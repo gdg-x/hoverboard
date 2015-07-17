@@ -1,0 +1,93 @@
+<dom-module id="hero-block">
+  <style>
+    :host {
+      display: block;
+      --paper-toolbar-background: transparent;
+      --paper-toolbar-color: #ffffff;
+      --paper-tabs-selection-bar-color: #ffffff;
+      --paper-tab-ink: #ffffff;
+    }
+
+    a {
+      text-decoration: none;
+      color: #ffffff;
+    }
+
+    .top-header {
+      height: 300px;
+      color: #ffffff;
+    }
+
+    .hero-content {
+      padding: 5px 15px;
+    }
+
+    .logo {
+      margin-top: 4px;
+      height: 40px;
+    }
+
+    .title-container {
+      padding: 0 15px;
+      font-size: 30px;
+    }
+
+    .title {
+      margin: 0;
+      line-height: 1;
+      font-size: 1em;
+    }
+
+    .subtitle {
+      margin: 10px 0 0;
+      font-size: 0.5em;
+    }
+
+    @media (min-width: 768px) {
+      .top-header {
+        height: 500px;
+        padding: 5px 15px;
+      }
+      .title-container {
+        font-size: 45px;
+      }
+    }
+  </style>
+  <template>
+    <div class="top-header image-background flex relative" style="background: url(/images/backgrounds/hero.jpg)">
+      <div class="gradient-overlay"></div>
+      <div class="hero-content">
+        <div class="title-container text-center vertical layout center-center fit">
+          <h1 class="title">GDG DevFest Ukraine 2015</h1>
+          <h4 class="subtitle">October 23-24, Lviv</h4>
+        </div>
+        <paper-toolbar>
+          <paper-icon-button class="visible-xs" icon="menu" on-tap="togglePanel"></paper-icon-button>
+          <div class="flex hidden-xs">
+            <a href="/">
+              <img class="logo" src="/images/logo.svg" alt="GDG DevFest 2015">
+            </a>
+          </div>
+          <paper-tabs class="hidden-xs" selected="0">
+            <paper-tab class="text-u-c">
+              <a data-route="about" href="/about" class="horizontal center-center layout">About</a>
+            </paper-tab>
+            <paper-tab class="text-u-c">
+              <a data-route="contact" href="/contact" class="horizontal center-center layout">Contact</a>
+            </paper-tab>
+          </paper-tabs>
+        </paper-toolbar>
+      </div>
+    </div>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'hero-block',
+    togglePanel: function() {
+      document.querySelector('#paperDrawerPanel').togglePanel();
+    }
+
+  });
+</script>
