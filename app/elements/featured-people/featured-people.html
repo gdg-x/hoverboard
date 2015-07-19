@@ -1,0 +1,53 @@
+<dom-module id="featured-people">
+    <style>
+        :host {
+            display: block;
+        }
+    </style>
+    <template>
+
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: 'featured-people',
+        properties: {
+            people: {
+                type: Array
+            }
+        },
+        attached: function() {
+            this.people = [{
+                id: 1,
+                name: 'Rob',
+                surname: 'Donson',
+                title: 'Polymer team'
+                company: 'Google',
+                photoUrl: '/images/people/rob_donson.jpg'
+            }, {
+                id: 2,
+                name: 'Dawid',
+                surname: 'Ostrowski',
+                title: 'Developer Relations Program Manager'
+                company: 'Google',
+                photoUrl: '/images/people/dawid_ostrowski.jpg'
+            }, {
+                id: 3,
+                name: 'Murat',
+                surname: 'Yener',
+                title: 'Android Developer'
+                company: 'Intel',
+                photoUrl: '/images/people/murat_yener.jpg'
+            }, {
+                id: 4,
+                name: 'Rob',
+                surname: 'Donson',
+                title: 'Polymer team'
+                company: 'Google',
+                photoUrl: '/images/people/rob_donson.jpg'
+            }];
+        }
+
+    });
+</script>

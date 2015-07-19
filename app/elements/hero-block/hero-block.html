@@ -68,7 +68,7 @@
               <img class="logo" src="/images/logo.svg" alt="GDG DevFest 2015">
             </a>
           </div>
-          <paper-tabs class="hidden-xs" selected="0">
+          <paper-tabs class="hidden-xs" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
             <paper-tab class="text-u-c">
               <a data-route="about" href="/about" class="horizontal center-center layout">About</a>
             </paper-tab>
