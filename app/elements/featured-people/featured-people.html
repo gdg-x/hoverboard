@@ -3,9 +3,47 @@
         :host {
             display: block;
         }
+
+        .fe-people-img {
+            height: 120px;
+            width: 120px;
+        }
+
+        .fe-people {
+            font-weight: 100;
+        }
+
+        .fe-people-name {
+            line-height: .8;
+        }
+
+        .fe-people-company {
+            font-size: .75em;
+        }
+        .block-link {
+          margin-top: 25px;
+          display: block;
+          font-size: .9em;
+        }
     </style>
     <template>
-
+        <div class="container text-center">
+            <div class="layout horizontal">
+                <template is="dom-repeat" items="{{_randomOrder(people)}}">
+                    <div class="fe-people flex">
+                        <iron-image src="{{item.photoUrl}}" class="fe-people-img placeholder-color img-circle" preload fade sizing="cover"></iron-image>
+                        <h4 class="fe-people-name">
+                            <span>{{item.name}}</span>
+                            <span>{{item.surname}}</span>
+                        </h4>
+                        <span class="fe-people-company">{{item.company}}</span>
+                    </div>
+                </template>
+            </div>
+            <a data-route="speakers" href="/speakers" class="block-link">
+                <paper-button>View all speakers</paper-button>
+            </a>
+        </div>
     </template>
 </dom-module>
 
@@ -21,33 +59,37 @@
             this.people = [{
                 id: 1,
                 name: 'Rob',
-                surname: 'Donson',
-                title: 'Polymer team'
+                surname: 'Dodson',
+                title: 'Polymer team',
                 company: 'Google',
-                photoUrl: '/images/people/rob_donson.jpg'
+                photoUrl: '/images/people/rob_dodson.jpg'
             }, {
                 id: 2,
                 name: 'Dawid',
                 surname: 'Ostrowski',
-                title: 'Developer Relations Program Manager'
+                title: 'Developer Relations Program Manager',
                 company: 'Google',
                 photoUrl: '/images/people/dawid_ostrowski.jpg'
             }, {
                 id: 3,
-                name: 'Murat',
-                surname: 'Yener',
-                title: 'Android Developer'
-                company: 'Intel',
-                photoUrl: '/images/people/murat_yener.jpg'
+                name: 'Magnus',
+                surname: 'Hyttsten',
+                title: 'Developer Advocate',
+                company: 'Google',
+                photoUrl: '/images/people/magnus_hyttsten.jpg'
             }, {
                 id: 4,
-                name: 'Rob',
-                surname: 'Donson',
-                title: 'Polymer team'
+                name: 'Adriana',
+                surname: 'Cerundolo',
+                title: 'Community Manage',
                 company: 'Google',
-                photoUrl: '/images/people/rob_donson.jpg'
+                photoUrl: '/images/people/adriana_cerundolo.png'
             }];
+        },
+        _randomOrder: function(array) {
+            return array.sort(function() {
+                return 0.5 - Math.random()
+            })
         }
-
     });
 </script>

@@ -20,6 +20,9 @@ a, .anchor-like {
     background-position: center center !important;
     background-size: cover !important;
 }
+.placeholder-color {
+    background-color: #3F51B5;
+}
 .gradient-overlay {
     position: absolute;
     top: 0;
@@ -27,6 +30,9 @@ a, .anchor-like {
     left: 0;
     right: 0;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 86%, #000000 106%);
+}
+.img-circle {
+  border-radius: 50%;
 }
 .container {
     font-size: 22px;
@@ -49,7 +55,7 @@ a, .anchor-like {
         max-width: 704px;
     }
     .card-container {
-      padding: 90px 0;
+        padding: 90px 0;
     }
 }
 @media (min-width: 1136px) {
@@ -76,7 +82,7 @@ a, .anchor-like {
     white-space: nowrap;
 }
 .card .bottom-link {
-  font-size: .7em;
+    font-size: .7em;
 }
 .card-content {
     padding: 24px 16px;
