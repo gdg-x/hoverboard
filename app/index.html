@@ -80,6 +80,7 @@
         <statistics-block></statistics-block>
         <featured-people></featured-people>
         <logos-block></logos-block>
+        <footer-block></footer-block>
         <!-- Main Content -->
         <div class="content">
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
@@ -106,6 +107,7 @@
       <platinum-sw-cache default-cache-strategy="networkFirst" precache-file="precache.json">
       </platinum-sw-cache>
     </platinum-sw-register>
+    <webfont-loader families="Roboto:100,300,400,500&subset=latin"></webfont-loader>
 
   </template>
 
