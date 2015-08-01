@@ -5,15 +5,27 @@
             background: #03A9F4;
             color: #ffffff;
         }
+
         .counter {
-          font-size: 3em;
-          font-weight: 100;
+            font-size: 3em;
+            font-weight: 100;
+        }
+
+        .caption {
+          font-size: .85em;
+        }
+
+        @media (max-width: 767px) {
+            .statistics-element:nth-child(1),
+            .statistics-element:nth-child(2) {
+                margin-bottom: 40px;
+            }
         }
     </style>
     <template>
-        <div class="container flex relative layout horizontal">
+        <div class="container flex wrap relative layout horizontal">
             <template is="dom-repeat" items="{{statistics}}">
-                <div class="flex layout vertical text-center">
+                <div class="statistics-element two-column-xs layout vertical text-center">
                     <span class="counter">{{item.counter}}</span>
                     <span class="caption">{{item.caption}}</span>
                 </div>
@@ -32,11 +44,11 @@
         },
         attached: function() {
             this.statistics = [{
-                counter: 450,
+                counter: 500,
                 caption: 'Attendees'
             }, {
-                counter: 48,
-                caption: 'Hours'
+                counter: 2,
+                caption: 'Days'
             }, {
                 counter: 40,
                 caption: 'Speakers'
@@ -44,6 +56,6 @@
                 counter: 3,
                 caption: 'Parallel tracks'
             }]
-        },
+        }
     });
 </script>

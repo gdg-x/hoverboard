@@ -32,9 +32,10 @@ a, .anchor-like {
     background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 86%, #000000 106%);
 }
 .img-circle {
-  border-radius: 50%;
+    border-radius: 50%;
 }
 .container {
+    padding: 40px 0;
     font-size: 22px;
     font-weight: 100;
 }
@@ -47,6 +48,9 @@ a, .anchor-like {
 }
 .container paper-button {
     font-size: 0.8em;
+}
+.card-container {
+    padding: 0;
 }
 @media (min-width: 768px) {
     .container {
@@ -66,6 +70,9 @@ a, .anchor-like {
 @media (min-width: 768px) {
     .section-before-card {
         margin-bottom: -180px;
+    }
+    .two-column-xs {
+        flex: 1;
     }
 }
 .card {
@@ -137,6 +144,9 @@ a, .anchor-like {
     display: none !important;
 }
 @media (max-width: 767px) {
+    .two-column-xs {
+        width: 50%;
+    }
     .visible-xs {
         display: block !important;
     }

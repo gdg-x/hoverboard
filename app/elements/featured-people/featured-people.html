@@ -3,6 +3,9 @@
         :host {
             display: block;
         }
+        .container {
+          padding-bottom: 20px;
+        }
 
         .fe-people-img {
             height: 120px;
@@ -13,24 +16,35 @@
             font-weight: 100;
         }
 
+        @media (max-width: 767px) {
+            .fe-people:nth-child(1),
+            .fe-people:nth-child(2) {
+                margin-bottom: 40px;
+            }
+        }
+
         .fe-people-name {
+            margin-top: 5px;
             line-height: .8;
         }
 
         .fe-people-company {
-            font-size: .75em;
+            display: block;
+            font-size: .7em;
+            line-height: 1.8;
         }
+
         .block-link {
-          margin-top: 25px;
-          display: block;
-          font-size: .9em;
+            margin-top: 25px;
+            display: block;
+            font-size: .85em;
         }
     </style>
     <template>
         <div class="container text-center">
-            <div class="layout horizontal">
+            <div class="flex wrap layout horizontal">
                 <template is="dom-repeat" items="{{_randomOrder(people)}}">
-                    <div class="fe-people flex">
+                    <div class="fe-people two-column-xs">
                         <iron-image src="{{item.photoUrl}}" class="fe-people-img placeholder-color img-circle" preload fade sizing="cover"></iron-image>
                         <h4 class="fe-people-name">
                             <span>{{item.name}}</span>
