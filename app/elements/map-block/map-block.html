@@ -1,0 +1,27 @@
+<dom-module id="map-block">
+  <style>
+    :host {
+      display: block;
+    }
+    google-map {
+      height: 300px;
+    }
+    @media (min-width: 768px) {
+      google-map {
+        height: 500px;
+      }
+    }
+  </style>
+  <template>
+    <google-map zoom="15" disableZoom disableDefaultUi fit-to-markers>
+      <google-map-marker latitude="49.809841" longitude="23.972805"></google-map-marker>
+    </google-map>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'map-block'
+
+  });
+</script>

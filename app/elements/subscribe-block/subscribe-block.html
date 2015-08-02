@@ -1,0 +1,37 @@
+<link rel="import" href="../mailchimp-subscribe/mailchimp-subscribe.html">
+
+<dom-module id="subscribe-block">
+    <style>
+        :host {
+            display: block;
+            background: #03A9F4;
+            color: #ffffff;
+        }
+
+        .container {
+            padding-bottom: 20px;
+        }
+
+        mailchimp-subscribe {
+            --mailchimp-color: #ffffff;
+            margin-top: 20px;
+              max-width: 600px;
+        }
+    </style>
+    <template>
+        <div class="container center-center relative layout vertical">
+            <h4 class="heading">Subscibe for updates</h4>
+            <mailchimp-subscribe url="{{url}}" name="{{name}}"></mailchimp-subscribe>
+        </div>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: 'subscribe-block',
+        properties: {
+            url: String,
+            name: String
+        }
+    });
+</script>

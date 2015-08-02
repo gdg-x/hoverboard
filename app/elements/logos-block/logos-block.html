@@ -5,18 +5,27 @@
             background: #ffffff;
         }
 
+        h5 {
+            font-weight: 100;
+        }
+
         .logo {
-            max-height: 40px;
+            margin: 0 25px 20px 0;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: 120px;
         }
     </style>
     <template>
-        <div class="container layout vertical">
+        <div class="container relative layout vertical">
             <template is="dom-repeat" items="{{content}}" as="block">
                 <h5>{{block.title}}</h5>
-                <div class="layout horizontal">
+                <div class="wrap layout horizontal">
                     <template is="dom-repeat" items="{{block.logos}}" as="logo">
                         <a class="logo" href="{{logo.url}}" title="{{logo.name}}">
-                            <iron-image src="{{logo.logoUrl}}" preload fade></iron-image>
+                            <iron-image class="logo-img flex" src="{{logo.logoUrl}}" preload fade sizing="contain"></iron-image>
                         </a>
                     </template>
                 </div>
@@ -53,6 +62,6 @@
                     logoUrl: '/images/partners/softserve.svg'
                 }]
             }];
-        },
+        }
     });
 </script>

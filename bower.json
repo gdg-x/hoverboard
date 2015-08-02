@@ -7,7 +7,8 @@
     "platinum-elements": "PolymerElements/platinum-elements#1.0.1",
     "neon-elements": "PolymerElements/neon-elements#1.0.0",
     "page": "visionmedia/page.js#~1.6.3",
-    "paper-menu-button": "PolymerElements/paper-menu-button#~1.0.0"
+    "paper-menu-button": "PolymerElements/paper-menu-button#~1.0.0",
+    "google-map": "GoogleWebComponents/google-map#~1.0.3"
   },
   "devDependencies": {
     "web-component-tester": "*",

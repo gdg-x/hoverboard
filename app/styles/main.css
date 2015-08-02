@@ -35,9 +35,12 @@ a, .anchor-like {
     border-radius: 50%;
 }
 .container {
-    padding: 40px 0;
+    padding: 40px 15px;
     font-size: 22px;
     font-weight: 100;
+}
+.container.container-narrow {
+    padding: 20px 15px;
 }
 .container .heading {
     margin-top: 0;
@@ -99,7 +102,7 @@ a, .anchor-like {
         position: absolute;
         font-size: 22px;
         border-radius: 3px;
-        box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16), 0px 2px 5px 0px rgba(0, 0, 0, 0.23);
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.23);
         z-index: 1;
     }
     .card:not(:last-child) {
