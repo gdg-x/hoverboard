@@ -37,7 +37,7 @@ git init
 git checkout -b master
 git add .
 git commit -m 'Check-in 1.0.1'
-git remote add upstream https://github.com/polymerelements/polymer-starter-kit.git
+git remote add upstream https://github.com/StartPolymer/polymer-starter-kit-plus.git
 git fetch upstream
 git merge upstream/master
 # resolve the merge conflicts in your editor
