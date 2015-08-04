@@ -1,5 +1,5 @@
 {
-  "name": "polymer-starter-kit",
+  "name": "polymer-starter-kit-plus",
   "private": true,
   "dependencies": {
     "iron-elements": "PolymerElements/iron-elements#1.0.0",
