@@ -1,0 +1,97 @@
+<dom-module id="hero-block">
+    <style>
+        :host {
+            display: block;
+            --paper-toolbar-background: transparent;
+            --paper-toolbar-color: #008094;
+            --paper-tabs-selection-bar-color: #008094;
+            --paper-tab-ink: rgba(0, 128, 148, 0.2);
+        }
+
+        .logo {
+            margin-top: 4px;
+            height: 40px;
+        }
+
+        .container {
+            padding-top: 0;
+        }
+
+        ::content .hero {
+            padding-top: 20px;
+            color: #4E4E4E;
+            font-size: 20px;
+        }
+
+        ::content .logo {
+            height: 100px;
+        }
+
+        ::content .slogan,
+        ::content .dates {
+            margin-top: 20px;
+            font-size: 17px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: .09em;
+            line-height: 1;
+        }
+
+        ::content .description {
+            margin-top: 20px;
+        }
+
+        ::content .links {
+            margin: 40px 0 10px;
+        }
+
+        ::content .event-image {
+            width: 100%;
+            height: 100%;
+        }
+
+        ::content .right-section {
+            margin-top: 20px;
+            height: 200px;
+        }
+
+        @media (min-width: 768px) {
+            ::content .hero {
+                padding-top: 40px;
+            }
+            ::content .right-section {
+                height: initial;
+            }
+        }
+    </style>
+    <template>
+        <div class="container flex relative">
+            <paper-toolbar>
+                <paper-icon-button class="visible-xs" icon="menu" on-tap="togglePanel"></paper-icon-button>
+                <div class="flex hidden-xs">
+                    <!-- <a href="/">
+          <img class="logo" src="/images/logo.svg" alt="GDG DevFest 2015">
+        </a> -->
+                </div>
+                <paper-tabs class="hidden-xs" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
+                    <paper-tab class="text-u-c">
+                        <a data-route="about" href="/about" class="horizontal center-center layout">About</a>
+                    </paper-tab>
+                    <paper-tab class="text-u-c">
+                        <a data-route="contact" href="/contact" class="horizontal center-center layout">Contact</a>
+                    </paper-tab>
+                </paper-tabs>
+            </paper-toolbar>
+            <content></content>
+        </div>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: 'hero-block',
+        togglePanel: function() {
+            document.querySelector('#paperDrawerPanel').togglePanel();
+        }
+    });
+</script>

@@ -8,7 +8,8 @@
     "neon-elements": "PolymerElements/neon-elements#1.0.0",
     "page": "visionmedia/page.js#~1.6.3",
     "paper-menu-button": "PolymerElements/paper-menu-button#~1.0.0",
-    "google-map": "GoogleWebComponents/google-map#~1.0.3"
+    "google-map": "GoogleWebComponents/google-map#~1.0.3",
+    "time-elements": "~0.4.0"
   },
   "devDependencies": {
     "web-component-tester": "*",

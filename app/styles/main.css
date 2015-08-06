@@ -3,6 +3,7 @@ body {
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #212121;
     font-size: 16px;
+    font-weight: 100;
     line-height: 1.4;
 }
 h1, h2, h3, h4 {
@@ -14,6 +15,18 @@ a, .anchor-like {
     font-weight: 500;
     text-decoration: none;
     cursor: pointer;
+}
+.post-link {
+    color: #ffffff;
+    font-weight: 100;
+    padding-bottom: 1px;
+    border-bottom: 1px dashed #ffffff;
+}
+.block {
+  display: block;
+}
+.bold {
+    font-weight: 400;
 }
 .image-background {
     background-repeat: no-repeat;
@@ -35,16 +48,23 @@ a, .anchor-like {
     border-radius: 50%;
 }
 .container {
-    padding: 40px 15px;
-    font-size: 22px;
+    padding: 40px 30px;
+    font-size: 18px;
     font-weight: 100;
 }
 .container.container-narrow {
-    padding: 20px 15px;
+    padding: 20px 30px;
 }
-.container .heading {
+.container .heading,
+.container .heading-block {
     margin-top: 0;
-    font-size: 1.9em;
+    margin-bottom: 20px;
+    font-size: 22px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+.container .heading-block {
+    margin-bottom: 40px;
 }
 .container p {
     line-height: 1.3;
@@ -74,8 +94,20 @@ a, .anchor-like {
     .section-before-card {
         margin-bottom: -180px;
     }
+    .section-before-card.add-padding {
+        padding-bottom: 80px;
+    }
     .two-column-xs {
         flex: 1;
+    }
+}
+.vertical-horizontal {
+    flex-direction: column;
+    display: flex;
+}
+@media (min-width: 768px) {
+    .vertical-horizontal {
+        flex-direction: row;
     }
 }
 .card {
@@ -96,6 +128,20 @@ a, .anchor-like {
 }
 .card-content {
     padding: 24px 16px;
+}
+.section-fab,
+.section-fab-right {
+    float: left;
+    transform: translateY(50%);
+    z-index: 1;
+}
+.section-fab-right {
+    float: right;
+}
+.section-shadow {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 1px 5px 2px rgba(0, 0, 0, .25);
 }
 @media (min-width: 768px) {
     .card {

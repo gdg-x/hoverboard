@@ -1,27 +1,72 @@
 <dom-module id="map-block">
-  <style>
-    :host {
-      display: block;
-    }
-    google-map {
-      height: 300px;
-    }
-    @media (min-width: 768px) {
-      google-map {
-        height: 500px;
-      }
-    }
-  </style>
-  <template>
-    <google-map zoom="15" disableZoom disableDefaultUi fit-to-markers>
-      <google-map-marker latitude="49.809841" longitude="23.972805"></google-map-marker>
-    </google-map>
-  </template>
+    <style>
+        :host {
+            display: block;
+        }
+
+        google-map {
+            height: 300px;
+        }
+
+        @media (min-width: 768px) {
+            google-map {
+                height: 500px;
+            }
+        }
+    </style>
+    <template>
+        <div class="container card-container flex relative layout vertical">
+            <div class="card">
+                <div class="card-content">
+                    <span>Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event. With convenient geographical position, well-planned infrastructure and modern equipment, expocentre will
+                        provide the nicest atmosphere for knowledge exchange and networking.</span>
+                </div>
+                <div class="card-content">
+                    <a class="bottom-link" href="https://www.google.com/maps/dir//49.8097687,23.9727791/@49.8099885,23.9727469,18z" target="_blank">Get directions</a>
+                </div>
+            </div>
+        </div>
+        <google-map zoom="15" latitude="49.812683" longitude="23.972805" disable-zoom disable-default-ui>
+            <google-map-marker latitude="49.809841" longitude="23.972805"></google-map-marker>
+        </google-map>
+    </template>
 </dom-module>
 
 <script>
-  Polymer({
-    is: 'map-block'
-
-  });
+    Polymer({
+        is: 'map-block',
+        properties: {
+            options: {
+                type: String
+            }
+        },
+        attached: function() {
+            this.options = [{
+                stylers: [{
+                    lightness: 40
+                }, {
+                    visibility: 'on'
+                }, {
+                    gamma: 0.9
+                }, {
+                    weight: 0.4
+                }]
+            }, {
+                elementType: 'labels',
+                stylers: [{
+                    visibility: 'on'
+                }]
+            }, {
+                featureType: 'water',
+                stylers: [{
+                    color: '#5dc7ff'
+                }]
+            }, {
+                featureType: 'road',
+                stylers: [{
+                    visibility: 'off'
+                }]
+            }];
+        }
+    });
 </script>

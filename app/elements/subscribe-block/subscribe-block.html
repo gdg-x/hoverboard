@@ -4,7 +4,7 @@
     <style>
         :host {
             display: block;
-            background: #03A9F4;
+            background: var(--default-primary-color);
             color: #ffffff;
         }
 
@@ -14,14 +14,21 @@
 
         mailchimp-subscribe {
             --mailchimp-color: #ffffff;
-            margin-top: 20px;
+            /*margin-top: 10px;*/
               max-width: 600px;
+        }
+        .details {
+          font-size: 16px;
         }
     </style>
     <template>
-        <div class="container center-center relative layout vertical">
+        <div class="container center-center relative layout horizontal">
+          <div class="flex">
             <h4 class="heading">Subscibe for updates</h4>
+            <span class="details">Get the latest news about the conference.</span>
             <mailchimp-subscribe url="{{url}}" name="{{name}}"></mailchimp-subscribe>
+          </div>
+          <div class="flex"></div>
         </div>
     </template>
 </dom-module>

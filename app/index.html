@@ -2,120 +2,148 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="GDG DevFest - the biggest Google related event in Ukraine. 350+ attendees, 48 hours of pure Google content, 30+ speakers from Ukraine and beyond, 3 parallel tracks.">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GDG DevFest Ukraine 2015</title>
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="GDG DevFest - the biggest Google related event in Ukraine. 350+ attendees, 48 hours of pure Google content, 30+ speakers from Ukraine and beyond, 3 parallel tracks.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GDG DevFest Ukraine 2015</title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-  <!-- Chrome for Android theme color -->
-  <meta name="theme-color" content="#303F9F">
+    <!-- Chrome for Android theme color -->
+    <meta name="theme-color" content="#303F9F">
 
-  <!-- Web Application Manifest -->
-  <link rel="manifest" href="manifest.json">
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="manifest.json">
 
-  <!-- Tile color for Win8 -->
-  <meta name="msapplication-TileColor" content="#3372DF">
+    <!-- Tile color for Win8 -->
+    <meta name="msapplication-TileColor" content="#3372DF">
 
-  <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="Polymer Starter Kit">
-  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Polymer Starter Kit">
+    <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
 
-  <!-- Add to homescreen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
-  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
+    <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
 
-  <!-- Tile icon for Win8 (144x144) -->
-  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <!-- Tile icon for Win8 (144x144) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
 
-  <!-- build:css styles/main.css -->
-  <link rel="stylesheet" href="styles/main.css">
-  <!-- endbuild-->
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild-->
 
-  <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
-  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-  <!-- endbuild -->
+    <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <!-- endbuild -->
 
-  <!-- will be replaced with elements/elements.vulcanized.html -->
-  <link rel="import" href="elements/elements.html">
-  <!-- endreplace-->
+    <!-- will be replaced with elements/elements.vulcanized.html -->
+    <link rel="import" href="elements/elements.html">
+    <!-- endreplace-->
 </head>
 
 <body unresolved class="fullbleed layout vertical">
-  <span id="browser-sync-binding"></span>
-  <template is="dom-bind" id="app">
+    <span id="browser-sync-binding"></span>
+    <template is="dom-bind" id="app">
 
-    <paper-drawer-panel id="paperDrawerPanel" force-narrow>
-      <paper-header-panel drawer class="drawer" mode="seamed">
-        <paper-toolbar class="tall">
-          <div class="top">
-            <img class="logo" src="images/logo.svg" alt="GDG DevFest 2015">
-          </div>
-          <div class="bottom">
-            <span class="typo-white">
-              October 23-24, 2015
-            </span>
-            <span class="block">
-              Lviv, Ukraine
-            </span>
-          </div>
-        </paper-toolbar>
-        <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
-          <a data-route="home" href="/">Home</a>
+        <paper-drawer-panel id="paperDrawerPanel" force-narrow>
+            <paper-header-panel drawer class="drawer" mode="seamed">
+                <paper-toolbar class="tall">
+                    <div class="top">
+                        <img class="logo" src="images/logo.svg" alt="GDG DevFest 2015">
+                    </div>
+                    <div class="bottom">
+                        <span class="typo-white">
+                            October 23-24, 2015
+                        </span>
+                        <span class="block">
+                            Lviv, Ukraine
+                        </span>
+                    </div>
+                </paper-toolbar>
+                <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
+                    <a data-route="home" href="/">Home</a>
 
-          <a data-route="about" href="/about">About</a>
+                    <a data-route="about" href="/about">About</a>
 
-          <a data-route="contact" href="/contact">Contact</a>
-        </paper-menu>
-      </paper-header-panel>
+                    <a data-route="contact" href="/contact">Contact</a>
+                </paper-menu>
+            </paper-header-panel>
 
-      <div class="scroll" main>
-        <hero-block class="section-before-card"></hero-block>
-        <about-conference></about-conference>
-        <photo-block></photo-block>
-        <statistics-block></statistics-block>
-        <featured-people></featured-people>
-        <subscribe-block url="http://gdg.us5.list-manage.com/subscribe/post?u=9fc8aa205b0521b5f05fc8e1e&amp;id=c749ee6609" name="b_9fc8aa205b0521b5f05fc8e1e_c749ee6609"></subscribe-block>
-        <logos-block></logos-block>
-        <map-block></map-block>
-        <footer-block></footer-block>
-        <!-- Main Content -->
-        <div class="content">
-          <iron-pages attr-for-selected="data-route" selected="{{route}}">
+            <div class="scroll" main>
 
-            <section data-route="home">
+                <!-- Main Content -->
+                <div class="content">
+                    <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
-            </section>
+                        <section data-route="home">
+                          <hero-block class="section-shadow">
+                              <div class="hero">
+                                  <div class="layout vertical-horizontal">
+                                      <div class="flex">
+                                          <img class="logo" src="/images/logo.svg" alt="GDG DevFest 2015">
+                                          <p class="dates bold">October 23-24, Lviv</p>
+                                          <p class="description">The biggest Google related event in Ukraine carefully crafted for you by GDG community! Awesome speakers and lot's of fun! This time, right in the heart of Lviv!</p>
+                                          <p class="slogan">Think out of the box. Create what you want!</p>
+                                          <div class="links layout horizontal">
+                                              <paper-button noink>
+                                                  <a href="http://goo.gl/forms/kymZwijWFy" target="_blank">Become a speaker</a>
+                                              </paper-button>
+                                              <paper-button noink>
+                                                  <a href="http://devfest.gdg.org.ua/assets/GDG_DevFest_Ukraine_2015_Partnership_Proposition.pdf" target="_blank">Become a sponsor</a>
+                                              </paper-button>
+                                          </div>
+                                      </div>
+                                      <div class="flex relative right-section">
+                                          <iron-image class="fit" src="/images/lviv.svg" sizing="contain"></iron-image>
+                                      </div>
+                                  </div>
+                                  <paper-fab class="section-fab-right" icon="expand-more"></paper-fab>
+                              </div>
+                          </hero-block>
+                          <!-- <about-conference></about-conference> -->
+                          <statistics-block></statistics-block>
+                          <featured-people>
+                            <h4 class="heading">Top Speakers</h4>
+                          </featured-people>
+                          <call-to-action>
+                            <span class="flex text">Look at previous year</span>
+                                <a class="border-button-link" href="/2014" target="_blank">Go to 2014</a>
+                          </call-to-action>
+                          <photo-block></photo-block>
+                          <social-feed json="http://lviv.gdg.org.ua/tweetledee/favoritesjson.php?c=10&cache_interval=3600"></social-feed>
+                          <logos-block></logos-block>
+                          <subscribe-block url="http://gdg.us5.list-manage.com/subscribe/post?u=9fc8aa205b0521b5f05fc8e1e&amp;id=c749ee6609" name="b_9fc8aa205b0521b5f05fc8e1e_c749ee6609"></subscribe-block>
+                          <map-block></map-block>
+                          <footer-block></footer-block>
+                        </section>
 
-            <section data-route="about">
-            </section>
 
-            <section data-route="contact">
-            </section>
+                        <section data-route="contact">
+                        </section>
 
-          </iron-pages>
-        </div>
-      </div>
-    </paper-drawer-panel>
+                    </iron-pages>
+                </div>
+            </div>
+        </paper-drawer-panel>
 
-    <paper-toast id="caching-complete" duration="6000" text="Caching complete! This app will work offline.">
-    </paper-toast>
+        <paper-toast id="caching-complete" duration="6000" text="Caching complete! This app will work offline.">
+        </paper-toast>
 
-    <platinum-sw-register auto-register clients-claim skip-waiting on-service-worker-installed="displayInstalledToast">
-      <platinum-sw-cache default-cache-strategy="networkFirst" precache-file="precache.json">
-      </platinum-sw-cache>
-    </platinum-sw-register>
-    <webfont-loader families="Roboto:100&subset=latin"></webfont-loader>
+        <platinum-sw-register auto-register clients-claim skip-waiting on-service-worker-installed="displayInstalledToast">
+            <platinum-sw-cache default-cache-strategy="networkFirst" precache-file="precache.json">
+            </platinum-sw-cache>
+        </platinum-sw-register>
+        <webfont-loader families="Roboto:100,400&subset=latin"></webfont-loader>
 
-  </template>
+    </template>
 
-  <!-- build:js scripts/app.js -->
-  <script src="scripts/app.js"></script>
-  <!-- endbuild-->
+    <!-- build:js scripts/app.js -->
+    <script src="scripts/app.js"></script>
+    <!-- endbuild-->
 </body>
 
 </html>

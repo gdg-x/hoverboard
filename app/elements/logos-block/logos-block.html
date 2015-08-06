@@ -5,12 +5,23 @@
             background: #ffffff;
         }
 
-        h5 {
-            font-weight: 100;
+        :host > .logos-block {
+          margin-bottom: 30px;
         }
 
-        .logo {
-            margin: 0 25px 20px 0;
+        .container .heading {
+          margin-bottom: 20px;
+        }
+
+        .logos-block-title {
+          margin: 20px 0;
+          font-weight: 100;
+          font-size: 22px;
+          letter-spacing: .05em;
+        }
+
+        .logo-item {
+            margin: 0 25px 10px 0;
         }
 
         .logo-img {
@@ -21,13 +32,15 @@
     <template>
         <div class="container relative layout vertical">
             <template is="dom-repeat" items="{{content}}" as="block">
-                <h5>{{block.title}}</h5>
-                <div class="wrap layout horizontal">
-                    <template is="dom-repeat" items="{{block.logos}}" as="logo">
-                        <a class="logo" href="{{logo.url}}" title="{{logo.name}}">
-                            <iron-image class="logo-img flex" src="{{logo.logoUrl}}" preload fade sizing="contain"></iron-image>
-                        </a>
-                    </template>
+                <div class="logos-block">
+                    <h5 class="logos-block-title">{{block.title}}</h5>
+                    <div class="wrap layout horizontal">
+                        <template is="dom-repeat" items="{{block.logos}}" as="logo">
+                            <a class="logo-item" href="{{logo.url}}" title="{{logo.name}}">
+                                <iron-image class="logo-img flex" src="{{logo.logoUrl}}" preload fade sizing="contain"></iron-image>
+                            </a>
+                        </template>
+                    </div>
                 </div>
             </template>
         </div>
