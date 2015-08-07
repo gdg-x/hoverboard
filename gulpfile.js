@@ -238,6 +238,24 @@ gulp.task('default', ['clean'], function (cb) {
     // Note: add , 'precache' , after 'vulcanize', if your are going to use Service Worker
 });
 
+// Run PageSpeed Insights
+gulp.task('pagespeed', function () {
+  return require('psi')(config.pageSpeed.site, {
+    nokey: config.pageSpeed.nokey,
+    // key: config.pageSpeed.key,
+    strategy: config.pageSpeed.strategy
+  }, function (err, data) {
+    console.log('Site: ' + config.pageSpeed.site);
+    console.log('Strategy: ' + config.pageSpeed.strategy);
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Score: ' + data.score);
+      console.log(data.pageStats);
+    }
+  });
+});
+
 // Load tasks for web-component-tester
 // Adds tasks for `gulp test:local` and `gulp test:remote`
 require('web-component-tester').gulp.init(gulp);
