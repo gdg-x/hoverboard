@@ -238,6 +238,73 @@ gulp.task('default', ['clean'], function (cb) {
     // Note: add , 'precache' , after 'vulcanize', if your are going to use Service Worker
 });
 
+// Deploy to Google Cloud Storage
+// Function to deploy staging or prod version from local tree,
+// or to promote staging to prod, per passed arg.
+// This function requires gsutil to be installed and configured.
+// For info on gsutil: https://cloud.google.com/storage/docs/gsutil.
+function deploy(environment) {
+  var acl = null;
+  var cacheTtl = null;
+  var src = null;
+  var dest = null;
+  if (environment === 'development') {
+    // Set staging specific vars here.
+    acl = config.cloudStorage.acl.development;
+    cacheTtl = 0;
+    src = 'dist/*';
+    dest = 'gs://' + config.cloudStorage.bucket.development;
+  } else if (environment === 'staging') {
+    // Set staging specific vars here.
+    acl = config.cloudStorage.acl.staging;
+    cacheTtl = 0;
+    src = 'dist/*';
+    dest = 'gs://' + config.cloudStorage.bucket.staging;
+  } else if (environment === 'production') {
+    // Set production specific vars here.
+    acl = config.cloudStorage.acl.production;
+    cacheTtl = config.cloudStorage.cacheTtlProduction;
+    src = 'dist/*';
+    dest = 'gs://' + config.cloudStorage.bucket.production;
+  } else if (environment === 'promote') {
+    // Set promote (essentially prod) specific vars here.
+    acl = config.cloudStorage.acl.production;
+    cacheTtl = config.cloudStorage.cacheTtlProduction;
+    src = 'gs://' + config.cloudStorage.bucket.staging + '/*';
+    dest = 'gs://' + config.cloudStorage.bucket.production;
+  }
+
+  var infoMsg = 'Deploy ' + environment + ' to GCS (' + dest + ') from ' + src;
+  process.stdout.write(infoMsg + '\n');
+
+  // Build gsutil command
+  var cacheControl = '-h "Cache-Control:public,max-age=' + cacheTtl + '"';
+  var gsutilCmd = 'gsutil -m ' + cacheControl +
+    ' cp -r -a ' + acl + ' -z css,html,js,json,svg,txt ' + src + ' ' + dest;
+
+  gulp.src('').pipe($.shell([gsutilCmd]));
+}
+
+// Development Google Cloud Storage bucket
+gulp.task('deploy:develop', function() {
+  deploy('development');
+});
+
+// Staging Google Cloud Storage bucket
+gulp.task('deploy:staging', function() {
+  deploy('staging');
+});
+
+// Production Google Cloud Storage bucket
+gulp.task('deploy:prod', function() {
+  deploy('production');
+});
+
+// Promote the staging version to the production Google Cloud Storage bucket
+gulp.task('deploy:promote', function() {
+  deploy('promote');
+});
+
 // Run PageSpeed Insights
 gulp.task('pagespeed', function () {
   return require('psi')(config.pageSpeed.site, {

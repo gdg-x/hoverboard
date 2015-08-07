@@ -25,10 +25,18 @@ module.exports = {
     }
   },
   // Google Cloud Storage
+  // https://cloud.google.com/storage/
   cloudStorage: {
-    bucketDevelopment: 'development.example.com',
-    bucketStaging: 'staging.example.com',
-    bucketProduction: 'www.example.com',
+    acl: { // https://cloud.google.com/storage/docs/access-control
+      development: 'public-read',
+      staging:     'public-read',
+      production:  'public-read'
+    },
+    bucket: { // https://cloud.google.com/storage/docs/reference-uris
+      development: 'development.example.com',
+      staging:     'staging.example.com',
+      production:  'www.example.com'
+    },
     cacheTtlProduction: '3600'
   },
   // PageSpeed Insights
