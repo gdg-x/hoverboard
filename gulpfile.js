@@ -21,25 +21,14 @@ var path = require('path');
 var fs = require('fs');
 var glob = require('glob');
 var historyApiFallback = require('connect-history-api-fallback');
-
-var AUTOPREFIXER_BROWSERS = [
-  'ie >= 10',
-  'ie_mob >= 10',
-  'ff >= 30',
-  'chrome >= 34',
-  'safari >= 7',
-  'opera >= 23',
-  'ios >= 7',
-  'android >= 4.4',
-  'bb >= 10'
-];
+var config = require('./config');
 
 var styleTask = function (stylesPath, srcs) {
   return gulp.src(srcs.map(function(src) {
       return path.join('app', stylesPath, src);
     }))
     .pipe($.changed(stylesPath, {extension: '.css'}))
-    .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
+    .pipe($.autoprefixer(config.autoprefixer.browsers))
     .pipe(gulp.dest('.tmp/' + stylesPath))
     .pipe($.if('*.css', $.cssmin()))
     .pipe(gulp.dest('dist/' + stylesPath))
@@ -182,7 +171,10 @@ gulp.task('clean', function (cb) {
 // Watch Files For Changes & Reload
 gulp.task('serve', ['styles', 'elements', 'images'], function () {
   browserSync({
-    notify: false,
+    browser: config.browserSync.browser,
+    https: config.browserSync.https,
+    notify: config.browserSync.notify,
+    port: config.browserSync.port,
     logPrefix: 'PSK',
     snippetOptions: {
       rule: {
@@ -192,10 +184,6 @@ gulp.task('serve', ['styles', 'elements', 'images'], function () {
         }
       }
     },
-    // Run as an https by uncommenting 'https: true'
-    // Note: this uses an unsigned certificate which on first access
-    //       will present a certificate warning in the browser.
-    // https: true,
     server: {
       baseDir: ['.tmp', 'app'],
       middleware: [ historyApiFallback() ],
@@ -215,7 +203,10 @@ gulp.task('serve', ['styles', 'elements', 'images'], function () {
 // Build and serve the output from the dist build
 gulp.task('serve:dist', ['default'], function () {
   browserSync({
-    notify: false,
+    browser: config.browserSync.browser,
+    https: config.browserSync.https,
+    notify: config.browserSync.notify,
+    port: config.browserSync.port,
     logPrefix: 'PSK',
     snippetOptions: {
       rule: {
@@ -225,10 +216,6 @@ gulp.task('serve:dist', ['default'], function () {
         }
       }
     },
-    // Run as an https by uncommenting 'https: true'
-    // Note: this uses an unsigned certificate which on first access
-    //       will present a certificate warning in the browser.
-    // https: true,
     server: 'dist',
     middleware: [ historyApiFallback() ]
   });
