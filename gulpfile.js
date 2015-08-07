@@ -190,6 +190,9 @@ gulp.task('serve', ['styles', 'elements', 'images'], function () {
       routes: {
         '/bower_components': 'bower_components'
       }
+    },
+    ui: {
+      port: config.browserSync.ui.port
     }
   });
 
@@ -217,7 +220,10 @@ gulp.task('serve:dist', ['default'], function () {
       }
     },
     server: 'dist',
-    middleware: [ historyApiFallback() ]
+    middleware: [ historyApiFallback() ],
+    ui: {
+      port: config.browserSync.ui.port
+    }
   });
 });
 
