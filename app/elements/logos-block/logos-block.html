@@ -5,7 +5,7 @@
             background: #ffffff;
         }
 
-        :host > .logos-block {
+        :host > .logos-block-wrapper {
           margin-bottom: 30px;
         }
 
@@ -32,7 +32,7 @@
     <template>
         <div class="container relative layout vertical">
             <template is="dom-repeat" items="{{content}}" as="block">
-                <div class="logos-block">
+                <div class="logos-block-wrapper">
                     <h5 class="logos-block-title">{{block.title}}</h5>
                     <div class="wrap layout horizontal">
                         <template is="dom-repeat" items="{{block.logos}}" as="logo">

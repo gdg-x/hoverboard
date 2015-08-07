@@ -20,7 +20,8 @@ a, .anchor-like {
     color: #ffffff;
     font-weight: 100;
     padding-bottom: 1px;
-    border-bottom: 1px dashed #ffffff;
+    /*border-bottom: 1px dashed #ffffff;*/
+    font-style: italic;
 }
 .block {
   display: block;

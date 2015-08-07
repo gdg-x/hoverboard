@@ -2,33 +2,40 @@
     <style>
         :host {
             display: block;
-        }
-
-        google-map {
-            height: 300px;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+            min-height: 350px;
         }
 
         @media (min-width: 768px) {
-            google-map {
-                height: 500px;
+            .card-container {
+                padding: 0;
+            }
+            .card-container h5 {
+                margin-top: 0;
             }
         }
     </style>
     <template>
-        <div class="container card-container flex relative layout vertical">
-            <div class="card">
-                <div class="card-content">
-                    <span>Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event. With convenient geographical position, well-planned infrastructure and modern equipment, expocentre will
-                        provide the nicest atmosphere for knowledge exchange and networking.</span>
-                </div>
-                <div class="card-content">
-                    <a class="bottom-link" href="https://www.google.com/maps/dir//49.8097687,23.9727791/@49.8099885,23.9727469,18z" target="_blank">Get directions</a>
+        <google-map class="fit" zoom="15" latitude="49.809841" longitude="23.982805" disable-zoom disable-default-ui>
+            <google-map-marker latitude="49.809841" longitude="23.972805"></google-map-marker>
+        </google-map>
+        <div class="container card-container relative layout horizontal">
+            <div class="flex"></div>
+            <div class="flex">
+                <div class="card relative">
+                    <div class="card-content">
+                        <h5>Location</h5>
+                        <span>Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event. With convenient geographical position, well-planned infrastructure and modern equipment, expocentre will
+                            provide the nicest atmosphere for knowledge exchange and networking.</span>
+                    </div>
+                    <div class="card-content">
+                        <a class="bottom-link" href="https://www.google.com/maps/dir//49.8097687,23.9727791/@49.8099885,23.9727469,18z" target="_blank">Get directions</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <google-map zoom="15" latitude="49.812683" longitude="23.972805" disable-zoom disable-default-ui>
-            <google-map-marker latitude="49.809841" longitude="23.972805"></google-map-marker>
-        </google-map>
     </template>
 </dom-module>
 
