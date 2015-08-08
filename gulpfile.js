@@ -125,9 +125,10 @@ gulp.task('html', function () {
     .pipe($.useref())
     // Minify Any HTML
     .pipe($.if('*.html', $.minifyHtml({
-      quotes: true,
-      empty: true,
-      spare: true
+      empty: true,  // KEEP empty attributes
+      loose: true,  // KEEP one whitespace
+      quotes: true, // KEEP arbitrary quotes
+      spare: true   // KEEP redundant attributes
     })))
     // Output Files
     .pipe(gulp.dest('dist'))
