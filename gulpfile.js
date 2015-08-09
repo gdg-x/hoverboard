@@ -81,7 +81,8 @@ gulp.task('copy', function () {
 
   var bower = gulp.src([
     'bower_components/**/*.{css,html,js}',
-    '!bower_components/**/{demo,index,metadata}.html'
+    '!bower_components/**/index.html',
+    '!bower_components/**/{demo,test}/**/*'
   ]).pipe(gulp.dest('dist/bower_components'));
 
   var elements = gulp.src(['app/elements/**/*.html'])
@@ -137,15 +138,28 @@ gulp.task('html', function () {
 
 // Vulcanize imports
 gulp.task('vulcanize', function () {
-  var DEST_DIR = 'dist/elements';
-
   return gulp.src('dist/elements/elements.vulcanized.html')
     .pipe($.vulcanize({
       stripComments: true,
       inlineCss: true,
       inlineScripts: true
     }))
-    .pipe(gulp.dest(DEST_DIR))
+    // Minify elements.vulcanized.html
+    // https://github.com/PolymerLabs/polybuild/issues/3
+    .pipe($.htmlmin({
+      customAttrAssign: [
+        {source:'\\$='}
+      ],
+      customAttrSurround: [
+        [ {source: '\\({\\{'}, {source: '\\}\\}'} ],
+        [ {source: '\\[\\['}, {source: '\\]\\]'}  ]
+      ],
+      minifyJS: true,
+      removeComments: true
+    }))
+    // Split inline scripts from an HTML file for CSP compliance
+    .pipe($.crisper())
+    .pipe(gulp.dest('dist/elements'))
     .pipe($.size({title: 'vulcanize'}));
 });
 
@@ -167,7 +181,21 @@ gulp.task('precache', function (callback) {
 
 // Clean Output Directory
 gulp.task('clean', function (cb) {
-  del(['.tmp', 'dist'], cb);
+  del(['.tmp', 'dist', 'cdn'], cb);
+});
+
+// Clean dist directory
+gulp.task('clean-dist', function (cb) {
+  del([
+    'dist/bower_components/**/*',
+    '!dist/bower_components/webcomponentsjs',
+    '!dist/bower_components/webcomponentsjs/webcomponents-lite.min.js',
+    '!dist/bower_components/platinum-sw',
+    '!dist/bower_components/platinum-sw/service-worker.js',
+    'dist/styles/app-theme.html',
+    'dist/elements/*',
+    '!dist/elements/elements.vulcanized.*'
+  ], cb);
 });
 
 // Watch Files For Changes & Reload
@@ -236,8 +264,21 @@ gulp.task('default', ['clean'], function (cb) {
     'elements',
     ['jshint', 'images', 'fonts', 'html'],
     'vulcanize',
+    'clean-dist',
     cb);
     // Note: add , 'precache' , after 'vulcanize', if your are going to use Service Worker
+});
+
+// Static asset revisioning by appending content hash to filenames
+gulp.task('revision', function () {
+  var revAll = new $.revAll({ dontRenameFile: [
+    /^\/index.html/g,
+    /^\/robots.txt/g,
+    /^\/sw-import.js/g
+  ]});
+  gulp.src('dist/**')
+    .pipe(revAll.revision())
+    .pipe(gulp.dest('cdn'));
 });
 
 // Deploy to Google Cloud Storage
@@ -245,33 +286,33 @@ gulp.task('default', ['clean'], function (cb) {
 // or to promote staging to prod, per passed arg.
 // This function requires gsutil to be installed and configured.
 // For info on gsutil: https://cloud.google.com/storage/docs/gsutil.
-function deploy(environment) {
+function deployGCS(environment) {
   var acl = null;
-  var cacheTtl = null;
+  var cacheTTL = null;
   var src = null;
   var dest = null;
   if (environment === 'development') {
     // Set staging specific vars here.
     acl = config.cloudStorage.acl.development;
-    cacheTtl = 0;
+    cacheTTL = 0;
     src = 'dist/*';
     dest = 'gs://' + config.cloudStorage.bucket.development;
   } else if (environment === 'staging') {
     // Set staging specific vars here.
     acl = config.cloudStorage.acl.staging;
-    cacheTtl = 0;
-    src = 'dist/*';
+    cacheTTL = 0;
+    src = 'cdn/*';
     dest = 'gs://' + config.cloudStorage.bucket.staging;
   } else if (environment === 'production') {
     // Set production specific vars here.
     acl = config.cloudStorage.acl.production;
-    cacheTtl = config.cloudStorage.cacheTtlProduction;
-    src = 'dist/*';
+    cacheTTL = config.cloudStorage.cacheTTL.production;
+    src = 'cdn/*';
     dest = 'gs://' + config.cloudStorage.bucket.production;
   } else if (environment === 'promote') {
     // Set promote (essentially prod) specific vars here.
     acl = config.cloudStorage.acl.production;
-    cacheTtl = config.cloudStorage.cacheTtlProduction;
+    cacheTTL = config.cloudStorage.cacheTTL.production;
     src = 'gs://' + config.cloudStorage.bucket.staging + '/*';
     dest = 'gs://' + config.cloudStorage.bucket.production;
   }
@@ -280,31 +321,40 @@ function deploy(environment) {
   process.stdout.write(infoMsg + '\n');
 
   // Build gsutil command
-  var cacheControl = '-h "Cache-Control:public,max-age=' + cacheTtl + '"';
-  var gsutilCmd = 'gsutil -m ' + cacheControl +
+  var cacheControl = '-h "Cache-Control:public,max-age=' + cacheTTL + '"';
+  var gsutilCpCmd = 'gsutil -m ' + cacheControl +
     ' cp -r -a ' + acl + ' -z css,html,js,json,svg,txt ' + src + ' ' + dest;
+  var gsutilRmCmd = 'gsutil -m rm ' + dest + '/**';
+  var gsutilCmds = [gsutilRmCmd, gsutilCpCmd];
 
-  gulp.src('').pipe($.shell([gsutilCmd]));
+  if (environment === 'production') {
+    cacheTTL = config.cloudStorage.cacheTTL.productionIndex;
+    cacheControl = '-h "Cache-Control:public,max-age=' + cacheTTL + '"';
+    var gsutilCacheCmd = 'gsutil -m setmeta ' + cacheControl + ' ' + dest + '/index.html';
+    gsutilCmds = [gsutilRmCmd, gsutilCpCmd, gsutilCacheCmd];
+  }
+
+  gulp.src('').pipe($.shell(gsutilCmds, {ignoreErrors: true}));
 }
 
 // Development Google Cloud Storage bucket
 gulp.task('deploy:develop', function() {
-  deploy('development');
+  deployGCS('development');
 });
 
 // Staging Google Cloud Storage bucket
-gulp.task('deploy:staging', function() {
-  deploy('staging');
+gulp.task('deploy:staging', ['revision'], function() {
+  deployGCS('staging');
 });
 
 // Production Google Cloud Storage bucket
 gulp.task('deploy:prod', function() {
-  deploy('production');
+  deployGCS('production');
 });
 
 // Promote the staging version to the production Google Cloud Storage bucket
 gulp.task('deploy:promote', function() {
-  deploy('promote');
+  deployGCS('promote');
 });
 
 // Run PageSpeed Insights

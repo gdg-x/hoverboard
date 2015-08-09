@@ -37,7 +37,10 @@ module.exports = {
       staging:     'staging.example.com',
       production:  'www.example.com'
     },
-    cacheTtlProduction: '3600'
+    cacheTTL: {
+      production: '315360000', // 10 years
+      productionIndex: '3600' // for index.html
+    }
   },
   // PageSpeed Insights
   // Please feel free to use the `nokey` option to try out PageSpeed
