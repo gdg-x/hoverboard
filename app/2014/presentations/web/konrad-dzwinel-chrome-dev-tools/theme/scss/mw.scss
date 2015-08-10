@@ -1,0 +1,269 @@
+//https://confluence.makingwaves.no/display/PRES/Color
+.title-slide hgroup h1 {
+  font-size: 52px;
+}
+
+.logoslide img {
+  width: 400px;
+}
+
+aside.gdbar {
+  background: black;
+}
+
+.thank-you-slide {
+  background: rgb(42,108,98) !important/*er*/;
+}
+
+.ios-wrapper, .android-wrapper, .wp-wrapper, .ios-wrapper-big {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: relative;
+
+  > div {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    overflow: hidden;
+  }
+}
+
+.ios-wrapper {
+  background-image: url(../../images/custom/iphone.png);
+
+  > div {
+    position: absolute;
+    left: 50px;
+    top: 76px;
+    width: 106px;
+    height: 200px;
+  }
+}
+
+.android-wrapper {
+  background-image: url(../../images/custom/htc-one.png);
+
+  > div {
+    position: absolute;
+    left: 37px;
+    top: 59px;
+    width: 127px;
+    height: 220px;
+  }
+}
+
+.ios-wrapper-big {
+  background-image: url(../../images/custom/iphone.png);
+
+  > div {
+    position: absolute;
+    left: 81px;
+    top: 81px;
+    width: 191px;
+    height: 338px;
+  }
+}
+
+.wp-wrapper {
+  background-image: url(../../images/custom/lumia.png);
+
+  > div {
+    position: absolute;
+    left: 34px;
+    top: 54px;
+    width: 131px;
+    height: 220px;
+  }
+}
+
+.objectivec-logo {
+  background-image: url(../../images/custom/objectivec.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.java-logo {
+  background-image: url(../../images/custom/java.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.csharp-logo {
+   background-image: url(../../images/custom/csharp.png);
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: center center;
+ }
+
+.browsers-logos {
+  background-image: url(../../images/custom/browsers.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.native-browsers-logos {
+  background-image: url(../../images/custom/native-browsers.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.html5-logo {
+  background-image: url(../../images/custom/html5.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.cordova-logo {
+  background-image: url(../../images/custom/cordova-logo.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.highlighted-switch {
+  position: relative;
+
+  > div {
+    position: absolute;
+    -webkit-transition: opacity 0.3s;
+  }
+
+  > div:nth-child(1) {
+    opacity: 1;
+  }
+  > div:nth-child(2) {
+    opacity: 0;
+  }
+
+  &.highlight {
+    > div:nth-child(1) {
+      opacity: 0;
+    }
+    > div:nth-child(2) {
+      opacity: 1;
+    }
+  }
+}
+
+.sidenote {
+  color: #a9a9a9;
+  font-style: italic;
+}
+
+table th {
+  background: rgb(93,7,73)
+}
+
+.bordered-layer {
+  box-shadow: black 0 0 10px;
+  padding: 5px;
+}
+
+li > pre {
+  left: -91px;
+  width: 110%;
+}
+
+#layers_wrapper {
+  -webkit-transform-style: preserve-3d;
+  -webkit-transition: -webkit-transform 0.3s;
+  -webkit-transform: rotateX(0deg) translateZ(0);
+  position: relative;
+}
+
+#layers_wrapper > div {
+  width: 400px;
+  height: 300px;
+  position: absolute;
+  left: 400px;
+  top: 50px;
+}
+
+#layers_wrapper.rotate {
+  -webkit-transform: rotateX(48deg) rotateZ(10deg) translate3d(0, 0, 0);
+}
+
+#layers_wrapper.rotate #layers_layer_2 {
+  -webkit-transform: translate3d(0,0,-150px);
+}
+
+#layers_wrapper.rotate #layers_layer_3 {
+  -webkit-transform: translate3d(0,-235px,-75px);
+}
+
+#layers_wrapper.rotate #layers_layer_3.moved{
+  -webkit-transform: translate3d(0,0,-75px);
+}
+
+#layers_layer_2 {
+  background: white url('../../images/custom/layers_anim_1.png') center 50px no-repeat;
+  background-size: 100% auto;
+  -webkit-transition: -webkit-transform 0.3s 0.3s;
+  z-index: 1;
+  box-shadow: black 0 0 10px 0;
+}
+
+#layers_layer_3.moved {
+  -webkit-transform: translate3d(0,0,0);
+}
+
+#layers_layer_3 {
+  background: transparent url('../../images/custom/layers_anim_2.png') center 50px no-repeat;
+  background-size: 100% auto;
+  -webkit-transform: translate3d(0,-235px,0);
+  -webkit-transition: -webkit-transform 0.3s 0.3s;
+  z-index: 2;
+}
+
+#layers_layer_1 {
+  background: transparent url('../../images/custom/layers_anim_3.png') top center no-repeat;
+  background-size: 100% auto;
+  -webkit-transform: translate3d(0,0,0);
+  z-index: 3;
+  box-shadow: black 0 0 10px 0;
+}
+
+aside.gde-logo {
+  background: url('../../images/custom/gde.svg') no-repeat center center;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 150px;
+  height: 150px;
+  background-size: contain;
+}
+
+.segue {
+  h2, h3 {
+    text-shadow: black 2px 2px 15px;
+  }
+}
+
+.fill {
+  h2 {
+    text-shadow: black 2px 2px 15px;
+  }
+}
+
+.thank-you-slide.segue h2 {
+  text-shadow: none;
+}
+
+slides > slide:not(.nobackground):before {
+  font-size: 12pt;
+  content: "#dfua";
+  position: absolute;
+  bottom: 20px;
+  left: 60px;
+  background: url(../../images/custom/gdg_icon_128.png) no-repeat 20% 50%;
+  background-size: 30px 30px;
+  padding-left: 40px;
+  height: 30px;
+  line-height: 1.9;
+}

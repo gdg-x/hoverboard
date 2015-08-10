@@ -1,0 +1,312 @@
+{
+    "speakers": [
+        {
+            "id": 3,
+            "bio": "Dawid is true technology enthusiast, who loves to work in areas where humans and machines meet to create amazing new products and services. He is experienced program manager with strong technical background, who is able to establish priorities for complex projects and execute across multiple organizations, according to long-term objectives. Dawid has worked in Poland, USA, Germany, Belgium and The Netherlands and truly values diversity of international working environment. His most visible characteristics are individualization (when dealing directly with people), ideation&intellection (inexhaustible source of new concepts) and strong communication (experienced trainer, community manager). He is also an activator constantly impatient for action.",
+            "name": "Dawid Ostrowski",
+            "company": "Google",
+            "title": "Developer Relations Program Manager",
+            "plusoneUrl": "https://plus.google.com/+DawidOstrowski/",
+            "website": "",
+            "twitter": "",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/DawidOstrowski.jpg"
+        },
+        {
+            "id": 12,
+            "bio": "Murat Yener is a code geek, open source committer and working in Intel as an Android Developer. He has extensive experience on developing Java, Web, JavaEE and OSGi applications besides teaching courses and mentoring. Murat is an Eclipse committer and one of the initial committers of Eclipse Libra project. He is currently working on building native and Hybrid mobile apps with mGWT. He is the author of upcoming Professional Java EE Design Patterns book from Wiley. He has been a user group leader at GDG Istanbul since 2009. Murat is a regular speaker at conferences like JavaOne, EclipseCon and user group meetings.",
+            "name": "Murat Yener",
+            "company": "Intel",
+            "title": "Android Developer",
+            "plusoneUrl": "https://plus.google.com/+MuratYener",
+            "website": "http://www.devchronicles.com",
+            "twitter": "https://twitter.com/yenerm",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/MuratYener.jpg"
+        },
+        {
+            "id": 11,
+            "bio": "Xavier is Developer Evangelist in Intel Software and Service Group in Paris, France. He is helping developers to improve their support for new hardware and technologies backed by Intel, with a focus on the Android NDK, 64-bit and dual-displays.",
+            "name": "Xavier Hallade",
+            "company": "Intel",
+            "title": "Developer Evangelist",
+            "plusoneUrl": "https://plus.google.com/+XavierHallade",
+            "website": "",
+            "twitter": "https://twitter.com/ph0b",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/XavierHallade.jpg"
+        },
+        {
+            "id": 4,
+            "bio": "Developer. Nominated to apply for the Google Developer Expert Program. Finalist of Google Apps Developer Challenge 2012. Author of open source libraries 1000+ stars. Writer. When Dmytro has free time he is writing technical articles. Speaker. Always trying to share his knowledge and experience on different events. Big fan of android, flat design, stackoverflow, git, IntelliJ IDEA. Eclipse IDE hater.",
+            "name": "Dmytro Danylyk",
+            "company": "Lemberg Solutions Limited",
+            "title": "Android Developer",
+            "plusoneUrl": "https://plus.google.com/+DmytroDanylyk",
+            "website": "",
+            "twitter": "https://twitter.com/dmytrodanylyk",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/DmytroDanylyk.jpg"
+        },
+        {
+            "id": 5,
+            "bio": "Mateusz is an Android GDE and GDG organizer. Works as Android Developer for Base CRM where he uses his android-abracadabras to make enterprise software users more productive.",
+            "name": "Mateusz Herych",
+            "company": "Base CRM",
+            "title": "Software Engineer",
+            "plusoneUrl": "https://plus.google.com/+MateuszHerych",
+            "website": "",
+            "twitter": "https://twitter.com/mherych",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/MateuszHerych.jpg"
+        },
+        {
+            "id": 9,
+            "bio": "Konrad is a developer at Making Waves, Google Developer Expert for Chrome and co-organizer of Google Developers Group in Krakow. Originally a back-end programmer for five years, he decided to switch to the more exciting, in his opinion, front-end world. At Making Waves he works on hybrid apps, websites and runs internal trainings. After work, he develops Chrome extensions, experiments with various front-end technologies, gives presentations and runs workshops.",
+            "name": "Konrad Dzwinel",
+            "company": "Making Waves",
+            "title": "Front-End developer",
+            "plusoneUrl": "https://plus.google.com/+KonradDzwinel",
+            "website": "",
+            "twitter": "https://twitter.com/kdzwinel",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/KonradDzwinel.jpg"
+        },
+        {
+            "id": 10,
+            "bio": "Co-founder and CTO of a successful interactive agency, these days Wojtek mostly works on mobile apps with his team. He likes to share ideas and experience with other technology enthusiasts during Google Developer Group meetups, which he helps organize. As a Google Developer Expert, he is interested in anything and everything related to Android.",
+            "name": "Wojtek Kalicinski",
+            "company": "Kalicinscy.com",
+            "title": "Co-founder and CTO",
+            "plusoneUrl": "https://plus.google.com/+WojtekKalicinski",
+            "website": "http://www.kalicinscy.com/",
+            "twitter": "",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/WojtekKalicinski.JPG"
+        },
+        {
+            "id": 6,
+            "bio": "Roman started his way in Android 5 years ago and fall in love with this platform. Currently he is a head of Android unit in Stanfy LLC and a co-organizer of Kyiv Google Developers Group focusing on Android development. Roman is responsible for building a strong team of Android developers inside Stanfy as well as for organizing Android professionals community in Kyiv.",
+            "name": "Roman Mazur",
+            "company": "Stanfy",
+            "title": "Head of Android/Java Unit",
+            "plusoneUrl": "https://plus.google.com/+RomanMazur/",
+            "website": "",
+            "twitter": "http://twitter.com/roman_mazur",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/RomanMazur.jpg"
+        },
+        {
+            "id": 7,
+            "bio": "Valentyn focuses on Polymer and Web Components. In previous roles heâ€™s helped craft design systems for massive enterprise companies, user interfaces for console titles, and even built the occasional enchanted princess game. These days his mission is to fight for a better web and to help developers build great experiences.",
+            "name": "Valentyn Shybanov",
+            "company": "Twinfield",
+            "title": "Software engineer/country manager",
+            "plusoneUrl": "https://google.com/+ValentynShybanov",
+            "website": "http://olostan.name/",
+            "twitter": "",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/ValentynShybanov.jpg"
+        },
+        {
+            "id": 8,
+            "bio": "Dima is a developer for about 10 years, making his way from junior to technical architect and manager of complex mobile solutions. In the past .NET developer, ex-leader of \"Lviv .NET User Group\" and one of the organizers of the \"Oh, Mobile!\" community. A fan of mobile technology and javascript. Makes fun talks all around the world and plays american football:)",
+            "name": "Dima Maleev",
+            "company": "N-iX",
+            "title": "Mobile Developer",
+            "plusoneUrl": "https://plus.google.com/+DimakaMaleev",
+            "website": "",
+            "twitter": "https://twitter.com/dimko1",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/DimaMaleev.jpg"
+        },
+        {
+            "id": 2,
+            "bio": "Nilay is co-organizer of GDG Istanbul and GDG Women Istanbul. In this time she has been one of the key organisers of big events such as DevFest and DevFest Women Istanbul. She has been working for Eteration for 5 years.",
+            "name": "Nilay Yener",
+            "company": "Eteration",
+            "title": "Product Manager",
+            "plusoneUrl": "https://plus.google.com/+NilayCoÅŸkunYener",
+            "website": "",
+            "twitter": "https://twitter.com/nlycskn",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/NilayYener.jpg"
+        },
+        {
+            "id": 14,
+            "bio": "Michal is Android Developer for all kinds of wearables, done programming for things such Oakley Airwave, Glass, Sony Smartwatch, and lately found his place in Android Wear development. He has contributed most of his project to the community and shared his knowledge to the community by organising many of Warsaw GDG meetings.",
+            "name": "Michal Tajchert",
+            "company": "Polidea",
+            "title": "Android Developer",
+            "plusoneUrl": "https://plus.google.com/+MichalTajchert",
+            "website": "",
+            "twitter": "https://twitter.com/Tajchert",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/MichalTajchert.jpg"
+        },
+        {
+            "id": 13,
+            "bio": "Kseniia is working as software developer at SoftServe. For two years she is leader of GDG Women Ukraine and GDG Dnipropetrovsk. Kseniia actively participate in GDG events, techtalks and conferences devoted software development and so on. Regularly she shares among girls an overview about different programs, grants available for women in IT and my own experience how was involved in some of these programs. Developer of several open-source project during Google Summer of Code program. Participant of TechTalk with global Women Techmakers community.",
+            "name": "Kseniia Shumelchyk",
+            "company": "SoftServe",
+            "title": "Software developer",
+            "plusoneUrl": "https://plus.google.com/u/0/104006672956574838559",
+            "website": "",
+            "twitter": "",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/KseniiaShumelchyk.jpg"
+        },
+        {
+            "id": 15,
+            "bio": "Andriy started as junior backend developer at Twinfield about 3 years ago. Ambitious and inquisitive, during work on complex enterprise system he progressed, looked aside new technologies and experimented. Nowadays Andriy trying to balance between stable back-end and unpredictable front-end developments. The main technologies he currently focused on are AngularJS, Dart and Android.",
+            "name": "Andriy Nechytailov",
+            "company": "Twinfield",
+            "title": "Software engineer",
+            "plusoneUrl": "https://plus.google.com/+AndreyNechitailov",
+            "website": "",
+            "twitter": "",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/AndriyNechytailov.jpg"
+        },
+        {
+            "id": 16,
+            "bio": "Natural born geek. 10+ years as front-end engineer",
+            "name": "Anton Iatsenko",
+            "company": "Evoldes",
+            "title": "Developer",
+            "plusoneUrl": "",
+            "website": "",
+            "twitter": "https://twitter.com/small_jam",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/AntonIatsenko.jpg"
+        },
+        {
+            "id": 17,
+            "bio": "Javascript-developer with extensive experience in highload applications, games enthusiast promotion on HTML5. Enjoy snowboards, owls and cookies. At conferences typically talking about games and everything connected with them, but this time made â€‹â€‹an exception.",
+            "name": "Yulia Puchnina",
+            "company": "Universal Mind",
+            "title": "Senior Technical Architect",
+            "plusoneUrl": "",
+            "website": "",
+            "twitter": "https://twitter.com/kira__kit",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/YuliaPuchnina.jpg"
+        },
+        {
+            "id": 18,
+            "bio": "Denys is a python web developer. He participated and successfully passed the Google Summer of Code 2013 and 2014 years. In his time at Melange (GSoC 2014), he worked on responsive layout for GSoC and GCI. An year ago, at TYPO3, he worked on extension for TYPO3 CMS for OAuth2 protocol. He likes new technologies and devices.",
+            "name": "Denys Butenko",
+            "company": "GDG Luhansk",
+            "title": "Python Web Developer",
+            "plusoneUrl": "",
+            "website": "",
+            "twitter": "https://twitter.com/denysbutenko",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/DenysButenko.jpg"
+        },
+        {
+            "id": 19,
+            "bio": "Yaroslav is one of the leading mapmakers in Ukraine. For last 2 years he mapped around 30000 objects. Wrote more than 50 guides about editing maps in Google Mapmaker for gmm.in.ua, site used by hundreds of other mapmakers from Ukraine.",
+            "name": "Yaroslav Yaroshevskyy",
+            "company": "gmm.in.ua",
+            "title": "Founder",
+            "plusoneUrl": "https://www.google.com/+YaroslavYaroshevskyy",
+            "website": "",
+            "twitter": "",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/YaroslavYaroshevskyy.jpg"
+        },
+        {
+            "id": 20,
+            "bio": "Yehor is a passionate front end engineer and UX designer. He likes to make useful tools, that help people solve their problems. Currently he is creating a web app, that helps insurance companies save money, and allows you to find a better and safer place to live.",
+            "name": "Yehor Lvivski",
+            "company": "Spatialkey",
+            "title": "Software Architect",
+            "plusoneUrl": "",
+            "website": "http://lvivski.com",
+            "twitter": "",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/YehorLvivski.jpg"
+        },
+        {
+            "id": 21,
+            "bio": "Andrii is a business associate intern in marketing at Google Ukraine, focusing on B2C products and brand. Prior to Google, Andrii has been studying in South Korea, Hong Kong and Germany, double majoring in mechanical engineering and business, with the emphasis on technology management.",
+            "name": "Andrii Komar",
+            "company": "Google",
+            "title": "Business Associate Intern",
+            "plusoneUrl": "https://plus.google.com/114293195346554220160",
+            "website": "",
+            "twitter": "",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/AndriiKomar.jpg"
+        },
+        {
+            "id": 22,
+            "bio": "Roman is Senior Java/Android developer. Currently he is lead of the E-commerce team in Privatbank PSJC and a co-organizer of GDG Dnipropetrovsk.Roman is interesting in software development for cutting edge technologies and devices like Google Glass and Android Wear.",
+            "name": "Roman Herasymenko",
+            "company": "Privatbank",
+            "title": "E-commerce Team Leader",
+            "plusoneUrl": "https://plus.google.com/+RomanGerasimenko/",
+            "website": "",
+            "twitter": "",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/RomanHerasymenko.jpg"
+        },
+        {
+            "id": 23,
+            "bio": "Maryna works as a software developer at Ciklum in Kiev. At the current moment she is working in search team of one of the largest Swiss auctions Ricardo.ch. Maryna's strong sides in programming are in .Net technology and Apache Solr search engine. Under her responsibility is making search relevant and fast as possible for buyers. Maryna is a first and only recipient of Google Anita Borg Scholarship in Ukraine. Since this summer she is running Anita Borg Scholarship Alumni community in EMEA region, the main aim of it is to increase the ratio of women in CS globally.",
+            "name": "Maryna Zhygadlo",
+            "company": "Ciklum",
+            "title": "Software developer",
+            "plusoneUrl": "",
+            "website": "http://ua.linkedin.com/pub/maryna-zhygadlo/43/7b2/535/",
+            "twitter": "",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/MarynaZhygadlo.jpg"
+        },
+        {
+            "id": 24,
+            "bio": "Founder and coordinator of the first Google Developer Group in Ukraine - GDG Kyiv-Center. Community manager of the Ukrainian Google developer program, a prominent member of the Ukrainian and international GDG communities, organizer of the first Ukrainian Hackathon, author and co-organizer of DevFest Ukraine 2012-14. â€œCommunityâ€ flow moderator at DevFest Ukraine 2014.",
+            "name": "Volodymyr Ivanov",
+            "company": "Google",
+            "title": "UA Developer Program associate",
+            "plusoneUrl": "http://google.com/+VladimirIvanovUA",
+            "website": "",
+            "twitter": "",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/VolodymyrIvanov.jpg"
+        },
+        {
+            "id": 25,
+            "bio": "Peter works at Prezi where he accompanied most of the client applications starting with writing the first web and desktop versions, through several multi-platform experiments, back to his roots, native applications. Before, he co-created Animata, an open source real-time animation software.",
+            "name": "Peter Nemeth",
+            "company": "Prezi",
+            "title": "",
+            "plusoneUrl": "",
+            "website": "https://github.com/lowdesertpunk",
+            "twitter": "",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/PeterNemeth.jpg"
+        },
+        {
+            "id": 26,
+            "bio": "After finishing Lviv Polytechnic Katya joined Prezi team in Budapest. She made her way from being a Flash developer for browser and desktop to C++ Native world. Katya love to develop user interaction applications, enjoy learning new technologies and travel around the world for an inspiration :)",
+            "name": "Katya Sadovnycha",
+            "company": "Prezi",
+            "title": "Software Engineer",
+            "plusoneUrl": "",
+            "website": "http://prezi.com/about/katya-sadovnycha/",
+            "twitter": "",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/KatyaSadovnycha.jpg"
+        },
+        {
+            "id": 27,
+            "bio": "Mark Drobnych lives Uzhhorod which is in the West of Ukraine. He studies at Senior High School. Mark's hobbies are: Lego, Lego EV3 programming, gadgets and robots. He is good in Lego robotics. Mark occupied first places in Robotica UA 2013 and Robotica UA 2014. He is global finalist of Google Science Fair 2014. Also Mark is saxophone player and fan of Elon Musk.",
+            "name": "Mark Drobnych",
+            "company": "Uzhhorod Gymnasium",
+            "title": "Student",
+            "plusoneUrl": "https://plus.google.com/u/0/+MarkDrobnych/posts",
+            "website": "",
+            "twitter": "",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/MarkDrobnych.jpg"
+        },
+        {
+            "id": 28,
+            "bio": "Nazar is UX Designer at Eleks with more than 5 years of experience in IT. Working with web and mobile platforms in wide range of domains (Healthcare, Entertainment, Social Networking). Big fan of Android, Edward Tufte and comic books :)",
+            "name": "Nazar Moravskyi",
+            "company": "Eleks",
+            "title": "UX Designer",
+            "plusoneUrl": "",
+            "website": "https://www.linkedin.com/in/moravskiy",
+            "twitter": "",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/NazarMoravskyi.jpg"
+        },
+        {
+            "id": 29,
+            "bio": "Google, Head of Marketing, Ukraine and CIS",
+            "name": "Svyatoslav Komakha",
+            "company": "Google",
+            "title": "Head of Marketing, Ukraine and CIS",
+            "plusoneUrl": "https://plus.google.com/+SvyatoslavKomakha",
+            "website": "https://www.linkedin.com/in/komakha",
+            "twitter": "",
+            "thumbnailUrl": "http://devfest.gdg.org.ua/img/people/SvyatoslavKomakha.jpg"
+        }
+    ]
+}

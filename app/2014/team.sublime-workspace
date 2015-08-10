@@ -1,0 +1,844 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"fon",
+				"font-weight"
+			],
+			[
+				"pad",
+				"padding-top"
+			],
+			[
+				"text",
+				"text-left	 bootstrap.min.css"
+			],
+			[
+				"ad",
+				"addClass"
+			],
+			[
+				"spea",
+				"speaker-item"
+			],
+			[
+				"log",
+				"logo-light"
+			],
+			[
+				"lo",
+				"logo-gray"
+			],
+			[
+				"logo",
+				"logo-dark"
+			],
+			[
+				"t",
+				"st-trigger-effects"
+			],
+			[
+				"e",
+				"effect"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"pa",
+				"padding-top"
+			],
+			[
+				"ma",
+				"margin-left"
+			],
+			[
+				"te",
+				"text-transform"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"sty",
+				"list-style"
+			],
+			[
+				"n",
+				"null"
+			],
+			[
+				"de",
+				"department_id"
+			],
+			[
+				"h",
+				"href	Attr"
+			],
+			[
+				"mi",
+				"min-height"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"p",
+				"padding"
+			],
+			[
+				"f",
+				"font-size"
+			],
+			[
+				"w",
+				"width"
+			],
+			[
+				"di",
+				"display"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "_layouts/default.html",
+			"settings":
+			{
+				"buffer_size": 1626,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "_layouts/index.html",
+			"settings":
+			{
+				"buffer_size": 2336,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "_layouts/logistics.html",
+			"settings":
+			{
+				"buffer_size": 2027,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "_layouts/post.html",
+			"settings":
+			{
+				"buffer_size": 1673,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 760,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "@echo off\necho.\nset apppath=\".\\optipng.exe\"\nif [%1]==[] echo Usage: %0 \"PNG Dir\" && echo. && echo Error: Invalid parameters && goto :EOF\nif not exist %1 echo Usage: %0 \"PNG Dir\" && echo. && echo Error: Invalid directory \"%~1\" && goto :EOF\n%apppath% \"%~1\\*.png\" -zc9 -zm9 -zs3 -f0-5 -nc -strip \"all\"\nfor /d /r \"%~1\" %%a in (*.*) do %apppath% \"%%~a\\*.png\" -zc9 -zm9 -zs3 -f0-5 -nc -strip \"all\"",
+			"file": "img/optimize.bat",
+			"file_size": -1,
+			"file_write_time": -1,
+			"settings":
+			{
+				"buffer_size": 391,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 400.0,
+		"selected_items":
+		[
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"pa",
+				"Package Control: Install Package"
+			],
+			[
+				"cod",
+				"Format Code"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 408.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/F/development/GitHub/devfest-ukraine-14/_includes/head.html",
+		"/F/development/GitHub/devfest-2014/_includes/speakers-modals.html",
+		"/F/development/GitHub/devfest-2014/team.html",
+		"/F/development/GitHub/devfest-2014/speakers.html",
+		"/F/development/GitHub/devfest-ukraine-14/css/style.min.css",
+		"/F/development/GitHub/devfest-ukraine-14/img/sprites/logos.svg",
+		"/F/development/GitHub/devfest-ukraine-14/img/sprites/sprites.svg",
+		"/F/development/GitHub/devfest-2014/img/sprites/sprites.svg",
+		"/F/development/GitHub/devfest-2014/img/sprites/logos.svg",
+		"/C/Users/Oleh/Desktop/patch.diff",
+		"/C/Users/Oleh/Desktop/optimize.bat",
+		"/F/development/GitHub/devfest-2014/_layouts/post.html",
+		"/F/development/GitHub/devfest-2014/_layouts/speakers.html",
+		"/F/development/GitHub/devfest-2014/_data/speakers.yml",
+		"/F/development/GitHub/devfest-2014/js/scripts.js",
+		"/F/development/GitHub/devfest-2014/css/style.css",
+		"/F/development/GitHub/devfest-2014/_includes/team.html",
+		"/F/development/GitHub/devfest-2014/prototype/speakers.html",
+		"/F/development/GitHub/devfest-2014/_includes/speakers-list.html",
+		"/F/development/GitHub/devfest-2014/_site/prototype/speakers.html",
+		"/F/development/GitHub/devfest-2014/_includes/speakers-list-2.html",
+		"/F/development/GitHub/devfest-2014/_includes/rockstar-speakers.html",
+		"/F/development/GitHub/devfest-2014/_site/img/sprites/sprites.svg",
+		"/F/development/GitHub/devfest-2014/img/speakers/optimize.bat",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/site ukraine/img/logos.min.svg",
+		"/F/development/GitHub/devfest-2014/_config.yml",
+		"/F/development/GitHub/devfest-2014/fonts/glyphicons-halflings-regular.svg",
+		"/F/development/GitHub/devfest-2014/cod.md",
+		"/F/development/GitHub/devfest-2014/CNAME",
+		"/F/development/GitHub/devfest-2014/_includes/navigation.html",
+		"/F/development/GitHub/devfest-2014/_includes/subscribe.html",
+		"/F/development/GitHub/devfest-2014/_includes/hero.html",
+		"/F/development/GitHub/devfest-2014/_site/js/scripts.js",
+		"/F/development/GitHub/devfest-2014/_includes/head.html",
+		"/F/development/GitHub/devfest-2014/about.md",
+		"/F/development/GitHub/devfest-2014/_layouts/default.html",
+		"/F/development/GitHub/devfest-2014/_layouts/index.html",
+		"/F/development/GitHub/devfest-2014/_layouts/logistics.html",
+		"/F/development/GitHub/devfest-2014/js/waves.js",
+		"/F/development/GitHub/devfest-2014/css/waves.css",
+		"/F/development/GitHub/devfest-2014/js/waves.min.js",
+		"/F/development/GitHub/devfest-2014/_includes/statistics.html",
+		"/C/Users/Oleh/Desktop/Waves-master/Waves-master/src/js/waves.js",
+		"/F/development/GitHub/devfest-2014/_includes/header.html",
+		"/F/development/GitHub/devfest-2014/img/sprites/logos - Copy.svg",
+		"/F/development/GitHub/devfest-2014/img/sprites/logos-copy2.svg",
+		"/F/development/GitHub/devfest-2014/img/sprites/logos-copy.svg",
+		"/F/development/GitHub/devfest-2014/img/sprites/logos copy.svg",
+		"/C/Users/Oleh/Desktop/IcoMoon-23-32px-#464646/sprites/sprites - Copy.svg",
+		"/C/Users/Oleh/Desktop/IcoMoon-23-32px-#464646/sprites/sprites.svg",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype-local/blog.html",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype-local/index.html",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype-local/img/sprites/sprites.svg",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/backup/sprites.svg",
+		"/C/Users/Oleh/Desktop/IcoMoon-16-32px-#464646/sprites/sprites.svg",
+		"/C/Users/Oleh/Desktop/IcoMoon-14-32px-#464646/sprites/sprites.svg",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype-local/img/sprites/sprites2.svg",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype-local/speakers.html",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype-local/team.html",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/data/speakers.json",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype-local/img/sprites/sprites - Copy.svg",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype-local/img/sprites/sprites.png",
+		"/C/Users/Oleh/Desktop/IcoMoon-13-32px-#464646/sprites/sprites.svg",
+		"/C/Users/Oleh/Desktop/IcoMoon-13-32px-#464646/sprites/sprites.css",
+		"/C/Users/Oleh/Desktop/IcoMoon-15-32px-#464646/sprites/sprites.svg",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/examples/Digital Agency in Leeds and London_files/Parallax   Digital Agency in Leeds and London.htm",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/examples/Digital Agency in Leeds and London_files/Parallax   Digital Agency in Leeds and London_files/main.jquery.js",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/examples/Digital Agency in Leeds and London_files/Parallax   Digital Agency in Leeds and London_files/style.css",
+		"/F/development/GitHub/devfest-2014/css/animate.min.css",
+		"/F/development/GitHub/devfest-2014/css/todc-bootstrap.min.css",
+		"/F/development/GitHub/devfest-2014/css/bootstrap.min.css",
+		"/F/development/GitHub/devfest-2014/_config-local.yml",
+		"/C/Users/Oleh/Desktop/sprites.html",
+		"/C/Users/Oleh/Desktop/sprites.css",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype/index.html",
+		"/F/development/GitHub/devfest13/appengine_app/templates/pages/index.html",
+		"/F/development/GitHub/devfest13/appengine_app/templates/pages/speakers.html",
+		"/F/development/GitHub/devfest13/appengine_app/templates/blocks/speackers.html",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/examples/Digital Agency in Leeds and London_files/Parallax   Digital Agency in Leeds and London_files/mousewheel.js",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/examples/Digital Agency in Leeds and London_files/Parallax   Digital Agency in Leeds and London_files/require.js",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/examples/Digital Agency in Leeds and London_files/Parallax   Digital Agency in Leeds and London_files/linkid.js",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/examples/Digital Agency in Leeds and London_files/Parallax   Digital Agency in Leeds and London_files/1420.js",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype/img/favicons/browserconfig.xml",
+		"/F/development/GitHub/devfest-2014/README.md",
+		"/C/Users/Oleh/Desktop/animate.css",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype/css/animate.min.css",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/examples/Ventcamp/Home.htm",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/site/css/style.css",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype/css/animate.css",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/site ukraine/index.html",
+		"/C/Users/Oleh/Desktop/random-login-form/css/style.css",
+		"/C/Users/Oleh/Desktop/random-login-form/index.html",
+		"/F/development/GitHub/devfest-2014/js/bootstrap.min.js",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/resources/waitForImages-master/dist/jquery.waitforimages.min.js",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/site/js/jquery.appear.js",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/examples/Ventcamp/Home_files/jquery.appear.js",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/resources/jquery-waypoints-master/waypoints.js",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype/desktop.ini",
+		"/F/development/GitHub/devfest-2014/_site/README.md",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype/js/scripts.js",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype/js/jquery.waitforimages.min.js",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype/js/jquery.waitforimages.js",
+		"/C/Users/Oleh/Desktop/css/iconizr-svg-data.css",
+		"/C/Users/Oleh/Desktop/css/iconizr-svg-sprite.css",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype/js/jquery.appear.js",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype/js/jquery.appear.min.js",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype/js/jquery.countTo.min.js",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype/js/jquery.countTo.js",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/prototype/js/typed.min.js",
+		"/F/development/GitHub/devfest-2014/_layouts/page.html",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/examples/Ventcamp/Home_files/style-blue.css",
+		"/F/development/GitHub/devfest13/appengine_app/templates/blocks/footer.html",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/examples/Ventcamp/Home_files/scripts.js",
+		"/F/development/GitHub/devfest13/appengine_app/static/css/styles.css",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/resources/jquery.html5loader-master/jquery.html5loader-master/examples/demo-nprogress.html",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/resources/jquery.html5loader-master/jquery.html5loader-master/examples/demo-append-sources.html",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/resources/jquery.html5loader-master/jquery.html5loader-master/src/files.json",
+		"/F/development/GitHub/devfest-2014/template/_config.yml",
+		"/F/development/GitHub/devfest-2014/template/preload.json",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/resources/jquery.html5loader-master/jquery.html5loader-master/bower.json",
+		"/F/development/GitHub/devfest-ukraine-14/css/style.css",
+		"/F/development/GitHub/devfest-ukraine-14/_includes/hero-before.html",
+		"/F/development/GitHub/devfest-ukraine-14/index.html",
+		"/F/development/GitHub/devfest-ukraine-14/_layouts/default.html",
+		"/F/development/GitHub/devfest-ukraine-14/_layouts/page.html",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/examples/IO/Google I O 2014.htm",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/resources/niklausgerber-PreLoadMe-bdea81d/index.html",
+		"/C/Users/Oleh/Диск Google/GDG/DevFest 2014/resources/SidebarTransitions/index.html"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"session",
+			"767",
+			"each",
+			"show",
+			"SVGID_12",
+			"pinterest",
+			"<g id=\"icon-walking\">\n	<path class=\"path1\" d=\"M22.703,15.611c-0.39,0.382-1.016,0.375-1.398-0.014l-3.425-3.495l-1.907,5.082l3.497,3.492\n	c0.127,0.127,0.203,0.277,0.256,0.434c0.022,0.05,0.082,6.67,0.082,6.67c0,0.526-0.439,0.953-0.98,0.953s-0.98-0.427-0.98-0.953\n	v-5.946c0,0-3.308-3.14-3.406-3.16l-3.479,9.269c-0.225,0.6-0.828,0.929-1.346,0.734c-0.518-0.195-0.755-0.839-0.53-1.439\n	l6.263-16.685l-2.947,0.644v2.998c0,0.498-0.442,0.901-0.987,0.901c-0.545,0-0.988-0.403-0.988-0.901V10.66\n	c-0.004-0.014-0.015-0.024-0.018-0.038c-0.116-0.533,0.302-1.077,0.934-1.215c0,0,4.813-1.044,4.83-1.047l0.129-0.344\n	c0.064-0.172,0.328-0.241,0.672-0.226c0.157-0.028,0.786,0.147,0.898,0.189c0.753,0.283,1.271,0.758,1.158,1.061l-0.383,1.02\n	l4.072,4.155C23.1,14.604,23.093,15.23,22.703,15.611z M19.415,7.842c1.155,0,2.091-0.936,2.091-2.091S20.57,3.66,19.415,3.66\n	c-1.155,0-2.091,0.936-2.091,2.091S18.26,7.842,19.415,7.842z\"></path>\n</g>",
+			"arrow",
+			"oleh",
+			"scroll",
+			"setInterval",
+			"$toggle",
+			"scroll-down",
+			"js-scroll-down",
+			"news",
+			"js",
+			"temp",
+			"footer",
+			"maps.googleapis",
+			"js",
+			"after",
+			"open-falldown",
+			"search",
+			"width",
+			"affix .toggle-search { color: #999; }",
+			"topbar",
+			"affix",
+			"?>",
+			".organizer h4 {\n	margin: 0.5em 0 0;\n	font-size: 1.2em;\n	text-transform: uppercase;\n}",
+			"require_once",
+			");\n",
+			".breadcrumb-text",
+			"caption",
+			".table-bordered",
+			".table",
+			".ui-",
+			"ui-state",
+			"ui-",
+			"time",
+			"ui-datepicker",
+			"ui-datepicker-div",
+			"{\n",
+			"datepicker",
+			"date",
+			"//",
+			"input-datepicker",
+			"input-prepend",
+			"hasDatepicker",
+			"login-field-icon",
+			"fui",
+			"bottom-menu",
+			"@font-face {\n  font-family: \"Flat-UI-Icons\";\n  src: url(\"../fonts/Flat-UI-Icons.eot\");\n  src: url(\"../fonts/Flat-UI-Icons.eot?#iefix\") format(\"embedded-opentype\"), url(\"../fonts/Flat-UI-Icons.woff\") format(\"woff\"), url(\"../fonts/Flat-UI-Icons.ttf\") format(\"truetype\"), url(\"../fonts/Flat-UI-Icons.svg#Flat-UI-Icons\") format(\"svg\");\n  font-weight: normal;\n  font-style: normal;\n}\n/* Use the following CSS code if you want to use data attributes for inserting your icons */\n[data-icon]:before {\n  font-family: 'Flat-UI-Icons';\n  content: attr(data-icon);\n  speak: none;\n  font-weight: normal;\n  font-variant: normal;\n  text-transform: none;\n  -webkit-font-smoothing: antialiased;\n}\n/* Use the following CSS code if you want to have a class per icon */\n/*\nInstead of a list of all class selectors,\nyou can use the generic selector below, but it's slower:\n[class*=\"fui-\"] {\n*/\n.fui-triangle-up,\n.fui-triangle-up-small,\n.fui-triangle-right-large,\n.fui-triangle-left-large,\n.fui-triangle-down,\n.fui-info,\n.fui-alert,\n.fui-question,\n.fui-window,\n.fui-windows,\n.fui-arrow-right,\n.fui-arrow-left,\n.fui-loop,\n.fui-cmd,\n.fui-mic,\n.fui-triangle-down-small,\n.fui-check-inverted,\n.fui-heart,\n.fui-location,\n.fui-plus,\n.fui-check,\n.fui-cross,\n.fui-list,\n.fui-new,\n.fui-video,\n.fui-photo,\n.fui-volume,\n.fui-time,\n.fui-eye,\n.fui-chat,\n.fui-home,\n.fui-upload,\n.fui-search,\n.fui-user,\n.fui-mail,\n.fui-lock,\n.fui-power,\n.fui-star,\n.fui-calendar,\n.fui-gear,\n.fui-book,\n.fui-exit,\n.fui-trash,\n.fui-folder,\n.fui-bubble,\n.fui-cross-inverted,\n.fui-plus-inverted,\n.fui-export,\n.fui-radio-unchecked,\n.fui-radio-checked,\n.fui-checkbox-unchecked,\n.fui-checkbox-checked,\n.fui-flat,\n.fui-calendar-solid,\n.fui-star-2,\n.fui-credit-card,\n.fui-clip,\n.fui-link,\n.fui-pause,\n.fui-play,\n.fui-tag,\n.fui-document,\n.fui-image,\n.fui-facebook,\n.fui-youtube,\n.fui-vimeo,\n.fui-twitter,\n.fui-stumbleupon,\n.fui-spotify,\n.fui-skype,\n.fui-pinterest,\n.fui-path,\n.fui-myspace,\n.fui-linkedin,\n.fui-googleplus,\n.fui-dribbble,\n.fui-blogger,\n.fui-behance,\n.fui-list-thumbnailed,\n.fui-list-small-thumbnails,\n.fui-list-numbered,\n.fui-list-large-thumbnails,\n.fui-list-columned,\n.fui-list-bulleted {\n  display: inline-block;\n  font-family: 'Flat-UI-Icons';\n  speak: none;\n  font-style: normal;\n  font-weight: normal;\n  font-variant: normal;\n  text-transform: none;\n  -webkit-font-smoothing: antialiased;\n}\n.fui-triangle-up:before {\n  content: \"\\e000\";\n}\n.fui-triangle-up-small:before {\n  content: \"\\e001\";\n}\n.fui-triangle-right-large:before {\n  content: \"\\e002\";\n}\n.fui-triangle-left-large:before {\n  content: \"\\e003\";\n}\n.fui-triangle-down:before {\n  content: \"\\e004\";\n}\n.fui-info:before {\n  content: \"\\e016\";\n}\n.fui-alert:before {\n  content: \"\\e017\";\n}\n.fui-question:before {\n  content: \"\\e018\";\n}\n.fui-window:before {\n  content: \"\\e019\";\n}\n.fui-windows:before {\n  content: \"\\e01a\";\n}\n.fui-arrow-right:before {\n  content: \"\\e02c\";\n}\n.fui-arrow-left:before {\n  content: \"\\e02d\";\n}\n.fui-loop:before {\n  content: \"\\e02e\";\n}\n.fui-cmd:before {\n  content: \"\\e02f\";\n}\n.fui-mic:before {\n  content: \"\\e030\";\n}\n.fui-triangle-down-small:before {\n  content: \"\\e005\";\n}\n.fui-check-inverted:before {\n  content: \"\\e006\";\n}\n.fui-heart:before {\n  content: \"\\e007\";\n}\n.fui-location:before {\n  content: \"\\e008\";\n}\n.fui-plus:before {\n  content: \"\\e009\";\n}\n.fui-check:before {\n  content: \"\\e00a\";\n}\n.fui-cross:before {\n  content: \"\\e00b\";\n}\n.fui-list:before {\n  content: \"\\e00c\";\n}\n.fui-new:before {\n  content: \"\\e00d\";\n}\n.fui-video:before {\n  content: \"\\e00e\";\n}\n.fui-photo:before {\n  content: \"\\e00f\";\n}\n.fui-volume:before {\n  content: \"\\e010\";\n}\n.fui-time:before {\n  content: \"\\e011\";\n}\n.fui-eye:before {\n  content: \"\\e012\";\n}\n.fui-chat:before {\n  content: \"\\e013\";\n}\n.fui-home:before {\n  content: \"\\e015\";\n}\n.fui-upload:before {\n  content: \"\\e01b\";\n}\n.fui-search:before {\n  content: \"\\e01c\";\n}\n.fui-user:before {\n  content: \"\\e01d\";\n}\n.fui-mail:before {\n  content: \"\\e01e\";\n}\n.fui-lock:before {\n  content: \"\\e01f\";\n}\n.fui-power:before {\n  content: \"\\e020\";\n}\n.fui-star:before {\n  content: \"\\e021\";\n}\n.fui-calendar:before {\n  content: \"\\e023\";\n}\n.fui-gear:before {\n  content: \"\\e024\";\n}\n.fui-book:before {\n  content: \"\\e025\";\n}\n.fui-exit:before {\n  content: \"\\e026\";\n}\n.fui-trash:before {\n  content: \"\\e027\";\n}\n.fui-folder:before {\n  content: \"\\e028\";\n}\n.fui-bubble:before {\n  content: \"\\e029\";\n}\n.fui-cross-inverted:before {\n  content: \"\\e02a\";\n}\n.fui-plus-inverted:before {\n  content: \"\\e031\";\n}\n.fui-export:before {\n  content: \"\\e014\";\n}\n.fui-radio-unchecked:before {\n  content: \"\\e02b\";\n}\n.fui-radio-checked:before {\n  content: \"\\e032\";\n}\n.fui-checkbox-unchecked:before {\n  content: \"\\e033\";\n}\n.fui-checkbox-checked:before {\n  content: \"\\e034\";\n}\n.fui-flat:before {\n  content: \"\\e035\";\n}\n.fui-calendar-solid:before {\n  content: \"\\e022\";\n}\n.fui-star-2:before {\n  content: \"\\e036\";\n}\n.fui-credit-card:before {\n  content: \"\\e037\";\n}\n.fui-clip:before {\n  content: \"\\e038\";\n}\n.fui-link:before {\n  content: \"\\e039\";\n}\n.fui-pause:before {\n  content: \"\\e03b\";\n}\n.fui-play:before {\n  content: \"\\e03c\";\n}\n.fui-tag:before {\n  content: \"\\e03d\";\n}\n.fui-document:before {\n  content: \"\\e03e\";\n}\n.fui-image:before {\n  content: \"\\e03a\";\n}\n.fui-facebook:before {\n  content: \"\\e03f\";\n}\n.fui-youtube:before {\n  content: \"\\e040\";\n}\n.fui-vimeo:before {\n  content: \"\\e041\";\n}\n.fui-twitter:before {\n  content: \"\\e042\";\n}\n.fui-stumbleupon:before {\n  content: \"\\e043\";\n}\n.fui-spotify:before {\n  content: \"\\e044\";\n}\n.fui-skype:before {\n  content: \"\\e045\";\n}\n.fui-pinterest:before {\n  content: \"\\e046\";\n}\n.fui-path:before {\n  content: \"\\e047\";\n}\n.fui-myspace:before {\n  content: \"\\e048\";\n}\n.fui-linkedin:before {\n  content: \"\\e049\";\n}\n.fui-googleplus:before {\n  content: \"\\e04a\";\n}\n.fui-dribbble:before {\n  content: \"\\e04c\";\n}\n.fui-blogger:before {\n  content: \"\\e04d\";\n}\n.fui-behance:before {\n  content: \"\\e04e\";\n}\n.fui-list-thumbnailed:before {\n  content: \"\\e04b\";\n}\n.fui-list-small-thumbnails:before {\n  content: \"\\e04f\";\n}\n.fui-list-numbered:before {\n  content: \"\\e050\";\n}\n.fui-list-large-thumbnails:before {\n  content: \"\\e051\";\n}\n.fui-list-columned:before {\n  content: \"\\e052\";\n}\n.fui-list-bulleted:before {\n  content: \"\\e053\";\n}",
+			"bottom-menu",
+			"info",
+			"//",
+			"info",
+			"9",
+			"info",
+			"video",
+			"table",
+			"@font-face {\n	font-family: 'icomoon';\n	src:url('../fonts/icomoon/icomoon.eot');\n	src:url('../fonts/icomoon/icomoon.eot?#iefix') format('embedded-opentype'),\n		url('../fonts/icomoon/icomoon.woff') format('woff'),\n		url('../fonts/icomoon/icomoon.ttf') format('truetype'),\n		url('../fonts/icomoon/icomoon.svg#icomoon') format('svg');\n	font-weight: normal;\n	font-style: normal;\n}",
+			".icon-arrow-right:before {\n	content: \"\\e00d\";\n}",
+			"bootstrap",
+			".",
+			"sea",
+			";}\n",
+			"speaker-text",
+			"}\n",
+			"navbar-brand",
+			"992",
+			"col-xs-11",
+			"patners",
+			"partners",
+			"}\n",
+			"patners",
+			"assets/",
+			"ratio",
+			"pixel",
+			"ratio",
+			"center",
+			"pull-",
+			"container",
+			"footer",
+			".text-right",
+			"text-right",
+			"featurette-divider",
+			"featurette-image",
+			"<!",
+			"4285F4",
+			"4285",
+			"nav navbar-nav",
+			"768",
+			".navbar-inverse .navbar-toggle",
+			".navbar-inverse .navbar-toggle:hover",
+			"navbar-toggle",
+			".navbar-toggle",
+			".navbar-inverse .navbar-toggle",
+			"icon-bar",
+			"navbar-toggle",
+			"101",
+			"768",
+			"992",
+			"768",
+			"767",
+			"720",
+			"992",
+			"navbar-brand"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			",",
+			"partners",
+			"images/"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 5,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "_layouts/default.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1626,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1566,
+								1566
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".#",
+									"selector": "text.html"
+								}
+							],
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "_layouts/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2336,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2277,
+								2277
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".#",
+									"selector": "text.html"
+								}
+							],
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 225.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "_layouts/logistics.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2027,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1097,
+								1097
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".#",
+									"selector": "text.html"
+								}
+							],
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "_layouts/post.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1673,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								456,
+								456
+							]
+						],
+						"settings":
+						{
+							"auto_complete_triggers":
+							[
+								{
+									"characters": "<",
+									"selector": "text.html"
+								},
+								{
+									"characters": ".#",
+									"selector": "text.html"
+								}
+							],
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 760,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "img/optimize.bat",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 391,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								38,
+								38
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Batch File/Batch File.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.CSS Extended Completions":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "team.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"hea",
+				"_includes\\head.html"
+			],
+			[
+				"spe",
+				"_data\\speakers.yml"
+			],
+			[
+				"sty",
+				"css\\style.css"
+			],
+			[
+				"sc",
+				"js\\scripts.js"
+			],
+			[
+				"tea",
+				"_includes\\team.html"
+			],
+			[
+				"sp",
+				"_data\\speakers.yml"
+			],
+			[
+				"con",
+				"_config.yml"
+			],
+			[
+				"hero",
+				"_includes\\hero.html"
+			],
+			[
+				"su",
+				"_includes\\subscribe.html"
+			],
+			[
+				"na",
+				"_includes\\navigation.html"
+			],
+			[
+				"her",
+				"_includes\\hero.html"
+			],
+			[
+				"navi",
+				"_includes\\navigation.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 203.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

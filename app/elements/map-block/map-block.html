@@ -18,7 +18,7 @@
         }
     </style>
     <template>
-        <google-map class="fit" zoom="15" latitude="49.809841" longitude="23.982805" disable-zoom disable-default-ui>
+        <google-map class="fit" zoom="15" latitude="49.809841" longitude="23.982805" styles="[[options]]" disable-zoom disable-default-ui>
             <google-map-marker latitude="49.809841" longitude="23.972805"></google-map-marker>
         </google-map>
         <div class="container card-container relative layout horizontal">
@@ -50,28 +50,23 @@
         attached: function() {
             this.options = [{
                 stylers: [{
-                    lightness: 40
+                    'lightness': 40
                 }, {
-                    visibility: 'on'
+                    'visibility': 'on'
                 }, {
-                    gamma: 0.9
+                    'gamma': 0.9
                 }, {
-                    weight: 0.4
+                    'weight': 0.4
                 }]
             }, {
-                elementType: 'labels',
-                stylers: [{
-                    visibility: 'on'
+                'elementType': 'labels',
+                'stylers': [{
+                    'visibility': 'on'
                 }]
             }, {
-                featureType: 'water',
-                stylers: [{
-                    color: '#5dc7ff'
-                }]
-            }, {
-                featureType: 'road',
-                stylers: [{
-                    visibility: 'off'
+                'featureType': 'water',
+                'stylers': [{
+                    'color': '#5dc7ff'
                 }]
             }];
         }

@@ -1,0 +1,13 @@
+{
+    "format": "iosched-json-v1",
+    "data_files": [
+        "blocks_v2.json",
+        "hashtags_v2.json",
+        "partners_v4.json",
+        "past_io_videolibrary_v2.json",
+        "rooms_v1.json",
+        "session_data_v4.json",
+        "speakers_v2.json",
+        "tags_v1.json"
+    ]
+}

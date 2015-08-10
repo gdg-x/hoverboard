@@ -1,0 +1,144 @@
+{
+    "blocks": [
+        {
+            "start": "2014-10-24T07:00:00.000Z",
+            "end": "2014-10-24T08:00:00.000Z",
+            "title": "Hackaton: Registration, app selection contest",
+            "type": "break",
+            "subtitle": "ComeIn"
+        },
+        {
+            "start": "2014-10-24T07:00:00.000Z",
+            "end": "2014-10-24T09:00:00.000Z",
+            "title": "Workshop: Android Wear Data Sync",
+            "type": "break",
+            "subtitle": "coMMuna"
+        },
+        {
+            "start": "2014-10-24T10:00:00.000Z",
+            "end": "2014-10-24T12:00:00.000Z",
+            "title": "Workshop: Browser Performance",
+            "type": "break",
+            "subtitle": "coMMuna"
+        },
+        {
+            "start": "2014-10-24T13:00:00.000Z",
+            "end": "2014-10-24T15:00:00.000Z",
+            "title": "Workshop: Polymer: Future on your fingers",
+            "type": "break",
+            "subtitle": "coMMuna"
+        },
+        {
+            "start": "2014-10-24T15:00:00.000Z",
+            "end": "2014-10-24T16:00:00.000Z",
+            "title": "Hackaton: Demostage",
+            "type": "break",
+            "subtitle": "ComeIn"
+        },
+        {
+            "start": "2014-10-25T05:30:00.000Z",
+            "end": "2014-10-25T06:20:00.000Z",
+            "title": "Registration",
+            "type": "break",
+            "subtitle": "Main Hall"
+        },
+        {
+            "start": "2014-10-25T06:30:00.000Z",
+            "end": "2014-10-25T07:20:00.000Z",
+            "title": "",
+            "type": "free",
+            "subtitle": ""
+        },
+        {
+            "start": "2014-10-25T07:30:00.000Z",
+            "end": "2014-10-25T08:00:00.000Z",
+            "title": "",
+            "type": "free",
+            "subtitle": ""
+        },
+        {
+            "start": "2014-10-25T08:10:00.000Z",
+            "end": "2014-10-25T08:40:00.000Z",
+            "title": "",
+            "type": "free",
+            "subtitle": ""
+        },
+        {
+            "start": "2014-10-25T08:50:00.000Z",
+            "end": "2014-10-25T09:20:00.000Z",
+            "title": "",
+            "type": "free",
+            "subtitle": ""
+        },
+        {
+            "start": "2014-10-25T09:30:00.000Z",
+            "end": "2014-10-25T10:50:00.000Z",
+            "title": "Lunch",
+            "type": "break",
+            "subtitle": "Лівий Берег (Left Bank) restaurant, Opera house"
+        },
+        {
+            "start": "2014-10-25T11:00:00.000Z",
+            "end": "2014-10-25T11:30:00.000Z",
+            "title": "",
+            "type": "free",
+            "subtitle": ""
+        },
+        {
+            "start": "2014-10-25T11:40:00.000Z",
+            "end": "2014-10-25T12:10:00.000Z",
+            "title": "",
+            "type": "free",
+            "subtitle": ""
+        },
+        {
+            "start": "2014-10-25T12:20:00.000Z",
+            "end": "2014-10-25T12:50:00.000Z",
+            "title": "",
+            "type": "free",
+            "subtitle": ""
+        },
+        {
+            "start": "2014-10-25T13:00:00.000Z",
+            "end": "2014-10-25T13:30:00.000Z",
+            "title": "Coffee Break",
+            "type": "break",
+            "subtitle": ""
+        },
+        {
+            "start": "2014-10-25T13:30:00.000Z",
+            "end": "2014-10-25T14:00:00.000Z",
+            "title": "",
+            "type": "free",
+            "subtitle": ""
+        },
+        {
+            "start": "2014-10-25T14:10:00.000Z",
+            "end": "2014-10-25T14:40:00.000Z",
+            "title": "",
+            "type": "free",
+            "subtitle": ""
+        },
+        {
+            "start": "2014-10-25T14:50:00.000Z",
+            "end": "2014-10-25T15:20:00.000Z",
+            "title": "",
+            "type": "free",
+            "subtitle": ""
+        },
+        {
+            "start": "2014-10-25T15:30:00.000Z",
+            "end": "2014-10-25T16:00:00.000Z",
+            "title": "Closing ceremony",
+            "type": "break",
+            "subtitle": "Blue room"
+        },
+        {
+            "start": "2014-10-25T16:10:00.000Z",
+            "end": "2014-10-25T18:00:00.000Z",
+            "title": "Afterparty",
+            "type": "break",
+            "subtitle": "Main Hall"
+        }
+    ]
+}

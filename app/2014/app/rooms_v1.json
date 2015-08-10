@@ -1,0 +1,22 @@
+{
+    "rooms": [
+        {
+            "originalid": "blue",
+            "id": "blue",
+            "name": "Blue room",
+            "capacity": 290
+        },
+        {
+            "originalid": "red",
+            "id": "red",
+            "name": "Red room",
+            "capacity": 90
+        },
+        {
+            "originalid": "art",
+            "id": "art",
+            "name": "Art room",
+            "capacity": 18
+        }
+    ]
+}

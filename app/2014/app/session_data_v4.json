@@ -1,0 +1,729 @@
+{
+    "sessions": [
+        {
+            "id": 101,
+            "startTimestamp": "2014-10-25T14:50:00Z",
+            "endTimestamp": "2014-10-25T15:20:00Z",
+            "title": "L(e) Android: The whole android ecosystem experience with wear and glass",
+            "description": "Google TV was an early but premature attempt to extend android out of the phone. Google Glass took that a step further by providing a new UI, UX and APIs. Now with Android Wear, Android has extended to a new environment which is much adoptable than Glass. However, Wear comes with a price, with wear once again we have new UI, UX and set of APIs.This talk intends to give a deep dive into whole new UI, UX and development tools introduced by Android L, Android Wear and the Google Glass showing ways to integrate each and offer a smooth flow between all android platforms.",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/MuratYener.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_ANDROID",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "blue",
+            "speakers": [
+                "12"
+            ],
+            "tags": [
+                "TOPIC_ANDROID",
+                "LANG_EN",
+                "THEME_INTERMEDIATE"
+            ]
+        },
+        {
+            "id": 102,
+            "startTimestamp": "2014-10-25T07:30:00Z",
+            "endTimestamp": "2014-10-25T08:00:00Z",
+            "title": "The Android NDK",
+            "description": "The Android NDK is used to integrate asm/C/C++ code into Android applications and libraries.Learn how to use it as well as NDK-based libraries with Eclipse and Android Studio. Discover what changes from the new Android Runtime (ART) may break your integration, and what you need to do in order to take advantage of 64-bit architectures.",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/XavierHallade.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_ANDROID",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "blue",
+            "speakers": [
+                "11"
+            ],
+            "tags": [
+                "TOPIC_ANDROID",
+                "LANG_EN",
+                "THEME_INTERMEDIATE"
+            ]
+        },
+        {
+            "id": 103,
+            "startTimestamp": "2014-10-25T12:20:00Z",
+            "endTimestamp": "2014-10-25T12:50:00Z",
+            "title": "Android L Animation",
+            "description": "I will speak and show how to:- Respond to touch events in your views with touch feedback animations.- Hide and show views with reveal effect animations.- Switch between activities with custom activity transition animations.- Create more natural animations with curved motion.- Animate changes in one or more view properties with view state change animations.- Create icon morphing transition",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/DmytroDanylyk.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_ANDROID",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "blue",
+            "speakers": [
+                "4"
+            ],
+            "tags": [
+                "TOPIC_ANDROID",
+                "LANG_UK",
+                "THEME_INTERMEDIATE"
+            ]
+        },
+        {
+            "id": 104,
+            "startTimestamp": "2014-10-25T08:10:00Z",
+            "endTimestamp": "2014-10-25T08:40:00Z",
+            "title": "Guava beyond Collections",
+            "description": "Based on the stats gathered by imaginarynumbers inc., 49% of Java developers wouldn't code Java anymore if not Guava.In fact, Guava is a wonderful library that makes Java development easier and friendlier. And it's applicable also for Android. However, many developers limit its usage to simple Collections' transformations and filters, not revealing many advantages coming with the whole lib.During my presentation I'll also cover some android-specific topics like:- Guava your ContentResolverish boilerplate- 65K method limit hurts your app and Guava uses too many? Different approaches of handling this issue.- Do's and dont's of Guava for Android.And more!",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/MateuszHerych.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_ANDROID",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "blue",
+            "speakers": [
+                "5"
+            ],
+            "tags": [
+                "TOPIC_ANDROID",
+                "LANG_EN",
+                "THEME_INTERMEDIATE"
+            ]
+        },
+        {
+            "id": 105,
+            "startTimestamp": "2014-10-25T11:40:00Z",
+            "endTimestamp": "2014-10-25T12:10:00Z",
+            "title": "Android Wear UX at a glance",
+            "description": "Android Wear is the new edition of Android geared towards smart watches. There are several easy ways you as a developer can add Wear support to your existing apps, but in order to make sure your app really rocks on the users' wrists, you need to unlearn some of the habits of designing for mobile. In this presentation I will show the do's, the don'ts, and some of the how of Android Wear development.",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/WojtekKalicinski.JPG",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_ANDROID",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "blue",
+            "speakers": [
+                "10"
+            ],
+            "tags": [
+                "TOPIC_ANDROID",
+                "LANG_EN",
+                "THEME_BEGINNER"
+            ]
+        },
+        {
+            "id": 106,
+            "startTimestamp": "2014-10-25T08:50:00Z",
+            "endTimestamp": "2014-10-25T09:20:00Z",
+            "title": "Android Loader, problems and solutions",
+            "description": "Assuming the audience is already familiar with Loader class, we'll discuss problems that occur while using it, try to understand their reasons and see how they can be solved with Enroscar Async. And maybe we'll find out that Loader can be a rather powerful tool.",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/RomanMazur.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_ANDROID",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "blue",
+            "speakers": [
+                "6"
+            ],
+            "tags": [
+                "TOPIC_ANDROID",
+                "LANG_EN",
+                "THEME_INTERMEDIATE"
+            ]
+        },
+        {
+            "id": 107,
+            "startTimestamp": "2014-10-25T14:10:00Z",
+            "endTimestamp": "2014-10-25T14:40:00Z",
+            "title": "Wearables Views",
+            "description": "In Android Wear SDK when using custom layouts we got access to 10 brand new Views, which are extremely useful, but which should I use and when is in most cases still unclear. During my presentation I would like to make small run over that topic and explain benefits and advantages of each of them.",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/MichalTajchert.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_ANDROID",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "blue",
+            "speakers": [
+                "14"
+            ],
+            "tags": [
+                "TOPIC_ANDROID",
+                "LANG_EN",
+                "THEME_INTERMEDIATE"
+            ]
+        },
+        {
+            "id": 108,
+            "startTimestamp": "2014-10-25T13:30:00Z",
+            "endTimestamp": "2014-10-25T14:00:00Z",
+            "title": "RESTful API with Dart",
+            "description": "RESTful API is one of the most important part of the modern web applications and Dart provides us possibility to write it easily, fast and effectively. Want to know how? Follow my presentation!",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/AndriyNechytailov.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_WEB",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "red",
+            "speakers": [
+                "15"
+            ],
+            "tags": [
+                "TOPIC_WEB",
+                "LANG_EN",
+                "THEME_INTERMEDIATE"
+            ]
+        },
+        {
+            "id": 109,
+            "startTimestamp": "2014-10-25T08:50:00Z",
+            "endTimestamp": "2014-10-25T09:20:00Z",
+            "title": "Front-End Tools Beyond DevTools",
+            "description": "Every front-end developer knows that Chrome DevTools rocks! It is a primary tool we work with every day. Mastering it is a must. Yet there is more to the story. Real front-end craftspersons don't use a multi-tool for every task. Instead, they use a set of specialised tools to make their work more efficient. In the Chrome world, these tools are called Chrome Extensions.During my presentation, I will demonstrate several extensions I have built. I will explain how I built them. You'll not only learn about new tools, but you will also see how easy it is to create them!",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/KonradDzwinel.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_WEB",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "red",
+            "speakers": [
+                "9"
+            ],
+            "tags": [
+                "TOPIC_WEB",
+                "LANG_EN",
+                "THEME_INTERMEDIATE"
+            ]
+        },
+        {
+            "id": 110,
+            "startTimestamp": "2014-10-25T08:10:00Z",
+            "endTimestamp": "2014-10-25T08:40:00Z",
+            "title": "Development for Chrome OS",
+            "description": "During our talk we will discuss how to develop on Chrome OS, what technologies can we use, and do we really need this?",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/DimaMaleev.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_WEB",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "red",
+            "speakers": [
+                "8"
+            ],
+            "tags": [
+                "TOPIC_WEB",
+                "LANG_RU",
+                "THEME_BEGINNER"
+            ]
+        },
+        {
+            "id": 111,
+            "startTimestamp": "2014-10-25T12:20:00Z",
+            "endTimestamp": "2014-10-25T12:50:00Z",
+            "title": "Polymer, motherfucka, do you speak it?",
+            "description": "Everything you should know about Polymer.",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/AntonIatsenko.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_WEB",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "red",
+            "speakers": [
+                "16"
+            ],
+            "tags": [
+                "TOPIC_WEB",
+                "LANG_EN",
+                "THEME_INTERMEDIATE"
+            ]
+        },
+        {
+            "id": 112,
+            "startTimestamp": "2014-10-25T12:20:00Z",
+            "endTimestamp": "2014-10-25T12:50:00Z",
+            "title": "How to get 50% women at a high-tech conference",
+            "description": "Technical conferences usually does not have so many women. Some have none at all. Some have 'token woman' who is simply invited because she is 'woman'. And many conferences have around 8-10% women visibility at most. Some researches also show while conferences with the soft subject matter such as user experience, web design has more women speakers and attendees, hight tech conferences have low woman proportions. The focus of this speech is on attempts to give more visibility to women at high-tech conferences. The experiences and challenges of a member of a community that organises conferences with the around 50% of women inclusion and solutions will be presented.",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/NilayYener.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_COMMUNITY",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "art",
+            "speakers": [
+                "2"
+            ],
+            "tags": [
+                "TOPIC_COMMUNITY",
+                "LANG_EN",
+                "THEME_INTERMEDIATE"
+            ]
+        },
+        {
+            "id": 113,
+            "startTimestamp": "2014-10-25T13:30:00Z",
+            "endTimestamp": "2014-10-25T14:00:00Z",
+            "title": "Women Techmakers Ukraine: how we support diversity",
+            "description": "Women Techmakers aims to raise awareness of innovative women leaders in technology and inspire others to join the field.I would talk about history and successful growth of Women Techmakers Ukraine community, why is necessary to expand diversity and how we make it with Google's support. As well I will talk about opportunities for women in IT and special programs for girls and students.",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/KseniiaShumelchyk.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_COMMUNITY",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "art",
+            "speakers": [
+                "13"
+            ],
+            "tags": [
+                "TOPIC_COMMUNITY",
+                "LANG_UK",
+                "THEME_BEGINNER"
+            ]
+        },
+        {
+            "id": 114,
+            "startTimestamp": "2014-10-25T07:30:00Z",
+            "endTimestamp": "2014-10-25T08:00:00Z",
+            "title": "Go in the Cloud: How using Go can help building cloud ready applications",
+            "description": "Though Go language was introduced quite long time ago, it was not very popular until Cloud Computing came into our life. In this presentation I will explain why Go would be a great choice for developing really cloud-ready apps.1. Introduction to Go language2. Quick comparison Go with other solutions3. Some details of main Go features: goroutins, channels4. Example of go app scaling written in go",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/ValentynShybanov.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_WEB",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "red",
+            "speakers": [
+                "7"
+            ],
+            "tags": [
+                "TOPIC_WEB",
+                "LANG_EN",
+                "THEME_INTERMEDIATE"
+            ]
+        },
+        {
+            "id": 115,
+            "startTimestamp": "2014-10-25T06:30:00Z",
+            "endTimestamp": "2014-10-25T07:20:00Z",
+            "title": "Keynote",
+            "description": "TBD",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/DawidOstrowski.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "FLAG_KEYNOTE",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "blue",
+            "speakers": [
+                "3"
+            ],
+            "tags": [
+                "FLAG_KEYNOTE",
+                "LANG_EN"
+            ]
+        },
+        {
+            "id": 116,
+            "startTimestamp": "2014-10-25T11:00:00Z",
+            "endTimestamp": "2014-10-25T11:30:00Z",
+            "title": "Graphical experiments with AngularJS",
+            "description": "How to connect browser graphic experiments with real-time data using AngularJS.",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/YuliaPuchnina.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_WEB",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "red",
+            "speakers": [
+                "17"
+            ],
+            "tags": [
+                "TOPIC_WEB",
+                "LANG_EN",
+                "THEME_INTERMEDIATE"
+            ]
+        },
+        {
+            "id": 117,
+            "startTimestamp": "2014-10-25T14:50:00Z",
+            "endTimestamp": "2014-10-25T15:20:00Z",
+            "title": "Round table - Ladies in tech",
+            "description": "Round table \"Ladies in Tech\"- The current situation for women in the national and global IT industry- This yearâ€™s changes and trends.- How the Ukrainian community and the GDG W and Women TechMakers can effect the process.- We came into this world to change it for the better, so I hope things discussed at our round table will be useful for us and those around.",
+            "photoUrl": "",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_COMMUNITY",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "art",
+            "speakers": [
+                "13",
+                "2",
+                "23",
+                "17"
+            ],
+            "tags": [
+                "TOPIC_COMMUNITY",
+                "LANG_EN",
+                "THEME_BEGINNER"
+            ]
+        },
+        {
+            "id": 118,
+            "startTimestamp": "2014-10-25T08:50:00Z",
+            "endTimestamp": "2014-10-25T09:20:00Z",
+            "title": "Interview Patterns Strategies for the technical interview",
+            "description": "What does Google, Amazon, and Microsoft look for in a candidate? In this session, learn preparation and presentation strategies to help you interview well, communicate effectively, and navigate the challenges of a technical interview. Who knows, someone might even be interviewed live on stage!",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/MuratYener.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_COMMUNITY",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "art",
+            "speakers": [
+                "12"
+            ],
+            "tags": [
+                "TOPIC_COMMUNITY",
+                "LANG_EN",
+                "THEME_BEGINNER"
+            ]
+        },
+        {
+            "id": 119,
+            "startTimestamp": "2014-10-25T11:40:00Z",
+            "endTimestamp": "2014-10-25T12:10:00Z",
+            "title": "Google Summer of Code - amazing experience for students",
+            "description": "During presentation we will cover: -What is Google Summer of Code?-What are the goals of the program?-How does Google Summer of Code work?-Stipends-Participating projects-Why should I participate?-Statistics-Useful links",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/DenysButenko.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_COMMUNITY",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "art",
+            "speakers": [
+                "18"
+            ],
+            "tags": [
+                "TOPIC_COMMUNITY",
+                "LANG_RU",
+                "THEME_BEGINNER"
+            ]
+        },
+        {
+            "id": 120,
+            "startTimestamp": "2014-10-25T08:10:00Z",
+            "endTimestamp": "2014-10-25T08:40:00Z",
+            "title": "Google Mapmaker",
+            "description": "Google Mapmaker - is a great tool to add important or missing objects to Google Maps. Each contribution will make country map better and as a result Ukraine will be more opened for citizens and foreign visitors from all around the world",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/YaroslavYaroshevskyy.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_COMMUNITY",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "art",
+            "speakers": [
+                "19"
+            ],
+            "tags": [
+                "TOPIC_COMMUNITY",
+                "LANG_UK",
+                "THEME_BEGINNER"
+            ]
+        },
+        {
+            "id": 121,
+            "startTimestamp": "2014-10-25T14:10:00Z",
+            "endTimestamp": "2014-10-25T14:40:00Z",
+            "title": "Behind The Scenes: Dart",
+            "description": "Why isn't Dart so popular right now and how to fix it. A brief overview of Dart success/failure stories and why is it the best front end prototyping tool right now.",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/YehorLvivski.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_WEB",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "red",
+            "speakers": [
+                "20"
+            ],
+            "tags": [
+                "TOPIC_WEB",
+                "LANG_EN",
+                "THEME_INTERMEDIATE"
+            ]
+        },
+        {
+            "id": 122,
+            "startTimestamp": "2014-10-25T11:00:00Z",
+            "endTimestamp": "2014-10-25T11:30:00Z",
+            "title": "Student opportunities abroad",
+            "description": "The world is going global. Borders are being demolished, companies expand internationally, English is becoming more and more widespread.We are not limited to one location and can choose to be pretty much in any country we want. There is an effort to be put but it is often very worth doing. The opportunities we have globally are countless and there is something great for anyone. Student years is the best time to experience it and to make a big usage out it.The talk will cover: - Big opportunities for students abroad- Huge benefits of studying/interning abroad- Personal life-changing experience of studying in South Korea, Germany and Hong Kong",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/AndriiKomar.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_COMMUNITY",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "art",
+            "speakers": [
+                "21"
+            ],
+            "tags": [
+                "TOPIC_COMMUNITY",
+                "LANG_EN",
+                "THEME_BEGINNER"
+            ]
+        },
+        {
+            "id": 123,
+            "startTimestamp": "2014-10-25T11:00:00Z",
+            "endTimestamp": "2014-10-25T11:30:00Z",
+            "title": "New Android Camera API",
+            "description": "The L Developer Preview introduces the new android.hardware.camera2 API to facilitate fine-grain photo capture and image processing.Access to deeper customisation controls and more image data will make it possible for developers to accomplish much more with the photos we take.",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/RomanHerasymenko.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_ANDROID",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "blue",
+            "speakers": [
+                "22"
+            ],
+            "tags": [
+                "TOPIC_ANDROID",
+                "LANG_EN",
+                "THEME_EXPERT"
+            ]
+        },
+        {
+            "id": 124,
+            "startTimestamp": "2014-10-25T14:10:00Z",
+            "endTimestamp": "2014-10-25T14:40:00Z",
+            "title": "Opportunities for women in technology from Google",
+            "description": "Agenda:- How to become a recipient of one of the most prestige scholarship for women in technology.- ABSA community is looking for proactive and creative women.- Post Grace Hopper Celebration - the largest gathering women in CS all over the world.",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/MarynaZhygadlo.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_COMMUNITY",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "art",
+            "speakers": [
+                "23"
+            ],
+            "tags": [
+                "TOPIC_COMMUNITY",
+                "LANG_UK",
+                "THEME_INTERMEDIATE"
+            ]
+        },
+        {
+            "id": 125,
+            "startTimestamp": "2014-10-25T07:30:00Z",
+            "endTimestamp": "2014-10-25T08:00:00Z",
+            "title": "All Google communities in Ukraine",
+            "description": "Wow! We were much more than we thought!Introduction to the Community flow. A short list of communities of the Google ecosystem and the various programs and stipends supporting students, women and small businesses. A few words about the Ukrainian groupsâ€™ place in the global GDG community.",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/VolodymyrIvanov.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_COMMUNITY",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "art",
+            "speakers": [
+                "24"
+            ],
+            "tags": [
+                "TOPIC_COMMUNITY",
+                "LANG_UK",
+                "THEME_BEGINNER"
+            ]
+        },
+        {
+            "id": 126,
+            "startTimestamp": "2014-10-25T07:30:00Z",
+            "endTimestamp": "2014-10-25T08:00:00Z",
+            "title": "The Google Developer Expert Program",
+            "description": "The Google Developer Expert Program is out of beta! Don't worry if you haven't heard about us Experts yet, come to the presentation and learn how you, your GDG or your company/product can benefit from GDEs presence all around the globe. Or maybe, just maybe... you want to join our ranks?",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/WojtekKalicinski.JPG",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_COMMUNITY",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "art",
+            "speakers": [
+                "10"
+            ],
+            "tags": [
+                "TOPIC_COMMUNITY",
+                "LANG_EN",
+                "THEME_BEGINNER"
+            ]
+        },
+        {
+            "id": 127,
+            "startTimestamp": "2014-10-25T13:30:00Z",
+            "endTimestamp": "2014-10-25T14:00:00Z",
+            "title": "Modern cross-platform mobile development in practice",
+            "description": "Nowadays if you want an application to target multiple platforms you can choose from several options. Instead of a write-once-run-everywhere solution I'll show you how to leverage modern C++ which can give you the freedom for writing reusable code while staying resource conscious. By carefully drawing the boundaries of the cross-platform and platform specific components you don't even have to give up the natural platform user experience. We will look at how these parts can be connected using the Android NDK / SDK through some real life examples.",
+            "photoUrl": "",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_ANDROID",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "blue",
+            "speakers": [
+                "25",
+                "26"
+            ],
+            "tags": [
+                "TOPIC_ANDROID",
+                "LANG_EN",
+                "THEME_INTERMEDIATE"
+            ]
+        },
+        {
+            "id": 128,
+            "startTimestamp": "2014-10-25T11:40:00Z",
+            "endTimestamp": "2014-10-25T12:10:00Z",
+            "title": "From hobby to final of Google Science Fair 2014",
+            "description": "My name is Mark. I'm 14. I'm from Uzhhorod, Ukraine. I like Lego. A year ago I tried to construct simple microscope from Lego bricks and old USB web camera. Some day I decided to embed some kind of brain into my construction. I used Lego EV3 intellectual brick. I found that my microscope become more and more interesting. I decided to send my idea to Google Science Fair. One day I received fantastic news. I was selected to 90 regional finalists. I added more efforts. Finally my robo-microscope had 3 optical systems and 4 servo motors. It has option of remote control and integration with Google Hangouts. At the same time it's still Lego construction which can be cloned in any school. I took final battle with all my 'ammunition' in Google HQ, Mountain View, September 24, 2014. It was hard battle. I didn't received grand prize. But I don't feel myself a loser. Because I have the next idea...",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/MarkDrobnych.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_COMMUNITY",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "art",
+            "speakers": [
+                "27"
+            ],
+            "tags": [
+                "TOPIC_COMMUNITY",
+                "LANG_UK",
+                "THEME_BEGINNER"
+            ]
+        },
+        {
+            "id": 129,
+            "startTimestamp": "2014-10-25T11:40:00Z",
+            "endTimestamp": "2014-10-25T12:10:00Z",
+            "title": "Material Design in Action",
+            "description": "In our talk we will discuss patterns and guides of Material Design, try to understand them and apply on existing application step-by-step.",
+            "photoUrl": "http://devfest.gdg.org.ua/img/people/NazarMoravskyi.jpg",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_WEB",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "red",
+            "speakers": [
+                "28"
+            ],
+            "tags": [
+                "TOPIC_WEB",
+                "LANG_UK",
+                "THEME_BEGINNER"
+            ]
+        },
+        {
+            "id": 130,
+            "startTimestamp": "2014-10-25T14:50:00Z",
+            "endTimestamp": "2014-10-25T15:20:00Z",
+            "title": "Panel \"Working for the giant\"",
+            "description": "Panel with top-notch experts about work in Giant world-known companies. IT Village will record another series of their podcast right on our stage!",
+            "photoUrl": "",
+            "url": "",
+            "youtubeUrl": "",
+            "mainTag": "TOPIC_WEB",
+            "color": "",
+            "hashtag": "",
+            "isLivestream": false,
+            "captionsUrl": "",
+            "room": "red",
+            "speakers": [
+                "11",
+                "29",
+                "3"
+            ],
+            "tags": [
+                "TOPIC_WEB",
+                "LANG_EN",
+                "THEME_BEGINNER"
+            ]
+        }
+    ]
+}

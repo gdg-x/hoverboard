@@ -5,6 +5,10 @@
             width: 100%;
         }
 
+        .mc-embedded-subscribe-form paper-button {
+            font-size: .9em;
+        }
+
         paper-button.colorful {
             color: var(--mailchimp-color);
         }
@@ -21,16 +25,20 @@
             width: 100%;
         }
 
+        paper-input-container input,
+        paper-input-container label {
+          font-size: 14px !important;
+        }
+
         .note-text {
             text-align: center;
-            font-size: .8em;
         }
     </style>
     <template>
         <div id="mc_embed_signup" class="mc_embed_signup layout vertical center-center">
             <form action="{{ url }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="mc-embedded-subscribe-form validate" target="_blank" novalidate>
                 <div class="mc-field-group layout vertical">
-                    <paper-input-container class="text-left">
+                    <paper-input-container no-label-float class="text-left">
                         <label>Your email</label>
                         <input is="iron-input" type="email" name="EMAIL" id="mce-EMAIL" autocomplete="off">
                         <paper-input-error>Plese enter valid email address</paper-input-error>

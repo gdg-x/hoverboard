@@ -1,0 +1,85 @@
+{
+    "tags": [
+        {
+            "category": "TOPIC",
+            "name": "Android",
+            "color": "#90be4e",
+            "abstract": "",
+            "tag": "TOPIC_ANDROID",
+            "originalid": "android",
+            "orderincategory": 1
+        },
+        {
+            "category": "TOPIC",
+            "name": "Web & Cloud",
+            "color": "#03a9f4",
+            "abstract": "",
+            "tag": "TOPIC_WEB",
+            "originalid": "web",
+            "orderincategory": 2
+        },
+        {
+            "category": "TOPIC",
+            "name": "Community",
+            "color": "#e91e63",
+            "abstract": "",
+            "tag": "TOPIC_COMMUNITY",
+            "originalid": "community",
+            "orderincategory": 3
+        },
+        {
+            "category": "TYPE",
+            "name": "English",
+            "color": "",
+            "abstract": "",
+            "tag": "LANG_EN",
+            "originalid": "english",
+            "orderincategory": 1
+        },
+        {
+            "category": "TYPE",
+            "name": "Ukrainian",
+            "color": "",
+            "abstract": "",
+            "tag": "LANG_UK",
+            "originalid": "ukrainian",
+            "orderincategory": 2
+        },
+        {
+            "category": "TYPE",
+            "name": "Russian",
+            "color": "",
+            "abstract": "",
+            "tag": "LANG_RU",
+            "originalid": "russian",
+            "orderincategory": 3
+        },
+        {
+            "category": "THEME",
+            "name": "Beginner",
+            "color": "",
+            "abstract": "",
+            "tag": "THEME_BEGINNER",
+            "originalid": "beginner",
+            "orderincategory": 1
+        },
+        {
+            "category": "THEME",
+            "name": "Intermediate",
+            "color": "",
+            "abstract": "",
+            "tag": "THEME_INTERMEDIATE",
+            "originalid": "intermediate",
+            "orderincategory": 2
+        },
+        {
+            "category": "THEME",
+            "name": "Expert",
+            "color": "",
+            "abstract": "",
+            "tag": "THEME_EXPERT",
+            "originalid": "expert",
+            "orderincategory": 3
+        }
+    ]
+}

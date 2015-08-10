@@ -1,0 +1,648 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!--This one seems to work all the time, but really small on ipad-->
+    <!--<meta name="viewport" content="initial-scale=0.4">-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" media="all" href="theme/css/default.css">
+    <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+    <base target="_blank">
+    <!-- This amazingness opens all links in a new tab. -->
+    <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+    <slide class="logoslide nobackground">
+        <article class="flexbox vcenter">
+            <span><img src="images/mw/horizontal.png"></span>
+        </article>
+    </slide>
+
+    <slide class="title-slide segue nobackground">
+        <aside class="gdbar"><img src="images/mw/logo_inv_128.png"></aside>
+        <aside class="gde-logo auto-fadein"></aside>
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+        <hgroup class="auto-fadein">
+            <h1 data-config-title><!-- populated from slide_config.json --></h1>
+
+            <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+
+            <p data-config-presenter><!-- populated from slide_config.json --></p>
+        </hgroup>
+    </slide>
+
+    <slide id="day-in-life">
+        <style>
+            #front-end-tasks span {
+                opacity: 0;
+                transition-property: opacity;
+            }
+
+            #front-end-tasks.active span {
+                opacity: 1;
+            }
+        </style>
+        <hgroup>
+            <h2>Day in the life of a front-end dev</h2>
+        </hgroup>
+        <article>
+            <p id="front-end-tasks">Searching tasks in the bugtracker, checking status of the build process, responding to emails, <span class="devtools">debugging</span>, creating code snippets, <span class="ghostlab">testing on different browsers</span>, reading documentation, looking for help on StackOverflow, googling for solutions, <span class="grunt">compiling SASS/LESS/CoffeeScript/etc</span>, creating minimal test cases, <span class="bower">managing library dependencies</span>, reporting bugs, <span class="devtools">measuring page performance</span>, looking for the right plugins and libraries, pushing, pulling, merging, <span class="grunt">linting JavaScript</span>, switching between projects, doing code reviews, discussing solutions, prototyping, researching, tracking latest front-end news, <span class="ghostlab">testing on multiple devices</span>, <span class="grunt">deploying to server</span>, writing code, sending files, <span class="photoshop">"converting" PSDs to HTML/CSS</span>, <span class="grunt">minifying files</span>, <span class="grunt">optimizing images</span>, adding ARIA support, setting up the IDE, reading emails, <span class="devtools">looking for memory leaks</span>, <span class="grunt">running unit tests</span>, writing tests, designing APIs, mocking APIs, writing documentation, refactoring, updating software, writing comments, estimating, measuring &amp; reporting time spent on tasks, <span class="yeoman">bootstraping the project</span>, <span class="bower">downloading libraries</span>, removing unused files, <span class="code-climate">measuring code complexity</span>, taking screenshots, looking for differences between two versions of the website, downloading fonts, <span class="grunt">creating sprites</span>, converting images to base64, <span class="devtools">testing responsiveness</span>, managing virtual machines, <span class="code-climate">analyzing code coverage</span>, planning sprints, updating pattern library &amp; style guide&hellip;</p>
+
+            <p style="display:none">gradients(CSS3Ps), creating sprites (compass), converting images to base64, creating image for pattern background, adobe ilustrator - creating simple shapes, install SASS, manage virtual machines, managing hosts file, ghost lab, download local DB, setup local website, preparing demo/prototype, translating test, planning sprints, pattern library / styleguide, build server, setting up test env, </p>
+        </article>
+    </slide>
+
+    <slide class="fill nobackground" style="background-image: url(images/pics/automation.jpg)">
+        <hgroup>
+            <h2 class="white">Opportunity for Automation and Tools</h2>
+        </hgroup>
+        <footer class="source black">flickr.com/photos/jurvetson/6858583426</footer>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Chrome DevTools are awesome</h2>
+            <h3>for CSS and HTML</h3>
+        </hgroup>
+        <article>
+            <img src="images/custom/chrome-workflow.png" style="width:100%;position:absolute;left:0;"/>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Chrome DevTools are awesome</h2>
+            <h3>for JavaScript</h3>
+        </hgroup>
+        <article>
+            <img src="images/custom/chrome-debugging.png" style="width:100%;position:absolute;left:0;"/>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Chrome DevTools are awesome</h2>
+            <h3>for Performance</h3>
+        </hgroup>
+        <article>
+            <img src="images/custom/chrome-performance.png" style="width:100%;position:absolute;left:0;"/>
+        </article>
+    </slide>
+
+    <slide class="add-class" data-class="show-devtools">
+        <hgroup>
+            <h2>Day in the life of a front-end dev</h2>
+        </hgroup>
+        <article>
+            <p class="front-end-tasks"></p>
+            <div style="position: absolute;
+bottom: 0;
+width: 100%;
+text-align: center;
+left: 0;
+ background: rgba(255,255,255,0.6);
+ box-shadow: 0 -10px 10px 0 rgba(255,255,255,0.6);
+ padding: 10px;">
+                <img src="images/custom/chrome-logo.png" style="display:inline-block; height: 100px"/>
+            </div>
+        </article>
+    </slide>
+
+    <slide class="add-class show-devtools" data-class="show-colors">
+        <style>
+            .front-end-tasks span {
+                transition-property: color;
+                transition-duration: 1000ms;
+                transition-delay: 600ms;
+            }
+
+            .show-colors .devtools, .show-devtools .devtools {
+                color: #71D375;
+            }
+            .show-colors .grunt {
+                color: #FBA919;
+            }
+            .show-colors .yeoman {
+                color: #DD002A;
+            }
+            .show-colors .photoshop {
+                color: #4EC7F8;
+            }
+            .show-colors .bower {
+                color: #FFCC2F;
+            }
+            .show-colors .ghostlab  {
+                color: rgba(35, 115, 200, 1);
+            }
+            .show-colors .code-climate {
+                color: rgba(123, 0, 255, 1);
+            }
+        </style>
+        <hgroup>
+            <h2>Day in the life of a front-end dev</h2>
+        </hgroup>
+        <article>
+            <p class="front-end-tasks"></p>
+
+            <div style="position: absolute;
+bottom: 0;
+width: 100%;
+text-align: center;
+left: 0;
+ background: rgba(255,255,255,0.6);
+ box-shadow: 0 -10px 10px 0 rgba(255,255,255,0.6);
+ padding: 10px;">
+                <img src="images/custom/chrome-logo.png" style="display:inline-block; height: 100px"/>
+                <img src="images/custom/grunt-logo.png" style="display:inline-block; height: 100px;"/>
+                <img src="images/custom/gulp-logo.png" style="display:inline-block; height: 100px;"/>
+                <img src="images/custom/yeoman-logo.png" style="display:inline-block; height: 100px"/>
+                <img src="images/custom/bower-logo.png" style="display:inline-block; height: 100px"/>
+                <img src="images/custom/npm-logo.png" style="display:inline-block; height: 100px"/>
+                <img src="images/custom/photoshop-logo.png" style="display:inline-block; height: 100px"/>
+                <img src="images/custom/ghostlab-logo.png" style="display:inline-block; height: 100px"/>
+                <img src="images/custom/code-climate-logo.png" style="display:inline-block; height: 100px"/>
+            </div>
+        </article>
+    </slide>
+
+    <slide class="fill nobackground" style="background-image: url(images/pics/programmers.jpg)">
+        <hgroup>
+            <h2 class="white">We are Programmers</h2>
+        </hgroup>
+        <footer class="source white">flickr.com/photos/eldave/527124495</footer>
+    </slide>
+
+    <slide class="segue quote fill nobackground" style="background-image: url(images/pics/zen.jpg)">
+        <article class="flexbox vleft">
+            <q class="black">Any application that can be written in JavaScript will eventually be written in JavaScript.</q>
+            <div class="author">Atwood's Law</div>
+        </article>
+        <footer class="source white" style="text-align: right; position: absolute; left: 0; right:10px; bottom: 10px;">flickr.com/photos/mtstradling/393047765</footer>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Building stuff with <img src="images/custom/js-logo.png" style="width: 80px;vertical-align: -7px;"/></h2>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>NodeJS/OS X script</li>
+                <li>Grunt/Gulp task</li>
+                <li>Yeoman generator</li>
+                <li>Google Apps Script</li>
+                <li>Photoshop/Ilustrator plugin</li>
+                <li>Desktop widget/gadget</li>
+                <li>Desktop app</li>
+                <li><b>Browser extension</b></li>
+            </ul>
+            <footer class="source black">More: <a href="http://goo.gl/Oq5JTg">goo.gl/Oq5JTg</a></footer>
+        </article>
+    </slide>
+
+    <slide class="segue nobackground" style="background-image: url(images/pics/red.jpg); background-size: cover">
+        <hgroup class="auto-fadein">
+            <h2>Issue #1</h2>
+            <h3>working with a bug tracker</h3>
+        </hgroup>
+        <footer class="source white" style="text-align: right; position: absolute; left: 0; right:10px; bottom: 10px;">flickr.com/photos/lcdrdan/15196460871</footer>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Issue #1</h2>
+            <h3>working with a bug tracker</h3>
+        </hgroup>
+        <article>
+            <ul>
+                <li>Distracting and cryptic email notifications</li>
+                <li>Mess in the mailbox</li>
+                <li>Relevant information missing</li>
+            </ul>
+            <img src="images/custom/redmine_emails.png" style="width:100%;position:absolute;left:0; bottom: 0"/>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2><img src="images/custom/redmine_logo_128.png" style="width: 80px;vertical-align: -7px;"/> Redmine Issues Checker</h2>
+        </hgroup>
+        <article>
+            <ul>
+                <li>Less distracting and more descriptive notifications</li>
+                <li>No bug tracker emails in the mailbox</li>
+                <li>Useful information right in front of you</li>
+            </ul>
+            <img src="images/custom/redmine_extension.png" style="width:100%;position:absolute;left:0; bottom: 0; border-top: solid gray 2px"/>
+        </article>
+    </slide>
+
+    <slide>
+        <style>
+            #manifest pre {
+                padding-top:0;
+                padding-bottom:0;
+                margin:0;
+            }
+
+            #manifest pre:after {
+                display: none;
+            }
+
+            #manifest > pre:nth-child(1):after {
+                display: block;
+            }
+
+            #manifest > .build {
+                background-color:#e6e6e6;
+                margin-left: -60px;
+                padding-left: 60px;
+            }
+        </style>
+        <hgroup>
+            <h2>Building Chrome Extensions</h2>
+            <h3>manifest.json</h3>
+        </hgroup>
+        <article id="manifest">
+            <pre class="prettyprint" data-lang="json">
+{
+  "name": "Redmine Issues Checker",
+  "version": "0.71",</pre>
+            <div class="build">
+                <pre class="prettyprint" data-lang="json">
+  "description": "Keep track of Redmine issues assigned to you.",
+  "icons": {
+    "128": "img/redmine_logo_128.png"
+  },</pre>
+                <pre class="prettyprint" data-lang="json">
+  "permissions": [ "notifications", "&lt;all_urls&gt;" ],
+  "browser_action": {
+    "default_title": "Redmine Issues Checker"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  }</pre>
+            </div>
+<pre class="prettyprint" data-lang="json">}</pre>
+            </pre>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Building Chrome Extensions</h2>
+            <h3>background page</h3>
+        </hgroup>
+        <article>
+            <ul>
+                <li>Script running in the "invisible tab"</li>
+                <li>with access to Chrome specific APIs (<code>chrome.*</code>)</li>
+            </ul>
+            <div class="build">
+            <pre class="prettyprint" data-lang="javascript">
+setInterval(function() {
+
+  getNumberOfIssues()
+    .then(function(allCount, newCount) {
+      chrome.browserAction.setTitle("issues: " + allCount + " (" + newCount + ")");
+      chrome.browserAction.setBadgeText(allCount);
+    });
+
+}, 30000);// 30sec
+            </pre>
+                <img src="images/custom/browser_action_tooltip.png" style="position: absolute;
+right: 60px;
+width: 30%;
+bottom: 10px;
+border: solid gray 2px;
+border-radius: 100%;"/>
+            </div>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Building Chrome Extensions</h2>
+            <h3>testing</h3>
+        </hgroup>
+        <article>
+            <img src="images/custom/extension_files.png" style="width: 60%;position: absolute;left: 50px;bottom: 100px;"/>
+            <div class="build">
+                <img src="images/custom/extensions_page.png" style="width:100%;position:absolute;left:0; bottom: 0;"/>
+                <img src="images/custom/extensions_page_developer_mode.png" style="width:100%;position:absolute;left:0; bottom: 0;"/>
+                <img src="images/custom/extensions_page_ext_loaded.png" style="width:100%;position:absolute;left:0; bottom: 0;"/>
+                <img src="images/custom/debugging_bg_page.png" style="width: 80%;position: absolute;left: 120px;bottom: 0;">
+            </div>
+        </article>
+    </slide>
+
+    <slide class="segue nobackground" style="background-image: url(images/pics/blue.jpg)">
+        <hgroup class="auto-fadein">
+            <h2>Issue #2</h2>
+            <h3>extracting HTML+CSS</h3>
+        </hgroup>
+        <footer class="source white" style="text-align: right; position: absolute; left: 0; right:10px; bottom: 10px;">flickr.com/photos/cross-hair/15018382899</footer>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Issue #2</h2>
+            <h3>extracting HTML+CSS</h3>
+        </hgroup>
+        <article>
+            <p>Copy an isolated element of the website</p>
+            <ul>
+                <li>to play around with it locally</li>
+                <li>or submit it with a bug report.</li>
+            </ul>
+            <img src="images/custom/snappysnippet_issue.png" style="width:100%;position:absolute;left:0; bottom: 0"/>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2><img src="images/custom/snappysnippet_logo.png" style="width: 80px;vertical-align: -7px;"/> SnappySnippet</h2>
+        </hgroup>
+        <article>
+            <p>Isolate an element from a page, grab its associated styles, toss it all to CodePen, jsFiddle or JS Bin.</p>
+            <img src="images/custom/snappysnippet_extension_1.png" style="width:100%;position:absolute;left:0; bottom: 0;"/>
+            <div class="build">
+                <img src="images/custom/snappysnippet_extension_11.png" style="width:100%;position:absolute;left:0; bottom: 0;"/>
+                <img src="images/custom/snappysnippet_extension_12.png" style="width:100%;position:absolute;left:0; bottom: 0;"/>
+                <img src="images/custom/snappysnippet_extension_13.png" style="width:100%;position:absolute;left:0; bottom: 0;"/>
+                <img src="images/custom/snappysnippet_extension_2.png" style="width:100%;position:absolute;left:0; bottom: 0;"/>
+            </div>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Building Chrome Extensions</h2>
+            <h3>extending DevTools</h3>
+        </hgroup>
+        <article>
+            <div class="build">
+                <pre class="prettyprint" data-lang="json">
+{
+...
+	"devtools_page": "devtools.html",
+...
+}</pre>
+            <pre class="prettyprint" data-lang="javascript">
+chrome.devtools.panels.create("SnappySnippet", "logo.png",
+                "panel.html", function (panel) {});</pre>
+                <img src="images/custom/extending_devtools_1.png" style="width:80%;position:absolute;right:0; bottom: 0;"/>
+                <img src="images/custom/extending_devtools_2.png" style="width:80%;position:absolute;right:0; bottom: 0;"/>
+            </div>
+        </article>
+    </slide>
+
+    <slide>
+        <article>
+            <hgroup class="auto-fadein">
+                <h2>Building Chrome Extensions</h2>
+                <h3>isolated worlds</h3>
+            </hgroup>
+            <pre class="prettyprint" data-lang="javascript">
+chrome.devtools.inspectedWindow.eval("document.title", function (result) {
+  console.log('Current page title: ', result);
+});</pre>
+        </article>
+    </slide>
+
+    <slide class="segue nobackground" style="background-image: url(images/pics/green.jpg); background-size: cover">
+        <hgroup class="auto-fadein">
+            <h2>Issue #3</h2>
+            <h3>managing multiple extensions</h3>
+        </hgroup>
+        <footer class="source white" style="text-align: right; position: absolute; left: 0; right:10px; bottom: 10px;">flickr.com/photos/thomashawk/14940129292</footer>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Issue #3</h2>
+            <h3>managing multiple extensions</h3>
+        </hgroup>
+        <article>
+            <p>Having too many active extensions will</p>
+            <ul>
+                <li>clutter your workspace,</li>
+                <li>distract you,</li>
+                <li>slow your browser down.</li>
+            </ul>
+            <img src="images/custom/context_issue.png" style="width:100%;position:absolute;left:0; bottom: 0"/>
+            <div class="build">
+                <img src="images/custom/context_issue_2.png" style="width:100%;position:absolute;left:0; bottom: 0"/>
+            </div>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2><img src="images/custom/context_logo.png" style="width: 80px;vertical-align: -7px;"/> Context</h2>
+        </hgroup>
+        <article>
+            <p>Sort extensions into groups and easily switch between them.</p>
+            <img src="images/custom/context_1.png" style="width:100%;position:absolute;left:0; bottom: 0;"/>
+            <div class="build">
+                <img src="images/custom/context_21.png" style="width:100%;position:absolute;left:0; bottom: 0;"/>
+                <img src="images/custom/context_22.png" style="width:100%;position:absolute;left:0; bottom: 0;"/>
+                <img src="images/custom/context_3.png" style="width:100%;position:absolute;left:0; bottom: 0;"/>
+                <img src="images/custom/context_31.png" style="width:100%;position:absolute;left:0; bottom: 0;"/>
+                <img src="images/custom/context_4.png" style="width:100%;position:absolute;left:0; bottom: 0;"/>
+            </div>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Building Chrome Extensions</h2>
+            <h3>option pages &amp; popups</h3>
+        </hgroup>
+        <article>
+            <div class="build">
+                <pre class="prettyprint" data-lang="json">
+{
+...
+   "options_page": "options.html",
+   "browser_action": {
+      "default_popup": "popup.html",
+      "default_title": "Context"
+   },
+...
+}</pre>
+                <img src="images/custom/context_parts_1.png" style="width:80%;position:absolute;right:20px; bottom: -50px;"/>
+                <img src="images/custom/context_parts_2.png" style="width:80%;position:absolute;right:20px; bottom: -50px;"/>
+            </div>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Building Chrome Extensions</h2>
+            <h3>saving settings</h3>
+        </hgroup>
+        <article>
+            <div class="build">
+                <div>
+                    <p>HTML5 localStorage</p>
+                <pre class="prettyprint" data-lang="javascript">
+localStorage.setItem('config', JSON.stringify(config));
+//...
+var config = JSON.parse( localStorage.getItem('config') );</pre>
+                </div>
+                <div>
+                    <p>Chrome synced storage <span style="font-size: 16px; color: gray">(requires <code>storage</code> permission)</span></p>
+                <pre class="prettyprint" data-lang="javascript">
+chrome.storage.sync.set({'config': config}, function() {
+  message('Settings saved');
+});
+//...
+chrome.storage.sync.get('config', function(config) {
+  message('Settings loaded', config);
+});</pre>
+                </div>
+            </div>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Building Chrome Extensions</h2>
+            <h3>managing other extensions <span style="font-size: 16px; color: gray">(requires <code>managment</code> permission)</span></h3>
+        </hgroup>
+        <article>
+            <div class="build" style="margin-top: -10px">
+                <div>
+                    <p style="margin-bottom: 10px;font-size: 22px;">Getting information</p>
+                <pre class="prettyprint" data-lang="javascript">
+chrome.management.get("aalnjolghjkk...", function(ext) {
+  console.log('extension info', ext.name, ext.icons, ext.enabled);
+});</pre>
+                </div>
+                <div>
+                    <p style="margin-bottom: 10px;font-size: 22px;">Enabling &amp; disabling</p>
+                <pre class="prettyprint" data-lang="javascript">
+chrome.management.setEnabled("aalnjolghjkk...", true, function() {
+  console.log('extension enabled');
+});</pre>
+                </div>
+                <div>
+                    <p style="margin-bottom: 10px;font-size: 22px;">Listening to events</p>
+                <pre class="prettyprint" data-lang="javascript">
+chrome.management.onInstalled.addListener(function(extension) {
+  console.log('extension ' + extension.name + ' installed');
+})</pre>
+                </div>
+            </div>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Building Chrome Extensions</h2>
+            <h3>Over 25 other APIs</h3>
+        </hgroup>
+        <article>
+            <img src="images/custom/wordcloud.png" style="width: 90%; margin-left: auto;margin-right: auto; margin-top: -40px;display: block;">
+        </article>
+    </slide>
+
+    <slide class="segue nobackground" style="background-image: url(images/pics/yellow.jpg); background-size: cover">
+        <hgroup class="auto-fadein">
+            <h2>Sharing your extension</h2>
+            <!--<h3></h3>-->
+        </hgroup>
+        <footer class="source white" style="text-align: right; position: absolute; left: 0; right:10px; bottom: 10px;">flickr.com/photos/josexl/15022586688</footer>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Deploying</h2>
+            <h3>Chrome Web Store</h3>
+        </hgroup>
+        <article  style="margin-top:25px">
+            <img src="images/custom/webstore_1.png" style="width:100%;position:absolute;left:0; bottom: -100px;"/>
+            <div class="build">
+                <img src="images/custom/webstore_2.png" style="width:100%;position:absolute;left:0; bottom: -100px;"/>
+                <img src="images/custom/webstore_3.png" style="width:100%;position:absolute;left:0; bottom: -100px;"/>
+            </div>
+            <ul class="build">
+                <li>One time $5 fee</li>
+                <li>Beta-testing</li>
+                <li>Monetizing: in-app payments, one-time charge, subscription</li>
+                <li>Trial versions</li>
+            </ul>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Deploying</h2>
+            <h3>Outside Chrome Web Store</h3>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Sharing signed zip file (<code>*.crx</code>)</li>
+                <li>Self hosted (not supported on Windows)</li>
+                <li>Enterprise policy</li>
+            </ul>
+        </article>
+    </slide>
+
+    <slide>
+        <hgroup>
+            <h2>Get back from the community</h2>
+        </hgroup>
+        <article>
+            <ul class="build">
+                <li>Bug reports</li>
+                <li>Feature requests</li>
+                <li>Contributions</li>
+                <li>Reviews :)</li>
+            </ul>
+            <div class="build">
+                <div style="background: #F1F1F1; border-top: solid gray 2px; position: absolute; bottom: 0; left: 0; width: 100%">
+                    <img src="images/custom/review1.png" style="width:100%"/>
+                    <img src="images/custom/review2.png" style="width:100%"/>
+                </div>
+            </div>
+        </article>
+    </slide>
+
+    <slide class="thank-you-slide segue nobackground">
+        <aside class="gdbar right"><img src="images/mw/logo_inv_128.png"></aside>
+        <article class="flexbox vleft auto-fadein">
+            <h2>Thank You!</h2>
+        </article>
+        <p class="auto-fadein" data-config-contact>
+            <!-- populated from slide_config.json -->
+        </p>
+    </slide>
+
+    <slide class="logoslide dark nobackground">
+        <article class="flexbox vcenter">
+            <span><img src="images/mw/horizontal.png"></span>
+        </article>
+    </slide>
+
+    <slide class="backdrop"></slide>
+
+</slides>
+
+</body>
+</html>

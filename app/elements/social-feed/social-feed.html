@@ -1,4 +1,3 @@
-<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../social-post/social-post.html">
 
 <dom-module id="social-feed">
@@ -29,18 +28,20 @@
             <div class="flex-5">
                 <h4 class="heading">Social</h4>
                 <span class="block">Connect with us on social networks</span>
-                <a href="https://plus.google.com/102444623953913144164" target="_blank">
-                    <paper-icon-button icon="app-icons:glus"></paper-icon-button>
-                </a>
-                <a href="https://www.facebook.com/GDGLviv" target="_blank">
-                    <paper-icon-button icon="app-icons:facebook"></paper-icon-button>
-                </a>
-                <a href="https://twitter.com/gdglviv" target="_blank">
-                    <paper-icon-button icon="app-icons:twitter"></paper-icon-button>
-                </a>
-                <a href="https://www.linkedin.com/company/google-developers-group-lviv" target="_blank">
-                    <paper-icon-button icon="app-icons:linkedin"></paper-icon-button>
-                </a>
+                <div class="align-pb-block">
+                    <a href="https://plus.google.com/102444623953913144164" target="_blank">
+                        <paper-icon-button icon="app-icons:glus"></paper-icon-button>
+                    </a>
+                    <a href="https://www.facebook.com/GDGLviv" target="_blank">
+                        <paper-icon-button icon="app-icons:facebook"></paper-icon-button>
+                    </a>
+                    <a href="https://twitter.com/gdglviv" target="_blank">
+                        <paper-icon-button icon="app-icons:twitter"></paper-icon-button>
+                    </a>
+                    <a href="https://www.linkedin.com/company/google-developers-group-lviv" target="_blank">
+                        <paper-icon-button icon="app-icons:linkedin"></paper-icon-button>
+                    </a>
+                </div>
             </div>
         </div>
     </template>
@@ -72,9 +73,11 @@
             var index = this.selected;
             this.selected = (++index % this.posts.length);
 
+            /* jshint ignore:start */
             this.author = this.posts[this.selected].user.screen_name;
-            this.text = this.linkifyPost(this.posts[this.selected].text);
             this.when = this.posts[this.selected].created_at;
+            /* jshint ignore:end */
+            this.text = this.linkifyPost(this.posts[this.selected].text);
 
             this.async(this.updatePost, this.interval);
         },

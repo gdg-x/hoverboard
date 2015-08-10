@@ -1,0 +1,24 @@
+{
+    "video_library": [
+        {
+            "id": "VFje117Ck7g",
+            "speakers": "Oriol Jiménez",
+            "vid": "VFje117Ck7g",
+            "title": "Thinking of CPU & Memory (EN)",
+            "topic": "Dev",
+            "year": 2013,
+            "thumbnailUrl": "http://img.youtube.com/vi/VFje117Ck7g/hqdefault.jpg",
+            "desc": "Thinking of CPU & Memory by Oriol Jiménez (Antena Produccions SL)"
+        },
+        {
+            "id": "sltjT72PoTk",
+            "speakers": "Alexis Moussine-Pouchkine",
+            "vid": "sltjT72PoTk",
+            "title": "Mobile Backend Starter (FR)",
+            "topic": "Dev",
+            "year": 2013,
+            "thumbnailUrl": "http://img.youtube.com/vi/sltjT72PoTk/hqdefault.jpg",
+            "desc": "Mobile Backend Starter by Alexis Moussine-Pouchkine (Google)"
+        }
+    ]
+}

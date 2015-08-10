@@ -84,11 +84,11 @@
                               <div class="hero">
                                   <div class="layout vertical-horizontal">
                                       <div class="flex">
-                                          <img class="logo" src="/images/logo.svg" alt="GDG DevFest 2015">
+                                          <img class="logo" src="images/logo.svg" alt="GDG DevFest 2015">
                                           <p class="dates bold">October 23-24, Lviv</p>
                                           <p class="description">The biggest Google related event in Ukraine carefully crafted for you by GDG community! Awesome speakers and lot's of fun! This time, right in the heart of Lviv!</p>
                                           <p class="slogan">Think out of the box. Create what you want!</p>
-                                          <div class="links layout horizontal">
+                                          <div class="links layout horizontal align-pb-block">
                                               <paper-button noink>
                                                   <a href="http://goo.gl/forms/kymZwijWFy" target="_blank">Become a speaker</a>
                                               </paper-button>
@@ -98,7 +98,7 @@
                                           </div>
                                       </div>
                                       <div class="flex relative right-section">
-                                          <iron-image class="fit" src="/images/lviv.svg" sizing="contain"></iron-image>
+                                          <iron-image class="fit" src="images/lviv.svg" sizing="contain"></iron-image>
                                       </div>
                                   </div>
                                   <paper-fab class="section-fab-right" icon="expand-more"></paper-fab>
@@ -109,19 +109,24 @@
                             <h4 class="heading">Top Speakers</h4>
                           </featured-people>
                           <call-to-action>
-                            <span class="flex text">Look at previous year</span>
-                                <a class="border-button-link" href="/2014" target="_blank">Go to 2014</a>
+                            <h4 class="heading flex text self-center">Look at previous year</h4>
+                            <a class="border-button-link" href="2014" target="_blank">Go to 2014</a>
                           </call-to-action>
                           <photo-block></photo-block>
-                          <social-feed json="http://lviv.gdg.org.ua/tweetledee/favoritesjson.php?c=10&cache_interval=3600"></social-feed>
+                          <social-feed json="http://lviv.gdg.org.ua/tweetledee/favoritesjson.php?c=10&cache_interval=7200"></social-feed>
                           <logos-block></logos-block>
-                          <subscribe-block url="http://gdg.us5.list-manage.com/subscribe/post?u=9fc8aa205b0521b5f05fc8e1e&amp;id=c749ee6609" name="b_9fc8aa205b0521b5f05fc8e1e_c749ee6609"></subscribe-block>
+                          <!-- <subscribe-block url="http://gdg.us5.list-manage.com/subscribe/post?u=9fc8aa205b0521b5f05fc8e1e&amp;id=c749ee6609" name="b_9fc8aa205b0521b5f05fc8e1e_c749ee6609"></subscribe-block> -->
                           <map-block></map-block>
                           <footer-block></footer-block>
                         </section>
 
 
+                        <section data-route="about">
+                          <h1>About</h1>
+                        </section>
+
                         <section data-route="contact">
+                          <h1>Contact</h1>
                         </section>
 
                     </iron-pages>

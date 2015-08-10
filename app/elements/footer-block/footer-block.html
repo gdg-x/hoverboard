@@ -1,40 +1,35 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<link rel="import" href="../mailchimp-subscribe/mailchimp-subscribe.html">
 
 <dom-module id="footer-block">
     <style>
         :host {
             display: block;
+            background: #fff;
+            overflow: hidden;
+        }
+
+        .container {
+          padding: 0;
+          font-size: 14px;
+        }
+
+        .container paper-button {
+            font-size: 0.9em;
         }
 
         .footer {
             min-height: 200px;
-            background: #fff;
             color: #757575;
-            font-size: 0.875rem;
         }
 
         .gdg-logo {
-            margin-top: -36px;
-            height: 35px;
+            height: 30px;
             display: block;
         }
 
         a {
             color: inherit !important;
-        }
-
-        nav > * {
-            margin: 20px 10px 0;
-        }
-
-        nav > paper-menu-button {
-            padding: 0;
-            top: 1px;
-            font-weight: 500;
-        }
-
-        nav > paper-menu-button iron-icon {
-            margin-top: -3px;
         }
 
         @media (min-width: 768px) {
@@ -50,22 +45,63 @@
         }
 
         .footer-content {
-            padding: 16px;
+            padding: 16px 0;
+        }
+
+        .footer-links-container {
+            padding-top: 0;
+        }
+
+        .link-block {
+            padding: 0;
+        }
+
+        .link-block li {
+            margin-bottom: 9px;
+            list-style-type: none;
+        }
+
+        .link-block-title {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            font-weight: 300;
+        }
+
+        .link-block a {
+            font-weight: 100;
+        }
+
+        .link-block a:hover {
+            text-decoration: underline;
         }
 
         @media (min-width: 768px) {
+            .footer-backtotop {
+                margin-top: -10px;
+                margin-bottom: 0;
+            }
             .footer-content {
-                padding: 24px;
+                padding: 32px 0;
                 flex: 1;
+            }
+            .footer-links-container {
+                padding-top: 0;
+            }
+            .footer-bottom {
+                padding: 16px 0;
             }
         }
 
-        .footer-bottom {
+        /*.footer-bottom {
             border-top: 1px solid #eee;
+        }*/
+
+        .icons-wrapper {
+            margin-top: -5px;
         }
     </style>
     <template>
-        <div class="footer layout vertical">
+        <div class="container footer layout vertical">
             <div class="footer-content layout horizontal justified">
                 <g:plusone size="medium" width="300" annotation="inline" href="http://devfest.gdg.org.ua/"></g:plusone>
                 <paper-button class="footer-backtotop">
@@ -74,67 +110,62 @@
                     </a>
                 </paper-button>
             </div>
-            <div class="footer-content layout horizontal">
-                <div class="self-end flex">
-                    <img class="gdg-logo" src="/images/gdg-logo.svg" alt="GDG Lviv">
-                </div>
-                <nav class="layout vertical end justified">
-                    <paper-button>
-                        <a href="/assets/GDG_DevFest_Ukraine_2015_Partnership_Proposition.pdf" target="_blank">Partnership Proposition</a>
-                    </paper-button>
+            <div class="footer-content footer-links-container">
+                <nav class="layout horizontal flex">
+                    <div class="flex">
+                        <span class="link-block-title block">Links</span>
+                        <ul class="link-block">
+                            <li><a href="https://developers.google.com/" target="_blank">Google Developers</a></li>
+                            <li><a href="http://gdg-devfest-ua.appspot.com/" target="_blank">GDG DevFest Ukraine 2013</a></li>
+                            <li><a href="/2014">GDG DevFest Ukraine 2014</a></li>
+                        </ul>
+                    </div>
 
-                    <paper-menu-button vertical-align="bottom" horizontal-align="right">
-                        <paper-button class="dropdown-trigger">GDG DevFest
-                            <iron-icon icon="icons:arrow-drop-down"></iron-icon>
-                        </paper-button>
-                        <paper-menu class="dropdown-content">
-                            <paper-item>
-                                <a href="http://gdg-devfest-ua.appspot.com/" target="_blank">2013</a>
-                            </paper-item>
-                            <paper-item>
-                                <a href="/2014">2014</a>
-                            </paper-item>
-                        </paper-menu>
-                    </paper-menu-button>
+                    <div class="flex">
+                        <span class="link-block-title block">Partnership</span>
+                        <ul class="link-block">
+                            <li><a href="/assets/GDG_DevFest_Ukraine_2015_Partnership_Proposition.pdf" target="_blank">Partnership Proposition</a></li>
+                            <li><a href="https://drive.google.com/open?id=0B3UBk7uINu2jRkdpQm5RTU9BQ2s" target="_blank">Media Kit</a></li>
+                        </ul>
+                    </div>
 
-                    <paper-menu-button vertical-align="bottom" horizontal-align="right">
-                        <paper-button class="dropdown-trigger">Other
-                            <iron-icon icon="icons:arrow-drop-down"></iron-icon>
-                        </paper-button>
-                        <paper-menu class="dropdown-content">
-                            <paper-item>
-                                <a href="" target="_blank">Media Kit</a>
-                            </paper-item>
-                            <paper-item>
-                                <a href="#/faq">FAQ</a>
-                            </paper-item>
-                            <paper-item>
-                                <a href="#/cod">Code of Conduct</a>
-                            </paper-item>
-                        </paper-menu>
-                    </paper-menu-button>
+                    <div class="flex">
+                        <span class="link-block-title block">Contacts</span>
+                        <ul class="link-block">
+                            <li><a href="mailto:devfest@gdg.org.ua">devfest@gdg.org.ua</a></li>
+                        </ul>
+                        <div class="icons-wrapper align-pb-block">
+                            <a href="https://plus.google.com/102444623953913144164" target="_blank">
+                                <paper-icon-button icon="app-icons:glus"></paper-icon-button>
+                            </a>
+                            <a href="https://www.facebook.com/GDGLviv" target="_blank">
+                                <paper-icon-button icon="app-icons:facebook"></paper-icon-button>
+                            </a>
+                            <a href="https://twitter.com/gdglviv" target="_blank">
+                                <paper-icon-button icon="app-icons:twitter"></paper-icon-button>
+                            </a>
+                            <a href="https://www.linkedin.com/company/google-developers-group-lviv" target="_blank">
+                                <paper-icon-button icon="app-icons:linkedin"></paper-icon-button>
+                            </a>
+                        </div>
+                    </div>
 
-                    <div class="icons-wrapper">
-                        <a href="https://plus.google.com/102444623953913144164" target="_blank">
-                            <paper-icon-button icon="app-icons:glus"></paper-icon-button>
-                        </a>
-                        <a href="https://www.facebook.com/GDGLviv" target="_blank">
-                            <paper-icon-button icon="app-icons:facebook"></paper-icon-button>
-                        </a>
-                        <a href="https://twitter.com/gdglviv" target="_blank">
-                            <paper-icon-button icon="app-icons:twitter"></paper-icon-button>
-                        </a>
-                        <a href="https://www.linkedin.com/company/google-developers-group-lviv" target="_blank">
-                            <paper-icon-button icon="app-icons:linkedin"></paper-icon-button>
-                        </a>
+                    <div class="flex">
+                        <span class="link-block-title block">Subscibe for updates</span>
+                        <span>Get the latest news about the conference.</span>
+                        <mailchimp-subscribe url="{{url}}" name="{{name}}"></mailchimp-subscribe>
                     </div>
                 </nav>
             </div>
-            <div class="footer-bottom footer-content layout horizontal justified">
-                <span>
+            <div class="line full-width"></div>
+            <div class="footer-content footer-bottom layout horizontal justified">
+                <span class="flex self-center">
                     &copy; 2015 Based on <a href="https://github.com/gdg-x/hoverboard" target="_blank">Project Hoverboard</a>. Designed and created by <a href="https://plus.google.com/+OlehZasadnyy/about" target="_blank">Oleh Zasadnyy</a> &middot;
                     <a href="http://lviv.gdg.org.ua" target="_blank">GDG Lviv</a>
                 </span>
+                <div class="self-end">
+                    <img class="gdg-logo" src="../../images/gdg-logo.svg" alt="GDG Lviv">
+                </div>
             </div>
         </div>
     </template>
@@ -142,6 +173,10 @@
 
 <script>
     Polymer({
-        is: 'footer-block'
+        is: 'footer-block',
+        ready: function() {
+            this.url = "http://gdg.us5.list-manage.com/subscribe/post?u=9fc8aa205b0521b5f05fc8e1e&amp;id=c749ee6609";
+            this.name = "b_9fc8aa205b0521b5f05fc8e1e_c749ee6609";
+        }
     });
 </script>

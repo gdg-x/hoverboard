@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
+	
+	<title>#пккбпв timer</title>
+	
+	<style>
+		* { margin: 0; padding: 0; }
+		
+		html { 
+			background: no-repeat center center fixed; 
+			background-image: url(gifs/0.gif);
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+		}
+		
+		#page-wrap { 
+			width: 400px; 
+			height: 400px; 
+			position:absolute;
+    		left:50%;
+    		top:50%;
+    		margin:-200px 0 0 -200px;
+
+			font: 180px Arial;
+		    text-align: center;
+		    line-height: 400px;
+		    color: #fff;
+		    text-shadow: 2px 2px 5px #000;
+
+			/*background: rgba(255,255,255,0.2); */
+			background: rgba(0,0,0,0.2); 
+			-moz-box-shadow: 0 0 20px black; 
+			-webkit-box-shadow: 0 0 20px black; 
+			box-shadow: 0 0 20px black; 
+   		}
+
+	</style>
+</head>
+
+<body>
+
+    <div id="page-wrap">
+    	
+    </div>
+
+   	<script>
+		function setSec(sec) {
+			document.getElementById("page-wrap").innerHTML=sec;// + " sec remaining";
+		}
+
+		function nextImage() {
+			return 'url(/img/gifs/' + Math.floor((Math.random()*24)) + '.gif)';
+		}
+
+		var currentTimer = {};
+
+		function run(time) {
+			clearInterval(currentTimer);
+
+			var count=time;
+			setSec(count);
+		
+			currentTimer=setInterval(timer, 1000); //1000 will  run it every 1 second
+
+			function timer() {
+				count = count - 1;
+				if (count <= 0) {
+				    clearInterval(currentTimer);
+				    setSec('Boo!');
+				    //counter ended, do something here
+				    return;
+				}
+				if (count % 4 == 0) {
+					var htmlElement = document.getElementsByTagName("html")[0];
+					htmlElement.style.backgroundImage = nextImage();
+				}
+
+			    setSec(count);
+			}
+		}
+
+		run(300);		
+	</script>
+</body></html>

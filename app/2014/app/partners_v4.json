@@ -1,0 +1,319 @@
+{
+    "partners": [
+        {
+            "id": "sponsor0",
+            "name": "Google",
+            "desc": "Google",
+            "website": "http://google.com",
+            "logo": "http://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png",
+            "level": 1,
+            "levelLabel": "General"
+        },
+        {
+            "id": "sponsor1",
+            "name": "Eleks",
+            "desc": "Software development, Localization, Internationalization, QA and Testing Services",
+            "website": "http://eleks.com/",
+            "logo": "http://hi-tech.org.ua/wp-content/uploads/2012/01/Eleks-logo-blue.png",
+            "level": 2,
+            "levelLabel": "Diamond"
+        },
+        {
+            "id": "sponsor2",
+            "name": "SoftServe",
+            "desc": "SoftServe – Best IT Employer",
+            "website": "https://softserve.ua/en/",
+            "logo": "http://upload.wikimedia.org/wikipedia/en/d/da/SoftServe_logo_new.png",
+            "level": 2,
+            "levelLabel": "Diamond"
+        },
+        {
+            "id": "sponsor3",
+            "name": "DataArt",
+            "desc": "DataArt is a custom software development company that builds advanced solutions for the financial services, healthcare, hospitality, logistics and other industries.",
+            "website": "http://www.dataart.com/",
+            "logo": "https://www.openfin.co/images/dataart-logo.png",
+            "level": 3,
+            "levelLabel": "Platinum"
+        },
+        {
+            "id": "sponsor4",
+            "name": "GlobalLogic",
+            "desc": "GlobalLogic is a full product lifecycle services provider that helps customers make amazing products, discover new revenue opportunities, and accelerate time-to-market.",
+            "website": "http://www.globallogic.com/",
+            "logo": "http://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Logo_800px.png/220px-Logo_800px.png",
+            "level": 3,
+            "levelLabel": "Platinum"
+        },
+        {
+            "id": "sponsor5",
+            "name": "Lemberg",
+            "desc": "Lemberg Solutions - Web and Mobile App Development Company",
+            "website": "http://lemberg.co.uk/",
+            "logo": "https://s3.amazonaws.com/sortfolio.production/listings/logos/15915_1369323987.large.png?1369323987",
+            "level": 4,
+            "levelLabel": "Gold"
+        },
+        {
+            "id": "sponsor6",
+            "name": "coMMuna",
+            "desc": "coMMuna- це простір для втілення твоїх можливостей, правильно організований для роботи, навчання та відпочинку.",
+            "website": "http://communa.net.ua/en/",
+            "logo": "http://devfest.gdg.org.ua/img/partners/communa.png",
+            "level": 4,
+            "levelLabel": "Gold"
+        },
+        {
+            "id": "sponsor7",
+            "name": "Lohika",
+            "desc": "A trusted partner in software development",
+            "website": "http://www.lohika.com/",
+            "logo": "https://d16cvnquvjw7pr.cloudfront.net/images/blog-photos-new/Letterheadlogo.jpg",
+            "level": 5,
+            "levelLabel": "Hackaton"
+        },
+        {
+            "id": "sponsor8",
+            "name": "GitHub",
+            "desc": "GitHub is the best place to build software together. Over 4 million people use GitHub to share code.",
+            "website": "https://github.com/",
+            "logo": "https://assets-cdn.github.com/images/modules/logos_page/GitHub-Logo.png",
+            "level": 5,
+            "levelLabel": "Hackaton"
+        },
+        {
+            "id": "sponsor9",
+            "name": "Come In",
+            "desc": "Ми – новий формат!Ми – нова концепція кафе!Ми – соціальна мережа у реальному світі.",
+            "website": "http://www.comein.lviv.ua/",
+            "logo": "http://devfest.gdg.org.ua/img/partners/comein.png",
+            "level": 5,
+            "levelLabel": "Hackaton"
+        },
+        {
+            "id": "support01",
+            "name": "IT-BPO",
+            "desc": "IT-BPO Lviv Cluster",
+            "website": "http://it-bpo.lviv.ua/",
+            "logo": "http://devfest.gdg.org.ua/img/partners/it-bpo.png",
+            "level": 6,
+            "levelLabel": "Support"
+        },
+        {
+            "id": "support02",
+            "name": "Lviv Convention Bureau",
+            "desc": "Lviv Convention Bureau - Business tourism in Lviv, Ukraine",
+            "website": "http://lvivconvention.com.ua/",
+            "logo": "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xap1/v/t1.0-1/p100x100/1512811_286493904808520_7174078415433564465_n.png?oh=193e85948bb39a2c93a7bf5338d75df0&oe=547F9534&__gda__=1416046069_f83f1e965f206beb55c255525ee67be9",
+            "level": 6,
+            "levelLabel": "Support"
+        },
+        {
+            "id": "hosting01",
+            "name": "Astoria",
+            "desc": "Astoria Hotel Lviv - Personally Yours",
+            "website": "http://astoriahotel.ua/en",
+            "logo": "http://devfest.gdg.org.ua/img/partners/astoria.png",
+            "level": 7,
+            "levelLabel": "Hosting"
+        },
+        {
+            "id": "hosting02",
+            "name": "Dnister",
+            "desc": "Premium Hotel Dnister Lviv",
+            "website": "http://dnister.lviv.ua",
+            "logo": "http://devfest.gdg.org.ua/img/partners/dnister.png",
+            "level": 7,
+            "levelLabel": "Hosting"
+        },
+        {
+            "id": "prod01",
+            "name": "and action",
+            "desc": "and action - video and photo production",
+            "website": "http://and-action.net/",
+            "logo": "http://devfest.gdg.org.ua/img/partners/and-action.png",
+            "level": 8,
+            "levelLabel": "Production"
+        },
+        {
+            "id": "info01",
+            "name": "DOU",
+            "desc": "DOU - Сообщество программистов",
+            "website": "http://dou.ua/",
+            "logo": "http://www.globallogic.com.ua/wp-content/uploads/2012/10/dou-logo-304x144.png",
+            "level": 9,
+            "levelLabel": "General Media"
+        },
+        {
+            "id": "info02",
+            "name": "career4it",
+            "desc": "career4it - employment fair for it talents",
+            "website": "http://career4it.com/en/",
+            "logo": "http://devfest.gdg.org.ua/img/partners/career4it.png",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "info03",
+            "name": "Startup Depot",
+            "desc": "Startup Depot - Lviv Business Incubator",
+            "website": "http://innovateinlviv.com/",
+            "logo": "http://profile.ak.fbcdn.net/hprofile-ak-xpf1/v/t1.0-1/c2.0.160.160/p160x160/1375886_595363050509412_963318323_n.png?oh=e5281db4f057cb4e8a47d35856941e44&oe=54616AD3&__gda__=1416434603_825beb34c97ac2c39a59318f9db1fda3",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "info04",
+            "name": "Betaplace",
+            "desc": "Betaplace – Coworking center in Lviv",
+            "website": "http://betaplace.com.ua/",
+            "logo": "http://lviv-online.com/ua/wp-content/uploads/2013/10/betaplace1.png",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "info05",
+            "name": "MCE 2015",
+            "desc": "MCE – The mobile technology conference created by developers and designers",
+            "website": "http://mceconf.com/",
+            "logo": "http://bitspiration.com/wp-content/uploads/2014/07/Screen-Shot-2014-07-14-at-11.38.03.png",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "info06",
+            "name": "Inspired",
+            "desc": "Inspired - це джерело вашого натхнення. Найкращі фотографії, цитати та відео з усього інтернету",
+            "website": "http://inspired.com.ua/",
+            "logo": "http://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Inspired_logo.jpg/250px-Inspired_logo.jpg",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "info07",
+            "name": "Mobile Warsaw",
+            "desc": "Mobile Warsaw is a community of mobile programmers. We organize regular meetings, where mobile developers talk to mobile developers about their experiences",
+            "website": "http://mobile-warsaw.pl/",
+            "logo": "http://mobile-warsaw.pl/img/logo_mw_big.png",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "info08",
+            "name": "Be-sparkle",
+            "desc": "BE-SPARKLE - це джерело новин, ідей та історій успіху натхненних сферами кіно, реклами, технологій та стартапів. Основна ціль - збільшення кількості діячів цих галузей, шляхом надання їм оптимізму та знань, яких інколи так не вистачає для здійснення рішучого кроку",
+            "website": "http://be-sparkle.com/",
+            "logo": "http://devfest.gdg.org.ua/img/partners/be-sparkle.png",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "info09",
+            "name": "Uzhhorod-IT",
+            "desc": "Uzhhorod-IT - група для спілкування студентів та спеціалістів задіяних у сфері інформаційних технологій",
+            "website": "https://www.facebook.com/groups/uzhitc/",
+            "logo": "https://api.monosnap.com/image/download?id=aQ4hS9iGVYRWz5Kv4Ewuxnima4GPpP",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "info10",
+            "name": "Md-Eksperiment",
+            "desc": "Фестивали, Дорогие друзья, представляем список фестивалей-партнеров Международного культурного портала Эксперимент. Для вашего удобства мы решили собрать их вместе. Количество постоянно увеличивается. Можно заказать,купить билеты на фестиваль",
+            "website": "http://md-eksperiment.org/page.php?menu_id=3",
+            "logo": "http://devfest.gdg.org.ua/img/partners/md-eksperiment.png",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "info11",
+            "name": "ІТ у нашому селі",
+            "desc": "Itvillage is a media project, which mission is in covering an intersection of technology, business and culture",
+            "website": "http://itvillage.in.ua/",
+            "logo": "https://i1.sndcdn.com/avatars-000087536940-f0w27n-t200x200.jpg?e76cf77",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "info12",
+            "name": "AppClub { build, monetize }",
+            "desc": "AppClub - профессиональный клуб мобильных разработчиков и стартапов",
+            "website": "http://appclub.im/",
+            "logo": "http://apptractor.ru/wp-content/uploads/2014/06/appclub.png",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "info13",
+            "name": "Mobiconf",
+            "desc": "Mobiconf - Experience the World of Mobile Development",
+            "website": "http://www.mobiconf.org/",
+            "logo": "http://www.mobiconf.org/img/logo.png",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "info14",
+            "name": "Symphony Solutions",
+            "desc": "Symphony Solutions - Software development tailored to your needs!",
+            "website": "http://www.symphony-solutions.eu/",
+            "logo": "http://www.invest-lvivregion.com/UserFiles/Image/imgdir_1/It_companies/symphony-solutions.png",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "info15",
+            "name": "ITEM-2014",
+            "desc": "IT-конференция, посвященная трендам в разработке программных продуктов и управления IT-проектами.",
+            "website": "http://item.dp.ua/en/",
+            "logo": "http://item.dp.ua/en/img/item.png",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "info16",
+            "name": "Django Girls",
+            "desc": "Django Girls is a one-day workshop about programming in Python and Django tailored for women.",
+            "website": "http://djangogirls.org/lviv",
+            "logo": "https://pbs.twimg.com/profile_images/474213835859951617/4vabKlGs.png",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "info17",
+            "name": "Root Nation",
+            "desc": "Root Nation - сайт о гаджетах и технологиях. Android, iOS, Windows. Обзоры: смартфоны, планшеты, ноутбуки, ПК. Операционные системы, софт, сервисы и ПО.",
+            "website": "http://root-nation.com/",
+            "logo": "http://root-nation.com/wp-content/uploads/2013/11/RN_new_Logo_square.png",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "info18",
+            "name": "Innabtys",
+            "desc": "Innabtys — цифровые проекты, интернет-маркетинг, право. Прикладные исследования и работа с веб-проектами, новыми сферами современной экономики.",
+            "website": "http://innabtys.com/",
+            "logo": "http://devfest.gdg.org.ua/img/partners/innabtys.png",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "info19",
+            "name": "Garage48",
+            "desc": "Garage48 - from an idea to prototype within 48 hours",
+            "website": "http://garage48.org/lviv",
+            "logo": "http://devfest.gdg.org.ua/img/partners/garage48.png",
+            "level": 10,
+            "levelLabel": "Information"
+        },
+        {
+            "id": "org01",
+            "name": "GDG Lviv",
+            "desc": "Google Developers Group Lviv",
+            "website": "http://lviv.gdg.org.ua/",
+            "logo": "https://lh5.googleusercontent.com/-WNRy8loYe7Q/AAAAAAAAAAI/AAAAAAAAGls/ccXi8f3texs/photo.jpg",
+            "level": 11,
+            "levelLabel": "Organizer"
+        }
+    ]
+}

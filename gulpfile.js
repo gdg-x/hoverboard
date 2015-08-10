@@ -20,6 +20,7 @@ var merge = require('merge-stream');
 var path = require('path');
 var fs = require('fs');
 var glob = require('glob');
+var ghPages = require('gulp-gh-pages');
 
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
@@ -117,6 +118,18 @@ gulp.task('fonts', function () {
     .pipe($.size({title: 'fonts'}));
 });
 
+gulp.task('2014', function () {
+  return gulp.src(['app/2014/**'])
+    .pipe(gulp.dest('dist/2014'))
+    .pipe($.size({title: '2014'}));
+});
+
+gulp.task('assets', function () {
+  return gulp.src(['app/assets/**'])
+    .pipe(gulp.dest('dist/assets'))
+    .pipe($.size({title: 'assets'}));
+});
+
 // Scan Your HTML For Assets & Optimize Them
 gulp.task('html', function () {
   var assets = $.useref.assets({searchPath: ['.tmp', 'app', 'dist']});
@@ -172,6 +185,11 @@ gulp.task('precache', function (callback) {
       fs.writeFile(filePath, JSON.stringify(files), callback);
     }
   });
+});
+
+gulp.task('gh-pages', function() {
+  return gulp.src('./dist/**/*')
+    .pipe(ghPages());
 });
 
 // Clean Output Directory
@@ -234,7 +252,13 @@ gulp.task('default', ['clean'], function (cb) {
     ['copy', 'styles'],
     'elements',
     ['jshint', 'images', 'fonts', 'html'],
-    'vulcanize', 'precache',
+    'vulcanize', 'precache', '2014', 'assets',
+    cb);
+});
+
+// Deploy on GitHub
+gulp.task('deploy', ['default'], function (cb) {
+  runSequence('gh-pages',
     cb);
 });
 

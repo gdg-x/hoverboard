@@ -1,10 +1,11 @@
-body {
+body, html {
     background: #fafafa;
     font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #212121;
     font-size: 16px;
     font-weight: 100;
     line-height: 1.4;
+    overflow: hidden;
 }
 h1, h2, h3, h4 {
     margin: 0;
@@ -24,10 +25,18 @@ a, .anchor-like {
     font-style: italic;
 }
 .block {
-  display: block;
+    display: block;
 }
 .bold {
     font-weight: 400;
+}
+.line {
+  height: 1px;
+  border-bottom: 1px solid #eee;
+}
+.full-width {
+  margin-left: -100%;
+  margin-right: -100%;
 }
 .image-background {
     background-repeat: no-repeat;
@@ -56,8 +65,7 @@ a, .anchor-like {
 .container.container-narrow {
     padding: 20px 30px;
 }
-.container .heading,
-.container .heading-block {
+.container .heading, .container .heading-block {
     margin-top: 0;
     margin-bottom: 20px;
     font-size: 22px;
@@ -80,7 +88,7 @@ a, .anchor-like {
     .container {
         margin: 0 auto;
         padding: 60px 0;
-        max-width: 704px;
+        max-width: 896px;
     }
     .card-container {
         padding: 90px 0;
@@ -88,7 +96,7 @@ a, .anchor-like {
 }
 @media (min-width: 1136px) {
     .container {
-        max-width: 896px;
+        max-width: 1280px;
     }
 }
 @media (min-width: 768px) {
@@ -130,8 +138,7 @@ a, .anchor-like {
 .card-content {
     padding: 24px 16px;
 }
-.section-fab,
-.section-fab-right {
+.section-fab, .section-fab-right {
     float: left;
     transform: translateY(50%);
     z-index: 1;
@@ -164,6 +171,9 @@ a, .anchor-like {
     .card-content {
         padding: 32px 40px;
     }
+}
+.align-pb-block {
+    margin-left: -9px;
 }
 .text-center {
     text-align: center;

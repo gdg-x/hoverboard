@@ -1,0 +1,22 @@
+{
+    "hashtags": [
+        {
+            "color": "#303f9f",
+            "order": 1,
+            "name": "#dfua",
+            "description": "Follow the general Google+ social conversation happening around GDG DevFest"
+        },
+        {
+            "color": "#303f9f",
+            "order": 2,
+            "name": "#gdg",
+            "description": "Follow the general Google+ social conversation happening around GDG"
+        },
+        {
+            "color": "#303f9f",
+            "order": 3,
+            "name": "#gdglviv",
+            "description": "Follow the general Google+ social conversation happening around GDG Lviv"
+        }
+    ]
+}

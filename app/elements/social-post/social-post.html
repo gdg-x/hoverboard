@@ -39,15 +39,12 @@
     </template>
 </dom-module>
 
-<script src="/bower_components/time-elements/time-elements.js"></script>
+<script src="../../bower_components/time-elements/time-elements.js"></script>
 
 <script>
     Polymer({
         is: 'social-post',
         properties: {
-            author: {
-                type: String
-            },
             author: {
                 type: String
             },
@@ -68,7 +65,7 @@
                 type: String
             }
         },
-        _textChanged: function(newValue, oldValue) {
+        _textChanged: function() {
             this.$.postContent.innerHTML = this.text;
         }
     });
