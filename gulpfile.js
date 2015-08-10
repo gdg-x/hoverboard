@@ -219,6 +219,9 @@ gulp.task('minify-dist', function () {
   gulp.src(['dist/sw-toolbox/*.js'])
     //.pipe($.uglify()).on('error', errorHandler)
     .pipe(gulp.dest('dist/sw-toolbox'));
+  gulp.src(['dist/sw-import.js'])
+    .pipe($.uglify())
+    .pipe(gulp.dest('dist'));
 });
 
 // Watch Files For Changes & Reload
