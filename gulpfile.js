@@ -23,6 +23,12 @@ var glob = require('glob');
 var historyApiFallback = require('connect-history-api-fallback');
 var config = require('./config');
 
+// Handle the error
+// .pipe(...).on('error', errorHandler)
+function errorHandler (error) {
+  console.log(error.toString());
+}
+
 var styleTask = function (stylesPath, srcs) {
   return gulp.src(srcs.map(function(src) {
       return path.join('app', stylesPath, src);
@@ -198,6 +204,16 @@ gulp.task('clean-dist', function (cb) {
   ], cb);
 });
 
+// Minify JavaScript in dist directory
+gulp.task('minify-dist', function () {
+  gulp.src(['dist/bower_components/platinum-sw/service-worker.js'])
+    .pipe($.uglify())
+    .pipe(gulp.dest('dist/bower_components/platinum-sw'));
+  gulp.src(['dist/sw-toolbox/*.js'])
+    //.pipe($.uglify()).on('error', errorHandler)
+    .pipe(gulp.dest('dist/sw-toolbox'));
+});
+
 // Watch Files For Changes & Reload
 gulp.task('serve', ['styles', 'elements', 'images'], function () {
   browserSync({
@@ -265,6 +281,7 @@ gulp.task('default', ['clean'], function (cb) {
     ['jshint', 'images', 'fonts', 'html'],
     'vulcanize',
     'clean-dist',
+    'minify-dist',
     cb);
     // Note: add , 'precache' , after 'vulcanize', if your are going to use Service Worker
 });
