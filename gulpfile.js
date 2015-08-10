@@ -163,6 +163,13 @@ gulp.task('vulcanize', function () {
       minifyJS: true,
       removeComments: true
     }))
+    // Remove newlines from CSS
+    .pipe($.replace(/[\r\n]/g, ''))
+    // Remove 2 or more spaces from CSS
+    // (single spaces can be syntactically significant)
+    .pipe($.replace(/ {2,}/g, ''))
+    // Remove CSS comments
+    .pipe($.replace(/\*.+?\*/g, ''))
     // Split inline scripts from an HTML file for CSP compliance
     .pipe($.crisper())
     .pipe(gulp.dest('dist/elements'))
