@@ -150,9 +150,11 @@ gulp.task('vulcanize', function () {
       inlineCss: true,
       inlineScripts: true
     }))
+    // Split inline scripts from an HTML file for CSP compliance
+    .pipe($.crisper())
     // Minify elements.vulcanized.html
     // https://github.com/PolymerLabs/polybuild/issues/3
-    .pipe($.htmlmin({
+    .pipe($.if('*.html', $.htmlmin({
       customAttrAssign: [
         {source:'\\$='}
       ],
@@ -160,18 +162,17 @@ gulp.task('vulcanize', function () {
         [ {source: '\\({\\{'}, {source: '\\}\\}'} ],
         [ {source: '\\[\\['}, {source: '\\]\\]'}  ]
       ],
-      minifyJS: true,
       removeComments: true
-    }))
+    })))
     // Remove newlines from CSS
-    .pipe($.replace(/[\r\n]/g, ''))
+    //.pipe($.replace(/[\r\n]/g, ''))
     // Remove 2 or more spaces from CSS
     // (single spaces can be syntactically significant)
-    .pipe($.replace(/ {2,}/g, ''))
+    .pipe($.if('*.html', $.replace(/ {2,}/g, '')))
     // Remove CSS comments
-    .pipe($.replace(/\*.+?\*/g, ''))
-    // Split inline scripts from an HTML file for CSP compliance
-    .pipe($.crisper())
+    .pipe($.if('*.html', $.stripCssComments({preserve: false})))
+    // Minify elements.vulcanized.js
+    .pipe($.if('*.js', $.uglify()))
     .pipe(gulp.dest('dist/elements'))
     .pipe($.size({title: 'vulcanize'}));
 });
