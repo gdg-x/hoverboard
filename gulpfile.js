@@ -232,6 +232,7 @@ gulp.task('minify-dist', function () {
     .pipe(gulp.dest('dist/bower_components/platinum-sw'));
   gulp.src(['dist/sw-toolbox/*.js'])
     //.pipe($.uglify()).on('error', errorHandler)
+    // https://github.com/mishoo/UglifyJS2/issues/766
     .pipe(gulp.dest('dist/sw-toolbox'));
   gulp.src(['dist/sw-import.js'])
     .pipe($.uglify())
