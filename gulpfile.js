@@ -21,6 +21,8 @@ var path = require('path');
 var fs = require('fs');
 var glob = require('glob');
 var historyApiFallback = require('connect-history-api-fallback');
+var packageJson = require('./package.json');
+var crypto = require('crypto');
 var config = require('./config');
 
 // Handle the error
@@ -80,7 +82,7 @@ gulp.task('copy', function () {
   var app = gulp.src([
     'app/*',
     '!app/test',
-    '!app/precache.json'
+    '!app/cache-config.json'
   ], {
     dot: true
   }).pipe(gulp.dest('dist'));
@@ -177,18 +179,29 @@ gulp.task('vulcanize', function () {
     .pipe($.size({title: 'vulcanize'}));
 });
 
-// Generate a list of files that should be precached when serving from 'dist'.
-// The list will be consumed by the <platinum-sw-cache> element.
-gulp.task('precache', function (callback) {
+// Generate config data for the <sw-precache-cache> element.
+// This include a list of files that should be precached, as well as a (hopefully unique) cache
+// id that ensure that multiple PSK projects don't share the same Cache Storage.
+gulp.task('cache-config', function (callback) {
   var dir = 'dist';
+  var config = {
+    cacheId: packageJson.name || path.basename(__dirname),
+    disabled: false
+  };
 
   glob('{elements,scripts,styles}/**/*.*', {cwd: dir}, function(error, files) {
     if (error) {
       callback(error);
     } else {
       files.push('index.html', './', 'bower_components/webcomponentsjs/webcomponents-lite.min.js');
-      var filePath = path.join(dir, 'precache.json');
-      fs.writeFile(filePath, JSON.stringify(files), callback);
+      config.precache = files;
+
+      var md5 = crypto.createHash('md5');
+      md5.update(JSON.stringify(config.precache));
+      config.precacheFingerprint = md5.digest('hex');
+
+      var configPath = path.join(dir, 'cache-config.json');
+      fs.writeFile(configPath, JSON.stringify(config), callback);
     }
   });
 });
@@ -286,15 +299,15 @@ gulp.task('serve:dist', ['default'], function () {
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
+  // Uncomment 'cache-config' after 'vulcanize' if you are going to use service workers.
   runSequence(
     ['copy', 'styles'],
     'elements',
     ['jshint', 'images', 'fonts', 'html'],
-    'vulcanize',
+    'vulcanize', // 'cache-config',
     'clean-dist',
     'minify-dist',
     cb);
-    // Note: add , 'precache' , after 'vulcanize', if your are going to use Service Worker
 });
 
 // Static asset revisioning by appending content hash to filenames
