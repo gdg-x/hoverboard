@@ -1,0 +1,33 @@
+<dom-module id="blog-post">
+    <style>
+        :host {
+            display: block;
+        }
+    </style>
+    <template>
+        <iron-ajax auto url="{{postUrl}}" handle-as="json" on-response="postLoaded" debounce-duration="300"></iron-ajax>
+        <div class="container card">
+            <div class="card-content">
+                <h1>{{postMeta.title}}</h1>
+                <marked-element markdown="{{post}}"></marked-element>
+            </div>
+        </div>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: 'blog-post',
+        properties: {
+            postMeta: {
+                type: Object
+            }
+        },
+        ready: function() {
+            this.postUrls = '../../posts/' + this.postMeta.file;
+        },
+        postLoaded: function(event, response) {
+            this.post = response.response;
+        }
+    });
+</script>

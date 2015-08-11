@@ -1,17 +1,53 @@
-<dom-module id="blog-block">
-  <style>
-    :host {
-      display: block;
-    }
-  </style>
-  <template>
+<link rel="import" href="../blog-post/blog-post.html">
 
-  </template>
+<dom-module id="blog-block">
+    <style>
+        :host {
+            display: block;
+        }
+
+        .card {
+            position: relative;
+        }
+
+        .card-wrapper {
+            margin-bottom: 30px;
+            padding: 0 15px;
+            width: 33.33%;
+        }
+    </style>
+    <template>
+        <iron-ajax auto url="../../settings/blog.json" handle-as="json" on-response="postsLoaded" debounce-duration="300"></iron-ajax>
+        <div class="container flex layout horizontal-reverse center-justified wrap">
+            <template is="dom-repeat" items="{{posts}}">
+                <div class="card-wrapper">
+                    <div class="card">
+                        <div class="card-content">
+                            <h1>{{item.title}}</h1>
+                            <marked-element markdown="{{item.brief}}"></marked-element>
+                        </div>
+                        <div class="card-content">
+                            <paper-button on-tap="openPost(item)">Read more</paper-button>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template is="dom-if" if="{{postSelected}}">
+                <blog-post entry-animation="scale-up-animation" exit-animation="fade-out-animation" post-meta="{{selectedPost}}"></blog-post>
+            </template>
+        </div>
+    </template>
 </dom-module>
 
 <script>
-  Polymer({
-    is: 'blog-block',
-
-  });
+    Polymer({
+        is: 'blog-block',
+        postsLoaded: function(event, response) {
+            this.posts = response.response;
+        },
+        openPost: function(post) {
+            this.selectedPost = post;
+            this.postSelected = true;
+        }
+    });
 </script>

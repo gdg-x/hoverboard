@@ -21,7 +21,6 @@ a, .anchor-like {
     color: #ffffff;
     font-weight: 100;
     padding-bottom: 1px;
-    /*border-bottom: 1px dashed #ffffff;*/
     font-style: italic;
 }
 .block {
@@ -31,12 +30,12 @@ a, .anchor-like {
     font-weight: 400;
 }
 .line {
-  height: 1px;
-  border-bottom: 1px solid #eee;
+    height: 1px;
+    border-bottom: 1px solid #eee;
 }
 .full-width {
-  margin-left: -100%;
-  margin-right: -100%;
+    margin-left: -100%;
+    margin-right: -100%;
 }
 .image-background {
     background-repeat: no-repeat;
@@ -80,9 +79,6 @@ a, .anchor-like {
 }
 .container paper-button {
     font-size: 0.8em;
-}
-.card-container {
-    padding: 0;
 }
 @media (min-width: 768px) {
     .container {
@@ -138,13 +134,16 @@ a, .anchor-like {
 .card-content {
     padding: 24px 16px;
 }
+.card-container {
+    padding: 0;
+}
 .section-fab, .section-fab-right {
-    float: left;
-    transform: translateY(50%);
+    position: absolute;
+    transform: translateY(-8px);
     z-index: 1;
 }
 .section-fab-right {
-    float: right;
+    right: 0;
 }
 .section-shadow {
     position: relative;

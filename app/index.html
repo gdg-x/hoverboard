@@ -80,8 +80,8 @@
                     <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
                         <section data-route="home">
-                          <hero-block class="section-shadow">
-                              <div class="hero">
+                          <hero-block class="section-shadow" hide-logo>
+                              <div class="top-section hero">
                                   <div class="layout vertical-horizontal">
                                       <div class="flex">
                                           <img class="logo" src="images/logo.svg" alt="GDG DevFest 2015">
@@ -101,8 +101,8 @@
                                           <iron-image class="fit" src="images/lviv.svg" sizing="contain"></iron-image>
                                       </div>
                                   </div>
-                                  <paper-fab class="section-fab-right" icon="expand-more"></paper-fab>
                               </div>
+                                  <paper-fab class="section-fab-right" icon="expand-more"></paper-fab>
                           </hero-block>
                           <statistics-block></statistics-block>
                           <featured-people>
@@ -122,7 +122,15 @@
 
 
                         <section data-route="about">
-                          <h1>About</h1>
+                          <hero-block class="section-shadow" style="background: #03A9F4; color: #fff;">
+                              <div class="top-section">
+                                  <div class="title-wrapper layout horizontal">
+                                      <h3 class="self-end">Blog</h3>
+                                  </div>
+                                  <paper-fab class="section-fab-right" icon="social:share"></paper-fab>
+                              </div>
+                          </hero-block>
+                          <blog-block></blog-block>
                         </section>
 
                         <section data-route="contact">

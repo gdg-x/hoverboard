@@ -3,24 +3,40 @@
         :host {
             display: block;
             --paper-toolbar-background: transparent;
-            --paper-toolbar-color: #008094;
-            --paper-tabs-selection-bar-color: #008094;
-            --paper-tab-ink: rgba(0, 128, 148, 0.2);
+            --paper-tab-ink: rgba(255, 255, 255, 0.2);
+            --paper-toolbar-color: inherit;
+            color: #4E4E4E;
+        }
+
+        .nav-link {
+            color: inherit;
         }
 
         .logo {
-            margin-top: 4px;
+            margin-top: 7px;
             height: 40px;
         }
 
         .container {
             padding-top: 0;
+            padding-bottom: 20px;
         }
 
         ::content .hero {
+            padding-bottom: 20px;
+        }
+
+        ::content .top-section {
             padding-top: 20px;
-            color: #4E4E4E;
             font-size: 20px;
+        }
+
+        ::content .title-wrapper {
+          min-height: 150px;
+        }
+
+        ::content h3 {
+            font-size: 2.1em;
         }
 
         ::content .logo {
@@ -65,24 +81,26 @@
         }
     </style>
     <template>
-        <div class="container flex relative">
-            <paper-toolbar>
-                <paper-icon-button class="visible-xs" icon="menu" on-tap="togglePanel"></paper-icon-button>
-                <div class="flex hidden-xs">
-                    <!-- <a href="/">
-          <img class="logo" src="../../images/logo.svg" alt="GDG DevFest 2015">
-        </a> -->
-                </div>
-                <paper-tabs class="hidden-xs" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
-                    <paper-tab class="text-u-c">
-                        <a data-route="about" href="/about" class="horizontal center-center layout">About</a>
-                    </paper-tab>
-                    <paper-tab class="text-u-c">
-                        <a data-route="contact" href="/contact" class="horizontal center-center layout">Contact</a>
-                    </paper-tab>
-                </paper-tabs>
-            </paper-toolbar>
-            <content></content>
+        <div id="block">
+            <div class="container flex relative">
+                <paper-toolbar>
+                    <paper-icon-button class="visible-xs" icon="menu" on-tap="togglePanel"></paper-icon-button>
+                    <div class="flex hidden-xs">
+                        <a data-route="home" href="/" hidden="{{hideLogo}}">
+                            <img class="logo" src="../../images/logo-light.svg" alt="GDG DevFest 2015">
+                        </a>
+                    </div>
+                    <paper-tabs class="hidden-xs" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
+                        <paper-tab class="text-u-c">
+                            <a data-route="about" href="/about" class="nav-link horizontal center-center layout">About</a>
+                        </paper-tab>
+                        <paper-tab class="text-u-c">
+                            <a data-route="contact" href="/contact" class="nav-link horizontal center-center layout">Contact</a>
+                        </paper-tab>
+                    </paper-tabs>
+                </paper-toolbar>
+                <content></content>
+            </div>
         </div>
     </template>
 </dom-module>
@@ -90,6 +108,11 @@
 <script>
     Polymer({
         is: 'hero-block',
+        properties: {
+            hideLogo: {
+                type: Boolean
+            }
+        },
         togglePanel: function() {
             document.querySelector('#paperDrawerPanel').togglePanel();
         }
