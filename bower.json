@@ -4,7 +4,7 @@
   "dependencies": {
     "iron-elements": "PolymerElements/iron-elements#1.0.x",
     "paper-elements": "PolymerElements/paper-elements#1.0.x",
-    "platinum-elements": "PolymerElements/platinum-elements#1.0.x",
+    "platinum-elements": "PolymerElements/platinum-elements#1.1.x",
     "neon-elements": "PolymerElements/neon-elements#1.0.x",
     "page": "visionmedia/page.js#1.6.x"
   },

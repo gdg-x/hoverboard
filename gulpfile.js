@@ -221,7 +221,8 @@ gulp.task('clean-dist', function (cb) {
     '!dist/bower_components/platinum-sw/service-worker.js',
     'dist/styles/app-theme.html',
     'dist/elements/*',
-    '!dist/elements/elements.vulcanized.*'
+    '!dist/elements/elements.vulcanized.*',
+    '!dist/elements/bootstrap'
   ], cb);
 });
 
@@ -305,9 +306,9 @@ gulp.task('default', ['clean'], function (cb) {
     ['copy', 'styles'],
     'elements',
     ['jshint', 'images', 'fonts', 'html'],
-    'vulcanize', // 'cache-config',
-    'clean-dist',
-    'minify-dist',
+    'vulcanize',
+    ['clean-dist', 'minify-dist'],
+    'cache-config',
     cb);
 });
 
@@ -316,7 +317,9 @@ gulp.task('revision', function () {
   var revAll = new $.revAll({ dontRenameFile: [
     /^\/index.html/g,
     /^\/robots.txt/g,
-    /^\/sw-import.js/g
+    /^\/sw-toolbox\/sw-toolbox.js/g
+  ], dontUpdateReference: [
+    /^\/index.html/g
   ]});
   gulp.src('dist/**')
     .pipe(revAll.revision())
