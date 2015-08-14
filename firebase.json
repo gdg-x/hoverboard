@@ -1,0 +1,41 @@
+{
+  "firebase": "app-name",
+  "public": "cdn",
+  "headers": [ {
+    "source" : "**/*.@(css|html|js|json|txt)",
+    "headers" : [ {
+      "key" : "Cache-Control",
+      "value" : "max-age=315360000"
+    } ]
+    }, {
+    "source" : "**/*.@(gif|jpg|jpeg|png|svg)",
+    "headers" : [ {
+      "key" : "Cache-Control",
+      "value" : "max-age=315360000"
+    } ]
+    }, {
+    "source" : "404.html",
+    "headers" : [ {
+      "key" : "Cache-Control",
+      "value" : "max-age=300"
+    } ]
+    }, {
+    "source" : "humans.txt",
+    "headers" : [ {
+      "key" : "Cache-Control",
+      "value" : "max-age=300"
+    } ]
+    }, {
+    "source" : "index.html",
+    "headers" : [ {
+      "key" : "Cache-Control",
+      "value" : "max-age=300"
+    } ]
+    }, {
+    "source" : "robots.txt",
+    "headers" : [ {
+      "key" : "Cache-Control",
+      "value" : "max-age=300"
+    } ]
+  } ]
+}
