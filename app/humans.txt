@@ -1,0 +1,23 @@
+# humanstxt.org
+# The humans responsible & technology colophon
+
+# TEAM
+
+Company:
+Developer:
+Site:
+From:
+
+# THANKS
+
+Names:       Google, GitHub, Firebase
+
+# SITE
+
+Boilerplate: Polymer Starter Kit Plus
+Design:      Material Design
+Doctype:     HTML5
+Language:
+Library:     Polymer
+Standards:   HTML5, CSS3, Web Components
+Tools:       Autoprefixer, Browsersync, Gulp, PageSpeed Insights, Sass

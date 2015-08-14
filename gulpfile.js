@@ -316,6 +316,7 @@ gulp.task('default', ['clean'], function (cb) {
 gulp.task('revision', function () {
   var revAll = new $.revAll({ dontRenameFile: [
     /^\/404.html/g,
+    /^\/humans.txt/g,
     /^\/index.html/g,
     /^\/robots.txt/g,
     /^\/sw-toolbox\/sw-toolbox.js/g
