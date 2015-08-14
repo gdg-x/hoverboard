@@ -9,9 +9,15 @@
       app.route = 'home';
     });
 
-    page('/about', function () {
-      app.route = 'about';
+    page('/blog', function () {
+      app.route = 'blog';
     });
+
+    page('/blog/:title', function (data) {
+      app.route = 'blog';
+      app.params = data.params;
+    });
+
 
     page('/contact', function () {
       app.route = 'contact';

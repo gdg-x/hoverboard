@@ -6,35 +6,58 @@
             display: block;
         }
 
-        .card {
-            position: relative;
+        .title {
+            color: var(--default-primary-color);
+        }
+
+        .medium {
+            font-size: 24px;
+            padding-bottom: 4px;
+        }
+
+        .small {
+            font-size: 16px;
+        }
+
+        .brief {
+            padding: 0 16px;
         }
 
         .card-wrapper {
-            margin-bottom: 30px;
-            padding: 0 15px;
-            width: 33.33%;
+            padding-bottom: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .card-wrapper {
+                padding: 0 15px 30px;
+                width: calc(100% / 3);
+            }
         }
     </style>
     <template>
         <iron-ajax auto url="../../settings/blog.json" handle-as="json" on-response="postsLoaded" debounce-duration="300"></iron-ajax>
-        <div class="container flex layout horizontal-reverse center-justified wrap">
+        <div id="posts" class="container flex layout horizontal-reverse center-justified wrap">
             <template is="dom-repeat" items="{{posts}}">
                 <div class="card-wrapper">
-                    <div class="card">
+                    <paper-card>
                         <div class="card-content">
-                            <h1>{{item.title}}</h1>
+                            <div class="title">
+                                <div class="medium">{{item.title}}</div>
+                                <div class="small">subtitle</div>
+                            </div>
+                        </div>
+                        <div class="card-content brief">
                             <marked-element markdown="{{item.brief}}"></marked-element>
                         </div>
-                        <div class="card-content">
-                            <paper-button on-tap="openPost(item)">Read more</paper-button>
+                        <div class="card-actions">
+                            <paper-button on-tap="readMore">Read more</paper-button>
                         </div>
-                    </div>
+                    </paper-card>
                 </div>
             </template>
-            <template is="dom-if" if="{{postSelected}}">
-                <blog-post entry-animation="scale-up-animation" exit-animation="fade-out-animation" post-meta="{{selectedPost}}"></blog-post>
-            </template>
+        </div>
+        <div class="container">
+            <blog-post id="post" class="flex" meta="{{selectedPost}}" closing={{closing}}></blog-post>
         </div>
     </template>
 </dom-module>
@@ -42,12 +65,110 @@
 <script>
     Polymer({
         is: 'blog-block',
+        behaviors: [
+            Polymer.NeonAnimatableBehavior,
+            Polymer.NeonAnimationRunnerBehavior
+        ],
+        properties: {
+            closing: {
+                type: Boolean,
+                observer: '_closingChanged'
+            },
+            animationConfig: {
+                value: function() {
+                    return {
+                        'loadPosts': {
+                            name: 'cascaded-animation',
+                            animation: 'transform-animation',
+                            transformFrom: 'translateY(100%)',
+                            transformTo: 'none',
+                            nodedelay: 500,
+                            timing: {
+                                duration: 2000
+                            }
+                        },
+                        'openPost': [{
+                            animatable: this.$.post,
+                            type: 'entry'
+                        }, {
+                            name: 'cascaded-animation',
+                            animation: 'transform-animation',
+                            transformFrom: 'none',
+                            transformTo: 'translateY(100vh)',
+                            nodedelay: 500,
+                            timing: {
+                                duration: 1000
+                            }
+                        }],
+                        'closePost': [{
+                            animatable: this.$.post,
+                            type: 'exit'
+                        }]
+                    }
+                }
+            }
+        },
+        listeners: {
+            'neon-animation-finish': '_onNeonAnimationFinish'
+        },
         postsLoaded: function(event, response) {
             this.posts = response.response;
+            if (app.params.title) {
+                var post = this.findByTitile(this.posts, app.params.title);
+                if (post !== undefined && post !== null) {
+                  var nodeList = Polymer.dom(this.root).querySelectorAll('.card-wrapper');
+                  this.animationConfig['loadPosts'].nodes = Array.prototype.slice.call(nodeList);
+                  this.animationConfig['openPost'][1].nodes = Array.prototype.slice.call(nodeList);
+                    this.openPost(post);
+                } else {
+                    this.async(function() {
+                      var nodeList = Polymer.dom(this.root).querySelectorAll('.card-wrapper');
+                      this.animationConfig['loadPosts'].nodes = Array.prototype.slice.call(nodeList);
+                      this.animationConfig['openPost'][1].nodes = Array.prototype.slice.call(nodeList);
+                        this.playAnimation('loadPosts');
+                    });
+                }
+            } else {
+                this.async(function() {
+                    this.playAnimation('loadPosts');
+                });
+            }
+        },
+        readMore: function(event) {
+            this.openPost(event.model.item);
         },
         openPost: function(post) {
             this.selectedPost = post;
             this.postSelected = true;
+            this.cancelAnimation();
+            this.playAnimation('openPost');
+        },
+        closePost: function(event) {
+            this.playAnimation('closePost');
+            this.playAnimation('loadPosts');
+        },
+        _onNeonAnimationFinish: function() {
+            if (this.postSelected) {
+                this.$.posts.style.display = 'none';
+            }
+            if (this.closing) {
+                this.$.posts.style.display = 'flex';
+                this.$.post.style.position = 'absolute';
+                this.playAnimation('openPost');
+                this.postSelected = false;
+                this.closing = false;
+            }
+        },
+        _closingChanged: function() {
+            this.cancelAnimation();
+            this.playAnimation('closePost');
+        },
+        findByTitile: function(array, title) {
+            for (var i = 0; i < array.length; i++) {
+                if (array[i].titleUrl == title) {
+                    return array[i];
+                }
+            }
         }
     });
 </script>

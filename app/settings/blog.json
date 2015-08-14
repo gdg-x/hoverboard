@@ -2,24 +2,28 @@
   {
     "id": 1,
     "title": "Call for Papers",
+    "titleUrl": "call-for-papers",
     "file": "2014-07-21-call-for-papers.markdown",
     "brief": "GDG DevFest Ukraine 2014 will be held 24-25th of October in ancient city of Lviv. If you want to be part of this great event as a speaker you knocked at the good door."
   },
   {
     "id": 2,
     "title": "Hello World!",
+    "titleUrl": "hello-world",
     "file": "2014-07-21-hello-world.markdown",
     "brief": "We're very excited - not just because of the inordinate amount of caffeine based products consumed - but also because our team are putting together the final missing parts to the biggest Google related event in Ukraine - <a href='http://devfest.gdg.org.ua'>GDG DevFest 2015</a>."
   },
   {
     "id": 3,
     "title": "Diamond Sponsor: ELEKS - striving for excellence",
+    "titleUrl": "diamond-sponsor-eleks",
     "file": "2014-09-19-diamond-sponsor-eleks.markdown",
     "brief": "From morning alarm clocks on our mobiles to evening movie sessions on our PCs – this is how  far technology has spread into our lives. Tons of gadgets, apps and other software have become our trivia. Not only we use them - we make them."
   },
   {
     "id": 4,
     "title": "Meet our Hackathon Sponsor Lohika",
+    "titleUrl": "meet-hackathon-sponsor-lohika",
     "file": "2014-10-08-meet-hackathon-sponsor-lohika.markdown",
     "brief": "Lohika provides high-quality services of software development for the world’s largest technology companies, as well as those, who are looking for custom innovative solutions in IT. Our Head office is located in San Bruno, California, in the heart of Silicon Valley."
   }

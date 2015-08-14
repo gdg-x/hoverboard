@@ -11,12 +11,10 @@ h1, h2, h3, h4 {
     margin: 0;
     font-weight: 100;
 }
-a, .anchor-like {
-    color: #008094;
-    font-weight: 500;
+a {
     text-decoration: none;
-    cursor: pointer;
 }
+
 .post-link {
     color: #ffffff;
     font-weight: 100;
@@ -131,9 +129,6 @@ a, .anchor-like {
 .card .bottom-link {
     font-size: .7em;
 }
-.card-content {
-    padding: 24px 16px;
-}
 .card-container {
     padding: 0;
 }
@@ -149,27 +144,6 @@ a, .anchor-like {
     position: relative;
     z-index: 1;
     box-shadow: 0 1px 5px 2px rgba(0, 0, 0, .25);
-}
-@media (min-width: 768px) {
-    .card {
-        position: absolute;
-        font-size: 22px;
-        border-radius: 3px;
-        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.23);
-        z-index: 1;
-    }
-    .card:not(:last-child) {
-        margin-right: 32px;
-    }
-    .card-content {
-        padding: 32px;
-        border-bottom: 1px solid #eee;
-    }
-}
-@media (min-width: 945px) {
-    .card-content {
-        padding: 32px 40px;
-    }
 }
 .align-pb-block {
     margin-left: -9px;

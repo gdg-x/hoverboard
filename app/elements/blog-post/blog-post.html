@@ -1,16 +1,45 @@
 <dom-module id="blog-post">
     <style>
         :host {
-            display: block;
+            display: none;
+            position: absolute;
+        }
+
+        paper-card {
+            width: 80%;
+            /*margin-top: -150px;*/
+            z-index: 1;
+        }
+
+        .paper-card-container {
+            padding: 50px 40px;
+        }
+
+        .title {
+            color: var(--default-primary-color);
+        }
+
+        .big {
+            font-size: 42px;
+            padding-bottom: 4px;
         }
     </style>
     <template>
-        <iron-ajax auto url="{{postUrl}}" handle-as="json" on-response="postLoaded" debounce-duration="300"></iron-ajax>
-        <div class="container card">
-            <div class="card-content">
-                <h1>{{postMeta.title}}</h1>
-                <marked-element markdown="{{post}}"></marked-element>
-            </div>
+        <iron-ajax id="ajax" url="{{postUrl}}" handle-as="text" on-response="postLoaded"></iron-ajax>
+        <div class="relative layout horizontal center-justified">
+            <paper-card>
+                <div class="paper-card-container">
+                    <paper-icon-button icon="icons:arrow-back" on-tap="closePost"></paper-icon-button>
+                    <div class="card-content">
+                        <div class="title">
+                            <div class="big">{{meta.title}}</div>
+                        </div>
+                    </div>
+                    <div class="card-content brief">
+                        <marked-element markdown="{{post}}"></marked-element>
+                    </div>
+                </div>
+            </paper-card>
         </div>
     </template>
 </dom-module>
@@ -18,16 +47,54 @@
 <script>
     Polymer({
         is: 'blog-post',
+        behaviors: [
+            Polymer.NeonSharedElementAnimatableBehavior
+        ],
         properties: {
-            postMeta: {
-                type: Object
+            meta: {
+                type: Object,
+                observer: '_metaChanged'
+            },
+            animationConfig: {
+                value: function() {
+                    return {
+                        'entry': {
+                            name: 'transform-animation',
+                            node: this,
+                            transformFrom: 'translateY(100vh)',
+                            transformTo: 'none',
+                            timing: {
+                                duration: 1000
+                            }
+                        },
+                        'exit': {
+                            name: 'transform-animation',
+                            node: this,
+                            transformFrom: 'none',
+                            transformTo: 'translateY(100vh)',
+                            timing: {
+                                duration: 1000
+                            }
+                        }
+                    }
+                }
+            },
+            closing: {
+                type: Boolean,
+                notify: true
             }
         },
-        ready: function() {
-            this.postUrls = '../../posts/' + this.postMeta.file;
+        _metaChanged: function() {
+            this.postUrl = '../../posts/' + this.meta.file;
+            this.style.display = 'block';
+            this.$.ajax.generateRequest();
         },
         postLoaded: function(event, response) {
             this.post = response.response;
+            this.style.position = 'relative';
+        },
+        closePost: function() {
+            this.closing = true;
         }
     });
 </script>
