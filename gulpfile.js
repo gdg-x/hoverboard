@@ -315,6 +315,7 @@ gulp.task('default', ['clean'], function (cb) {
 // Static asset revisioning by appending content hash to filenames
 gulp.task('revision', function () {
   var revAll = new $.revAll({ dontRenameFile: [
+    /^\/404.html/g,
     /^\/index.html/g,
     /^\/robots.txt/g,
     /^\/sw-toolbox\/sw-toolbox.js/g
