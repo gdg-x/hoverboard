@@ -188,6 +188,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                           clients-claim
                           skip-waiting
                           on-service-worker-installed="displayInstalledToast">
+      <platinum-sw-offline-analytics></platinum-sw-offline-analytics>
       <platinum-sw-cache default-cache-strategy="fastest"
                          cache-config-file="cache-config.json">
       </platinum-sw-cache>
@@ -198,6 +199,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>
   <!-- endbuild-->
+  
+  <google-analytics code="UA-XXXXX-Y"></google-analytics>
 </body>
 
 </html>
