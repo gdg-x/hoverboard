@@ -318,9 +318,9 @@ gulp.task('revision', function () {
     /^\/404.html/g,
     /^\/humans.txt/g,
     /^\/index.html/g,
-    /^\/robots.txt/g,
-    /^\/sw-toolbox\/sw-toolbox.js/g
+    /^\/robots.txt/g
   ], dontUpdateReference: [
+    // Don't rename index.html in cache-config.json
     /^\/index.html/g
   ]});
   gulp.src('dist/**')
