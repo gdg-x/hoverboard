@@ -1,6 +1,10 @@
 {
-  "firebase": "app-name",
+  "firebase": "polymer-starter-kit-plus",
   "public": "cdn",
+  "rewrites": [ {
+    "source": "**",
+    "destination": "/index.html"
+  } ],
   "headers": [ {
     "source" : "**/*.@(css|html|js|json|txt)",
     "headers" : [ {
