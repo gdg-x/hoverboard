@@ -42,10 +42,6 @@ module.exports = {
       productionIndex: '3600' // for index.html
     }
   },
-  // Google Analytics code
-  googleAnalytics: {
-    code: 'UA-XXXXX-Y'
-  },
   // PageSpeed Insights
   // Please feel free to use the `nokey` option to try out PageSpeed
   // Insights as part of your build process. For more frequent use,

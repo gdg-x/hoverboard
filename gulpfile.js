@@ -240,14 +240,6 @@ gulp.task('minify-dist', function () {
     .pipe(gulp.dest('dist'));
 });
 
-// Replace text in dist directory
-gulp.task('replace-dist', function () {
-  gulp.src(['dist/index.html'])
-    // Replace Google Analytics code
-    .pipe($.replace('UA-XXXXX-Y', config.googleAnalytics.code))
-    .pipe(gulp.dest('dist'));
-});
-
 // Watch Files For Changes & Reload
 gulp.task('serve', ['styles', 'elements', 'images'], function () {
   browserSync({
@@ -315,7 +307,7 @@ gulp.task('default', ['clean'], function (cb) {
     'elements',
     ['jshint', 'images', 'fonts', 'html'],
     'vulcanize',
-    ['clean-dist', 'minify-dist', 'replace-dist'],
+    ['clean-dist', 'minify-dist'],
     'cache-config',
     cb);
 });
