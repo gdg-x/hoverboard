@@ -309,6 +309,7 @@ gulp.task('default', ['clean'], function (cb) {
     'vulcanize',
     ['clean-dist', 'minify-dist'],
     'cache-config',
+    'revision',
     cb);
 });
 
@@ -323,9 +324,10 @@ gulp.task('revision', function () {
     // Don't rename index.html in cache-config.json
     /^\/index.html/g
   ]});
-  gulp.src('dist/**')
+  return gulp.src('dist/**')
     .pipe(revAll.revision())
-    .pipe(gulp.dest('cdn'));
+    .pipe(gulp.dest('cdn'))
+    .pipe($.size({title: 'cdn'}));
 });
 
 // Deploy to Google Cloud Storage
