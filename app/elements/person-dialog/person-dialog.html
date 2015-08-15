@@ -1,0 +1,140 @@
+<dom-module id="person-dialog">
+    <template>
+        <style>
+            :host {
+                display: none;
+                position: absolute;
+            }
+
+            .back-button {
+                margin-bottom: 25px;
+            }
+
+            paper-card {
+                width: 80%;
+                z-index: 1;
+            }
+
+            .paper-card-container {
+                padding: 50px 40px;
+            }
+
+            @media (max-width: 767px) {
+                .people-header {
+                    height: 256px;
+                }
+            }
+
+            .people-image-overlay {
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 4%, rgba(0, 0, 0, 0) 50%);
+            }
+
+            .person-img {
+                height: 70px;
+                width: 70px;
+            }
+
+            .title {
+                font-size: 14px;
+                padding-bottom: 4px;
+                font-weight: 300;
+                color: var(--default-primary-color);
+            }
+
+            @media (max-width: 767px) {
+                .people-name {
+                    color: #fff;
+                    padding: 16px;
+                    position: absolute;
+                    bottom: 0px;
+                    font-size: 24px;
+                    font-weight: 300;
+                }
+            }
+
+            .person-detail {
+                margin-left: 15px;
+            }
+
+            .person-detail .name {
+                font-size: 18px;
+                margin: 0 0 5px;
+            }
+
+            .badge {
+                color: var(--secondary-text-color);
+                font-size: 14px;
+            }
+        </style>
+        <div class="relative layout horizontal center-justified">
+            <paper-card>
+                <div class="paper-card-container">
+                    <div class="people-header relative visible-xs">
+                        <paper-button class="footer-backtotop" on-tap="closePeople">
+                            <iron-icon icon="icons:arrow-back"></iron-icon> Back
+                        </paper-button>
+                        <iron-image src="[[person.photoUrl]]" class="placeholder-color fit" preload fade sizing="cover"></iron-image>
+                        <div class="people-image-overlay fit"></div>
+                        <span class="people-name relative">[[person.name]]</span>
+                    </div>
+                    <div class="card-content layout vertical hidden-xs">
+                        <paper-button class="back-button self-start" on-tap="closePeople">
+                            <iron-icon icon="icons:arrow-back"></iron-icon> Back
+                        </paper-button>
+                        <div class="layout horizontal">
+                            <iron-image src="[[person.photoUrl]]" class="person-img placeholder-color img-circle" preload fade sizing="cover"></iron-image>
+                            <div class="person-detail flex layout vertical center-center">
+                                <p class="name self-start">[[person.name]]</p>
+                                <div class="title self-start">
+                                    <span>[[person.title]]</span>,
+                                    <span>[[person.company]]</span>
+                                </div>
+                            </div>
+                            <div class="flex layout vertical center-center">
+                                <template is="dom-repeat" items="[[person.badges]]" as="badge">
+                                    <a class="badge block self-end" href="[[badge.link]]" target="_blank">[[badge.description]]</a>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content people-description">
+                        <marked-element markdown="[[person.bio]]"></marked-element>
+                    </div>
+                    <div class="card-actions">
+                        <template is="dom-repeat" items="[[person.socials]]" as="social">
+                            <a href="[[social.link]]" target="_blank">
+                                <!-- <paper-icon-button icon="[[social.icon]]"></paper-icon-button>  -->
+                                <paper-button>[[social.name]]</paper-button>
+                            </a>
+                        </template>
+                    </div>
+                </div>
+            </paper-card>
+        </div>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: 'person-dialog',
+        properties: {
+            person: Object,
+            closing: {
+                type: Boolean,
+                notify: true
+            }
+        },
+        closePeople: function() {
+            this.closing = true;
+        },
+        _calculateIcon: function(event) {
+            console.log(event);
+            return 'app-icons:' + event.model.social.name;
+        },
+        calculateIcon: function(event) {
+            console.log(event);
+            return 'app-icons:' + event.model.social.name;
+        }
+
+    });
+</script>

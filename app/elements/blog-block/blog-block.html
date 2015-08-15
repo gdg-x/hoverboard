@@ -1,58 +1,64 @@
 <link rel="import" href="../blog-post/blog-post.html">
 
 <dom-module id="blog-block">
-    <style>
-        :host {
-            display: block;
-        }
-
-        .title {
-            color: var(--default-primary-color);
-        }
-
-        .medium {
-            font-size: 24px;
-            padding-bottom: 4px;
-        }
-
-        .small {
-            font-size: 16px;
-        }
-
-        .brief {
-            padding: 0 16px;
-        }
-
-        .card-wrapper {
-            padding-bottom: 30px;
-        }
-
-        @media (min-width: 768px) {
-            .card-wrapper {
-                padding: 0 15px 30px;
-                width: calc(100% / 3);
-            }
-        }
-    </style>
     <template>
-        <iron-ajax auto url="../../settings/blog.json" handle-as="json" on-response="postsLoaded" debounce-duration="300"></iron-ajax>
+        <style>
+            :host {
+                display: block;
+            }
+
+            .card-content {
+                padding: 16px;
+            }
+
+            .card-actions {
+              border-top: 1px solid #e8e8e8;
+              padding: 5px 16px;
+              position: relative;
+            }
+
+            .card-wrapper {
+                background: #fff;
+                margin-bottom: 30px;
+            }
+
+            .title {
+                color: var(--default-primary-color);
+                font-size: 24px;
+                line-height: 1.2
+            }
+            .posted {
+                font-size: 14px;
+                color: var(--secondary-text-color);
+            }
+
+            .brief {
+                padding: 0 16px;
+            }
+
+            @media (min-width: 768px) {
+                .card-wrapper {
+                    margin: 0 15px 30px;
+                    width: calc(100% / 3);
+                }
+            }
+        </style>
+        <iron-ajax auto url="[[source]]" handle-as="json" on-response="postsLoaded"></iron-ajax>
         <div id="posts" class="container flex layout horizontal-reverse center-justified wrap">
-            <template is="dom-repeat" items="{{posts}}">
-                <div class="card-wrapper">
-                    <paper-card>
+            <template is="dom-repeat" items="[[posts]]" as="post">
+                <div class="card-wrapper layout horizontal">
+                    <paper-material class="layout vertical">
                         <div class="card-content">
-                            <div class="title">
-                                <div class="medium">{{item.title}}</div>
-                                <div class="small">subtitle</div>
-                            </div>
+                                <span class="title block">[[post.title]]</span>
+                                <span class="posted">Posted <span>[[post.posted]]</span></span>
                         </div>
-                        <div class="card-content brief">
-                            <marked-element markdown="{{item.brief}}"></marked-element>
+                        <div class="brief card-content flex">
+                            <marked-element markdown="[[post.brief]]"></marked-element>
                         </div>
                         <div class="card-actions">
                             <paper-button on-tap="readMore">Read more</paper-button>
                         </div>
-                    </paper-card>
+                    </paper-material>
                 </div>
             </template>
         </div>
@@ -70,6 +76,7 @@
             Polymer.NeonAnimationRunnerBehavior
         ],
         properties: {
+            source: String,
             closing: {
                 type: Boolean,
                 observer: '_closingChanged'
@@ -113,29 +120,31 @@
         },
         postsLoaded: function(event, response) {
             this.posts = response.response;
-            if (app.params.title) {
-                var post = this.findByTitile(this.posts, app.params.title);
-                if (post !== undefined && post !== null) {
-                  var nodeList = Polymer.dom(this.root).querySelectorAll('.card-wrapper');
-                  this.animationConfig['loadPosts'].nodes = Array.prototype.slice.call(nodeList);
-                  this.animationConfig['openPost'][1].nodes = Array.prototype.slice.call(nodeList);
-                    this.openPost(post);
-                } else {
-                    this.async(function() {
-                      var nodeList = Polymer.dom(this.root).querySelectorAll('.card-wrapper');
-                      this.animationConfig['loadPosts'].nodes = Array.prototype.slice.call(nodeList);
-                      this.animationConfig['openPost'][1].nodes = Array.prototype.slice.call(nodeList);
-                        this.playAnimation('loadPosts');
-                    });
+            this.async(function() {
+                var nodeList = Polymer.dom(this.root).querySelectorAll('.card-wrapper');
+                this.animationConfig['loadPosts'].nodes = Array.prototype.slice.call(nodeList);
+                this.animationConfig['openPost'][1].nodes = Array.prototype.slice.call(nodeList);
+                if (!this.checkUrlParams()) {
+                    this.playLoadAnimation();
                 }
-            } else {
-                this.async(function() {
-                    this.playAnimation('loadPosts');
-                });
+            });
+        },
+        checkUrlParams: function() {
+            if (app.params && app.params.id) {
+                var post = app.findByPropertyValue(this.posts, 'titleUrl', app.params.title);
+                if (post !== undefined && post !== null) {
+                    this.openPost(post);
+                    return true;
+                }
             }
         },
+        playLoadAnimation: function() {
+            this.cancelAnimation();
+            this.playAnimation('loadPosts');
+        },
         readMore: function(event) {
-            this.openPost(event.model.item);
+            page.redirect('/blog/' + event.model.post.titleUrl);
+            this.openPost(event.model.post);
         },
         openPost: function(post) {
             this.selectedPost = post;
@@ -144,8 +153,9 @@
             this.playAnimation('openPost');
         },
         closePost: function(event) {
+            page.redirect('/blog');
+            this.cancelAnimation();
             this.playAnimation('closePost');
-            this.playAnimation('loadPosts');
         },
         _onNeonAnimationFinish: function() {
             if (this.postSelected) {
@@ -154,14 +164,13 @@
             if (this.closing) {
                 this.$.posts.style.display = 'flex';
                 this.$.post.style.position = 'absolute';
-                this.playAnimation('openPost');
+                this.playAnimation('loadPosts');
                 this.postSelected = false;
                 this.closing = false;
             }
         },
         _closingChanged: function() {
-            this.cancelAnimation();
-            this.playAnimation('closePost');
+            this.closePost();
         },
         findByTitile: function(array, title) {
             for (var i = 0; i < array.length; i++) {

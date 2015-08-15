@@ -104,10 +104,9 @@
         <div class="container footer layout vertical">
             <div class="footer-content layout horizontal justified">
                 <g:plusone size="medium" width="300" annotation="inline" href="http://devfest.gdg.org.ua/"></g:plusone>
-                <paper-button class="footer-backtotop">
-                    <a href="#navbar">Back
+                <paper-button class="footer-backtotop" on-tap="backToTop">
+                    Back
                           <iron-icon icon="icons:expand-less"></iron-icon>
-                    </a>
                 </paper-button>
             </div>
             <div class="footer-content footer-links-container">
@@ -177,6 +176,10 @@
         ready: function() {
             this.url = "http://gdg.us5.list-manage.com/subscribe/post?u=9fc8aa205b0521b5f05fc8e1e&amp;id=c749ee6609";
             this.name = "b_9fc8aa205b0521b5f05fc8e1e_c749ee6609";
+        },
+        backToTop: function() {
+            var hero = document.querySelector('#hero');
+            app.smoothScroll(hero, 1500);
         }
     });
 </script>

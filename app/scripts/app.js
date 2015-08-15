@@ -8,34 +8,88 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 */
 
 (function(document) {
-  'use strict';
+    'use strict';
 
-  // Grab a reference to our auto-binding template
-  // and give it some initial binding values
-  // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
-  var app = document.querySelector('#app');
+    // Grab a reference to our auto-binding template
+    // and give it some initial binding values
+    // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
+    var app = document.querySelector('#app');
 
-  app.displayInstalledToast = function() {
-    document.querySelector('#caching-complete').show();
-  };
+    app.displayInstalledToast = function() {
+        document.querySelector('#caching-complete').show();
+    };
 
-  // Listen for template bound event to know when bindings
-  // have resolved and content has been stamped to the page
-  app.addEventListener('dom-change', function() {
-    console.log('Our app is ready to rock!');
-  });
+    // Listen for template bound event to know when bindings
+    // have resolved and content has been stamped to the page
+    app.addEventListener('dom-change', function() {
+        console.log('Hello, folks! It is Hoverboard by GDG Lviv. Contact Oleh Zasadnyy for more details.');
+    });
 
-  // See https://github.com/Polymer/polymer/issues/1381
-  window.addEventListener('WebComponentsReady', function() {
-    // imports are loaded and elements have been registered
-  });
+    // See https://github.com/Polymer/polymer/issues/1381
+    window.addEventListener('WebComponentsReady', function() {
+        // imports are loaded and elements have been registered
+    });
 
-  // Close drawer after menu item is selected if drawerPanel is narrow
-  app.onMenuSelect = function() {
-    var drawerPanel = document.querySelector('#paperDrawerPanel');
-    if (drawerPanel.narrow) {
-      drawerPanel.closeDrawer();
+    // Close drawer after menu item is selected if drawerPanel is narrow
+    app.onMenuSelect = function() {
+        var drawerPanel = document.querySelector('#paperDrawerPanel');
+        if (drawerPanel.narrow) {
+            drawerPanel.closeDrawer();
+        }
+    };
+
+    app.findByPropertyValue = function(array, property, value) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i][property] == value) {
+                return array[i];
+            }
+        }
+    };
+
+    app.smoothScroll = function(el, optDuration, optCallback) {
+        var duration = optDuration || 1;
+
+        var scrollContainer = document.querySelector('paper-drawer-panel [main]');
+
+        var startTime = performance.now();
+        var endTime = startTime + duration;
+        var startTop = scrollContainer.scrollTop;
+        var destY = el.getBoundingClientRect().top;
+
+        if (destY === 0) {
+            if (optCallback) {
+                optCallback();
+            }
+            return; // already at top of element.
+        }
+
+        var callback = function(timestamp) {
+            if (timestamp < endTime) {
+                requestAnimationFrame(callback);
+            }
+
+            var point = smoothStep(startTime, endTime, timestamp);
+            var scrollTop = Math.round(startTop + (destY * point));
+
+            scrollContainer.scrollTop = scrollTop;
+
+            // All done scrolling.
+            if (point === 1 && optCallback) {
+                optCallback();
+            }
+        };
+        callback(startTime);
+    };
+
+    function smoothStep(start, end, point) {
+        if (point <= start) {
+            return 0;
+        }
+        if (point >= end) {
+            return 1;
+        }
+        var x = (point - start) / (end - start); // interpolation
+        return x * x * (3 - 2 * x);
     }
-  };
 
 })(document);

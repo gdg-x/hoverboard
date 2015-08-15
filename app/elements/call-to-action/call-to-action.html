@@ -1,29 +1,36 @@
 <dom-module id="call-to-action">
-    <style>
-        :host {
-            display: block;
-            background: var(--default-primary-color);
-        }
-        ::content .text,
-        ::content .border-button-link {
-          text-transform: uppercase;
-          letter-spacing: .1em;
-          color: #fff;
-          font-size: 24px;
-          font-weight: 100;
-        }
-        .call-to-action ::content .heading {
-          margin-bottom: 0;
-        }
-        ::content .border-button-link {
-          padding: 8px 12px;
-          border: 1px solid #fff;
-          font-size: 18px;
-        }
-    </style>
     <template>
+        <style>
+            :host {
+                display: block;
+                background: var(--default-primary-color);
+            }
+
+            ::content .text,
+            ::content .border-button-link {
+                text-transform: uppercase;
+                letter-spacing: .1em;
+                color: #fff;
+                font-size: 24px;
+                font-weight: 100;
+            }
+
+            .call-to-action::content .border-button-link {
+                color: #fff;
+            }
+
+            .call-to-action::content .heading {
+                margin-bottom: 0;
+            }
+
+            ::content .border-button-link {
+                padding: 8px 12px;
+                border: 1px solid #fff;
+                font-size: 18px;
+            }
+        </style>
         <div class="container container-narrow flex relative layout horizontal center-center">
-          <content></content>
+            <content></content>
         </div>
     </template>
 </dom-module>

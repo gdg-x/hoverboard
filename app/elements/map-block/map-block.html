@@ -1,41 +1,51 @@
 <dom-module id="map-block">
-    <style>
-        :host {
-            display: block;
-            padding: 100px 0;
-            position: relative;
-            overflow: hidden;
-            min-height: 350px;
-        }
-
-        @media (min-width: 768px) {
-            .card-container {
-                padding: 0;
-            }
-            .card-container h5 {
-                margin-top: 0;
-            }
-        }
-    </style>
     <template>
+        <style>
+            :host {
+                display: block;
+                padding: 100px 0;
+                position: relative;
+                overflow: hidden;
+                min-height: 300px;
+            }
+
+            h4 {
+                font-size: 32px;
+            }
+
+            @media (min-width: 768px) {
+                .card-container {
+                    padding: 0;
+                }
+                .card-container h5 {
+                    margin-top: 0;
+                }
+            }
+        </style>
         <google-map class="fit" zoom="15" latitude="49.809841" longitude="23.982805" styles="[[options]]" disable-zoom disable-default-ui>
             <google-map-marker latitude="49.809841" longitude="23.972805"></google-map-marker>
         </google-map>
-        <div class="container card-container relative layout horizontal">
-            <div class="flex"></div>
-            <div class="flex">
-                <div class="card relative">
-                    <div class="card-content">
-                        <h5>Location</h5>
-                        <span>Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event. With convenient geographical position, well-planned infrastructure and modern equipment, expocentre will
-                            provide the nicest atmosphere for knowledge exchange and networking.</span>
+        <div class="container card-container relative layout horizontal center-center">
+            <div class="flex-3"></div>
+            <div class="flex-2">
+                <paper-card>
+                    <div class="paper-card-container">
+                        <div class="card-content">
+                            <div class="title">
+                                <h4>Location</h4>
+                            </div>
+                            <p>Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event. With convenient geographical position, well-planned infrastructure and modern equipment, expocentre
+                                will provide the nicest atmosphere for knowledge exchange and networking.</p>
+                        </div>
+                        <div class="card-actions">
+                            <a class="bottom-link" href="https://www.google.com/maps/dir//49.8097687,23.9727791/@49.8099885,23.9727469,18z" target="_blank">
+                                <paper-button on-tap="readMore">Get directions</paper-button>
+                            </a </div>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <a class="bottom-link" href="https://www.google.com/maps/dir//49.8097687,23.9727791/@49.8099885,23.9727469,18z" target="_blank">Get directions</a>
-                    </div>
-                </div>
+                </paper-card>
             </div>
-        </div>
+            <div class="flex"></div>
     </template>
 </dom-module>
 

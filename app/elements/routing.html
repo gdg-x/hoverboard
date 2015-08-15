@@ -18,6 +18,15 @@
       app.params = data.params;
     });
 
+    page('/speakers', function () {
+      app.route = 'speakers';
+    });
+
+    page('/speakers/:id', function (data) {
+      app.route = 'speakers';
+      app.params = data.params;
+    });
+
 
     page('/contact', function () {
       app.route = 'contact';

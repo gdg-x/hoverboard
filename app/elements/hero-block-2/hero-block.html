@@ -1,87 +1,87 @@
 <dom-module id="hero-block">
-    <style>
-        :host {
-            display: block;
-            --paper-toolbar-background: transparent;
-            --paper-tab-ink: rgba(255, 255, 255, 0.2);
-            --paper-toolbar-color: inherit;
-            color: #4E4E4E;
-        }
-
-        .nav-link {
-            color: inherit;
-        }
-
-        .logo {
-            margin-top: 7px;
-            height: 40px;
-        }
-
-        .container {
-            padding-top: 0;
-            padding-bottom: 20px;
-        }
-
-        ::content .hero {
-            padding-bottom: 20px;
-        }
-
-        ::content .top-section {
-            padding-top: 20px;
-            font-size: 20px;
-        }
-
-        ::content .title-wrapper {
-          min-height: 150px;
-        }
-
-        ::content h3 {
-            font-size: 2.1em;
-        }
-
-        ::content .logo {
-            height: 100px;
-        }
-
-        ::content .slogan,
-        ::content .dates {
-            margin-top: 20px;
-            font-size: 17px;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: .09em;
-            line-height: 1;
-        }
-
-        ::content .description {
-            margin-top: 20px;
-        }
-
-        ::content .links {
-            margin: 40px 0 10px;
-        }
-
-        ::content .event-image {
-            width: 100%;
-            height: 100%;
-        }
-
-        ::content .right-section {
-            margin-top: 20px;
-            height: 200px;
-        }
-
-        @media (min-width: 768px) {
-            ::content .hero {
-                padding-top: 40px;
-            }
-            ::content .right-section {
-                height: initial;
-            }
-        }
-    </style>
     <template>
-        <div id="block">
+        <style>
+            :host {
+                display: block;
+                --paper-toolbar-background: transparent;
+                --paper-tab-ink: rgba(255, 255, 255, 0.2);
+                --paper-toolbar-color: inherit;
+                color: #4E4E4E;
+            }
+
+            .nav-link {
+                color: inherit;
+            }
+
+            .logo {
+                margin-top: 7px;
+                height: 40px;
+            }
+
+            .container {
+                padding-top: 0;
+                padding-bottom: 20px;
+            }
+
+            ::content .hero {
+                padding-bottom: 20px;
+            }
+
+            ::content .top-section {
+                padding-top: 20px;
+                font-size: 20px;
+            }
+
+            ::content .title-wrapper {
+                min-height: 150px;
+            }
+
+            ::content h3 {
+                font-size: 2.1em;
+            }
+
+            ::content .logo {
+                height: 100px;
+            }
+
+            ::content .slogan,
+            ::content .dates {
+                margin-top: 20px;
+                font-size: 17px;
+                font-weight: 400;
+                text-transform: uppercase;
+                letter-spacing: .09em;
+                line-height: 1;
+            }
+
+            ::content .description {
+                margin-top: 20px;
+            }
+
+            ::content .links {
+                margin: 40px 0 10px;
+            }
+
+            ::content .event-image {
+                width: 100%;
+                height: 100%;
+            }
+
+            ::content .right-section {
+                margin-top: 20px;
+                height: 200px;
+            }
+
+            @media (min-width: 768px) {
+                ::content .hero {
+                    padding-top: 40px;
+                }
+                ::content .right-section {
+                    height: initial;
+                }
+            }
+        </style>
+        <div id="hero">
             <div class="container flex relative">
                 <paper-toolbar>
                     <paper-icon-button class="visible-xs" icon="menu" on-tap="togglePanel"></paper-icon-button>
@@ -93,6 +93,9 @@
                     <paper-tabs class="hidden-xs" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
                         <paper-tab class="text-u-c">
                             <a data-route="blog" href="/blog" class="nav-link horizontal center-center layout">Blog</a>
+                        </paper-tab>
+                        <paper-tab class="text-u-c">
+                            <a data-route="speakers" href="/speakers" class="nav-link horizontal center-center layout">Speakers</a>
                         </paper-tab>
                         <paper-tab class="text-u-c">
                             <a data-route="contact" href="/contact" class="nav-link horizontal center-center layout">Contact</a>

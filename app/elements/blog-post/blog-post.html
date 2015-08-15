@@ -1,42 +1,44 @@
 <dom-module id="blog-post">
-    <style>
-        :host {
-            display: none;
-            position: absolute;
-        }
-
-        paper-card {
-            width: 80%;
-            /*margin-top: -150px;*/
-            z-index: 1;
-        }
-
-        .paper-card-container {
-            padding: 50px 40px;
-        }
-
-        .title {
-            color: var(--default-primary-color);
-        }
-
-        .big {
-            font-size: 42px;
-            padding-bottom: 4px;
-        }
-    </style>
     <template>
-        <iron-ajax id="ajax" url="{{postUrl}}" handle-as="text" on-response="postLoaded"></iron-ajax>
+        <style>
+            :host {
+                display: none;
+                position: absolute;
+            }
+
+            paper-card {
+                width: 80%;
+                /*margin-top: -150px;*/
+                z-index: 1;
+            }
+
+            .paper-card-container {
+                padding: 50px 40px;
+            }
+
+            .title {
+                color: var(--default-primary-color);
+            }
+
+            .big {
+                font-size: 42px;
+                padding-bottom: 4px;
+            }
+        </style>
+        <iron-ajax id="ajax" url="[[postUrl]]" handle-as="text" on-response="postLoaded"></iron-ajax>
         <div class="relative layout horizontal center-justified">
             <paper-card>
                 <div class="paper-card-container">
-                    <paper-icon-button icon="icons:arrow-back" on-tap="closePost"></paper-icon-button>
+                    <paper-button class="back-button self-start" on-tap="closePost">
+                        <iron-icon icon="icons:arrow-back"></iron-icon> Back
+                    </paper-button>
                     <div class="card-content">
                         <div class="title">
-                            <div class="big">{{meta.title}}</div>
+                            <div class="big">[[meta.title]]</div>
                         </div>
                     </div>
-                    <div class="card-content brief">
-                        <marked-element markdown="{{post}}"></marked-element>
+                    <div class="card-content">
+                        <marked-element markdown="[[post]]"></marked-element>
                     </div>
                 </div>
             </paper-card>

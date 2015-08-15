@@ -14,15 +14,11 @@ h1, h2, h3, h4 {
 a {
     text-decoration: none;
 }
-
-.post-link {
-    color: #ffffff;
-    font-weight: 100;
-    padding-bottom: 1px;
-    font-style: italic;
-}
 .block {
     display: block;
+}
+.text-right {
+    text-align: right;
 }
 .bold {
     font-weight: 400;

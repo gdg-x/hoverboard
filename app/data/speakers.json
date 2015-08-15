@@ -1,0 +1,55 @@
+[{
+    "id": 1,
+    "name": "Rob Dodson",
+    "title": "Polymer team",
+    "company": "Google",
+    "photoUrl": "../../images/people/rob_dodson.jpg",
+    "bio": "GDG DevFest Ukraine 2014 will be held 24-25th of October in ancient city of Lviv. If you want to be part of this great event as a speaker you knocked at the good door."
+}, {
+    "id": 2,
+    "name": "Dawid Ostrowski",
+    "title": "Developer Relations Program Manager",
+    "company": "Google",
+    "photoUrl": "../../images/people/dawid_ostrowski.jpg",
+    "bio": "**GDG DevFest Ukraine 2014** will be held 24-25th of October in ancient city of Lviv. ",
+    "badges": [{
+        "name": "GDE",
+        "description": "Polymer Google Developer Expert",
+        "link": "https://developers.google.com/experts/"
+    }, {
+        "name": "GDG",
+        "description": "Google Developers Group",
+        "link": "https://developers.google.com/experts/"
+    }],
+    "socials": [{
+        "name": "Google Plus",
+        "link": "https://plus.google.com/+DawidOstrowski"
+    }, {
+        "name": "Twitter",
+        "link": "https://plus.google.com/+DawidOstrowski"
+    }, {
+        "name": "Facebook",
+        "link": "https://plus.google.com/+DawidOstrowski"
+    }]
+}, {
+    "id": 3,
+    "name": "Magnus Hyttsten",
+    "title": "Developer Advocate",
+    "company": "Google",
+    "photoUrl": "../../images/people/magnus_hyttsten.jpg",
+    "bio": "GDG DevFest Ukraine 2014 will be held 24-25th of October in ancient city of Lviv. ",
+    "badges": [{
+        "name": "GDE",
+        "link": "https://developers.google.com/experts/"
+    }, {
+        "name": "GDG",
+        "link": "https://developers.google.com/experts/"
+    }]
+}, {
+    "id": 4,
+    "name": "Adriana Cerundolo",
+    "title": "Community Manage",
+    "company": "Google",
+    "photoUrl": "../../images/people/adriana_cerundolo.png",
+    "bio": "GDG DevFest Ukraine 2014 will be held 24-25th of October in ancient city of Lviv. "
+}]
