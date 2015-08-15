@@ -18,7 +18,7 @@
         }
     </style>
     <template>
-        <div class="container relative layout horizontal">
+        <div class="container relative layout vertical-horizontal">
             <iron-ajax auto url="{{json}}" handle-as="json" on-response="feedLoaded" debounce-duration="300" verbose></iron-ajax>
             <div class="flex-5">
                 <h4 class="heading">See what everyone is talking about at <a href="https://www.google.com/#q=%23dfua">#dfua</a></h4>

@@ -51,7 +51,7 @@ a {
     border-radius: 50%;
 }
 .container {
-    padding: 40px 30px;
+    padding: 40px 16px;
     font-size: 18px;
     font-weight: 100;
 }
@@ -129,6 +129,7 @@ a {
     padding: 0;
 }
 .section-fab, .section-fab-right {
+    margin: 0 16px;
     position: absolute;
     transform: translateY(-8px);
     z-index: 1;

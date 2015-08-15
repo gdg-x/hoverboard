@@ -1,0 +1,36 @@
+[{
+    "id": 1,
+    "name": "Rob Dodson",
+    "company": "Google",
+    "photoUrl": "../../images/people/rob_dodson.jpg"
+}, {
+    "id": 2,
+    "name": "Dawid Ostrowski",
+    "company": "Google",
+    "photoUrl": "../../images/people/dawid_ostrowski.jpg"
+}, {
+    "id": 3,
+    "name": "Magnus Hyttsten",
+    "company": "Google",
+    "photoUrl": "../../images/people/magnus_hyttsten.jpg"
+}, {
+    "id": 4,
+    "name": "Adriana Cerundolo",
+    "company": "Google",
+    "photoUrl": "../../images/people/adriana_cerundolo.png"
+}, {
+    "id": 2,
+    "name": "Dawid Ostrowski",
+    "company": "Google",
+    "photoUrl": "../../images/people/dawid_ostrowski.jpg"
+}, {
+    "id": 3,
+    "name": "Magnus Hyttsten",
+    "company": "Google",
+    "photoUrl": "../../images/people/magnus_hyttsten.jpg"
+}, {
+    "id": 4,
+    "name": "Adriana Cerundolo",
+    "company": "Google",
+    "photoUrl": "../../images/people/adriana_cerundolo.png"
+}]

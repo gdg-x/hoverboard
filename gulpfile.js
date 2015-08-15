@@ -130,6 +130,18 @@ gulp.task('assets', function () {
     .pipe($.size({title: 'assets'}));
 });
 
+gulp.task('data', function () {
+  return gulp.src(['app/data/**'])
+    .pipe(gulp.dest('dist/data'))
+    .pipe($.size({title: 'data'}));
+});
+
+gulp.task('posts', function () {
+  return gulp.src(['app/posts/**'])
+    .pipe(gulp.dest('dist/posts'))
+    .pipe($.size({title: 'posts'}));
+});
+
 // Scan Your HTML For Assets & Optimize Them
 gulp.task('html', function () {
   var assets = $.useref.assets({searchPath: ['.tmp', 'app', 'dist']});
@@ -252,7 +264,7 @@ gulp.task('default', ['clean'], function (cb) {
     ['copy', 'styles'],
     'elements',
     ['jshint', 'images', 'fonts', 'html'],
-    'vulcanize', 'precache', '2014', 'assets',
+    'vulcanize', 'precache', '2014', 'assets', 'data', 'posts',
     cb);
 });
 

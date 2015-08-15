@@ -18,11 +18,12 @@
 
             .title {
                 color: var(--default-primary-color);
+                font-size: 42px;
             }
 
-            .big {
-                font-size: 42px;
-                padding-bottom: 4px;
+            .posted {
+                font-size: 14px;
+                color: var(--secondary-text-color);
             }
         </style>
         <iron-ajax id="ajax" url="[[postUrl]]" handle-as="text" on-response="postLoaded"></iron-ajax>
@@ -33,9 +34,8 @@
                         <iron-icon icon="icons:arrow-back"></iron-icon> Back
                     </paper-button>
                     <div class="card-content">
-                        <div class="title">
-                            <div class="big">[[meta.title]]</div>
-                        </div>
+                            <span class="title block">[[meta.title]]</span>
+                            <span class="posted">Posted: <span>[[meta.posted]]</span></span>
                     </div>
                     <div class="card-content">
                         <marked-element markdown="[[post]]"></marked-element>
@@ -78,7 +78,7 @@
                                 duration: 1000
                             }
                         }
-                    }
+                    };
                 }
             },
             closing: {

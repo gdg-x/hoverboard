@@ -40,7 +40,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     app.findByPropertyValue = function(array, property, value) {
         for (var i = 0; i < array.length; i++) {
-            if (array[i][property] == value) {
+            if (array[i][property] === value) {
                 return array[i];
             }
         }
@@ -51,7 +51,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         var scrollContainer = document.querySelector('paper-drawer-panel [main]');
 
-        var startTime = performance.now();
+        var startTime = window.performance.now();
         var endTime = startTime + duration;
         var startTop = scrollContainer.scrollTop;
         var destY = el.getBoundingClientRect().top;

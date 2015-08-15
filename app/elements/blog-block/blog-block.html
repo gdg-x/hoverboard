@@ -111,7 +111,7 @@
                             animatable: this.$.post,
                             type: 'exit'
                         }]
-                    }
+                    };
                 }
             }
         },
@@ -122,15 +122,15 @@
             this.posts = response.response;
             this.async(function() {
                 var nodeList = Polymer.dom(this.root).querySelectorAll('.card-wrapper');
-                this.animationConfig['loadPosts'].nodes = Array.prototype.slice.call(nodeList);
-                this.animationConfig['openPost'][1].nodes = Array.prototype.slice.call(nodeList);
+                this.animationConfig.loadPosts.nodes = Array.prototype.slice.call(nodeList);
+                this.animationConfig.openPost[1].nodes = Array.prototype.slice.call(nodeList);
                 if (!this.checkUrlParams()) {
                     this.playLoadAnimation();
                 }
             });
         },
         checkUrlParams: function() {
-            if (app.params && app.params.id) {
+            if (app.params && app.params.title) {
                 var post = app.findByPropertyValue(this.posts, 'titleUrl', app.params.title);
                 if (post !== undefined && post !== null) {
                     this.openPost(post);
@@ -152,7 +152,7 @@
             this.cancelAnimation();
             this.playAnimation('openPost');
         },
-        closePost: function(event) {
+        closePost: function() {
             page.redirect('/blog');
             this.cancelAnimation();
             this.playAnimation('closePost');
@@ -171,13 +171,6 @@
         },
         _closingChanged: function() {
             this.closePost();
-        },
-        findByTitile: function(array, title) {
-            for (var i = 0; i < array.length; i++) {
-                if (array[i].titleUrl == title) {
-                    return array[i];
-                }
-            }
         }
     });
 </script>

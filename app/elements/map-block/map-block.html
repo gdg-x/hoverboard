@@ -26,7 +26,7 @@
             <google-map-marker latitude="49.809841" longitude="23.972805"></google-map-marker>
         </google-map>
         <div class="container card-container relative layout horizontal center-center">
-            <div class="flex-3"></div>
+            <div class="flex-3 hidden-xs"></div>
             <div class="flex-2">
                 <paper-card>
                     <div class="paper-card-container">
@@ -45,7 +45,7 @@
                     </div>
                 </paper-card>
             </div>
-            <div class="flex"></div>
+            <div class="flex hidden-xs"></div>
     </template>
 </dom-module>
 
@@ -53,9 +53,7 @@
     Polymer({
         is: 'map-block',
         properties: {
-            options: {
-                type: String
-            }
+            options: String
         },
         attached: function() {
             this.options = [{

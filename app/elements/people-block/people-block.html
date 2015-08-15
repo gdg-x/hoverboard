@@ -182,7 +182,7 @@
                                 duration: 1000
                             }
                         }]
-                    }
+                    };
                 }
             }
         },
@@ -194,8 +194,8 @@
 
             this.async(function() {
                 var nodeList = Polymer.dom(this.root).querySelectorAll('.card-wrapper');
-                this.animationConfig['loadPeople'].nodes = Array.prototype.slice.call(nodeList);
-                this.animationConfig['openPerson'][1].nodes = Array.prototype.slice.call(nodeList);
+                this.animationConfig.loadPeople.nodes = Array.prototype.slice.call(nodeList);
+                this.animationConfig.openPerson[1].nodes = Array.prototype.slice.call(nodeList);
                 if (!this.checkUrlParams()) {
                     this.playLoadAnimation();
                 }

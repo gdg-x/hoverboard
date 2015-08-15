@@ -45,7 +45,8 @@
         }
 
         .footer-content {
-            padding: 16px 0;
+            padding-top: 16px;
+            padding-bottom: 16px;
         }
 
         .footer-links-container {
@@ -110,7 +111,7 @@
                 </paper-button>
             </div>
             <div class="footer-content footer-links-container">
-                <nav class="layout horizontal flex">
+                <nav class="layout vertical-horizontal flex">
                     <div class="flex">
                         <span class="link-block-title block">Links</span>
                         <ul class="link-block">
@@ -174,8 +175,8 @@
     Polymer({
         is: 'footer-block',
         ready: function() {
-            this.url = "http://gdg.us5.list-manage.com/subscribe/post?u=9fc8aa205b0521b5f05fc8e1e&amp;id=c749ee6609";
-            this.name = "b_9fc8aa205b0521b5f05fc8e1e_c749ee6609";
+            this.url = 'http://gdg.us5.list-manage.com/subscribe/post?u=9fc8aa205b0521b5f05fc8e1e&amp;id=c749ee6609';
+            this.name = 'b_9fc8aa205b0521b5f05fc8e1e_c749ee6609';
         },
         backToTop: function() {
             var hero = document.querySelector('#hero');

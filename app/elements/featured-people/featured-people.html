@@ -3,13 +3,14 @@
         :host {
             display: block;
         }
+
         .container {
-          padding-bottom: 20px;
+            padding-bottom: 20px;
         }
 
         .fe-people-img {
-            height: 120px;
-            width: 120px;
+            height: 70px;
+            width: 70px;
         }
 
         .fe-people {
@@ -23,12 +24,21 @@
             }
         }
 
+        @media (min-width: 768px) {
+            .fe-people-img {
+                height: 120px;
+                width: 120px;
+            }
+        }
+
         .fe-people-name {
             margin-top: 5px;
-            line-height: .8;
+            padding: 0 16px;
+            line-height: .9;
         }
 
         .fe-people-company {
+            padding: 0 16px;
             display: block;
             font-size: .7em;
             line-height: 1.8;
@@ -41,17 +51,17 @@
         }
     </style>
     <template>
+        <iron-ajax auto url="[[source]]" handle-as="json" on-response="peopleLoaded" debounce-duration="300"></iron-ajax>
         <div class="container text-center">
-          <content></content>
+            <content></content>
             <div class="flex wrap layout horizontal">
-                <template is="dom-repeat" items="{{_randomOrder(people)}}">
+                <template is="dom-repeat" items="[[people)]" as="person">
                     <div class="fe-people two-column-xs">
-                        <iron-image src="{{item.photoUrl}}" class="fe-people-img placeholder-color img-circle" preload fade sizing="cover"></iron-image>
+                        <iron-image src="[[person.photoUrl]]" class="fe-people-img placeholder-color img-circle" preload fade sizing="cover"></iron-image>
                         <h4 class="fe-people-name">
-                            <span>{{item.name}}</span>
-                            <span>{{item.surname}}</span>
+                            <span>[[person.name]]</span>
                         </h4>
-                        <span class="fe-people-company">{{item.company}}</span>
+                        <span class="fe-people-company">[[person.company]]</span>
                     </div>
                 </template>
             </div>
@@ -66,40 +76,13 @@
     Polymer({
         is: 'featured-people',
         properties: {
-            people: Array
+            source: String
         },
-        attached: function() {
-            this.people = [{
-                id: 1,
-                name: 'Rob',
-                surname: 'Dodson',
-                title: 'Polymer team',
-                company: 'Google',
-                photoUrl: 'images/people/rob_dodson.jpg'
-            }, {
-                id: 2,
-                name: 'Dawid',
-                surname: 'Ostrowski',
-                title: 'Developer Relations Program Manager',
-                company: 'Google',
-                photoUrl: 'images/people/dawid_ostrowski.jpg'
-            }, {
-                id: 3,
-                name: 'Magnus',
-                surname: 'Hyttsten',
-                title: 'Developer Advocate',
-                company: 'Google',
-                photoUrl: 'images/people/magnus_hyttsten.jpg'
-            }, {
-                id: 4,
-                name: 'Adriana',
-                surname: 'Cerundolo',
-                title: 'Community Manage',
-                company: 'Google',
-                photoUrl: 'images/people/adriana_cerundolo.png'
-            }];
+        peopleLoaded: function(event, response) {
+            console.log(response.response);
+            this.people = this.randomOrder(response.response).slice(0, 4);
         },
-        _randomOrder: function(array) {
+        randomOrder: function(array) {
             return array.sort(function() {
                 return 0.5 - Math.random();
             });
