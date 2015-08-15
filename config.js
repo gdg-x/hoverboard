@@ -50,7 +50,7 @@ module.exports = {
   pageSpeed: {
     key: '', // need uncomment in task
     nokey: true,
-    site: 'http://startpolymer.org',
+    site: 'https://polymer-starter-kit-plus.firebaseapp.com',
     strategy: 'mobile' // or desktop
   }
 };
