@@ -1,5 +1,4 @@
 {
-  "firebase": "polymer-starter-kit-plus",
   "public": "cdn",
   "rewrites": [ {
     "source": "**",

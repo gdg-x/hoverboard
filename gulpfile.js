@@ -330,80 +330,40 @@ gulp.task('revision', function () {
     .pipe($.size({title: 'cdn'}));
 });
 
-// Deploy to Google Cloud Storage
-// Function to deploy staging or prod version from local tree,
-// or to promote staging to prod, per passed arg.
-// This function requires gsutil to be installed and configured.
-// For info on gsutil: https://cloud.google.com/storage/docs/gsutil.
-function deployGCS(environment) {
-  var acl = null;
-  var cacheTTL = null;
-  var src = null;
-  var dest = null;
-  if (environment === 'development') {
-    // Set staging specific vars here.
-    acl = config.cloudStorage.acl.development;
-    cacheTTL = 0;
-    src = 'dist/*';
-    dest = 'gs://' + config.cloudStorage.bucket.development;
-  } else if (environment === 'staging') {
-    // Set staging specific vars here.
-    acl = config.cloudStorage.acl.staging;
-    cacheTTL = 0;
-    src = 'cdn/*';
-    dest = 'gs://' + config.cloudStorage.bucket.staging;
-  } else if (environment === 'production') {
-    // Set production specific vars here.
-    acl = config.cloudStorage.acl.production;
-    cacheTTL = config.cloudStorage.cacheTTL.production;
-    src = 'cdn/*';
-    dest = 'gs://' + config.cloudStorage.bucket.production;
-  } else if (environment === 'promote') {
-    // Set promote (essentially prod) specific vars here.
-    acl = config.cloudStorage.acl.production;
-    cacheTTL = config.cloudStorage.cacheTTL.production;
-    src = 'gs://' + config.cloudStorage.bucket.staging + '/*';
-    dest = 'gs://' + config.cloudStorage.bucket.production;
-  }
-
-  var infoMsg = 'Deploy ' + environment + ' to GCS (' + dest + ') from ' + src;
-  process.stdout.write(infoMsg + '\n');
-
-  // Build gsutil command
-  var cacheControl = '-h "Cache-Control:public,max-age=' + cacheTTL + '"';
-  var gsutilCpCmd = 'gsutil -m ' + cacheControl +
-    ' cp -r -a ' + acl + ' -z css,html,js,json,svg,txt ' + src + ' ' + dest;
-  var gsutilRmCmd = 'gsutil -m rm ' + dest + '/**';
-  var gsutilCmds = [gsutilRmCmd, gsutilCpCmd];
-
-  if (environment === 'production') {
-    cacheTTL = config.cloudStorage.cacheTTL.productionIndex;
-    cacheControl = '-h "Cache-Control:public,max-age=' + cacheTTL + '"';
-    var gsutilCacheCmd = 'gsutil -m setmeta ' + cacheControl + ' ' + dest + '/index.html';
-    gsutilCmds = [gsutilRmCmd, gsutilCpCmd, gsutilCacheCmd];
-  }
-
-  gulp.src('').pipe($.shell(gsutilCmds, {ignoreErrors: true}));
-}
-
-// Development Google Cloud Storage bucket
-gulp.task('deploy:develop', function() {
-  deployGCS('development');
+// Deploy to Firebase
+// This function requires Firebase Command Line Tools to be installed and configured.
+// For info: https://www.firebase.com/docs/hosting/command-line-tool.html
+// Development Firebase environment
+gulp.task('deploy:dev', function() {
+  return gulp.src('')
+    .pipe($.shell('firebase deploy -f ' + config.firebase.development));
 });
 
-// Staging Google Cloud Storage bucket
-gulp.task('deploy:staging', ['revision'], function() {
-  deployGCS('staging');
+gulp.task('delete:dev', function() {
+  return gulp.src('')
+    .pipe($.shell('firebase delete-site -f ' + config.firebase.development));
 });
 
-// Production Google Cloud Storage bucket
+// Staging Firebase environment
+gulp.task('deploy:staging', function() {
+  return gulp.src('')
+    .pipe($.shell('firebase deploy -f ' + config.firebase.staging));
+});
+
+gulp.task('delete:staging', function() {
+  return gulp.src('')
+    .pipe($.shell('firebase delete-site -f ' + config.firebase.staging));
+});
+
+// Production Firebase environment
 gulp.task('deploy:prod', function() {
-  deployGCS('production');
+  return gulp.src('')
+    .pipe($.shell('firebase deploy -f ' + config.firebase.production));
 });
 
-// Promote the staging version to the production Google Cloud Storage bucket
-gulp.task('deploy:promote', function() {
-  deployGCS('promote');
+gulp.task('delete:prod', function() {
+  return gulp.src('')
+    .pipe($.shell('firebase delete-site -f ' + config.firebase.production));
 });
 
 // Run PageSpeed Insights

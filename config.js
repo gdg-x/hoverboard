@@ -24,23 +24,11 @@ module.exports = {
       port: 3001
     }
   },
-  // Google Cloud Storage
-  // https://cloud.google.com/storage/
-  cloudStorage: {
-    acl: { // https://cloud.google.com/storage/docs/access-control
-      development: 'public-read',
-      staging:     'public-read',
-      production:  'public-read'
-    },
-    bucket: { // https://cloud.google.com/storage/docs/reference-uris
-      development: 'development.example.com',
-      staging:     'staging.example.com',
-      production:  'www.example.com'
-    },
-    cacheTTL: {
-      production: '315360000', // 10 years
-      productionIndex: '3600' // for index.html
-    }
+  // Firebase environments
+  firebase: {
+    development: 'polymer-starter-kit-plus-dev', // app name URL - subdomain
+    staging:     'polymer-starter-kit-plus-staging',
+    production:  'polymer-starter-kit-plus'
   },
   // PageSpeed Insights
   // Please feel free to use the `nokey` option to try out PageSpeed
