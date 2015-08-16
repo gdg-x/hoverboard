@@ -8,6 +8,10 @@
             padding-bottom: 20px;
         }
 
+        .people-wraper {
+            margin-top: 40px;
+        }
+
         .fe-people-img {
             height: 70px;
             width: 70px;
@@ -54,7 +58,7 @@
         <iron-ajax auto url="[[source]]" handle-as="json" on-response="peopleLoaded" debounce-duration="300"></iron-ajax>
         <div class="container text-center">
             <content></content>
-            <div class="flex wrap layout horizontal">
+            <div class="flex wrap layout horizontal people-wraper">
                 <template is="dom-repeat" items="[[people)]" as="person">
                     <div class="fe-people two-column-xs">
                         <iron-image src="[[person.photoUrl]]" class="fe-people-img placeholder-color img-circle" preload fade sizing="cover"></iron-image>
