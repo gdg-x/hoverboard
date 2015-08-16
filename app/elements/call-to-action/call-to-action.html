@@ -6,6 +6,25 @@
                 background: var(--default-primary-color);
             }
 
+            .video-dialog,
+            .video-dialog > * {
+                margin: 0;
+                padding: 0;
+            }
+
+            .fullvideo-container {
+                z-index: 6;
+                overflow: hidden;
+            }
+
+            .navbar-overlay {
+                position: fixed !important;
+                background: rgba(0, 0, 0, 0.5) !important;
+                text-transform: uppercase;
+                z-index: 9;
+                color: #fff;
+            }
+
             ::content .text,
             ::content .border-button-link {
                 text-transform: uppercase;
@@ -18,6 +37,7 @@
             .call-to-action::content .border-button-link {
                 margin-left: 20px;
                 color: #fff;
+                cursor: pointer;
             }
 
             .call-to-action::content .heading {
@@ -38,12 +58,32 @@
         </style>
         <div class="container container-narrow flex relative layout horizontal center-center">
             <content></content>
+            <h4 class="heading flex text self-center">GDG DevFest 2014</h4>
+            <span class="border-button-link" on-tap="playVideo">See how it was</span>
         </div>
+        <paper-dialog class="video-dialog fit" id="videoDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+            <paper-toolbar class="navbar-overlay fit">
+                <paper-icon-button icon="icons:arrow-back" on-tap="closeVideoCard"></paper-icon-button>
+                <div class="title text-left">GDG DevFest Ukraine 2014 - Highlights</div>
+            </paper-toolbar>
+            <div class="fullvideo-container fit">
+                <google-youtube id="video" video-id="t95z_HLMTmM" fluid="true" autohide="1" chromeless="true"></google-youtube>
+            </div>
+        </paper-dialog>
     </template>
 </dom-module>
 
 <script>
     Polymer({
-        is: 'call-to-action'
+        is: 'call-to-action',
+        playVideo: function(event) {
+            this.$.videoDialog.open();
+            this.$.video.play();
+        },
+        closeVideoCard: function() {
+            this.$.videoDialog.close();
+            this.$.video.pause();
+            this.$.video.seekTo(0);
+        }
     });
 </script>

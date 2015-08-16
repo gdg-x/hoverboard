@@ -1,86 +1,124 @@
 <dom-module id="hero-block">
-  <style>
-    :host {
-      display: block;
-      --paper-toolbar-background: transparent;
-      --paper-toolbar-color: #ffffff;
-      --paper-tabs-selection-bar-color: #ffffff;
-      --paper-tab-ink: #ffffff;
-    }
+    <template>
+        <style>
+            :host {
+                display: block;
+                --paper-toolbar-background: transparent;
+                --paper-tab-ink: rgba(255, 255, 255, 0.2);
+                --paper-toolbar-color: inherit;
+                color: #4E4E4E;
+            }
 
-    a {
-      text-decoration: none;
-      color: #ffffff;
-    }
+            .nav-link {
+                color: inherit;
+            }
 
-    .top-header {
-      height: 300px;
-      color: #ffffff;
-    }
+            .logo {
+                margin-top: 7px;
+                height: 40px;
+            }
 
-    .logo {
-      margin-top: 4px;
-      height: 40px;
-    }
+            .container {
+                padding-top: 0;
+                padding-bottom: 20px;
+            }
 
-    ::content .hero-content {
-      padding: 5px 15px;
-    }
+            ::content .hero {
+                padding-bottom: 20px;
+            }
 
-    ::content .title-container {
-      padding: 0 15px;
-      font-size: 30px;
-    }
+            ::content .top-section {
+                padding-top: 20px;
+                font-size: 20px;
+            }
 
-    ::content .title {
-      margin: 0;
-      line-height: 1;
-      font-size: 1em;
-    }
+            ::content .title-wrapper {
+                min-height: 150px;
+            }
 
-    ::content .subtitle {
-      margin: 10px 0 0;
-      font-size: 0.5em;
-    }
+            ::content h3 {
+                font-size: 2.1em;
+            }
 
-    @media (min-width: 768px) {
-      .top-header {
-        height: 500px;
-        padding: 5px 15px;
-      }
-      ::content .title-container {
-        font-size: 45px;
-      }
-    }
-  </style>
-  <template>
-    <div class="top-header flex relative">
-      <content></content>
-      <paper-toolbar>
-        <paper-icon-button class="visible-xs" icon="menu" on-tap="togglePanel"></paper-icon-button>
-        <div class="flex hidden-xs">
-          <a href="/">
-            <img class="logo" src="../../images/logo.svg" alt="GDG DevFest 2015">
-          </a>
+            ::content .logo {
+                height: 100px;
+                max-width: 100%;
+            }
+
+            ::content .slogan,
+            ::content .dates {
+                margin-top: 20px;
+                font-size: 17px;
+                font-weight: 400;
+                text-transform: uppercase;
+                letter-spacing: .09em;
+                line-height: 1;
+            }
+
+            ::content .description {
+                margin-top: 20px;
+            }
+
+            ::content .links {
+                margin: 40px 0 10px;
+            }
+
+            ::content .event-image {
+                width: 100%;
+                height: 100%;
+            }
+
+            ::content .right-section {
+                margin-top: 20px;
+                height: 200px;
+            }
+
+            @media (min-width: 768px) {
+                ::content .hero {
+                    padding-top: 40px;
+                }
+                ::content .right-section {
+                    height: initial;
+                }
+            }
+        </style>
+        <div id="hero">
+            <div class="container flex relative">
+                <paper-toolbar>
+                    <paper-icon-button class="visible-xs" icon="menu" on-tap="togglePanel"></paper-icon-button>
+                    <div class="flex hidden-xs">
+                        <a data-route="home" href="/" hidden="{{hideLogo}}">
+                            <img class="logo" src="../../images/logo-light.svg" alt="GDG DevFest 2015">
+                        </a>
+                    </div>
+                    <paper-tabs class="hidden-xs" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
+                        <paper-tab class="text-u-c">
+                            <a data-route="blog" href="/blog" class="nav-link horizontal center-center layout">Blog</a>
+                        </paper-tab>
+                        <paper-tab class="text-u-c">
+                            <a data-route="speakers" href="/speakers" class="nav-link horizontal center-center layout">Speakers</a>
+                        </paper-tab>
+                        <paper-tab class="text-u-c">
+                            <a data-route="contact" href="/contact" class="nav-link horizontal center-center layout">Contact</a>
+                        </paper-tab>
+                    </paper-tabs>
+                </paper-toolbar>
+                <content></content>
+            </div>
         </div>
-        <paper-tabs class="hidden-xs" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
-          <paper-tab class="text-u-c">
-            <a data-route="about" href="/about" class="horizontal center-center layout">About</a>
-          </paper-tab>
-          <paper-tab class="text-u-c">
-            <a data-route="contact" href="/contact" class="horizontal center-center layout">Contact</a>
-          </paper-tab>
-        </paper-tabs>
-      </paper-toolbar>
-    </div>
-  </template>
+    </template>
 </dom-module>
 
 <script>
-  Polymer({
-    is: 'hero-block',
-    togglePanel: function() {
-      document.querySelector('#paperDrawerPanel').togglePanel();
-    }
-  });
+    Polymer({
+        is: 'hero-block',
+        properties: {
+            hideLogo: {
+                type: Boolean
+            }
+        },
+        togglePanel: function() {
+            document.querySelector('#paperDrawerPanel').togglePanel();
+        }
+    });
 </script>

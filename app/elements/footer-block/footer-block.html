@@ -1,4 +1,4 @@
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
 <link rel="import" href="../mailchimp-subscribe/mailchimp-subscribe.html">
 
 <dom-module id="footer-block">
@@ -10,8 +10,8 @@
         }
 
         .container {
-          padding: 0;
-          font-size: 14px;
+            padding: 0;
+            font-size: 14px;
         }
 
         .container paper-button {
@@ -93,10 +93,6 @@
             }
         }
 
-        /*.footer-bottom {
-            border-top: 1px solid #eee;
-        }*/
-
         .icons-wrapper {
             margin-top: -5px;
         }
@@ -108,7 +104,7 @@
                 <g:plusone size="medium" width="300" annotation="inline" href="http://devfest.gdg.org.ua/"></g:plusone>
                 <paper-button class="footer-backtotop" on-tap="backToTop">
                     Back to top
-                          <iron-icon icon="icons:expand-less"></iron-icon>
+                    <iron-icon icon="icons:expand-less"></iron-icon>
                 </paper-button>
             </div>
             <div class="footer-content footer-links-container">
@@ -176,7 +172,7 @@
     Polymer({
         is: 'footer-block',
         ready: function() {
-            this.url = 'http://gdg.us5.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe';
+            this.url = 'http://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe';
             this.name = 'b_b7e853a79164ddfdbda3ed77b_7993e39fbe';
         },
         backToTop: function() {
@@ -184,4 +180,12 @@
             app.smoothScroll(hero, 1500);
         }
     });
+    (function() {
+        var po = document.createElement('script');
+        po.type = 'text/javascript';
+        po.async = true;
+        po.src = 'https://apis.google.com/js/platform.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(po, s);
+    })();
 </script>

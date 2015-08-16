@@ -55,7 +55,7 @@
         }
     </style>
     <template>
-        <iron-ajax auto url="[[source]]" handle-as="json" on-response="peopleLoaded" debounce-duration="300"></iron-ajax>
+        <iron-ajax auto url="[[source]]" handle-as="json" on-response="peopleLoaded"></iron-ajax>
         <div class="container text-center">
             <content></content>
             <div class="flex wrap layout horizontal people-wraper">
@@ -83,7 +83,6 @@
             source: String
         },
         peopleLoaded: function(event, response) {
-            console.log(response.response);
             this.people = this.randomOrder(response.response).slice(0, 4);
         },
         randomOrder: function(array) {
