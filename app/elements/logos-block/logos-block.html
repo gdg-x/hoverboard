@@ -21,7 +21,7 @@
         }
 
         .logo-item {
-            margin: 0 25px 10px 0;
+            margin: 0 10px 10px;
         }
 
         .logo-img {
@@ -30,12 +30,13 @@
         }
     </style>
     <template>
-        <div class="container relative layout vertical">
+        <iron-ajax auto url="[[source]]" handle-as="json" on-response="logosLoaded"></iron-ajax>
+        <div class="container relative layout vertical center">
             <content></content>
-            <template is="dom-repeat" items="{{content}}" as="block">
+            <template is="dom-repeat" items="logoBlocks" as="block">
                 <div class="logos-block-wrapper">
-                    <h5 class="logos-block-title">{{block.title}}</h5>
-                    <div class="wrap layout horizontal">
+                    <h5 class="logos-block-title text-center">{{block.title}}</h5>
+                    <div class="wrap layout horizontal center">
                         <template is="dom-repeat" items="{{block.logos}}" as="logo">
                             <a class="logo-item" href="{{logo.url}}" title="{{logo.name}}">
                                 <iron-image class="logo-img flex" src="{{logo.logoUrl}}" preload fade sizing="contain"></iron-image>
@@ -52,37 +53,10 @@
     Polymer({
         is: 'logos-block',
         properties: {
-            content: {
-                type: Array
-            }
+            source: String
         },
-        attached: function() {
-            this.content = [{
-    title: 'General sponsor',
-    logos: [{
-        name: 'Google',
-        url: 'https://www.google.com.ua/intl/en/about/',
-        logoUrl: '../images/partners/google.svg',
-    }]
-}, {
-    title: 'General partner',
-    logos: [{
-        name: 'Lviv IT Cluster',
-        url: 'http://itcluster.lviv.ua/',
-        logoUrl: '../images/partners/itcluster.png'
-    }]
-}, {
-    title: 'Information partners',
-    logos: [{
-        name: 'CoMMuna',
-        url: 'http://communa.net.ua/en/',
-        logoUrl: '../images/partners/communa.png'
-    }, {
-        name: 'Symphony Solutions',
-        url: 'http://www.symphony-solutions.eu/',
-        logoUrl: '../images/partners/symphony-solutions.png'
-    }]
-}];
+        logosLoaded: function(event, response) {
+            this.logoBlocks = response.response;
         }
     });
 </script>

@@ -44,7 +44,7 @@
             }
         </style>
         <iron-ajax auto url="[[source]]" handle-as="json" on-response="postsLoaded"></iron-ajax>
-        <div id="posts" class="container flex layout horizontal-reverse center-justified wrap">
+        <div id="posts" class="container flex layout horizontal center-justified wrap">
             <template is="dom-repeat" items="[[posts]]" as="post">
                 <div class="card-wrapper layout horizontal">
                     <paper-material class="layout vertical">
@@ -119,7 +119,7 @@
             'neon-animation-finish': '_onNeonAnimationFinish'
         },
         postsLoaded: function(event, response) {
-            this.posts = response.response;
+            this.posts = response.response.reverse();
             this.async(function() {
                 var nodeList = Polymer.dom(this.root).querySelectorAll('.card-wrapper');
                 this.animationConfig.loadPosts.nodes = Array.prototype.slice.call(nodeList);
