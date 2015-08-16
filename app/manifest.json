@@ -1,4 +1,5 @@
 {
+    "lang": "en",
   "name": "GDG DevFest Ukraine 2015",
   "short_name": "GDG DevFest Ukraine 2015",
   "icons": [{
@@ -15,5 +16,6 @@
         "sizes": "192x192"
       }],
   "start_url": "/#!/",
+  "theme_color": "#303F9F",
   "display": "standalone"
 }
