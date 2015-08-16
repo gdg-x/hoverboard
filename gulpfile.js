@@ -25,6 +25,11 @@ var packageJson = require('./package.json');
 var crypto = require('crypto');
 var config = require('./config');
 
+// Get a task from the tasks directory with default parameters
+function getTask(task) {
+  return require('./gulp-tasks/' + task)(config, gulp, $);
+}
+
 // Handle the error
 // .pipe(...).on('error', errorHandler)
 function errorHandler (error) {
@@ -381,23 +386,14 @@ gulp.task('delete:prod', function() {
     .pipe($.shell('firebase delete-site -f ' + config.firebase.production));
 });
 
+// Tool Tasks
+// ----------
+
 // Run PageSpeed Insights
-gulp.task('pagespeed', function () {
-  return require('psi')(config.pageSpeed.site, {
-    nokey: config.pageSpeed.nokey,
-    // key: config.pageSpeed.key,
-    strategy: config.pageSpeed.strategy
-  }, function (err, data) {
-    console.log('Site: ' + config.pageSpeed.site);
-    console.log('Strategy: ' + config.pageSpeed.strategy);
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('Score: ' + data.score);
-      console.log(data.pageStats);
-    }
-  });
-});
+gulp.task('pagespeed', getTask('pagespeed'));
+
+// Test Tasks
+// ----------
 
 // Load tasks for web-component-tester
 // Adds tasks for `gulp test:local` and `gulp test:remote`
