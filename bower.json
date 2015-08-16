@@ -13,7 +13,8 @@
     "google-map": "GoogleWebComponents/google-map#~1.0.3",
     "time-elements": "~0.4.0",
     "marked-element": "PolymerElements/marked-element#~1.0.2",
-    "google-youtube": "GoogleWebComponents/google-youtube#~1.1.2"
+    "google-youtube": "GoogleWebComponents/google-youtube#~1.1.2",
+    "google-analytics": "~0.1.0"
   },
   "devDependencies": {
     "web-component-tester": "*",
