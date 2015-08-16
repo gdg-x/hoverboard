@@ -1,36 +1,26 @@
 [{
     "id": 1,
-    "name": "Rob Dodson",
-    "company": "Google, USA",
-    "photoUrl": "../../images/people/rob_dodson.jpg"
+    "name": "Said Tahsin Dane",
+    "company": "Startup Digest, Turkey",
+    "photoUrl": "../../images/people/said_tahsine_dane.jpg"
 }, {
     "id": 2,
-    "name": "Dawid Ostrowski",
-    "company": "Google, Switzerland",
-    "photoUrl": "../../images/people/dawid_ostrowski.jpg"
+    "name": "Mateusz Herych",
+    "company": "Base CRM, Poland",
+    "photoUrl": "../../images/people/mateus_herych.jpg"
 }, {
     "id": 3,
-    "name": "Magnus Hyttsten",
-    "company": "Google, USA",
-    "photoUrl": "../../images/people/magnus_hyttsten.jpg"
+    "name": "Michał Tajchert",
+    "company": "12Hours.io, Poland",
+    "photoUrl": "../../images/people/michal_tajchert.jpg"
 }, {
     "id": 4,
-    "name": "Adriana Cerundolo",
-    "company": "Google, USA",
-    "photoUrl": "../../images/people/adriana_cerundolo.png"
+    "name": "Yehor Lvivski",
+    "company": "Spatialkey, Ukraine",
+    "photoUrl": "../../images/people/yehor_lvivski.jpg"
 }, {
     "id": 2,
-    "name": "Dawid Ostrowski",
-    "company": "Google, Poland",
-    "photoUrl": "../../images/people/dawid_ostrowski.jpg"
-}, {
-    "id": 3,
-    "name": "Magnus Hyttsten",
-    "company": "Google, USA",
-    "photoUrl": "../../images/people/magnus_hyttsten.jpg"
-}, {
-    "id": 4,
-    "name": "Adriana Cerundolo",
-    "company": "Google, USA",
-    "photoUrl": "../../images/people/adriana_cerundolo.png"
+    "name": "Valentyn Shybanov",
+    "company": "Twinfield, Ukraine",
+    "photoUrl": "../../images/people/valentyn_shybanov.jpg"
 }]
