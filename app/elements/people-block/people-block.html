@@ -11,11 +11,22 @@
                 display: none;
             }
 
-            .title {
-                font-size: 14px;
-                padding-bottom: 4px;
+            .bottom-image-text {
+                padding: 16px;
+                position: absolute;
+                bottom: 0px;
+                color: #fff;
+            }
+
+            .people-name {
+                font-size: 24px;
                 font-weight: 300;
-                color: var(--default-primary-color);
+            }
+
+            .title {
+                margin-top: -5px;
+                font-size: 14px;
+                font-weight: 300;
             }
 
             .card-content {
@@ -23,9 +34,9 @@
             }
 
             .card-actions {
-              border-top: 1px solid #e8e8e8;
-              padding: 5px 16px;
-              position: relative;
+                border-top: 1px solid #e8e8e8;
+                padding: 5px 16px;
+                position: relative;
             }
 
             .card-wrapper {
@@ -38,15 +49,6 @@
 
             .people-image-overlay {
                 background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 4%, rgba(0, 0, 0, 0) 50%);
-            }
-
-            .people-name {
-                color: #fff;
-                padding: 16px;
-                position: absolute;
-                bottom: 0px;
-                font-size: 24px;
-                font-weight: 300;
             }
 
             .badges {
@@ -98,7 +100,7 @@
         <div id="people" class="container flex layout horizontal center-justified wrap">
             <template is="dom-repeat" items="[[people]]" as="person">
                 <div class="card-wrapper layout horizontal">
-                    <paper-material class="layout vertical">
+                    <paper-material class="flex pointer" on-tap="readMore">
                         <div class="people-header relative">
                             <iron-image src="[[person.photoUrl]]" class="placeholder-color fit" preload fade sizing="cover"></iron-image>
                             <div class="people-image-overlay fit"></div>
@@ -109,18 +111,21 @@
                                     </li>
                                 </template>
                             </ul>
-                            <span class="people-name relative">[[person.name]]</span>
-                        </div>
-                        <div class="card-content flex people-description">
-                            <div class="title">
-                                <span>[[person.title]]</span>,
-                                <span>[[person.company]]</span>
+                            <div class="bottom-image-text">
+                                <span class="people-name relative">[[person.name]]</span>
+                                <div class="title">
+                                    <span>[[person.company]]</span>,
+                                    <span>[[person.country]]</span>
+                                </div>
                             </div>
+                        </div>
+                        <!-- <div class="card-content flex people-description">
+
                             <marked-element class="brief" markdown="[[person.bio]]"></marked-element>
                         </div>
                         <div class="card-actions">
                             <paper-button on-tap="readMore">Open details</paper-button>
-                        </div>
+                        </div> -->
                     </paper-material>
                 </div>
             </template>

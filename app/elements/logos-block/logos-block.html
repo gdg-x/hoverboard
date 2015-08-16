@@ -25,21 +25,21 @@
         }
 
         .logo-img {
-            height: 80px;
+            height: 60px;
             width: 140px;
         }
     </style>
     <template>
-        <iron-ajax auto url="[[source]]" handle-as="json" on-response="logosLoaded"></iron-ajax>
+        <iron-ajax auto url="[[source]]" handle-as="json" on-response="logosLoaded" debounce-duration="300"></iron-ajax>
         <div class="container relative layout vertical center">
             <content></content>
-            <template is="dom-repeat" items="logoBlocks" as="block">
+            <template is="dom-repeat" items="[[logoBlocks]]" as="block">
                 <div class="logos-block-wrapper">
-                    <h5 class="logos-block-title text-center">{{block.title}}</h5>
+                    <h5 class="logos-block-title text-center">[[block.title]]</h5>
                     <div class="wrap layout horizontal center">
-                        <template is="dom-repeat" items="{{block.logos}}" as="logo">
-                            <a class="logo-item" href="{{logo.url}}" title="{{logo.name}}">
-                                <iron-image class="logo-img flex" src="{{logo.logoUrl}}" preload fade sizing="contain"></iron-image>
+                        <template is="dom-repeat" items="[[block.logos]]" as="logo">
+                            <a class="logo-item" href="[[logo.url]]" title="[[logo.name]]">
+                                <iron-image class="logo-img flex" src="[[logo.logoUrl]]" preload fade sizing="contain"></iron-image>
                             </a>
                         </template>
                     </div>
