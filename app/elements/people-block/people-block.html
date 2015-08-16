@@ -97,7 +97,7 @@
             }
         </style>
         <iron-ajax auto url="[[source]]" handle-as="json" on-response="peopleLoaded" debounce-duration="300"></iron-ajax>
-        <div id="people" class="container flex layout horizontal center-justified wrap">
+        <div id="people" class="container flex layout vertical-horizontal center-justified wrap">
             <template is="dom-repeat" items="[[people]]" as="person">
                 <div class="card-wrapper layout horizontal">
                     <paper-material class="flex pointer" on-tap="readMore">

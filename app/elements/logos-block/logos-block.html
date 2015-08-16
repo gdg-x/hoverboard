@@ -1,35 +1,35 @@
 <dom-module id="logos-block">
-    <style>
-        :host {
-            display: block;
-            background: #ffffff;
-        }
-
-        :host > .logos-block-wrapper {
-          margin-bottom: 30px;
-        }
-
-        .container .heading {
-          margin-bottom: 20px;
-        }
-
-        .logos-block-title {
-          margin: 20px 0;
-          font-weight: 100;
-          font-size: 22px;
-          letter-spacing: .05em;
-        }
-
-        .logo-item {
-            margin: 0 10px 10px;
-        }
-
-        .logo-img {
-            height: 60px;
-            width: 140px;
-        }
-    </style>
     <template>
+        <style>
+            :host {
+                display: block;
+                background: #ffffff;
+            }
+
+            :host > .logos-block-wrapper {
+              margin-bottom: 30px;
+            }
+
+            .container .heading {
+              margin-bottom: 20px;
+            }
+
+            .logos-block-title {
+              margin: 20px 0;
+              font-weight: 100;
+              font-size: 22px;
+              letter-spacing: .05em;
+            }
+
+            .logo-item {
+                margin: 0 10px 10px;
+            }
+
+            .logo-img {
+                height: 60px;
+                width: 140px;
+            }
+        </style>
         <iron-ajax auto url="[[source]]" handle-as="json" on-response="logosLoaded" debounce-duration="300"></iron-ajax>
         <div class="container relative layout vertical center">
             <content></content>
