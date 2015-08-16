@@ -299,6 +299,14 @@ gulp.task('serve:dist', ['default'], function () {
   });
 });
 
+// Replace text in dist dir
+gulp.task('replace-dist', function () {
+  return gulp.src(['dist/elements/elements.vulcanized.js'])
+    // Disable hashbang in routing
+    .pipe($.replace('hashbang:!0', 'hashbang:0'))
+    .pipe(gulp.dest('dist/elements'));
+});
+
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
   // Uncomment 'cache-config' after 'vulcanize' if you are going to use service workers.
@@ -309,7 +317,6 @@ gulp.task('default', ['clean'], function (cb) {
     'vulcanize',
     ['clean-dist', 'minify-dist'],
     'cache-config',
-    'revision',
     cb);
 });
 
@@ -333,8 +340,16 @@ gulp.task('revision', function () {
 // Deploy to Firebase
 // This function requires Firebase Command Line Tools to be installed and configured.
 // For info: https://www.firebase.com/docs/hosting/command-line-tool.html
+gulp.task('pre-deploy', function(cb) {
+  runSequence(
+    'default',
+    'replace-dist',
+    'revision',
+    cb);
+});
+
 // Development Firebase environment
-gulp.task('deploy:dev', function() {
+gulp.task('deploy:dev', ['pre-deploy'], function() {
   return gulp.src('')
     .pipe($.shell('firebase deploy -f ' + config.firebase.development));
 });
@@ -345,7 +360,7 @@ gulp.task('delete:dev', function() {
 });
 
 // Staging Firebase environment
-gulp.task('deploy:staging', function() {
+gulp.task('deploy:staging', ['pre-deploy'], function() {
   return gulp.src('')
     .pipe($.shell('firebase deploy -f ' + config.firebase.staging));
 });
@@ -356,7 +371,7 @@ gulp.task('delete:staging', function() {
 });
 
 // Production Firebase environment
-gulp.task('deploy:prod', function() {
+gulp.task('deploy:prod', ['pre-deploy'], function() {
   return gulp.src('')
     .pipe($.shell('firebase deploy -f ' + config.firebase.production));
 });
