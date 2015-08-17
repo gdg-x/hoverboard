@@ -2,6 +2,10 @@
 
 // Minify JavaScript in dist directory
 module.exports = function ($, config, gulp) { return function () {
+  var bootstrap = gulp.src('dist/elements/bootstrap/*.js')
+    .pipe($.uglify())
+    .pipe(gulp.dest('dist/elements/bootstrap'));
+
   var serviceWorker = gulp.src('dist/bower_components/platinum-sw/service-worker.js')
     .pipe($.uglify())
     .pipe(gulp.dest('dist/bower_components/platinum-sw'));
@@ -16,5 +20,5 @@ module.exports = function ($, config, gulp) { return function () {
     // https://github.com/mishoo/UglifyJS2/issues/766
     .pipe(gulp.dest('dist/sw-toolbox'));
 
-  return require('merge-stream')(serviceWorker, swImport, swToolbox);
+  return require('merge-stream')(bootstrap, serviceWorker, swImport, swToolbox);
 };};
