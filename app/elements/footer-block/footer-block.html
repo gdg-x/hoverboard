@@ -2,6 +2,7 @@
 <link rel="import" href="../mailchimp-subscribe/mailchimp-subscribe.html">
 
 <dom-module id="footer-block">
+    <template>
     <style>
         :host {
             display: block;
@@ -97,7 +98,6 @@
             margin-top: -5px;
         }
     </style>
-    <template>
         <div class="line full-width"></div>
         <div class="container footer layout vertical">
             <div class="footer-content layout horizontal justified">
@@ -148,7 +148,7 @@
                     </div>
 
                     <div class="flex">
-                        <span class="link-block-title block">Subscibe</span>
+                        <span class="link-block-title block">Subscribe</span>
                         <span>No spam, only the latest news and updates!</span>
                         <mailchimp-subscribe url="{{url}}" name="{{name}}"></mailchimp-subscribe>
                     </div>
