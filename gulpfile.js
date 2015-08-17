@@ -289,6 +289,9 @@ gulp.task('fetch-newest-analytics', getTask('fetch-newest-analytics'));
 // Minify JavaScript in dist directory
 gulp.task('minify-dist', getTask('minify-dist'));
 
+// Static asset revisioning by appending content hash to filenames
+gulp.task('revision', getTask('revision'));
+
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
   runSequence(
@@ -299,23 +302,6 @@ gulp.task('default', ['clean'], function (cb) {
     ['clean-dist', 'minify-dist'],
     'cache-config',
     cb);
-});
-
-// Static asset revisioning by appending content hash to filenames
-gulp.task('revision', function () {
-  var revAll = new $.revAll({ dontRenameFile: [
-    /^\/404.html/g,
-    /^\/humans.txt/g,
-    /^\/index.html/g,
-    /^\/robots.txt/g
-  ], dontUpdateReference: [
-    // Don't rename index.html in cache-config.json
-    /^\/index.html/g
-  ]});
-  return gulp.src('dist/**')
-    .pipe(revAll.revision())
-    .pipe(gulp.dest('cdn'))
-    .pipe($.size({title: 'cdn'}));
 });
 
 // Deploy to Firebase
