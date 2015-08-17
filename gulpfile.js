@@ -27,7 +27,7 @@ var config = require('./config');
 
 // Get a task from the tasks directory with default parameters
 function getTask(task) {
-  return require('./gulp-tasks/' + task)(config, gulp, $);
+  return require('./gulp-tasks/' + task)($, config, gulp);
 }
 
 // Handle the error
@@ -312,13 +312,17 @@ gulp.task('replace-dist', function () {
     .pipe(gulp.dest('dist/elements'));
 });
 
+// Fetch newest Google analytics.js and replace link to analytics.js
+// https://www.google-analytics.com/analytics.js have only 2 hours cache
+gulp.task('fetch-newest-analytics', getTask('fetch-newest-analytics'));
+
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
   // Uncomment 'cache-config' after 'vulcanize' if you are going to use service workers.
   runSequence(
     ['copy', 'styles'],
     'elements',
-    ['jshint', 'images', 'fonts', 'html'],
+    ['jshint', 'images', 'fonts', 'html', 'fetch-newest-analytics'],
     'vulcanize',
     ['clean-dist', 'minify-dist'],
     'cache-config',
