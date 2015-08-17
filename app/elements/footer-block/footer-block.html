@@ -10,7 +10,7 @@
         }
 
         .container {
-            padding: 0;
+            padding: 16px;
             font-size: 14px;
         }
 
@@ -38,6 +38,9 @@
                 justify-content: flex-end !important;
                 align-self: flex-end !important;
             }
+            .container {
+                padding: 0;
+            }
         }
 
         .footer-backtotop {
@@ -54,6 +57,7 @@
         }
 
         .link-block {
+            margin-top: 0;
             padding: 0;
         }
 
@@ -63,7 +67,7 @@
         }
 
         .link-block-title {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-size: 1.3em;
             font-weight: 300;
         }
@@ -74,6 +78,14 @@
 
         .link-block a:hover {
             text-decoration: underline;
+        }
+
+        .link-block-wrapper {
+            margin-bottom: 30px;
+        }
+
+        .icons-wrapper {
+            margin-top: -5px;
         }
 
         @media (min-width: 768px) {
@@ -91,17 +103,21 @@
             .footer-bottom {
                 padding: 16px 0;
             }
-        }
-
-        .icons-wrapper {
-            margin-top: -5px;
+            .link-block {
+                padding: 0;
+            }
+            .link-block-title {
+                margin-bottom: 15px;
+            }
         }
     </style>
     <template>
         <div class="line full-width"></div>
         <div class="container footer layout vertical">
             <div class="footer-content layout horizontal justified">
-                <g:plusone size="medium" width="300" annotation="inline" href="http://devfest.gdg.org.ua/"></g:plusone>
+                <div class="flex">
+                    <g:plusone size="medium" width="300" annotation="inline" href="http://devfest.gdg.org.ua/"></g:plusone>
+                </div>
                 <paper-button class="footer-backtotop" on-tap="backToTop">
                     Back to top
                     <iron-icon icon="icons:expand-less"></iron-icon>
@@ -109,7 +125,7 @@
             </div>
             <div class="footer-content footer-links-container">
                 <nav class="layout vertical-horizontal flex">
-                    <div class="flex">
+                    <div class="flex link-block-wrapper">
                         <span class="link-block-title block">For visitors</span>
                         <ul class="link-block">
                             <li><a href="https://developers.google.com/" target="_blank">Google Developers</a></li>
@@ -118,7 +134,7 @@
                         </ul>
                     </div>
 
-                    <div class="flex">
+                    <div class="flex link-block-wrapper">
                         <span class="link-block-title block">For partners</span>
                         <ul class="link-block">
                             <li><a href="/assets/GDG_DevFest_Ukraine_2015_Partnership_Proposition.pdf" target="_blank">Partnership Proposition</a></li>
@@ -126,7 +142,7 @@
                         </ul>
                     </div>
 
-                    <div class="flex">
+                    <div class="flex link-block-wrapper">
                         <span class="link-block-title block">Contact us</span>
                         <ul class="link-block">
                             <li><a href="mailto:devfest@gdg.org.ua">devfest@gdg.org.ua</a></li>
@@ -147,7 +163,7 @@
                         </div>
                     </div>
 
-                    <div class="flex">
+                    <div class="flex link-block-wrapper">
                         <span class="link-block-title block">Subscibe</span>
                         <span>No spam, only the latest news and updates!</span>
                         <mailchimp-subscribe url="{{url}}" name="{{name}}"></mailchimp-subscribe>

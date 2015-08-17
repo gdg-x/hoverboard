@@ -10,18 +10,22 @@
                 margin-bottom: 25px;
             }
 
-            paper-card {
-                width: 80%;
-                z-index: 1;
-            }
-
-            .paper-card-container {
-                padding: 50px 40px;
-            }
-
-            @media (max-width: 767px) {
-                .people-header {
-                    height: 256px;
+            @media (min-width: 768px) {
+                paper-card {
+                    width: 80%;
+                }
+                .paper-card-container {
+                    padding: 50px 40px;
+                }
+                .person-img {
+                    height: 70px;
+                    width: 70px;
+                }
+                .title {
+                    font-size: 14px;
+                    padding-bottom: 4px;
+                    font-weight: 300;
+                    color: var(--default-primary-color);
                 }
             }
 
@@ -29,26 +33,27 @@
                 background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 4%, rgba(0, 0, 0, 0) 50%);
             }
 
-            .person-img {
-                height: 70px;
-                width: 70px;
-            }
-
-            .title {
-                font-size: 14px;
-                padding-bottom: 4px;
-                font-weight: 300;
-                color: var(--default-primary-color);
-            }
-
             @media (max-width: 767px) {
-                .people-name {
-                    color: #fff;
+                .people-header {
+                    height: 256px;
+                }
+                .bottom-image-text {
                     padding: 16px;
                     position: absolute;
-                    bottom: 0px;
+                    bottom: 0;
+                    color: #fff;
+                }
+                .people-name {
                     font-size: 24px;
                     font-weight: 300;
+                }
+                .title {
+                    margin-top: -5px;
+                    font-size: 14px;
+                    font-weight: 300;
+                }
+                paper-icon-button {
+                    color: #fff;
                 }
             }
 
@@ -70,12 +75,16 @@
             <paper-card>
                 <div class="paper-card-container">
                     <div class="people-header relative visible-xs">
-                        <paper-button class="footer-backtotop" on-tap="closePeople">
-                            <iron-icon icon="icons:arrow-back"></iron-icon> Back
-                        </paper-button>
                         <iron-image src="[[person.photoUrl]]" class="placeholder-color fit" preload fade sizing="cover"></iron-image>
                         <div class="people-image-overlay fit"></div>
-                        <span class="people-name relative">[[person.name]]</span>
+                        <paper-icon-button icon="icons:arrow-back" on-tap="closePeople"></paper-icon-button>
+                        <div class="bottom-image-text">
+                            <span class="people-name relative">[[person.name]]</span>
+                            <div class="title">
+                                <span>[[person.company]]</span>,
+                                <span>[[person.country]]</span>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-content layout vertical hidden-xs">
                         <paper-button class="back-button self-start" on-tap="closePeople">
