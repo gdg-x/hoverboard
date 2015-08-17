@@ -314,7 +314,6 @@ gulp.task('fetch-newest-analytics', getTask('fetch-newest-analytics'));
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
-  // Uncomment 'cache-config' after 'vulcanize' if you are going to use service workers.
   runSequence(
     ['copy', 'styles'],
     'elements',
