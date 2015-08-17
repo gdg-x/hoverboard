@@ -1,6 +1,10 @@
-![](https://avatars0.githubusercontent.com/u/10231285?v=3&s=200)
+![Start Polymer](https://avatars0.githubusercontent.com/u/10231285?v=3&s=200)
 
 ## Polymer Starter Kit Plus
+
+[![PageSpeed:100/100](https://img.shields.io/badge/PageSpeed-100%20/%20100-brightgreen.svg)](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fpolymer-starter-kit-plus.firebaseapp.com)
+
+> A starting point for building web applications with Polymer 1.x
 
 > Polymer Starter Kit Plus is improved version of [Polymer Starter Kit](https://github.com/PolymerElements/polymer-starter-kit)
 
