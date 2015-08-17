@@ -40,7 +40,7 @@
             <template is="dom-repeat" items="[[logoBlocks]]" as="block">
                 <div class="logos-block-wrapper">
                     <h5 class="logos-block-title text-center">[[block.title]]</h5>
-                    <div class="wrap layout horizontal center">
+                    <div class="wrap layout horizontal center-center">
                         <template is="dom-repeat" items="[[block.logos]]" as="logo">
                             <a class="logo-item" href="[[logo.url]]" title="[[logo.name]]">
                                 <iron-image class="logo-img flex" src="[[logo.logoUrl]]" preload fade sizing="contain"></iron-image>
@@ -50,7 +50,7 @@
                 </div>
             </template>
             <a href="/assets/GDG_DevFest_Ukraine_2015_Partnership_Proposition.pdf" class="block-link" target="_blank">
-                <paper-button>Become a partner</paper-button>
+                <paper-button class="colorful" raised>Become a partner</paper-button>
             </a>
         </div>
     </template>

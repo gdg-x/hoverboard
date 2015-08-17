@@ -9,10 +9,6 @@
             font-size: .9em;
         }
 
-        paper-button.colorful {
-            color: var(--mailchimp-color);
-        }
-
         paper-input-container {
             padding-bottom: 0;
             --paper-input-container-color: var(--mailchimp-color);
@@ -43,7 +39,7 @@
                         <input is="iron-input" type="email" name="EMAIL" id="mce-EMAIL" autocomplete="off">
                         <paper-input-error>Plese enter valid email address</paper-input-error>
                     </paper-input-container>
-                    <paper-button class="colorful self-end" on-click="submitForm">Subscribe</paper-button>
+                    <paper-button class="self-end" on-click="submitForm">Subscribe</paper-button>
                 </div>
                 <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups -->
                 <div style="position: absolute; left: -5000px;">

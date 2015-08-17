@@ -23,6 +23,14 @@
             "name": "Symphony Solutions",
             "url": "http://www.symphony-solutions.eu/",
             "logoUrl": "../images/partners/symphony-solutions.png"
+        }, {
+            "name": "NETWORK",
+            "url": "http://network-ua.com/",
+            "logoUrl": "../images/partners/network.jpg"
+        }, {
+            "name": "career4it",
+            "url": "http://career4it.com/en/",
+            "logoUrl": "../images/partners/career4it.png"
         }]
     }
 ]

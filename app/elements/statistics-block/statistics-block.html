@@ -1,28 +1,28 @@
 <dom-module id="statistics-block">
-    <style>
-        :host {
-            display: block;
-            background: var(--default-primary-color);
-            color: #ffffff;
-        }
-
-        .counter {
-            font-size: 3em;
-            font-weight: 100;
-        }
-
-        .caption {
-          font-size: .85em;
-        }
-
-        @media (max-width: 767px) {
-            .statistics-element:nth-child(1),
-            .statistics-element:nth-child(2) {
-                margin-bottom: 40px;
-            }
-        }
-    </style>
     <template>
+        <style>
+            :host {
+                display: block;
+                background: var(--default-primary-color);
+                color: #ffffff;
+            }
+
+            .counter {
+                font-size: 3em;
+                font-weight: 100;
+            }
+
+            .caption {
+              font-size: .85em;
+            }
+
+            @media (max-width: 767px) {
+                .statistics-element:nth-child(1),
+                .statistics-element:nth-child(2) {
+                    margin-bottom: 40px;
+                }
+            }
+        </style>
         <div class="container flex wrap relative layout horizontal">
             <template is="dom-repeat" items="{{statistics}}">
                 <div class="statistics-element two-column-xs layout vertical text-center">

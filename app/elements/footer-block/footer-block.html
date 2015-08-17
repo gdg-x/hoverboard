@@ -1,121 +1,116 @@
-<!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
 <link rel="import" href="../mailchimp-subscribe/mailchimp-subscribe.html">
 
 <dom-module id="footer-block">
     <template>
-    <style>
-        :host {
-            display: block;
-            background: #FCFCFC;
-            overflow: hidden;
-        }
-
-        .container {
-<<<<<<< HEAD
-            padding: 16px;
-=======
-            padding: 0 16px;
->>>>>>> 2b51a04f9e7b40a9ad7230f4e08802f5b2a85320
-            font-size: 14px;
-        }
-
-        .container paper-button {
-            font-size: 0.9em;
-        }
-
-        .footer {
-            min-height: 200px;
-            color: #757575;
-        }
-
-        .gdg-logo {
-            height: 30px;
-            display: block;
-        }
-
-        a {
-            color: inherit !important;
-        }
-
-        @media (min-width: 768px) {
-            nav {
-                flex-direction: row !important;
-                justify-content: flex-end !important;
-                align-self: flex-end !important;
+        <style>
+            :host {
+                display: block;
+                background: #FCFCFC;
+                overflow: hidden;
             }
+
             .container {
-                padding: 0;
+                padding: 16px;
+                font-size: 14px;
             }
-        }
 
-        .footer-backtotop {
-            margin-bottom: 20px;
-        }
+            .container paper-button {
+                font-size: 0.9em;
+            }
 
-        .footer-content {
-            padding-top: 16px;
-            padding-bottom: 16px;
-        }
+            .footer {
+                min-height: 200px;
+                color: #757575;
+            }
 
-        .footer-links-container {
-            padding-top: 0;
-        }
+            .gdg-logo {
+                height: 30px;
+                display: block;
+            }
 
-        .link-block {
-            margin-top: 0;
-            padding: 0;
-        }
+            a {
+                color: inherit !important;
+            }
 
-        .link-block li {
-            margin-bottom: 9px;
-            list-style-type: none;
-        }
+            @media (min-width: 768px) {
+                nav {
+                    flex-direction: row !important;
+                    justify-content: flex-end !important;
+                    align-self: flex-end !important;
+                }
+                .container {
+                    padding: 0;
+                }
+            }
 
-        .link-block-title {
-            margin-bottom: 10px;
-            font-size: 1.3em;
-            font-weight: 300;
-        }
-
-        .link-block a {
-            font-weight: 100;
-        }
-
-        .link-block a:hover {
-            text-decoration: underline;
-        }
-
-        .link-block-wrapper {
-            margin-bottom: 30px;
-        }
-
-        .icons-wrapper {
-            margin-top: -5px;
-        }
-
-        @media (min-width: 768px) {
             .footer-backtotop {
-                margin-top: -10px;
-                margin-bottom: 0;
+                margin-bottom: 20px;
             }
+
             .footer-content {
-                padding: 32px 0;
-                flex: 1;
+                padding-top: 16px;
+                padding-bottom: 16px;
             }
+
             .footer-links-container {
                 padding-top: 0;
             }
-            .footer-bottom {
-                padding: 16px 0;
-            }
+
             .link-block {
+                margin-top: 0;
                 padding: 0;
             }
-            .link-block-title {
-                margin-bottom: 15px;
+
+            .link-block li {
+                margin-bottom: 9px;
+                list-style-type: none;
             }
-        }
-    </style>
+
+            .link-block-title {
+                margin-bottom: 10px;
+                font-size: 1.3em;
+                font-weight: 300;
+            }
+
+            .link-block a {
+                font-weight: 100;
+            }
+
+            .link-block a:hover {
+                text-decoration: underline;
+            }
+
+            .link-block-wrapper {
+                margin-bottom: 30px;
+            }
+
+            .icons-wrapper {
+                margin-top: -5px;
+            }
+
+            @media (min-width: 768px) {
+                .footer-backtotop {
+                    margin-top: -10px;
+                    margin-bottom: 0;
+                }
+                .footer-content {
+                    padding: 32px 0;
+                    flex: 1;
+                }
+                .footer-links-container {
+                    padding-top: 0;
+                }
+                .footer-bottom {
+                    padding: 16px 0;
+                }
+                .link-block {
+                    padding: 0;
+                }
+                .link-block-title {
+                    margin-bottom: 15px;
+                }
+            }
+        </style>
         <div class="line full-width"></div>
         <div class="container footer layout vertical">
             <div class="footer-content layout horizontal justified">
@@ -166,14 +161,8 @@
                             </a>
                         </div>
                     </div>
-
-<<<<<<< HEAD
-                    <div class="flex link-block-wrapper">
-                        <span class="link-block-title block">Subscibe</span>
-=======
                     <div class="flex">
                         <span class="link-block-title block">Subscribe</span>
->>>>>>> 2b51a04f9e7b40a9ad7230f4e08802f5b2a85320
                         <span>No spam, only the latest news and updates!</span>
                         <mailchimp-subscribe url="{{url}}" name="{{name}}"></mailchimp-subscribe>
                     </div>

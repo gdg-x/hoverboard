@@ -10,17 +10,6 @@
             padding: 16px 0;
         }
 
-        .title {
-            color: var(--default-primary-color);
-            font-size: 42px;
-        }
-
-        .posted {
-            font-size: 14px;
-            color: var(--secondary-text-color);
-        }
-
-<<<<<<< HEAD
             .title {
                 color: var(--default-primary-color);
                 font-size: 42px;
@@ -30,16 +19,6 @@
                 font-size: 14px;
                 color: var(--secondary-text-color);
             }
-
-            @media (min-width: 768px) {
-                paper-card {
-                    width: 80%;
-                }
-                .paper-card-container {
-                    padding: 50px 40px;
-                }
-            }
-=======
         @media (min-width: 768px) {
             paper-card {
                 width: 80%;
@@ -48,7 +27,6 @@
                 padding: 50px 40px;
             }
         }
->>>>>>> 2b51a04f9e7b40a9ad7230f4e08802f5b2a85320
         </style>
         <iron-ajax id="ajax" url="[[postUrl]]" handle-as="text" on-response="postLoaded"></iron-ajax>
         <div class="relative layout horizontal center-justified">
@@ -59,13 +37,9 @@
                     </paper-button>
                     <div class="card-content">
                         <span class="title block">[[meta.title]]</span>
-<<<<<<< HEAD
                         <span class="posted">Posted:
                             <span>[[meta.posted]]</span>
                         </span>
-=======
-                        <span class="posted">Posted: <span>[[meta.posted]]</span></span>
->>>>>>> 2b51a04f9e7b40a9ad7230f4e08802f5b2a85320
                     </div>
                     <div class="card-content">
                         <marked-element markdown="[[post]]"></marked-element>

@@ -44,59 +44,6 @@
                 color: #fff;
             }
         }
-
-<<<<<<< HEAD
-            @media (min-width: 768px) {
-                paper-card {
-                    width: 80%;
-                }
-                .paper-card-container {
-                    padding: 50px 40px;
-                }
-                .person-img {
-                    height: 70px;
-                    width: 70px;
-                }
-                .title {
-                    font-size: 14px;
-                    padding-bottom: 4px;
-                    font-weight: 300;
-                    color: var(--default-primary-color);
-                }
-            }
-
-            .people-image-overlay {
-                background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 4%, rgba(0, 0, 0, 0) 50%);
-            }
-
-            @media (max-width: 767px) {
-                .people-header {
-                    height: 256px;
-                }
-                .bottom-image-text {
-                    padding: 16px;
-                    position: absolute;
-                    bottom: 0;
-                    color: #fff;
-                }
-                .people-name {
-                    font-size: 24px;
-                    font-weight: 300;
-                }
-                .title {
-                    margin-top: -5px;
-                    font-size: 14px;
-                    font-weight: 300;
-                }
-                paper-icon-button {
-                    color: #fff;
-                }
-            }
-
-            .person-detail {
-                margin-left: 15px;
-            }
-=======
         @media (min-width: 768px) {
             paper-card {
                 width: 80%;
@@ -115,7 +62,6 @@
         .person-detail {
             margin-left: 15px;
         }
->>>>>>> 2b51a04f9e7b40a9ad7230f4e08802f5b2a85320
 
         .person-detail .name {
             font-size: 18px;
@@ -133,11 +79,7 @@
                     <div class="people-header relative visible-xs">
                         <iron-image src="[[person.photoUrl]]" class="placeholder-color fit" preload fade sizing="cover"></iron-image>
                         <div class="people-image-overlay fit"></div>
-<<<<<<< HEAD
-                        <paper-icon-button icon="icons:arrow-back" on-tap="closePeople"></paper-icon-button>
-=======
                         <paper-icon-button class="back-button-header" icon="icons:arrow-back" on-tap="closePeople"></paper-icon-button>
->>>>>>> 2b51a04f9e7b40a9ad7230f4e08802f5b2a85320
                         <div class="bottom-image-text">
                             <span class="people-name relative">[[person.name]]</span>
                             <div class="title">
