@@ -305,13 +305,8 @@ gulp.task('serve:dist', ['default'], function () {
   });
 });
 
-// Replace text in dist dir
-gulp.task('replace-dist', function () {
-  return gulp.src(['dist/elements/elements.vulcanized.js'])
-    // Disable hashbang in routing
-    .pipe($.replace('hashbang:!0', 'hashbang:0'))
-    .pipe(gulp.dest('dist/elements'));
-});
+// Disable hashbang in routing
+gulp.task('disable-hashbang', getTask('disable-hashbang'));
 
 // Fetch newest Google analytics.js and replace link to analytics.js
 // https://www.google-analytics.com/analytics.js have only 2 hours cache
@@ -353,7 +348,7 @@ gulp.task('revision', function () {
 gulp.task('pre-deploy', function(cb) {
   runSequence(
     'default',
-    'replace-dist',
+    'disable-hashbang',
     'revision',
     cb);
 });
