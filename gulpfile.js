@@ -172,8 +172,8 @@ gulp.task('vulcanize', function () {
       removeComments: true,
       collapseWhitespace: true
     })))
-    // Remove newlines from CSS
-    //.pipe($.replace(/[\r\n]/g, ''))
+    // Remove newline characters
+    .pipe($.if('*.html', $.replace(/[\n]/g, '')))
     // Remove 2 or more spaces from CSS
     // (single spaces can be syntactically significant)
     .pipe($.if('*.html', $.replace(/ {2,}/g, '')))
