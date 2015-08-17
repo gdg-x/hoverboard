@@ -1,30 +1,33 @@
 <dom-module id="blog-post">
     <template>
         <style>
-            :host {
-                display: none;
-                position: absolute;
-            }
+        :host {
+            display: none;
+            position: absolute;
+        }
 
+        .paper-card-container {
+            padding: 16px 0;
+        }
+
+        .title {
+            color: var(--default-primary-color);
+            font-size: 42px;
+        }
+
+        .posted {
+            font-size: 14px;
+            color: var(--secondary-text-color);
+        }
+
+        @media (min-width: 768px) {
             paper-card {
                 width: 80%;
-                /*margin-top: -150px;*/
-                z-index: 1;
             }
-
             .paper-card-container {
                 padding: 50px 40px;
             }
-
-            .title {
-                color: var(--default-primary-color);
-                font-size: 42px;
-            }
-
-            .posted {
-                font-size: 14px;
-                color: var(--secondary-text-color);
-            }
+        }
         </style>
         <iron-ajax id="ajax" url="[[postUrl]]" handle-as="text" on-response="postLoaded"></iron-ajax>
         <div class="relative layout horizontal center-justified">
@@ -34,8 +37,8 @@
                         <iron-icon icon="icons:arrow-back"></iron-icon> Back
                     </paper-button>
                     <div class="card-content">
-                            <span class="title block">[[meta.title]]</span>
-                            <span class="posted">Posted: <span>[[meta.posted]]</span></span>
+                        <span class="title block">[[meta.title]]</span>
+                        <span class="posted">Posted: <span>[[meta.posted]]</span></span>
                     </div>
                     <div class="card-content">
                         <marked-element markdown="[[post]]"></marked-element>
@@ -45,58 +48,57 @@
         </div>
     </template>
 </dom-module>
-
 <script>
-    Polymer({
-        is: 'blog-post',
-        behaviors: [
-            Polymer.NeonSharedElementAnimatableBehavior
-        ],
-        properties: {
-            meta: {
-                type: Object,
-                observer: '_metaChanged'
-            },
-            animationConfig: {
-                value: function() {
-                    return {
-                        'entry': {
-                            name: 'transform-animation',
-                            node: this,
-                            transformFrom: 'translateY(100vh)',
-                            transformTo: 'none',
-                            timing: {
-                                duration: 1000
-                            }
-                        },
-                        'exit': {
-                            name: 'transform-animation',
-                            node: this,
-                            transformFrom: 'none',
-                            transformTo: 'translateY(100vh)',
-                            timing: {
-                                duration: 1000
-                            }
+Polymer({
+    is: 'blog-post',
+    behaviors: [
+        Polymer.NeonSharedElementAnimatableBehavior
+    ],
+    properties: {
+        meta: {
+            type: Object,
+            observer: '_metaChanged'
+        },
+        animationConfig: {
+            value: function() {
+                return {
+                    'entry': {
+                        name: 'transform-animation',
+                        node: this,
+                        transformFrom: 'translateY(100vh)',
+                        transformTo: 'none',
+                        timing: {
+                            duration: 1000
                         }
-                    };
-                }
-            },
-            closing: {
-                type: Boolean,
-                notify: true
+                    },
+                    'exit': {
+                        name: 'transform-animation',
+                        node: this,
+                        transformFrom: 'none',
+                        transformTo: 'translateY(100vh)',
+                        timing: {
+                            duration: 1000
+                        }
+                    }
+                };
             }
         },
-        _metaChanged: function() {
-            this.postUrl = '../../posts/' + this.meta.file;
-            this.style.display = 'block';
-            this.$.ajax.generateRequest();
-        },
-        postLoaded: function(event, response) {
-            this.post = response.response;
-            this.style.position = 'relative';
-        },
-        closePost: function() {
-            this.closing = true;
+        closing: {
+            type: Boolean,
+            notify: true
         }
-    });
+    },
+    _metaChanged: function() {
+        this.postUrl = '../../posts/' + this.meta.file;
+        this.style.display = 'block';
+        this.$.ajax.generateRequest();
+    },
+    postLoaded: function(event, response) {
+        this.post = response.response;
+        this.style.position = 'relative';
+    },
+    closePost: function() {
+        this.closing = true;
+    }
+});
 </script>
