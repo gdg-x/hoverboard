@@ -169,7 +169,8 @@ gulp.task('vulcanize', function () {
         [ {source: '\\({\\{'}, {source: '\\}\\}'} ],
         [ {source: '\\[\\['}, {source: '\\]\\]'}  ]
       ],
-      removeComments: true
+      removeComments: true,
+      collapseWhitespace: true
     })))
     // Remove newlines from CSS
     //.pipe($.replace(/[\r\n]/g, ''))
