@@ -217,20 +217,6 @@ gulp.task('clean', function (cb) {
   del(['.tmp', 'dist', 'cdn'], cb);
 });
 
-// Minify JavaScript in dist directory
-gulp.task('minify-dist', function () {
-  gulp.src(['dist/bower_components/platinum-sw/service-worker.js'])
-    .pipe($.uglify())
-    .pipe(gulp.dest('dist/bower_components/platinum-sw'));
-  gulp.src(['dist/sw-toolbox/*.js'])
-    //.pipe($.uglify()).on('error', errorHandler)
-    // https://github.com/mishoo/UglifyJS2/issues/766
-    .pipe(gulp.dest('dist/sw-toolbox'));
-  gulp.src(['dist/sw-import.js'])
-    .pipe($.uglify())
-    .pipe(gulp.dest('dist'));
-});
-
 // Watch Files For Changes & Reload
 gulp.task('serve', ['styles', 'elements', 'images'], function () {
   browserSync({
@@ -299,6 +285,9 @@ gulp.task('disable-hashbang', getTask('disable-hashbang'));
 // Fetch newest Google analytics.js and replace link to analytics.js
 // https://www.google-analytics.com/analytics.js have only 2 hours cache
 gulp.task('fetch-newest-analytics', getTask('fetch-newest-analytics'));
+
+// Minify JavaScript in dist directory
+gulp.task('minify-dist', getTask('minify-dist'));
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
