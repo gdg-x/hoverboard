@@ -9,9 +9,7 @@
     <meta name="description" content="GDG DevFest Ukraine 2015 - The biggest Google related event in Ukraine carefully crafted for you by GDG community! Awesome speakers and lot's of fun!">
     <meta name="keywords" content="event, gdg, devfest, google, programming, android, chrome, polymer, developers, lviv">
     <link rel="canonical" href="http://devfest.gdg.org.ua/">
-
     <title>GDG DevFest Ukraine 2015 &bull; October 23-24, Lviv</title>
-
     <!-- Social: Twitter -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@GDGLviv">
@@ -25,41 +23,35 @@
     <meta property="og:url" content="http://devfest.gdg.org.ua/" />
     <meta property="og:image" content="images/seo/seo.jpg" />
     <meta property="og:description" content="GDG DevFest Ukraine 2015 - The biggest Google related event in Ukraine carefully crafted for you by GDG community! Awesome speakers and lot's of fun!" />
-
-
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
     <!-- Chrome for Android theme color -->
+<<<<<<< HEAD
     <meta name="theme-color" content="#00BCD4">
 
+=======
+    <meta name="theme-color" content="#303F9F">
+>>>>>>> 2b51a04f9e7b40a9ad7230f4e08802f5b2a85320
     <!-- Web Application Manifest -->
     <link rel="manifest" href="manifest.json">
-
     <!-- Tile color for Win8 -->
     <meta name="msapplication-TileColor" content="#00BCD4">
-
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Polymer Starter Kit">
     <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
-
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
     <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
-
     <!-- Tile icon for Win8 (144x144) -->
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild-->
-
     <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
     <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <!-- endbuild -->
-
     <!-- will be replaced with elements/elements.vulcanized.html -->
     <link rel="import" href="elements/elements.html">
     <!-- endreplace-->
@@ -68,7 +60,6 @@
 <body unresolved class="fullbleed layout vertical">
     <span id="browser-sync-binding"></span>
     <template is="dom-bind" id="app">
-
         <paper-drawer-panel id="paperDrawerPanel" force-narrow>
             <paper-header-panel drawer class="drawer" mode="seamed">
                 <paper-toolbar class="tall">
@@ -86,21 +77,15 @@
                 </paper-toolbar>
                 <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
                     <a data-route="home" href="/">Home</a>
-
                     <a data-route="blog" href="/blog">Blog</a>
-
                     <a data-route="speakers" href="/speakers">Speakers</a>
-
                     <!-- <a data-route="contact" href="/contact">Contact</a> -->
                 </paper-menu>
             </paper-header-panel>
-
             <div class="scroll" main>
-
                 <!-- Main Content -->
                 <div class="content">
                     <iron-pages attr-for-selected="data-route" selected="{{route}}">
-
                         <section data-route="home">
                             <hero-block class="section-shadow" hide-logo>
                                 <div class="top-section hero">
@@ -124,7 +109,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <paper-fab class="section-fab-right" icon="expand-more"></paper-fab>
+                                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=GDG%20DevFest%20Ukraine%202015&dates=20151023T090000/20151024T180000&details=The%20biggest%20Google%20related%20event%20in%20Ukraine%20carefully%20crafted%20for%20you%20by%20GDG%20community!%20Awesome%20speakers%20and%20lot's%20of%20fun!%20Details%20at%20http://devfest.gdg.org.ua&location=Shchyretska%20St%2036,%20L'viv,%20Львівська%20область,%20Ukraine&pli=1&uid=&sf=true&output=xml#eventpage_6" target="_blank">
+                                    <paper-fab class="section-fab-right" icon="icons:event"></paper-fab>
+                                </a>
                             </hero-block>
                             <statistics-block></statistics-block>
                             <featured-people source="../../data/featured-speakers.json">
@@ -139,7 +126,6 @@
                             </logos-block>
                             <footer-block></footer-block>
                         </section>
-
                         <section data-route="blog">
                             <hero-block class="section-shadow" style="background: #03A9F4; color: #fff;">
                                 <div class="top-section">
@@ -152,7 +138,6 @@
                             <blog-block source="../../data/blog.json"></blog-block>
                             <footer-block></footer-block>
                         </section>
-
                         <section data-route="speakers">
                             <hero-block class="section-shadow" style="background: #00BCD4; color: #fff;">
                                 <div class="top-section">
@@ -165,7 +150,6 @@
                             <people-block source="../../data/speakers.json"></people-block>
                             <footer-block></footer-block>
                         </section>
-
                         <!-- <section data-route="contact">
                             <h1>Contact</h1>
 
@@ -175,17 +159,15 @@
                 </div>
             </div>
         </paper-drawer-panel>
-
         <paper-toast id="caching-complete" duration="6000" text="Caching complete! This app will work offline.">
         </paper-toast>
-
         <platinum-sw-register auto-register clients-claim skip-waiting on-service-worker-installed="displayInstalledToast">
             <platinum-sw-cache default-cache-strategy="networkFirst" precache-file="precache.json">
             </platinum-sw-cache>
         </platinum-sw-register>
         <webfont-loader families="Roboto:100,400&subset=latin"></webfont-loader>
-
     </template>
+<<<<<<< HEAD
 
     <google-analytics code="UA-43643469-1"></google-analytics>
     <!-- <script>
@@ -198,6 +180,9 @@
       ga('send', 'pageview');
     </script> -->
 
+=======
+   <google-analytics code="UA-43643469-1"></google-analytics>
+>>>>>>> 2b51a04f9e7b40a9ad7230f4e08802f5b2a85320
     <!-- build:js scripts/app.js -->
     <script src="scripts/app.js"></script>
     <!-- endbuild-->

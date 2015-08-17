@@ -80,7 +80,7 @@ a {
 @media (min-width: 768px) {
     .container {
         margin: 0 auto;
-        padding: 60px 0;
+        padding: 60px 16px;
         max-width: 896px;
     }
     .card-container {

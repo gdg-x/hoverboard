@@ -1,15 +1,51 @@
 <dom-module id="person-dialog">
     <template>
         <style>
-            :host {
-                display: none;
+        :host {
+            display: none;
+            position: absolute;
+        }
+
+        .back-button {
+            margin-bottom: 25px;
+        }
+
+        .back-button-header {
+            color: #fff;
+        }
+
+        .people-image-overlay {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 4%, rgba(0, 0, 0, 0) 50%);
+        }
+
+        .person-img {
+            height: 70px;
+            width: 70px;
+        }
+
+        @media (max-width: 767px) {
+            .people-header {
+                height: 256px;
+            }
+            .bottom-image-text {
+                padding: 16px;
                 position: absolute;
+                bottom: 0px;
+                color: #fff;
             }
-
-            .back-button {
-                margin-bottom: 25px;
+            .people-name {
+                font-size: 24px;
+                font-weight: 300;
             }
+            .title {
+                margin-top: -5px;
+                font-size: 14px;
+                font-weight: 300;
+                color: #fff;
+            }
+        }
 
+<<<<<<< HEAD
             @media (min-width: 768px) {
                 paper-card {
                     width: 80%;
@@ -60,16 +96,36 @@
             .person-detail {
                 margin-left: 15px;
             }
-
-            .person-detail .name {
-                font-size: 18px;
-                margin: 0 0 5px;
+=======
+        @media (min-width: 768px) {
+            paper-card {
+                width: 80%;
             }
-
-            .badge {
-                color: var(--secondary-text-color);
+            .paper-card-container {
+                padding: 50px 40px;
+            }
+            .title {
                 font-size: 14px;
+                padding-bottom: 4px;
+                font-weight: 300;
+                color: var(--default-primary-color);
             }
+        }
+
+        .person-detail {
+            margin-left: 15px;
+        }
+>>>>>>> 2b51a04f9e7b40a9ad7230f4e08802f5b2a85320
+
+        .person-detail .name {
+            font-size: 18px;
+            margin: 0 0 5px;
+        }
+
+        .badge {
+            color: var(--secondary-text-color);
+            font-size: 14px;
+        }
         </style>
         <div class="relative layout horizontal center-justified">
             <paper-card>
@@ -77,7 +133,11 @@
                     <div class="people-header relative visible-xs">
                         <iron-image src="[[person.photoUrl]]" class="placeholder-color fit" preload fade sizing="cover"></iron-image>
                         <div class="people-image-overlay fit"></div>
+<<<<<<< HEAD
                         <paper-icon-button icon="icons:arrow-back" on-tap="closePeople"></paper-icon-button>
+=======
+                        <paper-icon-button class="back-button-header" icon="icons:arrow-back" on-tap="closePeople"></paper-icon-button>
+>>>>>>> 2b51a04f9e7b40a9ad7230f4e08802f5b2a85320
                         <div class="bottom-image-text">
                             <span class="people-name relative">[[person.name]]</span>
                             <div class="title">
@@ -122,28 +182,27 @@
         </div>
     </template>
 </dom-module>
-
 <script>
-    Polymer({
-        is: 'person-dialog',
-        properties: {
-            person: Object,
-            closing: {
-                type: Boolean,
-                notify: true
-            }
-        },
-        closePeople: function() {
-            this.closing = true;
-        },
-        _calculateIcon: function(event) {
-            console.log(event);
-            return 'app-icons:' + event.model.social.name;
-        },
-        calculateIcon: function(event) {
-            console.log(event);
-            return 'app-icons:' + event.model.social.name;
+Polymer({
+    is: 'person-dialog',
+    properties: {
+        person: Object,
+        closing: {
+            type: Boolean,
+            notify: true
         }
+    },
+    closePeople: function() {
+        this.closing = true;
+    },
+    _calculateIcon: function(event) {
+        console.log(event);
+        return 'app-icons:' + event.model.social.name;
+    },
+    calculateIcon: function(event) {
+        console.log(event);
+        return 'app-icons:' + event.model.social.name;
+    }
 
-    });
+});
 </script>

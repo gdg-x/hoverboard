@@ -2,6 +2,7 @@
 <link rel="import" href="../mailchimp-subscribe/mailchimp-subscribe.html">
 
 <dom-module id="footer-block">
+    <template>
     <style>
         :host {
             display: block;
@@ -10,7 +11,11 @@
         }
 
         .container {
+<<<<<<< HEAD
             padding: 16px;
+=======
+            padding: 0 16px;
+>>>>>>> 2b51a04f9e7b40a9ad7230f4e08802f5b2a85320
             font-size: 14px;
         }
 
@@ -111,7 +116,6 @@
             }
         }
     </style>
-    <template>
         <div class="line full-width"></div>
         <div class="container footer layout vertical">
             <div class="footer-content layout horizontal justified">
@@ -163,8 +167,13 @@
                         </div>
                     </div>
 
+<<<<<<< HEAD
                     <div class="flex link-block-wrapper">
                         <span class="link-block-title block">Subscibe</span>
+=======
+                    <div class="flex">
+                        <span class="link-block-title block">Subscribe</span>
+>>>>>>> 2b51a04f9e7b40a9ad7230f4e08802f5b2a85320
                         <span>No spam, only the latest news and updates!</span>
                         <mailchimp-subscribe url="{{url}}" name="{{name}}"></mailchimp-subscribe>
                     </div>
