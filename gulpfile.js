@@ -286,6 +286,9 @@ gulp.task('disable-hashbang', getTask('disable-hashbang'));
 // https://www.google-analytics.com/analytics.js have only 2 hours cache
 gulp.task('fetch-newest-analytics', getTask('fetch-newest-analytics'));
 
+// Fix path to sw-toolbox.js
+gulp.task('fix-path-sw-toolbox', getTask('fix-path-sw-toolbox'));
+
 // Minify JavaScript in dist directory
 gulp.task('minify-dist', getTask('minify-dist'));
 
@@ -310,7 +313,7 @@ gulp.task('default', ['clean'], function (cb) {
 gulp.task('pre-deploy', function(cb) {
   runSequence(
     'default',
-    'disable-hashbang',
+    ['disable-hashbang', 'fix-path-sw-toolbox'],
     'revision',
     cb);
 });
