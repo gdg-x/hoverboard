@@ -217,21 +217,6 @@ gulp.task('clean', function (cb) {
   del(['.tmp', 'dist', 'cdn'], cb);
 });
 
-// Clean dist directory
-gulp.task('clean-dist', function (cb) {
-  del([
-    'dist/bower_components/**/*',
-    '!dist/bower_components/webcomponentsjs',
-    '!dist/bower_components/webcomponentsjs/webcomponents-lite.min.js',
-    '!dist/bower_components/platinum-sw',
-    '!dist/bower_components/platinum-sw/service-worker.js',
-    'dist/styles/app-theme.html',
-    'dist/elements/*',
-    '!dist/elements/elements.vulcanized.*',
-    '!dist/elements/bootstrap'
-  ], cb);
-});
-
 // Minify JavaScript in dist directory
 gulp.task('minify-dist', function () {
   gulp.src(['dist/bower_components/platinum-sw/service-worker.js'])
@@ -304,6 +289,9 @@ gulp.task('serve:dist', ['default'], function () {
     }
   });
 });
+
+// Clean dist directory
+gulp.task('clean-dist', getTask('clean-dist'));
 
 // Disable hashbang in routing
 gulp.task('disable-hashbang', getTask('disable-hashbang'));
