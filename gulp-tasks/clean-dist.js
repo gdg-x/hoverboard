@@ -1,8 +1,8 @@
 'use strict';
 
 // Clean dist directory
-module.exports = function ($, config, gulp) { return function (cb) {
-  require('del')([
+module.exports = function (del) { return function (cb) {
+  del([
     'dist/bower_components/**/*',
     '!dist/bower_components/webcomponentsjs',
     '!dist/bower_components/webcomponentsjs/webcomponents-lite.min.js',

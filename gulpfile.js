@@ -24,11 +24,7 @@ var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
 var config = require('./config');
-
-// Get a task from the tasks directory with default parameters
-function getTask(task) {
-  return require('./gulp-tasks/' + task)($, config, gulp);
-}
+var taskDir = './gulp-tasks/';
 
 // Handle the error
 // .pipe(...).on('error', errorHandler)
@@ -277,23 +273,25 @@ gulp.task('serve:dist', ['default'], function () {
 });
 
 // Clean dist directory
-gulp.task('clean-dist', getTask('clean-dist'));
+gulp.task('clean-dist', require(taskDir + 'clean-dist')(del));
 
 // Disable hashbang in routing
-gulp.task('disable-hashbang', getTask('disable-hashbang'));
+gulp.task('disable-hashbang', require(taskDir + 'disable-hashbang')($, gulp));
 
 // Fetch newest Google analytics.js and replace link to analytics.js
 // https://www.google-analytics.com/analytics.js have only 2 hours cache
-gulp.task('fetch-newest-analytics', getTask('fetch-newest-analytics'));
+gulp.task('fetch-newest-analytics',
+  require(taskDir + 'fetch-newest-analytics')($, gulp, merge));
 
 // Fix path to sw-toolbox.js
-gulp.task('fix-path-sw-toolbox', getTask('fix-path-sw-toolbox'));
+gulp.task('fix-path-sw-toolbox',
+  require(taskDir + 'fix-path-sw-toolbox')($, gulp));
 
 // Minify JavaScript in dist directory
-gulp.task('minify-dist', getTask('minify-dist'));
+gulp.task('minify-dist', require(taskDir + 'minify-dist')($, gulp, merge));
 
 // Static asset revisioning by appending content hash to filenames
-gulp.task('revision', getTask('revision'));
+gulp.task('revision', require(taskDir + 'revision')($, gulp));
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
@@ -355,7 +353,7 @@ gulp.task('delete:prod', function() {
 // ----------
 
 // Run PageSpeed Insights
-gulp.task('pagespeed', getTask('pagespeed'));
+gulp.task('pagespeed', require(taskDir + 'pagespeed')(config));
 
 // Test Tasks
 // ----------

@@ -1,7 +1,7 @@
 'use strict';
 
 // Static asset revisioning by appending content hash to filenames
-module.exports = function ($, config, gulp) { return function () {
+module.exports = function ($, gulp) { return function () {
   var revAll = new $.revAll({ dontRenameFile: [
     /^\/404.html/g,
     /^\/humans.txt/g,
