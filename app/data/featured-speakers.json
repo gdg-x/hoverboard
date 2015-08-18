@@ -19,8 +19,13 @@
     "company": "Spatialkey, Ukraine",
     "photoUrl": "../../images/people/yehor_lvivski.jpg"
 }, {
-    "id": 2,
+    "id": 5,
     "name": "Valentyn Shybanov",
     "company": "Twinfield, Ukraine",
     "photoUrl": "../../images/people/valentyn_shybanov.jpg"
+}, {
+    "id": 6,
+    "name": "Mandy Waite",
+    "company": "Google, UK",
+    "photoUrl": "../../images/people/mandy_waite.jpg"
 }]

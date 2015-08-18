@@ -6,6 +6,7 @@
     "country": "Turkey",
     "photoUrl": "../../images/people/said_tahsine_dane.jpg",
     "bio": "GDE (Google Developer Expert) for Android. Experience with Android (since Cupcake), Google Glass, Android Wear, and (even on!) iOS. Very passionate developer who tries to live on the bleeding edge of technology. Also very interested in mobile UX. <br/><br/>Active member and organizer at GDG Istanbul enjoying organizing various conferences and hackathons. Also a part of GDG[X] - a GDG related open-source organization.",
+    "tags": ["Android"],
     "badges": [{
         "name": "GDE",
         "description": "Android Google Developer Expert",
@@ -33,6 +34,7 @@
     "country": "Poland",
     "photoUrl": "../../images/people/mateus_herych.jpg",
     "bio": "Mateusz is an Android GDE and GDG organizer. Works as Android Developer for Base CRM where he uses his android-abracadabras to make enterprise software users more productive.",
+    "tags": ["Android"],
     "badges": [{
         "name": "GDE",
         "description": "Android Google Developer Expert",
@@ -60,6 +62,7 @@
     "country": "Ukraine",
     "photoUrl": "../../images/people/dmytro_danylyk.jpeg",
     "bio": "Hello. I am finalist of Google Apps Developer Challenge 2012. Author of open source libraries 4000+ stars. When I have free time I am writing technical articles. Always trying to share my knowledge & experience on different events. Big fan of android, flat design, stackoverflow, git, Intellij IDEA. Eclipse IDE hater.",
+    "tags": ["Android", "UX"],
     "socials": [{
         "name": "Google+",
         "link": "https://plus.google.com/+DmytroDanylyk"
@@ -78,6 +81,7 @@
     "country": "Ukraine",
     "photoUrl": "../../images/people/roman_mazur.jpg",
     "bio": "Roman started his way in Android 5 years ago and fall in love with this platform. Currently he is a head of Android unit in Stanfy LLC and a co-organizer of Kyiv Google Developers Group focusing on Android development. Roman is responsible for building a strong team of Android developers inside Stanfy as well as for organizing Android professionals community in Kyiv.",
+    "tags": ["Android"],
     "badges": [{
         "name": "GDG",
         "description": "Google Developers Group Kyiv",
@@ -98,6 +102,7 @@
     "country": "Poland",
     "photoUrl": "../../images/people/michal_tajchert.jpg",
     "bio": "Michal is Android Developer for all kinds of wearables, done programming for things such Oakley Airwave, Glass, Sony Smartwatch, and lately found his place in Android Wear development. He has contributed most of his project to the community and shared his knowledge to the community by organising many of Warsaw GDG meetings.",
+    "tags": ["Android"],
     "socials": [{
         "name": "Google+",
         "link": "https://plus.google.com/+MichalTajchert"
@@ -119,6 +124,7 @@
     "country": "Ukraine",
     "photoUrl": "../../images/people/yehor_lvivski.jpg",
     "bio": "Yehor is a passionate front end engineer and UX designer. He likes to make useful tools, that help people solve their problems. Currently he is creating a web app, that helps insurance companies save money, and allows you to find a better and safer place to live.",
+    "tags": ["Dart"],
     "socials": [{
         "name": "Twitter",
         "link": "https://twitter.com/lvivski"
@@ -137,6 +143,7 @@
     "country": "Ukraine",
     "photoUrl": "../../images/people/valentyn_shybanov.jpg",
     "bio": "Valentyn focuses on Polymer and Web Components. In previous roles heâ€™s helped craft design systems for massive enterprise companies, user interfaces for console titles, and even built the occasional enchanted princess game. These days his mission is to fight for a better web and to help developers build great experiences.",
+    "tags": ["Cloud"],
     "badges": [{
         "name": "GDG",
         "description": "Google Developers Group Kyiv",
@@ -157,11 +164,31 @@
     "country": "Ukraine",
     "photoUrl": "../../images/people/dima_maleev.jpg",
     "bio": "Dima is a developer for about 10 years, making his way from junior to technical architect and manager of complex mobile solutions. In the past .NET developer, ex-leader of \"Lviv .NET User Group\" and one of the organizers of the \"Oh, Mobile!\" community. A fan of mobile technology and javascript. Makes fun talks all around the world and plays american football:)",
+    "tags": ["V8 Engine"],
     "socials": [{
         "name": "Twitter",
         "link": "https://twitter.com/dimko1"
     }, {
         "name": "GitHub",
         "link": "https://github.com/dimko1"
+    }]
+}, {
+    "id": 9,
+    "name": "Mandy Waite",
+    "title": "Developer Advocate",
+    "company": "Google",
+    "country": "UK",
+    "photoUrl": "../../images/people/mandy_waite.jpg",
+    "bio": "Based in London, UK, Mandy is a Developer Relations Engineer at Google specializing in Container and Cloud technologies and working to make the world a better place for developers building applications for the Cloud. Before Google Mandy worked at Sun Microsystems on performance and scalability of Java and JavaEE and on porting Open Source apps to OpenSolaris. In her spare time Mandy is learning Japanese and likes to play the guitar.",
+    "tags": ["GAE", "gRPC", "Kubernetes"],
+    "socials": [{
+        "name": "Google+",
+        "link": "https://plus.google.com/+MandyWaite"
+    }, {
+        "name": "Twitter",
+        "link": "https://twitter.com/tekgrrl"
+    }, {
+        "name": "GitHub",
+        "link": "https://github.com/tekgrrl"
     }]
 }]
