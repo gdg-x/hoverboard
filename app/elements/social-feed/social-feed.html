@@ -1,31 +1,31 @@
 <link rel="import" href="../social-post/social-post.html">
 
 <dom-module id="social-feed">
-    <style>
-        :host {
-            display: block;
-            background: var(--default-primary-color);
-            --social-font-color: #ffffff;
-            color: var(--social-font-color);
-        }
-
-        a {
-            color: var(--social-font-color);
-        }
-
-        .heading a {
-            font-weight: 100;
-        }
-    </style>
     <template>
+        <style>
+            :host {
+                display: block;
+                background: var(--default-primary-color);
+                --social-font-color: #ffffff;
+                color: var(--social-font-color);
+            }
+
+            a {
+                color: var(--social-font-color);
+            }
+
+            .heading a {
+                font-weight: 100;
+            }
+        </style>
         <div class="container relative layout vertical-horizontal">
-            <iron-ajax auto url="{{json}}" handle-as="json" on-response="feedLoaded" debounce-duration="300" verbose></iron-ajax>
+            <iron-ajax auto url="[[source]]" handle-as="json" on-response="feedLoaded"></iron-ajax>
             <div class="flex-5">
                 <h4 class="heading">What's up <a href="https://www.google.com/#q=%23dfua">#dfua</a></h4>
                 <social-post id="post" author="{{author}}" text="{{text}}" when="{{when}}" canonicalUrl="https://twitter.com/" sign="@"></social-post>
             </div>
             <span class="flex"></span>
-            <div class="flex-5">
+            <div class="flex-5 second-block">
                 <h4 class="heading">Social</h4>
                 <span class="block">Add to circles, like, follow or connect with us on</span>
                 <div class="align-pb-block">
@@ -51,9 +51,7 @@
     Polymer({
         is: 'social-feed',
         properties: {
-            json: {
-                type: String
-            },
+            source: String,
             interval: {
                 type: Number,
                 value: 10000

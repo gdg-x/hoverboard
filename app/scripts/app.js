@@ -37,14 +37,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             drawerPanel.closeDrawer();
         }
     };
-
+/* jshint ignore:start */
     app.findByPropertyValue = function(array, property, value) {
         for (var i = 0; i < array.length; i++) {
-            if (array[i][property] === value) {
+            if (array[i][property] == value) {
                 return array[i];
             }
         }
     };
+            /* jshint ignore:end */
 
     app.smoothScroll = function(el, optDuration, optCallback) {
         var duration = optDuration || 1;
@@ -73,7 +74,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             scrollContainer.scrollTop = scrollTop;
 
-            // All done scrolling.
             if (point === 1 && optCallback) {
                 optCallback();
             }
@@ -88,7 +88,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if (point >= end) {
             return 1;
         }
-        var x = (point - start) / (end - start); // interpolation
+        var x = (point - start) / (end - start);
         return x * x * (3 - 2 * x);
     }
 

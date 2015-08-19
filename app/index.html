@@ -81,6 +81,7 @@
                 <!-- Main Content -->
                 <div class="content">
                     <iron-pages attr-for-selected="data-route" selected="{{route}}">
+                        <span id="top-anchor"></span>
                         <section data-route="home">
                             <hero-block class="section-shadow" hide-logo>
                                 <div class="top-section hero">
@@ -115,8 +116,9 @@
                             </featured-people>
                             <call-to-action></call-to-action>
                             <photo-block></photo-block>
-                            <!-- <tickets-block></tickets-block> -->
-                            <social-feed json="http://lviv.gdg.org.ua/tweetledee/favoritesjson.php?c=10&cache_interval=7200"></social-feed>
+                            <tickets-block></tickets-block>
+                            <latest-news source="../../data/blog.json"></latest-news>
+                            <social-feed source="http://lviv.gdg.org.ua/tweetledee/favoritesjson.php?c=10&cache_interval=7200"></social-feed>
                             <map-block></map-block>
                             <logos-block source="../../data/partners.json">
                                 <h4 class="heading">Partners</h4>
