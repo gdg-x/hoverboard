@@ -1,5 +1,5 @@
 {
-  "public": "cdn",
+  "public": "deploy",
   "rewrites": [ {
     "source": "**",
     "destination": "/index.html"

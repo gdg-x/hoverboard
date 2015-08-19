@@ -210,7 +210,7 @@ gulp.task('cache-config', function (callback) {
 
 // Clean Output Directory
 gulp.task('clean', function (cb) {
-  del(['.tmp', 'dist', 'cdn'], cb);
+  del(['.tmp', 'dist', 'deploy'], cb);
 });
 
 // Watch Files For Changes & Reload
@@ -276,7 +276,8 @@ gulp.task('serve:dist', ['default'], function () {
 gulp.task('clean-dist', require(taskDir + 'clean-dist')(del));
 
 // Disable hashbang in routing
-gulp.task('disable-hashbang', require(taskDir + 'disable-hashbang')($, gulp));
+gulp.task('disable-hashbang',
+  require(taskDir + 'disable-hashbang')($, config, gulp));
 
 // Fetch newest Google analytics.js and replace link to analytics.js
 // https://www.google-analytics.com/analytics.js have only 2 hours cache
@@ -305,9 +306,10 @@ gulp.task('default', ['clean'], function (cb) {
     cb);
 });
 
-// Deploy to Firebase
-// This function requires Firebase Command Line Tools to be installed and configured.
-// For info: https://www.firebase.com/docs/hosting/command-line-tool.html
+// Deploy Tasks
+// ------------
+
+// Pre-deploy tasks
 gulp.task('pre-deploy', function(cb) {
   runSequence(
     'default',
@@ -316,38 +318,21 @@ gulp.task('pre-deploy', function(cb) {
     cb);
 });
 
-// Development Firebase environment
-gulp.task('deploy:dev', ['pre-deploy'], function() {
-  return gulp.src('')
-    .pipe($.shell('firebase deploy -f ' + config.firebase.development));
-});
+// Deploy to development environment
+gulp.task('deploy:dev', ['pre-deploy'],
+  require(taskDir + 'deploy')($, config, gulp, 'development'));
 
-gulp.task('delete:dev', function() {
-  return gulp.src('')
-    .pipe($.shell('firebase delete-site -f ' + config.firebase.development));
-});
+// Deploy to staging environment
+gulp.task('deploy:staging', ['pre-deploy'],
+  require(taskDir + 'deploy')($, config, gulp, 'staging'));
 
-// Staging Firebase environment
-gulp.task('deploy:staging', ['pre-deploy'], function() {
-  return gulp.src('')
-    .pipe($.shell('firebase deploy -f ' + config.firebase.staging));
-});
+// Deploy to production environment
+gulp.task('deploy:prod', ['pre-deploy'],
+  require(taskDir + 'deploy')($, config, gulp, 'production'));
 
-gulp.task('delete:staging', function() {
-  return gulp.src('')
-    .pipe($.shell('firebase delete-site -f ' + config.firebase.staging));
-});
-
-// Production Firebase environment
-gulp.task('deploy:prod', ['pre-deploy'], function() {
-  return gulp.src('')
-    .pipe($.shell('firebase deploy -f ' + config.firebase.production));
-});
-
-gulp.task('delete:prod', function() {
-  return gulp.src('')
-    .pipe($.shell('firebase delete-site -f ' + config.firebase.production));
-});
+// Promote the staging version to the production environment
+gulp.task('deploy:promote',
+  require(taskDir + 'deploy')($, config, gulp, 'promote'));
 
 // Tool Tasks
 // ----------

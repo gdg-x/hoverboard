@@ -3,6 +3,7 @@
 // Static asset revisioning by appending content hash to filenames
 module.exports = function ($, gulp) { return function () {
   var revAll = new $.revAll({ dontRenameFile: [
+    // Files without revision hash
     /^\/404.html/g,
     /^\/humans.txt/g,
     /^\/index.html/g,
@@ -14,6 +15,6 @@ module.exports = function ($, gulp) { return function () {
 
   return gulp.src('dist/**')
     .pipe(revAll.revision())
-    .pipe(gulp.dest('cdn'))
-    .pipe($.size({title: 'cdn'}));
+    .pipe(gulp.dest('deploy'))
+    .pipe($.size({title: 'deploy'}));
 };};

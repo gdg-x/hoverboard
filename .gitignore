@@ -1,5 +1,5 @@
-node_modules
-dist
 bower_components
+deploy
+dist
+node_modules
 .tmp
-cdn
