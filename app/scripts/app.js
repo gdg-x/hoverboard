@@ -37,16 +37,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             drawerPanel.closeDrawer();
         }
     };
-
+/* jshint ignore:start */
     app.findByPropertyValue = function(array, property, value) {
         for (var i = 0; i < array.length; i++) {
-            /* jshint ignore:start */
             if (array[i][property] == value) {
                 return array[i];
             }
-            /* jshint ignore:end */
         }
     };
+            /* jshint ignore:end */
 
     app.smoothScroll = function(el, optDuration, optCallback) {
         var duration = optDuration || 1;
