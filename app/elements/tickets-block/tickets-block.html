@@ -51,6 +51,7 @@
 
             paper-dialog {
                 background: #fff;
+                min-height: 200px;
             }
 
             paper-dialog .buttons {
@@ -60,7 +61,7 @@
             @media (min-width: 768px) {}
         </style>
         <div id="pricetable" class="container wrap relative layout vertical text-center">
-            <h4 class="heading">Pricetable</h4>
+            <h4 class="heading">Tickets</h4>
             <div class="price-block-wrapper flex layout vertical-horizontal">
                 <div class="price-block flex text-center">
                     <span class="ticket-name block">Student</span>
@@ -83,7 +84,7 @@
             </div>
             <span class="details">Tickets grant access to all conference sections, coffee brakes, lunch and party. Accommodation is NOT included in the ticket price.</span>
             <div class="flex">
-                <paper-button class="border-button"on-tap="openTicketsDialog">Buy a ticket</paper-button>
+                <paper-button class="border-button" on-tap="openTicketsDialog">Buy a ticket</paper-button>
             </div>
         </div>
         <paper-dialog id="ticketsDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal>

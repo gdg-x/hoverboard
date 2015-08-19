@@ -1,115 +1,115 @@
 <link rel="import" href="../mailchimp-subscribe/mailchimp-subscribe.html">
-
 <dom-module id="footer-block">
     <template>
         <style>
-            :host {
-                display: block;
-                background: #FCFCFC;
-                overflow: hidden;
-            }
+        :host {
+            display: block;
+            background: #FCFCFC;
+            overflow: hidden;
+        }
 
+        .container {
+            padding: 16px;
+            font-size: 14px;
+        }
+
+        .container paper-button {
+            font-size: 0.9em;
+        }
+
+        .footer {
+            min-height: 200px;
+            color: #757575;
+        }
+
+        .gdg-logo {
+            margin-top: 10px;
+            height: 30px;
+            display: block;
+        }
+
+        a {
+            color: inherit !important;
+        }
+
+        .footer-backtotop {
+            margin-bottom: 20px;
+        }
+
+        .footer-content {
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+
+        .footer-links-container {
+            padding-top: 0;
+        }
+
+        .link-block {
+            margin-top: 0;
+            padding: 0;
+        }
+
+        .link-block li {
+            margin-bottom: 9px;
+            list-style-type: none;
+        }
+
+        .link-block-title {
+            margin-bottom: 10px;
+            font-size: 1.3em;
+            font-weight: 300;
+        }
+
+        .link-block a {
+            font-weight: 100;
+        }
+
+        .link-block a:hover {
+            text-decoration: underline;
+        }
+
+        .link-block-wrapper {
+            margin-bottom: 30px;
+        }
+
+        .icons-wrapper {
+            margin-top: -5px;
+        }
+
+        @media (min-width: 768px) {
+            nav {
+                flex-direction: row !important;
+                justify-content: flex-end !important;
+                align-self: flex-end !important;
+            }
             .container {
-                padding: 16px;
-                font-size: 14px;
+                padding: 0;
             }
-
-            .container paper-button {
-                font-size: 0.9em;
-            }
-
-            .footer {
-                min-height: 200px;
-                color: #757575;
-            }
-
-            .gdg-logo {
-                height: 30px;
-                display: block;
-            }
-
-            a {
-                color: inherit !important;
-            }
-
-            @media (min-width: 768px) {
-                nav {
-                    flex-direction: row !important;
-                    justify-content: flex-end !important;
-                    align-self: flex-end !important;
-                }
-                .container {
-                    padding: 0;
-                }
-            }
-
             .footer-backtotop {
-                margin-bottom: 20px;
+                margin-top: -10px;
+                margin-bottom: 0;
             }
-
             .footer-content {
-                padding-top: 16px;
-                padding-bottom: 16px;
+                padding: 32px 0;
+                flex: 1;
             }
-
             .footer-links-container {
                 padding-top: 0;
             }
-
+            .footer-bottom {
+                padding: 16px 0;
+            }
             .link-block {
-                margin-top: 0;
                 padding: 0;
             }
-
-            .link-block li {
-                margin-bottom: 9px;
-                list-style-type: none;
-            }
-
             .link-block-title {
-                margin-bottom: 10px;
-                font-size: 1.3em;
-                font-weight: 300;
+                margin-bottom: 15px;
             }
-
-            .link-block a {
-                font-weight: 100;
+            .gdg-logo {
+                margin-top: 0;
             }
-
-            .link-block a:hover {
-                text-decoration: underline;
-            }
-
-            .link-block-wrapper {
-                margin-bottom: 30px;
-            }
-
-            .icons-wrapper {
-                margin-top: -5px;
-            }
-
-            @media (min-width: 768px) {
-                .footer-backtotop {
-                    margin-top: -10px;
-                    margin-bottom: 0;
-                }
-                .footer-content {
-                    padding: 32px 0;
-                    flex: 1;
-                }
-                .footer-links-container {
-                    padding-top: 0;
-                }
-                .footer-bottom {
-                    padding: 16px 0;
-                }
-                .link-block {
-                    padding: 0;
-                }
-                .link-block-title {
-                    margin-bottom: 15px;
-                }
-            }
+        }
         </style>
         <div class="line full-width"></div>
         <div class="container footer layout vertical">
@@ -132,7 +132,6 @@
                             <li><a href="/2014">GDG DevFest Ukraine 2014</a></li>
                         </ul>
                     </div>
-
                     <div class="flex link-block-wrapper">
                         <span class="link-block-title block">For partners</span>
                         <ul class="link-block">
@@ -140,7 +139,6 @@
                             <li><a href="https://drive.google.com/open?id=0B3UBk7uINu2jRkdpQm5RTU9BQ2s" target="_blank">Media Kit</a></li>
                         </ul>
                     </div>
-
                     <div class="flex link-block-wrapper">
                         <span class="link-block-title block">Contact us</span>
                         <ul class="link-block">
@@ -169,7 +167,7 @@
                 </nav>
             </div>
             <!-- <div class="line full-width"></div> -->
-            <div class="footer-content footer-bottom layout horizontal justified">
+            <div class="footer-content footer-bottom layout vertical-horizontal justified">
                 <span class="flex self-center">
                     &copy; 2015 Based on <a href="https://github.com/gdg-x/hoverboard" target="_blank">Project Hoverboard</a>. Designed and created by <a href="https://plus.google.com/+OlehZasadnyy/about" target="_blank">Oleh Zasadnyy</a> &middot;
                     <a href="http://lviv.gdg.org.ua" target="_blank">GDG Lviv</a>
@@ -181,25 +179,24 @@
         </div>
     </template>
 </dom-module>
-
 <script>
-    Polymer({
-        is: 'footer-block',
-        ready: function() {
-            this.url = 'http://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe';
-            this.name = 'b_b7e853a79164ddfdbda3ed77b_7993e39fbe';
-        },
-        backToTop: function() {
-            var hero = document.querySelector('#hero');
-            app.smoothScroll(hero, 1500);
-        }
-    });
-    (function() {
-        var po = document.createElement('script');
-        po.type = 'text/javascript';
-        po.async = true;
-        po.src = 'https://apis.google.com/js/platform.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(po, s);
-    })();
+Polymer({
+    is: 'footer-block',
+    ready: function() {
+        this.url = 'http://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe';
+        this.name = 'b_b7e853a79164ddfdbda3ed77b_7993e39fbe';
+    },
+    backToTop: function() {
+        var hero = document.querySelector('#hero');
+        app.smoothScroll(hero, 1500);
+    }
+});
+(function() {
+    var po = document.createElement('script');
+    po.type = 'text/javascript';
+    po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(po, s);
+})();
 </script>
