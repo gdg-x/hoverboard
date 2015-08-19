@@ -44,21 +44,19 @@
                 font-size: 13px;
             }
 
-            paper-button {
+            .open-dialog-button {
                 margin-top: 30px;
                 border-radius: 0;
             }
 
             paper-dialog {
                 background: #fff;
-                min-height: 200px;
+                min-height: 380px;
             }
 
             paper-dialog .buttons {
                 color: initial;
             }
-
-            @media (min-width: 768px) {}
         </style>
         <div id="pricetable" class="container wrap relative layout vertical text-center">
             <h4 class="heading">Tickets</h4>
@@ -84,7 +82,7 @@
             </div>
             <span class="details">Tickets grant access to all conference sections, coffee brakes, lunch and party. Accommodation is NOT included in the ticket price.</span>
             <div class="flex">
-                <paper-button class="border-button" on-tap="openTicketsDialog">Buy a ticket</paper-button>
+                <paper-button class="border-button open-dialog-button" on-tap="openTicketsDialog">Buy a ticket</paper-button>
             </div>
         </div>
         <paper-dialog id="ticketsDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal>
