@@ -1,154 +1,79 @@
 <dom-module id="person-dialog">
     <template>
         <style>
-            :host {
-                display: none;
+        :host {
+            display: none;
+            position: absolute;
+        }
+
+        .back-button {
+            margin-bottom: 25px;
+        }
+
+        .back-button-header {
+            color: #fff;
+        }
+
+        .people-image-overlay {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 4%, rgba(0, 0, 0, 0) 50%);
+        }
+
+        .person-img {
+            height: 70px;
+            width: 70px;
+        }
+
+        @media (max-width: 767px) {
+            .people-header {
+                height: 256px;
+            }
+            .bottom-image-text {
+                padding: 16px;
                 position: absolute;
-                z-index: 9;
-                height: 100%;
-            }
-
-            .back-button {
-                margin-bottom: 25px;
-            }
-
-            .back-button-header {
+                bottom: 0px;
                 color: #fff;
             }
-
-            .people-image-overlay {
-                background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 4%, rgba(0, 0, 0, 0) 50%);
+            .people-name {
+                font-size: 24px;
+                font-weight: 300;
             }
-
-            .person-img {
-                height: 70px;
-                width: 70px;
-            }
-
-            @media (max-width: 767px) {
-                .people-header {
-                    height: 256px;
-                }
-                .bottom-image-text {
-                    padding: 16px;
-                    position: absolute;
-                    bottom: 0px;
-                    color: #fff;
-                }
-                .people-name {
-                    font-size: 24px;
-                    font-weight: 300;
-                }
-                .title {
-                    margin-top: -5px;
-                    font-size: 14px;
-                    font-weight: 300;
-                    color: #fff;
-                }
-            }
-
-            @media (min-width: 768px) {
-                paper-card {
-                    width: 80%;
-                }
-                .paper-card-container {
-                    padding: 50px 40px;
-                }
-                .title {
-                    font-size: 14px;
-                    padding-bottom: 4px;
-                    font-weight: 300;
-                    color: var(--default-primary-color);
-                }
-            }
-
-            .person-detail {
-                margin-left: 15px;
-            }
-
-            .person-detail .name {
-                font-size: 18px;
-                margin: 0 0 5px;
-            }
-
-            .badge {
-                color: var(--secondary-text-color);
+            .title {
+                margin-top: -5px;
                 font-size: 14px;
+                font-weight: 300;
+                color: #fff;
             }
-            /*new*/
+        }
+        @media (min-width: 768px) {
+            paper-card {
+                width: 80%;
+            }
+            .paper-card-container {
+                padding: 50px 40px;
+            }
+            .title {
+                font-size: 14px;
+                padding-bottom: 4px;
+                font-weight: 300;
+                color: var(--default-primary-color);
+            }
+        }
 
-            paper-scroll-header-panel {
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                background: #fff;
-                /*--paper-scroll-header-panel-full-header: {
-                    background-color: red;
-                }
-                ;
-                --paper-scroll-header-panel-condensed-header: {
-                    background-color: #f4b400;
-                }
-                ;*/
-            }
+        .person-detail {
+            margin-left: 15px;
+        }
 
-            paper-toolbar {
-                background-color: transparent;
-                overflow: visible;
-            }
+        .person-detail .name {
+            font-size: 18px;
+            margin: 0 0 5px;
+        }
 
-            .bottom-text {
-                -webkit-transform: translateZ(0);
-                transform: translateZ(0);
-                font-size: 20px;
-                padding-bottom: 10px;
-            }
-
-            .subtitle {
-                padding-top: 4px;
-                font-size: 16px;
-                color: #ccc;
-            }
-
-            .content {
-                padding: 16px 10px;
-            }
+        .badge {
+            color: var(--secondary-text-color);
+            font-size: 14px;
+        }
         </style>
-        <paper-scroll-header-panel condenses>
-            <paper-toolbar class="tall">
-                <!-- <iron-image src="[[person.photoUrl]]" class="placeholder-color fit" preload fade sizing="cover"></iron-image> -->
-                <div class="top">
-                    <paper-icon-button icon="close" on-tap="closePeople"></paper-icon-button>
-                </div>
-                <div class="bottom indent bottom-text" self-end>
-                    <div>[[person.name]]</div>
-                    <div class="subtitle">
-                        <span>[[person.company]]</span>,
-                        <span>[[person.country]]</span>
-                    </div>
-                </div>
-            </paper-toolbar>
-            <div class="content">
-                <template is="dom-repeat" items="[[person.badges]]" as="badge">
-                    <a class="badge block self-end" href="[[badge.link]]" target="_blank">[[badge.description]]</a>
-                </template>
-                <div class="card-content people-description">
-                    <marked-element markdown="[[person.bio]]"></marked-element>
-                </div>
-                <div class="card-actions">
-                    <template is="dom-repeat" items="[[person.socials]]" as="social">
-                        <a href="[[social.link]]" target="_blank">
-                            <paper-icon-button icon="[[social.icon]]"></paper-icon-button>
-                            <paper-button>[[social.name]]</paper-button>
-                        </a>
-                    </template>
-                </div>
-            </div>
-        </paper-scroll-header-panel>
-
-        <!-- <div class="relative layout horizontal center-justified">
+        <div class="relative layout horizontal center-justified">
             <paper-card>
                 <div class="paper-card-container">
                     <div class="people-header relative visible-xs">
@@ -189,43 +114,37 @@
                     <div class="card-actions">
                         <template is="dom-repeat" items="[[person.socials]]" as="social">
                             <a href="[[social.link]]" target="_blank">
-                                <paper-icon-button icon="[[social.icon]]"></paper-icon-button>
+                                <!-- <paper-icon-button icon="[[social.icon]]"></paper-icon-button>  -->
                                 <paper-button>[[social.name]]</paper-button>
                             </a>
                         </template>
                     </div>
                 </div>
             </paper-card>
-        </div> -->
+        </div>
     </template>
 </dom-module>
 <script>
-    Polymer({
-        is: 'person-dialog',
-        properties: {
-            person: {
-                type: Object,
-                observer: '_setBackground'
-            },
-            closing: {
-                type: Boolean,
-                notify: true
-            }
-        },
-        _setBackground: function() {
-            // this.$.headerContainer.$.headerBg.style.background = 'url(' + this.person.photoUrl + ') 0 / cover no-repeat';
-        },
-        closePeople: function() {
-            this.closing = true;
-        },
-        _calculateIcon: function(event) {
-            console.log(event);
-            return 'app-icons:' + event.model.social.name;
-        },
-        calculateIcon: function(event) {
-            console.log(event);
-            return 'app-icons:' + event.model.social.name;
+Polymer({
+    is: 'person-dialog',
+    properties: {
+        person: Object,
+        closing: {
+            type: Boolean,
+            notify: true
         }
+    },
+    closePeople: function() {
+        this.closing = true;
+    },
+    _calculateIcon: function(event) {
+        console.log(event);
+        return 'app-icons:' + event.model.social.name;
+    },
+    calculateIcon: function(event) {
+        console.log(event);
+        return 'app-icons:' + event.model.social.name;
+    }
 
-    });
+});
 </script>

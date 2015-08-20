@@ -130,9 +130,12 @@
                 </div>
             </template>
         </div>
-        <div id="personCon" class="fit">
-            <person-dialog id="person" person="{{selectedPerson}}" closing={{closing}}></person-dialog>
+        <div id="personCon" class="container">
+            <person-dialog id="person" class="flex" person="{{selectedPerson}}" closing={{closing}}></person-dialog>
         </div>
+        <!-- <div id="personCon" class="fit">
+            <person-dialog id="person" person="{{selectedPerson}}" closing={{closing}}></person-dialog>
+        </div> -->
     </template>
 </dom-module>
 
