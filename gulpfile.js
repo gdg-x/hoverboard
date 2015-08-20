@@ -26,12 +26,6 @@ var crypto = require('crypto');
 var config = require('./config');
 var taskDir = './gulp-tasks/';
 
-// Handle the error
-// .pipe(...).on('error', errorHandler)
-function errorHandler (error) {
-  console.log(error.toString());
-}
-
 var styleTask = function (stylesPath, srcs) {
   return gulp.src(srcs.map(function(src) {
       return path.join('app', stylesPath, src);
