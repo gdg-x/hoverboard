@@ -6,12 +6,13 @@ module.exports = function ($, gulp) { return function () {
     // Files without revision hash
     /^\/404.html/g,
     /^\/humans.txt/g,
-    /^\/index.html/g,
     /^\/robots.txt/g
   ]});
 
   return gulp.src('dist/**')
     .pipe(revAll.revision())
     .pipe(gulp.dest('deploy'))
-    .pipe($.size({title: 'deploy'}));
+    .pipe($.size({title: 'deploy'}))
+    .pipe(revAll.manifestFile())
+    .pipe(gulp.dest('.tmp'));
 };};

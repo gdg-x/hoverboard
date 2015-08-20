@@ -29,12 +29,6 @@
       "value" : "max-age=300"
     } ]
     }, {
-    "source" : "index.html",
-    "headers" : [ {
-      "key" : "Cache-Control",
-      "value" : "max-age=300"
-    } ]
-    }, {
     "source" : "robots.txt",
     "headers" : [ {
       "key" : "Cache-Control",

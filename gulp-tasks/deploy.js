@@ -13,6 +13,7 @@ module.exports = function ($, config, gulp, environment) { return function () {
   var removeCmd = null;
   var src = null;
   var dest = null;
+  var revManifestJson = require('../.tmp/rev-manifest.json');
 
   if (config.deploy.hosting === 'firebase') {
     if (environment === 'development') {
@@ -27,6 +28,13 @@ module.exports = function ($, config, gulp, environment) { return function () {
     deployCmd = 'firebase deploy -f ' + dest;
     removeCmd = 'firebase delete-site -f ' + dest;
     cmds = [removeCmd, deployCmd];
+
+    return gulp.src('firebase.json.default')
+      // Set rewrite for index.html with revision hash
+      .pipe($.replace('index.html', revManifestJson['index.html']))
+      .pipe($.rename('firebase.json'))
+      .pipe(gulp.dest(''))
+      .pipe($.shell(cmds));
 
   } else if (config.deploy.hosting === 'gcs') {
     if (environment === 'development') {
@@ -63,18 +71,20 @@ module.exports = function ($, config, gulp, environment) { return function () {
     deployCmd = 'gsutil -m ' + cacheControl +
       ' cp -r -a ' + acl + ' -z css,html,js,json,svg,txt ' + src + ' ' + dest;
     removeCmd = 'gsutil -m rm ' + dest + '/**';
-    cmds = [removeCmd, deployCmd];
+    // Set rewrite for index.html with revision hash
+    var configCmd = 'gsutil web set -m ' + revManifestJson['index.html'] +
+      ' ' + dest
+    cmds = [removeCmd, deployCmd, configCmd];
 
     // Set cache for files without revision hash
     if (environment === 'production') {
       cacheTTL = config.deploy.gcs.cacheTTL.productionNoCache;
       cacheControl = '-h "Cache-Control:public,max-age=' + cacheTTL + '"';
       var cacheCmd = 'gsutil -m setmeta ' + cacheControl + ' ' +
-        dest + '/index.html ' + dest + '/404.html ' + dest + '/robots.txt ' +
-        dest + '/humans.txt';
-      cmds = [removeCmd, deployCmd, cacheCmd];
+        dest + '/404.html ' + dest + '/humans.txt ' + dest + '/robots.txt';
+      cmds = [removeCmd, deployCmd, configCmd, cacheCmd];
     }
-  }
 
-  return gulp.src('').pipe($.shell(cmds, {ignoreErrors: true}));
+    return gulp.src('').pipe($.shell(cmds, {ignoreErrors: true}));
+  }
 };};
