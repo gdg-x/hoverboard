@@ -73,7 +73,7 @@ module.exports = function ($, config, gulp, environment) { return function () {
     removeCmd = 'gsutil -m rm ' + dest + '/**';
     // Set rewrite for index.html with revision hash
     var configCmd = 'gsutil web set -m ' + revManifestJson['index.html'] +
-      ' ' + dest
+      ' ' + dest;
     cmds = [removeCmd, deployCmd, configCmd];
 
     // Set cache for files without revision hash
