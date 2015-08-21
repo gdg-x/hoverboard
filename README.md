@@ -30,8 +30,8 @@
  - [Revision](https://github.com/smysnk/gulp-rev-all)
 all files by appending content hash to their names
  - Hosting platforms:
-   - [Firebase](https://www.firebase.com)
-   - [Google Cloud Storage](https://cloud.google.com/storage/)
+    - [Firebase](https://www.firebase.com)
+    - [Google Cloud Storage](https://cloud.google.com/storage/)
 
 ## Getting Started
 
