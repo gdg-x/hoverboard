@@ -317,7 +317,7 @@ gulp.task('deploy:dev', ['pre-deploy'],
   require(taskDir + 'deploy')($, config, gulp, 'development'));
 
 // Deploy to staging environment
-gulp.task('deploy:staging', ['pre-deploy'],
+gulp.task('deploy:stag', ['pre-deploy'],
   require(taskDir + 'deploy')($, config, gulp, 'staging'));
 
 // Deploy to production environment
