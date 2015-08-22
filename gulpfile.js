@@ -269,10 +269,6 @@ gulp.task('serve:dist', ['default'], function () {
 // Clean dist directory
 gulp.task('clean-dist', require(taskDir + 'clean-dist')(del));
 
-// Disable hashbang in routing
-gulp.task('disable-hashbang',
-  require(taskDir + 'disable-hashbang')($, config, gulp));
-
 // Fetch newest Google analytics.js and replace link to analytics.js
 // https://www.google-analytics.com/analytics.js have only 2 hours cache
 gulp.task('fetch-newest-analytics',
@@ -307,7 +303,7 @@ gulp.task('default', ['clean'], function (cb) {
 gulp.task('pre-deploy', function(cb) {
   runSequence(
     'default',
-    ['disable-hashbang', 'fix-path-sw-toolbox'],
+    'fix-path-sw-toolbox',
     'revision',
     cb);
 });

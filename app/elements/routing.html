@@ -33,8 +33,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     });
 
     // add #! before urls
+    // https://developers.google.com/webmasters/ajax-crawling/docs/learn-more
     page({
-      hashbang: true
+      // Disable for single page site on Firebase
+      hashbang: false
     });
 
   });
