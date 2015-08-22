@@ -13,6 +13,7 @@ module.exports = function ($, config, gulp, environment) { return function () {
   var removeCmd = null;
   var src = null;
   var dest = null;
+  var stream = null;
   var revManifestJson = require('../.tmp/rev-manifest.json');
 
   if (config.deploy.hosting === 'firebase') {
@@ -29,7 +30,7 @@ module.exports = function ($, config, gulp, environment) { return function () {
     removeCmd = 'firebase delete-site -f ' + dest;
     cmds = [removeCmd, deployCmd];
 
-    return gulp.src('firebase.json.default')
+    stream = gulp.src('firebase.json.default')
       // Set rewrite for index.html with revision hash
       .pipe($.replace('index.html', revManifestJson['index.html']))
       .pipe($.rename('firebase.json'))
@@ -85,6 +86,8 @@ module.exports = function ($, config, gulp, environment) { return function () {
       cmds = [removeCmd, deployCmd, configCmd, cacheCmd];
     }
 
-    return gulp.src('').pipe($.shell(cmds, {ignoreErrors: true}));
+    stream = gulp.src('').pipe($.shell(cmds, {ignoreErrors: true}));
   }
+
+  return stream;
 };};
