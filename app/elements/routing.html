@@ -10,6 +10,11 @@
       app.route = 'home';
     });
 
+    page('/#pricetable', function () {
+      trackPageview('/');
+      app.route = 'home';
+    });
+
     page('/blog', function () {
       trackPageview('/blog');
       app.route = 'blog';
