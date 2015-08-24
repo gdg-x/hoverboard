@@ -181,6 +181,9 @@
     </template>
 </dom-module>
 <script>
+(function () {
+        Polymer.NeonAnimatableBehavior = [Polymer.NeonAnimatableBehavior, Polymer.IronResizableBehavior];
+    })();
 Polymer({
     is: 'footer-block',
     ready: function() {

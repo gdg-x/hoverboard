@@ -1,66 +1,7 @@
 <script src="../../bower_components/page/page.js"></script>
-<<<<<<< HEAD
 <script>
-    window.addEventListener('WebComponentsReady', function() {
-
-        // We use Page.js for routing. This is a Micro
-        // client-side router inspired by the Express router
-        // More info: https://visionmedia.github.io/page.js/
-        page('/', function() {
-            trackPageview('/');
-            app.route = 'home';
-        });
-
-        page('/#pricetable', function() {
-            trackPageview('/#pricetable');
-            app.route = 'home';
-            var pricetable = document.querySelector('#pricetable');
-            app.smoothScroll(pricetable, 0);
-        });
-
-        page('/blog', function() {
-            trackPageview('/blog');
-            app.route = 'blog';
-        });
-
-        page('/blog/:title', function(data) {
-            trackPageview('/blog/' + data.params['title']);
-            app.route = 'blog';
-            app.params = data.params;
-        });
-
-        page('/speakers', function() {
-            trackPageview('/speakers');
-            app.route = 'speakers';
-        });
-
-        page('/speakers/:id', function(data) {
-            trackPageview('/speakers/' + data.params['id']);
-            app.route = 'speakers';
-            app.params = data.params;
-        });
-
-
-        page('/contact', function() {
-            trackPageview('/contact');
-            app.route = 'contact';
-        });
-
-        // add #! before urls
-        page({
-            hashbang: true
-        });
-
-    });
-
-    function trackPageview(path) {
-        ga('set', 'page', path);
-        ga('send', 'pageview');
-    }
-=======
-<script>  
   function trackPageview(path) { // jshint ignore:line
-      /* jshint ignore:start */ 
+      /* jshint ignore:start */
       ga('set', 'page', path);
       ga('send', 'pageview');
       /* jshint ignore:end */
@@ -122,6 +63,4 @@
     });
 
   });
-
->>>>>>> ca6b12529f74e1a50d6ec60cf9f7a8505131d80d
 </script>
