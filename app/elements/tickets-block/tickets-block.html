@@ -113,6 +113,7 @@
     Polymer({
         is: 'tickets-block',
         openTicketsDialog: function() {
+            ga('send', 'buy-a-ticket', 'button', 'click');
             this.$.ticketsDialog.open();
         }
     });

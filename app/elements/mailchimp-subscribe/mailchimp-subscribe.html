@@ -60,6 +60,7 @@
                     name: String
                 },
                 submitForm: function() {
+                    ga('send', 'mailchimp-subscribe', 'button', 'click');
                     document.getElementById('mc-embedded-subscribe-form').submit();
                 }
             });

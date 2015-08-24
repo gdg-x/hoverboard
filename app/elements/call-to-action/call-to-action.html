@@ -77,6 +77,8 @@
     Polymer({
         is: 'call-to-action',
         playVideo: function() {
+            ga('send', 'play-2014-video', 'button', 'click');
+
             this.$.videoDialog.open();
             this.$.video.play();
         },
