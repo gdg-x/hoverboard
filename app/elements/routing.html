@@ -6,29 +6,35 @@
     // client-side router inspired by the Express router
     // More info: https://visionmedia.github.io/page.js/
     page('/', function () {
+      trackPageview('/');
       app.route = 'home';
     });
 
     page('/blog', function () {
+      trackPageview('/blog');
       app.route = 'blog';
     });
 
     page('/blog/:title', function (data) {
+      trackPageview('/blog/' + data.params['title']);
       app.route = 'blog';
       app.params = data.params;
     });
 
     page('/speakers', function () {
+      trackPageview('/speakers');
       app.route = 'speakers';
     });
 
     page('/speakers/:id', function (data) {
+      trackPageview('/speakers/' + data.params['id']);
       app.route = 'speakers';
       app.params = data.params;
     });
 
 
     page('/contact', function () {
+      trackPageview('/contact');
       app.route = 'contact';
     });
 
@@ -38,4 +44,10 @@
     });
 
   });
+
+  function trackPageview(path) {
+      ga('set', 'page', path);
+      ga('send', 'pageview');
+  }
+
 </script>
