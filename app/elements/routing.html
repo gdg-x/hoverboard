@@ -1,5 +1,12 @@
 <script src="../../bower_components/page/page.js"></script>
-<script>
+<script>  
+  function trackPageview(path) { // jshint ignore:line
+      /* jshint ignore:start */ 
+      ga('set', 'page', path);
+      ga('send', 'pageview');
+      /* jshint ignore:end */
+  }
+
   window.addEventListener('WebComponentsReady', function() {
 
     // We use Page.js for routing. This is a Micro
@@ -10,9 +17,11 @@
       app.route = 'home';
     });
 
-    page('/#pricetable', function () {
-      trackPageview('/');
-      app.route = 'home';
+    page('/#pricetable', function() {
+        trackPageview('/#pricetable');
+        app.route = 'home';
+        var pricetable = document.querySelector('#pricetable');
+        app.smoothScroll(pricetable, 0);
     });
 
     page('/blog', function () {
@@ -21,7 +30,7 @@
     });
 
     page('/blog/:title', function (data) {
-      trackPageview('/blog/' + data.params['title']);
+      trackPageview('/blog/' + data.params.title);
       app.route = 'blog';
       app.params = data.params;
     });
@@ -32,7 +41,7 @@
     });
 
     page('/speakers/:id', function (data) {
-      trackPageview('/speakers/' + data.params['id']);
+      trackPageview('/speakers/' + data.params.id);
       app.route = 'speakers';
       app.params = data.params;
     });
@@ -54,10 +63,5 @@
     });
 
   });
-
-  function trackPageview(path) {
-      ga('set', 'page', path);
-      ga('send', 'pageview');
-  }
 
 </script>
