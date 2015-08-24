@@ -21,6 +21,7 @@ a {
     text-decoration: none;
 }
 
+
 paper-button.colorful {
     color: #00BCD4;
 }
@@ -227,6 +228,18 @@ paper-button[raised].colorful {
 
 .drawer .bottom {
     font-size: 0.85em;
+}
+
+
+
+@media (max-width: 768px) {
+    .fit-xs {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
 }
 
 .hidden {

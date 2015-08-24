@@ -10,7 +10,6 @@
             #personCon {
                 display: none;
             }
-
             .bottom-image-text {
                 padding: 16px;
                 position: absolute;
@@ -89,6 +88,11 @@
                 -webkit-box-orient: vertical;
             }
 
+            @media (max-width: 767px) {
+                .person-wrapper, .person {
+                    @apply(--layout-fit);
+                }
+            }
             @media (min-width: 768px) {
                 .card-wrapper {
                     margin: 0 15px 30px;
@@ -130,12 +134,9 @@
                 </div>
             </template>
         </div>
-        <div id="personCon" class="container">
-            <person-dialog id="person" class="flex" person="{{selectedPerson}}" closing={{closing}}></person-dialog>
+        <div id="personCon" class="person-wrapper container relative">
+            <person-dialog id="person" class="person flex" person="{{selectedPerson}}" closing={{closing}}></person-dialog>
         </div>
-        <!-- <div id="personCon" class="fit">
-            <person-dialog id="person" person="{{selectedPerson}}" closing={{closing}}></person-dialog>
-        </div> -->
     </template>
 </dom-module>
 
@@ -231,8 +232,6 @@
             this.selectedPerson = person;
             this.personSelected = true;
             this.$.personCon.style.display = 'block';
-            this.$.person.style.display = 'block';
-            this.$.person.style.position = 'relative';
             this.cancelAnimation();
             this.playAnimation('openPerson');
         },
@@ -250,7 +249,6 @@
                 this.$.personCon.style.display = 'none';
                 this.$.people.style.display = 'flex';
                 this.$.people.style.position = 'relative';
-                this.$.person.style.position = 'absolute';
                 this.playLoadAnimation();
                 this.personSelected = false;
                 this.closing = false;

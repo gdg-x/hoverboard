@@ -30,6 +30,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // imports are loaded and elements have been registered
     });
 
+    Polymer.NeonAnimatableBehavior = [Polymer.NeonAnimatableBehavior, Polymer.IronResizableBehavior];
+
     // Close drawer after menu item is selected if drawerPanel is narrow
     app.onMenuSelect = function() {
         var drawerPanel = document.querySelector('#paperDrawerPanel');

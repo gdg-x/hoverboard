@@ -1,150 +1,166 @@
 <dom-module id="person-dialog">
     <template>
         <style>
-        :host {
-            display: none;
-            position: absolute;
-        }
-
-        .back-button {
-            margin-bottom: 25px;
-        }
-
-        .back-button-header {
-            color: #fff;
-        }
-
-        .people-image-overlay {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 4%, rgba(0, 0, 0, 0) 50%);
-        }
-
-        .person-img {
-            height: 70px;
-            width: 70px;
-        }
-
-        @media (max-width: 767px) {
-            .people-header {
-                height: 256px;
+            :host {
+                display: block;
+                z-index: 9;
+                height: 100%;
             }
-            .bottom-image-text {
-                padding: 16px;
+
+            paper-scroll-header-panel {
                 position: absolute;
-                bottom: 0px;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background: #fff;
+                height: 100%;
+                --paper-scroll-header-panel-condensed-header: {
+                    background-color: var(--default-primary-color);
+                }
+                ;
+            }
+
+            paper-toolbar {
+                background-color: transparent;
                 color: #fff;
             }
-            .people-name {
-                font-size: 24px;
-                font-weight: 300;
+
+            .subtitle {
+                margin-bottom: 5px;
+                font-size: 16px;
+                color: var(--secondary-text-color);
             }
-            .title {
-                margin-top: -5px;
+
+            .content {
+                padding: 16px 10px;
+            }
+
+            .badge {
+                color: var(--secondary-text-color);
                 font-size: 14px;
-                font-weight: 300;
-                color: #fff;
             }
-        }
-        @media (min-width: 768px) {
-            paper-card {
-                width: 80%;
-            }
-            .paper-card-container {
-                padding: 50px 40px;
-            }
-            .title {
-                font-size: 14px;
-                padding-bottom: 4px;
-                font-weight: 300;
-                color: var(--default-primary-color);
-            }
-        }
 
-        .person-detail {
-            margin-left: 15px;
-        }
-
-        .person-detail .name {
-            font-size: 18px;
-            margin: 0 0 5px;
-        }
-
-        .badge {
-            color: var(--secondary-text-color);
-            font-size: 14px;
-        }
+            @media (min-width: 768px) {
+                paper-card {
+                    width: 70%;
+                }
+                .person-img {
+                    height: 120px;
+                    width: 120px;
+                }
+                .person-detail {
+                    margin-left: 15px;
+                }
+                .name {
+                    font-size: 22px;
+                    color: var(--default-primary-color);
+                }
+                .title {
+                    font-size: 14px;
+                }
+            }
         </style>
-        <div class="relative layout horizontal center-justified">
+        <div class="relative layout horizontal center-justified hidden-xs">
             <paper-card>
                 <div class="paper-card-container">
-                    <div class="people-header relative visible-xs">
-                        <iron-image src="[[person.photoUrl]]" class="placeholder-color fit" preload fade sizing="cover"></iron-image>
-                        <div class="people-image-overlay fit"></div>
-                        <paper-icon-button class="back-button-header" icon="icons:arrow-back" on-tap="closePeople"></paper-icon-button>
-                        <div class="bottom-image-text">
-                            <span class="people-name relative">[[person.name]]</span>
-                            <div class="title">
-                                <span>[[person.company]]</span>,
-                                <span>[[person.country]]</span>
+                    <div class="card-content layout horizontal">
+                        <iron-image src="[[person.photoUrl]]" class="person-img placeholder-color img-circle" preload fade sizing="cover"></iron-image>
+                        <div class="person-detail flex layout vertical center-center">
+                            <span class="name self-start">[[person.name]]</span>
+                            <div class="title self-start">
+                                <span>[[person.title]]</span>,
+                                <span>[[person.company]]</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-content layout vertical hidden-xs">
-                        <paper-button class="back-button self-start" on-tap="closePeople">
-                            <iron-icon icon="icons:arrow-back"></iron-icon> Back
-                        </paper-button>
-                        <div class="layout horizontal">
-                            <iron-image src="[[person.photoUrl]]" class="person-img placeholder-color img-circle" preload fade sizing="cover"></iron-image>
-                            <div class="person-detail flex layout vertical center-center">
-                                <p class="name self-start">[[person.name]]</p>
-                                <div class="title self-start">
-                                    <span>[[person.title]]</span>,
-                                    <span>[[person.company]]</span>
-                                </div>
-                            </div>
-                            <div class="flex layout vertical center-center">
-                                <template is="dom-repeat" items="[[person.badges]]" as="badge">
-                                    <a class="badge block self-end" href="[[badge.link]]" target="_blank">[[badge.description]]</a>
-                                </template>
-                            </div>
+                        <div class="flex"></div>
+                        <div>
+                        <paper-icon-button class="back-button" on-tap="closePeople" icon="close"></paper-icon-button>
                         </div>
                     </div>
                     <div class="card-content people-description">
+                        <template is="dom-repeat" items="[[person.badges]]" as="badge">
+                            <a class="badge block" href="[[badge.link]]" target="_blank">[[badge.description]]</a>
+                        </template>
                         <marked-element markdown="[[person.bio]]"></marked-element>
                     </div>
                     <div class="card-actions">
-                        <template is="dom-repeat" items="[[person.socials]]" as="social">
-                            <a href="[[social.link]]" target="_blank">
-                                <!-- <paper-icon-button icon="[[social.icon]]"></paper-icon-button>  -->
-                                <paper-button>[[social.name]]</paper-button>
-                            </a>
-                        </template>
+                        <div class="align-pb-block">
+                            <template is="dom-repeat" items="[[person.socials]]" as="social">
+                                <a href="[[social.link]]" target="_blank">
+                                    <paper-button class="colorful">[[social.name]]</paper-button>
+                                </a>
+                            </template>
+                        </div>
                     </div>
                 </div>
             </paper-card>
         </div>
+
+        <paper-scroll-header-panel id="scrollHeaderPanel" class="visible-xs" condenses keep-condensed-header>
+
+            <paper-toolbar class="tall">
+                <paper-icon-button class="back-button" on-tap="closePeople" icon="arrow-back"></paper-icon-button>
+                <div class="bottom title">[[person.name]]</div>
+            </paper-toolbar>
+
+            <div class="content">
+                <div class="subtitle">
+                    <span>[[person.company]]</span>,
+                    <span>[[person.country]]</span>
+                </div>
+                <template is="dom-repeat" items="[[person.badges]]" as="badge">
+                    <a class="badge block" href="[[badge.link]]" target="_blank">[[badge.description]]</a>
+                </template>
+                <div class="card-content people-description">
+                    <marked-element markdown="[[person.bio]]"></marked-element>
+                </div>
+                <div class="card-actions">
+                    <div class="align-pb-block">
+                        <template is="dom-repeat" items="[[person.socials]]" as="social">
+                            <a href="[[social.link]]" target="_blank">
+                                <paper-button class="colorful">[[social.name]]</paper-button>
+                            </a>
+                        </template>
+                    </div>
+                </div>
+            </div>
+
+        </paper-scroll-header-panel>
     </template>
 </dom-module>
 <script>
-Polymer({
-    is: 'person-dialog',
-    properties: {
-        person: Object,
-        closing: {
-            type: Boolean,
-            notify: true
+    Polymer({
+        is: 'person-dialog',
+        properties: {
+            person: {
+                type: Object,
+                observer: '_setBackground'
+            },
+            closing: {
+                type: Boolean,
+                notify: true
+            }
+        },
+        attached: function() {
+            // this.super();
+            this.$.scrollHeaderPanel.measureHeaderHeight();
+            this.$.scrollHeaderPanel.scroller.scrollTop = 0;
+        },
+        _setBackground: function() {
+            this.$.scrollHeaderPanel.$.headerBg.style.background = 'linear-gradient(to top, rgba(0, 0, 0, 0.4) -10%, rgba(0, 0, 0, 0.1) 50%), url(' + this.person.photoUrl + ') 0 / cover no-repeat';
+            this.$.scrollHeaderPanel.measureHeaderHeight();
+            this.$.scrollHeaderPanel.scroller.scrollTop = 0;
+        },
+        closePeople: function() {
+            this.closing = true;
+        },
+        _calculateIcon: function(event) {
+            return 'app-icons:' + event.model.social.name;
+        },
+        calculateIcon: function(event) {
+            return 'app-icons:' + event.model.social.name;
         }
-    },
-    closePeople: function() {
-        this.closing = true;
-    },
-    _calculateIcon: function(event) {
-        console.log(event);
-        return 'app-icons:' + event.model.social.name;
-    },
-    calculateIcon: function(event) {
-        console.log(event);
-        return 'app-icons:' + event.model.social.name;
-    }
 
-});
+    });
 </script>
