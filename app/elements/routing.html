@@ -38,6 +38,11 @@
       app.route = 'contact';
     });
 
+    page('/code-of-conduct', function () {
+      trackPageview('/code-of-conduct');
+      app.route = 'code-of-conduct';
+    });
+
     // add #! before urls
     page({
       hashbang: true
