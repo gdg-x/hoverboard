@@ -9,7 +9,7 @@
 
 > Polymer Starter Kit Plus is keeping up to date with [Polymer Starter Kit](https://github.com/PolymerElements/polymer-starter-kit)
 
-:sparkles: [DEMO](https://polymer-starter-kit-plus.firebaseapp.com) :sparkles:
+:sparkles: [DEMO](https://polymer-starter-kit-plus.appspot.com) :sparkles:
 
 ## Features
 
@@ -31,6 +31,7 @@
 all files by appending content hash to their names
  - Hosting platforms:
     - [Firebase](https://www.firebase.com)
+    - [Google App Engine](https://cloud.google.com/appengine/) - free hosting with [HTTP2-over-QUIC](http://blog.chromium.org/2015/04/a-quic-update-on-googles-experimental.html) on custom domain
     - [Google Cloud Storage](https://cloud.google.com/storage/)
 
 ## Getting Started
@@ -130,6 +131,7 @@ This outputs an IP address you can use to locally test and another that can be u
 
 ```sh
 gulp serve:dist
+gulp serve:gae
 ```
 
 #### Run tests
@@ -149,6 +151,8 @@ gulp
 Build and optimize the current project, ready for deployment. This includes linting as well as vulcanization, image, script, stylesheet and HTML optimization and minification.
 
 ### 4. Deploy code :tada:
+
+How to setup [Google App Engine](https://github.com/h5bp/server-configs-gae)
 
 #### Deploy to development environment
 
@@ -185,6 +189,10 @@ gulp pagespeed
 ## Service Worker
 
 Polymer Starter Kit Plus offers an offline experience thanks to Service Worker and the [Platinum Service Worker elements](https://github.com/PolymerElements/platinum-sw). New to Service Worker? Read the following [introduction](https://github.com/PolymerElements/polymer-starter-kit#service-worker) to understand how it works.
+
+- http://www.html5rocks.com/en/tutorials/service-worker/introduction/
+- [chrome://inspect/#service-workers](chrome://inspect/#service-workers)
+- [chrome://serviceworker-internals](chrome://serviceworker-internals)
 
 ## Unit Testing
 

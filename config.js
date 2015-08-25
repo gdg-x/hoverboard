@@ -26,25 +26,37 @@ module.exports = {
   },
   // Deploy task
   deploy: {
-    // Firebase environments
+    // Firebase
     // Firebase requires Firebase Command Line Tools to be installed and configured.
     // For info on tool: https://www.firebase.com/docs/hosting/command-line-tool.html
     firebase: {
-      development: 'polymer-starter-kit-plus-dev', // subdomain
-      staging:     'polymer-starter-kit-plus-staging',
-      production:  'polymer-starter-kit-plus'
+      env: {
+        development: 'polymer-starter-kit-plus-dev', // subdomain
+        staging:     'polymer-starter-kit-plus-staging',
+        production:  'polymer-starter-kit-plus'
+      }
+    },
+    // Google App Engine
+    // GAE requires Google Cloud SDK to be installed and configured.
+    // For info on SDK: https://cloud.google.com/sdk/
+    gae: {
+      env: {
+        development: 'polymer-starter-kit-plus-dev', // project ID
+        staging:     'polymer-starter-kit-plus-staging',
+        production:  'polymer-starter-kit-plus'
+      }
     },
     // Google Cloud Storage
-    // GCS requires gsutil to be installed and configured.
-    // For info on gsutil: https://cloud.google.com/storage/docs/gsutil
+    // GCS requires Google Cloud SDK to be installed and configured.
+    // For info on SDK: https://cloud.google.com/sdk/
     gcs: {
       acl: { // https://cloud.google.com/storage/docs/access-control
         development: 'public-read',
         staging:     'public-read',
         production:  'public-read'
       },
-      bucket: { // https://cloud.google.com/storage/docs/reference-uris
-        development: 'dev.example.com',
+      env: { // https://cloud.google.com/storage/docs/reference-uris
+        development: 'dev.example.com', // bucket
         staging:     'staging.example.com',
         production:  'www.example.com'
       },
@@ -54,7 +66,7 @@ module.exports = {
       }
     },
     // Hosting
-    hosting: 'firebase' // or gcs
+    hosting: 'gae' // or firebase, gcs
   },
   // PageSpeed Insights
   // Please feel free to use the `nokey` option to try out PageSpeed

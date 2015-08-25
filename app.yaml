@@ -1,0 +1,88 @@
+# Google App Engine application config file tailored to static websites.
+# Inspired by: https://github.com/h5bp/server-configs-gae
+# Complete documentation can be found here:
+# https://developers.google.com/appengine/docs/php/config/appconfig
+
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+default_expiration: "365d" # 1 year, expiration on GAE is max 1 year
+
+handlers:
+
+# Manifest files
+
+- url: /(.+\.webapp)
+  static_files: \1
+  upload: (.+\.webapp)
+  mime_type: application/x-web-app-manifest+json
+  expiration: "0s"
+
+# Fonts and images
+
+- url: /(.+\.(eot|otf|tt[cf]|woff2?|cur|gif|ico|jpe?g|png|svgz?|webp))
+  static_files: \1
+  upload: (.+\.(eot|otf|tt[cf]|woff2?|cur|gif|ico|jpe?g|png|svgz?|webp))
+  http_headers:
+    # Allow cross-origin access to web fonts and images
+    # You can also replace "*" with a specific host, e.g. https://example.org
+    Access-Control-Allow-Origin: "*"
+
+# CSS, Javascript, JSON and other file types
+
+- url: /(.+\.(css|js|json|xml))
+  static_files: \1
+  upload: (.+\.(css|js|json|xml))
+
+# HTML pages
+
+- url: /404.html
+  static_files: 404.html
+  upload: 404.html
+  expiration: "5m"
+
+- url: /elements/(.+\.html)
+  static_files: elements/\1
+  upload: elements/(.+\.html)
+
+- url: /(.+\.html)
+  static_files: \1
+  upload: (.+\.html)
+  expiration: "5m"
+  http_headers:
+    # Force Internet Explorer to render pages in the highest available
+    # mode in the various cases when it may not.
+    # https://hsivonen.fi/doctype/#ie8
+    X-UA-Compatible: "IE=edge"
+    # For more details on how to craft a reasonable policy for your site, read:
+    # http://www.html5rocks.com/en/tutorials/security/content-security-policy/ (or
+    # the specification: http://www.w3.org/TR/CSP11/). Also, to make things easier,
+    # you can use an online CSP header generator such as: http://cspisawesome.com/.
+    #Content-Security-Policy: "script-src 'self'; object-src 'self'"
+
+# Text files
+
+- url: /humans.txt
+  static_files: humans.txt
+  upload: humans.txt
+  expiration: "5m"
+
+- url: /robots.txt
+  static_files: robots.txt
+  upload: robots.txt
+  expiration: "5m"
+
+- url: /(.+\.txt)
+  static_files: \1
+  upload: (.+\.txt)
+
+# Homepage
+
+- url: /(.*)
+  static_files: index.html
+  upload: index.html
+  expiration: "5m"
+  http_headers:
+    X-UA-Compatible: "IE=edge"
+    #Content-Security-Policy: "script-src 'self'; object-src 'self'"
