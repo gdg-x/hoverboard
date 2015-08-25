@@ -1,104 +1,106 @@
 <link rel="import" href="../person-dialog/person-dialog.html">
-
 <dom-module id="people-block">
     <template>
         <style>
-            :host {
-                display: block;
-            }
+        :host {
+            display: block;
+        }
 
-            #personCon {
-                display: none;
-            }
-            .bottom-image-text {
-                padding: 16px;
-                position: absolute;
-                bottom: 0;
-                color: #fff;
-            }
+        #personCon {
+            display: none;
+        }
 
-            .people-name {
-                font-size: 24px;
-                font-weight: 300;
-            }
+        .bottom-image-text {
+            padding: 16px;
+            position: absolute;
+            bottom: 0;
+            color: #fff;
+        }
 
-            .title {
-                margin-top: -5px;
-                font-size: 14px;
-                font-weight: 300;
-            }
+        .people-name {
+            font-size: 24px;
+            font-weight: 300;
+        }
 
-            .card-content {
-                padding: 16px;
-            }
+        .title {
+            margin-top: -5px;
+            font-size: 14px;
+            font-weight: 300;
+        }
 
-            .card-actions {
-                border-top: 1px solid #e8e8e8;
-                padding: 5px 16px;
-                position: relative;
-            }
+        .card-content {
+            padding: 16px;
+        }
 
+        .card-actions {
+            border-top: 1px solid #e8e8e8;
+            padding: 5px 16px;
+            position: relative;
+        }
+
+        .card-wrapper {
+            margin-bottom: 30px;
+        }
+
+        .people-header {
+            height: 256px;
+        }
+
+        .people-image-overlay {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 4%, rgba(0, 0, 0, 0) 50%);
+        }
+
+        .badges {
+            margin: 0;
+            padding: 15px;
+            list-style: none;
+        }
+
+        .badge {
+            display: inline-block;
+        }
+
+        .badge:not(:last-of-type):after {
+            color: rgba(255, 255, 255, 0.8);
+            vertical-align: middle;
+            font-size: 14px;
+            content: "\2022";
+        }
+
+        .badge a {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .people-description {
+            padding-bottom: 0;
+        }
+
+        .brief {
+            margin-bottom: 16px;
+            display: block;
+            display: -webkit-box;
+            overflow: hidden;
+            font-size: 17px height: 85px;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+        @media (max-width: 767px) {
+            .person-wrapper,
+            .person {
+                @apply(--layout-fit);
+            }
+        }
+
+        @media (min-width: 768px) {
             .card-wrapper {
-                margin-bottom: 30px;
+                margin: 0 15px 30px;
+                width: calc(100% / 4);
             }
-
-            .people-header {
-                height: 256px;
-            }
-
-            .people-image-overlay {
-                background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 4%, rgba(0, 0, 0, 0) 50%);
-            }
-
-            .badges {
-                margin: 0;
-                padding: 15px;
-                list-style: none;
-            }
-
-            .badge {
-                display: inline-block;
-            }
-
-            .badge:not(:last-of-type):after {
-                color: rgba(255, 255, 255, 0.8);
-                vertical-align: middle;
-                font-size: 14px;
-                content: "\2022";
-            }
-
-            .badge a {
-                color: #fff;
-                font-size: 14px;
-                font-weight: 500;
-            }
-
-            .people-description {
-                padding-bottom: 0;
-            }
-
-            .brief {
-                margin-bottom: 16px;
-                display: block;
-                display: -webkit-box;
-                overflow: hidden;
-                font-size: 17px height: 85px;
-                text-overflow: ellipsis;
-                -webkit-line-clamp: 3;
-                -webkit-box-orient: vertical;
-            }
-
-            @media (max-width: 767px) {
-                .person-wrapper, .person {
-                    @apply(--layout-fit);
-                }
-            }
-            @media (min-width: 768px) {
-                .card-wrapper {
-                    margin: 0 15px 30px;
-                    width: calc(100% / 4);
-                }
-            }
+        }
         </style>
         <iron-ajax auto url="[[source]]" handle-as="json" on-response="peopleLoaded" debounce-duration="300"></iron-ajax>
         <div id="people" class="container flex layout vertical-horizontal center-justified wrap">
@@ -135,127 +137,125 @@
             </template>
         </div>
         <div id="personCon" class="person-wrapper container relative">
-            <person-dialog id="person" class="person flex" person="{{selectedPerson}}" closing={{closing}}></person-dialog>
+            <person-dialog id="person" class="person flex" person="{{selectedPerson}}" opened="{{opened}}" }></person-dialog>
         </div>
     </template>
 </dom-module>
-
 <script>
-    Polymer({
-        is: 'people-block',
-        behaviors: [
-            Polymer.NeonAnimatableBehavior,
-            Polymer.NeonAnimationRunnerBehavior
-        ],
-        properties: {
-            source: String,
-            closing: {
-                type: Boolean,
-                observer: '_closingChanged'
-            },
-            animationConfig: {
-                value: function() {
-                    return {
-                        'loadPeople': {
-                            name: 'cascaded-animation',
-                            animation: 'transform-animation',
-                            transformFrom: 'translateY(100%)',
-                            transformTo: 'none',
-                            nodedelay: 250,
-                            timing: {
-                                duration: 1500
-                            }
-                        },
-                        'openPerson': [{
-                            name: 'fade-in-animation',
-                            node: this.$.person,
-                            timing: {
-                                duration: 1000
-                            }
-                        }, {
-                            name: 'cascaded-animation',
-                            animation: 'transform-animation',
-                            transformFrom: 'none',
-                            transformTo: 'translateY(100vh)',
-                            nodedelay: 500,
-                            timing: {
-                                duration: 1000
-                            }
-                        }],
-                        'closePerson': [{
-                            name: 'transform-animation',
-                            node: this.$.person,
-                            transformFrom: 'none',
-                            transformTo: 'translateY(100vh)',
-                            timing: {
-                                duration: 1000
-                            }
-                        }]
-                    };
-                }
+Polymer({
+    is: 'people-block',
+    behaviors: [
+        Polymer.NeonAnimatableBehavior,
+        Polymer.NeonAnimationRunnerBehavior
+    ],
+    properties: {
+        source: String,
+        opened: {
+            type: Boolean,
+            observer: '_openedChanged'
+        },
+        animationConfig: {
+            value: function() {
+                return {
+                    'loadPeople': {
+                        name: 'cascaded-animation',
+                        animation: 'transform-animation',
+                        transformFrom: 'translateY(100%)',
+                        transformTo: 'none',
+                        nodedelay: 250,
+                        timing: {
+                            duration: 1500
+                        }
+                    },
+                    'unloadPeople': {
+                        name: 'fade-out-animation',
+                        node: this.$.people,
+                        timing: {
+                            duration: 200
+                        }
+                    },
+                    'openPerson': {
+                        name: 'scale-up-animation',
+                        node: this.$.person,
+                        timing: {
+                            duration: 1000
+                        }
+                    },
+                    'closePerson': {
+                        name: 'fade-out-animation',
+                        node: this.$.person,
+                        timing: {
+                            duration: 500
+                        }
+                    }
+                };
             }
-        },
-        listeners: {
-            'neon-animation-finish': '_onNeonAnimationFinish'
-        },
-        peopleLoaded: function(event, response) {
-            this.people = response.response;
+        }
+    },
+    listeners: {
+        'neon-animation-finish': '_onNeonAnimationFinish'
+    },
+    peopleLoaded: function(event, response) {
+        this.people = response.response;
 
-            this.async(function() {
-                var nodeList = Polymer.dom(this.root).querySelectorAll('.card-wrapper');
-                this.animationConfig.loadPeople.nodes = Array.prototype.slice.call(nodeList);
-                this.animationConfig.openPerson[1].nodes = Array.prototype.slice.call(nodeList);
-                if (!this.checkUrlParams()) {
-                    this.playLoadAnimation();
-                }
-            });
-        },
-        checkUrlParams: function() {
-            if (app.params && app.params.id) {
-                var person = app.findByPropertyValue(this.people, 'id', app.params.id);
-                if (person !== undefined && person !== null) {
-                    this.openPerson(person);
-                    return true;
-                }
+        this.async(function() {
+            var nodeList = Polymer.dom(this.root).querySelectorAll('.card-wrapper');
+            this.animationConfig.loadPeople.nodes = Array.prototype.slice.call(nodeList);
+            if (!this.checkUrlParams()) {
+                this.playLoadAnimation();
             }
-        },
-        playLoadAnimation: function() {
-            this.$.people.style.position = 'relative';
-            this.cancelAnimation();
-            this.playAnimation('loadPeople');
-        },
-        readMore: function(event) {
-            page.redirect('/speakers/' + event.model.person.id);
-            this.openPerson(event.model.person);
-        },
-        openPerson: function(person) {
-            this.selectedPerson = person;
-            this.personSelected = true;
-            this.$.personCon.style.display = 'block';
-            this.cancelAnimation();
-            this.playAnimation('openPerson');
-        },
-        closePerson: function() {
-            page.redirect('/speakers');
-            this.cancelAnimation();
-            this.playAnimation('closePerson');
-        },
-        _onNeonAnimationFinish: function() {
-            if (this.personSelected) {
-                this.$.people.style.position = 'absolute';
-                this.$.people.style.display = 'none';
+        });
+    },
+    checkUrlParams: function() {
+        if (app.params && app.params.id) {
+            var person = app.findByPropertyValue(this.people, 'id', app.params.id);
+            if (person !== undefined && person !== null) {
+                this.openPerson(person);
+                return true;
             }
-            if (this.closing) {
-                this.$.personCon.style.display = 'none';
+        }
+    },
+    playLoadAnimation: function() {
+        this.$.people.style.position = 'relative';
+        this.cancelAnimation();
+        this.playAnimation('loadPeople');
+    },
+    readMore: function(event) {
+        page.redirect('/speakers/' + event.model.person.id);
+        this.openPerson(event.model.person);
+    },
+    openPerson: function(person) {
+        this.opened = true;
+        this.selectedPerson = person;
+        this.$.personCon.style.display = 'block';
+        this.cancelAnimation();
+        this.playAnimation('openPerson');
+        if (screen.width > 768) {
+            this.playAnimation('unloadPeople');
+        }
+    },
+    closePerson: function() {
+        page.redirect('/speakers');
+        this.cancelAnimation();
+        this.playAnimation('closePerson');
+    },
+    _onNeonAnimationFinish: function() {
+        if (this.opened && screen.width > 768) {
+            this.$.people.style.display = 'none';
+            this.$.people.style.position = 'absolute';
+        }
+        if (!this.opened) {
+            this.$.personCon.style.display = 'none';
+            if (screen.width > 768) {
                 this.$.people.style.display = 'flex';
                 this.$.people.style.position = 'relative';
-                this.playLoadAnimation();
-                this.personSelected = false;
-                this.closing = false;
             }
-        },
-        _closingChanged: function() {
+        }
+    },
+    _openedChanged: function() {
+        if (!this.opened) {
             this.closePerson();
         }
-    });
+    }
+});
 </script>

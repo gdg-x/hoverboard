@@ -137,24 +137,20 @@
                 type: Object,
                 observer: '_setBackground'
             },
-            closing: {
+            opened: {
                 type: Boolean,
                 notify: true
             }
         },
         _setBackground: function() {
             this.$.scrollHeaderPanel.$.headerBg.style.background = 'linear-gradient(to top, rgba(0, 0, 0, 0.4) -10%, rgba(0, 0, 0, 0.1) 50%), url(' + this.person.photoUrl + ') 0 / cover no-repeat';
-            // this.$.scrollHeaderPanel.measureHeaderHeight();
-            // this.$.scrollHeaderPanel.scroller.scrollTop = 0;
             setTimeout(function(){
                 document.querySelector('#scrollHeaderPanel').measureHeaderHeight();
                 document.querySelector('#scrollHeaderPanel').scroller.scrollTop = 0;
-                // this.$.scrollHeaderPanel.measureHeaderHeight();
-                // this.$.scrollHeaderPanel.scroller.scrollTop = 0;
             }, 0);
         },
         closePeople: function() {
-            this.closing = true;
+            this.opened = false;
         },
         _calculateIcon: function(event) {
             return 'app-icons:' + event.model.social.name;
