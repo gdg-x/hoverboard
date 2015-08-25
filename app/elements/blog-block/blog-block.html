@@ -7,6 +7,10 @@
                 display: block;
             }
 
+            .post-wrapper {
+                display: none;
+            }
+
             .card-content {
                 padding: 16px;
             }
@@ -36,6 +40,13 @@
                 padding: 0 16px;
             }
 
+            @media (max-width: 767px) {
+                .post-wrapper,
+                .post {
+                    @apply(--layout-fit);
+                }
+            }
+
             @media (min-width: 768px) {
                 .card-wrapper {
                     margin: 0 15px 30px;
@@ -62,8 +73,8 @@
                 </div>
             </template>
         </div>
-        <div class="container">
-            <blog-post id="post" class="flex" meta="{{selectedPost}}" closing={{closing}}></blog-post>
+        <div id="postCon" class="post-wrapper container relative">
+            <blog-post id="post" class="post flex" meta="{{selectedPost}}" opened={{opened}}></blog-post>
         </div>
     </template>
 </dom-module>
@@ -77,9 +88,9 @@
         ],
         properties: {
             source: String,
-            closing: {
+            opened: {
                 type: Boolean,
-                observer: '_closingChanged'
+                observer: '_openedChanged'
             },
             animationConfig: {
                 value: function() {
@@ -89,28 +100,32 @@
                             animation: 'transform-animation',
                             transformFrom: 'translateY(100%)',
                             transformTo: 'none',
-                            nodedelay: 500,
+                            nodedelay: 250,
                             timing: {
-                                duration: 2000
+                                duration: 1500
                             }
                         },
-                        'openPost': [{
-                            animatable: this.$.post,
-                            type: 'entry'
-                        }, {
-                            name: 'cascaded-animation',
-                            animation: 'transform-animation',
-                            transformFrom: 'none',
-                            transformTo: 'translateY(100vh)',
-                            nodedelay: 500,
+                        'unloadPosts': {
+                            name: 'fade-out-animation',
+                            node: this.$.posts,
                             timing: {
-                                duration: 1000
+                                duration: 200
                             }
-                        }],
-                        'closePost': [{
-                            animatable: this.$.post,
-                            type: 'exit'
-                        }]
+                        },
+                        'openPost': {
+                            name: 'scale-up-animation',
+                            node: this.$.post,
+                            timing: {
+                                duration: 500
+                            }
+                        },
+                        'closePost': {
+                            name: 'fade-out-animation',
+                            node: this.$.post,
+                            timing: {
+                                duration: 500
+                            }
+                        }
                     };
                 }
             }
@@ -120,10 +135,10 @@
         },
         postsLoaded: function(event, response) {
             this.posts = response.response.reverse();
+
             this.async(function() {
                 var nodeList = Polymer.dom(this.root).querySelectorAll('.card-wrapper');
                 this.animationConfig.loadPosts.nodes = Array.prototype.slice.call(nodeList);
-                this.animationConfig.openPost[1].nodes = Array.prototype.slice.call(nodeList);
                 if (!this.checkUrlParams()) {
                     this.playLoadAnimation();
                 }
@@ -147,10 +162,14 @@
             this.openPost(event.model.post);
         },
         openPost: function(post) {
+            this.opened = true;
             this.selectedPost = post;
-            this.postSelected = true;
+            this.$.postCon.style.display = 'block';
             this.cancelAnimation();
             this.playAnimation('openPost');
+            if (screen.width > 768) {
+                this.playAnimation('unloadPosts');
+            }
         },
         closePost: function() {
             page.redirect('/blog');
@@ -158,19 +177,22 @@
             this.playAnimation('closePost');
         },
         _onNeonAnimationFinish: function() {
-            if (this.postSelected) {
+            if (this.opened && screen.width > 768) {
                 this.$.posts.style.display = 'none';
+                this.$.posts.style.position = 'absolute';
             }
-            if (this.closing) {
-                this.$.posts.style.display = 'flex';
-                this.$.post.style.position = 'absolute';
-                this.playAnimation('loadPosts');
-                this.postSelected = false;
-                this.closing = false;
+            if (!this.opened) {
+                this.$.postCon.style.display = 'none';
+                if (screen.width > 768) {
+                    this.$.posts.style.display = 'flex';
+                    this.$.posts.style.position = 'relative';
+                }
             }
         },
-        _closingChanged: function() {
-            this.closePost();
+        _openedChanged: function() {
+            if (!this.opened) {
+                this.closePost();
+            }
         }
     });
 </script>

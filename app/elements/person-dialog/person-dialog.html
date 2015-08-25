@@ -8,11 +8,6 @@
             }
 
             paper-scroll-header-panel {
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
                 background: #fff;
                 height: 100%;
                 --paper-scroll-header-panel-condensed-header: {
@@ -24,6 +19,10 @@
             paper-toolbar {
                 background-color: transparent;
                 color: #fff;
+            }
+
+            paper-toolbar .title {
+                margin: 0;
             }
 
             .subtitle {
@@ -75,7 +74,7 @@
                         </div>
                         <div class="flex"></div>
                         <div>
-                        <paper-icon-button class="back-button" on-tap="closePeople" icon="close"></paper-icon-button>
+                            <paper-icon-button class="back-button" on-tap="closePeople" icon="close"></paper-icon-button>
                         </div>
                     </div>
                     <div class="card-content people-description">
@@ -97,11 +96,10 @@
             </paper-card>
         </div>
 
-        <paper-scroll-header-panel id="scrollHeaderPanel" class="visible-xs" condenses keep-condensed-header>
-
+        <paper-scroll-header-panel id="scrollHeaderPanel" class="visible-xs fit" condenses keep-condensed-header>
             <paper-toolbar class="tall">
                 <paper-icon-button class="back-button" on-tap="closePeople" icon="arrow-back"></paper-icon-button>
-                <div class="bottom title">[[person.name]]</div>
+                <div id="title" class="bottom title">[[person.name]]</div>
             </paper-toolbar>
 
             <div class="content">
@@ -125,11 +123,13 @@
                     </div>
                 </div>
             </div>
-
         </paper-scroll-header-panel>
     </template>
 </dom-module>
 <script>
+    (function() {
+        Polymer.NeonAnimatableBehavior = [Polymer.NeonAnimatableBehavior, Polymer.IronResizableBehavior];
+    })();
     Polymer({
         is: 'person-dialog',
         properties: {
@@ -142,12 +142,21 @@
                 notify: true
             }
         },
+        ready: function() {
+            var title = this.$.title;
+            addEventListener('paper-header-transform', function(e) {
+                var d = e.detail;
+                var m = d.height - d.condensedHeight;
+                var scale = Math.max(0.75, (m - d.y) / (m / 0.25) + 0.75);
+                Polymer.Base.transform('scale(' + scale + ') translateZ(0)', title);
+            });
+        },
         _setBackground: function() {
             this.$.scrollHeaderPanel.$.headerBg.style.background = 'linear-gradient(to top, rgba(0, 0, 0, 0.4) -10%, rgba(0, 0, 0, 0.1) 50%), url(' + this.person.photoUrl + ') 0 / cover no-repeat';
-            setTimeout(function(){
-                document.querySelector('#scrollHeaderPanel').measureHeaderHeight();
-                document.querySelector('#scrollHeaderPanel').scroller.scrollTop = 0;
-            }, 0);
+            this.async(function() {
+                this.$.scrollHeaderPanel.measureHeaderHeight();
+                this.$.scrollHeaderPanel.scroller.scrollTop = 0;
+            });
         },
         closePeople: function() {
             this.opened = false;

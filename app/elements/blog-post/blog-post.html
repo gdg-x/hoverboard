@@ -1,105 +1,141 @@
 <dom-module id="blog-post">
     <template>
         <style>
-        :host {
-            display: none;
-            position: absolute;
-        }
+            :host {
+                display: block;
+                z-index: 9;
+                height: 100%;
+            }
 
-        .paper-card-container {
-            padding: 16px 0;
-        }
+            paper-scroll-header-panel {
+                background: #fff;
+                height: 100%;
+                --paper-scroll-header-panel-full-header: {
+                    background-color: var(--default-primary-color);
+                }
+                ;
+                --paper-scroll-header-panel-condensed-header: {
+                    background-color: var(--default-primary-color);
+                }
+                ;
+            }
 
-            .title {
-                color: var(--default-primary-color);
-                font-size: 42px;
+            paper-toolbar {
+                background-color: transparent;
+                color: #fff;
+            }
+
+            paper-toolbar .title {
+                margin: 0;
             }
 
             .posted {
+                margin-bottom: 5px;
                 font-size: 14px;
                 color: var(--secondary-text-color);
             }
-        @media (min-width: 768px) {
-            paper-card {
-                width: 80%;
+
+            .content {
+                padding: 16px 10px;
             }
-            .paper-card-container {
-                padding: 50px 40px;
+
+            .post-wrapper {
+                padding-top: 0;
             }
-        }
+
+            .post-content ::content h3 {
+                font-size: 26px;
+            }
+
+            @media (min-width: 768px) {
+                paper-card {
+                    width: 70%;
+                }
+                .title {
+                    font-size: 36px;
+                    color: var(--default-primary-color);
+                }
+                .card-content {
+                    padding: 24px;
+                }
+            }
         </style>
         <iron-ajax id="ajax" url="[[postUrl]]" handle-as="text" on-response="postLoaded"></iron-ajax>
-        <div class="relative layout horizontal center-justified">
+        <div class="relative layout horizontal center-justified hidden-xs">
             <paper-card>
                 <div class="paper-card-container">
-                    <paper-button class="back-button self-start" on-tap="closePost">
-                        <iron-icon icon="icons:arrow-back"></iron-icon> Back
-                    </paper-button>
-                    <div class="card-content">
-                        <span class="title block">[[meta.title]]</span>
-                        <span class="posted">Posted:
-                            <span>[[meta.posted]]</span>
-                        </span>
+                    <div class="card-content layout horizontal">
+                        <iron-image src="[[person.photoUrl]]" class="person-img placeholder-color img-circle" preload fade sizing="cover"></iron-image>
+                        <div class="¸-detail flex layout vertical center-center">
+                            <span class="title self-start">[[meta.title]]</span>
+                            <span class="posted self-start">Posted:
+                                <span>[[meta.posted]]</span>
+                            </span>
+                        </div>
+                        <div>
+                            <paper-icon-button class="back-button" on-tap="closePost" icon="close"></paper-icon-button>
+                        </div>
                     </div>
-                    <div class="card-content">
-                        <marked-element markdown="[[post]]"></marked-element>
+                    <div class="card-content post-wrapper">
+                        <marked-element class="post-content" markdown="[[post]]"></marked-element>
                     </div>
                 </div>
             </paper-card>
         </div>
+
+        <paper-scroll-header-panel id="scrollHeaderPanel" class="visible-xs fit" condenses keep-condensed-header>
+            <paper-toolbar class="tall">
+                <paper-icon-button class="back-button" on-tap="closePost" icon="arrow-back"></paper-icon-button>
+                <div id="title" class="bottom title">[[meta.title]]</div>
+            </paper-toolbar>
+
+            <div class="content">
+                <span class="posted">Posted:
+                    <span>[[meta.posted]]</span>
+                </span>
+                <div class="card-content people-description">
+                    <marked-element class="post-content" markdown="[[post]]"></marked-element>
+                </div>
+            </div>
+        </paper-scroll-header-panel>
     </template>
 </dom-module>
 <script>
-Polymer({
-    is: 'blog-post',
-    behaviors: [
-        Polymer.NeonSharedElementAnimatableBehavior
-    ],
-    properties: {
-        meta: {
-            type: Object,
-            observer: '_metaChanged'
-        },
-        animationConfig: {
-            value: function() {
-                return {
-                    'entry': {
-                        name: 'transform-animation',
-                        node: this,
-                        transformFrom: 'translateY(100vh)',
-                        transformTo: 'none',
-                        timing: {
-                            duration: 1000
-                        }
-                    },
-                    'exit': {
-                        name: 'transform-animation',
-                        node: this,
-                        transformFrom: 'none',
-                        transformTo: 'translateY(100vh)',
-                        timing: {
-                            duration: 1000
-                        }
-                    }
-                };
+    Polymer({
+        is: 'blog-post',
+        properties: {
+            meta: {
+                type: Object,
+                observer: '_metaChanged'
+            },
+            opened: {
+                type: Boolean,
+                notify: true
             }
         },
-        closing: {
-            type: Boolean,
-            notify: true
+        ready: function() {
+            var title = this.$.title;
+            addEventListener('paper-header-transform', function(e) {
+                var d = e.detail;
+                var m = d.height - d.condensedHeight;
+                var scale = Math.max(0.75, (m - d.y) / (m / 0.25) + 0.75);
+                Polymer.Base.transform('scale(' + scale + ') translateZ(0)', title);
+            });
+        },
+        _metaChanged: function() {
+            this.postUrl = '../../posts/' + this.meta.file;
+            this.style.display = 'block';
+            this.$.ajax.generateRequest();
+        },
+        postLoaded: function(event, response) {
+            this.post = response.response;
+            this.async(function() {
+                this.$.scrollHeaderPanel.measureHeaderHeight();
+                this.$.scrollHeaderPanel.scroller.scrollTop = 0;
+            });
+        },
+        closePost: function() {
+            this.opened = false;
         }
-    },
-    _metaChanged: function() {
-        this.postUrl = '../../posts/' + this.meta.file;
-        this.style.display = 'block';
-        this.$.ajax.generateRequest();
-    },
-    postLoaded: function(event, response) {
-        this.post = response.response;
-        this.style.position = 'relative';
-    },
-    closePost: function() {
-        this.closing = true;
-    }
-});
+    });
 </script>

@@ -21,6 +21,10 @@ a {
     text-decoration: none;
 }
 
+strong, b {
+    font-weight: 400;
+}
+
 paper-button.colorful {
     color: #00BCD4;
 }
