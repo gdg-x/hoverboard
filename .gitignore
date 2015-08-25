@@ -1,6 +1,5 @@
 bower_components
 deploy
 dist
-firebase.json
 node_modules
 .tmp
