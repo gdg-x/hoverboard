@@ -40,7 +40,11 @@ module.exports = function ($, config, gulp, environment) { return function () {
     } else if (environment === 'promote') {
       console.log('Google App Engine don\'t support promote');
     }
-    deployCmd = 'gcloud preview app deploy -q --set-default --project ' + dest +
+    var args = '';
+    if (config.deploy.gae.setDefault) {
+      args = '--set-default';
+    }
+    deployCmd = 'gcloud preview app deploy -q ' + args + ' --project ' + dest +
       ' deploy/app.yaml';
     cmds = [deployCmd];
     stream = gulp.src('app.yaml')

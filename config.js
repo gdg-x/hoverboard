@@ -26,6 +26,8 @@ module.exports = {
   },
   // Deploy task
   deploy: {
+    // Choose hosting
+    hosting: 'gae', // or firebase, gcs
     // Firebase
     // Firebase requires Firebase Command Line Tools to be installed and configured.
     // For info on tool: https://www.firebase.com/docs/hosting/command-line-tool.html
@@ -44,7 +46,10 @@ module.exports = {
         development: 'polymer-starter-kit-plus-dev', // project ID
         staging:     'polymer-starter-kit-plus-staging',
         production:  'polymer-starter-kit-plus'
-      }
+      },
+      // Set the deployed version to be the default serving version.
+      // https://cloud.google.com/sdk/gcloud/reference/preview/app/deploy
+      setDefault: true
     },
     // Google Cloud Storage
     // GCS requires Google Cloud SDK to be installed and configured.
@@ -64,9 +69,7 @@ module.exports = {
         production: '315360000', // 10 years
         productionNoCache: '300' // 5 min for files without revision hash
       }
-    },
-    // Hosting
-    hosting: 'gae' // or firebase, gcs
+    }
   },
   // PageSpeed Insights
   // Please feel free to use the `nokey` option to try out PageSpeed
