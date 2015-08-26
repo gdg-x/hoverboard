@@ -8,7 +8,7 @@
     "platinum-elements": "PolymerElements/platinum-elements#1.1.x",
     "neon-elements": "PolymerElements/neon-elements#1.0.x",
     "page": "visionmedia/page.js#1.6.x",
-    "google-analytics": "cesarwbr/google-analytics-element#0.1.x"
+    "google-analytics-universal-tracker": "0.1.x"
   },
   "devDependencies": {
     "web-component-tester": "*",
