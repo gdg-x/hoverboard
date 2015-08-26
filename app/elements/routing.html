@@ -5,6 +5,11 @@
       ga('set', 'page', path);
       ga('send', 'pageview');
       /* jshint ignore:end */
+
+      var hero = document.querySelectorAll('#hero');
+      for (var i = hero.length - 1; i >= 0; i--) {
+          app.smoothScroll(hero[i], 200);
+      }  
   }
 
   window.addEventListener('WebComponentsReady', function() {
