@@ -2,6 +2,7 @@
   "name": "polymer-starter-kit-plus",
   "private": true,
   "dependencies": {
+    "polymer": "Polymer/polymer#1.1.x",
     "iron-elements": "PolymerElements/iron-elements#1.0.x",
     "paper-elements": "PolymerElements/paper-elements#1.0.x",
     "platinum-elements": "PolymerElements/platinum-elements#1.1.x",

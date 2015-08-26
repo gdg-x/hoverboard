@@ -9,7 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 'use strict';
 
-// Include Gulp & Tools We'll Use
+// Include Gulp & tools we'll use
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var del = require('del');
@@ -38,7 +38,7 @@ var styleTask = function (stylesPath, srcs) {
     .pipe($.size({title: stylesPath}));
 };
 
-// Compile and Automatically Prefix Stylesheets
+// Compile and automatically prefix stylesheets
 gulp.task('styles', function () {
   return styleTask('styles', ['**/*.css']);
 });
@@ -61,7 +61,7 @@ gulp.task('jshint', function () {
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
 });
 
-// Optimize Images
+// Optimize images
 gulp.task('images', function () {
   return gulp.src('app/images/**/*')
     .pipe($.cache($.imagemin({
@@ -72,7 +72,7 @@ gulp.task('images', function () {
     .pipe($.size({title: 'images'}));
 });
 
-// Copy All Files At The Root Level (app)
+// Copy all files at the root level (app)
 gulp.task('copy', function () {
   var app = gulp.src([
     'app/*',
@@ -105,14 +105,14 @@ gulp.task('copy', function () {
     .pipe($.size({title: 'copy'}));
 });
 
-// Copy Web Fonts To Dist
+// Copy web fonts to dist
 gulp.task('fonts', function () {
   return gulp.src(['app/fonts/**'])
     .pipe(gulp.dest('dist/fonts'))
     .pipe($.size({title: 'fonts'}));
 });
 
-// Scan Your HTML For Assets & Optimize Them
+// Scan your HTML for assets & optimize them
 gulp.task('html', function () {
   var assets = $.useref.assets({searchPath: ['.tmp', 'app', 'dist']});
 
@@ -120,26 +120,27 @@ gulp.task('html', function () {
     // Replace path for vulcanized assets
     .pipe($.if('*.html', $.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
     .pipe(assets)
-    // Concatenate And Minify JavaScript
+    // Concatenate and minify JavaScript
     .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
-    // Concatenate And Minify Styles
+    // Concatenate and minify styles
     // In case you are still using useref build blocks
     .pipe($.if('*.css', $.cssmin()))
     .pipe(assets.restore())
     .pipe($.useref())
-    // Minify Any HTML
+    // Minify any HTML
     .pipe($.if('*.html', $.minifyHtml({
       empty: true,  // KEEP empty attributes
       loose: true,  // KEEP one whitespace
       quotes: true, // KEEP arbitrary quotes
       spare: true   // KEEP redundant attributes
     })))
-    // Output Files
+    // Output files
     .pipe(gulp.dest('dist'))
     .pipe($.size({title: 'html'}));
 });
 
-// Vulcanize imports
+// Polybuild will take care of inlining HTML imports,
+// scripts and CSS for you.
 gulp.task('vulcanize', function () {
   return gulp.src('dist/elements/elements.vulcanized.html')
     .pipe($.vulcanize({
@@ -202,12 +203,12 @@ gulp.task('cache-config', function (callback) {
   });
 });
 
-// Clean Output Directory
+// Clean output directory
 gulp.task('clean', function (cb) {
   del(['.tmp', 'dist', 'deploy'], cb);
 });
 
-// Watch Files For Changes & Reload
+// Watch files for changes & reload
 gulp.task('serve', ['styles', 'elements', 'images'], function () {
   browserSync({
     browser: config.browserSync.browser,
@@ -238,7 +239,7 @@ gulp.task('serve', ['styles', 'elements', 'images'], function () {
   gulp.watch(['app/**/*.html'], reload);
   gulp.watch(['app/styles/**/*.css'], ['styles', reload]);
   gulp.watch(['app/elements/**/*.css'], ['elements', reload]);
-  gulp.watch(['app/{scripts,elements}/**/*.js'], ['jshint']);
+  gulp.watch(['app/{scripts,elements}/**/{*.js,*.html}'], ['jshint']);
   gulp.watch(['app/images/**/*'], reload);
 });
 
