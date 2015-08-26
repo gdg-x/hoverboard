@@ -1,64 +1,64 @@
 <dom-module id="person-dialog">
     <template>
         <style>
-            :host {
-                display: block;
-                z-index: 9;
-                height: 100%;
-            }
+        :host {
+            display: block;
+            z-index: 9;
+            height: 100%;
+        }
 
-            paper-scroll-header-panel {
-                background: #fff;
-                height: 100%;
-                --paper-scroll-header-panel-condensed-header: {
-                    background-color: var(--default-primary-color);
-                }
-                ;
+        paper-scroll-header-panel {
+            background: #fff;
+            height: 100%;
+            --paper-scroll-header-panel-condensed-header: {
+                background-color: var(--default-primary-color);
             }
+            ;
+        }
 
-            paper-toolbar {
-                background-color: transparent;
-                color: #fff;
+        paper-toolbar {
+            background-color: transparent;
+            color: #fff;
+        }
+
+        paper-toolbar .title {
+            margin: 0;
+        }
+
+        .subtitle {
+            margin-bottom: 5px;
+            font-size: 16px;
+            color: var(--secondary-text-color);
+        }
+
+        .content {
+            padding: 16px 10px;
+        }
+
+        .badge {
+            color: var(--secondary-text-color);
+            font-size: 14px;
+        }
+
+        @media (min-width: 768px) {
+            paper-card {
+                width: 70%;
             }
-
-            paper-toolbar .title {
-                margin: 0;
+            .person-img {
+                height: 120px;
+                width: 120px;
             }
-
-            .subtitle {
-                margin-bottom: 5px;
-                font-size: 16px;
-                color: var(--secondary-text-color);
+            .person-detail {
+                margin-left: 15px;
             }
-
-            .content {
-                padding: 16px 10px;
+            .name {
+                font-size: 22px;
+                color: var(--default-primary-color);
             }
-
-            .badge {
-                color: var(--secondary-text-color);
+            .title {
                 font-size: 14px;
             }
-
-            @media (min-width: 768px) {
-                paper-card {
-                    width: 70%;
-                }
-                .person-img {
-                    height: 120px;
-                    width: 120px;
-                }
-                .person-detail {
-                    margin-left: 15px;
-                }
-                .name {
-                    font-size: 22px;
-                    color: var(--default-primary-color);
-                }
-                .title {
-                    font-size: 14px;
-                }
-            }
+        }
         </style>
         <div class="relative layout horizontal center-justified hidden-xs">
             <paper-card>
@@ -95,13 +95,11 @@
                 </div>
             </paper-card>
         </div>
-
         <paper-scroll-header-panel id="scrollHeaderPanel" class="visible-xs fit" condenses keep-condensed-header>
             <paper-toolbar class="tall">
                 <paper-icon-button class="back-button" on-tap="closePeople" icon="arrow-back"></paper-icon-button>
                 <div id="title" class="bottom title">[[person.name]]</div>
             </paper-toolbar>
-
             <div class="content">
                 <div class="subtitle">
                     <span>[[person.company]]</span>,
@@ -127,46 +125,46 @@
     </template>
 </dom-module>
 <script>
-    (function() {
-        Polymer.NeonAnimatableBehavior = [Polymer.NeonAnimatableBehavior, Polymer.IronResizableBehavior];
-    })();
-    Polymer({
-        is: 'person-dialog',
-        properties: {
-            person: {
-                type: Object,
-                observer: '_setBackground'
-            },
-            opened: {
-                type: Boolean,
-                notify: true
-            }
+(function() {
+    Polymer.NeonAnimatableBehavior = [Polymer.NeonAnimatableBehavior, Polymer.IronResizableBehavior];
+})();
+Polymer({
+    is: 'person-dialog',
+    properties: {
+        person: {
+            type: Object,
+            observer: '_setBackground'
         },
-        ready: function() {
-            var title = this.$.title;
-            addEventListener('paper-header-transform', function(e) {
-                var d = e.detail;
-                var m = d.height - d.condensedHeight;
-                var scale = Math.max(0.75, (m - d.y) / (m / 0.25) + 0.75);
-                Polymer.Base.transform('scale(' + scale + ') translateZ(0)', title);
-            });
-        },
-        _setBackground: function() {
-            this.$.scrollHeaderPanel.$.headerBg.style.background = 'linear-gradient(to top, rgba(0, 0, 0, 0.4) -10%, rgba(0, 0, 0, 0.1) 50%), url(' + this.person.photoUrl + ') 0 / cover no-repeat';
-            this.async(function() {
-                this.$.scrollHeaderPanel.measureHeaderHeight();
-                this.$.scrollHeaderPanel.scroller.scrollTop = 0;
-            });
-        },
-        closePeople: function() {
-            this.opened = false;
-        },
-        _calculateIcon: function(event) {
-            return 'app-icons:' + event.model.social.name;
-        },
-        calculateIcon: function(event) {
-            return 'app-icons:' + event.model.social.name;
+        opened: {
+            type: Boolean,
+            notify: true
         }
+    },
+    ready: function() {
+        var title = this.$.title;
+        addEventListener('paper-header-transform', function(e) {
+            var d = e.detail;
+            var m = d.height - d.condensedHeight;
+            var transform = 50 * d.y / m;
+            Polymer.Base.transform('translate3d(' + transform + 'px,0,0)', title);
+        });
+    },
+    _setBackground: function() {
+        this.$.scrollHeaderPanel.$.headerBg.style.background = 'linear-gradient(to top, rgba(0, 0, 0, 0.4) -10%, rgba(0, 0, 0, 0.1) 50%), url(' + this.person.photoUrl + ') 0 / cover no-repeat';
+        this.async(function() {
+            this.$.scrollHeaderPanel.measureHeaderHeight();
+            this.$.scrollHeaderPanel.scroller.scrollTop = 0;
+        });
+    },
+    closePeople: function() {
+        this.opened = false;
+    },
+    _calculateIcon: function(event) {
+        return 'app-icons:' + event.model.social.name;
+    },
+    calculateIcon: function(event) {
+        return 'app-icons:' + event.model.social.name;
+    }
 
-    });
+});
 </script>
