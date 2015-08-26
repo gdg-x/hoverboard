@@ -266,13 +266,6 @@ gulp.task('serve:dist', ['default'], function () {
   });
 });
 
-// Build and serve the output from the dist build with GAE tool
-gulp.task('serve:gae', ['default'], function () {
-  return gulp.src('app.yaml')
-    .pipe(gulp.dest('dist'))
-    .pipe($.shell('gcloud preview app run dist/app.yaml'));
-});
-
 // Clean dist directory
 gulp.task('clean-dist', require(taskDir + 'clean-dist')(del));
 
@@ -290,6 +283,9 @@ gulp.task('minify-dist', require(taskDir + 'minify-dist')($, gulp, merge));
 
 // Static asset revisioning by appending content hash to filenames
 gulp.task('revision', require(taskDir + 'revision')($, gulp));
+
+// Build and serve the output from the dist build with GAE tool
+gulp.task('serve:gae', ['default'], require(taskDir + 'serve-gae')($, gulp));
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
