@@ -103,7 +103,7 @@
                             <img class="logo" src="../../images/logo-white.svg" alt="GDG DevFest 2015">
                         </a>
                     </div>
-                    <paper-tabs class="hidden-xs" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
+                    <paper-tabs class="hidden-xs" attr-for-selected="data-route" selected="{{route}}">
                         <paper-tab class="text-u-c">
                             <a data-route="blog" href="/blog" class="nav-link horizontal center-center layout">Blog</a>
                         </paper-tab>
@@ -125,8 +125,10 @@
     Polymer({
         is: 'hero-block',
         properties: {
-            hideLogo: {
-                type: Boolean
+            hideLogo: Boolean,
+            route: {
+                type: String,
+                notify: true
             }
         },
         togglePanel: function() {

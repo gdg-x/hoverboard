@@ -16,9 +16,9 @@
             }
 
             .card-actions {
-              border-top: 1px solid #e8e8e8;
-              padding: 5px 16px;
-              position: relative;
+                border-top: 1px solid #e8e8e8;
+                padding: 5px 16px;
+                position: relative;
             }
 
             .card-wrapper {
@@ -31,6 +31,7 @@
                 font-size: 24px;
                 line-height: 1.2
             }
+
             .posted {
                 font-size: 14px;
                 color: var(--secondary-text-color);
@@ -60,8 +61,10 @@
                 <div class="card-wrapper layout horizontal">
                     <paper-material class="layout vertical">
                         <div class="card-content">
-                                <span class="title block">[[post.title]]</span>
-                                <span class="posted">Posted <span>[[post.posted]]</span></span>
+                            <span class="title block">[[post.title]]</span>
+                            <span class="posted">Posted
+                                <span>[[post.posted]]</span>
+                            </span>
                         </div>
                         <div class="brief card-content flex">
                             <marked-element markdown="[[post.brief]]"></marked-element>

@@ -207,7 +207,7 @@ gulp.task('gh-pages', function() {
 });
 
 // Clean Output Directory
-gulp.task('clean', del.bind(null, ['.tmp', 'dist', '.publish']));
+gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 // Clear cache. Fixes problem with image task after moving project folder
 gulp.task('clearCache', function (done) {
