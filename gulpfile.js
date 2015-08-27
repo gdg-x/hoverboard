@@ -293,7 +293,7 @@ gulp.task('default', ['clean'], function (cb) {
   runSequence(
     ['copy', 'styles'],
     'elements',
-    ['jshint', 'images', 'fonts', 'html', 'fetch-newest-analytics'],
+    ['jshint', 'images', 'fonts', 'html'],
     'vulcanize',
     ['clean-dist', 'minify-dist'],
     'cache-config',
@@ -307,7 +307,7 @@ gulp.task('default', ['clean'], function (cb) {
 gulp.task('pre-deploy', function(cb) {
   runSequence(
     'default',
-    'fix-path-sw-toolbox',
+    ['fix-path-sw-toolbox', 'fetch-newest-analytics'],
     'revision',
     cb);
 });
