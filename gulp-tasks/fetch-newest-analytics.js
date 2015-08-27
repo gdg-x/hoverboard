@@ -7,9 +7,9 @@ module.exports = function ($, gulp, merge) { return function () {
     .pipe(gulp.dest('dist/scripts'))
     .pipe($.size({title: 'analytics.js'}));
 
-  var replace = gulp.src(['dist/bower_components/google-analytics/google-analytics.html'])
+  var replace = gulp.src(['dist/elements/elements.vulcanized.js'])
     .pipe($.replace('//www.google-analytics.com/analytics.js', 'scripts/analytics.js'))
-    .pipe(gulp.dest('dist/bower_components/google-analytics'));
+    .pipe(gulp.dest('dist/elements'));
 
   return merge(download, replace);
 };};
