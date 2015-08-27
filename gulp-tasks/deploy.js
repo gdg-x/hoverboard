@@ -23,8 +23,7 @@ module.exports = function ($, config, gulp, environment) { return function () {
       dest = config.deploy.firebase.env[environment];
     }
     deployCmd = 'firebase deploy -f ' + dest;
-    removeCmd = 'firebase delete-site -f ' + dest;
-    cmds = [removeCmd, deployCmd];
+    cmds = [deployCmd];
     stream = gulp.src('').pipe($.shell(cmds));
 
   } else if (config.deploy.hosting === 'gae') {
