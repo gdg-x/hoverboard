@@ -66,7 +66,9 @@ module.exports = {
         production:  'www.example.com'
       },
       cacheTTL: {
-        production: '315360000', // 10 years
+        development: '0',
+        staging:     '0',
+        production:  '315360000', // 10 years
         productionNoCache: '300' // 5 min for files without revision hash
       }
     }

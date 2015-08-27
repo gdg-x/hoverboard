@@ -16,14 +16,11 @@ module.exports = function ($, config, gulp, environment) { return function () {
   var stream = null;
 
   if (config.deploy.hosting === 'firebase') {
-    if (environment === 'development') {
-      dest = config.deploy.firebase.env.development;
-    } else if (environment === 'staging') {
-      dest = config.deploy.firebase.env.staging;
-    } else if (environment === 'production') {
-      dest = config.deploy.firebase.env.production;
-    } else if (environment === 'promote') {
+    if (environment === 'promote') {
       console.log('Firebase don\'t support promote');
+      return;
+    } else {
+      dest = config.deploy.firebase.env[environment];
     }
     deployCmd = 'firebase deploy -f ' + dest;
     removeCmd = 'firebase delete-site -f ' + dest;
@@ -31,14 +28,11 @@ module.exports = function ($, config, gulp, environment) { return function () {
     stream = gulp.src('').pipe($.shell(cmds));
 
   } else if (config.deploy.hosting === 'gae') {
-    if (environment === 'development') {
-      dest = config.deploy.gae.env.development;
-    } else if (environment === 'staging') {
-      dest = config.deploy.gae.env.staging;
-    } else if (environment === 'production') {
-      dest = config.deploy.gae.env.production;
-    } else if (environment === 'promote') {
+    if (environment === 'promote') {
       console.log('Google App Engine don\'t support promote');
+      return;
+    } else {
+      dest = config.deploy.gae.env[environment];
     }
     var args = '';
     if (config.deploy.gae.setDefault) {
@@ -52,30 +46,17 @@ module.exports = function ($, config, gulp, environment) { return function () {
       .pipe($.shell(cmds));
 
   } else if (config.deploy.hosting === 'gcs') {
-    if (environment === 'development') {
-      // Set staging specific vars here.
-      acl = config.deploy.gcs.acl.development;
-      cacheTTL = 0;
-      src = 'deploy/*';
-      dest = 'gs://' + config.deploy.gcs.env.development;
-    } else if (environment === 'staging') {
-      // Set staging specific vars here.
-      acl = config.deploy.gcs.acl.staging;
-      cacheTTL = 0;
-      src = 'deploy/*';
-      dest = 'gs://' + config.deploy.gcs.env.staging;
-    } else if (environment === 'production') {
-      // Set production specific vars here.
-      acl = config.deploy.gcs.acl.production;
-      cacheTTL = config.deploy.gcs.cacheTTL.production;
-      src = 'deploy/*';
-      dest = 'gs://' + config.deploy.gcs.env.production;
-    } else if (environment === 'promote') {
+    if (environment === 'promote') {
       // Set promote (essentially prod) specific vars here.
       acl = config.deploy.gcs.acl.production;
       cacheTTL = config.deploy.gcs.cacheTTL.production;
       src = 'gs://' + config.deploy.gcs.env.staging + '/*';
       dest = 'gs://' + config.deploy.gcs.env.production;
+    } else {
+      acl = config.deploy.gcs.acl[environment];
+      cacheTTL = config.deploy.gcs.cacheTTL[environment];
+      src = 'deploy/*';
+      dest = 'gs://' + config.deploy.gcs.env[environment];
     }
 
     var infoMsg = 'Deploy ' + environment + ' to GCS (' + dest + ') from ' + src;
