@@ -1,61 +1,66 @@
 <dom-module id="tickets-block">
     <template>
         <style>
-        :host {
-            display: block;
-            background: var(--default-primary-color);
-            color: #fff;
-        }
+            :host {
+                display: block;
+                background: var(--default-primary-color);
+                color: #fff;
+            }
 
-        .container {
-            padding-bottom: 35px;
-        }
+            .container {
+                padding-bottom: 35px;
+            }
 
-        .price-block-wrapper {
-            margin-top: 20px;
-        }
+            .price-block-wrapper {
+                margin-top: 20px;
+            }
 
-        .ticket-name {
-            margin-bottom: -5px;
-            font-size: 30px;
-        }
+            .ticket-name {
+                margin-bottom: -5px;
+                font-size: 30px;
+            }
 
-        .price-block {
-            margin-bottom: 15px;
-        }
+            .price-block {
+                margin-bottom: 15px;
+            }
 
-        .currency {
-            margin-top: 21px;
-            display: inline-block;
-            vertical-align: top;
-        }
+            .currency {
+                margin-top: 21px;
+                display: inline-block;
+                vertical-align: top;
+            }
 
-        .price {
-            font-size: 70px;
-        }
+            .price {
+                font-size: 70px;
+            }
 
-        .details {
-            margin-top: 10px;
-            font-size: 14px;
-        }
+            .details {
+                margin-top: 10px;
+                font-size: 14px;
+            }
 
-        .additional-info {
-            margin-top: -5px;
-            font-size: 13px;
-        }
+            .additional-info {
+                margin-top: -5px;
+                font-size: 13px;
+            }
 
-        .open-dialog-button {
-            margin-top: 30px;
-        }
+            .open-dialog-button {
+                margin-top: 30px;
+            }
 
-        paper-dialog {
-            background: #fff;
-            min-height: 380px;
-        }
+            paper-dialog {
+                background: #fff;
+            }
 
-        paper-dialog .buttons {
-            color: initial;
-        }
+            @media (min-height: 400px) {
+                paper-dialog {
+                    min-height: 380px;
+                }
+            }
+
+            paper-dialog .buttons {
+                color: initial;
+            }
         </style>
         <div id="pricetable" class="container wrap relative layout vertical text-center">
             <h4 class="heading">Tickets</h4>
@@ -64,7 +69,8 @@
                     <span class="ticket-name block">Student</span>
                     <span class="price">400</span>
                     <span class="currency">UAH</span>
-                    <span class="additional-info block">*Before October 23 or 100 tickets.<br/>Requires valid student ID</span>
+                    <span class="additional-info block">*Before October 23 or 100 tickets.
+                        <br/>Requires valid student ID</span>
                 </div>
                 <div class="price-block flex text-center">
                     <span class="ticket-name block">Early Bird</span>
@@ -85,7 +91,7 @@
             </div>
         </div>
         <paper-dialog id="ticketsDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal>
-            <div id="2event_tickets_widget" style="width: 640px; height: 300px; background:#fff;"></div>
+                <div id="2event_tickets_widget" style="width: 640px; height: 300px; background:#fff;"></div>
             <div class="buttons">
                 <a href="http://2event.com/events/312113" target="_blank">
                     <paper-button>Buy on the website</paper-button>
@@ -96,26 +102,26 @@
     </template>
 </dom-module>
 <script>
-/* jshint ignore:start */
-var widgetOptions = {
-    bg_color: 'ffffff',
-    id: 312113,
-    lang: 'en'
-};
-/* jshint ignore:end */
-(function() {
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.async = true;
-    script.src = 'http://2event.com/js/widget-tickets.js';
-    document.getElementsByTagName('head')[0].appendChild(script);
-})();
+    /* jshint ignore:start */
+    var widgetOptions = {
+        bg_color: 'ffffff',
+        id: 312113,
+        lang: 'en'
+    };
+    /* jshint ignore:end */
+    (function() {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.async = true;
+        script.src = 'http://2event.com/js/widget-tickets.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
+    })();
 
-Polymer({
-    is: 'tickets-block',
-    openTicketsDialog: function() {
-        ga('send', 'buy-a-ticket', 'button', 'click'); // jshint ignore:line
-        this.$.ticketsDialog.open();
-    }
-});
+    Polymer({
+        is: 'tickets-block',
+        openTicketsDialog: function() {
+            ga('send', 'buy-a-ticket', 'button', 'click'); // jshint ignore:line
+            this.$.ticketsDialog.open();
+        }
+    });
 </script>

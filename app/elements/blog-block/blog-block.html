@@ -140,7 +140,7 @@
             this.posts = response.response.reverse();
 
             this.async(function() {
-                var nodeList = Polymer.dom(this.root).querySelectorAll('.card-wrapper');
+                var nodeList = this.$.posts.querySelectorAll('.card-wrapper');
                 this.animationConfig.loadPosts.nodes = Array.prototype.slice.call(nodeList);
                 if (!this.checkUrlParams()) {
                     this.playLoadAnimation();

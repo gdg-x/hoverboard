@@ -42,6 +42,9 @@
         .post-wrapper {
             padding-top: 0;
         }
+        .post-detail {
+            padding-bottom: 16px;
+        }
 
         .post-content::content h3 {
             font-size: 26px;
@@ -58,15 +61,21 @@
             .card-content {
                 padding: 24px;
             }
+            .post-detail {
+                padding-bottom: 16px;
+            }
+            .post-wrapper {
+                padding-top: 0;
+            }
         }
         </style>
         <iron-ajax id="ajax" url="[[postUrl]]" handle-as="text" on-response="postLoaded"></iron-ajax>
         <div class="relative layout horizontal center-justified hidden-xs">
             <paper-card>
                 <div class="paper-card-container">
-                    <div class="card-content layout horizontal">
+                    <div class="post-detail card-content layout horizontal">
                         <iron-image src="[[person.photoUrl]]" class="person-img placeholder-color img-circle" preload fade sizing="cover"></iron-image>
-                        <div class="¸-detail flex layout vertical center-center">
+                        <div class="flex layout vertical center-center">
                             <span class="title self-start">[[meta.title]]</span>
                             <span class="posted self-start">Posted:
                                 <span>[[meta.posted]]</span>

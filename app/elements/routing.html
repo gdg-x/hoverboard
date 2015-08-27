@@ -13,10 +13,6 @@
   }
 
   window.addEventListener('WebComponentsReady', function() {
-
-    // We use Page.js for routing. This is a Micro
-    // client-side router inspired by the Express router
-    // More info: https://visionmedia.github.io/page.js/
     page('/', function () {
       trackPageview('/');
       app.route = 'home';
@@ -62,10 +58,22 @@
       app.route = 'code-of-conduct';
     });
 
-    // add #! before urls
+    page('*', function () {
+      page.redirect('/');
+    });
+
     page({
       hashbang: true
     });
 
+    function redirectLink(e) {
+        page.redirect('/' + this.getAttribute('data-route'));
+        e.preventDefault();
+    }
+
+    var routerLinks = document.querySelectorAll('a[href^="#!"],a[dynamic-link]');
+    for (var i = 0; i < routerLinks.length; i++) {
+        routerLinks[i].addEventListener('click', redirectLink, false);
+    }
   });
 </script>
