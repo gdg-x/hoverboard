@@ -270,10 +270,10 @@ gulp.task('serve:dist', ['default'], function () {
 // Clean dist directory
 gulp.task('clean-dist', require(taskDir + 'clean-dist')(del));
 
-// Fetch newest Google analytics.js and replace link to analytics.js
-// https://www.google-analytics.com/analytics.js have only 2 hours cache
-gulp.task('fetch-newest-analytics',
-  require(taskDir + 'fetch-newest-analytics')($, gulp, merge));
+// Download newest script analytics.js from Google, because link
+// https://www.google-analytics.com/analytics.js has set only 2 hours cache
+gulp.task('download:analytics',
+  require(taskDir + 'download-analytics')($, gulp));
 
 // Fix path to sw-toolbox.js
 gulp.task('fix-path-sw-toolbox',
@@ -307,7 +307,7 @@ gulp.task('default', ['clean'], function (cb) {
 gulp.task('pre-deploy', function(cb) {
   runSequence(
     'default',
-    ['fix-path-sw-toolbox', 'fetch-newest-analytics'],
+    'fix-path-sw-toolbox',
     'revision',
     cb);
 });
