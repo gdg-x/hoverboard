@@ -51,6 +51,7 @@ gulp.task('elements', function () {
 gulp.task('jshint', function () {
   return gulp.src([
       'app/scripts/**/*.js',
+      '!app/scripts/analytics.js',
       'app/elements/**/*.js',
       'app/elements/**/*.html'
     ])
@@ -75,7 +76,7 @@ gulp.task('images', function () {
 // Copy all files at the root level (app)
 gulp.task('copy', function () {
   var app = gulp.src([
-    'app/*',
+    'app/**',
     '!app/test',
     '!app/cache-config.json'
   ], {
