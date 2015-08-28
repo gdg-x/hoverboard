@@ -83,7 +83,7 @@ gulp.task('copy', function () {
   }).pipe(gulp.dest('dist'));
 
   var bower = gulp.src([
-    'bower_components/**/*.{css,html,js}',
+    'bower_components/**/*.{css,html,js,ttf}',
     '!bower_components/**/index.html',
     '!bower_components/**/{demo,test}/**/*'
   ]).pipe(gulp.dest('dist/bower_components'));
