@@ -39,6 +39,10 @@
             "url": "http://career4it.com/en/",
             "logoUrl": "../images/partners/career4it.png"
         }, {
+            "name": "LvivJs",
+            "url": "http://www.lvivjs.org.ua/",
+            "logoUrl": "../images/partners/lvivjs.png"
+        }, {
             "name": "Hackraft",
             "url": "http://hackraft.com/",
             "logoUrl": "../images/partners/hackraft.svg"
