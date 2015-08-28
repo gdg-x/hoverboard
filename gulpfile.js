@@ -300,6 +300,13 @@ gulp.task('default', ['clean'], function (cb) {
     cb);
 });
 
+// Initializing app
+gulp.task('init', function (cb) {
+  runSequence(
+    'download:analytics',
+    cb);
+});
+
 // Deploy Tasks
 // ------------
 
