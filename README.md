@@ -13,7 +13,8 @@
 
 ## Features
 
-- [Polymer](http://polymer-project.org), [Paper](https://elements.polymer-project.org/browse?package=paper-elements), [Iron](https://elements.polymer-project.org/browse?package=iron-elements) and [Neon](https://elements.polymer-project.org/browse?package=neon-elements) elements
+- [Polymer](http://polymer-project.org), [Paper](https://elements.polymer-project.org/browse?package=paper-elements), [Iron](https://elements.polymer-project.org/browse?package=iron-elements), [Neon](https://elements.polymer-project.org/browse?package=neon-elements) and
+[Start](https://github.com/StartPolymer/start-elements) elements
 - [Material Design](http://www.google.com/design/spec/material-design/introduction.html) layout
 - Routing with [Page.js](https://visionmedia.github.io/page.js/)
 - Offline setup through [Platinum](https://elements.polymer-project.org/browse?package=platinum-elements) Service Worker elements
@@ -119,6 +120,18 @@ This installs the element sets (Paper, Iron, Platinum) and tools the starter kit
 
 Gulp variables are in the file [config.js](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/config.js)
 
+#### Initializing your app
+
+##### Download newest script analytics.js
+
+You need download newest script analytics.js from Google, because link https://www.google-analytics.com/analytics.js has set only 2 hours cache.
+Here is [analytics.js changelog](https://developers.google.com/analytics/devguides/collection/analyticsjs/changelog).
+Local copy of this script is better for load page performance.
+
+```sh
+gulp init
+```
+
 #### Serve / watch
 
 ```sh
@@ -152,7 +165,7 @@ gulp
 
 Build and optimize the current project, ready for deployment. This includes linting as well as vulcanization, image, script, stylesheet and HTML optimization and minification.
 
-### 4. Deploy code :tada:
+### 4. Deploy app :tada:
 
 How to setup [Google App Engine](https://github.com/h5bp/server-configs-gae)
 
@@ -181,6 +194,15 @@ gulp deploy:promote
 ```
 
 ## Tools
+
+### Download Google Fonts
+
+Download Google Fonts for load page performance and offline using.
+Fonts list for download is in file [fonts.list](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/fonts.list).
+
+```sh
+gulp download:fonts
+```
 
 ### PageSpeed Insights
 
