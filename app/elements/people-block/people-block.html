@@ -204,7 +204,7 @@
             this.people = response.response;
 
             this.async(function() {
-                var nodeList = Polymer.dom(this.root).querySelectorAll('.card-wrapper');
+                var nodeList = this.$.people.querySelectorAll('.card-wrapper');
                 this.animationConfig.loadPeople.nodes = Array.prototype.slice.call(nodeList);
                 if (!this.checkUrlParams()) {
                     this.playLoadAnimation();

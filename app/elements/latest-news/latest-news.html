@@ -28,13 +28,13 @@
                 <div class="flex-5">
                     <span class="title block">[[news.0.title]]</span>
                     <marked-element markdown="[[news.0.brief]]"></marked-element>
-                    <a data-route="[[news.0.url]]" href="[[news.0.url]]">Continue reading</a>
+                    <a data-route="[[news.0.url]]" href="[[news.0.url]]" dynamic-link>Continue reading</a>
                 </div>
                 <span class="flex"></span>
                 <div class="flex-5 second-block">
                     <span class="title block">[[news.1.title]]</span>
                     <marked-element markdown="[[news.1.brief]]"></marked-element>
-                    <a data-route="[[news.1.url]]" href="[[news.1.url]]">Continue reading</a>
+                    <a data-route="[[news.1.url]]" href="[[news.1.url]]" dynamic-link>Continue reading</a>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
         newsLoaded: function(event, response) {
             var temp = response.response.reverse().slice(0, 2);
             for (var i = 0; i < temp.length; i++) {
-                temp[i].url = '/blog/' + temp[i].titleUrl;
+                temp[i].url = '#!/blog/' + temp[i].titleUrl;
             }
             this.news = temp;
         }
