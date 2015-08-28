@@ -339,6 +339,9 @@ gulp.task('deploy:promote',
 // Tool Tasks
 // ----------
 
+// Download Google Fonts for load page performance and offline using
+gulp.task('download:fonts', require(taskDir + 'download-fonts')($, gulp));
+
 // Run PageSpeed Insights
 gulp.task('pagespeed', require(taskDir + 'pagespeed')(config));
 
