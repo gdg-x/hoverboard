@@ -132,6 +132,10 @@ paper-button[raised].colorful {
     flex-direction: column;
     display: flex;
 }
+.horizontal-vertical {
+    flex-direction: row;
+    display: flex;
+}
 
 .card {
     position: relative;
@@ -237,6 +241,9 @@ paper-button[raised].colorful {
     }
     .vertical-horizontal {
         flex-direction: row;
+    }
+    .horizontal-vertical {
+        flex-direction: column;
     }
 }
 
