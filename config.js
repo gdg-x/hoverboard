@@ -52,7 +52,7 @@ module.exports = {
       setDefault: true
     },
     // Google Cloud Storage
-    // GCS requires Google Cloud SDK to be installed and configured.
+    // GCS requires Google Cloud SDK with gsutil to be installed and configured.
     // For info on SDK: https://cloud.google.com/sdk/
     gcs: {
       acl: { // https://cloud.google.com/storage/docs/access-control
