@@ -3,14 +3,20 @@
         <style>
             :root {
                 --android: #78C257;
-                --ux: #9C27B0;
-                --dart: #00B4AA;
-                --cloud: #4285F4;
-                --v8-engine: #00BCD4;
-                --gae: #FFC107;
-                --grpc: #617D8A;
-                --kubernetes: #326DE6;
+                --web: #2196F3;
+                --cloud: #3F51B5;
+                --community: #E91E63;
+                --angularjs: #E0343D;
                 --polymer: #D81B60;
+                --dart: #00B4AA;
+                --kubernetes: #326DE6;
+                --v8-engine: #009688;
+                --gae: #FFC107;
+                --ndk: #4CAF50;
+                --ci: #CDDC39;
+                --grpc: #617D8A;
+                --ux: #9C27B0;
+                --material-design: #009688;
             }
 
             paper-checkbox.android {
@@ -19,10 +25,34 @@
                 --paper-checkbox-unchecked-ink-color: var(--android);
             }
 
-            paper-checkbox.ux {
-                --paper-checkbox-checked-color: var(--ux);
-                --paper-checkbox-checked-ink-color: var(--ux);
-                --paper-checkbox-unchecked-ink-color: var(--ux);
+            paper-checkbox.web {
+                --paper-checkbox-checked-color: var(--web);
+                --paper-checkbox-checked-ink-color: var(--web);
+                --paper-checkbox-unchecked-ink-color: var(--web);
+            }
+
+            paper-checkbox.cloud {
+                --paper-checkbox-checked-color: var(--cloud);
+                --paper-checkbox-checked-ink-color: var(--cloud);
+                --paper-checkbox-unchecked-ink-color: var(--cloud);
+            }
+
+            paper-checkbox.community {
+                --paper-checkbox-checked-color: var(--community);
+                --paper-checkbox-checked-ink-color: var(--community);
+                --paper-checkbox-unchecked-ink-color: var(--community);
+            }
+
+            paper-checkbox.angularjs {
+                --paper-checkbox-checked-color: var(--angularjs);
+                --paper-checkbox-checked-ink-color: var(--angularjs);
+                --paper-checkbox-unchecked-ink-color: var(--angularjs);
+            }
+
+            paper-checkbox.polymer {
+                --paper-checkbox-checked-color: var(--polymer);
+                --paper-checkbox-checked-ink-color: var(--polymer);
+                --paper-checkbox-unchecked-ink-color: var(--polymer);
             }
 
             paper-checkbox.dart {
@@ -31,10 +61,10 @@
                 --paper-checkbox-unchecked-ink-color: var(--dart);
             }
 
-            paper-checkbox.cloud {
-                --paper-checkbox-checked-color: var(--cloud);
-                --paper-checkbox-checked-ink-color: var(--cloud);
-                --paper-checkbox-unchecked-ink-color: var(--cloud);
+            paper-checkbox.kubernetes {
+                --paper-checkbox-checked-color: var(--kubernetes);
+                --paper-checkbox-checked-ink-color: var(--kubernetes);
+                --paper-checkbox-unchecked-ink-color: var(--kubernetes);
             }
 
             paper-checkbox.v8-engine {
@@ -49,98 +79,73 @@
                 --paper-checkbox-unchecked-ink-color: var(--gae);
             }
 
+            paper-checkbox.ndk {
+                --paper-checkbox-checked-color: var(--ndk);
+                --paper-checkbox-checked-ink-color: var(--ndk);
+                --paper-checkbox-unchecked-ink-color: var(--ndk);
+            }
+
+            paper-checkbox.ci {
+                --paper-checkbox-checked-color: var(--ci);
+                --paper-checkbox-checked-ink-color: var(--ci);
+                --paper-checkbox-unchecked-ink-color: var(--ci);
+            }
+
             paper-checkbox.grpc {
                 --paper-checkbox-checked-color: var(--grpc);
                 --paper-checkbox-checked-ink-color: var(--grpc);
                 --paper-checkbox-unchecked-ink-color: var(--grpc);
             }
 
-            paper-checkbox.kubernetes {
-                --paper-checkbox-checked-color: var(--kubernetes);
-                --paper-checkbox-checked-ink-color: var(--kubernetes);
-                --paper-checkbox-unchecked-ink-color: var(--kubernetes);
+            paper-checkbox.ux {
+                --paper-checkbox-checked-color: var(--ux);
+                --paper-checkbox-checked-ink-color: var(--ux);
+                --paper-checkbox-unchecked-ink-color: var(--ux);
             }
 
-            paper-checkbox.polymer {
-                --paper-checkbox-checked-color: var(--polymer);
-                --paper-checkbox-checked-ink-color: var(--polymer);
-                --paper-checkbox-unchecked-ink-color: var(--polymer);
-            }
-
-            paper-radio-button.android {
-                --paper-radio-button-checked-color: var(--android);
-                --paper-radio-button-checked-ink-color: var(--android);
-                --paper-radio-button-unchecked-ink-color: var(--android);
-            }
-
-            paper-radio-button.ux {
-                --paper-radio-button-checked-color: var(--ux);
-                --paper-radio-button-checked-ink-color: var(--ux);
-                --paper-radio-button-unchecked-ink-color: var(--ux);
-            }
-
-            paper-radio-button.dart {
-                --paper-radio-button-checked-color: var(--dart);
-                --paper-radio-button-checked-ink-color: var(--dart);
-                --paper-radio-button-unchecked-ink-color: var(--dart);
-            }
-
-            paper-radio-button.cloud {
-                --paper-radio-button-checked-color: var(--cloud);
-                --paper-radio-button-checked-ink-color: var(--cloud);
-                --paper-radio-button-unchecked-ink-color: var(--cloud);
-            }
-
-            paper-radio-button.v8-engine {
-                --paper-radio-button-checked-color: var(--v8-engine);
-                --paper-radio-button-checked-ink-color: var(--v8-engine);
-                --paper-radio-button-unchecked-ink-color: var(--v8-engine);
-            }
-
-            paper-radio-button.gae {
-                --paper-radio-button-checked-color: var(--gae);
-                --paper-radio-button-checked-ink-color: var(--gae);
-                --paper-radio-button-unchecked-ink-color: var(--gae);
-            }
-
-            paper-radio-button.grpc {
-                --paper-radio-button-checked-color: var(--grpc);
-                --paper-radio-button-checked-ink-color: var(--grpc);
-                --paper-radio-button-unchecked-ink-color: var(--grpc);
-            }
-
-            paper-radio-button.kubernetes {
-                --paper-radio-button-checked-color: var(--kubernetes);
-                --paper-radio-button-checked-ink-color: var(--kubernetes);
-                --paper-radio-button-unchecked-ink-color: var(--kubernetes);
-            }
-
-            paper-radio-button.polymer {
-                --paper-radio-button-checked-color: var(--polymer);
-                --paper-radio-button-checked-ink-color: var(--polymer);
-                --paper-radio-button-unchecked-ink-color: var(--polymer);
+            paper-checkbox.material-design {
+                --paper-checkbox-checked-color: var(--material-design);
+                --paper-checkbox-checked-ink-color: var(--material-design);
+                --paper-checkbox-unchecked-ink-color: var(--material-design);
             }
 
             .tag-label {
                 padding: 4px 6px;
                 color: #fff;
                 font-size: 11px;
+                background: var(--default-primary-color);
             }
 
             .tag-label.android {
                 background: var(--android);
             }
 
-            .tag-label.ux {
-                background: var(--ux);
+            .tag-label.web {
+                background: var(--web);
+            }
+
+            .tag-label.cloud {
+                background: var(--cloud);
+            }
+
+            .tag-label.community {
+                background: var(--community);
+            }
+
+            .tag-label.angularjs {
+                background: var(--angularjs);
+            }
+
+            .tag-label.polymer {
+                background: var(--polymer);
             }
 
             .tag-label.dart {
                 background: var(--dart);
             }
 
-            .tag-label.cloud {
-                background: var(--cloud);
+            .tag-label.kubernetes {
+                background: var(--kubernetes);
             }
 
             .tag-label.v8-engine {
@@ -151,12 +156,24 @@
                 background: var(--gae);
             }
 
+            .tag-label.ndk {
+                background: var(--ndk);
+            }
+
+            .tag-label.ci {
+                background: var(--ci);
+            }
+
             .tag-label.grpc {
                 background: var(--grpc);
             }
 
-            .tag-label.kubernetes {
-                background: var(--kubernetes);
+            .tag-label.ux {
+                background: var(--ux);
+            }
+
+            .tag-label.material-design {
+                background: var(--material-design);
             }
 
             paper-scroll-header-panel.android {
@@ -170,24 +187,13 @@
                 ;
             }
 
-            paper-scroll-header-panel.ux {
+            paper-scroll-header-panel.web {
                 --paper-scroll-header-panel-full-header: {
-                    background-color: var(--ux);
+                    background-color: var(--web);
                 }
                 ;
                 --paper-scroll-header-panel-condensed-header: {
-                    background-color: var(--ux);
-                }
-                ;
-            }
-
-            paper-scroll-header-panel.dart {
-                --paper-scroll-header-panel-full-header: {
-                    background-color: var(--dart);
-                }
-                ;
-                --paper-scroll-header-panel-condensed-header: {
-                    background-color: var(--dart);
+                    background-color: var(--web);
                 }
                 ;
             }
@@ -203,57 +209,13 @@
                 ;
             }
 
-            paper-scroll-header-panel.v8-engine {
+            paper-scroll-header-panel.community {
                 --paper-scroll-header-panel-full-header: {
-                    background-color: var(--v8-engine);
+                    background-color: var(--community);
                 }
                 ;
                 --paper-scroll-header-panel-condensed-header: {
-                    background-color: var(--v8-engine);
-                }
-                ;
-            }
-
-            paper-scroll-header-panel.gae {
-                --paper-scroll-header-panel-full-header: {
-                    background-color: var(--gae);
-                }
-                ;
-                --paper-scroll-header-panel-condensed-header: {
-                    background-color: var(--gae);
-                }
-                ;
-            }
-
-            paper-scroll-header-panel.grpc {
-                --paper-scroll-header-panel-full-header: {
-                    background-color: var(--grpc);
-                }
-                ;
-                --paper-scroll-header-panel-condensed-header: {
-                    background-color: var(--grpc);
-                }
-                ;
-            }
-
-            paper-scroll-header-panel.kubernetes {
-                --paper-scroll-header-panel-full-header: {
-                    background-color: var(--kubernetes);
-                }
-                ;
-                --paper-scroll-header-panel-condensed-header: {
-                    background-color: var(--kubernetes);
-                }
-                ;
-            }
-
-            paper-scroll-header-panel.polymer {
-                --paper-scroll-header-panel-full-header: {
-                    background-color: var(--polymer);
-                }
-                ;
-                --paper-scroll-header-panel-condensed-header: {
-                    background-color: var(--polymer);
+                    background-color: var(--community);
                 }
                 ;
             }

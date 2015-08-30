@@ -27,6 +27,10 @@
                 margin: 0;
             }
 
+            .card-actions {
+                border-top: 1px solid #e8e8e8;
+            }
+
             .subtitle {
                 margin-bottom: 5px;
                 font-size: 16px;
@@ -34,7 +38,7 @@
             }
 
             .content {
-                padding: 16px 10px;
+                padding: 16px 10px 0;
             }
 
             .person-description {
@@ -61,6 +65,21 @@
 
             .tag {
                 margin-left: 5px;
+            }
+
+            .session {
+                padding: 20px 0;
+                border-top: 1px solid #e8e8e8;
+            }
+
+            .session-meta {
+                margin-right: 10px;
+                font-size: 14px;
+            }
+
+            .session-title {
+                font-size: 22px;
+                font-weight: 400;
             }
 
             @media (min-width: 768px) {
@@ -115,6 +134,20 @@
                         </template>
                         <marked-element markdown="[[person.bio]]"></marked-element>
                     </div>
+                    <div class="card-content sessions">
+                        <template is="dom-repeat" items="[[person.sessions]]" as="session">
+                            <div class="session">
+                                <h3 class="session-title">[[session.title]]</h3>
+                                <span class="session-meta">Language:
+                                    <span>[[session.language]]</span>
+                                </span>
+                                <span class="session-meta">Complexity:
+                                    <span>[[session.complexity]]</span>
+                                </span>
+                                <marked-element markdown="[[session.description]]"></marked-element>
+                            </div>
+                        </template>
+                    </div>
                     <div class="card-actions">
                         <div class="align-pb-block">
                             <template is="dom-repeat" items="[[person.socials]]" as="social">
@@ -148,6 +181,20 @@
                 </template>
                 <div class="card-content people-description">
                     <marked-element markdown="[[person.bio]]"></marked-element>
+                </div>
+                <div class="card-content sessions">
+                    <template is="dom-repeat" items="[[person.sessions]]" as="session">
+                        <div class="session">
+                            <h3 class="session-title">[[session.title]]</h3>
+                            <span class="session-meta">Language:
+                                <span>[[session.language]]</span>
+                            </span>
+                            <span class="session-meta">Complexity:
+                                <span>[[session.complexity]]</span>
+                            </span>
+                            <marked-element markdown="[[session.description]]"></marked-element>
+                        </div>
+                    </template>
                 </div>
                 <div class="card-actions">
                     <div class="align-pb-block">
@@ -187,7 +234,9 @@
         },
         _personChanged: function() {
             this.$.scrollHeaderPanel.$.headerBg.style.background = 'linear-gradient(to top, rgba(0, 0, 0, 0.4) -10%, rgba(0, 0, 0, 0.1) 50%), url(' + this.person.photoUrl + ') 0 / cover no-repeat';
-            // this.$.scrollHeaderPanel.className += ' ' + app.generateClass(this.person.tags[0]);
+            // var panelClass = 'visible-xs fit ' + app.generateClass(this.person.tags[0]);
+            // this.set('person.panelClass', panelClass);
+            // this.toggleClass(app.generateClass(this.person.tags[0]), true, this.$.scrollHeaderPanel);
             this.async(function() {
                 this.$.scrollHeaderPanel.measureHeaderHeight();
                 this.$.scrollHeaderPanel.scroller.scrollTop = 0;
