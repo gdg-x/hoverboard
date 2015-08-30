@@ -1,5 +1,6 @@
 app/fonts/*
 app/scripts/analytics.js
+app/styles/fonts.css
 bower_components
 deploy
 dist
