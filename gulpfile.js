@@ -24,7 +24,11 @@ var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
 var config = require('./config');
-var taskDir = './gulp-tasks/';
+
+// Get a task path
+function task(filename) {
+  return './gulp-tasks/' + filename;
+}
 
 var styleTask = function (stylesPath, srcs) {
   return gulp.src(srcs.map(function(src) {
@@ -272,25 +276,23 @@ gulp.task('serve:dist', ['default'], function () {
 });
 
 // Clean dist directory
-gulp.task('clean-dist', require(taskDir + 'clean-dist')(del));
+gulp.task('clean-dist', require(task('clean-dist'))(del));
 
 // Download newest script analytics.js from Google, because link
 // https://www.google-analytics.com/analytics.js has set only 2 hours cache
-gulp.task('download:analytics',
-  require(taskDir + 'download-analytics')($, gulp));
+gulp.task('download:analytics', require(task('download-analytics'))($, gulp));
 
 // Fix path to sw-toolbox.js
-gulp.task('fix-path-sw-toolbox',
-  require(taskDir + 'fix-path-sw-toolbox')($, gulp));
+gulp.task('fix-path-sw-toolbox', require(task('fix-path-sw-toolbox'))($, gulp));
 
 // Minify JavaScript in dist directory
-gulp.task('minify-dist', require(taskDir + 'minify-dist')($, gulp, merge));
+gulp.task('minify-dist', require(task('minify-dist'))($, gulp, merge));
 
 // Static asset revisioning by appending content hash to filenames
-gulp.task('revision', require(taskDir + 'revision')($, gulp));
+gulp.task('revision', require(task('revision'))($, gulp));
 
 // Build and serve the output from the dist build with GAE tool
-gulp.task('serve:gae', ['default'], require(taskDir + 'serve-gae')($, gulp));
+gulp.task('serve:gae', ['default'], require(task('serve-gae'))($, gulp));
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
@@ -324,28 +326,28 @@ gulp.task('pre-deploy', function(cb) {
 
 // Deploy to development environment
 gulp.task('deploy:dev', ['pre-deploy'],
-  require(taskDir + 'deploy')($, config, gulp, 'development'));
+  require(task('deploy'))($, config, gulp, 'development'));
 
 // Deploy to staging environment
 gulp.task('deploy:stag', ['pre-deploy'],
-  require(taskDir + 'deploy')($, config, gulp, 'staging'));
+  require(task('deploy'))($, config, gulp, 'staging'));
 
 // Deploy to production environment
 gulp.task('deploy:prod', ['pre-deploy'],
-  require(taskDir + 'deploy')($, config, gulp, 'production'));
+  require(task('deploy'))($, config, gulp, 'production'));
 
 // Promote the staging version to the production environment
 gulp.task('deploy:promote',
-  require(taskDir + 'deploy')($, config, gulp, 'promote'));
+  require(task('deploy'))($, config, gulp, 'promote'));
 
 // Tool Tasks
 // ----------
 
 // Download Google Fonts for load page performance and offline using
-gulp.task('download:fonts', require(taskDir + 'download-fonts')($, gulp));
+gulp.task('download:fonts', require(task('download-fonts'))($, gulp));
 
 // Run PageSpeed Insights
-gulp.task('pagespeed', require(taskDir + 'pagespeed')(config));
+gulp.task('pagespeed', require(task('pagespeed'))(config));
 
 // Test Tasks
 // ----------
