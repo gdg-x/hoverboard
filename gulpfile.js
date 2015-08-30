@@ -84,7 +84,7 @@ gulp.task('copy', function () {
   }).pipe(gulp.dest('dist'));
 
   var bower = gulp.src([
-    'bower_components/**/*.{css,html,js,ttf}',
+    'bower_components/**/*.{css,html,js}',
     '!bower_components/**/index.html',
     '!bower_components/**/{demo,test}/**/*'
   ]).pipe(gulp.dest('dist/bower_components'));
@@ -304,7 +304,7 @@ gulp.task('default', ['clean'], function (cb) {
 // Initializing app
 gulp.task('init', function (cb) {
   runSequence(
-    'download:analytics',
+    ['download:analytics', 'download:fonts'],
     cb);
 });
 

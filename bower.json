@@ -8,7 +8,7 @@
     "platinum-elements": "PolymerElements/platinum-elements#1.1.x",
     "neon-elements": "PolymerElements/neon-elements#1.0.x",
     "start-elements": "StartPolymer/start-elements#1.1.x",
-    "font-roboto": "PolymerElements/font-roboto-local#1.0.x",
+    "font-roboto": "StartPolymer/font-empty#1.1.x",
     "page": "visionmedia/page.js#1.6.x"
   },
   "devDependencies": {

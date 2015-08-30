@@ -19,6 +19,7 @@
 - Routing with [Page.js](https://visionmedia.github.io/page.js/)
 - Offline setup through [Platinum](https://elements.polymer-project.org/browse?package=platinum-elements) Service Worker elements
 - [Config file](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/config.js)
+- [Custom fonts list](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/fonts.list)
 - [Custom icons element](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/elements/custom-icons/icons.html)
 - [Gulp tasks](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/gulp-tasks) per file
 - [Autoprefixer](https://github.com/postcss/autoprefixer) for CSS
@@ -122,11 +123,9 @@ Gulp variables are in the file [config.js](https://github.com/StartPolymer/polym
 
 #### Initializing your app
 
-##### Download newest script analytics.js
+##### [Download newest script analytics.js](https://github.com/StartPolymer/polymer-starter-kit-plus#download-newest-script-analyticsjs)
 
-You need download newest script analytics.js from Google, because link https://www.google-analytics.com/analytics.js has set only 2 hours cache.
-Here is [analytics.js changelog](https://developers.google.com/analytics/devguides/collection/analyticsjs/changelog).
-Local copy of this script is better for load page performance.
+##### [Download Google Fonts](https://github.com/StartPolymer/polymer-starter-kit-plus#download-google-fonts)
 
 ```sh
 gulp init
@@ -194,6 +193,16 @@ gulp deploy:promote
 ```
 
 ## Tools
+
+### Download newest script analytics.js
+
+You need download newest script analytics.js from Google, because link https://www.google-analytics.com/analytics.js has set only 2 hours cache.
+Here is [analytics.js changelog](https://developers.google.com/analytics/devguides/collection/analyticsjs/changelog).
+Local copy of this script is for better load page performance.
+
+```sh
+gulp download:analytics
+```
 
 ### Download Google Fonts
 
