@@ -123,9 +123,8 @@ Gulp variables are in the file [config.js](https://github.com/StartPolymer/polym
 
 #### Initializing your app
 
-##### [Download newest script analytics.js](https://github.com/StartPolymer/polymer-starter-kit-plus#download-newest-script-analyticsjs)
-
-##### [Download Google Fonts](https://github.com/StartPolymer/polymer-starter-kit-plus#download-google-fonts)
+- [Download newest script analytics.js](https://github.com/StartPolymer/polymer-starter-kit-plus#download-newest-script-analyticsjs)
+- [Download Google Fonts](https://github.com/StartPolymer/polymer-starter-kit-plus#download-google-fonts)
 
 ```sh
 gulp init
