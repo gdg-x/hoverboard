@@ -179,44 +179,41 @@
                         </div>
                         <div class="card-actions">
                             <paper-button on-tap="readMore">Open details</paper-button>
-                        </div> -->
+                        </div>
                                 </paper-material>
-                            </div>
+                            </div> -->
                         </template>
+                        </div>
+                    </div>
+                    <div class="side-menu layout vertical">
+                        <paper-card class="filters">
+                            <div class="card-content header">
+                                <div class="title-text">Filters</div>
+                            </div>
+                            <div class="card-content">
+                                <div id="tagFilter" class="selector-group layout horizontal-vertical wrap">
+                                    <template is="dom-repeat" items="{{tags}}" as="tag">
+                                        <paper-checkbox class$="[[tag.tagClass]]" on-change="_filter" checked>[[tag.name]]</paper-checkbox>
+                                    </template>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <div id="badgeFilter" class="selector-group layout horizontal-vertical">
+                                    <template is="dom-repeat" items="[[badges]]" as="badge">
+                                        <paper-checkbox class$="[[badge.badgeClass]]" on-change="_filter" checked>[[badge.name]]</paper-checkbox>
+                                    </template>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <paper-button on-tap="_toggleFilters">{{toggleFiltersButton.title}}</paper-button>
+                            </div>
+                        </paper-card>
                     </div>
                 </div>
-                <div class="side-menu layout vertical">
-                    <paper-card class="filters">
-                        <div class="card-content header">
-                            <div class="title-text">Filters</div>
-                        </div>
-                        <div class="card-content">
-                            <div id="tagFilter" class="selector-group layout horizontal-vertical wrap">
-                                <template is="dom-repeat" items="[[tags]]" as="tag">
-                                    <paper-checkbox class$="[[tag.tagClass]]" on-change="_filter" checked>[[tag.name]]</paper-checkbox>
-                                </template>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <div id="badgeFilter" class="selector-group layout horizontal-vertical">
-                                <template is="dom-repeat" items="[[badges]]" as="badge">
-                                    <paper-checkbox class$="[[badge.badgeClass]]" on-change="_filter" checked>[[badge.name]]</paper-checkbox>
-                                </template>
-                            </div>
-                        </div>
-                        <div class="card-actions">
-                            <a href="http://goo.gl/forms/kymZwijWFy" class="block-link self-center" target="_blank">
-                                <paper-button>Become a speaker</paper-button>
-                            </a>
-                        </div>
-                    </paper-card>
-
-                </div>
             </div>
-        </div>
-        <div id="personCon" class="person-wrapper container relative">
-            <person-dialog id="person" class="person flex" person="{{selectedPerson}}" opened="{{opened}}"></person-dialog>
-        </div>
+            <div id="personCon" class="person-wrapper container relative">
+                <person-dialog id="person" class="person flex" person="{{selectedPerson}}" opened="{{opened}}"></person-dialog>
+            </div>
     </template>
 </dom-module>
 <script>
@@ -237,6 +234,16 @@
             opened: {
                 type: Boolean,
                 observer: '_openedChanged'
+            },
+            toggleFiltersButton: {
+                type: Object,
+                value: function() {
+                    return {
+                        title: 'Clear All',
+                        selectAll: false
+                    };
+                },
+                notify: true
             },
             animationConfig: {
                 value: function() {
@@ -374,8 +381,43 @@
                 this.closePerson();
             }
         },
+        _toggleFilters: function() {
+            var tags = this.$.tagFilter.children,
+                badges = this.$.badgeFilter.children;
+
+            for (var i = 0; i < tags.length - 1; i++) {
+                if (this.toggleFiltersButton.selectAll && !tags[i].checked) {
+                    tags[i].checked = true;
+                    this.filters.push(this.tags[i].name);
+                } else if (!this.toggleFiltersButton.selectAll && tags[i].checked) {
+                    tags[i].checked = false;
+                    this.filters.splice(this.filters.indexOf(this.tags[i].name), 1);
+                }
+            }
+            for (var j = 0; j < badges.length - 1; j++) {
+                if (this.toggleFiltersButton.selectAll && !badges[j].checked) {
+                    badges[j].checked = true;
+                    this.filters.push(this.badges[j].name);
+                } else if (!this.toggleFiltersButton.selectAll && badges[j].checked) {
+                    badges[j].checked = false;
+                    this.filters.splice(this.filters.indexOf(this.badges[j].name), 1);
+                }
+            }
+            for (var k = 0; k < this.people.length; k++) {
+                this.people[k].hide = this._matchesFilters(this.people[k]);
+            }
+            if (this.toggleFiltersButton.selectAll) {
+                this.set('toggleFiltersButton.title', 'Clear All');
+            } else {
+                this.set('toggleFiltersButton.title', 'Select All');
+            }
+            this.toggleFiltersButton.selectAll = !this.toggleFiltersButton.selectAll;
+            this.$.peopleList.render();
+        },
         _filter: function(event) {
             var filterName = '';
+            var index = event.model.index;
+            this.tags[index].checked = !this.tags[index].checked;
             if (event.model.tag !== undefined) {
                 filterName = event.model.tag.name;
             } else if (event.model.badge !== undefined) {

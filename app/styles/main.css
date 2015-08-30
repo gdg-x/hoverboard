@@ -230,6 +230,15 @@ paper-button[raised].colorful {
     .card-container {
         padding: 90px 0;
     }
+
+    .container-before-atop {
+        margin-bottom: -140px;
+        padding-bottom: 80px;
+    }
+    .container-atop {
+        position: relative;
+        z-index: 1;
+    }
     .section-before-card {
         margin-bottom: -180px;
     }
