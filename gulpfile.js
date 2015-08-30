@@ -295,8 +295,7 @@ gulp.task('serve:gae', ['default'], require(taskDir + 'serve-gae')($, gulp));
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
   runSequence(
-    ['copy', 'styles'],
-    'elements',
+    ['copy', 'styles', 'elements'],
     ['jshint', 'images', 'fonts', 'html'],
     'vulcanize',
     ['clean-dist', 'minify-dist'],
