@@ -51,6 +51,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     };
     /* jshint ignore:end */
 
+
+    app.scrollToTop = function() {
+        var heros = document.querySelectorAll('#hero');
+        for (var i = heros.length - 1; i >= 0; i--) {
+            app.smoothScroll(heros[i], 200);
+        }
+    };
+
     app.generateClass = function(value) {
         return value.replace(/\s+/g, '-').toLowerCase();
     };

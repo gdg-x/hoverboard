@@ -1,79 +1,74 @@
 <script src="../../bower_components/page/page.js"></script>
 <script>
-  function trackPageview(path) { // jshint ignore:line
-      /* jshint ignore:start */
-      ga('set', 'page', path);
-      ga('send', 'pageview');
-      /* jshint ignore:end */
-
-      var hero = document.querySelectorAll('#hero');
-      for (var i = hero.length - 1; i >= 0; i--) {
-          app.smoothScroll(hero[i], 200);
-      }
-  }
-
-  window.addEventListener('WebComponentsReady', function() {
-    page('/', function () {
-      trackPageview('/');
-      app.route = 'home';
-    });
-
-    page('/#pricetable', function() {
-        trackPageview('/#pricetable');
-        app.route = 'home';
-        var pricetable = document.querySelector('#pricetable');
-        app.smoothScroll(pricetable, 0);
-    });
-
-    page('/blog', function () {
-      trackPageview('/blog');
-      app.route = 'blog';
-    });
-
-    page('/blog/:title', function (data) {
-      trackPageview('/blog/' + data.params.title);
-      app.route = 'blog';
-      app.params = data.params;
-    });
-
-    page('/speakers', function () {
-      trackPageview('/speakers');
-      app.route = 'speakers';
-    });
-
-    page('/speakers/:id', function (data) {
-      trackPageview('/speakers/' + data.params.id);
-      app.route = 'speakers';
-      app.params = data.params;
-    });
-
-
-    page('/contact', function () {
-      trackPageview('/contact');
-      app.route = 'contact';
-    });
-
-    page('/code-of-conduct', function () {
-      trackPageview('/code-of-conduct');
-      app.route = 'code-of-conduct';
-    });
-
-    page('*', function () {
-      page.redirect('/');
-    });
-
-    page({
-      hashbang: true
-    });
-
-    function redirectLink(e) {
-        page.redirect('/' + this.getAttribute('data-route'));
-        e.preventDefault();
+    function trackPageview(path) { // jshint ignore:line
+        /* jshint ignore:start */
+        ga('set', 'page', path);
+        ga('send', 'pageview');
+        /* jshint ignore:end */
     }
 
-    var routerLinks = document.querySelectorAll('a[href^="#!"],a[dynamic-link]');
-    for (var i = 0; i < routerLinks.length; i++) {
-        routerLinks[i].addEventListener('click', redirectLink, false);
-    }
-  });
+    window.addEventListener('WebComponentsReady', function() {
+        page('/', function() {
+            trackPageview('/');
+            app.route = 'home';
+            app.scrollToTop();
+        });
+
+        page('/#pricetable', function() {
+            trackPageview('/#pricetable');
+            app.route = 'home';
+            var pricetable = document.querySelector('#pricetable');
+            app.smoothScroll(pricetable, 0);
+        });
+
+        page('/blog', function() {
+            trackPageview('/blog');
+            app.route = 'blog';
+        });
+
+        page('/blog/:title', function(data) {
+            trackPageview('/blog/' + data.params.title);
+            app.route = 'blog';
+            app.params = data.params;
+        });
+
+        page('/speakers', function() {
+            trackPageview('/speakers');
+            app.route = 'speakers';
+        });
+
+        page('/speakers/:id', function(data) {
+            trackPageview('/speakers/' + data.params.id);
+            app.route = 'speakers';
+            app.params = data.params;
+        });
+
+        page('/contact', function() {
+            trackPageview('/contact');
+            app.route = 'contact';
+        });
+
+        page('/code-of-conduct', function() {
+            trackPageview('/code-of-conduct');
+            app.route = 'code-of-conduct';
+        });
+
+        page('*', function() {
+            page.redirect('/');
+        });
+
+        page({
+            hashbang: true
+        });
+
+        function redirectLink(e) {
+            page.redirect('/' + this.getAttribute('data-route'));
+            e.preventDefault();
+        }
+
+        var routerLinks = document.querySelectorAll('a[href^="#!"],a[dynamic-link]');
+        for (var i = 0; i < routerLinks.length; i++) {
+            routerLinks[i].addEventListener('click', redirectLink, false);
+        }
+    });
 </script>
