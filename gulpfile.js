@@ -27,7 +27,7 @@ var config = require('./config');
 
 // Get a task path
 function task(filename) {
-  return './gulp-tasks/' + filename;
+  return './tasks/' + filename;
 }
 
 var styleTask = function (stylesPath, srcs) {
@@ -357,4 +357,4 @@ gulp.task('pagespeed', require(task('pagespeed'))(config));
 require('web-component-tester').gulp.init(gulp);
 
 // Load custom tasks from the `tasks` directory
-try { require('require-dir')('tasks'); } catch (err) {}
+try { require('require-dir')('tasks/tests'); } catch (err) {}
