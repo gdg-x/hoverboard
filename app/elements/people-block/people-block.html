@@ -3,34 +3,33 @@
     <template>
         <style include="tags-color"></style>
         <style>
-        :host {
-            display: block;
-            --paper-card: {
-                background: transparent;
+            :host {
+                display: block;
+                --paper-card: {
+                    background: transparent;
+                }
+                ;
+                --paper-card-content: {
+                    background: #fff;
+                }
+                ;
+                --paper-card-actions: {
+                    background: #fff;
+                }
+                ;
             }
-            ;
-            --paper-card-content: {
-                background: #fff;
+
+            .person-wrapper {
+                display: none;
             }
-            ;
-            --paper-card-actions: {
-                background: #fff;
+
+            .bottom-image-text {
+                padding: 16px;
+                position: absolute;
+                bottom: 0;
+                color: #fff;
             }
-            ;
-        }
 
-        .person-wrapper {
-            display: none;
-        }
-
-        .bottom-image-text {
-            padding: 16px;
-            position: absolute;
-            bottom: 0;
-            color: #fff;
-        }
-
-<<<<<<< HEAD
             paper-material {
                 background: #fff;
             }
@@ -38,21 +37,19 @@
             .card-content {
                 padding: 16px;
             }
-=======
-        .people-name {
-            font-size: 24px;
-            font-weight: 300;
-        }
->>>>>>> fb81f510fd4d103b756256cf7a2ca731bb915976
 
-        .title {
-            margin-top: -5px;
-            font-size: 14px;
-            font-weight: 300;
-        }
+            .people-name {
+                font-size: 24px;
+                font-weight: 300;
+            }
 
-<<<<<<< HEAD
-            .sessions h3:not(:last-of-type){
+            .title {
+                margin-top: -5px;
+                font-size: 14px;
+                font-weight: 300;
+            }
+
+            .sessions h3:not(:last-of-type) {
                 margin-bottom: 10px;
             }
 
@@ -63,113 +60,112 @@
             .card-wrapper {
                 margin-bottom: 20px;
             }
-=======
-        .card-content {
-            padding: 16px;
-        }
->>>>>>> fb81f510fd4d103b756256cf7a2ca731bb915976
 
-        .card-actions {
-            border-top: 1px solid #e8e8e8;
-            padding: 5px 16px;
-            position: relative;
-        }
-
-        .card-wrapper {
-            margin-bottom: 20px;
-        }
-
-        .people-header {
-            height: 256px;
-        }
-
-        .people-image-overlay {
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 4%, rgba(0, 0, 0, 0) 50%);
-        }
-
-        .badges {
-            margin: 0;
-            padding: 15px;
-            list-style: none;
-        }
-
-        .badge {
-            display: inline-block;
-        }
-
-        .badge:not(:last-of-type):after {
-            color: rgba(255, 255, 255, 0.8);
-            vertical-align: middle;
-            font-size: 14px;
-            content: "\2022";
-        }
-
-        .badge a {
-            color: #fff;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .people-description {
-            padding-bottom: 0;
-        }
-
-        .brief {
-            margin-bottom: 16px;
-            display: block;
-            display: -webkit-box;
-            overflow: hidden;
-            font-size: 17px height: 85px;
-            text-overflow: ellipsis;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-        }
-
-        .filters {
-            margin-bottom: 20px;
-        }
-
-        .filters .card-content {
-            border-bottom: 1px solid #eee;
-        }
-
-        .filters .header {
-            font-size: 20px;
-            font-weight: 400;
-        }
-
-        .filters .card-actions {
-            border: 0;
-        }
-
-        .selector-group > * {
-            padding: 14px 16px;
-        }
-
-        @media (max-width: 767px) {
-            .person-wrapper,
-            .person {
-                @apply(--layout-fit);
+            .card-content {
+                padding: 16px;
             }
-            .side-menu {
-                order: -1;
-            }
-            .filters .card-actions {
-                text-align: right;
-            }
-        }
 
-        @media (min-width: 768px) {
+            .card-actions {
+                border-top: 1px solid #e8e8e8;
+                padding: 5px 16px;
+                position: relative;
+            }
+
             .card-wrapper {
-                width: calc(100% / 3);
+                margin-bottom: 20px;
             }
-            .card-wrapper paper-material {
-                margin: 0 10px;
+
+            .people-header {
+                height: 256px;
             }
-            .side-menu {
-                padding-left: 20px;
+
+            .people-image-overlay {
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 4%, rgba(0, 0, 0, 0) 50%);
             }
-        }
+
+            .badges {
+                margin: 0;
+                padding: 15px;
+                list-style: none;
+            }
+
+            .badge {
+                display: inline-block;
+            }
+
+            .badge:not(:last-of-type):after {
+                color: rgba(255, 255, 255, 0.8);
+                vertical-align: middle;
+                font-size: 14px;
+                content: "\2022";
+            }
+
+            .badge a {
+                color: #fff;
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            .people-description {
+                padding-bottom: 0;
+            }
+
+            .brief {
+                margin-bottom: 16px;
+                display: block;
+                display: -webkit-box;
+                overflow: hidden;
+                font-size: 17px height: 85px;
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+            }
+
+            .filters {
+                margin-bottom: 20px;
+            }
+
+            .filters .card-content {
+                border-bottom: 1px solid #eee;
+            }
+
+            .filters .header {
+                font-size: 20px;
+                font-weight: 400;
+            }
+
+            .filters .card-actions {
+                border: 0;
+            }
+
+            .selector-group > * {
+                padding: 14px 16px;
+            }
+
+            @media (max-width: 767px) {
+                .person-wrapper,
+                .person {
+                    @apply(--layout-fit);
+                }
+                .side-menu {
+                    order: -1;
+                }
+                .filters .card-actions {
+                    text-align: right;
+                }
+            }
+
+            @media (min-width: 768px) {
+                .card-wrapper {
+                    width: calc(100% / 3);
+                }
+                .card-wrapper paper-material {
+                    margin: 0 10px;
+                }
+                .side-menu {
+                    padding-left: 20px;
+                }
+            }
         </style>
         <iron-ajax auto url="[[source]]" handle-as="json" last-response="{{peopleTemp}}"></iron-ajax>
         <iron-ajax auto url="[[sessionsSource]]" handle-as="json" last-response="{{sessions}}"></iron-ajax>
@@ -210,44 +206,23 @@
                             </div>
                         </template>
                     </div>
-<<<<<<< HEAD
                 </div>
-                <div class="side-menu layout vertical">
+                <div id="sideMenu" class="side-menu layout vertical">
                     <paper-card class="filters">
                         <div class="card-content header">
                             <div class="title-text">Filters</div>
                         </div>
                         <div class="card-content">
                             <div id="tagFilter" class="selector-group layout horizontal-vertical wrap">
-                                <template is="dom-repeat" items="{{tags}}" as="tag">
-                                    <paper-checkbox class$="[[tag.tagClass]]" on-change="_filter" checked>[[tag.name]]</paper-checkbox>
+                                <template is="dom-repeat" items="{{tags}}" as="filter">
+                                    <paper-checkbox class$="[[filter.className]]" on-change="_filter" checked>[[filter.name]]</paper-checkbox>
                                 </template>
-=======
-                    <div id="sideMenu" class="side-menu layout vertical">
-                        <paper-card class="filters">
-                            <div class="card-content header">
-                                <div class="title-text">Filters</div>
-                            </div>
-                            <div class="card-content">
-                                <div id="tagFilter" class="selector-group layout horizontal-vertical wrap">
-                                    <template is="dom-repeat" items="{{tags}}" as="filter">
-                                        <paper-checkbox class$="[[filter.className]]" on-change="_filter" checked>[[filter.name]]</paper-checkbox>
-                                    </template>
-                                </div>
-                            </div>
-                            <div class="card-content">
-                                <div id="badgeFilter" class="selector-group layout horizontal-vertical">
-                                    <template is="dom-repeat" items="[[badges]]" as="filter">
-                                        <paper-checkbox class$="[[filter.className]]" on-change="_filter" checked>[[filter.name]]</paper-checkbox>
-                                    </template>
-                                </div>
->>>>>>> fb81f510fd4d103b756256cf7a2ca731bb915976
                             </div>
                         </div>
                         <div class="card-content">
                             <div id="badgeFilter" class="selector-group layout horizontal-vertical">
-                                <template is="dom-repeat" items="[[badges]]" as="badge">
-                                    <paper-checkbox class$="[[badge.badgeClass]]" on-change="_filter" checked>[[badge.name]]</paper-checkbox>
+                                <template is="dom-repeat" items="[[badges]]" as="filter">
+                                    <paper-checkbox class$="[[filter.className]]" on-change="_filter" checked>[[filter.name]]</paper-checkbox>
                                 </template>
                             </div>
                         </div>
@@ -264,7 +239,6 @@
     </template>
 </dom-module>
 <script>
-<<<<<<< HEAD
     Polymer({
         is: 'people-block',
         behaviors: [
@@ -291,8 +265,7 @@
                         title: 'Clear All',
                         selectAll: false
                     };
-                },
-                notify: true
+                }
             },
             animationConfig: {
                 value: function() {
@@ -358,218 +331,137 @@
                     this.playLoadAnimation();
                 }
             });
-=======
-Polymer({
-    is: 'people-block',
-    behaviors: [
-        Polymer.NeonAnimatableBehavior,
-        Polymer.NeonAnimationRunnerBehavior
-    ],
-    properties: {
-        source: String,
-        tags: Array,
-        badges: Array,
-        filters: {
-            type: Array,
-            value: []
         },
-        opened: {
-            type: Boolean,
-            observer: '_openedChanged'
->>>>>>> fb81f510fd4d103b756256cf7a2ca731bb915976
-        },
-        toggleFiltersButton: {
-            type: Object,
-            value: function() {
-                return {
-                    title: 'Clear All',
-                    selectAll: false
-                };
+        checkUrlParams: function() {
+            if (app.params && app.params.id) {
+                var person = app.findByPropertyValue(this.people, 'id', app.params.id);
+                if (person !== undefined && person !== null) {
+                    this.openPerson(person);
+                    return true;
+                }
             }
         },
-        animationConfig: {
-            value: function() {
-                return {
-                    'loadPeople': {
-                        name: 'cascaded-animation',
-                        animation: 'transform-animation',
-                        transformFrom: 'translateY(100%)',
-                        transformTo: 'none',
-                        nodedelay: 250,
-                        timing: {
-                            duration: 1500
-                        }
-                    },
-                    'unloadPeople': {
-                        name: 'fade-out-animation',
-                        node: this.$.people,
-                        timing: {
-                            duration: 200
-                        }
-                    },
-                    'openPerson': {
-                        name: 'scale-up-animation',
-                        node: this.$.person,
-                        timing: {
-                            duration: 500
-                        }
-                    },
-                    'closePerson': {
-                        name: 'fade-out-animation',
-                        node: this.$.person,
-                        timing: {
-                            duration: 500
-                        }
-                    }
-                };
+        _generateFilters: function() {
+            var tempTags = [];
+            var tempBadges = [];
+            for (var i = 0; i < this.people.length; i++) {
+                tempTags = this._generateFilterArray(tempTags, this.people[i].tags);
+                if (this.people[i].badges === undefined) {
+                    this.people[i].badges = [];
+                }
+                tempBadges = this._generateFilterArray(tempBadges, this.people[i].badges, 'name');
             }
-        }
-    },
-    listeners: {
-        'neon-animation-finish': '_onNeonAnimationFinish'
-    },
-    peopleLoaded: function(event, response) {
-        this.people = response.response;
-        this._generateFilters();
+            this.tags = tempTags;
+            this.badges = tempBadges;
+        },
+        _generateFilterArray: function(filters, array, property) {
+            for (var i = 0; i < array.length; i++) {
+                var name = array[i];
+                if (property !== undefined) {
+                    name = array[i][property];
+                }
+                var className = app.generateClass(name);
+                if (!app.findByPropertyValue(filters, 'className', className)) {
+                    filters.push({
+                        name: name,
+                        className: className
+                    });
+                    this.filters.push(name);
+                }
+            }
+            return filters;
+        },
 
-        this.async(function() {
-            var nodeList = this.$.people.querySelectorAll('.card-wrapper');
-            this.animationConfig.loadPeople.nodes = Array.prototype.slice.call(nodeList);
-            if (!this.checkUrlParams()) {
-                this.playLoadAnimation();
+        playLoadAnimation: function() {
+            this.cancelAnimation();
+            this.playAnimation('loadPeople');
+        },
+        readMore: function(event) {
+            page.redirect('/speakers/' + event.model.person.id);
+            this.openPerson(event.model.person);
+        },
+        openPerson: function(person) {
+            this.opened = true;
+            this.selectedPerson = person;
+            this.$.personCon.style.display = 'block';
+            this.cancelAnimation();
+            this.playAnimation('openPerson');
+            if (screen.width > 768) {
+                this.playAnimation('unloadPeople');
             }
-        });
-    },
-    checkUrlParams: function() {
-        if (app.params && app.params.id) {
-            var person = app.findByPropertyValue(this.people, 'id', app.params.id);
-            if (person !== undefined && person !== null) {
-                this.openPerson(person);
+        },
+        closePerson: function() {
+            page.redirect('/speakers');
+            this.cancelAnimation();
+            this.playAnimation('closePerson');
+        },
+        _onNeonAnimationFinish: function() {
+            if (this.opened && screen.width > 768) {
+                this.$.people.style.display = 'none';
+                this.$.people.style.position = 'absolute';
+            }
+            if (!this.opened) {
+                this.$.personCon.style.display = 'none';
+                if (screen.width > 768) {
+                    this.$.people.style.display = 'flex';
+                    this.$.people.style.position = 'relative';
+                }
+            }
+        },
+        _openedChanged: function() {
+            if (!this.opened) {
+                this.closePerson();
+            }
+        },
+        _toggleFilters: function() {
+            this._toggleFilter(this.$.tagFilter.children, this.tags);
+            this._toggleFilter(this.$.badgeFilter.children, this.badges);
+            for (var k = 0; k < this.people.length; k++) {
+                this.people[k].hide = this._matchesFilters(this.people[k]);
+            }
+            this.set('toggleFiltersButton.title', this.toggleFiltersButton.selectAll ? 'Clear All' : 'Select All');
+            this.toggleFiltersButton.selectAll = !this.toggleFiltersButton.selectAll;
+            this.$.peopleList.render();
+        },
+        _toggleFilter: function(array, masterArray) {
+            for (var i = 0; i < array.length - 1; i++) {
+                if (this.toggleFiltersButton.selectAll && !array[i].checked) {
+                    array[i].checked = true;
+                    this.filters.push(masterArray[i].name);
+                } else if (!this.toggleFiltersButton.selectAll && array[i].checked) {
+                    array[i].checked = false;
+                    this.filters.splice(this.filters.indexOf(masterArray[i].name), 1);
+                }
+            }
+        },
+        _filter: function(event) {
+            var filterName = event.model.filter.name,
+                filterStatus = event.srcElement.checked,
+                filterIndex = this.filters.indexOf(filterName);
+            if (filterStatus && filterIndex < 0) {
+                this.filters.push(filterName);
+            } else {
+                this.filters.splice(filterIndex, 1);
+            }
+            for (var i = 0; i < this.people.length; i++) {
+                this.people[i].hide = this._matchesFilters(this.people[i]);
+            }
+            this.$.peopleList.render();
+        },
+        _matchesFilters: function(person) {
+            if (!this.filters.length) {
                 return true;
             }
-        }
-    },
-    _generateFilters: function() {
-        var tempTags = [];
-        var tempBadges = [];
-        for (var i = 0; i < this.people.length; i++) {
-            tempTags = this._generateFilterArray(tempTags, this.people[i].tags);
-            if (this.people[i].badges === undefined) {
-                this.people[i].badges = [];
+            for (var i = 0; i < this.filters.length; i++) {
+                if (person.tags.indexOf(this.filters[i]) > -1 || app.findByPropertyValue(person.badges, 'name', this.filters[i])) {
+                    return false;
+                }
             }
-            tempBadges = this._generateFilterArray(tempBadges, this.people[i].badges, 'name');
-        }
-        this.tags = tempTags;
-        this.badges = tempBadges;
-    },
-    _generateFilterArray: function(filters, array, property) {
-        for (var i = 0; i < array.length; i++) {
-            var name = array[i];
-            if (property !== undefined) {
-                name = array[i][property];
-            }
-            var className = app.generateClass(name);
-            if (!app.findByPropertyValue(filters, 'className', className)) {
-                filters.push({
-                    name: name,
-                    className: className
-                });
-                this.filters.push(name);
-            }
-        }
-        return filters;
-    },
-
-    playLoadAnimation: function() {
-        this.cancelAnimation();
-        this.playAnimation('loadPeople');
-    },
-    readMore: function(event) {
-        page.redirect('/speakers/' + event.model.person.id);
-        this.openPerson(event.model.person);
-    },
-    openPerson: function(person) {
-        this.opened = true;
-        this.selectedPerson = person;
-        this.$.personCon.style.display = 'block';
-        this.cancelAnimation();
-        this.playAnimation('openPerson');
-        if (screen.width > 768) {
-            this.playAnimation('unloadPeople');
-        }
-    },
-    closePerson: function() {
-        page.redirect('/speakers');
-        this.cancelAnimation();
-        this.playAnimation('closePerson');
-    },
-    _onNeonAnimationFinish: function() {
-        if (this.opened && screen.width > 768) {
-            this.$.people.style.display = 'none';
-            this.$.people.style.position = 'absolute';
-        }
-        if (!this.opened) {
-            this.$.personCon.style.display = 'none';
-            if (screen.width > 768) {
-                this.$.people.style.display = 'flex';
-                this.$.people.style.position = 'relative';
-            }
-        }
-    },
-    _openedChanged: function() {
-        if (!this.opened) {
-            this.closePerson();
-        }
-    },
-    _toggleFilters: function() {
-        this._toggleFilter(this.$.tagFilter.children, this.tags);
-        this._toggleFilter(this.$.badgeFilter.children, this.badges);
-        for (var k = 0; k < this.people.length; k++) {
-            this.people[k].hide = this._matchesFilters(this.people[k]);
-        }
-        this.set('toggleFiltersButton.title', this.toggleFiltersButton.selectAll ? 'Clear All' : 'Select All');
-        this.toggleFiltersButton.selectAll = !this.toggleFiltersButton.selectAll;
-        this.$.peopleList.render();
-    },
-    _toggleFilter: function(array, masterArray) {
-        for (var i = 0; i < array.length - 1; i++) {
-            if (this.toggleFiltersButton.selectAll && !array[i].checked) {
-                array[i].checked = true;
-                this.filters.push(masterArray[i].name);
-            } else if (!this.toggleFiltersButton.selectAll && array[i].checked) {
-                array[i].checked = false;
-                this.filters.splice(this.filters.indexOf(masterArray[i].name), 1);
-            }
-        }
-    },
-    _filter: function(event) {
-        var filterName = event.model.filter.name,
-            filterStatus = event.srcElement.checked,
-            filterIndex = this.filters.indexOf(filterName);
-        if (filterStatus && filterIndex < 0) {
-            this.filters.push(filterName);
-        } else {
-            this.filters.splice(filterIndex, 1);
-        }
-        for (var i = 0; i < this.people.length; i++) {
-            this.people[i].hide = this._matchesFilters(this.people[i]);
-        }
-        this.$.peopleList.render();
-    },
-    _matchesFilters: function(person) {
-        if (!this.filters.length) {
             return true;
+        },
+        checkHiding: function(person) {
+            return !person.hide;
         }
-        for (var i = 0; i < this.filters.length; i++) {
-            if (person.tags.indexOf(this.filters[i]) > -1 || app.findByPropertyValue(person.badges, 'name', this.filters[i])) {
-                return false;
-            }
-        }
-        return true;
-    },
-    checkHiding: function(person) {
-        return !person.hide;
-    }
 
-});
+    });
 </script>
