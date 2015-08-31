@@ -31,11 +31,11 @@
   },
   {
     "id": 104,
-    "title": "TBD",
-    "description": "",
+    "title": "Power of Android Shell",
+    "description": "Android provides a set of not really well documented command line tools that are mainly used by system engineers for debugging and testing purposes. Available after entering 'adb shell', these tools can give you a lot of details about what is happening in the system and help with automation. <br/><br/>We'll see what is available in Android command line and <br/>- analyze system and sample apps with 'dumpsys', <br/>- find out how to check whether your service finishes normally and does not live forever, <br/>- mock battery level and charger state, <br/>- trigger account sychronization, <br/>- change system settings without a single line of UiAutomator code.",
     "speakers": [4],
     "language": "en",
-    "complexity": "Beginner",
+    "complexity": "Intermediate",
     "presentation": "",
     "video": ""
   },
@@ -61,8 +61,8 @@
   },
   {
     "id": 107,
-    "title": "TBD",
-    "description": "",
+    "title": "Angular2: Reasoning behind technical decisions",
+    "description": "TBD",
     "speakers": [7],
     "language": "en",
     "complexity": "Beginner",
@@ -111,8 +111,8 @@
   },
   {
     "id": 112,
-    "title": "TBD",
-    "description": "",
+    "title": "Android Studio 1.3 with C/C++ ",
+    "description": "TBD",
     "speakers": [11],
     "language": "en",
     "complexity": "Beginner",
