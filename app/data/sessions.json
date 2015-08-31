@@ -22,7 +22,7 @@
   {
     "id": 103,
     "title": "Planning Android Screens",
-    "description": "Today I want to speak about Android UX when building new screen from scratch. We will go through some common Android screens (like Login / Sign Up / Search / etc.) and see what issues you can face, how popular apps are solving them and what are our options.",
+    "description": "This talks is about Android UX when building new screen from scratch. We will go through some common Android screens (like Login / Sign Up / Search / etc.) and see what issues you can face, how popular apps are solving them and what are our options. At the end I will show how to plan & prototype animations with Pixate Studio.",
     "speakers": [3],
     "language": "en",
     "complexity": "Beginner",

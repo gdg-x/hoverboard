@@ -55,7 +55,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     app.scrollToTop = function() {
         var heros = document.querySelectorAll('#hero');
         for (var i = heros.length - 1; i >= 0; i--) {
-            app.smoothScroll(heros[i], 200);
+            app.smoothScroll(heros[i], 2000);
         }
     };
 
