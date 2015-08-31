@@ -30,6 +30,7 @@
             trackPageview('/blog/' + data.params.title);
             app.route = 'blog';
             app.params = data.params;
+            app.scrollToTop();
         });
 
         page('/speakers', function() {
@@ -41,20 +42,19 @@
             trackPageview('/speakers/' + data.params.id);
             app.route = 'speakers';
             app.params = data.params;
+            app.scrollToTop();
         });
 
         page('/contact', function() {
             trackPageview('/contact');
             app.route = 'contact';
+            app.scrollToTop();
         });
 
         page('/code-of-conduct', function() {
             trackPageview('/code-of-conduct');
             app.route = 'code-of-conduct';
-        });
-
-        page('*', function() {
-            page.redirect('/');
+            app.scrollToTop();
         });
 
         page({
@@ -66,7 +66,7 @@
             e.preventDefault();
         }
 
-        var routerLinks = document.querySelectorAll('a[href^="#!"],a[dynamic-link]');
+        var routerLinks = document.querySelectorAll('a[href^="#!"], a[dynamic-link]');
         for (var i = 0; i < routerLinks.length; i++) {
             routerLinks[i].addEventListener('click', redirectLink, false);
         }

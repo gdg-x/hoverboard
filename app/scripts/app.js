@@ -30,10 +30,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // imports are loaded and elements have been registered
     });
 
-
-
-    Polymer.NeonAnimatableBehavior = [Polymer.NeonAnimatableBehavior, Polymer.IronResizableBehavior];
-
     // Close drawer after menu item is selected if drawerPanel is narrow
     app.onMenuSelect = function() {
         var drawerPanel = document.querySelector('#paperDrawerPanel');
@@ -55,7 +51,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     app.scrollToTop = function() {
         var heros = document.querySelectorAll('#hero');
         for (var i = heros.length - 1; i >= 0; i--) {
-            app.smoothScroll(heros[i], 2000);
+            app.smoothScroll(heros[i], 1000);
         }
     };
 
