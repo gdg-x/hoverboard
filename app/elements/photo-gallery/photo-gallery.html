@@ -1,0 +1,64 @@
+<dom-module id="photo-gallery">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            iron-list {
+                height: 100%;
+                width: 100%;
+                position: relative;
+                box-sizing: border-box;
+                overflow-y: auto;
+            }
+
+            .photos-wrapper {
+                background: rgba(0, 0, 0, 0.8);
+            }
+
+            .item {
+                height: 80vh;
+            }
+
+            .photo {
+                margin: 20px 0;
+            }
+            @media (min-width: 768px) {
+                iron-list {
+                    width: 80%;
+                }
+            }
+        </style>
+        <iron-ajax id="ajax" url="[[albumUrl]]" handle-as="json" on-response="photosLoaded"></iron-ajax>
+        <div class="photos-wrapper layout horizontal center-center fit">
+            <iron-list class="layout vertical" items="[[photos]]" as="photo">
+                <template>
+                    <div class="item">
+                        <iron-image src="[[photo.content.src]]" class="placeholder-color photo fit" preload fade sizing="cover"></iron-image>
+                    </div>
+                </template>
+            </iron-list>
+        </div>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: 'photo-gallery',
+        properties: {
+            userId: String,
+            albumId: String
+        },
+        observers: [
+            'generateAlbumUrl(userId, albumId)'
+        ],
+        generateAlbumUrl: function(userId, albumId) {
+            this.albumUrl = 'https://picasaweb.google.com/data/feed/api/user/' + userId + '/albumid/' + albumId + '?alt=json';
+            this.$.ajax.generateRequest();
+        },
+        photosLoaded: function(event, response) {
+            this.photos = response.response.feed.entry;
+        }
+    });
+</script>
