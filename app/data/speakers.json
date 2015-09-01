@@ -61,7 +61,7 @@
     "company": "Timee",
     "country": "Ukraine",
     "photoUrl": "../../images/people/dmytro_danylyk.jpeg",
-    "bio": "Hello. I am finalist of Google Apps Developer Challenge 2012. Author of open source libraries 4000+ stars. When I have free time I am writing technical articles. Always trying to share my knowledge & experience on different events. Big fan of android, flat design, stackoverflow, git, Intellij IDEA. Eclipse IDE hater.",
+    "bio": "Dmytro is a finalist of Google Apps Developer Challenge 2012. Author of open source libraries 4000+ stars. When he has free time he writes technical articles. Always trying to share his knowledge & experience on different events. Big fan of android, flat design, stackoverflow, git, Intellij IDEA. Eclipse IDE hater.",
     "tags": ["Android", "UX"],
     "socials": [{
         "name": "Google+",
@@ -104,7 +104,7 @@
     "company": "12Hours.io",
     "country": "Poland",
     "photoUrl": "../../images/people/michal_tajchert.jpg",
-    "bio": "Michal is Android Developer for all kinds of wearables, done programming for things such Oakley Airwave, Glass, Sony Smartwatch, and lately found his place in Android Wear development. He has contributed most of his project to the community and shared his knowledge to the community by organising many of Warsaw GDG meetings.",
+    "bio": "Michal is an Android Developer for all kinds of wearables, done programming for things such Oakley Airwave, Glass, Sony Smartwatch, and lately found his place in Android Wear development. He has contributed most of his project to the community and shared his knowledge by organising many of Warsaw GDG meetings.",
     "tags": ["Android"],
     "socials": [{
         "name": "Google+",
@@ -126,7 +126,7 @@
     "company": "Spatialkey",
     "country": "Ukraine",
     "photoUrl": "../../images/people/yehor_lvivski.jpg",
-    "bio": "Yehor is a passionate front end engineer and UX designer. He likes to make useful tools, that help people solve their problems. Currently he is creating a web app, that helps insurance companies save money, and allows you to find a better and safer place to live.",
+    "bio": "Yehor is a passionate front end engineer and UX designer. He likes to make useful tools that help people solve their problems. Currently he is creating a web app that helps insurance companies save money and allows you to find a better and safer place to live.",
     "tags": ["Web", "Dart"],
     "socials": [{
         "name": "Twitter",
@@ -145,7 +145,7 @@
     "company": "Twinfield",
     "country": "Ukraine",
     "photoUrl": "../../images/people/valentyn_shybanov.jpg",
-    "bio": "Valentyn focuses on Polymer and Web Components. In previous roles heâ€™s helped craft design systems for massive enterprise companies, user interfaces for console titles, and even built the occasional enchanted princess game. These days his mission is to fight for a better web and to help developers build great experiences.",
+    "bio": "Valentyn focuses on Polymer and Web Components. In previous roles helped craft design systems for massive enterprise companies, user interfaces for console titles, and even built the occasional enchanted princess game. These days his mission is to fight for a better web and help developers to build great experiences.",
     "tags": ["Web", "AngularJS"],
     "badges": [{
         "name": "GDE",
@@ -205,7 +205,7 @@
     "company": "Yalantis Mobile",
     "country": "Ukraine",
     "photoUrl": "../../images/people/roman_herasymenko.jpg",
-    "bio": "Roman is Senior Android developer at Yatlantis and a co-organizer of GDG Dnipropetrovsk. Roman is interesting in software development for cutting edge technologies and devices like Google Glass and Android Wear.",
+    "bio": "Roman is a Senior Android developer at Yatlantis and a co-organizer of GDG Dnipropetrovsk. Roman is interested in software development for cutting edge technologies and devices like Google Glass and Android Wear.",
     "tags": ["Android"],
     "badges": [{
         "name": "GDE",
