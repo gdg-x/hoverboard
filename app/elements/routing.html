@@ -21,16 +21,20 @@
             app.smoothScroll(pricetable, 0);
         });
 
-        page('/blog', function() {
+        page('/blog', function(ctx) {
             trackPageview('/blog');
             app.route = 'blog';
         });
 
-        page('/blog/:title', function(data) {
-            trackPageview('/blog/' + data.params.title);
+        page('/blog/:title', function(ctx) {
+            trackPageview('/blog/' + ctx.params.title);
             app.route = 'blog';
-            app.params = data.params;
+            app.params = ctx.params;
             app.scrollToTop();
+        });
+
+        page.exit('/blog/:title', function() {
+            document.querySelector('#blog').closePost();
         });
 
         page('/speakers', function() {
@@ -43,6 +47,10 @@
             app.route = 'speakers';
             app.params = data.params;
             app.scrollToTop();
+        });
+
+        page.exit('/speakers/:id', function() {
+            document.querySelector('#people-block').closePerson();
         });
 
         page('/contact', function() {
