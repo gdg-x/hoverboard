@@ -101,7 +101,7 @@
   },
   {
     "id": 111,
-    "title": "TBD",
+    "title": "New security model in Marshmallow",
     "description": "",
     "speakers": [10],
     "language": "en",
@@ -161,11 +161,11 @@
   },
   {
     "id": 117,
-    "title": "TBD",
-    "description": "",
+    "title": "Bluetooth Low Energy and iBeacon development for Android",
+    "description": "iBeacon is a new technology created by Apple. iBeacon uses a Bluetooth low energy signal, which Android 4.3+ devices can detect. Some fairly significant improvements were announced at Google I/O 2014 for improved BLE support in Android Lollipop. We will discuss different implementations for devices prior to 5.0, and for 5.0 and higher.  During our talk you will learn how to implement background beacon scanning, how to improve battery life (and how to choose between fast beacon detection and longer battery life). Also we'll discuss, on how to turn your android device into multiple iBeacon transmitters. Allowing a single Android device to act as multiple iBeacons opens up a huge number of interesting possibilities.",
     "speakers": [16],
     "language": "en",
-    "complexity": "Beginner",
+    "complexity": "Intermediate",
     "presentation": "",
     "video": ""
   },

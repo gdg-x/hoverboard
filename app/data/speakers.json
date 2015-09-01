@@ -351,7 +351,7 @@
     "country": "Ukraine",
     "photoUrl": "../../images/people/kseniia_shumelchyk.jpg",
     "bio": "Kseniia is working as software developer at SoftServe. For two years she is leader of GDG Women Ukraine and GDG Dnipropetrovsk. Kseniia actively participate in GDG events, techtalks and conferences devoted software development and so on. Regularly she shares among girls an overview about different programs, grants available for women in IT and my own experience how was involved in some of these programs. Developer of several open-source project during Google Summer of Code program. Participant of TechTalk with global Women Techmakers community.",
-    "tags": ["Community"],
+    "tags": ["Android", "BLE"],
     "badges": [{
         "name": "GDG",
         "description": "Google Developers Group Dnipropetrovsk",
