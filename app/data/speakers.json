@@ -330,7 +330,7 @@
     "country": "Czech Republic",
     "photoUrl": "../../images/people/jakub_skvara.jpg",
     "bio": "Jakub is a member of GDG Prague and GDG ČVUT in Czech republic. He organised together with Jana Moudrá several Polymer and Dart code labs and hackaton. He works as frontend engineer for Shipito. Jakub is interested in modern Javascript frameworks, libraries and tools and loves clean code.",
-    "tags": ["Web", "AngularJS"],
+    "tags": ["Web", "Polymer"],
     "badges": [{
         "name": "GDG",
         "description": "Google Developers Group Prague",
