@@ -37,26 +37,26 @@
     <template>
         <div class="photo-wrapper layout horizontal">
             <div class="flex relative big">
-                <iron-image src="{{photos.big}}" class="placeholder-color fit" sizing="cover" preload fade></iron-image>
+                <iron-image src="{{photos.big}}" class="placeholder-color fit poiner" on-tap="openGallery" sizing="cover" preload fade></iron-image>
             </div>
             <div class="flex layout vertical">
                 <div class="flex relative">
-                    <iron-image src="{{photos.small.0}}" class="placeholder-color fit" sizing="cover" preload fade></iron-image>
+                    <iron-image src="{{photos.small.0}}" class="placeholder-color fit poiner" on-tap="openGallery" sizing="cover" preload fade></iron-image>
                 </div>
                 <div class="flex relative hidden-xs">
-                    <iron-image src="{{photos.small.1}}" class="placeholder-color fit" sizing="cover" preload fade></iron-image>
+                    <iron-image src="{{photos.small.1}}" class="placeholder-color fit poiner" on-tap="openGallery" sizing="cover" preload fade></iron-image>
                 </div>
             </div>
         </div>
-        <!-- <paper-dialog id="photosDialog" class="gallery-dialog fit" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+        <paper-dialog id="photosDialog" class="gallery-dialog fit" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
             <paper-toolbar class="navbar-overlay fit">
                 <paper-icon-button icon="icons:arrow-back" on-tap="closeGallery"></paper-icon-button>
                 <div class="title text-left">GDG DevFest Ukraine 2014 - Photos</div>
             </paper-toolbar>
             <div class="gallery-container fit">
-                <photo-gallery user-id="102444623953913144164" album-id="6066676524229268177"></photo-gallery>
+                <photo-gallery user-id="104154992083455126443" album-id="6189295328162771457"></photo-gallery>
             </div>
-        </paper-dialog> -->
+        </paper-dialog>
     </template>
 </dom-module>
 
