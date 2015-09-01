@@ -1,16 +1,16 @@
 # [beta] Project Hoverboard - GDG DevFest 2015 site template
 
 ## About
-Project Hoverboard is the next try in building site template for conferences after [Project Zeppelin](https://github.com/gdg-x/zeppelin) and more optimized version - [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
+Project Hoverboard is the next generation conference website template after [Project Zeppelin](https://github.com/gdg-x/zeppelin) and more optimized version - [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
 
-Template was build using [Polymer](http://polymer-project.org) and uses [Material Design](http://www.google.com/design/spec/material-design/introduction.html) layout.
+Template was build using [Polymer](http://polymer-project.org) according to [Material Design](http://www.google.com/design/spec/material-design/introduction.html) guidelines.
 The site is **responsive**, **fast** and supports **offline access** (if you are using HTTPS protocol).
 
 Template is brought by [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy) from [GDG Lviv](http://lviv.gdg.org.ua/).
 
-### Live demo [http://devfest.gdg.org.ua/](GDG DevFest Ukraine 2015)
+### Live demo [GDG DevFest Ukraine 2015](http://devfest.gdg.org.ua/)
 
-#### The Hoverboard is still under development and can bring breakable changes shortly. If you are looking for stable website template try [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
+#### The Hoverboard is still under development and can bring breaking changes shortly. If you are looking for stable website template try [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
 
 ## Features
 * Material design
@@ -24,15 +24,15 @@ Template is brought by [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy) fr
 
 
 ## Quick-start guide
-1.  [Fork](https://github.com/gdg-x/hoverboard/fork) this repo and clone locally or [download](https://github.com/gdg-x/hoverboard/archive/master.zip) and extract Project Hoverboard to where you want to work
-2.  Install [Node.js](www.nodejs.org)
-3.  Run `npm install -g gulp bower && npm install && bower install` from the root of the folder
-4.  Edit site
+1.  [Fork](https://github.com/gdg-x/hoverboard/fork) this repo and clone locally or [download](https://github.com/gdg-x/hoverboard/archive/master.zip) and extract Project Hoverboard to where you want to work.
+2.  Install [Node.js](www.nodejs.org).
+3.  Run `npm install -g gulp bower && npm install && bower install` from the root of the folder.
+4.  Modify template to suit your needs.
 
 
 #### Requirements
 
-The project requires the following major dependencies:
+Project dependencies:
 
 - Node.js used to run JavaScript tools from the command line.
 - npm, the node package manager, installed with Node.js and used to install Node.js packages.
@@ -47,7 +47,7 @@ The project requires the following major dependencies:
 node --version
 ```
 
-The version should be at or above 0.12.x.
+The version should be 0.12.x or above.
 
 2)  If you don't have Node.js installed, or you have a lower version, go to [nodejs.org](https://nodejs.org) and click on the big green Install button.
 
@@ -65,7 +65,7 @@ This lets you run `gulp` and `bower` from the command line.
 cd hoverboard && npm install && bower install
 ```
 
-This installs the element sets and tools the starter kit requires to build and serve apps.
+This installs the element sets and tools the hoverboard template requires to build and serve apps.
 
 
 ## Development workflow
@@ -99,7 +99,7 @@ gulp deploy
 * Refactor styles
 * Schedule page
 * Countdown
-* Feedback blocks
+* Testimonials block
 * Venue block
 
 ## Application Theming
@@ -108,7 +108,7 @@ Polymer 1.0 introduces a shim for CSS custom properties. We take advantage of th
 
 [Read more](https://www.polymer-project.org/1.0/docs/devguide/styling.html) about CSS custom properties.
 
-Ok, to be honest, it should be refactored ASAP.
+_Ok, to be honest, it should be refactored ASAP._
 
 ## Dependency Management
 
@@ -116,7 +116,7 @@ Polymer uses [Bower](http://bower.io) for package management. This makes it easy
 
 ## Service Worker
 
-Polymer Starter Kit offers an offline-first experience thanks to Service Worker and the [Platinum Service Worker elements](https://github.com/PolymerElements/platinum-sw). New to Service Worker? Read the following [introduction](http://www.html5rocks.com/en/tutorials/service-worker/introduction/) to understand how it works.
+Template offers an offline-first experience thanks to Service Worker and the [Platinum Service Worker elements](https://github.com/PolymerElements/platinum-sw). New to Service Worker? Read the following [introduction](http://www.html5rocks.com/en/tutorials/service-worker/introduction/) to understand how it works.
 
 #### I get an error message about "Only secure origins are allowed"
 
@@ -139,13 +139,13 @@ This page shows your registered workers and provides some basic operations.
 
 #### Not yet ready for Service Worker support?
 
-If for any reason you decide that Service Worker support isn't for you, you can disable it from your Polymer Starter Kit project using these 3 steps:
+If for any reason you decide that Service Worker support isn't for you, you can disable it from your project using these 3 steps:
 
 * Remove 'precache' from the list in the 'default' gulp task ([gulpfile.js](https://github.com/PolymerElements/polymer-starter-kit/blob/master/gulpfile.js))
 * Remove the two Platinum Service Worker elements (platinum-sw/..) in [app/elements/elements.html](https://github.com/PolymerElements/polymer-starter-kit/blob/master/app/elements/elements.html)
 * Remove references to the platinum-sw elements from your application [index](https://github.com/PolymerElements/polymer-starter-kit/blob/master/app/index.html).
 
-You will also want to navigate to `chrome://serviceworker-internals` and unregister any Service Workers registered by Polymer Starter Kit for your app just in case there's a copy of it cached.
+You will also want to navigate to `chrome://serviceworker-internals` and unregister any Service Workers registered by Hoverboard for your app just in case there's a copy of it cached.
 
 ## Frequently Asked Questions
 
@@ -193,7 +193,7 @@ to build correctly. We are still investigating this, however for the time-being 
 you find your builds getting stuck here.
 
 
-> How do I add new JavaScript files to Starter Kit so they're picked up by the build process?
+> How do I add new JavaScript files to Hoverboard so they're picked up by the build process?
 
 At the bottom of `app/index.html`, you will find a building block that can be used to include additional
 scripts for your app. Build blocks are just normal script tags that are wrapped in an HTML
@@ -211,6 +211,14 @@ during a build.
 <!-- endbuild-->
 ```
 
+## Who is using template?
+
+Going to use template? Go on! The only thing we ask - let us know at [lviv@gdg.org.ua](mailto:lviv@gdg.org.ua) so we can include you to this list, or make a pull request.
+
 ## Contributing
 
-Project Hoverboard still under development and it is open for contributions. Feel free to send PR. If you have any questions, feel free to contact [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy).
+Project Hoverboard is still under development and it is open for contributions. Feel free to send PR. If you have any questions, feel free to contact [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy).
+
+## License
+
+Project is published under the [MIT license](https://github.com/gdg-x/hoverboard/blob/master/LICENSE.md) Feel free to clone and modify repo as you want, but don't forget to add reference to authors :)
