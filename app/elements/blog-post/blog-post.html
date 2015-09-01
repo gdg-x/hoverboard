@@ -42,6 +42,7 @@
         .post-wrapper {
             padding-top: 0;
         }
+
         .post-detail {
             padding-bottom: 16px;
         }
@@ -74,7 +75,6 @@
             <paper-card>
                 <div class="paper-card-container">
                     <div class="post-detail card-content layout horizontal">
-                        <iron-image src="[[person.photoUrl]]" class="person-img placeholder-color img-circle" preload fade sizing="cover"></iron-image>
                         <div class="flex layout vertical center-center">
                             <span class="title self-start">[[meta.title]]</span>
                             <span class="posted self-start">Posted:
@@ -131,7 +131,6 @@ Polymer({
     },
     _metaChanged: function() {
         this.postUrl = '../../posts/' + this.meta.file;
-        this.style.display = 'block';
         this.$.ajax.generateRequest();
     },
     postLoaded: function(event, response) {

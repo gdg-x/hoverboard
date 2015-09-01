@@ -257,7 +257,7 @@
     "company": "Ciklum",
     "country": "Ukraine",
     "photoUrl": "../../images/people/alex_pazhyn.jpg",
-    "bio": "Alex is a leading UI designer at Ciklum with more than 7 years experience in UI design and 3 years of public speaking. His general focus of work is mobile applications and interfaces of IOT.",
+    "bio": "Alex is a leading UI designer at Ciklum with more than 7 years of experience in UI design and 3 years of public speaking. His general focus of work is mobile applications and interfaces of IOT.",
     "tags": ["Android", "UX", "Material Design"],
     "socials": [{
         "name": "Google+",
@@ -276,7 +276,7 @@
     "company": "EL Passion",
     "country": "Poland",
     "photoUrl": "../../images/people/maciej_gorski.jpg",
-    "bio": "Maciej is a passionate Android developer. He cares about writing cleaner code and less of it. He is spending time to automate things to save even more time. He also bikes a lot and would love to be able to code while doing it… using only mind controlled wearables or bikeables.",
+    "bio": "Maciej is a passionate Android developer. He cares about writing clean code and less of it. He is spending time to automate things to save even more time. He also bikes a lot and would love to be able to code while doing it… using only mind controlled wearables or bikeables.",
     "tags": ["Android", "CI"],
     "socials": [{
         "name": "Google+",
@@ -329,7 +329,7 @@
     "company": "Shipito",
     "country": "Czech Republic",
     "photoUrl": "../../images/people/jakub_skvara.jpg",
-    "bio": "Jakub is a member of GDG Prague and GDG ČVUT in Czech republic. He organised together with Jana Moudrá several Polymer and Dart code labs and hackaton. He works as frontend engineer for Shipito. Jakub is interested in modern Javascript frameworks, libraries and tools and loves clean code.",
+    "bio": "Jakub is a member of GDG Prague and GDG ČVUT in Czech republic. He organised together with Jana Moudrá several Polymer and Dart code labs and a hackaton. He works as a frontend engineer for Shipito. Jakub is interested in modern Javascript frameworks, libraries and tools and loves clean code.",
     "tags": ["Web", "Polymer"],
     "badges": [{
         "name": "GDG",
@@ -375,7 +375,7 @@
     "company": "Hackraft",
     "country": "Ukraine",
     "photoUrl": "../../images/people/anna_kurylo.png",
-    "bio": "Anna drives several IT communities in Kyiv. She has organized more than 30 events during last 2 years including the biggest hackathon in Ukraine and several conferences for developers and startups. This year Anna became an Google Anita Borg Scholar in EMEA Region, being selected from more than a thousand candidates.",
+    "bio": "Anna drives several IT communities in Kyiv. She has organized more than 30 events during last the 2 years including the biggest hackathon in Ukraine and several conferences for developers and startups. This year Anna became a Google Anita Borg Scholar in EMEA Region, being selected from more than a thousand candidates.",
     "tags": ["Community"],
     "badges": [{
         "name": "WTM",

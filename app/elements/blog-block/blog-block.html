@@ -175,7 +175,8 @@
             }
         },
         closePost: function() {
-            page.redirect('/blog');
+            page('/blog');
+            this.opened = false;
             this.cancelAnimation();
             this.playAnimation('closePost');
         },

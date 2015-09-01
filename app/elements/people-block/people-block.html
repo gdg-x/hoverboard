@@ -391,7 +391,8 @@
             }
         },
         closePerson: function() {
-            page.redirect('/speakers');
+            page('/speakers');
+            this.opened = false;
             this.cancelAnimation();
             this.playAnimation('closePerson');
         },
