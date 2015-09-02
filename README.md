@@ -8,6 +8,8 @@ The site is **responsive**, **fast** and supports **offline access** (if you are
 
 Template is brought by [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy) from [GDG Lviv](http://lviv.gdg.org.ua/).
 
+*Do you like it?* Show your support - please, **star the project**.
+
 ### Live demo [GDG DevFest Ukraine 2015](http://devfest.gdg.org.ua/)
 
 #### The Hoverboard is still under development and can bring breaking changes shortly. If you are looking for stable website template try [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
