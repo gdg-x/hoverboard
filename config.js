@@ -3,6 +3,7 @@ module.exports = {
   autoprefixer: {
     // https://github.com/postcss/autoprefixer#browsers
     browsers: [
+      // https://github.com/WebComponents/webcomponentsjs#browser-support
       'Explorer >= 10',
       'ExplorerMobile >= 10',
       'Firefox >= 30',
