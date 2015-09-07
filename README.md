@@ -16,9 +16,10 @@
 
 - [Polymer](http://polymer-project.org), [Paper](https://elements.polymer-project.org/browse?package=paper-elements), [Iron](https://elements.polymer-project.org/browse?package=iron-elements), [Neon](https://elements.polymer-project.org/browse?package=neon-elements) and
 [Start](https://github.com/StartPolymer/start-elements) elements
+- Offline setup through [Platinum](https://elements.polymer-project.org/browse?package=platinum-elements) - [Service Worker](http://www.html5rocks.com/en/tutorials/service-worker/introduction/) elements
+- [Default theme](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/styles/default-theme) based on [BEM Methodology](http://getbem.com) and inspired by [Material Design Lite](http://www.getmdl.io)
 - [Material Design](http://www.google.com/design/spec/material-design/introduction.html) layout
 - Routing with [Page.js](https://visionmedia.github.io/page.js/)
-- Offline setup through [Platinum](https://elements.polymer-project.org/browse?package=platinum-elements) Service Worker elements
 - [Config file](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/config.js)
 - [Custom fonts list](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/fonts.list)
 - [Custom icons element](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/elements/custom-icons/icons.html)
