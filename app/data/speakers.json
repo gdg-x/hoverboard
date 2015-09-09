@@ -346,11 +346,11 @@
 }, {
     "id": 16,
     "name": "Kseniia Shumelchyk",
-    "title": "Software developer",
-    "company": "SoftServe",
+    "title": "Software Engineer",
+    "company": "SoftServe Inc.",
     "country": "Ukraine",
     "photoUrl": "../../images/people/kseniia_shumelchyk.jpg",
-    "bio": "Kseniia is working as a software developer at SoftServe. For two years she is leader of GDG Women Ukraine and GDG Dnipropetrovsk. Kseniia actively participates in GDG events, techtalks and conferences devoted to software development and so on. Regularly she shares among girls an overview about different programs, grants available for women in IT and her own experience being involved in some of these programs. Developer of several open-source projects during Google Summer of Code program. Participant of TechTalk with global Women Techmakers community.",
+    "bio": "Kseniia is working as software developer at SoftServe as well she has an experience of working on open-source project during Google Summer of Code. Kseniia is leading Women Techmakers Ukraine and GDG Dnipropetrovsk communities for 3 years. She participated in number of international conferences: GOTO Aarhus, Google I/O and GDG Leaders Summit and was a speaker at Droidcon Berlin, Women Techmakers Istanbul, GDG DevFest Ukraine and Women Techmakers Global TechTalk. This year Kseniia was selected as Anita Borg Scholar Receipient that aimed to support women with outstanding results in Computer Science. Kseniia is a big fan of innovative technologies in education and software development. She is creator of Android application for Women Techmakers Community.",
     "tags": ["Android", "BLE"],
     "badges": [{
         "name": "GDG",
