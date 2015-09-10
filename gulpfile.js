@@ -36,7 +36,7 @@ var styleTask = function (stylesPath, srcs) {
       return path.join('app', stylesPath, src);
     }))
     .pipe($.changed(stylesPath, {extension: '.css'}))
-    .pipe($.postcss([autoprefixer({ browsers: config.autoprefixer.browsers })]))
+    .pipe($.postcss([autoprefixer(config.autoprefixer)]))
     .pipe(gulp.dest('.tmp/' + stylesPath))
     .pipe($.if('*.css', $.cssmin()))
     .pipe(gulp.dest('dist/' + stylesPath))
