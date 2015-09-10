@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 // Include Gulp & tools we'll use
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
+var autoprefixer = require('autoprefixer');
 var del = require('del');
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
@@ -35,7 +36,7 @@ var styleTask = function (stylesPath, srcs) {
       return path.join('app', stylesPath, src);
     }))
     .pipe($.changed(stylesPath, {extension: '.css'}))
-    .pipe($.autoprefixer(config.autoprefixer.browsers))
+    .pipe($.postcss([autoprefixer({ browsers: config.autoprefixer.browsers })]))
     .pipe(gulp.dest('.tmp/' + stylesPath))
     .pipe($.if('*.css', $.cssmin()))
     .pipe(gulp.dest('dist/' + stylesPath))
