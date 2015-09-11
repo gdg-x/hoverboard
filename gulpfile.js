@@ -25,31 +25,50 @@ var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
 var config = require('./config');
+var stylelint = require('stylelint');
+var reporter = require('postcss-reporter');
 
 // Get a task path
 function task(filename) {
   return './tasks/' + filename;
 }
 
-var styleTask = function (stylesPath, srcs) {
-  return gulp.src(srcs.map(function(src) {
-      return path.join('app', stylesPath, src);
-    }))
-    .pipe($.changed(stylesPath, {extension: '.css'}))
-    .pipe($.postcss([autoprefixer(config.autoprefixer)]))
-    .pipe(gulp.dest('.tmp/' + stylesPath))
-    .pipe($.if('*.css', $.cssmin()))
-    .pipe(gulp.dest('dist/' + stylesPath))
-    .pipe($.size({title: stylesPath}));
-};
-
-// Compile and automatically prefix stylesheets
+// Lint and automatically prefix stylesheets
 gulp.task('styles', function () {
-  return styleTask('styles', ['**/*.css']);
-});
+  var themes = gulp.src([
+      'app/themes/**/*.html'
+    ])
+    .pipe($.changed('dist/themes'))
+    .pipe($.htmlPostcss([
+      stylelint(config.stylelint),
+      autoprefixer(config.autoprefixer),
+      reporter({
+        clearMessages: true
+      })
+    ]))
+    .pipe(gulp.dest('.tmp/themes'))
+    .pipe(gulp.dest('dist/themes'))
+    .pipe($.size({title: 'dist/themes'}));
 
-gulp.task('elements', function () {
-  return styleTask('elements', ['**/*.css']);
+  var elements = gulp.src([
+      'app/elements/**/*.html',
+      '!app/elements/elements.html',
+      '!app/elements/routing.html',
+      '!app/elements/custom-icons/*.html'
+    ])
+    .pipe($.changed('dist/elements'))
+    .pipe($.htmlPostcss([
+      stylelint(config.stylelint),
+      autoprefixer(config.autoprefixer),
+      reporter({
+        clearMessages: true
+      })
+    ]))
+    .pipe(gulp.dest('.tmp/elements'))
+    .pipe(gulp.dest('dist/elements'))
+    .pipe($.size({title: 'dist/elements'}));
+
+    return merge(themes, elements);
 });
 
 // Lint JavaScript
@@ -94,8 +113,14 @@ gulp.task('copy', function () {
     '!bower_components/**/{demo,test}/**/*'
   ]).pipe(gulp.dest('dist/bower_components'));
 
-  var elements = gulp.src(['app/elements/**/*.html'])
-    .pipe(gulp.dest('dist/elements'));
+  var elements = gulp.src([
+    'app/elements/elements.html',
+    'app/elements/routing.html',
+    'app/elements/custom-icons'
+  ]).pipe(gulp.dest('dist/elements'));
+
+  var icons = gulp.src(['app/elements/custom-icons/**/*'])
+    .pipe(gulp.dest('dist/elements/custom-icons'));
 
   var scripts = gulp.src(['app/scripts/analytics.js'])
     .pipe(gulp.dest('dist/scripts'));
@@ -110,22 +135,22 @@ gulp.task('copy', function () {
     .pipe($.rename('elements.vulcanized.html'))
     .pipe(gulp.dest('dist/elements'));
 
-  return merge(app, bower, elements, scripts, swBootstrap, swToolbox, vulcanized)
+  return merge(app, bower, elements, icons, scripts, swBootstrap, swToolbox, vulcanized)
     .pipe($.size({title: 'copy'}));
 });
 
 // Copy web fonts to dist
 gulp.task('fonts', function () {
-  return gulp.src(['app/fonts/**'])
-    .pipe(gulp.dest('dist/fonts'))
-    .pipe($.size({title: 'fonts'}));
+  return gulp.src(['app/themes/' + config.theme + '/fonts/**/*.{css,woff,woff2}'])
+    .pipe(gulp.dest('dist/themes/' + config.theme + '/fonts'))
+    .pipe($.size({title: 'dist/themes/' + config.theme + '/fonts'}));
 });
 
 // Scan your HTML for assets & optimize them
 gulp.task('html', function () {
   var assets = $.useref.assets({searchPath: ['.tmp', 'app', 'dist']});
 
-  return gulp.src(['app/**/*.html', '!app/{elements,test}/**/*.html'])
+  return gulp.src(['app/**/*.html', '!app/{elements,test,themes}/**/*.html'])
     // Replace path for vulcanized assets
     .pipe($.if('*.html', $.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
     .pipe(assets)
@@ -195,7 +220,7 @@ gulp.task('cache-config', function (callback) {
     disabled: false
   };
 
-  glob('{elements,scripts,styles}/**/*.*', {cwd: dir}, function(error, files) {
+  glob('{elements,scripts,themes}/**/*.*', {cwd: dir}, function(error, files) {
     if (error) {
       callback(error);
     } else {
@@ -218,7 +243,7 @@ gulp.task('clean', function (cb) {
 });
 
 // Watch files for changes & reload
-gulp.task('serve', ['styles', 'elements', 'images'], function () {
+gulp.task('serve', ['styles', 'images'], function () {
   browserSync({
     browser: config.browserSync.browser,
     https: config.browserSync.https,
@@ -246,7 +271,7 @@ gulp.task('serve', ['styles', 'elements', 'images'], function () {
   });
 
   gulp.watch(['app/**/*.html'], reload);
-  gulp.watch(['app/styles/**/*.css'], ['styles', reload]);
+  gulp.watch(['app/themes/**/*.{css,html}'], ['styles', reload]);
   gulp.watch(['app/elements/**/*.css'], ['elements', reload]);
   gulp.watch(['app/{scripts,elements}/**/{*.js,*.html}'], ['jshint']);
   gulp.watch(['app/images/**/*'], reload);
@@ -298,7 +323,7 @@ gulp.task('serve:gae', ['default'], require(task('serve-gae'))($, gulp));
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
   runSequence(
-    ['copy', 'styles', 'elements'],
+    ['copy', 'styles'],
     ['jshint', 'images', 'fonts', 'html'],
     'vulcanize',
     ['clean-dist', 'minify-dist'],
@@ -345,7 +370,7 @@ gulp.task('deploy:promote',
 // ----------
 
 // Download Google Fonts for load page performance and offline using
-gulp.task('download:fonts', require(task('download-fonts'))($, gulp));
+gulp.task('download:fonts', require(task('download-fonts'))($, config, gulp));
 
 // Run PageSpeed Insights
 gulp.task('pagespeed', require(task('pagespeed'))(config));

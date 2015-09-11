@@ -84,5 +84,18 @@ module.exports = {
     nokey: true,
     site: 'https://polymer-starter-kit-plus.firebaseapp.com',
     strategy: 'mobile' // or desktop
-  }
+  },
+  // stylelint - Modern CSS linter
+  // https://github.com/stylelint/stylelint
+  stylelint: {
+    rules: { // https://github.com/stylelint/stylelint#configuring-rules
+      'color-no-invalid-hex': 2,
+      'declaration-colon-space-before': [2, 'never'],
+      'number-leading-zero': [2, 'always']
+    }
+  },
+  // Polymer Theme
+  // Set theme also in file app/elements/elements.html
+  // <link rel="import" href="../themes/default-theme/theme.html">
+  theme: 'default-theme'
 };
