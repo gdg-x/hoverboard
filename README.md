@@ -220,6 +220,7 @@ Going to use template? Go on! The only thing we ask - let us know at [lviv@gdg.o
 | [GDG DevFest Ukraine](http://devfest.gdg.org.ua) |
 | :------------ |
 | [GDG DevFest Sao Paulo](http://sp.devfest.com.br)  |
+| [GDG DevFest Hamburg 2015](http://devfest.de)  |
 
 
 ## Contributing
