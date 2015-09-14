@@ -221,6 +221,8 @@ Going to use template? Go on! The only thing we ask - let us know at [lviv@gdg.o
 | :------------ |
 | [GDG DevFest Sao Paulo](http://sp.devfest.com.br)  |
 | [GDG DevFest Hamburg 2015](http://devfest.de)  |
+| [GDG DevFest Mezam 2015](https://devfest-mezam.gdgbambili.xyz) |
+
 
 
 ## Contributing
