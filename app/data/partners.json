@@ -65,5 +65,17 @@
         "name": "ITVDN",
         "url": "http://itvdn.com/en",
         "logoUrl": "../images/partners/itvdn.png"
+    }, {
+        "name": "Root Nation",
+        "url": "http://root-nation.com/",
+        "logoUrl": "../images/partners/root-nation.png"
+    }, {
+        "name": "LITS",
+        "url": "http://lits.com.ua/",
+        "logoUrl": "../images/partners/lits.png"
+    }, {
+        "name": "Codeguida",
+        "url": "http://codeguida.com/",
+        "logoUrl": "../images/partners/codeguida.png"
     }]
 }]
