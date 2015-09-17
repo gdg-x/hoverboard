@@ -1,4 +1,115 @@
 [{
+    "id": 23,
+    "name": "Dawid Ostrowski",
+    "title": "Developer Relations Program Manager",
+    "company": "Google",
+    "country": "Switzerland",
+    "photoUrl": "../../images/people/dawid_ostrowski.jpg",
+    "bio": "Dawid is true technology enthusiast, who loves to work in areas where humans and machines meet to create amazing new products and services. He is experienced program manager with strong technical background, who is able to establish priorities for complex projects and execute across multiple organizations, according to long-term objectives. Dawid has worked in Poland, USA, Germany, Belgium and The Netherlands and truly values diversity of international working environment. His most visible characteristics are individualization (when dealing directly with people), ideation&intellection (inexhaustible source of new concepts) and strong communication (experienced trainer, community manager). He is also an activator constantly impatient for action.",
+    "tags": ["Entrepreneurship"],
+    "socials": [{
+        "name": "Google+",
+        "link": "https://plus.google.com/+DawidOstrowski/"
+    }]
+}, {
+    "id": 9,
+    "name": "Mandy Waite",
+    "title": "Developer Relations Engineer",
+    "company": "Google",
+    "country": "UK",
+    "photoUrl": "../../images/people/mandy_waite.jpg",
+    "bio": "Based in London, UK, Mandy is a Developer Relations Engineer at Google specializing in Container and Cloud technologies and working to make the world a better place for developers building applications for the Cloud. Before Google Mandy worked at Sun Microsystems on performance and scalability of Java and JavaEE and on porting Open Source apps to OpenSolaris. In her spare time Mandy is learning Japanese and likes to play the guitar.",
+    "tags": ["Cloud", "AppEngine", "gRPC", "Kubernetes"],
+    "socials": [{
+        "name": "Google+",
+        "link": "https://plus.google.com/+MandyWaite"
+    }, {
+        "name": "Twitter",
+        "link": "https://twitter.com/tekgrrl"
+    }, {
+        "name": "GitHub",
+        "link": "https://github.com/tekgrrl"
+    }]
+}, {
+    "id": 15,
+    "name": "Jakub Škvára",
+    "title": "Frontend engineer",
+    "company": "Shipito",
+    "country": "Czech Republic",
+    "photoUrl": "../../images/people/jakub_skvara.jpg",
+    "bio": "Jakub is a member of GDG Prague and GDG ČVUT in Czech republic. He organised together with Jana Moudrá several Polymer and Dart code labs and a hackaton. He works as a frontend engineer for Shipito. Jakub is interested in modern Javascript frameworks, libraries and tools and loves clean code.",
+    "tags": ["Web", "Polymer"],
+    "badges": [{
+        "name": "GDG",
+        "description": "Google Developers Group Prague",
+        "link": "https://developers.google.com/groups/chapter/111919016509847766513/"
+    }],
+    "socials": [{
+        "name": "Google+",
+        "link": "https://plus.google.com/u/0/+JakubSkvara"
+    }, {
+        "name": "Twitter",
+        "link": "https://twitter.com/skvaros"
+    }]
+}, {
+    "id": 14,
+    "name": "Jana Moudrá",
+    "title": "Co-Founder",
+    "company": "Juicymo",
+    "country": "Czech Republic",
+    "photoUrl": "../../images/people/jana_moudra.jpg",
+    "bio": "GDE (Google Developer Expert) for Dart. Jana is a passionate developer and modern web and mobile technology evangelist. She is an event organiser for GDG Prague, where she arranges events for developers including public lectures, code labs and hackathons – covering a wide range of subjects including technologies Dart or Android. She loves to help other developers and spread the knowledge about these technologies. <br/><br/>Jana co-founded a company called Juicymo, where she works on juicy apps and products.",
+    "tags": ["Web", "Dart"],
+    "badges": [{
+        "name": "GDE",
+        "description": "Dart Google Developer Expert",
+        "link": "https://developers.google.com/experts/people/jana-moudr"
+    },{
+        "name": "GDG",
+        "description": "Google Developers Group Prague",
+        "link": "https://developers.google.com/groups/chapter/111919016509847766513/"
+    }],
+    "socials": [{
+        "name": "Google+",
+        "link": "https://plus.google.com/+JanaMoudrá"
+    }, {
+        "name": "LinkedIn",
+        "link": "https://cz.linkedin.com/in/janamoudra"
+    }, {
+        "name": "Twitter",
+        "link": "https://twitter.com/Janamou"
+    }, {
+        "name": "Blog",
+        "link": "http://www.moudra.net/"
+    }]
+}, {
+    "id": 11,
+    "name": "Hallade Xavier",
+    "title": "Developer Evangelist",
+    "company": "Intel",
+    "country": "France",
+    "photoUrl": "../../images/people/hallade_xavier.jpg",
+    "bio": "Xavier is Developer Evangelist in Intel Software and Service Group in Paris, France. He is helping developers to improve their support for new hardware and technologies backed by Intel, with a focus on the Android NDK, 64-bit and dual-displays.",
+    "tags": ["Android", "NDK"],
+    "badges": [{
+        "name": "GDE",
+        "description": "Android Google Developer Expert",
+        "link": "https://developers.google.com/experts/people/xavier-hallade"
+    }],
+    "socials": [{
+        "name": "Google+",
+        "link": "https://plus.google.com/106834066322753191683/posts"
+    }, {
+        "name": "LinkedIn",
+        "link": "https://www.linkedin.com/in/xavierhallade"
+    }, {
+        "name": "Twitter",
+        "link": "https://twitter.com/ph0b"
+    }, {
+        "name": "Website",
+        "link": "http://ph0b.com/"
+    }]
+}, {
     "id": 1,
     "name": "Said Tahsin Dane",
     "title": "Mobile Coder",
@@ -53,6 +164,33 @@
     }, {
         "name": "LinkedIn",
         "link": "https://www.linkedin.com/in/herych"
+    }]
+}, {
+    "id": 19,
+    "name": "Juarez Filho",
+    "title": "Front End Engineer",
+    "company": "madewithlove",
+    "country": "Brazil",
+    "photoUrl": "../../images/people/juarez_filho.jpg",
+    "bio": "Juarez Filho is an enthusiastic Front end Engineer with over 7 years of experience, started his career as backend developer, but with his first CSS class he devoted completely to Front End and UX.<br/><br/>Currently building things with love at @madewithlove and also a GDG Organizer spreading the awesome Google Technologies mainly Firebase and web related topics.",
+    "tags": ["Cloud", "Firebase"],
+    "badges": [{
+        "name": "GDG",
+        "description": "Google Developers Group Maceio",
+        "link": "https://developers.google.com/groups/chapter/105591078626334574818/"
+    }],
+    "socials": [{
+        "name": "Google+",
+        "link": "http://google.com/+JuarezPAFilho"
+    }, {
+        "name": "LinkedIn",
+        "link": "http://linkedin.com/in/juarezpaf"
+    }, {
+        "name": "Twitter",
+        "link": "http://twitter.com/juarezpaf"
+    }, {
+        "name": "GitHub",
+        "link": "http://github.com/juarezpaf"
     }]
 }, {
     "id": 3,
@@ -180,25 +318,6 @@
         "link": "https://github.com/dimko1"
     }]
 }, {
-    "id": 9,
-    "name": "Mandy Waite",
-    "title": "Developer Relations Engineer",
-    "company": "Google",
-    "country": "UK",
-    "photoUrl": "../../images/people/mandy_waite.jpg",
-    "bio": "Based in London, UK, Mandy is a Developer Relations Engineer at Google specializing in Container and Cloud technologies and working to make the world a better place for developers building applications for the Cloud. Before Google Mandy worked at Sun Microsystems on performance and scalability of Java and JavaEE and on porting Open Source apps to OpenSolaris. In her spare time Mandy is learning Japanese and likes to play the guitar.",
-    "tags": ["Cloud", "AppEngine", "gRPC", "Kubernetes"],
-    "socials": [{
-        "name": "Google+",
-        "link": "https://plus.google.com/+MandyWaite"
-    }, {
-        "name": "Twitter",
-        "link": "https://twitter.com/tekgrrl"
-    }, {
-        "name": "GitHub",
-        "link": "https://github.com/tekgrrl"
-    }]
-}, {
     "id": 10,
     "name": "Roman Herasymenko",
     "title": "Senior Android Developer",
@@ -222,33 +341,6 @@
     }, {
         "name": "LinkedIn",
         "link": "http://ua.linkedin.com/pub/roman-gerasimenko/"
-    }]
-}, {
-    "id": 11,
-    "name": "Hallade Xavier",
-    "title": "Developer Evangelist",
-    "company": "Intel",
-    "country": "France",
-    "photoUrl": "../../images/people/hallade_xavier.jpg",
-    "bio": "Xavier is Developer Evangelist in Intel Software and Service Group in Paris, France. He is helping developers to improve their support for new hardware and technologies backed by Intel, with a focus on the Android NDK, 64-bit and dual-displays.",
-    "tags": ["Android", "NDK"],
-    "badges": [{
-        "name": "GDE",
-        "description": "Android Google Developer Expert",
-        "link": "https://developers.google.com/experts/people/xavier-hallade"
-    }],
-    "socials": [{
-        "name": "Google+",
-        "link": "https://plus.google.com/106834066322753191683/posts"
-    }, {
-        "name": "LinkedIn",
-        "link": "https://www.linkedin.com/in/xavierhallade"
-    }, {
-        "name": "Twitter",
-        "link": "https://twitter.com/ph0b"
-    }, {
-        "name": "Website",
-        "link": "http://ph0b.com/"
     }]
 }, {
     "id": 12,
@@ -290,58 +382,6 @@
     }, {
         "name": "GitHub",
         "link": "https://github.com/mg6maciej"
-    }]
-}, {
-    "id": 14,
-    "name": "Jana Moudrá",
-    "title": "Co-Founder",
-    "company": "Juicymo",
-    "country": "Czech Republic",
-    "photoUrl": "../../images/people/jana_moudra.jpg",
-    "bio": "GDE (Google Developer Expert) for Dart. Jana is a passionate developer and modern web and mobile technology evangelist. She is an event organiser for GDG Prague, where she arranges events for developers including public lectures, code labs and hackathons – covering a wide range of subjects including technologies Dart or Android. She loves to help other developers and spread the knowledge about these technologies. <br/><br/>Jana co-founded a company called Juicymo, where she works on juicy apps and products.",
-    "tags": ["Web", "Dart"],
-    "badges": [{
-        "name": "GDE",
-        "description": "Dart Google Developer Expert",
-        "link": "https://developers.google.com/experts/people/jana-moudr"
-    },{
-        "name": "GDG",
-        "description": "Google Developers Group Prague",
-        "link": "https://developers.google.com/groups/chapter/111919016509847766513/"
-    }],
-    "socials": [{
-        "name": "Google+",
-        "link": "https://plus.google.com/+JanaMoudrá"
-    }, {
-        "name": "LinkedIn",
-        "link": "https://cz.linkedin.com/in/janamoudra"
-    }, {
-        "name": "Twitter",
-        "link": "https://twitter.com/Janamou"
-    }, {
-        "name": "Blog",
-        "link": "http://www.moudra.net/"
-    }]
-}, {
-    "id": 15,
-    "name": "Jakub Škvára",
-    "title": "Frontend engineer",
-    "company": "Shipito",
-    "country": "Czech Republic",
-    "photoUrl": "../../images/people/jakub_skvara.jpg",
-    "bio": "Jakub is a member of GDG Prague and GDG ČVUT in Czech republic. He organised together with Jana Moudrá several Polymer and Dart code labs and a hackaton. He works as a frontend engineer for Shipito. Jakub is interested in modern Javascript frameworks, libraries and tools and loves clean code.",
-    "tags": ["Web", "Polymer"],
-    "badges": [{
-        "name": "GDG",
-        "description": "Google Developers Group Prague",
-        "link": "https://developers.google.com/groups/chapter/111919016509847766513/"
-    }],
-    "socials": [{
-        "name": "Google+",
-        "link": "https://plus.google.com/u/0/+JakubSkvara"
-    }, {
-        "name": "Twitter",
-        "link": "https://twitter.com/skvaros"
     }]
 }, {
     "id": 16,
@@ -407,33 +447,6 @@
     "socials": [{
         "name": "LinkedIn",
         "link": "https://ua.linkedin.com/in/alexeyrybakov"
-    }]
-}, {
-    "id": 19,
-    "name": "Juarez Filho",
-    "title": "Front End Engineer",
-    "company": "madewithlove",
-    "country": "Brazil",
-    "photoUrl": "../../images/people/juarez_filho.jpg",
-    "bio": "Juarez Filho is an enthusiastic Front end Engineer with over 7 years of experience, started his career as backend developer, but with his first CSS class he devoted completely to Front End and UX.<br/><br/>Currently building things with love at @madewithlove and also a GDG Organizer spreading the awesome Google Technologies mainly Firebase and web related topics.",
-    "tags": ["Cloud", "Firebase"],
-    "badges": [{
-        "name": "GDG",
-        "description": "Google Developers Group Maceio",
-        "link": "https://developers.google.com/groups/chapter/105591078626334574818/"
-    }],
-    "socials": [{
-        "name": "Google+",
-        "link": "http://google.com/+JuarezPAFilho"
-    }, {
-        "name": "LinkedIn",
-        "link": "http://linkedin.com/in/juarezpaf"
-    }, {
-        "name": "Twitter",
-        "link": "http://twitter.com/juarezpaf"
-    }, {
-        "name": "GitHub",
-        "link": "http://github.com/juarezpaf"
     }]
 }, {
     "id": 20,
@@ -503,19 +516,6 @@
     }, {
         "name": "Blog",
         "link": "http://semihyagcioglu.com"
-    }]
-}, {
-    "id": 23,
-    "name": "Dawid Ostrowski",
-    "title": "Developer Relations Program Manager",
-    "company": "Google",
-    "country": "Switzerland",
-    "photoUrl": "../../images/people/dawid_ostrowski.jpg",
-    "bio": "Dawid is true technology enthusiast, who loves to work in areas where humans and machines meet to create amazing new products and services. He is experienced program manager with strong technical background, who is able to establish priorities for complex projects and execute across multiple organizations, according to long-term objectives. Dawid has worked in Poland, USA, Germany, Belgium and The Netherlands and truly values diversity of international working environment. His most visible characteristics are individualization (when dealing directly with people), ideation&intellection (inexhaustible source of new concepts) and strong communication (experienced trainer, community manager). He is also an activator constantly impatient for action.",
-    "tags": ["Entrepreneurship"],
-    "socials": [{
-        "name": "Google+",
-        "link": "https://plus.google.com/+DawidOstrowski/"
     }]
 }, {
     "id": 24,
