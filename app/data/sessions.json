@@ -178,5 +178,146 @@
     "complexity": "Beginner",
     "presentation": "",
     "video": ""
+  },
+  {
+    "id": 119,
+    "title": "Android TV Development",
+    "description": "We will discuss how to start programming for Android TV, what is “10 foot UI” and some hardware features  that Android TV developers should bear in mind.We will found out about the competitors and what is the current state of the market.",
+    "speakers": [18],
+    "language": "ru",
+    "complexity": "Intermediate",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 120,
+    "title": "Firebase Adventures - Real time platform for your apps",
+    "description": "Firebase is a powerful platform for building mobile and web applications. Use Firebase to store and sync data instantly, authenticate users, and easily deploy your web app. <br/><br/>Firebase Adventures is a talk about how to use Firebase in different ways to give you the ability to build extraordinary cross-platform apps.",
+    "speakers": [19],
+    "language": "en",
+    "complexity": "Intermediate",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 121,
+    "title": "[Workshop] Getting started with Firebase",
+    "description": "TBD",
+    "speakers": [19],
+    "language": "en",
+    "complexity": "Intermediate",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 122,
+    "title": "Service Worker - Native Apps Experience For The Web",
+    "description": "Installing and updating apps, network interceptors and full cache management, push notifications and background updates. All these is now possible in Web apps with Service Worker! Even when the App is closed. Excited? Be the one to touch it first!",
+    "speakers": [20],
+    "language": "en",
+    "complexity": "Intermediate",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 123,
+    "title": "Google WebRTC on Mobile",
+    "description": "WebRTC is a new milestone in the evolution of the web. This technology allows us to quickly create real-time communication applications. Altough its main target is web browsers, WebRTC is becoming a popular real time communication technology used on mobile. By using WebRTC you can develop your own peer-to-peer video chat in a short amount of time. Also, WebRTC is very flexible, you can make calls to another networks that using offer/answer model, for example SIP protocol. In this presentation you can gain in-depth insights about how to implement WebRTC on iOS and Android mobile devices for a native experience.",
+    "speakers": [21],
+    "language": "en",
+    "complexity": "Intermediate",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 124,
+    "title": "Build Your Thing In a Weekend with AngularJS 2.0",
+    "description": "Have you ever had and idea that you abandon after some time? You are not alone. That’s true for most of the software projects. The reasons might vary, lack of time, scope of the thing you want to build, or simply losing interest after some time. If only there was some easier way to build your thing with less hassle. Actually there is. In this talk we will discuss how to do that with AngularJS 2.0. We will go through some of the basics and talk about how it might help you implement your idea and what it has to offer.",
+    "speakers": [22],
+    "language": "en",
+    "complexity": "Beginner",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 125,
+    "title": "Keynote",
+    "description": "TBD",
+    "speakers": [23],
+    "language": "en",
+    "complexity": "Beginner",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 126,
+    "title": "Google Solve for X comes in Ukraine",
+    "description": "TBD",
+    "speakers": [24],
+    "language": "uk",
+    "complexity": "Beginner",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 127,
+    "title": "Solving Dev / Test conflicts",
+    "description": "In the ideal world, developers and testers act as a single solid team with a common goal. In reality, there is a number of problems that can create a split between these leagues, and even start a tiny cold war.<br/><br/>We'll try to look into some tricky questions.<br/>- How can we detect the split at the earliest stage?<br/>- What can we do to prevent it?<br/>- If we have already faced it, how can we heal it?",
+    "speakers": [25],
+    "language": "en",
+    "complexity": "Beginner",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 128,
+    "title": "Material Design in Games",
+    "description": "TBD",
+    "speakers": [26],
+    "language": "ru",
+    "complexity": "Beginner",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 129,
+    "title": "How to succeed in the kids and family mobile app space",
+    "description": "Learn how successful kids and family app developers understand and engage their audiences, and how you can design high-quality apps just for this group. You'll also get practical tips to help you boost your reach, retention or revenue.",
+    "speakers": [27],
+    "language": "ru",
+    "complexity": "Beginner",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 130,
+    "title": "[Workshop] Let's build new Polymer application in 30 minutes",
+    "description": "Polymer is a great tool for prototyping new applications. In this talk, you will see, how to build nice looking Polymer application in 30 minutes using Polymer Starter Kit and predefined set of elements and components.",
+    "speakers": [15],
+    "language": "en",
+    "complexity": "Beginner",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 131,
+    "title": "[Workshop] Dart in the Could",
+    "description": "TBD",
+    "speakers": [14],
+    "language": "en",
+    "complexity": "Beginner",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 132,
+    "title": "Women cracking the code",
+    "description": "TBD",
+    "speakers": [16],
+    "language": "en",
+    "complexity": "Beginner",
+    "presentation": "",
+    "video": ""
   }
+
 ]
