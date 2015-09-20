@@ -198,7 +198,7 @@ gulp.task('clean', function (cb) {
 });
 
 // Watch files for changes & reload
-gulp.task('serve', ['styles', 'images'], function () {
+gulp.task('serve', ['styles', 'images', 'lint'], function () {
   browserSync({
     browser: config.browserSync.browser,
     https: config.browserSync.https,
@@ -269,6 +269,9 @@ gulp.task('fix-path-sw-toolbox', require(task('fix-path-sw-toolbox'))($, gulp));
 // Minify JavaScript in dist directory
 gulp.task('minify-dist', require(task('minify-dist'))($, gulp, merge));
 
+// Lint CSS and JavaScript
+gulp.task('lint', require(task('lint'))($, gulp, merge));
+
 // Static asset revisioning by appending content hash to filenames
 gulp.task('revision', require(task('revision'))($, gulp));
 
@@ -281,7 +284,7 @@ gulp.task('styles', require(task('styles'))($, config, gulp, merge));
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
   runSequence(
-    ['copy', 'styles'],
+    ['copy', 'styles', 'lint'],
     ['jshint', 'images', 'fonts', 'html'],
     'vulcanize',
     ['clean-dist', 'minify-dist'],
