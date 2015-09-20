@@ -28,7 +28,8 @@ module.exports = function ($, config, gulp, merge) { return function () {
   ];
 
   var themes = gulp.src([
-      'app/themes/**/*.html'
+      'app/themes/' + config.theme + '/*.html',
+      '!app/themes/' + config.theme + '/icons.html'
     ])
     .pipe($.plumber({
       handleError: function (error) {
@@ -36,13 +37,14 @@ module.exports = function ($, config, gulp, merge) { return function () {
         this.emit('end');
       }
     }))
-    .pipe($.changed('dist/themes'))
+    .pipe($.changed('dist/themes/' + config.theme))
     .pipe($.sourcemaps.init())
     .pipe($.htmlPostcss(postcssPlugins))
     .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest('.tmp/themes'))
-    .pipe(gulp.dest('dist/themes'))
-    .pipe($.size({title: 'dist/themes'}));
+    .pipe(gulp.dest('.tmp/themes/' + config.theme))
+    .pipe($.size({title: 'Copy transformed styles to .tmp/themes dir:'}))
+    .pipe(gulp.dest('dist/themes/' + config.theme))
+    .pipe($.size({title: 'Copy transformed styles to dist/themes dir:'}));
 
   var elements = gulp.src([
       'app/elements/**/*.html',
@@ -60,8 +62,9 @@ module.exports = function ($, config, gulp, merge) { return function () {
     .pipe($.htmlPostcss(postcssPlugins))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('.tmp/elements'))
+    .pipe($.size({title: 'Copy transformed styles to .tmp/elements dir:'}))
     .pipe(gulp.dest('dist/elements'))
-    .pipe($.size({title: 'dist/elements'}));
+    .pipe($.size({title: 'Copy transformed styles to dist/elements dir:'}));
 
   return merge(themes, elements);
 };};
