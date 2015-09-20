@@ -10,16 +10,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="stylesheet" href="fonts/fonts.css">
 
-<style is="custom-style">
+<!-- Shared styles between elements and theme -->
+<dom-module id="shared-styles">
+<template><style>
 
-@import "variables";
-@import "breakpoints";
-@import "mixins";
+  @import "breakpoints";
+  @import "components/page";
 
-@import "components/drawer";
-@import "components/main";
-@import "components/navigation";
-@import "components/page";
+</style></template>
+</dom-module>
+
+<!-- Theme styles -->
+<style is="custom-style" include="shared-styles">
+
+  @import "variables";
+  @import "breakpoints";
+  @import "mixins";
+
+  @import "components/drawer";
+  @import "components/main";
+  @import "components/navigation";
 
 </style>
 
