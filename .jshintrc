@@ -1,7 +1,6 @@
 {
   "node": true,
   "browser": true,
-  "esnext": true,
   "bitwise": true,
   "camelcase": true,
   "curly": true,
@@ -13,6 +12,7 @@
   "quotmark": "single",
   "undef": true,
   "unused": true,
+  "newcap": false,
   "globals": {
     "wrap": true,
     "unwrap": true,
