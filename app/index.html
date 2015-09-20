@@ -59,30 +59,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <span id="browser-sync-binding"></span>
   <template is="dom-bind" id="app">
 
-    <paper-drawer-panel id="paperDrawerPanel">
+    <paper-drawer-panel id="paperDrawerPanel" responsive-width="599px">
       <!-- Drawer Scroll Header Panel -->
-      <paper-scroll-header-panel class="drawer" drawer fixed>
+      <paper-scroll-header-panel class="Drawer" drawer fixed>
         <!-- Drawer Toolbar -->
-        <paper-toolbar class="drawer__header">
-          <span class="drawer__title">Menu</span>
+        <paper-toolbar class="Drawer-header">
+          <span class="Drawer-title">Menu</span>
         </paper-toolbar>
 
         <!-- Drawer Content -->
         <!-- Navigation -->
         <nav>
-        <paper-menu class="drawer__widget navigation list" attr-for-selected="data-route" selected="[[route]]">
-          <a class="navigation__link" data-route="home" href="/" on-click="onDataRouteClick">
-            <iron-icon class="navigation__icon" icon="home"></iron-icon>
+        <paper-menu class="Drawer-widget Navigation list" attr-for-selected="data-route" selected="[[route]]">
+          <a class="Navigation-link" data-route="home" href="/" on-click="onDataRouteClick">
+            <iron-icon class="Navigation-icon" icon="home"></iron-icon>
             <span>Home</span>
           </a>
 
-          <a class="navigation__link" data-route="users" href="/users" on-click="onDataRouteClick">
-            <iron-icon class="navigation__icon" icon="info"></iron-icon>
+          <a class="Navigation-link" data-route="users" href="/users" on-click="onDataRouteClick">
+            <iron-icon class="Navigation-icon" icon="info"></iron-icon>
             <span>Users</span>
           </a>
 
-          <a class="navigation__link" data-route="contact" href="/contact" on-click="onDataRouteClick">
-            <iron-icon class="navigation__icon" icon="mail"></iron-icon>
+          <a class="Navigation-link" data-route="contact" href="/contact" on-click="onDataRouteClick">
+            <iron-icon class="Navigation-icon" icon="mail"></iron-icon>
             <span>Contact</span>
           </a>
         </paper-menu>
@@ -90,10 +90,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </paper-scroll-header-panel>
 
       <!-- Main Area -->
-      <paper-scroll-header-panel class="main" main condenses keep-condensed-header>
+      <paper-scroll-header-panel class="Main" main condenses keep-condensed-header>
 
         <!-- Main Toolbar -->
-        <paper-toolbar class="main__header tall">
+        <paper-toolbar class="Main-header tall">
           <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
           <span class="flex"></span>
 
@@ -102,22 +102,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <paper-icon-button icon="search"></paper-icon-button>
 
           <!-- Application name -->
-          <div class="middle center horizontal layout">
-            <h1 class="main__title">Polymer Starter Kit Plus</h1>
+          <div class="Main-headerMiddleContent middle center horizontal layout">
+            <h1 class="Main-headerTitle">Polymer Starter Kit Plus</h1>
           </div>
 
           <!-- Application sub title -->
-          <div class="bottom center horizontal layout">
-            <div class="main__sub-title">The future of the web today</div>
+          <div class="Main-headerBottomContent bottom center horizontal layout">
+            <div class="Main-headerSubTitle">The future of the web today</div>
           </div>
 
         </paper-toolbar>
 
         <!-- Main Content -->
-        <iron-pages class="main__content" attr-for-selected="data-route" selected="{{route}}">
+        <iron-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}">
 
-          <section class="page" data-route="home">
-            <paper-material class="page__paper" elevation="1">
+          <section class="Page" data-route="home">
+            <paper-material class="Page-paper" elevation="1">
               <my-greeting></my-greeting>
 
               <p class="paper-font-subhead">You now have:</p>
@@ -125,11 +125,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
               <p class="paper-font-body2">Looking for more Web App layouts? Check out our <a href="https://github.com/PolymerElements/app-layout-templates">layouts</a> collection. You can also <a href="http://polymerelements.github.io/app-layout-templates/">preview</a> them live.</p>
             </paper-material>
-            <paper-material class="page__paper" elevation="1">
+            <paper-material class="Page-paper" elevation="1">
               <p class="paper-font-body2">This is another card.</p>
             </paper-material>
 
-            <paper-material class="page__paper" elevation="1">
+            <paper-material class="Page-paper" elevation="1">
               <h2 id="license">License</h2>
               <p>Everything in this repo is BSD style license unless otherwise specified.</p>
               <p>Copyright (c) 2015 The Polymer Authors. All rights reserved.</p>
@@ -149,26 +149,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </paper-material>
           </section>
 
-          <section class="page" data-route="users">
-            <paper-material class="page__paper" elevation="1">
-              <h2 class="page__title">Users</h2>
+          <section class="Page" data-route="users">
+            <paper-material class="Page-paper" elevation="1">
+              <h2 class="Page-title">Users</h2>
               <p>This is the users section</p>
               <a href="/users/Rob">Rob</a>
             </paper-material>
           </section>
 
-          <section class="page" data-route="user-info">
-            <paper-material class="page__paper" elevation="1">
-              <h2 class="page__title">
+          <section class="Page" data-route="user-info">
+            <paper-material class="Page-paper" elevation="1">
+              <h2 class="Page-title">
                 User:<span>{{params.name}}</span>
               </h2>
               <div>This is <span>{{params.name}}</span>'s section</div>
             </paper-material>
           </section>
 
-          <section class="page" data-route="contact">
-            <paper-material class="page__paper" elevation="1">
-              <h2 class="page__title">Contact</h2>
+          <section class="Page" data-route="contact">
+            <paper-material class="Page-paper" elevation="1">
+              <h2 class="Page-title">Contact</h2>
               <p>This is the contact section</p>
             </paper-material>
           </section>

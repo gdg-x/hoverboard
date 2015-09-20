@@ -1,0 +1,52 @@
+/*
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/
+
+/** @define Main */
+
+.Main {
+  background: var(--primary-background-color);
+
+  @nest &-content {
+    color: var(--primary-text-color);
+    @apply(--paper-font-body);
+    @media (--md-viewport) {
+      @apply(--paper-font-body2);
+      padding: 48px 62px;
+    }
+  }
+
+  @nest &-headerMiddleContent  {
+    height: 100%;
+    margin-left: 48px;
+  }
+
+  @nest &-header:not(.tall) &-headerMiddleContent {
+    font-size: 18px;
+    padding-bottom: 0;
+  }
+
+  @nest &-headerBottomContent {
+    margin-left: 48px;
+    /* Required for main area's paper-scroll-header-panel custom condensing transformation */
+    transform-origin: left center;
+  }
+
+  @nest &-headerTitle {
+    @apply(--paper-font-headline);
+    /* Required for main area's paper-scroll-header-panel custom condensing transformation */
+    transform-origin: left center;
+    @media (--md-viewport) {
+      @apply(--paper-font-display2);
+    }
+  }
+
+  @nest &-headerSubTitle {
+    @apply(--paper-font-subhead);
+  }
+}

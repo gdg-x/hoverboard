@@ -12,7 +12,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 // Include Gulp & tools we'll use
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
-var autoprefixer = require('autoprefixer');
 var del = require('del');
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
@@ -25,51 +24,11 @@ var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
 var config = require('./config');
-var stylelint = require('stylelint');
-var reporter = require('postcss-reporter');
 
 // Get a task path
 function task(filename) {
   return './tasks/' + filename;
 }
-
-// Lint and automatically prefix stylesheets
-gulp.task('styles', function () {
-  var themes = gulp.src([
-      'app/themes/**/*.html'
-    ])
-    .pipe($.changed('dist/themes'))
-    .pipe($.htmlPostcss([
-      stylelint(config.stylelint),
-      autoprefixer(config.autoprefixer),
-      reporter({
-        clearMessages: true
-      })
-    ]))
-    .pipe(gulp.dest('.tmp/themes'))
-    .pipe(gulp.dest('dist/themes'))
-    .pipe($.size({title: 'dist/themes'}));
-
-  var elements = gulp.src([
-      'app/elements/**/*.html',
-      '!app/elements/elements.html',
-      '!app/elements/routing.html',
-      '!app/elements/custom-icons/*.html'
-    ])
-    .pipe($.changed('dist/elements'))
-    .pipe($.htmlPostcss([
-      stylelint(config.stylelint),
-      autoprefixer(config.autoprefixer),
-      reporter({
-        clearMessages: true
-      })
-    ]))
-    .pipe(gulp.dest('.tmp/elements'))
-    .pipe(gulp.dest('dist/elements'))
-    .pipe($.size({title: 'dist/elements'}));
-
-    return merge(themes, elements);
-});
 
 // Lint JavaScript
 gulp.task('jshint', function () {
@@ -115,12 +74,8 @@ gulp.task('copy', function () {
 
   var elements = gulp.src([
     'app/elements/elements.html',
-    'app/elements/routing.html',
-    'app/elements/custom-icons'
+    'app/elements/routing.html'
   ]).pipe(gulp.dest('dist/elements'));
-
-  var icons = gulp.src(['app/elements/custom-icons/**/*'])
-    .pipe(gulp.dest('dist/elements/custom-icons'));
 
   var scripts = gulp.src(['app/scripts/analytics.js'])
     .pipe(gulp.dest('dist/scripts'));
@@ -135,7 +90,7 @@ gulp.task('copy', function () {
     .pipe($.rename('elements.vulcanized.html'))
     .pipe(gulp.dest('dist/elements'));
 
-  return merge(app, bower, elements, icons, scripts, swBootstrap, swToolbox, vulcanized)
+  return merge(app, bower, elements, scripts, swBootstrap, swToolbox, vulcanized)
     .pipe($.size({title: 'copy'}));
 });
 
@@ -319,6 +274,9 @@ gulp.task('revision', require(task('revision'))($, gulp));
 
 // Build and serve the output from the dist build with GAE tool
 gulp.task('serve:gae', ['default'], require(task('serve-gae'))($, gulp));
+
+// Transform styles with PostCSS
+gulp.task('styles', require(task('styles'))($, config, gulp, merge));
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
