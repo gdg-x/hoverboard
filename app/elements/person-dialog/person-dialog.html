@@ -7,6 +7,9 @@
                 z-index: 9;
                 height: 100%;
                 --paper-card: #fff;
+                --paper-icon-button: {
+                    color: var(--primary-text-color);
+                };
             }
 
             paper-scroll-header-panel {
@@ -152,7 +155,7 @@
                         <div class="align-pb-block">
                             <template is="dom-repeat" items="[[person.socials]]" as="social">
                                 <a href="[[social.link]]" target="_blank">
-                                    <paper-button class="colorful">[[social.name]]</paper-button>
+                                    <paper-icon-button icon="[[social.icon]]"></paper-icon-button>
                                 </a>
                             </template>
                         </div>
@@ -200,7 +203,7 @@
                     <div class="align-pb-block">
                         <template is="dom-repeat" items="[[person.socials]]" as="social">
                             <a href="[[social.link]]" target="_blank">
-                                <paper-button class="colorful">[[social.name]]</paper-button>
+                                <paper-icon-button icon="[[social.icon]]"></paper-icon-button>
                             </a>
                         </template>
                     </div>

@@ -1,0 +1,48 @@
+<dom-module id="app-data">
+    <template>
+        <iron-ajax auto url="[[speakersSource]]" handle-as="json" last-response="{{speakers}}"></iron-ajax>
+        <iron-ajax auto url="[[sessionsSource]]" handle-as="json" last-response="{{sessions}}"></iron-ajax>
+        <iron-ajax auto url="[[postsSource]]" handle-as="json" last-response="{{posts}}"></iron-ajax>
+        <iron-ajax auto url="[[partnersSource]]" handle-as="json" last-response="{{partners}}"></iron-ajax>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: 'app-data',
+        properties: {
+            speakersSource: {
+                type: String,
+                value: '../../data/speakers.json'
+            },
+            sessionsSource: {
+                type: String,
+                value: '../../data/sessions.json'
+            },
+            postsSource: {
+                type: String,
+                value: '../../data/blog.json'
+            },
+            partnersSource: {
+                type: String,
+                value: '../../data/partners.json'
+            },
+            speakers: {
+                type: Array,
+                notify: true
+            },
+            sessions: {
+                type: Array,
+                notify: true
+            },
+            posts: {
+                type: Array,
+                notify: true
+            },
+            partners: {
+                type: Array,
+                notify: true
+            }
+        }
+    });
+</script>

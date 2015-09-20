@@ -30,10 +30,10 @@
     </style>
     <template>
         <span class="post-meta">
-            <a href="{{canonicalUrl}}/{{author}}" target="_blank">
-                <span>{{sign}}</span><span>{{author}}</span>
+            <a href="[[canonicalUrl]]/[[author]]" target="_blank">
+                <span>[[sign]]</span><span>[[author]]</span>
             </a>
-            <time is="time-ago" datetime="{{when}}"></time>
+            <time is="time-ago" datetime="[[when]]"></time>
         </span>
         <span id="postContent" class="post-content"></span>
     </template>
@@ -46,14 +46,16 @@
         is: 'social-post',
         properties: {
             author: {
-                type: String
+                type: String,
+                value: 'GDGLviv'
             },
             url: {
                 type: String
             },
             text: {
                 type: String,
-                observer: '_textChanged'
+                observer: '_textChanged',
+                value: 'Tweet us about your experience at GDG DevFest Ukraine 2015'
             },
             when: {
                 type: Date
