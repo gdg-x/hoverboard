@@ -11,7 +11,6 @@
     "gulp-cache": "^0.2.8",
     "gulp-changed": "^1.0.0",
     "gulp-crisper": "0.0.5",
-    "gulp-cssmin": "^0.1.7",
     "gulp-download": "0.0.1",
     "gulp-google-webfonts": "0.0.6",
     "gulp-html-postcss": "^6.0.1",

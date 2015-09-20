@@ -111,9 +111,6 @@ gulp.task('html', function () {
     .pipe(assets)
     // Concatenate and minify JavaScript
     .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
-    // Concatenate and minify styles
-    // In case you are still using useref build blocks
-    .pipe($.if('*.css', $.cssmin()))
     .pipe(assets.restore())
     .pipe($.useref())
     // Minify any HTML
