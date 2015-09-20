@@ -133,6 +133,7 @@ gulp.task('html', function () {
 // scripts and CSS for you.
 gulp.task('vulcanize', function () {
   return gulp.src('dist/elements/elements.vulcanized.html')
+    .pipe($.plumber())
     .pipe($.vulcanize({
       stripComments: true,
       inlineCss: true,
