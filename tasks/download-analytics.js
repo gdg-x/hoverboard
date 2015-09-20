@@ -5,5 +5,5 @@
 module.exports = function ($, gulp) { return function () {
   return $.download('https://www.google-analytics.com/analytics.js')
     .pipe(gulp.dest('app/scripts'))
-    .pipe($.size({title: 'app/scripts/analytics.js'}));
+    .pipe($.size({title: 'Copy downloaded analytics.js file to app/scripts dir:'}));
 };};
