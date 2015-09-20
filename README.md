@@ -17,16 +17,21 @@
 - [Polymer](http://polymer-project.org), [Paper](https://elements.polymer-project.org/browse?package=paper-elements), [Iron](https://elements.polymer-project.org/browse?package=iron-elements), [Neon](https://elements.polymer-project.org/browse?package=neon-elements) and
 [Start](https://github.com/StartPolymer/start-elements) elements
 - Offline setup through [Platinum](https://elements.polymer-project.org/browse?package=platinum-elements) - [Service Worker](http://www.html5rocks.com/en/tutorials/service-worker/introduction/) elements
-- [Default Theme](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/themes/default-theme) based on [BEM Methodology](http://getbem.com) and inspired by [Material Design Lite](http://www.getmdl.io)
+- [Default Theme](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/themes/default-theme) following [SUIT CSS](https://suitcss.github.io) - styling methodology for component-based UI development
  - [Custom Fonts list](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/themes/default-theme/fonts.list)
- for local fonts from [Google Fonts](https://www.google.com/fonts)
+ for download fonts from [Google Fonts](https://www.google.com/fonts)
  - [Custom Icons element](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/icons.html) for [Material Design Icons](https://materialdesignicons.com)
  - [Variables](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/variables.html) including [Material Design Colors](https://www.google.com/design/spec/style/color.html) - [Material Palette](https://www.materialpalette.com)
 - [Material Design](http://www.google.com/design/spec/material-design/introduction.html) layout
-- [PostCSS](https://github.com/postcss/postcss) for parse CSS
+- [PostCSS](https://github.com/postcss/postcss) for transforming styles with JS plugins
  - [2 times faster](https://github.com/postcss/benchmark) than [libsass](https://github.com/sass/libsass), which is written in C++
  - [Autoprefixer](https://github.com/postcss/autoprefixer) add vendor prefixes to CSS rules using values from [Can I Use](http://caniuse.com)
- - [stylelint](https://github.com/stylelint/stylelint) is modern CSS linter
+ - [CSS Custom Media Queries](https://github.com/postcss/postcss-custom-media)
+ - [CSS Nesting](https://github.com/jonathantneal/postcss-nesting)
+ - [CSS MQPacker](https://github.com/hail2u/node-css-mqpacker) - pack same CSS media query rules into one media query rule
+ - [Stylelint](https://github.com/stylelint/stylelint) - modern CSS linter
+ - [SUIT CSS linter](https://github.com/postcss/postcss-bem-linter)
+ - [PostCSS Import](https://github.com/postcss/postcss-import)
 - Routing with [Page.js](https://visionmedia.github.io/page.js/)
 - [Config file](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/config.js)
 - [Gulp tasks](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/gulp-tasks) per file
