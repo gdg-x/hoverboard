@@ -54,7 +54,7 @@ gulp.task('images', function () {
       interlaced: true
     })))
     .pipe(gulp.dest('dist/images'))
-    .pipe($.size({title: 'images'}));
+    .pipe($.size({title: 'Copy optimized images to dist/images dir:'}));
 });
 
 // Copy all files at the root level (app)
@@ -78,6 +78,9 @@ gulp.task('copy', function () {
     'app/elements/routing.html'
   ]).pipe(gulp.dest('dist/elements'));
 
+  var icons = gulp.src(['app/themes/' + config.theme + '/icons.html'])
+    .pipe(gulp.dest('dist/themes/' + config.theme));
+
   var scripts = gulp.src(['app/scripts/analytics.js'])
     .pipe(gulp.dest('dist/scripts'));
 
@@ -91,15 +94,15 @@ gulp.task('copy', function () {
     .pipe($.rename('elements.vulcanized.html'))
     .pipe(gulp.dest('dist/elements'));
 
-  return merge(app, bower, elements, scripts, swBootstrap, swToolbox, vulcanized)
-    .pipe($.size({title: 'copy'}));
+  return merge(app, bower, elements, icons, scripts, swBootstrap, swToolbox, vulcanized)
+    .pipe($.size({title: 'Copy files to dist dir:'}));
 });
 
 // Copy web fonts to dist
 gulp.task('fonts', function () {
   return gulp.src(['app/themes/' + config.theme + '/fonts/**/*.{css,woff,woff2}'])
     .pipe(gulp.dest('dist/themes/' + config.theme + '/fonts'))
-    .pipe($.size({title: 'dist/themes/' + config.theme + '/fonts'}));
+    .pipe($.size({title: 'Copy fonts to dist/themes/' + config.theme + '/fonts dir:'}));
 });
 
 // Scan your HTML for assets & optimize them
@@ -123,7 +126,7 @@ gulp.task('html', function () {
     })))
     // Output files
     .pipe(gulp.dest('dist'))
-    .pipe($.size({title: 'html'}));
+    .pipe($.size({title: 'Copy optimized html and assets files to dist dir:'}));
 });
 
 // Polybuild will take care of inlining HTML imports,
@@ -160,7 +163,7 @@ gulp.task('vulcanize', function () {
     // Minify elements.vulcanized.js
     .pipe($.if('*.js', $.uglify()))
     .pipe(gulp.dest('dist/elements'))
-    .pipe($.size({title: 'vulcanize'}));
+    .pipe($.size({title: 'Copy vulcanized elements to dist/elements dir:'}));
 });
 
 // Generate config data for the <sw-precache-cache> element.
@@ -173,7 +176,7 @@ gulp.task('cache-config', function (callback) {
     disabled: false
   };
 
-  glob('{elements,scripts,themes}/**/*.*', {cwd: dir}, function(error, files) {
+  return glob('{elements,scripts,themes}/**/*.*', {cwd: dir}, function(error, files) {
     if (error) {
       callback(error);
     } else {
