@@ -192,7 +192,7 @@ gulp.task('cache-config', function (callback) {
 
 // Clean output directory
 gulp.task('clean', function (cb) {
-  del(['.tmp', 'dist', 'deploy'], cb);
+  return del(['.tmp', 'dist', 'deploy'], cb);
 });
 
 // Watch files for changes & reload
@@ -224,8 +224,7 @@ gulp.task('serve', ['styles', 'images', 'lint'], function () {
   });
 
   gulp.watch(['app/**/*.html'], reload);
-  gulp.watch(['app/themes/**/*.{css,html}'], ['styles', reload]);
-  gulp.watch(['app/elements/**/*.css'], ['elements', reload]);
+  gulp.watch(['app/{elements,themes}/**/*.{css,html}'], ['styles', reload]);
   gulp.watch(['app/{scripts,elements}/**/{*.js,*.html}'], ['jshint']);
   gulp.watch(['app/images/**/*'], reload);
 });
