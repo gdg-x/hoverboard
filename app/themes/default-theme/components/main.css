@@ -13,8 +13,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   background: var(--primary-background-color);
 
   @nest &-content {
+    @apply(--paper-font-body1);
     color: var(--primary-text-color);
-    @apply(--paper-font-body);
     @media (--md-viewport) {
       @apply(--paper-font-body2);
       padding: 48px 62px;
