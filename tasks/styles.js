@@ -34,6 +34,8 @@ module.exports = function ($, config, gulp, merge) { return function () {
     .pipe($.plumber({
       handleError: function (error) {
         console.log(error);
+        // For gulp.watch
+        // http://blog.ibangspacebar.com/handling-errors-with-gulp-watch-and-gulp-plumber/
         this.emit('end');
       }
     }))
@@ -54,6 +56,8 @@ module.exports = function ($, config, gulp, merge) { return function () {
     .pipe($.plumber({
       handleError: function (error) {
         console.log(error);
+        // For gulp.watch
+        // http://blog.ibangspacebar.com/handling-errors-with-gulp-watch-and-gulp-plumber/
         this.emit('end');
       }
     }))
