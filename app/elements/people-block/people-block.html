@@ -142,7 +142,7 @@
                 padding: 14px 16px;
             }
 
-            @media (max-width: 767px) {
+            @media (max-width: 600px) {
                 .person-wrapper,
                 .person {
                     @apply(--layout-fit);
@@ -155,7 +155,7 @@
                 }
             }
 
-            @media (min-width: 768px) {
+            @media (min-width: 601px) {
                 .card-wrapper {
                     width: calc(100% / 3);
                 }
@@ -384,7 +384,7 @@
             this.$.personCon.style.display = 'block';
             this.cancelAnimation();
             this.playAnimation('openPerson');
-            if (screen.width > 768) {
+            if (screen.width > 601) {
                 this.playAnimation('unloadPeople');
             }
         },
@@ -395,13 +395,13 @@
             this.playAnimation('closePerson');
         },
         _onNeonAnimationFinish: function() {
-            if (this.opened && screen.width > 768) {
+            if (this.opened && screen.width > 601) {
                 this.$.people.style.display = 'none';
                 this.$.people.style.position = 'absolute';
             }
             if (!this.opened) {
                 this.$.personCon.style.display = 'none';
-                if (screen.width > 768) {
+                if (screen.width > 601) {
                     this.$.people.style.display = 'flex';
                     this.$.people.style.position = 'relative';
                 }
