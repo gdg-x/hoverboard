@@ -12,7 +12,7 @@
   {
     "id": 102,
     "title": "How can Android Backup break your app",
-    "description": "",
+    "description": "One of the most significant changes introduced in Android 6.0 is Android Backup - a standarized mechanism for backuping apps' data. However, backup is not a new concept on Android - we had third party solutions there for years. What can we learn from them? What should be your strategy for backuping data? Is your app ready to handle database migrations properly, and handle old, no-longer-supported SharedPreferences' keys?<br/><br/>Attend my talk to learn:<br/>- How Android Backup works in general<br/>- How old-fashioned backup tools broke my app in the past<br/>- How to prevent such defects in Android Backup",
     "speakers": [2],
     "language": "en",
     "complexity": "Beginner",

@@ -145,7 +145,7 @@
     "country": "Poland",
     "photoUrl": "../../images/people/mateus_herych.jpg",
     "bio": "Mateusz is an Android GDE and GDG organizer. Works as Android Developer for Base CRM where he uses his android-abracadabras to make enterprise software users more productive.",
-    "tags": ["Android"],
+    "tags": ["Android", "Backup"],
     "badges": [{
         "name": "GDE",
         "description": "Android Google Developer Expert",
