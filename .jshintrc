@@ -1,4 +1,5 @@
 {
+  "esnext": true,
   "node": true,
   "browser": true,
   "bitwise": true,

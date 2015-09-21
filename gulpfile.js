@@ -107,7 +107,7 @@ gulp.task('fonts', function () {
 
 // Scan your HTML for assets & optimize them
 gulp.task('html', function () {
-  var assets = $.useref.assets({searchPath: ['.tmp', 'app', 'dist']});
+  var assets = $.useref.assets({searchPath: ['.tmp', 'dist']});
 
   return gulp.src(['app/**/*.html', '!app/{elements,test,themes}/**/*.html'])
     // Replace path for vulcanized assets
@@ -200,7 +200,7 @@ gulp.task('clean', function (cb) {
 });
 
 // Watch files for changes & reload
-gulp.task('serve', ['styles', 'images', 'lint'], function () {
+gulp.task('serve', ['images', 'js', 'lint', 'styles'], function () {
   browserSync({
     browser: config.browserSync.browser,
     https: config.browserSync.https,
@@ -229,7 +229,7 @@ gulp.task('serve', ['styles', 'images', 'lint'], function () {
 
   gulp.watch(['app/**/*.html'], reload);
   gulp.watch(['app/{elements,themes}/**/*.{css,html}'], ['styles', reload]);
-  gulp.watch(['app/{scripts,elements}/**/{*.js,*.html}'], ['jshint']);
+  gulp.watch(['app/{scripts,elements}/**/*.{js,html}'], ['jshint', 'js']);
   gulp.watch(['app/images/**/*'], reload);
 });
 
@@ -267,11 +267,14 @@ gulp.task('download:analytics', require(task('download-analytics'))($, gulp));
 // Fix path to sw-toolbox.js
 gulp.task('fix-path-sw-toolbox', require(task('fix-path-sw-toolbox'))($, gulp));
 
-// Minify JavaScript in dist directory
-gulp.task('minify-dist', require(task('minify-dist'))($, gulp, merge));
+// Transpile all JS from ES2015 (ES6) to ES5
+gulp.task('js', require(task('js-babel'))($, gulp));
 
 // Lint CSS and JavaScript
 gulp.task('lint', require(task('lint'))($, gulp, merge));
+
+// Minify JavaScript in dist directory
+gulp.task('minify-dist', require(task('minify-dist'))($, gulp, merge));
 
 // Static asset revisioning by appending content hash to filenames
 gulp.task('revision', require(task('revision'))($, gulp));
@@ -285,7 +288,7 @@ gulp.task('styles', require(task('styles'))($, config, gulp, merge));
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
   runSequence(
-    ['copy', 'styles', 'lint'],
+    ['copy', 'styles', 'lint', 'js'],
     ['jshint', 'images', 'fonts', 'html'],
     'vulcanize',
     ['clean-dist', 'minify-dist'],

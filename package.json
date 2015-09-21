@@ -8,6 +8,7 @@
     "del": "^1.1.1",
     "glob": "^5.0.6",
     "gulp": "^3.8.5",
+    "gulp-babel": "^5.2.1",
     "gulp-cache": "^0.2.8",
     "gulp-changed": "^1.0.0",
     "gulp-crisper": "0.0.5",

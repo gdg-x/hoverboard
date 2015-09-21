@@ -11,6 +11,7 @@ module.exports = function (del) { return function (cb) {
     'dist/elements/*',
     '!dist/elements/elements.vulcanized.*',
     '!dist/elements/bootstrap',
+    'dist/scripts/**/*.map',
     'dist/themes/*/*.{html,map}',
     'dist/themes/*/fonts/fonts.css'
   ], cb);

@@ -32,6 +32,8 @@
  - [Stylelint](https://github.com/stylelint/stylelint) - modern CSS linter
  - [SUIT CSS linter](https://github.com/postcss/postcss-bem-linter)
  - [PostCSS Import](https://github.com/postcss/postcss-import)
+- [Babel](https://babeljs.io) for support [ES2015 JavaScript](https://babeljs.io/docs/learn-es2015/)
+ - [Polymer elements using the ES2015 class syntax](http://www.code-labs.io/codelabs/polymer-es2015/index.html#3)
 - Routing with [Page.js](https://visionmedia.github.io/page.js/)
 - [Config file](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/config.js)
 - [Gulp tasks](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/gulp-tasks) per file
