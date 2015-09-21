@@ -82,6 +82,9 @@
             }
 
             @media (min-width: 768px) {
+                .menu-toggle {
+                    display: none;
+                }
                 ::content .hero {
                     padding-top: 40px;
                 }
@@ -96,7 +99,7 @@
         <div id="hero">
             <div class="container flex relative">
                 <paper-toolbar>
-                    <paper-icon-button class="visible-xs" icon="menu" on-tap="togglePanel"></paper-icon-button>
+                    <paper-icon-button class="menu-toggle" icon="menu" on-tap="togglePanel"></paper-icon-button>
                     <div class="flex hidden-xs">
                         <a data-route="home" href="/" hidden="{{hideLogo}}">
                             <img class="logo" src="../../images/logo-white.svg" alt="GDG DevFest 2015">

@@ -24,6 +24,14 @@
                 margin-bottom: 15px;
             }
 
+            .sold-out > *:not(.sold-out-text) {
+                opacity: .3;
+            }
+            .sold-out-text {
+                font-size: 28px;
+                text-transform: uppercase;
+            }
+
             .currency {
                 margin-top: 21px;
                 display: inline-block;
@@ -72,11 +80,12 @@
                     <span class="additional-info block">*Before October 23 or 100 tickets.
                         <br/>Requires valid student ID</span>
                 </div>
-                <div class="price-block flex text-center">
+                <div class="price-block flex text-center relative sold-out">
                     <span class="ticket-name block">Early Bird</span>
                     <span class="price">600</span>
                     <span class="currency">UAH</span>
                     <span class="additional-info block">*Before September 27 or 150 tickets</span>
+                    <div class="fit layout vertical center-center sold-out-text"><span>Sold Out</span></div>
                 </div>
                 <div class="price-block flex text-center">
                     <span class="ticket-name block">Lazy Bird</span>
@@ -91,7 +100,7 @@
             </div>
         </div>
         <paper-dialog id="ticketsDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal>
-                <div id="2event_tickets_widget" style="width: 640px; height: 300px; background:#fff;"></div>
+            <div id="2event_tickets_widget" style="width: 640px; height: 300px; background:#fff;"></div>
             <div class="buttons">
                 <a href="http://2event.com/events/312113" target="_blank">
                     <paper-button>Buy on the website</paper-button>
