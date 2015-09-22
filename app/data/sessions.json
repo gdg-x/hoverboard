@@ -301,8 +301,8 @@
   },
   {
     "id": 131,
-    "title": "[Workshop] Dart in the Could",
-    "description": "TBD",
+    "title": "[Workshop] Your first server-side application in Dart",
+    "description": "In this session you will explore how to write your first Dart server-side application which will be later used during the Polymer workshop. Come to this workshop to try and learn Dart, have fun and see how you can write awesome applications with it. Note: please don't forget to bring your laptop with downloaded Dart and some editor/IDE with Dart support. More info: https://www.dartlang.org/downloads/.",
     "speakers": [14],
     "language": "en",
     "complexity": "Beginner",
