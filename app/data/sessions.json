@@ -291,8 +291,8 @@
   },
   {
     "id": 130,
-    "title": "[Workshop] Let's build new Polymer application in 30 minutes",
-    "description": "Polymer is a great tool for prototyping new applications. In this talk, you will see, how to build nice looking Polymer application in 30 minutes using Polymer Starter Kit and predefined set of elements and components.",
+    "title": "[Workshop] Let's build a new Polymer application",
+    "description": "Polymer is a great tool for prototyping new applications. In this workshop, you will see, how to build nice looking front-end application using Polymer Starter Kit and predefined set of elements and components. We're going to use backend API from Dart code lab. Feel free to visit both workshops, but you can also attend Dart or Polymer workshops individually. Note: please don't forget to bring your laptop and download Polymer Starter Kit https://developers.google.com/web/tools/polymer-starter-kit/",
     "speakers": [15],
     "language": "en",
     "complexity": "Beginner",
