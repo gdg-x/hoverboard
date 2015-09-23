@@ -1,8 +1,8 @@
 [
   {
     "id": 101,
-    "title": "TBD",
-    "description": "",
+    "title": "Material Design on Custom Views",
+    "description": "There are various widgets to create user interfaces in Android Framework. Using these widgets is a starting point but they are not enough to create awesome apps. Fortunately, alternative methods are here to rescue! I mean understanding and extending the View class.<br/><br/>In this presentation, I will give some Custom View examples. Some of them makes impossible things be possible and some of them increase performance.<br/><br/>I will also talk about how to apply Material Design in Custom Views with the support of older platform versions.",
     "speakers": [1],
     "language": "en",
     "complexity": "Beginner",

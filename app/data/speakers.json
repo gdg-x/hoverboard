@@ -117,7 +117,7 @@
     "country": "Turkey",
     "photoUrl": "../../images/people/said_tahsine_dane.jpg",
     "bio": "GDE (Google Developer Expert) for Android. Experience with Android (since Cupcake), Google Glass, Android Wear, and (even on!) iOS. Very passionate developer who tries to live on the bleeding edge of technology. Also very interested in mobile UX. <br/><br/>Active member and organizer at GDG Istanbul enjoying organizing various conferences and hackathons. Also a part of GDG[X] - a GDG related open-source organization.",
-    "tags": ["Android"],
+    "tags": ["Android", "Material Design"],
     "badges": [{
         "name": "GDE",
         "description": "Android Google Developer Expert",
