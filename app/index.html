@@ -9,52 +9,8 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="generator" content="Polymer Starter Kit Plus">
-  <title>Polymer Starter Kit Plus</title>
-  <!-- Place favicon.ico in the `app/` directory -->
-  <link rel="shortcut icon" href="favicon.ico">
-
-  <!-- Canonical link for single page site with more links to same content -->
-  <link rel="canonical" href="/">
-
-  <!-- Chrome for Android theme color -->
-  <meta name="theme-color" content="#2E3AA1">
-
-  <!-- Web Application Manifest -->
-  <link rel="manifest" href="manifest.json">
-
-  <!-- Tile color for Win8 -->
-  <meta name="msapplication-TileColor" content="#3372DF">
-
-  <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="application-name" content="PSK">
-  <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
-
-  <!-- Add to homescreen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
-  <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
-
-  <!-- Tile icon for Win8 (144x144) -->
-  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-
-  <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
-  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-  <!-- endbuild -->
-
-  <!-- will be replaced with elements/elements.vulcanized.html -->
-  <link rel="import" href="elements/elements.html">
-  <!-- endreplace -->
-</head>
-
+<html lang="{$ lang $}">
+{% include "head.html" %}
 <body unresolved class="fullbleed vertical layout">
   <span id="browser-sync-binding"></span>
   <template is="dom-bind" id="app">
@@ -130,22 +86,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             </paper-material>
 
             <paper-material class="Page-paper" elevation="1">
-              <h2 id="license">License</h2>
-              <p>Everything in this repo is BSD style license unless otherwise specified.</p>
-              <p>Copyright (c) 2015 The Polymer Authors. All rights reserved.</p>
-              <p>Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:</p>
-              <ul>
-              <li>Redistributions of source code must retain the above copyright
-              notice, this list of conditions and the following disclaimer.</li>
-              <li>Redistributions in binary form must reproduce the above
-              copyright notice, this list of conditions and the following disclaimer
-              in the documentation and/or other materials provided with the
-              distribution.</li>
-              <li>Neither the name of Google Inc. nor the names of its
-              contributors may be used to endorse or promote products derived from
-              this software without specific prior written permission.</li>
-              </ul>
-              <p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+              {% markdown "license.md" %}
             </paper-material>
           </section>
 

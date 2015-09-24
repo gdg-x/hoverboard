@@ -61,8 +61,11 @@ gulp.task('images', function () {
 gulp.task('copy', function () {
   var app = gulp.src([
     'app/*',
+    '!app/cache-config.json',
+    '!app/content',
+    '!app/manifest.json',
     '!app/test',
-    '!app/cache-config.json'
+    '!app/views'
   ], {
     dot: true
   }).pipe(gulp.dest('dist'));
@@ -106,10 +109,10 @@ gulp.task('fonts', function () {
 });
 
 // Scan your HTML for assets & optimize them
-gulp.task('html', function () {
+gulp.task('html', ['views'], function () {
   var assets = $.useref.assets({searchPath: ['.tmp', 'dist']});
 
-  return gulp.src(['app/**/*.html', '!app/{elements,test,themes}/**/*.html'])
+  return gulp.src(['app/*.html', '.tmp/*.html'])
     // Replace path for vulcanized assets
     .pipe($.if('*.html', $.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
     .pipe(assets)
@@ -200,7 +203,7 @@ gulp.task('clean', function (cb) {
 });
 
 // Watch files for changes & reload
-gulp.task('serve', ['images', 'js', 'lint', 'styles'], function () {
+gulp.task('serve', ['images', 'js', 'lint', 'manifest', 'styles', 'views'], function () {
   browserSync({
     browser: config.browserSync.browser,
     https: config.browserSync.https,
@@ -227,7 +230,11 @@ gulp.task('serve', ['images', 'js', 'lint', 'styles'], function () {
     }
   });
 
-  gulp.watch(['app/**/*.html'], reload);
+  gulp.watch([
+    'app/*.html',
+    'app/views/**/*.html',
+    'app/content/**/*.md'
+  ], ['views', reload]);
   gulp.watch(['app/{elements,themes}/**/*.{css,html}'], ['styles', reload]);
   gulp.watch(['app/{scripts,elements}/**/*.{js,html}'], ['jshint', 'js']);
   gulp.watch(['app/images/**/*'], reload);
@@ -273,6 +280,9 @@ gulp.task('js', require(task('js-babel'))($, gulp));
 // Lint CSS and JavaScript
 gulp.task('lint', require(task('lint'))($, gulp, merge));
 
+// Add colors to Web Application Manifest - manifest.json
+gulp.task('manifest', require(task('manifest'))($, config, gulp));
+
 // Minify JavaScript in dist directory
 gulp.task('minify-dist', require(task('minify-dist'))($, gulp, merge));
 
@@ -285,10 +295,13 @@ gulp.task('serve:gae', ['default'], require(task('serve-gae'))($, gulp));
 // Transform styles with PostCSS
 gulp.task('styles', require(task('styles'))($, config, gulp, merge));
 
+// Compile HTML files with Nunjucks templating engine
+gulp.task('views', require(task('views-nunjucks'))($, config, gulp));
+
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
   runSequence(
-    ['copy', 'styles', 'lint', 'js'],
+    ['copy', 'styles', 'lint', 'js', 'manifest'],
     ['jshint', 'images', 'fonts', 'html'],
     'vulcanize',
     ['clean-dist', 'minify-dist'],

@@ -8,7 +8,9 @@
 
 > A starting point for building web applications with Polymer 1.x
 
-> Polymer Starter Kit Plus is keeping up to date with [Polymer Starter Kit](https://github.com/PolymerElements/polymer-starter-kit)
+> Polymer Starter Kit Plus is keeping up to date with
+[Polymer Starter Kit](https://github.com/PolymerElements/polymer-starter-kit) and following
+[The 10 Commandments of Modern Web Application](https://gist.github.com/JosefJezek/8020bd8f02c4992e7d7d)
 
 :sparkles: [DEMO](https://polymer-starter-kit-plus.appspot.com) :sparkles:
 
@@ -21,7 +23,9 @@
  - [Custom Fonts list](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/themes/default-theme/fonts.list)
  for download fonts from [Google Fonts](https://www.google.com/fonts)
  - [Custom Icons element](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/icons.html) for [Material Design Icons](https://materialdesignicons.com)
- - [Variables](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/variables.html) including [Material Design Colors](https://www.google.com/design/spec/style/color.html) - [Material Palette](https://www.materialpalette.com)
+ - CSS [Variables](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/variables.css) including [Material Design Colors](https://www.google.com/design/spec/style/color.html) - [Material Palette](https://www.materialpalette.com)
+ - [Variables](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/variables.js)
+ for colors from index.html and manifest.json
 - [Material Design](http://www.google.com/design/spec/material-design/introduction.html) layout
 - [PostCSS](https://github.com/postcss/postcss) for transforming styles with JS plugins
  - [2 times faster](https://github.com/postcss/benchmark) than [libsass](https://github.com/sass/libsass), which is written in C++
@@ -34,6 +38,9 @@
  - [PostCSS Import](https://github.com/postcss/postcss-import)
 - [Babel](https://babeljs.io) for support [ES2015 JavaScript](https://babeljs.io/docs/learn-es2015/)
  - [Polymer elements using the ES2015 class syntax](http://www.code-labs.io/codelabs/polymer-es2015/index.html#3)
+- [Nunjucks](https://mozilla.github.io/nunjucks/) templating engine for server-side
+ - [Metadata](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/metadata.js) at one place
+ - [Markdown](http://commonmark.org) for [static content](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/content)
 - Routing with [Page.js](https://visionmedia.github.io/page.js/)
 - [Config file](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/config.js)
 - [Gulp tasks](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/gulp-tasks) per file
