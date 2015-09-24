@@ -114,5 +114,9 @@
         "name": "Be Sparkle",
         "url": "http://be-sparkle.com/",
         "logoUrl": "../images/partners/be-sparkle.png"
+    }, {
+        "name": "ITEA",
+        "url": "http://itea.ua/",
+        "logoUrl": "../images/partners/itea.png"
     }]
 }]
