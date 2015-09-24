@@ -35,6 +35,13 @@
         "logoUrl": "../images/partners/nic.png"
     }]
 }, {
+    "title": "Hosting partner",
+    "logos": [{
+        "name": "ibis",
+        "url": "http://www.ibisstyles.com/",
+        "logoUrl": "../images/partners/ibis.png"
+    }]
+}, {
     "title": "General partner",
     "logos": [{
         "name": "Lviv IT Cluster",
@@ -99,5 +106,9 @@
         "name": "LvivOnline",
         "url": "http://lviv-online.com/",
         "logoUrl": "../images/partners/lvivonline.png"
+    }, {
+        "name": "Startup Depot",
+        "url": "http://startupdepot.lviv.ua/en/",
+        "logoUrl": "../images/partners/startup-depot.png"
     }]
 }]
