@@ -110,5 +110,9 @@
         "name": "Startup Depot",
         "url": "http://startupdepot.lviv.ua/en/",
         "logoUrl": "../images/partners/startup-depot.png"
+    }, {
+        "name": "Be Sparkle",
+        "url": "http://be-sparkle.com/",
+        "logoUrl": "../images/partners/be-sparkle.png"
     }]
 }]
