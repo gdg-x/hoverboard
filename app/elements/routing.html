@@ -65,6 +65,12 @@
             app.scrollToTop();
         });
 
+        page('/speaker-guidelines', function() {
+            trackPageview('/speaker-guidelines');
+            app.route = 'speaker-guidelines';
+            app.scrollToTop();
+        });
+
         page({
             hashbang: true
         });
