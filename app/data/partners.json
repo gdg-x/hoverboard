@@ -28,11 +28,15 @@
         "logoUrl": "../images/partners/eleks.svg"
     }]
 }, {
-    "title": "Gifts sponsor",
+    "title": "Gift sponsors",
     "logos": [{
         "name": "Nic.ua",
         "url": "http://nic.ua/",
         "logoUrl": "../images/partners/nic.png"
+    },{
+        "name": "JetBrains",
+        "url": "https://www.jetbrains.com/",
+        "logoUrl": "../images/partners/jetbrains.svg"
     }]
 }, {
     "title": "Hosting partner",
