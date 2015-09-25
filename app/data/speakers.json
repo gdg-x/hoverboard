@@ -19,7 +19,7 @@
     "country": "UK",
     "photoUrl": "../../images/people/mandy_waite.jpg",
     "bio": "Based in London, UK, Mandy is a Developer Relations Engineer at Google specializing in Container and Cloud technologies and working to make the world a better place for developers building applications for the Cloud. Before Google Mandy worked at Sun Microsystems on performance and scalability of Java and JavaEE and on porting Open Source apps to OpenSolaris. In her spare time Mandy is learning Japanese and likes to play the guitar.",
-    "tags": ["Cloud", "AppEngine", "gRPC", "Kubernetes"],
+    "tags": ["Cloud", "Firebase", "gRPC", "Kubernetes", "Docker"],
     "socials": [{
         "name": "Google+",
         "link": "https://plus.google.com/+MandyWaite"

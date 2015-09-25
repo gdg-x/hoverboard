@@ -91,8 +91,8 @@
   },
   {
     "id": 110,
-    "title": "Redefining PaaS: Managed container based apps on Google App Engine",
-    "description": "Are you building the next big idea?  Are you part of a team that is focused on streamlined dev/test/production deployments?  Are you a bit more “dev” than “ops”?  If so, be sure to come by and check out this talk that focuses on maximizing developer productivity through the use of microservice based architectures and container technology in conjunction with Google App Engine. <br/><br/>We'll look at new and enhanced features of App Engine and walk through the staged deployment of both a simple application and a more complicated microservices based architecture. We'll also look at how App Engine has evolved from it's original sandboxed runtime environment to what it is today, a next generation platform for building and deploying modern day applications.",
+    "title": "Google Cloud Platform End to End: How we built 'Cloud Spin'",
+    "description": "The Cloud is useful for a lot of cool things, well how about taking 19 smartphones and wiring them together in order to take 3D pictures of people doing crazy stuff at events? Guess what? that's exactly what we did! Our only limitation was that being Google we had to use Google Cloud Platform and it turns out that that's not much of a limitation at all. <br/><br/>This talk looks at how we built the backend and analyzes the design choices that we made when it comes to endpoints, messaging, storage, scalability, Docker, Firebase and process pipelines. Best of all it answers the question: How do you wire up 19 smartphones to the Cloud and use them to create 3D pictures?",
     "speakers": [9],
     "language": "en",
     "complexity": "Beginner",
