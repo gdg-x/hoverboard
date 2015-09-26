@@ -202,7 +202,7 @@
   {
     "id": 121,
     "title": "[Workshop] Getting started with Firebase",
-    "description": "TBD",
+    "description": "In this workshop you will learn how to use Firebase to empower your web applications using all features provided by Firebase like realtime database, authentication, hosting and much more.",
     "speakers": [19],
     "language": "en",
     "complexity": "Intermediate",
