@@ -241,7 +241,7 @@
   },
   {
     "id": 125,
-    "title": "Keynote",
+    "title": "[Keynote] Lean Startup with Google",
     "description": "TBD",
     "speakers": [23],
     "language": "en",
@@ -251,7 +251,7 @@
   },
   {
     "id": 126,
-    "title": "Google Solve for X comes in Ukraine",
+    "title": "Google Solve for X comes to Ukraine",
     "description": "TBD",
     "speakers": [24],
     "language": "uk",
@@ -318,6 +318,35 @@
     "complexity": "Beginner",
     "presentation": "",
     "video": ""
+  },
+  {
+    "id": 133,
+    "title": "RxJava for Android",
+    "description": "Does Android Studio support Java 8 features? And Android Tools Developer Leaders say this will not be added to Studio at least nearest year. Seems it's not a problem for developers who want to write in functional style right now!<br/><br/>Today we'll talk about reactive functional programming for Android. We'll look how to change your code with RxJava to write flexible, resilient, asynchronous applications despite limitations of Java 7.<br/><br/>We'll look at examples of async and blocking observables, filtering, mapping, math operations, retrieving observables from network calls and applying schedulers for our reactive computations. And of course, some examples of live code :)",
+    "speakers": [28],
+    "language": "uk",
+    "complexity": "Beginner",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 134,
+    "title": "Data Binding. Next big thing?",
+    "description": "What Android Data Binding is? How it will change Android development? And the main question - will it be the next big thing or just yet another framework? Lets try to find out answers to all these questions and take a closer look to Data Binding.",
+    "speakers": [29],
+    "language": "uk",
+    "complexity": "Intermediate",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 135,
+    "title": "The Cloud Convergence: OpenStack and Kubernetes",
+    "description": "The new cloud era brings us a lot of different technologies and products that can make process of development easier. <br/><br/>On the one hand we have OpenStack - an Open Source product that provides you a possibility to deploy your own cloud. On the other hand - Google, with its extensive experience operating a cloud using container technology, developed the open source Kubernetes orchestration system to manage containerized applications in a clustered environment.<br/><br/>This presentation will show you how to manage Containers easily using Kubernetes system on the OpenStack cloud environment.",
+    "speakers": [30],
+    "language": "uk",
+    "complexity": "Beginner",
+    "presentation": "",
+    "video": ""
   }
-
 ]
