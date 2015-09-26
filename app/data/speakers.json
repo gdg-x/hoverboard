@@ -19,7 +19,7 @@
     "country": "UK",
     "photoUrl": "../../images/people/mandy_waite.jpg",
     "bio": "Based in London, UK, Mandy is a Developer Relations Engineer at Google specializing in Container and Cloud technologies and working to make the world a better place for developers building applications for the Cloud. Before Google Mandy worked at Sun Microsystems on performance and scalability of Java and JavaEE and on porting Open Source apps to OpenSolaris. In her spare time Mandy is learning Japanese and likes to play the guitar.",
-    "tags": ["Cloud", "AppEngine", "gRPC", "Kubernetes"],
+    "tags": ["Cloud", "Firebase", "gRPC", "Kubernetes", "Docker"],
     "socials": [{
         "name": "Google+",
         "link": "https://plus.google.com/+MandyWaite"
@@ -145,7 +145,7 @@
     "country": "Poland",
     "photoUrl": "../../images/people/mateus_herych.jpg",
     "bio": "Mateusz is an Android GDE and GDG organizer. Works as Android Developer for Base CRM where he uses his android-abracadabras to make enterprise software users more productive.",
-    "tags": ["Android", "Backup"],
+    "tags": ["Android", "Android M", "Backup"],
     "badges": [{
         "name": "GDE",
         "description": "Android Google Developer Expert",
@@ -325,7 +325,7 @@
     "country": "Ukraine",
     "photoUrl": "../../images/people/roman_herasymenko.jpg",
     "bio": "Roman is Senior Android developer at Yatlantis and a co-organizer of GDG Dnipropetrovsk. Roman is interesting in software development for cutting edge technologies and devices like Google Glass and Android Wear.",
-    "tags": ["Android"],
+    "tags": ["Android", "Android M"],
     "badges": [{
         "name": "GDE",
         "description": "Android Google Developer Expert",
@@ -390,8 +390,8 @@
     "company": "SoftServe",
     "country": "Ukraine",
     "photoUrl": "../../images/people/kseniia_shumelchyk.jpg",
-    "bio": "Kseniia is working as a software developer at SoftServe. For two years she is leader of GDG Women Ukraine and GDG Dnipropetrovsk. Kseniia actively participates in GDG events, techtalks and conferences devoted to software development and so on. Regularly she shares among girls an overview about different programs, grants available for women in IT and her own experience being involved in some of these programs. Developer of several open-source projects during Google Summer of Code program. Participant of TechTalk with global Women Techmakers community.",
-    "tags": ["Android", "BLE"],
+    "bio": "Kseniia is working as software developer at SoftServe as well she has an experience of working on open-source project during Google Summer of Code. Kseniia is leading Women Techmakers Ukraine and GDG Dnipropetrovsk communities for 3 years. She participated in number of international conferences: GOTO Aarhus, Google I/O and GDG Leaders Summit and was a speaker at Droidcon Berlin, Women Techmakers Istanbul, GDG DevFest Ukraine and Women Techmakers Global TechTalk. This year Kseniia was selected as Anita Borg Scholar Receipient that aimed to support women with outstanding results in Computer Science. Kseniia is a big fan of innovative technologies in education and software development. She is creator of Android application for Women Techmakers Community.",
+    "tags": ["Android", "BLE", "Community"],
     "badges": [{
         "name": "GDG",
         "description": "Google Developers Group Dnipropetrovsk",
@@ -579,5 +579,66 @@
     }, {
         "name": "LinkedIn",
         "link": "https://ua.linkedin.com/pub/tetiana-protasova/22/8a/a98"
+    }]
+}, {
+    "id": 28,
+    "name": "Constantine Mars",
+    "title": "Senior Android Developer",
+    "company": "DataArt",
+    "country": "Ukraine",
+    "photoUrl": "../../images/people/constantine_mars.png",
+    "bio": "Constantine is a Senior Mobile Developer at DataArt, GDG Dnipropetrovs'k Organizer and Java User Group Dnipro Organizer. <br/><br/>He is developing apps for both Android and iOS platfroms, but prefer to talk about Android innovations and Java language features. The last areas of his interest are Reactive Functional Programming, Ubiquitous Computing (especially AndroidWear) and GoogleFit.",
+    "badges": [{
+        "name": "GDG",
+        "description": "Google Developers Group Dnipropetrovs'k",
+        "link": "https://developers.google.com/groups/chapter/116033068768596939209/"
+    }],
+    "tags": ["Android", "RxJava"],
+    "socials": [{
+        "name": "Google+",
+        "link": "https://plus.google.com/u/0/+ConstantineMars"
+    }, {
+        "name": "Facebook",
+        "link": "https://www.facebook.com/constantine.mars"
+    }]
+}, {
+    "id": 29,
+    "name": "Anton Minashkin",
+    "title": "Android Developer",
+    "company": "GlobalLogic",
+    "country": "Ukraine",
+    "photoUrl": "../../images/people/anton_minashkin.jpg",
+    "bio": "Anton is an Android developer at GlobalLogic. He has experience in both, server and mobile side development. He is a speaker at UA-Mobile, GDG Kyiv Android and several other events. Also he is co-founder of GDG Kremenchuk and Kremenchuk IT Community.",
+    "badges": [{
+        "name": "GDG",
+        "description": "Google Developers Group Kremenchuk",
+        "link": "https://developers.google.com/groups/chapter/107464569258887658610/"
+    }],
+    "tags": ["Android", "Android M", "Data Binding"],
+    "socials": [{
+        "name": "LinkedIn",
+        "link": "https://www.linkedin.com/profile/view?id=178701990"
+    }, {
+        "name": "Facebook",
+        "link": "https://www.facebook.com/anton.minashkin.1"
+    }]
+}, {
+    "id": 30,
+    "name": "Ihor Dvoretskyi",
+    "title": "Operation Engineer",
+    "company": "Mirantis Inc.",
+    "country": "Ukraine",
+    "photoUrl": "../../images/people/ihor_dvoretskyi.jpg",
+    "bio": "Ihor is an Operations Engineer at Mirantis Inc - the #1 Pure Play OpenStack Company, with a huge experience working in IT companies, where he was responsible for a couple of projects, tightly bound to Cloud computing and *nix systems. Ihor is deeply interested in OpenStack cloud platform, other Cloud technologies and Open Source projects. Also, Ihor is a big fan of Google and Google products.<br/><br/>Apart from work, Ihor is also interested in other branches of IT technology and starts diving into Robotics.",
+    "tags": ["Cloud", "Kubernetes", "Docker"],
+    "socials": [{
+        "name": "Google+",
+        "link": "https://plus.google.com/+IgorDvoretskyi/"
+    },{
+        "name": "LinkedIn",
+        "link": "https://ua.linkedin.com/in/idvoretskyi"
+    }, {
+        "name": "Twitter",
+        "link": "https://twitter.com/idvoretskyi"
     }]
 }]
