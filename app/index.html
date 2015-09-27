@@ -77,6 +77,7 @@
                 <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
                     <a data-route="#!/home" href="/">Home</a>
                     <a data-route="#!/blog" href="/blog">Blog</a>
+                    <a data-route="#!/schedule" href="/schedule">Schedule</a>
                     <a data-route="#!/speakers" href="/speakers">Speakers</a>
                     <!-- <a data-route="contact" href="/contact">Contact</a> -->
                 </paper-menu>
@@ -142,6 +143,18 @@
                                 </div>
                             </hero-block>
                             <blog-block id="blog" class="container-atop" source="../../data/blog.json"></blog-block>
+                            <footer-block></footer-block>
+                        </section>
+                        <section data-route="schedule">
+                            <hero-block class="section-shadow container-before-atop" style="background: #00BCD4; color: #fff;">
+                                <div class="top-section">
+                                    <div class="title-wrapper layout horizontal">
+                                        <h3 class="self-end">Schedule</h3>
+                                    </div>
+                                    <!-- <paper-fab class="section-fab-right" icon="social:share"></paper-fab> -->
+                                </div>
+                            </hero-block>
+                            <schedule-block id="schedule-block" class="container-atop" source="data/speakers.json" sessions-source="data/sessions.json"></schedule-block>
                             <footer-block></footer-block>
                         </section>
                         <section data-route="speakers">
