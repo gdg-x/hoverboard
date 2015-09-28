@@ -89,7 +89,7 @@
     "company": "Intel",
     "country": "France",
     "photoUrl": "../../images/people/hallade_xavier.jpg",
-    "bio": "Xavier is Developer Evangelist in Intel Software and Service Group in Paris, France. He is helping developers to improve their support for new hardware and technologies backed by Intel, with a focus on the Android NDK, 64-bit and dual-displays.",
+    "bio": "Xavier Hallade is a software engineer at Intel Software and Services Group in Paris, France, where he works on a wide range of Android frameworks, libraries and applications, helping developers to improve their support for new hardware and technologies. He's a Google Developer Expert in Android, with a focus on the Android NDK and Android TV.",
     "tags": ["Android", "NDK"],
     "badges": [{
         "name": "GDE",

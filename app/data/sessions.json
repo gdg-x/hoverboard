@@ -111,8 +111,8 @@
   },
   {
     "id": 112,
-    "title": "Android Studio 1.3 with C/C++ ",
-    "description": "TBD",
+    "title": "Mastering the NDK with Android Studio 1.3+ and the gradle-experimental plugin",
+    "description": "Android Studio is finally fully supporting the NDK so you can easily integrate C/C++ inside Android applications.<br/><br/>While this support is still new and experimental, it’s promising and worth already doing the final jump from other IDEs and build systems.<br/><br/>After a short introduction on what is the NDK, learn how to use it from Android Studio while avoiding several classic pitfalls.",
     "speakers": [11],
     "language": "en",
     "complexity": "Beginner",
