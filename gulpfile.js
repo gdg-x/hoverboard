@@ -110,7 +110,7 @@ gulp.task('fonts', function () {
 
 // Scan your HTML for assets & optimize them
 gulp.task('html', ['views'], function () {
-  var assets = $.useref.assets({searchPath: ['.tmp', 'dist']});
+  var assets = $.useref.assets({searchPath: ['dist']});
 
   return gulp.src(['app/*.html', '.tmp/*.html'])
     // Replace path for vulcanized assets
