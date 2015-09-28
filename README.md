@@ -9,7 +9,7 @@
 > A starting point for building web applications with Polymer 1.x
 
 > Polymer Starter Kit Plus is keeping up to date with
-[Polymer Starter Kit](https://github.com/PolymerElements/polymer-starter-kit) and following
+[Polymer Starter Kit](https://github.com/PolymerElements/polymer-starter-kit) and following  
 [The 10 Commandments of Modern Web Application](https://gist.github.com/JosefJezek/8020bd8f02c4992e7d7d)
 
 :sparkles: [DEMO](https://polymer-starter-kit-plus.appspot.com) :sparkles:
