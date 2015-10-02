@@ -122,5 +122,9 @@
         "name": "ITEA",
         "url": "http://itea.ua/",
         "logoUrl": "../images/partners/itea.png"
+    }, {
+        "name": "DevCom",
+        "url": "http://devcom.com/",
+        "logoUrl": "../images/partners/devcom.svg"
     }]
 }]

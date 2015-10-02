@@ -95,11 +95,9 @@
                                             <p class="description">The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts</p>
                                             <p class="slogan">Think out of the box. Create what you want!</p>
                                             <div class="links layout horizontal align-pb-block">
-                                                <a href="/assets/GDG_DevFest_Ukraine_2015_Partnership_Proposition.pdf" target="_blank">
-                                                    <paper-button noink>
-                                                        Become a partner
-                                                    </paper-button>
-                                                </a>
+                                                <paper-button noink on-tap="playVideo">
+                                                    Watch a video
+                                                </paper-button>
                                                 <a href="#pricetable">
                                                     <paper-button class="colorful" raised>
                                                         Register
@@ -189,6 +187,15 @@
         </paper-drawer-panel>
         <paper-toast id="caching-complete" duration="6000" text="Caching complete! This app will work offline.">
         </paper-toast>
+        <paper-dialog class="video-dialog fit" id="promo-video-dialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+            <paper-toolbar class="navbar-overlay fit">
+                <paper-icon-button icon="icons:arrow-back" on-tap="closeVideoCard"></paper-icon-button>
+                <div class="title text-left">GDG DevFest Ukraine 2015</div>
+            </paper-toolbar>
+            <div class="fullvideo-container fit">
+                <google-youtube id="promo-video" video-id="_yhIH9wb3hE" fluid="true" autohide="1" chromeless="true"></google-youtube>
+            </div>
+        </paper-dialog>
         <platinum-sw-register auto-register clients-claim skip-waiting on-service-worker-installed="displayInstalledToast">
             <platinum-sw-cache default-cache-strategy="networkFirst" precache-file="precache.json">
             </platinum-sw-cache>

@@ -19,6 +19,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         document.querySelector('#caching-complete').show();
     };
 
+    app.playVideo = function() {
+        document.querySelector('#promo-video-dialog').open();
+        document.querySelector('#promo-video').play();
+    };
+    app.closeVideoCard = function() {
+        document.querySelector('#promo-video-dialog').close();
+        document.querySelector('#promo-video').pause();
+        document.querySelector('#promo-video').seekTo(0);
+    };
+
     // Listen for template bound event to know when bindings
     // have resolved and content has been stamped to the page
     app.addEventListener('dom-change', function() {
