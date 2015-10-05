@@ -26,6 +26,10 @@
         "name": "Eleks",
         "url": "http://eleks.com/",
         "logoUrl": "../images/partners/eleks.svg"
+    }, {
+        "name": "Wolters Kluwer",
+        "url": "http://www.wolterskluwer.com/",
+        "logoUrl": "../images/partners/wolterskluwer.svg"
     }]
 }, {
     "title": "Gift sponsors",
