@@ -1,18 +1,36 @@
-[
-  {
+[{
     "id": 1,
     "title": "GDG DevFest 2015 Announced",
     "titleUrl": "devfest-2015-announced",
     "posted": "Aug 17, 2015",
     "file": "2015-08-17-devfest-2015-announced.markdown",
     "brief": "Ukrainian GDGs are proud to announce the fourth annual GDG DevFest 2015 - the largest Google related event in Ukraine. Like last year, the event will be held on 23-24 October in Lviv. So aside all your business at this time and book tickets to the cultural capital of Ukraine."
-  },
-  {
+}, {
     "id": 2,
     "title": "Call for Speakers",
     "titleUrl": "call-for-speakers",
     "posted": "Aug 17, 2015",
     "file": "2015-08-17-call-for-papers.markdown",
     "brief": "We're very excited - not just because of the inordinate amount of caffeine based products consumed - but also because our team are putting together the final missing parts to the biggest Google related event in Ukraine - <a href='http://devfest.gdg.org.ua'>GDG DevFest 2015</a>."
-  }
-]
+}, {
+    "id": 3,
+    "title": "Women are underrepresented in IT",
+    "titleUrl": "women-are-underrepresented-in-it",
+    "posted": "Oct 04, 2015",
+    "file": "2015-10-04-women-are-underrepresented-in-it.markdown",
+    "brief": "Our friends from the Netherlands touched important theme in their blog about gender diversity: why women are underrepresented in IT. The cause of this seems to resonate with the lack of diversity in academia and the workplace. As a sizable event in technology, we found it in part our responsibility to encourage diversity at GDG DevFest Ukraine 2015."
+}, {
+    "id": 4,
+    "title": "Workshops announced",
+    "titleUrl": "workshops-announced",
+    "posted": "Oct 06, 2015",
+    "file": "2015-10-05-workshops-announced.markdown",
+    "brief": "Great news for everyone who wants to work side-by-side with best developers and practice in creating your own apps! On Saturday (2nd day of DFUA 2015) we’ll have 3 cool workshops in Community track."
+}, {
+    "id": 5,
+    "title": "Meet our Platinum Sponsor - N-iX",
+    "titleUrl": "meet-platinum-sponsor-n-ix",
+    "posted": "Oct 07, 2015",
+    "file": "2015-10-06-welcome-sponsor-nix.markdown",
+    "brief": "Founded in 2002, N-iX is a custom software development company with a core business of providing Dedicated Development Team / Own Development Center service."
+}]

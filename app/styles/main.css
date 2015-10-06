@@ -208,6 +208,9 @@ paper-button[raised].colorful {
     font-size: 0.85em;
 }
 
+
+
+
 @media (max-width: 767px) {
     .fit-xs {
         position: absolute;

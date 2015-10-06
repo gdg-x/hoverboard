@@ -26,6 +26,10 @@
         "name": "Eleks",
         "url": "http://eleks.com/",
         "logoUrl": "../images/partners/eleks.svg"
+    }, {
+        "name": "Wolters Kluwer",
+        "url": "http://www.wolterskluwer.com/",
+        "logoUrl": "../images/partners/wolterskluwer.svg"
     }]
 }, {
     "title": "Gift sponsors",
@@ -122,5 +126,9 @@
         "name": "ITEA",
         "url": "http://itea.ua/",
         "logoUrl": "../images/partners/itea.png"
+    }, {
+        "name": "DevCom",
+        "url": "http://devcom.com/",
+        "logoUrl": "../images/partners/devcom.svg"
     }]
 }]
