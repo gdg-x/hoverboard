@@ -57,6 +57,13 @@
         "logoUrl": "../images/partners/itcluster.png"
     }]
 }, {
+    "title": "Production partner",
+    "logos": [{
+        "name": "and action",
+        "url": "http://and-action.net/",
+        "logoUrl": "../images/partners/and-action.svg"
+    }]
+}, {
     "title": "Information partners",
     "logos": [{
         "name": "CoMMuna",
