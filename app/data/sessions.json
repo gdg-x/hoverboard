@@ -1,5 +1,45 @@
 [
   {
+    "id": 1001,
+    "title": "Registration & morning Coffee",
+    "description": "Get your badge, coffee, enjoy talking with tech edicts around",
+    "speakers": [],
+    "language": "",
+    "complexity": "",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 1002,
+    "title": "Lunch",
+    "description": "Foooooooood!",
+    "speakers": [],
+    "language": "",
+    "complexity": "",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 1003,
+    "title": "Coffee break",
+    "description": "Coffeeeeeee!",
+    "speakers": [],
+    "language": "",
+    "complexity": "",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 1004,
+    "title": "Morning coffee",
+    "description": "Coffeeeeeee!",
+    "speakers": [],
+    "language": "",
+    "complexity": "",
+    "presentation": "",
+    "video": ""
+  },
+  {
     "id": 101,
     "title": "Material Design on Custom Views",
     "description": "There are various widgets to create user interfaces in Android Framework. Using these widgets is a starting point but they are not enough to create awesome apps. Fortunately, alternative methods are here to rescue! I mean understanding and extending the View class.<br/><br/>In this presentation, I will give some Custom View examples. Some of them makes impossible things be possible and some of them increase performance.<br/><br/>I will also talk about how to apply Material Design in Custom Views with the support of older platform versions.",
@@ -7,7 +47,11 @@
     "language": "en",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Android",
+        "Material Design"
+    ]
   },
   {
     "id": 102,
@@ -17,7 +61,11 @@
     "language": "en",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Android",
+        "Marshmallow"
+    ]
   },
   {
     "id": 103,
@@ -27,7 +75,11 @@
     "language": "en",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Android",
+        "UX"
+    ]
   },
   {
     "id": 104,
@@ -37,7 +89,11 @@
     "language": "en",
     "complexity": "Intermediate",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Android",
+        "Tools"
+    ]
   },
   {
     "id": 105,
@@ -47,17 +103,24 @@
     "language": "en",
     "complexity": "Intermediate",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Android"
+    ]
   },
   {
     "id": 106,
-    "title": "TBD",
-    "description": "",
-    "speakers": [6],
+    "title": "Using GoLang for building micro-service architecture in Google Cloud Platform",
+    "description": "TBD",
+    "speakers": [7],
     "language": "en",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Cloud",
+        "Go Lang"
+    ]
   },
   {
     "id": 107,
@@ -67,7 +130,11 @@
     "language": "en",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Web",
+        "AngularJS"
+    ]
   },
   {
     "id": 108,
@@ -77,7 +144,11 @@
     "language": "en",
     "complexity": "Intermediate",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Web",
+        "V8 Engine"
+    ]
   },
   {
     "id": 109,
@@ -87,7 +158,12 @@
     "language": "en",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Cloud",
+        "gRPC",
+        "Kubernetes"
+    ]
   },
   {
     "id": 110,
@@ -97,7 +173,12 @@
     "language": "en",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Cloud",
+        "Docker",
+        "Firebase"
+    ]
   },
   {
     "id": 111,
@@ -107,7 +188,11 @@
     "language": "en",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Android",
+        "Marshmallow"
+    ]
   },
   {
     "id": 112,
@@ -117,7 +202,11 @@
     "language": "en",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Android",
+        "NDK"
+    ]
   },
   {
     "id": 113,
@@ -127,7 +216,11 @@
     "language": "ua",
     "complexity": "Intermediate",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Android",
+        "Material Design"
+    ]
   },
   {
     "id": 114,
@@ -137,7 +230,11 @@
     "language": "en",
     "complexity": "Intermediate",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Android",
+        "CI"
+    ]
   },
   {
     "id": 115,
@@ -147,7 +244,11 @@
     "language": "en",
     "complexity": "Intermediate",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Web",
+        "Dart"
+    ]
   },
   {
     "id": 116,
@@ -157,7 +258,11 @@
     "language": "en",
     "complexity": "Intermediate",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Web",
+        "Polymer"
+    ]
   },
   {
     "id": 117,
@@ -167,7 +272,11 @@
     "language": "en",
     "complexity": "Intermediate",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Android",
+        "BLE"
+    ]
   },
   {
     "id": 118,
@@ -177,7 +286,10 @@
     "language": "uk",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Community"
+    ]
   },
   {
     "id": 119,
@@ -187,7 +299,11 @@
     "language": "ru",
     "complexity": "Intermediate",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Android",
+        "Android TV"
+    ]
   },
   {
     "id": 120,
@@ -197,7 +313,11 @@
     "language": "en",
     "complexity": "Intermediate",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Cloud",
+        "Firebase"
+    ]
   },
   {
     "id": 121,
@@ -207,7 +327,11 @@
     "language": "en",
     "complexity": "Intermediate",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Cloud",
+        "Firebase"
+    ]
   },
   {
     "id": 122,
@@ -217,7 +341,11 @@
     "language": "en",
     "complexity": "Intermediate",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Web",
+        "Service Worker"
+    ]
   },
   {
     "id": 123,
@@ -227,7 +355,11 @@
     "language": "en",
     "complexity": "Intermediate",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Web",
+        "WebRTC"
+    ]
   },
   {
     "id": 124,
@@ -237,7 +369,11 @@
     "language": "en",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Web",
+        "AngularJS"
+    ]
   },
   {
     "id": 125,
@@ -247,7 +383,10 @@
     "language": "en",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Entrepreneurship"
+    ]
   },
   {
     "id": 126,
@@ -257,7 +396,10 @@
     "language": "uk",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Community"
+    ]
   },
   {
     "id": 127,
@@ -267,7 +409,10 @@
     "language": "en",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Community"
+    ]
   },
   {
     "id": 128,
@@ -277,7 +422,11 @@
     "language": "ru",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Community",
+        "Material Design"
+    ]
   },
   {
     "id": 129,
@@ -287,7 +436,11 @@
     "language": "ru",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Community",
+        "Play Store"
+    ]
   },
   {
     "id": 130,
@@ -297,7 +450,11 @@
     "language": "en",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Web",
+        "Polymer"
+    ]
   },
   {
     "id": 131,
@@ -307,17 +464,24 @@
     "language": "en",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Web",
+        "Dart"
+    ]
   },
   {
     "id": 132,
     "title": "Women cracking the code",
-    "description": "TBD",
+    "description": "For last several years the number of girls in IT sphere is actively increasing. In general girls in IT is not a myth, but still number of girls working as software developers, having original ideas or creating own startups is a tiny. Probably the reason is that profession of software developer requires a set of specific analytical skills, creative approach to any problems and ability to lifelong learn. During the talk we will discuss how to improve listed qualities and make a successful career in IT.",
     "speakers": [16],
     "language": "en",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Community"
+    ]
   },
   {
     "id": 133,
@@ -327,7 +491,11 @@
     "language": "uk",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Android",
+        "RxJava"
+    ]
   },
   {
     "id": 134,
@@ -337,7 +505,11 @@
     "language": "uk",
     "complexity": "Intermediate",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Android",
+        "Marshmallow"
+    ]
   },
   {
     "id": 135,
@@ -347,6 +519,49 @@
     "language": "uk",
     "complexity": "Beginner",
     "presentation": "",
-    "video": ""
+    "video": "",
+    "tags": [
+        "Cloud",
+        "Kubernetes"
+    ]
+  },
+  {
+    "id": 137,
+    "title": "How to become a Google Developer Expert",
+    "description": "TBD",
+    "speakers": [10],
+    "language": "en",
+    "complexity": "Beginner",
+    "presentation": "",
+    "video": "",
+    "tags": [
+        "Community"
+    ]
+  },
+  {
+    "id": 138,
+    "title": "Tips to succeed in IT career",
+    "description": "How to prepare to the interview? What is important in the resume? How get a job in Google?<br/><br/>When you start a career that a questions everyone is strugling with. During the session we'll talk about best practices in creating resume, differences in applying for a job in product and outsorce companies.",
+    "speakers": [],
+    "language": "uk",
+    "complexity": "Beginner",
+    "presentation": "",
+    "video": "",
+    "tags": [
+        "Community"
+    ]
+  },
+  {
+    "id": 139,
+    "title": "HR sessions",
+    "description": "Visit the session to learn more about insights of working for companies that support DevFest Ukraine.",
+    "speakers": [],
+    "language": "uk",
+    "complexity": "Beginner",
+    "presentation": "",
+    "video": "",
+    "tags": [
+        "Community"
+    ]
   }
 ]
