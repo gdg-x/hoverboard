@@ -41,6 +41,10 @@
         "name": "JetBrains",
         "url": "https://www.jetbrains.com/",
         "logoUrl": "../images/partners/jetbrains.svg"
+    },{
+        "name": "Shulga Massage",
+        "url": "http://shulga-massage.com/",
+        "logoUrl": "../images/partners/massage.png"
     }]
 }, {
     "title": "Hosting partner",
@@ -137,5 +141,9 @@
         "name": "DevCom",
         "url": "http://devcom.com/",
         "logoUrl": "../images/partners/devcom.svg"
+    }, {
+        "name": "Droidcon Krarow",
+        "url": "http://droidcon.pl/",
+        "logoUrl": "../images/partners/droidcon.png"
     }]
 }]
