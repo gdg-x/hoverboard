@@ -7,6 +7,9 @@
                 z-index: 9;
                 height: 100%;
                 --paper-card: #fff;
+                --paper-icon-button: {
+                    color: var(--primary-text-color);
+                };
             }
 
             paper-scroll-header-panel {
@@ -58,9 +61,9 @@
                 font-size: 16px;
             }
 
-            .tags-label {
-                font-weight: 400;
+            .tag-label {
                 font-size: 14px;
+                color: #ffffff !important;
             }
 
             .tag {
@@ -82,7 +85,7 @@
                 font-weight: 400;
             }
 
-            @media (min-width: 768px) {
+            @media (min-width: 601px) {
                 paper-card {
                     width: 70%;
                 }
@@ -152,7 +155,7 @@
                         <div class="align-pb-block">
                             <template is="dom-repeat" items="[[person.socials]]" as="social">
                                 <a href="[[social.link]]" target="_blank">
-                                    <paper-button class="colorful">[[social.name]]</paper-button>
+                                    <paper-icon-button icon="[[social.icon]]"></paper-icon-button>
                                 </a>
                             </template>
                         </div>
@@ -160,7 +163,7 @@
                 </div>
             </paper-card>
         </div>
-        <paper-scroll-header-panel id="scrollHeaderPanel" class="visible-xs hidden-sm hidden-md hidden-lg fit" condenses keep-condensed-header>
+        <paper-scroll-header-panel id="scrollHeaderPanel" class="visible-xs fit" condenses keep-condensed-header>
             <paper-toolbar class="tall">
                 <paper-icon-button class="back-button" on-tap="closePeople" icon="arrow-back"></paper-icon-button>
                 <div id="title" class="bottom title">[[person.name]]</div>
@@ -200,7 +203,7 @@
                     <div class="align-pb-block">
                         <template is="dom-repeat" items="[[person.socials]]" as="social">
                             <a href="[[social.link]]" target="_blank">
-                                <paper-button class="colorful">[[social.name]]</paper-button>
+                                <paper-icon-button icon="[[social.icon]]"></paper-icon-button>
                             </a>
                         </template>
                     </div>

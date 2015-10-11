@@ -1,5 +1,6 @@
 [{
     "id": 23,
+    "featured": true,
     "name": "Dawid Ostrowski",
     "title": "Developer Relations Program Manager",
     "company": "Google",
@@ -13,6 +14,7 @@
     }]
 }, {
     "id": 9,
+    "featured": true,
     "name": "Mandy Waite",
     "title": "Developer Relations Engineer",
     "company": "Google",
@@ -32,6 +34,7 @@
     }]
 }, {
     "id": 15,
+    "featured": true,
     "name": "Jakub Škvára",
     "title": "Frontend engineer",
     "company": "Shipito",
@@ -84,6 +87,7 @@
     }]
 }, {
     "id": 11,
+    "featured": true,
     "name": "Hallade Xavier",
     "title": "Developer Evangelist",
     "company": "Intel",
@@ -111,6 +115,7 @@
     }]
 }, {
     "id": 1,
+    "featured": true,
     "name": "Said Tahsin Dane",
     "title": "Mobile Coder",
     "company": "Startup Digest",
@@ -139,6 +144,7 @@
     }]
 }, {
     "id": 2,
+    "featured": true,
     "name": "Mateusz Herych",
     "title": "Software Engineer",
     "company": "Base CRM",
@@ -167,6 +173,7 @@
     }]
 }, {
     "id": 19,
+    "featured": true,
     "name": "Juarez Filho",
     "title": "Front End Engineer",
     "company": "madewithlove",
@@ -237,6 +244,7 @@
     }]
 }, {
     "id": 5,
+    "featured": true,
     "name": "Michał Tajchert",
     "title": "CEO",
     "company": "12Hours.io",

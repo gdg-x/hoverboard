@@ -18,6 +18,7 @@
             .ticket-name {
                 margin-bottom: -5px;
                 font-size: 30px;
+                font-weight: 200;
             }
 
             .price-block {
@@ -27,6 +28,7 @@
             .sold-out > *:not(.sold-out-text) {
                 opacity: .3;
             }
+
             .sold-out-text {
                 font-size: 28px;
                 text-transform: uppercase;
@@ -40,6 +42,7 @@
 
             .price {
                 font-size: 70px;
+                font-weight: 200;
             }
 
             .details {
@@ -118,13 +121,13 @@
         lang: 'en'
     };
     /* jshint ignore:end */
-    (function() {
+    setTimeout(function() {
         var script = document.createElement('script');
         script.type = 'text/javascript';
         script.async = true;
         script.src = 'http://2event.com/js/widget-tickets.js';
         document.getElementsByTagName('head')[0].appendChild(script);
-    })();
+    },2000);
 
     Polymer({
         is: 'tickets-block',

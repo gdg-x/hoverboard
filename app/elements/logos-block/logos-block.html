@@ -7,11 +7,11 @@
             }
 
             :host > .logos-block-wrapper {
-              margin-bottom: 30px;
+                margin-bottom: 30px;
             }
 
             .container .heading {
-              margin-bottom: 20px;
+                margin-bottom: 20px;
             }
 
             .container .block-link {
@@ -19,10 +19,10 @@
             }
 
             .logos-block-title {
-              margin: 20px 0;
-              font-weight: 100;
-              font-size: 22px;
-              letter-spacing: .05em;
+                margin: 20px 0;
+                font-weight: 200;
+                font-size: 22px;
+                letter-spacing: .05em;
             }
 
             .logo-item {
@@ -34,10 +34,9 @@
                 width: 140px;
             }
         </style>
-        <iron-ajax auto url="[[source]]" handle-as="json" on-response="logosLoaded" debounce-duration="300"></iron-ajax>
         <div class="container relative layout vertical center">
             <content></content>
-            <template is="dom-repeat" items="[[logoBlocks]]" as="block">
+            <template is="dom-repeat" items="[[logosBlocks]]" as="block">
                 <div class="logos-block-wrapper">
                     <h5 class="logos-block-title text-center">[[block.title]]</h5>
                     <div class="wrap layout horizontal center-center">
@@ -60,10 +59,8 @@
     Polymer({
         is: 'logos-block',
         properties: {
-            source: String
-        },
-        logosLoaded: function(event, response) {
-            this.logoBlocks = response.response;
+            source: String,
+            logosBlocks: Array
         }
     });
 </script>

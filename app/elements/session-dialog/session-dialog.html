@@ -1,0 +1,146 @@
+<dom-module id="session-dialog">
+    <template>
+        <style include="tags-color"></style>
+        <style>
+            :host {
+                display: block;
+            }
+
+            paper-scroll-header-panel {
+                background: #fff;
+                height: 100%;
+                --paper-scroll-header-panel-full-header: {
+                    background-color: var(--default-primary-color);
+                }
+                ;
+                --paper-scroll-header-panel-condensed-header: {
+                    background-color: var(--default-primary-color);
+                }
+                ;
+            }
+
+            paper-toolbar {
+                background-color: transparent;
+                color: #fff;
+            }
+
+            paper-toolbar .title {
+                margin: 0;
+            }
+
+            .card-content {
+                background: #fff;
+                padding: 16px;
+                color: var(--primary-text-color);
+            }
+
+            .session-description {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+
+            .meta-info {
+                font-size: 14px;
+                color: var(--disabled-text-color);
+            }
+
+            .meta-block {
+                margin-right: 15px;
+            }
+
+            .session-meta-icon {
+                --iron-icon-height: 18px;
+                --iron-icon-width: 18px;
+            }
+
+            .speaker,
+            .speakers-info {
+                color: var(--secondary-text-color);
+            }
+
+            .speaker-img {
+                margin-right: 10px;
+                height: 30px;
+                width: 30px;
+            }
+
+            .block-header {
+                margin-bottom: 10px;
+                font-weight: 400;
+                font-size: 16px;
+                color: var(--secondary-text-color);
+            }
+        </style>
+        <paper-scroll-header-panel id="scrollHeaderPanel" class$="[[_concatClass('fit', '')]]" condenses keep-condensed-header>
+            <paper-toolbar class="tall">
+                <paper-icon-button class="back-button" on-tap="_close" icon="arrow-back"></paper-icon-button>
+                <div id="title" class="bottom title">[[session.title]]</div>
+            </paper-toolbar>
+            <div class="content flex">
+                <div class="card-content meta-info layout horizontal">
+                    <div class="meta-block">
+                        <iron-icon class="session-meta-icon" icon="schedule"></iron-icon>
+                        <span>[[session.startTime]]</span> -
+                        <span>[[session.endTime]]</span>
+                    </div>
+                    <div class="meta-block" hidden$="[[!smallScreen]]">
+                        <iron-icon class="session-meta-icon" icon="room"></iron-icon>
+                        <span>[[session.track.title]]</span>
+                    </div>
+                    <template is="dom-if" if="[[session.language]]">
+                        <div class="meta-block" hidden$="[[!smallScreen]]">
+                            <iron-icon class="session-meta-icon" icon="font-download"></iron-icon>
+                            <span>[[session.language]]</span>
+                        </div>
+                    </template>
+                </div>
+                <div class="card-content session-description">
+                    <marked-element markdown="[[session.description]]"></marked-element>
+                </div>
+                <template is="dom-if" if="[[session.speakers]]">
+                    <div class="card-content">
+                        <h4 class="block-header">Speakers</h4>
+                        <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
+                            <div class="speaker layout horizontal">
+                                <iron-image src="[[speaker.photoUrl]]" class="speaker-img placeholder-color img-circle" preload fade sizing="cover"></iron-image>
+                                <div class="person-detail flex layout vertical center-center">
+                                    <span class="name self-start">[[speaker.name]]</span>
+                                </div>
+                            </div>
+                            <marked-element class="speakers-info" markdown="[[speaker.bio]]"></marked-element>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </paper-scroll-header-panel>
+    </template>
+    <script>
+        Polymer({
+            is: 'session-dialog',
+            properties: {
+                session: {
+                    type: Object
+                },
+                opened: {
+                    type: Boolean,
+                    notify: true
+                }
+            },
+            ready: function() {
+                var title = this.$.title;
+                addEventListener('paper-header-transform', function(e) {
+                    var d = e.detail;
+                    var m = d.height - d.condensedHeight;
+                    var transform = 50 * d.y / m;
+                    Polymer.Base.transform('translate3d(' + transform + 'px,0,0)', title);
+                });
+            },
+            _concatClass: function(basic, target) {
+                return basic + ' ' + target;
+            },
+            _close: function() {
+                this.opened = false;
+            }
+        });
+    </script>
+</dom-module>

@@ -1,0 +1,288 @@
+<dom-module id="schedule-block">
+    <template>
+        <style include="tags-color"></style>
+        <style>
+            :host {
+                margin-top: 32px;
+                display: block;
+                --paper-tabs-selection-bar-color: #fff;
+                --paper-tab-ink: rgba(255, 255, 255, 0.2);
+                --paper-tab-content: {
+                    font-weight: 400 !important;
+                }
+                ;
+                --paper-tab: {
+                    color: #fff;
+                    font-weight: 400;
+                    text-transform: uppercase;
+                    flex: none;
+                }
+            }
+
+            .schedule-icon {
+                --iron-icon-height: 20px;
+                --iron-icon-width: 20px;
+            }
+
+            .track {
+                width: 40px;
+            }
+
+            .track-dot span {
+                margin: 7px 0 0 8px;
+                width: 10px;
+                height: 10px;
+                display: block;
+                border-radius: 50%;
+            }
+
+            .session {
+                background: #fff;
+            }
+
+            .sub-session {
+                padding: 10px 16px;
+                background: none !important;
+                color: inherit !important;
+                cursor: pointer;
+            }
+
+            .session:last-of-type .sub-sessio:last-of-type {
+                padding-bottom: 0;
+            }
+
+            .session-title {
+                margin-bottom: 10px;
+                font-weight: 300;
+                font-size: 20px;
+                line-height: 1.1;
+                color: var(--primary-text-color);
+            }
+
+            .start-time {
+                margin: 25px 0 10px 10px;
+                font-size: 14px;
+                font-weight: 400;
+                color: var(--secondary-text-color);
+            }
+
+            .session-meta {
+                margin-top: 10px;
+                font-size: 14px;
+                color: var(--disabled-text-color);
+            }
+
+            .meta-block {
+                margin-right: 10px;
+            }
+
+            .session-meta-icon {
+                --iron-icon-height: 18px;
+                --iron-icon-width: 18px;
+            }
+
+            .lang {
+                margin: 5px 0 0 10px;
+                text-transform: uppercase;
+                font-size: 12px;
+                color: var(--secondary-text-color);
+            }
+
+            .speaker {
+                color: var(--secondary-text-color);
+            }
+
+            .speaker-img {
+                margin-right: 10px;
+                height: 30px;
+                width: 30px;
+            }
+
+            @media (max-width: 600px) {
+                .container {
+                    padding: 40px 0;
+                }
+                .sessions-wrapper {
+                    padding: 10px 0;
+                    background: #fff;
+                    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+                }
+                .session-dialog-wrapper {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    padding: 0;
+                    margin: 0;
+                }
+            }
+
+            @media (min-width: 601px) {
+                .schedule {
+                    margin-top: 10px;
+                }
+                .tracks-header {
+                    margin-top: 5px;
+                    color: var(--secondary-text-color);
+                    text-transform: uppercase;
+                }
+                .start-time {
+                    margin: 15px 10px;
+                    font-size: 20px;
+                    font-weight: 300;
+                }
+                .timeslot {
+                    margin-bottom: 10px;
+                }
+                .track {
+                    width: 30px;
+                }
+                .track-dot span {
+                    margin-left: 4px;
+                }
+                .session {
+                    margin: 0 10px;
+                    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+                }
+                .sub-session {
+                    padding: 20px 16px;
+                    border-top: 3px solid;
+                }
+                .session-dialog-wrapper {
+                    width: 50%;
+                    min-height: 90% !important;
+                    max-height: 90% !important;
+                }
+            }
+        </style>
+        <div id="schedule" class="container flex layout vertical">
+            <paper-tabs class="schedule-tabs" selected="{{selected}}">
+                <template is="dom-repeat" items="[[schedule]]" as="day">
+                    <paper-tab>[[day.dateReadable]]</paper-tab>
+                </template>
+            </paper-tabs>
+
+            <iron-pages class="schedule" selected="{{selected}}">
+                <template is="dom-repeat" items="[[schedule]]" as="day">
+                    <div>
+                        <div class="tracks-header layout horizontal" hidden$="[[smallScreen]]">
+                            <template is="dom-repeat" items="[[day.tracks]]" as="track">
+                                <div class="layout horizontal center-center flex">
+                                    <iron-icon class="session-meta-icon" icon="room"></iron-icon>
+                                    <span>[[track.title]]</span>
+                                </div>
+                            </template>
+                        </div>
+                        <template is="dom-repeat" items="[[day.timeslots]]" as="timeslot">
+                            <div class="timeslot layout vertical">
+                                <div class="start-time">
+                                    <iron-icon class="schedule-icon" icon="schedule"></iron-icon>
+                                    <span>[[timeslot.startTime]]</span>
+                                </div>
+                                <div class="sessions-wrapper layout vertical-horizontal flex">
+                                    <template is="dom-repeat" items="[[timeslot.sessions]]" as="session">
+                                        <div class="session layout vertical flex">
+                                            <template is="dom-repeat" items="[[session]]" as="subSession">
+                                                <div class$="[[ _concatClass('sub-session layout horizontal', subSession.mainTag) ]]" on-tap="_sessionTap">
+                                                    <div class="track track-dot">
+                                                        <span class$="[[subSession.mainTag]]"></span>
+                                                    </div>
+                                                    <div class="session-detail layout vertical flex">
+                                                        <div class="layout horizontal">
+                                                            <h4 class="session-title flex">[[subSession.title]]</h4>
+                                                            <span class="lang">[[subSession.language]]</span>
+                                                        </div>
+                                                        <template is="dom-repeat" items="[[subSession.speakers]]" as="speaker">
+                                                            <div class="speaker layout horizontal">
+                                                                <iron-image src="[[speaker.photoUrl]]" class="speaker-img placeholder-color img-circle" preload fade sizing="cover"></iron-image>
+                                                                <div class="person-detail flex layout vertical center-center">
+                                                                    <span class="name self-start">[[speaker.name]]</span>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                        <div class="session-meta layout horizontal">
+                                                            <div class="meta-block">
+                                                                <iron-icon class="session-meta-icon" icon="restore"></iron-icon>
+                                                                <span>[[subSession.endTime]]</span>
+                                                            </div>
+                                                            <div class="meta-block" hidden$="[[!smallScreen]]">
+                                                                <iron-icon class="session-meta-icon" icon="room"></iron-icon>
+                                                                <span>[[subSession.track.title]]</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+            </iron-pages>
+        </div>
+
+        <paper-dialog id="sessionDialog" class="session-dialog-wrapper" with-backdrop modal$="{{smallScreen}}" on-iron-overlay-opened="_patchOverlay" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+            <session-dialog session="{{selectedSession}}" opened="{{opened}}"></session-dialog>
+        </paper-dialog>
+        <iron-media-query query="(max-width: 600px)" query-matches="{{smallScreen}}"></iron-media-query>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: 'schedule-block',
+        properties: {
+            schedule: {
+                type: Array
+            },
+            sessions: {
+                type: Array
+            },
+            selected: {
+                type: Number,
+                value: 0
+            },
+            opened: {
+                type: Boolean,
+                observer: '_openedChanged'
+            }
+        },
+        observers: [
+            'checkUrlParams(schedule, sessions)'
+        ],
+        checkUrlParams: function(schedule, sessions) {
+            if (app.params && app.params.id) {
+                var session = app.findByPropertyValue(sessions, 'id', app.params.id);
+                if (session) {
+                    this.async(function() {
+                        this._openSession(session);
+                    });
+                }
+            }
+        },
+        _concatClass: function(basic, target) {
+            return basic + ' ' + target;
+        },
+        _sessionTap: function() {
+            page.redirect('/schedule/' + event.model.subSession.id);
+            this._openSession(event.model.subSession);
+        },
+        _openSession: function(session) {
+            this.selectedSession = session;
+            this.opened = true;
+            this.$.sessionDialog.open();
+        },
+        _openedChanged: function() {
+            // page('/schedule');
+            this.$.sessionDialog.close();
+        },
+        _patchOverlay: function(e) {
+            if (e.target.withBackdrop) {
+                e.target.parentNode.insertBefore(e.target._backdrop, e.target);
+            }
+        }
+    });
+</script>

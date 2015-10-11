@@ -41,21 +41,21 @@
                 padding: 0 16px;
             }
 
-            @media (max-width: 767px) {
+            @media (max-width: 600px) {
                 .post-wrapper,
                 .post {
                     @apply(--layout-fit);
                 }
             }
 
-            @media (min-width: 768px) {
+            @media (min-width: 601px) {
                 .card-wrapper {
                     margin: 0 15px 30px;
                     width: calc(100% / 3);
                 }
             }
         </style>
-        <iron-ajax auto url="[[source]]" handle-as="json" on-response="postsLoaded"></iron-ajax>
+        <!-- <iron-ajax auto url="[[source]]" handle-as="json" on-response="postsLoaded"></iron-ajax> -->
         <div id="posts" class="container flex layout horizontal center-justified wrap">
             <template is="dom-repeat" items="[[posts]]" as="post">
                 <div class="card-wrapper layout horizontal">
@@ -91,6 +91,10 @@
         ],
         properties: {
             source: String,
+            posts: {
+                type: Array,
+                observer: '_postsChanged'
+            },
             opened: {
                 type: Boolean,
                 observer: '_openedChanged'
@@ -136,8 +140,8 @@
         listeners: {
             'neon-animation-finish': '_onNeonAnimationFinish'
         },
-        postsLoaded: function(event, response) {
-            this.posts = response.response.reverse();
+        _postsChanged: function() {
+            this.posts = this.posts.reverse();
 
             this.async(function() {
                 var nodeList = this.$.posts.querySelectorAll('.card-wrapper');
@@ -170,7 +174,7 @@
             this.$.postCon.style.display = 'block';
             this.cancelAnimation();
             this.playAnimation('openPost');
-            if (screen.width > 768) {
+            if (screen.width > 601) {
                 this.playAnimation('unloadPosts');
             }
         },
@@ -181,13 +185,13 @@
             this.playAnimation('closePost');
         },
         _onNeonAnimationFinish: function() {
-            if (this.opened && screen.width > 768) {
+            if (this.opened && screen.width > 601) {
                 this.$.posts.style.display = 'none';
                 this.$.posts.style.position = 'absolute';
             }
             if (!this.opened) {
                 this.$.postCon.style.display = 'none';
-                if (screen.width > 768) {
+                if (screen.width > 601) {
                     this.$.posts.style.display = 'flex';
                     this.$.posts.style.position = 'relative';
                 }

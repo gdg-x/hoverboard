@@ -15,14 +15,14 @@
             }
 
             .heading a {
-                font-weight: 100;
+                font-weight: 200;
             }
         </style>
         <div class="container relative layout vertical-horizontal">
             <iron-ajax auto url="[[source]]" handle-as="json" on-response="feedLoaded"></iron-ajax>
             <div class="flex-5">
                 <h4 class="heading">What's up <a href="https://www.google.com/#q=%23dfua">#dfua</a></h4>
-                <social-post id="post" author="{{author}}" text="{{text}}" when="{{when}}" canonicalUrl="https://twitter.com/" sign="@"></social-post>
+                <social-post id="post" author="[[author]]" text="[[text]]" when="[[when]]" canonical-url="https://twitter.com/" sign="@"></social-post>
             </div>
             <span class="flex"></span>
             <div class="flex-5 second-block">
@@ -30,7 +30,7 @@
                 <span class="block">Add to circles, like, follow or connect with us on</span>
                 <div class="align-pb-block">
                     <a href="https://plus.google.com/102444623953913144164" target="_blank">
-                        <paper-icon-button icon="app-icons:glus"></paper-icon-button>
+                        <paper-icon-button icon="app-icons:gplus"></paper-icon-button>
                     </a>
                     <a href="https://www.facebook.com/GDGLviv" target="_blank">
                         <paper-icon-button icon="app-icons:facebook"></paper-icon-button>

@@ -21,7 +21,6 @@
                 font-size: 16px;
             }
         </style>
-        <iron-ajax auto url="[[source]]" handle-as="json" on-response="newsLoaded"></iron-ajax>
         <div class="container relative">
             <h4 class="heading text-center">Latest news</h4>
             <div class="layout vertical-horizontal">
@@ -45,10 +44,14 @@
     Polymer({
         is: 'latest-news',
         properties: {
-            source: String
+            source: String,
+            posts: {
+                type: Array,
+                observer: '_postsChanged'
+            },
         },
-        newsLoaded: function(event, response) {
-            var temp = response.response.reverse().slice(0, 2);
+        _postsChanged: function() {
+            var temp = this.posts.reverse().slice(0, 2);
             for (var i = 0; i < temp.length; i++) {
                 temp[i].url = '#!/blog/' + temp[i].titleUrl;
                 temp[i].dataRoute = 'blog/' + temp[i].titleUrl;
