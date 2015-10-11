@@ -124,6 +124,9 @@
             .filters {
                 margin-bottom: 20px;
             }
+            .filters paper-checkbox {
+                background: none;
+            }
 
             .filters .card-content {
                 border-bottom: 1px solid #eee;
@@ -313,7 +316,7 @@
             for (var i = 0; i < speakers.length; i++) {
                 speakers[i].sessions = [];
                 for (var j = 0; j < sessions.length; j++) {
-                    if (sessions[j].speakers.indexOf(speakers[i].id) > -1) {
+                    if (sessions[j].speakers && sessions[j].speakers.indexOf(speakers[i].id) > -1) {
                         speakers[i].sessions.push(sessions[j]);
                     }
                 }

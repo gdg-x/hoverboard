@@ -13,6 +13,11 @@
                 color: #4E4E4E;
             }
 
+            paper-tab {
+                flex: none;
+                padding: 0 10px;
+            }
+
             .nav-link {
                 color: inherit;
             }
@@ -98,16 +103,25 @@
                 <paper-toolbar>
                     <paper-icon-button class="visible-xs" icon="menu" on-tap="togglePanel"></paper-icon-button>
                     <div class="flex hidden-xs">
-                        <a data-route="home" href="/" hidden="{{hideLogo}}">
+                        <a data-route="home" href="/" hidden$="{{hideLogo}}">
                             <img class="logo" src="../../images/logo-white.svg" alt="GDG DevFest 2015">
                         </a>
                     </div>
                     <paper-tabs class="hidden-xs" attr-for-selected="data-route" selected="{{route}}">
-                        <paper-tab class="text-u-c">
-                            <a data-route="blog" href="#!/blog" class="nav-link horizontal center-center layout">Blog</a>
+                        <paper-tab class="text-u-c" link>
+                            <a data-route="blog" href="#!/blog" class="nav-link horizontal center-center layout">
+                                Blog
+                            </a>
                         </paper-tab>
-                        <paper-tab class="text-u-c">
-                            <a data-route="speakers" href="#!/speakers" class="nav-link horizontal center-center layout">Speakers</a>
+                        <paper-tab class="text-u-c" link>
+                            <a data-route="schedule" href="#!/schedule" class="nav-link horizontal center-center layout">
+                                Schedule
+                            </a>
+                        </paper-tab>
+                        <paper-tab class="text-u-c" link>
+                            <a data-route="speakers" href="#!/speakers" class="nav-link horizontal center-center layout">
+                                Speakers
+                            </a>
                         </paper-tab>
                         <!-- <paper-tab class="text-u-c">
                             <a data-route="contact" href="#!/contact" class="nav-link horizontal center-center layout">Contact</a>

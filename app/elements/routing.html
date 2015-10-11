@@ -53,6 +53,18 @@
             document.querySelector('#people-block').closePerson();
         });
 
+        page('/schedule', function() {
+            trackPageview('/schedule');
+            app.route = 'schedule';
+            app.scrollToTop();
+        });
+        page('/schedule/:id', function(data) {
+            trackPageview('/schedule/' + data.params.id);
+            app.route = 'schedule';
+            app.params = data.params;
+            // document.querySelector('#schedule-block').checkParams();
+        });
+
         page('/contact', function() {
             trackPageview('/contact');
             app.route = 'contact';

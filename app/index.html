@@ -59,7 +59,7 @@
 <body id="body" unresolved class="fullbleed layout vertical">
     <span id="browser-sync-binding"></span>
     <template is="dom-bind" id="app">
-        <app-data speakers="{{speakers}}" sessions="{{sessions}}" posts="{{posts}}" partners="{{partners}}"></app-data>
+        <app-data speakers="{{speakers}}" sessions="{{sessions}}" posts="{{posts}}" partners="{{partners}}" schedule="{{schedule}}"></app-data>
         <paper-drawer-panel id="paperDrawerPanel" force-narrow>
             <paper-header-panel drawer class="drawer" mode="seamed">
                 <paper-toolbar class="tall">
@@ -78,6 +78,7 @@
                 <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
                     <a data-route="#!/home" href="/">Home</a>
                     <a data-route="#!/blog" href="/blog">Blog</a>
+                    <a data-route="#!/schedule" href="/schedule">Schedule</a>
                     <a data-route="#!/speakers" href="/speakers">Speakers</a>
                     <!-- <a data-route="contact" href="/contact">Contact</a> -->
                 </paper-menu>
@@ -145,6 +146,17 @@
                             <blog-block id="blog" class="container-atop" posts="{{posts}}"></blog-block>
                             <footer-block></footer-block>
                         </section>
+                        <section data-route="schedule">
+                            <hero-block class="section-shadow container-before-atop bottom-tabs" style="background: #009688; color: #fff;">
+                                <div class="top-section">
+                                    <div class="title-wrapper layout horizontal">
+                                        <h3 class="self-end">Schedule</h3>
+                                    </div>
+                                </div>
+                            </hero-block>
+                            <schedule-block id="schedule-block" class="container-atop" schedule="{{schedule}}" sessions="{{sessions}}"></schedule-block>
+                            <footer-block></footer-block>
+                        </section>
                         <section data-route="speakers">
                             <hero-block class="section-shadow container-before-atop" style="background: #00BCD4; color: #fff;">
                                 <div class="top-section">
@@ -183,7 +195,7 @@
             <platinum-sw-cache default-cache-strategy="networkFirst" precache-file="precache.json">
             </platinum-sw-cache>
         </platinum-sw-register>
-        <webfont-loader families="Roboto:100,400&subset=latin"></webfont-loader>
+        <webfont-loader families="Roboto:100,200,400&subset=latin"></webfont-loader>
     </template>
     <google-analytics code="UA-43643469-1"></google-analytics>
     <!-- build:js scripts/app.js -->

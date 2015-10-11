@@ -33,22 +33,37 @@
     }
     /* General styles */
 
+    body,
+    html {
+        background: #fafafa;
+        font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: var(--primary-text-color);
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 1.4;
+        overflow: hidden;
+    }
+
     iron-pages {
         padding: 0 !important;
     }
 
     paper-button,
     a paper-button {
-        color: inherit;
+        color: initial;
+    }
+
+    paper-button.white {
+        color: #fff;
     }
 
     paper-button.colorful {
-        color: #00BCD4;
+        color: var(--default-primary-color);
     }
 
     paper-button[raised].colorful {
-        background: #00BCD4;
-        color: #fff;
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
     }
 
     a,
@@ -59,7 +74,7 @@
 
     .post-link {
         color: #ffffff;
-        font-weight: 100;
+        font-weight: 300;
         padding-bottom: 1px;
         font-style: italic;
     }
