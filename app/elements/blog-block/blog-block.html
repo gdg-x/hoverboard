@@ -141,7 +141,7 @@
             'neon-animation-finish': '_onNeonAnimationFinish'
         },
         _postsChanged: function() {
-            this.posts = this.posts.reverse();
+            this.posts = this.posts;
 
             this.async(function() {
                 var nodeList = this.$.posts.querySelectorAll('.card-wrapper');
