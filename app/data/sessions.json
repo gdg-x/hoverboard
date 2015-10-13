@@ -137,7 +137,7 @@
     "title": "V8 under the hood",
     "description": "What is happening inside V8 javascript engine - optimization, work, etc.",
     "speakers": [8],
-    "language": "uk",
+    "language": "ru",
     "complexity": "Intermediate",
     "presentation": "",
     "video": "",
@@ -206,7 +206,7 @@
   },
   {
     "id": 113,
-    "title": "Material Design Magic",
+    "title": "Material Design. Custom Branding",
     "description": "1. Material Design Magic <br/>2. Work with colours, typography and custom branding <br/>3. Frameworks for MD Style <br/>4. Issues, tricks and Best cases.",
     "speakers": [12],
     "language": "ua",
@@ -249,7 +249,7 @@
   {
     "id": 116,
     "title": "Polymer vs other libraries",
-    "description": "Most modern front-end JavaScript libraries provide support for component based development. Components help separate large applications into standalone building blocks with specified communication API. Let's compare Polymer elements with components from React, Angular, Ember and Backbone.",
+    "description": "Most modern front-end JavaScript libraries provide support for component based development. Components help separate large applications into standalone building blocks with specified communication API. Let's compare Polymer elements with components from React, Angular.",
     "speakers": [15],
     "language": "en",
     "complexity": "Intermediate",
@@ -556,6 +556,18 @@
     "video": "",
     "tags": [
         "Community"
+    ]
+  },
+  {
+    "id": 140,
+    "title": "TBD",
+    "description": "TBD",
+    "language": "uk",
+    "complexity": "Beginner",
+    "presentation": "",
+    "video": "",
+    "tags": [
+        "Web"
     ]
   }
 ]
