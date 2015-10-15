@@ -36,6 +36,33 @@
     "video": ""
   },
   {
+    "id": 1005,
+    "title": "GDG DevFest Ukraine 2015 Opening",
+    "description": "Official start of the conference. Greatings from the organizers, sponsors and partners.",
+    "language": "en",
+    "complexity": "",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 1006,
+    "title": "Afterpaty & Networking",
+    "description": "Afterpaty is a great time to have some fun and meet new people. We'll publish more information with all the details soon. Stay tuned!",
+    "language": "",
+    "complexity": "",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 1007,
+    "title": "Conference closing and contest winners announcements",
+    "description": "Make sure you won't miss closing ceremony, all gifts from out sponsors and partners will find their owners during this session.",
+    "language": "uk",
+    "complexity": "",
+    "presentation": "",
+    "video": ""
+  },
+  {
     "id": 101,
     "title": "Material Design on Custom Views",
     "description": "There are various widgets to create user interfaces in Android Framework. Using these widgets is a starting point but they are not enough to create awesome apps. Fortunately, alternative methods are here to rescue! I mean understanding and extending the View class.<br/><br/>In this presentation, I will give some Custom View examples. Some of them makes impossible things be possible and some of them increase performance.<br/><br/>I will also talk about how to apply Material Design in Custom Views with the support of older platform versions.",
