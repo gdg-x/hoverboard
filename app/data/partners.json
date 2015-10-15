@@ -30,6 +30,10 @@
         "name": "Wolters Kluwer",
         "url": "http://www.wolterskluwer.com/",
         "logoUrl": "../images/partners/wolterskluwer.svg"
+    }, {
+        "name": "Sigma Software",
+        "url": "http://sigma.software/",
+        "logoUrl": "../images/partners/sigma.png"
     }]
 }, {
     "title": "Gift sponsors",
