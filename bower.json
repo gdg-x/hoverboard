@@ -1,16 +1,16 @@
 {
   "name": "hoverboard",
   "dependencies": {
-    "polymer": "Polymer/polymer#1.1.3",
-    "iron-elements": "PolymerElements/iron-elements#1.0.3",
-    "paper-elements": "PolymerElements/paper-elements#1.0.5",
-    "platinum-elements": "PolymerElements/platinum-elements#1.2.0",
-    "neon-elements": "PolymerElements/neon-elements#1.0.0",
-    "molecules": "PolymerElements/molecules#1.0.0",
-    "google-web-components": "GoogleWebComponents/google-web-components#1.0.1",
-    "page": "visionmedia/page.js#~1.6.3",
-    "time-elements": "~0.4.0",
-    "google-analytics": "~0.1.0"
+      "polymer": "Polymer/polymer#1.1.3",
+      "iron-elements": "PolymerElements/iron-elements#1.0.3",
+      "paper-elements": "PolymerElements/paper-elements#1.0.5",
+      "platinum-elements": "PolymerElements/platinum-elements#1.2.0",
+      "neon-elements": "PolymerElements/neon-elements#1.0.0",
+      "molecules": "PolymerElements/molecules#1.0.0",
+      "google-web-components": "GoogleWebComponents/google-web-components#1.0.1",
+      "page": "visionmedia/page.js#~1.6.3",
+      "time-elements": "~0.4.0",
+      "google-analytics": "~0.1.0"
   },
   "devDependencies": {
     "web-component-tester": "*",
