@@ -134,7 +134,7 @@
   {
     "id": 106,
     "title": "Using GoLang for building micro-service architecture in Google Cloud Platform",
-    "description": "TBD",
+    "description": "Building a good cloud-ready application is always a challenge. Especially when you decide to use micro-service architecture, where you need to take care about orchestration of all components. Google Cloud Platform can help to solve all problems you can face when creating cloud apps. Go language allows to create small isolated components that can solve only one problem, but solve it perfectly. Combination of these two, Go language and GCP, brings excellent mix that makes development of real cloud application easy as piece of cake!",
     "speakers": [7],
     "language": "en",
     "complexity": "Beginner",
@@ -148,7 +148,7 @@
   {
     "id": 107,
     "title": "Angular2: Reasoning behind technical decisions",
-    "description": "TBD",
+    "description": "Angular 2.0 is the next generation of platform that allows to develop complex web application with a blazing speed and simplicity. But for many developers, even those who have lot of Angular1 experience, there are still a lot of questions why Angular team decided to use TypeScript, strange templating syntax and other not very obvious decisions. During this talk we’ll try to give answers to these questions and dive little bit deeper in Angular 2.0 architecture. ",
     "speakers": [7],
     "language": "en",
     "complexity": "Beginner",
