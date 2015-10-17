@@ -82,13 +82,14 @@
             }
 
             .lang {
-                margin: 5px 0 0 10px;
+                margin: 4px 0 0 10px;
                 text-transform: uppercase;
                 font-size: 12px;
                 color: var(--secondary-text-color);
             }
 
             .speaker {
+                margin-top: 5px;
                 color: var(--secondary-text-color);
             }
 
@@ -98,7 +99,16 @@
                 width: 30px;
             }
 
-            @media (max-width: 600px) {
+            .person-name {
+                font-size: 18px;
+                line-height: 1;
+            }
+            .person-title {
+                font-size: 14px;
+                color: var(--disabled-text-color);
+            }
+
+            @media (max-width: 960px) {
                 .container {
                     padding: 40px 0;
                 }
@@ -118,7 +128,7 @@
                 }
             }
 
-            @media (min-width: 601px) {
+            @media (min-width: 961px) {
                 .schedule {
                     margin-top: 10px;
                 }
@@ -166,14 +176,6 @@
             <iron-pages class="schedule" selected="{{selected}}">
                 <template is="dom-repeat" items="[[schedule]]" as="day">
                     <div>
-                        <div class="tracks-header layout horizontal" hidden$="[[smallScreen]]">
-                            <template is="dom-repeat" items="[[day.tracks]]" as="track">
-                                <div class="layout horizontal center-center flex">
-                                    <iron-icon class="session-meta-icon" icon="room"></iron-icon>
-                                    <span>[[track.title]]</span>
-                                </div>
-                            </template>
-                        </div>
                         <template is="dom-repeat" items="[[day.timeslots]]" as="timeslot">
                             <div class="timeslot layout vertical">
                                 <div class="start-time">
@@ -197,7 +199,11 @@
                                                             <div class="speaker layout horizontal">
                                                                 <iron-image src="[[speaker.photoUrl]]" class="speaker-img placeholder-color img-circle" preload fade sizing="cover"></iron-image>
                                                                 <div class="person-detail flex layout vertical center-center">
-                                                                    <span class="name self-start">[[speaker.name]]</span>
+                                                                    <span class="person-name self-start">[[speaker.name]]</span>
+                                                                    <div class="person-title self-start">
+                                                                        <span>[[speaker.company]]</span>,
+                                                                        <span>[[speaker.country]]</span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </template>
@@ -206,7 +212,7 @@
                                                                 <iron-icon class="session-meta-icon" icon="restore"></iron-icon>
                                                                 <span>[[subSession.endTime]]</span>
                                                             </div>
-                                                            <div class="meta-block" hidden$="[[!smallScreen]]">
+                                                            <div class="meta-block">
                                                                 <iron-icon class="session-meta-icon" icon="room"></iron-icon>
                                                                 <span>[[subSession.track.title]]</span>
                                                             </div>
@@ -224,10 +230,10 @@
             </iron-pages>
         </div>
 
-        <paper-dialog id="sessionDialog" class="session-dialog-wrapper" with-backdrop modal$="{{smallScreen}}" on-iron-overlay-opened="_patchOverlay" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+        <paper-dialog id="sessionDialog" class="session-dialog-wrapper" with-backdrop modal$="{{smallScreen}}" on-iron-overlay-opened="_patchOverlay"entry-animation="scale-up-animation" exit-animation="fade-out-animation">
             <session-dialog session="{{selectedSession}}" opened="{{opened}}"></session-dialog>
         </paper-dialog>
-        <iron-media-query query="(max-width: 600px)" query-matches="{{smallScreen}}"></iron-media-query>
+        <iron-media-query query="(max-width: 960px)" query-matches="{{smallScreen}}"></iron-media-query>
     </template>
 </dom-module>
 
@@ -276,7 +282,7 @@
             this.$.sessionDialog.open();
         },
         _openedChanged: function() {
-            // page('/schedule');
+            page('/schedule');
             this.$.sessionDialog.close();
         },
         _patchOverlay: function(e) {
