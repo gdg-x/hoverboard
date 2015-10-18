@@ -1,6 +1,9 @@
 #scrim {
     z-index: 9;
 }
+.toast {
+    z-index: 999;
+}
 h1, h2, h3, h4 {
     margin: 0;
     font-weight: 200;
@@ -70,7 +73,8 @@ strong, b {
     font-size: 18px;
 }
 .container paper-button {
-    font-size: .85em;
+    padding-bottom: 0.5em;
+    font-size: 17px;
 }
 .container.container-narrow {
     padding: 20px 30px;
@@ -205,6 +209,10 @@ strong, b {
     }
     .horizontal-vertical {
         flex-direction: column;
+    }
+    .container-atop-md {
+        position: relative;
+        z-index: 1;
     }
 }
 @media (min-width: 1136px) {

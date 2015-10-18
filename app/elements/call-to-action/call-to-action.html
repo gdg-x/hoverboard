@@ -10,6 +10,7 @@
             .video-dialog > * {
                 margin: 0;
                 padding: 0;
+                background: rgba(0, 0, 0, 0.5);
             }
 
             .fullvideo-container {
@@ -25,8 +26,7 @@
                 color: #fff;
             }
 
-            .text,
-            .border-button-link {
+            .text {
                 text-transform: uppercase;
                 letter-spacing: .1em;
                 color: #fff;
@@ -38,20 +38,15 @@
                 margin-bottom: 0;
             }
 
-            .border-button-link {
-                margin-top: 10px;
-                padding: 8px 12px;
-                border: 1px solid #fff;
-                font-size: 18px;
+            @media (max-width: 960px) {
+                .open-dialog-button {
+                    margin-top: 10px;
+                }
             }
-
             @media (min-width: 961px) {
                 .text {
                     font-size: 20px;
                     text-align: left;
-                }
-                .border-button-link {
-                    margin: 0;
                 }
             }
         </style>

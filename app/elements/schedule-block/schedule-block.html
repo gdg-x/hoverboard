@@ -103,6 +103,7 @@
                 font-size: 18px;
                 line-height: 1;
             }
+
             .person-title {
                 font-size: 14px;
                 color: var(--disabled-text-color);
@@ -117,7 +118,7 @@
                     background: #fff;
                     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
                 }
-                .session-dialog-wrapper {
+                .dialog-wrapper {
                     position: fixed;
                     top: 0;
                     left: 0;
@@ -159,7 +160,7 @@
                     padding: 20px 16px;
                     border-top: 3px solid;
                 }
-                .session-dialog-wrapper {
+                .dialog-wrapper {
                     width: 50%;
                     min-height: 90% !important;
                     max-height: 90% !important;
@@ -230,7 +231,7 @@
             </iron-pages>
         </div>
 
-        <paper-dialog id="sessionDialog" class="session-dialog-wrapper" with-backdrop modal$="{{smallScreen}}" on-iron-overlay-opened="_patchOverlay"entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+        <paper-dialog id="sessionDialog" class="dialog-wrapper" with-backdrop modal$="{{smallScreen}}" on-iron-overlay-opened="_patchOverlay">
             <session-dialog session="{{selectedSession}}" opened="{{opened}}"></session-dialog>
         </paper-dialog>
         <iron-media-query query="(max-width: 960px)" query-matches="{{smallScreen}}"></iron-media-query>
@@ -282,8 +283,10 @@
             this.$.sessionDialog.open();
         },
         _openedChanged: function() {
-            page('/schedule');
-            this.$.sessionDialog.close();
+            if (!this.opened) {
+                page.show('/schedule', null, false);
+                this.$.sessionDialog.close();
+            }
         },
         _patchOverlay: function(e) {
             if (e.target.withBackdrop) {

@@ -248,7 +248,7 @@
                 </div>
             </div>
         </div>
-        <paper-dialog id="personDialog" class="dialog-wrapper" with-backdrop modal$="{{smallScreen}}" on-iron-overlay-opened="_patchOverlay" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+        <paper-dialog id="personDialog" class="dialog-wrapper" with-backdrop modal$="{{smallScreen}}" on-iron-overlay-opened="_patchOverlay">
             <person-dialog person="{{selectedPerson}}" opened="{{opened}}"></person-dialog>
         </paper-dialog>
         <iron-media-query query="(max-width: 960px)" query-matches="{{smallScreen}}"></iron-media-query>
@@ -390,13 +390,10 @@
             this.$.personDialog.open();
 
         },
-        closePerson: function() {
-            page('/speakers');
-            this.$.personDialog.close();
-        },
         _openedChanged: function() {
             if (!this.opened) {
-                this.closePerson();
+                page.show('/speakers', null, false);
+                this.$.personDialog.close();
             }
         },
         _toggleFilters: function() {
