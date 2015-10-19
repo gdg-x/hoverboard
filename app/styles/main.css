@@ -73,7 +73,6 @@ strong, b {
     font-size: 18px;
 }
 .container paper-button {
-    padding-bottom: 0.5em;
     font-size: 17px;
 }
 .container.container-narrow {
@@ -174,6 +173,9 @@ strong, b {
     .container-before-atop.bottom-tabs {
         margin-bottom: -120px;
         padding-bottom: 40px;
+    }
+    .container paper-button {
+        padding-bottom: 0.54em;
     }
 }
 @media (min-width: 601px) {
