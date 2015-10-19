@@ -209,7 +209,7 @@
   {
     "id": 111,
     "title": "New security model in Marshmallow",
-    "description": "",
+    "description": "Permissions on Android have always been an important area to consider when developing applications. Currently, users have awareness of these permissions, but no real control over them.<br/><br/>Android M comes with several breaking changes, related to Permissions. <br/><br/>In this presentation we will learn on how the new permission model introduced in Android M works, and how can we educate our users, so they can understand why are we asking for certain permission. ",
     "speakers": [10],
     "language": "en",
     "complexity": "Beginner",
