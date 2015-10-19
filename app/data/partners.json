@@ -72,6 +72,13 @@
         "logoUrl": "../images/partners/and-action.svg"
     }]
 }, {
+    "title": "Party partner",
+    "logos": [{
+        "name": "Arsenal Market",
+        "url": "http://club.arsenalmarket.lviv.ua/",
+        "logoUrl": "../images/partners/arsenal.svg"
+    }]
+}, {
     "title": "Information partners",
     "logos": [{
         "name": "CoMMuna",
