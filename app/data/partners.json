@@ -153,5 +153,13 @@
         "name": "PHP Frameworks Day",
         "url": "http://frameworksdays.com/",
         "logoUrl": "../images/partners/phpday_logo.png"
+    }, {
+        "name": "SoftServe",
+        "url": "http://www.softserveinc.com/",
+        "logoUrl": "../images/partners/softserve.svg"
+    }, {
+        "name": "Garage48",
+        "url": "http://garage48.org/events/garage48-lviv",
+        "logoUrl": "../images/partners/garage48.png"
     }]
 }]
