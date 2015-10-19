@@ -141,7 +141,7 @@
                                     <!-- <paper-fab class="section-fab-right" icon="social:share"></paper-fab> -->
                                 </div>
                             </hero-block>
-                            <blog-block id="blog" class="container-atop" posts="{{posts}}"></blog-block>
+                            <blog-block id="blog" class="container-atop-md" posts="{{posts}}"></blog-block>
                             <footer-block></footer-block>
                         </section>
                         <section data-route="schedule">
@@ -198,9 +198,9 @@
                 </div>
             </div>
         </paper-drawer-panel>
-        <paper-toast id="caching-complete" duration="6000" text="Caching complete! This app will work offline.">
+        <paper-toast id="caching-complete" class="toast" duration="6000" text="Caching complete! This app will work offline.">
         </paper-toast>
-        <paper-dialog class="video-dialog fit" id="promo-video-dialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+        <paper-dialog class="video-dialog fit" id="promo-video-dialog" with-backdrop modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
             <paper-toolbar class="navbar-overlay fit">
                 <paper-icon-button icon="icons:arrow-back" on-tap="closeVideoCard"></paper-icon-button>
                 <div class="title text-left">GDG DevFest Ukraine 2015</div>

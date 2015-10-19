@@ -36,6 +36,36 @@
     "video": ""
   },
   {
+    "id": 1005,
+    "title": "GDG DevFest Ukraine 2015 Opening",
+    "description": "Official start of the conference. Greatings from the organizers, sponsors and partners.",
+    "language": "en",
+    "complexity": "",
+    "presentation": "",
+    "video": ""
+  },
+  {
+    "id": 1006,
+    "title": "Afterpaty & Networking",
+    "description": "Afterpaty is a great time to have some fun and meet new people. We'll publish more information with all the details soon. Stay tuned!",
+    "language": "",
+    "complexity": "",
+    "presentation": "",
+    "video": "",
+    "track": {
+        "title": "TBD"
+    }
+  },
+  {
+    "id": 1007,
+    "title": "Conference closing and contest winners announcements",
+    "description": "Make sure you won't miss closing ceremony, all gifts from out sponsors and partners will find their owners during this session.",
+    "language": "uk",
+    "complexity": "",
+    "presentation": "",
+    "video": ""
+  },
+  {
     "id": 101,
     "title": "Material Design on Custom Views",
     "description": "There are various widgets to create user interfaces in Android Framework. Using these widgets is a starting point but they are not enough to create awesome apps. Fortunately, alternative methods are here to rescue! I mean understanding and extending the View class.<br/><br/>In this presentation, I will give some Custom View examples. Some of them makes impossible things be possible and some of them increase performance.<br/><br/>I will also talk about how to apply Material Design in Custom Views with the support of older platform versions.",
@@ -107,7 +137,7 @@
   {
     "id": 106,
     "title": "Using GoLang for building micro-service architecture in Google Cloud Platform",
-    "description": "TBD",
+    "description": "Building a good cloud-ready application is always a challenge. Especially when you decide to use micro-service architecture, where you need to take care about orchestration of all components. Google Cloud Platform can help to solve all problems you can face when creating cloud apps. Go language allows to create small isolated components that can solve only one problem, but solve it perfectly. Combination of these two, Go language and GCP, brings excellent mix that makes development of real cloud application easy as piece of cake!",
     "speakers": [7],
     "language": "en",
     "complexity": "Beginner",
@@ -121,7 +151,7 @@
   {
     "id": 107,
     "title": "Angular2: Reasoning behind technical decisions",
-    "description": "TBD",
+    "description": "Angular 2.0 is the next generation of platform that allows to develop complex web application with a blazing speed and simplicity. But for many developers, even those who have lot of Angular1 experience, there are still a lot of questions why Angular team decided to use TypeScript, strange templating syntax and other not very obvious decisions. During this talk we’ll try to give answers to these questions and dive little bit deeper in Angular 2.0 architecture. ",
     "speakers": [7],
     "language": "en",
     "complexity": "Beginner",
@@ -179,7 +209,7 @@
   {
     "id": 111,
     "title": "New security model in Marshmallow",
-    "description": "",
+    "description": "Permissions on Android have always been an important area to consider when developing applications. Currently, users have awareness of these permissions, but no real control over them.<br/><br/>Android M comes with several breaking changes, related to Permissions. <br/><br/>In this presentation we will learn on how the new permission model introduced in Android M works, and how can we educate our users, so they can understand why are we asking for certain permission. ",
     "speakers": [10],
     "language": "en",
     "complexity": "Beginner",
@@ -209,7 +239,7 @@
     "title": "Material Design. Custom Branding",
     "description": "1. Material Design Magic <br/>2. Work with colours, typography and custom branding <br/>3. Frameworks for MD Style <br/>4. Issues, tricks and Best cases.",
     "speakers": [12],
-    "language": "ua",
+    "language": "uk",
     "complexity": "Intermediate",
     "presentation": "",
     "video": "",
@@ -402,7 +432,7 @@
     "title": "Solving Dev / Test conflicts",
     "description": "In the ideal world, developers and testers act as a single solid team with a common goal. In reality, there is a number of problems that can create a split between these leagues, and even start a tiny cold war.<br/><br/>We'll try to look into some tricky questions.<br/>- How can we detect the split at the earliest stage?<br/>- What can we do to prevent it?<br/>- If we have already faced it, how can we heal it?",
     "speakers": [25],
-    "language": "en",
+    "language": "uk",
     "complexity": "Beginner",
     "presentation": "",
     "video": "",
@@ -471,7 +501,7 @@
     "title": "Women cracking the code",
     "description": "For last several years the number of girls in IT sphere is actively increasing. In general girls in IT is not a myth, but still number of girls working as software developers, having original ideas or creating own startups is a tiny. Probably the reason is that profession of software developer requires a set of specific analytical skills, creative approach to any problems and ability to lifelong learn. During the talk we will discuss how to improve listed qualities and make a successful career in IT.",
     "speakers": [16],
-    "language": "en",
+    "language": "uk",
     "complexity": "Beginner",
     "presentation": "",
     "video": "",
@@ -526,7 +556,7 @@
     "title": "How to become a Google Developer Expert",
     "description": "TBD",
     "speakers": [10],
-    "language": "en",
+    "language": "uk",
     "complexity": "Beginner",
     "presentation": "",
     "video": "",
@@ -560,9 +590,9 @@
   },
   {
     "id": 140,
-    "title": "TBD",
-    "description": "TBD",
-    "language": "uk",
+    "title": "Fireside Chat",
+    "description": "In this informal session we would like to sit by the virtual fireplace and give you the possibility to ask any question to various speakers and sponsors on the fireside panel. If we are just staring at each other the moderator will put an extra woodblock on the fire by posing a taunting statement with the intention to heat up the discussion to a passionate debate. We give away great swag for people contributing to a great conversation.",
+    "language": "en",
     "complexity": "Beginner",
     "presentation": "",
     "video": "",

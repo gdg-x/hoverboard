@@ -2,11 +2,11 @@
     "date": "2015-10-23",
     "dateReadable": "October 23",
     "tracks": [{
-        "title": "Room 1"
+        "title": "Expo area"
     }, {
-        "title": "Room 2"
+        "title": "Conference hall"
     }, {
-        "title": "Room 3"
+        "title": "Community hall"
     }],
     "timeslots": [{
         "startTime": "09:00",
@@ -16,6 +16,12 @@
         ]
     }, {
         "startTime": "10:00",
+        "endTime": "10:15",
+        "sessions": [
+            [1005]
+        ]
+    }, {
+        "startTime": "10:15",
         "endTime": "11:00",
         "sessions": [
             [125]
@@ -80,19 +86,22 @@
             [120],
             [137, 132]
         ]
+    }, {
+        "startTime": "22:00",
+        "endTime": "02:00",
+        "sessions": [
+            [1006]
+        ]
     }]
 }, {
     "date": "2015-10-24",
     "dateReadable": "October 24",
     "tracks": [{
-        "color": "#90be4e",
-        "title": "Room 1"
+        "title": "Expo area"
     }, {
-        "color": "#03a9f4",
-        "title": "Room 2"
+        "title": "Conference hall"
     }, {
-        "color": "#e91e63",
-        "title": "Room 3"
+        "title": "Community hall"
     }],
     "timeslots": [{
         "startTime": "09:30",
@@ -167,6 +176,12 @@
             [119],
             [140],
             [130]
+        ]
+    }, {
+        "startTime": "17:40",
+        "endTime": "18:00",
+        "sessions": [
+            [1007]
         ]
     }]
 }]
