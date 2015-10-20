@@ -6,6 +6,4 @@ The company`s offices are located in four major Ukrainian hubs — Kharkiv, Odes
 
 Learn more about the company and follow the updates!
 * [Official website](http://sigma.software/)
-* [Facebook](www.facebook.com/SIGMAUKRAINE) 
-
-
+* [Facebook](https://facebook.com/SIGMAUKRAINE) 
