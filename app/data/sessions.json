@@ -404,7 +404,7 @@
   {
     "id": 125,
     "title": "[Keynote] Lean Startup with Google",
-    "description": "TBD",
+    "description": "THINK OUT OF THE BOX. CREATE WHAT YOU WANT!<br/><br/>It's time for the Ukrainian Developers to move forward and create the next globally-successful app! Please come to the Keynote by Dawid Ostrowski and learn how Google can help you with this goal, by providing technology for developers and support for entrepreneurs.",
     "speakers": [23],
     "language": "en",
     "complexity": "Beginner",
@@ -432,7 +432,7 @@
     "title": "Solving Dev / Test conflicts",
     "description": "In the ideal world, developers and testers act as a single solid team with a common goal. In reality, there is a number of problems that can create a split between these leagues, and even start a tiny cold war.<br/><br/>We'll try to look into some tricky questions.<br/>- How can we detect the split at the earliest stage?<br/>- What can we do to prevent it?<br/>- If we have already faced it, how can we heal it?",
     "speakers": [25],
-    "language": "uk",
+    "language": "en",
     "complexity": "Beginner",
     "presentation": "",
     "video": "",
@@ -567,7 +567,8 @@
   {
     "id": 138,
     "title": "Tips to succeed in IT career",
-    "description": "How to prepare to the interview? What is important in the resume? How get a job in Google?<br/><br/>When you start a career that a questions everyone is strugling with. During the session we'll talk about best practices in creating resume, differences in applying for a job in product and outsorce companies.",
+    "description": "How to prepare to the interview? What is important in the resume?<br/><br/>When you start a career that a questions everyone is strugling with. During the session we'll talk about best practices in creating resume, differences in applying for a job in product and outsorce companies.",
+    "speakers": [31],
     "language": "uk",
     "complexity": "Beginner",
     "presentation": "",

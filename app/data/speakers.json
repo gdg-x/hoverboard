@@ -738,4 +738,22 @@
         "icon": "app-icons:twitter",
         "link": "https://twitter.com/idvoretskyi"
     }]
+}, {
+    "id": 31,
+    "name": "Anastasiia Serafyn",
+    "title": "Recruiting Team Lead",
+    "company": "Lohika",
+    "country": "Ukraine",
+    "photoUrl": "../../images/people/anastasiia_serafyn.jpg",
+    "bio": "Anastasiia is a passionate and skilled Technical Recruiter, leading team of 7 people. She has 4 years of hands-on experience in recruiting/headhunting IT professionals and over 2 years in PR & Employer branding activities. Also Anastasiia helps in organization and management of Lviv Tech Talks community Morning@Lohika.",
+    "tags": ["Community"],
+    "socials": [{
+        "name": "Google+",
+        "icon": "app-icons:gplus",
+        "link": "https://plus.google.com/+AnastasiiaChernysh/posts"
+    }, {
+        "name": "Twitter",
+        "icon": "app-icons:twitter",
+        "link": "https://twitter.com/Nastya_web"
+    }]
 }]
