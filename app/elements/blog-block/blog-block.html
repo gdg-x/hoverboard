@@ -141,7 +141,6 @@
             'neon-animation-finish': '_onNeonAnimationFinish'
         },
         _postsChanged: function() {
-            console.log(this.posts);
             this.async(function() {
                 var nodeList = this.$.posts.querySelectorAll('.card-wrapper');
                 this.animationConfig.loadPosts.nodes = Array.prototype.slice.call(nodeList);
