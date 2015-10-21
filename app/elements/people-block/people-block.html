@@ -334,16 +334,16 @@
             });
         },
         checkUrlParams: function() {
-            if (app.params && app.params.id) {
-                var person = app.findByPropertyValue(this.people, 'id', app.params.id);
-                if (person) {
-                    this.async(function() {
+            this.async(function() {
+                if (app.params && app.params.id) {
+                    var person = app.findByPropertyValue(this.people, 'id', app.params.id);
+                    if (person) {
                         this.openPerson(person);
-                    });
-                    return true;
+                        return true;
 
+                    }
                 }
-            }
+            }, 1000);
         },
         _generateFilters: function() {
             var tempTags = [];

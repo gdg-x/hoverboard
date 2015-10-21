@@ -261,14 +261,15 @@
             'checkUrlParams(schedule, sessions)'
         ],
         checkUrlParams: function(schedule, sessions) {
-            if (app.params && app.params.id) {
-                var session = app.findByPropertyValue(sessions, 'id', app.params.id);
-                if (session) {
-                    this.async(function() {
+            this.async(function() {
+                if (app.params && app.params.id) {
+                    var session = app.findByPropertyValue(sessions, 'id', app.params.id);
+                    if (session) {
                         this._openSession(session);
-                    });
+
+                    }
                 }
-            }
+            }, 1000);
         },
         _concatClass: function(basic, target) {
             return basic + ' ' + target;
