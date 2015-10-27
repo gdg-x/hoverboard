@@ -39,6 +39,10 @@
                 padding-bottom: 0;
             }
 
+            .session-speakers {
+                margin-top: 20px;
+            }
+
             .meta-info {
                 font-size: 14px;
                 color: var(--disabled-text-color);
@@ -56,6 +60,7 @@
             }
 
             .session-meta-icon {
+                margin-top: -2px;
                 --iron-icon-height: 18px;
                 --iron-icon-width: 18px;
             }
@@ -114,8 +119,26 @@
                 <div class="card-content session-description">
                     <marked-element markdown="[[session.description]]"></marked-element>
                 </div>
+                <div class="card-content session-description">
+                    <template is="dom-if" if="[[session.presentation]]">
+                        <div class="meta-block">
+                            <a href="[[session.presentation]]" target="_blank">
+                                <iron-icon class="session-meta-icon" icon="app-icons:presentation"></iron-icon>
+                                <span>View presentation</span>
+                            </a>
+                        </div>
+                    </template>
+                    <template is="dom-if" if="[[session.video]]">
+                        <div class="meta-block">
+                            <a href="[[session.video]]" target="_blank">
+                                <iron-icon class="session-meta-icon" icon="av:videocam"></iron-icon>
+                                <span>View video</span>
+                            </a>
+                        </div>
+                    </template>
+                </div>
                 <template is="dom-if" if="[[session.speakers]]">
-                    <div class="card-content">
+                    <div class="card-content session-speakers">
                         <h4 class="block-header">Speakers</h4>
                         <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
                             <div class="speaker layout horizontal">

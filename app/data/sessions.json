@@ -2,38 +2,22 @@
   {
     "id": 1001,
     "title": "Registration & morning Coffee",
-    "description": "Get your badge, coffee, enjoy talking with tech edicts around",
-    "language": "",
-    "complexity": "",
-    "presentation": "",
-    "video": ""
+    "description": "Get your badge, coffee, enjoy talking with tech edicts around"
   },
   {
     "id": 1002,
     "title": "Lunch",
-    "description": "Foooooooood!",
-    "language": "",
-    "complexity": "",
-    "presentation": "",
-    "video": ""
+    "description": "Foooooooood!"
   },
   {
     "id": 1003,
     "title": "Coffee break",
-    "description": "Coffeeeeeee!",
-    "language": "",
-    "complexity": "",
-    "presentation": "",
-    "video": ""
+    "description": "Coffeeeeeee!"
   },
   {
     "id": 1004,
     "title": "Morning coffee",
-    "description": "Coffeeeeeee!",
-    "language": "",
-    "complexity": "",
-    "presentation": "",
-    "video": ""
+    "description": "Coffeeeeeee!"
   },
   {
     "id": 1005,
@@ -48,10 +32,6 @@
     "id": 1006,
     "title": "Afterparty & Networking",
     "description": "Afterpaty is a great time to have some fun and meet new people.<br/><br/><b>Location</b>: Club Arsenal Market, [Pidvalna St 5](http://club.arsenalmarket.lviv.ua/uk/contacts/)<br/><br/>Free shot for all DevFest attendees included.<br/><br/>Don't forget to bring your badge.",
-    "language": "",
-    "complexity": "",
-    "presentation": "",
-    "video": "",
     "track": {
         "title": "Club Arsenal Market"
     }
@@ -72,7 +52,7 @@
     "speakers": [1],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/said-tahsin-dane-material-design-custom-views",
     "video": "",
     "tags": [
         "Android",
@@ -114,7 +94,7 @@
     "speakers": [4],
     "language": "en",
     "complexity": "Intermediate",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/roman-mazur-power-of-android-shell",
     "video": "",
     "tags": [
         "Android",
@@ -183,7 +163,7 @@
     "speakers": [9],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/mandy-waite-scalable-microservices-with-grpc-kubernetes-and-containers",
     "video": "",
     "tags": [
         "Cloud",
@@ -198,7 +178,7 @@
     "speakers": [9],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/mandy-waite-cloud-platform-end-to-end-how-we-built-cloud-spin",
     "video": "",
     "tags": [
         "Cloud",
@@ -213,7 +193,7 @@
     "speakers": [10],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/roman-herasymenko-android-m-security-model",
     "video": "",
     "tags": [
         "Android",
@@ -269,7 +249,7 @@
     "speakers": [14],
     "language": "en",
     "complexity": "Intermediate",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/jana-moudra-lets-play-dart",
     "video": "",
     "tags": [
         "Web",
@@ -283,7 +263,7 @@
     "speakers": [15],
     "language": "en",
     "complexity": "Intermediate",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/jakub-skvara-polymer-vs-other-libraries",
     "video": "",
     "tags": [
         "Web",
@@ -324,7 +304,7 @@
     "speakers": [18],
     "language": "ru",
     "complexity": "Intermediate",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/alexey-rybakov-android-tv-development",
     "video": "",
     "tags": [
         "Android",
@@ -394,7 +374,7 @@
     "speakers": [22],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/semih-yagcioglu-build-your-thing-in-a-weekend-with-angularjs-2-dot-0",
     "video": "",
     "tags": [
         "Web",
@@ -408,7 +388,7 @@
     "speakers": [23],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "test",
     "video": "",
     "tags": [
         "Entrepreneurship"
