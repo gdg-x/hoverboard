@@ -39,18 +39,34 @@
                 padding-bottom: 0;
             }
 
+            .session-speakers {
+                margin-top: 20px;
+            }
+
             .meta-info {
                 font-size: 14px;
                 color: var(--disabled-text-color);
             }
 
             .meta-block {
+                margin-top: 3px;
                 margin-right: 15px;
+                display: inline-block;
+            }
+
+            .lang {
+                text-transform: uppercase;
+                font-size: 12px;
             }
 
             .session-meta-icon {
+                margin-top: -2px;
                 --iron-icon-height: 18px;
                 --iron-icon-width: 18px;
+            }
+
+            .speaker:not(:first-of-type) {
+                margin-top: 30px;
             }
 
             .speaker,
@@ -71,34 +87,58 @@
                 color: var(--secondary-text-color);
             }
         </style>
-        <paper-scroll-header-panel id="scrollHeaderPanel" class$="[[_concatClass('fit', '')]]" condenses keep-condensed-header>
+        <paper-scroll-header-panel id="scrollHeaderPanel" class$="[[_concatClass('fit', '')]]" condenses keep-condensed-header="[[smallScreen]]">
             <paper-toolbar class="tall">
                 <paper-icon-button class="back-button" on-tap="_close" icon="arrow-back"></paper-icon-button>
                 <div id="title" class="bottom title">[[session.title]]</div>
             </paper-toolbar>
             <div class="content flex">
-                <div class="card-content meta-info layout horizontal">
+                <div class="card-content meta-info">
                     <div class="meta-block">
                         <iron-icon class="session-meta-icon" icon="schedule"></iron-icon>
                         <span>[[session.startTime]]</span> -
                         <span>[[session.endTime]]</span>
                     </div>
-                    <div class="meta-block" hidden$="[[!smallScreen]]">
+                    <div class="meta-block">
                         <iron-icon class="session-meta-icon" icon="room"></iron-icon>
                         <span>[[session.track.title]]</span>
                     </div>
+                    <template is="dom-if" if="[[session.complexity]]">
+                        <div class="meta-block">
+                            <iron-icon class="session-meta-icon" icon="extension"></iron-icon>
+                            <span>[[session.complexity]]</span>
+                        </div>
+                    </template>
                     <template is="dom-if" if="[[session.language]]">
-                        <div class="meta-block" hidden$="[[!smallScreen]]">
+                        <div class="meta-block">
                             <iron-icon class="session-meta-icon" icon="font-download"></iron-icon>
-                            <span>[[session.language]]</span>
+                            <span class="lang">[[session.language]]</span>
                         </div>
                     </template>
                 </div>
                 <div class="card-content session-description">
                     <marked-element markdown="[[session.description]]"></marked-element>
                 </div>
+                <div class="card-content session-description">
+                    <template is="dom-if" if="[[session.presentation]]">
+                        <div class="meta-block">
+                            <a href="[[session.presentation]]" target="_blank">
+                                <iron-icon class="session-meta-icon" icon="app-icons:presentation"></iron-icon>
+                                <span>View presentation</span>
+                            </a>
+                        </div>
+                    </template>
+                    <template is="dom-if" if="[[session.video]]">
+                        <div class="meta-block">
+                            <a href="[[session.video]]" target="_blank">
+                                <iron-icon class="session-meta-icon" icon="av:videocam"></iron-icon>
+                                <span>View video</span>
+                            </a>
+                        </div>
+                    </template>
+                </div>
                 <template is="dom-if" if="[[session.speakers]]">
-                    <div class="card-content">
+                    <div class="card-content session-speakers">
                         <h4 class="block-header">Speakers</h4>
                         <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
                             <div class="speaker layout horizontal">
@@ -113,6 +153,7 @@
                 </template>
             </div>
         </paper-scroll-header-panel>
+        <iron-media-query query="(max-width: 960px)" query-matches="{{smallScreen}}"></iron-media-query>
     </template>
     <script>
         Polymer({

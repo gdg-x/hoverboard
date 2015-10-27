@@ -10,7 +10,7 @@
         --primary-text-color: #212121;
         --secondary-text-color: #727272;
         --disabled-text-color: #BDBDBD;
-        --divider-color: #B6B6B6;
+        --divider-color: #e8e8e8;
         /* Components */
         /* paper-drawer-panel */
         --drawer-menu-color: #ffffff;
@@ -79,6 +79,26 @@
         font-style: italic;
     }
 
+    .video-dialog,
+    .video-dialog > * {
+        margin: 0;
+        padding: 0;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .fullvideo-container {
+        z-index: 6;
+        overflow: hidden;
+    }
+
+    .navbar-overlay {
+        position: fixed !important;
+        background: rgba(0, 0, 0, 0.5) !important;
+        text-transform: uppercase;
+        z-index: 9;
+        color: #fff;
+    }
+
     #drawerToolbar {
         color: var(--secondary-text-color);
         background-color: var(--drawer-menu-color);
@@ -123,7 +143,7 @@
     /* Breakpoints */
     /* Small */
 
-    @media (max-width: 600px) {
+    @media (max-width: 960px) {
         paper-material {
             --menu-container-display: none;
             width: calc(97.33% - 32px);

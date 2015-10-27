@@ -16,7 +16,7 @@
             }
 
             .card-actions {
-                border-top: 1px solid #e8e8e8;
+                border-top: 1px solid var(--divider-color);
                 padding: 5px 16px;
                 position: relative;
             }
@@ -40,15 +40,14 @@
             .brief {
                 padding: 0 16px;
             }
-
-            @media (max-width: 600px) {
+            @media (max-width: 960px) {
                 .post-wrapper,
                 .post {
                     @apply(--layout-fit);
                 }
             }
 
-            @media (min-width: 601px) {
+            @media (min-width: 961px) {
                 .card-wrapper {
                     margin: 0 15px 30px;
                     width: calc(100% / 3);
@@ -141,8 +140,6 @@
             'neon-animation-finish': '_onNeonAnimationFinish'
         },
         _postsChanged: function() {
-            this.posts = this.posts.reverse();
-
             this.async(function() {
                 var nodeList = this.$.posts.querySelectorAll('.card-wrapper');
                 this.animationConfig.loadPosts.nodes = Array.prototype.slice.call(nodeList);
@@ -152,13 +149,15 @@
             });
         },
         checkUrlParams: function() {
-            if (app.params && app.params.title) {
-                var post = app.findByPropertyValue(this.posts, 'titleUrl', app.params.title);
-                if (post !== undefined && post !== null) {
-                    this.openPost(post);
-                    return true;
+            this.async(function() {
+                if (app.params && app.params.title) {
+                    var post = app.findByPropertyValue(this.posts, 'titleUrl', app.params.title);
+                    if (post) {
+                        this.openPost(post);
+                        return true;
+                    }
                 }
-            }
+            }, 1000);
         },
         playLoadAnimation: function() {
             this.cancelAnimation();
@@ -174,7 +173,7 @@
             this.$.postCon.style.display = 'block';
             this.cancelAnimation();
             this.playAnimation('openPost');
-            if (screen.width > 601) {
+            if (screen.width > 961) {
                 this.playAnimation('unloadPosts');
             }
         },
@@ -185,13 +184,13 @@
             this.playAnimation('closePost');
         },
         _onNeonAnimationFinish: function() {
-            if (this.opened && screen.width > 601) {
+            if (this.opened && screen.width > 961) {
                 this.$.posts.style.display = 'none';
                 this.$.posts.style.position = 'absolute';
             }
             if (!this.opened) {
                 this.$.postCon.style.display = 'none';
-                if (screen.width > 601) {
+                if (screen.width > 961) {
                     this.$.posts.style.display = 'flex';
                     this.$.posts.style.position = 'relative';
                 }

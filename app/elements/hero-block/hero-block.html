@@ -10,7 +10,12 @@
                     margin: 0 -16px;
                 }
                 ;
-                color: #4E4E4E;
+                color: var(--primary-text-color);
+            }
+
+            paper-tab {
+                flex: none;
+                padding: 0 10px;
             }
 
             paper-tab {
@@ -78,7 +83,7 @@
                 height: 200px;
             }
 
-            @media (max-width: 600px) {
+            @media (max-width: 960px) {
                 ::content .center-content-xs {
                     @apply(--layout-vertical);
                     @apply(--layout-center);
@@ -86,7 +91,10 @@
                 }
             }
 
-            @media (min-width: 601px) {
+            @media (min-width: 961px) {
+                .menu-toggle {
+                    display: none;
+                }
                 ::content .hero {
                     padding-top: 40px;
                 }
@@ -101,7 +109,7 @@
         <div id="hero">
             <div class="container flex relative">
                 <paper-toolbar>
-                    <paper-icon-button class="visible-xs" icon="menu" on-tap="togglePanel"></paper-icon-button>
+                    <paper-icon-button class="menu-toggle" icon="menu" on-tap="togglePanel"></paper-icon-button>
                     <div class="flex hidden-xs">
                         <a data-route="home" href="/" hidden$="{{hideLogo}}">
                             <img class="logo" src="../../images/logo-white.svg" alt="GDG DevFest 2015">

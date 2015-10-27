@@ -97,11 +97,9 @@
                                             <p class="description">The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts</p>
                                             <p class="slogan">Think out of the box. Create what you want!</p>
                                             <div class="links layout horizontal align-pb-block">
-                                                <a href="http://goo.gl/forms/kymZwijWFy" target="_blank">
-                                                    <paper-button noink>
-                                                        Become a speaker
-                                                    </paper-button>
-                                                </a>
+                                                <paper-button noink on-tap="playVideo">
+                                                    Watch a video
+                                                </paper-button>
                                                 <a href="#pricetable">
                                                     <paper-button class="colorful" raised>
                                                         Register
@@ -143,7 +141,7 @@
                                     <!-- <paper-fab class="section-fab-right" icon="social:share"></paper-fab> -->
                                 </div>
                             </hero-block>
-                            <blog-block id="blog" class="container-atop" posts="{{posts}}"></blog-block>
+                            <blog-block id="blog" class="container-atop-md" posts="{{posts}}"></blog-block>
                             <footer-block></footer-block>
                         </section>
                         <section data-route="schedule">
@@ -180,6 +178,17 @@
                             <cod-block class="container-atop" source="../../posts/code-of-conduct.markdown"></cod-block>
                             <footer-block></footer-block>
                         </section>
+                        <section data-route="speaker-guidelines">
+                            <hero-block class="section-shadow container-before-atop" style="background: #455A64; color: #fff;">
+                                <div class="top-section">
+                                    <div class="title-wrapper layout horizontal">
+                                        <h3 class="self-end">Speaker Guidelines</h3>
+                                    </div>
+                                </div>
+                            </hero-block>
+                            <speaker-guidelines-block class="container-atop" source="../../posts/speaker-guidelines.markdown"></speaker-guidelines-block>
+                            <footer-block></footer-block>
+                        </section>
                         <!-- <section data-route="contact">
                             <h1>Contact</h1>
 
@@ -189,8 +198,17 @@
                 </div>
             </div>
         </paper-drawer-panel>
-        <paper-toast id="caching-complete" duration="6000" text="Caching complete! This app will work offline.">
+        <paper-toast id="caching-complete" class="toast" duration="6000" text="Caching complete! This app will work offline.">
         </paper-toast>
+        <paper-dialog class="video-dialog fit" id="promo-video-dialog" with-backdrop modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+            <paper-toolbar class="navbar-overlay fit">
+                <paper-icon-button icon="icons:arrow-back" on-tap="closeVideoCard"></paper-icon-button>
+                <div class="title text-left">GDG DevFest Ukraine 2015</div>
+            </paper-toolbar>
+            <div class="fullvideo-container fit">
+                <google-youtube id="promo-video" video-id="_yhIH9wb3hE" fluid="true" autohide="1" chromeless="true"></google-youtube>
+            </div>
+        </paper-dialog>
         <platinum-sw-register auto-register clients-claim skip-waiting on-service-worker-installed="displayInstalledToast">
             <platinum-sw-cache default-cache-strategy="networkFirst" precache-file="precache.json">
             </platinum-sw-cache>

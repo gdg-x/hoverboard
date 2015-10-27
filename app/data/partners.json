@@ -1,55 +1,172 @@
-[
-    {
-        "title": "General sponsor",
-        "logos": [{
-            "name": "Google",
-            "url": "https://www.google.com.ua/intl/en/about/",
-            "logoUrl": "../images/partners/google.svg"
-        }]
+[{
+    "title": "General sponsor",
+    "logos": [{
+        "name": "Google",
+        "url": "https://www.google.com.ua/intl/en/about/",
+        "logoUrl": "../images/partners/google.svg"
+    }]
+}, {
+    "title": "Diamond sponsor",
+    "logos": [{
+        "name": "Malkos",
+        "url": "http://www.malkosua.com/",
+        "logoUrl": "../images/partners/corevalue.svg"
+    }]
+}, {
+    "title": "Platinum sponsors",
+    "logos": [{
+        "name": "N-IX",
+        "url": "http://n-ix.com/",
+        "logoUrl": "../images/partners/n-ix.svg"
     }, {
-        "title": "Platinum sponsor",
-        "logos": [{
-            "name": "N-IX",
-            "url": "http://n-ix.com/",
-            "logoUrl": "../images/partners/n-ix.png"
-        }]
+        "name": "DataArt",
+        "url": "http://www.dataart.com/",
+        "logoUrl": "../images/partners/dataart.svg"
     }, {
-        "title": "General partner",
-        "logos": [{
-            "name": "Lviv IT Cluster",
-            "url": "http://itcluster.lviv.ua/",
-            "logoUrl": "../images/partners/itcluster.png"
-        }]
+        "name": "Eleks",
+        "url": "http://eleks.com/",
+        "logoUrl": "../images/partners/eleks.svg"
     }, {
-        "title": "Information partners",
-        "logos": [{
-            "name": "CoMMuna",
-            "url": "http://communa.net.ua/en/",
-            "logoUrl": "../images/partners/communa.png"
-        }, {
-            "name": "Symphony Solutions",
-            "url": "http://www.symphony-solutions.eu/",
-            "logoUrl": "../images/partners/symphony-solutions.png"
-        }, {
-            "name": "NETWORK",
-            "url": "http://network-ua.com/",
-            "logoUrl": "../images/partners/network.jpg"
-        }, {
-            "name": "career4it",
-            "url": "http://career4it.com/en/",
-            "logoUrl": "../images/partners/career4it.png"
-        }, {
-            "name": "LvivJs",
-            "url": "http://www.lvivjs.org.ua/",
-            "logoUrl": "../images/partners/lvivjs.png"
-        }, {
-            "name": "Hackraft",
-            "url": "http://hackraft.com/",
-            "logoUrl": "../images/partners/hackraft.svg"
-        }, {
-            "name": "Software Engineering 2015",
-            "url": "http://seconf.org.ua/",
-            "logoUrl": "../images/partners/se2015.png"
-        }]
-    }
-]
+        "name": "Twinfield",
+        "url": "http://twinfield.com/",
+        "logoUrl": "../images/partners/wolterskluwer.svg"
+    }, {
+        "name": "Sigma Software",
+        "url": "http://sigma.software/",
+        "logoUrl": "../images/partners/sigma.svg"
+    }]
+}, {
+    "title": "Gift sponsors",
+    "logos": [{
+        "name": "Nic.ua",
+        "url": "http://nic.ua/",
+        "logoUrl": "../images/partners/nic.png"
+    },{
+        "name": "JetBrains",
+        "url": "https://www.jetbrains.com/",
+        "logoUrl": "../images/partners/jetbrains.svg"
+    },{
+        "name": "Shulga Massage",
+        "url": "http://shulga-massage.com/",
+        "logoUrl": "../images/partners/massage.png"
+    }]
+}, {
+    "title": "Hosting partner",
+    "logos": [{
+        "name": "ibis",
+        "url": "http://www.ibisstyles.com/",
+        "logoUrl": "../images/partners/ibis.png"
+    }]
+}, {
+    "title": "General partner",
+    "logos": [{
+        "name": "Lviv IT Cluster",
+        "url": "http://itcluster.lviv.ua/",
+        "logoUrl": "../images/partners/itcluster.png"
+    }]
+}, {
+    "title": "Production partner",
+    "logos": [{
+        "name": "and action",
+        "url": "http://and-action.net/",
+        "logoUrl": "../images/partners/and-action.svg"
+    }]
+}, {
+    "title": "Party partner",
+    "logos": [{
+        "name": "Arsenal Market",
+        "url": "http://club.arsenalmarket.lviv.ua/",
+        "logoUrl": "../images/partners/arsenal.svg"
+    }]
+}, {
+    "title": "Information partners",
+    "logos": [{
+        "name": "CoMMuna",
+        "url": "http://communa.net.ua/en/",
+        "logoUrl": "../images/partners/communa.png"
+    }, {
+        "name": "Symphony Solutions",
+        "url": "http://www.symphony-solutions.eu/",
+        "logoUrl": "../images/partners/symphony-solutions.png"
+    }, {
+        "name": "NETWORK",
+        "url": "http://network-ua.com/",
+        "logoUrl": "../images/partners/network.png"
+    }, {
+        "name": "career4it",
+        "url": "http://career4it.com/en/",
+        "logoUrl": "../images/partners/career4it.png"
+    }, {
+        "name": "LvivJs",
+        "url": "http://www.lvivjs.org.ua/",
+        "logoUrl": "../images/partners/lvivjs.png"
+    }, {
+        "name": "Hackraft",
+        "url": "http://hackraft.com/",
+        "logoUrl": "../images/partners/hackraft.svg"
+    }, {
+        "name": "Software Engineering 2015",
+        "url": "http://seconf.org.ua/",
+        "logoUrl": "../images/partners/se2015.png"
+    }, {
+        "name": "AfishaLviv",
+        "url": "http://afishalviv.net/",
+        "logoUrl": "../images/partners/afishalviv.png"
+    }, {
+        "name": "CyberBionic",
+        "url": "http://edu.cbsystematics.com/en/",
+        "logoUrl": "../images/partners/cyber-bionic.png"
+    }, {
+        "name": "ITVDN",
+        "url": "http://itvdn.com/en",
+        "logoUrl": "../images/partners/itvdn.png"
+    }, {
+        "name": "Root Nation",
+        "url": "http://root-nation.com/",
+        "logoUrl": "../images/partners/root-nation.png"
+    }, {
+        "name": "LITS",
+        "url": "http://lits.com.ua/",
+        "logoUrl": "../images/partners/lits.png"
+    }, {
+        "name": "Codeguida",
+        "url": "http://codeguida.com/",
+        "logoUrl": "../images/partners/codeguida.png"
+    }, {
+        "name": "LvivOnline",
+        "url": "http://lviv-online.com/",
+        "logoUrl": "../images/partners/lvivonline.png"
+    }, {
+        "name": "Startup Depot",
+        "url": "http://startupdepot.lviv.ua/en/",
+        "logoUrl": "../images/partners/startup-depot.png"
+    }, {
+        "name": "Be Sparkle",
+        "url": "http://be-sparkle.com/",
+        "logoUrl": "../images/partners/be-sparkle.png"
+    }, {
+        "name": "ITEA",
+        "url": "http://itea.ua/",
+        "logoUrl": "../images/partners/itea.png"
+    }, {
+        "name": "DevCom",
+        "url": "http://devcom.com/",
+        "logoUrl": "../images/partners/devcom.svg"
+    }, {
+        "name": "Droidcon Krarow",
+        "url": "http://droidcon.pl/",
+        "logoUrl": "../images/partners/droidcon.png"
+    }, {
+        "name": "PHP Frameworks Day",
+        "url": "http://frameworksdays.com/",
+        "logoUrl": "../images/partners/phpday_logo.png"
+    }, {
+        "name": "SoftServe",
+        "url": "http://www.softserveinc.com/",
+        "logoUrl": "../images/partners/softserve.svg"
+    }, {
+        "name": "Garage48",
+        "url": "http://garage48.org/events/garage48-lviv",
+        "logoUrl": "../images/partners/garage48.png"
+    }]
+}]

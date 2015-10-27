@@ -2,35 +2,45 @@
   {
     "id": 1001,
     "title": "Registration & morning Coffee",
-    "description": "Get your badge, coffee, enjoy talking with tech edicts around",
-    "language": "",
-    "complexity": "",
-    "presentation": "",
-    "video": ""
+    "description": "Get your badge, coffee, enjoy talking with tech edicts around"
   },
   {
     "id": 1002,
     "title": "Lunch",
-    "description": "Foooooooood!",
-    "language": "",
-    "complexity": "",
-    "presentation": "",
-    "video": ""
+    "description": "Foooooooood!"
   },
   {
     "id": 1003,
     "title": "Coffee break",
-    "description": "Coffeeeeeee!",
-    "language": "",
+    "description": "Coffeeeeeee!"
+  },
+  {
+    "id": 1004,
+    "title": "Morning coffee",
+    "description": "Coffeeeeeee!"
+  },
+  {
+    "id": 1005,
+    "title": "GDG DevFest Ukraine 2015 Opening",
+    "description": "Official start of the conference. Greatings from the organizers, sponsors and partners.",
+    "language": "en",
     "complexity": "",
     "presentation": "",
     "video": ""
   },
   {
-    "id": 1004,
-    "title": "Morning coffee",
-    "description": "Coffeeeeeee!",
-    "language": "",
+    "id": 1006,
+    "title": "Afterparty & Networking",
+    "description": "Afterpaty is a great time to have some fun and meet new people.<br/><br/><b>Location</b>: Club Arsenal Market, [Pidvalna St 5](http://club.arsenalmarket.lviv.ua/uk/contacts/)<br/><br/>Free shot for all DevFest attendees included.<br/><br/>Don't forget to bring your badge.",
+    "track": {
+        "title": "Club Arsenal Market"
+    }
+  },
+  {
+    "id": 1007,
+    "title": "Conference closing and contest winners announcements",
+    "description": "Make sure you won't miss closing ceremony, all gifts from out sponsors and partners will find their owners during this session.",
+    "language": "uk",
     "complexity": "",
     "presentation": "",
     "video": ""
@@ -42,7 +52,7 @@
     "speakers": [1],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/said-tahsin-dane-material-design-custom-views",
     "video": "",
     "tags": [
         "Android",
@@ -84,7 +94,7 @@
     "speakers": [4],
     "language": "en",
     "complexity": "Intermediate",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/roman-mazur-power-of-android-shell",
     "video": "",
     "tags": [
         "Android",
@@ -107,7 +117,7 @@
   {
     "id": 106,
     "title": "Using GoLang for building micro-service architecture in Google Cloud Platform",
-    "description": "TBD",
+    "description": "Building a good cloud-ready application is always a challenge. Especially when you decide to use micro-service architecture, where you need to take care about orchestration of all components. Google Cloud Platform can help to solve all problems you can face when creating cloud apps. Go language allows to create small isolated components that can solve only one problem, but solve it perfectly. Combination of these two, Go language and GCP, brings excellent mix that makes development of real cloud application easy as piece of cake!",
     "speakers": [7],
     "language": "en",
     "complexity": "Beginner",
@@ -121,7 +131,7 @@
   {
     "id": 107,
     "title": "Angular2: Reasoning behind technical decisions",
-    "description": "TBD",
+    "description": "Angular 2.0 is the next generation of platform that allows to develop complex web application with a blazing speed and simplicity. But for many developers, even those who have lot of Angular1 experience, there are still a lot of questions why Angular team decided to use TypeScript, strange templating syntax and other not very obvious decisions. During this talk we’ll try to give answers to these questions and dive little bit deeper in Angular 2.0 architecture. ",
     "speakers": [7],
     "language": "en",
     "complexity": "Beginner",
@@ -137,7 +147,7 @@
     "title": "V8 under the hood",
     "description": "What is happening inside V8 javascript engine - optimization, work, etc.",
     "speakers": [8],
-    "language": "en",
+    "language": "ru",
     "complexity": "Intermediate",
     "presentation": "",
     "video": "",
@@ -153,7 +163,7 @@
     "speakers": [9],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/mandy-waite-scalable-microservices-with-grpc-kubernetes-and-containers",
     "video": "",
     "tags": [
         "Cloud",
@@ -168,7 +178,7 @@
     "speakers": [9],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/mandy-waite-cloud-platform-end-to-end-how-we-built-cloud-spin",
     "video": "",
     "tags": [
         "Cloud",
@@ -179,11 +189,11 @@
   {
     "id": 111,
     "title": "New security model in Marshmallow",
-    "description": "",
+    "description": "Permissions on Android have always been an important area to consider when developing applications. Currently, users have awareness of these permissions, but no real control over them.<br/><br/>Android M comes with several breaking changes, related to Permissions. <br/><br/>In this presentation we will learn on how the new permission model introduced in Android M works, and how can we educate our users, so they can understand why are we asking for certain permission. ",
     "speakers": [10],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/roman-herasymenko-android-m-security-model",
     "video": "",
     "tags": [
         "Android",
@@ -206,10 +216,10 @@
   },
   {
     "id": 113,
-    "title": "Material Design Magic",
+    "title": "Material Design. Custom Branding",
     "description": "1. Material Design Magic <br/>2. Work with colours, typography and custom branding <br/>3. Frameworks for MD Style <br/>4. Issues, tricks and Best cases.",
     "speakers": [12],
-    "language": "ua",
+    "language": "uk",
     "complexity": "Intermediate",
     "presentation": "",
     "video": "",
@@ -239,7 +249,7 @@
     "speakers": [14],
     "language": "en",
     "complexity": "Intermediate",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/jana-moudra-lets-play-dart",
     "video": "",
     "tags": [
         "Web",
@@ -249,11 +259,11 @@
   {
     "id": 116,
     "title": "Polymer vs other libraries",
-    "description": "Most modern front-end JavaScript libraries provide support for component based development. Components help separate large applications into standalone building blocks with specified communication API. Let's compare Polymer elements with components from React, Angular, Ember and Backbone.",
+    "description": "Most modern front-end JavaScript libraries provide support for component based development. Components help separate large applications into standalone building blocks with specified communication API. Let's compare Polymer elements with components from React, Angular.",
     "speakers": [15],
     "language": "en",
     "complexity": "Intermediate",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/jakub-skvara-polymer-vs-other-libraries",
     "video": "",
     "tags": [
         "Web",
@@ -294,7 +304,7 @@
     "speakers": [18],
     "language": "ru",
     "complexity": "Intermediate",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/alexey-rybakov-android-tv-development",
     "video": "",
     "tags": [
         "Android",
@@ -364,7 +374,7 @@
     "speakers": [22],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/semih-yagcioglu-build-your-thing-in-a-weekend-with-angularjs-2-dot-0",
     "video": "",
     "tags": [
         "Web",
@@ -374,7 +384,7 @@
   {
     "id": 125,
     "title": "[Keynote] Lean Startup with Google",
-    "description": "TBD",
+    "description": "THINK OUT OF THE BOX. CREATE WHAT YOU WANT!<br/><br/>It's time for the Ukrainian Developers to move forward and create the next globally-successful app! Please come to the Keynote by Dawid Ostrowski and learn how Google can help you with this goal, by providing technology for developers and support for entrepreneurs.",
     "speakers": [23],
     "language": "en",
     "complexity": "Beginner",
@@ -471,7 +481,7 @@
     "title": "Women cracking the code",
     "description": "For last several years the number of girls in IT sphere is actively increasing. In general girls in IT is not a myth, but still number of girls working as software developers, having original ideas or creating own startups is a tiny. Probably the reason is that profession of software developer requires a set of specific analytical skills, creative approach to any problems and ability to lifelong learn. During the talk we will discuss how to improve listed qualities and make a successful career in IT.",
     "speakers": [16],
-    "language": "en",
+    "language": "uk",
     "complexity": "Beginner",
     "presentation": "",
     "video": "",
@@ -512,7 +522,7 @@
     "title": "The Cloud Convergence: OpenStack and Kubernetes",
     "description": "The new cloud era brings us a lot of different technologies and products that can make process of development easier. <br/><br/>On the one hand we have OpenStack - an Open Source product that provides you a possibility to deploy your own cloud. On the other hand - Google, with its extensive experience operating a cloud using container technology, developed the open source Kubernetes orchestration system to manage containerized applications in a clustered environment.<br/><br/>This presentation will show you how to manage Containers easily using Kubernetes system on the OpenStack cloud environment.",
     "speakers": [30],
-    "language": "uk",
+    "language": "en",
     "complexity": "Beginner",
     "presentation": "",
     "video": "",
@@ -526,7 +536,7 @@
     "title": "How to become a Google Developer Expert",
     "description": "TBD",
     "speakers": [10],
-    "language": "en",
+    "language": "uk",
     "complexity": "Beginner",
     "presentation": "",
     "video": "",
@@ -537,8 +547,8 @@
   {
     "id": 138,
     "title": "Tips to succeed in IT career",
-    "description": "How to prepare to the interview? What is important in the resume? How get a job in Google?<br/><br/>When you start a career that a questions everyone is strugling with. During the session we'll talk about best practices in creating resume, differences in applying for a job in product and outsorce companies.",
-    "speakers": [],
+    "description": "How to prepare to the interview? What is important in the resume?<br/><br/>When you start a career that a questions everyone is strugling with. During the session we'll talk about best practices in creating resume, differences in applying for a job in product and outsorce companies.",
+    "speakers": [31],
     "language": "uk",
     "complexity": "Beginner",
     "presentation": "",
@@ -550,14 +560,24 @@
   {
     "id": 139,
     "title": "HR sessions",
-    "description": "Visit the session to learn more about insights of working for companies that support DevFest Ukraine.",
-    "speakers": [],
     "language": "uk",
     "complexity": "Beginner",
     "presentation": "",
     "video": "",
     "tags": [
         "Community"
+    ]
+  },
+  {
+    "id": 140,
+    "title": "Fireside Chat",
+    "description": "In this informal session we would like to sit by the virtual fireplace and give you the possibility to ask any question to various speakers and sponsors on the fireside panel. If we are just staring at each other the moderator will put an extra woodblock on the fire by posing a taunting statement with the intention to heat up the discussion to a passionate debate. We give away great swag for people contributing to a great conversation.",
+    "language": "en",
+    "complexity": "Beginner",
+    "presentation": "",
+    "video": "",
+    "tags": [
+        "Web"
     ]
   }
 ]
