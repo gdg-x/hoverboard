@@ -19,17 +19,17 @@
             }
 
             .fe-people {
-                font-weight: 100;
+                font-weight: 200;
             }
 
-            @media (max-width: 767px) {
+            @media (max-width: 960px) {
                 .fe-people:nth-child(1),
                 .fe-people:nth-child(2) {
                     margin-bottom: 40px;
                 }
             }
 
-            @media (min-width: 768px) {
+            @media (min-width: 601px) {
                 .fe-people-img {
                     height: 120px;
                     width: 120px;
@@ -56,11 +56,10 @@
                 font-size: .9em;
             }
         </style>
-        <iron-ajax auto url="[[source]]" handle-as="json" on-response="peopleLoaded"></iron-ajax>
         <div class="container text-center">
             <content></content>
             <div class="flex wrap layout horizontal people-wraper">
-                <template is="dom-repeat" items="[[people)]" as="person">
+                <template is="dom-repeat" items="[[featuredPeople]]" as="person">
                     <div class="fe-people two-column-xs">
                         <iron-image src="[[person.photoUrl]]" class="fe-people-img placeholder-color img-circle" preload fade sizing="cover"></iron-image>
                         <h4 class="fe-people-name">
@@ -83,10 +82,19 @@
     Polymer({
         is: 'featured-people',
         properties: {
-            source: String
+            people: {
+                type: Array,
+                observer: '_peopleChanged'
+            }
         },
-        peopleLoaded: function(event, response) {
-            this.people = this.randomOrder(response.response).slice(0, 4);
+        _peopleChanged: function() {
+            var filteredPeople = [];
+            for (var i = 0; i < this.people.length; i++) {
+                if (this.people[i].featured) {
+                    filteredPeople.push(this.people[i]);
+                }
+            }
+            this.featuredPeople = this.randomOrder(filteredPeople).slice(0, 4);
         },
         randomOrder: function(array) {
             return array.sort(function() {

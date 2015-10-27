@@ -61,10 +61,6 @@
                 font-weight: 300;
             }
 
-            .link-block a {
-                font-weight: 100;
-            }
-
             .link-block a:hover {
                 text-decoration: underline;
             }
@@ -81,7 +77,7 @@
                 padding-top: 10px;
             }
 
-            @media (min-width: 768px) {
+            @media (min-width: 961px) {
                 nav {
                     flex-direction: row !important;
                     justify-content: flex-end !important;
@@ -95,7 +91,7 @@
                     margin-bottom: 0;
                 }
                 .footer-content {
-                    padding: 32px 0;
+                    padding: 32px 16px;
                     flex: 1;
                 }
                 .footer-links-container {
@@ -136,7 +132,7 @@
                         <ul class="link-block">
                             <li><a href="https://developers.google.com/" target="_blank">Google Developers</a></li>
                             <li><a href="http://gdg-devfest-ua.appspot.com/" target="_blank">GDG DevFest Ukraine 2013</a></li>
-                            <li><a href="/2014" target="_blank">GDG DevFest Ukraine 2014</a></li>
+                            <li><a href="http://devfest.gdg.org.ua/2014/" target="_blank">GDG DevFest Ukraine 2014</a></li>
                             <li><a href="/code-of-conduct">Code of Conduct</a></li>
                         </ul>
                     </div>
@@ -145,16 +141,17 @@
                         <ul class="link-block">
                             <li><a href="/assets/GDG_DevFest_Ukraine_2015_Partnership_Proposition.pdf" target="_blank">Partnership Proposition</a></li>
                             <li><a href="http://bit.ly/dfua-media" target="_blank">Media Kit</a></li>
+                            <li><a href="https://docs.google.com/forms/d/1sOjuv7rv77JXq2jPBdh3tg-O4CV8HpLTED5cjJBxnG8/viewform" target="_blank">Media Accreditation</a></li>
                         </ul>
                     </div>
                     <div class="flex link-block-wrapper">
                         <span class="link-block-title block">Contact us</span>
                         <ul class="link-block">
-                            <li><a href="mailto:devfest@gdg.org.ua">devfest@gdg.org.ua</a></li>
+                            <li><a href="mailto:devfest@gdg.org.ua">devfest@google.com</a></li>
                         </ul>
                         <div class="icons-wrapper align-pb-block">
                             <a href="https://plus.google.com/102444623953913144164" target="_blank">
-                                <paper-icon-button icon="app-icons:glus"></paper-icon-button>
+                                <paper-icon-button icon="app-icons:gplus"></paper-icon-button>
                             </a>
                             <a href="https://www.facebook.com/GDGLviv" target="_blank">
                                 <paper-icon-button icon="app-icons:facebook"></paper-icon-button>
@@ -194,7 +191,7 @@
     Polymer({
         is: 'footer-block',
         ready: function() {
-            this.url = 'http://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe';
+            this.url = 'https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe';
             this.name = 'b_b7e853a79164ddfdbda3ed77b_7993e39fbe';
         },
         backToTop: function() {

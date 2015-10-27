@@ -59,6 +59,7 @@
 <body id="body" unresolved class="fullbleed layout vertical">
     <span id="browser-sync-binding"></span>
     <template is="dom-bind" id="app">
+        <app-data speakers="{{speakers}}" sessions="{{sessions}}" posts="{{posts}}" partners="{{partners}}" schedule="{{schedule}}"></app-data>
         <paper-drawer-panel id="paperDrawerPanel" force-narrow>
             <paper-header-panel drawer class="drawer" mode="seamed">
                 <paper-toolbar class="tall">
@@ -77,6 +78,7 @@
                 <paper-menu class="list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onMenuSelect">
                     <a data-route="#!/home" href="/">Home</a>
                     <a data-route="#!/blog" href="/blog">Blog</a>
+                    <a data-route="#!/schedule" href="/schedule">Schedule</a>
                     <a data-route="#!/speakers" href="/speakers">Speakers</a>
                     <!-- <a data-route="contact" href="/contact">Contact</a> -->
                 </paper-menu>
@@ -95,11 +97,9 @@
                                             <p class="description">The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts</p>
                                             <p class="slogan">Think out of the box. Create what you want!</p>
                                             <div class="links layout horizontal align-pb-block">
-                                                <a href="http://goo.gl/forms/kymZwijWFy" target="_blank">
-                                                    <paper-button noink>
-                                                        Become a speaker
-                                                    </paper-button>
-                                                </a>
+                                                <paper-button noink on-tap="playVideo">
+                                                    Watch a video
+                                                </paper-button>
                                                 <a href="#pricetable">
                                                     <paper-button class="colorful" raised>
                                                         Register
@@ -118,16 +118,16 @@
                                 </a>
                             </hero-block>
                             <statistics-block></statistics-block>
-                            <featured-people source="../../data/featured-speakers.json">
+                            <featured-people people="{{speakers}}">
                                 <h4 class="heading">Rockstar Speakers</h4>
                             </featured-people>
                             <call-to-action></call-to-action>
                             <photo-block></photo-block>
                             <tickets-block></tickets-block>
-                            <latest-news source="../../data/blog.json"></latest-news>
+                            <latest-news posts="{{posts}}"></latest-news>
                             <social-feed source="http://lviv.gdg.org.ua/tweetledee/favoritesjson.php?c=10&cache_interval=7200"></social-feed>
                             <map-block></map-block>
-                            <logos-block source="../../data/partners.json">
+                            <logos-block logos-blocks="{{partners}}">
                                 <h4 class="heading">Partners</h4>
                             </logos-block>
                             <footer-block></footer-block>
@@ -141,7 +141,18 @@
                                     <!-- <paper-fab class="section-fab-right" icon="social:share"></paper-fab> -->
                                 </div>
                             </hero-block>
-                            <blog-block id="blog" class="container-atop" source="../../data/blog.json"></blog-block>
+                            <blog-block id="blog" class="container-atop-md" posts="{{posts}}"></blog-block>
+                            <footer-block></footer-block>
+                        </section>
+                        <section data-route="schedule">
+                            <hero-block class="section-shadow container-before-atop bottom-tabs" style="background: #009688; color: #fff;">
+                                <div class="top-section">
+                                    <div class="title-wrapper layout horizontal">
+                                        <h3 class="self-end">Schedule</h3>
+                                    </div>
+                                </div>
+                            </hero-block>
+                            <schedule-block id="schedule-block" class="container-atop" schedule="{{schedule}}" sessions="{{sessions}}"></schedule-block>
                             <footer-block></footer-block>
                         </section>
                         <section data-route="speakers">
@@ -153,7 +164,7 @@
                                     <!-- <paper-fab class="section-fab-right" icon="social:share"></paper-fab> -->
                                 </div>
                             </hero-block>
-                            <people-block id="people-block" class="container-atop" source="../../data/speakers.json" sessions-source="../../data/sessions.json"></people-block>
+                            <people-block id="people-block" class="container-atop" speakers="{{speakers}}" sessions="{{sessions}}"></people-block>
                             <footer-block></footer-block>
                         </section>
                         <section data-route="code-of-conduct">
@@ -167,6 +178,17 @@
                             <cod-block class="container-atop" source="../../posts/code-of-conduct.markdown"></cod-block>
                             <footer-block></footer-block>
                         </section>
+                        <section data-route="speaker-guidelines">
+                            <hero-block class="section-shadow container-before-atop" style="background: #455A64; color: #fff;">
+                                <div class="top-section">
+                                    <div class="title-wrapper layout horizontal">
+                                        <h3 class="self-end">Speaker Guidelines</h3>
+                                    </div>
+                                </div>
+                            </hero-block>
+                            <speaker-guidelines-block class="container-atop" source="../../posts/speaker-guidelines.markdown"></speaker-guidelines-block>
+                            <footer-block></footer-block>
+                        </section>
                         <!-- <section data-route="contact">
                             <h1>Contact</h1>
 
@@ -176,13 +198,22 @@
                 </div>
             </div>
         </paper-drawer-panel>
-        <paper-toast id="caching-complete" duration="6000" text="Caching complete! This app will work offline.">
+        <paper-toast id="caching-complete" class="toast" duration="6000" text="Caching complete! This app will work offline.">
         </paper-toast>
+        <paper-dialog class="video-dialog fit" id="promo-video-dialog" with-backdrop modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+            <paper-toolbar class="navbar-overlay fit">
+                <paper-icon-button icon="icons:arrow-back" on-tap="closeVideoCard"></paper-icon-button>
+                <div class="title text-left">GDG DevFest Ukraine 2015</div>
+            </paper-toolbar>
+            <div class="fullvideo-container fit">
+                <google-youtube id="promo-video" video-id="_yhIH9wb3hE" fluid="true" autohide="1" chromeless="true"></google-youtube>
+            </div>
+        </paper-dialog>
         <platinum-sw-register auto-register clients-claim skip-waiting on-service-worker-installed="displayInstalledToast">
             <platinum-sw-cache default-cache-strategy="networkFirst" precache-file="precache.json">
             </platinum-sw-cache>
         </platinum-sw-register>
-        <webfont-loader families="Roboto:100,400&subset=latin"></webfont-loader>
+        <webfont-loader families="Roboto:100,200,400&subset=latin"></webfont-loader>
     </template>
     <google-analytics code="UA-43643469-1"></google-analytics>
     <!-- build:js scripts/app.js -->

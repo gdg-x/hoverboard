@@ -10,7 +10,17 @@
                     margin: 0 -16px;
                 }
                 ;
-                color: #4E4E4E;
+                color: var(--primary-text-color);
+            }
+
+            paper-tab {
+                flex: none;
+                padding: 0 10px;
+            }
+
+            paper-tab {
+                flex: none;
+                padding: 0 10px;
             }
 
             .nav-link {
@@ -73,7 +83,7 @@
                 height: 200px;
             }
 
-            @media (max-width: 767px) {
+            @media (max-width: 960px) {
                 ::content .center-content-xs {
                     @apply(--layout-vertical);
                     @apply(--layout-center);
@@ -81,7 +91,10 @@
                 }
             }
 
-            @media (min-width: 768px) {
+            @media (min-width: 961px) {
+                .menu-toggle {
+                    display: none;
+                }
                 ::content .hero {
                     padding-top: 40px;
                 }
@@ -96,18 +109,27 @@
         <div id="hero">
             <div class="container flex relative">
                 <paper-toolbar>
-                    <paper-icon-button class="visible-xs" icon="menu" on-tap="togglePanel"></paper-icon-button>
+                    <paper-icon-button class="menu-toggle" icon="menu" on-tap="togglePanel"></paper-icon-button>
                     <div class="flex hidden-xs">
-                        <a data-route="home" href="/" hidden="{{hideLogo}}">
+                        <a data-route="home" href="/" hidden$="{{hideLogo}}">
                             <img class="logo" src="../../images/logo-white.svg" alt="GDG DevFest 2015">
                         </a>
                     </div>
                     <paper-tabs class="hidden-xs" attr-for-selected="data-route" selected="{{route}}">
-                        <paper-tab class="text-u-c">
-                            <a data-route="blog" href="#!/blog" class="nav-link horizontal center-center layout">Blog</a>
+                        <paper-tab class="text-u-c" link>
+                            <a data-route="blog" href="#!/blog" class="nav-link horizontal center-center layout">
+                                Blog
+                            </a>
                         </paper-tab>
-                        <paper-tab class="text-u-c">
-                            <a data-route="speakers" href="#!/speakers" class="nav-link horizontal center-center layout">Speakers</a>
+                        <paper-tab class="text-u-c" link>
+                            <a data-route="schedule" href="#!/schedule" class="nav-link horizontal center-center layout">
+                                Schedule
+                            </a>
+                        </paper-tab>
+                        <paper-tab class="text-u-c" link>
+                            <a data-route="speakers" href="#!/speakers" class="nav-link horizontal center-center layout">
+                                Speakers
+                            </a>
                         </paper-tab>
                         <!-- <paper-tab class="text-u-c">
                             <a data-route="contact" href="#!/contact" class="nav-link horizontal center-center layout">Contact</a>

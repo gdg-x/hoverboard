@@ -4,9 +4,9 @@
         <style>
             :host {
                 display: block;
-                z-index: 9;
-                height: 100%;
-                --paper-card: #fff;
+                --paper-icon-button: {
+                    color: var(--secondary-text-color);
+                };
             }
 
             paper-scroll-header-panel {
@@ -26,9 +26,12 @@
             paper-toolbar .title {
                 margin: 0;
             }
+            .back-button {
+                color: #fff;
+            }
 
             .card-actions {
-                border-top: 1px solid #e8e8e8;
+                border-top: 1px solid var(--divider-color);
             }
 
             .subtitle {
@@ -58,12 +61,13 @@
                 font-size: 16px;
             }
 
-            .tags-label {
-                font-weight: 400;
+            .tag-label {
                 font-size: 14px;
+                color: #ffffff !important;
             }
 
             .tag {
+                margin-top: 3px;
                 margin-left: 5px;
             }
 
@@ -81,86 +85,8 @@
                 font-size: 22px;
                 font-weight: 400;
             }
-
-            @media (min-width: 768px) {
-                paper-card {
-                    width: 70%;
-                }
-                .person-img {
-                    height: 130px;
-                    width: 130px;
-                    margin-top: -70px;
-                    border: 2px solid #fff;
-                }
-                .person-detail {
-                    margin-top: -10px;
-                    margin-left: 15px;
-                }
-                .name {
-                    font-size: 22px;
-                    color: var(--default-primary-color);
-                }
-                .title {
-                    font-size: 14px;
-                }
-            }
         </style>
-        <div class="relative layout horizontal center-justified hidden-xs">
-            <paper-card>
-                <div class="paper-card-container">
-                    <div class="card-content layout horizontal">
-                        <iron-image src="[[person.photoUrl]]" class="person-img placeholder-color img-circle" preload fade sizing="cover"></iron-image>
-                        <div class="person-detail flex layout vertical center-center">
-                            <span class="name self-start">[[person.name]]</span>
-                            <div class="title self-start">
-                                <span>[[person.title]]</span>,
-                                <span>[[person.company]]</span>
-                            </div>
-                        </div>
-                        <div class="flex"></div>
-                        <div>
-                            <paper-icon-button class="back-button" on-tap="closePeople" icon="close"></paper-icon-button>
-                        </div>
-                    </div>
-                    <div class="card-content person-tags">
-                        <span class="tags-label">Tags:</span>
-                        <template is="dom-repeat" items="[[tags]]" as="tag">
-                            <span class$="[[tag.tagClass]]">[[tag.name]]</span>
-                        </template>
-                    </div>
-                    <div class="card-content person-description">
-                        <template is="dom-repeat" items="[[person.badges]]" as="badge">
-                            <a class="badge block" href="[[badge.link]]" target="_blank">[[badge.description]]</a>
-                        </template>
-                        <marked-element markdown="[[person.bio]]"></marked-element>
-                    </div>
-                    <div class="card-content sessions">
-                        <template is="dom-repeat" items="[[person.sessions]]" as="session">
-                            <div class="session">
-                                <h3 class="session-title">[[session.title]]</h3>
-                                <span class="session-meta">Language:
-                                    <span>[[session.language]]</span>
-                                </span>
-                                <span class="session-meta">Complexity:
-                                    <span>[[session.complexity]]</span>
-                                </span>
-                                <marked-element markdown="[[session.description]]"></marked-element>
-                            </div>
-                        </template>
-                    </div>
-                    <div class="card-actions">
-                        <div class="align-pb-block">
-                            <template is="dom-repeat" items="[[person.socials]]" as="social">
-                                <a href="[[social.link]]" target="_blank">
-                                    <paper-button class="colorful">[[social.name]]</paper-button>
-                                </a>
-                            </template>
-                        </div>
-                    </div>
-                </div>
-            </paper-card>
-        </div>
-        <paper-scroll-header-panel id="scrollHeaderPanel" class="visible-xs fit" condenses keep-condensed-header>
+        <paper-scroll-header-panel id="scrollHeaderPanel" class="fit" condenses keep-condensed-header="[[smallScreen]]">
             <paper-toolbar class="tall">
                 <paper-icon-button class="back-button" on-tap="closePeople" icon="arrow-back"></paper-icon-button>
                 <div id="title" class="bottom title">[[person.name]]</div>
@@ -200,13 +126,14 @@
                     <div class="align-pb-block">
                         <template is="dom-repeat" items="[[person.socials]]" as="social">
                             <a href="[[social.link]]" target="_blank">
-                                <paper-button class="colorful">[[social.name]]</paper-button>
+                                <paper-icon-button class="social-icon" icon$="{{social.icon}}"></paper-icon-button>
                             </a>
                         </template>
                     </div>
                 </div>
             </div>
         </paper-scroll-header-panel>
+        <iron-media-query query="(max-width: 960px)" query-matches="{{smallScreen}}"></iron-media-query>
     </template>
 </dom-module>
 <script>

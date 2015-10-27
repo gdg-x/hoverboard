@@ -1,228 +1,223 @@
 <link rel="import" href="tags-color.html">
 <style is="custom-style" include="tags-color">
-/* Application theme */
-
-:root {
-    --dark-primary-color: #303F9F;
-    --default-primary-color: #00BCD4;
-    --light-primary-color: #C5CAE9;
-    --text-primary-color: #ffffff;
-    /*text/icons*/
-    --accent-color: #FF4081;
-    --primary-background-color: #c5cae9;
-    --primary-text-color: #212121;
-    --secondary-text-color: #727272;
-    --disabled-text-color: #bdbdbd;
-    --divider-color: #B6B6B6;
-    /* Components */
-    /* paper-drawer-panel */
-    --drawer-menu-color: #ffffff;
-    --drawer-border-color: 1px solid #ccc;
-    --paper-toolbar-background: #00BCD4;
-    --paper-toolbar-color: #07434D;
-    /* paper-menu */
-    --paper-menu-background-color: #fff;
-    --menu-link-color: #111111;
-    --paper-radio-button-checked-color: var(--default-primary-color);
-    --paper-radio-button-checked-ink-color: var(--default-primary-color);
-    --paper-radio-button-unchecked-ink-color: var(--default-primary-color);
-}
-
-
-/* General styles */
-
-iron-pages {
-    padding: 0 !important;
-}
-
-paper-button,
-a paper-button {
-    color: inherit;
-}
-
-paper-button.colorful {
-    color: #00BCD4;
-}
-
-paper-button[raised].colorful {
-    background: #00BCD4;
-    color: #fff;
-}
-
-a,
-.anchor-like {
-    color: var(--default-primary-color);
-    cursor: pointer;
-}
-
-.post-link {
-    color: #ffffff;
-    font-weight: 100;
-    padding-bottom: 1px;
-    font-style: italic;
-}
-
-#drawerToolbar {
-    color: var(--secondary-text-color);
-    background-color: var(--drawer-menu-color);
-    border-bottom: var(--drawer-toolbar-border-color);
-    height: 64px;
-}
-
-paper-drawer-panel {
-    --paper-drawer-panel-left-drawer-container: {
-        z-index: 10;
+    :root {
+        --dark-primary-color: #0097A7;
+        --default-primary-color: #00BCD4;
+        --light-primary-color: #B2EBF2;
+        --text-primary-color: #FFFFFF;
+        --accent-color: #FF4081;
+        --primary-background-color: #B2EBF2;
+        --primary-text-color: #212121;
+        --secondary-text-color: #727272;
+        --disabled-text-color: #BDBDBD;
+        --divider-color: #e8e8e8;
+        /* Components */
+        /* paper-drawer-panel */
+        --drawer-menu-color: #ffffff;
+        --drawer-border-color: 1px solid #ccc;
+        --drawer-toolbar-border-color: 1px solid rgba(0, 0, 0, 0.22);
+        /* paper-menu */
+        --paper-menu-background-color: #fff;
+        --menu-link-color: #111111;
+        /* paper-input */
+        --paper-input-container-color: rgba(255, 255, 255, 0.64);
+        --paper-input-container-focus-color: rgba(255, 255, 255, 1);
+        --paper-input-container-input-color: #fff;
+        /*paper-toolbar*/
+        --paper-toolbar-background: var(--default-primary-color);
+        --paper-toolbar-color: var(--dark-primary-color);
+        /*paper-radio-button*/
+        --paper-radio-button-checked-color: var(--default-primary-color);
+        --paper-radio-button-checked-ink-color: var(--default-primary-color);
+        --paper-radio-button-unchecked-ink-color: var(--default-primary-color);
     }
-    ;
-}
+    /* General styles */
 
-paper-material {
-    border-radius: 2px;
-    height: 100%;
-    padding: 16px 0 16px 0;
-    width: calc(98.66% - 16px);
-    margin: 16px auto;
-    background: white;
-}
-
-paper-menu a {
-    text-decoration: none;
-    color: var(--menu-link-color);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 24px;
-    min-height: 48px;
-    padding: 0 16px;
-}
-
-.paper-menu > .iron-selected {
-    background: #eaeaea;
-}
-
-
-/* Breakpoints */
-
-
-/* Small */
-
-@media (max-width: 600px) {
-    paper-material {
-        --menu-container-display: none;
-        width: calc(97.33% - 32px);
-        padding-left: 16px;
-        padding-right: 16px;
+    body,
+    html {
+        background: #fafafa;
+        font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: var(--primary-text-color);
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 1.4;
+        overflow: hidden;
     }
-}
 
-
-/* Tablet+ */
-
-@media (min-width: 601px) {
-    paper-material {
-        width: calc(98% - 46px);
-        margin-bottom: 32px;
-        padding-left: 30px;
-        padding-right: 30px;
-    }
     iron-pages {
-        padding: 48px 62px;
+        padding: 0 !important;
     }
-}
 
+    paper-button,
+    a paper-button {
+        color: initial;
+    }
 
-/* Material Design Adaptive Breakpoints */
+    paper-button.white {
+        color: #fff;
+    }
 
+    paper-button.colorful {
+        color: var(--default-primary-color);
+    }
 
-/*
+    paper-button[raised].colorful {
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
+    }
+
+    a,
+    .anchor-like {
+        color: var(--default-primary-color);
+        cursor: pointer;
+    }
+
+    .post-link {
+        color: #ffffff;
+        font-weight: 300;
+        padding-bottom: 1px;
+        font-style: italic;
+    }
+
+    .video-dialog,
+    .video-dialog > * {
+        margin: 0;
+        padding: 0;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .fullvideo-container {
+        z-index: 6;
+        overflow: hidden;
+    }
+
+    .navbar-overlay {
+        position: fixed !important;
+        background: rgba(0, 0, 0, 0.5) !important;
+        text-transform: uppercase;
+        z-index: 9;
+        color: #fff;
+    }
+
+    #drawerToolbar {
+        color: var(--secondary-text-color);
+        background-color: var(--drawer-menu-color);
+        border-bottom: var(--drawer-toolbar-border-color);
+        height: 64px;
+    }
+
+    paper-drawer-panel {
+        --paper-drawer-panel-left-drawer-container: {
+            z-index: 10;
+        }
+        ;
+    }
+
+    paper-material {
+        border-radius: 2px;
+        height: 100%;
+        padding: 16px 0 16px 0;
+        width: calc(98.66% - 16px);
+        margin: 16px auto;
+        background: white;
+    }
+
+    paper-menu a {
+        text-decoration: none;
+        color: var(--menu-link-color);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 24px;
+        min-height: 48px;
+        padding: 0 16px;
+    }
+
+    .paper-menu > .iron-selected {
+        background: #eaeaea;
+    }
+    /* Breakpoints */
+    /* Small */
+
+    @media (max-width: 960px) {
+        paper-material {
+            --menu-container-display: none;
+            width: calc(97.33% - 32px);
+            padding-left: 16px;
+            padding-right: 16px;
+        }
+    }
+    /* Tablet+ */
+
+    @media (min-width: 601px) {
+        paper-material {
+            width: calc(98% - 46px);
+            margin-bottom: 32px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+        iron-pages {
+            padding: 48px 62px;
+        }
+    }
+    /* Material Design Adaptive Breakpoints */
+    /*
     Below you'll find CSS media queries based on the breakpoint guidance
     published by the Material Design team. You can choose to use, customise
     or remove these breakpoints based on your needs.
 
     http://www.google.com/design/spec/layout/adaptive-ui.html#adaptive-ui-breakpoints
    */
+    /* mobile-small */
 
+    @media all and (min-width: 0) and (max-width: 360px) and (orientation: portrait) {}
+    /* mobile-large */
 
-/* mobile-small */
+    @media all and (min-width: 361px) and (orientation: portrait) {}
+    /* mobile-small-landscape */
 
-@media all and (min-width: 0) and (max-width: 360px) and (orientation: portrait) {}
+    @media all and (min-width: 0) and (max-width: 480px) and (orientation: landscape) {}
+    /* mobile-large-landscape */
 
+    @media all and (min-width: 481px) and (orientation: landscape) {}
+    /* tablet-small-landscape */
 
-/* mobile-large */
+    @media all and (min-width: 601px) and (max-width: 960px) and (orientation: landscape) {}
+    /* tablet-large-landscape */
 
-@media all and (min-width: 361px) and (orientation: portrait) {}
+    @media all and (min-width: 961px) and (orientation: landscape) {}
+    /* tablet-small */
 
+    @media all and (min-width: 601px) and (orientation: portrait) {}
+    /* tablet-large */
 
-/* mobile-small-landscape */
+    @media all and (min-width: 601px) and (max-width: 960px) and (orientation: portrait) {}
+    /* desktop-x-small-landscape */
 
-@media all and (min-width: 0) and (max-width: 480px) and (orientation: landscape) {}
+    @media all and (min-width: 0) and (max-width: 480px) and (orientation: landscape) {}
+    /* desktop-x-small */
 
+    @media all and (min-width: 0) and (max-width: 480px) and (max-aspect-ratio: 4/3) {}
+    /* desktop-small-landscape */
 
-/* mobile-large-landscape */
+    @media all and (min-width: 481px) and (max-width: 960px) and (orientation: landscape) {}
+    /* desktop-small */
 
-@media all and (min-width: 481px) and (orientation: landscape) {}
+    @media all and (min-width: 481px) and (max-width: 960px) and (max-aspect-ratio: 4/3) {}
+    /* desktop-medium-landscape */
 
+    @media all and (min-width: 961px) and (max-width: 1280px) and (orientation: landscape) {}
+    /* desktop-medium */
 
-/* tablet-small-landscape */
+    @media all and (min-width: 961px) and (max-width: 1280px) and (max-aspect-ratio: 4/3) {}
+    /* desktop-large */
 
-@media all and (min-width: 600px) and (max-width: 960px) and (orientation: landscape) {}
+    @media all and (min-width: 1281px) and (max-width: 1600px) {}
+    /* desktop-xlarge */
 
-
-/* tablet-large-landscape */
-
-@media all and (min-width: 961px) and (orientation: landscape) {}
-
-
-/* tablet-small */
-
-@media all and (min-width: 600px) and (orientation: portrait) {}
-
-
-/* tablet-large */
-
-@media all and (min-width: 601px) and (max-width: 840px) and (orientation: portrait) {}
-
-
-/* desktop-x-small-landscape */
-
-@media all and (min-width: 0) and (max-width: 480px) and (orientation: landscape) {}
-
-
-/* desktop-x-small */
-
-@media all and (min-width: 0) and (max-width: 480px) and (max-aspect-ratio: 4/3) {}
-
-
-/* desktop-small-landscape */
-
-@media all and (min-width: 481px) and (max-width: 840px) and (orientation: landscape) {}
-
-
-/* desktop-small */
-
-@media all and (min-width: 481px) and (max-width: 840px) and (max-aspect-ratio: 4/3) {}
-
-
-/* desktop-medium-landscape */
-
-@media all and (min-width: 841px) and (max-width: 1280px) and (orientation: landscape) {}
-
-
-/* desktop-medium */
-
-@media all and (min-width: 841px) and (max-width: 1280px) and (max-aspect-ratio: 4/3) {}
-
-
-/* desktop-large */
-
-@media all and (min-width: 1281px) and (max-width: 1600px) {}
-
-
-/* desktop-xlarge */
-
-@media all and (min-width: 1601px) and (max-width: 1920px) {}
+    @media all and (min-width: 1601px) and (max-width: 1920px) {}
 </style>

@@ -1,0 +1,113 @@
+<dom-module id="app-data">
+    <template>
+        <iron-ajax auto url="[[speakersSource]]" handle-as="json" last-response="{{speakers}}"></iron-ajax>
+        <iron-ajax auto url="[[sessionsSource]]" handle-as="json" last-response="{{sessions}}"></iron-ajax>
+        <iron-ajax auto url="[[postsSource]]" handle-as="json" last-response="{{posts}}"></iron-ajax>
+        <iron-ajax auto url="[[partnersSource]]" handle-as="json" last-response="{{partners}}"></iron-ajax>
+        <iron-ajax auto url="[[scheduleSource]]" handle-as="json" last-response="{{_scheduleRaw}}"></iron-ajax>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+        is: 'app-data',
+        properties: {
+            speakersSource: {
+                type: String,
+                value: '../../data/speakers.json'
+            },
+            sessionsSource: {
+                type: String,
+                value: '../../data/sessions.json'
+            },
+            postsSource: {
+                type: String,
+                value: '../../data/blog.json'
+            },
+            partnersSource: {
+                type: String,
+                value: '../../data/partners.json'
+            },
+            scheduleSource: {
+                type: String,
+                value: '../../data/schedule.json'
+            },
+            speakers: {
+                type: Array,
+                notify: true
+            },
+            sessions: {
+                type: Array,
+                notify: true
+            },
+            posts: {
+                type: Array,
+                notify: true
+            },
+            partners: {
+                type: Array,
+                notify: true
+            },
+            _scheduleRaw: {
+                type: Array
+            },
+            schedule: {
+                type: Array,
+                notify: true
+            }
+        },
+        observers: [
+            '_generateSchedule(speakers, sessions, _scheduleRaw)'
+        ],
+        _generateSchedule: function() {
+            for (var i = 0, scheduleLen = this._scheduleRaw.length; i < scheduleLen; i++) {
+                var day = this._scheduleRaw[i];
+                for (var j = 0, timeslotsLen = day.timeslots.length; j < timeslotsLen; j++) {
+                    var timeslot = day.timeslots[j];
+                    for (var k = 0, sessionsLen = timeslot.sessions.length; k < sessionsLen; k++) {
+                        for (var l = 0, subSessionsLen = timeslot.sessions[k].length; l < subSessionsLen; l++) {
+                            var session = this._getSession(timeslot.sessions[k][l]);
+                            if(!session.track) {
+                                session.track = day.tracks[k];
+                            }
+                            session.startTime = timeslot.startTime;
+                            session.endTime = subSessionsLen > 1 ? this._getEndTime(day.date, timeslot.startTime, timeslot.endTime, subSessionsLen, l + 1) : timeslot.endTime;
+                            this._scheduleRaw[i].timeslots[j].sessions[k][l] = session;
+                        }
+                    }
+                }
+            }
+            this.schedule = this._scheduleRaw;
+        },
+        _getSession: function(sessionId) {
+            for (var i = 0, sessionsLen = this.sessions.length; i < sessionsLen; i++) {
+                if (sessionId === this.sessions[i].id) {
+                    this.sessions[i].mainTag = this.sessions[i].tags ? app.generateClass(this.sessions[i].tags[0]) : 'default';
+                    if (this.sessions[i].speakers) {
+                        for (var j = 0, speakersLen = this.sessions[i].speakers.length; j < speakersLen; j++) {
+                            if (!this.sessions[i].speakers[j].id) {
+                                this.sessions[i].speakers[j] = this._getSpeaker(this.sessions[i].speakers[j]);
+                            }
+                        }
+                    }
+                    return this.sessions[i];
+                }
+            }
+        },
+        _getSpeaker: function(speakerId) {
+            for (var i = 0, speakersLen = this.speakers.length; i < speakersLen; i++) {
+                if (speakerId === this.speakers[i].id) {
+                    return this.speakers[i];
+                }
+            }
+        },
+        _getEndTime: function(date, startTime, endTime, totalNumber, number) {
+            var timezone = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1],
+                timeStart = new Date(date + ' ' + startTime + ' ' + timezone).getTime(),
+                timeEnd = new Date(date + ' ' + endTime + ' ' + timezone).getTime(),
+                difference = Math.floor((timeEnd - timeStart) / totalNumber),
+                result = new Date(timeStart + difference * number);
+            return result.getHours() + ':' + result.getMinutes();
+        }
+    });
+</script>

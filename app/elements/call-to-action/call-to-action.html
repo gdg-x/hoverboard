@@ -10,6 +10,7 @@
             .video-dialog > * {
                 margin: 0;
                 padding: 0;
+                background: rgba(0, 0, 0, 0.5);
             }
 
             .fullvideo-container {
@@ -25,33 +26,27 @@
                 color: #fff;
             }
 
-            .text,
-            .border-button-link {
+            .text {
                 text-transform: uppercase;
                 letter-spacing: .1em;
                 color: #fff;
                 font-size: 24px;
-                font-weight: 100;
+                font-weight: 200;
             }
 
             .call-to-action .heading {
                 margin-bottom: 0;
             }
 
-            .border-button-link {
-                margin-top: 10px;
-                padding: 8px 12px;
-                border: 1px solid #fff;
-                font-size: 18px;
+            @media (max-width: 960px) {
+                .open-dialog-button {
+                    margin-top: 10px;
+                }
             }
-
-            @media (min-width: 768px) {
+            @media (min-width: 961px) {
                 .text {
                     font-size: 20px;
                     text-align: left;
-                }
-                .border-button-link {
-                    margin: 0;
                 }
             }
         </style>
@@ -59,7 +54,7 @@
             <h4 class="heading flex text self-center text-center">GDG DevFest 2014</h4>
              <paper-button class="white border-button open-dialog-button" on-tap="playVideo">See how it was</paper-button>
         </div>
-        <paper-dialog class="video-dialog fit" id="videoDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+        <paper-dialog class="video-dialog fit" id="videoDialog" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
             <paper-toolbar class="navbar-overlay fit">
                 <paper-icon-button icon="icons:arrow-back" on-tap="closeVideoCard"></paper-icon-button>
                 <div class="title text-left">GDG DevFest Ukraine 2014 - Highlights</div>
