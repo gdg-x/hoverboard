@@ -77,8 +77,13 @@
             }
 
             .session-meta-icon {
+                margin-top: -2px;
                 --iron-icon-height: 18px;
                 --iron-icon-width: 18px;
+            }
+
+            .session-additional-meta {
+                margin-top: 3px;
             }
 
             .lang {
@@ -217,6 +222,20 @@
                                                                 <iron-icon class="session-meta-icon" icon="room"></iron-icon>
                                                                 <span>[[subSession.track.title]]</span>
                                                             </div>
+                                                        </div>
+                                                        <div class="session-meta session-additional-meta layout horizontal">
+                                                            <template is="dom-if" if="[[subSession.presentation]]">
+                                                                <div class="meta-block">
+                                                                    <iron-icon class="session-meta-icon" icon="app-icons:presentation"></iron-icon>
+                                                                    <span>Presentation available</span>
+                                                                </div>
+                                                            </template>
+                                                            <template is="dom-if" if="[[subSession.video]]">
+                                                                <div class="meta-block">
+                                                                    <iron-icon class="session-meta-icon" icon="av:videocam"></iron-icon>
+                                                                    <span>Video available</span>
+                                                                </div>
+                                                            </template>
                                                         </div>
                                                     </div>
                                                 </div>

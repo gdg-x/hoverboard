@@ -80,7 +80,7 @@
     "speakers": [3],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/dmytro-danylyk-planning-android-screens",
     "video": "",
     "tags": [
         "Android",
@@ -108,7 +108,7 @@
     "speakers": [5],
     "language": "en",
     "complexity": "Intermediate",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/michal-tajchert-hijacking-your-notifications",
     "video": "",
     "tags": [
         "Android"
@@ -207,7 +207,7 @@
     "speakers": [11],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/xavier-hallade-mastering-the-ndk-with-android-studio-1-dot-3-plus-and-the-gradle-experimental-plugin",
     "video": "",
     "tags": [
         "Android",
@@ -221,7 +221,7 @@
     "speakers": [12],
     "language": "uk",
     "complexity": "Intermediate",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/alex-pazhyn-material-design-custom-branding",
     "video": "",
     "tags": [
         "Android",
@@ -291,7 +291,7 @@
     "speakers": [17],
     "language": "uk",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/anna-kurylo-students-and-google-how-not-to-vanish-in-the-crowd",
     "video": "",
     "tags": [
         "Community"
@@ -318,7 +318,7 @@
     "speakers": [19],
     "language": "en",
     "complexity": "Intermediate",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/juarez-filho-firebase-adventures",
     "video": "",
     "tags": [
         "Cloud",
@@ -346,7 +346,7 @@
     "speakers": [20],
     "language": "en",
     "complexity": "Intermediate",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/viktor-zozuliak-service-worker-native-apps-experience-for-the-web",
     "video": "",
     "tags": [
         "Web",
@@ -360,7 +360,7 @@
     "speakers": [21],
     "language": "en",
     "complexity": "Intermediate",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/busra-deniz-google-webrtc-on-mobile",
     "video": "",
     "tags": [
         "Web",
@@ -388,7 +388,7 @@
     "speakers": [23],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "test",
+    "presentation": "https://speakerdeck.com/gdglviv/dawid-ostrowski-lean-startup-with-google",
     "video": "",
     "tags": [
         "Entrepreneurship"
@@ -401,7 +401,7 @@
     "speakers": [24],
     "language": "uk",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/volodymyr-ivanov-solve-for-x-comes-to-ukraine",
     "video": "",
     "tags": [
         "Community"
@@ -414,7 +414,7 @@
     "speakers": [25],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/test-conflicts",
     "video": "",
     "tags": [
         "Community"
@@ -427,7 +427,7 @@
     "speakers": [26],
     "language": "ru",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/elena-forostovets-material-design-in-games",
     "video": "",
     "tags": [
         "Community",
@@ -441,7 +441,7 @@
     "speakers": [27],
     "language": "ru",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/tetiana-protasova-how-to-succeed-in-the-kids-and-family-mobile-app-space",
     "video": "",
     "tags": [
         "Community",
@@ -496,7 +496,7 @@
     "speakers": [28],
     "language": "uk",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/constantine-mars-rxjava-for-android",
     "video": "",
     "tags": [
         "Android",
@@ -510,7 +510,7 @@
     "speakers": [29],
     "language": "uk",
     "complexity": "Intermediate",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/anton-minashkin-data-binding",
     "video": "",
     "tags": [
         "Android",
@@ -524,7 +524,7 @@
     "speakers": [30],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/igor-dvoretskyi-the-cloud-convergence-openstack-and-kubernetes",
     "video": "",
     "tags": [
         "Cloud",
@@ -551,7 +551,7 @@
     "speakers": [31],
     "language": "uk",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/anastasiia-serafyn-tips-to-succeed-in-it-career",
     "video": "",
     "tags": [
         "Community"
