@@ -121,7 +121,7 @@
     "speakers": [7],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "http://olostan.github.io/slides_microgcp",
     "video": "",
     "tags": [
         "Cloud",
@@ -135,7 +135,7 @@
     "speakers": [7],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "http://olostan.github.io/slides_ng2arch",
     "video": "",
     "tags": [
         "Web",
@@ -235,7 +235,7 @@
     "speakers": [13],
     "language": "en",
     "complexity": "Intermediate",
-    "presentation": "",
+    "presentation": "http://slides.com/mg6maciej/continuous-delivery-with-ease-devfest-ukraine-2015",
     "video": "",
     "tags": [
         "Android",
@@ -277,7 +277,7 @@
     "speakers": [16],
     "language": "en",
     "complexity": "Intermediate",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/ksenia-shymelcgyk-bluetooth-low-energy-and-ibeacon-development-for-android",
     "video": "",
     "tags": [
         "Android",
