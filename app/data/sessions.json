@@ -66,7 +66,7 @@
     "speakers": [2],
     "language": "en",
     "complexity": "Beginner",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/mateusz-herych-how-can-android-backup-break-your-app",
     "video": "",
     "tags": [
         "Android",
@@ -149,7 +149,7 @@
     "speakers": [8],
     "language": "ru",
     "complexity": "Intermediate",
-    "presentation": "",
+    "presentation": "https://speakerdeck.com/gdglviv/dima-maleev-v8-under-the-hood",
     "video": "",
     "tags": [
         "Web",
