@@ -27,17 +27,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <!-- Navigation -->
         <nav>
         <paper-menu class="Drawer-widget Navigation list" attr-for-selected="data-route" selected="[[route]]">
-          <a class="Navigation-link" data-route="home" href="/" on-click="onDataRouteClick">
+          <a class="Navigation-link" data-route="home" href="/" on-tap="onDataRouteClick">
             <iron-icon class="Navigation-icon" icon="home"></iron-icon>
             <span>Home</span>
           </a>
 
-          <a class="Navigation-link" data-route="users" href="/users" on-click="onDataRouteClick">
+          <a class="Navigation-link" data-route="users" href="/users" on-tap="onDataRouteClick">
             <iron-icon class="Navigation-icon" icon="info"></iron-icon>
             <span>Users</span>
           </a>
 
-          <a class="Navigation-link" data-route="contact" href="/contact" on-click="onDataRouteClick">
+          <a class="Navigation-link" data-route="contact" href="/contact" on-tap="onDataRouteClick">
             <iron-icon class="Navigation-icon" icon="mail"></iron-icon>
             <span>Contact</span>
           </a>
@@ -46,7 +46,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </paper-scroll-header-panel>
 
       <!-- Main Area -->
-      <paper-scroll-header-panel class="Main" main condenses keep-condensed-header>
+      <paper-scroll-header-panel id="headerPanelMain" class="Main" main condenses keep-condensed-header>
 
         <!-- Main Toolbar -->
         <paper-toolbar class="Main-header tall">
@@ -100,10 +100,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           <section class="Page" data-route="user-info">
             <paper-material class="Page-paper" elevation="1">
-              <h2 class="Page-title">
-                User:<span>{{params.name}}</span>
-              </h2>
-              <div>This is <span>{{params.name}}</span>'s section</div>
+              <h2 class="Page-title">User: {{params.name}}</h2>
+              <div>This is {{params.name}}'s section</div>
             </paper-material>
           </section>
 
@@ -117,6 +115,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </iron-pages>
       </paper-scroll-header-panel>
     </paper-drawer-panel>
+
+    <paper-toast id="toast">
+      <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
+    </paper-toast>
 
     <!-- Service Worker support -->
     <paper-toast id="caching-complete"

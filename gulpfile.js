@@ -48,10 +48,10 @@ gulp.task('jshint', function () {
 // Optimize images
 gulp.task('images', function () {
   return gulp.src('app/images/**/*')
-    .pipe($.cache($.imagemin({
+    .pipe($.imagemin({
       progressive: true,
       interlaced: true
-    })))
+    }))
     .pipe(gulp.dest('dist/images'))
     .pipe($.size({title: 'Copy optimized images to dist/images dir:'}));
 });
@@ -131,8 +131,7 @@ gulp.task('html', ['views'], function () {
     .pipe($.size({title: 'Copy optimized html and assets files to dist dir:'}));
 });
 
-// Polybuild will take care of inlining HTML imports,
-// scripts and CSS for you.
+// Vulcanize granular configuration
 gulp.task('vulcanize', function () {
   return gulp.src('dist/elements/elements.vulcanized.html')
     .pipe($.plumber())

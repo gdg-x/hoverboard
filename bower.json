@@ -2,17 +2,17 @@
   "name": "polymer-starter-kit-plus",
   "private": true,
   "dependencies": {
-    "polymer": "Polymer/polymer#1.1.x",
+    "font-roboto": "StartPolymer/font-empty#1.1.x",
     "iron-elements": "PolymerElements/iron-elements#1.0.x",
+    "neon-elements": "PolymerElements/neon-elements#1.0.x",
+    "page": "visionmedia/page.js#1.6.x",
     "paper-elements": "PolymerElements/paper-elements#1.0.x",
     "platinum-elements": "PolymerElements/platinum-elements#1.1.x",
-    "neon-elements": "PolymerElements/neon-elements#1.0.x",
-    "start-elements": "StartPolymer/start-elements#1.1.x",
-    "font-roboto": "StartPolymer/font-empty#1.1.x",
-    "page": "visionmedia/page.js#1.6.x"
+    "polymer": "Polymer/polymer#1.2.x",
+    "start-elements": "StartPolymer/start-elements#1.1.x"
   },
   "devDependencies": {
-    "web-component-tester": "*",
-    "test-fixture": "PolymerElements/test-fixture#1.0.x"
+    "test-fixture": "PolymerElements/test-fixture#1.0.x",
+    "web-component-tester": "*"
   }
 }

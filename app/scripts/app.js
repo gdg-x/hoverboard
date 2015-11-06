@@ -17,8 +17,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   app.displayInstalledToast = () => {
     // Check to make sure caching is actually enabled—it won't be in the dev environment.
-    if (!document.querySelector('platinum-sw-cache').disabled) {
-      document.querySelector('#caching-complete').show();
+    if (!Polymer.dom(document).querySelector('platinum-sw-cache').disabled) {
+      Polymer.dom(document).querySelector('#caching-complete').show();
     }
   };
 
@@ -33,10 +33,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   // the appName in the middle-container and the bottom title in the bottom-container.
   // The appName is moved to top and shrunk on condensing. The bottom sub title
   // is shrunk to nothing on condensing.
-  addEventListener('paper-header-transform', e => {
-    let appName = document.querySelector('.Main-headerTitle');
-    let middleContainer = document.querySelector('.Main-headerMiddleContent');
-    let bottomContainer = document.querySelector('.Main-headerBottomContent');
+  window.addEventListener('paper-header-transform', e => {
+    let appName = Polymer.dom(document).querySelector('.Main-headerTitle');
+    let middleContainer = Polymer.dom(document).querySelector('.Main-headerMiddleContent');
+    let bottomContainer = Polymer.dom(document).querySelector('.Main-headerBottomContent');
     let detail = e.detail;
     let heightDiff = detail.height - detail.condensedHeight;
     let yRatio = Math.min(1, detail.y / heightDiff);
@@ -55,14 +55,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   });
 
   // Close drawer after menu item is selected if drawerPanel is narrow
-  app.onDataRouteClick = () => {
-    let drawerPanel = document.querySelector('#paperDrawerPanel');
+  app.onDataRouteClick = function() {
+    let drawerPanel = Polymer.dom(document).querySelector('#paperDrawerPanel');
     if (drawerPanel.narrow) {
       drawerPanel.closeDrawer();
     }
   };
 
   // Scroll page to top and expand header
-  app.scrollPageToTop = () => document.getElementById('mainContainer').scrollTop = 0;
+  app.scrollPageToTop = () => app.$.headerPanelMain.scrollToTop(true);
 
 })(document);

@@ -8,7 +8,7 @@
 
 > A starting point for building web applications with Polymer 1.x
 
-> Front-end template for [Static Web Applications](http://www.staticapps.org) - [Static App Use Case](https://divshot.com/blog/guest/how-static-apps-are-changing-startups/) 
+> Front-end template for [Static Web Applications](http://www.staticapps.org) - [Static App Use Case](https://divshot.com/blog/guest/how-static-apps-are-changing-startups/)
 
 > Polymer Starter Kit Plus is keeping up to date with
 [Polymer Starter Kit](https://github.com/PolymerElements/polymer-starter-kit) and following  
@@ -58,6 +58,7 @@ all files by appending content hash to their names
     - [Firebase](https://www.firebase.com)
     - [Google App Engine](https://cloud.google.com/appengine/) - free hosting with [HTTP2-over-QUIC](http://blog.chromium.org/2015/04/a-quic-update-on-googles-experimental.html) on custom domain
     - [Google Cloud Storage](https://cloud.google.com/storage/)
+- [Recipes](/docs/README.md/) for Polymer performance and using Chrome Dev Editor
 
 ## Getting Started
 
@@ -260,6 +261,10 @@ Web apps built with Polymer Starter Kit come configured with support for [Web Co
 Use a [recipes](https://github.com/yeoman/generator-gulp-webapp/blob/master/docs/recipes/README.md)
 or [recipes](https://github.com/gulpjs/gulp/tree/master/docs/recipes)
 for integrating other popular technologies like CoffeeScript or Jade.
+
+## Licensing
+
+Like other Google projects, Polymer Starter Kit includes Google license headers at the top of several of our source files. Google's open-source licensing requires that this header be kept in place (sorry!), however we acknowledge that you may need to add your own licensing to files you modify. This can be done by appending your own extensions to these headers.
 
 ## Contributing :+1:
 
