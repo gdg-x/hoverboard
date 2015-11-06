@@ -18,7 +18,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   app.displayInstalledToast = () => {
     // Check to make sure caching is actually enabled—it won't be in the dev environment.
     if (!Polymer.dom(document).querySelector('platinum-sw-cache').disabled) {
-      Polymer.dom(document).querySelector('#caching-complete').show();
+      Polymer.dom(document).querySelector('#toastInfo').text = 'Caching complete! This app will work offline.';
+      Polymer.dom(document).querySelector('#toastInfo').show();
     }
   };
 
@@ -61,6 +62,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       drawerPanel.closeDrawer();
     }
   };
+
+  // Hide toastConfirm after tap on OK button 
+  app.onToastConfirmTap = () => app.$.toastConfirm.hide();
 
   // Scroll page to top and expand header
   app.scrollPageToTop = () => app.$.headerPanelMain.scrollToTop(true);

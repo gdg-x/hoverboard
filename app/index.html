@@ -116,16 +116,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </paper-scroll-header-panel>
     </paper-drawer-panel>
 
-    <paper-toast id="toast">
-      <span class="toast-hide-button" role="button" tabindex="0" onclick="app.$.toast.hide()">Ok</span>
+    <paper-toast id="toastConfirm" class="Toast" duration="10000">
+      <span class="Toast-button" role="button" tabindex="0" on-tap="onToastConfirmTap">OK</span>
     </paper-toast>
+
+    <paper-toast id="toastInfo" class="Toast" duration="8000"></paper-toast>
 
     <!-- Service Worker support -->
-    <paper-toast id="caching-complete"
-                 duration="6000"
-                 text="Caching complete! This app will work offline.">
-    </paper-toast>
-
     <platinum-sw-register auto-register
                           clients-claim
                           skip-waiting
