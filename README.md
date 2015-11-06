@@ -8,6 +8,8 @@
 
 > A starting point for building web applications with Polymer 1.x
 
+> Front-end template for [Static Web Applications](http://www.staticapps.org) - [Static App Use Case](https://divshot.com/blog/guest/how-static-apps-are-changing-startups/) 
+
 > Polymer Starter Kit Plus is keeping up to date with
 [Polymer Starter Kit](https://github.com/PolymerElements/polymer-starter-kit) and following  
 [The 10 Commandments of Modern Web Application](https://gist.github.com/JosefJezek/8020bd8f02c4992e7d7d)
