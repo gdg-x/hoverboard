@@ -39,7 +39,6 @@ module.exports = function ($, config, gulp, merge) { return function () {
         this.emit('end');
       }
     }))
-    .pipe($.changed('dist/themes/' + config.theme))
     .pipe($.sourcemaps.init())
     .pipe($.htmlPostcss(postcssPlugins))
     .pipe($.sourcemaps.write('.'))
@@ -61,7 +60,6 @@ module.exports = function ($, config, gulp, merge) { return function () {
         this.emit('end');
       }
     }))
-    .pipe($.changed('dist/elements'))
     .pipe($.sourcemaps.init())
     .pipe($.htmlPostcss(postcssPlugins))
     .pipe($.sourcemaps.write('.'))
