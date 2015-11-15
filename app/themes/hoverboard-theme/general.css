@@ -1,0 +1,108 @@
+body, html {
+    background: var(--default-backgroud-color);
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--primary-text-color);
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.4;
+    overflow: hidden;
+}
+h1, h2, h3, h4 {
+    margin: 0;
+    font-weight: 300;
+}
+a, .anchor-like {
+    color: var(--default-primary-color);
+    text-decoration: none;
+}
+.placeholder-color {
+    background-color: var(--primary-background-color);
+}
+.toast {
+    z-index: 999;
+}
+.image-background {
+    background-repeat: no-repeat;
+    background-position: center center !important;
+    background-size: cover !important;
+}
+.gradient-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, .3) 86%, #000000 106%);
+}
+.vertical-horizontal {
+    flex-direction: column;
+    display: flex;
+    @media (--md-viewport) {
+        flex-direction: row;
+    }
+}
+.horizontal-vertical {
+    flex-direction: row;
+    display: flex;
+    @media (--md-viewport) {
+        flex-direction: column;
+    }
+}
+.container {
+    padding: 40px 16px;
+    @media (--md-viewport) {
+        margin: 0 auto;
+        padding: 60px 16px;
+        max-width: 896px;
+    }
+    @media (--lg-viewport) {
+        max-width: 1280px;
+    }
+
+}
+.container-narrow {
+    padding: 20px 16px;
+    @media (--md-viewport) {
+        padding: 30px 16px;
+    }
+}
+.container .heading {
+    margin-bottom: 20px;
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+.two-column-xs {
+    width: 50%;
+    @media (--md-viewport) {
+        flex: 1;
+    }
+}
+.img-circle {
+    border-radius: 50%;
+}
+.text-center {
+    text-align: center;
+}
+.full-dialog, .full-dialog > * {
+    margin: 0;
+    padding: 0;
+    background: rgba(0, 0, 0, .5);
+}
+.full-container {
+    z-index: 6;
+    overflow: hidden;
+}
+.navbar-overlay {
+    position: fixed !important;
+    background: rgba(0, 0, 0, .5) !important;
+    text-transform: uppercase;
+    z-index: 9;
+    color: #ffffff;
+}
+.align-pb-block {
+    margin-left: -9px;
+}
+.pointer {
+    cursor: pointer;
+}

@@ -1,10 +1,13 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
 <dom-module id="statistics-block">
     <template>
+        <style include="shared-styles"></style>
         <style>
             :host {
                 display: block;
                 background: var(--default-primary-color);
-                color: #ffffff;
+                color: var(--text-primary-color);
             }
 
             .counter {
@@ -13,7 +16,7 @@
             }
 
             .caption {
-              font-size: .85em;
+                font-size: .85em;
             }
 
             @media (max-width: 960px) {
@@ -24,38 +27,27 @@
             }
         </style>
         <div class="container flex wrap relative layout horizontal">
-            <template is="dom-repeat" items="{{statistics}}">
-                <div class="statistics-element two-column-xs layout vertical text-center">
-                    <span class="counter">{{item.counter}}</span>
-                    <span class="caption">{{item.caption}}</span>
-                </div>
-            </template>
+            {% for statistic in statistics %}
+            <div class="statistics-element two-column-xs layout vertical center-center">
+                <span class="counter">{$ statistic.counter $}</span>
+                <span class="caption">{$ statistic.caption $}</span>
+            </div>
+            {% endfor %}
         </div>
     </template>
-</dom-module>
+    <script>
+        (function() {
+            'use strict';
 
-<script>
-    Polymer({
-        is: 'statistics-block',
-        properties: {
-            statistics: {
-                type: Array
+            class StatisticsBlock {
+                beforeRegister() {
+                    let is = this.constructor.name.replace(/\W+/g, '-')
+                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+                    this.is = is;
+                }
             }
-        },
-        attached: function() {
-            this.statistics = [{
-                counter: 500,
-                caption: 'Attendees'
-            }, {
-                counter: 2,
-                caption: 'Days'
-            }, {
-                counter: 40,
-                caption: 'Sessions'
-            }, {
-                counter: 3,
-                caption: 'Parallel tracks'
-            }];
-        }
-    });
-</script>
+
+            Polymer(StatisticsBlock);
+        })();
+    </script>
+</dom-module>

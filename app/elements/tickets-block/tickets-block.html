@@ -4,7 +4,7 @@
             :host {
                 display: block;
                 background: var(--default-primary-color);
-                color: #fff;
+                color: var(--text-primary-color);
             }
 
             .container {
@@ -112,28 +112,28 @@
             </div>
         </paper-dialog>
     </template>
-</dom-module>
-<script>
-    /* jshint ignore:start */
-    var widgetOptions = {
-        bg_color: 'ffffff',
-        id: 312113,
-        lang: 'en'
-    };
-    /* jshint ignore:end */
-    setTimeout(function() {
-        var script = document.createElement('script');
-        script.type = 'text/javascript';
-        script.async = true;
-        script.src = 'https://2event.com/js/widget-tickets.js';
-        document.getElementsByTagName('head')[0].appendChild(script);
-    },2000);
+    <script>
+        /* jshint ignore:start */
+        var widgetOptions = {
+            bg_color: 'ffffff',
+            id: 312113,
+            lang: 'en'
+        };
+        /* jshint ignore:end */
+        setTimeout(function() {
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.async = true;
+            script.src = 'https://2event.com/js/widget-tickets.js';
+            document.getElementsByTagName('head')[0].appendChild(script);
+        },2000);
 
-    Polymer({
-        is: 'tickets-block',
-        openTicketsDialog: function() {
-            ga('send', 'buy-a-ticket', 'button', 'click'); // jshint ignore:line
-            this.$.ticketsDialog.open();
-        }
-    });
-</script>
+        Polymer({
+            is: 'tickets-block',
+            openTicketsDialog: function() {
+                ga('send', 'buy-a-ticket', 'button', 'click'); // jshint ignore:line
+                this.$.ticketsDialog.open();
+            }
+        });
+    </script>
+</dom-module>

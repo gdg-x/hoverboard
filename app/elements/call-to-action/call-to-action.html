@@ -1,41 +1,16 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
 <dom-module id="call-to-action">
     <template>
-        <style>
+        <style include="shared-styles">
             :host {
                 display: block;
                 background: var(--default-primary-color);
+                color: var(--text-primary-color);
             }
 
-            .video-dialog,
-            .video-dialog > * {
-                margin: 0;
-                padding: 0;
-                background: rgba(0, 0, 0, 0.5);
-            }
-
-            .fullvideo-container {
-                z-index: 6;
-                overflow: hidden;
-            }
-
-            .navbar-overlay {
-                position: fixed !important;
-                background: rgba(0, 0, 0, 0.5) !important;
-                text-transform: uppercase;
-                z-index: 9;
-                color: #fff;
-            }
-
-            .text {
-                text-transform: uppercase;
-                letter-spacing: .1em;
-                color: #fff;
-                font-size: 24px;
-                font-weight: 200;
-            }
-
-            .call-to-action .heading {
-                margin-bottom: 0;
+            .heading {
+                margin-bottom: 0 !important;
             }
 
             @media (max-width: 960px) {
@@ -43,42 +18,58 @@
                     margin-top: 10px;
                 }
             }
+
             @media (min-width: 961px) {
-                .text {
-                    font-size: 20px;
+                .heading {
                     text-align: left;
                 }
             }
         </style>
         <div class="container container-narrow flex relative layout vertical-horizontal center-center">
-            <h4 class="heading flex text self-center text-center">GDG DevFest 2014</h4>
-             <paper-button class="white border-button open-dialog-button" on-tap="playVideo">See how it was</paper-button>
+            <h4 class="heading flex self-center text-center">{$ callToAction.text $}</h4>
+            <paper-button class="border-button open-dialog-button" on-tap="playVideo">{$ callToAction.buttonText $}</paper-button>
         </div>
-        <paper-dialog class="video-dialog fit" id="videoDialog" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+        <paper-dialog class="full-dialog fit" id="videoDialog" modal entry-animation="scale-up-animation" exit-animation="fade-out-animation">
             <paper-toolbar class="navbar-overlay fit">
                 <paper-icon-button icon="icons:arrow-back" on-tap="closeVideoCard"></paper-icon-button>
-                <div class="title text-left">GDG DevFest Ukraine 2014 - Highlights</div>
+                <div class="title text-left">{$ callToAction.video.title $}</div>
             </paper-toolbar>
-            <div class="fullvideo-container fit">
-                <google-youtube id="video" video-id="t95z_HLMTmM" fluid="true" autohide="1" chromeless="true"></google-youtube>
+            <div class="full-container fit">
+                <google-youtube id="video" video-id="{$ callToAction.video.id $}" fluid="true" autohide="1" chromeless="true"></google-youtube>
             </div>
         </paper-dialog>
     </template>
+    <script>
+        (function() {
+            'use strict';
+
+            class CallToAction {
+                beforeRegister() {
+                    let is = this.constructor.name.replace(/\W+/g, '-')
+                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+                    this.is = is;
+                }
+                playVideo() {
+                    this.fire('iron-signal', {
+                        name: 'track-event',
+                        data: {
+                            category: 'button',
+                            action: 'click',
+                            label: 'play-2014-video',
+                            value: 1
+                        }
+                    });
+                    this.$.videoDialog.open();
+                    this.$.video.play();
+                }
+                closeVideoCard() {
+                    this.$.videoDialog.close();
+                    this.$.video.pause();
+                    this.$.video.seekTo(0);
+                }
+            }
+
+            Polymer(CallToAction);
+        })();
+    </script>
 </dom-module>
-
-<script>
-    Polymer({
-        is: 'call-to-action',
-        playVideo: function() {
-            ga('send', 'play-2014-video', 'button', 'click'); // jshint ignore:line
-
-            this.$.videoDialog.open();
-            this.$.video.play();
-        },
-        closeVideoCard: function() {
-            this.$.videoDialog.close();
-            this.$.video.pause();
-            this.$.video.seekTo(0);
-        }
-    });
-</script>

@@ -1,0 +1,25 @@
+/** @define Page */
+
+.Page {
+  @nest &-title {
+    @apply(--paper-font-display2);
+    @media (--sm-viewport) {
+      font-size: 24px;
+    }
+  }
+
+  @nest &-paper {
+    border-radius: 2px;
+    height: 100%;
+    padding: 16px;
+    margin: 16px auto;
+    width: calc(97.33% - 32px);
+    background: var(--secondary-background-color);
+    @media (--md-viewport) {
+      width: calc(98% - 46px);
+      margin-bottom: 32px;
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+}

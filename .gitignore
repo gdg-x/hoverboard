@@ -1,7 +1,7 @@
-node_modules
-dist
-test/temp
+app/scripts/analytics.js
+app/themes/default-theme/fonts/*
 bower_components
+deploy
+dist
+node_modules
 .tmp
-test/bower_components/
-.publish

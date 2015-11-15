@@ -1,0 +1,28 @@
+/** @define Drawer */
+
+.Drawer {
+    z-index: 9;
+    /* postcss-bem-linter: ignore */
+    @nest &-logo {
+        margin-top: 15px;
+        height: 40px;
+    }
+    @nest &-bottom {
+        font-size: .85em;
+        color: var(--text-primary-color)
+    }
+    @nest &-navigation {
+        background: var(--secondary-background-color);
+    }
+    @nest &-navigation a {
+        padding: 0 16px;
+        min-height: 48px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+        text-decoration: none;
+        color: var(--primary-text-color);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
+}

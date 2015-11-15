@@ -1,94 +1,78 @@
-<script src="../../bower_components/page/page.js"></script>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<script src="../bower_components/page/page.js"></script>
 <script>
-    function trackPageview(path) { // jshint ignore:line
-        /* jshint ignore:start */
-        ga('set', 'page', path);
-        ga('send', 'pageview');
-        /* jshint ignore:end */
-    }
+    (function() {
+        'use strict';
 
-    window.addEventListener('WebComponentsReady', function() {
-        page('/', function() {
-            trackPageview('/');
-            app.route = 'home';
-            app.scrollToTop();
+        window.addEventListener('WebComponentsReady', () => {
+
+            // We use Page.js for routing. This is a Micro
+            // client-side router inspired by the Express router
+            // More info: https://visionmedia.github.io/page.js/
+
+            // Middleware
+            function scrollToTop(ctx, next) {
+                app.fire('iron-signal', {name: 'track-page', data: { path: ctx.path } });
+                app.scrollPageToTop();
+                next();
+            }
+
+            // Routes
+            page('/', scrollToTop, () => {
+                app.route = 'home';
+            });
+
+            page('/blog', scrollToTop, () => {
+                app.route = 'blog';
+            });
+
+            page('/blog/:title', scrollToTop, data => {
+                app.route = 'blog';
+                app.params = data.params;
+            });
+
+            page('/speakers', scrollToTop, () => {
+                app.route = 'speakers';
+            });
+
+            page('/speakers/:id', scrollToTop, data => {
+                app.route = 'speakers';
+                app.params = data.params;
+            });
+
+            page('/schedule', scrollToTop, () => {
+                app.route = 'schedule';
+            });
+
+            page('/schedule/:id', scrollToTop, data => {
+                app.route = 'schedule';
+                app.params = data.params;
+            });
+
+            page('/code-of-conduct', scrollToTop, () => {
+                app.route = 'code-of-conduct';
+            });
+
+            page('/speaker-guidelines', scrollToTop, () => {
+                app.route = 'speaker-guidelines';
+            });
+
+            // add #! before urls
+            // https://developers.google.com/webmasters/ajax-crawling/docs/learn-more
+            page({
+                // Disable for Firebase or GAE
+                hashbang: false
+            });
+
         });
-
-        page('/#pricetable', function() {
-            trackPageview('/#pricetable');
-            app.route = 'home';
-            var pricetable = document.querySelector('#pricetable');
-            app.smoothScroll(pricetable, 0);
-        });
-
-        page('/blog', function() {
-            trackPageview('/blog');
-            app.route = 'blog';
-        });
-
-        page('/blog/:title', function(ctx) {
-            trackPageview('/blog/' + ctx.params.title);
-            app.route = 'blog';
-            app.params = ctx.params;
-            app.scrollToTop();
-        });
-
-        page.exit('/blog/:title', function() {
-            document.querySelector('#blog').closePost();
-        });
-
-        page('/speakers', function() {
-            trackPageview('/speakers');
-            app.route = 'speakers';
-        });
-
-        page('/speakers/:id', function(data) {
-            trackPageview('/speakers/' + data.params.id);
-            app.route = 'speakers';
-            app.params = data.params;
-        });
-
-        page('/schedule', function() {
-            trackPageview('/schedule');
-            app.route = 'schedule';
-            app.scrollToTop();
-        });
-        page('/schedule/:id', function(data) {
-            trackPageview('/schedule/' + data.params.id);
-            app.route = 'schedule';
-            app.params = data.params;
-        });
-
-        page('/contact', function() {
-            trackPageview('/contact');
-            app.route = 'contact';
-            app.scrollToTop();
-        });
-
-        page('/code-of-conduct', function() {
-            trackPageview('/code-of-conduct');
-            app.route = 'code-of-conduct';
-            app.scrollToTop();
-        });
-
-        page('/speaker-guidelines', function() {
-            trackPageview('/speaker-guidelines');
-            app.route = 'speaker-guidelines';
-            app.scrollToTop();
-        });
-
-        page({
-            hashbang: true
-        });
-
-        function redirectLink(e) {
-            page.redirect('/' + this.getAttribute('data-route'));
-            e.preventDefault();
-        }
-
-        var routerLinks = document.querySelectorAll('a[href^="#!"], a[dynamic-link]');
-        for (var i = 0; i < routerLinks.length; i++) {
-            routerLinks[i].addEventListener('click', redirectLink, false);
-        }
-    });
+    })();
 </script>

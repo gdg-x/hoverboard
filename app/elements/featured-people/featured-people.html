@@ -1,6 +1,8 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
 <dom-module id="featured-people">
     <template>
-        <style>
+        <style include="shared-styles">
             :host {
                 display: block;
             }
@@ -16,24 +18,6 @@
             .fe-people-img {
                 height: 70px;
                 width: 70px;
-            }
-
-            .fe-people {
-                font-weight: 200;
-            }
-
-            @media (max-width: 960px) {
-                .fe-people:nth-child(1),
-                .fe-people:nth-child(2) {
-                    margin-bottom: 40px;
-                }
-            }
-
-            @media (min-width: 601px) {
-                .fe-people-img {
-                    height: 120px;
-                    width: 120px;
-                }
             }
 
             .fe-people-name {
@@ -55,9 +39,23 @@
                 color: inherit;
                 font-size: .9em;
             }
+
+            @media (max-width: 960px) {
+                .fe-people:nth-child(1),
+                .fe-people:nth-child(2) {
+                    margin-bottom: 40px;
+                }
+            }
+
+            @media (min-width: 601px) {
+                .fe-people-img {
+                    height: 120px;
+                    width: 120px;
+                }
+            }
         </style>
         <div class="container text-center">
-            <content></content>
+            <h4 class="heading">Rockstar Speakers</h4>
             <div class="flex wrap layout horizontal people-wraper">
                 <template is="dom-repeat" items="[[featuredPeople]]" as="person">
                     <div class="fe-people two-column-xs">
@@ -70,36 +68,45 @@
                 </template>
             </div>
             <div>
-                <a data-route="speakers" href="#!/speakers" class="block-link">
+                <a data-route="speakers" href="/speakers" class="block-link">
                     <paper-button>View all speakers</paper-button>
                 </a>
             </div>
         </div>
     </template>
-</dom-module>
+    <script>
+    (function () {
+        'use strict';
 
-<script>
-    Polymer({
-        is: 'featured-people',
-        properties: {
-            people: {
-                type: Array,
-                observer: '_peopleChanged'
+        class FeaturedPeople {
+            beforeRegister() {
+                let is = this.constructor.name.replace(/\W+/g, '-')
+                    .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+                this.is = is;
+                this.properties = {
+                    people: {
+                        type: Array,
+                        observer: '_peopleChanged'
+                    }
+                };
             }
-        },
-        _peopleChanged: function() {
-            var filteredPeople = [];
-            for (var i = 0; i < this.people.length; i++) {
-                if (this.people[i].featured) {
-                    filteredPeople.push(this.people[i]);
+            _peopleChanged() {
+                let filteredPeople = [];
+                for (var i = 0; i < this.people.length; i++) {
+                    if (this.people[i].featured) {
+                        filteredPeople.push(this.people[i]);
+                    }
                 }
+                this.featuredPeople = this._randomOrder(filteredPeople).slice(0, 4);
             }
-            this.featuredPeople = this.randomOrder(filteredPeople).slice(0, 4);
-        },
-        randomOrder: function(array) {
-            return array.sort(function() {
-                return 0.5 - Math.random();
-            });
+            _randomOrder(array) {
+                return array.sort(function() {
+                    return 0.5 - Math.random();
+                });
+            }
         }
-    });
-</script>
+
+        Polymer(FeaturedPeople);
+    })();
+    </script>
+</dom-module>

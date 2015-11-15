@@ -9,7 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 'use strict';
 
-// Include Gulp & Tools We'll Use
+// Include Gulp & tools we'll use
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var del = require('del');
@@ -20,56 +20,32 @@ var merge = require('merge-stream');
 var path = require('path');
 var fs = require('fs');
 var glob = require('glob');
-var ghPages = require('gulp-gh-pages');
+var historyApiFallback = require('connect-history-api-fallback');
+var packageJson = require('./package.json');
+var crypto = require('crypto');
+var config = require('./config');
 
-var AUTOPREFIXER_BROWSERS = [
-  'ie >= 10',
-  'ie_mob >= 10',
-  'ff >= 30',
-  'chrome >= 34',
-  'safari >= 7',
-  'opera >= 23',
-  'ios >= 7',
-  'android >= 4.4',
-  'bb >= 10'
-];
-
-var styleTask = function (stylesPath, srcs) {
-  return gulp.src(srcs.map(function(src) {
-      return path.join('app', stylesPath, src);
-    }))
-    .pipe($.changed(stylesPath, {extension: '.css'}))
-    .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
-    .pipe(gulp.dest('.tmp/' + stylesPath))
-    .pipe($.if('*.css', $.cssmin()))
-    .pipe(gulp.dest('dist/' + stylesPath))
-    .pipe($.size({title: stylesPath}));
-};
-
-// Compile and Automatically Prefix Stylesheets
-gulp.task('styles', function () {
-  return styleTask('styles', ['**/*.css']);
-});
-
-gulp.task('elements', function () {
-  return styleTask('elements', ['**/*.css']);
-});
+// Get a task path
+function task(filename) {
+  return './tasks/' + filename;
+}
 
 // Lint JavaScript
 gulp.task('jshint', function () {
   return gulp.src([
       'app/scripts/**/*.js',
+      '!app/scripts/analytics.js',
       'app/elements/**/*.js',
-      'app/elements/**/*.html'
+      'app/elements/**/*.html',
+      'gulpfile.js'
     ])
-    .pipe(reload({stream: true, once: true}))
     .pipe($.jshint.extract()) // Extract JS from .html files
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
 });
 
-// Optimize Images
+// Optimize images
 gulp.task('images', function () {
   return gulp.src('app/images/**/*')
     .pipe($.cache($.imagemin({
@@ -77,25 +53,38 @@ gulp.task('images', function () {
       interlaced: true
     })))
     .pipe(gulp.dest('dist/images'))
-    .pipe($.size({title: 'images'}));
+    .pipe($.size({title: 'Copy optimized images to dist/images dir:'}));
 });
 
-// Copy All Files At The Root Level (app)
+// Copy all files at the root level (app)
 gulp.task('copy', function () {
   var app = gulp.src([
     'app/*',
+    '!app/cache-config.json',
+    '!app/content',
+    '!app/manifest.json',
     '!app/test',
-    '!app/precache.json'
+    '!app/views'
   ], {
     dot: true
   }).pipe(gulp.dest('dist'));
 
   var bower = gulp.src([
-    'bower_components/**/*'
+    'bower_components/**/*.{css,html,js}',
+    '!bower_components/**/index.html',
+    '!bower_components/**/{demo,test}/**/*'
   ]).pipe(gulp.dest('dist/bower_components'));
 
-  var elements = gulp.src(['app/elements/**/*.html'])
-    .pipe(gulp.dest('dist/elements'));
+  var elements = gulp.src([
+    'app/elements/elements.html',
+    'app/elements/routing.html'
+  ]).pipe(gulp.dest('dist/elements'));
+
+  var icons = gulp.src(['app/themes/' + config.theme + '/icons.html'])
+    .pipe(gulp.dest('dist/themes/' + config.theme));
+
+  var scripts = gulp.src(['app/scripts/analytics.js'])
+    .pipe(gulp.dest('dist/scripts'));
 
   var swBootstrap = gulp.src(['bower_components/platinum-sw/bootstrap/*.js'])
     .pipe(gulp.dest('dist/elements/bootstrap'));
@@ -107,115 +96,119 @@ gulp.task('copy', function () {
     .pipe($.rename('elements.vulcanized.html'))
     .pipe(gulp.dest('dist/elements'));
 
-  return merge(app, bower, elements, vulcanized, swBootstrap, swToolbox)
-    .pipe($.size({title: 'copy'}));
+  return merge(app, bower, elements, icons, scripts, swBootstrap, swToolbox, vulcanized)
+    .pipe($.size({title: 'Copy files to dist dir:'}));
 });
 
-// Copy Web Fonts To Dist
+// Copy web fonts to dist
 gulp.task('fonts', function () {
-  return gulp.src(['app/fonts/**'])
-    .pipe(gulp.dest('dist/fonts'))
-    .pipe($.size({title: 'fonts'}));
+  return gulp.src(['app/themes/' + config.theme + '/fonts/**/*.{css,woff,woff2}'])
+    .pipe(gulp.dest('dist/themes/' + config.theme + '/fonts'))
+    .pipe($.size({title: 'Copy fonts to dist/themes/' + config.theme + '/fonts dir:'}));
 });
 
-gulp.task('2014', function () {
-  return gulp.src(['app/2014/**'])
-    .pipe(gulp.dest('dist/2014'))
-    .pipe($.size({title: '2014'}));
-});
+// Scan your HTML for assets & optimize them
+gulp.task('html', ['views'], function () {
+  var assets = $.useref.assets({searchPath: ['dist']});
 
-gulp.task('assets', function () {
-  return gulp.src(['app/assets/**'])
-    .pipe(gulp.dest('dist/assets'))
-    .pipe($.size({title: 'assets'}));
-});
-
-gulp.task('data', function () {
-  return gulp.src(['app/data/**'])
-    .pipe(gulp.dest('dist/data'))
-    .pipe($.size({title: 'data'}));
-});
-
-gulp.task('posts', function () {
-  return gulp.src(['app/posts/**'])
-    .pipe(gulp.dest('dist/posts'))
-    .pipe($.size({title: 'posts'}));
-});
-
-// Scan Your HTML For Assets & Optimize Them
-gulp.task('html', function () {
-  var assets = $.useref.assets({searchPath: ['.tmp', 'app', 'dist']});
-
-  return gulp.src(['app/**/*.html', '!app/{elements,test}/**/*.html'])
+  return gulp.src(['app/*.html', '.tmp/*.html'])
     // Replace path for vulcanized assets
     .pipe($.if('*.html', $.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
     .pipe(assets)
-    // Concatenate And Minify JavaScript
+    // Concatenate and minify JavaScript
     .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
-    // Concatenate And Minify Styles
-    // In case you are still using useref build blocks
-    .pipe($.if('*.css', $.cssmin()))
     .pipe(assets.restore())
     .pipe($.useref())
-    // Minify Any HTML
+    // Minify any HTML
     .pipe($.if('*.html', $.minifyHtml({
-      quotes: true,
-      empty: true,
-      spare: true
+      empty: true,  // KEEP empty attributes
+      loose: true,  // KEEP one whitespace
+      quotes: true, // KEEP arbitrary quotes
+      spare: true   // KEEP redundant attributes
     })))
-    // Output Files
+    // Output files
     .pipe(gulp.dest('dist'))
-    .pipe($.size({title: 'html'}));
+    .pipe($.size({title: 'Copy optimized html and assets files to dist dir:'}));
 });
 
-// Vulcanize imports
+// Polybuild will take care of inlining HTML imports,
+// scripts and CSS for you.
 gulp.task('vulcanize', function () {
-  var DEST_DIR = 'dist/elements';
-
   return gulp.src('dist/elements/elements.vulcanized.html')
+    .pipe($.plumber())
     .pipe($.vulcanize({
-      dest: DEST_DIR,
-      strip: true,
+      stripComments: true,
       inlineCss: true,
       inlineScripts: true
     }))
-    .pipe(gulp.dest(DEST_DIR))
-    .pipe($.size({title: 'vulcanize'}));
+    // Split inline scripts from an HTML file for CSP compliance
+    .pipe($.crisper())
+    // Minify elements.vulcanized.html
+    // https://github.com/PolymerLabs/polybuild/issues/3
+    .pipe($.if('*.html', $.htmlmin({
+      customAttrAssign: [
+        {source:'\\$='}
+      ],
+      customAttrSurround: [
+        [ {source: '\\({\\{'}, {source: '\\}\\}'} ],
+        [ {source: '\\[\\['}, {source: '\\]\\]'}  ]
+      ],
+      removeComments: true,
+      collapseWhitespace: true
+    })))
+    // Remove newline characters
+    .pipe($.if('*.html', $.replace(/[\n]/g, '')))
+    // Remove 2 or more spaces from CSS
+    // (single spaces can be syntactically significant)
+    .pipe($.if('*.html', $.replace(/ {2,}/g, '')))
+    // Remove CSS comments
+    .pipe($.if('*.html', $.stripCssComments({preserve: false})))
+    // Minify elements.vulcanized.js
+    .pipe($.if('*.js', $.uglify()))
+    .pipe(gulp.dest('dist/elements'))
+    .pipe($.size({title: 'Copy vulcanized elements to dist/elements dir:'}));
 });
 
-// Generate a list of files that should be precached when serving from 'dist'.
-// The list will be consumed by the <platinum-sw-cache> element.
-gulp.task('precache', function (callback) {
+// Generate config data for the <sw-precache-cache> element.
+// This include a list of files that should be precached, as well as a (hopefully unique) cache
+// id that ensure that multiple PSK projects don't share the same Cache Storage.
+gulp.task('cache-config', function (callback) {
   var dir = 'dist';
+  var config = {
+    cacheId: packageJson.name || path.basename(__dirname),
+    disabled: false
+  };
 
-  glob('{elements,scripts,styles}/**/*.*', {cwd: dir}, function(error, files) {
+  return glob('{elements,scripts,themes}/**/*.*', {cwd: dir}, function(error, files) {
     if (error) {
       callback(error);
     } else {
       files.push('index.html', './', 'bower_components/webcomponentsjs/webcomponents-lite.min.js');
-      var filePath = path.join(dir, 'precache.json');
-      fs.writeFile(filePath, JSON.stringify(files), callback);
+      config.precache = files;
+
+      var md5 = crypto.createHash('md5');
+      md5.update(JSON.stringify(config.precache));
+      config.precacheFingerprint = md5.digest('hex');
+
+      var configPath = path.join(dir, 'cache-config.json');
+      fs.writeFile(configPath, JSON.stringify(config), callback);
     }
   });
 });
 
-gulp.task('gh-pages', function() {
-  return gulp.src('./dist/**/*')
-    .pipe(ghPages());
+// Clean output directory
+gulp.task('clean', function (cb) {
+  del(['.tmp', 'dist', 'deploy'], cb);
 });
 
-// Clean Output Directory
-gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
-
-// Clear cache. Fixes problem with image task after moving project folder
-gulp.task('clearCache', function (done) {
-  return $.cache.clearAll(done);
-});
-
-// Watch Files For Changes & Reload
-gulp.task('serve', ['styles', 'elements', 'images'], function () {
+// Watch files for changes & reload
+gulp.task('serve', ['images', 'styles', 'js', 'lint', 'manifest', 'views'], function () {
   browserSync({
-    notify: false,
+    browser: config.browserSync.browser,
+    https: config.browserSync.https,
+    notify: config.browserSync.notify,
+    port: config.browserSync.port,
+    logPrefix: 'Hoverboard',
     snippetOptions: {
       rule: {
         match: '<span id="browser-sync-binding"></span>',
@@ -224,29 +217,36 @@ gulp.task('serve', ['styles', 'elements', 'images'], function () {
         }
       }
     },
-    // Run as an https by uncommenting 'https: true'
-    // Note: this uses an unsigned certificate which on first access
-    //       will present a certificate warning in the browser.
-    // https: true,
     server: {
       baseDir: ['.tmp', 'app'],
+      middleware: [ historyApiFallback() ],
       routes: {
         '/bower_components': 'bower_components'
       }
+    },
+    ui: {
+      port: config.browserSync.ui.port
     }
   });
 
-  gulp.watch(['app/**/*.html'], reload);
-  gulp.watch(['app/styles/**/*.css'], ['styles', reload]);
-  gulp.watch(['app/elements/**/*.css'], ['elements', reload]);
-  gulp.watch(['app/{scripts,elements}/**/*.js'], ['jshint']);
+  gulp.watch([
+    'app/*.html',
+    'app/views/**/*.html',
+    'app/content/**/*.md'
+  ], ['views', reload]);
+  gulp.watch(['app/{elements,themes}/**/*.{css,html}'], ['styles', reload]);
+  gulp.watch(['app/{scripts,elements}/**/*.{js,html}'], ['jshint', 'js']);
   gulp.watch(['app/images/**/*'], reload);
 });
 
 // Build and serve the output from the dist build
 gulp.task('serve:dist', ['default'], function () {
   browserSync({
-    notify: false,
+    browser: config.browserSync.browser,
+    https: config.browserSync.https,
+    notify: config.browserSync.notify,
+    port: config.browserSync.port,
+    logPrefix: 'Hoverboard',
     snippetOptions: {
       rule: {
         match: '<span id="browser-sync-binding"></span>',
@@ -255,33 +255,109 @@ gulp.task('serve:dist', ['default'], function () {
         }
       }
     },
-    // Run as an https by uncommenting 'https: true'
-    // Note: this uses an unsigned certificate which on first access
-    //       will present a certificate warning in the browser.
-    // https: true,
-    server: 'dist'
+    server: 'dist',
+    middleware: [ historyApiFallback() ],
+    ui: {
+      port: config.browserSync.ui.port
+    }
   });
 });
+
+// Clean dist directory
+gulp.task('clean-dist', require(task('clean-dist'))(del));
+
+// Download newest script analytics.js from Google, because link
+// https://www.google-analytics.com/analytics.js has set only 2 hours cache
+gulp.task('download:analytics', require(task('download-analytics'))($, gulp));
+
+// Fix path to sw-toolbox.js
+gulp.task('fix-path-sw-toolbox', require(task('fix-path-sw-toolbox'))($, gulp));
+
+// Transpile all JS from ES2015 (ES6) to ES5
+gulp.task('js', require(task('js-babel'))($, gulp));
+
+// Lint CSS and JavaScript
+gulp.task('lint', require(task('lint'))($, gulp, merge));
+
+// Add colors to Web Application Manifest - manifest.json
+gulp.task('manifest', require(task('manifest'))($, config, gulp));
+
+// Minify JavaScript in dist directory
+gulp.task('minify-dist', require(task('minify-dist'))($, gulp, merge));
+
+// Static asset revisioning by appending content hash to filenames
+gulp.task('revision', require(task('revision'))($, gulp));
+
+// Build and serve the output from the dist build with GAE tool
+gulp.task('serve:gae', ['default'], require(task('serve-gae'))($, gulp));
+
+// Transform styles with PostCSS
+gulp.task('styles', require(task('styles'))($, config, gulp, merge));
+
+// Compile HTML files with Nunjucks templating engine
+gulp.task('views', require(task('views-nunjucks'))($, config, gulp));
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
   runSequence(
-    ['copy', 'styles'],
-    'elements',
+    ['copy', 'styles', 'lint', 'js', 'manifest'],
     ['jshint', 'images', 'fonts', 'html'],
-    'vulcanize', 'precache', '2014', 'assets', 'data', 'posts',
+    'vulcanize',
+    ['clean-dist', 'minify-dist'],
+    'cache-config',
     cb);
 });
 
-// Deploy on GitHub
-gulp.task('deploy', ['default'], function (cb) {
-  runSequence('gh-pages',
+// Initializing app
+gulp.task('init', function (cb) {
+  runSequence(
+    ['download:analytics', 'download:fonts'],
     cb);
 });
+
+// Deploy Tasks
+// ------------
+
+// Pre-deploy tasks
+gulp.task('pre-deploy', function(cb) {
+  runSequence(
+    'default',
+    'fix-path-sw-toolbox',
+    'revision',
+    cb);
+});
+
+// Deploy to development environment
+gulp.task('deploy:dev', ['pre-deploy'],
+  require(task('deploy'))($, config, gulp, 'development'));
+
+// Deploy to staging environment
+gulp.task('deploy:stag', ['pre-deploy'],
+  require(task('deploy'))($, config, gulp, 'staging'));
+
+// Deploy to production environment
+gulp.task('deploy:prod', ['pre-deploy'],
+  require(task('deploy'))($, config, gulp, 'production'));
+
+// Promote the staging version to the production environment
+gulp.task('deploy:promote',
+  require(task('deploy'))($, config, gulp, 'promote'));
+
+// Tool Tasks
+// ----------
+
+// Download Google Fonts for load page performance and offline using
+gulp.task('download:fonts', require(task('download-fonts'))($, config, gulp));
+
+// Run PageSpeed Insights
+gulp.task('pagespeed', require(task('pagespeed'))(config));
+
+// Test Tasks
+// ----------
 
 // Load tasks for web-component-tester
 // Adds tasks for `gulp test:local` and `gulp test:remote`
-try { require('web-component-tester').gulp.init(gulp); } catch (err) {}
+require('web-component-tester').gulp.init(gulp);
 
 // Load custom tasks from the `tasks` directory
-try { require('require-dir')('tasks'); } catch (err) {}
+try { require('require-dir')('tasks/tests'); } catch (err) {}

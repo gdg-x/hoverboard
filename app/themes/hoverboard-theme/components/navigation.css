@@ -1,0 +1,23 @@
+/** @define Navigation */
+
+.Navigation {
+    /* postcss-bem-linter: ignore */
+    --paper-menu-selected-item: {
+        color: var(--default-primary-color);
+    }
+    ;
+    @nest &-icon {
+        margin-right: 33px;
+        opacity: var(--dark-secondary-opacity);
+    }
+    @nest &-link {
+        @apply(--paper-font-body2);
+        text-decoration: none;
+        color: var(--primary-text-color);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        min-height: 48px;
+        padding: 0 16px;
+    }
+}
