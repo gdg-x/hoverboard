@@ -3,7 +3,8 @@
 
 <dom-module id="footer-block">
     <template>
-        <style include="shared-styles">
+        <style include="shared-styles"></style>
+        <style>
             :host {
                 display: block;
                 background: var(--footer-background-color);
@@ -107,7 +108,7 @@
                         <span class="link-block-title">{$ block.title $}</span>
                         <ul class="link-block">
                             {% for link in block.links %}
-                            <li><a href="{$ link.url $}" {% if link.newTab %}target="_blank"{% endif %}>{$ link.text $}</a></li>
+                            <li><a href="{$ link.url $}" {% if link.newTab %}target="_blank" {% endif %}>{$ link.text $}</a></li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -116,7 +117,7 @@
                         <span class="link-block-title">{$ footer.contactBlock.title $}</span>
                         <ul class="link-block">
                             {% for link in footer.contactBlock.links %}
-                            <li><a href="{$ link.url $}" {% if link.newTab %}target="_blank"{% endif %}>{$ link.text $}</a></li>
+                            <li><a href="{$ link.url $}" {% if link.newTab %}target="_blank" {% endif %}>{$ link.text $}</a></li>
                             {% endfor %}
                         </ul>
                         <div class="icons-wrapper align-pb-block">

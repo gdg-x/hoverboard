@@ -1,5 +1,8 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
 <dom-module id="tickets-block">
     <template>
+        <style include="shared-styles"></style>
         <style>
             :host {
                 display: block;
@@ -9,10 +12,6 @@
 
             .container {
                 padding-bottom: 35px;
-            }
-
-            .price-block-wrapper {
-                margin-top: 20px;
             }
 
             .ticket-name {
@@ -45,14 +44,14 @@
                 font-weight: 200;
             }
 
-            .details {
-                margin-top: 10px;
-                font-size: 14px;
-            }
-
             .additional-info {
                 margin-top: -5px;
                 font-size: 13px;
+            }
+
+            .details {
+                margin-top: 10px;
+                font-size: 14px;
             }
 
             .open-dialog-button {
@@ -63,77 +62,64 @@
                 background: #fff;
             }
 
-            @media (min-height: 400px) {
-                paper-dialog {
-                    min-height: 380px;
-                }
-            }
-
             paper-dialog .buttons {
                 color: initial;
             }
         </style>
-        <div id="pricetable" class="container wrap relative layout vertical text-center">
-            <h4 class="heading">Tickets</h4>
+        <div class="container wrap relative layout vertical text-center">
+            <h4 class="heading">{$ ticketsBlock.title $}</h4>
             <div class="price-block-wrapper flex layout vertical-horizontal">
-                <div class="price-block flex text-center">
-                    <span class="ticket-name block">Student</span>
-                    <span class="price">400</span>
-                    <span class="currency">UAH</span>
-                    <span class="additional-info block">*Before October 23 or 100 tickets.
-                        <br/>Requires valid student ID</span>
+                {% for ticket in ticketsBlock.tickets %}
+                <div class="price-block flex text-center relative {% if ticket.soldOut %}sold-out{% endif %}">
+                    <span class="ticket-name block">{$ ticket.name $}</span>
+                    <span class="price">{$ ticket.price $}</span>
+                    <span class="currency">{$ ticket.currency $}</span>
+                    <span class="additional-info block">{$ ticket.info $}</span>
+                    {% if ticket.soldOut %}
+                    <div class="fit layout vertical center-center sold-out-text">
+                        <span>Sold Out</span>
+                    </div>
+                    {% endif %}
                 </div>
-                <div class="price-block flex text-center relative sold-out">
-                    <span class="ticket-name block">Early Bird</span>
-                    <span class="price">600</span>
-                    <span class="currency">UAH</span>
-                    <span class="additional-info block">*Before September 27 or 150 tickets</span>
-                    <div class="fit layout vertical center-center sold-out-text"><span>Sold Out</span></div>
-                </div>
-                <div class="price-block flex text-center">
-                    <span class="ticket-name block">Lazy Bird</span>
-                    <span class="price">800</span>
-                    <span class="currency">UAH</span>
-                    <span class="additional-info block">*Before October 23</span>
-                </div>
+                {% endfor %}
             </div>
-            <span class="details">Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.</span>
+            <span class="details">{$ ticketsBlock.details $}</span>
             <div class="flex">
                 <paper-button class="white border-button open-dialog-button" on-tap="openTicketsDialog">Buy a ticket</paper-button>
             </div>
         </div>
         <paper-dialog id="ticketsDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal>
-            <div id="2event_tickets_widget" style="width: 640px; height: 300px; background:#fff;"></div>
+            <p>We have run out all our tickets</p>
             <div class="buttons">
-                <a href="http://2event.com/events/312113" target="_blank">
-                    <paper-button>Buy on the website</paper-button>
-                </a>
                 <paper-button dialog-confirm>Close</paper-button>
             </div>
         </paper-dialog>
     </template>
     <script>
-        /* jshint ignore:start */
-        var widgetOptions = {
-            bg_color: 'ffffff',
-            id: 312113,
-            lang: 'en'
-        };
-        /* jshint ignore:end */
-        setTimeout(function() {
-            var script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.async = true;
-            script.src = 'https://2event.com/js/widget-tickets.js';
-            document.getElementsByTagName('head')[0].appendChild(script);
-        },2000);
+        (function() {
+            'use strict';
 
-        Polymer({
-            is: 'tickets-block',
-            openTicketsDialog: function() {
-                ga('send', 'buy-a-ticket', 'button', 'click'); // jshint ignore:line
-                this.$.ticketsDialog.open();
+            class TicketsBlock {
+                beforeRegister() {
+                    let is = this.constructor.name.replace(/\W+/g, '-')
+                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+                    this.is = is;
+                }
+                openTicketsDialog() {
+                    this.fire('iron-signal', {
+                        name: 'track-event',
+                        data: {
+                            category: 'button',
+                            action: 'click',
+                            label: 'group',
+                            value: 'buy-a-ticket'
+                        }
+                    });
+                    this.$.ticketsDialog.open();
+                }
             }
-        });
+
+            Polymer(TicketsBlock);
+        })();
     </script>
 </dom-module>

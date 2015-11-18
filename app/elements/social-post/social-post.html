@@ -1,0 +1,75 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/sc-timeago/sc-timeago.html">
+
+<dom-module id="social-post">
+    <template>
+        <style include="shared-styles"></style>
+        <style>
+            :host {
+                display: block;
+            }
+
+            .post-content {
+                margin-top: 5px;
+                display: block;
+                font-size: 20px;
+                line-height: 1.2;
+            }
+
+            #postContent::content a {
+                color: var(--social-font-color) !important;
+            }
+
+            time {
+                font-size: 16px;
+            }
+
+            @media (min-width: 601px) {
+                .post-content {
+                    margin-top: 10px;
+                }
+            }
+        </style>
+        <span class="post-meta">
+            <a class="post-link" href="[[canonicalUrl]][[author]]" target="_blank">[[sign]][[author]]</a>
+            <time is="time-ago" datetime$="[[when]]"></time>
+            <sc-timeago datetime$="[[when]]"></sc-timeago>
+        </span>
+        <span id="postContent" class="post-content"></span>
+
+    </template>
+    <!-- <script src="../../bower_components/time-elements/time-elements.js"></script> -->
+    <script>
+        (function() {
+            'use strict';
+
+            class SocialPost {
+                beforeRegister() {
+                    let is = this.constructor.name.replace(/\W+/g, '-')
+                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+                    this.is = is;
+                    this.properties = {
+                        author: {
+                            type: String,
+                            value: '{$ organizer.name $}'
+                        },
+                        url: String,
+                        text: {
+                            type: String,
+                            observer: '_textChanged',
+                            value: 'Post about your experience at {$ title $}'
+                        },
+                        when: Date,
+                        canonicalUrl: String,
+                        sign: String
+                    };
+                }
+                _textChanged() {
+                    this.$.postContent.innerHTML = this.text;
+                }
+            }
+
+            Polymer(SocialPost);
+        })();
+    </script>
+</dom-module>

@@ -12,7 +12,7 @@ h1, h2, h3, h4 {
     font-weight: 300;
 }
 a, .anchor-like {
-    color: var(--default-primary-color);
+    color: var(--text-primary-color);
     text-decoration: none;
 }
 .placeholder-color {
@@ -67,8 +67,8 @@ a, .anchor-like {
     }
 }
 .container .heading {
-    margin-bottom: 20px;
-    font-size: 28px;
+    margin-bottom: 40px;
+    font-size: 32px;
     text-transform: uppercase;
     letter-spacing: .05em;
 }

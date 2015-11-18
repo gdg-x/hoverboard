@@ -35,6 +35,7 @@ module.exports = {
             url: 'https://www.linkedin.com/company/google-developers-group-lviv'
         }
     },
+    hashtag: 'dfua',
     email: 'devfest@gdg.com',
     organizer: {
         name: 'GDG Lviv',

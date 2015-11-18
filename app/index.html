@@ -63,22 +63,9 @@
                         <featured-people people="{{speakers}}"></featured-people>
                         <call-to-action></call-to-action>
                         <photo-block picasa-user-id="{$ galleryBlock.picasa.userId $}" picasa-album-id="{$ galleryBlock.picasa.albumId $}" photos='{$ galleryBlock.photos | dump $}'></photo-block>
-
-                        <paper-material class="Page-paper" elevation="1">
-                            <my-greeting></my-greeting>
-
-                            <p class="paper-font-subhead">You now have:</p>
-                            <my-list></my-list>
-
-                            <p class="paper-font-body2">Looking for more Web App layouts? Check out our <a href="https://github.com/PolymerElements/app-layout-templates">layouts</a> collection. You can also <a href="http://polymerelements.github.io/app-layout-templates/">preview</a>                                them live.</p>
-                        </paper-material>
-                        <paper-material class="Page-paper" elevation="1">
-                            <p class="paper-font-body2">This is another card.</p>
-                        </paper-material>
-
-                        <paper-material class="Page-paper" elevation="1">
-                            Test
-                        </paper-material>
+                        <tickets-block></tickets-block>
+                        <latest-posts posts="{{posts}}"></latest-posts>
+                        <social-feed source="{$ socialFeed.source $}"></social-feed>
                         <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}"></footer-block>
                     </section>
 

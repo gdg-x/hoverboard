@@ -1,7 +1,6 @@
 /** @define Main */
 
 .Main {
-  background: var(--primary-background-color);
 
   @nest &-headerMiddleContent  {
     height: 100%;
