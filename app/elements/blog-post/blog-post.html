@@ -1,0 +1,29 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="blog-post">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <div>Hello from <span>{{foo}}</span></div>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'blog-post',
+
+      properties: {
+        foo: {
+          type: String,
+          value: 'blog-post',
+          notify: true
+        }
+      }
+    });
+  })();
+  </script>
+</dom-module>

@@ -32,28 +32,25 @@
             </paper-scroll-header-panel>
 
             <!-- Main Area -->
-            <paper-scroll-header-panel class="Main" main condenses>
+            <div class="Main scroll" main>
 
                 <!-- Main Toolbar -->
-                <paper-toolbar class="Main-header tall">
+                <!-- <paper-toolbar class="Main-header tall">
                     <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
                     <span class="flex"></span>
 
-                    <!-- Toolbar icons -->
                     <paper-icon-button icon="refresh"></paper-icon-button>
                     <paper-icon-button icon="search"></paper-icon-button>
 
-                    <!-- Application name -->
                     <div class="Main-headerMiddleContent middle center horizontal layout">
                         <h1 class="Main-headerTitle">Polymer Starter Kit Plus</h1>
                     </div>
 
-                    <!-- Application sub title -->
                     <div class="Main-headerBottomContent bottom center horizontal layout">
                         <div class="Main-headerSubTitle">The future of the web today</div>
                     </div>
 
-                </paper-toolbar>
+                </paper-toolbar> -->
 
                 <!-- Main Content -->
                 <iron-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}">
@@ -66,6 +63,8 @@
                         <tickets-block></tickets-block>
                         <latest-posts posts="{{posts}}"></latest-posts>
                         <social-feed source="{$ socialFeed.source $}"></social-feed>
+                        <map-block></map-block>
+                        <logos-block logos="{{partners}}"></logos-block>
                         <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}"></footer-block>
                     </section>
 
@@ -96,7 +95,7 @@
                     </section>
 
                 </iron-pages>
-            </paper-scroll-header-panel>
+            </div>
         </paper-drawer-panel>
 
         <!-- Service Worker support -->

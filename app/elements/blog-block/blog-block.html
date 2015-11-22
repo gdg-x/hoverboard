@@ -1,0 +1,108 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/marked-element/marked-element.html">
+<link rel="import" href="../blog-post/blog-post.html">
+
+<dom-module id="blog-block">
+    <template>
+        <style include="sharedStyles"></style>
+        <style>
+            :host {
+                display: block;
+            }
+            .post-wrapper {
+                display: none;
+            }
+            .card-content {
+                padding: 16px;
+            }
+            .card-actions {
+                border-top: 1px solid var(--divider-color);
+                padding: 5px 16px;
+                position: relative;
+            }
+            .card-wrapper {
+                background: #fff;
+                margin-bottom: 30px;
+            }
+            .title {
+                color: var(--default-primary-color);
+                font-size: 24px;
+                line-height: 1.2
+            }
+            .posted {
+                font-size: 14px;
+                color: var(--secondary-text-color);
+            }
+            .brief {
+                padding: 0 16px;
+            }
+            @media (max-width: 960px) {
+                .post-wrapper,
+                .post {
+                    @apply(--layout-fit);
+                }
+            }
+            @media (min-width: 961px) {
+                .card-wrapper {
+                    margin: 0 15px 30px;
+                    width: calc(100% / 3);
+                }
+            }
+        </style>
+        <div id="posts" class="container flex layout horizontal center-justified wrap">
+            <template is="dom-repeat" items="[[posts]]" as="post">
+                <div class="card-wrapper layout horizontal">
+                    <paper-material class="layout vertical">
+                        <div class="card-content">
+                            <span class="title block">[[post.title]]</span>
+                            <span class="posted">Posted
+                                <span>[[post.posted]]</span>
+                            </span>
+                        </div>
+                        <div class="brief card-content flex">
+                            <marked-element markdown="[[post.brief]]"></marked-element>
+                        </div>
+                        <div class="card-actions">
+                            <paper-button on-tap="readMore">Read more</paper-button>
+                        </div>
+                    </paper-material>
+                </div>
+            </template>
+        </div>
+        <div id="postCon" class="post-wrapper container relative">
+            <blog-post id="post" class="post flex" meta="{{selectedPost}}" opened={{opened}}></blog-post>
+        </div>
+    </template>
+    <script>
+        (function() {
+            'use strict';
+
+            class BlogBlock {
+                beforeRegister() {
+                    let is = this.constructor.name.replace(/\W+/g, '-')
+                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+                    this.is = is;
+                    this.properties = {
+                        posts: {
+                            type: Array,
+                            observer: '_postsChanged'
+                        }
+                    };
+                }
+                _postsChanged() {
+                    this.async(function() {
+                        var nodeList = this.$.posts.querySelectorAll('.card-wrapper');
+                        this.animationConfig.loadPosts.nodes = Array.prototype.slice.call(nodeList);
+                        if (!this.checkUrlParams()) {
+                            this.playLoadAnimation();
+                        }
+                    });
+                }
+            }
+
+            Polymer(BlogBlock);
+        })();
+    </script>
+</dom-module>

@@ -12,7 +12,17 @@ module.exports = {
     // Event details
     dates: 'October 23-24, 2015',
     location: {
-        short: 'Lviv, Ukraine'
+        short: 'Lviv, Ukraine',
+        detail: 'Pivdennyi Expo Center</br>Shchyretska St, 36, Lviv, Ukraine',
+        pointer: {
+            latitude: 49.809841,
+            longitude: 23.972805,
+            zoom: 15
+        },
+        mapCenter: {
+            latitude: 49.809841,
+            longitude: 23.982805
+        }
     },
 
     // Contacts

@@ -16,8 +16,8 @@
                 line-height: 1.2;
             }
 
-            #postContent::content a {
-                color: var(--social-font-color) !important;
+            a, .post-content::content a {
+                color: var(--social-font-color);
             }
 
             time {
@@ -66,6 +66,7 @@
                 }
                 _textChanged() {
                     this.$.postContent.innerHTML = this.text;
+                    this.updateStyles();
                 }
             }
 

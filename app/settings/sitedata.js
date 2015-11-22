@@ -54,5 +54,6 @@ module.exports = {
     },
     socialFeed: {
         source: 'http://lviv.gdg.org.ua/tweetledee/favoritesjson.php?c=10&cache_interval=7200'
-    }
+    },
+    partnershipProposition: '/assets/GDG_DevFest_Ukraine_2015_Partnership_Proposition.pdf'
 };
