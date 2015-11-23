@@ -2,19 +2,20 @@
 <html lang="{$ lang $}">
 {% include "head.html" %}
 
-<body unresolved class="fullbleed vertical layout">
+<body class="vertical layout">
     <span id="browser-sync-binding"></span>
     <template is="dom-bind" id="app">
         <hoverboard-app></hoverboard-app>
+
         <!-- Service Worker support -->
         <paper-toast id="caching-complete" class="toast" duration="6000" text="Caching complete! This app will work offline."></paper-toast>
 
-        <platinum-sw-register auto-register clients-claim skip-waiting on-service-worker-installed="displayInstalledToast">
+        <!-- <platinum-sw-register auto-register clients-claim skip-waiting on-service-worker-installed="displayInstalledToast"> -->
             <!-- Google Analytics offline support -->
-            <platinum-sw-offline-analytics></platinum-sw-offline-analytics>
+            <!-- <platinum-sw-offline-analytics></platinum-sw-offline-analytics>
             <platinum-sw-cache default-cache-strategy="fastest" cache-config-file="cache-config.json">
             </platinum-sw-cache>
-        </platinum-sw-register>
+        </platinum-sw-register> -->
     </template>
 
     <!-- build:js {$ baseurl $}/scripts/app.js -->

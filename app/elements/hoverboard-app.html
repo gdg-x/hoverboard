@@ -34,7 +34,6 @@
 
 <!-- Custom elements -->
 <link rel="import" href="app-data/app-data.html">
-<link rel="import" href="footer-block/footer-block.html">
 <link rel="import" href="statistics-block/statistics-block.html">
 <link rel="import" href="featured-people/featured-people.html">
 <link rel="import" href="call-to-action/call-to-action.html">
@@ -44,7 +43,8 @@
 <link rel="import" href="social-feed/social-feed.html">
 <link rel="import" href="map-block/map-block.html">
 <link rel="import" href="logos-block/logos-block.html">
-<link rel="import" href="blog-block/blog-block.html">
+<link rel="import" href="footer-block/footer-block.html">
+<!-- <link rel="import" href="blog-block/blog-block.html"> -->
 
 
 <dom-module id="hoverboard-app">
@@ -74,7 +74,7 @@
                 <!-- Drawer Content -->
                 <!-- Navigation -->
                 <nav>
-                    <paper-menu class="Drawer-navigation list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="onDataRouteClick">
+                    <paper-menu class="Drawer-navigation list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="_onDataRouteClick">
                         {% for nav in navigation %}
                         <a class="layout horizontal center" data-route="{$ nav.route $}" href="{$ nav.permalink $}">{$ nav.text $}</a> {% endfor %}
                     </paper-menu>
@@ -157,6 +157,18 @@
                     let is = this.constructor.name.replace(/\W+/g, '-')
                         .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
                     this.is = is;
+                    this.properties = {
+                        route: {
+                            type: String,
+                            value: 'home'
+                        }
+                    };
+                }
+                ready() {
+                    // page.redirect('/home');
+                }
+                _onDataRouteClick() {
+                    this.$.paperDrawerPanel.closeDrawer();
                 }
             }
 
