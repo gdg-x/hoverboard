@@ -1,29 +1,42 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="blog-post">
-  <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
-    <div>Hello from <span>{{foo}}</span></div>
-  </template>
-  <script>
-  (function() {
-    'use strict';
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+        </style>
+        <iron-ajax id="ajax" url="[[_postUrl]]" handle-as="text" last-response="post" on-response="_postLoaded"></iron-ajax>
 
-    Polymer({
-      is: 'blog-post',
+    </template>
+    <script>
+        (function() {
+            'use strict';
 
-      properties: {
-        foo: {
-          type: String,
-          value: 'blog-post',
-          notify: true
-        }
-      }
-    });
-  })();
-  </script>
+            class BlogPost {
+                beforeRegister() {
+                    let is = this.constructor.name.replace(/\W+/g, '-')
+                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+                    this.is = is;
+                    this.properties = {
+                        meta: {
+                            type: String,
+                            observer: '_metaChanged'
+                        }
+                    };
+                }
+                _metaChanged() {
+                    this._postUrl = '{$ baseurl $}/posts/${this.meta.file}';
+                    this.$.ajax.generateRequest();
+                }
+                _postLoaded() {
+
+                }
+            }
+
+            Polymer(BlogPost);
+        })();
+    </script>
 </dom-module>

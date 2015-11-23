@@ -5,99 +5,7 @@
 <body unresolved class="fullbleed vertical layout">
     <span id="browser-sync-binding"></span>
     <template is="dom-bind" id="app">
-        <app-data speakers="{{speakers}}" sessions="{{sessions}}" posts="{{posts}}" partners="{{partners}}" schedule="{{schedule}}"></app-data>
-
-        <paper-drawer-panel id="paperDrawerPanel" responsive-width="599px" force-narrow>
-            <!-- Drawer Scroll Header Panel -->
-            <paper-scroll-header-panel class="Drawer" drawer>
-                <!-- Drawer Toolbar -->
-                <paper-toolbar class="tall">
-                    <div class="top">
-                        <img class="Drawer-logo" src="{$ baseurl $}/images/logo-white.svg" alt="{$ title $}">
-                    </div>
-                    <div class="bottom">
-                        <span class="Drawer-bottom">{$ dates $}
-                            <br>{$ location.short $}</span>
-                    </div>
-                </paper-toolbar>
-
-                <!-- Drawer Content -->
-                <!-- Navigation -->
-                <nav>
-                    <paper-menu class="Drawer-navigation list" attr-for-selected="data-route" selected="[[route]]" on-iron-select="onDataRouteClick">
-                        {% for nav in navigation %}
-                        <a class="layout horizontal center" data-route="{$ nav.route $}" href="{$ nav.permalink $}">{$ nav.text $}</a> {% endfor %}
-                    </paper-menu>
-                </nav>
-            </paper-scroll-header-panel>
-
-            <!-- Main Area -->
-            <div class="Main scroll" main>
-
-                <!-- Main Toolbar -->
-                <!-- <paper-toolbar class="Main-header tall">
-                    <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
-                    <span class="flex"></span>
-
-                    <paper-icon-button icon="refresh"></paper-icon-button>
-                    <paper-icon-button icon="search"></paper-icon-button>
-
-                    <div class="Main-headerMiddleContent middle center horizontal layout">
-                        <h1 class="Main-headerTitle">Polymer Starter Kit Plus</h1>
-                    </div>
-
-                    <div class="Main-headerBottomContent bottom center horizontal layout">
-                        <div class="Main-headerSubTitle">The future of the web today</div>
-                    </div>
-
-                </paper-toolbar> -->
-
-                <!-- Main Content -->
-                <iron-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}">
-
-                    <section class="Page" data-route="home">
-                        <statistics-block></statistics-block>
-                        <featured-people people="{{speakers}}"></featured-people>
-                        <call-to-action></call-to-action>
-                        <photo-block picasa-user-id="{$ galleryBlock.picasa.userId $}" picasa-album-id="{$ galleryBlock.picasa.albumId $}" photos='{$ galleryBlock.photos | dump $}'></photo-block>
-                        <tickets-block></tickets-block>
-                        <latest-posts posts="{{posts}}"></latest-posts>
-                        <social-feed source="{$ socialFeed.source $}"></social-feed>
-                        <map-block></map-block>
-                        <logos-block logos="{{partners}}"></logos-block>
-                        <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}"></footer-block>
-                    </section>
-
-                    <section class="Page" data-route="blog">
-                        <paper-material class="page-paper" elevation="1">
-                            <h2 class="Page-title">Users</h2>
-                            <p>This is the users section</p>
-                            <a href="/users/Rob">Rob</a>
-                        </paper-material>
-                    </section>
-
-                    <section class="Page" data-route="speakers">
-                        <paper-material class="Page-paper" elevation="1">
-                            <h2 class="Page-title">
-                                User:
-                                <span>{{params.name}}</span>
-                            </h2>
-                            <div>This is
-                                <span>{{params.name}}</span>'s section</div>
-                        </paper-material>
-                    </section>
-
-                    <section class="Page" data-route="schedule">
-                        <paper-material class="Page-paper" elevation="1">
-                            <h2 class="Page-title">Contact</h2>
-                            <p>This is the contact section</p>
-                        </paper-material>
-                    </section>
-
-                </iron-pages>
-            </div>
-        </paper-drawer-panel>
-
+        <hoverboard-app></hoverboard-app>
         <!-- Service Worker support -->
         <paper-toast id="caching-complete" class="toast" duration="6000" text="Caching complete! This app will work offline."></paper-toast>
 
@@ -107,7 +15,6 @@
             <platinum-sw-cache default-cache-strategy="fastest" cache-config-file="cache-config.json">
             </platinum-sw-cache>
         </platinum-sw-register>
-
     </template>
 
     <!-- build:js {$ baseurl $}/scripts/app.js -->

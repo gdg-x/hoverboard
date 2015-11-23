@@ -42,7 +42,7 @@
         (function() {
             'use strict';
 
-            class socialFeed {
+            class SocialFeed {
                 beforeRegister() {
                     let is = this.constructor.name.replace(/\W+/g, '-')
                         .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
@@ -89,7 +89,7 @@
                 }
             }
 
-            Polymer(socialFeed);
+            Polymer(SocialFeed);
         })();
     </script>
 </dom-module>
