@@ -1,0 +1,67 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+
+<dom-module id="hero-block">
+    <template>
+        <style include="shared-styles"></style>
+        <style>
+            :host {
+                display: block;
+                --paper-toolbar-background: transparent;
+                color: var(--primary-text-color);
+            }
+            .container {
+                padding: 0;
+            }
+            paper-tab {
+                flex: none;
+                padding: 0 10px;
+            }
+            .logo {
+                margin-top: 7px;
+                height: 40px;
+            }
+        </style>
+        <div class="container flex relative">
+            <paper-toolbar>
+                <paper-icon-button class="menu-toggle" icon="icons:menu" on-tap="togglePanel"></paper-icon-button>
+                <div class="flex hidden-xs">
+                    <a data-route="home" href="/" hidden$="{{hideLogo}}">
+                        <img class="logo" src="{$ baseurl $}/images/logo-white.svg" alt="{$ title $}">
+                    </a>
+                </div>
+                <paper-tabs attr-for-selected="data-route" selected="{{route}}">
+                    {% for nav in navigation %}
+                    <paper-tab class="text-u-c" link>
+                        <a data-route="{$ nav.route $}" href="{$ nav.permalink $}" class="nav-link horizontal center-center layout">{$ nav.text $}</a>
+                    </paper-tab>
+                    {% endfor %}
+                </paper-tabs>
+            </paper-toolbar>
+            <content></content>
+        </div>
+    </template>
+    <script>
+        (function() {
+            'use strict';
+
+            class HeroBlock {
+                beforeRegister() {
+                    let is = this.constructor.name.replace(/\W+/g, '-')
+                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+                    this.is = is;
+                    this.properties = {
+                        route: String
+                    };
+                }
+                togglePanel() {
+                    document.querySelector('#paperDrawerPanel').togglePanel();
+                }
+            }
+
+            Polymer(HeroBlock);
+        })();
+    </script>
+</dom-module>

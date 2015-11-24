@@ -32,8 +32,12 @@
 <!-- Routing -->
 <link rel="import" href="routing.html">
 
+<!-- Theme -->
+<link rel="import" href="../themes/hoverboard-theme/theme.html">
+
 <!-- Custom elements -->
 <link rel="import" href="app-data/app-data.html">
+<link rel="import" href="hero-block/hero-block.html">
 <link rel="import" href="statistics-block/statistics-block.html">
 <link rel="import" href="featured-people/featured-people.html">
 <link rel="import" href="call-to-action/call-to-action.html">
@@ -83,7 +87,7 @@
 
             <!-- Main Area -->
             <div class="Main scroll" main>
-
+                <hero-block route="{{route}}"></hero-block>
                 <!-- Main Toolbar -->
                 <!-- <paper-toolbar class="Main-header tall">
                     <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
@@ -163,9 +167,6 @@
                             value: 'home'
                         }
                     };
-                }
-                ready() {
-                    // page.redirect('/home');
                 }
                 _onDataRouteClick() {
                     this.$.paperDrawerPanel.closeDrawer();
