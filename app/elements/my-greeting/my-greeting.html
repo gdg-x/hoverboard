@@ -13,31 +13,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
     <style include="shared-styles"></style>
     <style>
-      :host {
-        display: block;
-      }
+      @import "my-greeting";
     </style>
+    
     <h2 class="Page-title">{{greeting}}</h2>
     <span class="paper-font-body2">Update text to change the greeting.</span>
     <!-- Listens for "input" event and sets greeting to <input>.value -->
     <input class="paper-font-body2" value="{{greeting::input}}">
   </template>
 
-  <script>
-    class MyGreeting {
-      beforeRegister() {
-        this.is = 'my-greeting';
-        this.properties = {
-          greeting: {
-            type: String,
-            value: 'Welcome!',
-            notify: true
-          }
-        };
-      }
-    }
-
-    Polymer(MyGreeting);
-  </script>
+  <script src="my-greeting.js"></script>
 
 </dom-module>

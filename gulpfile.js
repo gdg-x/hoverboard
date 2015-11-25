@@ -36,10 +36,8 @@ gulp.task('jshint', function () {
       'app/scripts/**/*.js',
       '!app/scripts/analytics.js',
       'app/elements/**/*.js',
-      'app/elements/**/*.html',
       'gulpfile.js'
     ])
-    .pipe($.jshint.extract()) // Extract JS from .html files
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
@@ -299,8 +297,8 @@ gulp.task('views', require(task('views-nunjucks'))($, config, gulp));
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
   runSequence(
-    ['copy', 'styles', 'lint', 'js', 'manifest'],
-    ['jshint', 'images', 'fonts', 'html'],
+    ['copy', 'js', 'jshint', 'lint', 'manifest', 'styles'],
+    ['fonts', 'html', 'images'],
     'vulcanize',
     ['clean-dist', 'minify-dist'],
     'cache-config',
