@@ -1,7 +1,9 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html">
 
 <dom-module id="hero-block">
     <template>
@@ -10,38 +12,57 @@
             :host {
                 display: block;
                 --paper-toolbar-background: transparent;
+                --paper-tabs-selection-bar-color: var(--default-primary-color);
+                --tab-text-color: var(--default-primary-color);
                 color: var(--primary-text-color);
+                min-height: 250px;
             }
-            .container {
-                padding: 0;
+
+            paper-toolbar {
+                margin-left: -16px;
+                margin-right: -16px;
             }
+
+            paper-tabs a {
+                color: var(--tab-text-color);
+            }
+
             paper-tab {
                 flex: none;
                 padding: 0 10px;
             }
+
+            .container {
+                padding-top: 0;
+            }
+
             .logo {
                 margin-top: 7px;
                 height: 40px;
             }
         </style>
-        <div class="container flex relative">
-            <paper-toolbar>
-                <paper-icon-button class="menu-toggle" icon="icons:menu" on-tap="togglePanel"></paper-icon-button>
-                <div class="flex hidden-xs">
-                    <a data-route="home" href="/" hidden$="{{hideLogo}}">
-                        <img class="logo" src="{$ baseurl $}/images/logo-white.svg" alt="{$ title $}">
-                    </a>
-                </div>
-                <paper-tabs attr-for-selected="data-route" selected="{{route}}">
-                    {% for nav in navigation %}
-                    <paper-tab class="text-u-c" link>
-                        <a data-route="{$ nav.route $}" href="{$ nav.permalink $}" class="nav-link horizontal center-center layout">{$ nav.text $}</a>
-                    </paper-tab>
-                    {% endfor %}
-                </paper-tabs>
-            </paper-toolbar>
-            <content></content>
+        <div class="relative">
+            <paper-ripple id="ripple" noink></paper-ripple>
+            <div class="container">
+                <paper-toolbar>
+                    <paper-icon-button class="menu-toggle" icon="icons:menu" on-tap="togglePanel" hidden="{{!smallScreen}}"></paper-icon-button>
+                    <div class="flex">
+                        <a data-route="home" href="/" hidden="{{hideLogo}}">
+                            <img class="logo" src="{$ baseurl $}/images/logo-white.svg" alt="{$ title $}">
+                        </a>
+                    </div>
+                    <paper-tabs attr-for-selected="data-route" selected="{{route}}" hidden="{{smallScreen}}" noink>
+                        {% for nav in navigation %}
+                        <paper-tab data-route="{$ nav.route $}" class="text-u-c" on-tap="_pageSelected" link>
+                            <a href="{$ nav.permalink $}" class="nav-link horizontal center-center layout">{$ nav.text $}</a>
+                        </paper-tab>
+                        {% endfor %}
+                    </paper-tabs>
+                </paper-toolbar>
+                <content></content>
+            </div>
         </div>
+        <iron-media-query query="(max-width: 599px)" query-matches="{{smallScreen}}"></iron-media-query>
     </template>
     <script>
         (function() {
@@ -53,11 +74,33 @@
                         .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
                     this.is = is;
                     this.properties = {
-                        route: String
+                        route: {
+                            type: String,
+                            notify: true
+                        },
+                        hideLogo: Boolean,
+                        backgroundColor: String,
+                        fontColor: String,
+                        tabFontColor: String,
+                        tabBarColor: String
                     };
+                    this.observers = ['_stylesChanged(backgroundColor, fontColor, tabFontColor, tabBarColor)'];
                 }
                 togglePanel() {
                     document.querySelector('#paperDrawerPanel').togglePanel();
+                }
+                _pageSelected(e) {
+                    this.$.ripple.downAction(e);
+                    this.async(function() {
+                        this.$.ripple.upAction(e)
+                    }, 200);
+                }
+                _stylesChanged(backgroundColor, fontColor, tabFontColor, tabBarColor) {
+                    this.style.color = fontColor;
+                    this.style.background = backgroundColor;
+                    this.customStyle['--tab-text-color'] = tabFontColor;
+                    this.customStyle['--paper-tabs-selection-bar-color'] = tabBarColor;
+                    this.updateStyles();
                 }
             }
 

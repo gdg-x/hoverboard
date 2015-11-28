@@ -1,4 +1,9 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../picasa-gallery/picasa-gallery.html">
 
 <dom-module id="photo-block">
@@ -37,6 +42,7 @@
             <div class="flex relative big">
                 <iron-image src="[[ photos.big ]]" class="placeholder-color fit" sizing="cover" preload fade></iron-image>
                 <div class="open-photos layout vertical center-center fit pointer" on-tap="openGallery">
+                    <paper-ripple></paper-ripple>
                     <span>Click here to view more photos</span>
                 </div>
             </div>
@@ -44,12 +50,14 @@
                 <div class="flex relative">
                     <iron-image src="[[ photos.small.0 ]]" class="placeholder-color fit" sizing="cover" preload fade></iron-image>
                     <div class="open-photos layout vertical center-center fit pointer" on-tap="openGallery">
+                        <paper-ripple></paper-ripple>
                         <span>Click here to view more photos</span>
                     </div>
                 </div>
                 <div class="flex relative hidden-xs">
                     <iron-image src="[[ photos.small.1 ]]" class="placeholder-color fit" sizing="cover" preload fade></iron-image>
                     <div class="open-photos layout vertical center-center fit pointer" on-tap="openGallery">
+                        <paper-ripple></paper-ripple>
                         <span>Click here to view more photos</span>
                     </div>
                 </div>

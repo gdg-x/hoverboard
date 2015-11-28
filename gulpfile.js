@@ -46,7 +46,7 @@ gulp.task('jshint', function() {
 });
 
 // Optimize images
-gulp.task('images', function() {
+gulp.task('images', ['clean'], function() {
     return gulp.src('app/images/**/*')
         .pipe($.cache($.imagemin({
             progressive: true,
@@ -300,13 +300,13 @@ gulp.task('download:analytics', require(task('download-analytics'))($, gulp));
 gulp.task('fix-path-sw-toolbox', require(task('fix-path-sw-toolbox'))($, gulp));
 
 // Transpile all JS from ES2015 (ES6) to ES5
-gulp.task('js', require(task('js-babel'))($, gulp));
+gulp.task('js', ['views'], require(task('js-babel'))($, gulp));
 
 // Lint CSS and JavaScript
 gulp.task('lint', require(task('lint'))($, gulp, merge));
 
 // Add colors to Web Application Manifest - manifest.json
-gulp.task('manifest', require(task('manifest'))($, config, gulp));
+gulp.task('manifest', ['clean'], require(task('manifest'))($, config, gulp));
 
 // Minify JavaScript in dist directory
 gulp.task('minify-dist', require(task('minify-dist'))($, gulp, merge));
@@ -318,10 +318,10 @@ gulp.task('revision', require(task('revision'))($, gulp));
 gulp.task('serve:gae', ['default'], require(task('serve-gae'))($, gulp));
 
 // Transform styles with PostCSS
-gulp.task('styles', require(task('styles'))($, config, gulp, merge));
+gulp.task('styles', ['clean'], require(task('styles'))($, config, gulp, merge));
 
 // Compile HTML files with Nunjucks templating engine
-gulp.task('views', require(task('views-nunjucks'))($, config, gulp));
+gulp.task('views', ['styles'], require(task('views-nunjucks'))($, config, gulp));
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function(cb) {

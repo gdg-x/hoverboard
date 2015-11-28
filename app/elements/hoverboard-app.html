@@ -38,6 +38,7 @@
 <!-- Custom elements -->
 <link rel="import" href="app-data/app-data.html">
 <link rel="import" href="hero-block/hero-block.html">
+<link rel="import" href="hero-content/hero-content.html">
 <link rel="import" href="statistics-block/statistics-block.html">
 <link rel="import" href="featured-people/featured-people.html">
 <link rel="import" href="call-to-action/call-to-action.html">
@@ -80,14 +81,54 @@
                 <nav>
                     <paper-menu class="Drawer-navigation list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="_onDataRouteClick">
                         {% for nav in navigation %}
-                        <a class="layout horizontal center" data-route="{$ nav.route $}" href="{$ nav.permalink $}">{$ nav.text $}</a> {% endfor %}
+                        <a class="layout horizontal center" data-route="{$ nav.route $}" href="{$ nav.permalink $}">{$ nav.text $}</a>
+                        {% endfor %}
                     </paper-menu>
                 </nav>
             </paper-scroll-header-panel>
 
             <!-- Main Area -->
             <div class="Main scroll" main>
-                <hero-block route="{{route}}"></hero-block>
+                <hero-block route="{{route}}" font-color="{{_heroSettings.2}}" background-color="{{_heroSettings.0}}" tab-font-color="{{_heroSettings.3}}" tab-bar-color="{{_heroSettings.4}}" hide-logo="{{_equal(route, 'home')}}">
+                    <template is="dom-if" if="{{_equal(route, 'home')}}">
+                        <div class="top-section hero">
+                            <div class="layout vertical-horizontal">
+                                <div class="flex center-content-xs">
+                                    <img class="logo" src="{$ baseurl $}/images/logo.svg" alt="GDG DevFest 2015">
+                                    <p class="dates bold">October 23-24, Lviv</p>
+                                    <p class="description">The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts</p>
+                                    <p class="slogan">Think out of the box. Create what you want!</p>
+                                    <div class="links layout horizontal align-pb-block">
+                                        <paper-button noink on-tap="playVideo">
+                                            Watch a video
+                                        </paper-button>
+                                        <a href="https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1" target="_blank">
+                                            <paper-button class="colorful" raised>
+                                                View photos
+                                            </paper-button>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="flex relative right-section">
+                                    <iron-image class="fit" src="{$ baseurl $}/images/lviv.svg" sizing="contain"></iron-image>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=GDG%20DevFest%20Ukraine%202015&dates=20151023T090000/20151024T180000&details=The%20biggest%20Google%20related%20event%20in%20Ukraine%20carefully%20crafted%20for%20you%20by%20GDG%20community!%20Awesome%20speakers%20and%20lot's%20of%20fun!%20Details%20at%20http://devfest.gdg.org.ua&location=Shchyretska%20St%2036,%20L'viv,%20Львівська%20область,%20Ukraine&pli=1&uid=&sf=true&output=xml#eventpage_6"
+                        target="_blank" onclick="ga('send', 'add-event-to-calendar', 'button', 'click');">
+                            <paper-fab class="section-fab-right" icon="icons:event"></paper-fab>
+                        </a>
+                    </template>
+                    <template is="dom-if" if="{{_equal(route, 'blog')}}">
+                        <hero-content title="Blog"></hero-content>
+                    </template>
+                    <template is="dom-if" if="{{_equal(route, 'schedule')}}">
+                        <hero-content title="Schedule"></hero-content>
+                    </template>
+                    <template is="dom-if" if="{{_equal(route, 'speakers')}}">
+                        <hero-content title="Speakers"></hero-content>
+                    </template>
+                </hero-block>
                 <!-- Main Toolbar -->
                 <!-- <paper-toolbar class="Main-header tall">
                     <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
@@ -108,27 +149,30 @@
 
                 <!-- Main Content -->
                 <iron-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}">
+                    <template is="dom-if" if="{{_equal(route, 'home')}}">
+                        <section class="Page" data-route="home">
+                            <statistics-block></statistics-block>
+                            <featured-people people="{{speakers}}"></featured-people>
+                            <call-to-action></call-to-action>
+                            <photo-block picasa-user-id="{$ galleryBlock.picasa.userId $}" picasa-album-id="{$ galleryBlock.picasa.albumId $}" photos='{$ galleryBlock.photos | dump $}'></photo-block>
+                            <tickets-block></tickets-block>
+                            <latest-posts posts="{{posts}}"></latest-posts>
+                            <social-feed source="{$ socialFeed.source $}"></social-feed>
+                            <map-block></map-block>
+                            <logos-block logos="{{partners}}"></logos-block>
+                            <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}"></footer-block>
+                        </section>
+                    </template>
 
-                    <section class="Page" data-route="home">
-                        <statistics-block></statistics-block>
-                        <featured-people people="{{speakers}}"></featured-people>
-                        <call-to-action></call-to-action>
-                        <photo-block picasa-user-id="{$ galleryBlock.picasa.userId $}" picasa-album-id="{$ galleryBlock.picasa.albumId $}" photos='{$ galleryBlock.photos | dump $}'></photo-block>
-                        <tickets-block></tickets-block>
-                        <latest-posts posts="{{posts}}"></latest-posts>
-                        <social-feed source="{$ socialFeed.source $}"></social-feed>
-                        <map-block></map-block>
-                        <logos-block logos="{{partners}}"></logos-block>
-                        <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}"></footer-block>
-                    </section>
-
-                    <section class="Page" data-route="blog">
-                        <paper-material class="page-paper" elevation="1">
-                            <h2 class="Page-title">Users</h2>
-                            <p>This is the users section</p>
-                            <a href="/users/Rob">Rob</a>
-                        </paper-material>
-                    </section>
+                    <template is="dom-if" if="{{_equal(route, 'blog')}}">
+                        <section class="Page" data-route="blog">
+                            <paper-material class="page-paper" elevation="1">
+                                <h2 class="Page-title">Users</h2>
+                                <p>This is the users section</p>
+                                <a href="/users/Rob">Rob</a>
+                            </paper-material>
+                        </section>
+                    </template>
 
                     <section class="Page" data-route="speakers">
                         <paper-material class="Page-paper" elevation="1">
@@ -164,12 +208,35 @@
                     this.properties = {
                         route: {
                             type: String,
-                            value: 'home'
+                            value: 'home',
+                            observer: '_routerChanged'
+                        },
+                        _heroSettings: Array,
+                        _stylesMap: {
+                            type: Object,
+                            value: function() {
+                                return {
+                                    {% for nav in navigation %}
+                                    '{$ nav.route $}': {$ nav.styleSettings | dump $}{% if not loop.last %},{% endif %}
+                                    {% endfor %}
+                                };
+                            }
                         }
                     };
                 }
                 _onDataRouteClick() {
                     this.$.paperDrawerPanel.closeDrawer();
+                }
+                _routerChanged() {
+                    if(this._stylesMap) {
+                        this._heroSettings = this._stylesMap[this.route];
+                    }
+                }
+                _equal(value1, value2) {
+                    if(!Array.isArray(value2)) {
+                        value2 = [].concat(value2);
+                    }
+                    return value2.indexOf(value1) !== -1;
                 }
             }
 

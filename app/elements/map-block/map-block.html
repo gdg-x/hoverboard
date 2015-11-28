@@ -35,7 +35,8 @@
         <google-map class="fit" zoom="{$ location.pointer.zoom $}" latitude="{$ location.mapCenter.latitude $}" longitude="{$ location.mapCenter.longitude $}" styles="[[options]]" disable-zoom disable-default-ui>
             <google-map-marker latitude="{$ location.pointer.latitude $}" longitude="{$ location.pointer.longitude $}"></google-map-marker>
         </google-map>
-        <div class="container card-container relative layout horizontal center-center">
+        <div class="fit"></div>
+        <div class="container card-container relative fit layout horizontal center-center">
             <div class="flex-3" hidden$="{{smallScreen}}"></div>
             <paper-card class="flex-2">
                 <div class="paper-card-container location-card">

@@ -3,8 +3,8 @@
 // Transpile all JS from ES2015 (ES6) to ES5
 module.exports = function ($, gulp) { return function () {
   return gulp.src([
-      'app/{scripts,elements}/**/*.{js,html}',
-      '!app/scripts/analytics.js'
+      '.tmp/{scripts,elements}/**/*.{js,html}',
+      '!.tmp/scripts/analytics.js'
     ])
     .pipe($.plumber())
     .pipe($.sourcemaps.init())
