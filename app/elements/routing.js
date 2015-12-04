@@ -38,8 +38,9 @@ window.addEventListener('WebComponentsReady', () => {
     app.route = 'contact';
   });
 
-  page('*', function() {
-    app.$.toastConfirm.text = `Can't find: ${window.location.href}. Redirected you to Home Page`;
+  page('*', function(attempted) {
+    let url = window.location.href + attempted.path.substr(1);
+    app.$.toastConfirm.text = `Can't find: ${url}. Redirected you to Home Page`;
     app.$.toastConfirm.show();
     page.redirect('/');
   });
