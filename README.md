@@ -73,7 +73,13 @@ To take advantage of Polymer Starter Kit Plus you need to:
 
 [Download](https://github.com/StartPolymer/polymer-starter-kit-plus/releases/latest) and extract Polymer Starter Kit Plus to where you want to work.
 
-Or `git clone https://github.com/StartPolymer/polymer-starter-kit-plus.git <my-repo-name>`
+OR `git clone https://github.com/StartPolymer/polymer-starter-kit-plus.git my-project`
+
+OR Install [Start Polymer Generator](https://github.com/StartPolymer/generator-startpolymer#installation) and run it in `my-project` directory
+
+```sh
+yo startpolymer
+```
 
 #### Updating from previous version
 
