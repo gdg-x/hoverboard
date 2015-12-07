@@ -15,10 +15,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
   let app = document.querySelector('#app');
 
+  // Sets app default base URL
+  app.baseUrl = '/';
+  if (window.location.port === '') {  // if production
+    // Uncomment app.baseURL below and
+    // set app.baseURL to '/your-pathname/' if running from folder in production
+    // app.baseUrl = '/polymer-starter-kit/';
+  }
+
   app.displayInstalledToast = () => {
     // Check to make sure caching is actually enabled—it won't be in the dev environment.
     if (!Polymer.dom(document).querySelector('platinum-sw-cache').disabled) {
-      Polymer.dom(document).querySelector('#toastInfo').text = 'Caching complete! This app will work offline.';
+      Polymer.dom(document).querySelector('#toastInfo').text =
+        'Caching complete! This app will work offline.';
       Polymer.dom(document).querySelector('#toastInfo').show();
     }
   };
@@ -28,7 +37,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   app.addEventListener('dom-change', () => console.log('Our app is ready to rock!'));
 
   // See https://github.com/Polymer/polymer/issues/1381
-  window.addEventListener('WebComponentsReady', () => { /* imports are loaded and elements have been registered */ });
+  window.addEventListener('WebComponentsReady', () => {
+    /* imports are loaded and elements have been registered */
+  });
 
   // Main area's paper-scroll-header-panel custom condensing transformation of
   // the appName in the middle-container and the bottom title in the bottom-container.
@@ -41,9 +52,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     let detail = e.detail;
     let heightDiff = detail.height - detail.condensedHeight;
     let yRatio = Math.min(1, detail.y / heightDiff);
-    let maxMiddleScale = 0.50;  // appName max size when condensed. The smaller the number the smaller the condensed size.
-    let scaleMiddle = Math.max(maxMiddleScale, (heightDiff - detail.y) / (heightDiff / (1-maxMiddleScale))  + maxMiddleScale);
-    let scaleBottom = 1 - yRatio;
+    // appName max size when condensed. The smaller the number the smaller the condensed size.
+    var maxMiddleScale = 0.50;
+    var auxHeight = heightDiff - detail.y;
+    var auxScale = heightDiff / (1 - maxMiddleScale);
+    var scaleMiddle = Math.max(maxMiddleScale, auxHeight / auxScale + maxMiddleScale);
+    var scaleBottom = 1 - yRatio;
 
     // Move/translate middleContainer
     Polymer.Base.transform(`translate3d(0,${yRatio * 100}%,0)`, middleContainer);
@@ -55,18 +69,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer.Base.transform(`scale(${scaleMiddle}) translateZ(0)`, appName);
   });
 
-  // Close drawer after menu item is selected if drawerPanel is narrow
-  app.onDataRouteClick = function() {
-    let drawerPanel = Polymer.dom(document).querySelector('#paperDrawerPanel');
-    if (drawerPanel.narrow) {
-      drawerPanel.closeDrawer();
-    }
-  };
-
-  // Hide toastConfirm after tap on OK button 
-  app.onToastConfirmTap = () => app.$.toastConfirm.hide();
-
   // Scroll page to top and expand header
   app.scrollPageToTop = () => app.$.headerPanelMain.scrollToTop(true);
+
+  app.closeDrawer = function() {
+    app.$.paperDrawerPanel.closeDrawer();
+  };
 
 })(document);

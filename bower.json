@@ -14,5 +14,9 @@
   "devDependencies": {
     "test-fixture": "PolymerElements/test-fixture#1.0.x",
     "web-component-tester": "*"
+  },
+  "ignore": [],
+  "resolutions": {
+    "paper-menu": "4fecb43601"
   }
 }

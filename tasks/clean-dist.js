@@ -2,7 +2,7 @@
 
 // Clean dist directory
 module.exports = function (del) { return function (cb) {
-  del([
+  return del([
     'dist/bower_components/**/*',
     '!dist/bower_components/webcomponentsjs',
     '!dist/bower_components/webcomponentsjs/webcomponents-lite.min.js',

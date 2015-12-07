@@ -2,5 +2,7 @@
   "esnext": true,
   "preset": "google",
   "disallowSpacesInAnonymousFunctionExpression": null,
+  "disallowTrailingWhitespace": null,
+  "maximumLineLength": 100,
   "excludeFiles": ["node_modules/**"]
 }

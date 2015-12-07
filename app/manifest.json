@@ -22,6 +22,5 @@
         "sizes": "384x384",
         "type": "image/png"
       }],
-  "start_url": "/?homescreen=1",
   "display": "standalone"
 }

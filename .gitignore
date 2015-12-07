@@ -5,3 +5,4 @@ deploy
 dist
 node_modules
 .tmp
+.publish/

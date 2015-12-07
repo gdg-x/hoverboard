@@ -7,20 +7,22 @@ This recipe focuses on adding an ES2015 to ES5 transpile step to Polymer Starter
 
 ## Create a transpile gulp task
 
-- Install the gulp Babel, Sourcemap and Crisper plugins: `npm install --save-dev gulp-babel gulp-sourcemaps gulp-crisper`
+- Install the gulp Babel, Sourcemap, Crisper plugins and Babel ES2015 preset: `npm install --save-dev gulp-babel gulp-sourcemaps gulp-crisper babel-preset-es2015`
 - Add the following gulp task in the `gulpfile.js` file:
 
-```javascript
-// Transpile all JS to ES5.
-gulp.task('js', function () {
-  return gulp.src(['app/**/*.{js,html}'])
-    .pipe($.sourcemaps.init())
-    .pipe($.if('*.html', $.crisper())) // Extract JS from .html files
-    .pipe($.if('*.js', $.babel()))
-    .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest('.tmp/'))
-    .pipe(gulp.dest('dist/'));
-});
+```patch
++ // Transpile all JS to ES5.
++ gulp.task('js', function () {
++  return gulp.src(['app/**/*.{js,html}'])
++    .pipe($.sourcemaps.init())
++    .pipe($.if('*.html', $.crisper())) // Extract JS from .html files
++    .pipe($.if('*.js', $.babel({
++      presets: ['es2015']
++    })))
++    .pipe($.sourcemaps.write('.'))
++    .pipe(gulp.dest('.tmp/'))
++    .pipe(gulp.dest(dist()));
++ });
 ```
 
 This task will transpile all JS files and inline JS inside HTML files and also generate sourcemaps. The resulting files are generated in the `.tmp` and the `dist` folders
@@ -31,7 +33,7 @@ Note: At the time of writing Crisper does not generate the sourcemaps. Your app 
 
  - [ragingwind/gulp-crisper#4](https://github.com/ragingwind/gulp-crisper/issues/4)
  - [PolymerLabs/crisper#14](https://github.com/PolymerLabs/crisper/issues/14)
- 
+
 
 ## Integrating the transpile task
 
@@ -40,8 +42,8 @@ Make sure the `js` gulp task is triggered by the common build tasks:
  - In the gulp `serve` task, make sure `js` is triggered initially and on HTML and JS files changes:
 
 ```patch
--gulp.task('serve', ['styles', 'elements', 'images'], function () {
-+gulp.task('serve', ['styles', 'elements', 'images', 'js'], function () {
+-gulp.task('serve', ['lint', 'styles', 'elements', 'images'], function () {
++gulp.task('serve', ['lint', 'styles', 'elements', 'images', 'js'], function () {
 
   ...
 
@@ -49,8 +51,8 @@ Make sure the `js` gulp task is triggered by the common build tasks:
 + gulp.watch(['app/**/*.html'], ['js', reload]);
   gulp.watch(['app/styles/**/*.css'], ['styles', reload]);
   gulp.watch(['app/elements/**/*.css'], ['elements', reload]);
-- gulp.watch(['app/{scripts,elements}/**/*.js'], ['jshint']);
-+ gulp.watch(['app/{scripts,elements}/**/*.js'], ['jshint', 'js']);
+- gulp.watch(['app/{scripts,elements}/**/*.js'], ['lint']);
++ gulp.watch(['app/{scripts,elements}/**/*.js'], ['lint', 'js']);
   gulp.watch(['app/images/**/*'], reload);
 });
 ```
@@ -66,21 +68,21 @@ gulp.task('default', ['clean'], function (cb) {
     ['copy', 'styles'],
 -   'elements',
 +   ['elements', 'js'],
-    ['jshint', 'images', 'fonts', 'html'],
+    ['lint', 'images', 'fonts', 'html'],
     'vulcanize', // 'cache-config',
     cb);
 });
 ```
 
  - In the `html` task replace `app` in the paths by `dist` since dist should already contain all JS and HTML files now transpiled.
- 
+
  ```patch
  // Scan your HTML for assets & optimize them
  gulp.task('html', function () {
    return optimizeHtmlTask(
--    ['app/**/*.html', '!app/{elements,test}/**/*.html'],  
-+    ['dist/**/*.html', '!dist/{elements,test}/**/*.html'],
-     'dist');
+-    ['app/**/*.html', '!app/{elements,test}/**/*.html'],
++    [dist('/**/*.html'), '!' + dist('/{elements,test}/**/*.html')],
+     dist());
  });
  ```
 

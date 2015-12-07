@@ -14,34 +14,53 @@ window.addEventListener('WebComponentsReady', () => {
   // client-side router inspired by the Express router
   // More info: https://visionmedia.github.io/page.js/
 
+  // Removes end / from app.baseUrl which page.base requires for production
+  if (window.location.port === '') {  // if production
+    page.base(app.baseUrl.replace(/\/$/, ''));
+  }
+
   // Middleware
   function scrollToTop(ctx, next) {
     app.scrollPageToTop();
     next();
   }
 
+  function closeDrawer(ctx, next) {
+    app.closeDrawer();
+    next();
+  }
+
   // Routes
-  page('/', scrollToTop, () => {
+  page('*', scrollToTop, closeDrawer, (ctx, next) => {
+    next();
+  });
+
+  page('/', () => {
     app.route = 'home';
   });
 
-  page('/users', scrollToTop, () => {
+  page(app.baseUrl, () => {
+    app.route = 'home';
+  });
+
+  page('/users', () => {
     app.route = 'users';
   });
 
-  page('/users/:name', scrollToTop, data => {
+  page('/users/:name', data => {
     app.route = 'user-info';
     app.params = data.params;
   });
 
-  page('/contact', scrollToTop, () => {
+  page('/contact', () => {
     app.route = 'contact';
   });
 
+  // 404
   page('*', function() {
     app.$.toastConfirm.text = `Can't find: ${window.location.href}. Redirected you to Home Page`;
     app.$.toastConfirm.show();
-    page.redirect('/');
+    page.redirect(app.baseUrl);
   });
 
   // add #! before urls
