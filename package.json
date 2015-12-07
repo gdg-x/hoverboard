@@ -26,7 +26,6 @@
     "gulp-load-plugins": "^1.1.0",
     "gulp-minify-css": "^1.2.1",
     "gulp-minify-html": "^1.0.2",
-    "gulp-minify-inline": "^0.1.1",
     "gulp-nunjucks-html": "^2.0.0",
     "gulp-plumber": "^1.0.1",
     "gulp-postcss": "^6.0.0",

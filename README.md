@@ -60,6 +60,14 @@ all files by appending content hash to their names
     - [Google Cloud Storage](https://cloud.google.com/storage/)
 - [Recipes](/docs/README.md/) for Polymer performance and using Chrome Dev Editor
 
+### Tutorials
+
+Check out the Polymer Starter Kit tutorials on [polymer-project.org](https://polymer-project.org):
+
+* [Set up the PSK](https://www.polymer-project.org/1.0/docs/start/psk/set-up.html)
+* [Create a page](https://www.polymer-project.org/1.0/docs/start/psk/create-a-page.html)
+* [Deploy the PSK to the web](https://www.polymer-project.org/1.0/docs/start/psk/deploy.html)
+
 ## Getting Started
 
 To take advantage of Polymer Starter Kit Plus you need to:
