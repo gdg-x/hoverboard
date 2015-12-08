@@ -72,8 +72,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   // Scroll page to top and expand header
   app.scrollPageToTop = () => app.$.headerPanelMain.scrollToTop(true);
 
-  app.closeDrawer = function() {
-    app.$.paperDrawerPanel.closeDrawer();
-  };
+  // Close drawer
+  app.closeDrawer = () => app.$.paperDrawerPanel.closeDrawer();
+
+  // Hide toastConfirm after tap on OK button
+  app.onToastConfirmTap = () => app.$.toastConfirm.hide();
 
 })(document);
