@@ -9,10 +9,10 @@
     "paper-elements": "PolymerElements/paper-elements#1.0.x",
     "platinum-elements": "PolymerElements/platinum-elements#1.1.x",
     "polymer": "Polymer/polymer#1.2.x",
-    "start-elements": "StartPolymer/start-elements#1.1.x"
+    "start-elements": "StartPolymer/start-elements#1.1.x",
+    "paper-menu": "PolymerElements/paper-menu#4fecb43601"
   },
   "devDependencies": {
-    "test-fixture": "PolymerElements/test-fixture#1.0.x",
     "web-component-tester": "*"
   },
   "ignore": [],
