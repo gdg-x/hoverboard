@@ -11,112 +11,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <html lang="{$ lang $}">
 {% include "head.html" %}
+
 <body unresolved class="fullbleed vertical layout">
   <span id="browser-sync-binding"></span>
   <template is="dom-bind" id="app">
 
     <paper-drawer-panel id="paperDrawerPanel" responsive-width="599px">
-      <!-- Drawer Scroll Header Panel -->
-      <paper-scroll-header-panel class="Drawer" drawer fixed>
-        <!-- Drawer Toolbar -->
-        <paper-toolbar class="Drawer-header">
-          <span class="Drawer-title">Menu</span>
-        </paper-toolbar>
-
-        <!-- Drawer Content -->
-        <!-- Navigation -->
-        <nav>
-        <paper-menu class="Drawer-widget Navigation list" attr-for-selected="data-route" selected="[[route]]">
-          <a class="Navigation-link" data-route="home" href="{{baseUrl}}">
-            <iron-icon class="Navigation-icon" icon="home"></iron-icon>
-            <span>Home</span>
-          </a>
-
-          <a class="Navigation-link" data-route="users" href="{{baseUrl}}users">
-            <iron-icon class="Navigation-icon" icon="info"></iron-icon>
-            <span>Users</span>
-          </a>
-
-          <a class="Navigation-link" data-route="contact" href="{{baseUrl}}contact">
-            <iron-icon class="Navigation-icon" icon="mail"></iron-icon>
-            <span>Contact</span>
-          </a>
-        </paper-menu>
-        </nav>
-      </paper-scroll-header-panel>
-
-      <!-- Main Area -->
-      <paper-scroll-header-panel id="headerPanelMain" class="Main" main condenses keep-condensed-header>
-
-        <!-- Main Toolbar -->
-        <paper-toolbar class="Main-header tall">
-          <paper-icon-button id="paperToggle" icon="menu" paper-drawer-toggle></paper-icon-button>
-          <span class="flex"></span>
-
-          <!-- Toolbar icons -->
-          <paper-icon-button icon="refresh"></paper-icon-button>
-          <paper-icon-button icon="search"></paper-icon-button>
-
-          <!-- Application name -->
-          <div class="Main-headerMiddleContent middle center horizontal layout">
-            <h1 class="Main-headerTitle">Polymer Starter Kit Plus</h1>
-          </div>
-
-          <!-- Application sub title -->
-          <div class="Main-headerBottomContent bottom center horizontal layout">
-            <div class="Main-headerSubTitle">The future of the web today</div>
-          </div>
-
-        </paper-toolbar>
-
-        <!-- Main Content -->
-        <iron-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}">
-
-          <section class="Page" data-route="home">
-            <paper-material class="Page-paper" elevation="1">
-              <my-greeting></my-greeting>
-
-              <p class="paper-font-subhead">You now have:</p>
-              <my-list></my-list>
-
-              <p class="paper-font-body2">Looking for more Web App layouts? Check out our <a href="https://github.com/PolymerElements/app-layout-templates">layouts</a> collection. You can also <a href="http://polymerelements.github.io/app-layout-templates/">preview</a> them live.</p>
-            </paper-material>
-            <paper-material class="Page-paper" elevation="1">
-              <p class="paper-font-body2">This is another card.</p>
-            </paper-material>
-
-            <paper-material class="Page-paper" elevation="1">
-              {% markdown "license.md" %}
-            </paper-material>
-          </section>
-
-          <section class="Page" data-route="users">
-            <paper-material class="Page-paper" elevation="1">
-              <h2 class="Page-title">Users</h2>
-              <p>This is the users section</p>
-              <a href$="{{baseUrl}}users/Addy">Addy</a><br>
-              <a href$="{{baseUrl}}users/Rob">Rob</a><br>
-              <a href$="{{baseUrl}}users/Chuck">Chuck</a><br>
-              <a href$="{{baseUrl}}users/Sam">Sam</a>
-            </paper-material>
-          </section>
-
-          <section class="Page" data-route="user-info">
-            <paper-material class="Page-paper" elevation="1">
-              <h2 class="Page-title">User: {{params.name}}</h2>
-              <div>This is {{params.name}}'s section</div>
-            </paper-material>
-          </section>
-
-          <section class="Page" data-route="contact">
-            <paper-material class="Page-paper" elevation="1">
-              <h2 class="Page-title">Contact</h2>
-              <p>This is the contact section</p>
-            </paper-material>
-          </section>
-
-        </iron-pages>
-      </paper-scroll-header-panel>
+      {% include "drawer.html" %}
+      {% include "main.html" %}
     </paper-drawer-panel>
 
     <paper-toast id="toastConfirm" class="Toast" duration="10000">
