@@ -6,5 +6,7 @@ module.exports = {
   // Add to homescreen for Chrome on Android
   applicationName: 'PSK Plus',
   // Add to homescreen for Safari on iOS
-  appleMobileWebAppTitle: 'Polymer Starter Kit Plus'
+  appleMobileWebAppTitle: 'Polymer Starter Kit Plus',
+  // Google Analytics Tracking ID
+  googleAnalyticsTrackingId: 'UA-XXXXX-Y'
 };
