@@ -30,7 +30,8 @@
  for colors from index.html and manifest.json
 - [Material Design](http://www.google.com/design/spec/material-design/introduction.html) layout
 - [PostCSS](https://github.com/postcss/postcss) for transforming styles with JS plugins
- - [2 times faster](https://github.com/postcss/benchmark) than [libsass](https://github.com/sass/libsass), which is written in C++
+ - [Introduction to PostCSS](http://www.smashingmagazine.com/2015/12/introduction-to-postcss/)
+ - [PostCSS is 2 times faster](https://github.com/postcss/benchmark) than [libsass](https://github.com/sass/libsass), which is written in C++
  - [Autoprefixer](https://github.com/postcss/autoprefixer) add vendor prefixes to CSS rules using values from [Can I Use](http://caniuse.com)
  - [CSS Custom Media Queries](https://github.com/postcss/postcss-custom-media)
  - [CSS Nesting](https://github.com/jonathantneal/postcss-nesting)
