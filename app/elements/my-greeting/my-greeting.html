@@ -8,14 +8,17 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-meta/iron-meta.html">
 
 <dom-module id="my-greeting">
   <template>
+    <iron-meta id="meta"></iron-meta>
+
     <style include="shared-styles"></style>
     <style>
       @import "my-greeting";
     </style>
-    
+
     <h2 class="Page-title">{{greeting}}</h2>
     <span class="paper-font-body2">Update text to change the greeting.</span>
     <!-- Listens for "input" event and sets greeting to <input>.value -->

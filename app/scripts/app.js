@@ -15,6 +15,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
   let app = document.querySelector('#app');
 
+  // Global object with variables for sharing information across the DOM tree
+  // Based on <iron-meta> element
+  app.globals = {
+    greeting: 'Welcome!'
+  };
+
   // Sets app default base URL
   app.baseUrl = '/';
   if (window.location.port === '') {  // if production
