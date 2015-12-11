@@ -18,7 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   // Global object with variables for sharing information across the DOM tree
   // Based on <iron-meta> element
   app.globals = {
-    greeting: 'Welcome!'
+    greeting: 'Welcome!!!'
   };
 
   // Sets app default base URL

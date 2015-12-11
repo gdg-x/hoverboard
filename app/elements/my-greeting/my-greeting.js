@@ -14,13 +14,13 @@ class MyGreeting {
     this.properties = {
       greeting: {
         type: String,
-        value: '',
+        value: 'Welcome!',
         notify: true
       }
     };
   }
   ready() {
-    this.greeting = this.$.meta.byKey('globals').greeting;
+    //this.greeting = this.$.meta.byKey('globals').greeting;
   }
 }
 
