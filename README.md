@@ -4,7 +4,7 @@
 
 [![PageSpeed:100/100](https://img.shields.io/badge/PageSpeed-100%20/%20100-brightgreen.svg)](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fpolymer-starter-kit-plus.appspot.com)
 [![bitHound Score](https://www.bithound.io/github/StartPolymer/polymer-starter-kit-plus/badges/score.svg)](https://www.bithound.io/github/StartPolymer/polymer-starter-kit-plus)
-[![Google+ Start Polymer](https://img.shields.io/badge/Google+-Start%20Polymer-dd4b39.svg)](https://plus.google.com/u/0/b/101148544618948882647/101148544618948882647/posts)
+[![Google+ Start Polymer](https://img.shields.io/badge/Google+-Start%20Polymer-dd4b39.svg)](https://plus.google.com/101148544618948882647)
 
 > A starting point for building web applications with Polymer 1.x
 
