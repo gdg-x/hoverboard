@@ -112,3 +112,10 @@ a, .anchor-like {
 .pointer {
     cursor: pointer;
 }
+.center-content-xs {
+    @media(--sm-viewport) {
+        @apply(--layout-vertical);
+        @apply(--layout-center);
+        text-align: center;
+    }
+}

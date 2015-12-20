@@ -12,7 +12,7 @@
     "google-web-components": "GoogleWebComponents/google-web-components#1.0.x",
     "font-roboto": "StartPolymer/font-empty#1.1.x",
     "page": "visionmedia/page.js#1.6.x",
-    "sc-timeago": "*"
+    "time-elements": "~0.4.x"
   },
   "devDependencies": {
     "web-component-tester": "*",
