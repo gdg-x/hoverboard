@@ -103,13 +103,7 @@ gulp.task('copy', function() {
   var scripts = gulp.src(['app/scripts/analytics.js'])
     .pipe(gulp.dest('dist/scripts'));
 
-  var swBootstrap = gulp.src(['app/bower_components/platinum-sw/bootstrap/*.js'])
-    .pipe(gulp.dest('dist/elements/bootstrap'));
-
-  var swToolbox = gulp.src(['app/bower_components/sw-toolbox/*.js'])
-    .pipe(gulp.dest('dist/sw-toolbox'));
-
-  return merge(app, bower, elements, icons, scripts, swBootstrap, swToolbox)
+  return merge(app, bower, elements, icons, scripts)
     .pipe($.size({title: 'Copy files to dist dir:'}));
 });
 
@@ -127,7 +121,7 @@ gulp.task('html', ['views'], function() {
   return gulp.src(['app/*.html', '.tmp/*.html'])
     .pipe(assets)
     // Concatenate and minify JavaScript
-    .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
+    .pipe($.if('*.js', $.uglify()))
     .pipe(assets.restore())
     .pipe($.useref())
     // Minify any HTML
@@ -320,8 +314,8 @@ gulp.task('default', ['clean'], function(cb) {
     ['copy', 'js', 'lint-js', 'lint', 'manifest', 'styles'],
     ['fonts', 'html', 'images'],
     'vulcanize',
-    ['clean-dist', 'minify-dist'],
-    'cache-config',
+    'clean-dist',
+    ['cache-config', 'minify-dist'],
     cb);
 });
 
