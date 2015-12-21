@@ -64,11 +64,11 @@ window.addEventListener('WebComponentsReady', () => {
     page.redirect(app.baseUrl);
   });
 
-  // add #! before urls
-  // https://developers.google.com/webmasters/ajax-crawling/docs/learn-more
   page({
+    // add #! before urls
+    // https://developers.google.com/webmasters/ajax-crawling/docs/learn-more
     // Disable for Firebase or GAE
-    hashbang: false
+    hashbang: true
   });
 
 });
