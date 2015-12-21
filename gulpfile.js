@@ -80,7 +80,8 @@ gulp.task('copy', function() {
     '!app/manifest.json',
     '!app/metadata.js',
     '!app/test',
-    '!app/views'
+    '!app/views',
+    '!**/.DS_Store'
   ], {
     dot: true
   }).pipe(gulp.dest('dist'));

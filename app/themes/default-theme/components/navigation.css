@@ -15,6 +15,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     color: var(--default-primary-color);
   };
 
+  /* postcss-bem-linter: ignore */
+  --paper-menu-focused-item-after: {
+    background-color: var(--default-primary-color);
+  };
+
   @nest &-icon {
     margin-right: 33px;
     opacity: var(--dark-secondary-opacity);
