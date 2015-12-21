@@ -9,7 +9,7 @@ module.exports = function (del) { return function (cb) {
     '!dist/bower_components/platinum-sw',
     '!dist/bower_components/platinum-sw/service-worker.js',
     'dist/elements/*',
-    '!dist/elements/elements.vulcanized.*',
+    '!dist/elements/elements.*',
     '!dist/elements/bootstrap',
     'dist/scripts/**/*.map',
     'dist/themes/*/*.{html,map}',

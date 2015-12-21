@@ -30,8 +30,19 @@ function task(filename) {
   return './tasks/' + filename;
 }
 
+// Ensure that we are not missing required files for the project
+// "dot" files are specifically tricky due to them being hidden on
+// some systems.
+gulp.task('ensureFiles', function(cb) {
+  var requiredFiles = ['.jscsrc', '.jshintrc', '.bowerrc'];
+
+  require('./tasks/ensure-files')(requiredFiles.map(function(p) {
+    return path.join(__dirname, p);
+  }), cb);
+});
+
 // Lint JavaScript
-gulp.task('lint-js', function() {
+gulp.task('lint-js', ['ensureFiles'], function() {
   return gulp.src([
       'app/scripts/**/*.js',
       '!app/scripts/analytics.js',
@@ -67,6 +78,7 @@ gulp.task('copy', function() {
     '!app/cache-config.json',
     '!app/content',
     '!app/manifest.json',
+    '!app/metadata.js',
     '!app/test',
     '!app/views'
   ], {
@@ -74,9 +86,9 @@ gulp.task('copy', function() {
   }).pipe(gulp.dest('dist'));
 
   var bower = gulp.src([
-    'bower_components/**/*.{css,html,js}',
-    '!bower_components/**/index.html',
-    '!bower_components/**/{demo,test}/**/*'
+    'app/bower_components/**/*.{css,html,js}',
+    '!app/bower_components/**/index.html',
+    '!app/bower_components/**/{demo,test}/**/*'
   ]).pipe(gulp.dest('dist/bower_components'));
 
   var elements = gulp.src([
@@ -90,17 +102,13 @@ gulp.task('copy', function() {
   var scripts = gulp.src(['app/scripts/analytics.js'])
     .pipe(gulp.dest('dist/scripts'));
 
-  var swBootstrap = gulp.src(['bower_components/platinum-sw/bootstrap/*.js'])
+  var swBootstrap = gulp.src(['app/bower_components/platinum-sw/bootstrap/*.js'])
     .pipe(gulp.dest('dist/elements/bootstrap'));
 
-  var swToolbox = gulp.src(['bower_components/sw-toolbox/*.js'])
+  var swToolbox = gulp.src(['app/bower_components/sw-toolbox/*.js'])
     .pipe(gulp.dest('dist/sw-toolbox'));
 
-  var vulcanized = gulp.src(['app/elements/elements.html'])
-    .pipe($.rename('elements.vulcanized.html'))
-    .pipe(gulp.dest('dist/elements'));
-
-  return merge(app, bower, elements, icons, scripts, swBootstrap, swToolbox, vulcanized)
+  return merge(app, bower, elements, icons, scripts, swBootstrap, swToolbox)
     .pipe($.size({title: 'Copy files to dist dir:'}));
 });
 
@@ -116,8 +124,6 @@ gulp.task('html', ['views'], function() {
   var assets = $.useref.assets({searchPath: ['dist']});
 
   return gulp.src(['app/*.html', '.tmp/*.html'])
-    // Replace path for vulcanized assets
-    .pipe($.if('*.html', $.replace('elements/elements.html', 'elements/elements.vulcanized.html')))
     .pipe(assets)
     // Concatenate and minify JavaScript
     .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
@@ -137,7 +143,7 @@ gulp.task('html', ['views'], function() {
 
 // Vulcanize granular configuration
 gulp.task('vulcanize', function() {
-  return gulp.src('dist/elements/elements.vulcanized.html')
+  return gulp.src('dist/elements/elements.html')
     .pipe($.plumber())
     .pipe($.vulcanize({
       stripComments: true,
@@ -146,7 +152,7 @@ gulp.task('vulcanize', function() {
     }))
     // Split inline scripts from an HTML file for CSP compliance
     .pipe($.crisper())
-    // Minify elements.vulcanized.html
+    // Minify elements.html
     // https://github.com/PolymerLabs/polybuild/issues/3
     .pipe($.if('*.html', $.htmlmin({
       customAttrAssign: [
@@ -166,7 +172,7 @@ gulp.task('vulcanize', function() {
     .pipe($.if('*.html', $.replace(/ {2,}/g, '')))
     // Remove CSS comments
     .pipe($.if('*.html', $.stripCssComments({preserve: false})))
-    // Minify elements.vulcanized.js
+    // Minify elements.js
     .pipe($.if('*.js', $.uglify()))
     .pipe(gulp.dest('dist/elements'))
     .pipe($.size({title: 'Copy vulcanized elements to dist/elements dir:'}));
@@ -230,10 +236,7 @@ gulp.task('serve', ['images', 'js', 'lint', 'lint-js', 'manifest', 'styles', 'vi
     },
     server: {
       baseDir: ['.tmp', 'app'],
-      middleware: [historyApiFallback()],
-      routes: {
-        '/bower_components': 'bower_components'
-      }
+      middleware: [historyApiFallback()]
     },
     ui: {
       port: config.browserSync.ui.port
