@@ -122,16 +122,16 @@
                     <template is="dom-if" if="{{_equal(route, 'blog')}}">
                         <hero-content title="Blog"></hero-content>
                     </template>
-                    <template is="dom-if" if="{{_equal(route, 'schedule')}}">
-                        <hero-content title="Schedule"></hero-content>
-                    </template>
-                    <template is="dom-if" if="{{_equal(route, 'speakers')}}">
-                        <hero-content title="Speakers"></hero-content>
-                    </template>
+                    <!--<template is="dom-if" if="{{_equal(route, 'schedule')}}">-->
+                        <!--<hero-content title="Schedule"></hero-content>-->
+                    <!--</template>-->
+                    <!--<template is="dom-if" if="{{_equal(route, 'speakers')}}">-->
+                        <!--<hero-content title="Speakers"></hero-content>-->
+                    <!--</template>-->
                 </hero-block>
 
                 <!-- Main Content -->
-                <iron-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}" selected-attribute="showing">
+                <neon-animated-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}" selected-attribute="showing">
                     <template is="dom-if" if="{{_equal(route, 'home')}}">
                         <home-page class="Page" data-route="home" people="{{speakers}}" posts="{{posts}}" logos="{{partners}}"></home-page>
                     </template>
@@ -154,7 +154,7 @@
                             <p>This is the contact section</p>
                     </section>
 
-                </iron-pages>
+                </neon-animated-pages>
             </div>
         </paper-drawer-panel>
     </template>

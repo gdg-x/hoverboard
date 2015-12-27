@@ -14,44 +14,107 @@
 <link rel="import" href="../blocks/map-block/map-block.html">
 <link rel="import" href="../blocks/logos-block/logos-block.html">
 <link rel="import" href="../blocks/footer-block/footer-block.html">
+<link rel="import" href="../behaviors/cascaded-animation-behavior.html">
 
 
 <dom-module id="home-page">
     <template>
 
-        <statistics-block></statistics-block>
-        <featured-people people="{{people}}"></featured-people>
-        <call-to-action></call-to-action>
+        <statistics-block cascaded></statistics-block>
+        <featured-people people="{{people}}" cascaded></featured-people>
+        <call-to-action cascaded></call-to-action>
         <photo-block picasa-user-id="{$ galleryBlock.picasa.userId $}"
                      picasa-album-id="{$ galleryBlock.picasa.albumId $}"
-                     photos='{$ galleryBlock.photos | dump $}'></photo-block>
-        <tickets-block></tickets-block>
-        <latest-posts posts="{{posts}}"></latest-posts>
-        <social-feed source="{$ socialFeed.source $}"></social-feed>
-        <map-block></map-block>
-        <logos-block logos="{{logos}}"></logos-block>
-        <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}"></footer-block>
+                     photos='{$ galleryBlock.photos | dump $}' cascaded></photo-block>
+        <tickets-block cascaded></tickets-block>
+        <latest-posts posts="{{posts}}" cascaded></latest-posts>
+        <social-feed source="{$ socialFeed.source $}" cascaded></social-feed>
+        <map-block cascaded></map-block>
+        <logos-block logos="{{logos}}" cascaded></logos-block>
+        <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}" cascaded></footer-block>
 
     </template>
     <script>
         (function () {
             'use strict';
 
-            class HomePage {
+            Polymer({
 
-                beforeRegister() {
-                    let is = this.constructor.name.replace(/\W+/g, '-')
-                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-                    this.is = is;
-                    this.properties = {
-                        people: Array,
-                        posts: Array,
-                        logos: Array
-                    };
+                is: 'home-page',
+
+                behaviors: [
+                    Polymer.NeonAnimatableBehavior,
+//                    Polymer.CascadedAnimationBehavior
+                ],
+
+                properties: {
+                    people: Array,
+                    posts: Array,
+                    logos: Array,
+
+                    animationConfig: {
+                        type: Object,
+                        value: function () {
+                            return {
+                                'entry': [{
+                                    name: 'cascaded-animation',
+                                    animation: 'transform-animation',
+                                    transformFrom: 'translate3d(0,100%,0)',
+                                    transformTo: 'none',
+                                    timing: {
+                                        delay: 0
+                                    }
+                                }, {
+                                    name: 'cascaded-animation',
+                                    animation: 'fade-in-animation',
+                                    timing: {
+                                        delay: 0
+                                    }
+                                }],
+                                'exit': [{
+                                    name: 'cascaded-animation',
+                                    animation: 'transform-animation',
+                                    transformFrom: 'translate3d(0,0,0)',
+                                    transformTo: 'translate3d(0,100%,0)',
+                                    timing: {
+                                        delay: 0
+                                    }
+                                }, {
+                                    name: 'cascaded-animation',
+                                    animation: 'fade-out-animation',
+                                    timing: {
+                                        delay: 0
+                                    }
+                                }]
+                            };
+                        }
+                    }
+                },
+
+                attached: function () {
+                    var nodes = Polymer.dom(this.root).querySelectorAll(this.selector);
+                    var entry = this.animationConfig.entry;
+                    entry[0].nodes = entry[1].nodes = Array.prototype.slice.call(nodes);
                 }
-            }
+            });
 
-            Polymer(HomePage);
+//            Doesn't work for now..
+
+//            class HomePage {
+//
+//                beforeRegister() {
+//                    let is = this.constructor.name.replace(/\W+/g, '-')
+//                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+//                    this.is = is;
+//                    this.properties = {
+//                        people: Array,
+//                        posts: Array,
+//                        logos: Array
+//                    };
+//                }
+//            }
+//
+//            Polymer(HomePage);
         })();
     </script>
 </dom-module>

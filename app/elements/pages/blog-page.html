@@ -97,36 +97,73 @@
             is: 'blog-page',
 
             behaviors: [
+                Polymer.NeonSharedElementAnimatableBehavior,
                 Polymer.CascadedAnimationBehavior
             ],
 
             properties: {
-                posts: {
-                    type: Array
-                }
+                posts: Array,
+
+//                animationConfig: {
+//                    type: Object,
+//                    value: function () {
+//                        return {
+//                            'entry': [{
+//                                name: 'cascaded-animation',
+//                                animation: 'transform-animation',
+//                                transformFrom: 'translate3d(0,100%,0)',
+//                                transformTo: 'none',
+//                                timing: {
+//                                    delay: 0
+//                                }
+//                            }, {
+//                                name: 'cascaded-animation',
+//                                animation: 'fade-in-animation',
+//                                timing: {
+//                                    delay: 0
+//                                }
+//                            }],
+//                            'exit': [{
+//                                name: 'cascaded-animation',
+//                                animation: 'transform-animation',
+//                                transformFrom: 'translate3d(0,0,0)',
+//                                transformTo: 'translate3d(0,100%,0)',
+//                                timing: {
+//                                    delay: 0
+//                                }
+//                            }, {
+//                                name: 'cascaded-animation',
+//                                animation: 'fade-out-animation',
+//                                timing: {
+//                                    delay: 0
+//                                }
+//                            }]
+//                        };
+//                    }
+//                }
             }
 
         });
 
-        //        Doesn't work for now..
+//        Doesn't work for now..
 
-        //        class BlogPage {
-        //
-        //            get behaviors() {
-        //                return [Polymer.CascadedAnimationBehavior];
-        //            }
-        //
-        //            beforeRegister() {
-        //                let is = this.constructor.name.replace(/\W+/g, '-')
-        //                    .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-        //                this.is = is;
-        //                this.properties = {
-        //                    posts: Array
-        //                };
-        //            }
-        //        }
-        //
-        //        Polymer(BlogPage);
+//        class BlogPage {
+//
+//            get behaviors() {
+//                return [Polymer.CascadedAnimationBehavior];
+//            }
+//
+//            beforeRegister() {
+//                let is = this.constructor.name.replace(/\W+/g, '-')
+//                    .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+//                this.is = is;
+//                this.properties = {
+//                    posts: Array
+//                };
+//            }
+//        }
+//
+//        Polymer(BlogPage);
 
     })();
 

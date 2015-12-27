@@ -8,35 +8,99 @@
                 display: block;
             }
         </style>
-        <iron-ajax id="ajax" url="[[_postUrl]]" handle-as="text" last-response="post" on-response="_postLoaded"></iron-ajax>
+        <iron-ajax id="ajax" url="[[_postUrl]]" handle-as="text" last-response="post"
+                   on-response="_postLoaded"></iron-ajax>
 
     </template>
     <script>
-        (function() {
+        (function () {
             'use strict';
 
-            class BlogPost {
-                beforeRegister() {
-                    let is = this.constructor.name.replace(/\W+/g, '-')
-                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-                    this.is = is;
-                    this.properties = {
-                        meta: {
-                            type: String,
-                            observer: '_metaChanged'
+            Polymer({
+
+                is: 'home-page',
+
+                behaviors: [
+                    Polymer.NeonSharedElementAnimatableBehavior
+                ],
+
+                properties: {
+                    meta: {
+                        type: String,
+                        observer: '_metaChanged'
+                    },
+                    _postUrl: String,
+
+                    animationConfig: {
+                        type: Object,
+                        value: function () {
+                            return {
+                                'entry': [{
+                                    name: 'cascaded-animation',
+                                    animation: 'transform-animation',
+                                    transformFrom: 'translate3d(0,100%,0)',
+                                    transformTo: 'none',
+                                    timing: {
+                                        delay: 0
+                                    }
+                                }, {
+                                    name: 'cascaded-animation',
+                                    animation: 'fade-in-animation',
+                                    timing: {
+                                        delay: 0
+                                    }
+                                }],
+                                'exit': [{
+                                    name: 'cascaded-animation',
+                                    animation: 'transform-animation',
+                                    transformFrom: 'translate3d(0,0,0)',
+                                    transformTo: 'translate3d(0,100%,0)',
+                                    timing: {
+                                        delay: 0
+                                    }
+                                }, {
+                                    name: 'cascaded-animation',
+                                    animation: 'fade-out-animation',
+                                    timing: {
+                                        delay: 0
+                                    }
+                                }]
+                            };
                         }
-                    };
-                }
-                _metaChanged() {
+                    }
+                },
+
+                _metaChanged: function() {
                     this._postUrl = '{$ baseurl $}/posts/${this.meta.file}';
                     this.$.ajax.generateRequest();
                 }
-                _postLoaded() {
+            });
 
-                }
-            }
+//            Doesn't work for now..
 
-            Polymer(BlogPost);
+//            class BlogPost {
+//                beforeRegister() {
+//                    let is = this.constructor.name.replace(/\W+/g, '-')
+//                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+//                    this.is = is;
+//                    this.properties = {
+//                        meta: {
+//                            type: String,
+//                            observer: '_metaChanged'
+//                        },
+//                        _postUrl: String
+//                    };
+//                }
+//                _metaChanged() {
+//                    this._postUrl = '{$ baseurl $}/posts/${this.meta.file}';
+//                    this.$.ajax.generateRequest();
+//                }
+//                _postLoaded() {
+//
+//                }
+//            }
+//
+//            Polymer(BlogPost);
         })();
     </script>
 </dom-module>
