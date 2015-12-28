@@ -9,7 +9,7 @@
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../../bower_components/marked-element/marked-element.html">
 
-<link rel="import" href="../behaviors/cascaded-animation-behavior.html">
+<link rel="import" href="../blocks/footer-block/footer-block.html">
 
 <dom-module id="blog-page">
     <template>
@@ -24,8 +24,8 @@
             .container {
                 @apply(--layout-horizontal);
                 @apply(--layout-wrap);
+                margin: var(--grid-gutter) auto 40px;
                 max-width: calc(2 * var(--grid-column-width) + 4 * var(--grid-gutter));
-                margin: var(--grid-gutter) auto;
             }
 
             .post {
@@ -66,30 +66,27 @@
                     max-width: none;
                     padding: 0 var(--grid-gutter);
                 }
-
                 :host .post {
                     width: 100% !important;
                     height: var(--grid-item-height) !important;
                     margin: var(--grid-gutter) 0;
                 }
             }
-
         </style>
         <div class="container">
             <template is="dom-repeat" items="[[posts]]" as="post" on-dom-change="_updateCascadedNodes">
                 <a href="#" class="post" cascaded>
-                    <iron-image class="image" src="[[post.image]]" style$="background-color: [[post.primaryColor]];"
-                                sizing="cover" preload fade></iron-image>
+                    <iron-image class="image" src="[[post.image]]" style$="background-color: [[post.primaryColor]];" sizing="cover" preload fade></iron-image>
                     <div class="title" style$="background-color: [[post.secondaryColor]];">[[post.title]]</div>
                 </a>
             </template>
         </div>
+        <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}" cascaded></footer-block>
     </template>
 </dom-module>
 
 <script>
-
-    (function () {
+    (function() {
         'use strict';
 
         Polymer({
@@ -97,74 +94,53 @@
             is: 'blog-page',
 
             behaviors: [
-                Polymer.NeonSharedElementAnimatableBehavior,
-                Polymer.CascadedAnimationBehavior
+                Polymer.NeonSharedElementAnimatableBehavior
             ],
 
             properties: {
                 posts: Array,
 
-//                animationConfig: {
-//                    type: Object,
-//                    value: function () {
-//                        return {
-//                            'entry': [{
-//                                name: 'cascaded-animation',
-//                                animation: 'transform-animation',
-//                                transformFrom: 'translate3d(0,100%,0)',
-//                                transformTo: 'none',
-//                                timing: {
-//                                    delay: 0
-//                                }
-//                            }, {
-//                                name: 'cascaded-animation',
-//                                animation: 'fade-in-animation',
-//                                timing: {
-//                                    delay: 0
-//                                }
-//                            }],
-//                            'exit': [{
-//                                name: 'cascaded-animation',
-//                                animation: 'transform-animation',
-//                                transformFrom: 'translate3d(0,0,0)',
-//                                transformTo: 'translate3d(0,100%,0)',
-//                                timing: {
-//                                    delay: 0
-//                                }
-//                            }, {
-//                                name: 'cascaded-animation',
-//                                animation: 'fade-out-animation',
-//                                timing: {
-//                                    delay: 0
-//                                }
-//                            }]
-//                        };
-//                    }
-//                }
+                animationConfig: {
+                    type: Object,
+                    value: function() {
+                        return {
+                            'entry': [{
+                                name: 'cascaded-animation',
+                                animation: 'transform-animation',
+                                transformFrom: 'translate3d(0, 100%, 0)',
+                                timing: {
+                                    delay: 500
+                                }
+                            }, {
+                                name: 'fade-in-animation',
+                                animation: 'fade-in-animation',
+                                node: this,
+                                timing: {
+                                    delay: 500
+                                }
+                            }],
+                            'exit': [{
+                                name: 'cascaded-animation',
+                                animation: 'transform-animation',
+                                transformTo: 'translate3d(0, 100%, 0)',
+                            }, {
+                                name: 'fade-out-animation',
+                                animation: 'fade-out-animation',
+                                node: this
+                            }]
+                        };
+                    }
+                }
+            },
+
+            _updateCascadedNodes: function() {
+                var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
+                var cascadedArray = Array.prototype.slice.call(cascaded);
+                this.animationConfig.entry[0].nodes = cascadedArray;
+                this.animationConfig.exit[0].nodes = cascadedArray;
             }
 
         });
 
-//        Doesn't work for now..
-
-//        class BlogPage {
-//
-//            get behaviors() {
-//                return [Polymer.CascadedAnimationBehavior];
-//            }
-//
-//            beforeRegister() {
-//                let is = this.constructor.name.replace(/\W+/g, '-')
-//                    .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-//                this.is = is;
-//                this.properties = {
-//                    posts: Array
-//                };
-//            }
-//        }
-//
-//        Polymer(BlogPage);
-
     })();
-
 </script>

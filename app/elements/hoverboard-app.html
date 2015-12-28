@@ -131,16 +131,11 @@
                 </hero-block>
 
                 <!-- Main Content -->
-                <neon-animated-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}" selected-attribute="showing">
-                    <template is="dom-if" if="{{_equal(route, 'home')}}">
-                        <home-page class="Page" data-route="home" people="{{speakers}}" posts="{{posts}}" logos="{{partners}}"></home-page>
-                    </template>
+                <neon-animated-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}">
+                    <home-page class="Page" data-route="home" people="{{speakers}}" posts="{{posts}}" logos="{{partners}}"></home-page>
+                    <blog-page class="Page" data-route="blog" posts="{{posts}}"></blog-page>
 
-                    <template is="dom-if" if="{{_equal(route, 'blog')}}">
-                         <blog-page class="Page" data-route="blog" posts="{{posts}}"></blog-page>
-                    </template>
-
-                    <section class="Page" data-route="speakers">
+                    <!-- <section class="Page" data-route="speakers">
                             <h2 class="Page-title">
                                 User:
                                 <span>{{params.name}}</span>
@@ -152,7 +147,7 @@
                     <section class="Page" data-route="schedule">
                             <h2 class="Page-title">Contact</h2>
                             <p>This is the contact section</p>
-                    </section>
+                    </section> -->
 
                 </neon-animated-pages>
             </div>
