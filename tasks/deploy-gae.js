@@ -21,7 +21,5 @@ module.exports = function ($, config, gulp, environment) {
   var deployCmd = 'gcloud preview app deploy -q ' + args + ' --project ' +
     projectID + ' deploy/app.yaml';
 
-  return gulp.src('app.yaml')
-    .pipe(gulp.dest('deploy'))
-    .pipe($.shell(deployCmd));
+  return gulp.src('').pipe($.shell(deployCmd));
 };
