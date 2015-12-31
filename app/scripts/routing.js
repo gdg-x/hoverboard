@@ -26,6 +26,10 @@ if (window.location.port === '') {  // if production
 
 let app = document.getElementById('app');
 
+window.addEventListener('upgraded', () => {
+  app.baseUrl = baseUrl;
+});
+
 // Utility function to listen to an event on a node once.
 function once(node, event, fn, args) {
   var self = this;
@@ -38,22 +42,36 @@ function once(node, event, fn, args) {
 
 // Middleware
 function scrollToTop(ctx, next) {
-  app.scrollPageToTop();
+  function setData() {
+    app.scrollPageToTop();
+  }
+
+  // Check if element prototype has not been upgraded yet
+  if (!app.upgraded) {
+    once(app, 'upgraded', setData);
+  } else {
+    setData();
+  }
   next();
 }
 
 function closeDrawer(ctx, next) {
-  app.closeDrawer();
+  function setData() {
+    app.closeDrawer();
+  }
+
+  // Check if element prototype has not been upgraded yet
+  if (!app.upgraded) {
+    once(app, 'upgraded', setData);
+  } else {
+    setData();
+  }
   next();
 }
 
 // Routes
-window.addEventListener('WebComponentsReady', () => {
-  page('*', scrollToTop, closeDrawer, (ctx, next) => {
-    next();
-  });
-
-  app.baseUrl = baseUrl;
+page('*', scrollToTop, closeDrawer, (ctx, next) => {
+  next();
 });
 
 page('/', () => {
@@ -143,5 +161,5 @@ page({
   // add #! before urls
   // https://developers.google.com/webmasters/ajax-crawling/docs/learn-more
   // Disable for Firebase or GAE
-  hashbang: true
+  hashbang: false
 });
