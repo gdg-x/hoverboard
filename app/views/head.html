@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <head>
+  <base href="/">
   <meta charset="{$ charset $}">
   <meta name="description" content="{$ description $}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +24,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- Chrome for Android theme color -->
   <meta name="theme-color" content="{$ chromeThemeColor $}">
 
-  <!-- Web Application Manifest -->
+  <!-- Web Application Manifest for Chrome M39
+       https://developer.chrome.com/multidevice/android/installtohomescreen -->
   <link rel="manifest" href="manifest.json">
 
   <!-- Tile color for Win8 -->
@@ -43,11 +45,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- Tile icon for Win8 (144x144) -->
   <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
 
-  <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
-  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-  <!-- endbuild -->
-
   <!-- Because this project uses vulcanize this should be your only html import
-       in this file. All other imports should go in elements.html -->
-  <link rel="import" href="elements/elements.html">
+       in this file. All other imports should go in base-bundle.html -->
+  <link rel="import" id="elementsBaseBundle" href="elements/base-bundle.html" async>
+
+  <!-- Skeleton styles -->
+  <style>
+    @import "head";
+  </style>
 </head>

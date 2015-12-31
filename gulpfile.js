@@ -93,8 +93,7 @@ gulp.task('copy', function() {
   ]).pipe(gulp.dest('dist/bower_components'));
 
   var elements = gulp.src([
-    'app/elements/elements.html',
-    'app/elements/routing.html'
+    'app/elements/*-bundle.html'
   ]).pipe(gulp.dest('dist/elements'));
 
   var icons = gulp.src(['app/themes/' + config.theme + '/icons.html'])
@@ -115,7 +114,7 @@ gulp.task('fonts', function() {
 });
 
 // Scan your HTML for assets & optimize them
-gulp.task('html', ['views'], function() {
+gulp.task('html', function() {
   var assets = $.useref.assets({searchPath: ['dist']});
 
   return gulp.src(['app/*.html', '.tmp/*.html'])
@@ -138,7 +137,7 @@ gulp.task('html', ['views'], function() {
 
 // Vulcanize granular configuration
 gulp.task('vulcanize', function() {
-  return gulp.src('dist/elements/elements.html')
+  return gulp.src('dist/elements/base-bundle.html')
     .pipe($.plumber())
     .pipe($.vulcanize({
       stripComments: true,
@@ -147,7 +146,7 @@ gulp.task('vulcanize', function() {
     }))
     // Split inline scripts from an HTML file for CSP compliance
     .pipe($.crisper())
-    // Minify elements.html
+    // Minify base-bundle.html
     // https://github.com/PolymerLabs/polybuild/issues/3
     .pipe($.if('*.html', $.htmlmin({
       customAttrAssign: [
@@ -167,7 +166,7 @@ gulp.task('vulcanize', function() {
     .pipe($.if('*.html', $.replace(/ {2,}/g, '')))
     // Remove CSS comments
     .pipe($.if('*.html', $.stripCssComments({preserve: false})))
-    // Minify elements.js
+    // Minify base-bundle.js
     .pipe($.if('*.js', $.uglify()))
     .pipe(gulp.dest('dist/elements'))
     .pipe($.size({title: 'Copy vulcanized elements to dist/elements dir:'}));
@@ -214,13 +213,13 @@ gulp.task('clean', function(cb) {
 });
 
 // Watch files for changes & reload
-gulp.task('serve', ['images', 'js', 'lint', 'lint-js', 'manifest', 'styles', 'views'], function() {
+gulp.task('serve', ['images', 'js', 'lint', 'lint-js', 'manifest', 'styles'], function() {
   browserSync({
     browser: config.browserSync.browser,
     https: config.browserSync.https,
     notify: config.browserSync.notify,
     port: config.browserSync.port,
-    logPrefix: 'PSK',
+    logPrefix: 'PSK Plus',
     snippetOptions: {
       rule: {
         match: '<span id="browser-sync-binding"></span>',
@@ -242,7 +241,7 @@ gulp.task('serve', ['images', 'js', 'lint', 'lint-js', 'manifest', 'styles', 'vi
     'app/*.html',
     'app/views/**/*.html',
     'app/content/**/*.md'
-  ], ['views', reload]);
+  ], ['styles', reload]);
   gulp.watch(['app/{elements,themes}/**/*.{css,html}'], ['styles', reload]);
   gulp.watch(['app/{elements,scripts}/**/*.js'], ['lint-js', 'js']);
   gulp.watch(['app/images/**/*'], reload);
@@ -255,7 +254,7 @@ gulp.task('serve:dist', ['default'], function() {
     https: config.browserSync.https,
     notify: config.browserSync.notify,
     port: config.browserSync.port,
-    logPrefix: 'PSK',
+    logPrefix: 'PSK Plus',
     snippetOptions: {
       rule: {
         match: '<span id="browser-sync-binding"></span>',
@@ -277,12 +276,18 @@ gulp.task('serve:dist', ['default'], function() {
 // Clean dist directory
 gulp.task('clean-dist', require(task('clean-dist'))(del));
 
+// Copy hosting configuration
+gulp.task('copy-hosting-config', require(task('copy-hosting-config'))($, config, gulp));
+
 // Download newest script analytics.js from Google, because link
 // https://www.google-analytics.com/analytics.js has set only 2 hours cache
 gulp.task('download:analytics', require(task('download-analytics'))($, gulp));
 
-// Fix path to sw-toolbox.js
-gulp.task('fix-path-sw-toolbox', require(task('fix-path-sw-toolbox'))($, gulp));
+// Fix paths before revision task
+gulp.task('fix-paths-before-revision', require(task('fix-paths'))($, gulp, merge, 'before'));
+
+// Fix paths after revision task
+gulp.task('fix-paths-after-revision', require(task('fix-paths'))($, gulp, merge, 'after'));
 
 // Transpile all JS from ES2015 (ES6) to ES5
 gulp.task('js', require(task('js-babel'))($, gulp));
@@ -303,7 +308,7 @@ gulp.task('revision', require(task('revision'))($, gulp));
 gulp.task('serve:gae', ['default'], require(task('serve-gae'))($, gulp));
 
 // Transform styles with PostCSS
-gulp.task('styles', require(task('styles'))($, config, gulp, merge));
+gulp.task('styles', ['views'], require(task('styles-postcss'))($, config, gulp, merge));
 
 // Compile HTML files with Nunjucks templating engine
 gulp.task('views', require(task('views-nunjucks'))($, config, gulp));
@@ -333,8 +338,9 @@ gulp.task('init', function(cb) {
 gulp.task('pre-deploy', function(cb) {
   runSequence(
     'default',
-    'fix-path-sw-toolbox',
+    ['copy-hosting-config', 'fix-paths-before-revision'],
     'revision',
+    'fix-paths-after-revision',
     cb);
 });
 

@@ -12,43 +12,40 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <html lang="{$ lang $}">
 {% include "head.html" %}
 
-<body unresolved class="fullbleed vertical layout">
+<!-- Don't use <body unresolved>. It's a simple FOUC solution, but hides
+     the page until imports and Polymer are loaded. Intead, control FOUC manually with
+     a skeleton. -->
+<body>
   <span id="browser-sync-binding"></span>
-  <template is="dom-bind" id="app">
-    <!-- Global object with variables for sharing information across the DOM tree -->
-    <iron-meta key="globals" value="{{globals}}"></iron-meta>
 
-    <paper-drawer-panel id="paperDrawerPanel" responsive-width="599px" drawer-width="256px">
-      {% include "drawer.html" %}
-      {% include "main.html" %}
-    </paper-drawer-panel>
+  <!-- Light weight skeleton is outside of Polymer/imports and styled by
+       the main page. 1st paint is fast, even on polyfilled browsers. Alternatively,
+       one could create an "app shell" and style the page's un-upgraded elements
+       similar to their final upgraded version. -->
+  {% include "skeleton.html" %}
 
-    <paper-toast id="toastConfirm" class="Toast" duration="10000">
-      <span class="Toast-button" role="button" tabindex="0" on-tap="onToastConfirmTap">OK</span>
-    </paper-toast>
+  <!-- Elements wait on the page and are upgraded when elements.html loads. -->
+  <my-app id="app"></my-app>
 
-    <paper-toast id="toastInfo" class="Toast" duration="8000"></paper-toast>
+  <!-- Service Worker support -->
+  <platinum-sw-register auto-register
+                        clients-claim
+                        skip-waiting
+                        base-uri="bower_components/platinum-sw/bootstrap">
+    <!-- Google Analytics offline support -->
+    <platinum-sw-offline-analytics></platinum-sw-offline-analytics>
+    <platinum-sw-cache default-cache-strategy="fastest"
+                       cache-config-file="cache-config.json">
+    </platinum-sw-cache>
+  </platinum-sw-register>
 
-    <!-- Service Worker support -->
-    <platinum-sw-register auto-register
-                          clients-claim
-                          skip-waiting
-                          base-uri="bower_components/platinum-sw/bootstrap"
-                          on-service-worker-installed="displayInstalledToast">
-      <!-- Google Analytics offline support -->
-      <platinum-sw-offline-analytics></platinum-sw-offline-analytics>
-      <platinum-sw-cache default-cache-strategy="fastest"
-                         cache-config-file="cache-config.json">
-      </platinum-sw-cache>
-    </platinum-sw-register>
-
-  </template>
-
-  <!-- build:js scripts/app.js -->
+  <!-- build:js scripts/app.min.js async -->
+  <script src="bower_components/page/page.js"></script>
   <script src="scripts/app.js"></script>
+  <script src="scripts/routing.js"></script>
   <!-- endbuild-->
 
-  <!-- Google Analytics code -->
+  <!-- Google Analytics tracker -->
   <start-google-analytics-tracker code="{$ googleAnalyticsTrackingId $}"></start-google-analytics-tracker>
 </body>
 

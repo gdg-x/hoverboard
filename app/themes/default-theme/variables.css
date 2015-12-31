@@ -16,30 +16,29 @@ See https://www.polymer-project.org/1.0/docs/devguide/styling.html#xscope-stylin
 for further information on custom CSS properties.
 */
 
-:root {
-  /* Material Design Colors
-     http://www.google.com/design/spec/style/color.html#color-color-palette */
-  /* Primary colors */
-  --dark-primary-color:         var(--paper-indigo-700);
-  --default-primary-color:      var(--paper-indigo-500);
-  --light-primary-color:        var(--paper-indigo-100);
-  --text-primary-color:         #fff; /* text / icons */
+/* Material Design Colors
+   http://www.google.com/design/spec/style/color.html#color-color-palette */
 
-  /* Accent colors */
-  --dark-accent-color:          var(--paper-pink-a700);
-  --accent-color:               var(--paper-pink-a200);
-  --light-accent-color:         var(--paper-pink-a100);
-  --text-accent-color:          #fff; /* text / icons */
+/* Primary colors */
+--dark-primary-color:         var(--paper-indigo-700);
+--default-primary-color:      var(--paper-indigo-500);
+--light-primary-color:        var(--paper-indigo-100);
+--text-primary-color:         #fff; /* text / icons */
 
-  /* Background colors */
-  --primary-background-color:   var(--paper-grey-50);
-  --secondary-background-color: #fff;
+/* Accent colors */
+--dark-accent-color:          var(--paper-pink-a700);
+--accent-color:               var(--paper-pink-a200);
+--light-accent-color:         var(--paper-pink-a100);
+--text-accent-color:          #fff; /* text / icons */
 
-  /* Text colors */
-  --primary-text-color:         var(--paper-grey-900);
-  --secondary-text-color:       var(--paper-grey-600);
-  --disabled-text-color:        var(--paper-grey-400);
+/* Background colors */
+--primary-background-color:   var(--paper-grey-50);
+--secondary-background-color: #fff;
 
-  /* Other colors */
-  --divider-color:              var(--paper-grey-300);
-}
+/* Text colors */
+--primary-text-color:         var(--paper-grey-900);
+--secondary-text-color:       var(--paper-grey-600);
+--disabled-text-color:        var(--paper-grey-400);
+
+/* Other colors */
+--divider-color:              var(--paper-grey-300);

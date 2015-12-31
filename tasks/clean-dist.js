@@ -16,8 +16,9 @@ module.exports = function (del) { return function (cb) {
     '!dist/bower_components/sw-toolbox/companion.js',
     '!dist/bower_components/sw-toolbox/sw-toolbox.js',
     'dist/elements/*',
-    '!dist/elements/elements.*',
-    '!dist/elements/bootstrap',
+    '!dist/elements/*-bundle.{html,js}',
+    'dist/scripts/app.js',
+    'dist/scripts/routing.js',
     'dist/scripts/**/*.map',
     'dist/themes/*/*.{html,map}',
     'dist/themes/*/fonts/fonts.css'

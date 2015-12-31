@@ -14,7 +14,11 @@ module.exports = function ($, config, gulp) { return function () {
   }
 
   return gulp.src([
-      'app/*.html'
+      'app/**/*.html',
+      '!app/bower_components/**',
+      '!app/test/**',
+      '!app/themes/**',
+      '!app/views/**'
     ])
     .pipe($.plumber({
       handleError: function (error) {

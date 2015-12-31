@@ -86,8 +86,6 @@ module.exports = {
     site: 'https://polymer-starter-kit-plus.firebaseapp.com',
     strategy: 'mobile' // or desktop
   },
-  // Polymer Theme
-  // Set theme also in file app/elements/elements.html
-  // <link rel="import" href="../themes/default-theme/theme.html">
+  // App Theme
   theme: 'default-theme'
 };

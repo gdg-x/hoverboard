@@ -23,6 +23,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   @nest &-icon {
     margin-right: 33px;
     opacity: var(--dark-secondary-opacity);
+    pointer-events: none;
   }
 
   @nest &-link {
@@ -33,5 +34,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     color: var(--primary-text-color);
     min-height: 48px;
     padding: 0 16px;
+  }
+
+  @nest &-text {
+    pointer-events: none;
   }
 }
