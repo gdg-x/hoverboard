@@ -2,8 +2,9 @@
 
 # Polymer Starter Kit Plus
 
-[![PageSpeed:100/100](https://img.shields.io/badge/PageSpeed-100%20/%20100-brightgreen.svg)](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fpolymer-starter-kit-plus.appspot.com)
-[![bitHound Score](https://www.bithound.io/github/StartPolymer/polymer-starter-kit-plus/badges/score.svg)](https://www.bithound.io/github/StartPolymer/polymer-starter-kit-plus)
+[![PageSpeed 97/100](https://img.shields.io/badge/PageSpeed-97%20/%20100-brightgreen.svg)](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fpolymer-starter-kit-plus.appspot.com&tab=desktop)
+[![GTmetrix 99%](https://img.shields.io/badge/GTmetrix-99%-brightgreen.svg)](https://gtmetrix.com/reports/polymer-starter-kit-plus.appspot.com/KL895CNj)
+[![bitHound Code](https://www.bithound.io/github/StartPolymer/polymer-starter-kit-plus/badges/code.svg)](https://www.bithound.io/github/StartPolymer/polymer-starter-kit-plus)
 [![Google+ Start Polymer](https://img.shields.io/badge/Google+-Start%20Polymer-dd4b39.svg)](https://plus.google.com/101148544618948882647)
 
 > A starting point for building web applications with Polymer 1.x
@@ -18,6 +19,9 @@
 
 ## Features
 
+- Progressive Web App template
+ - [Building Progressive Web Apps with Polymer](https://www.youtube.com/watch?v=g7f1Az5fxgU&index=10&list=PLNYkxOF6rcICcHeQY02XLvoGL34rZFWZn)
+ - [Getting started with Progressive Web Apps](http://addyosmani.com/blog/getting-started-with-progressive-web-apps/)
 - [Polymer](http://polymer-project.org), [Paper](https://elements.polymer-project.org/browse?package=paper-elements), [Iron](https://elements.polymer-project.org/browse?package=iron-elements), [Neon](https://elements.polymer-project.org/browse?package=neon-elements) and
 [Start](https://github.com/StartPolymer/start-elements) elements
 - Offline setup through [Platinum](https://elements.polymer-project.org/browse?package=platinum-elements) - [Service Worker](http://www.html5rocks.com/en/tutorials/service-worker/introduction/) elements
