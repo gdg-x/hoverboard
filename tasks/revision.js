@@ -7,11 +7,17 @@ module.exports = function ($, gulp) { return function () {
     /^\/404.html/g,
     /^\/humans.txt/g,
     /^\/robots.txt/g
-  // Only revision files in index.html content
+  // Only revision files in this file content
   ], dontRenameFile: [
-    /^\/index.html/g
+    /^\/app.yaml/g,
+    /^\/cache-config.json/g,
+    /^\/index.html/g,
+    /^\/sw-import.js/g
   ], dontUpdateReference: [
-    /^\/index.html/g
+    /^\/app.yaml/g,
+    /^\/cache-config.json/g,
+    /^\/index.html/g,
+    /^\/sw-import.js/g
   ]});
 
   return gulp.src('dist/**')
