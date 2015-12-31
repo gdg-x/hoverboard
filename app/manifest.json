@@ -22,5 +22,6 @@
         "sizes": "384x384",
         "type": "image/png"
       }],
+  "start_url": "./?utm_source=web_app_manifest",
   "display": "standalone"
 }
