@@ -23,7 +23,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   @nest &-headerMiddleContent  {
     height: 100%;
-    margin-left: 48px;
+    margin-left: 38px;
+
+    @media (--md-viewport) {
+      margin-left: 48px;
+    }
   }
 
   @nest &-header:not(.tall) &-headerMiddleContent {
@@ -32,9 +36,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   @nest &-headerBottomContent {
-    margin-left: 48px;
+    margin-left: 38px;
     /* Required for main area's paper-scroll-header-panel custom condensing transformation */
     transform-origin: left center;
+
+    @media (--md-viewport) {
+      margin-left: 48px;
+    }
   }
 
   @nest &-headerTitle {
@@ -48,5 +56,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   @nest &-headerSubTitle {
     @apply(--paper-font-subhead);
+    /* Required for main area's paper-scroll-header-panel custom condensing transformation */
+    transform-origin: left center;
   }
 }

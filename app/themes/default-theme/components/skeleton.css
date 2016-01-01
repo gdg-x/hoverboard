@@ -93,7 +93,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     display: flex;
     flex-direction: row;
     height: 56px;
-    margin: 56px 0 0 64px;
+    margin: 56px 0 0 54px;
 
     @media (--md-viewport) {
       height: 64px;
@@ -106,10 +106,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     display: flex;
     flex-direction: row;
     height: 56px;
-    margin: 0 0 0 64px;
+    margin: 0 0 0 54px;
 
     @media (--md-viewport) {
       height: 64px;
+      margin: 0 0 0 64px;
     }
   }
   /*

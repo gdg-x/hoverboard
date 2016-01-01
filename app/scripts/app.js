@@ -113,31 +113,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   });
 
   // Main area's paper-scroll-header-panel custom condensing transformation of
-  // the appName in the middle-container and the bottom title in the bottom-container.
-  // The appName is moved to top and shrunk on condensing. The bottom sub title
+  // the headerTitle in the middle-container and the bottom title in the bottom-container.
+  // The headerTitle is moved to top and shrunk on condensing. The bottom sub title
   // is shrunk to nothing on condensing.
   window.addEventListener('paper-header-transform', e => {
-    let appName = app.querySelector('.Main-headerTitle');
-    let middleContainer = app.querySelector('.Main-headerMiddleContent');
-    let bottomContainer = app.querySelector('.Main-headerBottomContent');
+    let headerTitle = app.querySelector('.Main-headerTitle');
+    let headerSubTitle = app.querySelector('.Main-headerSubTitle');
+    let headerMiddleContent = app.querySelector('.Main-headerMiddleContent');
+    let headerBottomContent = app.querySelector('.Main-headerBottomContent');
     let detail = e.detail;
     let heightDiff = detail.height - detail.condensedHeight;
     let yRatio = Math.min(1, detail.y / heightDiff);
-    // appName max size when condensed. The smaller the number the smaller the condensed size.
-    var maxMiddleScale = 0.50;
+    // headerTitle max size when condensed. The smaller the number the smaller the condensed size.
+    var maxMiddleScale = 0.60;
     var auxHeight = heightDiff - detail.y;
     var auxScale = heightDiff / (1 - maxMiddleScale);
     var scaleMiddle = Math.max(maxMiddleScale, auxHeight / auxScale + maxMiddleScale);
     var scaleBottom = 1 - yRatio;
 
-    // Move/translate middleContainer
-    Polymer.Base.transform(`translate3d(0,${yRatio * 100}%,0)`, middleContainer);
+    // Move/translate headerMiddleContent and headerBottomContent
+    if (window.matchMedia('(min-width: 600px)').matches) {
+      Polymer.Base.transform(`translate3d(0,${yRatio * 100}%,0)`, headerMiddleContent);
+    } else {
+      Polymer.Base.transform(`translate3d(${yRatio * 18}px,${yRatio * 100}%,0)`,
+        headerMiddleContent);
+      Polymer.Base.transform(`translate3d(${yRatio * 18}px,0,0)`, headerBottomContent);
+    }
 
-    // Scale bottomContainer and bottom sub title to nothing and back
-    Polymer.Base.transform(`scale(${scaleBottom}) translateZ(0)`, bottomContainer);
-
-    // Scale middleContainer appName
-    Polymer.Base.transform(`scale(${scaleMiddle}) translateZ(0)`, appName);
+    // Scale headerTitle
+    Polymer.Base.transform(`scale(${scaleMiddle}) translateZ(0)`, headerTitle);
+    // Scale headerSubTitle
+    Polymer.Base.transform(`scale(${scaleBottom}) translateZ(0)`, headerSubTitle);
   });
 
 })(document);
