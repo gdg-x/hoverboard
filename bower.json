@@ -1,21 +1,22 @@
 {
-  "name": "polymer-starter-kit-plus",
-  "private": true,
-  "dependencies": {
-    "polymer": "Polymer/polymer#1.2.x",
-    "iron-elements": "PolymerElements/iron-elements#1.0.x",
-    "paper-elements": "PolymerElements/paper-elements#1.0.x",
-    "platinum-elements": "PolymerElements/platinum-elements#1.1.x",
-    "neon-elements": "PolymerElements/neon-elements#1.0.x",
-    "start-elements": "StartPolymer/start-elements#1.1.x",
-    "molecules": "PolymerElements/molecules#1.0.x",
-    "google-web-components": "GoogleWebComponents/google-web-components#1.0.x",
-    "font-roboto": "StartPolymer/font-empty#1.1.x",
-    "page": "visionmedia/page.js#1.6.x",
-    "time-elements": "~0.4.x"
-  },
-  "devDependencies": {
-    "web-component-tester": "*",
-    "test-fixture": "PolymerElements/test-fixture#1.0.x"
-  }
+    "name": "polymer-starter-kit-plus",
+    "private": true,
+    "dependencies": {
+        "polymer": "Polymer/polymer#1.2.x",
+        "iron-elements": "PolymerElements/iron-elements#1.0.x",
+        "iron-selector": "PolymerElements/iron-selector#1.0.7",
+        "paper-elements": "PolymerElements/paper-elements#1.0.x",
+        "platinum-elements": "PolymerElements/platinum-elements#1.1.x",
+        "neon-elements": "PolymerElements/neon-elements#1.0.x",
+        "start-elements": "StartPolymer/start-elements#1.1.x",
+        "molecules": "PolymerElements/molecules#1.0.x",
+        "google-web-components": "GoogleWebComponents/google-web-components#1.0.x",
+        "font-roboto": "StartPolymer/font-empty#1.1.x",
+        "page": "visionmedia/page.js#1.6.x",
+        "time-elements": "~0.4.x"
+    },
+    "devDependencies": {
+        "web-component-tester": "*",
+        "test-fixture": "PolymerElements/test-fixture#1.0.x"
+    }
 }
