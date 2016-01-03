@@ -8,7 +8,9 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input-container.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input-char-counter.html">
 
 <dom-module id="my-greeting">
 
@@ -19,7 +21,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <h2 class="Page-title">{{greeting}}</h2>
     <!-- Listens for "input" event and sets greeting to <input>.value -->
-    <paper-input class="Page-formInput" label="Update text to change the greeting" value="{{greeting::input}}" char-counter></paper-input>
+    <paper-input-container class="Page-formInput">
+      <label>Update text to change the greeting</label>
+      <input is="iron-input" value="{{greeting::input}}">
+      <paper-input-char-counter></paper-input-char-counter>
+    </paper-input-container>
   </template>
 
   <script src="my-greeting.js"></script>
