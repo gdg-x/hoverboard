@@ -19,6 +19,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             // client-side router inspired by the Express router
             // More info: https://visionmedia.github.io/page.js/
 
+            let happ = document.querySelector('#hoverboard-app');
+
             // Middleware
             function scrollToTop(ctx, next) {
                 app.fire('iron-signal', {name: 'track-page', data: { path: ctx.path } });
@@ -28,43 +30,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             // Routes
             page('/', scrollToTop, () => {
-                app.route = 'home';
+                happ.route = 'home';
             });
 
             page('/blog', scrollToTop, () => {
-                app.route = 'blog';
+                happ.route = 'blog';
             });
 
             page('/blog/:title', scrollToTop, data => {
-                app.route = 'post';
-                app.params = data.params;
+                happ.route = 'post';
+                happ.params = data.params;
             });
 
-            page('/speakers', scrollToTop, () => {
-                app.route = 'speakers';
-            });
-
-            page('/speakers/:id', scrollToTop, data => {
-                app.route = 'speakers';
-                app.params = data.params;
-            });
-
-            page('/schedule', scrollToTop, () => {
-                app.route = 'schedule';
-            });
-
-            page('/schedule/:id', scrollToTop, data => {
-                app.route = 'schedule';
-                app.params = data.params;
-            });
-
-            page('/code-of-conduct', scrollToTop, () => {
-                app.route = 'code-of-conduct';
-            });
-
-            page('/speaker-guidelines', scrollToTop, () => {
-                app.route = 'speaker-guidelines';
-            });
+//            page('/speakers', scrollToTop, () => {
+//                app.route = 'speakers';
+//            });
+//
+//            page('/speakers/:id', scrollToTop, data => {
+//                app.route = 'speakers';
+//                app.params = data.params;
+//            });
+//
+//            page('/schedule', scrollToTop, () => {
+//                app.route = 'schedule';
+//            });
+//
+//            page('/schedule/:id', scrollToTop, data => {
+//                app.route = 'schedule';
+//                app.params = data.params;
+//            });
+//
+//            page('/code-of-conduct', scrollToTop, () => {
+//                app.route = 'code-of-conduct';
+//            });
+//
+//            page('/speaker-guidelines', scrollToTop, () => {
+//                app.route = 'speaker-guidelines';
+//            });
 
             // add #! before urls
             // https://developers.google.com/webmasters/ajax-crawling/docs/learn-more
