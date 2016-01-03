@@ -7,7 +7,7 @@ module.exports = function ($, gulp, merge) { return function () {
     // Lint CSS
     require('stylelint')(stylelintConfig),
     // Lint SUIT CSS methodology
-    require('postcss-bem-linter')(),
+    //require('postcss-bem-linter')(),
     require('postcss-reporter')({
       clearMessages: true
     })

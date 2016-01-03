@@ -17,12 +17,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   /* postcss-bem-linter: ignore */
   --paper-menu-focused-item-after: {
-    background-color: var(--default-primary-color);
+    background-color: var(--divider-color);
   };
 
   @nest &-icon {
     margin-right: 33px;
-    opacity: var(--dark-secondary-opacity);
     pointer-events: none;
   }
 
@@ -31,9 +30,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     @apply(--layout-horizontal);
     @apply(--layout-center);
     text-decoration: none;
-    color: var(--primary-text-color);
+    color: var(--secondary-text-color);
     min-height: 48px;
-    padding: 0 16px;
+    padding: 0 32px;
   }
 
   @nest &-text {

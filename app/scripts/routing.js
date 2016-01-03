@@ -74,9 +74,11 @@ page('*', scrollToTop, closeDrawer, (ctx, next) => {
   next();
 });
 
-page('/', () => {
+function setHomePage() {
   function setData() {
     app.route = 'home';
+    app.pageTitle = 'Polymer';
+    app.pageSubTitle = 'The future of the web today';
   }
 
   // Check if element prototype has not been upgraded yet
@@ -85,24 +87,21 @@ page('/', () => {
   } else {
     setData();
   }
+}
+
+page('/', () => {
+  setHomePage();
 });
 
 page(baseUrl, () => {
-  function setData() {
-    app.route = 'home';
-  }
-
-  // Check if element prototype has not been upgraded yet
-  if (!app.upgraded) {
-    once(app, 'upgraded', setData);
-  } else {
-    setData();
-  }
+  setHomePage();
 });
 
 page('/users', () => {
   function setData() {
     app.route = 'users';
+    app.pageTitle = 'Users';
+    app.pageSubTitle = 'Test page';
   }
 
   // Check if element prototype has not been upgraded yet
@@ -116,6 +115,8 @@ page('/users', () => {
 page('/users/:name', ctx => {
   function setData() {
     app.route = 'user-info';
+    app.pageTitle = 'User information';
+    app.pageSubTitle = 'Test page';
     app.params = ctx.params;
   }
 
@@ -130,6 +131,8 @@ page('/users/:name', ctx => {
 page('/contact', () => {
   function setData() {
     app.route = 'contact';
+    app.pageTitle = 'Contact';
+    app.pageSubTitle = 'Test page';
   }
 
   // Check if element prototype has not been upgraded yet

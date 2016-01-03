@@ -119,13 +119,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   window.addEventListener('paper-header-transform', e => {
     let headerTitle = app.querySelector('.Main-headerTitle');
     let headerSubTitle = app.querySelector('.Main-headerSubTitle');
-    let headerMiddleContent = app.querySelector('.Main-headerMiddleContent');
-    let headerBottomContent = app.querySelector('.Main-headerBottomContent');
+    let headerMiddleBar = app.querySelector('.Main-headerMiddleBar');
+    let headerBottomBar = app.querySelector('.Main-headerBottomBar');
     let detail = e.detail;
     let heightDiff = detail.height - detail.condensedHeight;
     let yRatio = Math.min(1, detail.y / heightDiff);
+    let yRatio2 = Math.min(1, detail.y / (heightDiff + 30));
     // headerTitle max size when condensed. The smaller the number the smaller the condensed size.
-    var maxMiddleScale = 0.60;
+    var maxMiddleScale = 0.70;
     var auxHeight = heightDiff - detail.y;
     var auxScale = heightDiff / (1 - maxMiddleScale);
     var scaleMiddle = Math.max(maxMiddleScale, auxHeight / auxScale + maxMiddleScale);
@@ -133,11 +134,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     // Move/translate headerMiddleContent and headerBottomContent
     if (window.matchMedia('(min-width: 600px)').matches) {
-      Polymer.Base.transform(`translate3d(0,${yRatio * 100}%,0)`, headerMiddleContent);
+      Polymer.Base.transform(`translate3d(0,${yRatio2 * 100}%,0)`, headerMiddleBar);
     } else {
-      Polymer.Base.transform(`translate3d(${yRatio * 18}px,${yRatio * 100}%,0)`,
-        headerMiddleContent);
-      Polymer.Base.transform(`translate3d(${yRatio * 18}px,0,0)`, headerBottomContent);
+      Polymer.Base.transform(`translate3d(${yRatio * 18}px,${yRatio2 * 100}%,0)`,
+        headerMiddleBar);
+      Polymer.Base.transform(`translate3d(${yRatio * 18}px,0,0)`, headerBottomBar);
     }
 
     // Scale headerTitle

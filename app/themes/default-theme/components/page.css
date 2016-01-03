@@ -10,6 +10,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 /** @define Page */
 
 .Page {
+  @nest &-formInput {
+    width: 250px;
+  }
+
   @nest &-title {
     @apply(--paper-font-display2);
     margin: 32px 0;

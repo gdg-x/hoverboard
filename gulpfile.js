@@ -240,7 +240,8 @@ gulp.task('serve', ['images', 'js', 'lint', 'lint-js', 'manifest', 'styles'], fu
   gulp.watch([
     'app/*.html',
     'app/views/**/*.html',
-    'app/content/**/*.md'
+    'app/content/**/*.md',
+    'app/metadata.js'
   ], ['styles', reload]);
   gulp.watch(['app/{elements,themes}/**/*.{css,html}'], ['styles', reload]);
   gulp.watch(['app/{elements,scripts}/**/*.js'], ['lint-js', 'js']);

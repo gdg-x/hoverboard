@@ -10,16 +10,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 /** @define Drawer */
 
 .Drawer {
-  @media (--md-viewport) {
-    border-right: 1px solid rgba(0, 0, 0, var(--dark-divider-opacity));
+  @nest &-content {
+    height: 100%;
+
+    @media (--md-viewport) {
+      border-right: 1px solid rgba(0, 0, 0, var(--dark-divider-opacity));
+    }
   }
 
   @nest &-header {
-    color: var(--secondary-text-color);
     background-color: var(--secondary-background-color);
     border-bottom: 1px solid rgba(0, 0, 0, var(--dark-divider-opacity));
-    @media (--sm-viewport) {
-      margin-left: 16px;
+    color: var(--secondary-text-color);
+
+    @media (--md-viewport) {
+      background-color: var(--dark-primary-color);
+      border: 0 !important;
+      box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
+      color: var(--text-primary-color);
     }
   }
 
@@ -29,5 +37,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   @nest &-widget {
     background-color: var(--secondary-background-color);
+    padding: 16px 0;
+
+    @nest &--bottom {
+      border-top: 1px solid rgba(0, 0, 0, var(--dark-divider-opacity));
+    }
   }
 }

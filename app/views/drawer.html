@@ -12,27 +12,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <paper-scroll-header-panel class="Drawer" drawer fixed>
   <!-- Drawer Toolbar -->
   <paper-toolbar class="Drawer-header">
-    <span class="Drawer-title">Menu</span>
+    <span class="Drawer-title">{$ title $}</span>
   </paper-toolbar>
 
   <!-- Drawer Content -->
-  <!-- Navigation -->
-  <nav>
-  <paper-menu class="Drawer-widget Navigation list" attr-for-selected="data-route" selected="[[route]]">
-    <a class="Navigation-link" data-route="home" href$="{{baseUrl}}">
-      <iron-icon class="Navigation-icon" icon="home"></iron-icon>
-      <span class="Navigation-text">Home</span>
-    </a>
+  <div class="Drawer-content vertical layout">
+    <!-- Navigation -->
+    <nav>
+    <paper-menu class="Drawer-widget Navigation list" attr-for-selected="data-route" selected="[[route]]">
+      <a class="Navigation-link" data-route="home" href$="{{baseUrl}}">
+        <iron-icon class="Navigation-icon" icon="home"></iron-icon>
+        <span class="Navigation-text">Home</span>
+      </a>
 
-    <a class="Navigation-link" data-route="users" href$="{{baseUrl}}users">
-      <iron-icon class="Navigation-icon" icon="info"></iron-icon>
-      <span class="Navigation-text">Users</span>
-    </a>
+      <a class="Navigation-link" data-route="users" href$="{{baseUrl}}users">
+        <iron-icon class="Navigation-icon" icon="account-multiple"></iron-icon>
+        <span class="Navigation-text">Users</span>
+      </a>
 
-    <a class="Navigation-link" data-route="contact" href$="{{baseUrl}}contact">
-      <iron-icon class="Navigation-icon" icon="mail"></iron-icon>
-      <span class="Navigation-text">Contact</span>
-    </a>
-  </paper-menu>
-  </nav>
+      <a class="Navigation-link" data-route="contact" href$="{{baseUrl}}contact">
+        <iron-icon class="Navigation-icon" icon="mail"></iron-icon>
+        <span class="Navigation-text">Contact</span>
+      </a>
+    </paper-menu>
+    </nav>
+
+    <span class="Drawer-spacer flex"></span>
+
+    <div class="Drawer-widget Drawer-widget--bottom">
+      <a class="Navigation-link" href="https://github.com/StartPolymer/polymer-starter-kit-plus" target="_blank">
+        <iron-icon class="Navigation-icon" icon="github-mark"></iron-icon>
+        <span class="Navigation-text">View Source</span>
+      </a>
+
+      <a class="Navigation-link" href="https://github.com/StartPolymer/polymer-starter-kit-plus/issues/new?title=Feedback%20for:%20" target="_blank">
+        <iron-icon class="Navigation-icon" icon="message-alert"></iron-icon>
+        <span class="Navigation-text">Submit Feedback</span>
+      </a>
+    </div>
+  </div>
 </paper-scroll-header-panel>
