@@ -2,8 +2,7 @@ var config = require('../config');
 
 module.exports = {
   title: 'Polymer Starter Kit +',
-  subTitle: 'The future of the web today',
-  description: 'Polymer Starter Kit Plus',
+  description: 'Polymer Starter Kit Plus - The future of the web today',
   charset: 'UTF-8',
   lang: 'en',
   // Add to homescreen for Chrome on Android
