@@ -53,6 +53,7 @@
     "postcss-import": "^7.0.0",
     "postcss-nesting": "^2.0.2",
     "postcss-reporter": "^1.2.1",
+    "postcss-simple-vars": "^1.2.0",
     "psi": "^1.0.6",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.0.2",

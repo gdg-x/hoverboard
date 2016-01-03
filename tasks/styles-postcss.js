@@ -2,6 +2,7 @@
 
 // Transform styles with PostCSS
 module.exports = function ($, config, gulp, merge) { return function () {
+  var variables = require('../app/themes/' + config.theme + '/variables');
   var postcssApply = require('postcss-apply');
   var postcssAutoprefixer = require('autoprefixer');
   var postcssCssMqpacker = require('css-mqpacker');
@@ -11,6 +12,7 @@ module.exports = function ($, config, gulp, merge) { return function () {
   var postcssImport = require('postcss-import');
   var postcssNesting = require('postcss-nesting');
   var postcssReporter = require('postcss-reporter');
+  var postcssSimpleVars = require('postcss-simple-vars');
   var postcssPlugins = [
     // Transform @import rules by inlining content
     postcssImport({
@@ -19,6 +21,8 @@ module.exports = function ($, config, gulp, merge) { return function () {
         'app/themes/' + config.theme
       ]
     }),
+    // Sass-like variables
+    postcssSimpleVars({ variables: variables.global }),
     // Transform W3C CSS Custom Media Queries
     postcssCustomMedia(),
     // Unwrap nested rules, following CSS Nesting Module Level 3 specification
@@ -34,7 +38,7 @@ module.exports = function ($, config, gulp, merge) { return function () {
     })
   ];
 
-  var themes = gulp.src([
+  var theme = gulp.src([
       'app/themes/' + config.theme + '/*.html',
       '!app/themes/' + config.theme + '/icons.html'
     ])
@@ -92,6 +96,8 @@ module.exports = function ($, config, gulp, merge) { return function () {
             'app/themes/' + config.theme
           ]
         }),
+        // Sass-like variables
+        postcssSimpleVars({ variables: variables.global }),
         // Plugin enabling custom properties sets references - Polymer mixins
         postcssApply(),
         // Transform W3C CSS Custom Properties for variables syntax to more compatible CSS
@@ -116,5 +122,5 @@ module.exports = function ($, config, gulp, merge) { return function () {
       .pipe(gulp.dest('dist'))
       .pipe($.size({title: 'Copy transformed styles to dist dir:'}));
 
-  return merge(themes, elements, index);
+  return merge(theme, elements, index);
 };};

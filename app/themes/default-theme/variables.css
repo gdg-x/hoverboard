@@ -20,25 +20,25 @@ for further information on custom CSS properties.
    http://www.google.com/design/spec/style/color.html#color-color-palette */
 
 /* Primary colors */
---dark-primary-color:         var(--paper-indigo-700);
---default-primary-color:      var(--paper-indigo-500);
---light-primary-color:        var(--paper-indigo-100);
+--dark-primary-color:         var(--paper-$(primaryColorName)-700);
+--default-primary-color:      var(--paper-$(primaryColorName)-500);
+--light-primary-color:        var(--paper-$(primaryColorName)-100);
 --text-primary-color:         #fff; /* text / icons */
 
 /* Accent colors */
---dark-accent-color:          var(--paper-pink-a700);
---accent-color:               var(--paper-pink-a200);
---light-accent-color:         var(--paper-pink-a100);
+--dark-accent-color:          var(--paper-$(accentColorName)-a700);
+--accent-color:               var(--paper-$(accentColorName)-a200);
+--light-accent-color:         var(--paper-$(accentColorName)-a100);
 --text-accent-color:          #fff; /* text / icons */
+
+/* Text colors */
+--primary-text-color:         var(--paper-$(textColorName)-900);
+--secondary-text-color:       var(--paper-$(textColorName)-600);
+--disabled-text-color:        var(--paper-$(textColorName)-400);
 
 /* Background colors */
 --primary-background-color:   var(--paper-grey-50);
 --secondary-background-color: #fff;
-
-/* Text colors */
---primary-text-color:         var(--paper-grey-900);
---secondary-text-color:       var(--paper-grey-600);
---disabled-text-color:        var(--paper-grey-400);
 
 /* Other colors */
 --divider-color:              var(--paper-grey-300);
