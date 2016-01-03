@@ -29,9 +29,9 @@
  - [Custom Fonts list](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/themes/default-theme/fonts.list)
  for download fonts from [Google Fonts](https://www.google.com/fonts)
  - [Custom Icons element](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/icons.html) for [Material Design Icons](https://materialdesignicons.com)
- - CSS [Variables](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/variables.css) including [Material Design Colors](https://www.google.com/design/spec/style/color.html) - [Material Palette](https://www.materialpalette.com)
- - [Variables](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/variables.js)
- for colors from index.html and manifest.json
+ - [CSS Variables](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/variables.css) including [Material Design Colors](https://www.google.com/design/spec/style/color.html) - [Material Palette](https://www.materialpalette.com)
+ - [JS Variables](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/variables.js)
+ for colors in index.html and manifest.json
 - [Material Design](http://www.google.com/design/spec/material-design/introduction.html) layout
 - [PostCSS](https://github.com/postcss/postcss) for transforming styles with JS plugins
  - [Introduction to PostCSS](http://www.smashingmagazine.com/2015/12/introduction-to-postcss/)
@@ -40,9 +40,10 @@
  - [CSS Custom Media Queries](https://github.com/postcss/postcss-custom-media)
  - [CSS Nesting](https://github.com/jonathantneal/postcss-nesting)
  - [CSS MQPacker](https://github.com/hail2u/node-css-mqpacker) - pack same CSS media query rules into one media query rule
+ - [Import](https://github.com/postcss/postcss-import) - transform `@import` rules by inlining content
+ - [Simple Variables](https://github.com/postcss/postcss-simple-vars) - Sass-like variables
  - [Stylelint](https://github.com/stylelint/stylelint) - modern CSS linter
  - [SUIT CSS linter](https://github.com/postcss/postcss-bem-linter)
- - [PostCSS Import](https://github.com/postcss/postcss-import)
 - [Babel](https://babeljs.io) for support [ES2015 JavaScript](https://babeljs.io/docs/learn-es2015/)
  - [Polymer elements using the ES2015 class syntax](http://www.code-labs.io/codelabs/polymer-es2015/index.html#3)
 - [Nunjucks](https://mozilla.github.io/nunjucks/) templating engine for server-side
@@ -160,9 +161,11 @@ This installs the element sets (Paper, Iron, Platinum) and tools the starter kit
 
 ### 3. Development workflow
 
-#### Check out the config.js
+#### Check out the variables
 
-Gulp variables are in the file [config.js](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/config.js)
+- Gulp variables -  [config.js](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/config.js)
+- Theme variables -  [variables.css](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/themes/default-theme/variables.css) and [variables.js](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/themes/default-theme/variables.js)
+- HTML metadata -  [metadata.js](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/metadata.js)
 
 #### Initializing your app
 
