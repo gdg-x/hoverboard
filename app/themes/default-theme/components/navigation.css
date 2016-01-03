@@ -21,7 +21,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   };
 
   @nest &-icon {
-    margin-right: 33px;
+    margin-right: 24px;
     pointer-events: none;
   }
 
@@ -32,7 +32,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     text-decoration: none;
     color: var(--secondary-text-color);
     min-height: 48px;
-    padding: 0 32px;
+    padding: 0 24px;
   }
 
   @nest &-text {
