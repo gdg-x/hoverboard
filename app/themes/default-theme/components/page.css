@@ -24,6 +24,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   }
 
+  @nest &-subTitle {
+    @apply(--paper-font-subhead);
+  }
+
   @nest &-paper {
     background: var(--secondary-background-color);
     border-radius: 2px;

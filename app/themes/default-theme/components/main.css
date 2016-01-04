@@ -36,6 +36,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   @nest &-headerTopBar {
+    @apply(--layout-horizontal);
+    @apply(--layout-center);
+
     background-color: var(--dark-primary-color);
     bottom: 0;
     left: 0;
@@ -46,6 +49,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   @nest &-headerMiddleBar {
+    @apply(--layout-horizontal);
+    @apply(--layout-end);
+
     height: 100%;
     margin-left: 54px;
 
@@ -55,6 +61,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   @nest &-headerBottomBar {
+    @apply(--layout-horizontal);
+    @apply(--layout-center);
+
     margin-left: 54px;
     /* Required for main area's paper-scroll-header-panel custom condensing transformation */
     transform-origin: left center;

@@ -11,6 +11,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   @import 'variables';
 }
 
+body {
+  @apply(--layout-fullbleed);
+  @apply(--layout-vertical);
+}
+
 @import 'breakpoints';
 @import 'mixins';
 
@@ -18,3 +23,5 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 @import 'components/main';
 @import 'components/navigation';
 @import 'components/toast';
+
+@import 'utilities/layout';
