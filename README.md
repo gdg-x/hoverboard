@@ -119,7 +119,7 @@ git commit -m 'Updated to 1.0.2'
 With Node.js installed, run the following one liner from the root of your Polymer Starter Kit Plus download:
 
 ```sh
-npm run-script install-all
+npm run install:all
 ```
 
 #### Prerequisites (for everyone)
