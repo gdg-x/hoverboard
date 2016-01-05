@@ -62,11 +62,19 @@
     "web-component-tester": "^4.0.0"
   },
   "scripts": {
-    "install-all": "sudo npm install -g npm && sudo npm install -g bower gulp && npm install && bower install",
+    "deploy:dev": "gulp deploy:dev",
+    "deploy:prod": "gulp deploy:prod",
+    "deploy:promote": "gulp deploy:promote",
+    "deploy:stag": "gulp deploy:stag",
+    "init": "gulp init",
+    "install": "npm install && bower install",
+    "install:all": "sudo npm install -g npm && sudo npm install -g bower gulp && npm install && bower install",
     "lint": "gulp lint",
-    "start": "gulp serve",
+    "serve": "gulp serve",
+    "serve:dist": "gulp serve:dist",
+    "serve:gae": "gulp serve:gae",
     "test": "gulp test:local",
-    "update-all": "npm update && bower update"
+    "update": "npm update && bower update"
   },
   "engines": {
     "node": ">=0.12.0"
