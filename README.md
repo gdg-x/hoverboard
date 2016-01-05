@@ -139,7 +139,7 @@ The full starter kit requires the following major dependencies:
 node --version
 ```
 
-The version should be at or above 0.12.x. [Installing Node.js via package manager](https://github.com/joyent/node/wiki/installing-node.js-via-package-manager)
+The version should be at or above 5.x. [Installing Node.js via package manager](https://nodejs.org/en/download/package-manager/)
 
 2)  If you don't have Node.js installed, or you have a lower version, go to [nodejs.org](https://nodejs.org) and click on the big green Install button.
 
@@ -211,7 +211,8 @@ Build and optimize the current project, ready for deployment. This includes lint
 
 ### 4. Deploy app :tada:
 
-How to setup [Google App Engine](https://github.com/h5bp/server-configs-gae)
+- For GAE or GCS [install Google Cloud SDK](https://developers.google.com/cloud/sdk/#Quick_Start)
+- For Firebase [install Firebase command line tools](https://www.firebase.com/docs/hosting/command-line-tool.html)
 
 #### Deploy to development environment
 
