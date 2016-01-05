@@ -49,9 +49,9 @@ module.exports = {
         staging:     'polymer-starter-kit-plus-staging',
         production:  'polymer-starter-kit-plus'
       },
-      // Set the deployed version to be the default serving version.
+      // Promote the deployed version to receive all traffic.
       // https://cloud.google.com/sdk/gcloud/reference/preview/app/deploy
-      setDefault: true
+      promote: true
     },
     // Google Cloud Storage
     // GCS requires Google Cloud SDK with gsutil to be installed and configured.

@@ -14,8 +14,10 @@ module.exports = function ($, config, gulp, environment) {
   }
 
   var args = '';
-  if (config.deploy.gae.setDefault) {
-    args = '--set-default';
+  if (config.deploy.gae.promote) {
+    args = '--promote';
+  } else {
+    args = '--no-promote';
   }
 
   var deployCmd = 'gcloud preview app deploy -q ' + args + ' --project ' +
