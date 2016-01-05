@@ -5,6 +5,7 @@ module.exports = function ($, gulp) { return function () {
   // Files without revision hash
   var revAll = new $.revAll({ dontGlobal: [
     /^\/404.html/g,
+    /^\/google.*.html/g,
     /^\/humans.txt/g,
     /^\/robots.txt/g
   // Only revision files in this file content
