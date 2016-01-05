@@ -1,6 +1,6 @@
-<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../../../../bower_components/marked-element/marked-element.html">
+<link rel="import" href="../../../bower_components/marked-element/marked-element.html">
 
 <dom-module id="latest-posts">
     <template>
@@ -9,6 +9,7 @@
             :host {
                 display: block;
             }
+
             .title {
                 color: var(--default-primary-color);
                 font-size: 24px;
@@ -38,7 +39,7 @@
         </div>
     </template>
     <script>
-        (function() {
+        (function () {
             'use strict';
 
             class LatestPosts {
@@ -53,11 +54,12 @@
                         }
                     };
                 }
+
                 _postsChanged() {
                     let temp = this.posts.reverse().slice(0, 2);
                     for (let i = 0, len = temp.length; i < len; i++) {
-                        temp[i].url = '/blog/' + temp[i].titleUrl;
-                        temp[i].dataRoute = 'blog/' + temp[i].titleUrl;
+                        temp[i].url = '/blog/' + temp[i].id;
+                        temp[i].dataRoute = 'blog/' + temp[i].id;
                     }
                     this.news = temp;
                 }

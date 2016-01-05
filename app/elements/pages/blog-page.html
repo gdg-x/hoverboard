@@ -1,7 +1,6 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../bower_components/iron-image/iron-image.html">
@@ -75,7 +74,7 @@
         </style>
         <div class="container">
             <template is="dom-repeat" items="[[posts]]" as="post" on-dom-change="_updateCascadedNodes">
-                <a href="#" class="post" cascaded>
+                <a data-route="blog/[[post.id]]" href="/blog/[[post.id]]" class="post" cascaded>
                     <iron-image class="image" src="[[post.image]]" style$="background-color: [[post.primaryColor]];" sizing="cover" preload fade></iron-image>
                     <div class="title" style$="background-color: [[post.secondaryColor]];">[[post.title]]</div>
                 </a>

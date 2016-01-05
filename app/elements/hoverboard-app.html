@@ -3,7 +3,6 @@
 <!-- Iron elements -->
 <link rel="import" href="../../bower_components/iron-flex-layout/classes/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/iron-image/iron-image.html">
-<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 
 <!-- Paper elements -->
 <link rel="import" href="../../bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
@@ -11,6 +10,9 @@
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
+
+<!-- Neon elements -->
+<link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
 
 <!-- Routing -->
 <link rel="import" href="routing.html">
@@ -26,6 +28,7 @@
 
 <link rel="import" href="pages/home-page.html">
 <link rel="import" href="pages/blog-page.html">
+<link rel="import" href="pages/post-page.html">
 
 
 <dom-module id="hoverboard-app">
@@ -114,10 +117,6 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=GDG%20DevFest%20Ukraine%202015&dates=20151023T090000/20151024T180000&details=The%20biggest%20Google%20related%20event%20in%20Ukraine%20carefully%20crafted%20for%20you%20by%20GDG%20community!%20Awesome%20speakers%20and%20lot's%20of%20fun!%20Details%20at%20http://devfest.gdg.org.ua&location=Shchyretska%20St%2036,%20L'viv,%20Львівська%20область,%20Ukraine&pli=1&uid=&sf=true&output=xml#eventpage_6"
-                        target="_blank" onclick="ga('send', 'add-event-to-calendar', 'button', 'click');">
-                            <paper-fab class="section-fab-right" icon="icons:event"></paper-fab>
-                        </a>
                     </template>
                     <template is="dom-if" if="{{_equal(route, 'blog')}}">
                         <hero-content title="Blog"></hero-content>
@@ -134,21 +133,7 @@
                 <neon-animated-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}" animate-initial-selection>
                     <home-page class="Page" data-route="home" people="{{speakers}}" posts="{{posts}}" logos="{{partners}}"></home-page>
                     <blog-page class="Page" data-route="blog" posts="{{posts}}"></blog-page>
-
-                    <!-- <section class="Page" data-route="speakers">
-                            <h2 class="Page-title">
-                                User:
-                                <span>{{params.name}}</span>
-                            </h2>
-                            <div>This is
-                                <span>{{params.name}}</span>'s section</div>
-                    </section>
-
-                    <section class="Page" data-route="schedule">
-                            <h2 class="Page-title">Contact</h2>
-                            <p>This is the contact section</p>
-                    </section> -->
-
+                    <post-page class="Page" data-route="post" post-id="[[params.id]]" posts="{{posts}}"></post-page>
                 </neon-animated-pages>
             </div>
         </paper-drawer-panel>

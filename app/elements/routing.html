@@ -37,7 +37,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 happ.route = 'blog';
             });
 
-            page('/blog/:title', scrollToTop, data => {
+            page('/blog/:id', scrollToTop, data => {
                 happ.route = 'post';
                 happ.params = data.params;
             });

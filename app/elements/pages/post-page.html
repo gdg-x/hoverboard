@@ -1,14 +1,69 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
-<dom-module id="blog-post">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../../bower_components/marked-element/marked-element.html">
+
+<link rel="import" href="../blocks/footer-block/footer-block.html">
+
+<dom-module id="post-page">
     <template>
+        <style include="shared-styles"></style>
         <style>
             :host {
                 display: block;
+                position: relative;
+            }
+
+            .container {
+                padding-top: 0;
+                max-width: 896px;
+            }
+
+            .spinner-wrapper {
+                @apply(--layout-vertical);
+                @apply(--layout-center-center);
+                @apply(--layout-fit);
+                min-height: 50vh;
+            }
+
+            .post-wrapper {
+                background: #FFFFFF;
+            }
+
+            .post-meta {
+                margin-bottom: 20px;
+                padding: 40px 0 20px;
+                font-size: 13px;
+                color: var(--secondary-text-color);
+                border-bottom: 1px solid var(--divider-color);
             }
         </style>
-        <iron-ajax id="ajax" url="[[_postUrl]]" handle-as="text" last-response="post"
+
+        <div class="spinner-wrapper">
+            <paper-spinner id="spinner" active></paper-spinner>
+        </div>
+
+
+        <div id="animationWrapper">
+            <div class="post-wrapper">
+                <div class="container post" cascaded>
+                    <div class="post-meta">
+                        <span>Posted: [[_post.date]]</span>
+                    </div>
+
+                    <marked-element class="post-content" markdown="[[postBody]]">
+                        <div class="markdown-html"></div>
+                    </marked-element>
+                </div>
+            </div>
+
+            <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}"
+                          cascaded></footer-block>
+        </div>
+
+        <iron-ajax id="ajax" url="[[_postUrl]]" handle-as="text" last-response="{{postBody}}"
                    on-response="_postLoaded"></iron-ajax>
 
     </template>
@@ -18,89 +73,103 @@
 
             Polymer({
 
-                is: 'home-page',
+                is: 'post-page',
 
                 behaviors: [
+                    Polymer.NeonAnimationRunnerBehavior,
                     Polymer.NeonSharedElementAnimatableBehavior
                 ],
 
                 properties: {
-                    meta: {
+                    postId: {
                         type: String,
-                        observer: '_metaChanged'
+                        observer: '_postIdChanged'
                     },
-                    _postUrl: String,
+                    posts: Array,
+                    _loaded: {
+                        type: Boolean,
+                        value: false
+                    },
+                    _post: Object,
 
                     animationConfig: {
                         type: Object,
                         value: function () {
+                            var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
+                            var cascadedArray = Array.prototype.slice.call(cascaded);
                             return {
                                 'entry': [{
-                                    name: 'cascaded-animation',
-                                    animation: 'transform-animation',
-                                    transformFrom: 'translate3d(0,100%,0)',
-                                    transformTo: 'none',
-                                    timing: {
-                                        delay: 0
-                                    }
-                                }, {
-                                    name: 'cascaded-animation',
+                                    name: 'fade-in-animation',
                                     animation: 'fade-in-animation',
+                                    node: this,
                                     timing: {
-                                        delay: 0
+                                        delay: 500
                                     }
                                 }],
                                 'exit': [{
                                     name: 'cascaded-animation',
                                     animation: 'transform-animation',
-                                    transformFrom: 'translate3d(0,0,0)',
-                                    transformTo: 'translate3d(0,100%,0)',
+                                    transformTo: 'translate3d(0, 100%, 0)',
+                                    nodes: cascadedArray
+                                }, {
+                                    name: 'fade-out-animation',
+                                    animation: 'fade-out-animation',
+                                    node: this
+                                }],
+                                'postLoaded': [{
+                                    name: 'cascaded-animation',
+                                    animation: 'transform-animation',
+                                    transformFrom: 'translate3d(0, 100%, 0)',
+                                    nodes: cascadedArray,
                                     timing: {
-                                        delay: 0
+                                        delay: 500
                                     }
                                 }, {
-                                    name: 'cascaded-animation',
-                                    animation: 'fade-out-animation',
+                                    name: 'fade-in-animation',
+                                    animation: 'fade-in-animation',
+                                    nodes: cascadedArray,
                                     timing: {
-                                        delay: 0
+                                        delay: 500
                                     }
+                                }, {
+                                    name: 'scale-down-animation',
+                                    animation: 'scale-down-animation',
+                                    node: this.$.spinner
                                 }]
                             };
                         }
                     }
                 },
 
-                _metaChanged: function() {
-                    this._postUrl = '{$ baseurl $}/posts/${this.meta.file}';
+                listeners: {
+                    'neon-animation-finish': '_onNeonAnimationFinish'
+                },
+
+                _postIdChanged: function () {
+                    this.$.animationWrapper.style.opacity = 0;
+                    this.$.spinner.style.opacity = 1;
+
+                    this._post = app.findByProperty(this.posts, 'id', this.postId);
+                    this.notifyPath('_post.date', new Date(this._post.posted).toDateString().slice(4));
+                    this._postUrl = '{$ baseurl $}/posts/' + this._post.posted + '-' + this.postId + '.markdown';
                     this.$.ajax.generateRequest();
+                },
+
+                _postLoaded: function () {
+                    this._loaded = true;
+                    this.async(function () {
+                        this.$.animationWrapper.style.opacity = 1;
+                    }, 100);
+                    this.playAnimation('postLoaded');
+                },
+
+                _onNeonAnimationFinish: function () {
+                    if (this._loaded) {
+                        this.$.spinner.style.opacity = 0;
+                    }
                 }
             });
 
-//            Doesn't work for now..
-
-//            class BlogPost {
-//                beforeRegister() {
-//                    let is = this.constructor.name.replace(/\W+/g, '-')
-//                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-//                    this.is = is;
-//                    this.properties = {
-//                        meta: {
-//                            type: String,
-//                            observer: '_metaChanged'
-//                        },
-//                        _postUrl: String
-//                    };
-//                }
-//                _metaChanged() {
-//                    this._postUrl = '{$ baseurl $}/posts/${this.meta.file}';
-//                    this.$.ajax.generateRequest();
-//                }
-//                _postLoaded() {
-//
-//                }
-//            }
-//
-//            Polymer(BlogPost);
         })();
     </script>
 </dom-module>
