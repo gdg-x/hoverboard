@@ -14,6 +14,9 @@
             :host {
                 display: block;
                 position: relative;
+
+                --grid-gutter: 4px;
+                --grid-item-height: 300px;
             }
 
             .container {
@@ -21,11 +24,16 @@
                 max-width: 896px;
             }
 
+            .container:not(.latest-post-wrapper) {
+                padding-bottom: 20px;
+            }
+
             .spinner-wrapper {
                 @apply(--layout-vertical);
                 @apply(--layout-center-center);
                 @apply(--layout-fit);
                 min-height: 50vh;
+                max-height: 50vh;
             }
 
             .post-wrapper {
@@ -34,21 +42,75 @@
 
             .post-meta {
                 margin-bottom: 20px;
-                padding: 40px 0 20px;
+                padding: 30px 0 20px;
                 font-size: 13px;
                 color: var(--secondary-text-color);
                 border-bottom: 1px solid var(--divider-color);
             }
+
+            .latest-post-wrapper {
+                @apply(--layout-vertical);
+                padding-right: var(--grid-gutter);
+                padding-left: var(--grid-gutter);
+            }
+
+            .latest-post {
+                @apply(--layout-flex);
+            }
+
+            .latest-post:nth-of-type(2) {
+                margin-top: 10px;
+            }
+
+            .latest-post-label {
+                margin: 0 var(--grid-gutter);
+                font-size: 14px;
+                color: var(--secondary-text-color);
+            }
+
+            .post {
+                @apply(--layout-vertical);
+                height: var(--grid-item-height);
+                margin: var(--grid-gutter) 0;
+                text-decoration: none;
+            }
+
+            .image {
+                height: 100%;
+                background: no-repeat 50% 50%;
+            }
+
+            .title {
+                @apply(--layout-horizontal);
+                @apply(--layout-center-center);
+                padding: 12px;
+                min-height: 42px;
+                font-size: 20px;
+                text-align: center;
+                letter-spacing: .8px;
+                line-height: 1.05;
+                color: #fff;
+            }
+
+            @media (min-width: 961px) {
+                .latest-post-wrapper {
+                    @apply(--layout-horizontal);
+                }
+
+                .latest-post:nth-of-type(2) {
+                    margin-top: 0;
+                    text-align: right;
+                }
+
+                .post {
+                    margin: var(--grid-gutter);
+                }
+            }
         </style>
-
-        <div class="spinner-wrapper">
-            <paper-spinner id="spinner" active></paper-spinner>
-        </div>
-
 
         <div id="animationWrapper">
             <div class="post-wrapper">
-                <div class="container post" cascaded>
+                <div class="container" cascaded>
                     <div class="post-meta">
                         <span>Posted: [[_post.date]]</span>
                     </div>
@@ -57,10 +119,44 @@
                         <div class="markdown-html"></div>
                     </marked-element>
                 </div>
+                <div class="container latest-post-wrapper">
+                    <div class="latest-post">
+                        <template is="dom-if" if="{{_latestPosts.0}}">
+                            <span class="latest-post-label">Next post</span>
+                            <a data-route="blog/[[_latestPosts.0.id]]" href="{$ baseurl $}/blog/[[_latestPosts.0.id]]" class="post" cascaded>
+                                <iron-image class="image" src="[[_latestPosts.0.image]]"
+                                            style$="background-color: [[_latestPosts.0.primaryColor]];" sizing="cover"
+                                            preload
+                                            fade></iron-image>
+                                <div class="title" style$="background-color: [[_latestPosts.0.secondaryColor]];">
+                                    [[_latestPosts.0.title]]
+                                </div>
+                            </a>
+                        </template>
+                    </div>
+                    <div class="latest-post">
+                        <template is="dom-if" if="[[_latestPosts.1]]">
+                            <span class="latest-post-label">Previous post</span>
+                            <a data-route="blog/[[_latestPosts.1.id]]" href="{$ baseurl $}/blog/[[_latestPosts.1.id]]" class="post" cascaded>
+                                <iron-image class="image" src="[[_latestPosts.1.image]]"
+                                            style$="background-color: [[_latestPosts.1.primaryColor]];" sizing="cover"
+                                            preload
+                                            fade></iron-image>
+                                <div class="title" style$="background-color: [[_latestPosts.1.secondaryColor]];">
+                                    [[_latestPosts.1.title}}
+                                </div>
+                            </a>
+                        </template>
+                    </div>
+                </div>
             </div>
 
             <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}"
                           cascaded></footer-block>
+        </div>
+
+        <div class="spinner-wrapper">
+            <paper-spinner id="spinner" active></paper-spinner>
         </div>
 
         <iron-ajax id="ajax" url="[[_postUrl]]" handle-as="text" last-response="{{postBody}}"
@@ -91,6 +187,10 @@
                         value: false
                     },
                     _post: Object,
+                    _latestPosts: {
+                        type: Array,
+                        value: []
+                    },
 
                     animationConfig: {
                         type: Object,
@@ -147,9 +247,16 @@
 
                 _postIdChanged: function () {
                     this.$.animationWrapper.style.opacity = 0;
+                    this.$.animationWrapper.style.display = 'none';
                     this.$.spinner.style.opacity = 1;
 
-                    this._post = app.findByProperty(this.posts, 'id', this.postId);
+                    var postIndex = app.getIndexByProperty(this.posts, 'id', this.postId);
+
+                    this._latestPosts[0] = postIndex > 0 ? this.posts[postIndex - 1] : null;
+                    this._latestPosts[1] = postIndex < this.posts.length - 1 ? this.posts[postIndex + 1] : null;
+                    this.notifyPath('_latestPosts', this._latestPosts.slice());
+
+                    this._post = this.posts[postIndex];
                     this.notifyPath('_post.date', new Date(this._post.posted).toDateString().slice(4));
                     this._postUrl = '{$ baseurl $}/posts/' + this._post.posted + '-' + this.postId + '.markdown';
                     this.$.ajax.generateRequest();
@@ -159,6 +266,7 @@
                     this._loaded = true;
                     this.async(function () {
                         this.$.animationWrapper.style.opacity = 1;
+                        this.$.animationWrapper.style.display = 'block';
                     }, 100);
                     this.playAnimation('postLoaded');
                 },

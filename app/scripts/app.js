@@ -24,10 +24,10 @@
     // Scroll page to top and expand header
     app.scrollPageToTop = () => document.getElementById('mainContainer').scrollTop = 0;
     app.generateClass = (value) => value.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-    app.findByProperty = (array, property, value) => {
+    app.getIndexByProperty = (array, property, value) => {
         for (let i = 0, length = array.length; i < length; i++) {
             if (array[i][property] === value) {
-                return array[i];
+                return i;
             }
         }
     };

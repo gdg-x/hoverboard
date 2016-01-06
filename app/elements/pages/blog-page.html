@@ -42,10 +42,7 @@
 
             .image {
                 height: 100%;
-                width: 100%;
-                background-size: cover;
-                background-position: 50% 50%;
-                background-repeat: no-repeat;
+                background: no-repeat 50% 50%;
             }
 
             .title {
@@ -61,11 +58,11 @@
             }
 
             @media (max-width: 960px) {
-                :host .container {
+                .container {
                     max-width: none;
                     padding: 0 var(--grid-gutter);
                 }
-                :host .post {
+                .post {
                     width: 100% !important;
                     height: var(--grid-item-height) !important;
                     margin: var(--grid-gutter) 0;
@@ -74,7 +71,7 @@
         </style>
         <div class="container">
             <template is="dom-repeat" items="[[posts]]" as="post" on-dom-change="_updateCascadedNodes">
-                <a data-route="blog/[[post.id]]" href="/blog/[[post.id]]" class="post" cascaded>
+                <a data-route="blog/[[post.id]]" href="{$ baseurl $}/blog/[[post.id]]" class="post" cascaded>
                     <iron-image class="image" src="[[post.image]]" style$="background-color: [[post.primaryColor]];" sizing="cover" preload fade></iron-image>
                     <div class="title" style$="background-color: [[post.secondaryColor]];">[[post.title]]</div>
                 </a>

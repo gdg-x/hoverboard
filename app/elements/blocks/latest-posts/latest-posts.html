@@ -58,7 +58,7 @@
                 _postsChanged() {
                     let temp = this.posts.reverse().slice(0, 2);
                     for (let i = 0, len = temp.length; i < len; i++) {
-                        temp[i].url = '/blog/' + temp[i].id;
+                        temp[i].url = '{$ baseurl $}/blog/' + temp[i].id;
                         temp[i].dataRoute = 'blog/' + temp[i].id;
                     }
                     this.news = temp;
