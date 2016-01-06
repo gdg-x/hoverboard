@@ -9,7 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 var primaryColorName = 'indigo',
     accentColorName  = 'pink',
-    textColorName    = 'grey',
+    themeMode        = 'light', // or dark
 
     colors = require('./colors'),
     defaultPrimaryColor = colors['paper-' + primaryColorName + '-500'],
@@ -19,7 +19,7 @@ module.exports = {
   global: {
     primaryColorName: primaryColorName,
     accentColorName: accentColorName,
-    textColorName: textColorName
+    themeMode: themeMode
   },
 
   // Web Application Manifest - manifest.json

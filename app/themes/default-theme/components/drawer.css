@@ -16,20 +16,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     height: 100%;
 
     @media (--md-viewport) {
-      border-right: 1px solid rgba(0, 0, 0, var(--dark-divider-opacity));
+      border-right: 1px solid var(--divider-color);
     }
   }
 
   @nest &-header {
-    background-color: var(--secondary-background-color);
-    border-bottom: 1px solid rgba(0, 0, 0, var(--dark-divider-opacity));
-    color: var(--secondary-text-color);
+    background-color: var(--background-color);
+    border-bottom: 1px solid var(--divider-color);
+    color: var(--secondary-color);
 
     @media (--md-viewport) {
       background-color: var(--dark-primary-color);
       border: 0 !important;
       box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
-      color: var(--text-primary-color);
+      color: var(--text-dark-primary-color);
     }
   }
 
@@ -38,11 +38,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   @nest &-widget {
-    background-color: var(--secondary-background-color);
+    background-color: var(--background-color);
     padding: 16px 0;
 
     @nest &--bottom {
-      border-top: 1px solid rgba(0, 0, 0, var(--dark-divider-opacity));
+      border-top: 1px solid var(--divider-color);
     }
   }
 }

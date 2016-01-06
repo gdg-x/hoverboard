@@ -29,7 +29,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   @nest &-paper {
-    background: var(--secondary-background-color);
+    background: var(--background-color);
     border-radius: 2px;
     height: 100%;
     margin-bottom: 16px;

@@ -13,10 +13,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 .Toast {
   @apply(--paper-font-body1);
+
   @nest &-button {
     @apply(--paper-font-button);
+
     color: var(--accent-color);
     margin-left: 24px;
+
     @media(--md-viewport) {
       margin-left: 48px;
     }

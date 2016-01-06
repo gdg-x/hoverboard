@@ -10,11 +10,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 /** @define Main */
 
 .Main {
-  background-color: var(--primary-background-color);
+  background-color: var(--paper-grey-50);
 
   @nest &-content {
     @apply(--paper-font-body1);
-    color: var(--primary-text-color);
+    color: var(--text-color);
     @media (--md-viewport) {
       @apply(--paper-font-body2);
       padding: 48px 64px;
@@ -32,7 +32,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   @nest &-headerButton {
     /* postcss-bem-linter: ignore */
-    --paper-icon-button-ink-color: var(--text-primary-color);
+    --paper-icon-button-ink-color: var(--text-dark-primary-color);
   }
 
   @nest &-headerTopBar {

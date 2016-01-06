@@ -15,7 +15,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   @nest &-drawer {
-    background-color: var(--secondary-background-color);
+    background-color: var(--background-color);
     bottom: 0;
     display: none;
     left: 0;
@@ -31,14 +31,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   @nest &-drawerContent {
-    border-right: 1px solid rgba(0, 0, 0, var(--dark-divider-opacity));
+    border-right: 1px solid var(--divider-color);
     height: 100%;
   }
 
   @nest &-drawerHeader {
     background-color: var(--dark-primary-color);
     box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
-    color: var(--text-primary-color);
+    color: var(--text-dark-primary-color);
     display: block;
     height: 64px;
   }
@@ -60,7 +60,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   @nest &-main {
-    background-color: var(--primary-background-color);
+    background-color: var(--paper-grey-50);
     bottom: 0;
     left: 0;
     overflow: hidden;
@@ -74,9 +74,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   @nest &-mainHeader {
-    background-color: var(--default-primary-color);
+    background-color: var(--primary-color);
     box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
-    color: var(--text-primary-color);
     height: calc(56px * 3);
     left: 0;
     position: relative;
