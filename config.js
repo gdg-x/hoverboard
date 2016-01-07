@@ -21,7 +21,7 @@ module.exports = {
     browser: 'default', // or ["google chrome", "firefox"]
     https: false, // Enable https for localhost development.
     notify: false, // The small pop-over notifications in the browser.
-    port: 3000,
+    port: process.env.PORT || 3000, // Environment variable $PORT is for Cloud9 IDE
     ui: {
       port: 3001
     }
