@@ -1,0 +1,129 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../../../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../../bower_components/paper-tabs/paper-tabs.html">
+
+<dom-module id="hero-toolbar">
+    <template>
+        <style include="shared-styles"></style>
+        <style>
+            :host {
+                display: block;
+                background: var(--default-primary-color);
+                color: var(--text-primary-color);
+                --paper-toolbar-background: transparent;
+                --tab-text-color: var(--text-primary-color);
+                --paper-tabs-selection-bar-color: var(--text-primary-color);
+            }
+
+            .container {
+                padding-top: 0;
+                padding-bottom: 10px;
+            }
+
+            .logo-wrapper {
+                @apply(--layout-flex);
+            }
+
+            .logo {
+                margin-top: 7px;
+                height: 40px;
+            }
+
+            .nav-link {
+                @apply(--layout-horizontal);
+                @apply(--layout-center-center);
+            }
+
+            paper-tabs a {
+                color: var(--tab-text-color);
+            }
+
+            paper-tab {
+                flex: none;
+                padding: 0 10px;
+            }
+
+            .hero-title {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                pointer-events: none;
+                font-size: 20px;
+            }
+
+            @media (min-width: 961px) {
+                .hero-title {
+                    font-size: 42px;
+                }
+            }
+        </style>
+        <div class="container">
+            <paper-toolbar class="tall">
+                <paper-icon-button class="menu-toggle" icon="icons:menu" on-tap="togglePanel"
+                                   hidden$="{{!smallScreen}}"></paper-icon-button>
+                <div class="logo-wrapper">
+                    <a data-route="home" href="{$ baseurl $}/" hidden$="{{smallScreen}}">
+                        <img class="logo" src="{$ baseurl $}/images/logo-white.svg" alt="{$ title $}">
+                    </a>
+                </div>
+                <paper-tabs attr-for-selected="data-route" selected="{{route}}" hidden$="{{smallScreen}}" noink>
+                    {% for nav in navigation %}
+                    <paper-tab data-route="{$ nav.route $}" class="text-u-c" link>
+                        <a href="{$ nav.permalink $}" class="nav-link">{$ nav.text $}</a>
+                    </paper-tab>
+                    {% endfor %}
+                </paper-tabs>
+                <div class="bottom"><h3 class="hero-title">[[title]]</h3></div>
+            </paper-toolbar>
+        </div>
+        <iron-media-query query="(max-width: 599px)" query-matches="{{smallScreen}}"></iron-media-query>
+    </template>
+    <script>
+        (function () {
+            'use strict';
+
+            class HeroToolbar {
+                beforeRegister() {
+                    let is = this.constructor.name.replace(/\W+/g, '-')
+                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+                    this.is = is;
+                    this.properties = {
+                        route: {
+                            type: String,
+                            notify: true
+                        },
+                        title: {
+                            type: String,
+                            value: 'Home'
+                        },
+                        hideLogo: Boolean,
+                        backgroundColor: String,
+                        fontColor: String,
+                        tabFontColor: String,
+                        tabBarColor: String
+                    };
+                    this.observers = ['_stylesChanged(backgroundColor, fontColor, tabFontColor, tabBarColor)'];
+                }
+
+                togglePanel() {
+                    document.querySelector('#paperDrawerPanel').togglePanel();
+                }
+
+                _stylesChanged(backgroundColor, fontColor, tabFontColor, tabBarColor) {
+                    this.style.color = fontColor;
+                    this.style.background = backgroundColor;
+                    this.customStyle['--tab-text-color'] = tabFontColor;
+                    this.customStyle['--paper-tabs-selection-bar-color'] = tabBarColor;
+                    this.updateStyles();
+                }
+
+            }
+
+            Polymer(HeroToolbar);
+        })();
+    </script>
+</dom-module>

@@ -10,8 +10,14 @@ body, .markdown-html {
     overflow: hidden;
 }
 
-h1, h2, h3, h4,
-.markdown-html h1, .markdown-html h2, .markdown-html h3, .markdown-html h4 {
+h1,
+h2,
+h3,
+h4,
+.markdown-html h1,
+.markdown-html h2,
+.markdown-html h3,
+.markdown-html h4 {
     margin: 0;
     font-weight: 300;
 }

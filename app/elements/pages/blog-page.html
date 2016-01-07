@@ -95,6 +95,22 @@
 
             properties: {
                 posts: Array,
+                selected: {
+                    type: Boolean,
+                    observer: 'updateHeroSettings'
+                },
+                heroSettings: {
+                    type: Object,
+                    notify: true
+                },
+                _heroSettings: {
+                    type: Object,
+                    /* jshint ignore:start */
+                    value: function () {
+                        return {% for nav in navigation %}{% if nav.route == 'blog' %}{$ nav.heroSettings | dump $}{% endif %}{% endfor %};
+                    }
+                    /* jshint ignore:end */
+                },
 
                 animationConfig: {
                     type: Object,
@@ -118,7 +134,7 @@
                             'exit': [{
                                 name: 'cascaded-animation',
                                 animation: 'transform-animation',
-                                transformTo: 'translate3d(0, 100%, 0)',
+                                transformTo: 'translate3d(0, 100%, 0)'
                             }, {
                                 name: 'fade-out-animation',
                                 animation: 'fade-out-animation',
@@ -127,6 +143,14 @@
                         };
                     }
                 }
+            },
+
+            observers: [
+              'updateHeroSettings(selected)'
+            ],
+
+            updateHeroSettings: function() {
+                this.heroSettings = this.selected ? this._heroSettings : this.heroSettings;
             },
 
             _updateCascadedNodes: function() {

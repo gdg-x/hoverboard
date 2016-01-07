@@ -47,6 +47,22 @@
                     people: Array,
                     posts: Array,
                     logos: Array,
+                    selected: {
+                        type: Boolean,
+                        observer: 'updateHeroSettings'
+                    },
+                    heroSettings: {
+                        type: Object,
+                        notify: true
+                    },
+                    _heroSettings: {
+                        type: Object,
+                        /* jshint ignore:start */
+                        value: function () {
+                            return {% for nav in navigation %}{% if nav.route == 'home' %}{$ nav.heroSettings | dump $}{% endif %}{% endfor %};
+                        }
+                        /* jshint ignore:end */
+                    },
 
                     animationConfig: {
                         type: Object,
@@ -83,6 +99,10 @@
                             };
                         }
                     }
+                },
+
+                updateHeroSettings: function() {
+                    this.heroSettings = this.selected ? this._heroSettings : this.heroSettings;
                 }
             });
         })();

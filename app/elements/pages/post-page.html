@@ -182,6 +182,10 @@
                         observer: '_postIdChanged'
                     },
                     posts: Array,
+                    heroSettings: {
+                        type: Object,
+                        notify: true
+                    },
                     _loaded: {
                         type: Boolean,
                         value: false
@@ -258,6 +262,13 @@
 
                     this._post = this.posts[postIndex];
                     this.notifyPath('_post.date', new Date(this._post.posted).toDateString().slice(4));
+                    this.heroSettings = {
+                        title: this._post.title,
+                        backgroundColor: '#03A9F4',
+                        fontColor: '#FFFFFF',
+                        tabFontColor: '#FFFFFF',
+                        tabBarColor: '#FFFFFF'
+                    };
                     this._postUrl = '{$ baseurl $}/posts/' + this._post.posted + '-' + this.postId + '.markdown';
                     this.$.ajax.generateRequest();
                 },
