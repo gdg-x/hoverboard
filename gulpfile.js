@@ -219,7 +219,7 @@ gulp.task('serve', ['images', 'js', 'lint', 'lint-js', 'manifest', 'styles'], fu
     https: config.browserSync.https,
     notify: config.browserSync.notify,
     port: config.browserSync.port,
-    logPrefix: 'PSK Plus',
+    logPrefix: 'PSK+',
     snippetOptions: {
       rule: {
         match: '<span id="browser-sync-binding"></span>',
@@ -256,7 +256,7 @@ gulp.task('serve:dist', ['default'], function() {
     https: config.browserSync.https,
     notify: config.browserSync.notify,
     port: config.browserSync.port,
-    logPrefix: 'PSK Plus',
+    logPrefix: 'PSK+',
     snippetOptions: {
       rule: {
         match: '<span id="browser-sync-binding"></span>',
