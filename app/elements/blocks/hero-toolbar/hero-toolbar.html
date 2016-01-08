@@ -12,11 +12,26 @@
         <style>
             :host {
                 display: block;
+                position: relative;
                 background: var(--default-primary-color);
-                color: var(--text-primary-color);
+                --hero-color: var(--text-primary-color) color: var(--hero-color);
+                --paper-toolbar-color: var(--hero-color);
                 --paper-toolbar-background: transparent;
+                --paper-toolbar-height: 120px;
                 --tab-text-color: var(--text-primary-color);
                 --paper-tabs-selection-bar-color: var(--text-primary-color);
+            }
+
+            .toolbar-image {
+                @apply(--layout-fit);
+                width: 100%;
+                background-size: cover;
+            }
+
+            .image-overlay {
+                @apply(--layout-fit);
+                background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.7) 140%);
+                height: 100%;
             }
 
             .container {
@@ -56,15 +71,22 @@
             }
 
             @media (min-width: 961px) {
+                .container {
+                    padding-bottom: 20px;
+                }
                 .hero-title {
                     font-size: 42px;
                 }
+                paper-toolbar > * {
+                    @apply(--layout-start);
+                }
             }
         </style>
+        <iron-image class="placeholder-color toolbar-image" src="[[backgroundImage]]" style$="background-color: [[backgroundColor]];" sizing="cover" preload fade></iron-image>
+        <div class="image-overlay" hidden$={{!backgroundImage}}></div>
         <div class="container">
             <paper-toolbar class="tall">
-                <paper-icon-button class="menu-toggle" icon="icons:menu" on-tap="togglePanel"
-                                   hidden$="{{!smallScreen}}"></paper-icon-button>
+                <paper-icon-button class="menu-toggle" icon="icons:menu" on-tap="togglePanel" hidden$="{{!smallScreen}}"></paper-icon-button>
                 <div class="logo-wrapper">
                     <a data-route="home" href="{$ baseurl $}/" hidden$="{{smallScreen}}">
                         <img class="logo" src="{$ baseurl $}/images/logo-white.svg" alt="{$ title $}">
@@ -77,13 +99,15 @@
                     </paper-tab>
                     {% endfor %}
                 </paper-tabs>
-                <div class="bottom"><h3 class="hero-title">[[title]]</h3></div>
+                <div class="bottom">
+                    <h3 class="hero-title">[[title]]</h3>
+                </div>
             </paper-toolbar>
         </div>
         <iron-media-query query="(max-width: 599px)" query-matches="{{smallScreen}}"></iron-media-query>
     </template>
     <script>
-        (function () {
+        (function() {
             'use strict';
 
             class HeroToolbar {
@@ -102,20 +126,20 @@
                         },
                         hideLogo: Boolean,
                         backgroundColor: String,
+                        backgroundImage: String,
                         fontColor: String,
                         tabFontColor: String,
                         tabBarColor: String
                     };
-                    this.observers = ['_stylesChanged(backgroundColor, fontColor, tabFontColor, tabBarColor)'];
+                    this.observers = ['_stylesChanged(fontColor, tabFontColor, tabBarColor)'];
                 }
 
                 togglePanel() {
                     document.querySelector('#paperDrawerPanel').togglePanel();
                 }
 
-                _stylesChanged(backgroundColor, fontColor, tabFontColor, tabBarColor) {
-                    this.style.color = fontColor;
-                    this.style.background = backgroundColor;
+                _stylesChanged(fontColor, tabFontColor, tabBarColor) {
+                    this.customStyle['--hero-color'] = fontColor;
                     this.customStyle['--tab-text-color'] = tabFontColor;
                     this.customStyle['--paper-tabs-selection-bar-color'] = tabBarColor;
                     this.updateStyles();
