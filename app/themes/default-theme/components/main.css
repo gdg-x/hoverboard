@@ -19,6 +19,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       @apply(--paper-font-body2);
       padding: 48px 64px;
     }
+    
+    @nest & a {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
   }
 
   @nest &-header {

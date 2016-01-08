@@ -20,16 +20,16 @@ for further information on custom CSS properties.
    http://www.google.com/design/spec/style/color.html */
 
 /* Light background theme */
---light-theme-primary-background-color:   #fff;                     /* Cards / Dialogs */
---light-theme-secondary-background-color: var(--paper-grey-50);
+--light-theme-primary-background-color:   #fff;                     /* Cards / Dialogs background */
+--light-theme-secondary-background-color: var(--paper-grey-50);     /* Main background */
 --light-theme-primary-text-color:         rgba(0, 0, 0, .87);
 --light-theme-secondary-text-color:       rgba(0, 0, 0, .54);       /* Secondary text / Icons */
 --light-theme-disabled-text-color:        rgba(0, 0, 0, .38);       /* Disabled / Hint text */
 --light-theme-divider-color:              rgba(0, 0, 0, .12);
 
 /* Dark background theme */
---dark-theme-primary-background-color:    var(--paper-grey-800);    /* Cards / Dialogs */
---dark-theme-secondary-background-color:  #303030;
+--dark-theme-primary-background-color:    var(--paper-grey-800);    /* Cards / Dialogs background */
+--dark-theme-secondary-background-color:  #303030;                  /* Main background */
 --dark-theme-primary-text-color:          rgba(255, 255, 255, .9);
 --dark-theme-secondary-text-color:        rgba(255, 255, 255, .7);  /* Secondary text / Icons */
 --dark-theme-disabled-text-color:         rgba(255, 255, 255, .3);  /* Disabled / Hint text */
@@ -43,7 +43,7 @@ for further information on custom CSS properties.
 --divider-color:              var(--$(themeMode)-theme-divider-color);
 
 /* Primary colors */
---primary-color:              var(--paper-$(primaryColorName)-500); /* App bar */
+--primary-color:              var(--paper-$(primaryColorName)-500); /* Header bar */
 --light-primary-color:        var(--paper-$(primaryColorName)-100);
 --dark-primary-color:         var(--paper-$(primaryColorName)-700);
 --text-primary-color:         rgba(255, 255, 255, .87);             /* Text / Icons */
