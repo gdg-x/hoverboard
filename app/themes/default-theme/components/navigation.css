@@ -12,12 +12,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 .Navigation {
   /* postcss-bem-linter: ignore */
   --paper-menu-selected-item: {
-    color: var(--primary-color);
+    color: var(--accent-color);
   };
 
   /* postcss-bem-linter: ignore */
   --paper-menu-focused-item-after: {
-    background-color: var(--disabled-color);
+    background-color: var(--disabled-text-color);
   };
 
   @nest &-icon {
@@ -29,10 +29,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     @apply(--paper-font-body2);
     @apply(--layout-horizontal);
     @apply(--layout-center);
-    text-decoration: none;
-    color: var(--secondary-color);
+
+    color: var(--secondary-text-color);
     min-height: 48px;
     padding: 0 24px;
+    text-decoration: none;
   }
 
   @nest &-text {

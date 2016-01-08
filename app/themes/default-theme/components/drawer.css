@@ -13,6 +13,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   @nest &-content {
     @apply(--layout-vertical);
 
+    background-color: var(--primary-background-color);
     height: 100%;
 
     @media (--md-viewport) {
@@ -21,9 +22,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   @nest &-header {
-    background-color: var(--background-color);
+    background-color: var(--primary-background-color);
     border-bottom: 1px solid var(--divider-color);
-    color: var(--secondary-color);
+    color: var(--secondary-text-color);
 
     @media (--md-viewport) {
       background-color: var(--dark-primary-color);
@@ -38,7 +39,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   @nest &-widget {
-    background-color: var(--background-color);
     padding: 16px 0;
 
     @nest &--bottom {

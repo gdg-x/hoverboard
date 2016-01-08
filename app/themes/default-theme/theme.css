@@ -16,6 +16,11 @@ body {
   @apply(--layout-vertical);
 }
 
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
 @import 'breakpoints';
 @import 'mixins';
 

@@ -20,48 +20,47 @@ for further information on custom CSS properties.
    http://www.google.com/design/spec/style/color.html */
 
 /* Light background theme */
---light-theme-background-color: #fff;
---light-theme-base-color:       #000;
---light-theme-text-color:       rgba(0, 0, 0, .87);
---light-theme-secondary-color:  rgba(0, 0, 0, .54); /* Secondary text / Icons */
---light-theme-disabled-color:   rgba(0, 0, 0, .38); /* Disabled / Hint text */
---light-theme-divider-color:    rgba(0, 0, 0, .12);
+--light-theme-primary-background-color:   #fff;
+--light-theme-secondary-background-color: var(--paper-grey-50);
+--light-theme-base-color:                 #000;
+--light-theme-primary-text-color:         rgba(0, 0, 0, .87);
+--light-theme-secondary-text-color:       rgba(0, 0, 0, .54); /* Secondary text / Icons */
+--light-theme-disabled-text-color:        rgba(0, 0, 0, .38); /* Disabled / Hint text */
+--light-theme-divider-color:              rgba(0, 0, 0, .12);
 
 /* Dark background theme */
---dark-theme-background-color:  var(--paper-grey-900);
---dark-theme-base-color:        #fff;
---dark-theme-text-color:        #fff;
---dark-theme-secondary-color:   rgba(255, 255, 255, .7); /* Secondary text / Icons */
---dark-theme-disabled-color:    rgba(255, 255, 255, .3); /* Disabled / Hint text */
---dark-theme-divider-color:     rgba(255, 255, 255, .12);
+--dark-theme-primary-background-color:    var(--paper-grey-800);
+--dark-theme-secondary-background-color:  #303030;
+--dark-theme-base-color:                  #fff;
+--dark-theme-primary-text-color:          rgba(255, 255, 255, .9);
+--dark-theme-secondary-text-color:        rgba(255, 255, 255, .7); /* Secondary text / Icons */
+--dark-theme-disabled-text-color:         rgba(255, 255, 255, .3); /* Disabled / Hint text */
+--dark-theme-divider-color:               rgba(255, 255, 255, .12);
 
---background-color:             var(--$(themeMode)-theme-background-color);
---base-color:                   var(--$(themeMode)-theme-base-color);
---text-color:                   var(--$(themeMode)-theme-text-color);
---secondary-color:              var(--$(themeMode)-theme-secondary-color);
---disabled-color:               var(--$(themeMode)-theme-disabled-color);
---divider-color:                var(--$(themeMode)-theme-divider-color);
+--primary-background-color:   var(--$(themeMode)-theme-primary-background-color);
+--secondary-background-color: var(--$(themeMode)-theme-secondary-background-color);
+--base-color:                 var(--$(themeMode)-theme-base-color);
+--primary-text-color:         var(--$(themeMode)-theme-primary-text-color);
+--secondary-text-color:       var(--$(themeMode)-theme-secondary-text-color);
+--disabled-text-color:        var(--$(themeMode)-theme-disabled-text-color);
+--divider-color:              var(--$(themeMode)-theme-divider-color);
 
 /* Primary colors */
---primary-color:                var(--paper-$(primaryColorName)-500);
---light-primary-color:          var(--paper-$(primaryColorName)-100);
---dark-primary-color:           var(--paper-$(primaryColorName)-700);
---text-primary-color:           rgba(255, 255, 255, .87); /* Text / Icons */
---text-light-primary-color:     rgba(0, 0, 0, .87); /* Text / Icons */
---text-dark-primary-color:      rgba(255, 255, 255, .87); /* Text / Icons */
+--primary-color:              var(--paper-$(primaryColorName)-500);
+--light-primary-color:        var(--paper-$(primaryColorName)-100);
+--dark-primary-color:         var(--paper-$(primaryColorName)-700);
+--text-primary-color:         rgba(255, 255, 255, .87); /* Text / Icons */
+--text-light-primary-color:   rgba(0, 0, 0, .87); /* Text / Icons */
+--text-dark-primary-color:    rgba(255, 255, 255, .87); /* Text / Icons */
 
 /* Accent colors */
---accent-color:                 var(--paper-$(accentColorName)-a200);
---light-accent-color:           var(--paper-$(accentColorName)-a100);
---dark-accent-color:            var(--paper-$(accentColorName)-a400);
---text-accent-color:            #fff; /* Text / Icons */
---text-light-accent-color:      rgba(0, 0, 0, .87); /* Text / Icons */
---text-dark-accent-color:       rgba(255, 255, 255, .87); /* Text / Icons */
+--accent-color:               var(--paper-$(accentColorName)-a200);
+--light-accent-color:         var(--paper-$(accentColorName)-a100);
+--dark-accent-color:          var(--paper-$(accentColorName)-a400);
+--text-accent-color:          #fff; /* Text / Icons */
+--text-light-accent-color:    rgba(0, 0, 0, .87); /* Text / Icons */
+--text-dark-accent-color:     rgba(255, 255, 255, .87); /* Text / Icons */
 
 /* Deprecated values because of their confusing names.
    https://github.com/PolymerElements/paper-styles/blob/master/default-theme.html */
---primary-text-color:           var(--text-color);
---primary-background-color:     var(--background-color);
---secondary-text-color:         var(--secondary-color);
---disabled-text-color:          var(--disabled-color);
---default-primary-color:        var(--primary-color);
+--default-primary-color:      var(--primary-color);

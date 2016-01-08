@@ -15,7 +15,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   @nest &-drawer {
-    background-color: var(--background-color);
+    background-color: var(--primary-background-color);
     bottom: 0;
     display: none;
     left: 0;
@@ -60,7 +60,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   @nest &-main {
-    background-color: var(--paper-grey-50);
+    background-color: var(--secondary-background-color);
     bottom: 0;
     left: 0;
     overflow: hidden;

@@ -11,11 +11,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 .Page {
   @nest &-formInput {
+    --paper-input-container-focus-color: var(--accent-color);
+    
     width: 250px;
   }
 
   @nest &-title {
     @apply(--paper-font-display2);
+
     margin: 32px 0;
 
     @media (--sm-viewport) {
@@ -29,7 +32,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   @nest &-paper {
-    background: var(--background-color);
+    background-color: var(--primary-background-color);
     border-radius: 2px;
     height: 100%;
     margin-bottom: 16px;
