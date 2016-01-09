@@ -7,17 +7,21 @@
 [![bitHound Code](https://www.bithound.io/github/StartPolymer/polymer-starter-kit-plus/badges/code.svg)](https://www.bithound.io/github/StartPolymer/polymer-starter-kit-plus)
 [![Google+ Start Polymer](https://img.shields.io/badge/Google+-Start%20Polymer-dd4b39.svg)](https://plus.google.com/101148544618948882647)
 
-> A starting point for building web applications with Polymer 1.x
+> A starting point for building [Single-Page Applications](https://en.wikipedia.org/wiki/Single-page_application) with Polymer 1.x
 
-> Front-end template for [Static Web Applications](http://www.staticapps.org) - [Static App Use Case](https://divshot.com/blog/guest/how-static-apps-are-changing-startups/)
+> App template for [Static Web Applications](http://www.staticapps.org) - [Static app use case](https://divshot.com/blog/guest/how-static-apps-are-changing-startups/)
 
 > Polymer Starter Kit Plus is keeping up to date with
 [Polymer Starter Kit](https://github.com/PolymerElements/polymer-starter-kit) and following  
 [The 10 Commandments of Modern Web Application](https://gist.github.com/JosefJezek/8020bd8f02c4992e7d7d)
 
-:sparkles: [DEMO](https://polymer-starter-kit-plus.appspot.com) :sparkles:
+## Demo
 
-## Features
+See latest Polymer Starter Kit Plus Demo (from master) at https://polymer-starter-kit-plus.appspot.com
+
+The demo is running on Google App Engine with [HTTP 2.0 Push](https://github.com/GoogleChrome/http2push-gae)
+
+## :sparkles: Features :sparkles:
 
 - Progressive Web App template
  - [Building Progressive Web Apps with Polymer](https://www.youtube.com/watch?v=g7f1Az5fxgU&index=10&list=PLNYkxOF6rcICcHeQY02XLvoGL34rZFWZn)
@@ -25,14 +29,18 @@
 - [Polymer](http://polymer-project.org), [Paper](https://elements.polymer-project.org/browse?package=paper-elements), [Iron](https://elements.polymer-project.org/browse?package=iron-elements), [Neon](https://elements.polymer-project.org/browse?package=neon-elements) and
 [Start](https://github.com/StartPolymer/start-elements) elements
 - Offline setup through [Platinum](https://elements.polymer-project.org/browse?package=platinum-elements) - [Service Worker](http://www.html5rocks.com/en/tutorials/service-worker/introduction/) elements
-- [Default Theme](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/themes/default-theme) following [SUIT CSS](https://suitcss.github.io) - styling methodology for component-based UI development
+- Themes directory with [Default Theme](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/themes/default-theme)
+- Default Theme following [SUIT CSS](https://suitcss.github.io) - styling methodology for component-based UI development
+ - [Material Design Style](https://www.google.com/design/spec/style/color.html)
  - [Custom Fonts list](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/themes/default-theme/fonts.list)
  for download fonts from [Google Fonts](https://www.google.com/fonts)
  - [Custom Icons element](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/icons.html) for [Material Design Icons](https://materialdesignicons.com)
  - [CSS Variables](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/variables.css) including [Material Design Colors](https://www.google.com/design/spec/style/color.html) - [Material Palette](https://www.materialpalette.com)
  - [JS Variables](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/variables.js)
+ - Light and Dark background mode following Material Design
+ - Support more themes is ideal for [A/B testing](https://en.wikipedia.org/wiki/A/B_testing)
  for colors in index.html and manifest.json
-- [Material Design](http://www.google.com/design/spec/material-design/introduction.html) layout
+- [Material Design Layout](http://www.google.com/design/spec/layout/principles.html)
 - [PostCSS](https://github.com/postcss/postcss) for transforming styles with JS plugins
  - [Introduction to PostCSS](http://www.smashingmagazine.com/2015/12/introduction-to-postcss/)
  - [PostCSS is 2 times faster](https://github.com/postcss/benchmark) than [libsass](https://github.com/sass/libsass), which is written in C++
@@ -51,10 +59,10 @@
  - [Markdown](http://commonmark.org) for [static content](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/content)
 - Routing with [Page.js](https://visionmedia.github.io/page.js/)
 - [Config file](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/config.js)
-- [Gulp tasks](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/gulp-tasks) per file
+- [Gulp tasks](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/tasks) per file
 - [PageSpeed Insights](https://developers.google.com/speed/docs/insights/about) for performance tuning
 - Built-in preview server with [BrowserSync](http://www.browsersync.io)
-- [Vulcanize](https://github.com/Polymer/vulcanize) with [Content Security Policy CSP](https://github.com/PolymerLabs/crisper)
+- [Vulcanize](https://github.com/Polymer/vulcanize) with [Crisper](https://github.com/PolymerLabs/crisper) for [Content Security Policy](https://developer.chrome.com/apps/contentSecurityPolicy) compliance
 - Unit testing with [Web Component Tester](https://github.com/Polymer/web-component-tester)
 - [Google Analytics](http://www.google.com/analytics/) with [offline support](https://elements.polymer-project.org/elements/platinum-sw?active=platinum-sw-offline-analytics)
 - Quick deploy with 3 environments: Development, Staging, Production
@@ -62,17 +70,9 @@
 all files by appending content hash to their names
  - Hosting platforms:
     - [Firebase](https://www.firebase.com)
-    - [Google App Engine](https://cloud.google.com/appengine/) - free hosting with [HTTP2-over-QUIC](http://blog.chromium.org/2015/04/a-quic-update-on-googles-experimental.html) on custom domain
+    - [Google App Engine](https://cloud.google.com/appengine/) with [HTTP 2.0 Push](https://github.com/GoogleChrome/http2push-gae#pushing-content-from-a-static-handler)
     - [Google Cloud Storage](https://cloud.google.com/storage/)
 - [Recipes](/docs/README.md/) for Polymer performance and using Chrome Dev Editor
-
-### Tutorials
-
-Check out the Polymer Starter Kit tutorials on [polymer-project.org](https://www.polymer-project.org):
-
-* [Set up the PSK](https://www.polymer-project.org/1.0/docs/start/psk/set-up.html)
-* [Create a page](https://www.polymer-project.org/1.0/docs/start/psk/create-a-page.html)
-* [Deploy the PSK to the web](https://www.polymer-project.org/1.0/docs/start/psk/deploy.html)
 
 ## Getting Started
 
@@ -169,12 +169,12 @@ This installs the element sets (Paper, Iron, Platinum) and tools the starter kit
 
 #### Initializing your app
 
-- [Download newest script analytics.js](https://github.com/StartPolymer/polymer-starter-kit-plus#download-newest-script-analyticsjs)
-- [Download Google Fonts](https://github.com/StartPolymer/polymer-starter-kit-plus#download-google-fonts)
-
 ```sh
 gulp init
 ```
+
+Init task run [download:analytics task](https://github.com/StartPolymer/polymer-starter-kit-plus#download-newest-script-analyticsjs)
+and [download:fonts task](https://github.com/StartPolymer/polymer-starter-kit-plus#download-google-fonts)
 
 #### Serve / watch
 
