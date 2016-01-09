@@ -186,6 +186,10 @@
                         type: Object,
                         notify: true
                     },
+                    selected: {
+                        type: Boolean,
+                        observer: 'updateHeroSettings'
+                    },
                     _loaded: {
                         type: Boolean,
                         value: false
@@ -249,6 +253,19 @@
                     'neon-animation-finish': '_onNeonAnimationFinish'
                 },
 
+                updateHeroSettings: function() {
+                    if(this._post) {
+                        this.heroSettings = {
+                            title: this._post.title,
+                            backgroundColor: this._post.primaryColor,
+                            backgroundImage: this._post.image,
+                            fontColor: '#FFFFFF',
+                            tabFontColor: '#FFFFFF',
+                            tabBarColor: '#FFFFFF'
+                        };
+                    }
+                },
+
                 _postIdChanged: function () {
                     this.$.animationWrapper.style.opacity = 0;
                     this.$.animationWrapper.style.display = 'none';
@@ -262,13 +279,8 @@
 
                     this._post = this.posts[postIndex];
                     this.notifyPath('_post.date', new Date(this._post.posted).toDateString().slice(4));
-                    this.heroSettings = {
-                        title: this._post.title,
-                        backgroundColor: '#03A9F4',
-                        fontColor: '#FFFFFF',
-                        tabFontColor: '#FFFFFF',
-                        tabBarColor: '#FFFFFF'
-                    };
+                    this.updateHeroSettings();
+
                     this._postUrl = '{$ baseurl $}/posts/' + this._post.posted + '-' + this.postId + '.markdown';
                     this.$.ajax.generateRequest();
                 },

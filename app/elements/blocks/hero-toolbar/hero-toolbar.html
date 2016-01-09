@@ -14,7 +14,8 @@
                 display: block;
                 position: relative;
                 background: var(--default-primary-color);
-                --hero-color: var(--text-primary-color) color: var(--hero-color);
+                --hero-color: var(--text-primary-color);
+                color: var(--hero-color);
                 --paper-toolbar-color: var(--hero-color);
                 --paper-toolbar-background: transparent;
                 --paper-toolbar-height: 120px;
@@ -26,6 +27,7 @@
                 @apply(--layout-fit);
                 width: 100%;
                 background-size: cover;
+                background-position: 50% 50%;
             }
 
             .image-overlay {
@@ -74,19 +76,23 @@
                 .container {
                     padding-bottom: 20px;
                 }
+
                 .hero-title {
                     font-size: 42px;
                 }
+
                 paper-toolbar > * {
                     @apply(--layout-start);
                 }
             }
         </style>
-        <iron-image class="placeholder-color toolbar-image" src="[[backgroundImage]]" style$="background-color: [[backgroundColor]];" sizing="cover" preload fade></iron-image>
+        <iron-image class="placeholder-color toolbar-image" src="[[backgroundImage]]"
+                    style$="background-color: [[backgroundColor]];" sizing="cover" preload fade></iron-image>
         <div class="image-overlay" hidden$={{!backgroundImage}}></div>
         <div class="container">
             <paper-toolbar class="tall">
-                <paper-icon-button class="menu-toggle" icon="icons:menu" on-tap="togglePanel" hidden$="{{!smallScreen}}"></paper-icon-button>
+                <paper-icon-button class="menu-toggle" icon="icons:menu" on-tap="togglePanel"
+                                   hidden$="{{!smallScreen}}"></paper-icon-button>
                 <div class="logo-wrapper">
                     <a data-route="home" href="{$ baseurl $}/" hidden$="{{smallScreen}}">
                         <img class="logo" src="{$ baseurl $}/images/logo-white.svg" alt="{$ title $}">
@@ -107,7 +113,7 @@
         <iron-media-query query="(max-width: 599px)" query-matches="{{smallScreen}}"></iron-media-query>
     </template>
     <script>
-        (function() {
+        (function () {
             'use strict';
 
             class HeroToolbar {
