@@ -36,10 +36,9 @@ The demo is running on Google App Engine with [HTTP 2.0 Push](https://github.com
  for download fonts from [Google Fonts](https://www.google.com/fonts)
  - [Custom Icons element](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/icons.html) for [Material Design Icons](https://materialdesignicons.com)
  - [CSS Variables](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/variables.css) including [Material Design Colors](https://www.google.com/design/spec/style/color.html) - [Material Palette](https://www.materialpalette.com)
- - [JS Variables](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/variables.js)
+ - [JS Variables](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/themes/default-theme/variables.js) for colors in index.html and manifest.json
  - Light and Dark background mode following Material Design
  - Support more themes is ideal for [A/B testing](https://en.wikipedia.org/wiki/A/B_testing)
- for colors in index.html and manifest.json
 - [Material Design Layout](http://www.google.com/design/spec/layout/principles.html)
 - [PostCSS](https://github.com/postcss/postcss) for transforming styles with JS plugins
  - [Introduction to PostCSS](http://www.smashingmagazine.com/2015/12/introduction-to-postcss/)
