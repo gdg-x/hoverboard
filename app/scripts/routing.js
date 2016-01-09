@@ -8,6 +8,8 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
+/* global page */
+
 // We use Page.js for routing. This is a Micro
 // client-side router inspired by the Express router
 // More info: https://visionmedia.github.io/page.js/
