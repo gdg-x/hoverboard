@@ -1,6 +1,7 @@
 body, html {
     background: var(--default-backgroud-color);
 }
+
 body, .markdown-html {
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: var(--primary-text-color);
@@ -192,4 +193,24 @@ a, .anchor-like, .markdown-html a {
     margin-left: auto;
     max-width: 100%;
     display: block;
+}
+
+.page-header {
+    @media (--md-viewport) {
+        margin: -170px auto 0;
+        padding-bottom: 0;
+    }
+}
+
+.page-title {
+    margin-left: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 20px;
+    color: #FFFFFF;
+    pointer-events: none;
+    @media (--md-viewport) {
+        font-size: 42px;
+    }
 }

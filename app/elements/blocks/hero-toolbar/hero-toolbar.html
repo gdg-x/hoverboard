@@ -11,16 +11,19 @@
         <style include="shared-styles"></style>
         <style>
             :host {
-                display: block;
-                position: relative;
-                background: var(--default-primary-color);
+                --hero-background: var(--default-primary-color);
                 --hero-color: var(--text-primary-color);
-                color: var(--hero-color);
+
                 --paper-toolbar-color: var(--hero-color);
                 --paper-toolbar-background: transparent;
                 --paper-toolbar-height: 120px;
-                --tab-text-color: var(--text-primary-color);
+                --tab-text-color: var(--hero-color);
                 --paper-tabs-selection-bar-color: var(--text-primary-color);
+
+                display: block;
+                position: relative;
+                background: var(--hero-background);
+                color: var(--hero-color);
             }
 
             .toolbar-image {
@@ -57,6 +60,7 @@
 
             paper-tabs a {
                 color: var(--tab-text-color);
+                transition: color .7s
             }
 
             paper-tab {
@@ -87,7 +91,7 @@
             }
         </style>
         <iron-image class="placeholder-color toolbar-image" src="[[backgroundImage]]"
-                    style$="background-color: [[backgroundColor]];" sizing="cover" preload fade></iron-image>
+                    style$="background-color: [[backgroundColor]]; transition: background-color .5s;" sizing="cover" preload fade></iron-image>
         <div class="image-overlay" hidden$={{!backgroundImage}}></div>
         <div class="container">
             <paper-toolbar class="tall">
@@ -105,9 +109,6 @@
                     </paper-tab>
                     {% endfor %}
                 </paper-tabs>
-                <div class="bottom">
-                    <h3 class="hero-title">[[title]]</h3>
-                </div>
             </paper-toolbar>
         </div>
         <iron-media-query query="(max-width: 599px)" query-matches="{{smallScreen}}"></iron-media-query>
@@ -126,27 +127,21 @@
                             type: String,
                             notify: true
                         },
-                        title: {
-                            type: String,
-                            value: 'Home'
-                        },
                         hideLogo: Boolean,
                         backgroundColor: String,
                         backgroundImage: String,
                         fontColor: String,
-                        tabFontColor: String,
                         tabBarColor: String
                     };
-                    this.observers = ['_stylesChanged(fontColor, tabFontColor, tabBarColor)'];
+                    this.observers = ['_stylesChanged(fontColor, tabBarColor)'];
                 }
 
                 togglePanel() {
                     document.querySelector('#paperDrawerPanel').togglePanel();
                 }
 
-                _stylesChanged(fontColor, tabFontColor, tabBarColor) {
+                _stylesChanged(fontColor, tabBarColor) {
                     this.customStyle['--hero-color'] = fontColor;
-                    this.customStyle['--tab-text-color'] = tabFontColor;
                     this.customStyle['--paper-tabs-selection-bar-color'] = tabBarColor;
                     this.updateStyles();
                 }

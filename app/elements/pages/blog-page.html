@@ -12,6 +12,7 @@
 
 <dom-module id="blog-page">
     <template>
+        <style include="shared-styles"></style>
         <style>
             :host {
                 display: block;
@@ -20,7 +21,7 @@
                 --grid-item-height: calc(3 * var(--grid-column-width) / 4);
             }
 
-            .container {
+            .posts-container {
                 @apply(--layout-horizontal);
                 @apply(--layout-wrap);
                 margin: var(--grid-gutter) auto 40px;
@@ -58,10 +59,11 @@
             }
 
             @media (max-width: 960px) {
-                .container {
+                .posts-container {
                     max-width: none;
                     padding: 0 var(--grid-gutter);
                 }
+
                 .post {
                     width: 100% !important;
                     height: var(--grid-item-height) !important;
@@ -69,10 +71,16 @@
                 }
             }
         </style>
-        <div class="container">
+        <div class="container page-header" cascaded>
+            <div class="page-title">
+                <h3>Blog</h3>
+            </div>
+        </div>
+        <div class="container posts-container">
             <template is="dom-repeat" items="[[posts]]" as="post" on-dom-change="_updateCascadedNodes">
                 <a data-route="blog/[[post.id]]" href="{$ baseurl $}/blog/[[post.id]]" class="post" cascaded>
-                    <iron-image class="image" src="[[post.image]]" style$="background-color: [[post.primaryColor]];" sizing="cover" preload fade></iron-image>
+                    <iron-image class="image" src="[[post.image]]" style$="background-color: [[post.primaryColor]];"
+                                sizing="cover" preload fade></iron-image>
                     <div class="title" style$="background-color: [[post.secondaryColor]];">[[post.title]]</div>
                 </a>
             </template>
@@ -82,7 +90,7 @@
 </dom-module>
 
 <script>
-    (function() {
+    (function () {
         'use strict';
 
         Polymer({
@@ -114,7 +122,7 @@
 
                 animationConfig: {
                     type: Object,
-                    value: function() {
+                    value: function () {
                         return {
                             'entry': [{
                                 name: 'cascaded-animation',
@@ -146,14 +154,14 @@
             },
 
             observers: [
-              'updateHeroSettings(selected)'
+                'updateHeroSettings(selected)'
             ],
 
-            updateHeroSettings: function() {
+            updateHeroSettings: function () {
                 this.heroSettings = this.selected ? this._heroSettings : this.heroSettings;
             },
 
-            _updateCascadedNodes: function() {
+            _updateCascadedNodes: function () {
                 var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
                 var cascadedArray = Array.prototype.slice.call(cascaded);
                 this.animationConfig.entry[0].nodes = cascadedArray;

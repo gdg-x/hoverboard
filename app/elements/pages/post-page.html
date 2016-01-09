@@ -13,18 +13,17 @@
         <style>
             :host {
                 display: block;
-                position: relative;
 
                 --grid-gutter: 4px;
                 --grid-item-height: 300px;
             }
 
-            .container {
+            .post-wrapper > .container {
                 padding-top: 0;
                 max-width: 896px;
             }
 
-            .container:not(.latest-post-wrapper) {
+            .post-wrapper > .container:not(.latest-post-wrapper) {
                 padding-bottom: 20px;
             }
 
@@ -37,6 +36,7 @@
             }
 
             .post-wrapper {
+                margin-top: 52px;
                 background: #FFFFFF;
             }
 
@@ -107,7 +107,9 @@
                 }
             }
         </style>
-
+        <div id="pageHeader" class="container page-header">
+            <h3 class="page-title">[[_post.title]]</h3>
+        </div>
         <div id="animationWrapper">
             <div class="post-wrapper">
                 <div class="container" cascaded>
@@ -123,7 +125,8 @@
                     <div class="latest-post">
                         <template is="dom-if" if="{{_latestPosts.0}}">
                             <span class="latest-post-label">Next post</span>
-                            <a data-route="blog/[[_latestPosts.0.id]]" href="{$ baseurl $}/blog/[[_latestPosts.0.id]]" class="post" cascaded>
+                            <a data-route="blog/[[_latestPosts.0.id]]" href="{$ baseurl $}/blog/[[_latestPosts.0.id]]"
+                               class="post" cascaded>
                                 <iron-image class="image" src="[[_latestPosts.0.image]]"
                                             style$="background-color: [[_latestPosts.0.primaryColor]];" sizing="cover"
                                             preload
@@ -137,7 +140,8 @@
                     <div class="latest-post">
                         <template is="dom-if" if="[[_latestPosts.1]]">
                             <span class="latest-post-label">Previous post</span>
-                            <a data-route="blog/[[_latestPosts.1.id]]" href="{$ baseurl $}/blog/[[_latestPosts.1.id]]" class="post" cascaded>
+                            <a data-route="blog/[[_latestPosts.1.id]]" href="{$ baseurl $}/blog/[[_latestPosts.1.id]]"
+                               class="post" cascaded>
                                 <iron-image class="image" src="[[_latestPosts.1.image]]"
                                             style$="background-color: [[_latestPosts.1.primaryColor]];" sizing="cover"
                                             preload
@@ -253,14 +257,12 @@
                     'neon-animation-finish': '_onNeonAnimationFinish'
                 },
 
-                updateHeroSettings: function() {
-                    if(this._post) {
+                updateHeroSettings: function () {
+                    if (this._post) {
                         this.heroSettings = {
-                            title: this._post.title,
                             backgroundColor: this._post.primaryColor,
                             backgroundImage: this._post.image,
                             fontColor: '#FFFFFF',
-                            tabFontColor: '#FFFFFF',
                             tabBarColor: '#FFFFFF'
                         };
                     }
