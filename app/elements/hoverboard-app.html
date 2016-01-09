@@ -22,11 +22,9 @@
 
 <!-- Custom elements -->
 <link rel="import" href="app-data/app-data.html">
-<!--<link rel="import" href="blocks/hero-block/hero-block.html">-->
-<!--<link rel="import" href="blocks/hero-content/hero-content.html">-->
 <link rel="import" href="blocks/hero-toolbar/hero-toolbar.html">
 
-
+<!-- Custom pages -->
 <link rel="import" href="pages/home-page.html">
 <link rel="import" href="pages/blog-page.html">
 <link rel="import" href="pages/post-page.html">
@@ -39,32 +37,9 @@
             :host {
                 display: block;
             }
-            /*.logo {*/
-                /*height: 100px;*/
-                /*max-width: 100%;*/
-            /*}*/
-            /*.slogan,*/
-            /*.dates {*/
-                /*margin-top: 20px;*/
-                /*font-size: 17px;*/
-                /*font-weight: 400;*/
-                /*text-transform: uppercase;*/
-                /*letter-spacing: .09em;*/
-                /*line-height: 1;*/
-            /*}*/
-            /*.description {*/
-                /*margin-top: 20px;*/
-            /*}*/
-
-            /*.links {*/
-                /*margin: 40px 0 10px;*/
-            /*}*/
-
-            /*.right-section {*/
-                /*margin-top: 20px;*/
-            /*}*/
         </style>
-        <app-data speakers="{{speakers}}" sessions="{{sessions}}" posts="{{posts}}" partners="{{partners}}" schedule="{{schedule}}"></app-data>
+        <app-data speakers="{{speakers}}" sessions="{{sessions}}" posts="{{posts}}" partners="{{partners}}"
+                  schedule="{{schedule}}"></app-data>
 
         <paper-drawer-panel id="paperDrawerPanel" responsive-width="599px" force-narrow>
             <!-- Drawer Scroll Header Panel -->
@@ -83,9 +58,11 @@
                 <!-- Drawer Content -->
                 <!-- Navigation -->
                 <nav>
-                    <paper-menu class="Drawer-navigation list" attr-for-selected="data-route" selected="{{route}}" on-iron-select="_onDataRouteClick">
+                    <paper-menu class="Drawer-navigation list" attr-for-selected="data-route" selected="{{route}}"
+                                on-iron-select="_onDataRouteClick">
                         {% for nav in navigation %}
-                        <a class="layout horizontal center" data-route="{$ nav.route $}" href="{$ nav.permalink $}">{$ nav.text $}</a>
+                        <a class="layout horizontal center" data-route="{$ nav.route $}" href="{$ nav.permalink $}">{$
+                            nav.text $}</a>
                         {% endfor %}
                     </paper-menu>
                 </nav>
@@ -95,57 +72,26 @@
             <paper-scroll-header-panel class="Main scroll" main>
 
                 <hero-toolbar route="{{route}}" font-color="{{heroSettings.fontColor}}"
-                background-color="{{heroSettings.backgroundColor}}"
-                background-image="{{heroSettings.backgroundImage}}"
-                tab-bar-color="{{heroSettings.tabBarColor}}"></hero-toolbar>
-                <!--<hero-block route="{{route}}" font-color="{{_heroSettings.2}}" background-color="{{_heroSettings.0}}" tab-font-color="{{_heroSettings.3}}" tab-bar-color="{{_heroSettings.4}}" hide-logo="{{_equal(route, 'home')}}">-->
-                    <!--<template is="dom-if" if="{{_equal(route, 'home')}}">-->
-                        <!--<div class="top-section hero">-->
-                            <!--<div class="layout vertical-horizontal">-->
-                                <!--<div class="flex center-content-xs">-->
-                                    <!--<img class="logo" src="{$ baseurl $}/images/logo.svg" alt="GDG DevFest 2015">-->
-                                    <!--<p class="dates bold">October 23-24, Lviv</p>-->
-                                    <!--<p class="description">The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts</p>-->
-                                    <!--<p class="slogan">Think out of the box. Create what you want!</p>-->
-                                    <!--<div class="links layout horizontal align-pb-block">-->
-                                        <!--<paper-button noink on-tap="playVideo">-->
-                                            <!--Watch a video-->
-                                        <!--</paper-button>-->
-                                        <!--<a href="https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1" target="_blank">-->
-                                            <!--<paper-button class="colorful" raised>-->
-                                                <!--View photos-->
-                                            <!--</paper-button>-->
-                                        <!--</a>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                                <!--<div class="flex relative right-section">-->
-                                    <!--<iron-image class="fit" src="{$ baseurl $}/images/lviv.svg" sizing="contain"></iron-image>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</template>-->
-                    <!--<template is="dom-if" if="{{_equal(route, 'blog')}}">-->
-                        <!--<hero-content title="Blog"></hero-content>-->
-                    <!--</template>-->
-                    <!--&lt;!&ndash;<template is="dom-if" if="{{_equal(route, 'schedule')}}">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<hero-content title="Schedule"></hero-content>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</template>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<template is="dom-if" if="{{_equal(route, 'speakers')}}">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<hero-content title="Speakers"></hero-content>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</template>&ndash;&gt;-->
-                <!--</hero-block>-->
+                              background-color="{{heroSettings.backgroundColor}}"
+                              background-image="{{heroSettings.backgroundImage}}"
+                              tab-bar-color="{{heroSettings.tabBarColor}}"
+                              video="{{heroSettings.video}}"></hero-toolbar>
 
                 <!-- Main Content -->
-                <neon-animated-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}" selected-attribute="selected" animate-initial-selection>
-                    <home-page class="Page" data-route="home" people="{{speakers}}" posts="{{posts}}" logos="{{partners}}" hero-settings="{{heroSettings}}"></home-page>
-                    <blog-page class="Page" data-route="blog" posts="{{posts}}" hero-settings="{{heroSettings}}"></blog-page>
-                    <post-page class="Page" data-route="post" post-id="[[params.id]]" posts="{{posts}}" hero-settings="{{heroSettings}}"></post-page>
+                <neon-animated-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}"
+                                     selected-attribute="selected" animate-initial-selection>
+                    <home-page class="Page" data-route="home" people="{{speakers}}" posts="{{posts}}"
+                               logos="{{partners}}" hero-settings="{{heroSettings}}"></home-page>
+                    <blog-page class="Page" data-route="blog" posts="{{posts}}"
+                               hero-settings="{{heroSettings}}"></blog-page>
+                    <post-page class="Page" data-route="post" post-id="[[params.id]]" posts="{{posts}}"
+                               hero-settings="{{heroSettings}}"></post-page>
                 </neon-animated-pages>
             </paper-scroll-header-panel>
         </paper-drawer-panel>
     </template>
     <script>
-        (function() {
+        (function () {
             'use strict';
 
             class HoverboardApp {
@@ -160,20 +106,10 @@
                         }
                     };
                 }
+
                 _onDataRouteClick() {
                     this.$.paperDrawerPanel.closeDrawer();
                 }
-//                _routerChanged() {
-//                    if(this._stylesMap) {
-//                        this._heroSettings = this._stylesMap[this.route];
-//                    }
-//                }
-//                _equal(value1, value2) {
-//                    if(!Array.isArray(value2)) {
-//                        value2 = [].concat(value2);
-//                    }
-//                    return value2.indexOf(value1) !== -1;
-//                }
             }
 
             Polymer(HoverboardApp);

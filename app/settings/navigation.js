@@ -4,10 +4,15 @@ module.exports = {
         permalink: '/',
         text: 'Home',
         heroSettings: {
-            backgroundColor: '#FFFFFF',
-            backgroundImage: '',
-            fontColor: '#00BCD4',
-            tabBarColor: '#00BCD4'
+            backgroundColor: '#009688',
+            backgroundImage: '/images/backgrounds/home.png',
+            fontColor: '#FFFFFF',
+            tabBarColor: '#FFFFFF',
+            video: {
+                title: 'GDG DevFest Ukraine 2015',
+                youtubeId: '_yhIH9wb3hE',
+                text: 'Watch the promo-video'
+            }
         }
     }, {
         route: 'blog',

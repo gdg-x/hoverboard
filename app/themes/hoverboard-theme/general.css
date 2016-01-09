@@ -150,8 +150,10 @@ a, .anchor-like, .markdown-html a {
 }
 
 .full-dialog, .full-dialog > * {
+    @apply(--layout-fit);
     margin: 0;
     padding: 0;
+    position: fixed !important;
     background: rgba(0, 0, 0, .5);
 }
 
@@ -161,11 +163,15 @@ a, .anchor-like, .markdown-html a {
 }
 
 .navbar-overlay {
-    position: fixed !important;
-    background: rgba(0, 0, 0, .5) !important;
+    --paper-toolbar-height: 64px;
     text-transform: uppercase;
     z-index: 9;
     color: #ffffff;
+}
+
+.video {
+    @apply(--layout-fit);
+    padding: 0;
 }
 
 .align-pb-block {

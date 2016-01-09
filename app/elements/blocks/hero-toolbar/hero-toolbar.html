@@ -5,6 +5,7 @@
 <link rel="import" href="../../../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../../../bower_components/paper-dialog/paper-dialog.html">
 
 <dom-module id="hero-toolbar">
     <template>
@@ -17,6 +18,7 @@
                 --paper-toolbar-color: var(--hero-color);
                 --paper-toolbar-background: transparent;
                 --paper-toolbar-height: 120px;
+                --iron-icon-fill-color: var(--hero-color);
                 --tab-text-color: var(--hero-color);
                 --paper-tabs-selection-bar-color: var(--text-primary-color);
 
@@ -68,12 +70,16 @@
                 padding: 0 10px;
             }
 
-            .hero-title {
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                pointer-events: none;
-                font-size: 20px;
+            .play-video {
+                @apply(--layout-vertical);
+                @apply(--layout-center-center);
+                margin: 0 auto;
+                cursor: pointer;
+            }
+
+            .play-icon {
+                --iron-icon-width: 32px;
+                --iron-icon-height: 32px;
             }
 
             @media (min-width: 961px) {
@@ -81,17 +87,19 @@
                     padding-bottom: 20px;
                 }
 
-                .hero-title {
-                    font-size: 42px;
-                }
-
                 paper-toolbar > * {
                     @apply(--layout-start);
+                }
+
+                .play-icon {
+                    width: 48px;
+                    height: 48px;
                 }
             }
         </style>
         <iron-image class="placeholder-color toolbar-image" src="[[backgroundImage]]"
-                    style$="background-color: [[backgroundColor]]; transition: background-color .5s;" sizing="cover" preload fade></iron-image>
+                    style$="background-color: [[backgroundColor]]; transition: background-color .5s;" sizing="cover"
+                    preload fade></iron-image>
         <div class="image-overlay" hidden$={{!backgroundImage}}></div>
         <div class="container">
             <paper-toolbar class="tall">
@@ -109,8 +117,24 @@
                     </paper-tab>
                     {% endfor %}
                 </paper-tabs>
+
+                <div class="middle play-video" on-tap="openVideo" hidden$="[[!video]]">
+                    <iron-icon class="play-icon" icon="icons:play"></iron-icon>
+                    <span>[[video.text]]</span>
+                </div>
             </paper-toolbar>
         </div>
+
+        <paper-dialog id="videoDialog" class="full-dialog" entry-animation="scale-up-animation" exit-animation="scale-down-animation" modal>
+            <paper-toolbar class="navbar-overlay">
+                <paper-icon-button icon="icons:arrow-back" on-tap="closeVideo"></paper-icon-button>
+                <span class="title">[[video.title]]</span>
+            </paper-toolbar>
+            <div class="full-container">
+                <google-youtube id="video" class="video" video-id="[[video.youtubeId]]" width="100%" height="100%" autohide="1" autoplay="1" chromeless="true"></google-youtube>
+            </div>
+        </paper-dialog>
+
         <iron-media-query query="(max-width: 599px)" query-matches="{{smallScreen}}"></iron-media-query>
     </template>
     <script>
@@ -127,17 +151,37 @@
                             type: String,
                             notify: true
                         },
-                        hideLogo: Boolean,
                         backgroundColor: String,
                         backgroundImage: String,
                         fontColor: String,
-                        tabBarColor: String
+                        tabBarColor: String,
+                        video: Object
                     };
                     this.observers = ['_stylesChanged(fontColor, tabBarColor)'];
                 }
 
                 togglePanel() {
                     document.querySelector('#paperDrawerPanel').togglePanel();
+                }
+
+                openVideo() {
+                    this.fire('iron-signal', {
+                        name: 'track-event',
+                        data: {
+                            category: 'button',
+                            action: 'click',
+                            label: 'play ' + this.video.title,
+                            value: 1
+                        }
+                    });
+                    this.$.videoDialog.open();
+                    this.$.video.play();
+                }
+
+                closeVideo() {
+                    this.$.videoDialog.close();
+                    this.$.video.pause();
+                    this.$.video.seekTo(0);
                 }
 
                 _stylesChanged(fontColor, tabBarColor) {
