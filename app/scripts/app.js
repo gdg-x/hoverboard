@@ -34,8 +34,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     'import' in document.createElement('link') &&
     'content' in document.createElement('template'));
 
-  logger('Web Components Supported: ' + webComponentsSupported);
-
   function finishLazyLoading() {
     // (Optional) Use native Shadow DOM if it's available in the browser.
     // WARNING! This will mess up the page.js router which uses event delegation
@@ -72,12 +70,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   if (!webComponentsSupported) {
+    logger('Web Components aren\'t supported!');
     var script = document.createElement('script');
     script.async = true;
     script.src = 'bower_components/webcomponentsjs/webcomponents-lite.min.js';
     script.onload = finishLazyLoading;
     document.head.appendChild(script);
   } else {
+    logger('Web Components are supported!');
     finishLazyLoading();
   }
 
