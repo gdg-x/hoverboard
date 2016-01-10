@@ -202,6 +202,8 @@ a, .anchor-like, .markdown-html a {
 }
 
 .page-header {
+    margin: -90px auto 0;
+    padding-bottom: 20px;
     @media (--md-viewport) {
         margin: -170px auto 0;
         padding-bottom: 0;
