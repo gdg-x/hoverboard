@@ -43,30 +43,7 @@
 
         <paper-drawer-panel id="paperDrawerPanel" responsive-width="599px" force-narrow>
             <!-- Drawer Scroll Header Panel -->
-            <paper-scroll-header-panel class="Drawer" drawer>
-                <!-- Drawer Toolbar -->
-                <paper-toolbar class="tall">
-                    <div class="top">
-                        <img class="Drawer-logo" src="{$ baseurl $}/images/logo-white.svg" alt="{$ title $}">
-                    </div>
-                    <div class="bottom">
-                        <span class="Drawer-bottom">{$ dates $}
-                            <br>{$ location.short $}</span>
-                    </div>
-                </paper-toolbar>
-
-                <!-- Drawer Content -->
-                <!-- Navigation -->
-                <nav>
-                    <paper-menu class="Drawer-navigation list" attr-for-selected="data-route" selected="{{route}}"
-                                on-iron-select="_onDataRouteClick">
-                        {% for nav in navigation %}
-                        <a class="layout horizontal center" data-route="{$ nav.route $}" href="{$ nav.permalink $}">{$
-                            nav.text $}</a>
-                        {% endfor %}
-                    </paper-menu>
-                </nav>
-            </paper-scroll-header-panel>
+            {% include "drawer.html" %}
 
             <!-- Main Area -->
             <paper-scroll-header-panel class="Main scroll" main>

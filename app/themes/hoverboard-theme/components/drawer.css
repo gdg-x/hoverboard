@@ -8,8 +8,13 @@
         height: 40px;
     }
     @nest &-bottom {
-        font-size: .85em;
-        color: var(--text-primary-color)
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--text-primary-color);
+    }
+    @nest &-location {
+        display: block;
+        color: var(--dark-primary-color);
     }
     @nest &-navigation {
         background: var(--secondary-background-color);
@@ -24,5 +29,8 @@
         color: var(--primary-text-color);
         -webkit-font-smoothing: antialiased;
         text-rendering: optimizeLegibility;
+    }
+    @nest &-navigation a.selected {
+        background: #eaeaea;
     }
 }
