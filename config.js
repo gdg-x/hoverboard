@@ -1,3 +1,6 @@
+var execSync = require('child_process').execSync,
+    gitDescribe = execSync('git describe --tags').toString().replace(/\./g, '-');
+
 module.exports = {
   // Autoprefixer
   autoprefixer: {
@@ -51,7 +54,8 @@ module.exports = {
       },
       // Promote the deployed version to receive all traffic.
       // https://cloud.google.com/sdk/gcloud/reference/preview/app/deploy
-      promote: true
+      promote: true,
+      version: gitDescribe
     },
     // Google Cloud Storage
     // GCS requires Google Cloud SDK with gsutil to be installed and configured.
