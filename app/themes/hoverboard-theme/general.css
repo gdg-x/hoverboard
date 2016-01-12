@@ -125,10 +125,13 @@ a, .anchor-like, .markdown-html a {
 
 }
 .container .heading {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     font-size: 32px;
     text-transform: uppercase;
     letter-spacing: .05em;
+    @media (--md-viewport) {
+        margin-bottom: 40px;
+    }
 }
 
 .two-column-xs {
