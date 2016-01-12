@@ -184,8 +184,9 @@
 
                 closeVideo() {
                     this.$.videoDialog.close();
-                    this.$.video.pause();
+                    this.$.video.removeAttribute('autoplay');
                     this.$.video.seekTo(0);
+                    this.$.video.pause();
                 }
 
                 _stylesChanged(fontColor, tabBarColor) {
