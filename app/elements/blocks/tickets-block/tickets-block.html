@@ -1,7 +1,8 @@
-<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../../bower_components/paper-dialog/paper-dialog.html">
 
 <dom-module id="tickets-block">
     <template>
@@ -14,6 +15,8 @@
             }
 
             .container {
+                @apply(--layout-vertical);
+                @apply(--layout-wrap);
                 padding-bottom: 35px;
             }
 
@@ -23,8 +26,18 @@
                 font-weight: 200;
             }
 
+            .price-block-wrapper {
+                @apply(--layout-vertical);
+            }
+
             .price-block {
+                @apply(--layout-flex);
                 margin-bottom: 15px;
+                position: relative;
+            }
+
+            .price-block:not(:first-of-type) {
+                margin-top: 30px;
             }
 
             .sold-out > *:not(.sold-out-text) {
@@ -32,6 +45,9 @@
             }
 
             .sold-out-text {
+                @apply(--layout-vertical);
+                @apply(--layout-center-center);
+                @apply(--layout-fit);
                 font-size: 28px;
                 text-transform: uppercase;
             }
@@ -44,7 +60,6 @@
 
             .price {
                 font-size: 70px;
-                font-weight: 200;
             }
 
             .additional-info {
@@ -68,18 +83,28 @@
             paper-dialog .buttons {
                 color: initial;
             }
+
+            @media (min-width: 961px) {
+                .price-block-wrapper {
+                    @apply(--layout-horizontal);
+                }
+
+                .price-block:not(:first-of-type) {
+                    margin: 0;
+                }
+            }
         </style>
-        <div class="container wrap relative layout vertical text-center">
+        <div class="container text-center">
             <h4 class="heading">{$ ticketsBlock.title $}</h4>
-            <div class="price-block-wrapper flex layout vertical-horizontal">
+            <div class="price-block-wrapper">
                 {% for ticket in ticketsBlock.tickets %}
-                <div class="price-block flex text-center relative {% if ticket.soldOut %}sold-out{% endif %}">
+                <div class="price-block text-center {% if ticket.soldOut %}sold-out{% endif %}">
                     <span class="ticket-name block">{$ ticket.name $}</span>
                     <span class="price">{$ ticket.price $}</span>
                     <span class="currency">{$ ticket.currency $}</span>
                     <span class="additional-info block">{$ ticket.info $}</span>
                     {% if ticket.soldOut %}
-                    <div class="fit layout vertical center-center sold-out-text">
+                    <div class="sold-out-text">
                         <span>Sold Out</span>
                     </div>
                     {% endif %}
@@ -87,8 +112,9 @@
                 {% endfor %}
             </div>
             <span class="details">{$ ticketsBlock.details $}</span>
-            <div class="flex">
-                <paper-button class="white border-button open-dialog-button" on-tap="openTicketsDialog">Buy a ticket</paper-button>
+            <div class="block">
+                <paper-button class="white border-button open-dialog-button" on-tap="openTicketsDialog">Buy a ticket
+                </paper-button>
             </div>
         </div>
         <paper-dialog id="ticketsDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal>
@@ -99,7 +125,7 @@
         </paper-dialog>
     </template>
     <script>
-        (function() {
+        (function () {
             'use strict';
 
             class TicketsBlock {
@@ -108,6 +134,7 @@
                         .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
                     this.is = is;
                 }
+
                 openTicketsDialog() {
                     this.fire('iron-signal', {
                         name: 'track-event',
