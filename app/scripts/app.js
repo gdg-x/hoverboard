@@ -114,39 +114,4 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   });
 
-  // Main area's paper-scroll-header-panel custom condensing transformation of
-  // the headerTitle in the middle-container and the bottom title in the bottom-container.
-  // The headerTitle is moved to top and shrunk on condensing. The bottom sub title
-  // is shrunk to nothing on condensing.
-  window.addEventListener('paper-header-transform', e => {
-    let headerTitle = app.querySelector('.Main-headerTitle');
-    let headerSubTitle = app.querySelector('.Main-headerSubTitle');
-    let headerMiddleBar = app.querySelector('.Main-headerMiddleBar');
-    let headerBottomBar = app.querySelector('.Main-headerBottomBar');
-    let detail = e.detail;
-    let heightDiff = detail.height - detail.condensedHeight;
-    let yRatio = Math.min(1, detail.y / heightDiff);
-    let yRatio2 = Math.min(1, detail.y / (heightDiff + 30));
-    // headerTitle max size when condensed. The smaller the number the smaller the condensed size.
-    var maxMiddleScale = 0.70;
-    var auxHeight = heightDiff - detail.y;
-    var auxScale = heightDiff / (1 - maxMiddleScale);
-    var scaleMiddle = Math.max(maxMiddleScale, auxHeight / auxScale + maxMiddleScale);
-    var scaleBottom = 1 - yRatio;
-
-    // Move/translate headerMiddleContent and headerBottomContent
-    if (window.matchMedia('(min-width: 600px)').matches) {
-      Polymer.Base.transform(`translate3d(0,${yRatio2 * 100}%,0)`, headerMiddleBar);
-    } else {
-      Polymer.Base.transform(`translate3d(${yRatio * 18}px,${yRatio2 * 100}%,0)`,
-        headerMiddleBar);
-      Polymer.Base.transform(`translate3d(${yRatio * 18}px,0,0)`, headerBottomBar);
-    }
-
-    // Scale headerTitle
-    Polymer.Base.transform(`scale(${scaleMiddle}) translateZ(0)`, headerTitle);
-    // Scale headerSubTitle
-    Polymer.Base.transform(`scale(${scaleBottom}) translateZ(0)`, headerSubTitle);
-  });
-
 })(document);

@@ -1,11 +1,13 @@
 ![Start Polymer](https://avatars0.githubusercontent.com/u/10231285?v=3&s=200)
 
-# Polymer Starter Kit Plus
+# Polymer Starter Kit Plus Lite
 
 [![PageSpeed 97/100](https://img.shields.io/badge/PageSpeed-97%20/%20100-brightgreen.svg)](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fpolymer-starter-kit-plus.appspot.com&tab=desktop)
 [![GTmetrix 99%](https://img.shields.io/badge/GTmetrix-99%-brightgreen.svg)](https://gtmetrix.com/reports/polymer-starter-kit-plus.appspot.com/KL895CNj)
 [![bitHound Code](https://www.bithound.io/github/StartPolymer/polymer-starter-kit-plus/badges/code.svg)](https://www.bithound.io/github/StartPolymer/polymer-starter-kit-plus)
 [![Google+ Start Polymer](https://img.shields.io/badge/Google+-Start%20Polymer-dd4b39.svg)](https://plus.google.com/101148544618948882647)
+
+> Lite version doesn't contain demo content!
 
 > A starting point for building [Single-Page Applications](https://en.wikipedia.org/wiki/Single-page_application) with Polymer 1.x
 
