@@ -186,8 +186,13 @@ gulp.task('cache-config', function(callback) {
     disabled: false
   };
 
+  // URL’s with Query String parameters are treated as individual URL’s and
+  // need to be cached separately.
+  // https://codelabs.developers.google.com/codelabs/offline/index.html#6
   glob([
     'index.html',
+    'index.html?utm_source=web_app_manifest',
+    './?utm_source=web_app_manifest',
     './',
     'bower_components/webcomponentsjs/webcomponents-lite.min.js',
     '{elements,scripts,themes}/**/*.*'],
