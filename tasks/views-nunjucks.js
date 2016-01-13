@@ -30,7 +30,7 @@ module.exports = function ($, config, gulp) { return function () {
     }))
     .pipe($.nunjucksHtml({
       locals: require('merge')(variables.metadata, metadata),
-      searchPaths: ['app/content', 'app/views'],
+      searchPaths: ['app/content', 'app/elements', 'app/views'],
       tags: {
         variableStart: '{$',
         variableEnd: '$}'
