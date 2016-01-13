@@ -10,14 +10,15 @@ From:
 
 # THANKS
 
-Names:       Google, GitHub, Firebase
+Names:         Google, GitHub
 
 # SITE
 
-Boilerplate: Polymer Starter Kit Plus
-Design:      Material Design
-Doctype:     HTML5
-Language:
-Library:     Polymer
-Standards:   HTML5, CSS3, Web Components
-Tools:       Autoprefixer, Browsersync, Gulp, PageSpeed Insights, Sass
+Boilerplate:   Polymer Starter Kit Plus
+Design:        Material Design
+Doctype:       HTML5
+Language:      English
+Library:       Polymer
+Methodologies: Progressive Web App, SUIT CSS
+Standards:     HTML5, CSS3, Web Components
+Tools:         Autoprefixer, Babel, Browsersync, Gulp, Nunjucks, PostCSS
