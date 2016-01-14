@@ -84,11 +84,11 @@ To take advantage of Polymer Starter Kit Plus you need to:
 
 ### 1. Get the code
 
+The project comes in two flavours - Lite (branch `lite`) and Full (branch `master`). [Lite version](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/lite) doesn't contain demo content!
+
 [Download](https://github.com/StartPolymer/polymer-starter-kit-plus/releases/latest) and extract Polymer Starter Kit Plus to where you want to work.
 
 OR Install [Start Polymer Generator](https://github.com/StartPolymer/generator-startpolymer#installation) and run `yo startpolymer` in `my-project` directory.
-
-The project comes in two flavours - Lite (branch `lite`) and Full (branch `master`). [Lite version](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/lite) doesn't contain demo content!
 
 :warning: **Important**: Polymer Starter Kit Plus contain dotfiles (files starting with a `.`). If you're copying the contents of the Starter Kit to a new location make sure you bring along these dotfiles as well! On Mac, [enable showing hidden files](http://ianlunn.co.uk/articles/quickly-showhide-hidden-files-mac-os-x-mavericks/), then try extracting/copying Polymer Starter Kit Plus again. This time the dotfiles needed should be visible so you can copy them over without issues.
 
