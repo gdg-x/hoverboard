@@ -86,13 +86,13 @@ To take advantage of Polymer Starter Kit Plus you need to:
 
 [Download](https://github.com/StartPolymer/polymer-starter-kit-plus/releases/latest) and extract Polymer Starter Kit Plus to where you want to work.
 
-OR `git clone https://github.com/StartPolymer/polymer-starter-kit-plus.git my-project`
+OR Install [Start Polymer Generator](https://github.com/StartPolymer/generator-startpolymer#installation) and run `yo startpolymer` in `my-project` directory.
 
-OR Install [Start Polymer Generator](https://github.com/StartPolymer/generator-startpolymer#installation) and run it in `my-project` directory
+The project comes in two flavours - Lite (branch `lite`) and Full (branch `master`). [Lite version](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/lite) doesn't contain demo content!
 
-```sh
-yo startpolymer
-```
+:warning: **Important**: Polymer Starter Kit Plus contain dotfiles (files starting with a `.`). If you're copying the contents of the Starter Kit to a new location make sure you bring along these dotfiles as well! On Mac, [enable showing hidden files](http://ianlunn.co.uk/articles/quickly-showhide-hidden-files-mac-os-x-mavericks/), then try extracting/copying Polymer Starter Kit Plus again. This time the dotfiles needed should be visible so you can copy them over without issues.
+
+Rob Dodson has a fantastic [PolyCast video](https://www.youtube.com/watch?v=xz-yixRxZN8) available that walks through using Polymer Starter Kit. An [end-to-end with Polymer](https://www.youtube.com/watch?v=1f_Tj_JnStA) and Polymer Starter Kit talk is also available.
 
 #### Updating from previous version
 
@@ -105,7 +105,7 @@ git add .
 git commit -m 'Check-in 1.0.1'
 git remote add upstream https://github.com/StartPolymer/polymer-starter-kit-plus.git
 git fetch upstream
-git merge upstream/master
+git merge upstream/master # OR git merge upstream/lite
 # resolve the merge conflicts in your editor
 git add . -u
 git commit -m 'Updated to 1.0.2'
