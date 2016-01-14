@@ -84,7 +84,7 @@ To take advantage of Polymer Starter Kit Plus you need to:
 
 ### 1. Get the code
 
-The project comes in two flavours - Lite (branch `lite`) and Full (branch `master`). [Lite version](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/lite) doesn't contain demo content!
+Polymer Starter Kit Plus comes in two flavours - Lite (branch `lite`) and Full (branch `master`). [Lite version](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/lite) doesn't contain demo content!
 
 [Download](https://github.com/StartPolymer/polymer-starter-kit-plus/releases/latest) and extract Polymer Starter Kit Plus to where you want to work.
 
