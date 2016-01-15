@@ -12,8 +12,11 @@ module.exports = {
     // Event details
     dates: 'October 23-24, 2015',
     location: {
+        title: 'Pivdennyi Expo Center',
+        description: 'Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event',
         short: 'Lviv, Ukraine',
-        detail: 'Pivdennyi Expo Center</br>Shchyretska St, 36, Lviv, Ukraine',
+        address: 'Shchyretska St, 36',
+        link: 'https://www.facebook.com/expopivdennij',
         pointer: {
             latitude: 49.809841,
             longitude: 23.972805,
@@ -22,7 +25,8 @@ module.exports = {
         mapCenter: {
             latitude: 49.809841,
             longitude: 23.982805
-        }
+        },
+        images: ['/images/backgrounds/location_1.jpg', '/images/backgrounds/location_2.jpg', '/images/backgrounds/location_3.jpg']
     },
 
     // Contacts

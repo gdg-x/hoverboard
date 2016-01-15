@@ -1,7 +1,10 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../../../../bower_components/iron-media-query/iron-media-query.html">
-<link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../../../../bower_components/paper-item/paper-item-body.html">
 <link rel="import" href="../../../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../../../bower_components/google-map/google-map.html">
 
@@ -11,55 +14,98 @@
         <style>
             :host {
                 display: block;
-                padding: 100px 0;
+                padding: 40px 0;
                 position: relative;
                 overflow: hidden;
                 min-height: 300px;
             }
-            .location-card {
-                min-width: 400px;
+
+            google-map,
+            .disable-map-events {
+                @apply(--layout-fit);
             }
-            .location-card .heading {
-                margin: 0;
+
+            .container {
+                @apply(--layout-horizontal);
             }
-            .location-card .bottom-link {
-                color: inherit;
+
+            .card-wrapper {
+                @apply(--layout-horizontal);
+                @apply(--layout-flex);
+                @apply(--layout-around-justified);
             }
-            @media (min-width: 601px) {
-                .card-container {
-                    padding: 0;
+
+            .card {
+                --paper-card-header-text: {
+                    color: #FFFFFF;
+                    font-weight: 300;
+                };
+                --paper-content: {
+                    color: var(--primary-text-color);
+                };
+                max-width: 400px;
+                background: #FFFFFF;
+            }
+
+            paper-icon-item {
+                --paper-item-disabled-color: inherit;
+            }
+            paper-icon-item iron-icon {
+                --iron-icon-fill-color: var(--default-primary-color);
+            }
+            .card .bottom-link {
+                color: var(--secondary-text-color);
+            }
+
+            .additional-space {
+                display: none;
+            }
+
+            @media (min-width: 961px) {
+                :host {
+                    padding: 100px 0;
+                }
+                .additional-space {
+                    @apply(--layout-flex);
                 }
             }
-            .bottom-link {
-                color: inherit;
-            }
         </style>
-        <google-map class="fit" zoom="{$ location.pointer.zoom $}" latitude="{$ location.mapCenter.latitude $}" longitude="{$ location.mapCenter.longitude $}" styles="[[options]]" disable-zoom disable-default-ui>
+        <google-map zoom="{$ location.pointer.zoom $}" latitude="{$ location.mapCenter.latitude $}" longitude="{$ location.mapCenter.longitude $}" styles="[[options]]" disable-zoom disable-default-ui>
             <google-map-marker latitude="{$ location.pointer.latitude $}" longitude="{$ location.pointer.longitude $}"></google-map-marker>
         </google-map>
-        <div class="fit"></div>
-        <div class="container card-container relative fit layout horizontal center-center">
-            <div class="flex-3" hidden$="{{smallScreen}}"></div>
-            <paper-card class="flex-2">
-                <div class="paper-card-container location-card">
-                    <div class="card-content">
-                        <div class="title">
-                            <h4 class="heading">Location</h4>
+        <div class="disable-map-events"></div>
+        <div class="container">
+            <div class="additional-space"></div>
+            <div class="card-wrapper">
+                <paper-card class="card" heading="{$ location.title $}" image="{{_currentImage}}" preload-image fade-image>
+                    <div class="paper-card-container">
+                        <div class="card-content list">
+                            <paper-icon-item disabled>
+                                <iron-icon icon="icons:feedback" item-icon></iron-icon>
+                                <paper-item-body>{$ location.description $}</paper-item-body>
+                            </paper-icon-item>
+                            <paper-icon-item disabled>
+                                <iron-icon icon="icons:location" item-icon></iron-icon>
+                                <paper-item-body two-line>
+                                    <div>{$ location.address $}</div>
+                                    <div secondary>{$ location.short $}</div>
+                                </paper-item-body>
+                            </paper-icon-item>
                         </div>
-                        <p>{$ location.detail $}</p>
+                        <div class="card-actions">
+                            <a class="bottom-link" href="https://www.google.com/maps/dir/{$ location.pointer.latitude $},{$ location.pointer.longitude $}/@{$ location.pointer.latitude $},{$ location.pointer.longitude $},18z" target="_blank">
+                                <paper-icon-button icon="icons:directions"></paper-icon-button>
+                            </a>
+                            {% if location.link %}
+                            <a class="bottom-link" href="{$ location.link $}" target="_blank">
+                                <paper-icon-button icon="icons:link"></paper-icon-button>
+                            </a>
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="card-actions">
-                        <a class="bottom-link" href="https://www.google.com/maps/dir/{$ location.pointer.latitude $},{$ location.pointer.longitude $}/@{$ location.pointer.latitude $},{$ location.pointer.longitude $},18z" target="_blank">
-                            <paper-button>Get directions</paper-button>
-                        </a>
-                    </div>
-                </div>
-            </paper-card>
-            <div class="flex" hidden$="{{smallScreen}}"></div>
+                </paper-card>
+            </div>
         </div>
-        <iron-media-query
-          query="(max-width: 599px)"
-          query-matches="{{smallScreen}}"></iron-media-query>
     </template>
     <script>
         (function() {
@@ -71,6 +117,12 @@
                         .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
                     this.is = is;
                     this.properties = {
+                        images: {
+                            type: Array,
+                            /* jshint ignore:start */
+                            value: {$ location.images | dump $}
+                            /* jshint ignore:end */
+                        },
                         options: {
                             type: String,
                             value: function() {
@@ -96,8 +148,31 @@
                                     }]
                                 }];
                             }
-                        }
+                        },
+                        _currentIndex: {
+                            type: Number,
+                            value: 0
+                        },
+                        _currentImage: String
                     };
+                }
+
+                ready() {
+                    this._currentImage = this.images[this._currentIndex];
+                    // var that = this;
+                    // setInterval(function() {
+                    //     that.nextImage();
+                    // }, 3000);
+                }
+
+                previousImage() {
+                    this._currentIndex = (this._currentIndex > 0) ? this._currentIndex - 1 : this.images.length - 1;
+                    this._currentImage = this.images[this._currentIndex];
+                }
+
+                nextImage() {
+                    this._currentIndex = (this._currentIndex < this.images.length - 1) ? this._currentIndex + 1 : 0;
+                    this._currentImage = this.images[this._currentIndex];
                 }
             }
 
