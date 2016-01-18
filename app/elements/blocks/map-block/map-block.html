@@ -50,11 +50,30 @@
             paper-icon-item {
                 --paper-item-disabled-color: inherit;
             }
+
             paper-icon-item iron-icon {
                 --iron-icon-fill-color: var(--default-primary-color);
             }
+
             .card .bottom-link {
                 color: var(--secondary-text-color);
+            }
+
+            .header {
+                height: 250px;
+            }
+
+            .header-image {
+                @apply(--layout-fit);
+                width: 100%;
+                background-size: cover;
+                background-position: 50% 50%;
+                opacity: 0;
+                transition: all 1s ease-in-out;
+            }
+
+            .show {
+                opacity: 1;
             }
 
             .additional-space {
@@ -65,19 +84,32 @@
                 :host {
                     padding: 100px 0;
                 }
+
                 .additional-space {
+                    @apply(--layout);
                     @apply(--layout-flex);
                 }
             }
         </style>
-        <google-map zoom="{$ location.pointer.zoom $}" latitude="{$ location.mapCenter.latitude $}" longitude="{$ location.mapCenter.longitude $}" styles="[[options]]" disable-zoom disable-default-ui>
-            <google-map-marker latitude="{$ location.pointer.latitude $}" longitude="{$ location.pointer.longitude $}"></google-map-marker>
+        <google-map zoom="{$ location.pointer.zoom $}" latitude="{$ location.mapCenter.latitude $}"
+                    longitude="{$ location.mapCenter.longitude $}" styles="[[options]]" disable-zoom disable-default-ui>
+            <google-map-marker latitude="{$ location.pointer.latitude $}"
+                               longitude="{$ location.pointer.longitude $}"></google-map-marker>
         </google-map>
         <div class="disable-map-events"></div>
         <div class="container">
             <div class="additional-space"></div>
             <div class="card-wrapper">
-                <paper-card class="card" heading="{$ location.title $}" image="{{_currentImage}}" preload-image fade-image>
+                <paper-card class="card">
+                    <div class="header paper-card">
+                        <iron-image class="header-image show" src="[[_currentImages.0]]"
+                                    sizing="cover"></iron-image>
+                        <template is="dom-if" if="{{_moreImages}}">
+                            <iron-image class="header-image" src="[[_currentImages.1]]"
+                                        sizing="cover"></iron-image>
+                        </template>
+                        <div class="title-text over-image style-scope paper-card">{$ location.title $}</div>
+                    </div>
                     <div class="paper-card-container">
                         <div class="card-content list">
                             <paper-icon-item disabled>
@@ -93,7 +125,9 @@
                             </paper-icon-item>
                         </div>
                         <div class="card-actions">
-                            <a class="bottom-link" href="https://www.google.com/maps/dir/{$ location.pointer.latitude $},{$ location.pointer.longitude $}/@{$ location.pointer.latitude $},{$ location.pointer.longitude $},18z" target="_blank">
+                            <a class="bottom-link"
+                               href="https://www.google.com/maps/dir/{$ location.pointer.latitude $},{$ location.pointer.longitude $}/@{$ location.pointer.latitude $},{$ location.pointer.longitude $},18z"
+                               target="_blank">
                                 <paper-icon-button icon="icons:directions"></paper-icon-button>
                             </a>
                             {% if location.link %}
@@ -108,7 +142,7 @@
         </div>
     </template>
     <script>
-        (function() {
+        (function () {
             'use strict';
 
             class MapBlock {
@@ -125,7 +159,7 @@
                         },
                         options: {
                             type: String,
-                            value: function() {
+                            value: function () {
                                 return [{
                                     stylers: [{
                                         'lightness': 40
@@ -149,30 +183,55 @@
                                 }];
                             }
                         },
-                        _currentIndex: {
+                        _currentSourceIndex: {
                             type: Number,
                             value: 0
                         },
-                        _currentImage: String
+                        _currentTargetIndex: {
+                            type: Number,
+                            value: 0
+                        },
+                        _currentImages: {
+                            type: Array,
+                            value: []
+                        },
+                        _moreImages: {
+                            type: Boolean,
+                            value: false
+                        }
                     };
                 }
 
                 ready() {
-                    this._currentImage = this.images[this._currentIndex];
-                    // var that = this;
-                    // setInterval(function() {
-                    //     that.nextImage();
-                    // }, 3000);
+                    this._currentImages[0] = this.images[this._currentSourceIndex];
+                    if (this.images.length > 1) {
+                        this._moreImages = true;
+                        this._currentImages[1] = this.images[this._currentSourceIndex + 1];
+                        var that = this;
+                        setInterval(function () {
+                            that.nextImage();
+                        }, 4000);
+                    }
+                    this.notifyPath('_currentImages', this._currentImages.slice());
                 }
 
                 previousImage() {
-                    this._currentIndex = (this._currentIndex > 0) ? this._currentIndex - 1 : this.images.length - 1;
-                    this._currentImage = this.images[this._currentIndex];
+                    this._currentSourceIndex = (this._currentSourceIndex > 0) ? this._currentSourceIndex - 1 : this.images.length - 1;
+                    this._replaceImage(this._currentSourceIndex);
                 }
 
                 nextImage() {
-                    this._currentIndex = (this._currentIndex < this.images.length - 1) ? this._currentIndex + 1 : 0;
-                    this._currentImage = this.images[this._currentIndex];
+                    this._currentSourceIndex = (this._currentSourceIndex < this.images.length - 1) ? this._currentSourceIndex + 1 : 0;
+                    this._replaceImage(this._currentSourceIndex);
+                }
+
+                _replaceImage(index) {
+                    var imageFrom = this.$$('.header-image:nth-of-type(' + (this._currentTargetIndex + 1) + ')');
+                    this._currentTargetIndex = 1 - this._currentTargetIndex;
+                    var imageTo = this.$$('.header-image:nth-of-type(' + (this._currentTargetIndex + 1) + ')');
+                    this._currentImages[this._currentTargetIndex] = this.images[index];
+                    this.notifyPath('_currentImages', this._currentImages.slice());
+                    this.classFollows('show', imageFrom, imageTo);
                 }
             }
 
