@@ -24,5 +24,14 @@ module.exports = {
             fontColor: '#FFFFFF',
             tabBarColor: '#FFFFFF'
         }
+    }, {
+        route: 'speakers',
+        permalink: '/speakers',
+        text: 'Speakers',
+        heroSettings: {
+            backgroundColor: '#673AB7',
+            fontColor: '#FFFFFF',
+            tabBarColor: '#FFFFFF'
+        }
     }]
 };

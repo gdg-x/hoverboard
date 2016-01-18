@@ -42,14 +42,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 happ.params = data.params;
             });
 
-//            page('/speakers', scrollToTop, () => {
-//                app.route = 'speakers';
-//            });
-//
-//            page('/speakers/:id', scrollToTop, data => {
-//                app.route = 'speakers';
-//                app.params = data.params;
-//            });
+           page('/speakers', scrollToTop, () => {
+               app.route = 'speakers';
+           });
+
+           page('/speakers/:id', scrollToTop, data => {
+               app.route = 'speakersDetails';
+               app.params = data.params;
+           });
 //
 //            page('/schedule', scrollToTop, () => {
 //                app.route = 'schedule';

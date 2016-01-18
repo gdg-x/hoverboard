@@ -4,7 +4,7 @@
 
 <dom-module id="app-data">
     <template>
-        <iron-ajax auto url="[[speakersSource]]" handle-as="json" last-response="{{speakers}}"></iron-ajax>
+        <iron-ajax auto url="[[speakersSource]]" handle-as="json" last-response="{{_speakersRaw}}"></iron-ajax>
         <iron-ajax auto url="[[sessionsSource]]" handle-as="json" last-response="{{sessions}}"></iron-ajax>
         <iron-ajax auto url="[[postsSource]]" handle-as="json" last-response="{{posts}}"></iron-ajax>
         <iron-ajax auto url="[[partnersSource]]" handle-as="json" last-response="{{partners}}"></iron-ajax>
@@ -56,16 +56,33 @@
                             type: Array,
                             notify: true
                         },
-                        _scheduleRaw: {
-                            type: Array
-                        },
                         schedule: {
                             type: Array,
                             notify: true
-                        }
+                        },
+                        _speakersRaw: Array,
+                        _scheduleRaw: Array
                     };
-                    this.observers = ['_generateSchedule(speakers, sessions, _scheduleRaw)'];
+                    this.observers = [
+                        '_updateSpeakersData(_speakersRaw, sessions)',
+                        '_generateSchedule(speakers, sessions, _scheduleRaw)'
+                    ];
                 }
+
+                _updateSpeakersData() {
+                    for (var i = 0, speakersLen = this._speakersRaw.length; i < speakersLen; i++) {
+                        this._speakersRaw[i].sessions = [];
+                        for (var j = 0, sessionsLen = this.sessions.length; j < sessionsLen; j++) {
+                            if (this.sessions[j].speakers && this.sessions[j].speakers.indexOf(this._speakersRaw[i].id) > -1) {
+                                var tempSession = JSON.parse(JSON.stringify(this.sessions[j]));
+                                delete tempSession.speakers;
+                                this._speakersRaw[i].sessions.push(tempSession);
+                            }
+                        }
+                    }
+                    this.speakers = this._speakersRaw;
+                }
+
                 _generateSchedule() {
                     for (var i = 0, scheduleLen = this._scheduleRaw.length; i < scheduleLen; i++) {
                         var day = this._scheduleRaw[i];
@@ -86,6 +103,7 @@
                     }
                     this.schedule = this._scheduleRaw;
                 }
+
                 _getSession(sessionId) {
                     for (var i = 0, sessionsLen = this.sessions.length; i < sessionsLen; i++) {
                         if (sessionId === this.sessions[i].id) {
@@ -101,6 +119,7 @@
                         }
                     }
                 }
+
                 _getSpeaker(speakerId) {
                     for (var i = 0, speakersLen = this.speakers.length; i < speakersLen; i++) {
                         if (speakerId === this.speakers[i].id) {
@@ -108,6 +127,7 @@
                         }
                     }
                 }
+
                 _getEndTime(date, startTime, endTime, totalNumber, number) {
                     var timezone = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1],
                         timeStart = new Date(date + ' ' + startTime + ' ' + timezone).getTime(),

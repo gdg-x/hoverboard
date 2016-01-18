@@ -28,6 +28,7 @@
 <link rel="import" href="pages/home-page.html">
 <link rel="import" href="pages/blog-page.html">
 <link rel="import" href="pages/post-page.html">
+<link rel="import" href="pages/speakers-page.html">
 
 
 <dom-module id="hoverboard-app">
@@ -38,8 +39,7 @@
                 display: block;
             }
         </style>
-        <app-data speakers="{{speakers}}" sessions="{{sessions}}" posts="{{posts}}" partners="{{partners}}"
-                  schedule="{{schedule}}"></app-data>
+        <app-data speakers="{{speakers}}" sessions="{{sessions}}" posts="{{posts}}" partners="{{partners}}" schedule="{{schedule}}"></app-data>
 
         <paper-drawer-panel id="paperDrawerPanel" responsive-width="599px" force-narrow>
             <!-- Drawer Scroll Header Panel -->
@@ -48,27 +48,20 @@
             <!-- Main Area -->
             <paper-scroll-header-panel class="Main scroll" main>
 
-                <hero-toolbar route="{{route}}" font-color="{{heroSettings.fontColor}}"
-                              background-color="{{heroSettings.backgroundColor}}"
-                              background-image="{{heroSettings.backgroundImage}}"
-                              tab-bar-color="{{heroSettings.tabBarColor}}"
-                              video="{{heroSettings.video}}"></hero-toolbar>
+                <hero-toolbar route="{{route}}" font-color="{{heroSettings.fontColor}}" background-color="{{heroSettings.backgroundColor}}" background-image="{{heroSettings.backgroundImage}}" tab-bar-color="{{heroSettings.tabBarColor}}" video="{{heroSettings.video}}"></hero-toolbar>
 
                 <!-- Main Content -->
-                <neon-animated-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}"
-                                     selected-attribute="selected" animate-initial-selection>
-                    <home-page class="Page" data-route="home" people="{{speakers}}" posts="{{posts}}"
-                               logos="{{partners}}" hero-settings="{{heroSettings}}"></home-page>
-                    <blog-page class="Page" data-route="blog" posts="{{posts}}"
-                               hero-settings="{{heroSettings}}"></blog-page>
-                    <post-page class="Page" data-route="post" post-id="[[params.id]]" posts="{{posts}}"
-                               hero-settings="{{heroSettings}}"></post-page>
+                <neon-animated-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}" selected-attribute="selected" animate-initial-selection>
+                    <home-page class="Page" data-route="home" people="{{speakers}}" posts="{{posts}}" logos="{{partners}}" hero-settings="{{heroSettings}}"></home-page>
+                    <blog-page class="Page" data-route="blog" posts="{{posts}}" hero-settings="{{heroSettings}}"></blog-page>
+                    <post-page class="Page" data-route="post" post-id="[[params.id]]" posts="{{posts}}" hero-settings="{{heroSettings}}"></post-page>
+                    <speakers-page class="Page" data-route="speakers" speakers="{{speakers}}" hero-settings="{{heroSettings}}"></speakers-page>
                 </neon-animated-pages>
             </paper-scroll-header-panel>
         </paper-drawer-panel>
     </template>
     <script>
-        (function () {
+        (function() {
             'use strict';
 
             class HoverboardApp {
