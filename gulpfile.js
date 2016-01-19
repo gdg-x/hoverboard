@@ -218,7 +218,7 @@ gulp.task('clean', function(cb) {
 });
 
 // Watch files for changes & reload
-gulp.task('serve', ['images', 'js', 'lint', 'lint-js', 'manifest', 'styles'], function() {
+gulp.task('serve', ['js', 'lint', 'lint-js', 'manifest', 'styles'], function() {
   browserSync({
     browser: config.browserSync.browser,
     https: config.browserSync.https,

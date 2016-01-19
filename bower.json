@@ -12,7 +12,7 @@
     "start-elements": "StartPolymer/start-elements#1.1.x"
   },
   "devDependencies": {
-    "web-component-tester": "*"
+    "web-component-tester": "^4.0.0"
   },
   "ignore": []
 }
