@@ -7,6 +7,7 @@
 
 <link rel="import" href="../truncate-marked-text/truncate-marked-text.html">
 <link rel="import" href="../blocks/footer-block/footer-block.html">
+<link rel="import" href="../blocks/speaker-details/speaker-details.html">
 
 <dom-module id="speakers-page">
     <template>
@@ -40,6 +41,7 @@
                 @apply(--layout-flex-auto);
                 padding: 16px;
                 font-size: 18px;
+                cursor: pointer;
             }
 
             .bio {
@@ -112,6 +114,11 @@
                 color: var(--secondary-text-color);
             }
 
+            /*.speaker-details {*/
+                /*@apply(--layout-fit);*/
+                /*position: fixed;*/
+            /*}*/
+
             @media (min-width: 961px) {
                 .speakers-container {
                     @apply(--layout-horizontal);
@@ -121,6 +128,7 @@
                     width: calc(100% / 3 - 4 * var(--grid-gutter));
                     margin: var(--grid-gutter) var(--grid-gutter) calc(3 * var(--grid-gutter));
                 }
+
             }
         </style>
         <div class="container page-header" cascaded>
@@ -148,9 +156,9 @@
                                 <span class="title">[[speaker.company]], [[speaker.country]]</span>
                             </div>
                         </div>
-                        <a class="card-content" data-route="speakers/[[speaker.id]]" href="{$ baseurl $}/speakers/[[speaker.id]]">
+                        <div class="card-content" on-tap="_openSpeaker">
                             <truncate-marked-text class="bio" input-text="{{speaker.bio}}" characters="220" break-last-word></truncate-marked-text>
-                        </a>
+                        </div>
                         <div class="card-actions">
                             <template is="dom-repeat" items="[[speaker.socials]]" as="social">
                                 <a href="[[social.link]]" target="_blank">
@@ -163,8 +171,10 @@
                 </div>
             </template>
         </div>
-
         <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}" cascaded></footer-block>
+
+        <speaker-details id="speakerDetails" class="speaker-details" speaker="{{_selectedSpeaker}}"
+                         entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop></speaker-details>
     </template>
 </dom-module>
 
@@ -245,8 +255,12 @@
                 var cascadedArray = Array.prototype.slice.call(cascaded);
                 this.animationConfig.entry[0].nodes = cascadedArray;
                 this.animationConfig.exit[0].nodes = cascadedArray;
-            }
+            },
 
+            _openSpeaker: function(e) {
+                this._selectedSpeaker = e.model.speaker;
+                this.$.speakerDetails.open();
+            }
         });
 
     })();
