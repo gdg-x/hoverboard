@@ -1,0 +1,185 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../../../bower_components/neon-animation/neon-animation-runner-behavior.html">
+<link rel="import" href="../../../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
+<link rel="import" href="../../../../bower_components/paper-dialog-behavior/paper-dialog-shared-styles.html">
+
+<dom-module id="speaker-details">
+    <template>
+        <style include="shared-styles"></style>
+        <style include="paper-dialog-shared-styles"></style>
+        <style>
+            :host {
+                display: block;
+                background: #FFFFFF;
+            }
+
+            /*paper-scroll-header-panel {*/
+                /*background: #fff;*/
+                /*height: 100%;*/
+                /*--paper-scroll-header-panel-condensed-header: {*/
+                    /*background-color: var(--default-primary-color);*/
+                /*};*/
+            /*}*/
+
+            /*paper-toolbar {*/
+                /*background-color: transparent;*/
+                /*color: #fff;*/
+            /*}*/
+
+            /*paper-toolbar .title {*/
+                /*margin: 0;*/
+            /*}*/
+
+            /*.back-button {*/
+                /*color: #fff;*/
+            /*}*/
+
+            /*.card-actions {*/
+                /*border-top: 1px solid var(--divider-color);*/
+            /*}*/
+
+            /*.subtitle {*/
+                /*margin-bottom: 5px;*/
+                /*font-size: 16px;*/
+                /*color: var(--secondary-text-color);*/
+            /*}*/
+
+            /*.content {*/
+                /*padding: 16px 10px 0;*/
+            /*}*/
+
+            /*.speaker-description {*/
+                /*padding-top: 0;*/
+            /*}*/
+
+            /*.badge {*/
+                /*color: var(--secondary-text-color);*/
+                /*font-size: 14px;*/
+            /*}*/
+
+            /*.speaker-tags {*/
+                /*margin-bottom: 10px;*/
+                /*padding-top: 0;*/
+                /*padding-bottom: 0;*/
+                /*color: var(--secondary-text-color);*/
+                /*font-size: 16px;*/
+            /*}*/
+
+            /*.tag-label {*/
+                /*font-size: 14px;*/
+                /*color: #ffffff !important;*/
+            /*}*/
+
+            /*.tag {*/
+                /*margin-top: 3px;*/
+                /*margin-left: 5px;*/
+            /*}*/
+
+            /*.session {*/
+                /*padding: 20px 0;*/
+                /*border-top: 1px solid #e8e8e8;*/
+            /*}*/
+
+            /*.session-meta {*/
+                /*margin-right: 10px;*/
+                /*font-size: 14px;*/
+            /*}*/
+
+            /*.session-title {*/
+                /*font-size: 22px;*/
+                /*font-weight: 400;*/
+            /*}*/
+        </style>
+        <!--<paper-scroll-header-panel id="scrollHeaderPanel" class="fit" condenses keep-condensed-header="[[smallScreen]]">-->
+            <!--<paper-toolbar class="tall">-->
+                <!--<paper-icon-button class="back-button" on-tap="closePeople" icon="arrow-back"></paper-icon-button>-->
+                <!--<div id="title" class="bottom title">[[speaker.name]]</div>-->
+            <!--</paper-toolbar>-->
+            <div class="content">
+                <div class="subtitle">
+                    <span>[[speaker.company]]</span>,
+                    <span>[[speaker.country]]</span>
+                </div>
+                <div class="card-content speaker-tags">
+                    <span class="tags-label">Tags:</span>
+                    <template is="dom-repeat" items="[[tags]]" as="tag">
+                        <span class$="[[tag.tagClass]]">[[tag.name]]</span>
+                    </template>
+                </div>
+                <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
+                    <a class="badge block" href="[[badge.link]]" target="_blank">[[badge.description]]</a>
+                </template>
+                <div class="card-content people-description">
+                    <marked-element markdown="[[speaker.bio]]"></marked-element>
+                </div>
+                <div class="card-content sessions">
+                    <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
+                        <div class="session">
+                            <h3 class="session-title">[[session.title]]</h3>
+                            <span class="session-meta">Language:
+                                <span>[[session.language]]</span>
+                            </span>
+                            <span class="session-meta">Complexity:
+                                <span>[[session.complexity]]</span>
+                            </span>
+                            <marked-element markdown="[[session.description]]"></marked-element>
+                        </div>
+                    </template>
+                </div>
+                <div class="card-actions">
+                    <div class="align-pb-block">
+                        <template is="dom-repeat" items="[[speaker.socials]]" as="social">
+                            <a href="[[social.link]]" target="_blank">
+                                <paper-icon-button class="social-icon" icon$="{{social.icon}}"></paper-icon-button>
+                            </a>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        <!--</paper-scroll-header-panel>-->
+
+    </template>
+    <script>
+        (function () {
+            'use strict';
+
+            Polymer({
+
+                is: 'speaker-details',
+
+                behaviors: [
+                    Polymer.PaperDialogBehavior,
+                    Polymer.NeonAnimationRunnerBehavior
+                ],
+
+                listeners: {
+                    'neon-animation-finish': '_onNeonAnimationFinish'
+                },
+
+                _renderOpened: function () {
+                    if (this.withBackdrop) {
+                        this.backdropElement.open();
+                    }
+                    this.playAnimation('entry');
+                    this.refit();
+                },
+
+                _renderClosed: function () {
+                    if (this.withBackdrop) {
+                        this.backdropElement.close();
+                    }
+                    this.playAnimation('exit');
+                },
+
+                _onNeonAnimationFinish: function () {
+                    if (this.opened) {
+                        this._finishRenderOpened();
+                    } else {
+                        this._finishRenderClosed();
+                    }
+                }
+            });
+        })();
+    </script>
+</dom-module>
