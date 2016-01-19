@@ -2,10 +2,10 @@
 
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../bower_components/iron-image/iron-image.html">
-<link rel="import" href="../../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../../../bower_components/paper-material/paper-material.html">
-<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
 
+<link rel="import" href="../truncate-marked-text/truncate-marked-text.html">
 <link rel="import" href="../blocks/footer-block/footer-block.html">
 
 <dom-module id="speakers-page">
@@ -14,10 +14,10 @@
         <style>
             :host {
                 display: block;
-                --grid-gutter: 4px;
+                --grid-gutter: 8px;
             }
 
-            .people-container {
+            .speakers-container {
                 @apply(--layout-vertical);
                 @apply(--layout-wrap);
             }
@@ -39,7 +39,11 @@
                 @apply(--layout-vertical);
                 @apply(--layout-flex-auto);
                 padding: 16px;
-                font-size: 16px;
+                font-size: 18px;
+            }
+
+            .bio {
+                color: var(--primary-text-color);
             }
 
             .card-actions {
@@ -100,11 +104,8 @@
 
             .title {
                 margin-top: -5px;
+                display: block;
                 font-size: 14px;
-            }
-
-            .sessions h3:not(:last-of-type) {
-                margin-bottom: 10px;
             }
 
             .social-icon {
@@ -112,12 +113,13 @@
             }
 
             @media (min-width: 961px) {
-                .people-container {
+                .speakers-container {
                     @apply(--layout-horizontal);
                 }
+
                 .speaker {
                     width: calc(100% / 3 - 4 * var(--grid-gutter));
-                    margin: var(--grid-gutter);
+                    margin: var(--grid-gutter) var(--grid-gutter) calc(3 * var(--grid-gutter));
                 }
             }
         </style>
@@ -126,12 +128,13 @@
                 <h3>Speakers</h3>
             </div>
         </div>
-        <div class="container people-container">
+        <div class="container speakers-container">
             <template is="dom-repeat" items="[[speakers]]" as="speaker" on-dom-change="_updateCascadedNodes">
-                <a data-route="speakers/[[speaker.id]]" href="{$ baseurl $}/speakers/[[speaker.id]]" class="speaker" cascaded>
+                <div class="speaker" cascaded>
                     <paper-material class="card">
                         <div class="header">
-                            <iron-image src="[[speaker.photoUrl]]" class="photo placeholder-color" preload fade sizing="cover"></iron-image>
+                            <iron-image src="[[speaker.photoUrl]]" class="photo placeholder-color" preload fade
+                                        sizing="cover"></iron-image>
                             <div class="photo-overlay"></div>
                             <ul class="badges">
                                 <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
@@ -142,24 +145,22 @@
                             </ul>
                             <div class="bottom-image-text">
                                 <span class="name">[[speaker.name]]</span>
-                                <div class="title">[[speaker.company]], [[speaker.country]]</span>
-                                </div>
+                                <span class="title">[[speaker.company]], [[speaker.country]]</span>
                             </div>
                         </div>
-                        <div class="card-content sessions">
-                            <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
-                                <h3 class="session-title">[[session.title]]</h3>
-                            </template>
-                        </div>
+                        <a class="card-content" data-route="speakers/[[speaker.id]]" href="{$ baseurl $}/speakers/[[speaker.id]]">
+                            <truncate-marked-text class="bio" input-text="{{speaker.bio}}" characters="220" break-last-word></truncate-marked-text>
+                        </a>
                         <div class="card-actions">
                             <template is="dom-repeat" items="[[speaker.socials]]" as="social">
                                 <a href="[[social.link]]" target="_blank">
-                                    <paper-icon-button class="social-icon" icon$="icons:{{social.icon}}"></paper-icon-button>
+                                    <paper-icon-button class="social-icon"
+                                                       icon$="icons:{{social.icon}}"></paper-icon-button>
                                 </a>
                             </template>
                         </div>
                     </paper-material>
-                </a>
+                </div>
             </template>
         </div>
 
@@ -168,7 +169,7 @@
 </dom-module>
 
 <script>
-    (function() {
+    (function () {
         'use strict';
 
         Polymer({
@@ -200,7 +201,7 @@
 
                 animationConfig: {
                     type: Object,
-                    value: function() {
+                    value: function () {
                         return {
                             'entry': [{
                                 name: 'cascaded-animation',
@@ -235,11 +236,11 @@
                 'updateHeroSettings(selected)'
             ],
 
-            updateHeroSettings: function() {
+            updateHeroSettings: function () {
                 this.heroSettings = this.selected ? this._heroSettings : this.heroSettings;
             },
 
-            _updateCascadedNodes: function() {
+            _updateCascadedNodes: function () {
                 var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
                 var cascadedArray = Array.prototype.slice.call(cascaded);
                 this.animationConfig.entry[0].nodes = cascadedArray;
