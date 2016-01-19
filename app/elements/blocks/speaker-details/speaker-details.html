@@ -3,6 +3,7 @@
 <link rel="import" href="../../../../bower_components/neon-animation/neon-animation-runner-behavior.html">
 <link rel="import" href="../../../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
 <link rel="import" href="../../../../bower_components/paper-dialog-behavior/paper-dialog-shared-styles.html">
+<link rel="import" href="../../../../bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
 
 <dom-module id="speaker-details">
     <template>
@@ -11,21 +12,28 @@
         <style>
             :host {
                 display: block;
-                background: #FFFFFF;
+                min-height: 60%;
+                min-width: 60%;
             }
 
-            /*paper-scroll-header-panel {*/
-                /*background: #fff;*/
-                /*height: 100%;*/
-                /*--paper-scroll-header-panel-condensed-header: {*/
-                    /*background-color: var(--default-primary-color);*/
-                /*};*/
-            /*}*/
+            paper-scroll-header-panel {
+                @apply(--layout-fit);
+                margin: 0;
+                background: #FFFFFF;
+                height: 100%;
+                --paper-scroll-header-panel-condensed-header: {
+                    background-color: var(--default-primary-color);
+                };
+            }
 
-            /*paper-toolbar {*/
-                /*background-color: transparent;*/
-                /*color: #fff;*/
-            /*}*/
+            paper-toolbar {
+                background-color: transparent;
+                color: #FFFFFF;
+            }
+
+            .content {
+                padding: 16px;
+            }
 
             /*paper-toolbar .title {*/
                 /*margin: 0;*/
@@ -43,10 +51,6 @@
                 /*margin-bottom: 5px;*/
                 /*font-size: 16px;*/
                 /*color: var(--secondary-text-color);*/
-            /*}*/
-
-            /*.content {*/
-                /*padding: 16px 10px 0;*/
             /*}*/
 
             /*.speaker-description {*/
@@ -91,16 +95,13 @@
                 /*font-weight: 400;*/
             /*}*/
         </style>
-        <!--<paper-scroll-header-panel id="scrollHeaderPanel" class="fit" condenses keep-condensed-header="[[smallScreen]]">-->
-            <!--<paper-toolbar class="tall">-->
-                <!--<paper-icon-button class="back-button" on-tap="closePeople" icon="arrow-back"></paper-icon-button>-->
-                <!--<div id="title" class="bottom title">[[speaker.name]]</div>-->
-            <!--</paper-toolbar>-->
+        <paper-scroll-header-panel id="scrollHeaderPanel" condenses>
+            <paper-toolbar class="tall">
+                <paper-icon-button class="back-button" dialog-dismiss icon="arrow-back"></paper-icon-button>
+                <div id="title" class="bottom title">[[speaker.name]]</div>
+            </paper-toolbar>
             <div class="content">
-                <div class="subtitle">
-                    <span>[[speaker.company]]</span>,
-                    <span>[[speaker.country]]</span>
-                </div>
+                <div class="subtitle">[[speaker.company]], [[speaker.country]]</div>
                 <div class="card-content speaker-tags">
                     <span class="tags-label">Tags:</span>
                     <template is="dom-repeat" items="[[tags]]" as="tag">
@@ -137,7 +138,7 @@
                     </div>
                 </div>
             </div>
-        <!--</paper-scroll-header-panel>-->
+        </paper-scroll-header-panel>
 
     </template>
     <script>

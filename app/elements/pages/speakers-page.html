@@ -173,6 +173,11 @@
         </div>
         <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}" cascaded></footer-block>
 
+        <paper-dialog id="dialog" class="speaker-details" speaker="{{_selectedSpeaker}}"
+                         entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop>
+            <div>Test dialog</div>
+        </paper-dialog>
+
         <speaker-details id="speakerDetails" class="speaker-details" speaker="{{_selectedSpeaker}}"
                          entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop></speaker-details>
     </template>
@@ -260,6 +265,7 @@
             _openSpeaker: function(e) {
                 this._selectedSpeaker = e.model.speaker;
                 this.$.speakerDetails.open();
+//                this.$.dialog.open();
             }
         });
 
