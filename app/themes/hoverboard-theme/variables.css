@@ -41,4 +41,28 @@ for further information on custom CSS properties.
     /* Footer */
     --footer-background-color: #FCFCFC;
     --footer-text-color: #757575;
+
+    /* Tags colors */
+    --android: #78C257;
+    --web: #2196F3;
+    --cloud: #3F51B5;
+    --community: #E91E63;
+    --angularjs: #E0343D;
+    --polymer: #D81B60;
+    --dart: #00B4AA;
+    --firebase: #FF9800;
+    --appengine: #0D47A1;
+    --serviceworkers: #311B92;
+    --web-rtc: #7B1FA2;
+    --kubernetes: #326DE6;
+    --v8-engine: #006064;
+    --gae: #FFC107;
+    --ndk: #4CAF50;
+    --ble: #1565C0;
+    --ci: #CDDC39;
+    --tv: #D32F2F;
+    --grpc: #607D8B;
+    --ux: #9C27B0;
+    --material-design: #009688;
+    --entrepreneurship: #673AB7;
 }

@@ -129,9 +129,15 @@ a, .anchor-like, .markdown-html a {
     font-size: 32px;
     text-transform: uppercase;
     letter-spacing: .05em;
-    @media (--md-viewport) {
-        margin-bottom: 40px;
-    }
+
+@media (--md-viewport) {
+    margin-bottom:
+
+40px
+
+;
+}
+
 }
 
 .two-column-xs {
@@ -207,10 +213,18 @@ a, .anchor-like, .markdown-html a {
 .page-header {
     margin: -90px auto 0;
     padding-bottom: 20px;
-    @media (--md-viewport) {
-        margin: -170px auto 0;
-        padding-bottom: 0;
-    }
+
+@media (--md-viewport) {
+    margin:
+
+-170px auto
+
+0;
+    padding-bottom:
+
+0;
+}
+
 }
 
 .page-title {
@@ -221,7 +235,13 @@ a, .anchor-like, .markdown-html a {
     font-size: 20px;
     color: #FFFFFF;
     pointer-events: none;
-    @media (--md-viewport) {
-        font-size: 42px;
-    }
+
+@media (--md-viewport) {
+    font-size:
+
+42px
+
+;
+}
+
 }

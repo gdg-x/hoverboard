@@ -12,8 +12,10 @@
         <style>
             :host {
                 display: block;
-                min-height: 60%;
-                min-width: 60%;
+                margin: 0;
+                min-height: 100%;
+                min-width: 100%;
+                --paper-scroll-header-panel-color: var(--default-primary-color);
             }
 
             paper-scroll-header-panel {
@@ -21,8 +23,11 @@
                 margin: 0;
                 background: #FFFFFF;
                 height: 100%;
+                --paper-scroll-header-panel-full-header: {
+                    background-color: var(--paper-scroll-header-panel-color);
+                };
                 --paper-scroll-header-panel-condensed-header: {
-                    background-color: var(--default-primary-color);
+                    background-color: var(--paper-scroll-header-panel-color);
                 };
             }
 
@@ -32,114 +37,153 @@
             }
 
             .content {
-                padding: 16px;
+                padding: 24px;
+                font-size: 16px;
+                line-height: 1.5;
             }
 
-            /*paper-toolbar .title {*/
-                /*margin: 0;*/
-            /*}*/
+            @media (min-width: 961px) {
+                :host {
+                    min-height: 60%;
+                    min-width: 60%;
+                }
+            }
 
-            /*.back-button {*/
-                /*color: #fff;*/
-            /*}*/
+            .metadata-wrapper {
+                @apply(--layout-vertical);
+                margin-bottom: 10px;
+            }
 
-            /*.card-actions {*/
-                /*border-top: 1px solid var(--divider-color);*/
-            /*}*/
+            .main-info {
+                @apply(--layout-horizontal);
+            }
 
-            /*.subtitle {*/
-                /*margin-bottom: 5px;*/
-                /*font-size: 16px;*/
-                /*color: var(--secondary-text-color);*/
-            /*}*/
+            .info {
+                @apply(--layout-flex);
+                @apply(--layout-vertical);
+                @apply(--layout-center-justified);
+                color: var(--secondary-text-color);
+            }
 
-            /*.speaker-description {*/
-                /*padding-top: 0;*/
-            /*}*/
+            .photo {
+                margin-right: 24px;
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+            }
 
-            /*.badge {*/
-                /*color: var(--secondary-text-color);*/
-                /*font-size: 14px;*/
-            /*}*/
+            .name {
+                font-size: 24px;
+                color: var(--primary-text-color);
+            }
 
-            /*.speaker-tags {*/
-                /*margin-bottom: 10px;*/
-                /*padding-top: 0;*/
-                /*padding-bottom: 0;*/
-                /*color: var(--secondary-text-color);*/
-                /*font-size: 16px;*/
-            /*}*/
+            .title {
+                display: block;
+                font-size: 14px;
+            }
 
-            /*.tag-label {*/
-                /*font-size: 14px;*/
-                /*color: #ffffff !important;*/
-            /*}*/
+            .badges {
+                margin-top: -5px;
+            }
 
-            /*.tag {*/
-                /*margin-top: 3px;*/
-                /*margin-left: 5px;*/
-            /*}*/
+            .badge {
+                font-size: 14px;
+                color: var(--secondary-text-color);
+            }
 
-            /*.session {*/
-                /*padding: 20px 0;*/
-                /*border-top: 1px solid #e8e8e8;*/
-            /*}*/
+            .badge:not(:last-of-type)::after {
+                content: " /";
+            }
 
-            /*.session-meta {*/
-                /*margin-right: 10px;*/
-                /*font-size: 14px;*/
-            /*}*/
+            .social {
+                margin-left: -9px;
+            }
 
-            /*.session-title {*/
-                /*font-size: 22px;*/
-                /*font-weight: 400;*/
-            /*}*/
+            .social-icon {
+                color: var(--secondary-text-color);
+            }
+
+            .section-title {
+                margin-bottom: 20px;
+                font-size: 20px;
+                font-weight: 400;
+            }
+
+            .sessions-wrapper {
+                border-top: 1px solid var(--divider-color);
+            }
+
+            .sessions {
+                @apply(--layout-horizontal);
+                @apply(--layout-wrap)
+            }
+
+            .session {
+                width: calc(50% - 12px);
+                padding: 0 12px;
+            }
+
+            .session:last-of-type {
+                padding-right: 0;
+            }
+
+            .session:first-of-type {
+                padding-left: 0;
+            }
         </style>
-        <paper-scroll-header-panel id="scrollHeaderPanel" condenses>
+        <paper-scroll-header-panel id="scrollHeaderPanel" condenses="{{smallScreen}}">
             <paper-toolbar class="tall">
                 <paper-icon-button class="back-button" dialog-dismiss icon="arrow-back"></paper-icon-button>
-                <div id="title" class="bottom title">[[speaker.name]]</div>
+                <div id="title" class="bottom title" hidden="{{!smallScreen}}">[[speaker.name]]</div>
             </paper-toolbar>
             <div class="content">
-                <div class="subtitle">[[speaker.company]], [[speaker.country]]</div>
-                <div class="card-content speaker-tags">
-                    <span class="tags-label">Tags:</span>
-                    <template is="dom-repeat" items="[[tags]]" as="tag">
-                        <span class$="[[tag.tagClass]]">[[tag.name]]</span>
-                    </template>
-                </div>
-                <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
-                    <a class="badge block" href="[[badge.link]]" target="_blank">[[badge.description]]</a>
-                </template>
-                <div class="card-content people-description">
-                    <marked-element markdown="[[speaker.bio]]"></marked-element>
-                </div>
-                <div class="card-content sessions">
-                    <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
-                        <div class="session">
-                            <h3 class="session-title">[[session.title]]</h3>
-                            <span class="session-meta">Language:
-                                <span>[[session.language]]</span>
+
+                <div class="metadata-wrapper">
+                    <div class="main-info">
+                        <iron-image class="photo" src="[[speaker.photoUrl]]" preload fade sizing="cover" no-reveal
+                                    hidden="{{smallScreen}}"></iron-image>
+                        <div class="info">
+                            <span class="name" hidden="{{smallScreen}}">[[speaker.name]]</span>
+                            <span class="title">[[speaker.company]], [[speaker.country]]</span>
+                            <span class="badges">
+                                <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
+                                    <a class="badge" href="[[badge.link]]" target="_blank">[[badge.description]]</a>
+                                </template>
                             </span>
-                            <span class="session-meta">Complexity:
-                                <span>[[session.complexity]]</span>
-                            </span>
-                            <marked-element markdown="[[session.description]]"></marked-element>
                         </div>
+                    </div>
+                </div>
+
+                <marked-element markdown="[[speaker.bio]]"></marked-element>
+
+                <div class="social">
+                    <template is="dom-repeat" items="[[speaker.socials]]" as="social">
+                        <a href="[[social.link]]" target="_blank">
+                            <paper-icon-button class="social-icon" icon$="icons:{{social.icon}}"></paper-icon-button>
+                        </a>
                     </template>
                 </div>
-                <div class="card-actions">
-                    <div class="align-pb-block">
-                        <template is="dom-repeat" items="[[speaker.socials]]" as="social">
-                            <a href="[[social.link]]" target="_blank">
-                                <paper-icon-button class="social-icon" icon$="{{social.icon}}"></paper-icon-button>
-                            </a>
+
+            </div>
+
+            <template is="dom-if" if="{{speaker.sessions.length}}">
+                <div class="sessions-wrapper content">
+                    <h4 class="section-title">Sessions</h4>
+                    <div class="sessions">
+                        <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
+                            <div class="session">
+                                <h3 class="session-title">[[session.title]]</h3>
+                                <span class="session-meta">Language: [[session.language]]</span>
+                                <span class="session-meta">Complexity: [[session.complexity]]</span>
+                                <marked-element markdown="[[session.description]]"></marked-element>
+                            </div>
                         </template>
                     </div>
                 </div>
-            </div>
+            </template>
         </paper-scroll-header-panel>
 
+        <iron-media-query query="(max-width: 960px)" query-matches="{{smallScreen}}"></iron-media-query>
     </template>
     <script>
         (function () {
@@ -154,8 +198,26 @@
                     Polymer.NeonAnimationRunnerBehavior
                 ],
 
+                properties: {
+                    speaker: {
+                        type: Object,
+                        observer: '_speakerChanged'
+                    }
+                },
+
                 listeners: {
                     'neon-animation-finish': '_onNeonAnimationFinish'
+                },
+
+                _speakerChanged: function () {
+                    this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + app.generateClass(this.speaker.tags[0]) + ')';
+                    if (window.innerWidth < 961) {
+                        this.$.scrollHeaderPanel.$.headerBg.style.background = 'linear-gradient(to top, rgba(0, 0, 0, 0.4) -10%, rgba(0, 0, 0, 0.1) 50%), url(' + this.speaker.photoUrl + ') 0 / cover no-repeat';
+                    }
+                    this.async(function () {
+                        this.$.scrollHeaderPanel.scrollToTop(true);
+                    });
+                    this.updateStyles();
                 },
 
                 _renderOpened: function () {
