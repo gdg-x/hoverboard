@@ -152,7 +152,7 @@
                             </div>
                         </div>
                         <div class="card-content" on-tap="_openSpeaker">
-                            <truncate-marked-text class="bio" input-text="{{speaker.bio}}" characters="220" break-last-word></truncate-marked-text>
+                            <truncate-marked-text class="bio" text="[[speaker.bio]]" characters="220" break-last-word></truncate-marked-text>
                         </div>
                         <div class="card-actions">
                             <template is="dom-repeat" items="[[speaker.socials]]" as="social">
@@ -167,11 +167,6 @@
             </template>
         </div>
         <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}" cascaded></footer-block>
-
-        <paper-dialog id="dialog" class="speaker-details" speaker="{{_selectedSpeaker}}"
-                         entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop>
-            <div>Test dialog</div>
-        </paper-dialog>
 
         <speaker-details id="speakerDetails" class="speaker-details" speaker="{{_selectedSpeaker}}"
                          entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop></speaker-details>
@@ -260,7 +255,6 @@
             _openSpeaker: function(e) {
                 this._selectedSpeaker = e.model.speaker;
                 this.$.speakerDetails.open();
-//                this.$.dialog.open();
             }
         });
 

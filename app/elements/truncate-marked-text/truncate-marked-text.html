@@ -3,8 +3,16 @@
 <link rel="import" href="../../../bower_components/marked-element/marked-element.html">
 
 <dom-module id="truncate-marked-text">
+    <style include="shared-styles"></style>
+    <style>
+        .markdown-html {
+            @apply(--truncate-marked-text-style);
+        }
+    </style>
     <template>
-        <marked-element markdown="[[_outputText]]"></marked-element>
+        <marked-element markdown="[[_outputText]]">
+            <div class="markdown-html"></div>
+        </marked-element>
     </template>
     <script>
         (function() {
@@ -22,7 +30,7 @@
                             type: Boolean,
                             value: false
                         },
-                        inputText: {
+                        text: {
                             type: String,
                             observer: 'truncate'
                         },
@@ -35,9 +43,9 @@
 
                 truncate() {
                     if (this.words && !this.characters) {
-                        this._outputText = this._truncateByWords(this.inputText, this.words);
+                        this._outputText = this._truncateByWords(this.text, this.words);
                     } else {
-                        this._outputText = this._truncateByCharacters(this.inputText, this.characters, this.breakLastWord);
+                        this._outputText = this._truncateByCharacters(this.text, this.characters, this.breakLastWord);
                     }
                 }
 

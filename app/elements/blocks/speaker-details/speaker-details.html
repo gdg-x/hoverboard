@@ -16,6 +16,10 @@
                 min-height: 100%;
                 min-width: 100%;
                 --paper-scroll-header-panel-color: var(--default-primary-color);
+                --truncate-marked-text-style: {
+                    font-size: 16px;
+                    line-height: 1.5;
+                };
             }
 
             paper-scroll-header-panel {
@@ -34,19 +38,24 @@
             paper-toolbar {
                 background-color: transparent;
                 color: #FFFFFF;
+                --paper-toolbar-title: {
+                    margin-left: 10px;
+                };
+            }
+
+            .fallback-image-wrapper {
+                @apply(--layout-horizontal);
+                @apply(--layout-center-center);
+                @apply(--layout-fit);
+            }
+
+            .fallback-image {
+                width: 140px;
             }
 
             .content {
+                @apply(--truncate-marked-text-style);
                 padding: 24px;
-                font-size: 16px;
-                line-height: 1.5;
-            }
-
-            @media (min-width: 961px) {
-                :host {
-                    min-height: 60%;
-                    min-width: 60%;
-                }
             }
 
             .metadata-wrapper {
@@ -118,22 +127,43 @@
                 @apply(--layout-wrap)
             }
 
-            .session {
-                width: calc(50% - 12px);
-                padding: 0 12px;
+            .session:not(:last-of-type) {
+                margin-bottom: 20px;
             }
 
-            .session:last-of-type {
-                padding-right: 0;
+            .session-title {
+                margin-bottom: 5px;
+                line-height: 1.2;
+                font-weight: 400;
             }
 
-            .session:first-of-type {
-                padding-left: 0;
+            @media (min-width: 961px) {
+                :host {
+                    min-height: 60%;
+                    min-width: 800px;
+                }
+
+                .session {
+                    padding: 0 12px;
+                    width: calc(50% - 12px);
+                }
+
+                .session:last-of-type {
+                    padding-right: 0;
+                }
+
+                .session:first-of-type {
+                    padding-left: 0;
+                }
             }
         </style>
-        <paper-scroll-header-panel id="scrollHeaderPanel" condenses="{{smallScreen}}">
+        <paper-scroll-header-panel id="scrollHeaderPanel" condenses="{{smallScreen}}" no-reveal="{{!smallScreen}}">
             <paper-toolbar class="tall">
                 <paper-icon-button class="back-button" dialog-dismiss icon="arrow-back"></paper-icon-button>
+                <div class="middle fallback-image-wrapper" hidden="{{smallScreen}}">
+                    <iron-image class="fallback-image" src="{$ baseurl $}/images/logo-white.svg"
+                                alt="{$ title $}"></iron-image>
+                </div>
                 <div id="title" class="bottom title" hidden="{{!smallScreen}}">[[speaker.name]]</div>
             </paper-toolbar>
             <div class="content">
@@ -173,9 +203,13 @@
                         <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
                             <div class="session">
                                 <h3 class="session-title">[[session.title]]</h3>
-                                <span class="session-meta">Language: [[session.language]]</span>
-                                <span class="session-meta">Complexity: [[session.complexity]]</span>
-                                <marked-element markdown="[[session.description]]"></marked-element>
+                                <div class="badges">
+                                    <template is="dom-repeat" items="[[session.tags]]" as="tag">
+                                        <span class="badge" target="_blank">[[tag]]</span>
+                                    </template>
+                                </div>
+                                <truncate-marked-text text="[[session.description]]" characters="220"
+                                                      break-last-word></truncate-marked-text>
                             </div>
                         </template>
                     </div>
@@ -207,6 +241,16 @@
 
                 listeners: {
                     'neon-animation-finish': '_onNeonAnimationFinish'
+                },
+
+                ready: function () {
+                    var title = this.$.title;
+                    addEventListener('paper-header-transform', function (e) {
+                        var d = e.detail;
+                        var m = d.height - d.condensedHeight;
+                        var transform = 40 * d.y / m;
+                        Polymer.Base.transform('translate3d(' + transform + 'px,0,0)', title);
+                    });
                 },
 
                 _speakerChanged: function () {
