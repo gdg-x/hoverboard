@@ -41,6 +41,7 @@ for further information on custom CSS properties.
 --secondary-text-color:       var(--$(themeMode)-theme-secondary-text-color);
 --disabled-text-color:        var(--$(themeMode)-theme-disabled-text-color);
 --divider-color:              var(--$(themeMode)-theme-divider-color);
+--error-color:                var(--paper-deep-orange-a700);        /* User input errors */
 
 /* Primary colors */
 --primary-color:              var(--paper-$(primaryColorName)-500); /* Header bar */
