@@ -20,11 +20,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             // More info: https://visionmedia.github.io/page.js/
 
             let happ = document.querySelector('#hoverboard-app');
+            var app = document.querySelector('#app'),
+            scrollContainer = document.querySelector('#paperDrawerPanel [main]');
 
-            // Middleware
             function scrollToTop(ctx, next) {
                 app.fire('iron-signal', {name: 'track-page', data: { path: ctx.path } });
-                app.scrollPageToTop();
+                scrollContainer.scrollToTop(true);
                 next();
             }
 
@@ -43,29 +44,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             });
 
            page('/speakers', scrollToTop, () => {
-               app.route = 'speakers';
+               happ.route = 'speakers';
            });
 
            page('/speakers/:id', scrollToTop, data => {
-               app.route = 'speakersDetails';
-               app.params = data.params;
+               happ.route = 'speakersDetails';
+               happ.params = data.params;
            });
 //
 //            page('/schedule', scrollToTop, () => {
-//                app.route = 'schedule';
+//                happ.route = 'schedule';
 //            });
 //
 //            page('/schedule/:id', scrollToTop, data => {
-//                app.route = 'schedule';
-//                app.params = data.params;
+//                happ.route = 'schedule';
+//                happ.params = data.params;
 //            });
 //
 //            page('/code-of-conduct', scrollToTop, () => {
-//                app.route = 'code-of-conduct';
+//                happ.route = 'code-of-conduct';
 //            });
 //
 //            page('/speaker-guidelines', scrollToTop, () => {
-//                app.route = 'speaker-guidelines';
+//                happ.route = 'speaker-guidelines';
 //            });
 
             // add #! before urls

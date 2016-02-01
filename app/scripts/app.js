@@ -4,7 +4,7 @@
     // Grab a reference to our auto-binding template
     // and give it some initial binding values
     // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
-    let app = document.querySelector('#app');
+    var app = document.querySelector('#app');
 
     app.displayInstalledToast = () => {
         // Check to make sure caching is actually enabled—it won't be in the dev environment.
@@ -21,8 +21,6 @@
     window.addEventListener('WebComponentsReady', () => { /* imports are loaded and elements have been registered */
     });
 
-    // Scroll page to top and expand header
-    app.scrollPageToTop = () => document.getElementById('mainContainer').scrollTop = 0;
     app.generateClass = (value) => value.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
     app.getIndexByProperty = (array, property, value) => {
         for (let i = 0, length = array.length; i < length; i++) {
