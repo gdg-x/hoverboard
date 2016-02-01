@@ -272,22 +272,24 @@
                 },
 
                 _postIdChanged: function () {
-                    this.$.animationWrapper.style.opacity = 0;
-                    this.$.animationWrapper.style.display = 'none';
-                    this.$.spinner.style.opacity = 1;
+                    if(this.selected) {
+                        this.$.animationWrapper.style.opacity = 0;
+                        this.$.animationWrapper.style.display = 'none';
+                        this.$.spinner.style.opacity = 1;
 
-                    var postIndex = app.getIndexByProperty(this.posts, 'id', this.postId);
+                        var postIndex = app.getIndexByProperty(this.posts, 'id', this.postId);
 
-                    this._latestPosts[0] = postIndex > 0 ? this.posts[postIndex - 1] : null;
-                    this._latestPosts[1] = postIndex < this.posts.length - 1 ? this.posts[postIndex + 1] : null;
-                    this.notifyPath('_latestPosts', this._latestPosts.slice());
+                        this._latestPosts[0] = postIndex > 0 ? this.posts[postIndex - 1] : null;
+                        this._latestPosts[1] = postIndex < this.posts.length - 1 ? this.posts[postIndex + 1] : null;
+                        this.notifyPath('_latestPosts', this._latestPosts.slice());
 
-                    this._post = this.posts[postIndex];
-                    this.notifyPath('_post.date', new Date(this._post.posted).toDateString().slice(4));
-                    this.updateHeroSettings();
+                        this._post = this.posts[postIndex];
+                        this.notifyPath('_post.date', new Date(this._post.posted).toDateString().slice(4));
+                        this.updateHeroSettings();
 
-                    this._postUrl = '{$ baseurl $}/posts/' + this._post.posted + '-' + this.postId + '.markdown';
-                    this.$.ajax.generateRequest();
+                        this._postUrl = '{$ baseurl $}/posts/' + this._post.posted + '-' + this.postId + '.markdown';
+                        this.$.ajax.generateRequest();
+                    }
                 },
 
                 _postLoaded: function () {

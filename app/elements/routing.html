@@ -19,54 +19,53 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             // client-side router inspired by the Express router
             // More info: https://visionmedia.github.io/page.js/
 
-            let happ = document.querySelector('#hoverboard-app');
-            var app = document.querySelector('#app'),
-            scrollContainer = document.querySelector('#paperDrawerPanel [main]');
-
             function scrollToTop(ctx, next) {
                 app.fire('iron-signal', {name: 'track-page', data: { path: ctx.path } });
-                scrollContainer.scrollToTop(true);
                 next();
             }
 
             // Routes
             page('/', scrollToTop, () => {
-                happ.route = 'home';
+                app.scrollPageToTop();
+                app.route = 'home';
             });
 
             page('/blog', scrollToTop, () => {
-                happ.route = 'blog';
+                app.scrollPageToTop();
+                app.route = 'blog';
             });
 
             page('/blog/:id', scrollToTop, data => {
-                happ.route = 'post';
-                happ.params = data.params;
+                app.scrollPageToTop();
+                app.route = 'post';
+                app.params = data.params;
             });
 
            page('/speakers', scrollToTop, () => {
-               happ.route = 'speakers';
+               app.scrollPageToTop();
+               app.route = 'speakers';
            });
 
            page('/speakers/:id', scrollToTop, data => {
-               happ.route = 'speakersDetails';
-               happ.params = data.params;
+               app.route = 'speakers';
+               app.params = data.params;
            });
 //
 //            page('/schedule', scrollToTop, () => {
-//                happ.route = 'schedule';
+//                app.route = 'schedule';
 //            });
 //
 //            page('/schedule/:id', scrollToTop, data => {
-//                happ.route = 'schedule';
-//                happ.params = data.params;
+//                app.route = 'schedule';
+//                app.params = data.params;
 //            });
 //
 //            page('/code-of-conduct', scrollToTop, () => {
-//                happ.route = 'code-of-conduct';
+//                app.route = 'code-of-conduct';
 //            });
 //
 //            page('/speaker-guidelines', scrollToTop, () => {
-//                happ.route = 'speaker-guidelines';
+//                app.route = 'speaker-guidelines';
 //            });
 
             // add #! before urls

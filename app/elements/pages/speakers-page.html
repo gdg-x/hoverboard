@@ -152,7 +152,8 @@
                             </div>
                         </div>
                         <div class="card-content" on-tap="_openSpeaker">
-                            <truncate-marked-text class="bio" text="[[speaker.bio]]" characters="220" break-last-word></truncate-marked-text>
+                            <truncate-marked-text class="bio" text="[[speaker.bio]]" characters="220"
+                                                  break-last-word></truncate-marked-text>
                         </div>
                         <div class="card-actions">
                             <template is="dom-repeat" items="[[speaker.socials]]" as="social">
@@ -169,7 +170,8 @@
         <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}" cascaded></footer-block>
 
         <speaker-details id="speakerDetails" class="speaker-details" speaker="{{_selectedSpeaker}}"
-                         entry-animation="scale-up-animation" exit-animation="fade-out-animation" with-backdrop></speaker-details>
+                         entry-animation="scale-up-animation" exit-animation="fade-out-animation"
+                         with-backdrop></speaker-details>
     </template>
 </dom-module>
 
@@ -195,6 +197,10 @@
                     type: Object,
                     notify: true
                 },
+                speakerId: {
+                    type: Object,
+                    observer: 'openSpeakerDetails'
+                },
                 _heroSettings: {
                     type: Object,
                     /* jshint ignore:start */
@@ -209,13 +215,6 @@
                     value: function () {
                         return {
                             'entry': [{
-                                name: 'cascaded-animation',
-                                animation: 'transform-animation',
-                                transformFrom: 'translate3d(0, 100%, 0)',
-                                timing: {
-                                    delay: 500
-                                }
-                            }, {
                                 name: 'fade-in-animation',
                                 animation: 'fade-in-animation',
                                 node: this,
@@ -224,10 +223,6 @@
                                 }
                             }],
                             'exit': [{
-                                name: 'cascaded-animation',
-                                animation: 'transform-animation',
-                                transformTo: 'translate3d(0, 100%, 0)'
-                            }, {
                                 name: 'fade-out-animation',
                                 animation: 'fade-out-animation',
                                 node: this
@@ -245,14 +240,36 @@
                 this.heroSettings = this.selected ? this._heroSettings : this.heroSettings;
             },
 
+            openSpeakerDetails: function () {
+                if(this.selected) {
+                    this.async(function() {
+                        this._selectedSpeaker = this.speakers[app.getIndexByProperty(this.speakers, 'id', this.speakerId)];
+                        this.$.speakerDetails.open();
+                    }, 500);
+                }
+            },
+
             _updateCascadedNodes: function () {
                 var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
                 var cascadedArray = Array.prototype.slice.call(cascaded);
-                this.animationConfig.entry[0].nodes = cascadedArray;
-                this.animationConfig.exit[0].nodes = cascadedArray;
+                this.animationConfig.entry.push({
+                    name: 'cascaded-animation',
+                    animation: 'transform-animation',
+                    transformFrom: 'translate3d(0, 100%, 0)',
+                    timing: {
+                        delay: 500
+                    },
+                    nodes: cascadedArray
+                });
+                this.animationConfig.exit.push({
+                    name: 'cascaded-animation',
+                    animation: 'transform-animation',
+                    transformTo: 'translate3d(0, 100%, 0)',
+                    nodes: cascadedArray
+                });
             },
 
-            _openSpeaker: function(e) {
+            _openSpeaker: function (e) {
                 this._selectedSpeaker = e.model.speaker;
                 this.$.speakerDetails.open();
             }

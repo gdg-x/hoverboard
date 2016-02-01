@@ -6,7 +6,7 @@
     <span id="browser-sync-binding"></span>
     <template is="dom-bind" id="app">
 
-        <hoverboard-app id="hoverboard-app"></hoverboard-app>
+        <hoverboard-app id="hoverboard-app" route="{{route}}" params="{{params}}"></hoverboard-app>
 
         <!-- Service Worker support -->
         <paper-toast id="caching-complete" class="toast" duration="6000" text="Caching complete! This app will work offline."></paper-toast>

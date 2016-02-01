@@ -51,11 +51,11 @@
                 <hero-toolbar route="{{route}}" font-color="{{heroSettings.fontColor}}" background-color="{{heroSettings.backgroundColor}}" background-image="{{heroSettings.backgroundImage}}" tab-bar-color="{{heroSettings.tabBarColor}}" video="{{heroSettings.video}}"></hero-toolbar>
 
                 <!-- Main Content -->
-                <neon-animated-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}" selected-attribute="selected" animate-initial-selection>
+                <neon-animated-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}" selected-attribute="selected">
                     <home-page class="Page" data-route="home" people="{{speakers}}" posts="{{posts}}" logos="{{partners}}" hero-settings="{{heroSettings}}"></home-page>
                     <blog-page class="Page" data-route="blog" posts="{{posts}}" hero-settings="{{heroSettings}}"></blog-page>
                     <post-page class="Page" data-route="post" post-id="[[params.id]]" posts="{{posts}}" hero-settings="{{heroSettings}}"></post-page>
-                    <speakers-page class="Page" data-route="speakers" speakers="{{speakers}}" hero-settings="{{heroSettings}}"></speakers-page>
+                    <speakers-page class="Page" data-route="speakers" speakers="{{speakers}}" hero-settings="{{heroSettings}}" speaker-id="[[params.id]]"></speakers-page>
                 </neon-animated-pages>
             </paper-scroll-header-panel>
         </paper-drawer-panel>
@@ -73,7 +73,8 @@
                         route: {
                             type: String,
                             value: 'home'
-                        }
+                        },
+                        params: Object
                     };
                 }
 
