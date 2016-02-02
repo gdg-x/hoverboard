@@ -245,3 +245,7 @@ a, .anchor-like, .markdown-html a {
 }
 
 }
+
+[show] {
+    opacity: 1 !important;
+}
