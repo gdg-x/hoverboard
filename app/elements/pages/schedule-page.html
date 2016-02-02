@@ -1,0 +1,117 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="../blocks/footer-block/footer-block.html">
+
+<dom-module id="schedule-page">
+    <template>
+        <style include="shared-styles"></style>
+        <style>
+            :host {
+                display: block;
+            }
+        </style>
+        <div class="container page-header" cascaded>
+            <div class="page-title">
+                <h3>Schedule</h3>
+            </div>
+        </div>
+        <div class="container ">
+
+        </div>
+        <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}" cascaded></footer-block>
+    </template>
+</dom-module>
+
+<script>
+    (function () {
+        'use strict';
+
+        Polymer({
+
+            is: 'schedule-page',
+
+            behaviors: [
+                Polymer.NeonSharedElementAnimatableBehavior
+            ],
+
+            properties: {
+                speakers: Array,
+                selected: {
+                    type: Boolean,
+                    observer: 'updateHeroSettings'
+                },
+                heroSettings: {
+                    type: Object,
+                    notify: true
+                },
+                speakerId: {
+                    type: Object,
+                    observer: 'openSpeakerDetails'
+                },
+                _heroSettings: {
+                    type: Object,
+                    /* jshint ignore:start */
+                    value: function () {
+                        return {% for nav in navigation %}{% if nav.route == 'schedule' %}{$ nav.heroSettings | dump $}{% endif %}{% endfor %};
+                    }
+                    /* jshint ignore:end */
+                },
+
+                animationConfig: {
+                    type: Object,
+                    value: function () {
+                        return {
+                            'entry': [{
+                                name: 'fade-in-animation',
+                                animation: 'fade-in-animation',
+                                node: this,
+                                timing: {
+                                    delay: 500
+                                }
+                            }],
+                            'exit': [{
+                                name: 'fade-out-animation',
+                                animation: 'fade-out-animation',
+                                node: this
+                            }]
+                        };
+                    }
+                }
+            },
+
+            observers: [
+                'updateHeroSettings(selected)'
+            ],
+
+            updateHeroSettings: function () {
+                this.heroSettings = this.selected ? this._heroSettings : this.heroSettings;
+            },
+
+            _updateCascadedNodes: function () {
+                var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
+                var cascadedArray = Array.prototype.slice.call(cascaded);
+                this.animationConfig.entry.push({
+                    name: 'cascaded-animation',
+                    animation: 'transform-animation',
+                    transformFrom: 'translate3d(0, 100%, 0)',
+                    timing: {
+                        delay: 500
+                    },
+                    nodes: cascadedArray
+                });
+                this.animationConfig.exit.push({
+                    name: 'cascaded-animation',
+                    animation: 'transform-animation',
+                    transformTo: 'translate3d(0, 100%, 0)',
+                    nodes: cascadedArray
+                });
+            },
+        });
+
+    })();
+</script>

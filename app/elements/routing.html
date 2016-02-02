@@ -19,37 +19,47 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             // client-side router inspired by the Express router
             // More info: https://visionmedia.github.io/page.js/
 
-            function scrollToTop(ctx, next) {
+            function processRequest(ctx, next) {
                 app.fire('iron-signal', {name: 'track-page', data: { path: ctx.path } });
                 next();
             }
 
             // Routes
-            page('/', scrollToTop, () => {
+            page('/', processRequest, () => {
                 app.scrollPageToTop();
                 app.route = 'home';
             });
 
-            page('/blog', scrollToTop, () => {
+            page('/blog', processRequest, () => {
                 app.scrollPageToTop();
                 app.route = 'blog';
             });
 
-            page('/blog/:id', scrollToTop, data => {
+            page('/blog/:id', processRequest, data => {
                 app.scrollPageToTop();
                 app.route = 'post';
                 app.params = data.params;
             });
 
-           page('/speakers', scrollToTop, () => {
+           page('/speakers', processRequest, () => {
                app.scrollPageToTop();
                app.route = 'speakers';
            });
 
-           page('/speakers/:id', scrollToTop, data => {
+           page('/speakers/:id', processRequest, data => {
                app.route = 'speakers';
                app.params = data.params;
            });
+
+            page('/schedule', processRequest, () => {
+                app.scrollPageToTop();
+                app.route = 'schedule';
+            });
+
+            page('/schedule/:id', processRequest, data => {
+                app.route = 'schedule';
+                app.params = data.params;
+            });
 //
 //            page('/schedule', scrollToTop, () => {
 //                app.route = 'schedule';
