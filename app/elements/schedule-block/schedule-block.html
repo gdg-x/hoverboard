@@ -274,7 +274,7 @@
         _concatClass: function(basic, target) {
             return basic + ' ' + target;
         },
-        _sessionTap: function() {
+        _sessionTap: function(event) {
             page.redirect('/schedule/' + event.model.subSession.id);
             this._openSession(event.model.subSession);
         },

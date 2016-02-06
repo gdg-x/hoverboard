@@ -224,6 +224,10 @@ Going to use template? Go on! The only thing we ask - let us know at [lviv@gdg.o
 | [GDG DevFest Mezam 2015](https://devfest-mezam.gdgbambili.xyz) |
 | [GDG DevFest Silicon Valley 2015](http://devfest2015.gdgsv.com/) |
 | [GDG DevFest Belgium 2015](http://devfest.be/) |
+| [GDG DevFest South East Nigeria 2015](http://www.devfestse.com) |
+| [GDG DevFest Istanbul 2015](https://www.devfesttr.com) |
+| [GDG Cáceres CodeWeek 2015](http://codeweek.gdgcaceres.es) |
+
 
 
 
