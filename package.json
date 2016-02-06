@@ -15,7 +15,7 @@
         "gulp-gh-pages": "^0.5.4",
         "gulp-jshint": "^1.11.2",
         "gulp-load-plugins": "^1.0.0",
-        "gulp-minify-html": "^1.0.4",
+        "gulp-minify-html": "^1.0.5",
         "gulp-rename": "^1.2.2",
         "gulp-replace": "^0.5.4",
         "gulp-size": "^2.0.0",
