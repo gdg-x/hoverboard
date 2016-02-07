@@ -43,6 +43,7 @@ for further information on custom CSS properties.
     --footer-text-color: #757575;
 
     /* Tags colors */
+    --default: #BDBDBD;
     --android: #78C257;
     --web: #2196F3;
     --cloud: #3F51B5;

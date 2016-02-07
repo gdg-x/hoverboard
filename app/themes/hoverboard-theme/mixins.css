@@ -11,6 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         opacity: 0;
         transition: opacity .5s;
     };
+    --round: {
+        border-radius: 50%;
+    };
 }
-
-

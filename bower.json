@@ -5,6 +5,7 @@
         "polymer": "Polymer/polymer#1.2.x",
         "iron-elements": "PolymerElements/iron-elements#1.0.x",
         "iron-selector": "PolymerElements/iron-selector#1.2.x",
+        "iron-image": "PolymerElements/iron-image#1.2.x",
         "paper-elements": "PolymerElements/paper-elements#1.0.x",
         "platinum-elements": "PolymerElements/platinum-elements#2.0.x",
         "neon-elements": "PolymerElements/neon-elements#1.0.x",

@@ -96,6 +96,7 @@
                                     }
                                     session.startTime = timeslot.startTime;
                                     session.endTime = subSessionsLen > 1 ? this._getEndTime(day.date, timeslot.startTime, timeslot.endTime, subSessionsLen, l + 1) : timeslot.endTime;
+                                    session.dateReadable = day.dateReadable;
                                     this._scheduleRaw[i].timeslots[j].sessions[k][l] = session;
                                 }
                             }

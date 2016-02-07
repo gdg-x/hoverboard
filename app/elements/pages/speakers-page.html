@@ -169,7 +169,7 @@
         </div>
         <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}" cascaded></footer-block>
 
-        <speaker-details id="speakerDetails" class="speaker-details" speaker="{{_selectedSpeaker}}"
+        <speaker-details id="speakerDetails" speaker="{{_selectedSpeaker}}"
                          entry-animation="scale-up-animation" exit-animation="fade-out-animation"
                          with-backdrop></speaker-details>
     </template>
@@ -201,6 +201,7 @@
                     type: Object,
                     observer: 'openSpeakerDetails'
                 },
+                _selectedSpeaker: Object,
                 _heroSettings: {
                     type: Object,
                     /* jshint ignore:start */
