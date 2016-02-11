@@ -19,6 +19,7 @@
     "unwrap": true,
     "Polymer": true,
     "Platform": true,
+    "Firebase": false,
     "page": true,
     "app": true
   }
