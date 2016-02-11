@@ -235,6 +235,13 @@ Going to use template? Go on! The only thing we ask - let us know at [lviv@gdg.o
 
 Project Hoverboard is still under development and it is open for contributions. Feel free to send PR. If you have any questions, feel free to contact [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy).
 
+##Contributors
+See [list of contributors](https://github.com/gdg-x/hoverboard/graphs/contributors)
+
+Maintainer: [@ozasadnyy](https://github.com/ozasadnyy).
+
+######The GDG App, GDG[x] are not endorsed and/or supported by Google, the corporation.
+
 ## License
 
 Project is published under the [MIT license](https://github.com/gdg-x/hoverboard/blob/master/LICENSE.md) Feel free to clone and modify repo as you want, but don't forget to add reference to authors :)
