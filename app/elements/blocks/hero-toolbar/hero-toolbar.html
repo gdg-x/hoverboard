@@ -64,6 +64,7 @@
             .nav-link {
                 @apply(--layout-horizontal);
                 @apply(--layout-center-center);
+                height: 100%;
             }
 
             .menu-toggle {
@@ -123,7 +124,7 @@
                 </div>
                 <paper-tabs attr-for-selected="data-route" selected="{{route}}" hidden$="{{smallScreen}}" noink>
                     {% for nav in navigation %}
-                    <paper-tab data-route="{$ nav.route $}" class="text-u-c" link>
+                    <paper-tab data-route="{$ nav.route $}" link>
                         <a href="{$ nav.permalink $}" class="nav-link">{$ nav.text $}</a>
                     </paper-tab>
                     {% endfor %}
