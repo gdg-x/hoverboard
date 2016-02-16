@@ -2,17 +2,27 @@
   "name": "polymer-starter-kit-plus",
   "private": true,
   "dependencies": {
-    "font-roboto": "StartPolymer/font-empty#1.1.x",
-    "iron-elements": "PolymerElements/iron-elements#1.0.x",
-    "neon-elements": "PolymerElements/neon-elements#1.0.x",
-    "page": "visionmedia/page.js#1.6.x",
-    "paper-elements": "PolymerElements/paper-elements#1.0.x",
-    "platinum-elements": "PolymerElements/platinum-elements#1.1.x",
-    "polymer": "Polymer/polymer#1.2.x",
-    "start-elements": "StartPolymer/start-elements#1.1.x"
+    "font-roboto": "StartPolymer/font-empty#1.1.0",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#1.2.3",
+    "iron-pages": "PolymerElements/iron-pages#1.0.7",
+    "iron-selector": "PolymerElements/iron-selector#1.2.2",
+    "page": "visionmedia/page.js#1.6.4",
+    "paper-drawer-panel": "PolymerElements/paper-drawer-panel#1.0.6",
+    "paper-icon-button": "PolymerElements/paper-icon-button#1.0.6",
+    "paper-input": "PolymerElements/paper-input#1.1.6",
+    "paper-item": "PolymerElements/paper-item#1.1.3",
+    "paper-material": "PolymerElements/paper-material#1.0.6",
+    "paper-menu": "PolymerElements/paper-menu#1.2.2",
+    "paper-scroll-header-panel": "PolymerElements/paper-scroll-header-panel#1.0.15",
+    "paper-styles": "PolymerElements/paper-styles#1.1.3",
+    "paper-toast": "PolymerElements/paper-toast#1.1.3",
+    "paper-toolbar": "PolymerElements/paper-toolbar#1.1.4",
+    "platinum-sw": "PolymerElements/platinum-sw#1.2.3",
+    "polymer": "Polymer/polymer#1.2.4",
+    "start-google-analytics-tracker": "StartPolymer/start-google-analytics-tracker#1.1.0"
   },
   "devDependencies": {
-    "web-component-tester": "^4.0.0"
+    "web-component-tester": "4.2.0"
   },
   "ignore": []
 }

@@ -264,6 +264,18 @@ gulp download:fonts
 gulp pagespeed
 ```
 
+### Update versions of dependencies to the latest versions
+
+```sh
+npm install -g npm-check-updates
+
+# Check latest versions
+npm run check:ver # Alias for "ncu && ncu -m bower"
+
+# Update to the latest versions
+npm run update:ver # Alias for "ncu -u && ncu -um bower"
+```
+
 ## Service Worker
 
 Polymer Starter Kit Plus offers an offline experience thanks to Service Worker and the [Platinum Service Worker elements](https://github.com/PolymerElements/platinum-sw). New to Service Worker? Read the following [introduction](https://github.com/PolymerElements/polymer-starter-kit#service-worker) to understand how it works.

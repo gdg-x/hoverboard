@@ -66,6 +66,7 @@
     "deploy:prod": "gulp deploy:prod",
     "deploy:promote": "gulp deploy:promote",
     "deploy:stag": "gulp deploy:stag",
+    "check:ver": "ncu && ncu -m bower",
     "init": "gulp init",
     "install": "npm install && bower install",
     "install:all": "sudo npm install -g npm && sudo npm install -g bower gulp && npm install && bower install",
@@ -74,7 +75,8 @@
     "serve:dist": "gulp serve:dist",
     "serve:gae": "gulp serve:gae",
     "test": "gulp test:local",
-    "update": "npm update && bower update"
+    "update": "npm update && bower update",
+    "update:ver": "ncu -u && ncu -um bower"
   },
   "engines": {
     "node": ">=0.12.0"
