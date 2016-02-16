@@ -92,7 +92,7 @@
         "link": "https://twitter.com/Janamou"
     }, {
         "name": "Blog",
-        "icon": "link",
+        "icon": "website",
         "link": "http://www.moudra.net/"
     }]
 }, {
@@ -124,7 +124,7 @@
         "link": "https://twitter.com/ph0b"
     }, {
         "name": "Website",
-        "icon": "link",
+        "icon": "website",
         "link": "http://ph0b.com/"
     }]
 }, {
@@ -148,7 +148,7 @@
     }],
     "socials": [{
         "name": "Website",
-        "icon": "link",
+        "icon": "website",
         "link": "http://www.tasomaniac.com/"
     }, {
         "name": "Twitter",
@@ -242,7 +242,7 @@
         "link": "https://twitter.com/dmytrodanylyk"
     }, {
         "name": "Website",
-        "icon": "link",
+        "icon": "website",
         "link": "http://www.dmytrodanylyk.com/#/about"
     }]
 }, {
@@ -296,7 +296,7 @@
         "link": "https://github.com/tajchert"
     }, {
         "name": "Website",
-        "icon": "link",
+        "icon": "website",
         "link": "http://tajchert.pl/"
     }]
 }, {
@@ -323,7 +323,7 @@
         "link": "https://google.com/+ValentynShybanov"
     }, {
         "name": "Website",
-        "icon": "link",
+        "icon": "website",
         "link": "http://olostan.name/"
     }]
 }, {
@@ -554,7 +554,7 @@
         "link": "https://twitter.com/busradeniz"
     }, {
         "name": "Blog",
-        "icon": "link",
+        "icon": "website",
         "link": "http://www.busradeniz.com/"
     }]
 }, {
@@ -580,7 +580,7 @@
         "link": "https://twitter.com/semihyagcioglu"
     }, {
         "name": "Blog",
-        "icon": "link",
+        "icon": "website",
         "link": "http://semihyagcioglu.com"
     }]
 }, {
