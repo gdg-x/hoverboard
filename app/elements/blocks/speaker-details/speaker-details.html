@@ -25,7 +25,7 @@
                         <iron-image class="photo" src="[[speaker.photoUrl]]" preload fade sizing="cover" no-reveal
                                     hidden="{{smallScreen}}"></iron-image>
                         <div class="info">
-                            <h1 class="title" hidden="{{smallScreen}}">[[speaker.name]]</h1>
+                            <h1 class="main-title" hidden="{{smallScreen}}">[[speaker.name]]</h1>
                             <span class="meta highlight">[[speaker.company]], [[speaker.country]]</span>
                             <span class="meta">
                                 <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
@@ -36,7 +36,9 @@
                     </div>
                 </div>
 
-                <marked-element markdown="[[speaker.bio]]"></marked-element>
+                <marked-element markdown="[[speaker.bio]]">
+                    <div class="markdown-html"></div>
+                </marked-element>
 
                 <div class="actions">
                     <template is="dom-repeat" items="[[speaker.socials]]" as="social">
@@ -63,7 +65,7 @@
                                     </div>
                                     <truncate-marked-text text="[[session.description]]" characters="220"
                                                           break-last-word></truncate-marked-text>
-                                    <a class="read-more" href="/schedule/[[session.id]]" data-route="schedule">Read more</a>
+                                    <a class="read-more" href="/schedule/[[session.id]]" data-route="schedule" dialog-dismiss>Read more</a>
 
                                 </div>
                             </div>
@@ -119,7 +121,7 @@
                 },
 
                 _renderOpened: function () {
-                    if (this.withBackdrop) {
+                    if (this.withBackdrop && window.innerWidth > 960) {
                         this.backdropElement.open();
                     }
                     this.playAnimation('entry');
@@ -131,9 +133,7 @@
 
                 _renderClosed: function () {
                     page.show('/' + app.route, null, false);
-                    if (this.withBackdrop) {
-                        this.backdropElement.close();
-                    }
+                    this.backdropElement.close();
                     this.playAnimation('exit');
                 },
 

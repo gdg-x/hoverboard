@@ -15,14 +15,19 @@
     <template>
         <style include="shared-styles"></style>
         <style include="dialog-styles"></style>
-        <paper-scroll-header-panel id="scrollHeaderPanel" condenses="{{smallScreen}}" no-reveal="{{!smallScreen}}">
+        <style>
+            a {
+                color: var(--default-primary-color);
+                text-decoration: none;
+            }
+        </style>
+        <paper-scroll-header-panel id="scrollHeaderPanel" no-reveal>
             <paper-toolbar class="tall">
-                <paper-icon-button class="back-button" dialog-dismiss icon="arrow-back"></paper-icon-button>
-                <div class="middle fallback-image-wrapper" hidden="{{smallScreen}}">
+                <paper-icon-button class="back-button" dialog-dismiss icon="icons:arrow-back"></paper-icon-button>
+                <div class="middle fallback-image-wrapper">
                     <iron-image class="fallback-image" src="{$ baseurl $}/images/logo-white.svg"
                                 alt="{$ title $}"></iron-image>
                 </div>
-                <div id="title" class="bottom title" hidden="{{!smallScreen}}">[[session.title]]</div>
             </paper-toolbar>
             <div class="content">
                 <paper-menu-button horizontal-align="right" share-menu>
@@ -49,7 +54,7 @@
                 <div class="metadata-wrapper">
                     <div class="main-info">
                         <div class="info">
-                            <h1 class="title" hidden="{{smallScreen}}">[[session.title]]</h1>
+                            <h1 class="main-title">[[session.title]]</h1>
                             <span class="meta highlight">[[session.dateReadable]] / [[session.startTime]] - [[session.endTime]] / [[session.track.title]]
                                 <template is="dom-if" if="{{session.language}}">
                                     / [[session.language]]
@@ -63,7 +68,9 @@
                     </div>
                 </div>
 
-                <marked-element markdown="[[session.description]]"></marked-element>
+                <marked-element markdown="[[session.description]]">
+                    <div class="markdown-html"></div>
+                </marked-element>
 
                 <div class="actions">
                     <template is="dom-if" if="[[session.presentation]]">
@@ -106,7 +113,7 @@
                                     <truncate-marked-text text="[[speaker.bio]]" characters="220"
                                                           break-last-word></truncate-marked-text>
 
-                                    <a class="read-more" href="/speakers/[[speaker.id]]" data-route="speakers">Read
+                                    <a class="read-more" href="/speakers/[[speaker.id]]" data-route="speakers" dialog-dismiss>Read
                                         more</a>
                                 </div>
                             </div>
@@ -143,32 +150,18 @@
                     'neon-animation-finish': '_onNeonAnimationFinish'
                 },
 
-                ready: function () {
-                    var title = this.$.title;
-                    addEventListener('paper-header-transform', function (e) {
-                        var d = e.detail;
-                        var m = d.height - d.condensedHeight;
-                        var transform = 40 * d.y / m;
-                        Polymer.Base.transform('translate3d(' + transform + 'px,0,0)', title);
-                    });
-                },
-
                 _concatArray: function (array) {
                     return array ? array.join(', ') : '';
                 },
 
                 _sessionChanged: function () {
-                    console.log(this.session);
                     page.redirect('/' + app.route + '/' + this.session.id);
                     this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + this.session.mainTag + ')';
-                    if (window.innerWidth < 961) {
-                        this.$.scrollHeaderPanel.$.headerBg.style.background = 'linear-gradient(to top, rgba(0, 0, 0, 0.4) -10%, rgba(0, 0, 0, 0.1) 50%), url(' + "change" + ') 0 / cover no-repeat';
-                    }
                     this.updateStyles();
                 },
 
                 _renderOpened: function () {
-                    if (this.withBackdrop) {
+                    if (this.withBackdrop && window.innerWidth > 960) {
                         this.backdropElement.open();
                     }
                     this.playAnimation('entry');
@@ -180,9 +173,7 @@
 
                 _renderClosed: function () {
                     page.show('/' + app.route, null, false);
-                    if (this.withBackdrop) {
-                        this.backdropElement.close();
-                    }
+                    this.backdropElement.close();
                     this.playAnimation('exit');
                 },
 

@@ -15,13 +15,14 @@
         <style>
             :host {
                 display: block;
-                --paper-tabs-selection-bar-color: #fff;
+                --paper-tabs-selection-bar-color: #FFFFFF;
                 --paper-tab-ink: rgba(255, 255, 255, 0.2);
+                --hero-color: var(--default-primary-color);
                 --paper-tab-content: {
                     font-weight: 400 !important;
                 };
                 --paper-tab: {
-                    color: #fff;
+                    color: #FFFFFF;
                     font-weight: 400;
                     text-transform: uppercase;
                     flex: none;
@@ -62,7 +63,6 @@
 
             .sub-session {
                 @apply(--layout-horizontal);
-                margin-bottom: 10px;
                 padding: 10px 16px;
                 background: #FFFFFF;
                 cursor: pointer;
@@ -158,6 +158,10 @@
                     background: #FFFFFF;
                     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
                 }
+
+                .schedule-tabs {
+                    background: var(--hero-color);
+                }
             }
 
             @media (min-width: 961px) {
@@ -185,6 +189,10 @@
                     padding: 20px 16px;
                     border-top: 3px solid;
                     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+                }
+
+                .sub-session:not(:last-of-type) {
+                    margin-bottom: 10px;
                 }
 
                 .track {
@@ -227,12 +235,13 @@
                                                      style$="border-color: [[_getCustomStyleValue(subSession.mainTag)]]"
                                                      on-tap="_openSession">
                                                     <div class="track">
-                                                        <span style$="background: [[_getCustomStyleValue(subSession.mainTag)]]"></span>
+                                                        <span
+                                                            style$="background: [[_getCustomStyleValue(subSession.mainTag)]]"></span>
                                                     </div>
                                                     <div class="session-detail">
                                                         <div class="main-info">
                                                             <h4 class="session-title">[[subSession.title]]</h4>
-                                                            <span class="lang">[[subSession.language]]</span>
+                                                            <span class="lang">[[_getFirstCharacters(subSession.language)]]</span>
                                                         </div>
                                                         <template is="dom-repeat" items="[[subSession.speakers]]"
                                                                   as="speaker">
@@ -351,13 +360,18 @@
                 }
             },
 
+            ready: function () {
+                this.customStyle['--hero-color'] = this._heroSettings.backgroundColor;
+                this.updateStyles();
+            },
+
             updateHeroSettings: function () {
                 this.heroSettings = this.selected ? this._heroSettings : this.heroSettings;
             },
 
             openSessionDetails: function () {
-                if(this.selected) {
-                    this.async(function() {
+                if (this.selected) {
+                    this.async(function () {
                         this._selectedSession = this.sessions[app.getIndexByProperty(this.sessions, 'id', this.sessionId)];
                         this.$.sessionDetails.open();
                     }, 500);
@@ -401,6 +415,10 @@
                     transformTo: 'translate3d(0, 100%, 0)',
                     nodes: cascadedArray
                 });
+            },
+
+            _getFirstCharacters: function (text) {
+                return text ? text.substring(0, 2) : '';
             }
         });
 

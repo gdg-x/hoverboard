@@ -21,8 +21,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 --content-padding: 24px;
                 --paper-scroll-header-panel-color: var(--default-primary-color);
                 --paper-icon-item: {
-                    background: #FFFFFF;
-                    color: var(--secondary-text-color);
                 };
                 --truncate-marked-text-style: {
                     font-size: 15px;
@@ -31,11 +29,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                 --paper-fab-background: #FFFFFF;
                 --paper-fab-keyboard-focus-background: #FFFFFF;
+                --paper-menu-button-content: {
+                    background: #FFFFFF;
+                    color: var(--secondary-text-color);
+                };
                 --paper-fab-iron-icon: {
                     color: var(--secondary-text-color);
                 };
                 --paper-menu-button: {
                     margin-top: calc(-36px - var(--content-padding));
+                    margin-right: -var(--content-padding);
                     float: right;
                     z-index: 1;
                 };
@@ -84,6 +87,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 padding: var(--content-padding);
             }
 
+            .main-title {
+                margin-bottom: 10px;
+                font-size: 24px;
+                line-height: 1.1;
+                color: var(--primary-text-color);
+            }
+
             .metadata-wrapper {
                 @apply(--layout-vertical);
                 margin-bottom: 10px;
@@ -98,11 +108,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 @apply(--layout-vertical);
                 @apply(--layout-center-justified);
                 color: var(--secondary-text-color);
-            }
-
-            .title {
-                font-size: 24px;
-                color: var(--primary-text-color);
             }
 
             .meta {
@@ -156,6 +161,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 @apply(--layout-horizontal);
             }
 
+            .section:not(:last-of-type) {
+                margin-bottom: 40px;
+            }
+
             .section-info {
                 @apply(--layout-flex);
             }
@@ -190,6 +199,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 :host {
                     min-height: 60%;
                     min-width: 800px;
+                    --paper-menu-button: {
+                        margin-top: calc(-36px - var(--content-padding));
+                        float: right;
+                        z-index: 1;
+                    }
                 }
 
                 .section {

@@ -4,6 +4,7 @@
 <link rel="import" href="../../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../../../bower_components/paper-material/paper-material.html">
 <link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../bower_components/paper-tooltip/paper-tooltip.html">
 
 <link rel="import" href="../truncate-marked-text/truncate-marked-text.html">
 <link rel="import" href="../blocks/footer-block/footer-block.html">
@@ -114,11 +115,20 @@
                 color: var(--secondary-text-color);
             }
 
-            @media (min-width: 961px) {
+            @media (min-width: 601px) {
                 .speakers-container {
                     @apply(--layout-horizontal);
+                    @apply(--layout-center-justified);
                 }
 
+                .speaker {
+                    width: calc(100% / 2 - 3 * var(--grid-gutter));
+                    margin: var(--grid-gutter) var(--grid-gutter) calc(2 * var(--grid-gutter));
+                }
+
+            }
+
+            @media (min-width: 961px) {
                 .speaker {
                     width: calc(100% / 3 - 4 * var(--grid-gutter));
                     margin: var(--grid-gutter) var(--grid-gutter) calc(3 * var(--grid-gutter));
@@ -143,6 +153,7 @@
                                 <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
                                     <li class="badge">
                                         <a href="[[badge.link]]" target="_blank">[[badge.name]]</a>
+                                        <paper-tooltip>[[badge.description]]</paper-tooltip>
                                     </li>
                                 </template>
                             </ul>
