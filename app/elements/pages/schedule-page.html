@@ -37,6 +37,19 @@
                 margin-top: -66px;
             }
 
+            .legend {
+                margin-top: 20px;
+                background: transparent;
+            }
+
+            .legend-item {
+                margin-right: 10px;
+            }
+
+            .legend-item .point {
+                margin-right: 5px;
+            }
+
             .timeslot {
                 @apply(--layout-vertical);
             }
@@ -72,11 +85,11 @@
                 width: 40px;
             }
 
-            .track span {
+            .point {
                 margin: 7px 0 0 8px;
                 width: 10px;
                 height: 10px;
-                display: block;
+                display: inline-block;
                 border-radius: 50%;
             }
 
@@ -220,8 +233,17 @@
                                  exit-animation="[[_exitAnimation]]">
                 <template is="dom-repeat" items="[[schedule]]" as="day">
                     <neon-animatable>
-                        <template is="dom-repeat" items="[[day.timeslots]]" as="timeslot"
-                                  on-dom-change="_updateCascadedNodes">
+                        <div class="day-info">
+                            <paper-menu class="legend" multi>
+                                <template is="dom-repeat" items="[[day.tags]]" as="tag">
+                                    <paper-item class="legend-item">
+                                        <i class="point"
+                                                   style$="background: [[_getCustomStyleValue(tag.className)]]"></i>[[tag.name]]
+                                    </paper-item>
+                                </template>
+                            </paper-menu>
+                        </div>
+                        <template is="dom-repeat" items="[[day.timeslots]]" as="timeslot">
                             <div class="timeslot">
                                 <div class="start-time">
                                     <iron-icon class="schedule-icon" icon="icons:schedule"></iron-icon>
@@ -235,8 +257,8 @@
                                                      style$="border-color: [[_getCustomStyleValue(subSession.mainTag)]]"
                                                      on-tap="_openSession">
                                                     <div class="track">
-                                                        <span
-                                                            style$="background: [[_getCustomStyleValue(subSession.mainTag)]]"></span>
+                                                        <i class="point"
+                                                           style$="background: [[_getCustomStyleValue(subSession.mainTag)]]"></i>
                                                     </div>
                                                     <div class="session-detail">
                                                         <div class="main-info">
@@ -395,26 +417,6 @@
             _openSession: function (e) {
                 this._selectedSession = e.model.subSession;
                 this.$.sessionDetails.open();
-            },
-
-            _updateCascadedNodes: function () {
-                var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
-                var cascadedArray = Array.prototype.slice.call(cascaded);
-                this.animationConfig.entry.push({
-                    name: 'cascaded-animation',
-                    animation: 'transform-animation',
-                    transformFrom: 'translate3d(0, 100%, 0)',
-                    timing: {
-                        delay: 500
-                    },
-                    nodes: cascadedArray
-                });
-                this.animationConfig.exit.push({
-                    name: 'cascaded-animation',
-                    animation: 'transform-animation',
-                    transformTo: 'translate3d(0, 100%, 0)',
-                    nodes: cascadedArray
-                });
             },
 
             _getFirstCharacters: function (text) {
