@@ -2,8 +2,8 @@
 
 # Polymer Starter Kit Plus
 
-[![PageSpeed 97/100](https://img.shields.io/badge/PageSpeed-97%20/%20100-brightgreen.svg)](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fpolymer-starter-kit-plus.appspot.com&tab=desktop)
-[![GTmetrix 99%](https://img.shields.io/badge/GTmetrix-99%-brightgreen.svg)](https://gtmetrix.com/reports/polymer-starter-kit-plus.appspot.com/KL895CNj)
+[![PageSpeed 97%](https://img.shields.io/badge/PageSpeed-97%-brightgreen.svg)](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fpolymer-starter-kit-plus.appspot.com&tab=desktop)
+[![Sitespeed 98%](https://img.shields.io/badge/Sitespeed-98%-brightgreen.svg)](https://results.sitespeed.io/e361-2016/1/16/083f9e17-8729-4454-b7e9-539da460cbeb/index2.html)
 [![bitHound Code](https://www.bithound.io/github/StartPolymer/polymer-starter-kit-plus/badges/code.svg)](https://www.bithound.io/github/StartPolymer/polymer-starter-kit-plus)
 [![Google+ Start Polymer](https://img.shields.io/badge/Google+-Start%20Polymer-dd4b39.svg)](https://plus.google.com/101148544618948882647)
 
@@ -118,7 +118,7 @@ git commit -m 'Updated to 1.0.2'
 With Node.js installed, run the following one liner from the root of your Polymer Starter Kit Plus download:
 
 ```sh
-npm run install:all
+npm run install:all # Alias for "sudo npm install -g npm && sudo npm install -g bower gulp && npm install && bower install"
 ```
 
 #### Prerequisites (for everyone)
