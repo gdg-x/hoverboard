@@ -271,7 +271,7 @@
                 },
 
                 _concatArray: function (array) {
-                    return array.join(', ');
+                    return array ? array.join(', ') : '';
                 },
 
                 _sessionChanged: function () {
