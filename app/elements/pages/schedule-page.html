@@ -27,6 +27,17 @@
                     text-transform: uppercase;
                     flex: none;
                 };
+                --paper-menu: {
+                    color: var(--disabled-text-color);
+                };
+                --paper-menu-selected-item: {
+                    font-weight: 300;
+                    color: var(--primary-text-color);
+                };
+                --paper-menu-focused-item: {
+                    position: inherit;
+                    user-select: none;
+                };
             }
 
             .schedule-container {
@@ -44,6 +55,7 @@
 
             .legend-item {
                 margin-right: 10px;
+                cursor: pointer;
             }
 
             .legend-item .point {
@@ -167,9 +179,16 @@
                 }
 
                 .sessions-wrapper {
-                    padding: 10px 0;
                     background: #FFFFFF;
                     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+                }
+
+                .session:first-of-type .sub-session {
+                    padding-top: 20px;
+                }
+
+                .session:last-of-type .sub-session {
+                    padding-bottom: 20px;
                 }
 
                 .schedule-tabs {
@@ -234,11 +253,13 @@
                 <template is="dom-repeat" items="[[schedule]]" as="day">
                     <neon-animatable>
                         <div class="day-info">
-                            <paper-menu class="legend" multi>
+                            <paper-menu class="legend" selected-values="{{_selectedTags}}" multi
+                                        attr-for-selected="data-filter">
                                 <template is="dom-repeat" items="[[day.tags]]" as="tag">
-                                    <paper-item class="legend-item">
+                                    <paper-item class="legend-item"
+                                                data-filter$="[[tag]]">
                                         <i class="point"
-                                                   style$="background: [[_getCustomStyleValue(tag.className)]]"></i>[[tag.name]]
+                                           style$="background: [[_getCustomStyleValue(tag)]]"></i>[[tag]]
                                     </paper-item>
                                 </template>
                             </paper-menu>
@@ -251,8 +272,9 @@
                                 </div>
                                 <div class="sessions-wrapper">
                                     <template is="dom-repeat" items="[[timeslot.sessions]]" as="session">
-                                        <div class="session" cascaded>
-                                            <template is="dom-repeat" items="[[session]]" as="subSession">
+                                        <div class="session">
+                                            <template is="dom-repeat" items="[[session]]" as="subSession"
+                                                      filter="{{_filterSession(_selectedTags.splices)}}">
                                                 <div class="sub-session"
                                                      style$="border-color: [[_getCustomStyleValue(subSession.mainTag)]]"
                                                      on-tap="_openSession">
@@ -324,7 +346,10 @@
             ],
 
             properties: {
-                schedule: Array,
+                schedule: {
+                    type: Array,
+                    observer: '_updateLegend'
+                },
                 sessions: Array,
                 selected: {
                     type: Boolean,
@@ -339,12 +364,10 @@
                     observer: 'openSessionDetails'
                 },
                 _entryAnimation: {
-                    type: String,
-                    value: 'slide-up-animation'
+                    type: String
                 },
                 _exitAnimation: {
-                    type: String,
-                    value: 'slide-down-animation'
+                    type: String
                 },
                 _selectedDay: {
                     type: Number,
@@ -358,6 +381,10 @@
                         return {% for nav in navigation %}{% if nav.route == 'schedule' %}{$ nav.heroSettings | dump $}{% endif %}{% endfor %};
                     }
                     /* jshint ignore:end */
+                },
+                _selectedTags: {
+                    type: Array,
+                    value: []
                 },
 
                 animationConfig: {
@@ -400,6 +427,10 @@
                 }
             },
 
+            _updateLegend: function () {
+                this._selectedTags = this.schedule[0].tags;
+            },
+
             _changeDay: function (newValue, oldValue) {
                 if (window.innerWidth < 961) {
                     this._entryAnimation = newValue < oldValue ? 'slide-from-right-animation' : 'slide-from-left-animation';
@@ -408,10 +439,13 @@
                     this._entryAnimation = 'fade-in-animation';
                     this._exitAnimation = 'fade-out-animation';
                 }
+                if (this.schedule) {
+                    this._selectedTags = this.schedule[newValue].tags;
+                }
             },
 
             _getCustomStyleValue: function (value) {
-                return this.getComputedStyleValue('--' + value);
+                return this.getComputedStyleValue('--' + app.generateClass(value));
             },
 
             _openSession: function (e) {
@@ -421,6 +455,13 @@
 
             _getFirstCharacters: function (text) {
                 return text ? text.substring(0, 2) : '';
+            },
+
+            _filterSession: function () {
+                var tags = this._selectedTags || [];
+                return function (session) {
+                    return tags.indexOf(session.mainTag) > -1;
+                };
             }
         });
 
