@@ -115,14 +115,10 @@ gulp.task('fonts', function() {
 
 // Scan your HTML for assets & optimize them
 gulp.task('html', function() {
-  var assets = $.useref.assets({searchPath: ['dist']});
-
   return gulp.src(['app/*.html', '.tmp/*.html'])
-    .pipe(assets)
     // Concatenate and minify JavaScript
     .pipe($.if('*.js', $.uglify()))
-    .pipe(assets.restore())
-    .pipe($.useref())
+    .pipe($.useref({searchPath: 'dist'}))
     // Minify any HTML
     .pipe($.if('*.html', $.minifyHtml({
       empty: true,  // KEEP empty attributes
