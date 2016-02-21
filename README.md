@@ -118,7 +118,7 @@ git commit -m 'Updated to 1.0.2'
 With Node.js installed, run the following one liner from the root of your Polymer Starter Kit Plus download:
 
 ```sh
-npm run install:all # Alias for "sudo npm install -g npm && sudo npm install -g bower gulp && npm install && bower install"
+npm run install:complete # Alias for "sudo npm install -g npm && sudo npm install -g bower gulp && npm install && bower install"
 ```
 
 #### Prerequisites (for everyone)

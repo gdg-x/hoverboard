@@ -69,14 +69,14 @@
     "deploy:stag": "gulp deploy:stag",
     "check:ver": "ncu && ncu -m bower",
     "init": "gulp init",
-    "install": "npm install && bower install",
-    "install:all": "sudo npm install -g npm && sudo npm install -g bower gulp && npm install && bower install",
+    "install:all": "npm install && bower install",
+    "install:complete": "sudo npm install -g npm && sudo npm install -g bower gulp && npm install && bower install",
     "lint": "gulp lint",
     "serve": "gulp serve",
     "serve:dist": "gulp serve:dist",
     "serve:gae": "gulp serve:gae",
     "test": "gulp test:local",
-    "update": "npm update && bower update",
+    "update:all": "npm update && bower update",
     "update:ver": "ncu -u && ncu -um bower"
   },
   "engines": {
