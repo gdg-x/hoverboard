@@ -10,6 +10,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 /** @define Navigation */
 
 .Navigation {
+  /* stylelint-disable indentation */
+
   /* postcss-bem-linter: ignore */
   --paper-menu-selected-item: {
     color: var(--accent-color);
@@ -19,6 +21,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   --paper-menu-focused-item-after: {
     background-color: var(--disabled-text-color);
   };
+  /* stylelint-enable */
 
   @nest &-icon {
     margin-right: 24px;

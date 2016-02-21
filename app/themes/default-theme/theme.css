@@ -7,21 +7,15 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
-:root {
-  @import 'variables';
-}
-
-body {
-  @apply(--layout-fullbleed);
-  @apply(--layout-vertical);
-}
-
+@import 'variables';
 @import 'breakpoints';
 @import 'mixins';
 
+/* Components */
 @import 'components/drawer';
 @import 'components/main';
 @import 'components/navigation';
 @import 'components/toast';
 
+/* Utilities */
 @import 'utilities/layout';

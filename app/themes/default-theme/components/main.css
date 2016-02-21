@@ -15,11 +15,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   @nest &-content {
     @apply(--paper-font-body1);
     color: var(--primary-text-color);
+
     @media (--md-viewport) {
       @apply(--paper-font-body2);
       padding: 48px 64px;
     }
-    
+
     @nest & a {
       color: var(--accent-color);
       text-decoration: none;
@@ -27,7 +28,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   @nest &-header {
-    box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
 
     /* postcss-bem-linter: ignore */
     --paper-toolbar-content: {
@@ -70,6 +71,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     @apply(--layout-center);
 
     margin-left: 54px;
+
     /* Required for main area's paper-scroll-header-panel custom condensing transformation */
     transform-origin: left center;
 
@@ -81,6 +83,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   @nest &-headerTitle {
     @apply(--paper-font-headline);
     margin: 0;
+
     /* Required for main area's paper-scroll-header-panel custom condensing transformation */
     transform-origin: left center;
 
@@ -91,6 +94,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   @nest &-headerSubTitle {
     @apply(--paper-font-subhead);
+
     /* Required for main area's paper-scroll-header-panel custom condensing transformation */
     transform-origin: left center;
   }

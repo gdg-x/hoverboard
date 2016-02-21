@@ -29,7 +29,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     @media (--md-viewport) {
       background-color: var(--dark-primary-color);
       border: 0 !important;
-      box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
       color: var(--text-dark-primary-color);
     }
   }

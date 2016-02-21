@@ -18,15 +18,19 @@ https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md
 
 /* Single level of content hierarchy on the screen */
 @custom-media --sm-viewport (max-width: 599px);
+
 /* Two levels of content hierarchy on the screen */
 @custom-media --md-viewport (min-width: 600px);
+
 /* Max screen widths */
 @custom-media --lg-viewport (min-width: 1600px);
 
+/* Grid Breakpoints */
 @custom-media --4-col-grid  (orientation: portrait) and (max-width: 479px);
 @custom-media --8-col-grid  (orientation: portrait) and (min-width: 480px) and (max-width: 839px);
 @custom-media --12-col-grid (orientation: portrait) and (min-width: 840px);
 
+/* Phone Breakpoints */
 @custom-media --sm-phone           (orientation: portrait) and (max-width: 359px);
 @custom-media --md-phone           (orientation: portrait) and (min-width: 360px) and (max-width: 399px);
 @custom-media --lg-phone           (orientation: portrait) and (min-width: 400px);
@@ -34,6 +38,7 @@ https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md
 @custom-media --md-phone-landscape (orientation: landscape) and (min-width: 600px) and (max-width: 719px);
 @custom-media --lg-phone-landscape (orientation: landscape) and (min-width: 720px);
 
+/* Tablet Breakpoints */
 @custom-media --sm-tablet           (orientation: portrait) and (max-width: 719px);
 @custom-media --lg-tablet           (orientation: portrait) and (min-width: 720px);
 @custom-media --sm-tablet-landscape (orientation: landscape) and (max-width: 1023px);
@@ -42,22 +47,66 @@ https://github.com/suitcss/suit/blob/master/doc/naming-conventions.md
 /* Query order hack for CSS MQPacker
    https://github.com/hail2u/node-css-mqpacker#known-issues
 */
-@media (--sm-viewport) {}
-@media (--md-viewport) {}
-@media (--lg-viewport) {}
+@media (--sm-viewport) {
+  /* */
+}
 
-@media (--4-col-grid) {}
-@media (--8-col-grid) {}
-@media (--12-col-grid) {}
+@media (--md-viewport) {
+  /* */
+}
 
-@media (--sm-phone) {}
-@media (--md-phone) {}
-@media (--lg-phone) {}
-@media (--sm-phone-landscape) {}
-@media (--md-phone-landscape) {}
-@media (--lg-phone-landscape) {}
+@media (--lg-viewport) {
+  /* */
+}
 
-@media (--sm-tablet) {}
-@media (--lg-tablet) {}
-@media (--sm-tablet-landscape) {}
-@media (--lg-tablet-landscape) {}
+@media (--4-col-grid) {
+  /* */
+}
+
+@media (--8-col-grid) {
+  /* */
+}
+
+@media (--12-col-grid) {
+  /* */
+}
+
+@media (--sm-phone) {
+  /* */
+}
+
+@media (--md-phone) {
+  /* */
+}
+
+@media (--lg-phone) {
+  /* */
+}
+
+@media (--sm-phone-landscape) {
+  /* */
+}
+
+@media (--md-phone-landscape) {
+  /* */
+}
+
+@media (--lg-phone-landscape) {
+  /* */
+}
+
+@media (--sm-tablet) {
+  /* */
+}
+
+@media (--lg-tablet) {
+  /* */
+}
+
+@media (--sm-tablet-landscape) {
+  /* */
+}
+
+@media (--lg-tablet-landscape) {
+  /* */
+}

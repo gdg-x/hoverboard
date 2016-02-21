@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/paper-styles/color.html">
 <link rel="import" href="../../bower_components/paper-styles/typography.html">
+<link rel="import" href="icons.html">
 
 <link rel="stylesheet" href="fonts/fonts.css">
 
@@ -19,10 +20,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="shared-styles">
 <template><style>
 
-  @import "breakpoints";
-  @import "components/page";
+  @import 'breakpoints';
+  @import 'components/page';
 
 </style></template>
 </dom-module>
 
-<link rel="import" href="icons.html">
+<style is="custom-style">
+
+  body {
+    @apply(--layout-fullbleed);
+    @apply(--layout-vertical);
+  }
+
+</style>

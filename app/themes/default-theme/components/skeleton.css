@@ -37,7 +37,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   @nest &-drawerHeader {
     background-color: var(--dark-primary-color);
-    box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
     color: var(--text-dark-primary-color);
     display: block;
     height: 64px;
@@ -75,7 +75,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   @nest &-mainHeader {
     background-color: var(--primary-color);
-    box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
     height: calc(56px * 3);
     left: 0;
     position: relative;
