@@ -49,17 +49,17 @@ for further information on custom CSS properties.
   --primary-color: var(--paper-$(primaryColorName)-500);            /* Header bar */
   --light-primary-color: var(--paper-$(primaryColorName)-100);
   --dark-primary-color: var(--paper-$(primaryColorName)-700);
-  --text-primary-color: rgba(255, 255, 255, 0.87);                  /* Text / Icons */
-  --text-light-primary-color: rgba(0, 0, 0, 0.87);
-  --text-dark-primary-color: rgba(255, 255, 255, 0.87);
+  --text-primary-color: #fff;                                       /* Text / Icons */
+  --text-light-primary-color: var(--paper-grey-900);
+  --text-dark-primary-color: #fff;
 
   /* Accent colors */
   --accent-color: var(--paper-$(accentColorName)-a200);             /* Focus / Links / Switches */
   --light-accent-color: var(--paper-$(accentColorName)-a100);
   --dark-accent-color: var(--paper-$(accentColorName)-a400);
   --text-accent-color: #fff;                                        /* Text / Icons */
-  --text-light-accent-color: rgba(0, 0, 0, 0.87);
-  --text-dark-accent-color: rgba(255, 255, 255, 0.87);
+  --text-light-accent-color: var(--paper-grey-900);
+  --text-dark-accent-color: #fff;
 
   /* Deprecated values because of their confusing names.
      https://github.com/PolymerElements/paper-styles/blob/master/default-theme.html */
