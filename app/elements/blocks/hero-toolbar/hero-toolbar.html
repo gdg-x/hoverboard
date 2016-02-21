@@ -55,10 +55,14 @@
             .logo-wrapper {
                 @apply(--layout-flex);
             }
+            .logo-wrapper a {
+                display: inline-block;
+            }
 
             .logo {
                 margin-top: 7px;
                 height: 40px;
+                width: 130px;
             }
 
             .nav-link {
@@ -119,7 +123,7 @@
                                    hidden$="{{!smallScreen}}"></paper-icon-button>
                 <div class="logo-wrapper">
                     <a data-route="home" href="{$ baseurl $}/" hidden$="{{smallScreen}}">
-                        <img class="logo" src="{$ baseurl $}/images/logo-white.svg" alt="{$ title $}">
+                        <iron-image class="logo" src="{$ baseurl $}/images/logo-white.svg" sizing="contain" alt="{$ title $}"></iron-image>
                     </a>
                 </div>
                 <paper-tabs attr-for-selected="data-route" selected="{{route}}" hidden$="{{smallScreen}}" noink>

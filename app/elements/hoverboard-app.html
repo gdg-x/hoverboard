@@ -23,6 +23,7 @@
 <!-- Custom elements -->
 <link rel="import" href="app-data/app-data.html">
 <link rel="import" href="blocks/hero-toolbar/hero-toolbar.html">
+<link rel="import" href="blocks/drawer-block/drawer-block.html">
 
 <!-- Custom pages -->
 <link rel="import" href="pages/home-page.html">
@@ -44,7 +45,7 @@
 
         <paper-drawer-panel id="paperDrawerPanel" responsive-width="599px" force-narrow>
             <!-- Drawer Scroll Header Panel -->
-            {% include "drawer.html" %}
+            <drawer-block route="{{route}}" drawer></drawer-block>
 
             <!-- Main Area -->
             <paper-scroll-header-panel class="Main scroll" main>
@@ -78,10 +79,6 @@
                         },
                         params: Object
                     };
-                }
-
-                _onDataRouteClick() {
-                    this.$.paperDrawerPanel.closeDrawer();
                 }
             }
 
