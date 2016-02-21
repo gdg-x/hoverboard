@@ -3,7 +3,7 @@
 # Polymer Starter Kit Plus
 
 [![PageSpeed 97%](https://img.shields.io/badge/PageSpeed-97%-brightgreen.svg)](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fpolymer-starter-kit-plus.appspot.com&tab=desktop)
-[![Sitespeed 98%](https://img.shields.io/badge/Sitespeed-98%-brightgreen.svg)](https://results.sitespeed.io/e361-2016/1/16/083f9e17-8729-4454-b7e9-539da460cbeb/index2.html)
+[![Sitespeed 98%](https://img.shields.io/badge/Sitespeed-98%-brightgreen.svg)](https://results.sitespeed.io/f262-2016/1/21/26107713-0b5d-4ad3-8720-646bbcd398b2/index2.html)
 [![bitHound Code](https://www.bithound.io/github/StartPolymer/polymer-starter-kit-plus/badges/code.svg)](https://www.bithound.io/github/StartPolymer/polymer-starter-kit-plus)
 [![Google+ Start Polymer](https://img.shields.io/badge/Google+-Start%20Polymer-dd4b39.svg)](https://plus.google.com/101148544618948882647)
 
