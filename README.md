@@ -71,16 +71,17 @@ all files by appending content hash to their names
     - [Firebase](https://www.firebase.com)
     - [Google App Engine](https://cloud.google.com/appengine/) with [HTTP 2.0 Push](https://github.com/GoogleChrome/http2push-gae#pushing-content-from-a-static-handler)
     - [Google Cloud Storage](https://cloud.google.com/storage/)
+    - Any Linux hosting with [SSH](https://en.wikipedia.org/wiki/Secure_Shell)
 - [Recipes](/docs/README.md/) for Polymer performance and using Chrome Dev Editor
 
 ## Getting Started
 
 To take advantage of Polymer Starter Kit Plus you need to:
 
-1. Get a copy of the code.
-2. Install the dependencies if you don't already have them.
-3. Modify the application to your liking.
-4. Deploy your production code.
+1. [Get a copy of the code.](https://github.com/StartPolymer/polymer-starter-kit-plus#1-get-the-code)
+2. [Install the dependencies if you don't already have them.](https://github.com/StartPolymer/polymer-starter-kit-plus#2-install-dependencies)
+3. [Modify the application to your liking.](https://github.com/StartPolymer/polymer-starter-kit-plus#3-development-workflow)
+4. [Deploy your production code.](https://github.com/StartPolymer/polymer-starter-kit-plus#4-deploy-app-tada)
 
 ### 1. Get the code
 
@@ -212,6 +213,7 @@ Build and optimize the current project, ready for deployment. This includes lint
 
 - For GAE or GCS [install Google Cloud SDK](https://developers.google.com/cloud/sdk/#Quick_Start)
 - For Firebase [install Firebase command line tools](https://www.firebase.com/docs/hosting/command-line-tool.html)
+- Setup hosting in [config file](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/config.js)
 
 #### Deploy to development environment
 
@@ -267,6 +269,7 @@ gulp pagespeed
 ### Update versions of dependencies to the latest versions
 
 ```sh
+# Install tool
 npm install -g npm-check-updates
 
 # Check latest versions
