@@ -1,5 +1,7 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../../bower_components/paper-input/paper-input-container.html">
 <link rel="import" href="../../../../bower_components/paper-input/paper-input.html">
 
 <dom-module id="mailchimp-subscribe">
@@ -8,13 +10,22 @@
             :host {
                 display: block;
                 width: 100%;
+                --paper-input-container-color: var(--mailchimp-color);
+                --paper-input-container-focus-color: var(--default-primary-color);
+                --paper-input-container-input-color: var(--mailchimp-color);
+            }
+
+            .mc_embed_signup {
+                @apply(--layout-vertical);
+                @apply(--layout-center-center);
+            }
+
+            .mc-field-group {
+                @apply(--layout-vertical);
             }
 
             paper-input-container {
                 padding-bottom: 0;
-                --paper-input-container-color: var(--mailchimp-color);
-                --paper-input-container-focus-color: var(--mailchimp-color);
-                --paper-input-container-input-color: var(--mailchimp-color);
             }
 
             paper-input-container,
@@ -28,18 +39,19 @@
             }
 
             .subscribe-button {
+                @apply(--layout-self-end);
                 margin-top: 5px;
                 margin-right: 0;
             }
         </style>
-        <div id="mc_embed_signup" class="mc_embed_signup layout vertical center-center">
+        <div id="mc_embed_signup" class="mc_embed_signup">
             <form action="[[ url ]]" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="mc-embedded-subscribe-form validate" target="_blank" novalidate>
-                <div class="mc-field-group layout vertical">
-                    <paper-input-container no-label-float class="text-left">
+                <div class="mc-field-group">
+                    <paper-input-container no-label-float>
                         <label>Your email</label>
                         <input is="iron-input" type="email" name="EMAIL" id="mce-EMAIL" autocomplete="off">
                     </paper-input-container>
-                    <paper-button class="subscribe-button self-end" on-click="submitForm">Subscribe</paper-button>
+                    <paper-button class="subscribe-button" on-click="submitForm">Subscribe</paper-button>
                 </div>
                 <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups -->
                 <div style="position: absolute; left: -5000px;">

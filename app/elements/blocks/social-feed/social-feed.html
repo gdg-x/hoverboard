@@ -17,18 +17,39 @@
             a {
                 color: var(--text-primary-color);
             }
+
+            .container {
+                @apply(--layout-vertical);
+            }
+
+            .social-section {
+                @apply(--layout-flex-5);
+            }
+            .social-section:not(:first-of-type) {
+                margin-top: 30px;
+            }
+
+            .divider {
+                @apply(--layout-flex);
+            }
+
+            @media (min-width: 961px) {
+                .container {
+                    @apply(--layout-horizontal);
+                }
+            }
         </style>
-        <div class="container relative layout vertical-horizontal">
+        <div class="container">
             <iron-ajax auto url="[[source]]" handle-as="json" last-response="{{_posts}}"></iron-ajax>
-            <div class="flex-5">
+            <div class="social-section">
                 <h4 class="heading">What's up <a href="https://www.google.com/#q=%23{$ hashtag $}">#{$ hashtag $}</a></h4>
                 <h5>[[response.response]]</h5>
                 <social-post id="post" author="[[author]]" text="[[text]]" when="[[when]]" canonical-url="https://twitter.com/" sign="@"></social-post>
             </div>
-            <span class="flex"></span>
-            <div class="flex-5 second-block">
+            <span class="divider"></span>
+            <div class="social-section">
                 <h4 class="heading">Social</h4>
-                <span class="block">Add to circles, like, follow or connect with us on</span>
+                <div>Add to circles, like, follow or connect with us on</div>
                 <div class="align-pb-block">
                     {% for name, item in social %}
                     <a class="button-link" href="{$ item.url $}" target="_blank">

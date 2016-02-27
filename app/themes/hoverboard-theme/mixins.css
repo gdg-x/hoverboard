@@ -11,7 +11,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         opacity: 0;
         transition: opacity .5s;
     };
-    --round: {
+    --img-circle: {
         border-radius: 50%;
+        background-size: cover;
+        background-position: 50% 50%;
     };
 }

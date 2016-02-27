@@ -137,7 +137,7 @@
             }
 
             .speaker-img {
-                @apply(--round);
+                @apply(--img-circle);
                 margin-right: 10px;
                 height: 30px;
                 width: 30px;
@@ -291,9 +291,7 @@
                                                         <template is="dom-repeat" items="[[subSession.speakers]]"
                                                                   as="speaker">
                                                             <div class="speaker">
-                                                                <iron-image src="[[speaker.photoUrl]]"
-                                                                            class="speaker-img placeholder-color"
-                                                                            preload fade sizing="cover"></iron-image>
+                                                                <div class="speaker-img" style="background-image: url([[speaker.photoUrl]])"></div>
                                                                 <div class="person-detail">
                                                                     <span class="person-name">[[speaker.name]]</span>
                                                                     <div class="person-title">

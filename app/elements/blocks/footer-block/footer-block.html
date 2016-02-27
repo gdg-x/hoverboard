@@ -1,5 +1,6 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
@@ -20,6 +21,7 @@
             }
 
             .container {
+                @apply(--layout-vertical);
                 padding-top: 0;
                 padding-bottom: 0;
             }
@@ -27,6 +29,7 @@
             .gdg-logo {
                 margin-left: 20px;
                 height: 30px;
+                width: 85px;
                 display: block;
             }
 
@@ -44,7 +47,14 @@
             }
 
             .footer-content {
+                @apply(--layout-horizontal);
+                @apply(--layout-justified);
                 padding-top: 16px;
+            }
+
+            .navigation {
+                @apply(--layout-vertical);
+                @apply(--layout-flex);
             }
 
             .link-block-title {
@@ -62,6 +72,7 @@
             }
 
             .link-block-wrapper {
+                @apply(--layout-flex);
                 margin-bottom: 30px;
             }
 
@@ -74,8 +85,19 @@
             }
 
             .footer-bottom {
+                @apply(--layout-horizontal);
+                @apply(--layout-justified);
+                @apply(--layout-center);
                 margin-top: 16px;
                 padding: 16px 0;
+            }
+
+            .subscribe {
+                @apply(--layout-flex);
+            }
+
+            .copyright {
+                @apply(--layout-flex);
             }
 
             @media (min-width: 961px) {
@@ -83,22 +105,30 @@
                     margin-top: -10px;
                     margin-bottom: 0;
                 }
+
                 .footer-content {
                     padding-top: 32px;
                 }
+
+                .navigation {
+                    @apply(--layout-horizontal);
+                }
+
                 .link-block-title {
                     margin-bottom: 15px;
                 }
+
                 .gplus {
                     padding: 0;
                 }
+
                 .footer-bottom {
                     margin-top: 0;
                 }
             }
         </style>
-        <div class="container layout vertical">
-            <div class="footer-content layout horizontal justified">
+        <div class="container">
+            <div class="footer-content">
                 <div class="flex gplus">
                     <g:plusone size="medium" width="200" annotation="inline" href="{$ url $}"></g:plusone>
                 </div>
@@ -108,18 +138,20 @@
                 </paper-button>
             </div>
             <div class="footer-content footer-links-container">
-                <nav class="layout vertical-horizontal flex">
+                <nav class="navigation">
                     {% for block in footer.blocks %}
-                    <div class="flex link-block-wrapper">
+                    <div class="link-block-wrapper">
                         <span class="link-block-title">{$ block.title $}</span>
                         <ul class="link-block">
                             {% for link in block.links %}
-                            <li><a href="{$ link.url $}" {% if link.newTab %}target="_blank" {% endif %}>{$ link.text $}</a></li>
+                            <li>
+                                <a href="{$ link.url $}" {% if link.newTab %}target="_blank" {% endif %}>{$ link.text $}</a>
+                            </li>
                             {% endfor %}
                         </ul>
                     </div>
                     {% endfor %}
-                    <div class="flex link-block-wrapper">
+                    <div class="link-block-wrapper">
                         <span class="link-block-title">{$ footer.contactBlock.title $}</span>
                         <ul class="link-block">
                             {% for link in footer.contactBlock.links %}
@@ -134,27 +166,28 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="flex">
+                    <div class="subscribe">
                         <span class="link-block-title block">Subscribe</span>
                         <span>No spam, only the latest news and updates!</span>
                         <mailchimp-subscribe url="[[ mailchimpUrl ]]" name="[[ mailchimpName ]]"></mailchimp-subscribe>
                     </div>
                 </nav>
             </div>
-            <div class="footer-content footer-bottom layout horizontal justified">
+            <div class="footer-content footer-bottom">
                 <!-- Please do NOT delete next block -->
-                <span class="flex self-center">
-                    &copy; 2015 Based on <a href="https://github.com/gdg-x/hoverboard" target="_blank">Project Hoverboard</a>. Designed and created by <a href="http://o.zasadnyy.com/" target="_blank">Oleh Zasadnyy</a> &middot;
+                <span class="copyright">
+                    &copy; 2016 Based on <a href="https://github.com/gdg-x/hoverboard" target="_blank">Project
+                    Hoverboard</a>. Designed and created by <a href="http://o.zasadnyy.com/" target="_blank">Oleh
+                    Zasadnyy</a> &middot;
                     <a href="http://lviv.gdg.org.ua" target="_blank">GDG Lviv</a>
                 </span>
-                <div class="self-center">
-                    <iron-image class="gdg-logo" src="{$ baseurl $}/images/gdg-logo.svg" sizing="contain" alt="{$ organizer.name $}"></iron-image>
-                </div>
+                    <iron-image class="gdg-logo" src="{$ baseurl $}/images/gdg-logo.svg" sizing="contain"
+                                alt="{$ organizer.name $}"></iron-image>
             </div>
         </div>
     </template>
     <script>
-        (function() {
+        (function () {
             'use strict';
 
             class FooterBlock {

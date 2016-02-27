@@ -99,9 +99,7 @@
                     <div class="sections">
                         <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
                             <div class="section">
-                                <iron-image class="section-photo" src="[[speaker.photoUrl]]" preload fade sizing="cover"
-                                            no-reveal
-                                            hidden="{{smallScreen}}"></iron-image>
+                                <div class="section-photo" style="background-image: url([[speaker.photoUrl]])"></div>
                                 <div class="section-info">
                                     <h3 class="section-title">[[speaker.name]]</h3>
                                     <span class="section-sub-title">[[speaker.company]], [[speaker.country]]</span>
@@ -156,7 +154,7 @@
 
                 _sessionChanged: function () {
                     page.redirect('/' + app.route + '/' + this.session.id);
-                    this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + this.session.mainTag + ')';
+                    this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + app.generateClass(this.session.mainTag) + ')';
                     this.updateStyles();
                 },
 
