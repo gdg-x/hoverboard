@@ -68,12 +68,8 @@
                 width: 100%;
                 background-size: cover;
                 background-position: 50% 50%;
-                opacity: 0;
-                transition: all 1s ease-in-out;
-            }
-
-            .show {
-                opacity: 1;
+                transition: background-image 1s ease-in-out;
+                will-change: background-image;
             }
 
             .additional-space {
@@ -102,12 +98,7 @@
             <div class="card-wrapper">
                 <paper-card class="card">
                     <div class="header paper-card">
-                        <iron-image class="header-image show" src="[[_currentImages.0]]"
-                                    sizing="cover"></iron-image>
-                        <template is="dom-if" if="{{_moreImages}}">
-                            <iron-image class="header-image" src="[[_currentImages.1]]"
-                                        sizing="cover"></iron-image>
-                        </template>
+                        <div class="header-image" style$="background-image: url([[_currentImage]])"></div>
                         <div class="title-text over-image style-scope paper-card">{$ location.title $}</div>
                     </div>
                     <div class="paper-card-container">
@@ -191,47 +182,30 @@
                             type: Number,
                             value: 0
                         },
-                        _currentImages: {
-                            type: Array,
-                            value: []
-                        },
-                        _moreImages: {
-                            type: Boolean,
-                            value: false
+                        _currentImage: {
+                            type: String
                         }
                     };
                 }
 
                 ready() {
-                    this._currentImages[0] = this.images[this._currentSourceIndex];
+                    this._currentImage = this.images[this._currentSourceIndex];
                     if (this.images.length > 1) {
-                        this._moreImages = true;
-                        this._currentImages[1] = this.images[this._currentSourceIndex + 1];
                         var that = this;
                         setInterval(function () {
                             that.nextImage();
                         }, 4000);
                     }
-                    this.notifyPath('_currentImages', this._currentImages.slice());
                 }
 
                 previousImage() {
                     this._currentSourceIndex = (this._currentSourceIndex > 0) ? this._currentSourceIndex - 1 : this.images.length - 1;
-                    this._replaceImage(this._currentSourceIndex);
+                    this._currentImage = this.images[this._currentSourceIndex];
                 }
 
                 nextImage() {
                     this._currentSourceIndex = (this._currentSourceIndex < this.images.length - 1) ? this._currentSourceIndex + 1 : 0;
-                    this._replaceImage(this._currentSourceIndex);
-                }
-
-                _replaceImage(index) {
-                    var imageFrom = this.$$('.header-image:nth-of-type(' + (this._currentTargetIndex + 1) + ')');
-                    this._currentTargetIndex = 1 - this._currentTargetIndex;
-                    var imageTo = this.$$('.header-image:nth-of-type(' + (this._currentTargetIndex + 1) + ')');
-                    this._currentImages[this._currentTargetIndex] = this.images[index];
-                    this.notifyPath('_currentImages', this._currentImages.slice());
-                    this.classFollows('show', imageFrom, imageTo);
+                    this._currentImage = this.images[this._currentSourceIndex];
                 }
             }
 
