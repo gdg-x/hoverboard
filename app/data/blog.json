@@ -23,94 +23,6 @@
     "image": "https://g-design.storage.googleapis.com/production/v5/assets/150727_GD_Article_ToolingUpFurther_1x1Tile-01-86c8e03e.svg",
     "brief": "Our friends from the Netherlands touched important theme in their blog about gender diversity: why women are underrepresented in IT. The cause of this seems to resonate with the lack of diversity in academia and the workplace. As a sizable event in technology, we found it in part our responsibility to encourage diversity at GDG DevFest Ukraine 2015."
 }, {
-    "id": "workshops-announced",
-    "title": "Workshops Announced",
-    "posted": "2015-10-05",
-    "primaryColor": "#3e50b4",
-    "secondaryColor": "#303F9F",
-    "image": "https://g-design.storage.googleapis.com/production/v5/assets/renditions/Article_iOS_to_Android_Header_3e50b4-f064882f-1240.png",
-    "brief": "Great news for everyone who wants to work side-by-side with best developers and practice in creating your own apps! On Saturday (2nd day of DFUA 2015) we’ll have 3 cool workshops in Community track."
-}, {
-    "id": "welcome-sponsor-nix",
-    "title": "Meet our Platinum Sponsor - N-iX",
-    "posted": "2015-10-06",
-    "primaryColor": "#00ccb8",
-    "secondaryColor": "#00b7a5",
-    "image": "https://g-design.storage.googleapis.com/production/v5/assets/tooling-up-header-a13cfd9a.svg",
-    "brief": "Founded in 2002, N-iX is a custom software development company with a core business of providing Dedicated Development Team / Own Development Center service."
-}, {
-    "id": "5-reasons-for-students",
-    "title": "5 reasons for STUDENTS to attend GDG DevFest Ukraine 2015",
-    "posted": "2015-10-07",
-    "primaryColor": "#eeeeee",
-    "secondaryColor": "#9e9e9e",
-    "image": "https://g-design.storage.googleapis.com/production/v5/assets/pixate-and-form-1-3-header-2061f19f.svg",
-    "brief": "If you are a student, still in doubt and do not know whether <a href='http://devfest.gdg.org.ua'>GDG DevFest Ukraine 2015</a> is worth to visit it, GDG team decided to make a short list of top reasons for attending this conference for students."
-}, {
-    "id": "3-reasons-for-android-devs",
-    "title": "3 reasons for Android devs to attend GDG DevFest Ukraine 2015",
-    "posted": "2015-10-10",
-    "primaryColor": "#3367d6",
-    "secondaryColor": "#2755CC",
-    "image": "https://g-design.storage.googleapis.com/production/v5/assets/Article_Welcome_Header_2880-ce3ec22d.svg",
-    "brief": "We are growing and developing our communities in Ukraine but also creating more and more communications with GDG chapters all over the world. But if you, android developer, still have any doubts, just look at 3 main reasons to visit the event <a href='http://devfest.gdg.org.ua'>GDG DevFest Ukraine 2015</a>"
-}, {
-    "id": "3-reasons-for-cloud-devs",
-    "title": "3 reasons for Cloud devs to attend GDG DevFest Ukraine 2015",
-    "posted": "2015-10-13",
-    "primaryColor": "#00ccb8",
-    "secondaryColor": "#00b7a5",
-    "image": "https://g-design.storage.googleapis.com/production/v5/assets/tooling-up-header-a13cfd9a.svg",
-    "brief": "There are no such a lot of events for cloud developers in our country. And it’s more rare case when we can meet such amazing speakers. You can ask any question, learn new useful information from leaders in Cloud computing and of course get endless inspiration for self-improvement. "
-}, {
-    "id": "meet-platinum-sponsor-dataart",
-    "title": "Meet our Platinum Sponsor - DataArt",
-    "posted": "2015-10-14",
-    "primaryColor": "#00ccb8",
-    "secondaryColor": "#00b7a5",
-    "image": "https://g-design.storage.googleapis.com/production/v5/assets/tooling-up-header-a13cfd9a.svg",
-    "brief": "DataArt is a technology consulting firm that creates end-to-end solutions, from concept and strategy, to design, implementation and support, helping global clients in the financial services, healthcare, hospitality, media and IoT sectors achieve important business outcomes."
-}, {
-    "id": "reasons-for-web-develpers",
-    "title": "Reasons to attend DFUA for Web developers",
-    "posted": "2015-10-15",
-    "primaryColor": "#00ccb8",
-    "secondaryColor": "#00b7a5",
-    "image": "https://g-design.storage.googleapis.com/production/v5/assets/tooling-up-header-a13cfd9a.svg",
-    "brief": "If you, web developer, think there is no place for you at  DFUA, you are deeply mistaken, because then you may be missing out on one of the best opportunities to take your game to the next level! Below you’ll find reasons why you should attend DFUA."
-}, {
-    "id": "meet-platinum-sponsor-eleks",
-    "title": "Meet our Platinum Sponsor - ELEKS",
-    "posted": "2015-10-16",
-    "primaryColor": "#00ccb8",
-    "secondaryColor": "#00b7a5",
-    "image": "https://g-design.storage.googleapis.com/production/v5/assets/tooling-up-header-a13cfd9a.svg",
-    "brief": "ELEKS is a global organization that provides end-to-end, offshore, software product development. ELEKS is a strategic partner with the proven ability to address our customers' most pressing needs."
-}, {
-    "id": "meet-platinum-sponsor-sigma",
-    "title": "Meet our Platinum Sponsor - Sigma",
-    "posted": "2015-10-19",
-    "primaryColor": "#00ccb8",
-    "secondaryColor": "#00b7a5",
-    "image": "https://g-design.storage.googleapis.com/production/v5/assets/tooling-up-header-a13cfd9a.svg",
-    "brief": "The company provides top-quality IT services to customers all over the world. As an event partner, Sigma Software prepared great presents for conference attendees. Learn more at the company's booth."
-}, {
-    "id": "networking-tips",
-    "title": "How to Network at Conferences",
-    "posted": "2015-10-19",
-    "primaryColor": "#00ccb8",
-    "secondaryColor": "#00b7a5",
-    "image": "https://g-design.storage.googleapis.com/production/v5/assets/tooling-up-header-a13cfd9a.svg",
-    "brief": "A conference can be a great place to strike up a new business relationship, but it can also be stressful to walk into a room full of strangers and make meaningful connections. That’s why it’s important to understand some key principals of networking before showing up for an event."
-}, {
-    "id": "meet-platinum-sponsor-twinfield",
-    "title": "Meet our Platinum Sponsor - Twinfield",
-    "posted": "2015-10-20",
-    "primaryColor": "#00ccb8",
-    "secondaryColor": "#00b7a5",
-    "image": "https://g-design.storage.googleapis.com/production/v5/assets/tooling-up-header-a13cfd9a.svg",
-    "brief": "Wolters Kluwer Tax & Accounting Europe holds 3 operating companies and serves their customers with accounting software solutions and services under the brand names: Twinfield, Alure and Basecone."
-}, {
     "id": "what-to-do-in-lviv",
     "title": "Top Things to Do in Lviv",
     "posted": "2015-10-20",
@@ -118,14 +30,6 @@
     "secondaryColor": "#00b7a5",
     "image": "https://g-design.storage.googleapis.com/production/v5/assets/tooling-up-header-a13cfd9a.svg",
     "brief": "Ukrainian city of Lviv is no doubt one of the most charming and yet not well-known parts of Ukraine. It’s been recently gaining plenty of attention from the world, and was proudly featured on BBC and EuroNews."
-}, {
-    "id": "diamond-sponsor-corevalue",
-    "title": "Meet our Diamond Sponsor - CoreValue",
-    "posted": "2015-10-22",
-    "primaryColor": "#00ccb8",
-    "secondaryColor": "#00b7a5",
-    "image": "https://g-design.storage.googleapis.com/production/v5/assets/tooling-up-header-a13cfd9a.svg",
-    "brief": "CoreValue has been successfully providing business value via technical solutions to our customers for over 10 years. The company has been at the fore front of delivering innovative solutions."
 }, {
     "id": "devfest-ua-summary",
     "title": "GDG DevFest Ukraine 2015 - Summary",

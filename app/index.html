@@ -3,28 +3,28 @@
 {% include "head.html" %}
 
 <body class="vertical layout">
-    <span id="browser-sync-binding"></span>
-    <template is="dom-bind" id="app">
+<span id="browser-sync-binding"></span>
+<template is="dom-bind" id="app">
 
-        <hoverboard-app id="hoverboard-app" route="{{route}}" params="{{params}}"></hoverboard-app>
+    <hoverboard-app id="hoverboard-app" route="{{route}}" params="{{params}}"></hoverboard-app>
 
-        <!-- Service Worker support -->
-        <paper-toast id="caching-complete" class="toast" duration="6000" text="Caching complete! This app will work offline."></paper-toast>
+    <!-- Service Worker support -->
+    <paper-toast id="caching-complete" class="toast" duration="6000"
+                 text="Caching complete! This app will work offline."></paper-toast>
 
-        <!-- <platinum-sw-register auto-register clients-claim skip-waiting on-service-worker-installed="displayInstalledToast"> -->
-            <!-- Google Analytics offline support -->
-            <!-- <platinum-sw-offline-analytics></platinum-sw-offline-analytics>
-            <platinum-sw-cache default-cache-strategy="fastest" cache-config-file="cache-config.json">
-            </platinum-sw-cache>
-        </platinum-sw-register> -->
-    </template>
+    <platinum-sw-register auto-register clients-claim skip-waiting on-service-worker-installed="displayInstalledToast">
+        <!-- Google Analytics offline support -->
+        <platinum-sw-offline-analytics></platinum-sw-offline-analytics>
+        <platinum-sw-cache default-cache-strategy="fastest" cache-config-file="/cache-config.json"></platinum-sw-cache>
+    </platinum-sw-register>
+</template>
 
-    <!-- build:js {$ baseurl $}/scripts/app.js -->
-    <script src="{$ baseurl $}/scripts/app.js"></script>
-    <!-- endbuild-->
+<!-- build:js {$ baseurl $}/scripts/app.js -->
+<script src="{$ baseurl $}/scripts/app.js"></script>
+<!-- endbuild-->
 
-    <!-- Google Analytics code -->
-    <start-google-analytics-tracker code="{$ trackerCode $}"></start-google-analytics-tracker>
+<!-- Google Analytics code -->
+<start-google-analytics-tracker code="{$ trackerCode $}"></start-google-analytics-tracker>
 </body>
 
 </html>
