@@ -26,10 +26,7 @@ module.exports = {
             big: '../images/backgrounds/2014_1.jpg',
             small: ['../images/backgrounds/2014_2.jpg', '../images/backgrounds/2014_3.jpg']
         },
-        picasa: {
-            userId: '104154992083455126443',
-            albumId: '6189295328162771457'
-        }
+        albumUrl: 'https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1'
     },
     ticketsBlock: {
         title: 'Tickets',

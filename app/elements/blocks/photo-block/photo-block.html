@@ -1,103 +1,116 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../../bower_components/paper-ripple/paper-ripple.html">
-<link rel="import" href="../../../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../../../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../picasa-gallery/picasa-gallery.html">
 
 <dom-module id="photo-block">
     <template>
         <style include="shared-styles">
-        :host {
-            display: block;
-        }
+            :host {
+                display: block;
+            }
 
-        .photo-wrapper {
-            height: 200px;
-        }
+            iron-image {
+                @apply(--layout-fit);
+            }
 
-        .open-photos {
-            background: rgba(0, 0, 0, .3);
-            color: #fff;
-            font-size: 21px;
-            opacity: 0;
-            transition: opacity .3s;
-        }
-
-        .open-photos:hover {
-            opacity: 1;
-        }
-
-        @media (min-width: 601px) {
             .photo-wrapper {
-                height: 500px;
+                @apply(--layout-horizontal);
+                height: 200px;
             }
-            .big {
-                flex: 2;
+
+            .photo {
+                @apply(--layout-flex);
+                position: relative;
             }
-        }
+
+            .photo:not(:first-of-type) {
+                display: none;
+            }
+
+            .vertical-block {
+                @apply(--layout-vertical);
+                @apply(--layout-flex);
+            }
+
+            .open-photos {
+                @apply(--layout-vertical);
+                @apply(--layout-center-center);
+                @apply(--layout-fit);
+                background: rgba(0, 0, 0, .3);
+                color: #fff;
+                font-size: 21px;
+                opacity: 0;
+                transition: opacity .3s;
+            }
+
+            .open-photos:hover {
+                opacity: 1;
+                cursor: pointer;
+            }
+
+            @media (min-width: 601px) {
+                .photo-wrapper {
+                    height: 500px;
+                }
+
+                .big {
+                    @apply(--layout-flex-2);
+                }
+
+                .photo:not(:first-of-type) {
+                    display: flex;
+                }
+            }
         </style>
-        <div class="photo-wrapper layout horizontal">
-            <div class="flex relative big">
-                <iron-image src="[[ photos.big ]]" class="placeholder-color fit" sizing="cover" preload fade></iron-image>
-                <div class="open-photos layout vertical center-center fit pointer" on-tap="openGallery">
+        <div class="photo-wrapper">
+            <div class="photo big">
+                <iron-image src="[[ photos.big ]]" class="placeholder-color" sizing="cover" preload
+                            fade></iron-image>
+                <a class="open-photos" href="{$ galleryBlock.albumUrl $}" target="_blank">
                     <paper-ripple></paper-ripple>
                     <span>Click here to view more photos</span>
-                </div>
+                </a>
             </div>
-            <div class="flex layout vertical">
-                <div class="flex relative">
-                    <iron-image src="[[ photos.small.0 ]]" class="placeholder-color fit" sizing="cover" preload fade></iron-image>
-                    <div class="open-photos layout vertical center-center fit pointer" on-tap="openGallery">
+            <div class="vertical-block">
+                <div class="photo">
+                    <iron-image src="[[ photos.small.0 ]]" class="placeholder-color" sizing="cover" preload
+                                fade></iron-image>
+                    <a class="open-photos" href="{$ galleryBlock.albumUrl $}" target="_blank">
                         <paper-ripple></paper-ripple>
                         <span>Click here to view more photos</span>
-                    </div>
+                    </a>
                 </div>
-                <div class="flex relative hidden-xs">
-                    <iron-image src="[[ photos.small.1 ]]" class="placeholder-color fit" sizing="cover" preload fade></iron-image>
-                    <div class="open-photos layout vertical center-center fit pointer" on-tap="openGallery">
+                <div class="photo">
+                    <iron-image src="[[ photos.small.1 ]]" class="placeholder-color" sizing="cover" preload
+                                fade></iron-image>
+                    <a class="open-photos" href="{$ galleryBlock.albumUrl $}" target="_blank">
                         <paper-ripple></paper-ripple>
                         <span>Click here to view more photos</span>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
-        <paper-dialog id="photosDialog" class="full-dialog fit" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
-            <paper-toolbar class="navbar-overlay fit">
-                <paper-icon-button icon="icons:arrow-back" on-tap="closeGallery"></paper-icon-button>
-                <div class="title text-left">{$ galleryBlock.title $}</div>
-            </paper-toolbar>
-            <div class="full-container fit">
-                <picasa-gallery user-id="[[ picasaUserId ]]" album-id="[[ picasaAlbumId ]]"></picasa-gallery>
-            </div>
-        </paper-dialog>
     </template>
     <script>
-    (function() {
-        'use strict';
+        (function () {
+            'use strict';
 
-        class PhotoBlock {
-            beforeRegister() {
-                let is = this.constructor.name.replace(/\W+/g, '-')
-                    .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-                this.is = is;
-                this.properties = {
-                    photos: Object,
-                    picasaUserId: String,
-                    picasaAlbumId: String
-                };
+            class PhotoBlock {
+                beforeRegister() {
+                    let is = this.constructor.name.replace(/\W+/g, '-')
+                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+                    this.is = is;
+                    this.properties = {
+                        photos: Object
+                    };
+                }
             }
-            openGallery() {
-                this.$.photosDialog.open();
-            }
-            closeGallery() {
-                this.$.photosDialog.close();
-            }
-        }
 
-        Polymer(PhotoBlock);
-    })();
+            Polymer(PhotoBlock);
+        })();
     </script>
 </dom-module>
