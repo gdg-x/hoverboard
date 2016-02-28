@@ -16,7 +16,8 @@
         "google-web-components": "GoogleWebComponents/google-web-components#1.0.x",
         "font-roboto": "StartPolymer/font-empty#1.1.x",
         "page": "visionmedia/page.js#1.6.x",
-        "time-elements": "~0.4.x"
+        "time-elements": "~0.4.x",
+        "disqus-comments": "divshot/disqus-comments#0915a95"
     },
     "devDependencies": {
         "web-component-tester": "*",
