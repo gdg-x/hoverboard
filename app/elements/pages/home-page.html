@@ -6,6 +6,7 @@
 
 <link rel="import" href="../blocks/statistics-block/statistics-block.html">
 <link rel="import" href="../blocks/featured-people/featured-people.html">
+<link rel="import" href="../blocks/featured-videos/featured-videos.html">
 <link rel="import" href="../blocks/call-to-action/call-to-action.html">
 <link rel="import" href="../blocks/photo-block/photo-block.html">
 <link rel="import" href="../blocks/tickets-block/tickets-block.html">
@@ -20,6 +21,7 @@
 
         <statistics-block cascaded></statistics-block>
         <featured-people people="{{people}}" cascaded></featured-people>
+        <featured-videos videos="{{videos}}" cascaded></featured-videos>
         <call-to-action cascaded></call-to-action>
         <photo-block photos='{$ galleryBlock.photos | dump $}' cascaded></photo-block>
         <tickets-block cascaded></tickets-block>
@@ -47,6 +49,7 @@
                     people: Array,
                     posts: Array,
                     logos: Array,
+                    videos: Array,
                     selected: {
                         type: Boolean,
                         observer: 'updateHeroSettings'

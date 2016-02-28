@@ -114,13 +114,7 @@
                             filteredPeople.push(this.people[i]);
                         }
                     }
-                    this.featuredPeople = this._randomOrder(filteredPeople).slice(0, 4);
-                }
-
-                _randomOrder(array) {
-                    return array.sort(function () {
-                        return 0.5 - Math.random();
-                    });
+                    this.featuredPeople = app.randomOrder(filteredPeople).slice(0, 4);
                 }
             }
 

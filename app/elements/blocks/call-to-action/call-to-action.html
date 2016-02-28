@@ -1,11 +1,8 @@
-<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
-<link rel="import" href="../../../bower_components/paper-toolbar/paper-toolbar.html">
-<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../../../bower_components/google-youtube/google-youtube.html">
+<link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
 
+<link rel="import" href="../video-dialog/video-dialog.html">
 
 <dom-module id="call-to-action">
     <template>
@@ -16,7 +13,14 @@
                 color: var(--text-primary-color);
             }
 
+            .container {
+                @apply(--layout-vertical);
+                @apply(--layout-center-center);
+            }
+
             .heading {
+                @apply(--layout-flex);
+                @apply(--layout-self-center);
                 margin-bottom: 0 !important;
             }
 
@@ -27,24 +31,21 @@
             }
 
             @media (min-width: 600px) {
+                .container {
+                    @apply(--layout-horizontal);
+                }
                 .heading {
                     text-align: left;
                 }
             }
         </style>
-        <div class="container container-narrow flex relative layout vertical-horizontal center-center">
-            <h4 class="heading flex self-center text-center">{$ callToAction.text $}</h4>
-            <paper-button class="border-button open-dialog-button" on-tap="playVideo">{$ callToAction.buttonText $}</paper-button>
+        <div class="container container-narrow">
+            <h4 class="heading">{$ callToAction.text $}</h4>
+            <paper-button class="open-dialog-button" on-tap="playVideo">{$ callToAction.buttonText $}</paper-button>
         </div>
-        <paper-dialog id="videoDialog" class="full-dialog fit" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal>
-            <paper-toolbar class="navbar-overlay fit">
-                <paper-icon-button icon="icons:arrow-back" on-tap="closeVideoCard"></paper-icon-button>
-                <div class="title text-left">{$ callToAction.video.title $}</div>
-            </paper-toolbar>
-            <div class="full-container fit">
-                <google-youtube id="video" video-id="{$ callToAction.video.id $}" fluid="true" autohide="1" chromeless="true"></google-youtube>
-            </div>
-        </paper-dialog>
+        <video-dialog id="videoDialog" title="{$ callToAction.video.title $}" youtube-id="{$ callToAction.video.id $}"
+                      entry-animation="scale-up-animation"
+                      exit-animation="scale-down-animation" modal disable-controls></video-dialog>
     </template>
     <script>
         (function() {
@@ -67,12 +68,6 @@
                         }
                     });
                     this.$.videoDialog.open();
-                    this.$.video.play();
-                }
-                closeVideoCard() {
-                    this.$.videoDialog.close();
-                    this.$.video.pause();
-                    this.$.video.seekTo(0);
                 }
             }
 

@@ -41,7 +41,7 @@
                 display: block;
             }
         </style>
-        <app-data speakers="{{speakers}}" sessions="{{sessions}}" posts="{{posts}}" partners="{{partners}}" schedule="{{schedule}}"></app-data>
+        <app-data speakers="{{speakers}}" sessions="{{sessions}}" posts="{{posts}}" partners="{{partners}}" schedule="{{schedule}}" videos="{{videos}}"></app-data>
 
         <paper-drawer-panel id="paperDrawerPanel" responsive-width="599px" force-narrow>
             <!-- Drawer Scroll Header Panel -->
@@ -54,7 +54,7 @@
 
                 <!-- Main Content -->
                 <neon-animated-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}" selected-attribute="selected">
-                    <home-page class="Page" data-route="home" people="{{speakers}}" posts="{{posts}}" logos="{{partners}}" hero-settings="{{heroSettings}}"></home-page>
+                    <home-page class="Page" data-route="home" people="{{speakers}}" posts="{{posts}}" logos="{{partners}}" hero-settings="{{heroSettings}}" videos="{{videos}}"></home-page>
                     <blog-page class="Page" data-route="blog" posts="{{posts}}" hero-settings="{{heroSettings}}"></blog-page>
                     <post-page class="Page" data-route="post" post-id="[[params.id]]" posts="{{posts}}" hero-settings="{{heroSettings}}"></post-page>
                     <speakers-page class="Page" data-route="speakers" speakers="{{speakers}}" hero-settings="{{heroSettings}}" speaker-id="[[params.id]]"></speakers-page>

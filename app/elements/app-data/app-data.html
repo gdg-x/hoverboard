@@ -60,8 +60,16 @@
                             type: Array,
                             notify: true
                         },
+                        videos: {
+                            type: Array,
+                            notify: true
+                        },
                         _speakersRaw: Array,
-                        _scheduleRaw: Array
+                        _scheduleRaw: Array,
+                        _tempVideos: {
+                            type: Array,
+                            value: []
+                        }
                     };
                     this.observers = [
                         '_updateSpeakersData(_speakersRaw, sessions)',
@@ -104,6 +112,7 @@
                         }
                     }
                     this.schedule = this._scheduleRaw;
+                    this.videos = this._tempVideos;
                 }
 
                 _getSession(sessionId, day) {
@@ -114,12 +123,22 @@
                             if(day.tags.indexOf(this.sessions[i].mainTag) < 0) {
                                 day.tags.push(this.sessions[i].mainTag);
                             }
+                            var speakers = [];
                             if (this.sessions[i].speakers) {
                                 for (var j = 0, speakersLen = this.sessions[i].speakers.length; j < speakersLen; j++) {
                                     if (!this.sessions[i].speakers[j].id) {
                                         this.sessions[i].speakers[j] = this._getSpeaker(this.sessions[i].speakers[j]);
+                                        speakers.push(this.sessions[i].speakers[j].name);
                                     }
                                 }
+                            }
+                            if(this.sessions[i].videoId) {
+                                this.push('_tempVideos', {
+                                    youtubeId: this.sessions[i].videoId,
+                                    title: this.sessions[i].title,
+                                    speakers: speakers.join(', '),
+                                    thumbnail: this.sessions[i].thumbnail
+                                });
                             }
                             return this.sessions[i];
                         }

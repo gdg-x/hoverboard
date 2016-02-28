@@ -81,13 +81,13 @@
                             </paper-button>
                         </a>
                     </template>
-                    <template is="dom-if" if="[[session.video]]">
-                        <a href="[[session.video]]" target="_blank">
+                    <template is="dom-if" if="[[session.videoId]]">
+                        <div on-tap="_openVideo">
                             <paper-button class="action">
                                 <iron-icon icon="icons:video"></iron-icon>
                                 View video
                             </paper-button>
-                        </a>
+                        </div>
                     </template>
                 </div>
 
@@ -121,6 +121,10 @@
             </template>
         </paper-scroll-header-panel>
 
+        <video-dialog id="videoViewer" title="[[session.title]]" youtube-id="[[session.videoId]]"
+                      entry-animation="scale-up-animation"
+                      exit-animation="scale-down-animation" modal></video-dialog>
+
         <iron-media-query query="(max-width: 960px)" query-matches="{{smallScreen}}"></iron-media-query>
     </template>
     <script>
@@ -146,6 +150,10 @@
 
                 listeners: {
                     'neon-animation-finish': '_onNeonAnimationFinish'
+                },
+
+                _openVideo: function() {
+                    this.$.videoViewer.open();
                 },
 
                 _concatArray: function (array) {
