@@ -72,7 +72,6 @@
             }
 
             .link-block-wrapper {
-                @apply(--layout-flex);
                 margin-bottom: 30px;
             }
 
@@ -100,7 +99,7 @@
                 @apply(--layout-flex);
             }
 
-            @media (min-width: 961px) {
+            @media (min-width: 601px) {
                 .footer-backtotop {
                     margin-top: -10px;
                     margin-bottom: 0;
@@ -112,6 +111,11 @@
 
                 .navigation {
                     @apply(--layout-horizontal);
+                    @apply(--layout-wrap);
+                }
+
+                .link-block-wrapper {
+                    width: 50%;
                 }
 
                 .link-block-title {
@@ -124,6 +128,12 @@
 
                 .footer-bottom {
                     margin-top: 0;
+                }
+            }
+
+            @media (min-width: 961px) {
+                .link-block-wrapper {
+                    @apply(--layout-flex);
                 }
             }
         </style>

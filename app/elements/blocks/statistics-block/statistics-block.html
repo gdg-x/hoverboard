@@ -1,4 +1,4 @@
-<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
 
 <dom-module id="statistics-block">
     <template>
@@ -10,6 +10,17 @@
                 color: var(--text-primary-color);
             }
 
+            .container {
+                @apply(--layout-horizontal);
+                @apply(--layout-wrap);
+            }
+
+            .statistics-element {
+                @apply(--layout-vertical);
+                @apply(--layout-center-center);
+                text-align: center;
+            }
+
             .counter {
                 font-size: 3em;
                 font-weight: 200;
@@ -19,16 +30,25 @@
                 font-size: .85em;
             }
 
-            @media (max-width: 960px) {
+            @media (max-width: 600px) {
+                .statistics-element {
+                    width: 50%;
+                }
                 .statistics-element:nth-child(1),
                 .statistics-element:nth-child(2) {
                     margin-bottom: 40px;
                 }
             }
+
+            @media (min-width: 601px) {
+                .statistics-element {
+                    @apply(--layout-flex);
+                }
+            }
         </style>
-        <div class="container flex wrap relative layout horizontal">
+        <div class="container">
             {% for statistic in statistics %}
-            <div class="statistics-element two-column-xs layout vertical center-center">
+            <div class="statistics-element">
                 <span class="counter">{$ statistic.counter $}</span>
                 <span class="caption">{$ statistic.caption $}</span>
             </div>

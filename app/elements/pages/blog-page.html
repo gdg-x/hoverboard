@@ -56,10 +56,15 @@
                 color: #fff;
             }
 
+            @media (max-width: 600px) {
+                .posts-container {
+                    padding: 0 var(--grid-gutter);
+                }
+            }
+
             @media (max-width: 960px) {
                 .posts-container {
                     max-width: none;
-                    padding: 0 var(--grid-gutter);
                 }
 
                 .post {

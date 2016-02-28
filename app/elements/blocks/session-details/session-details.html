@@ -20,6 +20,9 @@
                 color: var(--default-primary-color);
                 text-decoration: none;
             }
+            paper-icon-item {
+                cursor: pointer;
+            }
         </style>
         <paper-scroll-header-panel id="scrollHeaderPanel" no-reveal>
             <paper-toolbar class="tall">
@@ -33,19 +36,19 @@
                 <paper-menu-button horizontal-align="right" share-menu>
                     <paper-fab class="float-button dropdown-trigger" icon="icons:share"></paper-fab>
                     <div class="dropdown-content">
-                        <paper-icon-item class="pointer" on-tap="share" share="gplus">
+                        <paper-icon-item on-tap="share" share="gplus">
                             <iron-icon icon="icons:gplus" item-icon></iron-icon>
                             Google+
                         </paper-icon-item>
-                        <paper-icon-item class="pointer" on-tap="share" share="facebook">
+                        <paper-icon-item on-tap="share" share="facebook">
                             <iron-icon icon="icons:facebook" item-icon></iron-icon>
                             Facebook
                         </paper-icon-item>
-                        <paper-icon-item class="pointer" on-tap="share" share="twitter">
+                        <paper-icon-item on-tap="share" share="twitter">
                             <iron-icon icon="icons:twitter" item-icon></iron-icon>
                             Twitter
                         </paper-icon-item>
-                        <paper-icon-item class="pointer" on-tap="share" share="copy">
+                        <paper-icon-item on-tap="share" share="copy">
                             <iron-icon icon="icons:link" item-icon></iron-icon>
                             Copy link
                         </paper-icon-item>
