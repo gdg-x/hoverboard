@@ -34,7 +34,7 @@ function task(filename) {
 // "dot" files are specifically tricky due to them being hidden on
 // some systems.
 gulp.task('ensureFiles', function(cb) {
-  var requiredFiles = ['.jscsrc', '.jshintrc', '.bowerrc'];
+  var requiredFiles = ['.bowerrc'];
 
   require('./tasks/ensure-files')(requiredFiles.map(function(p) {
     return path.join(__dirname, p);
@@ -52,12 +52,9 @@ gulp.task('lint-js', ['ensureFiles'], function() {
     .pipe(reload({
       stream: true,
       once: true
-    }))
-    .pipe($.jshint())
-    .pipe($.jscs())
-    .pipe($.jscsStylish.combineWithHintResults())
-    .pipe($.jshint.reporter('jshint-stylish'))
-    .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
+    }));
+    
+    //.pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
 });
 
 // Optimize images
@@ -382,4 +379,6 @@ require('web-component-tester').gulp.init(gulp);
 // Load custom tasks from the `tasks` directory
 try {
   require('require-dir')('tasks/tests');
-} catch (err) {}
+} catch (err) {
+  // Do nothing
+}

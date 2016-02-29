@@ -16,7 +16,7 @@ class MyList {
     this.properties = {
       items: {
         type: Array,
-        notify: true,
+        notify: true
       }
     };
   }

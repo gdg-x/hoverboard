@@ -71,6 +71,10 @@ function closeDrawer(ctx, next) {
   next();
 }
 
+function setFocus(selected){
+  document.querySelector('section[data-route="' + selected + '"]').focus();
+}
+
 // Routes
 page('*', scrollToTop, closeDrawer, (ctx, next) => {
   next();
@@ -81,6 +85,7 @@ function setHomePage() {
     app.route = 'home';
     app.pageTitle = 'Polymer';
     app.pageSubTitle = 'The future of the web today';
+    setFocus(app.route);
   }
 
   // Check if element prototype has not been upgraded yet
@@ -104,6 +109,7 @@ page('/users', () => {
     app.route = 'users';
     app.pageTitle = 'Users';
     app.pageSubTitle = 'Test page';
+    setFocus(app.route);
   }
 
   // Check if element prototype has not been upgraded yet
@@ -120,6 +126,7 @@ page('/users/:name', ctx => {
     app.pageTitle = 'User information';
     app.pageSubTitle = 'Test page';
     app.params = ctx.params;
+    setFocus(app.route);
   }
 
   // Check if element prototype has not been upgraded yet
@@ -135,6 +142,7 @@ page('/contact', () => {
     app.route = 'contact';
     app.pageTitle = 'Contact';
     app.pageSubTitle = 'Test page';
+    setFocus(app.route);
   }
 
   // Check if element prototype has not been upgraded yet

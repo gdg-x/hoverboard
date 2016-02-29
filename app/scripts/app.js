@@ -86,7 +86,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   app.addEventListener('dom-change', () => {
     logger('Our app is ready to rock!');
   });
-
+  
   // See https://github.com/Polymer/polymer/issues/1381
   window.addEventListener('WebComponentsReady', () => {
     /* imports are loaded and elements have been registered */
