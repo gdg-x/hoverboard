@@ -2,12 +2,12 @@
 
 // Lint CSS and JavaScript
 module.exports = function ($, gulp, merge) { return function () {
-  var stylelintrc = require('../.stylelintrc.json');
+  var stylelintConfig = require('../stylelint.config');
   var postcssPlugins = [
     // Lint CSS
-    require('stylelint')(stylelintrc),
+    require('stylelint')(stylelintConfig),
     // Lint SUIT CSS methodology
-    require('postcss-bem-linter')(),
+    //require('postcss-bem-linter')(),
     require('postcss-reporter')({
       clearMessages: true
     })

@@ -13,15 +13,18 @@ module.exports = function ($, config, gulp, environment) {
     projectID = config.deploy.gae.env[environment];
   }
 
-  var args = '';
-  if (config.deploy.gae.setDefault) {
-    args = '--set-default';
+  var flags = ' ';
+  if (config.deploy.gae.promote) {
+    flags += '--promote';
+  } else {
+    flags += '--no-promote';
+  }
+  
+  if (config.deploy.gae.version) {
+    flags += ' --version ' + config.version.replace(/\./g, '-');
   }
 
-  var deployCmd = 'gcloud preview app deploy -q ' + args + ' --project ' +
-    projectID + ' deploy/app.yaml';
+  var deployCmd = 'gcloud preview app deploy deploy/app.yaml -q --project ' + projectID + flags;
 
-  return gulp.src('app.yaml')
-    .pipe(gulp.dest('deploy'))
-    .pipe($.shell(deployCmd));
+  return gulp.src('').pipe($.shell(deployCmd));
 };

@@ -1,24 +1,35 @@
 'use strict';
 
-// Minify JavaScript in dist directory
+// Minify CSS and JavaScript in dist directory
 module.exports = function ($, gulp, merge) { return function () {
-  var bootstrap = gulp.src('dist/elements/bootstrap/*.js')
-    .pipe($.uglify())
-    .pipe(gulp.dest('dist/elements/bootstrap'));
+  var postcssCssWring = require('csswring');
+  var postcssReporter = require('postcss-reporter');
 
-  var serviceWorker = gulp.src('dist/bower_components/platinum-sw/service-worker.js')
+  var index = gulp.src('dist/index.html')
+    .pipe($.htmlPostcss([
+      // Minify CSS
+      postcssCssWring(),
+      postcssReporter({
+        clearMessages: true
+      })
+    ]))
+    .pipe(gulp.dest('dist'));
+
+  var platinumSw = gulp.src('dist/bower_components/platinum-sw/**/*.js')
     .pipe($.uglify())
     .pipe(gulp.dest('dist/bower_components/platinum-sw'));
+
+  var promisePolyfill = gulp.src('dist/bower_components/promise-polyfill/*.js')
+    .pipe($.uglify())
+    .pipe(gulp.dest('dist/bower_components/promise-polyfill'));
 
   var swImport = gulp.src('dist/sw-import.js')
     .pipe($.uglify())
     .pipe(gulp.dest('dist'));
 
-  var swToolbox = gulp.src('dist/sw-toolbox/*.js')
-    // TODO
-    //.pipe($.uglify()).on('error', errorHandler)
-    // https://github.com/mishoo/UglifyJS2/issues/766
-    .pipe(gulp.dest('dist/sw-toolbox'));
+  var swToolbox = gulp.src('dist/bower_components/sw-toolbox/*.js')
+    .pipe($.uglify())
+    .pipe(gulp.dest('dist/bower_components/sw-toolbox'));
 
-  return merge(bootstrap, serviceWorker, swImport, swToolbox);
+  return merge(index, platinumSw, promisePolyfill, swImport, swToolbox);
 };};

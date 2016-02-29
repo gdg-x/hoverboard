@@ -3,11 +3,11 @@
 // Compile HTML files with Nunjucks templating engine
 module.exports = function ($, config, gulp) { return function () {
   var variables = require('../app/themes/' + config.theme + '/variables');
-  var siteConfig = require('../app/settings/config');
-  var metadata = require('../app/settings/metadata');
-  var sitedata = require('../app/settings/sitedata');
-  var navigation = require('../app/settings/navigation');
-  var footer = require('../app/settings/footer');
+  var metadata = require('../app/metadata/config');
+  var general = require('../app/metadata/general');
+  var sitedata = require('../app/metadata/sitedata');
+  var navigation = require('../app/metadata/navigation');
+  var footer = require('../app/metadata/footer');
 
   function markdownRender(markdown) {
     var cm = require('commonmark');
@@ -18,7 +18,11 @@ module.exports = function ($, config, gulp) { return function () {
   }
 
   return gulp.src([
-      'app/**/*.html', '!app/themes/**/*.html'
+      'app/**/*.html',
+      '!app/bower_components/**',
+      '!app/test/**',
+      '!app/themes/**',
+      '!app/views/**'
     ])
     .pipe($.plumber({
       handleError: function (error) {
@@ -29,8 +33,8 @@ module.exports = function ($, config, gulp) { return function () {
       }
     }))
     .pipe($.nunjucksHtml({
-      locals: require('merge')(variables.html, siteConfig, metadata, sitedata, navigation, footer),
-      searchPaths: ['app/views', 'app/elements'],
+      locals: require('merge')(variables.metadata, metadata, general, sitedata, navigation, footer),
+      searchPaths: ['app/content', 'app/elements', 'app/views'],
       tags: {
         variableStart: '{$',
         variableEnd: '$}'

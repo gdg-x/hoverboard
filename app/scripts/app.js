@@ -1,25 +1,66 @@
 (function (document) {
-    'use strict';
+  'use strict';
 
-    var app = document.querySelector('#app');
+  var app = document.querySelector('#app');
 
-    app.displayInstalledToast = () => {
-        if (!document.querySelector('platinum-sw-cache').disabled) {
-            document.querySelector('#caching-complete').show();
-        }
-    };
+  // Debug mode
+  app.debug = true;
 
-    app.addEventListener('dom-change', () => console.log('Hello, folks! It is Project Hoverboard by GDG Lviv. Contact Oleh Zasadnyy for more details.'));
+  // Logger for debug mode
+  let logger = text => {
+    if (app.debug) {
+      console.info(text);
+    }
+  };
 
-    app.scrollPageToTop = () => document.querySelector('#paperDrawerPanel [main]').scrollToTop(true);
+  var webComponentsSupported = ('registerElement' in document &&
+  'import' in document.createElement('link') &&
+  'content' in document.createElement('template'));
 
-    app.generateClass = (value) => value.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-    app.getIndexByProperty = (array, property, value) => {
-        for (let i = 0, length = array.length; i < length; i++) {
-            if (array[i][property].toString() === value.toString()) {
-                return i;
-            }
-        }
-    };
-    app.randomOrder = (array) => array.sort(function () { return 0.5 - Math.random();});
+  if (!webComponentsSupported) {
+    logger('Web Components aren\'t supported!');
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'bower_components/webcomponentsjs/webcomponents-lite.min.js';
+    document.head.appendChild(script);
+  } else {
+    logger('Web Components are supported!');
+  }
+
+  app.displayInstalledToast = () => {
+    if (!document.querySelector('platinum-sw-cache').disabled) {
+      document.querySelector('#caching-complete').show();
+    }
+  };
+
+  app.addEventListener('dom-change', () => console.log('Hello, folks! It is Project Hoverboard by GDG Lviv. Contact Oleh Zasadnyy for more details.'));
+
+  window.addEventListener('service-worker-error', e => {
+    // Check to make sure caching is actually enabled—it won't be in the dev environment.
+    if (!Polymer.dom(document).querySelector('platinum-sw-cache').disabled) {
+      logger(e.detail);
+    }
+  });
+
+  window.addEventListener('service-worker-installed', () => {
+    // Check to make sure caching is actually enabled—it won't be in the dev environment.
+    if (!Polymer.dom(document).querySelector('platinum-sw-cache').disabled) {
+      app.$.infoToast.text = 'Caching complete! This app will work offline.';
+      app.$.infoToast.show();
+    }
+  });
+
+  app.scrollPageToTop = () => document.querySelector('#paperDrawerPanel [main]').scrollToTop(true);
+
+  app.generateClass = (value) => value.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+  app.getIndexByProperty = (array, property, value) => {
+    for (let i = 0, length = array.length; i < length; i++) {
+      if (array[i][property].toString() === value.toString()) {
+        return i;
+      }
+    }
+  };
+  app.randomOrder = (array) => array.sort(function () {
+    return 0.5 - Math.random();
+  });
 })(document);

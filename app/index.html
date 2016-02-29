@@ -9,18 +9,24 @@
     <hoverboard-app id="hoverboard-app" route="{{route}}" params="{{params}}"></hoverboard-app>
 
     <!-- Service Worker support -->
-    <paper-toast id="caching-complete" class="toast" duration="6000"
-                 text="Caching complete! This app will work offline."></paper-toast>
+    <paper-toast id="infoToast" class="toast" duration="6000"></paper-toast>
 
-    <platinum-sw-register auto-register clients-claim skip-waiting on-service-worker-installed="displayInstalledToast">
-        <!-- Google Analytics offline support -->
-        <platinum-sw-offline-analytics></platinum-sw-offline-analytics>
-        <platinum-sw-cache default-cache-strategy="fastest" cache-config-file="/cache-config.json"></platinum-sw-cache>
-    </platinum-sw-register>
+  <platinum-sw-register auto-register
+                        clients-claim
+                        skip-waiting
+                        base-uri="bower_components/platinum-sw/bootstrap">
+    <platinum-sw-offline-analytics></platinum-sw-offline-analytics>
+    <platinum-sw-cache default-cache-strategy="fastest"
+                       cache-config-file="cache-config.json">
+    </platinum-sw-cache>
+  </platinum-sw-register>
+
 </template>
 
 <!-- build:js {$ baseurl $}/scripts/app.js -->
-<script src="{$ baseurl $}/scripts/app.js"></script>
+<script src="bower_components/page/page.js"></script>
+<script src="scripts/app.js"></script>
+<script src="scripts/routing.js"></script>
 <!-- endbuild-->
 
 <!-- Google Analytics code -->
