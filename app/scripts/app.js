@@ -1,7 +1,7 @@
 (function (document) {
   'use strict';
 
-  var app = document.querySelector('#app');
+  let app = document.getElementById('app');
 
   // Debug mode
   app.debug = true;
@@ -33,7 +33,8 @@
     }
   };
 
-  app.addEventListener('dom-change', () => console.log('Hello, folks! It is Project Hoverboard by GDG Lviv. Contact Oleh Zasadnyy for more details.'));
+  window.addEventListener('WebComponentsReady', () =>
+    console.log('Hello, folks! It is Project Hoverboard by GDG Lviv. Contact Oleh Zasadnyy for more details.'));
 
   window.addEventListener('service-worker-error', e => {
     // Check to make sure caching is actually enabled—it won't be in the dev environment.
@@ -49,8 +50,6 @@
       app.$.infoToast.show();
     }
   });
-
-  app.scrollPageToTop = () => document.querySelector('#paperDrawerPanel [main]').scrollToTop(true);
 
   app.generateClass = (value) => value.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
   app.getIndexByProperty = (array, property, value) => {

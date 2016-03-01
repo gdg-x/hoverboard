@@ -2,26 +2,21 @@
 <html lang="{$ lang $}">
 {% include "head.html" %}
 
-<body class="vertical layout">
+<body>
 <span id="browser-sync-binding"></span>
-<template is="dom-bind" id="app">
 
-    <hoverboard-app id="hoverboard-app" route="{{route}}" params="{{params}}"></hoverboard-app>
+<hoverboard-app id="app" route="{{route}}" params="{{params}}"></hoverboard-app>
 
-    <!-- Service Worker support -->
-    <paper-toast id="infoToast" class="toast" duration="6000"></paper-toast>
-
-  <platinum-sw-register auto-register
-                        clients-claim
-                        skip-waiting
-                        base-uri="bower_components/platinum-sw/bootstrap">
-    <platinum-sw-offline-analytics></platinum-sw-offline-analytics>
-    <platinum-sw-cache default-cache-strategy="fastest"
-                       cache-config-file="cache-config.json">
-    </platinum-sw-cache>
-  </platinum-sw-register>
-
-</template>
+<!-- Service Worker support -->
+<platinum-sw-register auto-register
+                      clients-claim
+                      skip-waiting
+                      base-uri="bower_components/platinum-sw/bootstrap">
+  <platinum-sw-offline-analytics></platinum-sw-offline-analytics>
+  <platinum-sw-cache default-cache-strategy="fastest"
+                     cache-config-file="cache-config.json">
+  </platinum-sw-cache>
+</platinum-sw-register>
 
 <!-- build:js {$ baseurl $}/scripts/app.js -->
 <script src="bower_components/page/page.js"></script>

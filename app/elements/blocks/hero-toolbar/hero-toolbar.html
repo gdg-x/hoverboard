@@ -136,7 +136,7 @@
                     {% endfor %}
                 </paper-tabs>
 
-                <div class="middle play-video" on-tap="openVideo" hidden$="[[!video]]">
+                <div class="middle play-video" on-tap="openVideo" hidden$="{{!video}}">
                     <iron-icon class="play-icon" icon="icons:play"></iron-icon>
                     <span>[[video.text]]</span>
                 </div>
@@ -167,13 +167,16 @@
                         backgroundImage: String,
                         fontColor: String,
                         tabBarColor: String,
-                        video: Object
+                        video: {
+                          type: Object,
+                          value: {}
+                        }
                     };
                     this.observers = ['_stylesChanged(backgroundColor, fontColor, tabBarColor)'];
                 }
 
                 togglePanel() {
-                    document.querySelector('#paperDrawerPanel').togglePanel();
+                    app.toggleDrawer();
                 }
 
                 openVideo() {
