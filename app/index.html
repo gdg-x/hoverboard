@@ -11,14 +11,14 @@
 <platinum-sw-register auto-register
                       clients-claim
                       skip-waiting
-                      base-uri="bower_components/platinum-sw/bootstrap">
+                      base-uri="/bower_components/platinum-sw/bootstrap">
   <platinum-sw-offline-analytics></platinum-sw-offline-analytics>
   <platinum-sw-cache default-cache-strategy="fastest"
-                     cache-config-file="cache-config.json">
+                     cache-config-file="/cache-config.json">
   </platinum-sw-cache>
 </platinum-sw-register>
 
-<!-- build:js scripts/app.min.js async -->
+<!-- build:js /scripts/app.min.js async -->
 <script src="bower_components/page/page.js"></script>
 <script src="scripts/app.js"></script>
 <script src="scripts/routing.js"></script>

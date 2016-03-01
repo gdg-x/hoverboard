@@ -124,3 +124,7 @@ a,
   max-width: 100%;
   display: block;
 }
+
+[show] {
+  opacity: 1;
+}

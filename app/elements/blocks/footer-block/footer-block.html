@@ -151,7 +151,7 @@
                 <nav class="navigation">
                     {% for block in footer.blocks %}
                     <div class="link-block-wrapper">
-                        <span class="link-block-title">{$ block.title $}</span>
+                        <div class="link-block-title">{$ block.title $}</div>
                         <ul class="link-block">
                             {% for link in block.links %}
                             <li>
@@ -162,7 +162,7 @@
                     </div>
                     {% endfor %}
                     <div class="link-block-wrapper">
-                        <span class="link-block-title">{$ footer.contactBlock.title $}</span>
+                        <div class="link-block-title">{$ footer.contactBlock.title $}</div>
                         <ul class="link-block">
                             {% for link in footer.contactBlock.links %}
                             <li><a href="{$ link.url $}" {% if link.newTab %}target="_blank" {% endif %}>{$ link.text $}</a></li>
@@ -177,7 +177,7 @@
                         </div>
                     </div>
                     <div class="subscribe">
-                        <span class="link-block-title block">Subscribe</span>
+                        <div class="link-block-title">Subscribe</div>
                         <span>No spam, only the latest news and updates!</span>
                         <mailchimp-subscribe url="[[ mailchimpUrl ]]" name="[[ mailchimpName ]]"></mailchimp-subscribe>
                     </div>

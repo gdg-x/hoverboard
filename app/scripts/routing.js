@@ -171,7 +171,6 @@ page('/schedule/:id', ctx => {
 // 404
 page('*', ctx => {
   function setData() {
-    let url = ctx.path.substr(1);
     page.redirect(baseUrl);
   }
 

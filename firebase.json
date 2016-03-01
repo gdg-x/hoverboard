@@ -5,7 +5,7 @@
     "destination": "/index.html"
   } ],
   "headers": [ {
-    "source" : "**/*.@(css|html|js|json|txt|xml)",
+    "source" : "**/*.@(css|html|js|json|txt|xml|markdown|pdf)",
     "headers" : [ {
       "key" : "Cache-Control",
       "value" : "max-age=315360000"
