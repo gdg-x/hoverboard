@@ -58,7 +58,6 @@ function closeDrawer(ctx, next) {
 
 // Routes
 page('*', closeDrawer, (ctx, next) => {
-  app.fire('iron-signal', {name: 'track-page', data: { path: ctx.path } });
   next();
 });
 

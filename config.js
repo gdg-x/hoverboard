@@ -32,15 +32,15 @@ module.exports = {
   // Deploy task
   deploy: {
     // Choose hosting
-    hosting: 'gae', // or firebase, gcs, ssh
+    hosting: 'firebase', // or firebase, gcs, ssh
     // Firebase
     // Firebase requires Firebase Command Line Tools to be installed and configured.
     // For info on tool: https://www.firebase.com/docs/hosting/command-line-tool.html
     firebase: {
       env: {
-        development: 'polymer-starter-kit-plus-dev', // subdomain
-        staging:     'polymer-starter-kit-plus-staging',
-        production:  'polymer-starter-kit-plus'
+        development: 'hoverboard', // subdomain
+        staging:     'hoverboard',
+        production:  'hoverboard'
       }
     },
     // Google App Engine
@@ -99,7 +99,7 @@ module.exports = {
   pageSpeed: {
     key: '', // need uncomment in task
     nokey: true,
-    site: 'https://polymer-starter-kit-plus.firebaseapp.com',
+    site: 'https://hoverboard.firebaseapp.com',
     strategy: 'mobile' // or desktop
   },
   // App theme

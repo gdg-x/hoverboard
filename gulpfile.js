@@ -93,13 +93,28 @@ gulp.task('copy', function() {
     'app/elements/*-bundle.html'
   ]).pipe(gulp.dest('dist/elements'));
 
+  var assets = gulp.src([
+    'app/assets/*'
+  ]).pipe(gulp.dest('dist/assets'));
+
+  var data = gulp.src([
+    'app/data/*'
+  ]).pipe(gulp.dest('dist/data'));
+
+  var posts = gulp.src([
+    'app/posts/*'
+  ]).pipe(gulp.dest('dist/posts'));
+
   var icons = gulp.src(['app/themes/' + config.theme + '/icons.html'])
     .pipe(gulp.dest('dist/themes/' + config.theme));
+
+  var components = gulp.src(['app/themes/' + config.theme + '/components/*.html'])
+    .pipe(gulp.dest('dist/themes/' + config.theme + '/components'));
 
   var scripts = gulp.src(['app/scripts/analytics.js'])
     .pipe(gulp.dest('dist/scripts'));
 
-  return merge(app, bower, elements, icons, scripts)
+  return merge(app, bower, elements, assets, data, posts, icons, components, scripts)
     .pipe($.size({title: 'Copy files to dist dir:'}));
 });
 
@@ -160,7 +175,6 @@ gulp.task('vulcanize', function() {
     // Remove CSS comments
     .pipe($.if('*.html', $.stripCssComments({preserve: false})))
     // Minify base-bundle.js
-    .pipe($.if('*.js', $.uglify()))
     .pipe(gulp.dest('dist/elements'))
     .pipe($.size({title: 'Copy vulcanized elements to dist/elements dir:'}));
 });
