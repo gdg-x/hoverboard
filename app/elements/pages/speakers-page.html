@@ -245,7 +245,7 @@
             },
 
             observers: [
-                'updateHeroSettings(selected)'
+              'openSpeakerDetails(speakers, speakerId, selected)'
             ],
 
             updateHeroSettings: function () {
@@ -253,7 +253,7 @@
             },
 
             openSpeakerDetails: function () {
-                if(this.selected) {
+                if(this.selected && this.speakerId) {
                     this.async(function() {
                         this._selectedSpeaker = this.speakers[app.getIndexByProperty(this.speakers, 'id', this.speakerId)];
                         this.$.speakerDetails.open();
