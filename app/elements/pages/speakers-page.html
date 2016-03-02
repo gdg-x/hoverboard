@@ -244,16 +244,12 @@
                 }
             },
 
-            observers: [
-              'openSpeakerDetails(speakers, speakerId, selected)'
-            ],
-
             updateHeroSettings: function () {
                 this.heroSettings = this.selected ? this._heroSettings : this.heroSettings;
             },
 
             openSpeakerDetails: function () {
-                if(this.selected && this.speakerId) {
+                if(this.selected && this.speakerId && this.speakers) {
                     this.async(function() {
                         this._selectedSpeaker = this.speakers[app.getIndexByProperty(this.speakers, 'id', this.speakerId)];
                         this.$.speakerDetails.open();

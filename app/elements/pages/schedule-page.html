@@ -409,10 +409,6 @@
         }
       },
 
-      observers: [
-        'openSessionDetails(sessions, sessionId, selected)'
-      ],
-
       ready: function () {
         this.customStyle['--hero-color'] = this._heroSettings.backgroundColor;
         this.updateStyles();
@@ -423,7 +419,7 @@
       },
 
       openSessionDetails: function () {
-        if (this.selected && this.sessionId) {
+        if (this.selected && this.sessionId && this.sessions) {
           this.async(function () {
             this._selectedSession = this.sessions[app.getIndexByProperty(this.sessions, 'id', this.sessionId)];
             this.$.sessionDetails.open();
