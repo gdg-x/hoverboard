@@ -15,6 +15,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <!-- Iron elements -->
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-localstorage/iron-localstorage.html">
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../../bower_components/iron-selector/iron-selector.html">
 
@@ -28,6 +29,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/paper-styles/color.html">
 <link rel="import" href="../../bower_components/paper-styles/typography.html">
 <link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../bower_components/paper-toggle-button/paper-toggle-button.html">
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 
 <!-- Custom elements -->
@@ -40,6 +42,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <style include="shared-styles">
       @import "theme.css";
     </style>
+    
+    <iron-localstorage name="my-app-storage"
+      value="{{storage}}"
+      on-iron-localstorage-load-empty="initializeDefaultStorage">
+    </iron-localstorage>
 
     <paper-drawer-panel id="paperDrawerPanel" responsive-width="599px" drawer-width="256px">
       {% include "my-app/views/drawer.html" %}

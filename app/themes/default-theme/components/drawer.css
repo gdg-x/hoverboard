@@ -13,7 +13,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   @nest &-content {
     @apply(--layout-vertical);
 
-    background-color: var(--primary-background-color);
+    background-color: var(--secondary-background-color);
     height: 100%;
 
     @media (--md-viewport) {

@@ -10,6 +10,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 /** @define Navigation */
 
 .Navigation {
+  --paper-menu-background-color: var(--secondary-background-color);
+
   /* stylelint-disable indentation */
 
   /* postcss-bem-linter: ignore */
