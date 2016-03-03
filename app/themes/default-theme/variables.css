@@ -22,6 +22,7 @@ for further information on custom CSS properties.
 :root {
   /* Material Design Themes
      https://www.google.com/design/spec/style/color.html#color-themes */
+
   /* Light theme */
   --light-theme-primary-background-color: var(--paper-grey-50);     /* Content background */
   --light-theme-secondary-background-color: var(--paper-grey-100);  /* Main / Drawer background */
@@ -66,8 +67,8 @@ for further information on custom CSS properties.
   --text-light-accent-color: var(--paper-grey-900);
   --text-dark-accent-color: #fff;
 
-  /* Toggle button colors */
-  /* https://www.google.com/design/spec/components/selection-controls.html#selection-controls-switch */
+  /* Toggle button colors
+     https://www.google.com/design/spec/components/selection-controls.html#selection-controls-switch */
   --light-theme-toggle-unchecked-bar-color: #000;
   --light-theme-toggle-unchecked-button-color: var(--paper-grey-50);
   --light-theme-toggle-unchecked-ink-color: var(--paper-grey-700);
