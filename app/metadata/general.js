@@ -1,13 +1,13 @@
 module.exports = {
-    title: 'GDG DevFest Season 2015',
+    title: 'GDG DevFest Ukraine 2015',
     description: 'The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts',
     keywords: 'event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, cloud',
     charset: 'utf-8',
     lang: 'en',
     // Add to homescreen for Chrome on Android
-    applicationName: 'GDG DevFest Season 2015',
+    applicationName: 'GDG DevFest Ukraine 2015',
     // Add to homescreen for Safari on iOS
-    appleMobileWebAppTitle: 'GDG DevFest Season 2015',
+    appleMobileWebAppTitle: 'GDG DevFest Ukraine 2015',
 
     // Event details
     dates: 'October 23-24, 2015',
@@ -50,7 +50,7 @@ module.exports = {
         }
     },
     hashtag: 'dfua',
-    email: 'devfest@gdg.com',
+    email: 'devfest@gdg.org.ua',
     organizer: {
         name: 'GDG Lviv',
         blog: 'http://lviv.gdg.org.ua'

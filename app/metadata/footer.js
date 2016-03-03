@@ -18,10 +18,6 @@ module.exports = {
             text: 'GDG DevFest Ukraine 2014',
             url: 'http://devfest.gdg.org.ua/2014/',
             newTab: true
-          },
-          {
-            text: 'Code of Conduct',
-            url: '/code-of-conduct'
           }
         ]
       },
@@ -50,8 +46,8 @@ module.exports = {
       title: 'Contact us',
       links: [
         {
-          text: 'devfest@google.com',
-          url: 'mailto:devfest@google.com'
+          text: 'devfest@gdg.org.ua',
+          url: 'mailto:devfest@gdg.org.ua'
         }
       ]
     }

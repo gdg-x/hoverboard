@@ -22,9 +22,8 @@
 
                 <div class="metadata-wrapper">
                     <div class="main-info">
-                        <iron-image class="photo" src="[[speaker.photoUrl]]" preload fade sizing="cover" no-reveal
-                                    hidden="{{smallScreen}}"></iron-image>
-                        <div class="info">
+                      <div class="section-photo" style="background-image: url([[speaker.photoUrl]])" hidden$="{{smallScreen}}"></div>
+                      <div class="info">
                             <h1 class="main-title" hidden="{{smallScreen}}">[[speaker.name]]</h1>
                             <span class="meta highlight">[[speaker.company]], [[speaker.country]]</span>
                             <span class="meta">

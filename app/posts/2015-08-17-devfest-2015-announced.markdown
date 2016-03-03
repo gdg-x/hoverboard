@@ -10,7 +10,7 @@ Like last year, the event will be held on **23-24 October in Lviv**. Put aside a
 
 ### DevFest history infographic
 
-<img src="images/posts/df14-infographic.png" style="width: 100%;"/>
+<img src="/images/posts/df14-infographic.png" style="width: 100%;"/>
 
 This is only a small part of all the information, so stay tuned for our updates on a [DevFest website](http://devfest.gdg.org.ua/), like us on [Facebook](https://facebook.com/GDGLviv), check [Twitter](https://twitter.com/intent/user?screen_name=GDGLviv) or add to circles on [Google+](https://plus.google.com/b/102444623953913144164). Don’t miss anything interesting!
 
