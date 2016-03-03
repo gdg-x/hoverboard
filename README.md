@@ -121,6 +121,8 @@ With Node.js installed, run the following one liner from the root of your Polyme
 
 ```sh
 npm run install:complete # Alias for "sudo npm install -g npm && sudo npm install -g bower gulp && npm install && bower install"
+
+gulp init
 ```
 
 #### Prerequisites (for everyone)
@@ -175,7 +177,7 @@ there is a workaround or fix already posted.
 - Theme variables -  [variables.css](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/themes/default-theme/variables.css) and [variables.js](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/themes/default-theme/variables.js)
 - HTML metadata -  [metadata.js](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/metadata.js)
 
-#### Initializing your app
+#### Initialize your app
 
 ```sh
 gulp init
