@@ -21,7 +21,7 @@ module.exports = function ($, config, gulp, environment) {
   }
   
   if (config.deploy.gae.version) {
-    flags += ' --version ' + config.deploy.gae.version;
+    flags += ' --version ' + config.version.replace(/\./g, '-');
   }
 
   var deployCmd = 'gcloud preview app deploy deploy/app.yaml -q --project ' + projectID + flags;

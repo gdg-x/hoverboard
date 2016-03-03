@@ -4,6 +4,7 @@
 
 [![sitespeed.io 99%](https://img.shields.io/badge/sitespeed.io-99%-brightgreen.svg)](https://results.sitespeed.io/6ba4-2016/1/21/96a731d4-45fe-4230-958f-255011dd14a3/index2.html)
 [![PageSpeed 97%](https://img.shields.io/badge/PageSpeed-97%-brightgreen.svg)](https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fpolymer-starter-kit-plus.appspot.com&tab=desktop)
+[![Resizer Responsive UI](https://img.shields.io/badge/Resizer-Responsive%20UI-brightgreen.svg)](http://design.google.com/resizer/#url=https%3A%2F%2Fpolymer-starter-kit-plus.appspot.com)
 [![bitHound Code](https://www.bithound.io/github/StartPolymer/polymer-starter-kit-plus/badges/code.svg)](https://www.bithound.io/github/StartPolymer/polymer-starter-kit-plus)
 [![Google+ Start Polymer](https://img.shields.io/badge/Google+-Start%20Polymer-dd4b39.svg)](https://plus.google.com/101148544618948882647)
 
@@ -73,16 +74,17 @@ all files by appending content hash to their names
     - [Firebase](https://www.firebase.com)
     - [Google App Engine](https://cloud.google.com/appengine/) with [HTTP 2.0 Push](https://github.com/GoogleChrome/http2push-gae#pushing-content-from-a-static-handler)
     - [Google Cloud Storage](https://cloud.google.com/storage/)
-- [Recipes](/docs/README.md/) for Polymer performance and using Chrome Dev Editor
+    - Any Linux hosting with [SSH](https://en.wikipedia.org/wiki/Secure_Shell)
+- [Recipes](/docs/README.md/) for Polymer performance, Mobile Chrome Apps and using Chrome Dev Editor
 
 ## Getting Started
 
 To take advantage of Polymer Starter Kit Plus you need to:
 
-1. Get a copy of the code.
-2. Install the dependencies if you don't already have them.
-3. Modify the application to your liking.
-4. Deploy your production code.
+1. [Get a copy of the code.](https://github.com/StartPolymer/polymer-starter-kit-plus#1-get-the-code)
+2. [Install the dependencies if you don't already have them.](https://github.com/StartPolymer/polymer-starter-kit-plus#2-install-dependencies)
+3. [Modify the application to your liking.](https://github.com/StartPolymer/polymer-starter-kit-plus#3-development-workflow)
+4. [Deploy your production code.](https://github.com/StartPolymer/polymer-starter-kit-plus#4-deploy-app-tada)
 
 ### 1. Get the code
 
@@ -120,7 +122,7 @@ git commit -m 'Updated to 1.0.2'
 With Node.js installed, run the following one liner from the root of your Polymer Starter Kit Plus download:
 
 ```sh
-npm run install:all # Alias for "sudo npm install -g npm && sudo npm install -g bower gulp && npm install && bower install"
+npm run install:complete # Alias for "sudo npm install -g npm && sudo npm install -g bower gulp && npm install && bower install"
 ```
 
 #### Prerequisites (for everyone)
@@ -159,6 +161,13 @@ cd polymer-starter-kit-plus && npm install && bower install
 ```
 
 This installs the element sets (Paper, Iron, Platinum) and tools the starter kit requires to build and serve apps.
+
+If you get a browser console error indicating that an element you know you have installed is missing, try deleting the bower_components folder, then run `bower cache clean` followed by `bower install` to reinstall. This can be especially helpful when upgrading from a prior version of the Polymer Starter Kit Plus. 
+
+If the issue is to do with a failure somewhere else, you might find that due to a network issue
+a dependency failed to correctly install. We recommend running `npm cache clean` and deleting the `node_modules` directory followed by
+`npm install` to see if this corrects the problem. If not, please check the [issue tracker](https://github.com/StartPolymer/polymer-starter-kit-plus/issues) in case
+there is a workaround or fix already posted.
 
 ### 3. Development workflow
 
@@ -208,12 +217,13 @@ To run tests Java 7 or higher is required. To update Java go to http://www.oracl
 gulp
 ```
 
-Build and optimize the current project, ready for deployment. This includes linting as well as vulcanization, image, script, stylesheet and HTML optimization and minification.
+Build and optimize the current project, ready for deployment. This includes vulcanization, image, script, stylesheet and HTML optimization and minification.
 
 ### 4. Deploy app :tada:
 
 - For GAE or GCS [install Google Cloud SDK](https://developers.google.com/cloud/sdk/#Quick_Start)
 - For Firebase [install Firebase command line tools](https://www.firebase.com/docs/hosting/command-line-tool.html)
+- Setup hosting in [config file](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/config.js)
 
 #### Deploy to development environment
 
@@ -269,6 +279,7 @@ gulp pagespeed
 ### Update versions of dependencies to the latest versions
 
 ```sh
+# Install tool
 npm install -g npm-check-updates
 
 # Check latest versions

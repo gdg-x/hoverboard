@@ -2,7 +2,7 @@
 
 // Copy hosting configuration
 module.exports = function ($, config, gulp) { return function () {
-  var configFile = null;
+  var configFile = '';
 
   if (config.deploy.hosting === 'gae') {
     configFile = 'app.yaml';

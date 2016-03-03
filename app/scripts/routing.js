@@ -71,6 +71,10 @@ function closeDrawer(ctx, next) {
   next();
 }
 
+function setFocus(selected){
+  document.querySelector('section[data-route="' + selected + '"]').focus();
+}
+
 // Routes
 page('*', scrollToTop, closeDrawer, (ctx, next) => {
   next();
@@ -79,6 +83,7 @@ page('*', scrollToTop, closeDrawer, (ctx, next) => {
 function setHomePage() {
   function setData() {
     app.route = 'home';
+    setFocus(app.route);
   }
 
   // Check if element prototype has not been upgraded yet

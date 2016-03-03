@@ -1,5 +1,5 @@
 var execSync = require('child_process').execSync,
-    gitDescribe = execSync('git describe --tags').toString().replace(/\./g, '-');
+    gitDescribe = execSync('git describe --tags').toString().replace(/(\r\n|\n|\r)/gm, '');
 
 module.exports = {
   // Autoprefixer
@@ -32,7 +32,7 @@ module.exports = {
   // Deploy task
   deploy: {
     // Choose hosting
-    hosting: 'gae', // or firebase, gcs
+    hosting: 'gae', // or firebase, gcs, ssh
     // Firebase
     // Firebase requires Firebase Command Line Tools to be installed and configured.
     // For info on tool: https://www.firebase.com/docs/hosting/command-line-tool.html
@@ -54,8 +54,7 @@ module.exports = {
       },
       // Promote the deployed version to receive all traffic.
       // https://cloud.google.com/sdk/gcloud/reference/preview/app/deploy
-      promote: true,
-      version: gitDescribe
+      promote: true
     },
     // Google Cloud Storage
     // GCS requires Google Cloud SDK with gsutil to be installed and configured.
@@ -77,6 +76,19 @@ module.exports = {
         production:  '315360000', // 10 years
         productionNoCache: '300' // 5 min for files without revision hash
       }
+    },
+    // Any Linux hosting with SSH
+    // Install your SSH public key ~/.ssh/id_rsa.pub onto a remote Linux
+    // Example command: ssh-copy-id root@server.example.com
+    ssh: {
+      env: {
+        development: '/path/to/remote-dir-dev', // remote dir must not exist
+        staging:     '/path/to/remote-dir-staging',
+        production:  '/path/to/remote-dir'
+      },
+      host: 'server.example.com',
+      port: 22,
+      user: 'root'
     }
   },
   // PageSpeed Insights
@@ -90,6 +102,8 @@ module.exports = {
     site: 'https://polymer-starter-kit-plus.firebaseapp.com',
     strategy: 'mobile' // or desktop
   },
-  // App Theme
-  theme: 'default-theme'
+  // App theme
+  theme: 'default-theme',
+  // App version from git
+  version: gitDescribe
 };
