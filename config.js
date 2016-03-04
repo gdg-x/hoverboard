@@ -1,7 +1,15 @@
 var execSync = require('child_process').execSync,
-    gitDescribe = execSync('git describe --tags').toString().replace(/(\r\n|\n|\r)/gm, '');
+    appVersion = null;
+
+try {
+  appVersion = execSync('git describe --tags').toString().replace(/(\r\n|\n|\r)/gm, '');
+} catch(e) {
+  console.log('Warning: Can\'t run "git describe" for determine app version');
+}
 
 module.exports = {
+  // App version from git
+  appVersion: appVersion,
   // Autoprefixer
   autoprefixer: {
     // https://github.com/postcss/autoprefixer#browsers
@@ -103,7 +111,5 @@ module.exports = {
     strategy: 'mobile' // or desktop
   },
   // App theme
-  theme: 'default-theme',
-  // App version from git
-  version: gitDescribe
+  theme: 'default-theme'
 };
