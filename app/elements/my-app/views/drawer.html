@@ -19,7 +19,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <div class="Drawer-content">
     <!-- Navigation -->
     <nav>
-    <paper-menu class="Drawer-widget Navigation list" attr-for-selected="data-route" selected="[[route]]">
+    <paper-menu class="Drawer-widget Navigation Navigation--menu list" attr-for-selected="data-route" selected="[[route]]">
       <a class="Navigation-link" data-route="home" href$="{{baseUrl}}">
         <iron-icon class="Navigation-icon" icon="home"></iron-icon>
         <span class="Navigation-text">Home</span>
@@ -50,16 +50,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           on-change="onDarkThemeToggleChange">
         </paper-toggle-button>
       </div>
-      
-      <a class="Navigation-link" href="https://github.com/StartPolymer/polymer-starter-kit-plus" target="_blank">
-        <iron-icon class="Navigation-icon" icon="github-mark"></iron-icon>
-        <span class="Navigation-text">View Source</span>
-      </a>
 
-      <a class="Navigation-link" href="https://github.com/StartPolymer/polymer-starter-kit-plus/issues/new?title=Feedback%20for:%20" target="_blank">
-        <iron-icon class="Navigation-icon" icon="message-alert"></iron-icon>
-        <span class="Navigation-text">Submit Feedback</span>
-      </a>
+      <div class="Navigation">
+        <a class="Navigation-link" href="https://github.com/StartPolymer/polymer-starter-kit-plus" target="_blank">
+          <iron-icon class="Navigation-icon" icon="github-mark"></iron-icon>
+          <span class="Navigation-text">View Source</span>
+        </a>
+
+        <a class="Navigation-link" href="https://github.com/StartPolymer/polymer-starter-kit-plus/issues/new?title=Feedback%20for:%20" target="_blank">
+          <iron-icon class="Navigation-icon" icon="message-alert"></iron-icon>
+          <span class="Navigation-text">Submit Feedback</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="Drawer-widget Drawer-widget--footer">
+      <span>{$ appVersion $}</span>
+      &nbsp;-&nbsp;
+      <a class="Drawer-link" href="https://github.com/StartPolymer/polymer-starter-kit-plus" target="_blank">View Source</a>
     </div>
   </div>
 </paper-scroll-header-panel>

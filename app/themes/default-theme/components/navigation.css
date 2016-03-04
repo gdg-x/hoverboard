@@ -10,20 +10,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 /** @define Navigation */
 
 .Navigation {
-  --paper-menu-background-color: var(--secondary-background-color);
-
-  /* stylelint-disable indentation */
-
-  /* postcss-bem-linter: ignore */
-  --paper-menu-selected-item: {
-    color: var(--accent-color);
-  };
-
-  /* postcss-bem-linter: ignore */
-  --paper-menu-focused-item-after: {
-    background-color: var(--disabled-text-color);
-  };
-  /* stylelint-enable */
+  @nest &--menu {
+    --paper-menu-background-color: var(--secondary-background-color);
+    --paper-menu-color: currentColor;
+  
+    /* stylelint-disable indentation */
+  
+    /* postcss-bem-linter: ignore */
+    --paper-menu-selected-item: {
+      color: var(--accent-color);
+    };
+  
+    /* postcss-bem-linter: ignore */
+    --paper-menu-focused-item-after: {
+      background-color: var(--disabled-text-color);
+    };
+    /* stylelint-enable */
+  }
 
   @nest &-icon {
     margin-right: 24px;
@@ -35,7 +38,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     @apply(--layout-horizontal);
     @apply(--layout-center);
 
-    color: var(--secondary-text-color);
+    color: currentColor;
     min-height: 48px;
     padding: 0 24px;
     text-decoration: none;

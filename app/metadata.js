@@ -12,5 +12,7 @@ module.exports = {
   // Google Analytics Tracking ID
   googleAnalyticsTrackingId: 'UA-XXXXX-Y',
   // App Theme
-  theme: config.theme
+  theme: config.theme,
+  // App version
+  appVersion: config.appVersion
 };
