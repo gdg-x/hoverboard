@@ -1,73 +1,79 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 
 <dom-module id="statistics-block">
-    <template>
-        <style include="shared-styles"></style>
-        <style>
-            :host {
-                display: block;
-                background: var(--default-primary-color);
-                color: var(--text-primary-color);
-            }
+  <template>
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
+      }
 
-            .container {
-                @apply(--layout-horizontal);
-                @apply(--layout-wrap);
-            }
+      .container {
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
+      }
 
-            .statistics-element {
-                @apply(--layout-vertical);
-                @apply(--layout-center-center);
-                text-align: center;
-            }
+      .statistics-element {
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+        text-align: center;
+      }
 
-            .counter {
-                font-size: 3em;
-                font-weight: 200;
-            }
+      .counter {
+        font-size: 3em;
+        font-weight: 200;
+      }
 
-            .caption {
-                font-size: .85em;
-            }
+      .caption {
+        font-size: .85em;
+      }
 
-            @media (max-width: 600px) {
-                .statistics-element {
-                    width: 50%;
-                }
-                .statistics-element:nth-child(1),
-                .statistics-element:nth-child(2) {
-                    margin-bottom: 40px;
-                }
-            }
+      .description {
+        margin-top: 35px;
+      }
 
-            @media (min-width: 601px) {
-                .statistics-element {
-                    @apply(--layout-flex);
-                }
-            }
-        </style>
-        <div class="container">
-            {% for statistic in statistics %}
-            <div class="statistics-element">
-                <span class="counter">{$ statistic.counter $}</span>
-                <span class="caption">{$ statistic.caption $}</span>
-            </div>
-            {% endfor %}
-        </div>
-    </template>
-    <script>
-        (function() {
-            'use strict';
+      @media (max-width: 600px) {
+        .statistics-element {
+          width: 50%;
+        }
 
-            class StatisticsBlock {
-                beforeRegister() {
-                    let is = this.constructor.name.replace(/\W+/g, '-')
-                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-                    this.is = is;
-                }
-            }
+        .statistics-element:nth-child(1),
+        .statistics-element:nth-child(2) {
+          margin-bottom: 40px;
+        }
+      }
 
-            Polymer(StatisticsBlock);
-        })();
-    </script>
+      @media (min-width: 601px) {
+        .statistics-element {
+          @apply(--layout-flex);
+        }
+      }
+    </style>
+    <div class="container">
+      {% for statistic in statistics %}
+      <div class="statistics-element">
+        <span class="counter">{$ statistic.counter $}</span>
+        <span class="caption">{$ statistic.caption $}</span>
+      </div>
+      {% endfor %}
+      <div class="description text-center">{$ description $}</div>
+    </div>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      class StatisticsBlock {
+        beforeRegister() {
+          let is = this.constructor.name.replace(/\W+/g, '-')
+            .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+          this.is = is;
+        }
+      }
+
+      Polymer(StatisticsBlock);
+    })();
+  </script>
 </dom-module>

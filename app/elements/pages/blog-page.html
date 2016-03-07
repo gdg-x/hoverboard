@@ -39,10 +39,6 @@
         height: calc(var(--grid-column-width) + 2 * var(--grid-gutter));
       }
 
-      .post:hover .image {
-        opacity: 1;
-      }
-
       .image {
         height: 100%;
         background: no-repeat 50% 50%;
@@ -77,6 +73,12 @@
           width: 100% !important;
           height: var(--grid-item-height) !important;
           margin: var(--grid-gutter) 0;
+        }
+      }
+
+      @media (min-width: 961px) {
+        .post:hover .image {
+          opacity: 1;
         }
       }
     </style>

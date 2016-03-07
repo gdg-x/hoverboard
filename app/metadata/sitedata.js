@@ -1,4 +1,6 @@
 module.exports = {
+  aboutOrganizers: 'GDG Lviv with support of 10+ GDGs from all around Ukraine is proud organizer of DevFest Ukraine',
+  aboutGDG: 'Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion',
   statistics: [{
     counter: 500,
     caption: 'Attendees'
@@ -21,10 +23,9 @@ module.exports = {
     }
   },
   galleryBlock: {
-    title: 'GDG DevFest Ukraine 2014 - Photos',
     photos: {
-      big: '/images/backgrounds/2014_1.jpg',
-      small: ['/images/backgrounds/2014_2.jpg', '/images/backgrounds/2014_3.jpg']
+      big: '/images/backgrounds/2015_1.jpg',
+      small: ['/images/backgrounds/2015_2.jpg', '/images/backgrounds/2015_3.jpg']
     },
     albumUrl: 'https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1'
   },

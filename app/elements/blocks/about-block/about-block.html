@@ -1,0 +1,66 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<dom-module id="about-block">
+  <template>
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .container {
+        @apply(--layout-vertical);
+      }
+
+      .about-item {
+        @apply(--layout-flex-5);
+      }
+
+      .about-item:not(:first-of-type) {
+        margin-top: 30px;
+      }
+
+      .divider {
+        @apply(--layout-flex);
+      }
+
+      @media (min-width: 601px) {
+        .container {
+          @apply(--layout-horizontal);
+        }
+
+        .about-item:not(:first-of-type) {
+          margin-top: 0;
+        }
+      }
+    </style>
+    <div class="container">
+      <div class="about-item">
+        <h4 class="heading">Organizer</h4>
+        {$ aboutOrganizers $}
+      </div>
+      <span class="divider"></span>
+      <div class="about-item">
+        <h4 class="heading">What is GDG?</h4>
+        {$ aboutGDG $}
+      </div>
+    </div>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      class AboutBlock {
+        beforeRegister() {
+          let is = this.constructor.name.replace(/\W+/g, '-')
+            .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+          this.is = is;
+        }
+      }
+
+      Polymer(AboutBlock);
+    })();
+  </script>
+</dom-module>
