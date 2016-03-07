@@ -51,7 +51,7 @@ module.exports = {
     details: 'Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.'
   },
   socialFeed: {
-    source: 'http://lviv.gdg.org.ua/tweetledee/favoritesjson.php?c=10&cache_interval=7200'
+    source: '/data/tweets.json'
   },
   partnershipProposition: '/assets/GDG_DevFest_Ukraine_2015_Partnership_Proposition.pdf'
 };
