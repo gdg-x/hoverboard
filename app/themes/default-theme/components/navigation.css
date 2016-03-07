@@ -10,24 +10,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 /** @define Navigation */
 
 .Navigation {
-  @nest &--menu {
-    --paper-menu-background-color: var(--secondary-background-color);
-    --paper-menu-color: currentColor;
-  
-    /* stylelint-disable indentation */
-  
-    /* postcss-bem-linter: ignore */
-    --paper-menu-selected-item: {
-      color: var(--accent-color);
-    };
-  
-    /* postcss-bem-linter: ignore */
-    --paper-menu-focused-item-after: {
-      background-color: var(--disabled-text-color);
-    };
-    /* stylelint-enable */
-  }
-
   @nest &-icon {
     margin-right: 24px;
     pointer-events: none;
@@ -47,4 +29,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   @nest &-text {
     pointer-events: none;
   }
+}
+
+/* https://github.com/jonathantneal/postcss-nesting/issues/16 */
+.Navigation--menu {
+  --paper-menu-background-color: var(--secondary-background-color);
+  --paper-menu-color: currentColor;
+
+  /* stylelint-disable indentation */
+
+  /* postcss-bem-linter: ignore */
+  --paper-menu-selected-item: {
+    color: var(--accent-color);
+  };
+
+  /* postcss-bem-linter: ignore */
+  --paper-menu-focused-item-after: {
+    background-color: var(--disabled-text-color);
+  };
+  /* stylelint-enable */
 }
