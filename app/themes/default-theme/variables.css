@@ -63,6 +63,7 @@ for further information on custom CSS properties.
   --accent-color: var(--paper-$(accentColorName)-a200);             /* Focus / Links / Switches */
   --light-accent-color: var(--paper-$(accentColorName)-a100);
   --dark-accent-color: var(--paper-$(accentColorName)-a400);
+  --darker-accent-color: var(--paper-$(accentColorName)-a700);
   --text-accent-color: #fff;                                        /* Text / Icons */
   --text-light-accent-color: var(--paper-grey-900);
   --text-dark-accent-color: #fff;

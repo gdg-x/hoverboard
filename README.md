@@ -12,7 +12,7 @@
 
 > A starting point for building [Single-Page Applications](https://en.wikipedia.org/wiki/Single-page_application) with Polymer 1.x
 
-> App template for [Static Web Applications](http://www.staticapps.org) - [Static app use case](https://divshot.com/blog/guest/how-static-apps-are-changing-startups/)
+> App template for building [Static Web Applications](http://www.staticapps.org) deployable to static hosting or CDN without dependencies on any backend - [Static app use case](https://divshot.com/blog/guest/how-static-apps-are-changing-startups/)
 
 > Polymer Starter Kit Plus is keeping up to date with
 [Polymer Starter Kit](https://github.com/PolymerElements/polymer-starter-kit) and following  
@@ -56,7 +56,7 @@ The demo is running on Google App Engine with [HTTP 2.0 Push](https://github.com
  - [SUIT CSS linter](https://github.com/postcss/postcss-bem-linter)
 - [Babel](https://babeljs.io) for support [ES2015 JavaScript](https://babeljs.io/docs/learn-es2015/)
  - [Polymer elements using the ES2015 class syntax](http://www.code-labs.io/codelabs/polymer-es2015/index.html#3)
-- [Nunjucks](https://mozilla.github.io/nunjucks/) templating engine for server-side
+- [Nunjucks](https://mozilla.github.io/nunjucks/) templating engine for building static code using Gulp
  - [Metadata](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/metadata.js) at one place
  - [Markdown](http://commonmark.org) for [static content](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/content)
 - Routing with [Page.js](https://visionmedia.github.io/page.js/)
@@ -123,6 +123,8 @@ With Node.js installed, run the following one liner from the root of your Polyme
 
 ```sh
 npm run install:complete # Alias for "sudo npm install -g npm && sudo npm install -g bower gulp && npm install && bower install"
+
+gulp init # Initialize your app - download fonts from Google Fonts and analytics.js
 ```
 
 #### Prerequisites (for everyone)
@@ -177,7 +179,7 @@ there is a workaround or fix already posted.
 - Theme variables -  [variables.css](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/themes/default-theme/variables.css) and [variables.js](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/themes/default-theme/variables.js)
 - HTML metadata -  [metadata.js](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/app/metadata.js)
 
-#### Initializing your app
+#### Initialize your app
 
 ```sh
 gulp init

@@ -1,7 +1,19 @@
 var execSync = require('child_process').execSync,
-    gitDescribe = execSync('git describe --tags').toString().replace(/(\r\n|\n|\r)/gm, '');
+    appVersion = null;
+
+try {
+  appVersion = execSync('git describe --tags').toString().replace(/(\r\n|\n|\r)/gm, '');
+} catch(e) {
+  console.log('Warning: Can\'t run "git describe" for determine app version');
+}
 
 module.exports = {
+  // App name is used for iron-localstorage element and Service Worker cache ID
+  appName: 'polymer-starter-kit-plus',
+  // App theme is directory name in app/themes
+  appTheme: 'default-theme',
+  // App version from git is used for deploy task and frontend
+  appVersion: appVersion,
   // Autoprefixer
   autoprefixer: {
     // https://github.com/postcss/autoprefixer#browsers
@@ -102,8 +114,8 @@ module.exports = {
     site: 'https://polymer-starter-kit-plus.firebaseapp.com',
     strategy: 'mobile' // or desktop
   },
-  // App theme
-  theme: 'default-theme',
-  // App version from git
-  version: gitDescribe
+  // Service Worker
+  serviceWorker: {
+    cacheDisabled: false
+  }
 };

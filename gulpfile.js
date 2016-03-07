@@ -93,8 +93,8 @@ gulp.task('copy', function() {
     'app/elements/*-bundle.html'
   ]).pipe(gulp.dest('dist/elements'));
 
-  var icons = gulp.src(['app/themes/' + config.theme + '/icons.html'])
-    .pipe(gulp.dest('dist/themes/' + config.theme));
+  var icons = gulp.src(['app/themes/' + config.appTheme + '/icons.html'])
+    .pipe(gulp.dest('dist/themes/' + config.appTheme));
 
   var scripts = gulp.src(['app/scripts/analytics.js'])
     .pipe(gulp.dest('dist/scripts'));
@@ -105,9 +105,9 @@ gulp.task('copy', function() {
 
 // Copy web fonts to dist
 gulp.task('fonts', function() {
-  return gulp.src(['app/themes/' + config.theme + '/fonts/**/*.{css,woff,woff2}'])
-    .pipe(gulp.dest('dist/themes/' + config.theme + '/fonts'))
-    .pipe($.size({title: 'Copy fonts to dist/themes/' + config.theme + '/fonts dir:'}));
+  return gulp.src(['app/themes/' + config.appTheme + '/fonts/**/*.{css,woff,woff2}'])
+    .pipe(gulp.dest('dist/themes/' + config.appTheme + '/fonts'))
+    .pipe($.size({title: 'Copy fonts to dist/themes/' + config.appTheme + '/fonts dir:'}));
 });
 
 // Scan your HTML for assets & optimize them
@@ -174,9 +174,9 @@ gulp.task('vulcanize', function() {
 // for more context.
 gulp.task('cache-config', function(callback) {
   var dir = 'dist';
-  var config = {
-    cacheId: packageJson.name || path.basename(__dirname),
-    disabled: false
+  var cacheConfig = {
+    cacheId: config.appName,
+    disabled: config.serviceWorker.cacheDisabled
   };
 
   // URL’s with Query String parameters are treated as individual URL’s and
@@ -193,14 +193,14 @@ gulp.task('cache-config', function(callback) {
     if (error) {
       callback(error);
     } else {
-      config.precache = files;
+      cacheConfig.precache = files;
 
       var md5 = crypto.createHash('md5');
-      md5.update(JSON.stringify(config.precache));
-      config.precacheFingerprint = md5.digest('hex');
+      md5.update(JSON.stringify(cacheConfig.precache));
+      cacheConfig.precacheFingerprint = md5.digest('hex');
 
       var configPath = path.join(dir, 'cache-config.json');
-      fs.writeFile(configPath, JSON.stringify(config), callback);
+      fs.writeFile(configPath, JSON.stringify(cacheConfig), callback);
     }
   });
 });

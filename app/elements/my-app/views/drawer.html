@@ -1,0 +1,69 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<!-- Drawer Scroll Header Panel -->
+<paper-scroll-header-panel class="Drawer" drawer fixed>
+  <!-- Drawer Toolbar -->
+  <paper-toolbar class="Drawer-header">
+    <span class="Drawer-title">{$ title $}</span>
+  </paper-toolbar>
+
+  <!-- Drawer Content -->
+  <div class="Drawer-content">
+    <!-- Navigation -->
+    <nav class="Drawer-widget">
+      <paper-menu class="Navigation Navigation--menu list" attr-for-selected="data-route" selected="[[route]]">
+        <a class="Navigation-link" data-route="home" href$="{{baseUrl}}">
+          <iron-icon class="Navigation-icon" icon="home"></iron-icon>
+          <span class="Navigation-text">Home</span>
+        </a>
+  
+        <a class="Navigation-link" data-route="users" href$="{{baseUrl}}users">
+          <iron-icon class="Navigation-icon" icon="supervisor-account"></iron-icon>
+          <span class="Navigation-text">Users</span>
+        </a>
+  
+        <a class="Navigation-link" data-route="contact" href$="{{baseUrl}}contact">
+          <iron-icon class="Navigation-icon" icon="mail"></iron-icon>
+          <span class="Navigation-text">Contact</span>
+        </a>
+      </paper-menu>
+    </nav>
+
+    <span class="u-spacer"></span>
+
+    <div class="Drawer-widget Drawer-widget--bottom">
+      <paper-menu class="Navigation Navigation--menu list" attr-for-selected="data-route" selected="[[route]]">
+        <a class="Navigation-link" data-route="settings" href$="{{baseUrl}}settings" rel="nofollow">
+          <iron-icon class="Navigation-icon" icon="settings"></iron-icon>
+          <span class="Navigation-text">Settings</span>
+        </a>
+      </paper-menu>
+
+      <div class="Navigation">
+        <a id="submitFeedback" class="Navigation-link" href="https://github.com/StartPolymer/polymer-starter-kit-plus/issues/new?title=Feedback%20for:%20" on-tap="onSubmitFeedbackTap" target="_blank">
+          <iron-icon class="Navigation-icon" icon="announcement"></iron-icon>
+          <span class="Navigation-text">Submit Feedback</span>
+        </a>
+        
+        <a class="Navigation-link" href="https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/README.md" target="_blank">
+          <iron-icon class="Navigation-icon" icon="help"></iron-icon>
+          <span class="Navigation-text">Help</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="Drawer-widget Drawer-widget--footer">
+      <span>{$ appVersion $}</span>
+      &nbsp;-&nbsp;
+      <a class="Drawer-link" href="https://github.com/StartPolymer/polymer-starter-kit-plus" target="_blank">View Source</a>
+    </div>
+  </div>
+</paper-scroll-header-panel>

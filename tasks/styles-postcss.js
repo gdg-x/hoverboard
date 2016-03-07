@@ -2,7 +2,7 @@
 
 // Transform styles with PostCSS
 module.exports = function ($, config, gulp, merge) { return function () {
-  var variables = require('../app/themes/' + config.theme + '/variables');
+  var variables = require('../app/themes/' + config.appTheme + '/variables');
   var postcssApply = require('postcss-apply');
   var postcssAutoprefixer = require('autoprefixer');
   var postcssCssMqpacker = require('css-mqpacker');
@@ -18,7 +18,7 @@ module.exports = function ($, config, gulp, merge) { return function () {
     postcssImport({
       path: [
         'app/elements',
-        'app/themes/' + config.theme
+        'app/themes/' + config.appTheme
       ]
     }),
     // Sass-like variables
@@ -39,8 +39,8 @@ module.exports = function ($, config, gulp, merge) { return function () {
   ];
 
   var theme = gulp.src([
-      'app/themes/' + config.theme + '/*.html',
-      '!app/themes/' + config.theme + '/icons.html'
+      'app/themes/' + config.appTheme + '/*.html',
+      '!app/themes/' + config.appTheme + '/icons.html'
     ])
     .pipe($.plumber({
       handleError: function (error) {
@@ -53,9 +53,9 @@ module.exports = function ($, config, gulp, merge) { return function () {
     .pipe($.sourcemaps.init())
     .pipe($.htmlPostcss(postcssPlugins))
     .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest('.tmp/themes/' + config.theme))
+    .pipe(gulp.dest('.tmp/themes/' + config.appTheme))
     .pipe($.size({title: 'Copy transformed styles to .tmp/themes dir:'}))
-    .pipe(gulp.dest('dist/themes/' + config.theme))
+    .pipe(gulp.dest('dist/themes/' + config.appTheme))
     .pipe($.size({title: 'Copy transformed styles to dist/themes dir:'}));
 
   var elements = gulp.src([
@@ -93,7 +93,7 @@ module.exports = function ($, config, gulp, merge) { return function () {
         // Transform @import rules by inlining content
         postcssImport({
           path: [
-            'app/themes/' + config.theme
+            'app/themes/' + config.appTheme
           ]
         }),
         // Sass-like variables
