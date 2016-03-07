@@ -6,145 +6,145 @@
 <link rel="import" href="../../../themes/hoverboard-theme/components/dialog-styles.html">
 
 <dom-module id="speaker-details">
-    <template>
-        <style include="shared-styles"></style>
-        <style include="dialog-styles"></style>
-        <paper-scroll-header-panel id="scrollHeaderPanel" condenses="{{smallScreen}}" no-reveal="{{!smallScreen}}">
-            <paper-toolbar class="tall">
-                <paper-icon-button class="back-button" dialog-dismiss icon="arrow-back"></paper-icon-button>
-                <div class="middle fallback-image-wrapper" hidden="{{smallScreen}}">
-                    <iron-image class="fallback-image" src="{$ baseurl $}/images/logo-white.svg"
-                                alt="{$ title $}"></iron-image>
-                </div>
-                <div id="title" class="bottom title toolbar-title" hidden="{{!smallScreen}}">[[speaker.name]]</div>
-            </paper-toolbar>
-            <div class="content">
+  <template>
+    <style include="shared-styles"></style>
+    <style include="dialog-styles"></style>
+    <paper-scroll-header-panel id="scrollHeaderPanel" condenses="{{smallScreen}}" no-reveal="{{!smallScreen}}">
+      <paper-toolbar class="tall">
+        <paper-icon-button class="back-button" dialog-dismiss icon="arrow-back"></paper-icon-button>
+        <div class="middle fallback-image-wrapper" hidden="{{smallScreen}}">
+          <iron-image class="fallback-image" src="{$ baseurl $}/images/logo-white.svg"
+                      alt="{$ title $}"></iron-image>
+        </div>
+        <div id="title" class="bottom title toolbar-title" hidden="{{!smallScreen}}">[[speaker.name]]</div>
+      </paper-toolbar>
+      <div class="content">
 
-                <div class="metadata-wrapper">
-                    <div class="main-info">
-                        <iron-image class="photo" src="[[speaker.photoUrl]]" preload fade sizing="cover" no-reveal
-                                    hidden="{{smallScreen}}"></iron-image>
-                        <div class="info">
-                            <h1 class="main-title" hidden="{{smallScreen}}">[[speaker.name]]</h1>
-                            <span class="meta highlight">[[speaker.company]], [[speaker.country]]</span>
-                            <span class="meta">
-                                <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
-                                    <a class="badge" href="[[badge.link]]" target="_blank">[[badge.description]]</a>
-                                </template>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <marked-element markdown="[[speaker.bio]]">
-                    <div class="markdown-html"></div>
-                </marked-element>
-
-                <div class="actions">
-                    <template is="dom-repeat" items="[[speaker.socials]]" as="social">
-                        <a href="[[social.link]]" target="_blank">
-                            <paper-icon-button class="action" icon$="icons:{{social.icon}}"></paper-icon-button>
-                        </a>
-                    </template>
-                </div>
-
+        <div class="metadata-wrapper">
+          <div class="main-info">
+            <div class="photo" style="background-image: url([[speaker.photoUrl]])" hidden$="{{smallScreen}}"></div>
+            <div class="info">
+              <h1 class="main-title" hidden="{{smallScreen}}">[[speaker.name]]</h1>
+              <div class="meta highlight">[[speaker.company]], [[speaker.country]]</div>
+              <div class="meta">
+                <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
+                  <a class="badge" href="[[badge.link]]" target="_blank">[[badge.description]]</a>
+                </template>
+              </div>
             </div>
+          </div>
+        </div>
 
-            <template is="dom-if" if="{{speaker.sessions.length}}">
-                <div class="sections-wrapper content">
-                    <h4 class="block-title">Sessions</h4>
-                    <div class="sections">
-                        <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
-                            <div class="section">
-                                <div class="section-info">
-                                    <h3 class="section-title">[[session.title]]</h3>
-                                    <div class="badges">
-                                        <template is="dom-repeat" items="[[session.tags]]" as="tag">
-                                            <span class="badge" target="_blank">[[tag]]</span>
-                                        </template>
-                                    </div>
-                                    <truncate-marked-text text="[[session.description]]" characters="220"
-                                                          break-last-word></truncate-marked-text>
-                                    <a class="read-more" href="/schedule/[[session.id]]" data-route="schedule" dialog-dismiss>Read more</a>
+        <marked-element markdown="[[speaker.bio]]">
+          <div class="markdown-html"></div>
+        </marked-element>
 
-                                </div>
-                            </div>
-                        </template>
-                    </div>
+        <div class="actions">
+          <template is="dom-repeat" items="[[speaker.socials]]" as="social">
+            <a href="[[social.link]]" target="_blank">
+              <paper-icon-button class="action" icon$="icons:{{social.icon}}"></paper-icon-button>
+            </a>
+          </template>
+        </div>
+
+      </div>
+
+      <template is="dom-if" if="{{speaker.sessions.length}}">
+        <div class="sections-wrapper content">
+          <h4 class="block-title">Sessions</h4>
+          <div class="sections">
+            <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
+              <div class="section">
+                <div class="section-info">
+                  <h3 class="section-title">[[session.title]]</h3>
+                  <div class="badges">
+                    <template is="dom-repeat" items="[[session.tags]]" as="tag">
+                      <span class="badge" target="_blank">[[tag]]</span>
+                    </template>
+                  </div>
+                  <truncate-marked-text text="[[session.description]]" characters="220"
+                                        break-last-word></truncate-marked-text>
+                  <a class="read-more" href="/schedule/[[session.id]]" data-route="schedule" dialog-dismiss>Read
+                    more</a>
+
                 </div>
+              </div>
             </template>
-        </paper-scroll-header-panel>
+          </div>
+        </div>
+      </template>
+    </paper-scroll-header-panel>
 
-        <iron-media-query query="(max-width: 960px)" query-matches="{{smallScreen}}"></iron-media-query>
-    </template>
-    <script>
-        (function () {
-            'use strict';
+    <iron-media-query query="(max-width: 960px)" query-matches="{{smallScreen}}"></iron-media-query>
+  </template>
+  <script>
+    (function () {
+      'use strict';
 
-            Polymer({
+      Polymer({
 
-                is: 'speaker-details',
+        is: 'speaker-details',
 
-                behaviors: [
-                    Polymer.PaperDialogBehavior,
-                    Polymer.NeonAnimationRunnerBehavior
-                ],
+        behaviors: [
+          Polymer.PaperDialogBehavior,
+          Polymer.NeonAnimationRunnerBehavior
+        ],
 
-                properties: {
-                    speaker: {
-                        type: Object,
-                        observer: '_speakerChanged'
-                    }
-                },
+        properties: {
+          speaker: {
+            type: Object,
+            observer: '_speakerChanged'
+          }
+        },
 
-                listeners: {
-                    'neon-animation-finish': '_onNeonAnimationFinish'
-                },
+        listeners: {
+          'neon-animation-finish': '_onNeonAnimationFinish'
+        },
 
-                ready: function () {
-                    var title = this.$.title;
-                    addEventListener('paper-header-transform', function (e) {
-                        var d = e.detail;
-                        var m = d.height - d.condensedHeight;
-                        var transform = 40 * d.y / m;
-                        Polymer.Base.transform('translate3d(' + transform + 'px,0,0)', title);
-                    });
-                },
+        ready: function () {
+          var title = this.$.title;
+          addEventListener('paper-header-transform', function (e) {
+            var d = e.detail;
+            var m = d.height - d.condensedHeight;
+            var transform = 40 * d.y / m;
+            Polymer.Base.transform('translate3d(' + transform + 'px,0,0)', title);
+          });
+        },
 
-                _speakerChanged: function () {
-                    page.redirect('/' + app.route + '/' + this.speaker.id);
-                    this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + app.generateClass(this.speaker.tags[0]) + ')';
-                    if (window.innerWidth < 961) {
-                        this.$.scrollHeaderPanel.$.headerBg.style.background = 'linear-gradient(to top, rgba(0, 0, 0, 0.4) -10%, rgba(0, 0, 0, 0.1) 50%), url(' + this.speaker.photoUrl + ') 0 / cover no-repeat';
-                    }
-                    this.updateStyles();
-                },
+        _speakerChanged: function () {
+          page.redirect('/' + app.route + '/' + this.speaker.id);
+          this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + app.generateClass(this.speaker.tags[0]) + ')';
+          if (window.innerWidth < 961) {
+            this.$.scrollHeaderPanel.$.headerBg.style.background = 'linear-gradient(to top, rgba(0, 0, 0, 0.4) -10%, rgba(0, 0, 0, 0.1) 50%), url(' + this.speaker.photoUrl + ') 0 / cover no-repeat';
+          }
+          this.updateStyles();
+        },
 
-                _renderOpened: function () {
-                    if (this.withBackdrop && window.innerWidth > 960) {
-                        this.backdropElement.open();
-                    }
-                    this.playAnimation('entry');
-                    this.async(function () {
-                        this.$.scrollHeaderPanel.scrollToTop(true);
-                        this.$.scrollHeaderPanel.notifyResize();
-                    });
-                },
+        _renderOpened: function () {
+          if (this.withBackdrop && window.innerWidth > 960) {
+            this.backdropElement.open();
+          }
+          this.playAnimation('entry');
+          this.async(function () {
+            this.$.scrollHeaderPanel.scrollToTop(true);
+            this.$.scrollHeaderPanel.notifyResize();
+          });
+        },
 
-                _renderClosed: function () {
-                    page.show('/' + app.route, null, false);
-                    this.backdropElement.close();
-                    this.playAnimation('exit');
-                },
+        _renderClosed: function () {
+          page.show('/' + app.route, null, false);
+          this.backdropElement.close();
+          this.playAnimation('exit');
+        },
 
-                _onNeonAnimationFinish: function () {
-                    if (this.opened) {
-                        this._finishRenderOpened();
-                    } else {
-                        this._finishRenderClosed();
-                    }
-                }
-            });
-        })();
-    </script>
+        _onNeonAnimationFinish: function () {
+          if (this.opened) {
+            this._finishRenderOpened();
+          } else {
+            this._finishRenderClosed();
+          }
+        }
+      });
+    })();
+  </script>
 </dom-module>

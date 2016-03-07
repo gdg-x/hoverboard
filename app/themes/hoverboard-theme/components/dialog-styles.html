@@ -76,10 +76,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       .photo {
+        @apply(--img-circle);
         margin-right: var(--content-padding);
         width: 80px;
         height: 80px;
-        border-radius: 50%;
       }
 
       .toolbar-title {
@@ -212,8 +212,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
 
         .section {
+          margin-bottom: 10px;
           padding: 0 12px;
           width: calc(50% - 12px);
+        }
+
+        .section:not(:last-of-type) {
+          margin-bottom: 10px;
         }
 
         .section:last-of-type {
