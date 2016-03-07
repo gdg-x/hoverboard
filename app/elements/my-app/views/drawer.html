@@ -26,7 +26,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </a>
 
       <a class="Navigation-link" data-route="users" href$="{{baseUrl}}users">
-        <iron-icon class="Navigation-icon" icon="account-multiple"></iron-icon>
+        <iron-icon class="Navigation-icon" icon="supervisor-account"></iron-icon>
         <span class="Navigation-text">Users</span>
       </a>
 
@@ -40,26 +40,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <span class="u-spacer"></span>
 
     <div class="Drawer-widget Drawer-widget--bottom">
-      <div class="Toggle">
-        <iron-icon class="Toggle-icon" icon="theme-light-dark"></iron-icon>
-        <span id="darkThemeToggle_label" class="Toggle-label">Dark Theme</span>
-        <span class="u-spacer"></span>
-        <paper-toggle-button id="darkThemeToggle" class="Toggle-button"
-          aria-labelledby="darkThemeToggle_label" toggles
-          checked="{{storage.darkThemeEnabled::change}}"
-          on-change="onDarkThemeToggleChange">
-        </paper-toggle-button>
-      </div>
+      <paper-menu class="Navigation Navigation--menu list" attr-for-selected="data-route" selected="[[route]]">
+        <a class="Navigation-link" data-route="settings" href$="{{baseUrl}}settings" rel="nofollow">
+          <iron-icon class="Navigation-icon" icon="settings"></iron-icon>
+          <span class="Navigation-text">Settings</span>
+        </a>
+      </paper-menu>
 
       <div class="Navigation">
-        <a class="Navigation-link" href="https://github.com/StartPolymer/polymer-starter-kit-plus" target="_blank">
-          <iron-icon class="Navigation-icon" icon="github-mark"></iron-icon>
-          <span class="Navigation-text">View Source</span>
-        </a>
-
         <a class="Navigation-link" href="https://github.com/StartPolymer/polymer-starter-kit-plus/issues/new?title=Feedback%20for:%20" target="_blank">
-          <iron-icon class="Navigation-icon" icon="message-alert"></iron-icon>
+          <iron-icon class="Navigation-icon" icon="announcement"></iron-icon>
           <span class="Navigation-text">Submit Feedback</span>
+        </a>
+        
+        <a class="Navigation-link" href="https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/README.md" target="_blank">
+          <iron-icon class="Navigation-icon" icon="help"></iron-icon>
+          <span class="Navigation-text">Help</span>
         </a>
       </div>
     </div>

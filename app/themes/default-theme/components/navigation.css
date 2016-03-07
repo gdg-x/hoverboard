@@ -10,19 +10,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 /** @define Navigation */
 
 .Navigation {
+  padding-left: 24px;
+  padding-right: 24px;
+
   @nest &-icon {
     margin-right: 24px;
     pointer-events: none;
   }
 
   @nest &-link {
-    @apply(--paper-font-body2);
     @apply(--layout-horizontal);
     @apply(--layout-center);
 
     color: currentColor;
     min-height: 48px;
-    padding: 0 24px;
     text-decoration: none;
   }
 

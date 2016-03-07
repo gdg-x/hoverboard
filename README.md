@@ -54,7 +54,7 @@ The demo is running on Google App Engine with [HTTP 2.0 Push](https://github.com
  - [SUIT CSS linter](https://github.com/postcss/postcss-bem-linter)
 - [Babel](https://babeljs.io) for support [ES2015 JavaScript](https://babeljs.io/docs/learn-es2015/)
  - [Polymer elements using the ES2015 class syntax](http://www.code-labs.io/codelabs/polymer-es2015/index.html#3)
-- [Nunjucks](https://mozilla.github.io/nunjucks/) templating engine for building code using Gulp
+- [Nunjucks](https://mozilla.github.io/nunjucks/) templating engine for building static code using Gulp
  - [Metadata](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/metadata.js) at one place
  - [Markdown](http://commonmark.org) for [static content](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/app/content)
 - Routing with [Page.js](https://visionmedia.github.io/page.js/)

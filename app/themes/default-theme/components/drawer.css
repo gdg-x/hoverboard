@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 .Drawer {
   @nest &-content {
     @apply(--layout-vertical);
+    @apply(--paper-font-body2);
 
     background-color: var(--secondary-background-color);
     color: var(--secondary-text-color);
@@ -34,7 +35,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       color: var(--text-dark-primary-color);
     }
   }
-  
+
   @nest &-link {
     color: currentColor;
     text-decoration: none;
@@ -50,10 +51,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     @nest &--bottom {
       border-top: 1px solid var(--divider-color);
     }
-    
+
     @nest &--footer {
       @apply(--paper-font-caption);
-      
+
       border-top: 1px solid var(--divider-color);
       padding-left: 24px;
     }

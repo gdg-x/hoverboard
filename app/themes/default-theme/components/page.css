@@ -21,7 +21,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
   @nest &-title {
-    @apply(--paper-font-display2);
+    @apply(--paper-font-display1);
 
     margin: 32px 0;
 
@@ -45,6 +45,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     @media (--md-viewport) {
       margin-bottom: 32px;
       padding: 16px 32px;
+    }
+
+    @nest &--settings {
+      @apply(--layout-vertical);
+      @apply(--layout-center);
+    }
+  }
+
+  @nest &-widget {
+    width: 100%;
+
+    @media (--md-viewport) {
+      width: 512px;
     }
   }
 }

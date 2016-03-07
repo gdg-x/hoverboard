@@ -33,8 +33,15 @@ class MyApp {
     this.upgraded = true;
   }
   attached() {
-    let darkThemeEnabled = JSON.parse(localStorage.getItem('my-app-storage')).darkThemeEnabled;
-    this.changeTheme(darkThemeEnabled);
+    let storage = JSON.parse(localStorage.getItem('my-app-storage'));
+    if (storage) {
+      if (storage.darkThemeEnabled) {
+        this.changeTheme(storage.darkThemeEnabled);
+      }
+      if (storage.accentColor) {
+        this.changeAccentColor(storage.accentColor);
+      }
+    }
   }
   //detached() {}
   //attributeChanged() {}
@@ -42,7 +49,8 @@ class MyApp {
   // Initialize default storage if nothing has been stored
   initializeDefaultStorage() {
     this.storage = {
-      darkThemeEnabled: false
+      accentColor: null,
+      darkThemeEnabled: null
     }
   }
   // Scroll page to top and expand header
@@ -53,6 +61,10 @@ class MyApp {
   closeDrawer() {
     this.$.paperDrawerPanel.closeDrawer();
   }
+  // Handle change accent color from accentColorSwatchPicker
+  onAccentColorSwatchPickerSelected() {
+    this.changeAccentColor(this.$.accentColorSwatchPicker.color);
+  }
   // Hide confirmToast after tap on OK button
   onConfirmToastTap() {
     this.$.confirmToast.hide();
@@ -60,6 +72,46 @@ class MyApp {
   // Handle change event from darkThemeToggle
   onDarkThemeToggleChange() {
     this.changeTheme(this.$.darkThemeToggle.checked);
+  }
+  // Change accent color
+  changeAccentColor(color) {
+    let accentColors = {
+      '#ff5252': 'red',
+      '#ff4081': 'pink',
+      '#e040fb': 'purple',
+      '#7c4dff': 'deep-purple',
+      '#536dfe': 'indigo',
+      '#448aff': 'blue',
+      '#40c4ff': 'light-blue',
+      '#18ffff': 'cyan',
+      '#64ffda': 'teal',
+      '#69f0ae': 'green',
+      '#b2ff59': 'light-green',
+      '#eeff41': 'lime',
+      '#ffff00': 'yellow',
+      '#ffd740': 'amber',
+      '#ffab40': 'orange',
+      '#ff6e40': 'deep-orange'
+    };
+    let accentColorName = accentColors[color];
+    let themeMode = 'light';
+    
+    if (this.$.darkThemeToggle.checked) {
+      themeMode = 'dark';
+    }
+
+    this.customStyle['--accent-color'] = this.getComputedStyleValue(`--paper-${accentColorName}-a200`);
+    this.customStyle['--light-accent-color'] = this.getComputedStyleValue(`--paper-${accentColorName}-a100`);
+    this.customStyle['--dark-accent-color'] = this.getComputedStyleValue(`--paper-${accentColorName}-a400`);
+    this.customStyle['--darker-accent-color'] = this.getComputedStyleValue(`--paper-${accentColorName}-a700`);
+    
+    this.updateStyles();
+    
+    this.customStyle['--toggle-checked-bar-color'] = this.getComputedStyleValue(`--${themeMode}-theme-toggle-checked-bar-color`);
+    this.customStyle['--toggle-checked-button-color'] = this.getComputedStyleValue(`--${themeMode}-theme-toggle-checked-button-color`);
+    this.customStyle['--toggle-checked-ink-color'] = this.getComputedStyleValue(`--${themeMode}-theme-toggle-checked-ink-color`);
+
+    this.updateStyles();
   }
   // Change theme
   changeTheme(darkThemeEnabled) {

@@ -23,6 +23,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     @nest & a {
       color: var(--accent-color);
+      font-weight: 500;
       text-decoration: none;
     }
   }

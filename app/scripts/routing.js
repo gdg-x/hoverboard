@@ -108,7 +108,7 @@ page('/users', () => {
   function setData() {
     app.route = 'users';
     app.pageTitle = 'Users';
-    app.pageSubTitle = 'Test page';
+    app.pageSubTitle = 'This is the users section';
     setFocus(app.route);
   }
 
@@ -124,7 +124,7 @@ page('/users/:name', ctx => {
   function setData() {
     app.route = 'user-info';
     app.pageTitle = 'User information';
-    app.pageSubTitle = 'Test page';
+    app.pageSubTitle = 'This is the users section';
     app.params = ctx.params;
     setFocus(app.route);
   }
@@ -141,7 +141,23 @@ page('/contact', () => {
   function setData() {
     app.route = 'contact';
     app.pageTitle = 'Contact';
-    app.pageSubTitle = 'Test page';
+    app.pageSubTitle = 'This is the contact section';
+    setFocus(app.route);
+  }
+
+  // Check if element prototype has not been upgraded yet
+  if (!app.upgraded) {
+    once(app, 'upgraded', setData);
+  } else {
+    setData();
+  }
+});
+
+page('/settings', () => {
+  function setData() {
+    app.route = 'settings';
+    app.pageTitle = 'Settings';
+    app.pageSubTitle = 'Edit your settings';
     setFocus(app.route);
   }
 

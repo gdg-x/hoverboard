@@ -7,17 +7,19 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
-@import 'variables';
-@import 'breakpoints';
-@import 'mixins';
+/** @define SwatchPicker */
 
-/* Components */
-@import 'components/drawer';
-@import 'components/main';
-@import 'components/navigation';
-@import 'components/swatch-picker';
-@import 'components/toast';
-@import 'components/toggle';
+.SwatchPicker {
+  @apply(--layout-horizontal);
+  @apply(--layout-center);
 
-/* Utilities */
-@import 'utilities/layout';
+  min-height: 48px;
+
+  @nest &-button {
+    --paper-swatch-picker-color-size: 48px;
+  }
+
+  @nest &-icon {
+    margin-right: 24px;
+  }
+}

@@ -16,6 +16,7 @@
     "paper-menu": "PolymerElements/paper-menu#1.2.2",
     "paper-scroll-header-panel": "PolymerElements/paper-scroll-header-panel#1.0.15",
     "paper-styles": "PolymerElements/paper-styles#1.1.3",
+    "paper-swatch-picker": "StartPolymer/paper-swatch-picker#master",
     "paper-toast": "PolymerElements/paper-toast#1.1.3",
     "paper-toggle-button": "PolymerElements/paper-toggle-button#1.1.1",
     "paper-toolbar": "PolymerElements/paper-toolbar#1.1.4",

@@ -14,9 +14,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 .Toggle {
   @apply(--layout-horizontal);
   @apply(--layout-center);
-  color: var(--secondary-text-color);
+
   min-height: 48px;
-  padding: 0 24px;
 
   @nest &-button {
     --paper-toggle-button-unchecked-bar-color: var(--toggle-unchecked-bar-color);
@@ -29,9 +28,5 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   @nest &-icon {
     margin-right: 24px;
-  }
-
-  @nest &-label {
-    @apply(--paper-font-body2);
   }
 }
