@@ -2,7 +2,7 @@
 
 // Compile HTML files with Nunjucks templating engine
 module.exports = function ($, config, gulp) { return function () {
-  var variables = require('../app/themes/' + config.theme + '/variables');
+  var variables = require('../app/themes/' + config.appTheme + '/variables');
   var metadata = require('../app/metadata');
 
   function markdownRender(markdown) {

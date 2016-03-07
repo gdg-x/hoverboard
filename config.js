@@ -8,7 +8,11 @@ try {
 }
 
 module.exports = {
-  // App version from git
+  // App name is used for iron-localstorage element and Service Worker cache ID
+  appName: 'polymer-starter-kit-plus',
+  // App theme is directory name in app/themes
+  appTheme: 'default-theme',
+  // App version from git is used for deploy task and frontend
   appVersion: appVersion,
   // Autoprefixer
   autoprefixer: {
@@ -110,6 +114,8 @@ module.exports = {
     site: 'https://polymer-starter-kit-plus.firebaseapp.com',
     strategy: 'mobile' // or desktop
   },
-  // App theme
-  theme: 'default-theme'
+  // Service Worker
+  serviceWorker: {
+    cacheDisabled: false
+  }
 };

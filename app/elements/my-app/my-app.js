@@ -33,7 +33,7 @@ class MyApp {
     this.upgraded = true;
   }
   attached() {
-    let storage = JSON.parse(localStorage.getItem('my-app-storage'));
+    let storage = JSON.parse(localStorage.getItem(this.$.localStorage.name));
     if (storage) {
       if (storage.darkThemeEnabled) {
         this.changeTheme(storage.darkThemeEnabled);

@@ -2,7 +2,7 @@
 
 // Add colors to Web Application Manifest - manifest.json
 module.exports = function ($, config, gulp) { return function () {
-  var variables = require('../app/themes/' + config.theme + '/variables');
+  var variables = require('../app/themes/' + config.appTheme + '/variables');
   var manifest = require('../app/manifest');
 
   return $.file(

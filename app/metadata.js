@@ -11,8 +11,10 @@ module.exports = {
   appleMobileWebAppTitle: 'PSK+',
   // Google Analytics Tracking ID
   googleAnalyticsTrackingId: 'UA-XXXXX-Y',
-  // App Theme
-  theme: config.theme,
+  // App name
+  appName: config.appName,
+  // App theme
+  appTheme: config.appTheme,
   // App version
   appVersion: config.appVersion
 };

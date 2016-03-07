@@ -11,7 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <!-- App Theme -->
-<link rel="import" href="../../themes/{$ theme $}/theme.html">
+<link rel="import" href="../../themes/{$ appTheme $}/theme.html">
 
 <!-- Iron elements -->
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
@@ -44,7 +44,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       @import "theme.css";
     </style>
     
-    <iron-localstorage name="my-app-storage"
+    <iron-localstorage id="localStorage" name="{$ appName $}"
       value="{{storage}}"
       on-iron-localstorage-load-empty="initializeDefaultStorage">
     </iron-localstorage>
