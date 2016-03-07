@@ -18,23 +18,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- Drawer Content -->
   <div class="Drawer-content">
     <!-- Navigation -->
-    <nav>
-    <paper-menu class="Drawer-widget Navigation Navigation--menu list" attr-for-selected="data-route" selected="[[route]]">
-      <a class="Navigation-link" data-route="home" href$="{{baseUrl}}">
-        <iron-icon class="Navigation-icon" icon="home"></iron-icon>
-        <span class="Navigation-text">Home</span>
-      </a>
-
-      <a class="Navigation-link" data-route="users" href$="{{baseUrl}}users">
-        <iron-icon class="Navigation-icon" icon="supervisor-account"></iron-icon>
-        <span class="Navigation-text">Users</span>
-      </a>
-
-      <a class="Navigation-link" data-route="contact" href$="{{baseUrl}}contact">
-        <iron-icon class="Navigation-icon" icon="mail"></iron-icon>
-        <span class="Navigation-text">Contact</span>
-      </a>
-    </paper-menu>
+    <nav class="Drawer-widget">
+      <paper-menu class="Navigation Navigation--menu list" attr-for-selected="data-route" selected="[[route]]">
+        <a class="Navigation-link" data-route="home" href$="{{baseUrl}}">
+          <iron-icon class="Navigation-icon" icon="home"></iron-icon>
+          <span class="Navigation-text">Home</span>
+        </a>
+  
+        <a class="Navigation-link" data-route="users" href$="{{baseUrl}}users">
+          <iron-icon class="Navigation-icon" icon="supervisor-account"></iron-icon>
+          <span class="Navigation-text">Users</span>
+        </a>
+  
+        <a class="Navigation-link" data-route="contact" href$="{{baseUrl}}contact">
+          <iron-icon class="Navigation-icon" icon="mail"></iron-icon>
+          <span class="Navigation-text">Contact</span>
+        </a>
+      </paper-menu>
     </nav>
 
     <span class="u-spacer"></span>
