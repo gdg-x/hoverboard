@@ -73,6 +73,10 @@ class MyApp {
   onDarkThemeToggleChange() {
     this.changeTheme(this.$.darkThemeToggle.checked);
   }
+  // Add URL path to Submit Feedback link
+  onSubmitFeedbackTap() {
+    this.$.submitFeedback.href += window.location.pathname;
+  }
   // Change accent color
   changeAccentColor(color) {
     let accentColors = {
