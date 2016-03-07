@@ -226,7 +226,7 @@ gulp.task('clean', function(cb) {
 });
 
 // Watch files for changes & reload
-gulp.task('serve', ['js', 'lint', 'lint-js', 'manifest', 'styles'], function() {
+gulp.task('serve', ['js', 'lint', 'lint-js', 'styles'], function() {
   browserSync({
     browser: config.browserSync.browser,
     https: config.browserSync.https,
@@ -310,9 +310,6 @@ gulp.task('js', require(task('js-babel'))($, gulp));
 // Lint CSS and JavaScript
 gulp.task('lint', require(task('lint'))($, gulp, merge));
 
-// Add colors to Web Application Manifest - manifest.json
-gulp.task('manifest', require(task('manifest'))($, config, gulp));
-
 // Minify JavaScript in dist directory
 gulp.task('minify-dist', require(task('minify-dist'))($, gulp, merge));
 
@@ -331,7 +328,7 @@ gulp.task('views', require(task('views-nunjucks'))($, config, gulp));
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function(cb) {
   runSequence(
-    ['copy', 'js', 'lint-js', 'lint', 'manifest', 'styles'],
+    ['copy', 'js', 'lint-js', 'lint', 'styles'],
     ['fonts', 'html', 'images'],
     'vulcanize',
     'clean-dist',
