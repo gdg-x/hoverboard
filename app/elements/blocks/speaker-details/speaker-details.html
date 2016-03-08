@@ -113,7 +113,12 @@
 
         _speakerChanged: function () {
           page.redirect('/' + app.route + '/' + this.speaker.id);
-          this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + app.generateClass(this.speaker.tags[0]) + ')';
+
+          var generatedClass = app.generateClass(this.speaker.tags[0]);
+          this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + generatedClass + ')';
+          this._previousBrowserColor = document.getElementsByName('theme-color')[0].content;
+          document.getElementsByName('theme-color')[0].content = this.getComputedStyleValue('--' + generatedClass);
+
           if (window.innerWidth < 961) {
             this.$.scrollHeaderPanel.$.headerBg.style.background = 'linear-gradient(to top, rgba(0, 0, 0, 0.4) -10%, rgba(0, 0, 0, 0.1) 50%), url(' + this.speaker.photoUrl + ') 0 / cover no-repeat';
           }
@@ -133,6 +138,7 @@
 
         _renderClosed: function () {
           page.show('/' + app.route, null, false);
+          document.getElementsByName('theme-color')[0].content = this._previousBrowserColor;
           this.backdropElement.close();
           this.playAnimation('exit');
         },
