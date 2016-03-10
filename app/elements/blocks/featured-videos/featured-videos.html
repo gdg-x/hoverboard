@@ -5,6 +5,7 @@
 <link rel="import" href="../../../bower_components/paper-card/paper-card.html">
 
 <link rel="import" href="../video-dialog/video-dialog.html">
+<link rel="import" href="../../behaviors/utils-behavior.html">
 
 <dom-module id="featured-videos">
   <template>
@@ -126,6 +127,11 @@
       'use strict';
 
       class FeaturedVideos {
+
+        get behaviors() {
+          return [Polymer.UtilsBehavior];
+        }
+
         beforeRegister() {
           let is = this.constructor.name.replace(/\W+/g, '-')
             .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
@@ -141,7 +147,7 @@
         }
 
         _videosChanged() {
-          this._videos = app.randomOrder(this.videos).slice(0, 6);
+          this._videos = this.randomOrder(this.videos).slice(0, 6);
         }
 
         _playVideo(e) {

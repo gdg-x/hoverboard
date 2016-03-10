@@ -9,6 +9,7 @@
 <link rel="import" href="../blocks/truncate-marked-text/truncate-marked-text.html">
 <link rel="import" href="../blocks/footer-block/footer-block.html">
 <link rel="import" href="../blocks/speaker-details/speaker-details.html">
+<link rel="import" href="../behaviors/utils-behavior.html">
 
 <dom-module id="speakers-page">
     <template>
@@ -195,7 +196,8 @@
             is: 'speakers-page',
 
             behaviors: [
-                Polymer.NeonSharedElementAnimatableBehavior
+                Polymer.NeonSharedElementAnimatableBehavior,
+                Polymer.UtilsBehavior
             ],
 
             properties: {
@@ -251,7 +253,7 @@
             openSpeakerDetails: function () {
                 if(this.selected && this.speakerId && this.speakers) {
                     this.async(function() {
-                        this._selectedSpeaker = this.speakers[app.getIndexByProperty(this.speakers, 'id', this.speakerId)];
+                        this._selectedSpeaker = this.speakers[this.getIndexByProperty(this.speakers, 'id', this.speakerId)];
                         this.$.speakerDetails.open();
                     }, 500);
                 }

@@ -51,15 +51,4 @@
     }
   });
 
-  app.generateClass = (value) => value.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-  app.getIndexByProperty = (array, property, value) => {
-    for (let i = 0, length = array.length; i < length; i++) {
-      if (array[i][property].toString() === value.toString()) {
-        return i;
-      }
-    }
-  };
-  app.randomOrder = (array) => array.sort(function () {
-    return 0.5 - Math.random();
-  });
 })(document);

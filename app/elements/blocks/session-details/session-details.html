@@ -9,6 +9,7 @@
 <link rel="import" href="../../../bower_components/paper-fab/paper-fab.html">
 <link rel="import" href="../../../themes/hoverboard-theme/components/dialog-styles.html">
 <link rel="import" href="../../behaviors/share-behavior.html">
+<link rel="import" href="../../behaviors/utils-behavior.html">
 
 
 <dom-module id="session-details">
@@ -142,7 +143,8 @@
         behaviors: [
           Polymer.PaperDialogBehavior,
           Polymer.NeonAnimationRunnerBehavior,
-          Polymer.ShareBehavior
+          Polymer.ShareBehavior,
+          Polymer.UtilsBehavior
         ],
 
         properties: {
@@ -166,7 +168,7 @@
 
         _sessionChanged: function () {
           page.redirect('/' + app.route + '/' + this.session.id);
-          var generatedClass = app.generateClass(this.session.mainTag);
+          var generatedClass = this.generateClass(this.session.mainTag);
           this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + generatedClass + ')';
           this._previousBrowserColor = document.getElementsByName('theme-color')[0].content;
           document.getElementsByName('theme-color')[0].content = this.getComputedStyleValue('--' + generatedClass);

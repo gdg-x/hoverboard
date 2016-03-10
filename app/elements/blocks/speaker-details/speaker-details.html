@@ -4,6 +4,7 @@
 <link rel="import" href="../../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
 <link rel="import" href="../../../bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
 <link rel="import" href="../../../themes/hoverboard-theme/components/dialog-styles.html">
+<link rel="import" href="../../behaviors/utils-behavior.html">
 
 <dom-module id="speaker-details">
   <template>
@@ -87,7 +88,8 @@
 
         behaviors: [
           Polymer.PaperDialogBehavior,
-          Polymer.NeonAnimationRunnerBehavior
+          Polymer.NeonAnimationRunnerBehavior,
+          Polymer.UtilsBehavior
         ],
 
         properties: {
@@ -114,7 +116,7 @@
         _speakerChanged: function () {
           page.redirect('/' + app.route + '/' + this.speaker.id);
 
-          var generatedClass = app.generateClass(this.speaker.tags[0]);
+          var generatedClass = this.generateClass(this.speaker.tags[0]);
           this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + generatedClass + ')';
           this._previousBrowserColor = document.getElementsByName('theme-color')[0].content;
           document.getElementsByName('theme-color')[0].content = this.getComputedStyleValue('--' + generatedClass);

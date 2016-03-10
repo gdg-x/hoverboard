@@ -10,7 +10,7 @@
     "paper-dialog-behavior": "PolymerElements/paper-dialog-behavior#1.2.x",
     "platinum-elements": "PolymerElements/platinum-elements#2.0.x",
     "neon-elements": "PolymerElements/neon-elements#1.0.x",
-    "neon-animation": "PolymerElements/neon-animation#1.1.x",
+    "neon-animation": "PolymerElements/neon-animation#1.1.0",
     "start-elements": "StartPolymer/start-elements#1.1.x",
     "molecules": "PolymerElements/molecules#1.0.x",
     "google-web-components": "GoogleWebComponents/google-web-components#1.0.x",
