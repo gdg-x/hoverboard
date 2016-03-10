@@ -8,7 +8,7 @@ module.exports = {
     },
     // Web Application Manifest
     manifest: {
-        'theme_color': '#00BCD4',
-        'background_color': '#3E4EB8'
+        themeColor: '#00BCD4',
+        backgroundColor: '#FFFFFF'
     }
 };

@@ -175,7 +175,7 @@ gulp.task('vulcanize', function() {
     // Remove CSS comments
     .pipe($.if('*.html', $.stripCssComments({preserve: false})))
     // Minify base-bundle.js
-    //.pipe($.if('*.js', $.uglify()))
+    // .pipe($.if('*.js', $.uglify()))
     .pipe(gulp.dest('dist/elements'))
     .pipe($.size({title: 'Copy vulcanized elements to dist/elements dir:'}));
 });
@@ -226,7 +226,7 @@ gulp.task('clean', function(cb) {
 });
 
 // Watch files for changes & reload
-gulp.task('serve', ['js', 'lint', 'lint-js', 'manifest', 'styles'], function() {
+gulp.task('serve', ['js', 'lint', 'lint-js', 'styles'], function() {
   browserSync({
     browser: config.browserSync.browser,
     https: config.browserSync.https,
@@ -305,13 +305,10 @@ gulp.task('fix-paths-before-revision', require(task('fix-paths'))($, gulp, merge
 gulp.task('fix-paths-after-revision', require(task('fix-paths'))($, gulp, merge, 'after'));
 
 // Transpile all JS from ES2015 (ES6) to ES5
-gulp.task('js', require(task('js-babel'))($, gulp));
+gulp.task('js', ['views'], require(task('js-babel'))($, gulp));
 
 // Lint CSS and JavaScript
 gulp.task('lint', require(task('lint'))($, gulp, merge));
-
-// Add colors to Web Application Manifest - manifest.json
-gulp.task('manifest', require(task('manifest'))($, config, gulp));
 
 // Minify JavaScript in dist directory
 gulp.task('minify-dist', require(task('minify-dist'))($, gulp, merge));
@@ -323,7 +320,7 @@ gulp.task('revision', require(task('revision'))($, gulp));
 gulp.task('serve:gae', ['default'], require(task('serve-gae'))($, gulp));
 
 // Transform styles with PostCSS
-gulp.task('styles', ['views'], require(task('styles-postcss'))($, config, gulp, merge));
+gulp.task('styles', require(task('styles-postcss'))($, config, gulp, merge));
 
 // Compile HTML files with Nunjucks templating engine
 gulp.task('views', require(task('views-nunjucks'))($, config, gulp));
@@ -331,7 +328,7 @@ gulp.task('views', require(task('views-nunjucks'))($, config, gulp));
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function(cb) {
   runSequence(
-    ['copy', 'js', 'lint-js', 'lint', 'manifest', 'styles'],
+    ['copy', 'js', 'lint-js', 'lint', 'styles'],
     ['fonts', 'html', 'images'],
     'vulcanize',
     'clean-dist',

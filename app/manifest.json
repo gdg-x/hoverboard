@@ -1,6 +1,6 @@
 {
-  "name": "GDG DevFest Season 2015",
-  "short_name": "GDG DevFest Season 2015",
+  "name": "{$ title $}",
+  "short_name": "{$ title $}",
   "icons": [{
         "src": "/images/touch/icon-128x128.png",
         "sizes": "128x128",
@@ -23,5 +23,7 @@
         "type": "image/png"
       }],
   "start_url": "/",
-  "display": "standalone"
+  "display": "standalone",
+  "theme_color": "{$ manifest.themeColor $}",
+  "background_color": "{$ manifest.backgroundColor $}"
 }

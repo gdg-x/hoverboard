@@ -7,6 +7,7 @@
 <link rel="import" href="../../bower_components/disqus-comments/disqus-comments.html">
 
 <link rel="import" href="../blocks/footer-block/footer-block.html">
+<link rel="import" href="../behaviors/utils-behavior.html">
 
 <dom-module id="post-page">
   <template>
@@ -187,7 +188,8 @@
 
         behaviors: [
           Polymer.NeonAnimationRunnerBehavior,
-          Polymer.NeonSharedElementAnimatableBehavior
+          Polymer.NeonSharedElementAnimatableBehavior,
+          Polymer.UtilsBehavior
         ],
 
         properties: {
@@ -287,7 +289,7 @@
             this.$.animationWrapper.style.display = 'none';
             this.$.spinner.style.opacity = 1;
 
-            var postIndex = app.getIndexByProperty(this.posts, 'id', this.postId);
+            var postIndex = this.getIndexByProperty(this.posts, 'id', this.postId);
 
             this._latestPosts[0] = postIndex > 0 ? this.posts[postIndex - 1] : null;
             this._latestPosts[1] = postIndex < this.posts.length - 1 ? this.posts[postIndex + 1] : null;
