@@ -175,7 +175,7 @@ gulp.task('vulcanize', function() {
     // Remove CSS comments
     .pipe($.if('*.html', $.stripCssComments({preserve: false})))
     // Minify base-bundle.js
-    //.pipe($.if('*.js', $.uglify()))
+    // .pipe($.if('*.js', $.uglify()))
     .pipe(gulp.dest('dist/elements'))
     .pipe($.size({title: 'Copy vulcanized elements to dist/elements dir:'}));
 });
@@ -305,7 +305,7 @@ gulp.task('fix-paths-before-revision', require(task('fix-paths'))($, gulp, merge
 gulp.task('fix-paths-after-revision', require(task('fix-paths'))($, gulp, merge, 'after'));
 
 // Transpile all JS from ES2015 (ES6) to ES5
-gulp.task('js', require(task('js-babel'))($, gulp));
+gulp.task('js', ['views'], require(task('js-babel'))($, gulp));
 
 // Lint CSS and JavaScript
 gulp.task('lint', require(task('lint'))($, gulp, merge));
@@ -320,7 +320,7 @@ gulp.task('revision', require(task('revision'))($, gulp));
 gulp.task('serve:gae', ['default'], require(task('serve-gae'))($, gulp));
 
 // Transform styles with PostCSS
-gulp.task('styles', ['views'], require(task('styles-postcss'))($, config, gulp, merge));
+gulp.task('styles', require(task('styles-postcss'))($, config, gulp, merge));
 
 // Compile HTML files with Nunjucks templating engine
 gulp.task('views', require(task('views-nunjucks'))($, config, gulp));
