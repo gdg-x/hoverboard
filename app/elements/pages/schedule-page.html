@@ -361,8 +361,8 @@
           notify: true
         },
         sessionId: {
-          type: Object,
-          observer: 'openSessionDetails'
+          type: String,
+          notify: true
         },
         _entryAnimation: {
           type: String
@@ -410,6 +410,10 @@
         }
       },
 
+      observers: [
+        'openSessionDetails(selected, sessionId, sessions)'
+      ],
+
       ready: function () {
         this.customStyle['--hero-color'] = this._heroSettings.backgroundColor;
         this.updateStyles();
@@ -424,6 +428,7 @@
           this.async(function () {
             this._selectedSession = this.sessions[this.getIndexByProperty(this.sessions, 'id', this.sessionId)];
             this.$.sessionDetails.open();
+            this.sessionId = null;
           }, 500);
         }
       },
