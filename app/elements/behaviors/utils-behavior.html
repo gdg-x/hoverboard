@@ -5,6 +5,7 @@
     'use strict';
 
     Polymer.UtilsBehavior = {
+
         _getIndexByProperty: function (array, property, value) {
           for (let i = 0, length = array.length; i < length; i++) {
             if (array[i][property].toString() === value.toString()) {
@@ -20,5 +21,6 @@
         _toArray: (obj) => Object.keys(obj).map(key => obj[key])
 
     };
+
   })();
 </script>

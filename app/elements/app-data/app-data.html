@@ -15,10 +15,10 @@
       'use strict';
 
       class AppData {
+
         beforeRegister() {
-          let is = this.constructor.name.replace(/\W+/g, '-')
+          this.is = this.constructor.name.replace(/\W+/g, '-')
             .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-          this.is = is;
           this.properties = {
             speakersSource: {
               type: String,
@@ -75,21 +75,6 @@
             '_generateSchedule(_speakersRaw, sessions, _scheduleRaw)'
           ];
         }
-
-//        _updateSpeakersData() {
-//          for (var i = 0, speakersLen = this._speakersRaw.length; i < speakersLen; i++) {
-//            this._speakersRaw[i].sessions = [];
-////                        for (var j = 0, sessionsLen = this.sessions.length; j < sessionsLen; j++) {
-////                            if (this.sessions[j].speakers && this.sessions[j].speakers.indexOf(this._speakersRaw[i].id) > -1) {
-////                                var tempSession = JSON.parse(JSON.stringify(this.sessions[j]));
-////                                delete tempSession.speakers;
-////                                this._speakersRaw[i].sessions.push(tempSession);
-////                            }
-////                        }
-//
-//          }
-//          this.speakers = this._speakersRaw;
-//        }
 
         _generateSchedule() {
           for (var i = 0, scheduleLen = this._scheduleRaw.length; i < scheduleLen; i++) {
@@ -161,9 +146,11 @@
         _reversePosts(response) {
           this.posts = response.detail.response.reverse();
         }
+
       }
 
       Polymer(AppData);
+
     })();
   </script>
 </dom-module>

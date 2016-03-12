@@ -7,8 +7,11 @@
 <link rel="import" href="../../behaviors/utils-behavior.html">
 
 <dom-module id="featured-people">
+
   <template>
-    <style include="shared-styles">
+
+    <style include="shared-styles"></style>
+    <style>
       :host {
         display: block;
       }
@@ -75,6 +78,7 @@
         }
       }
     </style>
+
     <div class="container">
       <h4 class="heading">Rockstar Speakers</h4>
       <div class="people-wrapper">
@@ -92,7 +96,9 @@
         </a>
       </div>
     </div>
+
   </template>
+
   <script>
     (function () {
       'use strict';
@@ -104,9 +110,8 @@
         }
 
         beforeRegister() {
-          let is = this.constructor.name.replace(/\W+/g, '-')
+          this.is = this.constructor.name.replace(/\W+/g, '-')
             .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-          this.is = is;
           this.properties = {
             people: {
               type: Array,
@@ -125,9 +130,12 @@
           }
           this.featuredPeople = this._randomOrder(filteredPeople).slice(0, 4);
         }
+
       }
 
       Polymer(FeaturedPeople);
+
     })();
   </script>
+
 </dom-module>

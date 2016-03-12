@@ -4,7 +4,9 @@
 <link rel="import" href="../../../bower_components/marked-element/marked-element.html">
 
 <dom-module id="latest-posts">
+
   <template>
+
     <style include="shared-styles"></style>
     <style>
       :host {
@@ -48,23 +50,26 @@
         }
       }
     </style>
+
     <div class="container">
       <h4 class="heading text-center">Latest news</h4>
       <div class="posts-wrapper">
         <div class="post">
-          <span class="title block">[[_posts.0.title]]</span>
+          <div class="title">[[_posts.0.title]]</div>
           <marked-element markdown="[[_posts.0.brief]]"></marked-element>
           <a data-route$="[[_posts.0.dataRoute]]" href$="[[_posts.0.url]]">Continue reading</a>
         </div>
         <span class="post-divider"></span>
         <div class="post">
-          <span class="title block">[[_posts.1.title]]</span>
+          <div class="title">[[_posts.1.title]]</div>
           <marked-element markdown="[[_posts.1.brief]]"></marked-element>
           <a data-route$="[[_posts.1.dataRoute]]" href$="[[_posts.1.url]]">Continue reading</a>
         </div>
       </div>
     </div>
+
   </template>
+
   <script>
     (function () {
       'use strict';
@@ -72,9 +77,8 @@
       class LatestPosts {
 
         beforeRegister() {
-          let is = this.constructor.name.replace(/\W+/g, '-')
+          this.is = this.constructor.name.replace(/\W+/g, '-')
             .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-          this.is = is;
           this.properties = {
             posts: {
               type: Array,
@@ -92,9 +96,12 @@
           }
           this._posts = temp;
         }
+
       }
 
       Polymer(LatestPosts);
+
     })();
   </script>
+
 </dom-module>

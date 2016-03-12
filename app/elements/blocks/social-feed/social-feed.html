@@ -1,10 +1,14 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+
 <link rel="import" href="../social-post/social-post.html">
 
 <dom-module id="social-feed">
+
   <template>
+
     <style include="shared-styles"></style>
     <style>
       :host {
@@ -43,6 +47,7 @@
         }
       }
     </style>
+
     <div class="container">
       <iron-ajax auto url="[[source]]" handle-as="json" last-response="{{_posts}}"></iron-ajax>
       <div class="social-section">
@@ -64,16 +69,18 @@
         </div>
       </div>
     </div>
+
   </template>
+
   <script>
     (function () {
       'use strict';
 
       class SocialFeed {
+
         beforeRegister() {
-          let is = this.constructor.name.replace(/\W+/g, '-')
+          this.is = this.constructor.name.replace(/\W+/g, '-')
             .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-          this.is = is;
           this.properties = {
             source: String,
             interval: {
@@ -118,9 +125,12 @@
           replacedText = replacedText.replace(profileLinks, '<a class="post-link" href="https://twitter.com/$1" target="_blank">@$1</a>');
           return replacedText;
         }
+
       }
 
       Polymer(SocialFeed);
+
     })();
   </script>
+
 </dom-module>
