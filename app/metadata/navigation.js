@@ -11,7 +11,7 @@ module.exports = {
       video: {
         title: 'GDG DevFest Ukraine 2015',
         youtubeId: 'DfMnJAzOFng',
-        text: 'Watch highlights'
+        text: 'See how it was in 2015'
       }
     }
   }, {

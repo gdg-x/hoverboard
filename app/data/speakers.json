@@ -1,5 +1,5 @@
-[
-  {
+{
+  "23": {
     "id": 23,
     "featured": true,
     "name": "Dawid Ostrowski",
@@ -19,7 +19,7 @@
       }
     ]
   },
-  {
+  "9": {
     "id": 9,
     "featured": true,
     "name": "Mandy Waite",
@@ -53,7 +53,7 @@
       }
     ]
   },
-  {
+  "15": {
     "id": 15,
     "featured": true,
     "name": "Jakub Škvára",
@@ -86,7 +86,7 @@
       }
     ]
   },
-  {
+  "14": {
     "id": 14,
     "name": "Jana Moudrá",
     "title": "Co-Founder",
@@ -133,7 +133,7 @@
       }
     ]
   },
-  {
+  "11": {
     "id": 11,
     "featured": true,
     "name": "Hallade Xavier",
@@ -176,7 +176,7 @@
       }
     ]
   },
-  {
+  "1": {
     "id": 1,
     "featured": true,
     "name": "Said Tahsin Dane",
@@ -219,7 +219,7 @@
       }
     ]
   },
-  {
+  "2": {
     "id": 2,
     "featured": true,
     "name": "Mateusz Herych",
@@ -263,7 +263,7 @@
       }
     ]
   },
-  {
+  "19": {
     "id": 19,
     "featured": true,
     "name": "Juarez Filho",
@@ -306,7 +306,7 @@
       }
     ]
   },
-  {
+  "3": {
     "id": 3,
     "name": "Dmytro Danylyk",
     "title": "Android Developer",
@@ -336,7 +336,7 @@
       }
     ]
   },
-  {
+  "4": {
     "id": 4,
     "name": "Roman Mazur",
     "title": "Software Engineer",
@@ -372,7 +372,7 @@
       }
     ]
   },
-  {
+  "5": {
     "id": 5,
     "featured": true,
     "name": "Michał Tajchert",
@@ -407,7 +407,7 @@
       }
     ]
   },
-  {
+  "7": {
     "id": 7,
     "name": "Valentyn Shybanov",
     "title": "Software Engineer/Country Manager",
@@ -446,7 +446,7 @@
       }
     ]
   },
-  {
+  "8": {
     "id": 8,
     "name": "Dima Maleev",
     "title": "Director",
@@ -471,7 +471,7 @@
       }
     ]
   },
-  {
+  "10": {
     "id": 10,
     "name": "Roman Herasymenko",
     "title": "Senior Android Developer",
@@ -508,7 +508,7 @@
       }
     ]
   },
-  {
+  "12": {
     "id": 12,
     "name": "Alex Pazhyn",
     "title": "UI designer",
@@ -546,7 +546,7 @@
       }
     ]
   },
-  {
+  "13": {
     "id": 13,
     "name": "Maciej Górski",
     "title": "Lazy Developer",
@@ -581,7 +581,7 @@
       }
     ]
   },
-  {
+  "16": {
     "id": 16,
     "name": "Kseniia Shumelchyk",
     "title": "Software developer",
@@ -624,7 +624,7 @@
       }
     ]
   },
-  {
+  "17": {
     "id": 17,
     "name": "Anna Kurylo",
     "title": "Project manager",
@@ -670,7 +670,7 @@
       }
     ]
   },
-  {
+  "18": {
     "id": 18,
     "name": "Alexey Rybakov",
     "title": "Senior Developer",
@@ -690,7 +690,7 @@
       }
     ]
   },
-  {
+  "20": {
     "id": 20,
     "name": "Viktor Zozuliak",
     "title": "Web Developer",
@@ -715,7 +715,7 @@
       }
     ]
   },
-  {
+  "21": {
     "id": 21,
     "name": "Buşra Deniz",
     "title": "Mobile Software Developer",
@@ -762,7 +762,7 @@
       }
     ]
   },
-  {
+  "22": {
     "id": 22,
     "name": "Semih Yagcioglu",
     "title": "Senior Software Engineer",
@@ -797,7 +797,7 @@
       }
     ]
   },
-  {
+  "24": {
     "id": 24,
     "name": "Volodymyr Ivanov",
     "title": "Founder, Coordinator",
@@ -823,7 +823,7 @@
       }
     ]
   },
-  {
+  "25": {
     "id": 25,
     "name": "Daryna Chernysheva",
     "title": "Test Automation Tech Lead",
@@ -842,7 +842,7 @@
       }
     ]
   },
-  {
+  "26": {
     "id": 26,
     "name": "Elena Forostovets",
     "title": "UI/UX",
@@ -879,7 +879,7 @@
       }
     ]
   },
-  {
+  "27": {
     "id": 27,
     "name": "Tatiana Protasova",
     "title": "Marketing Manager",
@@ -916,7 +916,7 @@
       }
     ]
   },
-  {
+  "28": {
     "id": 28,
     "name": "Constantine Mars",
     "title": "Senior Android Developer",
@@ -948,7 +948,7 @@
       }
     ]
   },
-  {
+  "29": {
     "id": 29,
     "name": "Anton Minashkin",
     "title": "Android Developer",
@@ -981,7 +981,7 @@
       }
     ]
   },
-  {
+  "30": {
     "id": 30,
     "name": "Ihor Dvoretskyi",
     "title": "Operation Engineer",
@@ -1012,7 +1012,7 @@
       }
     ]
   },
-  {
+  "31": {
     "id": 31,
     "name": "Anastasiia Serafyn",
     "title": "Recruiting Team Lead",
@@ -1036,4 +1036,4 @@
       }
     ]
   }
-]
+}
