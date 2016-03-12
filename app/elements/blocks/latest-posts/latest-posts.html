@@ -4,93 +4,104 @@
 <link rel="import" href="../../../bower_components/marked-element/marked-element.html">
 
 <dom-module id="latest-posts">
-    <template>
-        <style include="shared-styles"></style>
-        <style>
-            :host {
-                display: block;
-            }
 
-            .posts-wrapper {
-                @apply(--layout-vertical);
-            }
+  <template>
 
-            .post {
-                @apply(--layout-flex-5);
-            }
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+      }
 
-            .post:not(:first-of-type) {
-                margin-top: 30px;
-            }
+      .posts-wrapper {
+        @apply(--layout-vertical);
+      }
 
-            .title {
-                color: var(--default-primary-color);
-                font-size: 24px;
-                line-height: 1.2
-            }
+      .post {
+        @apply(--layout-flex-5);
+      }
 
-            a {
-                color: var(--default-primary-color);
-                font-size: 16px;
-            }
+      .post:not(:first-of-type) {
+        margin-top: 30px;
+      }
 
-            @media (min-width: 601px) {
-                .posts-wrapper {
-                    @apply(--layout-horizontal);
-                }
-                .post:not(:first-of-type) {
-                    margin-top: 0;
-                }
-                .post-divider {
-                    @apply(--layout-flex);
-                }
-            }
-        </style>
-        <div class="container">
-            <h4 class="heading text-center">Latest news</h4>
-            <div class="posts-wrapper">
-                <div class="post">
-                    <span class="title block">[[news.0.title]]</span>
-                    <marked-element markdown="[[news.0.brief]]"></marked-element>
-                    <a data-route$="[[news.0.dataRoute]]" href$="[[news.0.url]]">Continue reading</a>
-                </div>
-                <span class="post-divider"></span>
-                <div class="post">
-                    <span class="title block">[[news.1.title]]</span>
-                    <marked-element markdown="[[news.1.brief]]"></marked-element>
-                    <a data-route$="[[news.1.dataRoute]]" href$="[[news.1.url]]">Continue reading</a>
-                </div>
-            </div>
+      .title {
+        color: var(--default-primary-color);
+        font-size: 24px;
+        line-height: 1.2
+      }
+
+      a {
+        color: var(--default-primary-color);
+        font-size: 16px;
+      }
+
+      @media (min-width: 601px) {
+        .posts-wrapper {
+          @apply(--layout-horizontal);
+        }
+
+        .post:not(:first-of-type) {
+          margin-top: 0;
+        }
+
+        .post-divider {
+          @apply(--layout-flex);
+        }
+      }
+    </style>
+
+    <div class="container">
+      <h4 class="heading text-center">Latest news</h4>
+      <div class="posts-wrapper">
+        <div class="post">
+          <div class="title">[[_posts.0.title]]</div>
+          <marked-element markdown="[[_posts.0.brief]]"></marked-element>
+          <a data-route$="[[_posts.0.dataRoute]]" href$="[[_posts.0.url]]">Continue reading</a>
         </div>
-    </template>
-    <script>
-        (function () {
-            'use strict';
+        <span class="post-divider"></span>
+        <div class="post">
+          <div class="title">[[_posts.1.title]]</div>
+          <marked-element markdown="[[_posts.1.brief]]"></marked-element>
+          <a data-route$="[[_posts.1.dataRoute]]" href$="[[_posts.1.url]]">Continue reading</a>
+        </div>
+      </div>
+    </div>
 
-            class LatestPosts {
-                beforeRegister() {
-                    let is = this.constructor.name.replace(/\W+/g, '-')
-                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-                    this.is = is;
-                    this.properties = {
-                        posts: {
-                            type: Array,
-                            observer: '_postsChanged'
-                        }
-                    };
-                }
+  </template>
 
-                _postsChanged() {
-                    let temp = this.posts.reverse().slice(0, 2);
-                    for (let i = 0, len = temp.length; i < len; i++) {
-                        temp[i].url = '{$ baseurl $}/blog/' + temp[i].id;
-                        temp[i].dataRoute = 'blog/' + temp[i].id;
-                    }
-                    this.news = temp;
-                }
-            }
+  <script>
+    (function () {
+      'use strict';
 
-            Polymer(LatestPosts);
-        })();
-    </script>
+      class LatestPosts {
+
+        beforeRegister() {
+          this.is = this.constructor.name.replace(/\W+/g, '-')
+            .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+          this.properties = {
+            posts: {
+              type: Array,
+              observer: '_postsChanged'
+            },
+            _posts: Array
+          };
+        }
+
+        _postsChanged() {
+          let temp = this.posts.slice(0, 2);
+          for (let i = 0, len = temp.length; i < len; i++) {
+            temp[i].url = '{$ baseurl $}/blog/' + temp[i].id;
+            temp[i].dataRoute = 'blog/' + temp[i].id;
+          }
+          this._posts = temp;
+        }
+
+      }
+
+      Polymer(LatestPosts);
+
+    })();
+  </script>
+
 </dom-module>

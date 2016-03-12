@@ -3,11 +3,15 @@
 <link rel="import" href="../../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+
 <link rel="import" href="../../behaviors/utils-behavior.html">
 
 <dom-module id="featured-people">
+
   <template>
-    <style include="shared-styles">
+
+    <style include="shared-styles"></style>
+    <style>
       :host {
         display: block;
       }
@@ -74,6 +78,7 @@
         }
       }
     </style>
+
     <div class="container">
       <h4 class="heading">Rockstar Speakers</h4>
       <div class="people-wrapper">
@@ -91,20 +96,22 @@
         </a>
       </div>
     </div>
+
   </template>
+
   <script>
     (function () {
       'use strict';
 
       class FeaturedPeople {
+
         get behaviors() {
           return [Polymer.UtilsBehavior];
         }
 
         beforeRegister() {
-          let is = this.constructor.name.replace(/\W+/g, '-')
+          this.is = this.constructor.name.replace(/\W+/g, '-')
             .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-          this.is = is;
           this.properties = {
             people: {
               type: Array,
@@ -114,17 +121,21 @@
         }
 
         _peopleChanged() {
-          let filteredPeople = [];
-          for (var i = 0; i < this.people.length; i++) {
-            if (this.people[i].featured) {
-              filteredPeople.push(this.people[i]);
+          let people = this._toArray(this.people),
+            filteredPeople = [];
+          for (var i = 0; i < people.length; i++) {
+            if (people[i].featured) {
+              filteredPeople.push(people[i]);
             }
           }
-          this.featuredPeople = this.randomOrder(filteredPeople).slice(0, 4);
+          this.featuredPeople = this._randomOrder(filteredPeople).slice(0, 4);
         }
+
       }
 
       Polymer(FeaturedPeople);
+
     })();
   </script>
+
 </dom-module>

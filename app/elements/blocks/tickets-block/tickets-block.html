@@ -5,7 +5,9 @@
 <link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
 
 <dom-module id="tickets-block">
+
     <template>
+
         <style include="shared-styles"></style>
         <style>
             :host {
@@ -94,6 +96,7 @@
                 }
             }
         </style>
+
         <div class="container text-center">
             <h4 class="heading">{$ ticketsBlock.title $}</h4>
             <div class="price-block-wrapper">
@@ -124,15 +127,16 @@
             </div>
         </paper-dialog>
     </template>
+
     <script>
         (function () {
             'use strict';
 
             class TicketsBlock {
+
                 beforeRegister() {
-                    let is = this.constructor.name.replace(/\W+/g, '-')
-                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-                    this.is = is;
+                    this.is = this.constructor.name.replace(/\W+/g, '-')
+                      .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
                 }
 
                 openTicketsDialog() {
@@ -147,9 +151,12 @@
                     });
                     this.$.ticketsDialog.open();
                 }
+
             }
 
             Polymer(TicketsBlock);
+
         })();
     </script>
+
 </dom-module>

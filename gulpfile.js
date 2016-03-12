@@ -203,7 +203,7 @@ gulp.task('cache-config', function(callback) {
     './?utm_source=web_app_manifest',
     './',
     'bower_components/webcomponentsjs/webcomponents-lite.min.js',
-    '{elements,scripts,themes,data,posts,assets}/**/*.*'],
+    '{elements,scripts,themes,data,posts}/**/*.*'],
     {cwd: dir}, function(error, files) {
     if (error) {
       callback(error);
@@ -256,7 +256,7 @@ gulp.task('serve', ['js', 'lint', 'lint-js', 'styles'], function() {
     'app/content/**/*.md',
     'app/metadata/*.js'
   ], ['styles', reload]);
-  gulp.watch(['app/{elements,themes}/**/*.{css,html}'], ['styles', reload]);
+  gulp.watch(['app/{elements,themes}/**/*.{css,html}'], ['styles', 'lint-js', 'js', reload]);
   gulp.watch(['app/themes/**/*.js'], ['styles', reload]);
   gulp.watch(['app/{elements,scripts}/**/*.js'], ['lint-js', 'js']);
   gulp.watch(['app/images/**/*'], reload);

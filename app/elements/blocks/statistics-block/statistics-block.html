@@ -1,7 +1,9 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 
 <dom-module id="statistics-block">
+
   <template>
+
     <style include="shared-styles"></style>
     <style>
       :host {
@@ -30,10 +32,6 @@
         font-size: .85em;
       }
 
-      .description {
-        margin: 35px auto 0;
-      }
-
       @media (max-width: 600px) {
         .statistics-element {
           width: 50%;
@@ -51,6 +49,7 @@
         }
       }
     </style>
+
     <div class="container">
       {% for statistic in statistics %}
       <div class="statistics-element">
@@ -58,22 +57,26 @@
         <span class="caption">{$ statistic.caption $}</span>
       </div>
       {% endfor %}
-      <div class="description text-center">{$ description $}</div>
     </div>
+
   </template>
+
   <script>
     (function () {
       'use strict';
 
       class StatisticsBlock {
+
         beforeRegister() {
-          let is = this.constructor.name.replace(/\W+/g, '-')
+          this.is = this.constructor.name.replace(/\W+/g, '-')
             .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-          this.is = is;
         }
+
       }
 
       Polymer(StatisticsBlock);
+
     })();
   </script>
+
 </dom-module>

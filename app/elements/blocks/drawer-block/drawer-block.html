@@ -7,110 +7,110 @@
 <link rel="import" href="../../../bower_components/paper-menu/paper-menu.html">
 
 <dom-module id="drawer-block">
-    <template>
-        <style include="shared-styles"></style>
-        <style>
-            :host {
-                display: block;
-                z-index: 9;
-                --paper-toolbar-background: var(--default-primary-color);
+
+  <template>
+
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+        z-index: 9;
+        --paper-toolbar-background: var(--default-primary-color);
+      }
+
+      .panel {
+        height: 100%;
+      }
+
+      .logo {
+        margin-top: 15px;
+        height: 40px;
+        width: 130px;
+      }
+
+      .bottom {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--text-primary-color);
+      }
+
+      .location {
+        display: block;
+        color: var(--dark-primary-color);
+      }
+
+      .navigation {
+        background: var(--secondary-background-color);
+      }
+
+      .navigation-link {
+        padding: 0 16px;
+        min-height: 48px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+        text-decoration: none;
+        color: var(--primary-text-color);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      .navigation-link {
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+      }
+
+      .selected {
+        background: #eaeaea;
+      }
+    </style>
+
+    <paper-scroll-header-panel class="panel">
+      <paper-toolbar class="tall">
+        <div class="top">
+          <iron-image class="logo" src="{$ baseurl $}/images/logo-white.svg" sizing="contain"
+                      alt="{$ title $}"></iron-image>
+        </div>
+        <div class="bottom">
+          <span class="dates">{$ dates $}</span>
+          <span class="location">{$ location.short $}</span>
+        </div>
+      </paper-toolbar>
+      <nav>
+        <paper-menu class="navigation list" attr-for-selected="data-route" selected="{{route}}"
+                    selected-class="selected">
+          {% for nav in navigation %}
+          <a class="navigation-link" data-route="{$ nav.route $}" href="{$ nav.permalink $}">{$
+            nav.text $}</a>
+          {% endfor %}
+        </paper-menu>
+      </nav>
+    </paper-scroll-header-panel>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      class DrawerBlock {
+
+        beforeRegister() {
+          this.is = this.constructor.name.replace(/\W+/g, '-')
+            .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+          this.properties = {
+            route: {
+              type: String,
+              notify: true
             }
+          };
+        }
 
-            .panel {
-                height: 100%;
-            }
+      }
 
-            .logo {
-                margin-top: 15px;
-                height: 40px;
-                width: 130px;
-            }
+      Polymer(DrawerBlock);
 
-            .bottom {
-                font-size: 14px;
-                font-weight: 400;
-                color: var(--text-primary-color);
-            }
+    })();
+  </script>
 
-            .location {
-                display: block;
-                color: var(--dark-primary-color);
-            }
-
-            .navigation {
-                background: var(--secondary-background-color);
-            }
-
-            .navigation-link {
-                padding: 0 16px;
-                min-height: 48px;
-                font-weight: 500;
-                font-size: 14px;
-                line-height: 24px;
-                text-decoration: none;
-                color: var(--primary-text-color);
-                -webkit-font-smoothing: antialiased;
-                text-rendering: optimizeLegibility;
-            }
-
-            .navigation-link {
-                @apply(--layout-horizontal);
-                @apply(--layout-center);
-            }
-
-            .selected {
-                background: #eaeaea;
-            }
-        </style>
-        <paper-scroll-header-panel class="panel">
-            <!-- Drawer Toolbar -->
-            <paper-toolbar class="tall">
-                <div class="top">
-                    <iron-image class="logo" src="{$ baseurl $}/images/logo-white.svg" sizing="contain"
-                                alt="{$ title $}"></iron-image>
-                </div>
-                <div class="bottom">
-                    <span class="dates">{$ dates $}</span>
-                    <span class="location">{$ location.short $}</span>
-                </div>
-            </paper-toolbar>
-
-            <!-- Navigation -->
-            <nav>
-                <paper-menu class="navigation list" attr-for-selected="data-route" selected="{{route}}"
-                            selected-class="selected" on-iron-select="_onDataRouteClick">
-                    {% for nav in navigation %}
-                    <a class="navigation-link" data-route="{$ nav.route $}" href="{$ nav.permalink $}">{$
-                        nav.text $}</a>
-                    {% endfor %}
-                </paper-menu>
-            </nav>
-        </paper-scroll-header-panel>
-
-    </template>
-    <script>
-        (function () {
-            'use strict';
-
-            class DrawerBlock {
-                beforeRegister() {
-                    let is = this.constructor.name.replace(/\W+/g, '-')
-                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-                    this.is = is;
-                    this.properties = {
-                        route: {
-                            type: String,
-                            notify: true
-                        }
-                    };
-                }
-
-                _onDataRouteClick() {
-                    document.querySelector('#paperDrawerPanel').closeDrawer();
-                }
-            }
-
-            Polymer(DrawerBlock);
-        })();
-    </script>
 </dom-module>

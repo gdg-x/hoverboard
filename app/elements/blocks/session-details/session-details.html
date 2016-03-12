@@ -1,19 +1,26 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../../../bower_components/neon-animation/neon-animation-runner-behavior.html">
-<link rel="import" href="../../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
+<link rel="import" href="../../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../../bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
+<link rel="import" href="../../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
 <link rel="import" href="../../../bower_components/paper-menu-button/paper-menu-button.html">
-<link rel="import" href="../../../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../../bower_components/paper-item/paper-icon-item.html">
+<link rel="import" href="../../../bower_components/paper-menu/paper-menu.html">
 <link rel="import" href="../../../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../../../bower_components/neon-animation/neon-animation-runner-behavior.html">
+<link rel="import" href="../../../bower_components/marked-element/marked-element.html">
+
 <link rel="import" href="../../../themes/hoverboard-theme/components/dialog-styles.html">
+<link rel="import" href="../truncate-marked-text/truncate-marked-text.html">
 <link rel="import" href="../../behaviors/share-behavior.html">
 <link rel="import" href="../../behaviors/utils-behavior.html">
-
+<link rel="import" href="../video-dialog/video-dialog.html">
 
 <dom-module id="session-details">
+
   <template>
+
     <style include="shared-styles"></style>
     <style include="dialog-styles"></style>
     <style>
@@ -26,6 +33,7 @@
         cursor: pointer;
       }
     </style>
+
     <paper-scroll-header-panel id="scrollHeaderPanel" no-reveal>
       <paper-toolbar class="tall">
         <paper-icon-button class="back-button" dialog-dismiss icon="icons:arrow-back"></paper-icon-button>
@@ -60,14 +68,15 @@
           <div class="main-info">
             <div class="info">
               <h1 class="main-title">[[session.title]]</h1>
-                            <span class="meta highlight">[[session.dateReadable]] / [[session.startTime]] - [[session.endTime]] / [[session.track.title]]
-                                <template is="dom-if" if="{{session.language}}">
-                                  / [[session.language]]
-                                </template>
-                                <template is="dom-if" if="{{session.complexity}}">
-                                  / [[session.complexity]]
-                                </template>
-                            </span>
+              <div class="meta highlight">[[session.dateReadable]] / [[session.startTime]] - [[session.endTime]] /
+                [[session.track.title]]
+                <template is="dom-if" if="{{session.language}}">
+                  / [[session.language]]
+                </template>
+                <template is="dom-if" if="{{session.complexity}}">
+                  / [[session.complexity]]
+                </template>
+              </div>
               <span class="meta">[[_concatArray(session.tags)]]</span>
             </div>
           </div>
@@ -130,8 +139,8 @@
                   entry-animation="scale-up-animation"
                   exit-animation="scale-down-animation" modal></video-dialog>
 
-    <iron-media-query query="(max-width: 960px)" query-matches="{{smallScreen}}"></iron-media-query>
   </template>
+
   <script>
     (function () {
       'use strict';
@@ -167,8 +176,7 @@
         },
 
         _sessionChanged: function () {
-          page.redirect('/' + app.route + '/' + this.session.id);
-          var generatedClass = this.generateClass(this.session.mainTag);
+          var generatedClass = this._generateClass(this.session.mainTag);
           this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + generatedClass + ')';
           this._previousBrowserColor = document.getElementsByName('theme-color')[0].content;
           document.getElementsByName('theme-color')[0].content = this.getComputedStyleValue('--' + generatedClass);
@@ -176,6 +184,7 @@
         },
 
         _renderOpened: function () {
+          page.redirect('/' + app.route + '/' + this.session.id);
           if (this.withBackdrop && window.innerWidth > 960) {
             this.backdropElement.open();
           }
@@ -200,7 +209,10 @@
             this._finishRenderClosed();
           }
         }
+
       });
+
     })();
   </script>
+
 </dom-module>

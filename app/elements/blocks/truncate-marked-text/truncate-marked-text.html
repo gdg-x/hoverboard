@@ -3,26 +3,31 @@
 <link rel="import" href="../../../bower_components/marked-element/marked-element.html">
 
 <dom-module id="truncate-marked-text">
+
     <style include="shared-styles"></style>
     <style>
         .markdown-html {
             @apply(--truncate-marked-text-style);
         }
     </style>
+
     <template>
+
         <marked-element markdown="[[_outputText]]">
             <div class="markdown-html"></div>
         </marked-element>
+
     </template>
+
     <script>
         (function() {
             'use strict';
 
             class TruncateMarkedText {
+
                 beforeRegister() {
-                    let is = this.constructor.name.replace(/\W+/g, '-')
-                        .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-                    this.is = is;
+                    this.is = this.constructor.name.replace(/\W+/g, '-')
+                      .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
                     this.properties = {
                         characters: Number,
                         words: Number,
@@ -88,9 +93,12 @@
                     }
                     return input;
                 }
+
             }
 
             Polymer(TruncateMarkedText);
+
         })();
     </script>
+
 </dom-module>
