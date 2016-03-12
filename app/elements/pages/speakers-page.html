@@ -143,7 +143,7 @@
       </div>
     </div>
     <div class="container speakers-container">
-      <template is="dom-repeat" items="[[speakers]]" as="speaker" on-dom-change="_updateCascadedNodes">
+      <template is="dom-repeat" items="[[_toArray(speakers)]]" as="speaker" on-dom-change="_updateCascadedNodes">
         <div class="speaker" cascaded>
           <paper-material class="card">
             <div class="header">
@@ -201,7 +201,9 @@
       ],
 
       properties: {
-        speakers: Array,
+        speakers: {
+          type: Object
+        },
         selected: {
           type: Boolean,
           observer: 'updateHeroSettings'
@@ -257,7 +259,7 @@
       openSpeakerDetails: function () {
         if (this.selected && this.speakerId) {
           this.async(function () {
-            this._selectedSpeaker = this.speakers[this.getIndexByProperty(this.speakers, 'id', this.speakerId)];
+            this._selectedSpeaker = this.speakers[this.speakerId];
             this.$.speakerDetails.open();
             this.speakerId = null;
           }, 500);

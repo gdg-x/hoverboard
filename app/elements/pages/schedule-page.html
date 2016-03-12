@@ -351,7 +351,7 @@
           type: Array,
           observer: '_updateLegend'
         },
-        sessions: Array,
+        sessions: Object,
         selected: {
           type: Boolean,
           observer: 'updateHeroSettings'
@@ -426,7 +426,7 @@
       openSessionDetails: function () {
         if (this.selected && this.sessionId) {
           this.async(function () {
-            this._selectedSession = this.sessions[this.getIndexByProperty(this.sessions, 'id', this.sessionId)];
+            this._selectedSession = this.sessions[this.sessionId];
             this.$.sessionDetails.open();
             this.sessionId = null;
           }, 500);
@@ -451,7 +451,7 @@
       },
 
       _getCustomStyleValue: function (value) {
-        return this.getComputedStyleValue('--' + this.generateClass(value));
+        return this.getComputedStyleValue('--' + this._generateClass(value));
       },
 
       _openSession: function (e) {

@@ -167,8 +167,7 @@
         },
 
         _sessionChanged: function () {
-          page.redirect('/' + app.route + '/' + this.session.id);
-          var generatedClass = this.generateClass(this.session.mainTag);
+          var generatedClass = this._generateClass(this.session.mainTag);
           this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + generatedClass + ')';
           this._previousBrowserColor = document.getElementsByName('theme-color')[0].content;
           document.getElementsByName('theme-color')[0].content = this.getComputedStyleValue('--' + generatedClass);
@@ -176,6 +175,7 @@
         },
 
         _renderOpened: function () {
+          page.redirect('/' + app.route + '/' + this.session.id);
           if (this.withBackdrop && window.innerWidth > 960) {
             this.backdropElement.open();
           }

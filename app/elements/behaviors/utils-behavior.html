@@ -1,24 +1,24 @@
 <link rel='import' href='../../bower_components/polymer/polymer.html'>
 
 <script>
-  Polymer.UtilsBehavior = {
-    generateClass: function (value) {
-      return value.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-    },
+  (function () {
+    'use strict';
 
-    getIndexByProperty: function (array, property, value) {
-      for (let i = 0, length = array.length; i < length; i++) {
-        if (array[i][property].toString() === value.toString()) {
-          return i;
-        }
-      }
-    },
+    Polymer.UtilsBehavior = {
+        _getIndexByProperty: function (array, property, value) {
+          for (let i = 0, length = array.length; i < length; i++) {
+            if (array[i][property].toString() === value.toString()) {
+              return i;
+            }
+          }
+        },
 
-    randomOrder: function (array) {
-      return array.sort(function () {
-        return 0.5 - Math.random();
-      });
-    }
+        _generateClass: (value) => value.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase(),
 
-  };
+        _randomOrder: (array) => array.sort(() => 0.5 - Math.random()),
+
+        _toArray: (obj) => Object.keys(obj).map(key => obj[key])
+
+    };
+  })();
 </script>

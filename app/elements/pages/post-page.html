@@ -194,7 +194,8 @@
 
         properties: {
           postId: {
-            type: String
+            type: String,
+            notify: true
           },
           posts: Array,
           heroSettings: {
@@ -289,7 +290,7 @@
             this.$.animationWrapper.style.display = 'none';
             this.$.spinner.style.opacity = 1;
 
-            var postIndex = this.getIndexByProperty(this.posts, 'id', this.postId);
+            var postIndex = this._getIndexByProperty(this.posts, 'id', this.postId);
 
             this._latestPosts[0] = postIndex > 0 ? this.posts[postIndex - 1] : null;
             this._latestPosts[1] = postIndex < this.posts.length - 1 ? this.posts[postIndex + 1] : null;
@@ -312,6 +313,7 @@
           }, 100);
           this.playAnimation('postLoaded');
           this.$.disqus.reset();
+          this.postId = null;
         },
 
         _onNeonAnimationFinish: function () {
