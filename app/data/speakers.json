@@ -312,7 +312,7 @@
     "title": "Android Developer",
     "company": "Timee",
     "country": "Ukraine",
-    "photoUrl": "/images/people/dmytro_danylyk.jpeg",
+    "photoUrl": "/images/people/dmytro_danylyk.jpg",
     "bio": "Hello. I am finalist of Google Apps Developer Challenge 2012. Author of open source libraries 4000+ stars. When I have free time I am writing technical articles. Always trying to share my knowledge & experience on different events. Big fan of android, flat design, stackoverflow, git, Intellij IDEA. Eclipse IDE hater.",
     "tags": [
       "Android",
@@ -630,7 +630,7 @@
     "title": "Project manager",
     "company": "Hackraft",
     "country": "Ukraine",
-    "photoUrl": "/images/people/anna_kurylo.png",
+    "photoUrl": "/images/people/anna_kurylo.jpg",
     "bio": "Anna drives several IT communities in Kyiv. She has organized more than 30 events during last the 2 years including the biggest hackathon in Ukraine and several conferences for developers and startups. This year Anna became a Google Anita Borg Scholar in EMEA Region, being selected from more than a thousand candidates.",
     "tags": [
       "Community"
@@ -676,7 +676,7 @@
     "title": "Senior Developer",
     "company": "DataArt",
     "country": "Ukraine",
-    "photoUrl": "/images/people/alexey_rybakov.png",
+    "photoUrl": "/images/people/alexey_rybakov.jpg",
     "bio": "For more than 12 years has been dedicated to game development for different mobile systems (from Palm OS, Windows CE to iOS).<br/><br/>In DataArt is working on development for  the mobile and embedded OS from 2011.",
     "tags": [
       "Android",
@@ -848,7 +848,7 @@
     "title": "UI/UX",
     "company": "Boolat Games",
     "country": "Ukraine",
-    "photoUrl": "/images/people/elena_forostovets.png",
+    "photoUrl": "/images/people/elena_forostovets.jpg",
     "bio": "Elena is a UI/UX designer at Boolat Games. Over 3 years experience in game development as UI/UX and 2D artist . Winner Golden Byte 5 and ecaHack Kyiv at 2013. Elena received her bechelor’s degree from NAU, where she studied architecture and design.<br/><br/>Also She is indie game developer, has published Cartrans game for Android and working on few other projects.",
     "tags": [
       "Community",
@@ -922,7 +922,7 @@
     "title": "Senior Android Developer",
     "company": "DataArt",
     "country": "Ukraine",
-    "photoUrl": "/images/people/constantine_mars.png",
+    "photoUrl": "/images/people/constantine_mars.jpg",
     "bio": "Constantine is a Senior Mobile Developer at DataArt, GDG Dnipropetrovs'k Organizer and Java User Group Dnipro Organizer. <br/><br/>He is developing apps for both Android and iOS platfroms, but prefer to talk about Android innovations and Java language features. The last areas of his interest are Reactive Functional Programming, Ubiquitous Computing (especially AndroidWear) and GoogleFit.",
     "badges": [
       {
