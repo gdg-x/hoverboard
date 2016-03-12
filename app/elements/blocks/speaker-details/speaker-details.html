@@ -108,8 +108,8 @@
           addEventListener('paper-header-transform', function (e) {
             var d = e.detail;
             var m = d.height - d.condensedHeight;
-            var transform = 40 * d.y / m;
-            Polymer.Base.transform('translate3d(' + transform + 'px,0,0)', title);
+            var transform = 40 * (d.y / m > 1 ? 1 : d.y / m);
+            Polymer.Base.translate3d(transform + 'px', 0, 0, title);
           });
         },
 
@@ -132,7 +132,7 @@
           }
           this.playAnimation('entry');
           this.async(function () {
-            this.$.scrollHeaderPanel.scrollToTop(true);
+            this.$.scrollHeaderPanel.scroll(1, true);
             this.$.scrollHeaderPanel.notifyResize();
           });
         },
