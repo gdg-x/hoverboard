@@ -424,7 +424,7 @@
       },
 
       openSessionDetails: function () {
-        if (this.selected && this.sessionId && this.sessions) {
+        if (this.selected && this.sessionId) {
           this.async(function () {
             this._selectedSession = this.sessions[this.getIndexByProperty(this.sessions, 'id', this.sessionId)];
             this.$.sessionDetails.open();

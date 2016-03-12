@@ -255,7 +255,7 @@
       },
 
       openSpeakerDetails: function () {
-        if (this.selected && this.speakerId && this.speakers) {
+        if (this.selected && this.speakerId) {
           this.async(function () {
             this._selectedSpeaker = this.speakers[this.getIndexByProperty(this.speakers, 'id', this.speakerId)];
             this.$.speakerDetails.open();
