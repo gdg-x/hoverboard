@@ -90,8 +90,8 @@ This installs the element sets and tools the hoverboard template requires to bui
 gulp init
 ```
 
-Init task run [download:analytics task](https://github.com/StartPolymer/polymer-starter-kit-plus#download-newest-script-analyticsjs)
-and [download:fonts task](https://github.com/StartPolymer/polymer-starter-kit-plus#download-google-fonts)
+Init task run [download:analytics task](https://github.com/gdg-x/hoverboard#download-newest-script-analyticsjs)
+and [download:fonts task](https://github.com/gdg-x/hoverboard#download-google-fonts)
 
 #### Serve / watch
 
@@ -131,7 +131,7 @@ Build and optimize the current project, ready for deployment. This includes vulc
 
 - For GAE or GCS [install Google Cloud SDK](https://developers.google.com/cloud/sdk/#Quick_Start)
 - For Firebase [install Firebase command line tools](https://www.firebase.com/docs/hosting/command-line-tool.html)
-- Setup hosting in [config file](https://github.com/StartPolymer/polymer-starter-kit-plus/tree/master/config.js)
+- Setup hosting in [config file](https://github.com/gdg-x/hoverboard/tree/master/config.js)
 
 #### Deploy to development environment
 
@@ -173,7 +173,7 @@ gulp download:analytics
 #### Download Google Fonts
 
 Download Google Fonts for load page performance and offline using.
-Fonts list for download is in file [fonts.list](https://github.com/StartPolymer/polymer-starter-kit-plus/blob/master/fonts.list).
+Fonts list for download is in file [fonts.list](https://github.com/gdg-x/hoverboard/blob/master/fonts.list).
 
 ```sh
 gulp download:fonts
