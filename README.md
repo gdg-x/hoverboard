@@ -1,17 +1,15 @@
 # Project Hoverboard - GDG DevFest 2016 site template
 
-## About
-Project Hoverboard is the next generation conference website template after [Project Zeppelin](https://github.com/gdg-x/zeppelin) and more optimized version - [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
+> Project Hoverboard is the next generation conference website template after [Project Zeppelin](https://github.com/gdg-x/zeppelin) and more optimized version - [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
 
-Template was build using [Polymer](http://polymer-project.org) according to [Material Design](http://www.google.com/design/spec/material-design/introduction.html) guidelines.
-The site is **responsive**, **fast** and supports **offline access** (if you are using HTTPS protocol).
+> Template was build using [Polymer](http://polymer-project.org) according to [Material Design](http://www.google.com/design/spec/material-design/introduction.html) guidelines.
+> The site is **responsive**, **fast** and supports **offline access** (if you are using HTTPS protocol).
 
-Template is brought by [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy) from [GDG Lviv](http://lviv.gdg.org.ua/).
+> Template is brought by [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy) from [GDG Lviv](http://lviv.gdg.org.ua/).
 
-*Do you like it?* Show your support - please, **star the project**.
+> *Do you like it?* Show your support - please, **star the project**.
 
 ### [Live demo](https://hoverboard.firebaseio.com)
-### Live demo [GDG DevFest Ukraine 2015](http://devfest.gdg.org.ua/)
 
 
 ## Features
@@ -30,8 +28,8 @@ Template is brought by [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy) fr
 
 
 ## Quick-start guide
-1.  [Fork](https://github.com/gdg-x/hoverboard/fork) this repo and clone locally or [download](https://github.com/gdg-x/hoverboard/archive/master.zip) and extract Project Hoverboard to where you want to work.
-2.  With Node.js installed, run the following one liner from the root of your Hoverboard download:
+*  [Fork](https://github.com/gdg-x/hoverboard/fork) this repo and clone locally or [download](https://github.com/gdg-x/hoverboard/archive/master.zip) and extract Project Hoverboard to where you want to work.
+*  With Node.js installed, run the following one liner from the root of your Hoverboard download:
 
 ```sh
 npm run install:complete # Alias for "sudo npm install -g npm && sudo npm install -g bower gulp && npm install && bower install"
@@ -39,7 +37,7 @@ npm run install:complete # Alias for "sudo npm install -g npm && sudo npm instal
 gulp init # Initialize your app - download fonts from Google Fonts and analytics.js
 ```
 
-3.  Modify template to suit your needs. 
+*  Modify template to suit your needs. 
 
 
 ### Requirements
@@ -220,6 +218,7 @@ Going to use template? Go on! The only thing we ask - let us know at [lviv@gdg.o
 * Deploy to GitHub pages
 * Implement Progressive Web App template
 * Better ES2015 support
+* Contact page
 
 
 ## Contributing
