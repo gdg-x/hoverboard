@@ -1,0 +1,173 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
+<link rel="import" href="../../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../../bower_components/neon-animation/neon-animation-runner-behavior.html">
+<link rel="import" href="../../../bower_components/marked-element/marked-element.html">
+
+<link rel="import" href="../../../themes/hoverboard-theme/components/dialog-styles.html">
+<link rel="import" href="../truncate-marked-text/truncate-marked-text.html">
+<link rel="import" href="../../behaviors/utils-behavior.html">
+
+<dom-module id="speaker-details">
+
+  <template>
+
+    <style include="shared-styles"></style>
+    <style include="dialog-styles"></style>
+
+    <paper-scroll-header-panel id="scrollHeaderPanel" condenses="{{smallScreen}}" no-reveal="{{!smallScreen}}">
+      <paper-toolbar class="tall">
+        <paper-icon-button class="back-button" dialog-dismiss icon="arrow-back"></paper-icon-button>
+        <div class="middle fallback-image-wrapper" hidden="{{smallScreen}}">
+          <iron-image class="fallback-image" src="{$ baseurl $}/images/logo-white.svg"
+                      alt="{$ title $}"></iron-image>
+        </div>
+        <div id="title" class="bottom title toolbar-title" hidden="{{!smallScreen}}">[[speaker.name]]</div>
+      </paper-toolbar>
+      <div class="content">
+
+        <div class="metadata-wrapper">
+          <div class="main-info">
+            <div class="photo" style="background-image: url([[speaker.photoUrl]])" hidden$="{{smallScreen}}"></div>
+            <div class="info">
+              <h1 class="main-title" hidden="{{smallScreen}}">[[speaker.name]]</h1>
+              <div class="meta highlight">[[speaker.company]], [[speaker.country]]</div>
+              <div class="meta">
+                <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
+                  <a class="badge" href="[[badge.link]]" target="_blank">[[badge.description]]</a>
+                </template>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <marked-element markdown="[[speaker.bio]]">
+          <div class="markdown-html"></div>
+        </marked-element>
+
+        <div class="actions">
+          <template is="dom-repeat" items="[[speaker.socials]]" as="social">
+            <a href="[[social.link]]" target="_blank">
+              <paper-icon-button class="action" icon$="icons:{{social.icon}}"></paper-icon-button>
+            </a>
+          </template>
+        </div>
+
+      </div>
+
+      <template is="dom-if" if="{{speaker.sessions.length}}">
+        <div class="sections-wrapper content">
+          <h4 class="block-title">Sessions</h4>
+          <div class="sections">
+            <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
+              <div class="section">
+                <div class="section-info">
+                  <h3 class="section-title">[[session.title]]</h3>
+                  <div class="badges">
+                    <template is="dom-repeat" items="[[session.tags]]" as="tag">
+                      <span class="badge" target="_blank">[[tag]]</span>
+                    </template>
+                  </div>
+                  <truncate-marked-text text="[[session.description]]" characters="220"
+                                        break-last-word></truncate-marked-text>
+                  <a class="read-more" href="/schedule/[[session.id]]" data-route="schedule" dialog-dismiss>Read
+                    more</a>
+
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </template>
+    </paper-scroll-header-panel>
+
+    <iron-media-query query="(max-width: 960px)" query-matches="{{smallScreen}}"></iron-media-query>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'speaker-details',
+
+        behaviors: [
+          Polymer.PaperDialogBehavior,
+          Polymer.NeonAnimationRunnerBehavior,
+          Polymer.UtilsBehavior
+        ],
+
+        properties: {
+          speaker: {
+            type: Object,
+            observer: '_speakerChanged'
+          }
+        },
+
+        listeners: {
+          'neon-animation-finish': '_onNeonAnimationFinish'
+        },
+
+        ready: function () {
+          var title = this.$.title;
+          addEventListener('paper-header-transform', function (e) {
+            var d = e.detail;
+            var m = d.height - d.condensedHeight;
+            var transform = 40 * (d.y / m > 1 ? 1 : d.y / m);
+            Polymer.Base.translate3d(transform + 'px', 0, 0, title);
+          });
+        },
+
+        _speakerChanged: function () {
+          var generatedClass = this._generateClass(this.speaker.tags[0]);
+          this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + generatedClass + ')';
+          this._previousBrowserColor = document.getElementsByName('theme-color')[0].content;
+          document.getElementsByName('theme-color')[0].content = this.getComputedStyleValue('--' + generatedClass);
+
+          if (window.innerWidth < 961) {
+            this.$.scrollHeaderPanel.$.headerBg.style.background = 'linear-gradient(to top, rgba(0, 0, 0, 0.4) -10%, rgba(0, 0, 0, 0.1) 50%), url(' + this.speaker.photoUrl + ') 0 / cover no-repeat';
+          }
+          this.updateStyles();
+        },
+
+        _renderOpened: function () {
+          page.redirect('/' + app.route + '/' + this.speaker.id);
+          if (this.withBackdrop && window.innerWidth > 960) {
+            this.backdropElement.open();
+          }
+          this.playAnimation('entry');
+          this.async(function () {
+            this.$.scrollHeaderPanel.scroll(1, true);
+            this.$.scrollHeaderPanel.notifyResize();
+          });
+        },
+
+        _renderClosed: function () {
+          page.show('/' + app.route, null, false);
+          document.getElementsByName('theme-color')[0].content = this._previousBrowserColor;
+          this.backdropElement.close();
+          this.playAnimation('exit');
+        },
+
+        _onNeonAnimationFinish: function () {
+          if (this.opened) {
+            this._finishRenderOpened();
+          } else {
+            this._finishRenderClosed();
+          }
+        }
+
+      });
+
+    })();
+  </script>
+
+</dom-module>

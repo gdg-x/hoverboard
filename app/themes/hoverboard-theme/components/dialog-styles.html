@@ -1,0 +1,234 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../../../bower_components/paper-dialog-behavior/paper-dialog-shared-styles.html">
+
+<dom-module id="dialog-styles">
+  <template>
+    <style include="paper-dialog-shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+        margin: 0;
+        min-height: 100%;
+        min-width: 100%;
+        --content-padding: 24px;
+        --paper-scroll-header-panel-color: var(--default-primary-color);
+        --paper-icon-item: {
+        };
+        --truncate-marked-text-style: {
+          font-size: 15px;
+          line-height: 1.5;
+        };
+
+        --paper-fab-background: #FFFFFF;
+        --paper-fab-keyboard-focus-background: #FFFFFF;
+        --paper-menu-button-content: {
+          background: #FFFFFF;
+          color: var(--secondary-text-color);
+        };
+        --paper-fab-iron-icon: {
+          color: var(--secondary-text-color);
+        };
+        --paper-menu-button: {
+          margin-top: calc(-36px - var(--content-padding));
+          margin-right: -var(--content-padding);
+          float: right;
+          z-index: 1;
+        };
+      }
+
+      paper-scroll-header-panel {
+        @apply(--layout-fit);
+        margin: 0;
+        background: #FFFFFF;
+        height: 100%;
+        --paper-scroll-header-panel-full-header: {
+          background-color: var(--paper-scroll-header-panel-color);
+        };
+        --paper-scroll-header-panel-condensed-header: {
+          background-color: var(--paper-scroll-header-panel-color);
+        };
+      }
+
+      paper-toolbar {
+        background-color: transparent;
+        color: #FFFFFF;
+        --paper-toolbar-title: {
+          margin-left: 10px;
+        };
+      }
+
+      .fallback-image-wrapper {
+        @apply(--layout-horizontal);
+        @apply(--layout-center-center);
+        @apply(--layout-fit);
+      }
+
+      .fallback-image {
+        width: 140px;
+      }
+
+      .photo {
+        @apply(--img-circle);
+        margin-right: var(--content-padding);
+        width: 80px;
+        height: 80px;
+      }
+
+      .toolbar-title {
+        margin-left: calc(var(--content-padding) - 16px) !important;
+      }
+
+      .content {
+        @apply(--truncate-marked-text-style);
+        padding: var(--content-padding);
+      }
+
+      .main-title {
+        margin-bottom: 10px;
+        font-size: 24px;
+        line-height: 1.1;
+        color: var(--primary-text-color);
+      }
+
+      .metadata-wrapper {
+        @apply(--layout-vertical);
+        margin-bottom: 10px;
+      }
+
+      .main-info {
+        @apply(--layout-horizontal);
+      }
+
+      .info {
+        @apply(--layout-flex);
+        @apply(--layout-vertical);
+        @apply(--layout-center-justified);
+        color: var(--secondary-text-color);
+      }
+
+      .meta {
+        display: block;
+        color: var(--secondary-text-color);
+        font-size: 14px;
+      }
+
+      .meta.highlight {
+        color: var(--primary-text-color);
+      }
+
+      .badges {
+        margin-top: -5px;
+      }
+
+      .badge {
+        font-size: 14px;
+        color: var(--secondary-text-color);
+      }
+
+      .badge:not(:last-of-type)::after {
+        content: " / ";
+      }
+
+      .actions {
+        @apply(--layout-horizontal);
+        margin-left: -9px;
+      }
+
+      .action {
+        color: var(--secondary-text-color);
+        text-transform: initial;
+      }
+
+      .block-title {
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-weight: 400;
+      }
+
+      .sections-wrapper {
+        border-top: 1px solid var(--divider-color);
+      }
+
+      .sections {
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap)
+      }
+
+      .section {
+        @apply(--layout-horizontal);
+      }
+
+      .section:not(:last-of-type) {
+        margin-bottom: 40px;
+      }
+
+      .section-info {
+        @apply(--layout-flex);
+      }
+
+      .section-photo {
+        @apply(--img-circle);
+        margin-right: var(--content-padding);
+        width: 60px;
+        height: 60px;
+      }
+
+      .section-title {
+        margin-bottom: 5px;
+        line-height: 1.2;
+        font-size: 17px;
+        font-weight: 400;
+      }
+
+      .section-sub-title {
+        margin-bottom: 5px;
+        color: var(--secondary-text-color);
+        line-height: 1.2;
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      .read-more {
+        color: inherit !important;
+      }
+
+      @media (min-width: 961px) {
+        :host {
+          min-height: 60%;
+          min-width: 800px;
+          --paper-menu-button: {
+            margin-top: calc(-36px - var(--content-padding));
+            float: right;
+            z-index: 1;
+          }
+        }
+
+        .section {
+          margin-bottom: 10px;
+          padding: 0 12px;
+          width: calc(50% - 12px);
+        }
+
+        .section:not(:last-of-type) {
+          margin-bottom: 10px;
+        }
+
+        .section:last-of-type {
+          padding-right: 0;
+        }
+
+        .section:first-of-type {
+          padding-left: 0;
+        }
+      }
+    </style>
+  </template>
+</dom-module>

@@ -1,0 +1,108 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../../bower_components/neon-animation/neon-animation-runner-behavior.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../../bower_components/google-youtube/google-youtube.html">
+
+<dom-module id="video-dialog">
+
+  <template>
+
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        @apply(--layout-fit);
+        --paper-toolbar-height: 64px;
+        margin: 0 !important;
+        padding: 0 !important;
+        position: fixed !important;
+        background: rgba(0, 0, 0, .5);
+      }
+
+      .toolbar {
+        text-transform: uppercase;
+        z-index: 9;
+        background: rgba(0, 0, 0, .5);
+        font-size: 18px;
+        color: #FFFFFF;
+      }
+
+      .video-wrapper {
+        z-index: 6;
+        overflow: hidden;
+      }
+
+      .video {
+        @apply(--layout-fit);
+        padding: 0;
+      }
+    </style>
+
+    <paper-toolbar class="toolbar">
+      <paper-icon-button icon="icons:arrow-back" on-tap="close"></paper-icon-button>
+      <span>[[title]]</span>
+    </paper-toolbar>
+    <div class="video-wrapper">
+      <google-youtube id="video" class="video" video-id="[[youtubeId]]" width="100%" height="100%"
+                      autohide="1" chromeless="{{disableControls}}"></google-youtube>
+    </div>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'video-dialog',
+
+        behaviors: [
+          Polymer.PaperDialogBehavior,
+          Polymer.NeonAnimationRunnerBehavior
+        ],
+
+        properties: {
+          title: String,
+          youtubeId: String,
+          disableControls: {
+            type: Boolean,
+            value: false
+          }
+        },
+
+        listeners: {
+          'neon-animation-finish': '_onNeonAnimationFinish'
+        },
+
+        _renderOpened: function () {
+          if (this.withBackdrop) {
+            this.backdropElement.open();
+          }
+          this.playAnimation('entry');
+          this.$.video.play();
+        },
+
+        _renderClosed: function () {
+          this.$.video.seekTo(0);
+          this.$.video.pause();
+          this.backdropElement.close();
+          this.playAnimation('exit');
+        },
+
+        _onNeonAnimationFinish: function () {
+          if (this.opened) {
+            this._finishRenderOpened();
+          } else {
+            this._finishRenderClosed();
+          }
+        }
+      });
+
+    })();
+  </script>
+
+</dom-module>

@@ -1,0 +1,82 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<dom-module id="statistics-block">
+
+  <template>
+
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
+      }
+
+      .container {
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
+      }
+
+      .statistics-element {
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+        text-align: center;
+      }
+
+      .counter {
+        font-size: 3em;
+        font-weight: 200;
+      }
+
+      .caption {
+        font-size: .85em;
+      }
+
+      @media (max-width: 600px) {
+        .statistics-element {
+          width: 50%;
+        }
+
+        .statistics-element:nth-child(1),
+        .statistics-element:nth-child(2) {
+          margin-bottom: 40px;
+        }
+      }
+
+      @media (min-width: 601px) {
+        .statistics-element {
+          @apply(--layout-flex);
+        }
+      }
+    </style>
+
+    <div class="container">
+      {% for statistic in statistics %}
+      <div class="statistics-element">
+        <span class="counter">{$ statistic.counter $}</span>
+        <span class="caption">{$ statistic.caption $}</span>
+      </div>
+      {% endfor %}
+    </div>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      class StatisticsBlock {
+
+        beforeRegister() {
+          this.is = this.constructor.name.replace(/\W+/g, '-')
+            .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+        }
+
+      }
+
+      Polymer(StatisticsBlock);
+
+    })();
+  </script>
+
+</dom-module>

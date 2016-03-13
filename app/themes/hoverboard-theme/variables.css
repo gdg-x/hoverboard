@@ -1,0 +1,69 @@
+/*
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+
+Polymer includes a shim for CSS Custom Properties that we can use for application theming.
+Below, you'll find the default palette for the Polymer Starter Kit layout. Feel free to play
+with changing the colors used or generate your own palette of colours at MaterialPalette.com.
+
+See https://www.polymer-project.org/1.0/docs/devguide/styling.html#xscope-styling-details
+for further information on custom CSS properties.
+*/
+
+:root {
+  /* Primary colors */
+  --dark-primary-color: #0097a7;
+  --default-primary-color: #00bcd4;
+  --light-primary-color: #b2ebf2;
+  --text-primary-color: #fff; /* text / icons */
+
+  /* Accent colors */
+  --accent-color: #ff4081;
+  --text-accent-color: #fff; /* text / icons */
+
+  /* Background colors */
+  --primary-background-color: #b2ebf2;
+  --secondary-background-color: #fff;
+
+  /* Text colors */
+  --primary-text-color: #212121;
+  --secondary-text-color: #727272;
+  --disabled-text-color: #bdbdbd;
+
+  /* Other colors */
+  --divider-color: #e8e8e8;
+  --default-backgroud-color: #fafafa;
+
+  /* Footer */
+  --footer-background-color: #fcfcfc;
+  --footer-text-color: #757575;
+
+  /* Tags colors */
+  --general: #bdbdbd;
+  --android: #78c257;
+  --web: #2196f3;
+  --cloud: #3f51b5;
+  --community: #e91e63;
+  --angularjs: #e0343d;
+  --polymer: #d81b60;
+  --dart: #00b4aa;
+  --firebase: #ff9800;
+  --appengine: #0d47a1;
+  --serviceworkers: #311b92;
+  --web-rtc: #7b1fa2;
+  --kubernetes: #326de6;
+  --v8-engine: #006064;
+  --gae: #ffc107;
+  --ndk: #4caf50;
+  --ble: #1565c0;
+  --ci: #cddc39;
+  --tv: #d32f2f;
+  --grpc: #607d8b;
+  --ux: #9c27b0;
+  --material-design: #009688;
+  --entrepreneurship: #673ab7;
+}

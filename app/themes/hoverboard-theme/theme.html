@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="fonts/fonts.css">
+
+<!-- Shared styles between elements and theme -->
+<dom-module id="shared-styles">
+    <template>
+        <style>
+            @import "breakpoints";
+            @import "general";
+        </style>
+    </template>
+</dom-module>
+
+<!-- Theme styles -->
+<style is="custom-style" include="shared-styles">
+    @import "variables";
+    @import "breakpoints";
+    @import "mixins";
+</style>
+
+<link rel="import" href="icons.html">

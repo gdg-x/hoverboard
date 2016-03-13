@@ -1,0 +1,335 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+<link rel="import" href="../../bower_components/marked-element/marked-element.html">
+<link rel="import" href="../../bower_components/disqus-comments/disqus-comments.html">
+
+<link rel="import" href="../blocks/footer-block/footer-block.html">
+<link rel="import" href="../behaviors/utils-behavior.html">
+
+<dom-module id="post-page">
+
+  <template>
+
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+
+        --grid-gutter: 4px;
+        --grid-item-height: 300px;
+      }
+
+      .post-wrapper > .container {
+        padding-top: 0;
+        max-width: 896px;
+      }
+
+      .post-wrapper > .container:not(.latest-post-wrapper) {
+        padding-bottom: 20px;
+      }
+
+      .spinner-wrapper {
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+        @apply(--layout-fit);
+        min-height: 50vh;
+        max-height: 50vh;
+      }
+
+      .post-wrapper {
+        margin-top: 2px;
+        background: #FFFFFF;
+      }
+
+      .post-meta {
+        margin-bottom: 20px;
+        padding: 30px 0 20px;
+        font-size: 13px;
+        color: var(--secondary-text-color);
+        border-bottom: 1px solid var(--divider-color);
+      }
+
+      .latest-post-wrapper {
+        @apply(--layout-vertical);
+        padding-right: var(--grid-gutter);
+        padding-left: var(--grid-gutter);
+      }
+
+      .latest-post {
+        @apply(--layout-flex);
+      }
+
+      .latest-post:nth-of-type(2) {
+        margin-top: 10px;
+      }
+
+      .latest-post-label {
+        margin: 0 var(--grid-gutter);
+        font-size: 14px;
+        color: var(--secondary-text-color);
+      }
+
+      .post {
+        @apply(--layout-vertical);
+        height: var(--grid-item-height);
+        margin: var(--grid-gutter) 0;
+        text-decoration: none;
+      }
+
+      .image {
+        height: 100%;
+        background: no-repeat 50% 50%;
+      }
+
+      .title {
+        @apply(--layout-horizontal);
+        @apply(--layout-center-center);
+        padding: 12px;
+        min-height: 42px;
+        font-size: 20px;
+        text-align: center;
+        letter-spacing: .8px;
+        line-height: 1.05;
+        color: #fff;
+      }
+
+      @media (min-width: 601px) {
+        .latest-post-wrapper {
+          @apply(--layout-horizontal);
+        }
+
+        .latest-post:nth-of-type(2) {
+          margin-top: 0;
+          text-align: right;
+        }
+
+        .post-wrapper {
+          margin-top: 52px;
+        }
+
+        .post {
+          margin: var(--grid-gutter);
+        }
+      }
+    </style>
+
+    <div id="pageHeader" class="container page-header">
+      <h3 class="page-title">[[_post.title]]</h3>
+    </div>
+    <div id="animationWrapper">
+      <div class="post-wrapper">
+        <div class="container" cascaded>
+          <div class="post-meta">
+            <span>Posted: [[_post.date]]</span>
+          </div>
+
+          <marked-element class="post-content" markdown="[[postBody]]">
+            <div class="markdown-html"></div>
+          </marked-element>
+        </div>
+        <div class="container latest-post-wrapper">
+          <div class="latest-post">
+            <template is="dom-if" if="{{_latestPosts.0}}">
+              <span class="latest-post-label">Next post</span>
+              <a data-route="blog/[[_latestPosts.0.id]]" href="{$ baseurl $}/blog/[[_latestPosts.0.id]]"
+                 class="post" cascaded>
+                <iron-image class="image" src="[[_latestPosts.0.image]]"
+                            style$="background-color: [[_latestPosts.0.primaryColor]];" sizing="cover"
+                            preload
+                            fade></iron-image>
+                <div class="title" style$="background-color: [[_latestPosts.0.secondaryColor]];">
+                  [[_latestPosts.0.title]]
+                </div>
+              </a>
+            </template>
+          </div>
+          <div class="latest-post">
+            <template is="dom-if" if="[[_latestPosts.1]]">
+              <span class="latest-post-label">Previous post</span>
+              <a data-route="blog/[[_latestPosts.1.id]]" href="{$ baseurl $}/blog/[[_latestPosts.1.id]]"
+                 class="post" cascaded>
+                <iron-image class="image" src="[[_latestPosts.1.image]]"
+                            style$="background-color: [[_latestPosts.1.primaryColor]];" sizing="cover"
+                            preload
+                            fade></iron-image>
+                <div class="title" style$="background-color: [[_latestPosts.1.secondaryColor]];">
+                  [[_latestPosts.1.title}}
+                </div>
+              </a>
+            </template>
+          </div>
+        </div>
+        <div class="container">
+          <disqus-comments id="disqus" shortname="{$ disqusShortName $}" identifier="[[_post.id]]"
+                           title="[[_post.title]]" https></disqus-comments>
+        </div>
+      </div>
+
+
+      <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}"
+                    cascaded></footer-block>
+    </div>
+
+    <div class="spinner-wrapper">
+      <paper-spinner id="spinner" active></paper-spinner>
+    </div>
+
+    <iron-ajax id="ajax" url="[[_postUrl]]" handle-as="text" last-response="{{postBody}}"
+               on-response="_postLoaded"></iron-ajax>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'post-page',
+
+        behaviors: [
+          Polymer.NeonAnimationRunnerBehavior,
+          Polymer.NeonSharedElementAnimatableBehavior,
+          Polymer.UtilsBehavior
+        ],
+
+        properties: {
+          postId: {
+            type: String,
+            notify: true
+          },
+          posts: Array,
+          heroSettings: {
+            type: Object,
+            notify: true
+          },
+          selected: {
+            type: Boolean,
+            observer: 'updateHeroSettings'
+          },
+          _loaded: {
+            type: Boolean,
+            value: false
+          },
+          _post: Object,
+          _latestPosts: {
+            type: Array,
+            value: []
+          },
+
+          animationConfig: {
+            type: Object,
+            value: function () {
+              var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
+              var cascadedArray = Array.prototype.slice.call(cascaded);
+              return {
+                'entry': [{
+                  name: 'fade-in-animation',
+                  animation: 'fade-in-animation',
+                  node: this,
+                  timing: {
+                    delay: 500
+                  }
+                }],
+                'exit': [{
+                  name: 'cascaded-animation',
+                  animation: 'transform-animation',
+                  transformTo: 'translate3d(0, 100%, 0)',
+                  nodes: cascadedArray
+                }, {
+                  name: 'fade-out-animation',
+                  animation: 'fade-out-animation',
+                  node: this
+                }],
+                'postLoaded': [{
+                  name: 'cascaded-animation',
+                  animation: 'transform-animation',
+                  transformFrom: 'translate3d(0, 100%, 0)',
+                  nodes: cascadedArray,
+                  timing: {
+                    delay: 500
+                  }
+                }, {
+                  name: 'fade-in-animation',
+                  animation: 'fade-in-animation',
+                  nodes: cascadedArray,
+                  timing: {
+                    delay: 500
+                  }
+                }, {
+                  name: 'scale-down-animation',
+                  animation: 'scale-down-animation',
+                  node: this.$.spinner
+                }]
+              };
+            }
+          }
+        },
+
+        observers: [
+          '_postChanged(posts, postId, selected)'
+        ],
+
+        listeners: {
+          'neon-animation-finish': '_onNeonAnimationFinish'
+        },
+
+        updateHeroSettings: function () {
+          if (this._post) {
+            this.heroSettings = {
+              backgroundColor: this._post.primaryColor,
+              backgroundImage: this._post.image,
+              fontColor: '#FFFFFF',
+              tabBarColor: '#FFFFFF'
+            };
+          }
+        },
+
+        _postChanged: function () {
+          if (this.selected && this.postId) {
+            this.$.animationWrapper.style.opacity = 0;
+            this.$.animationWrapper.style.display = 'none';
+            this.$.spinner.style.opacity = 1;
+
+            var postIndex = this._getIndexByProperty(this.posts, 'id', this.postId);
+
+            this._latestPosts[0] = postIndex > 0 ? this.posts[postIndex - 1] : null;
+            this._latestPosts[1] = postIndex < this.posts.length - 1 ? this.posts[postIndex + 1] : null;
+            this.notifyPath('_latestPosts', this._latestPosts.slice());
+
+            this._post = this.posts[postIndex];
+            this.notifyPath('_post.date', new Date(this._post.posted).toDateString().slice(4));
+            this.updateHeroSettings();
+
+            this._postUrl = '{$ baseurl $}/posts/' + this._post.posted + '-' + this.postId + '.markdown';
+            this.$.ajax.generateRequest();
+          }
+        },
+
+        _postLoaded: function () {
+          this._loaded = true;
+          this.async(function () {
+            this.$.animationWrapper.style.opacity = 1;
+            this.$.animationWrapper.style.display = 'block';
+          }, 100);
+          this.playAnimation('postLoaded');
+          this.$.disqus.reset();
+          this.postId = null;
+        },
+
+        _onNeonAnimationFinish: function () {
+          if (this._loaded) {
+            this.$.spinner.style.opacity = 0;
+          }
+        }
+
+      });
+
+    })();
+  </script>
+
+</dom-module>

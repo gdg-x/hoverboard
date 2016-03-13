@@ -1,7 +1,11 @@
-node_modules
-dist
-test/temp
+app/google*.html
+app/scripts/analytics.js
+app/themes/default-theme/fonts/*
 bower_components
+deploy
+dist
+node_modules
+npm-debug.log*
 .tmp
-test/bower_components/
-.publish
+.publish/
+.idea

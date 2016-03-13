@@ -1,0 +1,58 @@
+<head>
+    <meta charset="{$ charset $}">
+    <meta name="description" content="{$ description $}">
+    <meta name="keywords" content="{$ keywords $}">
+    <meta name="author" content="Oleh Zasadnyy, GDG Lviv">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="{$ webtoolsCode $}" />
+    <title>{$ title $}</title>
+
+    <!-- Place favicon.ico in the `app/` directory -->
+    <link rel="shortcut icon" href="{$ baseurl $}/favicon.ico">
+
+    <!-- Canonical link for single page site with more links to same content -->
+    <link rel="canonical" href="{$ url $}/">
+
+    <!-- Chrome for Android theme color -->
+    <meta name="theme-color" content="{$ chromeThemeColor $}">
+
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="{$ baseurl $}/manifest.json">
+
+    <!-- Tile color for Win8 -->
+    <meta name="msapplication-TileColor" content="{$ msapplicationTileColor $}">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="{$ applicationName $}">
+    <link rel="icon" sizes="192x192" href="{$ baseurl $}/images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="{$ appleMobileWebAppTitle $}">
+    <link rel="apple-touch-icon" href="{$ baseurl $}/images/touch/apple-touch-icon.png">
+
+    <!-- Tile icon for Win8 (144x144) -->
+    <meta name="msapplication-TileImage" content="{$ baseurl $}/images/touch/ms-touch-icon-144x144-precomposed.png">
+
+    <!-- Social: Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@{$ social.twitter.nickname $}">
+    <meta name="twitter:title" content="{$ title $}">
+    <meta name="twitter:description" content="{$ description $}">
+    <meta name="twitter:image:src" content="{$ url + baseurl $}/images/social-share.jpg">
+
+    <!-- Social: Facebook / Open Graph -->
+    <meta property="og:title" content="{$ title $}" />
+    <meta property="og:site_name" content="{$ title $}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{$ url + baseurl $}" />
+    <meta property="og:description" content="{$ description $}" />
+    <meta property="og:image" content="{$ url + baseurl $}/images/social-share.jpg" />
+
+
+  <!-- Because this project uses vulcanize this should be your only html import
+      in this file. All other imports should go in base-bundle.html -->
+    <link rel="import" href="/elements/base-bundle.html">
+</head>

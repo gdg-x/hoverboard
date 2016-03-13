@@ -1,0 +1,208 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../bower_components/paper-card/paper-card.html">
+
+<link rel="import" href="../video-dialog/video-dialog.html">
+<link rel="import" href="../../behaviors/utils-behavior.html">
+
+<dom-module id="featured-videos">
+
+  <template>
+
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
+        --iron-icon-fill-color: var(--text-primary-color);
+        --paper-card-background-color: #FFFFFF;
+      }
+
+      .videos-header {
+        @apply(--layout-vertical);
+        @apply(--layout-justified);
+      }
+
+      .controls {
+        margin-bottom: 10px;
+      }
+
+      .videos {
+        @apply(--layout-horizontal);
+        transition: all 0.4s cubic-bezier(0, 0, 0.2, 1);
+        will-change: transition;
+      }
+
+      .video-item {
+        @apply(--layout);
+        padding-right: 24px;
+        width: 100%;
+        min-width: 100%;
+      }
+
+      .card {
+        width: 100%;
+      }
+
+      .header {
+        height: 200px;
+      }
+
+      .thumbnail {
+        @apply(--layout-fit);
+      }
+
+      .play-video {
+        @apply(--layout-fit);
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+        margin: 0 auto;
+        cursor: pointer;
+      }
+
+      .play-icon {
+        --iron-icon-width: 48px;
+        --iron-icon-height: 48px;
+      }
+
+      .title {
+        @apply(--ellipsis);
+        color: var(--primary-text-color);
+      }
+
+      .speakers {
+        @apply(--ellipsis);
+        color: var(--secondary-text-color);
+        font-size: 14px;
+      }
+
+      @media (min-width: 601px) {
+        .videos-header {
+          @apply(--layout-horizontal);
+        }
+
+        .video-item {
+          width: 400px;
+          min-width: 400px;
+        }
+      }
+    </style>
+
+    <div class="container">
+      <div class="videos-header">
+        <h4 class="heading">Featured videos</h4>
+        <div class="controls">
+          <paper-icon-button icon="icons:chevron-left" on-tap="shiftContentLeft"></paper-icon-button>
+          <paper-icon-button icon="icons:chevron-right" on-tap="shiftContentRight"></paper-icon-button>
+        </div>
+      </div>
+      <div id="videos" class="videos">
+        <template is="dom-repeat" items="[[_videos]]" as="video">
+          <div class="video-item">
+            <paper-card class="card">
+              <div class="header paper-card">
+                <iron-image class="thumbnail" src="[[video.thumbnail]]" sizing="cover" preload
+                            fade></iron-image>
+                <div class="play-video" on-tap="_playVideo">
+                  <iron-icon class="play-icon" icon="icons:play"></iron-icon>
+                </div>
+              </div>
+              <div class="paper-card-container">
+                <div class="card-content list">
+                  <div class="title">[[video.title]]</div>
+                  <div class="speakers">[[video.speakers]]</div>
+                </div>
+              </div>
+            </paper-card>
+          </div>
+        </template>
+      </div>
+    </div>
+    <video-dialog id="videoViewer" title="[[_selectedVideo.title]]" youtube-id="[[_selectedVideo.youtubeId]]"
+                  entry-animation="scale-up-animation"
+                  exit-animation="scale-down-animation" modal></video-dialog>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      class FeaturedVideos {
+
+        get behaviors() {
+          return [
+            Polymer.UtilsBehavior
+          ];
+        }
+
+        beforeRegister() {
+          this.is = this.constructor.name.replace(/\W+/g, '-')
+            .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+          this.properties = {
+            videos: {
+              type: Array,
+              observer: '_videosChanged'
+            },
+            _videos: Array,
+            _selectedVideo: Object
+          };
+        }
+
+        _videosChanged() {
+          this._videos = this._randomOrder(this.videos).slice(0, 6);
+        }
+
+        _playVideo(e) {
+          this._selectedVideo = {
+            title: e.model.video.title + ' by ' + e.model.video.speakers,
+            youtubeId: e.model.video.youtubeId
+          };
+          this.$.videoViewer.open();
+        }
+
+        shiftContentLeft() {
+          var transform = this.$.videos.style.transform;
+          var videos = Polymer.dom(this.root).querySelectorAll('.video-item');
+
+          var lastX = transform ? parseInt(transform.split('(')[1].split(',')[0]) : 0;
+
+          var cardRect = videos[videos.length - 1].getBoundingClientRect();
+          var cardWidth = cardRect.width;
+
+          var newX = lastX + cardWidth;
+          if (newX < cardWidth) {
+            this.$.videos.style.transform = 'translate3d(' + newX + 'px, 0, 0)';
+          }
+        }
+
+        shiftContentRight() {
+          var transform = this.$.videos.style.transform;
+          var videos = Polymer.dom(this.root).querySelectorAll('.video-item');
+
+          var lastX = transform ? parseInt(transform.split('(')[1].split(',')[0]) : 0;
+
+          var containerWidth = this.$.videos.getBoundingClientRect().width;
+          var cardRect = videos[videos.length - 1].getBoundingClientRect();
+          var lastCardLeft = cardRect.left;
+          var cardWidth = cardRect.width;
+
+          var newX = lastX - cardWidth;
+          if (lastCardLeft > containerWidth) {
+            this.$.videos.style.transform = 'translate3d(' + newX + 'px, 0, 0)';
+          }
+        }
+
+      }
+
+      Polymer(FeaturedVideos);
+
+    })();
+  </script>
+
+</dom-module>

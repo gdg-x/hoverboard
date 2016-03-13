@@ -1,0 +1,303 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+
+<link rel="import" href="../blocks/truncate-marked-text/truncate-marked-text.html">
+<link rel="import" href="../blocks/speaker-details/speaker-details.html">
+<link rel="import" href="../blocks/footer-block/footer-block.html">
+<link rel="import" href="../behaviors/utils-behavior.html">
+
+<dom-module id="speakers-page">
+
+  <template>
+
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+        --grid-gutter: 8px;
+      }
+
+      .speakers-container {
+        @apply(--layout-vertical);
+        @apply(--layout-wrap);
+      }
+
+      .speaker {
+        @apply(--layout-horizontal);
+        width: 100%;
+        margin: var(--grid-gutter) 0;
+      }
+
+      .card {
+        @apply(--layout-flex);
+        @apply(--layout-vertical);
+        background: #FFFFFF;
+        color: var(--primary-text-color);
+      }
+
+      .card-content {
+        @apply(--layout-vertical);
+        @apply(--layout-flex-auto);
+        padding: 16px;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      .bio {
+        color: var(--primary-text-color);
+      }
+
+      .card-actions {
+        border-top: 1px solid #e8e8e8;
+        padding: 5px 16px;
+        position: relative;
+      }
+
+      .header {
+        position: relative;
+        height: 256px;
+      }
+
+      .photo {
+        @apply(--layout-fit);
+      }
+
+      .photo-overlay {
+        @apply(--layout-fit);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 4%, rgba(0, 0, 0, 0) 50%);
+      }
+
+      .badges {
+        margin: 0;
+        padding: 16px;
+        position: relative;
+        list-style: none;
+        text-align: right;
+      }
+
+      .badge {
+        display: inline-block;
+      }
+
+      .badge:not(:last-of-type):after {
+        color: rgba(255, 255, 255, 0.8);
+        vertical-align: middle;
+        font-size: 14px;
+        content: "\2022";
+      }
+
+      .badge a {
+        color: #FFFFFF;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .bottom-image-text {
+        padding: 16px;
+        position: absolute;
+        bottom: 0;
+        color: #FFFFFF;
+      }
+
+      .name {
+        font-size: 24px;
+      }
+
+      .title {
+        margin-top: -5px;
+        display: block;
+        font-size: 14px;
+      }
+
+      .social-icon {
+        color: var(--secondary-text-color);
+      }
+
+      @media (min-width: 601px) {
+        .speakers-container {
+          @apply(--layout-horizontal);
+          @apply(--layout-center-justified);
+        }
+
+        .speaker {
+          width: calc(100% / 2 - 3 * var(--grid-gutter));
+          margin: var(--grid-gutter) var(--grid-gutter) calc(2 * var(--grid-gutter));
+        }
+
+      }
+
+      @media (min-width: 961px) {
+        .speaker {
+          width: calc(100% / 3 - 4 * var(--grid-gutter));
+          margin: var(--grid-gutter) var(--grid-gutter) calc(3 * var(--grid-gutter));
+        }
+
+      }
+    </style>
+
+    <div class="container page-header" cascaded>
+      <div class="page-title">
+        <h3>Speakers</h3>
+      </div>
+    </div>
+    <div class="container speakers-container">
+      <template is="dom-repeat" items="[[_toArray(speakers)]]" as="speaker" on-dom-change="_updateCascadedNodes">
+        <div class="speaker" cascaded>
+          <paper-material class="card">
+            <div class="header">
+              <iron-image src="[[speaker.photoUrl]]" class="photo placeholder-color" preload fade
+                          sizing="cover"></iron-image>
+              <div class="photo-overlay"></div>
+              <ul class="badges">
+                <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
+                  <li class="badge">
+                    <a href="[[badge.link]]" target="_blank">[[badge.name]]</a>
+                    <paper-tooltip>[[badge.description]]</paper-tooltip>
+                  </li>
+                </template>
+              </ul>
+              <div class="bottom-image-text">
+                <span class="name">[[speaker.name]]</span>
+                <span class="title">[[speaker.company]], [[speaker.country]]</span>
+              </div>
+            </div>
+            <div class="card-content" on-tap="_openSpeaker">
+              <truncate-marked-text class="bio" text="[[speaker.bio]]" characters="220"
+                                    break-last-word></truncate-marked-text>
+            </div>
+            <div class="card-actions">
+              <template is="dom-repeat" items="[[speaker.socials]]" as="social">
+                <a href="[[social.link]]" target="_blank">
+                  <paper-icon-button class="social-icon"
+                                     icon$="icons:{{social.icon}}"></paper-icon-button>
+                </a>
+              </template>
+            </div>
+          </paper-material>
+        </div>
+      </template>
+    </div>
+    <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}" cascaded></footer-block>
+
+    <speaker-details id="speakerDetails" speaker="{{_selectedSpeaker}}"
+                     entry-animation="scale-up-animation" exit-animation="fade-out-animation"
+                     with-backdrop></speaker-details>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'speakers-page',
+
+        behaviors: [
+          Polymer.NeonSharedElementAnimatableBehavior,
+          Polymer.UtilsBehavior
+        ],
+
+        properties: {
+          speakers: {
+            type: Object
+          },
+          selected: {
+            type: Boolean,
+            observer: 'updateHeroSettings'
+          },
+          heroSettings: {
+            type: Object,
+            notify: true
+          },
+          speakerId: {
+            type: String,
+            notify: true
+          },
+          _selectedSpeaker: Object,
+          _heroSettings: {
+            type: Object,
+            /* jshint ignore:start */
+            value: function () {
+              return {% for nav in navigation %}{% if nav.route == 'speakers' %}{$ nav.heroSettings | dump $}{% endif %}{% endfor %};
+            }
+            /* jshint ignore:end */
+          },
+
+          animationConfig: {
+            type: Object,
+            value: function () {
+              return {
+                'entry': [{
+                  name: 'fade-in-animation',
+                  animation: 'fade-in-animation',
+                  node: this,
+                  timing: {
+                    delay: 500
+                  }
+                }],
+                'exit': [{
+                  name: 'fade-out-animation',
+                  animation: 'fade-out-animation',
+                  node: this
+                }]
+              };
+            }
+          }
+        },
+
+        observers: [
+          'openSpeakerDetails(selected, speakerId, speakers)'
+        ],
+
+        updateHeroSettings: function () {
+          this.heroSettings = this.selected ? this._heroSettings : this.heroSettings;
+        },
+
+        openSpeakerDetails: function () {
+          if (this.selected && this.speakerId) {
+            this.async(function () {
+              this._selectedSpeaker = this.speakers[this.speakerId];
+              this.$.speakerDetails.open();
+              this.speakerId = null;
+            }, 500);
+          }
+        },
+
+        _updateCascadedNodes: function () {
+          var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
+          var cascadedArray = Array.prototype.slice.call(cascaded);
+          this.animationConfig.entry.push({
+            name: 'cascaded-animation',
+            animation: 'transform-animation',
+            transformFrom: 'translate3d(0, 100%, 0)',
+            timing: {
+              delay: 500
+            },
+            nodes: cascadedArray
+          });
+          this.animationConfig.exit.push({
+            name: 'cascaded-animation',
+            animation: 'transform-animation',
+            transformTo: 'translate3d(0, 100%, 0)',
+            nodes: cascadedArray
+          });
+        },
+
+        _openSpeaker: function (e) {
+          this._selectedSpeaker = e.model.speaker;
+          this.$.speakerDetails.open();
+        }
+
+      });
+
+    })();
+  </script>
+
+</dom-module>

@@ -1,0 +1,125 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
+
+<link rel="import" href="../blocks/statistics-block/statistics-block.html">
+<link rel="import" href="../blocks/featured-people/featured-people.html">
+<link rel="import" href="../blocks/featured-videos/featured-videos.html">
+<link rel="import" href="../blocks/call-to-action/call-to-action.html">
+<link rel="import" href="../blocks/tickets-block/tickets-block.html">
+<link rel="import" href="../blocks/latest-posts/latest-posts.html">
+<link rel="import" href="../blocks/footer-block/footer-block.html">
+<link rel="import" href="../blocks/photo-block/photo-block.html">
+<link rel="import" href="../blocks/social-feed/social-feed.html">
+<link rel="import" href="../blocks/logos-block/logos-block.html">
+<link rel="import" href="../blocks/map-block/map-block.html">
+
+<dom-module id="home-page">
+
+  <template>
+
+    <statistics-block cascaded></statistics-block>
+    <featured-people people="{{people}}" cascaded></featured-people>
+    <featured-videos videos="{{videos}}" cascaded></featured-videos>
+    <call-to-action cascaded></call-to-action>
+    <photo-block photos='{$ galleryBlock.photos | dump $}' cascaded></photo-block>
+    <tickets-block cascaded></tickets-block>
+    <latest-posts posts="{{posts}}" cascaded></latest-posts>
+    <social-feed source="{$ socialFeed.source $}" cascaded></social-feed>
+    <map-block cascaded></map-block>
+    <logos-block logos="{{logos}}" cascaded></logos-block>
+    <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}" cascaded></footer-block>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      class HomePage {
+
+        get behaviors() {
+          return [
+            Polymer.NeonSharedElementAnimatableBehavior
+          ];
+        }
+
+        beforeRegister() {
+          this.is = this.constructor.name.replace(/\W+/g, '-')
+            .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+          this.properties = {
+            people: Array,
+            posts: Array,
+            logos: Array,
+            videos: Array,
+            selected: {
+              type: Boolean,
+              observer: 'updateHeroSettings'
+            },
+            heroSettings: {
+              type: Object,
+              notify: true
+            },
+            _heroSettings: {
+              type: Object,
+              /* jshint ignore:start */
+              value: function () {
+                return {% for nav in navigation %}{% if nav.route == 'home' %}{$ nav.heroSettings | dump $}{% endif %}{% endfor %};
+              }
+              /* jshint ignore:end */
+            },
+
+            animationConfig: {
+              type: Object,
+              value: function () {
+                var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
+                var cascadedArray = Array.prototype.slice.call(cascaded);
+                return {
+                  'entry': [{
+                    name: 'cascaded-animation',
+                    animation: 'transform-animation',
+                    transformFrom: 'translate3d(0, 100%, 0)',
+                    nodes: cascadedArray,
+                    timing: {
+                      delay: 500
+                    }
+                  }, {
+                    name: 'fade-in-animation',
+                    animation: 'fade-in-animation',
+                    node: this,
+                    timing: {
+                      delay: 500
+                    }
+                  }],
+                  'exit': [{
+                    name: 'cascaded-animation',
+                    animation: 'transform-animation',
+                    transformTo: 'translate3d(0, 100%, 0)',
+                    nodes: cascadedArray
+                  }, {
+                    name: 'fade-out-animation',
+                    animation: 'fade-out-animation',
+                    node: this
+                  }]
+                };
+              }
+            }
+          };
+          this.observers = [
+            'updateHeroSettings(selected)'
+          ];
+        }
+
+        updateHeroSettings() {
+          this.heroSettings = this.selected ? this._heroSettings : this.heroSettings;
+        }
+
+      }
+
+      Polymer(HomePage);
+
+    })();
+  </script>
+
+</dom-module>
