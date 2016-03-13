@@ -2,14 +2,14 @@
 
 > Project Hoverboard is the next generation conference website template after [Project Zeppelin](https://github.com/gdg-x/zeppelin) and more optimized version - [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
 
-> Template was build using [Polymer](http://polymer-project.org) according to [Material Design](http://www.google.com/design/spec/material-design/introduction.html) guidelines.
+> Template was build using [Polymer](http://polymer-project.org) according to [Material Design](http://www.google.com/design/spec/material-design/introduction.html) guidelines and based on [Polymer Starter Kit Plus](https://github.com/StartPolymer/polymer-starter-kit-plus).
 > The site is **responsive**, **fast** and supports **offline access** (if you are using HTTPS protocol).
 
 > Template is brought by [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy) from [GDG Lviv](http://lviv.gdg.org.ua/).
 
 > *Do you like it?* Show your support - please, **star the project**.
 
-### [Live demo](https://hoverboard.firebaseio.com)
+### [Live demo](https://hoverboard.firebaseapp.com/)
 
 
 ## Features
