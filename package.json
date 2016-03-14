@@ -17,7 +17,6 @@
     "gulp-crisper": "1.0.0",
     "gulp-download": "0.0.1",
     "gulp-file": "^0.2.0",
-    "gulp-gh-pages": "^0.5.4",
     "gulp-google-webfonts": "0.0.12",
     "gulp-html-postcss": "^6.0.1",
     "gulp-htmlmin": "^1.1.3",

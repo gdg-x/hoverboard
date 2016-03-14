@@ -13,8 +13,5 @@ module.exports = function ($, config, gulp, environment) { return function () {
 
   } else if (config.deploy.hosting === 'ssh') {
     return require('./deploy-ssh')($, config, gulp, environment);
-
-  } else if (config.deploy.hosting === 'ghp') {
-    return require('./deploy-ghp')($, config, gulp, environment);
   }
 };};
