@@ -40,7 +40,7 @@ module.exports = {
       env: {
         development: 'hoverboard', // subdomain
         staging:     'hoverboard',
-        production:  'hoverboard'
+        production:  'pskp-test'
       }
     },
     // Google App Engine

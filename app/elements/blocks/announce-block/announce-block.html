@@ -1,0 +1,97 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<dom-module id="announce-block">
+  <template>
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .container {
+        @apply(--layout-vertical);
+        padding: 50px 16px 40px;
+      }
+
+      .announce-item {
+        @apply(--layout-vertical);
+        @apply(--layout-flex-5);
+        @apply(--layout-center-justified);
+      }
+
+      .announce-item:not(:first-of-type) {
+        margin-top: 30px;
+      }
+
+      .logo {
+        width: 100%;
+        height: 90px;
+      }
+
+      .logo-annotation {
+        @apply(--layout-self-center);
+        text-align: center;
+      }
+      .description {
+        margin-bottom: 20px;
+        font-size: 16px;
+      }
+
+      .mailchimp-annotation {
+        font-size: 15px;
+      }
+
+      .mailchimp {
+        font-size: 14px;
+      }
+
+      .divider {
+        @apply(--layout-flex);
+      }
+
+      @media (min-width: 601px) {
+        .container {
+          @apply(--layout-horizontal);
+        }
+
+        .announce-item:not(:first-of-type) {
+          margin-top: 0;
+        }
+      }
+    </style>
+    <div class="container">
+      <div class="announce-item">
+        <iron-image class="logo" src="/images/dfua16-logo.svg" sizing="contain" preload fade></iron-image>
+        <div class="logo-annotation">September 09-10, Lviv</div>
+      </div>
+      <span class="divider"></span>
+      <div class="announce-item">
+        <div class="description">{$ description $}</div>
+        <div class="mailchimp-annotation">Subscribe for updates</div>
+        <mailchimp-subscribe class="mailchimp" url="[[ mailchimpUrl ]]"
+                             name="[[ mailchimpName ]]"></mailchimp-subscribe>
+      </div>
+    </div>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      class AnnounceBlock {
+        beforeRegister() {
+          let is = this.constructor.name.replace(/\W+/g, '-')
+            .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+          this.is = is;
+          this.properties = {
+            mailchimpUrl: String,
+            mailchimpName: String
+          };
+        }
+      }
+
+      Polymer(AnnounceBlock);
+    })();
+  </script>
+</dom-module>
