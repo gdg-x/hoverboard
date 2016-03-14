@@ -37,7 +37,7 @@ npm run install:complete # Alias for "sudo npm install -g npm && sudo npm instal
 gulp init # Initialize your app - download fonts from Google Fonts and analytics.js
 ```
 
-*  Modify template to suit your needs. 
+*  [Modify template to suit your needs.](https://github.com/gdg-x/hoverboard#modify-to-suit-your-needs) 
 
 
 ### Requirements
