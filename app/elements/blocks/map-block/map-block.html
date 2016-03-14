@@ -45,6 +45,7 @@
         --paper-content: {
           color: var(--primary-text-color);
         };
+        min-width: 320px;
         max-width: 400px;
         background: #FFFFFF;
       }
@@ -78,6 +79,12 @@
         display: none;
       }
 
+      @media (min-width: 601px) {
+        .card {
+          min-width: 400px;
+        }
+      }
+
       @media (min-width: 961px) {
         :host {
           padding: 100px 0;
@@ -106,10 +113,12 @@
           </div>
           <div class="paper-card-container">
             <div class="card-content list">
+              {% if location.description %}
               <paper-icon-item disabled>
                 <iron-icon icon="icons:feedback" item-icon></iron-icon>
                 <paper-item-body>{$ location.description $}</paper-item-body>
               </paper-icon-item>
+              {% endif %}
               <paper-icon-item disabled>
                 <iron-icon icon="icons:location" item-icon></iron-icon>
                 <paper-item-body two-line>
