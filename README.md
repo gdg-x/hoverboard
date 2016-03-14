@@ -226,6 +226,15 @@ Going to use template? Go on! The only thing we ask - let us know at [lviv@gdg.o
 ## Contributing
 
 Project Hoverboard is still under development and it is open for contributions. Feel free to send PR. If you have any questions, feel free to contact [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy).
+#### General workflow
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Make your changes
+4. Run the tests, adding new ones for your own code if necessary
+5. Commit your changes (`git commit -am 'Added some feature'`)
+6. Push to the branch (`git push origin my-new-feature`)
+7. Create new Pull Request
+
 
 ### Contributors
 See [list of contributors](https://github.com/gdg-x/hoverboard/graphs/contributors)
