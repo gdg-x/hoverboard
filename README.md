@@ -219,6 +219,8 @@ Going to use template? Go on! The only thing we ask - let us know at [lviv@gdg.o
 * Implement Progressive Web App template
 * Better ES2015 support
 * Contact page
+* My schedule
+* Push notification
 
 
 ## Contributing
