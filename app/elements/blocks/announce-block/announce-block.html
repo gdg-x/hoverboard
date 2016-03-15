@@ -11,67 +11,53 @@
       }
 
       .container {
-        @apply(--layout-vertical);
-        padding: 50px 16px 40px;
-      }
-
-      .announce-item {
-        @apply(--layout-vertical);
-        @apply(--layout-flex-5);
-        @apply(--layout-center-justified);
-      }
-
-      .announce-item:not(:first-of-type) {
-        margin-top: 30px;
+        @apply(--layout-horizontal);
+        @apply(--layout-center-center);
+        @apply(--layout-wrap);
       }
 
       .logo {
-        width: 100%;
-        height: 90px;
+        width: 160px;
+        height: 50px;
       }
 
       .logo-annotation {
-        @apply(--layout-self-center);
         text-align: center;
       }
-      .description {
-        margin-bottom: 20px;
-        font-size: 16px;
-      }
 
-      .mailchimp-annotation {
-        font-size: 15px;
-      }
-
-      .mailchimp {
-        font-size: 14px;
-      }
-
-      .divider {
-        @apply(--layout-flex);
-      }
-
-      @media (min-width: 601px) {
-        .container {
-          @apply(--layout-horizontal);
+      @media (max-width: 600px) {
+        .container > * {
+          @apply(--layout-flex);
+          padding: 0 10px;
         }
+        .block-link-wrapper {
+          margin-top: 20px;
+          flex-basis: 100% !important;
+          text-align: center;
+        }
+      }
 
-        .announce-item:not(:first-of-type) {
-          margin-top: 0;
+      @media (max-width: 960px) {
+        .container {
+          @apply(--layout-around-justified);
+        }
+      }
+
+      @media (min-width: 961px) {
+        .logo-annotation {
+          @apply(--layout-self-center);
+          margin: 0 80px;
+          font-size: 22px;
         }
       }
     </style>
-    <div class="container">
-      <div class="announce-item">
-        <iron-image class="logo" src="/images/dfua16-logo.svg" sizing="contain" preload fade></iron-image>
-        <div class="logo-annotation">September 09-10, Lviv</div>
-      </div>
-      <span class="divider"></span>
-      <div class="announce-item">
-        <div class="description">{$ description $}</div>
-        <div class="mailchimp-annotation">Subscribe for updates</div>
-        <mailchimp-subscribe class="mailchimp" url="[[ mailchimpUrl ]]"
-                             name="[[ mailchimpName ]]"></mailchimp-subscribe>
+    <div class="container container-narrow">
+      <iron-image class="logo" src="/images/dfua16-logo.svg" sizing="contain" preload fade></iron-image>
+      <div class="logo-annotation">Join us on September 09-10, Lviv</div>
+      <div class="block-link-wrapper">
+        <a class="block-link" href="{$ url $}" target="_blank">
+          <paper-button class="colorful" raised>Learn more</paper-button>
+        </a>
       </div>
     </div>
   </template>
