@@ -135,7 +135,7 @@
           <div class="latest-post">
             <template is="dom-if" if="{{_latestPosts.0}}">
               <span class="latest-post-label">Next post</span>
-              <a data-route="blog/[[_latestPosts.0.id]]" href="{$ baseurl $}/blog/[[_latestPosts.0.id]]"
+              <a data-route="blog/[[_latestPosts.0.id]]" href="{$ baseUrl $}/blog/[[_latestPosts.0.id]]"
                  class="post" cascaded>
                 <iron-image class="image" src="[[_latestPosts.0.image]]"
                             style$="background-color: [[_latestPosts.0.primaryColor]];" sizing="cover"
@@ -150,7 +150,7 @@
           <div class="latest-post">
             <template is="dom-if" if="[[_latestPosts.1]]">
               <span class="latest-post-label">Previous post</span>
-              <a data-route="blog/[[_latestPosts.1.id]]" href="{$ baseurl $}/blog/[[_latestPosts.1.id]]"
+              <a data-route="blog/[[_latestPosts.1.id]]" href="{$ baseUrl $}/blog/[[_latestPosts.1.id]]"
                  class="post" cascaded>
                 <iron-image class="image" src="[[_latestPosts.1.image]]"
                             style$="background-color: [[_latestPosts.1.primaryColor]];" sizing="cover"
@@ -305,7 +305,7 @@
             this.notifyPath('_post.date', new Date(this._post.posted).toDateString().slice(4));
             this.updateHeroSettings();
 
-            this._postUrl = '{$ baseurl $}/posts/' + this._post.posted + '-' + this.postId + '.markdown';
+            this._postUrl = '{$ baseUrl $}/posts/' + this._post.posted + '-' + this.postId + '.markdown';
             this.$.ajax.generateRequest();
           }
         },

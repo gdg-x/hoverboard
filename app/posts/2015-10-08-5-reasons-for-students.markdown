@@ -1,4 +1,4 @@
-<img src="/images/posts/reasons-to-attend-dfua.JPG" style="width: 50%;"/>
+<img src="/2015/images/posts/reasons-to-attend-dfua.JPG" style="width: 50%;"/>
 
 ### **To meet people**
 A big reason for going to DFUA is to meet and meet up with people. The conference brings together people from all different geographical areas who share a knowledge, and is a great way to meet new people in your field. At a [GDG DevFest Ukraine 2015](http://devfest.gdg.org.ua/) you will be able to get together with people from a wide range of backgrounds.

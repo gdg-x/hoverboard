@@ -1,5 +1,5 @@
 ### Why you should be one of that lucky guys who will buy a ticket?
-<img src="/images/posts/cloud.png" style="width: 100%;"/>
+<img src="/2015/images/posts/cloud.png" style="width: 100%;"/>
 
 * **Improve your skills.** There are no such a lot of events for cloud developers in our country. And it’s more rare case when we can meet such amazing [speakers](http://devfest.gdg.org.ua/#!/speakers). You can ask any question, learn new useful information from leaders in Cloud computing and of course get endless inspiration for self-improvement. Even more - we have great [workshop](http://devfest.gdg.org.ua/#!/speakers/19) on Firebase topic. So you won’t stop only on theory - practical experience will be a great bonus. Just don’t forget to bring your own computer for the workshop.
 

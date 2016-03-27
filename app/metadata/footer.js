@@ -26,7 +26,7 @@ module.exports = {
         links: [
           {
             text: 'Partnership Proposition',
-            url: '/assets/GDG_DevFest_Ukraine_2015_Partnership_Proposition.pdf',
+            url: '/2015/assets/GDG_DevFest_Ukraine_2015_Partnership_Proposition.pdf',
             newTab: true
           },
           {

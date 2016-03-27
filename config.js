@@ -105,5 +105,6 @@ module.exports = {
   // App theme
   theme: 'hoverboard-theme',
   // App version from git
-  version: gitDescribe
+  version: gitDescribe,
+  baseUrl: '/2015'
 };

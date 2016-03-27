@@ -1,4 +1,4 @@
-[<img src="/images/posts/n-ix.jpg" style="width: 50%;"/>](https://www.facebook.com/N.iX.Company)
+[<img src="/2015/images/posts/n-ix.jpg" style="width: 50%;"/>](https://www.facebook.com/N.iX.Company)
 
  **[N-iX](https://www.facebook.com/N.iX.Company)** is a company of about 250 professionals with over decade’s experience in software development. N-iX provides innovative tech companies, software vendors and digital agencies with technology and domain expertise to develop a variety of solutions by building dedicated teams of developers in Lviv and Kyiv.
 

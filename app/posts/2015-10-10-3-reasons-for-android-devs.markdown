@@ -1,5 +1,5 @@
 ### Join Android family at GDG DevFest Ukraine 2015!
-<img src="/images/posts/DevFest-Family.jpg" style="width: 50%;"/>
+<img src="/2015/images/posts/DevFest-Family.jpg" style="width: 50%;"/>
 
 This year we’ll have the biggest GDG DevFest comparing to all previous years. We are growing and developing our communities in Ukraine but also creating more and more communications with GDG chapters all over the world. No wonder that [less than 100 tickets left](http://2event.com/events/312113). But if you, android developer, still have any doubts, just look at **3 main reasons** to visit the event.
 

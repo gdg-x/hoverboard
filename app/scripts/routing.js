@@ -1,12 +1,12 @@
 /*
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
-*/
+ @license
+ Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+ This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+ The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+ Code distributed by Google as part of the polymer project is also
+ subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+ */
 
 /* global page */
 
@@ -15,12 +15,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 // More info: https://visionmedia.github.io/page.js/
 
 // Sets app default base URL
-let baseUrl = '/';
+let baseUrl = '/2015';
 
 if (window.location.port === '') {  // if production
   // Uncomment baseURL below and
   // set baseURL to '/your-pathname/' if running from folder in production
-  // baseUrl = '/polymer-starter-kit-plus/';
 
   // Removes end / from baseUrl which page.base requires for production
   page.base(baseUrl.replace(/\/$/, ''));
@@ -34,8 +33,9 @@ window.addEventListener('upgraded', () => {
 
 // Utility function to listen to an event on a node once.
 function once(node, event, fn, args) {
+  console.log('once');
   var self = this;
-  var listener = function() {
+  var listener = function () {
     fn.apply(self, args);
     node.removeEventListener(event, listener, false);
   };
@@ -43,6 +43,7 @@ function once(node, event, fn, args) {
 }
 
 function closeDrawer(ctx, next) {
+  console.log('closeDrawer');
   function setData() {
     app.closeDrawer();
   }
@@ -79,7 +80,8 @@ page('/', () => {
   setHomePage();
 });
 
-page(baseUrl, () => {
+
+page('/home', () => {
   setHomePage();
 });
 
@@ -169,18 +171,18 @@ page('/schedule/:id', ctx => {
 });
 
 // 404
-page('*', ctx => {
-  function setData() {
-    page.redirect(baseUrl);
-  }
-
-  // Check if element prototype has not been upgraded yet
-  if (!app.upgraded) {
-    once(app, 'upgraded', setData);
-  } else {
-    setData();
-  }
-});
+// page('*', ctx => {
+//   function setData() {
+//     page.redirect(baseUrl);
+//   }
+//
+//   // Check if element prototype has not been upgraded yet
+//   if (!app.upgraded) {
+//     once(app, 'upgraded', setData);
+//   } else {
+//     setData();
+//   }
+// });
 
 page({
   // add #! before urls

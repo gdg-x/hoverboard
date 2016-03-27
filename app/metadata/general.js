@@ -26,7 +26,7 @@ module.exports = {
             latitude: 49.809841,
             longitude: 23.982805
         },
-        images: ['/images/backgrounds/location_1.jpg', '/images/backgrounds/location_2.jpg', '/images/backgrounds/location_3.jpg']
+        images: ['/2015/images/backgrounds/location_1.jpg', '/2015/images/backgrounds/location_2.jpg', '/2015/images/backgrounds/location_3.jpg']
     },
 
     // Contacts

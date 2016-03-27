@@ -1,6 +1,6 @@
 Most of us are sort of shy about approaching people and often worry about saying the wrong thing in conversation. We try to portray confidence, but the truth is, we are not always confident in our ability.
 
-<img src="/images/posts/networking.jpg" style="width: 100%;"/>
+<img src="/2015/images/posts/networking.jpg" style="width: 100%;"/>
 
 Here are some of rules for successful networking:
 

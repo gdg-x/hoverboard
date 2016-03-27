@@ -25,7 +25,7 @@
       <paper-toolbar class="tall">
         <paper-icon-button class="back-button" dialog-dismiss icon="arrow-back"></paper-icon-button>
         <div class="middle fallback-image-wrapper" hidden="{{smallScreen}}">
-          <iron-image class="fallback-image" src="{$ baseurl $}/images/logo-white.svg"
+          <iron-image class="fallback-image" src="{$ baseUrl $}/images/logo-white.svg"
                       alt="{$ title $}"></iron-image>
         </div>
         <div id="title" class="bottom title toolbar-title" hidden="{{!smallScreen}}">[[speaker.name]]</div>
@@ -76,7 +76,7 @@
                   </div>
                   <truncate-marked-text text="[[session.description]]" characters="220"
                                         break-last-word></truncate-marked-text>
-                  <a class="read-more" href="/schedule/[[session.id]]" data-route="schedule" dialog-dismiss>Read
+                  <a class="read-more" href="{$ baseUrl $}/schedule/[[session.id]]" data-route="schedule" dialog-dismiss>Read
                     more</a>
 
                 </div>
@@ -139,7 +139,7 @@
         },
 
         _renderOpened: function () {
-          page.redirect('/' + app.route + '/' + this.speaker.id);
+          page.redirect('{$ baseUrl $}/' + app.route + '/' + this.speaker.id);
           if (this.withBackdrop && window.innerWidth > 960) {
             this.backdropElement.open();
           }
@@ -151,7 +151,7 @@
         },
 
         _renderClosed: function () {
-          page.show('/' + app.route, null, false);
+          page.show('{$ baseUrl $}/' + app.route, null, false);
           document.getElementsByName('theme-color')[0].content = this._previousBrowserColor;
           this.backdropElement.close();
           this.playAnimation('exit');

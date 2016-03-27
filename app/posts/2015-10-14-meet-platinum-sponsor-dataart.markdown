@@ -1,4 +1,4 @@
-<img src="/images/posts/dataart-logo.jpg" style="width: 100%;"/>
+<img src="/2015/images/posts/dataart-logo.jpg" style="width: 100%;"/>
 
 [DataArt](http://www.dataart.com/) is a technology consulting firm that creates end-to-end solutions, from concept and strategy, to design, implementation and support, helping global clients in the [financial services](http://www.dataart.com/industry/financial-software/), [healthcare](http://www.dataart.com/industry/medical-software-development/), [hospitality](http://www.dataart.com/industry/online-travel-solutions/), [media](http://www.dataart.com/industry/publishing-software/media-and-entertainment-software-solutions) and [IoT](http://www.dataart.com/industry/iot-and-m2m-solutions) sectors achieve important business outcomes. Rooted in deep domain knowledge and technology expertise, DataArt designs new products, modernizes enterprise systems and provides managed services delivered by outstanding development teams in the U.S., UK, Central and [Eastern Europe](http://www.dataart.com/software-development-company/location/global-locations), and Latin America.
 

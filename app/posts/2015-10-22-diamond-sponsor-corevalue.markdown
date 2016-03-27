@@ -1,4 +1,4 @@
-<img src="/images/posts/corevalue.jpg" style="width: 100%;"/>
+<img src="/2015/images/posts/corevalue.jpg" style="width: 100%;"/>
 
 ### LEVERAGE OUR EXPERTISE!
 

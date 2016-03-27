@@ -21,7 +21,7 @@
     logger('Web Components aren\'t supported!');
     var script = document.createElement('script');
     script.async = true;
-    script.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
+    script.src = '/2015/bower_components/webcomponentsjs/webcomponents-lite.min.js';
     document.head.appendChild(script);
   } else {
     logger('Web Components are supported!');

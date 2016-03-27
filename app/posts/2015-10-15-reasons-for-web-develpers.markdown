@@ -1,7 +1,7 @@
 There are so many great ways to learn and sharpen your skills these days: you can read blogs, watch how-to videos on YouTube, and attend webinars, just to name a few. Why bother with the time and expense of an in-person workshop or conference like [GDG DevFest Ukraine 2015](http://devfest.gdg.org.ua/)? </br>
 If you, web developer, think there is no place for you at  [DFUA](http://devfest.gdg.org.ua/), you are deeply mistaken, because then you may be missing out on one of the best opportunities to take your game to the next level! Below you’ll find reasons why you should attend [DFUA](http://devfest.gdg.org.ua/)
 
-<img src="/images/posts/web-developer.jpg" style="width: 100%;"/>
+<img src="/2015/images/posts/web-developer.jpg" style="width: 100%;"/>
 
 ### Sharpen the Saw
 You have the greates opportunities to hear more about web-technologies as [Angular](http://devfest.gdg.org.ua/?utm_content=buffer9c658&utm_medium=social&utm_source=facebook.com&utm_campaign=buffer#!/speakers/22), try Polymer on [workshop](http://devfest.gdg.org.ua/?utm_content=buffer9c658&utm_medium=social&utm_source=facebook.com&utm_campaign=buffer#!/speakers/15), find out more about Material Design on [speech](http://devfest.gdg.org.ua/?utm_content=buffer9c658&utm_medium=social&utm_source=facebook.com&utm_campaign=buffer#!/speakers/1). But the main idea of this reason is that sometimes you have to take a break from the “work” of your work to sharpen your skills. A dull axe won’t cut a tree nearly as effectively as a sharp one. Don’t be the woodcutter hacking away at the tree with a dull axe while your competition cuts it down in half the time with a sharp one :)

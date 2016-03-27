@@ -127,7 +127,7 @@ gulp.task('fonts', function() {
 
 // Scan your HTML for assets & optimize them
 gulp.task('html', function() {
-  return gulp.src(['app/*.html', '.tmp/*.html'])
+  return gulp.src(['.tmp/*.html'])
     // Concatenate and minify JavaScript
     .pipe($.if('*.js', $.uglify()))
     .pipe($.useref({searchPath: 'dist'}))
@@ -299,10 +299,10 @@ gulp.task('copy-hosting-config', require(task('copy-hosting-config'))($, config,
 gulp.task('download:analytics', require(task('download-analytics'))($, gulp));
 
 // Fix paths before revision task
-gulp.task('fix-paths-before-revision', require(task('fix-paths'))($, gulp, merge, 'before'));
+gulp.task('fix-paths-before-revision', require(task('fix-paths'))($, gulp, merge, config, 'before'));
 
 // Fix paths after revision task
-gulp.task('fix-paths-after-revision', require(task('fix-paths'))($, gulp, merge, 'after'));
+gulp.task('fix-paths-after-revision', require(task('fix-paths'))($, gulp, merge, config, 'after'));
 
 // Transpile all JS from ES2015 (ES6) to ES5
 gulp.task('js', ['views'], require(task('js-babel'))($, gulp));

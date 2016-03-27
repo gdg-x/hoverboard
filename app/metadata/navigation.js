@@ -5,7 +5,7 @@ module.exports = {
     text: 'Home',
     heroSettings: {
       backgroundColor: '#00BCD4',
-      backgroundImage: '/images/backgrounds/home.png',
+      backgroundImage: '/2015/images/backgrounds/home.png',
       fontColor: '#FFFFFF',
       tabBarColor: '#FFFFFF',
       video: {
