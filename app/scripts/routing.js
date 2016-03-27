@@ -33,7 +33,6 @@ window.addEventListener('upgraded', () => {
 
 // Utility function to listen to an event on a node once.
 function once(node, event, fn, args) {
-  console.log('once');
   var self = this;
   var listener = function () {
     fn.apply(self, args);
@@ -43,7 +42,6 @@ function once(node, event, fn, args) {
 }
 
 function closeDrawer(ctx, next) {
-  console.log('closeDrawer');
   function setData() {
     app.closeDrawer();
   }
