@@ -1,5 +1,11 @@
 var execSync = require('child_process').execSync,
-    gitDescribe = execSync('git describe --tags').toString().replace(/(\r\n|\n|\r)/gm, '');
+  appVersion = null;
+
+try {
+  appVersion = execSync('git describe --tags').toString().replace(/(\r\n|\n|\r)/gm, '');
+} catch(e) {
+  console.log('Warning: Can\'t run "git describe" for determine app version');
+}
 
 module.exports = {
   // Autoprefixer
@@ -105,5 +111,5 @@ module.exports = {
   // App theme
   theme: 'hoverboard-theme',
   // App version from git
-  version: gitDescribe
+  version: appVersion
 };
