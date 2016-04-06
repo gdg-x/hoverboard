@@ -3,160 +3,172 @@
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../../bower_components/paper-card/paper-card.html">
+
+<link rel="import" href="./ticket-element.html">
 
 <dom-module id="tickets-block">
 
-    <template>
+  <template>
 
-        <style include="shared-styles"></style>
-        <style>
-            :host {
-                display: block;
-                background: var(--default-primary-color);
-                color: var(--text-primary-color);
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        --iron-icon-fill-color: var(--text-primary-color);
+        --paper-card-background-color: #FFFFFF;
+        display: block;
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
+      }
+
+      .tickets-wrapper {
+        @apply(--layout-horizontal);
+        @apply(--layout-center-justified);
+      }
+
+      .ticket {
+        @apply(--layout-vertical);
+        width: 100%;
+        min-width: 100%;
+        color: var(--primary-text-color);
+      }
+
+      paper-card {
+        @apply(--layout-vertical);
+        width: 100%;
+        height: 100%;
+        flex: 1;
+      }
+
+      .ticket-name {
+        margin: 20px 0 0;
+        text-align: center;
+        font-size: 22px;
+      }
+
+      .card-content {
+        @apply(--layout-flex);
+      }
+
+      .price {
+        margin: 0 0 30px;
+        font-size: 35px;
+        text-align: center;
+      }
+
+      .info-block {
+        @apply(--layout-horizontal);
+      }
+
+      .info-item {
+        @apply(--layout-flex);
+      }
+
+      .label {
+        display: block;
+        font-size: 12px;
+        text-transform: uppercase;
+        color: var(--secondary-text-color);
+      }
+
+      .additional-info {
+        margin: 20px 0 0;
+        font-size: 14px;
+        color: var(--disabled-text-color);
+        text-align: center;
+      }
+
+      .card-actions {
+        text-align: right;
+      }
+
+      paper-button {
+        font-size: 0.9em;
+      }
+
+      @media (min-width: 601px) {
+        .ticket {
+          padding: 0 5px;
+          width: calc(100% / 3 - 5px);
+          min-width: calc(100% / 3 - 5px);
+        }
+      }
+    </style>
+
+    <div class="container">
+      <div class="block-header">
+        <h4 class="heading">{$ ticketsBlock.title $}</h4>
+      </div>
+      <div class="tickets-wrapper">
+        {% for ticket in ticketsBlock.tickets %}
+
+        <ticket-element>{$ ticket.name $}</ticket-element>
+        <!--<div class="ticket">-->
+          <!--<paper-card>-->
+            <!--<div class="header paper-card">-->
+              <!--<h4 class="ticket-name">{$ ticket.name $}</h4>-->
+            <!--</div>-->
+            <!--<div class="card-content">-->
+              <!--<div class="price">{$ ticket.price $}{$ ticket.currency $}</div>-->
+              <!--<div class="info-block">-->
+                <!--<div class="info-item">-->
+                  <!--<span class="label">Starts</span>-->
+                  <!--<span>{$ ticket.starts $}</span>-->
+                <!--</div>-->
+                <!--<div class="info-item">-->
+                  <!--<span class="label">Ends</span>-->
+                  <!--<span>{$ ticket.ends $}</span>-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<p class="additional-info">{$ ticket.info $}</p>-->
+            <!--</div>-->
+            <!--<div class="card-actions">-->
+              <!--<paper-button class="primary">Buy</paper-button>-->
+            <!--</div>-->
+          <!--</paper-card>-->
+        <!--</div>-->
+        {% endfor %}
+      </div>
+    </div>
+
+
+    <paper-dialog id="ticketsDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal>
+      <p>We have run out all our tickets</p>
+      <div class="buttons">
+        <paper-button dialog-confirm>Close</paper-button>
+      </div>
+    </paper-dialog>
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      class TicketsBlock {
+
+        beforeRegister() {
+          this.is = this.constructor.name.replace(/\W+/g, '-')
+            .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+        }
+
+        openTicketsDialog() {
+          this.fire('iron-signal', {
+            name: 'track-event',
+            data: {
+              category: 'button',
+              action: 'click',
+              label: 'group',
+              value: 'buy-a-ticket'
             }
+          });
+          this.$.ticketsDialog.open();
+        }
 
-            .container {
-                @apply(--layout-vertical);
-                @apply(--layout-wrap);
-                padding-bottom: 35px;
-            }
+      }
 
-            .ticket-name {
-                margin-bottom: -5px;
-                font-size: 30px;
-                font-weight: 200;
-            }
+      Polymer(TicketsBlock);
 
-            .price-block-wrapper {
-                @apply(--layout-vertical);
-            }
-
-            .price-block {
-                @apply(--layout-flex);
-                margin-bottom: 15px;
-                position: relative;
-            }
-
-            .price-block:not(:first-of-type) {
-                margin-top: 30px;
-            }
-
-            .sold-out > *:not(.sold-out-text) {
-                opacity: .3;
-            }
-
-            .sold-out-text {
-                @apply(--layout-vertical);
-                @apply(--layout-center-center);
-                @apply(--layout-fit);
-                font-size: 28px;
-                text-transform: uppercase;
-            }
-
-            .currency {
-                margin-top: 21px;
-                display: inline-block;
-                vertical-align: top;
-            }
-
-            .price {
-                font-size: 70px;
-            }
-
-            .additional-info {
-                margin-top: -5px;
-                font-size: 13px;
-            }
-
-            .details {
-                margin-top: 10px;
-                font-size: 14px;
-            }
-
-            .open-dialog-button {
-                margin-top: 30px;
-            }
-
-            paper-dialog {
-                background: #fff;
-            }
-
-            paper-dialog .buttons {
-                color: initial;
-            }
-
-            @media (min-width: 601px) {
-                .price-block-wrapper {
-                    @apply(--layout-horizontal);
-                }
-
-                .price-block:not(:first-of-type) {
-                    margin: 0;
-                }
-            }
-        </style>
-
-        <div class="container text-center">
-            <h4 class="heading">{$ ticketsBlock.title $}</h4>
-            <div class="price-block-wrapper">
-                {% for ticket in ticketsBlock.tickets %}
-                <div class="price-block text-center {% if ticket.soldOut %}sold-out{% endif %}">
-                    <div class="ticket-name">{$ ticket.name $}</div>
-                    <span class="price">{$ ticket.price $}</span>
-                    <span class="currency">{$ ticket.currency $}</span>
-                    <div class="additional-info">{$ ticket.info $}</div>
-                    {% if ticket.soldOut %}
-                    <div class="sold-out-text">
-                        <span>Sold Out</span>
-                    </div>
-                    {% endif %}
-                </div>
-                {% endfor %}
-            </div>
-            <span class="details">{$ ticketsBlock.details $}</span>
-            <div class="block">
-                <paper-button class="white border-button open-dialog-button" on-tap="openTicketsDialog">Buy a ticket
-                </paper-button>
-            </div>
-        </div>
-        <paper-dialog id="ticketsDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal>
-            <p>We have run out all our tickets</p>
-            <div class="buttons">
-                <paper-button dialog-confirm>Close</paper-button>
-            </div>
-        </paper-dialog>
-    </template>
-
-    <script>
-        (function () {
-            'use strict';
-
-            class TicketsBlock {
-
-                beforeRegister() {
-                    this.is = this.constructor.name.replace(/\W+/g, '-')
-                      .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
-                }
-
-                openTicketsDialog() {
-                    this.fire('iron-signal', {
-                        name: 'track-event',
-                        data: {
-                            category: 'button',
-                            action: 'click',
-                            label: 'group',
-                            value: 'buy-a-ticket'
-                        }
-                    });
-                    this.$.ticketsDialog.open();
-                }
-
-            }
-
-            Polymer(TicketsBlock);
-
-        })();
-    </script>
+    })();
+  </script>
 
 </dom-module>
