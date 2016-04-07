@@ -30,6 +30,27 @@ module.exports = {
   },
   ticketsBlock: {
     title: 'Tickets',
+    // tickets: [{
+    //   name: 'Student',
+    //   price: 400,
+    //   currency: '₴',
+    //   starts: 'May 1',
+    //   ends: 'Sep 8',
+    //   info: 'Requires valid student ID'
+    // }, {
+    //   name: 'Early Bird',
+    //   price: 600,
+    //   currency: '₴',
+    //   starts: 'May 1',
+    //   ends: 'July 1',
+    //   soldOut: true
+    // }, {
+    //   name: 'Lazy Bird',
+    //   price: 800,
+    //   currency: '₴',
+    //   starts: 'July 1',
+    //   ends: 'Sep 8'
+    // }],
     tickets: [{
       name: 'Student',
       price: 400,
@@ -37,19 +58,6 @@ module.exports = {
       starts: 'May 1',
       ends: 'Sep 8',
       info: 'Requires valid student ID'
-    }, {
-      name: 'Early Bird',
-      price: 600,
-      currency: '₴',
-      starts: 'May 1',
-      ends: 'July 1',
-      soldOut: true
-    }, {
-      name: 'Lazy Bird',
-      price: 800,
-      currency: '₴',
-      starts: 'July 1',
-      ends: 'Sep 8'
     }],
     details: 'Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.'
   },

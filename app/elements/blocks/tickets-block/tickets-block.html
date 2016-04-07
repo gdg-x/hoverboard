@@ -102,7 +102,11 @@
       <div class="tickets-wrapper">
         {% for ticket in ticketsBlock.tickets %}
 
-        <ticket-element>{$ ticket.name $}</ticket-element>
+        <ticket-element title="{$ ticket.name $}"
+                        price="{$ ticket.price $}"
+                        currency="{$ ticket.currency $}"
+                        starts="{$ ticket.starts $}"
+                        ends="{$ ticket.ends $}"></ticket-element>
         <!--<div class="ticket">-->
           <!--<paper-card>-->
             <!--<div class="header paper-card">-->

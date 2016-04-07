@@ -10,173 +10,105 @@
       :host {
         --ticket-color: #fff;
         --background-color: var(--default-primary-color);
+        --ticket-height: 200px;
+        --ticket-width: 400px;
+
+        background: var(--ticket-color);
 
         display: block;
-        -webkit-box-shadow: inset 0 0 0 0.25rem var(--ticket-color);
-        height: 12.5rem;
+        position: relative;
         overflow: hidden;
+        /*max-width: var(--ticket-width);*/
+        /*height: var(--ticket-height);*/
+        border-radius: 3px;
+      }
+
+      .inner {
+        @apply(--layout-horizontal);
+        margin-left: 25px;
         position: relative;
-        width: 30rem;
-      }
-      .ticket-inner {
-        box-shadow: 0 0 0 0.5rem var(--ticket-color);
-        border-radius: .5rem;
-        height: 8.5rem;
-        margin: 2rem 2.5rem;
-        position: relative;
-        width: 25rem;
+        color: var(--primary-text-color);
+        border-radius: 3px;
       }
 
-      .ticket-headline {
-        font-size: 2rem;
-        font-weight: bold;
-        padding: 1rem;
-        padding-bottom: 0;
-        text-align: center;
-      }
-
-      .ticket-star {
-        background: linear-gradient(to right, transparent 25%, black 50%, transparent 75%);
-        background-position: 0 50%;
-        background-repeat: no-repeat;
-        background-size: 100% 1px;
-        height: 1rem;
-        width: 100%;
-        text-align: center;
-      }
-      .ticket-star .fa-star-o {
-        background: white;
-        padding: 0 .25rem;
-      }
-
-      .ticket-admit {
-        font-size: 2rem;
-        text-align: center;
-      }
-
-
-      .ticket-numbers {
-        border-top: 0.25rem solid var(--ticket-color);
-        color: var(--ticket-color);
-        font-size: 1.25rem;
-        font-weight: bold;
-        left: 0;
-        letter-spacing: .25rem;
-        height: 5rem;
-        padding: 1.25rem;
-        position: absolute;
-        text-align: center;
-        top: 2.5rem;
-        transform: rotate(90deg) translate(-0.75rem, 3rem);
-        width: 9rem;
-      }
-      .ticket-numbers.second {
-        transform: rotate(-90deg) translate(0.75rem, 19rem);
-      }
-
-      [class*="ticket-edge"] {
+      .punch {
         background: var(--background-color);
-        border: 0.25rem solid var(--ticket-color);
+        border: 3px solid var(--ticket-color);
         border-radius: 50%;
-        height: 3rem;
+        width: 40px;
+        height: 40px;
         position: absolute;
-        width: 3rem;
+        top: 50%;
+        transform: translate3d(-50%, -50%, 0);
       }
 
-      [class*="top"] {
-        top: -1rem;
+      .main {
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+        padding: 20px;
       }
 
-      [class*="bottom"] {
-        top: calc(11.5rem);
+      .side {
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+        width: 50px;
+        border-left: 2px dotted var(--background-color);
       }
 
-      [class*=left] {
-        left: -1rem;
+      .price {
+        font-size: 24px;
+        letter-spacing: 1px;
+        transform: rotate(-90deg);
       }
 
-      [class*=right] {
-        right: -1rem;
+      .headline {
+        font-size: 30px;
       }
 
-      .ticket-punches, .ticket-punches::before, .ticket-punches::after,
-      .ticket-punches-right::before,
-      .ticket-punches-right::after,
-      .ticket-punches-right {
-        background: var(--background-color);
-        border: 0.25rem solid var(--ticket-color);
-        border-radius: 50%;
-        height: 2rem;
-        left: -1rem;
-        position: absolute;
-        top: 6rem;
-        width: 2rem;
-      }
-      .ticket-punches::before,
-      .ticket-punches-right::before, .ticket-punches::after,
-      .ticket-punches-right::after,
-      .ticket-punches-right::before,
-      .ticket-punches-right::after {
-        content: '';
-        display: block;
-        left: -.25rem;
-        top: 0;
-      }
-      .ticket-punches::before,
-      .ticket-punches-right::before,
-      .ticket-punches-right::before {
-        top: -2.25rem;
-      }
-      .ticket-punches::after,
-      .ticket-punches-right::after,
-      .ticket-punches-right::after {
-        top: 1.75rem;
+      .dates {
+        font-size: 16px;
+        color: var(--secondary-text-color);
       }
 
-      .ticket-punches-right {
-        left: 29rem;
-      }
+
 
     </style>
 
-    <div class='ticket-edge-top-left'></div>
-    <div class='ticket-edge-top-right'></div>
-    <div class='ticket-edge-bottom-left'></div>
-    <div class='ticket-edge-bottom-right'></div>
-    <div class='ticket-punches'></div>
-    <div class='ticket-punches-right'></div>
-    <div class='ticket-inner'>
-      <div class='ticket-headline'>
-        <content></content>
+    <div class="punch"></div>
+    <div class="inner">
+      <div class="main">
+        <div class="headline">[[title]]</div>
+        <div class="dates">[[starts]] - [[ends]]</div>
       </div>
-      <div class='ticket-star'>
-        <div class='fa fa-star-o'></div>
+      <div class="side">
+        <div class='price'>[[price]][[currency]]</div>
       </div>
-      <div class='ticket-admit'>
-        Super Ticket
-      </div>
-      <div class='ticket-numbers'>5482144</div>
-      <div class='ticket-numbers second'>5482144</div>
     </div>
 
-  </template>
+    <script>
+      (function () {
+        'use strict';
 
-  <script>
-    (function () {
-      'use strict';
+        class TicketElement {
 
-      class TicketElement {
+          beforeRegister() {
+            this.is = this.constructor.name.replace(/\W+/g, '-')
+              .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
 
-        beforeRegister() {
-          this.is = this.constructor.name.replace(/\W+/g, '-')
-            .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+            this.properties = {
+              title: String,
+              price: Number,
+              currency: String,
+              starts: String,
+              ends: String
+            }
+          }
+
         }
 
-      }
+        Polymer(TicketElement);
 
-      Polymer(TicketElement);
-
-    })();
-  </script>
+      })();
+    </script>
 
 </dom-module>
