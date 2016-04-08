@@ -38,7 +38,7 @@ module.exports = {
     // For info on tool: https://www.firebase.com/docs/hosting/command-line-tool.html
     firebase: {
       env: {
-        development: 'hoverboard', // subdomain
+        development: 'hoverboard-dev', // subdomain
         staging:     'hoverboard',
         production:  'hoverboard'
       }

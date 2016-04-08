@@ -23,74 +23,34 @@
 
       .tickets-wrapper {
         @apply(--layout-horizontal);
+        @apply(--layout-wrap);
         @apply(--layout-center-justified);
       }
 
-      .ticket {
-        @apply(--layout-vertical);
-        width: 100%;
-        min-width: 100%;
-        color: var(--primary-text-color);
-      }
-
-      paper-card {
-        @apply(--layout-vertical);
-        width: 100%;
-        height: 100%;
-        flex: 1;
-      }
-
-      .ticket-name {
-        margin: 20px 0 0;
-        text-align: center;
-        font-size: 22px;
-      }
-
-      .card-content {
-        @apply(--layout-flex);
-      }
-
-      .price {
-        margin: 0 0 30px;
-        font-size: 35px;
-        text-align: center;
-      }
-
-      .info-block {
-        @apply(--layout-horizontal);
-      }
-
-      .info-item {
-        @apply(--layout-flex);
-      }
-
-      .label {
-        display: block;
-        font-size: 12px;
-        text-transform: uppercase;
-        color: var(--secondary-text-color);
-      }
-
-      .additional-info {
-        margin: 20px 0 0;
-        font-size: 14px;
-        color: var(--disabled-text-color);
-        text-align: center;
-      }
-
-      .card-actions {
-        text-align: right;
+      ticket-element {
+        margin: 10px;
+        cursor: pointer;
       }
 
       paper-button {
         font-size: 0.9em;
       }
 
+      paper-dialog {
+        background: #fff;
+      }
+
+      paper-dialog .buttons {
+        color: initial;
+      }
+
       @media (min-width: 601px) {
-        .ticket {
-          padding: 0 5px;
-          width: calc(100% / 3 - 5px);
-          min-width: calc(100% / 3 - 5px);
+        ticket-element {
+          margin: 10px 0;
+        }
+
+        ticket-element:not(:last-of-type) {
+          margin-right: 20px;
         }
       }
     </style>
@@ -102,35 +62,13 @@
       <div class="tickets-wrapper">
         {% for ticket in ticketsBlock.tickets %}
 
-        <ticket-element title="{$ ticket.name $}"
+        <ticket-element type="{$ ticket.name $}"
                         price="{$ ticket.price $}"
                         currency="{$ ticket.currency $}"
                         starts="{$ ticket.starts $}"
-                        ends="{$ ticket.ends $}"></ticket-element>
-        <!--<div class="ticket">-->
-          <!--<paper-card>-->
-            <!--<div class="header paper-card">-->
-              <!--<h4 class="ticket-name">{$ ticket.name $}</h4>-->
-            <!--</div>-->
-            <!--<div class="card-content">-->
-              <!--<div class="price">{$ ticket.price $}{$ ticket.currency $}</div>-->
-              <!--<div class="info-block">-->
-                <!--<div class="info-item">-->
-                  <!--<span class="label">Starts</span>-->
-                  <!--<span>{$ ticket.starts $}</span>-->
-                <!--</div>-->
-                <!--<div class="info-item">-->
-                  <!--<span class="label">Ends</span>-->
-                  <!--<span>{$ ticket.ends $}</span>-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<p class="additional-info">{$ ticket.info $}</p>-->
-            <!--</div>-->
-            <!--<div class="card-actions">-->
-              <!--<paper-button class="primary">Buy</paper-button>-->
-            <!--</div>-->
-          <!--</paper-card>-->
-        <!--</div>-->
+                        ends="{$ ticket.ends $}"
+                        info="{$ ticket.info $}"
+                        on-tap="openTicketsDialog"></ticket-element>
         {% endfor %}
       </div>
     </div>
