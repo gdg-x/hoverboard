@@ -39,14 +39,15 @@ module.exports = {
       info: 'Requires valid student ID'
     }, {
       name: 'Early Bird',
-      price: 600,
+      price: 700,
       currency: '₴',
       starts: 'May 1',
       ends: 'July 1',
+      info: 'Or first 150 tickets',
       soldOut: true
     }, {
       name: 'Lazy Bird',
-      price: 800,
+      price: 900,
       currency: '₴',
       starts: 'July 1',
       ends: 'Sep 8'

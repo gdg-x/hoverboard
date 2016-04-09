@@ -10,6 +10,8 @@
     <style>
       :host {
         @apply(--layout);
+        @apply(--layout-flex);
+        @apply(--layout-justified);
         @apply(--shadow-elevation-2dp);
         @apply(--shadow-transition);
         --ticket-color: #fff;
@@ -22,11 +24,13 @@
       }
 
       :host:hover {
-        @apply(--shadow-elevation-4dp);
+        @apply(--shadow-elevation-6dp);
       }
 
       .inner {
         @apply(--layout-horizontal);
+        @apply(--layout-center-justified);
+        @apply(--layout-flex);
         margin-left: 15px;
         position: relative;
         color: var(--primary-text-color);
@@ -47,7 +51,7 @@
       .main {
         @apply(--layout-vertical);
         @apply(--layout-center-center);
-        margin: 30px 20px;
+        margin: 30px 0;
       }
 
       .side {
@@ -58,11 +62,13 @@
       }
 
       .side-content {
+        color: var(--primary-text-color);
         font-size: 20px;
         letter-spacing: 1px;
         text-transform: uppercase;
         white-space: nowrap;
-        transform: rotate(-90deg);
+        transform: rotate(-90deg) translate3d(0, 0, 0);
+        -webkit-font-smoothing: antialiased;
       }
 
       .headline {
@@ -106,9 +112,9 @@
           <div class="additional-info">[[info]]</div>
         </template>
       </div>
-      <div class="side">
-        <div class="side-content">[[type]]</div>
-      </div>
+    </div>
+    <div class="side">
+      <div class="side-content">[[type]]</div>
     </div>
   </template>
 

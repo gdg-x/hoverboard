@@ -19,6 +19,7 @@
         display: block;
         background: var(--default-primary-color);
         color: var(--text-primary-color);
+        text-align: center;
       }
 
       .tickets-wrapper {
@@ -28,12 +29,24 @@
       }
 
       ticket-element {
-        margin: 10px;
+        margin: 15px;
         cursor: pointer;
       }
 
       paper-button {
         font-size: 0.9em;
+      }
+
+      .details {
+        margin: 10px auto 0;
+        font-size: 14px;
+        max-width: 600px;
+      }
+
+      .buy-button {
+        margin-top: 30px;
+        background: #fff;
+        color: var(--primary-text-color);
       }
 
       paper-dialog {
@@ -46,11 +59,7 @@
 
       @media (min-width: 601px) {
         ticket-element {
-          margin: 10px 0;
-        }
-
-        ticket-element:not(:last-of-type) {
-          margin-right: 20px;
+          max-width: 350px;
         }
       }
     </style>
@@ -61,7 +70,6 @@
       </div>
       <div class="tickets-wrapper">
         {% for ticket in ticketsBlock.tickets %}
-
         <ticket-element type="{$ ticket.name $}"
                         price="{$ ticket.price $}"
                         currency="{$ ticket.currency $}"
@@ -71,6 +79,8 @@
                         on-tap="openTicketsDialog"></ticket-element>
         {% endfor %}
       </div>
+      <div class="details">{$ ticketsBlock.details $}</div>
+      <paper-button class="buy-button" raised on-tap="openTicketsDialog">Buy ticket</paper-button>
     </div>
 
 
