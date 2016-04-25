@@ -9,6 +9,7 @@
     <iron-ajax auto url="[[postsSource]]" handle-as="json" on-response="_reversePosts"></iron-ajax>
     <iron-ajax auto url="[[partnersSource]]" handle-as="json" last-response="{{partners}}"></iron-ajax>
     <iron-ajax auto url="[[scheduleSource]]" handle-as="json" last-response="{{_scheduleRaw}}"></iron-ajax>
+    <iron-ajax auto url="[[teamSource]]" handle-as="json" last-response="{{team}}"></iron-ajax>
   </template>
   <script>
     (function () {
@@ -40,6 +41,10 @@
               type: String,
               value: '{$ baseurl $}/data/schedule.json'
             },
+            teamSource: {
+              type: String,
+              value: '{$ baseurl $}/data/team.json'
+            },
             speakers: {
               type: Array,
               notify: true
@@ -62,6 +67,10 @@
             },
             videos: {
               type: Array,
+              notify: true
+            },
+            team: {
+              type: Object,
               notify: true
             },
             _speakersRaw: Object,

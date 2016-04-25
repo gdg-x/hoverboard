@@ -19,6 +19,7 @@
 <link rel="import" href="pages/home-page.html">
 <link rel="import" href="pages/blog-page.html">
 <link rel="import" href="pages/post-page.html">
+<link rel="import" href="pages/team-page.html">
 
 <dom-module id="hoverboard-app">
 
@@ -32,7 +33,7 @@
     </style>
 
     <app-data speakers="{{speakers}}" sessions="{{sessions}}" posts="{{posts}}" partners="{{partners}}"
-              schedule="{{schedule}}" videos="{{videos}}"></app-data>
+              schedule="{{schedule}}" videos="{{videos}}" team="{{team}}"></app-data>
 
     <paper-drawer-panel id="paperDrawerPanel" responsive-width="599px" force-narrow>
       <drawer-block route="{{route}}" drawer></drawer-block>
@@ -55,6 +56,7 @@
                          speaker-id="{{params.id}}"></speakers-page>
           <schedule-page class="Page" data-route="schedule" schedule="{{schedule}}" sessions="{{sessions}}"
                          hero-settings="{{heroSettings}}" session-id="{{params.id}}"></schedule-page>
+          <team-page class="Page" data-route="team" hero-settings="{{heroSettings}}" team="{{team}}"></team-page>
         </neon-animated-pages>
       </paper-scroll-header-panel>
     </paper-drawer-panel>

@@ -1,0 +1,146 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+
+<link rel="import" href="../blocks/truncate-marked-text/truncate-marked-text.html">
+<link rel="import" href="../blocks/speaker-details/speaker-details.html">
+<link rel="import" href="../blocks/footer-block/footer-block.html">
+<link rel="import" href="../behaviors/utils-behavior.html">
+
+<dom-module id="team-page">
+
+  <template>
+
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <div class="container page-header" cascaded>
+      <div class="page-title">
+        <h3>Team</h3>
+      </div>
+    </div>
+    <div class="container team-container">
+      <template is="dom-repeat" items="[[_toArray(team)]]" as="member" on-dom-change="_updateCascadedNodes">
+        <div class="member" cascaded>
+          <paper-material class="card">
+            <div class="header">
+              <iron-image src="[[member.photoUrl]]" class="photo placeholder-color" preload fade
+                          sizing="cover"></iron-image>
+              <div class="photo-overlay"></div>
+              <div class="bottom-image-text">
+                <span class="name">[[member.name]]</span>
+                <span class="title">[[speaker.company]], [[speaker.country]]</span>
+              </div>
+            </div>
+            <div class="card-content"> </div>
+            <div class="card-actions">
+              <template is="dom-repeat" items="[[team.socials]]" as="social">
+                <a href="[[social.link]]" target="_blank">
+                  <paper-icon-button class="social-icon"
+                                     icon$="icons:{{social.icon}}"></paper-icon-button>
+                </a>
+              </template>
+            </div>
+          </paper-material>
+        </div>
+      </template>
+    </div>
+    <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}" cascaded></footer-block>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'team-page',
+
+        behaviors: [
+          Polymer.NeonSharedElementAnimatableBehavior,
+          Polymer.UtilsBehavior
+        ],
+
+        properties: {
+          team: {
+            type: Object
+          },
+          selected: {
+            type: Boolean,
+            observer: 'updateHeroSettings'
+          },
+          heroSettings: {
+            type: Object,
+            notify: true
+          },
+          _heroSettings: {
+            type: Object,
+            /* jshint ignore:start */
+            value: function () {
+              return {% for nav in navigation %}{% if nav.route == 'team' %}{$ nav.heroSettings | dump $}{% endif %}{% endfor %};
+            }
+            /* jshint ignore:end */
+          },
+
+          animationConfig: {
+            type: Object,
+            value: function () {
+              return {
+                'entry': [{
+                  name: 'fade-in-animation',
+                  animation: 'fade-in-animation',
+                  node: this,
+                  timing: {
+                    delay: 500
+                  }
+                }],
+                'exit': [{
+                  name: 'fade-out-animation',
+                  animation: 'fade-out-animation',
+                  node: this
+                }]
+              };
+            }
+          }
+        },
+
+        updateHeroSettings: function () {
+          this.heroSettings = this.selected ? this._heroSettings : this.heroSettings;
+        },
+
+        _updateCascadedNodes: function () {
+          var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
+          var cascadedArray = Array.prototype.slice.call(cascaded);
+          this.animationConfig.entry.push({
+            name: 'cascaded-animation',
+            animation: 'transform-animation',
+            transformFrom: 'translate3d(0, 100%, 0)',
+            timing: {
+              delay: 500
+            },
+            nodes: cascadedArray
+          });
+          this.animationConfig.exit.push({
+            name: 'cascaded-animation',
+            animation: 'transform-animation',
+            transformTo: 'translate3d(0, 100%, 0)',
+            nodes: cascadedArray
+          });
+        }
+
+      });
+
+    })();
+  </script>
+
+</dom-module>
