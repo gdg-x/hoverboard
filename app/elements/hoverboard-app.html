@@ -8,12 +8,18 @@
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-menu/paper-menu.html">
 <link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../bower_components/app-layout/app-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../bower_components/carbon-route/carbon-location.html">
+<link rel="import" href="../bower_components/carbon-route/carbon-route.html">
 
 
 <link rel="import" href="../themes/hoverboard-theme/theme.html">
 <link rel="import" href="app-data/app-data.html">
 <link rel="import" href="blocks/hero-toolbar/hero-toolbar.html">
 <link rel="import" href="blocks/drawer-block/drawer-block.html">
+<link rel="import" href="blocks/header-block/header-block.html">
 <link rel="import" href="pages/speakers-page.html">
 <link rel="import" href="pages/schedule-page.html">
 <link rel="import" href="pages/home-page.html">
@@ -29,22 +35,36 @@
       :host {
         display: block;
       }
+      app-drawer-layout {
+        @apply(--layout-fit);
+      }
+
+      app-header {
+        background-color: #fff;
+        --app-header-background-rear-layer: {
+          background-color: #ccc;
+        };
+      }
     </style>
 
     <app-data speakers="{{speakers}}" sessions="{{sessions}}" posts="{{posts}}" partners="{{partners}}"
               schedule="{{schedule}}" videos="{{videos}}"></app-data>
+    <iron-media-query query="max-width: 400px" query-matches="{{smallScreen}}"></iron-media-query>
 
-    <paper-drawer-panel id="paperDrawerPanel" responsive-width="599px" force-narrow>
-      <drawer-block route="{{route}}" drawer></drawer-block>
 
-      <paper-scroll-header-panel id="headerPanelMain" class="Main scroll" main>
+    <app-drawer-layout drawer-width="599px" force-narrow>
+      <app-drawer id="drawer" swipe-open>
+        <drawer-block route="{{route}}" drawer></drawer-block>
+      </app-drawer>
 
-        <hero-toolbar route="{{route}}" font-color="{{heroSettings.fontColor}}"
-                      background-color="{{heroSettings.backgroundColor}}"
-                      background-image="{{heroSettings.backgroundImage}}" tab-bar-color="{{heroSettings.tabBarColor}}"
-                      video="{{heroSettings.video}}"></hero-toolbar>
+      <app-header-layout reveals effects="waterfall fade-background">
+        <app-header id="header" effects="waterfall" fixed="[[smallScreen]]" condenses="[[!smallScreen]]"
+                    reveals="[[!smallScreen]]">
+          <header-block route="{{route}}"></header-block>
+        </app-header>
 
-        <neon-animated-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}"
+
+        <neon-animated-pages attr-for-selected="data-route" selected="{{route}}"
                              selected-attribute="selected">
           <home-page class="Page" data-route="home" people="{{speakers}}" posts="{{posts}}" logos="{{partners}}"
                      hero-settings="{{heroSettings}}" videos="{{videos}}"></home-page>
@@ -56,8 +76,36 @@
           <schedule-page class="Page" data-route="schedule" schedule="{{schedule}}" sessions="{{sessions}}"
                          hero-settings="{{heroSettings}}" session-id="{{params.id}}"></schedule-page>
         </neon-animated-pages>
-      </paper-scroll-header-panel>
-    </paper-drawer-panel>
+
+
+      </app-header-layout>
+
+    </app-drawer-layout>
+
+
+    <!--<paper-drawer-panel id="paperDrawerPanel" responsive-width="599px" force-narrow>-->
+
+    <!--<paper-scroll-header-panel id="headerPanelMain" class="Main scroll" main>-->
+
+    <!--<hero-toolbar route="{{route}}" font-color="{{heroSettings.fontColor}}"-->
+    <!--background-color="{{heroSettings.backgroundColor}}"-->
+    <!--background-image="{{heroSettings.backgroundImage}}" tab-bar-color="{{heroSettings.tabBarColor}}"-->
+    <!--video="{{heroSettings.video}}"></hero-toolbar>-->
+
+    <!--<neon-animated-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}"-->
+    <!--selected-attribute="selected">-->
+    <!--<home-page class="Page" data-route="home" people="{{speakers}}" posts="{{posts}}" logos="{{partners}}"-->
+    <!--hero-settings="{{heroSettings}}" videos="{{videos}}"></home-page>-->
+    <!--<blog-page class="Page" data-route="blog" posts="{{posts}}" hero-settings="{{heroSettings}}"></blog-page>-->
+    <!--<post-page class="Page" data-route="post" post-id="{{params.id}}" posts="{{posts}}"-->
+    <!--hero-settings="{{heroSettings}}"></post-page>-->
+    <!--<speakers-page class="Page" data-route="speakers" speakers="{{speakers}}" hero-settings="{{heroSettings}}"-->
+    <!--speaker-id="{{params.id}}"></speakers-page>-->
+    <!--<schedule-page class="Page" data-route="schedule" schedule="{{schedule}}" sessions="{{sessions}}"-->
+    <!--hero-settings="{{heroSettings}}" session-id="{{params.id}}"></schedule-page>-->
+    <!--</neon-animated-pages>-->
+    <!--</paper-scroll-header-panel>-->
+    <!--</paper-drawer-panel>-->
 
     <paper-toast id="infoToast" class="toast" duration="6000"></paper-toast>
 
@@ -88,15 +136,15 @@
         }
 
         scrollPageToTop() {
-          this.$.headerPanelMain.scrollToTop(true);
+//          this.$.headerPanelMain.scrollToTop(true);
         }
 
         closeDrawer() {
-          this.$.paperDrawerPanel.closeDrawer();
+//          this.$.paperDrawerPanel.closeDrawer();
         }
 
         toggleDrawer() {
-          this.$.paperDrawerPanel.togglePanel();
+//          this.$.paperDrawerPanel.togglePanel();
         }
 
       }

@@ -1,0 +1,121 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../../bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
+<link rel="import" href="../../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
+<dom-module id="header-block">
+
+  <template>
+
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        --hero-background: #fff;
+        --hero-color: var(--primary-text-color);
+
+        --paper-toolbar-color: var(--hero-color);
+        --paper-toolbar-background: transparent;
+        --paper-toolbar-height: 120px;
+        --iron-icon-fill-color: var(--hero-color);
+        --tab-text-color: var(--hero-color);
+        --paper-tabs-selection-bar-color: var(--default-primary-color);
+
+        display: block;
+        position: relative;
+        color: var(--hero-color);
+      }
+
+      .logo-wrapper {
+        @apply(--layout-flex);
+      }
+
+      .logo-wrapper a {
+        display: inline-block;
+      }
+
+      .logo {
+        margin-top: 7px;
+        height: 40px;
+        width: 130px;
+      }
+
+      paper-tabs a {
+        color: var(--tab-text-color);
+        transition: color .7s
+      }
+
+      paper-tab {
+        flex: none;
+        padding: 0 10px;
+      }
+
+      .nav-link {
+        @apply(--layout-horizontal);
+        @apply(--layout-center-center);
+        height: 100%;
+        text-transform: uppercase;
+      }
+
+      paper-tab {
+        flex: none;
+        padding: 0 10px;
+      }
+
+      paper-tabs a {
+        color: var(--tab-text-color);
+        transition: color .7s
+      }
+    </style>
+
+    <app-toolbar id="mainToolbar">
+      <div class="navItem leftItem">
+        <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+      </div>
+      <div class="logo-wrapper">
+        <a data-route="home" href="{$ baseurl $}/" hidden$="{{smallScreen}}">
+          <iron-image class="logo" src="{$ baseurl $}/images/logo-white.svg" sizing="contain"
+                      alt="{$ title $}"></iron-image>
+        </a>
+      </div>
+      <div class="navItem">
+        <paper-tabs attr-for-selected="data-route" selected="{{route}}" hidden$="{{smallScreen}}" noink>
+          {% for nav in navigation %}
+          <paper-tab data-route="{$ nav.route $}" link>
+            <a href="{$ nav.permalink $}" class="nav-link">{$ nav.text $}</a>
+          </paper-tab>
+          {% endfor %}
+        </paper-tabs>
+      </div>
+    </app-toolbar>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      class HeaderBlock {
+
+        beforeRegister() {
+          this.is = this.constructor.name.replace(/\W+/g, '-')
+            .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+          this.properties = {
+            route: {
+              type: String,
+              notify: true
+            }
+          };
+        }
+
+      }
+
+      Polymer(HeaderBlock);
+
+    })();
+  </script>
+
+</dom-module>
