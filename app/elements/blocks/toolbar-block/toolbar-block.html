@@ -7,22 +7,20 @@
 <link rel="import" href="../../../bower_components/paper-menu/paper-menu.html">
 <link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 
-<dom-module id="header-block">
+<dom-module id="toolbar-block">
 
   <template>
 
     <style include="shared-styles"></style>
     <style>
       :host {
-        --hero-background: #fff;
         --hero-color: var(--primary-text-color);
 
-        --paper-toolbar-color: var(--hero-color);
-        --paper-toolbar-background: transparent;
-        --paper-toolbar-height: 120px;
+        --paper-tabs: {
+          height: 64px;
+        };
         --iron-icon-fill-color: var(--hero-color);
-        --tab-text-color: var(--hero-color);
-        --paper-tabs-selection-bar-color: var(--default-primary-color);
+        --paper-tabs-selection-bar-color: var(--hero-color);
 
         display: block;
         position: relative;
@@ -66,7 +64,7 @@
       }
 
       paper-tabs a {
-        color: var(--tab-text-color);
+        color: var(--hero-color);
         transition: color .7s
       }
     </style>
@@ -98,7 +96,7 @@
     (function () {
       'use strict';
 
-      class HeaderBlock {
+      class ToolbarBlock {
 
         beforeRegister() {
           this.is = this.constructor.name.replace(/\W+/g, '-')
@@ -107,13 +105,22 @@
             route: {
               type: String,
               notify: true
+            },
+            frontColor: {
+              type: String,
+              observer: '_stylesChanged'
             }
           };
         }
 
+        _stylesChanged() {
+          this.customStyle['--hero-color'] = this.frontColor;
+          this.updateStyles();
+        }
+
       }
 
-      Polymer(HeaderBlock);
+      Polymer(ToolbarBlock);
 
     })();
   </script>

@@ -128,3 +128,7 @@ a,
 [show] {
   opacity: 1 !important;
 }
+
+[hide] {
+  opacity: 0 !important;
+}
