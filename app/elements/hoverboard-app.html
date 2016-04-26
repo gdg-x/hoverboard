@@ -19,11 +19,13 @@
 <link rel="import" href="blocks/hero-toolbar/hero-toolbar.html">
 <link rel="import" href="blocks/drawer-block/drawer-block.html">
 <link rel="import" href="blocks/toolbar-block/toolbar-block.html">
+<link rel="import" href="blocks/head-content/head-content.html">
 <link rel="import" href="pages/speakers-page.html">
 <link rel="import" href="pages/schedule-page.html">
 <link rel="import" href="pages/home-page.html">
 <link rel="import" href="pages/blog-page.html">
 <link rel="import" href="pages/post-page.html">
+<link rel="import" href="effects/fade-effect.html">
 
 <dom-module id="hoverboard-app">
 
@@ -50,7 +52,7 @@
       app-header {
         background-color: var(--hero-background);
         color: var(--hero-color);
-        transition-property: transform, background-color, color;
+        transition-property: transform, background-color, color, height;
         --app-header-background-front-layer: {
           background-image: var(--hero-background-image);
           transition: background-image 0.5s;
@@ -59,23 +61,10 @@
           background-color: var(--hero-background);
         };
       }
-
-      .header-content {
-        padding-top: 120px;
-        padding-bottom: 40px;
-        opacity: 1;
-        transition: opacity 0.5s;
-      }
-
-      .page-title {
-
-      }
     </style>
 
     <app-data speakers="{{speakers}}" sessions="{{sessions}}" posts="{{posts}}" partners="{{partners}}"
               schedule="{{schedule}}" videos="{{videos}}"></app-data>
-    <iron-media-query query="max-width: 400px" query-matches="{{smallScreen}}"></iron-media-query>
-
 
     <app-drawer-layout drawer-width="599px" force-narrow>
       <app-drawer id="drawer" swipe-open>
@@ -83,24 +72,9 @@
       </app-drawer>
 
       <app-header-layout>
-        <app-header id="header" effects="parallax-background blend-background" condenses shadow reveals>
+        <app-header id="header" effects="parallax-background blend-background fade-effect" condenses shadow reveals>
           <toolbar-block route="{{route}}" front-color="{{heroSettings.fontColor}}" primary></toolbar-block>
-
-          <!--<neon-animated-pages attr-for-selected="data-route" selected="{{route}}"-->
-                               <!--entry-animation="fade-in-animation" exit-animation="fade-out-animation">-->
-            <div class="container header-content" data-route="home" hide$="{{_hideHeaderContent()}}">
-                <h3 class="page-title">Home</h3>
-            </div>
-            <!--<div class="container" data-route="blog">-->
-                <!--<h3 class="page-title">Blog</h3>-->
-            <!--</div>-->
-            <!--<div class="container" data-route="speakers">-->
-                <!--<h3 class="page-title">Speaker</h3>-->
-            <!--</div>-->
-            <!--<div class="container" data-route="schedule">-->
-                <!--<h3 class="page-title">Schedule</h3>-->
-            <!--</div>-->
-          <!--</neon-animated-pages>-->
+          <head-content route="{{route}}" fade></head-content>
         </app-header>
 
 
@@ -147,9 +121,6 @@
               observer: '_stylesChanged'
             }
           };
-          this.listeners = {
-            'iron-resize': '_resizeHandler'
-          };
         }
 
         ready() {
@@ -162,11 +133,11 @@
         }
 
         closeDrawer() {
-//          this.$.paperDrawerPanel.closeDrawer();
+          this.$.drawer.close();
         }
 
         toggleDrawer() {
-//          this.$.paperDrawerPanel.togglePanel();
+          this.$.drawer.toggle();
         }
 
         _stylesChanged() {
@@ -175,15 +146,6 @@
           this.customStyle['--hero-background-image'] = 'url(' + this.heroSettings.backgroundImage + ')';
           document.getElementsByName('theme-color')[0].content = this.heroSettings.backgroundColor;
           this.updateStyles();
-        }
-
-        _hideHeaderContent() {
-          console.log(this.$.header.getScrollState());
-          return this.$.header.getScrollState() > 0;
-        }
-
-        _resizeHandler() {
-          console.log(this.$.header.getScrollState());
         }
 
       }

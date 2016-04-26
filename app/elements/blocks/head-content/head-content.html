@@ -1,0 +1,69 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/neon-animation/neon-animated-pages.html">
+
+<dom-module id="head-content">
+
+  <template>
+
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .header-content {
+        padding-top: 120px;
+        padding-bottom: 40px;
+      }
+
+      neon-animatable {
+        position: relative;
+      }
+    </style>
+
+    <div class="container header-content">
+      <neon-animated-pages attr-for-selected="data-route" selected="{{route}}">
+        <neon-animatable data-route="home">
+          <h3 class="page-title">Home</h3>
+        </neon-animatable>
+        <neon-animatable data-route="blog">
+          <h3 class="page-title">Blog</h3>
+        </neon-animatable>
+        <neon-animatable data-route="speakers">
+          <h3 class="page-title">Speaker</h3>
+        </neon-animatable>
+        <neon-animatable data-route="schedule">
+          <h3 class="page-title">Schedule</h3>
+        </neon-animatable>
+      </neon-animated-pages>
+    </div>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      class HeadContent {
+
+        beforeRegister() {
+          this.is = this.constructor.name.replace(/\W+/g, '-')
+            .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+          this.properties = {
+            route: {
+              type: String,
+              notify: true
+            }
+          };
+        }
+
+      }
+
+      Polymer(HeadContent);
+
+    })();
+  </script>
+
+</dom-module>

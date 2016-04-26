@@ -1,10 +1,10 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 
+<link rel="import" href="../../../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../bower_components/iron-image/iron-image.html">
-<link rel="import" href="../../../bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
-<link rel="import" href="../../../bower_components/paper-toolbar/paper-toolbar.html">
-<link rel="import" href="../../../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 
 <dom-module id="toolbar-block">
@@ -69,9 +69,11 @@
       }
     </style>
 
+    <iron-media-query query="(max-width: 599px)" query-matches="{{smallScreen}}"></iron-media-query>
+
     <app-toolbar id="mainToolbar">
       <div class="navItem leftItem">
-        <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
+        <paper-icon-button icon="menu" on-tap="togglePanel" hidden$="{{!smallScreen}}"></paper-icon-button>
       </div>
       <div class="logo-wrapper">
         <a data-route="home" href="{$ baseurl $}/" hidden$="{{smallScreen}}">
@@ -111,6 +113,10 @@
               observer: '_stylesChanged'
             }
           };
+        }
+
+        togglePanel() {
+          app.toggleDrawer();
         }
 
         _stylesChanged() {

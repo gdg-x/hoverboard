@@ -1,0 +1,22 @@
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/app-scroll-effects-behavior.html">
+
+<script>
+  (function () {
+    'use strict';
+    Polymer.AppLayout.scrollEffects['fade-effect'] = {
+      setUp: function setUp(config) {
+        var fade = Polymer.dom(this).querySelector('[fade]');
+
+        var duration = config.duration || '0.5s';
+        fade.style.willChange = 'opacity';
+        fade.style.webkitTransform = 'translateZ(0)';
+        fade.style.transitionProperty = 'opacity';
+        fade.style.transitionDuration = duration;
+      },
+      run: function run(p, y) {
+        var fade = Polymer.dom(this).querySelector('[fade]');
+        fade.style.opacity = p >= 0.4 ? 0 : 1;
+      }
+    };
+  })();
+</script>
