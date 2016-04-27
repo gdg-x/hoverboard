@@ -76,7 +76,7 @@
         <paper-icon-button icon="menu" on-tap="togglePanel" hidden$="{{!smallScreen}}"></paper-icon-button>
       </div>
       <div class="logo-wrapper">
-        <a data-route="home" href="{$ baseurl $}/" hidden$="{{smallScreen}}">
+        <a data-route="home" href="{$ baseurl $}/" hidden$="{{smallScreen}}" hide$="[[hideLogo]]">
           <iron-image class="logo" src="{$ baseurl $}/images/logo-white.svg" sizing="contain"
                       alt="{$ title $}"></iron-image>
         </a>
@@ -111,7 +111,8 @@
             frontColor: {
               type: String,
               observer: '_stylesChanged'
-            }
+            },
+            hideLogo: Boolean
           };
         }
 

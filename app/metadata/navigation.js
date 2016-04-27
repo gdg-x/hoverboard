@@ -12,7 +12,8 @@ module.exports = {
         title: 'GDG DevFest Ukraine 2015',
         youtubeId: 'DfMnJAzOFng',
         text: 'See how it was in 2015'
-      }
+      },
+      hideLogo: true
     }
   }, {
     route: 'blog',

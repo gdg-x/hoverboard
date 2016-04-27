@@ -62,6 +62,10 @@
         };
       }
 
+      .image-overlay-wrapper {
+        @apply(--layout-fit);
+      }
+
       toolbar-block {
         z-index: 1;
       }
@@ -77,7 +81,11 @@
 
       <app-header-layout>
         <app-header id="header" effects="parallax-background blend-background fade-effect" condenses shadow reveals>
-          <toolbar-block route="{{route}}" front-color="{{heroSettings.fontColor}}" primary></toolbar-block>
+          <div class="image-overlay-wrapper" show$="[[heroSettings.backgroundImage]]">
+            <div class="image-overlay" fade></div>
+          </div>
+          <toolbar-block route="{{route}}" front-color="{{heroSettings.fontColor}}"
+                         hide-logo="[[heroSettings.hideLogo]]" primary></toolbar-block>
           <head-content route="{{route}}" header-title="{{heroSettings.title}}" fade></head-content>
         </app-header>
 
@@ -148,6 +156,9 @@
           this.customStyle['--hero-background'] = this.heroSettings.backgroundColor;
           this.customStyle['--hero-color'] = this.heroSettings.fontColor;
           this.customStyle['--hero-background-image'] = 'url(' + this.heroSettings.backgroundImage + ')';
+          this.customStyle['--hero-background-gradient'] = 'linear-gradient(to bottom, ' +
+            this.heroSettings.backgroundColor + ' 0%, rgba(0, 0, 0, 0) 35%, ' +
+            this.heroSettings.backgroundColor + ' 140%)';
           document.getElementsByName('theme-color')[0].content = this.heroSettings.backgroundColor;
           this.updateStyles();
         }

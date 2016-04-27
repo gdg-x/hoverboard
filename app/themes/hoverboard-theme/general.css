@@ -29,6 +29,10 @@ paper-button.colorful {
   color: var(--default-primary-color);
 }
 
+paper-button.primary {
+  background: var(--default-primary-color);
+}
+
 paper-button[raised].colorful {
   background: var(--default-primary-color);
   color: var(--text-primary-color);
@@ -126,9 +130,11 @@ a,
 }
 
 [show] {
+  transition: opacity 0.5s;
   opacity: 1 !important;
 }
 
 [hide] {
+  transition: opacity 0.5s;
   opacity: 0 !important;
 }

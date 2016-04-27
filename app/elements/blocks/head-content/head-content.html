@@ -34,36 +34,76 @@
         height: 100%;
       }
 
+      .home-wrapper {
+        width: 100%;
+        font-size: 18px;
+      }
+
+      .logo {
+        margin-bottom: 10px;
+        width: 240px;
+        min-height: 80px;
+      }
+
+      .motto {
+        font-size: 22px;
+        text-transform: uppercase;
+      }
+
+      .action-buttons {
+        margin-top: 20px;
+        text-align: right;
+      }
+
+      paper-button {
+        font-size: 0.8em;
+      }
+
+      @media (min-width: 601px) {
+        .home-wrapper {
+          width: 50%;
+        }
+      }
+
     </style>
 
     <app-toolbar>
-        <neon-animated-pages attr-for-selected="data-route" selected="{{route}}">
-          <animatable-content data-route="home">
-            <div class="container header-content">
-              <h3 class="page-title">Home</h3>
+      <neon-animated-pages attr-for-selected="data-route" selected="{{route}}">
+        <animatable-content data-route="home">
+          <div class="container header-content">
+            <div class="home-wrapper">
+              <iron-image class="logo" src="{$ baseurl $}/images/logo-light.svg" sizing="contain"
+                          alt="{$ title $}"></iron-image>
+              <h2 class="motto">{$ dates $}</h2>
+              <p class="detail">{$ description $}</p>
+              <div class="action-buttons">
+                <paper-button>Become a speaker</paper-button>
+                <paper-button class="primary">Buy a ticket</paper-button>
+              </div>
             </div>
-          </animatable-content>
-          <animatable-content data-route="blog">
-            <div class="container header-content">
-              <h3 class="page-title">Blog</h3>
-            </div>
-          </animatable-content>
-          <animatable-content data-route="speakers">
-            <div class="container header-content">
+          </div>
+        </animatable-content>
+        <animatable-content data-route="blog">
+          <div class="container header-content">
+            <h3 class="page-title">Blog</h3>
+          </div>
+        </animatable-content>
+        <animatable-content data-route="speakers">
+          <div class="container header-content">
             <h3 class="page-title">Speaker</h3>
-              </div>
-          </animatable-content>
-          <animatable-content data-route="schedule">
-            <div class="container header-content">
+          </div>
+        </animatable-content>
+        <animatable-content data-route="schedule">
+          <div class="container header-content">
             <h3 class="page-title">Schedule</h3>
-              </div>
-          </animatable-content>
-          <animatable-content data-route="post">
-            <div class="container header-content">
+          </div>
+        </animatable-content>
+        <animatable-content data-route="post">
+          <div class="container header-content">
             <h3 class="page-title">[[headerTitle]]</h3>
-              </div>
-          </animatable-content>
-        </neon-animated-pages>
+          </div>
+        </animatable-content>
+      </neon-animated-pages>
     </app-toolbar>
 
   </template>

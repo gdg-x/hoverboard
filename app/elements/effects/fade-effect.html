@@ -5,17 +5,22 @@
     'use strict';
     Polymer.AppLayout.scrollEffects['fade-effect'] = {
       setUp: function setUp(config) {
-        var fade = Polymer.dom(this).querySelector('[fade]');
+        var fades = Polymer.dom(this).querySelectorAll('[fade]');
 
         var duration = config.duration || '0.5s';
-        fade.style.willChange = 'opacity, transform';
-        fade.style.webkitTransform = 'translateZ(0)';
-        fade.style.transitionProperty = 'opacity, transform';
-        fade.style.transitionDuration = duration;
+
+        for (var i = 0, length = fades.length; i < length; i++) {
+          fades[i].style.willChange = 'opacity, transform';
+          fades[i].style.webkitTransform = 'translateZ(0)';
+          fades[i].style.transitionProperty = 'opacity, transform';
+          fades[i].style.transitionDuration = duration;
+        }
       },
       run: function run(p, y) {
-        var fade = Polymer.dom(this).querySelector('[fade]');
-        fade.style.opacity = p >= 0.4 ? 0 : 1;
+        var fades = Polymer.dom(this).querySelectorAll('[fade]');
+        for (var i = 0, length = fades.length; i < length; i++) {
+          fades[i].style.opacity = p >= 0.4 ? 0 : 1;
+        }
       }
     };
   })();
