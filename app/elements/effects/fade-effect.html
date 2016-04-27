@@ -8,9 +8,9 @@
         var fade = Polymer.dom(this).querySelector('[fade]');
 
         var duration = config.duration || '0.5s';
-        fade.style.willChange = 'opacity';
+        fade.style.willChange = 'opacity, transform';
         fade.style.webkitTransform = 'translateZ(0)';
-        fade.style.transitionProperty = 'opacity';
+        fade.style.transitionProperty = 'opacity, transform';
         fade.style.transitionDuration = duration;
       },
       run: function run(p, y) {

@@ -2,6 +2,7 @@
 
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="./animatable-content.html">
 
 <dom-module id="head-content">
 
@@ -11,34 +12,59 @@
     <style>
       :host {
         display: block;
+        overflow: hidden;
+      }
+
+      app-toolbar {
+        height: 360px;
       }
 
       .header-content {
-        padding-top: 120px;
+        @apply(--layout-vertical-reverse);
+        padding-top: 0;
         padding-bottom: 40px;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
       }
 
-      neon-animatable {
-        position: relative;
+      neon-animated-pages {
+        width: 100%;
+        height: 100%;
       }
+
     </style>
 
-    <div class="container header-content">
-      <neon-animated-pages attr-for-selected="data-route" selected="{{route}}">
-        <neon-animatable data-route="home">
-          <h3 class="page-title">Home</h3>
-        </neon-animatable>
-        <neon-animatable data-route="blog">
-          <h3 class="page-title">Blog</h3>
-        </neon-animatable>
-        <neon-animatable data-route="speakers">
-          <h3 class="page-title">Speaker</h3>
-        </neon-animatable>
-        <neon-animatable data-route="schedule">
-          <h3 class="page-title">Schedule</h3>
-        </neon-animatable>
-      </neon-animated-pages>
-    </div>
+    <app-toolbar>
+        <neon-animated-pages attr-for-selected="data-route" selected="{{route}}">
+          <animatable-content data-route="home">
+            <div class="container header-content">
+              <h3 class="page-title">Home</h3>
+            </div>
+          </animatable-content>
+          <animatable-content data-route="blog">
+            <div class="container header-content">
+              <h3 class="page-title">Blog</h3>
+            </div>
+          </animatable-content>
+          <animatable-content data-route="speakers">
+            <div class="container header-content">
+            <h3 class="page-title">Speaker</h3>
+              </div>
+          </animatable-content>
+          <animatable-content data-route="schedule">
+            <div class="container header-content">
+            <h3 class="page-title">Schedule</h3>
+              </div>
+          </animatable-content>
+          <animatable-content data-route="post">
+            <div class="container header-content">
+            <h3 class="page-title">[[headerTitle]]</h3>
+              </div>
+          </animatable-content>
+        </neon-animated-pages>
+    </app-toolbar>
 
   </template>
 
@@ -55,7 +81,8 @@
             route: {
               type: String,
               notify: true
-            }
+            },
+            headerTitle: String
           };
         }
 
