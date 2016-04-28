@@ -200,13 +200,13 @@
             notify: true
           },
           posts: Array,
-          heroSettings: {
+          headerSettings: {
             type: Object,
             notify: true
           },
           selected: {
             type: Boolean,
-            observer: 'updateHeroSettings'
+            observer: 'updateHeaderSettings'
           },
           _loaded: {
             type: Boolean,
@@ -275,9 +275,9 @@
           'neon-animation-finish': '_onNeonAnimationFinish'
         },
 
-        updateHeroSettings: function () {
+        updateHeaderSettings: function () {
           if (this._post) {
-            this.heroSettings = {
+            this.headerSettings = {
               backgroundColor: this._post.primaryColor,
               backgroundImage: this._post.image,
               fontColor: '#FFFFFF',
@@ -301,7 +301,7 @@
 
             this._post = this.posts[postIndex];
             this.notifyPath('_post.date', new Date(this._post.posted).toDateString().slice(4));
-            this.updateHeroSettings();
+            this.updateHeaderSettings();
 
             this._postUrl = '{$ baseurl $}/posts/' + this._post.posted + '-' + this.postId + '.markdown';
             this.$.ajax.generateRequest();

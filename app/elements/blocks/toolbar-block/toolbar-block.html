@@ -14,17 +14,17 @@
     <style include="shared-styles"></style>
     <style>
       :host {
-        --hero-color: var(--primary-text-color);
+        --header-color: #fff;
 
         --paper-tabs: {
           height: 64px;
         };
-        --iron-icon-fill-color: var(--hero-color);
-        --paper-tabs-selection-bar-color: var(--hero-color);
+        --iron-icon-fill-color: var(--header-color);
+        --paper-tabs-selection-bar-color: var(--header-color);
 
         display: block;
         position: relative;
-        color: var(--hero-color);
+        color: var(--header-color);
       }
 
       .logo-wrapper {
@@ -64,7 +64,7 @@
       }
 
       paper-tabs a {
-        color: var(--hero-color);
+        color: var(--header-color);
         transition: color .7s
       }
     </style>
@@ -121,7 +121,7 @@
         }
 
         _stylesChanged() {
-          this.customStyle['--hero-color'] = this.frontColor;
+          this.customStyle['--header-color'] = this.frontColor;
           this.updateStyles();
         }
 

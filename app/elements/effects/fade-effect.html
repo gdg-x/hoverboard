@@ -10,9 +10,9 @@
         var duration = config.duration || '0.5s';
 
         for (var i = 0, length = fades.length; i < length; i++) {
-          fades[i].style.willChange = 'opacity, transform';
+          fades[i].style.willChange = 'opacity, transform, height';
           fades[i].style.webkitTransform = 'translateZ(0)';
-          fades[i].style.transitionProperty = 'opacity, transform';
+          fades[i].style.transitionProperty = 'opacity, transform, height';
           fades[i].style.transitionDuration = duration;
         }
       },
