@@ -3,7 +3,6 @@
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-animatable.html">
 
@@ -18,18 +17,7 @@
     <style>
       :host {
         display: block;
-        --paper-tabs-selection-bar-color: #FFFFFF;
-        --paper-tab-ink: rgba(255, 255, 255, 0.2);
         --hero-color: var(--default-primary-color);
-        --paper-tab-content: {
-          font-weight: 400 !important;
-        };
-        --paper-tab: {
-          color: #FFFFFF;
-          font-weight: 400;
-          text-transform: uppercase;
-          flex: none;
-        };
         --paper-menu: {
           color: var(--disabled-text-color);
         };
@@ -45,10 +33,7 @@
 
       .schedule-container {
         @apply(--layout-vertical);
-      }
-
-      .schedule-tabs {
-        margin-top: -66px;
+        padding: 0 16px;
       }
 
       .legend {
@@ -242,19 +227,8 @@
       }
     </style>
 
-    <div class="container page-header" cascaded>
-      <div class="page-title">
-        <h3>Schedule</h3>
-      </div>
-    </div>
     <div class="container schedule-container">
-      <paper-tabs class="schedule-tabs" selected="{{_selectedDay}}">
-        <template is="dom-repeat" items="[[schedule]]" as="day">
-          <paper-tab>[[day.dateReadable]]</paper-tab>
-        </template>
-      </paper-tabs>
-
-      <neon-animated-pages selected="{{_selectedDay}}" entry-animation="[[_entryAnimation]]"
+      <neon-animated-pages selected="{{selectedDay}}" entry-animation="[[_entryAnimation]]"
                            exit-animation="[[_exitAnimation]]">
         <template is="dom-repeat" items="[[schedule]]" as="day">
           <neon-animatable>
@@ -369,8 +343,9 @@
           },
           _entryAnimation: String,
           _exitAnimation: String,
-          _selectedDay: {
+          selectedDay: {
             type: Number,
+            notify: true,
             value: 0,
             observer: '_changeDay'
           },

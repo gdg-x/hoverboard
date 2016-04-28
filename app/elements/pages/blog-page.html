@@ -86,11 +86,6 @@
       }
     </style>
 
-    <div class="container page-header" cascaded>
-      <div class="page-title">
-        <h3>Blog</h3>
-      </div>
-    </div>
     <div class="container posts-container">
       <template is="dom-repeat" items="[[posts]]" as="post" on-dom-change="_updateCascadedNodes">
         <a data-route="blog/[[post.id]]" href="{$ baseurl $}/blog/[[post.id]]" class="post"

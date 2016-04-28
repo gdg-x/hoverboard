@@ -64,6 +64,7 @@
 
       .image-overlay-wrapper {
         @apply(--layout-fit);
+        opacity: 0;
       }
 
       toolbar-block {
@@ -86,7 +87,7 @@
           </div>
           <toolbar-block route="{{route}}" front-color="{{heroSettings.fontColor}}"
                          hide-logo="[[heroSettings.hideLogo]]" primary></toolbar-block>
-          <head-content route="{{route}}" header-title="{{heroSettings.title}}" fade></head-content>
+          <head-content route="{{route}}" header-title="{{heroSettings.title}}" schedule="{{schedule}}" selected-day="{{selectedDay}}" fade></head-content>
         </app-header>
 
 
@@ -100,7 +101,7 @@
           <speakers-page class="Page" data-route="speakers" speakers="{{speakers}}" hero-settings="{{heroSettings}}"
                          speaker-id="{{params.id}}"></speakers-page>
           <schedule-page class="Page" data-route="schedule" schedule="{{schedule}}" sessions="{{sessions}}"
-                         hero-settings="{{heroSettings}}" session-id="{{params.id}}"></schedule-page>
+                         hero-settings="{{heroSettings}}" session-id="{{params.id}}" selected-day="{{selectedDay}}"></schedule-page>
         </neon-animated-pages>
 
 

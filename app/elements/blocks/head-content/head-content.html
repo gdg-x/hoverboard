@@ -2,6 +2,8 @@
 
 <link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../../../bower_components/paper-tabs/paper-tabs.html">
+
 <link rel="import" href="./animatable-content.html">
 
 <dom-module id="head-content">
@@ -11,6 +13,17 @@
     <style include="shared-styles"></style>
     <style>
       :host {
+        --paper-tabs-selection-bar-color: #FFFFFF;
+        --paper-tab-ink: rgba(255, 255, 255, 0.2);
+        --paper-tab-content: {
+          font-weight: 400 !important;
+        };
+        --paper-tab: {
+          color: #FFFFFF;
+          font-weight: 400;
+          text-transform: uppercase;
+          flex: none;
+        };
         display: block;
         overflow: hidden;
       }
@@ -27,6 +40,10 @@
         width: 100%;
         height: 100%;
         box-sizing: border-box;
+      }
+
+      .reset-padding-bottom {
+        padding-bottom: 0;
       }
 
       neon-animated-pages {
@@ -62,6 +79,7 @@
       @media (min-width: 601px) {
         .home-wrapper {
           width: 50%;
+          max-width: 500px;
         }
       }
 
@@ -94,8 +112,15 @@
           </div>
         </animatable-content>
         <animatable-content data-route="schedule">
-          <div class="container header-content">
-            <h3 class="page-title">Schedule</h3>
+          <div class="container header-content reset-padding-bottom">
+            <div>
+              <h3 class="page-title">Schedule</h3>
+              <paper-tabs class="schedule-tabs" selected="{{selectedDay}}" cascaded>
+                <template is="dom-repeat" items="[[schedule]]" as="day">
+                  <paper-tab>[[day.dateReadable]]</paper-tab>
+                </template>
+              </paper-tabs>
+            </div>
           </div>
         </animatable-content>
         <animatable-content data-route="post">
@@ -122,7 +147,13 @@
               type: String,
               notify: true
             },
-            headerTitle: String
+            headerTitle: String,
+            schedule: Array,
+            selectedDay: {
+              type: Number,
+              notify: true,
+              value: 0
+            }
           };
         }
 
