@@ -20,6 +20,7 @@
 <link rel="import" href="blocks/drawer-block/drawer-block.html">
 <link rel="import" href="blocks/toolbar-block/toolbar-block.html">
 <link rel="import" href="blocks/head-content/head-content.html">
+<link rel="import" href="blocks/video-dialog/video-dialog.html">
 <link rel="import" href="pages/speakers-page.html">
 <link rel="import" href="pages/schedule-page.html">
 <link rel="import" href="pages/home-page.html">
@@ -50,9 +51,6 @@
       }
 
       app-header {
-        background-color: var(--hero-background);
-        color: var(--hero-color);
-        transition-property: transform, background-color, color, height;
         --app-header-background-front-layer: {
           background-image: var(--hero-background-image);
           transition: background-image 0.5s;
@@ -60,6 +58,11 @@
         --app-header-background-rear-layer: {
           background-color: var(--hero-background);
         };
+        background-color: var(--hero-background);
+        color: var(--hero-color);
+        transition-property: transform, background-color, color, height;
+        @apply(--layout-fixed-top);
+        z-index: 9;
       }
 
       .image-overlay-wrapper {
@@ -69,6 +72,10 @@
 
       toolbar-block {
         z-index: 1;
+      }
+
+      .main-content {
+        padding-top: 424px;
       }
     </style>
 
@@ -80,17 +87,17 @@
         <drawer-block route="{{route}}" drawer></drawer-block>
       </app-drawer>
 
-      <app-header-layout>
-        <app-header id="header" effects="parallax-background blend-background fade-effect" condenses shadow reveals>
-          <div class="image-overlay-wrapper" show$="[[heroSettings.backgroundImage]]">
-            <div class="image-overlay" fade></div>
-          </div>
-          <toolbar-block route="{{route}}" front-color="{{heroSettings.fontColor}}"
-                         hide-logo="[[heroSettings.hideLogo]]" primary></toolbar-block>
-          <head-content route="{{route}}" header-title="{{heroSettings.title}}" schedule="{{schedule}}" selected-day="{{selectedDay}}" fade></head-content>
-        </app-header>
+      <app-header id="header" effects="parallax-background blend-background fade-effect" condenses shadow reveals>
+        <div class="image-overlay-wrapper" show$="[[heroSettings.backgroundImage]]">
+          <div class="image-overlay" fade></div>
+        </div>
+        <toolbar-block route="{{route}}" front-color="{{heroSettings.fontColor}}"
+                       hide-logo="[[heroSettings.hideLogo]]" primary></toolbar-block>
+        <head-content route="{{route}}" header-title="{{heroSettings.title}}" schedule="{{schedule}}"
+                      selected-day="{{selectedDay}}" fade></head-content>
+      </app-header>
 
-
+      <div class="main-content">
         <neon-animated-pages attr-for-selected="data-route" selected="{{route}}"
                              selected-attribute="selected">
           <home-page class="Page" data-route="home" people="{{speakers}}" posts="{{posts}}" logos="{{partners}}"
@@ -101,13 +108,16 @@
           <speakers-page class="Page" data-route="speakers" speakers="{{speakers}}" hero-settings="{{heroSettings}}"
                          speaker-id="{{params.id}}"></speakers-page>
           <schedule-page class="Page" data-route="schedule" schedule="{{schedule}}" sessions="{{sessions}}"
-                         hero-settings="{{heroSettings}}" session-id="{{params.id}}" selected-day="{{selectedDay}}"></schedule-page>
+                         hero-settings="{{heroSettings}}" session-id="{{params.id}}"
+                         selected-day="{{selectedDay}}"></schedule-page>
         </neon-animated-pages>
-
-
-      </app-header-layout>
+      </div>
 
     </app-drawer-layout>
+
+    <video-dialog id="videoDialog" title="[[video.title]]" youtube-id="[[video.youtubeId]]"
+                  entry-animation="scale-up-animation"
+                  exit-animation="scale-down-animation" disable-controls="[[!video.disableControls]]"></video-dialog>
 
     <paper-toast id="infoToast" class="toast" duration="6000"></paper-toast>
 
@@ -151,6 +161,15 @@
 
         toggleDrawer() {
           this.$.drawer.toggle();
+        }
+
+        openVideo(title, youtubeId, disableControls) {
+          this.video = {
+            title: title,
+            youtubeId: youtubeId,
+            disableControls: disableControls
+          };
+          this.$.videoDialog.open();
         }
 
         _stylesChanged() {

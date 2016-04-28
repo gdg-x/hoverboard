@@ -6,6 +6,7 @@
 
 <link rel="import" href="./animatable-content.html">
 
+
 <dom-module id="head-content">
 
   <template>
@@ -57,23 +58,41 @@
       }
 
       .logo {
-        margin-bottom: 10px;
         width: 240px;
         min-height: 80px;
       }
 
-      .motto {
-        font-size: 22px;
+      .dates {
+        font-size: 18px;
         text-transform: uppercase;
       }
 
-      .action-buttons {
+      .motto {
         margin-top: 20px;
+        font-size: 22px;
+        line-height: 1;
+      }
+
+      .action-buttons {
+        margin-top: 40px;
         text-align: right;
       }
 
       paper-button {
         font-size: 0.8em;
+        color: #fff;
+      }
+
+      .open-video {
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+        margin-top: 20px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .open-video iron-icon {
+        margin-right: 5px;
       }
 
       @media (min-width: 601px) {
@@ -92,11 +111,18 @@
             <div class="home-wrapper">
               <iron-image class="logo" src="{$ baseurl $}/images/logo-light.svg" sizing="contain"
                           alt="{$ title $}"></iron-image>
-              <h2 class="motto">{$ dates $}</h2>
-              <p class="detail">{$ description $}</p>
+              <h3 class="dates">{$ dates $}</h3>
+              <h2 class="motto">{$ motto $}</h2>
+              <div class="open-video" on-tap="_openVideo">
+                <iron-icon icon="play"></iron-icon>
+                See how it was in 2015
+              </div>
               <div class="action-buttons">
-                <paper-button>Become a speaker</paper-button>
-                <paper-button class="primary">Buy a ticket</paper-button>
+                <a href="https://docs.google.com/forms/d/1rNGi2oPOAZ84mKkL5ccDYUEp93cO0RJ4GZZ-NTmtkYg/viewform"
+                   target="_blank">
+                  <paper-button>Become a speaker</paper-button>
+                </a>
+                <paper-button class="primary" raised>Buy a ticket</paper-button>
               </div>
             </div>
           </div>
@@ -155,6 +181,10 @@
               value: 0
             }
           };
+        }
+
+        _openVideo() {
+          app.openVideo('GDG DevFest Ukraine 2015', 'DfMnJAzOFng', true);
         }
 
       }
