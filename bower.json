@@ -2,22 +2,21 @@
   "name": "hoverboard",
   "private": true,
   "dependencies": {
-    "polymer": "Polymer/polymer#1.3.x",
+    "polymer": "Polymer/polymer#1.4.x",
     "iron-elements": "PolymerElements/iron-elements#1.0.x",
-    "iron-selector": "PolymerElements/iron-selector#1.2.x",
-    "iron-image": "PolymerElements/iron-image#1.2.x",
+    "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior#1.6.x",
     "paper-elements": "PolymerElements/paper-elements#1.0.x",
-    "paper-dialog-behavior": "PolymerElements/paper-dialog-behavior#1.2.x",
     "platinum-elements": "PolymerElements/platinum-elements#2.0.x",
     "neon-elements": "PolymerElements/neon-elements#1.0.x",
-    "neon-animation": "PolymerElements/neon-animation#1.1.0",
     "start-elements": "StartPolymer/start-elements#1.1.x",
     "molecules": "PolymerElements/molecules#1.0.x",
     "google-web-components": "GoogleWebComponents/google-web-components#1.0.x",
     "font-roboto": "StartPolymer/font-empty#1.1.x",
     "page": "visionmedia/page.js#1.6.x",
     "time-elements": "~0.4.x",
-    "disqus-comments": "divshot/disqus-comments#0915a95"
+    "disqus-comments": "divshot/disqus-comments#0915a95",
+    "app-layout": "PolymerLabs/app-layout#0.0.x",
+    "carbon-elements": "PolymerElements/carbon-elements#0.1.*"
   },
   "devDependencies": {
     "web-component-tester": "*"

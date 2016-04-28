@@ -101,6 +101,10 @@
         beforeRegister() {
           this.is = this.constructor.name.replace(/\W+/g, '-')
             .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+          this.listeners = {
+            'iron-overlay-opened': '_onOverlayOpened',
+            'iron-overlay-closed': '_onOverlayClosed'
+          };
         }
 
         openTicketsDialog() {
@@ -114,6 +118,14 @@
             }
           });
           this.$.ticketsDialog.open();
+        }
+
+        _onOverlayOpened() {
+          Polymer.IronDropdownScrollManager.pushScrollLock(this.$.ticketsDialog);
+        }
+
+        _onOverlayClosed() {
+          Polymer.IronDropdownScrollManager.removeScrollLock(this.$.ticketsDialog);
         }
 
       }

@@ -2,6 +2,7 @@ module.exports = {
   title: 'GDG DevFest Season 2015',
   description: 'The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts',
   keywords: 'event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, cloud',
+  motto: 'Make the most of the development. Make the most of you!',
   charset: 'utf-8',
   lang: 'en',
   // Add to homescreen for Chrome on Android

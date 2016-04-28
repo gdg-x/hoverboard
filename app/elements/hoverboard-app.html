@@ -8,17 +8,25 @@
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-menu/paper-menu.html">
 <link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../bower_components/app-layout/app-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/carbon-route/carbon-location.html">
+<link rel="import" href="../bower_components/carbon-route/carbon-route.html">
 
 
 <link rel="import" href="../themes/hoverboard-theme/theme.html">
 <link rel="import" href="app-data/app-data.html">
-<link rel="import" href="blocks/hero-toolbar/hero-toolbar.html">
 <link rel="import" href="blocks/drawer-block/drawer-block.html">
+<link rel="import" href="blocks/toolbar-block/toolbar-block.html">
+<link rel="import" href="blocks/header-content/header-content.html">
+<link rel="import" href="blocks/video-dialog/video-dialog.html">
 <link rel="import" href="pages/speakers-page.html">
 <link rel="import" href="pages/schedule-page.html">
 <link rel="import" href="pages/home-page.html">
 <link rel="import" href="pages/blog-page.html">
 <link rel="import" href="pages/post-page.html">
+<link rel="import" href="behaviors/utils-behavior.html">
+<link rel="import" href="effects/fade-effect.html">
 
 <dom-module id="hoverboard-app">
 
@@ -27,37 +35,100 @@
     <style include="shared-styles"></style>
     <style>
       :host {
+        --min-header-height: 120px;
+        --header-background: #fff;
         display: block;
+      }
+
+      app-drawer-layout {
+        @apply(--layout-fit);
+      }
+
+      app-drawer {
+        z-index: 10;
+      }
+
+      .image-overlay {
+        @apply(--layout-fit);
+        @apply(--opacity-animation);
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.7) 140%);
+        height: 100%;
+      }
+
+      app-header {
+        @apply(--layout-fixed-top);
+        --app-header-background-front-layer: {
+          background-image: var(--header-background-image);
+          transition: background-image 0.5s;
+        };
+        --app-header-background-rear-layer: {
+          background-color: var(--header-background);
+        };
+        background-color: var(--header-background);
+        color: var(--header-color);
+        transition-property: transform, background-color, color, height;
+        z-index: 9;
+      }
+
+      .image-overlay-wrapper {
+        @apply(--layout-fit);
+        opacity: 0;
+      }
+
+      toolbar-block {
+        z-index: 1;
+      }
+
+      .main-content {
+        padding-top: calc(var(--min-header-height) + 64px);
+      }
+
+      @media (min-width: 601px) {
+        .main-content {
+          padding-top: 424px;
+        }
       }
     </style>
 
     <app-data speakers="{{speakers}}" sessions="{{sessions}}" posts="{{posts}}" partners="{{partners}}"
               schedule="{{schedule}}" videos="{{videos}}"></app-data>
 
-    <paper-drawer-panel id="paperDrawerPanel" responsive-width="599px" force-narrow>
-      <drawer-block route="{{route}}" drawer></drawer-block>
+    <app-drawer-layout drawer-width="599px" force-narrow>
+      <app-drawer id="drawer" swipe-open>
+        <drawer-block route="{{route}}" drawer></drawer-block>
+      </app-drawer>
 
-      <paper-scroll-header-panel id="headerPanelMain" class="Main scroll" main>
+      <app-header id="header" effects="parallax-background blend-background fade-effect" condenses shadow reveals>
+        <div class="image-overlay-wrapper" show$="[[headerSettings.backgroundImage]]">
+          <div class="image-overlay" fade></div>
+        </div>
+        <toolbar-block route="{{route}}" front-color="{{headerSettings.fontColor}}"
+                       hide-logo="[[headerSettings.hideLogo]]" primary></toolbar-block>
+        <header-content route="{{route}}" header-title="{{headerSettings.title}}" schedule="{{schedule}}"
+                        selected-day="{{selectedDay}}" min-height="{{headerSettings.minHeight}}" fade></header-content>
+      </app-header>
 
-        <hero-toolbar route="{{route}}" font-color="{{heroSettings.fontColor}}"
-                      background-color="{{heroSettings.backgroundColor}}"
-                      background-image="{{heroSettings.backgroundImage}}" tab-bar-color="{{heroSettings.tabBarColor}}"
-                      video="{{heroSettings.video}}"></hero-toolbar>
-
-        <neon-animated-pages class="Main-content" attr-for-selected="data-route" selected="{{route}}"
+      <div class="main-content">
+        <neon-animated-pages attr-for-selected="data-route" selected="{{route}}"
                              selected-attribute="selected">
           <home-page class="Page" data-route="home" people="{{speakers}}" posts="{{posts}}" logos="{{partners}}"
-                     hero-settings="{{heroSettings}}" videos="{{videos}}"></home-page>
-          <blog-page class="Page" data-route="blog" posts="{{posts}}" hero-settings="{{heroSettings}}"></blog-page>
+                     header-settings="{{headerSettings}}" videos="{{videos}}"></home-page>
+          <blog-page class="Page" data-route="blog" posts="{{posts}}" header-settings="{{headerSettings}}"></blog-page>
           <post-page class="Page" data-route="post" post-id="{{params.id}}" posts="{{posts}}"
-                     hero-settings="{{heroSettings}}"></post-page>
-          <speakers-page class="Page" data-route="speakers" speakers="{{speakers}}" hero-settings="{{heroSettings}}"
+                     header-settings="{{headerSettings}}"></post-page>
+          <speakers-page class="Page" data-route="speakers" speakers="{{speakers}}" header-settings="{{headerSettings}}"
                          speaker-id="{{params.id}}"></speakers-page>
           <schedule-page class="Page" data-route="schedule" schedule="{{schedule}}" sessions="{{sessions}}"
-                         hero-settings="{{heroSettings}}" session-id="{{params.id}}"></schedule-page>
+                         header-settings="{{headerSettings}}" session-id="{{params.id}}"
+                         selected-day="{{selectedDay}}"></schedule-page>
         </neon-animated-pages>
-      </paper-scroll-header-panel>
-    </paper-drawer-panel>
+      </div>
+
+    </app-drawer-layout>
+
+    <video-dialog id="videoDialog" title="[[video.title]]" youtube-id="[[video.youtubeId]]"
+                  entry-animation="scale-up-animation"
+                  exit-animation="scale-down-animation" disable-controls="[[!video.disableControls]]"></video-dialog>
 
     <paper-toast id="infoToast" class="toast" duration="6000"></paper-toast>
 
@@ -69,6 +140,10 @@
 
       class HoverboardApp {
 
+        get behaviors() {
+          return [Polymer.UtilsBehavior];
+        }
+
         beforeRegister() {
           this.is = this.constructor.name.replace(/\W+/g, '-')
             .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
@@ -78,7 +153,11 @@
               value: 'home'
             },
             params: Object,
-            upgraded: Boolean
+            upgraded: Boolean,
+            headerSettings: {
+              type: Object,
+              observer: '_stylesChanged'
+            }
           };
         }
 
@@ -88,15 +167,36 @@
         }
 
         scrollPageToTop() {
-          this.$.headerPanelMain.scrollToTop(true);
+//          this.$.headerPanelMain.scrollToTop(true);
         }
 
         closeDrawer() {
-          this.$.paperDrawerPanel.closeDrawer();
+          this.$.drawer.close();
         }
 
         toggleDrawer() {
-          this.$.paperDrawerPanel.togglePanel();
+          this.$.drawer.toggle();
+        }
+
+        openVideo(title, youtubeId, disableControls) {
+          this.video = {
+            title: title,
+            youtubeId: youtubeId,
+            disableControls: disableControls
+          };
+          this.$.videoDialog.open();
+        }
+
+        _stylesChanged() {
+          this.customStyle['--header-background'] = this.headerSettings.backgroundColor;
+          this.customStyle['--header-color'] = this.headerSettings.fontColor;
+          this.customStyle['--header-background-image'] = 'url(' + this.headerSettings.backgroundImage + ')';
+          this.customStyle['--header-background-gradient'] = 'linear-gradient(to bottom, ' +
+            this.headerSettings.backgroundColor + ' 0%, rgba(0, 0, 0, 0) 35%, ' +
+            this.headerSettings.backgroundColor + ' 140%)';
+          this.customStyle['--min-header-height'] = this.headerSettings.minHeight;
+          document.getElementsByName('theme-color')[0].content = this.headerSettings.backgroundColor;
+          this.updateStyles();
         }
 
       }

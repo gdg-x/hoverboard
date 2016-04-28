@@ -141,11 +141,6 @@
       }
     </style>
 
-    <div class="container page-header" cascaded>
-      <div class="page-title">
-        <h3>Speakers</h3>
-      </div>
-    </div>
     <div class="container speakers-container">
       <template is="dom-repeat" items="[[_toArray(speakers)]]" as="speaker" on-dom-change="_updateCascadedNodes">
         <div class="speaker" cascaded>
@@ -210,9 +205,9 @@
           },
           selected: {
             type: Boolean,
-            observer: 'updateHeroSettings'
+            observer: 'updateHeaderSettings'
           },
-          heroSettings: {
+          headerSettings: {
             type: Object,
             notify: true
           },
@@ -221,11 +216,11 @@
             notify: true
           },
           _selectedSpeaker: Object,
-          _heroSettings: {
+          _headerSettings: {
             type: Object,
             /* jshint ignore:start */
             value: function () {
-              return {% for nav in navigation %}{% if nav.route == 'speakers' %}{$ nav.heroSettings | dump $}{% endif %}{% endfor %};
+              return {% for nav in navigation %}{% if nav.route == 'speakers' %}{$ nav.headerSettings | dump $}{% endif %}{% endfor %};
             }
             /* jshint ignore:end */
           },
@@ -256,8 +251,8 @@
           'openSpeakerDetails(selected, speakerId, speakers)'
         ],
 
-        updateHeroSettings: function () {
-          this.heroSettings = this.selected ? this._heroSettings : this.heroSettings;
+        updateHeaderSettings: function () {
+          this.headerSettings = this.selected ? this._headerSettings : this.headerSettings;
         },
 
         openSpeakerDetails: function () {

@@ -1,6 +1,7 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../../../bower_components/iron-dropdown/iron-dropdown-scroll-manager.html">
 <link rel="import" href="../../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../../bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
@@ -159,8 +160,10 @@
 
         _onNeonAnimationFinish: function () {
           if (this.opened) {
+            Polymer.IronDropdownScrollManager.pushScrollLock(this);
             this._finishRenderOpened();
           } else {
+            Polymer.IronDropdownScrollManager.removeScrollLock(this);
             this._finishRenderClosed();
           }
         }
