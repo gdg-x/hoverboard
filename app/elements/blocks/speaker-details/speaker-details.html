@@ -10,6 +10,7 @@
 <link rel="import" href="../../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../../bower_components/neon-animation/neon-animation-runner-behavior.html">
 <link rel="import" href="../../../bower_components/marked-element/marked-element.html">
+<link rel="import" href="../../../bower_components/carbon-route/carbon-location.html">
 
 <link rel="import" href="../../../themes/hoverboard-theme/components/dialog-styles.html">
 <link rel="import" href="../truncate-marked-text/truncate-marked-text.html">
@@ -21,6 +22,8 @@
 
     <style include="shared-styles"></style>
     <style include="dialog-styles"></style>
+
+    <carbon-location route="{{route}}"></carbon-location>
 
     <paper-scroll-header-panel id="scrollHeaderPanel" condenses="{{smallScreen}}" no-reveal="{{!smallScreen}}">
       <paper-toolbar class="tall">
@@ -77,7 +80,7 @@
                   </div>
                   <truncate-marked-text text="[[session.description]]" characters="220"
                                         break-last-word></truncate-marked-text>
-                  <a class="read-more" href="/schedule/[[session.id]]" data-route="schedule" dialog-dismiss>Read
+                  <a class="read-more" href="/schedule/[[session.id]]/" dialog-dismiss>Read
                     more</a>
 
                 </div>
@@ -140,7 +143,6 @@
         },
 
         _renderOpened: function () {
-          page.redirect('/' + app.route + '/' + this.speaker.id);
           if (this.withBackdrop && window.innerWidth > 960) {
             this.backdropElement.open();
           }
@@ -152,7 +154,7 @@
         },
 
         _renderClosed: function () {
-          page.show('/' + app.route, null, false);
+          this.set('route.path', '/speakers/');
           document.getElementsByName('theme-color')[0].content = this._previousBrowserColor;
           this.backdropElement.close();
           this.playAnimation('exit');

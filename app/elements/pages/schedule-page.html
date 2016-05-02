@@ -223,6 +223,10 @@
       }
     </style>
 
+    <carbon-route route="{{route}}"
+                  pattern="/:id"
+                  data="{{sessionData}}"></carbon-route>
+
     <div class="container schedule-container">
       <neon-animated-pages selected="{{selectedDay}}" entry-animation="[[_entryAnimation]]"
                            exit-animation="[[_exitAnimation]]">
@@ -251,9 +255,8 @@
                     <div class="session">
                       <template is="dom-repeat" items="[[session]]" as="subSession"
                                 filter="{{_filterSession(_selectedTags.splices)}}">
-                        <div class="sub-session"
-                             style$="border-color: [[_getCustomStyleValue(subSession.mainTag)]]"
-                             on-tap="_openSession">
+                        <a href="{$ baseurl $}/schedule/[[subSession.id]]/" class="sub-session"
+                             style$="border-color: [[_getCustomStyleValue(subSession.mainTag)]]">
                           <div class="track">
                             <i class="point"
                                style$="background: [[_getCustomStyleValue(subSession.mainTag)]]"></i>
@@ -288,7 +291,7 @@
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </a>
                       </template>
                     </div>
                   </template>
@@ -300,8 +303,10 @@
       </neon-animated-pages>
     </div>
 
-    <session-details id="sessionDetails" session="{{_selectedSession}}"
-                     entry-animation="scale-up-animation" exit-animation="fade-out-animation"
+    <session-details id="sessionDetails"
+                     session="{{_selectedSession}}"
+                     entry-animation="scale-up-animation"
+                     exit-animation="fade-out-animation"
                      with-backdrop></session-details>
 
   </template>
@@ -381,7 +386,7 @@
         },
 
         observers: [
-          'openSessionDetails(selected, sessionId, sessions)'
+          'openSessionDetails(sessionData)'
         ],
 
         ready: function () {
@@ -394,11 +399,10 @@
         },
 
         openSessionDetails: function () {
-          if (this.selected && this.sessionId) {
+          if (this.sessionData.id) {
             this.async(function () {
-              this._selectedSession = this.sessions[this.sessionId];
+              this._selectedSession = this.sessions[this.sessionData.id];
               this.$.sessionDetails.open();
-              this.sessionId = null;
             }, 500);
           }
         },
@@ -422,11 +426,6 @@
 
         _getCustomStyleValue: function (value) {
           return this.getComputedStyleValue('--' + this._generateClass(value));
-        },
-
-        _openSession: function (e) {
-          this._selectedSession = e.model.subSession;
-          this.$.sessionDetails.open();
         },
 
         _getFirstCharacters: function (text) {

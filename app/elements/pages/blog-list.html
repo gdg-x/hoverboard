@@ -9,7 +9,7 @@
 
 <link rel="import" href="../blocks/footer-block/footer-block.html">
 
-<dom-module id="blog-page">
+<dom-module id="blog-list">
 
   <template>
 
@@ -88,7 +88,7 @@
 
     <div class="container posts-container">
       <template is="dom-repeat" items="[[posts]]" as="post" on-dom-change="_updateCascadedNodes">
-        <a data-route="blog/[[post.id]]" href="{$ baseurl $}/blog/[[post.id]]" class="post"
+        <a href="{$ baseurl $}/blog/posts/[[post.id]]/" class="post"
            style$="background-color: [[post.primaryColor]];" cascaded>
           <iron-image class="image" src="[[post.image]]" style$="background-color: [[post.primaryColor]];"
                       sizing="cover" preload fade></iron-image>
@@ -104,10 +104,11 @@
     (function () {
       'use strict';
 
-      class BlogPage {
+      class BlogList {
 
         get behaviors() {
           return [
+            Polymer.NeonAnimationRunnerBehavior,
             Polymer.NeonSharedElementAnimatableBehavior
           ];
         }
@@ -139,13 +140,6 @@
               value: function () {
                 return {
                   'entry': [{
-                    name: 'cascaded-animation',
-                    animation: 'transform-animation',
-                    transformFrom: 'translate3d(0, 100%, 0)',
-                    timing: {
-                      delay: 500
-                    }
-                  }, {
                     name: 'fade-in-animation',
                     animation: 'fade-in-animation',
                     node: this,
@@ -154,10 +148,6 @@
                     }
                   }],
                   'exit': [{
-                    name: 'cascaded-animation',
-                    animation: 'transform-animation',
-                    transformTo: 'translate3d(0, 100%, 0)'
-                  }, {
                     name: 'fade-out-animation',
                     animation: 'fade-out-animation',
                     node: this
@@ -166,9 +156,6 @@
               }
             }
           };
-          this.observers = [
-            'updateHeaderSettings(selected)'
-          ];
         }
 
         updateHeaderSettings() {
@@ -178,13 +165,26 @@
         _updateCascadedNodes() {
           var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
           var cascadedArray = Array.prototype.slice.call(cascaded);
-          this.animationConfig.entry[0].nodes = cascadedArray;
-          this.animationConfig.exit[0].nodes = cascadedArray;
+          this.animationConfig.entry.push({
+            name: 'cascaded-animation',
+            animation: 'transform-animation',
+            transformFrom: 'translate3d(0, 100%, 0)',
+            timing: {
+              delay: 500
+            },
+            nodes: cascadedArray
+          });
+          this.animationConfig.exit.push({
+            name: 'cascaded-animation',
+            animation: 'transform-animation',
+            transformTo: 'translate3d(0, 100%, 0)',
+            nodes: cascadedArray
+          });
         }
 
       }
 
-      Polymer(BlogPage);
+      Polymer(BlogList);
 
     })();
   </script>

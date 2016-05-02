@@ -118,8 +118,8 @@
     </style>
 
     <app-toolbar>
-      <neon-animated-pages attr-for-selected="data-route" selected="{{route}}">
-        <animatable-content data-route="home">
+      <neon-animated-pages attr-for-selected="data-page" selected="{{routeData.page}}">
+        <animatable-content data-page="">
           <div class="container">
             <div class="home-wrapper">
               <iron-image class="logo" src="{$ baseurl $}/images/logo-light.svg" sizing="contain"
@@ -140,17 +140,18 @@
             </div>
           </div>
         </animatable-content>
-        <animatable-content data-route="blog">
+        <animatable-content data-page="blog">
           <div class="container">
-            <h3 class="page-title">Blog</h3>
+            <h3 class="page-title" hidden$="{{headerTitle}}">Blog</h3>
+            <h3 class="page-title" hidden$="{{!headerTitle}}">[[headerTitle]]</h3>
           </div>
         </animatable-content>
-        <animatable-content data-route="speakers">
+        <animatable-content data-page="speakers">
           <div class="container">
             <h3 class="page-title">Speaker</h3>
           </div>
         </animatable-content>
-        <animatable-content data-route="schedule">
+        <animatable-content data-page="schedule">
           <div class="container reset-padding-bottom">
             <div>
               <h3 class="page-title">Schedule</h3>
@@ -160,11 +161,6 @@
                 </template>
               </paper-tabs>
             </div>
-          </div>
-        </animatable-content>
-        <animatable-content data-route="post">
-          <div class="container">
-            <h3 class="page-title">[[headerTitle]]</h3>
           </div>
         </animatable-content>
       </neon-animated-pages>
@@ -182,8 +178,8 @@
           this.is = this.constructor.name.replace(/\W+/g, '-')
             .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
           this.properties = {
-            route: {
-              type: String,
+            routeData: {
+              type: Object,
               notify: true
             },
             headerTitle: String,
@@ -201,8 +197,8 @@
         }
 
         _updateStyles() {
-//          this.customStyle['--min-height'] = this.minHeight;
-//          this.updateStyles();
+          this.customStyle['--min-header-height'] = this.minHeight;
+          this.updateStyles();
         }
 
         _openVideo() {

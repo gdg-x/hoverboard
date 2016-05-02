@@ -1,6 +1,6 @@
 module.exports = {
   navigation: [{
-    route: 'home',
+    route: '',
     permalink: '/',
     text: 'Home',
     headerSettings: {
@@ -18,7 +18,7 @@ module.exports = {
     }
   }, {
     route: 'blog',
-    permalink: '/blog',
+    permalink: '/blog/',
     text: 'Blog',
     headerSettings: {
       backgroundColor: '#03A9F4',
@@ -28,7 +28,7 @@ module.exports = {
     }
   }, {
     route: 'schedule',
-    permalink: '/schedule',
+    permalink: '/schedule/',
     text: 'Schedule',
     headerSettings: {
       backgroundColor: '#607D8B',
@@ -37,7 +37,7 @@ module.exports = {
     }
   }, {
     route: 'speakers',
-    permalink: '/speakers',
+    permalink: '/speakers/',
     text: 'Speakers',
     headerSettings: {
       backgroundColor: '#673AB7',
