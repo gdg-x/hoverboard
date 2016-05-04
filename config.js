@@ -38,9 +38,9 @@ module.exports = {
     // For info on tool: https://www.firebase.com/docs/hosting/command-line-tool.html
     firebase: {
       env: {
-        development: 'hoverboard-dev', // subdomain
+        development: 'pskp-test', // subdomain
         staging:     'hoverboard',
-        production:  'pskp-test'
+        production:  'hoverboard-firebase'
       }
     },
     // Google App Engine

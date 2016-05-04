@@ -18,6 +18,11 @@ module.exports = {
             text: 'GDG DevFest Ukraine 2014',
             url: 'http://devfest.gdg.org.ua/2014/',
             newTab: true
+          },
+          {
+            text: 'GDG DevFest Ukraine 2015',
+            url: 'http://devfest.gdg.org.ua/2015/',
+            newTab: true
           }
         ]
       },
@@ -26,17 +31,12 @@ module.exports = {
         links: [
           {
             text: 'Partnership Proposition',
-            url: '/2015/assets/GDG_DevFest_Ukraine_2015_Partnership_Proposition.pdf',
+            url: 'mailto:devfest@gdg.org.ua?subject=Partnership%20with%20GDG%20DevFest%20Ukraine%202016',
             newTab: true
           },
           {
             text: 'Media Kit',
-            url: 'http://bit.ly/dfua-media',
-            newTab: true
-          },
-          {
-            text: 'Media Accreditation',
-            url: 'https://docs.google.com/forms/d/1sOjuv7rv77JXq2jPBdh3tg-O4CV8HpLTED5cjJBxnG8/viewform',
+            url: 'https://drive.google.com/open?id=0BxVrjMGUgQYEVnVfcTBXaWlCdDQ',
             newTab: true
           }
         ]

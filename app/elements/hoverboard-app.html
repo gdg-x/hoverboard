@@ -21,7 +21,6 @@
 <link rel="import" href="blocks/header-content/header-content.html">
 <link rel="import" href="blocks/video-dialog/video-dialog.html">
 <link rel="import" href="pages/speakers-page.html">
-<link rel="import" href="pages/schedule-page.html">
 <link rel="import" href="pages/home-page.html">
 <link rel="import" href="pages/blog-pages.html">
 <link rel="import" href="pages/post-page.html">
@@ -111,8 +110,6 @@
 
 
     <app-data speakers="{{speakers}}"
-              sessions="{{sessions}}"
-              schedule="{{schedule}}"
               posts="{{posts}}"
               partners="{{partners}}"
               videos="{{videos}}"></app-data>
@@ -132,8 +129,6 @@
                        primary></toolbar-block>
 
         <header-content route-data="{{pageData}}"
-                        schedule="{{schedule}}"
-                        selected-day="{{selectedDay}}"
                         header-title="{{headerSettings.title}}"
                         min-height="{{headerSettings.minHeight}}"
                         fade></header-content>
@@ -161,13 +156,6 @@
                          header-settings="{{headerSettings}}"
                          route="{{speakersTail}}"
                          speakers="{{speakers}}"></speakers-page>
-
-          <schedule-page data-page="schedule"
-                         header-settings="{{headerSettings}}"
-                         route="{{scheduleTail}}"
-                         schedule="{{schedule}}"
-                         sessions="{{sessions}}"
-                         selected-day="{{selectedDay}}"></schedule-page>
 
         </neon-animated-pages>
       </div>

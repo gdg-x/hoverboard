@@ -1,137 +1,17 @@
 [{
-  "id": "devfest-2015-announced",
-  "title": "GDG DevFest 2015 Announced",
-  "posted": "2015-08-17",
-  "primaryColor": "#607D8B",
-  "secondaryColor": "#607D8B",
-  "image": "/2015/images/posts/announce.jpg",
-  "brief": "Ukrainian GDGs are proud to announce the fourth annual GDG DevFest 2015 - the largest Google related event in Ukraine. Like last year, the event will be held on 23-24 October in Lviv. So aside all your business at this time and book tickets to the cultural capital of Ukraine."
-}, {
-  "id": "call-for-speakers",
-  "title": "Call for Speakers",
-  "posted": "2015-08-17",
-  "primaryColor": "#673AB7",
-  "secondaryColor": "#673AB7",
-  "image": "/2015/images/posts/speakers.jpg",
-  "brief": "We're very excited - not just because of the inordinate amount of caffeine based products consumed - but also because our team are putting together the final missing parts to the biggest Google related event in Ukraine - <a href='http://devfest.gdg.org.ua'>GDG DevFest 2015</a>."
-}, {
-  "id": "women-are-underrepresented-in-it",
-  "title": "Women are underrepresented in IT",
-  "posted": "2015-10-04",
-  "primaryColor": "#E91E63",
-  "secondaryColor": "#E91E63",
-  "image": "/2015/images/posts/women.jpg",
-  "brief": "Our friends from the Netherlands touched important theme in their blog about gender diversity: why women are underrepresented in IT. The cause of this seems to resonate with the lack of diversity in academia and the workplace. As a sizable event in technology, we found it in part our responsibility to encourage diversity at GDG DevFest Ukraine 2015."
-}, {
-  "id": "workshops-announced",
-  "title": "Workshops announced",
-  "posted": "2015-10-06",
-  "primaryColor": "#607D8B",
-  "secondaryColor": "#607D8B",
-  "image": "/2015/images/posts/workshops.jpg",
-  "brief": "Great news for everyone who wants to work side-by-side with best developers and practice in creating your own apps! On Saturday (2nd day of DFUA 2015) we’ll have 3 cool workshops in Community track."
-}, {
-  "id": "meet-platinum-sponsor-n-ix",
-  "title": "Meet our Platinum Sponsor - N-iX",
-  "posted": "2015-10-07",
-  "primaryColor": "#FF5722",
-  "secondaryColor": "#FF5722",
-  "image": "/2015/images/posts/nix-top.jpg",
-  "brief": "Founded in 2002, N-iX is a custom software development company with a core business of providing Dedicated Development Team / Own Development Center service."
-}, {
-  "id": "5-reasons-for-students",
-  "title": "5 reasons for STUDENTS to attend GDG DevFest Ukraine 2015",
-  "posted": "2015-10-08",
-  "primaryColor": "#00BCD4",
-  "secondaryColor": "#00BCD4",
-  "image": "/2015/images/posts/students.jpg",
-  "brief": "If you are a student, still in doubt and do not know whether <a href='http://devfest.gdg.org.ua'>GDG DevFest Ukraine 2015</a> is worth to visit it, GDG team decided to make a short list of top reasons for attending this conference for students."
-}, {
-  "id": "3-reasons-for-android-devs",
-  "title": "3 reasons for Android devs to attend GDG DevFest Ukraine 2015",
-  "posted": "2015-10-10",
-  "primaryColor": "#009688",
-  "secondaryColor": "#009688",
-  "image": "/2015/images/posts/android.jpg",
-  "brief": "We are growing and developing our communities in Ukraine but also creating more and more communications with GDG chapters all over the world. But if you, android developer, still have any doubts, just look at 3 main reasons to visit the event <a href='http://devfest.gdg.org.ua'>GDG DevFest Ukraine 2015</a>"
-}, {
-  "id": "3-reasons-for-cloud-devs",
-  "title": "3 reasons for Cloud devs to attend GDG DevFest Ukraine 2015",
-  "posted": "2015-10-13",
-  "primaryColor": "#673AB7",
-  "secondaryColor": "#673AB7",
-  "image": "/2015/images/posts/cloud.jpg",
-  "brief": "There are no such a lot of events for cloud developers in our country. And it’s more rare case when we can meet such amazing speakers. You can ask any question, learn new useful information from leaders in Cloud computing and of course get endless inspiration for self-improvement. "
-}, {
-  "id": "meet-platinum-sponsor-dataart",
-  "title": "Meet our Platinum Sponsor - DataArt",
-  "posted": "2015-10-14",
-  "primaryColor": "#2196F3",
-  "secondaryColor": "#2196F3",
-  "image": "/2015/images/posts/dataart-top.jpg",
-  "brief": "DataArt is a technology consulting firm that creates end-to-end solutions, from concept and strategy, to design, implementation and support, helping global clients in the financial services, healthcare, hospitality, media and IoT sectors achieve important business outcomes."
-}, {
-  "id": "reasons-for-web-develpers",
-  "title": "Reasons to attend DFUA for Web developers",
-  "posted": "2015-10-15",
-  "primaryColor": "#607D8B",
-  "secondaryColor": "#607D8B",
-  "image": "/2015/images/posts/web.jpg",
-  "brief": "If you, web developer, think there is no place for you at  DFUA, you are deeply mistaken, because then you may be missing out on one of the best opportunities to take your game to the next level! Below you’ll find reasons why you should attend DFUA."
-}, {
-  "id": "meet-platinum-sponsor-eleks",
-  "title": "Meet our Platinum Sponsor - ELEKS",
-  "posted": "2015-10-16",
-  "primaryColor": "#3F51B5",
-  "secondaryColor": "#3F51B5",
-  "image": "/2015/images/posts/eleks-top.jpg",
-  "brief": "ELEKS is a global organization that provides end-to-end, offshore, software product development. ELEKS is a strategic partner with the proven ability to address our customers' most pressing needs."
-}, {
-  "id": "meet-platinum-sponsor-sigma",
-  "title": "Meet our Platinum Sponsor - Sigma",
-  "posted": "2015-10-20",
-  "primaryColor": "#E91E63",
-  "secondaryColor": "#E91E63",
-  "image": "/2015/images/posts/sigma-top.jpg",
-  "brief": "The company provides top-quality IT services to customers all over the world. As an event partner, Sigma Software prepared great presents for conference attendees. Learn more at the company's booth."
-}, {
-  "id": "networking-tips",
-  "title": "How to Network at Conferences",
-  "posted": "2015-10-20",
-  "primaryColor": "#673AB7",
-  "secondaryColor": "#673AB7",
-  "image": "/2015/images/posts/network.jpg",
-  "brief": "A conference can be a great place to strike up a new business relationship, but it can also be stressful to walk into a room full of strangers and make meaningful connections. That’s why it’s important to understand some key principals of networking before showing up for an event."
-}, {
-  "id": "meet-platinum-sponsor-twinfield",
-  "title": "Meet our Platinum Sponsor - Twinfield",
-  "posted": "2015-10-20",
-  "primaryColor": "#03A9F4",
-  "secondaryColor": "#03A9F4",
-  "image": "/2015/images/posts/wolterskluwer.png",
-  "brief": "Wolters Kluwer Tax & Accounting Europe holds 3 operating companies and serves their customers with accounting software solutions and services under the brand names: Twinfield, Alure and Basecone."
-},{
-  "id": "what-to-do-in-lviv",
-  "title": "Top Things to Do in Lviv",
-  "posted": "2015-10-21",
-  "primaryColor": "#3F51B5",
-  "secondaryColor": "#3F51B5",
-  "image": "/2015/images/posts/lviv.jpg",
-  "brief": "Ukrainian city of Lviv is no doubt one of the most charming and yet not well-known parts of Ukraine. It’s been recently gaining plenty of attention from the world, and was proudly featured on BBC and EuroNews."
-},{
-  "id": "diamond-sponsor-corevalue",
-  "title": "Meet our Diamond Sponsor - CoreValue",
-  "posted": "2015-10-22",
-  "primaryColor": "#2196F3",
-  "secondaryColor": "#2196F3",
-  "image": "/2015/images/posts/corevalue-top.jpg",
-  "brief": "CoreValue has been successfully providing business value via technical solutions to our customers for over 10 years. The company has been at the fore front of delivering innovative solutions."
-},{
   "id": "devfest-ua-summary",
   "title": "GDG DevFest Ukraine 2015 - Summary",
   "posted": "2015-10-24",
   "primaryColor": "#5a7785",
   "secondaryColor": "#455a64",
-  "image": "/2015/images/posts/summary.jpg",
+  "image": "/images/posts/summary.jpg",
   "brief": "GDG DevFest Ukraine 2015 is now over. It was a great success. We are happy to share with you some facts, emotions and, of course, photos from the biggest Google Developers Conference in Ukraine!"
+},{
+  "id": "devfest-2016-announced",
+  "title": "GDG DevFest 2016 Announced",
+  "posted": "2016-05-04",
+  "primaryColor": "#00BCD4",
+  "secondaryColor": "#00BCD4",
+  "image": "/images/posts/announce.jpg",
+  "brief": "Ukrainian GDGs are proud to announce the fourth annual GDG DevFest 2015 - the largest Google related event in Ukraine. Like last year, the event will be held on 23-24 October in Lviv. So aside all your business at this time and book tickets to the cultural capital of Ukraine."
 }]

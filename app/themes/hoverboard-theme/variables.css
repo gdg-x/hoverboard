@@ -16,31 +16,31 @@ for further information on custom CSS properties.
 
 :root {
   /* Primary colors */
-  --dark-primary-color: #0097a7;
-  --default-primary-color: #00bcd4;
-  --light-primary-color: #b2ebf2;
-  --text-primary-color: #fff; /* text / icons */
+  --dark-primary-color:         #455A64;
+  --default-primary-color:      #607D8B;
+  --light-primary-color:        #CFD8DC;
+  --text-primary-color:         #FFFFFF; /* text / icons */
 
   /* Accent colors */
-  --accent-color: #ff4081;
-  --text-accent-color: #fff; /* text / icons */
+  --accent-color:               #009688;
+  --text-accent-color:          #FFFFFF; /* text / icons */
 
   /* Background colors */
-  --primary-background-color: #b2ebf2;
-  --secondary-background-color: #fff;
+  --primary-background-color:   #CFD8DC;
+  --secondary-background-color: #FFFFFF;
 
   /* Text colors */
-  --primary-text-color: #212121;
-  --secondary-text-color: #727272;
-  --disabled-text-color: #bdbdbd;
+  --primary-text-color:         #212121;
+  --secondary-text-color:       #727272;
+  --disabled-text-color:        #BDBDBD;
 
   /* Other colors */
-  --divider-color: #e8e8e8;
-  --default-backgroud-color: #fafafa;
+  --divider-color:              #B6B6B6;
+  --default-backgroud-color:    #fafafa;
 
   /* Footer */
-  --footer-background-color: #fcfcfc;
-  --footer-text-color: #757575;
+  --footer-background-color:    #fcfcfc;
+  --footer-text-color:          #757575;
 
   /* Tags colors */
   --general: #bdbdbd;

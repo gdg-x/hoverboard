@@ -151,18 +151,6 @@
             <h3 class="page-title">Speaker</h3>
           </div>
         </animatable-content>
-        <animatable-content data-page="schedule">
-          <div class="container reset-padding-bottom">
-            <div>
-              <h3 class="page-title">Schedule</h3>
-              <paper-tabs class="schedule-tabs" selected="{{selectedDay}}" cascaded>
-                <template is="dom-repeat" items="[[schedule]]" as="day">
-                  <paper-tab>[[day.dateReadable]]</paper-tab>
-                </template>
-              </paper-tabs>
-            </div>
-          </div>
-        </animatable-content>
       </neon-animated-pages>
     </app-toolbar>
 

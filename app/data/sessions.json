@@ -55,7 +55,7 @@
     "language": "English",
     "complexity": "Beginner",
     "presentation": "https://speakerdeck.com/gdglviv/said-tahsin-dane-material-design-custom-views",
-    "thumbnail": "/2015/images/sessions/101.JPG",
+    "thumbnail": "/images/sessions/101.JPG",
     "videoId": "nFZxAIi8n7I",
     "tags": [
       "Android",
@@ -72,7 +72,7 @@
     "language": "English",
     "complexity": "Beginner",
     "presentation": "https://speakerdeck.com/gdglviv/mateusz-herych-how-can-android-backup-break-your-app",
-    "thumbnail": "/2015/images/sessions/102.JPG",
+    "thumbnail": "/images/sessions/102.JPG",
     "videoId": "89wvLLc25AY",
     "tags": [
       "Android",
@@ -89,7 +89,7 @@
     "language": "English",
     "complexity": "Beginner",
     "presentation": "https://speakerdeck.com/gdglviv/dmytro-danylyk-planning-android-screens",
-    "thumbnail": "/2015/images/sessions/103.JPG",
+    "thumbnail": "/images/sessions/103.JPG",
     "videoId": "gQbjjOE2yF4",
     "tags": [
       "Android",
@@ -106,7 +106,7 @@
     "language": "English",
     "complexity": "Intermediate",
     "presentation": "https://speakerdeck.com/gdglviv/roman-mazur-power-of-android-shell",
-    "thumbnail": "/2015/images/sessions/104.JPG",
+    "thumbnail": "/images/sessions/104.JPG",
     "videoId": "a4InM2VhAvQ",
     "tags": [
       "Android",
@@ -123,7 +123,7 @@
     "language": "English",
     "complexity": "Intermediate",
     "presentation": "https://speakerdeck.com/gdglviv/michal-tajchert-hijacking-your-notifications",
-    "thumbnail": "/2015/images/sessions/105.JPG",
+    "thumbnail": "/images/sessions/105.JPG",
     "videoId": "2rT4Us7cFDg",
     "tags": [
       "Android"
@@ -139,7 +139,7 @@
     "language": "English",
     "complexity": "Beginner",
     "presentation": "http://olostan.github.io/slides_microgcp",
-    "thumbnail": "/2015/images/sessions/106.JPG",
+    "thumbnail": "/images/sessions/106.JPG",
     "videoId": "euROYVOJYuI",
     "tags": [
       "Cloud",
@@ -156,7 +156,7 @@
     "language": "English",
     "complexity": "Beginner",
     "presentation": "http://olostan.github.io/slides_ng2arch",
-    "thumbnail": "/2015/images/sessions/107.JPG",
+    "thumbnail": "/images/sessions/107.JPG",
     "videoId": "V7GCjnfsOCE",
     "tags": [
       "Web",
@@ -173,7 +173,7 @@
     "language": "Russian",
     "complexity": "Intermediate",
     "presentation": "https://speakerdeck.com/gdglviv/dima-maleev-v8-under-the-hood",
-    "thumbnail": "/2015/images/sessions/108.JPG",
+    "thumbnail": "/images/sessions/108.JPG",
     "videoId": "Oazl4fx-X68",
     "tags": [
       "Web",
@@ -190,7 +190,7 @@
     "language": "English",
     "complexity": "Beginner",
     "presentation": "https://speakerdeck.com/gdglviv/mandy-waite-scalable-microservices-with-grpc-kubernetes-and-containers",
-    "thumbnail": "/2015/images/sessions/109.JPG",
+    "thumbnail": "/images/sessions/109.JPG",
     "videoId": "BZ-uR8LQRkA",
     "tags": [
       "Cloud",
@@ -208,7 +208,7 @@
     "language": "English",
     "complexity": "Beginner",
     "presentation": "https://speakerdeck.com/gdglviv/mandy-waite-cloud-platform-end-to-end-how-we-built-cloud-spin",
-    "thumbnail": "/2015/images/sessions/110.JPG",
+    "thumbnail": "/images/sessions/110.JPG",
     "videoId": "n-H6jYnL32U",
     "tags": [
       "Cloud",
@@ -226,7 +226,7 @@
     "language": "English",
     "complexity": "Beginner",
     "presentation": "https://speakerdeck.com/gdglviv/roman-herasymenko-android-m-security-model",
-    "thumbnail": "/2015/images/sessions/111.JPG",
+    "thumbnail": "/images/sessions/111.JPG",
     "videoId": "lFpb-LaYDvs",
     "tags": [
       "Android",
@@ -243,7 +243,7 @@
     "language": "English",
     "complexity": "Beginner",
     "presentation": "https://speakerdeck.com/gdglviv/xavier-hallade-mastering-the-ndk-with-android-studio-1-dot-3-plus-and-the-gradle-experimental-plugin",
-    "thumbnail": "/2015/images/sessions/122.JPG",
+    "thumbnail": "/images/sessions/122.JPG",
     "videoId": "GbTe0BTuNaU",
     "tags": [
       "Android",
@@ -260,7 +260,7 @@
     "language": "Ukrainian",
     "complexity": "Intermediate",
     "presentation": "https://speakerdeck.com/gdglviv/alex-pazhyn-material-design-custom-branding",
-    "thumbnail": "/2015/images/sessions/113.JPG",
+    "thumbnail": "/images/sessions/113.JPG",
     "videoId": "3u8864j4g24",
     "tags": [
       "Android",
@@ -277,7 +277,7 @@
     "language": "English",
     "complexity": "Intermediate",
     "presentation": "http://slides.com/mg6maciej/continuous-delivery-with-ease-devfest-ukraine-2015",
-    "thumbnail": "/2015/images/sessions/114.JPG",
+    "thumbnail": "/images/sessions/114.JPG",
     "videoId": "b-4upgkYdZo",
     "tags": [
       "Android",
@@ -294,7 +294,7 @@
     "language": "English",
     "complexity": "Intermediate",
     "presentation": "https://speakerdeck.com/gdglviv/jana-moudra-lets-play-dart",
-    "thumbnail": "/2015/images/sessions/115.JPG",
+    "thumbnail": "/images/sessions/115.JPG",
     "videoId": "DoUATBQcihI",
     "tags": [
       "Web",
@@ -311,7 +311,7 @@
     "language": "English",
     "complexity": "Intermediate",
     "presentation": "https://speakerdeck.com/gdglviv/jakub-skvara-polymer-vs-other-libraries",
-    "thumbnail": "/2015/images/sessions/116.JPG",
+    "thumbnail": "/images/sessions/116.JPG",
     "videoId": "-UEURYYVCmg",
     "tags": [
       "Web",
@@ -328,7 +328,7 @@
     "language": "English",
     "complexity": "Intermediate",
     "presentation": "https://speakerdeck.com/gdglviv/ksenia-shymelcgyk-bluetooth-low-energy-and-ibeacon-development-for-android",
-    "thumbnail": "/2015/images/sessions/117.JPG",
+    "thumbnail": "/images/sessions/117.JPG",
     "videoId": "tEUmmZDwHDg",
     "tags": [
       "Android",
@@ -361,7 +361,7 @@
     "language": "Russian",
     "complexity": "Intermediate",
     "presentation": "https://speakerdeck.com/gdglviv/alexey-rybakov-android-tv-development",
-    "thumbnail": "/2015/images/sessions/119.JPG",
+    "thumbnail": "/images/sessions/119.JPG",
     "videoId": "SoXb9cXnJhc",
     "tags": [
       "Android",
@@ -378,7 +378,7 @@
     "language": "English",
     "complexity": "Intermediate",
     "presentation": "https://speakerdeck.com/gdglviv/juarez-filho-firebase-adventures",
-    "thumbnail": "/2015/images/sessions/120.JPG",
+    "thumbnail": "/images/sessions/120.JPG",
     "videoId": "uz4vA21lqoE",
     "tags": [
       "Cloud",
@@ -395,7 +395,7 @@
     "language": "English",
     "complexity": "Intermediate",
     "presentation": "",
-    "thumbnail": "/2015/images/sessions/121.JPG",
+    "thumbnail": "/images/sessions/121.JPG",
     "videoId": "",
     "tags": [
       "Cloud",
@@ -412,7 +412,7 @@
     "language": "English",
     "complexity": "Intermediate",
     "presentation": "https://speakerdeck.com/gdglviv/viktor-zozuliak-service-worker-native-apps-experience-for-the-web",
-    "thumbnail": "/2015/images/sessions/122.JPG",
+    "thumbnail": "/images/sessions/122.JPG",
     "videoId": "szLFi1aO398",
     "tags": [
       "Web",
@@ -429,7 +429,7 @@
     "language": "English",
     "complexity": "Intermediate",
     "presentation": "https://speakerdeck.com/gdglviv/busra-deniz-google-webrtc-on-mobile",
-    "thumbnail": "/2015/images/sessions/123.JPG",
+    "thumbnail": "/images/sessions/123.JPG",
     "videoId": "YWaOdwCenZM",
     "tags": [
       "Web",
@@ -446,7 +446,7 @@
     "language": "English",
     "complexity": "Beginner",
     "presentation": "https://speakerdeck.com/gdglviv/semih-yagcioglu-build-your-thing-in-a-weekend-with-angularjs-2-dot-0",
-    "thumbnail": "/2015/images/sessions/124.JPG",
+    "thumbnail": "/images/sessions/124.JPG",
     "videoId": "gHd-0itPpGg",
     "tags": [
       "Web",
@@ -463,7 +463,7 @@
     "language": "English",
     "complexity": "Beginner",
     "presentation": "https://speakerdeck.com/gdglviv/dawid-ostrowski-lean-startup-with-google",
-    "thumbnail": "/2015/images/sessions/125.JPG",
+    "thumbnail": "/images/sessions/125.JPG",
     "videoId": "o04aL3IzmcQ",
     "tags": [
       "Entrepreneurship"
@@ -545,7 +545,7 @@
     "language": "English",
     "complexity": "Beginner",
     "presentation": "",
-    "thumbnail": "/2015/images/sessions/130.JPG",
+    "thumbnail": "/images/sessions/130.JPG",
     "videoId": "",
     "tags": [
       "Web",
@@ -562,7 +562,7 @@
     "language": "English",
     "complexity": "Beginner",
     "presentation": "",
-    "thumbnail": "/2015/images/sessions/131.JPG",
+    "thumbnail": "/images/sessions/131.JPG",
     "videoId": "",
     "tags": [
       "Web",
@@ -595,7 +595,7 @@
     "language": "Ukrainian",
     "complexity": "Beginner",
     "presentation": "https://speakerdeck.com/gdglviv/constantine-mars-rxjava-for-android",
-    "thumbnail": "/2015/images/sessions/133.JPG",
+    "thumbnail": "/images/sessions/133.JPG",
     "videoId": "3LQnqJhGQmI",
     "tags": [
       "Android",
@@ -612,7 +612,7 @@
     "language": "Ukrainian",
     "complexity": "Intermediate",
     "presentation": "https://speakerdeck.com/gdglviv/anton-minashkin-data-binding",
-    "thumbnail": "/2015/images/sessions/134.JPG",
+    "thumbnail": "/images/sessions/134.JPG",
     "videoId": "GYwvQ0YAPo4",
     "tags": [
       "Android",
@@ -629,7 +629,7 @@
     "language": "English",
     "complexity": "Beginner",
     "presentation": "https://speakerdeck.com/gdglviv/igor-dvoretskyi-the-cloud-convergence-openstack-and-kubernetes",
-    "thumbnail": "/2015/images/sessions/135.JPG",
+    "thumbnail": "/images/sessions/135.JPG",
     "videoId": "3zbxUcyiP8Y",
     "tags": [
       "Cloud",
@@ -687,7 +687,7 @@
     "language": "English",
     "complexity": "Beginner",
     "presentation": "",
-    "thumbnail": "/2015/images/sessions/140.JPG",
+    "thumbnail": "/images/sessions/140.JPG",
     "videoId": "8kXNWOhEAhE",
     "tags": [
       "Web"

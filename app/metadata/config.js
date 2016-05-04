@@ -1,7 +1,7 @@
 var config = require('../../config');
 
 module.exports = {
-    baseUrl: '/2015',
+    baseUrl: '',
     url: 'https://devfest.gdg.org.ua',
     // Google Analytics code
     trackerCode: 'UA-43643469-1',

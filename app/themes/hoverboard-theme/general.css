@@ -122,7 +122,8 @@ a,
   margin-left: -9px;
 }
 
-.markdown-html img {
+.markdown-html img,
+.markdown-html iframe {
   margin-right: auto;
   margin-left: auto;
   max-width: 100%;

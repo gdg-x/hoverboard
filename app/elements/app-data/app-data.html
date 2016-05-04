@@ -4,11 +4,12 @@
 
 <dom-module id="app-data">
   <template>
-    <iron-ajax auto url="[[speakersSource]]" handle-as="json" last-response="{{_speakersRaw}}"></iron-ajax>
-    <iron-ajax auto url="[[sessionsSource]]" handle-as="json" last-response="{{sessions}}"></iron-ajax>
+    <iron-ajax auto url="[[speakersSource]]" handle-as="json" last-response="{{speakers}}"></iron-ajax>
+    <!--<iron-ajax auto url="[[sessionsSource]]" handle-as="json" last-response="{{sessions}}"></iron-ajax>-->
     <iron-ajax auto url="[[postsSource]]" handle-as="json" on-response="_reversePosts"></iron-ajax>
     <iron-ajax auto url="[[partnersSource]]" handle-as="json" last-response="{{partners}}"></iron-ajax>
-    <iron-ajax auto url="[[scheduleSource]]" handle-as="json" last-response="{{_scheduleRaw}}"></iron-ajax>
+    <iron-ajax auto url="[[videosSource]]" handle-as="json" last-response="{{videos}}"></iron-ajax>
+    <!--<iron-ajax auto url="[[scheduleSource]]" handle-as="json" last-response="{{_scheduleRaw}}"></iron-ajax>-->
   </template>
   <script>
     (function () {
@@ -39,6 +40,10 @@
             scheduleSource: {
               type: String,
               value: '{$ baseUrl $}/data/schedule.json'
+            },
+            videosSource: {
+              type: String,
+              value: '{$ baseUrl $}/data/videos.json'
             },
             speakers: {
               type: Array,
