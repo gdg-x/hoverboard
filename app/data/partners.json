@@ -5,4 +5,51 @@
     "url": "https://www.google.com.ua/intl/en/about/",
     "logoUrl": "/images/partners/google.svg"
   }]
+}, {
+    "title": "Information partners",
+    "logos": [{
+        "name": "Android Weekly",
+        "url": "http://androidweekly.net/",
+        "logoUrl": "../images/partners/android_weekly.png"
+    }, {
+        "name": "Droidcon Krakow",
+        "url": "http://droidcon.pl/",
+        "logoUrl": "../images/partners/droidcon.png"
+    }, {
+        "name": "CyberBionic",
+        "url": "http://edu.cbsystematics.com/en/",
+        "logoUrl": "../images/partners/cbs.png"
+    }, {
+        "name": "ITVDN",
+        "url": "http://itvdn.com/en",
+        "logoUrl": "../images/partners/itvdn.png"
+    }, {
+        "name": "ITEM",
+        "url": "http://item.com.ua/",
+        "logoUrl": "../images/partners/item.png"
+    }, {
+        "name": "JDay",
+        "url": "http://www.jday.com.ua/",
+        "logoUrl": "../images/partners/jday.png"
+    }, {
+        "name": "Lviv Convention Bureau",
+        "url": "http://lvivconvention.com.ua/en/",
+        "logoUrl": "../images/partners/lcb.png"
+    }, {
+        "name": "Lviv IT School",
+        "url": "http://lits.com.ua/",
+        "logoUrl": "../images/partners/lits.png"
+    }, {
+        "name": "Symphony Solutions",
+        "url": "http://www.symphony-solutions.eu/",
+        "logoUrl": "../images/partners/symphony-solutions.png"
+    }, {
+        "name": "UA Mobile",
+        "url": "http://www.uamobile.org/",
+        "logoUrl": "../images/partners/uamobile.png"
+    }, {
+        "name": "Rozrobka",
+        "url": "https://rozrobka.com/",
+        "logoUrl": "../images/partners/rozrobka.png"
+    }]
 }]

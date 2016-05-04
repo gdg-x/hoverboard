@@ -1,4 +1,4 @@
-Ukrainian Google Developers Groups are proud to announce the fifth annual GDG DevFest 2016 which is the biggest Google related event in Ukraine carefully crafted by GDG community! The event will take place on **9-10th of September* in **Lviv**.
+Ukrainian Google Developers Groups are proud to announce the fifth annual GDG DevFest 2016 which is the biggest Google related event in Ukraine carefully crafted by GDG community! The event will take place on **9-10th of September** in **Lviv**.
 
 ### What to expect
 
