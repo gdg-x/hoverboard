@@ -7,9 +7,11 @@
     Polymer.UtilsBehavior = {
 
         _getIndexByProperty: function (array, property, value) {
-          for (let i = 0, length = array.length; i < length; i++) {
-            if (array[i][property].toString() === value.toString()) {
-              return i;
+          if(array) {
+            for (let i = 0, length = array.length; i < length; i++) {
+              if (array[i][property].toString() === value.toString()) {
+                return i;
+              }
             }
           }
         },

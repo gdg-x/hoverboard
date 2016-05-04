@@ -83,7 +83,7 @@
       <h4 class="heading">Rockstar Speakers</h4>
       <div class="people-wrapper">
         <template is="dom-repeat" items="[[featuredPeople]]" as="person">
-          <a data-route="speakers/[[person.id]]" href="{$ baseUrl $}/speakers/[[person.id]]" class="person">
+          <a href="{$ baseurl $}/speakers/[[person.id]]" class="person">
             <div class="photo" style="background-image: url([[person.photoUrl]])"></div>
             <h4 class="name">[[person.name]]</h4>
             <span class="company">[[person.company]]</span>
@@ -91,7 +91,7 @@
         </template>
       </div>
       <div>
-        <a data-route="speakers" href="{$ baseUrl $}/speakers" class="block-link">
+        <a href="{$ baseurl $}/speakers" class="block-link">
           <paper-button>View all speakers</paper-button>
         </a>
       </div>

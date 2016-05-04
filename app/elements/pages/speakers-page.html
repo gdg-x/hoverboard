@@ -141,11 +141,10 @@
       }
     </style>
 
-    <div class="container page-header" cascaded>
-      <div class="page-title">
-        <h3>Speakers</h3>
-      </div>
-    </div>
+    <carbon-route route="{{route}}"
+                  pattern="/:id"
+                  data="{{speakerData}}"></carbon-route>
+
     <div class="container speakers-container">
       <template is="dom-repeat" items="[[_toArray(speakers)]]" as="speaker" on-dom-change="_updateCascadedNodes">
         <div class="speaker" cascaded>
@@ -167,10 +166,10 @@
                 <span class="title">[[speaker.company]], [[speaker.country]]</span>
               </div>
             </div>
-            <div class="card-content" on-tap="_openSpeaker">
+            <a href="{$ baseurl $}/speakers/[[speaker.id]]/" class="card-content">
               <truncate-marked-text class="bio" text="[[speaker.bio]]" characters="220"
                                     break-last-word></truncate-marked-text>
-            </div>
+            </a>
             <div class="card-actions">
               <template is="dom-repeat" items="[[speaker.socials]]" as="social">
                 <a href="[[social.link]]" target="_blank">
@@ -185,8 +184,10 @@
     </div>
     <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}" cascaded></footer-block>
 
-    <speaker-details id="speakerDetails" speaker="{{_selectedSpeaker}}"
-                     entry-animation="scale-up-animation" exit-animation="fade-out-animation"
+    <speaker-details id="speakerDetails"
+                     speaker="{{_selectedSpeaker}}"
+                     entry-animation="scale-up-animation"
+                     exit-animation="fade-out-animation"
                      with-backdrop></speaker-details>
 
   </template>
@@ -210,9 +211,9 @@
           },
           selected: {
             type: Boolean,
-            observer: 'updateHeroSettings'
+            observer: 'updateHeaderSettings'
           },
-          heroSettings: {
+          headerSettings: {
             type: Object,
             notify: true
           },
@@ -221,11 +222,11 @@
             notify: true
           },
           _selectedSpeaker: Object,
-          _heroSettings: {
+          _headerSettings: {
             type: Object,
             /* jshint ignore:start */
             value: function () {
-              return {% for nav in navigation %}{% if nav.route == 'speakers' %}{$ nav.heroSettings | dump $}{% endif %}{% endfor %};
+              return {% for nav in navigation %}{% if nav.route == 'speakers' %}{$ nav.headerSettings | dump $}{% endif %}{% endfor %};
             }
             /* jshint ignore:end */
           },
@@ -253,19 +254,18 @@
         },
 
         observers: [
-          'openSpeakerDetails(selected, speakerId, speakers)'
+          'openSpeakerDetails(speakerData)'
         ],
 
-        updateHeroSettings: function () {
-          this.heroSettings = this.selected ? this._heroSettings : this.heroSettings;
+        updateHeaderSettings: function () {
+          this.headerSettings = this.selected ? this._headerSettings : this.headerSettings;
         },
 
         openSpeakerDetails: function () {
-          if (this.selected && this.speakerId) {
+          if (this.speakerData.id) {
             this.async(function () {
-              this._selectedSpeaker = this.speakers[this.speakerId];
+              this._selectedSpeaker = this.speakers[this.speakerData.id];
               this.$.speakerDetails.open();
-              this.speakerId = null;
             }, 500);
           }
         },
@@ -288,11 +288,6 @@
             transformTo: 'translate3d(0, 100%, 0)',
             nodes: cascadedArray
           });
-        },
-
-        _openSpeaker: function (e) {
-          this._selectedSpeaker = e.model.speaker;
-          this.$.speakerDetails.open();
         }
 
       });

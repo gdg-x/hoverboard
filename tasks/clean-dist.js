@@ -18,7 +18,6 @@ module.exports = function (del) { return function (cb) {
     'dist/elements/*',
     '!dist/elements/*-bundle.{html,js}',
     'dist/scripts/app.js',
-    'dist/scripts/routing.js',
     'dist/scripts/**/*.map',
     'dist/themes/*/*.{html,map}',
     'dist/themes/*/fonts/fonts.css'

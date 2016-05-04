@@ -1,0 +1,135 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
+<dom-module id="toolbar-block">
+
+  <template>
+
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        --header-color: #fff;
+
+        --paper-tabs: {
+          height: 64px;
+        };
+        --iron-icon-fill-color: var(--header-color);
+        --paper-tabs-selection-bar-color: var(--header-color);
+
+        display: block;
+        position: relative;
+        color: var(--header-color);
+      }
+
+      .logo-wrapper {
+        @apply(--layout-flex);
+      }
+
+      .logo-wrapper a {
+        display: inline-block;
+      }
+
+      .logo {
+        margin-top: 7px;
+        height: 40px;
+        width: 130px;
+      }
+
+      paper-tabs a {
+        color: var(--tab-text-color);
+        transition: color .7s
+      }
+
+      paper-tab {
+        flex: none;
+        padding: 0 10px;
+      }
+
+      .nav-link {
+        @apply(--layout-horizontal);
+        @apply(--layout-center-center);
+        height: 100%;
+        text-transform: uppercase;
+      }
+
+      paper-tab {
+        flex: none;
+        padding: 0 10px;
+      }
+
+      paper-tabs a {
+        color: var(--header-color);
+        transition: color .7s
+      }
+    </style>
+
+    <iron-media-query query="(max-width: 599px)" query-matches="{{smallScreen}}"></iron-media-query>
+
+    <app-toolbar id="mainToolbar">
+      <div class="navItem leftItem">
+        <paper-icon-button icon="menu" on-tap="togglePanel" hidden$="{{!smallScreen}}"></paper-icon-button>
+      </div>
+      <div class="logo-wrapper">
+        <a href="{$ baseurl $}/" hidden$="{{smallScreen}}" hide$="[[hideLogo]]" fade>
+          <iron-image class="logo" src="{$ baseurl $}/images/logo-white.svg" sizing="contain"
+                      alt="{$ title $}"></iron-image>
+        </a>
+      </div>
+      <div class="navItem">
+        <paper-tabs selected="{{routeData.page}}" attr-for-selected="data-page" hidden$="{{smallScreen}}" noink>
+          {% for nav in navigation %}
+          <paper-tab data-page="{$ nav.route $}" link>
+            <a href="{$ nav.permalink $}" class="nav-link">{$ nav.text $}</a>
+          </paper-tab>
+          {% endfor %}
+        </paper-tabs>
+      </div>
+    </app-toolbar>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      class ToolbarBlock {
+
+        beforeRegister() {
+          this.is = this.constructor.name.replace(/\W+/g, '-')
+            .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+          this.properties = {
+            routeData: {
+              type: Object,
+              notify: true
+            },
+            frontColor: {
+              type: String,
+              observer: '_stylesChanged'
+            },
+            hideLogo: Boolean
+          };
+        }
+
+        togglePanel() {
+          app.toggleDrawer();
+        }
+
+        _stylesChanged() {
+          this.customStyle['--header-color'] = this.frontColor;
+          this.updateStyles();
+        }
+
+      }
+
+      Polymer(ToolbarBlock);
+
+    })();
+  </script>
+
+</dom-module>
