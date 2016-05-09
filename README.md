@@ -1,5 +1,7 @@
 # Project Hoverboard - GDG DevFest 2016 site template
 
+[![Join the chat at https://gitter.im/gdg-x/hoverboard](https://badges.gitter.im/gdg-x/hoverboard.svg)](https://gitter.im/gdg-x/hoverboard?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 > Project Hoverboard is the next generation conference website template after [Project Zeppelin](https://github.com/gdg-x/zeppelin) and more optimized version - [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
 
 > Template was build using [Polymer](http://polymer-project.org) according to [Material Design](http://www.google.com/design/spec/material-design/introduction.html) guidelines and based on [Polymer Starter Kit Plus](https://github.com/StartPolymer/polymer-starter-kit-plus).
