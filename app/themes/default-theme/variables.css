@@ -1,0 +1,97 @@
+/*
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/
+
+/*
+Polymer includes a shim for CSS Custom Properties that we can use for application theming.
+Below, you'll find the default palette for the Polymer Starter Kit Plus layout. Feel free to play
+with changing the colors used or generate your own palette of colours at MaterialPalette.com.
+
+See https://www.polymer-project.org/1.0/docs/devguide/styling.html#xscope-styling-details
+for further information on custom CSS properties.
+*/
+
+/* Material Design Style
+   http://www.google.com/design/spec/style/color.html */
+
+:root {
+  /* Material Design Themes
+     https://www.google.com/design/spec/style/color.html#color-themes */
+
+  /* Light theme */
+  --light-theme-primary-background-color: var(--paper-grey-50);     /* Content background */
+  --light-theme-secondary-background-color: var(--paper-grey-100);  /* Main / Drawer background */
+  --light-theme-tertiary-background-color: #fff;                    /* Cards / Dialogs background */
+  --light-theme-primary-text-color: rgba(0, 0, 0, 0.87);
+  --light-theme-secondary-text-color: rgba(0, 0, 0, 0.54);          /* Secondary text / Icons */
+  --light-theme-disabled-text-color: rgba(0, 0, 0, 0.38);           /* Disabled / Hint text */
+  --light-theme-divider-color: rgba(0, 0, 0, 0.12);
+
+  /* Dark theme */
+  --dark-theme-primary-background-color: #303030;                   /* Content background */
+  --dark-theme-secondary-background-color: var(--paper-grey-900);   /* Main / Drawer background */
+  --dark-theme-tertiary-background-color: var(--paper-grey-800);    /* Cards / Dialogs background */
+  --dark-theme-primary-text-color: rgba(255, 255, 255, 0.9);
+  --dark-theme-secondary-text-color: rgba(255, 255, 255, 0.7);      /* Secondary text / Icons */
+  --dark-theme-disabled-text-color: rgba(255, 255, 255, 0.3);       /* Disabled / Hint text */
+  --dark-theme-divider-color: rgba(255, 255, 255, 0.12);
+
+  /* Colors */
+  --primary-background-color: var(--$(themeMode)-theme-primary-background-color);
+  --secondary-background-color: var(--$(themeMode)-theme-secondary-background-color);
+  --tertiary-background-color: var(--$(themeMode)-theme-tertiary-background-color);
+  --primary-text-color: var(--$(themeMode)-theme-primary-text-color);
+  --secondary-text-color: var(--$(themeMode)-theme-secondary-text-color);
+  --disabled-text-color: var(--$(themeMode)-theme-disabled-text-color);
+  --divider-color: var(--$(themeMode)-theme-divider-color);
+  --error-color: var(--paper-deep-orange-a700);                     /* User input errors */
+
+  /* Primary colors */
+  --primary-color: var(--paper-$(primaryColorName)-500);            /* Header bar */
+  --light-primary-color: var(--paper-$(primaryColorName)-100);
+  --dark-primary-color: var(--paper-$(primaryColorName)-700);
+  --text-primary-color: #fff;                                       /* Text / Icons */
+  --text-light-primary-color: var(--paper-grey-900);
+  --text-dark-primary-color: #fff;
+
+  /* Accent colors */
+  --accent-color: var(--paper-$(accentColorName)-a200);             /* Focus / Links / Switches */
+  --light-accent-color: var(--paper-$(accentColorName)-a100);
+  --dark-accent-color: var(--paper-$(accentColorName)-a400);
+  --darker-accent-color: var(--paper-$(accentColorName)-a700);
+  --text-accent-color: #fff;                                        /* Text / Icons */
+  --text-light-accent-color: var(--paper-grey-900);
+  --text-dark-accent-color: #fff;
+
+  /* Toggle button colors
+     https://www.google.com/design/spec/components/selection-controls.html#selection-controls-switch */
+  --light-theme-toggle-unchecked-bar-color: #000;
+  --light-theme-toggle-unchecked-button-color: var(--paper-grey-50);
+  --light-theme-toggle-unchecked-ink-color: var(--paper-grey-700);
+  --light-theme-toggle-checked-bar-color: var(--accent-color);
+  --light-theme-toggle-checked-button-color: var(--accent-color);
+  --light-theme-toggle-checked-ink-color: var(--dark-accent-color);
+  
+  --dark-theme-toggle-unchecked-bar-color: var(--paper-grey-400);
+  --dark-theme-toggle-unchecked-button-color: var(--paper-grey-400);
+  --dark-theme-toggle-unchecked-ink-color: var(--paper-grey-50);
+  --dark-theme-toggle-checked-bar-color: var(--light-accent-color);
+  --dark-theme-toggle-checked-button-color: var(--light-accent-color);
+  --dark-theme-toggle-checked-ink-color: var(--light-accent-color);
+  
+  --toggle-unchecked-bar-color: var(--$(themeMode)-theme-toggle-unchecked-bar-color);
+  --toggle-unchecked-button-color: var(--$(themeMode)-theme-toggle-unchecked-button-color);
+  --toggle-unchecked-ink-color: var(--$(themeMode)-theme-toggle-unchecked-ink-color);
+  --toggle-checked-bar-color: var(--$(themeMode)-theme-toggle-checked-bar-color);
+  --toggle-checked-button-color: var(--$(themeMode)-theme-toggle-checked-button-color);
+  --toggle-checked-ink-color: var(--$(themeMode)-theme-toggle-checked-ink-color);
+
+  /* Deprecated values because of their confusing names.
+     https://github.com/PolymerElements/paper-styles/blob/master/default-theme.html */
+  --default-primary-color: var(--primary-color);
+}

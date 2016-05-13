@@ -1,0 +1,98 @@
+/*
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/
+
+/** @define Skeleton */
+
+.Skeleton {
+  @nest & * {
+    box-sizing: border-box;
+  }
+
+  @nest &-drawer {
+    background-color: var(--primary-background-color);
+    bottom: 0;
+    display: none;
+    left: 0;
+    position: fixed;
+    right: auto;
+    top: 0;
+    width: 0;
+
+    @media (--md-viewport) {
+      display: block;
+      width: 256px;
+    }
+  }
+
+  @nest &-drawerContent {
+    border-right: 1px solid var(--divider-color);
+    height: 100%;
+  }
+
+  @nest &-drawerHeader {
+    background-color: var(--dark-primary-color);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+    color: var(--text-dark-primary-color);
+    display: block;
+    height: 64px;
+  }
+
+  @nest &-drawerHeaderContent {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    height: 64px;
+    margin: 0 16px;
+  }
+
+  @nest &-drawerTitle {
+    /* Nested mixins issue https://github.com/pascalduez/postcss-apply/issues/3
+       @apply rule with brackets issue https://github.com/pascalduez/postcss-apply/issues/4
+    */
+    @apply --paper-font-common-base;
+    @apply --paper-font-headline;
+  }
+
+  @nest &-main {
+    background-color: var(--secondary-background-color);
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    position: fixed;
+    right: 0;
+    top: 0;
+
+    @media (--md-viewport) {
+      left: 256px;
+    }
+  }
+
+  @nest &-mainHeader {
+    background-color: var(--primary-color);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+    height: calc(56px * 3);
+    left: 0;
+    position: relative;
+    right: 0;
+    top: 0;
+
+    @media (--md-viewport) {
+      height: calc(64px * 3);
+    }
+  }
+
+  @nest &-mainHeaderTopBar {
+    background-color: var(--dark-primary-color);
+    height: 56px;
+
+    @media (--md-viewport) {
+      height: 64px;
+    }
+  }
+}

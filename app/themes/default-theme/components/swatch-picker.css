@@ -7,4 +7,22 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
 
-importScripts('bower_components/platinum-sw/service-worker.js');
+/** @define SwatchPicker */
+
+.SwatchPicker {
+  @apply(--layout-horizontal);
+  @apply(--layout-center);
+
+  min-height: 48px;
+
+  @nest &-button {
+    --paper-swatch-picker-color-size: 48px;
+    --paper-icon-button-ink-color: var(--accent-color);
+
+    color: var(--accent-color);
+  }
+
+  @nest &-icon {
+    margin-right: 24px;
+  }
+}

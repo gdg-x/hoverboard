@@ -1,0 +1,104 @@
+/*
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/
+
+/** @define Main */
+
+.Main {
+  background-color: var(--secondary-background-color);
+
+  @nest &-content {
+    @apply(--paper-font-body1);
+    color: var(--primary-text-color);
+
+    @media (--md-viewport) {
+      @apply(--paper-font-body2);
+      padding: 48px 64px;
+    }
+
+    @nest & a {
+      color: var(--accent-color);
+      font-weight: 500;
+      text-decoration: none;
+    }
+  }
+
+  @nest &-header {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
+    color: var(--text-primary-color);
+
+    /* postcss-bem-linter: ignore */
+    --paper-toolbar-content: {
+      padding: 0;
+    };
+  }
+
+  @nest &-headerButton {
+    /* postcss-bem-linter: ignore */
+    --paper-icon-button-ink-color: var(--text-dark-primary-color);
+  }
+
+  @nest &-headerTopBar {
+    @apply(--layout-horizontal);
+    @apply(--layout-center);
+
+    background-color: var(--dark-primary-color);
+    bottom: 0;
+    color: var(--text-dark-primary-color);
+    left: 0;
+    padding: 0 16px;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  @nest &-headerMiddleBar {
+    @apply(--layout-horizontal);
+    @apply(--layout-end);
+
+    height: 100%;
+    margin-left: 54px;
+
+    @media (--md-viewport) {
+      margin-left: 64px;
+    }
+  }
+
+  @nest &-headerBottomBar {
+    @apply(--layout-horizontal);
+    @apply(--layout-center);
+
+    margin-left: 54px;
+
+    /* Required for main area's paper-scroll-header-panel custom condensing transformation */
+    transform-origin: left center;
+
+    @media (--md-viewport) {
+      margin-left: 64px;
+    }
+  }
+
+  @nest &-headerTitle {
+    @apply(--paper-font-headline);
+    margin: 0;
+
+    /* Required for main area's paper-scroll-header-panel custom condensing transformation */
+    transform-origin: left center;
+
+    @media (--md-viewport) {
+      @apply(--paper-font-display1);
+    }
+  }
+
+  @nest &-headerSubTitle {
+    @apply(--paper-font-subhead);
+
+    /* Required for main area's paper-scroll-header-panel custom condensing transformation */
+    transform-origin: left center;
+  }
+}

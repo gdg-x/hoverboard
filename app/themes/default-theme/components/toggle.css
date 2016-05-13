@@ -1,0 +1,32 @@
+/*
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/
+
+/** @define Toggle */
+
+/* https://www.google.com/design/spec/components/selection-controls.html#selection-controls-switch */
+
+.Toggle {
+  @apply(--layout-horizontal);
+  @apply(--layout-center);
+
+  min-height: 48px;
+
+  @nest &-button {
+    --paper-toggle-button-unchecked-bar-color: var(--toggle-unchecked-bar-color);
+    --paper-toggle-button-unchecked-button-color: var(--toggle-unchecked-button-color);
+    --paper-toggle-button-unchecked-ink-color: var(--toggle-unchecked-ink-color);
+    --paper-toggle-button-checked-bar-color: var(--toggle-checked-bar-color);
+    --paper-toggle-button-checked-button-color: var(--toggle-checked-button-color);
+    --paper-toggle-button-checked-ink-color: var(--toggle-checked-ink-color);
+  }
+
+  @nest &-icon {
+    margin-right: 24px;
+  }
+}

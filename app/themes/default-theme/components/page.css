@@ -1,0 +1,63 @@
+/*
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/
+
+/** @define Page */
+
+.Page {
+  @nest &-formInput {
+    --paper-input-container-focus-color: var(--accent-color);
+
+    width: 250px;
+  }
+
+  @nest &:focus {
+    outline: none;
+  }
+
+  @nest &-title {
+    @apply(--paper-font-display1);
+
+    margin: 32px 0;
+
+    @media (--sm-viewport) {
+      font-size: 24px;
+      margin: 16px 0;
+    }
+  }
+
+  @nest &-subTitle {
+    @apply(--paper-font-subhead);
+  }
+
+  @nest &-paper {
+    background-color: var(--primary-background-color);
+    border-radius: 2px;
+    height: 100%;
+    margin-bottom: 16px;
+    padding: 16px;
+
+    @media (--md-viewport) {
+      margin-bottom: 32px;
+      padding: 16px 32px;
+    }
+
+    @nest &--settings {
+      @apply(--layout-vertical);
+      @apply(--layout-center);
+    }
+  }
+
+  @nest &-widget {
+    width: 100%;
+
+    @media (--md-viewport) {
+      width: 512px;
+    }
+  }
+}
