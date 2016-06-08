@@ -260,11 +260,11 @@
             type: Boolean,
             observer: 'updateHeaderSettings'
           },
-          heroSettings: {
+          headerSettings: {
             type: Object,
             notify: true
           },
-          _heroSettings: {
+          _headerSettings: {
             type: Object,
             value: function () {
               return {
@@ -298,7 +298,7 @@
         },
 
         updateHeaderSettings: function () {
-          this.heroSettings = this.selected ? this._heroSettings : this.heroSettings;
+          this.headerSettings = this.selected ? this._headerSettings : this.headerSettings;
         },
 
         _updateCascadedNodes: function () {
