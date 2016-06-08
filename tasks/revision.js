@@ -26,7 +26,7 @@ module.exports = function ($, gulp) { return function () {
   ]});
 
   return gulp.src('dist/**')
-    //.pipe(revAll.revision())
+    .pipe(revAll.revision())
     .pipe(gulp.dest('deploy'))
     .pipe($.size({title: 'deploy'}));
 };};
