@@ -102,6 +102,20 @@ page(baseUrl, () => {
   setHomePage();
 });
 
+page('/team', () => {
+  function setData() {
+    app.route = 'team';
+    app.scrollPageToTop();
+  }
+
+  // Check if element prototype has not been upgraded yet
+  if (!app.upgraded) {
+    once(app, 'upgraded', setData);
+  } else {
+    setData();
+  }
+});
+
 // 404
 page('*', ctx => {
   function setData() {

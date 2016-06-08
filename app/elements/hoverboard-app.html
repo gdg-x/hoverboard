@@ -25,6 +25,7 @@
 <link rel="import" href="pages/home-page.html">
 <link rel="import" href="pages/blog-pages.html">
 <link rel="import" href="pages/post-page.html">
+<link rel="import" href="pages/team-page.html">
 <link rel="import" href="behaviors/utils-behavior.html">
 <link rel="import" href="effects/fade-effect.html">
 
@@ -115,7 +116,8 @@
               schedule="{{schedule}}"
               posts="{{posts}}"
               partners="{{partners}}"
-              videos="{{videos}}"></app-data>
+              videos="{{videos}}"
+              team="{{team}}"></app-data>
 
     <app-drawer-layout drawer-width="599px" force-narrow>
       <app-drawer id="drawer" swipe-open>
@@ -168,6 +170,9 @@
                          schedule="{{schedule}}"
                          sessions="{{sessions}}"
                          selected-day="{{selectedDay}}"></schedule-page>
+          <team-page data-page="team"
+                     header-settings="{{headerSettings}}"
+                     team="{{team}}"></team-page>
 
         </neon-animated-pages>
       </div>

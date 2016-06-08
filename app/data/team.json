@@ -1,0 +1,211 @@
+{
+  "Core team": [
+    {
+      "name": "Oleh Zasadnyy",
+      "title": "Website and sponsors",
+      "photoUrl": "/images/people/oleh_zasadnyy.jpg",
+      "socials": [
+        {
+          "name": "Google+",
+          "icon": "gplus",
+          "link": "https://plus.google.com/+OlehZasadnyy"
+        },
+        {
+          "name": "Facebook",
+          "icon": "facebook",
+          "link": "https://www.facebook.com/oleh.zasadnyy"
+        },
+        {
+          "name": "Twitter",
+          "icon": "twitter",
+          "link": "https://twitter.com/ozasadnyy"
+        },
+        {
+          "name": "Blog",
+          "icon": "website",
+          "link": "http://o.zasadnyy.com/"
+        }
+      ]
+    },
+    {
+      "name": "Sofiya Huts",
+      "title": "Social and media",
+      "photoUrl": "/images/people/sofiya_huts.jpg",
+      "socials": [
+        {
+          "name": "Google+",
+          "icon": "gplus",
+          "link": "https://plus.google.com/+SofiaHuts"
+        },
+        {
+          "name": "Facebook",
+          "icon": "facebook",
+          "link": "https://www.facebook.com/sophie.huts.7"
+        }
+      ]
+    },
+    {
+      "name": "Vitaliy Zasadnyy",
+      "title": "Speakers",
+      "photoUrl": "/images/people/vitaliy_zasadnyy.jpg",
+      "socials": [
+        {
+          "name": "Linkedin",
+          "icon": "linkedin",
+          "link": "https://www.linkedin.com/in/zasadnyy"
+        },
+        {
+          "name": "Twitter",
+          "icon": "twitter",
+          "link": "https://twitter.com/zasadnyy"
+        },
+        {
+          "name": "Blog",
+          "icon": "website",
+          "link": "http://v.zasadnyy.com/"
+        }
+      ]
+    },
+    {
+      "name": "Marta Maxymiak",
+      "title": "Party and happiness",
+      "photoUrl": "/images/people/marta_maxymiak.jpg",
+      "socials": [
+        {
+          "name": "Google+",
+          "icon": "gplus",
+          "link": "https://plus.google.com/104036874811391520583"
+        },
+        {
+          "name": "Facebook",
+          "icon": "facebook",
+          "link": "https://www.facebook.com/marta.maxymiak"
+        }
+      ]
+    },
+    {
+      "name": "Ostap Andrusiv",
+      "title": "Sponsors",
+      "photoUrl": "/images/people/ostap_andrusiv.jpg",
+      "socials": [
+        {
+          "name": "Google+",
+          "icon": "gplus",
+          "link": "https://google.com/+OstapAndrusiv"
+        },
+        {
+          "name": "Facebook",
+          "icon": "facebook",
+          "link": "https://www.facebook.com/ostap.andrusiv"
+        },
+        {
+          "name": "Twitter",
+          "icon": "twitter",
+          "link": "https://twitter.com/p1f"
+        },
+        {
+          "name": "Blog",
+          "icon": "website",
+          "link": "http://andrusiv.com/"
+        }
+      ]
+    },
+    {
+      "name": "Vasylyna Mytsak",
+      "title": "Party and happiness",
+      "photoUrl": "/images/people/vasylyna_mytsak.jpg",
+      "socials": [
+        {
+          "name": "Google+",
+          "icon": "gplus",
+          "link": "https://plus.google.com/+ВасилинаМицак"
+        },
+        {
+          "name": "Facebook",
+          "icon": "facebook",
+          "link": "https://www.facebook.com/vasylyna.mytsak"
+        }
+      ]
+    },
+    {
+      "name": "Volodya Karpliuk",
+      "title": "Speakers",
+      "photoUrl": "/images/people/volodya_karpliuk.jpg",
+      "socials": [
+        {
+          "name": "Google+",
+          "icon": "gplus",
+          "link": "https://plus.google.com/+VolodyaKarpliuk23"
+        },
+        {
+          "name": "Facebook",
+          "icon": "facebook",
+          "link": "https://www.facebook.com/volodya.karpluk"
+        },
+        {
+          "name": "Twitter",
+          "icon": "twitter",
+          "link": "https://twitter.com/keyv23"
+        }
+      ]
+    },
+    {
+      "name": "Diana Pinchuk",
+      "title": "Social and media",
+      "photoUrl": "/images/people/diana_pinchuk.jpg",
+      "socials": [
+        {
+          "name": "Google+",
+          "icon": "gplus",
+          "link": "https://plus.google.com/+DianaPinchuk"
+        },
+        {
+          "name": "Facebook",
+          "icon": "facebook",
+          "link": "https://www.facebook.com/diana.pinchuk.9"
+        }
+      ]
+    }
+  ],
+  "Program committee": [
+    {
+      "name": "Ihor Dvoretskyi",
+      "title": "Cloud stream",
+      "photoUrl": "/images/people/ihor_dvoretskyi.jpg",
+      "socials": [
+        {
+          "name": "Facebook",
+          "icon": "facebook",
+          "link": "https://www.facebook.com/idvoretskyi"
+        },
+        {
+          "name": "Twitter",
+          "icon": "twitter",
+          "link": "https://twitter.com/idvoretskyi"
+        }
+      ]
+    },
+    {
+      "name": "Dmytro Danylyk",
+      "title": "Android Stream",
+      "photoUrl": "/images/people/dmytro_danylyk.jpg",
+      "socials": [
+        {
+          "name": "Google+",
+          "icon": "gplus",
+          "link": "https://plus.google.com/+DmytroDanylyk"
+        },
+        {
+          "name": "Twitter",
+          "icon": "twitter",
+          "link": "https://twitter.com/dmytrodanylyk"
+        },
+        {
+          "name": "Website",
+          "icon": "website",
+          "link": "http://www.dmytrodanylyk.com/#/about"
+        }
+      ]
+    }
+  ]
+}
