@@ -24,6 +24,7 @@ var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
 var config = require('./config');
+var requireUncached = require('require-uncached');
 
 // Get a task path
 function task(filename) {
@@ -77,7 +78,7 @@ gulp.task('copy', function() {
     '!app/manifest.json',
     '!app/metadata',
     '!app/test',
-    '!app/views',
+    '!app/`',
     '!**/.DS_Store'
   ], {
     dot: true
@@ -326,7 +327,7 @@ gulp.task('serve:gae', ['default'], require(task('serve-gae'))($, gulp));
 gulp.task('styles', ['views'], require(task('styles-postcss'))($, config, gulp, merge));
 
 // Compile HTML files with Nunjucks templating engine
-gulp.task('views', require(task('views-nunjucks'))($, config, gulp));
+gulp.task('views', require(task('views-nunjucks'))($, config, gulp, requireUncached));
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function(cb) {

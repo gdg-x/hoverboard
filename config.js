@@ -9,9 +9,9 @@ try {
 
 module.exports = {
   // App name is used for iron-localstorage element and Service Worker cache ID
-  appName: 'polymer-starter-kit-plus',
+  appName: 'GDG DevFest Season 2016',
   // App theme is directory name in app/themes
-  appTheme: 'default-theme',
+  appTheme: 'hoverboard-theme',
   // App version from git is used for deploy task and frontend
   appVersion: appVersion,
   // Autoprefixer

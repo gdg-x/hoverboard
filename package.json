@@ -52,6 +52,7 @@
     "postcss-simple-vars": "^1.2.0",
     "psi": "^2.0.2",
     "require-dir": "^0.3.0",
+    "require-uncached": "^1.0.2",
     "run-sequence": "^1.0.2",
     "stylelint": "^4.3.3",
     "stylelint-config-standard": "^3.0.0",

@@ -30,10 +30,6 @@
     // When base-bundle.html with elements is loaded
     var onImportLoaded = function() {
       logger('Imports are loaded and elements have been registered!');
-      
-      // Remove skeleton
-      var skeleton = document.getElementById('skeleton');
-      skeleton.remove();
 
       if (webComponentsSupported) {
         // Emulate WebComponentsReady event for browsers supporting Web Components natively
