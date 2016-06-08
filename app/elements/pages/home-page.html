@@ -65,7 +65,7 @@
               type: Object,
               /* jshint ignore:start */
               value: function () {
-                return {% for nav in navigation %}{% if nav.route == 'home' %}{$ nav.headerSettings | dump $}{% endif %}{% endfor %};
+                return {% for nav in navigation %}{% if nav.route == '' %}{$ nav.headerSettings | dump $}{% endif %}{% endfor %};
               }
               /* jshint ignore:end */
             },

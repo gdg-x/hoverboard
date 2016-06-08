@@ -57,13 +57,13 @@
         <div class="post">
           <div class="title">[[_posts.0.title]]</div>
           <marked-element markdown="[[_posts.0.brief]]"></marked-element>
-          <a data-route$="[[_posts.0.dataRoute]]" href$="[[_posts.0.url]]">Continue reading</a>
+          <a href$="[[_posts.0.url]]">Continue reading</a>
         </div>
         <span class="post-divider"></span>
         <div class="post">
           <div class="title">[[_posts.1.title]]</div>
           <marked-element markdown="[[_posts.1.brief]]"></marked-element>
-          <a data-route$="[[_posts.1.dataRoute]]" href$="[[_posts.1.url]]">Continue reading</a>
+          <a href$="[[_posts.1.url]]">Continue reading</a>
         </div>
       </div>
     </div>
@@ -91,8 +91,7 @@
         _postsChanged() {
           let temp = this.posts.slice(0, 2);
           for (let i = 0, len = temp.length; i < len; i++) {
-            temp[i].url = '{$ baseurl $}/blog/' + temp[i].id;
-            temp[i].dataRoute = 'blog/' + temp[i].id;
+            temp[i].url = '{$ baseurl $}/blog/posts/' + temp[i].id + '/';
           }
           this._posts = temp;
         }

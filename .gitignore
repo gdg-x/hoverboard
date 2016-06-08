@@ -6,6 +6,7 @@ deploy
 dist
 node_modules
 npm-debug.log*
+TODO.md
 .tmp
 .publish/
 .idea

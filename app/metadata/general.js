@@ -2,16 +2,12 @@ module.exports = {
   title: 'GDG DevFest Season 2015',
   description: 'The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts',
   keywords: 'event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, cloud',
-  motto: 'Make the most of the development. Make the most of you!',
+  motto: 'Be a hero! Be a GDG!',
   charset: 'utf-8',
   lang: 'en',
-  // Add to homescreen for Chrome on Android
-  applicationName: 'GDG DevFest Season 2015',
-  // Add to homescreen for Safari on iOS
-  appleMobileWebAppTitle: 'GDG DevFest Season 2015',
 
   // Event details
-  dates: 'October 23-24, 2015',
+  dates: 'September 9-10, 2016',
   location: {
     title: 'Pivdennyi Expo Center',
     description: 'Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event',

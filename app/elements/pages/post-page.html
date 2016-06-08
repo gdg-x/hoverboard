@@ -41,8 +41,7 @@
       }
 
       .post-wrapper {
-        margin-top: 2px;
-        background: #FFFFFF;
+        background: #fff;
       }
 
       .post-meta {
@@ -107,10 +106,6 @@
           text-align: right;
         }
 
-        .post-wrapper {
-          margin-top: 52px;
-        }
-
         .post {
           margin: var(--grid-gutter);
         }
@@ -132,7 +127,7 @@
           <div class="latest-post">
             <template is="dom-if" if="{{_latestPosts.0}}">
               <span class="latest-post-label">Next post</span>
-              <a data-route="blog/[[_latestPosts.0.id]]" href="{$ baseurl $}/blog/[[_latestPosts.0.id]]"
+              <a href="{$ baseurl $}/blog/posts/[[_latestPosts.0.id]]/"
                  class="post" cascaded>
                 <iron-image class="image" src="[[_latestPosts.0.image]]"
                             style$="background-color: [[_latestPosts.0.primaryColor]];" sizing="cover"
@@ -147,7 +142,7 @@
           <div class="latest-post">
             <template is="dom-if" if="[[_latestPosts.1]]">
               <span class="latest-post-label">Previous post</span>
-              <a data-route="blog/[[_latestPosts.1.id]]" href="{$ baseurl $}/blog/[[_latestPosts.1.id]]"
+              <a href="{$ baseurl $}/blog/posts/[[_latestPosts.1.id]]/"
                  class="post" cascaded>
                 <iron-image class="image" src="[[_latestPosts.1.image]]"
                             style$="background-color: [[_latestPosts.1.primaryColor]];" sizing="cover"
@@ -203,10 +198,6 @@
           headerSettings: {
             type: Object,
             notify: true
-          },
-          selected: {
-            type: Boolean,
-            observer: 'updateHeaderSettings'
           },
           _loaded: {
             type: Boolean,
@@ -268,7 +259,7 @@
         },
 
         observers: [
-          '_postChanged(posts, postId, selected)'
+          '_postChanged(posts, postId)'
         ],
 
         listeners: {
@@ -280,15 +271,15 @@
             this.headerSettings = {
               backgroundColor: this._post.primaryColor,
               backgroundImage: this._post.image,
-              fontColor: '#FFFFFF',
-              tabBarColor: '#FFFFFF',
+              fontColor: '#fff',
+              tabBarColor: '#fff',
               title: this._post.title
             };
           }
         },
 
         _postChanged: function () {
-          if (this.selected && this.postId) {
+          if (this.postId) {
             this.$.animationWrapper.style.opacity = 0;
             this.$.animationWrapper.style.display = 'none';
             this.$.spinner.style.opacity = 1;

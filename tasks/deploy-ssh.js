@@ -5,13 +5,14 @@
 // For info on tool: https://www.firebase.com/docs/hosting/command-line-tool.html
 module.exports = function ($, config, gulp, environment) {
   var remoteDir = null,
-      remoteSymbolicLink = null;
+      remoteSymbolicLink = null,
+      appVersion = config.appVersion || new Date().toISOString();
 
   if (environment === 'promote') {
     console.log('SSH don\'t support promote');
     return;
   } else {
-    remoteDir = config.deploy.ssh.env[environment] + '.' + config.version;
+    remoteDir = config.deploy.ssh.env[environment] + '.' + appVersion;
     remoteSymbolicLink = config.deploy.ssh.env[environment];
   }
 

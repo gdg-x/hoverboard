@@ -23,7 +23,7 @@
 <link rel="import" href="pages/speakers-page.html">
 <link rel="import" href="pages/schedule-page.html">
 <link rel="import" href="pages/home-page.html">
-<link rel="import" href="pages/blog-page.html">
+<link rel="import" href="pages/blog-pages.html">
 <link rel="import" href="pages/post-page.html">
 <link rel="import" href="behaviors/utils-behavior.html">
 <link rel="import" href="effects/fade-effect.html">
@@ -90,45 +90,96 @@
       }
     </style>
 
-    <app-data speakers="{{speakers}}" sessions="{{sessions}}" posts="{{posts}}" partners="{{partners}}"
-              schedule="{{schedule}}" videos="{{videos}}"></app-data>
+
+    <carbon-location route="{{route}}"></carbon-location>
+
+    <carbon-route route="{{route}}"
+                  pattern="/:page"
+                  data="{{pageData}}"></carbon-route>
+
+    <carbon-route route="{{route}}"
+                  pattern="/blog"
+                  tail="{{blogTail}}"></carbon-route>
+
+    <carbon-route route="{{route}}"
+                  pattern="/schedule"
+                  tail="{{scheduleTail}}"></carbon-route>
+
+    <carbon-route route="{{route}}"
+                  pattern="/speakers"
+                  tail="{{speakersTail}}"></carbon-route>
+
+
+    <app-data speakers="{{speakers}}"
+              sessions="{{sessions}}"
+              schedule="{{schedule}}"
+              posts="{{posts}}"
+              partners="{{partners}}"
+              videos="{{videos}}"></app-data>
 
     <app-drawer-layout drawer-width="599px" force-narrow>
       <app-drawer id="drawer" swipe-open>
-        <drawer-block route="{{route}}" drawer></drawer-block>
+        <drawer-block route-data="{{pageData}}" drawer></drawer-block>
       </app-drawer>
 
       <app-header id="header" effects="parallax-background blend-background fade-effect" condenses shadow reveals>
         <div class="image-overlay-wrapper" show$="[[headerSettings.backgroundImage]]">
           <div class="image-overlay" fade></div>
         </div>
-        <toolbar-block route="{{route}}" front-color="{{headerSettings.fontColor}}"
-                       hide-logo="[[headerSettings.hideLogo]]" primary></toolbar-block>
-        <header-content route="{{route}}" header-title="{{headerSettings.title}}" schedule="{{schedule}}"
-                        selected-day="{{selectedDay}}" min-height="{{headerSettings.minHeight}}" fade></header-content>
+        <toolbar-block route-data="{{pageData}}"
+                       front-color="{{headerSettings.fontColor}}"
+                       hide-logo="[[headerSettings.hideLogo]]"
+                       primary></toolbar-block>
+
+        <header-content route-data="{{pageData}}"
+                        schedule="{{schedule}}"
+                        selected-day="{{selectedDay}}"
+                        header-title="{{headerSettings.title}}"
+                        min-height="{{headerSettings.minHeight}}"
+                        fade></header-content>
       </app-header>
 
       <div class="main-content">
-        <neon-animated-pages attr-for-selected="data-route" selected="{{route}}"
-                             selected-attribute="selected">
-          <home-page class="Page" data-route="home" people="{{speakers}}" posts="{{posts}}" logos="{{partners}}"
-                     header-settings="{{headerSettings}}" videos="{{videos}}"></home-page>
-          <blog-page class="Page" data-route="blog" posts="{{posts}}" header-settings="{{headerSettings}}"></blog-page>
-          <post-page class="Page" data-route="post" post-id="{{params.id}}" posts="{{posts}}"
-                     header-settings="{{headerSettings}}"></post-page>
-          <speakers-page class="Page" data-route="speakers" speakers="{{speakers}}" header-settings="{{headerSettings}}"
-                         speaker-id="{{params.id}}"></speakers-page>
-          <schedule-page class="Page" data-route="schedule" schedule="{{schedule}}" sessions="{{sessions}}"
-                         header-settings="{{headerSettings}}" session-id="{{params.id}}"
+        <neon-animated-pages selected="{{pageData.page}}"
+                             attr-for-selected="data-page"
+                             selected-attribute="selected"
+                             fallback-selection="">
+
+          <home-page data-page=""
+                     header-settings="{{headerSettings}}"
+                     people="{{speakers}}"
+                     posts="{{posts}}"
+                     logos="{{partners}}"
+                     videos="{{videos}}"></home-page>
+
+          <blog-pages data-page="blog"
+                      header-settings="{{headerSettings}}"
+                      route="{{blogTail}}"
+                      posts="{{posts}}"></blog-pages>
+
+          <speakers-page data-page="speakers"
+                         header-settings="{{headerSettings}}"
+                         route="{{speakersTail}}"
+                         speakers="{{speakers}}"></speakers-page>
+
+          <schedule-page data-page="schedule"
+                         header-settings="{{headerSettings}}"
+                         route="{{scheduleTail}}"
+                         schedule="{{schedule}}"
+                         sessions="{{sessions}}"
                          selected-day="{{selectedDay}}"></schedule-page>
+
         </neon-animated-pages>
       </div>
 
     </app-drawer-layout>
 
-    <video-dialog id="videoDialog" title="[[video.title]]" youtube-id="[[video.youtubeId]]"
+    <video-dialog id="videoDialog"
+                  title="[[video.title]]"
+                  youtube-id="[[video.youtubeId]]"
                   entry-animation="scale-up-animation"
-                  exit-animation="scale-down-animation" disable-controls="[[!video.disableControls]]"></video-dialog>
+                  exit-animation="scale-down-animation"
+                  disable-controls="[[!video.disableControls]]"></video-dialog>
 
     <paper-toast id="infoToast" class="toast" duration="6000"></paper-toast>
 
@@ -148,10 +199,6 @@
           this.is = this.constructor.name.replace(/\W+/g, '-')
             .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
           this.properties = {
-            route: {
-              type: String,
-              value: 'home'
-            },
             params: Object,
             upgraded: Boolean,
             headerSettings: {
@@ -162,12 +209,15 @@
         }
 
         ready() {
-          this.fire('upgraded');
-          this.upgraded = true;
+          this.async(function () {
+            if (!this.route.path) {
+              this.set('route.path', '/');
+            }
+          });
         }
 
         scrollPageToTop() {
-//          this.$.headerPanelMain.scrollToTop(true);
+          window.scroll(0, 0);
         }
 
         closeDrawer() {

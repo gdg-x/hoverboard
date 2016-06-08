@@ -77,11 +77,12 @@
       </div>
     </paper-toolbar>
     <nav>
-      <paper-menu class="navigation list" attr-for-selected="data-route" selected="{{route}}"
+      <paper-menu class="navigation list"
+                  attr-for-selected="data-page"
+                  selected="{{pageData.page}}"
                   selected-class="selected">
         {% for nav in navigation %}
-        <a class="navigation-link" data-route="{$ nav.route $}" href="{$ nav.permalink $}">{$
-          nav.text $}</a>
+        <a class="navigation-link" data-page="{$ nav.route $}" href="{$ nav.permalink $}">{$ nav.text $}</a>
         {% endfor %}
       </paper-menu>
     </nav>
@@ -98,8 +99,8 @@
           this.is = this.constructor.name.replace(/\W+/g, '-')
             .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
           this.properties = {
-            route: {
-              type: String,
+            routeData: {
+              type: Object,
               notify: true
             }
           };

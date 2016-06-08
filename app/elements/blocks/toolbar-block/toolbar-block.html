@@ -76,15 +76,15 @@
         <paper-icon-button icon="menu" on-tap="togglePanel" hidden$="{{!smallScreen}}"></paper-icon-button>
       </div>
       <div class="logo-wrapper">
-        <a data-route="home" href="{$ baseurl $}/" hidden$="{{smallScreen}}" hide$="[[hideLogo]]" fade>
+        <a href="{$ baseurl $}/" hidden$="{{smallScreen}}" hide$="[[hideLogo]]" fade>
           <iron-image class="logo" src="{$ baseurl $}/images/logo-white.svg" sizing="contain"
                       alt="{$ title $}"></iron-image>
         </a>
       </div>
       <div class="navItem">
-        <paper-tabs attr-for-selected="data-route" selected="{{route}}" hidden$="{{smallScreen}}" noink>
+        <paper-tabs selected="{{routeData.page}}" attr-for-selected="data-page" hidden$="{{smallScreen}}" noink>
           {% for nav in navigation %}
-          <paper-tab data-route="{$ nav.route $}" link>
+          <paper-tab data-page="{$ nav.route $}" link>
             <a href="{$ nav.permalink $}" class="nav-link">{$ nav.text $}</a>
           </paper-tab>
           {% endfor %}
@@ -104,8 +104,8 @@
           this.is = this.constructor.name.replace(/\W+/g, '-')
             .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
           this.properties = {
-            route: {
-              type: String,
+            routeData: {
+              type: Object,
               notify: true
             },
             frontColor: {
