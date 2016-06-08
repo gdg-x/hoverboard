@@ -1,16 +1,11 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
-<link rel="import" href="../../bower_components/paper-tooltip/paper-tooltip.html">
 <link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
 
-<link rel="import" href="../blocks/truncate-marked-text/truncate-marked-text.html">
-<link rel="import" href="../blocks/speaker-details/speaker-details.html">
 <link rel="import" href="../blocks/footer-block/footer-block.html">
-<link rel="import" href="../behaviors/utils-behavior.html">
 
 <dom-module id="team-page">
 
@@ -19,42 +14,228 @@
     <style include="shared-styles"></style>
     <style>
       :host {
+        --grid-gutter: 8px;
+        --colums-number: 3;
         display: block;
+      }
+
+      .details {
+        @apply(--layout-vertical);
+        @apply(--layout-center-justified);
+      }
+
+      .details-item {
+        @apply(--layout-horizontal);
+        margin: 0 auto;
+        padding-bottom: 32px;
+      }
+
+      .details-icon {
+        --iron-icon-height: 56px;
+        --iron-icon-width: 56px;
+        --iron-icon-fill-color: var(--default-primary-color);
+        margin-right: 24px;
+      }
+
+      .details-info {
+        @apply(--layout-flex);
+      }
+
+      .details-title {
+        margin-bottom: 24px;
+        font-size: 24px;
+        font-weight: 400;
+      }
+
+      .details-text .markdown-html {
+        font-size: 16px;
+      }
+
+      .team-container {
+        @apply(--layout-vertical);
+        @apply(--layout-wrap);
+      }
+
+      .team-block {
+        margin-bottom: 30px;
+      }
+
+      .team-name {
+        text-align: center;
+      }
+
+      .member {
+        @apply(--layout-horizontal);
+        width: 100%;
+        margin: var(--grid-gutter) 0;
+      }
+
+      .card {
+        @apply(--layout-flex);
+        @apply(--layout-vertical);
+        @apply(--shadow-elevation-2dp);
+        padding: 32px 16px;
+        background: #fff;
+      }
+
+      .card:hover {
+        @apply(--shadow-elevation-3dp);
+        background: #fff;
+      }
+
+      .header {
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+      }
+
+      .photo {
+        width: 120px;
+        height: 120px;
+        position: relative;
+        border-radius: 50%;
+        overflow: hidden;
+        background: var(--default-primary-color) 50% 50%;
+        background-size: cover;
+      }
+
+      .card-content {
+        @apply(--layout-vertical);
+        @apply(--layout-flex-auto);
+        color: var(--primary-text-color);
+        font-size: 18px;
+        text-align: center;
+      }
+
+      .name {
+        font-size: 20px;
+      }
+
+      .title {
+        font-size: 16px;
+        color: var(--secondary-text-color);
+      }
+
+      .card-actions {
+        text-align: center;
+      }
+
+      .social-icon {
+        color: var(--secondary-text-color);
+      }
+
+      @media (min-width: 601px) {
+        .details-icon {
+          --iron-icon-height: 72px;
+          --iron-icon-width: 72px;
+          margin-right: 32px;
+        }
+
+        .team-container {
+          @apply(--layout-horizontal);
+          @apply(--layout-center-justified);
+        }
+
+        .member {
+          width: calc(100% / var(--colums-number) - (var(--colums-number) + 1) * var(--grid-gutter));
+          margin: var(--grid-gutter) var(--grid-gutter) calc(var(--colums-number) * var(--grid-gutter));
+        }
+
+        .card {
+          background: none;
+          box-shadow: none;
+          transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+          @apply(--shadow-elevation-3dp);
+          background: #fff;
+        }
+
+        .social-link {
+          display: inline-block;
+          opacity: 0;
+          transform: translate3d(0, 50%, 0);
+          will-change: transform, opacity;
+          transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover .social-link {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+
+        .social-link:nth-child(2) {
+          transition-delay: .1s;
+        }
+
+        .social-link:nth-child(3) {
+          transition-delay: .15s;
+        }
+
+        .social-link:nth-child(4) {
+          transition-delay: .2s;
+        }
+
+        .social-link:nth-child(5) {
+          transition-delay: .25s;
+        }
+      }
+
+      @media (min-width: 1600px) {
+        .container {
+          max-width: 960px;
+        }
       }
     </style>
 
-    <div class="container page-header" cascaded>
-      <div class="page-title">
-        <h3>Team</h3>
+    <div class="container">
+      <div class="details">
+        <div class="details-item" cascaded>
+          <iron-icon class="details-icon" icon="{$ teamPage.icon $}"></iron-icon>
+          <div class="details-info">
+            <h4 class="details-title">{$ teamPage.title $}</h4>
+            <marked-element class="details-text">
+              <div class="markdown-html"></div>
+              <script type="text/markdown">{$ teamPage.text $}</script>
+            </marked-element>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="container team-container">
-      <template is="dom-repeat" items="[[_toArray(team)]]" as="member" on-dom-change="_updateCascadedNodes">
-        <div class="member" cascaded>
-          <paper-material class="card">
-            <div class="header">
-              <iron-image src="[[member.photoUrl]]" class="photo placeholder-color" preload fade
-                          sizing="cover"></iron-image>
-              <div class="photo-overlay"></div>
-              <div class="bottom-image-text">
-                <span class="name">[[member.name]]</span>
-                <span class="title">[[speaker.company]], [[speaker.country]]</span>
+
+      <template is="dom-repeat" items="[[_toInheritedArray(team)]]" as="team">
+        <div class="team-block">
+          <h3 class="team-name">[[team.name]]</h3>
+
+          <div class="team-container">
+            <template is="dom-repeat" items="[[team.value]]" as="member" on-dom-change="_updateCascadedNodes">
+              <div class="member">
+                <paper-material class="card" cascaded>
+                  <div class="header">
+                    <div class="photo" style="background-image: url([[member.photoUrl]])"></div>
+                  </div>
+                  <div class="card-content">
+                    <div class="name">[[member.name]]</div>
+                    <div class="title">[[member.title]]</div>
+                  </div>
+                  <div class="card-actions">
+                    <template is="dom-repeat" items="[[member.socials]]" as="social">
+                      <a class="social-link" href="[[social.link]]" target="_blank">
+                        <paper-icon-button class="social-icon"
+                                           icon$="icons:{{social.icon}}"></paper-icon-button>
+                      </a>
+                    </template>
+                  </div>
+                </paper-material>
               </div>
-            </div>
-            <div class="card-content"> </div>
-            <div class="card-actions">
-              <template is="dom-repeat" items="[[team.socials]]" as="social">
-                <a href="[[social.link]]" target="_blank">
-                  <paper-icon-button class="social-icon"
-                                     icon$="icons:{{social.icon}}"></paper-icon-button>
-                </a>
-              </template>
-            </div>
-          </paper-material>
+            </template>
+          </div>
         </div>
       </template>
+
     </div>
-    <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}" cascaded></footer-block>
+    <footer-block mailchimp-url="{$ mailchimp.url $}"
+                  mailchimp-name="{$ mailchimp.name $}"
+                  cascaded></footer-block>
 
   </template>
 
@@ -77,7 +258,7 @@
           },
           selected: {
             type: Boolean,
-            observer: 'updateHeroSettings'
+            observer: 'updateHeaderSettings'
           },
           heroSettings: {
             type: Object,
@@ -85,11 +266,13 @@
           },
           _heroSettings: {
             type: Object,
-            /* jshint ignore:start */
             value: function () {
-              return {% for nav in navigation %}{% if nav.route == 'team' %}{$ nav.heroSettings | dump $}{% endif %}{% endfor %};
+              return {
+                backgroundColor: '#009688',
+                fontColor: '#fff',
+                tabBarColor: '#fff'
+              };
             }
-            /* jshint ignore:end */
           },
 
           animationConfig: {
@@ -114,7 +297,7 @@
           }
         },
 
-        updateHeroSettings: function () {
+        updateHeaderSettings: function () {
           this.heroSettings = this.selected ? this._heroSettings : this.heroSettings;
         },
 

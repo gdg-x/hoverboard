@@ -18,9 +18,11 @@
 
         _randomOrder: (array) => array.sort(() => 0.5 - Math.random()),
 
-        _toArray: (obj) => Object.keys(obj).map(key => obj[key])
+        _toArray: (obj) => Object.keys(obj).map(key => obj[key]),
 
-    };
+        _toInheritedArray: (obj) => Object.keys(obj).map(key => { return { name: key, value: obj[key] }})
+
+  };
 
   })();
 </script>
