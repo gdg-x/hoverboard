@@ -141,9 +141,9 @@
       }
     </style>
 
-    <carbon-route route="{{route}}"
+    <app-route route="{{route}}"
                   pattern="/:id"
-                  data="{{speakerData}}"></carbon-route>
+                  data="{{speakerData}}"></app-route>
 
     <div class="container speakers-container">
       <template is="dom-repeat" items="[[_toArray(speakers)]]" as="speaker" on-dom-change="_updateCascadedNodes">

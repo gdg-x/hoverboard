@@ -1,6 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../../bower_components/carbon-route/carbon-route.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
 
 <link rel="import" href="./blog-list.html">
 
@@ -8,13 +8,13 @@
 
   <template>
 
-    <carbon-route route="{{route}}"
+    <app-route route="{{route}}"
                   pattern="/posts/:slug"
-                  data="{{postsData}}"></carbon-route>
+                  data="{{postsData}}"></app-route>
 
-    <carbon-route route="{{route}}"
+    <app-route route="{{route}}"
                   pattern="/:page"
-                  data="{{pageData}}"></carbon-route>
+                  data="{{pageData}}"></app-route>
 
 
     <neon-animated-pages id="pages"

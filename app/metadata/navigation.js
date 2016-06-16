@@ -46,7 +46,7 @@ module.exports = {
     }
   }, {
     route: 'team',
-    permalink: '/team',
+    permalink: '/team/',
     text: 'Team',
     heroSettings: {
       backgroundColor: '#009688',

@@ -2,20 +2,19 @@
   "name": "hoverboard",
   "private": true,
   "dependencies": {
-    "polymer": "Polymer/polymer#1.4.x",
+    "polymer": "Polymer/polymer#1.5.x",
     "iron-elements": "PolymerElements/iron-elements#1.0.x",
-    "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior#1.6.x",
     "paper-elements": "PolymerElements/paper-elements#1.0.x",
     "platinum-elements": "PolymerElements/platinum-elements#2.0.x",
     "neon-elements": "PolymerElements/neon-elements#1.0.x",
     "start-elements": "StartPolymer/start-elements#1.1.x",
     "molecules": "PolymerElements/molecules#1.0.x",
     "google-web-components": "GoogleWebComponents/google-web-components#1.0.x",
+    "app-elements": "PolymerElements/app-elements#0.9.*",
+    "app-layout": "PolymerElements/app-layout#0.9.*",
     "font-roboto": "StartPolymer/font-empty#1.1.x",
     "time-elements": "~0.4.x",
-    "disqus-comments": "divshot/disqus-comments#0915a95",
-    "app-layout": "PolymerLabs/app-layout#0.0.x",
-    "carbon-elements": "PolymerElements/carbon-elements#0.1.*"
+    "disqus-comments": "divshot/disqus-comments#0915a95"
   },
   "devDependencies": {
     "web-component-tester": "*"
