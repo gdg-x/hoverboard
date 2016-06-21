@@ -212,6 +212,7 @@ Going to use template? Go on! The only thing we ask - let us know at [lviv@gdg.o
 | [GDG DevFest South East Nigeria 2015](http://www.devfestse.com) |
 | [GDG DevFest Istanbul 2015](https://www.devfesttr.com) |
 | [GDG Cáceres CodeWeek 2015](http://codeweek.gdgcaceres.es) |
+| [GDG Bingham University Website](http://bhu.gdg.ng) |
 
 
 ## Roadmap
