@@ -1,0 +1,12 @@
+{
+  "resources": {
+    "en": {
+      "title": "Featured Videos",
+      "view-all": "View all videos"
+    },
+    "uk": {
+      "title": "Вподобані відео",
+      "view-all": "Переглянути всі відео"
+    }
+  }
+}

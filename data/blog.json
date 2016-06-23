@@ -1,0 +1,47 @@
+[
+  {
+    "id": "devfest-2015-announced",
+    "title": "GDG DevFest 2015 Announced",
+    "posted": "2015-08-17",
+    "primaryColor": "#607D8B",
+    "secondaryColor": "#607D8B",
+    "image": "/images/posts/announce.jpg",
+    "brief": "Ukrainian GDGs are proud to announce the fourth annual GDG DevFest 2015 - the largest Google related event in Ukraine. Like last year, the event will be held on 23-24 October in Lviv. So aside all your business at this time and book tickets to the cultural capital of Ukraine."
+  },
+  {
+    "id": "call-for-speakers",
+    "title": "Call for Speakers",
+    "posted": "2015-08-17",
+    "primaryColor": "#673AB7",
+    "secondaryColor": "#673AB7",
+    "image": "/images/posts/speakers.jpg",
+    "brief": "We're very excited - not just because of the inordinate amount of caffeine based products consumed - but also because our team are putting together the final missing parts to the biggest Google related event in Ukraine - <a href='http://devfest.gdg.org.ua'>GDG DevFest 2015</a>."
+  },
+  {
+    "id": "women-are-underrepresented-in-it",
+    "title": "Women are underrepresented in IT",
+    "posted": "2015-10-04",
+    "primaryColor": "#E91E63",
+    "secondaryColor": "#E91E63",
+    "image": "/images/posts/women.jpg",
+    "brief": "Our friends from the Netherlands touched important theme in their blog about gender diversity: why women are underrepresented in IT. The cause of this seems to resonate with the lack of diversity in academia and the workplace. As a sizable event in technology, we found it in part our responsibility to encourage diversity at GDG DevFest Ukraine 2015."
+  },
+  {
+    "id": "what-to-do-in-lviv",
+    "title": "Top Things to Do in Lviv",
+    "posted": "2015-10-21",
+    "primaryColor": "#3F51B5",
+    "secondaryColor": "#3F51B5",
+    "image": "/images/posts/lviv.jpg",
+    "brief": "Ukrainian city of Lviv is no doubt one of the most charming and yet not well-known parts of Ukraine. It’s been recently gaining plenty of attention from the world, and was proudly featured on BBC and EuroNews."
+  },
+  {
+    "id": "devfest-ua-summary",
+    "title": "GDG DevFest Ukraine 2015 - Summary",
+    "posted": "2015-10-24",
+    "primaryColor": "#5a7785",
+    "secondaryColor": "#455a64",
+    "image": "/images/posts/summary.jpg",
+    "brief": "GDG DevFest Ukraine 2015 is now over. It was a great success. We are happy to share with you some facts, emotions and, of course, photos from the biggest Google Developers Conference in Ukraine!"
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "resources": {
+    "en": {
+      "dates": "September 9-10, 2016",
+      "motto": "Be a hero! Be a GDG!",
+      "play-icon": "See how it was in 2015",
+      "c4p": "Become a speaker",
+      "buy-ticket": "Buy a ticket",
+      "blog": "Blog",
+      "speakers": "Speakers",
+      "schedule": "Schedule",
+      "team": "Team"
+    },
+    "uk": {
+      "dates": "9-10 Вересня 2016",
+      "motto": "Будь героєм! Будь GDG!",
+      "play-icon": "Погляньте як це було в 2015",
+      "c4p": "Стати доповідачем",
+      "buy-ticket": "Купити квиток",
+      "blog": "Блог",
+      "speakers": "Доповідачі",
+      "schedule": "Розклад",
+      "team": "Команда"
+    }
+  }
+}

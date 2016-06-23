@@ -1,0 +1,116 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+
+<link rel="import" href="../../bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+
+
+<dom-module id="drawer-block">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+        z-index: 9;
+        --paper-toolbar-background: var(--default-primary-color);
+      }
+
+      .panel {
+        height: 100%;
+      }
+
+      .logo {
+        margin-top: 15px;
+        height: 40px;
+        width: 130px;
+      }
+
+      .bottom {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--text-primary-color);
+      }
+
+      .location {
+        display: block;
+        color: var(--dark-primary-color);
+      }
+
+      .navigation {
+        background: var(--secondary-background-color);
+      }
+
+      .navigation-link {
+        padding: 0 16px;
+        min-height: 48px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+        text-decoration: none;
+        color: var(--primary-text-color);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      .navigation-link {
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+      }
+
+      .selected {
+        background: #eaeaea;
+      }
+    </style>
+
+    <paper-toolbar class="tall">
+      <div class="top">
+        <iron-image class="logo" src="{$ baseurl $}/images/logo-white.svg" sizing="contain"
+                    alt="GDG DevFest Ukraine 2016"></iron-image>
+      </div>
+      <div class="bottom">
+        <span class="dates">September 9-10, 2016</span>
+        <span class="location">{$ location.short $}</span>
+      </div>
+    </paper-toolbar>
+    <nav>
+      <paper-menu class="navigation list"
+                  attr-for-selected="data-page"
+                  selected="{{pageData.page}}"
+                  selected-class="selected">
+        {% for nav in navigation %}
+        <a class="navigation-link" data-page="{$ nav.route $}" href="{$ nav.permalink $}">{$ nav.text $}</a>
+        {% endfor %}
+      </paper-menu>
+    </nav>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+          is: 'drawer-block',
+
+          properties: {
+            routeData: {
+              type: Object,
+              notify: true
+            }
+          }
+
+        });
+
+    }());
+  </script>
+
+</dom-module>

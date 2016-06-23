@@ -1,0 +1,12 @@
+{
+  "resources": {
+    "en": {
+      "title": "Rockstar Speakers",
+      "view-all": "View all speakers"
+    },
+    "uk": {
+      "title": "Рок доповідачі",
+      "view-all": "Переглянути всіх доповідачів"
+    }
+  }
+}

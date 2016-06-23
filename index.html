@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en" itemscope itemtype="http://schema.org/Event">
 <head>
+  <base href="/">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
@@ -76,6 +77,44 @@
        Analytics lib is also loaded up front for error reporting. -->
   <script src="https://www.google-analytics.com/analytics.js" async></script>
 
+  <script>
+
+    window.ENV = 'dev';
+    window.PREFIX = '/';
+
+    // setup Polymer options
+    window.Polymer = {lazyRegister: true, dom: 'shadow'};
+
+    // Initializes the analytics.js command queue.
+    window.ga = window.ga || function () {
+        (ga.q = ga.q || []).push(arguments)
+      };
+    ga.l = +new Date;
+
+    // Creates the tracker.
+    ga('create', {
+      trackingId: window.ENV === 'prod' ? 'UA-43643469-8' : 'UA-43643469-9',
+      cookieDomain: 'auto',
+      cookiePath: window.ENV !== 'dev' ? window.PREFIX || '/' : null,
+      siteSpeedSampleRate: 10 // 10% of users.
+    });
+
+    // Setup error tracking before anything else runs.
+    window.onerror = function (message, file, lineNumber, columnNumber, error) {
+      // We don't want to trigger any errors inside window.onerror, so wrap in a try/catch.
+      try {
+        // Some browsers don't support error param yet.
+        if (error !== undefined) {
+          message = error.stack;
+        }
+        ga('send', 'event', 'error', file + ':' + lineNumber, message);
+      } catch (e) {
+        // no-op
+      }
+    };
+
+  </script>
+
   <link rel="import" href="/src/hoverboard-app.html" async>
 
   <style>
@@ -110,37 +149,15 @@
 </head>
 <body>
 
-<hoverboard-app></hoverboard-app>
+<template is="dom-bind" id="t">
+  <hoverboard-app></hoverboard-app>
+</template>
 
-<script>
-
-  window.performance && performance.mark && performance.mark('index.html');
-
-  // setup Polymer options
-  window.Polymer = {lazyRegister: true, dom: 'shadow'};
-
-  // load webcomponents polyfills
-  (function () {
-    if ('registerElement' in document
-      && 'import' in document.createElement('link')
-      && 'content' in document.createElement('template')) {
-      // browser has web components
-    } else {
-      // polyfill web components
-      var e = document.createElement('script');
-      e.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
-      document.head.appendChild(e);
-    }
-  })();
-
-  // load pre-caching service worker
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      navigator.serviceWorker.register('/service-worker.js');
-    });
-  }
-
-</script>
+<script src="scripts/helper/util.js"></script>
+<script src="scripts/analytics.js"></script>
+<script src="scripts/helper/elements.js"></script>
+<script src="scripts/helper/service-worker-registration.js"></script>
+<script src="scripts/bootstrap.js"></script>
 
 </body>
 </html>

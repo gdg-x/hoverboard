@@ -1,0 +1,84 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
+
+<script>
+  (function () {
+    'use strict';
+
+    HOVERBOARD.AppLocalizeBehaviorImpl = {
+
+      properties: {
+        /* Overriden from Polymer.AppLocalizeBehavior */
+        formats: {
+          type: Object,
+          value: function () {
+            return {
+              number: {USD: {style: 'currency', currency: 'USD'}}
+            };
+          }
+        },
+
+        /* Overriden from Polymer.AppLocalizeBehavior */
+        language: {
+          type: String,
+          value: function () {
+            var lang = window.navigator.languages ? window.navigator.languages[0] : null;
+            lang = lang || window.navigator.language || window.navigator.browserLanguage || window.navigator.userLanguage;
+            if (lang.indexOf('-') !== -1)
+              lang = lang.split('-')[0];
+            if (lang.indexOf('_') !== -1)
+              lang = lang.split('_')[0];
+            return lang;
+          }
+        },
+
+        loaded: {
+          type: Boolean,
+          value: false
+        }
+      },
+
+      listeners: {
+        'app-resources-loaded': '_onLocalesLoaded'
+      },
+
+      attached: function () {
+        this.loadElementResources(this.tagName);
+      },
+
+      loadElementResources: function (element) {
+        var url = '/data/resources/' + element.toLowerCase() + '.json';
+        this.loadResources(this.resolveUrl(url));
+      },
+
+      __onRequestResponse: function (event) {
+        if (!event.response || !this.app) return;
+        var resources = event.response.resources;
+        var data = event.response.data;
+        if (resources) {
+          var appResources = this.app.resources || {};
+          for (var lang in resources) {
+            if (resources.hasOwnProperty(lang)) {
+              appResources[lang] = HOVERBOARD.Util.extend(appResources[lang], resources[lang]);
+            }
+          }
+          this.set('app.resources', appResources);
+        }
+        if (data) {
+          var appData = this.app.data || {};
+          this.set('app.data', HOVERBOARD.Util.extend(appData, data));
+        }
+        this.resources = this.app.resources;
+        this.notifyPath('app.values.statistics');
+        this.fire('app-resources-loaded');
+      },
+
+      _onLocalesLoaded: function (event) {
+        event.stopPropagation();
+      }
+
+    };
+
+  }());
+</script>

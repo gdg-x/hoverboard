@@ -1,17 +1,157 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
+<link rel="import" href="../bower_components/app-layout/app-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/parallax-background.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/blend-background.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
+
+<link rel="import" href="effects/fade-effect.html">
+<link rel="import" href="behaviors/utils-behavior.html">
+<link rel="import" href="elements/app-data.html">
+<link rel="import" href="elements/drawer-block.html">
+<link rel="import" href="elements/toolbar-block.html">
+<link rel="import" href="elements/header-content.html">
+
+<link rel="import" href="pages/home-page.html">
+
 
 <dom-module id="hoverboard-app">
 
   <template>
 
-    <style>
-
+    <style include="shared-styles">
       :host {
+        --min-header-height: 120px;
+        --header-background: var(--default-primary-color);
         display: block;
       }
 
+      app-drawer-layout {
+        @apply(--layout-fit);
+      }
+
+      app-drawer {
+        z-index: 10;
+      }
+
+      .image-overlay {
+        @apply(--layout-fit);
+        @apply(--opacity-animation);
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.7) 140%);
+        height: 100%;
+      }
+
+      app-header {
+        @apply(--layout-fixed-top);
+        --app-header-background-front-layer: {
+          background-image: var(--header-background-image);
+          transition: background-image 0.5s;
+        };
+        --app-header-background-rear-layer: {
+          background-color: var(--header-background);
+        };
+        background-color: var(--header-background);
+        color: var(--header-color);
+        transition-property: transform, background-color, color, height;
+        z-index: 9;
+      }
+
+      .image-overlay-wrapper {
+        @apply(--layout-fit);
+        opacity: 0;
+      }
+
+      toolbar-block {
+        z-index: 1;
+      }
+
+      .main-content {
+        padding-top: calc(var(--min-header-height) + 64px);
+      }
+
+      @media (min-width: 601px) {
+        .main-content {
+          padding-top: 424px;
+        }
+      }
     </style>
+
+    <!-- Responsive handlers -->
+    <iron-media-query id="mq-phone" full query="(min-width:320px) and (max-width:768px)"
+                      query-matches="{{app.isPhoneSize}}"></iron-media-query>
+    <iron-media-query id="mq-tablet" full query="(min-width:769px) and (max-width:959px)"
+                      query-matches="{{app.isTabletSize}}"></iron-media-query>
+    <iron-media-query id="mq-desktop" query="(min-width:960px)"
+                      query-matches="{{app.isDesktopSize}}"></iron-media-query>
+
+    <app-location route="{{route}}"></app-location>
+    <app-route
+      route="{{route}}"
+      pattern="/:page"
+      data="{{routeData}}"
+      tail="{{subRoute}}"></app-route>
+
+    <app-data speakers="{{speakers}}"
+              sessions="{{sessions}}"
+              schedule="{{schedule}}"
+              posts="{{posts}}"
+              partners="{{partners}}"
+              videos="{{videos}}"
+              team="{{team}}"
+              app="{{app}}"></app-data>
+
+    <app-drawer-layout drawer-width="599px" force-narrow>
+      <app-drawer id="drawer" swipe-open>
+        <template is="dom-if" if="[[app.isPhoneSize]]">
+          <drawer-block route-data="{{routeData}}" drawer></drawer-block>
+        </template>
+      </app-drawer>
+
+      <app-header id="header" effects="parallax-background blend-background fade-effect" condenses shadow reveals>
+        <div class="image-overlay-wrapper" show$="[[app.headerSettings.backgroundImage]]">
+          <div class="image-overlay" fade></div>
+        </div>
+        <toolbar-block app="[[app]]"
+                       primary></toolbar-block>
+
+        <header-content app="[[app]]"
+                        selected-day="{{selectedDay}}"
+                        fade></header-content>
+      </app-header>
+
+      <div class="main-content">
+        <iron-pages selected="[[app.page]]"
+                    attr-for-selected="name"
+                    selected-attribute="selected">
+
+          <home-page name="home"
+                     app="{{app}}"
+                     header-settings="{{app.headerSettings}}"
+                     people="{{speakers}}"
+                     posts="{{posts}}"
+                     logos="{{partners}}"
+                     videos="{{videos}}"></home-page>
+
+          <speakers-page name="speakers"
+                         header-settings="{{app.headerSettings}}"
+                         route="{{subRoute}}"
+                         speakers="{{speakers}}"></speakers-page>
+
+        </iron-pages>
+      </div>
+
+    </app-drawer-layout>
+
+    <paper-toast id="toast" class="toast" duration="6000"></paper-toast>
 
   </template>
 
@@ -25,8 +165,61 @@
 
       Polymer({
 
-        is: 'hoverboard-app'
+        is: 'hoverboard-app',
 
+        behaviors: [
+          HOVERBOARD.UtilsBehavior
+        ],
+
+        properties: {
+          app: {
+            type: Object,
+            notify: true,
+            value: {}
+          },
+
+          page: {
+            type: String,
+            reflectToAttribute: true
+          }
+        },
+
+        observers: [
+          '_routePageChanged(routeData.page)',
+          '_pageChanged(app.page)'
+        ],
+
+        _routePageChanged: function (page) {
+          this.set('app.page', (page || 'home'));
+          // Scroll to the top of the page on every *route* change. Use `Polymer.AppLayout.scroll`
+          // with `behavior: 'silent'` to disable header scroll effects during the scroll.
+          Polymer.AppLayout.scroll({top: 0, behavior: 'silent'});
+          // Close the drawer - in case the *route* change came from a link in the drawer.
+          this.drawerOpened = false;
+          var navObject = this.app.data.navigation[this._getIndexByProperty(this.app.data.navigation, 'route', this.app.page)];
+          if (navObject && navObject.headerSettings) {
+            this.set('app.headerSettings', navObject.headerSettings);
+            this.stylesChanged();
+          }
+        },
+
+        stylesChanged: function () {
+          this.customStyle['--header-background'] = this.app.headerSettings.backgroundColor;
+          this.customStyle['--header-color'] = this.app.headerSettings.fontColor;
+          this.customStyle['--header-background-image'] = 'url(' + this.app.headerSettings.backgroundImage + ')';
+          this.customStyle['--header-background-gradient'] = 'linear-gradient(to bottom, ' +
+            this.app.headerSettings.backgroundColor + ' 0%, rgba(0, 0, 0, 0) 35%, ' +
+            this.app.headerSettings.backgroundColor + ' 140%)';
+          this.customStyle['--min-header-height'] = this.app.headerSettings.minHeight;
+          document.getElementsByName('theme-color')[0].content = this.app.headerSettings.backgroundColor;
+          this.updateStyles();
+        },
+
+        _pageChanged: function (page) {
+          if (page && page !== 'home') {
+            this.importHref(this.resolveUrl('pages/' + page + '-page.html'), null, null, true);
+          }
+        }
       });
 
     }());

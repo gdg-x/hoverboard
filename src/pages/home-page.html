@@ -1,0 +1,119 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
+
+<link rel="import" href="../elements/statistics-block.html">
+<link rel="import" href="../elements/featured-people.html">
+<link rel="import" href="../elements/featured-videos.html">
+<link rel="import" href="../elements/call-to-action.html">
+<link rel="import" href="../elements/tickets-block.html">
+<link rel="import" href="../elements/latest-posts.html">
+<link rel="import" href="../elements/footer-block.html">
+<link rel="import" href="../elements/photo-block.html">
+<link rel="import" href="../elements/social-feed.html">
+<link rel="import" href="../elements/logos-block.html">
+<link rel="import" href="../elements/map-block.html">
+
+<dom-module id="home-page">
+
+  <template>
+
+    <statistics-block app="{{app}}" statistics="[[app.statistics]]" cascaded></statistics-block>
+    <featured-people app="{{app}}" people="{{people}}" cascaded></featured-people>
+    <featured-videos app="{{app}}" videos="{{videos}}" cascaded></featured-videos>
+    <call-to-action app="{{app}}" cascaded></call-to-action>
+    <photo-block app="{{app}}" gallery="[[app.gallery]]" cascaded></photo-block>
+    <tickets-block app="{{app}}" tickets="[[app.tickets]]" cascaded></tickets-block>
+    <latest-posts app="{{app}}" posts="{{posts}}" cascaded></latest-posts>
+    <social-feed app="{{app}}" source="/data/tweets.json" social="[[app.social]]" hashtag="dfua" cascaded></social-feed>
+    <map-block app="{{app}}" latitude="49.809841" longitude="23.972805" zoom="15" cascaded></map-block>
+    <logos-block app="{{app}}" logos="{{logos}}" cascaded></logos-block>
+    <footer-block app="{{app}}" social="[[app.social]]" blocks="[[app.footerBlocks]]" mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}" cascaded></footer-block>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'home-page',
+
+        behaviors: [
+          Polymer.NeonSharedElementAnimatableBehavior
+        ],
+
+        properties: {
+          app: Object,
+          people: Array,
+          posts: Array,
+          logos: Array,
+          videos: Array,
+          selected: {
+            type: Boolean,
+            observer: 'updateHeaderSettings'
+          },
+          headerSettings: {
+            type: Object,
+            notify: true
+          },
+          _headerSettings: {
+            type: Object,
+            value: function () {
+              return {};
+            },
+
+            animationConfig: {
+              type: Object,
+              value: function () {
+                var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
+                var cascadedArray = Array.prototype.slice.call(cascaded);
+                return {
+                  'entry': [{
+                    name: 'cascaded-animation',
+                    animation: 'transform-animation',
+                    transformFrom: 'translate3d(0, 100%, 0)',
+                    nodes: cascadedArray,
+                    timing: {
+                      delay: 500
+                    }
+                  }, {
+                    name: 'fade-in-animation',
+                    animation: 'fade-in-animation',
+                    node: this,
+                    timing: {
+                      delay: 500
+                    }
+                  }],
+                  'exit': [{
+                    name: 'cascaded-animation',
+                    animation: 'transform-animation',
+                    transformTo: 'translate3d(0, 100%, 0)',
+                    nodes: cascadedArray
+                  }, {
+                    name: 'fade-out-animation',
+                    animation: 'fade-out-animation',
+                    node: this
+                  }]
+                };
+              }
+            }
+          }
+        },
+
+        observers: [
+          'updateHeaderSettings(selected)'
+        ],
+
+        updateHeaderSettings: function () {
+          this.headerSettings = this.selected ? this._headerSettings : this.headerSettings;
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

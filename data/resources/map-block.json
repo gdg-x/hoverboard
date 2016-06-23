@@ -1,0 +1,16 @@
+{
+  "resources": {
+    "en": {
+      "location-title": "Pivdennyi Expo Center",
+      "location-description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event",
+      "location-address": "Shchyretska St, 36",
+      "location-address-short": "Lviv, Ukraine"
+    },
+    "uk": {
+      "location-title": "Південний Експо",
+      "location-description": "Нещодавно збудований Південний Expo є довгоочікуваний виставковий центр у Львові, який може задовольнити потреби масштабної події",
+      "location-address": "Щирецька 36",
+      "location-address-short": "Львів, Україна"
+    }
+  }
+}

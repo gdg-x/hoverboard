@@ -1,0 +1,696 @@
+{
+  "1001": {
+    "id": 1001,
+    "title": "Registration & morning Coffee",
+    "description": "Get your badge, coffee, enjoy talking with tech edicts around"
+  },
+  "1002": {
+    "id": 1002,
+    "title": "Lunch",
+    "description": "Foooooooood!"
+  },
+  "1003": {
+    "id": 1003,
+    "title": "Coffee break",
+    "description": "Coffeeeeeee!"
+  },
+  "1004": {
+    "id": 1004,
+    "title": "Morning coffee",
+    "description": "Coffeeeeeee!"
+  },
+  "1005": {
+    "id": 1005,
+    "title": "GDG DevFest Ukraine 2015 Opening",
+    "description": "Official start of the conference. Greatings from the organizers, sponsors and partners.",
+    "language": "English",
+    "complexity": "",
+    "presentation": "",
+    "videoId": ""
+  },
+  "1006": {
+    "id": 1006,
+    "title": "Afterparty & Networking",
+    "description": "Afterpaty is a great time to have some fun and meet new people.<br/><br/><b>Location</b>: Club Arsenal Market, [Pidvalna St 5](http://club.arsenalmarket.lviv.ua/uk/contacts/)<br/><br/>Free shot for all DevFest attendees included.<br/><br/>Don't forget to bring your badge.",
+    "track": {
+      "title": "Club Arsenal Market"
+    }
+  },
+  "1007": {
+    "id": 1007,
+    "title": "Conference closing and contest winners announcements",
+    "description": "Make sure you won't miss closing ceremony, all gifts from out sponsors and partners will find their owners during this session.",
+    "language": "Ukrainian",
+    "complexity": "",
+    "presentation": "",
+    "videoId": ""
+  },
+  "101": {
+    "id": 101,
+    "title": "Material Design on Custom Views",
+    "description": "There are various widgets to create user interfaces in Android Framework. Using these widgets is a starting point but they are not enough to create awesome apps. Fortunately, alternative methods are here to rescue! I mean understanding and extending the View class.<br/><br/>In this presentation, I will give some Custom View examples. Some of them makes impossible things be possible and some of them increase performance.<br/><br/>I will also talk about how to apply Material Design in Custom Views with the support of older platform versions.",
+    "speakers": [
+      1
+    ],
+    "language": "English",
+    "complexity": "Beginner",
+    "presentation": "https://speakerdeck.com/gdglviv/said-tahsin-dane-material-design-custom-views",
+    "thumbnail": "/images/sessions/101.JPG",
+    "videoId": "nFZxAIi8n7I",
+    "tags": [
+      "Android",
+      "Material Design"
+    ]
+  },
+  "102": {
+    "id": 102,
+    "title": "How can Android Backup break your app",
+    "description": "One of the most significant changes introduced in Android 6.0 is Android Backup - a standarized mechanism for backuping apps' data. However, backup is not a new concept on Android - we had third party solutions there for years. What can we learn from them? What should be your strategy for backuping data? Is your app ready to handle database migrations properly, and handle old, no-longer-supported SharedPreferences' keys?<br/><br/>Attend my talk to learn:<br/>- How Android Backup works in general<br/>- How old-fashioned backup tools broke my app in the past<br/>- How to prevent such defects in Android Backup",
+    "speakers": [
+      2
+    ],
+    "language": "English",
+    "complexity": "Beginner",
+    "presentation": "https://speakerdeck.com/gdglviv/mateusz-herych-how-can-android-backup-break-your-app",
+    "thumbnail": "/images/sessions/102.JPG",
+    "videoId": "89wvLLc25AY",
+    "tags": [
+      "Android",
+      "Marshmallow"
+    ]
+  },
+  "103": {
+    "id": 103,
+    "title": "Planning Android Screens",
+    "description": "This talks is about Android UX when building new screen from scratch. We will go through some common Android screens (like Login / Sign Up / Search / etc.) and see what issues you can face, how popular apps are solving them and what are our options. At the end I will show how to plan & prototype animations with Pixate Studio.",
+    "speakers": [
+      3
+    ],
+    "language": "English",
+    "complexity": "Beginner",
+    "presentation": "https://speakerdeck.com/gdglviv/dmytro-danylyk-planning-android-screens",
+    "thumbnail": "/images/sessions/103.JPG",
+    "videoId": "gQbjjOE2yF4",
+    "tags": [
+      "Android",
+      "UX"
+    ]
+  },
+  "104": {
+    "id": 104,
+    "title": "Power of Android Shell",
+    "description": "Android provides a set of not really well documented command line tools that are mainly used by system engineers for debugging and testing purposes. Available after entering 'adb shell', these tools can give you a lot of details about what is happening in the system and help with automation. <br/><br/>We'll see what is available in Android command line and <br/>- analyze system and sample apps with 'dumpsys', <br/>- find out how to check whether your service finishes normally and does not live forever, <br/>- mock battery level and charger state, <br/>- trigger account sychronization, <br/>- change system settings without a single line of UiAutomator code.",
+    "speakers": [
+      4
+    ],
+    "language": "English",
+    "complexity": "Intermediate",
+    "presentation": "https://speakerdeck.com/gdglviv/roman-mazur-power-of-android-shell",
+    "thumbnail": "/images/sessions/104.JPG",
+    "videoId": "a4InM2VhAvQ",
+    "tags": [
+      "Android",
+      "Tools"
+    ]
+  },
+  "105": {
+    "id": 105,
+    "title": "Hijacking notification actions - lets respond to your messages!",
+    "description": "Always wanted to implement automatic answer to your text messages/FB Messenger/Telegram and didn't want to implement whole client for this? <br/><br/>Wanted to call some action in any notification from your app without too much permissions (or root access)? <br/><br/>Here we go! I will show and explain how to hijack actions from any visible notification to any other app.",
+    "speakers": [
+      5
+    ],
+    "language": "English",
+    "complexity": "Intermediate",
+    "presentation": "https://speakerdeck.com/gdglviv/michal-tajchert-hijacking-your-notifications",
+    "thumbnail": "/images/sessions/105.JPG",
+    "videoId": "2rT4Us7cFDg",
+    "tags": [
+      "Android"
+    ]
+  },
+  "106": {
+    "id": 106,
+    "title": "Using GoLang for building micro-service architecture in Google Cloud Platform",
+    "description": "Building a good cloud-ready application is always a challenge. Especially when you decide to use micro-service architecture, where you need to take care about orchestration of all components. Google Cloud Platform can help to solve all problems you can face when creating cloud apps. Go language allows to create small isolated components that can solve only one problem, but solve it perfectly. Combination of these two, Go language and GCP, brings excellent mix that makes development of real cloud application easy as piece of cake!",
+    "speakers": [
+      7
+    ],
+    "language": "English",
+    "complexity": "Beginner",
+    "presentation": "http://olostan.github.io/slides_microgcp",
+    "thumbnail": "/images/sessions/106.JPG",
+    "videoId": "euROYVOJYuI",
+    "tags": [
+      "Cloud",
+      "Go Lang"
+    ]
+  },
+  "107": {
+    "id": 107,
+    "title": "Angular2: Reasoning behind technical decisions",
+    "description": "Angular 2.0 is the next generation of platform that allows to develop complex web application with a blazing speed and simplicity. But for many developers, even those who have lot of Angular1 experience, there are still a lot of questions why Angular team decided to use TypeScript, strange templating syntax and other not very obvious decisions. During this talk we’ll try to give answers to these questions and dive little bit deeper in Angular 2.0 architecture. ",
+    "speakers": [
+      7
+    ],
+    "language": "English",
+    "complexity": "Beginner",
+    "presentation": "http://olostan.github.io/slides_ng2arch",
+    "thumbnail": "/images/sessions/107.JPG",
+    "videoId": "V7GCjnfsOCE",
+    "tags": [
+      "Web",
+      "AngularJS"
+    ]
+  },
+  "108": {
+    "id": 108,
+    "title": "V8 under the hood",
+    "description": "What is happening inside V8 javascript engine - optimization, work, etc.",
+    "speakers": [
+      8
+    ],
+    "language": "Russian",
+    "complexity": "Intermediate",
+    "presentation": "https://speakerdeck.com/gdglviv/dima-maleev-v8-under-the-hood",
+    "thumbnail": "/images/sessions/108.JPG",
+    "videoId": "Oazl4fx-X68",
+    "tags": [
+      "Web",
+      "V8 Engine"
+    ]
+  },
+  "109": {
+    "id": 109,
+    "title": "Scalable Microservices with gRPC, Kubernetes, and Containers",
+    "description": "Microservices and Containers are a great mix, but if you want to get serious about using them together then you need to start shopping for a Cluster Management and Container Orchestration Platform. It just so happens there's already an extremely popular, Open Source, Cross Cloud Platform called Kubernetes. You'll also need something to wire them together, maybe something that offers high performance RPCs, but also provides a toolset to generate services and clients in multiple languages. gRPC is a language and platform-neutral RPC framework, based on HTTP/2 and Protobuf, used to build highly performant and scalable APIs. <br/><br/>In this talk, we’ll demo the core concepts of gRPC and Kubernetes, and show you how to combine these two technologies to create scalable and performant microservices rooted in lessons learned from Google’s experience!",
+    "speakers": [
+      9
+    ],
+    "language": "English",
+    "complexity": "Beginner",
+    "presentation": "https://speakerdeck.com/gdglviv/mandy-waite-scalable-microservices-with-grpc-kubernetes-and-containers",
+    "thumbnail": "/images/sessions/109.JPG",
+    "videoId": "BZ-uR8LQRkA",
+    "tags": [
+      "Cloud",
+      "gRPC",
+      "Kubernetes"
+    ]
+  },
+  "110": {
+    "id": 110,
+    "title": "Google Cloud Platform End to End: How we built 'Cloud Spin'",
+    "description": "The Cloud is useful for a lot of cool things, well how about taking 19 smartphones and wiring them together in order to take 3D pictures of people doing crazy stuff at events? Guess what? that's exactly what we did! Our only limitation was that being Google we had to use Google Cloud Platform and it turns out that that's not much of a limitation at all. <br/><br/>This talk looks at how we built the backend and analyzes the design choices that we made when it comes to endpoints, messaging, storage, scalability, Docker, Firebase and process pipelines. Best of all it answers the question: How do you wire up 19 smartphones to the Cloud and use them to create 3D pictures?",
+    "speakers": [
+      9
+    ],
+    "language": "English",
+    "complexity": "Beginner",
+    "presentation": "https://speakerdeck.com/gdglviv/mandy-waite-cloud-platform-end-to-end-how-we-built-cloud-spin",
+    "thumbnail": "/images/sessions/110.JPG",
+    "videoId": "n-H6jYnL32U",
+    "tags": [
+      "Cloud",
+      "Docker",
+      "Firebase"
+    ]
+  },
+  "111": {
+    "id": 111,
+    "title": "New security model in Marshmallow",
+    "description": "Permissions on Android have always been an important area to consider when developing applications. Currently, users have awareness of these permissions, but no real control over them.<br/><br/>Android M comes with several breaking changes, related to Permissions. <br/><br/>In this presentation we will learn on how the new permission model introduced in Android M works, and how can we educate our users, so they can understand why are we asking for certain permission. ",
+    "speakers": [
+      10
+    ],
+    "language": "English",
+    "complexity": "Beginner",
+    "presentation": "https://speakerdeck.com/gdglviv/roman-herasymenko-android-m-security-model",
+    "thumbnail": "/images/sessions/111.JPG",
+    "videoId": "lFpb-LaYDvs",
+    "tags": [
+      "Android",
+      "Marshmallow"
+    ]
+  },
+  "112": {
+    "id": 112,
+    "title": "Mastering the NDK with Android Studio 1.3+ and the gradle-experimental plugin",
+    "description": "Android Studio is finally fully supporting the NDK so you can easily integrate C/C++ inside Android applications.<br/><br/>While this support is still new and experimental, it’s promising and worth already doing the final jump from other IDEs and build systems.<br/><br/>After a short introduction on what is the NDK, learn how to use it from Android Studio while avoiding several classic pitfalls.",
+    "speakers": [
+      11
+    ],
+    "language": "English",
+    "complexity": "Beginner",
+    "presentation": "https://speakerdeck.com/gdglviv/xavier-hallade-mastering-the-ndk-with-android-studio-1-dot-3-plus-and-the-gradle-experimental-plugin",
+    "thumbnail": "/images/sessions/122.JPG",
+    "videoId": "GbTe0BTuNaU",
+    "tags": [
+      "Android",
+      "NDK"
+    ]
+  },
+  "113": {
+    "id": 113,
+    "title": "Material Design. Custom Branding",
+    "description": "1. Material Design Magic <br/>2. Work with colours, typography and custom branding <br/>3. Frameworks for MD Style <br/>4. Issues, tricks and Best cases.",
+    "speakers": [
+      12
+    ],
+    "language": "Ukrainian",
+    "complexity": "Intermediate",
+    "presentation": "https://speakerdeck.com/gdglviv/alex-pazhyn-material-design-custom-branding",
+    "thumbnail": "/images/sessions/113.JPG",
+    "videoId": "3u8864j4g24",
+    "tags": [
+      "Android",
+      "Material Design"
+    ]
+  },
+  "114": {
+    "id": 114,
+    "title": "Continuous Delivery with Ease",
+    "description": "Do you create builds for your client frequently? Maybe every day? That’s good, because you can get feedback early and often… unless you do that manually, pushing APKs via mail or to some app testing platform via browser. Look back at the time spent on these tedious tasks. How would you feel if you could spend less time and do even more at the same time? I will show you, how easy it is to set things up, not to spend even a minute a day to create builds for your testers. We will look at all the requirements for that and we will go as far as enabling business people to decide when to publish new version of your amazing application literally with a push of a button.",
+    "speakers": [
+      13
+    ],
+    "language": "English",
+    "complexity": "Intermediate",
+    "presentation": "http://slides.com/mg6maciej/continuous-delivery-with-ease-devfest-ukraine-2015",
+    "thumbnail": "/images/sessions/114.JPG",
+    "videoId": "b-4upgkYdZo",
+    "tags": [
+      "Android",
+      "CI"
+    ]
+  },
+  "115": {
+    "id": 115,
+    "title": "Let's play Dart!",
+    "description": "Dart is a language for the web by Google which is object oriented with optional types. You can use Dart to build great apps for the client-side, server-side and command line. <br/><br/>Come to listen to my story why I love Dart and why it makes me so much productive!",
+    "speakers": [
+      14
+    ],
+    "language": "English",
+    "complexity": "Intermediate",
+    "presentation": "https://speakerdeck.com/gdglviv/jana-moudra-lets-play-dart",
+    "thumbnail": "/images/sessions/115.JPG",
+    "videoId": "DoUATBQcihI",
+    "tags": [
+      "Web",
+      "Dart"
+    ]
+  },
+  "116": {
+    "id": 116,
+    "title": "Polymer vs other libraries",
+    "description": "Most modern front-end JavaScript libraries provide support for component based development. Components help separate large applications into standalone building blocks with specified communication API. Let's compare Polymer elements with components from React, Angular.",
+    "speakers": [
+      15
+    ],
+    "language": "English",
+    "complexity": "Intermediate",
+    "presentation": "https://speakerdeck.com/gdglviv/jakub-skvara-polymer-vs-other-libraries",
+    "thumbnail": "/images/sessions/116.JPG",
+    "videoId": "-UEURYYVCmg",
+    "tags": [
+      "Web",
+      "Polymer"
+    ]
+  },
+  "117": {
+    "id": 117,
+    "title": "Bluetooth Low Energy and iBeacon development for Android",
+    "description": "iBeacon is a new technology created by Apple. iBeacon uses a Bluetooth low energy signal, which Android 4.3+ devices can detect. Some fairly significant improvements were announced at Google I/O 2014 for improved BLE support in Android Lollipop. We will discuss different implementations for devices prior to 5.0, and for 5.0 and higher.  During our talk you will learn how to implement background beacon scanning, how to improve battery life (and how to choose between fast beacon detection and longer battery life). Also we'll discuss, on how to turn your android device into multiple iBeacon transmitters. Allowing a single Android device to act as multiple iBeacons opens up a huge number of interesting possibilities.",
+    "speakers": [
+      16
+    ],
+    "language": "English",
+    "complexity": "Intermediate",
+    "presentation": "https://speakerdeck.com/gdglviv/ksenia-shymelcgyk-bluetooth-low-energy-and-ibeacon-development-for-android",
+    "thumbnail": "/images/sessions/117.JPG",
+    "videoId": "tEUmmZDwHDg",
+    "tags": [
+      "Android",
+      "BLE"
+    ]
+  },
+  "118": {
+    "id": 118,
+    "title": "Students & Google: how not to vanish in the crowd",
+    "description": "Most students believe that getting a job at Google is some kind of 'Mission Impossible'. Fortunately, you don't need superpower for this. In her talk Anna will tell you about the opportunities for students at Google and will share some tips on how to apply, keep calm and succeed.",
+    "speakers": [
+      17
+    ],
+    "language": "Ukrainian",
+    "complexity": "Beginner",
+    "presentation": "https://speakerdeck.com/gdglviv/anna-kurylo-students-and-google-how-not-to-vanish-in-the-crowd",
+    "thumbnail": "",
+    "videoId": "",
+    "tags": [
+      "Community"
+    ]
+  },
+  "119": {
+    "id": 119,
+    "title": "Android TV Development",
+    "description": "We will discuss how to start programming for Android TV, what is “10 foot UI” and some hardware features  that Android TV developers should bear in mind.We will found out about the competitors and what is the current state of the market.",
+    "speakers": [
+      18
+    ],
+    "language": "Russian",
+    "complexity": "Intermediate",
+    "presentation": "https://speakerdeck.com/gdglviv/alexey-rybakov-android-tv-development",
+    "thumbnail": "/images/sessions/119.JPG",
+    "videoId": "SoXb9cXnJhc",
+    "tags": [
+      "Android",
+      "Android TV"
+    ]
+  },
+  "120": {
+    "id": 120,
+    "title": "Firebase Adventures - Real time platform for your apps",
+    "description": "Firebase is a powerful platform for building mobile and web applications. Use Firebase to store and sync data instantly, authenticate users, and easily deploy your web app. <br/><br/>Firebase Adventures is a talk about how to use Firebase in different ways to give you the ability to build extraordinary cross-platform apps.",
+    "speakers": [
+      19
+    ],
+    "language": "English",
+    "complexity": "Intermediate",
+    "presentation": "https://speakerdeck.com/gdglviv/juarez-filho-firebase-adventures",
+    "thumbnail": "/images/sessions/120.JPG",
+    "videoId": "uz4vA21lqoE",
+    "tags": [
+      "Cloud",
+      "Firebase"
+    ]
+  },
+  "121": {
+    "id": 121,
+    "title": "[Workshop] Getting started with Firebase",
+    "description": "In this workshop you will learn how to use Firebase to empower your web applications using all features provided by Firebase like realtime database, authentication, hosting and much more.",
+    "speakers": [
+      19
+    ],
+    "language": "English",
+    "complexity": "Intermediate",
+    "presentation": "",
+    "thumbnail": "/images/sessions/121.JPG",
+    "videoId": "",
+    "tags": [
+      "Cloud",
+      "Firebase"
+    ]
+  },
+  "122": {
+    "id": 122,
+    "title": "Service Worker - Native Apps Experience For The Web",
+    "description": "Installing and updating apps, network interceptors and full cache management, push notifications and background updates. All these is now possible in Web apps with Service Worker! Even when the App is closed. Excited? Be the one to touch it first!",
+    "speakers": [
+      20
+    ],
+    "language": "English",
+    "complexity": "Intermediate",
+    "presentation": "https://speakerdeck.com/gdglviv/viktor-zozuliak-service-worker-native-apps-experience-for-the-web",
+    "thumbnail": "/images/sessions/122.JPG",
+    "videoId": "szLFi1aO398",
+    "tags": [
+      "Web",
+      "Service Worker"
+    ]
+  },
+  "123": {
+    "id": 123,
+    "title": "Google WebRTC on Mobile",
+    "description": "WebRTC is a new milestone in the evolution of the web. This technology allows us to quickly create real-time communication applications. Altough its main target is web browsers, WebRTC is becoming a popular real time communication technology used on mobile. By using WebRTC you can develop your own peer-to-peer videoId chat in a short amount of time. Also, WebRTC is very flexible, you can make calls to another networks that using offer/answer model, for example SIP protocol. In this presentation you can gain in-depth insights about how to implement WebRTC on iOS and Android mobile devices for a native experience.",
+    "speakers": [
+      21
+    ],
+    "language": "English",
+    "complexity": "Intermediate",
+    "presentation": "https://speakerdeck.com/gdglviv/busra-deniz-google-webrtc-on-mobile",
+    "thumbnail": "/images/sessions/123.JPG",
+    "videoId": "YWaOdwCenZM",
+    "tags": [
+      "Web",
+      "WebRTC"
+    ]
+  },
+  "124": {
+    "id": 124,
+    "title": "Build Your Thing In a Weekend with AngularJS 2.0",
+    "description": "Have you ever had and idea that you abandon after some time? You are not alone. That’s true for most of the software projects. The reasons might vary, lack of time, scope of the thing you want to build, or simply losing interest after some time. If only there was some easier way to build your thing with less hassle. Actually there is. In this talk we will discuss how to do that with AngularJS 2.0. We will go through some of the basics and talk about how it might help you implement your idea and what it has to offer.",
+    "speakers": [
+      22
+    ],
+    "language": "English",
+    "complexity": "Beginner",
+    "presentation": "https://speakerdeck.com/gdglviv/semih-yagcioglu-build-your-thing-in-a-weekend-with-angularjs-2-dot-0",
+    "thumbnail": "/images/sessions/124.JPG",
+    "videoId": "gHd-0itPpGg",
+    "tags": [
+      "Web",
+      "AngularJS"
+    ]
+  },
+  "125": {
+    "id": 125,
+    "title": "[Keynote] Lean Startup with Google",
+    "description": "THINK OUT OF THE BOX. CREATE WHAT YOU WANT!<br/><br/>It's time for the Ukrainian Developers to move forward and create the next globally-successful app! Please come to the Keynote by Dawid Ostrowski and learn how Google can help you with this goal, by providing technology for developers and support for entrepreneurs.",
+    "speakers": [
+      23
+    ],
+    "language": "English",
+    "complexity": "Beginner",
+    "presentation": "https://speakerdeck.com/gdglviv/dawid-ostrowski-lean-startup-with-google",
+    "thumbnail": "/images/sessions/125.JPG",
+    "videoId": "o04aL3IzmcQ",
+    "tags": [
+      "Entrepreneurship"
+    ]
+  },
+  "126": {
+    "id": 126,
+    "title": "Google Solve for X comes to Ukraine",
+    "description": "<i>The world is not limited by IQ. We are limited by creativity and bravery.</i> - Astro Teller</br></br>Learn about the new GDG-powered exciting Google initiative in Ukraine! It is called Solve for X and is a project of a mysterious division Google [x] Lab, (which is at the moment a separate project in the Alphabet holding). Would you like to join the global projects changing the world? - Solve for X is the answer!</br></br>Learn about the first Ukrainian experience and find out how to participate in a Moonshot Sprint in your city.</br></br>The brave and creative - we are looking for you!",
+    "speakers": [
+      24
+    ],
+    "language": "Ukrainian",
+    "complexity": "Beginner",
+    "presentation": "https://speakerdeck.com/gdglviv/volodymyr-ivanov-solve-for-x-comes-to-ukraine",
+    "thumbnail": "",
+    "videoId": "",
+    "tags": [
+      "Community"
+    ]
+  },
+  "127": {
+    "id": 127,
+    "title": "Solving Dev / Test conflicts",
+    "description": "In the ideal world, developers and testers act as a single solid team with a common goal. In reality, there is a number of problems that can create a split between these leagues, and even start a tiny cold war.<br/><br/>We'll try to look into some tricky questions.<br/>- How can we detect the split at the earliest stage?<br/>- What can we do to prevent it?<br/>- If we have already faced it, how can we heal it?",
+    "speakers": [
+      25
+    ],
+    "language": "English",
+    "complexity": "Beginner",
+    "presentation": "https://speakerdeck.com/gdglviv/test-conflicts",
+    "thumbnail": "",
+    "videoId": "",
+    "tags": [
+      "Community"
+    ]
+  },
+  "128": {
+    "id": 128,
+    "title": "Material Design in Games",
+    "description": "1. Why people play the games?<br/>2. Games in Material Design<br/>3. Developing of character <br/>4. Why Material Design is actual today?",
+    "speakers": [
+      26
+    ],
+    "language": "Russian",
+    "complexity": "Beginner",
+    "presentation": "https://speakerdeck.com/gdglviv/elena-forostovets-material-design-in-games",
+    "thumbnail": "",
+    "videoId": "",
+    "tags": [
+      "Community",
+      "Material Design"
+    ]
+  },
+  "129": {
+    "id": 129,
+    "title": "How to succeed in the kids and family mobile app space",
+    "description": "Learn how successful kids and family app developers understand and engage their audiences, and how you can design high-quality apps just for this group. You'll also get practical tips to help you boost your reach, retention or revenue.",
+    "speakers": [
+      27
+    ],
+    "language": "Russian",
+    "complexity": "Beginner",
+    "presentation": "https://speakerdeck.com/gdglviv/tetiana-protasova-how-to-succeed-in-the-kids-and-family-mobile-app-space",
+    "thumbnail": "",
+    "videoId": "",
+    "tags": [
+      "Community",
+      "Play Store"
+    ]
+  },
+  "130": {
+    "id": 130,
+    "title": "[Workshop] Let's build a new Polymer application",
+    "description": "Polymer is a great tool for prototyping new applications. In this workshop, you will see, how to build nice looking front-end application using Polymer Starter Kit and predefined set of elements and components. We're going to use backend API from Dart code lab. Feel free to visit both workshops, but you can also attend Dart or Polymer workshops individually. Note: please don't forget to bring your laptop and download Polymer Starter Kit https://developers.google.com/web/tools/polymer-starter-kit/",
+    "speakers": [
+      15
+    ],
+    "language": "English",
+    "complexity": "Beginner",
+    "presentation": "",
+    "thumbnail": "/images/sessions/130.JPG",
+    "videoId": "",
+    "tags": [
+      "Web",
+      "Polymer"
+    ]
+  },
+  "131": {
+    "id": 131,
+    "title": "[Workshop] Your first server-side application in Dart",
+    "description": "In this session you will explore how to write your first Dart server-side application which will be later used during the Polymer workshop. Come to this workshop to try and learn Dart, have fun and see how you can write awesome applications with it. Note: please don't forget to bring your laptop with downloaded Dart and some editor/IDE with Dart support. More info: https://www.dartlang.org/downloads/.",
+    "speakers": [
+      14
+    ],
+    "language": "English",
+    "complexity": "Beginner",
+    "presentation": "",
+    "thumbnail": "/images/sessions/131.JPG",
+    "videoId": "",
+    "tags": [
+      "Web",
+      "Dart"
+    ]
+  },
+  "132": {
+    "id": 132,
+    "title": "Women cracking the code",
+    "description": "For last several years the number of girls in IT sphere is actively increasing. In general girls in IT is not a myth, but still number of girls working as software developers, having original ideas or creating own startups is a tiny. Probably the reason is that profession of software developer requires a set of specific analytical skills, creative approach to any problems and ability to lifelong learn. During the talk we will discuss how to improve listed qualities and make a successful career in IT.",
+    "speakers": [
+      16
+    ],
+    "language": "Ukrainian",
+    "complexity": "Beginner",
+    "presentation": "",
+    "thumbnail": "",
+    "videoId": "",
+    "tags": [
+      "Community"
+    ]
+  },
+  "133": {
+    "id": 133,
+    "title": "RxJava for Android",
+    "description": "Does Android Studio support Java 8 features? And Android Tools Developer Leaders say this will not be added to Studio at least nearest year. Seems it's not a problem for developers who want to write in functional style right now!<br/><br/>Today we'll talk about reactive functional programming for Android. We'll look how to change your code with RxJava to write flexible, resilient, asynchronous applications despite limitations of Java 7.<br/><br/>We'll look at examples of async and blocking observables, filtering, mapping, math operations, retrieving observables from network calls and applying schedulers for our reactive computations. And of course, some examples of live code :)",
+    "speakers": [
+      28
+    ],
+    "language": "Ukrainian",
+    "complexity": "Beginner",
+    "presentation": "https://speakerdeck.com/gdglviv/constantine-mars-rxjava-for-android",
+    "thumbnail": "/images/sessions/133.JPG",
+    "videoId": "3LQnqJhGQmI",
+    "tags": [
+      "Android",
+      "RxJava"
+    ]
+  },
+  "134": {
+    "id": 134,
+    "title": "Data Binding. Next big thing?",
+    "description": "What Android Data Binding is? How it will change Android development? And the main question - will it be the next big thing or just yet another framework? Lets try to find out answers to all these questions and take a closer look to Data Binding.",
+    "speakers": [
+      29
+    ],
+    "language": "Ukrainian",
+    "complexity": "Intermediate",
+    "presentation": "https://speakerdeck.com/gdglviv/anton-minashkin-data-binding",
+    "thumbnail": "/images/sessions/134.JPG",
+    "videoId": "GYwvQ0YAPo4",
+    "tags": [
+      "Android",
+      "Marshmallow"
+    ]
+  },
+  "135": {
+    "id": 135,
+    "title": "The Cloud Convergence: OpenStack and Kubernetes",
+    "description": "The new cloud era brings us a lot of different technologies and products that can make process of development easier. <br/><br/>On the one hand we have OpenStack - an Open Source product that provides you a possibility to deploy your own cloud. On the other hand - Google, with its extensive experience operating a cloud using container technology, developed the open source Kubernetes orchestration system to manage containerized applications in a clustered environment.<br/><br/>This presentation will show you how to manage Containers easily using Kubernetes system on the OpenStack cloud environment.",
+    "speakers": [
+      30
+    ],
+    "language": "English",
+    "complexity": "Beginner",
+    "presentation": "https://speakerdeck.com/gdglviv/igor-dvoretskyi-the-cloud-convergence-openstack-and-kubernetes",
+    "thumbnail": "/images/sessions/135.JPG",
+    "videoId": "3zbxUcyiP8Y",
+    "tags": [
+      "Cloud",
+      "Kubernetes"
+    ]
+  },
+  "137": {
+    "id": 137,
+    "title": "How to become a Google Developer Expert",
+    "description": "TBD",
+    "speakers": [
+      10
+    ],
+    "language": "Ukrainian",
+    "complexity": "Beginner",
+    "presentation": "",
+    "thumbnail": "",
+    "videoId": "",
+    "tags": [
+      "Community"
+    ]
+  },
+  "138": {
+    "id": 138,
+    "title": "Tips to succeed in IT career",
+    "description": "How to prepare to the interview? What is important in the resume?<br/><br/>When you start a career that a questions everyone is strugling with. During the session we'll talk about best practices in creating resume, differences in applying for a job in product and outsorce companies.",
+    "speakers": [
+      31
+    ],
+    "language": "Ukrainian",
+    "complexity": "Beginner",
+    "presentation": "https://speakerdeck.com/gdglviv/anastasiia-serafyn-tips-to-succeed-in-it-career",
+    "thumbnail": "",
+    "videoId": "",
+    "tags": [
+      "Community"
+    ]
+  },
+  "139": {
+    "id": 139,
+    "title": "HR sessions",
+    "language": "Ukrainian",
+    "complexity": "Beginner",
+    "presentation": "",
+    "thumbnail": "",
+    "videoId": "",
+    "tags": [
+      "Community"
+    ]
+  },
+  "140": {
+    "id": 140,
+    "title": "Fireside Chat",
+    "description": "In this informal session we would like to sit by the virtual fireplace and give you the possibility to ask any question to various speakers and sponsors on the fireside panel. If we are just staring at each other the moderator will put an extra woodblock on the fire by posing a taunting statement with the intention to heat up the discussion to a passionate debate. We give away great swag for people contributing to a great conversation.",
+    "language": "English",
+    "complexity": "Beginner",
+    "presentation": "",
+    "thumbnail": "/images/sessions/140.JPG",
+    "videoId": "8kXNWOhEAhE",
+    "tags": [
+      "Web"
+    ]
+  }
+}

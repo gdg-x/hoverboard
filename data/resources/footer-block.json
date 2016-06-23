@@ -1,0 +1,82 @@
+{
+  "values": {
+    "footerBlocks": [
+      {
+        "title": "for-visitors",
+        "links": [
+          {
+            "text": "team",
+            "url": "/team/"
+          },
+          {
+            "text": "google-developers",
+            "url": "https://developers.google.com/",
+            "newTab": true
+          },
+          {
+            "text": "df-13",
+            "url": "http://gdg-devfest-ua.appspot.com/",
+            "newTab": true
+          },
+          {
+            "text": "df-14",
+            "url": "http://devfest.gdg.org.ua/2014/",
+            "newTab": true
+          },
+          {
+            "text": "df-15",
+            "url": "http://devfest.gdg.org.ua/2015/",
+            "newTab": true
+          }
+        ]
+      },
+      {
+        "title": "for-partners",
+        "links": [
+          {
+            "text": "partnership-proposition",
+            "url": "http://bit.ly/df16-sponsor",
+            "newTab": true
+          },
+          {
+            "text": "media-kit",
+            "url": "http://bit.ly/df16-media",
+            "newTab": true
+          }
+        ]
+      }
+    ]
+  },
+  "resources": {
+    "en": {
+      "back-to-top": "Back to top",
+      "subscribe": "Subscribe",
+      "subscribe-note": "No spam, only the latest news and updates!",
+      "for-visitors": "For visitors",
+      "team": "Team",
+      "google-developers": "Google Developers",
+      "df-13": "GDG DevFest Ukraine 2013",
+      "df-14": "GDG DevFest Ukraine 2014",
+      "df-15": "GDG DevFest Ukraine 2015",
+      "for-partners": "For Partners",
+      "partnership-proposition": "Partnership Proposition",
+      "media-kit": "Media Kit",
+      "contact-us": "Contact us"
+    },
+    "uk": {
+      "back-to-top": "До вверху",
+      "subscribe": "Підписатися",
+      "subscribe-note": "Ніякого спаму, лише останні новини!",
+      "for-visitors": "Для відвідувачів",
+      "team": "Команда",
+      "google-developers": "Google Developers",
+      "df-13": "GDG DevFest Ukraine 2013",
+      "df-14": "GDG DevFest Ukraine 2014",
+      "df-15": "GDG DevFest Ukraine 2015",
+      "for-partners": "Для партнерів",
+      "partnership-proposition": "Партнерська пропозиція",
+      "media-kit": "Медіа-кіт",
+      "contact-us": "Зв’яжіться з нами"
+    }
+  }
+}
