@@ -1,5 +1,6 @@
 {
-  "values": {
+  "data": {
+    "hashtag": "dfua",
     "social": [{
       "name": "twitter",
       "nickname": "GDGLviv",
@@ -16,7 +17,8 @@
       "name": "linkedin",
       "nickname": "google-developers-group-lviv",
       "url": "https://www.linkedin.com/company/google-developers-group-lviv"
-    }]
+    }],
+    "tweetsSource": "/data/tweets.json"
   },
   "resources": {
     "en": {

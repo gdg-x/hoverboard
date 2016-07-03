@@ -37,7 +37,7 @@
       }
 
       .logo-wrapper a {
-        display: inline-block;
+        /*display: inline-block;*/
       }
 
       .logo {
@@ -79,21 +79,21 @@
     </style>
 
     <app-toolbar id="mainToolbar">
-      <div class="navItem leftItem">
-        <paper-icon-button icon="menu" on-tap="togglePanel" hidden$="{{!app.isPhoneSize}}"></paper-icon-button>
+      <div class="navItem leftItem" hidden$="{{!app.isPhoneSize}}">
+        <paper-icon-button icon="menu" on-tap="togglePanel"></paper-icon-button>
       </div>
       <div class="logo-wrapper">
-        <a href="/" hidden$="{{app.isPhoneSize}}" hide$="[[hideLogo]]" fade>
+        <a href="/" hidden$="{{hideLogo}}" fade>
           <iron-image class="logo" src="/images/logo-white.svg" sizing="contain"
                       alt="{{localize('title')}}"></iron-image>
         </a>
       </div>
-      <div class="navItem">
+      <div class="navItem" self-end>
         <template is="dom-if" if="[[!app.isPhoneSize]]">
           <paper-tabs selected="[[app.page]]" attr-for-selected="name" noink>
             <template is="dom-repeat" items="[[app.data.navigation]]" as="nav">
               <paper-tab name="[[nav.route]]" link>
-                <a href="[[nav.permalink]]" class="nav-link">{{localize(nav.route)}}</a>
+                <a href$="[[nav.permalink]]" class="nav-link">{{localize(nav.route)}}</a>
               </paper-tab>
             </template>
           </paper-tabs>
@@ -118,9 +118,12 @@
         ],
 
         properties: {
-          app: Object,
           routeData: Object,
-          hideLogo: Boolean
+          hideLogo: Boolean,
+          loadExternalResources: {
+            type: Boolean,
+            value: false
+          }
         },
 
         observers: [
@@ -128,7 +131,7 @@
         ],
 
         togglePanel: function () {
-          app.toggleDrawer();
+          HOVERBOARD.Elements.Template.toggleDrawer();
         },
 
         _stylesChanged: function (headerSettings) {

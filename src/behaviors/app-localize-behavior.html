@@ -9,6 +9,16 @@
     HOVERBOARD.AppLocalizeBehaviorImpl = {
 
       properties: {
+        app: {
+          type: Object,
+          notify: true
+        },
+
+        loadExternalResources: {
+          type: Boolean,
+          value: true
+        },
+
         /* Overriden from Polymer.AppLocalizeBehavior */
         formats: {
           type: Object,
@@ -31,11 +41,6 @@
               lang = lang.split('_')[0];
             return lang;
           }
-        },
-
-        loaded: {
-          type: Boolean,
-          value: false
         }
       },
 
@@ -47,9 +52,22 @@
         this.loadElementResources(this.tagName);
       },
 
+      observers: [
+        'linkResources(app.resources)'
+      ],
+
       loadElementResources: function (element) {
-        var url = '/data/resources/' + element.toLowerCase() + '.json';
-        this.loadResources(this.resolveUrl(url));
+        if (this.loadExternalResources) {
+          var url = '/data/resources/' + element.toLowerCase() + '.json';
+          this.loadResources(this.resolveUrl(url));
+        }
+      },
+
+      linkResources: function () {
+        if (!this.loadExternalResources && this.app.resources) {
+          this.resources = this.app.resources;
+          this.fire('app-resources-loaded');
+        }
       },
 
       __onRequestResponse: function (event) {
@@ -66,11 +84,14 @@
           this.set('app.resources', appResources);
         }
         if (data) {
-          var appData = this.app.data || {};
-          this.set('app.data', HOVERBOARD.Util.extend(appData, data));
+          this.app.data = this.app.data || {};
+          for (var val in data) {
+            if (data.hasOwnProperty(val)) {
+              this.set('app.data.' + val, data[val]);
+            }
+          }
         }
         this.resources = this.app.resources;
-        this.notifyPath('app.values.statistics');
         this.fire('app-resources-loaded');
       },
 

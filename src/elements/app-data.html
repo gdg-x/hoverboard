@@ -2,6 +2,9 @@
 
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
+<link rel="import" href="../behaviors/app-localize-behavior.html">
+
+
 <dom-module id="app-data">
   <template>
     <iron-ajax auto url="[[speakersSource]]" handle-as="json" last-response="{{_speakersRaw}}"></iron-ajax>
@@ -9,7 +12,6 @@
     <iron-ajax auto url="[[postsSource]]" handle-as="json" on-response="_reversePosts"></iron-ajax>
     <iron-ajax auto url="[[partnersSource]]" handle-as="json" last-response="{{partners}}"></iron-ajax>
     <iron-ajax auto url="[[scheduleSource]]" handle-as="json" last-response="{{_scheduleRaw}}"></iron-ajax>
-    <iron-ajax auto url="[[teamSource]]" handle-as="json" last-response="{{team}}"></iron-ajax>
   </template>
   <script>
     (function () {
@@ -17,6 +19,11 @@
 
       Polymer({
         is: 'app-data',
+
+        behaviors: [
+          Polymer.AppLocalizeBehavior,
+          HOVERBOARD.AppLocalizeBehaviorImpl
+        ],
 
         properties: {
           speakersSource: {
@@ -38,10 +45,6 @@
           scheduleSource: {
             type: String,
             value: 'data/schedule.json'
-          },
-          teamSource: {
-            type: String,
-            value: 'data/team.json'
           },
           speakers: {
             type: Array,
@@ -67,10 +70,6 @@
             type: Array,
             notify: true
           },
-          team: {
-            type: Object,
-            notify: true
-          },
           app: {
             type: Object,
             notify: true
@@ -89,7 +88,6 @@
 
         ready: function () {
           this.app = this.app || {};
-          this.set('app.gallery', this._getGallery());
         },
 
         _generateSchedule: function () {
@@ -161,16 +159,6 @@
 
         _reversePosts: function (response) {
           this.posts = response.detail.response.reverse();
-        },
-
-        _getGallery: function () {
-          return {
-            albumUrl: 'https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1',
-            photos: {
-              big: '/images/backgrounds/2015_1.jpg',
-              small: ['/images/backgrounds/2015_2.jpg', '/images/backgrounds/2015_3.jpg']
-            }
-          };
         }
 
       });

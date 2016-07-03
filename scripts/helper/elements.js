@@ -51,6 +51,7 @@ HOVERBOARD.Elements = (function() {
   }
 
   function onDomBindStamp() {
+    var template = document.getElementById('t');
     var toast = document.getElementById('toast');
 
     HOVERBOARD.Elements.Toast = toast;
@@ -67,10 +68,6 @@ HOVERBOARD.Elements = (function() {
     template.app.isSafari = HOVERBOARD.Util.isSafari();
     template.app.ANALYTICS_LINK_ATTR = ANALYTICS_LINK_ATTR;
 
-    // FAB scrolling effect caches.
-    template._fabCrossFooterThreshold = null; // Scroll limit when FAB sticks.
-    template._fabBottom = null; // Bottom to pin FAB at.
-
     template.backToTop = function(e) {
       e.preventDefault();
 
@@ -86,7 +83,7 @@ HOVERBOARD.Elements = (function() {
     };
 
     template.toggleDrawer = function() {
-      this.$.appdrawer.toggle();
+      this.$.happ.$$('#drawer').toggle();
     };
 
     template._isPage = function(page, selectedPage) {
@@ -94,8 +91,8 @@ HOVERBOARD.Elements = (function() {
     };
 
     template.closeDrawer = function() {
-      if (this.$.appdrawer && this.$.appdrawer.close) {
-        this.$.appdrawer.close();
+      if (this.$.happ.$$('#drawer') && this.$.happ.$$('#drawer').close) {
+        this.$.happ.$$('#drawer').close();
       }
     };
 

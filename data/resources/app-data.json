@@ -1,0 +1,90 @@
+{
+  "data": {
+    "navigation": [
+      {
+        "route": "home",
+        "permalink": "/",
+        "headerSettings": {
+          "backgroundColor": "#00BCD4",
+          "backgroundImage": "/images/backgrounds/home.png",
+          "fontColor": "#FFFFFF",
+          "tabBarColor": "#FFFFFF",
+          "video": {
+            "title": "GDG DevFest Ukraine 2015",
+            "youtubeId": "DfMnJAzOFng",
+            "text": "See how it was in 2015"
+          },
+          "hideLogo": true,
+          "minHeight": "360px"
+        }
+      },
+      {
+        "route": "blog",
+        "permalink": "/blog/",
+        "headerSettings": {
+          "backgroundColor": "#03A9F4",
+          "backgroundImage": "/images/backgrounds/blog.png",
+          "fontColor": "#FFFFFF",
+          "tabBarColor": "#FFFFFF"
+        }
+      },
+      {
+        "route": "schedule",
+        "permalink": "/schedule/",
+        "headerSettings": {
+          "backgroundColor": "#607D8B",
+          "fontColor": "#FFFFFF",
+          "tabBarColor": "#FFFFFF"
+        }
+      },
+      {
+        "route": "speakers",
+        "permalink": "/speakers/",
+        "headerSettings": {
+          "backgroundColor": "#673AB7",
+          "fontColor": "#FFFFFF",
+          "tabBarColor": "#FFFFFF"
+        }
+      },
+      {
+        "route": "team",
+        "permalink": "/team/",
+        "headerSettings": {
+          "backgroundColor": "#009688",
+          "fontColor": "#FFFFFF",
+          "tabBarColor": "#FFFFFF"
+        }
+      }
+    ],
+    "url": "https://devfest.gdg.org.ua/",
+    "trackerCode": "UA-43643469-1",
+    "mailchimp": {
+      "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
+      "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
+    },
+    "partnershipProposition": "http://bit.ly/df16-sponsor",
+    "disqusShortName": "hoverboard-gdg-x"
+  },
+  "resources": {
+    "en": {
+      "title": "GDG DevFest Ukraine 2016",
+      "dates": "September 9-10, 2016",
+      "home": "Home",
+      "blog": "Blog",
+      "speakers": "Speakers",
+      "schedule": "Schedule",
+      "team": "Team",
+      "location-address-short": "Lviv, Ukraine"
+    },
+    "uk": {
+      "title": "GDG DevFest Ukraine 2016",
+      "dates": "9-10 Вересня 2016",
+      "home": "Головна",
+      "blog": "Блог",
+      "speakers": "Доповідачі",
+      "schedule": "Розклад",
+      "team": "Команда",
+      "location-address-short": "Львів, Україна"
+    }
+  }
+}

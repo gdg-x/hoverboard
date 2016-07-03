@@ -33,7 +33,6 @@
 
       ticket-element {
         margin: 15px;
-        cursor: pointer;
       }
 
       paper-button {
@@ -54,10 +53,11 @@
 
       paper-dialog {
         background: #fff;
+        color: var(--primary-text-color);
       }
 
-      paper-dialog .buttons {
-        color: initial;
+      paper-dialog paper-button {
+        color: var(--default-primary-color);
       }
 
       @media (min-width: 601px) {
@@ -72,14 +72,14 @@
         <h4 class="heading">[[localize('tickets-title')]]</h4>
       </div>
       <div class="tickets-wrapper">
-        <template is="dom-repeat" items="[[tickets.elements]]" as="ticket">
+        <template is="dom-repeat" items="[[app.data.tickets.elements]]" as="ticket">
           <ticket-element type="[[localize(ticket.name)]]"
                           price="[[ticket.price]]"
                           currency="[[ticket.currency]]"
                           starts="[[localize(ticket.starts)]]"
                           ends="[[localize(ticket.ends)]]"
                           info="[[localize(ticket.info)]]"
-                          on-tap="openTicketsDialog"></ticket-element>
+                          sold-out="[[ticket.soldOut]]"></ticket-element>
         </template>
       </div>
       <div class="details">[[localize('tickets-details')]]</div>
@@ -107,13 +107,13 @@
           HOVERBOARD.AppLocalizeBehaviorImpl
         ],
 
-        properties: {
-          tickets: Object
-        },
-
         listeners: {
           'iron-overlay-opened': '_onOverlayOpened',
           'iron-overlay-closed': '_onOverlayClosed'
+        },
+
+        ready: function () {
+          HOVERBOARD.Elements.Tickets = this;
         },
 
         openTicketsDialog: function () {

@@ -44,11 +44,13 @@
         @apply(--layout-vertical);
         @apply(--layout-center-center);
         @apply(--layout-fit);
+        padding: 16px;
         background: rgba(0, 0, 0, .3);
         color: #fff;
         font-size: 21px;
         opacity: 0;
         transition: opacity .3s;
+        text-align: center;
       }
 
       .open-photos:hover {
@@ -73,28 +75,28 @@
 
     <div class="photo-wrapper">
       <div class="photo big">
-        <iron-image src="[[gallery.photos.big]]" class="placeholder-color" sizing="cover" preload
+        <iron-image src="{{app.data.gallery.photos.big}}" class="placeholder-color" sizing="cover" preload
                     fade></iron-image>
-        <a class="open-photos" href$="[[gallery.albumUrl]]" target="_blank">
+        <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank">
           <paper-ripple></paper-ripple>
-          <span>Click here to view more photos <iron-icon icon="open-in-new"/></span>
+          <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>
         </a>
       </div>
       <div class="vertical-block">
         <div class="photo">
-          <iron-image src="[[gallery.photos.small.0]]" class="placeholder-color" sizing="cover" preload
+          <iron-image src="[[app.data.gallery.photos.small.0]]" class="placeholder-color" sizing="cover" preload
                       fade></iron-image>
-          <a class="open-photos" href$="[[gallery.albumUrl]]" target="_blank">
+          <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank">
             <paper-ripple></paper-ripple>
-            <span>Click here to view more photos <iron-icon icon="open-in-new"/></span>
+            <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>
           </a>
         </div>
         <div class="photo">
-          <iron-image src="[[gallery.photos.small.1]]" class="placeholder-color" sizing="cover" preload
+          <iron-image src="[[app.data.gallery.photos.small.1]]" class="placeholder-color" sizing="cover" preload
                       fade></iron-image>
-          <a class="open-photos" href$="[[gallery.albumUrl]]" target="_blank">
+          <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank">
             <paper-ripple></paper-ripple>
-            <span>Click here to view more photos <iron-icon icon="open-in-new"/></span>
+            <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>
           </a>
         </div>
       </div>
@@ -110,9 +112,10 @@
 
         is: 'photo-block',
 
-        properties: {
-          gallery: Object
-        }
+        behaviors: [
+          Polymer.AppLocalizeBehavior,
+          HOVERBOARD.AppLocalizeBehaviorImpl
+        ]
 
       });
 

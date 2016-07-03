@@ -1,5 +1,5 @@
 {
-  "values": {
+  "data": {
     "tickets": {
       "url": "http://2event.com/events/630032",
       "elements": [{
@@ -8,7 +8,8 @@
         "currency": "₴",
         "starts": "student-ticket-starts",
         "ends": "student-ticket-ends",
-        "info": "student-ticket-info"
+        "info": "student-ticket-info",
+        "soldOut": false
       }, {
         "name": "early-ticket",
         "price": 750,
@@ -22,7 +23,8 @@
         "price": 1000,
         "currency": "₴",
         "starts": "lazy-ticket-starts",
-        "ends": "lazy-ticket-ends"
+        "ends": "lazy-ticket-ends",
+        "soldOut": false
       }]
     }
   },

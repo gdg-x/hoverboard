@@ -169,7 +169,7 @@
                 <span class="title">[[speaker.company]], [[speaker.country]]</span>
               </div>
             </div>
-            <a href="{$ baseurl $}/speakers/[[speaker.id]]/" class="card-content">
+            <a href$="/speakers/[[speaker.id]]/" class="card-content">
               <truncate-marked-text class="bio" text="[[speaker.bio]]" characters="220"
                                     break-last-word></truncate-marked-text>
             </a>
@@ -185,7 +185,7 @@
         </div>
       </template>
     </div>
-    <footer-block mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}" cascaded></footer-block>
+    <footer-block app="{{app}}" cascaded></footer-block>
 
     <speaker-details id="speakerDetails"
                      speaker="{{_selectedSpeaker}}"

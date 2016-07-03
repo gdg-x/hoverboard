@@ -19,17 +19,17 @@
 
   <template>
 
-    <statistics-block app="{{app}}" statistics="[[app.statistics]]" cascaded></statistics-block>
+    <statistics-block app="{{app}}" cascaded></statistics-block>
     <featured-people app="{{app}}" people="{{people}}" cascaded></featured-people>
     <featured-videos app="{{app}}" videos="{{videos}}" cascaded></featured-videos>
     <call-to-action app="{{app}}" cascaded></call-to-action>
-    <photo-block app="{{app}}" gallery="[[app.gallery]]" cascaded></photo-block>
-    <tickets-block app="{{app}}" tickets="[[app.tickets]]" cascaded></tickets-block>
+    <photo-block app="{{app}}" cascaded></photo-block>
+    <tickets-block app="{{app}}" cascaded></tickets-block>
     <latest-posts app="{{app}}" posts="{{posts}}" cascaded></latest-posts>
-    <social-feed app="{{app}}" source="/data/tweets.json" social="[[app.social]]" hashtag="dfua" cascaded></social-feed>
-    <map-block app="{{app}}" latitude="49.809841" longitude="23.972805" zoom="15" cascaded></map-block>
+    <social-feed app="{{app}}" cascaded></social-feed>
+    <map-block app="{{app}}" cascaded></map-block>
     <logos-block app="{{app}}" logos="{{logos}}" cascaded></logos-block>
-    <footer-block app="{{app}}" social="[[app.social]]" blocks="[[app.footerBlocks]]" mailchimp-url="{$ mailchimp.url $}" mailchimp-name="{$ mailchimp.name $}" cascaded></footer-block>
+    <footer-block app="{{app}}" cascaded></footer-block>
 
   </template>
 
@@ -51,64 +51,42 @@
           posts: Array,
           logos: Array,
           videos: Array,
-          selected: {
-            type: Boolean,
-            observer: 'updateHeaderSettings'
-          },
-          headerSettings: {
-            type: Object,
-            notify: true
-          },
-          _headerSettings: {
+
+          animationConfig: {
             type: Object,
             value: function () {
-              return {};
-            },
-
-            animationConfig: {
-              type: Object,
-              value: function () {
-                var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
-                var cascadedArray = Array.prototype.slice.call(cascaded);
-                return {
-                  'entry': [{
-                    name: 'cascaded-animation',
-                    animation: 'transform-animation',
-                    transformFrom: 'translate3d(0, 100%, 0)',
-                    nodes: cascadedArray,
-                    timing: {
-                      delay: 500
-                    }
-                  }, {
-                    name: 'fade-in-animation',
-                    animation: 'fade-in-animation',
-                    node: this,
-                    timing: {
-                      delay: 500
-                    }
-                  }],
-                  'exit': [{
-                    name: 'cascaded-animation',
-                    animation: 'transform-animation',
-                    transformTo: 'translate3d(0, 100%, 0)',
-                    nodes: cascadedArray
-                  }, {
-                    name: 'fade-out-animation',
-                    animation: 'fade-out-animation',
-                    node: this
-                  }]
-                };
-              }
+              var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
+              var cascadedArray = Array.prototype.slice.call(cascaded);
+              return {
+                'entry': [{
+                  name: 'cascaded-animation',
+                  animation: 'transform-animation',
+                  transformFrom: 'translate3d(0, 100%, 0)',
+                  nodes: cascadedArray,
+                  timing: {
+                    delay: 500
+                  }
+                }, {
+                  name: 'fade-in-animation',
+                  animation: 'fade-in-animation',
+                  node: this,
+                  timing: {
+                    delay: 500
+                  }
+                }],
+                'exit': [{
+                  name: 'cascaded-animation',
+                  animation: 'transform-animation',
+                  transformTo: 'translate3d(0, 100%, 0)',
+                  nodes: cascadedArray
+                }, {
+                  name: 'fade-out-animation',
+                  animation: 'fade-out-animation',
+                  node: this
+                }]
+              };
             }
           }
-        },
-
-        observers: [
-          'updateHeaderSettings(selected)'
-        ],
-
-        updateHeaderSettings: function () {
-          this.headerSettings = this.selected ? this._headerSettings : this.headerSettings;
         }
 
       });

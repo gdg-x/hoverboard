@@ -1,0 +1,233 @@
+{
+  "data": {
+    "teamPageTitle": "team-page-title",
+    "teamPageText": "team-page-text",
+    "team": [
+      {
+        "members": [
+          {
+            "name": "Oleh Zasadnyy",
+            "photoUrl": "/images/people/oleh_zasadnyy.jpg",
+            "socials": [
+              {
+                "icon": "gplus",
+                "link": "https://plus.google.com/+OlehZasadnyy",
+                "name": "Google+"
+              },
+              {
+                "icon": "facebook",
+                "link": "https://www.facebook.com/oleh.zasadnyy",
+                "name": "Facebook"
+              },
+              {
+                "icon": "twitter",
+                "link": "https://twitter.com/ozasadnyy",
+                "name": "Twitter"
+              },
+              {
+                "icon": "website",
+                "link": "http://o.zasadnyy.com/",
+                "name": "Blog"
+              }
+            ],
+            "title": "Website and sponsors"
+          },
+          {
+            "name": "Sofiya Huts",
+            "photoUrl": "/images/people/sofiya_huts.jpg",
+            "socials": [
+              {
+                "icon": "gplus",
+                "link": "https://plus.google.com/+SofiaHuts",
+                "name": "Google+"
+              },
+              {
+                "icon": "facebook",
+                "link": "https://www.facebook.com/sophie.huts.7",
+                "name": "Facebook"
+              }
+            ],
+            "title": "Social and media"
+          },
+          {
+            "name": "Vitaliy Zasadnyy",
+            "photoUrl": "/images/people/vitaliy_zasadnyy.jpg",
+            "socials": [
+              {
+                "icon": "linkedin",
+                "link": "https://www.linkedin.com/in/zasadnyy",
+                "name": "Linkedin"
+              },
+              {
+                "icon": "twitter",
+                "link": "https://twitter.com/zasadnyy",
+                "name": "Twitter"
+              },
+              {
+                "icon": "website",
+                "link": "http://v.zasadnyy.com/",
+                "name": "Blog"
+              }
+            ],
+            "title": "Speakers"
+          },
+          {
+            "name": "Marta Maxymiak",
+            "photoUrl": "/images/people/marta_maxymiak.jpg",
+            "socials": [
+              {
+                "icon": "gplus",
+                "link": "https://plus.google.com/104036874811391520583",
+                "name": "Google+"
+              },
+              {
+                "icon": "facebook",
+                "link": "https://www.facebook.com/marta.maxymiak",
+                "name": "Facebook"
+              }
+            ],
+            "title": "Party and happiness"
+          },
+          {
+            "name": "Ostap Andrusiv",
+            "photoUrl": "/images/people/ostap_andrusiv.jpg",
+            "socials": [
+              {
+                "icon": "gplus",
+                "link": "https://google.com/+OstapAndrusiv",
+                "name": "Google+"
+              },
+              {
+                "icon": "facebook",
+                "link": "https://www.facebook.com/ostap.andrusiv",
+                "name": "Facebook"
+              },
+              {
+                "icon": "twitter",
+                "link": "https://twitter.com/p1f",
+                "name": "Twitter"
+              },
+              {
+                "icon": "website",
+                "link": "http://andrusiv.com/",
+                "name": "Blog"
+              }
+            ],
+            "title": "Sponsors"
+          },
+          {
+            "name": "Vasylyna Mytsak",
+            "photoUrl": "/images/people/vasylyna_mytsak.jpg",
+            "socials": [
+              {
+                "icon": "gplus",
+                "link": "https://plus.google.com/+ВасилинаМицак",
+                "name": "Google+"
+              },
+              {
+                "icon": "facebook",
+                "link": "https://www.facebook.com/vasylyna.mytsak",
+                "name": "Facebook"
+              }
+            ],
+            "title": "Party and happiness"
+          },
+          {
+            "name": "Volodya Karpliuk",
+            "photoUrl": "/images/people/volodya_karpliuk.jpg",
+            "socials": [
+              {
+                "icon": "gplus",
+                "link": "https://plus.google.com/+VolodyaKarpliuk23",
+                "name": "Google+"
+              },
+              {
+                "icon": "facebook",
+                "link": "https://www.facebook.com/volodya.karpluk",
+                "name": "Facebook"
+              },
+              {
+                "icon": "twitter",
+                "link": "https://twitter.com/keyv23",
+                "name": "Twitter"
+              }
+            ],
+            "title": "Speakers"
+          },
+          {
+            "name": "Diana Pinchuk",
+            "photoUrl": "/images/people/diana_pinchuk.jpg",
+            "socials": [
+              {
+                "icon": "gplus",
+                "link": "https://plus.google.com/+DianaPinchuk",
+                "name": "Google+"
+              },
+              {
+                "icon": "facebook",
+                "link": "https://www.facebook.com/diana.pinchuk.9",
+                "name": "Facebook"
+              }
+            ],
+            "title": "Social and media"
+          }
+        ],
+        "title": "Core Team"
+      },
+      {
+        "members": [
+          {
+            "name": "Ihor Dvoretskyi",
+            "photoUrl": "/images/people/ihor_dvoretskyi.jpg",
+            "socials": [
+              {
+                "icon": "facebook",
+                "link": "https://www.facebook.com/idvoretskyi",
+                "name": "Facebook"
+              },
+              {
+                "icon": "twitter",
+                "link": "https://twitter.com/idvoretskyi",
+                "name": "Twitter"
+              }
+            ],
+            "title": "Cloud stream"
+          },
+          {
+            "name": "Dmytro Danylyk",
+            "photoUrl": "/images/people/dmytro_danylyk.jpg",
+            "socials": [
+              {
+                "icon": "gplus",
+                "link": "https://plus.google.com/+DmytroDanylyk",
+                "name": "Google+"
+              },
+              {
+                "icon": "twitter",
+                "link": "https://twitter.com/dmytrodanylyk",
+                "name": "Twitter"
+              },
+              {
+                "icon": "website",
+                "link": "http://www.dmytrodanylyk.com/#/about",
+                "name": "Website"
+              }
+            ],
+            "title": "Android Stream"
+          }
+        ],
+        "title": "Program Committee"
+      }
+    ]
+  },
+  "resources": {
+    "en": {
+      "team-page-title": "Team",
+      "team-page-text": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT."
+    },
+    "uk": {
+      "team-page-title": "Команда",
+      "team-page-text": "Google відома у всьому світі. Кожен 'вдаючись до допомоги', перевірка на 'картах' і спілкування в 'Gmail'. Для простих користувачів, вони є послуги, які тільки працює, але не для нас. Розробники побачити набагато більше: API, питання масштабованості, складних технологічних стеків. І це те, що ГДГ про <br> <br> [Google Developers Group (ГДГ) Львів] (http://lviv.gdg.org.ua/) -. Відкрито і доброволець виродок спільноти, які створюють цікаві проекти і частка досвід про технології Google з пристрастю. <br> <br> Наша мета організувати простір для підключення кращих фахівців галузі з українською аудиторією для стимулювання розвитку ІТ."
+    }
+  }
+}

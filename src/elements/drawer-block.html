@@ -9,6 +9,7 @@
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
 
+<link rel="import" href="../behaviors/app-localize-behavior.html">
 <link rel="import" href="../styles/shared-styles.html">
 
 
@@ -72,22 +73,22 @@
 
     <paper-toolbar class="tall">
       <div class="top">
-        <iron-image class="logo" src="{$ baseurl $}/images/logo-white.svg" sizing="contain"
-                    alt="GDG DevFest Ukraine 2016"></iron-image>
+        <iron-image class="logo" src="/images/logo-white.svg" sizing="contain"
+                    alt="[[localize('title')]]"></iron-image>
       </div>
       <div class="bottom">
-        <span class="dates">September 9-10, 2016</span>
-        <span class="location">{$ location.short $}</span>
+        <span class="dates">[[localize('dates')]]</span>
+        <span class="location">{{localize('location-address-short')}}</span>
       </div>
     </paper-toolbar>
     <nav>
       <paper-menu class="navigation list"
-                  attr-for-selected="data-page"
+                  attr-for-selected="name"
                   selected="{{pageData.page}}"
                   selected-class="selected">
-        {% for nav in navigation %}
-        <a class="navigation-link" data-page="{$ nav.route $}" href="{$ nav.permalink $}">{$ nav.text $}</a>
-        {% endfor %}
+        <template is="dom-repeat" items="[[app.data.navigation]]" as="nav">
+          <a class="navigation-link" name="[[nav.route]]" href$="[[nav.permalink]]" on-tap="closeDrawer">{{localize(nav.route)}}</a>
+        </template>
       </paper-menu>
     </nav>
 
@@ -99,16 +100,29 @@
 
       Polymer({
 
-          is: 'drawer-block',
+        is: 'drawer-block',
 
-          properties: {
-            routeData: {
-              type: Object,
-              notify: true
-            }
+        behaviors: [
+          Polymer.AppLocalizeBehavior,
+          HOVERBOARD.AppLocalizeBehaviorImpl
+        ],
+
+        properties: {
+          routeData: {
+            type: Object,
+            notify: true
+          },
+          loadExternalResources: {
+            type: Boolean,
+            value: false
           }
+        },
 
-        });
+        closeDrawer: function () {
+          HOVERBOARD.Elements.Template.closeDrawer();
+        }
+
+      });
 
     }());
   </script>

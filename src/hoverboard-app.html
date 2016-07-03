@@ -14,8 +14,11 @@
 
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+
 <link rel="import" href="effects/fade-effect.html">
 <link rel="import" href="behaviors/utils-behavior.html">
+<link rel="import" href="behaviors/app-localize-behavior.html">
 <link rel="import" href="elements/app-data.html">
 <link rel="import" href="elements/drawer-block.html">
 <link rel="import" href="elements/toolbar-block.html">
@@ -86,7 +89,7 @@
     </style>
 
     <!-- Responsive handlers -->
-    <iron-media-query id="mq-phone" full query="(min-width:320px) and (max-width:768px)"
+    <iron-media-query id="mq-phone" full query="(max-width:768px)"
                       query-matches="{{app.isPhoneSize}}"></iron-media-query>
     <iron-media-query id="mq-tablet" full query="(min-width:769px) and (max-width:959px)"
                       query-matches="{{app.isTabletSize}}"></iron-media-query>
@@ -110,9 +113,9 @@
               app="{{app}}"></app-data>
 
     <app-drawer-layout drawer-width="599px" force-narrow>
-      <app-drawer id="drawer" swipe-open>
+      <app-drawer id="drawer" swipe-open="[[app.isPhoneSize]]">
         <template is="dom-if" if="[[app.isPhoneSize]]">
-          <drawer-block route-data="{{routeData}}" drawer></drawer-block>
+          <drawer-block app={{app}} route-data="{{routeData}}" drawer></drawer-block>
         </template>
       </app-drawer>
 
@@ -120,18 +123,18 @@
         <div class="image-overlay-wrapper" show$="[[app.headerSettings.backgroundImage]]">
           <div class="image-overlay" fade></div>
         </div>
-        <toolbar-block app="[[app]]"
+        <toolbar-block app="{{app}}"
                        primary></toolbar-block>
 
-        <header-content app="[[app]]"
+        <header-content app="{{app}}"
                         selected-day="{{selectedDay}}"
                         fade></header-content>
       </app-header>
 
       <div class="main-content">
-        <iron-pages selected="[[app.page]]"
-                    attr-for-selected="name"
-                    selected-attribute="selected">
+        <neon-animated-pages selected="[[app.page]]"
+                             attr-for-selected="name"
+                             selected-attribute="selected">
 
           <home-page name="home"
                      app="{{app}}"
@@ -141,12 +144,27 @@
                      logos="{{partners}}"
                      videos="{{videos}}"></home-page>
 
+          <blog-page name="blog"
+                     app="{{app}}"
+                     header-settings="{{app.headerSettings}}"
+                     route="{{subRoute}}"
+                     posts="{{posts}}"></blog-page>
+
           <speakers-page name="speakers"
                          header-settings="{{app.headerSettings}}"
                          route="{{subRoute}}"
                          speakers="{{speakers}}"></speakers-page>
 
-        </iron-pages>
+          <schedule-page name="schedule"
+                         app="{{app}}"
+                         route="{{subRoute}}"
+                         schedule="{{schedule}}"
+                         sessions="{{sessions}}"></schedule-page>
+
+          <team-page name="team"
+                     app="{{app}}"></team-page>
+
+        </neon-animated-pages>
       </div>
 
     </app-drawer-layout>
@@ -168,6 +186,8 @@
         is: 'hoverboard-app',
 
         behaviors: [
+          Polymer.AppLocalizeBehavior,
+          HOVERBOARD.AppLocalizeBehaviorImpl,
           HOVERBOARD.UtilsBehavior
         ],
 
@@ -177,6 +197,10 @@
             notify: true,
             value: {}
           },
+          loadExternalResources: {
+            type: Boolean,
+            value: false
+          },
 
           page: {
             type: String,
@@ -185,7 +209,7 @@
         },
 
         observers: [
-          '_routePageChanged(routeData.page)',
+          '_routePageChanged(routeData.page, app.data.navigation)',
           '_pageChanged(app.page)'
         ],
 
@@ -196,10 +220,12 @@
           Polymer.AppLayout.scroll({top: 0, behavior: 'silent'});
           // Close the drawer - in case the *route* change came from a link in the drawer.
           this.drawerOpened = false;
-          var navObject = this.app.data.navigation[this._getIndexByProperty(this.app.data.navigation, 'route', this.app.page)];
-          if (navObject && navObject.headerSettings) {
-            this.set('app.headerSettings', navObject.headerSettings);
-            this.stylesChanged();
+          if (this.app.data) {
+            var navObject = this.app.data.navigation[this._getIndexByProperty(this.app.data.navigation, 'route', this.app.page)];
+            if (navObject && navObject.headerSettings) {
+              this.set('app.headerSettings', navObject.headerSettings);
+              this.stylesChanged();
+            }
           }
         },
 

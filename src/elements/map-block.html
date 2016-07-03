@@ -74,6 +74,7 @@
 
       .header {
         height: 250px;
+        position: relative;
       }
 
       .header-image {
@@ -107,10 +108,11 @@
       }
     </style>
 
-    <google-map zoom="[[zoom]]" latitude="[[latitude]]"
-                longitude="[[longitude]]" styles="[[options]]" disable-zoom disable-default-ui>
-      <google-map-marker latitude="[[latitude]]"
-                         longitude="[[longitude]]"></google-map-marker>
+    <google-map zoom="[[app.data.location.pointer.zoom]]" latitude="[[app.data.location.mapCenter.latitude]]"
+                longitude="[[app.data.location.mapCenter.longitude]]" styles="[[options]]" disable-zoom
+                disable-default-ui>
+      <google-map-marker latitude="[[app.data.location.poinert.latitude]]"
+                         longitude="[[app.data.location.poinert.longitude]]"></google-map-marker>
     </google-map>
     <div class="disable-map-events"></div>
     <div class="container">
@@ -137,7 +139,7 @@
             </div>
             <div class="card-actions">
               <a class="bottom-link"
-                 href="https://www.google.com/maps/dir/[[latitude]],[[longitude]]/@[[latitude]],[[longitude]],18z"
+                 href="https://www.google.com/maps/dir/[[app.data.location.pointer.latitude]],[[app.data.location.pointer.longitude]]/@[[app.data.location.pointer.latitude]],[[app.data.location.pointer.longitude]],18z"
                  target="_blank">
                 <paper-icon-button icon="icons:directions"></paper-icon-button>
               </a>
@@ -163,13 +165,6 @@
         ],
 
         properties: {
-          latitude: Number,
-          longitude: Number,
-          zoom: Number,
-          images: {
-            type: Array,
-            value: ['/images/backgrounds/location_1.jpg', '/images/backgrounds/location_2.jpg', '/images/backgrounds/location_3.jpg']
-          },
           options: {
             type: String,
             value: function () {
@@ -209,7 +204,13 @@
           }
         },
 
-        ready: function () {
+        observers: [
+          'setImages(app.data.location.images)'
+        ],
+
+        setImages: function (images) {
+          if(!images) return;
+          this.images = images;
           this._currentImage = this.images[this._currentSourceIndex];
           if (this.images.length > 1) {
             var that = this;

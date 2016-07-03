@@ -26,10 +26,6 @@
         user-select: none;
       }
 
-      :host:hover {
-        @apply(--shadow-elevation-6dp);
-      }
-
       .inner {
         @apply(--layout-horizontal);
         @apply(--layout-center-justified);
@@ -49,12 +45,17 @@
         top: 50%;
         box-shadow: inset -2px 0 1px rgba(0, 0, 0, 0.12);
         transform: translate3d(-50%, -50%, 0);
+        z-index: 1;
       }
 
       .main {
         @apply(--layout-vertical);
         @apply(--layout-center-center);
         margin: 30px 0;
+      }
+
+      .headline {
+        font-weight: 300;
       }
 
       .side {
@@ -102,6 +103,22 @@
         font-size: 12px;
         color: var(--disabled-text-color);
       }
+
+      .overlay {
+        @apply(--layout-fit);
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 3px;
+        color: var(--default-primary-color);
+        font-size: 24px;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+
+      .overlay[hidden] {
+        display: none;
+      }
     </style>
 
     <div class="punch"></div>
@@ -120,6 +137,7 @@
     <div class="side">
       <div class="side-content">[[type]]</div>
     </div>
+    <div class="overlay" hidden$="{{!soldOut}}">Sold Out</div>
   </template>
 
   <script>
@@ -136,7 +154,11 @@
           currency: String,
           starts: String,
           ends: String,
-          info: String
+          info: String,
+          soldOut: {
+            type: Boolean,
+            value: false
+          }
         }
 
       });

@@ -52,9 +52,9 @@
     </style>
 
     <div class="container">
-      <iron-ajax auto url="[[source]]" handle-as="json" last-response="{{_posts}}"></iron-ajax>
+      <iron-ajax auto url="[[app.data.tweetsSource]]" handle-as="json" last-response="{{_posts}}"></iron-ajax>
       <div class="social-section">
-        <h4 class="heading">[[localize('before-hashtag')]] <a href="https://www.google.com/#q=%23[[hashtag]]">#[[hashtag]]</a></h4>
+        <h4 class="heading">[[localize('before-hashtag')]] <a href="https://www.google.com/#q=%23[[app.data.hashtag]]">#[[app.data.hashtag]]</a></h4>
         <h5>[[response.response]]</h5>
         <social-post id="post" author="[[author]]" text="[[text]]" when="[[when]]" canonical-url="https://twitter.com/"
                      sign="@"></social-post>
@@ -64,7 +64,7 @@
         <h4 class="heading">[[localize('social-title')]]</h4>
         <div>[[localize('social-motto')]]</div>
         <div class="align-pb-block">
-          <template is="dom-repeat" items="[[social]]" as="network">
+          <template is="dom-repeat" items="[[app.data.social]]" as="network">
             <a class="button-link" href$="[[network.url]]" target="_blank">
               <paper-icon-button icon="icons:[[network.name]]"></paper-icon-button>
             </a>
@@ -89,9 +89,6 @@
         ],
 
         properties: {
-          social: Array,
-          source: String,
-          hashtag: String,
           interval: {
             type: Number,
             value: 10000

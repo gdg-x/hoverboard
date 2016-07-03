@@ -1,4 +1,10 @@
 {
+  "data": {
+    "callToAction": {
+      "videoId": "t95z_HLMTmM",
+      "videoTitle": "GDG DevFest Ukraine 2014 - Highlights"
+    }
+  },
   "resources": {
     "en": {
       "text": "GDG DevFest 2014",
@@ -6,7 +12,7 @@
     },
     "uk": {
       "text": "GDG DevFest 2014",
-      "action": "See how it was"
+      "action": "Як це було"
     }
   }
 }

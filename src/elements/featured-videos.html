@@ -53,6 +53,7 @@
 
       .header {
         height: 200px;
+        position: relative;
       }
 
       .thumbnail {
@@ -65,6 +66,7 @@
         @apply(--layout-center-center);
         margin: 0 auto;
         cursor: pointer;
+        background: rgba(0,0,0,0.15);
       }
 
       .play-icon {
@@ -81,13 +83,6 @@
         @apply(--ellipsis);
         color: var(--secondary-text-color);
         font-size: 14px;
-      }
-
-      .block-link {
-        margin-top: 25px;
-        display: block;
-        color: inherit;
-        font-size: .9em;
       }
 
       @media (min-width: 601px) {
@@ -115,15 +110,15 @@
           <div class="video-item">
             <paper-card class="card">
               <div class="header paper-card">
-                <iron-image class="thumbnail" src="[[video.thumbnail]]" sizing="cover" preload
-                            fade></iron-image>
+                <iron-image class="thumbnail" src="[[video.thumbnail]]" placeholder="[[video.preloadPlaceholder]]"
+                            sizing="cover" preload fade></iron-image>
                 <div class="play-video" on-tap="_playVideo">
                   <iron-icon class="play-icon" icon="icons:play"></iron-icon>
                 </div>
               </div>
               <div class="paper-card-container">
                 <div class="card-content list">
-                  <div class="title">[[video.title]]</div>
+                  <div class="title">[[video.title]] [[video.preloadPlaceholder]]</div>
                   <div class="speakers">[[video.speakers]]</div>
                 </div>
               </div>
@@ -164,7 +159,11 @@
             observer: '_videosChanged'
           },
           _videos: Array,
-          _selectedVideo: Object
+          _selectedVideo: Object,
+          _currentIndex: {
+            type: Number,
+            value: 0
+          }
         },
 
         _videosChanged: function () {
@@ -172,42 +171,33 @@
         },
 
         _playVideo: function (e) {
+          var presenters = e.model.video.speakers ? (' by ' + e.model.video.speakers) : '';
           this._selectedVideo = {
-            title: e.model.video.title + ' by ' + e.model.video.speakers,
+            title: e.model.video.title + presenters,
             youtubeId: e.model.video.youtubeId
           };
           this.$.videoViewer.open();
         },
 
         shiftContentLeft: function () {
-          var transform = this.$.videos.style.transform;
           var videos = Polymer.dom(this.root).querySelectorAll('.video-item');
-
-          var lastX = transform ? parseInt(transform.split('(')[1].split(',')[0]) : 0;
-
           var cardRect = videos[videos.length - 1].getBoundingClientRect();
           var cardWidth = cardRect.width;
-
-          var newX = lastX + cardWidth;
-          if (newX < cardWidth) {
+          var newX = -(this._currentIndex - 1) * cardWidth;
+          if (this._currentIndex < videos.length && this._currentIndex > 0) {
             this.$.videos.style.transform = 'translate3d(' + newX + 'px, 0, 0)';
+            this._currentIndex--;
           }
         },
 
         shiftContentRight: function () {
-          var transform = this.$.videos.style.transform;
           var videos = Polymer.dom(this.root).querySelectorAll('.video-item');
-
-          var lastX = transform ? parseInt(transform.split('(')[1].split(',')[0]) : 0;
-
-          var containerWidth = this.$.videos.getBoundingClientRect().width;
           var cardRect = videos[videos.length - 1].getBoundingClientRect();
-          var lastCardLeft = cardRect.left;
           var cardWidth = cardRect.width;
-
-          var newX = lastX - cardWidth;
-          if (lastCardLeft > containerWidth) {
+          var newX = -(this._currentIndex + 1) * cardWidth;
+          if (this._currentIndex >= 0 && this._currentIndex < videos.length - 1) {
             this.$.videos.style.transform = 'translate3d(' + newX + 'px, 0, 0)';
+            this._currentIndex++;
           }
         }
 

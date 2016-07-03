@@ -138,15 +138,15 @@
                    target="_blank">
                   <paper-button>{{localize('c4p')}}</paper-button>
                 </a>
-                <paper-button class="primary" raised>{{localize('buy-ticket')}}</paper-button>
+                <paper-button class="primary" on-tap="_scrollToTickets" raised>{{localize('buy-ticket')}}</paper-button>
               </div>
             </div>
           </div>
         </animatable-content>
         <animatable-content name="blog">
           <div class="container">
-            <h3 class="page-title" hidden$="{{headerTitle}}">{{localize('blog')}}</h3>
-            <h3 class="page-title" hidden$="{{!headerTitle}}">[[headerTitle]]</h3>
+            <h3 class="page-title" hidden$="{{app.headerSettings.headerTitle}}">{{localize('blog')}}</h3>
+            <h3 class="page-title" hidden$="{{!app.headerSettings.headerTitle}}">[[app.headerSettings.headerTitle]]</h3>
           </div>
         </animatable-content>
         <animatable-content name="speakers">
@@ -190,9 +190,7 @@
         ],
 
         properties: {
-          app: Object,
           routeData: Object,
-          headerTitle: String,
           schedule: Array,
           selectedDay: {
             type: Number,
@@ -208,13 +206,20 @@
         _stylesChanged: function (headerSettings) {
           if(headerSettings) {
             this.customStyle['--min-header-height'] = headerSettings.minHeight;
-            this.headerTitle = headerSettings.headerTitle;
             this.updateStyles();
           }
         },
 
         _openVideo: function () {
           app.openVideo('GDG DevFest Ukraine 2015', 'DfMnJAzOFng', true);
+        },
+
+        _scrollToTickets: function () {
+          Polymer.AppLayout.scroll({
+            top: HOVERBOARD.Elements.Tickets.getBoundingClientRect().top,
+            behavior: 'smooth',
+            target: HOVERBOARD.Elements.Scroller
+          });
         }
 
       });

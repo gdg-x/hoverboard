@@ -1,5 +1,5 @@
 {
-  "values": {
+  "data": {
     "footerBlocks": [
       {
         "title": "for-visitors",
@@ -45,7 +45,15 @@
           }
         ]
       }
-    ]
+    ],
+    "contactBlock": {
+      "links": [
+        {
+          "text": "devfest@google.com",
+          "url": "mailto:devfest@google.com"
+        }
+      ]
+    }
   },
   "resources": {
     "en": {
