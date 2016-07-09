@@ -63,7 +63,17 @@
       "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
     },
     "partnershipProposition": "http://bit.ly/df16-sponsor",
-    "disqusShortName": "hoverboard-gdg-x"
+    "disqusShortName": "hoverboard-gdg-x",
+    "languages": [
+      {
+        "name": "English",
+        "key": "en"
+      },
+      {
+        "name": "Українська",
+        "key": "uk"
+      }
+    ]
   },
   "resources": {
     "en": {

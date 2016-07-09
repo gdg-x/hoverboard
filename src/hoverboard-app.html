@@ -186,8 +186,7 @@
         is: 'hoverboard-app',
 
         behaviors: [
-          Polymer.AppLocalizeBehavior,
-          HOVERBOARD.AppLocalizeBehaviorImpl,
+          HOVERBOARD.AppLocalizeBehavior,
           HOVERBOARD.UtilsBehavior
         ],
 
@@ -195,7 +194,11 @@
           app: {
             type: Object,
             notify: true,
-            value: {}
+            value: function () {
+              return {
+                lang: 'en'
+              };
+            }
           },
           loadExternalResources: {
             type: Boolean,
@@ -245,7 +248,33 @@
           if (page && page !== 'home') {
             this.importHref(this.resolveUrl('pages/' + page + '-page.html'), null, null, true);
           }
+        },
+
+        backToTop: function (e) {
+          e.preventDefault();
+
+          Polymer.AppLayout.scroll({
+            top: 0,
+            behavior: 'smooth',
+            target: HOVERBOARD.Elements.Scroller
+          });
+          e.target.blur();
+        },
+
+        toggleDrawer: function () {
+          this.$$('#drawer').toggle();
+        },
+
+        _isPage: function (page, selectedPage) {
+          return page === selectedPage;
+        },
+
+        closeDrawer: function () {
+          if (this.$$('#drawer') && this.$$('#drawer').close) {
+            this.$$('#drawer').close();
+          }
         }
+
       });
 
     }());

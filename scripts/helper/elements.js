@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-HOVERBOARD.Elements = (function() {
+HOVERBOARD.Elements = (function () {
   'use strict';
 
   const ANALYTICS_LINK_ATTR = 'data-track-link';
 
   // Called from critical.html when the bundle is loaded.
   function onElementsBundleLoaded() {
-    var onPageSelect = function() {
+    var onPageSelect = function () {
       document.body.removeEventListener('page-select', onPageSelect);
 
       // Deep link into a subpage.
@@ -31,10 +31,10 @@ HOVERBOARD.Elements = (function() {
       selectedPageEl.selectedSubpage = parsedUrl.subpage || selectedPageEl.selectedSubpage;
 
       var subpage = document.querySelector(
-          '.subpage-' + selectedPageEl.selectedSubpage);
+        '.subpage-' + selectedPageEl.selectedSubpage);
 
       HOVERBOARD.PageAnimation.play(
-        HOVERBOARD.PageAnimation.pageFirstRender(subpage), function() {
+        HOVERBOARD.PageAnimation.pageFirstRender(subpage), function () {
           // Let page know transitions are done.
           HOVERBOARD.Elements.Template.fire('page-transition-done');
           HOVERBOARD.ServiceWorkerRegistration.register();
@@ -43,7 +43,7 @@ HOVERBOARD.Elements = (function() {
     };
 
     if (HOVERBOARD.Elements && HOVERBOARD.Elements.LazyPages &&
-        HOVERBOARD.Elements.LazyPages.selectedPage) {
+      HOVERBOARD.Elements.LazyPages.selectedPage) {
       onPageSelect();
     } else {
       document.body.addEventListener('page-select', onPageSelect);
@@ -60,43 +60,7 @@ HOVERBOARD.Elements = (function() {
   }
 
   function init() {
-    var template = document.getElementById('t');
-
-    template.app = {};
-    template.app.isIOS = HOVERBOARD.Util.isIOS();
-    template.app.isAndroid = HOVERBOARD.Util.isAndroid();
-    template.app.isSafari = HOVERBOARD.Util.isSafari();
-    template.app.ANALYTICS_LINK_ATTR = ANALYTICS_LINK_ATTR;
-
-    template.backToTop = function(e) {
-      e.preventDefault();
-
-      Polymer.AppLayout.scroll({
-        top: 0,
-        behavior: 'smooth',
-        target: HOVERBOARD.Elements.Scroller
-      });
-
-      // Kick focus back to the page
-      // User will start from the top of the document again
-      e.target.blur();
-    };
-
-    template.toggleDrawer = function() {
-      this.$.happ.$$('#drawer').toggle();
-    };
-
-    template._isPage = function(page, selectedPage) {
-      return page === selectedPage;
-    };
-
-    template.closeDrawer = function() {
-      if (this.$.happ.$$('#drawer') && this.$.happ.$$('#drawer').close) {
-        this.$.happ.$$('#drawer').close();
-      }
-    };
-
-    HOVERBOARD.Elements.Template = template;
+    HOVERBOARD.Elements.Template = document.getElementById('happ');
   }
 
   return {

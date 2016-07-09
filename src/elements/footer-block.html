@@ -5,6 +5,9 @@
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
 
 <link rel="import" href="../styles/shared-styles.html">
 <link rel="import" href="../js-wrappers/g-plusone.html">
@@ -23,6 +26,9 @@
         color: var(--footer-text-color, #757575);
         border-top: 1px solid #eee;
         font-size: 14px;
+        --paper-menu-button: {
+          padding: 0;
+        };
       }
 
       .container {
@@ -32,9 +38,9 @@
       }
 
       .gdg-logo {
-        margin-left: 20px;
-        height: 30px;
-        width: 85px;
+        margin: 10px 10px 0 0;
+        height: 24px;
+        width: 120px;
         display: block;
       }
 
@@ -102,11 +108,11 @@
 
       .copyright {
         @apply(--layout-flex);
+        margin-right: 10px;
       }
 
       @media (min-width: 601px) {
         .footer-backtotop {
-          margin-top: -10px;
           margin-bottom: 0;
         }
 
@@ -145,9 +151,8 @@
 
     <div class="container">
       <div class="footer-content">
-        <div class="flex gplus">
-          <g:plusone size="medium" width="200" annotation="inline" href$="{{app.data.url}}"></g:plusone>
-        </div>
+        <iron-image class="gdg-logo" src="/images/gdg-logo.svg" sizing="contain"
+                    alt="[[app.data.organizer.name]]"></iron-image>
         <paper-button class="footer-backtotop" on-tap="scrollToTop" noink>
           [[localize('back-to-top')]]
           <iron-icon icon="icons:expand-less"></iron-icon>
@@ -171,7 +176,7 @@
             <div class="link-block-title">[[localize('contact-us')]]</div>
             <ul class="link-block">
               <template is="dom-repeat" items="[[app.data.contactBlock.links]]" as="link">
-                <li><a href="[[link.url]]" target="_blank">[[link.text]]</a></li>
+                <li><a href$="[[link.url]]" target="_blank">[[link.text]]</a></li>
               </template>
             </ul>
             <div class="icons-wrapper align-pb-block">
@@ -185,7 +190,8 @@
           <div class="subscribe">
             <div class="link-block-title">[[localize('subscribe')]]</div>
             <span>[[localize('subscribe-note')]]</span>
-            <mailchimp-subscribe url="[[app.data.mailchimp.url]]" name="[[app.data.mailchimp.name]]"></mailchimp-subscribe>
+            <mailchimp-subscribe url="[[app.data.mailchimp.url]]"
+                                 name="[[app.data.mailchimp.name]]"></mailchimp-subscribe>
           </div>
         </nav>
       </div>
@@ -197,8 +203,23 @@
           Zasadnyy</a> &middot;
           <a href="http://lviv.gdg.org.ua" target="_blank">GDG Lviv</a>
         </div>
-        <iron-image class="gdg-logo" src="/images/gdg-logo.svg" sizing="contain"
-                    alt="[[app.data.organizer.name]]"></iron-image>
+        <div class="gplus">
+          <g:plusone size="medium" width="200" annotation="inline" href$="{{app.data.url}}"></g:plusone>
+        </div>
+
+        <paper-menu-button vertical-align="bottom" horizontal-align="left">
+          <paper-button class="dropdown-trigger">
+            <iron-icon icon="language"></iron-icon>
+            [[selectedLanguage.label]]
+            <iron-icon icon="arrow-drop-down"></iron-icon>
+          </paper-button>
+          <paper-menu class="dropdown-content" selected="{{app.lang}}" selected-item="{{selectedLanguage}}"
+                      attr-for-selected="value">
+            <template is="dom-repeat" items="[[app.data.languages]]" as="lang">
+              <paper-item value="[[lang.key]]" label="[[lang.name]]">[[lang.name]]</paper-item>
+            </template>
+          </paper-menu>
+        </paper-menu-button>
       </div>
     </div>
 
@@ -213,8 +234,7 @@
         is: 'footer-block',
 
         behaviors: [
-          Polymer.AppLocalizeBehavior,
-          HOVERBOARD.AppLocalizeBehaviorImpl
+          HOVERBOARD.AppLocalizeBehavior
         ],
 
         scrollToTop: function (e) {

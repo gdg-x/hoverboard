@@ -17,30 +17,6 @@
         loadExternalResources: {
           type: Boolean,
           value: true
-        },
-
-        /* Overriden from Polymer.AppLocalizeBehavior */
-        formats: {
-          type: Object,
-          value: function () {
-            return {
-              number: {USD: {style: 'currency', currency: 'USD'}}
-            };
-          }
-        },
-
-        /* Overriden from Polymer.AppLocalizeBehavior */
-        language: {
-          type: String,
-          value: function () {
-            var lang = window.navigator.languages ? window.navigator.languages[0] : null;
-            lang = lang || window.navigator.language || window.navigator.browserLanguage || window.navigator.userLanguage;
-            if (lang.indexOf('-') !== -1)
-              lang = lang.split('-')[0];
-            if (lang.indexOf('_') !== -1)
-              lang = lang.split('_')[0];
-            return lang;
-          }
         }
       },
 
@@ -53,7 +29,8 @@
       },
 
       observers: [
-        'linkResources(app.resources)'
+        'linkResources(app.resources)',
+        'setLanguage(app.lang)'
       ],
 
       loadElementResources: function (element) {
@@ -68,6 +45,11 @@
           this.resources = this.app.resources;
           this.fire('app-resources-loaded');
         }
+      },
+
+      setLanguage: function (lang) {
+        if (lang)
+        this.set('language', lang);
       },
 
       __onRequestResponse: function (event) {
@@ -100,6 +82,11 @@
       }
 
     };
+
+    HOVERBOARD.AppLocalizeBehavior = [
+      Polymer.AppLocalizeBehavior,
+      HOVERBOARD.AppLocalizeBehaviorImpl
+    ];
 
   }());
 </script>

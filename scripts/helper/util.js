@@ -167,7 +167,7 @@ HOVERBOARD.Util = HOVERBOARD.Util || (function () {
       return raw ? parseInt(raw[1], 10) : false;
     };
 
-    var extend = function(obj1, obj2) {
+    var extend = function (obj1, obj2) {
       if(!obj1) obj1 = {};
       for (var i in obj2) {
         if (obj2.hasOwnProperty(i)) {
@@ -175,6 +175,17 @@ HOVERBOARD.Util = HOVERBOARD.Util || (function () {
         }
       }
       return obj1;
+    };
+
+
+    var getUserLanguage = function () {
+      var lang = window.navigator.languages ? window.navigator.languages[0] : null;
+      lang = lang || window.navigator.language || window.navigator.browserLanguage || window.navigator.userLanguage;
+      if (lang.indexOf('-') !== -1)
+        lang = lang.split('-')[0];
+      if (lang.indexOf('_') !== -1)
+        lang = lang.split('_')[0];
+      return lang;
     };
 
     return {
@@ -193,6 +204,7 @@ HOVERBOARD.Util = HOVERBOARD.Util || (function () {
       reportError,
       getChromeVersion,
       getFirefoxVersion,
-      extend
+      extend,
+      getUserLanguage
     };
   })();
