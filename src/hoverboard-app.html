@@ -124,11 +124,19 @@
           <div class="image-overlay" fade></div>
         </div>
         <toolbar-block app="{{app}}"
-                       primary></toolbar-block>
+                       primary sticky></toolbar-block>
 
         <header-content app="{{app}}"
                         selected-day="{{selectedDay}}"
                         fade></header-content>
+
+        <!--<app-toolbar sticky>-->
+          <!--<paper-tabs class="schedule-tabs" selected="{{selectedDay}}" cascaded>-->
+            <!--<template is="dom-repeat" items="[[schedule]]" as="day">-->
+              <!--<paper-tab>[[day.dateReadable]]</paper-tab>-->
+            <!--</template>-->
+          <!--</paper-tabs>-->
+        <!--</app-toolbar>-->
       </app-header>
 
       <div class="main-content">
@@ -141,7 +149,6 @@
                      header-settings="{{app.headerSettings}}"
                      people="{{speakers}}"
                      posts="{{posts}}"
-                     logos="{{partners}}"
                      videos="{{videos}}"></home-page>
 
           <blog-page name="blog"
@@ -151,6 +158,7 @@
                      posts="{{posts}}"></blog-page>
 
           <speakers-page name="speakers"
+                         app="{{app}}"
                          header-settings="{{app.headerSettings}}"
                          route="{{subRoute}}"
                          speakers="{{speakers}}"></speakers-page>

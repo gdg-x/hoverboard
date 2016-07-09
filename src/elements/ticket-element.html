@@ -63,6 +63,7 @@
         @apply(--layout-center-center);
         width: 50px;
         border-left: 2px dotted var(--background-color);
+        overflow: hidden;
       }
 
       .side-content {
@@ -137,7 +138,7 @@
     <div class="side">
       <div class="side-content">[[type]]</div>
     </div>
-    <div class="overlay" hidden$="{{!soldOut}}">Sold Out</div>
+    <div class="overlay" hidden$="{{!soldOut}}">[[soldOutText]]</div>
   </template>
 
   <script>
@@ -148,6 +149,10 @@
 
         is: 'ticket-element',
 
+        behaviors: [
+          HOVERBOARD.AppLocalizeBehavior
+        ],
+
         properties: {
           type: String,
           price: Number,
@@ -156,6 +161,11 @@
           ends: String,
           info: String,
           soldOut: {
+            type: Boolean,
+            value: false
+          },
+          soldOutText: String,
+          loadExternalResources: {
             type: Boolean,
             value: false
           }

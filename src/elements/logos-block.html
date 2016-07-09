@@ -2,9 +2,11 @@
 
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<!--<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">-->
 
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
+<link rel="import" href="../behaviors/app-localize-behavior.html">
 <link rel="import" href="../styles/shared-styles.html">
 
 <dom-module id="logos-block">
@@ -59,11 +61,13 @@
       }
     </style>
 
+    <!--<iron-ajax auto url="[[partnersSource]]" handle-as="json" last-response="{{logos}}"></iron-ajax>-->
+
     <div class="container">
-      <h4 class="heading text-center">Partners</h4>
-      <template is="dom-repeat" items="[[logos]]" as="block">
+      <h4 class="heading text-center">[[localize('partners')]]</h4>
+      <template is="dom-repeat" items="[[app.data.partners]]" as="block">
         <div class="logos-block-wrapper">
-          <h5 class="logos-block-title text-center">[[block.title]]</h5>
+          <h5 class="logos-block-title text-center">[[localize(block.title)]]</h5>
           <div class="logos">
             <template is="dom-repeat" items="[[block.logos]]" as="logo">
               <a class="logo-item" href="[[logo.url]]" title="[[logo.name]]" target="_blank">
@@ -75,7 +79,7 @@
         </div>
       </template>
       <a class="block-link" href$="[[app.data.partnershipProposition]]" target="_blank">
-        <paper-button class="colorful" raised>Become a partner</paper-button>
+        <paper-button class="colorful" raised>[[localize('become-a-partner')]]</paper-button>
       </a>
     </div>
 
@@ -89,9 +93,17 @@
 
         is: 'logos-block',
 
-        properties: {
-          logos: Array
-        }
+        behaviors: [
+          HOVERBOARD.AppLocalizeBehavior
+        ],
+
+//        properties: {
+//          logos: Array,
+//          partnersSource: {
+//            type: String,
+//            value
+//          }
+//        }
 
       });
 

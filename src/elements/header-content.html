@@ -155,15 +155,8 @@
           </div>
         </animatable-content>
         <animatable-content name="schedule">
-          <div class="container reset-padding-bottom">
-            <div>
-              <h3 class="page-title">{{localize('schedule')}}</h3>
-              <paper-tabs class="schedule-tabs" selected="{{selectedDay}}" cascaded>
-                <template is="dom-repeat" items="[[schedule]]" as="day">
-                  <paper-tab>[[day.dateReadable]]</paper-tab>
-                </template>
-              </paper-tabs>
-            </div>
+          <div class="container">
+            <h3 class="page-title">{{localize('schedule')}}</h3>
           </div>
         </animatable-content>
         <animatable-content name="team">
@@ -203,7 +196,7 @@
         ],
 
         _stylesChanged: function (headerSettings) {
-          if(headerSettings) {
+          if (headerSettings) {
             this.customStyle['--min-header-height'] = headerSettings.minHeight;
             this.updateStyles();
           }
