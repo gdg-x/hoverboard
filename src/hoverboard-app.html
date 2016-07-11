@@ -146,7 +146,6 @@
 
           <home-page name="home"
                      app="{{app}}"
-                     header-settings="{{app.headerSettings}}"
                      people="{{speakers}}"
                      posts="{{posts}}"
                      videos="{{videos}}"></home-page>
@@ -159,7 +158,6 @@
 
           <speakers-page name="speakers"
                          app="{{app}}"
-                         header-settings="{{app.headerSettings}}"
                          route="{{subRoute}}"
                          speakers="{{speakers}}"></speakers-page>
 
@@ -225,10 +223,12 @@
         ],
 
         _routePageChanged: function (page) {
-          this.set('app.page', (page || 'home'));
           // Scroll to the top of the page on every *route* change. Use `Polymer.AppLayout.scroll`
           // with `behavior: 'silent'` to disable header scroll effects during the scroll.
-          Polymer.AppLayout.scroll({top: 0, behavior: 'silent'});
+          if(this.app.page !== page) {
+            Polymer.AppLayout.scroll({top: 0, behavior: 'silent'});
+          }
+          this.set('app.page', (page || 'home'));
           // Close the drawer - in case the *route* change came from a link in the drawer.
           this.drawerOpened = false;
           if (this.app.data) {

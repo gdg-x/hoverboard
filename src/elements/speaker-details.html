@@ -1,7 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../../bower_components/app-route/app-location.html">
-
 <link rel="import" href="../../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../../bower_components/iron-dropdown/iron-dropdown-scroll-manager.html">
 <link rel="import" href="../../bower_components/iron-image/iron-image.html">
@@ -26,19 +24,18 @@
 
   <template>
 
-    <style include="shared-styles"></style>
-    <style include="dialog-styles"></style>
-
-    <app-location route="{{route}}"></app-location>
+    <style include="shared-styles dialog-styles"></style>
 
     <paper-scroll-header-panel id="scrollHeaderPanel" condenses="{{smallScreen}}" no-reveal="{{!smallScreen}}">
       <paper-toolbar class="tall">
-        <paper-icon-button class="back-button" dialog-dismiss icon="arrow-back"></paper-icon-button>
-        <div class="middle fallback-image-wrapper" hidden="{{smallScreen}}">
+        <a href="/speakers">
+          <paper-icon-button class="back-button" dialog-dismiss icon="arrow-back"></paper-icon-button>
+        </a>
+        <div class="middle fallback-image-wrapper" hidden$="{{smallScreen}}">
           <iron-image class="fallback-image" src="/images/logo-white.svg"
                       alt="GDG DevFest Ukraine 2016"></iron-image>
         </div>
-        <div id="title" class="bottom title toolbar-title" hidden="{{!smallScreen}}">[[speaker.name]]</div>
+        <div id="title" class="bottom title toolbar-title" hidden$="{{!smallScreen}}">[[speaker.name]]</div>
       </paper-toolbar>
       <div class="content">
 
@@ -46,11 +43,11 @@
           <div class="main-info">
             <div class="photo" style="background-image: url([[speaker.photoUrl]])" hidden$="{{smallScreen}}"></div>
             <div class="info">
-              <h1 class="main-title" hidden="{{smallScreen}}">[[speaker.name]]</h1>
+              <h1 class="main-title" hidden$="{{smallScreen}}">[[speaker.name]]</h1>
               <div class="meta highlight">[[speaker.company]], [[speaker.country]]</div>
               <div class="meta">
                 <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
-                  <a class="badge" href="[[badge.link]]" target="_blank">[[badge.description]]</a>
+                  <a class="badge" href$="[[badge.link]]" target="_blank">[[badge.description]]</a>
                 </template>
               </div>
             </div>
@@ -86,7 +83,7 @@
                   </div>
                   <truncate-marked-text text="[[session.description]]" characters="220"
                                         break-last-word></truncate-marked-text>
-                  <a class="read-more" href="/schedule/[[session.id]]/" dialog-dismiss>Read
+                  <a class="read-more" href$="/schedule/[[session.id]]/" dialog-dismiss>Read
                     more</a>
 
                 </div>
@@ -160,7 +157,6 @@
         },
 
         _renderClosed: function () {
-          this.set('route.path', '/speakers/');
           document.getElementsByName('theme-color')[0].content = this._previousBrowserColor;
           this.backdropElement.close();
           this.playAnimation('exit');
@@ -168,10 +164,10 @@
 
         _onNeonAnimationFinish: function () {
           if (this.opened) {
-            Polymer.IronDropdownScrollManager.pushScrollLock(this);
+//            Polymer.IronDropdownScrollManager.pushScrollLock(this);
             this._finishRenderOpened();
           } else {
-            Polymer.IronDropdownScrollManager.removeScrollLock(this);
+//            Polymer.IronDropdownScrollManager.removeScrollLock(this);
             this._finishRenderClosed();
           }
         }

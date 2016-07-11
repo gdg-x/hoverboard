@@ -16,9 +16,12 @@
       }
 
       .container {
+        text-align: center;
+      }
+
+      .statistics-wrapper {
         @apply(--layout-horizontal);
         @apply(--layout-wrap);
-        text-align: center;
       }
 
       .statistics-element {
@@ -58,12 +61,14 @@
     </style>
 
     <div class="container">
-      <template is="dom-repeat" items="[[app.data.statistics]]" as="statistic">
-        <div class="statistics-element">
-          <span class="counter">[[statistic.counter]]</span>
-          <span class="caption">[[localize(statistic.caption)]]</span>
-        </div>
-      </template>
+      <div class="statistics-wrapper">
+        <template is="dom-repeat" items="[[app.data.statistics]]" as="statistic">
+          <div class="statistics-element">
+            <span class="counter">[[statistic.counter]]</span>
+            <span class="caption">[[localize(statistic.caption)]]</span>
+          </div>
+        </template>
+      </div>
       <div class="description">[[localize('description')]]</div>
     </div>
 

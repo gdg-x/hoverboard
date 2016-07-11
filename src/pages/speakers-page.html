@@ -1,5 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/iron-image/iron-image.html">
 
@@ -19,8 +21,7 @@
 
   <template>
 
-    <style include="shared-styles"></style>
-    <style>
+    <style include="shared-styles">
       :host {
         display: block;
         --grid-gutter: 8px;
@@ -145,8 +146,8 @@
     </style>
 
     <app-route route="{{route}}"
-                  pattern="/:id"
-                  data="{{speakerData}}"></app-route>
+               pattern="/:id"
+               data="{{speakerData}}"></app-route>
 
     <div class="container speakers-container">
       <template is="dom-repeat" items="[[_toArray(speakers)]]" as="speaker" on-dom-change="_updateCascadedNodes">
@@ -210,28 +211,15 @@
 
         properties: {
           app: Object,
+          route: Object,
           speakers: {
             type: Object
-          },
-          selected: {
-            type: Boolean,
-            observer: 'updateHeaderSettings'
-          },
-          headerSettings: {
-            type: Object,
-            notify: true
           },
           speakerId: {
             type: String,
             notify: true
           },
           _selectedSpeaker: Object,
-          _headerSettings: {
-            type: Object,
-            value: function () {
-              return {};
-            }
-          },
 
           animationConfig: {
             type: Object,
@@ -256,19 +244,13 @@
         },
 
         observers: [
-          'openSpeakerDetails(speakerData)'
+          'openSpeakerDetails(speakerData.id)'
         ],
 
-        updateHeaderSettings: function () {
-          this.headerSettings = this.selected ? this._headerSettings : this.headerSettings;
-        },
-
-        openSpeakerDetails: function () {
-          if (this.speakerData.id) {
-            this.async(function () {
-              this._selectedSpeaker = this.speakers[this.speakerData.id];
-              this.$.speakerDetails.open();
-            }, 500);
+        openSpeakerDetails: function (speakerId) {
+          if (speakerId) {
+            this._selectedSpeaker = this.speakers[speakerId];
+            this.$.speakerDetails.open();
           }
         },
 

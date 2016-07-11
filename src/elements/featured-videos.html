@@ -47,7 +47,7 @@
         min-width: 100%;
       }
 
-      .card {
+      paper-card {
         width: 100%;
       }
 
@@ -93,6 +93,10 @@
         .video-item {
           width: 400px;
           min-width: 400px;
+        }
+
+        .video-item:hover paper-card {
+          @apply(--shadow-elevation-2dp);
         }
       }
     </style>
@@ -153,10 +157,6 @@
         ],
 
         properties: {
-          videos: {
-            type: Array,
-            observer: '_videosChanged'
-          },
           _videos: Array,
           _selectedVideo: Object,
           _currentIndex: {
@@ -165,8 +165,13 @@
           }
         },
 
+        observers: [
+          '_videosChanged(app.data, app.data.videos)'
+        ],
+
         _videosChanged: function () {
-          this._videos = this._randomOrder(this.videos).slice(0, 6);
+          if (this.app.data.videos)
+          this._videos = this._randomOrder(this.app.data.videos).slice(0, 6);
         },
 
         _playVideo: function (e) {

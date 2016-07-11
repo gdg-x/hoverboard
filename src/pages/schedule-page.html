@@ -228,8 +228,8 @@
     </style>
 
     <app-route route="{{route}}"
-                  pattern="/:id"
-                  data="{{sessionData}}"></app-route>
+               pattern="/:id"
+               data="{{sessionData}}"></app-route>
 
     <div class="container schedule-container">
       <neon-animated-pages selected="{{selectedDay}}" entry-animation="[[_entryAnimation]]"
@@ -260,7 +260,7 @@
                       <template is="dom-repeat" items="[[session]]" as="subSession"
                                 filter="{{_filterSession(_selectedTags.splices)}}">
                         <a href$="/schedule/[[subSession.id]]/" class="sub-session"
-                             style$="border-color: [[_getCustomStyleValue(subSession.mainTag)]]">
+                           style$="border-color: [[_getCustomStyleValue(subSession.mainTag)]]">
                           <div class="track">
                             <i class="point"
                                style$="background: [[_getCustomStyleValue(subSession.mainTag)]]"></i>
@@ -337,10 +337,7 @@
           selected: {
             type: Boolean
           },
-          headerSettings: {
-            type: Object,
-            notify: true
-          },
+          route: Object,
           sessionId: {
             type: String,
             notify: true
@@ -381,15 +378,13 @@
         },
 
         observers: [
-          'openSessionDetails(sessionData)'
+          'openSessionDetails(sessionData.id)'
         ],
 
-        openSessionDetails: function () {
-          if (this.sessionData.id) {
-            this.async(function () {
-              this._selectedSession = this.sessions[this.sessionData.id];
-              this.$.sessionDetails.open();
-            }, 500);
+        openSessionDetails: function (sessionId) {
+          if (sessionId) {
+            this._selectedSession = this.sessions[sessionId];
+            this.$.sessionDetails.open();
           }
         },
 

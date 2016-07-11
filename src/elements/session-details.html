@@ -1,7 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../../bower_components/app-route/app-location.html">
-
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-dropdown/iron-dropdown-scroll-manager.html">
 
@@ -37,11 +35,11 @@
       }
     </style>
 
-    <app-location route="{{route}}"></app-location>
-
     <paper-scroll-header-panel id="scrollHeaderPanel" no-reveal>
       <paper-toolbar class="tall">
-        <paper-icon-button class="back-button" dialog-dismiss icon="icons:arrow-back"></paper-icon-button>
+        <a href="/schedule">
+          <paper-icon-button class="back-button" dialog-dismiss icon="arrow-back"></paper-icon-button>
+        </a>
         <div class="middle fallback-image-wrapper">
           <iron-image class="fallback-image" src="/images/logo-white.svg"
                       alt="[[app.data.title]]"></iron-image>
@@ -49,22 +47,22 @@
       </paper-toolbar>
       <div class="content">
         <paper-menu-button horizontal-align="right" share-menu>
-          <paper-fab class="float-button dropdown-trigger" icon="icons:share"></paper-fab>
+          <paper-fab class="float-button dropdown-trigger" icon="share"></paper-fab>
           <div class="dropdown-content">
             <paper-icon-item on-tap="share" share="gplus">
-              <iron-icon icon="icons:gplus" item-icon></iron-icon>
+              <iron-icon icon="gplus" item-icon></iron-icon>
               Google+
             </paper-icon-item>
             <paper-icon-item on-tap="share" share="facebook">
-              <iron-icon icon="icons:facebook" item-icon></iron-icon>
+              <iron-icon icon="facebook" item-icon></iron-icon>
               Facebook
             </paper-icon-item>
             <paper-icon-item on-tap="share" share="twitter">
-              <iron-icon icon="icons:twitter" item-icon></iron-icon>
+              <iron-icon icon="twitter" item-icon></iron-icon>
               Twitter
             </paper-icon-item>
             <paper-icon-item on-tap="share" share="copy">
-              <iron-icon icon="icons:link" item-icon></iron-icon>
+              <iron-icon icon="link" item-icon></iron-icon>
               Copy link
             </paper-icon-item>
           </div>
@@ -93,9 +91,9 @@
 
         <div class="actions">
           <template is="dom-if" if="[[session.presentation]]">
-            <a href="[[session.presentation]]" target="_blank">
+            <a href$="[[session.presentation]]" target="_blank">
               <paper-button class="action">
-                <iron-icon icon="icons:presentation"></iron-icon>
+                <iron-icon icon="presentation"></iron-icon>
                 View presentation
               </paper-button>
             </a>
@@ -103,7 +101,7 @@
           <template is="dom-if" if="[[session.videoId]]">
             <div on-tap="_openVideo">
               <paper-button class="action">
-                <iron-icon icon="icons:video"></iron-icon>
+                <iron-icon icon="video"></iron-icon>
                 View video
               </paper-button>
             </div>
@@ -124,13 +122,13 @@
                   <span class="section-sub-title">[[speaker.company]], [[speaker.country]]</span>
                   <div class="badges">
                     <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
-                      <a class="badge" href="[[badge.link]]" target="_blank">[[badge.name]]</a>
+                      <a class="badge" href$="[[badge.link]]" target="_blank">[[badge.name]]</a>
                     </template>
                   </div>
                   <truncate-marked-text text="[[speaker.bio]]" characters="220"
                                         break-last-word></truncate-marked-text>
 
-                  <a class="read-more" href="/speakers/[[speaker.id]]" dialog-dismiss>Read
+                  <a class="read-more" href$="/speakers/[[speaker.id]]" dialog-dismiss>Read
                     more</a>
                 </div>
               </div>
@@ -168,7 +166,6 @@
           }
         },
 
-
         listeners: {
           'neon-animation-finish': '_onNeonAnimationFinish'
         },
@@ -201,7 +198,6 @@
         },
 
         _renderClosed: function () {
-          this.set('route.path', '/schedule/');
           document.getElementsByName('theme-color')[0].content = this._previousBrowserColor;
           this.backdropElement.close();
           this.playAnimation('exit');
@@ -209,10 +205,10 @@
 
         _onNeonAnimationFinish: function () {
           if (this.opened) {
-            Polymer.IronDropdownScrollManager.pushScrollLock(this);
+//            Polymer.IronDropdownScrollManager.pushScrollLock(this);
             this._finishRenderOpened();
           } else {
-            Polymer.IronDropdownScrollManager.removeScrollLock(this);
+//            Polymer.IronDropdownScrollManager.removeScrollLock(this);
             this._finishRenderClosed();
           }
         }
