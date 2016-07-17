@@ -36,6 +36,10 @@
         return Object.keys(obj).map(function (key) {
           return {name: key, value: obj[key]}
         });
+      },
+
+      _addToValue: function (value, addition) {
+        return value + addition;
       }
 
     };

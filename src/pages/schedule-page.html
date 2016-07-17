@@ -12,6 +12,7 @@
 
 <link rel="import" href="../elements/schedule-subnav.html">
 <link rel="import" href="../elements/schedule-day.html">
+<link rel="import" href="../behaviors/utils-behavior.html">
 
 
 <dom-module id="schedule-page">
@@ -22,19 +23,23 @@
       :host {
         display: block;
       }
+
+      schedule-day {
+        margin-bottom: 64px;
+      }
     </style>
 
     <!--<app-route route="{{route}}"-->
-               <!--pattern="/:id"-->
+               <!--pattern="/:day"-->
                <!--data="{{routeData}}"></app-route>-->
 
     <div class="container">
 
-      <schedule-subnav schedule="[[schedule]]" selected-subpage="{{selectedSubpage}}"></schedule-subnav>
+      <schedule-subnav schedule="[[schedule]]" selected-day="{{selectedDay}}"></schedule-subnav>
 
-      <neon-animated-pages selected="[[selectedSubpage]]">
+      <neon-animated-pages selected="[[selectedDay]]" attr-for-selected="name">
         <template is="dom-repeat" items="[[schedule]]" as="day">
-          <schedule-day app={{app}} day="[[day]]"></schedule-day>
+          <schedule-day name$="day[[_addToValue(index, 1)]]" app={{app}} day="[[day]]"></schedule-day>
         </template>
       </neon-animated-pages>
 
@@ -51,7 +56,8 @@
         is: 'schedule-page',
 
         behaviors: [
-          Polymer.NeonSharedElementAnimatableBehavior
+          Polymer.NeonSharedElementAnimatableBehavior,
+          HOVERBOARD.UtilsBehavior,
         ],
 
         properties: {
@@ -65,6 +71,12 @@
 
           schedule: {
             type: Array
+          },
+
+          selected: {
+            type: Boolean,
+            reflectToAttribute: true,
+            value: false
           },
 
           animationConfig: {
@@ -87,6 +99,17 @@
               };
             }
           }
+        },
+
+//        observers: [
+//          '_routePageChanged(routeData.day)'
+//        ],
+
+        _routePageChanged: function (day) {
+          if(this.selected) {
+            this.set('app.selectedDay', day || 'day1');
+          }
+
         }
 
       });
