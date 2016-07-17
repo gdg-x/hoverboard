@@ -115,6 +115,8 @@
 
   </script>
 
+
+  <link rel="import" href="bower_components/polymerfire/firebase-app.html">
   <link rel="import" href="/src/hoverboard-app.html" async>
 
   <style>
@@ -148,6 +150,12 @@
 
 </head>
 <body>
+<firebase-app
+  name="hoverboard-dev"
+  api-key="AIzaSyBu9LI-hY4NfUOPJJKuV3BfQm7edLr2-aE"
+  auth-domain="hoverboard-dev.firebaseapp.com"
+  database-url="https://hoverboard-dev.firebaseio.com">
+</firebase-app>
 
 <hoverboard-app id="happ"></hoverboard-app>
 

@@ -25,14 +25,13 @@
     "paper-toolbar": "PolymerElements/paper-toolbar#^1.1.4",
     "paper-toast": "PolymerElements/paper-toast#^1.3.0",
     "paper-button": "PolymerElements/paper-button#^1.0.12",
-    "paper-checkbox": "PolymerElements/paper-checkbox#^1.3.0",
     "paper-input": "PolymerElements/paper-input#^1.1.11",
     "paper-item": "PolymerElements/paper-item#^1.2.1",
     "paper-menu": "PolymerElements/paper-menu#^1.2.2",
     "paper-material": "PolymerElements/paper-material#^1.0.6",
     "paper-tooltip": "PolymerElements/paper-tooltip#^1.1.2",
     "paper-card": "PolymerElements/paper-card#^1.1.1",
-    "paper-menu-button": "PolymerElements/paper-menu-button#^1.2.0",
+    "paper-menu-button": "PolymerElements/paper-menu-button#^1.1.2",
     "paper-fab": "PolymerElements/paper-fab#^1.2.0",
     "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#^1.2.2",
     "paper-spinner": "PolymerElements/paper-spinner#^1.2.0",
@@ -43,7 +42,9 @@
     "google-map": "GoogleWebComponents/google-map#^1.1.10",
     "polymer": "Polymer/polymer#^1.5.0",
     "time-elements": "github/time-elements#^0.5.0",
-    "disqus-comments": "divshot/disqus-comments#0915a95"
+    "disqus-comments": "divshot/disqus-comments#0915a95",
+    "polymerfire": "firebase/polymerfire#^0.9.4",
+    "app-storage": "^0.9.4"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
