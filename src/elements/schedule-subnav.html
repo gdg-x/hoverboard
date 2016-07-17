@@ -1,0 +1,143 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<!--<link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">-->
+<!--<link rel="import" href="../../bower_components/paper-button/paper-button.html">-->
+<!--<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">-->
+<!--<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">-->
+
+<link rel="import" href="../styles/shared-styles.html">
+<link rel="import" href="../behaviors/app-localize-behavior.html">
+
+
+<dom-module id="schedule-subnav">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .subpage-nav {
+        padding-left: 16px;
+        height: 69px;
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
+      }
+
+      .schedule-tabs {
+        height: 100%;
+      }
+
+      .filters-content > * {
+        padding: 0 24px;
+      }
+
+      paper-checkbox {
+        position: relative;
+        min-height: 48px;
+      }
+
+    </style>
+
+    <nav class="subpage-nav" layout horizontal center justified relative>
+      <paper-tabs class="schedule-tabs" selected="{{selectedSubpage}}">
+        <template is="dom-repeat" items="[[schedule]]" as="day">
+          <paper-tab>[[day.dateReadable]]</paper-tab>
+        </template>
+      </paper-tabs>
+
+      <!--<paper-menu-button horizontal-align="right" ignore-select allow-outside-scroll>-->
+        <!--<paper-button class="dropdown-trigger">-->
+          <!--Filter-->
+          <!--<iron-icon icon="[[_computeFilterIcon(showFilters)]]"></iron-icon>-->
+        <!--</paper-button>-->
+        <!--<paper-menu id="filters" class="filters-content dropdown-content" attr-for-selected="value" selected-values="{{filters}}" multi>-->
+          <!--<template is="dom-repeat" items="[[schedule.tags]]" as="tag">-->
+            <!--<paper-checkbox layout horizontal center flex value="[[tag]]">[[tag]]</paper-checkbox>-->
+          <!--</template>-->
+          <!--<paper-item on-tap="clearFilters">Clear all</paper-item>-->
+        <!--</paper-menu>-->
+      <!--</paper-menu-button>-->
+    </nav>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'schedule-subnav',
+
+        behaviors: [
+          HOVERBOARD.AppLocalizeBehavior,
+        ],
+
+        properties: {
+          schedule: Array,
+          selectedSubpage: {
+            type: String,
+            value: 0,
+            notify: true
+          },
+          showFilters: {
+            type: Boolean,
+            value: false,
+            notify: true
+          },
+          filters: {
+            type: Array,
+            value: []
+          }
+        },
+
+        listeners: {
+          'iron-select': '_onFilterChange',
+          'iron-deselect': '_onFilterChange'
+        },
+
+        clearFilters: function (e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+
+          this.filters = [];
+          var checkboxes = this.$.filters.querySelectorAll('paper-checkbox');
+          Array.prototype.forEach.call(checkboxes, function(checkbox) {
+            checkbox.checked = false;
+          });
+        },
+
+        _computeFilterIcon: function (filtering) {
+          return filtering ? 'close' : 'filter-list';
+        },
+
+        _onFilterChange: function () {
+          var filters = this.filters.join(',');
+          var search = window.location.search;
+          if (filters.length) {
+            search = HOVERBOARD.Util.setSearchParam(search, 'filters', filters);
+          } else {
+            search = HOVERBOARD.Util.removeSearchParam(search, 'filters');
+          }
+
+          history.replaceState({}, '', [
+            window.location.origin,
+            window.location.pathname,
+            search,
+            window.location.hash
+          ].join(''));
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

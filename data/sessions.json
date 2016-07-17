@@ -2,26 +2,31 @@
   "1001": {
     "id": 1001,
     "title": "Registration & morning Coffee",
+    "image": "/images/backgrounds/registration.jpg",
     "description": "Get your badge, coffee, enjoy talking with tech edicts around"
   },
   "1002": {
     "id": 1002,
     "title": "Lunch",
+    "image": "/images/backgrounds/lunch.jpg",
     "description": "Foooooooood!"
   },
   "1003": {
     "id": 1003,
     "title": "Coffee break",
+    "image": "/images/backgrounds/coffee-break.jpg",
     "description": "Coffeeeeeee!"
   },
   "1004": {
     "id": 1004,
     "title": "Morning coffee",
+    "image": "/images/backgrounds/morning.jpg",
     "description": "Coffeeeeeee!"
   },
   "1005": {
     "id": 1005,
     "title": "GDG DevFest Ukraine 2015 Opening",
+    "image": "/images/backgrounds/opening.jpg",
     "description": "Official start of the conference. Greatings from the organizers, sponsors and partners.",
     "language": "English",
     "complexity": "",
@@ -31,6 +36,7 @@
   "1006": {
     "id": 1006,
     "title": "Afterparty & Networking",
+    "image": "/images/backgrounds/party.jpg",
     "description": "Afterpaty is a great time to have some fun and meet new people.<br/><br/><b>Location</b>: Club Arsenal Market, [Pidvalna St 5](http://club.arsenalmarket.lviv.ua/uk/contacts/)<br/><br/>Free shot for all DevFest attendees included.<br/><br/>Don't forget to bring your badge.",
     "track": {
       "title": "Club Arsenal Market"
@@ -39,6 +45,7 @@
   "1007": {
     "id": 1007,
     "title": "Conference closing and contest winners announcements",
+    "image": "/images/backgrounds/closing.jpg",
     "description": "Make sure you won't miss closing ceremony, all gifts from out sponsors and partners will find their owners during this session.",
     "language": "Ukrainian",
     "complexity": "",
@@ -238,7 +245,7 @@
     "title": "Mastering the NDK with Android Studio 1.3+ and the gradle-experimental plugin",
     "description": "Android Studio is finally fully supporting the NDK so you can easily integrate C/C++ inside Android applications.<br/><br/>While this support is still new and experimental, it’s promising and worth already doing the final jump from other IDEs and build systems.<br/><br/>After a short introduction on what is the NDK, learn how to use it from Android Studio while avoiding several classic pitfalls.",
     "speakers": [
-      11
+      11, 10
     ],
     "language": "English",
     "complexity": "Beginner",

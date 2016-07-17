@@ -93,6 +93,75 @@ HOVERBOARD.Util = HOVERBOARD.Util || (function () {
     }
 
     /**
+     * Returns the static base URL of the running app.
+     * https://events.google.com/io2016/about -> https://events.google.com/io2016/
+     */
+    function getStaticBaseURL() {
+      var url = location.href.replace(location.hash, '');
+      return url.substring(0, url.lastIndexOf('/') + 1);
+    }
+
+    /**
+     * Gets a param from the search part of a URL by name.
+     * @param {string} param URL parameter to look for.
+     * @return {string|undefined} undefined if the URL parameter does not exist.
+     */
+    function getURLParameter(param) {
+      if (!window.location.search) {
+        return undefined;
+      }
+      var m = new RegExp(param + '=([^&]*)').exec(window.location.search.substring(1));
+      if (!m) {
+        return undefined;
+      }
+      return decodeURIComponent(m[1]);
+    }
+
+    /**
+     * Removes a param from the search part of a URL.
+     * @param {string} search Search part of a URL, e.g. location.search.
+     * @param {string} name Param name.
+     * @return {string} Modified search.
+     */
+    function removeSearchParam(search, name) {
+      if (search[0] === '?') {
+        search = search.substring(1);
+      }
+      var parts = search.split('&');
+      var res = [];
+      for (var i = 0; i < parts.length; i++) {
+        var pair = parts[i].split('=');
+        if (pair[0] === name) {
+          continue;
+        }
+        res.push(parts[i]);
+      }
+      search = res.join('&');
+      if (search.length > 0) {
+        search = '?' + search;
+      }
+      return search;
+    }
+
+    /**
+     * Adds a new or replaces existing param of the search part of a URL.
+     * @param {string} search Search part of a URL, e.g. location.search.
+     * @param {string} name Param name.
+     * @param {string} value Param value.
+     * @return {string} Modified search.
+     */
+    function setSearchParam(search, name, value) {
+      search = removeSearchParam(search, name);
+      if (search === '') {
+        search = '?';
+      }
+      if (search.length > 1) {
+        search += '&';
+      }
+      return search + name + '=' + encodeURIComponent(value);
+    }
+
+    /**
      * Reports an error to Google Analytics.
      * Normally, this is done in the window.onerror handler, but this helper method can be used in the
      * catch() of a promise to log rejections.
@@ -198,6 +267,9 @@ HOVERBOARD.Util = HOVERBOARD.Util || (function () {
       isSafari,
       isTouchScreen,
       setMetaThemeColor,
+      getURLParameter,
+      setSearchParam,
+      removeSearchParam,
       supportsHTMLImports: 'import' in document.createElement('link'),
       getFPIfSupported,
       getEventSender,
