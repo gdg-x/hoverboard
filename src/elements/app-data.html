@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymerfire/polymerfire.html">
 
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
@@ -7,7 +8,22 @@
 
 <dom-module id="app-data">
   <template>
-    <iron-ajax auto url="[[speakersSource]]" handle-as="json" last-response="{{_speakersRaw}}"></iron-ajax>
+
+    <firebase-query
+      id="querySpeakers"
+      app-name="hoverboard-dev"
+      path="/speakers"
+      data="{{_speakersRaw}}">
+    </firebase-query>
+
+    <!--<firebase-query-->
+      <!--id="querySessions"-->
+      <!--app-name="hoverboard-dev"-->
+      <!--path="/sessions"-->
+      <!--data="{{sessions}}">-->
+    <!--</firebase-query>-->
+	
+    <!--<iron-ajax auto url="[[speakersSource]]" handle-as="json" last-response="{{_speakersRaw}}"></iron-ajax>-->
     <iron-ajax auto url="[[sessionsSource]]" handle-as="json" last-response="{{sessions}}"></iron-ajax>
     <iron-ajax auto url="[[postsSource]]" handle-as="json" on-response="_reversePosts"></iron-ajax>
     <!--<iron-ajax auto url="[[partnersSource]]" handle-as="json" last-response="{{partners}}"></iron-ajax>-->
@@ -73,7 +89,10 @@
             type: Object,
             notify: true
           },
-          _speakersRaw: Object,
+          _speakersRaw: {
+            type: Object,
+            notify: true
+          },
           _scheduleRaw: Array,
           _tempVideos: {
             type: Array,
@@ -82,7 +101,7 @@
         },
 
         observers: [
-          '_generateSchedule(_speakersRaw, sessions, _scheduleRaw)'
+          '_generateSchedule(_speakersRaw.splices, sessions, _scheduleRaw)'
         ],
 
         ready: function () {
@@ -90,6 +109,7 @@
         },
 
         _generateSchedule: function () {
+		if (!this._speakersRaw.length) {return;}
           this._scheduleRaw.tags = [];
           for (var i = 0, scheduleLen = this._scheduleRaw.length; i < scheduleLen; i++) {
             var day = this._scheduleRaw[i];
