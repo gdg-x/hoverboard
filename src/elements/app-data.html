@@ -9,22 +9,22 @@
 <dom-module id="app-data">
   <template>
 
-    <firebase-query
+    <firebase-document
       id="querySpeakers"
       app-name="hoverboard-dev"
       path="/speakers"
       data="{{_speakersRaw}}">
-    </firebase-query>
+    </firebase-document>
 
-    <!--<firebase-query-->
-      <!--id="querySessions"-->
-      <!--app-name="hoverboard-dev"-->
-      <!--path="/sessions"-->
-      <!--data="{{sessions}}">-->
-    <!--</firebase-query>-->
-	
+    <firebase-document
+      id="querySessions"
+      app-name="hoverboard-dev"
+      path="/sessions"
+      data="{{sessions}}">
+    </firebase-document>
+
     <!--<iron-ajax auto url="[[speakersSource]]" handle-as="json" last-response="{{_speakersRaw}}"></iron-ajax>-->
-    <iron-ajax auto url="[[sessionsSource]]" handle-as="json" last-response="{{sessions}}"></iron-ajax>
+    <!--<iron-ajax auto url="[[sessionsSource]]" handle-as="json" last-response="{{sessions}}"></iron-ajax>-->
     <iron-ajax auto url="[[postsSource]]" handle-as="json" on-response="_reversePosts"></iron-ajax>
     <!--<iron-ajax auto url="[[partnersSource]]" handle-as="json" last-response="{{partners}}"></iron-ajax>-->
     <iron-ajax auto url="[[scheduleSource]]" handle-as="json" last-response="{{_scheduleRaw}}"></iron-ajax>
@@ -93,7 +93,7 @@
             type: Object,
             notify: true
           },
-          _scheduleRaw: Array,
+          _scheduleRaw : Array,
           _tempVideos: {
             type: Array,
             value: []
@@ -101,7 +101,7 @@
         },
 
         observers: [
-          '_generateSchedule(_speakersRaw.splices, sessions, _scheduleRaw)'
+          '_generateSchedule(_speakersRaw, sessions, _scheduleRaw)'
         ],
 
         ready: function () {
@@ -109,7 +109,9 @@
         },
 
         _generateSchedule: function () {
-		if (!this._speakersRaw.length) {return;}
+          if (!Object.keys(this._speakersRaw).length
+                || !Object.keys(this.sessions).length)
+          { return;}
           this._scheduleRaw.tags = [];
           for (var i = 0, scheduleLen = this._scheduleRaw.length; i < scheduleLen; i++) {
             var day = this._scheduleRaw[i];
@@ -121,11 +123,12 @@
                   var session = this._getSession(timeslot.sessions[k][l], day, this._scheduleRaw);
                   if (session && !session.track) {
                     session.track = day.tracks[k];
+                    session.startTime = timeslot.startTime;
+                    session.endTime = subSessionsLen > 1 ? this._getEndTime(day.date, timeslot.startTime, timeslot.endTime, subSessionsLen, l + 1) : timeslot.endTime;
+                    session.dateReadable = day.dateReadable;
+                    this._scheduleRaw[i].timeslots[j].sessions[k][l] = session;
                   }
-                  session.startTime = timeslot.startTime;
-                  session.endTime = subSessionsLen > 1 ? this._getEndTime(day.date, timeslot.startTime, timeslot.endTime, subSessionsLen, l + 1) : timeslot.endTime;
-                  session.dateReadable = day.dateReadable;
-                  this._scheduleRaw[i].timeslots[j].sessions[k][l] = session;
+
                 }
               }
             }
@@ -137,6 +140,7 @@
 
         _getSession: function (sessionId, day, schedule) {
           var session = this.sessions[sessionId];
+          if (!session) {return;}
           session.mainTag = session.tags ? session.tags[0] : 'General';
 
           if (day.tags.indexOf(session.mainTag) < 0) {
