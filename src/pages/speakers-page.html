@@ -25,6 +25,8 @@
       :host {
         display: block;
         --grid-gutter: 8px;
+        --colums-number: 3;
+        --general: #bdbdbd;
       }
 
       .speakers-container {
@@ -70,6 +72,7 @@
 
       .photo {
         @apply(--layout-fit);
+        /*@apply(--img-circle);*/
       }
 
       .photo-overlay {
@@ -131,7 +134,7 @@
 
         .speaker {
           width: calc(100% / 2 - 3 * var(--grid-gutter));
-          margin: var(--grid-gutter) var(--grid-gutter) calc(2 * var(--grid-gutter));
+          margin: var(--grid-gutter);
         }
 
       }
@@ -139,9 +142,32 @@
       @media (min-width: 961px) {
         .speaker {
           width: calc(100% / 3 - 4 * var(--grid-gutter));
-          margin: var(--grid-gutter) var(--grid-gutter) calc(3 * var(--grid-gutter));
         }
 
+      }
+
+      .tags {
+        font-size: 14px;
+        color: var(--primary-text-color);
+      }
+
+      .tag {
+        margin: 2px 0 0 2px;
+        padding: 1px 4px;
+        color: #fff;
+        display: inline-block;
+        font-size: 12px;
+        border-radius: 2px;
+        background: var(--general);
+      }
+
+      .markdown-html {
+        font-size: 16px;
+      }
+
+      .company-logo {
+        margin-bottom: 10px;
+        height: 25px;
       }
     </style>
 
@@ -160,7 +186,7 @@
               <ul class="badges">
                 <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
                   <li class="badge">
-                    <a href="[[badge.link]]" target="_blank">[[badge.name]]</a>
+                    <a href$="[[badge.link]]" target="_blank">[[badge.name]]</a>
                     <paper-tooltip>[[badge.description]]</paper-tooltip>
                   </li>
                 </template>
@@ -171,8 +197,15 @@
               </div>
             </div>
             <a href$="/speakers/[[speaker.id]]/" class="card-content">
-              <truncate-marked-text class="bio" text="[[speaker.bio]]" characters="220"
-                                    break-last-word></truncate-marked-text>
+              <iron-image class="company-logo" src="{{speaker.companyLogo}}" sizing="contain"></iron-image>
+              <div class="tags">Skills:
+                <template is="dom-repeat" items="[[speaker.tags]]" as="tag">
+                  <span class="tag" style$="{{_getCustomStyleValue(tag)}}" target="_blank">[[tag]]</span>
+                </template>
+              </div>
+              <marked-element class="details-text" markdown="[[speaker.shortBio]]">
+                <div class="markdown-html"></div>
+              </marked-element>
             </a>
             <div class="card-actions">
               <template is="dom-repeat" items="[[speaker.socials]]" as="social">
@@ -272,6 +305,10 @@
             transformTo: 'translate3d(0, 100%, 0)',
             nodes: cascadedArray
           });
+        },
+
+        _getCustomStyleValue: function (value) {
+          return 'background-color: ' + this.getComputedStyleValue('--' + this._generateClass(value)) || this.getComputedStyleValue('--general');
         }
 
       });
