@@ -7,11 +7,14 @@
 
 <dom-module id="app-data">
   <template>
+    <iron-ajax auto url="[[configSource]]" handle-as="json" last-response="{{app.data}}"></iron-ajax>
     <iron-ajax auto url="[[speakersSource]]" handle-as="json" last-response="{{_speakersRaw}}"></iron-ajax>
     <iron-ajax auto url="[[sessionsSource]]" handle-as="json" last-response="{{sessions}}"></iron-ajax>
     <iron-ajax auto url="[[postsSource]]" handle-as="json" on-response="_reversePosts"></iron-ajax>
-    <!--<iron-ajax auto url="[[partnersSource]]" handle-as="json" last-response="{{partners}}"></iron-ajax>-->
+    <iron-ajax auto url="[[partnersSource]]" handle-as="json" last-response="{{app.partners}}"></iron-ajax>
     <iron-ajax auto url="[[scheduleSource]]" handle-as="json" last-response="{{_scheduleRaw}}"></iron-ajax>
+    <iron-ajax auto url="[[teamSource]]" handle-as="json" last-response="{{app.team}}"></iron-ajax>
+    <iron-ajax auto url="[[videosSource]]" handle-as="json" last-response="{{app.videos}}"></iron-ajax>
   </template>
   <script>
     (function () {
@@ -25,6 +28,10 @@
         ],
 
         properties: {
+          configSource: {
+            type: String,
+            value: 'data/hoverboard.config.json'
+          },
           speakersSource: {
             type: String,
             value: 'data/speakers.json'
@@ -44,6 +51,14 @@
           scheduleSource: {
             type: String,
             value: 'data/schedule.json'
+          },
+          teamSource: {
+            type: String,
+            value: 'data/team.json'
+          },
+          videosSource: {
+            type: String,
+            value: 'data/videos.json'
           },
           speakers: {
             type: Array,
@@ -69,11 +84,17 @@
             type: Array,
             notify: true
           },
+          team: {
+            type: Object,
+            notify: true
+          },
           app: {
             type: Object,
             notify: true
           },
           _speakersRaw: Object,
+          _configs: Object,
+          _english: Object,
           _scheduleRaw: Array,
           _tempVideos: {
             type: Array,

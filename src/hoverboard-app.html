@@ -89,11 +89,16 @@
     </style>
 
     <!-- Responsive handlers -->
-    <iron-media-query id="mq-phone" full query="(max-width:768px)"
+    <iron-media-query id="mq-phone"
+                      full
+                      query="(max-width:768px)"
                       query-matches="{{app.isPhoneSize}}"></iron-media-query>
-    <iron-media-query id="mq-tablet" full query="(min-width:769px) and (max-width:959px)"
+    <iron-media-query id="mq-tablet"
+                      full
+                      query="(min-width:769px) and (max-width:959px)"
                       query-matches="{{app.isTabletSize}}"></iron-media-query>
-    <iron-media-query id="mq-desktop" query="(min-width:960px)"
+    <iron-media-query id="mq-desktop"
+                      query="(min-width:960px)"
                       query-matches="{{app.isDesktopSize}}"></iron-media-query>
 
     <app-location route="{{route}}"></app-location>
@@ -109,7 +114,6 @@
               posts="{{posts}}"
               partners="{{partners}}"
               videos="{{videos}}"
-              team="{{team}}"
               app="{{app}}"></app-data>
 
     <app-drawer-layout drawer-width="599px" force-narrow>
@@ -144,7 +148,6 @@
 
           <blog-page name="blog"
                      app="{{app}}"
-                     header-settings="{{app.headerSettings}}"
                      route="{{subRoute}}"
                      posts="{{posts}}"></blog-page>
 
@@ -214,10 +217,18 @@
           '_pageChanged(app.page)'
         ],
 
+        ready: function () {
+          Polymer.RenderStatus.afterNextRender(this, function () {
+            this.importHref(this.resolveUrl('pages/schedule-page.html'), null, null, true);
+            this.importHref(this.resolveUrl('pages/speakers-page.html'), null, null, true);
+            this.importHref(this.resolveUrl('pages/blog-page.html'), null, null, true);
+          }.bind(this));
+        },
+
         _routePageChanged: function (page) {
           // Scroll to the top of the page on every *route* change. Use `Polymer.AppLayout.scroll`
           // with `behavior: 'silent'` to disable header scroll effects during the scroll.
-          if(this.app.page !== page) {
+          if (this.app.page !== page) {
             Polymer.AppLayout.scroll({top: 0, behavior: 'silent'});
           }
           this.set('app.page', (page || 'home'));
