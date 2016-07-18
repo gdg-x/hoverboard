@@ -8,6 +8,7 @@
 <link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
 
 <link rel="import" href="../behaviors/utils-behavior.html">
+<link rel="import" href="../elements/session-details.html">
 
 
 <dom-module id="schedule-day">
@@ -164,7 +165,7 @@
               <template is="dom-repeat" items="[[session]]" as="subSession"
                         filter="{{_filterSession(_selectedTags.splices)}}">
 
-                <paper-card class="sub-session" with-background$="[[subSession.image]]">
+                <paper-card class="sub-session" with-background$="[[subSession.image]]" on-tap="_openSession">
 
                   <template is="dom-if" if="[[subSession.image]]">
                     <iron-image src="[[subSession.image]]" sizing="cover" fit preload></iron-image>
@@ -204,7 +205,7 @@
                             <div class="person-detail" flex>
                               <span class="speaker-name">[[speaker.name]]</span>
                               <div class="speaker-title">
-                                [[speaker.company]],[[speaker.country]]
+                                [[speaker.company]], [[speaker.country]]
                               </div>
                             </div>
                           </div>
@@ -222,6 +223,12 @@
 
       </div>
     </template>
+
+    <session-details id="sessionDetails"
+                     session="{{_selectedSession}}"
+                     entry-animation="scale-up-animation"
+                     exit-animation="fade-out-animation"
+                     with-backdrop></session-details>
 
   </template>
 
@@ -270,6 +277,13 @@
                 }]
               };
             }
+          }
+        },
+
+        _openSession: function (e) {
+          if(e.model.subSession) {
+            this._selectedSession = e.model.subSession;
+            this.$.sessionDetails.open();
           }
         },
 

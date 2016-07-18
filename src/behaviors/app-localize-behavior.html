@@ -11,7 +11,10 @@
       properties: {
         app: {
           type: Object,
-          notify: true
+          notify: true,
+          value: function () {
+            return {};
+          }
         },
 
         loadExternalResources: {
@@ -25,55 +28,31 @@
       },
 
       attached: function () {
-        this.loadElementResources(this.tagName);
+        this.loadAppResources(this.language);
       },
 
       observers: [
-        'linkResources(app.resources)',
         'setLanguage(app.lang)'
       ],
 
-      loadElementResources: function (element) {
-        if (this.loadExternalResources) {
-          var url = '/data/resources/' + element.toLowerCase() + '.json';
-          this.loadResources(this.resolveUrl(url));
-        }
-      },
-
-      linkResources: function () {
-        if (!this.loadExternalResources && this.app.resources) {
-          this.resources = this.app.resources;
-          this.fire('app-resources-loaded');
-        }
+      loadAppResources: function (lang) {
+        var url = '/data/' + lang + '/resources.json';
+        this.loadResources(this.resolveUrl(url));
       },
 
       setLanguage: function (lang) {
-        if (lang)
-        this.set('language', lang);
+        if (lang) {
+          this.loadAppResources(lang);
+          this.set('language', lang);
+        }
       },
 
       __onRequestResponse: function (event) {
         if (!event.response || !this.app) return;
-        var resources = event.response.resources;
-        var data = event.response.data;
-        if (resources) {
-          var appResources = this.app.resources || {};
-          for (var lang in resources) {
-            if (resources.hasOwnProperty(lang)) {
-              appResources[lang] = HOVERBOARD.Util.extend(appResources[lang], resources[lang]);
-            }
-          }
-          this.set('app.resources', appResources);
-        }
-        if (data) {
-          this.app.data = this.app.data || {};
-          for (var val in data) {
-            if (data.hasOwnProperty(val)) {
-              this.set('app.data.' + val, data[val]);
-            }
-          }
-        }
-        this.resources = this.app.resources;
+        var resource = {};
+        resource[this.language] = event.response;
+        this.resources = resource;
+//        this.set('app.resources', resource);
         this.fire('app-resources-loaded');
       },
 

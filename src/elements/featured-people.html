@@ -64,6 +64,12 @@
         font-size: .9em;
       }
 
+      .company-logo {
+        width: 80px;
+        height: 20px;
+        transform: translate3d(0, -50%, 0);
+      }
+
       @media (max-width: 600px) {
         .person:nth-child(1),
         .person:nth-child(2) {
@@ -84,11 +90,12 @@
     </style>
 
     <div class="container">
-      <h4 class="heading">[[localize('title')]]</h4>
+      <h4 class="heading">[[localize('featured-people-title')]]</h4>
       <div class="people-wrapper">
         <template is="dom-repeat" items="[[featuredPeople]]" as="person">
           <a href="/speakers/[[person.id]]" class="person">
             <div class="photo" style="background-image: url([[person.photoUrl]])"></div>
+            <iron-image class="company-logo" src="{{person.companyLogo}}" sizing="contain"></iron-image>
             <h4 class="name">[[person.name]]</h4>
             <span class="company">[[person.company]]</span>
           </a>
@@ -96,7 +103,7 @@
       </div>
       <div>
         <a href="/speakers" class="block-link">
-          <paper-button>[[localize('view-all')]]</paper-button>
+          <paper-button>[[localize('featured-people-view-all')]]</paper-button>
         </a>
       </div>
     </div>

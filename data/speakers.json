@@ -6,7 +6,9 @@
     "title": "Developer Relations Program Manager",
     "company": "Google",
     "country": "Switzerland",
+    "companyLogo": "/images/partners/google.svg",
     "photoUrl": "/images/people/dawid_ostrowski.jpg",
+    "shortBio": "Dawid is true technology enthusiast, who loves to work in areas where humans and machines meet to create amazing new products and services.",
     "bio": "Dawid is true technology enthusiast, who loves to work in areas where humans and machines meet to create amazing new products and services. He is experienced program manager with strong technical background, who is able to establish priorities for complex projects and execute across multiple organizations, according to long-term objectives. Dawid has worked in Poland, USA, Germany, Belgium and The Netherlands and truly values diversity of international working environment. His most visible characteristics are individualization (when dealing directly with people), ideation&intellection (inexhaustible source of new concepts) and strong communication (experienced trainer, community manager). He is also an activator constantly impatient for action.",
     "tags": [
       "Entrepreneurship"
@@ -25,8 +27,10 @@
     "name": "Mandy Waite",
     "title": "Developer Relations Engineer",
     "company": "Google",
+    "companyLogo": "/images/partners/google.svg",
     "country": "UK",
     "photoUrl": "/images/people/mandy_waite.jpg",
+    "shortBio": "Based in London, UK, Mandy is a Developer Relations Engineer at Google specializing in Container and Cloud technologies and working to make the world a better place for developers building applications for the Cloud.",
     "bio": "Based in London, UK, Mandy is a Developer Relations Engineer at Google specializing in Container and Cloud technologies and working to make the world a better place for developers building applications for the Cloud. Before Google Mandy worked at Sun Microsystems on performance and scalability of Java and JavaEE and on porting Open Source apps to OpenSolaris. In her spare time Mandy is learning Japanese and likes to play the guitar.",
     "tags": [
       "Cloud",
@@ -59,8 +63,10 @@
     "name": "Jakub Škvára",
     "title": "Frontend engineer",
     "company": "Shipito",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Czech Republic",
     "photoUrl": "/images/people/jakub_skvara.jpg",
+    "shortBio": "Jakub is a member of GDG Prague and GDG ČVUT in Czech republic. He organised together with Jana Moudrá several Polymer and Dart code labs and a hackaton.",
     "bio": "Jakub is a member of GDG Prague and GDG ČVUT in Czech republic. He organised together with Jana Moudrá several Polymer and Dart code labs and a hackaton. He works as a frontend engineer for Shipito. Jakub is interested in modern Javascript frameworks, libraries and tools and loves clean code.",
     "tags": [
       "Web",
@@ -91,8 +97,10 @@
     "name": "Jana Moudrá",
     "title": "Co-Founder",
     "company": "Juicymo",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Czech Republic",
     "photoUrl": "/images/people/jana_moudra.jpg",
+    "shortBio": "GDE (Google Developer Expert) for Dart. Jana is a passionate developer and modern web and mobile technology evangelist.",
     "bio": "GDE (Google Developer Expert) for Dart. Jana is a passionate developer and modern web and mobile technology evangelist. She is an event organiser for GDG Prague, where she arranges events for developers including public lectures, code labs and hackathons – covering a wide range of subjects including technologies Dart or Android. She loves to help other developers and spread the knowledge about these technologies. <br/><br/>Jana co-founded a company called Juicymo, where she works on juicy apps and products.",
     "tags": [
       "Web",
@@ -139,8 +147,10 @@
     "name": "Hallade Xavier",
     "title": "Developer Evangelist",
     "company": "Intel",
+    "companyLogo": "/images/partners/google.svg",
     "country": "France",
     "photoUrl": "/images/people/hallade_xavier.jpg",
+    "shortBio": "Xavier Hallade is a software engineer at Intel Software and Services Group in Paris, France, where he works on a wide range of Android frameworks, libraries and applications, helping developers to improve their support for new hardware and technologies.",
     "bio": "Xavier Hallade is a software engineer at Intel Software and Services Group in Paris, France, where he works on a wide range of Android frameworks, libraries and applications, helping developers to improve their support for new hardware and technologies. He's a Google Developer Expert in Android, with a focus on the Android NDK and Android TV.",
     "tags": [
       "Android",
@@ -182,8 +192,10 @@
     "name": "Said Tahsin Dane",
     "title": "Mobile Coder",
     "company": "Startup Digest",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Turkey",
     "photoUrl": "/images/people/said_tahsine_dane.jpg",
+    "shortBio": "GDE (Google Developer Expert) for Android. Experience with Android (since Cupcake), Google Glass, Android Wear, and (even on!) iOS. Very passionate developer who tries to live on the bleeding edge of technology. Also very interested in mobile UX.",
     "bio": "GDE (Google Developer Expert) for Android. Experience with Android (since Cupcake), Google Glass, Android Wear, and (even on!) iOS. Very passionate developer who tries to live on the bleeding edge of technology. Also very interested in mobile UX. <br/><br/>Active member and organizer at GDG Istanbul enjoying organizing various conferences and hackathons. Also a part of GDG[X] - a GDG related open-source organization.",
     "tags": [
       "Android",
@@ -225,8 +237,10 @@
     "name": "Mateusz Herych",
     "title": "Software Engineer",
     "company": "Base CRM",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Poland",
     "photoUrl": "/images/people/mateus_herych.jpg",
+    "shortBio": "Mateusz is an Android GDE and GDG organizer. Works as Android Developer for Base CRM where he uses his android-abracadabras to make enterprise software users more productive.",
     "bio": "Mateusz is an Android GDE and GDG organizer. Works as Android Developer for Base CRM where he uses his android-abracadabras to make enterprise software users more productive.",
     "tags": [
       "Android",
@@ -269,8 +283,10 @@
     "name": "Juarez Filho",
     "title": "Front End Engineer",
     "company": "madewithlove",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Brazil",
     "photoUrl": "/images/people/juarez_filho.jpg",
+    "shortBio": "Juarez Filho is an enthusiastic Front end Engineer with over 7 years of experience, started his career as backend developer, but with his first CSS class he devoted completely to Front End and UX.",
     "bio": "Juarez Filho is an enthusiastic Front end Engineer with over 7 years of experience, started his career as backend developer, but with his first CSS class he devoted completely to Front End and UX.<br/><br/>Currently building things with love at @madewithlove and also a GDG Organizer spreading the awesome Google Technologies mainly Firebase and web related topics.",
     "tags": [
       "Cloud",
@@ -311,8 +327,10 @@
     "name": "Dmytro Danylyk",
     "title": "Android Developer",
     "company": "Timee",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Ukraine",
     "photoUrl": "/images/people/dmytro_danylyk.jpg",
+    "shortBio": "First Android GDE in Ukraine. Frequent speaker on tech conferences.",
     "bio": "Hello. I am finalist of Google Apps Developer Challenge 2012. Author of open source libraries 4000+ stars. When I have free time I am writing technical articles. Always trying to share my knowledge & experience on different events. Big fan of android, flat design, stackoverflow, git, Intellij IDEA. Eclipse IDE hater.",
     "tags": [
       "Android",
@@ -341,8 +359,10 @@
     "name": "Roman Mazur",
     "title": "Software Engineer",
     "company": "Stanfy",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Ukraine",
     "photoUrl": "/images/people/roman_mazur.jpg",
+    "shortBio": "Roman has been working with Android for more than 6 years. ",
     "bio": "Roman has been working with Android for more than 6 years. You can find him delivering fixes and new features to a plenty of Android libraries and frameworks including support library, Robolectric, Madge, Spoon, Retrofit, and Helium. <br/><br/>At Stanfy he is working on a customized Android OS for in-room tablets installed at hotels by KEYPR.",
     "tags": [
       "Android"
@@ -378,8 +398,10 @@
     "name": "Michał Tajchert",
     "title": "CEO",
     "company": "12Hours.io",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Poland",
     "photoUrl": "/images/people/michal_tajchert.jpg",
+    "shortBio": "Michal is Android Developer for all kinds of wearables, done programming for things such Oakley Airwave, Glass, Sony Smartwatch, and lately found his place in Android Wear development.",
     "bio": "Michal is Android Developer for all kinds of wearables, done programming for things such Oakley Airwave, Glass, Sony Smartwatch, and lately found his place in Android Wear development. He has contributed most of his project to the community and shared his knowledge to the community by organising many of Warsaw GDG meetings.",
     "tags": [
       "Android"
@@ -412,8 +434,10 @@
     "name": "Valentyn Shybanov",
     "title": "Software Engineer/Country Manager",
     "company": "Twinfield",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Ukraine",
     "photoUrl": "/images/people/valentyn_shybanov.jpg",
+    "shortBio": "Google Developer Expert on Cloud. Co-organizer of GDG Kyiv-Center.",
     "bio": "Valentyn focuses on Polymer and Web Components. In previous roles heâ€™s helped craft design systems for massive enterprise companies, user interfaces for console titles, and even built the occasional enchanted princess game. These days his mission is to fight for a better web and to help developers build great experiences.",
     "tags": [
       "Web",
@@ -451,8 +475,10 @@
     "name": "Dima Maleev",
     "title": "Director",
     "company": "Lviv Code School",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Ukraine",
     "photoUrl": "/images/people/dima_maleev.jpg",
+    "shortBio": "Dima is a developer for about 10 years, making his way from junior to technical architect and manager of complex mobile solutions.",
     "bio": "Dima is a developer for about 10 years, making his way from junior to technical architect and manager of complex mobile solutions. In the past .NET developer, ex-leader of \"Lviv .NET User Group\" and one of the organizers of the \"Oh, Mobile!\" community. A fan of mobile technology and javascript. Makes fun talks all around the world and plays american football:)",
     "tags": [
       "Web",
@@ -476,8 +502,10 @@
     "name": "Roman Herasymenko",
     "title": "Senior Android Developer",
     "company": "Yalantis Mobile",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Ukraine",
     "photoUrl": "/images/people/roman_herasymenko.jpg",
+    "shortBio": "Roman is Senior Android developer at Yatlantis and a co-organizer of GDG Dnipropetrovsk.",
     "bio": "Roman is Senior Android developer at Yatlantis and a co-organizer of GDG Dnipropetrovsk. Roman is interesting in software development for cutting edge technologies and devices like Google Glass and Android Wear.",
     "tags": [
       "Android",
@@ -513,8 +541,10 @@
     "name": "Alex Pazhyn",
     "title": "UI designer",
     "company": "Ciklum",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Ukraine",
     "photoUrl": "/images/people/alex_pazhyn.jpg",
+    "shortBio": "Alex is a leading UI designer at Ciklum with more than 7 years of experience in UI design and 3 years of public speaking.",
     "bio": "Alex is a leading UI designer at Ciklum with more than 7 years of experience in UI design and 3 years of public speaking. His general focus of work is mobile applications and interfaces of IOT.",
     "tags": [
       "Android",
@@ -551,8 +581,10 @@
     "name": "Maciej Górski",
     "title": "Lazy Developer",
     "company": "EL Passion",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Poland",
     "photoUrl": "/images/people/maciej_gorski.jpg",
+    "shortBio": "Maciej is a passionate Android developer. He cares about writing clean code and less of it.",
     "bio": "Maciej is a passionate Android developer. He cares about writing clean code and less of it. He is spending time to automate things to save even more time. He also bikes a lot and would love to be able to code while doing it… using only mind controlled wearables or bikeables.",
     "tags": [
       "Android",
@@ -586,8 +618,10 @@
     "name": "Kseniia Shumelchyk",
     "title": "Software developer",
     "company": "SoftServe",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Ukraine",
     "photoUrl": "/images/people/kseniia_shumelchyk.jpg",
+    "shortBio": "Kseniia is working as software developer at SoftServe as well she has an experience of working on open-source project during Google Summer of Code.",
     "bio": "Kseniia is working as software developer at SoftServe as well she has an experience of working on open-source project during Google Summer of Code. Kseniia is leading Women Techmakers Ukraine and GDG Dnipropetrovsk communities for 3 years. She participated in number of international conferences: GOTO Aarhus, Google I/O and GDG Leaders Summit and was a speaker at Droidcon Berlin, Women Techmakers Istanbul, GDG DevFest Ukraine and Women Techmakers Global TechTalk. This year Kseniia was selected as Anita Borg Scholar Receipient that aimed to support women with outstanding results in Computer Science. Kseniia is a big fan of innovative technologies in education and software development. She is creator of Android application for Women Techmakers Community.",
     "tags": [
       "Android",
@@ -629,8 +663,10 @@
     "name": "Anna Kurylo",
     "title": "Project manager",
     "company": "Hackraft",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Ukraine",
     "photoUrl": "/images/people/anna_kurylo.jpg",
+    "shortBio": "Anna drives several IT communities in Kyiv. ",
     "bio": "Anna drives several IT communities in Kyiv. She has organized more than 30 events during last the 2 years including the biggest hackathon in Ukraine and several conferences for developers and startups. This year Anna became a Google Anita Borg Scholar in EMEA Region, being selected from more than a thousand candidates.",
     "tags": [
       "Community"
@@ -675,8 +711,10 @@
     "name": "Alexey Rybakov",
     "title": "Senior Developer",
     "company": "DataArt",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Ukraine",
     "photoUrl": "/images/people/alexey_rybakov.jpg",
+    "shortBio": "For more than 12 years has been dedicated to game development for different mobile systems (from Palm OS, Windows CE to iOS).",
     "bio": "For more than 12 years has been dedicated to game development for different mobile systems (from Palm OS, Windows CE to iOS).<br/><br/>In DataArt is working on development for  the mobile and embedded OS from 2011.",
     "tags": [
       "Android",
@@ -695,8 +733,10 @@
     "name": "Viktor Zozuliak",
     "title": "Web Developer",
     "company": "DataXu/RailsReactor",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Poland",
     "photoUrl": "/images/people/viktor_zozuliak.jpg",
+    "shortBio": "Viktor is a passionate web developer with >10 years experience.",
     "bio": "Viktor is a passionate web developer with >10 years experience. He is completely in love with making user interfaces better. Crazy about unit/e2e testing. Believes that everything is going to be in Web someday.",
     "tags": [
       "Web",
@@ -720,8 +760,10 @@
     "name": "Buşra Deniz",
     "title": "Mobile Software Developer",
     "company": "Netas",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Turkey",
     "photoUrl": "/images/people/busra_deniz.jpg",
+    "shortBio": "Busra Deniz is a Software Engineer who has a keen interest in developing high-quality software by applying agile principles and methodologies",
     "bio": "Busra Deniz is a Software Engineer who has a keen interest in developing high-quality software by applying agile principles and methodologies, especially Scrum.<br/><br/>She is a Certificated Scrum Master and mobile engineer in Netas. Currently, working on an international project that provides iOS and Android SDKs those allow other programmers to develop their applications, which are capable of voice call, video call and IM using WebRTC.<br/><br/>Besides being co-organizer in two different community, Google Developer Group and WomenTechMakers İstanbul, she enjoys voluntarily organizing and speaking at developer events. Also, she believes in sharing knowledge and collaborating with the other people through these events, will come hand in hand with innovation and new perspectives. She always loves being part of a team and thinks that individual commitment to a team is the key to success. As a result of that she is a big fan of agile methodologies including Scrum, TDD and XP. Besides agile, she is also got excited almost every new technology in mobile platforms. And, as a software engineer, her goal is delivering software with high quality and robust architecture. In order to achieve that she highly relies on unit testing and mobile test automation.",
     "tags": [
       "Web",
@@ -767,8 +809,10 @@
     "name": "Semih Yagcioglu",
     "title": "Senior Software Engineer",
     "company": "MITS",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Turkey",
     "photoUrl": "/images/people/semih_yagcioglu.jpg",
+    "shortBio": "Semih is a software developer. He likes to solve problems and get things done.",
     "bio": "Semih is a software developer. He likes to solve problems and get things done. He is a PhD student in Computer Science at Hacettepe University with a focus on Computer Vision and NLP and works at MITS on mobile and web.",
     "tags": [
       "Web",
@@ -802,8 +846,10 @@
     "name": "Volodymyr Ivanov",
     "title": "Founder, Coordinator",
     "company": "GDG Kyiv",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Ukraine",
     "photoUrl": "/images/people/volodymyr_ivanov.jpg",
+    "shortBio": "Founder and coordinator of the first Google Developer Group in Ukraine - GDG Kyiv-Center. ",
     "bio": "Founder and coordinator of the first Google Developer Group in Ukraine - GDG Kyiv-Center. Community manager of the Ukrainian Google developer program, a prominent member of the Ukrainian and international GDG communities, organizer of the first Ukrainian Hackathon, author and co-organizer of DevFest Ukraine 2012-14. “Community” flow moderator at DevFest Ukraine 2014.",
     "badges": [
       {
@@ -828,8 +874,10 @@
     "name": "Daryna Chernysheva",
     "title": "Test Automation Tech Lead",
     "company": "EPAM Systems",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Ukraine",
     "photoUrl": "/images/people/daryna_chernysheva.jpg",
+    "shortBio": "Daryna is working in test automation field. ",
     "bio": "Daryna is working in test automation field. She has experience in testing desktop, web and mobile applications, her main area of responsibility is test framework design.",
     "tags": [
       "Community"
@@ -847,8 +895,10 @@
     "name": "Elena Forostovets",
     "title": "UI/UX",
     "company": "Boolat Games",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Ukraine",
     "photoUrl": "/images/people/elena_forostovets.jpg",
+    "shortBio": "Elena is a UI/UX designer at Boolat Games. Over 3 years experience in game development as UI/UX and 2D artist.",
     "bio": "Elena is a UI/UX designer at Boolat Games. Over 3 years experience in game development as UI/UX and 2D artist . Winner Golden Byte 5 and ecaHack Kyiv at 2013. Elena received her bechelor’s degree from NAU, where she studied architecture and design.<br/><br/>Also She is indie game developer, has published Cartrans game for Android and working on few other projects.",
     "tags": [
       "Community",
@@ -884,8 +934,10 @@
     "name": "Tatiana Protasova",
     "title": "Marketing Manager",
     "company": "Plarium Education",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Ukraine",
     "photoUrl": "/images/people/protasova_tatiana.jpg",
+    "shortBio": "At the moment I am passionately engaged in promoting an educational mobile game for kids.",
     "bio": "At the moment I am passionately engaged in promoting an educational mobile game for kids.<br/><br/>I am also addicted to the startup ecosystem -been part of two business accelerators in two different countries- and own a startup of my own.",
     "tags": [
       "Community",
@@ -921,8 +973,10 @@
     "name": "Constantine Mars",
     "title": "Senior Android Developer",
     "company": "DataArt",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Ukraine",
     "photoUrl": "/images/people/constantine_mars.jpg",
+    "shortBio": "Constantine is a Senior Mobile Developer at DataArt, GDG Dnipropetrovs'k Organizer and Java User Group Dnipro Organizer.",
     "bio": "Constantine is a Senior Mobile Developer at DataArt, GDG Dnipropetrovs'k Organizer and Java User Group Dnipro Organizer. <br/><br/>He is developing apps for both Android and iOS platfroms, but prefer to talk about Android innovations and Java language features. The last areas of his interest are Reactive Functional Programming, Ubiquitous Computing (especially AndroidWear) and GoogleFit.",
     "badges": [
       {
@@ -953,8 +1007,10 @@
     "name": "Anton Minashkin",
     "title": "Android Developer",
     "company": "GlobalLogic",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Ukraine",
     "photoUrl": "/images/people/anton_minashkin.jpg",
+    "shortBio": "Anton is an Android developer at GlobalLogic. He has experience in both, server and mobile side development.",
     "bio": "Anton is an Android developer at GlobalLogic. He has experience in both, server and mobile side development. He is a speaker at UA-Mobile, GDG Kyiv Android and several other events. Also he is co-founder of GDG Kremenchuk and Kremenchuk IT Community.",
     "badges": [
       {
@@ -986,8 +1042,10 @@
     "name": "Ihor Dvoretskyi",
     "title": "Operation Engineer",
     "company": "Mirantis Inc.",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Ukraine",
     "photoUrl": "/images/people/ihor_dvoretskyi.jpg",
+    "shortBio": "OpenStack Foundation member, Kubernetes upstream contributor and OpenStack special interest group lead in Kubernetes Community. ",
     "bio": "Ihor is an Operations Engineer at Mirantis Inc - the #1 Pure Play OpenStack Company, with a huge experience working in IT companies, where he was responsible for a couple of projects, tightly bound to Cloud computing and *nix systems. Ihor is deeply interested in OpenStack cloud platform, other Cloud technologies and Open Source projects. Also, Ihor is a big fan of Google and Google products.<br/><br/>Apart from work, Ihor is also interested in other branches of IT technology and starts diving into Robotics.",
     "tags": [
       "Cloud",
@@ -1017,8 +1075,10 @@
     "name": "Anastasiia Serafyn",
     "title": "Recruiting Team Lead",
     "company": "Lohika",
+    "companyLogo": "/images/partners/google.svg",
     "country": "Ukraine",
     "photoUrl": "/images/people/anastasiia_serafyn.jpg",
+    "shortBio": "Anastasiia is a passionate and skilled Technical Recruiter, leading team of 7 people. ",
     "bio": "Anastasiia is a passionate and skilled Technical Recruiter, leading team of 7 people. She has 4 years of hands-on experience in recruiting/headhunting IT professionals and over 2 years in PR & Employer branding activities. Also Anastasiia helps in organization and management of Lviv Tech Talks community Morning@Lohika.",
     "tags": [
       "Community"

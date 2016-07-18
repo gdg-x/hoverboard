@@ -9,6 +9,7 @@
 <!--<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">-->
 
 <link rel="import" href="../styles/shared-styles.html">
+<link rel="import" href="../behaviors/utils-behavior.html">
 <link rel="import" href="../behaviors/app-localize-behavior.html">
 
 
@@ -32,6 +33,10 @@
         height: 100%;
       }
 
+      paper-tab a {
+        color: var(--text-primary-color);
+      }
+
       .filters-content > * {
         padding: 0 24px;
       }
@@ -44,23 +49,27 @@
     </style>
 
     <nav class="subpage-nav" layout horizontal center justified relative>
-      <paper-tabs class="schedule-tabs" selected="{{selectedSubpage}}">
+      <paper-tabs class="schedule-tabs" selected="{{selectedDay}}" attr-for-selected="day">
         <template is="dom-repeat" items="[[schedule]]" as="day">
-          <paper-tab>[[day.dateReadable]]</paper-tab>
+          <paper-tab day$="day[[_addToValue(index, 1)]]">
+            <!--<a href$="/schedule/day[[_addToValue(index, 1)]]" layout center="">-->
+              [[day.dateReadable]]
+            <!--</a>-->
+          </paper-tab>
         </template>
       </paper-tabs>
 
       <!--<paper-menu-button horizontal-align="right" ignore-select allow-outside-scroll>-->
-        <!--<paper-button class="dropdown-trigger">-->
-          <!--Filter-->
-          <!--<iron-icon icon="[[_computeFilterIcon(showFilters)]]"></iron-icon>-->
-        <!--</paper-button>-->
-        <!--<paper-menu id="filters" class="filters-content dropdown-content" attr-for-selected="value" selected-values="{{filters}}" multi>-->
-          <!--<template is="dom-repeat" items="[[schedule.tags]]" as="tag">-->
-            <!--<paper-checkbox layout horizontal center flex value="[[tag]]">[[tag]]</paper-checkbox>-->
-          <!--</template>-->
-          <!--<paper-item on-tap="clearFilters">Clear all</paper-item>-->
-        <!--</paper-menu>-->
+      <!--<paper-button class="dropdown-trigger">-->
+      <!--Filter-->
+      <!--<iron-icon icon="[[_computeFilterIcon(showFilters)]]"></iron-icon>-->
+      <!--</paper-button>-->
+      <!--<paper-menu id="filters" class="filters-content dropdown-content" attr-for-selected="value" selected-values="{{filters}}" multi>-->
+      <!--<template is="dom-repeat" items="[[schedule.tags]]" as="tag">-->
+      <!--<paper-checkbox layout horizontal center flex value="[[tag]]">[[tag]]</paper-checkbox>-->
+      <!--</template>-->
+      <!--<paper-item on-tap="clearFilters">Clear all</paper-item>-->
+      <!--</paper-menu>-->
       <!--</paper-menu-button>-->
     </nav>
 
@@ -75,14 +84,15 @@
         is: 'schedule-subnav',
 
         behaviors: [
+          HOVERBOARD.UtilsBehavior,
           HOVERBOARD.AppLocalizeBehavior,
         ],
 
         properties: {
           schedule: Array,
-          selectedSubpage: {
+          selectedDay: {
             type: String,
-            value: 0,
+            value: 'day1',
             notify: true
           },
           showFilters: {
@@ -109,7 +119,7 @@
 
           this.filters = [];
           var checkboxes = this.$.filters.querySelectorAll('paper-checkbox');
-          Array.prototype.forEach.call(checkboxes, function(checkbox) {
+          Array.prototype.forEach.call(checkboxes, function (checkbox) {
             checkbox.checked = false;
           });
         },

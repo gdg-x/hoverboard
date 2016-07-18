@@ -103,7 +103,7 @@
 
     <div class="container">
       <div class="videos-header">
-        <h4 class="heading">[[localize('title')]]</h4>
+        <h4 class="heading">[[localize('featured-videos-title')]]</h4>
         <div class="controls">
           <paper-icon-button icon="icons:chevron-left" on-tap="shiftContentLeft"></paper-icon-button>
           <paper-icon-button icon="icons:chevron-right" on-tap="shiftContentRight"></paper-icon-button>
@@ -133,7 +133,7 @@
       <div>
         <a href="https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv" class="block-link"
            target="_blank">
-          <paper-button>[[localize('view-all')]]</paper-button>
+          <paper-button>[[localize('featured-videos-view-all')]]</paper-button>
         </a>
       </div>
     </div>
@@ -166,12 +166,12 @@
         },
 
         observers: [
-          '_videosChanged(app.data, app.data.videos)'
+          '_videosChanged(app.videos)'
         ],
 
         _videosChanged: function () {
-          if (this.app.data.videos)
-          this._videos = this._randomOrder(this.app.data.videos).slice(0, 6);
+          if (this.app.videos)
+          this._videos = this._randomOrder(this.app.videos).slice(0, 6);
         },
 
         _playVideo: function (e) {
