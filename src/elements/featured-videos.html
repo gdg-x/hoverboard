@@ -85,6 +85,13 @@
         font-size: 14px;
       }
 
+      .block-link {
+        margin-top: 25px;
+        display: block;
+        color: inherit;
+        font-size: .9em;
+      }
+
       @media (min-width: 601px) {
         .videos-header {
           @apply(--layout-horizontal);
@@ -131,8 +138,7 @@
         </template>
       </div>
       <div>
-        <a href="https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv" class="block-link"
-           target="_blank">
+        <a href="[[app.data.videosSessionsUrl]]" class="block-link" target="_blank">
           <paper-button>[[localize('featured-videos-view-all')]]</paper-button>
         </a>
       </div>

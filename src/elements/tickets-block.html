@@ -3,8 +3,6 @@
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
-<link rel="import" href="../../bower_components/paper-card/paper-card.html">
 
 <link rel="import" href="../styles/shared-styles.html">
 <link rel="import" href="../behaviors/app-localize-behavior.html">
@@ -84,16 +82,11 @@
         </template>
       </div>
       <div class="details">[[localize('tickets-details')]]</div>
-      <paper-button class="buy-button" raised on-tap="openTicketsDialog">[[localize('buy-ticket')]]</paper-button>
+      <a href$="[[app.data.tickets.url]]" target="_blank" on-tap="_trackBuyClick">
+        <paper-button class="buy-button" raised>[[localize('buy-ticket')]]</paper-button>
+      </a>
     </div>
 
-
-    <paper-dialog id="ticketsDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal>
-      <p>[[localize('run-out-tickets')]]</p>
-      <div class="buttons">
-        <paper-button dialog-confirm>[[localize('close')]]</paper-button>
-      </div>
-    </paper-dialog>
   </template>
 
   <script>
@@ -107,25 +100,12 @@
           HOVERBOARD.AppLocalizeBehavior
         ],
 
-        listeners: {
-          'iron-overlay-opened': '_onOverlayOpened',
-          'iron-overlay-closed': '_onOverlayClosed'
-        },
-
         ready: function () {
           HOVERBOARD.Elements.Tickets = this;
         },
 
-        openTicketsDialog: function () {
-          this.$.ticketsDialog.open();
-        },
-
-        _onOverlayOpened: function () {
-          Polymer.IronDropdownScrollManager.pushScrollLock(this.$.ticketsDialog);
-        },
-
-        _onOverlayClosed: function () {
-          Polymer.IronDropdownScrollManager.removeScrollLock(this.$.ticketsDialog);
+        _trackBuyClick: function (e) {
+          ga('send', 'event', 'ticket', 'buy_click', e.currentTarget.href);
         }
 
       });

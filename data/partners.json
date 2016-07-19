@@ -1,12 +1,78 @@
 [
   {
-    "title": "template-creator",
+    "title": "general-sponsor",
     "logos": [
       {
-        "name": "GDG Lviv",
-        "url": "https://plus.google.com/102444623953913144164",
-        "logoUrl": "../images/partners/gdg-lviv.svg",
-        "width": 170
+        "name": "Google",
+        "url": "https://www.google.com.ua/intl/en/about/",
+        "logoUrl": "/images/partners/google.svg"
+      }
+    ]
+  },
+  {
+    "title": "diamond-sponsor",
+    "logos": [
+      {
+        "name": "intouch",
+        "url": "http://www.intouchmena.com/",
+        "logoUrl": "/images/partners/intouch.svg"
+      }
+    ]
+  },
+  {
+    "title": "platinum-sponsor",
+    "logos": [
+      {
+        "name": "CoreValue",
+        "url": "http://www.corevalue.com.ua/",
+        "logoUrl": "/images/partners/corevalue.svg"
+      },
+      {
+        "name": "GlobalLogic",
+        "url": "http://www.globallogic.com/",
+        "logoUrl": "/images/partners/global-logic.svg"
+      },
+      {
+        "name": "Wolters Kluwer",
+        "url": "http://wolterskluwer.com/",
+        "logoUrl": "/images/partners/wolterskluwer.svg"
+      },
+      {
+        "name": "N-iX",
+        "url": "http://n-ix.com/",
+        "logoUrl": "/images/partners/n_ix.svg",
+        "width": 85
+      },
+      {
+        "name": "Mirantis",
+        "url": "https://www.mirantis.com/",
+        "logoUrl": "/images/partners/mirantis.svg",
+        "width": 100
+      },
+      {
+        "name": "DataArt",
+        "url": "http://dataart.ua/",
+        "logoUrl": "/images/partners/dataart.svg"
+      }
+    ]
+  },
+  {
+    "title": "gold-sponsor",
+    "logos": [
+      {
+        "name": "Ciklum",
+        "url": "https://www.ciklum.com/",
+        "logoUrl": "/images/partners/ciklum.svg"
+      }
+    ]
+  },
+  {
+    "title": "gift-sponsor",
+    "logos": [
+      {
+        "name": "JetBrains",
+        "url": "https://www.jetbrains.com/",
+        "logoUrl": "/images/partners/jetbrains.svg"
       }
     ]
   },
@@ -14,59 +80,160 @@
     "title": "general-partner",
     "logos": [
       {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/partners/google.svg"
+        "name": "IT Cluster",
+        "url": "http://itcluster.lviv.ua/",
+        "logoUrl": "/images/partners/itcluster.png"
+      }
+    ]
+  },
+  {
+    "title": "information-partner",
+    "logosClass": "info",
+    "logos": [
+      {
+        "name": "Android Weekly",
+        "url": "http://androidweekly.net/",
+        "logoUrl": "/images/partners/android_weekly.png"
       },
       {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/partners/gdg-x.svg"
+        "name": "Droidcon Krakow",
+        "url": "http://droidcon.pl/",
+        "logoUrl": "/images/partners/droidcon.png"
       },
       {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/partners/google.svg"
+        "name": "CyberBionic",
+        "url": "http://edu.cbsystematics.com/en/",
+        "logoUrl": "/images/partners/cbs.svg"
       },
       {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/partners/gdg-x.svg"
+        "name": "ITVDN",
+        "url": "http://itvdn.com/en",
+        "logoUrl": "/images/partners/itvdn.svg"
       },
       {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/partners/google.svg"
+        "name": "ITEM",
+        "url": "http://item.com.ua/",
+        "logoUrl": "/images/partners/item.svg"
       },
       {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/partners/gdg-x.svg"
+        "name": "JDay",
+        "url": "http://www.jday.com.ua/",
+        "logoUrl": "/images/partners/jday.svg"
       },
       {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/partners/google.svg"
+        "name": "Lviv Convention Bureau",
+        "url": "http://lvivconvention.com.ua/en/",
+        "logoUrl": "/images/partners/lcb.svg"
       },
       {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/partners/gdg-x.svg"
+        "name": "Lviv IT School",
+        "url": "http://lits.com.ua/",
+        "logoUrl": "/images/partners/lits.png"
       },
       {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/partners/google.svg"
+        "name": "Symphony Solutions",
+        "url": "http://www.symphony-solutions.eu/",
+        "logoUrl": "/images/partners/symphony-solutions.svg"
       },
       {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/partners/gdg-x.svg"
+        "name": "UA Mobile",
+        "url": "http://www.uamobile.org/",
+        "logoUrl": "/images/partners/uamobile.png"
       },
       {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/partners/google.svg"
+        "name": "Rozrobka",
+        "url": "https://rozrobka.com/",
+        "logoUrl": "/images/partners/rozrobka.svg"
+      },
+      {
+        "name": "SoftServe",
+        "url": "https://softserve.ua/en/",
+        "logoUrl": "/images/partners/softserve.svg"
+      },
+      {
+        "name": "Mobile Warsaw",
+        "url": "http://mobile-warsaw.pl/",
+        "logoUrl": "/images/partners/mobile-warsaw.svg"
+      },
+      {
+        "name": "TechMagic",
+        "url": "http://www.techmagic.co/",
+        "logoUrl": "/images/partners/techmagic.png"
+      },
+      {
+        "name": "Betaplace",
+        "url": "http://betaplace.com.ua/en/",
+        "logoUrl": "/images/partners/betaplace.svg"
+      },
+      {
+        "name": "Robo Camp",
+        "url": "http://robocamp.com.ua//",
+        "logoUrl": "/images/partners/robocamp.png"
+      },
+      {
+        "name": "SE",
+        "url": "https://www.facebook.com/events/1616149385375331/",
+        "logoUrl": "/images/partners/se.svg"
+      },
+      {
+        "name": "DOU",
+        "url": "https://dou.ua/",
+        "logoUrl": "/images/partners/dou.svg"
+      },
+      {
+        "name": "IT Arena",
+        "url": "http://itarena.lviv.ua/",
+        "logoUrl": "/images/partners/itarena.png"
+      },
+      {
+        "name": "Decoded",
+        "url": "http://decoded.org.ua/en/",
+        "logoUrl": "/images/partners/decoded.png"
+      },
+      {
+        "name": "JavaDay Minsk",
+        "url": "https://www.facebook.com/javadayby",
+        "logoUrl": "/images/partners/javaday_minsk.jpg"
+      },
+      {
+        "name": "Start IT",
+        "url": "http://start-it.com.ua/",
+        "logoUrl": "/images/partners/start_it.png"
+      },
+      {
+        "name": "Sphinx",
+        "url": "http://sphinx.sg/",
+        "logoUrl": "/images/partners/sphinx.png"
+      },
+      {
+        "name": "JS Odessa",
+        "url": "http://odessajs.org/",
+        "logoUrl": "/images/partners/jsodessa.png"
+      },
+      {
+        "name": "HotWork",
+        "url": "http://hotwork.com.ua/",
+        "logoUrl": "/images/partners/hotwork.jpg"
+      },
+      {
+        "name": "Droidcon Vienna",
+        "url": "http://www.devfest.at/",
+        "logoUrl": "/images/partners/droidcon_vienna.svg"
+      },
+      {
+        "name": "BuilStuff Odessa",
+        "url": "http://www.buildstuff.com.ua/odessa/",
+        "logoUrl": "/images/partners/buildstuff.png"
+      },
+      {
+        "name": "Codeguida",
+        "url": "http://codeguida.com/",
+        "logoUrl": "/images/partners/codeguida.svg"
+      },
+      {
+        "name": "Crowd Reviews",
+        "url": "https://www.crowdreviews.com/",
+        "logoUrl": "/images/partners/crowd_reviews.png"
       }
     ]
   }

@@ -23,6 +23,7 @@
 <link rel="import" href="elements/drawer-block.html">
 <link rel="import" href="elements/toolbar-block.html">
 <link rel="import" href="elements/header-content.html">
+<link rel="import" href="elements/video-dialog.html">
 
 <link rel="import" href="pages/home-page.html">
 
@@ -168,10 +169,20 @@
           <cod-page name="cod"
                     app="{{app}}"></cod-page>
 
+          <hub-page name="hub"
+                    app="{{app}}"></hub-page>
+
         </neon-animated-pages>
       </div>
 
     </app-drawer-layout>
+
+    <video-dialog id="videoDialog"
+                  title="[[video.title]]"
+                  youtube-id="[[video.youtubeId]]"
+                  entry-animation="scale-up-animation"
+                  exit-animation="scale-down-animation"
+                  disable-controls="[[!video.disableControls]]"></video-dialog>
 
     <paper-toast id="toast" class="toast" duration="6000"></paper-toast>
 
@@ -287,6 +298,15 @@
           if (this.$$('#drawer') && this.$$('#drawer').close) {
             this.$$('#drawer').close();
           }
+        },
+
+        openVideo(title, youtubeId, disableControls) {
+          this.video = {
+            title: title,
+            youtubeId: youtubeId,
+            disableControls: disableControls
+          };
+          this.$.videoDialog.open();
         }
 
       });

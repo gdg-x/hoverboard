@@ -7,6 +7,7 @@
   "schedule": "Розклад",
   "team": "Команда",
   "cod": "Норми поведінки",
+  "hub": "Хаб доповідачів",
   "location-address-short": "Львів, Україна",
   "motto": "Будь героєм! Будь GDG!",
   "play-icon": "Погляньте як це було в 2015",
@@ -53,9 +54,14 @@
   "click-to-view-photos": "Натисніть, щоб відкрити більше фотографій",
   "partners": "Партнери",
   "become-a-partner": "Стати партнером",
-  "template-creator": "Розробник шаблону",
+  "general-sponsor": "Генеральний спонсор",
+  "diamond-sponsor": "Діамантовий спонсор",
+  "platinum-sponsor": "Платинум спонсори",
+  "gold-sponsor": "Золотий спонсор",
+  "gift-sponsor": "Спонсор подарунків",
   "general-partner": "Генеральний партнер",
-  "featured-videos-title": "Вподобані відео",
+  "information-partner": "Інформаційні партнери",
+  "featured-videos-title": "Вподобані #DFUA '15 сесії",
   "featured-videos-view-all": "Переглянути всі відео",
   "featured-people-title": "Рок доповідачі",
   "featured-people-view-all": "Переглянути всіх доповідачів",
@@ -63,5 +69,11 @@
   "action": "Як це було",
   "location-title": "Південний Експо",
   "location-description": "Нещодавно збудований Південний Expo є довгоочікуваний виставковий центр у Львові, який може задовольнити потреби масштабної події",
-  "location-address": "Щирецька 36"
+  "location-address": "Щирецька 36",
+  "organizer": "Організатор",
+  "about-organizers": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 8 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
+  "open-team-page": "Відкрити сторінку команди",
+  "what-is-gdg": "Що таке GDG?",
+  "about-gdg": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion"
+
 }

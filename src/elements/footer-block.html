@@ -166,7 +166,7 @@
               <ul class="link-block">
                 <template is="dom-repeat" items="[[block.links]]" as="link">
                   <li>
-                    <a href$="[[link.url]]" target="_blank">[[localize(link.text)]]</a>
+                    <a href$="[[link.url]]" target="_getLinkTarget(link.newTab)">[[localize(link.text)]]</a>
                   </li>
                 </template>
               </ul>
@@ -239,6 +239,10 @@
 
         scrollToTop: function (e) {
           HOVERBOARD.Elements.Template.backToTop(e);
+        },
+
+        _getLinkTarget: function (newTab) {
+          return newTab ? '_blank' : '';
         }
 
       });
