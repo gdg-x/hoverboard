@@ -238,7 +238,7 @@
           // Close the drawer - in case the *route* change came from a link in the drawer.
           this.drawerOpened = false;
           if (this.app.data) {
-            var navObject = this.app.data.navigation[this._getIndexByProperty(this.app.data.navigation, 'route', this.app.page)];
+            var navObject = this.app.data.pages[this.app.page];
             if (navObject && navObject.headerSettings) {
               this.set('app.headerSettings', navObject.headerSettings);
               this.stylesChanged();

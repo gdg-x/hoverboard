@@ -1,13 +1,11 @@
 {
-  "navigation": [
-    {
-      "route": "home",
-      "permalink": "/",
+  "pages": {
+    "home": {
       "headerSettings": {
-        "backgroundColor": "#00BCD4",
+        "backgroundColor": "#00bcd4",
         "backgroundImage": "/images/backgrounds/home.png",
-        "fontColor": "#FFFFFF",
-        "tabBarColor": "#FFFFFF",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff",
         "video": {
           "title": "GDG DevFest Ukraine 2015",
           "youtubeId": "DfMnJAzOFng",
@@ -17,51 +15,63 @@
         "minHeight": "360px"
       }
     },
-    {
-      "route": "blog",
-      "permalink": "/blog/",
+    "blog": {
       "headerSettings": {
-        "backgroundColor": "#03A9F4",
+        "backgroundColor": "#03a9f4",
         "backgroundImage": "/images/backgrounds/blog.png",
-        "fontColor": "#FFFFFF",
-        "tabBarColor": "#FFFFFF"
-      }
-    },
-    {
-      "route": "schedule",
-      "permalink": "/schedule/",
-      "headerSettings": {
-        "backgroundColor": "#607D8B",
-        "fontColor": "#FFFFFF",
-        "tabBarColor": "#FFFFFF"
-      }
-    },
-    {
-      "route": "speakers",
-      "permalink": "/speakers/",
-      "headerSettings": {
-        "backgroundColor": "#673AB7",
-        "fontColor": "#FFFFFF",
-        "tabBarColor": "#FFFFFF"
-      }
-    },
-    {
-      "route": "team",
-      "permalink": "/team/",
-      "headerSettings": {
-        "backgroundColor": "#009688",
-        "fontColor": "#FFFFFF",
-        "tabBarColor": "#FFFFFF"
-      }
-    },
-    {
-      "route": "cod",
-      "permalink": "/cod/",
-      "headerSettings": {
-        "backgroundColor": "#673AB7",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
+    },
+    "speakers": {
+      "headerSettings": {
+        "backgroundColor": "#673AB7",
+        "fontColor": "#FFFFFF",
+        "tabBarColor": "#FFFFFF"
+      }
+    },
+    "schedule": {
+      "headerSettings": {
+        "backgroundColor": "#607d8b",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
+    },
+    "team": {
+      "headerSettings": {
+        "backgroundColor": "#009688",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
+    },
+    "cod": {
+      "headerSettings": {
+        "backgroundColor": "#673ab7",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
+    }
+  },
+  "navigation": [
+    {
+      "route": "home",
+      "permalink": "/"
+    },
+    {
+      "route": "blog",
+      "permalink": "/blog/"
+    },
+    {
+      "route": "schedule",
+      "permalink": "/schedule/"
+    },
+    {
+      "route": "speakers",
+      "permalink": "/speakers/"
+    },
+    {
+      "route": "team",
+      "permalink": "/team/"
     }
   ],
   "url": "https://devfest.gdg.org.ua/",
@@ -89,6 +99,10 @@
         {
           "text": "team",
           "url": "/team/"
+        },
+        {
+          "text": "cod",
+          "url": "/cod/"
         },
         {
           "text": "google-developers",
@@ -215,7 +229,10 @@
     "albumUrl": "https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1",
     "photos": {
       "big": "/images/backgrounds/2015_1.jpg",
-      "small": ["/images/backgrounds/2015_2.jpg", "/images/backgrounds/2015_3.jpg"]
+      "small": [
+        "/images/backgrounds/2015_2.jpg",
+        "/images/backgrounds/2015_3.jpg"
+      ]
     }
   },
   "location": {
@@ -229,6 +246,10 @@
       "latitude": 49.809841,
       "longitude": 23.982805
     },
-    "images": ["/images/backgrounds/location_1.jpg", "/images/backgrounds/location_2.jpg", "/images/backgrounds/location_3.jpg"]
+    "images": [
+      "/images/backgrounds/location_1.jpg",
+      "/images/backgrounds/location_2.jpg",
+      "/images/backgrounds/location_3.jpg"
+    ]
   }
 }
