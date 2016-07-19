@@ -23,9 +23,23 @@
       data="{{sessions}}">
     </firebase-document>
 
+    <!--<firebase-document-->
+      <!--id="querySchedule"-->
+      <!--app-name="hoverboard-dev"-->
+      <!--path="/schedule"-->
+      <!--data="{{_scheduleRaw}}">-->
+    <!--</firebase-document>-->
+
+    <firebase-query
+      id="queryPosts"
+      app-name="hoverboard-dev"
+      path="/blog"
+      data="{{posts}}">
+    </firebase-query>
+
     <!--<iron-ajax auto url="[[speakersSource]]" handle-as="json" last-response="{{_speakersRaw}}"></iron-ajax>-->
     <!--<iron-ajax auto url="[[sessionsSource]]" handle-as="json" last-response="{{sessions}}"></iron-ajax>-->
-    <iron-ajax auto url="[[postsSource]]" handle-as="json" on-response="_reversePosts"></iron-ajax>
+    <!--<iron-ajax auto url="[[postsSource]]" handle-as="json" on-response="_reversePosts"></iron-ajax>-->
     <!--<iron-ajax auto url="[[partnersSource]]" handle-as="json" last-response="{{partners}}"></iron-ajax>-->
     <iron-ajax auto url="[[scheduleSource]]" handle-as="json" last-response="{{_scheduleRaw}}"></iron-ajax>
   </template>
@@ -110,7 +124,8 @@
 
         _generateSchedule: function () {
           if (!Object.keys(this._speakersRaw).length
-                || !Object.keys(this.sessions).length)
+                || !Object.keys(this.sessions).length
+                  || !Object.keys(this._scheduleRaw).length)
           { return;}
           this._scheduleRaw.tags = [];
           for (var i = 0, scheduleLen = this._scheduleRaw.length; i < scheduleLen; i++) {

@@ -83,11 +83,14 @@
 
         properties: {
           posts: {
-            type: Array,
-            observer: '_postsChanged'
+            type: Array
           },
           _posts: Array
         },
+
+        observers: [
+          '_postsChanged(posts.splices)'
+        ],
 
         _postsChanged: function () {
           let temp = this.posts.slice(0, 2);
