@@ -51,7 +51,6 @@
 
       .sub-session {
         @apply(--shadow-transition);
-        height: 100%;
         cursor: pointer;
       }
 
@@ -61,10 +60,6 @@
 
       .sub-session[with-background] > div {
         background: rgba(0, 0, 0, 0.4);
-      }
-
-      .sub-session > div {
-        height: 100%;
       }
 
       .sub-session:hover {
@@ -165,13 +160,13 @@
               <template is="dom-repeat" items="[[session]]" as="subSession"
                         filter="{{_filterSession(_selectedTags.splices)}}">
 
-                <paper-card class="sub-session" with-background$="[[subSession.image]]" on-tap="_openSession">
+                <paper-card class="sub-session" with-background$="[[subSession.image]]" on-tap="_openSession" layout flex-auto>
 
                   <template is="dom-if" if="[[subSession.image]]">
                     <iron-image src="[[subSession.image]]" sizing="cover" fit preload></iron-image>
                   </template>
 
-                  <div relative layout vertical>
+                  <div relative layout vertical flex>
 
                     <div class="sub-session-content" flex>
                       <h2 class="session-title">[[subSession.title]]</h2>
