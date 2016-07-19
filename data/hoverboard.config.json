@@ -53,6 +53,15 @@
         "fontColor": "#FFFFFF",
         "tabBarColor": "#FFFFFF"
       }
+    },
+    {
+      "route": "cod",
+      "permalink": "/cod/",
+      "headerSettings": {
+        "backgroundColor": "#673AB7",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
     }
   ],
   "url": "https://devfest.gdg.org.ua/",
