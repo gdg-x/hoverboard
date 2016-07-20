@@ -1,49 +1,55 @@
 {
-    "137": {
-        "id": 137,
+    "139": {
+        "id": 139,
+        "title": "Keynote",
+        "description": "",
+        "language": "English"
+    },
+    "138": {
+        "id": 138,
         "title": "Conference closing and contest winners announcements",
         "description": "Make sure you won't miss closing ceremony, all gifts from out sponsors and partners will find their owners during this session.",
         "image": "/images/backgrounds/closing.jpg"
     },
-    "136": {
-        "id": 136,
+    "137": {
+        "id": 137,
         "title": "Afterparty & Networking",
         "description": "Afterpaty is a great time to have some fun and meet new people",
         "image": "/images/backgrounds/party.jpg"
     },
-    "135": {
-        "id": 135,
+    "136": {
+        "id": 136,
         "title": "GDG DevFest Ukraine 2016 Opening",
         "description": "Official start of the conference. Greatings from the organizers, sponsors and partners.",
         "language": "English",
         "image": "/images/backgrounds/opening.jpg"
     },
-    "134": {
-        "id": 134,
+    "135": {
+        "id": 135,
         "title": "Morning coffee",
         "description": "Coffeeeeeee!",
         "image": "/images/backgrounds/morning.jpg"
     },
-    "133": {
-        "id": 133,
+    "134": {
+        "id": 134,
         "title": "Coffee break",
         "description": "Coffeeeeeee!",
         "image": "/images/backgrounds/coffee-break.jpg"
     },
-    "132": {
-        "id": 132,
+    "133": {
+        "id": 133,
         "title": "Lunch",
         "description": "Foooooooood!",
         "image": "/images/backgrounds/lunch.jpg"
     },
-    "131": {
-        "id": 131,
+    "132": {
+        "id": 132,
         "title": "Registration & morning Coffee",
         "description": "Get your badge, coffee, enjoy talking with tech edicts around",
         "image": "/images/backgrounds/registration.jpg"
     },
-    "130": {
-        "id": 130,
+    "131": {
+        "id": 131,
         "title": "TBD",
         "description": "",
         "speakers": [
@@ -55,8 +61,8 @@
             "Android"
         ]
     },
-    "129": {
-        "id": 129,
+    "130": {
+        "id": 130,
         "title": "Designing an Android Wear Application",
         "description": "Wearable devices are one of the most popular things nowadays. Specially, after the Apple Watch, we finally get the whole picture of the entire list of products and their features. Now, we can talk about how we can design a user experience for this type of devices.\nEvery platform has it's own design principles and approaches. But, in the core, they all need to follow same core rules. So, how we combine this core requirements with Google's Material Design and use them on an Android Wear device? Let's learn!",
         "speakers": [
@@ -68,8 +74,8 @@
             "Android"
         ]
     },
-    "128": {
-        "id": 128,
+    "129": {
+        "id": 129,
         "title": "Accessibility on Android",
         "description": "Accessibility is a very important step to make sure that your app reaches everyone in an easy and fun way to use. \nGood accessibility support means much more than just making sure the app supports screen readers, different fonts sizes and good contrast ratios. It is a learning process, and one in which we ourselves still have much to learn and explore. ",
         "speakers": [
@@ -81,8 +87,8 @@
             "Android"
         ]
     },
-    "127": {
-        "id": 127,
+    "128": {
+        "id": 128,
         "title": "Android Wear 2.0: Great Changes Upcoming this Fall",
         "description": "Google announced Android Wear 2.0 become available this Fall. This major update brings some revolutionary changes in platform, that should change our approaches in developing wearable apps, including freedom of BLE tethering, system support for complications and activity recognition by GoogleFit, developed mainly for Android Wear 2.0. We will talk deeper about these new features and look at some ways to implement them in the code.",
         "speakers": [
@@ -94,8 +100,8 @@
             "Android"
         ]
     },
-    "126": {
-        "id": 126,
+    "127": {
+        "id": 127,
         "title": "ExoPlayer: Media playback without pain (almost...)",
         "description": "If you have any experience with Android Media Player, you definitely know how hard it is to prepare it and do not lose your mind. ExoPlayer - is an alternative, which can help you deal with media with much less pain. So lets discuss if it really a \"silver bullet\" or yet another State Machine hell.",
         "speakers": [
@@ -107,8 +113,8 @@
             "Android"
         ]
     },
-    "125": {
-        "id": 125,
+    "126": {
+        "id": 126,
         "title": "Android hacking for dummies: \u2018if\u2019 operator demolytion",
         "description": "Imagine the world where you can get any application, look into its code (even if it is not open sourced) and modify any conditional operator in any way you like. Welcome, you are in the Android applications world! Let's discover how anyone can decompile your app and, for example, hack your 'if' operators. For the beginning, we will play a role of a script kiddie and try to hack some simple app. After this, we will pretend security-conscious Android developers and try to think how we can protect ourselves.",
         "speakers": [
@@ -120,10 +126,10 @@
             "Android"
         ]
     },
-    "124": {
-        "id": 124,
-        "title": "TBD",
-        "description": "",
+    "125": {
+        "id": 125,
+        "title": "Kubernets",
+        "description": "TBD",
         "speakers": [
             22
         ],
@@ -133,8 +139,8 @@
             "Cloud"
         ]
     },
-    "123": {
-        "id": 123,
+    "124": {
+        "id": 124,
         "title": "Continues Integration in Android",
         "description": "You are tired of building every patch for your QA ? Still deploying to google play manually ? You still think that build server is something that you don't need ? Than I will try to show you how you can make life of your team easier with CI.",
         "speakers": [
@@ -144,6 +150,19 @@
         "complexity": "Intermediate",
         "tags": [
             "Android"
+        ]
+    },
+    "123": {
+        "id": 123,
+        "title": "TDB",
+        "description": "TDB",
+        "speakers": [
+            20
+        ],
+        "language": "English",
+        "complexity": "Beginner",
+        "tags": [
+            "Web"
         ]
     },
     "122": {
@@ -226,8 +245,8 @@
     },
     "116": {
         "id": 116,
-        "title": "TBD",
-        "description": "",
+        "title": "On Polymer and smileys... or Polysmileys",
+        "description": "One of my favourite things about the web are ASCII smileys. They're sweet, fun and simply make the web a better place. How could anyone not like them \u00af(\u30c4)/\u00af?\n\nThis talk is an overdose of smileys, because they're the perfect excuse to get started with Polymer. Polymer is a library built on top of the Web Components standards that helps developers create reusable components for the modern web. And since I know that everybody has been wondering how one could take over the world by creating a suite of Polymer animated emoticon components, we're going to do exactly that.",
         "speakers": [
             14
         ],
