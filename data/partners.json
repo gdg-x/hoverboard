@@ -234,6 +234,16 @@
         "name": "Crowd Reviews",
         "url": "https://www.crowdreviews.com/",
         "logoUrl": "/images/partners/crowd_reviews.png"
+      },
+      {
+        "name": "ITEA",
+        "url": "http://itea.ua/uk/",
+        "logoUrl": "/images/partners/itea.svg"
+      },
+      {
+        "name": "Eurasia Mobile Challenge",
+        "url": "http://www.eurasiamobilechallenge.com/",
+        "logoUrl": "/images/partners/eurasia.jpg"
       }
     ]
   }
