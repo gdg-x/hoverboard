@@ -418,7 +418,7 @@
     "name": "Carmen Popovicu",
     "title": "Front-end Engineer",
     "company": "Widespread",
-    "companyLogo": "/images/companies/widespread.png",
+    "companyLogo": "/images/companies/angularjs-nl.png",
     "country": "Cluj-Napoca, Romania",
     "photoUrl": "/images/people/carmen_popovicu.jpg",
     "shortBio": "Angular JS committer. Founder of Dutch Angular JS Community, co-organizer of NG-NL.",
@@ -667,8 +667,8 @@
     ],
     "socials": [
       {
-        "icon": "website",
-        "name": "Website",
+        "icon": "gplus",
+        "name": "Google+",
         "link": "https://google.com/+ValentynShybanov"
       },
       {
