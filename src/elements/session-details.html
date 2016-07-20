@@ -117,7 +117,7 @@
           <div class="sections">
             <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
               <div class="section">
-                <div class="section-photo" style="background-image: url([[speaker.photoUrl]])"></div>
+                <div class="section-photo" style$="background-image: url([[speaker.photoUrl]])"></div>
                 <div class="section-info">
                   <h3 class="section-title">[[speaker.name]]</h3>
                   <span class="section-sub-title">[[speaker.company]], [[speaker.country]]</span>
@@ -129,7 +129,7 @@
                   <truncate-marked-text text="[[speaker.bio]]" characters="220"
                                         break-last-word></truncate-marked-text>
 
-                  <a class="read-more" href$="/speakers/[[speaker.id]]" dialog-dismiss>[[localize('read-more'))]]</a>
+                  <a class="read-more" href$="/speakers/[[speaker.id]]" dialog-dismiss>[[localize('read-more')]]</a>
                 </div>
               </div>
             </template>

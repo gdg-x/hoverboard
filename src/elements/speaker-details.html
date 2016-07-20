@@ -83,7 +83,7 @@
                   </div>
                   <truncate-marked-text text="[[session.description]]" characters="220"
                                         break-last-word></truncate-marked-text>
-                  <a class="read-more" href$="/schedule" dialog-dismiss>[[localize('read-more')]]</a>
+                  <a class="read-more" href="/schedule" dialog-dismiss>[[localize('read-more')]]</a>
 
                 </div>
               </div>
@@ -113,7 +113,8 @@
         properties: {
           speaker: {
             type: Object,
-            observer: '_speakerChanged'
+            observer: '_speakerChanged',
+            notify: true
           }
         },
 
