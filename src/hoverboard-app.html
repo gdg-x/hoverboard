@@ -12,8 +12,6 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
-<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
-
 <link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
 
 <link rel="import" href="effects/fade-effect.html">
@@ -24,6 +22,7 @@
 <link rel="import" href="elements/toolbar-block.html">
 <link rel="import" href="elements/header-content.html">
 <link rel="import" href="elements/video-dialog.html">
+<link rel="import" href="elements/toast-element.html">
 
 <link rel="import" href="pages/home-page.html">
 
@@ -184,7 +183,7 @@
                   exit-animation="scale-down-animation"
                   disable-controls="[[!video.disableControls]]"></video-dialog>
 
-    <paper-toast id="toast" class="toast" duration="6000"></paper-toast>
+    <toast-element id="toast"></toast-element>
 
   </template>
 
@@ -233,6 +232,7 @@
 
         ready: function () {
           Polymer.RenderStatus.afterNextRender(this, function () {
+            HOVERBOARD.ServiceWorkerRegistration.register();
             this.importHref(this.resolveUrl('pages/schedule-page.html'), null, null, true);
             this.importHref(this.resolveUrl('pages/speakers-page.html'), null, null, true);
             this.importHref(this.resolveUrl('pages/blog-page.html'), null, null, true);
@@ -300,7 +300,7 @@
           }
         },
 
-        openVideo(title, youtubeId, disableControls) {
+        openVideo: function(title, youtubeId, disableControls) {
           this.video = {
             title: title,
             youtubeId: youtubeId,

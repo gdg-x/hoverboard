@@ -35,11 +35,12 @@ HOVERBOARD.ServiceWorkerRegistration = (function () {
             // The updatefound event implies that registration.installing is set; see
             // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-container-updatefound-event
             const installingWorker = registration.installing;
+
             installingWorker.onstatechange = function () {
               switch (installingWorker.state) {
                 case 'installed':
                   if (!navigator.serviceWorker.controller) {
-                    HOVERBOARD.Elements.Toast.showMessage(
+                    HOVERBOARD.Elements.Template.$.toast.showMessage(
                       'Caching complete! Future visits will work offline.');
                   }
                   break;
@@ -68,9 +69,9 @@ HOVERBOARD.ServiceWorkerRegistration = (function () {
           window.location.reload();
         };
 
-        if (HOVERBOARD.Elements && HOVERBOARD.Elements.Toast &&
-          HOVERBOARD.Elements.Toast.showMessage) {
-          HOVERBOARD.Elements.Toast.showMessage(
+        if (HOVERBOARD.Elements && HOVERBOARD.Elements.Template &&
+          HOVERBOARD.Elements.Template.$.toast.showMessage) {
+          HOVERBOARD.Elements.Template.$.toast.showMessage(
             'A new version of this app is available.', tapHandler, 'Refresh',
             null, 0); // duration 0 indications shows the toast indefinitely.
         } else {
