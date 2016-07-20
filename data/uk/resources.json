@@ -46,7 +46,7 @@
   "description": "The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts",
   "attendees": "Учасників",
   "days": "Днів",
-  "sessions": "Сесій",
+  "sessions": "Доповіді",
   "tracks": "Паралельних потоків",
   "social-title": "Соціальні мережі",
   "social-motto": "Додавайте в кола, лайкайте, фоловте нас",
@@ -75,5 +75,5 @@
   "open-team-page": "Відкрити сторінку команди",
   "what-is-gdg": "Що таке GDG?",
   "about-gdg": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion"
-
+  "read-more": "Більше"
 }

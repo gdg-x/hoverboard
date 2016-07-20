@@ -17,6 +17,7 @@
 <link rel="import" href="../styles/dialog-styles.html">
 <link rel="import" href="../behaviors/share-behavior.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
+<link rel="import" href="../behaviors/app-localize-behavior.html">
 <link rel="import" href="truncate-marked-text.html">
 <link rel="import" href="video-dialog.html">
 
@@ -63,7 +64,7 @@
             </paper-icon-item>
             <paper-icon-item on-tap="share" share="copy">
               <iron-icon icon="link" item-icon></iron-icon>
-              Copy link
+              [[localize('copy-link')]]
             </paper-icon-item>
           </div>
         </paper-menu-button>
@@ -112,7 +113,7 @@
 
       <template is="dom-if" if="{{session.speakers.length}}">
         <div class="sections-wrapper content">
-          <h4 class="block-title">Speakers</h4>
+          <h4 class="block-title">[[localize('speakers')]]</h4>
           <div class="sections">
             <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
               <div class="section">
@@ -128,8 +129,7 @@
                   <truncate-marked-text text="[[speaker.bio]]" characters="220"
                                         break-last-word></truncate-marked-text>
 
-                  <a class="read-more" href$="/speakers/[[speaker.id]]" dialog-dismiss>Read
-                    more</a>
+                  <a class="read-more" href$="/speakers/[[speaker.id]]" dialog-dismiss>[[localize('read-more'))]]</a>
                 </div>
               </div>
             </template>
@@ -155,6 +155,7 @@
         behaviors: [
           Polymer.PaperDialogBehavior,
           Polymer.NeonAnimationRunnerBehavior,
+          HOVERBOARD.AppLocalizeBehavior,
           HOVERBOARD.ShareBehavior,
           HOVERBOARD.UtilsBehavior
         ],
@@ -205,10 +206,10 @@
 
         _onNeonAnimationFinish: function () {
           if (this.opened) {
-//            Polymer.IronDropdownScrollManager.pushScrollLock(this);
+            Polymer.IronDropdownScrollManager.pushScrollLock(this.$.scrollHeaderPanel);
             this._finishRenderOpened();
           } else {
-//            Polymer.IronDropdownScrollManager.removeScrollLock(this);
+            Polymer.IronDropdownScrollManager.removeScrollLock(this.$.scrollHeaderPanel);
             this._finishRenderClosed();
           }
         }
