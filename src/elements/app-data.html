@@ -153,11 +153,13 @@
                 session.speakers[j] = this._speakersRaw[session.speakers[j]];
                 var tempSession = JSON.parse(JSON.stringify(session));
                 delete tempSession.speakers;
-                if (!session.speakers[j].sessions) {
-                  session.speakers[j].sessions = [];
+                if (session.speakers[j]) {
+                  if (!session.speakers[j].sessions) {
+                    session.speakers[j].sessions = [];
+                  }
+                  session.speakers[j].sessions.push(tempSession);
+                  speakers.push(session.speakers[j].name);
                 }
-                session.speakers[j].sessions.push(tempSession);
-                speakers.push(session.speakers[j].name);
               }
             }
           }
