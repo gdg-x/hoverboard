@@ -1,4 +1,10 @@
 {
+    "140": {
+        "id": 140,
+        "title": "TBD",
+        "description": "TBD",
+        "language": "English"
+    },
     "139": {
         "id": 139,
         "title": "Keynote",
@@ -154,8 +160,8 @@
     },
     "123": {
         "id": 123,
-        "title": "TDB",
-        "description": "TDB",
+        "title": "TBD",
+        "description": "TBD",
         "speakers": [
             20
         ],
@@ -375,7 +381,7 @@
     },
     "106": {
         "id": 106,
-        "title": "Fuelio. Success story.",
+        "title": "Fuelio. Success story",
         "description": "Fuelio. Success story (I'll write more info later)",
         "speakers": [
             5
