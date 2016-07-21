@@ -15,7 +15,7 @@
 <link rel="import" href="../../bower_components/marked-element/marked-element.html">
 
 <link rel="import" href="../styles/dialog-styles.html">
-<link rel="import" href="../behaviors/share-behavior.html">
+<!--<link rel="import" href="../behaviors/share-behavior.html">-->
 <link rel="import" href="../behaviors/utils-behavior.html">
 <link rel="import" href="../behaviors/app-localize-behavior.html">
 <link rel="import" href="truncate-marked-text.html">
@@ -47,27 +47,27 @@
         </div>
       </paper-toolbar>
       <div class="content">
-        <paper-menu-button horizontal-align="right" share-menu>
-          <paper-fab class="float-button dropdown-trigger" icon="share"></paper-fab>
-          <div class="dropdown-content">
-            <paper-icon-item on-tap="share" share="gplus">
-              <iron-icon icon="gplus" item-icon></iron-icon>
-              Google+
-            </paper-icon-item>
-            <paper-icon-item on-tap="share" share="facebook">
-              <iron-icon icon="facebook" item-icon></iron-icon>
-              Facebook
-            </paper-icon-item>
-            <paper-icon-item on-tap="share" share="twitter">
-              <iron-icon icon="twitter" item-icon></iron-icon>
-              Twitter
-            </paper-icon-item>
-            <paper-icon-item on-tap="share" share="copy">
-              <iron-icon icon="link" item-icon></iron-icon>
-              [[localize('copy-link')]]
-            </paper-icon-item>
-          </div>
-        </paper-menu-button>
+        <!--<paper-menu-button horizontal-align="right" share-menu>-->
+          <!--<paper-fab class="float-button dropdown-trigger" icon="share"></paper-fab>-->
+          <!--<div class="dropdown-content">-->
+            <!--<paper-icon-item on-tap="share" share="gplus">-->
+              <!--<iron-icon icon="gplus" item-icon></iron-icon>-->
+              <!--Google+-->
+            <!--</paper-icon-item>-->
+            <!--<paper-icon-item on-tap="share" share="facebook">-->
+              <!--<iron-icon icon="facebook" item-icon></iron-icon>-->
+              <!--Facebook-->
+            <!--</paper-icon-item>-->
+            <!--<paper-icon-item on-tap="share" share="twitter">-->
+              <!--<iron-icon icon="twitter" item-icon></iron-icon>-->
+              <!--Twitter-->
+            <!--</paper-icon-item>-->
+            <!--<paper-icon-item on-tap="share" share="copy">-->
+              <!--<iron-icon icon="link" item-icon></iron-icon>-->
+              <!--[[localize('copy-link')]]-->
+            <!--</paper-icon-item>-->
+          <!--</div>-->
+        <!--</paper-menu-button>-->
         <div class="metadata-wrapper">
           <div class="main-info">
             <div class="info">
@@ -156,7 +156,6 @@
           Polymer.PaperDialogBehavior,
           Polymer.NeonAnimationRunnerBehavior,
           HOVERBOARD.AppLocalizeBehavior,
-          HOVERBOARD.ShareBehavior,
           HOVERBOARD.UtilsBehavior
         ],
 
@@ -196,6 +195,7 @@
             this.$.scrollHeaderPanel.scrollToTop(true);
             this.$.scrollHeaderPanel.notifyResize();
           });
+          HOVERBOARD.Analytics.trackEvent('session', 'open details', this.session.title);
         },
 
         _renderClosed: function () {

@@ -209,9 +209,11 @@
 
         _openVideo: function () {
           HOVERBOARD.Elements.Template.openVideo('GDG DevFest Ukraine 2015', 'DfMnJAzOFng', true);
+          HOVERBOARD.Analytics.trackEvent('video', 'watch', 'GDG DevFest Ukraine 2015');
         },
 
         _scrollToTickets: function () {
+          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'header');
           Polymer.AppLayout.scroll({
             top: HOVERBOARD.Elements.Tickets.getBoundingClientRect().top,
             behavior: 'smooth',

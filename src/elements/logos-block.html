@@ -82,7 +82,7 @@
           </div>
         </div>
       </template>
-      <a class="block-link" href$="[[app.data.partnershipProposition]]" target="_blank">
+      <a class="block-link" href$="[[app.data.partnershipProposition]]" target="_blank" on-tap="_trackClick">
         <paper-button class="colorful" raised>[[localize('become-a-partner')]]</paper-button>
       </a>
     </div>
@@ -99,7 +99,11 @@
 
         behaviors: [
           HOVERBOARD.AppLocalizeBehavior
-        ]
+        ],
+
+        _trackClick: function () {
+          HOVERBOARD.Analytics.trackEvent('sponsors', 'open proposition', 'Become a partner');
+        }
 
       });
 
