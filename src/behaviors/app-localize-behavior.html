@@ -1,0 +1,71 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
+
+<script>
+  (function () {
+    'use strict';
+
+    HOVERBOARD.AppLocalizeBehaviorImpl = {
+
+      properties: {
+        app: {
+          type: Object,
+          notify: true,
+          value: function () {
+            return {};
+          }
+        },
+
+        loadExternalResources: {
+          type: Boolean,
+          value: true
+        }
+      },
+
+      listeners: {
+        'app-resources-loaded': '_onLocalesLoaded'
+      },
+
+      attached: function () {
+        this.loadAppResources(this.language);
+      },
+
+      observers: [
+        'setLanguage(app.lang)'
+      ],
+
+      loadAppResources: function (lang) {
+        var url = '/data/' + lang + '/resources.json';
+        this.loadResources(this.resolveUrl(url));
+      },
+
+      setLanguage: function (lang) {
+        if (lang) {
+          this.loadAppResources(lang);
+          this.set('language', lang);
+        }
+      },
+
+      __onRequestResponse: function (event) {
+        if (!event.response || !this.app) return;
+        var resource = {};
+        resource[this.language] = event.response;
+        this.resources = resource;
+//        this.set('app.resources', resource);
+        this.fire('app-resources-loaded');
+      },
+
+      _onLocalesLoaded: function (event) {
+        event.stopPropagation();
+      }
+
+    };
+
+    HOVERBOARD.AppLocalizeBehavior = [
+      Polymer.AppLocalizeBehavior,
+      HOVERBOARD.AppLocalizeBehaviorImpl
+    ];
+
+  }());
+</script>

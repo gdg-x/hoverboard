@@ -1,0 +1,99 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+
+<link rel="import" href="blog-list.html">
+<link rel="import" href="post-page.html">
+
+<dom-module id="blog-page">
+
+  <template>
+
+    <app-route route="{{route}}"
+                  pattern="/posts/:slug"
+                  data="{{postsData}}"></app-route>
+
+    <app-route route="{{route}}"
+                  pattern="/:page"
+                  data="{{pageData}}"></app-route>
+
+
+    <neon-animated-pages id="pages"
+                         selected="{{pageData.page}}"
+                         attr-for-selected="data-page"
+                         selected-attribute="selected">
+
+      <blog-list id="blogList" data-page=""
+                 app="{{app}}"
+                 header-settings="{{headerSettings}}"
+                 posts="{{posts}}"></blog-list>
+
+      <post-page data-page="posts"
+                 app="{{app}}"
+                 header-settings="{{headerSettings}}"
+                 posts="{{posts}}"
+                 post-id="{{postsData.slug}}"></post-page>
+
+    </neon-animated-pages>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'blog-page',
+
+        behaviors: [
+          Polymer.NeonAnimatableBehavior
+
+        ],
+
+        properties: {
+          app: Object,
+          posts: Array,
+          route: {
+            type: Object,
+            observer: 'routeChange'
+          },
+          animationConfig: {
+            type: Object,
+            value: function () {
+              return {
+                'entry': [{
+                  name: 'fade-in-animation',
+                  animation: 'fade-in-animation',
+                  node: this,
+                  timing: {
+                    delay: 500
+                  }
+                }],
+                'exit': [{
+                  name: 'fade-out-animation',
+                  animation: 'fade-out-animation',
+                  node: this
+                }]
+              };
+            }
+          }
+        },
+
+        routeChange() {
+          if(this.pageData && this.pageData.page === this.$.pages.selected) {
+            let tempSelection = this.$.pages.selected;
+            this.$.pages.select(null);
+            this.$.pages.select(tempSelection);
+            if(this.$.pages.selectedItem){
+              this.$.pages.selectedItem.playAnimation('entry');
+            }
+          }
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>
