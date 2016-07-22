@@ -33,7 +33,7 @@
         };
         --paper-menu-button: {
           margin-top: calc(-36px - var(--content-padding));
-          margin-right: -var(--content-padding);
+          margin-right: var(--content-padding);
           float: right;
           z-index: 1;
         };
@@ -154,7 +154,7 @@
 
       .sections {
         @apply(--layout-horizontal);
-        @apply(--layout-wrap)
+        @apply(--layout-wrap);
       }
 
       .section {
@@ -199,7 +199,7 @@
         color: #fff;
       }
 
-      @media (min-width: 961px) {
+      @media (min-width: 769px) {
         :host {
           min-height: 60%;
           min-width: 800px;

@@ -2,12 +2,12 @@
   "pages": {
     "home": {
       "headerSettings": {
-        "backgroundColor": "#00bcd4",
+        "backgroundColor": "#607d8b",
         "backgroundImage": "/images/backgrounds/home.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff",
         "video": {
-          "title": "GDG DevFest Ukraine 2015",
+          "title": "GDG DevFest Ukraine 2016",
           "youtubeId": "DfMnJAzOFng",
           "text": "See how it was in 2015"
         },
@@ -18,21 +18,20 @@
     "blog": {
       "headerSettings": {
         "backgroundColor": "#03a9f4",
-        "backgroundImage": "/images/backgrounds/blog.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
     },
     "speakers": {
       "headerSettings": {
-        "backgroundColor": "#673AB7",
-        "fontColor": "#FFFFFF",
-        "tabBarColor": "#FFFFFF"
+        "backgroundColor": "#3f51b5",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
       }
     },
     "schedule": {
       "headerSettings": {
-        "backgroundColor": "#607d8b",
+        "backgroundColor": "#673ab7",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
@@ -47,6 +46,14 @@
     "cod": {
       "headerSettings": {
         "backgroundColor": "#673ab7",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
+    },
+    "hub": {
+      "headerSettings": {
+        "backgroundImage": "images/backgrounds/hub.jpg",
+        "backgroundColor": "#4caf50",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
@@ -68,20 +75,15 @@
     {
       "route": "speakers",
       "permalink": "/speakers/"
-    },
-    {
-      "route": "team",
-      "permalink": "/team/"
     }
   ],
   "url": "https://devfest.gdg.org.ua/",
-  "trackerCode": "UA-43643469-1",
   "mailchimp": {
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
   },
   "partnershipProposition": "http://bit.ly/df16-sponsor",
-  "disqusShortName": "hoverboard-gdg-x",
+  "disqusShortName": "dfua2016",
   "languages": [
     {
       "name": "English",
@@ -145,8 +147,8 @@
   "contactBlock": {
     "links": [
       {
-        "text": "devfest@google.com",
-        "url": "mailto:devfest@google.com"
+        "text": "devfest@gdg.org.ua",
+        "url": "mailto:devfest@gdg.org.ua"
       }
     ]
   },
@@ -251,5 +253,6 @@
       "/images/backgrounds/location_2.jpg",
       "/images/backgrounds/location_3.jpg"
     ]
-  }
+  },
+  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv"
 }

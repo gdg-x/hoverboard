@@ -83,7 +83,6 @@
 
       .action-buttons {
         margin-top: 40px;
-        text-align: right;
       }
 
       paper-button {
@@ -134,10 +133,6 @@
                 {{localize('play-icon')}}
               </div>
               <div class="action-buttons">
-                <a href="https://docs.google.com/forms/d/1rNGi2oPOAZ84mKkL5ccDYUEp93cO0RJ4GZZ-NTmtkYg/viewform"
-                   target="_blank">
-                  <paper-button>{{localize('c4p')}}</paper-button>
-                </a>
                 <paper-button class="primary" on-tap="_scrollToTickets" raised>{{localize('buy-ticket')}}</paper-button>
               </div>
             </div>
@@ -167,6 +162,11 @@
         <animatable-content name="cod">
           <div class="container">
             <h3 class="page-title">{{localize('cod')}}</h3>
+          </div>
+        </animatable-content>
+        <animatable-content name="hub">
+          <div class="container">
+            <h3 class="page-title">{{localize('hub')}}</h3>
           </div>
         </animatable-content>
       </neon-animated-pages>
@@ -208,10 +208,12 @@
         },
 
         _openVideo: function () {
-          app.openVideo('GDG DevFest Ukraine 2015', 'DfMnJAzOFng', true);
+          HOVERBOARD.Elements.Template.openVideo('GDG DevFest Ukraine 2015', 'DfMnJAzOFng', true);
+          HOVERBOARD.Analytics.trackEvent('video', 'watch', 'GDG DevFest Ukraine 2015');
         },
 
         _scrollToTickets: function () {
+          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'header');
           Polymer.AppLayout.scroll({
             top: HOVERBOARD.Elements.Tickets.getBoundingClientRect().top,
             behavior: 'smooth',

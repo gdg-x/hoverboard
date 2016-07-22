@@ -12,8 +12,6 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
-<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
-
 <link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
 
 <link rel="import" href="effects/fade-effect.html">
@@ -23,6 +21,8 @@
 <link rel="import" href="elements/drawer-block.html">
 <link rel="import" href="elements/toolbar-block.html">
 <link rel="import" href="elements/header-content.html">
+<link rel="import" href="elements/video-dialog.html">
+<link rel="import" href="elements/toast-element.html">
 
 <link rel="import" href="pages/home-page.html">
 
@@ -168,12 +168,22 @@
           <cod-page name="cod"
                     app="{{app}}"></cod-page>
 
+          <hub-page name="hub"
+                    app="{{app}}"></hub-page>
+
         </neon-animated-pages>
       </div>
 
     </app-drawer-layout>
 
-    <paper-toast id="toast" class="toast" duration="6000"></paper-toast>
+    <video-dialog id="videoDialog"
+                  title="[[video.title]]"
+                  youtube-id="[[video.youtubeId]]"
+                  entry-animation="scale-up-animation"
+                  exit-animation="scale-down-animation"
+                  disable-controls="[[!video.disableControls]]"></video-dialog>
+
+    <toast-element id="toast"></toast-element>
 
   </template>
 
@@ -222,6 +232,7 @@
 
         ready: function () {
           Polymer.RenderStatus.afterNextRender(this, function () {
+            HOVERBOARD.ServiceWorkerRegistration.register();
             this.importHref(this.resolveUrl('pages/schedule-page.html'), null, null, true);
             this.importHref(this.resolveUrl('pages/speakers-page.html'), null, null, true);
             this.importHref(this.resolveUrl('pages/blog-page.html'), null, null, true);
@@ -287,6 +298,15 @@
           if (this.$$('#drawer') && this.$$('#drawer').close) {
             this.$$('#drawer').close();
           }
+        },
+
+        openVideo: function(title, youtubeId, disableControls) {
+          this.video = {
+            title: title,
+            youtubeId: youtubeId,
+            disableControls: disableControls
+          };
+          this.$.videoDialog.open();
         }
 
       });
