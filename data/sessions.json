@@ -20,13 +20,13 @@
     "137": {
         "id": 137,
         "title": "Afterparty & Networking",
-        "description": "Afterpaty is a great time to have some fun and meet new people",
+        "description": "Afterparty is a great time to have some fun and meet new people",
         "image": "/images/backgrounds/party.jpg"
     },
     "136": {
         "id": 136,
         "title": "GDG DevFest Ukraine 2016 Opening",
-        "description": "Official start of the conference. Greatings from the organizers, sponsors and partners.",
+        "description": "Official start of the conference. Greetings from the organizers, sponsors and partners.",
         "language": "English",
         "image": "/images/backgrounds/opening.jpg"
     },
@@ -56,8 +56,8 @@
     },
     "131": {
         "id": 131,
-        "title": "TBD",
-        "description": "",
+        "title": "Deal with it: Android DataBinding explained",
+        "description": "In this talk, I will reveal you all the deepest secrets of using MVVM architecture in Android. \nWe will discuss on how to organise your application, views, models, how to retrieve data from the model requested from the view via data binding. \nLightweight Activities and Fragments, is it even possible? \n\nYes, and I will show you how to achieve this with MVVM and DataBinding!",
         "speakers": [
             27
         ],
@@ -134,7 +134,7 @@
     },
     "125": {
         "id": 125,
-        "title": "Kubernets",
+        "title": "Kubernetes in a real world",
         "description": "TBD",
         "speakers": [
             22
@@ -174,7 +174,7 @@
     "122": {
         "id": 122,
         "title": "Firebase + Kotlin + RxJava + MVP: Practical Tips",
-        "description": "I would like to talk about architecture of our Settle Up app. It's all based on new Firebase announced on I/O with the help of modern frameworks like Rx, Kotlin and MVP. I could change it a bit if you have a similar topic from another speaker, let me know.",
+        "description": "I would like to talk about architecture of our Settle Up app. It's all based on new Firebase announced on I/O with the help of modern frameworks like Rx, Kotlin and MVP.",
         "speakers": [
             19
         ],
@@ -395,7 +395,7 @@
     "105": {
         "id": 105,
         "title": "Intro to TensorFlow",
-        "description": "",
+        "description": "TBD",
         "speakers": [
             4
         ],
