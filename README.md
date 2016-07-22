@@ -1,7 +1,8 @@
 # Polymer App Toolbox - Drawer Template
 
-This template is a starting point for building apps using a drawer-based
-layout.  The layout is provided by `app-layout` elements.
+[![Join the chat at https://gitter.im/gdg-x/hoverboard](https://badges.gitter.im/gdg-x/hoverboard.svg)](https://gitter.im/gdg-x/hoverboard?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+> Project Hoverboard is the next generation conference website template after [Project Zeppelin](https://github.com/gdg-x/zeppelin) and more optimized version - [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
 
 This template, along with the `polymer-cli` toolchain, also demonstrates use
 of the "PRPL pattern" This pattern allows fast first delivery and interaction with
@@ -73,3 +74,42 @@ those components and their dependencies are added to the list of pre-cached
 components (and will have bundles created in the fallback `bundled` build).
 
 
+## Who is using template?
+
+Going to use template? Go on! The only thing we ask - let us know at [lviv@gdg.org.ua](mailto:lviv@gdg.org.ua) so we can include you to this list, or make a pull request.
+
+| [GDG DevFest Ukraine](http://devfest.gdg.org.ua) |
+| :------------ |
+| [GDG DevFest Sao Paulo](http://sp.devfest.com.br)  |
+| [GDG DevFest Hamburg 2015](http://devfest.de)  |
+| [GDG DevFest Mezam 2015](https://devfest-mezam.gdgbambili.xyz) |
+| [GDG DevFest Silicon Valley 2015](http://devfest2015.gdgsv.com/) |
+| [GDG DevFest Belgium 2015](http://devfest.be/) |
+| [GDG DevFest South East Nigeria 2015](http://www.devfestse.com) |
+| [GDG DevFest Istanbul 2015](https://www.devfesttr.com) |
+| [GDG Cáceres CodeWeek 2015](http://codeweek.gdgcaceres.es) |
+| [GDG Bingham University Website](http://bhu.gdg.ng) |
+
+## Contributing
+
+Project Hoverboard is still under development and it is open for contributions. Feel free to send PR. If you have any questions, feel free to contact [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy).
+#### General workflow
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Make your changes
+4. Run the tests, adding new ones for your own code if necessary
+5. Commit your changes (`git commit -am 'Added some feature'`)
+6. Push to the branch (`git push origin my-new-feature`)
+7. Create new Pull Request
+
+
+### Contributors
+See [list of contributors](https://github.com/gdg-x/hoverboard/graphs/contributors)
+
+Maintainer: [@ozasadnyy](https://github.com/ozasadnyy).
+
+######The GDG App, GDG[x] are not endorsed and/or supported by Google, the corporation.
+
+## License
+
+Project is published under the [MIT license](https://github.com/gdg-x/hoverboard/blob/master/LICENSE.md) Feel free to clone and modify repo as you want, but don't forget to add reference to authors :)
