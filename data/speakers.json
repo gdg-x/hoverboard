@@ -16,7 +16,7 @@
             "gRPC"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -95,7 +95,7 @@
             "Smart Home"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -122,7 +122,7 @@
         "title": "Software Engineer",
         "company": "Google",
         "companyLogo": "/images/logos/google.svg",
-        "country": "San Francisco, United States",
+        "country": "Mountain View, United States",
         "photoUrl": "/images/people/rustem_arzymbetov.jpg",
         "shortBio": "Rustem is working at Google for last 8 years. Was in Search and Android teams. Big fan of perform...",
         "bio": "Rustem is working at Google for last 8 years. Was in Search and Android teams. Big fan of performance optimizations.",
@@ -132,7 +132,7 @@
             "TensorFlow"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -158,7 +158,7 @@
             "Entrepreneurship"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -220,7 +220,7 @@
             "Firebase"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -308,7 +308,7 @@
             "Dagger 2"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -462,13 +462,13 @@
             "Android N"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
                 "icon": "twitter",
                 "name": "Twitter",
-                "link": "twitter.com/pelotasplus"
+                "link": "https://twitter.com/pelotasplus"
             },
             {
                 "icon": "facebook",
@@ -505,7 +505,7 @@
             "Protractor"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -537,7 +537,7 @@
             "Analytics"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -706,7 +706,7 @@
         "title": "Frontend engineer",
         "company": "Shipito",
         "companyLogo": "/images/logos/shipito.png",
-        "country": "Prague, Czech republic",
+        "country": "Prague, Czech Republic",
         "photoUrl": "/images/people/jakub_\u0161kv\u00e1ra.jpg",
         "shortBio": "Jakub is a front-end engineer at Shipito interested in modern web frameworks, libraries and tools...",
         "bio": "Jakub is a front-end engineer at Shipito interested in modern web frameworks, libraries and tools. Jakub is also a member of GDG Prague and GDG \u010cVUT in the Czech republic.",
@@ -837,7 +837,7 @@
             "Security"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -948,7 +948,7 @@
             "ExoPlayer"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -1042,27 +1042,27 @@
             {
                 "icon": "twitter",
                 "name": "Twitter",
-                "link": "twitter.com/protechman"
+                "link": "https://twitter.com/protechman"
             },
             {
                 "icon": "gplus",
                 "name": "Google+",
-                "link": "plus.google.com/+rcaneryildirim"
+                "link": "https://plus.google.com/+rcaneryildirim"
             },
             {
                 "icon": "facebook",
                 "name": "Facebook",
-                "link": "facebook.com/r.caner.yildirim"
+                "link": "https://facebook.com/r.caner.yildirim"
             },
             {
                 "icon": "website",
                 "name": "Website",
-                "link": "dribbble.com/protechman"
+                "link": "https://dribbble.com/protechman"
             },
             {
                 "icon": "linkedin",
                 "name": "LinkedIn",
-                "link": "linkedin.com/in/protechman"
+                "link": "https://linkedin.com/in/protechman"
             }
         ]
     }
