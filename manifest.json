@@ -40,6 +40,6 @@
   ],
   "start_url": "./?utm_source=web_app_manifest",
   "display": "standalone",
-  "background_color": "#00bcd4",
-  "theme_color": "#00bcd4"
+  "background_color": "#607d8b",
+  "theme_color": "#607d8b"
 }

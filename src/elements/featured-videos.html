@@ -187,6 +187,7 @@
             youtubeId: e.model.video.youtubeId
           };
           this.$.videoViewer.open();
+          HOVERBOARD.Analytics.trackEvent('video', 'watch',  'dfua15' + this._selectedVideo.title);
         },
 
         shiftContentLeft: function () {

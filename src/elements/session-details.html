@@ -15,8 +15,9 @@
 <link rel="import" href="../../bower_components/marked-element/marked-element.html">
 
 <link rel="import" href="../styles/dialog-styles.html">
-<link rel="import" href="../behaviors/share-behavior.html">
+<!--<link rel="import" href="../behaviors/share-behavior.html">-->
 <link rel="import" href="../behaviors/utils-behavior.html">
+<link rel="import" href="../behaviors/app-localize-behavior.html">
 <link rel="import" href="truncate-marked-text.html">
 <link rel="import" href="video-dialog.html">
 
@@ -46,27 +47,27 @@
         </div>
       </paper-toolbar>
       <div class="content">
-        <paper-menu-button horizontal-align="right" share-menu>
-          <paper-fab class="float-button dropdown-trigger" icon="share"></paper-fab>
-          <div class="dropdown-content">
-            <paper-icon-item on-tap="share" share="gplus">
-              <iron-icon icon="gplus" item-icon></iron-icon>
-              Google+
-            </paper-icon-item>
-            <paper-icon-item on-tap="share" share="facebook">
-              <iron-icon icon="facebook" item-icon></iron-icon>
-              Facebook
-            </paper-icon-item>
-            <paper-icon-item on-tap="share" share="twitter">
-              <iron-icon icon="twitter" item-icon></iron-icon>
-              Twitter
-            </paper-icon-item>
-            <paper-icon-item on-tap="share" share="copy">
-              <iron-icon icon="link" item-icon></iron-icon>
-              Copy link
-            </paper-icon-item>
-          </div>
-        </paper-menu-button>
+        <!--<paper-menu-button horizontal-align="right" share-menu>-->
+          <!--<paper-fab class="float-button dropdown-trigger" icon="share"></paper-fab>-->
+          <!--<div class="dropdown-content">-->
+            <!--<paper-icon-item on-tap="share" share="gplus">-->
+              <!--<iron-icon icon="gplus" item-icon></iron-icon>-->
+              <!--Google+-->
+            <!--</paper-icon-item>-->
+            <!--<paper-icon-item on-tap="share" share="facebook">-->
+              <!--<iron-icon icon="facebook" item-icon></iron-icon>-->
+              <!--Facebook-->
+            <!--</paper-icon-item>-->
+            <!--<paper-icon-item on-tap="share" share="twitter">-->
+              <!--<iron-icon icon="twitter" item-icon></iron-icon>-->
+              <!--Twitter-->
+            <!--</paper-icon-item>-->
+            <!--<paper-icon-item on-tap="share" share="copy">-->
+              <!--<iron-icon icon="link" item-icon></iron-icon>-->
+              <!--[[localize('copy-link')]]-->
+            <!--</paper-icon-item>-->
+          <!--</div>-->
+        <!--</paper-menu-button>-->
         <div class="metadata-wrapper">
           <div class="main-info">
             <div class="info">
@@ -112,11 +113,11 @@
 
       <template is="dom-if" if="{{session.speakers.length}}">
         <div class="sections-wrapper content">
-          <h4 class="block-title">Speakers</h4>
+          <h4 class="block-title">[[localize('speakers')]]</h4>
           <div class="sections">
             <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
               <div class="section">
-                <div class="section-photo" style="background-image: url([[speaker.photoUrl]])"></div>
+                <div class="section-photo" style$="background-image: url([[speaker.photoUrl]])"></div>
                 <div class="section-info">
                   <h3 class="section-title">[[speaker.name]]</h3>
                   <span class="section-sub-title">[[speaker.company]], [[speaker.country]]</span>
@@ -128,8 +129,7 @@
                   <truncate-marked-text text="[[speaker.bio]]" characters="220"
                                         break-last-word></truncate-marked-text>
 
-                  <a class="read-more" href$="/speakers/[[speaker.id]]" dialog-dismiss>Read
-                    more</a>
+                  <a class="read-more" href$="/speakers/[[speaker.id]]" dialog-dismiss>[[localize('read-more')]]</a>
                 </div>
               </div>
             </template>
@@ -155,7 +155,7 @@
         behaviors: [
           Polymer.PaperDialogBehavior,
           Polymer.NeonAnimationRunnerBehavior,
-          HOVERBOARD.ShareBehavior,
+          HOVERBOARD.AppLocalizeBehavior,
           HOVERBOARD.UtilsBehavior
         ],
 
@@ -195,6 +195,7 @@
             this.$.scrollHeaderPanel.scrollToTop(true);
             this.$.scrollHeaderPanel.notifyResize();
           });
+          HOVERBOARD.Analytics.trackEvent('session', 'open details', this.session.title);
         },
 
         _renderClosed: function () {
@@ -205,10 +206,10 @@
 
         _onNeonAnimationFinish: function () {
           if (this.opened) {
-//            Polymer.IronDropdownScrollManager.pushScrollLock(this);
+            Polymer.IronDropdownScrollManager.pushScrollLock(this.$.scrollHeaderPanel);
             this._finishRenderOpened();
           } else {
-//            Polymer.IronDropdownScrollManager.removeScrollLock(this);
+            Polymer.IronDropdownScrollManager.removeScrollLock(this.$.scrollHeaderPanel);
             this._finishRenderClosed();
           }
         }

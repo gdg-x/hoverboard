@@ -200,7 +200,7 @@
                             <div class="person-detail" flex>
                               <span class="speaker-name">[[speaker.name]]</span>
                               <div class="speaker-title">
-                                [[speaker.company]], [[speaker.country]]
+                                [[speaker.company]] / [[speaker.country]]
                               </div>
                             </div>
                           </div>
@@ -220,6 +220,7 @@
     </template>
 
     <session-details id="sessionDetails"
+                     app="{{app}}"
                      session="{{_selectedSession}}"
                      entry-animation="scale-up-animation"
                      exit-animation="fade-out-animation"

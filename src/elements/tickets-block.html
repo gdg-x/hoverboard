@@ -105,7 +105,7 @@
         },
 
         _trackBuyClick: function (e) {
-          ga('send', 'event', 'ticket', 'buy_click', e.currentTarget.href);
+          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', e.currentTarget.href);
         }
 
       });

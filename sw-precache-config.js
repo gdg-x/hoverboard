@@ -3,9 +3,10 @@ module.exports = {
     '/index.html',
     '/manifest.json',
     '/bower_components/webcomponentsjs/webcomponents-lite.min.js',
-    '/scripts/*',
-    '/images/*',
-    '/data/*'
+    '/src/**/*',
+    '/scripts/**/*',
+    '/images/**/*',
+    '/data/**/*'
   ],
   navigateFallback: '/index.html'
 };

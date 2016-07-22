@@ -298,6 +298,7 @@
           this.playAnimation('postLoaded');
           this.$.disqus.reset();
           this.postId = null;
+          HOVERBOARD.Analytics.trackEvent('blog', 'open post', this._post.title);
         },
 
         _onNeonAnimationFinish: function () {

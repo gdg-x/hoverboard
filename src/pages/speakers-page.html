@@ -72,7 +72,6 @@
 
       .photo {
         @apply(--layout-fit);
-        /*@apply(--img-circle);*/
       }
 
       .photo-overlay {
@@ -166,7 +165,8 @@
       }
 
       .company-logo {
-        margin-bottom: 10px;
+        margin: 0 auto 10px;
+        width: 110px;
         height: 25px;
       }
     </style>
@@ -179,7 +179,7 @@
       <template is="dom-repeat" items="[[_toArray(speakers)]]" as="speaker" on-dom-change="_updateCascadedNodes">
         <div class="speaker" cascaded>
           <paper-material class="card">
-            <div class="header">
+            <a href$="/speakers/[[speaker.id]]/" class="header">
               <iron-image src="[[speaker.photoUrl]]" class="photo placeholder-color" preload fade
                           sizing="cover"></iron-image>
               <div class="photo-overlay"></div>
@@ -193,9 +193,9 @@
               </ul>
               <div class="bottom-image-text">
                 <span class="name">[[speaker.name]]</span>
-                <span class="title">[[speaker.company]], [[speaker.country]]</span>
+                <span class="title">[[speaker.country]]</span>
               </div>
-            </div>
+            </a>
             <a href$="/speakers/[[speaker.id]]/" class="card-content">
               <iron-image class="company-logo" src="{{speaker.companyLogo}}" sizing="contain"></iron-image>
               <div class="tags">Skills:
@@ -222,10 +222,11 @@
     <footer-block app="{{app}}" cascaded></footer-block>
 
     <speaker-details id="speakerDetails"
+                     app="{{app}}"
                      speaker="{{_selectedSpeaker}}"
                      entry-animation="scale-up-animation"
                      exit-animation="fade-out-animation"
-                     with-backdrop></speaker-details>
+                     modal></speaker-details>
 
   </template>
 

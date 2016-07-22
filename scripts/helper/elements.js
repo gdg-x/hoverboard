@@ -19,42 +19,12 @@ HOVERBOARD.Elements = (function () {
 
   const ANALYTICS_LINK_ATTR = 'data-track-link';
 
-  // Called from critical.html when the bundle is loaded.
-  function onElementsBundleLoaded() {
-    var onPageSelect = function () {
-      document.body.removeEventListener('page-select', onPageSelect);
-
-      // Deep link into a subpage.
-      var selectedPageEl = HOVERBOARD.Elements.LazyPages.selectedPage;
-      var parsedUrl = HOVERBOARD.Router.parseUrl(window.location.href);
-      // Select page's default subpage tab if there's no deep link in the URL.
-      selectedPageEl.selectedSubpage = parsedUrl.subpage || selectedPageEl.selectedSubpage;
-
-      var subpage = document.querySelector(
-        '.subpage-' + selectedPageEl.selectedSubpage);
-
-      HOVERBOARD.PageAnimation.play(
-        HOVERBOARD.PageAnimation.pageFirstRender(subpage), function () {
-          // Let page know transitions are done.
-          HOVERBOARD.Elements.Template.fire('page-transition-done');
-          HOVERBOARD.ServiceWorkerRegistration.register();
-        }
-      );
-    };
-
-    if (HOVERBOARD.Elements && HOVERBOARD.Elements.LazyPages &&
-      HOVERBOARD.Elements.LazyPages.selectedPage) {
-      onPageSelect();
-    } else {
-      document.body.addEventListener('page-select', onPageSelect);
-    }
-  }
 
   function onDomBindStamp() {
     var template = document.getElementById('t');
-    var toast = document.getElementById('toast');
-
-    HOVERBOARD.Elements.Toast = toast;
+    // var toast = document.getElementById('toast');
+    //
+    // HOVERBOARD.Elements.Toast = toast;
     HOVERBOARD.Elements.ScrollContainer = window;
     HOVERBOARD.Elements.Scroller = document.documentElement;
   }
@@ -64,7 +34,6 @@ HOVERBOARD.Elements = (function () {
   }
 
   return {
-    init,
-    onElementsBundleLoaded
+    init
   };
 })();

@@ -5,7 +5,7 @@
         "name": "Mete Atamel",
         "title": "Developer Advocate",
         "company": "Google",
-        "companyLogo": "/images/companies/google.png",
+        "companyLogo": "/images/logos/google.svg",
         "country": "London, United Kingdom",
         "photoUrl": "/images/people/mete_atamel.jpg",
         "shortBio": "Mete is a Developer Advocate at Google, currently focused on helping developers with Google Cloud...",
@@ -16,7 +16,7 @@
             "gRPC"
         ],
         "badges": [
-            
+
         ],
         "socials": [
             {
@@ -42,7 +42,7 @@
         "name": "Yonatan Levin",
         "title": "Android Evangelist & Developer",
         "company": "Gett",
-        "companyLogo": "/images/companies/gett.png",
+        "companyLogo": "/images/logos/gett.png",
         "country": "Tel Aviv, Israel",
         "photoUrl": "/images/people/yonatan_levin.jpg",
         "shortBio": "Born with the spirit of an entrepreneur, Yonatan loves to create, build and just do fun stuff in...",
@@ -84,7 +84,7 @@
         "name": "Sascha Wolter",
         "title": "Senior Developer Evangelist Connected Home",
         "company": "Duetsche Telekom AG - Group Innovation+",
-        "companyLogo": "/images/companies/duetsche telekom ag - group innovation+.png",
+        "companyLogo": "/images/logos/duetsche telekom ag - group innovation+.png",
         "country": "Munich and Dusseldorf, Germany",
         "photoUrl": "/images/people/sascha_wolter.jpg",
         "shortBio": "UX enthusiast with passion for the IoT. Board member of the Usability & User Experience committee at the federal association BITKOM.",
@@ -95,7 +95,7 @@
             "Smart Home"
         ],
         "badges": [
-            
+
         ],
         "socials": [
             {
@@ -121,8 +121,8 @@
         "name": "Rustem Arzymbetov",
         "title": "Software Engineer",
         "company": "Google",
-        "companyLogo": "/images/companies/google.png",
-        "country": "Mountain View, United States",
+        "companyLogo": "/images/logos/google.svg",
+        "country": "San Francisco, United States",
         "photoUrl": "/images/people/rustem_arzymbetov.jpg",
         "shortBio": "Rustem is working at Google for last 8 years. Was in Search and Android teams. Big fan of perform...",
         "bio": "Rustem is working at Google for last 8 years. Was in Search and Android teams. Big fan of performance optimizations.",
@@ -132,7 +132,7 @@
             "TensorFlow"
         ],
         "badges": [
-            
+
         ],
         "socials": [
             {
@@ -148,7 +148,7 @@
         "name": "Adrian Kajda",
         "title": "Product Manager/Developer",
         "company": "Sygic",
-        "companyLogo": "/images/companies/sygic.png",
+        "companyLogo": "/images/logos/sygic.png",
         "country": "Opole, Poland",
         "photoUrl": "/images/people/adrian_kajda.jpg",
         "shortBio": "Creator of Fuelio app. Fuelio was his hooby project started in 2012. Three years later the app wa...",
@@ -158,7 +158,7 @@
             "Entrepreneurship"
         ],
         "badges": [
-            
+
         ],
         "socials": [
             {
@@ -174,7 +174,7 @@
         "name": "Gerard Sans",
         "title": "Technical Evangelist",
         "company": "AngularZone",
-        "companyLogo": "/images/companies/angularzone.png",
+        "companyLogo": "/images/logos/angularzone.png",
         "country": "London, United Kingdom",
         "photoUrl": "/images/people/gerard_sans.jpg",
         "shortBio": "Angular Google Developer Expert. International speaker and trainer.  Enjoy running AngularLabs London.",
@@ -210,7 +210,7 @@
         "name": "Jozef Vodicka",
         "title": "Developer Relations Program Manager",
         "company": "Google",
-        "companyLogo": "/images/companies/google.png",
+        "companyLogo": "/images/logos/google.svg",
         "country": "Prague, Czech Republic",
         "photoUrl": "/images/people/jozef_vodicka.jpg",
         "shortBio": "TEDx speaker, Slovak Forbes 30-under-30, IT auditor for AIESEC International & TOP 5 Student Entrepreneurs in Slovakia.",
@@ -220,7 +220,7 @@
             "Firebase"
         ],
         "badges": [
-            
+
         ],
         "socials": [
             {
@@ -251,7 +251,7 @@
         "name": "Mateusz Herych",
         "title": "Android Tech Lead",
         "company": "IG",
-        "companyLogo": "/images/companies/ig.png",
+        "companyLogo": "/images/logos/ig.png",
         "country": "Krakow, Poland",
         "photoUrl": "/images/people/mateusz_herych.jpg",
         "shortBio": "3x rockstar of DevFest Ukraine stage. Android GDE. Co-organizer of GDG Krakow.",
@@ -298,7 +298,7 @@
         "name": "David Mayboroda",
         "title": "Android Engineer",
         "company": "SoftServe",
-        "companyLogo": "/images/companies/softserve.png",
+        "companyLogo": "/images/logos/softserve.svg",
         "country": "Kyiv, Ukraine",
         "photoUrl": "/images/people/david_mayboroda.jpg",
         "shortBio": "Ex Yandex emproyee. Android enthusiast.",
@@ -308,7 +308,7 @@
             "Dagger 2"
         ],
         "badges": [
-            
+
         ],
         "socials": [
             {
@@ -329,7 +329,7 @@
         "name": "Konrad Dzwinel",
         "title": "Front-End Engineer",
         "company": "Brainly",
-        "companyLogo": "/images/companies/brainly.png",
+        "companyLogo": "/images/logos/brainly.png",
         "country": "Krakow, Poland",
         "photoUrl": "/images/people/konrad_dzwinel.jpg",
         "shortBio": "Fighting for 60FPS on Web. GDE on Web Technologies. Co-organizer of GDG Krakow.",
@@ -370,7 +370,7 @@
         "name": "Jean-Baptiste Clion",
         "title": "Founder",
         "company": "Apeser",
-        "companyLogo": "/images/companies/apeser.png",
+        "companyLogo": "/images/logos/apeser.png",
         "country": "Basel, Switzerland",
         "photoUrl": "/images/people/jean-baptiste_clion.jpg",
         "shortBio": "Founder and co-organiser of GDG Basel. Worked in Defence & Aeronautics, Finance & Consulting industries.",
@@ -416,7 +416,7 @@
         "name": "Paul Lammertsma",
         "title": "CTO",
         "company": "Pixplicity",
-        "companyLogo": "/images/companies/pixplicity.png",
+        "companyLogo": "/images/logos/pixplicity.png",
         "country": "Amsterdam, The Netherlands",
         "photoUrl": "/images/people/paul_lammertsma.jpg",
         "shortBio": "Paul is CTO and co-founder of Pixplicity, Holland's leading Android-specific consulting and app-b...",
@@ -452,7 +452,7 @@
         "name": "Aleksander Piotrowski",
         "title": "Code Monkey",
         "company": "Applause",
-        "companyLogo": "/images/companies/applause.png",
+        "companyLogo": "/images/logos/applause.png",
         "country": "Warsaw, Poland",
         "photoUrl": "/images/people/aleksander_piotrowski.jpg",
         "shortBio": "Became a mobile developer after long run as a backend developer. Because of age, holding senior p...",
@@ -462,7 +462,7 @@
             "Android N"
         ],
         "badges": [
-            
+
         ],
         "socials": [
             {
@@ -493,7 +493,7 @@
         "name": "Carmen Popovicu",
         "title": "Front-end Engineer",
         "company": "Widespread",
-        "companyLogo": "/images/companies/widespread.png",
+        "companyLogo": "/images/logos/widespread.png",
         "country": "Cluj-Napoca, Romania",
         "photoUrl": "/images/people/carmen_popovicu.jpg",
         "shortBio": "Angular JS committer. Founder of Dutch Angular JS Community, co-organizer of NG-NL.",
@@ -505,7 +505,7 @@
             "Protractor"
         ],
         "badges": [
-            
+
         ],
         "socials": [
             {
@@ -526,7 +526,7 @@
         "name": "Sergii Khomenko",
         "title": "Data Scientist",
         "company": "Stylight",
-        "companyLogo": "/images/companies/stylight.png",
+        "companyLogo": "/images/logos/stylight.png",
         "country": "Munich, Germany",
         "photoUrl": "/images/people/sergii_khomenko.jpg",
         "shortBio": "Data scientist at one of the biggest fashion communities, STYLIGHT. Data analysis and visualisati...",
@@ -537,7 +537,7 @@
             "Analytics"
         ],
         "badges": [
-            
+
         ],
         "socials": [
             {
@@ -553,7 +553,7 @@
         "name": "Jana Moudra",
         "title": "Co-Founder",
         "company": "Juicymo",
-        "companyLogo": "/images/companies/juicymo.png",
+        "companyLogo": "/images/logos/juicymo.png",
         "country": "Prague, Czech Republic",
         "photoUrl": "/images/people/jana_moudra.jpg",
         "shortBio": "GDG Prague organizer. Android and Dart enthusiast. Co-founder of a company called Juicymo.",
@@ -605,7 +605,7 @@
         "name": "Dmytro Danylyk",
         "title": "Senior Android Developer",
         "company": "Timee",
-        "companyLogo": "/images/companies/timee.png",
+        "companyLogo": "/images/logos/timee.png",
         "country": "Lviv, Ukraine",
         "photoUrl": "/images/people/dmytro_danylyk.jpg",
         "shortBio": "First Android GDE in Ukraine. Frequent speaker on tech conferences.",
@@ -658,7 +658,7 @@
         "name": "David V\u00e1vra",
         "title": "Founder/CEO/Android Lead",
         "company": "Step Up Labs",
-        "companyLogo": "/images/companies/step up labs.png",
+        "companyLogo": "/images/logos/step up labs.png",
         "country": "Prague, Czech Republic",
         "photoUrl": "/images/people/david_v\u00e1vra.jpg",
         "shortBio": "Founder and CEO of Step Up Labs. Android GDE.",
@@ -705,8 +705,8 @@
         "name": "Jakub \u0160kv\u00e1ra",
         "title": "Frontend engineer",
         "company": "Shipito",
-        "companyLogo": "/images/companies/shipito.png",
-        "country": "Prague, Czech Republic",
+        "companyLogo": "/images/logos/shipito.png",
+        "country": "Prague, Czech republic",
         "photoUrl": "/images/people/jakub_\u0161kv\u00e1ra.jpg",
         "shortBio": "Jakub is a front-end engineer at Shipito interested in modern web frameworks, libraries and tools...",
         "bio": "Jakub is a front-end engineer at Shipito interested in modern web frameworks, libraries and tools. Jakub is also a member of GDG Prague and GDG \u010cVUT in the Czech republic.",
@@ -744,7 +744,7 @@
         "name": "Sergiy Mokienko",
         "title": "Android Team Lead",
         "company": "Leverate",
-        "companyLogo": "/images/companies/leverate.png",
+        "companyLogo": "/images/logos/leverate.png",
         "country": "Kyiv,  Ukraine",
         "photoUrl": "/images/people/sergiy_mokienko.jpg",
         "shortBio": "Sergiy is an android developer that has experience from building apps from scratch to developing...",
@@ -784,7 +784,7 @@
         "name": "Valentyn Shybanov",
         "title": "Software Engineer/Country Manager",
         "company": "Wolters Kluwer",
-        "companyLogo": "/images/companies/wolters kluwer.png",
+        "companyLogo": "/images/logos/wolterskluwer.svg",
         "country": "Kyiv, Ukraine",
         "photoUrl": "/images/people/valentyn_shybanov.jpg",
         "shortBio": "Google Developer Expert on Cloud. Co-organizer of GDG Kyiv-Center.",
@@ -809,8 +809,8 @@
         ],
         "socials": [
             {
-                "icon": "website",
-                "name": "Website",
+                "icon": "gplus",
+                "name": "Google+",
                 "link": "https://google.com/+ValentynShybanov"
             },
             {
@@ -826,7 +826,7 @@
         "name": "Michael Pustovit",
         "title": "Senior Android Developer",
         "company": "Stanfy",
-        "companyLogo": "/images/companies/stanfy.png",
+        "companyLogo": "/images/logos/stanfy.png",
         "country": "Kyiv, Ukraine",
         "photoUrl": "/images/people/michael_pustovit.jpg",
         "shortBio": "Michael is a software engineer at Stanfy. He is KPI FICT Computer Science graduate and has 4+ yea...",
@@ -837,7 +837,7 @@
             "Security"
         ],
         "badges": [
-            
+
         ],
         "socials": [
             {
@@ -863,7 +863,7 @@
         "name": "Ihor Dvoretskyi",
         "title": "Deployment Engineer",
         "company": "Mirantis",
-        "companyLogo": "/images/companies/mirantis.png",
+        "companyLogo": "/images/logos/mirantis.svg",
         "country": "Lviv, Ukraine",
         "photoUrl": "/images/people/ihor_dvoretskyi.jpg",
         "shortBio": "OpenStack Foundation member, Kubernetes upstream contributor and OpenStack special interest group lead in Kubernetes Community.",
@@ -905,7 +905,7 @@
         "name": "Constantine Mars",
         "title": "Senior Android Developer",
         "company": "DataArt",
-        "companyLogo": "/images/companies/dataart.png",
+        "companyLogo": "/images/logos/dataart.svg",
         "country": "Dnipro, Ukraine",
         "photoUrl": "/images/people/constantine_mars.jpg",
         "shortBio": "Constantine is Senior Android Developer at DataArt and GDG Dnipro Organizer. He was speaker on De...",
@@ -937,7 +937,7 @@
         "name": "Anton  Minashkin",
         "title": "Lead Software Developer",
         "company": "EPAM",
-        "companyLogo": "/images/companies/epam.png",
+        "companyLogo": "/images/logos/epam.svg",
         "country": "Lviv, Ukraine",
         "photoUrl": "/images/people/anton_minashkin.jpg",
         "shortBio": "Android developer, currently works at EPAM. Have experience in both server and mobile side develo...",
@@ -948,7 +948,7 @@
             "ExoPlayer"
         ],
         "badges": [
-            
+
         ],
         "socials": [
             {
@@ -974,7 +974,7 @@
         "name": "Roman Herasymenko",
         "title": "CEO",
         "company": "Yamert",
-        "companyLogo": "/images/companies/yamert.png",
+        "companyLogo": "/images/logos/yamert.png",
         "country": "Dnipro, Ukraine",
         "photoUrl": "/images/people/roman_herasymenko.jpg",
         "shortBio": "Roman is Founder and CEO at Yamert and a co-organizer of GDG Dnipropetrovsk. Roman is interesting...",
@@ -1015,7 +1015,7 @@
         "name": "Resul Caner  Yildirim",
         "title": "User Experience Expert",
         "company": "InnovationBox",
-        "companyLogo": "/images/companies/innovationbox.png",
+        "companyLogo": "/images/logos/innovationbox.png",
         "country": "Istanbul, Turkey",
         "photoUrl": "/images/people/resul caner_yildirim.jpg",
         "shortBio": "Caner is a GDE on UX/UI who is also a technology geek. Mainly focused on the design and marketing...",

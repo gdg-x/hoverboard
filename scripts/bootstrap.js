@@ -89,9 +89,9 @@
   }
 
   window.addEventListener('offline', function () {
-    if (HOVERBOARD.Elements && HOVERBOARD.Elements.Toast) {
-      HOVERBOARD.Elements.Toast.showMessage(
-        'Offline. Changes you make to My Schedule will be saved for later.');
+    if (HOVERBOARD.Elements && HOVERBOARD.Elements.Template.$.toast) {
+      HOVERBOARD.Elements.Template.$.toast.showMessage(
+        'You can still work offline.');
     }
   });
 
