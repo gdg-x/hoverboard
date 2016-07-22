@@ -176,7 +176,7 @@
             <div class="link-block-title">[[localize('contact-us')]]</div>
             <ul class="link-block">
               <template is="dom-repeat" items="[[app.data.contactBlock.links]]" as="link">
-                <li><a href$="[[link.url]]" target="_blank">[[link.text]]</a></li>
+                <li><a href$="[[link.url]]" target="_getLinkTarget(link.newTab)">[[link.text]]</a></li>
               </template>
             </ul>
             <div class="icons-wrapper align-pb-block">
