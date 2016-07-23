@@ -77,13 +77,13 @@
       "permalink": "/speakers/"
     }
   ],
-  "url": "https://hoverboard.firebaseapp.com/",
+  "url": "https://devfest.gdg.org.ua/",
   "mailchimp": {
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
   },
   "partnershipProposition": "http://bit.ly/df16-sponsor",
-  "disqusShortName": "hoverboard-gdg-x",
+  "disqusShortName": "dfua2016",
   "languages": [
     {
       "name": "English",
@@ -147,8 +147,8 @@
   "contactBlock": {
     "links": [
       {
-        "text": "devfest@google.com",
-        "url": "mailto:devfest@google.com"
+        "text": "devfest@gdg.org.ua",
+        "url": "mailto:devfest@gdg.org.ua"
       }
     ]
   },
