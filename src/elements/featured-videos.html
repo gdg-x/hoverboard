@@ -162,6 +162,10 @@
           HOVERBOARD.UtilsBehavior
         ],
 
+        listeners: {
+          'track': '_onSwipe'
+        },
+
         properties: {
           _videos: Array,
           _selectedVideo: Object,
@@ -175,9 +179,37 @@
           '_videosChanged(app.videos)'
         ],
 
+
+        _onSwipe: function(event) {
+
+          let state = event.detail.state;
+
+          if (state === 'start') {
+            this._nodeWidth = event.currentTarget.offsetWidth;
+          } else if (state === 'end') {
+            this._trackEnd(event.detail);
+          }
+        },
+
+        _trackEnd: function(event) {
+
+          // The element is swiped away if it's moved halfway its total width.
+          this._swipeComplete = Math.abs(event.dx) > this._nodeWidth / 2;
+          this._direction = event.dx > 0;
+
+          if (this._swipeComplete) {
+            if (event.dx > 0) {
+              this.shiftContentLeft();
+            }
+            else  {
+              this.shiftContentRight();
+            }
+          }
+        },
+
         _videosChanged: function () {
           if (this.app.videos)
-          this._videos = this._randomOrder(this.app.videos).slice(0, 6);
+            this._videos = this._randomOrder(this.app.videos).slice(0, 6);
         },
 
         _playVideo: function (e) {
