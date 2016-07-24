@@ -289,9 +289,11 @@
         ],
 
         openSpeakerDetails: function (speakerId) {
-          if (speakerId) {
+          if (speakerId && this.speakers) {
             this._selectedSpeaker = this.speakers[speakerId];
-            this.$.speakerDetails.open();
+            if(this._selectedSpeaker) {
+              this.$.speakerDetails.open();
+            }
           }
         },
 
