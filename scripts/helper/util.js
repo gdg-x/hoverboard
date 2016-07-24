@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-window.HOVERBOARD = window.HOVERBOARD || {};
-
 /**
  * Log to console if not in production.
  * @param {...*} var_args
