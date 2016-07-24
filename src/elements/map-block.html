@@ -86,6 +86,14 @@
         will-change: background-image;
       }
 
+      .title-text {
+        padding: 16px;
+        position: absolute;
+        bottom: 0;
+        font-size: 24px;
+        color: #fff;
+      }
+
       .additional-space {
         display: none;
       }
@@ -109,7 +117,7 @@
     </style>
 
     <google-map zoom="[[app.data.location.pointer.zoom]]" latitude="[[app.data.location.mapCenter.latitude]]"
-                longitude="[[app.data.location.mapCenter.longitude]]" styles="[[options]]" disable-zoom
+                longitude="[[app.data.location.mapCenter.longitude]]" api-key="[[app.data.location.apiKey]]" styles="[[options]]" disable-zoom
                 disable-default-ui>
       <google-map-marker latitude="[[app.data.location.pointer.latitude]]"
                          longitude="[[app.data.location.pointer.longitude]]"></google-map-marker>
@@ -121,7 +129,7 @@
         <paper-card class="card">
           <div class="header paper-card">
             <div class="header-image" style$="background-image: url([[_currentImage]])"></div>
-            <div class="title-text over-image style-scope paper-card">[[localize('location-title')]]</div>
+            <div class="title-text">[[localize('location-title')]]</div>
           </div>
           <div class="paper-card-container">
             <div class="card-content list">

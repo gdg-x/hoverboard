@@ -238,6 +238,7 @@
     }
   },
   "location": {
+    "apiKey": "",
     "link": "https://www.facebook.com/expopivdennij",
     "pointer": {
       "latitude": 49.809841,
