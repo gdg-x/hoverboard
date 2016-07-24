@@ -784,7 +784,7 @@
         "name": "Valentyn Shybanov",
         "title": "Software Engineer/Country Manager",
         "company": "Wolters Kluwer",
-        "companyLogo": "/images/logos/wolterskluwer.svg",
+        "companyLogo": "/images/logos/wolters kluwer.svg",
         "country": "Kyiv, Ukraine",
         "photoUrl": "/images/people/valentyn_shybanov.jpg",
         "shortBio": "Google Developer Expert on Cloud. Co-organizer of GDG Kyiv-Center.",
@@ -811,7 +811,7 @@
             {
                 "icon": "gplus",
                 "name": "Google+",
-                "link": "https://google.com/+ValentynShybanov"
+                "link": "https://plus.google.com/+ValentynShybanov"
             },
             {
                 "icon": "website",
@@ -1017,7 +1017,7 @@
         "company": "InnovationBox",
         "companyLogo": "/images/logos/innovationbox.png",
         "country": "Istanbul, Turkey",
-        "photoUrl": "/images/people/resul_caner_yildirim.jpg",
+        "photoUrl": "/images/people/resul caner_yildirim.jpg",
         "shortBio": "Caner is a GDE on UX/UI who is also a technology geek. Mainly focused on the design and marketing...",
         "bio": "Caner is a GDE on UX/UI who is also a technology geek. Mainly focused on the design and marketing of mobile applications. Passionate about good UX, IoT and Android. He works at InnovationBox, a design agency in Istanbul making and creating apps that users love. Caner has been an organiser of GDG Istanbul since 2013, organising, participating, and speaking at events.",
         "tags": [
@@ -1063,6 +1063,32 @@
                 "icon": "linkedin",
                 "name": "LinkedIn",
                 "link": "https://linkedin.com/in/protechman"
+            }
+        ]
+    },
+    "37": {
+        "id": 37,
+        "featured": "false",
+        "name": "Dmytro Zaitsev",
+        "title": "Senior Android Developer",
+        "company": "Lohika Inc.",
+        "companyLogo": "/images/logos/lohika inc..svg",
+        "country": "Kyiv, Ukraine",
+        "photoUrl": "/images/people/dmytro_zaitsev.jpg",
+        "shortBio": "Dmytro is a Senior/Lead Mobile Developer at L\u00f3hika, specializing in developing Android apps. He l...",
+        "bio": "Dmytro is a Senior/Lead Mobile Developer at L\u00f3hika, specializing in developing Android apps. He loves learning new domains and creating big systems that are manageable and amenable to change. He's more than five years professionally engaged in developing mobile system-, multimedia-, business-, promo applications and social networks.",
+        "tags": [
+            "Android",
+            "Architecture"
+        ],
+        "badges": [
+            
+        ],
+        "socials": [
+            {
+                "icon": "facebook",
+                "name": "Facebook",
+                "link": "https://www.facebook.com/profile.php?id=1395787678"
             }
         ]
     }
