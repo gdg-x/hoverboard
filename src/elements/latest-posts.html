@@ -94,8 +94,8 @@
         },
 
         _postsChanged: function () {
-          let temp = this.posts.slice(0, 2);
-          for (let i = 0, len = temp.length; i < len; i++) {
+          var temp = this.posts.slice(0, 2);
+          for (var i = 0, len = temp.length; i < len; i++) {
             temp[i].url = '/blog/posts/' + temp[i].id + '/';
           }
           this._posts = temp;

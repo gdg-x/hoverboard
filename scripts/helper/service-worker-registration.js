@@ -18,12 +18,12 @@ HOVERBOARD.ServiceWorkerRegistration = (function () {
   'use strict';
 
   // Ensure we only attempt to register the SW once.
-  let isAlreadyRegistered = false;
+  var isAlreadyRegistered = false;
 
-  const URL = 'service-worker.js';
-  const SCOPE = './';
+  var URL = 'service-worker.js';
+  var SCOPE = './';
 
-  const register = function () {
+  var register = function () {
     if (!isAlreadyRegistered) {
       isAlreadyRegistered = true;
 
@@ -34,7 +34,7 @@ HOVERBOARD.ServiceWorkerRegistration = (function () {
           registration.onupdatefound = function () {
             // The updatefound event implies that registration.installing is set; see
             // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-container-updatefound-event
-            const installingWorker = registration.installing;
+            var installingWorker = registration.installing;
 
             installingWorker.onstatechange = function () {
               switch (installingWorker.state) {
@@ -65,7 +65,7 @@ HOVERBOARD.ServiceWorkerRegistration = (function () {
       if (event.target.state === 'redundant') {
         // Define a handler that will be used for the next io-toast tap, at which point it
         // be automatically removed.
-        const tapHandler = function () {
+        var tapHandler = function () {
           window.location.reload();
         };
 

@@ -33,7 +33,7 @@
       }
     </style>
     <div class="post-meta">
-      <a class="post-link" href="[[canonicalUrl]][[author]]" target="_blank">[[sign]][[author]]</a>
+      <a class="post-link" href$="[[canonicalUrl]][[author]]" target="_blank">[[sign]][[author]]</a>
       <time is="time-ago" datetime$="[[when]]"></time>
     </div>
     <div id="postContent" class="post-content"></div>
@@ -58,9 +58,15 @@
             observer: '_textChanged',
             value: 'Post about your experience at GDG DevFest Ukraine 2016'
           },
-          when: Date,
-          canonicalUrl: String,
-          sign: String
+          when: {
+            type: Date
+          },
+          canonicalUrl: {
+            type: String
+          },
+          sign: {
+            type: String
+          }
         },
 
         _textChanged: function () {

@@ -82,7 +82,7 @@
 
         routeChange() {
           if(this.pageData && this.pageData.page === this.$.pages.selected) {
-            let tempSelection = this.$.pages.selected;
+            var tempSelection = this.$.pages.selected;
             this.$.pages.select(null);
             this.$.pages.select(tempSelection);
             if(this.$.pages.selectedItem){

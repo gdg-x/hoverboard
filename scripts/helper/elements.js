@@ -17,9 +17,6 @@
 HOVERBOARD.Elements = (function () {
   'use strict';
 
-  const ANALYTICS_LINK_ATTR = 'data-track-link';
-
-
   function onDomBindStamp() {
     var template = document.getElementById('t');
     // var toast = document.getElementById('toast');
