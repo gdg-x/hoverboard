@@ -201,13 +201,13 @@ HOVERBOARD.Util = HOVERBOARD.Util || (function () {
      * Returns the first paint metric (if available).
      * @return {number} The first paint time in ms.
      */
-    const getFPIfSupported = function () {
+    var getFPIfSupported = function () {
       if (window.chrome && window.chrome.loadTimes) {
-        let load = window.chrome.loadTimes();
-        let fp = (load.firstPaintTime - load.startLoadTime) * 1000;
+        var load = window.chrome.loadTimes();
+        var fp = (load.firstPaintTime - load.startLoadTime) * 1000;
         return Math.round(fp);
       } else if ('performance' in window) {
-        let navTiming = window.performance.timing;
+        var navTiming = window.performance.timing;
         // See http://msdn.microsoft.com/ff974719
         if (navTiming && navTiming.msFirstPaint && navTiming.navigationStart !== 0) {
           // See http://msdn.microsoft.com/ff974719
@@ -237,7 +237,7 @@ HOVERBOARD.Util = HOVERBOARD.Util || (function () {
     };
 
     var extend = function (obj1, obj2) {
-      if(!obj1) obj1 = {};
+      if (!obj1) obj1 = {};
       for (var i in obj2) {
         if (obj2.hasOwnProperty(i)) {
           obj1[i] = obj2[i];

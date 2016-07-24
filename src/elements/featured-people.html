@@ -131,7 +131,7 @@
         },
 
         _peopleChanged: function () {
-          let people = this._toArray(this.people),
+          var people = this._toArray(this.people),
             filteredPeople = [];
           for (var i = 0; i < people.length; i++) {
             if (people[i].featured) {

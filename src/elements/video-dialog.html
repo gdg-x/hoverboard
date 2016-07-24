@@ -49,7 +49,7 @@
 
     <paper-toolbar class="toolbar">
       <paper-icon-button icon="icons:arrow-back" on-tap="close"></paper-icon-button>
-      <span>[[title]]</span>
+      <span>[[videoTitle]]</span>
     </paper-toolbar>
     <div class="video-wrapper">
       <google-youtube id="video" class="video" video-id="[[youtubeId]]" width="100%" height="100%"
@@ -72,7 +72,9 @@
         ],
 
         properties: {
-          title: String,
+          videoTitle: {
+            type: String
+          },
           youtubeId: String,
           disableControls: {
             type: Boolean,
