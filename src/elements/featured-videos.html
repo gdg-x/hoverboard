@@ -93,7 +93,7 @@
       .block-link {
         margin-top: 25px;
         display: block;
-        color: inherit;
+        color: var(--text-primary-color);
         font-size: .9em;
       }
 
@@ -167,9 +167,9 @@
           HOVERBOARD.UtilsBehavior
         ],
 
-        listeners: {
-          'track': '_onSwipe'
-        },
+//        listeners: {
+//          'track': '_onSwipe'
+//        },
 
         properties: {
           _videos: Array,
@@ -187,7 +187,7 @@
 
         _onSwipe: function(event) {
 
-          let state = event.detail.state;
+          var state = event.detail.state;
 
           if (state === 'start') {
             this._nodeWidth = event.currentTarget.offsetWidth;
