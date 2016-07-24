@@ -173,7 +173,7 @@
 
     <app-route route="{{route}}"
                pattern="/:id"
-               data="{{speakerData}}"></app-route>
+               data="{{speakerRouteData}}"></app-route>
 
     <div class="container speakers-container">
       <template is="dom-repeat" items="[[_toArray(speakers)]]" as="speaker" on-dom-change="_updateCascadedNodes">
@@ -244,8 +244,15 @@
         ],
 
         properties: {
-          app: Object,
-          route: Object,
+          app: {
+            type: Object
+          },
+          route: {
+            type: Object
+          },
+          speakerRouteData: {
+            type: Object
+          },
           speakers: {
             type: Object
           },
@@ -278,13 +285,15 @@
         },
 
         observers: [
-          'openSpeakerDetails(speakerData.id)'
+          'openSpeakerDetails(speakerRouteData.id)'
         ],
 
         openSpeakerDetails: function (speakerId) {
-          if (speakerId) {
+          if (speakerId && this.speakers) {
             this._selectedSpeaker = this.speakers[speakerId];
-            this.$.speakerDetails.open();
+            if(this._selectedSpeaker) {
+              this.$.speakerDetails.open();
+            }
           }
         },
 

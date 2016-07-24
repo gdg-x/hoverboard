@@ -46,10 +46,10 @@
     </style>
 
     <div class="container container-narrow">
-      <h4 class="heading">[[localize('action-title')]]</h4>
+      <h4 class="heading">[[localize(app.data.callToAction.videoTitle)]]</h4>
       <paper-button class="open-dialog-button" on-tap="playVideo">[[localize('action')]]</paper-button>
     </div>
-    <video-dialog id="videoDialog" title="[[app.data.callToAction.videoTitle]]" youtube-id="[[app.data.callToAction.videoId]]"
+    <video-dialog id="videoDialog" video-title="[[localize(app.data.callToAction.videoTitle)]]" youtube-id="[[app.data.callToAction.videoId]]"
                   entry-animation="scale-up-animation"
                   exit-animation="scale-down-animation" modal disable-controls></video-dialog>
 

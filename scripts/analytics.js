@@ -36,7 +36,6 @@ HOVERBOARD.Analytics = HOVERBOARD.Analytics || (function (exports) {
       this.trackPerfEvent('WebComponentsReady', 'Polymer');
 
       this.trackOnlineStatus();
-      this.trackNotificationPermission();
       this.trackServiceWorkerControlled();
 
       var matches = exports.location.search.match(/utm_error=([^&]+)/);
@@ -80,9 +79,9 @@ HOVERBOARD.Analytics = HOVERBOARD.Analytics || (function (exports) {
      * dimension requested.
      */
     Analytics.prototype.setTrackerDefaults = function () {
-      Object.keys(this.customDimensions).forEach(key => {
+      Object.keys(this.customDimensions).forEach(function (key) {
         ga('set', this.customDimensions[key], this.NULL_DIMENSION);
-      });
+      }.bind(this));
     };
 
     /**
@@ -101,13 +100,13 @@ HOVERBOARD.Analytics = HOVERBOARD.Analytics || (function (exports) {
       // timeout so the promise always resolves. In such cases, some hits
       // will be sent with missing custom dimension values, but that's better
       // than them not being sent at all.
-      setTimeout(() => {
+      setTimeout(function() {
         this.readyState_.resolve();
 
         // Tracks that this happened and when it happened.
         this.trackEvent('analytics', 'timeout', this.READY_STATE_TIMEOUT_,
           window.performance && Math.round(window.performance.now()));
-      }, this.READY_STATE_TIMEOUT_);
+      }.bind(this), this.READY_STATE_TIMEOUT_);
     };
 
     /**
@@ -119,11 +118,12 @@ HOVERBOARD.Analytics = HOVERBOARD.Analytics || (function (exports) {
      * @param {value} value The field's value.
      */
     Analytics.prototype.updateTracker = function (field, value) {
-      ga(tracker => {
+      ga(function(tracker) {
         ga('set', field, value); // Use the command queue for easier debugging.
         var requiredDimensionKeys = Object.keys(this.requiredDimensions);
-        var hasAllRequiredDimensions = requiredDimensionKeys.every(key =>
-        tracker.get(this.requiredDimensions[key]) !== this.NULL_DIMENSION);
+        var hasAllRequiredDimensions = requiredDimensionKeys.every(function (key) {
+          tracker.get(this.requiredDimensions[key]) !== this.NULL_DIMENSION;
+        }.bind(this));
 
         if (hasAllRequiredDimensions) {
           this.readyState_.resolve();
@@ -168,7 +168,7 @@ HOVERBOARD.Analytics = HOVERBOARD.Analytics || (function (exports) {
      * @param {object=} opt_obj Optional field object for additional params to send to GA.
      */
     Analytics.prototype.trackPerf = function (category, variable, time, opt_label, opt_maxTime, opt_obj) {
-      this.waitForTrackerReady().then(() => {
+      this.waitForTrackerReady().then(function() {
         if (opt_maxTime !== null && time > opt_maxTime) {
           variable += ' - outliers';
         }
@@ -200,7 +200,7 @@ HOVERBOARD.Analytics = HOVERBOARD.Analytics || (function (exports) {
      *                   hit is recorded.
      */
     Analytics.prototype.trackEvent = function (category, action, opt_label, opt_value, opt_callback) {
-      this.waitForTrackerReady().then(() => {
+      this.waitForTrackerReady().then(function() {
         ga('send', {
           hitType: 'event',
           eventCategory: category,
@@ -209,7 +209,7 @@ HOVERBOARD.Analytics = HOVERBOARD.Analytics || (function (exports) {
           eventValue: opt_value,
           hitCallback: opt_callback
         });
-      });
+      }.bind(this));
     };
 
     /**
@@ -312,36 +312,13 @@ HOVERBOARD.Analytics = HOVERBOARD.Analytics || (function (exports) {
     Analytics.prototype.trackOnlineStatus = function () {
       this.updateTracker(this.customDimensions.ONLINE, navigator.onLine);
 
-      var updateOnlineStatus = event => {
+      var updateOnlineStatus = function (event) {
         this.updateTracker(this.customDimensions.ONLINE, navigator.onLine);
         this.trackEvent('network', 'change', event.type);
-      };
+      }.bind(this);
 
       window.addEventListener('online', updateOnlineStatus);
       window.addEventListener('offline', updateOnlineStatus);
-    };
-
-    /**
-     * Sets up tracking for notification permissions.
-     * Tracks the current notification state at startup, and for browsers that support the
-     * Permissions API, tracks changes to the notification state as well.
-     */
-    Analytics.prototype.trackNotificationPermission = function () {
-      var notificationPermission = this.getNotificationPermission();
-      this.updateTracker(this.customDimensions.NOTIFICATION_PERMISSION,
-        notificationPermission);
-
-      this.trackEvent('notifications', 'startup', notificationPermission);
-
-      if (navigator.permissions) {
-        navigator.permissions.query({name: 'notifications'}).then(p => {
-          p.onchange = event => {
-            this.updateTracker(this.customDimensions.NOTIFICATION_PERMISSION,
-              this.getNotificationPermission());
-            this.trackEvent('notifications', 'change', event.target.state);
-          };
-        });
-      }
     };
 
     /**

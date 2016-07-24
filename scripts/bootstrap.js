@@ -15,13 +15,16 @@
  */
 
 (function () {
+  'use strict';
+
   var PROMISE_REJECTION_LOGGING_DELAY = 10 * 1000; // 10s
   var logRejectionTimeoutId;
   var unhandledRejections = [];
 
   function logRejectedPromises() {
-    unhandledRejections.forEach(({reason}) =>
-      HOVERBOARD.Analytics.trackError('UnhandledPromiseRejection', reason));
+    unhandledRejections.forEach(function (reason) {
+      HOVERBOARD.Analytics.trackError('UnhandledPromiseRejection', reason);
+    });
 
     unhandledRejections = [];
     logRejectionTimeoutId = null;
@@ -44,13 +47,15 @@
     debugLog('rejectionhandled fired: ' + event.reason);
 
     // If a previously rejected promise is handled, remove it from the list.
-    unhandledRejections = unhandledRejections.filter(rejection =>
-    rejection.promise !== event.promise);
+    unhandledRejections = unhandledRejections.filter(function (rejection) {
+      rejection.promise !== event.promise;
+    });
   });
 
 
-  function lazyLoadWCPolyfillsIfNecessary(callback = null) {
-    const onload = function () {
+  function lazyLoadWCPolyfillsIfNecessary(callback) {
+    callback = callback || null;
+    var onload = function () {
       // For native Imports, manually fire WCR so user code
       // can use the same code path for native and polyfill'd imports.
       if (!window.HTMLImports) {
@@ -113,7 +118,7 @@
     // browsers. In Chrome, lazyLoadWCPolyfillsIfNecessary is effectively not
     // async. It's a noop and its callback gets invoked right away. Therefore,
     // this shouldn't slow anything down.
-    lazyLoadWCPolyfillsIfNecessary(function() {
+    lazyLoadWCPolyfillsIfNecessary(function () {
       HOVERBOARD.Elements.init();
     });
   }

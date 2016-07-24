@@ -8,7 +8,7 @@
 
       _getIndexByProperty: function (array, property, value) {
         if (array) {
-          for (let i = 0, length = array.length; i < length; i++) {
+          for (var i = 0, length = array.length; i < length; i++) {
             if (array[i][property].toString() === value.toString()) {
               return i;
             }

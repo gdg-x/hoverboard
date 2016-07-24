@@ -17,18 +17,6 @@
 HOVERBOARD.Elements = (function () {
   'use strict';
 
-  const ANALYTICS_LINK_ATTR = 'data-track-link';
-
-
-  function onDomBindStamp() {
-    var template = document.getElementById('t');
-    // var toast = document.getElementById('toast');
-    //
-    // HOVERBOARD.Elements.Toast = toast;
-    HOVERBOARD.Elements.ScrollContainer = window;
-    HOVERBOARD.Elements.Scroller = document.documentElement;
-  }
-
   function init() {
     HOVERBOARD.Elements.Template = document.getElementById('happ');
   }
@@ -36,4 +24,4 @@ HOVERBOARD.Elements = (function () {
   return {
     init
   };
-})();
+}());
