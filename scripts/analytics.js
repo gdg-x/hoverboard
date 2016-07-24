@@ -123,7 +123,7 @@ HOVERBOARD.Analytics = HOVERBOARD.Analytics || (function (exports) {
         var requiredDimensionKeys = Object.keys(this.requiredDimensions);
         var hasAllRequiredDimensions = requiredDimensionKeys.every(function (key) {
           tracker.get(this.requiredDimensions[key]) !== this.NULL_DIMENSION;
-        });
+        }.bind(this));
 
         if (hasAllRequiredDimensions) {
           this.readyState_.resolve();
@@ -209,7 +209,7 @@ HOVERBOARD.Analytics = HOVERBOARD.Analytics || (function (exports) {
           eventValue: opt_value,
           hitCallback: opt_callback
         });
-      });
+      }.bind(this));
     };
 
     /**

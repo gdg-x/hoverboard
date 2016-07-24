@@ -30,6 +30,10 @@
         @apply(--layout-justified);
       }
 
+      .heading {
+        line-height: 1.3;
+      }
+
       .controls {
         margin-bottom: 10px;
       }
@@ -137,7 +141,7 @@
           </div>
         </template>
       </div>
-      <div>
+      <div layout>
         <a href="[[app.data.videosSessionsUrl]]" class="block-link" target="_blank">
           <paper-button>[[localize('featured-videos-view-all')]]</paper-button>
         </a>
