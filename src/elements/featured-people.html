@@ -94,7 +94,7 @@
       <div class="people-wrapper">
         <template is="dom-repeat" items="[[featuredPeople]]" as="person">
           <a href="/speakers/[[person.id]]" class="person">
-            <div class="photo" style="background-image: url([[person.photoUrl]])"></div>
+            <iron-image class="photo" src="[[person.photoUrl]]" sizing="cover"></iron-image>
             <iron-image class="company-logo" src="{{person.companyLogo}}" sizing="contain"></iron-image>
             <h4 class="name">[[person.name]]</h4>
             <span class="company">[[person.country]]</span>

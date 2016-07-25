@@ -180,9 +180,10 @@
 
         _sessionChanged: function () {
           var generatedClass = this._generateClass(this.session.mainTag);
-          this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + generatedClass + ')';
+          var dialogColor = this.getComputedStyleValue('--' + generatedClass) || this.getComputedStyleValue('--general');
+          this.customStyle['--paper-scroll-header-panel-color'] = dialogColor;
           this._previousBrowserColor = document.getElementsByName('theme-color')[0].content;
-          document.getElementsByName('theme-color')[0].content = this.getComputedStyleValue('--' + generatedClass);
+          document.getElementsByName('theme-color')[0].content = dialogColor;
           this.updateStyles();
         },
 

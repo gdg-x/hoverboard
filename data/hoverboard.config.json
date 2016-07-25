@@ -99,10 +99,6 @@
       "title": "for-visitors",
       "links": [
         {
-          "text": "team",
-          "url": "/team/"
-        },
-        {
           "text": "cod",
           "url": "/cod/"
         },
@@ -146,6 +142,10 @@
   ],
   "contactBlock": {
     "links": [
+      {
+        "text": "Team",
+        "url": "/team/"
+      },
       {
         "text": "devfest@gdg.org.ua",
         "url": "mailto:devfest@gdg.org.ua"
