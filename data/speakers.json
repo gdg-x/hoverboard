@@ -1069,32 +1069,32 @@
     "38": {
         "id": 38,
         "featured": "false",
-        "name": "Dima Maleev",
-        "title": "Director",
-        "company": "Lviv Code School",
-        "companyLogo": "/images/logos/lviv code school.png",
+        "name": "Professor Fortran",
+        "title": "",
+        "company": "Podcast",
+        "companyLogo": "/images/logos/youtube.png",
         "country": "Lviv, Ukraine",
-        "photoUrl": "/images/people/dima_maleev.jpg",
-        "shortBio": "Dima is a developer for about 10 years, making his way from junior to technical architect and man...",
-        "bio": "Dima is a developer for about 10 years, making his way from junior to technical architect and manager of complex mobile solutions. In the past .NET developer, ex-leader of \"Lviv .NET User Group\" and one of the organizers of the \"Oh, Mobile!\" community. A fan of mobile technology and javascript. Makes fun talks all around the world and plays american football:)",
+        "photoUrl": "/images/people/professor_fortran.jpg",
+        "shortBio": "Professor Fortran is podcast about tech news and IT prepared in an easy and caual way. Check YouT...",
+        "bio": "Professor Fortran is podcast about tech news and IT prepared in an easy and caual way. Check YouTube channel to learn more.",
         "tags": [
-            "JavaScript",
-            "Android",
-            "iOS"
+            "IT",
+            "News",
+            "Podcast"
         ],
         "badges": [
             
         ],
         "socials": [
             {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/dimko1"
+                "icon": "website",
+                "name": "Website",
+                "link": "https://www.youtube.com/channel/UCciDRJ4WVVjB-JtvGdRUm1Q"
             },
             {
-                "icon": "github",
-                "name": "GitHub",
-                "link": "https://github.com/dimko1"
+                "icon": "facebook",
+                "name": "Facebook",
+                "link": "https://www.facebook.com/fortranforthewin/"
             }
         ]
     },
