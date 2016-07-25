@@ -1,4 +1,18 @@
 {
+    "141": {
+        "id": 141,
+        "title": "Podcast Recording",
+        "description": "Our friends from Professor Fortran Videocast decided to record a session at the DevFest Ukraine. Wait for a casual conversation with our speakers about IT. More details comming soon...",
+        "speakers": [
+            38
+        ],
+        "language": "English",
+        "complexity": "Beginner",
+        "image": "/images/backgrounds/professor_fortran.jpg",
+        "tags": [
+            "IT"
+        ]
+    },
     "140": {
         "id": 140,
         "title": "TBD",

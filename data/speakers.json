@@ -1066,6 +1066,38 @@
             }
         ]
     },
+    "38": {
+        "id": 38,
+        "featured": "false",
+        "name": "Professor Fortran",
+        "title": "",
+        "company": "Podcast",
+        "companyLogo": "/images/logos/youtube.png",
+        "country": "Lviv, Ukraine",
+        "photoUrl": "/images/people/professor_fortran.jpg",
+        "shortBio": "Professor Fortran is podcast about tech news and IT prepared in an easy and caual way. Check YouT...",
+        "bio": "Professor Fortran is podcast about tech news and IT prepared in an easy and caual way. Check YouTube channel to learn more.",
+        "tags": [
+            "IT",
+            "News",
+            "Podcast"
+        ],
+        "badges": [
+            
+        ],
+        "socials": [
+            {
+                "icon": "website",
+                "name": "Website",
+                "link": "https://www.youtube.com/channel/UCciDRJ4WVVjB-JtvGdRUm1Q"
+            },
+            {
+                "icon": "facebook",
+                "name": "Facebook",
+                "link": "https://www.facebook.com/fortranforthewin/"
+            }
+        ]
+    },
     "37": {
         "id": 37,
         "featured": "false",
