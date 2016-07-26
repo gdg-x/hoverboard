@@ -134,9 +134,10 @@
 
         _speakerChanged: function () {
           var generatedClass = this._generateClass(this.speaker.tags[0]);
-          this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + generatedClass + ')';
+          var dialogColor = this.getComputedStyleValue('--' + generatedClass) || this.getComputedStyleValue('--general');
+          this.customStyle['--paper-scroll-header-panel-color'] = dialogColor;
           this._previousBrowserColor = document.getElementsByName('theme-color')[0].content;
-          document.getElementsByName('theme-color')[0].content = this.getComputedStyleValue('--' + generatedClass);
+          document.getElementsByName('theme-color')[0].content = dialogColor;
 
           if (this.app.isPhoneSize) {
             this.$.scrollHeaderPanel.$.headerBg.style.background = 'linear-gradient(to top, rgba(0, 0, 0, 0.4) -10%, rgba(0, 0, 0, 0.1) 50%), url(' + this.speaker.photoUrl + ') 0 / cover no-repeat';
