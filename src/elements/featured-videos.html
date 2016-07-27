@@ -185,12 +185,13 @@
           this.dist = 0;
           this.startX = touchObj.pageX;
           this.startY = touchObj.pageY;
+          this.nodeWidth = e.currentTarget.offsetWidth;
         },
 
         _onTouchEnd: function(e) {
 
           //required min distance traveled to be considered swipe
-          this.threshold = 150;
+          this.threshold = this.nodeWidth / 4;
           // maximum distance allowed at the same time in perpendicular direction
           this.restraint = 100;
           var touchObj = e.changedTouches[0]
