@@ -36,7 +36,6 @@ HOVERBOARD.Analytics = HOVERBOARD.Analytics || (function (exports) {
       this.trackPerfEvent('WebComponentsReady', 'Polymer');
 
       this.trackOnlineStatus();
-      this.trackNotificationPermission();
       this.trackServiceWorkerControlled();
 
       var matches = exports.location.search.match(/utm_error=([^&]+)/);
@@ -124,7 +123,7 @@ HOVERBOARD.Analytics = HOVERBOARD.Analytics || (function (exports) {
         var requiredDimensionKeys = Object.keys(this.requiredDimensions);
         var hasAllRequiredDimensions = requiredDimensionKeys.every(function (key) {
           tracker.get(this.requiredDimensions[key]) !== this.NULL_DIMENSION;
-        });
+        }.bind(this));
 
         if (hasAllRequiredDimensions) {
           this.readyState_.resolve();
@@ -210,7 +209,7 @@ HOVERBOARD.Analytics = HOVERBOARD.Analytics || (function (exports) {
           eventValue: opt_value,
           hitCallback: opt_callback
         });
-      });
+      }.bind(this));
     };
 
     /**
@@ -320,29 +319,6 @@ HOVERBOARD.Analytics = HOVERBOARD.Analytics || (function (exports) {
 
       window.addEventListener('online', updateOnlineStatus);
       window.addEventListener('offline', updateOnlineStatus);
-    };
-
-    /**
-     * Sets up tracking for notification permissions.
-     * Tracks the current notification state at startup, and for browsers that support the
-     * Permissions API, tracks changes to the notification state as well.
-     */
-    Analytics.prototype.trackNotificationPermission = function () {
-      var notificationPermission = this.getNotificationPermission();
-      this.updateTracker(this.customDimensions.NOTIFICATION_PERMISSION,
-        notificationPermission);
-
-      this.trackEvent('notifications', 'startup', notificationPermission);
-
-      if (navigator.permissions) {
-        navigator.permissions.query({name: 'notifications'}).then(function(p) {
-          p.onchange = function (event) {
-            this.updateTracker(this.customDimensions.NOTIFICATION_PERMISSION,
-              this.getNotificationPermission());
-            this.trackEvent('notifications', 'change', event.target.state);
-          }.bind(this);
-        });
-      }
     };
 
     /**

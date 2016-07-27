@@ -17,15 +17,6 @@
 HOVERBOARD.Elements = (function () {
   'use strict';
 
-  function onDomBindStamp() {
-    var template = document.getElementById('t');
-    // var toast = document.getElementById('toast');
-    //
-    // HOVERBOARD.Elements.Toast = toast;
-    HOVERBOARD.Elements.ScrollContainer = window;
-    HOVERBOARD.Elements.Scroller = document.documentElement;
-  }
-
   function init() {
     HOVERBOARD.Elements.Template = document.getElementById('happ');
   }
@@ -33,4 +24,4 @@ HOVERBOARD.Elements = (function () {
   return {
     init
   };
-})();
+}());
