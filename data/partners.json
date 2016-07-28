@@ -53,6 +53,11 @@
         "name": "DataArt",
         "url": "http://dataart.ua/",
         "logoUrl": "/images/logos/dataart.svg"
+      },
+      {
+        "name": "Zalando",
+        "url": "https://tech.zalando.de/",
+        "logoUrl": "/images/logos/zalando.svg"
       }
     ]
   },
