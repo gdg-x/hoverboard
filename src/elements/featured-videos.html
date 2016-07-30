@@ -168,7 +168,8 @@
         ],
 
         listeners: {
-          'track': '_onSwipe'
+          'touchstart': '_onTouchStart',
+          'touchend': '_onTouchEnd'
         },
 
         properties: {
@@ -184,26 +185,28 @@
           '_videosChanged(app.videos)'
         ],
 
-
-        _onSwipe: function(event) {
-
-          let state = event.detail.state;
-
-          if (state === 'start') {
-            this._nodeWidth = event.currentTarget.offsetWidth;
-          } else if (state === 'end') {
-            this._trackEnd(event.detail);
-          }
+        _onTouchStart: function(e) {
+          var touchObj = e.changedTouches[0]
+          this.dist = 0;
+          this.startX = touchObj.pageX;
+          this.startY = touchObj.pageY;
+          this.nodeWidth = e.currentTarget.offsetWidth;
         },
 
-        _trackEnd: function(event) {
+        _onTouchEnd: function(e) {
 
-          // The element is swiped away if it's moved halfway its total width.
-          this._swipeComplete = Math.abs(event.dx) > this._nodeWidth / 2;
-          this._direction = event.dx > 0;
+          //required min distance traveled to be considered swipe
+          this.threshold = this.nodeWidth / 4;
+          // maximum distance allowed at the same time in perpendicular direction
+          this.restraint = 100;
+          var touchObj = e.changedTouches[0]
+          // get horizontal dist traveled by finger while in contact with surface;
+          this.distX = touchObj.pageX - this.startX;
+          // get vertical dist traveled by finger while in contact with surface
+          this.distY = touchObj.pageY - this.startY;
 
-          if (this._swipeComplete) {
-            if (event.dx > 0) {
+          if (Math.abs(this.distX) >= this.threshold && Math.abs(this.distY) <= this.restraint){
+            if (this.distX > 0) {
               this.shiftContentLeft();
             }
             else  {
