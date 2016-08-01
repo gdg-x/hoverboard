@@ -216,6 +216,7 @@ Going to use template? Go on! The only thing we ask - let us know at [lviv@gdg.o
 | [GDG Cáceres CodeWeek 2015](http://codeweek.gdgcaceres.es) |
 | [GDG Bingham University Website](http://bhu.gdg.ng) |
 | [Google I/O Extended 2016 Kuala Lumpur](https://ioxkl2016.firebaseapp.com) |
+| [GDG DevFest Hamburg 2016](https://hamburg.devfest.de) |
 
 
 ## Roadmap
