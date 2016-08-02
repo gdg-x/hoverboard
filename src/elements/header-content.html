@@ -61,6 +61,10 @@
         margin: 0;
       }
 
+      .page-subtitle {
+        font-size: 16px;
+      }
+
       .home-wrapper {
         width: 100%;
         font-size: 18px;
@@ -141,8 +145,9 @@
         </animatable-content>
         <animatable-content name="blog">
           <div class="container">
-            <h3 class="page-title" hidden$="{{app.headerSettings.headerTitle}}">{{localize('blog')}}</h3>
-            <h3 class="page-title" hidden$="{{!app.headerSettings.headerTitle}}">[[app.headerSettings.headerTitle]]</h3>
+            <h3 class="page-title" hidden$="{{app.headerSettings.title}}">{{localize('blog')}}</h3>
+            <h3 class="page-title" hidden$="{{!app.headerSettings.title}}">[[app.headerSettings.title]]</h3>
+            <div class="page-subtitle" hidden$="{{!app.headerSettings.subtitle}}">[[app.headerSettings.subtitle]]</div>
           </div>
         </animatable-content>
         <animatable-content name="speakers">
@@ -183,23 +188,15 @@
         ],
 
         properties: {
+          app: {
+            type: Object
+          },
           routeData: Object,
           schedule: Array,
           selectedDay: {
             type: Number,
             notify: true,
             value: 0
-          }
-        },
-
-        observers: [
-          '_stylesChanged(app.headerSettings)'
-        ],
-
-        _stylesChanged: function (headerSettings) {
-          if (headerSettings) {
-            this.customStyle['--min-header-height'] = headerSettings.minHeight;
-            this.updateStyles();
           }
         },
 
