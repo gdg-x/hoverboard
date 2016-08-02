@@ -227,7 +227,8 @@
 
         observers: [
           '_routePageChanged(routeData.page, app.data.navigation)',
-          '_pageChanged(app.page)'
+          '_pageChanged(app.page)',
+          'stylesChanged(app.headerSettings)'
         ],
 
         ready: function () {
@@ -252,12 +253,12 @@
             var navObject = this.app.data.pages[this.app.page];
             if (navObject && navObject.headerSettings) {
               this.set('app.headerSettings', navObject.headerSettings);
-              this.stylesChanged();
             }
           }
         },
 
         stylesChanged: function () {
+          if(!this.app.headerSettings) return;
           this.customStyle['--header-background'] = this.app.headerSettings.backgroundColor;
           this.customStyle['--header-color'] = this.app.headerSettings.fontColor;
           this.customStyle['--header-background-image'] = 'url(' + this.app.headerSettings.backgroundImage + ')';

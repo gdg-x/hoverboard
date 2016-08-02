@@ -27,7 +27,7 @@
       }
 
       .post-wrapper > .container {
-        padding-top: 0;
+        padding-top: 20px;
         max-width: 896px;
       }
 
@@ -45,14 +45,6 @@
 
       .post-wrapper {
         background: #fff;
-      }
-
-      .post-meta {
-        margin-bottom: 20px;
-        padding: 30px 0 20px;
-        font-size: 13px;
-        color: var(--secondary-text-color);
-        border-bottom: 1px solid var(--divider-color);
       }
 
       .latest-post-wrapper {
@@ -118,10 +110,6 @@
     <div id="animationWrapper">
       <div class="post-wrapper">
         <div class="container" cascaded>
-          <div class="post-meta">
-            <span>Posted: [[_post.date]]</span>
-          </div>
-
           <marked-element class="post-content" markdown="[[postBody]]">
             <div class="markdown-html"></div>
           </marked-element>
@@ -198,10 +186,6 @@
             notify: true
           },
           posts: Array,
-          headerSettings: {
-            type: Object,
-            notify: true
-          },
           _loaded: {
             type: Boolean,
             value: false
@@ -282,6 +266,7 @@
             this.notifyPath('_latestPosts', this._latestPosts.slice());
 
             this._post = this.posts[postIndex];
+            this._updateHeaderSettings();
             this.notifyPath('_post.date', new Date(this._post.posted).toDateString().slice(4));
 
             this._postUrl = '/data/posts/' + this._post.posted + '-' + this.postId + '.markdown';
@@ -299,6 +284,19 @@
           this.$.disqus.reset();
           this.postId = null;
           HOVERBOARD.Analytics.trackEvent('blog', 'open post', this._post.title);
+        },
+
+        _updateHeaderSettings: function () {
+          if (this._post) {
+            this.set('app.headerSettings', {
+              backgroundColor: this._post.primaryColor,
+              backgroundImage: this._post.image,
+              fontColor: '#fff',
+              tabBarColor: '#fff',
+              title: this._post.title,
+              subtitle: new Date(this._post.posted).toDateString().slice(4)
+            });
+          }
         },
 
         _onNeonAnimationFinish: function () {
