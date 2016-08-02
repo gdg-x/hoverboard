@@ -1,4 +1,17 @@
 {
+    "142": {
+        "id": 142,
+        "title": "Kubernetes: More than just a toy",
+        "description": "The presentation covers automation of Kubernetes installation with Kargo. It has not so many working parts, but achieving real production HA takes work. We will cover deployment on bare metal and on clouds, such as GCE and AWS.",
+        "speakers": [
+            39
+        ],
+        "language": "English",
+        "complexity": "Intermediate",
+        "tags": [
+            "Cloud"
+        ]
+    },
     "141": {
         "id": 141,
         "title": "Fireside Chat",

@@ -1100,6 +1100,38 @@
             }
         ]
     },
+    "39": {
+        "id": 39,
+        "featured": "true",
+        "name": "Matthew Mosesohn",
+        "title": "Senior Deployment Engineer",
+        "company": "Mirantis",
+        "companyLogo": "/images/logos/mirantis.svg",
+        "country": "Moscow, Russia",
+        "photoUrl": "/images/people/matthew_mosesohn.jpg",
+        "shortBio": "Matthew develops automated systems for deploying Kubernetes and Openstack. He has worked on autom...",
+        "bio": "Matthew develops automated systems for deploying Kubernetes and Openstack. He has worked on automating bare metal provisioning, configuration management, and HA systems. Matthew strives to keep configuration management minimal by pushing changes into core applications, as opposed to workarounds.",
+        "tags": [
+            "Cloud",
+            "Kebernetes",
+            "OpenStack"
+        ],
+        "badges": [
+            
+        ],
+        "socials": [
+            {
+                "icon": "github",
+                "name": "GitHub",
+                "link": "http://github.com/mattymo/"
+            },
+            {
+                "icon": "glpus",
+                "name": "Google+",
+                "link": "https://plus.google.com/+MatthewMosesohn"
+            }
+        ]
+    },
     "37": {
         "id": 37,
         "featured": "false",
