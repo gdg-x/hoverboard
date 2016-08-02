@@ -174,8 +174,8 @@
     },
     "123": {
         "id": 123,
-        "title": "TBD",
-        "description": "TBD",
+        "title": "Highlevel overview of the Angular 2",
+        "description": "In the session, we'll talk about the current state of the Angular 2 and usages to build progressive web apps, mobile apps (hybrid and native). How to get the best performance from the Angular and serverside rendering.\n\nTo make it even more interesting, we'll spice the talk with live codding with Dart.",
         "speakers": [
             20
         ],
@@ -214,7 +214,7 @@
     "120": {
         "id": 120,
         "title": "Progressive web apps - prepare your web for 2017",
-        "description": "\"Remember back when AJAX completely changed what was possible in the desktop web? Progressive web apps are that same fundamental shift for the mobile web.\" said Rahul Row-Chowdhury (Google\u2019s product lead for chrome and the web platform) on stage at Google I/O 2016. - Progressive web apps use service workers, app shell, push notifications, RAIL and other capabilities to deliver an app-like user experience.",
+        "description": "Remember back when AJAX completely changed what was possible in the desktop web? Progressive web apps are that same fundamental shift for the mobile web.\" said Rahul Row-Chowdhury (Google\u2019s product lead for chrome and the web platform) on stage at Google I/O 2016. - Progressive web apps use new capabilities to deliver an app-like user experience. In this talk we will take a look at push notifications, app shell, RAIL and other new technologies.",
         "speakers": [
             18
         ],
