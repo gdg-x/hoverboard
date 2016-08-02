@@ -713,9 +713,9 @@
         "tags": [
             "Web",
             "AngularJS",
-            "ReactJS",
-            "NodeJS",
             "Progressive Web Apps",
+            "Push Notifications",
+            "App Shell",
             "RAIL"
         ],
         "badges": [
@@ -793,7 +793,9 @@
             "Web",
             "AngularJS",
             "Polymer",
-            "Go"
+            "Go",
+            "Dart",
+            "Progressive Web Apps"
         ],
         "badges": [
             {
@@ -977,8 +979,8 @@
         "companyLogo": "/images/logos/yamert.png",
         "country": "Dnipro, Ukraine",
         "photoUrl": "/images/people/roman_herasymenko.jpg",
-        "shortBio": "Roman is Founder and CEO at Yamert and a co-organizer of GDG Dnipropetrovsk. Roman is interesting...",
-        "bio": "Roman is Founder and CEO at Yamert and a co-organizer of GDG Dnipropetrovsk. Roman is interesting in software development for cutting edge technologies and devices like Google Glass and Android Wear.",
+        "shortBio": "Roman is a technology geek, leading developer with 10+ years of experience, and a GDE on Android...",
+        "bio": "Roman is a technology geek, leading developer with 10+ years of experience, and a Google Developer Expert on Android at Yamert company. He is skilled in building cutting-edge mobile apps, mainly developing for Android and wearable devices. \nFor the last three years Roman is a leader at GDG Dnipropetrovsk, where he had already organized a variety of local meet-ups, conferences and hackathons.",
         "tags": [
             "Android",
             "Firebase",
@@ -1095,6 +1097,38 @@
                 "icon": "facebook",
                 "name": "Facebook",
                 "link": "https://www.facebook.com/fortranforthewin/"
+            }
+        ]
+    },
+    "39": {
+        "id": 39,
+        "featured": "true",
+        "name": "Matthew Mosesohn",
+        "title": "Senior Deployment Engineer",
+        "company": "Mirantis",
+        "companyLogo": "/images/logos/mirantis.svg",
+        "country": "Moscow, Russia",
+        "photoUrl": "/images/people/matthew_mosesohn.jpg",
+        "shortBio": "Matthew develops automated systems for deploying Kubernetes and Openstack. He has worked on autom...",
+        "bio": "Matthew develops automated systems for deploying Kubernetes and Openstack. He has worked on automating bare metal provisioning, configuration management, and HA systems. Matthew strives to keep configuration management minimal by pushing changes into core applications, as opposed to workarounds.",
+        "tags": [
+            "Cloud",
+            "Kebernetes",
+            "OpenStack"
+        ],
+        "badges": [
+
+        ],
+        "socials": [
+            {
+                "icon": "github",
+                "name": "GitHub",
+                "link": "http://github.com/mattymo/"
+            },
+            {
+                "icon": "glpus",
+                "name": "Google+",
+                "link": "https://plus.google.com/+MatthewMosesohn"
             }
         ]
     },

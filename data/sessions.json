@@ -1,7 +1,20 @@
 {
+    "142": {
+        "id": 142,
+        "title": "Kubernetes: More than just a toy",
+        "description": "The presentation covers automation of Kubernetes installation with Kargo. It has not so many working parts, but achieving real production HA takes work. We will cover deployment on bare metal and on clouds, such as GCE and AWS.",
+        "speakers": [
+            39
+        ],
+        "language": "English",
+        "complexity": "Intermediate",
+        "tags": [
+            "Cloud"
+        ]
+    },
     "141": {
         "id": 141,
-        "title": "Podcast Recording",
+        "title": "Fireside Chat",
         "description": "Our friends from Professor Fortran Videocast decided to record a session at the DevFest Ukraine. Wait for a casual conversation with our speakers about IT. More details comming soon...",
         "speakers": [
             38
@@ -174,8 +187,8 @@
     },
     "123": {
         "id": 123,
-        "title": "TBD",
-        "description": "TBD",
+        "title": "Highlevel overview of the Angular 2",
+        "description": "In the session, we'll talk about the current state of the Angular 2 and usages to build progressive web apps, mobile apps (hybrid and native). How to get the best performance from the Angular and serverside rendering.\n\nTo make it even more interesting, we'll spice the talk with live codding with Dart.",
         "speakers": [
             20
         ],
@@ -214,7 +227,7 @@
     "120": {
         "id": 120,
         "title": "Progressive web apps - prepare your web for 2017",
-        "description": "\"Remember back when AJAX completely changed what was possible in the desktop web? Progressive web apps are that same fundamental shift for the mobile web.\" said Rahul Row-Chowdhury (Google\u2019s product lead for chrome and the web platform) on stage at Google I/O 2016. - Progressive web apps use service workers, app shell, push notifications, RAIL and other capabilities to deliver an app-like user experience.",
+        "description": "Remember back when AJAX completely changed what was possible in the desktop web? Progressive web apps are that same fundamental shift for the mobile web.\" said Rahul Row-Chowdhury (Google\u2019s product lead for chrome and the web platform) on stage at Google I/O 2016. - Progressive web apps use new capabilities to deliver an app-like user experience. In this talk we will take a look at push notifications, app shell, RAIL and other new technologies.",
         "speakers": [
             18
         ],
