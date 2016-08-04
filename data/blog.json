@@ -34,5 +34,14 @@
     "secondaryColor": "#E91E63",
     "image": "/images/posts/women_programming.jpg",
     "brief": "Women represent half of the world’s intellectual capital and their participation can substantially expand economic growth. Ignoring this fact can be disastrous for organizations."
+  },
+  {
+    "id": "platinum-sponsor-corevalue",
+    "title": "Meet our Platinum Sponsor - CoreValue",
+    "posted": "2016-08-03",
+    "primaryColor": "#2196F3",
+    "secondaryColor": "#2196F3",
+    "image": "/images/posts/corevalue.jpg",
+    "brief": "CoreValue, a Software and Technology Services firm headquartered in New Jersey provides Mobility and traditional Cloud based CRM implementation services..."
   }
 ]

@@ -10,29 +10,29 @@
   <template>
 
     <app-route route="{{route}}"
-                  pattern="/posts/:slug"
-                  data="{{postsData}}"></app-route>
+               pattern="/:page"
+               data="{{pageData}}"
+               tail="{{subRoute}}"></app-route>
 
-    <app-route route="{{route}}"
-                  pattern="/:page"
-                  data="{{pageData}}"></app-route>
+    <app-route route="{{subRoute}}"
+               pattern="/:id"
+               data="{{postData}}"></app-route>
 
 
     <neon-animated-pages id="pages"
                          selected="{{pageData.page}}"
-                         attr-for-selected="data-page"
+                         attr-for-selected="name"
                          selected-attribute="selected">
 
-      <blog-list id="blogList" data-page=""
+      <blog-list id="blogList"
+                 name=""
                  app="{{app}}"
-                 header-settings="{{headerSettings}}"
-                 posts="{{posts}}"></blog-list>
+                 posts="[[posts]]"></blog-list>
 
-      <post-page data-page="posts"
+      <post-page name="posts"
                  app="{{app}}"
-                 header-settings="{{headerSettings}}"
-                 posts="{{posts}}"
-                 post-id="{{postsData.slug}}"></post-page>
+                 posts="[[posts]]"
+                 post-id="[[postData.id]]"></post-page>
 
     </neon-animated-pages>
 
@@ -48,15 +48,13 @@
 
         behaviors: [
           Polymer.NeonAnimatableBehavior
-
         ],
 
         properties: {
           app: Object,
           posts: Array,
           route: {
-            type: Object,
-            observer: 'routeChange'
+            type: Object
           },
           animationConfig: {
             type: Object,
@@ -76,17 +74,6 @@
                   node: this
                 }]
               };
-            }
-          }
-        },
-
-        routeChange() {
-          if(this.pageData && this.pageData.page === this.$.pages.selected) {
-            var tempSelection = this.$.pages.selected;
-            this.$.pages.select(null);
-            this.$.pages.select(tempSelection);
-            if(this.$.pages.selectedItem){
-              this.$.pages.selectedItem.playAnimation('entry');
             }
           }
         }
