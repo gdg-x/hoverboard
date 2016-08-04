@@ -16,7 +16,7 @@
             "gRPC"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -95,7 +95,7 @@
             "Smart Home"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -132,7 +132,7 @@
             "TensorFlow"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -158,7 +158,7 @@
             "Entrepreneurship"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -220,7 +220,7 @@
             "Firebase"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -301,14 +301,14 @@
         "companyLogo": "/images/logos/infopulse.png",
         "country": "Kyiv, Ukraine",
         "photoUrl": "/images/people/david_mayboroda.jpg",
-        "shortBio": "Ex Yandex employee. Android enthusiast.",
+        "shortBio": "Ex Yandex emproyee. Android enthusiast.",
         "bio": "Ex-Yandex employee, currently Android Engineer at SoftServe.",
         "tags": [
             "Android",
             "Dagger 2"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -462,7 +462,7 @@
             "Android N"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -505,7 +505,7 @@
             "Protractor"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -537,7 +537,7 @@
             "Analytics"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -839,7 +839,7 @@
             "Security"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -950,7 +950,7 @@
             "ExoPlayer"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -1085,7 +1085,7 @@
             "Podcast"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -1117,7 +1117,7 @@
             "OpenStack"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
@@ -1126,7 +1126,7 @@
                 "link": "http://github.com/mattymo/"
             },
             {
-                "icon": "glpus",
+                "icon": "gplus",
                 "name": "Google+",
                 "link": "https://plus.google.com/+MatthewMosesohn"
             }
@@ -1148,13 +1148,42 @@
             "Architecture"
         ],
         "badges": [
-
+            
         ],
         "socials": [
             {
                 "icon": "facebook",
                 "name": "Facebook",
                 "link": "https://www.facebook.com/profile.php?id=1395787678"
+            }
+        ]
+    },
+    "40": {
+        "id": 40,
+        "featured": "false",
+        "name": "Michal Rostecki",
+        "title": "Software Engineer",
+        "company": "Mirantis",
+        "companyLogo": "/images/logos/mirantis.svg",
+        "country": "Poznan, Poland",
+        "photoUrl": "/images/people/michal_rostecki.jpg",
+        "shortBio": "Michal works as a Software Engineer at Mirantis. He codes in Golang and Python and is strong supp...",
+        "bio": "Michal works as a Software Engineer at Mirantis. He codes in Golang and Python and is strong supporter of open source. Currently a Kubernetes contributor, formerly an OpenStack contributor.",
+        "tags": [
+            "Cloud",
+            "Go",
+            "Python",
+            "Kubernetes",
+            "OpenStack"
+        ],
+        "badges": [
+            
+        ],
+        "socials": [
+            {
+                "icon": "github",
+                "name": "GitHub",
+                "link": "https://github.com/nhlfr"
             }
         ]
     }

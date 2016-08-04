@@ -1,4 +1,17 @@
 {
+    "143": {
+        "id": 143,
+        "title": "Introduction to Golang",
+        "description": "Go becomes more and more popular language. It's strongly focused on concurrency and breaks the traditional approach to object-oriented programming. And it's made by Google for the software written by Google. If you want to take a look at Golang as a beginner or a curious person, you're welcome!",
+        "speakers": [
+            40
+        ],
+        "language": "English",
+        "complexity": "Beginner",
+        "tags": [
+            "Cloud"
+        ]
+    },
     "142": {
         "id": 142,
         "title": "Kubernetes: More than just a toy",
