@@ -43,5 +43,14 @@
     "secondaryColor": "#2196F3",
     "image": "/images/posts/corevalue.jpg",
     "brief": "CoreValue, a Software and Technology Services firm headquartered in New Jersey provides Mobility and traditional Cloud based CRM implementation services..."
+  },
+  {
+    "id": "diamond-sponsor-intouch",
+    "title": "Meet our Diamond Sponsor - intouch",
+    "posted": "2016-08-05",
+    "primaryColor": "#a61862",
+    "secondaryColor": "#a61862",
+    "image": "/images/posts/intouch_cover.jpg",
+    "brief": "Producing a powerful online solution is very essential in today’s competitive markets. intouch makes sure to keep up with the pace of the market’s growing need and skilled developers..."
   }
 ]
