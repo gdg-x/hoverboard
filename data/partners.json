@@ -254,6 +254,26 @@
         "name": "Eurasia Mobile Challenge",
         "url": "http://www.eurasiamobilechallenge.com/",
         "logoUrl": "/images/logos/eurasia.jpg"
+      },
+      {
+        "name": "PHP fwdays",
+        "url": "http://frameworksdays.com/event/php-frameworks-day-2016",
+        "logoUrl": "/images/logos/phpday.png"
+      },
+      {
+        "name": "Perfectial",
+        "url": "http://perfectial.com/",
+        "logoUrl": "/images/logos/perfectial.svg"
+      },
+      {
+        "name": "Coders Guild",
+        "url": "http://www.businesscamp.in.ua/",
+        "logoUrl": "/images/logos/coders_guild.png"
+      },
+      {
+        "name": ".Net Developer Day",
+        "url": "http://net.developerdays.pl/",
+        "logoUrl": "/images/logos/net-days.png"
       }
     ]
   }
