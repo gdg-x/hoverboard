@@ -1113,7 +1113,7 @@
         "bio": "Matthew develops automated systems for deploying Kubernetes and Openstack. He has worked on automating bare metal provisioning, configuration management, and HA systems. Matthew strives to keep configuration management minimal by pushing changes into core applications, as opposed to workarounds.",
         "tags": [
             "Cloud",
-            "Kebernetes",
+            "Kubernetes",
             "OpenStack"
         ],
         "badges": [
