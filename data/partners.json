@@ -58,11 +58,6 @@
         "name": "Zalando",
         "url": "https://tech.zalando.de/",
         "logoUrl": "/images/logos/zalando.svg"
-      },
-      {
-        "name": "Sigma",
-        "url": "http://sigma.software/",
-        "logoUrl": "/images/logos/sigma.svg"
       }
     ]
   },
@@ -73,6 +68,11 @@
         "name": "Ciklum",
         "url": "https://www.ciklum.com/",
         "logoUrl": "/images/logos/ciklum.svg"
+      },
+      {
+        "name": "Sigma",
+        "url": "http://sigma.software/",
+        "logoUrl": "/images/logos/sigma.svg"
       }
     ]
   },
