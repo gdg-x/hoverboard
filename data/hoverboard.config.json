@@ -129,7 +129,7 @@
       "links": [
         {
           "text": "partnership-proposition",
-          "url": "http://bit.ly/df16-sponsor",
+          "url": "https://drive.google.com/file/d/0B7agnb-tSfBcMkVXWVJQZDVoR0U/view?usp=sharing",
           "newTab": true
         },
         {
@@ -191,12 +191,12 @@
       "caption": "attendees"
     },
     {
-      "counter": 2,
-      "caption": "days"
+      "counter": 30,
+      "caption": "sessions"
     },
     {
-      "counter": 40,
-      "caption": "sessions"
+      "counter": 6,
+      "caption": "workshops"
     },
     {
       "counter": 3,
