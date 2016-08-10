@@ -187,7 +187,7 @@
     },
     "124": {
         "id": 124,
-        "title": "Continues Integration in Android",
+        "title": "Continuous Integration in Android",
         "description": "You are tired of building every patch for your QA ? Still deploying to google play manually ? You still think that build server is something that you don't need ? Than I will try to show you how you can make life of your team easier with CI.",
         "speakers": [
             21
