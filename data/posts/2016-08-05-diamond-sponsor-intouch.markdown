@@ -29,6 +29,6 @@ We also  enjoy conceptualizing and building a wide range of solutions from small
 
 Our  sponsorship and presence within the GDG Dev Fest is at the core of our vision and  mission since it serves all what was mentioned above. As such, we look forward  to meeting each and every one of you in person within our booth.
 
-As such, make sure to pass by for a coffee or tea!
+So please make  sure to pass by for a coffee, juice or tea!
 
 <img src="/images/posts/intouch1.jpg" style="width: 100%;"/>

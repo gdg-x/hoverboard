@@ -1,8 +1,14 @@
-# Polymer App Toolbox - Drawer Template
+# Project Hoverboard 
 
 [![Join the chat at https://gitter.im/gdg-x/hoverboard](https://badges.gitter.im/gdg-x/hoverboard.svg)](https://gitter.im/gdg-x/hoverboard?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 > Project Hoverboard is the next generation conference website template after [Project Zeppelin](https://github.com/gdg-x/zeppelin) and more optimized version - [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
+
+> Template is brought by [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy) from [GDG Lviv](http://lviv.gdg.org.ua/).
+
+> *Do you like it?* Show your support - please, **star the project**.
+
+### [Live demo](https://hoverboard.firebaseapp.com/)
 
 This template, along with the `polymer-cli` toolchain, also demonstrates use
 of the "PRPL pattern" This pattern allows fast first delivery and interaction with
@@ -23,13 +29,11 @@ The PRPL pattern, in a nutshell:
 
 Install [polymer-cli](https://github.com/Polymer/polymer-cli):
 
-    npm install -g polymer-cli
+    npm i -g polymer-cli@0.12.0
 
-##### Initialize project from template
+### Install dependencies
 
-    mkdir my-app
-    cd my-app
-    polymer init app-drawer-template
+    bower install
 
 ### Start the development server
 
@@ -76,7 +80,7 @@ components (and will have bundles created in the fallback `bundled` build).
 
 ## Who uses the template?
 
-Going to use template? Go on! The only thing we ask - let us know at [lviv@gdg.org.ua](mailto:lviv@gdg.org.ua) so we can include you to this list, or make a pull request.
+Going to use template? Go on! The only thing we ask - let us know at with a pull request, so we can include you to this list.
 
 | [GDG DevFest Ukraine](http://devfest.gdg.org.ua) |
 | :------------ |
@@ -89,6 +93,18 @@ Going to use template? Go on! The only thing we ask - let us know at [lviv@gdg.o
 | [GDG DevFest Istanbul 2015](https://www.devfesttr.com) |
 | [GDG Cáceres CodeWeek 2015](http://codeweek.gdgcaceres.es) |
 | [GDG Bingham University Website](http://bhu.gdg.ng) |
+
+## Contributing
+
+Project Hoverboard is still under development and it is open for contributions. Feel free to send PR. If you have any questions, feel free to contact [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy).
+#### General workflow
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Make your changes
+4. Run the tests, adding new ones for your own code if necessary
+5. Commit your changes (`git commit -am 'Added some feature'`)
+6. Push to the branch (`git push origin my-new-feature`)
+7. Create new Pull Request
 
 ## Contributing
 

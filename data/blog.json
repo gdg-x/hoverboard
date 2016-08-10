@@ -52,5 +52,14 @@
     "secondaryColor": "#a61862",
     "image": "/images/posts/intouch_cover.jpg",
     "brief": "Producing a powerful online solution is very essential in today’s competitive markets. intouch makes sure to keep up with the pace of the market’s growing need and skilled developers..."
+  },
+  {
+    "id": "interview-with-yonatan-levin",
+    "title": "Doze and Star Wars: Interview with Yonatan Levin",
+    "posted": "2016-08-09",
+    "primaryColor": "#ffc107",
+    "secondaryColor": "#ffc107",
+    "image": "/images/posts/yonatan_cover.jpg",
+    "brief": "First time I faced Android was when building an app for my own startup, with Android SDK 8. It was an amazing app that was draining battery from 100 to 0 in about 4 hours..."
   }
 ]
