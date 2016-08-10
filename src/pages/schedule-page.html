@@ -1,6 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<!--<link rel="import" href="../../bower_components/app-route/app-route.html">-->
+<link rel="import" href="../../bower_components/app-route/app-route.html">
 
 <link rel="import" href="../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
@@ -29,15 +29,18 @@
       }
     </style>
 
-    <!--<app-route route="{{route}}"-->
-               <!--pattern="/:day"-->
-               <!--data="{{routeData}}"></app-route>-->
+    <app-route route="{{route}}"
+               pattern="/:day"
+               data="{{routeData}}"></app-route>
 
     <div class="container">
 
-      <schedule-subnav schedule="[[schedule]]" selected-day="{{selectedDay}}"></schedule-subnav>
+      <schedule-subnav
+        schedule="[[schedule]]"
+        selected-day="[[app.selectedDay]]"
+      ></schedule-subnav>
 
-      <neon-animated-pages selected="[[selectedDay]]" attr-for-selected="name">
+      <neon-animated-pages selected="[[app.selectedDay]]" attr-for-selected="name">
         <template is="dom-repeat" items="[[schedule]]" as="day">
           <schedule-day name$="day[[_addToValue(index, 1)]]" app={{app}} day="[[day]]"></schedule-day>
         </template>
@@ -66,7 +69,8 @@
           },
 
           route: {
-            type: Object
+            type: Object,
+            notify: true
           },
 
           schedule: {
@@ -101,13 +105,17 @@
           }
         },
 
-//        observers: [
-//          '_routePageChanged(routeData.day)'
-//        ],
+        observers: [
+          '_routePageChanged(routeData.day)'
+        ],
 
         _routePageChanged: function (day) {
-          if(this.selected) {
-            this.set('app.selectedDay', day || 'day1');
+          if (this.selected) {
+            if (!day) {
+              this.set('routeData.day', 'day1');
+            } else if (this.app.selectedDay !== day) {
+              this.set('app.selectedDay', day);
+            }
           }
 
         }
