@@ -382,6 +382,11 @@
         ],
         "badges": [
             {
+                "name": "GDE",
+                "description": "Google Cloud Platform Google Developer Expert",
+                "link": "https://developers.google.com/experts/people/jean-baptiste-clion"
+            },
+            {
                 "name": "GDG",
                 "description": "Google Developers Group Basel",
                 "link": "https://developers.google.com/groups/chapter/104796338340371914914/"
