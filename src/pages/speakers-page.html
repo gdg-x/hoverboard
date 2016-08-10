@@ -128,11 +128,10 @@
       @media (min-width: 601px) {
         .speakers-container {
           @apply(--layout-horizontal);
-          @apply(--layout-center-justified);
         }
 
         .speaker {
-          width: calc(100% / 2 - 3 * var(--grid-gutter));
+          width: calc(100% / 2 - 2 * var(--grid-gutter));
           margin: var(--grid-gutter);
         }
 
@@ -140,7 +139,7 @@
 
       @media (min-width: 961px) {
         .speaker {
-          width: calc(100% / 3 - 4 * var(--grid-gutter));
+          width: calc(100% / 3 - 2 * var(--grid-gutter));
         }
 
       }
@@ -291,7 +290,7 @@
         openSpeakerDetails: function (speakerId) {
           if (speakerId && this.speakers) {
             this._selectedSpeaker = this.speakers[speakerId];
-            if(this._selectedSpeaker) {
+            if (this._selectedSpeaker) {
               this.$.speakerDetails.open();
             }
           }
