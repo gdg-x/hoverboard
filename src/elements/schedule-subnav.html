@@ -49,12 +49,12 @@
     </style>
 
     <nav class="subpage-nav" layout horizontal center justified relative>
-      <paper-tabs class="schedule-tabs" selected="{{selectedDay}}" attr-for-selected="day">
+      <paper-tabs class="schedule-tabs" selected="[[selectedDay]]" attr-for-selected="day">
         <template is="dom-repeat" items="[[schedule]]" as="day">
-          <paper-tab day$="day[[_addToValue(index, 1)]]">
-            <!--<a href$="/schedule/day[[_addToValue(index, 1)]]" layout center="">-->
+          <paper-tab day$="day[[_addToValue(index, 1)]]" link>
+            <a href$="/schedule/day[[_addToValue(index, 1)]]" layout center>
               [[day.dateReadable]]
-            <!--</a>-->
+            </a>
           </paper-tab>
         </template>
       </paper-tabs>
@@ -89,11 +89,11 @@
         ],
 
         properties: {
-          schedule: Array,
+          schedule: {
+            type: Array
+          },
           selectedDay: {
-            type: String,
-            value: 'day1',
-            notify: true
+            type: String
           },
           showFilters: {
             type: Boolean,
