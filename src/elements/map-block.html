@@ -114,12 +114,13 @@
       }
     </style>
 
-    <google-map zoom="[[app.data.location.pointer.zoom]]" latitude="[[app.data.location.mapCenter.latitude]]"
-                longitude="[[app.data.location.mapCenter.longitude]]" api-key="[[app.data.location.apiKey]]" styles="[[options]]" disable-zoom
-                disable-default-ui>
-      <google-map-marker latitude="[[app.data.location.pointer.latitude]]"
-                         longitude="[[app.data.location.pointer.longitude]]"></google-map-marker>
-    </google-map>
+    <template is="dom-if" if="[[_active]]">
+      <google-map id="bbb" zoom="[[app.data.location.pointer.zoom]]" latitude="[[app.data.location.mapCenter.latitude]]"
+                  longitude="[[app.data.location.mapCenter.longitude]]" api-key="[[app.data.location.apiKey]]" styles="[[options]]" disable-zoom disable-default-ui>
+        <google-map-marker latitude="[[app.data.location.pointer.latitude]]"
+                           longitude="[[app.data.location.pointer.longitude]]"></google-map-marker>
+      </google-map>
+    </template>>
     <div class="disable-map-events"></div>
     <div class="container">
       <div class="additional-space"></div>
@@ -206,12 +207,27 @@
           },
           _currentImage: {
             type: String
+          },
+
+          _active: {
+            type:Boolean
           }
         },
 
         observers: [
-          'setImages(app.data.location.images)'
+          'setImages(app.data.location.images)',
+          'pageChanged(app.page)'
         ],
+
+        pageChanged: function(page){
+
+          if (page !== 'home') {
+            this._active = false;
+            return;
+          }
+
+          this._active = true;
+        },
 
         setImages: function (images) {
           if(!images) return;
