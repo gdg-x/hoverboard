@@ -220,7 +220,7 @@
         ],
 
         pageChanged: function(page){
-          if (page !== 'home') {
+          if (!this.app.data || page !== this.app.data.navigation[0].route) {
             this._active = false;
             return;
           }
