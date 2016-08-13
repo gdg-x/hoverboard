@@ -418,36 +418,32 @@
     "12": {
         "id": 12,
         "featured": "true",
-        "name": "Paul Lammertsma",
-        "title": "CTO",
+        "name": "Eliza Camberogiannis",
+        "title": "Android Developer",
         "company": "Pixplicity",
         "companyLogo": "/images/logos/pixplicity.svg",
         "country": "Amsterdam, The Netherlands",
-        "photoUrl": "/images/people/paul_lammertsma.jpg",
-        "shortBio": "Paul is CTO and co-founder of Pixplicity, Holland's leading Android-specific consulting and app-b...",
-        "bio": "Paul is CTO and co-founder of Pixplicity, Holland's leading Android-specific consulting and app-building company. He applies his knowledge of Java, Android and Linux in Pixplicity to develop high-quality apps and provide technical solutions for customers such as Mercedes-Benz, Nestl\u00e9, De Telegraaf, AGIS and De Consumentenbond.",
+        "photoUrl": "/images/people/eliza_camberogiannis.jpg",
+        "shortBio": "Eliza is an Android Developer at Pixplicity, Holland's leading Android-specific consulting and di...",
+        "bio": "Eliza is an Android Developer at Pixplicity, Holland's leading Android-specific consulting and digital agency. In her free time she enjoys travelling and sharing her knowledge and experiences with the local communities. ",
         "tags": [
             "Android",
             "Data Sync",
             "Linux"
         ],
         "badges": [
-            {
-                "name": "DAUG",
-                "description": "DAUG",
-                "link": "https://developers.google.com/groups/chapter/113182948271879290904/"
-            }
+            
         ],
         "socials": [
             {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/u/0/+PaulLammertsma"
-            },
-            {
                 "icon": "twitter",
                 "name": "Twitter",
-                "link": "https://twitter.com/officesunshine"
+                "link": "https://twitter.com/elizacamber"
+            },
+            {
+                "icon": "linkedin",
+                "name": "LinkedIn",
+                "link": "https://linkedin.com/in/elizacamber"
             }
         ]
     },
@@ -457,7 +453,7 @@
         "name": "Aleksander Piotrowski",
         "title": "Code Monkey",
         "company": "Applause",
-        "companyLogo": "/images/logos/applause.svg",
+        "companyLogo": "/images/logos/applause.png",
         "country": "Warsaw, Poland",
         "photoUrl": "/images/people/aleksander_piotrowski.jpg",
         "shortBio": "Became a mobile developer after long run as a backend developer. Because of age, holding senior p...",
