@@ -63,6 +63,7 @@
           default:
             return;
         }
+        HOVERBOARD.Analytics.trackEvent('session', 'share', type);
         Polymer.dom(this.root).querySelector(this.shareMenuSelector).close();
       }
 

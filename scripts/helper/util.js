@@ -80,6 +80,17 @@ HOVERBOARD.Util = HOVERBOARD.Util || (function () {
     }
 
     /**
+     * Gets the <meta name="theme-color"> value.
+     */
+    function getMetaThemeColor() {
+      var metaTheme = document.documentElement.querySelector('meta[name="theme-color"]');
+      if (metaTheme) {
+        return metaTheme.content;
+      }
+      return null;
+    }
+
+    /**
      * Sets the <meta name="theme-color"> to the specified value.
      * @param {string} color Color hex value.
      */
@@ -264,6 +275,7 @@ HOVERBOARD.Util = HOVERBOARD.Util || (function () {
       isAndroid,
       isSafari,
       isTouchScreen,
+      getMetaThemeColor,
       setMetaThemeColor,
       getURLParameter,
       setSearchParam,
@@ -277,4 +289,4 @@ HOVERBOARD.Util = HOVERBOARD.Util || (function () {
       extend,
       getUserLanguage
     };
-  })();
+  }());

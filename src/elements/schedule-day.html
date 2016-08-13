@@ -8,7 +8,6 @@
 <link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
 
 <link rel="import" href="../behaviors/utils-behavior.html">
-<link rel="import" href="../elements/session-details.html">
 
 
 <dom-module id="schedule-day">
@@ -18,6 +17,7 @@
     <style include="shared-styles">
       :host {
         display: block;
+        --paper-card-background-color: var(--secondary-background-color);;
       }
 
       .timeslot {
@@ -52,7 +52,7 @@
       .sub-session {
         @apply(--shadow-transition);
         cursor: pointer;
-        background: var(--secondary-background-color);
+        color: var(--text-primary-color);
       }
 
       .sub-session[with-background] {
@@ -156,62 +156,65 @@
           <span class="minutes">[[_splitText(timeslot.startTime, ':', 1)]]</span>
         </div>
 
-        <div class="sessions-wrapper" layout vertical$="{{app.isPhoneSize}}" horizontal$="{{!app.isPhoneSize}}" flex$="{{!app.isPhoneSize}}">
+        <div class="sessions-wrapper" layout vertical$="{{app.isPhoneSize}}" horizontal$="{{!app.isPhoneSize}}"
+             flex$="{{!app.isPhoneSize}}">
           <template is="dom-repeat" items="[[timeslot.sessions]]" as="session">
             <div class="session" layout vertical flex$="{{!app.isPhoneSize}}">
               <template is="dom-repeat" items="[[session]]" as="subSession"
                         filter="{{_filterSession(_selectedTags.splices)}}">
 
-                <paper-card class="sub-session" with-background$="[[subSession.image]]" on-tap="_openSession" layout flex-auto>
+                <a href$="/schedule/[[name]]?sessionId=[[subSession.id]]" class="sub-session" with-background$="[[subSession.image]]" layout flex-auto>
+                  <paper-card layout flex-auto>
 
-                  <template is="dom-if" if="[[subSession.image]]">
-                    <iron-image src="[[subSession.image]]" sizing="cover" fit preload></iron-image>
-                  </template>
-
-                  <div relative layout vertical flex>
-
-                    <div class="sub-session-content" flex>
-                      <h2 class="session-title">[[subSession.title]]</h2>
-                      <ul class="session-meta">
-                        <template is="dom-if" if="[[subSession.language]]">
-                          <li>[[subSession.language]]</li>
-                        </template>
-                        <template is="dom-if" if="[[subSession.complexity]]">
-                          <li>[[subSession.complexity]]</li>
-                        </template>
-                        <template is="dom-if" if="[[subSession.track.title]]">
-                          <li>[[subSession.track.title]]</li>
-                        </template>
-                      </ul>
-                    </div>
-
-                    <template is="dom-if" if="[[subSession.tags]]">
-                      <div class="tags" layout horizontal center>
-                        <iron-icon icon="tags"></iron-icon>
-                        <span>[[_joinArray(subSession.tags)]]</span>
-                      </div>
+                    <template is="dom-if" if="[[subSession.image]]">
+                      <iron-image src="[[subSession.image]]" sizing="cover" fit preload></iron-image>
                     </template>
 
-                    <template is="dom-if" if="[[subSession.speakers]]">
-                      <div class="speaker-block" relative>
-                        <div class="image-overlay"
-                             style$="background-color: [[_getCustomStyleValue(subSession.mainTag)]]" fit></div>
-                        <template is="dom-repeat" items="[[subSession.speakers]]" as="speaker">
-                          <div class="speaker" layout horizontal center>
-                            <iron-icon icon="account"></iron-icon>
-                            <div class="person-detail" flex>
-                              <span class="speaker-name">[[speaker.name]]</span>
-                              <div class="speaker-title">
-                                [[speaker.company]] / [[speaker.country]]
+                    <div relative layout vertical flex>
+
+                      <div class="sub-session-content" flex>
+                        <h2 class="session-title">[[subSession.title]]</h2>
+                        <ul class="session-meta">
+                          <template is="dom-if" if="[[subSession.language]]">
+                            <li>[[subSession.language]]</li>
+                          </template>
+                          <template is="dom-if" if="[[subSession.complexity]]">
+                            <li>[[subSession.complexity]]</li>
+                          </template>
+                          <template is="dom-if" if="[[subSession.track.title]]">
+                            <li>[[subSession.track.title]]</li>
+                          </template>
+                        </ul>
+                      </div>
+
+                      <template is="dom-if" if="[[subSession.tags]]">
+                        <div class="tags" layout horizontal center>
+                          <iron-icon icon="tags"></iron-icon>
+                          <span>[[_joinArray(subSession.tags)]]</span>
+                        </div>
+                      </template>
+
+                      <template is="dom-if" if="[[subSession.speakers]]">
+                        <div class="speaker-block" relative>
+                          <div class="image-overlay"
+                               style$="background-color: [[_getCustomStyleValue(subSession.mainTag)]]" fit></div>
+                          <template is="dom-repeat" items="[[subSession.speakers]]" as="speaker">
+                            <div class="speaker" layout horizontal center>
+                              <iron-icon icon="account"></iron-icon>
+                              <div class="person-detail" flex>
+                                <span class="speaker-name">[[speaker.name]]</span>
+                                <div class="speaker-title">
+                                  [[speaker.company]] / [[speaker.country]]
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </template>
-                      </div>
-                    </template>
+                          </template>
+                        </div>
+                      </template>
 
-                  </div>
-                </paper-card>
+                    </div>
+                  </paper-card>
+                </a>
 
               </template>
             </div>
@@ -220,13 +223,6 @@
 
       </div>
     </template>
-
-    <session-details id="sessionDetails"
-                     app="{{app}}"
-                     session="{{_selectedSession}}"
-                     entry-animation="scale-up-animation"
-                     exit-animation="fade-out-animation"
-                     with-backdrop></session-details>
 
   </template>
 
@@ -275,13 +271,6 @@
                 }]
               };
             }
-          }
-        },
-
-        _openSession: function (e) {
-          if(e.model.subSession) {
-            this._selectedSession = e.model.subSession;
-            this.$.sessionDetails.open();
           }
         },
 

@@ -40,7 +40,6 @@
       <div class="content">
         <div class="metadata-wrapper">
           <div class="main-info">
-            <iron-image></iron-image>
             <div class="photo" style$="background-image: url([[speaker.photoUrl]])" hidden$="{{app.isPhoneSize}}"></div>
             <div class="info">
               <h1 class="main-title" hidden$="{{app.isPhoneSize}}">[[speaker.name]]</h1>
@@ -83,7 +82,7 @@
                   </div>
                   <truncate-marked-text text="[[session.description]]" characters="220"
                                         break-last-word></truncate-marked-text>
-                  <a class="read-more" href="/schedule" dialog-dismiss>[[localize('read-more')]]</a>
+                  <a class="read-more" href$="/schedule/day[[session.day]]?sessionId=[[session.id]]" dialog-dismiss>[[localize('read-more')]]</a>
 
                 </div>
               </div>
@@ -134,10 +133,9 @@
 
         _speakerChanged: function () {
           var generatedClass = this._generateClass(this.speaker.tags[0]);
-          var dialogColor = this.getComputedStyleValue('--' + generatedClass) || this.getComputedStyleValue('--general');
-          this.customStyle['--paper-scroll-header-panel-color'] = dialogColor;
-          this._previousBrowserColor = document.getElementsByName('theme-color')[0].content;
-          document.getElementsByName('theme-color')[0].content = dialogColor;
+          this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + generatedClass + ')';
+          this._previousBrowserColor = HOVERBOARD.Util.getMetaThemeColor();
+          HOVERBOARD.Util.setMetaThemeColor(this.getComputedStyleValue('--' + generatedClass));
 
           if (this.app.isPhoneSize) {
             this.$.scrollHeaderPanel.$.headerBg.style.background = 'linear-gradient(to top, rgba(0, 0, 0, 0.4) -10%, rgba(0, 0, 0, 0.1) 50%), url(' + this.speaker.photoUrl + ') 0 / cover no-repeat';
@@ -158,7 +156,7 @@
         },
 
         _renderClosed: function () {
-          document.getElementsByName('theme-color')[0].content = this._previousBrowserColor;
+          HOVERBOARD.Util.setMetaThemeColor(this._previousBrowserColor);
           this.backdropElement.close();
           this.playAnimation('exit');
         },

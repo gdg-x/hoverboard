@@ -15,7 +15,7 @@
 <link rel="import" href="../../bower_components/marked-element/marked-element.html">
 
 <link rel="import" href="../styles/dialog-styles.html">
-<!--<link rel="import" href="../behaviors/share-behavior.html">-->
+<link rel="import" href="../behaviors/share-behavior.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
 <link rel="import" href="../behaviors/app-localize-behavior.html">
 <link rel="import" href="truncate-marked-text.html">
@@ -38,36 +38,34 @@
 
     <paper-scroll-header-panel id="scrollHeaderPanel" no-reveal>
       <paper-toolbar class="tall">
-        <a href="/schedule">
-          <paper-icon-button class="back-button" dialog-dismiss icon="arrow-back"></paper-icon-button>
-        </a>
+        <paper-icon-button class="back-button" dialog-dismiss icon="arrow-back"></paper-icon-button>
         <div class="middle fallback-image-wrapper">
           <iron-image class="fallback-image" src="/images/logo-white.svg"
                       alt="[[app.data.title]]"></iron-image>
         </div>
       </paper-toolbar>
       <div class="content">
-        <!--<paper-menu-button horizontal-align="right" share-menu>-->
-          <!--<paper-fab class="float-button dropdown-trigger" icon="share"></paper-fab>-->
-          <!--<div class="dropdown-content">-->
-            <!--<paper-icon-item on-tap="share" share="gplus">-->
-              <!--<iron-icon icon="gplus" item-icon></iron-icon>-->
-              <!--Google+-->
-            <!--</paper-icon-item>-->
-            <!--<paper-icon-item on-tap="share" share="facebook">-->
-              <!--<iron-icon icon="facebook" item-icon></iron-icon>-->
-              <!--Facebook-->
-            <!--</paper-icon-item>-->
-            <!--<paper-icon-item on-tap="share" share="twitter">-->
-              <!--<iron-icon icon="twitter" item-icon></iron-icon>-->
-              <!--Twitter-->
-            <!--</paper-icon-item>-->
-            <!--<paper-icon-item on-tap="share" share="copy">-->
-              <!--<iron-icon icon="link" item-icon></iron-icon>-->
-              <!--[[localize('copy-link')]]-->
-            <!--</paper-icon-item>-->
-          <!--</div>-->
-        <!--</paper-menu-button>-->
+        <paper-menu-button horizontal-align="right" share-menu>
+          <paper-fab class="float-button dropdown-trigger" icon="share"></paper-fab>
+          <div class="dropdown-content">
+            <paper-icon-item on-tap="share" share="gplus">
+              <iron-icon icon="gplus" item-icon></iron-icon>
+              Google+
+            </paper-icon-item>
+            <paper-icon-item on-tap="share" share="facebook">
+              <iron-icon icon="facebook" item-icon></iron-icon>
+              Facebook
+            </paper-icon-item>
+            <paper-icon-item on-tap="share" share="twitter">
+              <iron-icon icon="twitter" item-icon></iron-icon>
+              Twitter
+            </paper-icon-item>
+            <paper-icon-item on-tap="share" share="copy">
+              <iron-icon icon="link" item-icon></iron-icon>
+              [[localize('copy-link')]]
+            </paper-icon-item>
+          </div>
+        </paper-menu-button>
         <div class="metadata-wrapper">
           <div class="main-info">
             <div class="info">
@@ -156,7 +154,8 @@
           Polymer.PaperDialogBehavior,
           Polymer.NeonAnimationRunnerBehavior,
           HOVERBOARD.AppLocalizeBehavior,
-          HOVERBOARD.UtilsBehavior
+          HOVERBOARD.UtilsBehavior,
+          HOVERBOARD.ShareBehavior
         ],
 
         properties: {
@@ -180,10 +179,9 @@
 
         _sessionChanged: function () {
           var generatedClass = this._generateClass(this.session.mainTag);
-          var dialogColor = this.getComputedStyleValue('--' + generatedClass) || this.getComputedStyleValue('--general');
-          this.customStyle['--paper-scroll-header-panel-color'] = dialogColor;
-          this._previousBrowserColor = document.getElementsByName('theme-color')[0].content;
-          document.getElementsByName('theme-color')[0].content = dialogColor;
+          this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + generatedClass + ')';
+          this._previousBrowserColor = HOVERBOARD.Util.getMetaThemeColor();
+          HOVERBOARD.Util.setMetaThemeColor(this.getComputedStyleValue('--' + generatedClass));
           this.updateStyles();
         },
 
@@ -200,7 +198,7 @@
         },
 
         _renderClosed: function () {
-          document.getElementsByName('theme-color')[0].content = this._previousBrowserColor;
+          HOVERBOARD.Util.setMetaThemeColor(this._previousBrowserColor);
           this.backdropElement.close();
           this.playAnimation('exit');
         },
@@ -217,7 +215,7 @@
 
       });
 
-    })();
+    }());
   </script>
 
 </dom-module>
