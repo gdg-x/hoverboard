@@ -435,12 +435,12 @@
     "105": {
         "id": 105,
         "title": "Intro to TensorFlow",
-        "description": "TBD",
+        "description": "TensorFlow\u2122 is an open source software library for numerical computation using data flow graphs. The flexible architecture allows you to deploy computation to one or more CPUs or GPUs in a desktop, server, or mobile device with a single API. TensorFlow was originally developed by researchers and engineers working on the Google Brain Team within Google's Machine Intelligence research organization for the purposes of conducting machine learning and deep neural networks research, but the system is general enough to be applicable in a wide variety of other domains as well.",
         "speakers": [
             4
         ],
         "language": "English",
-        "complexity": "Intermediate",
+        "complexity": "Beginner",
         "tags": [
             "Cloud"
         ]
