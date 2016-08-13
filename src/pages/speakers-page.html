@@ -171,8 +171,8 @@
     </style>
 
     <app-route route="{{route}}"
-               pattern="/:id"
-               data="{{speakerRouteData}}"></app-route>
+               pattern="/:speakerId"
+               data="{{routeData}}"></app-route>
 
     <div class="container speakers-container">
       <template is="dom-repeat" items="[[_toArray(speakers)]]" as="speaker" on-dom-change="_updateCascadedNodes">
@@ -246,19 +246,30 @@
           app: {
             type: Object
           },
+
           route: {
+            type: Object,
+            notify: true
+          },
+
+          routeData: {
             type: Object
           },
+
           speakerRouteData: {
             type: Object
           },
+
           speakers: {
             type: Object
           },
-          speakerId: {
-            type: String,
-            notify: true
+
+          selected: {
+            type: Boolean,
+            reflectToAttribute: true,
+            value: false
           },
+
           _selectedSpeaker: Object,
 
           animationConfig: {
@@ -284,14 +295,17 @@
         },
 
         observers: [
-          'openSpeakerDetails(speakerRouteData.id)'
+          '_routePageChanged(routeData.speakerId)'
         ],
 
-        openSpeakerDetails: function (speakerId) {
-          if (speakerId && this.speakers) {
-            this._selectedSpeaker = this.speakers[speakerId];
-            if (this._selectedSpeaker) {
-              this.$.speakerDetails.open();
+        _routePageChanged: function (speakerId) {
+          if (speakerId && this.selected) {
+            var tempSpeaker = this.speakers[speakerId];
+            if (tempSpeaker) {
+              Polymer.RenderStatus.afterNextRender(this, function () {
+                this._selectedSpeaker = tempSpeaker;
+                this.$.speakerDetails.open();
+              }.bind(this));
             }
           }
         },
