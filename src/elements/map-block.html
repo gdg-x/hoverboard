@@ -114,7 +114,7 @@
       }
     </style>
 
-    <template is="dom-if" if="[[_active]]">
+    <template is="dom-if" if="[[selected]]">
       <google-map zoom="[[app.data.location.pointer.zoom]]" latitude="[[app.data.location.mapCenter.latitude]]"
                   longitude="[[app.data.location.mapCenter.longitude]]" api-key="[[app.data.location.apiKey]]" styles="[[options]]" disable-zoom disable-default-ui>
         <google-map-marker latitude="[[app.data.location.pointer.latitude]]"
@@ -207,25 +207,12 @@
           },
           _currentImage: {
             type: String
-          },
-
-          _active: {
-            type:Boolean
           }
         },
 
         observers: [
-          'setImages(app.data.location.images)',
-          'pageChanged(app.page)'
+          'setImages(app.data.location.images)'
         ],
-
-        pageChanged: function(page){
-          if (!this.app.data || page !== this.app.data.navigation[0].route) {
-            this._active = false;
-            return;
-          }
-          this._active = true;
-        },
 
         setImages: function (images) {
           if(!images) return;
