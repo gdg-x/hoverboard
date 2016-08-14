@@ -98,6 +98,7 @@
         color: var(--secondary-text-color);
       }
 
+      .sub-session[with-background] .tags,
       .sub-session[with-background] .session-meta {
         color: #fff;
       }
@@ -123,6 +124,11 @@
 
       .sub-session:hover .image-overlay {
         opacity: 1;
+      }
+
+      .sub-session[with-background] .image-overlay,
+      .sub-session[with-background]:hover .image-overlay {
+        opacity: 0;
       }
 
       .tags {
