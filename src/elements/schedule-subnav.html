@@ -1,12 +1,11 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-
 <link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<!--<link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">-->
-<!--<link rel="import" href="../../bower_components/paper-button/paper-button.html">-->
-<!--<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">-->
-<!--<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">-->
+<link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
 
 <link rel="import" href="../styles/shared-styles.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
@@ -20,6 +19,7 @@
     <style include="shared-styles">
       :host {
         display: block;
+        --paper-menu-background-color: #fff;
       }
 
       .subpage-nav {
@@ -37,6 +37,10 @@
         color: var(--text-primary-color);
       }
 
+      .filter-icon {
+        margin-left: 4px;
+      }
+
       .filters-content > * {
         padding: 0 24px;
       }
@@ -46,6 +50,28 @@
         min-height: 48px;
       }
 
+      paper-item {
+        cursor: pointer;
+      }
+
+      .info-banner {
+        padding: 16px;
+        background: rgba(236, 239, 241, 0.6);
+        color: rgba(0,0,0,0.54);
+        font-size: 12px;
+      }
+
+      .legend-item {
+        margin-right: 8px;
+      }
+
+      .point {
+        margin-right: 4px;
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        border-radius: 50%;
+      }
     </style>
 
     <nav class="subpage-nav" layout horizontal center justified relative>
@@ -59,19 +85,51 @@
         </template>
       </paper-tabs>
 
-      <!--<paper-menu-button horizontal-align="right" ignore-select allow-outside-scroll>-->
-      <!--<paper-button class="dropdown-trigger">-->
-      <!--Filter-->
-      <!--<iron-icon icon="[[_computeFilterIcon(showFilters)]]"></iron-icon>-->
-      <!--</paper-button>-->
-      <!--<paper-menu id="filters" class="filters-content dropdown-content" attr-for-selected="value" selected-values="{{filters}}" multi>-->
-      <!--<template is="dom-repeat" items="[[schedule.tags]]" as="tag">-->
-      <!--<paper-checkbox layout horizontal center flex value="[[tag]]">[[tag]]</paper-checkbox>-->
-      <!--</template>-->
-      <!--<paper-item on-tap="clearFilters">Clear all</paper-item>-->
-      <!--</paper-menu>-->
-      <!--</paper-menu-button>-->
+      <paper-menu-button
+        id="filtersMenuToggle"
+        horizontal-align="right"
+        ignore-select
+        allow-outside-scroll
+        opened="{{_filtersOpened}}"
+      >
+        <paper-button class="dropdown-trigger">
+          Filter
+          <iron-icon class="filter-icon" icon="filter-list"></iron-icon>
+        </paper-button>
+        <paper-menu
+          id="filters"
+          class="filters-content dropdown-content"
+          attr-for-selected="value"
+          selected-values="{{filters}}"
+          multi
+        >
+          <template is="dom-repeat" items="[[schedule.tags]]" as="tag">
+            <paper-checkbox
+              value="[[tag]]"
+              checked="{{_isChecked(tag)}}"
+              layout horizontal center flex
+            >
+              [[tag]]
+            </paper-checkbox>
+          </template>
+          <paper-item on-tap="clearFilters">[[localize('clear-all')]]</paper-item>
+        </paper-menu>
+      </paper-menu-button>
     </nav>
+
+    <div class="info-banner" layout horizontal justified>
+      <div class="legend" layout horizontal>
+        <template is="dom-repeat" items="[[schedule.tags]]" as="tag">
+          <div class="legend-item">
+            <i class="point"
+               style$="background: [[_getCustomStyleValue(tag)]]"></i>[[tag]]
+          </div>
+        </template>
+      </div>
+      <div class="filters" hidden$="[[!_activeFilters(filters)]]">
+        [[localize('filtered-by')]] [[_joinArray(filters)]]
+      </div>
+    </div>
 
   </template>
 
@@ -85,7 +143,7 @@
 
         behaviors: [
           HOVERBOARD.UtilsBehavior,
-          HOVERBOARD.LocalizeBehavior,
+          HOVERBOARD.LocalizeBehavior
         ],
 
         properties: {
@@ -95,20 +153,31 @@
           selectedDay: {
             type: String
           },
-          showFilters: {
-            type: Boolean,
-            value: false,
-            notify: true
-          },
           filters: {
             type: Array,
-            value: []
+            value: [],
+            notify: true
           }
         },
 
-        listeners: {
-          'iron-select': '_onFilterChange',
-          'iron-deselect': '_onFilterChange'
+        attached: function () {
+          this._target = this.$.filtersMenuToggle;
+
+          this.listen(this._target, 'mouseenter', '_showFilters');
+          this.listen(this._target, 'focus', '_showFilters');
+          this.listen(this._target, 'mouseleave', '_hideFilters');
+          this.listen(this._target, 'blur', '_hideFilters');
+          this.listen(this._target, 'tap', '_hideFilters');
+        },
+
+        detached: function () {
+          if (this._target) {
+            this.unlisten(this._target, 'mouseenter', '_showFilters');
+            this.unlisten(this._target, 'focus', '_showFilters');
+            this.unlisten(this._target, 'mouseleave', '_hideFilters');
+            this.unlisten(this._target, 'blur', '_hideFilters');
+            this.unlisten(this._target, 'tap', '_hideFilters');
+          }
         },
 
         clearFilters: function (e) {
@@ -124,25 +193,30 @@
           });
         },
 
-        _computeFilterIcon: function (filtering) {
-          return filtering ? 'close' : 'filter-list';
+        _isChecked: function (tag) {
+          return this.filters.indexOf(tag) > -1;
         },
 
-        _onFilterChange: function () {
-          var filters = this.filters.join(',');
-          var search = window.location.search;
-          if (filters.length) {
-            search = HOVERBOARD.Util.setSearchParam(search, 'filters', filters);
-          } else {
-            search = HOVERBOARD.Util.removeSearchParam(search, 'filters');
-          }
+        _showFilters: function () {
+          if (this._filtersOpened) return;
+          this.set('_filtersOpened', true);
+        },
 
-          history.replaceState({}, '', [
-            window.location.origin,
-            window.location.pathname,
-            search,
-            window.location.hash
-          ].join(''));
+        _hideFilters: function () {
+          if (!this._filtersOpened) return;
+          this.set('_filtersOpened', false);
+        },
+
+        _joinArray: function (array) {
+          return array.join(', ');
+        },
+
+        _getCustomStyleValue: function(tag) {
+          return this.getComputedStyleValue('--' + this._generateClass(tag));
+        },
+
+        _activeFilters: function() {
+          return this.filters && this.filters.length;
         }
 
       });
