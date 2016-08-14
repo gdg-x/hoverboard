@@ -6,7 +6,7 @@
   (function () {
     'use strict';
 
-    HOVERBOARD.AppLocalizeBehaviorImpl = {
+    HOVERBOARD.LocalizeBehaviorImpl = {
 
       properties: {
         app: {
@@ -36,35 +36,40 @@
       ],
 
       loadAppResources: function (lang) {
+        if (!lang) return;
         var url = '/data/' + lang + '/resources.json';
         this.loadResources(this.resolveUrl(url));
       },
 
       setLanguage: function (lang) {
         if (lang) {
-          this.loadAppResources(lang);
-          this.set('language', lang);
+          if (this.app.resources && !this.app.resources[lang]) {
+            this.loadAppResources(lang);
+          } else {
+            this.set('language', lang);
+          }
         }
       },
 
       __onRequestResponse: function (event) {
         if (!event.response || !this.app) return;
-        var resource = {};
-        resource[this.language] = event.response;
-        this.resources = resource;
-//        this.set('app.resources', resource);
+        var resource = this.app.resources || {};
+        resource[this.app.lang] = event.response;
+        this.set('resources', resource);
+        this.set('app.resources', resource);
         this.fire('app-resources-loaded');
       },
 
       _onLocalesLoaded: function (event) {
         event.stopPropagation();
+        this.set('language', this.app.lang);
       }
 
     };
 
-    HOVERBOARD.AppLocalizeBehavior = [
+    HOVERBOARD.LocalizeBehavior = [
       Polymer.AppLocalizeBehavior,
-      HOVERBOARD.AppLocalizeBehaviorImpl
+      HOVERBOARD.LocalizeBehaviorImpl
     ];
 
   }());

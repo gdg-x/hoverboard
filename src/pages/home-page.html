@@ -27,7 +27,7 @@
     <tickets-block app="{{app}}" cascaded></tickets-block>
     <latest-posts app="{{app}}" posts="{{posts}}" cascaded></latest-posts>
     <social-feed app="{{app}}" cascaded></social-feed>
-    <map-block app="{{app}}" cascaded></map-block>
+    <map-block app="{{app}}" selected="{{selected}}" cascaded></map-block>
     <logos-block app="{{app}}" cascaded></logos-block>
     <footer-block app="{{app}}" cascaded></footer-block>
 
@@ -51,6 +51,11 @@
           posts: Array,
           logos: Array,
           videos: Array,
+          selected: {
+            type: Boolean,
+            reflectToAttribute: true,
+            value: false
+          },
 
           animationConfig: {
             type: Object,

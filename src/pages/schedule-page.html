@@ -25,37 +25,51 @@
         display: block;
       }
 
+      .container[phone] {
+        padding-right: 0;
+        padding-left: 0;
+      }
+
       schedule-day {
         margin-bottom: 64px;
       }
     </style>
 
-    <app-route route="{{route}}"
-               pattern="/:day"
-               data="{{routeData}}"
-               query-params="{{queryParams}}"></app-route>
+    <app-route
+      route="{{route}}"
+      pattern="/:day"
+      data="{{routeData}}"
+      query-params="{{queryParams}}"
+    ></app-route>
 
-    <div class="container">
-
+    <div class="container" phone$="{{app.isPhoneSize}}">
       <schedule-subnav
+        app="{{app}}"
         schedule="[[schedule]]"
         selected-day="[[app.selectedDay]]"
+        filters="{{filters}}"
       ></schedule-subnav>
 
       <neon-animated-pages selected="[[app.selectedDay]]" attr-for-selected="name">
         <template is="dom-repeat" items="[[schedule]]" as="day">
-          <schedule-day name$="day[[_addToValue(index, 1)]]" app={{app}} day="[[day]]"></schedule-day>
+          <schedule-day
+            name$="day[[_addToValue(index, 1)]]"
+            app={{app}}
+            day="[[day]]"
+            filters="[[filters]]"
+          ></schedule-day>
         </template>
       </neon-animated-pages>
-
     </div>
 
-    <session-details id="sessionDetails"
-                     app="{{app}}"
-                     session="[[_selectedSession]]"
-                     entry-animation="scale-up-animation"
-                     exit-animation="fade-out-animation"
-                     with-backdrop></session-details>
+    <session-details
+      id="sessionDetails"
+      app="{{app}}"
+      session="[[_selectedSession]]"
+      entry-animation="scale-up-animation"
+      exit-animation="fade-out-animation"
+      with-backdrop
+    ></session-details>
 
   </template>
 
@@ -100,6 +114,10 @@
             value: false
           },
 
+          filters: {
+            type: Array
+          },
+
           animationConfig: {
             type: Object,
             value: function () {
@@ -124,11 +142,12 @@
 
         observers: [
           '_routePageChanged(routeData.day)',
-          '_queryParamsChanged(queryParams)'
+          '_queryParamsChanged(queryParams)',
+          '_filtersChanged(filters.splices)'
         ],
 
         listeners: {
-          'iron-overlay-closed': '_resetQueryParams'
+          'iron-overlay-closed': '_resetSessionIdParam'
         },
 
         _routePageChanged: function (day) {
@@ -143,20 +162,33 @@
 
         _queryParamsChanged: function (params) {
           if (this.selected) {
-            var session = this.sessions[params.sessionId];
-            if (!session) {
-              this._resetQueryParams();
-              return;
+            if (params.sessionId) {
+              var session = this.sessions[params.sessionId];
+              if (!session) {
+                this._resetSessionIdParam();
+                return;
+              }
+              Polymer.RenderStatus.afterNextRender(this, function () {
+                this._selectedSession = session;
+                this.$.sessionDetails.open();
+              }.bind(this));
             }
-            Polymer.RenderStatus.afterNextRender(this, function () {
-              this._selectedSession = session;
-              this.$.sessionDetails.open();
-            }.bind(this));
+            if (params.filters) {
+              this.set('filters', params.filters.split(','));
+            } else {
+              this.set('queryParams.filters', null);
+            }
           }
         },
 
+        _filtersChanged: function () {
+          if (this.filters.length)
+            this.set('queryParams.filters', this.filters.join(','));
+          else
+            this.set('queryParams.filters', null);
+        },
 
-        _resetQueryParams: function () {
+        _resetSessionIdParam: function () {
           this.set('queryParams.sessionId', null);
         }
 

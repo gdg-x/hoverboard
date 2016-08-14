@@ -17,7 +17,7 @@
     <style include="shared-styles">
       :host {
         display: block;
-        --paper-card-background-color: var(--secondary-background-color);;
+        --paper-card-background-color: var(--secondary-background-color);
       }
 
       .timeslot {
@@ -46,6 +46,10 @@
       }
 
       .session {
+        padding: 0 16px;
+      }
+
+      .session[flex] {
         padding: 0 8px;
       }
 
@@ -161,7 +165,7 @@
           <template is="dom-repeat" items="[[timeslot.sessions]]" as="session">
             <div class="session" layout vertical flex$="{{!app.isPhoneSize}}">
               <template is="dom-repeat" items="[[session]]" as="subSession"
-                        filter="{{_filterSession(_selectedTags.splices)}}">
+                        filter="{{_filterSession(filters.splices)}}">
 
                 <a href$="/schedule/[[name]]?sessionId=[[subSession.id]]" class="sub-session" with-background$="[[subSession.image]]" layout flex-auto>
                   <paper-card layout flex-auto>
@@ -249,7 +253,8 @@
           },
 
           filters: {
-            type: Array
+            type: Array,
+            value: []
           },
 
           animationConfig: {
@@ -283,7 +288,16 @@
         },
 
         _joinArray: function (array) {
-          return array.join(", ");
+          return array.join(', ');
+        },
+
+        _filterSession: function () {
+          var filters = this.filters || [];
+          if (!filters.length)
+            return false;
+          return function (session) {
+            return filters.indexOf(session.mainTag) > -1;
+          };
         }
 
       });
