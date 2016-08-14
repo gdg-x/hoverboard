@@ -11,7 +11,7 @@
 
 <link rel="import" href="../styles/shared-styles.html">
 <link rel="import" href="../js-wrappers/g-plusone.html">
-<link rel="import" href="../behaviors/app-localize-behavior.html">
+<link rel="import" href="../behaviors/localize-behavior.html">
 <link rel="import" href="mailchimp-subscribe.html">
 
 
@@ -29,6 +29,7 @@
         --paper-menu-button: {
           padding: 0;
         };
+        --paper-menu-background-color: #fff;
       }
 
       .container {
@@ -109,6 +110,14 @@
       .copyright {
         @apply(--layout-flex);
         margin-right: 10px;
+      }
+
+      .language-icon {
+        margin-right: 4px;
+      }
+
+      paper-item {
+        cursor: pointer;
       }
 
       @media (min-width: 601px) {
@@ -207,19 +216,19 @@
           <g:plusone size="medium" width="200" annotation="inline" href$="{{app.data.url}}"></g:plusone>
         </div>
 
-        <!--<paper-menu-button vertical-align="bottom" horizontal-align="left">-->
-          <!--<paper-button class="dropdown-trigger">-->
-            <!--<iron-icon icon="language"></iron-icon>-->
-            <!--[[selectedLanguage.label]]-->
-            <!--<iron-icon icon="arrow-drop-down"></iron-icon>-->
-          <!--</paper-button>-->
-          <!--<paper-menu class="dropdown-content" selected="{{app.lang}}" selected-item="{{selectedLanguage}}"-->
-                      <!--attr-for-selected="value">-->
-            <!--<template is="dom-repeat" items="[[app.data.languages]]" as="lang">-->
-              <!--<paper-item value="[[lang.key]]" label="[[lang.name]]">[[lang.name]]</paper-item>-->
-            <!--</template>-->
-          <!--</paper-menu>-->
-        <!--</paper-menu-button>-->
+        <paper-menu-button vertical-align="bottom" horizontal-align="left">
+          <paper-button class="dropdown-trigger">
+            <iron-icon class="language-icon" icon="language"></iron-icon>
+            [[selectedLanguage.label]]
+            <iron-icon icon="arrow-drop-down"></iron-icon>
+          </paper-button>
+          <paper-menu class="dropdown-content" selected="{{app.lang}}" selected-item="{{selectedLanguage}}"
+                      attr-for-selected="value">
+            <template is="dom-repeat" items="[[app.data.languages]]" as="lang">
+              <paper-item value="[[lang.key]]" label="[[lang.name]]">[[lang.name]]</paper-item>
+            </template>
+          </paper-menu>
+        </paper-menu-button>
       </div>
     </div>
 
@@ -234,7 +243,11 @@
         is: 'footer-block',
 
         behaviors: [
-          HOVERBOARD.AppLocalizeBehavior
+          HOVERBOARD.LocalizeBehavior
+        ],
+
+        observers: [
+          'languageChanged(app.lang)'
         ],
 
         scrollToTop: function (e) {
@@ -243,6 +256,10 @@
 
         _getLinkTarget: function (newTab) {
           return newTab ? '_blank' : '';
+        },
+
+        languageChanged: function (lang) {
+          HOVERBOARD.Analytics.trackEvent('language', 'select', lang);
         }
 
       });

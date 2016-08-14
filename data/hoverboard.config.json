@@ -187,7 +187,7 @@
   "teamPageText": "team-page-text",
   "statistics": [
     {
-      "counter": 500,
+      "counter": 600,
       "caption": "attendees"
     },
     {
@@ -195,7 +195,7 @@
       "caption": "days"
     },
     {
-      "counter": 40,
+      "counter": 30,
       "caption": "sessions"
     },
     {
