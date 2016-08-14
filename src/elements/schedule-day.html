@@ -56,14 +56,14 @@
       .sub-session {
         @apply(--shadow-transition);
         cursor: pointer;
-        color: var(--text-primary-color);
+        color: var(--primary-text-color);
       }
 
       .sub-session[with-background] {
         color: #fff;
       }
 
-      .sub-session[with-background] > div {
+      .sub-session[with-background] .overlay {
         background: rgba(0, 0, 0, 0.4);
       }
 
@@ -174,7 +174,7 @@
                       <iron-image src="[[subSession.image]]" sizing="cover" fit preload></iron-image>
                     </template>
 
-                    <div relative layout vertical flex>
+                    <div class="overlay" relative layout vertical flex>
 
                       <div class="sub-session-content" flex>
                         <h2 class="session-title">[[subSession.title]]</h2>

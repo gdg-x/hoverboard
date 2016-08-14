@@ -2,7 +2,7 @@ Today we start the series of interviews with our speakers, and the first one we 
 
 So, let's start!
 
-## 1. Please, tell a bit about the work you do. How did you first get involved into this work?
+## 1. Hello, Yonatan! Please, tell a bit about the work you do. How did you first get involved into this work?
 
 First time I faced Android was when building an app for my own startup, with Android SDK 8. It was an amazing app that was draining battery from 100 to 0 in about 4 hours :)
 The development felt right for me. I really enjoyed the mixture between UI, complex algorithms and the entire eco-system. I liked the opportunity to try various open source libraries. In general, the system flexibility was very appealing to me.

@@ -166,7 +166,46 @@
             "name": "Facebook"
           }
         ],
-        "title": "Social and media"
+        "title": "Volunteers"
+      }
+    ]
+  },
+  {
+    "title": "Media team",
+    "members": [
+      {
+        "name": "Alina Yurenko",
+        "photoUrl": "/images/people/alina_yurenko.jpg",
+        "socials": [
+          {
+            "icon": "facebook",
+            "link": "https://www.facebook.com/alina.yurenko",
+            "name": "Facebook"
+          },
+          {
+            "icon": "linkedin",
+            "link": "https://www.linkedin.com/in/alinayurenko",
+            "name": "Linkedin"
+          }
+        ],
+        "title": "Emails and analytics"
+      },
+      {
+        "name": "Jule Palenuchka",
+        "photoUrl": "/images/people/jule_palenuchka.jpg",
+        "socials": [
+          {
+            "icon": "facebook",
+            "link": "https://www.facebook.com/julepalenu4ka",
+            "name": "Facebook"
+          },
+          {
+            "icon": "twitter",
+            "link": "https://twitter.com/Palenu4kaJulia",
+            "name": "Twitter"
+          }
+        ],
+        "title": "Social networks"
       }
     ]
   },

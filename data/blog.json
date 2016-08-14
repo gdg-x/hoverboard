@@ -61,5 +61,14 @@
     "secondaryColor": "#ffc107",
     "image": "/images/posts/yonatan_cover.jpg",
     "brief": "First time I faced Android was when building an app for my own startup, with Android SDK 8. It was an amazing app that was draining battery from 100 to 0 in about 4 hours..."
+  },
+  {
+    "id": "interview-with-carmen-popoviciu",
+    "title": "Interview with Carmen Popoviciu",
+    "posted": "2016-08-15",
+    "primaryColor": "#009688",
+    "secondaryColor": "#009688",
+    "image": "/images/posts/popoviciu_cover.jpg",
+    "brief": "I’m a front-end developer, working mostly on the JS side of things, because that’s what I really like doing. My story is actually funny because originally I wanted to be a dancer..."
   }
 ]

@@ -73,6 +73,11 @@
         "name": "Sigma",
         "url": "http://sigma.software/",
         "logoUrl": "/images/logos/sigma.svg"
+      },
+      {
+        "name": "Ruckus",
+        "url": "https://www.ruckuswireless.com/",
+        "logoUrl": "/images/logos/ruckus.svg"
       }
     ]
   },
@@ -83,6 +88,16 @@
         "name": "JetBrains",
         "url": "https://www.jetbrains.com/",
         "logoUrl": "/images/logos/jetbrains.svg"
+      }
+    ]
+  },
+  {
+    "title": "hosting-partner",
+    "logos": [
+      {
+        "name": "ibis",
+        "url": "http://www.ibisstyles.com/",
+        "logoUrl": "/images/logos/ibis.png"
       }
     ]
   },
