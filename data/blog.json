@@ -13,7 +13,7 @@
     "title": "GDG DevFest 2016 Announced",
     "posted": "2016-05-04",
     "primaryColor": "#00BCD4",
-    "secondaryColor": "#00BCD4",
+    "secondaryColor": "#03afc5",
     "image": "/images/posts/announce.jpg",
     "brief": "Ukrainian Google Developers Groups are proud to announce the fifth annual GDG DevFest 2016 which is the biggest Google related event in Ukraine carefully crafted by GDG community! The event will take place on **9-10th of September** in **Lviv**."
   },
@@ -22,7 +22,7 @@
     "title": "Call for Papers Time",
     "posted": "2016-05-06",
     "primaryColor": "#3F51B5",
-    "secondaryColor": "#3F51B5",
+    "secondaryColor": "#3647a5",
     "image": "/images/posts/c4p-is-open.jpg",
     "brief": "GDG DevFest Ukraine 2016 announced! The 5th edition of the biggest conference about Google technologies in Ukraine will take on **September 9-10** in an ancient city of Lviv. That means that it is time to open [call for talk submissions](http://bit.ly/df16-c4p)."
   },
@@ -31,7 +31,7 @@
     "title": "Women in Tech WANTED",
     "posted": "2016-07-13",
     "primaryColor": "#E91E63",
-    "secondaryColor": "#E91E63",
+    "secondaryColor": "#d91b5c",
     "image": "/images/posts/women_programming.jpg",
     "brief": "Women represent half of the world’s intellectual capital and their participation can substantially expand economic growth. Ignoring this fact can be disastrous for organizations."
   },
@@ -40,7 +40,7 @@
     "title": "Meet our Platinum Sponsor - CoreValue",
     "posted": "2016-08-03",
     "primaryColor": "#2196F3",
-    "secondaryColor": "#2196F3",
+    "secondaryColor": "#1d8fea",
     "image": "/images/posts/corevalue.jpg",
     "brief": "CoreValue, a Software and Technology Services firm headquartered in New Jersey provides Mobility and traditional Cloud based CRM implementation services..."
   },
@@ -49,7 +49,7 @@
     "title": "Meet our Diamond Sponsor - intouch",
     "posted": "2016-08-05",
     "primaryColor": "#a61862",
-    "secondaryColor": "#a61862",
+    "secondaryColor": "#971559",
     "image": "/images/posts/intouch_cover.jpg",
     "brief": "Producing a powerful online solution is very essential in today’s competitive markets. intouch makes sure to keep up with the pace of the market’s growing need and skilled developers..."
   },
@@ -58,7 +58,7 @@
     "title": "Doze and Star Wars: Interview with Yonatan Levin",
     "posted": "2016-08-09",
     "primaryColor": "#ffc107",
-    "secondaryColor": "#ffc107",
+    "secondaryColor": "#edb305",
     "image": "/images/posts/yonatan_cover.jpg",
     "brief": "First time I faced Android was when building an app for my own startup, with Android SDK 8. It was an amazing app that was draining battery from 100 to 0 in about 4 hours..."
   },
@@ -67,8 +67,17 @@
     "title": "Interview with Carmen Popoviciu",
     "posted": "2016-08-15",
     "primaryColor": "#009688",
-    "secondaryColor": "#009688",
+    "secondaryColor": "#028478",
     "image": "/images/posts/popoviciu_cover.jpg",
     "brief": "I’m a front-end developer, working mostly on the JS side of things, because that’s what I really like doing. My story is actually funny because originally I wanted to be a dancer..."
+  },
+  {
+    "id": "platinum-sponsor-n-ix",
+    "title": "Meet our Platinum Sponsor - N-iX",
+    "posted": "2016-08-16",
+    "primaryColor": "#f48221",
+    "secondaryColor": "#e47b23",
+    "image": "/images/posts/nix_cover.jpg",
+    "brief": "N‐iX is an Eastern European provider of software development services with over 300 expert software engineers onboard that power innovative technology businesses across North America, UK, Sweden and Europe...."
   }
 ]
