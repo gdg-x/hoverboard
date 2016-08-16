@@ -49,14 +49,6 @@
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
-    },
-    "hub": {
-      "headerSettings": {
-        "backgroundImage": "images/backgrounds/hub.jpg",
-        "backgroundColor": "#4caf50",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
     }
   },
   "navigation": [
