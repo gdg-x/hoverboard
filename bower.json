@@ -42,8 +42,7 @@
     "google-youtube": "GoogleWebComponents/google-youtube#^1.2.0",
     "google-map": "GoogleWebComponents/google-map#^1.1.0",
     "polymer": "Polymer/polymer#^1.6.0",
-    "time-elements": "github/time-elements#^0.6.0",
-    "disqus-comments": "divshot/disqus-comments#0915a95"
+    "time-elements": "github/time-elements#^0.6.0"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^4.3.0"
