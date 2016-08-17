@@ -11,7 +11,7 @@ version - [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
 > Template is brought by [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy) 
 from [GDG Lviv](http://lviv.gdg.org.ua/).
 
-> *Do you :heart: it?* Show your support - please, star **the project**.
+> *Do you :heart: it?* Show your support - please, :star: the project.
 
 :zap: [Live demo](https://hoverboard.firebaseapp.com/)
 
@@ -29,7 +29,7 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 
 
 ### Setup
-:zap: [Full documentation](/docs/)
+:book: [Full documentation](/docs/).
 
 
 ###### Prerequisites
@@ -38,7 +38,7 @@ Install [polymer-cli](https://github.com/Polymer/polymer-cli):
 
     npm i -g polymer-cli@0.12.0
     
-[Fork](https://github.com/gdg-x/hoverboard/fork) this repository and clone it locally
+[Fork](https://github.com/gdg-x/hoverboard/fork) this repository and clone it locally.
 
 ##### Install dependencies
 
@@ -68,7 +68,7 @@ H2/push-compatible servers or to clients that do not support H2/Push.
 
     polymer build
     
-:book: Read more in [deploy docs](/docs/deploy.md)   
+:book: Read more in [deploy docs](/docs/deploy.md).   
 
 
 ### Who uses the template?
@@ -112,11 +112,11 @@ Feel free to send PR. If you have any questions, feel free to contact
 6. Push to the branch (`git push origin my-new-feature`)
 7. Create new Pull Request
 
-:book: Read complete [contributing guide](CONTRIBUTING.md)
+:book: Read complete [contributing guide](CONTRIBUTING.md).
 
 
 ### Contributors
-See [list of contributors](https://github.com/gdg-x/hoverboard/graphs/contributors)
+See [list of contributors](https://github.com/gdg-x/hoverboard/graphs/contributors).
 
 __Maintainer:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
 
