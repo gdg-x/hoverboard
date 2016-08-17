@@ -8,6 +8,8 @@
   <template>
     <style>
       :root {
+        /* Generate theme at https://www.materialpalette.com */
+
         /* Primary colors */
         --dark-primary-color:       #F57C00;
         --default-primary-color:    #FF9800;
@@ -27,6 +29,9 @@
 
         /* Other colors */
         --divider-color:            #B6B6B6;
+
+        /* --- End of replace section --- */
+
         --secondary-background-color: #FFFFFF;
 
         /* Footer */
@@ -150,6 +155,10 @@
         display: block !important;
       }
 
+      body {
+        margin: 0;
+        min-height: 100vh;
+      }
       body,
       .markdown-html {
         font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;

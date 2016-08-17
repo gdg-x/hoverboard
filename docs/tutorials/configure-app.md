@@ -26,11 +26,25 @@ which looks like:
 ```
 
 **Note**, the project supports localization using [AppLocalizeBehavior][
-AppLocalizeBehavior], that's why some of config values are keys in
+AppLocalizeBehavior], that's why some of the config values are keys in
 [localization resources][localization resources].
 
+### SEO
+The project doesn't use any generators, so there is a need to edit manually
+meta data in `index.html`
+```
+<head>
+  <meta name="description"
+        content="The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts">
+  <meta name="keywords"
+        content="event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev">
+  <meta name="author" content="GDG Lviv">
 
-## Pages config
+  <title>GDG DevFest Ukraine 2016</title>
+  ...
+```
+
+### Pages config
 
 ```
 "pages": {
@@ -78,7 +92,7 @@ in `hoverboard-app.html`
 And in navigation
 
 
-## Navigation
+### Navigation
 
 ```
 "navigation": [
@@ -95,5 +109,12 @@ And in navigation
 
 This configs reflects in `toolbar-block.html` and `drawer-block.html`
 
+
+# Next steps
+
+Now your Hoverboard is up configured, learn how to [style app][style app] and [deploy][deploy].
+
 [AppLocalizeBehavior]: https://elements.polymer-project.org/elements/app-localize-behavior
 [localization resources]: /data/en/resources.json
+[style app]: styling.md
+[deploy]: deploy.md

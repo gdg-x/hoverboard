@@ -22,7 +22,7 @@ The instructions below are based on the [Firebase quick start][Firebase quick st
         firebase init
 
     Running the firebase init command creates a firebase.json settings file 
-    in the root of your project directory. Otherwise go to
+    in the root of your project directory. Otherwise, go to
     [Firebase console][Firebase console] to create a new app.
     
 1.  When you initialize your app, you will be prompted for a directory to 
