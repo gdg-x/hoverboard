@@ -95,6 +95,8 @@ pull request, so we can include you in this list.
 :x: My schedule  
 :x: Push notification  
 :x: ES2015  
+:x: Firebase Integration
+:x: Unit/Integration Tests
 :point_right: __Propose your feature with [creating an issue](https://github.com/gdg-x/hoverboard/issues/new)__
 
 ### Contributing
