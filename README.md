@@ -16,18 +16,17 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 :zap: [Live demo](https://hoverboard.firebaseapp.com/)
 
 ### Features
-* Polymer 
-* [PRPL pattern](https://www.polymer-project.org/1.0/toolbox/server) 
-* Offline access
-* i18n
-* Material design
-* Animations
-* Integrated speakers and sessions management
-* SEO friendly
-* Optimized and fast
-* Editable theme colors
-* Quick deploy
-
+:white_check_mark: Polymer  
+:white_check_mark: [PRPL pattern](https://www.polymer-project.org/1.0/toolbox/server)  
+:white_check_mark: * Offline access  
+:white_check_mark: i18n  
+:white_check_mark: Material design  
+:white_check_mark: Animations  
+:white_check_mark: Integrated speakers and sessions management  
+:white_check_mark: SEO friendly  
+:white_check_mark: Optimized and fast  
+:white_check_mark: Editable theme colors  
+:white_check_mark: Quick deploy  
 
 ### Setup
 :book: [Full documentation](/docs/).
@@ -91,12 +90,12 @@ pull request, so we can include you in this list.
 | [Google I/O Extended 2016 Kuala Lumpur](https://ioxkl2016.firebaseapp.com) |
 | [GDG DevFest Hamburg 2016](https://hamburg.devfest.de) |
 
-### Roadmap
-* Admin panel
-* My schedule
-* Push notification
-* ES2015
-* __Propose your feature with [creating an issue](https://github.com/gdg-x/hoverboard/issues/new)__
+### Roadmap :rocket:
+:x: Admin panel  
+:x: My schedule  
+:x: Push notification  
+:x: ES2015  
+:point_right: __Propose your feature with [creating an issue](https://github.com/gdg-x/hoverboard/issues/new)__
 
 ### Contributing
 
@@ -116,7 +115,7 @@ Feel free to send PR. If you have any questions, feel free to contact
 :book: Read complete [contributing guide](CONTRIBUTING.md).
 
 
-### Contributors
+### Contributors :sparkles:
 See [list of contributors](https://github.com/gdg-x/hoverboard/graphs/contributors).
 
 __Maintainer:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
