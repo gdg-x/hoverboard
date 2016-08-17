@@ -19,6 +19,7 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 * Polymer 
 * [PRPL pattern](https://www.polymer-project.org/1.0/toolbox/server) 
 * Offline access
+* i18n
 * Material design
 * Animations
 * Integrated speakers and sessions management

@@ -56,14 +56,14 @@
       .sub-session {
         @apply(--shadow-transition);
         cursor: pointer;
-        color: var(--text-primary-color);
+        color: var(--primary-text-color);
       }
 
       .sub-session[with-background] {
         color: #fff;
       }
 
-      .sub-session[with-background] > div {
+      .sub-session[with-background] .overlay {
         background: rgba(0, 0, 0, 0.4);
       }
 
@@ -98,6 +98,7 @@
         color: var(--secondary-text-color);
       }
 
+      .sub-session[with-background] .tags,
       .sub-session[with-background] .session-meta {
         color: #fff;
       }
@@ -123,6 +124,11 @@
 
       .sub-session:hover .image-overlay {
         opacity: 1;
+      }
+
+      .sub-session[with-background] .image-overlay,
+      .sub-session[with-background]:hover .image-overlay {
+        opacity: 0;
       }
 
       .tags {
@@ -174,7 +180,7 @@
                       <iron-image src="[[subSession.image]]" sizing="cover" fit preload></iron-image>
                     </template>
 
-                    <div relative layout vertical flex>
+                    <div class="overlay" relative layout vertical flex>
 
                       <div class="sub-session-content" flex>
                         <h2 class="session-title">[[subSession.title]]</h2>

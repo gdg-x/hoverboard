@@ -44,6 +44,18 @@ meta data in `index.html`
   ...
 ```
 
+### Google Analytics
+Replace GA tracking code in `index.html`
+```
+trackingId: window.ENV === 'prod' ? 'UA-43643469-8' : 'UA-43643469-9'
+```
+
+It's possible to have analytics for development and production. Select
+your environment on line:
+```
+window.ENV = 'dev';
+```
+
 ### Pages config
 
 ```
