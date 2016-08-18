@@ -51,7 +51,7 @@ routing for the app:
 
     polymer serve
     
-:book: Read more in [setup docs](/docs/set-up.md)
+:book: Read more in [setup docs](/docs/set-up.md).
 
 
 ### Build
