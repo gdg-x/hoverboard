@@ -1,0 +1,29 @@
+<link rel='import' href='../../bower_components/polymer/polymer.html'>
+
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/app-scroll-effects-behavior.html">
+
+
+<script>
+  (function () {
+    'use strict';
+
+    Polymer.AppLayout.registerEffect('fade-effect', {
+
+      setUp: function setUp(config) {
+        var fades = Polymer.dom(this).querySelectorAll('[fade]');
+        for (var i = 0, length = fades.length; i < length; i++) {
+          fades[i].style.willChange = 'opacity';
+          fades[i].style.transitionProperty = 'opacity';
+        }
+      },
+
+      run: function run(p, y) {
+        var fades = Polymer.dom(this).querySelectorAll('[fade]');
+        for (var i = 0, length = fades.length; i < length; i++) {
+          fades[i].style.opacity = 1 - p * 1.3;
+        }
+      }
+
+    });
+  })();
+</script>

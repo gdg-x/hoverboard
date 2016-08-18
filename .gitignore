@@ -1,11 +1,5 @@
-app/google*.html
-app/scripts/analytics.js
-app/themes/default-theme/fonts/*
 bower_components
-deploy
 dist
 node_modules
-npm-debug.log*
-.tmp
-.publish/
-.idea
+build
+.idea/

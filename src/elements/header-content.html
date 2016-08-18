@@ -1,0 +1,221 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+
+<link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+<link rel="import" href="../behaviors/localize-behavior.html">
+<link rel="import" href="animatable-content.html">
+
+
+<dom-module id="header-content">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        --paper-tabs-selection-bar-color: #FFFFFF;
+        --paper-tab-ink: rgba(255, 255, 255, 0.2);
+        --paper-tab-content: {
+          font-weight: 400 !important;
+        };
+        --paper-tab: {
+          color: #FFFFFF;
+          font-weight: 400;
+          text-transform: uppercase;
+          flex: none;
+        };
+        display: block;
+        position: relative;
+        overflow: hidden;
+      }
+
+      app-toolbar {
+        min-height: var(--min-header-height, 120px);
+        max-height: 360px;
+      }
+
+      .container {
+        @apply(--layout-vertical-reverse);
+        padding-top: 0;
+        padding-bottom: 20px;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+      }
+
+      .reset-padding-bottom {
+        padding-bottom: 0 !important;
+      }
+
+      neon-animated-pages {
+        width: 100%;
+        height: 100%;
+      }
+
+      .page-title {
+        margin: 0;
+      }
+
+      .page-subtitle {
+        font-size: 16px;
+      }
+
+      .home-wrapper {
+        width: 100%;
+        font-size: 18px;
+      }
+
+      .logo {
+        width: 240px;
+        min-height: 80px;
+      }
+
+      .dates {
+        font-size: 18px;
+        text-transform: uppercase;
+      }
+
+      .motto {
+        margin-top: 20px;
+        font-size: 22px;
+        line-height: 1;
+      }
+
+      .action-buttons {
+        margin-top: 40px;
+      }
+
+      paper-button {
+        font-size: 0.8em;
+        color: #fff;
+      }
+
+      .open-video {
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+        margin-top: 20px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .open-video iron-icon {
+        margin-right: 5px;
+      }
+
+      @media (min-width: 601px) {
+        .container {
+          padding-bottom: 40px;
+        }
+
+        .home-wrapper {
+          width: 50%;
+          max-width: 500px;
+        }
+
+        app-toolbar {
+          min-height: 360px;
+        }
+      }
+
+    </style>
+
+    <app-toolbar>
+      <neon-animated-pages attr-for-selected="name" selected="{{app.page}}">
+        <animatable-content name="home">
+          <div class="container">
+            <div class="home-wrapper">
+              <iron-image class="logo" src="/images/logo-light.svg" sizing="contain"
+                          alt="GDG DevFest Ukraine 2016"></iron-image>
+              <h3 class="dates">{{localize('dates')}}</h3>
+              <h2 class="motto">{{localize('motto')}}</h2>
+              <div class="open-video" on-tap="_openVideo">
+                <iron-icon icon="play"></iron-icon>
+                {{localize('play-icon')}}
+              </div>
+              <div class="action-buttons">
+                <paper-button class="primary" on-tap="_scrollToTickets" raised>{{localize('buy-ticket')}}</paper-button>
+              </div>
+            </div>
+          </div>
+        </animatable-content>
+        <animatable-content name="blog">
+          <div class="container">
+            <h3 class="page-title" hidden$="{{app.headerSettings.title}}">{{localize('blog')}}</h3>
+            <h3 class="page-title" hidden$="{{!app.headerSettings.title}}">[[app.headerSettings.title]]</h3>
+            <div class="page-subtitle" hidden$="{{!app.headerSettings.subtitle}}">[[app.headerSettings.subtitle]]</div>
+          </div>
+        </animatable-content>
+        <animatable-content name="speakers">
+          <div class="container">
+            <h3 class="page-title">{{localize('speakers')}}</h3>
+          </div>
+        </animatable-content>
+        <animatable-content name="schedule">
+          <div class="container">
+            <h3 class="page-title">{{localize('schedule')}}</h3>
+          </div>
+        </animatable-content>
+        <animatable-content name="team">
+          <div class="container">
+            <h3 class="page-title">{{localize('team')}}</h3>
+          </div>
+        </animatable-content>
+        <animatable-content name="cod">
+          <div class="container">
+            <h3 class="page-title">{{localize('cod')}}</h3>
+          </div>
+        </animatable-content>
+      </neon-animated-pages>
+    </app-toolbar>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'header-content',
+
+        behaviors: [
+          HOVERBOARD.LocalizeBehavior
+        ],
+
+        properties: {
+          app: {
+            type: Object
+          },
+          schedule: Array,
+          selectedDay: {
+            type: Number,
+            notify: true,
+            value: 0
+          }
+        },
+
+        _openVideo: function () {
+          HOVERBOARD.Elements.Template.openVideo('GDG DevFest Ukraine 2015', 'DfMnJAzOFng', true);
+          HOVERBOARD.Analytics.trackEvent('video', 'watch', 'GDG DevFest Ukraine 2015');
+        },
+
+        _scrollToTickets: function () {
+          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'header');
+          Polymer.AppLayout.scroll({
+            top: HOVERBOARD.Elements.Tickets.getBoundingClientRect().top,
+            behavior: 'smooth',
+            target: HOVERBOARD.Elements.Scroller
+          });
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>
