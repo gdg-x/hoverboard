@@ -42,7 +42,7 @@ and [Bower](https://bower.io/):
     
     npm i -g bower
     
-**[Fork](https://github.com/gdg-x/hoverboard/fork) this repository** and clone it locally.
+:point_right: **[Fork](https://github.com/gdg-x/hoverboard/fork) this repository** and clone it locally.
 
 ##### Install dependencies
 
@@ -133,5 +133,5 @@ __Maintainer:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](
 
 ### License
 
-Project is published under the [MIT license](https://github.com/gdg-x/hoverboard/blob/master/LICENSE.md) 
+Project is published under the [MIT license](https://github.com/gdg-x/hoverboard/blob/master/LICENSE.md).  
 Feel free to clone and modify repo as you want, but don't forget to add reference to authors :)
