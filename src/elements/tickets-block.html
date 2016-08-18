@@ -71,14 +71,16 @@
       </div>
       <div class="tickets-wrapper">
         <template is="dom-repeat" items="[[app.data.tickets.elements]]" as="ticket">
-          <ticket-element type="[[localize(ticket.name)]]"
-                          price="[[ticket.price]]"
-                          currency="[[ticket.currency]]"
-                          starts="[[localize(ticket.starts)]]"
-                          ends="[[localize(ticket.ends)]]"
-                          info="[[localize(ticket.info)]]"
-                          sold-out="[[ticket.soldOut]]"
-                          sold-out-text="[[localize('sold-out-tickets')]]"></ticket-element>
+          <ticket-element
+            type="[[localize(ticket.name)]]"
+            price="[[ticket.price]]"
+            currency="[[ticket.currency]]"
+            starts="[[localize(ticket.starts)]]"
+            ends="[[localize(ticket.ends)]]"
+            info="[[localize(ticket.info)]]"
+            sold-out="[[ticket.soldOut]]"
+            sold-out-text="[[localize('sold-out-tickets')]]"
+          ></ticket-element>
         </template>
       </div>
       <div class="details">[[localize('tickets-details')]]</div>

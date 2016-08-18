@@ -88,14 +88,21 @@
       </div>
     </paper-toolbar>
     <nav>
-      <paper-menu class="navigation list"
-                  attr-for-selected="name"
-                  selected="{{pageData.page}}"
-                  selected-class="selected">
+      <paper-menu
+        class="navigation list"
+        attr-for-selected="name"
+        selected="{{pageData.page}}"
+        selected-class="selected"
+      >
         <template is="dom-repeat" items="[[app.data.navigation]]" as="nav">
           <a class="navigation-link" name="[[nav.route]]" href$="[[nav.permalink]]" on-tap="closeDrawer">{{localize(nav.route)}}</a>
         </template>
-        <a class="navigation-link" href$="[[app.data.tickets.url]]" target="_blank" on-tap="_trackBuyClick">[[localize('buy-ticket')]] <iron-icon class="open-in-new" icon="open-in-new"/></a>
+        <a class="navigation-link" href$="[[app.data.tickets.url]]" target="_blank" on-tap="_trackBuyClick">[[localize('buy-ticket')]]
+          <iron-icon
+            class="open-in-new"
+            icon="open-in-new"
+          ></iron-icon>
+        </a>
       </paper-menu>
     </nav>
 
@@ -112,13 +119,6 @@
         behaviors: [
           HOVERBOARD.LocalizeBehavior
         ],
-
-        properties: {
-          routeData: {
-            type: Object,
-            notify: true
-          }
-        },
 
         closeDrawer: function () {
           HOVERBOARD.Elements.Template.closeDrawer();

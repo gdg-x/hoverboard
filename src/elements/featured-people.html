@@ -93,9 +93,17 @@
       <h4 class="heading">[[localize('featured-people-title')]]</h4>
       <div class="people-wrapper">
         <template is="dom-repeat" items="[[featuredPeople]]" as="person">
-          <a href="/speakers/[[person.id]]" class="person">
-            <iron-image class="photo" src="[[person.photoUrl]]" sizing="cover"></iron-image>
-            <iron-image class="company-logo" src="{{person.companyLogo}}" sizing="contain"></iron-image>
+          <a href$="/speakers/[[person.id]]" class="person">
+            <iron-image
+              class="photo"
+              src="[[person.photoUrl]]"
+              sizing="cover"
+            ></iron-image>
+            <iron-image
+              class="company-logo"
+              src="[[person.companyLogo]]"
+              sizing="contain"
+            ></iron-image>
             <h4 class="name">[[person.name]]</h4>
             <span class="company">[[person.country]]</span>
           </a>

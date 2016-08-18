@@ -74,5 +74,9 @@
   "copy-link": "Copy link",
   "filtered-by": "filtered by",
   "clear-all": "Clear all",
-  "filter": "Filter"
+  "filter": "Filter",
+  "latest-news": "Latest news",
+  "continue-reading": "Continue reading",
+  "view-presentation": "View presentation",
+  "view-video": "View video"
 }

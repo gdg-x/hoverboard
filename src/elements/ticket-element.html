@@ -155,17 +155,38 @@
         ],
 
         properties: {
-          type: String,
-          price: Number,
-          currency: String,
-          starts: String,
-          ends: String,
-          info: String,
+          type: {
+            type: String
+          },
+
+          price: {
+            type: Number
+          },
+
+          currency: {
+            type: String
+          },
+
+          starts: {
+            type: String
+          },
+
+          ends: {
+            type: String
+          },
+
+          info: {
+            type: String
+          },
+
           soldOut: {
             type: Boolean,
             value: false
           },
-          soldOutText: String
+
+          soldOutText: {
+            type: String
+          }
         }
 
       });

@@ -51,8 +51,13 @@
       }
     </style>
 
+    <iron-ajax
+      auto
+      url="[[app.data.tweetsSource]]"
+      handle-as="json"
+      last-response="{{_posts}}"
+    ></iron-ajax>
     <div class="container">
-      <iron-ajax auto url="[[app.data.tweetsSource]]" handle-as="json" last-response="{{_posts}}"></iron-ajax>
       <div class="social-section">
         <h4 class="heading">[[localize('before-hashtag')]] <a href$="https://www.google.com/#q=%23[[app.data.hashtag]]">#[[app.data.hashtag]]</a></h4>
         <h5>[[response.response]]</h5>
@@ -66,7 +71,7 @@
         <div class="align-pb-block">
           <template is="dom-repeat" items="[[app.data.social]]" as="network">
             <a class="button-link" href$="[[network.url]]" target="_blank">
-              <paper-icon-button icon="icons:[[network.name]]"></paper-icon-button>
+              <paper-icon-button icon="[[network.name]]"></paper-icon-button>
             </a>
           </template>
         </div>
@@ -92,10 +97,12 @@
             type: Number,
             value: 10000
           },
+
           _posts: {
             type: Array,
             observer: '_postsChanged'
           },
+
           _selected: {
             type: Number,
             value: -1

@@ -299,8 +299,7 @@
 
         _filterSession: function () {
           var filters = this.filters || [];
-          if (!filters.length)
-            return false;
+          if (!filters.length) return false;
           return function (session) {
             return filters.indexOf(session.mainTag) > -1;
           };
