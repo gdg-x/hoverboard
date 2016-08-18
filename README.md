@@ -55,7 +55,7 @@ routing for the app:
 
     polymer serve
     
-:book: Read more in [setup docs](/docs/set-up.md).
+:book: Read more in [setup docs](/docs/tutorials/set-up.md).
 
 
 ### Build
@@ -72,7 +72,7 @@ H2/push-compatible servers or to clients that do not support H2/Push.
 
     polymer build
     
-:book: Read more in [deploy docs](/docs/deploy.md).   
+:book: Read more in [deploy docs](/docs/tutorials/deploy.md).   
 
 
 ### Who uses the template?
