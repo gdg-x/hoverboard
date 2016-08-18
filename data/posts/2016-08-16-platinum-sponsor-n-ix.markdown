@@ -19,7 +19,7 @@ Novell, OpenText, StreamServe, Lebara, Currency Cloud, Anoto, Cure Forward, Hot 
 ## EMPOWERING PEOPLE WITH INNOVATIVE AND CHALLENGING PROJECTS
 
 
-<div layout horizontal>
+<div class="m-r" layout horizontal>
 <img src="/images/posts/nix_1.png"/>
 <div flex>
 <br>
@@ -29,7 +29,7 @@ At N-iX we want you to find what you’re passionate about and select an imp
 </div>
 </div>
 
-<div layout horizontal>
+<div class="m-r" layout horizontal>
 <img src="/images/posts/nix_2.png"/>
 <div flex>
 <br>
@@ -39,7 +39,7 @@ Working at N-iX, you are expected to not only write code, but to make a real
 </div>
 </div>
 
-<div layout horizontal>
+<div class="m-r" layout horizontal>
 <img src="/images/posts/nix_3.png"/>
 <div flex>
 <br>
@@ -55,6 +55,7 @@ We believe that hands-on experience in the team of professionals that share y
 * **35** long term engagements
 * **40%** growth in 2016
 
-N-iX continues to support GDG DevFest in Lviv for a second year straight in its pursue to create quality tech events in Ukraine. We welcome for cooperation professional, talented and motivated experts in all areas of development. If you are interested in new possibilities for your career – come meet us at GDG DevFest 2016 or check us at - [n-ix.com/careers](http://n-ix.com/careers/)
+N-iX continues to support GDG DevFest in Lviv for a second year straight in its pursue to create quality tech events in Ukraine. We welcome for cooperation professional, talented and motivated experts in all areas of development. If you are interested in new possibilities for your career – come meet us at GDG DevFest 2016 or check us at -  
+[n-ix.com/careers](http://n-ix.com/careers/)
 
 <img src="/images/posts/nix_4.jpg" style="width: 100%;"/>
