@@ -18,7 +18,7 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 ### Features
 :white_check_mark: Polymer  
 :white_check_mark: [PRPL pattern](https://www.polymer-project.org/1.0/toolbox/server)  
-:white_check_mark: * Offline access  
+:white_check_mark: Offline access  
 :white_check_mark: i18n  
 :white_check_mark: Material design  
 :white_check_mark: Animations  
@@ -92,11 +92,12 @@ pull request, so we can include you in this list.
 
 ### Roadmap :rocket:
 :x: Admin panel  
+:x: Firebase Integration   
 :x: My schedule  
 :x: Push notification  
 :x: ES2015  
-:x: Firebase Integration
-:x: Unit/Integration Tests
+:x: Accessibility  
+:x: Unit/Integration Tests  
 :point_right: __Propose your feature with [creating an issue](https://github.com/gdg-x/hoverboard/issues/new)__
 
 ### Contributing
