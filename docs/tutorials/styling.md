@@ -77,4 +77,8 @@ and in `index.html`
 <meta name="theme-color" content="#F57C00">
 ```
 
+## Next steps
+
+Learn how to [deploy the app to the web](deploy.md).
+
 [Material Palette]: https://www.materialpalette.com/
