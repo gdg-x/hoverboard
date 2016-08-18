@@ -4,7 +4,6 @@
 
 <link rel="import" href="../styles/shared-styles.html">
 <link rel="import" href="../behaviors/localize-behavior.html">
-<link rel="import" href="video-dialog.html">
 
 
 <dom-module id="call-to-action">
@@ -51,15 +50,6 @@
       <paper-button class="open-dialog-button" on-tap="playVideo">[[localize('action')]]</paper-button>
     </div>
 
-    <video-dialog
-      id="videoDialog"
-      video-title="[[localize(app.data.callToAction.videoTitle)]]"
-      youtube-id="[[app.data.callToAction.videoId]]"
-      entry-animation="scale-up-animation"
-      exit-animation="scale-down-animation"
-      modal disable-controls
-    ></video-dialog>
-
   </template>
 
   <script>
@@ -75,7 +65,8 @@
         ],
 
         playVideo: function () {
-          this.$.videoDialog.open();
+          HOVERBOARD.Elements.Template.openVideo(this.localize(this.app.data.callToAction.videoTitle),
+            this.app.data.callToAction.videoId, true);
         }
 
       });

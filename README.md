@@ -38,7 +38,11 @@ Install [polymer-cli](https://github.com/Polymer/polymer-cli):
 
     npm i -g polymer-cli@0.12.0
     
-[Fork](https://github.com/gdg-x/hoverboard/fork) this repository and clone it locally.
+and [Bower](https://bower.io/):
+    
+    npm i -g bower
+    
+**[Fork](https://github.com/gdg-x/hoverboard/fork) this repository** and clone it locally.
 
 ##### Install dependencies
 

@@ -33,7 +33,7 @@ Project Hoverboard locally in less than 15 minutes.
 
 1.  [Fork](https://github.com/gdg-x/hoverboard/fork) this repository
 
-1.  Clone it locally
+1.  Clone it locally.
 
 1. `cd` into the base directory of your Hoverboard project.
 
