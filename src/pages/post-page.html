@@ -181,14 +181,20 @@
             type: String,
             notify: true
           },
+
           posts: {
             type: Array
           },
+
           _loaded: {
             type: Boolean,
             value: false
           },
-          _post: Object,
+
+          _post: {
+            type: Object
+          },
+
           _latestPosts: {
             type: Array,
             value: []
