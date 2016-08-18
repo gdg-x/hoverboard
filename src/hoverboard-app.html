@@ -108,13 +108,13 @@
       data="{{routeData}}"
       tail="{{subRoute}}"></app-route>
 
-    <app-data speakers="{{speakers}}"
-              sessions="{{sessions}}"
-              schedule="{{schedule}}"
-              posts="{{posts}}"
-              partners="{{partners}}"
-              videos="{{videos}}"
-              app="{{app}}"></app-data>
+    <app-data
+      app="{{app}}"
+      speakers="{{speakers}}"
+      sessions="{{sessions}}"
+      schedule="{{schedule}}"
+      posts="{{posts}}"
+    ></app-data>
 
     <app-drawer-layout drawer-width="599px" force-narrow>
       <app-drawer id="drawer" swipe-open="[[app.isPhoneSize]]">
@@ -252,7 +252,7 @@
         },
 
         stylesChanged: function () {
-          if(!this.app.headerSettings) return;
+          if (!this.app.headerSettings) return;
           this.customStyle['--header-background'] = this.app.headerSettings.backgroundColor;
           this.customStyle['--header-color'] = this.app.headerSettings.fontColor;
           this.customStyle['--header-background-image'] = 'url(' + this.app.headerSettings.backgroundImage + ')';
@@ -295,7 +295,7 @@
           }
         },
 
-        openVideo: function(title, youtubeId, disableControls) {
+        openVideo: function (title, youtubeId, disableControls) {
           this.video = {
             title: title,
             youtubeId: youtubeId,
