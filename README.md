@@ -13,7 +13,7 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 
 > *Do you :heart: it?* Show your support - please, :star: the project.
 
-:zap: [Live demo](https://hoverboard.firebaseapp.com/)
+:zap: [Live demo](https://hoverboard-dev.firebaseapp.com/)
 
 ### Features
 :white_check_mark: Polymer  
