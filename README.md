@@ -1,4 +1,4 @@
-![preview](https://cloud.githubusercontent.com/assets/2954281/17747961/da51bf9e-64bf-11e6-8680-5c6ca4f7f17f.png)
+![preview-web](https://cloud.githubusercontent.com/assets/2954281/17777476/5dbbbe1c-6569-11e6-9cc4-77185ae9bf92.png)
 
 # Project Hoverboard 
 
