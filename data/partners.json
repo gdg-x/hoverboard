@@ -289,6 +289,26 @@
         "name": ".Net Developer Day",
         "url": "http://net.developerdays.pl/",
         "logoUrl": "/images/logos/net-days.png"
+      },
+      {
+        "name": "Epam",
+        "url": "https://www.epam.com/",
+        "logoUrl": "/images/logos/epam.svg"
+      },
+      {
+        "name": "Web Academy",
+        "url": "http://web-academy.com.ua/",
+        "logoUrl": "/images/logos/web_academy.png"
+      },
+      {
+        "name": "IHub",
+        "url": "http://ihub.com.ua/",
+        "logoUrl": "/images/logos/ihub.png"
+      },
+      {
+        "name": "Startup Depot",
+        "url": "http://startupdepot.lviv.ua/home-page/",
+        "logoUrl": "/images/logos/startup_depot.png"
       }
     ]
   }
