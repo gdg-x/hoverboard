@@ -107,9 +107,9 @@
             "Android"
         ]
     },
-    "130": {
-        "id": 130,
-        "title": "Designing an Android Wear Application",
+    "1301": {
+        "id": 1301,
+        "title": "Designing an Android Wear Application (part 1)",
         "description": "Wearable devices are one of the most popular things nowadays. Specially, after the Apple Watch, we finally get the whole picture of the entire list of products and their features. Now, we can talk about how we can design a user experience for this type of devices.\nEvery platform has it's own design principles and approaches. But, in the core, they all need to follow same core rules. So, how we combine this core requirements with Google's Material Design and use them on an Android Wear device? Let's learn!",
         "speakers": [
             26
@@ -117,7 +117,22 @@
         "language": "English",
         "complexity": "Intermediate",
         "tags": [
-            "Android"
+            "Android",
+            "Workshop"
+        ]
+    },
+    "1302": {
+        "id": 1302,
+        "title": "Designing an Android Wear Application (part 2)",
+        "description": "Wearable devices are one of the most popular things nowadays. Specially, after the Apple Watch, we finally get the whole picture of the entire list of products and their features. Now, we can talk about how we can design a user experience for this type of devices.\nEvery platform has it's own design principles and approaches. But, in the core, they all need to follow same core rules. So, how we combine this core requirements with Google's Material Design and use them on an Android Wear device? Let's learn!",
+        "speakers": [
+            26
+        ],
+        "language": "English",
+        "complexity": "Intermediate",
+        "tags": [
+            "Android",
+            "Workshop"
         ]
     },
     "129": {
@@ -224,9 +239,9 @@
             "Android"
         ]
     },
-    "121": {
-        "id": 121,
-        "title": "Offline-first progressive web apps",
+    "1211": {
+        "id": 1211,
+        "title": "Offline-first progressive web apps (part 1)",
         "description": "Using service workers and other modern progressive web apps capabilities we can update our web applications to be offline-fires. In this session we'll show how to easily convert your applications be usable without the internet connection.",
         "speakers": [
             18
@@ -234,7 +249,36 @@
         "language": "English",
         "complexity": "Intermediate",
         "tags": [
-            "Web"
+            "Web",
+            "Workshop"
+        ]
+    },
+    "1212": {
+        "id": 1212,
+        "title": "Offline-first progressive web apps (part 2)",
+        "description": "Using service workers and other modern progressive web apps capabilities we can update our web applications to be offline-fires. In this session we'll show how to easily convert your applications be usable without the internet connection.",
+        "speakers": [
+            18
+        ],
+        "language": "English",
+        "complexity": "Intermediate",
+        "tags": [
+            "Web",
+            "Workshop"
+        ]
+    },
+    "1213": {
+        "id": 1213,
+        "title": "Offline-first progressive web apps (part 3)",
+        "description": "Using service workers and other modern progressive web apps capabilities we can update our web applications to be offline-fires. In this session we'll show how to easily convert your applications be usable without the internet connection.",
+        "speakers": [
+            18
+        ],
+        "language": "English",
+        "complexity": "Intermediate",
+        "tags": [
+            "Web",
+            "Workshop"
         ]
     },
     "120": {
@@ -250,9 +294,9 @@
             "Web"
         ]
     },
-    "119": {
-        "id": 119,
-        "title": "Hands-on with UI testing for Android developers",
+    "1191": {
+        "id": 1191,
+        "title": "Hands-on with UI testing for Android developers (part 1)",
         "description": "Writing Android apps is usually fun because you are actually building something. But what about writing tests? Boring stuff. Errr, UI tests? I am a developer!\n\nIn this talk we will take a look at options for UI tests on Android, why you should write them and how they help you with your app development workflow. No more untested apps!",
         "speakers": [
             17
@@ -260,7 +304,36 @@
         "language": "English",
         "complexity": "Beginner",
         "tags": [
-            "Android"
+            "Android",
+            "Workshop"
+        ]
+    },
+    "1192": {
+        "id": 1192,
+        "title": "Hands-on with UI testing for Android developers (part 2)",
+        "description": "Writing Android apps is usually fun because you are actually building something. But what about writing tests? Boring stuff. Errr, UI tests? I am a developer!\n\nIn this talk we will take a look at options for UI tests on Android, why you should write them and how they help you with your app development workflow. No more untested apps!",
+        "speakers": [
+            17
+        ],
+        "language": "English",
+        "complexity": "Beginner",
+        "tags": [
+            "Android",
+            "Workshop"
+        ]
+    },
+    "1193": {
+        "id": 1193,
+        "title": "Hands-on with UI testing for Android developers (part 3)",
+        "description": "Writing Android apps is usually fun because you are actually building something. But what about writing tests? Boring stuff. Errr, UI tests? I am a developer!\n\nIn this talk we will take a look at options for UI tests on Android, why you should write them and how they help you with your app development workflow. No more untested apps!",
+        "speakers": [
+            17
+        ],
+        "language": "English",
+        "complexity": "Beginner",
+        "tags": [
+            "Android",
+            "Workshop"
         ]
     },
     "118": {
@@ -380,9 +453,9 @@
             "Android"
         ]
     },
-    "109": {
-        "id": 109,
-        "title": "How much money Firebase can save you",
+    "1091": {
+        "id": 1091,
+        "title": "How much money Firebase can save you (part 1)",
         "description": "TBD",
         "speakers": [
             7
@@ -390,7 +463,22 @@
         "language": "English",
         "complexity": "Beginner",
         "tags": [
-            "Cloud"
+            "Cloud",
+            "Workshop"
+        ]
+    },
+    "1092": {
+        "id": 1092,
+        "title": "How much money Firebase can save you (part 2)",
+        "description": "TBD",
+        "speakers": [
+            7
+        ],
+        "language": "English",
+        "complexity": "Beginner",
+        "tags": [
+            "Cloud",
+            "Workshop"
         ]
     },
     "108": {
@@ -406,9 +494,9 @@
             "Web"
         ]
     },
-    "107": {
-        "id": 107,
-        "title": "Introduction to Progressive Web Apps in Angular 2",
+    "1071": {
+        "id": 1071,
+        "title": "Introduction to Progressive Web Apps in Angular 2 (part 1)",
         "description": "There's been much discussion about Progressive Web Apps. They're still a relatively new model. In this talk, I'll summarise few options and techniques for getting started with your own Progressive Web App",
         "speakers": [
             6
@@ -416,7 +504,22 @@
         "language": "English",
         "complexity": "Beginner",
         "tags": [
-            "Web"
+            "Web",
+            "Workshop"
+        ]
+    },
+    "1072": {
+        "id": 1072,
+        "title": "Introduction to Progressive Web Apps in Angular 2 (part 2)",
+        "description": "There's been much discussion about Progressive Web Apps. They're still a relatively new model. In this talk, I'll summarise few options and techniques for getting started with your own Progressive Web App",
+        "speakers": [
+            6
+        ],
+        "language": "English",
+        "complexity": "Beginner",
+        "tags": [
+            "Web",
+            "Workshop"
         ]
     },
     "106": {
@@ -471,9 +574,9 @@
             "Android"
         ]
     },
-    "102": {
-        "id": 102,
-        "title": "Hands-on gRPC experience building your own multiplayer game client",
+    "1021": {
+        "id": 1021,
+        "title": "Hands-on gRPC experience building your own multiplayer game client (part 1)",
         "description": "Do you remember the game Simon says from the 80s? I don\u2019t know about you, but I know many that spent hours trying to press those specific sequences of red, green, blue and yellow buttons in the correct order. But why play on your own? We\u2019ve implemented a gRPC server that allows you to play Simon with other players over the internet!\n\nIn this workshop we will dive into the toolset and libraries to build your very own Simon Says client for this server. We will have a message description in Protocol Buffers format and some stub code in several languages ready for you to play with. The goal for this workshop is for you to have a working client that you can use to play (and beat!) other attendees of the workshop.",
         "speakers": [
             1
@@ -481,7 +584,22 @@
         "language": "English",
         "complexity": "Beginner",
         "tags": [
-            "Cloud"
+            "Cloud",
+            "Workshop"
+        ]
+    },
+    "1022": {
+        "id": 1022,
+        "title": "Hands-on gRPC experience building your own multiplayer game client (part 2)",
+        "description": "Do you remember the game Simon says from the 80s? I don\u2019t know about you, but I know many that spent hours trying to press those specific sequences of red, green, blue and yellow buttons in the correct order. But why play on your own? We\u2019ve implemented a gRPC server that allows you to play Simon with other players over the internet!\n\nIn this workshop we will dive into the toolset and libraries to build your very own Simon Says client for this server. We will have a message description in Protocol Buffers format and some stub code in several languages ready for you to play with. The goal for this workshop is for you to have a working client that you can use to play (and beat!) other attendees of the workshop.",
+        "speakers": [
+            1
+        ],
+        "language": "English",
+        "complexity": "Beginner",
+        "tags": [
+            "Cloud",
+            "Workshop"
         ]
     },
     "101": {
