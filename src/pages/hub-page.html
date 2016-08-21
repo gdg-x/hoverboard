@@ -73,6 +73,24 @@
         margin-top: 20px;
       }
 
+      .quote img {
+        float: left;
+        margin: 0 20px 20px 0;
+        border-radius: 50%;
+        width: 150px;
+      }
+
+      .quote .text {
+        font-style: italic;
+        margin: 0;
+      }
+
+      .quote .author {
+        font-weight: bold;
+        text-align: right;
+        margin: 10px 0 0 0;
+      }
+
       @media (min-width: 961px) {
         .layout {
           @apply(--layout-horizontal);
@@ -101,11 +119,13 @@
       <div class="layout">
         <div id="guidelines" class="c1">
           <paper-card cascaded>
-            <div class="paper-card-container">
+            <div class="paper-card-container quote">
               <div class="card-content">
-                Welcome to center stage for the 5th Annual GDG DevFest Ukraine. We are excited to be returning to Lviv
+                <img src="/images/people/vitaliy_zasadnyy.jpg">
+                <p class="text">Welcome to center stage for the 5th Annual GDG DevFest Ukraine. We are excited to be returning to Lviv
                 and thrilled that you chose to participate. Please read on for information that will help your session
-                succeed, and drive value for you both before and after the conference as well.
+                succeed, and drive value for you both before and after the conference as well.</p>
+                <p class="author">- Vitaliy Zasadnyy, Speakers and Content Manager</p>
               </div>
             </div>
           </paper-card>
