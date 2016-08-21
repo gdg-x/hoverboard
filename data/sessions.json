@@ -232,7 +232,7 @@
     "122": {
         "id": 122,
         "title": "Firebase + Kotlin + RxJava + MVP: Practical Tips",
-        "description": "I would like to talk about architecture of our Settle Up app. It's all based on new Firebase announced on I/O with the help of modern frameworks like Rx, Kotlin and MVP.",
+        "description": "New Firebase products announced at I/O make an Android developer’s life so much easier. We have been happily developing with it since January 2016. Sample projects work great, but what if your database structure is complex and you want a solid architecture with MVP, RxJava and Kotlin? Come to learn some practical tips.",
         "speakers": [
             19
         ],
