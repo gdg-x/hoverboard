@@ -79,5 +79,14 @@
     "secondaryColor": "#e47b23",
     "image": "/images/posts/nix_cover.jpg",
     "brief": "N‐iX is an Eastern European provider of software development services with over 300 expert software engineers onboard that power innovative technology businesses across North America, UK, Sweden and Europe...."
+  },
+  {
+    "id": "interview-with-sascha-wolter",
+    "title": "Interview with Sascha Wolter",
+    "posted": "2016-08-23",
+    "primaryColor": "#9E9E9E",
+    "secondaryColor": "#757575",
+    "image": "/images/posts/wolter_cover.jpg",
+    "brief": "Thanks to my passion for the ease of use for both developers and users (i.e. APIs/toolchain and user interfaces) and some talking skills I was asked to become a Developer Evangelist a few years ago..."
   }
 ]
