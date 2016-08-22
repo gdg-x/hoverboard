@@ -1,0 +1,315 @@
+[
+  {
+    "title": "general-sponsor",
+    "logos": [
+      {
+        "name": "Google",
+        "url": "https://www.google.com.ua/intl/en/about/",
+        "logoUrl": "/images/logos/google.svg"
+      }
+    ]
+  },
+  {
+    "title": "diamond-sponsor",
+    "logos": [
+      {
+        "name": "intouch",
+        "url": "http://www.intouchmena.com/",
+        "logoUrl": "/images/logos/intouch.svg"
+      }
+    ]
+  },
+  {
+    "title": "platinum-sponsor",
+    "logos": [
+      {
+        "name": "CoreValue",
+        "url": "http://www.corevalue.com.ua/",
+        "logoUrl": "/images/logos/corevalue.svg"
+      },
+      {
+        "name": "GlobalLogic",
+        "url": "http://www.globallogic.com/",
+        "logoUrl": "/images/logos/global-logic.svg"
+      },
+      {
+        "name": "Wolters Kluwer",
+        "url": "http://wolterskluwer.com/",
+        "logoUrl": "/images/logos/wolters kluwer.svg"
+      },
+      {
+        "name": "N-iX",
+        "url": "http://n-ix.com/",
+        "logoUrl": "/images/logos/n_ix.svg",
+        "width": 85
+      },
+      {
+        "name": "Mirantis",
+        "url": "https://www.mirantis.com/",
+        "logoUrl": "/images/logos/mirantis.svg",
+        "width": 90
+      },
+      {
+        "name": "DataArt",
+        "url": "http://dataart.ua/",
+        "logoUrl": "/images/logos/dataart.svg"
+      },
+      {
+        "name": "Zalando",
+        "url": "https://tech.zalando.de/",
+        "logoUrl": "/images/logos/zalando.svg"
+      }
+    ]
+  },
+  {
+    "title": "gold-sponsor",
+    "logos": [
+      {
+        "name": "Ciklum",
+        "url": "https://www.ciklum.com/",
+        "logoUrl": "/images/logos/ciklum.svg"
+      },
+      {
+        "name": "Sigma",
+        "url": "http://sigma.software/",
+        "logoUrl": "/images/logos/sigma.svg"
+      },
+      {
+        "name": "Ruckus",
+        "url": "https://www.ruckuswireless.com/",
+        "logoUrl": "/images/logos/ruckus.svg"
+      }
+    ]
+  },
+  {
+    "title": "gift-sponsor",
+    "logos": [
+      {
+        "name": "JetBrains",
+        "url": "https://www.jetbrains.com/",
+        "logoUrl": "/images/logos/jetbrains.svg"
+      }
+    ]
+  },
+  {
+    "title": "hosting-partner",
+    "logos": [
+      {
+        "name": "ibis",
+        "url": "http://www.ibisstyles.com/",
+        "logoUrl": "/images/logos/ibis.png"
+      }
+    ]
+  },
+  {
+    "title": "general-partner",
+    "logos": [
+      {
+        "name": "IT Cluster",
+        "url": "http://itcluster.lviv.ua/",
+        "logoUrl": "/images/logos/it-cluster.svg"
+      }
+    ]
+  },
+  {
+    "title": "information-partner",
+    "logosClass": "info",
+    "logos": [
+      {
+        "name": "Android Weekly",
+        "url": "http://androidweekly.net/",
+        "logoUrl": "/images/logos/android_weekly.png"
+      },
+      {
+        "name": "Droidcon Krakow",
+        "url": "http://droidcon.pl/",
+        "logoUrl": "/images/logos/droidcon.png"
+      },
+      {
+        "name": "CyberBionic",
+        "url": "http://edu.cbsystematics.com/en/",
+        "logoUrl": "/images/logos/cbs.svg"
+      },
+      {
+        "name": "ITVDN",
+        "url": "http://itvdn.com/en",
+        "logoUrl": "/images/logos/itvdn.svg"
+      },
+      {
+        "name": "ITEM",
+        "url": "http://item.com.ua/",
+        "logoUrl": "/images/logos/item.svg"
+      },
+      {
+        "name": "JDay",
+        "url": "http://www.jday.com.ua/",
+        "logoUrl": "/images/logos/jday.svg"
+      },
+      {
+        "name": "Lviv Convention Bureau",
+        "url": "http://lvivconvention.com.ua/en/",
+        "logoUrl": "/images/logos/lcb.svg"
+      },
+      {
+        "name": "Lviv IT School",
+        "url": "http://lits.com.ua/",
+        "logoUrl": "/images/logos/lits.png"
+      },
+      {
+        "name": "Symphony Solutions",
+        "url": "http://www.symphony-solutions.eu/",
+        "logoUrl": "/images/logos/symphony-solutions.svg"
+      },
+      {
+        "name": "UA Mobile",
+        "url": "http://www.uamobile.org/",
+        "logoUrl": "/images/logos/uamobile.png"
+      },
+      {
+        "name": "Rozrobka",
+        "url": "https://rozrobka.com/",
+        "logoUrl": "/images/logos/rozrobka.svg"
+      },
+      {
+        "name": "SoftServe",
+        "url": "https://softserve.ua/en/",
+        "logoUrl": "/images/logos/softserve.svg"
+      },
+      {
+        "name": "Mobile Warsaw",
+        "url": "http://mobile-warsaw.pl/",
+        "logoUrl": "/images/logos/mobile-warsaw.svg"
+      },
+      {
+        "name": "TechMagic",
+        "url": "http://www.techmagic.co/",
+        "logoUrl": "/images/logos/techmagic.svg"
+      },
+      {
+        "name": "Betaplace",
+        "url": "http://betaplace.com.ua/en/",
+        "logoUrl": "/images/logos/betaplace.svg"
+      },
+      {
+        "name": "Robo Camp",
+        "url": "http://robocamp.com.ua//",
+        "logoUrl": "/images/logos/robocamp.png"
+      },
+      {
+        "name": "SE",
+        "url": "https://www.facebook.com/events/1616149385375331/",
+        "logoUrl": "/images/logos/se.svg"
+      },
+      {
+        "name": "DOU",
+        "url": "https://dou.ua/",
+        "logoUrl": "/images/logos/dou.svg"
+      },
+      {
+        "name": "IT Arena",
+        "url": "http://itarena.lviv.ua/",
+        "logoUrl": "/images/logos/it-arena.svg"
+      },
+      {
+        "name": "Decoded",
+        "url": "http://decoded.org.ua/en/",
+        "logoUrl": "/images/logos/decoded.png"
+      },
+      {
+        "name": "JavaDay Minsk",
+        "url": "https://www.facebook.com/javadayby",
+        "logoUrl": "/images/logos/javaday_minsk.jpg"
+      },
+      {
+        "name": "Start IT",
+        "url": "http://start-it.com.ua/",
+        "logoUrl": "/images/logos/start_it.png"
+      },
+      {
+        "name": "Sphinx",
+        "url": "http://sphinx.sg/",
+        "logoUrl": "/images/logos/sphinx.png"
+      },
+      {
+        "name": "JS Odessa",
+        "url": "http://odessajs.org/",
+        "logoUrl": "/images/logos/jsodessa.png"
+      },
+      {
+        "name": "HotWork",
+        "url": "http://hotwork.com.ua/",
+        "logoUrl": "/images/logos/hotwork.jpg"
+      },
+      {
+        "name": "Droidcon Vienna",
+        "url": "http://www.devfest.at/",
+        "logoUrl": "/images/logos/droidcon_vienna.svg"
+      },
+      {
+        "name": "BuilStuff Odessa",
+        "url": "http://www.buildstuff.com.ua/odessa/",
+        "logoUrl": "/images/logos/buildstuff.png"
+      },
+      {
+        "name": "Codeguida",
+        "url": "http://codeguida.com/",
+        "logoUrl": "/images/logos/codeguida.svg"
+      },
+      {
+        "name": "Crowd Reviews",
+        "url": "https://www.crowdreviews.com/",
+        "logoUrl": "/images/logos/crowd_reviews.png"
+      },
+      {
+        "name": "ITEA",
+        "url": "http://itea.ua/uk/",
+        "logoUrl": "/images/logos/itea.svg"
+      },
+      {
+        "name": "Eurasia Mobile Challenge",
+        "url": "http://www.eurasiamobilechallenge.com/",
+        "logoUrl": "/images/logos/eurasia.jpg"
+      },
+      {
+        "name": "PHP fwdays",
+        "url": "http://frameworksdays.com/event/php-frameworks-day-2016",
+        "logoUrl": "/images/logos/phpday.png"
+      },
+      {
+        "name": "Perfectial",
+        "url": "http://perfectial.com/",
+        "logoUrl": "/images/logos/perfectial.svg"
+      },
+      {
+        "name": "Coders Guild",
+        "url": "http://www.businesscamp.in.ua/",
+        "logoUrl": "/images/logos/coders_guild.png"
+      },
+      {
+        "name": ".Net Developer Day",
+        "url": "http://net.developerdays.pl/",
+        "logoUrl": "/images/logos/net-days.png"
+      },
+      {
+        "name": "Epam",
+        "url": "https://www.epam.com/",
+        "logoUrl": "/images/logos/epam.svg"
+      },
+      {
+        "name": "Web Academy",
+        "url": "http://web-academy.com.ua/",
+        "logoUrl": "/images/logos/web_academy.png"
+      },
+      {
+        "name": "IHub",
+        "url": "http://ihub.com.ua/",
+        "logoUrl": "/images/logos/ihub.png"
+      },
+      {
+        "name": "Startup Depot",
+        "url": "http://startupdepot.lviv.ua/home-page/",
+        "logoUrl": "/images/logos/startup_depot.png"
+      }
+    ]
+  }
+]
