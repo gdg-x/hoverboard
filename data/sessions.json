@@ -432,8 +432,8 @@
     },
     "111": {
         "id": 111,
-        "title": "Dagger 2: dependency Injection Android way",
-        "description": "It's beauty, it's handy, it's fast, it's easy - all about Dagger 2",
+        "title": "Building modular architecture apps with Dagger 2",
+        "description": "TBD",
         "speakers": [
             9
         ],
