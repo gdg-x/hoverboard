@@ -108,18 +108,25 @@
       data="{{routeData}}"
       tail="{{subRoute}}"></app-route>
 
-    <app-data speakers="{{speakers}}"
-              sessions="{{sessions}}"
-              schedule="{{schedule}}"
-              posts="{{posts}}"
-              partners="{{partners}}"
-              videos="{{videos}}"
-              app="{{app}}"></app-data>
+    <app-data
+      app="{{app}}"
+      speakers="{{speakers}}"
+      sessions="{{sessions}}"
+      schedule="{{schedule}}"
+      posts="{{posts}}"
+    ></app-data>
 
     <app-drawer-layout drawer-width="599px" force-narrow>
-      <app-drawer id="drawer" swipe-open="[[app.isPhoneSize]]">
+
+      <app-drawer
+        id="drawer"
+        swipe-open="[[app.isPhoneSize]]"
+      >
         <template is="dom-if" if="[[app.isPhoneSize]]">
-          <drawer-block app={{app}} route-data="{{routeData}}" drawer></drawer-block>
+          <drawer-block
+            app={{app}}
+            drawer
+          ></drawer-block>
         </template>
       </app-drawer>
 
@@ -127,13 +134,17 @@
         <div class="image-overlay-wrapper" show$="[[app.headerSettings.backgroundImage]]">
           <div class="image-overlay" fade></div>
         </div>
-        <toolbar-block app="{{app}}"
-                       primary
-                       sticky></toolbar-block>
+        <toolbar-block
+          app="{{app}}"
+          primary
+          sticky
+        ></toolbar-block>
 
-        <header-content app="{{app}}"
-                        selected-day="{{selectedDay}}"
-                        fade></header-content>
+        <header-content
+          app="{{app}}"
+          selected-day="{{selectedDay}}"
+          fade
+        ></header-content>
       </app-header>
 
       <div class="main-content">
@@ -168,9 +179,6 @@
 
           <cod-page name="cod"
                     app="{{app}}"></cod-page>
-
-          <hub-page name="hub"
-                    app="{{app}}"></hub-page>
 
         </neon-animated-pages>
       </div>
@@ -215,10 +223,6 @@
               };
             }
           },
-          loadExternalResources: {
-            type: Boolean,
-            value: false
-          },
 
           page: {
             type: String,
@@ -259,7 +263,7 @@
         },
 
         stylesChanged: function () {
-          if(!this.app.headerSettings) return;
+          if (!this.app.headerSettings) return;
           this.customStyle['--header-background'] = this.app.headerSettings.backgroundColor;
           this.customStyle['--header-color'] = this.app.headerSettings.fontColor;
           this.customStyle['--header-background-image'] = 'url(' + this.app.headerSettings.backgroundImage + ')';
@@ -302,7 +306,7 @@
           }
         },
 
-        openVideo: function(title, youtubeId, disableControls) {
+        openVideo: function (title, youtubeId, disableControls) {
           this.video = {
             title: title,
             youtubeId: youtubeId,

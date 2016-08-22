@@ -2,8 +2,6 @@
 
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
-<link rel="import" href="../behaviors/localize-behavior.html">
-
 
 <dom-module id="app-data">
   <template>
@@ -23,82 +21,78 @@
       Polymer({
         is: 'app-data',
 
-        behaviors: [
-          HOVERBOARD.LocalizeBehavior
-        ],
-
         properties: {
-          configSource: {
-            type: String,
-            value: 'data/hoverboard.config.json'
-          },
-          speakersSource: {
-            type: String,
-            value: 'data/speakers.json'
-          },
-          sessionsSource: {
-            type: String,
-            value: 'data/sessions.json'
-          },
-          postsSource: {
-            type: String,
-            value: 'data/blog.json'
-          },
-          partnersSource: {
-            type: String,
-            value: 'data/partners.json'
-          },
-          scheduleSource: {
-            type: String,
-            value: 'data/schedule.json'
-          },
-          teamSource: {
-            type: String,
-            value: 'data/team.json'
-          },
-          videosSource: {
-            type: String,
-            value: 'data/videos.json'
-          },
-          speakers: {
-            type: Array,
-            notify: true
-          },
-          sessions: {
-            type: Object,
-            notify: true
-          },
-          posts: {
-            type: Array,
-            notify: true
-          },
-          partners: {
-            type: Array,
-            notify: true
-          },
-          schedule: {
-            type: Array,
-            notify: true
-          },
-          videos: {
-            type: Array,
-            notify: true
-          },
-          team: {
-            type: Object,
-            notify: true
-          },
           app: {
             type: Object,
             notify: true
           },
-          _speakersRaw: Object,
-          _configs: Object,
-          _english: Object,
-          _scheduleRaw: Array,
-          _tempVideos: {
+
+          configSource: {
+            type: String,
+            value: 'data/hoverboard.config.json'
+          },
+
+          speakersSource: {
+            type: String,
+            value: 'data/speakers.json'
+          },
+
+          sessionsSource: {
+            type: String,
+            value: 'data/sessions.json'
+          },
+
+          postsSource: {
+            type: String,
+            value: 'data/blog.json'
+          },
+
+          partnersSource: {
+            type: String,
+            value: 'data/partners.json'
+          },
+
+          scheduleSource: {
+            type: String,
+            value: 'data/schedule.json'
+          },
+
+          teamSource: {
+            type: String,
+            value: 'data/team.json'
+          },
+
+          videosSource: {
+            type: String,
+            value: 'data/videos.json'
+          },
+
+          speakers: {
             type: Array,
-            value: []
+            notify: true
+          },
+
+          sessions: {
+            type: Object,
+            notify: true
+          },
+
+          posts: {
+            type: Array,
+            notify: true
+          },
+
+          schedule: {
+            type: Array,
+            notify: true
+          },
+
+          _speakersRaw: {
+            type: Object
+          },
+
+          _scheduleRaw: {
+            type: Array
           }
         },
 
@@ -131,9 +125,8 @@
               }
             }
           }
-          this.schedule = this._scheduleRaw;
-          this.speakers = this._speakersRaw;
-          this.videos = this._tempVideos;
+          this.set('schedule', this._scheduleRaw);
+          this.set('speakers', this._speakersRaw);
         },
 
         _getSession: function (sessionId, day, dayIndex, schedule) {
@@ -147,7 +140,6 @@
           if (schedule.tags.indexOf(session.mainTag) < 0) {
             schedule.tags.push(session.mainTag);
           }
-          
           var speakers = [];
           if (session.speakers) {
             for (var j = 0, speakersLen = session.speakers.length; j < speakersLen; j++) {
@@ -164,14 +156,6 @@
                 }
               }
             }
-          }
-          if (session.videoId) {
-            this.push('_tempVideos', {
-              youtubeId: session.videoId,
-              title: session.title,
-              speakers: speakers.join(', '),
-              thumbnail: session.thumbnail
-            });
           }
           return session;
         },

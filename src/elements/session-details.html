@@ -19,7 +19,7 @@
 <link rel="import" href="../behaviors/utils-behavior.html">
 <link rel="import" href="../behaviors/localize-behavior.html">
 <link rel="import" href="truncate-marked-text.html">
-<link rel="import" href="video-dialog.html">
+
 
 <dom-module id="session-details">
 
@@ -93,7 +93,7 @@
             <a href$="[[session.presentation]]" target="_blank">
               <paper-button class="action">
                 <iron-icon icon="presentation"></iron-icon>
-                View presentation
+                [[localize('view-presentation')]]
               </paper-button>
             </a>
           </template>
@@ -101,7 +101,7 @@
             <div on-tap="_openVideo">
               <paper-button class="action">
                 <iron-icon icon="video"></iron-icon>
-                View video
+                [[localize('view-video')]]
               </paper-button>
             </div>
           </template>
@@ -124,8 +124,11 @@
                       <a class="badge" href$="[[badge.link]]" target="_blank">[[badge.name]]</a>
                     </template>
                   </div>
-                  <truncate-marked-text text="[[speaker.bio]]" characters="220"
-                                        break-last-word></truncate-marked-text>
+                  <truncate-marked-text
+                    text="[[speaker.bio]]"
+                    characters="220"
+                    break-last-word
+                  ></truncate-marked-text>
 
                   <a class="read-more" href$="/speakers/[[speaker.id]]" dialog-dismiss>[[localize('read-more')]]</a>
                 </div>
@@ -135,10 +138,6 @@
         </div>
       </template>
     </paper-scroll-header-panel>
-
-    <video-dialog id="videoViewer" video-title="[[session.title]]" youtube-id="[[session.videoId]]"
-                  entry-animation="scale-up-animation"
-                  exit-animation="scale-down-animation" modal></video-dialog>
 
   </template>
 
@@ -170,7 +169,7 @@
         },
 
         _openVideo: function () {
-          this.$.videoViewer.open();
+          HOVERBOARD.Elements.Template.openVideo(this.session.title, this.session.videoId, true);
         },
 
         _concatArray: function (array) {

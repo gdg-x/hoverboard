@@ -15,6 +15,7 @@
   "buy-ticket": "Купити квиток",
   "back-to-top": "Вгору",
   "subscribe": "Підписатись",
+  "your-email": "Ваш емейл",
   "subscribe-note": "Ніякого спаму, лише останні новини!",
   "for-visitors": "Для відвідувачів",
   "google-developers": "Google Developers",
@@ -79,5 +80,10 @@
   "read-more": "Більше",
   "copy-link": "Скопіювати посилання",
   "filtered-by": "відфільтровано по",
-  "clear-all": "Очистити все"
+  "clear-all": "Очистити все",
+  "filter": "Фільтрувати",
+  "latest-news": "Останні новини",
+  "continue-reading": "Читати далі",
+  "view-presentation": "Переглянути презентацію",
+  "view-video": "Переглянути відео"
 }

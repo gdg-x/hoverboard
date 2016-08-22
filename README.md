@@ -1,46 +1,61 @@
+![preview-web](https://cloud.githubusercontent.com/assets/2954281/17777476/5dbbbe1c-6569-11e6-9cc4-77185ae9bf92.png)
+
 # Project Hoverboard 
 
 [![Join the chat at https://gitter.im/gdg-x/hoverboard](https://badges.gitter.im/gdg-x/hoverboard.svg)](https://gitter.im/gdg-x/hoverboard?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-> Project Hoverboard is the next generation conference website template after [Project Zeppelin](https://github.com/gdg-x/zeppelin) and more optimized version - [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
+> Project Hoverboard is the next generation conference website template after 
+[Project Zeppelin](https://github.com/gdg-x/zeppelin) and more optimized 
+version - [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
 
-> Template is brought by [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy) from [GDG Lviv](http://lviv.gdg.org.ua/).
+> Template is brought by [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy) 
+from [GDG Lviv](http://lviv.gdg.org.ua/).
 
-> *Do you like it?* Show your support - please, **star the project**.
+> *Do you :heart: it?* Show your support - please, :star: the project.
 
-### [Live demo](https://hoverboard.firebaseapp.com/)
+:zap: [Live demo](https://hoverboard-dev.firebaseapp.com/)
 
-This template, along with the `polymer-cli` toolchain, also demonstrates use
-of the "PRPL pattern" This pattern allows fast first delivery and interaction with
-the content at the initial route requested by the user, along with fast subsequent
-navigation by pre-caching the remaining components required by the app and
-progressively loading them on-demand as the user navigates through the app.
-
-The PRPL pattern, in a nutshell:
-
-* **Push** components required for the initial route
-* **Render** initial route ASAP
-* **Pre-cache** components for remaining routes
-* **Lazy-load** and progressively upgrade next routes on-demand
+### Features
+:white_check_mark: Polymer  
+:white_check_mark: [PRPL pattern](https://www.polymer-project.org/1.0/toolbox/server)  
+:white_check_mark: Offline access  
+:white_check_mark: i18n  
+:white_check_mark: Material design  
+:white_check_mark: Animations  
+:white_check_mark: Integrated speakers and sessions management  
+:white_check_mark: SEO friendly  
+:white_check_mark: Optimized and fast  
+:white_check_mark: Editable theme colors  
+:white_check_mark: Quick deploy  
 
 ### Setup
+:book: [Full documentation](/docs/).
 
-##### Prerequisites
+
+###### Prerequisites
 
 Install [polymer-cli](https://github.com/Polymer/polymer-cli):
 
     npm i -g polymer-cli@0.12.0
+    
+and [Bower](https://bower.io/):
+    
+    npm i -g bower
+    
+:point_right: **[Fork](https://github.com/gdg-x/hoverboard/fork) this repository** and clone it locally.
 
-### Install dependencies
+##### Install dependencies
 
     bower install
 
-### Start the development server
+##### Start the development server
 
 This command serves the app at `http://localhost:8080` and provides basic URL
 routing for the app:
 
     polymer serve
+    
+:book: Read more in [setup docs](/docs/tutorials/set-up.md).
 
 
 ### Build
@@ -56,31 +71,14 @@ generated using fragment bundling, suitable for serving from non
 H2/push-compatible servers or to clients that do not support H2/Push.
 
     polymer build
-
-### Test the build
-
-This command serves the minified version of the app in an unbundled state, as it would
-be served by a push-compatible server:
-
-    polymer serve build/unbundled
-
-This command serves the minified version of the app generated using fragment bundling:
-
-    polymer serve build/bundled
-
-### Extend
-
-You can extend the app by adding more elements that will be demand-loaded
-e.g. based on the route, or to progressively render non-critical sections
-of the application.  Each new demand-loaded fragment should be added to the
-list of `fragments` in the included `polymer.json` file.  This will ensure
-those components and their dependencies are added to the list of pre-cached
-components (and will have bundles created in the fallback `bundled` build).
+    
+:book: Read more in [deploy docs](/docs/tutorials/deploy.md).   
 
 
-## Who uses the template?
+### Who uses the template?
 
-Going to use template? Go on! The only thing we ask - let us know at with a pull request, so we can include you to this list.
+Going to use the template? Go on! The only thing we ask - let us know at with a 
+pull request, so we can include you in this list.
 
 | [GDG DevFest Ukraine](http://devfest.gdg.org.ua) |
 | :------------ |
@@ -93,26 +91,47 @@ Going to use template? Go on! The only thing we ask - let us know at with a pull
 | [GDG DevFest Istanbul 2015](https://www.devfesttr.com) |
 | [GDG Cáceres CodeWeek 2015](http://codeweek.gdgcaceres.es) |
 | [GDG Bingham University Website](http://bhu.gdg.ng) |
+| [Google I/O Extended 2016 Kuala Lumpur](https://ioxkl2016.firebaseapp.com) |
+| [GDG DevFest Hamburg 2016](https://hamburg.devfest.de) |
 
-## Contributing
+### Roadmap :rocket:
+:x: Admin panel  
+:x: Firebase Integration   
+:x: My schedule  
+:x: Push notification  
+:x: ES2015  
+:x: Accessibility  
+:x: Unit/Integration Tests  
+:point_right: __Propose your feature with [creating an issue](https://github.com/gdg-x/hoverboard/issues/new)__
 
-Project Hoverboard is still under development and it is open for contributions. Feel free to send PR. If you have any questions, feel free to contact [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy).
-#### General workflow
+### Contributing
+
+Project Hoverboard is still under development, and it is open for contributions. 
+Feel free to send PR. If you have any questions, feel free to contact 
+[Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy).
+
+##### General workflow
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Make your changes
-4. Run the tests, adding new ones for your own code if necessary
+4. Run the tests, adding new ones for your code if necessary
 5. Commit your changes (`git commit -am 'Added some feature'`)
 6. Push to the branch (`git push origin my-new-feature`)
 7. Create new Pull Request
 
-### Contributors
-See [list of contributors](https://github.com/gdg-x/hoverboard/graphs/contributors)
+:book: Read complete [contributing guide](CONTRIBUTING.md).
 
-Maintainer: [@ozasadnyy](https://github.com/ozasadnyy).
+
+### Contributors :sparkles:
+See [list of contributors](https://github.com/gdg-x/hoverboard/graphs/contributors).
+
+__Maintainer:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
+
 
 ######The GDG App, GDG[x] are not endorsed and/or supported by Google, the corporation.
 
-## License
 
-Project is published under the [MIT license](https://github.com/gdg-x/hoverboard/blob/master/LICENSE.md) Feel free to clone and modify repo as you want, but don't forget to add reference to authors :)
+### License
+
+Project is published under the [MIT license](https://github.com/gdg-x/hoverboard/blob/master/LICENSE.md).  
+Feel free to clone and modify repo as you want, but don't forget to add reference to authors :)

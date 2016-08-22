@@ -81,8 +81,12 @@
       </div>
       <div class="logo-wrapper">
         <a href="/" hidden$="{{hideLogo}}" fade>
-          <iron-image class="logo" src="/images/logo-white.svg" sizing="contain"
-                      alt="{{localize('title')}}"></iron-image>
+          <iron-image
+            class="logo"
+            src="/images/logo-white.svg"
+            sizing="contain"
+            alt="{{localize('title')}}"
+          ></iron-image>
         </a>
       </div>
       <div class="navItem" layout horizontal self-end>
@@ -119,11 +123,8 @@
         ],
 
         properties: {
-          routeData: Object,
-          hideLogo: Boolean,
-          loadExternalResources: {
-            type: Boolean,
-            value: false
+          hideLogo: {
+            type: Boolean
           }
         },
 

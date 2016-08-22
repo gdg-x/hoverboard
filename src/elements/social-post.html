@@ -52,18 +52,25 @@
           author: {
             type: String
           },
-          url: String,
+
+          url: {
+            type: String
+          },
+
           text: {
             type: String,
             observer: '_textChanged',
             value: 'Post about your experience at GDG DevFest Ukraine 2016'
           },
+
           when: {
             type: Date
           },
+
           canonicalUrl: {
             type: String
           },
+
           sign: {
             type: String
           }

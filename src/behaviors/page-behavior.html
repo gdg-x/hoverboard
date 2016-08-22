@@ -1,6 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
 
 <script>
   (function () {
@@ -13,7 +12,9 @@
           type: Object
         },
         selected: {
-          type: Boolean
+          type: Boolean,
+          reflectToAttribute: true,
+          value: false
         }
       }
 

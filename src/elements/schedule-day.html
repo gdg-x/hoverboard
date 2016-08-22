@@ -299,17 +299,9 @@
 
         _filterSession: function () {
           var filters = this.filters || [];
-          if (!filters.length)
-            return false;
+          if (!filters.length) return false;
           return function (session) {
-            if(session.tags) {
-              var tagsIntersection = session.tags.filter(function(tag) {
-                  return filters.indexOf(tag) != -1;
-              });
-              return tagsIntersection.length > 0;
-            } else {
-              return true; // always show sessions without tags
-            }
+            return filters.indexOf(session.mainTag) > -1;
           };
         }
 
