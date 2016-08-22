@@ -302,7 +302,14 @@
           if (!filters.length)
             return false;
           return function (session) {
-            return filters.indexOf(session.mainTag) > -1;
+            if(session.tags) {
+              var tagsIntersection = session.tags.filter(function(tag) {
+                  return filters.indexOf(tag) != -1;
+              });
+              return tagsIntersection.length > 0;
+            } else {
+              return true; // always show sessions without tags
+            }
           };
         }
 

@@ -3,6 +3,10 @@
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/maps-icons.html">
+
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/paper-material/paper-material.html">
 
@@ -73,6 +77,28 @@
         margin-top: 20px;
       }
 
+      .quote {
+        padding: 40px !important;
+      }
+
+      .quote img {
+        float: left;
+        margin: 0 20px 20px 0;
+        border-radius: 50%;
+        width: 150px;
+      }
+
+      .quote .text {
+        font-style: italic;
+        margin: 0;
+      }
+
+      .quote .author {
+        font-weight: bold;
+        text-align: right;
+        margin: 10px 0 0 0;
+      }
+
       @media (min-width: 961px) {
         .layout {
           @apply(--layout-horizontal);
@@ -101,11 +127,13 @@
       <div class="layout">
         <div id="guidelines" class="c1">
           <paper-card cascaded>
-            <div class="paper-card-container">
+            <div class="paper-card-container quote">
               <div class="card-content">
-                Welcome to center stage for the 5th Annual GDG DevFest Ukraine. We are excited to be returning to Lviv
+                <img src="/images/people/vitaliy_zasadnyy.jpg">
+                <p class="text">Welcome to center stage for the 5th Annual GDG DevFest Ukraine. We are excited to be returning to Lviv
                 and thrilled that you chose to participate. Please read on for information that will help your session
-                succeed, and drive value for you both before and after the conference as well.
+                succeed, and drive value for you both before and after the conference as well.</p>
+                <p class="author">- Vitaliy Zasadnyy, Speakers and Content Manager</p>
               </div>
             </div>
           </paper-card>
@@ -218,9 +246,10 @@
           </paper-card>
         </div>
         <div class="c2">
+          
           <paper-card class="info-card" cascaded>
             <div class="card-content header">
-              <div class="title-text">Key dates</div>
+              <div class="title-text"><iron-icon icon="date-range"></iron-icon>  Key dates</div>
             </div>
             <div class="card-content">
               <b>August 21:</b> submit a presentation for review with "_DRAFT" in the filename <a target="_blank" href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=YzFwZ292bDQzN2pkaHZ2OTVhZ3NzNWQwMDAgemFzYWRueXkudml0YWxpa0Bt&tmsrc=zasadnyy.vitalik%40gmail.com">[Add to calendar]</a></br></br>
@@ -228,25 +257,38 @@
               <b>September 9:</b> game on, DevFest Ukraine 2016 openning
             </div>
           </paper-card>
+          
           <paper-card class="info-card" cascaded>
             <div class="card-content header">
-              <div class="title-text">Slides Template</div>
+              <div class="title-text"><iron-icon icon="perm-media"/></iron-icon>  Slides template</div>
             </div>
             <div class="card-content">
               <a href="https://drive.google.com/folderview?id=0B3UBk7uINu2jZHRXZnh4Rk53Yzg&usp=sharing" target="_blank">Download slides template from Google Drive</a>
             </div>
           </paper-card>
-          <!-- <paper-card class="info-card">
+          
+          <paper-card class="info-card">
               <div class="card-content header">
-                  <div class="title-text">Speakers party</div>
+                  <div class="title-text"><iron-icon icon="maps:local-activity"/></iron-icon> Special party</div>
               </div>
               <div class="card-content">
-                  Special speakers party will be on Saturday evening. More details comming soon...
+                  Special speakers and organizers party will be held on Saturday evening. The time and location will be announced later.
               </div>
-          </paper-card> -->
+          </paper-card>
+          
+          <paper-card class="info-card">
+              <div class="card-content header">
+                  <div class="title-text"><iron-icon icon="maps:place"/></iron-icon> Important locations</div>
+              </div>
+              <div class="card-content">
+                  <b>Hotel Ibis Styles</b>: <a href="https://goo.gl/maps/hSSx5GbMUgC2" target=_blank>Shukhevycha St, 3, Lviv</a><br/>
+                  <b>Pivdennyi Expo</b> (DevFest venue): <a href="https://goo.gl/maps/JVZpjMmYYok" target=_blank>Shchyretska St, 36, Lviv</a>
+              </div>
+          </paper-card>
+
           <paper-card class="info-card" cascaded>
             <div class="card-content header">
-              <div class="title-text">Need help?</div>
+              <div class="title-text"><iron-icon icon="help-outline"/></iron-icon> Need help?</div>
             </div>
             <div class="card-content">
               With any questions or equeries feel free to ping Vitaliy at <a href="mailto:vitaliy.zasadnyy@gdg.org.ua">vitaliy.zasadnyy@gdg.org.ua</a>
