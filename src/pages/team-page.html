@@ -11,6 +11,7 @@
 
 <link rel="import" href="../elements/footer-block.html">
 <link rel="import" href="../behaviors/localize-behavior.html">
+<link rel="import" href="../behaviors/page-behavior.html">
 
 
 <dom-module id="team-page">
@@ -252,15 +253,11 @@
 
         behaviors: [
           Polymer.NeonSharedElementAnimatableBehavior,
-          HOVERBOARD.LocalizeBehavior,
-          HOVERBOARD.UtilsBehavior
+          HOVERBOARD.PageBehavior,
+          HOVERBOARD.LocalizeBehavior
         ],
 
         properties: {
-          selected: {
-            type: Boolean
-          },
-
           animationConfig: {
             type: Object,
             value: function () {

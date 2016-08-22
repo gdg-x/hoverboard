@@ -58,6 +58,17 @@
         "name": "Zalando",
         "url": "https://tech.zalando.de/",
         "logoUrl": "/images/logos/zalando.svg"
+      },
+      {
+        "name": "FM standard",
+        "url": "http://fm-standard.com/en",
+        "logoUrl": "/images/logos/fm-standart.svg",
+        "width": 55
+      },
+      {
+        "name": "Designprof",
+        "url": "http://designprof.com.ua/",
+        "logoUrl": "/images/logos/designprof.svg"
       }
     ]
   },
@@ -289,6 +300,26 @@
         "name": ".Net Developer Day",
         "url": "http://net.developerdays.pl/",
         "logoUrl": "/images/logos/net-days.png"
+      },
+      {
+        "name": "Epam",
+        "url": "https://www.epam.com/",
+        "logoUrl": "/images/logos/epam.svg"
+      },
+      {
+        "name": "Web Academy",
+        "url": "http://web-academy.com.ua/",
+        "logoUrl": "/images/logos/web_academy.png"
+      },
+      {
+        "name": "IHub",
+        "url": "http://ihub.com.ua/",
+        "logoUrl": "/images/logos/ihub.png"
+      },
+      {
+        "name": "Startup Depot",
+        "url": "http://startupdepot.lviv.ua/home-page/",
+        "logoUrl": "/images/logos/startup_depot.png"
       }
     ]
   }

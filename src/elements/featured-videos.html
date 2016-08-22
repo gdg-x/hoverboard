@@ -9,7 +9,7 @@
 <link rel="import" href="../styles/shared-styles.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
 <link rel="import" href="../behaviors/localize-behavior.html">
-<link rel="import" href="video-dialog.html">
+
 
 <dom-module id="featured-videos">
 
@@ -20,7 +20,7 @@
         display: block;
         background: var(--default-primary-color);
         color: var(--text-primary-color);
-        --iron-icon-fill-color: #fff;
+        --iron-icon-fill-color: var(--text-primary-color);
         --paper-card-background-color: #fff;
         overflow: hidden;
       }
@@ -70,7 +70,7 @@
         @apply(--layout-center-center);
         margin: 0 auto;
         cursor: pointer;
-        background: rgba(0,0,0,0.15);
+        background: rgba(0, 0, 0, 0.15);
       }
 
       .play-icon {
@@ -93,7 +93,7 @@
       .block-link {
         margin-top: 25px;
         display: block;
-        color: var(--text-primary-color);
+        color: inherit;
         font-size: .9em;
       }
 
@@ -117,8 +117,8 @@
       <div class="videos-header">
         <h4 class="heading">[[localize('featured-videos-title')]]</h4>
         <div class="controls">
-          <paper-icon-button icon="icons:chevron-left" on-tap="shiftContentLeft"></paper-icon-button>
-          <paper-icon-button icon="icons:chevron-right" on-tap="shiftContentRight"></paper-icon-button>
+          <paper-icon-button icon="chevron-left" on-tap="shiftContentLeft"></paper-icon-button>
+          <paper-icon-button icon="chevron-right" on-tap="shiftContentRight"></paper-icon-button>
         </div>
       </div>
       <div id="videos" class="videos">
@@ -126,8 +126,13 @@
           <div class="video-item">
             <paper-card class="card">
               <div class="header paper-card">
-                <iron-image class="thumbnail" src="[[video.thumbnail]]" placeholder="[[video.preloadPlaceholder]]"
-                            sizing="cover" preload fade></iron-image>
+                <iron-image
+                  class="thumbnail"
+                  src="[[video.thumbnail]]"
+                  placeholder="[[video.preloadPlaceholder]]"
+                  sizing="cover"
+                  preload fade
+                ></iron-image>
                 <div class="play-video" on-tap="_playVideo">
                   <iron-icon class="play-icon" icon="icons:play"></iron-icon>
                 </div>
@@ -143,14 +148,11 @@
         </template>
       </div>
       <div layout>
-        <a href="[[app.data.videosSessionsUrl]]" class="block-link" target="_blank">
+        <a href$="[[app.data.videosSessionsUrl]]" class="block-link" target="_blank">
           <paper-button>[[localize('featured-videos-view-all')]]</paper-button>
         </a>
       </div>
     </div>
-    <video-dialog id="videoViewer" video-title="[[_selectedVideo.title]]" youtube-id="[[_selectedVideo.youtubeId]]"
-                  entry-animation="scale-up-animation"
-                  exit-animation="scale-down-animation" modal></video-dialog>
 
   </template>
 
@@ -173,8 +175,14 @@
         },
 
         properties: {
-          _videos: Array,
-          _selectedVideo: Object,
+          _videos: {
+            type: Array
+          },
+
+          _selectedVideo: {
+            type: Object
+          },
+
           _currentIndex: {
             type: Number,
             value: 0
@@ -185,49 +193,45 @@
           '_videosChanged(app.videos)'
         ],
 
-        _onTouchStart: function(e) {
-          var touchObj = e.changedTouches[0]
-          this.dist = 0;
+        _onTouchStart: function (e) {
+          var touchObj = e.changedTouches[0];
           this.startX = touchObj.pageX;
           this.startY = touchObj.pageY;
           this.nodeWidth = e.currentTarget.offsetWidth;
         },
 
-        _onTouchEnd: function(e) {
-
+        _onTouchEnd: function (e) {
           //required min distance traveled to be considered swipe
           this.threshold = this.nodeWidth / 4;
           // maximum distance allowed at the same time in perpendicular direction
           this.restraint = 100;
-          var touchObj = e.changedTouches[0]
+          var touchObj = e.changedTouches[0];
           // get horizontal dist traveled by finger while in contact with surface;
           this.distX = touchObj.pageX - this.startX;
           // get vertical dist traveled by finger while in contact with surface
           this.distY = touchObj.pageY - this.startY;
 
-          if (Math.abs(this.distX) >= this.threshold && Math.abs(this.distY) <= this.restraint){
+          if (Math.abs(this.distX) >= this.threshold && Math.abs(this.distY) <= this.restraint) {
             if (this.distX > 0) {
               this.shiftContentLeft();
             }
-            else  {
+            else {
               this.shiftContentRight();
             }
           }
         },
 
         _videosChanged: function () {
-          if (this.app.videos)
+          if (this.app.videos) {
             this._videos = this._randomOrder(this.app.videos).slice(0, 6);
+          }
         },
 
         _playVideo: function (e) {
           var presenters = e.model.video.speakers ? (' by ' + e.model.video.speakers) : '';
-          this._selectedVideo = {
-            title: e.model.video.title + presenters,
-            youtubeId: e.model.video.youtubeId
-          };
-          this.$.videoViewer.open();
-          HOVERBOARD.Analytics.trackEvent('video', 'watch',  'dfua15' + this._selectedVideo.title);
+          HOVERBOARD.Elements.Template.openVideo(e.model.video.title + presenters, e.model.video.youtubeId, true);
+
+          HOVERBOARD.Analytics.trackEvent('video', 'watch', 'featured video ' + this._selectedVideo.title);
         },
 
         shiftContentLeft: function () {

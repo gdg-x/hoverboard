@@ -7,8 +7,7 @@
 
 <dom-module id="truncate-marked-text">
 
-  <style include="shared-styles"></style>
-  <style>
+  <style include="shared-styles">
     .markdown-html {
       @apply(--truncate-marked-text-style);
     }
@@ -31,16 +30,24 @@
         is: 'truncate-marked-text',
 
         properties: {
-          characters: Number,
-          words: Number,
+          characters: {
+            type: Number
+          },
+
+          words: {
+            type: Number
+          },
+
           breakLastWord: {
             type: Boolean,
             value: false
           },
+
           text: {
             type: String,
             observer: 'truncate'
           },
+
           _outputText: {
             type: String,
             notify: true

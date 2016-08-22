@@ -9,9 +9,8 @@
 
 <link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
 
-<link rel="import" href="../../bower_components/disqus-comments/disqus-comments.html">
-
 <link rel="import" href="../elements/footer-block.html">
+<link rel="import" href="../behaviors/page-behavior.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
 
 <dom-module id="post-page">
@@ -92,10 +91,6 @@
         color: #fff;
       }
 
-      .markdown-html .m-r {
-        margin-right: 16px;
-      }
-
       @media (min-width: 601px) {
         .latest-post-wrapper {
           @apply(--layout-horizontal);
@@ -151,10 +146,6 @@
             </template>
           </div>
         </div>
-        <div class="container">
-          <disqus-comments id="disqus" shortname="[[app.data.disqusShortName]]" identifier="[[_post.id]]"
-                           title="[[_post.title]]" https></disqus-comments>
-        </div>
       </div>
 
 
@@ -181,21 +172,29 @@
         behaviors: [
           Polymer.NeonAnimationRunnerBehavior,
           Polymer.NeonSharedElementAnimatableBehavior,
+          HOVERBOARD.PageBehavior,
           HOVERBOARD.UtilsBehavior
         ],
 
         properties: {
-          app: Object,
           postId: {
             type: String,
             notify: true
           },
-          posts: Array,
+
+          posts: {
+            type: Array
+          },
+
           _loaded: {
             type: Boolean,
             value: false
           },
-          _post: Object,
+
+          _post: {
+            type: Object
+          },
+
           _latestPosts: {
             type: Array,
             value: []
@@ -286,7 +285,6 @@
             this.$.animationWrapper.style.display = 'block';
           }, 100);
           this.playAnimation('postLoaded');
-          this.$.disqus.reset();
           this.postId = null;
           HOVERBOARD.Analytics.trackEvent('blog', 'open post', this._post.title);
         },

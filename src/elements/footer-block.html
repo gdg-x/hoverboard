@@ -160,8 +160,12 @@
 
     <div class="container">
       <div class="footer-content">
-        <iron-image class="gdg-logo" src="/images/gdg-logo.svg" sizing="contain"
-                    alt="[[app.data.organizer.name]]"></iron-image>
+        <iron-image
+          class="gdg-logo"
+          src="/images/gdg-logo.svg"
+          sizing="contain"
+          alt="[[app.data.organizer.name]]"
+        ></iron-image>
         <paper-button class="footer-backtotop" on-tap="scrollToTop" noink>
           [[localize('back-to-top')]]
           <iron-icon icon="icons:expand-less"></iron-icon>
@@ -185,7 +189,9 @@
             <div class="link-block-title">[[localize('contact-us')]]</div>
             <ul class="link-block">
               <template is="dom-repeat" items="[[app.data.contactBlock.links]]" as="link">
-                <li><a href$="[[link.url]]" target="_getLinkTarget(link.newTab)">[[link.text]]</a></li>
+                <li>
+                  <a href$="[[link.url]]" target="_getLinkTarget(link.newTab)">[[link.text]]</a>
+                </li>
               </template>
             </ul>
             <div class="icons-wrapper align-pb-block">
@@ -199,8 +205,11 @@
           <div class="subscribe">
             <div class="link-block-title">[[localize('subscribe')]]</div>
             <span>[[localize('subscribe-note')]]</span>
-            <mailchimp-subscribe url="[[app.data.mailchimp.url]]"
-                                 name="[[app.data.mailchimp.name]]"></mailchimp-subscribe>
+            <mailchimp-subscribe
+              app="[[app]]"
+              url="[[app.data.mailchimp.url]]"
+              name="[[app.data.mailchimp.name]]"
+            ></mailchimp-subscribe>
           </div>
         </nav>
       </div>
@@ -213,7 +222,12 @@
           <a href="http://lviv.gdg.org.ua" target="_blank">GDG Lviv</a>
         </div>
         <div class="gplus">
-          <g:plusone size="medium" width="200" annotation="inline" href$="{{app.data.url}}"></g:plusone>
+          <g:plusone
+            size="medium"
+            width="200"
+            annotation="inline"
+            href$="{{app.data.url}}"
+          ></g:plusone>
         </div>
 
         <paper-menu-button vertical-align="bottom" horizontal-align="left">
@@ -222,10 +236,18 @@
             [[selectedLanguage.label]]
             <iron-icon icon="arrow-drop-down"></iron-icon>
           </paper-button>
-          <paper-menu class="dropdown-content" selected="{{app.lang}}" selected-item="{{selectedLanguage}}"
-                      attr-for-selected="value">
+          <paper-menu
+            class="dropdown-content"
+            selected="{{app.lang}}"
+            selected-item="{{selectedLanguage}}"
+            attr-for-selected="value"
+          >
             <template is="dom-repeat" items="[[app.data.languages]]" as="lang">
-              <paper-item value="[[lang.key]]" label="[[lang.name]]">[[lang.name]]</paper-item>
+              <paper-item
+                value="[[lang.key]]"
+                label="[[lang.name]]"
+              >[[lang.name]]
+              </paper-item>
             </template>
           </paper-menu>
         </paper-menu-button>

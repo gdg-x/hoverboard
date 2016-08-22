@@ -6,6 +6,7 @@
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 
 <link rel="import" href="../styles/shared-styles.html">
+<link rel="import" href="../behaviors/localize-behavior.html">
 
 
 <dom-module id="mailchimp-subscribe">
@@ -52,21 +53,29 @@
     </style>
 
     <div id="mc_embed_signup" class="mc_embed_signup">
-      <form action="[[ url ]]" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
-            class="mc-embedded-subscribe-form validate" target="_blank" novalidate>
+      <form
+        id="mc-embedded-subscribe-form"
+        class="mc-embedded-subscribe-form validate"
+        action="[[url]]"
+        method="post"
+        name="mc-embedded-subscribe-form"
+        target="_blank"
+        novalidate
+      >
         <div class="mc-field-group">
           <paper-input-container no-label-float>
-            <label>Your email</label>
-            <input is="iron-input" type="email" name="EMAIL" id="mce-EMAIL" autocomplete="off">
+            <label>[[localize('your-email')]]</label>
+            <input is="iron-input" type="email" name="EMAIL" id="mce-EMAIL" autocomplete="off" />
           </paper-input-container>
-          <paper-button class="subscribe-button" on-click="submitForm">Subscribe</paper-button>
+          <paper-button class="subscribe-button" on-click="submitForm">[[localize('subscribe')]]</paper-button>
         </div>
         <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups -->
         <div style="position: absolute; left: -5000px;">
           <input type="text" name="[[ name ]]" tabindex="-1">
         </div>
         <div class="mc-submit-group">
-          <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" style="display:none">
+          <input type="submit" value$="[[localize('subscribe')]]" name="subscribe" id="mc-embedded-subscribe"
+                 style="display:none">
         </div>
       </form>
     </div>
@@ -81,13 +90,23 @@
 
         is: 'mailchimp-subscribe',
 
+        behaviors: [
+          HOVERBOARD.LocalizeBehavior
+        ],
+
         properties: {
-          url: String,
-          name: String
+          url: {
+            type: String
+          },
+
+          name: {
+            type: String
+          }
         },
 
         submitForm: function () {
           this.$$('#mc-embedded-subscribe-form').submit();
+          HOVERBOARD.Analytics.trackEvent('attendees', 'subscribe', 'Subscribe mailchimp');
         }
 
       });

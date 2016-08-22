@@ -15,11 +15,6 @@
           value: function () {
             return {};
           }
-        },
-
-        loadExternalResources: {
-          type: Boolean,
-          value: true
         }
       },
 
@@ -42,12 +37,11 @@
       },
 
       setLanguage: function (lang) {
-        if (lang) {
-          if (this.app.resources && !this.app.resources[lang]) {
-            this.loadAppResources(lang);
-          } else {
-            this.set('language', lang);
-          }
+        if (!lang) return;
+        if (this.app.resources && !this.app.resources[lang]) {
+          this.loadAppResources(lang);
+        } else {
+          this.set('language', lang);
         }
       },
 

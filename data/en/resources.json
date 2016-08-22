@@ -15,6 +15,7 @@
   "buy-ticket": "Buy ticket",
   "back-to-top": "Back to top",
   "subscribe": "Subscribe",
+  "your-email": "Your email",
   "subscribe-note": "No spam, only the latest news and updates!",
   "for-visitors": "For visitors",
   "google-developers": "Google Developers",
@@ -80,5 +81,10 @@
   "read-more": "Read more",
   "copy-link": "Copy link",
   "filtered-by": "filtered by",
-  "clear-all": "Clear all"
+  "clear-all": "Clear all",
+  "filter": "Filter",
+  "latest-news": "Latest news",
+  "continue-reading": "Continue reading",
+  "view-presentation": "View presentation",
+  "view-video": "View video"
 }

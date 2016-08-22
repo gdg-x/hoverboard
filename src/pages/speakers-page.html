@@ -16,6 +16,7 @@
 <link rel="import" href="../elements/speaker-details.html">
 <link rel="import" href="../elements/footer-block.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
+<link rel="import" href="../behaviors/page-behavior.html">
 
 <dom-module id="speakers-page">
 
@@ -240,13 +241,11 @@
 
         behaviors: [
           Polymer.NeonSharedElementAnimatableBehavior,
+          HOVERBOARD.PageBehavior,
           HOVERBOARD.UtilsBehavior
         ],
 
         properties: {
-          app: {
-            type: Object
-          },
 
           route: {
             type: Object,
@@ -263,12 +262,6 @@
 
           speakers: {
             type: Object
-          },
-
-          selected: {
-            type: Boolean,
-            reflectToAttribute: true,
-            value: false
           },
 
           _selectedSpeaker: Object,

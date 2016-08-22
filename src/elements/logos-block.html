@@ -2,7 +2,6 @@
 
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/iron-image/iron-image.html">
-<!--<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">-->
 
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
@@ -59,13 +58,12 @@
         height: 60px;
         width: 140px;
       }
+
       .logo-img.info {
         height: 45px;
         width: 100px;
       }
     </style>
-
-    <!--<iron-ajax auto url="[[partnersSource]]" handle-as="json" last-response="{{logos}}"></iron-ajax>-->
 
     <div class="container">
       <h4 class="heading text-center">[[localize('partners')]]</h4>
@@ -75,8 +73,14 @@
           <div class="logos">
             <template is="dom-repeat" items="[[block.logos]]" as="logo">
               <a class="logo-item" href="[[logo.url]]" title="[[logo.name]]" target="_blank">
-                <iron-image class$="logo-img [[block.logosClass]]" src="[[logo.logoUrl]]" height$="{{logo.height}}"
-                            width$="{{logo.width}}" preload fade sizing="contain"></iron-image>
+                <iron-image
+                  class$="logo-img [[block.logosClass]]"
+                  src="[[logo.logoUrl]]"
+                  width$="{{logo.width}}"
+                  height$="{{logo.height}}"
+                  sizing="contain"
+                  preload fade
+                ></iron-image>
               </a>
             </template>
           </div>

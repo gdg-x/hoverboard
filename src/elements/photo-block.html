@@ -75,8 +75,12 @@
 
     <div class="photo-wrapper">
       <div class="photo big">
-        <iron-image src="{{app.data.gallery.photos.big}}" class="placeholder-color" sizing="cover" preload
-                    fade></iron-image>
+        <iron-image
+          class="placeholder-color"
+          src="[[app.data.gallery.photos.big]]"
+          sizing="cover"
+          preload fade
+        ></iron-image>
         <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank">
           <paper-ripple></paper-ripple>
           <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>
@@ -84,16 +88,24 @@
       </div>
       <div class="vertical-block">
         <div class="photo">
-          <iron-image src="[[app.data.gallery.photos.small.0]]" class="placeholder-color" sizing="cover" preload
-                      fade></iron-image>
+          <iron-image
+            class="placeholder-color"
+            src="[[app.data.gallery.photos.small.0]]"
+            sizing="cover"
+            preload fade
+          ></iron-image>
           <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank">
             <paper-ripple></paper-ripple>
             <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>
           </a>
         </div>
         <div class="photo">
-          <iron-image src="[[app.data.gallery.photos.small.1]]" class="placeholder-color" sizing="cover" preload
-                      fade></iron-image>
+          <iron-image
+            class="placeholder-color"
+            src="[[app.data.gallery.photos.small.1]]"
+            sizing="cover"
+            preload fade
+          ></iron-image>
           <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank">
             <paper-ripple></paper-ripple>
             <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>

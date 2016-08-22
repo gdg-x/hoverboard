@@ -2,8 +2,12 @@
 
 <link rel="import" href="../../bower_components/app-route/app-route.html">
 
+<link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
+
+<link rel="import" href="../behaviors/page-behavior.html">
 <link rel="import" href="blog-list.html">
 <link rel="import" href="post-page.html">
+
 
 <dom-module id="blog-page">
 
@@ -47,15 +51,19 @@
         is: 'blog-page',
 
         behaviors: [
-          Polymer.NeonAnimatableBehavior
+          Polymer.NeonAnimatableBehavior,
+          HOVERBOARD.PageBehavior
         ],
 
         properties: {
-          app: Object,
-          posts: Array,
           route: {
             type: Object
           },
+
+          posts: {
+            type: Array
+          },
+
           animationConfig: {
             type: Object,
             value: function () {

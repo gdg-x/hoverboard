@@ -115,12 +115,21 @@
     </style>
 
     <template is="dom-if" if="[[selected]]">
-      <google-map zoom="[[app.data.location.pointer.zoom]]" latitude="[[app.data.location.mapCenter.latitude]]"
-                  longitude="[[app.data.location.mapCenter.longitude]]" api-key="[[app.data.location.apiKey]]" styles="[[options]]" disable-zoom disable-default-ui>
-        <google-map-marker latitude="[[app.data.location.pointer.latitude]]"
-                           longitude="[[app.data.location.pointer.longitude]]"></google-map-marker>
+      <google-map
+        zoom="[[app.data.location.pointer.zoom]]"
+        latitude="[[app.data.location.mapCenter.latitude]]"
+        longitude="[[app.data.location.mapCenter.longitude]]"
+        api-key="[[app.data.location.apiKey]]"
+        styles="[[options]]"
+        disable-zoom disable-default-ui
+      >
+        <google-map-marker
+          latitude="[[app.data.location.pointer.latitude]]"
+          longitude="[[app.data.location.pointer.longitude]]"
+        ></google-map-marker>
       </google-map>
-    </template>>
+    </template>
+    >
     <div class="disable-map-events"></div>
     <div class="container">
       <div class="additional-space"></div>
@@ -197,14 +206,12 @@
               }];
             }
           },
+
           _currentSourceIndex: {
             type: Number,
             value: 0
           },
-          _currentTargetIndex: {
-            type: Number,
-            value: 0
-          },
+
           _currentImage: {
             type: String
           }
@@ -215,7 +222,7 @@
         ],
 
         setImages: function (images) {
-          if(!images) return;
+          if (!images) return;
           this.images = images;
           this._currentImage = this.images[this._currentSourceIndex];
           if (this.images.length > 1) {
