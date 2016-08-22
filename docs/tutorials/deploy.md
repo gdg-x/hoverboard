@@ -27,7 +27,7 @@ The instructions below are based on the [Firebase quick start][Firebase quick st
     
 1.  When you initialize your app, you will be prompted for a directory to 
     use as the public root (default is "public"). Enter `build/bundled` 
-    or `build/onbundled` (supports HTTP/2). `build` contains everything 
+    or `build/unbundled` (supports HTTP/2). `build` contains everything 
     your application needs to run.
 
 1.  Edit firebase.json, change firebase name, and add `rewrites` section 
