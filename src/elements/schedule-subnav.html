@@ -126,8 +126,8 @@
           </div>
         </template>
       </div>
-      <div class="filters" hidden$="[[!_activeFilters(filters)]]">
-        [[localize('filtered-by')]] [[_joinArray(filters)]]
+      <div class="filters" hidden$="[[!_filtersLabel]]">
+        [[localize('filtered-by')]] [[_filtersLabel]]
       </div>
     </div>
 
@@ -160,6 +160,11 @@
             value: [],
             notify: true
           }
+        },
+
+        listeners: {
+          'iron-select': '_refreshFiltersLabel',
+          'iron-deselect': '_refreshFiltersLabel'
         },
 
         attached: function () {
@@ -209,16 +214,16 @@
           this.set('_filtersOpened', false);
         },
 
-        _joinArray: function (array) {
-          return array.join(', ');
-        },
-
         _getCustomStyleValue: function(tag) {
           return this.getComputedStyleValue('--' + this._generateClass(tag));
         },
 
         _activeFilters: function() {
           return this.filters && this.filters.length;
+        },
+
+        _refreshFiltersLabel: function () {
+          this._filtersLabel = this.filters.join(', ');
         }
 
       });
