@@ -419,8 +419,8 @@
     },
     "112": {
         "id": 112,
-        "title": "Building web apps in 2016",
-        "description": "Last year brought a lot of new capabilities to browsers, fundamentally changing the way we will build web apps in 2016. 60FPS, push messages, offline support and background sync became a reality marking the birth of Progressive Web Apps.",
+        "title": "Going offline with Service Worker",
+        "description": "Last year brought a lot of new capabilities to browsers, fundamentally changing the way we will build web apps in the near future. Offline support is definitely one of the most exciting additions. In this talk, we will dive deep into Service Worker and see how we can use it in our apps.",
         "speakers": [
             10
         ],
