@@ -99,6 +99,11 @@
         "name": "JetBrains",
         "url": "https://www.jetbrains.com/",
         "logoUrl": "/images/logos/jetbrains.svg"
+      },
+      {
+        "name": "Shulga Massage",
+        "url": "http://shulga-massage.com/",
+        "logoUrl": "/images/logos/massage.png"
       }
     ]
   },
@@ -317,9 +322,19 @@
         "logoUrl": "/images/logos/ihub.png"
       },
       {
+        "name": "Ukrainian Software Development Forum",
+        "url": "http://outsourcingforum.org.ua/",
+        "logoUrl": "/images/logos/forum.png"
+      },
+      {
         "name": "Startup Depot",
         "url": "http://startupdepot.lviv.ua/home-page/",
         "logoUrl": "/images/logos/startup_depot.png"
+      },
+      {
+        "name": "Kharkiv IT Cluster",
+        "url": "http://it-kharkiv.com/",
+        "logoUrl": "/images/logos/kharkiv_itcluster.png"
       }
     ]
   }
