@@ -192,8 +192,8 @@
     },
     "125": {
         "id": 125,
-        "title": "Kubernetes in a real world",
-        "description": "TBD",
+        "title": "Application Delivery with OpenStack and Kubernetes",
+        "description": "OpenStack is the open-source cloud computing platform for building elastic and scalable clouds, originally launched by NASA and Rackspace and now developed and maintained by over 150 different contributing organizations. While OpenStack began as a platform for managing compute resources represented as virtual machines, now it provides wide abilities to run the workloads in multiple forms, including VM-based, bare-metal, containerized and hybrid models. To this end folks from the OpenStack and Kubernetes communities have been working together to build Kubernetes’ awareness of the capabilities of the underlying cloud when running on OpenStack, ultimately providing an ideal platform for modern containerized applications while they themselves remain agnostic of the underlying infrastructure. \n\nIn this session we will review what OpenStack is at a high level, what are the benefits of running Kubernetes on OpenStack today, and the integration opportunities that mean you are even more likely to want to run Kubernetes on OpenStack in the future! Attend this session to learn how and why you would use Kubernetes and OpenStack to modernize your application delivery and management. We’ll also discuss how you yourself can get involved in the work of the Kubernetes OpenStack SIG.",
         "speakers": [
             22
         ],
@@ -419,8 +419,8 @@
     },
     "112": {
         "id": 112,
-        "title": "Building web apps in 2016",
-        "description": "Last year brought a lot of new capabilities to browsers, fundamentally changing the way we will build web apps in 2016. 60FPS, push messages, offline support and background sync became a reality marking the birth of Progressive Web Apps.",
+        "title": "Going offline with Service Worker",
+        "description": "Last year brought a lot of new capabilities to browsers, fundamentally changing the way we will build web apps in the near future. Offline support is definitely one of the most exciting additions. In this talk, we will dive deep into Service Worker and see how we can use it in our apps.",
         "speakers": [
             10
         ],
@@ -432,8 +432,8 @@
     },
     "111": {
         "id": 111,
-        "title": "Dagger 2: dependency Injection Android way",
-        "description": "It's beauty, it's handy, it's fast, it's easy - all about Dagger 2",
+        "title": "Building modular architecture apps with Dagger 2",
+        "description": "TBD",
         "speakers": [
             9
         ],

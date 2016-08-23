@@ -295,31 +295,40 @@
     "9": {
         "id": 9,
         "featured": "false",
-        "name": "David Mayboroda",
-        "title": "Android Engineer",
-        "company": "Infopulse",
-        "companyLogo": "/images/logos/infopulse.svg",
-        "country": "Kyiv, Ukraine",
-        "photoUrl": "/images/people/david_mayboroda.jpg",
-        "shortBio": "Ex Yandex emproyee. Android enthusiast.",
-        "bio": "Ex-Yandex employee, currently Android Engineer at Infopulse.",
+        "name": "Kseniia Shumelchyk",
+        "title": "Software Engineer",
+        "company": "SoftServe Inc.",
+        "companyLogo": "/images/logos/softserve.svg",
+        "country": "Dnipro, Ukraine",
+        "photoUrl": "/images/people/kseniia_shumelchyk.jpg",
+        "shortBio": "GDG Dnipro and WTM Ukraine lead. Anita Borg schoolarship winner.",
+        "bio": "Kseniia is working as software developer at SoftServe as well she has an experience of working on open-source project during Google Summer of Code. Kseniia is leading Women Techmakers Ukraine and GDG Dnipropetrovsk communities for 4 years. She participated in number of international conferences: GOTO Aarhus, Google I/O and GDG Leaders Summit and was a speaker at Droidcon Berlin, Women Techmakers Istanbul, GDG DevFest Ukraine, Codemotion Milan and Droidcon Krakow. In 2015 Kseniia was selected as recipient of Google Anita Borg Scholarship that aimed to support women with outstanding results in Computer Science. Kseniia is a big fan of innovative technologies in education and software development. She is creator of Android application for Women Techmakers Community.",
         "tags": [
             "Android",
             "Dagger 2"
         ],
         "badges": [
-            
+            {
+                "name": "GDG",
+                "description": "Google Developers Group Dnipro",
+                "link": "https://developers.google.com/groups/chapter/116033068768596939209/"
+            }
         ],
         "socials": [
             {
                 "icon": "facebook",
                 "name": "Facebook",
-                "link": "https://www.facebook.com/profile.php?id=100008474898785"
+                "link": "https://www.facebook.com/kseniya.shumelchyk"
             },
             {
-                "icon": "github",
-                "name": "GitHub",
-                "link": "https://github.com/dmayboroda"
+                "icon": "twitter",
+                "name": "Twitter",
+                "link": "https://twitter.com/KseniiaS"
+            },
+            {
+                "icon": "linkedin",
+                "name": "LinkedIn",
+                "link": "http://ua.linkedin.com/pub/kseniia-shumelchyk/49/26/935"
             }
         ]
     },
@@ -870,7 +879,7 @@
         "country": "Lviv, Ukraine",
         "photoUrl": "/images/people/ihor_dvoretskyi.jpg",
         "shortBio": "OpenStack Foundation member, Kubernetes upstream contributor and OpenStack special interest group lead in Kubernetes Community.",
-        "bio": "Ihor is an Operations Engineer at Mirantis with a huge experience working in IT companies, where he was responsible for projects tightly bound to Cloud computing and Linux systems. He is deeply interested in the OpenStack cloud platform, other Cloud technologies, especially the Open Source projects.<br><br>Also, Ihor acts as the OpenStack Foundation member, Kubernetes upstream contributor, and OpenStack special interest group lead in Kubernetes Community, working intensely on the questions and abilities, related to the OpenStack and Kubernetes collaboration and integration.",
+        "bio": "Ihor is an Operations Engineer at Mirantis with a huge experience working in IT companies, where he was responsible for projects tightly bound to Cloud computing and Linux systems. He is deeply interested in the OpenStack cloud platform, other Cloud technologies, especially the Open Source projects. \nAlso, Ihor acts as the OpenStack Foundation member, Kubernetes upstream contributor, and OpenStack special interest group lead in Kubernetes Community, working intensely on the questions and abilities, related to the OpenStack and Kubernetes collaboration and integration.",
         "tags": [
             "Cloud",
             "OpenStack",
