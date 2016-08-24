@@ -88,5 +88,14 @@
     "secondaryColor": "#757575",
     "image": "/images/posts/wolter_cover.jpg",
     "brief": "Thanks to my passion for the ease of use for both developers and users (i.e. APIs/toolchain and user interfaces) and some talking skills I was asked to become a Developer Evangelist a few years ago..."
+  },
+  {
+    "id": "why-pwa-next-big-thing",
+    "title": "Why PWA could be the next big thing?",
+    "posted": "2016-08-25",
+    "primaryColor": "#a61862",
+    "secondaryColor": "#971559",
+    "image": "/images/posts/pwa.png",
+    "brief": "A progressive web application takes advantage of the latest technologies to  combine the best of web and mobile apps ..."
   }
 ]
