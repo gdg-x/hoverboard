@@ -292,6 +292,10 @@
           '_routePageChanged(routeData.speakerId)'
         ],
 
+        listeners: {
+          'iron-overlay-closed': '_resetSpeakerIdParam'
+        },
+
         _routePageChanged: function (speakerId) {
           if (speakerId && this.selected) {
             var tempSpeaker = this.speakers[speakerId];
@@ -326,8 +330,11 @@
 
         _getCustomStyleValue: function (value) {
           return 'background-color: ' + this.getComputedStyleValue('--' + this._generateClass(value)) || this.getComputedStyleValue('--general');
-        }
+        },
 
+        _resetSpeakerIdParam: function () {
+          this.set('routeData.speakerId', null);
+        }
       });
 
     }());
