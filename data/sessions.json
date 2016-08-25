@@ -1,4 +1,32 @@
 {
+    "1441": {
+        "id": 1441,
+        "title": "Build a Progressive Web App with Firebase and Polymer (part 1)",
+        "description": "In this codelab, you'll learn how to make a progressive web app using Firebase and Polymer Web Components. You'll connect pre-made view components to Firebase data components to build an app that features user authentication, a database backend, offline data availability and the ability to be installed to the home screen of an Android device. \n\nThat may sound like a lot to consider, but worry not: Polymer Web Components make it easy to unlock the power of the web platform. Let's get coding!",
+        "speakers": [
+            41
+        ],
+        "language": "English",
+        "complexity": "Beginner",
+        "tags": [
+            "Web",
+            "Workshop"
+        ]
+    },
+    "1442": {
+        "id": 1442,
+        "title": "Build a Progressive Web App with Firebase and Polymer (part 2)",
+        "description": "In this codelab, you'll learn how to make a progressive web app using Firebase and Polymer Web Components. You'll connect pre-made view components to Firebase data components to build an app that features user authentication, a database backend, offline data availability and the ability to be installed to the home screen of an Android device. \n\nThat may sound like a lot to consider, but worry not: Polymer Web Components make it easy to unlock the power of the web platform. Let's get coding!",
+        "speakers": [
+            41
+        ],
+        "language": "English",
+        "complexity": "Beginner",
+        "tags": [
+            "Web",
+            "Workshop"
+        ]
+    },
     "143": {
         "id": 143,
         "title": "Introduction to Golang",
@@ -495,34 +523,6 @@
         "complexity": "Intermediate",
         "tags": [
             "Web"
-        ]
-    },
-    "1071": {
-        "id": 1071,
-        "title": "Introduction to Progressive Web Apps in Angular 2 (part 1)",
-        "description": "There's been much discussion about Progressive Web Apps. They're still a relatively new model. In this talk, I'll summarise few options and techniques for getting started with your own Progressive Web App",
-        "speakers": [
-            6
-        ],
-        "language": "English",
-        "complexity": "Beginner",
-        "tags": [
-            "Web",
-            "Workshop"
-        ]
-    },
-    "1072": {
-        "id": 1072,
-        "title": "Introduction to Progressive Web Apps in Angular 2 (part 2)",
-        "description": "There's been much discussion about Progressive Web Apps. They're still a relatively new model. In this talk, I'll summarise few options and techniques for getting started with your own Progressive Web App",
-        "speakers": [
-            6
-        ],
-        "language": "English",
-        "complexity": "Beginner",
-        "tags": [
-            "Web",
-            "Workshop"
         ]
     },
     "106": {

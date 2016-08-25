@@ -1196,5 +1196,38 @@
                 "link": "https://github.com/nhlfr"
             }
         ]
+    },
+    "41": {
+        "id": 41,
+        "featured": "false",
+        "name": "Martin Splitt",
+        "title": "Senior Software Engineer",
+        "company": "Archilogic",
+        "companyLogo": "/images/logos/archilogic.png",
+        "country": "Zurich, Switzerland",
+        "photoUrl": "/images/people/martin_splitt.jpg",
+        "shortBio": "Martin is pretty decent at humaning and pretty good at computering, so he decided...",
+        "bio": "Martin is pretty decent at humaning and pretty good at computering, so he decided to use his computering to improve his and other's humaning. \n\nHe loves the open web and open source and helps to make things better with, but not limited to, code.",
+        "tags": [
+            "Web",
+            "WebGL",
+            "Polymer",
+            "PWA"
+        ],
+        "badges": [
+            
+        ],
+        "socials": [
+            {
+                "icon": "github",
+                "name": "GitHub",
+                "link": "https://github.com/avgp"
+            },
+            {
+                "icon": "twitter",
+                "name": "Twitter",
+                "link": "https://twitter.com/g33konaut"
+            }
+        ]
     }
 }
