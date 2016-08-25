@@ -88,5 +88,23 @@
     "secondaryColor": "#757575",
     "image": "/images/posts/wolter_cover.jpg",
     "brief": "Thanks to my passion for the ease of use for both developers and users (i.e. APIs/toolchain and user interfaces) and some talking skills I was asked to become a Developer Evangelist a few years ago..."
+  },
+  {
+    "id": "platinum-sponsor-dataart",
+    "title": "Meet our Platinum Sponsor - DataArt",
+    "posted": "2016-08-26",
+    "primaryColor": "#303d7d",
+    "secondaryColor": "#232c57",
+    "image": "/images/posts/dataart_cover.jpg",
+    "brief": "DataArt is a technology consulting firm that creates end-to-end solutions, from concept and strategy, to design, implementation and support, helping global clients achieve important business outcomes..."
+  },
+  {
+    "id": "interview-with-konrad-dzwinel",
+    "title": "Interview with Konrad Dzwinel",
+    "posted": "2016-08-26",
+    "primaryColor": "#009688",
+    "secondaryColor": "#00796B",
+    "image": "/images/posts/konrad_cover.jpg",
+    "brief": "I'm a front-end engineer at the ed tech company called Brainly. It's a startup from my hometown that, in many ways, reassembles StackOverflow, but is targeted to school kids..."
   }
 ]

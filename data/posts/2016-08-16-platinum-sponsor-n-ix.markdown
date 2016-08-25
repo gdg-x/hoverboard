@@ -1,6 +1,6 @@
 ## About N-iX
 
-[N‐iX](http://n-ix.com/) is an Eastern European provider of software development services with over 300 expert software engineers onboard that power innovative technology businesses across North America, UK, Sweden and Europe. Since 2002 we have formed strategic partnerships with a variety of global industry leaders. They include Canada’s largest software company OpenText, infrastructure software provider Novell, one of Europe’s fastest growing mobile companies Lebara, innovative fintech leader Currency Cloud and over 50 other medium and large‐scale businesses. With delivery centers in Ukraine (Lviv, Kyiv) and Poland (Krakow), we deliver excellence in software engineering and deep domain expertise in finance, healthcare, hospitality, telecom and enterprise content management helping our clients to implement technology and business transformations.
+[N‐iX](http://n-ix.com/) is an Eastern European provider of software development services with 500 expert software engineers onboard that power innovative technology businesses across North America, UK, Sweden and Europe. Since 2002 we have formed strategic partnerships with a variety of global industry leaders. They include Canada’s largest software company OpenText, infrastructure software provider Novell, one of Europe’s fastest growing mobile companies Lebara, innovative fintech leader Currency Cloud and over 50 other medium and large‐scale businesses. With delivery centers in Ukraine (Lviv, Kyiv) and Poland (Krakow), we deliver excellence in software engineering and deep domain expertise in finance, healthcare, hospitality, telecom and enterprise content management helping our clients to implement technology and business transformations.
 
 
 ## Specialties
@@ -55,7 +55,7 @@ We believe that hands-on experience in the team of professionals that share y
 * **35** long term engagements
 * **40%** growth in 2016
 
-N-iX continues to support GDG DevFest in Lviv for a second year straight in its pursue to create quality tech events in Ukraine. We welcome for cooperation professional, talented and motivated experts in all areas of development. If you are interested in new possibilities for your career – come meet us at GDG DevFest 2016 or check us at -  
+N-iX continues to support GDG DevFest in Lviv for a second year straight in its pursue to create quality tech events in Ukraine. We welcome for cooperation professional, talented and motivated experts in all areas of development. If you are interested in new possibilities for your career – come meet us at GDG DevFest 2016 or check us at -
 [n-ix.com/careers](http://n-ix.com/careers/)
 
 <img src="/images/posts/nix_4.jpg" style="width: 100%;"/>
