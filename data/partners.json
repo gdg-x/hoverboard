@@ -335,6 +335,11 @@
         "name": "Kharkiv IT Cluster",
         "url": "http://it-kharkiv.com/",
         "logoUrl": "/images/logos/kharkiv_itcluster.png"
+      },
+      {
+        "name": "ITEA Hub",
+        "url": "http://iteahub.com/",
+        "logoUrl": "/images/logos/itea_hub.png"
       }
     ]
   }
