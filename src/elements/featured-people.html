@@ -141,7 +141,7 @@
         _peopleChanged: function () {
           var people = this._toArray(this.people),
             filteredPeople = [];
-          for (var i = 0; i < people.length; i++) {
+          for (var i = 0, length = people.length; i < length; i++) {
             if (people[i].featured) {
               filteredPeople.push(people[i]);
             }
