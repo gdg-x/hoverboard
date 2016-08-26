@@ -15,8 +15,6 @@
         min-width: 100%;
         --content-padding: 24px;
         --paper-scroll-header-panel-color: var(--default-primary-color);
-        --paper-icon-item: {
-        };
         --truncate-marked-text-style: {
           font-size: 15px;
           line-height: 1.5;
@@ -162,7 +160,7 @@
       }
 
       .section:not(:last-of-type) {
-        margin-bottom: 40px;
+        margin-bottom: 32px;
       }
 
       .section-info {
@@ -210,22 +208,13 @@
           }
         }
 
+        .sections {
+          margin: 0 -8px -32px;
+        }
+
         .section {
-          margin-bottom: 10px;
-          padding: 0 12px;
-          width: calc(50% - 12px);
-        }
-
-        .section:not(:last-of-type) {
-          margin-bottom: 10px;
-        }
-
-        .section:last-of-type {
-          padding-right: 0;
-        }
-
-        .section:first-of-type {
-          padding-left: 0;
+          padding: 0 8px;
+          width: calc(50% - 16px);
         }
       }
 
