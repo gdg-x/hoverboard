@@ -110,10 +110,6 @@
 
     <app-data
       app="{{app}}"
-      speakers="{{speakers}}"
-      sessions="{{sessions}}"
-      schedule="{{schedule}}"
-      posts="{{posts}}"
     ></app-data>
 
     <app-drawer-layout drawer-width="599px" force-narrow>
@@ -153,21 +149,7 @@
                              selected-attribute="selected">
 
           <home-page name="home"
-                     app="{{app}}"
-                     people="{{speakers}}"
-                     posts="{{posts}}"
-                     videos="{{videos}}"></home-page>
-
-          <speakers-page name="speakers"
-                         app="{{app}}"
-                         route="{{subRoute}}"
-                         speakers="{{speakers}}"></speakers-page>
-
-          <schedule-page name="schedule"
-                         app="{{app}}"
-                         route="{{subRoute}}"
-                         schedule="{{schedule}}"
-                         sessions="{{sessions}}"></schedule-page>
+                     app="{{app}}"></home-page>
 
           <cod-page name="cod"
                     app="{{app}}"></cod-page>
@@ -177,12 +159,6 @@
 
     </app-drawer-layout>
 
-    <video-dialog id="videoDialog"
-                  video-title="[[video.title]]"
-                  youtube-id="[[video.youtubeId]]"
-                  entry-animation="scale-up-animation"
-                  exit-animation="scale-down-animation"
-                  disable-controls="[[!video.disableControls]]"></video-dialog>
 
     <toast-element id="toast"></toast-element>
 
