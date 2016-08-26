@@ -1,0 +1,148 @@
+<html><head><link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../bower_components/paper-dialog/paper-dialog.html">
+
+</head><body><dom-module id="tickets-block">
+
+    <template>
+
+        <style include="shared-styles"></style>
+        <style>
+            :host {
+                display: block;
+                background: var(--default-primary-color);
+                color: var(--text-primary-color);
+            }
+
+            .container {
+                @apply(--layout-vertical);
+                @apply(--layout-wrap);
+                padding-bottom: 35px;
+            }
+
+            .ticket-name {
+                margin-bottom: -5px;
+                font-size: 30px;
+                font-weight: 200;
+            }
+
+            .price-block-wrapper {
+                @apply(--layout-vertical);
+            }
+
+            .price-block {
+                @apply(--layout-flex);
+                margin-bottom: 15px;
+                position: relative;
+            }
+
+            .price-block:not(:first-of-type) {
+                margin-top: 30px;
+            }
+
+            .sold-out > *:not(.sold-out-text) {
+                opacity: .3;
+            }
+
+            .sold-out-text {
+                @apply(--layout-vertical);
+                @apply(--layout-center-center);
+                @apply(--layout-fit);
+                font-size: 28px;
+                text-transform: uppercase;
+            }
+
+            .currency {
+                margin-top: 21px;
+                display: inline-block;
+                vertical-align: top;
+            }
+
+            .price {
+                font-size: 70px;
+            }
+
+            .additional-info {
+                margin-top: -5px;
+                font-size: 13px;
+            }
+
+            .details {
+                margin-top: 10px;
+                font-size: 14px;
+            }
+
+            .open-dialog-button {
+                margin-top: 30px;
+            }
+
+            paper-dialog {
+                background: #fff;
+            }
+
+            paper-dialog .buttons {
+                color: initial;
+            }
+
+            @media (min-width: 601px) {
+                .price-block-wrapper {
+                    @apply(--layout-horizontal);
+                }
+
+                .price-block:not(:first-of-type) {
+                    margin: 0;
+                }
+            }
+        </style>
+
+        <div class="container text-center">
+            <h4 class="heading">Tickets</h4>
+            <div class="price-block-wrapper">
+                
+                <div class="price-block text-center ">
+                    <div class="ticket-name">Student</div>
+                    <span class="price">400</span>
+                    <span class="currency">UAH</span>
+                    <div class="additional-info">*Before October 23 or 100 tickets.<br>Requires valid student ID</div>
+                    
+                </div>
+                
+                <div class="price-block text-center sold-out">
+                    <div class="ticket-name">Early Bird</div>
+                    <span class="price">600</span>
+                    <span class="currency">UAH</span>
+                    <div class="additional-info">*Before September 27 or 150 tickets</div>
+                    
+                    <div class="sold-out-text">
+                        <span>Sold Out</span>
+                    </div>
+                    
+                </div>
+                
+                <div class="price-block text-center ">
+                    <div class="ticket-name">Lazy Bird</div>
+                    <span class="price">800</span>
+                    <span class="currency">UAH</span>
+                    <div class="additional-info">*Before October 23</div>
+                    
+                </div>
+                
+            </div>
+            <span class="details">Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.</span>
+            <div class="block">
+                <paper-button class="white border-button open-dialog-button" on-tap="openTicketsDialog">Buy a ticket
+                </paper-button>
+            </div>
+        </div>
+        <paper-dialog id="ticketsDialog" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal="">
+            <p>We have run out all our tickets</p>
+            <div class="buttons">
+                <paper-button dialog-confirm="">Close</paper-button>
+            </div>
+        </paper-dialog>
+    </template>
+
+    </dom-module>
+<script src="tickets-block.js"></script></body></html>

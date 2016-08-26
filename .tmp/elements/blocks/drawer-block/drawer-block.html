@@ -1,0 +1,94 @@
+<html><head><link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../../bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
+<link rel="import" href="../../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../../bower_components/paper-menu/paper-menu.html">
+
+</head><body><dom-module id="drawer-block">
+
+  <template>
+
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+        z-index: 9;
+        --paper-toolbar-background: var(--default-primary-color);
+      }
+
+      .panel {
+        height: 100%;
+      }
+
+      .logo {
+        margin-top: 15px;
+        height: 40px;
+        width: 130px;
+      }
+
+      .bottom {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--text-primary-color);
+      }
+
+      .location {
+        display: block;
+        color: var(--dark-primary-color);
+      }
+
+      .navigation {
+        background: var(--secondary-background-color);
+      }
+
+      .navigation-link {
+        padding: 0 16px;
+        min-height: 48px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+        text-decoration: none;
+        color: var(--primary-text-color);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      .navigation-link {
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+      }
+
+      .selected {
+        background: #eaeaea;
+      }
+    </style>
+
+    <paper-scroll-header-panel class="panel">
+      <paper-toolbar class="tall">
+        <div class="top">
+          <iron-image class="logo" src="/images/logo-white.svg" sizing="contain" alt="GDG DevFest Season 2015"></iron-image>
+        </div>
+        <div class="bottom">
+          <span class="dates">October 23-24, 2015</span>
+          <span class="location">Lviv, Ukraine</span>
+        </div>
+      </paper-toolbar>
+      <nav>
+        <paper-menu class="navigation list" attr-for-selected="data-route" selected="{{route}}" selected-class="selected">
+          
+          <a class="navigation-link" data-route="home" href="/">Home</a>
+          
+          <a class="navigation-link" data-route="schedule" href="/schedule">Schedule</a>
+          
+          <a class="navigation-link" data-route="speakers" href="/speakers">Speakers</a>
+          
+        </paper-menu>
+      </nav>
+    </paper-scroll-header-panel>
+
+  </template>
+
+  </dom-module>
+<script src="drawer-block.js"></script></body></html>

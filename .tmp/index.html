@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts">
+    <meta name="keywords" content="event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, cloud">
+    <meta name="author" content="Oleh Zasadnyy, GDG Lviv">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="YOUR_WEBTOOLS_CODE" />
+    <title>GDG DevFest Season 2015</title>
+
+    <!-- Place favicon.ico in the `app/` directory -->
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <!-- Canonical link for single page site with more links to same content -->
+    <link rel="canonical" href="https://hoverboard.firebaseapp.com//">
+
+    <!-- Chrome for Android theme color -->
+    <meta name="theme-color" content="">
+
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Tile color for Win8 -->
+    <meta name="msapplication-TileColor" content="">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="GDG DevFest Season 2015">
+    <link rel="icon" sizes="192x192" href="/images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="GDG DevFest Season 2015">
+    <link rel="apple-touch-icon" href="/images/touch/apple-touch-icon.png">
+
+    <!-- Tile icon for Win8 (144x144) -->
+    <meta name="msapplication-TileImage" content="/images/touch/ms-touch-icon-144x144-precomposed.png">
+
+    <!-- Social: Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@GDGLviv">
+    <meta name="twitter:title" content="GDG DevFest Season 2015">
+    <meta name="twitter:description" content="The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts">
+    <meta name="twitter:image:src" content="https://hoverboard.firebaseapp.com//images/social-share.jpg">
+
+    <!-- Social: Facebook / Open Graph -->
+    <meta property="og:title" content="GDG DevFest Season 2015" />
+    <meta property="og:site_name" content="GDG DevFest Season 2015" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hoverboard.firebaseapp.com/" />
+    <meta property="og:description" content="The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts" />
+    <meta property="og:image" content="https://hoverboard.firebaseapp.com//images/social-share.jpg" />
+
+
+  <!-- Because this project uses vulcanize this should be your only html import
+      in this file. All other imports should go in base-bundle.html -->
+    <link rel="import" href="/elements/base-bundle.html">
+</head>
+
+
+<body>
+<span id="browser-sync-binding"></span>
+
+<hoverboard-app id="app" route="{{route}}" params="{{params}}"></hoverboard-app>
+
+<!-- Service Worker support -->
+<platinum-sw-register auto-register
+                      clients-claim
+                      skip-waiting
+                      base-uri="/bower_components/platinum-sw/bootstrap">
+  <platinum-sw-offline-analytics></platinum-sw-offline-analytics>
+  <platinum-sw-cache default-cache-strategy="fastest"
+                     cache-config-file="/cache-config.json">
+  </platinum-sw-cache>
+</platinum-sw-register>
+
+<!-- build:js /scripts/app.min.js async -->
+<script src="/bower_components/page/page.js"></script>
+<script src="/scripts/app.js"></script>
+<script src="/scripts/routing.js"></script>
+<!-- endbuild -->
+
+<!-- Google Analytics code -->
+<start-google-analytics-tracker code="UA-43643469-8"></start-google-analytics-tracker>
+</body>
+
+</html>

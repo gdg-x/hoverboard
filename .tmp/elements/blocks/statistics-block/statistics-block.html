@@ -1,0 +1,80 @@
+<html><head><link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+</head><body><dom-module id="statistics-block">
+
+  <template>
+
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
+      }
+
+      .container {
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
+      }
+
+      .statistics-element {
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+        text-align: center;
+      }
+
+      .counter {
+        font-size: 3em;
+        font-weight: 200;
+      }
+
+      .caption {
+        font-size: .85em;
+      }
+
+      @media (max-width: 600px) {
+        .statistics-element {
+          width: 50%;
+        }
+
+        .statistics-element:nth-child(1),
+        .statistics-element:nth-child(2) {
+          margin-bottom: 40px;
+        }
+      }
+
+      @media (min-width: 601px) {
+        .statistics-element {
+          @apply(--layout-flex);
+        }
+      }
+    </style>
+
+    <div class="container">
+      
+      <div class="statistics-element">
+        <span class="counter">500</span>
+        <span class="caption">Attendees</span>
+      </div>
+      
+      <div class="statistics-element">
+        <span class="counter">2</span>
+        <span class="caption">Days</span>
+      </div>
+      
+      <div class="statistics-element">
+        <span class="counter">40</span>
+        <span class="caption">Sessions</span>
+      </div>
+      
+      <div class="statistics-element">
+        <span class="counter">3</span>
+        <span class="caption">Parallel tracks</span>
+      </div>
+      
+    </div>
+
+  </template>
+
+  </dom-module>
+<script src="statistics-block.js"></script></body></html>

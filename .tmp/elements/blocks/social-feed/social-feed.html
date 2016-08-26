@@ -1,0 +1,87 @@
+<html><head><link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="../social-post/social-post.html">
+
+</head><body><dom-module id="social-feed">
+
+  <template>
+
+    <style include="shared-styles"></style>
+    <style>
+      :host {
+        display: block;
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
+        --social-font-color: var(--text-primary-color);
+      }
+
+      a {
+        color: var(--text-primary-color);
+      }
+
+      .container {
+        @apply(--layout-vertical);
+      }
+
+      .social-section {
+        @apply(--layout-flex-5);
+      }
+
+      .social-section:not(:first-of-type) {
+        margin-top: 30px;
+      }
+
+      .divider {
+        @apply(--layout-flex);
+      }
+
+      @media (min-width: 601px) {
+        .container {
+          @apply(--layout-horizontal);
+        }
+        .social-section:not(:first-of-type) {
+          margin-top: 0;
+        }
+      }
+    </style>
+
+    <div class="container">
+      <iron-ajax auto="" url="[[source]]" handle-as="json" last-response="{{_posts}}"></iron-ajax>
+      <div class="social-section">
+        <h4 class="heading">What's up <a href="https://www.google.com/#q=%23dfua">#dfua</a></h4>
+        <h5>[[response.response]]</h5>
+        <social-post id="post" author="[[author]]" text="[[text]]" when="[[when]]" canonical-url="https://twitter.com/" sign="@"></social-post>
+      </div>
+      <span class="divider"></span>
+      <div class="social-section">
+        <h4 class="heading">Social</h4>
+        <div>Add to circles, like, follow or connect with us on</div>
+        <div class="align-pb-block">
+          
+          <a class="button-link" href="https://twitter.com/gdglviv" target="_blank">
+            <paper-icon-button icon="icons:twitter"></paper-icon-button>
+          </a>
+          
+          <a class="button-link" href="https://plus.google.com/102444623953913144164" target="_blank">
+            <paper-icon-button icon="icons:gplus"></paper-icon-button>
+          </a>
+          
+          <a class="button-link" href="https://www.facebook.com/GDGLviv" target="_blank">
+            <paper-icon-button icon="icons:facebook"></paper-icon-button>
+          </a>
+          
+          <a class="button-link" href="https://www.linkedin.com/company/google-developers-group-lviv" target="_blank">
+            <paper-icon-button icon="icons:linkedin"></paper-icon-button>
+          </a>
+          
+        </div>
+      </div>
+    </div>
+
+  </template>
+
+  </dom-module>
+<script src="social-feed.js"></script></body></html>
