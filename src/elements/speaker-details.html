@@ -46,7 +46,7 @@
               <div class="meta highlight">[[speaker.company]], [[speaker.country]]</div>
               <div class="meta">
                 <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
-                  <a class="badge" href$="[[badge.link]]" target="_blank">[[badge.description]]</a>
+                  <a class="badge" href$="[[badge.link]]" target="_blank" rel="noopener noreferrer">[[badge.description]]</a>
                 </template>
               </div>
             </div>
@@ -59,7 +59,7 @@
 
         <div class="actions">
           <template is="dom-repeat" items="[[speaker.socials]]" as="social">
-            <a href$="[[social.link]]" target="_blank">
+            <a href$="[[social.link]]" target="_blank" rel="noopener noreferrer">
               <paper-icon-button class="action" icon$="icons:{{social.icon}}"></paper-icon-button>
             </a>
           </template>
@@ -77,7 +77,7 @@
                   <h3 class="section-title">[[session.title]]</h3>
                   <div class="badges">
                     <template is="dom-repeat" items="[[session.tags]]" as="tag">
-                      <span class="badge" target="_blank">[[tag]]</span>
+                      <span class="badge" target="_blank" rel="noopener noreferrer">[[tag]]</span>
                     </template>
                   </div>
                   <truncate-marked-text

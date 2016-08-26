@@ -90,7 +90,7 @@
 
         <div class="actions">
           <template is="dom-if" if="[[session.presentation]]">
-            <a href$="[[session.presentation]]" target="_blank">
+            <a href$="[[session.presentation]]" target="_blank" rel="noopener noreferrer">
               <paper-button class="action">
                 <iron-icon icon="presentation"></iron-icon>
                 [[localize('view-presentation')]]
@@ -121,7 +121,7 @@
                   <span class="section-sub-title">[[speaker.company]], [[speaker.country]]</span>
                   <div class="badges">
                     <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
-                      <a class="badge" href$="[[badge.link]]" target="_blank">[[badge.name]]</a>
+                      <a class="badge" href$="[[badge.link]]" target="_blank" rel="noopener noreferrer">[[badge.name]]</a>
                     </template>
                   </div>
                   <truncate-marked-text
