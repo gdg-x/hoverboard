@@ -1,0 +1,23 @@
+<html><head><link rel="import" href="../../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../../bower_components/marked-element/marked-element.html">
+
+</head><body><dom-module id="truncate-marked-text">
+
+    <style include="shared-styles"></style>
+    <style>
+        .markdown-html {
+            @apply(--truncate-marked-text-style);
+        }
+    </style>
+
+    <template>
+
+        <marked-element markdown="[[_outputText]]">
+            <div class="markdown-html"></div>
+        </marked-element>
+
+    </template>
+
+    </dom-module>
+<script src="truncate-marked-text.js"></script></body></html>

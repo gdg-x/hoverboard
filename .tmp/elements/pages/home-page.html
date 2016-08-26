@@ -1,0 +1,125 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
+
+<link rel="import" href="../blocks/statistics-block/statistics-block.html">
+<link rel="import" href="../blocks/featured-people/featured-people.html">
+<link rel="import" href="../blocks/featured-videos/featured-videos.html">
+<link rel="import" href="../blocks/call-to-action/call-to-action.html">
+<link rel="import" href="../blocks/tickets-block/tickets-block.html">
+<link rel="import" href="../blocks/latest-posts/latest-posts.html">
+<link rel="import" href="../blocks/footer-block/footer-block.html">
+<link rel="import" href="../blocks/photo-block/photo-block.html">
+<link rel="import" href="../blocks/social-feed/social-feed.html">
+<link rel="import" href="../blocks/logos-block/logos-block.html">
+<link rel="import" href="../blocks/map-block/map-block.html">
+
+<dom-module id="home-page">
+
+  <template>
+
+    <statistics-block cascaded></statistics-block>
+    <featured-people people="{{people}}" cascaded></featured-people>
+    <featured-videos videos="{{videos}}" cascaded></featured-videos>
+    <call-to-action cascaded></call-to-action>
+    <photo-block photos='{"big":"../images/backgrounds/2015_1.jpg","small":["../images/backgrounds/2015_2.jpg","../images/backgrounds/2015_3.jpg"]}' cascaded></photo-block>
+    <tickets-block cascaded></tickets-block>
+    <latest-posts posts="{{posts}}" cascaded></latest-posts>
+    <social-feed source="/data/tweets.json" cascaded></social-feed>
+    <map-block cascaded></map-block>
+    <logos-block logos="{{logos}}" cascaded></logos-block>
+    <footer-block mailchimp-url="YOUR_MAILCHIMP_URL" mailchimp-name="YOUR_MAILCHIMP_NAME" cascaded></footer-block>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      class HomePage {
+
+        get behaviors() {
+          return [
+            Polymer.NeonSharedElementAnimatableBehavior
+          ];
+        }
+
+        beforeRegister() {
+          this.is = this.constructor.name.replace(/\W+/g, '-')
+            .replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+          this.properties = {
+            people: Array,
+            posts: Array,
+            logos: Array,
+            videos: Array,
+            selected: {
+              type: Boolean,
+              observer: 'updateHeroSettings'
+            },
+            heroSettings: {
+              type: Object,
+              notify: true
+            },
+            _heroSettings: {
+              type: Object,
+              /* jshint ignore:start */
+              value: function () {
+                return {"backgroundColor":"#00BCD4","backgroundImage":"/images/backgrounds/home.png","fontColor":"#FFFFFF","tabBarColor":"#FFFFFF","video":{"title":"GDG DevFest Ukraine 2015","youtubeId":"DfMnJAzOFng","text":"See how it was in 2015"}};
+              }
+              /* jshint ignore:end */
+            },
+
+            animationConfig: {
+              type: Object,
+              value: function () {
+                var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
+                var cascadedArray = Array.prototype.slice.call(cascaded);
+                return {
+                  'entry': [{
+                    name: 'cascaded-animation',
+                    animation: 'transform-animation',
+                    transformFrom: 'translate3d(0, 100%, 0)',
+                    nodes: cascadedArray,
+                    timing: {
+                      delay: 500
+                    }
+                  }, {
+                    name: 'fade-in-animation',
+                    animation: 'fade-in-animation',
+                    node: this,
+                    timing: {
+                      delay: 500
+                    }
+                  }],
+                  'exit': [{
+                    name: 'cascaded-animation',
+                    animation: 'transform-animation',
+                    transformTo: 'translate3d(0, 100%, 0)',
+                    nodes: cascadedArray
+                  }, {
+                    name: 'fade-out-animation',
+                    animation: 'fade-out-animation',
+                    node: this
+                  }]
+                };
+              }
+            }
+          };
+          this.observers = [
+            'updateHeroSettings(selected)'
+          ];
+        }
+
+        updateHeroSettings() {
+          this.heroSettings = this.selected ? this._heroSettings : this.heroSettings;
+        }
+
+      }
+
+      Polymer(HomePage);
+
+    })();
+  </script>
+
+</dom-module>

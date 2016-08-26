@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["behaviors/share-behavior.html"],"sourcesContent":["<html><head><link rel=\"import\" href=\"../../bower_components/polymer/polymer.html\">\n\n</head><body><script src=\"share-behavior.js\"></script></body></html>"],"file":"behaviors/share-behavior.html","sourceRoot":"/source/"}

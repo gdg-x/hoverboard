@@ -15,13 +15,6 @@
         "minHeight": "360px"
       }
     },
-    "blog": {
-      "headerSettings": {
-        "backgroundColor": "#03a9f4",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
     "speakers": {
       "headerSettings": {
         "backgroundColor": "#3f51b5",
@@ -32,13 +25,6 @@
     "schedule": {
       "headerSettings": {
         "backgroundColor": "#673ab7",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "team": {
-      "headerSettings": {
-        "backgroundColor": "#009688",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
@@ -57,20 +43,12 @@
       "permalink": "/"
     },
     {
-      "route": "blog",
-      "permalink": "/blog/"
-    },
-    {
       "route": "schedule",
       "permalink": "/schedule/"
     },
     {
       "route": "speakers",
       "permalink": "/speakers/"
-    },
-    {
-      "route": "team",
-      "permalink": "/team/"
     }
   ],
   "url": "https://hoverboard.firebaseapp.com/",
@@ -82,6 +60,9 @@
   "disqusShortName": "hoverboard-gdg-x",
   "languages": [
     {
+      "name": "Türkçe",
+      "key": "tr"
+    },{
       "name": "English",
       "key": "en"
     },
@@ -95,31 +76,12 @@
       "title": "for-visitors",
       "links": [
         {
-          "text": "team",
-          "url": "/team/"
-        },
-        {
           "text": "cod",
           "url": "/cod/"
         },
         {
           "text": "google-developers",
           "url": "https://developers.google.com/",
-          "newTab": true
-        },
-        {
-          "text": "df-13",
-          "url": "http://gdg-devfest-ua.appspot.com/",
-          "newTab": true
-        },
-        {
-          "text": "df-14",
-          "url": "http://devfest.gdg.org.ua/2014/",
-          "newTab": true
-        },
-        {
-          "text": "df-15",
-          "url": "http://devfest.gdg.org.ua/2015/",
           "newTab": true
         }
       ]
@@ -158,23 +120,6 @@
         "starts": "student-ticket-starts",
         "ends": "student-ticket-ends",
         "info": "student-ticket-info",
-        "soldOut": false
-      },
-      {
-        "name": "early-ticket",
-        "price": 750,
-        "currency": "₴",
-        "starts": "early-ticket-starts",
-        "ends": "early-ticket-ends",
-        "info": "early-ticket-info",
-        "soldOut": true
-      },
-      {
-        "name": "lazy-ticket",
-        "price": 1000,
-        "currency": "₴",
-        "starts": "lazy-ticket-starts",
-        "ends": "lazy-ticket-ends",
         "soldOut": false
       }
     ]
