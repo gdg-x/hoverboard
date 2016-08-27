@@ -16,9 +16,12 @@
 
 HOVERBOARD.Elements = (function () {
   'use strict';
+
+  function init() {
+    HOVERBOARD.Elements.Template = document.getElementById('happ');
+  }
+  
   return {
-    init : function () {
-      HOVERBOARD.Elements.Template = document.getElementById('happ');
-    }
+    init : init
   };
 }());
