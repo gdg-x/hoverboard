@@ -1,7 +1,7 @@
 {
     "1": {
         "id": 1,
-        "featured": "true",
+        "featured": true,
         "name": "Mete Atamel",
         "title": "Developer Advocate",
         "company": "Google",
@@ -38,7 +38,7 @@
     },
     "2": {
         "id": 2,
-        "featured": "true",
+        "featured": true,
         "name": "Yonatan Levin",
         "title": "Android Evangelist & Developer",
         "company": "Gett",
@@ -80,7 +80,7 @@
     },
     "3": {
         "id": 3,
-        "featured": "true",
+        "featured": true,
         "name": "Sascha Wolter",
         "title": "Senior Developer Evangelist Connected Home",
         "company": "Duetsche Telekom AG - Group Innovation+",
@@ -117,7 +117,7 @@
     },
     "4": {
         "id": 4,
-        "featured": "true",
+        "featured": true,
         "name": "Rustem Arzymbetov",
         "title": "Software Engineer",
         "company": "Google",
@@ -144,7 +144,7 @@
     },
     "5": {
         "id": 5,
-        "featured": "true",
+        "featured": true,
         "name": "Adrian Kajda",
         "title": "Product Manager/Developer",
         "company": "Sygic",
@@ -170,7 +170,7 @@
     },
     "6": {
         "id": 6,
-        "featured": "true",
+        "featured": true,
         "name": "Gerard Sans",
         "title": "Technical Evangelist",
         "company": "AngularZone",
@@ -206,7 +206,7 @@
     },
     "7": {
         "id": 7,
-        "featured": "true",
+        "featured": true,
         "name": "Jozef Vodicka",
         "title": "Developer Relations Program Manager",
         "company": "Google",
@@ -247,7 +247,7 @@
     },
     "8": {
         "id": 8,
-        "featured": "true",
+        "featured": true,
         "name": "Mateusz Herych",
         "title": "Android Tech Lead",
         "company": "IG",
@@ -294,7 +294,7 @@
     },
     "9": {
         "id": 9,
-        "featured": "false",
+        "featured": false,
         "name": "Kseniia Shumelchyk",
         "title": "Software Engineer",
         "company": "SoftServe Inc.",
@@ -334,7 +334,7 @@
     },
     "10": {
         "id": 10,
-        "featured": "true",
+        "featured": true,
         "name": "Konrad Dzwinel",
         "title": "Front-End Engineer",
         "company": "Brainly",
@@ -375,7 +375,7 @@
     },
     "11": {
         "id": 11,
-        "featured": "false",
+        "featured": false,
         "name": "Jean-Baptiste Clion",
         "title": "Founder",
         "company": "Apeser",
@@ -426,7 +426,7 @@
     },
     "12": {
         "id": 12,
-        "featured": "true",
+        "featured": true,
         "name": "Eliza Camberogiannis",
         "title": "Android Developer",
         "company": "Pixplicity",
@@ -458,7 +458,7 @@
     },
     "13": {
         "id": 13,
-        "featured": "false",
+        "featured": false,
         "name": "Aleksander Piotrowski",
         "title": "Code Monkey",
         "company": "Applause",
@@ -499,7 +499,7 @@
     },
     "14": {
         "id": 14,
-        "featured": "false",
+        "featured": false,
         "name": "Carmen Popovicu",
         "title": "Front-end Engineer",
         "company": "Widespread",
@@ -532,7 +532,7 @@
     },
     "15": {
         "id": 15,
-        "featured": "true",
+        "featured": true,
         "name": "Sergii Khomenko",
         "title": "Data Scientist",
         "company": "Stylight",
@@ -559,7 +559,7 @@
     },
     "17": {
         "id": 17,
-        "featured": "false",
+        "featured": false,
         "name": "Jana Moudra",
         "title": "Co-Founder",
         "company": "Juicymo",
@@ -611,7 +611,7 @@
     },
     "16": {
         "id": 16,
-        "featured": "false",
+        "featured": false,
         "name": "Dmytro Danylyk",
         "title": "Senior Android Developer",
         "company": "Timee",
@@ -664,7 +664,7 @@
     },
     "19": {
         "id": 19,
-        "featured": "true",
+        "featured": true,
         "name": "David V\u00e1vra",
         "title": "Founder/CEO/Android Lead",
         "company": "Step Up Labs",
@@ -711,7 +711,7 @@
     },
     "18": {
         "id": 18,
-        "featured": "false",
+        "featured": false,
         "name": "Jakub \u0160kv\u00e1ra",
         "title": "Frontend engineer",
         "company": "Shipito",
@@ -750,7 +750,7 @@
     },
     "21": {
         "id": 21,
-        "featured": "false",
+        "featured": false,
         "name": "Sergiy Mokienko",
         "title": "Android Team Lead",
         "company": "Leverate",
@@ -790,7 +790,7 @@
     },
     "20": {
         "id": 20,
-        "featured": "false",
+        "featured": false,
         "name": "Valentyn Shybanov",
         "title": "Software Engineer/Country Manager",
         "company": "Wolters Kluwer",
@@ -834,7 +834,7 @@
     },
     "23": {
         "id": 23,
-        "featured": "false",
+        "featured": false,
         "name": "Michael Pustovit",
         "title": "Senior Android Developer",
         "company": "Stanfy",
@@ -871,7 +871,7 @@
     },
     "22": {
         "id": 22,
-        "featured": "false",
+        "featured": false,
         "name": "Ihor Dvoretskyi",
         "title": "Deployment Engineer",
         "company": "Mirantis",
@@ -913,7 +913,7 @@
     },
     "25": {
         "id": 25,
-        "featured": "false",
+        "featured": false,
         "name": "Constantine Mars",
         "title": "Senior Android Developer",
         "company": "DataArt",
@@ -945,7 +945,7 @@
     },
     "24": {
         "id": 24,
-        "featured": "false",
+        "featured": false,
         "name": "Anton  Minashkin",
         "title": "Lead Software Developer",
         "company": "EPAM",
@@ -982,7 +982,7 @@
     },
     "27": {
         "id": 27,
-        "featured": "false",
+        "featured": false,
         "name": "Roman Herasymenko",
         "title": "CEO",
         "company": "Yamert",
@@ -1023,7 +1023,7 @@
     },
     "26": {
         "id": 26,
-        "featured": "false",
+        "featured": false,
         "name": "Resul Caner  Yildirim",
         "title": "User Experience Expert",
         "company": "InnovationBox",
@@ -1080,7 +1080,7 @@
     },
     "38": {
         "id": 38,
-        "featured": "false",
+        "featured": false,
         "name": "Professor Fortran",
         "title": "",
         "company": "Podcast",
@@ -1112,7 +1112,7 @@
     },
     "39": {
         "id": 39,
-        "featured": "true",
+        "featured": true,
         "name": "Matthew Mosesohn",
         "title": "Senior Deployment Engineer",
         "company": "Mirantis",
@@ -1144,7 +1144,7 @@
     },
     "37": {
         "id": 37,
-        "featured": "false",
+        "featured": false,
         "name": "Dmytro Zaitsev",
         "title": "Senior Android Developer",
         "company": "Lohika Inc.",
@@ -1170,7 +1170,7 @@
     },
     "40": {
         "id": 40,
-        "featured": "false",
+        "featured": false,
         "name": "Michal Rostecki",
         "title": "Software Engineer",
         "company": "Mirantis",
@@ -1199,7 +1199,7 @@
     },
     "41": {
         "id": 41,
-        "featured": "false",
+        "featured": false,
         "name": "Martin Splitt",
         "title": "Senior Software Engineer",
         "company": "Archilogic",
