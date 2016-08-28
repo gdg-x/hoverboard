@@ -66,7 +66,7 @@
       "links": [
         {
           "text": "partnership-proposition",
-          "url": "http://goo.gl/9EInFK",
+          "url": "http://goo.gl/dLUH42",
           "newTab": true
         },
         {
@@ -164,10 +164,5 @@
       "/images/backgrounds/location_2.jpg",
       "/images/backgrounds/location_3.jpg"
     ]
-  },
-  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
-  "callToAction": {
-    "videoTitle": "action-title",
-    "videoId": "DfMnJAzOFng"
   }
 }
