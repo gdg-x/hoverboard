@@ -39,7 +39,7 @@
     }
   ],
   "url": "https://hoverboard.firebaseapp.com/",
-  "partnershipProposition": "http://bit.ly/df16-sponsor",
+  "partnershipProposition": "http://goo.gl/9EInFK",
   "languages": [
     {
       "name": "Türkçe",
@@ -66,7 +66,7 @@
       "links": [
         {
           "text": "partnership-proposition",
-          "url": "http://bit.ly/df16-sponsor",
+          "url": "http://goo.gl/9EInFK",
           "newTab": true
         },
         {
@@ -90,8 +90,7 @@
     "elements": [
       {
         "name": "student-ticket",
-        "price": 0,
-        "currency": "₺",
+        "currency": "Ücretsiz",
         "starts": "student-ticket-starts",
         "ends": "student-ticket-ends",
         "info": "student-ticket-info",
@@ -119,7 +118,7 @@
       "caption": "tracks"
     }
   ],
-  "hashtag": "devfestesk",
+  "hashtag": "dfesk",
   "social": [
     {
       "name": "twitter",
@@ -152,16 +151,16 @@
     "apiKey": "",
     "link": "https://www.facebook.com/expopivdennij",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 15
+      "latitude": 39.792864,
+      "longitude": 30.500162,
+      "zoom": 20
     },
     "mapCenter": {
-      "latitude": 49.809841,
-      "longitude": 23.982805
+      "latitude": 39.792864,
+      "longitude": 30.500162
     },
     "images": [
-      "/images/backgrounds/location_1.jpg",
+      "/images/backgrounds/location_1.jpg ",
       "/images/backgrounds/location_2.jpg",
       "/images/backgrounds/location_3.jpg"
     ]
