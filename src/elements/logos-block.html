@@ -72,7 +72,7 @@
           <h5 class="logos-block-title text-center">[[localize(block.title)]]</h5>
           <div class="logos">
             <template is="dom-repeat" items="[[block.logos]]" as="logo">
-              <a class="logo-item" href="[[logo.url]]" title="[[logo.name]]" target="_blank">
+              <a class="logo-item" href="[[logo.url]]" title="[[logo.name]]" target="_blank" rel="noopener noreferrer">
                 <iron-image
                   class$="logo-img [[block.logosClass]]"
                   src="[[logo.logoUrl]]"
@@ -86,7 +86,7 @@
           </div>
         </div>
       </template>
-      <a class="block-link" href$="[[app.data.partnershipProposition]]" target="_blank" on-tap="_trackClick">
+      <a class="block-link" href$="[[app.data.partnershipProposition]]" target="_blank" rel="noopener noreferrer" on-tap="_trackClick">
         <paper-button class="primary" raised>[[localize('become-a-partner')]]</paper-button>
       </a>
     </div>

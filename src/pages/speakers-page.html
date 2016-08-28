@@ -186,7 +186,7 @@
               <ul class="badges">
                 <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
                   <li class="badge">
-                    <a href$="[[badge.link]]" target="_blank">[[badge.name]]</a>
+                    <a href$="[[badge.link]]" target="_blank" rel="noopener noreferrer">[[badge.name]]</a>
                     <paper-tooltip>[[badge.description]]</paper-tooltip>
                   </li>
                 </template>
@@ -200,7 +200,7 @@
               <iron-image class="company-logo" src="{{speaker.companyLogo}}" sizing="contain"></iron-image>
               <div class="tags">Skills:
                 <template is="dom-repeat" items="[[speaker.tags]]" as="tag">
-                  <span class="tag" style$="{{_getCustomStyleValue(tag)}}" target="_blank">[[tag]]</span>
+                  <span class="tag" style$="{{_getCustomStyleValue(tag)}}" target="_blank" rel="noopener noreferrer">[[tag]]</span>
                 </template>
               </div>
               <marked-element class="details-text" markdown="[[speaker.shortBio]]">
@@ -209,7 +209,7 @@
             </a>
             <div class="card-actions">
               <template is="dom-repeat" items="[[speaker.socials]]" as="social">
-                <a href="[[social.link]]" target="_blank">
+                <a href="[[social.link]]" target="_blank" rel="noopener noreferrer">
                   <paper-icon-button class="social-icon"
                                      icon$="icons:{{social.icon}}"></paper-icon-button>
                 </a>
@@ -292,6 +292,10 @@
           '_routePageChanged(routeData.speakerId)'
         ],
 
+        listeners: {
+          'iron-overlay-closed': '_resetSpeakerIdParam'
+        },
+
         _routePageChanged: function (speakerId) {
           if (speakerId && this.selected) {
             var tempSpeaker = this.speakers[speakerId];
@@ -326,8 +330,11 @@
 
         _getCustomStyleValue: function (value) {
           return 'background-color: ' + this.getComputedStyleValue('--' + this._generateClass(value)) || this.getComputedStyleValue('--general');
-        }
+        },
 
+        _resetSpeakerIdParam: function () {
+          this.set('routeData.speakerId', null);
+        }
       });
 
     }());

@@ -32,7 +32,6 @@
 
       .details-item {
         @apply(--layout-horizontal);
-        margin: 0 auto;
         padding-bottom: 32px;
       }
 
@@ -214,9 +213,9 @@
           <div class="team-container">
             <template is="dom-repeat" items="[[team.members]]" as="member" on-dom-change="_updateCascadedNodes">
               <div class="member">
-                <paper-material class="card" cascaded>
+                <paper-material class="card"  cascaded>
                   <div class="header">
-                    <div class="photo" style="background-image: url('[[member.photoUrl]]')"></div>
+                    <img class="photo" src="[[member.photoUrl]]"/>
                   </div>
                   <div class="card-content">
                     <div class="name">[[member.name]]</div>
@@ -224,7 +223,7 @@
                   </div>
                   <div class="card-actions">
                     <template is="dom-repeat" items="[[member.socials]]" as="social">
-                      <a class="social-link" href$="[[social.link]]" target="_blank">
+                      <a class="social-link" href$="[[social.link]]" target="_blank" rel="noopener noreferrer">
                         <paper-icon-button class="social-icon"
                                            icon$="icons:{{social.icon}}"></paper-icon-button>
                       </a>

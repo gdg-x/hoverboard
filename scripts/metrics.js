@@ -94,7 +94,7 @@ HOVERBOARD.Analytics = HOVERBOARD.Analytics || (function (exports) {
      * pageview, to ensure all hits can be grouped by these custom dimensions.
      */
     Analytics.prototype.initTrackerReadyState = function () {
-      this.readyState_ = HOVERBOARD.Util.createDeferred();
+      this.readyState_ = HOVERBOARD.Deferred.createDeferred();
 
       // In the event of an error or a failure in the auth code, we set a
       // timeout so the promise always resolves. In such cases, some hits
