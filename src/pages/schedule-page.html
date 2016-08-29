@@ -181,7 +181,7 @@
         },
 
         _resetSessionIdParam: function () {
-          this.set('queryParams.sessionId', null);
+          !this.$.sessionDetails.opened && this.set('queryParams.sessionId', null);
         }
 
       });

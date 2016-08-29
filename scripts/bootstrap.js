@@ -84,10 +84,7 @@
 
     if (!(HOVERBOARD.Util.getChromeVersion() &&
       HOVERBOARD.Util.getChromeVersion() >= 46 || HOVERBOARD.Util.getFirefoxVersion() && HOVERBOARD.Util.getFirefoxVersion() >= 40)) {
-      var script = document.createElement('script');
-      //script.async = true;
-      script.src = 'https://cdn.polyfill.io/v2/polyfill.min.js?features=es6,intl';
-      document.head.appendChild(script);
+      document.write('<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6,intl"><\/script>');
       ga('send', 'event', 'browser', 'unsupported-es6-intl', navigator.userAgent);
       console.log('Your browser is out-of-date. Please download one of these up-to-date, free and excellent browsers: Chrome, Chromium, Opera, Vivaldi');
     }

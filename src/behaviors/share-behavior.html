@@ -44,7 +44,7 @@
 
           case 'twitter':
             height = 253;
-            var text = 'Check out ' + title + ' at ' + this.app.data.hashtag + ': ' + shareUrl;
+            var text = 'Check out ' + title + ' at #' + this.app.data.hashtag + ': ' + shareUrl;
             url = 'https://twitter.com/intent/tweet?text=' +
               encodeURIComponent(text);
             window.open(url, 'share', winOptions);
@@ -52,19 +52,25 @@
 
           case 'copy':
             var copyElement = document.createElement('input');
+            var oldPosition = HOVERBOARD.Elements.Template.$.drawerLayout.getBoundingClientRect().top;
             copyElement.setAttribute('type', 'text');
             copyElement.setAttribute('value', shareUrl);
             copyElement = document.body.appendChild(copyElement);
             copyElement.select();
             document.execCommand('copy');
             copyElement.remove();
+            Polymer.AppLayout.scroll({
+              top: Math.abs(oldPosition),
+              target: HOVERBOARD.Elements.Scroller
+            });
             break;
 
           default:
             return;
         }
         HOVERBOARD.Analytics.trackEvent('session', 'share', type);
-        Polymer.dom(this.root).querySelector(this.shareMenuSelector).close();
+        var shareMenu = Polymer.dom(this.root).querySelector(this.shareMenuSelector);
+        shareMenu && shareMenu.close();
       }
 
     };
