@@ -38,8 +38,8 @@
       "permalink": "/"
     }
   ],
-  "url": "https://hoverboard.firebaseapp.com/",
-  "partnershipProposition": "http://bit.ly/df16-sponsor",
+  "url": "df16.gdgeskisehir.com",
+  "partnershipProposition": "http://goo.gl/FDSxAf",
   "languages": [
     {
       "name": "Türkçe",
@@ -66,7 +66,7 @@
       "links": [
         {
           "text": "partnership-proposition",
-          "url": "http://bit.ly/df16-sponsor",
+          "url": "http://goo.gl/FDSxAf",
           "newTab": true
         },
         {
@@ -86,12 +86,11 @@
     ]
   },
   "tickets": {
-    "url": "http://2event.com/events/630032",
+    "url": "http://goo.gl/6dh0lQ",
     "elements": [
       {
         "name": "student-ticket",
-        "price": 0,
-        "currency": "₺",
+        "currency": "Ücretsiz",
         "starts": "student-ticket-starts",
         "ends": "student-ticket-ends",
         "info": "student-ticket-info",
@@ -119,7 +118,7 @@
       "caption": "tracks"
     }
   ],
-  "hashtag": "devfestesk",
+  "hashtag": "dfesk",
   "social": [
     {
       "name": "twitter",
@@ -152,23 +151,18 @@
     "apiKey": "AIzaSyCOhdvcHnI6kWgIxenpskcElIPgqjjdXzE",
     "link": "https://www.anadolu.edu.tr/kampuste-yasam/kultur-sanat-merkezleri-ve-salonlari/ogrenci-merkezi",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 15
+      "latitude": 39.792864,
+      "longitude": 30.500162,
+      "zoom": 20
     },
     "mapCenter": {
-      "latitude": 49.809841,
-      "longitude": 23.982805
+      "latitude": 39.792864,
+      "longitude": 30.500162
     },
     "images": [
-      "/images/backgrounds/location_1.jpg",
+      "/images/backgrounds/location_1.jpg ",
       "/images/backgrounds/location_2.jpg",
       "/images/backgrounds/location_3.jpg"
     ]
-  },
-  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
-  "callToAction": {
-    "videoTitle": "action-title",
-    "videoId": "DfMnJAzOFng"
   }
 }
