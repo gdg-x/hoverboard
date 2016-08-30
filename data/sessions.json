@@ -421,8 +421,8 @@
     },
     "114": {
         "id": 114,
-        "title": "I\u2019ve been doing some syncing\u2026",
-        "description": "Storing account information is a common challenge many app developers face, and is often tackled in tailored solutions. Isn't there some strategy to store account credentials in a centralized place?\n\nWhat about considerations for multiple accounts? Security concerns? And when should or could I synchronize data?\n\nAndroid offers a powerful\u2014and underrated\u2014account manager. Let's explore the possibilities together and lay out an architecture for engineering an Android app based on accounts.",
+        "title": "J2ObjC. Cross platform development - Google way",
+        "description": "The war between mobile platforms is over. After several years of active competition, we’ve got two operating systems with almost the same quality and feature set.\n\nFor mobile developers this means that all further projects should target at least two platforms. In this talk, Vitaliy wants to share results of internal R&D experiments at GetSocial with J2ObjC – Java to Objective-C translation tool developed by Google.\n\nJ2ObjC goal is to write an app’s non-UI code (such as application logic and data models) in Java, which is then shared with no editing by Android and iOS apps.",
         "speakers": [
             12
         ],
