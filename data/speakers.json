@@ -426,33 +426,42 @@
     },
     "12": {
         "id": 12,
-        "featured": true,
-        "name": "Eliza Camberogiannis",
-        "title": "Android Developer",
-        "company": "Pixplicity",
-        "companyLogo": "/images/logos/pixplicity.svg",
-        "country": "Amsterdam, The Netherlands",
-        "photoUrl": "/images/people/eliza_camberogiannis.jpg",
-        "shortBio": "Eliza is an Android Developer at Pixplicity, Holland's leading Android-specific consulting and di...",
-        "bio": "Eliza is an Android Developer at Pixplicity, Holland's leading Android-specific consulting and digital agency. In her free time she enjoys travelling and sharing her knowledge and experiences with the local communities. ",
+        "featured": false,
+        "name": "Vitaliy Zasadnyy",
+        "title": "Head of Mobile",
+        "company": "GetSocial",
+        "companyLogo": "/images/logos/getsocial.png",
+        "country": "Lviv, Ukraine",
+        "photoUrl": "/images/people/vitaliy_zasadnyy.jpg",
+        "shortBio": "Developer. Public Speaker. Community manager. Co-founder of GDG Lviv. Head of mobile department at GetSocial.",
+        "bio": "Vitaliy is a mobile developer, public speaker and community manager. He is eager about product perfection and scalability. Goes crazy about new IoT devices and Google products. Originally Vitaliy is from Ukraine, where he founded GDG Lviv. Now he is leading mobile department at GetSocial, startup based in The Netherlands. GetSocial is building the cloud-based mobile engagement platform that empowers any app developer with tools to maximise user acquisition, engagement, retention and monetization.",
         "tags": [
             "Android",
-            "Data Sync",
-            "Linux"
+            "Patterns",
+            "J2ObjC"
         ],
         "badges": [
-
+            {
+                "name": "GDG",
+                "description": "Google Developers Group Lviv",
+                "link": "https://developers.google.com/groups/chapter/102444623953913144164/"
+            }
         ],
         "socials": [
             {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/elizacamber"
+                "icon": "website",
+                "name": "Blog",
+                "link": "https://zasadnyy.com"
             },
             {
-                "icon": "linkedin",
-                "name": "LinkedIn",
-                "link": "https://linkedin.com/in/elizacamber"
+                "icon": "twitter",
+                "name": "Twitter",
+                "link": "https://twitter.com/zasadnyy"
+            },
+            {
+                "icon": "github",
+                "name": "GitHub",
+                "link": "https://github.com/zasadnyy"
             }
         ]
     },
