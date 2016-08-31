@@ -124,5 +124,14 @@
     "secondaryColor": "#cb7013",
     "image": "/images/posts/gl_cover.jpg",
     "brief": "GlobalLogic is a full-lifecycle product development services leader that combines deep domain expertise and cross-industry experience to connect makers with markets worldwide..."
+  },
+  {
+    "id": "reasons-to-visit-devfest",
+    "title": "Don't visit this GDG DevFest 2016! Even don't speak it out loud!",
+    "posted": "2016-09-01",
+    "primaryColor": "#2196F3",
+    "secondaryColor": "#1d8fea",
+    "image": "/images/posts/reasons1.png",
+    "brief": "Everyone knows the Falls like harvest season, but in Lviv, everyone associates Falls with terribly coolest conferences ever..."
   }
 ]
