@@ -1,6 +1,6 @@
 Everyone knows the Falls like harvest season, but in Lviv, everyone associates Falls with terribly awesome conferences ever! Yes, we are going to talk about [GDG DevFest Ukraine 2016](https://devfest.gdg.org.ua/) on September 9-10. Scary?
 
-<div class="highlight-blockquote"> And yes! We are going to tell you why you shouldn't visit this enormous wild, huge and important conference, the reasons are the next! </div>
+<div class="highlight-blockquote" style="margin-bottom: 20px;"> And yes! We are going to tell you why you shouldn't visit this enormous wild, huge and important conference, the reasons are the next! </div>
 
 A lot of new insane friends 
 ---------------------------
@@ -19,7 +19,7 @@ All this 32 guys they are real Nerds! Well experienced armed with knowledges and
 <img src="/images/posts/reasons3.png" style="width: 70%;"/> 
 
 
-Lviv - historical place of Europe culture soul of Ukraine. 
+Lviv - historical place of Europe and culture soul of Ukraine
 -------------------------------------------------------------
 Pretty terrific city! If you comes here one time you have to return and stay here for all your life! I am not joking Lviv is dangerous (it makes you want to return again and again and again). Lviv is obsession!
 
