@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - '6'
 before_script:
-  - npm install -g bower polymer-cli@0.12.0
+  - npm install -g bower polymer-cli@0.12.0 firebase-tools
   - bower install
 script:
   - echo "Deploying!"
