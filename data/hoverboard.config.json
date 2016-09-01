@@ -136,7 +136,7 @@
       "url": "https://www.facebook.com/gdgeskisehir"
     }
   ],
-  "tweetsSource": "/data/tweets.json",
+  "tweetsSource":"https://df16-af009.firebaseio.com/tweets.json",
   "gallery": {
     "albumUrl": "https://plus.google.com/photos/115602346615910585045/albums/6095589954824832113",
     "photos": {
