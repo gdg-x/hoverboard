@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - '6'
+before_script:
+  - npm install -g bower polymer-cli@0.12.0
+  - bower install
+script:
+  - echo "Deploying!"
+after_success:
+  - firebase deploy --token $FIREBASE_TOKEN
