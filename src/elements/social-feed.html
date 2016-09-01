@@ -113,8 +113,8 @@
           var index = this._selected;
           if (this._posts) {
             this._selected = (++index % this._posts.length);
-            this.author = this._posts[this._selected].user.screen_name;
-            this.when = this._posts[this._selected].created_at;
+            this.author = this._posts[this._selected].username;
+            this.when = this._posts[this._selected].date;
             this.text = this._linkifyPost(this._posts[this._selected].text);
 
             this.async(this._postsChanged, this.interval);
