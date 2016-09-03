@@ -340,6 +340,16 @@
         "name": "ITEA Hub",
         "url": "http://iteahub.com/",
         "logoUrl": "/images/logos/itea_hub.png"
+      },
+      {
+        "name": "DevChallenge",
+        "url": "http://devchallenge.it/",
+        "logoUrl": "/images/logos/dev_challenge.svg"
+      },
+      {
+        "name": "StiyStil",
+        "url": "https://www.stiystil.com.ua/",
+        "logoUrl": "/images/logos/stiy_stil.svg"
       }
     ]
   }

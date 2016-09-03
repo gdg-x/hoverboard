@@ -167,7 +167,7 @@
         "starts": "student-ticket-starts",
         "ends": "student-ticket-ends",
         "info": "student-ticket-info",
-        "soldOut": false
+        "soldOut": true
       },
       {
         "name": "early-ticket",
