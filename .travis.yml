@@ -7,4 +7,5 @@ install:
   - npm install -g bower polymer-cli@0.12.0 firebase-tools
   - bower install
 after_success:
+  - polymer build
   - firebase deploy --token $FIREBASE_TOKEN
