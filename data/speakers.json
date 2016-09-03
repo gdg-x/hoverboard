@@ -1238,5 +1238,36 @@
                 "link": "https://twitter.com/g33konaut"
             }
         ]
+    },
+    "42": {
+        "id": 42,
+        "featured": true,
+        "name": "Peter Tuszynski",
+        "title": "CTO",
+        "company": "inFullMobile",
+        "companyLogo": "/images/logos/infullmobile.svg",
+        "country": "Warsaw, Poland",
+        "photoUrl": "/images/people/peter_tuszynski.jpg",
+        "shortBio": "Peter is a developer turned entrepreneur turned CTO. He currently works at inFullMobile...",
+        "bio": "Peter is a developer turned entrepreneur turned CTO. He currently works at inFullMobile delivering delightful mobile products and also at HardGamma Ventures where he helps early stage startups take off the ground. ",
+        "tags": [
+            "Statrups",
+            "Entrepreneurship"
+        ],
+        "badges": [
+
+        ],
+        "socials": [
+            {
+                "icon": "facebook",
+                "name": "Facebook",
+                "link": "https://facebook.com/dusker"
+            },
+            {
+                "icon": "twitter",
+                "name": "Twitter",
+                "link": "https://twitter.com/dusker"
+            }
+        ]
     }
 }
