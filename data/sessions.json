@@ -78,9 +78,18 @@
     },
     "139": {
         "id": 139,
-        "title": "Keynote",
-        "description": "",
-        "language": "English"
+        "title": "Keynote - How to take off in 2016",
+        "description": "It's 2016 and turning your idea from just a concept in your head to a startup is easier than ever, but sometimes that road can get a bit turbulent. Let's talk about making your take off smooth, quick and fun!",
+        "speakers": [
+            42
+        ],
+        "language": "English",
+        "complexity": "Intermediate",
+        "tags": [
+            "General",
+            "Startups",
+            "Entrepreneurship"
+        ]
     },
     "138": {
         "id": 138,
