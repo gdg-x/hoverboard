@@ -133,5 +133,14 @@
     "secondaryColor": "#1d8fea",
     "image": "/images/posts/reasons1.png",
     "brief": "Everyone knows the Falls like harvest season, but in Lviv, everyone associates Falls with terribly coolest conferences ever..."
+  },
+  {
+    "id": "platinum-sponsor-zalando",
+    "title": "Meet our Platinum Sponsor - Zalando",
+    "posted": "2016-09-03",
+    "primaryColor": "#ff6900",
+    "secondaryColor": "#d45903",
+    "image": "/images/posts/zalando_cover.jpg",
+    "brief": "Zalando is transforming from an e-commerce company into a multi-service platform that provides fashion as a service for 19+ million customers..."
   }
 ]
