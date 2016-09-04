@@ -1,4 +1,17 @@
 {
+    "145": {
+        "id": 145,
+        "title": "Practical WebGL with Three.js",
+        "description": "Create interactive 3D worlds in your browser - no plugins needed, just JavaScript.\n\nWe will explore what it takes to get 3D graphics into your browser and how to load and interact with 3D models and get our hands on Three.js, a library to make this a lot easier than vanilla WebGL.\n\nYou will need to have a solid understanding of JavaScript (especially Arrays, TypedArrays, objects, requestAnimationFrame) and a browser & laptop that is able to display WebGL, which you can check at http://get.webgl.org.",
+        "speakers": [
+            41
+        ],
+        "language": "English",
+        "complexity": "Beginner",
+        "tags": [
+            "Web"
+        ]
+    },
     "1441": {
         "id": 1441,
         "title": "Build a Progressive Web App with Firebase and Polymer (part 1)",
@@ -55,14 +68,14 @@
     },
     "141": {
         "id": 141,
-        "title": "Fireside Chat",
+        "title": "Fireside Chat. Hosted by Professor Fortran",
         "description": "Our friends from Professor Fortran Videocast decided to record a session at the DevFest Ukraine. Wait for a casual conversation with our speakers about IT. More details comming soon...",
         "speakers": [
             38
         ],
         "language": "English",
         "complexity": "Beginner",
-        "image": "/images/backgrounds/professor_fortran.jpg",
+        "image": "/images/backgrounds/fireside_chat.jpg",
         "tags": [
             "General",
             "Android",
