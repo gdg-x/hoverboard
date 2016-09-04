@@ -1,4 +1,17 @@
 {
+    "145": {
+        "id": 145,
+        "title": "Practical WebGL with Three.js",
+        "description": "Create interactive 3D worlds in your browser - no plugins needed, just JavaScript.\n\nWe will explore what it takes to get 3D graphics into your browser and how to load and interact with 3D models and get our hands on Three.js, a library to make this a lot easier than vanilla WebGL.\n\nYou will need to have a solid understanding of JavaScript (especially Arrays, TypedArrays, objects, requestAnimationFrame) and a browser & laptop that is able to display WebGL, which you can check at http://get.webgl.org.",
+        "speakers": [
+            41
+        ],
+        "language": "English",
+        "complexity": "Beginner",
+        "tags": [
+            "Web"
+        ]
+    },
     "1441": {
         "id": 1441,
         "title": "Build a Progressive Web App with Firebase and Polymer (part 1)",
@@ -55,14 +68,14 @@
     },
     "141": {
         "id": 141,
-        "title": "Fireside Chat",
+        "title": "Fireside Chat. Hosted by Professor Fortran",
         "description": "Our friends from Professor Fortran Videocast decided to record a session at the DevFest Ukraine. Wait for a casual conversation with our speakers about IT. More details comming soon...",
         "speakers": [
             38
         ],
         "language": "English",
         "complexity": "Beginner",
-        "image": "/images/backgrounds/professor_fortran.jpg",
+        "image": "/images/backgrounds/fireside_chat.jpg",
         "tags": [
             "General",
             "Android",
@@ -78,7 +91,7 @@
     },
     "139": {
         "id": 139,
-        "title": "Keynote - How to take off in 2016",
+        "title": "Keynote. How to take off in 2016",
         "description": "It's 2016 and turning your idea from just a concept in your head to a startup is easier than ever, but sometimes that road can get a bit turbulent. Let's talk about making your take off smooth, quick and fun!",
         "speakers": [
             42
@@ -93,8 +106,8 @@
     },
     "138": {
         "id": 138,
-        "title": "Conference closing and contest winners announcements",
-        "description": "Make sure you won't miss closing ceremony, all gifts from out sponsors and partners will find their owners during this session.",
+        "title": "Closing ceremony",
+        "description": "Last words from the organizers and official conference closing.",
         "image": "/images/backgrounds/closing.jpg"
     },
     "137": {
