@@ -98,7 +98,8 @@
       {
         "name": "JetBrains",
         "url": "https://www.jetbrains.com/",
-        "logoUrl": "/images/logos/jetbrains.svg"
+        "logoUrl": "/images/logos/jetbrains.svg",
+        "width": 55
       },
       {
         "name": "Shulga Massage",

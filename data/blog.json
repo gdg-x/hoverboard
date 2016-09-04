@@ -142,5 +142,14 @@
     "secondaryColor": "#d45903",
     "image": "/images/posts/zalando_cover.jpg",
     "brief": "Zalando is transforming from an e-commerce company into a multi-service platform that provides fashion as a service for 19+ million customers..."
+  },
+  {
+    "id": "make-the-most-of-lviv",
+    "title": "Make the most of Lviv!",
+    "posted": "2016-09-04",
+    "primaryColor": "#E91E63",
+    "secondaryColor": "#D81B60",
+    "image": "/images/posts/lviv_cover.jpg",
+    "brief": "Lviv is a hidden pearl of Central-Eastern Europe, combining amazing architecture, diverse cultural inheritance, varied entertainments and great business and education opportunities into one remarkable atmosphere..."
   }
 ]
