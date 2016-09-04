@@ -67,9 +67,7 @@ If you are a person who likes to explore new cities away from trodden tourist pa
 
 ## Explore the weaponry collection at Lviv History Museum ‘Arsenal’
 
-<img src="/images/posts/lviv_8.jpg" style="width: 50%;"/>
-
-_Image source_: http://embed.virtual.ua/
+<img src="/images/posts/lviv_8.jpg" style="width: 100%;"/>
 
 Unquestionably, the biggest attraction for any male traveler in Lviv! Museum boasts thousands of weaponry items from more than 30 countries and as old as 10th century. Knives, daggers, swords, sabers, épées, yatagans, axes, halberds, maces, czekans, pernaches, and many other strange names of cold, fire and defensive weapons that will keep your interest throughout all the exhibit. The collection’s highlight is Eastern type sword from the 17th century with double blade, the so-called “Zulfakar”. Where to find: Pidvalna st., 5 – close to the town center When to visit:daily 10:00 – 17:30, except Wednesdays How much to pay: less than 1 EURO, extra fee is charged for photo and video footage.
 
