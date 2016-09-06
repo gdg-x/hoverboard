@@ -1,6 +1,11 @@
 language: node_js
 node_js: 6
 
+cache:
+  directories:
+  - node_modules  # NPM packages
+  - bower_components  # bower packages
+
 install:
   - npm install -g bower polymer-cli@0.12.0
   - bower install
