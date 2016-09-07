@@ -57,6 +57,14 @@
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
+    },
+    "quest": {
+      "headerSettings": {
+        "backgroundImage": "images/backgrounds/quest.jpg",
+        "backgroundColor": "#FF5722",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
     }
   },
   "navigation": [
