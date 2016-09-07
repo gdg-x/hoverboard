@@ -192,7 +192,7 @@
         "currency": "₴",
         "starts": "lazy-ticket-starts",
         "ends": "lazy-ticket-ends",
-        "soldOut": false
+        "soldOut": true
       }
     ]
   },
