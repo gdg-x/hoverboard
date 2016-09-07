@@ -1,0 +1,266 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+
+<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+
+<link rel="import" href="../behaviors/utils-behavior.html">
+<link rel="import" href="../elements/footer-block.html">
+
+
+
+<dom-module id="quest-page">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .layout {
+        @apply(--layout-vertical);
+      }
+
+      h2 {
+        font-size: 2.5em;
+      }
+
+      h3 {
+        font-size: 1.5em;
+        margin: 25px 0 5px;
+      }
+
+      .paper-card-container {
+        padding: 16px 0;
+      }
+
+      paper-card {
+        width: 100%;
+        background-color: #ffffff;
+      }
+
+      .card-content {
+        padding: 16px;
+      }
+
+      .info-card {
+        margin-bottom: 20px;
+      }
+
+      .info-card .card-content {
+        border-bottom: 1px solid #eee;
+      }
+
+      .info-card .header {
+        font-size: 20px;
+        font-weight: 400;
+      }
+
+      .c1 {
+        @apply(--layout-flex);
+      }
+
+      #guidelines paper-card {
+        margin: 10px 0px;
+      }
+
+      .c2 {
+        margin-top: 20px;
+      }
+
+      .quote {
+        padding: 40px !important;
+      }
+
+      .quote img {
+        float: left;
+        margin: 0 20px 20px 0;
+        border-radius: 50%;
+        width: 150px;
+      }
+
+      .quote .text {
+        font-style: italic;
+        margin: 0;
+      }
+
+      .quote .author {
+        font-weight: bold;
+        text-align: right;
+        margin: 10px 0 0 0;
+      }
+
+      @media (min-width: 961px) {
+        .layout {
+          @apply(--layout-horizontal);
+        }
+
+        .c1 {
+          margin: 10px;
+        }
+
+        .c2 {
+          margin: 20px 10px 10px 10px;
+          width: 30%;
+        }
+
+        paper-card {
+          margin-bottom: 30px;
+        }
+
+        .paper-card-container {
+          padding: 50px 40px;
+        }
+      }
+    </style>
+
+    <div class="container">
+      <div class="layout">
+        <div id="guidelines" class="c1">
+          <paper-card cascaded>
+            <div class="paper-card-container quote">
+              <!-- <div class="card-content"> -->
+                <i>Do you like quests? We've prepared something special for you. GDG Quest - is a combination of dev challenge, meeting new people and exploring Google tech demos.</i>
+              <!-- </div> -->
+            </div>
+          </paper-card>
+          <paper-card cascaded>
+            <div class="paper-card-container">
+              <div class="card-content">
+                <h2>GDG Quest Rules</h2>
+                <h3>Task</h3>
+                <ol>
+                  <li>Make a selfie with a speaker</li>
+                  <li>Finish workshop or <a href="https://g.co/dev/DevFest16Ukraine" target=_blank>codelab online</a> or build your own cardboard and make a photo or screenshot of your achievement</li>
+                  <li>Photo from the Emotobooth with your emotions recognized</li>
+                  <li>Crazy photo with <b>at least one</b> friend in front of DevFest press wall</li>
+                  <li>Photo from a Spotlight Stories or Expeditions or AR music or Wearbird booth</li>
+                </ol>
+                
+                <h3>Conditions</h3>
+                <ul>
+                  <li>Deadline: Saturday 15:30</li>
+                  <li>Post all photos <b>as a one public post</b> in Facebook or Twitter or Instagram with #dfua #quest hashtags</li>
+                  <li>After posting the photos, visit the GDG Booth to claim your gift</li>
+                  <li>Top 3 submissions (the one that will win Chromcasts) will be announced on September 10, 15:30 at GDG booth</li>
+                </ul>
+
+                <h3>Gifts</h3>
+                <div>Everyone who is going to finish the quest will get one of the next gifts:</div>
+                <ul>
+                  <li>Unique GDG poster made by Ola Yatsenko (the winner of Global GDG Design contest before Google I/O 2015)</li>
+                  <li>Cardboard</li>
+                  <li>One year JetBrains Toolbox licence</li>
+                  <li>GDG DevFest Ukriane T-shirt</li>
+                </ul>
+                <div>3 of the most funny/crazy/interesting quest submissions will get a <b>brand new Chromecast 2</b>.</div>
+              </div>
+            </div>
+          </paper-card>
+          
+        </div>
+      </div>
+    </div>
+    <footer-block app="{{app}}"></footer-block>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'quest-page',
+
+        behaviors: [
+          Polymer.NeonSharedElementAnimatableBehavior,
+          HOVERBOARD.UtilsBehavior
+        ],
+
+        properties: {
+          app: {
+            type: Object
+          },
+          team: {
+            type: Object
+          },
+          selected: {
+            type: Boolean,
+            observer: 'updateHeaderSettings'
+          },
+          headerSettings: {
+            type: Object,
+            notify: true
+          },
+          _headerSettings: {
+            type: Object,
+            value: function () {
+              return {
+                backgroundImage: '/images/backgrounds/hub.jpg',
+                backgroundColor: '#FF5722',
+                fontColor: '#fff',
+                tabBarColor: '#fff'
+              };
+            }
+          },
+
+          animationConfig: {
+            type: Object,
+            value: function () {
+              return {
+                'entry': [{
+                  name: 'fade-in-animation',
+                  animation: 'fade-in-animation',
+                  node: this,
+                  timing: {
+                    delay: 500
+                  }
+                }],
+                'exit': [{
+                  name: 'fade-out-animation',
+                  animation: 'fade-out-animation',
+                  node: this
+                }]
+              };
+            }
+          }
+        },
+
+        updateHeaderSettings: function () {
+          this.headerSettings = this.selected ? this._headerSettings : this.headerSettings;
+        },
+
+        _updateCascadedNodes: function () {
+          var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
+          var cascadedArray = Array.prototype.slice.call(cascaded);
+          this.animationConfig.entry.push({
+            name: 'cascaded-animation',
+            animation: 'transform-animation',
+            transformFrom: 'translate3d(0, 100%, 0)',
+            timing: {
+              delay: 500
+            },
+            nodes: cascadedArray
+          });
+          this.animationConfig.exit.push({
+            name: 'cascaded-animation',
+            animation: 'transform-animation',
+            transformTo: 'translate3d(0, 100%, 0)',
+            nodes: cascadedArray
+          });
+        }
+
+      });
+
+    })();
+  </script>
+
+</dom-module>

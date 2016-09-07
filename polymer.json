@@ -10,6 +10,7 @@
     "src/pages/schedule-page.html",
     "src/pages/speakers-page.html",
     "src/pages/team-page.html",
-    "src/pages/hub-page.html"
+    "src/pages/hub-page.html",
+    "src/pages/quest-page.html"
   ]
 }
