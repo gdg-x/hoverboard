@@ -93,6 +93,7 @@ pull request, so we can include you in this list.
 | [GDG Bingham University Website](http://bhu.gdg.ng) |
 | [Google I/O Extended 2016 Kuala Lumpur](https://ioxkl2016.firebaseapp.com) |
 | [GDG DevFest Hamburg 2016](https://hamburg.devfest.de) |
+| [GDG DevFest Mezam 2016](https://devfest-mezam.gdgbambili.xyz) |
 
 ### Roadmap :rocket:
 :x: Admin panel  
