@@ -1,0 +1,70 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
+
+<script>
+  (function () {
+    'use strict';
+
+    HOVERBOARD.LocalizeBehaviorImpl = {
+
+      properties: {
+        app: {
+          type: Object,
+          notify: true,
+          value: function () {
+            return {};
+          }
+        }
+      },
+
+      listeners: {
+        'app-resources-loaded': '_onLocalesLoaded'
+      },
+
+      attached: function () {
+        this.loadAppResources(this.language);
+      },
+
+      observers: [
+        'setLanguage(app.lang)'
+      ],
+
+      loadAppResources: function (lang) {
+        if (!lang) return;
+        var url = '/data/' + lang + '/resources.json';
+        this.loadResources(this.resolveUrl(url));
+      },
+
+      setLanguage: function (lang) {
+        if (!lang) return;
+        if (this.app.resources && !this.app.resources[lang]) {
+          this.loadAppResources(lang);
+        } else {
+          this.set('language', lang);
+        }
+      },
+
+      __onRequestResponse: function (event) {
+        if (!event.response || !this.app) return;
+        var resource = this.app.resources || {};
+        resource[this.app.lang] = event.response;
+        this.set('resources', resource);
+        this.set('app.resources', resource);
+        this.fire('app-resources-loaded');
+      },
+
+      _onLocalesLoaded: function (event) {
+        event.stopPropagation();
+        this.set('language', this.app.lang);
+      }
+
+    };
+
+    HOVERBOARD.LocalizeBehavior = [
+      Polymer.AppLocalizeBehavior,
+      HOVERBOARD.LocalizeBehaviorImpl
+    ];
+
+  }());
+</script>

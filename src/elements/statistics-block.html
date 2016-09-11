@@ -1,0 +1,94 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+<link rel="import" href="../behaviors/localize-behavior.html">
+
+
+<dom-module id="statistics-block">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
+      }
+
+      .container {
+        text-align: center;
+      }
+
+      .statistics-wrapper {
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
+      }
+
+      .statistics-element {
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+      }
+
+      .counter {
+        font-size: 3em;
+        font-weight: 200;
+      }
+
+      .caption {
+        font-size: .85em;
+      }
+
+      .description {
+        margin-top: 35px;
+      }
+
+      @media (max-width: 600px) {
+        .statistics-element {
+          width: 50%;
+        }
+
+        .statistics-element:nth-child(1),
+        .statistics-element:nth-child(2) {
+          margin-bottom: 40px;
+        }
+      }
+
+      @media (min-width: 601px) {
+        .statistics-element {
+          @apply(--layout-flex);
+        }
+      }
+    </style>
+
+    <div class="container">
+      <div class="statistics-wrapper">
+        <template is="dom-repeat" items="[[app.data.statistics]]" as="statistic">
+          <div class="statistics-element">
+            <span class="counter">[[statistic.counter]]</span>
+            <span class="caption">[[localize(statistic.caption)]]</span>
+          </div>
+        </template>
+      </div>
+      <div class="description">[[localize('description')]]</div>
+    </div>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'statistics-block',
+
+        behaviors: [
+          HOVERBOARD.LocalizeBehavior
+        ]
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

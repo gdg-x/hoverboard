@@ -1,0 +1,110 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/marked-element/marked-element.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+
+
+<dom-module id="truncate-marked-text">
+
+  <style include="shared-styles">
+    .markdown-html {
+      @apply(--truncate-marked-text-style);
+    }
+  </style>
+
+  <template>
+
+    <marked-element markdown="[[_outputText]]">
+      <div class="markdown-html"></div>
+    </marked-element>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'truncate-marked-text',
+
+        properties: {
+          characters: {
+            type: Number
+          },
+
+          words: {
+            type: Number
+          },
+
+          breakLastWord: {
+            type: Boolean,
+            value: false
+          },
+
+          text: {
+            type: String,
+            observer: 'truncate'
+          },
+
+          _outputText: {
+            type: String,
+            notify: true
+          }
+        },
+
+        truncate: function () {
+          if (this.words && !this.characters) {
+            this._outputText = this._truncateByWords(this.text, this.words);
+          } else {
+            this._outputText = this._truncateByCharacters(this.text, this.characters, this.breakLastWord);
+          }
+        },
+
+        _truncateByWords: function (input, words) {
+          if (isNaN(words)) {
+            return input;
+          }
+          if (words <= 0) {
+            return '';
+          }
+          if (input) {
+            var inputWords = input.split(/\s+/);
+            if (inputWords.length > words) {
+              input = inputWords.slice(0, words).join(' ') + '...';
+            }
+          }
+          return input;
+        },
+
+        _truncateByCharacters: function (input, chars, breakOnWord) {
+          if (isNaN(chars)) {
+            return input;
+          }
+          if (chars <= 0) {
+            return '';
+          }
+          if (input && input.length > chars) {
+            input = input.trim().substring(0, chars);
+            if (!breakOnWord) {
+              var lastSpace = input.lastIndexOf(' ');
+              if (lastSpace !== -1) {
+                input = input.substr(0, lastSpace);
+              }
+            } else {
+              while (input.charAt(input.length - 1) === ' ') {
+                input = input.substr(0, input.length - 1);
+              }
+            }
+            return input + '...';
+          }
+          return input;
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

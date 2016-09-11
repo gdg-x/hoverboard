@@ -1,0 +1,72 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+
+
+<dom-module id="animatable-content">
+
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <content></content>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        behaviors: [
+          Polymer.NeonAnimatableBehavior
+        ],
+
+        is: 'animatable-content',
+
+        properties: {
+          animationConfig: {
+            type: Object,
+            value: function () {
+              return {
+                'entry': [{
+                  name: 'slide-from-bottom-animation',
+                  animation: 'slide-from-bottom-animation',
+                  node: this,
+                  timing: {
+                    delay: 500
+                  }
+                }, {
+                  name: 'fade-in-animation',
+                  animation: 'fade-in-animation',
+                  node: this,
+                  timing: {
+                    delay: 500
+                  }
+                }],
+                'exit': [{
+                  name: 'slide-down-animation',
+                  animation: 'slide-down-animation',
+                  node: this
+                }, {
+                  name: 'fade-out-animation',
+                  animation: 'fade-out-animation',
+                  node: this
+                }]
+              };
+            }
+          }
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

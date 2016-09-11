@@ -1,0 +1,192 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+
+<link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+
+<link rel="import" href="../elements/schedule-subnav.html">
+<link rel="import" href="../elements/schedule-day.html">
+<link rel="import" href="../elements/session-details.html">
+<link rel="import" href="../behaviors/utils-behavior.html">
+<link rel="import" href="../behaviors/page-behavior.html">
+
+
+<dom-module id="schedule-page">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .container[phone] {
+        padding-right: 0;
+        padding-left: 0;
+      }
+
+      schedule-day {
+        margin-bottom: 64px;
+      }
+    </style>
+
+    <app-route
+      route="{{route}}"
+      pattern="/:day"
+      data="{{routeData}}"
+      query-params="{{queryParams}}"
+    ></app-route>
+
+    <div class="container" phone$="{{app.isPhoneSize}}">
+      <schedule-subnav
+        app="{{app}}"
+        schedule="[[schedule]]"
+        selected-day="[[app.selectedDay]]"
+        filters="{{filters}}"
+      ></schedule-subnav>
+
+      <neon-animated-pages selected="[[app.selectedDay]]" attr-for-selected="name">
+        <template is="dom-repeat" items="[[schedule]]" as="day">
+          <schedule-day
+            name$="day[[_addToValue(index, 1)]]"
+            app={{app}}
+            day="[[day]]"
+            filters="[[filters]]"
+          ></schedule-day>
+        </template>
+      </neon-animated-pages>
+    </div>
+
+    <session-details
+      id="sessionDetails"
+      app="{{app}}"
+      session="[[_selectedSession]]"
+      entry-animation="scale-up-animation"
+      exit-animation="fade-out-animation"
+      with-backdrop
+    ></session-details>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'schedule-page',
+
+        behaviors: [
+          Polymer.NeonSharedElementAnimatableBehavior,
+          HOVERBOARD.PageBehavior,
+          HOVERBOARD.UtilsBehavior
+        ],
+
+        properties: {
+          route: {
+            type: Object,
+            notify: true
+          },
+
+          routeData: {
+            type: Object
+          },
+
+          schedule: {
+            type: Array
+          },
+
+          sessions: {
+            type: Object
+          },
+
+          filters: {
+            type: Array
+          },
+
+          animationConfig: {
+            type: Object,
+            value: function () {
+              return {
+                'entry': [{
+                  name: 'fade-in-animation',
+                  animation: 'fade-in-animation',
+                  node: this,
+                  timing: {
+                    delay: 500
+                  }
+                }],
+                'exit': [{
+                  name: 'fade-out-animation',
+                  animation: 'fade-out-animation',
+                  node: this
+                }]
+              };
+            }
+          }
+        },
+
+        observers: [
+          '_routePageChanged(routeData.day)',
+          '_queryParamsChanged(queryParams)',
+          '_filtersChanged(filters.splices)'
+        ],
+
+        listeners: {
+          'iron-overlay-closed': '_resetSessionIdParam'
+        },
+
+        _routePageChanged: function (day) {
+          if (this.selected) {
+            if (!day) {
+              this.set('routeData.day', 'day1');
+            } else if (this.app.selectedDay !== day) {
+              this.set('app.selectedDay', day);
+            }
+          }
+        },
+
+        _queryParamsChanged: function (params) {
+          if (this.selected) {
+            if (params.sessionId) {
+              var session = this.sessions[params.sessionId];
+              if (!session) {
+                this._resetSessionIdParam();
+                return;
+              }
+              Polymer.RenderStatus.afterNextRender(this, function () {
+                this._selectedSession = session;
+                this.$.sessionDetails.open();
+              }.bind(this));
+            }
+            if (params.filters) {
+              this.set('filters', params.filters.split(','));
+            } else {
+              this.set('queryParams.filters', null);
+            }
+          }
+        },
+
+        _filtersChanged: function () {
+          if (this.filters.length)
+            this.set('queryParams.filters', this.filters.join(','));
+          else
+            this.set('queryParams.filters', null);
+        },
+
+        _resetSessionIdParam: function () {
+          !this.$.sessionDetails.opened && this.set('queryParams.sessionId', null);
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

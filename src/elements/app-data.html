@@ -1,0 +1,180 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+
+<dom-module id="app-data">
+  <template>
+    <iron-ajax auto url="[[configSource]]" handle-as="json" last-response="{{app.data}}"></iron-ajax>
+    <iron-ajax auto url="[[speakersSource]]" handle-as="json" last-response="{{_speakersRaw}}"></iron-ajax>
+    <iron-ajax auto url="[[sessionsSource]]" handle-as="json" last-response="{{sessions}}"></iron-ajax>
+    <iron-ajax auto url="[[postsSource]]" handle-as="json" on-response="_reversePosts"></iron-ajax>
+    <iron-ajax auto url="[[partnersSource]]" handle-as="json" last-response="{{app.partners}}"></iron-ajax>
+    <iron-ajax auto url="[[scheduleSource]]" handle-as="json" last-response="{{_scheduleRaw}}"></iron-ajax>
+    <iron-ajax auto url="[[teamSource]]" handle-as="json" last-response="{{app.team}}"></iron-ajax>
+    <iron-ajax auto url="[[videosSource]]" handle-as="json" last-response="{{app.videos}}"></iron-ajax>
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        is: 'app-data',
+
+        properties: {
+          app: {
+            type: Object,
+            notify: true
+          },
+
+          configSource: {
+            type: String,
+            value: 'data/hoverboard.config.json'
+          },
+
+          speakersSource: {
+            type: String,
+            value: 'data/speakers.json'
+          },
+
+          sessionsSource: {
+            type: String,
+            value: 'data/sessions.json'
+          },
+
+          postsSource: {
+            type: String,
+            value: 'data/blog.json'
+          },
+
+          partnersSource: {
+            type: String,
+            value: 'data/partners.json'
+          },
+
+          scheduleSource: {
+            type: String,
+            value: 'data/schedule.json'
+          },
+
+          teamSource: {
+            type: String,
+            value: 'data/team.json'
+          },
+
+          videosSource: {
+            type: String,
+            value: 'data/videos.json'
+          },
+
+          speakers: {
+            type: Array,
+            notify: true
+          },
+
+          sessions: {
+            type: Object,
+            notify: true
+          },
+
+          posts: {
+            type: Array,
+            notify: true
+          },
+
+          schedule: {
+            type: Array,
+            notify: true
+          },
+
+          _speakersRaw: {
+            type: Object
+          },
+
+          _scheduleRaw: {
+            type: Array
+          }
+        },
+
+        observers: [
+          '_generateSchedule(_speakersRaw, sessions, _scheduleRaw)'
+        ],
+
+        ready: function () {
+          this.app = this.app || {};
+        },
+
+        _generateSchedule: function () {
+          this._scheduleRaw.tags = [];
+          for (var i = 0, scheduleLen = this._scheduleRaw.length; i < scheduleLen; i++) {
+            var day = this._scheduleRaw[i];
+            this._scheduleRaw[i].tags = [];
+            for (var j = 0, timeslotsLen = day.timeslots.length; j < timeslotsLen; j++) {
+              var timeslot = day.timeslots[j];
+              for (var k = 0, sessionsLen = timeslot.sessions.length; k < sessionsLen; k++) {
+                for (var l = 0, subSessionsLen = timeslot.sessions[k].length; l < subSessionsLen; l++) {
+                  var session = this._getSession(timeslot.sessions[k][l], day, i, this._scheduleRaw);
+                  if (session && !session.track) {
+                    session.track = day.tracks[k];
+                  }
+                  session.startTime = timeslot.startTime;
+                  session.endTime = subSessionsLen > 1 ? this._getEndTime(day.date, timeslot.startTime, timeslot.endTime, subSessionsLen, l + 1) : timeslot.endTime;
+                  session.dateReadable = day.dateReadable;
+                  this._scheduleRaw[i].timeslots[j].sessions[k][l] = session;
+                }
+              }
+            }
+          }
+          this.set('schedule', this._scheduleRaw);
+          this.set('speakers', this._speakersRaw);
+        },
+
+        _getSession: function (sessionId, day, dayIndex, schedule) {
+          var session = this.sessions[sessionId];
+          session.mainTag = session.tags ? session.tags[0] : 'General';
+          session.day = dayIndex + 1;
+
+          if (day.tags.indexOf(session.mainTag) < 0) {
+            day.tags.push(session.mainTag);
+          }
+          if (schedule.tags.indexOf(session.mainTag) < 0) {
+            schedule.tags.push(session.mainTag);
+          }
+          var speakers = [];
+          if (session.speakers) {
+            for (var j = 0, speakersLen = session.speakers.length; j < speakersLen; j++) {
+              if (!session.speakers[j].id) {
+                session.speakers[j] = this._speakersRaw[session.speakers[j]];
+                var tempSession = JSON.parse(JSON.stringify(session));
+                delete tempSession.speakers;
+                if (session.speakers[j]) {
+                  if (!session.speakers[j].sessions) {
+                    session.speakers[j].sessions = [];
+                  }
+                  session.speakers[j].sessions.push(tempSession);
+                  speakers.push(session.speakers[j].name);
+                }
+              }
+            }
+          }
+          return session;
+        },
+
+        _getEndTime: function (date, startTime, endTime, totalNumber, number) {
+          var timezone = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1],
+            timeStart = new Date(date + ' ' + startTime + ' ' + timezone).getTime(),
+            timeEnd = new Date(date + ' ' + endTime + ' ' + timezone).getTime(),
+            difference = Math.floor((timeEnd - timeStart) / totalNumber),
+            result = new Date(timeStart + difference * number);
+          return result.getHours() + ':' + result.getMinutes();
+        },
+
+        _reversePosts: function (response) {
+          this.posts = response.detail.response.reverse();
+        }
+
+      });
+
+    }());
+  </script>
+</dom-module>

@@ -1,0 +1,111 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
+
+<link rel="import" href="../behaviors/page-behavior.html">
+<link rel="import" href="../elements/statistics-block.html">
+<link rel="import" href="../elements/featured-people.html">
+<link rel="import" href="../elements/featured-videos.html">
+<link rel="import" href="../elements/call-to-action.html">
+<link rel="import" href="../elements/about-block.html">
+<link rel="import" href="../elements/tickets-block.html">
+<link rel="import" href="../elements/latest-posts.html">
+<link rel="import" href="../elements/footer-block.html">
+<link rel="import" href="../elements/photo-block.html">
+<link rel="import" href="../elements/social-feed.html">
+<link rel="import" href="../elements/logos-block.html">
+<link rel="import" href="../elements/map-block.html">
+
+<dom-module id="home-page">
+
+  <template>
+
+    <statistics-block app="{{app}}" cascaded></statistics-block>
+    <featured-people app="{{app}}" people="{{people}}" cascaded></featured-people>
+    <featured-videos app="{{app}}" cascaded></featured-videos>
+    <call-to-action app="{{app}}" cascaded></call-to-action>
+    <about-block app="{{app}}" cascaded></about-block>
+    <photo-block app="{{app}}" cascaded></photo-block>
+    <tickets-block app="{{app}}" cascaded></tickets-block>
+    <latest-posts app="{{app}}" posts="{{posts}}" cascaded></latest-posts>
+    <social-feed app="{{app}}" cascaded></social-feed>
+    <map-block app="{{app}}" selected="{{selected}}" cascaded></map-block>
+    <logos-block app="{{app}}" cascaded></logos-block>
+    <footer-block app="{{app}}" cascaded></footer-block>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'home-page',
+
+        behaviors: [
+          Polymer.NeonSharedElementAnimatableBehavior,
+          HOVERBOARD.PageBehavior
+        ],
+
+        properties: {
+          people: {
+            type: Array
+          },
+
+          posts: {
+            type: Array
+          },
+
+          logos: {
+            type: Array
+          },
+
+          videos: {
+            type: Array
+          },
+
+          animationConfig: {
+            type: Object,
+            value: function () {
+              var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
+              var cascadedArray = Array.prototype.slice.call(cascaded);
+              return {
+                'entry': [{
+                  name: 'cascaded-animation',
+                  animation: 'transform-animation',
+                  transformFrom: 'translate3d(0, 100%, 0)',
+                  nodes: cascadedArray,
+                  timing: {
+                    delay: 500
+                  }
+                }, {
+                  name: 'fade-in-animation',
+                  animation: 'fade-in-animation',
+                  node: this,
+                  timing: {
+                    delay: 500
+                  }
+                }],
+                'exit': [{
+                  name: 'cascaded-animation',
+                  animation: 'transform-animation',
+                  transformTo: 'translate3d(0, 100%, 0)',
+                  nodes: cascadedArray
+                }, {
+                  name: 'fade-out-animation',
+                  animation: 'fade-out-animation',
+                  node: this
+                }]
+              };
+            }
+          }
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

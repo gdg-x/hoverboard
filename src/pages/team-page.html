@@ -1,0 +1,307 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+
+<link rel="import" href="../../bower_components/marked-element/marked-element.html">
+
+<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+
+<link rel="import" href="../elements/footer-block.html">
+<link rel="import" href="../behaviors/localize-behavior.html">
+<link rel="import" href="../behaviors/page-behavior.html">
+
+
+<dom-module id="team-page">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        --grid-gutter: 8px;
+        --colums-number: 3;
+        display: block;
+      }
+
+      .details {
+        @apply(--layout-vertical);
+        @apply(--layout-center-justified);
+      }
+
+      .details-item {
+        @apply(--layout-horizontal);
+        padding-bottom: 32px;
+      }
+
+      .details-icon {
+        --iron-icon-height: 56px;
+        --iron-icon-width: 56px;
+        --iron-icon-fill-color: var(--default-primary-color);
+        margin-right: 24px;
+      }
+
+      .details-info {
+        @apply(--layout-flex);
+      }
+
+      .details-title {
+        margin-bottom: 24px;
+        font-size: 24px;
+        font-weight: 400;
+      }
+
+      .details-text .markdown-html {
+        font-size: 16px;
+      }
+
+      .team-container {
+        @apply(--layout-vertical);
+        @apply(--layout-wrap);
+      }
+
+      .team-block {
+        margin-bottom: 30px;
+      }
+
+      .team-name {
+        text-align: center;
+      }
+
+      .member {
+        @apply(--layout-horizontal);
+        width: 100%;
+        margin: var(--grid-gutter) 0;
+      }
+
+      .card {
+        @apply(--layout-flex);
+        @apply(--layout-vertical);
+        @apply(--shadow-elevation-2dp);
+        padding: 32px 16px;
+        background: #fff;
+      }
+
+      .card:hover {
+        @apply(--shadow-elevation-3dp);
+        background: #fff;
+      }
+
+      .header {
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+      }
+
+      .photo {
+        width: 120px;
+        height: 120px;
+        position: relative;
+        border-radius: 50%;
+        overflow: hidden;
+        background: var(--default-primary-color) 50% 50%;
+        background-size: cover;
+      }
+
+      .card-content {
+        @apply(--layout-vertical);
+        @apply(--layout-flex-auto);
+        color: var(--primary-text-color);
+        font-size: 18px;
+        text-align: center;
+      }
+
+      .name {
+        font-size: 20px;
+      }
+
+      .title {
+        font-size: 16px;
+        color: var(--secondary-text-color);
+      }
+
+      .card-actions {
+        text-align: center;
+      }
+
+      .social-icon {
+        color: var(--secondary-text-color);
+      }
+
+      @media (min-width: 601px) {
+        .details-icon {
+          --iron-icon-height: 72px;
+          --iron-icon-width: 72px;
+          margin-right: 32px;
+        }
+
+        .team-container {
+          @apply(--layout-horizontal);
+          @apply(--layout-center-justified);
+        }
+
+        .member {
+          width: calc(100% / var(--colums-number) - (var(--colums-number) + 1) * var(--grid-gutter));
+          margin: var(--grid-gutter) var(--grid-gutter) calc(var(--colums-number) * var(--grid-gutter));
+        }
+
+        .card {
+          background: none;
+          box-shadow: none;
+          transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1), background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+          @apply(--shadow-elevation-3dp);
+          background: #fff;
+        }
+
+        .social-link {
+          display: inline-block;
+          opacity: 0;
+          transform: translate3d(0, 50%, 0);
+          will-change: transform, opacity;
+          transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover .social-link {
+          opacity: 1;
+          transform: translate3d(0, 0, 0);
+        }
+
+        .social-link:nth-child(2) {
+          transition-delay: .1s;
+        }
+
+        .social-link:nth-child(3) {
+          transition-delay: .15s;
+        }
+
+        .social-link:nth-child(4) {
+          transition-delay: .2s;
+        }
+
+        .social-link:nth-child(5) {
+          transition-delay: .25s;
+        }
+      }
+
+      @media (min-width: 1600px) {
+        .container {
+          max-width: 960px;
+        }
+      }
+    </style>
+
+    <div class="container">
+      <div class="details">
+        <div class="details-item" cascaded>
+          <iron-icon class="details-icon" icon="info"></iron-icon>
+          <div class="details-info">
+            <h4 class="details-title">[[localize(app.data.teamPageTitle)]]</h4>
+            <marked-element class="details-text" markdown="{{localize(app.data.teamPageText)}}">
+              <div class="markdown-html"></div>
+            </marked-element>
+          </div>
+        </div>
+      </div>
+
+      <template is="dom-repeat" items="[[app.team]]" as="team">
+        <div class="team-block">
+          <h3 class="team-name" cascaded>[[team.title]]</h3>
+
+          <div class="team-container">
+            <template is="dom-repeat" items="[[team.members]]" as="member" on-dom-change="_updateCascadedNodes">
+              <div class="member">
+                <paper-material class="card"  cascaded>
+                  <div class="header">
+                    <img class="photo" src="[[member.photoUrl]]"/>
+                  </div>
+                  <div class="card-content">
+                    <div class="name">[[member.name]]</div>
+                    <div class="title">[[member.title]]</div>
+                  </div>
+                  <div class="card-actions">
+                    <template is="dom-repeat" items="[[member.socials]]" as="social">
+                      <a class="social-link" href$="[[social.link]]" target="_blank" rel="noopener noreferrer">
+                        <paper-icon-button class="social-icon"
+                                           icon$="icons:{{social.icon}}"></paper-icon-button>
+                      </a>
+                    </template>
+                  </div>
+                </paper-material>
+              </div>
+            </template>
+          </div>
+        </div>
+      </template>
+
+    </div>
+
+    <footer-block app="{{app}}" cascaded></footer-block>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'team-page',
+
+        behaviors: [
+          Polymer.NeonSharedElementAnimatableBehavior,
+          HOVERBOARD.PageBehavior,
+          HOVERBOARD.LocalizeBehavior
+        ],
+
+        properties: {
+          animationConfig: {
+            type: Object,
+            value: function () {
+              return {
+                'entry': [{
+                  name: 'fade-in-animation',
+                  animation: 'fade-in-animation',
+                  node: this,
+                  timing: {
+                    delay: 500
+                  }
+                }],
+                'exit': [{
+                  name: 'fade-out-animation',
+                  animation: 'fade-out-animation',
+                  node: this
+                }]
+              };
+            }
+          }
+        },
+
+        _updateCascadedNodes: function () {
+          var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
+          var cascadedArray = Array.prototype.slice.call(cascaded);
+          this.animationConfig.entry.push({
+            name: 'cascaded-animation',
+            animation: 'transform-animation',
+            transformFrom: 'translate3d(0, 100%, 0)',
+            timing: {
+              delay: 500
+            },
+            nodes: cascadedArray
+          });
+          this.animationConfig.exit.push({
+            name: 'cascaded-animation',
+            animation: 'transform-animation',
+            transformTo: 'translate3d(0, 100%, 0)',
+            nodes: cascadedArray
+          });
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

@@ -1,0 +1,117 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../behaviors/localize-behavior.html">
+<link rel="import" href="../styles/shared-styles.html">
+
+<dom-module id="logos-block">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+        background: #FFFFFF;
+      }
+
+      .logos-block-wrapper {
+        margin-bottom: 30px;
+      }
+
+      .container {
+        @apply(--layout-relative);
+        @apply(--layout-vertical);
+        @apply(--layout-center);
+      }
+
+      .container .heading {
+        margin-bottom: 20px;
+      }
+
+      .container .block-link {
+        margin-top: 35px;
+      }
+
+      .logos-block-title {
+        margin: 20px 0;
+        font-weight: 200;
+        font-size: 22px;
+        letter-spacing: .05em;
+      }
+
+      .logos {
+        @apply(--layout-horizontal);
+        @apply(--layout-center-center);
+        @apply(--layout-wrap);
+      }
+
+      .logo-item {
+        margin: 0 10px 10px;
+      }
+
+      .logo-img {
+        @apply(--layout-flex);
+        height: 60px;
+        width: 140px;
+      }
+
+      .logo-img.info {
+        height: 45px;
+        width: 100px;
+      }
+    </style>
+
+    <div class="container">
+      <h4 class="heading text-center">[[localize('partners')]]</h4>
+      <template is="dom-repeat" items="[[app.partners]]" as="block">
+        <div class="logos-block-wrapper">
+          <h5 class="logos-block-title text-center">[[localize(block.title)]]</h5>
+          <div class="logos">
+            <template is="dom-repeat" items="[[block.logos]]" as="logo">
+              <a class="logo-item" href="[[logo.url]]" title="[[logo.name]]" target="_blank" rel="noopener noreferrer">
+                <iron-image
+                  class$="logo-img [[block.logosClass]]"
+                  src="[[logo.logoUrl]]"
+                  width$="{{logo.width}}"
+                  height$="{{logo.height}}"
+                  sizing="contain"
+                  preload fade
+                ></iron-image>
+              </a>
+            </template>
+          </div>
+        </div>
+      </template>
+      <a class="block-link" href$="[[app.data.partnershipProposition]]" target="_blank" rel="noopener noreferrer" on-tap="_trackClick">
+        <paper-button class="primary" raised>[[localize('become-a-partner')]]</paper-button>
+      </a>
+    </div>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'logos-block',
+
+        behaviors: [
+          HOVERBOARD.LocalizeBehavior
+        ],
+
+        _trackClick: function () {
+          HOVERBOARD.Analytics.trackEvent('sponsors', 'open proposition', 'Become a partner');
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

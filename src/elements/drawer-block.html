@@ -1,0 +1,137 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+
+<link rel="import" href="../../bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
+
+<link rel="import" href="../behaviors/localize-behavior.html">
+<link rel="import" href="../styles/shared-styles.html">
+
+
+<dom-module id="drawer-block">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+        z-index: 9;
+        --paper-toolbar-background: var(--default-primary-color);
+      }
+
+      .panel {
+        height: 100%;
+      }
+
+      .logo {
+        margin-top: 15px;
+        height: 40px;
+        width: 130px;
+      }
+
+      .bottom {
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--text-primary-color);
+      }
+
+      .location {
+        display: block;
+        color: var(--dark-primary-color);
+      }
+
+      .navigation {
+        background: var(--secondary-background-color);
+      }
+
+      .navigation-link {
+        padding: 0 16px;
+        min-height: 48px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+        text-decoration: none;
+        color: var(--primary-text-color);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      .navigation-link {
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+      }
+
+      .navigation-link .open-in-new {
+        margin-left: 8px;
+        --iron-icon-width: 16px;
+        --iron-icon-height: 16px;
+      }
+
+      .selected {
+        background: #eaeaea;
+      }
+    </style>
+
+    <paper-toolbar class="tall">
+      <div class="top">
+        <iron-image class="logo" src="/images/logo-white.svg" sizing="contain"
+                    alt="[[localize('title')]]"></iron-image>
+      </div>
+      <div class="bottom">
+        <span class="dates">[[localize('dates')]]</span>
+        <span class="location">{{localize('location-address-short')}}</span>
+      </div>
+    </paper-toolbar>
+    <nav>
+      <paper-menu
+        class="navigation list"
+        attr-for-selected="name"
+        selected="{{pageData.page}}"
+        selected-class="selected"
+      >
+        <template is="dom-repeat" items="[[app.data.navigation]]" as="nav">
+          <a class="navigation-link" name="[[nav.route]]" href$="[[nav.permalink]]" on-tap="closeDrawer">{{localize(nav.route)}}</a>
+        </template>
+        <a class="navigation-link" href$="[[app.data.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">[[localize('buy-ticket')]]
+          <iron-icon
+            class="open-in-new"
+            icon="open-in-new"
+          ></iron-icon>
+        </a>
+      </paper-menu>
+    </nav>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'drawer-block',
+
+        behaviors: [
+          HOVERBOARD.LocalizeBehavior
+        ],
+
+        closeDrawer: function () {
+          HOVERBOARD.Elements.Template.closeDrawer();
+        },
+
+        _trackBuyClick: function () {
+          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'drawer');
+          this.closeDrawer();
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

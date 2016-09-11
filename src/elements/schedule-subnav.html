@@ -1,0 +1,234 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+<link rel="import" href="../behaviors/utils-behavior.html">
+<link rel="import" href="../behaviors/localize-behavior.html">
+
+
+<dom-module id="schedule-subnav">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+        --paper-menu-background-color: #fff;
+      }
+
+      .subpage-nav {
+        padding-left: 16px;
+        height: 69px;
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
+      }
+
+      .schedule-tabs {
+        height: 100%;
+      }
+
+      paper-tab a {
+        color: var(--text-primary-color);
+      }
+
+      .filter-icon {
+        margin-left: 4px;
+      }
+
+      .filters-content > * {
+        padding: 0 24px;
+      }
+
+      paper-checkbox {
+        position: relative;
+        min-height: 48px;
+      }
+
+      paper-item {
+        cursor: pointer;
+      }
+
+      .info-banner {
+        padding: 16px;
+        background: rgba(236, 239, 241, 0.6);
+        color: rgba(0,0,0,0.54);
+        font-size: 12px;
+      }
+
+      .legend-item {
+        margin-right: 8px;
+      }
+
+      .point {
+        margin-right: 4px;
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        border-radius: 50%;
+      }
+    </style>
+
+    <nav class="subpage-nav" layout horizontal center justified relative>
+      <paper-tabs class="schedule-tabs" selected="[[selectedDay]]" attr-for-selected="day">
+        <template is="dom-repeat" items="[[schedule]]" as="day">
+          <paper-tab day$="day[[_addToValue(index, 1)]]" link>
+            <a href$="/schedule/day[[_addToValue(index, 1)]]" layout center>
+              [[day.dateReadable]]
+            </a>
+          </paper-tab>
+        </template>
+      </paper-tabs>
+
+      <paper-menu-button
+        id="filtersMenuToggle"
+        horizontal-align="right"
+        ignore-select
+        allow-outside-scroll
+        opened="{{_filtersOpened}}"
+      >
+        <paper-button class="dropdown-trigger">
+          [[localize('filter')]]
+          <iron-icon class="filter-icon" icon="filter-list"></iron-icon>
+        </paper-button>
+        <paper-menu
+          id="filters"
+          class="filters-content dropdown-content"
+          attr-for-selected="value"
+          selected-values="{{filters}}"
+          multi
+        >
+          <template is="dom-repeat" items="[[schedule.tags]]" as="tag">
+            <paper-checkbox
+              value="[[tag]]"
+              checked="{{_isChecked(tag)}}"
+              layout horizontal center flex
+            >
+              [[tag]]
+            </paper-checkbox>
+          </template>
+          <paper-item on-tap="clearFilters">[[localize('clear-all')]]</paper-item>
+        </paper-menu>
+      </paper-menu-button>
+    </nav>
+
+    <div class="info-banner" layout horizontal justified>
+      <div class="legend" layout horizontal>
+        <template is="dom-repeat" items="[[schedule.tags]]" as="tag">
+          <div class="legend-item">
+            <i class="point"
+               style$="background: [[_getCustomStyleValue(tag)]]"></i>[[tag]]
+          </div>
+        </template>
+      </div>
+      <div class="filters" hidden$="[[!_filtersLabel]]">
+        [[localize('filtered-by')]] [[_filtersLabel]]
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'schedule-subnav',
+
+        behaviors: [
+          HOVERBOARD.UtilsBehavior,
+          HOVERBOARD.LocalizeBehavior
+        ],
+
+        properties: {
+          schedule: {
+            type: Array
+          },
+
+          selectedDay: {
+            type: String
+          },
+
+          filters: {
+            type: Array,
+            value: [],
+            notify: true
+          }
+        },
+
+        listeners: {
+          'iron-select': '_refreshFiltersLabel',
+          'iron-deselect': '_refreshFiltersLabel'
+        },
+
+        attached: function () {
+          this._target = this.$.filtersMenuToggle;
+
+          this.listen(this._target, 'mouseenter', '_showFilters');
+          this.listen(this._target, 'focus', '_showFilters');
+          this.listen(this._target, 'mouseleave', '_hideFilters');
+          this.listen(this._target, 'blur', '_hideFilters');
+          this.listen(this._target, 'tap', '_hideFilters');
+        },
+
+        detached: function () {
+          if (this._target) {
+            this.unlisten(this._target, 'mouseenter', '_showFilters');
+            this.unlisten(this._target, 'focus', '_showFilters');
+            this.unlisten(this._target, 'mouseleave', '_hideFilters');
+            this.unlisten(this._target, 'blur', '_hideFilters');
+            this.unlisten(this._target, 'tap', '_hideFilters');
+          }
+        },
+
+        clearFilters: function (e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+
+          this.filters = [];
+          var checkboxes = this.$.filters.querySelectorAll('paper-checkbox');
+          Array.prototype.forEach.call(checkboxes, function (checkbox) {
+            checkbox.checked = false;
+          });
+        },
+
+        _isChecked: function (tag) {
+          return this.filters.indexOf(tag) > -1;
+        },
+
+        _showFilters: function () {
+          if (this._filtersOpened) return;
+          this.set('_filtersOpened', true);
+        },
+
+        _hideFilters: function () {
+          if (!this._filtersOpened) return;
+          this.set('_filtersOpened', false);
+        },
+
+        _getCustomStyleValue: function(tag) {
+          return this.getComputedStyleValue('--' + this._generateClass(tag));
+        },
+
+        _activeFilters: function() {
+          return this.filters && this.filters.length;
+        },
+
+        _refreshFiltersLabel: function () {
+          this._filtersLabel = this.filters.join(', ');
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

@@ -1,0 +1,41 @@
+<link rel='import' href='../../bower_components/polymer/polymer.html'>
+
+<script>
+  (function () {
+    'use strict';
+
+    HOVERBOARD.UtilsBehavior = {
+
+      _getIndexByProperty: function (array, property, value) {
+        if (!array) return null;
+        for (var i = 0, length = array.length; i < length; i++) {
+          if (array[i][property].toString() === value.toString()) {
+            return i;
+          }
+        }
+      },
+
+      _generateClass: function (value) {
+        return value.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+      },
+
+      _randomOrder: function (array) {
+        return array.sort(function () {
+          return 0.5 - Math.random();
+        });
+      },
+
+      _toArray: function (obj) {
+        return Object.keys(obj).map(function (key) {
+          return obj[key];
+        });
+      },
+
+      _addToValue: function (value, addition) {
+        return value + addition;
+      }
+
+    };
+
+  }());
+</script>

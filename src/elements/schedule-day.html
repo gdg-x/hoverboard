@@ -1,0 +1,313 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+
+<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+
+<link rel="import" href="../behaviors/utils-behavior.html">
+
+
+<dom-module id="schedule-day">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+        --paper-card-background-color: var(--secondary-background-color);
+      }
+
+      .timeslot {
+        margin-top: 40px;
+      }
+
+      .timeslot:last-of-type {
+        margin-bottom: 64px;
+      }
+
+      .start-time {
+        padding-left: 24px;
+        min-width: 110px;
+        color: var(--secondary-text-color);
+      }
+
+      .hours {
+        font-size: 56px;
+        font-weight: 300;
+        letter-spacing: -0.04em;
+      }
+
+      .minutes {
+        margin-left: 3px;
+        font-size: 16px;
+      }
+
+      .session {
+        padding: 0 16px;
+      }
+
+      .session[flex] {
+        padding: 0 8px;
+      }
+
+      .sub-session {
+        @apply(--shadow-transition);
+        cursor: pointer;
+        color: var(--primary-text-color);
+      }
+
+      .sub-session[with-background] {
+        color: #fff;
+      }
+
+      .sub-session[with-background] .overlay {
+        background: rgba(0, 0, 0, 0.4);
+      }
+
+      .sub-session:hover {
+        @apply(--shadow-elevation-4dp);
+      }
+
+      .sessions-wrapper[vertical] .session:not(:first-of-type) .sub-session,
+      .sub-session:not(:first-of-type) {
+        margin-top: 16px;
+      }
+
+      .sub-session-content {
+        padding: 24px;
+        flex-basis: auto;
+      }
+
+      .sub-session-content p {
+        margin: 24px 0 8px;
+      }
+
+      .session-title {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 22px;
+      }
+
+      .session-meta {
+        margin: 8px 0 0;
+        padding: 0;
+        font-size: 15px;
+        color: var(--secondary-text-color);
+      }
+
+      .sub-session[with-background] .tags,
+      .sub-session[with-background] .session-meta {
+        color: #fff;
+      }
+
+      .session-meta li {
+        display: inline-block;
+      }
+
+      .session-meta li:not(:last-of-type)::after {
+        margin-left: 5px;
+        content: "/";
+      }
+
+      .speaker-block {
+        padding: 16px 24px;
+        color: #fff;
+      }
+
+      .image-overlay {
+        transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0.85;
+      }
+
+      .sub-session:hover .image-overlay {
+        opacity: 1;
+      }
+
+      .sub-session[with-background] .image-overlay,
+      .sub-session[with-background]:hover .image-overlay {
+        opacity: 0;
+      }
+
+      .tags {
+        padding: 16px 24px;
+        color: var(--secondary-text-color);
+        font-size: 13px;
+      }
+
+      .tags iron-icon {
+        --iron-icon-width: 14px;
+        --iron-icon-height: 14px;
+        margin-right: 8px;
+      }
+
+      .speaker:not(:last-of-type) {
+        margin-bottom: 8px;
+      }
+
+      .person-detail {
+        margin-left: 7px;
+        line-height: 1;
+        z-index: 1;
+      }
+
+      .speaker-title {
+        font-size: 13px;
+      }
+    </style>
+
+    <template is="dom-repeat" items="[[day.timeslots]]" as="timeslot">
+      <div class="timeslot" layout vertical$="{{app.isPhoneSize}}" horizontal$="{{!app.isPhoneSize}}">
+
+        <div class="start-time">
+          <span class="hours">[[_splitText(timeslot.startTime, ':', 0)]]</span>
+          <span class="minutes">[[_splitText(timeslot.startTime, ':', 1)]]</span>
+        </div>
+
+        <div class="sessions-wrapper" layout vertical$="{{app.isPhoneSize}}" horizontal$="{{!app.isPhoneSize}}"
+             flex$="{{!app.isPhoneSize}}">
+          <template is="dom-repeat" items="[[timeslot.sessions]]" as="session">
+            <div class="session" layout vertical flex$="{{!app.isPhoneSize}}">
+              <template is="dom-repeat" items="[[session]]" as="subSession"
+                        filter="{{_filterSession(filters.splices)}}">
+
+                <a href$="/schedule/[[name]]?sessionId=[[subSession.id]]" class="sub-session" with-background$="[[subSession.image]]" layout flex-auto>
+                  <paper-card layout flex-auto>
+
+                    <template is="dom-if" if="[[subSession.image]]">
+                      <iron-image src="[[subSession.image]]" sizing="cover" fit preload></iron-image>
+                    </template>
+
+                    <div class="overlay" relative layout vertical flex>
+
+                      <div class="sub-session-content" flex>
+                        <h2 class="session-title">[[subSession.title]]</h2>
+                        <ul class="session-meta">
+                          <template is="dom-if" if="[[subSession.language]]">
+                            <li>[[subSession.language]]</li>
+                          </template>
+                          <template is="dom-if" if="[[subSession.complexity]]">
+                            <li>[[subSession.complexity]]</li>
+                          </template>
+                          <template is="dom-if" if="[[subSession.track.title]]">
+                            <li>[[subSession.track.title]]</li>
+                          </template>
+                        </ul>
+                      </div>
+
+                      <template is="dom-if" if="[[subSession.tags]]">
+                        <div class="tags" layout horizontal center>
+                          <iron-icon icon="tags"></iron-icon>
+                          <span>[[_joinArray(subSession.tags)]]</span>
+                        </div>
+                      </template>
+
+                      <template is="dom-if" if="[[subSession.speakers]]">
+                        <div class="speaker-block" relative>
+                          <div class="image-overlay"
+                               style$="background-color: [[_getCustomStyleValue(subSession.mainTag)]]" fit></div>
+                          <template is="dom-repeat" items="[[subSession.speakers]]" as="speaker">
+                            <div class="speaker" layout horizontal center>
+                              <iron-icon icon="account"></iron-icon>
+                              <div class="person-detail" flex>
+                                <span class="speaker-name">[[speaker.name]]</span>
+                                <div class="speaker-title">
+                                  [[speaker.company]] / [[speaker.country]]
+                                </div>
+                              </div>
+                            </div>
+                          </template>
+                        </div>
+                      </template>
+
+                    </div>
+                  </paper-card>
+                </a>
+
+              </template>
+            </div>
+          </template>
+        </div>
+
+      </div>
+    </template>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'schedule-day',
+
+        behaviors: [
+          Polymer.NeonSharedElementAnimatableBehavior,
+          HOVERBOARD.UtilsBehavior
+        ],
+
+        properties: {
+          app: {
+            type: Object
+          },
+
+          day: {
+            type: Object
+          },
+
+          filters: {
+            type: Array,
+            value: []
+          },
+
+          animationConfig: {
+            type: Object,
+            value: function () {
+              return {
+                'entry': [{
+                  name: 'fade-in-animation',
+                  animation: 'fade-in-animation',
+                  node: this,
+                  timing: {
+                    delay: 500
+                  }
+                }],
+                'exit': [{
+                  name: 'fade-out-animation',
+                  animation: 'fade-out-animation',
+                  node: this
+                }]
+              };
+            }
+          }
+        },
+
+        _splitText: function (text, divider, index) {
+          return text.split(divider)[index];
+        },
+
+        _getCustomStyleValue: function (value) {
+          return this.getComputedStyleValue('--' + this._generateClass(value));
+        },
+
+        _joinArray: function (array) {
+          return array.join(', ');
+        },
+
+        _filterSession: function () {
+          var filters = this.filters || [];
+          if (!filters.length) return false;
+          return function (session) {
+            return filters.indexOf(session.mainTag) > -1;
+          };
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

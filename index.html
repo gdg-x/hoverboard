@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en" itemscope itemtype="http://schema.org/Event">
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="description"
+        content="The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts">
+  <meta name="keywords"
+        content="event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev">
+  <meta name="author" content="GDG Lviv">
+
+  <title>GDG DevFest Ukraine 2016</title>
+
+  <link rel="canonical" href="https://devfest.gdg.org.ua">
+  <link rel="shortcut icon" sizes="32x32" href="images/favicon/favivon-32.png">
+
+  <meta name="theme-color" content="#F57C00">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Add to homescreen for Chrome on Android -->
+  <meta name="mobile-web-app-capable" content="yes"> <!-- fallback for manifest.json -->
+  <meta name="application-name" content="GDG DevFest Ukraine 2016"> <!-- fallback for manifest.json -->
+
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="GDG DevFest Ukraine 2016">
+
+  <!-- Homescreen icons. -->
+  <link rel="shortcut icon" href="images/favicon/favicon-72.png">
+  <link rel="apple-touch-icon" href="images/touch/homescreen-48.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="images/touch/homescreen-72.png">
+  <link rel="apple-touch-icon" sizes="96x96" href="images/touch/homescreen-96.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="images/touch/homescreen-144.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="images/touch/homescreen-192.png">
+
+  <!-- Tile icon for Win8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="images/touch/homescreen-144.png">
+  <meta name="msapplication-TileColor" content="#ECEFF1">
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <!-- G+ sharing meta data -->
+  <meta itemprop="name" content="GDG DevFest Ukraine 2016">
+  <meta itemprop="description"
+        content="The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts">
+  <meta itemprop="image" content="images/social-share.png">
+  <meta itemprop="startDate" content="2016-09-09T09:00:00+03:00">
+  <meta itemprop="endDate" content="2016-09-10T19:00:00+03:00">
+
+  <!-- Facebook sharing meta data -->
+  <meta property="og:title" content="GDG DevFest Ukraine 2016">
+  <meta property="og:site_name" content="GDG DevFest Ukraine 2016">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://devfest.gdg.org.ua">
+  <meta property="og:description"
+        content="The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts">
+  <meta property="og:type" content="Event">
+  <meta property="og:image" content="images/social-share.png">
+
+  <!-- Twitter meta data -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@gdglviv">
+  <meta name="twitter:title" content="GDG DevFest Ukraine 2016">
+  <meta name="twitter:description"
+        content="The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts">
+  <meta name="twitter:image" content="images/social-share.png">
+
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
+  <link rel="dns-prefetch" href="https://apis.google.com">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Unsupported browser checks need to come before webcomponents.js is loaded,
+       otherwise unsupported browsers will error out and not record a pageview.
+       Analytics lib is also loaded up front for error reporting. -->
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+
+  <style>
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', 'Noto', sans-serif;
+      line-height: 1.4;
+      min-height: 100vh;
+    }
+
+  </style>
+
+  <script>
+
+
+    window.HOVERBOARD = window.HOVERBOARD || {};
+    window.ENV = 'dev';
+    window.PREFIX = '/';
+
+    // setup Polymer options
+    window.Polymer = {lazyRegister: true, dom: 'shadow'};
+
+    // Initializes the analytics.js command queue.
+    window.ga = window.ga || function () {
+        (ga.q = ga.q || []).push(arguments)
+      };
+    ga.l = +new Date;
+
+    // Creates the tracker.
+    ga('create', {
+      trackingId: window.ENV === 'prod' ? 'UA-43643469-8' : 'UA-43643469-9',
+      cookieDomain: 'auto',
+      cookiePath: window.ENV !== 'dev' ? window.PREFIX || '/' : null,
+      siteSpeedSampleRate: 10 // 10% of users.
+    });
+
+    // Setup error tracking before anything else runs.
+    window.onerror = function (message, file, lineNumber, columnNumber, error) {
+      // We don't want to trigger any errors inside window.onerror, so wrap in a try/catch.
+      try {
+        // Some browsers don't support error param yet.
+        if (error !== undefined) {
+          message = error.stack;
+        }
+        ga('send', 'event', 'error', file + ':' + lineNumber, message);
+      } catch (e) {
+        // no-op
+      }
+    };
+
+  </script>
+
+  <link rel="import" href="/src/hoverboard-app.html" async>
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Event",
+      "name": "GDG DevFest Ukraine 2016",
+      "description": "The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts",
+      "startDate": "2016-09-09T09:00:00+03:00",
+      "endDate": "2016-09-10T19:00:00+03:00",
+      "url": "https://devfest.gdg.org.ua",
+      "location": {
+        "@type" : "Place",
+        "name" : "Pivdennyi Expo Center",
+        "address": "36 Shchyretska St, Lviv, Ukraine"
+      }
+    }
+  </script>
+
+</head>
+<body>
+
+<hoverboard-app id="happ"></hoverboard-app>
+
+<script src="scripts/helper/util.js"></script>
+<script src="scripts/helper/elements.js"></script>
+<script src="scripts/bootstrap.js"></script>
+<script src="scripts/helper/service-worker-registration.js"></script>
+<script src="scripts/helper/deferred.js"></script>
+<script src="scripts/metrics.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+<link rel="import" href="../behaviors/localize-behavior.html">
+
+
+<dom-module id="call-to-action">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
+      }
+
+      .container {
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+      }
+
+      .heading {
+        @apply(--layout-flex);
+        @apply(--layout-self-center);
+        margin-bottom: 0 !important;
+      }
+
+      @media (max-width: 599px) {
+        .open-dialog-button {
+          margin-top: 10px;
+        }
+      }
+
+      @media (min-width: 600px) {
+        .container {
+          @apply(--layout-horizontal);
+        }
+
+        .heading {
+          text-align: left;
+        }
+      }
+    </style>
+
+    <div class="container container-narrow">
+      <h4 class="heading">[[localize(app.data.callToAction.videoTitle)]]</h4>
+      <paper-button class="open-dialog-button" on-tap="playVideo">[[localize('action')]]</paper-button>
+    </div>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'call-to-action',
+
+        behaviors: [
+          HOVERBOARD.LocalizeBehavior
+        ],
+
+        playVideo: function () {
+          HOVERBOARD.Elements.Template.openVideo(this.localize(this.app.data.callToAction.videoTitle),
+            this.app.data.callToAction.videoId, true);
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

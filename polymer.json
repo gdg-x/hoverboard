@@ -1,0 +1,14 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/hoverboard-app.html",
+  "fragments": [
+    "src/pages/blog-list.html",
+    "src/pages/blog-page.html",
+    "src/pages/cod-page.html",
+    "src/pages/home-page.html",
+    "src/pages/post-page.html",
+    "src/pages/schedule-page.html",
+    "src/pages/speakers-page.html",
+    "src/pages/team-page.html"
+  ]
+}

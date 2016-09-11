@@ -1,0 +1,118 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+<link rel="import" href="../behaviors/localize-behavior.html">
+<link rel="import" href="ticket-element.html">
+
+
+<dom-module id="tickets-block">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        --iron-icon-fill-color: var(--text-primary-color);
+        --paper-card-background-color: #FFFFFF;
+        display: block;
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
+        text-align: center;
+      }
+
+      .tickets-wrapper {
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
+        @apply(--layout-center-justified);
+      }
+
+      ticket-element {
+        margin: 15px;
+      }
+
+      paper-button {
+        font-size: 0.9em;
+      }
+
+      .details {
+        margin: 10px auto 0;
+        font-size: 14px;
+        max-width: 600px;
+      }
+
+      .buy-button {
+        margin-top: 30px;
+        background: #fff;
+        color: var(--primary-text-color);
+      }
+
+      paper-dialog {
+        background: #fff;
+        color: var(--primary-text-color);
+      }
+
+      paper-dialog paper-button {
+        color: var(--default-primary-color);
+      }
+
+      @media (min-width: 601px) {
+        ticket-element {
+          max-width: 350px;
+        }
+      }
+    </style>
+
+    <div class="container">
+      <div class="block-header">
+        <h4 class="heading">[[localize('tickets-title')]]</h4>
+      </div>
+      <div class="tickets-wrapper">
+        <template is="dom-repeat" items="[[app.data.tickets.elements]]" as="ticket">
+          <ticket-element
+            type="[[localize(ticket.name)]]"
+            price="[[ticket.price]]"
+            currency="[[ticket.currency]]"
+            starts="[[localize(ticket.starts)]]"
+            ends="[[localize(ticket.ends)]]"
+            info="[[localize(ticket.info)]]"
+            sold-out="[[ticket.soldOut]]"
+            sold-out-text="[[localize('sold-out-tickets')]]"
+          ></ticket-element>
+        </template>
+      </div>
+      <div class="details">[[localize('tickets-details')]]</div>
+      <a href$="[[app.data.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
+        <paper-button class="buy-button" raised>[[localize('buy-ticket')]]</paper-button>
+      </a>
+    </div>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        is: 'tickets-block',
+
+        behaviors: [
+          HOVERBOARD.LocalizeBehavior
+        ],
+
+        ready: function () {
+          HOVERBOARD.Elements.Tickets = this;
+        },
+
+        _trackBuyClick: function (e) {
+          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', e.currentTarget.href);
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

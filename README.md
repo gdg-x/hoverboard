@@ -1,226 +1,137 @@
-# [beta] Project Hoverboard - GDG DevFest 2015 site template
+![preview-web](https://cloud.githubusercontent.com/assets/2954281/17777476/5dbbbe1c-6569-11e6-9cc4-77185ae9bf92.png)
 
-## About
-Project Hoverboard is the next generation conference website template after [Project Zeppelin](https://github.com/gdg-x/zeppelin) and more optimized version - [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
+# Project Hoverboard 
 
-Template was build using [Polymer](http://polymer-project.org) according to [Material Design](http://www.google.com/design/spec/material-design/introduction.html) guidelines.
-The site is **responsive**, **fast** and supports **offline access** (if you are using HTTPS protocol).
+[![Join the chat at https://gitter.im/gdg-x/hoverboard](https://badges.gitter.im/gdg-x/hoverboard.svg)](https://gitter.im/gdg-x/hoverboard?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Template is brought by [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy) from [GDG Lviv](http://lviv.gdg.org.ua/).
+> Project Hoverboard is the next generation conference website template after 
+[Project Zeppelin](https://github.com/gdg-x/zeppelin) and more optimized 
+version - [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
 
-*Do you like it?* Show your support - please, **star the project**.
+> Template is brought by [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy) 
+from [GDG Lviv](http://lviv.gdg.org.ua/).
 
-### Live demo [GDG DevFest Ukraine 2015](http://devfest.gdg.org.ua/)
+> *Do you :heart: it?* Show your support - please, :star: the project.
 
-#### The Hoverboard is still under development and can bring breaking changes shortly. If you are looking for stable website template try [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
+:zap: [Live demo](https://hoverboard-dev.firebaseapp.com/)
 
-## Features
-* Material design
-* Polymer
-* Responsive
-* Integrated speakers and sessions management
-* SVG icons
-* SEO friendly
-* Optimized and fast
-* Offline access
+### Features
+:white_check_mark: Polymer  
+:white_check_mark: [PRPL pattern](https://www.polymer-project.org/1.0/toolbox/server)  
+:white_check_mark: Offline access  
+:white_check_mark: i18n  
+:white_check_mark: Material design  
+:white_check_mark: Animations  
+:white_check_mark: Integrated speakers and sessions management  
+:white_check_mark: SEO friendly  
+:white_check_mark: Optimized and fast  
+:white_check_mark: Editable theme colors  
+:white_check_mark: Quick deploy  
 
+### Setup
+:book: [Full documentation](/docs/).
 
-## Quick-start guide
-1.  [Fork](https://github.com/gdg-x/hoverboard/fork) this repo and clone locally or [download](https://github.com/gdg-x/hoverboard/archive/master.zip) and extract Project Hoverboard to where you want to work.
-2.  Install [Node.js](www.nodejs.org).
-3.  Run `npm install -g gulp bower && npm install && bower install` from the root of the folder.
-4.  Modify template to suit your needs.
 
+###### Prerequisites
 
-#### Requirements
+Install [polymer-cli](https://github.com/Polymer/polymer-cli):
 
-Project dependencies:
+    npm i -g polymer-cli@0.12.0
+    
+and [Bower](https://bower.io/):
+    
+    npm i -g bower
+    
+:point_right: **[Fork](https://github.com/gdg-x/hoverboard/fork) this repository** and clone it locally.
 
-- Node.js used to run JavaScript tools from the command line.
-- npm, the node package manager, installed with Node.js and used to install Node.js packages.
-- gulp, a Node.js-based build tool.
-- bower, a Node.js-based package manager used to install front-end packages (like Polymer).
+##### Install dependencies
 
-**To install dependencies:**
+    bower install
 
-1)  Check your Node.js version.
+##### Start the development server
 
-```sh
-node --version
-```
+This command serves the app at `http://localhost:8080` and provides basic URL
+routing for the app:
 
-The version should be 0.12.x or above.
+    polymer serve
+    
+:book: Read more in [setup docs](/docs/tutorials/set-up.md).
 
-2)  If you don't have Node.js installed, or you have a lower version, go to [nodejs.org](https://nodejs.org) and click on the big green Install button.
 
-3)  Install `gulp` and `bower` globally.
+### Build
 
-```sh
-npm install -g gulp bower
-```
+This command performs HTML, CSS, and JS minification on the application
+dependencies, and generates a service-worker.js file with code to pre-cache the
+dependencies based on the entrypoint and fragments specified in `polymer.json`.
+The minified files are output to the `build/unbundled` folder, and are suitable
+for serving from a HTTP/2+Push compatible server.
 
-This lets you run `gulp` and `bower` from the command line.
+In addition the command also creates a fallback `build/bundled` folder,
+generated using fragment bundling, suitable for serving from non
+H2/push-compatible servers or to clients that do not support H2/Push.
 
-4)  Install the projects's local `npm` and `bower` dependencies.
+    polymer build
+    
+:book: Read more in [deploy docs](/docs/tutorials/deploy.md).   
 
-```sh
-cd hoverboard && npm install && bower install
-```
 
-This installs the element sets and tools the hoverboard template requires to build and serve apps.
+### Who uses the template?
 
+Going to use the template? Go on! The only thing we ask - let us know at with a 
+pull request, so we can include you in this list.
 
-## Development workflow
+| [GDG DevFest Ukraine](http://devfest.gdg.org.ua) |
+| :------------ |
+| [GDG DevFest Sao Paulo](http://sp.devfest.com.br)  |
+| [GDG DevFest Hamburg 2015](http://devfest.de)  |
+| [GDG DevFest Mezam 2015](https://devfest-mezam.gdgbambili.xyz) |
+| [GDG DevFest Silicon Valley 2015](http://devfest2015.gdgsv.com/) |
+| [GDG DevFest Belgium 2015](http://devfest.be/) |
+| [GDG DevFest South East Nigeria 2015](http://www.devfestse.com) |
+| [GDG DevFest Istanbul 2015](https://www.devfesttr.com) |
+| [GDG Cáceres CodeWeek 2015](http://codeweek.gdgcaceres.es) |
+| [GDG Bingham University Website](http://bhu.gdg.ng) |
+| [Google I/O Extended 2016 Kuala Lumpur](https://ioxkl2016.firebaseapp.com) |
+| [GDG DevFest Hamburg 2016](https://hamburg.devfest.de) |
 
-#### Serve / watch
+### Roadmap :rocket:
+:x: Admin panel  
+:x: Firebase Integration   
+:x: My schedule  
+:x: Push notification  
+:x: ES2015  
+:x: Accessibility  
+:x: Unit/Integration Tests  
+:point_right: __Propose your feature with [creating an issue](https://github.com/gdg-x/hoverboard/issues/new)__
 
-```sh
-gulp serve
-```
+### Contributing
 
-This outputs an IP address you can use to locally test and another that can be used on devices connected to your network.
+Project Hoverboard is still under development, and it is open for contributions. 
+Feel free to send PR. If you have any questions, feel free to contact 
+[Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy).
 
-#### Build & Vulcanize
+##### General workflow
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Make your changes
+4. Run the tests, adding new ones for your code if necessary
+5. Commit your changes (`git commit -am 'Added some feature'`)
+6. Push to the branch (`git push origin my-new-feature`)
+7. Create new Pull Request
 
-```sh
-gulp
-```
+:book: Read complete [contributing guide](CONTRIBUTING.md).
 
-Build and optimize the current project, ready for deployment. This includes linking as well as vulcanization, image, script, stylesheet and HTML optimization and minification.
 
-#### Build, Vulcanize, and Deploy
+### Contributors :sparkles:
+See [list of contributors](https://github.com/gdg-x/hoverboard/graphs/contributors).
 
-```sh
-gulp deploy
-```
+__Maintainer:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
 
-**Warning:** don't forget to [edit destination repository](https://github.com/gdg-x/hoverboard/blob/master/gulpfile.js#L205) to deploy the website.
 
-## Next steps in the project
-* Use generator to configure the template from files
-* Refactor styles
-* Schedule page
-* Countdown
-* Testimonials block
-* Venue block
+######The GDG App, GDG[x] are not endorsed and/or supported by Google, the corporation.
 
-## Application Theming
 
-Polymer 1.0 introduces a shim for CSS custom properties. We take advantage of this in `app/styles/app-theme.html` and `app/styles/tags-color.html` to provide theming for your application. You can also find our presets for Material Design breakpoints in this file.
+### License
 
-[Read more](https://www.polymer-project.org/1.0/docs/devguide/styling.html) about CSS custom properties.
-
-_Ok, to be honest, it should be refactored ASAP._
-
-## Dependency Management
-
-Polymer uses [Bower](http://bower.io) for package management. This makes it easy to keep your elements up to date and versioned. For tooling, we use npm to manage Node.js-based dependencies.
-
-## Service Worker
-
-Template offers an offline-first experience thanks to Service Worker and the [Platinum Service Worker elements](https://github.com/PolymerElements/platinum-sw). New to Service Worker? Read the following [introduction](http://www.html5rocks.com/en/tutorials/service-worker/introduction/) to understand how it works.
-
-#### I get an error message about "Only secure origins are allowed"
-
-Service Workers are only available to "secure origins" (HTTPS sites, basically) in line with a policy to prefer secure origins for powerful new features. However http://localhost is also considered a secure origin, so if you can, developing on localhost is an easy way to avoid this error. For production, your site will need to support HTTPS.
-
-#### How do I debug Service Worker?
-
-If you need to debug the event listener wire-up use `chrome://serviceworker-internals`.
-
-#### What are those buttons on chrome://serviceworker-internals?
-
-This page shows your registered workers and provides some basic operations.
-
-* Unregister: Unregisters the worker.
-* Start: Starts the worker. This would happen automatically when you navigate to a page in the worker's scope.
-* Stop: Stops the worker.
-* Sync: Dispatches a 'sync' event to the worker. If you don't handle this event, nothing will happen.
-* Push: Dispatches a 'push' event to the worker. If you don't handle this event, nothing will happen.
-* Inspect: Opens the worker in the Inspector.
-
-#### Not yet ready for Service Worker support?
-
-If for any reason you decide that Service Worker support isn't for you, you can disable it from your project using these 3 steps:
-
-* Remove 'precache' from the list in the 'default' gulp task ([gulpfile.js](https://github.com/PolymerElements/polymer-starter-kit/blob/master/gulpfile.js))
-* Remove the two Platinum Service Worker elements (platinum-sw/..) in [app/elements/elements.html](https://github.com/PolymerElements/polymer-starter-kit/blob/master/app/elements/elements.html)
-* Remove references to the platinum-sw elements from your application [index](https://github.com/PolymerElements/polymer-starter-kit/blob/master/app/index.html).
-
-You will also want to navigate to `chrome://serviceworker-internals` and unregister any Service Workers registered by Hoverboard for your app just in case there's a copy of it cached.
-
-## Frequently Asked Questions
-
-> Where do I customize my application theme?
-
-Theming can be achieved using [CSS Custom properties](https://www.polymer-project.org/1.0/docs/devguide/styling.html#xscope-styling-details) via [app/styles/app-theme.html](https://github.com/PolymerElements/polymer-starter-kit/blob/master/app/styles/app-theme.html).
-You can also use `app/styles/main.css` for pure CSS stylesheets (e.g for global styles), however, note that Custom properties will not work there under the shim.
-
-A [Polycast](https://www.youtube.com/watch?v=omASiF85JzI) is also available that walks through theming using Polymer 1.0.
-
-> Where do I configure routes in my application?
-
-This can be done via [`app/elements/routing.html`](https://github.com/PolymerElements/polymer-starter-kit/blob/master/app/elements/routing.html). We use Page.js for routing, and new routes
-can be defined in this import. We then toggle which `<iron-pages>` page to display based on the [selected](https://github.com/PolymerElements/polymer-starter-kit/blob/master/app/index.html#L105) route.
-
-> Something has failed during installation. How do I fix this?
-
-Our most commonly reported issue is around system permissions for installing Node.js dependencies.
-We recommend following the [fixing npm permissions](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md)
-guide to address any messages around administrator permissions being required. If you use `sudo`
-to work around these issues, this guide may also be useful for avoiding that.
-
-If you run into an exception that mentions five optional dependencies failing (or an `EEXIST` error), you
-may have run into an npm [bug](https://github.com/npm/npm/issues/6309). We recommend updating to npm 2.11.0+
-to work around this. You can do this by opening a Command Prompt/terminal and running `npm install npm@2.11.0 -g`. If you are on Windows,
-Node.js (and npm) may have been installed into `C:\Program Files\`. Updating npm by running `npm install npm@2.11.0 -g` will install npm
-into `%AppData%\npm`, but your system will still use the npm version. You can avoid this by deleting your older npm from `C:\Program Files\nodejs`
-as described [here](https://github.com/npm/npm/issues/6309#issuecomment-67549380).
-
-If the issue is to do with a failure somewhere else, you might find that due to a network issue
-a dependency failed to install correctly. We recommend running `npm cache clean` and deleting the `node_modules` directory followed by
-`npm install` to see if this corrects the problem. If not, please check the [issue tracker](https://github.com/PolymerElements/polymer-starter-kit/issues) in case
-there is a workaround or fix already posted.
-
-
-> I'm having trouble getting Vulcanize to build my project on Windows fully. Help?
-
-Some Windows users have run into trouble with the `elements.vulcanized.html` file in their `dist` folder
-not being correctly vulcanized. This can happen if your project is in a folder with a name containing a
-space. You can work around this issue by ensuring your path doesn't contain one.
-
-There is also an [in-flight](https://github.com/PolymerElements/polymer-starter-kit/issues/62#issuecomment-108974016) issue
-where some are finding they need to disable the `inlineCss` option in our configuration for Vulcanize
-to build correctly. We are still investigating this, however for the time-being use the workaround if
-you find your builds getting stuck here.
-
-
-> How do I add new JavaScript files to Hoverboard so they're picked up by the build process?
-
-At the bottom of `app/index.html`, you will find a building block that can be used to include additional
-scripts for your app. Build blocks are just normal script tags that are wrapped in an HTML
-comment that indicates where to concatenate and minify their final contents to.
-
-Below, we've added in `script2.js` and `script3.js` to this block. The line
-`<!-- build:js scripts/app.js -->` specifies that these scripts will be squashed into `scripts/app.js`
-during a build.
-
-```html
-<!-- build:js scripts/app.js -->
-<script src="scripts/app.js"></script>
-<script src="scripts/script2.js"></script>
-<script src="scripts/script3.js"></script>
-<!-- endbuild-->
-```
-
-## Who is using template?
-
-Going to use template? Go on! The only thing we ask - let us know at [lviv@gdg.org.ua](mailto:lviv@gdg.org.ua) so we can include you to this list, or make a pull request.
-
-## Contributing
-
-Project Hoverboard is still under development and it is open for contributions. Feel free to send PR. If you have any questions, feel free to contact [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy).
-
-## License
-
-Project is published under the [MIT license](https://github.com/gdg-x/hoverboard/blob/master/LICENSE.md) Feel free to clone and modify repo as you want, but don't forget to add reference to authors :)
+Project is published under the [MIT license](https://github.com/gdg-x/hoverboard/blob/master/LICENSE.md).  
+Feel free to clone and modify repo as you want, but don't forget to add reference to authors :)

@@ -1,0 +1,356 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button-light.html">
+<link rel="import" href="../../bower_components/paper-spinner/paper-spinner.html">
+
+<link rel="import" href="../../bower_components/marked-element/marked-element.html">
+
+<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+
+<link rel="import" href="../elements/footer-block.html">
+<link rel="import" href="../behaviors/localize-behavior.html">
+<link rel="import" href="../behaviors/page-behavior.html">
+<link rel="import" href="../behaviors/utils-behavior.html">
+<link rel="import" href="../behaviors/share-behavior.html">
+
+
+<dom-module id="post-page">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        --grid-gutter: 4px;
+        --grid-item-height: 300px;
+      }
+
+      .post-wrapper > .container {
+        padding-top: 20px;
+        max-width: 896px;
+      }
+
+      .post-wrapper > .container:not(.latest-post-wrapper) {
+        padding-bottom: 20px;
+      }
+
+      .spinner-wrapper {
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+        @apply(--layout-fit);
+        min-height: 50vh;
+        max-height: 50vh;
+        pointer-events: none;
+      }
+
+      .post-wrapper {
+        background: #fff;
+      }
+
+      .latest-post-wrapper {
+        @apply(--layout-vertical);
+        padding-right: var(--grid-gutter);
+        padding-left: var(--grid-gutter);
+      }
+
+      .latest-post {
+        @apply(--layout-flex);
+      }
+
+      .latest-post:nth-of-type(2) {
+        margin-top: 10px;
+      }
+
+      .latest-post-label {
+        margin: 0 var(--grid-gutter);
+        font-size: 14px;
+        color: var(--secondary-text-color);
+      }
+
+      .post {
+        @apply(--layout-vertical);
+        height: var(--grid-item-height);
+        margin: var(--grid-gutter) 0;
+        text-decoration: none;
+      }
+
+      .image {
+        height: 100%;
+        background: no-repeat 50% 50%;
+      }
+
+      .title {
+        @apply(--layout-horizontal);
+        @apply(--layout-center-center);
+        padding: 12px;
+        min-height: 42px;
+        font-size: 20px;
+        text-align: center;
+        letter-spacing: .8px;
+        line-height: 1.05;
+        color: #fff;
+      }
+
+      .share-label {
+        margin-top: 72px;
+        display: block;
+        color: var(--secondary-text-color);
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 14px;
+      }
+
+      button[is=paper-icon-button-light] {
+        margin: 16px;
+        padding: 8px;
+        width: 40px;
+        height: 40px;
+      }
+
+      @media (min-width: 601px) {
+        .latest-post-wrapper {
+          @apply(--layout-horizontal);
+        }
+
+        .latest-post:nth-of-type(2) {
+          margin-top: 0;
+          text-align: right;
+        }
+
+        .post {
+          margin: var(--grid-gutter);
+        }
+      }
+    </style>
+
+    <div id="animationWrapper">
+      <div class="post-wrapper">
+        <div class="container" cascaded>
+          <marked-element class="post-content" markdown="[[postBody]]">
+            <div class="markdown-html"></div>
+          </marked-element>
+
+          <span class="share-label">[[localize('share-with')]]</span>
+          <div layout horizontal center-center wrap>
+            <button is="paper-icon-button-light" class="share-button" on-tap="share" share="gplus">
+              <iron-icon icon="gplus"></iron-icon>
+            </button>
+            <button is="paper-icon-button-light" class="share-button" on-tap="share" share="facebook">
+              <iron-icon icon="facebook"></iron-icon>
+            </button>
+            <button is="paper-icon-button-light" class="share-button" on-tap="share" share="twitter">
+              <iron-icon icon="twitter"></iron-icon>
+            </button>
+            <button is="paper-icon-button-light" class="share-button" on-tap="share" share="copy">
+              <iron-icon icon="link"></iron-icon>
+            </button>
+          </div>
+        </div>
+
+        <div class="container latest-post-wrapper">
+          <div class="latest-post">
+            <template is="dom-if" if="{{_latestPosts.0}}">
+              <span class="latest-post-label">Next post</span>
+              <a href$="/blog/posts/[[_latestPosts.0.id]]/"
+                 class="post" cascaded>
+                <iron-image class="image" src="[[_latestPosts.0.image]]"
+                            style$="background-color: [[_latestPosts.0.primaryColor]];" sizing="cover"
+                            preload
+                            fade></iron-image>
+                <div class="title" style$="background-color: [[_latestPosts.0.secondaryColor]];">
+                  [[_latestPosts.0.title]]
+                </div>
+              </a>
+            </template>
+          </div>
+          <div class="latest-post">
+            <template is="dom-if" if="[[_latestPosts.1]]">
+              <span class="latest-post-label">Previous post</span>
+              <a href$="/blog/posts/[[_latestPosts.1.id]]/"
+                 class="post" cascaded>
+                <iron-image class="image" src="[[_latestPosts.1.image]]"
+                            style$="background-color: [[_latestPosts.1.primaryColor]];" sizing="cover"
+                            preload
+                            fade></iron-image>
+                <div class="title" style$="background-color: [[_latestPosts.1.secondaryColor]];">
+                  [[_latestPosts.1.title}}
+                </div>
+              </a>
+            </template>
+          </div>
+        </div>
+      </div>
+
+
+      <footer-block app="{{app}}" cascaded></footer-block>
+    </div>
+
+    <div class="spinner-wrapper">
+      <paper-spinner id="spinner" active></paper-spinner>
+    </div>
+
+    <iron-ajax id="ajax" url="[[_postUrl]]" handle-as="text" last-response="{{postBody}}"
+               on-response="_postLoaded"></iron-ajax>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'post-page',
+
+        behaviors: [
+          Polymer.NeonAnimationRunnerBehavior,
+          Polymer.NeonSharedElementAnimatableBehavior,
+          HOVERBOARD.LocalizeBehavior,
+          HOVERBOARD.PageBehavior,
+          HOVERBOARD.UtilsBehavior,
+          HOVERBOARD.ShareBehavior
+        ],
+
+        properties: {
+          postId: {
+            type: String,
+            notify: true
+          },
+
+          posts: {
+            type: Array
+          },
+
+          _loaded: {
+            type: Boolean,
+            value: false
+          },
+
+          _post: {
+            type: Object
+          },
+
+          _latestPosts: {
+            type: Array,
+            value: []
+          },
+
+          animationConfig: {
+            type: Object,
+            value: function () {
+              var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
+              var cascadedArray = Array.prototype.slice.call(cascaded);
+              return {
+                'entry': [{
+                  name: 'fade-in-animation',
+                  animation: 'fade-in-animation',
+                  node: this,
+                  timing: {
+                    delay: 500
+                  }
+                }],
+                'exit': [{
+                  name: 'cascaded-animation',
+                  animation: 'transform-animation',
+                  transformTo: 'translate3d(0, 100%, 0)',
+                  nodes: cascadedArray
+                }, {
+                  name: 'fade-out-animation',
+                  animation: 'fade-out-animation',
+                  node: this
+                }],
+                'postLoaded': [{
+                  name: 'cascaded-animation',
+                  animation: 'transform-animation',
+                  transformFrom: 'translate3d(0, 100%, 0)',
+                  nodes: cascadedArray,
+                  timing: {
+                    delay: 500
+                  }
+                }, {
+                  name: 'fade-in-animation',
+                  animation: 'fade-in-animation',
+                  nodes: cascadedArray,
+                  timing: {
+                    delay: 500
+                  }
+                }, {
+                  name: 'scale-down-animation',
+                  animation: 'scale-down-animation',
+                  node: this.$.spinner
+                }]
+              };
+            }
+          }
+        },
+
+        observers: [
+          '_postChanged(posts, postId)'
+        ],
+
+        listeners: {
+          'neon-animation-finish': '_onNeonAnimationFinish'
+        },
+
+        _postChanged: function () {
+          if (this.postId) {
+            this.$.animationWrapper.style.opacity = 0;
+            this.$.animationWrapper.style.display = 'none';
+            this.$.spinner.style.opacity = 1;
+
+            var postIndex = this._getIndexByProperty(this.posts, 'id', this.postId);
+
+            this._latestPosts[0] = postIndex > 0 ? this.posts[postIndex - 1] : null;
+            this._latestPosts[1] = postIndex < this.posts.length - 1 ? this.posts[postIndex + 1] : null;
+            this.notifyPath('_latestPosts', this._latestPosts.slice());
+
+            this._post = this.posts[postIndex];
+            this._updateHeaderSettings();
+            this.notifyPath('_post.date', new Date(this._post.posted).toDateString().slice(4));
+
+            this._postUrl = '/data/posts/' + this._post.posted + '-' + this.postId + '.markdown';
+            this.$.ajax.generateRequest();
+          }
+        },
+
+        _postLoaded: function () {
+          this._loaded = true;
+          this.async(function () {
+            this.$.animationWrapper.style.opacity = 1;
+            this.$.animationWrapper.style.display = 'block';
+          }, 100);
+          this.playAnimation('postLoaded');
+          this.postId = null;
+          HOVERBOARD.Analytics.trackEvent('blog', 'open post', this._post.title);
+        },
+
+        _updateHeaderSettings: function () {
+          if (this._post) {
+            this.set('app.headerSettings', {
+              backgroundColor: this._post.primaryColor,
+              backgroundImage: this._post.image,
+              fontColor: '#fff',
+              tabBarColor: '#fff',
+              title: this._post.title,
+              subtitle: new Date(this._post.posted).toDateString().slice(4)
+            });
+          }
+        },
+
+        _onNeonAnimationFinish: function () {
+          if (this._loaded) {
+            this.$.spinner.style.opacity = 0;
+          }
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

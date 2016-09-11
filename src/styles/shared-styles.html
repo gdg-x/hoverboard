@@ -1,0 +1,329 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="mixins.html">
+<link rel="import" href="icons.html">
+
+<dom-module id="shared-styles">
+  <template>
+    <style>
+      :root {
+        /* Generate theme at https://www.materialpalette.com */
+
+        /* Primary colors */
+        --dark-primary-color:       #F57C00;
+        --default-primary-color:    #FF9800;
+        --light-primary-color:      #FFE0B2;
+        --text-primary-color:       #212121; /* text / icons */
+
+        /* Accent colors */
+        --accent-color:             #03A9F4;
+
+        /* Background colors */
+        --primary-background-color:   #FFE0B2;
+
+        /* Text colors */
+        --primary-text-color:       #212121;
+        --secondary-text-color:     #727272;
+        --disabled-text-color:      #BDBDBD;
+
+        /* Other colors */
+        --divider-color:            #B6B6B6;
+
+        /* --- End of replace section --- */
+
+        --secondary-background-color: #FFFFFF;
+
+        /* Footer */
+        --footer-background-color:    #fcfcfc;
+        --footer-text-color:          #757575;
+
+        /* Tags colors */
+        --general: #bdbdbd;
+        --android: #78c257;
+        --web: #2196f3;
+        --cloud: #3f51b5;
+        --community: #e91e63;
+        --it: #9E9E9E;
+        --angular-js: #e0343d;
+        --angular-js2: #e0343d;
+        --protractor: #e0343d;
+        --polymer: #d81b60;
+        --dart: #00b4aa;
+        --firebase: #ff9800;
+        --appengine: #0d47a1;
+        --serviceworkers: #311b92;
+        --web-rtc: #7b1fa2;
+        --kubernetes: #326de6;
+        --data-sync: #006064;
+        --gae: #ffc107;
+        --ndk: #4caf50;
+        --ble: #1565c0;
+        --ci: #cddc39;
+        --tv: #d32f2f;
+        --grpc: #607d8b;
+        --ux: #9c27b0;
+        --material-design: #009688;
+        --entrepreneurship: #673ab7;
+        --design-patterns: #673ab7;
+        --libraries: #ffc107;
+        --realm: #ff9800;
+        --animations: #311b92;
+        --go: #009688;
+        --open-stack: #e0343d;
+        --docker: #2196f3;
+        --chrome-extensions: #ff9800;
+        --progressive-web-apps: #00b4aa;
+      }
+
+      [layout] {
+        @apply(--layout);
+      }
+
+      [layout][horizontal] {
+        @apply(--layout-horizontal);
+      }
+
+      [layout][vertical] {
+        @apply(--layout-vertical);
+      }
+
+      [layout][center] {
+        @apply(--layout-center);
+      }
+
+      [layout][center-center] {
+        @apply(--layout-center-center);
+      }
+
+      [flex] {
+        @apply(--layout-flex);
+      }
+
+      [flex-auto] {
+        @apply(--layout-flex-auto);
+      }
+
+      [two] {
+        @apply(--layout-flex-2);
+      }
+
+      [end-justified] {
+        @apply(--layout-end-justified);
+      }
+
+      [end] {
+        @apply(--layout-end);
+      }
+
+      [justified] {
+        @apply(--layout-justified);
+      }
+
+      [self-center] {
+        @apply(--layout-self-center);
+      }
+
+      [self-end] {
+        @apply(--layout-self-end);
+      }
+
+      [wrap] {
+        @apply(--layout-wrap);
+      }
+
+      [inline] {
+        @apply(--layout-inline);
+      }
+
+      [relative] {
+        position: relative;
+      }
+
+      [fit] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      [show] {
+        display: block !important;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+      }
+      body,
+      .markdown-html {
+        font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: var(--primary-text-color);
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 1.4;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      .markdown-html h1,
+      .markdown-html h2,
+      .markdown-html h3,
+      .markdown-html h4 {
+        margin: 0;
+        font-weight: 300;
+      }
+
+      a,
+      .anchor-like,
+      .markdown-html a {
+        color: var(--default-primary-color);
+        text-decoration: none;
+      }
+
+      .placeholder-color {
+        background-color: var(--primary-background-color);
+      }
+
+      .container {
+        padding: 40px 16px;
+      }
+
+      .container-narrow {
+        padding: 20px 16px;
+      }
+
+      .container .heading {
+        margin-bottom: 20px;
+        font-size: 32px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .page-header {
+        margin: -90px auto 0;
+        padding-bottom: 20px;
+      }
+
+      .page-title {
+        margin-left: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 20px;
+        color: #fff;
+        pointer-events: none;
+      }
+
+      .markdown-html img {
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 100%;
+        display: block;
+      }
+
+      @media (min-width: 769px) {
+        .container {
+          margin: 0 auto;
+          padding: 60px 16px;
+          max-width: 896px;
+        }
+
+        .container-narrow {
+          padding: 30px 16px;
+        }
+
+        .container .heading {
+          margin-bottom: 40px;
+        }
+
+        .page-header {
+          margin: -170px auto 0;
+          padding-bottom: 0;
+        }
+
+        .page-title {
+          font-size: 42px;
+        }
+      }
+
+      @media (min-width: 1400px) {
+        .container {
+          max-width: 1280px;
+        }
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .align-pb-block {
+        margin-left: -9px;
+      }
+
+      [show] {
+        transition: opacity 0.5s;
+        opacity: 1 !important;
+      }
+
+      [hide] {
+        transition: opacity 0.5s;
+        opacity: 0 !important;
+      }
+
+      paper-dialog-scrollable {
+        padding: 0;
+        margin: 0;
+
+        --paper-dialog-scrollable: {
+          padding: 0;
+        };
+      }
+
+      .scrollable {
+        @apply(--layout-scroll);
+      }
+
+      .noscroll {
+        overflow: hidden;
+      }
+
+      paper-button.primary {
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
+      }
+
+      paper-tabs {
+        --paper-tabs-selection-bar-color: currentcolor;
+      }
+
+      paper-tabs paper-tab {
+        --paper-tab-ink: currentcolor;
+        --paper-tab-content: {
+          opacity: 1 !important;
+        };
+      }
+
+      paper-tab[link] {
+        padding: 0;
+      }
+
+      paper-tab[link] a {
+        padding: 0 12px;
+      }
+
+      paper-dialog {
+        color: inherit;
+        --paper-font-title: {
+        }; /* nuke paper-dialog's styling */
+      }
+    </style>
+  </template>
+</dom-module>

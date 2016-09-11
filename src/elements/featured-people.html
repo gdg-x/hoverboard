@@ -1,0 +1,157 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+<link rel="import" href="../behaviors/utils-behavior.html">
+<link rel="import" href="../behaviors/localize-behavior.html">
+
+
+<dom-module id="featured-people">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+        background: #fff;
+      }
+
+      .container {
+        padding-bottom: 30px;
+        text-align: center;
+      }
+
+      .people-wrapper {
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
+        margin-top: 40px;
+      }
+
+      .person {
+        @apply(--layout-vertical);
+        @apply(--layout-center);
+        color: var(--primary-text-color);
+        width: 50%;
+      }
+
+      .photo {
+        @apply(--img-circle);
+        height: 70px;
+        width: 70px;
+      }
+
+      .name {
+        margin-top: 5px;
+        padding: 0 16px;
+        line-height: .9;
+      }
+
+      .company {
+        padding: 0 16px;
+        display: block;
+        font-size: .7em;
+        line-height: 1.8;
+      }
+
+      .block-link {
+        margin-top: 25px;
+        display: block;
+        color: inherit;
+        font-size: .9em;
+      }
+
+      .company-logo {
+        margin: 5px auto;
+        width: 80px;
+        height: 20px;
+      }
+
+      @media (max-width: 600px) {
+        .person:nth-child(1),
+        .person:nth-child(2) {
+          margin-bottom: 40px;
+        }
+      }
+
+      @media (min-width: 601px) {
+        .photo {
+          height: 120px;
+          width: 120px;
+        }
+
+        .person {
+          @apply(--layout-flex);
+        }
+      }
+    </style>
+
+    <div class="container">
+      <h4 class="heading">[[localize('featured-people-title')]]</h4>
+      <div class="people-wrapper">
+        <template is="dom-repeat" items="[[featuredPeople]]" as="person">
+          <a href$="/speakers/[[person.id]]" class="person">
+            <iron-image
+              class="photo"
+              src="[[person.photoUrl]]"
+              sizing="cover"
+            ></iron-image>
+            <iron-image
+              class="company-logo"
+              src="[[person.companyLogo]]"
+              sizing="contain"
+            ></iron-image>
+            <h4 class="name">[[person.name]]</h4>
+            <span class="company">[[person.country]]</span>
+          </a>
+        </template>
+      </div>
+      <div>
+        <a href="/speakers" class="block-link">
+          <paper-button>[[localize('featured-people-view-all')]]</paper-button>
+        </a>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'featured-people',
+
+        behaviors: [
+          HOVERBOARD.LocalizeBehavior,
+          HOVERBOARD.UtilsBehavior
+        ],
+
+        properties: {
+          people: {
+            type: Array,
+            observer: '_peopleChanged'
+          }
+        },
+
+        _peopleChanged: function () {
+          var people = this._toArray(this.people),
+            filteredPeople = [];
+          for (var i = 0, length = people.length; i < length; i++) {
+            if (people[i].featured) {
+              filteredPeople.push(people[i]);
+            }
+          }
+          this.featuredPeople = this._randomOrder(filteredPeople).slice(0, 4);
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

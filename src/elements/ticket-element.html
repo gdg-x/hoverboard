@@ -1,0 +1,197 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+
+
+<dom-module id="ticket-element">
+
+  <template>
+
+    <style>
+      :host {
+        @apply(--layout);
+        @apply(--layout-flex);
+        @apply(--layout-justified);
+        @apply(--shadow-elevation-2dp);
+        @apply(--shadow-transition);
+        --ticket-color: #fff;
+        --background-color: var(--default-primary-color);
+
+        background: var(--ticket-color);
+        position: relative;
+        -webkit-flex: 1 1 auto;
+        border-radius: 3px;
+        user-select: none;
+      }
+
+      .inner {
+        @apply(--layout-horizontal);
+        @apply(--layout-center-justified);
+        @apply(--layout-flex);
+        margin-left: 15px;
+        position: relative;
+        color: var(--primary-text-color);
+        border-radius: 3px;
+      }
+
+      .punch {
+        background: var(--background-color);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: 50%;
+        box-shadow: inset -2px 0 1px rgba(0, 0, 0, 0.12);
+        transform: translate3d(-50%, -50%, 0);
+        z-index: 1;
+      }
+
+      .main {
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+        margin: 30px 0;
+      }
+
+      .headline {
+        font-weight: 300;
+      }
+
+      .side {
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+        width: 50px;
+        border-left: 2px dotted var(--background-color);
+        overflow: hidden;
+      }
+
+      .side-content {
+        color: var(--primary-text-color);
+        font-size: 20px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+        transform: rotate(-90deg) translate3d(0, 0, 0);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .headline {
+        margin: 0 30px;
+        font-size: 50px;
+        line-height: 1;
+      }
+
+      .divider {
+        width: 100%;
+        background: linear-gradient(to right, transparent 15%, var(--primary-text-color) 50%, transparent 85%) no-repeat 0 50%;
+        background-size: 100% 1px;
+        text-align: center;
+      }
+
+      iron-icon {
+        padding: 3px;
+        background: var(--ticket-color);
+        fill: var(--primary-text-color);
+      }
+
+      .dates {
+        font-size: 16px;
+        color: var(--secondary-text-color);
+      }
+
+      .additional-info {
+        font-size: 12px;
+        color: var(--disabled-text-color);
+      }
+
+      .overlay {
+        @apply(--layout-fit);
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 3px;
+        color: var(--default-primary-color);
+        font-size: 24px;
+        font-weight: 400;
+        text-transform: uppercase;
+      }
+
+      .overlay[hidden] {
+        display: none;
+      }
+    </style>
+
+    <div class="punch"></div>
+    <div class="inner">
+      <div class="main">
+        <div class="headline">[[price]][[currency]]</div>
+        <div class="divider">
+          <iron-icon icon="icons:star"></iron-icon>
+        </div>
+        <div class="dates">[[starts]] - [[ends]]</div>
+        <template is="dom-if" if="[[info]]">
+          <div class="additional-info">[[info]]</div>
+        </template>
+      </div>
+    </div>
+    <div class="side">
+      <div class="side-content">[[type]]</div>
+    </div>
+    <div class="overlay" hidden$="{{!soldOut}}">[[soldOutText]]</div>
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'ticket-element',
+
+        behaviors: [
+          HOVERBOARD.LocalizeBehavior
+        ],
+
+        properties: {
+          type: {
+            type: String
+          },
+
+          price: {
+            type: Number
+          },
+
+          currency: {
+            type: String
+          },
+
+          starts: {
+            type: String
+          },
+
+          ends: {
+            type: String
+          },
+
+          info: {
+            type: String
+          },
+
+          soldOut: {
+            type: Boolean,
+            value: false
+          },
+
+          soldOutText: {
+            type: String
+          }
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

@@ -1,0 +1,142 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="../behaviors/localize-behavior.html">
+<link rel="import" href="social-post.html">
+
+
+<dom-module id="social-feed">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
+        --social-font-color: var(--text-primary-color);
+      }
+
+      a {
+        color: var(--text-primary-color);
+      }
+
+      .container {
+        @apply(--layout-vertical);
+      }
+
+      .social-section {
+        @apply(--layout-flex-5);
+      }
+
+      .social-section:not(:first-of-type) {
+        margin-top: 30px;
+      }
+
+      .divider {
+        @apply(--layout-flex);
+      }
+
+      @media (min-width: 601px) {
+        .container {
+          @apply(--layout-horizontal);
+        }
+
+        .social-section:not(:first-of-type) {
+          margin-top: 0;
+        }
+      }
+    </style>
+
+    <iron-ajax
+      auto
+      url="[[app.data.tweetsSource]]"
+      handle-as="json"
+      last-response="{{_posts}}"
+    ></iron-ajax>
+    <div class="container">
+      <div class="social-section">
+        <h4 class="heading">[[localize('before-hashtag')]] <a href$="https://www.google.com/#q=%23[[app.data.hashtag]]">#[[app.data.hashtag]]</a></h4>
+        <h5>[[response.response]]</h5>
+        <social-post id="post" author="[[author]]" text="[[text]]" when="[[when]]" canonical-url="https://twitter.com/"
+                     sign="@"></social-post>
+      </div>
+      <span class="divider"></span>
+      <div class="social-section">
+        <h4 class="heading">[[localize('social-title')]]</h4>
+        <div>[[localize('social-motto')]]</div>
+        <div class="align-pb-block">
+          <template is="dom-repeat" items="[[app.data.social]]" as="network">
+            <a class="button-link" href$="[[network.url]]" target="_blank" rel="noopener noreferrer">
+              <paper-icon-button icon="[[network.name]]"></paper-icon-button>
+            </a>
+          </template>
+        </div>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'social-feed',
+
+        behaviors: [
+          HOVERBOARD.LocalizeBehavior
+        ],
+
+        properties: {
+          interval: {
+            type: Number,
+            value: 10000
+          },
+
+          _posts: {
+            type: Array,
+            observer: '_postsChanged'
+          },
+
+          _selected: {
+            type: Number,
+            value: -1
+          }
+        },
+
+        _postsChanged: function () {
+          var index = this._selected;
+          if (this._posts) {
+            this._selected = (++index % this._posts.length);
+            this.author = this._posts[this._selected].user.screen_name;
+            this.when = this._posts[this._selected].created_at;
+            this.text = this._linkifyPost(this._posts[this._selected].text);
+
+            this.async(this._postsChanged, this.interval);
+          }
+        },
+
+        _linkifyPost: function (value) {
+          var replacedText, links1, links2, hashtags, profileLinks;
+          links1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+          replacedText = value.replace(links1, '<a class="post-link" href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
+          links2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+          replacedText = replacedText.replace(links2, '$1<a class="post-link" href="http://$2" target="_blank" rel="noopener noreferrer">$2</a>');
+          hashtags = /#(\S*)/g;
+          replacedText = replacedText.replace(hashtags, '<a class="post-link" href="https://twitter.com/search?q=%23$1" target="_blank" rel="noopener noreferrer">#$1</a>');
+          profileLinks = /\B@([\w-]+)/gm;
+          replacedText = replacedText.replace(profileLinks, '<a class="post-link" href="https://twitter.com/$1" target="_blank" rel="noopener noreferrer">@$1</a>');
+          return replacedText;
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

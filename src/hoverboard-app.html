@@ -1,0 +1,325 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../bower_components/app-layout/app-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/parallax-background.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/blend-background.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+
+<link rel="import" href="effects/fade-effect.html">
+<link rel="import" href="behaviors/utils-behavior.html">
+<link rel="import" href="behaviors/localize-behavior.html">
+<link rel="import" href="elements/app-data.html">
+<link rel="import" href="elements/drawer-block.html">
+<link rel="import" href="elements/toolbar-block.html">
+<link rel="import" href="elements/header-content.html">
+<link rel="import" href="elements/video-dialog.html">
+<link rel="import" href="elements/toast-element.html">
+
+<link rel="import" href="pages/home-page.html">
+
+
+<dom-module id="hoverboard-app">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        --min-header-height: 120px;
+        --header-background: var(--default-primary-color);
+        display: block;
+      }
+
+      app-drawer-layout {
+        @apply(--layout-fit);
+      }
+
+      app-drawer {
+        z-index: 10;
+      }
+
+      .image-overlay {
+        @apply(--layout-fit);
+        @apply(--opacity-animation);
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.7) 140%);
+        height: 100%;
+      }
+
+      app-header {
+        @apply(--layout-fixed-top);
+        --app-header-background-front-layer: {
+          background-image: var(--header-background-image);
+          background-position: 50% 50%;
+          transition: background-image 0.5s;
+        };
+        --app-header-background-rear-layer: {
+          background-color: var(--header-background);
+        };
+        background-color: var(--header-background);
+        color: var(--header-color);
+        transition-property: transform, background-color, color, height;
+        z-index: 9;
+      }
+
+      .image-overlay-wrapper {
+        @apply(--layout-fit);
+        opacity: 0;
+      }
+
+      toolbar-block {
+        z-index: 1;
+      }
+
+      .main-content {
+        padding-top: calc(var(--min-header-height) + 64px);
+      }
+
+      @media (min-width: 601px) {
+        .main-content {
+          padding-top: 424px;
+        }
+      }
+    </style>
+
+    <!-- Responsive handlers -->
+    <iron-media-query id="mq-phone"
+                      full
+                      query="(max-width:768px)"
+                      query-matches="{{app.isPhoneSize}}"></iron-media-query>
+    <iron-media-query id="mq-tablet"
+                      full
+                      query="(min-width:769px) and (max-width:959px)"
+                      query-matches="{{app.isTabletSize}}"></iron-media-query>
+    <iron-media-query id="mq-desktop"
+                      query="(min-width:960px)"
+                      query-matches="{{app.isDesktopSize}}"></iron-media-query>
+
+    <app-location route="{{route}}"></app-location>
+    <app-route
+      route="{{route}}"
+      pattern="/:page"
+      data="{{routeData}}"
+      tail="{{subRoute}}"></app-route>
+
+    <app-data
+      app="{{app}}"
+      speakers="{{speakers}}"
+      sessions="{{sessions}}"
+      schedule="{{schedule}}"
+      posts="{{posts}}"
+    ></app-data>
+
+    <app-drawer-layout id="drawerLayout" drawer-width="599px" force-narrow>
+
+      <app-drawer
+        id="drawer"
+        swipe-open="[[app.isPhoneSize]]"
+      >
+        <template is="dom-if" if="[[app.isPhoneSize]]">
+          <drawer-block
+            app={{app}}
+            drawer
+          ></drawer-block>
+        </template>
+      </app-drawer>
+
+      <app-header id="header" effects="parallax-background blend-background fade-effect" condenses shadow reveals>
+        <div class="image-overlay-wrapper" show$="[[app.headerSettings.backgroundImage]]">
+          <div class="image-overlay" fade></div>
+        </div>
+        <toolbar-block
+          app="{{app}}"
+          primary
+          sticky
+        ></toolbar-block>
+
+        <header-content
+          app="{{app}}"
+          selected-day="{{selectedDay}}"
+          fade
+        ></header-content>
+      </app-header>
+
+      <div class="main-content">
+        <neon-animated-pages selected="[[app.page]]"
+                             attr-for-selected="name"
+                             selected-attribute="selected">
+
+          <home-page name="home"
+                     app="{{app}}"
+                     people="{{speakers}}"
+                     posts="{{posts}}"
+                     videos="{{videos}}"></home-page>
+
+          <blog-page name="blog"
+                     app="{{app}}"
+                     route="{{subRoute}}"
+                     posts="{{posts}}"></blog-page>
+
+          <speakers-page name="speakers"
+                         app="{{app}}"
+                         route="{{subRoute}}"
+                         speakers="{{speakers}}"></speakers-page>
+
+          <schedule-page name="schedule"
+                         app="{{app}}"
+                         route="{{subRoute}}"
+                         schedule="{{schedule}}"
+                         sessions="{{sessions}}"></schedule-page>
+
+          <team-page name="team"
+                     app="{{app}}"></team-page>
+
+          <cod-page name="cod"
+                    app="{{app}}"></cod-page>
+
+        </neon-animated-pages>
+      </div>
+
+    </app-drawer-layout>
+
+    <video-dialog id="videoDialog"
+                  video-title="[[video.title]]"
+                  youtube-id="[[video.youtubeId]]"
+                  entry-animation="scale-up-animation"
+                  exit-animation="scale-down-animation"
+                  disable-controls="[[!video.disableControls]]"></video-dialog>
+
+    <toast-element id="toast"></toast-element>
+
+  </template>
+
+  <script>
+
+    (function () {
+      'use strict';
+
+      // performance logging
+      window.performance && performance.mark && performance.mark('hoverboard-app - before register');
+
+      Polymer({
+
+        is: 'hoverboard-app',
+
+        behaviors: [
+          HOVERBOARD.LocalizeBehavior,
+          HOVERBOARD.UtilsBehavior
+        ],
+
+        properties: {
+          app: {
+            type: Object,
+            notify: true,
+            value: function () {
+              return {
+                lang: 'en'
+              };
+            }
+          },
+
+          page: {
+            type: String,
+            reflectToAttribute: true
+          }
+        },
+
+        observers: [
+          '_routePageChanged(routeData.page, app.data.navigation)',
+          '_pageChanged(app.page)',
+          'stylesChanged(app.headerSettings)'
+        ],
+
+        ready: function () {
+          Polymer.RenderStatus.afterNextRender(this, function () {
+            HOVERBOARD.ServiceWorkerRegistration.register();
+            this.importHref(this.resolveUrl('pages/schedule-page.html'), null, null, true);
+            this.importHref(this.resolveUrl('pages/speakers-page.html'), null, null, true);
+            this.importHref(this.resolveUrl('pages/blog-page.html'), null, null, true);
+          }.bind(this));
+        },
+
+        _routePageChanged: function (page) {
+          // Scroll to the top of the page on every *route* change. Use `Polymer.AppLayout.scroll`
+          // with `behavior: 'silent'` to disable header scroll effects during the scroll.
+          if (this.app.page !== page) {
+            Polymer.AppLayout.scroll({top: 0, behavior: 'silent'});
+          }
+          this.set('app.page', (page || 'home'));
+          // Close the drawer - in case the *route* change came from a link in the drawer.
+          this.drawerOpened = false;
+          if (this.app.data) {
+            var navObject = this.app.data.pages[this.app.page];
+            if (navObject && navObject.headerSettings) {
+              this.set('app.headerSettings', navObject.headerSettings);
+            }
+          }
+        },
+
+        stylesChanged: function () {
+          if (!this.app.headerSettings) return;
+          this.customStyle['--header-background'] = this.app.headerSettings.backgroundColor;
+          this.customStyle['--header-color'] = this.app.headerSettings.fontColor;
+          this.customStyle['--header-background-image'] = 'url(' + this.app.headerSettings.backgroundImage + ')';
+          this.customStyle['--header-background-gradient'] = 'linear-gradient(to bottom, ' +
+            this.app.headerSettings.backgroundColor + ' 0%, rgba(0, 0, 0, 0) 35%, ' +
+            this.app.headerSettings.backgroundColor + ' 140%)';
+          this.customStyle['--min-header-height'] = this.app.headerSettings.minHeight;
+          document.getElementsByName('theme-color')[0].content = this.app.headerSettings.backgroundColor;
+          this.updateStyles();
+        },
+
+        _pageChanged: function (page) {
+          if (page && page !== 'home') {
+            this.importHref(this.resolveUrl('pages/' + page + '-page.html'), null, null, true);
+          }
+        },
+
+        backToTop: function (e) {
+          e.preventDefault();
+
+          Polymer.AppLayout.scroll({
+            top: 0,
+            behavior: 'smooth',
+            target: HOVERBOARD.Elements.Scroller
+          });
+          e.target.blur();
+        },
+
+        toggleDrawer: function () {
+          this.$$('#drawer').toggle();
+        },
+
+        _isPage: function (page, selectedPage) {
+          return page === selectedPage;
+        },
+
+        closeDrawer: function () {
+          if (this.$$('#drawer') && this.$$('#drawer').close) {
+            this.$$('#drawer').close();
+          }
+        },
+
+        openVideo: function (title, youtubeId, disableControls) {
+          this.video = {
+            title: title,
+            youtubeId: youtubeId,
+            disableControls: disableControls
+          };
+          this.$.videoDialog.open();
+        }
+
+      });
+
+    }());
+
+  </script>
+
+</dom-module>
