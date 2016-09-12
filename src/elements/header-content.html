@@ -200,7 +200,8 @@
         },
 
         _openVideo: function () {
-          HOVERBOARD.Elements.Template.openVideo('GDG DevFest Ukraine 2015', 'DfMnJAzOFng', true);
+          HOVERBOARD.Elements.Template.openVideo(this.app.data.pages.home.headerSettings.video.title,
+            this.app.data.pages.home.headerSettings.video.videoId, true);
           HOVERBOARD.Analytics.trackEvent('video', 'watch', 'GDG DevFest Ukraine 2015');
         },
 
