@@ -17,6 +17,8 @@
 <link rel="import" href="../elements/footer-block.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
 <link rel="import" href="../behaviors/page-behavior.html">
+<link rel="import" href="../behaviors/localize-behavior.html">
+
 
 <dom-module id="speakers-page">
 
@@ -198,7 +200,7 @@
             </a>
             <a href$="/speakers/[[speaker.id]]/" class="card-content">
               <iron-image class="company-logo" src="{{speaker.companyLogo}}" sizing="contain"></iron-image>
-              <div class="tags">Skills:
+              <div class="tags">{{localize('skills')}}:
                 <template is="dom-repeat" items="[[speaker.tags]]" as="tag">
                   <span class="tag" style$="{{_getCustomStyleValue(tag)}}" target="_blank">[[tag]]</span>
                 </template>
@@ -239,10 +241,12 @@
 
         is: 'speakers-page',
 
+
         behaviors: [
           Polymer.NeonSharedElementAnimatableBehavior,
           HOVERBOARD.PageBehavior,
-          HOVERBOARD.UtilsBehavior
+          HOVERBOARD.UtilsBehavior,
+          HOVERBOARD.LocalizeBehavior
         ],
 
         properties: {

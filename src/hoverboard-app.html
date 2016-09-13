@@ -109,6 +109,8 @@
 
     <app-data
       app="{{app}}"
+     speakers="{{speakers}}"
+ 
     ></app-data>
 
     <app-drawer-layout drawer-width="599px" force-narrow>
@@ -148,10 +150,18 @@
                              selected-attribute="selected">
 
           <home-page name="home"
-                     app="{{app}}"></home-page>
+                     app="{{app}}"
+                     people="{{speakers}}"
+
+                  ></home-page>
 
           <cod-page name="cod"
                     app="{{app}}"></cod-page>
+
+           <speakers-page name="speakers"
+                         app="{{app}}"
+                         route="{{subRoute}}"
+                         speakers="{{speakers}}"></speakers-page>   
 
         </neon-animated-pages>
       </div>

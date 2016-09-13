@@ -36,6 +36,10 @@
     {
       "route": "home",
       "permalink": "/"
+    },
+    {
+      "route": "speakers",
+      "permalink": "/speakers/"
     }
   ],
   "url": "df16.gdgeskisehir.com",
