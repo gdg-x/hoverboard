@@ -3,7 +3,7 @@
     "home": {
       "headerSettings": {
         "backgroundColor": "#607D8B",
-        "backgroundImage": "/images/backgrounds/home.png",
+        "backgroundImage": "/images/backgrounds/home.jpg",
         "fontColor": "#fff",
         "tabBarColor": "#fff",
         "video": {
@@ -83,6 +83,10 @@
     {
       "route": "speakers",
       "permalink": "/speakers/"
+    },
+    {
+      "route": "team",
+      "permalink": "/team/"
     }
   ],
   "url": "https://devfest.gdg.org.ua/",
@@ -200,7 +204,7 @@
   "teamPageText": "team-page-text",
   "statistics": [
     {
-      "counter": 600,
+      "counter": 700,
       "caption": "attendees"
     },
     {

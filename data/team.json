@@ -210,6 +210,35 @@
     ]
   },
   {
+    "title": "Design team",
+    "members": [
+      {
+        "name": "Olga Gorokh",
+        "photoUrl": "/images/people/olga_gorokh.jpg",
+        "socials": [
+          {
+            "icon": "facebook",
+            "link": "https://www.facebook.com/olga.gorokh.1",
+            "name": "Facebook"
+          }
+        ],
+        "title": ""
+      },
+      {
+        "name": "Marta Ryzhok",
+        "photoUrl": "/images/people/marta_ryzhok.jpg",
+        "socials": [
+          {
+            "icon": "facebook",
+            "link": "https://www.facebook.com/marta.ryzhok",
+            "name": "Facebook"
+          }
+        ],
+        "title": ""
+      }
+    ]
+  },
+  {
     "title": "Program Committee",
     "members": [
       {

@@ -99,8 +99,8 @@
             </template>
           </paper-tabs>
           <div class="action-button-wrapper" layout horizontal center-center>
-            <a href$="[[app.data.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
-              <paper-button class="action-button">[[localize('buy-ticket')]]</paper-button>
+            <a href="/blog/posts/dfua-summary/" on-tap="_trackBuyClick">
+              <paper-button class="action-button">[[localize('open-summary')]]</paper-button>
             </a>
           </div>
         </template>
@@ -145,7 +145,7 @@
         },
 
         _trackBuyClick: function () {
-          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'toolbar');
+          HOVERBOARD.Analytics.trackEvent('ticket', 'open_summary', 'toolbar');
         }
 
       });
