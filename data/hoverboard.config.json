@@ -243,7 +243,7 @@
       "url": "https://www.linkedin.com/company/google-developers-group-lviv"
     }
   ],
-  "tweetsSource": "/data/tweets.json",
+  "tweetsSource": "https://dfua-tweets.herokuapp.com/favoritesjson.php?c=10&cache_interval=8000",
   "gallery": {
     "albumUrl": "https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1",
     "photos": {
