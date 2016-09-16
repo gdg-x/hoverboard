@@ -82,8 +82,8 @@ HOVERBOARD.ServiceWorkerRegistration = (function () {
   }
 
   return {
-    register : register,
-    URL : URL,
-    SCOPE : SCOPE
+    register: register,
+    URL: URL,
+    SCOPE: SCOPE
   };
 })();
