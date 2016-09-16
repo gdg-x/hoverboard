@@ -18,5 +18,8 @@
     "src/**/*",
     "bower.json",
     "manifest.json"
+  ],
+  "includeDependencies": [
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
   ]
 }
