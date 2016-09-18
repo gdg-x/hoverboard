@@ -151,5 +151,23 @@
     "secondaryColor": "#D81B60",
     "image": "/images/posts/lviv_cover.jpg",
     "brief": "Lviv is a hidden pearl of Central-Eastern Europe, combining amazing architecture, diverse cultural inheritance, varied entertainments and great business and education opportunities into one remarkable atmosphere..."
+  },
+  {
+    "id": "preparation-checklist",
+    "title": "We are about to start - get ready to DevFest 👆",
+    "posted": "2016-09-07",
+    "primaryColor": "#8BC34A",
+    "secondaryColor": "#33691E",
+    "image": "/images/posts/checklist_cover.jpg",
+    "brief": "DevFest Ukraine will rock in 2 days, so we prepared for you this short **TO DO list** to make your event experience smooth and enjoyable...."
+  },
+  {
+    "id": "dfua-summary",
+    "title": "DevFest Ukraine rocked - SUMMARY",
+    "posted": "2016-09-10",
+    "primaryColor": "#ffc107",
+    "secondaryColor": "#edb305",
+    "image": "/images/posts/summary16_1.jpg",
+    "brief": "GDG DevFest Ukraine 2016 - it was fun, advantageous, crowded and exciting event...."
   }
 ]

@@ -3,7 +3,7 @@
     "home": {
       "headerSettings": {
         "backgroundColor": "#607D8B",
-        "backgroundImage": "/images/backgrounds/home.png",
+        "backgroundImage": "/images/backgrounds/home.jpg",
         "fontColor": "#fff",
         "tabBarColor": "#fff",
         "video": {
@@ -83,6 +83,10 @@
     {
       "route": "speakers",
       "permalink": "/speakers/"
+    },
+    {
+      "route": "team",
+      "permalink": "/team/"
     }
   ],
   "url": "https://devfest.gdg.org.ua/",
@@ -192,7 +196,7 @@
         "currency": "₴",
         "starts": "lazy-ticket-starts",
         "ends": "lazy-ticket-ends",
-        "soldOut": false
+        "soldOut": true
       }
     ]
   },
@@ -200,7 +204,7 @@
   "teamPageText": "team-page-text",
   "statistics": [
     {
-      "counter": 600,
+      "counter": 700,
       "caption": "attendees"
     },
     {
@@ -239,7 +243,7 @@
       "url": "https://www.linkedin.com/company/google-developers-group-lviv"
     }
   ],
-  "tweetsSource": "/data/tweets.json",
+  "tweetsSource": "https://dfua-tweets.herokuapp.com/favoritesjson.php?c=10&cache_interval=8000",
   "gallery": {
     "albumUrl": "https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1",
     "photos": {
