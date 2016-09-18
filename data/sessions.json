@@ -10,7 +10,8 @@
         "complexity": "Beginner",
         "tags": [
             "Web"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/martin-splitt-practical-webgl-with-three-dot-js"
     },
     "1441": {
         "id": 1441,
@@ -51,7 +52,8 @@
         "complexity": "Beginner",
         "tags": [
             "Cloud"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/michal-rostecki-introduction-to-golang"
     },
     "142": {
         "id": 142,
@@ -64,7 +66,8 @@
         "complexity": "Intermediate",
         "tags": [
             "Cloud"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/matthew-mosesohn-kubernetes-more-than-just-a-toy"
     },
     "141": {
         "id": 141,
@@ -102,7 +105,8 @@
             "General",
             "Startups",
             "Entrepreneurship"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/peter-tuszynski-keynote-how-to-take-off-in-2016"
     },
     "138": {
         "id": 138,
@@ -212,7 +216,8 @@
         "complexity": "Beginner",
         "tags": [
             "Android"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/constantine-mars-android-wear-2-dot-0-great-changes-upcoming-this-fall"
     },
     "127": {
         "id": 127,
@@ -238,7 +243,8 @@
         "complexity": "Intermediate",
         "tags": [
             "Android"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/michael-pustovit-android-hacking-for-dummies-if-operator-demolytion"
     },
     "125": {
         "id": 125,
@@ -264,7 +270,8 @@
         "complexity": "Intermediate",
         "tags": [
             "Android"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/sergiy-mokienko-continuous-integration-in-android"
     },
     "123": {
         "id": 123,
@@ -277,7 +284,8 @@
         "complexity": "Beginner",
         "tags": [
             "Web"
-        ]
+        ],
+        "presentation":"https://olostan.github.io/slides_ng2high/"
     },
     "122": {
         "id": 122,
@@ -290,7 +298,8 @@
         "complexity": "Intermediate",
         "tags": [
             "Android"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/david-vavra-firebase-plus-kotlin-plus-rxjava-plus-mvp-practical-tips"
     },
     "1211": {
         "id": 1211,
@@ -345,7 +354,8 @@
         "complexity": "Beginner",
         "tags": [
             "Web"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/jakub-skvara-progressive-web-apps-prepare-your-web-for-2017"
     },
     "1191": {
         "id": 1191,
@@ -359,7 +369,8 @@
         "tags": [
             "Android",
             "Workshop"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/jana-moudra-hands-on-with-ui-testing-for-android-developers"
     },
     "1192": {
         "id": 1192,
@@ -400,7 +411,8 @@
         "complexity": "Intermediate",
         "tags": [
             "Android"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/dmytro-danylyk-kotlin-plus-android"
     },
     "117": {
         "id": 117,
@@ -426,7 +438,8 @@
         "complexity": "Beginner",
         "tags": [
             "Web"
-        ]
+        ],
+        "presentation":"http://carmenpopoviciu.github.io/on-polymer-and-smileys/"
     },
     "115": {
         "id": 115,
@@ -439,7 +452,8 @@
         "complexity": "Beginner",
         "tags": [
             "Android"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/aleksander-piotrowski-android-tool-chain-and-run-time-improvements-in-n"
     },
     "114": {
         "id": 114,
@@ -452,7 +466,8 @@
         "complexity": "Intermediate",
         "tags": [
             "Android"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/zasadnyy/j2objc-cross-platform-development-google-way"
     },
     "113": {
         "id": 113,
@@ -465,7 +480,8 @@
         "complexity": "Intermediate",
         "tags": [
             "Cloud"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/jean-baptiste-clion-microservices-in-google-app-engine"
     },
     "112": {
         "id": 112,
@@ -504,7 +520,8 @@
         "complexity": "Intermediate",
         "tags": [
             "Android"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/mateusz-herych-the-ultimate-guide-to-mvp-pattern-on-android"
     },
     "1091": {
         "id": 1091,
@@ -518,7 +535,8 @@
         "tags": [
             "Cloud",
             "Workshop"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/jozef-vodicka-how-much-money-firebase-can-save-you"
     },
     "1092": {
         "id": 1092,
@@ -532,7 +550,8 @@
         "tags": [
             "Cloud",
             "Workshop"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/jozef-vodicka-how-much-money-firebase-can-save-you"
     },
     "108": {
         "id": 108,
@@ -545,7 +564,8 @@
         "complexity": "Intermediate",
         "tags": [
             "Web"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/gerard-sans-new-data-architecture-in-angular-2"
     },
     "106": {
         "id": 106,
@@ -558,7 +578,8 @@
         "complexity": "Beginner",
         "tags": [
             "Android"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/adrian-kajda-fuelio-success-story"
     },
     "105": {
         "id": 105,
@@ -571,7 +592,8 @@
         "complexity": "Beginner",
         "tags": [
             "Cloud"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/rustem-arzymbetov-intro-to-tensorflow"
     },
     "104": {
         "id": 104,
@@ -584,7 +606,8 @@
         "complexity": "Beginner",
         "tags": [
             "Web"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/sascha-wolter-the-physical-web-context-is-king"
     },
     "103": {
         "id": 103,
@@ -597,7 +620,8 @@
         "complexity": "Intermediate",
         "tags": [
             "Android"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/yonatan-levin-knock-knock-whos-there-doze"
     },
     "1021": {
         "id": 1021,
@@ -638,6 +662,7 @@
         "complexity": "Beginner",
         "tags": [
             "Cloud"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/mete-atamel-windows-and-net-on-google-cloud-platform"
     }
 }
