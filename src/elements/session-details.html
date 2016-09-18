@@ -91,7 +91,7 @@
         <div class="actions">
           <template is="dom-if" if="[[session.presentation]]">
             <a href$="[[session.presentation]]" target="_blank" rel="noopener noreferrer">
-              <paper-button class="action">
+              <paper-button class="action" on-tap="_openPresentation">
                 <iron-icon icon="presentation"></iron-icon>
                 [[localize('view-presentation')]]
               </paper-button>
@@ -210,6 +210,10 @@
             Polymer.IronDropdownScrollManager.removeScrollLock(this.$.scrollHeaderPanel);
             this._finishRenderClosed();
           }
+        },
+
+        _openPresentation: function () {
+          HOVERBOARD.Analytics.trackEvent('presentation', 'open', this.session.title);
         }
 
       });
