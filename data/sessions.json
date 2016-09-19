@@ -507,7 +507,8 @@
         "complexity": "Intermediate",
         "tags": [
             "Android"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/kseniia-shumelchyk-building-modular-architecture-apps-with-dagger-2"
     },
     "110": {
         "id": 110,
