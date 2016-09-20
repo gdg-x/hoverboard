@@ -1,15 +1,5 @@
 [
   {
-    "title": "general-partner",
-    "logos": [
-      {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
-      }
-    ]
-  },
-  {
     "title": "gdg-groups",
     "logos": [
       {
