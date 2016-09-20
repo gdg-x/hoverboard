@@ -203,7 +203,8 @@
         "complexity": "Intermediate",
         "tags": [
             "Android"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/resul-caner-yildirim-accessibility-on-android"
     },
     "128": {
         "id": 128,
@@ -230,7 +231,8 @@
         "complexity": "Intermediate",
         "tags": [
             "Android"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/anton-minashkin-exoplayer-media-playback-without-pain-almost-dot-dot-dot"
     },
     "126": {
         "id": 126,
@@ -257,7 +259,8 @@
         "complexity": "Intermediate",
         "tags": [
             "Cloud"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/ihor-dvoretskyi-application-delivery-with-openstack-and-kubernetes"
     },
     "124": {
         "id": 124,
@@ -425,7 +428,8 @@
         "complexity": "Beginner",
         "tags": [
             "Cloud"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/sergii-khomenko-building-data-pipelines-from-simple-to-more-advanced-hands-on-experience"
     },
     "116": {
         "id": 116,
