@@ -127,19 +127,12 @@
     <app-toolbar>
       <neon-animated-pages attr-for-selected="name" selected="{{app.page}}">
         <animatable-content name="home">
-          <div class="container">
+          <div class="container" layout vertical$="{{app.headerSettings.center}}" center-justified$="{{app.headerSettings.center}}">
             <div class="home-wrapper">
               <iron-image class="logo" src="/images/logo-light.svg" sizing="contain"
                           alt="GDG DevFest Ukraine 2016"></iron-image>
               <h3 class="dates">{{localize('dates')}}</h3>
               <h2 class="motto">{{localize('motto')}}</h2>
-              <div class="open-video" on-tap="_openVideo">
-                <iron-icon icon="play"></iron-icon>
-                {{localize('play-icon')}}
-              </div>
-              <div class="action-buttons">
-                <paper-button class="primary" on-tap="_scrollToTickets" raised>{{localize('buy-ticket')}}</paper-button>
-              </div>
             </div>
           </div>
         </animatable-content>

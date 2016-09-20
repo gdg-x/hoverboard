@@ -5,7 +5,6 @@
 
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
-<link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html">
 
 
 <dom-module id="photo-block">
@@ -40,24 +39,6 @@
         @apply(--layout-flex);
       }
 
-      .open-photos {
-        @apply(--layout-vertical);
-        @apply(--layout-center-center);
-        @apply(--layout-fit);
-        padding: 16px;
-        background: rgba(0, 0, 0, .3);
-        color: #fff;
-        font-size: 21px;
-        opacity: 0;
-        transition: opacity .3s;
-        text-align: center;
-      }
-
-      .open-photos:hover {
-        opacity: 1;
-        cursor: pointer;
-      }
-
       @media (min-width: 601px) {
         .photo-wrapper {
           height: 500px;
@@ -81,10 +62,6 @@
           sizing="cover"
           preload fade
         ></iron-image>
-        <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
-          <paper-ripple></paper-ripple>
-          <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>
-        </a>
       </div>
       <div class="vertical-block">
         <div class="photo">
@@ -94,10 +71,6 @@
             sizing="cover"
             preload fade
           ></iron-image>
-          <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
-            <paper-ripple></paper-ripple>
-            <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>
-          </a>
         </div>
         <div class="photo">
           <iron-image
@@ -106,10 +79,6 @@
             sizing="cover"
             preload fade
           ></iron-image>
-          <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
-            <paper-ripple></paper-ripple>
-            <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>
-          </a>
         </div>
       </div>
     </div>

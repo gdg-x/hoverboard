@@ -1,6 +1,6 @@
 {
-  "name": "GDG DevFest Ukraine 2016",
-  "short_name": "GDG DevFest Ukraine 2016",
+  "name": "GDG CEE Summit 2016",
+  "short_name": "GDG CEE Summit 2016",
   "icons": [
     {
       "src": "images/touch/homescreen-48.png",
@@ -40,6 +40,6 @@
   ],
   "start_url": "./?utm_source=web_app_manifest",
   "display": "standalone",
-  "background_color": "#F57C00",
-  "theme_color": "#F57C00"
+  "background_color": "#F44336",
+  "theme_color": "#F44336"
 }

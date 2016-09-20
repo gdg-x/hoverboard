@@ -2,16 +2,12 @@
   "pages": {
     "home": {
       "headerSettings": {
-        "backgroundColor": "#FF9800",
+        "backgroundColor": "#F44336",
         "backgroundImage": "/images/backgrounds/home.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff",
-        "video": {
-          "title": "GDG DevFest Ukraine 2016",
-          "youtubeId": "DfMnJAzOFng",
-          "text": "See how it was in 2015"
-        },
         "hideLogo": true,
+        "center": true,
         "minHeight": "360px"
       }
     },
@@ -59,18 +55,6 @@
     {
       "route": "blog",
       "permalink": "/blog/"
-    },
-    {
-      "route": "schedule",
-      "permalink": "/schedule/"
-    },
-    {
-      "route": "speakers",
-      "permalink": "/speakers/"
-    },
-    {
-      "route": "team",
-      "permalink": "/team/"
     }
   ],
   "url": "https://hoverboard.firebaseapp.com/",
@@ -84,20 +68,12 @@
     {
       "name": "English",
       "key": "en"
-    },
-    {
-      "name": "Українська",
-      "key": "uk"
     }
   ],
   "footerBlocks": [
     {
       "title": "for-visitors",
       "links": [
-        {
-          "text": "team",
-          "url": "/team/"
-        },
         {
           "text": "cod",
           "url": "/cod/"
@@ -106,36 +82,6 @@
           "text": "google-developers",
           "url": "https://developers.google.com/",
           "newTab": true
-        },
-        {
-          "text": "df-13",
-          "url": "http://gdg-devfest-ua.appspot.com/",
-          "newTab": true
-        },
-        {
-          "text": "df-14",
-          "url": "http://devfest.gdg.org.ua/2014/",
-          "newTab": true
-        },
-        {
-          "text": "df-15",
-          "url": "http://devfest.gdg.org.ua/2015/",
-          "newTab": true
-        }
-      ]
-    },
-    {
-      "title": "for-partners",
-      "links": [
-        {
-          "text": "partnership-proposition",
-          "url": "http://bit.ly/df16-sponsor",
-          "newTab": true
-        },
-        {
-          "text": "media-kit",
-          "url": "http://bit.ly/df16-media",
-          "newTab": true
         }
       ]
     }
@@ -143,39 +89,8 @@
   "contactBlock": {
     "links": [
       {
-        "text": "devfest@google.com",
-        "url": "mailto:devfest@google.com"
-      }
-    ]
-  },
-  "tickets": {
-    "url": "http://2event.com/events/630032",
-    "elements": [
-      {
-        "name": "student-ticket",
-        "price": 500,
-        "currency": "₴",
-        "starts": "student-ticket-starts",
-        "ends": "student-ticket-ends",
-        "info": "student-ticket-info",
-        "soldOut": false
-      },
-      {
-        "name": "early-ticket",
-        "price": 750,
-        "currency": "₴",
-        "starts": "early-ticket-starts",
-        "ends": "early-ticket-ends",
-        "info": "early-ticket-info",
-        "soldOut": true
-      },
-      {
-        "name": "lazy-ticket",
-        "price": 1000,
-        "currency": "₴",
-        "starts": "lazy-ticket-starts",
-        "ends": "lazy-ticket-ends",
-        "soldOut": false
+        "text": "summit@gdgcee.org",
+        "url": "mailto:summit@gdgcee.org"
       }
     ]
   },
@@ -183,20 +98,20 @@
   "teamPageText": "team-page-text",
   "statistics": [
     {
-      "counter": 600,
-      "caption": "attendees"
-    },
-    {
-      "counter": 2,
+      "counter": 3,
       "caption": "days"
     },
     {
-      "counter": 30,
-      "caption": "sessions"
+      "counter": 10,
+      "caption": "countries"
     },
     {
-      "counter": 3,
-      "caption": "tracks"
+      "counter": 31,
+      "caption": "chapters"
+    },
+    {
+      "counter": 80,
+      "caption": "organizers"
     }
   ],
   "hashtag": "dfua",
@@ -222,7 +137,6 @@
       "url": "https://www.linkedin.com/company/google-developers-group-lviv"
     }
   ],
-  "tweetsSource": "/data/tweets.json",
   "gallery": {
     "albumUrl": "https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1",
     "photos": {
@@ -235,15 +149,15 @@
   },
   "location": {
     "apiKey": "",
-    "link": "https://www.facebook.com/expopivdennij",
+    "link": "https://www.campus.co/warsaw/en",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
+      "latitude": 52.254790,
+      "longitude": 21.044493,
       "zoom": 15
     },
     "mapCenter": {
-      "latitude": 49.809841,
-      "longitude": 23.982805
+      "latitude": 52.254797,
+      "longitude": 21.051188
     },
     "images": [
       "/images/backgrounds/location_1.jpg",
@@ -251,7 +165,6 @@
       "/images/backgrounds/location_3.jpg"
     ]
   },
-  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
   "callToAction": {
     "videoTitle": "action-title",
     "videoId": "DfMnJAzOFng"
