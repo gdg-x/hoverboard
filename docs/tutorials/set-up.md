@@ -29,7 +29,7 @@ Project Hoverboard locally in less than 15 minutes.
     
 1.  Install [polymer-cli](https://github.com/Polymer/polymer-cli):
     
-        npm i -g polymer-cli@0.12.0
+        npm i -g polymer-cli
 
 1.  [Fork](https://github.com/gdg-x/hoverboard/fork) this repository
 

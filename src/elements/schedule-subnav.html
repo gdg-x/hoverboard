@@ -41,16 +41,14 @@
         margin-left: 4px;
       }
 
-      .filters-content > * {
-        padding: 0 24px;
-      }
-
       paper-checkbox {
+        padding: 0 24px;
         position: relative;
         min-height: 48px;
       }
 
       paper-item {
+        padding: 0 24px;
         cursor: pointer;
       }
 
@@ -171,18 +169,14 @@
           this._target = this.$.filtersMenuToggle;
 
           this.listen(this._target, 'mouseenter', '_showFilters');
-          this.listen(this._target, 'focus', '_showFilters');
           this.listen(this._target, 'mouseleave', '_hideFilters');
-          this.listen(this._target, 'blur', '_hideFilters');
           this.listen(this._target, 'tap', '_hideFilters');
         },
 
         detached: function () {
           if (this._target) {
             this.unlisten(this._target, 'mouseenter', '_showFilters');
-            this.unlisten(this._target, 'focus', '_showFilters');
             this.unlisten(this._target, 'mouseleave', '_hideFilters');
-            this.unlisten(this._target, 'blur', '_hideFilters');
             this.unlisten(this._target, 'tap', '_hideFilters');
           }
         },
@@ -204,14 +198,20 @@
           return this.filters.indexOf(tag) > -1;
         },
 
-        _showFilters: function () {
-          if (this._filtersOpened) return;
-          this.set('_filtersOpened', true);
+        _showFilters: function (e) {
+          e.stopPropagation();
+          this.debounce('doSomething', function () {
+            if (this._filtersOpened) return;
+            this.set('_filtersOpened', true);
+          }, 50);
         },
 
-        _hideFilters: function () {
-          if (!this._filtersOpened) return;
-          this.set('_filtersOpened', false);
+        _hideFilters: function (e) {
+          e.stopPropagation();
+          this.debounce('doSomething', function () {
+            if (!this._filtersOpened) return;
+            this.set('_filtersOpened', false);
+          }, 50);
         },
 
         _getCustomStyleValue: function(tag) {
