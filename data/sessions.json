@@ -162,7 +162,8 @@
         "complexity": "Intermediate",
         "tags": [
             "Android"
-        ]
+        ],
+        "presentation":"https://speakerdeck.com/gdglviv/roman-herasymenko-deal-with-it-android-databinding-explained"
     },
     "1301": {
         "id": 1301,
