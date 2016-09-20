@@ -199,8 +199,13 @@
 
                       <template is="dom-if" if="[[subSession.tags]]">
                         <div class="tags" layout horizontal center>
-                          <iron-icon icon="tags"></iron-icon>
-                          <span>[[_joinArray(subSession.tags)]]</span>
+                          <div flex>
+                            <iron-icon icon="tags"></iron-icon>
+                            <span>[[_joinArray(subSession.tags)]]</span>
+                          </div>
+                          <template is="dom-if" if="[[subSession.presentation]]">
+                            <iron-icon icon="presentation" title="Presentation available"></iron-icon>
+                          </template>
                         </div>
                       </template>
 

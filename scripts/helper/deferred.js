@@ -49,6 +49,6 @@ HOVERBOARD.Deferred = HOVERBOARD.Deferred || (function () {
     }
 
     return {
-      createDeferred : createDeferred
+      createDeferred: createDeferred
     };
   }());

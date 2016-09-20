@@ -12,5 +12,16 @@
     "src/pages/team-page.html",
     "src/pages/hub-page.html",
     "src/pages/quest-page.html"
+  ],
+  "sources": [
+    "data/**/*",
+    "images/**/*",
+    "scripts/**/*",
+    "src/**/*",
+    "bower.json",
+    "manifest.json"
+  ],
+  "includeDependencies": [
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
   ]
 }

@@ -231,7 +231,7 @@
           var presenters = e.model.video.speakers ? (' by ' + e.model.video.speakers) : '';
           HOVERBOARD.Elements.Template.openVideo(e.model.video.title + presenters, e.model.video.youtubeId, true);
 
-          HOVERBOARD.Analytics.trackEvent('video', 'watch', 'featured video ' + this._selectedVideo.title);
+          HOVERBOARD.Analytics.trackEvent('video', 'watch', 'featured video ' + e.model.video.title);
         },
 
         shiftContentLeft: function () {
