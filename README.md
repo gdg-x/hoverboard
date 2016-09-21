@@ -1,14 +1,14 @@
 ![preview-web](https://cloud.githubusercontent.com/assets/2954281/17777476/5dbbbe1c-6569-11e6-9cc4-77185ae9bf92.png)
 
-# Project Hoverboard 
+# Project Hoverboard
 
 [![Join the chat at https://gitter.im/gdg-x/hoverboard](https://badges.gitter.im/gdg-x/hoverboard.svg)](https://gitter.im/gdg-x/hoverboard?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-> Project Hoverboard is the next generation conference website template after 
-[Project Zeppelin](https://github.com/gdg-x/zeppelin) and more optimized 
+> Project Hoverboard is the next generation conference website template after
+[Project Zeppelin](https://github.com/gdg-x/zeppelin) and more optimized
 version - [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
 
-> Template is brought by [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy) 
+> Template is brought by [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy)
 from [GDG Lviv](http://lviv.gdg.org.ua/).
 
 > *Do you :heart: it?* Show your support - please, :star: the project.
@@ -37,11 +37,11 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 Install [polymer-cli](https://github.com/Polymer/polymer-cli):
 
     npm i -g polymer-cli
-    
+
 and [Bower](https://bower.io/):
-    
+
     npm i -g bower
-    
+
 :point_right: **[Fork](https://github.com/gdg-x/hoverboard/fork) this repository** and clone it locally.
 
 ##### Install dependencies
@@ -54,7 +54,7 @@ This command serves the app at `http://localhost:8080` and provides basic URL
 routing for the app:
 
     polymer serve
-    
+
 :book: Read more in [setup docs](/docs/tutorials/set-up.md).
 
 
@@ -71,7 +71,7 @@ generated using fragment bundling, suitable for serving from non
 H2/push-compatible servers or to clients that do not support H2/Push.
 
     polymer build
-    
+
 :book: Read more in [deploy docs](/docs/tutorials/deploy.md).   
 
 ### Updating
@@ -87,7 +87,7 @@ git commit -m 'Updated to the latest version'
 
 ### Who uses the template?
 
-Going to use the template? Go on! The only thing we ask - let us know at with a 
+Going to use the template? Go on! The only thing we ask - let us know at with a
 pull request, so we can include you in this list.
 
 | [GDG DevFest Ukraine](http://devfest.gdg.org.ua) |
@@ -104,6 +104,7 @@ pull request, so we can include you in this list.
 | [Google I/O Extended 2016 Kuala Lumpur](https://ioxkl2016.firebaseapp.com) |
 | [GDG DevFest Hamburg 2016](https://hamburg.devfest.de) |
 | [GDG DevFest Mezam 2016](https://devfest-mezam.gdgbambili.xyz) |
+| [GDG DevFest Lisbon 2016](https://devfestlisbon.firebaseapp.com) |
 
 ### Roadmap :rocket:
 :x: Admin panel  
@@ -117,8 +118,8 @@ pull request, so we can include you in this list.
 
 ### Contributing
 
-Project Hoverboard is still under development, and it is open for contributions. 
-Feel free to send PR. If you have any questions, feel free to contact 
+Project Hoverboard is still under development, and it is open for contributions.
+Feel free to send PR. If you have any questions, feel free to contact
 [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy).
 
 ##### General workflow
