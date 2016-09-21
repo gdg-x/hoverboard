@@ -104,7 +104,7 @@
       }
 
       .subscribe {
-        @apply(--layout-flex);
+        @apply(--layout-flex-auto);
       }
 
       .copyright {
@@ -152,7 +152,8 @@
       }
 
       @media (min-width: 961px) {
-        .link-block-wrapper {
+        .link-block-wrapper,
+        .subscribe {
           @apply(--layout-flex);
         }
       }

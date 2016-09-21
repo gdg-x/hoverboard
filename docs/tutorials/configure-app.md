@@ -121,6 +121,21 @@ And in navigation
 
 This configs reflects in `toolbar-block.html` and `drawer-block.html`
 
+### Tweets
+```
+"tweetsSource": "/data/tweets.json",
+```
+To make it more dynamic use [Tweetledee](http://chrissimpkins.github.io/tweetledee/)
+which provides ready-bake PHP files that allow you to access Twitter user 
+timelines, user favorites, lists, home timelines, and tweet search data in a JSON.
+```
+"tweetsSource": "https://<YOUR_APP>.herokuapp.com/favoritesjson.php?c=10&cache_interval=8000",
+```
+You can install Tweetledee on [Heroku](https://www.heroku.com/).
+Download the latest version of Tweetledee; unzip and deploy on their server.  
+**Note:** don't forget to enable CORS, changing `$TLD_JS = 0;` to `$TLD_JS = 1;`.  
+Read [full documentation](http://chrissimpkins.github.io/tweetledee/) on the official website.
+
 
 # Next steps
 

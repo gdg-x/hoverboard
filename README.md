@@ -36,7 +36,7 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 
 Install [polymer-cli](https://github.com/Polymer/polymer-cli):
 
-    npm i -g polymer-cli@0.12.0
+    npm i -g polymer-cli
     
 and [Bower](https://bower.io/):
     

@@ -14,7 +14,7 @@
         min-height: 100%;
         min-width: 100%;
         --content-padding: 24px;
-        --paper-scroll-header-panel-color: var(--default-primary-color);
+        --paper-scroll-header-panel-color: var(--general);
         --truncate-marked-text-style: {
           font-size: 15px;
           line-height: 1.5;
@@ -43,10 +43,10 @@
         background: #FFFFFF;
         height: 100%;
         --paper-scroll-header-panel-full-header: {
-          background-color: var(--paper-scroll-header-panel-color);
+          background-color: var(--paper-scroll-header-panel-color, var(--general));
         };
         --paper-scroll-header-panel-condensed-header: {
-          background-color: var(--paper-scroll-header-panel-color);
+          background-color: var(--paper-scroll-header-panel-color, var(--general));
         };
       }
 
@@ -215,6 +215,10 @@
         .section {
           padding: 0 8px;
           width: calc(50% - 16px);
+        }
+
+        .section:last-of-type {
+          margin-bottom: 32px;
         }
       }
 

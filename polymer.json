@@ -10,5 +10,16 @@
     "src/pages/schedule-page.html",
     "src/pages/speakers-page.html",
     "src/pages/team-page.html"
+  ],
+  "sources": [
+    "data/**/*",
+    "images/**/*",
+    "scripts/**/*",
+    "src/**/*",
+    "bower.json",
+    "manifest.json"
+  ],
+  "includeDependencies": [
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
   ]
 }

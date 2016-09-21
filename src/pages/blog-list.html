@@ -146,7 +146,7 @@
           }
         },
 
-        _updateCascadedNodes() {
+        _updateCascadedNodes: function() {
           var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
           var cascadedArray = Array.prototype.slice.call(cascaded);
           this.animationConfig.entry.push({
