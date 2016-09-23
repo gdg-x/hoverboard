@@ -8,7 +8,7 @@
   "team": "Team",
   "cod": "Code of Conduct",
   "location-address-short": "Warsaw, Poland",
-  "motto": "Be a GDG. Be a Hero!",
+  "motto": "Inspiring Developers Everywhere",
   "play-icon": "See how it was in 2015",
   "c4p": "Become a speaker",
   "buy-ticket": "Buy ticket",
@@ -34,7 +34,7 @@
   "social-motto": "Add to circles, like, follow or connect with us on",
   "before-hashtag": "What's up",
   "click-to-view-photos": "Click here to view more photos",
-  "partners": "Partners",
+  "partners": "GDG Groups",
   "become-a-partner": "Become a partner",
   "template-creator": "Template creator",
   "general-partner": "General partner",
@@ -65,5 +65,6 @@
   "countries": "Countries",
   "chapters": "Chapters",
   "organizers": "Organizers",
-  "gdg-groups": "GDG Groups"
+  "gdg-groups": "GDG Groups",
+  "present-group": "Present your group"
 }
