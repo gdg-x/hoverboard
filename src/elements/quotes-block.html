@@ -1,0 +1,121 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../behaviors/localize-behavior.html">
+
+
+<dom-module id="quotes-block">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+        position: relative;
+        min-height: 370px;
+        background: url("/images/backgrounds/quotes.jpg");
+        background-position: 50% 50%;
+        color: var(--text-primary-color);
+      }
+
+      .overlay {
+        background: var(--default-primary-color);
+        opacity: 0.7;
+      }
+
+      .container {
+        text-align: center;
+        position: relative;
+      }
+
+      .quote-mark {
+        margin-bottom: -64px;
+        line-height: 0.9;
+        font-size: 100px;
+        font-style: italic;
+        opacity: 0.3;
+      }
+
+      .quote-wrapper {
+        max-width: 800px;
+      }
+
+      .quote {
+        /*margin-top: 8px;*/
+        font-size: 24px;
+        color: var(--text-primary-color);
+        font-style: italic;
+        text-align: left;
+      }
+
+      .content::before {
+        margin-right: 24px;
+        display: inline-block;
+        content: "\"";
+        font-size: 100px;
+        font-style: italic;
+        opacity: 0.3;
+      }
+
+      .author {
+        font-size: 13px;
+        opacity: 0.7;
+      }
+
+    </style>
+
+    <div class="overlay" fit></div>
+    <div class="container" layout vertical center>
+      <h4 class="heading">[[localize('share-your-story')]]</h4>
+      <div class="quote-wrapper">
+        <marked-element class="content" markdown="[[_selected.text]]" layout horizontal>
+          <div class="markdown-html quote"></div>
+        </marked-element>
+      </div>
+      <span class="author">@[[_selected.author.name]]</span>
+    </div>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'quotes-block',
+
+        behaviors: [
+          HOVERBOARD.LocalizeBehavior
+        ],
+
+        properties: {
+          interval: {
+            type: Number,
+            value: 7000
+          },
+
+          _selectedIndex: {
+            type: Number,
+            value: -1
+          }
+        },
+
+        observers: [
+          'next(app.quotes)'
+        ],
+
+        next: function () {
+          var index = this._selectedIndex;
+          if (this.app.quotes) {
+            this._selectedIndex = (++index % this.app.quotes.length);
+            this._selected = this.app.quotes[this._selectedIndex];
+            this.async(this.next, this.interval);
+          }
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>
