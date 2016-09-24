@@ -104,6 +104,8 @@ pull request, so we can include you in this list.
 | [Google I/O Extended 2016 Kuala Lumpur](https://ioxkl2016.firebaseapp.com) |
 | [GDG DevFest Hamburg 2016](https://hamburg.devfest.de) |
 | [GDG DevFest Mezam 2016](https://devfest-mezam.gdgbambili.xyz) |
+| [GDG DevFest Vietnam 2016](https://devfest.vn) |
+| [GDG DevFest Seattle 2016](https://devfest.gdgseattle.org) |
 
 ### Roadmap :rocket:
 :x: Admin panel  
