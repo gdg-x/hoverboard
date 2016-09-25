@@ -31,6 +31,21 @@
         position: relative;
       }
 
+      .image {
+        transition: background-image 1s ease-in-out;
+        will-change: background-image;
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+
+      .second {
+        transition-delay: 0.5s;
+      }
+
+      .third {
+        transition-delay: 1s;
+      }
+
       .photo:not(:first-of-type) {
         display: none;
       }
@@ -75,12 +90,13 @@
 
     <div class="photo-wrapper">
       <div class="photo big">
-        <iron-image
-          class="placeholder-color"
-          src="[[app.data.gallery.photos.big]]"
-          sizing="cover"
-          preload fade
-        ></iron-image>
+        <!--<iron-image-->
+          <!--class="placeholder-color image"-->
+          <!--src="[[_selected.big]]"-->
+          <!--sizing="cover"-->
+          <!--preload fade-->
+        <!--&gt;</iron-image>-->
+        <div class="placeholder-color image" style$="background-image: url([[_selected.big]])" fit></div>
         <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
           <paper-ripple></paper-ripple>
           <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>
@@ -88,24 +104,26 @@
       </div>
       <div class="vertical-block">
         <div class="photo">
-          <iron-image
-            class="placeholder-color"
-            src="[[app.data.gallery.photos.small.0]]"
-            sizing="cover"
-            preload fade
-          ></iron-image>
+          <!--<iron-image-->
+            <!--class="placeholder-color image second"-->
+            <!--src="[[_selected.small.0]]"-->
+            <!--sizing="cover"-->
+            <!--preload fade-->
+          <!--&gt;</iron-image>-->
+          <div class="placeholder-color image second" style$="background-image: url([[_selected.small.0]])" fit></div>
           <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
             <paper-ripple></paper-ripple>
             <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>
           </a>
         </div>
         <div class="photo">
-          <iron-image
-            class="placeholder-color"
-            src="[[app.data.gallery.photos.small.1]]"
-            sizing="cover"
-            preload fade
-          ></iron-image>
+          <!--<iron-image-->
+            <!--class="placeholder-color image third"-->
+            <!--src="[[_selected.small.1]]"-->
+            <!--sizing="cover"-->
+            <!--preload fade-->
+          <!--&gt;</iron-image>-->
+          <div class="placeholder-color image third" style$="background-image: url([[_selected.small.1]])" fit></div>
           <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
             <paper-ripple></paper-ripple>
             <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>
@@ -126,7 +144,32 @@
 
         behaviors: [
           HOVERBOARD.LocalizeBehavior
-        ]
+        ],
+
+        properties: {
+          interval: {
+            type: Number,
+            value: 4000
+          },
+
+          _selectedIndex: {
+            type: Number,
+            value: -1
+          }
+        },
+
+        observers: [
+          'next(app.data.gallery.photos)'
+        ],
+
+        next: function () {
+          var index = this._selectedIndex;
+          if (this.app.data && this.app.data.gallery && this.app.data.gallery.photos) {
+            this._selectedIndex = (++index % this.app.data.gallery.photos.length);
+            this._selected = this.app.data.gallery.photos[this._selectedIndex];
+            this.async(this.next, this.interval);
+          }
+        }
 
       });
 
