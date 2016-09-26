@@ -50,6 +50,11 @@
         "logoUrl": "../images/logos/gdg-prague.svg"
       },
       {
+        "name": "GDG ČVUT",
+        "url": "https://developers.google.com/groups/chapter/117819266709320995508/",
+        "logoUrl": "../images/logos/gdg-cvut.svg"
+      },
+      {
         "name": "GDG Krakow",
         "url": "https://developers.google.com/groups/chapter/107562802227561437057/",
         "logoUrl": "../images/logos/gdg-krakow.svg"
