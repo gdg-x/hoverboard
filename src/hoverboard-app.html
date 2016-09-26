@@ -274,7 +274,7 @@
           this.customStyle['--min-header-height'] = this.app.headerSettings.minHeight;
           document.getElementsByName('theme-color')[0].content = this.app.headerSettings.backgroundColor;
           this.updateStyles();
-          this.async(this.$.header.resetLayout(), 1);
+          this.$.header.resetLayout();
         },
 
         _pageChanged: function (page) {
