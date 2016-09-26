@@ -1,72 +1,163 @@
 [
   {
-    "title": "template-creator",
+    "title": "gdg-groups",
     "logos": [
+      {
+        "name": "GDG Warsaw",
+        "url": "https://developers.google.com/groups/chapter/105909141177271768718/",
+        "logoUrl": "../images/logos/gdg-warsaw.svg",
+        "height": 70
+      },
       {
         "name": "GDG Lviv",
-        "url": "https://plus.google.com/102444623953913144164",
-        "logoUrl": "../images/logos/gdg-lviv.svg",
-        "width": 170
-      }
-    ]
-  },
-  {
-    "title": "general-partner",
-    "logos": [
-      {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
+        "url": "https://developers.google.com/groups/chapter/102444623953913144164/",
+        "logoUrl": "../images/logos/gdg-lviv.svg"
       },
       {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/logos/gdg-x.svg"
+        "name": "GDG Jihlava",
+        "url": "https://developers.google.com/groups/chapter/114298804346759031330/",
+        "logoUrl": "../images/logos/gdg-jihlava.svg",
+        "height": 70
       },
       {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
+        "name": "GDG Uzhhorod",
+        "url": "https://developers.google.com/groups/chapter/111433667344566709274/",
+        "logoUrl": "../images/logos/gdg-uzhhorod.svg"
       },
       {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/logos/gdg-x.svg"
+        "name": "GDG Odessa",
+        "url": "https://developers.google.com/groups/chapter/107429905367776958803/",
+        "logoUrl": "../images/logos/gdg-odessa.svg"
       },
       {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
+        "name": "GDG Kyiv",
+        "url": "https://developers.google.com/groups/chapter/110301321530950732281/",
+        "logoUrl": "../images/logos/gdg-kyiv.svg"
       },
       {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/logos/gdg-x.svg"
+        "name": "GDG Minsk",
+        "url": "https://developers.google.com/groups/chapter/113201184286137496581/",
+        "logoUrl": "../images/logos/gdg-minsk.svg"
       },
       {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
+        "name": "GDG Riga",
+        "url": "https://developers.google.com/groups/chapter/105327287996815830446/",
+        "logoUrl": "../images/logos/gdg-riga.svg"
       },
       {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/logos/gdg-x.svg"
+        "name": "GDG Prague",
+        "url": "https://developers.google.com/groups/chapter/111919016509847766513/",
+        "logoUrl": "../images/logos/gdg-prague.svg"
       },
       {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
+        "name": "GDG ČVUT",
+        "url": "https://developers.google.com/groups/chapter/117819266709320995508/",
+        "logoUrl": "../images/logos/gdg-cvut.svg"
       },
       {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/logos/gdg-x.svg"
+        "name": "GDG Krakow",
+        "url": "https://developers.google.com/groups/chapter/107562802227561437057/",
+        "logoUrl": "../images/logos/gdg-krakow.svg"
       },
       {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
+        "name": "GDG Rzeszów",
+        "url": "https://developers.google.com/groups/chapter/109899465967689104804/",
+        "logoUrl": "../images/logos/gdg-rzeszow.svg"
+      },
+      {
+        "name": "GDG Cherkasy",
+        "url": "https://developers.google.com/groups/chapter/106245677365553946559/",
+        "logoUrl": "../images/logos/gdg-cherkasy.svg"
+      },
+      {
+        "name": "GDG Pardubice",
+        "url": "https://developers.google.com/groups/chapter/102347293314420788085/",
+        "logoUrl": "../images/logos/gdg-pardubice.svg"
+      },
+      {
+        "name": "GDG Zielona Góra",
+        "url": "https://developers.google.com/groups/directory/",
+        "logoUrl": "../images/logos/gdg-zielona-gora.svg"
+      },
+      {
+        "name": "GDG Bucharest",
+        "url": "https://developers.google.com/groups/chapter/112968068864186499076/",
+        "logoUrl": "../images/logos/gdg-bucharest.svg"
+      },
+      {
+        "name": "GDG Dnipro",
+        "url": "https://developers.google.com/groups/chapter/116033068768596939209/",
+        "logoUrl": "../images/logos/gdg-dnipro.svg"
+      },
+      {
+        "name": "GDG Pitesti",
+        "url": "https://developers.google.com/groups/chapter/111704918612718501013/",
+        "logoUrl": "../images/logos/gdg-pitesti.svg"
+      },
+      {
+        "name": "GDG Kremenchuk",
+        "url": "https://developers.google.com/groups/chapter/107464569258887658610/",
+        "logoUrl": "../images/logos/gdg-kremenchuk.svg"
+      },
+      {
+        "name": "GDG Ternopil",
+        "url": "https://developers.google.com/groups/chapter/106848361510936329588/",
+        "logoUrl": "../images/logos/gdg-ternopil.svg"
+      },
+      {
+        "name": "GDG Silesia",
+        "url": "https://developers.google.com/groups/directory/",
+        "logoUrl": "../images/logos/gdg-silesia.svg"
+      },
+      {
+        "name": "GDG Ostrava",
+        "url": "https://developers.google.com/groups/chapter/112342577449557575881/",
+        "logoUrl": "../images/logos/gdg-ostrava.svg"
+      },
+      {
+        "name": "GDG Poznań",
+        "url": "https://developers.google.com/groups/directory/",
+        "logoUrl": "../images/logos/gdg-poznan.svg"
+      },
+      {
+        "name": "GDG Brno",
+        "url": "https://developers.google.com/groups/chapter/107527312296247581699/",
+        "logoUrl": "../images/logos/gdg-brno.svg"
+      },
+      {
+        "name": "GDG Cluj-Napoca",
+        "url": "https://developers.google.com/groups/chapter/110300482287055515286/",
+        "logoUrl": "../images/logos/gdg-cluj-napoca.svg"
+      },
+      {
+        "name": "GDG Zagreb",
+        "url": "https://developers.google.com/groups/directory/",
+        "logoUrl": "../images/logos/gdg-zagreb.svg"
+      },
+      {
+        "name": "GDG Novi Sad",
+        "url": "https://developers.google.com/groups/chapter/114128907653399665682/",
+        "logoUrl": "../images/logos/gdg-novi-sad.svg"
+      },
+      {
+        "name": "GDG Pilsen",
+        "url": "https://developers.google.com/groups/directory/",
+        "logoUrl": "../images/logos/gdg-pilsen.svg"
+      },
+      {
+        "name": "GDG Moldova",
+        "url": "https://developers.google.com/groups/chapter/102745134847043369252/",
+        "logoUrl": "../images/logos/gdg-moldova.svg"
+      },
+      {
+        "name": "GDG Lublin",
+        "url": "https://developers.google.com/groups/directory/",
+        "logoUrl": "../images/logos/gdg-lublin.svg"
+      },
+      {
+        "name": "GDG Vilnius",
+        "url": "https://developers.google.com/groups/chapter/109861037894263174818/",
+        "logoUrl": "../images/logos/gdg-vilnius.svg"
       }
     ]
   }
