@@ -17,10 +17,6 @@
         display: block;
       }
 
-      iron-image {
-        @apply(--layout-fit);
-      }
-
       .photo-wrapper {
         @apply(--layout-horizontal);
         height: 200px;
@@ -90,12 +86,6 @@
 
     <div class="photo-wrapper">
       <div class="photo big">
-        <!--<iron-image-->
-          <!--class="placeholder-color image"-->
-          <!--src="[[_selected.big]]"-->
-          <!--sizing="cover"-->
-          <!--preload fade-->
-        <!--&gt;</iron-image>-->
         <div class="placeholder-color image" style$="background-image: url([[_selected.big]])" fit></div>
         <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
           <paper-ripple></paper-ripple>
@@ -104,12 +94,6 @@
       </div>
       <div class="vertical-block">
         <div class="photo">
-          <!--<iron-image-->
-            <!--class="placeholder-color image second"-->
-            <!--src="[[_selected.small.0]]"-->
-            <!--sizing="cover"-->
-            <!--preload fade-->
-          <!--&gt;</iron-image>-->
           <div class="placeholder-color image second" style$="background-image: url([[_selected.small.0]])" fit></div>
           <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
             <paper-ripple></paper-ripple>
@@ -117,12 +101,6 @@
           </a>
         </div>
         <div class="photo">
-          <!--<iron-image-->
-            <!--class="placeholder-color image third"-->
-            <!--src="[[_selected.small.1]]"-->
-            <!--sizing="cover"-->
-            <!--preload fade-->
-          <!--&gt;</iron-image>-->
           <div class="placeholder-color image third" style$="background-image: url([[_selected.small.1]])" fit></div>
           <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
             <paper-ripple></paper-ripple>
