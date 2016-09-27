@@ -113,7 +113,7 @@
       }
 
       .speaker-block {
-        padding: 16px 24px;
+        padding: 12px 24px;
         color: #fff;
       }
 
@@ -143,8 +143,12 @@
         margin-right: 8px;
       }
 
+      .speaker {
+        margin: 4px 0;
+      }
+
       .speaker:not(:last-of-type) {
-        margin-bottom: 8px;
+        margin-right: 24px;
       }
 
       .person-detail {
@@ -205,7 +209,7 @@
                       </template>
 
                       <template is="dom-if" if="[[subSession.speakers]]">
-                        <div class="speaker-block" relative>
+                        <div class="speaker-block" layout horizontal wrap relative>
                           <div class="image-overlay"
                                style$="background-color: [[_getCustomStyleValue(subSession.mainTag)]]" fit></div>
                           <template is="dom-repeat" items="[[subSession.speakers]]" as="speaker">
