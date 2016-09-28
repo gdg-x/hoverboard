@@ -247,6 +247,7 @@
   "tweetsSource": "https://dfua-tweets.herokuapp.com/favoritesjson.php?c=10&cache_interval=8000",
   "gallery": {
     "albumUrl": "https://goo.gl/photos/H8s3CtPexCzkLqSt9",
+    "sharedAlbumUrl": "https://goo.gl/photos/FLUS5ezy5dNzTCXi7",
     "photos": [
       {
         "big": "/images/backgrounds/2016_1.jpg",

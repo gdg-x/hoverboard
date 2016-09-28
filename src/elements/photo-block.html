@@ -69,6 +69,22 @@
         cursor: pointer;
       }
 
+      .photo-albums-links {
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
+      }
+
+      .heading {
+        margin-bottom: 0 !important;
+      }
+
+      paper-button {
+        margin: 4px 16px;
+        font-size: initial;
+        background: var(--text-primary-color);
+        color: var(--default-primary-color);
+      }
+
       @media (min-width: 601px) {
         .photo-wrapper {
           height: 500px;
@@ -87,26 +103,47 @@
     <div class="photo-wrapper">
       <div class="photo big">
         <div class="placeholder-color image" style$="background-image: url([[_selected.big]])" fit></div>
-        <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
-          <paper-ripple></paper-ripple>
-          <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>
-        </a>
+        <!--<a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">-->
+          <!--<paper-ripple></paper-ripple>-->
+          <!--<span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>-->
+        <!--</a>-->
       </div>
       <div class="vertical-block">
         <div class="photo">
           <div class="placeholder-color image second" style$="background-image: url([[_selected.small.0]])" fit></div>
-          <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
-            <paper-ripple></paper-ripple>
-            <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>
-          </a>
+          <!--<a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">-->
+            <!--<paper-ripple></paper-ripple>-->
+            <!--<span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>-->
+          <!--</a>-->
         </div>
         <div class="photo">
           <div class="placeholder-color image third" style$="background-image: url([[_selected.small.1]])" fit></div>
-          <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
-            <paper-ripple></paper-ripple>
-            <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>
-          </a>
+          <!--<a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">-->
+            <!--<paper-ripple></paper-ripple>-->
+            <!--<span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>-->
+          <!--</a>-->
         </div>
+      </div>
+    </div>
+
+    <div class="photo-albums-links">
+      <div class="container container-narrow" layout horizontal center-center wrap>
+        <h4 class="heading">
+          [[localize('add-photos')]]
+          </h4>
+          <a class="block-link" href$="[[app.data.gallery.sharedAlbumUrl]]" target="_blank" rel="noopener noreferrer"
+             on-tap="_trackClick">
+            <paper-button raised>[[localize('shared-album')]]</paper-button>
+          </a>
+        <h4 class="heading">
+
+        [[localize('or-view')]]
+        </h4>
+
+        <a class="block-link" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer"
+             on-tap="_trackClick">
+            <paper-button raised>[[localize('highlights')]]</paper-button>
+          </a>
       </div>
     </div>
 
