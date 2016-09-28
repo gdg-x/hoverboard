@@ -99,8 +99,8 @@
             </template>
           </paper-tabs>
           <div class="action-button-wrapper" layout horizontal center-center>
-            <a href="/blog/posts/dfua-summary/" on-tap="_trackBuyClick">
-              <paper-button class="action-button">[[localize('open-summary')]]</paper-button>
+            <a href="https://goo.gl/photos/H8s3CtPexCzkLqSt9" on-tap="_trackPrimaryAction" target="_blank" rel="noopener noreferrer">
+              <paper-button class="action-button">[[localize('view-photos')]]</paper-button>
             </a>
           </div>
         </template>
@@ -144,8 +144,8 @@
           }
         },
 
-        _trackBuyClick: function () {
-          HOVERBOARD.Analytics.trackEvent('ticket', 'open_summary', 'toolbar');
+        _trackPrimaryAction: function () {
+          HOVERBOARD.Analytics.trackEvent('photos', 'view', 'toolbar');
         }
 
       });

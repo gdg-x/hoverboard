@@ -138,8 +138,11 @@
                 {{localize('play-icon')}}
               </div>
               <div class="action-buttons">
-                <a href="/blog/posts/dfua-summary/">
-                  <paper-button class="primary" raised>[[localize('open-summary')]]</paper-button>
+                <a href="/blog/posts/dfua-summary/" on-tap="_trackEventSummary">
+                  <paper-button>[[localize('open-summary')]]</paper-button>
+                </a>
+                <a href="https://goo.gl/photos/H8s3CtPexCzkLqSt9" on-tap="_trackEventPhotos" target="_blank" rel="noopener noreferrer">
+                  <paper-button class="primary" raised>[[localize('view-photos')]]</paper-button>
                 </a>
               </div>
             </div>
@@ -219,6 +222,14 @@
             behavior: 'smooth',
             target: HOVERBOARD.Elements.Scroller
           });
+        },
+
+        _trackEventPhotos: function() {
+          HOVERBOARD.Analytics.trackEvent('photos', 'view', 'header');
+        },
+
+        _trackEventSummary: function() {
+          HOVERBOARD.Analytics.trackEvent('summary', 'open', 'header');
         }
 
       });
