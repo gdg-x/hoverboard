@@ -248,6 +248,7 @@
                 <paper-item
                   value="[[lang.key]]"
                   label="[[lang.name]]"
+                  on-tap="_changeLanguage"
                 >[[lang.name]]
                 </paper-item>
               </template>
@@ -271,16 +272,12 @@
           HOVERBOARD.LocalizeBehavior
         ],
 
-        observers: [
-          'languageChanged(app.lang)'
-        ],
-
         scrollToTop: function (e) {
           HOVERBOARD.Elements.Template.backToTop(e);
         },
 
-        languageChanged: function (lang) {
-          HOVERBOARD.Analytics.trackEvent('language', 'select', lang);
+        _changeLanguage: function (e) {
+          HOVERBOARD.Analytics.trackEvent('language', 'select', e.target.label);
         },
 
         _getLinkTarget: function (newTab) {
