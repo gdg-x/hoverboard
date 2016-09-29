@@ -1,5 +1,5 @@
 
-[****DevFest Ukraine****](https://devfest.gdg.org.ua/) - it was fun, advantageous, crowded and exciting event! The scale of DevFest is simple breathtaking - 2 days full of Android, Web and Cloud hardcore!
+[****DevFest Ukraine****](https://devfest.gdg.org.ua/) - it was fun, advantageous, crowded and exciting event! The scale of DevFest is simply breathtaking - 2 days full of Android, Web and Cloud hardcore!
 
 
 The 5th annual conference GDG DevFest Ukraine - the biggest one related to Google techlogies in CEE - was held on September 9-10, 2016 in Lviv, Ukraine. The conference was powered by [Google Developers Group Lviv](http://lviv.gdg.org.ua/) (GDG Lviv) in together with the Google Developer Groups from all over Ukraine.
