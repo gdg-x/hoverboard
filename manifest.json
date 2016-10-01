@@ -1,6 +1,6 @@
 {
-  "name": "GDG DevFest Ukraine 2016",
-  "short_name": "GDG DevFest Ukraine 2016",
+  "name": "ngVikings 2017",
+  "short_name": "ngVikings 2017",
   "icons": [
     {
       "src": "images/touch/homescreen-48.png",
@@ -40,6 +40,6 @@
   ],
   "start_url": "./?utm_source=web_app_manifest",
   "display": "standalone",
-  "background_color": "#F57C00",
-  "theme_color": "#F57C00"
+  "background_color": "#012250",
+  "theme_color": "#012250"
 }
