@@ -6,6 +6,11 @@
         "name": "AngularJS Oslo Meetup",
         "url": "www.meetup.com/AngularJS-Oslo/",
         "logoUrl": "../images/logos/angularoslo.png"
+      },
+      {
+        "name": "AngularJS Copenhagen Meetup",
+        "url": "www.meetup.com/AngularJS-Copenhagen/",
+        "logoUrl": "../images/logos/ngcopenhagen.png"
       }
     ]
   }

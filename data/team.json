@@ -28,6 +28,28 @@
           }
         ],
         "title": "Website and general management"
+      },
+      {
+        "name": "Shahrzad (Sherry) Aziminia",
+        "photoUrl": "/images/people/sherry.jpg",
+        "socials": [
+          {
+            "icon": "gplus",
+            "link": "https://plus.google.com/+ShahrzadA",
+            "name": "Google+"
+          },
+          {
+            "icon": "facebook",
+            "link": "https://www.facebook.com/sherry.list.a",
+            "name": "Facebook"
+          },
+          {
+            "icon": "twitter",
+            "link": "https://twitter.com/sherrrylst",
+            "name": "Twitter"
+          }
+        ],
+        "title": "co-organizer"
       }
     ]
   },
