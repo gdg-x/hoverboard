@@ -106,6 +106,7 @@ pull request, so we can include you in this list.
 | [GDG DevFest Mezam 2016](https://devfest-mezam.gdgbambili.xyz) |
 | [GDG DevFest Vietnam 2016](https://devfest.vn) |
 | [GDG DevFest Seattle 2016](https://devfest.gdgseattle.org) |
+| [GDG DevFest Belgium 2016](https://devfest.be) |
 
 ### Roadmap :rocket:
 :x: Admin panel  
