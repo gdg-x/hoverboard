@@ -201,7 +201,7 @@
               <iron-image class="company-logo" src="{{speaker.companyLogo}}" sizing="contain"></iron-image>
               <div class="tags">{{localize('skills')}}:
                 <template is="dom-repeat" items="[[speaker.tags]]" as="tag">
-                  <span class="tag" style$="{{_getCustomStyleValue(tag)}}" target="_blank">[[tag]]</span>
+                  <span class="tag" style$="{{_getCustomStyleValue(tag)}}">[[tag]]</span>
                 </template>
               </div>
               <marked-element class="details-text" markdown="[[speaker.shortBio]]">
