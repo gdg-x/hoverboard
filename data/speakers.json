@@ -1,6 +1,6 @@
 {
-    "1": {
-        "id": 1,
+    "7": {
+        "id": 7,
         "featured": "true",
         "name": "Mert Şimsek",
         "title": "Android Developer",
@@ -36,9 +36,209 @@
             }
         ]
     },
+    "8": {
+      "id": 8,
+      "featured": "true",
+      "name": "Sevnur Malik",
+      "title": "İş Geliştirme Müdürü",
+      "company": "Medyanet",
+      "companyLogo": "/images/logos/medyanet.jpg",
+      "country": "İstanbul, Türkiye",
+      "photoUrl": "/images/people/sevnurmalik.png",
+      "shortBio": "Sevnur Medyanet'te reklam teknolojileri odaklı iş geliştirme müdürü olarak çalışıyor",
+      "bio": "Medyanet'te reklam teknolojileri odaklı iş geliştirme müdürü olarak çalışan Sevnur, daha önce Türk Telekom Dijitial Strateji ve İş Geliştirme, internet teknolojileri departmanlarında, Useful iş geliştirme ajansında ve Unilever'de OMO markasının ürün müdür yardımcısı olarak çalıştı. İşten arta kalan zamanlardan Women Techmakers İstanbul'u başlatıp organizatorlüğünü yaptı ve Çayçek isimli bir blogun kurucu ortaklarından.Teknoloji ve data ile yeni nesil reklamcılık, programatik, mobil reklamcılık, ad blocking recovery, ölçümleme ve optimizasyon gibi konularda tüm dünyada farklı firmalarla çalışıyor. Boğaziçi Üniversitesi'nden 2010'da mezun oldu ve 2014'de Stanford'da girişimcilik ve inovasyon yaz sertifika programına katıldı. ",
+      "tags": [
+        "GDG",
+        "Mobil",
+        "İş Geliştirme"
 
-    "2": {
-      "id": 2,
+      ],
+      "badges": [
+        {
+          "name": "GDG",
+          "description": "Google Developers Group İstanbul",
+          "link": "https://developers.google.com/groups/chapter/100514812580249787371/"
+        }
+
+      ],
+      "socials": [
+        {
+          "icon": "linkedin",
+          "name": "LinkedIn",
+          "link": " https://tr.linkedin.com/in/sevnurmalik"
+        },
+        {
+          "icon": "twitter",
+          "name": "twitter",
+          "link": "https://twitter.com/sevnurm"
+        }
+      ]
+    },
+    "9": {
+      "id": 9,
+      "featured": "true",
+      "name": "Serdar Gökay Küçük",
+      "title": "Sistem Mimarı",
+      "company": "4S Bilgi Teknolojileri",
+      "companyLogo": "/images/logos/4s.jpg",
+      "country": "İstanbul, Türkiye",
+      "photoUrl": "/images/people/serdarkucuk.jpg",
+      "shortBio": "Gökay, 4S Bilgi Teknoljileri' nde Sofware Developer olarak çalışıyor.",
+      "bio": "Gökay KüçükUnity ile yakından ilgileniyor. DevFest Eskişehir 2016' da Yeni Kral Docker sunumu ile bizlere Docker' ın inceliklerinden bahsedecek.",
+      "tags": [
+        "Web",
+        "Docker"
+      ],
+      "badges": [
+
+      ],
+      "socials": [
+        {
+          "icon": "linkedin",
+          "name": "LinkedIn",
+          "link": "https://www.linkedin.com/in/serdar-gokay-kucuk-8a103751"
+        },
+        {
+          "icon": "facebook",
+          "name": "facebook",
+          "link": "https://www.facebook.com/sgkucuk"
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "featured": "true",
+      "name": "Orhan Bayram",
+      "title": "Business Development & Partnership Manager",
+      "company": "StartersHub",
+      "companyLogo": "/images/logos/starters.png",
+      "country": "İstanbul, Türkiye",
+      "photoUrl": "/images/people/orhan-bayram.jpg",
+      "shortBio": "Gebze Yüksek Teknoloji Enstitüsü Elektronik Mühendisliği mezunuyum. 2011 yılında kurduğum danışmanlık firmasından 2012'de ayrılarak Turkcell'de profesyonel çalışma hayatına başladım.",
+      "bio": "Gebze Yüksek Teknoloji Enstitüsü Elektronik Mühendisliği mezunuyum. 2011 yılında kurduğum danışmanlık firmasından 2012'de ayrılarak Turkcell'de profesyonel çalışma hayatına başladım. 3,5 yıllık Turkcell serüveninde Geleceği Yazanlar projesinin ürün yöneticiliği, Turkcell appstore süreçlerinin yönetimi, IoT & M2M ekosistem yöneticiliği görevlerinde bulundum.Mart 2016'dan beri StartersHub'da İş Geliştirme ve İşbirlikleri Yöneticisi olarak görev yapıyorum.",
+      "tags": [
+        "Business Development"
+      ],
+      "badges": [
+      ],
+      "socials": [
+        {
+          "icon": "linkedin",
+          "name": "LinkedIn",
+          "link": "https://www.linkedin.com/in/orhanbayram"
+        },
+        {
+          "icon": "twitter",
+          "name": "twitter",
+          "link": "https://twitter.com/orhanbayram"
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "featured": "true",
+      "name": "Ferhat Kurt",
+      "title": "Yazılım Uzmanı",
+      "company": "Open Zeka Bilgi Teknolojileri",
+      "companyLogo": "/images/logos/openzeka.png",
+      "country": "Ankara, Türkiye",
+      "photoUrl": "/images/people/ferhatkurt.jpg",
+      "shortBio": " Derin öğrenme tabanlı makine öğrenmesi çalışmalarına 2014 yılında Hacettepe Üniversitesinde başlamıştır",
+      "bio": "Derin öğrenme alanında destek sitesi http://derinogrenme.com, Türkiye Derin Öğrenme Grubu dahil sosyal medya kanallarında yöneticilik yapmaktadır. 2015 yılından bu yana üniversite ve teknoketler bünyesinde derin öğrenme eğitimleri vermiştir. Ferhat Kurt, 2016 yılında kamuda proje yöneticiliği görevinden istifa ederek, yapay zeka uygulamaları geliştirmek üzere Open Zeka girişimine Mayıs 2016 ayında başlamıştır. Halen Hacettepe Üniversitesi Bilgisayar Mühendisliği'nde yüksek lisans çalışmasına devam etmektedir. Open Zeka girişimi Microsoft ve NVIDIA tarafından desteklenmektedir.",
+      "tags": [
+        "AI",
+        "Deep Learning"
+      ],
+      "badges": [
+      ],
+      "socials": [
+        {
+          "icon": "twitter",
+          "name": "twitter",
+          "link": "https://twitter.com/openzeka"
+        }
+      ]
+  },
+    "6": {
+      "id": 6,
+      "featured": "true",
+      "name": "Elif Boncuk",
+      "title": "Yetkili Yazılım Uzmanı",
+      "company": "Garanti Teknoloji",
+      "companyLogo": "/images/logos/garantiteknoloji.png",
+      "country": "İstanbul, Türkiye",
+      "photoUrl": "/images/people/elifboncuk.webp",
+      "shortBio": "Elif Boncuk 2011 yılında Hacettepe Üniversitesi Bilgisayar Mühendisliği bölümünden, 2016 yılında da Bahçeşehir Üniversitesi MBA programından mezun olmuştur.",
+      "bio": "Garanti Teknoloji'de Yetkili Yazılım Uzmanı olarak çalışmaktadır. Profesyonel iş yaşamının dışında Android'de Google Developers Expert programının bir parçası olarak, Google Developer Group ve Women Techmakers Istanbul'da da co-organizer olarak görev almaktadır.5 yıldan uzun bir zamandır Android(Eclair'den beri) başta olmak üzere mobil teknolojiler üzerine çalışan Elif Boncuk, şirketinde mobil ekibin kurulum aşamasında da yer almış olmakla beraber Garanti'nin popüler uygulamalarının çoğunun geliştirilmesinde görev almıştır.",
+      "tags": [
+        "Android",
+        "Java"
+      ],
+      "badges": [
+        {
+          "name": "GDG",
+          "description": "Google Developers Group İstanbul",
+          "link": "https://developers.google.com/groups/chapter/100514812580249787371/"
+        },
+        {
+          "name": "GDE",
+          "description": "Google Developers Expert Android",
+          "link": "https://developers.google.com/experts/people/elif-boncuk"
+        }
+
+      ],
+      "socials": [
+        {
+        "icon": "linkedin",
+        "name": "LinkedIn",
+        "link": "https://tr.linkedin.com/in/elif-boncuk-mba-855a8728"
+      },
+        {
+          "icon": "twitter",
+          "name": "twitter",
+          "link": "https://twitter.com/elifbon_"
+        },
+        {
+          "icon": "gplus",
+          "name": "Google+",
+          "link": "https://plus.google.com/+ElifBoncuk"
+        },
+        {
+          "icon": "website",
+          "name": "Website",
+          "link": "https://elifboncuk.com/"
+        }
+      ]
+    },
+    "10": {
+      "id": 10,
+      "featured": "true",
+      "name": "Samet Sevim",
+      "title": "Bilgisayar Mühendisi",
+      "company": "Logo Yazılım",
+      "companyLogo": "/images/logos/logoyazilim.jpg",
+      "country": "Ankara, Türkiye",
+      "photoUrl": "/images/people/sametsevim.jpg",
+      "shortBio": "2012 Bilkent Bilgisayar Mühendisliği mezunuyum. 2011 yılında Vardar Yazılım Eğitim Danışmanlık Ltd. Şirketinde çalışma hayatıma başladım.",
+      "bio": "2015 yılında Logo Yazılım tarafından satın alınan Vardar Yazılım ile birlikte Logo yazılım bünyesinde kıdemli yazılım uzmanı olarak çalışmaya başladım.Web tabanlı kurumsal uygulamalar konularında çalışmaktayım. Vardar yazılımdan süre gelen eğitmenlik anlayışı ile çeşitli şirket içi ve dışı eğitim organizasyonlarında bulundum.Vaadin, Spring konularında verilen eğitimlerin yanısıra Android programlama, hibernate, xamarin, mqtt, bpmn2.0  konularında bilgi sahibiyim.İş süreçleri, izleme modülleri ve doküman yönetim sistemleri projeleri ile Logo yazılım bünyesinde çalışma hayatımı sürdürmekteyim.",
+      "tags": [
+        "Spring Boot",
+        "Java",
+        "Vaadin"
+      ],
+      "badges": [
+      ],
+      "socials": [
+        {
+          "icon": "linkedin",
+          "name": "LinkedIn",
+          "link": "https://tr.linkedin.com/in/samet-sevim-a1954a84"
+        }
+
+      ]
+    },
+    "13": {
+      "id": 13,
       "featured": "true",
       "name": "Yakında Açıklanacak",
       "title": "-",
@@ -60,8 +260,175 @@
 
       ],
       "socials": [
-
       ]
-    }
+  },
+    "11": {
+    "id": 11,
+    "featured": "true",
+    "name": "Burak İnce",
+    "title": "Bilgi Güvenliği Danışmanı",
+    "company": "Trend Micro",
+    "companyLogo": "/images/logos/trendmicro.jpg",
+    "country": "İstanbul, Türkiye",
+    "photoUrl": "/images/people/burakince.jpg",
+    "shortBio": "ODTU Bilgisayar ve Öğretim Teknolojileri Eğitimi Bölümünden mezun oldum.",
+    "bio": "ODTU Bilgisayar ve Öğretim Teknolojileri Eğitimi Bölümünden mezun oldum. 8 yıldır Bilgi Güvenliği alanında sektörün farklı firmalarında daha çok kamu ağırlıklı müşteriler ile çalıştım. 4 yıldır Trend Micro Ankara ofisinde Bilgi Güvenliği Danışmanı olarak Ankara ve Yunanistan kamu kurumlarına destek veriyorum.",
+    "tags": [
+      "Security",
+      "APT",
+      "Hack"
+    ],
+    "badges": [
+    ],
+    "socials": [
+    ]
+  },
+    "2": {
+    "id": 2,
+    "featured": "true",
+    "name": "Ahmet Yalçınkaya",
+    "title": "Mobile Software Engineer",
+    "company": "sahibinden.com",
+    "companyLogo": "/images/logos/sahibinden.png",
+    "country": "İstanbul, Türkiye",
+    "photoUrl": "/images/people/ahmetyalcinkaya.jpg",
+    "shortBio": "sahibinden.com'da iOS Developer olarak çalışıyorum. Mobil dünya ile yakından ilgileniyor, yenilikleri takip etmeyi seviyorum.",
+    "bio": "sahibinden.com'da iOS Developer olarak çalışıyorum. Mobil dünya ile yakından ilgileniyor, yenilikleri takip etmeyi seviyorum.",
+    "tags": [
+      "ios",
+      "apple"
+    ],
+    "badges": [
+      {
+        "name": "GDG",
+        "description": "Google Developers Group Eskişehir",
+        "link": "https://developers.google.com/groups/chapter/115602346615910585045/"
+      }
+
+    ],
+    "socials": [
+      {
+        "icon": "linkedin",
+        "name": "LinkedIn",
+        "link": "https://www.linkedin.com/in/ayalcinkaya"
+      },
+      {
+        "icon": "twitter",
+        "name": "twitter",
+        "link": "https://twitter.com/ayalcinkaya_"
+      }
+
+    ]
+  },
+    "3": {
+    "id": 3,
+    "featured": "true",
+    "name": "Gürcan Serbest",
+    "title": "Game Developer",
+    "company": "Imece Studios",
+    "companyLogo": "/images/logos/imece.png",
+    "country": "Eskişehir, Türkiye",
+    "photoUrl": "/images/people/gurcanserbest.jpg",
+    "shortBio": "Gürcan SERBEST Imece Studios kurucusu olup Türkiye'nin ilk sanal gerçeklik oyunu olan Air Istanbul'un tasarımcısı ve proje yöneticisidir. ",
+    "bio": "Gürcan SERBEST Imece Studios kurucusu olup Türkiye'nin ilk sanal gerçeklik oyunu olan Air Istanbul'un tasarımcısı ve proje yöneticisidir. ",
+    "tags": [
+      "Games",
+      "VR",
+      "Hack"
+    ],
+    "badges": [
+    ],
+    "socials": [
+      {
+        "icon": "twitter",
+        "name": "twitter",
+        "link": "https://twitter.com/gurcanserbest"
+      }
+
+    ]
+  },
+    "12": {
+    "id": 12,
+    "featured": "true",
+    "name": "Murat Can BUR",
+    "title": "Android Developer",
+    "company": "dolap.com",
+    "companyLogo": "/images/logos/dolapcom.png",
+    "country": "İstanbul, Türkiye",
+    "photoUrl": "/images/people/muratcanbur.jpg",
+    "shortBio": "Android Developer @dolap.com",
+    "bio": "Murat, dolap.com 'da Android Developer olarak çalışıyor. Android uygulama geliştirme ile ilgili blog yazıları yazıyor, sunumlar yapıyor. DevFest Eskişehir 2016' da Gradle Tips & Tricks sunumu ile Android uygulama geliştirirken Gradle' ı daha etkili nasıl kullanabileceğimizi anlatacak.",
+    "tags": [
+      "Android",
+      "Gradle",
+      "Build"
+    ],
+    "badges": [
+      {
+        "name": "GDG",
+        "description": "Google Developers Group Eskişehir",
+        "link": "https://developers.google.com/groups/chapter/115602346615910585045/"
+      }
+    ],
+    "socials": [
+      {
+        "icon": "linkedin",
+        "name": "LinkedIn",
+        "link": "https://tr.linkedin.com/in/muratcanbur"
+      },
+      {
+        "icon": "twitter",
+        "name": "twitter",
+        "link": "https://twitter.com/muratcanbur"
+      },
+      {
+        "icon": "github",
+        "name": "github",
+        "link": "https://github.com/muratcanbur"
+      }
+
+    ]
+  },
+    "1": {
+    "id": 1,
+    "featured": "true",
+    "name": "Esin Işık",
+    "title": "UX Designer",
+    "company": "Bağımsız UX Tasarımcısı - esindesign",
+    "country": "İstanbul, Türkiye",
+    "photoUrl": "/images/people/esinisik.jpg",
+    "shortBio": "Esin is an independent user experience designer with 5 years experience in fields including banking IT, user research, emotional design, interaction design, service design and creative facilitation.",
+    "bio": "She completed a master's degree in TUDelft in the Netherlands in 2010 in the field of Design for Interaction after an undergarduate degree at the department of Industrial Design at METU (Middle East Technical University) in Ankara in 2007. She first started with digital experience design consulting in i-am Istanbul, then was in Denizbank and Garanti Bank's IT companies. Her current focus is getting startup teams to become more human centred, experience design conscious. She also keeps being a consultant for corporate design teams and IT projects.",
+    "tags": [
+      "Desing",
+      "UX"
+    ],
+    "badges": [
+      {
+        "name": "GDG",
+        "description": "Google Developers Group İstanbul",
+        "link": "https://developers.google.com/groups/chapter/100514812580249787371/"
+      },
+      {
+        "name": "GDE",
+        "description": "Google Developers Expert Android",
+        "link": "https://developers.google.com/experts/people/esin-i-ik"
+      }
+
+    ],
+    "socials": [
+      {
+        "icon": "linkedin",
+        "name": "LinkedIn",
+        "link": "tr.linkedin.com/in/esinis"
+      },
+      {
+        "icon": "twitter",
+        "name": "twitter",
+        "link": "https://twitter.com/esinishi"
+      }
+    ]
+  }
+
 
 }

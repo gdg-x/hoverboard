@@ -1,5 +1,77 @@
 [
   {
+    "title": "general-partner",
+    "logos": [
+      {
+        "name": "Google",
+        "url": "https://www.google.com.ua/intl/en/about/",
+        "logoUrl": "../images/logos/google.svg"
+      }
+    ]
+  },
+  {
+    "title": "bronze-sponsor",
+    "logos": [
+      {
+        "name": "Gpay",
+        "url": "https://www.gpay.com.tr/",
+        "logoUrl": "/images/logos/gpaylogo.svg",
+        "width": 157,
+        "height": 53
+      }
+    ]
+  },
+  {
+    "title": "event-organizer",
+    "logos": [
+    {
+          "name": "Bilgisayar Kulübü",
+          "url": "https://www.facebook.com/AnadoluBK/?ref=br_rs",
+          "logoUrl": "../images/logos/bklogo.png",
+          "width": 170,
+          "height":120
+        },
+      {
+
+        "name": "GDG Eskişehir",
+        "url": "http://www.gdgeskisehir.com/#!/about",
+        "logoUrl": "../images/logos/gdg-eskisehir.png",
+        "width": 200,
+        "height":120
+      }
+
+      ]
+    },
+  {
+    "title": "media-sponsor",
+    "logos": [
+      {
+        "name": "Radyo ODTÜ",
+        "url": "www.radyoodtu.com.tr/",
+        "logoUrl": "../images/logos/radyoodtu.png",
+        "width": 170,
+        "height":120
+      },
+      {
+
+        "name": "Yazılım Günleri",
+        "url": "http://www.yazilimgunleri.com/",
+        "logoUrl": "../images/logos/yazilimgunleri.png",
+        "width": 170,
+        "height":120
+      },
+      {
+
+        "name": "Haberimport",
+        "url": "http://www.haberimport.com/",
+        "logoUrl": "../images/logos/haberimport.png",
+        "width": 170,
+        "height":120
+      }
+
+    ]
+  },
+  {
     "title": "template-creator",
     "logos": [
       {
@@ -7,23 +79,6 @@
         "url": "https://plus.google.com/102444623953913144164",
         "logoUrl": "../images/logos/gdg-lviv.svg",
         "width": 170
-      }
-    ]
-  },
-  {
-    "title": "general-partner",
-    "logos": [
-      {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
-      },
-      {
-        "name": "Bilgisayar Kulübü",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/logos/bklogo.png",
-        "width": 170,
-        "height":120
       }
     ]
   }
