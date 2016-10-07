@@ -237,8 +237,8 @@
 
       ]
     },
-    "13": {
-      "id": 13,
+    "15": {
+      "id": 15,
       "featured": "true",
       "name": "Yakında Açıklanacak",
       "title": "-",
@@ -428,7 +428,63 @@
         "link": "https://twitter.com/esinishi"
       }
     ]
-  }
+  },
+    "13": {
+    "id": 13,
+    "featured": "true",
+    "name": "Efe Budak",
+    "title": "Android Developer",
+    "company": "sahibinden.com",
+    "country": "İstanbul, Türkiye",
+      "companyLogo": "/images/logos/sahibinden.png",
+      "photoUrl": "/images/people/efebudak.jpg",
+    "shortBio": "Bilkent bilgisayar muhendisligini bitridikten sonra Akbank' ta cobol developer olarak 1 yil calistim. Ardindan android hayatima Monitise MEA' da devam ettim. Su anda Sahibinden.com android takimindayim.",
+    "bio": "Bilkent bilgisayar muhendisligini bitridikten sonra Akbank' ta cobol developer olarak 1 yil calistim. Ardindan android hayatima Monitise MEA' da devam ettim. Su anda Sahibinden.com android takimindayim.",
+    "tags": [
+      "Android",
+      "Mobile"
+    ],
+    "badges": [
+    ],
+    "socials": [
+      {
+        "icon": "linkedin",
+        "name": "LinkedIn",
+        "link": "https://www.linkedin.com/in/efe-budak-72893882"
+      }
 
+    ]
+  },
+    "14": {
+    "id": 14,
+    "featured": "true",
+    "name": "Erdem Lafcı",
+    "title": "Girişimci",
+    "company": "4PPS",
+    "country": "Ankara, Türkiye",
+      "companyLogo": "/images/logos/4pps.png",
+      "photoUrl": "/images/people/erdemlafci.jpg",
+    "shortBio": "Erdem LAFCI, Hacettepe Üniversitesi Bilgisayar Mühendisliği mezunudur. 7 yıldır mobil teknolojiler ve mobil uygulamalar üzerine çalışmalar yapmaktadır. ",
+    "bio": "Kuruluşundan itibaren Google Developer Group Ankara'da çalışmakta ve Android Developer Days etkinliklerini düzenleyen ekipte yer almaktadır. Ayrıca Mobil Monday ekibinde Co-Organizer olarak çalışmaktadır.Öğrencilik zamanlarından beri Türkiye Bilişim Derneği Ankara şubesinde çalışmaktadır ve bir dönem TBD Genç başkanlığı yapmıştır.2014 yılından ekip arkadaşlarıyla birlikte kurduğu 4PPS firmasında ise mobil teknolojiler ile ilgili Ar-Ge çalışmaları yapmakta, kurumsal firmalar ve startup'lar  için mobil uygulamalar geliştirmektedir. ",
+    "tags": [
+      "Android",
+      "Mobile"
+    ],
+    "badges": [
+      {
+        "name": "GDG",
+        "description": "Google Developers Group Eskişehir",
+        "link": "https://developers.google.com/groups/chapter/114568591151316164517/"
+      }
+    ],
+    "socials": [
+      {
+        "icon": "twitter",
+        "name": "twitter",
+        "link": "https://twitter.com/erdemlafci"
+      }
+
+    ]
+  }
 
 }
