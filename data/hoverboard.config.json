@@ -40,6 +40,9 @@
     {
       "route": "speakers",
       "permalink": "/speakers/"
+    },{
+      "route": "schedule",
+      "permalink": "/schedule/"
     }
   ],
   "url": "df16.gdgeskisehir.com",

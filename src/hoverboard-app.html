@@ -109,8 +109,10 @@
 
     <app-data
       app="{{app}}"
-     speakers="{{speakers}}"
- 
+      speakers="{{speakers}}"
+      sessions="{{sessions}}"
+      schedule="{{schedule}}"
+
     ></app-data>
 
     <app-drawer-layout drawer-width="599px" force-narrow>
@@ -155,13 +157,20 @@
 
                   ></home-page>
 
+          <speakers-page name="speakers"
+                         app="{{app}}"
+                         route="{{subRoute}}"
+                         speakers="{{speakers}}"></speakers-page>
+
+          <schedule-page name="schedule"
+                         app="{{app}}"
+                         route="{{subRoute}}"
+                         schedule="{{schedule}}"
+                         sessions="{{sessions}}"></schedule-page>
+
           <cod-page name="cod"
                     app="{{app}}"></cod-page>
 
-           <speakers-page name="speakers"
-                         app="{{app}}"
-                         route="{{subRoute}}"
-                         speakers="{{speakers}}"></speakers-page>   
 
         </neon-animated-pages>
       </div>

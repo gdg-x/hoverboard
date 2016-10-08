@@ -48,9 +48,8 @@
       "shortBio": "Sevnur Medyanet'te reklam teknolojileri odaklı iş geliştirme müdürü olarak çalışıyor",
       "bio": "Medyanet'te reklam teknolojileri odaklı iş geliştirme müdürü olarak çalışan Sevnur, daha önce Türk Telekom Dijitial Strateji ve İş Geliştirme, internet teknolojileri departmanlarında, Useful iş geliştirme ajansında ve Unilever'de OMO markasının ürün müdür yardımcısı olarak çalıştı. İşten arta kalan zamanlardan Women Techmakers İstanbul'u başlatıp organizatorlüğünü yaptı ve Çayçek isimli bir blogun kurucu ortaklarından.Teknoloji ve data ile yeni nesil reklamcılık, programatik, mobil reklamcılık, ad blocking recovery, ölçümleme ve optimizasyon gibi konularda tüm dünyada farklı firmalarla çalışıyor. Boğaziçi Üniversitesi'nden 2010'da mezun oldu ve 2014'de Stanford'da girişimcilik ve inovasyon yaz sertifika programına katıldı. ",
       "tags": [
-        "GDG",
         "Mobil",
-        "İş Geliştirme"
+        "community"
 
       ],
       "badges": [
@@ -117,7 +116,7 @@
       "shortBio": "Gebze Yüksek Teknoloji Enstitüsü Elektronik Mühendisliği mezunuyum. 2011 yılında kurduğum danışmanlık firmasından 2012'de ayrılarak Turkcell'de profesyonel çalışma hayatına başladım.",
       "bio": "Gebze Yüksek Teknoloji Enstitüsü Elektronik Mühendisliği mezunuyum. 2011 yılında kurduğum danışmanlık firmasından 2012'de ayrılarak Turkcell'de profesyonel çalışma hayatına başladım. 3,5 yıllık Turkcell serüveninde Geleceği Yazanlar projesinin ürün yöneticiliği, Turkcell appstore süreçlerinin yönetimi, IoT & M2M ekosistem yöneticiliği görevlerinde bulundum.Mart 2016'dan beri StartersHub'da İş Geliştirme ve İşbirlikleri Yöneticisi olarak görev yapıyorum.",
       "tags": [
-        "Business Development"
+        "Business-Development"
       ],
       "badges": [
       ],
@@ -147,7 +146,7 @@
       "bio": "Derin öğrenme alanında destek sitesi http://derinogrenme.com, Türkiye Derin Öğrenme Grubu dahil sosyal medya kanallarında yöneticilik yapmaktadır. 2015 yılından bu yana üniversite ve teknoketler bünyesinde derin öğrenme eğitimleri vermiştir. Ferhat Kurt, 2016 yılında kamuda proje yöneticiliği görevinden istifa ederek, yapay zeka uygulamaları geliştirmek üzere Open Zeka girişimine Mayıs 2016 ayında başlamıştır. Halen Hacettepe Üniversitesi Bilgisayar Mühendisliği'nde yüksek lisans çalışmasına devam etmektedir. Open Zeka girişimi Microsoft ve NVIDIA tarafından desteklenmektedir.",
       "tags": [
         "AI",
-        "Deep Learning"
+        "Deep-Learning"
       ],
       "badges": [
       ],
@@ -222,7 +221,7 @@
       "shortBio": "2012 Bilkent Bilgisayar Mühendisliği mezunuyum. 2011 yılında Vardar Yazılım Eğitim Danışmanlık Ltd. Şirketinde çalışma hayatıma başladım.",
       "bio": "2015 yılında Logo Yazılım tarafından satın alınan Vardar Yazılım ile birlikte Logo yazılım bünyesinde kıdemli yazılım uzmanı olarak çalışmaya başladım.Web tabanlı kurumsal uygulamalar konularında çalışmaktayım. Vardar yazılımdan süre gelen eğitmenlik anlayışı ile çeşitli şirket içi ve dışı eğitim organizasyonlarında bulundum.Vaadin, Spring konularında verilen eğitimlerin yanısıra Android programlama, hibernate, xamarin, mqtt, bpmn2.0  konularında bilgi sahibiyim.İş süreçleri, izleme modülleri ve doküman yönetim sistemleri projeleri ile Logo yazılım bünyesinde çalışma hayatımı sürdürmekteyim.",
       "tags": [
-        "Spring Boot",
+        "Spring",
         "Java",
         "Vaadin"
       ],
@@ -442,7 +441,7 @@
     "bio": "Bilkent bilgisayar muhendisligini bitridikten sonra Akbank' ta cobol developer olarak 1 yil calistim. Ardindan android hayatima Monitise MEA' da devam ettim. Su anda Sahibinden.com android takimindayim.",
     "tags": [
       "Android",
-      "Mobile"
+      "Mobil"
     ],
     "badges": [
     ],
@@ -468,7 +467,7 @@
     "bio": "Kuruluşundan itibaren Google Developer Group Ankara'da çalışmakta ve Android Developer Days etkinliklerini düzenleyen ekipte yer almaktadır. Ayrıca Mobil Monday ekibinde Co-Organizer olarak çalışmaktadır.Öğrencilik zamanlarından beri Türkiye Bilişim Derneği Ankara şubesinde çalışmaktadır ve bir dönem TBD Genç başkanlığı yapmıştır.2014 yılından ekip arkadaşlarıyla birlikte kurduğu 4PPS firmasında ise mobil teknolojiler ile ilgili Ar-Ge çalışmaları yapmakta, kurumsal firmalar ve startup'lar  için mobil uygulamalar geliştirmektedir. ",
     "tags": [
       "Android",
-      "Mobile"
+      "Mobil"
     ],
     "badges": [
       {
@@ -486,5 +485,4 @@
 
     ]
   }
-
 }
