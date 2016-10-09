@@ -31,6 +31,19 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 ### Setup
 :book: [Full documentation](/docs/).
 
+##### Docker based development env
+
+If you don't want to bother with the dependencies, you can develop in the docker container.
+
+Build:
+
+    docker build -t hoverboard .
+
+and run:
+
+    docker run -it -v "$PWD":/app -p 8080:8080 hoverboard
+
+:book: Read more in [docker docs](/docs/tutorials/docker.md).
 
 ###### Prerequisites
 
@@ -71,6 +84,10 @@ generated using fragment bundling, suitable for serving from non
 H2/push-compatible servers or to clients that do not support H2/Push.
 
     polymer build
+
+Or you can build in Docker container:
+
+    docker run -v "$PWD":/app hoverboard polymer build
     
 :book: Read more in [deploy docs](/docs/tutorials/deploy.md).   
 

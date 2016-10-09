@@ -3,6 +3,8 @@
 Follow the instructions below to install, build, and run the
 Project Hoverboard locally in less than 15 minutes.
 
+Or you may use [Docker container for development](docker.md)
+
 ## Install the Hoverboard and dependencies
 
 1.  Install [Node.js](https://nodejs.org/) (`node`) version 4 or above.
