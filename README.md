@@ -104,7 +104,7 @@ git commit -m 'Updated to the latest version'
 
 ### Who uses the template?
 
-Going to use the template? Go on! The only thing we ask - let us know at with a 
+Going to use the template? Go on! The only thing we ask - let us know with a 
 pull request, so we can include you in this list.
 
 | [GDG DevFest Ukraine](http://devfest.gdg.org.ua) |
@@ -125,6 +125,7 @@ pull request, so we can include you in this list.
 | [GDG DevFest Seattle 2016](https://devfest.gdgseattle.org) |
 | [GDG DevFest Belgium 2016](https://devfest.be) |
 | [GDG DevFest Lisbon 2016](https://devfestlisbon.firebaseapp.com) |
+| [GDG DevFest Sudbury 2016](https://devfest.gdgsudbury.ca) |
 
 ### Roadmap :rocket:
 :x: Admin panel  
