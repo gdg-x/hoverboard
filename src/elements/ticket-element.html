@@ -72,7 +72,6 @@
         font-size: 20px;
         letter-spacing: 1px;
         text-transform: uppercase;
-        white-space: nowrap;
         transform: rotate(-90deg) translate3d(0, 0, 0);
         -webkit-font-smoothing: antialiased;
       }
@@ -130,7 +129,12 @@
         <div class="divider">
           <iron-icon icon="icons:star"></iron-icon>
         </div>
-        <div class="dates">[[starts]] - [[ends]]</div>
+        <template is="dom-if" if="[[ends]]">
+          <div class="dates">[[starts]] - [[ends]]</div>
+        </template>
+        <template is="dom-if" if="[[!ends]]">
+          <div class="dates">[[starts]]</div>
+        </template>
         <template is="dom-if" if="[[info]]">
           <div class="additional-info">[[info]]</div>
         </template>
