@@ -193,7 +193,7 @@
                   exit-animation="scale-down-animation"
                   disable-controls="[[!video.disableControls]]"></video-dialog>
 
-    <toast-element id="toast"></toast-element>
+    <toast-element id="toast" app="{{app}}"></toast-element>
 
   </template>
 
@@ -273,7 +273,7 @@
             this.app.headerSettings.backgroundColor + ' 140%)';
           this.customStyle['--min-header-height'] = this.app.headerSettings.minHeight;
           document.getElementsByName('theme-color')[0].content = this.app.headerSettings.backgroundColor;
-          this.updateStyles(); 
+          this.updateStyles();
           this.$.header.resetLayout();
         },
 
