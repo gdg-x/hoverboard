@@ -145,7 +145,14 @@
         _routePageChanged: function (day) {
           if (this.selected) {
             if (!day) {
-              this.set('routeData.day', 'day1');
+              var dayToSelect = null;
+              var today = new Date().toISOString().substring(0, 10);
+              for (var i = 0, length = this.schedule.length; i < length; i++) {
+                if (today === this.schedule[i].date) {
+                  dayToSelect = 'day' + (i + 1);
+                }
+              }
+              this.set('routeData.day', (dayToSelect || 'day1'));
             } else if (this.app.selectedDay !== day) {
               this.set('app.selectedDay', day);
             }
