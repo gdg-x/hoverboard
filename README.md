@@ -31,6 +31,19 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 ### Setup
 :book: [Full documentation](/docs/).
 
+##### Docker based development env
+
+If you don't want to bother with the dependencies, you can develop in the docker container.
+
+Build:
+
+    docker build -t hoverboard .
+
+and run:
+
+    docker run -it -v "$PWD":/app -p 8080:8080 hoverboard
+
+:book: Read more in [docker docs](/docs/tutorials/docker.md).
 
 ###### Prerequisites
 
@@ -71,6 +84,10 @@ generated using fragment bundling, suitable for serving from non
 H2/push-compatible servers or to clients that do not support H2/Push.
 
     polymer build
+
+Or you can build in Docker container:
+
+    docker run -v "$PWD":/app hoverboard polymer build
     
 :book: Read more in [deploy docs](/docs/tutorials/deploy.md).   
 
@@ -87,7 +104,7 @@ git commit -m 'Updated to the latest version'
 
 ### Who uses the template?
 
-Going to use the template? Go on! The only thing we ask - let us know at with a 
+Going to use the template? Go on! The only thing we ask - let us know with a 
 pull request, so we can include you in this list.
 
 | [GDG DevFest Ukraine](http://devfest.gdg.org.ua) |
@@ -104,6 +121,11 @@ pull request, so we can include you in this list.
 | [Google I/O Extended 2016 Kuala Lumpur](https://ioxkl2016.firebaseapp.com) |
 | [GDG DevFest Hamburg 2016](https://hamburg.devfest.de) |
 | [GDG DevFest Mezam 2016](https://devfest-mezam.gdgbambili.xyz) |
+| [GDG DevFest Vietnam 2016](https://devfest.vn) |
+| [GDG DevFest Seattle 2016](https://devfest.gdgseattle.org) |
+| [GDG DevFest Belgium 2016](https://devfest.be) |
+| [GDG DevFest Lisbon 2016](https://devfestlisbon.firebaseapp.com) |
+| [GDG DevFest Sudbury 2016](https://devfest.gdgsudbury.ca) |
 
 ### Roadmap :rocket:
 :x: Admin panel  
