@@ -22,12 +22,12 @@
             "name": "Twitter"
           },
           {
-            "icon": "website",
-            "link": "http://webmax.rocks/",
-            "name": "Blog"
+            "icon": "github",
+            "link": "https://github.com/webmaxru",
+            "name": "GitHub"
           }
         ],
-        "title": "Website and general management"
+        "title": "Co-organizer"
       },
       {
         "name": "Shahrzad (Sherry) Aziminia",
@@ -49,14 +49,237 @@
             "name": "Twitter"
           }
         ],
-        "title": "co-organizer"
+        "title": "Co-organizer"
+      },
+      {
+        "name": "Alexander Hafstad",
+        "photoUrl": "/images/people/anonymous.png",
+        "socials": [
+        {
+          "icon": "github",
+          "link": "https://github.com/",
+          "name": "GitHub"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/",
+          "name": "Twitter"
+        }],
+        "title": "Co-organizer"
+      },
+      {
+        "name": "Filip Bech-Larsen",
+        "photoUrl": "/images/people/anonymous.png",
+        "socials": [
+        {
+          "icon": "github",
+          "link": "https://github.com/",
+          "name": "GitHub"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/",
+          "name": "Twitter"
+        }],
+        "title": "Co-organizer"
+      },
+      {
+        "name": "Dennis Haulund Nielsen",
+        "photoUrl": "/images/people/anonymous.png",
+        "socials": [
+        {
+          "icon": "github",
+          "link": "https://github.com/",
+          "name": "GitHub"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/",
+          "name": "Twitter"
+        }],
+        "title": "Co-organizer"
+      },
+      {
+        "name": "Magnus Gudmundsson",
+        "photoUrl": "/images/people/anonymous.png",
+        "socials": [
+        {
+          "icon": "github",
+          "link": "https://github.com/",
+          "name": "GitHub"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/",
+          "name": "Twitter"
+        }],
+        "title": "Co-organizer"
+      },
+      {
+        "name": "Fredrik Holm",
+        "photoUrl": "/images/people/anonymous.png",
+        "socials": [
+        {
+          "icon": "github",
+          "link": "https://github.com/",
+          "name": "GitHub"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/",
+          "name": "Twitter"
+        }],
+        "title": "Co-organizer"
+      },
+      {
+        "name": "Jussi Kinnula",
+        "photoUrl": "/images/people/anonymous.png",
+        "socials": [
+        {
+          "icon": "github",
+          "link": "https://github.com/",
+          "name": "GitHub"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/",
+          "name": "Twitter"
+        }],
+        "title": "Co-organizer"
+      },
+      {
+        "name": "Chris Noring",
+        "photoUrl": "/images/people/anonymous.png",
+        "socials": [
+        {
+          "icon": "github",
+          "link": "https://github.com/",
+          "name": "GitHub"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/",
+          "name": "Twitter"
+        }],
+        "title": "Co-organizer"
+      },
+      {
+        "name": "Morten Kirstein",
+        "photoUrl": "/images/people/anonymous.png",
+        "socials": [
+        {
+          "icon": "github",
+          "link": "https://github.com/",
+          "name": "GitHub"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/",
+          "name": "Twitter"
+        }],
+        "title": "Co-organizer"
+      },
+      {
+        "name": "Cem Turan",
+        "photoUrl": "/images/people/anonymous.png",
+        "socials": [
+        {
+          "icon": "github",
+          "link": "https://github.com/",
+          "name": "GitHub"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/",
+          "name": "Twitter"
+        }],
+        "title": "Co-organizer"
       }
     ]
   },
   {
-    "title": "Program Committee",
+    "title": "Contributors",
     "members": [
-
+      {
+        "name": "Jaime Gonzalez Garcia",
+        "photoUrl": "/images/people/anonymous.png",
+        "socials": [
+        {
+          "icon": "github",
+          "link": "https://github.com/",
+          "name": "GitHub"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/",
+          "name": "Twitter"
+        }],
+        "title": "Contributor"
+      },
+      {
+        "name": "Marco Pegoraro",
+        "photoUrl": "/images/people/anonymous.png",
+        "socials": [
+        {
+          "icon": "github",
+          "link": "https://github.com/",
+          "name": "GitHub"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/",
+          "name": "Twitter"
+        }],
+        "title": "Contributor"
+      },
+      {
+        "name": "Mohsen Asfia",
+        "photoUrl": "/images/people/anonymous.png",
+        "socials": [
+        {
+          "icon": "github",
+          "link": "https://github.com/",
+          "name": "GitHub"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/",
+          "name": "Twitter"
+        }],
+        "title": "Contributor"
+      },
+      {
+        "name": "Nima Zahedi",
+        "photoUrl": "/images/people/anonymous.png",
+        "socials": [
+        {
+          "icon": "github",
+          "link": "https://github.com/",
+          "name": "GitHub"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/",
+          "name": "Twitter"
+        }],
+        "title": "Contributor"
+      },
+      {
+        "name": "Sasha Vinčić",
+        "photoUrl": "/images/people/anonymous.png",
+        "socials": [
+        {
+          "icon": "github",
+          "link": "https://github.com/",
+          "name": "GitHub"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/",
+          "name": "Twitter"
+        }],
+        "title": "Contributor"
+      }
     ]
   }
 ]

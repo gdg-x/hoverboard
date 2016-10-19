@@ -2,20 +2,95 @@
     "1": {
         "id": 1,
         "featured": true,
-        "name": "To Be Announced",
-        "title": "To Be Announced",
-        "company": "",
+        "name": "Secret Keynote Speaker",
+        "title": "Angular Hero",
+        "company": "Great Company",
         "companyLogo": "",
-        "country": "",
-        "photoUrl": "",
-        "shortBio": "",
-        "bio": "",
+        "country": "World",
+        "photoUrl": "/images/people/anonymous.png",
+        "shortBio": "Short bio",
+        "bio": "Full bio",
         "tags": [
             "Angular",
             "Angular 2"
         ],
         "badges": [
-
+            "Angular",
+            "Angular 2"
+        ],
+        "socials": [
+            {
+                "icon": "linkedin",
+                "name": "LinkedIn",
+                "link": "https://www.linkedin.com/in/"
+            },
+            {
+                "icon": "twitter",
+                "name": "Twitter",
+                "link": "https://twitter.com/"
+            },
+            {
+                "icon": "github",
+                "name": "GitHub",
+                "link": "https://github.com/"
+            }
+        ]
+    },
+    "2": {
+        "id": 2,
+        "featured": true,
+        "name": "Secret Speaker",
+        "title": "Angular Hero",
+        "company": "Great Company",
+        "companyLogo": "",
+        "country": "World",
+        "photoUrl": "/images/people/anonymous.png",
+        "shortBio": "Short bio",
+        "bio": "Full bio",
+        "tags": [
+            "Angular",
+            "Angular 2"
+        ],
+        "badges": [
+            "Angular",
+            "Angular 2"
+        ],
+        "socials": [
+            {
+                "icon": "linkedin",
+                "name": "LinkedIn",
+                "link": "https://www.linkedin.com/in/"
+            },
+            {
+                "icon": "twitter",
+                "name": "Twitter",
+                "link": "https://twitter.com/"
+            },
+            {
+                "icon": "github",
+                "name": "GitHub",
+                "link": "https://github.com/"
+            }
+        ]
+    },
+    "3": {
+        "id": 3,
+        "featured": true,
+        "name": "Secret Workshop Trainer",
+        "title": "Angular Hero",
+        "company": "Great Company",
+        "companyLogo": "",
+        "country": "World",
+        "photoUrl": "/images/people/anonymous.png",
+        "shortBio": "Short bio",
+        "bio": "Full bio",
+        "tags": [
+            "Angular",
+            "Angular 2"
+        ],
+        "badges": [
+            "Angular",
+            "Angular 2"
         ],
         "socials": [
             {

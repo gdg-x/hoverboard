@@ -1,189 +1,135 @@
 [{
-    "date": "2016-09-09",
-    "dateReadable": "September 9",
+    "date": "2017-02-11",
+    "dateReadable": "February 11",
     "tracks": [{
-        "title": "Expo hall"
-    }, {
-        "title": "Conference hall"
-    }, {
-        "title": "Workshops hall"
+        "title": "Main hall"
     }],
     "timeslots": [{
+        "startTime": "08:00",
+        "endTime": "09:00",
+        "sessions": [
+            [1]
+        ]
+    }, {
         "startTime": "09:00",
-        "endTime": "10:00",
+        "endTime": "09:15",
         "sessions": [
-            [132]
+            [2]
         ]
     }, {
-        "startTime": "10:00",
-        "endTime": "10:15",
+        "startTime": "09:15",
+        "endTime": "09:50",
         "sessions": [
-            [136]
+            [100]
         ]
     }, {
-        "startTime": "10:15",
+        "startTime": "09:50",
+        "endTime": "10:25",
+        "sessions": [
+            [999]
+        ]
+    }, {
+        "startTime": "10:25",
         "endTime": "11:00",
         "sessions": [
-            [139]
+            [999]
         ]
     }, {
         "startTime": "11:00",
-        "endTime": "11:40",
+        "endTime": "11:35",
         "sessions": [
-            [103],
-            [120],
-            [109]
+            [999]
         ]
     }, {
-        "startTime": "11:50",
-        "endTime": "12:30",
+        "startTime": "11:35",
+        "endTime": "12:10",
         "sessions": [
-            [129],
-            [116],
-            [109]
+            [999]
         ]
     }, {
-        "startTime": "12:30",
-        "endTime": "14:00",
+        "startTime": "12:10",
+        "endTime": "13:40",
         "sessions": [
-            [133]
+            [3]
         ]
     }, {
-        "startTime": "14:00",
-        "endTime": "14:40",
+        "startTime": "13:40",
+        "endTime": "14:15",
         "sessions": [
-            [101],
-            [118],
-            [107]
+            [999]
+        ]
+    }, {
+        "startTime": "14:15",
+        "endTime": "14:50",
+        "sessions": [
+            [999]
         ]
     }, {
         "startTime": "14:50",
-        "endTime": "15:30",
+        "endTime": "15:25",
         "sessions": [
-            [140],
-            [126],
-            [107]
+            [999]
         ]
     }, {
-        "startTime": "15:30",
+        "startTime": "15:25",
         "endTime": "16:00",
         "sessions": [
-            [134]
+            [4]
         ]
     }, {
         "startTime": "16:00",
-        "endTime": "16:40",
+        "endTime": "16:35",
         "sessions": [
-            [105],
-            [127],
-            [119]
+            [999]
         ]
     }, {
-        "startTime": "16:50",
-        "endTime": "17:30",
+        "startTime": "16:35",
+        "endTime": "17:10",
         "sessions": [
-            [112],
-            [111],
-            [119]
+            [999]
         ]
     }, {
-        "startTime": "17:40",
-        "endTime": "18:20",
+        "startTime": "17:10",
+        "endTime": "17:50",
         "sessions": [
-            [106],
-            [125],
-            [119]
+            [999]
         ]
     }, {
-        "startTime": "18:30",
-        "endTime": "22:30",
+        "startTime": "17:50",
+        "endTime": "18:00",
         "sessions": [
-            [137]
+            [5]
+        ]
+    }, {
+        "startTime": "18:00",
+        "endTime": "19:00",
+        "sessions": [
+            [6]
         ]
     }]
 }, {
-    "date": "2016-09-10",
-    "dateReadable": "September 10",
+    "date": "2017-02-12",
+    "dateReadable": "February 12",
     "tracks": [{
-        "title": "Expo hall"
+        "title": "Workshops room #1"
     }, {
-        "title": "Conference hall"
+        "title": "Workshops room #2"
     }, {
-        "title": "Workshops hall"
+        "title": "Workshops room #3"
     }],
     "timeslots": [{
         "startTime": "09:30",
-        "endTime": "10:10",
+        "endTime": "10:00",
         "sessions": [
-            [135]
+            [7]
         ]
     }, {
-        "startTime": "10:10",
-        "endTime": "10:50",
+        "startTime": "10:00",
+        "endTime": "17:00",
         "sessions": [
-            [114],
-            [117],
-            [121]
-        ]
-    }, {
-        "startTime": "11:00",
-        "endTime": "11:40",
-        "sessions": [
-            [122],
-            [113],
-            [121]
-        ]
-    }, {
-        "startTime": "11:50",
-        "endTime": "12:30",
-        "sessions": [
-            [104],
-            [124],
-            [121]
-        ]
-    }, {
-        "startTime": "12:30",
-        "endTime": "14:00",
-        "sessions": [
-            [133]
-        ]
-    }, {
-        "startTime": "14:00",
-        "endTime": "14:40",
-        "sessions": [
-            [108],
-            [128],
-            [102]
-        ]
-    }, {
-        "startTime": "14:50",
-        "endTime": "15:30",
-        "sessions": [
-            [110],
-            [123],
-            [102]
-        ]
-    }, {
-        "startTime": "15:30",
-        "endTime": "16:00",
-        "sessions": [
-            [134]
-        ]
-    }, {
-        "startTime": "16:00",
-        "endTime": "16:40",
-        "sessions": [
-            [131],
-            [140],
-            [130]
-        ]
-    }, {
-        "startTime": "16:50",
-        "endTime": "17:30",
-        "sessions": [
-            [115],
-            [140],
-            [130]
+            [888],
+            [777],
+            [888]
         ]
     }]
 }]

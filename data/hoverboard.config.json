@@ -11,7 +11,7 @@
           "youtubeId": "",
           "text": "Connecting communities"
         },
-        "hideLogo": false,
+        "hideLogo": true,
         "minHeight": "360px"
       }
     },
@@ -55,6 +55,22 @@
     {
       "route": "home",
       "permalink": "/"
+    },
+    {
+      "route": "blog",
+      "permalink": "/blog/"
+    },
+    {
+      "route": "schedule",
+      "permalink": "/schedule/"
+    },
+    {
+      "route": "speakers",
+      "permalink": "/speakers/"
+    },
+    {
+      "route": "team",
+      "permalink": "/team/"
     }
   ],
   "url": "https://ngvikings.org/",
@@ -105,7 +121,7 @@
       {
         "name": "early-ticket",
         "price": "Soon",
-        "currency": "DKK",
+        "currency": "!",
         "starts": "early-ticket-starts",
         "ends": "early-ticket-ends",
         "info": "early-ticket-info",
@@ -125,12 +141,12 @@
       "caption": "days"
     },
     {
-      "counter": 20,
+      "counter": 11,
       "caption": "sessions"
     },
     {
-      "counter": 1,
-      "caption": "track"
+      "counter": 3,
+      "caption": "workshops"
     }
   ],
   "hashtag": "ngvikings",
