@@ -13,6 +13,20 @@
             "Angular 2"
         ]
     },
+    "998": {
+        "id": 998,
+        "title": "Lightning Talk",
+        "description": "Amazing Angular Talk",
+        "language": "English",
+        "speakers": [
+            2
+        ],
+        "complexity": "Beginner",
+        "tags": [
+            "Angular",
+            "Angular 2"
+        ]
+    },
     "888": {
         "id": 888,
         "title": "Full-day workshop",
@@ -27,8 +41,8 @@
             "Angular 2"
         ]
     },
-    "777": {
-        "id": 777,
+    "887": {
+        "id": 887,
         "title": "Half-day workshop",
         "description": "Amazing Angular Workshop",
         "language": "English",

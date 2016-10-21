@@ -51,12 +51,15 @@
 
       .logo-item {
         margin: 0 10px 10px;
+        text-align: center;
+        font-size: 14px;
       }
 
       .logo-img {
         @apply(--layout-flex);
-        height: 60px;
-        width: 140px;
+        height: 100px;
+        width: 200px;
+        display: block;
       }
 
       .logo-img.info {
@@ -81,7 +84,9 @@
                   sizing="contain"
                   preload fade
                 ></iron-image>
+[[logo.name]]
               </a>
+
             </template>
           </div>
         </div>

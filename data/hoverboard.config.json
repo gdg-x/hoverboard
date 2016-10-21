@@ -7,9 +7,9 @@
         "fontColor": "#fff",
         "tabBarColor": "#fff",
         "video": {
-          "title": "ngVikings 2017",
+          "title": "",
           "youtubeId": "",
-          "text": "Connecting communities"
+          "text": ""
         },
         "hideLogo": true,
         "minHeight": "360px"
@@ -188,5 +188,9 @@
   "callToAction": {
     "videoTitle": "action-title",
     "videoId": ""
+  },
+  "externalLinks": {
+    "cfp": "http://bit.ly/cfp-ngvikings",
+    "cfs": "http://bit.ly/sponsor-ngvikings"
   }
 }

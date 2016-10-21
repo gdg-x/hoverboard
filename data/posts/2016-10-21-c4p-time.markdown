@@ -1,0 +1,29 @@
+ngVikings are a series of community-driven events across the Nordic countries. Our talks and workshops will be mostly about Angular and other technologies related to the Angular framework. The conference will give most space to experienced speakers, but will leave some room (lightning talks) for more novice speakers as well.
+
+If you are experienced in presenting a technical or design topic within Angular, we would like to hear from you. Send us a proposal below, tweet at us, or send an email.
+
+The conference will reimburse speaker travel and hotel costs. If you want, we can also help you organize for-pay workshops during your stay in Copenhagen
+
+### Formats
+* 30 minute talks
+* 10 minute lightning talks
+
+### Language
+* English
+
+### Themes and topics – what do we expect?
+* Angular (all versions)
+* Angular Ecosystem (CLI, Universal, Mobile Toolkit)
+* Angular Material
+* AngularFire
+* Ionic
+* NativeScript
+* other technologies related to the Angular framework
+
+### Please [submit your proposals here](http://bit.ly/cfp-ngvikings).
+__Deadline__ is December 10, 2016
+
+__Talk selection__ is December 15, 2016
+
+### Any questions?
+Email organizers at [contact@ngvikings.org](mailto:contact@ngvikings.org)

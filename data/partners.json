@@ -3,15 +3,41 @@
     "title": "organizers",
     "logos": [
       {
-        "name": "AngularJS Oslo Meetup",
-        "url": "www.meetup.com/AngularJS-Oslo/",
+        "name": "Angular Oslo",
+        "url": "https://www.meetup.com/AngularJS-Oslo/",
         "logoUrl": "../images/logos/angularoslo.png"
       },
       {
-        "name": "AngularJS Copenhagen Meetup",
-        "url": "www.meetup.com/AngularJS-Copenhagen/",
+        "name": "AngularJS Copenhagen",
+        "url": "https://www.meetup.com/AngularJS-Copenhagen/",
         "logoUrl": "../images/logos/ngcopenhagen.png"
+      },
+      {
+        "name": "Angular Finland",
+        "url": "https://www.meetup.com/Angular-Finland/",
+        "logoUrl": "../images/logos/ngfinland.png"
+      },
+      {
+        "name": "ngStockholm",
+        "url": "https://www.meetup.com/ngStockholm/",
+        "logoUrl": "../images/logos/ngstockholm.png"
+      },
+      {
+        "name": "ngAarhus",
+        "url": "https://twitter.com/ngaarhus",
+        "logoUrl": "../images/logos/ngaarhus.png"
+      },
+      {
+        "name": "GDG Copenhagen",
+        "url": "https://www.meetup.com/GDG-Copenhagen/",
+        "logoUrl": "../images/logos/gdg-copenhagen.png"
+      },
+      {
+        "name": "AngularJS Gothenburg",
+        "url": "https://www.meetup.com/AngularJS-Gothenburg/",
+        "logoUrl": "../images/logos/nggothenburg.png"
       }
+
     ]
   }
 ]

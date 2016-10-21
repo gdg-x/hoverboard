@@ -83,10 +83,12 @@
           ></ticket-element>
         </template>
       </div>
-      <div class="details">[[localize('tickets-details')]]</div>
-      <a href$="[[app.data.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
+      <marked-element markdown="[[localize('tickets-pre-details')]]">
+        <div class="details"></div>
+      </marked-element>
+      <!-- <a href$="[[app.data.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
         <paper-button class="buy-button" raised>[[localize('buy-ticket')]]</paper-button>
-      </a>
+      </a> -->
     </div>
 
   </template>

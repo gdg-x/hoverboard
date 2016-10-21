@@ -1,11 +1,20 @@
 [
   {
-    "id": "c4p-time",
-    "title": "Call for Papers Time",
-    "posted": "2017-10-01",
+    "id": "hello-world",
+    "title": "We officially announce ngVikings 2017",
+    "posted": "2016-10-01",
     "primaryColor": "#012250",
     "secondaryColor": "#012250",
-    "image": "",
+    "image": "images/backgrounds/team.jpg",
     "brief": "ngVikings 2017 announced!"
+  },
+  {
+    "id": "c4p-time",
+    "title": "Call for Papers Time",
+    "posted": "2016-10-21",
+    "primaryColor": "#012250",
+    "secondaryColor": "#012250",
+    "image": "images/backgrounds/blog.jpg",
+    "brief": "Want to speak at ngVikings 2017?"
   }
 ]

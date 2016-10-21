@@ -21,7 +21,6 @@
 
       .about-item {
         @apply(--layout-flex-5);
-        text-align: justify;
       }
 
       .about-item:not(:first-of-type) {
@@ -54,19 +53,44 @@
     </style>
 
     <div class="container">
+
       <div class="about-item">
-        <h4 class="heading">[[localize('organizer')]]</h4>
+
+        <h4 class="heading">[[localize('what-is')]]</h4>
+        <marked-element markdown="[[localize('about')]]">
+          <div class="markdown-html"></div>
+        </marked-element>
+      </div>
+
+      <span class="divider"></span>
+
+      <div class="about-item">
+        <h4 class="heading">[[localize('organizers')]]</h4>
         <marked-element markdown="[[localize('about-organizers')]]">
           <div class="markdown-html"></div>
         </marked-element>
         <a class="page-link" href="/team">[[localize('open-team-page')]]</a>
       </div>
       <span class="divider"></span>
+
       <div class="about-item">
-        <h4 class="heading">[[localize('what-is')]]</h4>
-        <marked-element markdown="[[localize('about')]]">
+
+        <h4 class="heading">[[localize('subscribe')]]</h4>
+
+        <marked-element markdown="[[localize('subscribe-note')]]">
           <div class="markdown-html"></div>
         </marked-element>
+
+        <mailchimp-subscribe
+          app="[[app]]"
+          url="[[app.data.mailchimp.url]]"
+          name="[[app.data.mailchimp.name]]"
+        ></mailchimp-subscribe>
+
+        <marked-element markdown="[[localize('tickets-pre-details')]]">
+          <div class="markdown-html"></div>
+        </marked-element>
+
       </div>
     </div>
 
