@@ -52,23 +52,40 @@
         "title": "Co-organizer"
       },
       {
-        "name": "Alexander Hafstad",
-        "photoUrl": "/images/people/anonymous.png",
+        "name": "Christoffer Noring",
+        "photoUrl": "/images/people/ChrisNoring.jpg",
         "socials": [
         {
           "icon": "github",
-          "link": "https://github.com/",
+          "link": "https://github.com/softchris",
           "name": "GitHub"
         },
         {
           "icon": "twitter",
-          "link": "https://twitter.com/",
+          "link": "https://twitter.com/chris_noring",
+          "name": "Twitter"
+        }],
+        "title": "Co-organizer"
+      },
+
+      {
+        "name": "Filip Bech-Larsen",
+        "photoUrl": "/images/people/FilipBech-Larsen.jpg",
+        "socials": [
+        {
+          "icon": "github",
+          "link": "https://github.com/filipbech",
+          "name": "GitHub"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/filipbech",
           "name": "Twitter"
         }],
         "title": "Co-organizer"
       },
       {
-        "name": "Filip Bech-Larsen",
+        "name": "Alexander Hafstad",
         "photoUrl": "/images/people/anonymous.png",
         "socials": [
         {
@@ -147,22 +164,7 @@
         }],
         "title": "Co-organizer"
       },
-      {
-        "name": "Chris Noring",
-        "photoUrl": "/images/people/ChrisNoring.jpg",
-        "socials": [
-        {
-          "icon": "github",
-          "link": "https://github.com/",
-          "name": "GitHub"
-        },
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/",
-          "name": "Twitter"
-        }],
-        "title": "Co-organizer"
-      },
+
       {
         "name": "Morten Kirstein",
         "photoUrl": "/images/people/anonymous.png",

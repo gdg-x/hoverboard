@@ -141,11 +141,11 @@
       "caption": "days"
     },
     {
-      "counter": 11,
+      "counter": 13,
       "caption": "sessions"
     },
     {
-      "counter": 3,
+      "counter": 4,
       "caption": "workshops"
     }
   ],
@@ -162,7 +162,7 @@
       "url": "https://www.facebook.com/ngVikings"
     }
   ],
-  "tweetsSource": "",
+  "tweetsSource": "https://ngvikings-tweetledee.herokuapp.com/tweetledee/favoritesjson.php?c=10&cache_interval=8000",
   "gallery": {
     "albumUrl": "",
     "photos": {

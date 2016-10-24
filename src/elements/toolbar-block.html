@@ -34,17 +34,24 @@
       }
 
       .logo-wrapper {
+        @apply(--layout-horizontal);
+        @apply(--layout-center-center);
         @apply(--layout-flex);
+        @apply(--layout-self-start);
       }
 
       .logo {
         margin-top: 7px;
         height: 40px;
-        width: 130px;
+        width: 40px;
       }
 
       iron-image {
         background-color: transparent;
+      }
+
+      .title {
+        margin: 0 10px 0 10px;
       }
 
       paper-tabs a {
@@ -88,6 +95,7 @@
             alt="{{localize('title')}}"
           ></iron-image>
         </a>
+        <span class="title" hidden$="{{hideLogo}}">[[localize('title')]]</span>
       </div>
       <div class="navItem" layout horizontal self-end>
         <template is="dom-if" if="[[!app.isPhoneSize]]">

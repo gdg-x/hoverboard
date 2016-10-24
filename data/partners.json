@@ -1,5 +1,30 @@
 [
   {
+    "title": "sponsors",
+    "logos": [
+      {
+        "name": "IMPACT",
+        "url": "http://www.impact.dk/",
+        "logoUrl": "../images/logos/impact.png"
+      }
+    ]
+  },
+  {
+    "title": "partners",
+    "logos": [
+      {
+        "name": "IT University of Copenhagen",
+        "url": "https://www.itu.dk/",
+        "logoUrl": "../images/logos/itu.png"
+      },
+      {
+        "name": "ITU Innovators",
+        "url": "http://www.itu-innovators.dk/",
+        "logoUrl": "../images/logos/ituinnovators.png"
+      }
+    ]
+  },
+  {
     "title": "organizers",
     "logos": [
       {

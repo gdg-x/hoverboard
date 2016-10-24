@@ -35,7 +35,7 @@
   "early-ticket": "Early Bird",
   "early-ticket-starts": "November 1",
   "early-ticket-ends": "January 1",
-  "early-ticket-info": "Or first 100 tickets",
+  "early-ticket-info": "Or first 50 tickets",
   "lazy-ticket": "Lazy Bird",
   "lazy-ticket-starts": "July 1",
   "lazy-ticket-ends": "Sep 8",
@@ -80,5 +80,6 @@
   "view-video": "View video",
   "share-with": "Share with",
   "organizers": "Organizers",
-  "call-for-papers": "Call for Papers"
+  "call-for-papers": "Call for Papers",
+  "sponsors": "Sponsors"
 }

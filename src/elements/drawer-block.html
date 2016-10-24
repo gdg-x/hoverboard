@@ -40,7 +40,13 @@
         color: var(--text-primary-color);
       }
 
-      .location {
+      .title {
+        display: block;
+        color: var(--light-primary-color);
+        font-weight: bold;
+      }
+
+      .dates {
         display: block;
         color: var(--light-primary-color);
       }
@@ -83,7 +89,7 @@
                     alt="[[localize('title')]]"></iron-image>
       </div>
       <div class="bottom">
-        <span class="location">{{localize('title')}}</span>
+        <span class="title">[[localize('title')]]</span>
         <span class="dates">[[localize('dates')]]</span>
       </div>
     </paper-toolbar>
