@@ -154,7 +154,7 @@
 
         <div class="container latest-post-wrapper">
           <div class="latest-post">
-            <template is="dom-if" if="{{_latestPosts.0}}">
+            <div hidden$="[[!_latestPosts.0]]">
               <span class="latest-post-label">Next post</span>
               <a href$="/blog/posts/[[_latestPosts.0.id]]/"
                  class="post" cascaded>
@@ -166,10 +166,10 @@
                   [[_latestPosts.0.title]]
                 </div>
               </a>
-            </template>
+            </div>
           </div>
           <div class="latest-post">
-            <template is="dom-if" if="[[_latestPosts.1]]">
+            <div hidden$="[[!_latestPosts.1]]">
               <span class="latest-post-label">Previous post</span>
               <a href$="/blog/posts/[[_latestPosts.1.id]]/"
                  class="post" cascaded>
@@ -181,7 +181,7 @@
                   [[_latestPosts.1.title}}
                 </div>
               </a>
-            </template>
+            </div>
           </div>
         </div>
       </div>
