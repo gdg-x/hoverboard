@@ -127,6 +127,7 @@ pull request, so we can include you in this list.
 | [GDG DevFest Lisbon 2016](https://devfestlisbon.firebaseapp.com) |
 | [GDG DevFest Sudbury 2016](https://devfest.gdgsudbury.ca) |
 | [GDG DevFest Hong Kong 2016](https://devfest.gdghk.org) |
+| [GDG DevFest London 2016](https://devfest-london-2016.firebaseapp.com/) |
 
 ### Roadmap :rocket:
 :x: Admin panel  
