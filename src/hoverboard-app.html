@@ -273,8 +273,11 @@
             this.app.headerSettings.backgroundColor + ' 140%)';
           this.customStyle['--min-header-height'] = this.app.headerSettings.minHeight;
           document.getElementsByName('theme-color')[0].content = this.app.headerSettings.backgroundColor;
-          this.updateStyles();
-          this.$.header.resetLayout();
+
+          window.requestAnimationFrame(function () {
+            this.updateStyles();
+            this.$.header.resetLayout();
+          }.bind(this));
         },
 
         _pageChanged: function (page) {
@@ -295,7 +298,9 @@
         },
 
         toggleDrawer: function () {
-          this.$$('#drawer').toggle();
+          window.requestAnimationFrame(function () {
+            this.$$('#drawer').toggle();
+          }.bind(this));
         },
 
         _isPage: function (page, selectedPage) {
@@ -304,7 +309,9 @@
 
         closeDrawer: function () {
           if (this.$$('#drawer') && this.$$('#drawer').close) {
-            this.$$('#drawer').close();
+            window.requestAnimationFrame(function () {
+              this.$$('#drawer').close();
+            }.bind(this));
           }
         },
 

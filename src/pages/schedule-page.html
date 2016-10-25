@@ -8,13 +8,13 @@
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 
 <link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
-<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
 
 <link rel="import" href="../elements/schedule-subnav.html">
 <link rel="import" href="../elements/schedule-day.html">
 <link rel="import" href="../elements/session-details.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
 <link rel="import" href="../behaviors/page-behavior.html">
+<link rel="import" href="../behaviors/cascaded-behavior.html">
 
 
 <dom-module id="schedule-page">
@@ -52,7 +52,7 @@
       ></schedule-subnav>
 
       <neon-animated-pages selected="[[app.selectedDay]]" attr-for-selected="name">
-        <template is="dom-repeat" items="[[schedule]]" as="day">
+        <template is="dom-repeat" items="[[schedule]]" as="day" on-dom-change="updateCascadedNodes">
           <schedule-day
             name$="day[[_addToValue(index, 1)]]"
             app={{app}}
@@ -83,8 +83,8 @@
         is: 'schedule-page',
 
         behaviors: [
-          Polymer.NeonSharedElementAnimatableBehavior,
           HOVERBOARD.PageBehavior,
+          HOVERBOARD.CascadedBehavior,
           HOVERBOARD.UtilsBehavior
         ],
 
@@ -108,27 +108,6 @@
 
           filters: {
             type: Array
-          },
-
-          animationConfig: {
-            type: Object,
-            value: function () {
-              return {
-                'entry': [{
-                  name: 'fade-in-animation',
-                  animation: 'fade-in-animation',
-                  node: this,
-                  timing: {
-                    delay: 500
-                  }
-                }],
-                'exit': [{
-                  name: 'fade-out-animation',
-                  animation: 'fade-out-animation',
-                  node: this
-                }]
-              };
-            }
           }
         },
 
@@ -167,7 +146,8 @@
                 this._resetSessionIdParam();
                 return;
               }
-              Polymer.RenderStatus.afterNextRender(this, function () {
+
+              window.requestAnimationFrame(function () {
                 this._selectedSession = session;
                 this.$.sessionDetails.open();
               }.bind(this));
