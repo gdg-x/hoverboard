@@ -150,16 +150,16 @@
       },
       {
         "name": "Jussi Kinnula",
-        "photoUrl": "/images/people/anonymous.png",
+        "photoUrl": "/images/people/JussiKinnula.png",
         "socials": [
         {
           "icon": "github",
-          "link": "https://github.com/",
+          "link": "https://github.com/jussikinnula",
           "name": "GitHub"
         },
         {
           "icon": "twitter",
-          "link": "https://twitter.com/",
+          "link": "https://twitter.com/jussikinnula",
           "name": "Twitter"
         }],
         "title": "Co-organizer"
