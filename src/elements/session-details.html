@@ -72,12 +72,12 @@
               <h1 class="main-title">[[session.title]]</h1>
               <div class="meta highlight">[[session.dateReadable]] / [[session.startTime]] - [[session.endTime]] /
                 [[session.track.title]]
-                <template is="dom-if" if="{{session.language}}">
+                <span hidden$="[[!session.language]]">
                   / [[session.language]]
-                </template>
-                <template is="dom-if" if="{{session.complexity}}">
+                </span>
+                <span hidden$="[[!session.complexity]]">
                   / [[session.complexity]]
-                </template>
+                </span>
               </div>
               <span class="meta">[[_concatArray(session.tags)]]</span>
             </div>
@@ -89,22 +89,19 @@
         </marked-element>
 
         <div class="actions">
-          <template is="dom-if" if="[[session.presentation]]">
-            <a href$="[[session.presentation]]" target="_blank" rel="noopener noreferrer">
-              <paper-button class="action" on-tap="_openPresentation">
-                <iron-icon icon="presentation"></iron-icon>
-                [[localize('view-presentation')]]
-              </paper-button>
-            </a>
-          </template>
-          <template is="dom-if" if="[[session.videoId]]">
-            <div on-tap="_openVideo">
-              <paper-button class="action">
-                <iron-icon icon="video"></iron-icon>
-                [[localize('view-video')]]
-              </paper-button>
-            </div>
-          </template>
+          <a href$="[[session.presentation]]" hidden$="[[!session.presentation]]" target="_blank"
+             rel="noopener noreferrer">
+            <paper-button class="action">
+              <iron-icon icon="presentation"></iron-icon>
+              [[localize('view-presentation')]]
+            </paper-button>
+          </a>
+          <div on-tap="_openVideo" hidden$="[[!session.videoId]]">
+            <paper-button class="action">
+              <iron-icon icon="video"></iron-icon>
+              [[localize('view-video')]]
+            </paper-button>
+          </div>
         </div>
 
       </div>
@@ -121,7 +118,8 @@
                   <span class="section-sub-title">[[speaker.company]], [[speaker.country]]</span>
                   <div class="badges">
                     <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
-                      <a class="badge" href$="[[badge.link]]" target="_blank" rel="noopener noreferrer">[[badge.name]]</a>
+                      <a class="badge" href$="[[badge.link]]" target="_blank"
+                         rel="noopener noreferrer">[[badge.name]]</a>
                     </template>
                   </div>
                   <truncate-marked-text

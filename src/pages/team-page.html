@@ -7,11 +7,10 @@
 
 <link rel="import" href="../../bower_components/marked-element/marked-element.html">
 
-<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
-
 <link rel="import" href="../elements/footer-block.html">
 <link rel="import" href="../behaviors/localize-behavior.html">
 <link rel="import" href="../behaviors/page-behavior.html">
+<link rel="import" href="../behaviors/cascaded-behavior.html">
 
 
 <dom-module id="team-page">
@@ -211,7 +210,7 @@
           <h3 class="team-name" cascaded>[[team.title]]</h3>
 
           <div class="team-container">
-            <template is="dom-repeat" items="[[team.members]]" as="member" on-dom-change="_updateCascadedNodes">
+            <template is="dom-repeat" items="[[team.members]]" as="member" on-dom-change="updateCascadedNodes">
               <div class="member">
                 <paper-material class="card"  cascaded>
                   <div class="header">
@@ -251,53 +250,10 @@
         is: 'team-page',
 
         behaviors: [
-          Polymer.NeonSharedElementAnimatableBehavior,
           HOVERBOARD.PageBehavior,
+          HOVERBOARD.CascadedBehavior,
           HOVERBOARD.LocalizeBehavior
-        ],
-
-        properties: {
-          animationConfig: {
-            type: Object,
-            value: function () {
-              return {
-                'entry': [{
-                  name: 'fade-in-animation',
-                  animation: 'fade-in-animation',
-                  node: this,
-                  timing: {
-                    delay: 500
-                  }
-                }],
-                'exit': [{
-                  name: 'fade-out-animation',
-                  animation: 'fade-out-animation',
-                  node: this
-                }]
-              };
-            }
-          }
-        },
-
-        _updateCascadedNodes: function () {
-          var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
-          var cascadedArray = Array.prototype.slice.call(cascaded);
-          this.animationConfig.entry.push({
-            name: 'cascaded-animation',
-            animation: 'transform-animation',
-            transformFrom: 'translate3d(0, 100%, 0)',
-            timing: {
-              delay: 500
-            },
-            nodes: cascadedArray
-          });
-          this.animationConfig.exit.push({
-            name: 'cascaded-animation',
-            animation: 'transform-animation',
-            transformTo: 'translate3d(0, 100%, 0)',
-            nodes: cascadedArray
-          });
-        }
+        ]
 
       });
 
