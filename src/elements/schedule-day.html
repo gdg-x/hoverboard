@@ -213,7 +213,7 @@
                         </div>
                       </template>
 
-                      <template is="dom-if" if="[[subSession.speakers]]">
+                      <template is="dom-if" if="[[subSession.speakers.length]]">
                         <div class="speaker-block" layout horizontal wrap relative>
                           <div class="image-overlay"
                                style$="background-color: [[_getCustomStyleValue(subSession.mainTag)]]" fit></div>
