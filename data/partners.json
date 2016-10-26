@@ -25,6 +25,21 @@
     ]
   },
   {
+    "title": "community-partners",
+    "logos": [
+      {
+        "name": "NG-BE",
+        "url": "https://ng-be.org/",
+        "logoUrl": "../images/logos/ng-be.png"
+      },
+      {
+        "name": "Mobile Meetup Oslo",
+        "url": "https://www.meetup.com/Mobile-Meetup-Oslo/",
+        "logoUrl": "../images/logos/mobile-meetup-oslo.png"
+      }
+    ]
+  },
+  {
     "title": "organizers",
     "logos": [
       {
