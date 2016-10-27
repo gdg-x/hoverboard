@@ -194,17 +194,6 @@
     </style>
 
     <div class="container">
-      <div class="details">
-        <div class="details-item" cascaded>
-          <iron-icon class="details-icon" icon="info"></iron-icon>
-          <div class="details-info">
-            <h4 class="details-title">[[localize(app.data.teamPageTitle)]]</h4>
-            <marked-element class="details-text" markdown="{{localize(app.data.teamPageText)}}">
-              <div class="markdown-html"></div>
-            </marked-element>
-          </div>
-        </div>
-      </div>
 
       <template is="dom-repeat" items="[[app.team]]" as="team">
         <div class="team-block">

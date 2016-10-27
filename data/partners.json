@@ -21,6 +21,11 @@
         "name": "ITU Innovators",
         "url": "http://www.itu-innovators.dk/",
         "logoUrl": "../images/logos/ituinnovators.png"
+      },
+      {
+        "name": "JetBrains",
+        "url": "https://www.jetbrains.com/",
+        "logoUrl": "../images/logos/jetbrains.png"
       }
     ]
   },
@@ -64,7 +69,7 @@
       },
       {
         "name": "ngAarhus",
-        "url": "https://twitter.com/ngaarhus",
+        "url": "https://www.facebook.com/groups/ngAarhus/",
         "logoUrl": "../images/logos/ngaarhus.png"
       },
       {

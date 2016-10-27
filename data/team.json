@@ -85,6 +85,22 @@
         "title": "Co-organizer"
       },
       {
+        "name": "Jussi Kinnula",
+        "photoUrl": "/images/people/JussiKinnula.jpg",
+        "socials": [
+        {
+          "icon": "github",
+          "link": "https://github.com/jussikinnula",
+          "name": "GitHub"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/jussikinnula",
+          "name": "Twitter"
+        }],
+        "title": "Co-organizer"
+      },
+      {
         "name": "Alexander Hafstad",
         "photoUrl": "/images/people/anonymous.png",
         "socials": [
@@ -148,23 +164,6 @@
         }],
         "title": "Co-organizer"
       },
-      {
-        "name": "Jussi Kinnula",
-        "photoUrl": "/images/people/JussiKinnula.jpg",
-        "socials": [
-        {
-          "icon": "github",
-          "link": "https://github.com/jussikinnula",
-          "name": "GitHub"
-        },
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/jussikinnula",
-          "name": "Twitter"
-        }],
-        "title": "Co-organizer"
-      },
-
       {
         "name": "Morten Kirstein",
         "photoUrl": "/images/people/anonymous.png",
