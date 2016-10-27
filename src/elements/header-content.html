@@ -46,7 +46,6 @@
         width: 100%;
         height: 100%;
         box-sizing: border-box;
-        justify-content: center;
       }
 
       .reset-padding-bottom {
@@ -139,18 +138,18 @@
       <neon-animated-pages attr-for-selected="name" selected="{{app.page}}">
         <animatable-content name="home">
           <div class="container" center-justified>
-            <div class="home-wrapper">
-              <iron-image class="logo" src="/images/logo-light.svg" sizing="contain"
-                          alt="GDG DevFest Ukraine 2016"></iron-image>
-              <h3 class="dates">{{localize('dates')}}</h3>
-              <h2 class="motto">{{localize('motto')}}</h2>
-              <div class="action-buttons">
-                <a href="https://goo.gl/photos/H8s3CtPexCzkLqSt9" on-tap="_trackEventPhotos" target="_blank" rel="noopener noreferrer">
-                  <paper-button>
-                    <iron-icon icon="photo-album"></iron-icon>
-                    <span>[[localize('view-photos')]]</span>
-                  </paper-button>
-                </a>
+                <div class="home-wrapper">
+                  <iron-image class="logo" src="/images/logo-light.svg" sizing="contain"
+                              alt="GDG DevFest Ukraine 2016"></iron-image>
+                  <h3 class="dates">{{localize('dates')}}</h3>
+                  <h2 class="motto">{{localize('motto')}}</h2>
+                  <div class="action-buttons">
+                    <a href="https://goo.gl/photos/H8s3CtPexCzkLqSt9" on-tap="_trackEventPhotos" target="_blank" rel="noopener noreferrer">
+                      <paper-button>
+                        <iron-icon icon="photo-album"></iron-icon>
+                        <span>[[localize('view-photos')]]</span>
+                      </paper-button>
+                    </a>
                 <paper-button class="primary-white" on-tap="_openVideo">
                   <iron-icon icon="movie-filter"></iron-icon>
                   <span>[[localize('view-highlights-video')]]</span>

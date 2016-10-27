@@ -99,9 +99,7 @@
             </template>
           </paper-tabs>
           <div class="action-button-wrapper" layout horizontal center-center>
-            <a href="https://www.youtube.com/watch?v=TdpbgRgz6eE" on-tap="_trackPrimaryAction" target="_blank" rel="noopener noreferrer">
-              <paper-button class="action-button">[[localize('highlights-video')]]</paper-button>
-            </a>
+            <paper-button class="action-button" on-tap="_primaryAction">[[localize('highlights-video')]]</paper-button>
           </div>
         </template>
       </div>
@@ -144,7 +142,9 @@
           }
         },
 
-        _trackPrimaryAction: function () {
+        _primaryAction: function () {
+          HOVERBOARD.Elements.Template.openVideo(this.app.data.pages.home.headerSettings.video.title,
+            this.app.data.pages.home.headerSettings.video.youtubeId, true);
           HOVERBOARD.Analytics.trackEvent('highlightVideo', 'view', 'toolbar');
         }
 

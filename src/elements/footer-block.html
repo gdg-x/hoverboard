@@ -14,7 +14,6 @@
 <link rel="import" href="../styles/shared-styles.html">
 <link rel="import" href="../js-wrappers/g-plusone.html">
 <link rel="import" href="../behaviors/localize-behavior.html">
-<link rel="import" href="../behaviors/share-behavior.html">
 <link rel="import" href="mailchimp-subscribe.html">
 
 
@@ -235,28 +234,6 @@
             href$="{{app.data.url}}"
           ></g:plusone>
         </div>
-
-        <paper-menu-button vertical-align="bottom" horizontal-align="left" share-menu>
-          <paper-icon-button icon="share" class="dropdown-trigger"></paper-icon-button>
-          <div class="dropdown-content">
-            <paper-icon-item on-tap="share" share="gplus">
-              <iron-icon icon="gplus" item-icon></iron-icon>
-              Google+
-            </paper-icon-item>
-            <paper-icon-item on-tap="share" share="facebook">
-              <iron-icon icon="facebook" item-icon></iron-icon>
-              Facebook
-            </paper-icon-item>
-            <paper-icon-item on-tap="share" share="twitter">
-              <iron-icon icon="twitter" item-icon></iron-icon>
-              Twitter
-            </paper-icon-item>
-            <paper-icon-item on-tap="share" share="copy">
-              <iron-icon icon="link" item-icon></iron-icon>
-              [[localize('copy-link')]]
-            </paper-icon-item>
-          </div>
-        </paper-menu-button>
 
         <template is="dom-if" if="[[_showLanguageToggle(app.data.languages)]]">
           <paper-menu-button vertical-align="bottom" horizontal-align="left">

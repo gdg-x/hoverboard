@@ -85,6 +85,16 @@
         color: var(--default-primary-color);
       }
 
+      @media (max-width: 601px) {
+        .container .heading {
+          font-size: 23px;
+        }
+
+        paper-button {
+          font-size: 14px;
+        }
+      }
+
       @media (min-width: 601px) {
         .photo-wrapper {
           height: 500px;
@@ -103,25 +113,13 @@
     <div class="photo-wrapper">
       <div class="photo big">
         <div class="placeholder-color image" style$="background-image: url([[_selected.big]])" fit></div>
-        <!--<a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">-->
-          <!--<paper-ripple></paper-ripple>-->
-          <!--<span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>-->
-        <!--</a>-->
       </div>
       <div class="vertical-block">
         <div class="photo">
           <div class="placeholder-color image second" style$="background-image: url([[_selected.small.0]])" fit></div>
-          <!--<a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">-->
-            <!--<paper-ripple></paper-ripple>-->
-            <!--<span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>-->
-          <!--</a>-->
         </div>
         <div class="photo">
           <div class="placeholder-color image third" style$="background-image: url([[_selected.small.1]])" fit></div>
-          <!--<a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">-->
-            <!--<paper-ripple></paper-ripple>-->
-            <!--<span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>-->
-          <!--</a>-->
         </div>
       </div>
     </div>
