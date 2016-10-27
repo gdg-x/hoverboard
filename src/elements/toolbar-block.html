@@ -99,8 +99,8 @@
             </template>
           </paper-tabs>
           <div class="action-button-wrapper" layout horizontal center-center>
-            <a href="https://goo.gl/photos/H8s3CtPexCzkLqSt9" on-tap="_trackPrimaryAction" target="_blank" rel="noopener noreferrer">
-              <paper-button class="action-button">[[localize('view-photos')]]</paper-button>
+            <a href="https://www.youtube.com/watch?v=TdpbgRgz6eE" on-tap="_trackPrimaryAction" target="_blank" rel="noopener noreferrer">
+              <paper-button class="action-button">[[localize('highlights-video')]]</paper-button>
             </a>
           </div>
         </template>
@@ -145,7 +145,7 @@
         },
 
         _trackPrimaryAction: function () {
-          HOVERBOARD.Analytics.trackEvent('photos', 'view', 'toolbar');
+          HOVERBOARD.Analytics.trackEvent('highlightVideo', 'view', 'toolbar');
         }
 
       });

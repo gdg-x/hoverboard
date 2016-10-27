@@ -46,6 +46,7 @@
         width: 100%;
         height: 100%;
         box-sizing: border-box;
+        justify-content: center;
       }
 
       .reset-padding-bottom {
@@ -87,12 +88,22 @@
       }
 
       .action-buttons {
-        margin-top: 40px;
+        margin-top: 30px;
       }
 
       paper-button {
         font-size: 0.8em;
         color: #fff;
+      }
+
+      paper-button iron-icon {
+        margin-right: 8px;
+      }
+
+      .primary-white {
+        --iron-icon-fill-color: var(--default-primary-color);
+        background-color: #fff;
+        color: var(--default-primary-color);
       }
 
       .open-video {
@@ -133,17 +144,17 @@
                           alt="GDG DevFest Ukraine 2016"></iron-image>
               <h3 class="dates">{{localize('dates')}}</h3>
               <h2 class="motto">{{localize('motto')}}</h2>
-              <div class="open-video" on-tap="_openVideo">
-                <iron-icon icon="play"></iron-icon>
-                {{localize('play-icon')}}
-              </div>
               <div class="action-buttons">
-                <a href="/blog/posts/dfua-summary/" on-tap="_trackEventSummary">
-                  <paper-button>[[localize('open-summary')]]</paper-button>
-                </a>
                 <a href="https://goo.gl/photos/H8s3CtPexCzkLqSt9" on-tap="_trackEventPhotos" target="_blank" rel="noopener noreferrer">
-                  <paper-button class="primary" raised>[[localize('view-photos')]]</paper-button>
+                  <paper-button>
+                    <iron-icon icon="photo-album"></iron-icon>
+                    <span>[[localize('view-photos')]]</span>
+                  </paper-button>
                 </a>
+                <paper-button class="primary-white" on-tap="_openVideo">
+                  <iron-icon icon="movie-filter"></iron-icon>
+                  <span>[[localize('view-highlights-video')]]</span>
+                </paper-button>
               </div>
             </div>
           </div>
