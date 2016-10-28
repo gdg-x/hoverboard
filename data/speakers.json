@@ -2,137 +2,107 @@
     "1": {
         "id": 1,
         "featured": true,
-        "name": "Mete Atamel",
-        "title": "Developer Advocate",
-        "company": "Google",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "London, United Kingdom",
-        "photoUrl": "/images/people/mete_atamel.jpg",
-        "shortBio": "Mete is a Developer Advocate at Google, currently focused on helping developers with Google Cloud...",
-        "bio": "Mete is a Developer Advocate at Google, currently focused on helping developers with Google Cloud Platform. As a long-time Java and a recent C# developer, he likes to compare the two ecosystems. Prior to Google, he worked at Microsoft, Skype, Adobe, EMC, and Nokia building apps and services on various web, mobile and cloud platforms. Originally from Cyprus, he currently lives in Greenwich, not too far away from the prime meridian.",
+        "name": "Hasitha Liyanage",
+        "title": "Director - Technology and Architecture",
+        "company": "CAKE LABS",
+        "companyLogo": "/images/logos/cakelabs_logo.png",
+        "country": "CAKE LABS",
+        "photoUrl": "/images/people/hasitha_liyanage.png",
+        "shortBio": "Hasitha holds a BSc in Computer Science and Engineering from the University of Moratuwa and has over 12 years of experience in the IT industry...",
+        "bio": "Hasitha holds a BSc in Computer Science and Engineering from the University of Moratuwa and has over 12 years of experience in the IT industry, having designed and developed technologies from high frequency trading (HFT) systems for financial markets in the United States, Europe and Hong Kong, to electronic regulatory compliance systems for the Philippines and the International Labour Organization. Before CAKE LABS, Hasitha was the Chief Software Architect for Infoshare and a Technology Consultant for thinkCube Systems, a digital services company specializing in cloud applications.",
         "tags": [
-            "Cloud",
-            "Compute Engine",
-            "gRPC"
+            
         ],
         "badges": [
-
+			{
+				"name": "FAST",
+				"description": "making apps faster...",
+				"link": ""
+			}
         ],
         "socials": [
             {
                 "icon": "linkedin",
                 "name": "LinkedIn",
-                "link": "https://www.linkedin.com/in/meteatamel/"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/meteatamel/"
-            },
-            {
-                "icon": "github",
-                "name": "GitHub",
-                "link": "https://github.com/meteatamel/"
-            }
+                "link": "https://www.linkedin.com/in/hliyan"
+            }            
         ]
     },
     "2": {
         "id": 2,
         "featured": true,
-        "name": "Yonatan Levin",
-        "title": "Android Evangelist & Developer",
-        "company": "Gett",
+        "name": "Harshadewa Ariyasinghe",
+        "title": "Lead Business Analyst",
+        "company": "Cambio Healthcare Systems",
         "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Tel Aviv, Israel",
-        "photoUrl": "/images/people/yonatan_levin.jpg",
-        "shortBio": "Born with the spirit of an entrepreneur, Yonatan loves to create, build and just do fun stuff in...",
-        "bio": "Born with the spirit of an entrepreneur, Yonatan loves to create, build and just do fun stuff in the technology field.\nYonatan is one of the top Israeli mobile developers, who is also a part of an elite worldwide group of Google Developer Experts.\nHis primary expertise is Android and Mobile UX, but is also friendly to backend technologies and people in general :)\nFounded and led 3 startups in the past, recently received funding for his new startup which is on the make.\nCurrently, Yonatan is taking a part of the startup Gett - the largest on-demand transportation, delivery, and logistics company which already raised more than $500M",
+        "country": "Cambio",
+        "photoUrl": "/images/people/harshadewa_ariyasinghe.jpg",
+        "shortBio": "aa",
+        "bio": "aaa",
         "tags": [
-            "Android",
-            "Doze",
-            "Mobile UX",
-            "Entrepreneurship"
+            
         ],
         "badges": [
-            {
-                "name": "GDE",
-                "description": "Android Google Developer Expert",
-                "link": "https://developers.google.com/experts/people/yonatan-levin.html"
-            }
+			{
+                "name": "EFFICIENT",
+                "description": "how to make apps more efficient",
+                "link": ""
+			}
         ],
         "socials": [
-            {
-                "icon": "facebook",
-                "name": "Facebook",
-                "link": "https://www.facebook.com/levin.yonatan"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/parahall"
-            },
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/+YonatanLevin"
-            }
+            
         ]
     },
     "3": {
         "id": 3,
         "featured": true,
-        "name": "Sascha Wolter",
-        "title": "Senior Developer Evangelist Connected Home",
-        "company": "Duetsche Telekom AG - Group Innovation+",
+        "name": "Chamika Weerasinghe",
+        "title": "Director of Engineering",
+        "company": "Bhasha Lanka",
         "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Munich and Dusseldorf, Germany",
-        "photoUrl": "/images/people/sascha_wolter.jpg",
-        "shortBio": "UX enthusiast with passion for the IoT. Board member of the Usability & User Experience committee at the federal association BITKOM.",
-        "bio": "Sascha Wolter is a professional developer and user experience enthusiast with passion for the Internet of Things in all flavors. He also works as a consultant, trainer, lecturer, keynote-speaker, and author who focusses on understanding, innovation and value. Sascha is the founder of the User Group flashforum.de with more than 100,000 members, and as such he is committed to the interests of the user. After organizing internationally renowned events like beyond tellerrand from 2001 to 2011, he is now board member of the Usability & User Experience committee at the federal association BITKOM. When he is not tinkering with new soft- and hardware for Deutsche Telekom AG \u2013 Connected Home, he likes discovering the world together with his kids in an odd way.",
+        "country": "Bhasha",
+        "photoUrl": "/images/people/chamika_weerasinghe.png",
+        "shortBio": "Chamika Weerasinghe is the Director of Engineering at Bhasha Lanka (Pvt) Ltd which is a pioneering localized mobile solution provider in Sri Lanka",
+        "bio": "Chamika Weerasinghe is the Director of Engineering at Bhasha Lanka (Pvt) Ltd which is a pioneering localized mobile solution provider in Sri Lanka. Chamika graduated from the Department of Computer Science and Engineering , University of Moratuwa in 2013. He previously worked as the CTO of Bhasha and has contributed to various open source projects in Android and iOS.",
         "tags": [
-            "Web",
-            "IoT",
-            "Smart Home"
+            
         ],
         "badges": [
-
+			{
+                "name": "SECURE",
+                "description": "how to make data secure",
+                "link": ""
+			}
         ],
         "socials": [
-            {
-                "icon": "website",
-                "name": "Website",
-                "link": "http://www.wolter.biz"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "http://twitter.com/saschawolter"
-            },
+            
             {
                 "icon": "linkedin",
                 "name": "LinkedIn",
-                "link": "http://www.linkedin.com/pub/sascha-wolter/5/a38/493"
+                "link": "https://www.linkedin.com/in/chamikaw"
             }
         ]
     },
     "4": {
         "id": 4,
         "featured": true,
-        "name": "Rustem Arzymbetov",
-        "title": "Software Engineer",
-        "company": "Google",
+        "name": "Sameera Jayasoma",
+        "title": "Associate Director and Architect",
+        "company": "WSO2 Inc.",
         "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Mountain View, United States",
-        "photoUrl": "/images/people/rustem_arzymbetov.jpg",
-        "shortBio": "Rustem is working at Google for last 8 years. Was in Search and Android teams. Big fan of perform...",
-        "bio": "Rustem is working at Google for last 8 years. Was in Search and Android teams. Big fan of performance optimizations.",
+        "country": "WSO2",
+        "photoUrl": "/images/people/sameera_jayasoma.jpg",
+        "shortBio": "Sameera is an Associate Director/Architect at WSO2. His primary focus is on WSO2 Carbon and WSO2 Web Services Application Server.",
+        "bio": "Sameera is an Associate Director/Architect at WSO2. His primary focus is on WSO2 Carbon and WSO2 Web Services Application Server. As a WSO2 intern in 2007, Sameera developed an Axiom version of Rhino's E4X implementation, which is used in the WSO2 Mashup Server. He has also provided technology consulting on customer engagements, including Quick Start Programs, Business Process Execution Language (BPEL), and cloud projects.Sameera has contributed to a number of Apache Software Foundation (ASF) projects, including Apache Axis2 and Axiom. He also was a co-developer of Apache Rampart2. During the 2007 Google Summer of Code, he contributed to the development of JAX-WS templates for the Apache Axis2/Java Codegen tool. Sameera holds a first class honors degree in Computer Science and Engineering from University of Moratuwa, Sri Lanka.",
         "tags": [
-            "Cloud",
-            "Performance",
-            "TensorFlow"
+            
         ],
         "badges": [
-
+			{
+                "name": "TIDY",
+                "description": "how to write clean code",
+                "link": ""
+			}
         ],
         "socials": [
             {
@@ -145,39 +115,39 @@
     "5": {
         "id": 5,
         "featured": true,
-        "name": "Adrian Kajda",
-        "title": "Product Manager/Developer",
-        "company": "Sygic",
+        "name": "Albert Padin",
+        "title": "Cloud Google Developer Expert",
+        "company": "Google Developers",
         "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Opole, Poland",
-        "photoUrl": "/images/people/adrian_kajda.jpg",
-        "shortBio": "Creator of Fuelio app. Fuelio was his hooby project started in 2012. Three years later the app wa...",
-        "bio": "Creator of Fuelio app. Fuelio was his hooby project started in 2012. Three years later the app was aquired by Sygic.",
+        "country": "GDE",
+        "photoUrl": "/images/people/albert_padin.jpg",
+        "shortBio": "Albert is a Google Developer expert in Google Cloud Platform.",
+        "bio": "Albert is a developer and entrepreneur who's worked on consumer, enterprise, and government software products. He is the co-founder and CTO of Symph, a design, development, and startup studio. At Symph, he has architected and developed solutions for 500 Startups, Office of the President of the Philippines, and the World Bank.",
         "tags": [
-            "Android",
-            "Entrepreneurship"
+            "GCP",
+            "Firebase"
         ],
         "badges": [
 
         ],
         "socials": [
             {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "plus.google.com/+AdrianKajda"
+                "icon": "linkedin",
+                "name": "LinkedIn",
+                "link": "https://www.linkedin.com/in/jpadin"
             }
         ]
     },
     "6": {
         "id": 6,
         "featured": true,
-        "name": "Gerard Sans",
-        "title": "Technical Evangelist",
-        "company": "AngularZone",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "London, United Kingdom",
-        "photoUrl": "/images/people/gerard_sans.jpg",
-        "shortBio": "Angular Google Developer Expert. International speaker and trainer.  Enjoy running AngularLabs London.",
+        "name": "Keshan Sodimana",
+        "title": "Country Engineering Consultant",
+        "company": "Google",
+        "companyLogo": "/images/logos/google.svg",
+        "country": "GOOGLE",
+        "photoUrl": "/images/people/keshan_sodimana.jpg",
+        "shortBio": "",
         "bio": "Angular Google Developer Expert. I am a Computer Science Engineer specialised in Web. International speaker and trainer. I am an Angular fanboy and a community activist fighting for the JavaScript revolution. I have lived and worked for all sorts of companies in Germany, Brazil, UK and Spain. I am always up for a good challenge. I enjoy running AngularLabs London, mentoring students, participating in the community, giving talks and writing technical articles at Medium.",
         "tags": [
             "Web",
