@@ -38,8 +38,8 @@
         "companyLogo": "/images/logos/cambio_logo.png",
         "country": "Cambio",
         "photoUrl": "/images/people/harshadewa_ariyasinghe.jpg",
-        "shortBio": "Harsha is the Lead Business Analyst of Cambio Software Engineering, leading Cambio�s Product Design function from a simple idea to a product used by thousands around the world.",
-        "bio": "Harsha is the Lead Business Analyst of Cambio Software Engineering, leading Cambio�s Product Design function from a simple idea to a product used by thousands around the world. Before joining Cambio, Harsha has worked at JKCS and E-Solutions where he designed solutions for multiple domains ranging from Aviation, Middleware, Insurance and E-Commerce. Harsha has over 11 years of experience in both solutions design and software engineering. He got his bachelor�s degree in Computing and Information Systems from London Metropolitan University in 2005.",
+        "shortBio": "Harsha is the Lead Business Analyst of Cambio Software Engineering, leading Cambio's Product Design function from a simple idea to a product used by thousands around the world.",
+        "bio": "Harsha is the Lead Business Analyst of Cambio Software Engineering, leading Cambio's Product Design function from a simple idea to a product used by thousands around the world. Before joining Cambio, Harsha has worked at JKCS and E-Solutions where he designed solutions for multiple domains ranging from Aviation, Middleware, Insurance and E-Commerce. Harsha has over 11 years of experience in both solutions design and software engineering. He got his bachelor's degree in Computing and Information Systems from London Metropolitan University in 2005.",
         "tags": [
             "Web",
 			"Business Analysis"
@@ -48,12 +48,16 @@
         "badges": [
 			{
                 "name": "EFFICIENT",
-                "description": "how to make apps more efficient",
+                "description": "How to make apps more efficient",
                 "link": ""
 			}
         ],
         "socials": [
-
+			{
+                "icon": "linkedin",
+                "name": "LinkedIn",
+                "link": "https://www.linkedin.com/in/harshadewa"
+            }
         ]
     },
     "3": {
