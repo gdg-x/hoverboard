@@ -19,14 +19,14 @@
   },
   "137": {
     "id": 137,
-    "title": "Afterparty & Networking",
-    "description": "Afterparty is a great time to have some fun and meet new people",
+    "title": "Vote of thanks ",
+    "description": "great time to have some fun and meet new people",
     "image": "/images/backgrounds/party.jpg"
   },
   "136": {
     "id": 136,
-    "title": "GDG DevFest Ukraine 2016 Opening",
-    "description": "Official start of the conference. Greetings from the organizers, sponsors and partners.",
+    "title": "GDG DevFest Srilanka Conference Start",
+    "description": "Official start of the Code Lab.",
     "language": "English",
     "image": "/images/backgrounds/opening.jpg"
   },
@@ -50,8 +50,8 @@
   },
   "132": {
     "id": 132,
-    "title": "Registration & morning Coffee",
-    "description": "Get your badge, coffee, enjoy talking with tech edicts around",
+    "title": "Registration",
+    "description": "Get your Tags",
     "image": "/images/backgrounds/registration.jpg"
   },
   "131": {
@@ -83,8 +83,8 @@
   },
   "129": {
     "id": 129,
-    "title": "Accessibility on Android",
-    "description": "Accessibility is a very important step to make sure that your app reaches everyone in an easy and fun way to use. \nGood accessibility support means much more than just making sure the app supports screen readers, different fonts sizes and good contrast ratios. It is a learning process, and one in which we ourselves still have much to learn and explore. ",
+    "title": "Building your own voice Create a TTS voice on your computer",
+    "description": "",
     "speakers": [
       26
     ],
@@ -97,15 +97,15 @@
   },
   "128": {
     "id": 128,
-    "title": "Android Wear 2.0: Great Changes Upcoming this Fall",
-    "description": "Google announced Android Wear 2.0 become available this Fall. This major update brings some revolutionary changes in platform, that should change our approaches in developing wearable apps, including freedom of BLE tethering, system support for complications and activity recognition by GoogleFit, developed mainly for Android Wear 2.0. We will talk deeper about these new features and look at some ways to implement them in the code.",
+    "title": "I See you do..!",
+    "description": "",
     "speakers": [
       25
     ],
     "language": "English",
     "complexity": "Beginner",
     "tags": [
-      "Android"
+      "General"
     ]
   },
   "127": {
@@ -124,8 +124,8 @@
   },
   "126": {
     "id": 126,
-    "title": "Android hacking for dummies: \u2018if\u2019 operator demolytion",
-    "description": "Imagine the world where you can get any application, look into its code (even if it is not open sourced) and modify any conditional operator in any way you like. Welcome, you are in the Android applications world! Let's discover how anyone can decompile your app and, for example, hack your 'if' operators. For the beginning, we will play a role of a script kiddie and try to hack some simple app. After this, we will pretend security-conscious Android developers and try to think how we can protect ourselves.",
+    "title": "Mobile application security in data transferring and storing",
+    "description": "",
     "speakers": [
       23
     ],
@@ -138,28 +138,28 @@
   },
   "125": {
     "id": 125,
-    "title": "Kubernetes in a real world",
-    "description": "TBD",
+    "title": "Keshan",
+    "description": "",
     "speakers": [
       22
     ],
     "language": "English",
     "complexity": "Intermediate",
     "tags": [
-      "Cloud"
+      "General"
     ]
   },
   "124": {
     "id": 124,
-    "title": "Continues Integration in Android",
-    "description": "You are tired of building every patch for your QA ? Still deploying to google play manually ? You still think that build server is something that you don't need ? Than I will try to show you how you can make life of your team easier with CI.",
+    "title": "Code Quality",
+    "description": " ",
     "speakers": [
       21
     ],
     "language": "English",
     "complexity": "Intermediate",
     "tags": [
-      "Android"
+      "Web"
     ]
   },
   "123": {
@@ -177,8 +177,8 @@
   },
   "122": {
     "id": 122,
-    "title": "Firebase + Kotlin + RxJava + MVP: Practical Tips",
-    "description": "I would like to talk about architecture of our Settle Up app. It's all based on new Firebase announced on I/O with the help of modern frameworks like Rx, Kotlin and MVP.",
+    "title": "Googler",
+    "description": "",
     "speakers": [
       19
     ],
@@ -315,7 +315,7 @@
   },
   "112": {
     "id": 112,
-    "title": "Building web apps in 2016",
+    "title": "Google Cloud Platform",
     "description": "Last year brought a lot of new capabilities to browsers, fundamentally changing the way we will build web apps in 2016. 60FPS, push messages, offline support and background sync became a reality marking the birth of Progressive Web Apps.",
     "speakers": [
       10
@@ -323,7 +323,7 @@
     "language": "English",
     "complexity": "Intermediate",
     "tags": [
-      "Web"
+      "Cloud"
     ]
   },
   "111": {
@@ -384,8 +384,8 @@
   },
   "107": {
     "id": 107,
-    "title": "Introduction to Progressive Web Apps in Angular 2",
-    "description": "There's been much discussion about Progressive Web Apps. They're still a relatively new model. In this talk, I'll summarise few options and techniques for getting started with your own Progressive Web App",
+    "title": "Keys to Application Performance",
+    "description": "",
     "speakers": [
       6
     ],
@@ -397,29 +397,29 @@
   },
   "106": {
     "id": 106,
-    "title": "Fuelio. Success story",
-    "description": "Fuelio. Success story (I'll write more info later)",
+    "title": "Kanchayudha",
+    "description": "The most awaited digital phenomenon of Sri Lanka",
     "speakers": [
       5
     ],
     "language": "English",
     "complexity": "Beginner",
     "tags": [
-      "Android"
+      "Web"
     ],
     "presentation":"https://speakerdeck.com/gdglviv/adrian-kajda-fuelio-success-story"
   },
   "105": {
     "id": 105,
-    "title": "Intro to TensorFlow",
-    "description": "TBD",
+    "title": "SL2College",
+    "description": "",
     "speakers": [
       4
     ],
     "language": "English",
     "complexity": "Intermediate",
     "tags": [
-      "Cloud"
+      "General"
     ],
     "presentation":"https://speakerdeck.com/gdglviv/rustem-arzymbetov-intro-to-tensorflow"
   },
@@ -439,7 +439,7 @@
   },
   "103": {
     "id": 103,
-    "title": "Knock knock! Who's there? Doze.",
+    "title": "Code Lab 1",
     "description": "Doze mode is just around the corner. \nIntroduced in Marshmallow, as the shy guy that was allowed to step in only when your device went to sleep. ZzzZzzzz\nWith the new N release, Doze mode becomes the rockstar. He rushes into the room with a big shabang by shooting all background services and network requests that forgot to get away. \nHe should no longer be shy. He just shoots and dances on bones of your scheduled alarms, while you wonder why this particular task is no longer running.\nWith the new Doze mode, you require to adapt your app architecture to the new reality.\nOn this talk, we will learn how to survive Doze mode using Job Scheduler, Content Provider and stay in one piece.",
     "speakers": [
       2
