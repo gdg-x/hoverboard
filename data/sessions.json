@@ -54,33 +54,6 @@
     "description": "Get your Tags",
     "image": "/images/backgrounds/registration.jpg"
   },
-  "131": {
-    "id": 131,
-    "title": "Deal with it: Android DataBinding explained",
-    "description": "In this talk, I will reveal you all the deepest secrets of using MVVM architecture in Android. \nWe will discuss on how to organise your application, views, models, how to retrieve data from the model requested from the view via data binding. \nLightweight Activities and Fragments, is it even possible? \n\nYes, and I will show you how to achieve this with MVVM and DataBinding!",
-    "speakers": [
-      27
-    ],
-    "language": "English",
-    "complexity": "Intermediate",
-    "tags": [
-      "Android"
-    ],
-    "presentation": "https://speakerdeck.com/gdglviv/roman-herasymenko-deal-with-it-android-databinding-explained"
-  },
-  "130": {
-    "id": 130,
-    "title": "Designing an Android Wear Application",
-    "description": "Wearable devices are one of the most popular things nowadays. Specially, after the Apple Watch, we finally get the whole picture of the entire list of products and their features. Now, we can talk about how we can design a user experience for this type of devices.\nEvery platform has it's own design principles and approaches. But, in the core, they all need to follow same core rules. So, how we combine this core requirements with Google's Material Design and use them on an Android Wear device? Let's learn!",
-    "speakers": [
-      26
-    ],
-    "language": "English",
-    "complexity": "Intermediate",
-    "tags": [
-      "Android"
-    ]
-  },
   "129": {
     "id": 129,
     "title": "Building your own voice Create a TTS voice on your computer",
@@ -107,20 +80,6 @@
     "tags": [
       "General"
     ]
-  },
-  "127": {
-    "id": 127,
-    "title": "ExoPlayer: Media playback without pain (almost...)",
-    "description": "If you have any experience with Android Media Player, you definitely know how hard it is to prepare it and do not lose your mind. ExoPlayer - is an alternative, which can help you deal with media with much less pain. So lets discuss if it really a \"silver bullet\" or yet another State Machine hell.",
-    "speakers": [
-      24
-    ],
-    "language": "Ukrainian",
-    "complexity": "Intermediate",
-    "tags": [
-      "Android"
-    ],
-    "presentation":"https://speakerdeck.com/gdglviv/anton-minashkin-exoplayer-media-playback-without-pain-almost-dot-dot-dot"
   },
   "126": {
     "id": 126,
@@ -162,19 +121,6 @@
       "Web"
     ]
   },
-  "123": {
-    "id": 123,
-    "title": "TBD",
-    "description": "TBD",
-    "speakers": [
-      20
-    ],
-    "language": "English",
-    "complexity": "Beginner",
-    "tags": [
-      "Web"
-    ]
-  },
   "122": {
     "id": 122,
     "title": "Googler",
@@ -189,130 +135,6 @@
     ],
     "presentation":"https://speakerdeck.com/gdglviv/david-vavra-firebase-plus-kotlin-plus-rxjava-plus-mvp-practical-tips"
   },
-  "121": {
-    "id": 121,
-    "title": "Offline-first progressive web apps",
-    "description": "Using service workers and other modern progressive web apps capabilities we can update our web applications to be offline-fires. In this session we'll show how to easily convert your applications be usable without the internet connection.",
-    "speakers": [
-      18
-    ],
-    "language": "English",
-    "complexity": "Intermediate",
-    "tags": [
-      "Web"
-    ]
-  },
-  "120": {
-    "id": 120,
-    "title": "Progressive web apps - prepare your web for 2017",
-    "description": "\"Remember back when AJAX completely changed what was possible in the desktop web? Progressive web apps are that same fundamental shift for the mobile web.\" said Rahul Row-Chowdhury (Google\u2019s product lead for chrome and the web platform) on stage at Google I/O 2016. - Progressive web apps use service workers, app shell, push notifications, RAIL and other capabilities to deliver an app-like user experience.",
-    "speakers": [
-      18
-    ],
-    "language": "English",
-    "complexity": "Beginner",
-    "tags": [
-      "Web"
-    ],
-    "presentation":"https://speakerdeck.com/gdglviv/jakub-skvara-progressive-web-apps-prepare-your-web-for-2017"
-  },
-  "119": {
-    "id": 119,
-    "title": "Hands-on with UI testing for Android developers",
-    "description": "Writing Android apps is usually fun because you are actually building something. But what about writing tests? Boring stuff. Errr, UI tests? I am a developer!\n\nIn this talk we will take a look at options for UI tests on Android, why you should write them and how they help you with your app development workflow. No more untested apps!",
-    "speakers": [
-      17
-    ],
-    "language": "English",
-    "complexity": "Beginner",
-    "tags": [
-      "Android"
-    ],
-    "presentation":"https://speakerdeck.com/gdglviv/jana-moudra-hands-on-with-ui-testing-for-android-developers"
-  },
-  "118": {
-    "id": 118,
-    "title": "Kotlin + Android",
-    "description": "TBD",
-    "speakers": [
-      16
-    ],
-    "language": "English",
-    "complexity": "Intermediate",
-    "tags": [
-      "Android"
-    ],
-    "presentation":"https://speakerdeck.com/gdglviv/dmytro-danylyk-kotlin-plus-android"
-  },
-  "117": {
-    "id": 117,
-    "title": "Building data pipelines: from simple to more advanced - hands-on experience",
-    "description": "Data is becoming one of the main decision-makers in an organisation. The more data we have the more challenges we face every day. Every decision we make will have long-term implications. In the talk we will go through different approaches to the data pipelines: from a simple in-house built, with comparison to open source solutions based on Apache stack(Apache Kafka, Apache Samza, Spark) and finally hosted auto-scaling solutions based Amazon(S3, Kinesis, Lambda, EMR) or Google(Pub/Sub, Dataflow, BigQuery). The talk covers the main aspects of data collecting processes altogether with further implications for data processing, highlighting appropriate solutions and architectures for the particular use-cases. ",
-    "speakers": [
-      15
-    ],
-    "language": "English",
-    "complexity": "Beginner",
-    "tags": [
-      "Cloud"
-    ],
-    "presentation":"https://speakerdeck.com/gdglviv/sergii-khomenko-building-data-pipelines-from-simple-to-more-advanced-hands-on-experience"
-  },
-  "116": {
-    "id": 116,
-    "title": "On Polymer and smileys... or Polysmileys",
-    "description": "One of my favourite things about the web are ASCII smileys. They're sweet, fun and simply make the web a better place. How could anyone not like them \u00af(\u30c4)/\u00af?\n\nThis talk is an overdose of smileys, because they're the perfect excuse to get started with Polymer. Polymer is a library built on top of the Web Components standards that helps developers create reusable components for the modern web. And since I know that everybody has been wondering how one could take over the world by creating a suite of Polymer animated emoticon components, we're going to do exactly that.",
-    "speakers": [
-      14
-    ],
-    "language": "English",
-    "complexity": "Beginner",
-    "tags": [
-      "Web"
-    ],
-    "presentation":"http://carmenpopoviciu.github.io/on-polymer-and-smileys/"
-  },
-  "115": {
-    "id": 115,
-    "title": "Android tool-chain and run-time improvements in N",
-    "description": "Upcoming Android N release will bring some interesting changes to both Android run-time and toolchain. Let's talk about JIT, AOT, hybrid JIT/AOT, Jack, Jill and other acronyms and codenames ;-) In this presentation we'll see how many awesome tricks are needed to make our apps start fast and run smoothly on modern Android devices. Hopefully we'll also answer the most important question -- what's next for Android after Java.",
-    "speakers": [
-      13
-    ],
-    "language": "English",
-    "complexity": "Beginner",
-    "tags": [
-      "Android"
-    ],
-    "presentation":"https://speakerdeck.com/gdglviv/aleksander-piotrowski-android-tool-chain-and-run-time-improvements-in-n"
-  },
-  "114": {
-    "id": 114,
-    "title": "I\u2019ve been doing some syncing\u2026",
-    "description": "Storing account information is a common challenge many app developers face, and is often tackled in tailored solutions. Isn't there some strategy to store account credentials in a centralized place?\n\nWhat about considerations for multiple accounts? Security concerns? And when should or could I synchronize data?\n\nAndroid offers a powerful\u2014and underrated\u2014account manager. Let's explore the possibilities together and lay out an architecture for engineering an Android app based on accounts.",
-    "speakers": [
-      12
-    ],
-    "language": "English",
-    "complexity": "Intermediate",
-    "tags": [
-      "Android"
-    ]
-  },
-  "113": {
-    "id": 113,
-    "title": "Microservices in Google App Engine",
-    "description": "Microservices is coming with a certain workload and constraints. Let's try to see how Google Cloud Platform and App Engine can help the overall microservices implementation.",
-    "speakers": [
-      11
-    ],
-    "language": "English",
-    "complexity": "Intermediate",
-    "tags": [
-      "Cloud"
-    ],
-    "presentation":"https://speakerdeck.com/gdglviv/jean-baptiste-clion-microservices-in-google-app-engine"
-  },
   "112": {
     "id": 112,
     "title": "Google Cloud Platform",
@@ -325,62 +147,6 @@
     "tags": [
       "Cloud"
     ]
-  },
-  "111": {
-    "id": 111,
-    "title": "Building modular architecture apps with Dagger 2",
-    "description": "It's beauty, it's handy, it's fast, it's easy - all about Dagger 2",
-    "speakers": [
-      9
-    ],
-    "language": "English",
-    "complexity": "Intermediate",
-    "tags": [
-      "Android"
-    ],
-    "presentation":"https://speakerdeck.com/gdglviv/kseniia-shumelchyk-building-modular-architecture-apps-with-dagger-2"
-  },
-  "110": {
-    "id": 110,
-    "title": "The ultimate guide to MVP pattern on Android",
-    "description": "There's a lot of hype around MVP pattern in the Android world. Now it's time for concretes. During his presentation Mateusz will tell you how IG divided responsibilities between pattern's different components, how they tied Presenters' and Views' lifecycles and what they did to make it all testable. If you'd love to make your Fragments' and Activities' code simpler and increase your coverage, but you're confused how to glue it all together - don't miss Mateusz's talk.",
-    "speakers": [
-      8
-    ],
-    "language": "English",
-    "complexity": "Intermediate",
-    "tags": [
-      "Android"
-    ],
-    "presentation":"https://speakerdeck.com/gdglviv/mateusz-herych-the-ultimate-guide-to-mvp-pattern-on-android"
-  },
-  "109": {
-    "id": 109,
-    "title": "How much money Firebase can save you",
-    "description": "TBD",
-    "speakers": [
-      7
-    ],
-    "language": "English",
-    "complexity": "Beginner",
-    "tags": [
-      "Cloud"
-    ],
-    "presentation":"https://speakerdeck.com/gdglviv/jozef-vodicka-how-much-money-firebase-can-save-you"
-  },
-  "108": {
-    "id": 108,
-    "title": "New Data Architecture in Angular 2",
-    "description": "Angular 2 introduces a new Data Architecture based on Reactive Programming using RxJS 5. We are really excited to see the new approach using Observable sequences aka Observables. We will cover a basic introduction of Angular 2 followed by RxJS 5 and the new HTTP API covering some basic use cases.",
-    "speakers": [
-      6
-    ],
-    "language": "English",
-    "complexity": "Intermediate",
-    "tags": [
-      "Web"
-    ],
-    "presentation":"https://speakerdeck.com/gdglviv/gerard-sans-new-data-architecture-in-angular-2"
   },
   "107": {
     "id": 107,
@@ -423,20 +189,6 @@
     ],
     "presentation":"https://speakerdeck.com/gdglviv/rustem-arzymbetov-intro-to-tensorflow"
   },
-  "104": {
-    "id": 104,
-    "title": "The Physical Web: Context is King!",
-    "description": "It's no longer just about digitizing our environment. It\u2019s rather about pervasive and ubiquitous computing. Almost all everyday things will turn into connected devices soon. This \u201cInternet of Things\u201d will allow the Web to be physically tangible. But what is the value, and how can one prevent IoT applications which just seem to be only more expensive and complicated than conventional solutions. Sascha will discuss the purpose and guide you through this complex topic showing inspiring solutions, tips from practice, and code samples in a variety of technologies from simple Bluetooth Eddystone Beacons to more sophisticated IoT platforms like Eclipse SmartHome.",
-    "speakers": [
-      3
-    ],
-    "language": "English",
-    "complexity": "Beginner",
-    "tags": [
-      "Web"
-    ],
-    "presentation":"https://speakerdeck.com/gdglviv/sascha-wolter-the-physical-web-context-is-king"
-  },
   "103": {
     "id": 103,
     "title": "Code Lab 1",
@@ -466,16 +218,16 @@
   },
   "101": {
     "id": 101,
-    "title": "Windows and .NET on Google Cloud Platform ",
-    "description": "In this session, we will take a look at Windows and .NET support on Google Cloud Platform. We will build a simple ASP.NET app, deploy to Google Compute Engine and take a look at some of the tools and APIs available to .NET developers on Google Cloud Platform. ",
+    "title": "Keynote",
+    "description": "",
     "speakers": [
       1
     ],
     "language": "English",
     "complexity": "Beginner",
     "tags": [
-      "Cloud"
-    ],
-    "presentation":"https://speakerdeck.com/gdglviv/mete-atamel-windows-and-net-on-google-cloud-platform"
+      "General"
+    ]
+
   }
 }
