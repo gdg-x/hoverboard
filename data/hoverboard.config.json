@@ -149,12 +149,12 @@
     ]
   },
   "tickets": {
-    "url": "http://2event.com/events/630032",
+    "url": "http://rsvp.lk/gdgsrilanka/devfestsl2016",
     "elements": [
       {
         "name": "student-ticket",
         "price": 500,
-        "currency": "₴",
+        "currency": "",
         "starts": "student-ticket-starts",
         "ends": "student-ticket-ends",
         "info": "student-ticket-info",
@@ -163,19 +163,19 @@
       {
         "name": "early-ticket",
         "price": 750,
-        "currency": "₴",
+        "currency": "",
         "starts": "early-ticket-starts",
         "ends": "early-ticket-ends",
         "info": "early-ticket-info",
-        "soldOut": true
+        "soldOut": false
       },
       {
         "name": "lazy-ticket",
         "price": 1000,
-        "currency": "₴",
+        "currency": "",
         "starts": "lazy-ticket-starts",
         "ends": "lazy-ticket-ends",
-        "soldOut": false
+        "soldOut": true
       }
     ]
   },

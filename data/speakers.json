@@ -11,7 +11,8 @@
         "shortBio": "Hasitha holds a BSc in Computer Science and Engineering from the University of Moratuwa and has over 12 years of experience in the IT industry...",
         "bio": "Hasitha holds a BSc in Computer Science and Engineering from the University of Moratuwa and has over 12 years of experience in the IT industry, having designed and developed technologies from high frequency trading (HFT) systems for financial markets in the United States, Europe and Hong Kong, to electronic regulatory compliance systems for the Philippines and the International Labour Organization. Before CAKE LABS, Hasitha was the Chief Software Architect for Infoshare and a Technology Consultant for thinkCube Systems, a digital services company specializing in cloud applications.",
         "tags": [
-            
+            "Distributed Systems",
+			"Cloud"
         ],
         "badges": [
 			{
@@ -37,10 +38,12 @@
         "companyLogo": "/images/logos/gdg-lviv.svg",
         "country": "Cambio",
         "photoUrl": "/images/people/harshadewa_ariyasinghe.jpg",
-        "shortBio": "aa",
-        "bio": "aaa",
+        "shortBio": "Harsha is the Lead Business Analyst of Cambio Software Engineering, leading Cambio’s Product Design function from a simple idea to a product used by thousands around the world.",
+        "bio": "Harsha is the Lead Business Analyst of Cambio Software Engineering, leading Cambio’s Product Design function from a simple idea to a product used by thousands around the world. Before joining Cambio, Harsha has worked at JKCS and E-Solutions where he designed solutions for multiple domains ranging from Aviation, Middleware, Insurance and E-Commerce. Harsha has over 11 years of experience in both solutions design and software engineering. He got his bachelor’s degree in Computing and Information Systems from London Metropolitan University in 2005.",
         "tags": [
-            
+            "Web",
+			"Business Analysis",
+			
         ],
         "badges": [
 			{
@@ -65,7 +68,7 @@
         "shortBio": "Chamika Weerasinghe is the Director of Engineering at Bhasha Lanka (Pvt) Ltd which is a pioneering localized mobile solution provider in Sri Lanka",
         "bio": "Chamika Weerasinghe is the Director of Engineering at Bhasha Lanka (Pvt) Ltd which is a pioneering localized mobile solution provider in Sri Lanka. Chamika graduated from the Department of Computer Science and Engineering , University of Moratuwa in 2013. He previously worked as the CTO of Bhasha and has contributed to various open source projects in Android and iOS.",
         "tags": [
-            
+            "Android"
         ],
         "badges": [
 			{
@@ -95,7 +98,8 @@
         "shortBio": "Sameera is an Associate Director/Architect at WSO2. His primary focus is on WSO2 Carbon and WSO2 Web Services Application Server.",
         "bio": "Sameera is an Associate Director/Architect at WSO2. His primary focus is on WSO2 Carbon and WSO2 Web Services Application Server. As a WSO2 intern in 2007, Sameera developed an Axiom version of Rhino's E4X implementation, which is used in the WSO2 Mashup Server. He has also provided technology consulting on customer engagements, including Quick Start Programs, Business Process Execution Language (BPEL), and cloud projects.Sameera has contributed to a number of Apache Software Foundation (ASF) projects, including Apache Axis2 and Axiom. He also was a co-developer of Apache Rampart2. During the 2007 Google Summer of Code, he contributed to the development of JAX-WS templates for the Apache Axis2/Java Codegen tool. Sameera holds a first class honors degree in Computer Science and Engineering from University of Moratuwa, Sri Lanka.",
         "tags": [
-            
+            "ESB",
+			"Web"
         ],
         "badges": [
 			{
@@ -147,47 +151,39 @@
         "companyLogo": "/images/logos/google.svg",
         "country": "GOOGLE",
         "photoUrl": "/images/people/keshan_sodimana.jpg",
-        "shortBio": "",
-        "bio": "Angular Google Developer Expert. I am a Computer Science Engineer specialised in Web. International speaker and trainer. I am an Angular fanboy and a community activist fighting for the JavaScript revolution. I have lived and worked for all sorts of companies in Germany, Brazil, UK and Spain. I am always up for a good challenge. I enjoy running AngularLabs London, mentoring students, participating in the community, giving talks and writing technical articles at Medium.",
+        "shortBio": "Keshan is the country engineering consultant for Google Sri Lanka",
+        "bio": "Keshan is the country engineering consultant for Google Sri Lanka",
         "tags": [
-            "Web",
-            "Angular",
-            "Progressive Web Apps"
+            "NLP",
+            "TTS",
+			"Android"
         ],
         "badges": [
-            {
-                "name": "GDE",
-                "description": "Angular Google Developer Expert",
-                "link": "https://developers.google.com/experts/people/gerard-sans.html"
-            }
+            
         ],
         "socials": [
             {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/gerardsans"
-            },
-            {
-                "icon": "website",
-                "name": "Website",
-                "link": "https://medium.com/@gerard.sans"
+                "icon": "linkedin",
+                "name": "LinkedIn",
+                "link": "https://www.linkedin.com/in/keshan"
             }
         ]
     },
     "7": {
         "id": 7,
-        "featured": true,
-        "name": "Jozef Vodicka",
-        "title": "Developer Relations Program Manager",
-        "company": "Google",
+        "featured": false,
+        "name": "Chamira Prasad Jayasinghe",
+        "title": "CEO",
+        "company": "Arimac Lanka",
         "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Prague, Czech Republic",
-        "photoUrl": "/images/people/jozef_vodicka.jpg",
-        "shortBio": "TEDx speaker, Slovak Forbes 30-under-30, IT auditor for AIESEC International & TOP 5 Student Entrepreneurs in Slovakia.",
-        "bio": "Right now he is a passionate Googler helping developers and companies in South CEE to be more successful and profitable.\n\nHe co-founded and lead several StartUPs such as Venzeo.com, TrashOut.ngo, Matura.sk and Stuzkova.EU.\n\nHe is TEDx speaker, Slovak Forbes 30-under-30, IT auditor for AIESEC International & TOP 5 Student Entrepreneurs in Slovakia. He gets things done.",
+        "country": "ARIMAC",
+        "photoUrl": "/images/people/chamira_prasad.jpg",
+        "shortBio": "",
+        "bio": "",
         "tags": [
-            "Cloud",
-            "Firebase"
+            "Android",
+			"iOS",
+            "Gaming"
         ],
         "badges": [
 
@@ -196,100 +192,59 @@
             {
                 "icon": "linkedin",
                 "name": "LinkedIn",
-                "link": "https://www.linkedin.com/in/jozefvodicka"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/jozefvodicka"
-            },
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/+JozefVodicka"
-            },
-            {
-                "icon": "facebook",
-                "name": "Facebook",
-                "link": "https://www.facebook.com/jozef.vodicka"
+                "link": "https://www.linkedin.com/in/mastercpj"
             }
         ]
     },
     "8": {
         "id": 8,
-        "featured": true,
-        "name": "Mateusz Herych",
-        "title": "Android Tech Lead",
-        "company": "IG",
+        "featured": false,
+        "name": "Mohamed Rushdi Hadhi",
+        "title": "Administrative Director - Research",
+        "company": "SL2College",
         "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Krakow, Poland",
-        "photoUrl": "/images/people/mateusz_herych.jpg",
-        "shortBio": "3x rockstar of DevFest Ukraine stage. Android GDE. Co-organizer of GDG Krakow.",
-        "bio": "Mateusz lives in Krakow, holds a membership in the Google Developer Expert program for Android. Works as an Android Tech Lead at IG. Co-organizer of GDG Krakow community meetups. Fresh dad of twins. For the third time at DevFest Ukraine.",
+        "country": "SL2College",
+        "photoUrl": "/images/people/mohamed_rushdi.jpg",
+        "shortBio": "",
+        "bio": "",
         "tags": [
-            "Android",
-            "Android",
-            "Design Patterns",
-            "Libraries"
+            
         ],
         "badges": [
-            {
-                "name": "GDE",
-                "description": "Android Google Developer Expert",
-                "link": "https://developers.google.com/experts/img/user/108555637824110226040.png"
-            },
-            {
-                "name": "GDG",
-                "description": "Google Developers Group Krakow",
-                "link": "https://developers.google.com/groups/directory/"
-            }
+            
         ],
         "socials": [
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/+MateuszHerych"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/mherych"
-            },
+            
             {
                 "icon": "linkedin",
                 "name": "LinkedIn",
-                "link": "https://www.linkedin.com/in/herych"
+                "link": "https://www.linkedin.com/in/mohamedrushdihadhi"
             }
         ]
     },
     "9": {
         "id": 9,
         "featured": false,
-        "name": "David Mayboroda",
-        "title": "Android Engineer",
-        "company": "SoftServe",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Kyiv, Ukraine",
-        "photoUrl": "/images/people/david_mayboroda.jpg",
-        "shortBio": "Ex Yandex emproyee. Android enthusiast.",
-        "bio": "Ex-Yandex emploee, currently Android Engineer at SoftServe.",
+        "name": "Prashanthan Balakrishnan",
+        "title": "Country Marketing Consultant",
+        "company": "Google",
+        "companyLogo": "/images/logos/google.svg",
+        "country": "Google",
+        "photoUrl": "/images/people/prash_bala.jpg",
+        "shortBio": "",
+        "bio": "",
         "tags": [
-            "Android",
-            "Dagger 2"
+            "Marketing"
         ],
         "badges": [
 
         ],
         "socials": [
+            
             {
-                "icon": "facebook",
-                "name": "Facebook",
-                "link": "https://www.facebook.com/profile.php?id=100008474898785"
-            },
-            {
-                "icon": "github",
-                "name": "GitHub",
-                "link": "https://github.com/dmayboroda"
+                "icon": "linkedin",
+                "name": "LinkedIn",
+                "link": "https://lk.linkedin.com/in/prashbalakrishnan"
             }
         ]
     },
