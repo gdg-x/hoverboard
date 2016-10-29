@@ -143,7 +143,7 @@
         "starts": "early-ticket-starts",
         "ends": "early-ticket-ends",
         "info": "early-ticket-info",
-        "soldOut": false
+        "soldOut": true
       },
       {
         "name": "lazy-ticket",
@@ -175,7 +175,7 @@
       "caption": "segments"
     }
   ],
-  "hashtag": "GDGLK",
+  "hashtag": "devfestsl2016",
   "social": [
     {
       "name": "twitter",
@@ -189,8 +189,13 @@
     },
     {
       "name": "facebook",
-      "nickname": "GDG SriLanka",
-      "url": "https://www.facebook.com/GDGSriLanka"
+      "nickname": "GDG Sri Lanka",
+      "url": "https://www.facebook.com/GDGSriLanka/"
+    },
+    {
+      "name": "linkedin",
+      "nickname": "gdg-sri-lanka",
+      "url": "https://www.linkedin.com/groups/8284836"
     }
   ],
   "tweetsSource": "/data/tweets.json",
@@ -213,11 +218,11 @@
       "zoom": 17
     },
     "mapCenter": {
-      "latitude": 6.885536, 
+      "latitude": 6.885536,
       "longitude": 79.862940
     },
     "images": [
-      "/images/backgrounds/location_1.jpg"	
+      "/images/backgrounds/location_1.jpg"
     ]
   }
 }
