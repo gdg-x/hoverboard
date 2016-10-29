@@ -129,7 +129,7 @@ pull request, so we can include you in this list.
 | [GDG DevFest Hong Kong 2016](https://devfest.gdghk.org) |
 | [GDG DevFest London 2016](https://devfest-london-2016.firebaseapp.com/) |
 | [GDG DevFest Paraná 2016](https://devfestpr.org/) |  
-
+| [GDG DevFest Srilanka 2016](https://www.devfest16.gdgsrilanka.org/) |
 ### Roadmap :rocket:
 :x: Admin panel  
 :x: Firebase Integration   
