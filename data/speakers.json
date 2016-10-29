@@ -126,9 +126,9 @@
         "name": "Albert Padin",
         "title": "Cloud Google Developer Expert",
         "company": "Google Developers",
-        "companyLogo": "http://a43d55f6a02c4be185ce-9cfa4cf7c673a59966ad8296f4c88804.r44.cf3.rackcdn.com/Google-Developer-Expert/google-developers-experts.png",
+        "companyLogo": "https://cdn-images-1.medium.com/max/800/1*AyeFx2i4x5rx62m1LFtI0Q.png",
         "country": "GDE",
-        "photoUrl": "/images/people/albert_padin.jpg",
+        "photoUrl": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/12359827_10153875466684954_7243851383854348017_n.jpg?oh=6f8c81c1af87fcc152372fb17a9811a2&oe=5898636A",
         "shortBio": "Albert is a Google Developer expert in Google Cloud Platform.",
         "bio": "Albert is a developer and entrepreneur who's worked on consumer, enterprise, and government software products. He is the co-founder and CTO of Symph, a design, development, and startup studio. At Symph, he has architected and developed solutions for 500 Startups, Office of the President of the Philippines, and the World Bank.",
         "tags": [
@@ -180,10 +180,10 @@
         "title": "CEO",
         "company": "Arimac Lanka",
         "companyLogo": "/images/logos/arimac_logo.png",
-        "country": "ARIMAC",
+        "country": "Arimac Lanka",
         "photoUrl": "/images/people/chamira_prasad.jpg",
-        "shortBio": "",
-        "bio": "",
+        "shortBio": "Chamira Prasad Jayasinghe is a serial entrepreneur, innovator and an avid programmer.",
+        "bio": "Chamira Prasad Jayasinghe is a serial entrepreneur, innovator and an avid programmer. He made his humble entrance to the programming arena by compiling GW-Basic Code Snippets. With ample hard work, commitment and self-studies he paved his path to master Visual Basic 6.0. He genuinely acquired a number of National and International awards for the innovative software products he implemented such as ArtificiaI Intelligence Based Chess Engine, Sinhala Sub Operating System etc. He obtained a Bachelor of Science (Hons.) degree in Information Technology with a First Class Honors from Sri Lanka Institute of Information Technology.",
         "tags": [
             "Android",
 			"iOS",
@@ -257,15 +257,14 @@
         "name": "Tharaka Devinda",
         "title": "Organizer DGD Srilanka",
         "company": "GDG",
-        "companyLogo": "/images/touch/gdg-logo.svg",
+        "companyLogo": "/images/gdg-logo.svg",
         "country": "Google",
         "photoUrl": "/images/people/tharaka.jpg",
         "shortBio": "",
         "bio": "",
         "tags": [
-            "Map",
             "Android",
-            "Web"
+            "Web",
             "Firebase"
         ],
         "badges": [
@@ -279,8 +278,7 @@
                 "link": "https://lk.linkedin.com/in/tdevinda"
             }
         ]
-    },
-    "11": {
+    },"11": {
         "id": 11,
         "featured": false,
         "name": "Shafraz Rahim",
@@ -293,7 +291,7 @@
         "bio": "",
         "tags": [
             
-            "Web",
+            "Web"
            
         ],
         "badges": [
@@ -305,6 +303,36 @@
                 "icon": "linkedin",
                 "name": "LinkedIn",
                 "link": "https://lk.linkedin.com/in/shafrazrahim"
+            }
+        ]
+    }
+    ,"12": {
+        "id": 12,
+        "featured": false,
+        "name": "Pasindu De Silva",
+        "title": "Open Source Developer",
+        "company": "Google",
+        "companyLogo": "/images/logos/google.svg",
+        "country": "Sri Lanka",
+        "photoUrl": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/10671451_10152566176552669_2267594167288688113_n.jpg?oh=5754b27dd42d70828f52823482fcd8c5&oe=58D45B62",
+        "shortBio": "",
+        "bio": "",
+        "tags": [
+            
+            "Web",
+            "NLP",
+            "TTS"
+           
+        ],
+        "badges": [
+
+        ],
+        "socials": [
+
+            {
+                "icon": "linkedin",
+                "name": "LinkedIn",
+                "link": "https://www.linkedin.com/in/pasindud"
             }
         ]
     }
