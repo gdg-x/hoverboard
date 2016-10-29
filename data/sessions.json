@@ -65,8 +65,8 @@
     "complexity": "Intermediate",
     "tags": [
       "Android"
-    ],
-    "presentation":"https://speakerdeck.com/gdglviv/resul-caner-yildirim-accessibility-on-android"
+    ]
+    
   },
   "128": {
     "id": 128,
@@ -91,7 +91,10 @@
     "language": "English",
     "complexity": "Intermediate",
     "tags": [
-      "Android"
+      "Secure",
+      "Storing",
+      "Mobile"
+
     ],
     "presentation":""
   },
@@ -118,6 +121,7 @@
     "language": "English",
     "complexity": "Intermediate",
     "tags": [
+      "Tidy",
       "Web"
     ]
   },
@@ -126,14 +130,14 @@
     "title": "Googler",
     "description": "",
     "speakers": [
-      19
+      9
     ],
     "language": "English",
     "complexity": "Intermediate",
     "tags": [
-      "Android"
+      "Entrepreneurship"
     ],
-    "presentation":"https://speakerdeck.com/gdglviv/david-vavra-firebase-plus-kotlin-plus-rxjava-plus-mvp-practical-tips"
+    "presentation":""
   },
   "112": {
     "id": 112,
@@ -158,6 +162,7 @@
     "language": "English",
     "complexity": "Beginner",
     "tags": [
+      "Fast",
       "Web"
     ]
   },
@@ -173,7 +178,7 @@
     "tags": [
       "Web"
     ],
-    "presentation":"https://speakerdeck.com/gdglviv/adrian-kajda-fuelio-success-story"
+    "presentation":""
   },
   "105": {
     "id": 105,
@@ -186,9 +191,8 @@
     "complexity": "Intermediate",
     "tags": [
       "General"
-    ],
-    "presentation":"https://speakerdeck.com/gdglviv/rustem-arzymbetov-intro-to-tensorflow"
-  },
+    ]
+      },
   "103": {
     "id": 103,
     "title": "Analytics for Firebase",
@@ -199,9 +203,9 @@
     "language": "English",
     "complexity": "Intermediate",
     "tags": [
-      "Android"
-    ],
-    "presentation":"https://speakerdeck.com/gdglviv/yonatan-levin-knock-knock-whos-there-doze"
+      "Firebase"
+    ]
+
   },
  
   "101": {
@@ -227,7 +231,9 @@
   "language": "English",
   "complexity": "Beginner",
   "tags": [
-    "General"
+    "Efficient",
+    "Web",
+    "Mobile"
   ]
 
 }

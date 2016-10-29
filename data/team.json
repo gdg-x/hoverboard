@@ -3,214 +3,208 @@
     "title": "Core Team",
     "members": [
       {
-        "name": "Oleh Zasadnyy",
-        "photoUrl": "/images/people/oleh_zasadnyy.jpg",
+        "name": "Tharaka Devinda",
+        "photoUrl": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/13266113_10208356116393842_2175530521734496140_n.jpg?oh=b7d03a365c17853002e721737dd6cebb&oe=58D233BD",
         "socials": [
           {
             "icon": "gplus",
-            "link": "https://plus.google.com/+OlehZasadnyy",
+            "link": "https://plus.google.com/+TharakaDevinda",
             "name": "Google+"
           },
           {
             "icon": "facebook",
-            "link": "https://www.facebook.com/oleh.zasadnyy",
+            "link": "https://www.facebook.com/tdevinda",
             "name": "Facebook"
           },
           {
             "icon": "twitter",
-            "link": "https://twitter.com/ozasadnyy",
-            "name": "Twitter"
-          },
-          {
-            "icon": "website",
-            "link": "http://o.zasadnyy.com/",
-            "name": "Blog"
-          }
-        ],
-        "title": "Website and sponsors"
-      },
-      {
-        "name": "Sofiya Huts",
-        "photoUrl": "/images/people/sofiya_huts.jpg",
-        "socials": [
-          {
-            "icon": "gplus",
-            "link": "https://plus.google.com/+SofiaHuts",
-            "name": "Google+"
-          },
-          {
-            "icon": "facebook",
-            "link": "https://www.facebook.com/sophie.huts.7",
-            "name": "Facebook"
-          }
-        ],
-        "title": "Social and media"
-      },
-      {
-        "name": "Vitaliy Zasadnyy",
-        "photoUrl": "/images/people/vitaliy_zasadnyy.jpg",
-        "socials": [
-          {
-            "icon": "linkedin",
-            "link": "https://www.linkedin.com/in/zasadnyy",
-            "name": "Linkedin"
-          },
-          {
-            "icon": "twitter",
-            "link": "https://twitter.com/zasadnyy",
-            "name": "Twitter"
-          },
-          {
-            "icon": "website",
-            "link": "http://v.zasadnyy.com/",
-            "name": "Blog"
-          }
-        ],
-        "title": "Speakers"
-      },
-      {
-        "name": "Marta Maxymiak",
-        "photoUrl": "/images/people/marta_maxymiak.jpg",
-        "socials": [
-          {
-            "icon": "gplus",
-            "link": "https://plus.google.com/104036874811391520583",
-            "name": "Google+"
-          },
-          {
-            "icon": "facebook",
-            "link": "https://www.facebook.com/marta.maxymiak",
-            "name": "Facebook"
-          }
-        ],
-        "title": "Party and happiness"
-      },
-      {
-        "name": "Ostap Andrusiv",
-        "photoUrl": "/images/people/ostap_andrusiv.jpg",
-        "socials": [
-          {
-            "icon": "gplus",
-            "link": "https://google.com/+OstapAndrusiv",
-            "name": "Google+"
-          },
-          {
-            "icon": "facebook",
-            "link": "https://www.facebook.com/ostap.andrusiv",
-            "name": "Facebook"
-          },
-          {
-            "icon": "twitter",
-            "link": "https://twitter.com/p1f",
-            "name": "Twitter"
-          },
-          {
-            "icon": "website",
-            "link": "http://andrusiv.com/",
-            "name": "Blog"
-          }
-        ],
-        "title": "Sponsors"
-      },
-      {
-        "name": "Vasylyna Mytsak",
-        "photoUrl": "/images/people/vasylyna_mytsak.jpg",
-        "socials": [
-          {
-            "icon": "gplus",
-            "link": "https://plus.google.com/+ВасилинаМицак",
-            "name": "Google+"
-          },
-          {
-            "icon": "facebook",
-            "link": "https://www.facebook.com/vasylyna.mytsak",
-            "name": "Facebook"
-          }
-        ],
-        "title": "Party and happiness"
-      },
-      {
-        "name": "Volodya Karpliuk",
-        "photoUrl": "/images/people/volodya_karpliuk.jpg",
-        "socials": [
-          {
-            "icon": "gplus",
-            "link": "https://plus.google.com/+VolodyaKarpliuk23",
-            "name": "Google+"
-          },
-          {
-            "icon": "facebook",
-            "link": "https://www.facebook.com/volodya.karpluk",
-            "name": "Facebook"
-          },
-          {
-            "icon": "twitter",
-            "link": "https://twitter.com/keyv23",
+            "link": "https://twitter.com/tdevinda",
             "name": "Twitter"
           }
         ],
-        "title": "Speakers"
+        "title": "DevFest Organizer"
       },
       {
-        "name": "Diana Pinchuk",
-        "photoUrl": "/images/people/diana_pinchuk.jpg",
+        "name": "Pamuditha Imalka",
+        "photoUrl": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/969141_409507712501270_946571863_n.jpg?oh=d90d5bf4a1010731cea65a1170eab6a6&oe=58D4F39A",
         "socials": [
           {
             "icon": "gplus",
-            "link": "https://plus.google.com/+DianaPinchuk",
+            "link": "https://plus.google.com/u/0/+PamudithaImalka",
             "name": "Google+"
           },
           {
             "icon": "facebook",
-            "link": "https://www.facebook.com/diana.pinchuk.9",
+            "link": "https://www.facebook.com/pamuroky",
             "name": "Facebook"
           }
         ],
-        "title": "Social and media"
+        "title": "DevFest Organizer"
+      },
+      {
+        "name": "Udaya Gunathilake",
+        "photoUrl": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/10174978_10208496763515211_148233193522874536_n.jpg?oh=b5d04075c9f51bb1e5fcdba1b10096c5&oe=589B3126",
+        "socials": [
+          {
+            "icon": "facebook",
+            "link": "https://www.facebook.com/umgunathilaka",
+            "name": "Facebook"
+          }
+        ],
+        "title": "DevFest Organizer"
+      },
+      {
+        "name": "Raveen Harith",
+        "photoUrl": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/12243056_10206988761092970_8253388931726213198_n.jpg?oh=5380b02f7407a88456e2cdeba3042d44&oe=589967BC",
+        "socials": [
+          {
+            "icon": "gplus",
+            "link": "https://plus.google.com/+HarithPerera9127",
+            "name": "Google+"
+          },
+          {
+            "icon": "facebook",
+            "link": "https://www.facebook.com/rhperera",
+            "name": "Facebook"
+          }
+        ],
+        "title": "DevFest Organizer"
+      },
+      {
+        "name": "Milindu Sanoj",
+        "photoUrl": "/images/people/milidu.png",
+        "socials": [
+          {
+            "icon": "gplus",
+            "link": "https://plus.google.com/u/0/+MilinduSanojKumarage",
+            "name": "Google+"
+          },
+          {
+            "icon": "facebook",
+            "link": "https://www.facebook.com/agentmilindu",
+            "name": "Facebook"
+          }
+        ],
+        "title": "DevFest Organizer"
+      },
+      {
+        "name": "Sandun Nilanka",
+        "photoUrl": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/13592294_495811973942160_2646817790454509407_n.jpg?oh=eef6e89381a5e9d229d1bf3444badca1&oe=589E1FA4",
+        "socials": [
+         
+          {
+            "icon": "facebook",
+            "link": "https://www.facebook.com/Sandun8",
+            "name": "Facebook"
+          }
+        ],
+        "title": "DevFest Organizer"
+      },
+      {
+        "name": "Pasan Ranathunga",
+        "photoUrl": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/12631394_1216227675058461_8363231553578650033_n.jpg?oh=844d61dce6cf9865ed4706e5619152f2&oe=58D28F0C",
+        "socials": [
+         
+          {
+            "icon": "facebook",
+            "link": "https://www.facebook.com/pasan.artz",
+            "name": "Facebook"
+          }
+        ],
+        "title": "DevFest Organizer"
+      },
+      {
+        "name": "Dilini Madhubhashini ",
+        "photoUrl": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/13557694_1057151737654384_6345270622779344391_n.jpg?oh=3efa59d1281c0cd65963bc4128096669&oe=58A3295D",
+        "socials": [
+          {
+            "icon": "gplus",
+            "link": "https://plus.google.com/112171662926048643500",
+            "name": "Google+"
+          },
+          {
+            "icon": "facebook",
+            "link": "https://www.facebook.com/dilini.m.weerasinghe",
+            "name": "Facebook"
+          }
+        ],
+        "title": "DevFest Organizer"
+      },
+      {
+        "name": "Michela Thalagala",
+        "photoUrl": "/images/people/michela.png",
+        "socials": [
+          {
+            "icon": "gplus",
+            "link": "hhttps://plus.google.com/+MichelaThalagala",
+            "name": "Google+"
+          },
+          {
+            "icon": "facebook",
+            "link": "https://www.facebook.com/michela.thalagala",
+            "name": "Facebook"
+          }
+        ],
+        "title": "DevFest Organizer"
       }
     ]
   },
   {
-    "title": "Program Committee",
+    "title": "Support Ops",
     "members": [
       {
-        "name": "Ihor Dvoretskyi",
-        "photoUrl": "/images/people/ihor_dvoretskyi.jpg",
-        "socials": [
-          {
-            "icon": "facebook",
-            "link": "https://www.facebook.com/idvoretskyi",
-            "name": "Facebook"
-          },
-          {
-            "icon": "twitter",
-            "link": "https://twitter.com/idvoretskyi",
-            "name": "Twitter"
-          }
-        ],
-        "title": "Cloud stream"
+        "name": "Ashan Maduranga",
+        "photoUrl": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/12806144_10201489930885777_247297524535645958_n.jpg?oh=25e50326c85b3a779bc32fda773ee00c&oe=589F518D"
+        
+        
       },
       {
-        "name": "Dmytro Danylyk",
-        "photoUrl": "/images/people/dmytro_danylyk.jpg",
-        "socials": [
-          {
-            "icon": "gplus",
-            "link": "https://plus.google.com/+DmytroDanylyk",
-            "name": "Google+"
-          },
-          {
-            "icon": "twitter",
-            "link": "https://twitter.com/dmytrodanylyk",
-            "name": "Twitter"
-          },
-          {
-            "icon": "website",
-            "link": "http://www.dmytrodanylyk.com/#/about",
-            "name": "Website"
-          }
-        ],
-        "title": "Android Stream"
+        "name": "Asith Wijenayake",
+        "photoUrl": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/13165839_994183050678575_7205035327671583246_n.jpg?oh=26761519dc8a1575a4251caa3ad9c380&oe=588926C5"
+        
+      
+      },
+      {
+        "name": "Chamath Silva",
+        "photoUrl": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/13775744_1137253363001319_6355204719692524880_n.jpg?oh=171c7becba5a3d4676a936d9993251fe&oe=5891C0E5"
+       
+      },
+      {
+        "name": "Lakmal Niranga",
+        "photoUrl": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/14492607_1292866734080715_3959610263298978503_n.jpg?oh=a09d5d29afef9930fcc4affd5a677341&oe=58D43819"
+       
+      }
+    ]
+  },
+  {
+    "title": "Bloggers",
+    "members": [
+      {
+        "name": "Akhila Damsari",
+        "photoUrl": "/images/people/akhila.jpg"
+        
+        
+      },
+      {
+        "name": "Ruwanmalee Dissanayake",
+        "photoUrl": "/images/people/Ruwanmalee.jpg"
+        
+      
+      },
+      {
+        "name": "Kithma Marindagoda",
+        "photoUrl": "/images/people/kithma.jpg"
+       
+      },
+      {
+        "name": "Madhuka De Silva",
+        "photoUrl": "/images/people/madhuka.jpg"
+       
+      },
+      {
+        "name": "Nuwini Dulanga",
+        "photoUrl": "/images/people/nuwini.jpg"
+       
       }
     ]
   }
