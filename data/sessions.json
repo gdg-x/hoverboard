@@ -73,7 +73,7 @@
     "title": "I See you do..!",
     "description": "",
     "speakers": [
-      25
+      11
     ],
     "language": "English",
     "complexity": "Beginner",
@@ -97,10 +97,10 @@
   },
   "125": {
     "id": 125,
-    "title": "Keshan",
+    "title": "Building your own voice Create a TTS voice on your computer",
     "description": "",
     "speakers": [
-      22
+      6
     ],
     "language": "English",
     "complexity": "Intermediate",
@@ -140,7 +140,7 @@
     "title": "Google Cloud Platform",
     "description": "Last year brought a lot of new capabilities to browsers, fundamentally changing the way we will build web apps in 2016. 60FPS, push messages, offline support and background sync became a reality marking the birth of Progressive Web Apps.",
     "speakers": [
-      10
+      5
     ],
     "language": "English",
     "complexity": "Intermediate",
@@ -166,7 +166,7 @@
     "title": "Kanchayudha",
     "description": "The most awaited digital phenomenon of Sri Lanka",
     "speakers": [
-      5
+      7
     ],
     "language": "English",
     "complexity": "Beginner",
@@ -180,7 +180,7 @@
     "title": "SL2College",
     "description": "",
     "speakers": [
-      4
+      8
     ],
     "language": "English",
     "complexity": "Intermediate",
@@ -203,25 +203,13 @@
     ],
     "presentation":"https://speakerdeck.com/gdglviv/yonatan-levin-knock-knock-whos-there-doze"
   },
-  "102": {
-    "id": 102,
-    "title": "Hands-on gRPC experience building your own multiplayer game client",
-    "description": "Do you remember the game Simon says from the 80s? I don\u2019t know about you, but I know many that spent hours trying to press those specific sequences of red, green, blue and yellow buttons in the correct order. But why play on your own? We\u2019ve implemented a gRPC server that allows you to play Simon with other players over the internet!\n\nIn this workshop we will dive into the toolset and libraries to build your very own Simon Says client for this server. We will have a message description in Protocol Buffers format and some stub code in several languages ready for you to play with. The goal for this workshop is for you to have a working client that you can use to play (and beat!) other attendees of the workshop.",
-    "speakers": [
-      1
-    ],
-    "language": "English",
-    "complexity": "Beginner",
-    "tags": [
-      "Cloud"
-    ]
-  },
+ 
   "101": {
     "id": 101,
     "title": "Keynote",
     "description": "",
     "speakers": [
-      1
+      10
     ],
     "language": "English",
     "complexity": "Beginner",

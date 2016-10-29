@@ -251,5 +251,62 @@
                 "link": "https://lk.linkedin.com/in/prashbalakrishnan"
             }
         ]
+    }, "10": {
+        "id": 10,
+        "featured": false,
+        "name": "Tharaka Devinda",
+        "title": "Organizer DGD Srilanka",
+        "company": "GDG",
+        "companyLogo": "/images/touch/gdg-logo.svg",
+        "country": "Google",
+        "photoUrl": "/images/people/tharaka.jpg",
+        "shortBio": "",
+        "bio": "",
+        "tags": [
+            "Map",
+            "Android",
+            "Web"
+            "Firebase"
+        ],
+        "badges": [
+
+        ],
+        "socials": [
+
+            {
+                "icon": "linkedin",
+                "name": "LinkedIn",
+                "link": "https://lk.linkedin.com/in/tdevinda"
+            }
+        ]
+    },
+    "11": {
+        "id": 11,
+        "featured": false,
+        "name": "Shafraz Rahim",
+        "title": "Developer Relations and Platform Evangelist",
+        "company": "Dialog",
+        "companyLogo": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSpMe5N-jSTv2D7WeCNnNvtpSLVbSJNQcpsF7Mg3KVaSHf6ZaQvsxFUeOc2",
+        "country": "Sri Lanka",
+        "photoUrl": "https://media.licdn.com/media/AAEAAQAAAAAAAAPTAAAAJGQ1OTQ3OWEyLWQyYTUtNDEwOS1hMmIxLTI4OWU2YjA5ODIyNA.jpg",
+        "shortBio": "",
+        "bio": "",
+        "tags": [
+            
+            "Web",
+           
+        ],
+        "badges": [
+
+        ],
+        "socials": [
+
+            {
+                "icon": "linkedin",
+                "name": "LinkedIn",
+                "link": "https://lk.linkedin.com/in/shafrazrahim"
+            }
+        ]
     }
+
 }
