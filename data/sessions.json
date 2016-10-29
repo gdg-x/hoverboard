@@ -93,14 +93,14 @@
     "tags": [
       "Android"
     ],
-    "presentation":"https://speakerdeck.com/gdglviv/michael-pustovit-android-hacking-for-dummies-if-operator-demolytion"
+    "presentation":""
   },
   "125": {
     "id": 125,
     "title": "Building your own voice Create a TTS voice on your computer",
     "description": "",
     "speakers": [
-      6
+      6,12
     ],
     "language": "English",
     "complexity": "Intermediate",

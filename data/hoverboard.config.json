@@ -8,7 +8,7 @@
         "tabBarColor": "#fff",
         "video": {
           "title": "GDG DevFest Sri Lanka 2016",
-          "youtubeId": "T6_DIVFiiAg",
+          "youtubeId": "",
           "text": "See how it was in 2015"
         },
         "hideLogo": true,
@@ -75,11 +75,11 @@
   ],
   "url": "https://hoverboard.firebaseapp.com/",
   "mailchimp": {
-    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
+    "url": "",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
   },
-  "partnershipProposition": "http://bit.ly/df16-sponsor",
-  "disqusShortName": "hoverboard-gdg-x",
+  "partnershipProposition": "",
+  "disqusShortName": "",
   "languages": [
     {
       "name": "English",
@@ -110,7 +110,7 @@
       "links": [
         {
           "text": "media-kit",
-          "url": "http://bit.ly/df16-media",
+          "url": "",
           "newTab": true
         }
       ]
@@ -175,7 +175,7 @@
       "caption": "segments"
     }
   ],
-  "hashtag": "dfua",
+  "hashtag": "GDGLK",
   "social": [
     {
       "name": "twitter",
@@ -184,18 +184,13 @@
     },
     {
       "name": "gplus",
-      "nickname": "102444623953913144164",
-      "url": "https://plus.google.com/102444623953913144164"
+      "nickname": "118444516760608140335",
+      "url": "https://plus.google.com/u/0/b/118444516760608140335/+GDGSriLankaChapter"
     },
     {
       "name": "facebook",
-      "nickname": "GDGLviv",
-      "url": "https://www.facebook.com/GDGLviv"
-    },
-    {
-      "name": "linkedin",
-      "nickname": "google-developers-group-lviv",
-      "url": "https://www.linkedin.com/company/google-developers-group-lviv"
+      "nickname": "GDG SriLanka",
+      "url": "https://www.facebook.com/GDGSriLanka"
     }
   ],
   "tweetsSource": "/data/tweets.json",
@@ -211,9 +206,9 @@
   },
   "location": {
     "apiKey": "",
-    "link": "https://www.facebook.com/expopivdennij",
+    "link": "",
     "pointer": {
-      "latitude": 6.885632, 
+      "latitude": 6.8865953,
       "longitude": 79.860290,
       "zoom": 17
     },
@@ -224,10 +219,5 @@
     "images": [
       "/images/backgrounds/location_1.jpg"	
     ]
-  },
-  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
-  "callToAction": {
-    "videoTitle": "action-title",
-    "videoId": "DfMnJAzOFng"
   }
 }
