@@ -5,8 +5,13 @@
 
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 
+<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+<link rel="import" href="../../bower_components/app-storage/app-network-status-behavior.html">
+
 <link rel="import" href="../behaviors/utils-behavior.html">
 <link rel="import" href="../behaviors/cascaded-behavior.html">
+<link rel="import" href="../behaviors/localize-behavior.html">
+<link rel="import" href="../behaviors/my-schedule-behavior.html">
 
 
 <dom-module id="schedule-day">
@@ -121,19 +126,53 @@
         opacity: 0.85;
       }
 
-      .sub-session:hover .image-overlay {
+      .sub-session[wide]:hover .image-overlay,
+      .sub-session[wide]:hover .action-icon {
         opacity: 1;
       }
 
-      .sub-session[with-background] .image-overlay,
-      .sub-session[with-background]:hover .image-overlay {
+      .action-icon[disabled],
+      .sub-session[wide]:hover .action-icon[disabled] {
+        opacity: 0.2;
+        cursor: default;
+      }
+
+      .sub-session[wide] .action-icon.remove-circle {
+        opacity: 1;
+      }
+
+      .sub-session[with-background][wide] .image-overlay,
+      .sub-session[with-background][wide]:hover .image-overlay {
         opacity: 0;
+      }
+
+      .bottom-caption {
+        position: relative;
+        font-size: 13px;
+        color: var(--secondary-text-color);
+      }
+
+      .action-icon {
+        --iron-icon-width: 20px;
+        --iron-icon-height: 20px;
+        margin-left: 16px;
+        padding: 16px 24px;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+      }
+
+      .sub-session[with-background] .action-icon {
+        color: #fff;
+      }
+
+      .sub-session[wide] .action-icon {
+        opacity: 0;
+        transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       .tags {
         padding: 16px 24px;
-        color: var(--secondary-text-color);
-        font-size: 13px;
       }
 
       .tags iron-icon {
@@ -177,47 +216,70 @@
                         filter="{{_filterSession(filters.splices)}}">
 
                 <a href$="/schedule/[[name]]?sessionId=[[subSession.id]]" class="sub-session"
-                   with-background$="[[subSession.image]]" layout flex-auto>
+                   with-background$="[[subSession.image]]" layout flex-auto wide$="{{!app.isPhoneSize}}">
                   <paper-card layout flex-auto>
 
-                    <iron-image
-                      src="[[subSession.image]]"
-                      sizing="cover"
-                      fit preload
-                    ></iron-image>
+                    <template is="dom-if" if="[[subSession.image]]">
+                      <iron-image src="[[subSession.image]]" sizing="cover" fit preload></iron-image>
+                    </template>
 
                     <div class="overlay" relative layout vertical flex>
-
                       <div class="sub-session-content" flex>
                         <h2 class="session-title">[[subSession.title]]</h2>
                         <ul class="session-meta">
-                          <li hidden$="[[!subSession.language]]">[[subSession.language]]</li>
-                          <li hidden$="[[!subSession.complexity]]">[[subSession.complexity]]</li>
-                          <li hidden$="[[!subSession.track.title]]">[[subSession.track.title]]</li>
+                          <template is="dom-if" if="[[subSession.language]]">
+                            <li>[[subSession.language]]</li>
+                          </template>
+                          <template is="dom-if" if="[[subSession.complexity]]">
+                            <li>[[subSession.complexity]]</li>
+                          </template>
+                          <template is="dom-if" if="[[subSession.track.title]]">
+                            <li>[[subSession.track.title]]</li>
+                          </template>
                         </ul>
                       </div>
 
-                      <div class="tags" hidden$="[[!subSession.tags.length]]" layout horizontal center>
-                        <iron-icon icon="tags"></iron-icon>
-                        <span>[[_joinArray(subSession.tags)]]</span>
-                      </div>
-
-                      <div class="speaker-block" hidden$="[[!subSession.speakers.length]]" layout horizontal wrap
-                           relative>
-                        <div class="image-overlay"
-                             style$="background-color: [[_getCustomStyleValue(subSession.mainTag)]]" fit></div>
-                        <template is="dom-repeat" items="[[subSession.speakers]]" as="speaker">
-                          <div class="speaker" layout horizontal center>
-                            <iron-icon icon="account"></iron-icon>
-                            <div class="person-detail" flex>
-                              <span class="speaker-name">[[speaker.name]]</span>
-                              <div class="speaker-title">
-                                [[speaker.company]] / [[speaker.country]]
-                              </div>
-                            </div>
+                      <div class="bottom-caption" layout horizontal center justified>
+                        <template is="dom-if" if="[[subSession.tags]]">
+                          <div class="tags" layout horizontal center flex>
+                            <iron-icon icon="tags"></iron-icon>
+                            <span>[[_joinArray(subSession.tags)]]</span>
                           </div>
                         </template>
+                        <iron-icon
+                          class$="action-icon [[_getMyScheduleIcon(subSession.id, app.user.sessions)]]"
+                          icon$="[[_getMyScheduleIcon(subSession.id, app.user.sessions)]]"
+                          on-tap="toggleMyScheduleSession"
+                          session-id$="[[subSession.id]]"
+                          disabled$="[[!online]]"
+                        ></iron-icon>
+                        <template is="dom-if" if="[[!app.user.uid]]">
+                          <iron-icon
+                            class="action-icon add-icon-outline"
+                            icon="add-circle-outline"
+                            on-tap="toggleMyScheduleSession"
+                            disabled$="[[!online]]"
+                          ></iron-icon>
+                        </template>
                       </div>
+
+                      <template is="dom-if" if="[[subSession.speakers]]">
+                        <div class="speaker-block" layout horizontal wrap relative>
+                          <div class="image-overlay"
+                               style$="background-color: [[_getCustomStyleValue(subSession.mainTag)]]" fit></div>
+                          <template is="dom-repeat" items="[[subSession.speakers]]" as="speaker">
+                            <div class="speaker" layout horizontal center>
+                              <iron-icon icon="account"></iron-icon>
+                              <div class="person-detail" flex>
+                                <span class="speaker-name">[[speaker.name]]</span>
+                                <div class="speaker-title">
+                                  [[speaker.company]] / [[speaker.country]]
+                                </div>
+                              </div>
+                            </div>
+                          </template>
+                        </div>
+                      </template>
 
                     </div>
                   </paper-card>
@@ -242,13 +304,17 @@
         is: 'schedule-day',
 
         behaviors: [
-          HOVERBOARD.CascadedBehavior,
-          HOVERBOARD.UtilsBehavior
+          Polymer.NeonSharedElementAnimatableBehavior,
+          Polymer.AppNetworkStatusBehavior,
+          HOVERBOARD.UtilsBehavior,
+          HOVERBOARD.LocalizeBehavior,
+          HOVERBOARD.MyScheduleBehavior
         ],
 
         properties: {
           app: {
-            type: Object
+            type: Object,
+            notify: true
           },
 
           day: {
@@ -258,8 +324,30 @@
           filters: {
             type: Array,
             value: []
+          },
+
+          animationConfig: {
+            type: Object,
+            value: function () {
+              return {
+                'entry': [{
+                  name: 'fade-in-animation',
+                  animation: 'fade-in-animation',
+                  node: this,
+                  timing: {
+                    delay: 500
+                  }
+                }],
+                'exit': [{
+                  name: 'fade-out-animation',
+                  animation: 'fade-out-animation',
+                  node: this
+                }]
+              };
+            }
           }
         },
+
 
         _splitText: function (text, divider, index) {
           return text.split(divider)[index];
@@ -270,7 +358,6 @@
         },
 
         _joinArray: function (array) {
-          if (!array) return;
           return array.join(', ');
         },
 
@@ -280,8 +367,11 @@
           return function (session) {
             return filters.indexOf(session.mainTag) > -1;
           };
-        }
+        },
 
+        _getMyScheduleIcon: function (id) {
+          return this.isInMySchedule(id) ? 'remove-circle' : 'add-circle-outline';
+        }
       });
 
     }());

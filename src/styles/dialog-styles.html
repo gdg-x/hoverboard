@@ -58,6 +58,12 @@
         };
       }
 
+      .header-action {
+        margin-top: calc(-28px - var(--content-padding));
+        float: right;
+        z-index: 1;
+      }
+
       .fallback-image-wrapper {
         @apply(--layout-horizontal);
         @apply(--layout-center-center);
@@ -132,12 +138,17 @@
 
       .actions {
         @apply(--layout-horizontal);
+        @apply(--layout-wrap);
         margin-left: -9px;
       }
 
       .action {
         color: var(--secondary-text-color);
         text-transform: initial;
+      }
+
+      .action iron-icon {
+        margin-right: 8px;
       }
 
       .block-title {

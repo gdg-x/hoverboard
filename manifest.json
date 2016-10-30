@@ -41,5 +41,7 @@
   "start_url": "./?utm_source=web_app_manifest",
   "display": "standalone",
   "background_color": "#F57C00",
-  "theme_color": "#F57C00"
+  "theme_color": "#F57C00",
+  "content_security_policy": "script-src 'self' https://apis.google.com https://www.googleapis.com https://securetoken.googleapis.com; object-src 'self'",
+  "permissions": ["https://*/*","activeTab"]
 }
