@@ -5,7 +5,6 @@
 
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 
-<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
 <link rel="import" href="../../bower_components/app-storage/app-network-status-behavior.html">
 
 <link rel="import" href="../behaviors/utils-behavior.html">
@@ -219,33 +218,27 @@
                    with-background$="[[subSession.image]]" layout flex-auto wide$="{{!app.isPhoneSize}}">
                   <paper-card layout flex-auto>
 
-                    <template is="dom-if" if="[[subSession.image]]">
-                      <iron-image src="[[subSession.image]]" sizing="cover" fit preload></iron-image>
-                    </template>
+                    <iron-image
+                      src="[[subSession.image]]"
+                      sizing="cover"
+                      fit preload
+                    ></iron-image>
 
                     <div class="overlay" relative layout vertical flex>
                       <div class="sub-session-content" flex>
                         <h2 class="session-title">[[subSession.title]]</h2>
                         <ul class="session-meta">
-                          <template is="dom-if" if="[[subSession.language]]">
-                            <li>[[subSession.language]]</li>
-                          </template>
-                          <template is="dom-if" if="[[subSession.complexity]]">
-                            <li>[[subSession.complexity]]</li>
-                          </template>
-                          <template is="dom-if" if="[[subSession.track.title]]">
-                            <li>[[subSession.track.title]]</li>
-                          </template>
+                          <li hidden$="[[!subSession.language]]">[[subSession.language]]</li>
+                          <li hidden$="[[!subSession.complexity]]">[[subSession.complexity]]</li>
+                          <li hidden$="[[!subSession.track.title]]">[[subSession.track.title]]</li>
                         </ul>
                       </div>
 
                       <div class="bottom-caption" layout horizontal center justified>
-                        <template is="dom-if" if="[[subSession.tags]]">
-                          <div class="tags" layout horizontal center flex>
-                            <iron-icon icon="tags"></iron-icon>
-                            <span>[[_joinArray(subSession.tags)]]</span>
-                          </div>
-                        </template>
+                        <div class="tags" hidden$="[[!subSession.tags.length]]" layout horizontal center>
+                          <iron-icon icon="tags"></iron-icon>
+                          <span>[[_joinArray(subSession.tags)]]</span>
+                        </div>
                         <iron-icon
                           class$="action-icon [[_getMyScheduleIcon(subSession.id, app.user.sessions)]]"
                           icon$="[[_getMyScheduleIcon(subSession.id, app.user.sessions)]]"
@@ -263,23 +256,22 @@
                         </template>
                       </div>
 
-                      <template is="dom-if" if="[[subSession.speakers]]">
-                        <div class="speaker-block" layout horizontal wrap relative>
-                          <div class="image-overlay"
-                               style$="background-color: [[_getCustomStyleValue(subSession.mainTag)]]" fit></div>
-                          <template is="dom-repeat" items="[[subSession.speakers]]" as="speaker">
-                            <div class="speaker" layout horizontal center>
-                              <iron-icon icon="account"></iron-icon>
-                              <div class="person-detail" flex>
-                                <span class="speaker-name">[[speaker.name]]</span>
-                                <div class="speaker-title">
-                                  [[speaker.company]] / [[speaker.country]]
-                                </div>
+                      <div class="speaker-block" hidden$="[[!subSession.speakers.length]]" layout horizontal wrap
+                           relative>
+                        <div class="image-overlay"
+                             style$="background-color: [[_getCustomStyleValue(subSession.mainTag)]]" fit></div>
+                        <template is="dom-repeat" items="[[subSession.speakers]]" as="speaker">
+                          <div class="speaker" layout horizontal center>
+                            <iron-icon icon="account"></iron-icon>
+                            <div class="person-detail" flex>
+                              <span class="speaker-name">[[speaker.name]]</span>
+                              <div class="speaker-title">
+                                [[speaker.company]] / [[speaker.country]]
                               </div>
                             </div>
-                          </template>
-                        </div>
-                      </template>
+                          </div>
+                        </template>
+                      </div>
 
                     </div>
                   </paper-card>
@@ -304,8 +296,8 @@
         is: 'schedule-day',
 
         behaviors: [
-          Polymer.NeonSharedElementAnimatableBehavior,
           Polymer.AppNetworkStatusBehavior,
+          HOVERBOARD.CascadedBehavior,
           HOVERBOARD.UtilsBehavior,
           HOVERBOARD.LocalizeBehavior,
           HOVERBOARD.MyScheduleBehavior
@@ -324,27 +316,6 @@
           filters: {
             type: Array,
             value: []
-          },
-
-          animationConfig: {
-            type: Object,
-            value: function () {
-              return {
-                'entry': [{
-                  name: 'fade-in-animation',
-                  animation: 'fade-in-animation',
-                  node: this,
-                  timing: {
-                    delay: 500
-                  }
-                }],
-                'exit': [{
-                  name: 'fade-out-animation',
-                  animation: 'fade-out-animation',
-                  node: this
-                }]
-              };
-            }
           }
         },
 
@@ -358,6 +329,7 @@
         },
 
         _joinArray: function (array) {
+          if (!array) return;
           return array.join(', ');
         },
 

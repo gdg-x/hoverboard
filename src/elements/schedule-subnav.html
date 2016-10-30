@@ -29,7 +29,6 @@
         padding-left: 16px;
         height: 69px;
         background: var(--default-primary-color);
-        color: var(--text-primary-color);
       }
 
       .subpage-nav[phoneSize] {
@@ -136,31 +135,31 @@
       layout horizontal center justified relative
     >
 
-    <template is="dom-if" if="[[!app.isPhoneSize]]">
-      <paper-tabs
-        class="schedule-tabs"
-        selected="[[selectedDay]]"
-        attr-for-selected="day"
-        scrollable="[[app.isPhoneSize]]"
-        relative
-        hide-scroll-buttons
-      >
-        <template is="dom-repeat" items="[[schedule]]" as="day">
-          <paper-tab day$="day[[_addToValue(index, 1)]]" link>
-            <a href$="/schedule/day[[_addToValue(index, 1)]]" layout center>
-              [[day.dateReadable]]
-            </a>
-          </paper-tab>
-        </template>
-        <template is="dom-if" if="{{app.user}}">
-          <paper-tab day="myschedule" link>
-            <a href="/schedule/myschedule" layout center>
-              [[localize('my-schedule')]]
-            </a>
-          </paper-tab>
-        </template>
-      </paper-tabs>
-    </template>
+      <template is="dom-if" if="[[!app.isPhoneSize]]">
+        <paper-tabs
+          class="schedule-tabs"
+          selected="[[selectedDay]]"
+          attr-for-selected="day"
+          scrollable="[[app.isPhoneSize]]"
+          relative
+          hide-scroll-buttons
+        >
+          <template is="dom-repeat" items="[[schedule]]" as="day">
+            <paper-tab day$="day[[_addToValue(index, 1)]]" link>
+              <a href$="/schedule/day[[_addToValue(index, 1)]]" layout center>
+                [[day.dateReadable]]
+              </a>
+            </paper-tab>
+          </template>
+          <template is="dom-if" if="{{app.user}}">
+            <paper-tab day="myschedule" link>
+              <a href="/schedule/myschedule" layout center>
+                [[localize('my-schedule')]]
+              </a>
+            </paper-tab>
+          </template>
+        </paper-tabs>
+      </template>
 
       <template is="dom-if" if="[[_showDaySelector(app.isPhoneSize, selectedDay)]]">
         <paper-menu-button vertical-align="bottom" horizontal-align="left">
@@ -192,44 +191,44 @@
         </div>
       </template>
 
-    <div layout horizontal center>
-      <div class="myschedue-button"
-           hidden$="[[!_displayPersonIcon(app.isPhoneSize, app.user)]]"
-           disabled$="[[_isMySchedulePage(selectedDay)]]">
-        <a href="/schedule/myschedule">
-          <paper-icon-button icon="person" aria-label="[[localize('my-schedule')]]"></paper-icon-button>
-        </a>
-      </div>
-      <paper-menu-button
-        id="filtersMenuToggle"
-        horizontal-align="right"
-        ignore-select
-        allow-outside-scroll
-        opened="{{_filtersOpened}}"
-      >
-        <paper-button class="filter-button dropdown-trigger">
-          [[localize('filter')]]
-          <iron-icon class="filter-icon" icon="filter-list"></iron-icon>
-        </paper-button>
-        <paper-menu
-          id="filters"
-          class="filters-content dropdown-content"
-          attr-for-selected="value"
-          selected-values="{{filters}}"
-          multi
+      <div layout horizontal center>
+        <div class="myschedue-button"
+             hidden$="[[!_displayPersonIcon(app.isPhoneSize, app.user)]]"
+             disabled$="[[_isMySchedulePage(selectedDay)]]">
+          <a href="/schedule/myschedule">
+            <paper-icon-button icon="person" aria-label="[[localize('my-schedule')]]"></paper-icon-button>
+          </a>
+        </div>
+        <paper-menu-button
+          id="filtersMenuToggle"
+          horizontal-align="right"
+          ignore-select
+          allow-outside-scroll
+          opened="{{_filtersOpened}}"
         >
-          <template is="dom-repeat" items="[[schedule.tags]]" as="tag">
-            <paper-checkbox
-              value="[[tag]]"
-              checked="{{_isChecked(tag)}}"
-              layout horizontal center flex
-            >
-              [[tag]]
-            </paper-checkbox>
-          </template>
-          <paper-item on-tap="clearFilters">[[localize('clear-all')]]</paper-item>
-        </paper-menu>
-      </paper-menu-button>
+          <paper-button class="filter-button dropdown-trigger">
+            [[localize('filter')]]
+            <iron-icon class="filter-icon" icon="filter-list"></iron-icon>
+          </paper-button>
+          <paper-menu
+            id="filters"
+            class="filters-content dropdown-content"
+            attr-for-selected="value"
+            selected-values="{{filters}}"
+            multi
+          >
+            <template is="dom-repeat" items="[[schedule.tags]]" as="tag">
+              <paper-checkbox
+                value="[[tag]]"
+                checked="{{_isChecked(tag)}}"
+                layout horizontal center flex
+              >
+                [[tag]]
+              </paper-checkbox>
+            </template>
+            <paper-item on-tap="clearFilters">[[localize('clear-all')]]</paper-item>
+          </paper-menu>
+        </paper-menu-button>
       </div>
     </nav>
 
@@ -344,15 +343,15 @@
           this._filtersLabel = this.filters.join(', ');
         },
 
-        _showDaySelector: function(isMobile, selectedDay) {
+        _showDaySelector: function (isMobile, selectedDay) {
           return isMobile && !this._isMySchedulePage(selectedDay);
         },
 
-        _showMyScheduleArrow: function(isMobile, selectedDay) {
+        _showMyScheduleArrow: function (isMobile, selectedDay) {
           return isMobile && this._isMySchedulePage(selectedDay);
         },
 
-        _isMySchedulePage: function(selectedDay) {
+        _isMySchedulePage: function (selectedDay) {
           return selectedDay === 'myschedule';
         },
 
@@ -360,7 +359,7 @@
           return isMobile && user;
         },
 
-        _goBack: function(e) {
+        _goBack: function (e) {
           e.stopPropagation();
           e.preventDefault();
           window.history.go(-1);
@@ -370,7 +369,7 @@
           if (this._isMySchedulePage(selectedDay)) return;
 
           var index = Number(selectedDay.match(/\d+/)[0]);
-          return this.schedule[index-1].dateReadable;
+          return this.schedule[index - 1].dateReadable;
         }
       });
 
