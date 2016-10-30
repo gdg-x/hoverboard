@@ -3,11 +3,11 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "public": "build/bundled",
+    "public": "./build/bundled",
     "cleanUrls": true,
     "rewrites": [
       {
-        "source": "**",
+        "source": "**/*",
         "destination": "/index.html"
       }
     ],

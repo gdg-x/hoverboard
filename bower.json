@@ -27,22 +27,23 @@
     "paper-button": "PolymerElements/paper-button#^1.0.0",
     "paper-checkbox": "PolymerElements/paper-checkbox#^1.4.0",
     "paper-input": "PolymerElements/paper-input#^1.1.0",
-    "paper-item": "PolymerElements/paper-item#^1.2.0",
+    "paper-item": "polymerelements/paper-item#^1.2.1",
     "paper-menu": "PolymerElements/paper-menu#^1.2.0",
     "paper-material": "PolymerElements/paper-material#^1.0.0",
     "paper-tooltip": "PolymerElements/paper-tooltip#^1.1.0",
     "paper-card": "PolymerElements/paper-card#^1.1.0",
     "paper-menu-button": "PolymerElements/paper-menu-button#^1.5.0",
     "paper-fab": "PolymerElements/paper-fab#^1.2.0",
-    "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#^1.3.0",
+    "paper-dropdown-menu": "polymerelements/paper-dropdown-menu#^1.4.1",
     "paper-spinner": "PolymerElements/paper-spinner#^1.2.0",
-    "paper-listbox": "PolymerElements/paper-listbox#^1.1.0",
+    "paper-listbox": "polymerelements/paper-listbox#^1.1.2",
     "neon-animation": "PolymerElements/neon-animation#^1.2.0",
     "marked-element": "PolymerElements/marked-element#^1.1.0",
     "google-youtube": "GoogleWebComponents/google-youtube#^1.2.0",
     "google-map": "GoogleWebComponents/google-map#^1.1.0",
     "polymer": "Polymer/polymer#^1.6.0",
-    "time-elements": "github/time-elements#^0.6.0"
+    "time-elements": "github/time-elements#^0.6.0",
+    "polymerfire": "firebase/polymerfire#^0.10.1"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^4.3.0"
