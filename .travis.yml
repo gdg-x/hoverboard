@@ -1,0 +1,19 @@
+language: node_js
+node_js: 6
+cache:
+  directories:
+  - node_modules
+  - bower_components
+  - "/home/travis/.nvm/versions/node/v6.5.0/lib/node_modules"
+install:
+- npm install -g bower polymer-cli
+- bower install
+script: echo "Deploying!"
+before_deploy: polymer build
+deploy:
+- provider: firebase
+  skip_cleanup: true
+  branch: develop
+  project: hoverboard-dev
+  token:
+    secure: AntBTKZ4UUsGDzU1K1mOYGJxFkV+domCiKlJvi0M4vJzDDnyqGEk28JKxnEpR4QBDWLNm1XRM/9D3KX7ZcZC10jDffU8XloAEZRbCYaCHRSWAxdofAb1cujbW0k7Yr+R8bLi8k/riQrrXWF9L5PEgirBjy/IF1ROcZoamYc+9uPqYTcYYv854r5mZt5rKa8ILapp9zTU7aBB8FGaw4vlhHjo2C95eb+qL9lfdDMpGokctUmR+3jR3WSZLJPpbpHr3M1exFisDhgIA0qwY5En6QycL2vk36q9jyOKw+e46DrjB00Qwi91hw3fSwJW1tQ/1274ngbUp9nmiAQ72Mx4XHpwc0aABFaCwqDIX9JlhgnSxYEBZz8uJQhNUZitQ5J9y+UriF8y24SqCvvqQWXG36i5s3l2aiesb6/WPXCy7cCwtWs3sc2u1xZP+APptUlXBrZxeMcwLxHDmp3RewOaaUvl/XQv91U+o/WOGL2TmZxgJb/sBjlCAfmvyQBdabpqyuoEkpUGS/umZN3CKsrz6iQoaROAF57MvdB/ahYur2mgTvz4W4VMKXHJMlLhptFi8C551GujN9f5emk9UXGgwRptOM4/yQlNF2wpeFvW+j9+9dQeegA+PSDxh1AGLerKgE4oNxGNmfc/vQDD0Rkp+DTm1ZAOh/fZwTzEgkf9Vrk=
