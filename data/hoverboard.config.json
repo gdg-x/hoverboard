@@ -11,7 +11,7 @@
           "youtubeId": "DfMnJAzOFng",
           "text": "See how it was in 2015"
         },
-        "hideLogo": true,
+        "hideLogo": false,
         "minHeight": "360px"
       }
     },
@@ -61,10 +61,6 @@
       "permalink": "/blog/"
     },
     {
-      "route": "schedule",
-      "permalink": "/schedule/"
-    },
-    {
       "route": "speakers",
       "permalink": "/speakers/"
     },
@@ -73,7 +69,7 @@
       "permalink": "/team/"
     }
   ],
-  "url": "https://hoverboard.firebaseapp.com/",
+  "url": "https://gdgfoumban-2016.firebaseapp.com/",
   "mailchimp": {
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
@@ -81,13 +77,13 @@
   "partnershipProposition": "http://bit.ly/df16-sponsor",
   "disqusShortName": "hoverboard-gdg-x",
   "languages": [
+      {
+      "name": "français",
+      "key": "fr"
+    },
     {
       "name": "English",
       "key": "en"
-    },
-    {
-      "name": "Українська",
-      "key": "uk"
     }
   ],
   "footerBlocks": [
@@ -199,22 +195,22 @@
       "caption": "tracks"
     }
   ],
-  "hashtag": "dfua",
+  "hashtag": "#GDGFoumban",
   "social": [
     {
       "name": "twitter",
-      "nickname": "GDGLviv",
-      "url": "https://twitter.com/gdglviv"
+      "nickname": "GDGFoumban",
+      "url": "https://twitter.com/GDGFoumban"
     },
     {
       "name": "gplus",
-      "nickname": "102444623953913144164",
-      "url": "https://plus.google.com/102444623953913144164"
+      "nickname": "101655900172336891178",
+      "url": "https://plus.google.com/u/0/b/101655900172336891178/101655900172336891178/posts"
     },
     {
       "name": "facebook",
-      "nickname": "GDGLviv",
-      "url": "https://www.facebook.com/GDGLviv"
+      "nickname": "GDGFoumban",
+      "url": "https://www.facebook.com/GDGfoumban/"
     },
     {
       "name": "linkedin",
@@ -237,13 +233,13 @@
     "apiKey": "",
     "link": "https://www.facebook.com/expopivdennij",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
+      "latitude": 5.720460,
+      "longitude": 10.901268,
       "zoom": 15
     },
     "mapCenter": {
-      "latitude": 49.809841,
-      "longitude": 23.982805
+      "latitude": 5.720460,
+      "longitude": 10.901268
     },
     "images": [
       "/images/backgrounds/location_1.jpg",

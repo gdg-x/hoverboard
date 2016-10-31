@@ -113,7 +113,7 @@
       app="{{app}}"
       speakers="{{speakers}}"
       sessions="{{sessions}}"
-      schedule="{{schedule}}"
+      schedule="{{schedule}}"schedule="{{schedule}}"schedule="{{schedule}}"
       posts="{{posts}}"
     ></app-data>
 
@@ -168,12 +168,12 @@
                          app="{{app}}"
                          route="{{subRoute}}"
                          speakers="{{speakers}}"></speakers-page>
-
+            
           <schedule-page name="schedule"
                          app="{{app}}"
                          route="{{subRoute}}"
                          schedule="{{schedule}}"
-                         sessions="{{sessions}}"></schedule-page>
+                         sessions="{{sessions}}"></schedule-page>  
 
           <team-page name="team"
                      app="{{app}}"></team-page>
@@ -220,7 +220,7 @@
             notify: true,
             value: function () {
               return {
-                lang: 'en'
+                lang: 'fr'
               };
             }
           },
