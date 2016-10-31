@@ -26,7 +26,8 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 :white_check_mark: SEO friendly  
 :white_check_mark: Optimized and fast  
 :white_check_mark: Editable theme colors  
-:white_check_mark: Quick deploy  
+:white_check_mark: Quick deploy (with [Travis CI](/docs/tutorials/deploy.md))  
+:white_check_mark: My schedule :new: 
 
 ### Setup
 :book: [Full documentation](/docs/).
@@ -130,7 +131,6 @@ pull request, so we can include you in this list.
 ### Roadmap :rocket:
 :x: Admin panel  
 :x: Firebase Integration   
-:x: My schedule  
 :x: Push notification  
 :x: ES2015  
 :x: Accessibility  
