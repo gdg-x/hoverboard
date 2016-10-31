@@ -12,7 +12,11 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
+<link rel="import" href="../bower_components/polymerfire/polymerfire.html">
+
 <link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/scale-up-animation.html">
 
 <link rel="import" href="effects/fade-effect.html">
 <link rel="import" href="behaviors/utils-behavior.html">
@@ -117,6 +121,21 @@
       posts="{{posts}}"
     ></app-data>
 
+    <firebase-app
+      name="[[app.data.firebase.name]]"
+      auth-domain="[[app.data.firebase.domain]]"
+      database-url="[[app.data.firebase.database]]"
+      api-key="[[app.data.firebase.api]]"
+    >
+    </firebase-app>
+    <firebase-auth
+      id="auth"
+      provider="google"
+      app-name="[[app.data.firebase.name]]"
+      user="{{app.user}}"
+    >
+    </firebase-auth>
+
     <app-drawer-layout id="drawerLayout" drawer-width="599px" force-narrow>
 
       <app-drawer
@@ -190,7 +209,7 @@
                   video-title="[[video.title]]"
                   youtube-id="[[video.youtubeId]]"
                   entry-animation="scale-up-animation"
-                  exit-animation="scale-down-animation"
+                  exit-animation="fade-out-animation"
                   disable-controls="[[!video.disableControls]]"></video-dialog>
 
     <toast-element id="toast" app="{{app}}"></toast-element>
@@ -220,7 +239,8 @@
             notify: true,
             value: function () {
               return {
-                lang: 'en'
+                lang: 'en',
+                user: {}
               };
             }
           },
@@ -273,8 +293,11 @@
             this.app.headerSettings.backgroundColor + ' 140%)';
           this.customStyle['--min-header-height'] = this.app.headerSettings.minHeight;
           document.getElementsByName('theme-color')[0].content = this.app.headerSettings.backgroundColor;
-          this.updateStyles();
-          this.$.header.resetLayout();
+
+          window.requestAnimationFrame(function () {
+            this.updateStyles();
+            this.$.header.resetLayout();
+          }.bind(this));
         },
 
         _pageChanged: function (page) {
@@ -295,7 +318,9 @@
         },
 
         toggleDrawer: function () {
-          this.$$('#drawer').toggle();
+          window.requestAnimationFrame(function () {
+            this.$$('#drawer').toggle();
+          }.bind(this));
         },
 
         _isPage: function (page, selectedPage) {
@@ -304,7 +329,9 @@
 
         closeDrawer: function () {
           if (this.$$('#drawer') && this.$$('#drawer').close) {
-            this.$$('#drawer').close();
+            window.requestAnimationFrame(function () {
+              this.$$('#drawer').close();
+            }.bind(this));
           }
         },
 
@@ -315,6 +342,14 @@
             disableControls: disableControls
           };
           this.$.videoDialog.open();
+        },
+
+        signIn: function () {
+          HOVERBOARD.Elements.Template.$.auth.signInWithPopup();
+        },
+
+        signOut: function () {
+          this.$.auth.signOut();
         }
 
       });

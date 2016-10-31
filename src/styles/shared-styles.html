@@ -18,6 +18,7 @@
 
         /* Accent colors */
         --accent-color:             #03A9F4;
+        --disabled-accent-color:    #4dcfff;
 
         /* Background colors */
         --primary-background-color:   #FFE0B2;
@@ -118,6 +119,10 @@
 
       [justified] {
         @apply(--layout-justified);
+      }
+
+      [center-justified] {
+        @apply(--layout-center-justified);
       }
 
       [self-center] {

@@ -1,8 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
-<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
-
+<link rel="import" href="../behaviors/cascaded-behavior.html">
 <link rel="import" href="../behaviors/page-behavior.html">
 <link rel="import" href="../elements/statistics-block.html">
 <link rel="import" href="../elements/featured-people.html">
@@ -16,6 +14,7 @@
 <link rel="import" href="../elements/social-feed.html">
 <link rel="import" href="../elements/logos-block.html">
 <link rel="import" href="../elements/map-block.html">
+
 
 <dom-module id="home-page">
 
@@ -45,8 +44,8 @@
         is: 'home-page',
 
         behaviors: [
-          Polymer.NeonSharedElementAnimatableBehavior,
-          HOVERBOARD.PageBehavior
+          HOVERBOARD.PageBehavior,
+          HOVERBOARD.CascadedBehavior
         ],
 
         properties: {
@@ -64,43 +63,11 @@
 
           videos: {
             type: Array
-          },
-
-          animationConfig: {
-            type: Object,
-            value: function () {
-              var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
-              var cascadedArray = Array.prototype.slice.call(cascaded);
-              return {
-                'entry': [{
-                  name: 'cascaded-animation',
-                  animation: 'transform-animation',
-                  transformFrom: 'translate3d(0, 100%, 0)',
-                  nodes: cascadedArray,
-                  timing: {
-                    delay: 500
-                  }
-                }, {
-                  name: 'fade-in-animation',
-                  animation: 'fade-in-animation',
-                  node: this,
-                  timing: {
-                    delay: 500
-                  }
-                }],
-                'exit': [{
-                  name: 'cascaded-animation',
-                  animation: 'transform-animation',
-                  transformTo: 'translate3d(0, 100%, 0)',
-                  nodes: cascadedArray
-                }, {
-                  name: 'fade-out-animation',
-                  animation: 'fade-out-animation',
-                  node: this
-                }]
-              };
-            }
           }
+        },
+
+        ready: function() {
+          this.updateCascadedNodes();
         }
 
       });

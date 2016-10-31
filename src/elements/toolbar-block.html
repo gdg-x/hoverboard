@@ -7,6 +7,7 @@
 
 <link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
 <link rel="import" href="../styles/shared-styles.html">
@@ -21,6 +22,7 @@
     <style include="shared-styles">
       :host {
         --header-color: #fff;
+        --paper-menu-button-dropdown-background: #fff;
 
         --paper-tabs: {
           height: 64px;
@@ -55,6 +57,7 @@
       paper-tab {
         flex: none;
         padding: 0 10px;
+        text-transform: uppercase;
       }
 
       .nav-link {
@@ -72,6 +75,60 @@
         color: var(--header-background);
         background: var(--header-color);
         font-size: 13px;
+      }
+
+      .signin-tab {
+        --paper-tab-content-unselected: {
+          opacity: 1;
+        };
+        height: 64px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .auth-menu[phoneSize] {
+        padding: 0;
+        transform: translateY(-16px);
+      }
+
+      .profile-image {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-position: center;
+        background-size: cover;
+      }
+
+      .signin-panel {
+        background: #fff;
+        color: var(--text-primary-color);
+      }
+
+      .profile-details {
+        padding: 16px;
+        border-bottom: 1px solid var(--divider-color);
+      }
+
+      .profile-details .profile-image {
+        margin-right: 16px;
+        width: 48px;
+        height: 48px;
+      }
+
+      .profile-name,
+      .profile-email {
+        font-size: 14px;
+        display: block;
+        white-space: nowrap;
+        color: var(--secondary-text-color);
+      }
+
+      .profile-action {
+        margin-top: 4px;
+        text-transform: uppercase;
+        color: var(--default-primary-color);
+        font-size: 14px;
+        cursor: pointer;
       }
     </style>
 
@@ -98,12 +155,42 @@
               </paper-tab>
             </template>
           </paper-tabs>
-          <div class="action-button-wrapper" layout horizontal center-center>
-            <a href$="[[app.data.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
-              <paper-button class="action-button">[[localize('buy-ticket')]]</paper-button>
-            </a>
-          </div>
         </template>
+
+        <paper-tab class="signin-tab" on-tap="signIn" hidden$="[[app.user]]">[[localize('sign-in')]]</paper-tab>
+
+        <paper-menu-button
+          class="auth-menu"
+          hidden$="[[!app.user]]"
+          vertical-align="top"
+          horizontal-align="right"
+          phoneSize$="[[app.isPhoneSize]]"
+          layout horizontal center-center
+        >
+          <div
+            class="profile-image dropdown-trigger"
+            style="background-image: url('[[app.user.photoURL]]')"
+          ></div>
+          <div class="signin-panel dropdown-content">
+            <div class="profile-details" layout horizontal>
+              <div
+                class="profile-image dropdown-trigger"
+                style="background-image: url('[[app.user.photoURL]]')"
+              ></div>
+              <div layout vertical center-justified>
+                <span class="profile-name">[[app.user.displayName]]</span>
+                <span class="profile-email">[[app.user.email]]</span>
+                <span class="profile-action" role="button" on-tap="signOut">[[localize('sign-out')]]</span>
+              </div>
+            </div>
+          </div>
+        </paper-menu-button>
+
+        <div class="action-button-wrapper" hidden$="[[app.isPhoneSize]]" layout horizontal center-center>
+          <a href$="[[app.data.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
+            <paper-button class="action-button">[[localize('buy-ticket')]]</paper-button>
+          </a>
+        </div>
       </div>
     </app-toolbar>
 
@@ -134,6 +221,14 @@
 
         togglePanel: function () {
           HOVERBOARD.Elements.Template.toggleDrawer();
+        },
+
+        signIn: function () {
+          HOVERBOARD.Elements.Template.signIn();
+        },
+
+        signOut: function () {
+          HOVERBOARD.Elements.Template.signOut();
         },
 
         _stylesChanged: function (headerSettings) {

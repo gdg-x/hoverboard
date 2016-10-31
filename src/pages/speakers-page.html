@@ -18,6 +18,7 @@
 <link rel="import" href="../behaviors/utils-behavior.html">
 <link rel="import" href="../behaviors/page-behavior.html">
 <link rel="import" href="../behaviors/localize-behavior.html">
+<link rel="import" href="../behaviors/cascaded-behavior.html">
 
 <dom-module id="speakers-page">
 
@@ -177,7 +178,7 @@
                data="{{routeData}}"></app-route>
 
     <div class="container speakers-container">
-      <template is="dom-repeat" items="[[_toArray(speakers)]]" as="speaker" on-dom-change="_updateCascadedNodes">
+      <template is="dom-repeat" items="[[_toArray(speakers)]]" as="speaker" on-dom-change="updateCascadedNodes">
         <div class="speaker" cascaded>
           <paper-material class="card">
             <a href$="/speakers/[[speaker.id]]/" class="header">
@@ -241,11 +242,10 @@
         is: 'speakers-page',
 
         behaviors: [
-          Polymer.NeonSharedElementAnimatableBehavior,
           HOVERBOARD.PageBehavior,
+          HOVERBOARD.CascadedBehavior,
           HOVERBOARD.UtilsBehavior,
           HOVERBOARD.LocalizeBehavior
-
         ],
 
         properties: {
@@ -267,28 +267,7 @@
             type: Object
           },
 
-          _selectedSpeaker: Object,
-
-          animationConfig: {
-            type: Object,
-            value: function () {
-              return {
-                'entry': [{
-                  name: 'fade-in-animation',
-                  animation: 'fade-in-animation',
-                  node: this,
-                  timing: {
-                    delay: 500
-                  }
-                }],
-                'exit': [{
-                  name: 'fade-out-animation',
-                  animation: 'fade-out-animation',
-                  node: this
-                }]
-              };
-            }
-          }
+          _selectedSpeaker: Object
         },
 
         observers: [
@@ -303,32 +282,12 @@
           if (speakerId && this.selected) {
             var tempSpeaker = this.speakers[speakerId];
             if (tempSpeaker) {
-              Polymer.RenderStatus.afterNextRender(this, function () {
+              window.requestAnimationFrame(function () {
                 this._selectedSpeaker = tempSpeaker;
                 this.$.speakerDetails.open();
               }.bind(this));
             }
           }
-        },
-
-        _updateCascadedNodes: function () {
-          var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
-          var cascadedArray = Array.prototype.slice.call(cascaded);
-          this.animationConfig.entry.push({
-            name: 'cascaded-animation',
-            animation: 'transform-animation',
-            transformFrom: 'translate3d(0, 100%, 0)',
-            timing: {
-              delay: 500
-            },
-            nodes: cascadedArray
-          });
-          this.animationConfig.exit.push({
-            name: 'cascaded-animation',
-            animation: 'transform-animation',
-            transformTo: 'translate3d(0, 100%, 0)',
-            nodes: cascadedArray
-          });
         },
 
         _getCustomStyleValue: function (value) {

@@ -1,4 +1,11 @@
 {
+  "firebase": {
+    "name": "hoverboard-dev",
+    "domain": "lviv-app.firebaseapp.com",
+    "database": "https://lviv-app.firebaseio.com",
+    "api": "AIzaSyDL3yRuBdVNSD-hmNJ1t1jpC-NM6XDrPF0",
+    "userSessionsPath": "/userSessions"
+  },
   "pages": {
     "home": {
       "headerSettings": {
@@ -8,8 +15,8 @@
         "tabBarColor": "#fff",
         "video": {
           "title": "GDG DevFest Ukraine 2016",
-          "youtubeId": "DfMnJAzOFng",
-          "text": "See how it was in 2015"
+          "youtubeId": "TdpbgRgz6eE",
+          "text": "See how it was in 2016"
         },
         "hideLogo": true,
         "minHeight": "360px"

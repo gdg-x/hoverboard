@@ -29,12 +29,6 @@
         --paper-fab-iron-icon: {
           color: var(--secondary-text-color);
         };
-        --paper-menu-button: {
-          margin-top: calc(-36px - var(--content-padding));
-          margin-right: -8px;
-          float: right;
-          z-index: 1;
-        };
       }
 
       paper-scroll-header-panel {
@@ -56,6 +50,12 @@
         --paper-toolbar-title: {
           margin-left: 10px;
         };
+      }
+
+      .header-action {
+        margin-top: calc(-28px - var(--content-padding));
+        float: right;
+        z-index: 1;
       }
 
       .fallback-image-wrapper {
@@ -132,12 +132,17 @@
 
       .actions {
         @apply(--layout-horizontal);
+        @apply(--layout-wrap);
         margin-left: -9px;
       }
 
       .action {
         color: var(--secondary-text-color);
         text-transform: initial;
+      }
+
+      .action iron-icon {
+        margin-right: 8px;
       }
 
       .block-title {
@@ -201,11 +206,6 @@
         :host {
           min-height: 60%;
           min-width: 800px;
-          --paper-menu-button: {
-            margin-top: calc(-36px - var(--content-padding));
-            float: right;
-            z-index: 1;
-          }
         }
 
         .sections {
