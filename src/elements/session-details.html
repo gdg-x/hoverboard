@@ -62,6 +62,10 @@
         background: var(--disabled-accent-color);
         cursor: default;
       }
+
+      .share-menu {
+        padding: 0;
+      }
     </style>
 
     <paper-scroll-header-panel id="scrollHeaderPanel" no-reveal>
@@ -104,7 +108,7 @@
         </marked-element>
 
         <div class="actions">
-          <paper-menu-button horizontal-align="left" vertical-align="bottom" share-menu>
+          <paper-menu-button class="share-menu" horizontal-align="left" vertical-align="bottom" share-menu>
             <paper-button class="action dropdown-trigger">
               <iron-icon icon="share"></iron-icon>
               [[localize('share')]]
