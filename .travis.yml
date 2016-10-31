@@ -1,24 +1,19 @@
 language: node_js
 node_js: 6
-
 cache:
   directories:
-  - node_modules  # NPM packages
-  - bower_components  # bower packages
-  - /home/travis/.nvm/versions/node/v6.5.0/lib/node_modules  # global NPM packages
-
+  - node_modules
+  - bower_components
+  - "/home/travis/.nvm/versions/node/v6.5.0/lib/node_modules"
 install:
-  - npm install -g bower polymer-cli@0.12.0
-  - bower install
-
+- npm install -g bower polymer-cli
+- bower install
 script: echo "Deploying!"
-
 before_deploy: polymer build
 deploy:
-  - provider: firebase
-    skip_cleanup: true
-    on:
-      tags: true
-    project: hoverboard-firebase
-    token:
-      secure: "hLdsE9fmjZlJo8VSfeitL/4jm7OMhKC0kesJLLvS1lXo4MarXwRU86F2a7bxiRA3jrq71zI59f3d2pYfWQwyzaDxO2VOoX0IxRVxBrcRTvo8WbDIFab5x7SJQIdYxXUCsZ8/+y8VCPXBbRF2mC04BSV0rE6qLTBV6vtY5GejGunb0D+7+DLP9c8JOV6ynjLs4ENS5f0QdW7/W6OlCqU8ebd7XaXqmFNYZ36ED9OAXAYuK8iY/m2YpJy9Z0xLsXFMWRLgDhFCa0i/5Ho8G2UnCAG8+jjvuHBAD84LHpbuXTPdUNuBkNx2u810y9EENg1+ycCfarmQ5OGvrWC4fekNwRZh1BnrEhsaTm+wdI9cPfRRBNTUzhL3BkHjnYKhcszajcfXhHr1TO0mvGRY3xkLyEZVo5LBNW37mcV2JvaBdFFr8lR2YMQuvyjcIjdZN9QxqjZH4FH2cMpx5oh/XCUSaOcq17sxtOuS9qt7V3365W4CL6pPVTPSBYBpO+64XdtwocbkU4S1MpTAeyEvEeTEnzgk5nFXbmXu9mHK/irpt79Wh5t4NtVfxlvwuJxLWX+hMhU5LMASE5ogfKC42G4ZEJFIKpR11gGneiMFJ3/rPsf82PBkkLGVD4BoscN0GxhTzt+KOK/xt8QLJzTSiO8JQ8tYuxHB3Mrw7d3U0PjLz3Y="
+- provider: firebase
+  skip_cleanup: true
+  branch: master
+  project: hoverboard-firebase
+  token:
+    secure: 1ymzpvAYb1K5ZRow4BrNZ3fh1SwCgD0E/mF9Rzs+JBcjdR3+SNTcOH8ODWJo9yeO3sV/dEpJxV3+p+ABfC4KCBoPJdRFpoLaCTXnzOyGyo5ZEFG2akePoKpl/sfgO83zVzBMGraAFYWVG2PMQVaL3EIz9egW7fSMl8Wmgdd3RjLolgGE2uAs2PoaQWvKduNiO9BV8gEdFmVHPQ+0/0wHfZ2uHqwutdlF61WzXDanGfWsU19lgPxh61x+areJRjivXKhMPdQHAhAVrnH5LBBTPHj+65dFOWfflF6m6d1OAL9A/Oee4IBvoo3mHTHa2buHAGl4UQsUJbE0T5YVUlcBT8f7ibpFyDJ5j3IzeCc1XJbUg4v8pP2xQaYhYFT9Uck4H917wVkEI6Zj6e9UM9hcbXUv4Zu8cYJ5g4retTI+R7iIJqYgIKVMwsW+hnlE9OAXJ4AWA7MxYp3YecIlWGP5xi1da8gb9T7buL7HfsCJAL9jIHrEfFXxPruaEdMpebPI+s7tvBrucExtccYm+oKGbhY4ny6xoBfhwdVHQynUjo3fNNbbsbD5rU5nevUAvjFRK9m7bGvgVLP8QY3WL6lN0TukzDLWv3k2oI4qFuZ6lS9t89P74ITc8DMLiuHXYD+/LdC0S6pRoa9cScxF2xp1bWJurPipN2O9Bu0Awe2sICQ=
