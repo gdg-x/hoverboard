@@ -127,6 +127,14 @@ pull request, so we can include you in this list.
 | [GDG DevFest Belgium 2016](https://devfest.be) |
 | [GDG DevFest Lisbon 2016](https://devfestlisbon.firebaseapp.com) |
 | [GDG DevFest Sudbury 2016](https://devfest.gdgsudbury.ca) |
+| [GDG DevFest Hong Kong 2016](https://devfest.gdghk.org) |
+| [GDG DevFest London 2016](https://devfest-london-2016.firebaseapp.com/) |
+| [GDG DevFest Paraná 2016](https://devfestpr.org/) |  
+| [GDG DevFest Srilanka 2016](https://devfest16.gdgsrilanka.org/) |
+| [GDG DevFest Incheon 2016](http://devfest16in.gdg.kr/) |
+| [GDG Dschang 2016 Website](http://gdgdschang.com) |
+| [GDG DevFest Eskisehir 2016](https://df16.gdgeskisehir.com/) |
+
 
 ### Roadmap :rocket:
 :x: Admin panel  
