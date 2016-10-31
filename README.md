@@ -108,6 +108,7 @@ git commit -m 'Updated to the latest version'
 Going to use the template? Go on! The only thing we ask - let us know with a 
 pull request, so we can include you in this list.
 
+| | | |
 |------|------|------|
 | [GDG DevFest Ukraine](http://devfest.gdg.org.ua)                | [GDG DevFest Sao Paulo](http://sp.devfest.com.br)                           | [GDG DevFest Hamburg 2015](http://devfest.de)               |
 | [GDG DevFest Mezam 2015](https://devfest-mezam.gdgbambili.xyz)  | [GDG DevFest Silicon Valley 2015](http://devfest2015.gdgsv.com/)            | [GDG DevFest Belgium 2015](http://devfest.be/)              |
