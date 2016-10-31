@@ -244,6 +244,9 @@
             this.importHref(this.resolveUrl('pages/speakers-page.html'), null, null, true);
             this.importHref(this.resolveUrl('pages/blog-page.html'), null, null, true);
           }.bind(this));
+
+          // Hide loader box
+          document.getElementById('loader-box').style.display = 'none';
         },
 
         _routePageChanged: function (page) {

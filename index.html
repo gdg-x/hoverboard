@@ -87,6 +87,21 @@
       min-height: 100vh;
     }
 
+    #loader-box {
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      background-color: #fff;
+      background: rgba(255, 255, 255, 0.7);
+    }
+    #loader-box>figure img {
+      max-width: 90%;
+    }
+
   </style>
 
   <script>
@@ -153,12 +168,36 @@
 
 <hoverboard-app id="happ"></hoverboard-app>
 
+<div id="loader-box">
+  <figure>
+    <img alt="loading..." src="images/loader-animation.gif" />
+  </figure>
+</div>
+
 <script src="scripts/helper/util.js"></script>
 <script src="scripts/helper/elements.js"></script>
 <script src="scripts/bootstrap.js"></script>
 <script id="sw-registration" src="scripts/helper/service-worker-registration.js"></script>
 <script src="scripts/helper/deferred.js"></script>
 <script src="scripts/metrics.js"></script>
+<script>
+  // vertically center the content of the loader box
+  var centerLoaderPosition = function () {
+    loaderFixedBox = document.getElementById('loader-box');
+    loaderImg = loaderFixedBox.firstElementChild;
+    maxDSHeight = loaderFixedBox.offsetHeight - (loaderFixedBox.offsetHeight * 30 / 100) ;
+    if ( loaderImg.offsetHeight > maxDSHeight) {
+      loaderImg.offsetHeight = (maxDSHeight >= 100) ? maxDSHeight + "px" : "100px" ;
+      loaderImg.style.margin = "10% auto" ;
+    } else {
+      dsMargin = (loaderFixedBox.offsetHeight - loaderImg.offsetHeight) / 2 ;
+      loaderImg.style.margin = dsMargin + "px auto" ;
+    }
+  }
+
+  centerLoaderPosition() ;
+  window.addEventListener('resize', centerLoaderPosition, false);
+</script>
 
 </body>
 </html>
