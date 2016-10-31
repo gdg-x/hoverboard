@@ -132,6 +132,9 @@ pull request, so we can include you in this list.
 | [GDG DevFest Srilanka 2016](https://devfest16.gdgsrilanka.org/) |
 | [GDG DevFest Incheon 2016](http://devfest16in.gdg.kr/) |
 | [GDG Dschang 2016 Website](http://gdgdschang.com) |
+| [GDG DevFest Eskisehir 2016](https://df16.gdgeskisehir.com/) |
+
+
 ### Roadmap :rocket:
 :x: Admin panel  
 :x: Firebase Integration   
