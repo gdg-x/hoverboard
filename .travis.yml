@@ -4,7 +4,7 @@ cache:
   directories:
   - node_modules
   - bower_components
-  - "/home/travis/.nvm/versions/node/v6.5.0/lib/node_modules"
+  - "/home/travis/.nvm/versions/node/${TRAVIS_NODE_VERSION}/lib/node_modules"
 install:
 - npm install -g bower polymer-cli
 - bower install
