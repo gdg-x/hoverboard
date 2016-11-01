@@ -12,7 +12,7 @@ addons:
     sources:
     - ubuntu-toolchain-r-test
     packages:
-    - $CXX
+    - g++-4.8
 install:
 - npm install -g bower polymer-cli
 - bower install
