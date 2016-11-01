@@ -5,6 +5,14 @@ cache:
   - node_modules
   - bower_components
   - "/home/travis/.nvm/versions/node/${TRAVIS_NODE_VERSION}/lib/node_modules"
+env:
+- CXX=g++-4.8
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - ${CXX}
 install:
 - npm install -g bower polymer-cli
 - bower install
