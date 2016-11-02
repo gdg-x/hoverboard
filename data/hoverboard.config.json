@@ -1,9 +1,9 @@
 {
   "firebase": {
-    "name": "<YOUR_APP_NAME>",
-    "domain": "YOUR_FIREBASE_DOMAIN",
-    "database": "<YOUR_FIREBASE_DATABASE>",
-    "api": "<YOUR_API_KEY>",
+    "name": "hoverboard",
+    "domain": "hoverboard.firebaseapp.com",
+    "database": "https://hoverboard.firebaseio.com",
+    "api": "AIzaSyD38vfm_P6wNVKDnJJd6RBE9fbRl-tGgZE",
     "userSessionsPath": "/userSessions"
   },
   "pages": {
