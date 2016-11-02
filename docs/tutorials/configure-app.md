@@ -4,6 +4,7 @@ The most important file of configuration is `data/hoverboard.config.json`
 which looks like:
 
 ```
+  "firebase": {..},
   "pages": {..},
   "navigation": [..],
   "url": "..",
