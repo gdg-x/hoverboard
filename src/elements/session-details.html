@@ -78,8 +78,8 @@
       </paper-toolbar>
       <div class="content">
         <paper-fab
-          class$="float-button header-action [[_getMyScheduleIcon(session.id, app.user.sessions)]]"
-          icon="[[_getMyScheduleIcon(session.id, app.user.sessions)]]"
+          class$="float-button header-action [[fabIcon]]"
+          icon="[[fabIcon]]"
           session-id$="[[session.id]]"
           on-tap="toggleMyScheduleSession"
           disabled$="[[!online]]"
@@ -206,8 +206,16 @@
           session: {
             type: Object,
             observer: '_sessionChanged'
+          },
+          fabIcon: {
+            type: String,
+            value: 'add'
           }
         },
+
+        observers: [
+          '_getMyScheduleIcon(session.id, app.user.sessions)'
+        ],
 
         listeners: {
           'neon-animation-finish': '_onNeonAnimationFinish'
@@ -258,7 +266,7 @@
         },
 
         _getMyScheduleIcon: function (id) {
-          return this.isInMySchedule(id) ? 'remove' : 'add';
+          this.fabIcon = this.isInMySchedule(id) ? 'remove' : 'add';
         }
 
       });
