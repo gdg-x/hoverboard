@@ -1,9 +1,9 @@
 {
   "firebase": {
-    "name": "hoverboard-dev",
-    "domain": "lviv-app.firebaseapp.com",
-    "database": "https://lviv-app.firebaseio.com",
-    "api": "AIzaSyDL3yRuBdVNSD-hmNJ1t1jpC-NM6XDrPF0",
+    "name": "hoverboard",
+    "domain": "hoverboard.firebaseapp.com",
+    "database": "https://hoverboard.firebaseio.com",
+    "api": "AIzaSyD38vfm_P6wNVKDnJJd6RBE9fbRl-tGgZE",
     "userSessionsPath": "/userSessions"
   },
   "pages": {
