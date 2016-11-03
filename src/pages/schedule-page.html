@@ -72,7 +72,7 @@
         <template is="dom-repeat" items="[[schedule]]" as="day" on-dom-change="updateCascadedNodes">
           <schedule-day
             name$="day[[_addToValue(index, 1)]]"
-            app={{app}}
+            app="{{app}}"
             day="[[day]]"
             filters="[[filters]]"
           ></schedule-day>
@@ -80,7 +80,7 @@
         <template is="dom-if" if="{{app.user}}">
           <my-schedule
             name="myschedule"
-            app={{app}}
+            app="{{app}}"
             schedule="[[schedule]]"
           ></my-schedule>
         </template>

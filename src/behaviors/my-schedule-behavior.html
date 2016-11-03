@@ -43,6 +43,7 @@
       },
 
       isInMySchedule: function (id) {
+        if (!this.app.user) return false;
         if (!this.app.user.sessions) {
           this.app.user.sessions = {};
         }
