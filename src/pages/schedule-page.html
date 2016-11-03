@@ -137,6 +137,7 @@
 
         observers: [
           '_routePageChanged(routeData.day)',
+          '_userChanged(app.user)',
           '_queryParamsChanged(queryParams)',
           '_filtersChanged(filters.splices)'
         ],
@@ -156,6 +157,8 @@
                 }
               }
               this.set('routeData.day', (dayToSelect || 'day1'));
+            } else if (day === 'myschedule' && !this.app.user) {
+              this.set('routeData.day', 'day1');
             } else if (this.app.selectedDay !== day) {
               this.set('app.selectedDay', day);
             }
@@ -185,14 +188,22 @@
         },
 
         _filtersChanged: function () {
-          if (this.filters.length)
+          if (this.filters.length) {
             this.set('queryParams.filters', this.filters.join(','));
-          else
+          }
+          else {
             this.set('queryParams.filters', null);
+          }
         },
 
         _resetSessionIdParam: function () {
           !this.$.sessionDetails.opened && this.set('queryParams.sessionId', null);
+        },
+
+        _userChanged: function (user) {
+          if (!user && this.app.selectedDay === 'myschedule') {
+            this.set('routeData.day', 'day1');
+          }
         }
 
       });
