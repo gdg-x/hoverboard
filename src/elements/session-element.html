@@ -196,8 +196,8 @@
             </div>
 
             <iron-icon
-              class$="action-icon [[_getMyScheduleIcon(session.id, app.user.sessions)]]"
-              icon$="[[_getMyScheduleIcon(session.id, app.user.sessions)]]"
+              class$="action-icon [[myScheduleIcon]]"
+              icon$="[[myScheduleIcon]]"
               on-tap="toggleMyScheduleSession"
               session-id$="[[session.id]]"
               disabled$="[[!online]]"
@@ -270,8 +270,18 @@
           sessionColor: {
             type: String,
             value: ''
+          },
+
+          myScheduleIcon: {
+            type: String,
+            value: 'add-circle-outline'
           }
         },
+
+        observers: [
+          '_getMyScheduleIcon(session.id, app.user.sessions)',
+          '_userUpdated(app.user)'
+        ],
 
         ready: function () {
           this.async(function () {
@@ -289,7 +299,13 @@
         },
 
         _getMyScheduleIcon: function (id) {
-          return this.isInMySchedule(id) ? 'remove-circle' : 'add-circle-outline';
+          this.myScheduleIcon = this.isInMySchedule(id) ? 'remove-circle' : 'add-circle-outline';
+        },
+
+        _userUpdated: function (user) {
+          if (!user && this.session) {
+            this._getMyScheduleIcon(this.session.id);
+          }
         }
       });
 

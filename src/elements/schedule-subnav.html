@@ -157,7 +157,7 @@
       </template>
 
       <template is="dom-if" if="[[_showDaySelector(app.isPhoneSize, selectedDay)]]">
-        <paper-menu-button vertical-align="bottom" horizontal-align="left">
+        <paper-menu-button vertical-align="top" horizontal-align="left">
           <paper-button class="dropdown-trigger">
             [[_getDayLabel(selectedDay)]]
             <iron-icon icon="arrow-drop-down"></iron-icon>
@@ -350,7 +350,7 @@
           return selectedDay === 'myschedule';
         },
 
-        _displayPersonIcon(isMobile, user) {
+        _displayPersonIcon: function(isMobile, user) {
           return isMobile && user;
         },
 
@@ -360,7 +360,7 @@
           window.history.go(-1);
         },
 
-        _getDayLabel(selectedDay) {
+        _getDayLabel: function (selectedDay) {
           if (this._isMySchedulePage(selectedDay)) return;
 
           var index = Number(selectedDay.match(/\d+/)[0]);
