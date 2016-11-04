@@ -1,0 +1,28 @@
+language: node_js
+node_js: 6
+cache:
+  directories:
+  - node_modules
+  - bower_components
+  - "${NVM_PATH}_modules"
+env:
+- CXX=g++-4.8
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
+install:
+- npm install -g bower polymer-cli
+- bower install
+script: echo "Deploying!"
+before_deploy: polymer build
+deploy:
+- provider: firebase
+  skip_cleanup: true
+  on:
+    branch: master
+  project: hoverboard-master
+  token:
+    secure: fQOOIF4mkqH438Dawy2v27Qw7UsVizfJ1ZIeTno2sGfq9an8mZk13YWBuYJcOc1hSnEEp3G7/pkBcwykCj1CYpoOS+wMxpVbOQw6ogMGFD8rv+208Ddt1VJw/uUuFdf4k07+eRGokykCsCmcv2J+5wnLw34CKzXYTxLpL6JrxGzkuAcKIRNNda13yxJfYXz7HtQiNo3aMYnv2MCffNnSaR+OJ9Cl0JGYDCg3zuJIqrq7CFJqnUXE5TsO0VGCLY46rLvICY6inNlgZvA4RWi6Yf4rs2swzgC7HKbcIipjptlCRpPdRigLKoxhv6HZUIpkVgDu10Jq6OWU5gj4VpNYYd+c+E4F23nvm+3BEToUuEGURZ9Ins1SSHr3d+WxneQ+jreHCGrEBhKkLknbPQuOQF3khtk9CHu+07fBafBCLt4dGC6oQu+QwTdn+JQ/rYxWAUq8yJjrTsKevgXAVyMqDTU1Fy7FH5QP7HRyI71C6Q7Ij3cVwrFrVXNGzg2h2q8qTX2Yn6Ph9NJUpS+QmVsymblh38zwlyThZ1T4XudYM5iZTzNKKVqCmR9upl8nSLMEez1ukhBETJCslb2nFXJI3k7dsFA5cGO51sbYB44bxIXJwZkQ0s9p8XBNsU9gI2hX6UvE5+tephbohd6YGHmfc+qaJkLpcYKjRbhFsysf60k=

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 { 
 
     "firebase": {
@@ -11,6 +12,16 @@
         "api": "AIzaSyDNSmzmNwbZ4ijvt0Vl7DoqnwlDi5dPDCY",
         "userSessionPath": "/userSessions"
 },
+=======
+{
+  "firebase": {
+    "name": "hoverboard-master",
+    "domain": "hoverboard-master.firebaseapp.com",
+    "database": "https://hoverboard-master.firebaseio.com",
+    "api": "AIzaSyCaSkhtHekxAqXXzzbuNs2s6CpGdhZdta8",
+    "userSessionsPath": "/userSessions"
+  },
+>>>>>>> upstream/master
   "pages": {
     "home": {
       "headerSettings": {
@@ -20,8 +31,8 @@
         "tabBarColor": "#fff",
         "video": {
           "title": "GDG DevFest Ukraine 2016",
-          "youtubeId": "DfMnJAzOFng",
-          "text": "See how it was in 2015"
+          "youtubeId": "TdpbgRgz6eE",
+          "text": "See how it was in 2016"
         },
         "hideLogo": false,
         "minHeight": "360px"

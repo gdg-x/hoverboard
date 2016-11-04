@@ -3,6 +3,8 @@
 <link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
 <link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
@@ -26,18 +28,52 @@
         padding-left: 16px;
         height: 69px;
         background: var(--default-primary-color);
-        color: var(--text-primary-color);
+      }
+
+      .subpage-nav[phoneSize] {
+        padding-left: 8px;
+      }
+
+      .subpage-nav[phoneSize] .schedule-tabs {
+        width: 100%;
       }
 
       .schedule-tabs {
         height: 100%;
       }
 
+      .subpage-nav[phoneSize] .schedule-tabs::before,
+      .subpage-nav[phoneSize] .schedule-tabs::after {
+        display: block;
+        width: 8px;
+        height: 100%;
+        top: 0;
+        position: absolute;
+        z-index: 1;
+        content: "";
+        background: linear-gradient(to right, var(--default-primary-color) 10%, rgba(147, 126, 232, 0) 100%);
+      }
+
+      .subpage-nav[phoneSize] .schedule-tabs::after {
+        right: 0;
+        background: linear-gradient(to left, var(--default-primary-color) 10%, rgba(147, 126, 232, 0) 100%);
+      }
+
+      .schedule-tabs paper-tab {
+        margin: 0 8px;
+      }
+
       paper-tab a {
         color: var(--text-primary-color);
       }
 
+      .filter-button {
+        font-size: 14px;
+      }
+
       .filter-icon {
+        --iron-icon-height: 16px;
+        --iron-icon-width: 16px;
         margin-left: 4px;
       }
 
@@ -55,7 +91,7 @@
       .info-banner {
         padding: 16px;
         background: rgba(236, 239, 241, 0.6);
-        color: rgba(0,0,0,0.54);
+        color: rgba(0, 0, 0, 0.54);
         font-size: 12px;
       }
 
@@ -70,49 +106,125 @@
         display: inline-block;
         border-radius: 50%;
       }
+
+     paper-button {
+        text-transform: none;
+      }
+
+      a {
+        color: var(--primary-text-color);
+      }
+
+      paper-menu-button {
+        padding-left: 0;
+      }
+
+      .myschedue-button[disabled] {
+        opacity: 0;
+      }
     </style>
 
-    <nav class="subpage-nav" layout horizontal center justified relative>
-      <paper-tabs class="schedule-tabs" selected="[[selectedDay]]" attr-for-selected="day">
-        <template is="dom-repeat" items="[[schedule]]" as="day">
-          <paper-tab day$="day[[_addToValue(index, 1)]]" link>
-            <a href$="/schedule/day[[_addToValue(index, 1)]]" layout center>
-              [[day.dateReadable]]
-            </a>
-          </paper-tab>
-        </template>
-      </paper-tabs>
+    <nav
+      class="subpage-nav"
+      phoneSize$="[[app.isPhoneSize]]"
+      layout horizontal center justified relative
+    >
 
-      <paper-menu-button
-        id="filtersMenuToggle"
-        horizontal-align="right"
-        ignore-select
-        allow-outside-scroll
-        opened="{{_filtersOpened}}"
-      >
-        <paper-button class="dropdown-trigger">
-          [[localize('filter')]]
-          <iron-icon class="filter-icon" icon="filter-list"></iron-icon>
-        </paper-button>
-        <paper-menu
-          id="filters"
-          class="filters-content dropdown-content"
-          attr-for-selected="value"
-          selected-values="{{filters}}"
-          multi
+      <template is="dom-if" if="[[!app.isPhoneSize]]">
+        <paper-tabs
+          class="schedule-tabs"
+          selected="[[selectedDay]]"
+          attr-for-selected="day"
+          scrollable="[[app.isPhoneSize]]"
+          relative
+          hide-scroll-buttons
         >
-          <template is="dom-repeat" items="[[schedule.tags]]" as="tag">
-            <paper-checkbox
-              value="[[tag]]"
-              checked="{{_isChecked(tag)}}"
-              layout horizontal center flex
-            >
-              [[tag]]
-            </paper-checkbox>
+          <template is="dom-repeat" items="[[schedule]]" as="day">
+            <paper-tab day$="day[[_addToValue(index, 1)]]" link>
+              <a href$="/schedule/day[[_addToValue(index, 1)]]" layout center>
+                [[day.dateReadable]]
+              </a>
+            </paper-tab>
           </template>
-          <paper-item on-tap="clearFilters">[[localize('clear-all')]]</paper-item>
-        </paper-menu>
-      </paper-menu-button>
+          <template is="dom-if" if="{{app.user}}">
+            <paper-tab day="myschedule" link>
+              <a href="/schedule/myschedule" layout center>
+                [[localize('my-schedule')]]
+              </a>
+            </paper-tab>
+          </template>
+        </paper-tabs>
+      </template>
+
+      <template is="dom-if" if="[[_showDaySelector(app.isPhoneSize, selectedDay)]]">
+        <paper-menu-button vertical-align="top" horizontal-align="left">
+          <paper-button class="dropdown-trigger">
+            [[_getDayLabel(selectedDay)]]
+            <iron-icon icon="arrow-drop-down"></iron-icon>
+          </paper-button>
+          <paper-menu
+            class="dropdown-content"
+            selected="[[selectedDay]]"
+            attr-for-selected="day">
+
+            <template is="dom-repeat" items="[[schedule]]" as="day">
+              <paper-item label$="[[day.dateReadable]]" day$="day[[_addToValue(index, 1)]]" link>
+                <a href$="/schedule/day[[_addToValue(index, 1)]]"
+                   layout center>[[day.dateReadable]]</a>
+              </paper-item>
+            </template>
+          </paper-menu>
+        </paper-menu-button>
+      </template>
+
+      <template is="dom-if" if="[[_showMyScheduleArrow(app.isPhoneSize, selectedDay)]]">
+        <div class="myscheduleback" layout horizontal center>
+          <paper-icon-button icon="arrow-back"
+                             aria-label="Close My Schedule"
+                             on-tap="_goBack"></paper-icon-button>
+          <span>[[localize('my-schedule')]]</span>
+        </div>
+      </template>
+
+      <div layout horizontal center>
+        <div class="myschedue-button"
+             hidden$="[[!_displayPersonIcon(app.isPhoneSize, app.user)]]"
+             disabled$="[[_isMySchedulePage(selectedDay)]]">
+          <a href="/schedule/myschedule">
+            <paper-icon-button icon="person" aria-label="[[localize('my-schedule')]]"></paper-icon-button>
+          </a>
+        </div>
+        <paper-menu-button
+          id="filtersMenuToggle"
+          horizontal-align="right"
+          ignore-select
+          allow-outside-scroll
+          opened="{{_filtersOpened}}"
+        >
+          <paper-button class="filter-button dropdown-trigger">
+            [[localize('filter')]]
+            <iron-icon class="filter-icon" icon="filter-list"></iron-icon>
+          </paper-button>
+          <paper-menu
+            id="filters"
+            class="filters-content dropdown-content"
+            attr-for-selected="value"
+            selected-values="{{filters}}"
+            multi
+          >
+            <template is="dom-repeat" items="[[schedule.tags]]" as="tag">
+              <paper-checkbox
+                value="[[tag]]"
+                checked="{{_isChecked(tag)}}"
+                layout horizontal center flex
+              >
+                [[tag]]
+              </paper-checkbox>
+            </template>
+            <paper-item on-tap="clearFilters">[[localize('clear-all')]]</paper-item>
+          </paper-menu>
+        </paper-menu-button>
+      </div>
     </nav>
 
     <div class="info-banner" layout horizontal justified>
@@ -214,18 +326,46 @@
           }, 50);
         },
 
-        _getCustomStyleValue: function(tag) {
+        _getCustomStyleValue: function (tag) {
           return this.getComputedStyleValue('--' + this._generateClass(tag));
         },
 
-        _activeFilters: function() {
+        _activeFilters: function () {
           return this.filters && this.filters.length;
         },
 
         _refreshFiltersLabel: function () {
           this._filtersLabel = this.filters.join(', ');
-        }
+        },
 
+        _showDaySelector: function (isMobile, selectedDay) {
+          return isMobile && !this._isMySchedulePage(selectedDay);
+        },
+
+        _showMyScheduleArrow: function (isMobile, selectedDay) {
+          return isMobile && this._isMySchedulePage(selectedDay);
+        },
+
+        _isMySchedulePage: function (selectedDay) {
+          return selectedDay === 'myschedule';
+        },
+
+        _displayPersonIcon: function(isMobile, user) {
+          return isMobile && user;
+        },
+
+        _goBack: function (e) {
+          e.stopPropagation();
+          e.preventDefault();
+          window.history.go(-1);
+        },
+
+        _getDayLabel: function (selectedDay) {
+          if (this._isMySchedulePage(selectedDay)) return;
+
+          var index = Number(selectedDay.match(/\d+/)[0]);
+          return this.schedule[index - 1].dateReadable;
+        }
       });
 
     }());

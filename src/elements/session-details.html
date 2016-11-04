@@ -1,5 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
+<link rel="import" href="../../bower_components/app-storage/app-network-status-behavior.html">
+
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-dropdown/iron-dropdown-scroll-manager.html">
 
@@ -18,6 +20,7 @@
 <link rel="import" href="../behaviors/share-behavior.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
 <link rel="import" href="../behaviors/localize-behavior.html">
+<link rel="import" href="../behaviors/my-schedule-behavior.html">
 <link rel="import" href="truncate-marked-text.html">
 
 
@@ -34,6 +37,35 @@
       paper-icon-item {
         cursor: pointer;
       }
+
+      paper-fab {
+        --paper-fab-iron-icon: {
+          color: inherit;
+        };
+        transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      paper-fab.remove {
+        @apply(--shadow-elevation-4dp);
+        @apply(--shadow-transition);
+        color: #fff;
+        background: var(--accent-color);
+      }
+
+      paper-fab[disabled]:not(.remove) {
+        color: var(--disabled-text-color);
+        cursor: default;
+      }
+
+      paper-fab[disabled].remove {
+        @apply(--shadow-none);
+        background: var(--disabled-accent-color);
+        cursor: default;
+      }
+
+      .share-menu {
+        padding: 0;
+      }
     </style>
 
     <paper-scroll-header-panel id="scrollHeaderPanel" no-reveal>
@@ -45,39 +77,26 @@
         </div>
       </paper-toolbar>
       <div class="content">
-        <paper-menu-button horizontal-align="right" share-menu>
-          <paper-fab class="float-button dropdown-trigger" icon="share"></paper-fab>
-          <div class="dropdown-content">
-            <paper-icon-item on-tap="share" share="gplus">
-              <iron-icon icon="gplus" item-icon></iron-icon>
-              Google+
-            </paper-icon-item>
-            <paper-icon-item on-tap="share" share="facebook">
-              <iron-icon icon="facebook" item-icon></iron-icon>
-              Facebook
-            </paper-icon-item>
-            <paper-icon-item on-tap="share" share="twitter">
-              <iron-icon icon="twitter" item-icon></iron-icon>
-              Twitter
-            </paper-icon-item>
-            <paper-icon-item on-tap="share" share="copy">
-              <iron-icon icon="link" item-icon></iron-icon>
-              [[localize('copy-link')]]
-            </paper-icon-item>
-          </div>
-        </paper-menu-button>
+        <paper-fab
+          class$="float-button header-action [[fabIcon]]"
+          icon="[[fabIcon]]"
+          session-id$="[[session.id]]"
+          on-tap="toggleMyScheduleSession"
+          disabled$="[[!online]]"
+        ></paper-fab>
+
         <div class="metadata-wrapper">
           <div class="main-info">
             <div class="info">
               <h1 class="main-title">[[session.title]]</h1>
               <div class="meta highlight">[[session.dateReadable]] / [[session.startTime]] - [[session.endTime]] /
                 [[session.track.title]]
-                <template is="dom-if" if="{{session.language}}">
+                <span hidden$="[[!session.language]]">
                   / [[session.language]]
-                </template>
-                <template is="dom-if" if="{{session.complexity}}">
+                </span>
+                <span hidden$="[[!session.complexity]]">
                   / [[session.complexity]]
-                </template>
+                </span>
               </div>
               <span class="meta">[[_concatArray(session.tags)]]</span>
             </div>
@@ -89,22 +108,45 @@
         </marked-element>
 
         <div class="actions">
-          <template is="dom-if" if="[[session.presentation]]">
-            <a href$="[[session.presentation]]" target="_blank" rel="noopener noreferrer">
-              <paper-button class="action">
-                <iron-icon icon="presentation"></iron-icon>
-                [[localize('view-presentation')]]
-              </paper-button>
-            </a>
-          </template>
-          <template is="dom-if" if="[[session.videoId]]">
-            <div on-tap="_openVideo">
-              <paper-button class="action">
-                <iron-icon icon="video"></iron-icon>
-                [[localize('view-video')]]
-              </paper-button>
+          <paper-menu-button class="share-menu" horizontal-align="left" vertical-align="bottom" share-menu>
+            <paper-button class="action dropdown-trigger">
+              <iron-icon icon="share"></iron-icon>
+              [[localize('share')]]
+            </paper-button>
+            <div class="dropdown-content">
+              <paper-icon-item on-tap="share" share="gplus">
+                <iron-icon icon="gplus" item-icon></iron-icon>
+                Google+
+              </paper-icon-item>
+              <paper-icon-item on-tap="share" share="facebook">
+                <iron-icon icon="facebook" item-icon></iron-icon>
+                Facebook
+              </paper-icon-item>
+              <paper-icon-item on-tap="share" share="twitter">
+                <iron-icon icon="twitter" item-icon></iron-icon>
+                Twitter
+              </paper-icon-item>
+              <paper-icon-item on-tap="share" share="copy">
+                <iron-icon icon="link" item-icon></iron-icon>
+                [[localize('copy-link')]]
+              </paper-icon-item>
             </div>
-          </template>
+          </paper-menu-button>
+
+
+          <a href$="[[session.presentation]]" hidden$="[[!session.presentation]]" target="_blank"
+             rel="noopener noreferrer">
+            <paper-button class="action">
+              <iron-icon icon="presentation"></iron-icon>
+              [[localize('view-presentation')]]
+            </paper-button>
+          </a>
+          <div on-tap="_openVideo" hidden$="[[!session.videoId]]">
+            <paper-button class="action">
+              <iron-icon icon="video"></iron-icon>
+              [[localize('view-video')]]
+            </paper-button>
+          </div>
         </div>
 
       </div>
@@ -121,7 +163,8 @@
                   <span class="section-sub-title">[[speaker.company]], [[speaker.country]]</span>
                   <div class="badges">
                     <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
-                      <a class="badge" href$="[[badge.link]]" target="_blank" rel="noopener noreferrer">[[badge.name]]</a>
+                      <a class="badge" href$="[[badge.link]]" target="_blank"
+                         rel="noopener noreferrer">[[badge.name]]</a>
                     </template>
                   </div>
                   <truncate-marked-text
@@ -152,17 +195,27 @@
         behaviors: [
           Polymer.PaperDialogBehavior,
           Polymer.NeonAnimationRunnerBehavior,
+          Polymer.AppNetworkStatusBehavior,
           HOVERBOARD.LocalizeBehavior,
           HOVERBOARD.UtilsBehavior,
-          HOVERBOARD.ShareBehavior
+          HOVERBOARD.ShareBehavior,
+          HOVERBOARD.MyScheduleBehavior
         ],
 
         properties: {
           session: {
             type: Object,
             observer: '_sessionChanged'
+          },
+          fabIcon: {
+            type: String,
+            value: 'add'
           }
         },
+
+        observers: [
+          '_getMyScheduleIcon(session.id, app.user.sessions)'
+        ],
 
         listeners: {
           'neon-animation-finish': '_onNeonAnimationFinish'
@@ -210,6 +263,10 @@
             Polymer.IronDropdownScrollManager.removeScrollLock(this.$.scrollHeaderPanel);
             this._finishRenderClosed();
           }
+        },
+
+        _getMyScheduleIcon: function (id) {
+          this.fabIcon = this.isInMySchedule(id) ? 'remove' : 'add';
         }
 
       });

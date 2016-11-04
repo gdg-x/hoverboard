@@ -4,6 +4,7 @@ The most important file of configuration is `data/hoverboard.config.json`
 which looks like:
 
 ```
+  "firebase": {..},
   "pages": {..},
   "navigation": [..],
   "url": "..",
@@ -139,9 +140,10 @@ Read [full documentation](http://chrissimpkins.github.io/tweetledee/) on the off
 
 # Next steps
 
-Now your Hoverboard is up configured, learn how to [style app][style app] and [deploy][deploy].
+Now your Hoverboard is up configured, learn how to integrate [firebase][firebase] in your app, [style app][style app] and [deploy][deploy].
 
 [AppLocalizeBehavior]: https://elements.polymer-project.org/elements/app-localize-behavior
 [localization resources]: /data/en/resources.json
 [style app]: styling.md
 [deploy]: deploy.md
+[firebase]: firebase.md

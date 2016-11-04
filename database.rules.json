@@ -1,6 +1,10 @@
 {
   "rules": {
+<<<<<<< HEAD
     ".read": "auth != null",
+=======
+    ".read": true,
+>>>>>>> upstream/master
     ".write": "auth != null"
   }
 }
