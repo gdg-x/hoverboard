@@ -39,11 +39,6 @@
         @apply(--shadow-elevation-4dp);
       }
 
-      .sessions-wrapper[vertical] .session:not(:first-of-type) .session,
-      .session:not(:first-of-type) {
-        margin-top: 16px;
-      }
-
       .session-content {
         padding: 24px;
         flex-basis: auto;
@@ -166,7 +161,7 @@
 
     <a
       class="session"
-      href$="/schedule/[[name]]?sessionId=[[session.id]]"
+      href$="/schedule/[[dayName]]?sessionId=[[session.id]]"
       with-background$="[[session.image]]"
       wide$="{{!app.isPhoneSize}}"
       layout flex-auto
@@ -261,6 +256,10 @@
           app: {
             type: Object,
             notify: true
+          },
+
+          dayName: {
+            type: String
           },
 
           session: {
