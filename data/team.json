@@ -3,7 +3,7 @@
     "title": "Core Team",
     "members": [
       {
-        "name": "Oleh Zasadnyy",
+        "name": "Ramadan Abdellah",
         "photoUrl": "/images/people/oleh_zasadnyy.jpg",
         "socials": [
           {
@@ -30,7 +30,7 @@
         "title": "Website and sponsors"
       },
       {
-        "name": "Sofiya Huts",
+        "name": "Mohamed Moustapha",
         "photoUrl": "/images/people/sofiya_huts.jpg",
         "socials": [
           {
@@ -47,7 +47,7 @@
         "title": "Social and media"
       },
       {
-        "name": "Vitaliy Zasadnyy",
+        "name": "Njoya Njikam Houdi",
         "photoUrl": "/images/people/vitaliy_zasadnyy.jpg",
         "socials": [
           {
@@ -69,7 +69,7 @@
         "title": "Speakers"
       },
       {
-        "name": "Marta Maxymiak",
+        "name": "Abdel-Aziz Njoya",
         "photoUrl": "/images/people/marta_maxymiak.jpg",
         "socials": [
           {
@@ -86,7 +86,7 @@
         "title": "Party and happiness"
       },
       {
-        "name": "Ostap Andrusiv",
+        "name": "Bachirou Njoya",
         "photoUrl": "/images/people/ostap_andrusiv.jpg",
         "socials": [
           {
@@ -113,7 +113,7 @@
         "title": "Sponsors"
       },
       {
-        "name": "Vasylyna Mytsak",
+        "name": "Wolsh Rahim",
         "photoUrl": "/images/people/vasylyna_mytsak.jpg",
         "socials": [
           {
@@ -130,7 +130,7 @@
         "title": "Party and happiness"
       },
       {
-        "name": "Volodya Karpliuk",
+        "name": " ",
         "photoUrl": "/images/people/volodya_karpliuk.jpg",
         "socials": [
           {
@@ -189,28 +189,6 @@
           }
         ],
         "title": "Cloud stream"
-      },
-      {
-        "name": "Dmytro Danylyk",
-        "photoUrl": "/images/people/dmytro_danylyk.jpg",
-        "socials": [
-          {
-            "icon": "gplus",
-            "link": "https://plus.google.com/+DmytroDanylyk",
-            "name": "Google+"
-          },
-          {
-            "icon": "twitter",
-            "link": "https://twitter.com/dmytrodanylyk",
-            "name": "Twitter"
-          },
-          {
-            "icon": "website",
-            "link": "http://www.dmytrodanylyk.com/#/about",
-            "name": "Website"
-          }
-        ],
-        "title": "Android Stream"
       }
     ]
   }

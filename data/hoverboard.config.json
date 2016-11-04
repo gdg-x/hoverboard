@@ -1,9 +1,21 @@
-{
+{ 
+
+    "firebase": {
+        "name": "GDG Foumban",
+        "domain": "gdgfoumban-2016.firebaseapp.com",
+        "database": "https://gdgfoumban-2016.firebaseio.com",
+        "api": "AIzaSyDNSmzmNwbZ4ijvt0Vl7DoqnwlDi5dPDCY",
+        "name": "GDG Foumban",
+        "domain": "gdgfoumban-2016.firebaseapp.com",
+        "database": "https://gdgfoumban-2016.firebaseio.com",
+        "api": "AIzaSyDNSmzmNwbZ4ijvt0Vl7DoqnwlDi5dPDCY",
+        "userSessionPath": "/userSessions"
+},
   "pages": {
     "home": {
       "headerSettings": {
         "backgroundColor": "#FF9800",
-        "backgroundImage": "/images/backgrounds/home.png",
+        "backgroundImage": "/images/backgrounds/head_background.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff",
         "video": {
@@ -179,7 +191,7 @@
   "teamPageText": "team-page-text",
   "statistics": [
     {
-      "counter": 600,
+      "counter": 15,
       "caption": "attendees"
     },
     {
@@ -187,7 +199,7 @@
       "caption": "days"
     },
     {
-      "counter": 30,
+      "counter": 13,
       "caption": "sessions"
     },
     {
@@ -222,7 +234,7 @@
   "gallery": {
     "albumUrl": "https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1",
     "photos": {
-      "big": "/images/backgrounds/2015_1.jpg",
+      "big": "/images/backgrounds/big.jpg",
       "small": [
         "/images/backgrounds/2015_2.jpg",
         "/images/backgrounds/2015_3.jpg"
