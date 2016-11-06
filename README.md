@@ -121,7 +121,8 @@ pull request, so we can include you in this list.
 | [GDG DevFest Eskisehir 2016](https://df16.gdgeskisehir.com/)    | [GDG DevFest Poland 2016](https://devfest.pl/)                              | [GDG DevFest Pilsen 2016](https://devfest.cz/)              |
 | [GDG DevFest Switzerland 2016](https://devfest.ch/)             | [GDG DevFest Toulouse 2016](https://devfesttoulouse.fr/)                    | [GDG Ohio DevFest](https://ohiodevfest.com/)                |
 | [GDG DevFest NYC 2016](https://devfestnyc.com/)                 | [GDG DevFest Los Angeles 2016](https://devfest.gdgla.org/)                  | [GDG DevFest West](https://devfest2016.gdgsv.com)           |
-| [GDG DevFest Florida 2016](https://devfestflorida.org)          |
+| [GDG DevFest Florida 2016](https://devfestflorida.org)          | [GDG DevFest Granada 2016](http://devfest.gdggranada.com/) 
+| |
 
 
 ### Roadmap :rocket:
