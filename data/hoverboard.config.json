@@ -1,27 +1,12 @@
-<<<<<<< HEAD
-{ 
 
-    "firebase": {
-        "name": "GDG Foumban",
-        "domain": "gdgfoumban-2016.firebaseapp.com",
-        "database": "https://gdgfoumban-2016.firebaseio.com",
-        "api": "AIzaSyDNSmzmNwbZ4ijvt0Vl7DoqnwlDi5dPDCY",
-        "name": "GDG Foumban",
-        "domain": "gdgfoumban-2016.firebaseapp.com",
-        "database": "https://gdgfoumban-2016.firebaseio.com",
-        "api": "AIzaSyDNSmzmNwbZ4ijvt0Vl7DoqnwlDi5dPDCY",
-        "userSessionPath": "/userSessions"
-},
-=======
 {
   "firebase": {
-    "name": "hoverboard-master",
-    "domain": "hoverboard-master.firebaseapp.com",
-    "database": "https://hoverboard-master.firebaseio.com",
-    "api": "AIzaSyCaSkhtHekxAqXXzzbuNs2s6CpGdhZdta8",
+    "name": "GDG Foumban",
+    "domain": "gdgfoumban-2016.firebaseapp.com",
+    "database": "https://gdgfoumban-2016.firebaseio.com",
+    "api": "AIzaSyDNSmzmNwbZ4ijvt0Vl7DoqnwlDi5dPDCY",
     "userSessionsPath": "/userSessions"
   },
->>>>>>> upstream/master
   "pages": {
     "home": {
       "headerSettings": {
@@ -30,7 +15,7 @@
         "fontColor": "#fff",
         "tabBarColor": "#fff",
         "video": {
-          "title": "GDG DevFest Ukraine 2016",
+          "title": "GDG Foumban",
           "youtubeId": "TdpbgRgz6eE",
           "text": "See how it was in 2016"
         },
@@ -92,7 +77,7 @@
       "permalink": "/team/"
     }
   ],
-  "url": "https://gdgfoumban-2016.firebaseapp.com/",
+  "url": "https://gdgfoumban.org",
   "mailchimp": {
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
@@ -218,7 +203,7 @@
       "caption": "tracks"
     }
   ],
-  "hashtag": "#GDGFoumban",
+  "hashtag": "GDGFoumban",
   "social": [
     {
       "name": "twitter",
@@ -237,13 +222,13 @@
     },
     {
       "name": "linkedin",
-      "nickname": "google-developers-group-lviv",
-      "url": "https://www.linkedin.com/company/google-developers-group-lviv"
+      "nickname": "google-developers-group-foumban",
+      "url": "#"
     }
   ],
   "tweetsSource": "/data/tweets.json",
   "gallery": {
-    "albumUrl": "https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1",
+    "albumUrl": "https://plus.google.com/b/101655900172336891178/photos/101655900172336891178/album/6307964166029504193",
     "photos": {
       "big": "/images/backgrounds/big.jpg",
       "small": [
@@ -253,12 +238,12 @@
     }
   },
   "location": {
-    "apiKey": "",
-    "link": "https://www.facebook.com/expopivdennij",
+     "apiKey": "AIzaSyCiLJ5uJ29Rl6VoGb5YzpeS41SWtSDaRGc",
+    "link": "https://www.facebook.com/CHM-salle-de-f%C3%AAte-111350885618200/",
     "pointer": {
       "latitude": 5.720460,
       "longitude": 10.901268,
-      "zoom": 15
+      "zoom": 10
     },
     "mapCenter": {
       "latitude": 5.720460,

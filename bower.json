@@ -41,7 +41,7 @@
     "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#^1.4.0",
     "paper-spinner": "PolymerElements/paper-spinner#^1.2.0",
     "polymer": "Polymer/polymer#^1.7.0",
-    "polymerfire": "firebase/polymerfire#^0.10.0",
+    "polymerfire": "firebase/polymerfire#^0.10.2",
     "time-elements": "github/time-elements#^0.6.0"
   },
   "devDependencies": {

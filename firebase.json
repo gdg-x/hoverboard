@@ -3,15 +3,10 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-<<<<<<< HEAD
     "public": "build/unbundled",
-=======
-    "public": "./build/bundled",
-    "cleanUrls": true,
->>>>>>> upstream/master
     "rewrites": [
       {
-        "source": "**/*",
+        "source": "**",
         "destination": "/index.html"
       }
     ]

@@ -5,8 +5,8 @@
     "posted": "2015-10-24",
     "primaryColor": "#5a7785",
     "secondaryColor": "#455a64",
-    "image": "/images/posts/summary.jpg",
-    "brief": "GDG DevFest Ukraine 2015 is now over. It was a great success. We are happy to share with you some facts, emotions and, of course, photos from the biggest Google Developers Conference in Ukraine!"
+    "image": "/images/backgrounds/devfestWest.jpg",
+    "brief": "GDG DevFest West Cameroon"
   },
   {
     "id": "devfest-2016-announced",
@@ -19,11 +19,11 @@
   },
   {
     "id": "c4p-time",
-    "title": "Call for Papers Time",
+    "title": "Nguon 2016 ",
     "posted": "2016-05-06",
     "primaryColor": "#3F51B5",
     "secondaryColor": "#3F51B5",
-    "image": "/images/posts/c4p-is-open.jpg",
-    "brief": "GDG DevFest Ukraine 2016 announced! The 5th edition of the biggest conference about Google technologies in Ukraine will take on **September 9-10** in an ancient city of Lviv. That means that it is time to open [call for talk submissions](http://bit.ly/df16-c4p)."
+    "image": "/images/backgrounds/nguon2016.jpg",
+    "brief": "<h1>THEME:   LEVIER DE CONSOLIDATION DE LA PAIX ET DU DEVELOPPEMENT</h1>\n "
   }
 ]
