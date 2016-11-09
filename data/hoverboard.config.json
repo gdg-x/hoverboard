@@ -12,42 +12,47 @@
           "text": ""
         },
         "hideLogo": true,
-        "minHeight": "360px"
+        "minHeight": "300px"
       }
     },
     "blog": {
       "headerSettings": {
         "backgroundColor": "#012250",
         "fontColor": "#fff",
-        "tabBarColor": "#fff"
+        "tabBarColor": "#fff",
+        "backgroundImage": "/images/backgrounds/blog.jpg"
       }
     },
     "speakers": {
       "headerSettings": {
         "backgroundColor": "#012250",
         "fontColor": "#fff",
-        "tabBarColor": "#fff"
+        "tabBarColor": "#fff",
+        "backgroundImage": "/images/backgrounds/speakers.jpg"
       }
     },
     "schedule": {
       "headerSettings": {
         "backgroundColor": "#012250",
         "fontColor": "#fff",
-        "tabBarColor": "#fff"
+        "tabBarColor": "#fff",
+        "backgroundImage": "/images/backgrounds/schedule.jpg"
       }
     },
     "team": {
       "headerSettings": {
         "backgroundColor": "#012250",
         "fontColor": "#fff",
-        "tabBarColor": "#fff"
+        "tabBarColor": "#fff",
+        "backgroundImage": "/images/backgrounds/team.jpg"
       }
     },
     "cod": {
       "headerSettings": {
         "backgroundColor": "#012250",
         "fontColor": "#fff",
-        "tabBarColor": "#fff"
+        "tabBarColor": "#fff",
+        "backgroundImage": "/images/backgrounds/coc.jpg"
       }
     }
   },
@@ -141,11 +146,11 @@
       "caption": "days"
     },
     {
-      "counter": 13,
+      "counter": 14,
       "caption": "sessions"
     },
     {
-      "counter": 4,
+      "counter": 3,
       "caption": "workshops"
     }
   ],

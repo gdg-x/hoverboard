@@ -2,56 +2,46 @@
     "999": {
         "id": 999,
         "title": "To Be Announced",
-        "description": "Amazing Angular Talk",
-        "language": "English",
+        "description": "",
         "speakers": [
-            2
+            92
         ],
-        "complexity": "Beginner",
         "tags": [
-            "Angular",
             "Angular 2"
         ]
     },
     "998": {
         "id": 998,
         "title": "Lightning Talk",
-        "description": "Amazing Angular Talk",
-        "language": "English",
+        "description": "",
         "speakers": [
-            2
+            92
         ],
-        "complexity": "Beginner",
         "tags": [
-            "Angular",
             "Angular 2"
         ]
     },
     "888": {
         "id": 888,
         "title": "Full-day workshop",
-        "description": "Amazing Angular Workshop",
-        "language": "English",
+        "description": "",
         "speakers": [
-            3
+            93
         ],
         "complexity": "Beginner",
         "tags": [
-            "Angular",
             "Angular 2"
         ]
     },
     "887": {
         "id": 887,
         "title": "Half-day workshop",
-        "description": "Amazing Angular Workshop",
-        "language": "English",
+        "description": "",
         "speakers": [
-            3
+            93
         ],
         "complexity": "Beginner",
         "tags": [
-            "Angular",
             "Angular 2"
         ]
     },
@@ -59,9 +49,8 @@
         "id": 100,
         "title": "Keynote",
         "description": "",
-        "language": "English",
         "speakers": [
-            1
+            91
         ],
         "tags": [
             "Keynote"
@@ -83,7 +72,6 @@
         "id": 2,
         "title": "ngVikings 2017 Opening",
         "description": "Official start of the conference. Greetings from the organizers, sponsors and partners.",
-        "language": "English",
         "image": "/images/backgrounds/opening.jpg"
     },
     "7": {
@@ -110,17 +98,83 @@
         "description": "Get your badge, coffee, enjoy talking with tech edicts around",
         "image": "/images/backgrounds/registration.jpg"
     },
-    "101": {
-        "id": 101,
-        "title": "Title",
-        "description": "Description",
+
+    "81": {
+        "id": 81,
+        "title": "Advanced Angular 2",
+        "description": "In this workshop, attendees that already know the basics of Angular 2 will concentrate on advanced topics. You will learn about approaches for internationalization and about modern authentication scenarios with OAuth 2 and OpenId Connect that allow for single sign on as well as for an integration into existing identity systems like Active Directory. In addition to that, you will also get to know some strategies to drastically improve your application performance, like using observables and immutables for data binding and leveraging the AOT compiler as well as tree shaking. In addition to that, you will find out how to use lazy loading and preloading together with webpack and how to use other advanced routing techniques, like aux routes, router events and guards.",
         "speakers": [
-            1
+            11
         ],
-        "language": "English",
-        "complexity": "Beginner",
         "tags": [
-            "Cloud"
+            "Angular 2"
+        ],
+        "complexity": "Advanced"
+    },
+
+
+    "11": {
+        "id": 11,
+        "title": "Step by Step: Improving Startup Performance with Lazy Loading in Angular 2",
+        "description": "Angular 2 applications can lazily load modules to improve startup performance. Using an example, this session shows how you can optimize your solution with this approach. You will also learn about potential pitfalls as well as about asynchronously preloading modules with build-in strategies and your own strategies to speed up lazy loading.",
+        "speakers": [
+            11
+        ],
+        "tags": [
+            "Angular 2"
+        ]
+    },
+
+    "12": {
+        "id": 12,
+        "title": "Angular 2 Continuous Integration",
+        "description": "Insomnia? Nightmares? Stress? That's usually some of the symptoms in developers that are not using continuous integration systems. In this talk you will learn how to create a healthy life-cycle in your development process.",
+        "speakers": [
+            12
+        ],
+        "tags": [
+            "Angular 2",
+            "CI"
+        ]
+    },
+
+    "13": {
+        "id": 13,
+        "title": "To Be Announced",
+        "description": "",
+        "speakers": [
+            13
+        ],
+        "tags": [
+            "IoT",
+            "Angular 2"
+        ]
+    },
+
+    "14": {
+        "id": 14,
+        "title": "Sharing Code Between Web and Native Apps",
+        "description": "NativeScript has opened up a whole new world to Angular developers: the ability to share code directly between your web and native iOS/Android applications. Which is awesome! But, just because you can share code across multiple platforms, doesn’t mean that you necessarily should. In this talk we’ll first take a look at what NativeScript makes possible from a code sharing perspective. We’ll build a few Angular components and use them both in the browser and on mobile devices. Then we’ll take a step back and look at the same code from a pragmatic, maintenance-oriented perspective. Come for practical tips & tricks on sharing code across multiple development environments.",
+        "speakers": [
+            14
+        ],
+        "tags": [
+            "NativeScript",
+            "Angular 2"
+        ]
+    },
+
+    "15": {
+        "id": 15,
+        "title": "An Introduction Into Using Angular’s Material 2 Design",
+        "description": "Angular Material 2 has been evolving over the course of the past year, and it has finally become stable enough to use in production. Get familiar with the various components of Angular Material 2, how to use them in your app, and a few tips and tricks to getting started.",
+        "speakers": [
+            15
+        ],
+        "tags": [
+            "Angular Material 2",
+            "Angular 2"
         ]
     }
+
 }

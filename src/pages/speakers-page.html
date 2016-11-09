@@ -198,7 +198,7 @@
             </a>
             <a href$="/speakers/[[speaker.id]]/" class="card-content">
               <iron-image class="company-logo" src="{{speaker.companyLogo}}" sizing="contain"></iron-image>
-              <div class="tags">Skills:
+              <div class="tags">
                 <template is="dom-repeat" items="[[speaker.tags]]" as="tag">
                   <span class="tag" style$="{{_getCustomStyleValue(tag)}}" target="_blank" rel="noopener noreferrer">[[tag]]</span>
                 </template>

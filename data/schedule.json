@@ -2,7 +2,7 @@
     "date": "2017-02-11",
     "dateReadable": "February 11",
     "tracks": [{
-        "title": "Main hall"
+        "title": "Main Hall"
     }],
     "timeslots": [{
         "startTime": "08:00",
@@ -26,25 +26,25 @@
         "startTime": "09:50",
         "endTime": "10:25",
         "sessions": [
-            [999]
+            [11]
         ]
     }, {
         "startTime": "10:25",
         "endTime": "11:00",
         "sessions": [
-            [999]
+            [12]
         ]
     }, {
         "startTime": "11:00",
         "endTime": "11:35",
         "sessions": [
-            [999]
+            [13]
         ]
     }, {
         "startTime": "11:35",
         "endTime": "12:10",
         "sessions": [
-            [999]
+            [14]
         ]
     }, {
         "startTime": "12:10",
@@ -74,7 +74,7 @@
         "startTime": "14:15",
         "endTime": "14:50",
         "sessions": [
-            [999]
+            [15]
         ]
     }, {
         "startTime": "14:50",
@@ -139,7 +139,7 @@
         "startTime": "10:00",
         "endTime": "17:00",
         "sessions": [
-            [888],
+            [81],
             [887],
             [888]
         ]

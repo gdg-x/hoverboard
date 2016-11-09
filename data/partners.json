@@ -6,6 +6,16 @@
         "name": "IMPACT",
         "url": "http://www.impact.dk/",
         "logoUrl": "../images/logos/impact.png"
+      },
+      {
+        "name": "Frantic",
+        "url": "https://www.frantic.com",
+        "logoUrl": "../images/logos/frantic.png"
+      },
+      {
+        "name": "Opbeat",
+        "url": "https://opbeat.com/",
+        "logoUrl": "../images/logos/opbeat.png"
       }
     ]
   },
@@ -26,6 +36,11 @@
         "name": "JetBrains",
         "url": "https://www.jetbrains.com/",
         "logoUrl": "../images/logos/jetbrains.png"
+      },
+      {
+        "name": "Pluralsight",
+        "url": "https://www.pluralsight.com/",
+        "logoUrl": "../images/logos/pluralsight.png"
       }
     ]
   },

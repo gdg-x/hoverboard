@@ -16,5 +16,14 @@
     "secondaryColor": "#012250",
     "image": "images/backgrounds/blog.jpg",
     "brief": "Want to speak at ngVikings 2017?"
+  },
+  {
+    "id": "speakers-announced",
+    "title": "Our first speakers announced",
+    "posted": "2016-11-09",
+    "primaryColor": "#012250",
+    "secondaryColor": "#012250",
+    "image": "images/backgrounds/speakers.jpg",
+    "brief": "ngVikings 2017 team is proud to announce the first part of our speaker lineup"
   }
 ]

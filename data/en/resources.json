@@ -33,8 +33,8 @@
   "student-ticket-ends": "Sep 8",
   "student-ticket-info": "Requires valid student ID",
   "early-ticket": "Early Bird",
-  "early-ticket-starts": "November 1",
-  "early-ticket-ends": "January 1",
+  "early-ticket-starts": "Soon",
+  "early-ticket-ends": "Stay tuned!",
   "early-ticket-info": "Or first 50 tickets",
   "lazy-ticket": "Lazy Bird",
   "lazy-ticket-starts": "July 1",
@@ -57,7 +57,7 @@
   "general-partner": "General partner",
   "featured-videos-title": "Featured Sessions",
   "featured-videos-view-all": "View all videos",
-  "featured-people-title": "Rockstar Speakers",
+  "featured-people-title": "Angular Heroes",
   "featured-people-view-all": "View all speakers",
   "action-title": "",
   "action": "",
@@ -82,5 +82,6 @@
   "organizers": "Organizers",
   "call-for-papers": "Call for Papers",
   "sponsors": "Sponsors",
-  "community-partners": "Community partners"
+  "community-partners": "Community Partners",
+  "supported-by": "Supported by"
 }
