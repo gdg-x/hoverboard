@@ -54,6 +54,12 @@
       .session[flex] {
         padding: 0 8px;
       }
+
+
+      .sessions-wrapper[vertical] .session:not(:first-of-type) session-element,
+      session-element:not(:first-of-type) {
+        margin-top: 16px;
+      }
     </style>
 
     <template is="dom-repeat" items="[[day.timeslots]]" as="timeslot">
@@ -81,6 +87,7 @@
 
                 <session-element
                   app="{{app}}"
+                  day-name="[[name]]"
                   session="{{subSession}}"
                   layout flex-auto
                 ></session-element>
@@ -118,6 +125,10 @@
 
           day: {
             type: Object
+          },
+
+          name: {
+            type: String
           },
 
           filters: {

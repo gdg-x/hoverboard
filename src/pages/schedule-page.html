@@ -178,6 +178,10 @@
                 this._selectedSession = session;
                 this.$.sessionDetails.open();
               }.bind(this));
+            } else {
+              window.requestAnimationFrame(function () {
+                this.$.sessionDetails.cancel();
+              }.bind(this));
             }
             if (params.filters) {
               this.set('filters', params.filters.split(','));
