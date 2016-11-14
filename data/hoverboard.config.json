@@ -14,7 +14,7 @@
         "fontColor": "#fff",
         "tabBarColor": "#fff",
         "video": {
-          "title": "GDG DevFest Ukraine 2016",
+          "title": "GDG DevFest Taipei 2016",
           "youtubeId": "TdpbgRgz6eE",
           "text": "See how it was in 2016"
         },
@@ -89,12 +89,12 @@
   "disqusShortName": "hoverboard-gdg-x",
   "languages": [
     {
-      "name": "English",
-      "key": "en"
+      "name": "繁體中文 (Traditional Chinese)",
+      "key": "zhtw"
     },
     {
-      "name": "Українська",
-      "key": "uk"
+      "name": "English",
+      "key": "en"
     }
   ],
   "footerBlocks": [
@@ -112,21 +112,6 @@
         {
           "text": "google-developers",
           "url": "https://developers.google.com/",
-          "newTab": true
-        },
-        {
-          "text": "df-13",
-          "url": "http://gdg-devfest-ua.appspot.com/",
-          "newTab": true
-        },
-        {
-          "text": "df-14",
-          "url": "http://devfest.gdg.org.ua/2014/",
-          "newTab": true
-        },
-        {
-          "text": "df-15",
-          "url": "http://devfest.gdg.org.ua/2015/",
           "newTab": true
         }
       ]
