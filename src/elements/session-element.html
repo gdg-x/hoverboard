@@ -131,6 +131,7 @@
       }
 
       .tags {
+        margin-right: 24px;
         padding: 16px 24px;
       }
 
@@ -187,7 +188,7 @@
           <div class="bottom-caption" layout horizontal center justified>
             <div class="tags" hidden$="[[!session.tags.length]]" layout horizontal center>
               <iron-icon icon="tags"></iron-icon>
-              <span>[[_joinArray(session.tags)]]</span>
+              <span flex>[[_joinArray(session.tags)]]</span>
             </div>
 
             <iron-icon
