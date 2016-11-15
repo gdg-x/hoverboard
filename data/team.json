@@ -1,172 +1,97 @@
 [
   {
-    "title": "Core Team",
+    "title": "GDG Taipei",
     "members": [
       {
-        "name": "Oleh Zasadnyy",
-        "photoUrl": "/images/people/oleh_zasadnyy.jpg",
+        "name": "Ted Chien",
+        "photoUrl": "http://en.gravatar.com/userimage/2635180/c9757c44283ee800e3b31e1452834fb9.jpg",
         "socials": [
           {
             "icon": "gplus",
-            "link": "https://plus.google.com/+OlehZasadnyy",
+            "link": "https://plus.google.com/+TedHsiangTaiChien",
             "name": "Google+"
           },
           {
             "icon": "facebook",
-            "link": "https://www.facebook.com/oleh.zasadnyy",
+            "link": "https://www.facebook.com/htchien",
             "name": "Facebook"
           },
           {
             "icon": "twitter",
-            "link": "https://twitter.com/ozasadnyy",
+            "link": "https://twitter.com/htchien",
             "name": "Twitter"
           },
           {
             "icon": "website",
-            "link": "http://o.zasadnyy.com/",
+            "link": "http://www.htchien.tw/",
             "name": "Blog"
           }
         ],
-        "title": "Website and sponsors"
-      },
+        "title": "Co-organizer"
+      }
+    ]
+  },
+  {
+    "title": "Google Cloud Platform User Group",
+    "members": [
       {
-        "name": "Sofiya Huts",
-        "photoUrl": "/images/people/sofiya_huts.jpg",
+        "name": "Simon Su",
+        "photoUrl": "",
         "socials": [
           {
             "icon": "gplus",
-            "link": "https://plus.google.com/+SofiaHuts",
+            "link": "",
             "name": "Google+"
           },
           {
             "icon": "facebook",
-            "link": "https://www.facebook.com/sophie.huts.7",
+            "link": "",
             "name": "Facebook"
-          }
-        ],
-        "title": "Social and media"
-      },
-      {
-        "name": "Vitaliy Zasadnyy",
-        "photoUrl": "/images/people/vitaliy_zasadnyy.jpg",
-        "socials": [
-          {
-            "icon": "linkedin",
-            "link": "https://www.linkedin.com/in/zasadnyy",
-            "name": "Linkedin"
           },
           {
             "icon": "twitter",
-            "link": "https://twitter.com/zasadnyy",
+            "link": "",
             "name": "Twitter"
           },
           {
             "icon": "website",
-            "link": "http://v.zasadnyy.com/",
+            "link": "",
             "name": "Blog"
           }
         ],
-        "title": "Speakers"
-      },
+        "title": "Organizer"
+      }
+    ]
+  },
+  {
+    "title": "Taiwan Android Developer Study Group",
+    "members": [
       {
-        "name": "Marta Maxymiak",
-        "photoUrl": "/images/people/marta_maxymiak.jpg",
+        "name": "Takuma",
+        "photoUrl": "",
         "socials": [
           {
             "icon": "gplus",
-            "link": "https://plus.google.com/104036874811391520583",
+            "link": "",
             "name": "Google+"
           },
           {
             "icon": "facebook",
-            "link": "https://www.facebook.com/marta.maxymiak",
-            "name": "Facebook"
-          }
-        ],
-        "title": "Party and happiness"
-      },
-      {
-        "name": "Ostap Andrusiv",
-        "photoUrl": "/images/people/ostap_andrusiv.jpg",
-        "socials": [
-          {
-            "icon": "gplus",
-            "link": "https://google.com/+OstapAndrusiv",
-            "name": "Google+"
-          },
-          {
-            "icon": "facebook",
-            "link": "https://www.facebook.com/ostap.andrusiv",
+            "link": "",
             "name": "Facebook"
           },
           {
             "icon": "twitter",
-            "link": "https://twitter.com/p1f",
+            "link": "",
             "name": "Twitter"
           },
           {
             "icon": "website",
-            "link": "http://andrusiv.com/",
+            "link": "",
             "name": "Blog"
           }
         ],
-        "title": "Sponsors"
-      },
-      {
-        "name": "Vasylyna Mytsak",
-        "photoUrl": "/images/people/vasylyna_mytsak.jpg",
-        "socials": [
-          {
-            "icon": "gplus",
-            "link": "https://plus.google.com/+ВасилинаМицак",
-            "name": "Google+"
-          },
-          {
-            "icon": "facebook",
-            "link": "https://www.facebook.com/vasylyna.mytsak",
-            "name": "Facebook"
-          }
-        ],
-        "title": "Party and happiness"
-      },
-      {
-        "name": "Volodya Karpliuk",
-        "photoUrl": "/images/people/volodya_karpliuk.jpg",
-        "socials": [
-          {
-            "icon": "gplus",
-            "link": "https://plus.google.com/+VolodyaKarpliuk23",
-            "name": "Google+"
-          },
-          {
-            "icon": "facebook",
-            "link": "https://www.facebook.com/volodya.karpluk",
-            "name": "Facebook"
-          },
-          {
-            "icon": "twitter",
-            "link": "https://twitter.com/keyv23",
-            "name": "Twitter"
-          }
-        ],
-        "title": "Speakers"
-      },
-      {
-        "name": "Diana Pinchuk",
-        "photoUrl": "/images/people/diana_pinchuk.jpg",
-        "socials": [
-          {
-            "icon": "gplus",
-            "link": "https://plus.google.com/+DianaPinchuk",
-            "name": "Google+"
-          },
-          {
-            "icon": "facebook",
-            "link": "https://www.facebook.com/diana.pinchuk.9",
-            "name": "Facebook"
-          }
-        ],
-        "title": "Social and media"
+        "title": "Organizer"
       }
     ]
   },
@@ -174,43 +99,21 @@
     "title": "Program Committee",
     "members": [
       {
-        "name": "Ihor Dvoretskyi",
-        "photoUrl": "/images/people/ihor_dvoretskyi.jpg",
+        "name": "Charlie Tsai",
+        "photoUrl": "",
         "socials": [
           {
             "icon": "facebook",
-            "link": "https://www.facebook.com/idvoretskyi",
+            "link": "",
             "name": "Facebook"
           },
           {
             "icon": "twitter",
-            "link": "https://twitter.com/idvoretskyi",
+            "link": "",
             "name": "Twitter"
           }
         ],
-        "title": "Cloud stream"
-      },
-      {
-        "name": "Dmytro Danylyk",
-        "photoUrl": "/images/people/dmytro_danylyk.jpg",
-        "socials": [
-          {
-            "icon": "gplus",
-            "link": "https://plus.google.com/+DmytroDanylyk",
-            "name": "Google+"
-          },
-          {
-            "icon": "twitter",
-            "link": "https://twitter.com/dmytrodanylyk",
-            "name": "Twitter"
-          },
-          {
-            "icon": "website",
-            "link": "http://www.dmytrodanylyk.com/#/about",
-            "name": "Website"
-          }
-        ],
-        "title": "Android Stream"
+        "title": "Committee Officer"
       }
     ]
   }

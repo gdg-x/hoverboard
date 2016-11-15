@@ -12,20 +12,6 @@
         "backgroundColor": "#FF9800",
         "backgroundImage": "/images/backgrounds/home.png",
         "fontColor": "#fff",
-        "tabBarColor": "#fff",
-        "video": {
-          "title": "GDG DevFest Taipei 2016",
-          "youtubeId": "TdpbgRgz6eE",
-          "text": "See how it was in 2016"
-        },
-        "hideLogo": true,
-        "minHeight": "360px"
-      }
-    },
-    "blog": {
-      "headerSettings": {
-        "backgroundColor": "#03a9f4",
-        "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
     },
@@ -64,10 +50,6 @@
       "permalink": "/"
     },
     {
-      "route": "blog",
-      "permalink": "/blog/"
-    },
-    {
       "route": "schedule",
       "permalink": "/schedule/"
     },
@@ -81,11 +63,7 @@
     }
   ],
   "url": "https://hoverboard.firebaseapp.com/",
-  "mailchimp": {
-    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
-    "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
-  },
-  "partnershipProposition": "http://bit.ly/df16-sponsor",
+  "partnershipProposition": "https://drive.google.com/open?id=1fMjo73MyXyR4zWEfoGnDkqARBOJ0xwDMQDcCOAmt28s",
   "disqusShortName": "hoverboard-gdg-x",
   "languages": [
     {
@@ -121,12 +99,12 @@
       "links": [
         {
           "text": "partnership-proposition",
-          "url": "http://bit.ly/df16-sponsor",
+          "url": "https://drive.google.com/open?id=1fMjo73MyXyR4zWEfoGnDkqARBOJ0xwDMQDcCOAmt28s",
           "newTab": true
         },
         {
           "text": "media-kit",
-          "url": "http://bit.ly/df16-media",
+          "url": "",
           "newTab": true
         }
       ]
@@ -135,36 +113,18 @@
   "contactBlock": {
     "links": [
       {
-        "text": "devfest@google.com",
-        "url": "mailto:devfest@google.com"
+        "text": "DevFestTaipei@googlegroups.com",
+        "url": "mailto:http://gdg-taipei.kktix.cc/events/devfest16"
       }
     ]
   },
   "tickets": {
-    "url": "http://2event.com/events/630032",
+    "url": "http://gdg-taipei.kktix.cc/events/devfest16",
     "elements": [
       {
-        "name": "student-ticket",
-        "price": 500,
-        "currency": "₴",
-        "starts": "student-ticket-starts",
-        "ends": "student-ticket-ends",
-        "info": "student-ticket-info",
-        "soldOut": false
-      },
-      {
-        "name": "early-ticket",
-        "price": 750,
-        "currency": "₴",
-        "starts": "early-ticket-starts",
-        "ends": "early-ticket-ends",
-        "info": "early-ticket-info",
-        "soldOut": true
-      },
-      {
         "name": "lazy-ticket",
-        "price": 1000,
-        "currency": "₴",
+        "price": 0,
+        "currency": "",
         "starts": "lazy-ticket-starts",
         "ends": "lazy-ticket-ends",
         "soldOut": false
@@ -175,75 +135,63 @@
   "teamPageText": "team-page-text",
   "statistics": [
     {
-      "counter": 600,
+      "counter": 500,
       "caption": "attendees"
-    },
-    {
-      "counter": 2,
-      "caption": "days"
-    },
-    {
-      "counter": 30,
-      "caption": "sessions"
     },
     {
       "counter": 3,
       "caption": "tracks"
+    },
+    {
+      "counter": 15,
+      "caption": "sessions"
+    },
+    {
+      "counter": 2,
+      "caption": "codelabs"
     }
   ],
-  "hashtag": "dfua",
+  "hashtag": "DevFestTP",
   "social": [
     {
       "name": "twitter",
-      "nickname": "GDGLviv",
-      "url": "https://twitter.com/gdglviv"
+      "nickname": "GDGTaipei",
+      "url": "https://twitter.com/Taipei_GTUG"
     },
     {
       "name": "gplus",
-      "nickname": "102444623953913144164",
-      "url": "https://plus.google.com/102444623953913144164"
+      "nickname": "",
+      "url": "https://plus.google.com/communities/100566773212437391191"
     },
     {
       "name": "facebook",
-      "nickname": "GDGLviv",
-      "url": "https://www.facebook.com/GDGLviv"
+      "nickname": "GDGTaipei",
+      "url": "https://www.facebook.com/GDGTaipei"
     },
     {
       "name": "linkedin",
-      "nickname": "google-developers-group-lviv",
-      "url": "https://www.linkedin.com/company/google-developers-group-lviv"
+      "nickname": "google-developers-group-taipei",
+      "url": "https://www.linkedin.com/company/480844"
     }
   ],
   "tweetsSource": "/data/tweets.json",
-  "gallery": {
-    "albumUrl": "https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1",
-    "photos": {
-      "big": "/images/backgrounds/2015_1.jpg",
-      "small": [
-        "/images/backgrounds/2015_2.jpg",
-        "/images/backgrounds/2015_3.jpg"
-      ]
-    }
-  },
   "location": {
     "apiKey": "",
-    "link": "https://www.facebook.com/expopivdennij",
+    "link": "https://www.facebook.com/pages/%E5%9C%8B%E7%AB%8B%E5%8F%B0%E7%81%A3%E5%A4%A7%E5%AD%B8%E6%99%AE%E9%80%9A%E6%95%99%E5%AD%B8%E9%A4%A8/194021344011331",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 15
+      "latitude": 25.0185579,
+      "longitude": 121.5367215,
+      "zoom": 16
     },
     "mapCenter": {
-      "latitude": 49.809841,
-      "longitude": 23.982805
+      "latitude": 25.0185579,
+      "longitude": 121.5367215
     },
     "images": [
-      "/images/backgrounds/location_1.jpg",
-      "/images/backgrounds/location_2.jpg",
-      "/images/backgrounds/location_3.jpg"
+      ""
     ]
   },
-  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
+  "videosSessionsUrl": "",
   "callToAction": {
     "videoTitle": "action-title",
     "videoId": "DfMnJAzOFng"
