@@ -67,7 +67,7 @@
   "disqusShortName": "hoverboard-gdg-x",
   "languages": [
     {
-      "name": "繁體中文 (Traditional Chinese)",
+      "name": "中文 (Chinese)",
       "key": "zhtw"
     },
     {
@@ -91,6 +91,11 @@
           "text": "google-developers",
           "url": "https://developers.google.com/",
           "newTab": true
+        },
+        {
+          "text": "df-13",
+          "url": "http://www.taipei-gtug.org/meetings/google-devfest-taipei-2013",
+          "newTab": true
         }
       ]
     },
@@ -101,11 +106,6 @@
           "text": "partnership-proposition",
           "url": "https://drive.google.com/open?id=1fMjo73MyXyR4zWEfoGnDkqARBOJ0xwDMQDcCOAmt28s",
           "newTab": true
-        },
-        {
-          "text": "media-kit",
-          "url": "",
-          "newTab": true
         }
       ]
     }
@@ -114,13 +114,21 @@
     "links": [
       {
         "text": "DevFestTaipei@googlegroups.com",
-        "url": "mailto:http://gdg-taipei.kktix.cc/events/devfest16"
+        "url": "mailto:DevFestTaipei@googlegroups.com"
       }
     ]
   },
   "tickets": {
     "url": "http://gdg-taipei.kktix.cc/events/devfest16",
     "elements": [
+      {
+        "name": "student-ticket",
+        "price": 0,
+        "currency": "",
+        "starts": "student-ticket-starts",
+        "ends": "student-ticket-ends",
+        "soldOut": true
+      },
       {
         "name": "lazy-ticket",
         "price": 0,
