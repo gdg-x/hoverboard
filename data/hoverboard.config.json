@@ -124,7 +124,7 @@
       {
         "name": "student-ticket",
         "price": 0,
-        "currency": "",
+        "currency": "$",
         "starts": "student-ticket-starts",
         "ends": "student-ticket-ends",
         "soldOut": true
@@ -132,7 +132,7 @@
       {
         "name": "lazy-ticket",
         "price": 0,
-        "currency": "",
+        "currency": "$",
         "starts": "lazy-ticket-starts",
         "ends": "lazy-ticket-ends",
         "soldOut": false

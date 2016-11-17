@@ -1,16 +1,5 @@
 [
   {
-    "title": "template-creator",
-    "logos": [
-      {
-        "name": "GDG Lviv",
-        "url": "https://plus.google.com/102444623953913144164",
-        "logoUrl": "../images/logos/gdg-lviv.svg",
-        "width": 170
-      }
-    ]
-  },
-  {
     "title": "general-partner",
     "logos": [
       {
@@ -22,6 +11,17 @@
         "name": "GDG[x]",
         "url": "https://github.com/gdg-x",
         "logoUrl": "../images/logos/gdg-x.svg"
+      }
+    ]
+  },
+  {
+    "title": "template-creator",
+    "logos": [
+      {
+        "name": "GDG Lviv",
+        "url": "https://plus.google.com/102444623953913144164",
+        "logoUrl": "../images/logos/gdg-lviv.svg",
+        "width": 170
       }
     ]
   }
