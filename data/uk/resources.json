@@ -87,6 +87,8 @@
   "continue-reading": "Читати далі",
   "view-presentation": "Переглянути презентацію",
   "view-video": "Переглянути відео",
+  "share": "Поширити",
+  "skills": "Навички",
   "share-with": "Поширити у",
   "quest": "GDG Квест",
   "get-direction": "Як добратися",
@@ -101,4 +103,11 @@
   "skills": "Навички",
   "highlights-video": "Головні моменти",
   "view-highlights-video": "Переглянути головні моменти"
+  "sign-in": "Авторизуватися",
+  "sign-out": "Вийти",
+  "my-schedule": "Мій розклад",
+  "browse-more": "Знайдіть більше подій",
+  "you-should-sign-in": "Залогуйтесь, щоб зберегти сесію",
+  "removed-from-schedule": "Видалено з Мого Розкладу",
+  "added-to-schedule": "Додано в Мій Розклад"
 }

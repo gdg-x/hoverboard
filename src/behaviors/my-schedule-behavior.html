@@ -1,0 +1,56 @@
+<link rel='import' href='../../bower_components/polymer/polymer.html'>
+
+<script>
+  (function () {
+    'use strict';
+
+    HOVERBOARD.MyScheduleBehavior = {
+
+      properties: {
+        app: {
+          type: Object,
+          notify: true
+        }
+      },
+
+      toggleMyScheduleSession: function (e) {
+        e.stopPropagation();
+        e.preventDefault();
+
+        if (!this.app.user) {
+          HOVERBOARD.Elements.Template.$.toast.showMessage(
+            this.localize('you-should-sign-in'), HOVERBOARD.Elements.Template.signIn, this.localize('sign-in'));
+          return;
+        }
+
+        if (!this.online) {
+          return;
+        }
+        var id = e.target.getAttribute('session-id');
+
+        if (this.app.user.sessions && this.app.user.sessions[id]) {
+          this.set('app.user.sessions.'+ id, null);
+          e.target.classList.remove('remove');
+          HOVERBOARD.Elements.Template.$.toast.showMessage(this.localize('removed-from-schedule'));
+        } else {
+          if (!this.app.user.sessions) {
+            this.app.user.sessions = {};
+          }
+          this.set('app.user.sessions.'+ id, true);
+          e.target.classList.add('remove');
+          HOVERBOARD.Elements.Template.$.toast.showMessage(this.localize('added-to-schedule'));
+        }
+      },
+
+      isInMySchedule: function (id) {
+        if (!this.app.user) return false;
+        if (!this.app.user.sessions) {
+          this.app.user.sessions = {};
+        }
+        return !!this.app.user.sessions[id];
+      }
+
+    };
+
+  }());
+</script>
