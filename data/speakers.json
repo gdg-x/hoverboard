@@ -4,87 +4,88 @@
         "featured": "true",
         "name": "Ramadan Abdellah",
         "title": "Software Engineer",
-        "company": "Google",
+        "company": " ",
         "companyLogo": "/images/logos/logo_small.png",
         "country": "Foumban, Cameroun",
         "photoUrl": "/images/people/download.png",
-        "shortBio": "Mete is a Developer Advocate at Google, currently focused on helping developers with Google Cloud...",
-        "bio": "Mete is a Developer Advocate at Google, currently focused on helping developers with Google Cloud Platform. As a long-time Java and a recent C# developer, he likes to compare the two ecosystems. Prior to Google, he worked at Microsoft, Skype, Adobe, EMC, and Nokia building apps and services on various web, mobile and cloud platforms. Originally from Cyprus, he currently lives in Greenwich, not too far away from the prime meridian.",
+        "shortBio": "Ramadan is a software Engineer student, a Lead and co-Organizer of GDG Foumban. Ramadan has great passion and enthusiasm in technology.",
+        "bio": "Ramadan is a software Engineer student, a Lead and co-Organizer of GDG Foumban. Ramadan has great passion and enthusiasm in technology.",
         "tags": [
-            "Cloud",
-            "Compute Engine",
-            "gRPC"
+            "Android",
+            "Progressive Web Apps",
+            "Firebase"
         ],
         "badges": [
-
+            {
+                "name": " GDG",
+                "description": "Android Google Developer",
+                "link": " "
+            }
         ],
         "socials": [
             {
                 "icon": "linkedin",
                 "name": "LinkedIn",
-                "link": "https://www.linkedin.com/in/meteatamel/"
+                "link": "https://www.linkedin.com/in/abdellah-ramadan-5429b1118?trk=hp-identity-name"
             },
             {
                 "icon": "twitter",
                 "name": "Twitter",
-                "link": "https://twitter.com/meteatamel/"
+                "link": "https://twitter.com/ramadanabdel24"
             },
             {
                 "icon": "github",
                 "name": "GitHub",
-                "link": "https://github.com/meteatamel/"
+                "link": "https://github.com/giantthinker/"
             },
              {
                 "icon": "website",
                 "name": "Website",
-                "link": "https://dribbble.com/protechman"
+                "link": "https://medium.com/@ramadanabdel24"
             },
             {
-                "icon": "linkedin",
-                "name": "LinkedIn",
-                "link": "https://linkedin.com/in/protechman"
+                "icon": "gplus",
+                "name": "Google+",
+                "link": "https://plus.google.com/u/0/+AbdellahRamadan"
+            },
+            {
+                "icon": "facebook",
+                "name": "Facebook",
+                "link": "https://www.facebook.com/abdellah.ramadan1"
             }
         ]
     },
     "2": {
         "id": 2,
         "featured": "true",
-        "name": "Njoya Houdi",
-        "title": "Android Evangelist & Developer",
-        "company": "Gett",
+        "name": "Mohammed Moustapha",
+        "title": " ",
+        "company": " ",
         "companyLogo": "/images/logos/logo_small.png",
-        "country": "Tel Aviv, Israel",
+        "country": "Foumban, Cameroon",
         "photoUrl": "/images/people/Houdi.png",
-        "shortBio": "Born with the spirit of an entrepreneur, Yonatan loves to create, build and just do fun stuff in...",
-        "bio": "Born with the spirit of an entrepreneur, Yonatan loves to create, build and just do fun stuff in the technology field.\nYonatan is one of the top Israeli mobile developers, who is also a part of an elite worldwide group of Google Developer Experts.\nHis primary expertise is Android and Mobile UX, but is also friendly to backend technologies and people in general :)\nFounded and led 3 startups in the past, recently received funding for his new startup which is on the make.\nCurrently, Yonatan is taking a part of the startup Gett - the largest on-demand transportation, delivery, and logistics company which already raised more than $500M",
+        "shortBio": " ",
+        "bio": " ",
         "tags": [
-            "Android",
-            "Doze",
-            "Mobile UX",
             "Entrepreneurship"
         ],
         "badges": [
             {
                 "name": " GDG",
-                "description": "Android Google Developer Expert",
-                "link": "https://developers.google.com/experts/people/yonatan-levin.html"
+                "description": " ",
+                "link": ""
             }
         ],
         "socials": [
             {
                 "icon": "facebook",
                 "name": "Facebook",
-                "link": "https://www.facebook.com/levin.yonatan"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/parahall"
+                "link": "https://www.facebook.com/mohamedmoustapha.gbetkom?fref=ts"
             },
             {
                 "icon": "gplus",
                 "name": "Google+",
-                "link": "https://plus.google.com/+YonatanLevin"
+                "link": "https://plus.google.com/u/0/+MohamedMoustaphaNjoyaGbetkom"
             }
         ]
     },
@@ -149,32 +150,6 @@
                 "icon": "gplus",
                 "name": "Google+",
                 "link": "https://plus.google.com/102117493667558776856"
-            }
-        ]
-    },
-    "5": {
-        "id": 5,
-        "featured": true,
-        "name": "Adrian Kajda",
-        "title": "Product Manager/Developer",
-        "company": "Sygic",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Opole, Poland",
-        "photoUrl": "/images/people/download.png",
-        "shortBio": "Creator of Fuelio app. Fuelio was his hooby project started in 2012. Three years later the app wa...",
-        "bio": "Creator of Fuelio app. Fuelio was his hooby project started in 2012. Three years later the app was aquired by Sygic.",
-        "tags": [
-            "Android",
-            "Entrepreneurship"
-        ],
-        "badges": [
-
-        ],
-        "socials": [
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "plus.google.com/+AdrianKajda"
             }
         ]
     },
@@ -299,37 +274,6 @@
                 "icon": "linkedin",
                 "name": "LinkedIn",
                 "link": "https://www.linkedin.com/in/herych"
-            }
-        ]
-    },
-    "9": {
-        "id": 9,
-        "featured": false,
-        "name": "David Mayboroda",
-        "title": "Android Engineer",
-        "company": "SoftServe",
-        "companyLogo": "/images/logos/logo_small.png",
-        "country": "Kyiv, Ukraine",
-        "photoUrl": "/images/people/download.png",
-        "shortBio": "Ex Yandex emproyee. Android enthusiast.",
-        "bio": "Ex-Yandex emploee, currently Android Engineer at SoftServe.",
-        "tags": [
-            "Android",
-            "Dagger 2"
-        ],
-        "badges": [
-
-        ],
-        "socials": [
-            {
-                "icon": "facebook",
-                "name": "Facebook",
-                "link": "https://www.facebook.com/profile.php?id=100008474898785"
-            },
-            {
-                "icon": "github",
-                "name": "GitHub",
-                "link": "https://github.com/dmayboroda"
             }
         ]
     },
@@ -527,33 +471,6 @@
                 "icon": "twitter",
                 "name": "Twitter",
                 "link": "https://twitter.com/CarmenPopoviciu"
-            }
-        ]
-    },
-    "15": {
-        "id": 15,
-        "featured": true,
-        "name": "Sergii Khomenko",
-        "title": "Data Scientist",
-        "company": "Stylight",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Munich, Germany",
-        "photoUrl": "/images/people/download.png",
-        "shortBio": "Data scientist at one of the biggest fashion communities, STYLIGHT. Data analysis and visualisati...",
-        "bio": "Data scientist at one of the biggest fashion communities, STYLIGHT. Data analysis and visualisation hobbyist, working on problems not only in working time, but in free time for fun and personal data visualisations.\n\nSpeaker at different conferences: Berlin Buzzwords 2014, ApacheCon Europe 2014, Puppet Camp London 2015, Munich Developer Camp, Berlin Buzzwords 2015, Tableau Conference on Tour - Berlin 2015, Budapest BI forum 2015, CrunchConf 2015, FOSDEM 2016, PyData Amsterdam 2016",
-        "tags": [
-            "Cloud",
-            "Big Data",
-            "Analytics"
-        ],
-        "badges": [
-
-        ],
-        "socials": [
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/lc0d3r"
             }
         ]
     },

@@ -4,11 +4,18 @@
   },
   "hosting": {
     "public": "build/unbundled",
+    "cleanUrls": true,
     "rewrites": [
       {
         "source": "**",
         "destination": "/index.html"
       }
+    ],
+      "ignore": [
+      "bower.json",
+      "database.rules.json",
+      "firebase.json",
+      "README.md"
     ]
   }
 }

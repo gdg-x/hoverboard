@@ -11,7 +11,7 @@
     "home": {
       "headerSettings": {
         "backgroundColor": "#FF9800",
-        "backgroundImage": "/images/backgrounds/head_background.png",
+        "backgroundImage": "/images/backgrounds/background.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff",
         "video": {
@@ -112,8 +112,8 @@
           "newTab": true
         },
         {
-          "text": "df-13",
-          "url": "http://gdg-devfest-ua.appspot.com/",
+          "text": "past-events",
+          "url": "/past-events/",
           "newTab": true
         },
         {
@@ -243,7 +243,7 @@
     "pointer": {
       "latitude": 5.720460,
       "longitude": 10.901268,
-      "zoom": 10
+      "zoom": 12
     },
     "mapCenter": {
       "latitude": 5.720460,
@@ -255,7 +255,7 @@
       "/images/backgrounds/location_3.jpg"
     ]
   },
-  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
+  "videosSessionsUrl": "https://www.youtube.com/channel/UCU4kkC6QldtsOklSvvijtcg",
   "callToAction": {
     "videoTitle": "action-title",
     "videoId": "DfMnJAzOFng"

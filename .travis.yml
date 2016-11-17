@@ -6,7 +6,18 @@ cache:
   - bower_components
   - "${NVM_PATH}_modules"
 env:
-- CXX=g++-4.8
+  matrix:
+  - CXX=g++-4.8
+  global:
+      secure: Zx7xdj32PpEP+hWX4qdT/MPH7EIMfwP+nuCu1mboVoJwvtQ3lRZHQ390bHyJGVPIcqjLC
+1Q0zpemN2WdM0Q4hrN+8keuF8TOPt+xFp8tsg7NggaQ5XtI/Gv1XWg6Nrp3YldY6nInGm3NSNwjcP1rn
+h57Zdy71qda/xInhQj4zY7TPUqPVKf5po6Y0rcixzXR1DAjAYS9Uu9Qf8KcbW0BR10Vfm3+WtUfhvBTD
+NKUIsnPk384fgr2rXdyDDtlhuZNIlNwefq2S4E6ALmCYfzr8/BBrCWKcLZRCEpPZiSwZmt8+cSGuUTas
+6KgKWaE8ckeL0bAyq1FB/Wi3FQT6tdTrokca+z7Yexl4FimjtLhdya184y2RAO4Hqhp3Yl539KTERkbW
+QVhsrdSBizL+KZcs9yOZ4y87rebb8E3b/kMHeBJHd2JkiwYqO0ll/MoKRbbY3nccUOUxZz3+1eIfsGmr
+WDNGIaEGloMg1u68Ut5Kt886hHF9ZI/vef5xJj+nNLAe2KTATh7QcuPVxeKK53a3L6I16VRCzEnudvFZ
+BLxcBYg+I62QlnPjYKxjXsuc2s8YeqW7rnwbN6v3wlMwhLlWMhsF7PIhLIcxjVTdF2cu0TR+xRZvsp7p
+Y5LBc0LEwigWA08kF1G5egw1lwjQEVfxQtOr1q+RSbVIUTsmK2i1Bo=
 addons:
   apt:
     sources:
