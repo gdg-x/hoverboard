@@ -246,14 +246,14 @@
     "12": {
         "id": 12,
         "featured": true,
-        "name": "John Huang / 黃種熙",
-        "title": "Director",
-        "company": "ASUStek Corporation",
+        "name": "John Huang",
+        "title": "",
+        "company": "ASUSTeK Computer Inc. 華碩電腦",
         "companyLogo": "http://myzen.asus.com/wp-content/uploads/2016/07/asus_logo_ISOI.png",
         "country": "Taipei, Taiwan",
         "photoUrl": "",
         "shortBio": "華碩達文西創新實驗室軟體研發二處處長，目前負責 Zenbo 上層軟體 App 與服務開發",
-        "bio": "",
+        "bio": "Zenbo project 應用軟體開發主管，Zenfone 系列應用軟體開發，Android/Windows Mobile phone 應用軟體開發主管",
         "tags": [
             "Android",
             "Robotics",
