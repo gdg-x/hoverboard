@@ -7,7 +7,7 @@
         "company": "Google Japan",
         "companyLogo": "/images/logos/google.svg",
         "country": "Tokyo, Japan",
-        "photoUrl": "",
+        "photoUrl": "https://pbs.twimg.com/profile_images/378800000672537135/2f5a340d5df2fb9b3baed2b1e22ea660_400x400.jpeg",
         "shortBio": "Takuo is a Developer Relation, Regional Lead at Google, currently focused on helping developers with Google technologies...",
         "bio": "Takuo is a Developer Relation Regional Lead at Google, currently focused on helping developers with Google technologies.",
         "tags": [
@@ -25,16 +25,17 @@
     "2": {
         "id": 2,
         "featured": true,
-        "name": "TBD",
-        "title": "Googler",
+        "name": "Kevin Chiao",
+        "title": "Business Development, Google Play Apps & Games",
         "company": "Google",
         "companyLogo": "/images/logos/google.svg",
-        "country": "TBD",
-        "photoUrl": "",
-        "shortBio": "TBD",
-        "bio": "TBD",
+        "country": "Taipei, Taiwan",
+        "photoUrl": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/7/005/0a5/0a6/067b73f.jpg",
+        "shortBio": "Kevin Chiao 是 Google Play 應用與遊戲在台灣、香港的商務推廣負責人。他致力於提升 Google Play 的開發者營收，拓展營運面向，並參與 Google Play 開發者後台",
+        "bio": "Kevin Chiao 是 Google Play 應用與遊戲在台灣、香港的商務推廣負責人。他致力於提升 Google Play 的開發者營收，拓展營運面向，並參與 Google Play 開發者後台、產品搜尋與曝光等關鍵項目的發展。Kevin 自 2011 年起，就陸續協助過許多優秀的遊戲開發者，當時他還在 OpenFeint 的開發者關係團隊服務，該公司後來已被 GREE 收購。Kevin 在美國加州大學爾灣分校取得了心理學學位，並於 2005 年時以美國海軍陸戰隊中士身份參與了一次前往伊拉克的長期任務。",
         "tags": [
-            "TBD"
+            "Business Development",
+            "Google Play"
         ],
         "badges": [
 
@@ -45,17 +46,17 @@
     },
     "3": {
         "id": 3,
-        "featured": true,
+        "featured": false,
         "name": "TBD",
         "title": "TBD",
-        "company": "Googler",
-        "companyLogo": "/images/logos/google.svg",
-        "country": "Changhwa, Taiwan",
+        "company": "TBD",
+        "companyLogo": "",
+        "country": "TBD",
         "photoUrl": "",
         "shortBio": "TBD",
         "bio": "TBD",
         "tags": [
-            "TBD"
+
         ],
         "badges": [
 
@@ -68,16 +69,16 @@
         "id": 4,
         "featured": false,
         "name": "張景隆",
-        "title": "",
-        "company": "",
-        "companyLogo": "",
+        "title": "Co-organizer",
+        "company": "iOS Dev Club",
+        "companyLogo": "https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-1/c94.0.480.480/p480x480/421243_489616664444085_1423449068_n.png?oh=39bd91458f6238ca065dbd07f2b71b33&oe=588851E8",
         "country": "Taiwan",
-        "photoUrl": "",
-        "shortBio": "",
-        "bio": "",
+        "photoUrl": "https://www.evernote.com/shard/s9/sh/94deb824-7895-44b8-b1c2-a218a74c3013/6c353ef2c2929ece/res/51fd8bd6-6bd4-4bbb-ba62-f461dc24ca95/appletone.jpg?resizeSmall&width=832",
+        "shortBio": "2015/16年臺大黑客松評審/講者、2014 MOPCON 講者、熱門軟體 CWMoney 開發者",
+        "bio": "曾在 2015/16年擔任臺大黑客松評審/講者，也曾經在台中榮總、東海大學、資策會、教育部、HackNTU...等單位擔任講師，在 iOS 領域上有突出表現。",
         "tags": [
-            "iOS",
-            "Firebase"
+            "Firebase",
+            "iOS"
         ],
         "badges": [
 
@@ -90,15 +91,15 @@
         "id": 5,
         "featured": false,
         "name": "Aki",
-        "title": "",
-        "company": "",
+        "title": "Founder",
+        "company": "iOS @ Taipei",
         "companyLogo": "",
         "country": "Taiwan",
-        "photoUrl": "",
+        "photoUrl": "https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/10543650_10152573500782451_6143852327074234396_n.jpg?oh=71b60f2d0c742237278555e4bef7d4cf&oe=58C8ACE0",
         "shortBio": "",
         "bio": "",
         "tags": [
-            "TBD"
+            "iOS"
         ],
         "badges": [
 
@@ -132,12 +133,12 @@
         "id": 7,
         "featured": false,
         "name": "Andy",
-        "title": "",
-        "company": "",
-        "companyLogo": "",
-        "country": "Taiwan",
-        "photoUrl": "",
-        "shortBio": "",
+        "title": "Full-Stack Engineer",
+        "company": "QNAP System Inc.",
+        "companyLogo": "https://download.qnap.com/Origin/i/images/q_logo.jpg",
+        "country": "Taipei, Taiwan",
+        "photoUrl": "https://lh3.googleusercontent.com/PjtLz_h8CN6tTJTGlQ6vXMPCrxnquPWLdsmzbRKYfG8-PQTLZmTHbQSwuWoqgwN2NNTu2BC5FeVSRrE=w2880-h1554",
+        "shortBio": "QNAP 全端攻城獅",
         "bio": "",
         "tags": [
             "Cloud"
@@ -152,12 +153,12 @@
     "8": {
         "id": 8,
         "featured": true,
-        "name": "Evan Lin",
+        "name": "Evan Lin 林宜鋒",
         "title": "Cloud Architect",
         "company": "Linker Networks",
         "companyLogo": "",
         "country": "Taipei, Taiwan",
-        "photoUrl": "https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/11822616_10205620897855546_701112722031919314_n.jpg?oh=6fc1b93373f451def14aa0b2e6cd61ae&oe=58D09141",
+        "photoUrl": "http://confapi.ithome.com.tw/sites/default/files/speaker_avatar/%E6%9E%97%E5%AE%9C%E9%8B%92Evan_%E7%B6%B2%E7%AB%99%E7%94%A8.PNG",
         "shortBio": "Cloud Architect at Linker Networks, Co-organizer of Golang Taiwan User Group.",
         "bio": "Cloud Architect at Linker Networks, Co-organizer of Golang Taiwan User Group.",
         "tags": [
@@ -203,13 +204,13 @@
         "id": 10,
         "featured": true,
         "name": "Araon Lai",
-        "title": "",
-        "company": "",
+        "title": "Data Scientist",
+        "company": "GliaCloud",
         "companyLogo": "",
         "country": "Taipei, Taiwan",
-        "photoUrl": "",
-        "shortBio": "",
-        "bio": "",
+        "photoUrl": "https://lh4.googleusercontent.com/1MzoVFxc7SHFczUaY_fq_ItnvcAvzAgEG6wdoCmE0eYBAdNwjac6RFftsMki2E0OGAM4fEu3ngLT4GM=w2880-h1554",
+        "shortBio": "Yi-An Lai is a Data Scientist in GliaCloud and participates in the core development of GliaStudio, an artificial intelligence video creation platform.",
+        "bio": "Yi-An Lai is a Data Scientist in GliaCloud and participates in the core development of GliaStudio, an artificial intelligence video creation platform. Yi-An Lai has broad interests in Machine Learning, Deep Learning, and Recommender systems. He is also a travel lover.",
         "tags": [
             "Cloud"
         ],
@@ -223,13 +224,13 @@
     "11": {
         "id": 11,
         "featured": true,
-        "name": "Akane",
-        "title": "UI/UX Designer",
+        "name": "Akane Lee",
+        "title": "嫁給 RD 的 UI Designer",
         "company": "",
         "companyLogo": "",
         "country": "Taipei, Taiwan",
-        "photoUrl": "",
-        "shortBio": "",
+        "photoUrl": "https://blog.akanelee.me/avatar.png",
+        "shortBio": "擅長 UI/UX/Web 設計，還有嘴砲",
         "bio": "",
         "tags": [
             "UI/UX",
@@ -248,10 +249,10 @@
         "name": "John Huang / 黃種熙",
         "title": "Director",
         "company": "ASUStek Corporation",
-        "companyLogo": "",
+        "companyLogo": "http://myzen.asus.com/wp-content/uploads/2016/07/asus_logo_ISOI.png",
         "country": "Taipei, Taiwan",
         "photoUrl": "",
-        "shortBio": "",
+        "shortBio": "華碩達文西創新實驗室軟體研發二處處長，目前負責 Zenbo 上層軟體 App 與服務開發",
         "bio": "",
         "tags": [
             "Android",
@@ -294,15 +295,15 @@
         "id": 14,
         "featured": true,
         "name": "Mosky Liu / 劉依語",
-        "title": "",
-        "company": "",
+        "title": "Python Charmer",
+        "company": "Pinkoi",
         "companyLogo": "",
         "country": "Taipei, Taiwan",
-        "photoUrl": "",
-        "shortBio": "",
-        "bio": "",
+        "photoUrl": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAhKAAAAJGJjOGIzMjJjLWMwOWQtNDM3MC1iYzEwLTJmYWEyNTg2YzE5NQ.jpg",
+        "shortBio": "Mosky 是 Pinkoi 的 Python Charmer，和同事一起打造能夠買到特別禮物的購物平台，也是個熱愛 open source 精神的 Python 工程師。",
+        "bio": "Mosky 是 Pinkoi 的 Python Charmer，和同事一起打造能夠買到特別禮物的購物平台，也是個熱愛 open source 精神的 Python 工程師。同時有在教授 Python 課程，也擁有數個 Python 專案，例如 ZIPCodeTW、Clime 與 MoSQL。也曾在數場研討會分享過，包含臺灣的 PyCon、COSCUP、TEDxNTUST，以及在日本、新加坡、香港、韓國等地的 PyCon。more: mosky.tw",
         "tags": [
-
+            "Python"
         ],
         "badges": [
 
