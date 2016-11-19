@@ -18,9 +18,14 @@
         "logoUrl": "../images/logos/gdg-x.svg"
       },
       {
-        "name": "ASUSTek Computer Inc.",
+        "name": "ASUSTek Computer Inc. / 華碩電腦",
         "url": "https://zenbo.asus.com/tw/",
         "logoUrl": "../images/logos/ASUS_Logo.png"
+      },
+      {
+        "name": "HTC Corporation / 宏達國際電子",
+        "url": "http://www.htc.com/tw/",
+        "logoUrl": "http://logos-download.com/wp-content/uploads/2016/03/HTC_logo.png"
       }
     ]
   },

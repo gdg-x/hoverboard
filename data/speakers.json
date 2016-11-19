@@ -47,14 +47,14 @@
     "3": {
         "id": 3,
         "featured": false,
-        "name": "TBD",
-        "title": "TBD",
-        "company": "TBD",
+        "name": "",
+        "title": "",
+        "company": "",
         "companyLogo": "",
-        "country": "TBD",
+        "country": "",
         "photoUrl": "",
-        "shortBio": "TBD",
-        "bio": "TBD",
+        "shortBio": "",
+        "bio": "",
         "tags": [
 
         ],
@@ -67,7 +67,7 @@
     },
     "4": {
         "id": 4,
-        "featured": false,
+        "featured": true,
         "name": "張景隆",
         "title": "Co-organizer",
         "company": "iOS Dev Club",
@@ -81,7 +81,11 @@
             "iOS"
         ],
         "badges": [
-
+            {
+                "name": "iOS Dev Club",
+                "description": "Co-organizer of iOS Dev Club",
+                "link": ""
+            }
         ],
         "socials": [
 
@@ -89,7 +93,7 @@
     },
     "5": {
         "id": 5,
-        "featured": false,
+        "featured": true,
         "name": "Aki",
         "title": "Founder",
         "company": "iOS @ Taipei",
@@ -125,7 +129,7 @@
         "shortBio": "",
         "bio": "",
         "tags": [
-            "TBD"
+
         ],
         "badges": [
 
@@ -136,7 +140,7 @@
     },
     "7": {
         "id": 7,
-        "featured": false,
+        "featured": true,
         "name": "Andy",
         "title": "Full-Stack Engineer",
         "company": "QNAP System Inc.",
@@ -177,7 +181,7 @@
             {
                 "name": "Golang Taiwan User Group",
                 "description": "Co-organizer",
-                "link": ""
+                "link": "https://www.facebook.com/groups/269001993248363/"
             }
         ],
         "socials": [
@@ -199,7 +203,11 @@
             "Android"
         ],
         "badges": [
-
+            {
+                "name": "TADSG",
+                "description": "Member of Taiwan Android Developer Study Group / 台灣 Android 開發者讀書會",
+                "link": "https://www.facebook.com/groups/523386591081376/"
+            }
         ],
         "socials": [
 
@@ -253,7 +261,7 @@
         "featured": true,
         "name": "John Huang",
         "title": "Division Director",
-        "company": "ASUSTeK Computer Inc. 華碩電腦",
+        "company": "ASUSTeK Computer Inc. / 華碩電腦",
         "companyLogo": "http://myzen.asus.com/wp-content/uploads/2016/07/asus_logo_ISOI.png",
         "country": "Taipei, Taiwan",
         "photoUrl": "../images/people/ASUS_JOHN.JPG",
@@ -268,7 +276,7 @@
             {
                 "name": "ASUS",
                 "description": "ASUSTeK Computer Inc.",
-                "link": ""
+                "link": "https://zenbo.asus.com/tw/"
             }
         ],
         "socials": [
@@ -281,7 +289,7 @@
         "name": "Andrew Chen / 陳勇志",
         "title": "",
         "company": "Android Taipei 開發者社群",
-        "companyLogo": "",
+        "companyLogo": "https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-0/c0.74.480.270/p480x480/11038653_981430325243344_7312510889302594364_n.jpg?oh=e89b6c4a90cf977cbf3565bf2324f1ed&oe=58C2F72A",
         "country": "Taipei, Taiwan",
         "photoUrl": "https://scontent-tpe1-1.xx.fbcdn.net/t31.0-8/13735823_10153955843069118_6923480853648942927_o.jpg",
         "shortBio": "",
@@ -290,7 +298,11 @@
             "Android"
         ],
         "badges": [
-
+          {
+              "name": "Android Taipei",
+              "description": "Android Taipei 開發者社群",
+              "link": "https://www.facebook.com/groups/AndroidTaipei/"
+          }
         ],
         "socials": [
 
@@ -323,7 +335,7 @@
         "name": "Cooper",
         "title": "",
         "company": "HTC Corporation / 宏達國際電子",
-        "companyLogo": "",
+        "companyLogo": "http://logos-download.com/wp-content/uploads/2016/03/HTC_logo.png",
         "country": "Taipei, Taiwan",
         "photoUrl": "",
         "shortBio": "",
@@ -361,7 +373,8 @@
         "badges": [
             {
                 "name": "TADSG",
-                "description": "Member of Taiwan Android Developer Study Group / 台灣 Android 開發者讀書會"
+                "description": "Member of Taiwan Android Developer Study Group / 台灣 Android 開發者讀書會",
+                "link": "https://www.facebook.com/groups/523386591081376/"
             }
         ],
         "socials": [
@@ -387,31 +400,8 @@
         "badges": [
             {
                 "name": "TADSG",
-                "description": "Member of Taiwan Android Developer Study Group / 台灣 Android 開發者讀書會"
-            }
-        ],
-        "socials": [
-
-        ]
-    },
-    "18": {
-        "id": 18,
-        "featured": true,
-        "name": "Takuma Lee / 李思諒",
-        "title": "Senior Android Developer",
-        "company": "Taiwan Android Developer Study Group / 台灣 Android 開發者讀書會",
-        "companyLogo": "../images/logos/TADSG_logo.png",
-        "country": "Taipei, Taiwan",
-        "photoUrl": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAOaAAAAJDJkOGYzOTNmLWU1OTktNGIxNS1hYjM5LTQyOTY3ZTVjZDc2NA.jpg",
-        "shortBio": "Founder of TADSG, Android enthusiast.",
-        "bio": "Founder of TADSG, Android enthusiast.",
-        "tags": [
-            "Android"
-        ],
-        "badges": [
-            {
-                "name": "TADSG",
-                "description": "Founder of Taiwan Android Developer Study Group / 台灣 Android 開發者讀書會創辦人"
+                "description": "Co-organizer of Taiwan Android Developer Study Group / 台灣 Android 開發者讀書會",
+                "link": "https://www.facebook.com/groups/523386591081376/"
             }
         ],
         "socials": [
