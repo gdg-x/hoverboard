@@ -1,13 +1,13 @@
 {
   "140": {
     "id": 140,
-    "title": "N/A 無議程",
-    "description": "Not available 場地無法使用"
+    "title": "",
+    "image": "/images/backgrounds/gray.png"
   },
   "139": {
     "id": 139,
-    "title": "N/A 無議程",
-    "description": "Not available 場地無法使用"
+    "title": "",
+    "image": "/images/backgrounds/gray.png"
   },
   "138": {
     "id": 138,
@@ -27,8 +27,8 @@
   },
   "135": {
     "id": 135,
-    "title": "N/A 無議程",
-    "description": "Not available 場地無法使用"
+    "title": "",
+    "image": "/images/backgrounds/gray.png"
   },
   "134": {
     "id": 134,
@@ -66,16 +66,10 @@
   },
   "128": {
     "id": 128,
-    "title": "Android Wear 2.0: Great Changes Upcoming this Fall",
-    "description": "Google announced Android Wear 2.0 become available this Fall. This major update brings some revolutionary changes in platform, that should change our approaches in developing wearable apps, including freedom of BLE tethering, system support for complications and activity recognition by GoogleFit, developed mainly for Android Wear 2.0. We will talk deeper about these new features and look at some ways to implement them in the code.",
-    "speakers": [
-      25
-    ],
-    "language": "English",
-    "complexity": "Beginner",
-    "tags": [
-      "Android"
-    ]
+    "title": "Opening / 開場活動",
+    "description": "Official start of the conference. Greetings from the organizers, sponsors and partners. / 活動開場，介紹贊助商與合作夥伴",
+    "language": "中文",
+    "image": "/images/backgrounds/opening.jpg"
   },
   "127": {
     "id": 127,
