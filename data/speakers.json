@@ -257,12 +257,12 @@
         "companyLogo": "http://myzen.asus.com/wp-content/uploads/2016/07/asus_logo_ISOI.png",
         "country": "Taipei, Taiwan",
         "photoUrl": "../images/people/ASUS_JOHN.JPG",
-        "shortBio": "華碩達文西創新實驗室軟體研發二處處長，目前負責 Zenbo 上層軟體 App 與服務開發",
+        "shortBio": "華碩達文西創新實驗室，目前負責 Zenbo 上層軟體 App 與服務開發",
         "bio": "Zenbo project 應用軟體開發主管，Zenfone 系列應用軟體開發，Android/Windows Mobile phone 應用軟體開發主管",
         "tags": [
             "Android",
             "Robotics",
-            "Linux"
+            "Developing Tools"
         ],
         "badges": [
             {
