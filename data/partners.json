@@ -1,16 +1,26 @@
 [
   {
-    "title": "general-partner",
+    "title": "main-sponsor",
     "logos": [
       {
         "name": "Google",
         "url": "https://www.google.com/intl/en/about/",
         "logoUrl": "../images/logos/google.svg"
-      },
+      }
+    ]
+  },
+  {
+    "title": "general-partner",
+    "logos": [
       {
         "name": "GDG[x]",
         "url": "https://github.com/gdg-x",
         "logoUrl": "../images/logos/gdg-x.svg"
+      },
+      {
+        "name": "ASUSTek Computer Inc.",
+        "url": "https://zenbo.asus.com/tw/",
+        "logoUrl": "../images/logos/ASUS_Logo.png"
       }
     ]
   },
