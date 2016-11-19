@@ -94,15 +94,20 @@
         "title": "Founder",
         "company": "iOS @ Taipei",
         "companyLogo": "",
-        "country": "Taiwan",
-        "photoUrl": "https://scontent-tpe1-1.xx.fbcdn.net/v/t1.0-9/10543650_10152573500782451_6143852327074234396_n.jpg?oh=71b60f2d0c742237278555e4bef7d4cf&oe=58C8ACE0",
-        "shortBio": "",
-        "bio": "",
+        "country": "Taipei, Taiwan",
+        "photoUrl": "https://dl.dropboxusercontent.com/u/81233286/head.jpg",
+        "shortBio": "iOS@Taipei 社群創辦人",
+        "bio": "iOS@Taipei 社群創辦人，曾在 2015/16年擔任臺大黑客松評審、2016新北青創駭客松評審",
         "tags": [
+            "Android",
             "iOS"
         ],
         "badges": [
-
+            {
+              "name": "iOS@Taipei",
+              "description": "Founder of iOS @ Taipei / iOS @ Taipei 社群創辦人",
+              "link": "https://www.facebook.com/groups/ios.taipei/"
+            }
         ],
         "socials": [
 
