@@ -316,7 +316,7 @@
         "company": "Pinkoi",
         "companyLogo": "http://cdn04.pinkoi.com/pinkoi.site/logo/logo_20160510_zh_TW.png",
         "country": "Taipei, Taiwan",
-        "photoUrl": "https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAhKAAAAJGJjOGIzMjJjLWMwOWQtNDM3MC1iYzEwLTJmYWEyNTg2YzE5NQ.jpg",
+        "photoUrl": "../images/people/mosky_liu.jpg",
         "shortBio": "Mosky 是 Pinkoi 的 Python Charmer，和同事一起打造能夠買到特別禮物的購物平台，也是個熱愛 open source 精神的 Python 工程師。",
         "bio": "Mosky 是 Pinkoi 的 Python Charmer，和同事一起打造能夠買到特別禮物的購物平台，也是個熱愛 open source 精神的 Python 工程師。同時有在教授 Python 課程，也擁有數個 Python 專案，例如 ZIPCodeTW、Clime 與 MoSQL。也曾在數場研討會分享過，包含臺灣的 PyCon、COSCUP、TEDxNTUST，以及在日本、新加坡、香港、韓國等地的 PyCon。more: mosky.tw",
         "tags": [
