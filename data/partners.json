@@ -1,12 +1,11 @@
 [
   {
-    "title": "template-creator",
+    "title": "main-sponsor",
     "logos": [
       {
-        "name": "GDG Lviv",
-        "url": "https://plus.google.com/102444623953913144164",
-        "logoUrl": "../images/logos/gdg-lviv.svg",
-        "width": 170
+        "name": "Google",
+        "url": "https://www.google.com/intl/en/about/",
+        "logoUrl": "../images/logos/google.svg"
       }
     ]
   },
@@ -14,59 +13,25 @@
     "title": "general-partner",
     "logos": [
       {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
-      },
-      {
         "name": "GDG[x]",
         "url": "https://github.com/gdg-x",
         "logoUrl": "../images/logos/gdg-x.svg"
       },
       {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
-      },
+        "name": "ASUSTek Computer Inc.",
+        "url": "https://zenbo.asus.com/tw/",
+        "logoUrl": "../images/logos/ASUS_Logo.png"
+      }
+    ]
+  },
+  {
+    "title": "template-creator",
+    "logos": [
       {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/logos/gdg-x.svg"
-      },
-      {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
-      },
-      {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/logos/gdg-x.svg"
-      },
-      {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
-      },
-      {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/logos/gdg-x.svg"
-      },
-      {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
-      },
-      {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/logos/gdg-x.svg"
-      },
-      {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
+        "name": "GDG Lviv",
+        "url": "https://plus.google.com/102444623953913144164",
+        "logoUrl": "../images/logos/gdg-lviv.svg",
+        "width": 170
       }
     ]
   }
