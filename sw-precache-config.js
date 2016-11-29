@@ -1,4 +1,5 @@
 module.exports = {
+  cacheId: 'v1',
   staticFileGlobs: [
     '/index.html',
     '/manifest.json',

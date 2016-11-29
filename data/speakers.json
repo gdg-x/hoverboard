@@ -212,6 +212,68 @@
       "name": "GitHub",
       "link": "https://github.com/ladyleet"
     }]
+  },
+
+  "82": {
+    "id": 82,
+    "featured": true,
+    "name": "Brecht Billiet",
+    "title": "Trainer",
+    "company": "Strongbrew",
+    "companyLogo": "",
+    "country": "Belgium",
+    "photoUrl": "/images/people/BrechtBilliet.jpg",
+    "shortBio": "Brecht is a trainer, blogger and software engineer passionate about architecture and best-practices. Brecht uses the technologies that he teaches in his workshops on a daily basis in different projects. One of his main activities is kickstarting new Angular projects in companies and guiding them in the right direction.",
+    "bio": "Brecht is a trainer, blogger and software engineer passionate about architecture and best-practices. Brecht uses the technologies that he teaches in his workshops on a daily basis in different projects. One of his main activities is kickstarting new Angular projects in companies and guiding them in the right direction.",
+    "tags": [
+      "RxJS",
+      "Angular 2"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "website",
+      "name": "Website",
+      "link": "http://www.brecht.io/"
+    }, {
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/brechtbilliet"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "https://github.com/strongbrewio"
+    }]
+  },
+
+  "83": {
+    "id": 83,
+    "featured": true,
+    "name": "Kwinten Pisman",
+    "title": "Mentor",
+    "company": "Strongbrew",
+    "companyLogo": "",
+    "country": "Belgium",
+    "photoUrl": "/images/people/KwintenPisman.jpg",
+    "shortBio": "Kwinten is a highly motivated developer with a passion for the fast changing front end world. He mainly focusses on Angular 2 and RxJS nowadays and transfers his knowledge to other developers through intensive coaching and workshops.",
+    "bio": "Kwinten is a highly motivated developer with a passion for the fast changing front end world. He mainly focusses on Angular 2 and RxJS nowadays and transfers his knowledge to other developers through intensive coaching and workshops.",
+    "tags": [
+      "RxJS",
+      "Angular 2"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "website",
+      "name": "Website",
+      "link": "http://blog.kwintenp.com/"
+    }, {
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/KwintenP"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "https://github.com/strongbrewio"
+    }]
   }
 
 

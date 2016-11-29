@@ -2,7 +2,10 @@
     "date": "2017-02-11",
     "dateReadable": "February 11",
     "tracks": [{
-        "title": "Main Hall"
+        "title": "Room: Bifrost"
+    },
+    {
+        "title": "Room: Valhalla"
     }],
     "timeslots": [{
         "startTime": "08:00",
@@ -26,25 +29,29 @@
         "startTime": "09:50",
         "endTime": "10:25",
         "sessions": [
-            [11]
+            [11],
+            [999]
         ]
     }, {
         "startTime": "10:25",
         "endTime": "11:00",
         "sessions": [
-            [12]
+            [12],
+            [999]
         ]
     }, {
         "startTime": "11:00",
         "endTime": "11:35",
         "sessions": [
-            [13]
+            [13],
+            [999]
         ]
     }, {
         "startTime": "11:35",
         "endTime": "12:10",
         "sessions": [
-            [14]
+            [14],
+            [999]
         ]
     }, {
         "startTime": "12:10",
@@ -74,12 +81,14 @@
         "startTime": "14:15",
         "endTime": "14:50",
         "sessions": [
-            [15]
+            [15],
+            [999]
         ]
     }, {
         "startTime": "14:50",
         "endTime": "15:25",
         "sessions": [
+            [999],
             [999]
         ]
     }, {
@@ -92,18 +101,21 @@
         "startTime": "16:00",
         "endTime": "16:35",
         "sessions": [
+            [999],
             [999]
         ]
     }, {
         "startTime": "16:35",
         "endTime": "17:10",
         "sessions": [
+            [999],
             [999]
         ]
     }, {
         "startTime": "17:10",
         "endTime": "17:50",
         "sessions": [
+            [999],
             [999]
         ]
     }, {
@@ -128,6 +140,8 @@
         "title": "Workshops room #2"
     }, {
         "title": "Workshops room #3"
+    }, {
+        "title": "Workshops room #4"
     }],
     "timeslots": [{
         "startTime": "09:30",
@@ -140,7 +154,8 @@
         "endTime": "17:00",
         "sessions": [
             [81],
-            [887],
+            [82],
+            [888],
             [888]
         ]
     }]

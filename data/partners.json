@@ -16,6 +16,11 @@
         "name": "Opbeat",
         "url": "https://opbeat.com/",
         "logoUrl": "../images/logos/opbeat.png"
+      },
+      {
+        "name": "Jayway",
+        "url": "https://www.jayway.com/",
+        "logoUrl": "../images/logos/jayway.png"
       }
     ]
   },

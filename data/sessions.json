@@ -112,6 +112,20 @@
         "complexity": "Advanced"
     },
 
+    "82": {
+        "id": 82,
+        "title": "Reactive applications with Angular2, Rxjs and @ngrx",
+        "description": " During this workshop you will have the newest technologies explained to you. This is not a basic Angular 2 workshop. Instead we will focus on the hard parts of creating a scalable application that is maintainable and snappy. We will teach you how to use Smart vs Dumb components, RxJS, NGRX/Store and much more in real world applications. The focus lies on principles, architectural choices and best practices. And of course CODING! We do this by switching theory with coding sessions where you have to code parts of the application yourself. We refactor a non-reactive application towards a reactive application during the workshop. At the end, we will demonstrate the flexibility of the application by making it realtime in only 6 lines of code!",
+        "speakers": [
+            82, 83
+        ],
+        "tags": [
+            "RxJS",
+            "Angular 2"
+        ],
+        "complexity": "Advanced"
+    },
+
 
     "11": {
         "id": 11,
