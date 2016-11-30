@@ -64,5 +64,11 @@
     "title": "New Data Architecture in Angular 2",
     "speakers": "Gerard Sans, AngularZone",
     "thumbnail": "/images/sessions/gerard.jpg"
+  },
+  {
+    "youtubeId": "qK7ysoohsaM",
+    "title": "Fuelio Success story",
+    "speakers": "Adrian Kajda, Sygic",
+    "thumbnail": "/images/sessions/adrian.jpg"
   }
 ]
