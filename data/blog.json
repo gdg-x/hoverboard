@@ -25,5 +25,14 @@
     "secondaryColor": "#012250",
     "image": "images/backgrounds/speakers.jpg",
     "brief": "ngVikings 2017 team is proud to announce the first part of our speaker lineup"
-  }
+  },
+  {
+      "id": "ticket-sales",
+      "title": "We start the ticket sales!",
+      "posted": "2016-11-30",
+      "primaryColor": "#012250",
+      "secondaryColor": "#012250",
+      "image": "images/backgrounds/team.jpg",
+      "brief": "The prices start from 500DKK for the Student ticket (excl. MVA)"
+    }
 ]

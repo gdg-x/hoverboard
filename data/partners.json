@@ -28,6 +28,11 @@
     "title": "partners",
     "logos": [
       {
+        "name": "Google Developers",
+        "url": "https://developers.google.com/",
+        "logoUrl": "../images/logos/google.png"
+      },
+      {
         "name": "IT University of Copenhagen",
         "url": "https://www.itu.dk/",
         "logoUrl": "../images/logos/itu.png"

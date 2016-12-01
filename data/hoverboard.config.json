@@ -121,15 +121,33 @@
     ]
   },
   "tickets": {
-    "url": "http://ngvikings.eventbrite.com",
+    "url": "https://ti.to/ngvikings/2017/",
     "elements": [
       {
+        "name": "student-ticket",
+        "price": "500",
+        "currency": "DKK",
+        "starts": "student-ticket-starts",
+        "ends": "student-ticket-ends",
+        "info": "student-ticket-info",
+        "soldOut": false
+      },
+      {
         "name": "early-ticket",
-        "price": "Soon",
-        "currency": "!",
+        "price": "1000",
+        "currency": "DKK",
         "starts": "early-ticket-starts",
         "ends": "early-ticket-ends",
         "info": "early-ticket-info",
+        "soldOut": false
+      },
+      {
+        "name": "workshop-ticket",
+        "price": "2000",
+        "currency": "DKK",
+        "starts": "workshop-ticket-starts",
+        "ends": "workshop-ticket-ends",
+        "info": "workshop-ticket-info",
         "soldOut": false
       }
     ]

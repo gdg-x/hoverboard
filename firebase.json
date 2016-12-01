@@ -19,11 +19,20 @@
     ],
     "headers": [
       {
-        "source": "**/*.@(css|html|js|json|txt|xml|markdown|pdf)",
+        "source": "service-worker.js",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=315360000"
+            "value": "max-age=0"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(css|html|json|txt|xml|markdown|pdf)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=7200"
           }
         ]
       },
@@ -32,7 +41,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=315360000"
+            "value": "max-age=7200"
           }
         ]
       },

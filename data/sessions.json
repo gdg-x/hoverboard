@@ -189,6 +189,19 @@
             "Angular Material 2",
             "Angular 2"
         ]
+    },
+
+    "16": {
+        "id": 16,
+        "title": "Angular 2 outside of a browser",
+        "description": "This is a overview of the Angular Universal project I contribute to which aims to add support for Server-Side-Rendering (SSR) to Angular 2 apps. In other words, with Universal you will be able to render your Angular 2 application both on the client and the server.",
+        "speakers": [
+            16
+        ],
+        "tags": [
+            "Angular Universal",
+            "Angular 2"
+        ]
     }
 
 }
