@@ -96,7 +96,7 @@
         cursor: default;
       }
 
-      .session[wide] .action-icon.remove-circle {
+      .session[wide] .action-icon.calendar-check {
         opacity: 1;
       }
 
@@ -202,7 +202,7 @@
             <template is="dom-if" if="[[!app.user.uid]]">
               <iron-icon
                 class="action-icon add-icon-outline"
-                icon="add-circle-outline"
+                icon="calendar-plus"
                 on-tap="toggleMyScheduleSession"
                 disabled$="[[!online]]"
               ></iron-icon>
@@ -274,7 +274,7 @@
 
           myScheduleIcon: {
             type: String,
-            value: 'add-circle-outline'
+            value: 'calendar-plus'
           }
         },
 
@@ -299,7 +299,7 @@
         },
 
         _getMyScheduleIcon: function (id) {
-          this.myScheduleIcon = this.isInMySchedule(id) ? 'remove-circle' : 'add-circle-outline';
+          this.myScheduleIcon = this.isInMySchedule(id) ? 'calendar-check' : 'calendar-plus';
         },
 
         _userUpdated: function (user) {
