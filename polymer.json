@@ -11,7 +11,7 @@
     "src/pages/speakers-page.html",
     "src/pages/team-page.html"
   ],
-  "sources": [
+  "sourceGlobs": [
     "data/**/*",
     "images/**/*",
     "scripts/**/*",
@@ -20,6 +20,7 @@
     "manifest.json"
   ],
   "includeDependencies": [
+    "manifest.json",
     "bower_components/webcomponentsjs/webcomponents-lite.min.js"
   ]
 }
