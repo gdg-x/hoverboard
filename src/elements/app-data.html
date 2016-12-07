@@ -6,7 +6,7 @@
 <dom-module id="app-data">
   <template>
     <iron-ajax auto url="[[configSource]]" handle-as="json" last-response="{{app.data}}"></iron-ajax>
-    <iron-ajax auto url="[[speakersSource]]" handle-as="json" last-response="{{_speakersRaw}}"></iron-ajax>
+    <iron-ajax auto url="[[speakersSource]]" handle-as="json" last-response="{{_speakersRaw}}" on-response="_updateSpeakers"></iron-ajax>
     <iron-ajax auto url="[[sessionsSource]]" handle-as="json" last-response="{{sessions}}"></iron-ajax>
     <iron-ajax auto url="[[postsSource]]" handle-as="json" on-response="_reversePosts"></iron-ajax>
     <iron-ajax auto url="[[partnersSource]]" handle-as="json" last-response="{{app.partners}}"></iron-ajax>
@@ -105,6 +105,7 @@
         },
 
         _generateSchedule: function () {
+          if (!Object.keys(this._speakersRaw).length || !Object.keys(this.sessions).length || !this._scheduleRaw.length) return;
           this._scheduleRaw.tags = [];
           for (var i = 0, scheduleLen = this._scheduleRaw.length; i < scheduleLen; i++) {
             var day = this._scheduleRaw[i];
@@ -167,6 +168,10 @@
             difference = Math.floor((timeEnd - timeStart) / totalNumber),
             result = new Date(timeStart + difference * number);
           return result.getHours() + ':' + result.getMinutes();
+        },
+
+        _updateSpeakers: function () {
+          this.set('speakers', this._speakersRaw);
         },
 
         _reversePosts: function (response) {

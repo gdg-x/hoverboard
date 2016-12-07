@@ -29,15 +29,13 @@
         var id = e.target.getAttribute('session-id');
 
         if (this.app.user.sessions && this.app.user.sessions[id]) {
-          this.set('app.user.sessions.'+ id, null);
-          e.target.classList.remove('remove');
+          this.set('app.user.sessions.' + id, null);
           HOVERBOARD.Elements.Template.$.toast.showMessage(this.localize('removed-from-schedule'));
         } else {
           if (!this.app.user.sessions) {
             this.app.user.sessions = {};
           }
-          this.set('app.user.sessions.'+ id, true);
-          e.target.classList.add('remove');
+          this.set('app.user.sessions.' + id, true);
           HOVERBOARD.Elements.Template.$.toast.showMessage(this.localize('added-to-schedule'));
         }
       },

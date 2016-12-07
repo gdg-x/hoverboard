@@ -134,7 +134,8 @@
     "tags": [
       "Android"
     ],
-    "presentation":"https://speakerdeck.com/gdglviv/michael-pustovit-android-hacking-for-dummies-if-operator-demolytion"
+    "presentation":"https://speakerdeck.com/gdglviv/michael-pustovit-android-hacking-for-dummies-if-operator-demolytion",
+    "videoId": "We04nyIIsA0"
   },
   "125": {
     "id": 125,
@@ -160,7 +161,8 @@
     "complexity": "Intermediate",
     "tags": [
       "Android"
-    ]
+    ],
+    "videoId": "MmGDQkgknfY"
   },
   "123": {
     "id": 123,
@@ -187,7 +189,8 @@
     "tags": [
       "Android"
     ],
-    "presentation":"https://speakerdeck.com/gdglviv/david-vavra-firebase-plus-kotlin-plus-rxjava-plus-mvp-practical-tips"
+    "presentation":"https://speakerdeck.com/gdglviv/david-vavra-firebase-plus-kotlin-plus-rxjava-plus-mvp-practical-tips",
+    "videoId": "b9NgjqM6dvk"
   },
   "121": {
     "id": 121,
@@ -284,7 +287,8 @@
     "tags": [
       "Android"
     ],
-    "presentation":"https://speakerdeck.com/gdglviv/aleksander-piotrowski-android-tool-chain-and-run-time-improvements-in-n"
+    "presentation":"https://speakerdeck.com/gdglviv/aleksander-piotrowski-android-tool-chain-and-run-time-improvements-in-n",
+    "videoId": "WqULb6bdwwg"
   },
   "114": {
     "id": 114,
@@ -380,7 +384,8 @@
     "tags": [
       "Web"
     ],
-    "presentation":"https://speakerdeck.com/gdglviv/gerard-sans-new-data-architecture-in-angular-2"
+    "presentation":"https://speakerdeck.com/gdglviv/gerard-sans-new-data-architecture-in-angular-2",
+    "videoId": "pgmLkwD-mqM"
   },
   "107": {
     "id": 107,
@@ -407,7 +412,8 @@
     "tags": [
       "Android"
     ],
-    "presentation":"https://speakerdeck.com/gdglviv/adrian-kajda-fuelio-success-story"
+    "presentation":"https://speakerdeck.com/gdglviv/adrian-kajda-fuelio-success-story",
+    "videoId": "qK7ysoohsaM"
   },
   "105": {
     "id": 105,
@@ -421,7 +427,8 @@
     "tags": [
       "Cloud"
     ],
-    "presentation":"https://speakerdeck.com/gdglviv/rustem-arzymbetov-intro-to-tensorflow"
+    "presentation":"https://speakerdeck.com/gdglviv/rustem-arzymbetov-intro-to-tensorflow",
+    "videoId": "e3cuSz1hEPs"
   },
   "104": {
     "id": 104,
@@ -435,7 +442,8 @@
     "tags": [
       "Web"
     ],
-    "presentation":"https://speakerdeck.com/gdglviv/sascha-wolter-the-physical-web-context-is-king"
+    "presentation":"https://speakerdeck.com/gdglviv/sascha-wolter-the-physical-web-context-is-king",
+    "videoId": "fLfQNp75kbc"
   },
   "103": {
     "id": 103,

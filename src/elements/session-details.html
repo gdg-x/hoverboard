@@ -45,19 +45,19 @@
         transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      paper-fab.remove {
+      paper-fab.calendar-check {
         @apply(--shadow-elevation-4dp);
         @apply(--shadow-transition);
         color: #fff;
         background: var(--accent-color);
       }
 
-      paper-fab[disabled]:not(.remove) {
+      paper-fab[disabled]:not(.calendar-check) {
         color: var(--disabled-text-color);
         cursor: default;
       }
 
-      paper-fab[disabled].remove {
+      paper-fab[disabled].calendar-check {
         @apply(--shadow-none);
         background: var(--disabled-accent-color);
         cursor: default;
@@ -157,7 +157,7 @@
           <div class="sections">
             <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
               <div class="section">
-                <div class="section-photo" style$="background-image: url([[speaker.photoUrl]])"></div>
+                <div class="section-photo" style$="background-image: url('[[speaker.photoUrl]]')"></div>
                 <div class="section-info">
                   <h3 class="section-title">[[speaker.name]]</h3>
                   <span class="section-sub-title">[[speaker.company]], [[speaker.country]]</span>
@@ -209,7 +209,7 @@
           },
           fabIcon: {
             type: String,
-            value: 'add'
+            value: 'calendar-plus'
           }
         },
 
@@ -266,7 +266,7 @@
         },
 
         _getMyScheduleIcon: function (id) {
-          this.fabIcon = this.isInMySchedule(id) ? 'remove' : 'add';
+          this.fabIcon = this.isInMySchedule(id) ? 'calendar-check' : 'calendar-plus';
         }
 
       });
