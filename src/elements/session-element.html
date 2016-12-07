@@ -121,7 +121,8 @@
         bottom: 0;
       }
 
-      .session[with-background] .action-icon {
+      .session[with-background] .action-icon,
+      .session[with-background] .bottom-meta {
         color: #fff;
       }
 
@@ -130,12 +131,12 @@
         transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1);
       }
 
-      .tags {
+      .bottom-meta {
         margin-right: 24px;
         padding: 16px 24px;
       }
 
-      .tags iron-icon {
+      .bottom-meta iron-icon {
         --iron-icon-width: 14px;
         --iron-icon-height: 14px;
         margin-right: 8px;
@@ -186,9 +187,21 @@
           </div>
 
           <div class="bottom-caption" layout horizontal center justified>
-            <div class="tags" hidden$="[[!session.tags.length]]" layout horizontal center>
-              <iron-icon icon="tags"></iron-icon>
-              <span flex>[[_joinArray(session.tags)]]</span>
+            <div class="bottom-meta" flex hidden$="[[!_hasBottomMeta(session)]]">
+              <div hidden$="[[!session.tags.length]]" layout horizontal center>
+                <iron-icon icon="tags"></iron-icon>
+                <span>[[_joinArray(session.tags)]]</span>
+              </div>
+
+              <div hidden$="[[!session.videoId]]" layout horizontal center>
+                <iron-icon icon="video"></iron-icon>
+                <span>Recording available</span>
+              </div>
+
+              <div hidden$="[[!session.presentation]]" layout horizontal center>
+                <iron-icon icon="presentation"></iron-icon>
+                <span>Presentation available</span>
+              </div>
             </div>
 
             <iron-icon
@@ -198,15 +211,6 @@
               session-id$="[[session.id]]"
               disabled$="[[!online]]"
             ></iron-icon>
-
-            <template is="dom-if" if="[[!app.user.uid]]">
-              <iron-icon
-                class="action-icon add-icon-outline"
-                icon="calendar-plus"
-                on-tap="toggleMyScheduleSession"
-                disabled$="[[!online]]"
-              ></iron-icon>
-            </template>
           </div>
 
           <div
@@ -306,6 +310,10 @@
           if (!user && this.session) {
             this._getMyScheduleIcon(this.session.id);
           }
+        },
+
+        _hasBottomMeta: function (session) {
+          return session.tags && session.tags.length || session.presentation || session.videoId;
         }
       });
 
