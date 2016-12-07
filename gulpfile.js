@@ -37,6 +37,7 @@ global.config = {
 // A task should return either a WriteableStream or a Promise
 const clean = require('./gulp-tasks/clean.js');
 const images = require('./gulp-tasks/images.js');
+const template = require('./gulp-tasks/template.js');
 const project = require('./gulp-tasks/project.js');
 
 // The source task will split all of your source files into one
@@ -50,6 +51,7 @@ function source() {
   return project.splitSource()
     // Add your own build tasks here!
     .pipe(gulpif('**/*.{png,gif,jpg,svg}', images.minify()))
+    .pipe(gulpif('**/*.{html,json}', template.compile()))
     .pipe(project.rejoin()); // Call rejoin when you're finished
 }
 

@@ -2,7 +2,6 @@
   "name": "hoverboard",
   "version": "1.2.0",
   "description": "Conference website template",
-  "license": "http://polymer.github.io/LICENSE.txt",
   "scripts": {
     "build": "gulp"
   },
@@ -11,9 +10,11 @@
     "gulp": "gulpjs/gulp#4.0",
     "gulp-if": "^2.0.0",
     "gulp-imagemin": "^3.1.0",
+    "gulp-nunjucks": "^2.3.0",
     "merge-stream": "^1.0.0",
     "plylog": "^0.4.0",
-    "polymer-build": "^0.4.0"
+    "polymer-build": "^0.4.0",
+    "require-uncached": "^1.0.3"
   },
   "engines": {
     "node": ">=4.0"
