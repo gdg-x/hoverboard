@@ -1,14 +1,14 @@
 ![preview-web](https://cloud.githubusercontent.com/assets/2954281/17777476/5dbbbe1c-6569-11e6-9cc4-77185ae9bf92.png)
 
-# Project Hoverboard 
+# Project Hoverboard
 
 [![Join the chat at https://gitter.im/gdg-x/hoverboard](https://badges.gitter.im/gdg-x/hoverboard.svg)](https://gitter.im/gdg-x/hoverboard?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-> Project Hoverboard is the next generation conference website template after 
-[Project Zeppelin](https://github.com/gdg-x/zeppelin) and more optimized 
+> Project Hoverboard is the next generation conference website template after
+[Project Zeppelin](https://github.com/gdg-x/zeppelin) and more optimized
 version - [Project Zeppelin-Grunt](https://github.com/gdg-x/zeppelin-grunt).
 
-> Template is brought by [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy) 
+> Template is brought by [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy)
 from [GDG Lviv](http://lviv.gdg.org.ua/).
 
 > *Do you :heart: it?* Show your support - please, :star: the project.
@@ -27,7 +27,7 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 :white_check_mark: Optimized and fast  
 :white_check_mark: Editable theme colors  
 :white_check_mark: Quick deploy (with [Travis CI](/docs/tutorials/deploy.md))  
-:white_check_mark: My schedule :new: 
+:white_check_mark: My schedule :new:
 
 ### Setup
 :book: [Full documentation](/docs/).
@@ -51,11 +51,11 @@ and run:
 Install [polymer-cli](https://github.com/Polymer/polymer-cli):
 
     npm i -g polymer-cli
-    
+
 and [Bower](https://bower.io/):
-    
+
     npm i -g bower
-    
+
 :point_right: **[Fork](https://github.com/gdg-x/hoverboard/fork) this repository** and clone it locally.
 
 ##### Install dependencies
@@ -68,7 +68,7 @@ This command serves the app at `http://localhost:8080` and provides basic URL
 routing for the app:
 
     polymer serve
-    
+
 :book: Read more in [setup docs](/docs/tutorials/set-up.md).
 
 
@@ -89,7 +89,7 @@ H2/push-compatible servers or to clients that do not support H2/Push.
 Or you can build in Docker container:
 
     docker run -v "$PWD":/app hoverboard polymer build
-    
+
 :book: Read more in [deploy docs](/docs/tutorials/deploy.md).   
 
 ### Updating
@@ -105,7 +105,7 @@ git commit -m 'Updated to the latest version'
 
 ### Who uses the template?
 
-Going to use the template? Go on! The only thing we ask - let us know with a 
+Going to use the template? Go on! The only thing we ask - let us know with a
 pull request, so we can include you in this list.
 
 | | | |
@@ -121,7 +121,8 @@ pull request, so we can include you in this list.
 | [GDG DevFest Eskisehir 2016](https://df16.gdgeskisehir.com/)    | [GDG DevFest Poland 2016](https://devfest.pl/)                              | [GDG DevFest Pilsen 2016](https://devfest.cz/)              |
 | [GDG DevFest Switzerland 2016](https://devfest.ch/)             | [GDG DevFest Toulouse 2016](https://devfesttoulouse.fr/)                    | [GDG Ohio DevFest](https://ohiodevfest.com/)                |
 | [GDG DevFest NYC 2016](https://devfestnyc.com/)                 | [GDG DevFest Los Angeles 2016](https://devfest.gdgla.org/)                  | [GDG DevFest West](https://devfest2016.gdgsv.com)           |
-| [GDG DevFest Florida 2016](https://devfestflorida.org)          |
+| [GDG DevFest Florida 2016](https://devfestflorida.org)          | [GDG DevFest Madrid 2016](https://gdgmadrid.com)                            | [GDG DevFest SBA 2016](https://devfest.gdgsba.org/)         |
+| [GDG Foumban Website](https://gdgfoumban.org)                   | [GDG DevFest Granada 2016](http://devfest.gdggranada.com/)                  | [GDG DevFest Taipei 2016](http://devfest.gdg-taipei.org/)    |
 
 
 ### Roadmap :rocket:
@@ -135,8 +136,8 @@ pull request, so we can include you in this list.
 
 ### Contributing
 
-Project Hoverboard is still under development, and it is open for contributions. 
-Feel free to send PR. If you have any questions, feel free to contact 
+Project Hoverboard is still under development, and it is open for contributions.
+Feel free to send PR. If you have any questions, feel free to contact
 [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy).
 
 ##### General workflow
