@@ -1,4 +1,23 @@
 {
+  "title": "GDG DevFest Season 2016",
+  "description": "The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts",
+  "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
+  "url": "https://hoverboard.firebaseapp.com/",
+  "startDate": "2016-09-09T09:00:00+03:00",
+  "endDate": "2016-09-10T19:00:00+03:00",
+  "analytics": {
+    "prod": "UA-43643469-8",
+    "dev": "UA-43643469-9"
+  },
+  "organizer": {
+    "name": "GDG Lviv",
+    "twitter": "gdglviv"
+  },
+  "webapp": {
+    "shortName": "DevFest Season",
+    "themeColor": "#F57C00",
+    "backgroundColor": "#F57C00"
+  },
   "firebase": {
     "name": "hoverboard-master",
     "domain": "hoverboard-master.firebaseapp.com",
@@ -80,7 +99,6 @@
       "permalink": "/team/"
     }
   ],
-  "url": "https://hoverboard.firebaseapp.com/",
   "mailchimp": {
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
@@ -242,6 +260,8 @@
   },
   "location": {
     "apiKey": "",
+    "name": "Pivdennyi Expo Center",
+    "address": "36 Shchyretska St, Lviv, Ukraine",
     "link": "https://www.facebook.com/expopivdennij",
     "pointer": {
       "latitude": 49.809841,

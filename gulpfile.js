@@ -3,6 +3,8 @@
 const path = require('path');
 const gulp = require('gulp');
 const gulpif = require('gulp-if');
+const browserSync = require('browser-sync').create();
+const history = require('connect-history-api-fallback');
 
 // Got problems? Try logging 'em
 // const logging = require('plylog');
@@ -51,7 +53,7 @@ function source() {
   return project.splitSource()
     // Add your own build tasks here!
     .pipe(gulpif('**/*.{png,gif,jpg,svg}', images.minify()))
-    .pipe(gulpif('**/*.{html,json}', template.compile()))
+    .pipe(gulpif('**/*.{html,js,json}', template.compile()))
     .pipe(project.rejoin()); // Call rejoin when you're finished
 }
 
@@ -64,6 +66,22 @@ function dependencies() {
     .pipe(project.rejoin());
 }
 
+gulp.task('template', gulp.series(clean('.temp'), () => {
+  return gulp.src([
+    'scripts/**/*.js',
+    'src/**/*.html',
+    'index.html',
+    'manifest.json'
+  ])
+    .pipe(template.compile())
+    .pipe(gulp.dest('.temp'));
+}));
+
+function reload(done) {
+  browserSync.reload();
+  done();
+}
+
 // Clean the build directory, split all source and dependency files into streams
 // and process them, and output bundled and unbundled versions of the project
 // with their own service workers
@@ -72,3 +90,27 @@ gulp.task('default', gulp.series([
   project.merge(source, dependencies),
   project.serviceWorker
 ]));
+
+gulp.task('serve', gulp.series('template', () => {
+  browserSync.init({
+    logPrefix: 'Hoverboard',
+    notify: false,
+    server: {
+      baseDir: ['.temp', './'],
+      middleware: [history()]
+    }
+  });
+
+  gulp.watch([
+    'data/**/*.{markdown,md}',
+    'images/**/*.{png,gif,jpg,svg}',
+  ]).on('change', reload);
+
+  gulp.watch([
+    'data/**/*.json',
+    'scripts/**/*.js',
+    'src/**/*.html',
+    './index.html',
+    'manifest.json'
+  ], gulp.series('template', reload));
+}));
