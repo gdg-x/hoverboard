@@ -14,7 +14,7 @@
     "twitter": "gdglviv"
   },
   "webapp": {
-    "shortName": "DevFest Season",
+    "shortName": "DevFest",
     "themeColor": "#F57C00",
     "backgroundColor": "#F57C00"
   },
@@ -79,23 +79,23 @@
   },
   "navigation": [
     {
-      "route": "home",
+      "route": "Home",
       "permalink": "/"
     },
     {
-      "route": "blog",
+      "route": "Blog",
       "permalink": "/blog/"
     },
     {
-      "route": "schedule",
+      "route": "Schedule",
       "permalink": "/schedule/"
     },
     {
-      "route": "speakers",
+      "route": "Speakers",
       "permalink": "/speakers/"
     },
     {
-      "route": "team",
+      "route": "Team",
       "permalink": "/team/"
     }
   ],
@@ -105,60 +105,50 @@
   },
   "partnershipProposition": "http://bit.ly/df16-sponsor",
   "disqusShortName": "hoverboard-gdg-x",
-  "languages": [
-    {
-      "name": "English",
-      "key": "en"
-    },
-    {
-      "name": "Українська",
-      "key": "uk"
-    }
-  ],
   "footerBlocks": [
     {
-      "title": "for-visitors",
+      "title": "For visitors",
       "links": [
         {
-          "text": "team",
+          "text": "Team",
           "url": "/team/"
         },
         {
-          "text": "cod",
+          "text": "Code of Conduct",
           "url": "/cod/"
         },
         {
-          "text": "google-developers",
+          "text": "Google Developers",
           "url": "https://developers.google.com/",
           "newTab": true
         },
         {
-          "text": "df-13",
+          "text": "GDG DevFest Ukraine 2013",
           "url": "http://gdg-devfest-ua.appspot.com/",
           "newTab": true
         },
         {
-          "text": "df-14",
+          "text": "GDG DevFest Ukraine 2014",
           "url": "http://devfest.gdg.org.ua/2014/",
           "newTab": true
         },
         {
-          "text": "df-15",
+          "text": "GDG DevFest Ukraine 2015",
           "url": "http://devfest.gdg.org.ua/2015/",
           "newTab": true
         }
       ]
     },
     {
-      "title": "for-partners",
+      "title": "For Partners",
       "links": [
         {
-          "text": "partnership-proposition",
+          "text": "Partnership Proposition",
           "url": "http://bit.ly/df16-sponsor",
           "newTab": true
         },
         {
-          "text": "media-kit",
+          "text": "Media Kit",
           "url": "http://bit.ly/df16-media",
           "newTab": true
         }
@@ -177,51 +167,51 @@
     "url": "http://2event.com/events/630032",
     "elements": [
       {
-        "name": "student-ticket",
+        "name": "Student",
         "price": 500,
         "currency": "₴",
-        "starts": "student-ticket-starts",
-        "ends": "student-ticket-ends",
-        "info": "student-ticket-info",
+        "starts": "May 1",
+        "ends": "Sep 8",
+        "info": "Requires valid student ID",
         "soldOut": false
       },
       {
-        "name": "early-ticket",
+        "name": "Early Bird",
         "price": 750,
         "currency": "₴",
-        "starts": "early-ticket-starts",
-        "ends": "early-ticket-ends",
-        "info": "early-ticket-info",
+        "starts": "May 1",
+        "ends": "July 1",
+        "info": "Or first 100 tickets",
         "soldOut": true
       },
       {
-        "name": "lazy-ticket",
+        "name": "Lazy Bird",
         "price": 1000,
         "currency": "₴",
-        "starts": "lazy-ticket-starts",
-        "ends": "lazy-ticket-ends",
+        "starts": "July 1",
+        "ends": "Sep 8",
         "soldOut": false
       }
     ]
   },
-  "teamPageTitle": "team-page-title",
-  "teamPageText": "team-page-text",
+  "teamPageTitle": "Team",
+  "teamPageText": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT.",
   "statistics": [
     {
       "counter": 600,
-      "caption": "attendees"
+      "caption": "Attendees"
     },
     {
       "counter": 2,
-      "caption": "days"
+      "caption": "Days"
     },
     {
       "counter": 30,
-      "caption": "sessions"
+      "caption": "Sessions"
     },
     {
       "counter": 3,
-      "caption": "tracks"
+      "caption": "Tracks"
     }
   ],
   "hashtag": "dfua",
@@ -280,7 +270,7 @@
   },
   "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
   "callToAction": {
-    "videoTitle": "action-title",
+    "videoTitle": "GDG DevFest 2015",
     "videoId": "DfMnJAzOFng"
   }
 }
