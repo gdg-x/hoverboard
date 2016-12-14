@@ -3,7 +3,8 @@
   "version": "1.2.0",
   "description": "Conference website template",
   "scripts": {
-    "build": "gulp"
+    "build": "gulp",
+    "serve": "gulp serve"
   },
   "devDependencies": {
     "browser-sync": "^2.18.0",

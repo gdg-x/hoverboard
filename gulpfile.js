@@ -5,6 +5,7 @@ const gulp = require('gulp');
 const gulpif = require('gulp-if');
 const browserSync = require('browser-sync').create();
 const history = require('connect-history-api-fallback');
+const requireUncached = require('require-uncached');
 
 // Got problems? Try logging 'em
 // const logging = require('plylog');
@@ -67,13 +68,15 @@ function dependencies() {
 }
 
 gulp.task('template', gulp.series(clean('.temp'), () => {
+  const metadata = requireUncached('./data/hoverboard.config');
+
   return gulp.src([
     'scripts/**/*.js',
     'src/**/*.html',
     'index.html',
     'manifest.json'
   ])
-    .pipe(template.compile())
+    .pipe(template.compile(metadata))
     .pipe(gulp.dest('.temp'));
 }));
 
