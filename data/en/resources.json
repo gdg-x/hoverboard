@@ -1,6 +1,12 @@
 {
   "title": "GDG DevFest Ukraine 2016",
   "dates": "September 9-10, 2016",
+  "home": "Home",
+  "blog": "Blog",
+  "speakers": "Speakers",
+  "schedule": "Schedule",
+  "team": "Team",
+  "cod": "Code of Conduct",
   "locationAddressShort": "Lviv, Ukraine",
   "motto": "Be a GDG. Be a Hero!",
   "playIcon": "See how it was in 2015",
@@ -17,7 +23,7 @@
   "soldOutTickets": "Sold Out",
   "description": "The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts",
   "socialTitle": "Social",
-  "social-motto": "Add to circles, like, follow or connect with us on",
+  "socialMotto": "Add to circles, like, follow or connect with us on",
   "beforeHashtag": "What's up",
   "clickToViewPhotos": "Click here to view more photos",
   "partners": "Partners",
@@ -32,7 +38,7 @@
   "locationTitle": "Pivdennyi Expo Center",
   "locationDescription": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event",
   "locationAddress": "Shchyretska St, 36",
-  "organizer": "Organizer",
+  "organizerTitle": "Organizer",
   "aboutOrganizers": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
   "openTeamPage": "Open team page",
   "whatIsGdg": "What is GDG?",
@@ -53,6 +59,7 @@
   "signOut": "Sign out",
   "mySchedule": "My Schedule",
   "browseMore": "Browse more events",
+  "youShouldSignIn": "Sign in to save sessions",
   "removedFromSchedule": "Removed from My Schedule",
   "addedToSchedule": "Added to My Schedule"
 }

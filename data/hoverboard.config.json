@@ -79,23 +79,23 @@
   },
   "navigation": [
     {
-      "route": "Home",
+      "route": "home",
       "permalink": "/"
     },
     {
-      "route": "Blog",
+      "route": "blog",
       "permalink": "/blog/"
     },
     {
-      "route": "Schedule",
+      "route": "schedule",
       "permalink": "/schedule/"
     },
     {
-      "route": "Speakers",
+      "route": "speakers",
       "permalink": "/speakers/"
     },
     {
-      "route": "Team",
+      "route": "team",
       "permalink": "/team/"
     }
   ],

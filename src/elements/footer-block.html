@@ -13,7 +13,6 @@
 
 <link rel="import" href="../styles/shared-styles.html">
 <link rel="import" href="../js-wrappers/g-plusone.html">
-<link rel="import" href="../behaviors/localize-behavior.html">
 <link rel="import" href="../behaviors/share-behavior.html">
 <link rel="import" href="mailchimp-subscribe.html">
 
@@ -173,48 +172,48 @@
           alt="[[app.data.organizer.name]]"
         ></iron-image>
         <paper-button class="footer-backtotop" on-tap="scrollToTop" noink>
-          [[localize('backToTop')]]
+          {$ backToTop $}
           <iron-icon icon="icons:expand-less"></iron-icon>
         </paper-button>
       </div>
       <div class="footer-content footer-links-container">
         <nav class="navigation">
-          <template is="dom-repeat" items="[[app.data.footerBlocks]]" as="block">
+          {% for block in footerBlocks %}
             <div class="link-block-wrapper">
-              <div class="link-block-title">[[localize(block.title)]]</div>
+              <div class="link-block-title">{$ block.title $}</div>
               <ul class="link-block">
-                <template is="dom-repeat" items="[[block.links]]" as="link">
+                {% for link in block.links %}
                   <li>
-                    <a href$="[[link.url]]" target="_getLinkTarget(link.newTab)">[[localize(link.text)]]</a>
+                    <a href="{$ link.url $}" {% if link.newTab %}target="_blank" rel="noopener noreferrer"{% endif %}>{$ link.text $}</a>
                   </li>
-                </template>
+                {% endfor %}
               </ul>
             </div>
-          </template>
+          {% endfor %}
           <div class="link-block-wrapper">
-            <div class="link-block-title">[[localize('contactUs')]]</div>
+            <div class="link-block-title">{$ contactUs $}</div>
             <ul class="link-block">
-              <template is="dom-repeat" items="[[app.data.contactBlock.links]]" as="link">
+              {% for link in contactBlock.links %}
                 <li>
-                  <a href$="[[link.url]]" target="_getLinkTarget(link.newTab)">[[link.text]]</a>
+                  <a href="{$ link.url $}" {% if link.newTab %}target="_blank" rel="noopener noreferrer"{% endif %}>{$ link.text $}</a>
                 </li>
-              </template>
+              {% endfor %}
             </ul>
             <div class="icons-wrapper align-pb-block">
-              <template is="dom-repeat" items="[[app.data.social]]" as="network">
-                <a class="button-link" href$="[[network.url]]" target="_blank" rel="noopener noreferrer">
+              {% for network in social %}
+                <a class="button-link" href="{$ network.url $}" target="_blank" rel="noopener noreferrer">
                   <paper-icon-button icon="icons:[[network.name]]"></paper-icon-button>
                 </a>
-              </template>
+              {% endfor %}
             </div>
           </div>
           <div class="subscribe">
-            <div class="link-block-title">[[localize('subscribe')]]</div>
-            <span>[[localize('subscribeNote')]]</span>
+            <div class="link-block-title">{$ subscribe $}</div>
+            <span>{$ subscribeNote $}</span>
             <mailchimp-subscribe
               app="[[app]]"
-              url="[[app.data.mailchimp.url]]"
-              name="[[app.data.mailchimp.name]]"
+              url="{$ mailchimp.url $}"
+              name="{$ mailchimp.name $}"
             ></mailchimp-subscribe>
           </div>
         </nav>
@@ -253,35 +252,10 @@
             </paper-icon-item>
             <paper-icon-item on-tap="share" share="copy">
               <iron-icon icon="link" item-icon></iron-icon>
-              [[localize('copyLink')]]
+              {$ copyLink $}
             </paper-icon-item>
           </div>
         </paper-menu-button>
-
-        <template is="dom-if" if="[[_showLanguageToggle(app.data.languages)]]">
-          <paper-menu-button vertical-align="bottom" horizontal-align="left">
-            <paper-button class="dropdown-trigger">
-              <iron-icon class="language-icon" icon="language"></iron-icon>
-              [[selectedLanguage.label]]
-              <iron-icon icon="arrow-drop-down"></iron-icon>
-            </paper-button>
-            <paper-menu
-              class="dropdown-content"
-              selected="{{app.lang}}"
-              selected-item="{{selectedLanguage}}"
-              attr-for-selected="value"
-            >
-              <template is="dom-repeat" items="[[app.data.languages]]" as="lang">
-                <paper-item
-                  value="[[lang.key]]"
-                  label="[[lang.name]]"
-                  on-tap="_changeLanguage"
-                >[[lang.name]]
-                </paper-item>
-              </template>
-            </paper-menu>
-          </paper-menu-button>
-        </template>
       </div>
     </div>
 
@@ -296,24 +270,11 @@
         is: 'footer-block',
 
         behaviors: [
-          HOVERBOARD.LocalizeBehavior,
           HOVERBOARD.ShareBehavior
         ],
 
         scrollToTop: function (e) {
           HOVERBOARD.Elements.Template.backToTop(e);
-        },
-
-        _changeLanguage: function (e) {
-          HOVERBOARD.Analytics.trackEvent('language', 'select', e.target.label);
-        },
-
-        _getLinkTarget: function (newTab) {
-          return newTab ? '_blank' : '';
-        },
-
-        _showLanguageToggle: function (languages) {
-          return languages && (languages.length > 1);
         }
 
       });

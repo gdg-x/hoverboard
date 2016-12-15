@@ -8,7 +8,6 @@
 <link rel="import" href="../../bower_components/marked-element/marked-element.html">
 
 <link rel="import" href="../elements/footer-block.html">
-<link rel="import" href="../behaviors/localize-behavior.html">
 <link rel="import" href="../behaviors/page-behavior.html">
 <link rel="import" href="../behaviors/cascaded-behavior.html">
 
@@ -197,8 +196,8 @@
         <div class="details-item" cascaded>
           <iron-icon class="details-icon" icon="info"></iron-icon>
           <div class="details-info">
-            <h4 class="details-title">[[localize(app.data.teamPageTitle)]]</h4>
-            <marked-element class="details-text" markdown="{{localize(app.data.teamPageText)}}">
+            <h4 class="details-title">{$ teamPageTitle $}</h4>
+            <marked-element class="details-text" markdown="{$ teamPageText $}">
               <div class="markdown-html"></div>
             </marked-element>
           </div>
@@ -251,8 +250,7 @@
 
         behaviors: [
           HOVERBOARD.PageBehavior,
-          HOVERBOARD.CascadedBehavior,
-          HOVERBOARD.LocalizeBehavior
+          HOVERBOARD.CascadedBehavior
         ]
 
       });

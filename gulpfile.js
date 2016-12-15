@@ -76,7 +76,7 @@ gulp.task('template', gulp.series(clean('.temp'), () => {
     'src/**/*.html',
     'index.html',
     'manifest.json'
-  ], {base: "."})
+  ], {base: '.'})
     .pipe(template.compile(Object.assign({}, metadata, resources)))
     .pipe(gulp.dest('.temp'));
 }));

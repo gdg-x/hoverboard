@@ -83,7 +83,7 @@
         ></iron-image>
         <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
           <paper-ripple></paper-ripple>
-          <span>[[localize('clickToViewPhotos')]] <iron-icon icon="open-in-new"/></span>
+          <span>{$ clickToViewPhotos $} <iron-icon icon="open-in-new"/></span>
         </a>
       </div>
       <div class="vertical-block">
@@ -96,7 +96,7 @@
           ></iron-image>
           <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
             <paper-ripple></paper-ripple>
-            <span>[[localize('clickToViewPhotos')]] <iron-icon icon="open-in-new"/></span>
+            <span>{$ clickToViewPhotos $} <iron-icon icon="open-in-new"/></span>
           </a>
         </div>
         <div class="photo">
@@ -108,7 +108,7 @@
           ></iron-image>
           <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
             <paper-ripple></paper-ripple>
-            <span>[[localize('clickToViewPhotos')]] <iron-icon icon="open-in-new"/></span>
+            <span>{$ clickToViewPhotos $} <iron-icon icon="open-in-new"/></span>
           </a>
         </div>
       </div>
@@ -122,11 +122,7 @@
 
       Polymer({
 
-        is: 'photo-block',
-
-        behaviors: [
-          HOVERBOARD.LocalizeBehavior
-        ]
+        is: 'photo-block'
 
       });
 

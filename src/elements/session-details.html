@@ -19,7 +19,6 @@
 <link rel="import" href="../styles/dialog-styles.html">
 <link rel="import" href="../behaviors/share-behavior.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
-<link rel="import" href="../behaviors/localize-behavior.html">
 <link rel="import" href="../behaviors/my-schedule-behavior.html">
 <link rel="import" href="truncate-marked-text.html">
 
@@ -111,7 +110,7 @@
           <paper-menu-button class="share-menu" horizontal-align="left" vertical-align="bottom" share-menu>
             <paper-button class="action dropdown-trigger">
               <iron-icon icon="share"></iron-icon>
-              [[localize('share')]]
+              {$ share $}
             </paper-button>
             <div class="dropdown-content">
               <paper-icon-item on-tap="share" share="gplus">
@@ -128,7 +127,7 @@
               </paper-icon-item>
               <paper-icon-item on-tap="share" share="copy">
                 <iron-icon icon="link" item-icon></iron-icon>
-                [[localize('copyLink')]]
+                {$ copyLink $}
               </paper-icon-item>
             </div>
           </paper-menu-button>
@@ -138,13 +137,13 @@
              rel="noopener noreferrer">
             <paper-button class="action">
               <iron-icon icon="presentation"></iron-icon>
-              [[localize('viewPresentation')]]
+              {$ viewPresentation $}
             </paper-button>
           </a>
           <div on-tap="_openVideo" hidden$="[[!session.videoId]]">
             <paper-button class="action">
               <iron-icon icon="video"></iron-icon>
-              [[localize('viewVideo')]]
+              {$ viewVideo $}
             </paper-button>
           </div>
         </div>
@@ -153,7 +152,7 @@
 
       <template is="dom-if" if="{{session.speakers.length}}">
         <div class="sections-wrapper content">
-          <h4 class="block-title">[[localize('speakers')]]</h4>
+          <h4 class="block-title">{$ speakers $}</h4>
           <div class="sections">
             <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
               <div class="section">
@@ -173,7 +172,7 @@
                     break-last-word
                   ></truncate-marked-text>
 
-                  <a class="read-more" href$="/speakers/[[speaker.id]]" dialog-dismiss>[[localize('readMore')]]</a>
+                  <a class="read-more" href$="/speakers/[[speaker.id]]" dialog-dismiss>{$ readMore $}</a>
                 </div>
               </div>
             </template>
@@ -196,7 +195,6 @@
           Polymer.PaperDialogBehavior,
           Polymer.NeonAnimationRunnerBehavior,
           Polymer.AppNetworkStatusBehavior,
-          HOVERBOARD.LocalizeBehavior,
           HOVERBOARD.UtilsBehavior,
           HOVERBOARD.ShareBehavior,
           HOVERBOARD.MyScheduleBehavior

@@ -1,6 +1,12 @@
 {
   "title": "GDG DevFest Ukraine 2016",
   "dates": "9-10 Вересня 2016",
+  "home": "Головна",
+  "blog": "Блог",
+  "speakers": "Доповідачі",
+  "schedule": "Розклад",
+  "team": "Команда",
+  "cod": "Норми поведінки",
   "locationAddressShort": "Львів, Україна",
   "motto": "Будь GDG. Будь героєм!",
   "playIcon": "Погляньте, як це було в 2015",
@@ -17,7 +23,7 @@
   "soldOutTickets": "Продано",
   "description": "Найбільша технічна конференція в Україні, пов'язана з технологіями Google, ретельно організована для Вас GDG-спільнотою! Все про Android, Web та Cloud від світових експертів",
   "socialTitle": "Соціальні мережі",
-  "social-motto": "Додавайтесь до наших кіл, лайкайте та контактуйте з нами",
+  "socialMotto": "Додавайтесь до наших кіл, лайкайте та контактуйте з нами",
   "beforeHashtag": "Що нового",
   "clickToViewPhotos": "Натисніть, щоб відкрити більше фотографій",
   "partners": "Партнери",
@@ -32,7 +38,7 @@
   "locationTitle": "Південний Експо",
   "locationDescription": "Нещодавно збудований Південний Експо є довгоочікуваним виставковим центром у Львові, який може задовольнити потреби масштабної події",
   "locationAddress": "Щирецька 36",
-  "organizer": "Організатор",
+  "organizerTitle": "Організатор",
   "aboutOrganizers": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> за підтримки 10 GDG-груп з усієї України є організатором DevFest Ukraine",
   "openTeamPage": "Відкрити сторінку команди",
   "whatIsGdg": "Що таке GDG?",
@@ -53,6 +59,7 @@
   "signOut": "Вийти",
   "mySchedule": "Мій розклад",
   "browseMore": "Знайдіть більше подій",
+  "youShouldSignIn": "Залогуйтесь, щоб зберегти сесію",
   "removedFromSchedule": "Видалено з Мого Розкладу",
   "addedToSchedule": "Додано в Мій Розклад"
 }
