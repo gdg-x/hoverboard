@@ -67,7 +67,7 @@
 
     <div class="container">
       <div class="block-header">
-        <h4 class="heading">[[localize('tickets-title')]]</h4>
+        <h4 class="heading">[[localize('ticketsTitle')]]</h4>
       </div>
       <div class="tickets-wrapper">
         <template is="dom-repeat" items="[[app.data.tickets.elements]]" as="ticket">
@@ -79,13 +79,13 @@
             ends="[[localize(ticket.ends)]]"
             info="[[localize(ticket.info)]]"
             sold-out="[[ticket.soldOut]]"
-            sold-out-text="[[localize('sold-out-tickets')]]"
+            sold-out-text="[[localize('soldOutTickets')]]"
           ></ticket-element>
         </template>
       </div>
-      <div class="details">[[localize('tickets-details')]]</div>
+      <div class="details">[[localize('ticketsDetails')]]</div>
       <a href$="[[app.data.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
-        <paper-button class="buy-button" raised>[[localize('buy-ticket')]]</paper-button>
+        <paper-button class="buy-button" raised>[[localize('buyTicket')]]</paper-button>
       </a>
     </div>
 

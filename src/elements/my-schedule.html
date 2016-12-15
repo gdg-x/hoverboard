@@ -115,7 +115,7 @@
       <div layout horizontal center-justified>
         <a class="browse-more" href$="/schedule/day[[_addToValue(index, 1)]]" layout horizontal center>
           <iron-icon icon="calendar-plus"></iron-icon>
-          <span>[[localize('browse-more')]]</span>
+          <span>[[localize('browseMore')]]</span>
         </a>
       </div>
     </template>
@@ -165,7 +165,7 @@
             this.set('app.user.sessions.' + id, null);
           }
 
-          HOVERBOARD.Elements.Template.$.toast.showMessage(this.localize('removed-from-schedule'));
+          HOVERBOARD.Elements.Template.$.toast.showMessage(this.localize('removedFromSchedule'));
         },
 
         _splitText: function (text, divider, index) {

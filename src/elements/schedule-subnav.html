@@ -151,7 +151,7 @@
           <template is="dom-if" if="{{app.user}}">
             <paper-tab day="myschedule" link>
               <a href="/schedule/myschedule" layout center>
-                [[localize('my-schedule')]]
+                [[localize('mySchedule')]]
               </a>
             </paper-tab>
           </template>
@@ -184,7 +184,7 @@
           <paper-icon-button icon="arrow-back"
                              aria-label="Close My Schedule"
                              on-tap="_goBack"></paper-icon-button>
-          <span>[[localize('my-schedule')]]</span>
+          <span>[[localize('mySchedule')]]</span>
         </div>
       </template>
 
@@ -193,7 +193,7 @@
              hidden$="[[!_displayPersonIcon(app.isPhoneSize, app.user)]]"
              disabled$="[[_isMySchedulePage(selectedDay)]]">
           <a href="/schedule/myschedule">
-            <paper-icon-button icon="person" aria-label="[[localize('my-schedule')]]"></paper-icon-button>
+            <paper-icon-button icon="person" aria-label="[[localize('mySchedule')]]"></paper-icon-button>
           </a>
         </div>
         <paper-menu-button
@@ -223,7 +223,7 @@
                 [[tag]]
               </paper-checkbox>
             </template>
-            <paper-item on-tap="clearFilters">[[localize('clear-all')]]</paper-item>
+            <paper-item on-tap="clearFilters">[[localize('clearAll')]]</paper-item>
           </paper-menu>
         </paper-menu-button>
       </div>
@@ -239,7 +239,7 @@
         </template>
       </div>
       <div class="filters" hidden$="[[!_filtersLabel]]">
-        [[localize('filtered-by')]] [[_filtersLabel]]
+        [[localize('filteredBy')]] [[_filtersLabel]]
       </div>
     </div>
 

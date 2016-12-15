@@ -157,7 +157,7 @@
           </paper-tabs>
         </template>
 
-        <paper-tab class="signin-tab" on-tap="signIn" hidden$="[[app.user]]">[[localize('sign-in')]]</paper-tab>
+        <paper-tab class="signin-tab" on-tap="signIn" hidden$="[[app.user]]">[[localize('signIn')]]</paper-tab>
 
         <paper-menu-button
           class="auth-menu"
@@ -180,7 +180,7 @@
               <div layout vertical center-justified>
                 <span class="profile-name">[[app.user.displayName]]</span>
                 <span class="profile-email">[[app.user.email]]</span>
-                <span class="profile-action" role="button" on-tap="signOut">[[localize('sign-out')]]</span>
+                <span class="profile-action" role="button" on-tap="signOut">[[localize('signOut')]]</span>
               </div>
             </div>
           </div>
@@ -188,7 +188,7 @@
 
         <div class="action-button-wrapper" hidden$="[[app.isPhoneSize]]" layout horizontal center-center>
           <a href$="[[app.data.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
-            <paper-button class="action-button">[[localize('buy-ticket')]]</paper-button>
+            <paper-button class="action-button">[[localize('buyTicket')]]</paper-button>
           </a>
         </div>
       </div>
