@@ -1,20 +1,20 @@
 {
   "firebase": {
-    "name": "hoverboard-master",
-    "domain": "hoverboard-master.firebaseapp.com",
-    "database": "https://hoverboard-master.firebaseio.com",
-    "api": "AIzaSyCaSkhtHekxAqXXzzbuNs2s6CpGdhZdta8",
+    "name": "HackTrin",
+    "domain": "hacktrin.firebaseapp.com",
+    "database": "https://hacktrin.firebaseio.com",
+    "api": "AIzaSyDRqqesmwftq3dd1Ayr2zAeoQygDooN8F4",
     "userSessionsPath": "/userSessions"
   },
   "pages": {
     "home": {
       "headerSettings": {
-        "backgroundColor": "#FF9800",
+        "backgroundColor": "#808080",
         "backgroundImage": "/images/backgrounds/home.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff",
         "video": {
-          "title": "GDG DevFest Ukraine 2016",
+          "title": "HackTrin",
           "youtubeId": "TdpbgRgz6eE",
           "text": "See how it was in 2016"
         },
@@ -160,28 +160,11 @@
     "elements": [
       {
         "name": "student-ticket",
-        "price": 500,
-        "currency": "₴",
+        "price": 0,
+        "currency": "$",
         "starts": "student-ticket-starts",
         "ends": "student-ticket-ends",
         "info": "student-ticket-info",
-        "soldOut": false
-      },
-      {
-        "name": "early-ticket",
-        "price": 750,
-        "currency": "₴",
-        "starts": "early-ticket-starts",
-        "ends": "early-ticket-ends",
-        "info": "early-ticket-info",
-        "soldOut": true
-      },
-      {
-        "name": "lazy-ticket",
-        "price": 1000,
-        "currency": "₴",
-        "starts": "lazy-ticket-starts",
-        "ends": "lazy-ticket-ends",
         "soldOut": false
       }
     ]
@@ -190,28 +173,24 @@
   "teamPageText": "team-page-text",
   "statistics": [
     {
-      "counter": 600,
+      "counter": 100,
       "caption": "attendees"
     },
     {
-      "counter": 2,
-      "caption": "days"
+      "counter": 12,
+      "caption": "hours"
     },
     {
-      "counter": 30,
-      "caption": "sessions"
-    },
-    {
-      "counter": 3,
-      "caption": "tracks"
+      "counter": 5,
+      "caption": "classes"
     }
   ],
   "hashtag": "dfua",
   "social": [
     {
       "name": "twitter",
-      "nickname": "GDGLviv",
-      "url": "https://twitter.com/gdglviv"
+      "nickname": "HackTrin",
+      "url": "https://twitter.com/HackTrin"
     },
     {
       "name": "gplus",
@@ -220,8 +199,8 @@
     },
     {
       "name": "facebook",
-      "nickname": "GDGLviv",
-      "url": "https://www.facebook.com/GDGLviv"
+      "nickname": "hacktrin",
+      "url": "https://www.facebook.com/hacktrin/"
     },
     {
       "name": "linkedin",
@@ -241,16 +220,16 @@
     }
   },
   "location": {
-    "apiKey": "",
-    "link": "https://www.facebook.com/expopivdennij",
+    "apiKey": "AIzaSyCe-Ju7OcgNv6NAkL-wQFz9LUPJpr-cZ0A",
+    "link": "https://www.facebook.com/trinityschoolnyc/",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
+      "latitude": 40.7905327,
+      "longitude": -73.9734873,
       "zoom": 15
     },
     "mapCenter": {
-      "latitude": 49.809841,
-      "longitude": 23.982805
+      "latitude": 40.7905327,
+      "longitude": -73.9734873
     },
     "images": [
       "/images/backgrounds/location_1.jpg",
