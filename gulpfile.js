@@ -70,13 +70,14 @@ function dependencies() {
 
 gulp.task('template', gulp.series(clean('.temp'), () => {
   const metadata = requireUncached('./data/hoverboard.config');
+  const resources = requireUncached('./data/en/resources');
   return gulp.src([
     'scripts/**/*.js',
     'src/**/*.html',
     'index.html',
     'manifest.json'
-  ])
-    .pipe(template.compile(metadata))
+  ], {base: "."})
+    .pipe(template.compile(Object.assign({}, metadata, resources)))
     .pipe(gulp.dest('.temp'));
 }));
 
