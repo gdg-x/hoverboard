@@ -52,10 +52,11 @@ const project = require('./gulp-tasks/project.js');
 // which filters all images and runs them through imagemin
 function source() {
   const metadata = requireUncached('./data/hoverboard.config');
+  const resources = requireUncached('./data/en/resources');
   return project.splitSource()
     // Add your own build tasks here!
     .pipe(gulpif('**/*.{png,gif,jpg,svg}', images.minify()))
-    .pipe(gulpif('**/*.{html,js,json}', template.compile(metadata)))
+    .pipe(gulpif('**/*.{html,js,json}', template.compile(Object.assign({}, metadata, resources))))
     .pipe(project.rejoin()); // Call rejoin when you're finished
 }
 

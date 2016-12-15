@@ -111,11 +111,13 @@
       "links": [
         {
           "text": "Team",
-          "url": "/team/"
+          "url": "/team/",
+          "newTab": false
         },
         {
           "text": "Code of Conduct",
-          "url": "/cod/"
+          "url": "/cod/",
+          "newTab": false
         },
         {
           "text": "Google Developers",
