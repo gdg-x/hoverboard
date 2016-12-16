@@ -66,6 +66,21 @@
         "name": "Mobile Meetup Oslo",
         "url": "https://www.meetup.com/Mobile-Meetup-Oslo/",
         "logoUrl": "../images/logos/mobile-meetup-oslo.png"
+      },
+      {
+        "name": "Hamburg AngularJS Meetup",
+        "url": "https://www.meetup.com/de-DE/Hamburg-AngularJS-Meetup/",
+        "logoUrl": "../images/logos/nghh.png"
+      },
+      {
+        "name": "The Hub",
+        "url": "https://thehub.dk/",
+        "logoUrl": "../images/logos/thehub.png"
+      },
+      {
+        "name": "GDG Oslo",
+        "url": "https://www.meetup.com/GDGOslo/",
+        "logoUrl": "../images/logos/gdg-oslo.png"
       }
     ]
   },

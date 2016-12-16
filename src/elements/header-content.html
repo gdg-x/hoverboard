@@ -141,10 +141,12 @@
                 {{localize('play-icon')}}
               </div> -->
               <div class="action-buttons">
-                <a href$="[[app.data.externalLinks.cfp]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
-                  <paper-button class="primary">[[localize('c4p')]]</paper-button>
+                <a href$="[[app.data.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
+                  <paper-button class="primary">[[localize('buy-conference-ticket')]]</paper-button>
                 </a>
-                <paper-button class="primary" on-tap="_scrollToTickets" raised>{{localize('buy-ticket')}}</paper-button>
+                <a href$="[[app.data.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
+                  <paper-button class="primary" href$="[[app.data.tickets.url]]" raised>{{localize('buy-workshop-ticket')}}</paper-button>
+                </a>
               </div>
             </div>
           </div>
@@ -218,6 +220,10 @@
             behavior: 'smooth',
             target: HOVERBOARD.Elements.Scroller
           });
+        },
+
+        _trackBuyClick: function () {
+          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'header');
         }
 
       });

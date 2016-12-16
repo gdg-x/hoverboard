@@ -133,12 +133,12 @@
         "soldOut": false
       },
       {
-        "name": "early-ticket",
-        "price": "1000",
+        "name": "regular-ticket",
+        "price": "1600",
         "currency": "DKK",
-        "starts": "early-ticket-starts",
-        "ends": "early-ticket-ends",
-        "info": "early-ticket-info",
+        "starts": "regular-ticket-starts",
+        "ends": "regular-ticket-ends",
+        "info": "regular-ticket-info",
         "soldOut": false
       },
       {
@@ -149,6 +149,15 @@
         "ends": "workshop-ticket-ends",
         "info": "workshop-ticket-info",
         "soldOut": false
+      },
+      {
+        "name": "early-ticket",
+        "price": "1000",
+        "currency": "DKK",
+        "starts": "early-ticket-starts",
+        "ends": "early-ticket-ends",
+        "info": "early-ticket-info",
+        "soldOut": true
       }
     ]
   },

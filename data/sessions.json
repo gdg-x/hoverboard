@@ -50,7 +50,7 @@
         "title": "Keynote",
         "description": "",
         "speakers": [
-            91
+            92
         ],
         "tags": [
             "Keynote"
@@ -115,7 +115,7 @@
     "82": {
         "id": 82,
         "title": "Reactive applications with Angular2, Rxjs and @ngrx",
-        "description": " During this workshop you will have the newest technologies explained to you. This is not a basic Angular 2 workshop. Instead we will focus on the hard parts of creating a scalable application that is maintainable and snappy. We will teach you how to use Smart vs Dumb components, RxJS, NGRX/Store and much more in real world applications. The focus lies on principles, architectural choices and best practices. And of course CODING! We do this by switching theory with coding sessions where you have to code parts of the application yourself. We refactor a non-reactive application towards a reactive application during the workshop. At the end, we will demonstrate the flexibility of the application by making it realtime in only 6 lines of code!",
+        "description": "During this workshop you will have the newest technologies explained to you. This is not a basic Angular 2 workshop. Instead we will focus on the hard parts of creating a scalable application that is maintainable and snappy. We will teach you how to use Smart vs Dumb components, RxJS, NGRX/Store and much more in real world applications. The focus lies on principles, architectural choices and best practices. And of course CODING! We do this by switching theory with coding sessions where you have to code parts of the application yourself. We refactor a non-reactive application towards a reactive application during the workshop. At the end, we will demonstrate the flexibility of the application by making it realtime in only 6 lines of code!",
         "speakers": [
             82, 83
         ],
@@ -126,6 +126,35 @@
         "complexity": "Advanced"
     },
 
+    "84": {
+        "id": 84,
+        "title": "Ionic 2 with Firebase",
+        "description": "In this workshop we start with setting up Ionic 2 and Firebase. First of all we'll guide you through the basics of the Ionic CLI, Firebase configuration and documentation available. We'll learn how to use the ionic starters, setup and use basic components and building the application. We'll move from the idea of mobile apps to progressive web apps and how we can implement that idea with Ionic2 & Firebase. Identify the requirements to get service workers and 'Add to home screen' working and how to set this up. Last but not least we'll see how we can make our PWA realtime and work offline with Firebase.",
+        "speakers": [
+            84
+        ],
+        "tags": [
+            "Progressive Web Apps",
+            "Firebase",
+            "Ionic 2",
+            "Angular 2"
+        ],
+        "complexity": "Advanced"
+    },
+
+    "85": {
+        "id": 85,
+        "title": "Data flow architecture with Redux and Angular 2",
+        "description": "This workshop is all about modern SPA architecture, focused on popular architectural design pattern Redux. Redux, an architectural pattern inspired by concepts from stateless web architecture patterns and functional programming paradigms, introduces a unidirectional data-flow and a predictable state container that scales. It’s a popular, mind-blowing alternative to the popular MVC pattern and solves a lot of issues in an elegant and clean way. Through a series of live code examples, Nir Kaufman walks you through a complete flow of a typical application, using Angular2 as the presentation layer.",
+        "speakers": [
+            85
+        ],
+        "tags": [
+            "Redux",
+            "Angular 2"
+        ],
+        "complexity": "Advanced"
+    },
 
     "11": {
         "id": 11,
@@ -154,8 +183,8 @@
 
     "13": {
         "id": 13,
-        "title": "To Be Announced",
-        "description": "",
+        "title": "Angular 2, of Things",
+        "description": "As web developers, we use JavaScript to create wonderful apps that run inside a web browser. But what if we could leverage the same technology to program physical devices that interact with the real world? In this session, we will combine Angular 2 with some IoT sauce to create a hardware game.",
         "speakers": [
             13
         ],
@@ -200,6 +229,88 @@
         ],
         "tags": [
             "Angular Universal",
+            "Angular 2"
+        ]
+    },
+
+    "17": {
+        "id": 17,
+        "title": "AngularFire2 and you",
+        "description": "Discover how Firebase can streamline development processes and how to easily add AngularFire2 to your Angular2 apps. A comprehensive walk-through of how to effortlessly create a full-stack application using Firebase and Angular2. A demo web app (and possibly an Android app) will be built to illustrate integration points for authentication, realtime database, asset storage, hosting, notifications, analytics, and more.",
+        "speakers": [
+            17
+        ],
+        "tags": [
+            "Firebase",
+            "AngularFire 2",
+            "Angular 2"
+        ]
+    },
+
+    "18": {
+        "id": 18,
+        "title": "Forms in Angular2",
+        "description": "Forms are probably the most sensitive part of your web app. They are the main way we get data from the user. They seem simple enough, you just add an ngForm to your template, user clicks Submit and you have data. But there's more to them than that, and we're going to talk about that in this session. We'll try building forms in 2 ways: FormControls and FormBuilder. We'll then proceed to add Validations to one of the forms, touching on available Validations and then creating our custom one. We'll then look at the EventEmitter Observable and handle changes to our form.",        "speakers": [
+            18
+        ],
+        "tags": [
+            "ngForm",
+            "Angular 2"
+        ]
+    },
+
+    "19": {
+        "id": 19,
+        "title": "Developing Accessible Cross-platform Apps with NativeScript and Angular",
+        "description": "Nota is the Danish Library and Expertise Center for people with print disabilities. We'll talk about our new accessible Audiobook player, which with a single codebase targets native Android, native iOS and web, and the challenges and experiences we've gained from the project.",
+        "speakers": [
+            19, 20
+        ],
+        "tags": [
+            "NativeScript",
+            "Accessibility",
+            "Angular 2"
+        ]
+    },
+
+    "21": {
+        "id": 21,
+        "title": "Angular 2: Beyond the tutorials with tests!",
+        "description": "This session is a journey, during which you will learn how to effectively test Angular 2.  Using the angular-cli as our base we will begin by unit testing our application with the built in Karma unit testing scaffold. We will then move into e2e testing with Protractor, again leveraging the built in scaffolding that comes with the cli. For an added bonus you will get to see how using Async Await can help simplify your test suite.",
+        "speakers": [
+            21
+        ],
+        "tags": [
+            "Testing",
+            "Angular CLI",
+            "Angular 2"
+        ]
+    },
+
+    "22": {
+        "id": 22,
+        "title": "Progressively Mobile With Ionic",
+        "description": "With multiple competing mobile eco systems to worry about, it is always important to choose an efficient solution for creating your mobile Apps With the exciting prospects of Progressive Web Apps taking the web & mobile web world by storm, it can be quite challenging to fit a current mobile setup to work with Progressive Web Apps. This talk will showcase how you can create a mobile app for Android, IOS, Windows with 100% the same code & same project and still have it work as a Progressive Web application without any change",
+        "speakers": [
+            22
+        ],
+        "tags": [
+            "Progressive Web Apps",
+            "Ionic 2",
+            "Angular 2"
+        ]
+    },
+
+    "23": {
+        "id": 23,
+        "title": "Angular's User Authentication Tool Belt",
+        "description": "User authentication is necessary for any non-trivial application, but implementing it in a single page app can be a pain. Not only are there a bunch of moving parts on the front end that we need to account for, but we can also get hampered down when we try to use traditional session-based methods of authentication. Luckily for us, Angular 2 comes with a bunch of features designed to make things like route access control and asynchronously loading protected routes really simple. When we pair these features with a modern authentication spec like JSON Web Token, we can lock down our apps in a snap. In this session, we’ll explore how to implement authentication in an Angular 2 app. You’ll come away knowing how the important pieces fit together and how Angular 2 takes care of a lot of the heavy lifting for us.",
+        "speakers": [
+            23
+        ],
+        "tags": [
+            "Authentication",
+            "JWT",
             "Angular 2"
         ]
     }

@@ -30,28 +30,28 @@
         "endTime": "10:25",
         "sessions": [
             [16],
-            [999]
+            [21]
         ]
     }, {
         "startTime": "10:25",
         "endTime": "11:00",
         "sessions": [
             [12],
-            [999]
+            [19]
         ]
     }, {
         "startTime": "11:00",
         "endTime": "11:35",
         "sessions": [
             [13],
-            [999]
+            [18]
         ]
     }, {
         "startTime": "11:35",
         "endTime": "12:10",
         "sessions": [
             [14],
-            [999]
+            [15]
         ]
     }, {
         "startTime": "12:10",
@@ -61,34 +61,23 @@
         ]
     }, {
         "startTime": "13:40",
-        "endTime": "13:50",
-        "sessions": [
-            [998]
-        ]
-    }, {
-        "startTime": "13:50",
-        "endTime": "14:00",
-        "sessions": [
-            [998]
-        ]
-    }, {
-        "startTime": "14:00",
         "endTime": "14:15",
         "sessions": [
-            [998]
+            [22],
+            [23]
         ]
     }, {
         "startTime": "14:15",
         "endTime": "14:50",
         "sessions": [
-            [15],
-            [999]
+            [11],
+            [17]
         ]
     }, {
         "startTime": "14:50",
         "endTime": "15:25",
         "sessions": [
-            [11],
+            [999],
             [999]
         ]
     }, {
@@ -155,8 +144,8 @@
         "sessions": [
             [81],
             [82],
-            [888],
-            [888]
+            [84],
+            [85]
         ]
     }]
 }]

@@ -103,7 +103,7 @@
         <template is="dom-repeat" items="[[app.data.navigation]]" as="nav">
           <a class="navigation-link" name="[[nav.route]]" href$="[[nav.permalink]]" on-tap="closeDrawer">{{localize(nav.route)}}</a>
         </template>
-        <a class="navigation-link" href$="[[app.data.externalLinks.cfp]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">[[localize('c4p')]]
+        <a class="navigation-link" href$="[[app.data.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">[[localize('buy-ticket')]]
           <iron-icon
             class="open-in-new"
             icon="open-in-new"

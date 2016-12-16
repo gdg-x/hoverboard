@@ -1,39 +1,7 @@
 {
-  "91": {
-    "id": 91,
-    "name": "Secret Keynote Speaker",
-    "title": "Angular Hero",
-    "company": "",
-    "companyLogo": "",
-    "country": "World",
-    "photoUrl": "/images/people/anonymous.png",
-    "shortBio": "",
-    "bio": "",
-    "tags": [
-    ],
-    "badges": [
-    ],
-    "socials": []
-  },
   "92": {
     "id": 92,
     "name": "Secret Speaker",
-    "title": "Angular Hero",
-    "company": "",
-    "companyLogo": "",
-    "country": "World",
-    "photoUrl": "/images/people/anonymous.png",
-    "shortBio": "",
-    "bio": "",
-    "tags": [
-    ],
-    "badges": [
-    ],
-    "socials": []
-  },
-  "93": {
-    "id": 93,
-    "name": "Secret Workshop Trainer",
     "title": "Angular Hero",
     "company": "",
     "companyLogo": "",
@@ -253,6 +221,222 @@
     }]
   },
 
+  "17": {
+    "id": 17,
+    "featured": true,
+    "name": "Erik Haddad",
+    "title": "UX Engineer",
+    "company": "Google",
+    "companyLogo": "",
+    "country": "USA",
+    "photoUrl": "/images/people/ErikHaddad.jpg",
+    "shortBio": "Erik Haddad is a UX Engineer at Google on the Firebase team. Prior to joining Google, Erik was an advanced development engineer at ESPN and Disney.",
+    "bio": "Erik Haddad is a UX Engineer at Google on the Firebase team. Prior to joining Google, Erik was an advanced development engineer at ESPN and Disney.",
+    "tags": [
+      "Firebase",
+      "AngularFire 2",
+      "Angular 2"
+    ],
+    "badges": [{
+      "name": "Googler",
+      "description": "Firebase Team",
+      "link": "https://firebase.google.com/"
+    }],
+    "socials": [ {
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/erikhaddad"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "https://github.com/erikhaddad"
+    }]
+  },
+
+  "18": {
+    "id": 18,
+    "featured": true,
+    "name": "Alex Lakatos",
+    "title": "Tech Speaker",
+    "company": "Mozilla",
+    "companyLogo": "",
+    "country": "UK",
+    "photoUrl": "/images/people/AlexLakatos.jpg",
+    "shortBio": "Alex Lakatos wears many hats at Mozilla for the past 5 years, including but not limited to Mozilla Tech Speaker, Mozilla Reps Council Member, T-Shirt Lover. JavaScript developer building on the open web, he has been pushing its boundaries every day. A Trainer based in London he's been doing public and private Angular classes, runs a Meetup group, and just can't shut up about Angular when in front of an audience.",
+    "bio": "Alex Lakatos wears many hats at Mozilla for the past 5 years, including but not limited to Mozilla Tech Speaker, Mozilla Reps Council Member, T-Shirt Lover. JavaScript developer building on the open web, he has been pushing its boundaries every day. A Trainer based in London he's been doing public and private Angular classes, runs a Meetup group, and just can't shut up about Angular when in front of an audience.",
+    "tags": [
+      "Firebase",
+      "AngularFire 2",
+      "Angular 2"
+    ],
+    "badges": [{
+      "name": "Mozilla Tech Speaker",
+      "description": "Mozilla Tech Speaker",
+      "link": "https://wiki.mozilla.org/TechSpeakers"
+    }],
+    "socials": [{
+      "icon": "website",
+      "name": "Website",
+      "link": "http://alexlakatos.com"
+    },{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/lakatos88"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "https://github.com/AlexLakatos"
+    }]
+  },
+
+  "19": {
+    "id": 19,
+    "featured": true,
+    "name": "Daniel Freilling",
+    "title": "Fullstack Developer",
+    "company": "Nota",
+    "companyLogo": "",
+    "country": "Denmark",
+    "photoUrl": "/images/people/DanielFreilling.jpg",
+    "shortBio": "Fullstack developer mainly experienced in JavaScript and NodeJS. Daniel is 30 years old and have mostly been developing native Apps for iOS and Android and backends. Recently became a father to a little girl.",
+    "bio": "Fullstack developer mainly experienced in JavaScript and NodeJS. Daniel is 30 years old and have mostly been developing native Apps for iOS and Android and backends. Recently became a father to a little girl.",
+    "tags": [
+      "NativeScript",
+      "Accessibility",
+      "Angular 2"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "website",
+      "name": "Website",
+      "link": "http://nota.dk"
+    }]
+  },
+
+  "20": {
+    "id": 20,
+    "featured": true,
+    "name": "Morten Sjøgren",
+    "title": "Fullstack Developer",
+    "company": "Nota",
+    "companyLogo": "",
+    "country": "Denmark",
+    "photoUrl": "/images/people/MortenSjogren.jpg",
+    "shortBio": "Fullstack developer mainly experienced in JavaScript and NodeJS. Morten is 36 years old and have been active in Open Source for almost 10 years and a Linux user for 15. He's active in Prosa, the danish union for IT-professionals and in IT-politics.",
+    "bio": "Fullstack developer mainly experienced in JavaScript and NodeJS. Morten is 36 years old and have been active in Open Source for almost 10 years and a Linux user for 15. He's active in Prosa, the danish union for IT-professionals and in IT-politics.",
+    "tags": [
+      "Firebase",
+      "AngularFire 2",
+      "Angular 2"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "website",
+      "name": "Website",
+      "link": "http://mabs.dk"
+    },{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/m_abs"
+    }]
+  },
+
+  "21": {
+    "id": 21,
+    "featured": true,
+    "name": "Zackary Chapple",
+    "title": "Software Architect",
+    "company": "CareerBuilder",
+    "companyLogo": "",
+    "country": "USA",
+    "photoUrl": "/images/people/ZackaryChapple.jpg",
+    "shortBio": "Zack Chapple - in his current role as a Software Architect at CareerBuilder he is leading the charge for UI convergence through an unifying vision around Atomic Design and Angular 2, while simultaneously breaking down silos across products and teams around the globe. Zack brings a distinct passion for software craftsmanship, testing and a contagious excitement for living on the bleeding edge of software. The best part is his background in teaching at development bootcamps for people of all skill levels, which helps him to convey complicated concepts in an easily digestible fashion.",
+    "bio": "Zack Chapple - in his current role as a Software Architect at CareerBuilder he is leading the charge for UI convergence through an unifying vision around Atomic Design and Angular 2, while simultaneously breaking down silos across products and teams around the globe. Zack brings a distinct passion for software craftsmanship, testing and a contagious excitement for living on the bleeding edge of software. The best part is his background in teaching at development bootcamps for people of all skill levels, which helps him to convey complicated concepts in an easily digestible fashion.",
+    "tags": [
+      "Testing",
+      "Angular CLI",
+      "Angular 2"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "website",
+      "name": "Website",
+      "link": "http://www.zackarychapple.guru"
+    },{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/ZChapple"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "http://github.com/zackarychapple"
+    }]
+  },
+
+  "22": {
+    "id": 22,
+    "featured": true,
+    "name": "Sani Yusuf",
+    "title": "Founder",
+    "company": "HAIBRID",
+    "companyLogo": "",
+    "country": "United Kingdom",
+    "photoUrl": "/images/people/SaniYusuf.jpg",
+    "shortBio": "Sani is the founder of HAIBRID, a London based startup that uses Ionic to create innovative mobile solutions. Sani also co-manages the Ionic UK community in UK and has done some Ionic stuff spanning 3 continents. He has also done some cool stuff with companies like Sworkit, Microsoft, Huddlebuy & Anritsu and actively contributes to the Ionic open source community.",
+    "bio": "Sani is the founder of HAIBRID, a London based startup that uses Ionic to create innovative mobile solutions. Sani also co-manages the Ionic UK community in UK and has done some Ionic stuff spanning 3 continents. He has also done some cool stuff with companies like Sworkit, Microsoft, Huddlebuy & Anritsu and actively contributes to the Ionic open source community.",
+    "tags": [
+      "Progressive Web Apps",
+      "Ionic 2",
+      "Angular 2"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "website",
+      "name": "Website",
+      "link": "http://www.saniyusuf.com"
+    },{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/saniyusuf"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "http://github.com/saniyusuf"
+    }]
+  },
+
+  "23": {
+    "id": 23,
+    "featured": true,
+    "name": "Ryan Chenkie",
+    "title": "Full-stack JavaScript developer",
+    "company": "Auth0",
+    "companyLogo": "",
+    "country": "Canada",
+    "photoUrl": "/images/people/RyanChenkie.jpg",
+    "shortBio": "Ryan is a full-stack JavaScript developer and works mostly with Angular 2 and Node. He's a Product Owner at Auth0 and also runs Angularcasts.io, a screencast site offering end-to-end Angular and JavaScript training. Ryan has a keen interest in authentication and identity in modern apps and loves contributing to the community with tutorial content and libraries such as angular2-jwt.",
+    "bio": "Ryan is a full-stack JavaScript developer and works mostly with Angular 2 and Node. He's a Product Owner at Auth0 and also runs Angularcasts.io, a screencast site offering end-to-end Angular and JavaScript training. Ryan has a keen interest in authentication and identity in modern apps and loves contributing to the community with tutorial content and libraries such as angular2-jwt.",
+    "tags": [
+      "Authentication",
+      "JWT",
+      "Angular 2"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "website",
+      "name": "Website",
+      "link": "https://angularcasts.io"
+    },{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/ryanchenkie"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "http://github.com/chenkie"
+    }]
+  },
+
   "82": {
     "id": 82,
     "featured": true,
@@ -312,6 +496,70 @@
       "icon": "github",
       "name": "GitHub",
       "link": "https://github.com/strongbrewio"
+    }]
+  },
+
+  "84": {
+    "id": 84,
+    "featured": true,
+    "name": "Sam Vloeberghs",
+    "title": "Software architect",
+    "company": "NG-BE",
+    "companyLogo": "",
+    "country": "Belgium",
+    "photoUrl": "/images/people/SamVloeberghs.jpg",
+    "shortBio": "Sam is a freelance software architect, coach and project manager with a broad knowledge on frontend architecture. Currently he focusses on Angular, testing, the 'write once run everywhere' principe using Electron & Ionic 2 and Firebase.  Besides that he is co-managing the yearly Belgian Angular conference NG-BE, the Angular-Belgium and JSBE.io meetup group, supporting the frontend community where he can.",
+    "bio": "Sam is a freelance software architect, coach and project manager with a broad knowledge on frontend architecture. Currently he focusses on Angular, testing, the 'write once run everywhere' principe using Electron & Ionic 2 and Firebase.  Besides that he is co-managing the yearly Belgian Angular conference NG-BE, the Angular-Belgium and JSBE.io meetup group, supporting the frontend community where he can.",
+    "tags": [
+      "Progressive Web Apps",
+      "Firebase",
+      "Ionic 2",
+      "Angular 2"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "website",
+      "name": "Website",
+      "link": "http://samvloeberghs.be/?willbeupdatedsoon"
+    }, {
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/samvloeberghs"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "https://github.com/samvloeberghs"
+    }]
+  },
+
+  "85": {
+    "id": 85,
+    "featured": true,
+    "name": "Nir Kaufman",
+    "title": "Head of Angular Development",
+    "company": "500Tech",
+    "companyLogo": "",
+    "country": "Israel",
+    "photoUrl": "/images/people/NirKaufman.jpg",
+    "shortBio": "Nir is the Head of Angular Development at 500Tech - a leading front-end consultancy in Israel. He is a passionate JavaScript developer, international speaker, Angular evangelist and community activist. ",
+    "bio": "Nir is the Head of Angular Development at 500Tech - a leading front-end consultancy in Israel. He is a passionate JavaScript developer, international speaker, Angular evangelist and community activist. ",
+    "tags": [
+      "Redux",
+      "Angular 2"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "website",
+      "name": "Website",
+      "link": "http://500tech.com/"
+    }, {
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/nirkaufman"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "https://github.com/nirkaufman"
     }]
   }
 
