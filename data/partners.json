@@ -3,6 +3,11 @@
     "title": "sponsors",
     "logos": [
       {
+        "name": "Nordea",
+        "url": "http://www.nordea.com/",
+        "logoUrl": "../images/logos/nordea.png"
+      },
+      {
         "name": "IMPACT",
         "url": "http://www.impact.dk/",
         "logoUrl": "../images/logos/impact.png"
@@ -57,6 +62,11 @@
   {
     "title": "community-partners",
     "logos": [
+      {
+        "name": "AngularCamp",
+        "url": "https://angularcamp.org/",
+        "logoUrl": "../images/logos/angularcamp.png"
+      },
       {
         "name": "NG-BE",
         "url": "https://ng-be.org/",

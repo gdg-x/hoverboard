@@ -130,6 +130,7 @@
         "starts": "student-ticket-starts",
         "ends": "student-ticket-ends",
         "info": "student-ticket-info",
+        "day": "student-ticket-day",
         "soldOut": false
       },
       {
@@ -139,6 +140,7 @@
         "starts": "regular-ticket-starts",
         "ends": "regular-ticket-ends",
         "info": "regular-ticket-info",
+        "day": "regular-ticket-day",
         "soldOut": false
       },
       {
@@ -148,6 +150,7 @@
         "starts": "workshop-ticket-starts",
         "ends": "workshop-ticket-ends",
         "info": "workshop-ticket-info",
+        "day": "workshop-ticket-day",
         "soldOut": false
       },
       {
@@ -157,6 +160,7 @@
         "starts": "early-ticket-starts",
         "ends": "early-ticket-ends",
         "info": "early-ticket-info",
+        "day": "early-ticket-day",
         "soldOut": true
       }
     ]
@@ -177,7 +181,7 @@
       "caption": "sessions"
     },
     {
-      "counter": 4,
+      "counter": 5,
       "caption": "workshops"
     }
   ],

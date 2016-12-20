@@ -131,6 +131,8 @@
         "title": "Workshops room #3"
     }, {
         "title": "Workshops room #4"
+    }, {
+        "title": "Workshops room #5"
     }],
     "timeslots": [{
         "startTime": "09:30",
@@ -145,7 +147,8 @@
             [81],
             [82],
             [84],
-            [85]
+            [85],
+            [86]
         ]
     }]
 }]

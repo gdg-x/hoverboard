@@ -102,7 +102,7 @@
     "81": {
         "id": 81,
         "title": "Advanced Angular 2",
-        "description": "In this workshop, attendees that already know the basics of Angular 2 will concentrate on advanced topics. You will learn about approaches for internationalization and about modern authentication scenarios with OAuth 2 and OpenId Connect that allow for single sign on as well as for an integration into existing identity systems like Active Directory. In addition to that, you will also get to know some strategies to drastically improve your application performance, like using observables and immutables for data binding and leveraging the AOT compiler as well as tree shaking. In addition to that, you will find out how to use lazy loading and preloading together with webpack and how to use other advanced routing techniques, like aux routes, router events and guards.",
+        "description": "In this workshop, attendees that already know the basics of Angular 2 will concentrate on advanced topics. You will learn about approaches for internationalization and about modern authentication scenarios with OAuth 2 and OpenId Connect that allow for single sign on as well as for an integration into existing identity systems like Active Directory. In addition to that, you will also get to know some strategies to drastically improve your application performance, like using observables and immutables for data binding and leveraging the AOT compiler as well as tree shaking. In addition to that, you will find out how to use lazy loading and preloading together with webpack and how to use other advanced routing techniques, like aux routes, router events and guards.<br /><b><a href='https://ti.to/ngvikings/2017/with/8cwlwg1x4qm'>Get the ticket</a></b>",
         "speakers": [
             11
         ],
@@ -115,7 +115,7 @@
     "82": {
         "id": 82,
         "title": "Reactive applications with Angular2, Rxjs and @ngrx",
-        "description": "During this workshop you will have the newest technologies explained to you. This is not a basic Angular 2 workshop. Instead we will focus on the hard parts of creating a scalable application that is maintainable and snappy. We will teach you how to use Smart vs Dumb components, RxJS, NGRX/Store and much more in real world applications. The focus lies on principles, architectural choices and best practices. And of course CODING! We do this by switching theory with coding sessions where you have to code parts of the application yourself. We refactor a non-reactive application towards a reactive application during the workshop. At the end, we will demonstrate the flexibility of the application by making it realtime in only 6 lines of code!",
+        "description": "During this workshop you will have the newest technologies explained to you. This is not a basic Angular 2 workshop. Instead we will focus on the hard parts of creating a scalable application that is maintainable and snappy. We will teach you how to use Smart vs Dumb components, RxJS, NGRX/Store and much more in real world applications. The focus lies on principles, architectural choices and best practices. And of course CODING! We do this by switching theory with coding sessions where you have to code parts of the application yourself. We refactor a non-reactive application towards a reactive application during the workshop. At the end, we will demonstrate the flexibility of the application by making it realtime in only 6 lines of code!<br /><b><a href='https://ti.to/ngvikings/2017/with/ircfy7j10dq'>Get the ticket</a></b>",
         "speakers": [
             82, 83
         ],
@@ -129,7 +129,7 @@
     "84": {
         "id": 84,
         "title": "Ionic 2 with Firebase",
-        "description": "In this workshop we start with setting up Ionic 2 and Firebase. First of all we'll guide you through the basics of the Ionic CLI, Firebase configuration and documentation available. We'll learn how to use the ionic starters, setup and use basic components and building the application. We'll move from the idea of mobile apps to progressive web apps and how we can implement that idea with Ionic2 & Firebase. Identify the requirements to get service workers and 'Add to home screen' working and how to set this up. Last but not least we'll see how we can make our PWA realtime and work offline with Firebase.",
+        "description": "In this workshop we start with setting up Ionic 2 and Firebase. First of all we'll guide you through the basics of the Ionic CLI, Firebase configuration and documentation available. We'll learn how to use the ionic starters, setup and use basic components and building the application. We'll move from the idea of mobile apps to progressive web apps and how we can implement that idea with Ionic2 & Firebase. Identify the requirements to get service workers and 'Add to home screen' working and how to set this up. Last but not least we'll see how we can make our PWA realtime and work offline with Firebase.<br /><b><a href='https://ti.to/ngvikings/2017/with/zvkdnmxrw-k'>Get the ticket</a></b>",
         "speakers": [
             84
         ],
@@ -145,7 +145,7 @@
     "85": {
         "id": 85,
         "title": "Data flow architecture with Redux and Angular 2",
-        "description": "This workshop is all about modern SPA architecture, focused on popular architectural design pattern Redux. Redux, an architectural pattern inspired by concepts from stateless web architecture patterns and functional programming paradigms, introduces a unidirectional data-flow and a predictable state container that scales. It’s a popular, mind-blowing alternative to the popular MVC pattern and solves a lot of issues in an elegant and clean way. Through a series of live code examples, Nir Kaufman walks you through a complete flow of a typical application, using Angular2 as the presentation layer.",
+        "description": "This workshop is all about modern SPA architecture, focused on popular architectural design pattern Redux. Redux, an architectural pattern inspired by concepts from stateless web architecture patterns and functional programming paradigms, introduces a unidirectional data-flow and a predictable state container that scales. It’s a popular, mind-blowing alternative to the popular MVC pattern and solves a lot of issues in an elegant and clean way. Through a series of live code examples, Nir Kaufman walks you through a complete flow of a typical application, using Angular2 as the presentation layer.<br /><b><a href='https://ti.to/ngvikings/2017/with/b1vu-lona1s'>Get the ticket</a></b>",
         "speakers": [
             85
         ],
@@ -154,6 +154,19 @@
             "Angular 2"
         ],
         "complexity": "Advanced"
+    },
+
+    "86": {
+        "id": 86,
+        "title": "Angular 2 Workshop: From Zero To Hero Jr in 1 day!",
+        "description": "This exciting workshop will start from scratch and walk you through how to develop a full Angular application. We will dive into how to setup, create and debug a web application with Angular 2 and TypeScript that will let us explore the various concepts, and familiarise ourselves with some of the new terminology in Angular 2. The agenda is:<br />• TypeScript fundamentals<br />• Setup and Tooling<br />• Getting started with the Angular CLI<br />• Introduction to Angular<br />• Components (Decorators, Data Binding, Events, Input/Output)<br />• NgModules, Ahead-of-time compilation<br />• Dependency Injection and providers<br />• Services<br />• Async with Reactive Extensions (RxJS, Observables)<br />• Requests to a REST API (HTTP)<br />• Navigation and Routing (Component Router)<br />• Lazy-loading<br /><b><a href='https://ti.to/ngvikings/2017/with/l0ba5y5ht0m'>Get the ticket</a></b>",
+        "speakers": [
+            86
+        ],
+        "tags": [
+            "Angular 2"
+        ],
+        "complexity": "Beginner"
     },
 
     "11": {

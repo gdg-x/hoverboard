@@ -34,5 +34,14 @@
       "secondaryColor": "#012250",
       "image": "images/backgrounds/team.jpg",
       "brief": "The prices start from 500DKK for the Student ticket (excl. MVA)"
+    },
+    {
+      "id": "workshops",
+      "title": "Get to the next level: 5 full-day Angular 2 workshops for the very good price!",
+      "posted": "2016-12-18",
+      "primaryColor": "#012250",
+      "secondaryColor": "#012250",
+      "image": "images/backgrounds/speakers.jpg",
+      "brief": "Internationally renowned trainers, influencers, the persons you know by their presentations for the best developer conferences, by their blog posts and Angular community activities, will teach you Angular 2 basics, best practices, advanced techniques and surrounding technologies"
     }
 ]

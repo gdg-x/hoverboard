@@ -130,7 +130,7 @@
         <div class="divider">
           <iron-icon icon="icons:star"></iron-icon>
         </div>
-        <div class="dates">[[starts]] - [[ends]]</div>
+        <div class="dates">[[day]]</div>
         <template is="dom-if" if="[[info]]">
           <div class="additional-info">[[info]]</div>
         </template>
@@ -172,6 +172,10 @@
           },
 
           ends: {
+            type: String
+          },
+
+          day: {
             type: String
           },
 

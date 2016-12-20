@@ -541,8 +541,8 @@
     "companyLogo": "",
     "country": "Israel",
     "photoUrl": "/images/people/NirKaufman.jpg",
-    "shortBio": "Nir is the Head of Angular Development at 500Tech - a leading front-end consultancy in Israel. He is a passionate JavaScript developer, international speaker, Angular evangelist and community activist. ",
-    "bio": "Nir is the Head of Angular Development at 500Tech - a leading front-end consultancy in Israel. He is a passionate JavaScript developer, international speaker, Angular evangelist and community activist. ",
+    "shortBio": "Nir is the Head of Angular Development at 500Tech - a leading front-end consultancy in Israel. He is a passionate JavaScript developer, international speaker, Angular evangelist and community activist.",
+    "bio": "Nir is the Head of Angular Development at 500Tech - a leading front-end consultancy in Israel. He is a passionate JavaScript developer, international speaker, Angular evangelist and community activist.",
     "tags": [
       "Redux",
       "Angular 2"
@@ -560,6 +560,36 @@
       "icon": "github",
       "name": "GitHub",
       "link": "https://github.com/nirkaufman"
+    }]
+  },
+
+  "86": {
+    "id": 86,
+    "featured": true,
+    "name": "Laurent Duveau",
+    "title": "Full Stack Teacher",
+    "company": "Angular Academy",
+    "companyLogo": "",
+    "country": "Canada",
+    "photoUrl": "/images/people/LaurentDuveau.jpg",
+    "shortBio": "Full Stack Teacher, passionate about web and mobile dev with Angular, TypeScript and .NET.",
+    "bio": "Full Stack Teacher, passionate about web and mobile dev with Angular, TypeScript and .NET",
+    "tags": [
+      "Angular 2"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "website",
+      "name": "Website",
+      "link": "http://www.AngularAcademy.ca"
+    }, {
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/AngularAcademy"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "https://github.com/ldex"
     }]
   }
 
