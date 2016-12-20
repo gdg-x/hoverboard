@@ -32,7 +32,13 @@ global.config = {
   // https://github.com/GoogleChrome/sw-precache#options-parameter
   swPrecacheConfig: {
     navigateFallback: '/index.html'
-  }
+  },
+  templatePath: [
+    'scripts/**/*.js',
+    'src/**/*.html',
+    'index.html',
+    'manifest.json'
+  ]
 };
 
 // Add your own custom gulp tasks to the gulp-tasks directory
@@ -51,12 +57,10 @@ const project = require('./gulp-tasks/project.js');
 // out of the stream and run them through specific tasks. An example is provided
 // which filters all images and runs them through imagemin
 function source() {
-  const metadata = requireUncached('./data/hoverboard.config');
-  const resources = requireUncached('./data/en/resources');
-  return project.splitSource()
+  return compileTemplate()
+    .pipe(project.splitSource())
     // Add your own build tasks here!
-    .pipe(gulpif('**/*.{png,gif,jpg,svg}', images.minify()))
-    .pipe(gulpif('**/*.{html,js,json}', template.compile(Object.assign({}, metadata, resources))))
+    // .pipe(gulpif('**/*.{png,gif,jpg,svg}', images.minify()))
     .pipe(project.rejoin()); // Call rejoin when you're finished
 }
 
@@ -69,16 +73,15 @@ function dependencies() {
     .pipe(project.rejoin());
 }
 
-gulp.task('template', gulp.series(clean('.temp'), () => {
+function compileTemplate() {
   const metadata = requireUncached('./data/hoverboard.config');
   const resources = requireUncached('./data/en/resources');
-  return gulp.src([
-    'scripts/**/*.js',
-    'src/**/*.html',
-    'index.html',
-    'manifest.json'
-  ], {base: '.'})
-    .pipe(template.compile(Object.assign({}, metadata, resources)))
+  return gulp.src(global.config.templatePath, {base: '.'})
+    .pipe(template.compile(Object.assign({}, metadata, resources)));
+}
+
+gulp.task('template', gulp.series(clean('.temp'), () => {
+  return compileTemplate()
     .pipe(gulp.dest('.temp'));
 }));
 
