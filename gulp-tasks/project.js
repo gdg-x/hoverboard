@@ -129,10 +129,20 @@ function writeUnbundledServiceWorker() {
   });
 }
 
+function sources() {
+  return project.sources();
+}
+
+function splitHtml() {
+  return project.splitHtml();
+}
+
 module.exports = {
   splitSource: splitSource,
   splitDependencies: splitDependencies,
   rejoin: rejoin,
   merge: merge,
-  serviceWorker: serviceWorker
+  serviceWorker: serviceWorker,
+  sources: sources,
+  splitHtml: splitHtml
 };
