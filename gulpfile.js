@@ -5,6 +5,7 @@ const gulp = require('gulp');
 const gulpif = require('gulp-if');
 const uglify = require('gulp-uglify');
 const cssSlam = require('css-slam').gulp;
+const htmlmin = require('gulp-htmlmin');
 const browserSync = require('browser-sync').create();
 const history = require('connect-history-api-fallback');
 const requireUncached = require('require-uncached');
@@ -78,6 +79,18 @@ function source() {
     // splitHtml doesn't split CSS https://github.com/Polymer/polymer-build/issues/32
     .pipe(gulpif(/\.js$/, uglify()))
     .pipe(gulpif('**/*.{html,css}', cssSlam()))
+    .pipe(gulpif(/\.html$/, htmlmin({
+      caseSensitive: true,
+      collapseWhitespace: true,
+      collapseInlineTagWhitespace: true,
+      removeComments: true,
+      removeCommentsFromCDATA: true,
+      customAttrAssign: [/\$=/],
+      customAttrSurround: [
+        [ {'source': '\\({\\{'}, {'source': '\\}\\}'} ],
+        [ {'source': '\\[\\['}, {'source': '\\]\\]'}  ]
+      ]
+    })))
     .pipe(gulpif('**/*.{png,gif,jpg,svg}', images.minify()))
     .pipe(project.rejoin()); // Call rejoin when you're finished
 }
