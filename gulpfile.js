@@ -3,6 +3,8 @@
 const path = require('path');
 const gulp = require('gulp');
 const gulpif = require('gulp-if');
+const uglify = require('gulp-uglify');
+const cssSlam = require('css-slam').gulp;
 const browserSync = require('browser-sync').create();
 const history = require('connect-history-api-fallback');
 const requireUncached = require('require-uncached');
@@ -73,6 +75,9 @@ function source() {
     .pipe(gulpif('**/*.{html,js,json}', template.compile(Object.assign({}, metadata, resources))))
     .pipe(project.splitHtml())
     // Add your own build tasks here!
+    // splitHtml doesn't split CSS https://github.com/Polymer/polymer-build/issues/32
+    .pipe(gulpif(/\.js$/, uglify()))
+    .pipe(gulpif('**/*.{html,css}', cssSlam()))
     .pipe(gulpif('**/*.{png,gif,jpg,svg}', images.minify()))
     .pipe(project.rejoin()); // Call rejoin when you're finished
 }
