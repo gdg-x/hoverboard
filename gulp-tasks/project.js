@@ -112,7 +112,7 @@ function serviceWorker() {
 function writeBundledServiceWorker() {
   return polymer.addServiceWorker({
     project: project,
-    buildRoot: bundledPath,
+    buildRoot: bundledPath.replace('\\', '/'),
     swConfig: global.config.swPrecacheConfig,
     serviceWorkerPath: global.config.serviceWorkerPath,
     bundled: true
@@ -123,7 +123,7 @@ function writeBundledServiceWorker() {
 function writeUnbundledServiceWorker() {
   return polymer.addServiceWorker({
     project: project,
-    buildRoot: unbundledPath,
+    buildRoot: unbundledPath.replace('\\', '/'),
     swConfig: global.config.swPrecacheConfig,
     serviceWorkerPath: global.config.serviceWorkerPath
   });

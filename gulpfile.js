@@ -31,7 +31,17 @@ global.config = {
   // Service Worker precache options based on
   // https://github.com/GoogleChrome/sw-precache#options-parameter
   swPrecacheConfig: {
-    navigateFallback: '/index.html'
+    staticFileGlobs: [
+      '/index.html',
+      '/manifest.json',
+      '/bower_components/webcomponentsjs/webcomponents-lite.min.js',
+      '/src/**/*',
+      '/scripts/**/*',
+      '/images/**/*',
+      '/data/**/*'
+    ],
+    navigateFallback: '/index.html',
+    navigateFallbackWhitelist: [ /^\/[^\_]+\// ]
   },
   templatePath: [
     'scripts/**/*.js',
