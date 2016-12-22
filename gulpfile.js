@@ -101,6 +101,20 @@ function source() {
 // case you need it :)
 function dependencies() {
   return project.splitDependencies()
+    .pipe(gulpif(/\.js$/, uglify()))
+    .pipe(gulpif('**/*.{html,css}', cssSlam()))
+    .pipe(gulpif(/\.html$/, htmlmin({
+      caseSensitive: true,
+      collapseWhitespace: true,
+      collapseInlineTagWhitespace: true,
+      removeComments: true,
+      removeCommentsFromCDATA: true,
+      customAttrAssign: [/\$=/],
+      customAttrSurround: [
+        [ {'source': '\\({\\{'}, {'source': '\\}\\}'} ],
+        [ {'source': '\\[\\['}, {'source': '\\]\\]'}  ]
+      ]
+    })))
     .pipe(project.rejoin());
 }
 
