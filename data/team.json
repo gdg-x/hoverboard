@@ -118,16 +118,16 @@
       },
       {
         "name": "Morten Kirstein",
-        "photoUrl": "/images/people/anonymous.png",
+        "photoUrl": "/images/people/MortenKirstein.jpg",
         "socials": [
         {
           "icon": "github",
-          "link": "https://github.com/",
+          "link": "https://github.com/morten-kirstein",
           "name": "GitHub"
         },
         {
           "icon": "twitter",
-          "link": "https://twitter.com/",
+          "link": "https://twitter.com/mortenkirstein",
           "name": "Twitter"
         }],
         "title": "Co-organizer"
