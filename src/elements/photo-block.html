@@ -77,38 +77,38 @@
       <div class="photo big">
         <iron-image
           class="placeholder-color"
-          src="[[app.data.gallery.photos.big]]"
+          src="{$ gallery.photos.big $}"
           sizing="cover"
           preload fade
         ></iron-image>
-        <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
+        <a class="open-photos" href="{$ gallery.albumUrl $}" target="_blank" rel="noopener noreferrer">
           <paper-ripple></paper-ripple>
-          <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>
+          <span>{$ clickToViewPhotos $} <iron-icon icon="open-in-new"/></span>
         </a>
       </div>
       <div class="vertical-block">
         <div class="photo">
           <iron-image
             class="placeholder-color"
-            src="[[app.data.gallery.photos.small.0]]"
+            src="{$ gallery.photos.small[0] $}"
             sizing="cover"
             preload fade
           ></iron-image>
-          <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
+          <a class="open-photos" href="{$ gallery.albumUrl $}" target="_blank" rel="noopener noreferrer">
             <paper-ripple></paper-ripple>
-            <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>
+            <span>{$ clickToViewPhotos $} <iron-icon icon="open-in-new"/></span>
           </a>
         </div>
         <div class="photo">
           <iron-image
             class="placeholder-color"
-            src="[[app.data.gallery.photos.small.1]]"
+            src="{$ gallery.photos.small[1] $}"
             sizing="cover"
             preload fade
           ></iron-image>
-          <a class="open-photos" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
+          <a class="open-photos" href="{$ gallery.albumUrl $}" target="_blank" rel="noopener noreferrer">
             <paper-ripple></paper-ripple>
-            <span>[[localize('click-to-view-photos')]] <iron-icon icon="open-in-new"/></span>
+            <span>{$ clickToViewPhotos $} <iron-icon icon="open-in-new"/></span>
           </a>
         </div>
       </div>
@@ -122,11 +122,7 @@
 
       Polymer({
 
-        is: 'photo-block',
-
-        behaviors: [
-          HOVERBOARD.LocalizeBehavior
-        ]
+        is: 'photo-block'
 
       });
 

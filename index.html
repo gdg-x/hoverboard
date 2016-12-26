@@ -5,28 +5,26 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <meta name="description"
-        content="The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts">
-  <meta name="keywords"
-        content="event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev">
-  <meta name="author" content="GDG Lviv">
+  <meta name="description" content="{$ description $}">
+  <meta name="keywords" content="{$ keywords $}">
+  <meta name="author" content="{$ organizer.name $}">
 
-  <title>GDG DevFest Season 2016</title>
+  <title>{$ title $}</title>
 
-  <link rel="canonical" href="https://hoverboard.firebaseapp.com/">
+  <link rel="canonical" href="{$ url $}">
   <link rel="shortcut icon" sizes="32x32" href="/images/favicon/favicon-32.png">
 
-  <meta name="theme-color" content="#F57C00">
+  <meta name="theme-color" content="{$ webapp.themeColor $}">
   <link rel="manifest" href="manifest.json">
 
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes"> <!-- fallback for manifest.json -->
-  <meta name="application-name" content="GDG DevFest Season 2016"> <!-- fallback for manifest.json -->
+  <meta name="application-name" content="{$ title $}"> <!-- fallback for manifest.json -->
 
   <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="GDG DevFest Season 2016">
+  <meta name="apple-mobile-web-app-title" content="{$ title $}">
 
   <!-- Homescreen icons. -->
   <link rel="shortcut icon" href="/images/favicon/favicon-72.png">
@@ -42,30 +40,27 @@
   <meta name="msapplication-tap-highlight" content="no">
 
   <!-- G+ sharing meta data -->
-  <meta itemprop="name" content="GDG DevFest Season 2016">
-  <meta itemprop="description"
-        content="The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts">
+  <meta itemprop="name" content="{$ title $}">
+  <meta itemprop="description" content="{$ description $}">
   <meta itemprop="image" content="/images/social-share.jpg">
-  <meta itemprop="startDate" content="2016-09-09T09:00:00+03:00">
-  <meta itemprop="endDate" content="2016-09-10T19:00:00+03:00">
+  <meta itemprop="startDate" content="{$ startDate $}">
+  <meta itemprop="endDate" content="{$ endDate $}">
 
   <!-- Facebook sharing meta data -->
-  <meta property="og:title" content="GDG DevFest Season 2016">
-  <meta property="og:site_name" content="GDG DevFest Season 2016">
+  <meta property="og:title" content="{$ title $}">
+  <meta property="og:site_name" content="{$ title $}">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://hoverboard.firebaseapp.com/">
-  <meta property="og:description"
-        content="The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts">
+  <meta property="og:url" content="{$ url $}">
+  <meta property="og:description" content="{$ description $}">
   <meta property="og:type" content="Event">
   <meta property="og:image" content="/images/social-share.jpg">
   <meta property="og:image:type" content="image/png" />
 
   <!-- Twitter meta data -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:creator" content="@gdglviv">
-  <meta name="twitter:title" content="GDG DevFest Season 2016">
-  <meta name="twitter:description"
-        content="The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts">
+  <meta name="twitter:creator" content="@{$ organizer.twitter $}">
+  <meta name="twitter:title" content="{$ title $}">
+  <meta name="twitter:description" content="{$ description $}">
   <meta name="twitter:image" content="/images/social-share.jpg">
 
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
@@ -107,7 +102,7 @@
 
     // Creates the tracker.
     ga('create', {
-      trackingId: window.ENV === 'prod' ? 'UA-43643469-8' : 'UA-43643469-9',
+      trackingId: window.ENV === 'prod' ? '{$ analytics.prod $}' : '{$ analytics.dev $}',
       cookieDomain: 'auto',
       cookiePath: window.ENV !== 'dev' ? window.PREFIX || '/' : null,
       siteSpeedSampleRate: 10 // 10% of users.
@@ -130,23 +125,6 @@
   </script>
 
   <link rel="import" href="/src/hoverboard-app.html" async>
-
-  <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "Event",
-      "name": "GDG DevFest Season 2016",
-      "description": "The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts",
-      "startDate": "2016-09-09T09:00:00+03:00",
-      "endDate": "2016-09-10T19:00:00+03:00",
-      "url": "https://hoverboard.firebaseapp.com/",
-      "location": {
-        "@type" : "Place",
-        "name" : "Pivdennyi Expo Center",
-        "address": "36 Shchyretska St, Lviv, Ukraine"
-      }
-    }
-  </script>
 
 </head>
 <body>
