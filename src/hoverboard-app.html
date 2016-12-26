@@ -121,16 +121,16 @@
     ></app-data>
 
     <firebase-app
-      name="[[app.data.firebase.name]]"
-      auth-domain="[[app.data.firebase.domain]]"
-      database-url="[[app.data.firebase.database]]"
-      api-key="[[app.data.firebase.api]]"
+      name="{$ firebase.name $}"
+      auth-domain="{$ firebase.domain $}"
+      database-url="{$ firebase.database $}"
+      api-key="{$ firebase.api $}"
     >
     </firebase-app>
     <firebase-auth
       id="auth"
       provider="google"
-      app-name="[[app.data.firebase.name]]"
+      app-name="{$ firebase.name $}"
       user="{{app.user}}"
     >
     </firebase-auth>
@@ -246,11 +246,16 @@
           page: {
             type: String,
             reflectToAttribute: true
+          },
+
+          pages: {
+            type: Array,
+            value: {$ pages | dump | safe $}
           }
         },
 
         observers: [
-          '_routePageChanged(routeData.page, app.data.navigation)',
+          '_routePageChanged(routeData.page)',
           '_pageChanged(app.page)',
           'stylesChanged(app.headerSettings)'
         ],
@@ -273,11 +278,9 @@
           this.set('app.page', (page || 'home'));
           // Close the drawer - in case the *route* change came from a link in the drawer.
           this.drawerOpened = false;
-          if (this.app.data) {
-            var navObject = this.app.data.pages[this.app.page];
-            if (navObject && navObject.headerSettings) {
-              this.set('app.headerSettings', navObject.headerSettings);
-            }
+          var navObject = this.pages[this.app.page];
+          if (navObject && navObject.headerSettings) {
+            this.set('app.headerSettings', navObject.headerSettings);
           }
         },
 

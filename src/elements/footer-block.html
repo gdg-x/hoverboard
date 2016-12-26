@@ -169,7 +169,7 @@
           class="gdg-logo"
           src="/images/gdg-logo.svg"
           sizing="contain"
-          alt="[[app.data.organizer.name]]"
+          alt="{$ organizer.name $}"
         ></iron-image>
         <paper-button class="footer-backtotop" on-tap="scrollToTop" noink>
           {$ backToTop $}
@@ -202,7 +202,7 @@
             <div class="icons-wrapper align-pb-block">
               {% for network in social %}
                 <a class="button-link" href="{$ network.url $}" target="_blank" rel="noopener noreferrer">
-                  <paper-icon-button icon="icons:[[network.name]]"></paper-icon-button>
+                  <paper-icon-button icon="{$ network.name $}"></paper-icon-button>
                 </a>
               {% endfor %}
             </div>
@@ -231,7 +231,7 @@
             size="medium"
             width="200"
             annotation="inline"
-            href$="{{app.data.url}}"
+            href="{$ url $}"
           ></g:plusone>
         </div>
 

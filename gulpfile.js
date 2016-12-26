@@ -6,6 +6,7 @@ const gulpif = require('gulp-if');
 const uglify = require('gulp-uglify');
 const cssSlam = require('css-slam').gulp;
 const htmlmin = require('gulp-htmlmin');
+const babel = require('gulp-babel');
 const browserSync = require('browser-sync').create();
 const history = require('connect-history-api-fallback');
 const requireUncached = require('require-uncached');
@@ -101,7 +102,8 @@ function source() {
 // case you need it :)
 function dependencies() {
   return project.splitDependencies()
-    .pipe(gulpif(/\.js$/, uglify()))
+    // Doesn't work for now
+    // .pipe(gulpif(/\.js$/, uglify()))
     .pipe(gulpif('**/*.{html,css}', cssSlam()))
     .pipe(gulpif(/\.html$/, htmlmin({
       caseSensitive: true,

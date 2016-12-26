@@ -48,8 +48,8 @@
 
     <firebase-document
       id="userSessions"
-      app-name="[[app.data.firebase.name]]"
-      path="[[app.data.firebase.userSessionsPath]]/[[app.user.uid]]"
+      app-name="{$ firebase.name $}"
+      path="{$ firebase.userSessionsPath $}/[[app.user.uid]]"
       data="{{persistedData}}">
     </firebase-document>
 

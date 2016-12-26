@@ -144,31 +144,20 @@
         </animatable-content>
         <animatable-content name="blog">
           <div class="container">
-            <h3 class="page-title" hidden$="{{app.headerSettings.title}}">{$ blog $}</h3>
+            <h3 class="page-title" hidden$="{{app.headerSettings.title}}">{$ pages.blog.title $}</h3>
             <h3 class="page-title" hidden$="{{!app.headerSettings.title}}">[[app.headerSettings.title]]</h3>
             <div class="page-subtitle" hidden$="{{!app.headerSettings.subtitle}}">[[app.headerSettings.subtitle]]</div>
           </div>
         </animatable-content>
-        <animatable-content name="speakers">
-          <div class="container">
-            <h3 class="page-title">{$ speakers $}</h3>
-          </div>
-        </animatable-content>
-        <animatable-content name="schedule">
-          <div class="container">
-            <h3 class="page-title">{$ schedule $}</h3>
-          </div>
-        </animatable-content>
-        <animatable-content name="team">
-          <div class="container">
-            <h3 class="page-title">{$ team $}</h3>
-          </div>
-        </animatable-content>
-        <animatable-content name="cod">
-          <div class="container">
-            <h3 class="page-title">{$ cod $}</h3>
-          </div>
-        </animatable-content>
+        {% for page, settings in pages %}
+          {% if page !== 'home' and page !== 'blog' %}
+            <animatable-content name="{$ page $}">
+              <div class="container">
+                <h3 class="page-title">{$ settings.title $}</h3>
+              </div>
+            </animatable-content>
+          {% endif %}
+        {% endfor %}
       </neon-animated-pages>
     </app-toolbar>
 
@@ -195,9 +184,9 @@
         },
 
         _openVideo: function () {
-          HOVERBOARD.Elements.Template.openVideo(this.app.data.pages.home.headerSettings.video.title,
-            this.app.data.pages.home.headerSettings.video.youtubeId, true);
-          HOVERBOARD.Analytics.trackEvent('video', 'watch', this.app.data.pages.home.headerSettings.video.title);
+          HOVERBOARD.Elements.Template.openVideo('{$ pages.home.headerSettings.video.title $}',
+            '{$ pages.home.headerSettings.video.youtubeId $}', true);
+          HOVERBOARD.Analytics.trackEvent('video', 'watch', '{$ pages.home.headerSettings.video.title $}');
         },
 
         _scrollToTickets: function () {

@@ -150,7 +150,7 @@
           <paper-tabs selected="[[app.page]]" attr-for-selected="name" noink>
             {% for nav in navigation %}
               <paper-tab name="{$ nav.route $}" link>
-                <a href="{$ nav.permalink $}" class="nav-link">{$ nav.route $}</a>
+                <a href="{$ nav.permalink $}" class="nav-link">{$ pages[nav.route].title $}</a>
               </paper-tab>
             {% endfor %}
           </paper-tabs>
