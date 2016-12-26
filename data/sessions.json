@@ -1,331 +1,436 @@
 {
-    "999": {
-        "id": 999,
-        "title": "To Be Announced",
-        "description": "",
-        "speakers": [
-            92
-        ],
-        "tags": [
-            "Angular 2"
-        ]
-    },
-    "998": {
-        "id": 998,
-        "title": "Lightning Talk",
-        "description": "",
-        "speakers": [
-            92
-        ],
-        "tags": [
-            "Angular 2"
-        ]
-    },
-    "888": {
-        "id": 888,
-        "title": "Full-day workshop",
-        "description": "",
-        "speakers": [
-            93
-        ],
-        "complexity": "Beginner",
-        "tags": [
-            "Angular 2"
-        ]
-    },
-    "887": {
-        "id": 887,
-        "title": "Half-day workshop",
-        "description": "",
-        "speakers": [
-            93
-        ],
-        "complexity": "Beginner",
-        "tags": [
-            "Angular 2"
-        ]
-    },
-    "100": {
-        "id": 100,
-        "title": "Keynote",
-        "description": "",
-        "speakers": [
-            92
-        ],
-        "tags": [
-            "Keynote"
-        ]
-    },
-    "5": {
-        "id": 5,
-        "title": "Conference closing",
-        "description": "Make sure you won't miss closing ceremony.",
-        "image": "/images/backgrounds/closing.jpg"
-    },
-    "6": {
-        "id": 6,
-        "title": "Afterparty & Networking",
-        "description": "Afterparty is a great time to have some fun and meet new people",
-        "image": "/images/backgrounds/party.jpg"
-    },
-    "2": {
-        "id": 2,
-        "title": "ngVikings 2017 Opening",
-        "description": "Official start of the conference. Greetings from the organizers, sponsors and partners.",
-        "image": "/images/backgrounds/opening.jpg"
-    },
-    "7": {
-        "id": 7,
-        "title": "Morning coffee",
-        "description": "Coffeeeeeee!",
-        "image": "/images/backgrounds/morning.jpg"
-    },
-    "4": {
-        "id": 4,
-        "title": "Coffee break",
-        "description": "Coffeeeeeee!",
-        "image": "/images/backgrounds/coffee-break.jpg"
-    },
-    "3": {
-        "id": 3,
-        "title": "Lunch",
-        "description": "Foooooooood!",
-        "image": "/images/backgrounds/lunch.jpg"
-    },
-    "1": {
-        "id": 1,
-        "title": "Registration & morning Coffee",
-        "description": "Get your badge, coffee, enjoy talking with tech edicts around",
-        "image": "/images/backgrounds/registration.jpg"
-    },
+  "5": {
+    "id": 5,
+    "title": "Conference closing",
+    "description": "Make sure you won't miss closing ceremony.",
+    "image": "/images/backgrounds/closing.jpg"
+  },
+  "6": {
+    "id": 6,
+    "title": "Afterparty & Networking",
+    "description": "Afterparty is a great time to have some fun and meet new people",
+    "image": "/images/backgrounds/party.jpg"
+  },
+  "2": {
+    "id": 2,
+    "title": "ngVikings 2017 Opening",
+    "description": "Official start of the conference. Greetings from the organizers, sponsors and partners.",
+    "image": "/images/backgrounds/opening.jpg"
+  },
+  "7": {
+    "id": 7,
+    "title": "Morning coffee",
+    "description": "Coffeeeeeee!",
+    "image": "/images/backgrounds/morning.jpg"
+  },
+  "4": {
+    "id": 4,
+    "title": "Coffee break",
+    "description": "Coffeeeeeee!",
+    "image": "/images/backgrounds/coffee-break.jpg"
+  },
+  "3": {
+    "id": 3,
+    "title": "Lunch",
+    "description": "Foooooooood!",
+    "image": "/images/backgrounds/lunch.jpg"
+  },
+  "1": {
+    "id": 1,
+    "title": "Registration & morning Coffee",
+    "description": "Get your badge, coffee, enjoy talking with tech edicts around",
+    "image": "/images/backgrounds/registration.jpg"
+  },
 
-    "81": {
-        "id": 81,
-        "title": "Advanced Angular 2",
-        "description": "In this workshop, attendees that already know the basics of Angular 2 will concentrate on advanced topics. You will learn about approaches for internationalization and about modern authentication scenarios with OAuth 2 and OpenId Connect that allow for single sign on as well as for an integration into existing identity systems like Active Directory. In addition to that, you will also get to know some strategies to drastically improve your application performance, like using observables and immutables for data binding and leveraging the AOT compiler as well as tree shaking. In addition to that, you will find out how to use lazy loading and preloading together with webpack and how to use other advanced routing techniques, like aux routes, router events and guards.<br /><b><a href='https://ti.to/ngvikings/2017/with/8cwlwg1x4qm'>Get the ticket</a></b>",
-        "speakers": [
-            11
-        ],
-        "tags": [
-            "Angular 2"
-        ],
-        "complexity": "Advanced"
-    },
+  "81": {
+    "id": 81,
+    "title": "Advanced Angular 2",
+    "description": "In this workshop, attendees that already know the basics of Angular 2 will concentrate on advanced topics. You will learn about approaches for internationalization and about modern authentication scenarios with OAuth 2 and OpenId Connect that allow for single sign on as well as for an integration into existing identity systems like Active Directory. In addition to that, you will also get to know some strategies to drastically improve your application performance, like using observables and immutables for data binding and leveraging the AOT compiler as well as tree shaking. In addition to that, you will find out how to use lazy loading and preloading together with webpack and how to use other advanced routing techniques, like aux routes, router events and guards.<br /><b><a href='https://ti.to/ngvikings/2017/with/8cwlwg1x4qm'>Get the ticket</a></b>",
+    "speakers": [
+      11
+    ],
+    "tags": [
+      "Angular 2",
+      "Angular"
+    ],
+    "complexity": "Advanced"
+  },
 
-    "82": {
-        "id": 82,
-        "title": "Reactive applications with Angular2, Rxjs and @ngrx",
-        "description": "During this workshop you will have the newest technologies explained to you. This is not a basic Angular 2 workshop. Instead we will focus on the hard parts of creating a scalable application that is maintainable and snappy. We will teach you how to use Smart vs Dumb components, RxJS, NGRX/Store and much more in real world applications. The focus lies on principles, architectural choices and best practices. And of course CODING! We do this by switching theory with coding sessions where you have to code parts of the application yourself. We refactor a non-reactive application towards a reactive application during the workshop. At the end, we will demonstrate the flexibility of the application by making it realtime in only 6 lines of code!<br /><b><a href='https://ti.to/ngvikings/2017/with/ircfy7j10dq'>Get the ticket</a></b>",
-        "speakers": [
-            82, 83
-        ],
-        "tags": [
-            "RxJS",
-            "Angular 2"
-        ],
-        "complexity": "Advanced"
-    },
+  "82": {
+    "id": 82,
+    "title": "Reactive applications with Angular2, Rxjs and @ngrx",
+    "description": "During this workshop you will have the newest technologies explained to you. This is not a basic Angular 2 workshop. Instead we will focus on the hard parts of creating a scalable application that is maintainable and snappy. We will teach you how to use Smart vs Dumb components, RxJS, NGRX/Store and much more in real world applications. The focus lies on principles, architectural choices and best practices. And of course CODING! We do this by switching theory with coding sessions where you have to code parts of the application yourself. We refactor a non-reactive application towards a reactive application during the workshop. At the end, we will demonstrate the flexibility of the application by making it realtime in only 6 lines of code!<br /><b><a href='https://ti.to/ngvikings/2017/with/ircfy7j10dq'>Get the ticket</a></b>",
+    "speakers": [
+      82, 83
+    ],
+    "tags": [
+      "RxJS",
+      "Angular 2",
+      "Angular"
+    ],
+    "complexity": "Advanced"
+  },
 
-    "84": {
-        "id": 84,
-        "title": "Ionic 2 with Firebase",
-        "description": "In this workshop we start with setting up Ionic 2 and Firebase. First of all we'll guide you through the basics of the Ionic CLI, Firebase configuration and documentation available. We'll learn how to use the ionic starters, setup and use basic components and building the application. We'll move from the idea of mobile apps to progressive web apps and how we can implement that idea with Ionic2 & Firebase. Identify the requirements to get service workers and 'Add to home screen' working and how to set this up. Last but not least we'll see how we can make our PWA realtime and work offline with Firebase.<br /><b><a href='https://ti.to/ngvikings/2017/with/zvkdnmxrw-k'>Get the ticket</a></b>",
-        "speakers": [
-            84
-        ],
-        "tags": [
-            "Progressive Web Apps",
-            "Firebase",
-            "Ionic 2",
-            "Angular 2"
-        ],
-        "complexity": "Advanced"
-    },
+  "84": {
+    "id": 84,
+    "title": "Ionic 2 with Firebase",
+    "description": "In this workshop we start with setting up Ionic 2 and Firebase. First of all we'll guide you through the basics of the Ionic CLI, Firebase configuration and documentation available. We'll learn how to use the ionic starters, setup and use basic components and building the application. We'll move from the idea of mobile apps to progressive web apps and how we can implement that idea with Ionic2 & Firebase. Identify the requirements to get service workers and 'Add to home screen' working and how to set this up. Last but not least we'll see how we can make our PWA realtime and work offline with Firebase.<br /><b><a href='https://ti.to/ngvikings/2017/with/zvkdnmxrw-k'>Get the ticket</a></b>",
+    "speakers": [
+      84
+    ],
+    "tags": [
+      "Progressive Web Apps",
+      "Firebase",
+      "Ionic 2",
+      "Angular 2",
+      "Angular"
+    ],
+    "complexity": "Advanced"
+  },
 
-    "85": {
-        "id": 85,
-        "title": "Data flow architecture with Redux and Angular 2",
-        "description": "This workshop is all about modern SPA architecture, focused on popular architectural design pattern Redux. Redux, an architectural pattern inspired by concepts from stateless web architecture patterns and functional programming paradigms, introduces a unidirectional data-flow and a predictable state container that scales. It’s a popular, mind-blowing alternative to the popular MVC pattern and solves a lot of issues in an elegant and clean way. Through a series of live code examples, Nir Kaufman walks you through a complete flow of a typical application, using Angular2 as the presentation layer.<br /><b><a href='https://ti.to/ngvikings/2017/with/b1vu-lona1s'>Get the ticket</a></b>",
-        "speakers": [
-            85
-        ],
-        "tags": [
-            "Redux",
-            "Angular 2"
-        ],
-        "complexity": "Advanced"
-    },
+  "85": {
+    "id": 85,
+    "title": "Data flow architecture with Redux and Angular 2",
+    "description": "This workshop is all about modern SPA architecture, focused on popular architectural design pattern Redux. Redux, an architectural pattern inspired by concepts from stateless web architecture patterns and functional programming paradigms, introduces a unidirectional data-flow and a predictable state container that scales. It’s a popular, mind-blowing alternative to the popular MVC pattern and solves a lot of issues in an elegant and clean way. Through a series of live code examples, Nir Kaufman walks you through a complete flow of a typical application, using Angular2 as the presentation layer.<br /><b><a href='https://ti.to/ngvikings/2017/with/b1vu-lona1s'>Get the ticket</a></b>",
+    "speakers": [
+      85
+    ],
+    "tags": [
+      "Redux",
+      "Angular 2",
+      "Angular"
+    ],
+    "complexity": "Advanced"
+  },
 
-    "86": {
-        "id": 86,
-        "title": "Angular 2 Workshop: From Zero To Hero Jr in 1 day!",
-        "description": "This exciting workshop will start from scratch and walk you through how to develop a full Angular application. We will dive into how to setup, create and debug a web application with Angular 2 and TypeScript that will let us explore the various concepts, and familiarise ourselves with some of the new terminology in Angular 2. The agenda is:<br />• TypeScript fundamentals<br />• Setup and Tooling<br />• Getting started with the Angular CLI<br />• Introduction to Angular<br />• Components (Decorators, Data Binding, Events, Input/Output)<br />• NgModules, Ahead-of-time compilation<br />• Dependency Injection and providers<br />• Services<br />• Async with Reactive Extensions (RxJS, Observables)<br />• Requests to a REST API (HTTP)<br />• Navigation and Routing (Component Router)<br />• Lazy-loading<br /><b><a href='https://ti.to/ngvikings/2017/with/l0ba5y5ht0m'>Get the ticket</a></b>",
-        "speakers": [
-            86
-        ],
-        "tags": [
-            "Angular 2"
-        ],
-        "complexity": "Beginner"
-    },
+  "86": {
+    "id": 86,
+    "title": "Angular 2 Workshop: From Zero To Hero Jr in 1 day!",
+    "description": "This exciting workshop will start from scratch and walk you through how to develop a full Angular application. We will dive into how to setup, create and debug a web application with Angular 2 and TypeScript that will let us explore the various concepts, and familiarise ourselves with some of the new terminology in Angular 2. The agenda is:<br />• TypeScript fundamentals<br />• Setup and Tooling<br />• Getting started with the Angular CLI<br />• Introduction to Angular<br />• Components (Decorators, Data Binding, Events, Input/Output)<br />• NgModules, Ahead-of-time compilation<br />• Dependency Injection and providers<br />• Services<br />• Async with Reactive Extensions (RxJS, Observables)<br />• Requests to a REST API (HTTP)<br />• Navigation and Routing (Component Router)<br />• Lazy-loading<br /><b><a href='https://ti.to/ngvikings/2017/with/l0ba5y5ht0m'>Get the ticket</a></b>",
+    "speakers": [
+      86
+    ],
+    "tags": [
+      "Angular 2",
+      "Angular"
+    ],
+    "complexity": "Beginner"
+  },
 
-    "11": {
-        "id": 11,
-        "title": "Step by Step: Improving Startup Performance with Lazy Loading in Angular 2",
-        "description": "Angular 2 applications can lazily load modules to improve startup performance. Using an example, this session shows how you can optimize your solution with this approach. You will also learn about potential pitfalls as well as about asynchronously preloading modules with build-in strategies and your own strategies to speed up lazy loading.",
-        "speakers": [
-            11
-        ],
-        "tags": [
-            "Angular 2"
-        ]
-    },
+  "11": {
+    "id": 11,
+    "title": "Step by Step: Improving Startup Performance with Lazy Loading in Angular 2",
+    "description": "Angular 2 applications can lazily load modules to improve startup performance. Using an example, this session shows how you can optimize your solution with this approach. You will also learn about potential pitfalls as well as about asynchronously preloading modules with build-in strategies and your own strategies to speed up lazy loading.",
+    "speakers": [
+      11
+    ],
+    "tags": [
+      "Angular 2",
+      "Angular"
+    ]
+  },
 
-    "12": {
-        "id": 12,
-        "title": "Angular 2 Continuous Integration",
-        "description": "Insomnia? Nightmares? Stress? That's usually some of the symptoms in developers that are not using continuous integration systems. In this talk you will learn how to create a healthy life-cycle in your development process.",
-        "speakers": [
-            12
-        ],
-        "tags": [
-            "Angular 2",
-            "CI"
-        ]
-    },
+  "12": {
+    "id": 12,
+    "title": "Angular 2 Continuous Integration",
+    "description": "Insomnia? Nightmares? Stress? That's usually some of the symptoms in developers that are not using continuous integration systems. In this talk you will learn how to create a healthy life-cycle in your development process.",
+    "speakers": [
+      12
+    ],
+    "tags": [
+      "CI",
+      "Angular 2",
+      "Angular"
+    ]
+  },
 
-    "13": {
-        "id": 13,
-        "title": "Angular 2, of Things",
-        "description": "As web developers, we use JavaScript to create wonderful apps that run inside a web browser. But what if we could leverage the same technology to program physical devices that interact with the real world? In this session, we will combine Angular 2 with some IoT sauce to create a hardware game.",
-        "speakers": [
-            13
-        ],
-        "tags": [
-            "IoT",
-            "Angular 2"
-        ]
-    },
+  "13": {
+    "id": 13,
+    "title": "Angular 2, of Things",
+    "description": "As web developers, we use JavaScript to create wonderful apps that run inside a web browser. But what if we could leverage the same technology to program physical devices that interact with the real world? In this session, we will combine Angular 2 with some IoT sauce to create a hardware game.",
+    "speakers": [
+      13
+    ],
+    "tags": [
+      "IoT",
+      "Angular 2",
+      "Angular"
+    ]
+  },
 
-    "14": {
-        "id": 14,
-        "title": "Sharing Code Between Web and Native Apps",
-        "description": "NativeScript has opened up a whole new world to Angular developers: the ability to share code directly between your web and native iOS/Android applications. Which is awesome! But, just because you can share code across multiple platforms, doesn’t mean that you necessarily should. In this talk we’ll first take a look at what NativeScript makes possible from a code sharing perspective. We’ll build a few Angular components and use them both in the browser and on mobile devices. Then we’ll take a step back and look at the same code from a pragmatic, maintenance-oriented perspective. Come for practical tips & tricks on sharing code across multiple development environments.",
-        "speakers": [
-            14
-        ],
-        "tags": [
-            "NativeScript",
-            "Angular 2"
-        ]
-    },
+  "14": {
+    "id": 14,
+    "title": "Sharing Code Between Web and Native Apps",
+    "description": "NativeScript has opened up a whole new world to Angular developers: the ability to share code directly between your web and native iOS/Android applications. Which is awesome! But, just because you can share code across multiple platforms, doesn’t mean that you necessarily should. In this talk we’ll first take a look at what NativeScript makes possible from a code sharing perspective. We’ll build a few Angular components and use them both in the browser and on mobile devices. Then we’ll take a step back and look at the same code from a pragmatic, maintenance-oriented perspective. Come for practical tips & tricks on sharing code across multiple development environments.",
+    "speakers": [
+      14
+    ],
+    "tags": [
+      "NativeScript",
+      "Angular 2",
+      "Angular"
+    ]
+  },
 
-    "15": {
-        "id": 15,
-        "title": "An Introduction Into Using Angular’s Material 2 Design",
-        "description": "Angular Material 2 has been evolving over the course of the past year, and it has finally become stable enough to use in production. Get familiar with the various components of Angular Material 2, how to use them in your app, and a few tips and tricks to getting started.",
-        "speakers": [
-            15
-        ],
-        "tags": [
-            "Angular Material 2",
-            "Angular 2"
-        ]
-    },
+  "15": {
+    "id": 15,
+    "title": "An Introduction Into Using Angular’s Material 2 Design",
+    "description": "Angular Material 2 has been evolving over the course of the past year, and it has finally become stable enough to use in production. Get familiar with the various components of Angular Material 2, how to use them in your app, and a few tips and tricks to getting started.",
+    "speakers": [
+      15
+    ],
+    "tags": [
+      "Angular Material 2",
+      "Angular 2",
+      "Angular"
+    ]
+  },
 
-    "16": {
-        "id": 16,
-        "title": "Angular 2 outside of a browser",
-        "description": "This is a overview of the Angular Universal project I contribute to which aims to add support for Server-Side-Rendering (SSR) to Angular 2 apps. In other words, with Universal you will be able to render your Angular 2 application both on the client and the server.",
-        "speakers": [
-            16
-        ],
-        "tags": [
-            "Angular Universal",
-            "Angular 2"
-        ]
-    },
+  "16": {
+    "id": 16,
+    "title": "Angular 2 outside of a browser",
+    "description": "This is a overview of the Angular Universal project I contribute to which aims to add support for Server-Side-Rendering (SSR) to Angular 2 apps. In other words, with Universal you will be able to render your Angular 2 application both on the client and the server.",
+    "speakers": [
+      16
+    ],
+    "tags": [
+      "Angular Universal",
+      "Angular 2",
+      "Angular"
+    ]
+  },
 
-    "17": {
-        "id": 17,
-        "title": "AngularFire2 and you",
-        "description": "Discover how Firebase can streamline development processes and how to easily add AngularFire2 to your Angular2 apps. A comprehensive walk-through of how to effortlessly create a full-stack application using Firebase and Angular2. A demo web app (and possibly an Android app) will be built to illustrate integration points for authentication, realtime database, asset storage, hosting, notifications, analytics, and more.",
-        "speakers": [
-            17
-        ],
-        "tags": [
-            "Firebase",
-            "AngularFire 2",
-            "Angular 2"
-        ]
-    },
+  "17": {
+    "id": 17,
+    "title": "AngularFire2 and you",
+    "description": "Discover how Firebase can streamline development processes and how to easily add AngularFire2 to your Angular2 apps. A comprehensive walk-through of how to effortlessly create a full-stack application using Firebase and Angular2. A demo web app (and possibly an Android app) will be built to illustrate integration points for authentication, realtime database, asset storage, hosting, notifications, analytics, and more.",
+    "speakers": [
+      17
+    ],
+    "tags": [
+      "Firebase",
+      "AngularFire 2",
+      "Angular 2",
+      "Angular"
+    ]
+  },
 
-    "18": {
-        "id": 18,
-        "title": "Forms in Angular2",
-        "description": "Forms are probably the most sensitive part of your web app. They are the main way we get data from the user. They seem simple enough, you just add an ngForm to your template, user clicks Submit and you have data. But there's more to them than that, and we're going to talk about that in this session. We'll try building forms in 2 ways: FormControls and FormBuilder. We'll then proceed to add Validations to one of the forms, touching on available Validations and then creating our custom one. We'll then look at the EventEmitter Observable and handle changes to our form.",        "speakers": [
-            18
-        ],
-        "tags": [
-            "ngForm",
-            "Angular 2"
-        ]
-    },
+  "18": {
+    "id": 18,
+    "title": "Forms in Angular2",
+    "description": "Forms are probably the most sensitive part of your web app. They are the main way we get data from the user. They seem simple enough, you just add an ngForm to your template, user clicks Submit and you have data. But there's more to them than that, and we're going to talk about that in this session. We'll try building forms in 2 ways: FormControls and FormBuilder. We'll then proceed to add Validations to one of the forms, touching on available Validations and then creating our custom one. We'll then look at the EventEmitter Observable and handle changes to our form.",
+    "speakers": [
+      18
+    ],
+    "tags": [
+      "ngForm",
+      "Angular 2",
+      "Angular"
+    ]
+  },
 
-    "19": {
-        "id": 19,
-        "title": "Developing Accessible Cross-platform Apps with NativeScript and Angular",
-        "description": "Nota is the Danish Library and Expertise Center for people with print disabilities. We'll talk about our new accessible Audiobook player, which with a single codebase targets native Android, native iOS and web, and the challenges and experiences we've gained from the project.",
-        "speakers": [
-            19, 20
-        ],
-        "tags": [
-            "NativeScript",
-            "Accessibility",
-            "Angular 2"
-        ]
-    },
+  "19": {
+    "id": 19,
+    "title": "Developing Accessible Cross-platform Apps with NativeScript and Angular",
+    "description": "Nota is the Danish Library and Expertise Center for people with print disabilities. We'll talk about our new accessible Audiobook player, which with a single codebase targets native Android, native iOS and web, and the challenges and experiences we've gained from the project.",
+    "speakers": [
+      19, 20
+    ],
+    "tags": [
+      "NativeScript",
+      "Accessibility",
+      "Angular 2",
+      "Angular"
+    ]
+  },
 
-    "21": {
-        "id": 21,
-        "title": "Angular 2: Beyond the tutorials with tests!",
-        "description": "This session is a journey, during which you will learn how to effectively test Angular 2.  Using the angular-cli as our base we will begin by unit testing our application with the built in Karma unit testing scaffold. We will then move into e2e testing with Protractor, again leveraging the built in scaffolding that comes with the cli. For an added bonus you will get to see how using Async Await can help simplify your test suite.",
-        "speakers": [
-            21
-        ],
-        "tags": [
-            "Testing",
-            "Angular CLI",
-            "Angular 2"
-        ]
-    },
+  "21": {
+    "id": 21,
+    "title": "Angular 2: Beyond the tutorials with tests!",
+    "description": "This session is a journey, during which you will learn how to effectively test Angular 2.  Using the angular-cli as our base we will begin by unit testing our application with the built in Karma unit testing scaffold. We will then move into e2e testing with Protractor, again leveraging the built in scaffolding that comes with the cli. For an added bonus you will get to see how using Async Await can help simplify your test suite.",
+    "speakers": [
+      21
+    ],
+    "tags": [
+      "Testing",
+      "Angular CLI",
+      "Angular 2",
+      "Angular"
+    ]
+  },
 
-    "22": {
-        "id": 22,
-        "title": "Progressively Mobile With Ionic",
-        "description": "With multiple competing mobile eco systems to worry about, it is always important to choose an efficient solution for creating your mobile Apps With the exciting prospects of Progressive Web Apps taking the web & mobile web world by storm, it can be quite challenging to fit a current mobile setup to work with Progressive Web Apps. This talk will showcase how you can create a mobile app for Android, IOS, Windows with 100% the same code & same project and still have it work as a Progressive Web application without any change",
-        "speakers": [
-            22
-        ],
-        "tags": [
-            "Progressive Web Apps",
-            "Ionic 2",
-            "Angular 2"
-        ]
-    },
+  "22": {
+    "id": 22,
+    "title": "Progressively Mobile With Ionic",
+    "description": "With multiple competing mobile eco systems to worry about, it is always important to choose an efficient solution for creating your mobile Apps With the exciting prospects of Progressive Web Apps taking the web & mobile web world by storm, it can be quite challenging to fit a current mobile setup to work with Progressive Web Apps. This talk will showcase how you can create a mobile app for Android, IOS, Windows with 100% the same code & same project and still have it work as a Progressive Web application without any change",
+    "speakers": [
+      22
+    ],
+    "tags": [
+      "Progressive Web Apps",
+      "Ionic 2",
+      "Angular 2",
+      "Angular"
+    ]
+  },
 
-    "23": {
-        "id": 23,
-        "title": "Angular's User Authentication Tool Belt",
-        "description": "User authentication is necessary for any non-trivial application, but implementing it in a single page app can be a pain. Not only are there a bunch of moving parts on the front end that we need to account for, but we can also get hampered down when we try to use traditional session-based methods of authentication. Luckily for us, Angular 2 comes with a bunch of features designed to make things like route access control and asynchronously loading protected routes really simple. When we pair these features with a modern authentication spec like JSON Web Token, we can lock down our apps in a snap. In this session, we’ll explore how to implement authentication in an Angular 2 app. You’ll come away knowing how the important pieces fit together and how Angular 2 takes care of a lot of the heavy lifting for us.",
-        "speakers": [
-            23
-        ],
-        "tags": [
-            "Authentication",
-            "JWT",
-            "Angular 2"
-        ]
-    }
+  "23": {
+    "id": 23,
+    "title": "Angular's User Authentication Tool Belt",
+    "description": "User authentication is necessary for any non-trivial application, but implementing it in a single page app can be a pain. Not only are there a bunch of moving parts on the front end that we need to account for, but we can also get hampered down when we try to use traditional session-based methods of authentication. Luckily for us, Angular 2 comes with a bunch of features designed to make things like route access control and asynchronously loading protected routes really simple. When we pair these features with a modern authentication spec like JSON Web Token, we can lock down our apps in a snap. In this session, we’ll explore how to implement authentication in an Angular 2 app. You’ll come away knowing how the important pieces fit together and how Angular 2 takes care of a lot of the heavy lifting for us.",
+    "speakers": [
+      23
+    ],
+    "tags": [
+      "Authentication",
+      "JWT",
+      "Angular 2",
+      "Angular"
+    ]
+  },
+
+  "24": {
+    "id": 24,
+    "title": "Understanding AOT and Dynamic Components in Angular 2",
+    "description": "Supplying and using Angular 2 Components in separately developed Modules/Libraries is straight-forward if you're using Just-in-Time (JIT) compilation, but if you're using Ahead-of-Time AOT compilation (and you should!) then there are a few hurdles and gotchas you need to think about. This talk explains how to enable users of a library to supply components in an easy to use way that still satisfies the requirements of the Angular compiler, resulting is smaller and faster code that is still developer friendly.",
+    "speakers": [
+      24
+    ],
+    "tags": [
+      "AOT",
+      "Dynamic Components",
+      "Angular 2",
+      "Angular"
+    ]
+  },
+
+  "25": {
+    "id": 25,
+    "title": "Keeping untrusted code out of your Angular application",
+    "description": "Modern browsers are packed with powerful security features. In this talk, you will learn how to leverage these brand-new technologies to secure your Angular applications. We will cover three concrete security technologies: Subresource Integrity, Content Security Policy and HTML5 sandboxing, and you will walk away with practical advice on using them in your applications.",
+    "speakers": [
+      25
+    ],
+    "tags": [
+      "Security",
+      "Angular 2",
+      "Angular"
+    ]
+  },
+
+  "26": {
+    "id": 26,
+    "title": "Building Angular 2 Apps",
+    "description": "We can no longer stick a .min.js file into our projects and start coding. Coding workflows have changed rapidly and we are facing a Javascript Fatigue. Learn how Angular 2 applications are built with the aid of Webpack 2. From compiling to treeshaking, get an application from ~2.7MB to ~100KB.",
+    "speakers": [
+      26
+    ],
+    "tags": [
+      "Performance",
+      "Optimization",
+      "Angular 2",
+      "Angular"
+    ]
+  },
+
+  "27": {
+    "id": 27,
+    "title": "Keep it clean: Creating and managing reusable components",
+    "description": "How to:<br />- avoid ../../../../path/to/components?<br />- spot reusable piece?<br />- cut it out and manage it independently?<br />- which tools will help?<br />Managing dozen of angular2 projects, pushed me to write a tool which allows me and my co-workers to easily manage submodules along side with projects. At the moment it is applied to ng2-bootstrap, and PRs on a way ng2-translate and other modules",
+    "speakers": [
+      27
+    ],
+    "tags": [
+      "Components",
+      "Angular 2",
+      "Angular"
+    ]
+  },
+
+  "28": {
+    "id": 28,
+    "title": "The Secret Life(cycle) of Components",
+    "description": "There is an entire world of complex interactions happening just under the surface of an Angular 2 application. We can use lifecycle hooks to perform complex state management, coordinate control flow and finesse asynchronous events that would normally result in unpredictable and volatile results. We will start out by laying a solid foundation of what lifecycle hooks exist and when they happen in relation to each other. We will then anchor this knowledge in practical concepts that you can start using in your projects right away to help you make friends and influence people. Then we will go into the Twilight Zone as learn how to manipulate Zone.js events, 3rd party events and how to use lifecycle hooks to bridge the gap between Angular 1.x and Angular 2.",
+    "speakers": [
+      28
+    ],
+    "tags": [
+      "lifecycle hooks",
+      "Angular 2",
+      "Angular"
+    ]
+  },
+
+  "29": {
+    "id": 29,
+    "title": "How Not To Mess-up Your Front End Architecture with Angular",
+    "description": "It’s all too common for front-end developers to start coding an application without a formal architecture in place. Applications lacking a formal architecture are generally tightly coupled, brittle, difficult to change, and without a clear vision or direction. Results? Serious maintainability and extensibility issues. In this talk, I am going to put real world scenario of a large code base and how worst it can get. We will then step back and try to realize what went wrong and how we ended up in this state? Why it became so hard for us to add/subtract features to a set of applications we maintain? We will than discuss what to do next? Should you rewrite the entire front-end piece? Should you try to re-organize your existing architecture? This talk will help you decide and answer these difficult questions on how to get out of a messed-up front-end architecture.",
+    "speakers": [
+      29
+    ],
+    "tags": [
+      "Architecture",
+      "Angular 2",
+      "Angular"
+    ]
+  },
+
+  "30": {
+    "id": 30,
+    "title": "Angular CLI Jumpstart",
+    "description": "Let me introduce you my big love, Angular CLI. Scaffolding a Angular 2 app and show you some tip for your projects.",
+    "speakers": [
+      30
+    ],
+    "tags": [
+      "Angular CLI",
+      "Angular 2",
+      "Angular"
+    ]
+  },
+
+  "31": {
+    "id": 31,
+    "title": "Webpack: The Core Concepts",
+    "description": "I had the opportunity to be introduced to using Webpack working at React shop, however as an AngularJS Fanboy and Apologist, I longed to bring the same brain-melting, experience to my ngApp. Problem was that I used, webpack, but never understood it. From automatically managing Bower, AMD, and NPM dependencies to code-splitting, minification, and source-mapping, I realized Webpack automagically handles all the hurdles I had ever encountered in my previous web projects. Together we will break down the core concepts and demystify this amazing tool. My hope for you is that by the time we’re done, you’ll have set fire to every Gulpfile and Gruntfile you’ve ever written, destroy all those extra style and script tags in your browser, and give you the tools needed to make the best modern web apps, without sacrificing developer experience. Join me while we webpack ALL the things.",
+    "speakers": [
+      31
+    ],
+    "tags": [
+      "Webpack",
+      "Angular 2",
+      "Angular"
+    ]
+  },
+
+  "32": {
+    "id": 32,
+    "title": "Keynote: Apps In The Future",
+    "description": "",
+    "speakers": [
+      32
+    ],
+    "tags": [
+      "Keynote",
+      "Progressive Web Apps",
+      "Angular 2",
+      "Angular"
+    ],
+    "image": "/images/backgrounds/keynote.jpg"
+  },
+
+  "87": {
+    "id": 87,
+    "title": "Migrating Angular 1 Apps to Angular 2",
+    "description": "",
+    "speakers": [
+      87
+    ],
+    "tags": [
+      "Angular 1",
+      "Angular 2",
+      "Angular"
+    ]
+  }
 
 }

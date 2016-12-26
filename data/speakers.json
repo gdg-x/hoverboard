@@ -1,20 +1,4 @@
 {
-  "92": {
-    "id": 92,
-    "name": "Secret Speaker",
-    "title": "Angular Hero",
-    "company": "",
-    "companyLogo": "",
-    "country": "World",
-    "photoUrl": "/images/people/anonymous.png",
-    "shortBio": "",
-    "bio": "",
-    "tags": [
-    ],
-    "badges": [
-    ],
-    "socials": []
-  },
 
   "11": {
     "id": 11,
@@ -28,7 +12,8 @@
     "shortBio": "Trainer and Consultant with focus on Angular. Google Developer Expert (GDE) and Microsoft MVP. Writes for O'Reilly, Hanser, the German Java Magazine, windows.developer and Heise. Regularly speaks at conferences.",
     "bio": "Trainer and Consultant with focus on Angular. Google Developer Expert (GDE) and Microsoft MVP. Writes for O'Reilly, Hanser, the German Java Magazine, windows.developer and Heise. Regularly speaks at conferences.",
     "tags": [
-      "Angular 2"
+      "Angular 2",
+      "Angular"
     ],
     "badges": [{
       "name": "GDE",
@@ -63,7 +48,8 @@
     "bio": "Raul is a software engineer passionate about JS frameworks, web technologies and cross-platform development. Since 2012 he's focused in Angular, HTML5 video and his open source project Videogular. He manages his own company in Barcelona working as a consultant architect for companies around the world helping them to build high-performance web apps. In his spare time he's usually involved in the community as an Angular Google Developer Expert helping local meetups, writing blog posts, speaking at conferences and contributing to open source projects. He lives in Barcelona and is happy by default :)",
     "tags": [
       "CI",
-      "Angular 2"
+      "Angular 2",
+      "Angular"
     ],
     "badges": [{
       "name": "GDE",
@@ -98,7 +84,8 @@
     "bio": "Uri Shaked is a Google Developer Expert for Web Technologies. He created the popular angular-moment open source module and regularly speaks about Web and IoT-related technologies in conferences and meetups. Among his interests are reverse engineering, hardware hacking, building 3D-printed robots and games, playing music and Salsa dancing.",
     "tags": [
       "IoT",
-      "Angular 2"
+      "Angular 2",
+      "Angular"
     ],
     "badges": [{
       "name": "GDE",
@@ -133,7 +120,8 @@
     "bio": "Sebastian Witalec is a Technical Evangelist for Progress/Telerik with over 8 years of experience in software engineering and architecture. Sebastian has passion for all types of technologies. However in the last few years his focus shifted towards cross platform Mobile development where he gained experience with Apache Cordova and NativeScript.",
     "tags": [
       "NativeScript",
-      "Angular 2"
+      "Angular 2",
+      "Angular"
     ],
     "badges": [],
     "socials": [{
@@ -164,7 +152,8 @@
     "bio": "Tracy is a speaker, writer, and serial entrepreneur passionate about JavaScript and new technologies. After the acquisition of her last startup, she learned how to code and spends her time as a junior developer these days. Tracy spends her time building the JS community through her new startup, This Dot and runs the Modern Web podcast and events. She loves open source projects, pairing with friends, and empowering people to do awesome things. Tracy is also an organizer of ng-cruise and track chair for QCon.",
     "tags": [
       "Angular Material 2",
-      "Angular 2"
+      "Angular 2",
+      "Angular"
     ],
     "badges": [{
       "name": "GDE",
@@ -199,7 +188,8 @@
     "bio": "Wassim (aka manekinekko on Twitter/Github) is a Developer Advocate based in Paris. He is also a Developer Expert in Web technologies nominated by Google. He enjoys writing technical articles, meeting developers at events, speaking at conferences and contributing to open source projects: contributor to Angular core, Documentation, Universal and more… Wassim’s mantra: Love what you do and do what you love.",
     "tags": [
       "Angular Universal",
-      "Angular 2"
+      "Angular 2",
+      "Angular"
     ],
     "badges": [{
       "name": "GDE",
@@ -235,14 +225,15 @@
     "tags": [
       "Firebase",
       "AngularFire 2",
-      "Angular 2"
+      "Angular 2",
+      "Angular"
     ],
     "badges": [{
       "name": "Googler",
       "description": "Firebase Team",
       "link": "https://firebase.google.com/"
     }],
-    "socials": [ {
+    "socials": [{
       "icon": "twitter",
       "name": "Twitter",
       "link": "https://twitter.com/erikhaddad"
@@ -260,14 +251,14 @@
     "title": "Tech Speaker",
     "company": "Mozilla",
     "companyLogo": "",
-    "country": "UK",
+    "country": "United Kingdom",
     "photoUrl": "/images/people/AlexLakatos.jpg",
     "shortBio": "Alex Lakatos wears many hats at Mozilla for the past 5 years, including but not limited to Mozilla Tech Speaker, Mozilla Reps Council Member, T-Shirt Lover. JavaScript developer building on the open web, he has been pushing its boundaries every day. A Trainer based in London he's been doing public and private Angular classes, runs a Meetup group, and just can't shut up about Angular when in front of an audience.",
     "bio": "Alex Lakatos wears many hats at Mozilla for the past 5 years, including but not limited to Mozilla Tech Speaker, Mozilla Reps Council Member, T-Shirt Lover. JavaScript developer building on the open web, he has been pushing its boundaries every day. A Trainer based in London he's been doing public and private Angular classes, runs a Meetup group, and just can't shut up about Angular when in front of an audience.",
     "tags": [
-      "Firebase",
-      "AngularFire 2",
-      "Angular 2"
+      "ngForm",
+      "Angular 2",
+      "Angular"
     ],
     "badges": [{
       "name": "Mozilla Tech Speaker",
@@ -278,7 +269,7 @@
       "icon": "website",
       "name": "Website",
       "link": "http://alexlakatos.com"
-    },{
+    }, {
       "icon": "twitter",
       "name": "Twitter",
       "link": "https://twitter.com/lakatos88"
@@ -303,7 +294,8 @@
     "tags": [
       "NativeScript",
       "Accessibility",
-      "Angular 2"
+      "Angular 2",
+      "Angular"
     ],
     "badges": [],
     "socials": [{
@@ -325,16 +317,17 @@
     "shortBio": "Fullstack developer mainly experienced in JavaScript and NodeJS. Morten is 36 years old and have been active in Open Source for almost 10 years and a Linux user for 15. He's active in Prosa, the danish union for IT-professionals and in IT-politics.",
     "bio": "Fullstack developer mainly experienced in JavaScript and NodeJS. Morten is 36 years old and have been active in Open Source for almost 10 years and a Linux user for 15. He's active in Prosa, the danish union for IT-professionals and in IT-politics.",
     "tags": [
-      "Firebase",
-      "AngularFire 2",
-      "Angular 2"
+      "NativeScript",
+      "Accessibility",
+      "Angular 2",
+      "Angular"
     ],
     "badges": [],
     "socials": [{
       "icon": "website",
       "name": "Website",
       "link": "http://mabs.dk"
-    },{
+    }, {
       "icon": "twitter",
       "name": "Twitter",
       "link": "https://twitter.com/m_abs"
@@ -355,21 +348,22 @@
     "tags": [
       "Testing",
       "Angular CLI",
-      "Angular 2"
+      "Angular 2",
+      "Angular"
     ],
     "badges": [],
     "socials": [{
       "icon": "website",
       "name": "Website",
       "link": "http://www.zackarychapple.guru"
-    },{
+    }, {
       "icon": "twitter",
       "name": "Twitter",
       "link": "https://twitter.com/ZChapple"
     }, {
       "icon": "github",
       "name": "GitHub",
-      "link": "http://github.com/zackarychapple"
+      "link": "https://github.com/zackarychapple"
     }]
   },
 
@@ -387,21 +381,22 @@
     "tags": [
       "Progressive Web Apps",
       "Ionic 2",
-      "Angular 2"
+      "Angular 2",
+      "Angular"
     ],
     "badges": [],
     "socials": [{
       "icon": "website",
       "name": "Website",
       "link": "http://www.saniyusuf.com"
-    },{
+    }, {
       "icon": "twitter",
       "name": "Twitter",
       "link": "https://twitter.com/saniyusuf"
     }, {
       "icon": "github",
       "name": "GitHub",
-      "link": "http://github.com/saniyusuf"
+      "link": "https://github.com/saniyusuf"
     }]
   },
 
@@ -419,21 +414,290 @@
     "tags": [
       "Authentication",
       "JWT",
-      "Angular 2"
+      "Angular 2",
+      "Angular"
     ],
     "badges": [],
     "socials": [{
       "icon": "website",
       "name": "Website",
       "link": "https://angularcasts.io"
-    },{
+    }, {
       "icon": "twitter",
       "name": "Twitter",
       "link": "https://twitter.com/ryanchenkie"
     }, {
       "icon": "github",
       "name": "GitHub",
-      "link": "http://github.com/chenkie"
+      "link": "https://github.com/chenkie"
+    }]
+  },
+
+  "24": {
+    "id": 24,
+    "featured": true,
+    "name": "Sean Landsman",
+    "title": "Full Stack Developer",
+    "company": "ag-Grid",
+    "companyLogo": "",
+    "country": "United Kingdom",
+    "photoUrl": "/images/people/SeanLandsman.jpg",
+    "shortBio": "Full Stack Developer with over 19 years experience working in Enterprise.",
+    "bio": "Full Stack Developer with over 19 years experience working in Enterprise.",
+    "tags": [
+      "AOT",
+      "Dynamic Components",
+      "Angular 2",
+      "Angular"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/seanlandsman"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "https://github.com/seanlandsman"
+    }]
+  },
+
+  "25": {
+    "id": 25,
+    "featured": true,
+    "name": "Philippe De Ryck",
+    "title": "Trainer",
+    "company": "University of Leuven",
+    "companyLogo": "",
+    "country": "Belgium",
+    "photoUrl": "/images/people/PhilippeDeRyck.jpg",
+    "shortBio": "Philippe De Ryck is a professional speaker and trainer on software security and web security. Since he obtained his PhD at the imec-DistriNet research group (KU Leuven, Belgium), he has been running the group's Web Security Training program, which ensures a sustainable knowledge transfer of the group’s security expertise towards practitioners.",
+    "bio": "Philippe De Ryck is a professional speaker and trainer on software security and web security. Since he obtained his PhD at the imec-DistriNet research group (KU Leuven, Belgium), he has been running the group's Web Security Training program, which ensures a sustainable knowledge transfer of the group’s security expertise towards practitioners.",
+    "tags": [
+      "Security",
+      "Angular 2",
+      "Angular"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "website",
+      "name": "Website",
+      "link": "https://www.websec.be"
+    }, {
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/PhilippeDeRyck"
+    }]
+  },
+
+  "26": {
+    "id": 26,
+    "featured": true,
+    "name": "Thomas Horvath",
+    "title": "Lead Front-End Developer",
+    "company": "Xplosion Media",
+    "companyLogo": "",
+    "country": "Ireland",
+    "photoUrl": "/images/people/ThomasHorvath.jpg",
+    "shortBio": "Super interested in everything NG2 & performance, been working with Angular 2 since the beta and now trying share some of my experiences with it. Lead Front-End Developer @ Xplosion Media - Dublin, Ireland ",
+    "bio": "Super interested in everything NG2 & performance, been working with Angular 2 since the beta and now trying share some of my experiences with it. Lead Front-End Developer @ Xplosion Media - Dublin, Ireland ",
+    "tags": [
+      "Performance",
+      "Optimization",
+      "Angular 2",
+      "Angular"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/criticalpix"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "https://github.com/criticalpixel"
+    }]
+  },
+
+
+  "27": {
+    "id": 27,
+    "featured": true,
+    "name": "Dmitriy Shekhovtsov",
+    "title": "JS maniac",
+    "company": "Valor Software",
+    "companyLogo": "",
+    "country": "Ukraine",
+    "photoUrl": "/images/people/DmitriyShekhovtsov.jpg",
+    "shortBio": "JS maniac, author of ng2-bootstrap and couple of other ng2 and node.js modules.",
+    "bio": "JS maniac, author of ng2-bootstrap and couple of other ng2 and node.js modules.",
+    "tags": [
+      "Components",
+      "Angular 2",
+      "Angular"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/valorkin"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "https://github.com/valorkin"
+    }]
+  },
+
+
+  "28": {
+    "id": 28,
+    "featured": true,
+    "name": "Leonardo Zizzamia",
+    "title": "Developer",
+    "company": "Plan",
+    "companyLogo": "",
+    "country": "USA",
+    "photoUrl": "/images/people/LeonardoZizzamia.jpg",
+    "shortBio": "Leonardo Zizzamia is a former Twitter engineer with a flare for front-end development and Angular. Throughout the past few years, he has been involved on many levels within the Angular community by helping blog, teach and spread the word. Throughout 2016, he has been making extensive use of both Angular2 and AngularJS to bring his startup project, Plan, to life. Leonardo is deeply passionate about big and original ideas and continuously sets out to reinvent himself through challenging software development efforts. He also hosts great dinner parties with amazing Italian food.",
+    "bio": "Leonardo Zizzamia is a former Twitter engineer with a flare for front-end development and Angular. Throughout the past few years, he has been involved on many levels within the Angular community by helping blog, teach and spread the word. Throughout 2016, he has been making extensive use of both Angular2 and AngularJS to bring his startup project, Plan, to life. Leonardo is deeply passionate about big and original ideas and continuously sets out to reinvent himself through challenging software development efforts. He also hosts great dinner parties with amazing Italian food.",
+    "tags": [
+      "Lifecycle Hooks",
+      "Angular 2",
+      "Angular"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/zizzamia"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "https://github.com/zizzamia"
+    }]
+  },
+
+
+  "29": {
+    "id": 29,
+    "featured": true,
+    "name": "Anas.R.Firdousi",
+    "title": "Front-End Lead",
+    "company": "Apple Inc.",
+    "companyLogo": "",
+    "country": "USA",
+    "photoUrl": "/images/people/AnasRFirdousi.jpg",
+    "shortBio": "Anas.R.Firdousi is a active Angular JS community contributor. He has over decade of JavaScript and front-end experience under his belt.  He writes and speaks about ECMA 6/7,  Angular 2, Reactive Programming and others open source areas. He has lead front end teams at organizations like Apple and PayPal. He is the host of a new type of talk-less-code-more show called Angular Unplugged Show. Anas also heads the Angular Pakistan community and organize Angular meetups in Pakistan.",
+    "bio": "Anas.R.Firdousi is a active Angular JS community contributor. He has over decade of JavaScript and front-end experience under his belt.  He writes and speaks about ECMA 6/7,  Angular 2, Reactive Programming and others open source areas. He has lead front end teams at organizations like Apple and PayPal. He is the host of a new type of talk-less-code-more show called Angular Unplugged Show. Anas also heads the Angular Pakistan community and organize Angular meetups in Pakistan.",
+    "tags": [
+      "Architecture",
+      "Angular 2",
+      "Angular"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "website",
+      "name": "Website",
+      "link": "http://www.anasfirdousi.com"
+    }, {
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/AnasFirdousi"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "https://github.com//afirdousi"
+    }]
+  },
+
+
+  "30": {
+    "id": 30,
+    "featured": true,
+    "name": "David Müllerchen",
+    "title": "Trainer",
+    "company": "webdave",
+    "companyLogo": "",
+    "country": "Germany",
+    "photoUrl": "/images/people/DavidMullerchen.jpg",
+    "shortBio": "David Muellerchen is a trainer at AngularJS.DE. He loves to speak and teach at meetups and conferences. In his meantime he works as a front-end developer at Acando. During leisure time he jumps through the parks with his kids or rides his racer. He also is a Organizer of the Hamburg AngularJS Meetup.",
+    "bio": "David Muellerchen is a trainer at AngularJS.DE. He loves to speak and teach at meetups and conferences. In his meantime he works as a front-end developer at Acando. During leisure time he jumps through the parks with his kids or rides his racer. He also is a Organizer of the Hamburg AngularJS Meetup.",
+    "tags": [
+      "Angular CLI",
+      "Angular 2",
+      "Angular"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "website",
+      "name": "Website",
+      "link": "https://www.webdave.de"
+    }, {
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/webdave_de"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "https://github.com/web-dave"
+    }]
+  },
+
+
+  "31": {
+    "id": 31,
+    "featured": true,
+    "name": "Sean Larkin",
+    "title": "User Experience Developer",
+    "company": "Mutual",
+    "companyLogo": "",
+    "country": "USA",
+    "photoUrl": "/images/people/SeanLarkin.jpg",
+    "shortBio": "User Experience Developer @ Mutual of Omaha. Former technical support representative turned renegade software engineer and web developer, driven by the need to help people through the code he writes. 3.5 years now into the web world, Sean is a member of the Webpack core team, angular team and angular-cli core team, has held talks on Ruby, DAMP programming, AngularJS, and Webpack and lives to teach others about the world of Web Development. From Lincoln, Nebraska, loves to spend his time with his wife, newborn son, 18 chickens, dog, and gypsy cat. Obsessed with AngularJS, readability, Webpack, bundlers, tooling, and anything that helps Web Dev and Engineering easier and more enjoyable for anyone!",
+    "bio": "User Experience Developer @ Mutual of Omaha. Former technical support representative turned renegade software engineer and web developer, driven by the need to help people through the code he writes. 3.5 years now into the web world, Sean is a member of the Webpack core team, angular team and angular-cli core team, has held talks on Ruby, DAMP programming, AngularJS, and Webpack and lives to teach others about the world of Web Development. From Lincoln, Nebraska, loves to spend his time with his wife, newborn son, 18 chickens, dog, and gypsy cat. Obsessed with AngularJS, readability, Webpack, bundlers, tooling, and anything that helps Web Dev and Engineering easier and more enjoyable for anyone!",
+    "tags": [
+      "Webpack",
+      "Angular 2",
+      "Angular"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/TheLarkInn"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "https://github.com/thelarkinn"
+    }]
+  },
+
+  "32": {
+    "id": 32,
+    "featured": true,
+    "name": "Kenneth Auchenberg",
+    "title": "Program Manager",
+    "company": "Microsoft",
+    "companyLogo": "",
+    "country": "Canada",
+    "photoUrl": "/images/people/KennethAuchenberg.jpg",
+    "shortBio": "Kenneth is a Program Manager at Microsoft and lives in Vancouver, Canada, where he leads the next generation of web developer tooling. He's a Global Shaper for Word Economic Forum, serves on multiple advisory boards, and is a frequent public speaker who travels the world.",
+    "bio": "Kenneth is a Program Manager at Microsoft and lives in Vancouver, Canada, where he leads the next generation of web developer tooling. He's a Global Shaper for Word Economic Forum, serves on multiple advisory boards, and is a frequent public speaker who travels the world.",
+    "tags": [
+      "Keynote",
+      "Progressive Web Apps",
+      "Angular 2",
+      "Angular"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "website",
+      "name": "Website",
+      "link": "https://kenneth.io"
+    }, {
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/auchenberg"
     }]
   },
 
@@ -450,7 +714,8 @@
     "bio": "Brecht is a trainer, blogger and software engineer passionate about architecture and best-practices. Brecht uses the technologies that he teaches in his workshops on a daily basis in different projects. One of his main activities is kickstarting new Angular projects in companies and guiding them in the right direction.",
     "tags": [
       "RxJS",
-      "Angular 2"
+      "Angular 2",
+      "Angular"
     ],
     "badges": [],
     "socials": [{
@@ -481,7 +746,8 @@
     "bio": "Kwinten is a highly motivated developer with a passion for the fast changing front end world. He mainly focusses on Angular 2 and RxJS nowadays and transfers his knowledge to other developers through intensive coaching and workshops.",
     "tags": [
       "RxJS",
-      "Angular 2"
+      "Angular 2",
+      "Angular"
     ],
     "badges": [],
     "socials": [{
@@ -514,7 +780,8 @@
       "Progressive Web Apps",
       "Firebase",
       "Ionic 2",
-      "Angular 2"
+      "Angular 2",
+      "Angular"
     ],
     "badges": [],
     "socials": [{
@@ -545,7 +812,8 @@
     "bio": "Nir is the Head of Angular Development at 500Tech - a leading front-end consultancy in Israel. He is a passionate JavaScript developer, international speaker, Angular evangelist and community activist.",
     "tags": [
       "Redux",
-      "Angular 2"
+      "Angular 2",
+      "Angular"
     ],
     "badges": [],
     "socials": [{
@@ -575,7 +843,8 @@
     "shortBio": "Full Stack Teacher, passionate about web and mobile dev with Angular, TypeScript and .NET.",
     "bio": "Full Stack Teacher, passionate about web and mobile dev with Angular, TypeScript and .NET",
     "tags": [
-      "Angular 2"
+      "Angular 2",
+      "Angular"
     ],
     "badges": [],
     "socials": [{
@@ -590,6 +859,42 @@
       "icon": "github",
       "name": "GitHub",
       "link": "https://github.com/ldex"
+    }]
+  },
+
+  "87": {
+    "id": 87,
+    "featured": true,
+    "name": "Joe Eames",
+    "title": "Viking (at heart)",
+    "company": "Self Employed",
+    "companyLogo": "",
+    "country": "USA",
+    "photoUrl": "/images/people/JoeEames.jpg",
+    "shortBio": "Joe is a Viking (at heart). By day he is a mild-mannered author for Pluralsight.com. By night he is a mild-mannered organizer of ng-conf. He is a Google Developer Expert in Angular, gives lots of talks & workshops, and loves all things web.",
+    "bio": "Joe is a Viking (at heart). By day he is a mild-mannered author for Pluralsight.com. By night he is a mild-mannered organizer of ng-conf. He is a Google Developer Expert in Angular, gives lots of talks & workshops, and loves all things web.",
+    "tags": [
+      "Angular 1",
+      "Angular 2",
+      "Angular"
+    ],
+    "badges": [{
+      "name": "GDE",
+      "description": "Google Developer Expert",
+      "link": "https://developers.google.com/experts/"
+    }],
+    "socials": [{
+      "icon": "website",
+      "name": "Website",
+      "link": "http://joeeames.me/"
+    }, {
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/josepheames"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "https://github.com/joeeames"
     }]
   }
 

@@ -1,154 +1,156 @@
 [{
-    "date": "2017-02-11",
-    "dateReadable": "February 11",
-    "tracks": [{
-        "title": "Room: Bifrost"
-    },
-    {
-        "title": "Room: Valhalla"
-    }],
-    "timeslots": [{
-        "startTime": "08:00",
-        "endTime": "09:00",
-        "sessions": [
-            [1]
-        ]
-    }, {
-        "startTime": "09:00",
-        "endTime": "09:15",
-        "sessions": [
-            [2]
-        ]
-    }, {
-        "startTime": "09:15",
-        "endTime": "09:50",
-        "sessions": [
-            [100]
-        ]
-    }, {
-        "startTime": "09:50",
-        "endTime": "10:25",
-        "sessions": [
-            [16],
-            [21]
-        ]
-    }, {
-        "startTime": "10:25",
-        "endTime": "11:00",
-        "sessions": [
-            [12],
-            [19]
-        ]
-    }, {
-        "startTime": "11:00",
-        "endTime": "11:35",
-        "sessions": [
-            [13],
-            [18]
-        ]
-    }, {
-        "startTime": "11:35",
-        "endTime": "12:10",
-        "sessions": [
-            [14],
-            [15]
-        ]
-    }, {
-        "startTime": "12:10",
-        "endTime": "13:40",
-        "sessions": [
-            [3]
-        ]
-    }, {
-        "startTime": "13:40",
-        "endTime": "14:15",
-        "sessions": [
-            [22],
-            [23]
-        ]
-    }, {
-        "startTime": "14:15",
-        "endTime": "14:50",
-        "sessions": [
-            [11],
-            [17]
-        ]
-    }, {
-        "startTime": "14:50",
-        "endTime": "15:25",
-        "sessions": [
-            [999],
-            [999]
-        ]
-    }, {
-        "startTime": "15:25",
-        "endTime": "16:00",
-        "sessions": [
-            [4]
-        ]
-    }, {
-        "startTime": "16:00",
-        "endTime": "16:35",
-        "sessions": [
-            [999],
-            [999]
-        ]
-    }, {
-        "startTime": "16:35",
-        "endTime": "17:10",
-        "sessions": [
-            [999],
-            [999]
-        ]
-    }, {
-        "startTime": "17:10",
-        "endTime": "17:50",
-        "sessions": [
-            [999],
-            [999]
-        ]
-    }, {
-        "startTime": "17:50",
-        "endTime": "18:00",
-        "sessions": [
-            [5]
-        ]
-    }, {
-        "startTime": "18:00",
-        "endTime": "19:00",
-        "sessions": [
-            [6]
-        ]
-    }]
+  "date": "2017-02-11",
+  "dateReadable": "February 11",
+  "tracks": [{
+    "title": "Room: Bifrost"
+  }, {
+    "title": "Room: Valhalla"
+  }],
+  "timeslots": [{
+    "startTime": "08:00",
+    "endTime": "09:00",
+    "sessions": [
+      [1]
+    ]
+  }, {
+    "startTime": "09:00",
+    "endTime": "09:15",
+    "sessions": [
+      [2]
+    ]
+  }, {
+    "startTime": "09:15",
+    "endTime": "09:50",
+    "sessions": [
+      [32]
+    ]
+  }, {
+    "startTime": "09:50",
+    "endTime": "10:25",
+    "sessions": [
+      [16],
+      [21]
+    ]
+  }, {
+    "startTime": "10:25",
+    "endTime": "11:00",
+    "sessions": [
+      [12],
+      [19]
+    ]
+  }, {
+    "startTime": "11:00",
+    "endTime": "11:35",
+    "sessions": [
+      [13],
+      [18]
+    ]
+  }, {
+    "startTime": "11:35",
+    "endTime": "12:10",
+    "sessions": [
+      [14],
+      [15]
+    ]
+  }, {
+    "startTime": "12:10",
+    "endTime": "13:40",
+    "sessions": [
+      [3]
+    ]
+  }, {
+    "startTime": "13:40",
+    "endTime": "14:15",
+    "sessions": [
+      [22],
+      [23]
+    ]
+  }, {
+    "startTime": "14:15",
+    "endTime": "14:50",
+    "sessions": [
+      [11],
+      [17]
+    ]
+  }, {
+    "startTime": "14:50",
+    "endTime": "15:25",
+    "sessions": [
+      [24],
+      [25]
+    ]
+  }, {
+    "startTime": "15:25",
+    "endTime": "16:00",
+    "sessions": [
+      [4]
+    ]
+  }, {
+    "startTime": "16:00",
+    "endTime": "16:35",
+    "sessions": [
+      [26],
+      [27]
+    ]
+  }, {
+    "startTime": "16:35",
+    "endTime": "17:10",
+    "sessions": [
+      [28],
+      [29]
+    ]
+  }, {
+    "startTime": "17:10",
+    "endTime": "17:50",
+    "sessions": [
+      [30],
+      [31]
+    ]
+  }, {
+    "startTime": "17:50",
+    "endTime": "18:00",
+    "sessions": [
+      [5]
+    ]
+  }, {
+    "startTime": "18:00",
+    "endTime": "19:00",
+    "sessions": [
+      [6]
+    ]
+  }]
 }, {
-    "date": "2017-02-12",
-    "dateReadable": "February 12",
-    "tracks": [{
-        "title": "Workshops room #1"
-    }, {
-        "title": "Workshops room #2"
-    }, {
-        "title": "Workshops room #3"
-    }, {
-        "title": "Workshops room #4"
-    }, {
-        "title": "Workshops room #5"
-    }],
-    "timeslots": [{
-        "startTime": "09:30",
-        "endTime": "10:00",
-        "sessions": [
-            [7]
-        ]
-    }, {
-        "startTime": "10:00",
-        "endTime": "17:00",
-        "sessions": [
-            [81],
-            [82],
-            [84],
-            [85],
-            [86]
-        ]
-    }]
+  "date": "2017-02-12",
+  "dateReadable": "February 12",
+  "tracks": [{
+    "title": "Workshops room #1"
+  }, {
+    "title": "Workshops room #2"
+  }, {
+    "title": "Workshops room #3"
+  }, {
+    "title": "Workshops room #4"
+  }, {
+    "title": "Workshops room #5"
+  }, {
+    "title": "Workshops room #6"
+  }],
+  "timeslots": [{
+    "startTime": "09:30",
+    "endTime": "10:00",
+    "sessions": [
+      [7]
+    ]
+  }, {
+    "startTime": "10:00",
+    "endTime": "17:00",
+    "sessions": [
+      [81],
+      [82],
+      [84],
+      [85],
+      [86],
+      [87]
+    ]
+  }]
 }]
