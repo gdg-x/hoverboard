@@ -3,6 +3,16 @@
     "title": "sponsors",
     "logos": [
       {
+        "name": "Microsoft",
+        "url": "http://www.microsoft.com/",
+        "logoUrl": "../images/logos/microsoft.png"
+      },
+      {
+        "name": "ag-Grid",
+        "url": "http://www.ag-grid.com/",
+        "logoUrl": "../images/logos/ag-grid.png"
+      },
+      {
         "name": "Nordea",
         "url": "http://www.nordea.com/",
         "logoUrl": "../images/logos/nordea.png"
