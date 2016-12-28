@@ -51,12 +51,12 @@
       persisted-data="{{_scheduleRaw}}">
     </app-indexeddb-mirror>
 
-    <firebase-document
+    <firebase-query
       id="queryPartners"
       app-name="[[app.data.firebase.name]]"
       path="/partners"
       data="{{_firebasePartners}}">
-    </firebase-document>
+    </firebase-query>
 
     <app-indexeddb-mirror
       session="[[app.data.firebase.indexedDbSession]]"
