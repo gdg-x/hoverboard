@@ -1,189 +1,195 @@
 [{
-    "date": "2016-09-09",
-    "dateReadable": "September 9",
-    "tracks": [{
-        "title": "Expo hall"
-    }, {
-        "title": "Conference hall"
-    }, {
-        "title": "Workshops hall"
-    }],
-    "timeslots": [{
-        "startTime": "09:00",
-        "endTime": "10:00",
-        "sessions": [
-            [132]
-        ]
-    }, {
-        "startTime": "10:00",
-        "endTime": "10:15",
-        "sessions": [
-            [136]
-        ]
-    }, {
-        "startTime": "10:15",
-        "endTime": "11:00",
-        "sessions": [
-            [139]
-        ]
-    }, {
-        "startTime": "11:00",
-        "endTime": "11:40",
-        "sessions": [
-            [103],
-            [120],
-            [109]
-        ]
-    }, {
-        "startTime": "11:50",
-        "endTime": "12:30",
-        "sessions": [
-            [129],
-            [116],
-            [109]
-        ]
-    }, {
-        "startTime": "12:30",
-        "endTime": "14:00",
-        "sessions": [
-            [133]
-        ]
-    }, {
-        "startTime": "14:00",
-        "endTime": "14:40",
-        "sessions": [
-            [101],
-            [118],
-            [107]
-        ]
-    }, {
-        "startTime": "14:50",
-        "endTime": "15:30",
-        "sessions": [
-            [140],
-            [126],
-            [107]
-        ]
-    }, {
-        "startTime": "15:30",
-        "endTime": "16:00",
-        "sessions": [
-            [134]
-        ]
-    }, {
-        "startTime": "16:00",
-        "endTime": "16:40",
-        "sessions": [
-            [105],
-            [127],
-            [119]
-        ]
-    }, {
-        "startTime": "16:50",
-        "endTime": "17:30",
-        "sessions": [
-            [112],
-            [111],
-            [119]
-        ]
-    }, {
-        "startTime": "17:40",
-        "endTime": "18:20",
-        "sessions": [
-            [106],
-            [125],
-            [119]
-        ]
-    }, {
-        "startTime": "18:30",
-        "endTime": "22:30",
-        "sessions": [
-            [137]
-        ]
-    }]
+  "date": "2017-10-19",
+  "dateReadable": "19 octobre",
+  "tracks": [{
+    "title": "Salle Titan"
+  }, {
+    "title": "Salle Belem"
+  }, {
+    "title": "Salle Tour de Bretagne"
+  }, {
+    "title": "Salle Graslin"
+  }, {
+    "title": "Salle Les machines"
+  }, {
+    "title": "Salle Tour LU"
+  }],
+  "timeslots": [{
+    "startTime": "08:00",
+    "sessions": [
+      [0]
+    ]
+  }, {
+    "startTime": "09:00",
+    "sessions": [
+      [1]
+    ]
+  }, {
+    "startTime": "10:00",
+    "sessions": [
+      [1472110242598],
+      [1471954293355],
+      [1471945120162],
+      [1472512275589],
+      [1471878583557],
+      [1472473075263]
+    ]
+  }, {
+    "startTime": "11:10",
+    "sessions": [
+      [995],
+      [1465841475354],
+      [1466670619967],
+      [1470394746917]
+    ]
+  }, {
+    "startTime": "12:00",
+    "sessions": [
+      [2]
+    ]
+  }, {
+    "startTime": "14:00",
+    "sessions": [
+      [1465579632798],
+      [1467190977231],
+      [1472454479881],
+      [1470391525167],
+      [1466789828567],
+      [1472390695765]
+    ]
+  }, {
+    "startTime": "15:10",
+    "sessions": [
+      [1472224082408],
+      [999],
+      [1470391194125],
+      [1469470996994]
+    ]
+  }, {
+    "startTime": "16:20",
+    "sessions": [
+      [1465225950184],
+      [1469880580843],
+      [1466671476078],
+      [1470522007386]
+    ]
+  }, {
+    "startTime": "17:20",
+    "sessions": [
+      [1472641651474],
+      [1469380401604],
+      [1472679569387],
+      [1466874066735]
+    ]
+  }, {
+    "startTime": "17:50",
+    "sessions": [
+      [1472131616929],
+      [1466851531333],
+      [1472546431941],
+      [1472052858025]
+    ]
+  }, {
+    "startTime": "18:30",
+    "sessions": [
+      [3]
+    ]
+  }]
 }, {
-    "date": "2016-09-10",
-    "dateReadable": "September 10",
-    "tracks": [{
-        "title": "Expo hall"
-    }, {
-        "title": "Conference hall"
-    }, {
-        "title": "Workshops hall"
-    }],
-    "timeslots": [{
-        "startTime": "09:30",
-        "endTime": "10:10",
-        "sessions": [
-            [135]
-        ]
-    }, {
-        "startTime": "10:10",
-        "endTime": "10:50",
-        "sessions": [
-            [114],
-            [117],
-            [121]
-        ]
-    }, {
-        "startTime": "11:00",
-        "endTime": "11:40",
-        "sessions": [
-            [122],
-            [113],
-            [121]
-        ]
-    }, {
-        "startTime": "11:50",
-        "endTime": "12:30",
-        "sessions": [
-            [104],
-            [124],
-            [121]
-        ]
-    }, {
-        "startTime": "12:30",
-        "endTime": "14:00",
-        "sessions": [
-            [133]
-        ]
-    }, {
-        "startTime": "14:00",
-        "endTime": "14:40",
-        "sessions": [
-            [108],
-            [128],
-            [102]
-        ]
-    }, {
-        "startTime": "14:50",
-        "endTime": "15:30",
-        "sessions": [
-            [110],
-            [123],
-            [102]
-        ]
-    }, {
-        "startTime": "15:30",
-        "endTime": "16:00",
-        "sessions": [
-            [134]
-        ]
-    }, {
-        "startTime": "16:00",
-        "endTime": "16:40",
-        "sessions": [
-            [131],
-            [140],
-            [130]
-        ]
-    }, {
-        "startTime": "16:50",
-        "endTime": "17:30",
-        "sessions": [
-            [115],
-            [140],
-            [130]
-        ]
-    }]
+  "date": "2017-10-20",
+  "dateReadable": "20 octobre",
+  "tracks": [{
+    "title": "Salle Titan"
+  }, {
+    "title": "Salle Belem"
+  }, {
+    "title": "Salle Tour de Bretagne"
+  }, {
+    "title": "Salle Graslin"
+  }, {
+    "title": "Salle Les machines"
+  }, {
+    "title": "Salle Tour LU"
+  }],
+  "timeslots": [{
+    "startTime": "08:30",
+    "sessions": [
+      [5]
+    ]
+  }, {
+    "startTime": "09:00",
+    "sessions": [
+      [1467051776736],
+      [1472107474978],
+      [991],
+      [1471777299468],
+      [1470050577168],
+      [1472541226273]
+    ]
+  }, {
+    "startTime": "10:10",
+    "sessions": [
+      [1471998460521],
+      [8],
+      [1472463470824],
+      [1472544348682]
+    ]
+  }, {
+    "startTime": "11:20",
+    "sessions": [
+      [1471611313272],
+      [1466585739187],
+      [993],
+      [994]
+    ]
+  }, {
+    "startTime": "12:10",
+    "sessions": [
+      [4]
+    ]
+  }, {
+    "startTime": "14:00",
+    "sessions": [
+      [1472594325076],
+      [1470053819525],
+      [998],
+      [992],
+      [1472653456003],
+      [1470779030956]
+    ]
+  }, {
+    "startTime": "15:10",
+    "sessions": [
+      [1467624369880],
+      [997],
+      [1470660979759],
+      [1472317441011]
+    ]
+  }, {
+    "startTime": "16:20",
+    "sessions": [
+      [1472390635773],
+      [1472553153816],
+      [1468499637504],
+      [1472674682270]
+    ]
+  }, {
+    "startTime": "16:50",
+    "sessions": [
+      [1465336720044],
+      [1472453181702],
+      [1472646290272],
+      [996]
+    ]
+  }, {
+    "startTime": "17:20",
+    "sessions": [
+      [1467189637282]
+    ]
+  }, {
+    "startTime": "18:10",
+    "sessions": [
+      [9]
+    ]
+  }]
 }]

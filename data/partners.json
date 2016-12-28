@@ -1,72 +1,226 @@
 [
   {
-    "title": "template-creator",
+    "title": "platinium-partner",
     "logos": [
       {
-        "name": "GDG Lviv",
-        "url": "https://plus.google.com/102444623953913144164",
-        "logoUrl": "../images/logos/gdg-lviv.svg",
-        "width": 170
+        "name": "Google",
+        "url": "https://www.google.com.ua/intl/en/about/",
+        "logoUrl": "../images/logos/google.svg",
+        "width": 250
+      },
+      {
+        "name": "Epitech",
+        "url": "http://www.epitech.eu/",
+        "logoUrl": "../images/sponsors/epitech.png",
+        "width": 250
+      },
+      {
+        "name": "Zenika",
+        "url": "http://www.zenika.com/",
+        "logoUrl": "../images/sponsors/zenika.png",
+        "width": 250
+      },
+      {
+        "name": "SQLi",
+        "url": "http://www.sqli.com/",
+        "logoUrl": "../images/sponsors/sqli.png",
+        "width": 250
+      },
+      {
+        "name": "Concerto",
+        "url": "http://www.conserto.pro/",
+        "logoUrl": "../images/sponsors/conserto.png",
+        "width": 250
+      },
+      {
+        "name": "Sopra",
+        "url": "http://www.soprasteria.com/fr",
+        "logoUrl": "../images/sponsors/sopra.png",
+        "width": 250
+      },
+      {
+        "name": "Creative",
+        "url": "http://www.groupe-creative.fr/",
+        "logoUrl": "../images/sponsors/creative.png",
+        "width": 250
+      },
+      {
+        "name": "Neosoft",
+        "url": "http://www.neo-soft.fr/",
+        "logoUrl": "../images/sponsors/neosoft.png",
+        "width": 300
       }
     ]
-  },
-  {
+  },{
+    "title": "gold-partner",
+    "logos": [
+      {
+        "name": "Github",
+        "url": "http://www.github.com",
+        "logoUrl": "../images/sponsors/github.png"
+      },
+      {
+        "name": "eDoceo",
+        "url": "http://www.e-doceo.net/",
+        "logoUrl": "../images/sponsors/edoceo.png"
+      },
+      {
+        "name": "Cap",
+        "url": "https://www.fr.capgemini.com/",
+        "logoUrl": "../images/sponsors/cap.png"
+      },
+      {
+        "name": "Netapsys",
+        "url": "http://www.netapsys.fr/",
+        "logoUrl": "../images/sponsors/netapsys.png"
+      },
+      {
+        "name": "Accenture",
+        "url": "https://www.accenture.com/fr-fr/",
+        "logoUrl": "../images/sponsors/accenture.png"
+      },
+      {
+        "name": "Open Groupe",
+        "url": "http://www.open-groupe.com",
+        "logoUrl": "../images/sponsors/open.png"
+      },
+      {
+        "name": "SII",
+        "url": "http://www.groupe-sii.com/fr",
+        "logoUrl": "../images/sponsors/sii.png"
+      },
+      {
+        "name": "VIF",
+        "url": "https://www.vif.fr",
+        "logoUrl": "../images/sponsors/vif.png"
+      },
+      {
+        "name": "Talend",
+        "url": "http://fr.talend.com/",
+        "logoUrl": "../images/sponsors/talend.png"
+      },
+      {
+        "name": "Mozilla",
+        "url": "https://www.mozilla.org/en-US/foundation/",
+        "logoUrl": "../images/sponsors/mozilla.png"
+      },
+      {
+        "name": "ENI",
+        "url": "http://www.groupe-sii.com/fr",
+        "logoUrl": "../images/sponsors/eni.png"
+      },
+      {
+        "name": "SNCF",
+        "url": "https://www.vif.fr",
+        "logoUrl": "../images/sponsors/sncf.png"
+      }
+    ]
+  },{
+    "title": "silver-partner",
+    "logos": [
+      {
+        "name": "apside",
+        "url": "http://www.github.com",
+        "logoUrl": "../images/sponsors/apside.png"
+      },
+      {
+        "name": "asi",
+        "url": "http://www.e-doceo.net/",
+        "logoUrl": "../images/sponsors/asi.png"
+      },
+      {
+        "name": "beapp",
+        "url": "https://www.fr.capgemini.com/",
+        "logoUrl": "../images/sponsors/beapp.png"
+      },
+      {
+        "name": "beemoov",
+        "url": "http://www.netapsys.fr/",
+        "logoUrl": "../images/sponsors/beemoov.png"
+      },
+      {
+        "name": "catamania",
+        "url": "https://www.accenture.com/fr-fr/",
+        "logoUrl": "../images/sponsors/catamania.png"
+      },
+      {
+        "name": "externatic",
+        "url": "http://www.open-groupe.com",
+        "logoUrl": "../images/sponsors/externatic.png"
+      },
+      {
+        "name": "gfi",
+        "url": "http://www.groupe-sii.com/fr",
+        "logoUrl": "../images/sponsors/gfi.png"
+      },
+      {
+        "name": "lafourchette",
+        "url": "https://www.vif.fr",
+        "logoUrl": "../images/sponsors/lafourchette.png"
+      },
+      {
+        "name": "onepoint",
+        "url": "http://fr.talend.com/",
+        "logoUrl": "../images/sponsors/onepoint.png"
+      },
+      {
+        "name": "seyos",
+        "url": "https://www.mozilla.org/en-US/foundation/",
+        "logoUrl": "../images/sponsors/seyos.png"
+      },
+      {
+        "name": "softeam",
+        "url": "http://www.groupe-sii.com/fr",
+        "logoUrl": "../images/sponsors/softeam.png"
+      },
+      {
+        "name": "sogeti",
+        "url": "https://www.vif.fr",
+        "logoUrl": "../images/sponsors/sogeti.png"
+      },
+      {
+        "name": "sparklane",
+        "url": "https://www.sparklane.fr",
+        "logoUrl": "../images/sponsors/sparklane.png"
+      }
+    ]
+  },{
     "title": "general-partner",
     "logos": [
       {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
+        "name": "Remi Chautard",
+        "url": "http://www.github.com",
+        "logoUrl": "../images/sponsors/remy_chautard.png"
       },
       {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/logos/gdg-x.svg"
+        "name": "mstream",
+        "url": "http://www.e-doceo.net/",
+        "logoUrl": "../images/sponsors/mstream.png"
       },
       {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
+        "name": "chooseyourboss",
+        "url": "https://www.fr.capgemini.com/",
+        "logoUrl": "../images/sponsors/chooseyourboss.png"
       },
       {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/logos/gdg-x.svg"
+        "name": "nantestech",
+        "url": "http://www.netapsys.fr/",
+        "logoUrl": "../images/sponsors/nantestech.png"
       },
       {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
+        "name": "nantesmetropole",
+        "url": "https://www.accenture.com/fr-fr/",
+        "logoUrl": "../images/sponsors/nantesmetropole.png"
       },
       {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/logos/gdg-x.svg"
+        "name": "residhome",
+        "url": "http://www.open-groupe.com",
+        "logoUrl": "../images/sponsors/residhome.png"
       },
       {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
-      },
-      {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/logos/gdg-x.svg"
-      },
-      {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
-      },
-      {
-        "name": "GDG[x]",
-        "url": "https://github.com/gdg-x",
-        "logoUrl": "../images/logos/gdg-x.svg"
-      },
-      {
-        "name": "Google",
-        "url": "https://www.google.com.ua/intl/en/about/",
-        "logoUrl": "../images/logos/google.svg"
+        "name": "maddyness",
+        "url": "http://www.groupe-sii.com/fr",
+        "logoUrl": "../images/sponsors/maddyness.png"
       }
     ]
   }

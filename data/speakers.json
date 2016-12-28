@@ -1,1069 +1,1614 @@
 {
-    "1": {
-        "id": 1,
-        "featured": true,
-        "name": "Mete Atamel",
-        "title": "Developer Advocate",
-        "company": "Google",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "London, United Kingdom",
-        "photoUrl": "/images/people/mete_atamel.jpg",
-        "shortBio": "Mete is a Developer Advocate at Google, currently focused on helping developers with Google Cloud...",
-        "bio": "Mete is a Developer Advocate at Google, currently focused on helping developers with Google Cloud Platform. As a long-time Java and a recent C# developer, he likes to compare the two ecosystems. Prior to Google, he worked at Microsoft, Skype, Adobe, EMC, and Nokia building apps and services on various web, mobile and cloud platforms. Originally from Cyprus, he currently lives in Greenwich, not too far away from the prime meridian.",
-        "tags": [
-            "Cloud",
-            "Compute Engine",
-            "gRPC"
-        ],
-        "badges": [
-
-        ],
-        "socials": [
-            {
-                "icon": "linkedin",
-                "name": "LinkedIn",
-                "link": "https://www.linkedin.com/in/meteatamel/"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/meteatamel/"
-            },
-            {
-                "icon": "github",
-                "name": "GitHub",
-                "link": "https://github.com/meteatamel/"
-            }
-        ]
-    },
-    "2": {
-        "id": 2,
-        "featured": true,
-        "name": "Yonatan Levin",
-        "title": "Android Evangelist & Developer",
-        "company": "Gett",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Tel Aviv, Israel",
-        "photoUrl": "/images/people/yonatan_levin.jpg",
-        "shortBio": "Born with the spirit of an entrepreneur, Yonatan loves to create, build and just do fun stuff in...",
-        "bio": "Born with the spirit of an entrepreneur, Yonatan loves to create, build and just do fun stuff in the technology field.\nYonatan is one of the top Israeli mobile developers, who is also a part of an elite worldwide group of Google Developer Experts.\nHis primary expertise is Android and Mobile UX, but is also friendly to backend technologies and people in general :)\nFounded and led 3 startups in the past, recently received funding for his new startup which is on the make.\nCurrently, Yonatan is taking a part of the startup Gett - the largest on-demand transportation, delivery, and logistics company which already raised more than $500M",
-        "tags": [
-            "Android",
-            "Doze",
-            "Mobile UX",
-            "Entrepreneurship"
-        ],
-        "badges": [
-            {
-                "name": "GDE",
-                "description": "Android Google Developer Expert",
-                "link": "https://developers.google.com/experts/people/yonatan-levin.html"
-            }
-        ],
-        "socials": [
-            {
-                "icon": "facebook",
-                "name": "Facebook",
-                "link": "https://www.facebook.com/levin.yonatan"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/parahall"
-            },
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/+YonatanLevin"
-            }
-        ]
-    },
-    "3": {
-        "id": 3,
-        "featured": true,
-        "name": "Sascha Wolter",
-        "title": "Senior Developer Evangelist Connected Home",
-        "company": "Duetsche Telekom AG - Group Innovation+",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Munich and Dusseldorf, Germany",
-        "photoUrl": "/images/people/sascha_wolter.jpg",
-        "shortBio": "UX enthusiast with passion for the IoT. Board member of the Usability & User Experience committee at the federal association BITKOM.",
-        "bio": "Sascha Wolter is a professional developer and user experience enthusiast with passion for the Internet of Things in all flavors. He also works as a consultant, trainer, lecturer, keynote-speaker, and author who focusses on understanding, innovation and value. Sascha is the founder of the User Group flashforum.de with more than 100,000 members, and as such he is committed to the interests of the user. After organizing internationally renowned events like beyond tellerrand from 2001 to 2011, he is now board member of the Usability & User Experience committee at the federal association BITKOM. When he is not tinkering with new soft- and hardware for Deutsche Telekom AG \u2013 Connected Home, he likes discovering the world together with his kids in an odd way.",
-        "tags": [
-            "Web",
-            "IoT",
-            "Smart Home"
-        ],
-        "badges": [
-
-        ],
-        "socials": [
-            {
-                "icon": "website",
-                "name": "Website",
-                "link": "http://www.wolter.biz"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "http://twitter.com/saschawolter"
-            },
-            {
-                "icon": "linkedin",
-                "name": "LinkedIn",
-                "link": "http://www.linkedin.com/pub/sascha-wolter/5/a38/493"
-            }
-        ]
-    },
-    "4": {
-        "id": 4,
-        "featured": true,
-        "name": "Rustem Arzymbetov",
-        "title": "Software Engineer",
-        "company": "Google",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Mountain View, United States",
-        "photoUrl": "/images/people/rustem_arzymbetov.jpg",
-        "shortBio": "Rustem is working at Google for last 8 years. Was in Search and Android teams. Big fan of perform...",
-        "bio": "Rustem is working at Google for last 8 years. Was in Search and Android teams. Big fan of performance optimizations.",
-        "tags": [
-            "Cloud",
-            "Performance",
-            "TensorFlow"
-        ],
-        "badges": [
-
-        ],
-        "socials": [
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/102117493667558776856"
-            }
-        ]
-    },
-    "5": {
-        "id": 5,
-        "featured": true,
-        "name": "Adrian Kajda",
-        "title": "Product Manager/Developer",
-        "company": "Sygic",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Opole, Poland",
-        "photoUrl": "/images/people/adrian_kajda.jpg",
-        "shortBio": "Creator of Fuelio app. Fuelio was his hooby project started in 2012. Three years later the app wa...",
-        "bio": "Creator of Fuelio app. Fuelio was his hooby project started in 2012. Three years later the app was aquired by Sygic.",
-        "tags": [
-            "Android",
-            "Entrepreneurship"
-        ],
-        "badges": [
-
-        ],
-        "socials": [
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "plus.google.com/+AdrianKajda"
-            }
-        ]
-    },
-    "6": {
-        "id": 6,
-        "featured": true,
-        "name": "Gerard Sans",
-        "title": "Technical Evangelist",
-        "company": "AngularZone",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "London, United Kingdom",
-        "photoUrl": "/images/people/gerard_sans.jpg",
-        "shortBio": "Angular Google Developer Expert. International speaker and trainer.  Enjoy running AngularLabs London.",
-        "bio": "Angular Google Developer Expert. I am a Computer Science Engineer specialised in Web. International speaker and trainer. I am an Angular fanboy and a community activist fighting for the JavaScript revolution. I have lived and worked for all sorts of companies in Germany, Brazil, UK and Spain. I am always up for a good challenge. I enjoy running AngularLabs London, mentoring students, participating in the community, giving talks and writing technical articles at Medium.",
-        "tags": [
-            "Web",
-            "Angular",
-            "Progressive Web Apps"
-        ],
-        "badges": [
-            {
-                "name": "GDE",
-                "description": "Angular Google Developer Expert",
-                "link": "https://developers.google.com/experts/people/gerard-sans.html"
-            }
-        ],
-        "socials": [
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/gerardsans"
-            },
-            {
-                "icon": "website",
-                "name": "Website",
-                "link": "https://medium.com/@gerard.sans"
-            }
-        ]
-    },
-    "7": {
-        "id": 7,
-        "featured": true,
-        "name": "Jozef Vodicka",
-        "title": "Developer Relations Program Manager",
-        "company": "Google",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Prague, Czech Republic",
-        "photoUrl": "/images/people/jozef_vodicka.jpg",
-        "shortBio": "TEDx speaker, Slovak Forbes 30-under-30, IT auditor for AIESEC International & TOP 5 Student Entrepreneurs in Slovakia.",
-        "bio": "Right now he is a passionate Googler helping developers and companies in South CEE to be more successful and profitable.\n\nHe co-founded and lead several StartUPs such as Venzeo.com, TrashOut.ngo, Matura.sk and Stuzkova.EU.\n\nHe is TEDx speaker, Slovak Forbes 30-under-30, IT auditor for AIESEC International & TOP 5 Student Entrepreneurs in Slovakia. He gets things done.",
-        "tags": [
-            "Cloud",
-            "Firebase"
-        ],
-        "badges": [
-
-        ],
-        "socials": [
-            {
-                "icon": "linkedin",
-                "name": "LinkedIn",
-                "link": "https://www.linkedin.com/in/jozefvodicka"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/jozefvodicka"
-            },
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/+JozefVodicka"
-            },
-            {
-                "icon": "facebook",
-                "name": "Facebook",
-                "link": "https://www.facebook.com/jozef.vodicka"
-            }
-        ]
-    },
-    "8": {
-        "id": 8,
-        "featured": true,
-        "name": "Mateusz Herych",
-        "title": "Android Tech Lead",
-        "company": "IG",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Krakow, Poland",
-        "photoUrl": "/images/people/mateusz_herych.jpg",
-        "shortBio": "3x rockstar of DevFest Ukraine stage. Android GDE. Co-organizer of GDG Krakow.",
-        "bio": "Mateusz lives in Krakow, holds a membership in the Google Developer Expert program for Android. Works as an Android Tech Lead at IG. Co-organizer of GDG Krakow community meetups. Fresh dad of twins. For the third time at DevFest Ukraine.",
-        "tags": [
-            "Android",
-            "Android",
-            "Design Patterns",
-            "Libraries"
-        ],
-        "badges": [
-            {
-                "name": "GDE",
-                "description": "Android Google Developer Expert",
-                "link": "https://developers.google.com/experts/img/user/108555637824110226040.png"
-            },
-            {
-                "name": "GDG",
-                "description": "Google Developers Group Krakow",
-                "link": "https://developers.google.com/groups/directory/"
-            }
-        ],
-        "socials": [
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/+MateuszHerych"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/mherych"
-            },
-            {
-                "icon": "linkedin",
-                "name": "LinkedIn",
-                "link": "https://www.linkedin.com/in/herych"
-            }
-        ]
-    },
-    "9": {
-        "id": 9,
-        "featured": false,
-        "name": "David Mayboroda",
-        "title": "Android Engineer",
-        "company": "SoftServe",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Kyiv, Ukraine",
-        "photoUrl": "/images/people/david_mayboroda.jpg",
-        "shortBio": "Ex Yandex emproyee. Android enthusiast.",
-        "bio": "Ex-Yandex emploee, currently Android Engineer at SoftServe.",
-        "tags": [
-            "Android",
-            "Dagger 2"
-        ],
-        "badges": [
-
-        ],
-        "socials": [
-            {
-                "icon": "facebook",
-                "name": "Facebook",
-                "link": "https://www.facebook.com/profile.php?id=100008474898785"
-            },
-            {
-                "icon": "github",
-                "name": "GitHub",
-                "link": "https://github.com/dmayboroda"
-            }
-        ]
-    },
-    "10": {
-        "id": 10,
-        "featured": true,
-        "name": "Konrad Dzwinel",
-        "title": "Front-End Engineer",
-        "company": "Brainly",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Krakow, Poland",
-        "photoUrl": "/images/people/konrad_dzwinel.jpg",
-        "shortBio": "Fighting for 60FPS on Web. GDE on Web Technologies. Co-organizer of GDG Krakow.",
-        "bio": "Konrad is a front-end developer at Brainly, Google Developer Expert for Web Technologies and co-organizer of Google Developers Group in Krakow. Over the years he worked for various startups, consultancies and software houses building websites, hybrid apps and internal tools. After work, he develops Chrome extensions, experiments with various front-end technologies, gives presentations and runs workshops.",
-        "tags": [
-            "Web",
-            "Chrome Extensions",
-            "Progressive Web Apps"
-        ],
-        "badges": [
-            {
-                "name": "GDE",
-                "description": "Web Technologies Google Developer Expert",
-                "link": "https://developers.google.com/experts/people/konrad-dzwinel.html"
-            },
-            {
-                "name": "GDG",
-                "description": "Google Developers Group Krakow",
-                "link": " https://developers.google.com/groups/directory/"
-            }
-        ],
-        "socials": [
-            {
-                "icon": "github",
-                "name": "GitHub",
-                "link": "https://github.com/kdzwinel"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/kdzwinel"
-            }
-        ]
-    },
-    "11": {
-        "id": 11,
-        "featured": false,
-        "name": "Jean-Baptiste Clion",
-        "title": "Founder",
-        "company": "Apeser",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Basel, Switzerland",
-        "photoUrl": "/images/people/jean-baptiste_clion.jpg",
-        "shortBio": "Founder and co-organiser of GDG Basel. Worked in Defence & Aeronautics, Finance & Consulting industries.",
-        "bio": "Jean-Baptiste Clion (AKA JB) is a senior cloud engineer working with Google Technologies since 2007.  He is the founder and co-organiser of GDG Basel, Switzerland. Jean-Baptiste worked in various industries such as Defence & Aeronautics, Finance & Consulting. In his last position, JB was Google Practice Lead at Capgemini Switzerland, he is now co-founding a startup dedicated to Progressive Web Apps solutions relying on cloud technologies.",
-        "tags": [
-            "Cloud",
-            "AppEngine",
-            "Microservices"
-        ],
-        "badges": [
-            {
-                "name": "GDG",
-                "description": "Google Developers Group Basel",
-                "link": "https://developers.google.com/groups/chapter/104796338340371914914/"
-            }
-        ],
-        "socials": [
-            {
-                "icon": "facebook",
-                "name": "Facebook",
-                "link": "https://www.facebook.com/jbclion"
-            },
-            {
-                "icon": "linkedin",
-                "name": "LinkedIn",
-                "link": "https://ch.linkedin.com/in/jean-baptiste-clion-3196415"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/JBaptisteClion"
-            },
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/+JeanBaptisteClionBasel/posts"
-            }
-        ]
-    },
-    "12": {
-        "id": 12,
-        "featured": true,
-        "name": "Paul Lammertsma",
-        "title": "CTO",
-        "company": "Pixplicity",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Amsterdam, The Netherlands",
-        "photoUrl": "/images/people/paul_lammertsma.jpg",
-        "shortBio": "Paul is CTO and co-founder of Pixplicity, Holland's leading Android-specific consulting and app-b...",
-        "bio": "Paul is CTO and co-founder of Pixplicity, Holland's leading Android-specific consulting and app-building company. He applies his knowledge of Java, Android and Linux in Pixplicity to develop high-quality apps and provide technical solutions for customers such as Mercedes-Benz, Nestl\u00e9, De Telegraaf, AGIS and De Consumentenbond.",
-        "tags": [
-            "Android",
-            "Data Sync",
-            "Linux"
-        ],
-        "badges": [
-            {
-                "name": "DAUG",
-                "description": "DAUG",
-                "link": "https://developers.google.com/groups/chapter/113182948271879290904/"
-            }
-        ],
-        "socials": [
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/u/0/+PaulLammertsma"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/officesunshine"
-            }
-        ]
-    },
-    "13": {
-        "id": 13,
-        "featured": false,
-        "name": "Aleksander Piotrowski",
-        "title": "Code Monkey",
-        "company": "Applause",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Warsaw, Poland",
-        "photoUrl": "/images/people/aleksander_piotrowski.jpg",
-        "shortBio": "Became a mobile developer after long run as a backend developer. Because of age, holding senior p...",
-        "bio": "Became a mobile developer after long run as a backend developer. Because of age, holding senior positions from the day one as an Android programmer. Serial hackathon winner, or at least contender ;-)",
-        "tags": [
-            "Android",
-            "Android N"
-        ],
-        "badges": [
-
-        ],
-        "socials": [
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/pelotasplus"
-            },
-            {
-                "icon": "facebook",
-                "name": "Facebook",
-                "link": "http://facebook.com/pelotasplus"
-            },
-            {
-                "icon": "linkedin",
-                "name": "LinkedIn",
-                "link": "https://www.linkedin.com/in/pelotasplus"
-            },
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://www.instagram.com/pelotasplus/"
-            }
-        ]
-    },
-    "14": {
-        "id": 14,
-        "featured": false,
-        "name": "Carmen Popovicu",
-        "title": "Front-end Engineer",
-        "company": "Widespread",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Cluj-Napoca, Romania",
-        "photoUrl": "/images/people/carmen_popovicu.jpg",
-        "shortBio": "Angular JS committer. Founder of Dutch Angular JS Community, co-organizer of NG-NL.",
-        "bio": "Carmen is a front-end engineer and a #1 fan of dev communities. She loves Angular but has since recently developed feelings for Polymer too. She strongly believes that adding at least one ASCII smiley in your emails will make the world a better place and hopes to one day make a difference for the web with the code she writes. If she had super powers, she would smiley all the things.",
-        "tags": [
-            "Web",
-            "AngularJS2",
-            "Polymer",
-            "Protractor"
-        ],
-        "badges": [
-
-        ],
-        "socials": [
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/u/0/118143942632321563925/"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/CarmenPopoviciu"
-            }
-        ]
-    },
-    "15": {
-        "id": 15,
-        "featured": true,
-        "name": "Sergii Khomenko",
-        "title": "Data Scientist",
-        "company": "Stylight",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Munich, Germany",
-        "photoUrl": "/images/people/sergii_khomenko.jpg",
-        "shortBio": "Data scientist at one of the biggest fashion communities, STYLIGHT. Data analysis and visualisati...",
-        "bio": "Data scientist at one of the biggest fashion communities, STYLIGHT. Data analysis and visualisation hobbyist, working on problems not only in working time, but in free time for fun and personal data visualisations.\n\nSpeaker at different conferences: Berlin Buzzwords 2014, ApacheCon Europe 2014, Puppet Camp London 2015, Munich Developer Camp, Berlin Buzzwords 2015, Tableau Conference on Tour - Berlin 2015, Budapest BI forum 2015, CrunchConf 2015, FOSDEM 2016, PyData Amsterdam 2016",
-        "tags": [
-            "Cloud",
-            "Big Data",
-            "Analytics"
-        ],
-        "badges": [
-
-        ],
-        "socials": [
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/lc0d3r"
-            }
-        ]
-    },
-    "17": {
-        "id": 17,
-        "featured": false,
-        "name": "Jana Moudra",
-        "title": "Co-Founder",
-        "company": "Juicymo",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Prague, Czech Republic",
-        "photoUrl": "/images/people/jana_moudra.jpg",
-        "shortBio": "GDG Prague organizer. Android and Dart enthusiast. Co-founder of a company called Juicymo.",
-        "bio": "GDE (Google Developer Expert) for Dart. Jana is a passionate developer and modern web and mobile technology evangelist. She is an event organiser for GDG Prague, where she arranges events for developers including public lectures, code labs and hackathons \u2013 covering a wide range of subjects including technologies Dart or Android. She loves to help other developers and spread the knowledge about these technologies. \n\nJana co-founded a company called Juicymo, where she works on juicy apps and products and teaches at Unicorn College.",
-        "tags": [
-            "Android",
-            "Testing",
-            "UiAutomator",
-            "Dart"
-        ],
-        "badges": [
-            {
-                "name": "GDE",
-                "description": "Dart Google Developer Expert",
-                "link": "https://developers.google.com/experts/people/jana-moudr.html"
-            },
-            {
-                "name": "GDG",
-                "description": "Google Developers Group Prague",
-                "link": "https://developers.google.com/groups/chapter/111919016509847766513/"
-            }
-        ],
-        "socials": [
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/+JanaMoudr\u00e1/posts"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/Janamou"
-            },
-            {
-                "icon": "linkedin",
-                "name": "LinkedIn",
-                "link": "https://cz.linkedin.com/in/janamoudra"
-            },
-            {
-                "icon": "github",
-                "name": "GitHub",
-                "link": "https://github.com/Janamou"
-            }
-        ]
-    },
-    "16": {
-        "id": 16,
-        "featured": false,
-        "name": "Dmytro Danylyk",
-        "title": "Senior Android Developer",
-        "company": "Timee",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Lviv, Ukraine",
-        "photoUrl": "/images/people/dmytro_danylyk.jpg",
-        "shortBio": "First Android GDE in Ukraine. Frequent speaker on tech conferences.",
-        "bio": "Dmytro is a developer, writer, speaker. He live in Lviv - a quaint and beautiful city. He is passionate about android and flat design. Currently Dmytro works for a startup Timee where he develop Android application and he love what he do.",
-        "tags": [
-            "Android",
-            "Realm",
-            "Material Design",
-            "Data Sync",
-            "Animations"
-        ],
-        "badges": [
-            {
-                "name": "GDE",
-                "description": "Android Google Developer Expert",
-                "link": "https://developers.google.com/experts/people/dmytro-danylyk"
-            },
-            {
-                "name": "GDG",
-                "description": "Google Developers Group Lviv",
-                "link": "https://developers.google.com/groups/chapter/102444623953913144164/"
-            }
-        ],
-        "socials": [
-            {
-                "icon": "website",
-                "name": "Website",
-                "link": "http://www.dmytrodanylyk.com"
-            },
-            {
-                "icon": "website",
-                "name": "Website",
-                "link": "http://slides.com/dmytrodanylyk"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/dmytrodanylyk"
-            },
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/+DmytroDanylyk"
-            }
-        ]
-    },
-    "19": {
-        "id": 19,
-        "featured": true,
-        "name": "David V\u00e1vra",
-        "title": "Founder/CEO/Android Lead",
-        "company": "Step Up Labs",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Prague, Czech Republic",
-        "photoUrl": "/images/people/david_v\u00e1vra.jpg",
-        "shortBio": "Founder and CEO of Step Up Labs. Android GDE.",
-        "bio": "David is a Google Developer Expert for Android. He is a CEO now, but he still finds time for diving deep into Android architecture. He currently focuses on Firebase for Android. He loves open-source and gadgets like Android Wear or Android TV. He is the core organiser of GDG Prague events.",
-        "tags": [
-            "Android",
-            "Android Wear",
-            "Android TV",
-            "Firebase"
-        ],
-        "badges": [
-            {
-                "name": "GDE",
-                "description": "Android Google Developer Expert",
-                "link": "https://developers.google.com/experts/people/david-v-vra.html"
-            }
-        ],
-        "socials": [
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/+DavidV\u00e1vra"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/vavradav"
-            },
-            {
-                "icon": "linkedin",
-                "name": "LinkedIn",
-                "link": "https://www.linkedin.com/in/dvavra"
-            },
-            {
-                "icon": "github",
-                "name": "GitHub",
-                "link": "https://github.com/davidvavra"
-            }
-        ]
-    },
-    "18": {
-        "id": 18,
-        "featured": false,
-        "name": "Jakub \u0160kv\u00e1ra",
-        "title": "Frontend engineer",
-        "company": "Shipito",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Prague, Czech Republic",
-        "photoUrl": "/images/people/jakub_\u0161kv\u00e1ra.jpg",
-        "shortBio": "Jakub is a front-end engineer at Shipito interested in modern web frameworks, libraries and tools...",
-        "bio": "Jakub is a front-end engineer at Shipito interested in modern web frameworks, libraries and tools. Jakub is also a member of GDG Prague and GDG \u010cVUT in the Czech republic.",
-        "tags": [
-            "Web",
-            "AngularJS",
-            "ReactJS",
-            "NodeJS",
-            "Progressive Web Apps",
-            "RAIL"
-        ],
-        "badges": [
-            {
-                "name": "GDG",
-                "description": "Google Developers Group Prague",
-                "link": "https://developers.google.com/groups/chapter/111919016509847766513/"
-            }
-        ],
-        "socials": [
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/@skvaros"
-            },
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/+JakubSkvara/"
-            }
-        ]
-    },
-    "21": {
-        "id": 21,
-        "featured": false,
-        "name": "Sergiy Mokienko",
-        "title": "Android Team Lead",
-        "company": "Leverate",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Kyiv,  Ukraine",
-        "photoUrl": "/images/people/sergiy_mokienko.jpg",
-        "shortBio": "Sergiy is an android developer that has experience from building apps from scratch to developing...",
-        "bio": "Sergiy is an android developer that has experience from building apps from scratch to developing android based sdks and libraries for other applications. He has more than 10 applications successfully published on Google Play. Former GDG chapter lead in Nikolaev. Currently he is leading a team that builds broker software for 60+ different brokers.",
-        "tags": [
-            "Android",
-            "CI/CD"
-        ],
-        "badges": [
-            {
-                "name": "GDG",
-                "description": "Google Developers Group Kyiv",
-                "link": "https://developers.google.com/groups/chapter/110301321530950732281/"
-            }
-        ],
-        "socials": [
-            {
-                "icon": "linkedin",
-                "name": "LinkedIn",
-                "link": "https://www.linkedin.com/in/sergiy-mokienko-76891359"
-            },
-            {
-                "icon": "facebook",
-                "name": "Facebook",
-                "link": "https://www.facebook.com/Korwin22"
-            },
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/107094180736796042888"
-            }
-        ]
-    },
-    "20": {
-        "id": 20,
-        "featured": false,
-        "name": "Valentyn Shybanov",
-        "title": "Software Engineer/Country Manager",
-        "company": "Wolters Kluwer",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Kyiv, Ukraine",
-        "photoUrl": "/images/people/valentyn_shybanov.jpg",
-        "shortBio": "Google Developer Expert on Cloud. Co-organizer of GDG Kyiv-Center.",
-        "bio": "Google Developer Expert on Cloud. Co-organizer of GDG Kyiv-Center.",
-        "tags": [
-            "Web",
-            "AngularJS",
-            "Polymer",
-            "Go"
-        ],
-        "badges": [
-            {
-                "name": "GDE",
-                "description": "Cloud Google Developer Expert",
-                "link": "https://developers.google.com/experts/people/valentyn-shybanov.html"
-            },
-            {
-                "name": "GDG",
-                "description": "Google Developers Group Kyiv",
-                "link": "https://developers.google.com/groups/chapter/110301321530950732281/"
-            }
-        ],
-        "socials": [
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://google.com/+ValentynShybanov"
-            },
-            {
-                "icon": "website",
-                "name": "Website",
-                "link": "http://olostan.name/"
-            }
-        ]
-    },
-    "23": {
-        "id": 23,
-        "featured": false,
-        "name": "Michael Pustovit",
-        "title": "Senior Android Developer",
-        "company": "Stanfy",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Kyiv, Ukraine",
-        "photoUrl": "/images/people/michael_pustovit.jpg",
-        "shortBio": "Michael is a software engineer at Stanfy. He is KPI FICT Computer Science graduate and has 4+ yea...",
-        "bio": "Michael is a software engineer at Stanfy. He is KPI FICT Computer Science graduate and has 4+ years in Android development. Michael moderates KyivAndroidDevClub. Besides programming, he is a capoeira player.",
-        "tags": [
-            "Android",
-            "Decompilation",
-            "Security"
-        ],
-        "badges": [
-
-        ],
-        "socials": [
-            {
-                "icon": "github",
-                "name": "GitHub",
-                "link": "https://github.com/lampapos"
-            },
-            {
-                "icon": "facebook",
-                "name": "Facebook",
-                "link": "https://www.facebook.com/pustovit"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/pustovit"
-            }
-        ]
-    },
-    "22": {
-        "id": 22,
-        "featured": false,
-        "name": "Ihor Dvoretskyi",
-        "title": "Deployment Engineer",
-        "company": "Mirantis",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Lviv, Ukraine",
-        "photoUrl": "/images/people/ihor_dvoretskyi.jpg",
-        "shortBio": "OpenStack Foundation member, Kubernetes upstream contributor and OpenStack special interest group lead in Kubernetes Community.",
-        "bio": "Ihor is an Operations Engineer at Mirantis with a huge experience working in IT companies, where he was responsible for projects tightly bound to Cloud computing and Linux systems. He is deeply interested in the OpenStack cloud platform, other Cloud technologies, especially the Open Source projects.<br><br>Also, Ihor acts as the OpenStack Foundation member, Kubernetes upstream contributor, and OpenStack special interest group lead in Kubernetes Community, working intensely on the questions and abilities, related to the OpenStack and Kubernetes collaboration and integration.",
-        "tags": [
-            "Cloud",
-            "OpenStack",
-            "Kubernetes",
-            "Docker"
-        ],
-        "badges": [
-            {
-                "name": "GDG",
-                "description": "Google Developers Group Lviv",
-                "link": "https://developers.google.com/groups/chapter/102444623953913144164/"
-            }
-        ],
-        "socials": [
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/103000293055760527954"
-            },
-            {
-                "icon": "linkedin",
-                "name": "LinkedIn",
-                "link": "https://ua.linkedin.com/in/idvoretskyi"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/idvoretskyi"
-            }
-        ]
-    },
-    "25": {
-        "id": 25,
-        "featured": false,
-        "name": "Constantine Mars",
-        "title": "Senior Android Developer",
-        "company": "DataArt",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Dnipro, Ukraine",
-        "photoUrl": "/images/people/constantine_mars.jpg",
-        "shortBio": "Constantine is Senior Android Developer at DataArt and GDG Dnipro Organizer. He was speaker on De...",
-        "bio": "Constantine is Senior Android Developer at DataArt and GDG Dnipro Organizer. He was speaker on DevFest, multiple IT NonStop events and GDG meetups. Constantine is interested mainly in Android Wear platform, RxJava, best practices in applications Architecture, and sometimes cross-platform mobile development with Xamarin.",
-        "tags": [
-            "Android",
-            "RxJava",
-            "Android Wear",
-            "Xamarin"
-        ],
-        "badges": [
-            {
-                "name": "GDG",
-                "description": "Google Developers Group Dnipro",
-                "link": "https://developers.google.com/groups/chapter/116033068768596939209/"
-            }
-        ],
-        "socials": [
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/+ConstantineMars"
-            }
-        ]
-    },
-    "24": {
-        "id": 24,
-        "featured": false,
-        "name": "Anton  Minashkin",
-        "title": "Lead Software Developer",
-        "company": "EPAM",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Lviv, Ukraine",
-        "photoUrl": "/images/people/anton_minashkin.jpg",
-        "shortBio": "Android developer, currently works at EPAM. Have experience in both server and mobile side develo...",
-        "bio": "Android developer, currently works at EPAM. Have experience in both server and mobile side development. All my free time I spend on the endless search of silver bullets, perfect architectures and holy wars.",
-        "tags": [
-            "Android",
-            "Architecture",
-            "ExoPlayer"
-        ],
-        "badges": [
-
-        ],
-        "socials": [
-            {
-                "icon": "facebook",
-                "name": "Facebook",
-                "link": "https://www.facebook.com/anton.minashkin.1"
-            },
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/AntonMinashkin"
-            },
-            {
-                "icon": "linkedin",
-                "name": "LinkedIn",
-                "link": "https://ua.linkedin.com/in/anton-minashkin-606a1b4b"
-            }
-        ]
-    },
-    "27": {
-        "id": 27,
-        "featured": false,
-        "name": "Roman Herasymenko",
-        "title": "CEO",
-        "company": "Yamert",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Dnipro, Ukraine",
-        "photoUrl": "/images/people/roman_herasymenko.jpg",
-        "shortBio": "Roman is Founder and CEO at Yamert and a co-organizer of GDG Dnipropetrovsk. Roman is interesting...",
-        "bio": "Roman is Founder and CEO at Yamert and a co-organizer of GDG Dnipropetrovsk. Roman is interesting in software development for cutting edge technologies and devices like Google Glass and Android Wear.",
-        "tags": [
-            "Android",
-            "Firebase",
-            "Security"
-        ],
-        "badges": [
-            {
-                "name": "GDE",
-                "description": "Android Google Developer Expert",
-                "link": "https://developers.google.com/experts/people/roman-herasymenko.html"
-            },
-            {
-                "name": "GDG",
-                "description": "Google Developers Group Dnipro",
-                "link": "https://developers.google.com/groups/chapter/116033068768596939209/"
-            }
-        ],
-        "socials": [
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/+RomanGerasimenko/"
-            },
-            {
-                "icon": "linkedin",
-                "name": "LinkedIn",
-                "link": "http://ua.linkedin.com/pub/roman-gerasimenko/"
-            }
-        ]
-    },
-    "26": {
-        "id": 26,
-        "featured": false,
-        "name": "Resul Caner  Yildirim",
-        "title": "User Experience Expert",
-        "company": "InnovationBox",
-        "companyLogo": "/images/logos/gdg-lviv.svg",
-        "country": "Istanbul, Turkey",
-        "photoUrl": "/images/people/resul caner_yildirim.jpg",
-        "shortBio": "Caner is a GDE on UX/UI who is also a technology geek. Mainly focused on the design and marketing...",
-        "bio": "Caner is a GDE on UX/UI who is also a technology geek. Mainly focused on the design and marketing of mobile applications. Passionate about good UX, IoT and Android. He works at InnovationBox, a design agency in Istanbul making and creating apps that users love. Caner has been an organiser of GDG Istanbul since 2013, organising, participating, and speaking at events.",
-        "tags": [
-            "Android",
-            "UX/UI",
-            "Android Wear",
-            "IoT"
-        ],
-        "badges": [
-            {
-                "name": "GDE",
-                "description": "UI/UX Google Developer Expert",
-                "link": "https://developers.google.com/experts/people/resul-caner-y-ld-r-m.html"
-            },
-            {
-                "name": "GDG",
-                "description": "Google Developers Group Istanbul",
-                "link": "https://developers.google.com/groups/chapter/100514812580249787371/"
-            }
-        ],
-        "socials": [
-            {
-                "icon": "twitter",
-                "name": "Twitter",
-                "link": "https://twitter.com/protechman"
-            },
-            {
-                "icon": "gplus",
-                "name": "Google+",
-                "link": "https://plus.google.com/+rcaneryildirim"
-            },
-            {
-                "icon": "facebook",
-                "name": "Facebook",
-                "link": "https://facebook.com/r.caner.yildirim"
-            },
-            {
-                "icon": "website",
-                "name": "Website",
-                "link": "https://dribbble.com/protechman"
-            },
-            {
-                "icon": "linkedin",
-                "name": "LinkedIn",
-                "link": "https://linkedin.com/in/protechman"
-            }
-        ]
-    }
+  "101": {
+    "id": 101,
+    "featured": true,
+    "name": "Pierre-Yves Ricau",
+    "company": "Square",
+    "country": "San Francisco, USA",
+    "photoUrl": "/images/speakers/pricau.jpg",
+    "shortBio": "Tech Lead Android à Square. J'aime le vin bien structuré et le code tartiné au beurre salé....",
+    "bio": "Tech Lead Android à Square. J'aime le vin bien structuré et le code tartiné au beurre salé.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/piwai"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/piwai"
+    }]
+  },
+  "102": {
+    "id": 102,
+    "featured": true,
+    "name": "François Beaufort",
+    "company": "Google",
+    "country": "Paris, France",
+    "photoUrl": "/images/speakers/fbeaufort.jpg",
+    "shortBio": "François Beaufort travaille chez Google pour l'équipe Chrome Apps...",
+    "bio": "François Beaufort travaille chez Google pour l'équipe Chrome Apps",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/beaufortfrancois"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/u/0/+FrancoisBeaufort"
+    }]
+  },
+  "103": {
+    "id": 103,
+    "featured": false,
+    "name": "Thomas Gx",
+    "company": "CommitStrip",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/commitstrip.jpg",
+    "shortBio": "Thomas Gx est le fondateur de CommitStrip, le blog BD bien connu des codeurs : c'est lui qui écrit c...",
+    "bio": "Thomas Gx est le fondateur de CommitStrip, le blog BD bien connu des codeurs : c'est lui qui écrit chaque jour depuis 2012 une strip sur la vie quotidienne des codeurs. Pionner du développement des réseaux sociaux en France dès 2006 en lançant Cancoon, Thomas co-fonde en 2007 l'agence KRDS, première agence spécialisée en social media marketing et aujourd'hui leader en Europe et en Asie. Il y occupe aujourd'hui la Direction de la Production, dirigeant un studio primé et une équipe de développeurs web ayant produit près de 2000 projets.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/CommitStrip_fr"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/+Commitstrip"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "https://www.commitstrip.com/fr/"
+    }]
+  },
+  "200": {
+    "id": 200,
+    "featured": false,
+    "name": "Yoann Dubreuil",
+    "company": "Cloudbees",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/ndubreuil.jpg",
+    "shortBio": "Yoann Dubreuil travaille chez CloudBees. A mi-chemin entre développeur et administrateur système, il...",
+    "bio": "Yoann Dubreuil travaille chez CloudBees. A mi-chemin entre développeur et administrateur système, il s'occupe aujourd'hui du maintien de la solution hébergée DEV@cloud après avoir accompagné les clients CloudBees à tirer le meilleur de Jenkins dans l'équipe support. Il participe à l’organisation du BreizhCamp, la conférence à l’ouest.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/yoanndubreuil"
+    }]
+  },
+  "201": {
+    "id": 201,
+    "featured": false,
+    "name": "Julie Moynat",
+    "company": "Capgemini",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/jmoynat.jpg",
+    "shortBio": "Ayant la double casquette de webdesigner et d'intégratrice web, la qualité a toujours été un objecti...",
+    "bio": "Ayant la double casquette de webdesigner et d'intégratrice web, la qualité a toujours été un objectif pour moi car il fallait, entre autres, réaliser des maquettes intégrables. Au fil de l'eau, j'ai découvert que la façon dont on écrit le HTML et le CSS a un réel impact que ce soit pour les différents navigateurs mais aussi et surtout pour les personnes en situation de handicap. Je me suis donc tout naturellement orientée vers l'accessibilité web pour essayer, même si ça reste encore assez utopique, de rendre le web meilleur et donc plus accessible.<br />Je co-organise, par ailleurs, les Web Apéros Nantais ; un évènement qui vise à se faire rencontrer les acteurs du web nantais.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/juliemoynat"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "http://www.juliemoynat.fr/"
+    }]
+  },
+  "202": {
+    "id": 202,
+    "featured": false,
+    "name": "Jean Palies",
+    "company": null,
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/jpalies.jpg",
+    "shortBio": "Développeur Java, Angular JS le jour, bidouilleur la nuit. Après quelques années de bricolage et déc...",
+    "bio": "Développeur Java, Angular JS le jour, bidouilleur la nuit. Après quelques années de bricolage et découvertes, j'ai repris les bases de la programmation il y a 15 ans avec Scratch, que je réutilise avec bonheur maintenant dans les Devoxx4Kids ou les Coding Goûters à Nantes, dont je suis cofondateur. Je suis aussi membre et confondateur des Women In Technology à Nantes.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/jpalies"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/JeanPalies"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/u/0/106552014287288043542/"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "https://javagile.wordpress.com/"
+    }]
+  },
+  "203": {
+    "id": 203,
+    "featured": false,
+    "name": "Stéphane Cohan",
+    "company": "SQLI",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/scohan.jpg",
+    "shortBio": "Conquis par les makers et l'univers DIY, Stéphane Cohan est curieux et n'hésite pas à bidouiller des...",
+    "bio": "Conquis par les makers et l'univers DIY, Stéphane Cohan est curieux et n'hésite pas à bidouiller des trucs et des machins, notamment autour des interfaces tangibles pour les enfants.<br />Dans la vraie vie, Stéphane est consultant UI/UX depuis près de 20 ans mais ça n'a rien à voir avec le schmilblick, à moins que...",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/SCxPro"
+    }]
+  },
+  "204": {
+    "id": 204,
+    "featured": false,
+    "name": "Nicolas Greffard",
+    "company": "Expandium",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/ngreffard.jpg",
+    "shortBio": "Natif de Nantes où il obtient un DUT informatique, il part en Ecosse pur suivre un Master “Learning ...",
+    "bio": "Natif de Nantes où il obtient un DUT informatique, il part en Ecosse pur suivre un Master “Learning From Data” à l’université d’Edimbourg. Il reviendra finalement à Nantes pour y effectuer un doctorat dans le domaine de la visualisation d’information au sein de l’équipe Data User Knowledge du Laboratoire Informatique de Nantes Atlantique. Après deux ans passés en tant qu’ingénieur de recherche dans cette même équipe il rejoint la société Expandium en 2015 comme data scientist.",
+    "tags": [],
+    "badges": [],
+    "socials": []
+  },
+  "206": {
+    "id": 206,
+    "featured": false,
+    "name": "Romain Lespinasse",
+    "company": "SFEIR",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/rlespinasse.jpg",
+    "shortBio": "Romain est développeur backend chez SFEIR. Depuis un peu plus de 10 ans, il aide les clients dans le...",
+    "bio": "Romain est développeur backend chez SFEIR. Depuis un peu plus de 10 ans, il aide les clients dans leurs projets Java, tantôt développeur, tantôt intégrateur. Arrivant chez Sfeir, il est parti regarder du côté de Go et Docker pour ses clients IoT. Il se joint à Sébastien pour partager ses expériences avec vous.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/rlespinasse"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/rlespinasse"
+    }]
+  },
+  "207": {
+    "id": 207,
+    "featured": false,
+    "name": "Aurélie Robert",
+    "company": "Conserto",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/arobert.jpg",
+    "shortBio": "Product Owner chez Conserto...",
+    "bio": "Product Owner chez Conserto",
+    "tags": [],
+    "badges": [],
+    "socials": []
+  },
+  "208": {
+    "id": 208,
+    "featured": false,
+    "name": "Nicolas Terral",
+    "company": "Sopra Steria",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/nterral.jpg",
+    "shortBio": "DataHero au sein du DataLab Sopra Steria. En charge de missions de développement et d’architecture a...",
+    "bio": "DataHero au sein du DataLab Sopra Steria. En charge de missions de développement et d’architecture autour de sujets Big Data.",
+    "tags": [],
+    "badges": [],
+    "socials": []
+  },
+  "209": {
+    "id": 209,
+    "featured": false,
+    "name": "Antoine Cellier",
+    "company": "Zenika",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/acellier.jpg",
+    "shortBio": "Consultant chez Zenika Nantes. J'interviens sur des missions de réalisation autour des technos front...",
+    "bio": "Consultant chez Zenika Nantes. J'interviens sur des missions de réalisation autour des technos front et back tel que AngularJS, ReactJS et Spring. Passionné par l’écosystème technique dans lequel je travaille je participe régulièrement aux meetups Nantais et donne des talks lors de différents événement (NantesJS, Voxxed Luxembourg, Nantes JUG, bdx.io)",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/AntoineCellier3"
+    }]
+  },
+  "210": {
+    "id": 210,
+    "featured": false,
+    "name": "Gautier de SAINT MARTIN LACAZE",
+    "company": "Freelance",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/glacaze.jpg",
+    "shortBio": "Développeur freelance passionné, Gautier travaille principalement sur les technologies Java et JavaS...",
+    "bio": "Développeur freelance passionné, Gautier travaille principalement sur les technologies Java et JavaScript. Afin de rester au fait des nouveautés, il participe régulièrement à des conférences nantaises ou nationales. Il coorganise également le Nantes JUG depuis juin 2014.<br />Ayant appris à dompter l'IDE Eclipse lors de ses premières années de travail, il contribue aujourd'hui à l'amélioration de son outil de travail via des patchs et la formation de ses clients.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/darkjabberwock"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/jabby"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "http://jabby-techs.fr/"
+    }]
+  },
+  "211": {
+    "id": 211,
+    "featured": false,
+    "name": "Eric Briand",
+    "company": "Zenika",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/ebriand.jpg",
+    "shortBio": "Eric développeur Java/J2EE full-stack chez Zenika Nantes. Il aime travailler sur toutes les couches ...",
+    "bio": "Eric développeur Java/J2EE full-stack chez Zenika Nantes. Il aime travailler sur toutes les couches d'une application web, de la base de données jusqu'au front en utilisant aussi bien des technologies qui ont fait leur preuve que des technologies de pointe. Très intéressé par les technologies Cloud (PAAS & IAAS). Il est formateur officiel Docker et co-organisateur du Docker Meetup Nantes.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/eric_briand"
+    }]
+  },
+  "212": {
+    "id": 212,
+    "featured": false,
+    "name": "Cyril Balit",
+    "company": "SFEIR",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/cbalit.jpg",
+    "shortBio": "Cyril Balit est CTO Front chez SFEIR et Goole Developer Expert. Développeur passionné, il construit ...",
+    "bio": "Cyril Balit est CTO Front chez SFEIR et Goole Developer Expert. Développeur passionné, il construit des Single Page Application en javascript depuis 2003 et tombe amoureux d’Angular en 2013. Il est un membre actif de la communauté web français sur plusieurs sujets comme Angular, Polymer  et les Progressives Web App . Organisateur de conférences et de meetups , speaker et formateur , Cyril aime partager avec les communautés.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/cbalit"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/cbalit"
+    }]
+  },
+  "213": {
+    "id": 213,
+    "featured": false,
+    "name": "Ezra ",
+    "company": "Organic Orchestra",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/ezra.jpg",
+    "shortBio": "EZRA (Vincent CHTAÏBI), directeur artistique, est un membre actif et reconnu du beatbox internationa...",
+    "bio": "EZRA (Vincent CHTAÏBI), directeur artistique, est un membre actif et reconnu du beatbox international. Il a foulé les scènes des quatre coins du monde et joué en solo dans les lieux les plus mythiques de France (Olympia, Cigale, Transmusicales…). Ezra développe sa discipline avec des facultés d’adaptation et une aisance scénique qui l’ont amené à collaborer avec des artistes de réputation mondiale (Kid Koala, Bauchklang, Wax Tailor, One self, Socalled…) et de partir en tournée mondiale avec la chanteuse Camille.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/Ezrabox"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "http://organic-orchestra.com"
+    }]
+  },
+  "214": {
+    "id": 214,
+    "featured": false,
+    "name": "Julien Landuré",
+    "company": "Zenika",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/jlandure.jpg",
+    "shortBio": "CTO de Zenika Nantes, Julien navigue entre des missions de formation (Docker, AngularJS, PaaS) et d’...",
+    "bio": "CTO de Zenika Nantes, Julien navigue entre des missions de formation (Docker, AngularJS, PaaS) et d’architecture. Issu de la génération Google, il a co-fondé en Janvier 2011 le GDG Nantes, participe depuis 5 ans au Google I/O et organise le DevFest Nantes.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/jlandure"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/+JulienLandur%C3%A9"
+    }]
+  },
+  "215": {
+    "id": 215,
+    "featured": false,
+    "name": "Emile Vauge",
+    "company": "Containo.us",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/evauge.jpg",
+    "shortBio": "Emile is founder of Containous, the container delivery company. More than 10 years experience develo...",
+    "bio": "Emile is founder of Containous, the container delivery company. More than 10 years experience developing applications for the web and the industry, certified Docker trainer, he got interested lately in the DevOps method. He is particularly interested container orchestrators like Kubernetes, Mesos, Docker Swarm. Creator of traefik.io",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/emilevauge"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/emilevauge"
+    }]
+  },
+  "216": {
+    "id": 216,
+    "featured": false,
+    "name": "Raphaël Thebaud",
+    "company": "Conserto",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/rthebaud.jpg",
+    "shortBio": "Raphaël est directeur technique chez Conserto, en charge de l’offre digitale.<br />Passionné de cult...",
+    "bio": "Raphaël est directeur technique chez Conserto, en charge de l’offre digitale.<br />Passionné de culture geek et de jeux en tout genre, Raphäel a découvert la programmation par le jeu vidéo à 10 ans en développant son premier casse-brique en BASIC sur l’Amstrad familial.<br />Même si aujourd’hui le développement se fait pour lui dans un contexte beaucoup plus sérieux, coder reste une bonne façon de s’amuser !",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/raphthebaud"
+    }]
+  },
+  "217": {
+    "id": 217,
+    "featured": false,
+    "name": "Ismaël Mejía",
+    "company": "Talend",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/imeja.jpg",
+    "shortBio": "Ingénieur logiciel avec plus de dix ans d’expérience dans la conception et développement des système...",
+    "bio": "Ingénieur logiciel avec plus de dix ans d’expérience dans la conception et développement des systèmes d’information pour groupes financiers, entreprises de télécommunications et start-ups en Amérique Latine. Spécialiste dans le domaine du Cloud et du Big Data, Ismael travaille pour Talend comme Ingénieur Open Source et il est contributeur sur plusieurs projets de la fondation Apache.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/iemejia"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/@iemejia"
+    }]
+  },
+  "218": {
+    "id": 218,
+    "featured": false,
+    "name": "Jean-Baptiste Onofré",
+    "company": "Apache",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/jonofre.jpg",
+    "shortBio": "Membre de l’Apache Software Foundation, Jean-Baptiste est commiter et PMC sur de nombreux projets Ap...",
+    "bio": "Membre de l’Apache Software Foundation, Jean-Baptiste est commiter et PMC sur de nombreux projets Apache : Apache Karaf, Apache Camel, Apache ActiveMQ, Apache Falcon, Apache Syncope, Apache Lens,… Il est notamment champion et mentor du projet Apache Beam. Jean-Baptiste est Talend Fellow.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/jbonofre"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "http://t.co/iXjWyxthOO"
+    }]
+  },
+  "219": {
+    "id": 219,
+    "featured": false,
+    "name": "Gautier Mechling",
+    "company": "",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/gmechling.jpg",
+    "shortBio": "Gautier est développeur Android et aspirant Craftsman. Intéressé par les méthodes agiles, le hacking...",
+    "bio": "Gautier est développeur Android et aspirant Craftsman. Intéressé par les méthodes agiles, le hacking et la qualité logicielle, il façonne et maintient des outils libres et gratuits permettant d’améliorer sa productivité. Parlez lui de Kotlin, de Clean Code ou de Logiciel Libre et vous pourrez voir ses yeux briller.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/Nilhcem"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/Nilhcem"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/+GautierMechling"
+    }]
+  },
+  "220": {
+    "id": 220,
+    "featured": false,
+    "name": "Jean-Sébastien DUPUY",
+    "company": "Microsoft",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/jdupuy.jpg",
+    "shortBio": "Jean-Sébastien Dupuy est évangéliste technique chez Microsoft France. Passionné par le développement...",
+    "bio": "Jean-Sébastien Dupuy est évangéliste technique chez Microsoft France. Passionné par le développement d’applications mobiles, les objets connectés et plus récemment les bots, il anime régulièrement des sessions sur ces différents sujets. Vous pouvez suivre son actualité sur twitter @dupuyjs ou sur son blog https://blogs.msdn.microsoft.com/jdupuy/.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/dupuyjs"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/dupuyjs"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "https://blogs.msdn.microsoft.com/jdupuy/"
+    }]
+  },
+  "221": {
+    "id": 221,
+    "featured": false,
+    "name": "Cédric Gillet",
+    "company": "Santéclair",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/cgillet.jpg",
+    "shortBio": "Ancien militaire parachutiste, je me suis reconverti dans l'informatique ou j'ai très vite rejoint l...",
+    "bio": "Ancien militaire parachutiste, je me suis reconverti dans l'informatique ou j'ai très vite rejoint la société Santéclair en tant que développeur puis en tant qu’architecte (mais bon je fais toujours le même boulot qu'avant... ). Féru de développement (comme vous à priori si vous lisez ces lignes), j'aime remettre en question l'ordre établi (ce doit être une résurgence de mes années sous les drapeaux) et relever des challenges permanents.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/telligcirdec"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/telligcirdec"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/u/0/108192160837556609422/posts"
+    }]
+  },
+  "222": {
+    "id": 222,
+    "featured": false,
+    "name": "Christian RENOULIN",
+    "company": "Néo-Soft",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/crenoulin.jpg",
+    "shortBio": "Christian RENOULIN, peintre amateur mais surtout développeur confirmé chez Néo-Soft depuis plus de 5...",
+    "bio": "Christian RENOULIN, peintre amateur mais surtout développeur confirmé chez Néo-Soft depuis plus de 5 ans ! Spécialisé dans la programmation Java/JEE et dans les processus d’intégration continues.<br />Christian est impliqué au sein de sa société mais également dans de nombreux projets personnels open source où il met à disposition son expertise et son savoir-faire.<br />Voici l’un de ses nombreux projets : https://mieuxtrieranantes.wordpress.com/",
+    "tags": [],
+    "badges": [],
+    "socials": []
+  },
+  "1434742896211": {
+    "id": 1434742896211,
+    "featured": false,
+    "name": "Nicolas De Loof",
+    "company": "Cloudbees",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/ndeloof.jpg",
+    "shortBio": "Hacker @ CloudBees, Docker captain...",
+    "bio": "Hacker @ CloudBees, Docker captain",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/ndeloof"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/ndeloof"
+    }]
+  },
+  "1465335589385": {
+    "id": 1465335589385,
+    "featured": false,
+    "name": "Wassim Chegham",
+    "company": "SFEIR",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/wchegham.jpg",
+    "shortBio": "Wassim (@manekinekko) is an ECMAScript hacker and Google Developer Expert in Web Technologies locate...",
+    "bio": "Wassim (@manekinekko) is an ECMAScript hacker and Google Developer Expert in Web Technologies located in Paris. When he is not working on production ready webapps, he loves writing technical articles, hacking on different technologies, talk at conferences and contributing to open source projects (here is a gift for you http://www.codetriage.com).",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/manekinekko"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/manekinekko"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/u/0/+WassimCheghamJavaScript"
+    }]
+  },
+  "1440444860271": {
+    "id": 1440444860271,
+    "featured": false,
+    "name": "Cyril Mottier",
+    "company": "Captain Train",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/cmottier.jpg",
+    "shortBio": "Cyril is Head of Mobile & Web at Captain Train and an expert in Android & Google technologies. Passi...",
+    "bio": "Cyril is Head of Mobile & Web at Captain Train and an expert in Android & Google technologies. Passionate about technology and design, Cyril is an avid lover of Android and a multi-skilled engineer. His motto: “Do less, but do it insanely great”",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/cyrilmottier"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/cyrilmottier"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/+CyrilMottier"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "http://cyrilmottier.com"
+    }]
+  },
+  "1465334462068": {
+    "id": 1465334462068,
+    "featured": false,
+    "name": "Vincent Ogloblinsky",
+    "company": "SII",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/vogloblinsky.jpg",
+    "shortBio": "Architecte logiciel au sein d'une ESN rennaise, j'évolue entre architecture de projets web, formatio...",
+    "bio": "Architecte logiciel au sein d'une ESN rennaise, j'évolue entre architecture de projets web, formations, animations techniques, support client, expertise technique.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/vogloblinsky"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/110496959767269301776"
+    }]
+  },
+  "1465823767741": {
+    "id": 1465823767741,
+    "featured": true,
+    "name": "Thomas Belin",
+    "company": "doyoubuzz",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/tbelin.jpg",
+    "shortBio": "Full-Stack développeur chez doyoubuzz.  <br />Je fais la <a href=\"http://blog.thomasbelin.fr/p/faire...",
+    "bio": "Full-Stack développeur chez doyoubuzz.  <br />Je fais la <a href=\"http://blog.thomasbelin.fr/p/faire-la-part-belle-au-code\" target=\"_blank\">part belle au code</a>.  <br />Je m'éclate avec Javascript.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/atomrc"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/atomrc"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/+ThomasBelin"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "http://blog.thomasbelin.fr"
+    }]
+  },
+  "1465562660644": {
+    "id": 1465562660644,
+    "featured": false,
+    "name": "Francois Teychene",
+    "company": "Tabmo",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/fteychene.jpg",
+    "shortBio": "Devops la journée, JUG Leader le soir sur Montpellier, j'aime parler et discuter de Docker.<br />Anc...",
+    "bio": "Devops la journée, JUG Leader le soir sur Montpellier, j'aime parler et discuter de Docker.<br />Ancien développeur Java et devops passé par de grosses structures très (trop) lentes à évoluer je met en place des infras basés sur Docker depuis 1 ans et aime essayer de nouvelles choses sur cet écosystème.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/fteychene"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/fteychene"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/u/0/+Fran%C3%A7oisTeychene"
+    }]
+  },
+  "1440170007547": {
+    "id": 1440170007547,
+    "featured": false,
+    "name": "Raphael Goetter",
+    "company": "Alsacréations",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/rgoetter.jpg",
+    "shortBio": "Intégrateur du Dimanche, dompteur de CSS et tripoteur de HTML, créateur de Alsacreations.com, auteur...",
+    "bio": "Intégrateur du Dimanche, dompteur de CSS et tripoteur de HTML, créateur de Alsacreations.com, auteur de quelques livres CSS, Alsacien",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/goetter"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/raphaelgoetter"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "http://goetter.fr"
+    }]
+  },
+  "1466669874351": {
+    "id": 1466669874351,
+    "featured": false,
+    "name": "Michel Rousseau",
+    "company": "Microsoft",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/mrousseau.jpg",
+    "shortBio": "Je suis un passionné d'UX et d'interfaces, mais aussi de jeux vidéo, de robots, et de toute la cultu...",
+    "bio": "Je suis un passionné d'UX et d'interfaces, mais aussi de jeux vidéo, de robots, et de toute la culture geek, en général. Je travaille chez Microsoft France en tant qu'évangéliste design/UX et UI.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/rousseau_michel"
+    }]
+  },
+  "1466786786895": {
+    "id": 1466786786895,
+    "featured": false,
+    "name": "Olivier Laurendeau",
+    "company": "LaFourchette",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/olaurendeau.jpg",
+    "shortBio": "Ayant travaillé en SSII, Agence web et Free-Lance, j'ai trouvé ma place depuis quelques années chez ...",
+    "bio": "Ayant travaillé en SSII, Agence web et Free-Lance, j'ai trouvé ma place depuis quelques années chez un pure player, LaFourchette qui m'a offert l'opportunité de quitter Paris pour venir travailler à Nantes en septembre 2015.<br /><br />D'un point de vue language j'utilise essentiellement <pre>PHP</pre>,  <pre>bash</pre> et <pre>javascript</pre>. Je travaille au quotidien avec <pre>Symfony 2</pre>, <pre>RabbitMQ</pre>,  <pre>jenkins</pre>, <pre>new relic</pre>, <pre>kibana</pre> et de plus en plus <pre>docker</pre>.<br /><br />Personnellement trois long voyages en Asie et en Amérique du sud m'ont énormément enrichis et j'aime pratiquer régulièrement un ensemble de disciplines sportives.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/olaurendeau"
+    }]
+  },
+  "1439973988610": {
+    "id": 1439973988610,
+    "featured": false,
+    "name": "Sun Seng David TAN",
+    "company": "Serli",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/stan.jpg",
+    "shortBio": "Java Software Engineer @SerliFr. Eclipse Che commiter. OpenSource Minded. @parisjug crew member....",
+    "bio": "Java Software Engineer @SerliFr. Eclipse Che commiter. OpenSource Minded. @parisjug crew member.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/sunsengdavidtan"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/sunix"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "http://blog.sunix.org"
+    }]
+  },
+  "1434987027061": {
+    "id": 1434987027061,
+    "featured": false,
+    "name": "Emmanuel DEMEY",
+    "company": "Zenika",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/edemey.jpg",
+    "shortBio": "Consultant et Formateur Web chez Zenika Lille depuis avril 2015. Je suis spécialisé dans AngularJS /...",
+    "bio": "Consultant et Formateur Web chez Zenika Lille depuis avril 2015. Je suis spécialisé dans AngularJS / Angular 2 / TypeScript et l'Accessibilité Web. Speaker à ses heures perdues. Aime également les bières (et oui quand on vient de Lille c'est normal...), le Jazz et la Domotique. <br /><br />Plusieurs expériences en tant que conférencier, notamment depuis septembre 2015 autour du sujet Angular2. <br />- ESLint au Jug Summer Camp et ChtiJS<br />- Angular 2 : ChtiJUG, LyonJS, GDG Paris, GDG Nantes, Meetup AngularJS Grenoble, Devoxx, RivieraDev, ...",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/EmmanuelDemey"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/Gillespie59"
+    }]
+  },
+  "1434094629196": {
+    "id": 1434094629196,
+    "featured": false,
+    "name": "Jean-François Garreau",
+    "company": "Lucca",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/jgarreau.jpg",
+    "shortBio": "Je suis développeur depuis 10 ans. J'ai évolué pendant longtemps sur des stack java et android. Depu...",
+    "bio": "Je suis développeur depuis 10 ans. J'ai évolué pendant longtemps sur des stack java et android. Depuis maintenant 3 ans je m’intéresse plus en profondeur au Web et à ses nouvelles possibilités. J'ai ainsi obtenu le statut de GDE (Google Developer Expert) cette année sur la partie WebTechnology. En dehors du travail, je suis co-fondateur du GDG Nantes, organisateur du DevFest Nantes, co-créateur des Nantes Wit et organisateur de Devoxx4Kids ",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/jefbinomed"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/jefbinomed"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/+jefbinomed"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "https://jefbinomed.fr"
+    }]
+  },
+  "1467354410413": {
+    "id": 1467354410413,
+    "featured": false,
+    "name": "Nathalie Rolland",
+    "company": "Indépendante",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/nrolland.jpg",
+    "shortBio": "Expert AccessiWeb en évaluation...",
+    "bio": "Expert AccessiWeb en évaluation",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/nroll82"
+    }]
+  },
+  "1441039953835": {
+    "id": 1441039953835,
+    "featured": false,
+    "name": "Antoine Richard",
+    "company": "Restlet",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/arichard.jpg",
+    "shortBio": "Antoine est \"Code Rider\" chez Restlet où il s'attache à créer de bons produits. C'est un développeur...",
+    "bio": "Antoine est \"Code Rider\" chez Restlet où il s'attache à créer de bons produits. C'est un développeur passionné qui s'intéresse également à l'UX et au bon vin.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/richard_antoine"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/antoine-richard"
+    }]
+  },
+  "1434372231365": {
+    "id": 1434372231365,
+    "featured": false,
+    "name": "Cécilia Bossard",
+    "company": null,
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/cbossard.jpg",
+    "shortBio": "ai un but : aider les équipes à produire des logiciels utiles aux utilisateurs finaux. Pour cela, je...",
+    "bio": "ai un but : aider les équipes à produire des logiciels utiles aux utilisateurs finaux. Pour cela, je les accompagne en intégrant les équipes de développement ou en les assistant dans leur transition agile. Impliquée dans la communauté agile nantaise, je participe également à l'organisation de l'Agile Tour de Nantes. Femme développeuse, je suis également co-fondatrice du groupe Women In Technology à Nantes, dont le but est de promouvoir les femmes dans la technique. Dans ce cadre, je participe également aux initiations à la programmation à destination des enfants avec des initiatives telles que les Devoxx4Kids ou les coding goûters.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/ceciliaBossard"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "https://javagile.wordpress.com/"
+    }]
+  },
+  "1466499956776": {
+    "id": 1466499956776,
+    "featured": false,
+    "name": "Guillaume Membré",
+    "company": "Zenika",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/gmembre.jpg",
+    "shortBio": "Geek à toute heure, Guillaume Membré travaille principalement autour des technologies Java/JavaEE ma...",
+    "bio": "Geek à toute heure, Guillaume Membré travaille principalement autour des technologies Java/JavaEE mais aussi sur des problématiques d'intégration continue, de qualimétrie. Mission après mission sur Nantes, il a eu l'occasion d'avoir une expérience diversifiée qui l'a amenée à occuper différentes responsabilités, à faire dèv et de l'infra, et maintenant de la mise en place d'outils devops.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/GuillaumeMembre"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "http://www.monbook.tech"
+    }]
+  },
+  "1466732332968": {
+    "id": 1466732332968,
+    "featured": false,
+    "name": "Jeff Abrahamson",
+    "company": "Jellybooks",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/jabrahamson.jpg",
+    "shortBio": "Jeff Abrahamson (ré)invente l'analyse de livres électroniques chez Jellybooks.<br />Derrière chaque ...",
+    "bio": "Jeff Abrahamson (ré)invente l'analyse de livres électroniques chez Jellybooks.<br />Derrière chaque livre se cache une histoire dans les données de lecture : à trouver, à éclairer, à visualiser.<br />Jeff anime le Nantes Machine Learning Meetup et co-organise des formations professionnelles en DataScience à travers l'initiative ML Week.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/#!/Jeff_Abrahamson"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/JeffAbrahamson"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://google.com/+JeffAbrahamson"
+    }]
+  },
+  "1469097650471": {
+    "id": 1469097650471,
+    "featured": false,
+    "name": "Vincent Piard",
+    "company": "SQLI",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/vpiard.jpg",
+    "shortBio": "Biberonné aux joies du Cobol, engraissé aux compotes Php, gavé de Java, sustenté aux sucreries C#, r...",
+    "bio": "Biberonné aux joies du Cobol, engraissé aux compotes Php, gavé de Java, sustenté aux sucreries C#, repu au Flex et finalement dernièrement nourri en intraveineuse de JS, je me délecte en ce moment d'IOT. A mes heures perdues, je cuisine également quelques mets open source.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/lynchmaniacPL"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/lynchmaniac"
+    }]
+  },
+  "1469880094236": {
+    "id": 1469880094236,
+    "featured": false,
+    "name": "Pierre Benayoun",
+    "company": "Le cabinet numérique",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/pbenayoun.jpg",
+    "shortBio": "Je suis développeur depuis 2001. <br /><br />Je me suis lancé dans l'aventure Android en 2011 et sui...",
+    "bio": "Je suis développeur depuis 2001. <br /><br />Je me suis lancé dans l'aventure Android en 2011 et suis en mode \"one man startup\" sur des applications indépendantes depuis 2014.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/Pierre_Benayoun"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/+PierreBenayoun"
+    }]
+  },
+  "1467794901682": {
+    "id": 1467794901682,
+    "featured": false,
+    "name": "Pierre Salmon",
+    "company": "Expandium",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/psalmon.jpg",
+    "shortBio": "Originaire de Nantes, il effectue ses études à la faculté des sciences de Nantes dans le domaine de ...",
+    "bio": "Originaire de Nantes, il effectue ses études à la faculté des sciences de Nantes dans le domaine de l'informatique. Après un Master 2 Pro en 2006, il travaille dans le domaine du jeux vidéo chez Succubus Interactive avant de rejoindre Expandium en 2008 en tant que Software Engineer spécialisé dans le traitement realtime.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/ddway2"
+    }]
+  },
+  "1470053410611": {
+    "id": 1470053410611,
+    "featured": false,
+    "name": "Stéphane Lagraulet",
+    "company": "Ippon Technologies",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/slagraulet.jpg",
+    "shortBio": "Architecte chez Ippon Technologies Bordeaux depuis Janvier 2013, je m'intéresse depuis quelques anné...",
+    "bio": "Architecte chez Ippon Technologies Bordeaux depuis Janvier 2013, je m'intéresse depuis quelques années à l'émergence des micro-services et ai pu bâtir une solution s'appuyant sur cette architecture depuis près de deux ans.<br>La mise à l'échelle de ce type d'architecture et la responsabilitation des équipes de développements m'amènent à expérimenter de nouvelles organisations et de nouveaux outils.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/stephlag"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/stephlag"
+    }]
+  },
+  "1470133687234": {
+    "id": 1470133687234,
+    "featured": false,
+    "name": "Christophe Augier",
+    "company": null,
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/caugier.jpg",
+    "shortBio": "Après 5 ans à développer des hyperviseurs pour les systèmes embarquées et un cours passage en SSII j...",
+    "bio": "Après 5 ans à développer des hyperviseurs pour les systèmes embarquées et un cours passage en SSII je m'occupe à depuis 5 ans du développement du debugger intégré à Simics une solution de simulation de cartes électroniques multi-architectures et plus récemment du développement d'outils Cloud pour ce dernier.<br /><br />Inscrit dans le mouvement Software Craftmanship j'essaie au jour le jour d'améliorer mes pratiques et celles de mon équipe.<br /><br />Quand il me reste un peu de temps, j'anime des ateliers pour Makerspace56 une association que j'ai co-fondé en 2012, un pilier du FabLab de Vannes.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/tytouf"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/tytouf"
+    }]
+  },
+  "1470388445640": {
+    "id": 1470388445640,
+    "featured": false,
+    "name": "Philippe Charrière",
+    "company": "GitHub",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/pcharriere.jpg",
+    "shortBio": "Le jour: je suis Solution Architect chez GitHub.<br />La nuit: je \"geek\" en JavaScript, Golo, Java, ...",
+    "bio": "Le jour: je suis Solution Architect chez GitHub.<br />La nuit: je \"geek\" en JavaScript, Golo, Java, Groovy, ... avec une addiction sévère à L'IOT et au JS<br />J’ai aussi le plaisir d’être co-organisateur de la conférence Lyonnaise Mix-IT.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/k33g_org"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/k33g"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/+PhilippeCharri%C3%A8re"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "https://github.com/k33g/files"
+    }]
+  },
+  "1470172292219": {
+    "id": 1470172292219,
+    "featured": false,
+    "name": "Olivier Guillet",
+    "company": "Emotic",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/oguillet.jpg",
+    "shortBio": "Olivier Guillet développe depuis plus de 15 ans : jeux vidéos, sites internet ou applications mobile...",
+    "bio": "Olivier Guillet développe depuis plus de 15 ans : jeux vidéos, sites internet ou applications mobiles, le plus souvent sur des technologies web. Egalement passionné de réalité virtuelle, réalité augmentée et innovations en tout genre, aux frontières de l'informatiques et du cyberpunk.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/OlivierGuillet"
+    }]
+  },
+  "1470778035883": {
+    "id": 1470778035883,
+    "featured": false,
+    "name": "Sébastien Friess",
+    "company": "SFEIR",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/sfriess.jpg",
+    "shortBio": "Développeur backend chez <b>SFEIR</b>. Après 10 années de Java dans des environnements distribués, i...",
+    "bio": "Développeur backend chez <b>SFEIR</b>. Après 10 années de Java dans des environnements distribués, il a récemment sauté le pas pour le <b>Go</b> chez ses clients dans le domaine de l'IoT. Il vous propose aujourd'hui de partager son expérience pour la première fois.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/sebastienfriess"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/sebastienfr"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/+SebastienFRIESS"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "https://sebastienfr.fr/"
+    }]
+  },
+  "1470838537157": {
+    "id": 1470838537157,
+    "featured": false,
+    "name": "Kevin Biger",
+    "company": "SQLI",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/kbiger.jpg",
+    "shortBio": "Développeur chez SQLI et co-responsable du pôle NoSQL/Big Data, je suis passionné par la sécurité, J...",
+    "bio": "Développeur chez SQLI et co-responsable du pôle NoSQL/Big Data, je suis passionné par la sécurité, Java, les WebAPIs et le NoSQL. <br />Je suis impliqué dans la communauté Neo4j et ai créé un meetup nantais sur le sujet.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/kevin_biger"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/kbiger"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/+KevinBiger"
+    }]
+  },
+  "1471338493721": {
+    "id": 1471338493721,
+    "featured": false,
+    "name": "GILLES BRIEUX",
+    "company": "Conserto",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/gbrieux.jpg",
+    "shortBio": "Passionné d’informatique et tombé dedans tout petit je suis actuellement formateur, coach agile chez...",
+    "bio": "Passionné d’informatique et tombé dedans tout petit je suis actuellement formateur, coach agile chez Conserto.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/u/0/+gbrieux"
+    }]
+  },
+  "1471610942207": {
+    "id": 1471610942207,
+    "featured": false,
+    "name": "Jean-Philippe Briend",
+    "company": "CloudBees",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/jbriend.png",
+    "shortBio": "Jean-Philippe traîne autour de Hudson/Jenkins depuis plus de 8 ans. Il a mis en place des environnem...",
+    "bio": "Jean-Philippe traîne autour de Hudson/Jenkins depuis plus de 8 ans. Il a mis en place des environnements d'Intégration Continue complexe puis poussé les Best Practices de Déploiement Continu dans des entreprises de toutes tailles.<br />Il est maintenant Solutions Architect chez CloudBees et côtoie tous les jours des usages très diversifiés (voir exotiques) de Jenkins en entreprise.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/jpbriend"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/jpbriend"
+    }]
+  },
+  "1465399242926": {
+    "id": 1465399242926,
+    "featured": false,
+    "name": "Frédéric Menou",
+    "company": "FretLink",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/fmenou.jpg",
+    "shortBio": "CTO at FretLink, developer at heart...",
+    "bio": "CTO at FretLink, developer at heart",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/ptit_fred"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/ptitfred"
+    }]
+  },
+  "1471954065677": {
+    "id": 1471954065677,
+    "featured": false,
+    "name": "Morresi Alfredo",
+    "company": "Google",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/amorresi.jpg",
+    "shortBio": "I have always been addicted by innovation since 12 years old. My last passion (and work, of course) ...",
+    "bio": "I have always been addicted by innovation since 12 years old. My last passion (and work, of course) is Android, but in the past I managed Windows and Linux infrastructures for middle-size companies (250-300 empl.) and developed applications using .NET and Java.<br /><br />Now, in Google, I’m taking care of the developers ecosystem, providing technical contents, organizing events, teaching in universities, working with communities and much more.<br /><br />In parallel, I’ve been actively participating to the Italian technical social scene, giving talk on a wide range of topics: courses on Android development, Linux training, security matters etc, and my degree in “Communication Science” strengthened my communication and human-relation skills.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/rainbowbreeze"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/rainbowbreeze"
+    }]
+  },
+  "1437051561717": {
+    "id": 1437051561717,
+    "featured": false,
+    "name": "Menetrier Romain",
+    "company": null,
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/rmenetrier.jpg",
+    "shortBio": "Romain est développeur depuis plus de 15 ans et a été CTO dans une startup (Connecthings) et pour un...",
+    "bio": "Romain est développeur depuis plus de 15 ans et a été CTO dans une startup (Connecthings) et pour une solution d'un grand groupe (Orange). Passé  par le web et les backend, il est maintenant concentré sur l'innovation et l'environnement mobile. Il est également organisateur au Paris Android User Group et un des fondateurs de Droidcon Paris.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/romemore"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/romemore"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/u/0/+RomainMenetrier"
+    }]
+  },
+  "1466514040973": {
+    "id": 1466514040973,
+    "featured": false,
+    "name": "Nicolas Garnier",
+    "company": "Google",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/ngarnier.jpg",
+    "shortBio": "Nicolas a rejoint Google en 2008 et a travaillé sur de multiple produits pour développeurs comme les...",
+    "bio": "Nicolas a rejoint Google en 2008 et a travaillé sur de multiple produits pour développeurs comme les APIs Google Drive, Checkout, Tasks, Gmail, Contacts, Calendar, Base mais aussi Dart, Material Design Lite, Espresso et OAuth 2. Plus récemment il a rejoint l'équipe Firebase et se concentre sur l'aspect Web.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/nivco"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/nicolasgarnier"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://google.com/+NicolasGarnier"
+    }]
+  },
+  "1438377254497": {
+    "id": 1438377254497,
+    "featured": false,
+    "name": "Hugo Wood",
+    "company": "Zenika",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/hwood.jpg",
+    "shortBio": "Développeur autodidacte depuis 12 ans, professionnel depuis 3, je n'ai de cesse d'apprendre de nouve...",
+    "bio": "Développeur autodidacte depuis 12 ans, professionnel depuis 3, je n'ai de cesse d'apprendre de nouvelles techniques pour améliorer mon savoir-faire. J'aime étudier les langages, de C# à Haskell. Au quotidien, ce sont Java et JavaScript qui m'accaparent. Je suis consultant et formateur chez Zenika. Enfin, j'apprécie les jeux de code : vous me retrouverez par exemple sur CodinGame, et là, c'est Python.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/mercury_wood"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/hgwood"
+    }]
+  },
+  "1472051425635": {
+    "id": 1472051425635,
+    "featured": false,
+    "name": "Jerome Delbut",
+    "company": "Sopra Steria",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/jdelbut.jpg",
+    "shortBio": "Je suis architecte des solutions IOT au sein d l’IOT Line de SOPRA STERIA. Dans le cadre de la mise ...",
+    "bio": "Je suis architecte des solutions IOT au sein d l’IOT Line de SOPRA STERIA. Dans le cadre de la mise en œuvre de solutions innovantes pour répondre aux nouveaux besoins métiers de nos clients, je développe des solutions innovantes sur la base de plateformes Intel Edison ou open source. Je réalise aussi des prestations de conseil à la réalisation d’applications basées sur des lunettes et casques connectés applicables dans l’industrie 4.0. J'ai également la responsabilité du projet SOPRA STERIA « Inspect’Drone » pour inspecter via drone des infrastructures (barrages, bateaux, avion, bâtiments, …) afin de détecter des défauts automatiquement. Ce projet est un démonstrateur technologique du savoir-faire de SOPRA STERIA dans le domaine du traitement d’image, du pilotage automatique et collaboratif et de la cybersécurité.",
+    "tags": [],
+    "badges": [],
+    "socials": []
+  },
+  "1434699116549": {
+    "id": 1434699116549,
+    "featured": false,
+    "name": "Bruno Bonnin",
+    "company": null,
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/bbonnin.jpg",
+    "shortBio": "Architecte logiciel, développeur full stack avec une prédilection pour les technologies Java, JavaSc...",
+    "bio": "Architecte logiciel, développeur full stack avec une prédilection pour les technologies Java, JavaScript, NoSQL (MongoDB, Elasticsearch) et Big Data (Hadoop). Développe depuis l’époque du ZX Spectrum et pense toujours que c’est la meilleure machine de tous les temps (même si Spark a du mal a tourné dessus) !",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/_bruno_b_"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/bbonnin"
+    }]
+  },
+  "1469452017228": {
+    "id": 1469452017228,
+    "featured": false,
+    "name": "Benjamin Fontaine",
+    "company": "Zenika",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/bfontaine.jpg",
+    "shortBio": "Je suis un dév fullstack Java et Js, curieux de tout : devops, nouvelles technologies, agilité, craf...",
+    "bio": "Je suis un dév fullstack Java et Js, curieux de tout : devops, nouvelles technologies, agilité, craftmanship, développement personnel.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/benjifontaine5"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/benjaminfontaine"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/100218727706940554885"
+    }]
+  },
+  "1472133508219": {
+    "id": 1472133508219,
+    "featured": false,
+    "name": "Mikaël Barbero",
+    "company": "Eclipse Foundation Europe GmbH",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/mbarbero.jpg",
+    "shortBio": "Mikaël Barbero is a passionate software engineer. He started programming at the age of 10 with BASIC...",
+    "bio": "Mikaël Barbero is a passionate software engineer. He started programming at the age of 10 with BASIC and hasn't stopped since. After having led and contributed to many Eclipse project (especially in the modeling area), he is now a senior Eclipse platform developer and is also taking care of the release engineering for the Eclipse Foundation. A hacker at heart, Mikael likes to untangle everyday things to reveal their design layers. It lets him understand how things are built and what makes them beautiful. To him, good design is not only attractive, but also targeted for a purpose.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/mikbarbero"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/mbarbero"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/u/0/+MikaëlBarbero"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "http://mikael-barbero.tumblr.com"
+    }]
+  },
+  "1472223851013": {
+    "id": 1472223851013,
+    "featured": true,
+    "name": "Didier Girard",
+    "company": "SFEIR",
+    "country": "Paris, France",
+    "photoUrl": "/images/speakers/dgirard.jpg",
+    "shortBio": "Cloud Rider / GDE @Google / VP Engineering @Sfeir / PhD Machine Learning @EnsDeLyon...",
+    "bio": "Cloud Rider / GDE @Google / VP Engineering @Sfeir / PhD Machine Learning @EnsDeLyon",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/DidierGirard"
+    }]
+  },
+  "1472226217608": {
+    "id": 1472226217608,
+    "featured": false,
+    "name": "Olivier Bierlaire",
+    "company": "Sparklane",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/obierlaire.jpg",
+    "shortBio": "Je suis actuellement DevOps chez Sparklane, premier éditeur français de solutions d’intelligence com...",
+    "bio": "Je suis actuellement DevOps chez Sparklane, premier éditeur français de solutions d’intelligence commerciale et marketing dédiées au marché B2B, en France et en Europe.<br />Pour garantir la performance et la haute disponibilité des solutions BigData de la société, j’ai en charge la définition de l’architecture Cloud, la mise en œuvre et le maintien en conditions opérationnelles de l’ensemble des plateformes.<br />Dans le cloud Amazon (AWS), nous déployons et organisons nos composants dans des technologies fiables et managées : Docker, Rancher, pour assurer performance et haute disponibilité.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/obierlaire"
+    }]
+  },
+  "1472282811544": {
+    "id": 1472282811544,
+    "featured": false,
+    "name": "Fabien JUIF",
+    "company": "Zenika",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/fjuif.jpg",
+    "shortBio": "Fabien JUIF a baigné dans l’informatique depuis son adolescence. Il installait sa première Gentoo st...",
+    "bio": "Fabien JUIF a baigné dans l’informatique depuis son adolescence. Il installait sa première Gentoo stage 1 en 1ère pour migrer vers Archlinux quelques années après.<br />Pour lui pacman n’est pas un jeu, on ne rigole pas avec ça.<br /><br />Passioné par la création de jeux vidéos, il s’intéressa très rapidement au développement logiciel. Avec 6 années dans le métier et une veille technologique personnelle depuis son plus jeune âge, il est devenu un peu touche à tout <i>GNU+Linux, Docker, développement backend, développement frontend, etc</i><br /><br />Chez Zenika, son attrait du moment c'est le Web, et plus précisément le développement ReactJS.<br /><br />Il espère pouvoir partager un peu de sa passion avec vous !",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/fabienjuif"
+    }]
+  },
+  "1470747868721": {
+    "id": 1470747868721,
+    "featured": false,
+    "name": "Jan Jongboom",
+    "company": "ARM",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/jjongboom.jpg",
+    "shortBio": "Jan Jongboom is working as Developer Evangelist IoT for ARM, and always on the lookout on how to con...",
+    "bio": "Jan Jongboom is working as Developer Evangelist IoT for ARM, and always on the lookout on how to connect the web with the real world. He loves doing unexpected stuff with sensors, flying drones from the browser, and breaking phones. Before ARM he was a core contributor to Firefox OS, and he wrote hundreds of patches to various open source projects. He's also a Google Developer Expert for Web technologies.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "http://twitter.com/janjongboom"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "http://github.com/janjongboom/"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "http://janjongboom.com"
+    }]
+  },
+  "1472465838515": {
+    "id": 1472465838515,
+    "featured": false,
+    "name": "Frédéric Serreau",
+    "company": "Groupe Créative",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/fserreau.jpg",
+    "shortBio": "Chef de projet technique coloré mobilité indus, chez @groupecreative. J’interviens sur des applicati...",
+    "bio": "Chef de projet technique coloré mobilité indus, chez @groupecreative. J’interviens sur des applications à dominante graphique en C++\\Qt\\QML ou en JAVA FX optimisées par des shaders et OpenCL. Mon dada : Les SIG et les projections cartographiques.",
+    "tags": [],
+    "badges": [],
+    "socials": []
+  },
+  "1434374399444": {
+    "id": 1434374399444,
+    "featured": false,
+    "name": "Axel Cateland",
+    "company": "Talend",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/acateland.jpg",
+    "shortBio": "Électrotechnicien de formation Axel s'engage à 17 ans dans la Marine Nationale, s'échappe de son sou...",
+    "bio": "Électrotechnicien de formation Axel s'engage à 17 ans dans la Marine Nationale, s'échappe de son sous-marin nucléaire 3 ans plus tard, redécouvre le développement à 24 ans, développeur back (JAVA, PHP) pendant quelques années il s'enfuit cette fois définitivement de l'armée en 2012 pour se lancer dans une carrière de développeur front. Sa seule constance finalement c'est de savoir apprécier une bonne bière.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/catelandaxel"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/acateland/"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/u/0/+google.com/axelcateland"
+    }]
+  },
+  "1472510496898": {
+    "id": 1472510496898,
+    "featured": false,
+    "name": "Alexis Hassler",
+    "company": null,
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/ahassler.jpg",
+    "shortBio": "Alexis Hassler est développeur Java depuis la fin du siècle dernier. Il exerce son métier comme indé...",
+    "bio": "Alexis Hassler est développeur Java depuis la fin du siècle dernier. Il exerce son métier comme indépendant, en codant, mais aussi en accompagnant ou formant les entreprises pour les aider à améliorer leur façon de développer et de déployer leurs applications Java. <br />Il a été un des fondateurs du LyonJUG (lyonjug.org) et aide à l’organisation de Mix-IT (mix-it.fr), l'excellente conférence annuelle à Lyon.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/AlexisHassler"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/hasalex"
+    }]
+  },
+  "1465224485474": {
+    "id": 1465224485474,
+    "featured": false,
+    "name": "Yvonnick Frin",
+    "company": "Zenika",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/yfrin.jpg",
+    "shortBio": "Yvonnick développeur javascript chez Zenika Nantes. Curieux et passionné, il aime découvrir les dern...",
+    "bio": "Yvonnick développeur javascript chez Zenika Nantes. Curieux et passionné, il aime découvrir les dernières technologies du Web. Adepte d’AngularJs depuis déjà deux ans, il se met à explorer le Flux avec React. Social, il écume les meetups nantais en quête de nouveautés.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/YvonnickFrin"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/frinyvonnick"
+    }]
+  },
+  "1471601816772": {
+    "id": 1471601816772,
+    "featured": false,
+    "name": "Olivier Leplus",
+    "company": null,
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/oleplus.jpg",
+    "shortBio": "My day to day my mission is to help developers create successful and quality apps.<br />As a passion...",
+    "bio": "My day to day my mission is to help developers create successful and quality apps.<br />As a passionate web developer, I am always discovering and playing with new web technologies !",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/olivierleplus"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/tagazok"
+    }]
+  },
+  "1472501816997": {
+    "id": 1472501816997,
+    "featured": false,
+    "name": "Matthieu Gioani",
+    "company": null,
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/mgioani.jpg",
+    "shortBio": "Matthieu Gioani, consultant, designer & facilitateur, accompagne les équipes projet et les managers ...",
+    "bio": "Matthieu Gioani, consultant, designer & facilitateur, accompagne les équipes projet et les managers sur les problématiques de design, d’émergence des besoins et d’innovation depuis plus de 6 ans.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/Matt_Gio"
+    }, {
+      "icon": "website",
+      "name": "Website",
+      "link": "http://www.design-en-entreprise.fr/"
+    }]
+  },
+  "1436275955994": {
+    "id": 1436275955994,
+    "featured": false,
+    "name": "Horacio Gonzalez",
+    "company": "Cityzen Data",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/hgonzalez.jpg",
+    "shortBio": "Malgré ce que son accent espagnol bien prononcé peut suggérer, Horacio est arrivé en France il y a u...",
+    "bio": "Malgré ce que son accent espagnol bien prononcé peut suggérer, Horacio est arrivé en France il y a une quinzaine d'années déjà. Passionné d'informatique, dans laquelle il est tombé depuis tout petit, il a découvert Java en 1997 et depuis il n'a pas arrêté de bosser autour. <br /><br />Après quelques années comme architecte technique au Crédit Mutuel Arkea, Horacio travaille actuellement à Cityzen Data, entreprise spécialisée dans le domaine du Big Data. Il est aussi leader et cofondateur du FinistJUG, le JUG francophone le plus proche de la Silicon Valley. <br /><br />Passionné par le développement web et tout ce qui gravite autour des composants web, Horacio a été nommé Google Developer Expert (GDE) en Web Technologies et Polymer.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://plus.google.com/u/0/+LostInBrittany"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/LostInBrittany"
+    }, {
+      "icon": "gplus",
+      "name": "Google+",
+      "link": "https://plus.google.com/u/0/+LostInBrittany"
+    }]
+  },
+  "1438785880433": {
+    "id": 1438785880433,
+    "featured": false,
+    "name": "Ludovic Champenois",
+    "company": "Google",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/lchampenois.jpg",
+    "shortBio": "Tech Lead, Manager Google Cloud Platform, Java....",
+    "bio": "Tech Lead, Manager Google Cloud Platform, Java.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/ludoch"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/ludoch"
+    }]
+  },
+  "1434378343474": {
+    "id": 1434378343474,
+    "featured": false,
+    "name": "Thomas Fournaise",
+    "company": "La Poste",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/tfournaise.jpg",
+    "shortBio": "Chef de projet et développeur. <br />En charge de l'opendata et de la réalisation de dataviz au sein...",
+    "bio": "Chef de projet et développeur. <br />En charge de l'opendata et de la réalisation de dataviz au sein du groupe La Poste. Je pratique assez régulièrement D3 pour créer de l'interactivité autour des données.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/FournaiseThomas"
+    }]
+  },
+  "1467623542435": {
+    "id": 1467623542435,
+    "featured": false,
+    "name": "David Pilato",
+    "company": "Elastic",
+    "country": "Nantes, France",
+    "photoUrl": "/images/speakers/dpilato.jpg",
+    "shortBio": "Depuis 2013, David Pilato est développeur et évangéliste chez elastic.co, après avoir passé les deux...",
+    "bio": "Depuis 2013, David Pilato est développeur et évangéliste chez elastic.co, après avoir passé les deux années précédentes à promouvoir le projet open-source Elasticsearch. Il en anime la communauté française.",
+    "tags": [],
+    "badges": [],
+    "socials": [{
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/dadoonet"
+    }, {
+      "icon": "github",
+      "name": "Github",
+      "link": "https://github.com/dadoonet"
+    }]
+  }
 }
