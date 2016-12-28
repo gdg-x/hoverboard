@@ -20,7 +20,8 @@
     "domain": "hoverboard-experimental.firebaseapp.com",
     "database": "https://hoverboard-experimental.firebaseio.com",
     "api": "AIzaSyALDa2D7CMhK_wt2VkET1MaJuQXYVUJd2I",
-    "userSessionsPath": "/userSessions"
+    "userSessionsPath": "/userSessions",
+    "indexedDbSession": "hoverboard"
   },
   "mailchimp": {
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
