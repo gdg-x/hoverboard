@@ -335,13 +335,13 @@
 
   "27": {
     "id": 27,
-    "title": "Keep it clean: Creating and managing reusable components",
-    "description": "How to:<br />- avoid ../../../../path/to/components?<br />- spot reusable piece?<br />- cut it out and manage it independently?<br />- which tools will help?<br />Managing dozen of angular2 projects, pushed me to write a tool which allows me and my co-workers to easily manage submodules along side with projects. At the moment it is applied to ng2-bootstrap, and PRs on a way ng2-translate and other modules",
+    "title": "Unleash The Power Of Angular 2 With Patterns",
+    "description": "Stop mapping knowledge of one implementation to another, get familiar with ng2 patterns once and use them everywhere. With this knowledge you will be able to understand and use ng2, or any other tools, much faster and effectively.",
     "speakers": [
       27
     ],
     "tags": [
-      "Components",
+      "Patterns",
       "Angular 2",
       "Angular"
     ]
@@ -422,8 +422,8 @@
 
   "87": {
     "id": 87,
-    "title": "Migrating Angular 1 Apps to Angular 2",
-    "description": "",
+    "title": "Migrating Applications from Angular 1 to Angular 2",
+    "description": "Your Angular 1 application doesn’t have to be scrapped, or live forever. There’s another way. Migration from Angular 1 to the latest version of Angular is a great way to add life to your application without spending an unreasonable amount of time and money on “the great rewrite”. Come learn from Joe Eames how to migrate your application to to save time, money, and minimize risk. In this workshop attendees will migrate a production-ready application to the latest version of Angular, and learn a step by step plan for migrating any application from Angular 1.x, including: preparing your Angular 1.x application for migration, minimizing risk through small steps, dealing with third party libraries, effectively migrating routing, including protecting routes & preloading data, dealing with HTTP, and learning common gotchas when migrating from 1.x.",
     "speakers": [
       87
     ],

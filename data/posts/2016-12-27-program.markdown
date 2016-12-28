@@ -4,7 +4,7 @@ ngVikings 2017 Conference is excited to announce the program: 21 technical, in-d
 
 ## One more BONUS for our attendees!
 
-Do you love to receive gifts? ngVikings Conference is happy to announce one more FREE workshop for Conference Day attendees! Amazing "Migrating Angular 1 Apps to Angular 2" by __Google Developer Expert [Joe Eames](https://ngvikings.org/speakers/87/) (ng-conf, USA)__
+Do you love to receive gifts? ngVikings Conference is happy to announce one more FREE workshop for Conference Day attendees! Amazing "Migrating Applications from Angular 1 to Angular 2" by __Google Developer Expert [Joe Eames](https://ngvikings.org/speakers/87/) (ng-conf, USA)__
 
 *This FREE workshop is for the owners of Conference Day (Feb 11th) tickets only! Please use "yesIHaveMyConferenceTicket" discount code to get your 100% discount.*
 
@@ -14,7 +14,7 @@ Do you love to receive gifts? ngVikings Conference is happy to announce one more
 * * *
 &nbsp;
 
-### Please choose ONLY ONE of free full-day workshops ["Migrating Angular 1 Apps to Angular 2"](https://ti.to/ngvikings/2017/with/ues54bhyjm0) OR ["Ionic 2 with Firebase"](https://ti.to/ngvikings/2017/with/zvkdnmxrw-k)
+### Please choose ONLY ONE of free full-day workshops ["Migrating Applications from Angular 1 to Angular 2"](https://ti.to/ngvikings/2017/with/ues54bhyjm0) OR ["Ionic 2 with Firebase"](https://ti.to/ngvikings/2017/with/zvkdnmxrw-k)
 
 &nbsp;
 &nbsp;

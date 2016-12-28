@@ -73,6 +73,11 @@
     "title": "community-partners",
     "logos": [
       {
+        "name": "ngGirls",
+        "url": "http://ng-girls.org/",
+        "logoUrl": "../images/logos/nggirls.png"
+      },
+      {
         "name": "AngularCamp",
         "url": "https://angularcamp.org/",
         "logoUrl": "../images/logos/angularcamp.png"
