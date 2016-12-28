@@ -242,10 +242,10 @@
   "gallery": {
     "albumUrl": "https://www.flickr.com/photos/129650261@N07/sets/72157676475088136",
     "photos": {
-      "big": "/images/backgrounds/2015_1.jpg",
+      "big": "/images/backgrounds/2016_1.jpg",
       "small": [
-        "/images/backgrounds/2015_2.jpg",
-        "/images/backgrounds/2015_3.jpg"
+        "/images/backgrounds/2016_2.jpg",
+        "/images/backgrounds/2016_3.jpg"
       ]
     }
   },
@@ -255,11 +255,11 @@
     "pointer": {
       "latitude": 47.2129658,
       "longitude": -1.5425652,
-      "zoom": 15
+      "zoom": 7
     },
     "mapCenter": {
-      "latitude": 47.2129658,
-      "longitude": -1.5425652
+      "latitude": 46.9666849,
+      "longitude": -1.4848352
     },
     "images": [
       "/images/backgrounds/location_1.jpg",

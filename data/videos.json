@@ -1,164 +1,62 @@
 [
   {
-    "youtubeId": "-UEURYYVCmg",
-    "title": "Polymer vs other libraries",
-    "speakers": "Jakub Škvára",
-    "thumbnail": "/images/sessions/116.JPG"
+    "youtubeId": "HLuJBOfRbkk",
+    "title": "Accessibilité, par où commencer ?",
+    "speakers": "Julie Moynat",
+    "thumbnail": "/images/sessions/accessibilite.jpg"
   },
   {
-    "youtubeId": "BZ-uR8LQRkA",
-    "title": "Scalable Microservices with gRPC, Kubernetes, and Containers",
-    "speakers": "Mandy Waite",
-    "thumbnail": "/images/sessions/109.JPG"
+    "youtubeId": "r2uew8cGqz8",
+    "title": "Conversational power for Android apps",
+    "speakers": "Morresi Alfredo",
+    "thumbnail": "/images/sessions/alfresco.jpg"
   },
   {
-    "youtubeId": "n-H6jYnL32U",
-    "title": "Google Cloud Platform End to End: How we built 'Cloud Spin'",
-    "speakers": "Mandy Waite",
-    "thumbnail": "/images/sessions/110.JPG"
+    "youtubeId": "ca3OcJHeq4Y",
+    "title": "Du DevOps chez les Commandos",
+    "speakers": "Cédric Gillet",
+    "thumbnail": "/images/sessions/cgillet.jpg"
   },
   {
-    "youtubeId": "89wvLLc25AY",
-    "title": "How can Android Backup break your app",
-    "speakers": "Mateusz Herych",
-    "thumbnail": "/images/sessions/102.JPG"
+    "youtubeId": "a_va_QxR4HY",
+    "title": "Flexbox : après l'ivresse, place à la gueule de bois !",
+    "speakers": "Cédric Gillet",
+    "thumbnail": "/images/sessions/cgoetter.jpg"
   },
   {
-    "youtubeId": "3u8864j4g24",
-    "title": "Material Design. Custom Branding",
-    "speakers": "Alex Pazhyn",
-    "thumbnail": "/images/sessions/113.JPG"
+    "youtubeId": "Jv5LmQOXmjU",
+    "title": "Cloud patterns",
+    "speakers": "Didier Girard & Julien Landuré",
+    "thumbnail": "/images/sessions/dgirard.jpg"
   },
   {
-    "youtubeId": "szLFi1aO398",
-    "title": "Service Worker - Native Apps Experience For The Web",
-    "speakers": "Viktor Zozuliak",
-    "thumbnail": "/images/sessions/122.JPG"
+    "youtubeId": "HJuOC2WFNDs",
+    "title": "GraphQL vs Falcor",
+    "speakers": "Hugo Wood & Antoine Cellier",
+    "thumbnail": "/images/sessions/falcor.jpg"
   },
   {
-    "youtubeId": "nFZxAIi8n7I",
-    "title": "Material Design on Custom Views",
-    "speakers": "Said Tahsin Dane",
-    "thumbnail": "/images/sessions/101.JPG"
+    "youtubeId": "P-gPyRpLcu0",
+    "title": "MinuteJS - Les nouveautés Javascript à ne pas rater !",
+    "speakers": "Fabien Juif",
+    "thumbnail": "/images/sessions/fjuif.jpg"
   },
   {
-    "youtubeId": "3zbxUcyiP8Y",
-    "title": "The Cloud Convergence: OpenStack and Kubernetes",
-    "speakers": "Ihor Dvoretskyi",
-    "thumbnail": "/images/sessions/135.JPG"
+    "youtubeId": "B3eyhNBKx2U",
+    "title": "Mixité dans le monde des webcomponents",
+    "speakers": "Horacio Gonzalez",
+    "thumbnail": "/images/sessions/horacio.jpg"
   },
   {
-    "youtubeId": "uz4vA21lqoE",
-    "title": "Firebase Adventures - Real time platform for your apps",
-    "speakers": "Juarez Filho",
-    "thumbnail": "/images/sessions/120.JPG"
+    "youtubeId": "rfzRbSEwnR8",
+    "title": "Ivre, il décida de commercialiser des apps tout seul",
+    "speakers": "Pierre Benayoun",
+    "thumbnail": "/images/sessions/pbenyaoun.jpg"
   },
   {
-    "youtubeId": "GYwvQ0YAPo4",
-    "title": "Data Binding. Next big thing?",
-    "speakers": "Anton Minashkin",
-    "thumbnail": "/images/sessions/134.JPG"
-  },
-  {
-    "youtubeId": "GbTe0BTuNaU",
-    "title": "Mastering the NDK with Android Studio 1.3+ and the gradle-experimental plugin",
-    "speakers": "Hallade Xavier",
-    "thumbnail": "/images/sessions/112.JPG"
-  },
-  {
-    "youtubeId": "DoUATBQcihI",
-    "title": "Let's play Dart!",
-    "speakers": "Jana Moudrá",
-    "thumbnail": "/images/sessions/115.JPG"
-  },
-  {
-    "youtubeId": "euROYVOJYuI",
-    "title": "Using GoLang for building micro-service architecture in Google Cloud Platform",
-    "speakers": "Valentyn Shybanov",
-    "thumbnail": "/images/sessions/106.JPG"
-  },
-  {
-    "youtubeId": "gHd-0itPpGg",
-    "title": "Build Your Thing In a Weekend with AngularJS 2.0",
-    "speakers": "Semih Yagcioglu",
-    "thumbnail": "/images/sessions/124.JPG"
-  },
-  {
-    "youtubeId": "o04aL3IzmcQ",
-    "title": "[Keynote] Lean Startup with Google",
-    "speakers": "Dawid Ostrowski",
-    "thumbnail": "/images/sessions/125.JPG"
-  },
-  {
-    "youtubeId": "3LQnqJhGQmI",
-    "title": "RxJava for Android",
-    "speakers": "Constantine Mars",
-    "thumbnail": "/images/sessions/133.JPG"
-  },
-  {
-    "youtubeId": "a4InM2VhAvQ",
-    "title": "Power of Android Shell",
-    "speakers": "Roman Mazur",
-    "thumbnail": "/images/sessions/104.JPG"
-  },
-  {
-    "youtubeId": "gQbjjOE2yF4",
-    "title": "Planning Android Screens",
-    "speakers": "Dmytro Danylyk",
-    "thumbnail": "/images/sessions/103.JPG"
-  },
-  {
-    "youtubeId": "Oazl4fx-X68",
-    "title": "V8 under the hood",
-    "speakers": "Dima Maleev",
-    "thumbnail": "/images/sessions/108.JPG"
-  },
-  {
-    "youtubeId": "tEUmmZDwHDg",
-    "title": "Bluetooth Low Energy and iBeacon development for Android",
-    "speakers": "Kseniia Shumelchyk",
-    "thumbnail": "/images/sessions/117.JPG"
-  },
-  {
-    "youtubeId": "b-4upgkYdZo",
-    "title": "Continuous Delivery with Ease",
-    "speakers": "Maciej Górski",
-    "thumbnail": "/images/sessions/114.JPG"
-  },
-  {
-    "youtubeId": "2rT4Us7cFDg",
-    "title": "Hijacking notification actions - lets respond to your messages!",
-    "speakers": "Michał Tajchert",
-    "thumbnail": "/images/sessions/105.JPG"
-  },
-  {
-    "youtubeId": "lFpb-LaYDvs",
-    "title": "New security model in Marshmallow",
-    "speakers": "Roman Herasymenko",
-    "thumbnail": "/images/sessions/111.JPG"
-  },
-  {
-    "youtubeId": "V7GCjnfsOCE",
-    "title": "Angular2: Reasoning behind technical decisions",
-    "speakers": "Valentyn Shybanov",
-    "thumbnail": "/images/sessions/107.JPG"
-  },
-  {
-    "youtubeId": "8kXNWOhEAhE",
-    "title": "Fireside Chat",
-    "speakers": "",
-    "thumbnail": "/images/sessions/140.JPG"
-  },
-  {
-    "youtubeId": "SoXb9cXnJhc",
-    "title": "Android TV Development",
-    "speakers": "Alexey Rybakov",
-    "thumbnail": "/images/sessions/119.JPG"
-  },
-  {
-    "youtubeId": "YWaOdwCenZM",
-    "title": "Google WebRTC on Mobile",
-    "speakers": "Buşra Deniz",
-    "thumbnail": "/images/sessions/123.JPG"
+    "youtubeId": "4q78S36ehCs",
+    "title": "Introduction à la programmation réactive",
+    "speakers": "Thomas Belin",
+    "thumbnail": "/images/sessions/tbelin.jpg"
   }
 ]
