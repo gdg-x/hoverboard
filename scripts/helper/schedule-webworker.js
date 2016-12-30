@@ -37,7 +37,7 @@ function getEndTime(date, startTime, endTime, totalNumber, number) {
   return result.getHours() + ':' + result.getMinutes();
 }
 
-self.addEventListener('message', function(e) {
+self.addEventListener('message', function (e) {
   var speakers = e.data.speakers;
   var sessions = e.data.sessions;
   var schedule = e.data.schedule;
@@ -67,6 +67,5 @@ self.addEventListener('message', function(e) {
     speakers: speakers,
     sessions: sessions,
     schedule: schedule
-
-});
+  });
 }, false);

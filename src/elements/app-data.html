@@ -5,7 +5,7 @@
 
 <dom-module id="app-data">
   <template>
-    <iron-ajax auto url="[[speakersSource]]" handle-as="json" last-response="{{speakers}}"></iron-ajax>
+    <iron-ajax auto url="[[speakersSource]]" handle-as="json" last-response="{{_speakersRaw}}"></iron-ajax>
     <iron-ajax auto url="[[sessionsSource]]" handle-as="json" last-response="{{_sessionsRaw}}"></iron-ajax>
     <iron-ajax auto url="[[postsSource]]" handle-as="json" on-response="_reversePosts"></iron-ajax>
     <iron-ajax auto url="[[partnersSource]]" handle-as="json" last-response="{{app.partners}}"></iron-ajax>
@@ -66,16 +66,17 @@
             value: 'data/videos.json'
           },
 
+          posts: {
+            type: Array,
+            notify: true
+          },
+
           speakers: {
             type: Array,
             notify: true
           },
 
-          _sessionsRaw: {
-            type: Object
-          },
-
-          posts: {
+          sessions: {
             type: Array,
             notify: true
           },
@@ -89,13 +90,17 @@
             type: Object
           },
 
+          _sessionsRaw: {
+            type: Object
+          },
+
           _scheduleRaw: {
             type: Array
           }
         },
 
         observers: [
-          '_generateSchedule(speakers, _sessionsRaw, _scheduleRaw)'
+          '_generateSchedule(_speakersRaw, _sessionsRaw, _scheduleRaw)'
         ],
 
         ready: function () {
@@ -103,11 +108,11 @@
         },
 
         _generateSchedule: function () {
-          if (!Object.keys(this.speakers).length || !Object.keys(this._sessionsRaw).length || !this._scheduleRaw.length) return;
+          if (!Object.keys(this._speakersRaw).length || !Object.keys(this._sessionsRaw).length || !this._scheduleRaw.length) return;
 
           var myWorker = new Worker('./scripts/helper/schedule-webworker.js');
           myWorker.postMessage({
-            speakers: this.speakers,
+            speakers: this._speakersRaw,
             sessions: this._sessionsRaw,
             schedule: this._scheduleRaw
           });
@@ -115,6 +120,7 @@
           myWorker.addEventListener('message', function(e) {
             this.set('schedule', e.data.schedule);
             this.set('sessions', e.data.sessions);
+            this.set('speakers', e.data.speakers);
             myWorker.terminate();
           }.bind(this), false);
         },
