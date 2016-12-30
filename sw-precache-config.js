@@ -1,5 +1,5 @@
 module.exports = {
-  cacheId: 'v11',
+  cacheId: 'v12',
   staticFileGlobs: [],
   navigateFallback: '/index.html'
 };
