@@ -46,6 +46,13 @@
         "tabBarColor": "#fff",
         "backgroundImage": "/images/backgrounds/team.jpg"
       }
+    },"ng-girls": {
+      "headerSettings": {
+        "backgroundColor": "#012250",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff",
+        "backgroundImage": "/images/backgrounds/ng-girls.jpg"
+      }
     },
     "cod": {
       "headerSettings": {
@@ -76,6 +83,10 @@
     {
       "route": "team",
       "permalink": "/team/"
+    },
+    {
+      "route": "ng-girls",
+      "permalink": "/ng-girls/"
     }
   ],
   "url": "https://ngvikings.org/",
