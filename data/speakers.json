@@ -12,7 +12,7 @@
     "shortBio": "Trainer and Consultant with focus on Angular. Google Developer Expert (GDE) and Microsoft MVP. Writes for O'Reilly, Hanser, the German Java Magazine, windows.developer and Heise. Regularly speaks at conferences.",
     "bio": "Trainer and Consultant with focus on Angular. Google Developer Expert (GDE) and Microsoft MVP. Writes for O'Reilly, Hanser, the German Java Magazine, windows.developer and Heise. Regularly speaks at conferences.",
     "tags": [
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [{
@@ -48,7 +48,7 @@
     "bio": "Raul is a software engineer passionate about JS frameworks, web technologies and cross-platform development. Since 2012 he's focused in Angular, HTML5 video and his open source project Videogular. He manages his own company in Barcelona working as a consultant architect for companies around the world helping them to build high-performance web apps. In his spare time he's usually involved in the community as an Angular Google Developer Expert helping local meetups, writing blog posts, speaking at conferences and contributing to open source projects. He lives in Barcelona and is happy by default :)",
     "tags": [
       "CI",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [{
@@ -84,7 +84,7 @@
     "bio": "Uri Shaked is a Google Developer Expert for Web Technologies. He created the popular angular-moment open source module and regularly speaks about Web and IoT-related technologies in conferences and meetups. Among his interests are reverse engineering, hardware hacking, building 3D-printed robots and games, playing music and Salsa dancing.",
     "tags": [
       "IoT",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [{
@@ -120,7 +120,7 @@
     "bio": "Sebastian Witalec is a Technical Evangelist for Progress/Telerik with over 8 years of experience in software engineering and architecture. Sebastian has passion for all types of technologies. However in the last few years his focus shifted towards cross platform Mobile development where he gained experience with Apache Cordova and NativeScript.",
     "tags": [
       "NativeScript",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -152,7 +152,7 @@
     "bio": "Tracy is a speaker, writer, and serial entrepreneur passionate about JavaScript and new technologies. After the acquisition of her last startup, she learned how to code and spends her time as a junior developer these days. Tracy spends her time building the JS community through her new startup, This Dot and runs the Modern Web podcast and events. She loves open source projects, pairing with friends, and empowering people to do awesome things. Tracy is also an organizer of ng-cruise and track chair for QCon.",
     "tags": [
       "Angular Material 2",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [{
@@ -188,7 +188,7 @@
     "bio": "Wassim (aka manekinekko on Twitter/Github) is a Developer Advocate based in Paris. He is also a Developer Expert in Web technologies nominated by Google. He enjoys writing technical articles, meeting developers at events, speaking at conferences and contributing to open source projects: contributor to Angular core, Documentation, Universal and more… Wassim’s mantra: Love what you do and do what you love.",
     "tags": [
       "Angular Universal",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [{
@@ -225,7 +225,7 @@
     "tags": [
       "Firebase",
       "AngularFire 2",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [{
@@ -257,7 +257,7 @@
     "bio": "Alex Lakatos wears many hats at Mozilla for the past 5 years, including but not limited to Mozilla Tech Speaker, Mozilla Reps Council Member, T-Shirt Lover. JavaScript developer building on the open web, he has been pushing its boundaries every day. A Trainer based in London he's been doing public and private Angular classes, runs a Meetup group, and just can't shut up about Angular when in front of an audience.",
     "tags": [
       "ngForm",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [{
@@ -294,7 +294,7 @@
     "tags": [
       "NativeScript",
       "Accessibility",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -319,7 +319,7 @@
     "tags": [
       "NativeScript",
       "Accessibility",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -343,12 +343,12 @@
     "companyLogo": "",
     "country": "USA",
     "photoUrl": "/images/people/ZackaryChapple.jpg",
-    "shortBio": "Zack Chapple - in his current role as a Software Architect at CareerBuilder he is leading the charge for UI convergence through an unifying vision around Atomic Design and Angular 2, while simultaneously breaking down silos across products and teams around the globe. Zack brings a distinct passion for software craftsmanship, testing and a contagious excitement for living on the bleeding edge of software. The best part is his background in teaching at development bootcamps for people of all skill levels, which helps him to convey complicated concepts in an easily digestible fashion.",
-    "bio": "Zack Chapple - in his current role as a Software Architect at CareerBuilder he is leading the charge for UI convergence through an unifying vision around Atomic Design and Angular 2, while simultaneously breaking down silos across products and teams around the globe. Zack brings a distinct passion for software craftsmanship, testing and a contagious excitement for living on the bleeding edge of software. The best part is his background in teaching at development bootcamps for people of all skill levels, which helps him to convey complicated concepts in an easily digestible fashion.",
+    "shortBio": "Zack Chapple - in his current role as a Software Architect at CareerBuilder he is leading the charge for UI convergence through an unifying vision around Atomic Design and Angular, while simultaneously breaking down silos across products and teams around the globe. Zack brings a distinct passion for software craftsmanship, testing and a contagious excitement for living on the bleeding edge of software. The best part is his background in teaching at development bootcamps for people of all skill levels, which helps him to convey complicated concepts in an easily digestible fashion.",
+    "bio": "Zack Chapple - in his current role as a Software Architect at CareerBuilder he is leading the charge for UI convergence through an unifying vision around Atomic Design and Angular, while simultaneously breaking down silos across products and teams around the globe. Zack brings a distinct passion for software craftsmanship, testing and a contagious excitement for living on the bleeding edge of software. The best part is his background in teaching at development bootcamps for people of all skill levels, which helps him to convey complicated concepts in an easily digestible fashion.",
     "tags": [
       "Testing",
       "Angular CLI",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -381,7 +381,7 @@
     "tags": [
       "Progressive Web Apps",
       "Ionic 2",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -409,12 +409,12 @@
     "companyLogo": "",
     "country": "Canada",
     "photoUrl": "/images/people/RyanChenkie.jpg",
-    "shortBio": "Ryan is a full-stack JavaScript developer and works mostly with Angular 2 and Node. He's a Product Owner at Auth0 and also runs Angularcasts.io, a screencast site offering end-to-end Angular and JavaScript training. Ryan has a keen interest in authentication and identity in modern apps and loves contributing to the community with tutorial content and libraries such as angular2-jwt.",
-    "bio": "Ryan is a full-stack JavaScript developer and works mostly with Angular 2 and Node. He's a Product Owner at Auth0 and also runs Angularcasts.io, a screencast site offering end-to-end Angular and JavaScript training. Ryan has a keen interest in authentication and identity in modern apps and loves contributing to the community with tutorial content and libraries such as angular2-jwt.",
+    "shortBio": "Ryan is a full-stack JavaScript developer and works mostly with Angular and Node. He's a Product Owner at Auth0 and also runs Angularcasts.io, a screencast site offering end-to-end Angular and JavaScript training. Ryan has a keen interest in authentication and identity in modern apps and loves contributing to the community with tutorial content and libraries such as angular2-jwt.",
+    "bio": "Ryan is a full-stack JavaScript developer and works mostly with Angular and Node. He's a Product Owner at Auth0 and also runs Angularcasts.io, a screencast site offering end-to-end Angular and JavaScript training. Ryan has a keen interest in authentication and identity in modern apps and loves contributing to the community with tutorial content and libraries such as angular2-jwt.",
     "tags": [
       "Authentication",
       "JWT",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -447,7 +447,7 @@
     "tags": [
       "AOT",
       "Dynamic Components",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -475,7 +475,7 @@
     "bio": "Philippe De Ryck is a professional speaker and trainer on software security and web security. Since he obtained his PhD at the imec-DistriNet research group (KU Leuven, Belgium), he has been running the group's Web Security Training program, which ensures a sustainable knowledge transfer of the group’s security expertise towards practitioners.",
     "tags": [
       "Security",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -504,7 +504,7 @@
     "tags": [
       "Performance",
       "Optimization",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -533,7 +533,7 @@
     "bio": "JS maniac, author of ng2-bootstrap and couple of other ng2 and node.js modules.",
     "tags": [
       "Patterns",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -558,11 +558,11 @@
     "companyLogo": "",
     "country": "USA",
     "photoUrl": "/images/people/LeonardoZizzamia.jpg",
-    "shortBio": "Leonardo Zizzamia is a former Twitter engineer with a flare for front-end development and Angular. Throughout the past few years, he has been involved on many levels within the Angular community by helping blog, teach and spread the word. Throughout 2016, he has been making extensive use of both Angular2 and AngularJS to bring his startup project, Plan, to life. Leonardo is deeply passionate about big and original ideas and continuously sets out to reinvent himself through challenging software development efforts. He also hosts great dinner parties with amazing Italian food.",
-    "bio": "Leonardo Zizzamia is a former Twitter engineer with a flare for front-end development and Angular. Throughout the past few years, he has been involved on many levels within the Angular community by helping blog, teach and spread the word. Throughout 2016, he has been making extensive use of both Angular2 and AngularJS to bring his startup project, Plan, to life. Leonardo is deeply passionate about big and original ideas and continuously sets out to reinvent himself through challenging software development efforts. He also hosts great dinner parties with amazing Italian food.",
+    "shortBio": "Leonardo Zizzamia is a former Twitter engineer with a flare for front-end development and Angular. Throughout the past few years, he has been involved on many levels within the Angular community by helping blog, teach and spread the word. Throughout 2016, he has been making extensive use of both Angular and Angular 1.x to bring his startup project, Plan, to life. Leonardo is deeply passionate about big and original ideas and continuously sets out to reinvent himself through challenging software development efforts. He also hosts great dinner parties with amazing Italian food.",
+    "bio": "Leonardo Zizzamia is a former Twitter engineer with a flare for front-end development and Angular. Throughout the past few years, he has been involved on many levels within the Angular community by helping blog, teach and spread the word. Throughout 2016, he has been making extensive use of both Angular and Angular 1.x to bring his startup project, Plan, to life. Leonardo is deeply passionate about big and original ideas and continuously sets out to reinvent himself through challenging software development efforts. He also hosts great dinner parties with amazing Italian food.",
     "tags": [
       "Lifecycle Hooks",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -587,11 +587,11 @@
     "companyLogo": "",
     "country": "USA",
     "photoUrl": "/images/people/AnasRFirdousi.jpg",
-    "shortBio": "Anas.R.Firdousi is a active Angular JS community contributor. He has over decade of JavaScript and front-end experience under his belt.  He writes and speaks about ECMA 6/7,  Angular 2, Reactive Programming and others open source areas. He has lead front end teams at organizations like Apple and PayPal. He is the host of a new type of talk-less-code-more show called Angular Unplugged Show. Anas also heads the Angular Pakistan community and organize Angular meetups in Pakistan.",
-    "bio": "Anas.R.Firdousi is a active Angular JS community contributor. He has over decade of JavaScript and front-end experience under his belt.  He writes and speaks about ECMA 6/7,  Angular 2, Reactive Programming and others open source areas. He has lead front end teams at organizations like Apple and PayPal. He is the host of a new type of talk-less-code-more show called Angular Unplugged Show. Anas also heads the Angular Pakistan community and organize Angular meetups in Pakistan.",
+    "shortBio": "Anas.R.Firdousi is a active Angular JS community contributor. He has over decade of JavaScript and front-end experience under his belt.  He writes and speaks about ECMA 6/7,  Angular, Reactive Programming and others open source areas. He has lead front end teams at organizations like Apple and PayPal. He is the host of a new type of talk-less-code-more show called Angular Unplugged Show. Anas also heads the Angular Pakistan community and organize Angular meetups in Pakistan.",
+    "bio": "Anas.R.Firdousi is a active Angular JS community contributor. He has over decade of JavaScript and front-end experience under his belt.  He writes and speaks about ECMA 6/7,  Angular, Reactive Programming and others open source areas. He has lead front end teams at organizations like Apple and PayPal. He is the host of a new type of talk-less-code-more show called Angular Unplugged Show. Anas also heads the Angular Pakistan community and organize Angular meetups in Pakistan.",
     "tags": [
       "Architecture",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -624,7 +624,7 @@
     "bio": "David Muellerchen is a trainer at AngularJS.DE. He loves to speak and teach at meetups and conferences. In his meantime he works as a front-end developer at Acando. During leisure time he jumps through the parks with his kids or rides his racer. He also is a Organizer of the Hamburg AngularJS Meetup.",
     "tags": [
       "Angular CLI",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -657,7 +657,7 @@
     "bio": "User Experience Developer @ Mutual of Omaha. Former technical support representative turned renegade software engineer and web developer, driven by the need to help people through the code he writes. 3.5 years now into the web world, Sean is a member of the Webpack core team, angular team and angular-cli core team, has held talks on Ruby, DAMP programming, AngularJS, and Webpack and lives to teach others about the world of Web Development. From Lincoln, Nebraska, loves to spend his time with his wife, newborn son, 18 chickens, dog, and gypsy cat. Obsessed with AngularJS, readability, Webpack, bundlers, tooling, and anything that helps Web Dev and Engineering easier and more enjoyable for anyone!",
     "tags": [
       "Webpack",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -686,7 +686,7 @@
     "tags": [
       "Keynote",
       "Progressive Web Apps",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -714,7 +714,7 @@
     "bio": "Brecht is a trainer, blogger and software engineer passionate about architecture and best-practices. Brecht uses the technologies that he teaches in his workshops on a daily basis in different projects. One of his main activities is kickstarting new Angular projects in companies and guiding them in the right direction.",
     "tags": [
       "RxJS",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -742,11 +742,11 @@
     "companyLogo": "",
     "country": "Belgium",
     "photoUrl": "/images/people/KwintenPisman.jpg",
-    "shortBio": "Kwinten is a highly motivated developer with a passion for the fast changing front end world. He mainly focusses on Angular 2 and RxJS nowadays and transfers his knowledge to other developers through intensive coaching and workshops.",
-    "bio": "Kwinten is a highly motivated developer with a passion for the fast changing front end world. He mainly focusses on Angular 2 and RxJS nowadays and transfers his knowledge to other developers through intensive coaching and workshops.",
+    "shortBio": "Kwinten is a highly motivated developer with a passion for the fast changing front end world. He mainly focusses on Angular and RxJS nowadays and transfers his knowledge to other developers through intensive coaching and workshops.",
+    "bio": "Kwinten is a highly motivated developer with a passion for the fast changing front end world. He mainly focusses on Angular and RxJS nowadays and transfers his knowledge to other developers through intensive coaching and workshops.",
     "tags": [
       "RxJS",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -780,7 +780,7 @@
       "Progressive Web Apps",
       "Firebase",
       "Ionic 2",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -812,7 +812,7 @@
     "bio": "Nir is the Head of Angular Development at 500Tech - a leading front-end consultancy in Israel. He is a passionate JavaScript developer, international speaker, Angular evangelist and community activist.",
     "tags": [
       "Redux",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -843,7 +843,7 @@
     "shortBio": "Full Stack Teacher, passionate about web and mobile dev with Angular, TypeScript and .NET.",
     "bio": "Full Stack Teacher, passionate about web and mobile dev with Angular, TypeScript and .NET",
     "tags": [
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [],
@@ -875,7 +875,7 @@
     "bio": "Joe is a Viking (at heart). By day he is a mild-mannered author for Pluralsight.com. By night he is a mild-mannered organizer of ng-conf. He is a Google Developer Expert in Angular, gives lots of talks & workshops, and loves all things web.",
     "tags": [
       "Angular 1",
-      "Angular 2",
+
       "Angular"
     ],
     "badges": [{

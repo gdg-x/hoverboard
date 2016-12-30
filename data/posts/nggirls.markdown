@@ -13,7 +13,7 @@ Do you already have experience in front-end development? [Apply as a mentor](htt
 ## What is the schedule of the workshop day?
 The workshop will be held during the day.<br/>
 * 9:00 - Check in
-* 9:15 - Welcome and intro to Angular 2
+* 9:15 - Welcome and intro to Angular
 * 10:00 - Workshop begins!
 * 13:00 - Lunch break
 * 14:00 - Workshop resumes

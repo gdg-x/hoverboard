@@ -1,6 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
@@ -14,7 +13,7 @@
 <link rel="import" href="../behaviors/page-behavior.html">
 
 
-<dom-module id="ng-girls-page">
+<dom-module id="nggirls-page">
 
   <template>
 
@@ -41,12 +40,12 @@
       }
     </style>
 
-    <iron-ajax auto id="ajax" url="[[source]]" handle-as="text" on-response="_updateCascadedNodes" last-response="{{ng-girls}}"></iron-ajax>
+    <iron-ajax auto id="ajax" url="[[source]]" handle-as="text" on-response="_updateCascadedNodes" last-response="{{nggirls}}"></iron-ajax>
 
     <div class="container">
       <div class="details">
         <div class="details-item" cascaded>
-          <marked-element markdown="[[ng-girls]]">
+          <marked-element markdown="[[nggirls]]">
             <div class="markdown-html"></div>
           </marked-element>
         </div>
@@ -63,7 +62,7 @@
 
       Polymer({
 
-        is: 'ng-girls-page',
+        is: 'nggirls-page',
 
         behaviors: [
           Polymer.NeonSharedElementAnimatableBehavior,
@@ -73,7 +72,7 @@
         properties: {
           source: {
             type: String,
-            value: 'data/posts/ng-girls.markdown'
+            value: 'data/posts/nggirls.markdown'
           },
 
           animationConfig: {

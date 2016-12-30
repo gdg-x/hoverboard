@@ -1,0 +1,22 @@
+# Angular. Just Angular.
+
+Let the last day of 2016 be the last day of annoying explicit "2" version mentioning in talks and workshop titles. Starting from NOW: we say "Angular" - we mean Angular "2" or later. Everywhere on this website.
+
+ngVikings 2017 Conference will be the first event following this recommendation by Angular team after their switch to Semantic Versioning (SEMVER).
+
+There is a great guest blog post ["Ok... let me explain: it's going to be Angular 4.0, or just Angular"](http://angularjs.blogspot.com/2016/12/ok-let-me-explain-its-going-to-be.html) by [Juri Strumpflohner](https://twitter.com/juristr) explaining all in details, here is the summary about naming from there:
+
+__Basically from now on, name all versions of Angular simply “Angular”. Try to avoid using the version number, unless it is really necessary to disambiguate.__
+
+Three simple guidelines:
+
+- Use “Angular” by default (e.g. “I’m an Angular developer”, “This is an Angular meetup”, “The Angular ecosystem is growing quickly”)
+- Use “Angular 1”, “Angular 2”, “Angular 4” when talking about a specific release train (e.g. when talking about a newly introduced feature - “This is an introduction to feature X, introduced in Angular 4”, “We are upgrading from Angular 1 to Angular 2”, “I’m proposing this change for Angular 5”)
+- Use full semver version when reporting a bug (e.g. “This issue is present as of Angular 2.3.1”)
+
+&nbsp;
+* * *
+&nbsp;
+
+## Any questions?
+Email organizers at [contact@ngvikings.org](mailto:contact@ngvikings.org)

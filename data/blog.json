@@ -37,12 +37,12 @@
     },
     {
       "id": "workshops",
-      "title": "Get to the next level: 5 full-day Angular 2 workshops for the very good price!",
+      "title": "Get to the next level: 5 full-day Angular workshops for the very good price!",
       "posted": "2016-12-18",
       "primaryColor": "#012250",
       "secondaryColor": "#012250",
       "image": "images/backgrounds/speakers.jpg",
-      "brief": "Internationally renowned trainers, influencers, the persons you know by their presentations for the best developer conferences, by their blog posts and Angular community activities, will teach you Angular 2 basics, best practices, advanced techniques and surrounding technologies"
+      "brief": "Internationally renowned trainers, influencers, the persons you know by their presentations for the best developer conferences, by their blog posts and Angular community activities, will teach you Angular basics, best practices, advanced techniques and surrounding technologies"
     },
     {
       "id": "program",
@@ -52,5 +52,14 @@
       "secondaryColor": "#012250",
       "image": "images/backgrounds/team.jpg",
       "brief": "We are excited to present 100% of our speakers and sessions: 21 technical, in-depth sessions about Angular and satellite technologies with the main focus on practical usage."
+    },
+    {
+      "id": "angular",
+      "title": "Angular. Just Angular.",
+      "posted": "2016-12-31",
+      "primaryColor": "#012250",
+      "secondaryColor": "#012250",
+      "image": "images/backgrounds/speakers.jpg",
+      "brief": "Let the last day of 2016 be the last day of annoying explicit \"2\" version mentioning in talks and workshop titles. Starting from NOW: we say \"Angular\" - we mean Angular \"2\" or later. Everywhere on this website."
     }
 ]
