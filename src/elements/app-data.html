@@ -5,19 +5,17 @@
 
 <dom-module id="app-data">
   <template>
-    <iron-ajax auto url="[[configSource]]" handle-as="json" last-response="{{app.data}}">
-    </iron-ajax> <iron-ajax auto url="[[postsSource]]" handle-as="json" on-response="_reversePosts"></iron-ajax>
+    <iron-ajax auto url="[[postsSource]]" handle-as="json" on-response="_reversePosts"></iron-ajax>
 
-    <template is="dom-if" if="[[app.data]]">
     <firebase-document
       id="querySpeakers"
-      app-name="[[app.data.firebase.name]]"
+      app-name="{$ firebase.name $}"
       path="/speakers"
       data="{{_firebaseSpeakersRaw}}">
     </firebase-document>
 
     <app-indexeddb-mirror
-      session="[[app.data.firebase.indexedDbSession]]"
+      session="{$ firebase.indexedDbSession $}"
       key="speakers"
       data="{{_firebaseSpeakersRaw}}"
       persisted-data="{{_speakersRaw}}">
@@ -25,27 +23,27 @@
 
     <firebase-document
       id="querySessions"
-      app-name="[[app.data.firebase.name]]"
+      app-name="{$ firebase.name $}"
       path="/sessions"
       data="{{_firebaseSessions}}">
     </firebase-document>
 
     <app-indexeddb-mirror
       session="devfest"
-      key="[[app.data.firebase.indexedDbSession]]"
+      key="{$ firebase.indexedDbSession $}"
       data="{{_firebaseSessions}}"
       persisted-data="{{sessions}}">
     </app-indexeddb-mirror>
 
     <firebase-document
       id="querySchedule"
-      app-name="[[app.data.firebase.name]]"
+      app-name="{$ firebase.name $}"
       path="/schedule"
       data="{{_firebaseSchedule}}">
     </firebase-document>
 
     <app-indexeddb-mirror
-      session="[[app.data.firebase.indexedDbSession]]"
+      session="{$ firebase.indexedDbSession $}"
       key="schedule"
       data="{{_firebaseSchedule}}"
       persisted-data="{{_scheduleRaw}}">
@@ -53,13 +51,13 @@
 
     <firebase-query
       id="queryPartners"
-      app-name="[[app.data.firebase.name]]"
+      app-name="{$ firebase.name $}"
       path="/partners"
       data="{{_firebasePartners}}">
     </firebase-query>
 
     <app-indexeddb-mirror
-      session="[[app.data.firebase.indexedDbSession]]"
+      session="{$ firebase.indexedDbSession $}"
       key="partners"
       data="{{_firebasePartners}}"
       persisted-data="{{app.partners}}">
@@ -67,32 +65,31 @@
 
     <firebase-document
       id="queryVideos"
-      app-name="[[app.data.firebase.name]]"
+      app-name="{$ firebase.name $}"
       path="/videos"
       data="{{_firebaseVideos}}">
     </firebase-document>
 
     <app-indexeddb-mirror
-      session="[[app.data.firebase.indexedDbSession]]"
+      session="{$ firebase.indexedDbSession $}"
       key="videos"
       data="{{_firebaseVideos}}"
       persisted-data="{{app.videos}}">
     </app-indexeddb-mirror>
 
-    <firebase-document
-      id="queryVideos"
-      app-name="[[app.data.firebase.name]]"
+    <firebase-query
+      id="queryTeam"
+      app-name="{$ firebase.name $}"
       path="/team"
       data="{{_firebaseTeam}}">
-    </firebase-document>
+    </firebase-query>
 
     <app-indexeddb-mirror
-      session="[[app.data.firebase.indexedDbSession]]"
+      session="{$ firebase.indexedDbSession $}"
       key="team"
       data="{{_firebaseTeam}}"
       persisted-data="{{app.team}}">
     </app-indexeddb-mirror>
-  </template>
 
   </template>
   <script>
@@ -106,11 +103,6 @@
           app: {
             type: Object,
             notify: true
-          },
-
-          configSource: {
-            type: String,
-            value: 'data/hoverboard.config.json'
           },
 
           postsSource: {
@@ -183,7 +175,7 @@
         },
 
         _getSession: function (sessionId, day, dayIndex, schedule) {
-          var session = this.sessions[sessionId] || this.sessions[sessionId.id];
+          var session = this.sessions[sessionId];
           if (!session) {return;}
           session.mainTag = session.tags ? session.tags[0] : 'General';
           session.day = dayIndex + 1;
