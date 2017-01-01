@@ -112,6 +112,13 @@
       data="{{routeData}}"
       tail="{{subRoute}}"></app-route>
 
+    <firebase-app
+      name="{$ firebase.name $}"
+      auth-domain="{$ firebase.domain $}"
+      database-url="{$ firebase.database $}"
+      api-key="{$ firebase.api $}">
+    </firebase-app>
+
     <app-data
       app="{{app}}"
       speakers="{{speakers}}"
@@ -120,19 +127,11 @@
       posts="{{posts}}"
     ></app-data>
 
-    <firebase-app
-      name="{$ firebase.name $}"
-      auth-domain="{$ firebase.domain $}"
-      database-url="{$ firebase.database $}"
-      api-key="{$ firebase.api $}"
-    >
-    </firebase-app>
     <firebase-auth
       id="auth"
       provider="google"
       app-name="{$ firebase.name $}"
-      user="{{app.user}}"
-    >
+      user="{{app.user}}">
     </firebase-auth>
 
     <app-drawer-layout id="drawerLayout" drawer-width="599px" force-narrow>

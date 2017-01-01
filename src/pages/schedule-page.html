@@ -54,7 +54,7 @@
     </firebase-document>
 
     <app-indexeddb-mirror
-      session="[[app.user.uid]]"
+      session="{$ firebase.indexedDbSession $}"
       key="mySchedule"
       data="{{persistedData}}"
       persisted-data="{{app.user.sessions}}">
