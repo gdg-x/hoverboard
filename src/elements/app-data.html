@@ -115,11 +115,16 @@
             notify: true
           },
 
+          posts: {
+            type: Array,
+            notify: true
+          },
+          
           speakers: {
             type: Array,
             notify: true
           },
-
+          
           sessions: {
             type: Array,
             notify: true
@@ -128,6 +133,18 @@
           schedule: {
             type: Array,
             notify: true
+          },
+
+          _speakersRaw: {
+            type: Object
+          },
+
+          _sessionsRaw: {
+            type: Object
+          },
+
+          _scheduleRaw: {
+            type: Array
           }
         },
 
