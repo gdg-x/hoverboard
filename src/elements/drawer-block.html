@@ -94,11 +94,11 @@
         selected-class="selected"
       >
         {% for nav in navigation %}
-          <a class="navigation-link" name="{$ nav.route $}" href$="{$ nav.permalink $}" on-tap="closeDrawer">
+          <a class="navigation-link" href="{$ nav.permalink $}" name="{$ nav.route $}" on-tap="closeDrawer">
             {$ pages[nav.route].title $}
           </a>
         {% endfor %}
-        <a class="navigation-link" href$="{$ tickets.url $}" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
+        <a class="navigation-link" href="{$ tickets.url $}" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
           {$ buyTicket $}
           <iron-icon
             class="open-in-new"
