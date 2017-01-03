@@ -131,8 +131,9 @@
       id="auth"
       provider="google"
       app-name="{$ firebase.name $}"
-      user="{{app.user}}">
-    </firebase-auth>
+      user="{{app.user}}"
+      status-known="{{_authStatusKnown}}"
+    ></firebase-auth>
 
     <app-drawer-layout id="drawerLayout" drawer-width="599px" force-narrow>
 
@@ -236,10 +237,15 @@
             notify: true,
             value: function () {
               return {
-                lang: 'en',
                 user: {}
               };
             }
+          },
+
+          _authStatusKnown: {
+            type: Boolean,
+            value: false,
+            observer: '_autoSignIn'
           },
 
           page: {
@@ -345,11 +351,61 @@
         },
 
         signIn: function () {
-          HOVERBOARD.Elements.Template.$.auth.signInWithPopup();
+          this.$.auth.signInWithPopup()
+            .then(function (signInObject) {
+              if (navigator.credentials) {
+                var cred = new FederatedCredential({
+                  id: signInObject.user.email,
+                  name: signInObject.user.displayName,
+                  iconURL: signInObject.user.photoURL,
+                  provider: 'https://accounts.google.com'
+                });
+
+                navigator.credentials.store(cred);
+              }
+            });
         },
 
         signOut: function () {
-          this.$.auth.signOut();
+          this.$.auth.signOut()
+            .then(function () {
+              if (navigator.credentials) {
+                navigator.credentials.requireUserMediation();
+              }
+            });
+        },
+
+        _autoSignIn: function (authStatusKnown) {
+          if (navigator.credentials
+            && authStatusKnown
+            && !this.app.user) {
+            return navigator.credentials.get({
+              password: true,
+              federated: {
+                providers: ['https://accounts.google.com']
+              },
+              unmediated: true
+            }).then(function (cred) {
+              if (cred) {
+                this.gSignIn(cred.id);
+              }
+            }.bind(this));
+          }
+        },
+
+        gSignIn: function (id) {
+          return (function () {
+            if (this.app.user && this.app.user.email === id) {
+              return Promise.resolve(this.app.user);
+            }
+
+            var provider = new firebase.auth.GoogleAuthProvider();
+            provider.setCustomParameters({
+              'login_hint': id || ''
+            });
+
+            return this.$.auth.signInWithPopup(provider);
+          }.bind(this))();
         }
 
       });
