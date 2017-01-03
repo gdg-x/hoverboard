@@ -120,7 +120,7 @@
         color: var(--text-primary-color);
       }
 
-      .myschedue-button[disabled] {
+      .myschedule-button[disabled] {
         opacity: 0;
       }
     </style>
@@ -160,7 +160,7 @@
       <template is="dom-if" if="[[_showDaySelector(app.isPhoneSize, selectedDay)]]">
         <paper-menu-button vertical-align="top" horizontal-align="left">
           <paper-button class="dropdown-trigger">
-            [[_getDayLabel(selectedDay)]]
+            [[_getDayLabel(selectedDay, schedule)]]
             <iron-icon icon="arrow-drop-down"></iron-icon>
           </paper-button>
           <paper-menu
@@ -188,7 +188,7 @@
       </template>
 
       <div layout horizontal center>
-        <div class="myschedue-button"
+        <div class="myschedule-button"
              hidden$="[[!_displayPersonIcon(app.isPhoneSize, app.user)]]"
              disabled$="[[_isMySchedulePage(selectedDay)]]">
           <a href="/schedule/myschedule">
@@ -361,7 +361,7 @@
         },
 
         _getDayLabel: function (selectedDay) {
-          if (this._isMySchedulePage(selectedDay)) return;
+          if (!this.schedule || this._isMySchedulePage(selectedDay)) return;
 
           var index = Number(selectedDay.match(/\d+/)[0]);
           return this.schedule[index - 1].dateReadable;

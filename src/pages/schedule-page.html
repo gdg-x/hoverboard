@@ -151,9 +151,11 @@
             if (!day) {
               var dayToSelect = null;
               var today = new Date().toISOString().substring(0, 10);
-              for (var i = 0, length = this.schedule.length; i < length; i++) {
-                if (today === this.schedule[i].date) {
-                  dayToSelect = 'day' + (i + 1);
+              if (this.schedule) {
+                for (var i = 0, length = this.schedule.length; i < length; i++) {
+                  if (today === this.schedule[i].date) {
+                    dayToSelect = 'day' + (i + 1);
+                  }
                 }
               }
               this.set('routeData.day', (dayToSelect || 'day1'));
