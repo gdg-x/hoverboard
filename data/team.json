@@ -131,6 +131,22 @@
           "name": "Twitter"
         }],
         "title": "Co-organizer"
+      },      
+      {
+        "name": "Mohsen Asfia",
+        "photoUrl": "/images/people/mohsen.png",
+        "socials": [
+        {
+          "icon": "linkedin",
+          "link": "https://dk.linkedin.com/in/asfia",
+          "name": "Linkedin"
+        },
+        {
+          "icon": "facebook",
+          "link": "https://www.facebook.com/people/Mohsen-Asfia/1529957082",
+          "name": "Facebook"
+        }],
+        "title": "Co-organizer"
       },
       {
         "name": "Cem Turan",
@@ -219,22 +235,6 @@
       },
       {
         "name": "Marco Pegoraro",
-        "photoUrl": "/images/people/anonymous.png",
-        "socials": [
-        {
-          "icon": "github",
-          "link": "https://github.com/",
-          "name": "GitHub"
-        },
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/",
-          "name": "Twitter"
-        }],
-        "title": "Contributor"
-      },
-      {
-        "name": "Mohsen Asfia",
         "photoUrl": "/images/people/anonymous.png",
         "socials": [
         {
