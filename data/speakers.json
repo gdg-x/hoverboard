@@ -151,7 +151,7 @@
     "shortBio": "Tracy is a speaker, writer, and serial entrepreneur passionate about JavaScript and new technologies. After the acquisition of her last startup, she learned how to code and spends her time as a junior developer these days. Tracy spends her time building the JS community through her new startup, This Dot and runs the Modern Web podcast and events.",
     "bio": "Tracy is a speaker, writer, and serial entrepreneur passionate about JavaScript and new technologies. After the acquisition of her last startup, she learned how to code and spends her time as a junior developer these days. Tracy spends her time building the JS community through her new startup, This Dot and runs the Modern Web podcast and events. She loves open source projects, pairing with friends, and empowering people to do awesome things. Tracy is also an organizer of ng-cruise and track chair for QCon.",
     "tags": [
-      "Angular Material 2",
+      "Angular Material",
 
       "Angular"
     ],
@@ -895,6 +895,38 @@
       "icon": "github",
       "name": "GitHub",
       "link": "https://github.com/joeeames"
+    }]
+  },
+
+  "88": {
+    "id": 88,
+    "featured": true,
+    "name": "Shmuela Jacobs",
+    "title": "Senior Front-End Developer",
+    "company": "500Tech",
+    "companyLogo": "",
+    "country": "Israel",
+    "photoUrl": "/images/people/ShmuelaJacobs.jpg",
+    "shortBio": "Shmuela Jacobs is a senior front-end developer and consultant mastering Angular, at 500Tech, a leading Web development consultancy in Israel. During her academic studies (M.Sc. in Information Management Engineering and B.Sc. in Physics) she has combined her passions of coding and teaching as a software developer, teaching assistant, science museum guide, and researcher. Today she continues to enjoy these activities as a full-time front end developer, sharing her knowledge and experience in meetups and conferences. Shmuela currently resides in Tel Aviv with her husband Haggai, their deaf dog Ziggi, and their one-eyed cat Franco.",
+    "bio": "Shmuela Jacobs is a senior front-end developer and consultant mastering Angular, at 500Tech, a leading Web development consultancy in Israel. During her academic studies (M.Sc. in Information Management Engineering and B.Sc. in Physics) she has combined her passions of coding and teaching as a software developer, teaching assistant, science museum guide, and researcher. Today she continues to enjoy these activities as a full-time front end developer, sharing her knowledge and experience in meetups and conferences. Shmuela currently resides in Tel Aviv with her husband Haggai, their deaf dog Ziggi, and their one-eyed cat Franco.",
+    "tags": [
+      "Community",
+
+      "Angular"
+    ],
+    "badges": [],
+    "socials": [{
+      "icon": "website",
+      "name": "Website",
+      "link": "http://ng-girls.org"
+    }, {
+      "icon": "twitter",
+      "name": "Twitter",
+      "link": "https://twitter.com/ShmuelaJ"
+    }, {
+      "icon": "github",
+      "name": "GitHub",
+      "link": "https://github.com/shmool"
     }]
   }
 

@@ -3,6 +3,16 @@
     "title": "sponsors",
     "logos": [
       {
+        "name": "Lund&Bendsen",
+        "url": "https://lundogbendsen.dk",
+        "logoUrl": "../images/logos/lundogbendsen.png"
+      },
+      {
+        "name": "7N",
+        "url": "https://www.7n.com/",
+        "logoUrl": "../images/logos/7n.png"
+      },
+      {
         "name": "Microsoft",
         "url": "http://www.microsoft.com/",
         "logoUrl": "../images/logos/microsoft.png"
@@ -72,6 +82,16 @@
   {
     "title": "community-partners",
     "logos": [
+      {
+        "name": "Angular Toulouse",
+        "url": "https://www.meetup.com/angulartoulouse/",
+        "logoUrl": "../images/logos/angulartoulouse.png"
+      },
+      {
+        "name": "dotJS",
+        "url": "https://dotjs.io",
+        "logoUrl": "../images/logos/dotjs.png"
+      },
       {
         "name": "ngGirls",
         "url": "http://ng-girls.org/",

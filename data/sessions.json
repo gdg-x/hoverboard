@@ -117,6 +117,20 @@
     "complexity": "Beginner"
   },
 
+  "88": {
+    "id": 88,
+    "title": "ngGirls @ ngVikings",
+    "description": "Are you a woman interested in learning how to build web applications with the latest technologies? We have good news for you: We are holding a one-day workshop for beginners! During the workshop you will build and deploy your very first Angular Web Application! Angular is an open-source platform for building web application, developed by Google and the community. It gives various tools to easily create a dynamic, interactive app that can run on desktop browses, mobile and even robots!<br /><b><a href='https://goo.gl/forms/54BNs02vlwoIVT7I3'>Get the ticket</a></b>",
+    "speakers": [
+      88
+    ],
+    "tags": [
+      "Community",
+      "Angular"
+    ],
+    "complexity": "Beginner"
+  },
+
   "11": {
     "id": 11,
     "title": "Step by Step: Improving Startup Performance with Lazy Loading in Angular",
@@ -180,7 +194,7 @@
       15
     ],
     "tags": [
-      "Angular Material 2",
+      "Angular Material",
 
       "Angular"
     ]
@@ -377,7 +391,7 @@
 
   "30": {
     "id": 30,
-    "title": "Angular CLI Jumpstart",
+    "title": "angular-cli - Coding like a viking",
     "description": "Let me introduce you my big love, Angular CLI. Scaffolding a Angular app and show you some tip for your projects.",
     "speakers": [
       30

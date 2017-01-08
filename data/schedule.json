@@ -1,6 +1,6 @@
 [{
   "date": "2017-02-11",
-  "dateReadable": "February 11",
+  "dateReadable": "February 11 - Conference Day",
   "tracks": [{
     "title": "Room: Bifrost"
   }, {
@@ -121,7 +121,7 @@
   }]
 }, {
   "date": "2017-02-12",
-  "dateReadable": "February 12",
+  "dateReadable": "February 12 - Workshops Day",
   "tracks": [{
     "title": "Workshops room #1"
   }, {
@@ -134,6 +134,8 @@
     "title": "Workshops room #5"
   }, {
     "title": "Workshops room #6"
+  }, {
+    "title": "Workshops room #7"
   }],
   "timeslots": [{
     "startTime": "09:30",
@@ -150,7 +152,8 @@
       [84],
       [85],
       [86],
-      [87]
+      [87],
+      [88]
     ]
   }]
 }]
