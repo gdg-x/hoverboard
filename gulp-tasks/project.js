@@ -54,8 +54,7 @@ function rejoin() {
 // either bundled or unbundled. If this argument is omitted it will output both
 function merge(source, dependencies) {
   return function output() {
-    const mergedFiles = mergeStream(source(), dependencies())
-      .pipe(project.analyzer);
+    const mergedFiles = mergeStream(source(), dependencies());
     const bundleType = global.config.build.bundleType;
     let outputs = [];
 
