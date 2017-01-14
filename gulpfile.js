@@ -143,38 +143,25 @@
 //   project.serviceWorker
 // ]));
 //
-// gulp.task('serve', gulp.series('template', () => {
-//   browserSync.init({
-//     logPrefix: 'Hoverboard',
-//     notify: false,
-//     server: {
-//       baseDir: ['.temp', './'],
-//       middleware: [history()]
-//     }
-//   });
 //
-//   gulp.watch([
-//     'data/**/*.{markdown,md}',
-//     'images/**/*.{png,gif,jpg,svg}',
-//   ]).on('change', reload);
-//
-//   gulp.watch([
-//     'data/**/*.json',
-//     'scripts/**/*.js',
-//     'src/**/*.html',
-//     './index.html',
-//     'manifest.json'
-//   ], gulp.series('template', reload));
-// }));
 
 
 const del = require('del');
 const gulp = require('gulp');
 const gulpif = require('gulp-if');
 const imagemin = require('gulp-imagemin');
+const uglify = require('gulp-uglify');
+const cssSlam = require('css-slam').gulp;
+const htmlmin = require('gulp-htmlmin');
 const mergeStream = require('merge-stream');
 const polymerBuild = require('polymer-build');
 const requireUncached = require('require-uncached');
+const replace = require('gulp-replace');
+const browserSync = require('browser-sync').create();
+const history = require('connect-history-api-fallback');
+
+const logging = require('plylog');
+// logging.setVerbose();
 
 const config = {
   polymerJsonPath: './polymer.json',
@@ -182,7 +169,7 @@ const config = {
     rootDirectory: 'build',
     bundleType: 'bundled'
   },
-  serviceWorkerPath: './service-worker.js',
+  serviceWorkerPath: 'service-worker.js',
   swPrecacheConfigPath: './sw-precache-config.js',
   templateData: [
     './data/hoverboard.config',
@@ -215,29 +202,65 @@ function compileTemplate() {
     metadata = Object.assign({}, metadata, requireUncached(file));
   }
   console.log(`Compiling...`);
-  return gulp.src([
+  let compileStream = gulp.src([
     ...polymerJson.sources,
     polymerJson.entrypoint
   ], {base: '.'})
     .pipe(gulpif(/\.(html|js|json)$/, template.compile(metadata)))
+    .pipe(gulpif(/\.(html|js)$/, replace('bower_components', '../bower_components')))
     .pipe(gulp.dest(config.tempDirectory));
+  return waitFor(compileStream);
 }
 
 function build() {
-  return new Promise((resolve, reject)=> {
-    console.log(`Deleting ${config.build.rootDirectory} and ${config.tempDirectory} directory...`);
-    del([config.build.rootDirectory])
-      // .then(compileTemplate)
+  return new Promise((resolve, reject) => {
+    let polymerProject = null;
+    console.log(`Deleting ${config.build.rootDirectory} and ${config.tempDirectory} directories...`);
+    del([config.build.rootDirectory, config.tempDirectory])
+      .then(compileTemplate)
       .then(() => {
-        const polymerProject = new polymerBuild.PolymerProject(buildPolymerJson);
+        polymerProject = new polymerBuild.PolymerProject(buildPolymerJson);
         console.log(`Polymer building...`);
-        console.log(buildPolymerJson);
         let sourcesStream = polymerProject.sources()
           .pipe(polymerProject.splitHtml())
+          // splitHtml doesn't split CSS https://github.com/Polymer/polymer-build/issues/32
+          .pipe(gulpif(/\.js$/, uglify()))
+          .pipe(gulpif(/\.(html|css)$/, cssSlam()))
+          .pipe(gulpif(/\.html$/, htmlmin({
+            caseSensitive: true,
+            collapseWhitespace: true,
+            collapseInlineTagWhitespace: true,
+            removeComments: true,
+            removeCommentsFromCDATA: true,
+            customAttrAssign: [/\$=/],
+            customAttrSurround: [
+              [{'source': '\\({\\{'}, {'source': '\\}\\}'}],
+              [{'source': '\\[\\['}, {'source': '\\]\\]'}]
+            ]
+          })))
+          .pipe(gulpif(/\.(png|gif|jpg|svg)$/, imagemin({
+            progressive: true,
+            interlaced: true
+          })))
           .pipe(polymerProject.rejoinHtml());
 
         let dependenciesStream = polymerProject.dependencies()
           .pipe(polymerProject.splitHtml())
+          // Doesn't work for now
+          // .pipe(gulpif(/\.js$/, uglify()))
+          .pipe(gulpif(/\.(html|css)$/, cssSlam()))
+          .pipe(gulpif(/\.html$/, htmlmin({
+            caseSensitive: true,
+            collapseWhitespace: true,
+            collapseInlineTagWhitespace: true,
+            removeComments: true,
+            removeCommentsFromCDATA: true,
+            customAttrAssign: [/\$=/],
+            customAttrSurround: [
+              [{'source': '\\({\\{'}, {'source': '\\}\\}'}],
+              [{'source': '\\[\\['}, {'source': '\\]\\]'}]
+            ]
+          })))
           .pipe(polymerProject.rejoinHtml());
 
         let buildStream = mergeStream(sourcesStream, dependenciesStream)
@@ -249,15 +272,32 @@ function build() {
         buildStream = buildStream.pipe(gulp.dest(config.build.rootDirectory));
         return waitFor(buildStream);
       })
-      // .then(() => {
-      //   console.log('Generating the Service Worker...');
-      //   return polymerBuild.addServiceWorker({
-      //     project: polymerProject,
-      //     buildRoot: config.build.rootDirectory,
-      //     bundled: true,
-      //     swPrecacheConfig: swPrecacheConfig
-      //   });
-      // })
+      .then(() => {
+        console.log('Generating the Service Worker...');
+        return polymerBuild.addServiceWorker({
+          project: polymerProject,
+          buildRoot: `${config.build.rootDirectory}/${config.tempDirectory}`.replace('\\', '/'),
+          bundled: true,
+          swPrecacheConfig
+          // swPrecacheConfig: {
+          //   staticFileGlobs: swPrecacheConfig.staticFileGlobs.reduce((res, el) => [...res, `${config.tempDirectory}/${el}`], []),
+          //   navigateFallback: `${config.tempDirectory}/${swPrecacheConfig.navigateFallback}`,
+          //   navigateFallbackWhitelist: swPrecacheConfig.navigateFallbackWhitelist
+          // }
+        });
+      })
+      .then(() => {
+        console.log('Normalizing...');
+        let normalizeStream = gulp.src(`${config.build.rootDirectory}/${config.tempDirectory}/**/*`,
+          {base: `${config.build.rootDirectory}/${config.tempDirectory}`})
+          .pipe(gulpif(/\.(html|js)$/, replace('../bower_components', 'bower_components')))
+          .pipe(gulpif(/\.(html|js)$/, replace('/.temp', '')))
+          .pipe(gulp.dest(config.build.rootDirectory));
+        return waitFor(normalizeStream);
+      })
+      .then(() => {
+        del([`${config.build.rootDirectory}/${config.tempDirectory}`])
+      })
       .then(() => {
         console.log('Build complete!');
         resolve();
@@ -266,5 +306,27 @@ function build() {
 }
 
 gulp.task('default', build);
-gulp.task('compile', compileTemplate);
+gulp.task('serve', gulp.series(compileTemplate, () => {
+  browserSync.init({
+    logPrefix: 'Hoverboard',
+    notify: false,
+    server: {
+      baseDir: [config.tempDirectory, './'],
+      middleware: [history()]
+    }
+  });
+
+  gulp.watch([
+    'data/**/*.{markdown,md}',
+    'images/**/*.{png,gif,jpg,svg}',
+  ]).on('change', reload);
+
+  gulp.watch([
+    'data/**/*.json',
+    'scripts/**/*.js',
+    'src/**/*.html',
+    './index.html',
+    'manifest.json'
+  ], gulp.series(compileTemplate, reload));
+}));
 
