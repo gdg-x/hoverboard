@@ -29,7 +29,6 @@ const config = {
 const swPrecacheConfig = require(config.swPrecacheConfigPath);
 const polymerJson = require(config.polymerJsonPath);
 const buildPolymerJson = {
-  entrypoint2: prependPath(config.tempDirectory, polymerJson.entrypoint),
   entrypoint: prependPath(config.tempDirectory, polymerJson.entrypoint),
   shell: prependPath(config.tempDirectory, polymerJson.shell),
   fragments: polymerJson.fragments.reduce((res, el) => [...res, prependPath(config.tempDirectory, el)], []),
