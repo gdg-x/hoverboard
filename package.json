@@ -17,10 +17,11 @@
     "gulp-if": "^2.0.0",
     "gulp-imagemin": "^3.1.0",
     "gulp-nunjucks": "^2.3.0",
+    "gulp-replace": "^0.5.0",
     "gulp-uglify": "^2.0.0",
     "merge-stream": "^1.0.0",
     "plylog": "^0.4.0",
-    "polymer-build": "^0.4.0",
+    "polymer-build": "^0.6.0",
     "require-uncached": "^1.0.0"
   },
   "engines": {
