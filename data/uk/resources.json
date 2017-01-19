@@ -55,6 +55,8 @@
   "youShouldSignIn": "Залогуйтесь, щоб зберегти сесію",
   "removedFromSchedule": "Видалено з Мого Розкладу",
   "addedToSchedule": "Додано в Мій Розклад",
+  "rateSession": "Оцініть доповідь",
+
   "pages": {
     "home": {
       "title": "Головна",

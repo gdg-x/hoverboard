@@ -21,6 +21,7 @@
     "database": "https://hoverboard-experimental.firebaseio.com",
     "api": "AIzaSyALDa2D7CMhK_wt2VkET1MaJuQXYVUJd2I",
     "userSessionsPath": "/userSessions",
+    "ratingsPath": "/ratings",
     "indexedDbSession": "hoverboard"
   },
   "mailchimp": {
