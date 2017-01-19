@@ -50,8 +50,6 @@ The diagram below is a brief summary of the directories within the PSK.
     /
     |---bower_components/
     |---build/
-    |   |---bundled/
-    |   |---unbundled/
     |---data/
     |---docs/
     |---images/
@@ -67,11 +65,6 @@ The diagram below is a brief summary of the directories within the PSK.
 
 *   `bower_components/` is the place for project dependencies.
 *   `build/` is the directory to deploy to production.
-*   `bundled/` - here all fragments are bundled together to reduce the number 
-    of file requests. Optimal for sending to clients or serving from servers 
-    that are not HTTP/2 compatible.
-*   `unbundled/` - an app where fragments are unbundled. Optimal for 
-    HTTP/2-compatible servers and clients. 
 *   `data/` folder with all data for the template including config, blog, 
     partners, schedule, sessions, speakers, team and videos.
 *   `docs/` contains optional "recipes" (how-to guides) for adding features
