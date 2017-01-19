@@ -96,11 +96,11 @@ The Hoverboard is ready to be built and ran locally.
 
 1.  Serve the app locally.
 
-        polymer serve
+        gulp serve
 
 1.  Build the app.
 
-        polymer build
+        gulp
 
     More options you can find on [polymer-cli][polymer-cli] repository.
 
