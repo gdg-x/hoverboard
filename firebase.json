@@ -3,7 +3,7 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "public": "./build/bundled",
+    "public": "./build",
     "cleanUrls": true,
     "rewrites": [
       {

@@ -35,7 +35,7 @@ The instructions below are based on the [Firebase quick start][Firebase quick st
 
 1.  Build
 
-        polymer build
+        gulp
 
 1.  Deploy
 
