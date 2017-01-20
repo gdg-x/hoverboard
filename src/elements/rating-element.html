@@ -24,7 +24,7 @@
     </style>
 
     <template is="dom-repeat" items="[[points]]" as="point">
-      <paper-icon-button icon=[[icon]] class$="[[isActive(point, rate)]]" on-tap="setRate"></paper-icon-button>
+      <paper-icon-button icon=[[icon]] class$="[[isActive(point, rate)]]" disabled="[[disabled]]" on-tap="setRate"></paper-icon-button>
     </template>
   </template>
 
@@ -53,6 +53,11 @@
             type: Number,
             notify: true,
             value: 0
+          },
+
+          disabled: {
+            type: Boolean,
+            value: false
           }
         },
 

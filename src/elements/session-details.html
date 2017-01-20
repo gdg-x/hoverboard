@@ -174,7 +174,7 @@
         </div>
 
         <div class="label">{$ rateSession $}</div>
-        <rating-element rate={{rate}}></rating-element>
+        <rating-element rate={{rate}} disabled$="[[!online]]"></rating-element>
       </div>
 
       <template is="dom-if" if="{{session.speakers.length}}">
@@ -261,6 +261,8 @@
         },
 
         _sessionChanged: function () {
+          this._lazyInitialize();
+          this.set('rate', this.app.user.ratings.sessions[this.session.id] || 0);
           var generatedClass = this._generateClass(this.session.mainTag);
           this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + generatedClass + ')';
           this._previousBrowserColor = HOVERBOARD.Util.getMetaThemeColor();
@@ -301,7 +303,7 @@
         },
 
         rateSession: function () {
-          if (!this.online || !this.session) {
+          if (!this.online || !this.session || !this.rate) {
             return;
           }
 
@@ -310,7 +312,12 @@
               '{$ youShouldSignIn $}', HOVERBOARD.Elements.Template.signIn, '{$ signIn $}');
             return;
           }
+          this._lazyInitialize();
 
+          this.set('app.user.ratings.sessions.' + this.session.id, this.rate);
+        },
+
+        _lazyInitialize: function() {
           if (!this.app.user.ratings) {
             this.app.user.ratings = {
               sessions: {}
@@ -318,9 +325,7 @@
           } else if(!this.app.user.ratings.sessions) {
             this.app.user.ratings.sessions = {};
           }
-
-          this.set('app.user.ratings.sessions.' + this.session.id, this.rate);
-        },
+        }
 
       });
 
