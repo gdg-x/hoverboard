@@ -173,8 +173,12 @@
           </div>
         </div>
 
+        {% if enableSessionsRating %}
         <div class="label">{$ rateSession $}</div>
-        <rating-element rate={{rate}} disabled$="[[!online]]"></rating-element>
+        <rating-element rate={{rate}}
+                        disabled$="[[_isRatingDisabled(online, app.user)]]"
+                        on-tap="_rate"></rating-element>
+        {% endif %}
       </div>
 
       <template is="dom-if" if="{{session.speakers.length}}">
@@ -261,8 +265,16 @@
         },
 
         _sessionChanged: function () {
-          this._lazyInitialize();
-          this.set('rate', this.app.user.ratings.sessions[this.session.id] || 0);
+          if (this.app.user) {
+            if (!this.app.user.ratings) {
+              this.app.user.ratings = {
+                sessions: {}
+              };
+            } else if (!this.app.user.ratings.sessions) {
+              this.app.user.ratings.sessions = {};
+            }
+            this.set('rate', this.app.user.ratings.sessions[this.session.id] || 0);
+          }
           var generatedClass = this._generateClass(this.session.mainTag);
           this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + generatedClass + ')';
           this._previousBrowserColor = HOVERBOARD.Util.getMetaThemeColor();
@@ -298,33 +310,29 @@
           }
         },
 
-        _getMyScheduleIcon: function (id) {
-          this.fabIcon = this.isInMySchedule(id) ? 'calendar-check' : 'calendar-plus';
-        },
-
         rateSession: function () {
-          if (!this.online || !this.session || !this.rate) {
-            return;
-          }
-
-          if (!this.app.user) {
-            HOVERBOARD.Elements.Template.$.toast.showMessage(
-              '{$ youShouldSignIn $}', HOVERBOARD.Elements.Template.signIn, '{$ signIn $}');
-            return;
-          }
-          this._lazyInitialize();
-
+          if (!this.rate) return;
           this.set('app.user.ratings.sessions.' + this.session.id, this.rate);
         },
 
-        _lazyInitialize: function() {
-          if (!this.app.user.ratings) {
-            this.app.user.ratings = {
-              sessions: {}
+        _rate: function () {
+          if (!this.online) {
+            HOVERBOARD.Elements.Template.$.toast.showMessage('{$ offlineMessage $}');
+          } else if (!this.app.user) {
+            var signIn = function () {
+              HOVERBOARD.Elements.Template.signIn();
             };
-          } else if(!this.app.user.ratings.sessions) {
-            this.app.user.ratings.sessions = {};
+            HOVERBOARD.Elements.Template.$.toast.showMessage(
+              '{$ youShouldSignInRating $}', signIn, '{$ signIn $}');
           }
+        },
+
+        _isRatingDisabled: function (online, user) {
+          return !online || !user;
+        },
+
+        _getMyScheduleIcon: function (id) {
+          this.fabIcon = this.isInMySchedule(id) ? 'calendar-check' : 'calendar-plus';
         }
 
       });
