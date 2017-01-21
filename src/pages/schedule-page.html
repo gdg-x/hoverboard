@@ -138,7 +138,7 @@
         observers: [
           '_routePageChanged(routeData.day)',
           '_userChanged(app.user)',
-          '_queryParamsChanged(queryParams)',
+          '_queryParamsChanged(queryParams, sessions)',
           '_filtersChanged(filters.splices)'
         ],
 
@@ -167,7 +167,7 @@
           }
         },
 
-        _queryParamsChanged: function (params) {
+        _queryParamsChanged: function (params, sessions) {
           if (this.selected) {
             if (params.sessionId) {
               var session = this.sessions[params.sessionId];
