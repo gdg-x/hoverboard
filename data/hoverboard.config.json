@@ -21,6 +21,7 @@
     "database": "https://hoverboard-experimental.firebaseio.com",
     "api": "AIzaSyALDa2D7CMhK_wt2VkET1MaJuQXYVUJd2I",
     "userSessionsPath": "/userSessions",
+    "ratingsPath": "/ratings",
     "indexedDbSession": "hoverboard"
   },
   "mailchimp": {
@@ -32,6 +33,7 @@
   "tweetsSource": "/data/tweets.json",
   "partnershipProposition": "http://bit.ly/df16-sponsor",
   "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
+  "enableSessionsRating": true,
   "navigation": [
     {
       "route": "home",

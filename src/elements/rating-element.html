@@ -1,0 +1,82 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+
+
+<dom-module id="rating-element">
+  <template>
+
+    <style>
+      :host {
+        display: inline-block;
+      }
+
+      paper-icon-button {
+        --paper-icon-button-ink-color: var(--paper-indigo-500);
+        margin: 0 -8px;
+        cursor: pointer;
+        color: var(--disabled-text-color);
+      }
+
+      paper-icon-button.active {
+        color: var(--default-primary-color);
+      }
+
+    </style>
+
+    <template is="dom-repeat" items="[[points]]" as="point">
+      <paper-icon-button icon=[[icon]] class$="[[isActive(point, rate)]]" disabled="[[disabled]]" on-tap="setRate"></paper-icon-button>
+    </template>
+  </template>
+
+  <script>
+    (function () {
+      Polymer({
+        is: 'rating-element',
+        properties: {
+
+          maxPoint: {
+            type: Number,
+            value: 5
+          },
+
+          points: {
+            type: Array,
+            computed: 'initializePoints(maxPoint)'
+          },
+
+          icon: {
+            type: String,
+            value: 'star'
+          },
+
+          rate: {
+            type: Number,
+            notify: true,
+            value: 0
+          },
+
+          disabled: {
+            type: Boolean,
+            value: false
+          }
+        },
+
+        initializePoints: function (maxPoint) {
+          return Array.apply(null, new Array(maxPoint)).map(function (x, i) {
+            return i + 1;
+          })
+        },
+
+        isActive: function (point, rate) {
+          return point <= rate ? 'active' : '';
+        },
+
+        setRate: function (e) {
+          this.set('rate', e.model.point);
+        }
+      });
+
+    })();
+  </script>
+
+</dom-module>

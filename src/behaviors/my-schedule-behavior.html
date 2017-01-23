@@ -20,15 +20,20 @@
         e.stopPropagation();
         e.preventDefault();
 
-        if (!this.app.user) {
-          HOVERBOARD.Elements.Template.$.toast.showMessage(
-            '{$ youShouldSignIn $}', HOVERBOARD.Elements.Template.signIn, '{$ signIn $}');
+        if (!this.online) {
+          HOVERBOARD.Elements.Template.$.toast.showMessage('{$ offlineMessage $}');
           return;
         }
 
-        if (!this.online) {
+        if (!this.app.user) {
+          var signIn = function () {
+            HOVERBOARD.Elements.Template.signIn();
+          };
+          HOVERBOARD.Elements.Template.$.toast.showMessage(
+            '{$ youShouldSignInSessions $}', signIn, '{$ signIn $}');
           return;
         }
+
         var id = e.target.getAttribute('session-id');
 
         if (this.app.user.sessions && this.app.user.sessions[id]) {
