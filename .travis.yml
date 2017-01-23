@@ -25,3 +25,9 @@ deploy:
   project: dfua16
   token:
     secure: pXjCmSFt/4ZFPrnYdfPYnGI2gkm20+XAvjdyHmpqnpRe0r50BeGrbLRarjPOgUy6T34N0MESZD8tdWcKke1yziVwPRzM0cKlKGHESSjKaFYSNIJDq2UmVI9f+ZiNX2iWewbxLqyM5XkIliQvpIPonrlFs24LNVeNFPFkRfP39sTHjqfj4QlEbscZ3RISTi/V5vq832PzHNpt8rV14XBzpVfzqM7PYBl9ES+hfIZKon6cNYrQEXHrScomG6urX8RBRw50EqOP+XhDKy+kHBVf36O2jJd1PiA/3v20ulPzPsIlRCP+KJbsnV/ZtgafEUtwaYc1DHbGq9F8Mcnh/TdO1PuJLrHjzuV4dIUvpAKKimUsliY8F4JjzTqE1miwEUjLbNiRK1jRn+e/GH9zzSTN7qctRfLKlwfqnUdicZ85u7NqxvASFZLJrY6mffPlJdJIgLXz91hCW3xdivHlOssROC0dcaHyP1eXm2ZP49B3issRwa2phBkZSUzp+8P9fNFw/nXkW+gasHzrGnzEbdZYKK2VvfklfUXuO4hWNOhEATGhfznY8xLCbZ0qtzwec6Mpw6aTw625+vbb4bgX8/IVNeaAk0ukAFnszwb0ZCaeRzD8b1/1Pof2V5e1MrNfh3ZYelwGGVqrtaNLa9w0CJ3adR/VpNma7uCDKxiWQfQHo1o=
+- provider: firebase
+  skip_cleanup: true
+  branch: develop
+  project: dfua16-dev{change-this}
+  token:
+    secure: your-secured-password-for-dev-deployment{change-this}
