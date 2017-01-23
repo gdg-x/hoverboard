@@ -1,9 +1,9 @@
 {
   "firebase": {
-    "name": "hoverboard-firebase",
-    "domain": "hoverboard-firebase.firebaseapp.com",
-    "database": "https://hoverboard-firebase.firebaseio.com",
-    "api": "AIzaSyDWy6O98n-ueoVaYPWRPve23vjm3JP08gw",
+    "name": "dfua16",
+    "domain": "dfua16.firebaseapp.com",
+    "database": "https://dfua16.firebaseio.com",
+    "api": "AIzaSyDKOSA8VXmDH05rFjann0s6Q2emGVMWlqc",
     "userSessionsPath": "/userSessions"
   },
   "pages": {
@@ -96,7 +96,7 @@
       "permalink": "/team/"
     }
   ],
-  "url": "https://devfest.gdg.org.ua/",
+  "url": "https://dfua16.devfest.gdg.org.ua/",
   "mailchimp": {
     "subscribePage": "http://eepurl.com/cq7-Yz",
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
