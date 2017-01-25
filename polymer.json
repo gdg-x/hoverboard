@@ -21,7 +21,8 @@
     "bower.json",
     "manifest.json"
   ],
-  "includeDependencies": [
-    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+  "extraDependencies": [
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js",
+    "bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror-worker.js"
   ]
 }

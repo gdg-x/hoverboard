@@ -12,7 +12,6 @@
 
 <link rel="import" href="../styles/shared-styles.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
-<link rel="import" href="../behaviors/localize-behavior.html">
 
 
 <dom-module id="toolbar-block">
@@ -142,22 +141,22 @@
             class="logo"
             src="/images/logo-white.svg"
             sizing="contain"
-            alt="{{localize('title')}}"
+            alt="{$ title $}"
           ></iron-image>
         </a>
       </div>
       <div class="navItem" layout horizontal self-end>
         <template is="dom-if" if="[[!app.isPhoneSize]]">
           <paper-tabs selected="[[app.page]]" attr-for-selected="name" noink>
-            <template is="dom-repeat" items="[[app.data.navigation]]" as="nav">
-              <paper-tab name="[[nav.route]]" link>
-                <a href$="[[nav.permalink]]" class="nav-link">{{localize(nav.route)}}</a>
+            {% for nav in navigation %}
+              <paper-tab name="{$ nav.route $}" link>
+                <a href="{$ nav.permalink $}" class="nav-link">{$ pages[nav.route].title $}</a>
               </paper-tab>
-            </template>
+            {% endfor %}
           </paper-tabs>
         </template>
 
-        <paper-tab class="signin-tab" on-tap="signIn" hidden$="[[app.user]]">[[localize('sign-in')]]</paper-tab>
+        <paper-tab class="signin-tab" on-tap="signIn" hidden$="[[app.user]]">{$ signIn $}</paper-tab>
 
         <paper-menu-button
           class="auth-menu"
@@ -180,14 +179,16 @@
               <div layout vertical center-justified>
                 <span class="profile-name">[[app.user.displayName]]</span>
                 <span class="profile-email">[[app.user.email]]</span>
-                <span class="profile-action" role="button" on-tap="signOut">[[localize('sign-out')]]</span>
+                <span class="profile-action" role="button" on-tap="signOut">{$ signOut $}</span>
               </div>
             </div>
           </div>
         </paper-menu-button>
 
         <div class="action-button-wrapper" hidden$="[[app.isPhoneSize]]" layout horizontal center-center>
-            <paper-button class="action-button" on-tap="_primaryAction">[[localize('highlights-video')]]</paper-button>
+          <a href="{$ tickets.url $}" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
+            <paper-button class="action-button">{$ buyTicket $}</paper-button>
+          </a>
         </div>
       </div>
     </app-toolbar>
@@ -203,7 +204,6 @@
         is: 'toolbar-block',
 
         behaviors: [
-          HOVERBOARD.LocalizeBehavior,
           HOVERBOARD.UtilsBehavior
         ],
 
@@ -237,10 +237,8 @@
           }
         },
 
-        _primaryAction: function () {
-          HOVERBOARD.Elements.Template.openVideo(this.app.data.pages.home.headerSettings.video.title,
-            this.app.data.pages.home.headerSettings.video.youtubeId, true);
-          HOVERBOARD.Analytics.trackEvent('highlightVideo', 'view', 'toolbar');
+        _trackBuyClick: function () {
+          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'toolbar');
         }
 
       });

@@ -1,79 +1,39 @@
 {
+  "url": "https://hoverboard.firebaseapp.com/",
+  "startDate": "2016-09-09T09:00:00+03:00",
+  "endDate": "2016-09-10T19:00:00+03:00",
+  "analytics": {
+    "prod": "UA-43643469-8",
+    "dev": "UA-43643469-9"
+  },
+  "organizer": {
+    "name": "GDG Lviv",
+    "twitter": "gdglviv"
+  },
+  "webapp": {
+    "shortName": "DevFest",
+    "themeColor": "#F57C00",
+    "backgroundColor": "#F57C00"
+  },
   "firebase": {
-    "name": "dfua16",
-    "domain": "dfua16.firebaseapp.com",
-    "database": "https://dfua16.firebaseio.com",
-    "api": "AIzaSyDKOSA8VXmDH05rFjann0s6Q2emGVMWlqc",
-    "userSessionsPath": "/userSessions"
+    "name": "hoverboard-experimental",
+    "domain": "hoverboard-experimental.firebaseapp.com",
+    "database": "https://hoverboard-experimental.firebaseio.com",
+    "api": "AIzaSyALDa2D7CMhK_wt2VkET1MaJuQXYVUJd2I",
+    "userSessionsPath": "/userSessions",
+    "ratingsPath": "/ratings",
+    "indexedDbSession": "hoverboard"
   },
-  "pages": {
-    "home": {
-      "headerSettings": {
-        "backgroundColor": "#607D8B",
-        "backgroundImage": "/images/backgrounds/home.jpg",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff",
-        "video": {
-          "title": "GDG DevFest Ukraine 2016",
-          "youtubeId": "TdpbgRgz6eE",
-          "text": "Watch higlights"
-        },
-        "hideLogo": true,
-        "minHeight": "360px"
-      }
-    },
-    "blog": {
-      "headerSettings": {
-        "backgroundColor": "#03a9f4",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "speakers": {
-      "headerSettings": {
-        "backgroundColor": "#3f51b5",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "schedule": {
-      "headerSettings": {
-        "backgroundColor": "#673ab7",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "team": {
-      "headerSettings": {
-        "backgroundColor": "#009688",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "cod": {
-      "headerSettings": {
-        "backgroundColor": "#673ab7",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "hub": {
-      "headerSettings": {
-        "backgroundImage": "images/backgrounds/hub.jpg",
-        "backgroundColor": "#4caf50",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "quest": {
-      "headerSettings": {
-        "backgroundImage": "images/backgrounds/quest.jpg",
-        "backgroundColor": "#FF5722",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    }
+  "mailchimp": {
+    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
+    "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
   },
+  "hashtag": "dfua",
+  "disqusShortName": "hoverboard-gdg-x",
+  "tweetsSource": "/data/tweets.json",
+  "partnershipProposition": "http://bit.ly/df16-sponsor",
+  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
+  "enableSessionsRating": true,
   "navigation": [
     {
       "route": "home",
@@ -96,139 +56,6 @@
       "permalink": "/team/"
     }
   ],
-  "url": "https://dfua16.devfest.gdg.org.ua/",
-  "mailchimp": {
-    "subscribePage": "http://eepurl.com/cq7-Yz",
-    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
-    "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
-  },
-  "partnershipProposition": "https://drive.google.com/file/d/0B7agnb-tSfBcMkVXWVJQZDVoR0U/view?usp=sharing",
-  "disqusShortName": "dfua2016",
-  "languages": [
-    {
-      "name": "English",
-      "key": "en"
-    },
-    {
-      "name": "Українська",
-      "key": "uk"
-    }
-  ],
-  "footerBlocks": [
-    {
-      "title": "for-visitors",
-      "links": [
-        {
-          "text": "cod",
-          "url": "/cod/"
-        },
-        {
-          "text": "google-developers",
-          "url": "https://developers.google.com/",
-          "newTab": true
-        },
-        {
-          "text": "df-13",
-          "url": "http://gdg-devfest-ua.appspot.com/",
-          "newTab": true
-        },
-        {
-          "text": "df-14",
-          "url": "http://devfest.gdg.org.ua/2014/",
-          "newTab": true
-        },
-        {
-          "text": "df-15",
-          "url": "http://devfest.gdg.org.ua/2015/",
-          "newTab": true
-        }
-      ]
-    },
-    {
-      "title": "for-partners",
-      "links": [
-        {
-          "text": "partnership-proposition",
-          "url": "https://drive.google.com/file/d/0B7agnb-tSfBcMkVXWVJQZDVoR0U/view?usp=sharing",
-          "newTab": true
-        },
-        {
-          "text": "media-kit",
-          "url": "http://bit.ly/df16-media",
-          "newTab": true
-        },
-        {
-          "text": "media-accreditation",
-          "url": "https://goo.gl/forms/Kfoa7q79ZcncOmjD3",
-          "newTab": true
-        }
-      ]
-    }
-  ],
-  "contactBlock": {
-    "links": [
-      {
-        "text": "Team",
-        "url": "/team/"
-      },
-      {
-        "text": "devfest@gdg.org.ua",
-        "url": "mailto:devfest@gdg.org.ua"
-      }
-    ]
-  },
-  "tickets": {
-    "url": "http://2event.com/events/630032",
-    "elements": [
-      {
-        "name": "student-ticket",
-        "price": 500,
-        "currency": "₴",
-        "starts": "student-ticket-starts",
-        "ends": "student-ticket-ends",
-        "info": "student-ticket-info",
-        "soldOut": true
-      },
-      {
-        "name": "early-ticket",
-        "price": 750,
-        "currency": "₴",
-        "starts": "early-ticket-starts",
-        "ends": "early-ticket-ends",
-        "info": "early-ticket-info",
-        "soldOut": true
-      },
-      {
-        "name": "lazy-ticket",
-        "price": 1000,
-        "currency": "₴",
-        "starts": "lazy-ticket-starts",
-        "ends": "lazy-ticket-ends",
-        "soldOut": true
-      }
-    ]
-  },
-  "teamPageTitle": "team-page-title",
-  "teamPageText": "team-page-text",
-  "statistics": [
-    {
-      "counter": 700,
-      "caption": "attendees"
-    },
-    {
-      "counter": 30,
-      "caption": "sessions"
-    },
-    {
-      "counter": 6,
-      "caption": "workshops"
-    },
-    {
-      "counter": 3,
-      "caption": "tracks"
-    }
-  ],
-  "hashtag": "dfua",
   "social": [
     {
       "name": "twitter",
@@ -251,36 +78,10 @@
       "url": "https://www.linkedin.com/company/google-developers-group-lviv"
     }
   ],
-  "tweetsSource": "https://dfua-tweets.herokuapp.com/favoritesjson.php?c=10&cache_interval=8000",
-  "gallery": {
-    "albumUrl": "https://goo.gl/photos/H8s3CtPexCzkLqSt9",
-    "sharedAlbumUrl": "https://goo.gl/photos/FLUS5ezy5dNzTCXi7",
-    "photos": [
-      {
-        "big": "/images/backgrounds/2016_1.jpg",
-        "small": [
-          "/images/backgrounds/2016_2.jpg",
-          "/images/backgrounds/2016_3.jpg"
-        ]
-      },
-      {
-        "big": "/images/backgrounds/2016_4.jpg",
-        "small": [
-          "/images/backgrounds/2016_5.jpg",
-          "/images/backgrounds/2016_6.jpg"
-        ]
-      },
-      {
-        "big": "/images/backgrounds/2016_7.jpg",
-        "small": [
-          "/images/backgrounds/2016_8.jpg",
-          "/images/backgrounds/2016_9.jpg"
-        ]
-      }
-    ]
-  },
   "location": {
-    "apiKey": "AIzaSyDWy6O98n-ueoVaYPWRPve23vjm3JP08gw",
+    "apiKey": "",
+    "name": "Pivdennyi Expo Center",
+    "address": "36 Shchyretska St, Lviv, Ukraine",
     "link": "https://www.facebook.com/expopivdennij",
     "pointer": {
       "latitude": 49.809841,
@@ -297,5 +98,14 @@
       "/images/backgrounds/location_3.jpg"
     ]
   },
-  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+  "gallery": {
+    "albumUrl": "https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1",
+    "photos": {
+      "big": "/images/backgrounds/2015_1.jpg",
+      "small": [
+        "/images/backgrounds/2015_2.jpg",
+        "/images/backgrounds/2015_3.jpg"
+      ]
+    }
+  }
 }

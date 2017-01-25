@@ -17,6 +17,10 @@
         display: block;
       }
 
+      iron-image {
+        @apply(--layout-fit);
+      }
+
       .photo-wrapper {
         @apply(--layout-horizontal);
         height: 200px;
@@ -25,21 +29,6 @@
       .photo {
         @apply(--layout-flex);
         position: relative;
-      }
-
-      .image {
-        transition: background-image 1s ease-in-out;
-        will-change: background-image;
-        background-size: cover;
-        background-position: 50% 50%;
-      }
-
-      .second {
-        transition-delay: 0.5s;
-      }
-
-      .third {
-        transition-delay: 1s;
       }
 
       .photo:not(:first-of-type) {
@@ -69,32 +58,6 @@
         cursor: pointer;
       }
 
-      .photo-albums-links {
-        background: var(--default-primary-color);
-        color: var(--text-primary-color);
-      }
-
-      .heading {
-        margin-bottom: 0 !important;
-      }
-
-      paper-button {
-        margin: 4px 16px;
-        font-size: initial;
-        background: var(--text-primary-color);
-        color: var(--default-primary-color);
-      }
-
-      @media (max-width: 601px) {
-        .container .heading {
-          font-size: 23px;
-        }
-
-        paper-button {
-          font-size: 14px;
-        }
-      }
-
       @media (min-width: 601px) {
         .photo-wrapper {
           height: 500px;
@@ -112,36 +75,42 @@
 
     <div class="photo-wrapper">
       <div class="photo big">
-        <div class="placeholder-color image" style$="background-image: url([[_selected.big]])" fit></div>
+        <iron-image
+          class="placeholder-color"
+          src="{$ gallery.photos.big $}"
+          sizing="cover"
+          preload fade
+        ></iron-image>
+        <a class="open-photos" href="{$ gallery.albumUrl $}" target="_blank" rel="noopener noreferrer">
+          <paper-ripple></paper-ripple>
+          <span>{$ clickToViewPhotos $} <iron-icon icon="open-in-new"/></span>
+        </a>
       </div>
       <div class="vertical-block">
         <div class="photo">
-          <div class="placeholder-color image second" style$="background-image: url([[_selected.small.0]])" fit></div>
+          <iron-image
+            class="placeholder-color"
+            src="{$ gallery.photos.small[0] $}"
+            sizing="cover"
+            preload fade
+          ></iron-image>
+          <a class="open-photos" href="{$ gallery.albumUrl $}" target="_blank" rel="noopener noreferrer">
+            <paper-ripple></paper-ripple>
+            <span>{$ clickToViewPhotos $} <iron-icon icon="open-in-new"/></span>
+          </a>
         </div>
         <div class="photo">
-          <div class="placeholder-color image third" style$="background-image: url([[_selected.small.1]])" fit></div>
+          <iron-image
+            class="placeholder-color"
+            src="{$ gallery.photos.small[1] $}"
+            sizing="cover"
+            preload fade
+          ></iron-image>
+          <a class="open-photos" href="{$ gallery.albumUrl $}" target="_blank" rel="noopener noreferrer">
+            <paper-ripple></paper-ripple>
+            <span>{$ clickToViewPhotos $} <iron-icon icon="open-in-new"/></span>
+          </a>
         </div>
-      </div>
-    </div>
-
-    <div class="photo-albums-links">
-      <div class="container container-narrow" layout horizontal center-center wrap>
-        <h4 class="heading">
-          [[localize('add-photos')]]
-          </h4>
-          <a class="block-link" href$="[[app.data.gallery.sharedAlbumUrl]]" target="_blank" rel="noopener noreferrer"
-             on-tap="_trackClick">
-            <paper-button raised>[[localize('shared-album')]]</paper-button>
-          </a>
-        <h4 class="heading">
-
-        [[localize('or-view')]]
-        </h4>
-
-        <a class="block-link" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer"
-             on-tap="_trackClick">
-            <paper-button raised>[[localize('highlights')]]</paper-button>
-          </a>
       </div>
     </div>
 
@@ -153,36 +122,7 @@
 
       Polymer({
 
-        is: 'photo-block',
-
-        behaviors: [
-          HOVERBOARD.LocalizeBehavior
-        ],
-
-        properties: {
-          interval: {
-            type: Number,
-            value: 4000
-          },
-
-          _selectedIndex: {
-            type: Number,
-            value: -1
-          }
-        },
-
-        observers: [
-          'next(app.data.gallery.photos)'
-        ],
-
-        next: function () {
-          var index = this._selectedIndex;
-          if (this.app.data && this.app.data.gallery && this.app.data.gallery.photos) {
-            this._selectedIndex = (++index % this.app.data.gallery.photos.length);
-            this._selected = this.app.data.gallery.photos[this._selectedIndex];
-            this.async(this.next, this.interval);
-          }
-        }
+        is: 'photo-block'
 
       });
 

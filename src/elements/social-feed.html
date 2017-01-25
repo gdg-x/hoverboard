@@ -4,7 +4,6 @@
 
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 
-<link rel="import" href="../behaviors/localize-behavior.html">
 <link rel="import" href="social-post.html">
 
 
@@ -53,27 +52,27 @@
 
     <iron-ajax
       auto
-      url="[[app.data.tweetsSource]]"
+      url="{$ tweetsSource $}"
       handle-as="json"
       last-response="{{_posts}}"
     ></iron-ajax>
     <div class="container">
       <div class="social-section">
-        <h4 class="heading">[[localize('before-hashtag')]] <a href$="https://www.google.com/#q=%23[[app.data.hashtag]]">#[[app.data.hashtag]]</a></h4>
+        <h4 class="heading">{$ beforeHashtag $} <a href="https://www.google.com/#q=%23{$ hashtag $}">#{$ hashtag $}</a></h4>
         <h5>[[response.response]]</h5>
         <social-post id="post" author="[[author]]" text="[[text]]" when="[[when]]" canonical-url="https://twitter.com/"
                      sign="@"></social-post>
       </div>
       <span class="divider"></span>
       <div class="social-section">
-        <h4 class="heading">[[localize('social-title')]]</h4>
-        <div>[[localize('social-motto')]]</div>
+        <h4 class="heading">{$ socialTitle $}</h4>
+        <div>{$ socialMotto $}</div>
         <div class="align-pb-block">
-          <template is="dom-repeat" items="[[app.data.social]]" as="network">
-            <a class="button-link" href$="[[network.url]]" target="_blank" rel="noopener noreferrer">
-              <paper-icon-button icon="[[network.name]]"></paper-icon-button>
-            </a>
-          </template>
+          {% for network in social %}
+          <a class="button-link" href="{$ network.url $}" target="_blank" rel="noopener noreferrer">
+            <paper-icon-button icon="{$ network.name $}"></paper-icon-button>
+          </a>
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -87,10 +86,6 @@
       Polymer({
 
         is: 'social-feed',
-
-        behaviors: [
-          HOVERBOARD.LocalizeBehavior
-        ],
 
         properties: {
           interval: {

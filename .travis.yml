@@ -14,20 +14,22 @@ addons:
     packages:
     - g++-4.8
 install:
-- npm install -g bower polymer-cli
+- npm install -g bower
+- npm install
 - bower install
 script: echo "Deploying!"
-before_deploy: polymer build
+before_deploy: npm run build
 deploy:
 - provider: firebase
   skip_cleanup: true
-  branch: master
-  project: dfua16
+  branch: develop
+  project: hoverboard-master
   token:
-    secure: pXjCmSFt/4ZFPrnYdfPYnGI2gkm20+XAvjdyHmpqnpRe0r50BeGrbLRarjPOgUy6T34N0MESZD8tdWcKke1yziVwPRzM0cKlKGHESSjKaFYSNIJDq2UmVI9f+ZiNX2iWewbxLqyM5XkIliQvpIPonrlFs24LNVeNFPFkRfP39sTHjqfj4QlEbscZ3RISTi/V5vq832PzHNpt8rV14XBzpVfzqM7PYBl9ES+hfIZKon6cNYrQEXHrScomG6urX8RBRw50EqOP+XhDKy+kHBVf36O2jJd1PiA/3v20ulPzPsIlRCP+KJbsnV/ZtgafEUtwaYc1DHbGq9F8Mcnh/TdO1PuJLrHjzuV4dIUvpAKKimUsliY8F4JjzTqE1miwEUjLbNiRK1jRn+e/GH9zzSTN7qctRfLKlwfqnUdicZ85u7NqxvASFZLJrY6mffPlJdJIgLXz91hCW3xdivHlOssROC0dcaHyP1eXm2ZP49B3issRwa2phBkZSUzp+8P9fNFw/nXkW+gasHzrGnzEbdZYKK2VvfklfUXuO4hWNOhEATGhfznY8xLCbZ0qtzwec6Mpw6aTw625+vbb4bgX8/IVNeaAk0ukAFnszwb0ZCaeRzD8b1/1Pof2V5e1MrNfh3ZYelwGGVqrtaNLa9w0CJ3adR/VpNma7uCDKxiWQfQHo1o=
+    secure: fQOOIF4mkqH438Dawy2v27Qw7UsVizfJ1ZIeTno2sGfq9an8mZk13YWBuYJcOc1hSnEEp3G7/pkBcwykCj1CYpoOS+wMxpVbOQw6ogMGFD8rv+208Ddt1VJw/uUuFdf4k07+eRGokykCsCmcv2J+5wnLw34CKzXYTxLpL6JrxGzkuAcKIRNNda13yxJfYXz7HtQiNo3aMYnv2MCffNnSaR+OJ9Cl0JGYDCg3zuJIqrq7CFJqnUXE5TsO0VGCLY46rLvICY6inNlgZvA4RWi6Yf4rs2swzgC7HKbcIipjptlCRpPdRigLKoxhv6HZUIpkVgDu10Jq6OWU5gj4VpNYYd+c+E4F23nvm+3BEToUuEGURZ9Ins1SSHr3d+WxneQ+jreHCGrEBhKkLknbPQuOQF3khtk9CHu+07fBafBCLt4dGC6oQu+QwTdn+JQ/rYxWAUq8yJjrTsKevgXAVyMqDTU1Fy7FH5QP7HRyI71C6Q7Ij3cVwrFrVXNGzg2h2q8qTX2Yn6Ph9NJUpS+QmVsymblh38zwlyThZ1T4XudYM5iZTzNKKVqCmR9upl8nSLMEez1ukhBETJCslb2nFXJI3k7dsFA5cGO51sbYB44bxIXJwZkQ0s9p8XBNsU9gI2hX6UvE5+tephbohd6YGHmfc+qaJkLpcYKjRbhFsysf60k=
 - provider: firebase
   skip_cleanup: true
   branch: develop
-  project: dfua16-dev{change-this}
+  project: hoverboard-dev
   token:
-    secure: your-secured-password-for-dev-deployment{change-this}
+    secure: Quq/Ys1GKDYFjqMCD107saKj005L0RaM7Ian9yLIW/er4KdMzwjYw7TVXmtMeJPIfEy/e2/4WJ63K1SaXieBoFndoUcpGWqPOoTrnkkj5K7tzeZKM32XqIarF+BNmOoqW5M7+kuN8L7N3RLp00ywFDOgKgiZJeoaDV6sIRRAIFVh+xHWabVWpFCwCUSeBZpufOsZhMXkicyRe0XhMmkUvS1P5CI3AyZZdIfWG+sguFsPOWRjMFKWrbnsilDFDjf7N0Wd8Z1H2Z0LBn/V00bNb95MSIuOhkdk3a1wP0P5Eollet+Y8g+NpdWyFq0/C+6+ECvFLBjtvbtMY1BVfdxkCo5XlogZx31OmkMWVX6PXOD5Va8aFoJnwvjovUT8oZbSCWEuyMxI91jDsLxXZt542MNfUfQ1Q2+SpUShdcRlwoV2c/XOYvme95HnI1LSqzLubooKWxz8wpa/aovkdZbum54t/z5nA54AXN1lYKsi+hcAFHOeucqd/kHOLG0bx05Ev86wcvNH8qGx+v7S644YH37No7PGnKU3g3Jq/m6quo1B/bMEIaatVnR40D301wAi8tsNWnqEdWFKnAlGrTIDd1qek9OHnApmgBQI8o0FOy6WbzLMwl9PnMl+t+wew/ggSY0IdWhjFWR/S1d6xML8cYHXHVpE0wxkat5ETbIYXlg=
+

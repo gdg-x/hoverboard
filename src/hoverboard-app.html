@@ -20,7 +20,6 @@
 
 <link rel="import" href="effects/fade-effect.html">
 <link rel="import" href="behaviors/utils-behavior.html">
-<link rel="import" href="behaviors/localize-behavior.html">
 <link rel="import" href="elements/app-data.html">
 <link rel="import" href="elements/drawer-block.html">
 <link rel="import" href="elements/toolbar-block.html">
@@ -113,6 +112,13 @@
       data="{{routeData}}"
       tail="{{subRoute}}"></app-route>
 
+    <firebase-app
+      name="{$ firebase.name $}"
+      auth-domain="{$ firebase.domain $}"
+      database-url="{$ firebase.database $}"
+      api-key="{$ firebase.api $}">
+    </firebase-app>
+
     <app-data
       app="{{app}}"
       speakers="{{speakers}}"
@@ -121,27 +127,19 @@
       posts="{{posts}}"
     ></app-data>
 
-    <firebase-app
-      name="[[app.data.firebase.name]]"
-      auth-domain="[[app.data.firebase.domain]]"
-      database-url="[[app.data.firebase.database]]"
-      api-key="[[app.data.firebase.api]]"
-    >
-    </firebase-app>
     <firebase-auth
       id="auth"
       provider="google"
-      app-name="[[app.data.firebase.name]]"
+      app-name="{$ firebase.name $}"
       user="{{app.user}}"
-    >
-    </firebase-auth>
+      status-known="{{_authStatusKnown}}"
+    ></firebase-auth>
 
     <app-drawer-layout id="drawerLayout" drawer-width="599px" force-narrow>
 
       <app-drawer
         id="drawer"
-        swipe-open="[[app.isPhoneSize]]"
-      >
+        swipe-open="[[app.isPhoneSize]]">
         <template is="dom-if" if="[[app.isPhoneSize]]">
           <drawer-block
             app={{app}}
@@ -235,7 +233,6 @@
         is: 'hoverboard-app',
 
         behaviors: [
-          HOVERBOARD.LocalizeBehavior,
           HOVERBOARD.UtilsBehavior
         ],
 
@@ -245,20 +242,30 @@
             notify: true,
             value: function () {
               return {
-                lang: 'en',
                 user: {}
               };
             }
           },
 
+          _authStatusKnown: {
+            type: Boolean,
+            value: false,
+            observer: '_autoSignIn'
+          },
+
           page: {
             type: String,
             reflectToAttribute: true
+          },
+
+          pages: {
+            type: Array,
+            value: {$ pages | dump | safe $}
           }
         },
 
         observers: [
-          '_routePageChanged(routeData.page, app.data.navigation)',
+          '_routePageChanged(routeData.page)',
           '_pageChanged(app.page)',
           'stylesChanged(app.headerSettings)'
         ],
@@ -281,11 +288,9 @@
           this.set('app.page', (page || 'home'));
           // Close the drawer - in case the *route* change came from a link in the drawer.
           this.drawerOpened = false;
-          if (this.app.data) {
-            var navObject = this.app.data.pages[this.app.page];
-            if (navObject && navObject.headerSettings) {
-              this.set('app.headerSettings', navObject.headerSettings);
-            }
+          var navObject = this.pages[this.app.page];
+          if (navObject && navObject.headerSettings) {
+            this.set('app.headerSettings', navObject.headerSettings);
           }
         },
 
@@ -351,11 +356,61 @@
         },
 
         signIn: function () {
-          HOVERBOARD.Elements.Template.$.auth.signInWithPopup();
+          this.$.auth.signInWithPopup()
+            .then(function (signInObject) {
+              if (navigator.credentials) {
+                var cred = new FederatedCredential({
+                  id: signInObject.user.email,
+                  name: signInObject.user.displayName,
+                  iconURL: signInObject.user.photoURL,
+                  provider: 'https://accounts.google.com'
+                });
+
+                navigator.credentials.store(cred);
+              }
+            });
         },
 
         signOut: function () {
-          this.$.auth.signOut();
+          this.$.auth.signOut()
+            .then(function () {
+              if (navigator.credentials) {
+                navigator.credentials.requireUserMediation();
+              }
+            });
+        },
+
+        _autoSignIn: function (authStatusKnown) {
+          if (navigator.credentials
+            && authStatusKnown
+            && !this.app.user) {
+            return navigator.credentials.get({
+              password: true,
+              federated: {
+                providers: ['https://accounts.google.com']
+              },
+              unmediated: true
+            }).then(function (cred) {
+              if (cred) {
+                this.gSignIn(cred.id);
+              }
+            }.bind(this));
+          }
+        },
+
+        gSignIn: function (id) {
+          return (function () {
+            if (this.app.user && this.app.user.email === id) {
+              return Promise.resolve(this.app.user);
+            }
+
+            var provider = new firebase.auth.GoogleAuthProvider();
+            provider.setCustomParameters({
+              'login_hint': id || ''
+            });
+
+            return this.$.auth.signInWithPopup(provider);
+          }.bind(this))();
         }
 
       });
