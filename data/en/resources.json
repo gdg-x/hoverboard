@@ -52,9 +52,12 @@
   "signOut": "Sign out",
   "mySchedule": "My Schedule",
   "browseMore": "Browse more events",
-  "youShouldSignIn": "Sign in to save sessions",
+  "youShouldSignInSessions": "Sign in to save sessions",
+  "youShouldSignInRating": "Sign in to rate sessions",
+  "offlineMessage": "You are offline",
   "removedFromSchedule": "Removed from My Schedule",
   "addedToSchedule": "Added to My Schedule",
+  "rateSession": "Rate session",
 
   "pages": {
     "home": {
