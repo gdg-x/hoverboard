@@ -1,8 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../behaviors/localize-behavior.html">
-
-
 <dom-module id="quotes-block">
 
   <template>
@@ -65,7 +62,7 @@
 
     <div class="overlay" fit></div>
     <div class="container" layout vertical center>
-      <h4 class="heading">[[localize('share-your-story')]]</h4>
+      <h4 class="heading">{$ shareYourStory $}</h4>
       <div class="quote-wrapper">
         <marked-element class="content" markdown="[[_selected.text]]" layout horizontal>
           <div class="markdown-html quote"></div>
@@ -84,11 +81,11 @@
 
         is: 'quotes-block',
 
-        behaviors: [
-          HOVERBOARD.LocalizeBehavior
-        ],
-
         properties: {
+          app: {
+            type: Object
+          },
+
           interval: {
             type: Number,
             value: 7000
@@ -106,7 +103,7 @@
 
         next: function () {
           var index = this._selectedIndex;
-          if (this.app.quotes) {
+          if (this.app.quotes.length) {
             this._selectedIndex = (++index % this.app.quotes.length);
             this._selected = this.app.quotes[this._selectedIndex];
             this.async(this.next, this.interval);

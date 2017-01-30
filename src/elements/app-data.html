@@ -91,6 +91,20 @@
       persisted-data="{{app.team}}">
     </app-indexeddb-mirror>
 
+    <firebase-document
+      id="queryQuotes"
+      app-name="{$ firebase.name $}"
+      path="/quotes"
+      data="{{_firebaseQuotes}}">
+    </firebase-document>
+
+    <app-indexeddb-mirror
+      session="{$ firebase.indexedDbSession $}"
+      key="quotes"
+      data="{{_firebaseQuotes}}"
+      persisted-data="{{app.quotes}}">
+    </app-indexeddb-mirror>
+
   </template>
   <script>
     (function () {
@@ -151,33 +165,33 @@
           this.app = this.app || {};
         },
 
-      _generateSchedule: function () {
-        if (!Object.keys(this._speakersRaw).length
-          || !Object.keys(this._sessionsRaw).length
-          || !Object.keys(this._scheduleRaw).length) return;
+        _generateSchedule: function () {
+          if (!Object.keys(this._speakersRaw).length
+            || !Object.keys(this._sessionsRaw).length
+            || !Object.keys(this._scheduleRaw).length) return;
 
-        var myWorker = new Worker('./scripts/helper/schedule-webworker.js');
+          var myWorker = new Worker('./scripts/helper/schedule-webworker.js');
 
-        myWorker.postMessage({
-          speakers: this._speakersRaw,
-          sessions: this._sessionsRaw,
-          schedule: this._scheduleRaw
-        });
+          myWorker.postMessage({
+            speakers: this._speakersRaw,
+            sessions: this._sessionsRaw,
+            schedule: this._scheduleRaw
+          });
 
-        myWorker.addEventListener('message', function(e) {
-          this.set('schedule', e.data.schedule);
-          this.set('sessions', e.data.sessions);
-          this.set('speakers', e.data.speakers);
-          myWorker.terminate();
-        }.bind(this), false);
+          myWorker.addEventListener('message', function (e) {
+            this.set('schedule', e.data.schedule);
+            this.set('sessions', e.data.sessions);
+            this.set('speakers', e.data.speakers);
+            myWorker.terminate();
+          }.bind(this), false);
 
-      },
+        },
 
-      _reversePosts: function (response) {
-        this.posts = response.detail.response.reverse();
-      }
-    });
+        _reversePosts: function (response) {
+          this.posts = response.detail.response.reverse();
+        }
+      });
 
-  }());
+    }());
   </script>
 </dom-module>

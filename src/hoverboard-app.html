@@ -181,28 +181,11 @@
                      route="{{subRoute}}"
                      posts="{{posts}}"></blog-page>
 
-          <speakers-page name="speakers"
-                         app="{{app}}"
-                         route="{{subRoute}}"
-                         speakers="{{speakers}}"></speakers-page>
-
-          <schedule-page name="schedule"
-                         app="{{app}}"
-                         route="{{subRoute}}"
-                         schedule="{{schedule}}"
-                         sessions="{{sessions}}"></schedule-page>
-
           <team-page name="team"
                      app="{{app}}"></team-page>
 
           <cod-page name="cod"
                     app="{{app}}"></cod-page>
-
-          <hub-page name="hub"
-                    app="{{app}}"></hub-page>
-
-          <quest-page name="quest"
-                    app="{{app}}"></quest-page>
 
         </neon-animated-pages>
       </div>
@@ -273,8 +256,6 @@
         ready: function () {
           Polymer.RenderStatus.afterNextRender(this, function () {
             HOVERBOARD.ServiceWorkerRegistration.register();
-            this.importHref(this.resolveUrl('pages/schedule-page.html'), null, null, true);
-            this.importHref(this.resolveUrl('pages/speakers-page.html'), null, null, true);
             this.importHref(this.resolveUrl('pages/blog-page.html'), null, null, true);
           }.bind(this));
         },

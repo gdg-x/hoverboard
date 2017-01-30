@@ -1,11 +1,11 @@
 {
-  "title": "GDG DevFest Season 2016",
+  "title": "GDG DevFest Ukraine 2017",
   "description": "The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "September 9-10, 2016",
+  "dates": "October 13-14, 2017",
   "locationAddressShort": "Lviv, Ukraine",
-  "motto": "Be a GDG. Be a Hero!",
-  "playIcon": "See how it was in 2015",
+  "motto": "Make the most of development. Make the most of you!",
+  "playIcon": "See how it was in 2016",
   "c4p": "Become a speaker",
   "buyTicket": "Buy ticket",
   "backToTop": "Back to top",
@@ -23,7 +23,7 @@
   "clickToViewPhotos": "Click here to view more photos",
   "partners": "Partners",
   "becomePartner": "Become a partner",
-  "featuredVideosTitle": "Featured #DFUA '15 Sessions",
+  "featuredVideosTitle": "Featured #DFUA '16 Sessions",
   "featuredVideosViewAll": "View all videos",
   "featuredPeopleTitle": "Rockstar Speakers",
   "featuredPeopleViewAll": "View all speakers",
@@ -58,13 +58,18 @@
   "removedFromSchedule": "Removed from My Schedule",
   "addedToSchedule": "Added to My Schedule",
   "rateSession": "Rate session",
+  "shareYourStory": "Share your story about #dfua",
+  "addPhotos": "Add your photos to",
+  "sharedAlbum": "Shared album",
+  "orView": "or view",
+  "highlights": "Highlights",
 
   "pages": {
     "home": {
       "title": "Home",
       "headerSettings": {
-        "backgroundColor": "#FF9800",
-        "backgroundImage": "/images/backgrounds/home.png",
+        "backgroundColor": "#2196F3",
+        "backgroundImage": "/images/backgrounds/home.jpg",
         "fontColor": "#fff",
         "tabBarColor": "#fff",
         "video": {
@@ -80,22 +85,6 @@
       "title": "Blog",
       "headerSettings": {
         "backgroundColor": "#03a9f4",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "speakers": {
-      "title": "Speakers",
-      "headerSettings": {
-        "backgroundColor": "#3f51b5",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "schedule": {
-      "title": "Schedule",
-      "headerSettings": {
-        "backgroundColor": "#673ab7",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
@@ -172,8 +161,8 @@
   "contactBlock": {
     "links": [
       {
-        "text": "devfest@google.com",
-        "url": "mailto:devfest@google.com"
+        "text": "devfest@gdg.org.ua",
+        "url": "mailto:devfest@gdg.org.ua"
       }
     ]
   },
@@ -181,29 +170,47 @@
     "url": "http://2event.com/events/630032",
     "elements": [
       {
-        "name": "Student",
-        "price": 500,
-        "currency": "₴",
-        "starts": "May 1",
-        "ends": "Sep 8",
-        "info": "Requires valid student ID",
+        "name": "Edu",
+        "price": 20,
+        "currency": "$",
+        "starts": "Feb 1",
+        "ends": "Oct 13",
+        "info": "Requires valid student/lecturer ID",
+        "soldOut": false
+      },
+      {
+        "name": "Super Early Bird",
+        "price": 30,
+        "currency": "$",
+        "starts": "Feb 1",
+        "ends": "Mar 31",
+        "info": "Or first 50 tickets",
         "soldOut": false
       },
       {
         "name": "Early Bird",
-        "price": 750,
-        "currency": "₴",
-        "starts": "May 1",
-        "ends": "July 1",
-        "info": "Or first 100 tickets",
-        "soldOut": true
+        "price": 40,
+        "currency": "$",
+        "starts": "Apr 1",
+        "ends": "Jun 30",
+        "info": "Or first 200 tickets",
+        "soldOut": false
       },
       {
-        "name": "Lazy Bird",
-        "price": 1000,
-        "currency": "₴",
-        "starts": "July 1",
-        "ends": "Sep 8",
+        "name": "Regular",
+        "price": 55,
+        "currency": "$",
+        "starts": "Jul 1",
+        "ends": "Sep 30",
+        "info": "Or first 100 tickets",
+        "soldOut": false
+      },
+      {
+        "name": "I love DFUA",
+        "price": 100,
+        "currency": "$",
+        "starts": "Oct 1",
+        "ends": "Oct 13",
         "soldOut": false
       }
     ]
@@ -212,7 +219,7 @@
   "teamPageText": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT.",
   "statistics": [
     {
-      "counter": 600,
+      "counter": 900,
       "caption": "Attendees"
     },
     {
@@ -220,7 +227,7 @@
       "caption": "Days"
     },
     {
-      "counter": 30,
+      "counter": 40,
       "caption": "Sessions"
     },
     {

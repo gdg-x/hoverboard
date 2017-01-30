@@ -1,9 +1,9 @@
 {
-  "url": "https://hoverboard.firebaseapp.com/",
-  "startDate": "2016-09-09T09:00:00+03:00",
-  "endDate": "2016-09-10T19:00:00+03:00",
+  "url": "https://devfest.gdg.org.ua/",
+  "startDate": "2017-010-13T09:00:00+03:00",
+  "endDate": "2017-10-14T19:00:00+03:00",
   "analytics": {
-    "prod": "UA-43643469-8",
+    "prod": "UA-43643469-1",
     "dev": "UA-43643469-9"
   },
   "organizer": {
@@ -11,29 +11,29 @@
     "twitter": "gdglviv"
   },
   "webapp": {
-    "shortName": "DevFest",
-    "themeColor": "#F57C00",
-    "backgroundColor": "#F57C00"
+    "shortName": "DFUA",
+    "themeColor": "#2196F3",
+    "backgroundColor": "#2196F3"
   },
   "firebase": {
-    "name": "hoverboard-experimental",
-    "domain": "hoverboard-experimental.firebaseapp.com",
-    "database": "https://hoverboard-experimental.firebaseio.com",
-    "api": "AIzaSyALDa2D7CMhK_wt2VkET1MaJuQXYVUJd2I",
+    "name": "hoverboard-firebase",
+    "domain": "hoverboard-firebase.firebaseapp.com",
+    "database": "https://hoverboard-firebase.firebaseio.com",
+    "api": "AIzaSyDWy6O98n-ueoVaYPWRPve23vjm3JP08gw",
     "userSessionsPath": "/userSessions",
     "ratingsPath": "/ratings",
-    "indexedDbSession": "hoverboard"
+    "indexedDbSession": "dfua"
   },
   "mailchimp": {
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
   },
   "hashtag": "dfua",
-  "disqusShortName": "hoverboard-gdg-x",
-  "tweetsSource": "/data/tweets.json",
+  "disqusShortName": "dfua",
+  "tweetsSource": "https://dfua-tweets.herokuapp.com/favoritesjson.php?c=10&cache_interval=8000",
   "partnershipProposition": "http://bit.ly/df16-sponsor",
-  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
-  "enableSessionsRating": true,
+  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en",
+  "enableSessionsRating": false,
   "navigation": [
     {
       "route": "home",
@@ -42,14 +42,6 @@
     {
       "route": "blog",
       "permalink": "/blog/"
-    },
-    {
-      "route": "schedule",
-      "permalink": "/schedule/"
-    },
-    {
-      "route": "speakers",
-      "permalink": "/speakers/"
     },
     {
       "route": "team",
@@ -79,7 +71,7 @@
     }
   ],
   "location": {
-    "apiKey": "",
+    "apiKey": "AIzaSyDWy6O98n-ueoVaYPWRPve23vjm3JP08gw",
     "name": "Pivdennyi Expo Center",
     "address": "36 Shchyretska St, Lviv, Ukraine",
     "link": "https://www.facebook.com/expopivdennij",
@@ -99,13 +91,30 @@
     ]
   },
   "gallery": {
-    "albumUrl": "https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1",
-    "photos": {
-      "big": "/images/backgrounds/2015_1.jpg",
-      "small": [
-        "/images/backgrounds/2015_2.jpg",
-        "/images/backgrounds/2015_3.jpg"
-      ]
-    }
+    "albumUrl": "https://goo.gl/photos/H8s3CtPexCzkLqSt9",
+    "sharedAlbumUrl": "https://goo.gl/photos/FLUS5ezy5dNzTCXi7",
+    "photos": [
+      {
+        "big": "/images/backgrounds/2016_1.jpg",
+        "small": [
+          "/images/backgrounds/2016_2.jpg",
+          "/images/backgrounds/2016_3.jpg"
+        ]
+      },
+      {
+        "big": "/images/backgrounds/2016_4.jpg",
+        "small": [
+          "/images/backgrounds/2016_5.jpg",
+          "/images/backgrounds/2016_6.jpg"
+        ]
+      },
+      {
+        "big": "/images/backgrounds/2016_7.jpg",
+        "small": [
+          "/images/backgrounds/2016_8.jpg",
+          "/images/backgrounds/2016_9.jpg"
+        ]
+      }
+    ]
   }
 }
