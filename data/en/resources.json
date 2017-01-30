@@ -132,12 +132,17 @@
         },
         {
           "text": "GDG DevFest Ukraine 2014",
-          "url": "http://devfest.gdg.org.ua/2014/",
+          "url": "https://dfua14.firebaseapp.com",
           "newTab": true
         },
         {
           "text": "GDG DevFest Ukraine 2015",
-          "url": "http://devfest.gdg.org.ua/2015/",
+          "url": "https://dfua15.firebaseapp.com",
+          "newTab": true
+        },
+        {
+          "text": "GDG DevFest Ukraine 2016",
+          "url": "https://dfua16.firebaseapp.com",
           "newTab": true
         }
       ]
