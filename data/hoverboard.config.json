@@ -51,8 +51,8 @@
   "social": [
     {
       "name": "twitter",
-      "nickname": "GDGLviv",
-      "url": "https://twitter.com/gdglviv"
+      "nickname": "devfest_ukraine",
+      "url": "https://twitter.com/devfest_ukraine"
     },
     {
       "name": "gplus",
@@ -61,13 +61,18 @@
     },
     {
       "name": "facebook",
-      "nickname": "GDGLviv",
-      "url": "https://www.facebook.com/GDGLviv"
+      "nickname": "devfest.ukraine",
+      "url": "https://www.facebook.com/devfest.ukraine/"
     },
     {
       "name": "linkedin",
       "nickname": "google-developers-group-lviv",
       "url": "https://www.linkedin.com/company/google-developers-group-lviv"
+    },
+    {
+      "name": "instagram",
+      "nickname": "devfestukraine",
+      "url": "https://www.instagram.com/devfestukraine"
     }
   ],
   "location": {

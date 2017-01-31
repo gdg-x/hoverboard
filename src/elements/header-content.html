@@ -80,18 +80,29 @@
       }
 
       .motto {
-        margin-top: 20px;
-        font-size: 22px;
+        margin-top: 24px;
+        max-width: 340px;
+        font-size: 24px;
         line-height: 1;
       }
 
       .action-buttons {
-        margin-top: 40px;
+        margin-top: 24px;
       }
 
       paper-button {
         font-size: 0.8em;
         color: #fff;
+      }
+
+      paper-button iron-icon {
+        margin-right: 8px;
+      }
+
+      .primary-white {
+        --iron-icon-fill-color: var(--default-primary-color);
+        background-color: #fff;
+        color: var(--default-primary-color);
       }
 
       .open-video {
@@ -104,6 +115,14 @@
 
       .open-video iron-icon {
         margin-right: 5px;
+      }
+
+      .info-items {
+        margin-top: 8px;
+      }
+
+      .info-item:not(:last-of-type) {
+        margin-right: 8px;
       }
 
       @media (min-width: 601px) {
@@ -130,14 +149,29 @@
             <div class="home-wrapper">
               <iron-image class="logo" src="/images/logo-light.svg" sizing="contain"
                           alt="GDG DevFest Ukraine 2016"></iron-image>
-              <h3 class="dates">{$ dates $}</h3>
-              <h2 class="motto">{$ motto $}</h2>
-              <div class="open-video" on-tap="_openVideo">
-                <iron-icon icon="play"></iron-icon>
-                {$ playIcon $}
+
+              <div class="info-items" layout horizontal wrap>
+                <div class="info-item">
+                  <iron-icon icon="calendar-event"></iron-icon>
+                  {$ dates $}
+                </div>
+                <div class="info-item">
+                  <iron-icon icon="place"></iron-icon>
+                  {$ locationAddressShort $}
+                </div>
               </div>
+
+              <h2 class="motto">{$ motto $}</h2>
+
               <div class="action-buttons">
-                <paper-button class="primary" on-tap="_scrollToTickets" raised>{$ buyTicket $}</paper-button>
+                <paper-button on-tap="_openVideo">
+                  <iron-icon icon="movie-filter"></iron-icon>
+                  <span>{$ playIcon $}</span>
+                </paper-button>
+                <paper-button class="primary-white" on-tap="_scrollToTickets" raised>
+                  <iron-icon icon="ticket"></iron-icon>
+                  <span>{$ buyTicket $}</span>
+                </paper-button>
               </div>
             </div>
           </div>
@@ -150,13 +184,13 @@
           </div>
         </animatable-content>
         {% for page, settings in pages %}
-          {% if page !== 'home' and page !== 'blog' %}
-            <animatable-content name="{$ page $}">
-              <div class="container">
-                <h3 class="page-title">{$ settings.title $}</h3>
-              </div>
-            </animatable-content>
-          {% endif %}
+        {% if page !== 'home' and page !== 'blog' %}
+        <animatable-content name="{$ page $}">
+          <div class="container">
+            <h3 class="page-title">{$ settings.title $}</h3>
+          </div>
+        </animatable-content>
+        {% endif %}
         {% endfor %}
       </neon-animated-pages>
     </app-toolbar>

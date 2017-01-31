@@ -129,6 +129,11 @@
         font-size: 14px;
         cursor: pointer;
       }
+
+      paper-button iron-icon {
+        margin-right: 8px;
+        --iron-icon-fill-color: var(--header-background);
+      }
     </style>
 
     <app-toolbar id="mainToolbar">
@@ -187,7 +192,10 @@
 
         <div class="action-button-wrapper" hidden$="[[app.isPhoneSize]]" layout horizontal center-center>
           <a href="{$ tickets.url $}" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
-            <paper-button class="action-button">{$ buyTicket $}</paper-button>
+            <paper-button class="action-button">
+              <iron-icon icon="ticket"></iron-icon>
+              {$ buyTicket $}
+            </paper-button>
           </a>
         </div>
       </div>
