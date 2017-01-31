@@ -4,7 +4,7 @@
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
   "dates": "October 13-14, 2017",
   "locationAddressShort": "Lviv, Ukraine",
-  "motto": "Make the most of development. Make the most of you!",
+  "motto": "The biggest Google tech conference in CEE.\nAll about Android, Web, and Cloud.",
   "playIcon": "See how it was in 2016",
   "c4p": "Become a speaker",
   "buyTicket": "Buy ticket",
@@ -33,7 +33,7 @@
   "locationAddress": "Shchyretska St, 36",
   "organizerTitle": "Organizer",
   "aboutOrganizers": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
-  "openTeamPage": "Open team page",
+  "openTeamPage": "Meet the team",
   "whatIsGdg": "What is GDG?",
   "aboutGdg": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion",
   "readMore": "Read more",
@@ -61,7 +61,8 @@
   "shareYourStory": "Share your story about #dfua",
   "addPhotos": "Add your photos to",
   "sharedAlbum": "Shared album",
-  "orView": "or view",
+  "orView": "the photo highlights from #DFUA16",
+  "view": "View",
   "highlights": "Highlights",
 
   "pages": {
@@ -111,7 +112,7 @@
       "title": "For visitors",
       "links": [
         {
-          "text": "Team",
+          "text": "Meet the team",
           "url": "/team/",
           "newTab": false
         },
@@ -153,11 +154,6 @@
         {
           "text": "Partnership Proposition",
           "url": "http://bit.ly/df16-sponsor",
-          "newTab": true
-        },
-        {
-          "text": "Media Kit",
-          "url": "http://bit.ly/df16-media",
           "newTab": true
         }
       ]
@@ -207,11 +203,11 @@
         "currency": "$",
         "starts": "Jul 1",
         "ends": "Sep 30",
-        "info": "Or first 100 tickets",
+        "info": "Or first 350 tickets",
         "soldOut": false
       },
       {
-        "name": "I love DFUA",
+        "name": "Lazy Bird",
         "price": 100,
         "currency": "$",
         "starts": "Oct 1",

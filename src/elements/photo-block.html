@@ -126,14 +126,10 @@
 
     <div class="photo-albums-links">
       <div class="container container-narrow" layout horizontal center-center wrap>
-        <h4 class="heading">{$ addPhotos $}</h4>
-        <a class="block-link" href="{$ gallery.sharedAlbumUrl $}" target="_blank" rel="noopener noreferrer">
-          <paper-button raised>{$ sharedAlbum $}</paper-button>
+        <a class="block-link" href="{$ gallery.albumUrl $}" target="_blank" rel="noopener noreferrer">
+          <paper-button raised>{$ view $}</paper-button>
         </a>
         <h4 class="heading">{$ orView $}</h4>
-        <a class="block-link" href="{$ gallery.albumUrl $}" target="_blank" rel="noopener noreferrer">
-          <paper-button raised>{$ highlights $}</paper-button>
-        </a>
       </div>
     </div>
 
