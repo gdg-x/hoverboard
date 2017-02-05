@@ -93,7 +93,7 @@
       <h4 class="heading">{$ featuredPeopleTitle $}</h4>
       <div class="people-wrapper">
         <template is="dom-repeat" items="[[featuredPeople]]" as="person">
-          <a href$="/speakers/[[person.id]]" class="person">
+          <div class="person">
             <iron-image
               class="photo"
               src="[[person.photoUrl]]"
@@ -106,13 +106,8 @@
             ></iron-image>
             <h4 class="name">[[person.name]]</h4>
             <span class="company">[[person.country]]</span>
-          </a>
+          </div>
         </template>
-      </div>
-      <div>
-        <a href="/speakers" class="block-link">
-          <paper-button>{$ featuredPeopleViewAll $}</paper-button>
-        </a>
       </div>
     </div>
 

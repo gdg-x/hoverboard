@@ -7,6 +7,20 @@
   <template>
     <iron-ajax auto url="[[postsSource]]" handle-as="json" on-response="_reversePosts"></iron-ajax>
 
+    <firebase-document
+      id="queryPreviousSpeakers"
+      app-name="{$ firebase.name $}"
+      path="/previousSpeakers"
+      data="{{_firebasePreviousSpeakersRaw}}">
+    </firebase-document>
+
+    <app-indexeddb-mirror
+      session="{$ firebase.indexedDbSession $}"
+      key="previousSpeakers"
+      data="{{_firebasePreviousSpeakersRaw}}"
+      persisted-data="{{app.previousSpeakers}}">
+    </app-indexeddb-mirror>
+
     <!--<firebase-document-->
       <!--id="querySpeakers"-->
       <!--app-name="{$ firebase.name $}"-->
