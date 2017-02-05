@@ -1,7 +1,7 @@
 {
     "1": {
         "id": 1,
-        "featured": false,
+        "featured": true,
         "name": "Mete Atamel",
         "title": "Developer Advocate",
         "company": "Google",
@@ -38,7 +38,7 @@
     },
     "2": {
         "id": 2,
-        "featured": false,
+        "featured": true,
         "name": "Yonatan Levin",
         "title": "Android Evangelist & Developer",
         "company": "Gett",
@@ -80,7 +80,7 @@
     },
     "3": {
         "id": 3,
-        "featured": false,
+        "featured": true,
         "name": "Sascha Wolter",
         "title": "Senior Developer Evangelist Connected Home",
         "company": "Duetsche Telekom AG - Group Innovation+",
@@ -117,7 +117,7 @@
     },
     "4": {
         "id": 4,
-        "featured": false,
+        "featured": true,
         "name": "Rustem Arzymbetov",
         "title": "Software Engineer",
         "company": "Google",
@@ -170,7 +170,7 @@
     },
     "6": {
         "id": 6,
-        "featured": false,
+        "featured": true,
         "name": "Gerard Sans",
         "title": "Technical Evangelist",
         "company": "AngularZone",
@@ -206,7 +206,7 @@
     },
     "7": {
         "id": 7,
-        "featured": false,
+        "featured": true,
         "name": "Jozef Vodicka",
         "title": "Developer Relations Program Manager",
         "company": "Google",
@@ -468,7 +468,7 @@
     },
     "14": {
         "id": 14,
-        "featured": false,
+        "featured": true,
         "name": "Carmen Popovicu",
         "title": "Front-end Engineer",
         "company": "Widespread",
@@ -803,7 +803,7 @@
     },
     "23": {
         "id": 23,
-        "featured": false,
+        "featured": true,
         "name": "Michael Pustovit",
         "title": "Senior Android Developer",
         "company": "Stanfy",
@@ -1143,7 +1143,7 @@
     },
     "42": {
         "id": 42,
-        "featured": false,
+        "featured": true,
         "name": "Peter Tuszynski",
         "title": "CTO",
         "company": "inFullMobile",
