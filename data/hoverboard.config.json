@@ -25,11 +25,13 @@
     "indexedDbSession": "dfua"
   },
   "mailchimp": {
+    "page": "https://gdg.us11.list-manage.com/subscribe?u=b7e853a79164ddfdbda3ed77b&id=7993e39fbe",
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
   },
   "hashtag": "dfua",
   "disqusShortName": "dfua",
+  "email": "devfest@gdg.org.ua",
   "tweetsSource": "https://dfua-tweets.herokuapp.com/favoritesjson.php?c=10&cache_interval=8000",
   "partnershipProposition": "http://bit.ly/df16-sponsor",
   "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en",
