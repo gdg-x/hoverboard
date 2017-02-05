@@ -174,9 +174,18 @@
     "id": "thank-you",
     "title": "Thank you all for your support",
     "posted": "2016-09-29",
-    "primaryColor": "#2196F3",
-    "secondaryColor": "#1d8fea",
+    "primaryColor": "#5a7785",
+    "secondaryColor": "#455a64",
     "image": "/images/posts/thankyou_2.jpg",
     "brief": "Our team wants to thank one more time our partners, who made GDG DevFest Ukraine 2016 possible...."
+  },
+  {
+    "id": "dfua17-announced",
+    "title": "Announcing GDG DevFest Ukraine 2017",
+    "posted": "2017-02-06",
+    "primaryColor": "#2196F3",
+    "secondaryColor": "#1d8fea",
+    "image": "/images/posts/dfua17-announced.jpg",
+    "brief": "It is official. GDG DevFest Ukraine 2017 is going to take place in Lviv, on October 13-14."
   }
 ]
