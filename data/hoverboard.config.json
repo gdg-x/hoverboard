@@ -1,6 +1,6 @@
 {
-  "url": "https://devfest.gdg.org.ua/",
-  "startDate": "2017-010-13T09:00:00+03:00",
+  "url": "https://devfest.gdg.org.ua",
+  "startDate": "2017-10-13T09:00:00+03:00",
   "endDate": "2017-10-14T19:00:00+03:00",
   "analytics": {
     "prod": "UA-43643469-1",

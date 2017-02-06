@@ -172,9 +172,9 @@
     "url": "https://2event.com/events/800690",
     "elements": [
       {
-        "name": "Edu",
-        "price": 20,
-        "currency": "$",
+        "name": "EDU",
+        "price": 500,
+        "currency": "₴",
         "starts": "Feb 1",
         "ends": "Oct 13",
         "info": "Requires valid student/lecturer ID",
@@ -182,8 +182,8 @@
       },
       {
         "name": "Pre Early Bird",
-        "price": 30,
-        "currency": "$",
+        "price": 800,
+        "currency": "₴",
         "starts": "Feb 1",
         "ends": "Mar 31",
         "info": "Or first 50 tickets",
@@ -191,8 +191,8 @@
       },
       {
         "name": "Early Bird",
-        "price": 40,
-        "currency": "$",
+        "price": 1200,
+        "currency": "₴",
         "starts": "Apr 1",
         "ends": "Jun 30",
         "info": "Or first 200 tickets",
@@ -200,8 +200,8 @@
       },
       {
         "name": "Regular",
-        "price": 55,
-        "currency": "$",
+        "price": 1600,
+        "currency": "₴",
         "starts": "Jul 1",
         "ends": "Sep 30",
         "info": "Or first 350 tickets",
@@ -209,8 +209,8 @@
       },
       {
         "name": "Lazy Bird",
-        "price": 100,
-        "currency": "$",
+        "price": 2800,
+        "currency": "₴",
         "starts": "Oct 1",
         "ends": "Oct 13",
         "soldOut": false

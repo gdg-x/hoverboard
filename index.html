@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en" itemscope itemtype="http://schema.org/Event">
 <head>
-  <base href="/">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
@@ -42,7 +41,7 @@
   <!-- G+ sharing meta data -->
   <meta itemprop="name" content="{$ title $}">
   <meta itemprop="description" content="{$ description $}">
-  <meta itemprop="image" content="/images/social-share.jpg">
+  <meta itemprop="image" content="{$ url $}/images/social-share.jpg">
   <meta itemprop="startDate" content="{$ startDate $}">
   <meta itemprop="endDate" content="{$ endDate $}">
 
@@ -53,7 +52,7 @@
   <meta property="og:url" content="{$ url $}">
   <meta property="og:description" content="{$ description $}">
   <meta property="og:type" content="Event">
-  <meta property="og:image" content="/images/social-share.jpg">
+  <meta property="og:image" content="{$ url $}/images/social-share.jpg">
   <meta property="og:image:type" content="image/jpg" />
 
   <!-- Twitter meta data -->
@@ -61,7 +60,7 @@
   <meta name="twitter:creator" content="@{$ organizer.twitter $}">
   <meta name="twitter:title" content="{$ title $}">
   <meta name="twitter:description" content="{$ description $}">
-  <meta name="twitter:image" content="/images/social-share.jpg">
+  <meta name="twitter:image" content="{$ url $}/images/social-share.jpg">
 
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
   <link rel="dns-prefetch" href="https://apis.google.com">
@@ -122,6 +121,14 @@
       }
     };
 
+    (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:407943,hjsv:5};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+    })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
   </script>
 
   <link rel="import" href="/src/hoverboard-app.html" async>
