@@ -174,7 +174,7 @@
       {
         "name": "EDU",
         "price": 500,
-        "currency": "₴",
+        "currency": "UAH",
         "starts": "Feb 7",
         "ends": "Oct 13",
         "info": "Requires valid student/lecturer ID",
@@ -183,7 +183,7 @@
       {
         "name": "Pre Early Bird",
         "price": 800,
-        "currency": "₴",
+        "currency": "UAH",
         "starts": "Feb 7",
         "ends": "Mar 31",
         "info": "Or first 50 tickets",
@@ -192,7 +192,7 @@
       {
         "name": "Early Bird",
         "price": 1200,
-        "currency": "₴",
+        "currency": "UAH",
         "starts": "Apr 1",
         "ends": "Jun 30",
         "info": "Or first 200 tickets",
@@ -201,7 +201,7 @@
       {
         "name": "Regular",
         "price": 1600,
-        "currency": "₴",
+        "currency": "UAH",
         "starts": "Jul 1",
         "ends": "Sep 30",
         "info": "Or first 350 tickets",
@@ -210,9 +210,9 @@
       {
         "name": "I Love DFUA",
         "price": 2800,
-        "currency": "₴",
-        "starts": "Feb 7",
-        "ends": "Oct 13",
+        "currency": "UAH",
+        "starts": "Money worth nothing when you love it",
+        "ends": "",
         "soldOut": false
       }
     ]

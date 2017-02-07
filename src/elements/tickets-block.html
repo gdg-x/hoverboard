@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
@@ -48,6 +49,11 @@
         color: var(--primary-text-color);
       }
 
+      iron-icon {
+        margin-right: 8px;
+        fill: var(--primary-text-color);
+      }
+
       paper-dialog {
         background: #fff;
         color: var(--primary-text-color);
@@ -85,7 +91,10 @@
       </div>
       <div class="details">{$ ticketsDetails $}</div>
       <a href="{$ tickets.url $}" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
-        <paper-button class="buy-button" raised>{$ buyTicket $}</paper-button>
+        <paper-button class="buy-button" raised>
+          <iron-icon icon="ticket"></iron-icon>
+          {$ buyTicket $}
+        </paper-button>
       </a>
     </div>
 

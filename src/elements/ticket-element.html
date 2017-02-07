@@ -97,6 +97,7 @@
       }
 
       .dates {
+        max-width: 200px;
         font-size: 16px;
         color: var(--secondary-text-color);
       }
@@ -121,16 +122,21 @@
       .overlay[hidden] {
         display: none;
       }
+
+      .currency {
+        font-size: 24px;
+        vertical-align: super;
+      }
     </style>
 
     <div class="punch"></div>
     <div class="inner">
       <div class="main">
-        <div class="headline">[[price]][[currency]]</div>
+        <div class="headline">[[price]]<span class="currency">[[currency]]</span></div>
         <div class="divider">
           <iron-icon icon="icons:star"></iron-icon>
         </div>
-        <div class="dates">[[starts]] - [[ends]]</div>
+        <div class="dates">[[starts]] <span hidden$="[[!ends]]">-</span> [[ends]]</div>
         <div class="additional-info" hidden$="[[!info]]">[[info]]</div>
       </div>
     </div>
