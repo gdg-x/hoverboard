@@ -3,8 +3,7 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
 <link rel="import" href="../styles/shared-styles.html">
-<link rel="import" href="../behaviors/localize-behavior.html">
-<link rel="import" href="video-dialog.html">
+
 
 <dom-module id="call-to-action">
 
@@ -46,12 +45,9 @@
     </style>
 
     <div class="container container-narrow">
-      <h4 class="heading">[[localize(app.data.callToAction.videoTitle)]]</h4>
-      <paper-button class="open-dialog-button" on-tap="playVideo">[[localize('action')]]</paper-button>
+      <h4 class="heading">{$ callToAction.videoTitle $}</h4>
+      <paper-button class="open-dialog-button" on-tap="playVideo">{$ action $}</paper-button>
     </div>
-    <video-dialog id="videoDialog" video-title="[[localize(app.data.callToAction.videoTitle)]]" youtube-id="[[app.data.callToAction.videoId]]"
-                  entry-animation="scale-up-animation"
-                  exit-animation="scale-down-animation" modal disable-controls></video-dialog>
 
   </template>
 
@@ -63,12 +59,9 @@
 
         is: 'call-to-action',
 
-        behaviors: [
-          HOVERBOARD.LocalizeBehavior
-        ],
-
-        playVideo: function() {
-          this.$.videoDialog.open();
+        playVideo: function () {
+          HOVERBOARD.Elements.Template.openVideo('{$ callToAction.videoTitle $}',
+            '{$ callToAction.videoId $}', true);
         }
 
       });

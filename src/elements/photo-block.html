@@ -126,24 +126,13 @@
 
     <div class="photo-albums-links">
       <div class="container container-narrow" layout horizontal center-center wrap>
-        <h4 class="heading">
-          [[localize('add-photos')]]
-          </h4>
-          <a class="block-link" href$="[[app.data.gallery.sharedAlbumUrl]]" target="_blank" rel="noopener noreferrer"
-             on-tap="_trackClick">
-            <paper-button raised>[[localize('shared-album')]]</paper-button>
-          </a>
-        <h4 class="heading">
-
-        [[localize('or-view')]]
-        </h4>
-
-        <a class="block-link" href$="[[app.data.gallery.albumUrl]]" target="_blank" rel="noopener noreferrer"
-             on-tap="_trackClick">
-            <paper-button raised>[[localize('highlights')]]</paper-button>
-          </a>
+        <a class="block-link" href="{$ gallery.albumUrl $}" target="_blank" rel="noopener noreferrer">
+          <paper-button raised>{$ view $}</paper-button>
+        </a>
+        <h4 class="heading">{$ orView $}</h4>
       </div>
     </div>
+
 
   </template>
 
@@ -155,10 +144,6 @@
 
         is: 'photo-block',
 
-        behaviors: [
-          HOVERBOARD.LocalizeBehavior
-        ],
-
         properties: {
           interval: {
             type: Number,
@@ -168,18 +153,23 @@
           _selectedIndex: {
             type: Number,
             value: -1
+          },
+
+          _photos: {
+            type: Array,
+            value: {$ gallery.photos | dump | safe $}
           }
         },
 
-        observers: [
-          'next(app.data.gallery.photos)'
-        ],
+        ready: function () {
+          this.next();
+        },
 
         next: function () {
           var index = this._selectedIndex;
-          if (this.app.data && this.app.data.gallery && this.app.data.gallery.photos) {
-            this._selectedIndex = (++index % this.app.data.gallery.photos.length);
-            this._selected = this.app.data.gallery.photos[this._selectedIndex];
+          if (this._photos.length) {
+            this._selectedIndex = (++index % this._photos.length);
+            this._selected = this._photos[this._selectedIndex];
             this.async(this.next, this.interval);
           }
         }

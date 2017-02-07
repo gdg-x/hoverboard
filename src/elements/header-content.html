@@ -7,7 +7,6 @@
 <link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
 
 <link rel="import" href="../styles/shared-styles.html">
-<link rel="import" href="../behaviors/localize-behavior.html">
 <link rel="import" href="animatable-content.html">
 
 
@@ -81,13 +80,14 @@
       }
 
       .motto {
-        margin-top: 20px;
-        font-size: 22px;
+        margin-top: 24px;
+        max-width: 470px;
+        font-size: 24px;
         line-height: 1;
       }
 
       .action-buttons {
-        margin-top: 30px;
+        margin-top: 24px;
       }
 
       paper-button {
@@ -117,6 +117,14 @@
         margin-right: 5px;
       }
 
+      .info-items {
+        margin-top: 8px;
+      }
+
+      .info-item:not(:last-of-type) {
+        margin-right: 8px;
+      }
+
       @media (min-width: 601px) {
         .container {
           padding-bottom: 40px;
@@ -124,7 +132,7 @@
 
         .home-wrapper {
           width: 50%;
-          max-width: 440px;
+          max-width: 500px;
         }
 
         app-toolbar {
@@ -138,21 +146,31 @@
       <neon-animated-pages attr-for-selected="name" selected="{{app.page}}">
         <animatable-content name="home">
           <div class="container" center-justified>
-                <div class="home-wrapper">
-                  <iron-image class="logo" src="/images/logo-light.svg" sizing="contain"
-                              alt="GDG DevFest Ukraine 2016"></iron-image>
-                  <h3 class="dates">{{localize('dates')}}</h3>
-                  <h2 class="motto">{{localize('motto')}}</h2>
-                  <div class="action-buttons">
-                    <a href="https://goo.gl/photos/H8s3CtPexCzkLqSt9" on-tap="_trackEventPhotos" target="_blank" rel="noopener noreferrer">
-                      <paper-button>
-                        <iron-icon icon="photo-album"></iron-icon>
-                        <span>[[localize('view-photos')]]</span>
-                      </paper-button>
-                    </a>
-                <paper-button class="primary-white" on-tap="_openVideo">
+            <div class="home-wrapper">
+              <iron-image class="logo" src="/images/logo-light.svg" sizing="contain"
+                          alt="GDG DevFest Ukraine 2017"></iron-image>
+
+              <div class="info-items" layout horizontal wrap>
+                <div class="info-item">
+                  <iron-icon icon="calendar-event"></iron-icon>
+                  {$ dates $}
+                </div>
+                <div class="info-item">
+                  <iron-icon icon="place"></iron-icon>
+                  {$ locationAddressShort $}
+                </div>
+              </div>
+
+              <h2 class="motto">{$ motto $}</h2>
+
+              <div class="action-buttons">
+                <paper-button on-tap="_openVideo">
                   <iron-icon icon="movie-filter"></iron-icon>
-                  <span>[[localize('view-highlights-video')]]</span>
+                  <span>{$ playIcon $}</span>
+                </paper-button>
+                <paper-button class="primary-white" on-tap="_scrollToTickets" raised>
+                  <iron-icon icon="ticket"></iron-icon>
+                  <span>{$ buyTicket $}</span>
                 </paper-button>
               </div>
             </div>
@@ -160,36 +178,20 @@
         </animatable-content>
         <animatable-content name="blog">
           <div class="container">
-            <h3 class="page-title" hidden$="{{app.headerSettings.title}}">{{localize('blog')}}</h3>
+            <h3 class="page-title" hidden$="{{app.headerSettings.title}}">{$ pages.blog.title $}</h3>
             <h3 class="page-title" hidden$="{{!app.headerSettings.title}}">[[app.headerSettings.title]]</h3>
             <div class="page-subtitle" hidden$="{{!app.headerSettings.subtitle}}">[[app.headerSettings.subtitle]]</div>
           </div>
         </animatable-content>
-        <animatable-content name="speakers">
+        {% for page, settings in pages %}
+        {% if page !== 'home' and page !== 'blog' %}
+        <animatable-content name="{$ page $}">
           <div class="container">
-            <h3 class="page-title">{{localize('speakers')}}</h3>
+            <h3 class="page-title">{$ settings.title $}</h3>
           </div>
         </animatable-content>
-        <animatable-content name="schedule">
-          <div class="container">
-            <h3 class="page-title">{{localize('schedule')}}</h3>
-          </div>
-        </animatable-content>
-        <animatable-content name="team">
-          <div class="container">
-            <h3 class="page-title">{{localize('team')}}</h3>
-          </div>
-        </animatable-content>
-        <animatable-content name="cod">
-          <div class="container">
-            <h3 class="page-title">{{localize('cod')}}</h3>
-          </div>
-        </animatable-content>
-        <animatable-content name="quest">
-          <div class="container">
-            <h3 class="page-title">{{localize('quest')}}</h3>
-          </div>
-        </animatable-content>
+        {% endif %}
+        {% endfor %}
       </neon-animated-pages>
     </app-toolbar>
 
@@ -202,10 +204,6 @@
       Polymer({
 
         is: 'header-content',
-
-        behaviors: [
-          HOVERBOARD.LocalizeBehavior
-        ],
 
         properties: {
           app: {
@@ -220,9 +218,9 @@
         },
 
         _openVideo: function () {
-          HOVERBOARD.Elements.Template.openVideo(this.app.data.pages.home.headerSettings.video.title,
-            this.app.data.pages.home.headerSettings.video.youtubeId, true);
-          HOVERBOARD.Analytics.trackEvent('video', 'watch', this.app.data.pages.home.headerSettings.video.title);
+          HOVERBOARD.Elements.Template.openVideo('{$ pages.home.headerSettings.video.title $}',
+            '{$ pages.home.headerSettings.video.youtubeId $}', true);
+          HOVERBOARD.Analytics.trackEvent('video', 'watch', '{$ pages.home.headerSettings.video.title $}');
         },
 
         _scrollToTickets: function () {
@@ -232,14 +230,6 @@
             behavior: 'smooth',
             target: HOVERBOARD.Elements.Scroller
           });
-        },
-
-        _trackEventPhotos: function() {
-          HOVERBOARD.Analytics.trackEvent('photos', 'view', 'header');
-        },
-
-        _trackEventSummary: function() {
-          HOVERBOARD.Analytics.trackEvent('summary', 'open', 'header');
         }
 
       });

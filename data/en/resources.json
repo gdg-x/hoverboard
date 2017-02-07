@@ -1,113 +1,244 @@
 {
-  "title": "GDG DevFest Ukraine 2016",
-  "dates": "September 9-10, 2016",
-  "home": "Home",
-  "blog": "Blog",
-  "speakers": "Speakers",
-  "schedule": "Schedule",
-  "team": "Team",
-  "cod": "Code of Conduct",
-  "hub": "Speakers Hub",
-  "location-address-short": "Lviv, Ukraine",
-  "motto": "The biggest Google tech conference in CEE. All about Android, Web and Cloud",
-  "play-icon": "See how it was in 2015",
+  "title": "GDG DevFest Ukraine 2017",
+  "description": "GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases. Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
+  "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
+  "dates": "October 13-14, 2017",
+  "locationAddressShort": "Lviv, Ukraine",
+  "motto": "The biggest Google tech conference in CEE.\nAll about Android, Web, and Cloud.",
+  "playIcon": "See how it was in 2016",
   "c4p": "Become a speaker",
-  "buy-ticket": "Buy ticket",
-  "back-to-top": "Back to top",
+  "buyTicket": "Buy ticket",
+  "backToTop": "Back to top",
   "subscribe": "Subscribe",
-  "your-email": "Your email",
-  "subscribe-note": "No spam, only the latest news and updates!",
-  "for-visitors": "For visitors",
-  "google-developers": "Google Developers",
-  "df-13": "GDG DevFest Ukraine 2013",
-  "df-14": "GDG DevFest Ukraine 2014",
-  "df-15": "GDG DevFest Ukraine 2015",
-  "for-partners": "For Partners",
-  "partnership-proposition": "Partnership Proposition",
-  "media-kit": "Media Kit",
-  "media-accreditation": "Media Accreditation",
-  "contact-us": "Contact us",
-  "tickets-title": "Tickets",
-  "tickets-details": "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
-  "run-out-tickets": "We have run out all our tickets",
+  "yourEmail": "Your email",
+  "subscribeNote": "No spam, only the latest news and updates!",
+  "contactUs": "Contact us",
+  "ticketsTitle": "Tickets",
+  "ticketsDetails": "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
   "close": "Close",
-  "sold-out-tickets": "Sold Out",
-  "student-ticket": "Student",
-  "student-ticket-starts": "May 1",
-  "student-ticket-ends": "Sep 8",
-  "student-ticket-info": "Requires valid student ID",
-  "early-ticket": "Early Bird",
-  "early-ticket-starts": "May 1",
-  "early-ticket-ends": "July 1",
-  "early-ticket-info": "Or first 100 tickets",
-  "lazy-ticket": "Lazy Bird",
-  "lazy-ticket-starts": "July 1",
-  "lazy-ticket-ends": "Sep 8",
-  "team-page-title": "Team",
-  "team-page-text": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT.",
-  "description": "Sessions from the world experts, hands-on workshops that challenge your skills, expo area to learn about latest developments in Google technologies. GDG DevFest Ukraine - Make the most of development, make the most of you.",
-  "attendees": "Attendees",
-  "days": "Days",
-  "sessions": "Sessions",
-  "workshops": "Workshops",
-  "tracks": "Parallel tracks",
-  "social-title": "Social",
-  "social-motto": "Add to circles, like, follow or connect with us on",
-  "before-hashtag": "What's up",
-  "click-to-view-photos": "Click here to view more photos",
+  "soldOutTickets": "Sold Out",
+  "socialTitle": "Social",
+  "socialMotto": "Like, follow or connect with us on",
+  "beforeHashtag": "What's up",
+  "clickToViewPhotos": "Click here to view more photos",
   "partners": "Partners",
-  "become-a-partner": "Become a partner",
-  "general-sponsor": "General sponsor",
-  "diamond-sponsor": "Diamond sponsor",
-  "platinum-sponsor": "Platinum sponsors",
-  "gold-sponsor": "Gold sponsors",
-  "gift-sponsor": "Gift sponsor",
-  "hosting-partner": "Hosting partner",
-  "general-partner": "General partner",
-  "information-partner": "Information partners",
-  "featured-videos-title": "Featured #DFUA '16 Sessions",
-  "featured-videos-view-all": "View all videos",
-  "featured-people-title": "Rockstar Speakers",
-  "featured-people-view-all": "View all speakers",
-  "action-title": "GDG DevFest 2015",
+  "becomePartner": "Become a partner",
+  "featuredVideosTitle": "Featured #DFUA '16 Sessions",
+  "featuredVideosViewAll": "View all videos",
+  "featuredPeopleTitle": "See who was speaking at #DFUA",
+  "featuredPeopleViewAll": "View all speakers",
   "action": "See how it was",
-  "location-title": "Pivdennyi Expo Center",
-  "location-description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event",
-  "location-address": "Shchyretska St, 36",
-  "organizer": "Organizer",
-  "about-organizers": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
-  "open-team-page": "Meet the team",
-  "what-is-gdg": "What is GDG?",
-  "about-gdg": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion",
-  "read-more": "Read more",
-  "copy-link": "Copy link",
-  "filtered-by": "filtered by",
-  "clear-all": "Clear all",
+  "locationTitle": "Pivdennyi Expo Center",
+  "locationDescription": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event",
+  "locationAddress": "Shchyretska St, 36",
+  "organizerTitle": "Organizer",
+  "aboutOrganizers": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
+  "openTeamPage": "MEET THE TEAM",
+  "whatIsGdg": "What is GDG?",
+  "aboutGdg": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion",
+  "readMore": "Read more",
+  "copyLink": "Copy link",
+  "filteredBy": "filtered by",
+  "clearAll": "Clear all",
   "filter": "Filter",
-  "latest-news": "Latest news",
-  "continue-reading": "Continue reading",
-  "view-presentation": "View presentation",
-  "view-video": "View video",
+  "latestNews": "Latest news",
+  "continueReading": "Continue reading",
+  "viewPresentation": "View presentation",
+  "viewVideo": "View video",
   "skills": "Skills",
   "share": "Share",
-  "share-with": "Share with",
-  "quest": "GDG Quest",
-  "get-direction": "Get directions",
-  "open-summary": "Open summary",
-  "share-your-story": "Share your story about #dfua",
-  "waiting-for-video": "Subscribe to super early tickets booking for #dfua 2017!",
-  "view-photos": "View photos",
-  "add-photos": "Add your photos to",
-  "shared-album": "Shared album",
-  "or-view": "or view",
+  "shareWith": "Share with",
+  "signIn": "Sign in",
+  "signOut": "Sign out",
+  "mySchedule": "My Schedule",
+  "browseMore": "Browse more events",
+  "youShouldSignInSessions": "Sign in to save sessions",
+  "youShouldSignInRating": "Sign in to rate sessions",
+  "offlineMessage": "You are offline",
+  "removedFromSchedule": "Removed from My Schedule",
+  "addedToSchedule": "Added to My Schedule",
+  "rateSession": "Rate session",
+  "shareYourStory": "Share your story about #dfua",
+  "addPhotos": "Add your photos to",
+  "sharedAlbum": "Shared album",
+  "orView": "the photo highlights from #DFUA16",
+  "view": "View",
   "highlights": "Highlights",
-  "highlights-video": "Highlights video",
-  "view-highlights-video": "View highlights video",
-  "sign-in": "Sign in",
-  "sign-out": "Sign out",
-  "my-schedule": "My Schedule",
-  "browse-more": "Browse more events",
-  "you-should-sign-in": "Sign in to save sessions",
-  "removed-from-schedule": "Removed from My Schedule",
-  "added-to-schedule": "Added to My Schedule"
+  "subscribeForUpdates": "Get notified about the conference updates",
+
+  "pages": {
+    "home": {
+      "title": "Home",
+      "headerSettings": {
+        "backgroundColor": "#2196F3",
+        "backgroundImage": "/images/backgrounds/home.jpg",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff",
+        "video": {
+          "title": "GDG DevFest Ukraine 2016",
+          "youtubeId": "TdpbgRgz6eE",
+          "text": "See how it was in 2016"
+        },
+        "hideLogo": true,
+        "minHeight": "360px"
+      }
+    },
+    "blog": {
+      "title": "Blog",
+      "headerSettings": {
+        "backgroundColor": "#03a9f4",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
+    },
+    "team": {
+      "title": "Team",
+      "headerSettings": {
+        "backgroundColor": "#009688",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
+    },
+    "cod": {
+      "title": "Cod of Conduct",
+      "headerSettings": {
+        "backgroundColor": "#673ab7",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
+    }
+  },
+  "footerBlocks": [
+    {
+      "title": "For visitors",
+      "links": [
+        {
+          "text": "Meet the team",
+          "url": "/team/",
+          "newTab": false
+        },
+        {
+          "text": "Code of Conduct",
+          "url": "/cod/",
+          "newTab": false
+        },
+        {
+          "text": "Google Developers",
+          "url": "https://developers.google.com/",
+          "newTab": true
+        },
+        {
+          "text": "GDG DevFest Ukraine 2013",
+          "url": "http://gdg-devfest-ua.appspot.com/",
+          "newTab": true
+        },
+        {
+          "text": "GDG DevFest Ukraine 2014",
+          "url": "https://dfua14.firebaseapp.com",
+          "newTab": true
+        },
+        {
+          "text": "GDG DevFest Ukraine 2015",
+          "url": "https://dfua15.firebaseapp.com",
+          "newTab": true
+        },
+        {
+          "text": "GDG DevFest Ukraine 2016",
+          "url": "https://dfua16.firebaseapp.com",
+          "newTab": true
+        }
+      ]
+    },
+    {
+      "title": "For Partners",
+      "links": [
+        {
+          "text": "Partnership Proposition",
+          "url": "http://bit.ly/df16-sponsor",
+          "newTab": true
+        }
+      ]
+    }
+  ],
+  "contactBlock": {
+    "links": [
+      {
+        "text": "devfest@gdg.org.ua",
+        "url": "mailto:devfest@gdg.org.ua"
+      }
+    ]
+  },
+  "tickets": {
+    "url": "https://2event.com/events/800690",
+    "elements": [
+      {
+        "name": "EDU",
+        "price": 500,
+        "currency": "₴",
+        "starts": "Feb 7",
+        "ends": "Oct 13",
+        "info": "Requires valid student/lecturer ID",
+        "soldOut": false
+      },
+      {
+        "name": "Pre Early Bird",
+        "price": 800,
+        "currency": "₴",
+        "starts": "Feb 7",
+        "ends": "Mar 31",
+        "info": "Or first 50 tickets",
+        "soldOut": false
+      },
+      {
+        "name": "Early Bird",
+        "price": 1200,
+        "currency": "₴",
+        "starts": "Apr 1",
+        "ends": "Jun 30",
+        "info": "Or first 200 tickets",
+        "soldOut": false
+      },
+      {
+        "name": "Regular",
+        "price": 1600,
+        "currency": "₴",
+        "starts": "Jul 1",
+        "ends": "Sep 30",
+        "info": "Or first 350 tickets",
+        "soldOut": false
+      },
+      {
+        "name": "I Love DFUA",
+        "price": 2800,
+        "currency": "₴",
+        "starts": "Feb 7",
+        "ends": "Oct 13",
+        "soldOut": false
+      }
+    ]
+  },
+  "teamPageTitle": "Team",
+  "teamPageText": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT.",
+  "statistics": [
+    {
+      "counter": 900,
+      "caption": "Attendees"
+    },
+    {
+      "counter": 2,
+      "caption": "Days"
+    },
+    {
+      "counter": 50,
+      "caption": "Sessions"
+    },
+    {
+      "counter": 4,
+      "caption": "Tracks"
+    }
+  ],
+  "callToAction": {
+    "videoTitle": "GDG DevFest 2015",
+    "videoId": "DfMnJAzOFng"
+  }
 }

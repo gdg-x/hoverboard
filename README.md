@@ -48,9 +48,9 @@ and run:
 
 ###### Prerequisites
 
-Install [polymer-cli](https://github.com/Polymer/polymer-cli):
+Install [gulp 4](https://github.com/gulpjs/gulp/tree/4.0):
 
-    npm i -g polymer-cli
+    npm i -g gulpjs/gulp#4.0
 
 and [Bower](https://bower.io/):
 
@@ -60,14 +60,14 @@ and [Bower](https://bower.io/):
 
 ##### Install dependencies
 
-    bower install
+    bower install && npm install
 
 ##### Start the development server
 
 This command serves the app at `http://localhost:8080` and provides basic URL
 routing for the app:
 
-    polymer serve
+    gulp serve
 
 :book: Read more in [setup docs](/docs/tutorials/set-up.md).
 
@@ -84,11 +84,11 @@ In addition the command also creates a fallback `build/bundled` folder,
 generated using fragment bundling, suitable for serving from non
 H2/push-compatible servers or to clients that do not support H2/Push.
 
-    polymer build
+    gulp
 
 Or you can build in Docker container:
 
-    docker run -v "$PWD":/app hoverboard polymer build
+    docker run -v "$PWD":/app hoverboard gulp build
 
 :book: Read more in [deploy docs](/docs/tutorials/deploy.md).   
 

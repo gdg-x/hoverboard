@@ -11,7 +11,6 @@
 <link rel="import" href="../../bower_components/google-map/google-map.html">
 
 <link rel="import" href="../styles/shared-styles.html">
-<link rel="import" href="../behaviors/localize-behavior.html">
 
 
 <dom-module id="map-block">
@@ -116,16 +115,16 @@
 
     <template is="dom-if" if="[[selected]]">
       <google-map
-        zoom="[[app.data.location.pointer.zoom]]"
-        latitude="[[app.data.location.mapCenter.latitude]]"
-        longitude="[[app.data.location.mapCenter.longitude]]"
-        api-key="[[app.data.location.apiKey]]"
+        zoom="{$ location.pointer.zoom $}"
+        latitude="{$ location.mapCenter.latitude $}"
+        longitude="{$ location.mapCenter.longitude $}"
+        api-key="{$ location.apiKey $}"
         styles="[[options]]"
         disable-zoom disable-default-ui
       >
         <google-map-marker
-          latitude="[[app.data.location.pointer.latitude]]"
-          longitude="[[app.data.location.pointer.longitude]]"
+          latitude="{$ location.pointer.latitude $}"
+          longitude="{$ location.pointer.longitude $}"
         ></google-map-marker>
       </google-map>
     </template>
@@ -137,25 +136,25 @@
         <paper-card class="card">
           <div class="header paper-card">
             <div class="header-image" style$="background-image: url([[_currentImage]])"></div>
-            <div class="title-text">[[localize('location-title')]]</div>
+            <div class="title-text">{$ locationTitle $}</div>
           </div>
           <div class="paper-card-container">
             <div class="card-content list">
               <paper-icon-item disabled>
                 <iron-icon icon="icons:feedback" item-icon></iron-icon>
-                <paper-item-body>[[localize('location-description')]]</paper-item-body>
+                <paper-item-body>{$ locationDescription $}</paper-item-body>
               </paper-icon-item>
               <paper-icon-item disabled>
                 <iron-icon icon="icons:location" item-icon></iron-icon>
                 <paper-item-body two-line>
-                  <div>[[localize('location-address')]]</div>
-                  <div secondary>[[localize('location-address-short')]]</div>
+                  <div>{$ locationAddress $}</div>
+                  <div secondary>{$ locationAddressShort $}</div>
                 </paper-item-body>
               </paper-icon-item>
             </div>
             <div class="card-actions">
               <a class="bottom-link"
-                 href$="https://www.google.com/maps/dir/[[app.data.location.pointer.latitude]],[[app.data.location.pointer.longitude]]/@[[app.data.location.pointer.latitude]],[[app.data.location.pointer.longitude]],18z"
+                 href="https://www.google.com/maps/dir/{$ location.pointer.latitude $},{$ location.pointer.longitude $}/@{$ location.pointer.latitude $},{$ location.pointer.longitude $},18z"
                  target="_blank"
                  rel="noopener noreferrer"
               >
@@ -176,10 +175,6 @@
       Polymer({
 
         is: 'map-block',
-
-        behaviors: [
-          HOVERBOARD.LocalizeBehavior
-        ],
 
         properties: {
           options: {
@@ -209,6 +204,11 @@
             }
           },
 
+          images: {
+            type: Array,
+            value: {$ location.images | dump | safe $}
+          },
+
           _currentSourceIndex: {
             type: Number,
             value: 0
@@ -219,13 +219,7 @@
           }
         },
 
-        observers: [
-          'setImages(app.data.location.images)'
-        ],
-
-        setImages: function (images) {
-          if (!images) return;
-          this.images = images;
+        ready: function () {
           this._currentImage = this.images[this._currentSourceIndex];
           if (this.images.length > 1) {
             var that = this;

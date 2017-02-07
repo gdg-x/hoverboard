@@ -3,7 +3,6 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
 <link rel="import" href="../styles/shared-styles.html">
-<link rel="import" href="../behaviors/localize-behavior.html">
 
 <dom-module id="subscribe-block">
 
@@ -27,9 +26,9 @@
     </style>
 
     <div class="container container-narrow" layout horizontal center-center wrap>
-      <h4 class="heading">[[localize('waiting-for-video')]]</h4>
-      <a class="block-link" href$="[[app.data.mailchimp.subscribePage]]" target="_blank" rel="noopener noreferrer" on-tap="_trackClick">
-        <paper-button class="primary" raised>[[localize('subscribe')]]</paper-button>
+      <h4 class="heading">{$ subscribeForUpdates $}</h4>
+      <a class="block-link" href="{$ mailchimp.page $}" target="_blank" rel="noopener noreferrer" on-tap="_trackClick">
+        <paper-button class="primary" raised>{$ subscribe $}</paper-button>
       </a>
     </div>
 
@@ -42,10 +41,6 @@
       Polymer({
 
         is: 'subscribe-block',
-
-        behaviors: [
-          HOVERBOARD.LocalizeBehavior
-        ],
 
         _trackClick: function() {
           HOVERBOARD.Analytics.trackEvent('attendees', 'subscribe', 'Subscribe mailchimp - block');

@@ -1,79 +1,41 @@
 {
+  "url": "https://devfest.gdg.org.ua",
+  "startDate": "2017-10-13T09:00:00+03:00",
+  "endDate": "2017-10-14T19:00:00+03:00",
+  "analytics": {
+    "prod": "UA-43643469-1",
+    "dev": "UA-43643469-9"
+  },
+  "organizer": {
+    "name": "GDG Lviv",
+    "twitter": "gdglviv"
+  },
+  "webapp": {
+    "shortName": "DFUA",
+    "themeColor": "#2196F3",
+    "backgroundColor": "#2196F3"
+  },
   "firebase": {
-    "name": "dfua16",
-    "domain": "dfua16.firebaseapp.com",
-    "database": "https://dfua16.firebaseio.com",
-    "api": "AIzaSyDKOSA8VXmDH05rFjann0s6Q2emGVMWlqc",
-    "userSessionsPath": "/userSessions"
+    "name": "hoverboard-firebase",
+    "domain": "hoverboard-firebase.firebaseapp.com",
+    "database": "https://hoverboard-firebase.firebaseio.com",
+    "api": "AIzaSyDWy6O98n-ueoVaYPWRPve23vjm3JP08gw",
+    "userSessionsPath": "/userSessions",
+    "ratingsPath": "/ratings",
+    "indexedDbSession": "dfua"
   },
-  "pages": {
-    "home": {
-      "headerSettings": {
-        "backgroundColor": "#607D8B",
-        "backgroundImage": "/images/backgrounds/home.jpg",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff",
-        "video": {
-          "title": "GDG DevFest Ukraine 2016",
-          "youtubeId": "TdpbgRgz6eE",
-          "text": "Watch higlights"
-        },
-        "hideLogo": true,
-        "minHeight": "360px"
-      }
-    },
-    "blog": {
-      "headerSettings": {
-        "backgroundColor": "#03a9f4",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "speakers": {
-      "headerSettings": {
-        "backgroundColor": "#3f51b5",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "schedule": {
-      "headerSettings": {
-        "backgroundColor": "#673ab7",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "team": {
-      "headerSettings": {
-        "backgroundColor": "#009688",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "cod": {
-      "headerSettings": {
-        "backgroundColor": "#673ab7",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "hub": {
-      "headerSettings": {
-        "backgroundImage": "images/backgrounds/hub.jpg",
-        "backgroundColor": "#4caf50",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "quest": {
-      "headerSettings": {
-        "backgroundImage": "images/backgrounds/quest.jpg",
-        "backgroundColor": "#FF5722",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    }
+  "mailchimp": {
+    "page": "https://gdg.us11.list-manage.com/subscribe?u=b7e853a79164ddfdbda3ed77b&id=7993e39fbe",
+    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
+    "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
   },
+  "hashtag": "dfua",
+  "disqusShortName": "dfua",
+  "email": "devfest@gdg.org.ua",
+  "tweetsSource": "https://dfua-tweets.herokuapp.com/favoritesjson.php?c=10&cache_interval=8000",
+  "partnershipProposition": "http://bit.ly/df16-sponsor",
+  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en",
+  "enableSessionsRating": false,
   "navigation": [
     {
       "route": "home",
@@ -84,174 +46,47 @@
       "permalink": "/blog/"
     },
     {
-      "route": "schedule",
-      "permalink": "/schedule/"
-    },
-    {
-      "route": "speakers",
-      "permalink": "/speakers/"
-    },
-    {
       "route": "team",
       "permalink": "/team/"
     }
   ],
-  "url": "https://dfua16.devfest.gdg.org.ua/",
-  "mailchimp": {
-    "subscribePage": "http://eepurl.com/cq7-Yz",
-    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
-    "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
-  },
-  "partnershipProposition": "https://drive.google.com/file/d/0B7agnb-tSfBcMkVXWVJQZDVoR0U/view?usp=sharing",
-  "disqusShortName": "dfua2016",
-  "languages": [
-    {
-      "name": "English",
-      "key": "en"
-    },
-    {
-      "name": "Українська",
-      "key": "uk"
-    }
-  ],
-  "footerBlocks": [
-    {
-      "title": "for-visitors",
-      "links": [
-        {
-          "text": "cod",
-          "url": "/cod/"
-        },
-        {
-          "text": "google-developers",
-          "url": "https://developers.google.com/",
-          "newTab": true
-        },
-        {
-          "text": "df-13",
-          "url": "http://gdg-devfest-ua.appspot.com/",
-          "newTab": true
-        },
-        {
-          "text": "df-14",
-          "url": "http://devfest.gdg.org.ua/2014/",
-          "newTab": true
-        },
-        {
-          "text": "df-15",
-          "url": "http://devfest.gdg.org.ua/2015/",
-          "newTab": true
-        }
-      ]
-    },
-    {
-      "title": "for-partners",
-      "links": [
-        {
-          "text": "partnership-proposition",
-          "url": "https://drive.google.com/file/d/0B7agnb-tSfBcMkVXWVJQZDVoR0U/view?usp=sharing",
-          "newTab": true
-        },
-        {
-          "text": "media-kit",
-          "url": "http://bit.ly/df16-media",
-          "newTab": true
-        },
-        {
-          "text": "media-accreditation",
-          "url": "https://goo.gl/forms/Kfoa7q79ZcncOmjD3",
-          "newTab": true
-        }
-      ]
-    }
-  ],
-  "contactBlock": {
-    "links": [
-      {
-        "text": "Team",
-        "url": "/team/"
-      },
-      {
-        "text": "devfest@gdg.org.ua",
-        "url": "mailto:devfest@gdg.org.ua"
-      }
-    ]
-  },
-  "tickets": {
-    "url": "http://2event.com/events/630032",
-    "elements": [
-      {
-        "name": "student-ticket",
-        "price": 500,
-        "currency": "₴",
-        "starts": "student-ticket-starts",
-        "ends": "student-ticket-ends",
-        "info": "student-ticket-info",
-        "soldOut": true
-      },
-      {
-        "name": "early-ticket",
-        "price": 750,
-        "currency": "₴",
-        "starts": "early-ticket-starts",
-        "ends": "early-ticket-ends",
-        "info": "early-ticket-info",
-        "soldOut": true
-      },
-      {
-        "name": "lazy-ticket",
-        "price": 1000,
-        "currency": "₴",
-        "starts": "lazy-ticket-starts",
-        "ends": "lazy-ticket-ends",
-        "soldOut": true
-      }
-    ]
-  },
-  "teamPageTitle": "team-page-title",
-  "teamPageText": "team-page-text",
-  "statistics": [
-    {
-      "counter": 700,
-      "caption": "attendees"
-    },
-    {
-      "counter": 30,
-      "caption": "sessions"
-    },
-    {
-      "counter": 6,
-      "caption": "workshops"
-    },
-    {
-      "counter": 3,
-      "caption": "tracks"
-    }
-  ],
-  "hashtag": "dfua",
   "social": [
     {
       "name": "twitter",
-      "nickname": "GDGLviv",
-      "url": "https://twitter.com/gdglviv"
-    },
-    {
-      "name": "gplus",
-      "nickname": "102444623953913144164",
-      "url": "https://plus.google.com/102444623953913144164"
+      "nickname": "devfest_ukraine",
+      "url": "https://twitter.com/devfest_ukraine"
     },
     {
       "name": "facebook",
-      "nickname": "GDGLviv",
-      "url": "https://www.facebook.com/GDGLviv"
+      "nickname": "devfest.ukraine",
+      "url": "https://www.facebook.com/devfest.ukraine/"
     },
     {
-      "name": "linkedin",
-      "nickname": "google-developers-group-lviv",
-      "url": "https://www.linkedin.com/company/google-developers-group-lviv"
+      "name": "instagram",
+      "nickname": "devfestukraine",
+      "url": "https://www.instagram.com/devfestukraine"
     }
   ],
-  "tweetsSource": "https://dfua-tweets.herokuapp.com/favoritesjson.php?c=10&cache_interval=8000",
+  "location": {
+    "apiKey": "AIzaSyDWy6O98n-ueoVaYPWRPve23vjm3JP08gw",
+    "name": "Pivdennyi Expo Center",
+    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "link": "https://www.facebook.com/expopivdennij",
+    "pointer": {
+      "latitude": 49.809841,
+      "longitude": 23.972805,
+      "zoom": 15
+    },
+    "mapCenter": {
+      "latitude": 49.809841,
+      "longitude": 23.982805
+    },
+    "images": [
+      "/images/backgrounds/location_1.jpg",
+      "/images/backgrounds/location_2.jpg",
+      "/images/backgrounds/location_3.jpg"
+    ]
+  },
   "gallery": {
     "albumUrl": "https://goo.gl/photos/H8s3CtPexCzkLqSt9",
     "sharedAlbumUrl": "https://goo.gl/photos/FLUS5ezy5dNzTCXi7",
@@ -278,24 +113,5 @@
         ]
       }
     ]
-  },
-  "location": {
-    "apiKey": "AIzaSyDWy6O98n-ueoVaYPWRPve23vjm3JP08gw",
-    "link": "https://www.facebook.com/expopivdennij",
-    "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 15
-    },
-    "mapCenter": {
-      "latitude": 49.809841,
-      "longitude": 23.982805
-    },
-    "images": [
-      "/images/backgrounds/location_1.jpg",
-      "/images/backgrounds/location_2.jpg",
-      "/images/backgrounds/location_3.jpg"
-    ]
-  },
-  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+  }
 }

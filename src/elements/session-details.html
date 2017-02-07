@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../bower_components/app-storage/app-network-status-behavior.html">
+<link rel="import" href="../../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
 
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-dropdown/iron-dropdown-scroll-manager.html">
@@ -16,12 +17,14 @@
 <link rel="import" href="../../bower_components/neon-animation/neon-animation-runner-behavior.html">
 <link rel="import" href="../../bower_components/marked-element/marked-element.html">
 
+<link rel="import" href="../../bower_components/polymerfire/firebase-document.html">
+
 <link rel="import" href="../styles/dialog-styles.html">
 <link rel="import" href="../behaviors/share-behavior.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
-<link rel="import" href="../behaviors/localize-behavior.html">
 <link rel="import" href="../behaviors/my-schedule-behavior.html">
 <link rel="import" href="truncate-marked-text.html">
+<link rel="import" href="rating-element.html">
 
 
 <dom-module id="session-details">
@@ -67,14 +70,34 @@
       .share-menu {
         padding: 0;
       }
+
+      .label {
+        margin-top: 8px;
+        font-size: 12px;
+        color: var(--secondary-text-color);
+      }
     </style>
+
+    <firebase-document
+      id="userSessions"
+      app-name="{$ firebase.name $}"
+      path="{$ firebase.ratingsPath $}/[[app.user.uid]]"
+      data="{{persistedData}}">
+    </firebase-document>
+
+    <app-indexeddb-mirror
+      session="{$ firebase.indexedDbSession $}"
+      key="ratings"
+      data="{{persistedData}}"
+      persisted-data="{{app.user.ratings}}">
+    </app-indexeddb-mirror>
 
     <paper-scroll-header-panel id="scrollHeaderPanel" no-reveal>
       <paper-toolbar class="tall">
         <paper-icon-button class="back-button" dialog-dismiss icon="arrow-back"></paper-icon-button>
         <div class="middle fallback-image-wrapper">
           <iron-image class="fallback-image" src="/images/logo-white.svg"
-                      alt="[[app.data.title]]"></iron-image>
+                      alt="{$ title $}"></iron-image>
         </div>
       </paper-toolbar>
       <div class="content">
@@ -112,7 +135,7 @@
           <paper-menu-button class="share-menu" horizontal-align="left" vertical-align="bottom" share-menu>
             <paper-button class="action dropdown-trigger">
               <iron-icon icon="share"></iron-icon>
-              [[localize('share')]]
+              {$ share $}
             </paper-button>
             <div class="dropdown-content">
               <paper-icon-item on-tap="share" share="gplus">
@@ -129,7 +152,7 @@
               </paper-icon-item>
               <paper-icon-item on-tap="share" share="copy">
                 <iron-icon icon="link" item-icon></iron-icon>
-                [[localize('copy-link')]]
+                {$ copyLink $}
               </paper-icon-item>
             </div>
           </paper-menu-button>
@@ -139,22 +162,29 @@
              rel="noopener noreferrer">
             <paper-button class="action">
               <iron-icon icon="presentation"></iron-icon>
-              [[localize('view-presentation')]]
+              {$ viewPresentation $}
             </paper-button>
           </a>
+
           <div on-tap="_openVideo" hidden$="[[!session.videoId]]">
             <paper-button class="action">
               <iron-icon icon="video"></iron-icon>
-              [[localize('view-video')]]
+              {$ viewVideo $}
             </paper-button>
           </div>
         </div>
 
+        {% if enableSessionsRating %}
+        <div class="label">{$ rateSession $}</div>
+        <rating-element rate={{rate}}
+                        disabled$="[[_isRatingDisabled(online, app.user)]]"
+                        on-tap="_rate"></rating-element>
+        {% endif %}
       </div>
 
       <template is="dom-if" if="{{session.speakers.length}}">
         <div class="sections-wrapper content">
-          <h4 class="block-title">[[localize('speakers')]]</h4>
+          <h4 class="block-title">{$ speakers $}</h4>
           <div class="sections">
             <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
               <div class="section">
@@ -174,7 +204,7 @@
                     break-last-word
                   ></truncate-marked-text>
 
-                  <a class="read-more" href$="/speakers/[[speaker.id]]" dialog-dismiss>[[localize('read-more')]]</a>
+                  <a class="read-more" href$="/speakers/[[speaker.id]]" dialog-dismiss>{$ readMore $}</a>
                 </div>
               </div>
             </template>
@@ -197,7 +227,6 @@
           Polymer.PaperDialogBehavior,
           Polymer.NeonAnimationRunnerBehavior,
           Polymer.AppNetworkStatusBehavior,
-          HOVERBOARD.LocalizeBehavior,
           HOVERBOARD.UtilsBehavior,
           HOVERBOARD.ShareBehavior,
           HOVERBOARD.MyScheduleBehavior
@@ -208,9 +237,15 @@
             type: Object,
             observer: '_sessionChanged'
           },
+
           fabIcon: {
             type: String,
             value: 'calendar-plus'
+          },
+
+          rate: {
+            type: Number,
+            observer: 'rateSession'
           }
         },
 
@@ -231,6 +266,16 @@
         },
 
         _sessionChanged: function () {
+          if (this.app.user) {
+            if (!this.app.user.ratings) {
+              this.app.user.ratings = {
+                sessions: {}
+              };
+            } else if (!this.app.user.ratings.sessions) {
+              this.app.user.ratings.sessions = {};
+            }
+            this.set('rate', this.app.user.ratings.sessions[this.session.id] || 0);
+          }
           var generatedClass = this._generateClass(this.session.mainTag);
           this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + generatedClass + ')';
           this._previousBrowserColor = HOVERBOARD.Util.getMetaThemeColor();
@@ -264,6 +309,27 @@
             Polymer.IronDropdownScrollManager.removeScrollLock(this.$.scrollHeaderPanel);
             this._finishRenderClosed();
           }
+        },
+
+        rateSession: function () {
+          if (!this.rate) return;
+          this.set('app.user.ratings.sessions.' + this.session.id, this.rate);
+        },
+
+        _rate: function () {
+          if (!this.online) {
+            HOVERBOARD.Elements.Template.$.toast.showMessage('{$ offlineMessage $}');
+          } else if (!this.app.user) {
+            var signIn = function () {
+              HOVERBOARD.Elements.Template.signIn();
+            };
+            HOVERBOARD.Elements.Template.$.toast.showMessage(
+              '{$ youShouldSignInRating $}', signIn, '{$ signIn $}');
+          }
+        },
+
+        _isRatingDisabled: function (online, user) {
+          return !online || !user;
         },
 
         _getMyScheduleIcon: function (id) {

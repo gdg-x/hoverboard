@@ -15,7 +15,6 @@
 
 <link rel="import" href="../styles/dialog-styles.html">
 <link rel="import" href="../styles/shared-styles.html">
-<link rel="import" href="../behaviors/localize-behavior.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
 <link rel="import" href="truncate-marked-text.html">
 
@@ -33,7 +32,7 @@
         </a>
         <div class="middle fallback-image-wrapper" hidden$="{{app.isPhoneSize}}">
           <iron-image class="fallback-image" src="/images/logo-white.svg"
-                      alt="[[localize('title')]]"></iron-image>
+                      alt="{$ title $}"></iron-image>
         </div>
         <div id="title" class="bottom title toolbar-title" hidden$="{{!app.isPhoneSize}}">[[speaker.name]]</div>
       </paper-toolbar>
@@ -69,7 +68,7 @@
 
       <template is="dom-if" if="{{speaker.sessions.length}}">
         <div class="sections-wrapper content">
-          <h4 class="block-title">[[localize('sessions')]]</h4>
+          <h4 class="block-title">{$ sessions $}</h4>
           <div class="sections">
             <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
               <div class="section">
@@ -85,7 +84,7 @@
                     characters="220"
                     break-last-word
                   ></truncate-marked-text>
-                  <a class="read-more" href$="/schedule/day[[session.day]]?sessionId=[[session.id]]" dialog-dismiss>[[localize('read-more')]]</a>
+                  <a class="read-more" href$="/schedule/day[[session.day]]?sessionId=[[session.id]]" dialog-dismiss>{$ readMore $}</a>
 
                 </div>
               </div>
@@ -108,7 +107,6 @@
         behaviors: [
           Polymer.PaperDialogBehavior,
           Polymer.NeonAnimationRunnerBehavior,
-          HOVERBOARD.LocalizeBehavior,
           HOVERBOARD.UtilsBehavior
         ],
 
