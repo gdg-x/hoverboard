@@ -187,7 +187,7 @@
         "starts": "Feb 7",
         "ends": "Mar 31",
         "info": "Or first 50 tickets",
-        "soldOut": false
+        "soldOut": true
       },
       {
         "name": "Early Bird",
