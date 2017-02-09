@@ -193,7 +193,7 @@
         "name": "Early Bird",
         "price": 1200,
         "currency": "UAH",
-        "starts": "Apr 1",
+        "starts": "Feb 7",
         "ends": "Jun 30",
         "info": "Or first 200 tickets",
         "soldOut": false
