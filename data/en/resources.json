@@ -177,37 +177,6 @@
       }
     ]
   },
-  "tickets": {
-    "url": "http://2event.com/events/630032",
-    "elements": [
-      {
-        "name": "Student",
-        "price": 500,
-        "currency": "₴",
-        "starts": "May 1",
-        "ends": "Sep 8",
-        "info": "Requires valid student ID",
-        "soldOut": false
-      },
-      {
-        "name": "Early Bird",
-        "price": 750,
-        "currency": "₴",
-        "starts": "May 1",
-        "ends": "July 1",
-        "info": "Or first 100 tickets",
-        "soldOut": true
-      },
-      {
-        "name": "Lazy Bird",
-        "price": 1000,
-        "currency": "₴",
-        "starts": "July 1",
-        "ends": "Sep 8",
-        "soldOut": false
-      }
-    ]
-  },
   "teamPageTitle": "Team",
   "teamPageText": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT.",
   "statistics": [
