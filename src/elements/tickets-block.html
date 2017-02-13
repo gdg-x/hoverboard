@@ -69,21 +69,21 @@
         <h4 class="heading">{$ ticketsTitle $}</h4>
       </div>
       <div class="tickets-wrapper">
-        {% for ticket in tickets.elements %}
+        <template is="dom-repeat" items="[[app.tickets.elements]]" as="ticket">
           <ticket-element
-            type="{$ ticket.name $}"
-            price="{$ ticket.price $}"
-            currency="{$ ticket.currency $}"
-            starts="{$ ticket.starts $}"
-            ends="{$ ticket.ends $}"
-            info="{$ ticket.info $}"
-            {% if ticket.soldOut %}sold-out{% endif %}
-            sold-out-text="{$ soldOutTickets $}"
-          ></ticket-element>
-        {% endfor %}
+            type="[[ticket.name]]"
+            price="[[ticket.price]]"
+            currency="[[ticket.currency]]"
+            starts="[[ticket.starts]]"
+            ends="[[ticket.ends]]"
+            info="[[ticket.info]]"
+            sold-out="[[ticket.soldOut]]",
+            sold-out-text="{$ soldOutTickets $}">
+          </ticket-element>
+        </template>
       </div>
       <div class="details">{$ ticketsDetails $}</div>
-      <a href="{$ tickets.url $}" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
+      <a href="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
         <paper-button class="buy-button" raised>{$ buyTicket $}</paper-button>
       </a>
     </div>
@@ -98,7 +98,7 @@
         is: 'tickets-block',
 
         ready: function () {
-          HOVERBOARD.Elements.Tickets = this;
+          HOVERBOARD.Elements.Tickets = this
         },
 
         _trackBuyClick: function (e) {
