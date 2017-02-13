@@ -6,7 +6,7 @@
     "primaryColor": "#ffc107",
     "secondaryColor": "#edb305",
     "image": "/images/posts/summary16_1.jpg",
-    "brief": "GDG DevFest Ukraine 2016 - it was fun, advantageous, crowded and exciting event...."
+    "brief": "GDG DevFest Ukraine 2016 - it was fun, advantageous, crowded and exciting event..."
   },
   {
     "id": "thank-you",
@@ -15,7 +15,7 @@
     "primaryColor": "#5a7785",
     "secondaryColor": "#455a64",
     "image": "/images/posts/thankyou_2.jpg",
-    "brief": "Our team wants to thank one more time our partners, who made GDG DevFest Ukraine 2016 possible...."
+    "brief": "Our team wants to thank one more time our partners, who made GDG DevFest Ukraine 2016 possible..."
   },
   {
     "id": "dfua17-announced",
@@ -33,6 +33,6 @@
     "primaryColor": "#3647a5",
     "secondaryColor": "#673AB7",
     "image": "/images/posts/c4p.jpg",
-    "brief": "-------------------------------------------------------------------------------------------"
+    "brief": "GDG DevFest Ukraine was announced, for the sixth year in a row, the conference will bring together 900 developers, managers and..."
   }
 ]
