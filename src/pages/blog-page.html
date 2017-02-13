@@ -30,8 +30,7 @@
                          attr-for-selected="name"
                          selected-attribute="selected">
 
-      <blog-list id="blogList"
-                 name=""
+      <blog-list name=""
                  app="{{app}}"
                  posts="[[posts]]"></blog-list>
 
@@ -58,12 +57,30 @@
         ],
 
         properties: {
+          app: {
+            type: Object
+          },
+
           route: {
+            type: Object
+          },
+
+          pageData: {
             type: Object
           },
 
           posts: {
             type: Array
+          }
+        },
+
+        observers: [
+          '_routeChanged(pageData.page)'
+        ],
+
+        _routeChanged: function (page) {
+          if (this.app.page === 'blog' && !page) {
+            this.set('pageData.page', '');
           }
         }
 
