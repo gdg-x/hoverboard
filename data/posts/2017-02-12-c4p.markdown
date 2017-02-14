@@ -1,0 +1,62 @@
+GDG DevFest Ukraine was announced, for the sixth year in a row, the conference will bring together 900 developers, managers and entrepreneurs on **October 13-14** to Lviv.
+
+This year our team is doing big advancement in the content, we're building an extra stage to accommodate more visitors and provide three fully independent tracks on Android, Web and Google Cloud topics.
+
+Our focus is the content. **We’re looking for speakers like you**, who are ready to rock the stage and deliver the best talk or workshop in the field.
+
+<div class="quote-container reverse">
+  <div class="quote-photo" style="background-image: url('https://dfua16.firebaseapp.com/images/people/david_v%C3%A1vra.jpg')"></div>
+  <div class="quote-text-wrapper">
+    <div class="quote-text">"It was a best DevFest I ever attended. So professional, so much enthusiasm from the community. You managed to bring the vibe of Google I/O to Ukraine."</div>
+    <div class="quote-author">- David Vávra, DevFest '16 Speaker</div>
+  </div>
+</div>
+
+<br/>
+
+## Why is it cool to speak at the DevFest?
+
+DevFest Ukraine is not an ordinary tech conference, besides selecting only the best speakers, we help them to succeed in delivering an exceptional quality talk on the stage.
+
+Here are few perks that all our speakers get:
+
+- **Professional video recording**. We work with experienced video production companies to create session recording of the best quality. Stage, screen, audio, all is recorded separately and combined later. Check the [sample session video from the last year](https://www.youtube.com/watch?v=VOwUnBkqmo4).
+- **Exposure**. By being a speaker, you are proving your level of expertise to a potential business partners or employers. Your talk will be promoted in our online resources and recording published in YouTube channel with more than 35k views.
+- **Unique networking**. Being a speaker means you’ll have the unique chance to network with other speakers - the best experts in the industry.
+- **Coaching**. We're in the same boat, after being selected as a speaker our program committee will help you to deliver the best talk possible. We provide information about the audience, presentation templates, feedback on the slides, all to help you to prepare.
+
+
+<div class="quote-container">
+  <div class="quote-photo" style="background-image: url('https://dfua16.firebaseapp.com/images/people/peter_tuszynski.jpg')"></div>
+  <div class="quote-text-wrapper">
+      <div class="quote-text">"I've been to conferences all over the world and what you've created in Lviv is world class. It's easily first league of conferences."</div>
+      <div class="quote-author">- Piotr Tuszynski, DevFest '16 Keynote Speaker</div>
+  </div>
+</div>
+<br/>
+
+## What are we looking for?
+
+We're looking for **experience-based talks**, the information that can not be found in the documentation or easily googled. We're looking for your stories, your struggles, research results and experiences with the frontier tools or technologies.
+
+You can submit as many talks as you want. This year we accept submissions in two formats:
+  - 40 minutes sessions;
+  - 2(or 3) hours workshops.
+
+<div class="text-center">
+<a href="http://bit.ly/df17-c4p" target="_blank" class="style-scope header-content" style="color: white; ">
+  <paper-button class="primary style-scope header-content x-scope paper-button-0" raised="" role="button" tabindex="0" animated="" aria-disabled="false" elevation="1">Submit a proposal</paper-button>
+</a>
+</div>
+<br/>
+
+
+<br/>
+
+## Timeline
+
+**Call for Papers submission deadline is July 1, 2017.** Submission results will be announced by July 16.
+
+
+Any questions? Email organizers at [devfest@gdg.org.ua](mailto:devfest@gdg.org.ua)
+

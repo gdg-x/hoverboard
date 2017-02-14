@@ -6,7 +6,7 @@
     "primaryColor": "#ffc107",
     "secondaryColor": "#edb305",
     "image": "/images/posts/summary16_1.jpg",
-    "brief": "GDG DevFest Ukraine 2016 - it was fun, advantageous, crowded and exciting event...."
+    "brief": "GDG DevFest Ukraine 2016 - it was fun, advantageous, crowded and exciting event..."
   },
   {
     "id": "thank-you",
@@ -15,7 +15,7 @@
     "primaryColor": "#5a7785",
     "secondaryColor": "#455a64",
     "image": "/images/posts/thankyou_2.jpg",
-    "brief": "Our team wants to thank one more time our partners, who made GDG DevFest Ukraine 2016 possible...."
+    "brief": "Our team wants to thank one more time our partners, who made GDG DevFest Ukraine 2016 possible..."
   },
   {
     "id": "dfua17-announced",
@@ -25,5 +25,14 @@
     "secondaryColor": "#1d8fea",
     "image": "/images/posts/dfua17-announced.jpg",
     "brief": "It is official. GDG DevFest Ukraine 2017 is going to take place in Lviv, on October 13-14."
+  },
+  {
+    "id": "c4p",
+    "title": "We're looking for speakers",
+    "posted": "2017-02-12",
+    "primaryColor": "#3647a5",
+    "secondaryColor": "#673AB7",
+    "image": "/images/posts/c4p.jpg",
+    "brief": "GDG DevFest Ukraine was announced, for the sixth year in a row, the conference will bring together 900 developers, managers and..."
   }
 ]
