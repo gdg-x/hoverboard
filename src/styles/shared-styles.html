@@ -221,6 +221,48 @@
         height: 100%;
       }
 
+      .markdown-html .quote-container {
+        padding: 8px 16px;
+        display: flex;
+        flex-direction: row;
+      }
+
+      .markdown-html .quote-container.reverse {
+        flex-direction: row-reverse;
+      }
+
+      .markdown-html .quote-photo {
+        margin-right: 16px;
+        width: 64px;
+        height: 64px;
+        background-position: center;
+        background-size: cover;
+        border-radius: 50%;
+      }
+
+      .markdown-html .quote-container.reverse .quote-photo {
+        margin-right: 0;
+        margin-left: 16px;
+      }
+
+      .markdown-html .quote-text-wrapper {
+        flex: 1;
+      }
+
+      .markdown-html .quote-text {
+        font-style: italic;
+      }
+
+      .markdown-html .quote-author {
+        margin-top: 16px;
+        font-size: 0.85em;
+      }
+
+      .markdown-html .quote-container.reverse .quote-text,
+      .markdown-html .quote-container.reverse .quote-author {
+        text-align: right;
+      }
+
       .placeholder-color {
         background-color: var(--primary-background-color);
       }
@@ -265,6 +307,26 @@
       @media (min-width: 769px) {
         .markdown-html .highlight-quote {
           font-size: 2em;
+        }
+
+        .markdown-html .quote-container {
+          padding: 16px 64px;
+          align-items: center;
+        }
+
+        .markdown-html .quote-photo {
+          margin-right: 32px;
+          width: 128px;
+          height: 128px;
+        }
+
+        .markdown-html .quote-container.reverse .quote-photo {
+          margin-right: 0;
+          margin-left: 32px;
+        }
+
+        .markdown-html .quote-text {
+          font-size: 1.15em;
         }
 
         .container {
