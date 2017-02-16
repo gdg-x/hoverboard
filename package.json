@@ -23,7 +23,7 @@
     "plylog": "^0.4.0",
     "polymer-build": "^0.7.0",
     "require-uncached": "^1.0.0",
-    "sw-precache": "^4.3.0"
+    "sw-precache": "^5.0.0"
   },
   "engines": {
     "node": ">=4.0"
