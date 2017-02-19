@@ -105,18 +105,6 @@
         color: var(--default-primary-color);
       }
 
-      .open-video {
-        @apply(--layout-horizontal);
-        @apply(--layout-center);
-        margin-top: 20px;
-        cursor: pointer;
-        font-size: 16px;
-      }
-
-      .open-video iron-icon {
-        margin-right: 5px;
-      }
-
       .info-items {
         margin-top: 8px;
       }
@@ -164,10 +152,6 @@
               <h2 class="motto">{$ motto $}</h2>
 
               <div class="action-buttons">
-                <!-- <paper-button on-tap="_openVideo">
-                  <iron-icon icon="movie-filter"></iron-icon>
-                  <span>{$ playIcon $}</span>
-                </paper-button> -->
                 <paper-button class="primary-white" on-tap="_scrollToTickets" raised>
                   <iron-icon icon="ticket"></iron-icon>
                   <span>{$ buyTicket $}</span>
@@ -221,12 +205,6 @@
             notify: true,
             value: 0
           }
-        },
-
-        _openVideo: function () {
-          HOVERBOARD.Elements.Template.openVideo('{$ pages.home.headerSettings.video.title $}',
-            '{$ pages.home.headerSettings.video.youtubeId $}', true);
-          HOVERBOARD.Analytics.trackEvent('video', 'watch', '{$ pages.home.headerSettings.video.title $}');
         },
 
         _scrollToTickets: function () {
