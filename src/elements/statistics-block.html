@@ -41,6 +41,18 @@
         margin-top: 35px;
       }
 
+      .open-video {
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+        margin-top: 20px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .open-video iron-icon {
+        margin-right: 5px;
+      }
+
       @media (max-width: 600px) {
         .statistics-element {
           width: 50%;
@@ -69,6 +81,10 @@
         {% endfor %}
       </div>
       <div class="description">{$ description $}</div>
+      <paper-button on-tap="_openVideo" class="open-video">
+        <iron-icon icon="movie-filter"></iron-icon>
+        <span>{$ playIcon $}</span>
+      </paper-button>
     </div>
 
   </template>
@@ -79,7 +95,13 @@
 
       Polymer({
 
-        is: 'statistics-block'
+        is: 'statistics-block',
+
+        _openVideo: function () {
+          HOVERBOARD.Elements.Template.openVideo('{$ pages.home.headerSettings.video.title $}',
+            '{$ pages.home.headerSettings.video.youtubeId $}', true);
+          HOVERBOARD.Analytics.trackEvent('video', 'watch', '{$ pages.home.headerSettings.video.title $}');
+        }
 
       });
 
