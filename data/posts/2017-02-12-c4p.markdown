@@ -14,6 +14,14 @@ Our focus is the content. **We’re looking for speakers like you**, who are rea
 
 <br/>
 
+<div class="text-center">
+  <a href="http://bit.ly/df17-c4p" target="_blank" class="style-scope header-content" style="color: white; ">
+    <paper-button class="primary style-scope header-content x-scope paper-button-0" raised="" role="button" tabindex="0" animated="" aria-disabled="false" elevation="1">Submit a proposal</paper-button>
+  </a>
+</div>
+
+<br/>
+
 ## Why is it cool to speak at the DevFest?
 
 DevFest Ukraine is not an ordinary tech conference, besides selecting only the best speakers, we help them to succeed in delivering an exceptional quality talk on the stage.
@@ -44,9 +52,9 @@ You can submit as many talks as you want. This year we accept submissions in two
   - 2(or 3) hours workshops.
 
 <div class="text-center">
-<a href="http://bit.ly/df17-c4p" target="_blank" class="style-scope header-content" style="color: white; ">
-  <paper-button class="primary style-scope header-content x-scope paper-button-0" raised="" role="button" tabindex="0" animated="" aria-disabled="false" elevation="1">Submit a proposal</paper-button>
-</a>
+  <a href="http://bit.ly/df17-c4p" target="_blank" class="style-scope header-content" style="color: white; ">
+    <paper-button class="primary style-scope header-content x-scope paper-button-0" raised="" role="button" tabindex="0" animated="" aria-disabled="false" elevation="1">Submit a proposal</paper-button>
+  </a>
 </div>
 <br/>
 
