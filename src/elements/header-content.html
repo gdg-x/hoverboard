@@ -164,14 +164,20 @@
               <h2 class="motto">{$ motto $}</h2>
 
               <div class="action-buttons">
-                <paper-button on-tap="_openVideo">
+                <!-- <paper-button on-tap="_openVideo">
                   <iron-icon icon="movie-filter"></iron-icon>
                   <span>{$ playIcon $}</span>
-                </paper-button>
+                </paper-button> -->
                 <paper-button class="primary-white" on-tap="_scrollToTickets" raised>
                   <iron-icon icon="ticket"></iron-icon>
                   <span>{$ buyTicket $}</span>
                 </paper-button>
+                <a href="/blog/posts/c4p/">
+                  <paper-button>
+                    <iron-icon icon="description"></iron-icon>
+                    <span>{$ c4p $}</span>
+                  </paper-button>
+                </a>
               </div>
             </div>
           </div>
