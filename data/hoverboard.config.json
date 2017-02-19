@@ -1,21 +1,20 @@
 {
   "firebase": {
-    "name": "hoverboard-master",
-    "domain": "hoverboard-master.firebaseapp.com",
-    "database": "https://hoverboard-master.firebaseio.com",
-    "api": "AIzaSyCaSkhtHekxAqXXzzbuNs2s6CpGdhZdta8",
+    "name": "devfestnantes2017-test",
+    "domain": "devfestnantes2017-test.firebaseapp.com",
+    "database": "https://devfestnantes2017-test.firebaseio.com",
+    "api": "AIzaSyBa07A_bclfoeK6_qoGcAFlfJG03dZ5-q0",
     "userSessionsPath": "/userSessions"
   },
   "pages": {
     "home": {
       "headerSettings": {
-        "backgroundColor": "#FF9800",
-        "backgroundImage": "/images/backgrounds/home.png",
+        "backgroundImage": "/images/backgrounds/home2.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff",
         "video": {
-          "title": "GDG DevFest Ukraine 2016",
-          "youtubeId": "TdpbgRgz6eE",
+          "title": "DevFest Nantes 2016",
+          "youtubeId": "WucMDHXj-xQ",
           "text": "See how it was in 2016"
         },
         "hideLogo": true,
@@ -24,35 +23,36 @@
     },
     "blog": {
       "headerSettings": {
-        "backgroundColor": "#03a9f4",
+        "backgroundImage": "/images/backgrounds/hero1.png",
+        "backgroundColor": "#66bb6a",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
     },
     "speakers": {
       "headerSettings": {
-        "backgroundColor": "#3f51b5",
+        "backgroundImage": "/images/backgrounds/hero2.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
     },
     "schedule": {
       "headerSettings": {
-        "backgroundColor": "#673ab7",
+        "backgroundImage": "/images/backgrounds/hero3.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
     },
     "team": {
       "headerSettings": {
-        "backgroundColor": "#009688",
+        "backgroundImage": "/images/backgrounds/hero4.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
     },
     "cod": {
       "headerSettings": {
-        "backgroundColor": "#673ab7",
+        "backgroundImage": "/images/backgrounds/hero5.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
@@ -80,7 +80,7 @@
       "permalink": "/team/"
     }
   ],
-  "url": "https://hoverboard.firebaseapp.com/",
+  "url": "https://devfestnantes2017-test.firebaseapp.com/",
   "mailchimp": {
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
@@ -93,8 +93,8 @@
       "key": "en"
     },
     {
-      "name": "Українська",
-      "key": "uk"
+      "name": "Français",
+      "key": "fr"
     }
   ],
   "footerBlocks": [
@@ -115,18 +115,28 @@
           "newTab": true
         },
         {
+          "text": "df-12",
+          "url": "https://devfest2012.gdgnantes.com/",
+          "newTab": true
+        },
+        {
           "text": "df-13",
-          "url": "http://gdg-devfest-ua.appspot.com/",
+          "url": "https://devfest2013.gdgnantes.com/",
           "newTab": true
         },
         {
           "text": "df-14",
-          "url": "http://devfest.gdg.org.ua/2014/",
+          "url": "https://devfest2014.gdgnantes.com/",
           "newTab": true
         },
         {
           "text": "df-15",
-          "url": "http://devfest.gdg.org.ua/2015/",
+          "url": "https://devfest2015.gdgnantes.com/",
+          "newTab": true
+        },
+        {
+          "text": "df-16",
+          "url": "https://devfest2016.gdgnantes.com/",
           "newTab": true
         }
       ]
@@ -150,8 +160,8 @@
   "contactBlock": {
     "links": [
       {
-        "text": "devfest@google.com",
-        "url": "mailto:devfest@google.com"
+        "text": "bureau@gdgnantes.com",
+        "url": "mailto:bureau@gdgnantes.com"
       }
     ]
   },
@@ -160,8 +170,8 @@
     "elements": [
       {
         "name": "student-ticket",
-        "price": 500,
-        "currency": "₴",
+        "price": 30,
+        "currency": "€",
         "starts": "student-ticket-starts",
         "ends": "student-ticket-ends",
         "info": "student-ticket-info",
@@ -169,17 +179,17 @@
       },
       {
         "name": "early-ticket",
-        "price": 750,
-        "currency": "₴",
+        "price": 50,
+        "currency": "€",
         "starts": "early-ticket-starts",
         "ends": "early-ticket-ends",
         "info": "early-ticket-info",
-        "soldOut": true
+        "soldOut": false
       },
       {
         "name": "lazy-ticket",
-        "price": 1000,
-        "currency": "₴",
+        "price": 70,
+        "currency": "€",
         "starts": "lazy-ticket-starts",
         "ends": "lazy-ticket-ends",
         "soldOut": false
@@ -190,7 +200,7 @@
   "teamPageText": "team-page-text",
   "statistics": [
     {
-      "counter": 600,
+      "counter": 1600,
       "caption": "attendees"
     },
     {
@@ -198,59 +208,58 @@
       "caption": "days"
     },
     {
-      "counter": 30,
+      "counter": 4,
+      "caption": "tracks"
+    },
+    {
+      "counter": 60,
       "caption": "sessions"
     },
     {
-      "counter": 3,
-      "caption": "tracks"
+      "counter": 70,
+      "caption": "speakers"
     }
   ],
-  "hashtag": "dfua",
+  "hashtag": "DevFestNantes",
   "social": [
     {
       "name": "twitter",
-      "nickname": "GDGLviv",
-      "url": "https://twitter.com/gdglviv"
+      "nickname": "devfestnantes",
+      "url": "https://twitter.com/devfestnantes"
     },
     {
       "name": "gplus",
-      "nickname": "102444623953913144164",
-      "url": "https://plus.google.com/102444623953913144164"
+      "nickname": "Gdgnantes",
+      "url": "https://plus.google.com/+Gdgnantes"
     },
     {
       "name": "facebook",
-      "nickname": "GDGLviv",
-      "url": "https://www.facebook.com/GDGLviv"
-    },
-    {
-      "name": "linkedin",
-      "nickname": "google-developers-group-lviv",
-      "url": "https://www.linkedin.com/company/google-developers-group-lviv"
+      "nickname": "gdgnantes",
+      "url": "https://www.facebook.com/gdgnantes"
     }
   ],
   "tweetsSource": "/data/tweets.json",
   "gallery": {
-    "albumUrl": "https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1",
+    "albumUrl": "https://www.flickr.com/photos/129650261@N07/sets/72157676475088136",
     "photos": {
-      "big": "/images/backgrounds/2015_1.jpg",
+      "big": "/images/backgrounds/2016_1.jpg",
       "small": [
-        "/images/backgrounds/2015_2.jpg",
-        "/images/backgrounds/2015_3.jpg"
+        "/images/backgrounds/2016_2.jpg",
+        "/images/backgrounds/2016_3.jpg"
       ]
     }
   },
   "location": {
     "apiKey": "",
-    "link": "https://www.facebook.com/expopivdennij",
+    "link": "http://www.lacite-nantes.fr/",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 15
+      "latitude": 47.2129658,
+      "longitude": -1.5425652,
+      "zoom": 7
     },
     "mapCenter": {
-      "latitude": 49.809841,
-      "longitude": 23.982805
+      "latitude": 46.9666849,
+      "longitude": -1.4848352
     },
     "images": [
       "/images/backgrounds/location_1.jpg",
@@ -258,9 +267,9 @@
       "/images/backgrounds/location_3.jpg"
     ]
   },
-  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
+  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLuZ_sYdawLiVZTEIxKLCsVWWGZBpPHwQy",
   "callToAction": {
     "videoTitle": "action-title",
-    "videoId": "DfMnJAzOFng"
+    "videoId": "WucMDHXj-xQ"
   }
 }
