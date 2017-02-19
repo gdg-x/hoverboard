@@ -13,4 +13,4 @@ WORKDIR /app
 RUN bower install
 
 EXPOSE 8080
-CMD polymer serve
+CMD polymer serve --hostname 0.0.0.0
