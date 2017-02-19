@@ -103,7 +103,7 @@
 
         next: function () {
           var index = this._selectedIndex;
-          if (this.app.quotes.length) {
+          if (this.app.quotes && this.app.quotes.length) {
             this._selectedIndex = (++index % this.app.quotes.length);
             this._selected = this.app.quotes[this._selectedIndex];
             this.async(this.next, this.interval);
