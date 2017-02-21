@@ -22,7 +22,7 @@ const config = {
   swPrecacheConfigPath: './sw-precache-config.js',
   templateData: [
     'data/hoverboard.config',
-    'data/en/resources'
+    'data/resources'
   ],
   tempDirectory: '.temp'
 };

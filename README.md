@@ -19,7 +19,6 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 :white_check_mark: Polymer  
 :white_check_mark: [PRPL pattern](https://www.polymer-project.org/1.0/toolbox/server)  
 :white_check_mark: Offline access  
-:white_check_mark: i18n  
 :white_check_mark: Material design  
 :white_check_mark: Animations  
 :white_check_mark: Integrated speakers and sessions management  
@@ -27,7 +26,9 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 :white_check_mark: Optimized and fast  
 :white_check_mark: Editable theme colors  
 :white_check_mark: Quick deploy (with [Travis CI](/docs/tutorials/deploy.md))  
-:white_check_mark: My schedule :new:
+:white_check_mark: My schedule  
+:white_check_mark: Firebase Data Loading :new:  
+:white_check_mark: Sessions star rating :new:  
 
 ### Setup
 :book: [Full documentation](/docs/).
@@ -42,7 +43,7 @@ Build:
 
 and run:
 
-    docker run -it -v "$PWD":/app -p 8080:8080 hoverboard
+    docker run -it -v "$PWD":/app -p 3000:3000 hoverboard
 
 :book: Read more in [docker docs](/docs/tutorials/docker.md).
 
@@ -64,7 +65,7 @@ and [Bower](https://bower.io/):
 
 ##### Start the development server
 
-This command serves the app at `http://localhost:8080` and provides basic URL
+This command serves the app at `http://localhost:3000` and provides basic URL
 routing for the app:
 
     gulp serve
@@ -77,18 +78,13 @@ routing for the app:
 This command performs HTML, CSS, and JS minification on the application
 dependencies, and generates a service-worker.js file with code to pre-cache the
 dependencies based on the entrypoint and fragments specified in `polymer.json`.
-The minified files are output to the `build/unbundled` folder, and are suitable
-for serving from a HTTP/2+Push compatible server.
-
-In addition the command also creates a fallback `build/bundled` folder,
-generated using fragment bundling, suitable for serving from non
-H2/push-compatible servers or to clients that do not support H2/Push.
+The minified files are output to the `build`.
 
     gulp
 
 Or you can build in Docker container:
 
-    docker run -v "$PWD":/app hoverboard gulp build
+    docker run -v "$PWD":/app hoverboard gulp
 
 :book: Read more in [deploy docs](/docs/tutorials/deploy.md).   
 
@@ -123,11 +119,11 @@ pull request, so we can include you in this list.
 | [GDG DevFest NYC 2016](https://devfestnyc.com/)                 | [GDG DevFest Los Angeles 2016](https://devfest.gdgla.org/)                  | [GDG DevFest West](https://devfest2016.gdgsv.com)           |
 | [GDG DevFest Florida 2016](https://devfestflorida.org)          | [GDG DevFest Madrid 2016](https://gdgmadrid.com)                            | [GDG DevFest SBA 2016](https://devfest.gdgsba.org/)         |
 | [GDG Foumban Website](https://gdgfoumban.org)                   | [GDG DevFest Granada 2016](http://devfest.gdggranada.com/)                  | [GDG DevFest Taipei 2016](http://devfest.gdg-taipei.org/)    |
+| [2016 Valley DevFest](https://valleydevfest.com)                |
 
 
 ### Roadmap :rocket:
-:x: Admin panel  
-:x: Firebase Integration   
+:x: Admin panel    
 :x: Push notification  
 :x: ES2015  
 :x: Accessibility  
