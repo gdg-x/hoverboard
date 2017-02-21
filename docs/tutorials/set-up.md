@@ -20,18 +20,20 @@ Or you may use [Docker container for development](docker.md)
         npm -v
         2.15.8
 
-1.  Install Bower.
+1. Install [gulp 4](https://github.com/gulpjs/gulp/tree/4.0):
+      
+        npm i -g gulpjs/gulp#4.0 
+
+and Install [Bower](https://bower.io/):
 
         npm install -g bower
 
-    Note: the `-g` flag installs Gulp and Bower globally, so you may need to
-    execute the script with `sudo` privileges. The reason they are installed
-    globally is because some scripts in the Hoverboard expect `bower` to be 
-    available from the command line.
+Note: the `-g` flag installs Gulp and Bower globally, so you may need to
+execute the script with `sudo` privileges. The reason they are installed
+globally is because some scripts in the Hoverboard expect `bower` to be 
+available from the command line.
     
-1.  Install [polymer-cli](https://github.com/Polymer/polymer-cli):
-    
-        npm i -g polymer-cli
+
 
 1.  [Fork](https://github.com/gdg-x/hoverboard/fork) this repository
 
@@ -41,7 +43,7 @@ Or you may use [Docker container for development](docker.md)
 
 1.  Install the application dependencies.
 
-        bower install
+        bower install && npm install
 
 ## Directory structure
 
@@ -85,7 +87,7 @@ The diagram below is a brief summary of the directories within the PSK.
 
 The Hoverboard is ready to be built and ran locally.
 
-1. `cd` into the base directory of your PSK project.
+1. `cd` into the base directory of your Hoverboard project.
 
 1.  Serve the app locally.
 
@@ -94,8 +96,6 @@ The Hoverboard is ready to be built and ran locally.
 1.  Build the app.
 
         gulp
-
-    More options you can find on [polymer-cli][polymer-cli] repository.
 
 
 ## Next steps

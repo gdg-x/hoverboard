@@ -43,7 +43,7 @@ Build:
 
 and run:
 
-    docker run -it -v "$PWD":/app -p 8080:8080 hoverboard
+    docker run -it -v "$PWD":/app -p 3000:3000 hoverboard
 
 :book: Read more in [docker docs](/docs/tutorials/docker.md).
 
@@ -65,7 +65,7 @@ and [Bower](https://bower.io/):
 
 ##### Start the development server
 
-This command serves the app at `http://localhost:8080` and provides basic URL
+This command serves the app at `http://localhost:3000` and provides basic URL
 routing for the app:
 
     gulp serve
@@ -78,18 +78,13 @@ routing for the app:
 This command performs HTML, CSS, and JS minification on the application
 dependencies, and generates a service-worker.js file with code to pre-cache the
 dependencies based on the entrypoint and fragments specified in `polymer.json`.
-The minified files are output to the `build/unbundled` folder, and are suitable
-for serving from a HTTP/2+Push compatible server.
-
-In addition the command also creates a fallback `build/bundled` folder,
-generated using fragment bundling, suitable for serving from non
-H2/push-compatible servers or to clients that do not support H2/Push.
+The minified files are output to the `build`.
 
     gulp
 
 Or you can build in Docker container:
 
-    docker run -v "$PWD":/app hoverboard gulp build
+    docker run -v "$PWD":/app hoverboard gulp
 
 :book: Read more in [deploy docs](/docs/tutorials/deploy.md).   
 
