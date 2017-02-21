@@ -81,10 +81,12 @@
         {% endfor %}
       </div>
       <div class="description">{$ description $}</div>
-      <paper-button on-tap="_openVideo" class="open-video">
-        <iron-icon icon="movie-filter"></iron-icon>
-        <span>{$ playIcon $}</span>
-      </paper-button>
+      <div layout horizontal center-justified>
+        <paper-button on-tap="_openVideo" class="open-video">
+          <iron-icon icon="movie-filter"></iron-icon>
+          <span>{$ playIcon $}</span>
+        </paper-button>
+      </div>
     </div>
 
   </template>

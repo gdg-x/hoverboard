@@ -66,48 +66,6 @@
   "highlights": "Highlights",
   "subscribeForUpdates": "Get notified about the conference updates",
 
-  "pages": {
-    "home": {
-      "title": "Home",
-      "headerSettings": {
-        "backgroundColor": "#2196F3",
-        "backgroundImage": "/images/backgrounds/home.jpg",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff",
-        "video": {
-          "title": "GDG DevFest Ukraine 2016",
-          "youtubeId": "TdpbgRgz6eE",
-          "text": "See how it was in 2016"
-        },
-        "hideLogo": true,
-        "minHeight": "360px"
-      }
-    },
-    "blog": {
-      "title": "Blog",
-      "headerSettings": {
-        "backgroundColor": "#03a9f4",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "team": {
-      "title": "Team",
-      "headerSettings": {
-        "backgroundColor": "#009688",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "cod": {
-      "title": "Cod of Conduct",
-      "headerSettings": {
-        "backgroundColor": "#673ab7",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    }
-  },
   "footerBlocks": [
     {
       "title": "For visitors",
