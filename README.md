@@ -19,7 +19,6 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 :white_check_mark: Polymer  
 :white_check_mark: [PRPL pattern](https://www.polymer-project.org/1.0/toolbox/server)  
 :white_check_mark: Offline access  
-:white_check_mark: i18n  
 :white_check_mark: Material design  
 :white_check_mark: Animations  
 :white_check_mark: Integrated speakers and sessions management  
@@ -28,6 +27,8 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 :white_check_mark: Editable theme colors  
 :white_check_mark: Quick deploy (with [Travis CI](/docs/tutorials/deploy.md))  
 :white_check_mark: My schedule :new:
+:white_check_mark: Firebase Data Loading :new:
+:white_check_mark: Sessions star rating :new:
 
 ### Setup
 :book: [Full documentation](/docs/).
