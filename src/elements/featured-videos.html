@@ -8,7 +8,6 @@
 
 <link rel="import" href="../styles/shared-styles.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
-<link rel="import" href="../behaviors/localize-behavior.html">
 
 
 <dom-module id="featured-videos">
@@ -115,7 +114,7 @@
 
     <div class="container">
       <div class="videos-header">
-        <h4 class="heading">[[localize('featured-videos-title')]]</h4>
+        <h4 class="heading">{$ featuredVideosTitle $}</h4>
         <div class="controls">
           <paper-icon-button icon="icons:chevron-left" on-tap="shiftContentLeft"></paper-icon-button>
           <paper-icon-button icon="icons:chevron-right" on-tap="shiftContentRight"></paper-icon-button>
@@ -148,8 +147,8 @@
         </template>
       </div>
       <div layout>
-        <a href$="[[app.data.videosSessionsUrl]]" class="block-link" target="_blank" rel="noopener noreferrer">
-          <paper-button>[[localize('featured-videos-view-all')]]</paper-button>
+        <a href="{$ videosSessionsUrl $}" class="block-link" target="_blank" rel="noopener noreferrer">
+          <paper-button>{$ featuredVideosViewAll $}</paper-button>
         </a>
       </div>
     </div>
@@ -165,7 +164,6 @@
         is: 'featured-videos',
 
         behaviors: [
-          HOVERBOARD.LocalizeBehavior,
           HOVERBOARD.UtilsBehavior
         ],
 
@@ -222,7 +220,7 @@
         },
 
         _videosChanged: function () {
-          if (this.app.videos) {
+          if (this.app.videos && Object.keys(this.app.videos).length) {
             this._videos = this._randomOrder(this.app.videos).slice(0, 6);
           }
         },

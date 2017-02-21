@@ -9,7 +9,7 @@
 
     Polymer.AppLayout.registerEffect('fade-effect', {
 
-      setUp: function setUp(config) {
+      setUp: function setUp() {
         var fades = Polymer.dom(this).querySelectorAll('[fade]');
         for (var i = 0, length = fades.length; i < length; i++) {
           fades[i].style.willChange = 'opacity';
@@ -17,7 +17,7 @@
         }
       },
 
-      run: function run(p, y) {
+      run: function run(p) {
         var fades = Polymer.dom(this).querySelectorAll('[fade]');
         for (var i = 0, length = fades.length; i < length; i++) {
           fades[i].style.opacity = 1 - p * 1.3;

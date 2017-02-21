@@ -7,7 +7,6 @@
 
 <link rel="import" href="../behaviors/utils-behavior.html">
 <link rel="import" href="../behaviors/cascaded-behavior.html">
-<link rel="import" href="../behaviors/localize-behavior.html">
 <link rel="import" href="./session-element.html">
 
 
@@ -115,7 +114,7 @@
       <div layout horizontal center-justified>
         <a class="browse-more" href$="/schedule/day[[_addToValue(index, 1)]]" layout horizontal center>
           <iron-icon icon="calendar-plus"></iron-icon>
-          <span>[[localize('browse-more')]]</span>
+          <span>{$ browseMore $}</span>
         </a>
       </div>
     </template>
@@ -132,7 +131,6 @@
 
         behaviors: [
           HOVERBOARD.CascadedBehavior,
-          HOVERBOARD.LocalizeBehavior,
           HOVERBOARD.UtilsBehavior
         ],
 
@@ -165,7 +163,7 @@
             this.set('app.user.sessions.' + id, null);
           }
 
-          HOVERBOARD.Elements.Template.$.toast.showMessage(this.localize('removed-from-schedule'));
+          HOVERBOARD.Elements.Template.$.toast.showMessage('{$ removedFromSchedule $}');
         },
 
         _splitText: function (text, divider, index) {

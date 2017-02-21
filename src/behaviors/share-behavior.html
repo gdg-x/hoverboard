@@ -4,6 +4,9 @@
   (function () {
     'use strict';
 
+    /**
+     * @polymerBehavior HOVERBOARD.ShareBehavior
+     */
     HOVERBOARD.ShareBehavior = {
 
       properties: {
@@ -44,7 +47,7 @@
 
           case 'twitter':
             height = 253;
-            var text = 'Check out ' + title + ' at #' + this.app.data.hashtag + ': ' + shareUrl;
+            var text = 'Check out ' + title + ' at #{$ hashtag $}: ' + shareUrl;
             url = 'https://twitter.com/intent/tweet?text=' +
               encodeURIComponent(text);
             window.open(url, 'share', winOptions);

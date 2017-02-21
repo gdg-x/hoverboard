@@ -5,7 +5,6 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
 <link rel="import" href="../styles/shared-styles.html">
-<link rel="import" href="../behaviors/localize-behavior.html">
 <link rel="import" href="ticket-element.html">
 
 
@@ -67,25 +66,25 @@
 
     <div class="container">
       <div class="block-header">
-        <h4 class="heading">[[localize('tickets-title')]]</h4>
+        <h4 class="heading">{$ ticketsTitle $}</h4>
       </div>
       <div class="tickets-wrapper">
-        <template is="dom-repeat" items="[[app.data.tickets.elements]]" as="ticket">
+        <template is="dom-repeat" items="[[app.tickets.elements]]" as="ticket">
           <ticket-element
-            type="[[localize(ticket.name)]]"
+            type="[[ticket.name]]"
             price="[[ticket.price]]"
             currency="[[ticket.currency]]"
-            starts="[[localize(ticket.starts)]]"
-            ends="[[localize(ticket.ends)]]"
-            info="[[localize(ticket.info)]]"
-            sold-out="[[ticket.soldOut]]"
-            sold-out-text="[[localize('sold-out-tickets')]]"
-          ></ticket-element>
+            starts="[[ticket.starts]]"
+            ends="[[ticket.ends]]"
+            info="[[ticket.info]]"
+            sold-out="[[ticket.soldOut]]",
+            sold-out-text="{$ soldOutTickets $}">
+          </ticket-element>
         </template>
       </div>
-      <div class="details">[[localize('tickets-details')]]</div>
-      <a href$="[[app.data.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
-        <paper-button class="buy-button" raised>[[localize('buy-ticket')]]</paper-button>
+      <div class="details">{$ ticketsDetails $}</div>
+      <a href="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
+        <paper-button class="buy-button" raised>{$ buyTicket $}</paper-button>
       </a>
     </div>
 
@@ -98,12 +97,8 @@
       Polymer({
         is: 'tickets-block',
 
-        behaviors: [
-          HOVERBOARD.LocalizeBehavior
-        ],
-
         ready: function () {
-          HOVERBOARD.Elements.Tickets = this;
+          HOVERBOARD.Elements.Tickets = this
         },
 
         _trackBuyClick: function (e) {

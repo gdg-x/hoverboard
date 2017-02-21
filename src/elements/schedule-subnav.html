@@ -11,7 +11,6 @@
 
 <link rel="import" href="../styles/shared-styles.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
-<link rel="import" href="../behaviors/localize-behavior.html">
 
 
 <dom-module id="schedule-subnav">
@@ -121,7 +120,7 @@
         color: var(--text-primary-color);
       }
 
-      .myschedue-button[disabled] {
+      .myschedule-button[disabled] {
         opacity: 0;
       }
     </style>
@@ -151,7 +150,7 @@
           <template is="dom-if" if="{{app.user}}">
             <paper-tab day="myschedule" link>
               <a href="/schedule/myschedule" layout center>
-                [[localize('my-schedule')]]
+                {$ mySchedule $}
               </a>
             </paper-tab>
           </template>
@@ -161,7 +160,7 @@
       <template is="dom-if" if="[[_showDaySelector(app.isPhoneSize, selectedDay)]]">
         <paper-menu-button vertical-align="top" horizontal-align="left">
           <paper-button class="dropdown-trigger">
-            [[_getDayLabel(selectedDay)]]
+            [[_getDayLabel(selectedDay, schedule)]]
             <iron-icon icon="arrow-drop-down"></iron-icon>
           </paper-button>
           <paper-menu
@@ -184,16 +183,16 @@
           <paper-icon-button icon="arrow-back"
                              aria-label="Close My Schedule"
                              on-tap="_goBack"></paper-icon-button>
-          <span>[[localize('my-schedule')]]</span>
+          <span>{$ mySchedule $}</span>
         </div>
       </template>
 
       <div layout horizontal center>
-        <div class="myschedue-button"
+        <div class="myschedule-button"
              hidden$="[[!_displayPersonIcon(app.isPhoneSize, app.user)]]"
              disabled$="[[_isMySchedulePage(selectedDay)]]">
           <a href="/schedule/myschedule">
-            <paper-icon-button icon="person" aria-label="[[localize('my-schedule')]]"></paper-icon-button>
+            <paper-icon-button icon="person" aria-label="{$ mySchedule $}"></paper-icon-button>
           </a>
         </div>
         <paper-menu-button
@@ -204,7 +203,7 @@
           opened="{{_filtersOpened}}"
         >
           <paper-button class="filter-button dropdown-trigger">
-            [[localize('filter')]]
+            {$ filter $}
             <iron-icon class="filter-icon" icon="filter-list"></iron-icon>
           </paper-button>
           <paper-menu
@@ -223,7 +222,7 @@
                 [[tag]]
               </paper-checkbox>
             </template>
-            <paper-item on-tap="clearFilters">[[localize('clear-all')]]</paper-item>
+            <paper-item on-tap="clearFilters">{$ clearAll $}</paper-item>
           </paper-menu>
         </paper-menu-button>
       </div>
@@ -239,7 +238,7 @@
         </template>
       </div>
       <div class="filters" hidden$="[[!_filtersLabel]]">
-        [[localize('filtered-by')]] [[_filtersLabel]]
+        {$ filteredBy $} [[_filtersLabel]]
       </div>
     </div>
 
@@ -254,8 +253,7 @@
         is: 'schedule-subnav',
 
         behaviors: [
-          HOVERBOARD.UtilsBehavior,
-          HOVERBOARD.LocalizeBehavior
+          HOVERBOARD.UtilsBehavior
         ],
 
         properties: {
@@ -363,7 +361,7 @@
         },
 
         _getDayLabel: function (selectedDay) {
-          if (this._isMySchedulePage(selectedDay)) return;
+          if (!this.schedule || this._isMySchedulePage(selectedDay)) return;
 
           var index = Number(selectedDay.match(/\d+/)[0]);
           return this.schedule[index - 1].dateReadable;

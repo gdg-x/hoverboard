@@ -10,7 +10,6 @@
 <link rel="import" href="../../bower_components/marked-element/marked-element.html">
 
 <link rel="import" href="../elements/footer-block.html">
-<link rel="import" href="../behaviors/localize-behavior.html">
 <link rel="import" href="../behaviors/page-behavior.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
 <link rel="import" href="../behaviors/cascaded-behavior.html">
@@ -123,7 +122,7 @@
             <div class="markdown-html"></div>
           </marked-element>
 
-          <span class="share-label">[[localize('share-with')]]</span>
+          <span class="share-label">{$ shareWith $}</span>
           <div layout horizontal center-center wrap>
             <button is="paper-icon-button-light" class="share-button" on-tap="share" share="gplus">
               <iron-icon icon="gplus"></iron-icon>
@@ -190,7 +189,6 @@
         is: 'post-page',
 
         behaviors: [
-          HOVERBOARD.LocalizeBehavior,
           HOVERBOARD.PageBehavior,
           HOVERBOARD.CascadedBehavior,
           HOVERBOARD.UtilsBehavior,

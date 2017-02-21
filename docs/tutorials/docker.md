@@ -9,10 +9,10 @@ Now you have prepared the local development environment!
 
 Now you can run the project with local sources:
 
-    docker run -it -v "$PWD":/app -p 8080:8080 hoverboard
+    docker run -it -v "$PWD":/app -p 3000:3000 hoverboard
 
 or build the production version:
 
-    docker run -v "$PWD":/app hoverboard polymer build
+    docker run -v "$PWD":/app hoverboard gulp
 
 For the explanation of the commands and their modifications please refer to https://docs.docker.com/engine/reference/run

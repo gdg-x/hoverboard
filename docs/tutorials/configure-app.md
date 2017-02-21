@@ -4,31 +4,26 @@ The most important file of configuration is `data/hoverboard.config.json`
 which looks like:
 
 ```
-  "firebase": {..},
-  "pages": {..},
-  "navigation": [..],
   "url": "..",
+  "startDate": "..",
+  "endDate": "..",
+  "analytics": {..},
+  "organizer": {..},
+  "webapp": {..},
+  "firebase": {..},
   "mailchimp": {..},
-  "partnershipProposition": "..",
-  "languages": [..],
-  "footerBlocks": [..],
-  "contactBlock": {..},
-  "tickets": {..},
-  "teamPageTitle": "..",
-  "teamPageText": "..",
-  "statistics": [..],
   "hashtag": "..",
-  "social": [..],
+  "disqusShortName": "..",
   "tweetsSource": "..",
-  "gallery": {..},
-  "location": {..},
+  "partnershipProposition": "..",
   "videosSessionsUrl": "..",
-  "callToAction": {..}
+  "enableSessionsRating": "..",
+  "navigation": [..],
+  "social": [..],
+  "location": {..}
+  "social": [..],
+  "gallery": {..}
 ```
-
-**Note**, the project supports localization using [AppLocalizeBehavior][
-AppLocalizeBehavior], that's why some of the config values are keys in
-[localization resources][localization resources].
 
 ### SEO
 The project doesn't use any generators, so there is a need to edit manually
@@ -143,7 +138,7 @@ Read [full documentation](http://chrissimpkins.github.io/tweetledee/) on the off
 Now your Hoverboard is up configured, learn how to integrate [firebase][firebase] in your app, [style app][style app] and [deploy][deploy].
 
 [AppLocalizeBehavior]: https://elements.polymer-project.org/elements/app-localize-behavior
-[localization resources]: /data/en/resources.json
+[localization resources]: /data/resources.json
 [style app]: styling.md
 [deploy]: deploy.md
 [firebase]: firebase.md

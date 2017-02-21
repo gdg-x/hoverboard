@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
 
 <link rel="import" href="../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
@@ -8,7 +9,8 @@
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 
 <link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
-<link rel="import" href="../../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
+
+<link rel="import" href="../../bower_components/polymerfire/firebase-document.html">
 
 <link rel="import" href="../elements/schedule-subnav.html">
 <link rel="import" href="../elements/schedule-day.html">
@@ -48,13 +50,13 @@
 
     <firebase-document
       id="userSessions"
-      app-name="[[app.data.firebase.name]]"
-      path="[[app.data.firebase.userSessionsPath]]/[[app.user.uid]]"
+      app-name="{$ firebase.name $}"
+      path="{$ firebase.userSessionsPath $}/[[app.user.uid]]"
       data="{{persistedData}}">
     </firebase-document>
 
     <app-indexeddb-mirror
-      session="[[app.user.uid]]"
+      session="{$ firebase.indexedDbSession $}"
       key="mySchedule"
       data="{{persistedData}}"
       persisted-data="{{app.user.sessions}}">
@@ -138,7 +140,7 @@
         observers: [
           '_routePageChanged(routeData.day)',
           '_userChanged(app.user)',
-          '_queryParamsChanged(queryParams)',
+          '_queryParamsChanged(queryParams, sessions)',
           '_filtersChanged(filters.splices)'
         ],
 
@@ -151,9 +153,11 @@
             if (!day) {
               var dayToSelect = null;
               var today = new Date().toISOString().substring(0, 10);
-              for (var i = 0, length = this.schedule.length; i < length; i++) {
-                if (today === this.schedule[i].date) {
-                  dayToSelect = 'day' + (i + 1);
+              if (this.schedule) {
+                for (var i = 0, length = this.schedule.length; i < length; i++) {
+                  if (today === this.schedule[i].date) {
+                    dayToSelect = 'day' + (i + 1);
+                  }
                 }
               }
               this.set('routeData.day', (dayToSelect || 'day1'));
@@ -165,7 +169,7 @@
           }
         },
 
-        _queryParamsChanged: function (params) {
+        _queryParamsChanged: function (params, sessions) {
           if (this.selected) {
             if (params.sessionId) {
               var session = this.sessions[params.sessionId];
