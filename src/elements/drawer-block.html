@@ -9,7 +9,6 @@
 <link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
 <link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
 
-<link rel="import" href="../behaviors/localize-behavior.html">
 <link rel="import" href="../styles/shared-styles.html">
 
 
@@ -80,11 +79,11 @@
     <paper-toolbar class="tall">
       <div class="top">
         <iron-image class="logo" src="/images/logo-white.svg" sizing="contain"
-                    alt="[[localize('title')]]"></iron-image>
+                    alt="{$ title $}"></iron-image>
       </div>
       <div class="bottom">
-        <span class="dates">[[localize('dates')]]</span>
-        <span class="location">{{localize('location-address-short')}}</span>
+        <span class="dates">{$ dates $}</span>
+        <span class="location">{$ locationAddressShort $}</span>
       </div>
     </paper-toolbar>
     <nav>
@@ -94,10 +93,13 @@
         selected="{{pageData.page}}"
         selected-class="selected"
       >
-        <template is="dom-repeat" items="[[app.data.navigation]]" as="nav">
-          <a class="navigation-link" name="[[nav.route]]" href$="[[nav.permalink]]" on-tap="closeDrawer">{{localize(nav.route)}}</a>
-        </template>
-        <a class="navigation-link" href$="[[app.data.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">[[localize('buy-ticket')]]
+        {% for nav in navigation %}
+          <a class="navigation-link" href="{$ nav.permalink $}" name="{$ nav.route $}" on-tap="closeDrawer">
+            {$ pages[nav.route].title $}
+          </a>
+        {% endfor %}
+        <a class="navigation-link" href="{$ tickets.url $}" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
+          {$ buyTicket $}
           <iron-icon
             class="open-in-new"
             icon="open-in-new"
@@ -115,10 +117,6 @@
       Polymer({
 
         is: 'drawer-block',
-
-        behaviors: [
-          HOVERBOARD.LocalizeBehavior
-        ],
 
         closeDrawer: function () {
           HOVERBOARD.Elements.Template.closeDrawer();

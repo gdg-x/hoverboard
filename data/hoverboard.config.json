@@ -1,63 +1,39 @@
 {
+  "url": "https://hoverboard.firebaseapp.com/",
+  "startDate": "2016-09-09T09:00:00+03:00",
+  "endDate": "2016-09-10T19:00:00+03:00",
+  "analytics": {
+    "prod": "UA-43643469-8",
+    "dev": "UA-43643469-9"
+  },
+  "organizer": {
+    "name": "GDG Lviv",
+    "twitter": "gdglviv"
+  },
+  "webapp": {
+    "shortName": "DevFest",
+    "themeColor": "#F57C00",
+    "backgroundColor": "#F57C00"
+  },
   "firebase": {
-    "name": "hoverboard-master",
-    "domain": "hoverboard-master.firebaseapp.com",
-    "database": "https://hoverboard-master.firebaseio.com",
-    "api": "AIzaSyCaSkhtHekxAqXXzzbuNs2s6CpGdhZdta8",
-    "userSessionsPath": "/userSessions"
+    "name": "hoverboard-experimental",
+    "domain": "hoverboard-experimental.firebaseapp.com",
+    "database": "https://hoverboard-experimental.firebaseio.com",
+    "api": "AIzaSyALDa2D7CMhK_wt2VkET1MaJuQXYVUJd2I",
+    "userSessionsPath": "/userSessions",
+    "ratingsPath": "/ratings",
+    "indexedDbSession": "hoverboard"
   },
-  "pages": {
-    "home": {
-      "headerSettings": {
-        "backgroundColor": "#FF9800",
-        "backgroundImage": "/images/backgrounds/home.png",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff",
-        "video": {
-          "title": "GDG DevFest Ukraine 2016",
-          "youtubeId": "TdpbgRgz6eE",
-          "text": "See how it was in 2016"
-        },
-        "hideLogo": true,
-        "minHeight": "360px"
-      }
-    },
-    "blog": {
-      "headerSettings": {
-        "backgroundColor": "#03a9f4",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "speakers": {
-      "headerSettings": {
-        "backgroundColor": "#3f51b5",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "schedule": {
-      "headerSettings": {
-        "backgroundColor": "#673ab7",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "team": {
-      "headerSettings": {
-        "backgroundColor": "#009688",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "cod": {
-      "headerSettings": {
-        "backgroundColor": "#673ab7",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    }
+  "mailchimp": {
+    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
+    "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
   },
+  "hashtag": "dfua",
+  "disqusShortName": "hoverboard-gdg-x",
+  "tweetsSource": "/data/tweets.json",
+  "partnershipProposition": "http://bit.ly/df16-sponsor",
+  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
+  "enableSessionsRating": true,
   "navigation": [
     {
       "route": "home",
@@ -80,133 +56,6 @@
       "permalink": "/team/"
     }
   ],
-  "url": "https://hoverboard.firebaseapp.com/",
-  "mailchimp": {
-    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
-    "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
-  },
-  "partnershipProposition": "http://bit.ly/df16-sponsor",
-  "disqusShortName": "hoverboard-gdg-x",
-  "languages": [
-    {
-      "name": "English",
-      "key": "en"
-    },
-    {
-      "name": "Українська",
-      "key": "uk"
-    }
-  ],
-  "footerBlocks": [
-    {
-      "title": "for-visitors",
-      "links": [
-        {
-          "text": "team",
-          "url": "/team/"
-        },
-        {
-          "text": "cod",
-          "url": "/cod/"
-        },
-        {
-          "text": "google-developers",
-          "url": "https://developers.google.com/",
-          "newTab": true
-        },
-        {
-          "text": "df-13",
-          "url": "http://gdg-devfest-ua.appspot.com/",
-          "newTab": true
-        },
-        {
-          "text": "df-14",
-          "url": "http://devfest.gdg.org.ua/2014/",
-          "newTab": true
-        },
-        {
-          "text": "df-15",
-          "url": "http://devfest.gdg.org.ua/2015/",
-          "newTab": true
-        }
-      ]
-    },
-    {
-      "title": "for-partners",
-      "links": [
-        {
-          "text": "partnership-proposition",
-          "url": "http://bit.ly/df16-sponsor",
-          "newTab": true
-        },
-        {
-          "text": "media-kit",
-          "url": "http://bit.ly/df16-media",
-          "newTab": true
-        }
-      ]
-    }
-  ],
-  "contactBlock": {
-    "links": [
-      {
-        "text": "devfest@google.com",
-        "url": "mailto:devfest@google.com"
-      }
-    ]
-  },
-  "tickets": {
-    "url": "http://2event.com/events/630032",
-    "elements": [
-      {
-        "name": "student-ticket",
-        "price": 500,
-        "currency": "₴",
-        "starts": "student-ticket-starts",
-        "ends": "student-ticket-ends",
-        "info": "student-ticket-info",
-        "soldOut": false
-      },
-      {
-        "name": "early-ticket",
-        "price": 750,
-        "currency": "₴",
-        "starts": "early-ticket-starts",
-        "ends": "early-ticket-ends",
-        "info": "early-ticket-info",
-        "soldOut": true
-      },
-      {
-        "name": "lazy-ticket",
-        "price": 1000,
-        "currency": "₴",
-        "starts": "lazy-ticket-starts",
-        "ends": "lazy-ticket-ends",
-        "soldOut": false
-      }
-    ]
-  },
-  "teamPageTitle": "team-page-title",
-  "teamPageText": "team-page-text",
-  "statistics": [
-    {
-      "counter": 600,
-      "caption": "attendees"
-    },
-    {
-      "counter": 2,
-      "caption": "days"
-    },
-    {
-      "counter": 30,
-      "caption": "sessions"
-    },
-    {
-      "counter": 3,
-      "caption": "tracks"
-    }
-  ],
-  "hashtag": "dfua",
   "social": [
     {
       "name": "twitter",
@@ -229,19 +78,10 @@
       "url": "https://www.linkedin.com/company/google-developers-group-lviv"
     }
   ],
-  "tweetsSource": "/data/tweets.json",
-  "gallery": {
-    "albumUrl": "https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1",
-    "photos": {
-      "big": "/images/backgrounds/2015_1.jpg",
-      "small": [
-        "/images/backgrounds/2015_2.jpg",
-        "/images/backgrounds/2015_3.jpg"
-      ]
-    }
-  },
   "location": {
     "apiKey": "",
+    "name": "Pivdennyi Expo Center",
+    "address": "36 Shchyretska St, Lviv, Ukraine",
     "link": "https://www.facebook.com/expopivdennij",
     "pointer": {
       "latitude": 49.809841,
@@ -258,9 +98,72 @@
       "/images/backgrounds/location_3.jpg"
     ]
   },
-  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
-  "callToAction": {
-    "videoTitle": "action-title",
-    "videoId": "DfMnJAzOFng"
+  "gallery": {
+    "albumUrl": "https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1",
+    "photos": {
+      "big": "/images/backgrounds/2015_1.jpg",
+      "small": [
+        "/images/backgrounds/2015_2.jpg",
+        "/images/backgrounds/2015_3.jpg"
+      ]
+    }
+  },
+  "pages": {
+    "home": {
+      "title": "Home",
+      "headerSettings": {
+        "backgroundColor": "#FF9800",
+        "backgroundImage": "/images/backgrounds/home.png",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff",
+        "video": {
+          "title": "GDG DevFest Ukraine 2016",
+          "youtubeId": "TdpbgRgz6eE",
+          "text": "See how it was in 2016"
+        },
+        "hideLogo": true,
+        "minHeight": "360px"
+      }
+    },
+    "blog": {
+      "title": "Blog",
+      "headerSettings": {
+        "backgroundColor": "#03a9f4",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
+    },
+    "speakers": {
+      "title": "Speakers",
+      "headerSettings": {
+        "backgroundColor": "#3f51b5",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
+    },
+    "schedule": {
+      "title": "Schedule",
+      "headerSettings": {
+        "backgroundColor": "#673ab7",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
+    },
+    "team": {
+      "title": "Team",
+      "headerSettings": {
+        "backgroundColor": "#009688",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
+    },
+    "cod": {
+      "title": "Cod of Conduct",
+      "headerSettings": {
+        "backgroundColor": "#673ab7",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
+    }
   }
 }
