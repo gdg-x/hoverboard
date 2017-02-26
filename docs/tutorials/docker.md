@@ -1,18 +1,22 @@
 # Development in Docker container
 
-For simpler development setup you can use Docker.
+## For running the website directly from a container you can use docker : 
 
 1. Install docker https://docs.docker.com/ (Follow the installation instructions for your platform)
-2. Build the image `docker build -t hoverboard .`
+2. Build the image `docker build -t hoverboard .` and run the website with `docker run -it -p 3000:3000 -p 3001:3001 -v "$PWD":/app hoverboard`  
 
-Now you have prepared the local development environment!
+## For specific dev commands, you can run those from container : 
 
-Now you can run the project with local sources:
+Install all dependencies from docker command line :
 
-    docker run -it -v "$PWD":/app -p 3000:3000 hoverboard
+    docker run -it -v "$PWD":/app hoverboard npm install
+    
+Run the site from the container : 
 
-or build the production version:
+    docker run -it -p 3000:3000 -p 3001:3001 -v "$PWD":/app hoverboard npm run serve
 
-    docker run -v "$PWD":/app hoverboard gulp
+Build the production version:
+
+    docker run -it -v "$PWD":/app hoverboard npm run build
 
 For the explanation of the commands and their modifications please refer to https://docs.docker.com/engine/reference/run
