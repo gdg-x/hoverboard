@@ -33,15 +33,15 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 ### Setup
 :book: [Full documentation](/docs/).
 
-##### Docker based development env
+##### Docker-based development environment
 
-If you don't want to bother with the dependencies, you can develop in the docker container.
+If you don't want to bother with the dependencies, you can use the docker container for development.
 
-Build the docker image :
+Build the docker image:
 
     docker build -t hoverboard .
 
-and execute the commands associated to the docker env in the following documentation
+and execute the commands associated to the docker env in the following documentation:
 
 :book: Read more in [docker docs](/docs/tutorials/docker.md).
 
