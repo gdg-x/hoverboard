@@ -12,7 +12,8 @@
   <title>{$ title $}</title>
 
   <link rel="canonical" href="{$ url $}">
-  <link rel="shortcut icon" sizes="32x32" href="/images/favicon/favicon-32.png">
+
+  <link rel="icon" href="/images/favicon.ico">
 
   <meta name="theme-color" content="{$ webapp.themeColor $}">
   <link rel="manifest" href="manifest.json">
@@ -23,20 +24,19 @@
 
   <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="{$ title $}">
 
   <!-- Homescreen icons. -->
-  <link rel="shortcut icon" href="/images/favicon/favicon-72.png">
-  <link rel="apple-touch-icon" href="/images/touch/homescreen-48.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="/images/touch/homescreen-72.png">
-  <link rel="apple-touch-icon" sizes="96x96" href="/images/touch/homescreen-96.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="/images/touch/homescreen-144.png">
-  <link rel="apple-touch-icon" sizes="192x192" href="/images/touch/homescreen-192.png">
+  <link rel="apple-touch-icon" href="/images/manifest/icon-48.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/manifest/icon-72.png">
+  <link rel="apple-touch-icon" sizes="96x96" href="/images/manifest/icon-96.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/manifest/icon-144.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="/images/manifest/icon-192.png">
 
   <!-- Tile icon for Win8 (144x144 + tile color) -->
-  <meta name="msapplication-TileImage" content="/images/touch/homescreen-144.png">
-  <meta name="msapplication-TileColor" content="#ECEFF1">
+  <meta name="msapplication-TileImage" content="/images/manifest/icon-144.png">
+  <meta name="msapplication-TileColor" content="#00aba9">
   <meta name="msapplication-tap-highlight" content="no">
 
   <!-- G+ sharing meta data -->
@@ -54,7 +54,7 @@
   <meta property="og:description" content="{$ description $}">
   <meta property="og:type" content="Event">
   <meta property="og:image" content="/images/social-share.jpg">
-  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:type" content="image/jpeg" />
 
   <!-- Twitter meta data -->
   <meta name="twitter:card" content="summary_large_image">
@@ -68,75 +68,42 @@
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Unsupported browser checks need to come before webcomponents.js is loaded,
-       otherwise unsupported browsers will error out and not record a pageview.
-       Analytics lib is also loaded up front for error reporting. -->
-  <script src="https://www.google-analytics.com/analytics.js" async></script>
+  <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+  <link rel="import" href="/src/hoverboard-app.html">
 
   <style>
 
     body {
       margin: 0;
       font-family: 'Roboto', 'Noto', sans-serif;
-      line-height: 1.4;
+      font-size: 16px;
+      line-height: 1.5;
       min-height: 100vh;
+    }
+
+    /* styling for render while resources are loading */
+    hoverboard-app[unresolved] {
+      padding: 0 16px;
+      display: block;
+      min-height: 101vh;
+      line-height: 68px;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      color: #202020;
+      overflow: visible;
     }
 
   </style>
 
-  <script>
-
-
-    window.HOVERBOARD = window.HOVERBOARD || {};
-    window.ENV = 'dev';
-    window.PREFIX = '/';
-
-    // setup Polymer options
-    window.Polymer = {lazyRegister: true, dom: 'shadow'};
-
-    // Initializes the analytics.js command queue.
-    window.ga = window.ga || function () {
-        (ga.q = ga.q || []).push(arguments)
-      };
-    ga.l = +new Date;
-
-    // Creates the tracker.
-    ga('create', {
-      trackingId: window.ENV === 'prod' ? '{$ analytics.prod $}' : '{$ analytics.dev $}',
-      cookieDomain: 'auto',
-      cookiePath: window.ENV !== 'dev' ? window.PREFIX || '/' : null,
-      siteSpeedSampleRate: 10 // 10% of users.
-    });
-
-    // Setup error tracking before anything else runs.
-    window.onerror = function (message, file, lineNumber, columnNumber, error) {
-      // We don't want to trigger any errors inside window.onerror, so wrap in a try/catch.
-      try {
-        // Some browsers don't support error param yet.
-        if (error !== undefined) {
-          message = error.stack;
-        }
-        ga('send', 'event', 'error', file + ':' + lineNumber, message);
-      } catch (e) {
-        // no-op
-      }
-    };
-
-  </script>
-
-  <link rel="import" href="/src/hoverboard-app.html" async>
-
 </head>
 <body>
 
-<hoverboard-app id="happ"></hoverboard-app>
+<hoverboard-app unresolved>{$ title $}</hoverboard-app>
 
-<script src="scripts/helper/util.js"></script>
-<script src="scripts/helper/elements.js"></script>
-<script src="scripts/bootstrap.js"></script>
-<script id="sw-registration" src="scripts/helper/service-worker-registration.js"></script>
-<script src="scripts/helper/deferred.js"></script>
-<script src="scripts/metrics.js"></script>
+<script>
+  window.performance && performance.mark && performance.mark('index.html');
+</script>
 
 </body>
 </html>

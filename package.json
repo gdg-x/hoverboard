@@ -1,10 +1,10 @@
 {
   "name": "hoverboard",
-  "version": "1.2.0",
+  "version": "2.0.0-alpha.1",
   "description": "Conference website template",
   "scripts": {
-  	"gulp": "gulp",
-  	"bower": "bower",
+    "gulp": "gulp",
+    "bower": "bower",
     "build": "gulp",
     "postinstall": "bower install",
     "serve": "gulp serve"
@@ -24,8 +24,8 @@
     "gulp-replace": "^0.5.0",
     "gulp-uglify": "^2.0.0",
     "merge-stream": "^1.0.0",
-    "plylog": "^0.4.0",
-    "polymer-build": "^0.7.0",
+    "plylog": "^0.5.0",
+    "polymer-build": "^0.8.0",
     "require-uncached": "^1.0.0",
     "sw-precache": "^5.0.0"
   },

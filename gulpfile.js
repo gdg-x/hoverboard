@@ -7,6 +7,7 @@ const uglify = require('gulp-uglify');
 const cssSlam = require('css-slam').gulp;
 const mergeStream = require('merge-stream');
 const polymerBuild = require('polymer-build');
+const HtmlSplitter = require('polymer-build').HtmlSplitter;
 const browserSync = require('browser-sync').create();
 const history = require('connect-history-api-fallback');
 
@@ -60,22 +61,24 @@ function build() {
       .then(() => {
         console.log(`Polymer building...`);
 
+        const sourcesHtmlSplitter = new HtmlSplitter();
         const sourcesStream = polymerProject.sources()
-          .pipe(polymerProject.splitHtml())
+          .pipe(sourcesHtmlSplitter.split())
           // splitHtml doesn't split CSS https://github.com/Polymer/polymer-build/issues/32
-          .pipe(gulpif(/\.js$/, uglify()))
+          // .pipe(gulpif(/\.js$/, uglify()))
           .pipe(gulpif(/\.(html|css)$/, cssSlam()))
           .pipe(gulpif(/\.html$/, html.minify()))
           .pipe(gulpif(/\.(png|gif|jpg|svg)$/, images.minify()))
-          .pipe(polymerProject.rejoinHtml());
+          .pipe(sourcesHtmlSplitter.rejoin());
 
+        const dependenciesHtmlSplitter = new HtmlSplitter();
         const dependenciesStream = polymerProject.dependencies()
-          .pipe(polymerProject.splitHtml())
+          .pipe(dependenciesHtmlSplitter.split())
           // Doesn't work for now
           // .pipe(gulpif(/\.js$/, uglify()))
           .pipe(gulpif(/\.(html|css)$/, cssSlam()))
           .pipe(gulpif(/\.html$/, html.minify()))
-          .pipe(polymerProject.rejoinHtml());
+          .pipe(dependenciesHtmlSplitter.rejoin());
 
         let buildStream = mergeStream(sourcesStream, dependenciesStream)
           .once('data', () => {
