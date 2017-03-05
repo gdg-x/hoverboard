@@ -1,0 +1,53 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<!-- shared styles for all views -->
+<dom-module id="shared-styles">
+  <template>
+    <style>
+      :host {
+        --dark-primary-color: #512DA8;
+        --default-primary-color: #673AB7;
+        --light-primary-color: #D1C4E9;
+        --text-primary-color: #FFFFFF;
+        --accent-color: #FF5252;
+        --primary-background-color: #D1C4E9;
+        --primary-text-color: #212121;
+        --secondary-text-color: #757575;
+        --disabled-text-color: #BDBDBD;
+        --divider-color: #EDEDED;
+
+        /* Components */
+
+        /* paper-drawer-panel */
+        --drawer-menu-color: #ffffff;
+        --drawer-border-color: 1px solid #ccc;
+        --drawer-toolbar-border-color: 1px solid rgba(0, 0, 0, 0.22);
+
+        /* paper-menu */
+        --paper-menu-background-color: #fff;
+        --menu-link-color: #111111;
+
+        /* paper-input */
+        --paper-input-container-color: rgba(255, 255, 255, 0.64);
+        --paper-input-container-focus-color: rgba(255, 255, 255, 1);
+        --paper-input-container-input-color: #fff;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Product Sans", arial, sans-serif;
+        color: #4A4A4A;
+      }
+
+      a {
+        color: var(--default-primary-color);
+        text-decoration: none;
+      }
+
+    </style>
+  </template>
+</dom-module>
