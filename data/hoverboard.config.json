@@ -12,5 +12,21 @@
     "themeColor": "#F57C00",
     "backgroundColor": "#F57C00"
   },
-  "hashtag": "dfua"
+  "hashtag": "dfua",
+  "mediaQueries": {
+    "xs": {
+      "max": "639px"
+    },
+    "sm": {
+      "min": "640px",
+      "max": "811px"
+    },
+    "md": {
+      "min": "812px",
+      "max": "1023px"
+    },
+    "lg": {
+      "min": "1024px"
+    }
+  }
 }
