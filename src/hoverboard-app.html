@@ -2,17 +2,19 @@
 <link rel="import" href="../bower_components/polymer/lib/utils/render-status.html">
 <link rel="import" href="../bower_components/polymer/lib/utils/import-href.html">
 
+<link rel="import" href="elements/flex-layout-attr.html">
+<link rel="import" href="elements/shared-styles.html">
 
 <dom-module id="hoverboard-app">
 
   <template>
 
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
     <style>
 
       :host {
         display: block;
         position: relative;
-        padding-top: 130px;
         padding-bottom: 64px;
         min-height: 100vh;
       }
