@@ -37,15 +37,39 @@
       }
 
       app-drawer app-toolbar {
-        padding: 36px 24px;
+        padding: 36px 24px 24px;
         border-bottom: 1px solid var(--divider-color);
       }
 
       app-drawer .dates {
-        font-size: 24px;
+        margin-top: 42px;
+        font-size: 22px;
+        line-height: 0.95;
+      }
+
+      app-drawer .location {
+        margin-top: 4px;
+        font-size: 15px;
+        color: var(--secondary-text-color);
+      }
+
+      .drawer-list {
+        padding: 16px 0;
+        display: block;
+      }
+
+      .drawer-list a {
+        padding: 8px 24px;
+        display: block;
+        color: var(--primary-text-color);
+      }
+
+      .drawer-list a.selected {
+        font-weight: 500;
       }
 
       app-header {
+        background-color: var(--primary-background-color);
         border-bottom: 1px solid var(--divider-color);
       }
 
@@ -102,18 +126,21 @@
 
     <app-drawer-layout drawer-width="300px" force-narrow fullbleed>
 
-      <app-drawer id="drawer" slot="drawer">
-        <app-toolbar layout vertical>
+      <app-drawer id="drawer" slot="drawer" opened="{{drawerOpened}}">
+        <app-toolbar layout vertical start>
           <iron-image class="toolbar-logo" src="/images/logo.svg" alt="{$ title $}"></iron-image>
-          <h4 class="dates">{$ dates $}</h4>
-          <h5 class="location">{$ locationAddressShort $}</h5>
+          <h2 class="dates">{$ dates $}</h2>
+          <h3 class="location">{$ locationAddressShort $}</h3>
         </app-toolbar>
 
-        <iron-selector selected="[[routeData.page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+        <iron-selector
+          class="drawer-list"
+          selected="[[routeData.page]]"
+          attr-for-selected="path"
+          selected-class="selected"
+          role="navigation">
           {% for nav in navigation %}
-          <paper-tab name="{$ nav.route $}" link>
-            <a href="{$ nav.permalink $}" class="nav-link">{$ nav.title $}</a>
-          </paper-tab>
+          <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer">{$ nav.title $}</a>
           {% endfor %}
         </iron-selector>
       </app-drawer>
@@ -174,6 +201,10 @@
         console.log('Hoverboard v2 is ready!');
         this.removeAttribute('unresolved');
         this._ensureLazyLoaded();
+      }
+
+      closeDrawer() {
+        this.drawerOpened = false;
       }
 
       _ensureLazyLoaded() {

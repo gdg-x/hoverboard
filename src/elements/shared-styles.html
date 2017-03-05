@@ -10,27 +10,14 @@
         --light-primary-color: #D1C4E9;
         --text-primary-color: #FFFFFF;
         --accent-color: #FF5252;
-        --primary-background-color: #D1C4E9;
+        --primary-background-color: #FFFFFF;
         --primary-text-color: #212121;
         --secondary-text-color: #757575;
         --disabled-text-color: #BDBDBD;
         --divider-color: #EDEDED;
 
-        /* Components */
-
-        /* paper-drawer-panel */
-        --drawer-menu-color: #ffffff;
-        --drawer-border-color: 1px solid #ccc;
-        --drawer-toolbar-border-color: 1px solid rgba(0, 0, 0, 0.22);
-
-        /* paper-menu */
-        --paper-menu-background-color: #fff;
-        --menu-link-color: #111111;
-
-        /* paper-input */
-        --paper-input-container-color: rgba(255, 255, 255, 0.64);
-        --paper-input-container-focus-color: rgba(255, 255, 255, 1);
-        --paper-input-container-input-color: #fff;
+        /* Custom */
+        --default-background-color: #FAFAFA;
       }
 
       h1,
@@ -39,8 +26,17 @@
       h4,
       h5,
       h6 {
+        margin: 0;
         font-family: "Product Sans", arial, sans-serif;
-        color: #4A4A4A;
+        font-weight: normal;
+        color: var(--primary-text-color);
+      }
+
+      h1 {
+        padding: 8px 8px 24px 14px;
+        font-size: 24px;
+        line-height: 30px;
+        font-weight: 500;
       }
 
       a {
