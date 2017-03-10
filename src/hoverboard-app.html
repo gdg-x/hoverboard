@@ -18,6 +18,7 @@
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 
+<link rel="import" href="redux-store.html">
 <link rel="import" href="elements/shared-styles.html">
 <link rel="import" href="elements/flex-layout-attr.html">
 <link rel="import" href="elements/hoverboard-icons.html">
@@ -88,7 +89,7 @@
         text-transform: uppercase;
       }
 
-      @media (min-width: {$ mediaQueries.sm.min $}) {
+      @media (min-width: 640px) {
         app-toolbar {
           padding: 0 36px;
           height: initial;
@@ -126,7 +127,7 @@
 
     <app-drawer-layout drawer-width="300px" force-narrow fullbleed>
 
-      <app-drawer id="drawer" slot="drawer" opened="{{drawerOpened}}">
+      <app-drawer id="drawer" slot="drawer" opened="[[ui.isDrawerOpened]]">
         <app-toolbar layout vertical start>
           <iron-image class="toolbar-logo" src="/images/logo.svg" alt="{$ title $}"></iron-image>
           <h2 class="dates">{$ dates $}</h2>
@@ -152,7 +153,7 @@
               icon="h-icons:menu"
               aria-label="Menu"
               hidden$="[[!isPhoneSize]]"
-              drawer-toggle>
+              on-tap="openDrawer">
             </paper-icon-button>
             <div layout horizontal center flex>
               <a href="/" hidden$="[[isPhoneSize]]" layout horizontal>
@@ -185,10 +186,19 @@
 
   <script>
 
-    class HoverboardApp extends Polymer.Element {
+    class HoverboardApp extends ReduxMixin(Polymer.Element) {
 
       static get is() {
         return 'hoverboard-app';
+      }
+
+      static get properties() {
+        return {
+          ui: {
+            type: Object,
+            statePath: 'ui'
+          }
+        };
       }
 
       constructor() {
@@ -203,8 +213,12 @@
         this._ensureLazyLoaded();
       }
 
+      openDrawer() {
+        uiActions.toggleDrawer(true);
+      }
+
       closeDrawer() {
-        this.drawerOpened = false;
+        uiActions.toggleDrawer(false);
       }
 
       _ensureLazyLoaded() {
