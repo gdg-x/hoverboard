@@ -32,5 +32,8 @@
   "engines": {
     "node": ">=4.0"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "redux": "^3.6.0"
+  }
 }
