@@ -1,0 +1,92 @@
+
+[layout] {
+  /**
+   * Alignment in cross axis.
+   */
+  &[start] {
+    align-items: flex-start;
+  }
+
+  &[center],
+  &[center-center] {
+    align-items: center;
+  }
+
+  &[end] {
+    align-items: flex-end;
+  }
+
+  &[baseline] {
+    align-items: baseline;
+  }
+
+  /**
+   * Alignment in main axis.
+   */
+  &[start-justified] {
+    justify-content: flex-start;
+  }
+
+  &[center-justified],
+  &[center-center] {
+    justify-content: center;
+  }
+
+  &[end-justified] {
+    justify-content: flex-end;
+  }
+
+  &[around-justified] {
+    justify-content: space-around;
+  }
+
+  &[justified] {
+    justify-content: space-between;
+  }
+
+  /**
+   * multi-line alignment in main axis.
+   */
+  &[start-aligned] {
+    align-content: flex-start;
+  }
+
+  &[end-aligned] {
+    align-content: flex-end;
+  }
+
+  &[center-aligned] {
+    align-content: center;
+  }
+
+  &[between-aligned] {
+    align-content: space-between;
+  }
+
+  &[around-aligned] {
+    align-content: space-around;
+  }
+}
+
+/**
+ * Self alignment.
+ */
+[self-start] {
+  align-self: flex-start;
+}
+
+[self-center] {
+  align-self: center;
+}
+
+[self-end] {
+  align-self: flex-end;
+}
+
+[self-stretch] {
+  align-self: stretch;
+}
+
+[self-baseline] {
+  align-self: baseline;
+}

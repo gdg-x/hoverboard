@@ -1,0 +1,76 @@
+<!--
+A set of layout attributes that let you specify layout properties directly in markup.
+You must include this file in every element that needs to use them.
+
+Sample use:
+
+    <link rel="import" href="../flex-layout-attr.html">
+    <style is="custom-style" include="flex flex-alignment"></style>
+
+    <div layout horizontal layout-start>
+      <div>cross axis start alignment</div>
+    </div>
+
+The following imports are available:
+ - flex
+ - flex-reverse
+ - flex-alignment
+ - flex-factors
+ - positioning
+-->
+
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<!-- Most common used flex styles-->
+<dom-module id="flex">
+  <template>
+    <style>
+
+      {% include ".css/flex.css" ignore missing %}
+
+    </style>
+  </template>
+</dom-module>
+
+<!-- Basic flexbox reverse styles -->
+<dom-module id="flex-reverse">
+  <template>
+    <style>
+
+      {% include ".css/flex-reverse.css" ignore missing %}
+
+    </style>
+  </template>
+</dom-module>
+
+<!-- Flexbox alignment -->
+<dom-module id="flex-alignment">
+  <template>
+    <style>
+
+      {% include ".css/flex-alignment.css" ignore missing %}
+
+    </style>
+  </template>
+</dom-module>
+
+<dom-module id="flex-factors">
+  <template>
+    <style>
+
+      {% include ".css/flex-factors.css" ignore missing %}
+
+    </style>
+  </template>
+</dom-module>
+
+<!-- Non-flexbox positioning helper styles -->
+<dom-module id="positioning">
+  <template>
+    <style>
+
+      {% include ".css/positioning.css" ignore missing %}
+
+    </style>
+  </template>
+</dom-module>

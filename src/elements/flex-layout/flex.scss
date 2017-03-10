@@ -1,0 +1,45 @@
+[layout] {
+  &[horizontal],
+  &[vertical] {
+    display: flex;
+  }
+
+  &[inline] {
+    display: inline-flex;
+  }
+
+  &[horizontal] {
+    flex-direction: row;
+  }
+
+  &[vertical] {
+    flex-direction: column;
+  }
+
+  &[wrap] {
+    flex-wrap: wrap;
+  }
+
+  &[center],
+  &[center-center] {
+    align-items: center;
+  }
+
+  &[center-justified],
+  &[center-center] {
+    justify-content: center;
+  }
+}
+
+[flex] {
+  flex: 1;
+  flex-basis: 0.000000001px;
+}
+
+[flex-auto] {
+  flex: 1 1 auto;
+}
+
+[flex-none] {
+  flex: none;
+}
