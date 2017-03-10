@@ -10,6 +10,8 @@ const polymerBuild = require('polymer-build');
 const HtmlSplitter = require('polymer-build').HtmlSplitter;
 const browserSync = require('browser-sync').create();
 const history = require('connect-history-api-fallback');
+const sass = require('gulp-sass');
+const flatten = require('gulp-flatten');
 
 const logging = require('plylog');
 // logging.setVerbose();
@@ -25,7 +27,8 @@ const config = {
     'data/hoverboard.config',
     'data/resources'
   ],
-  tempDirectory: '.temp'
+  tempDirectory: '.temp',
+  tempCssDirectory: '.css'
 };
 const swPrecacheConfig = require(config.swPrecacheConfigPath);
 const polymerJson = require(config.polymerJsonPath);
@@ -48,7 +51,11 @@ function build() {
     let polymerProject = null;
     console.log(`Deleting ${config.build.rootDirectory} and ${config.tempDirectory} directories...`);
 
-    del([config.build.rootDirectory, config.tempDirectory])
+    del([config.build.rootDirectory, config.tempDirectory, config.tempCssDirectory])
+      .then(() => {
+        console.log(`Compiling sass...`);
+        return waitFor(compileSass());
+      })
       .then(() => {
         console.log(`Compiling template...`);
 
@@ -128,11 +135,15 @@ function reload(done) {
   done();
 }
 
+function compileSass() {
+  return gulp.src('src/**/*.{sass,scss}')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(flatten())
+    .pipe(gulp.dest(config.tempCssDirectory));
+}
+
 function compileTemplate() {
-  return del([config.tempDirectory])
-    .then(() => {
-      return waitFor(template.compile(config, polymerJson));
-    });
+  return waitFor(template.compile(config, polymerJson));
 }
 
 function prependPath(pre, to) {
@@ -141,27 +152,33 @@ function prependPath(pre, to) {
 
 gulp.task('default', build);
 
-gulp.task('serve', gulp.series(compileTemplate, () => {
-  browserSync.init({
-    logPrefix: 'Hoverboard 2',
-    notify: false,
-    server: {
-      baseDir: [config.tempDirectory, './'],
-      middleware: [history()]
-    }
-  });
+gulp.task('serve', gulp.series(() => del([config.tempDirectory, config.tempCssDirectory]),
+  compileSass, compileTemplate, () => {
+    browserSync.init({
+      logPrefix: 'Hoverboard 2',
+      notify: false,
+      server: {
+        baseDir: [config.tempDirectory, './'],
+        middleware: [history()]
+      }
+    });
 
-  gulp.watch([
-    'data/**/*.{markdown,md}',
-    'images/**/*.{png,gif,jpg,svg}',
-  ]).on('change', reload);
+    gulp.watch([
+      'data/**/*.{markdown,md}',
+      'images/**/*.{png,gif,jpg,svg}'
+    ]).on('change', reload);
 
-  gulp.watch([
-    'data/**/*.json',
-    'scripts/**/*.js',
-    'src/**/*.html',
-    './index.html',
-    'manifest.json'
-  ], gulp.series(compileTemplate, reload));
-}));
+    gulp.watch([
+      'src/**/*.{sass,scss}'
+    ]).on('change', gulp.series(() => del([config.tempDirectory, config.tempCssDirectory]),
+      compileSass, compileTemplate, reload));
+
+    gulp.watch([
+      'data/**/*.json',
+      'scripts/**/*.js',
+      'src/**/*.html',
+      './index.html',
+      'manifest.json'
+    ], gulp.series(compileTemplate, reload));
+  }));
 

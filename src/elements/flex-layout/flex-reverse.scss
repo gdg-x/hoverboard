@@ -1,0 +1,18 @@
+[layout] {
+  &[horizontal-reverse],
+  &[vertical-reverse] {
+    display: flex;
+  }
+
+  &[horizontal-reverse] {
+    flex-direction: row-reverse;
+  }
+
+  &[vertical-reverse] {
+    flex-direction: column-reverse;
+  }
+
+  &[wrap-reverse] {
+    flex-wrap: wrap-reverse;
+  }
+}

@@ -1,0 +1,75 @@
+@import "properties";
+
+:host {
+  display: block;
+  position: relative;
+  min-height: 100vh;
+}
+
+app-drawer {
+  app-toolbar {
+    padding: 36px 24px 24px;
+    border-bottom: 1px solid var(--divider-color);
+  }
+}
+
+app-drawer {
+  .dates {
+    margin-top: 42px;
+    font-size: 22px;
+    line-height: 0.95;
+  }
+
+  .location {
+    margin-top: 4px;
+    font-size: 15px;
+    color: var(--secondary-text-color);
+  }
+}
+
+.drawer-list {
+  padding: 16px 0;
+  display: block;
+
+  a {
+    padding: 8px 24px;
+    display: block;
+    color: var(--primary-text-color);
+
+    &.selected {
+      font-weight: 500;
+    }
+  }
+}
+
+app-header {
+  background-color: var(--primary-background-color);
+  border-bottom: 1px solid var(--divider-color);
+}
+
+app-toolbar {
+  padding: 0;
+  height: auto;
+
+  @media (min-width: $mq-sm-min) {
+    padding: 0 36px;
+    height: initial;
+
+    .nav-items {
+      --paper-tabs-selection-bar-color: var(--default-primary-color);
+      --paper-tabs: #{'{
+          height: 64px;
+      }'}
+    }
+  }
+}
+
+.toolbar-logo {
+  --iron-image-height: 32px;
+}
+
+.nav-item a {
+  padding: 0 14px;
+  color: var(--primary-text-color);
+  text-transform: uppercase;
+}
