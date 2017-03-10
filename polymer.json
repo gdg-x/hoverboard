@@ -8,10 +8,10 @@
     "images/**/*",
     "scripts/**/*",
     "src/**/*",
-    "bower.json",
     "manifest.json"
   ],
   "extraDependencies": [
-    "bower_components/webcomponentsjs/webcomponents-*.js"
+    "bower_components/webcomponentsjs/webcomponents-*.js",
+    "node_modules/redux/dist/redux.min.js"
   ]
 }
