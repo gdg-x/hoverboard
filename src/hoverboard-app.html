@@ -22,6 +22,7 @@
 <link rel="import" href="elements/shared-styles.html">
 <link rel="import" href="elements/flex-layout-attr.html">
 <link rel="import" href="elements/hoverboard-icons.html">
+<link rel="import" href="elements/footer-block.html">
 
 
 <dom-module id="hoverboard-app">
@@ -34,7 +35,7 @@
       :host {
         display: block;
         position: relative;
-        min-height: 100vh;
+        min-height: 200vh;
       }
 
       app-drawer app-toolbar {
@@ -150,7 +151,7 @@
         <app-header id="header" slot="header" effects="waterfall" condenses reveals>
           <app-toolbar>
             <paper-icon-button
-              icon="h-icons:menu"
+              icon="hoverboard:menu"
               aria-label="Menu"
               hidden$="[[!isPhoneSize]]"
               on-tap="openDrawer">
@@ -178,10 +179,9 @@
         </app-header>
 
         <h1>{{routeData.page}}</h1>
-
       </app-header-layout>
+      <footer-block></footer-block>
     </app-drawer-layout>
-
   </template>
 
   <script>

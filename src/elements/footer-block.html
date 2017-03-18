@@ -1,0 +1,65 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="footer-social.html">
+<link rel="import" href="footer-rel.html">
+<link rel="import" href="footer-nav.html">
+<link rel="import" href="hoverboard-icons.html">
+
+
+
+<dom-module id="footer-block">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+    <style>
+
+      :host {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 20px 0 0 0;
+        box-sizing: border-box;
+        color: var(--footer-text-color);
+        background: var(--footer-background-color);
+        font-size: 14px;
+        line-height: 1.5;
+        text-rendering: optimizeLegibility;
+      }
+
+      .container {
+        margin: 0 auto;
+        padding: 20px 0;
+        box-sizing: border-box;
+      }
+
+      @media (min-width: 640px) {
+        .container {
+          padding: 15px 60px;
+          box-sizing: border-box;
+        }
+      }
+
+    </style>
+
+    <div class="container">
+      <footer-social layout flex flex-auto horizontal wrap></footer-social>
+      <footer-rel layout flex horizontal wrap></footer-rel>
+      <footer-nav  layout flex horizontal wrap></footer-nav>
+    </div>
+  </template>
+
+  <script>
+
+    class FooterBlock extends Polymer.Element {
+
+      static get is() { return 'footer-block' }
+
+      constructor() {
+        super();
+      }
+    }
+
+    customElements.define(FooterBlock.is, FooterBlock);
+
+  </script>
+</dom-module>

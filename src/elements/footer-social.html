@@ -1,0 +1,212 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+
+
+<dom-module id="footer-social">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+    <style>
+      :host {
+        padding-left: 4px;
+        position: relative;
+        color: var(--footer-text-color);;
+      }
+
+      .title {
+        display: inline-block;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 14px;
+        margin: 0;
+      }
+
+      .nav-inline {
+        display: inline;
+        margin: 0 55px 0 4px;
+      }
+
+      ul.nav-inline {
+        padding-left: 10px;
+      }
+
+      .nav-inline li {
+        display: inline-block;
+      }
+
+      .share-gplus {
+        height: 30px;
+        padding: 8px;
+        width: 23px;
+      }
+
+      .share-gplus paper-icon-button {
+        color: var(--red-gplus-color);
+      }
+
+      a {
+        display: inline-block;
+        margin: 0;
+        color: var(--footer-text-color);
+        text-decoration: none;
+      }
+
+      .social-group {
+        margin-right: 30px;
+        box-sizing: border-box;
+      }
+
+      .social-group.email h4 {
+        padding-right: 0;
+        padding-top: 17px;
+      }
+
+      .social-group.email a {
+        border-bottom: 1px solid var(--footer-text-color);
+        padding-bottom: 1px;
+      }
+
+      .social-group.social-networks {
+        padding-top: 5px;
+      }
+
+      .social-group.social-networks ul {
+        list-style-type: disc;
+      }
+
+      .social-group.blog {
+        padding-top: 17px;
+      }
+
+      .blog h4 {
+        padding-right: 55px;
+      }
+
+      .blog a {
+        border-bottom: 1px solid var(--footer-text-color);
+        padding-bottom: 1px;
+      }
+
+      .fab paper-fab {
+        transform: scale(1);
+        background: #fff;
+        color: inherit;
+        transition: transform 200ms cubic-bezier(0, 0, 0.2, 1), -webkit-transform 200ms cubic-bezier(0, 0, 0.2, 1);
+        will-change: transform;
+        pointer-events: all;
+        box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.12), 0px 8px 8px 0px rgba(0,0,0,0.24);
+      }
+
+      .fab {
+        transform: translateY(2px);
+        position: absolute;
+        right: 0;
+        bottom: 40px;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      @media (max-width: 811px) {
+        :host  {
+          margin: 0 10px 0 10px;
+          display: block;
+        }
+
+        .social-group {
+          margin-right: 0;
+          margin-bottom: 10px;
+          width: 100%;
+          padding-top: 0;
+        }
+
+        .social-group.blog,
+        .social-group.social-networks {
+          padding-top: 0;
+        }
+
+        .social-group.social-networks {
+          margin-bottom: -10px;
+        }
+
+        .email {
+          margin-bottom: 20px;
+        }
+
+        .nav-inline li a {
+          padding: 0;
+        }
+
+        .fab {
+          transform: translateY(-130px);
+        }
+      }
+
+    </style>
+
+    <div class="fab">
+      <paper-fab class="back-to-top" icon="hoverboard:up" on-click="backToTop"></paper-fab>
+    </div>
+    <div class="social-group google-plus">
+      <h4 class="title roboto-font">{$ share $}</h4>
+      <div class="nav-inline">
+          <a class="share-gplus" href="{$ gplusShareLink $}"  target="_blank" rel="noopener noreferrer">
+            <paper-icon-button icon="hoverboard:gplus"></paper-icon-button>
+          </a>
+      </div>
+    </div>
+
+    <div class="social-group blog">
+      <h4 class="title roboto-font">
+        {$ followOur $}
+        <a href="{$ blogLink $}" target="_blank" rel="noopener noreferrer">{$ blog $}</a>
+      </h4>
+    </div>
+
+    <div class="social-group social-networks">
+      <h4 class="title roboto-font">{$ followUs $} </h4>
+      <ul class="nav-inline">
+        {% for soc in socialNetwork %}
+          <li>
+            <a href="{$ soc.url $}" target="_blank" rel="noopener noreferrer">
+              <paper-icon-button icon="hoverboard:{$ soc.name $}"></paper-icon-button>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="social-group email">
+      <h4 class="title roboto-font">
+        <a aria-label="Email us" href="mailto:{$ mailto $}">{$ emailUs $}</a>
+      </h4>
+    </div>
+
+  </template>
+
+  <script>
+
+    class FooterSocial extends Polymer.Element {
+
+      static get is() { return 'footer-social' }
+
+      constructor() {
+        super();
+      }
+
+      backToTop(e) {
+        var scrollDuration = 500;
+        var scrollStep = -window.scrollY / (scrollDuration / 15),
+          scrollInterval = setInterval(function(){
+            if ( window.scrollY != 0 ) {
+              window.scrollBy( 0, scrollStep );
+            }
+            else clearInterval(scrollInterval);
+          },15);
+      }
+    }
+
+    customElements.define(FooterSocial.is, FooterSocial);
+
+  </script>
+</dom-module>
+
