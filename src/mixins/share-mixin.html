@@ -1,0 +1,37 @@
+<script>
+  const ShareMixin = subclass => class extends subclass {
+
+    share(e) {
+      let type = e.currentTarget.getAttribute('share');
+      let shareUrl = location.href;
+      let url =  e.currentTarget.getAttribute('url');
+
+      let width = 600;
+      let height = 600;
+      let winOptions = `menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=${height},width=${width}`;
+      let title = document.title;
+
+      switch (type) {
+        case 'facebook':
+          height = 229;
+          url = `${url}${encodeURIComponent(shareUrl)}&t=${encodeURIComponent(title)}`;
+          window.open(url, 'share', winOptions);
+          break;
+        case 'gplus':
+          height = 348;
+          width = 512;
+          url = `${url}${encodeURIComponent(shareUrl)}&hl=${encodeURIComponent(document.documentElement.lang)}`;
+          window.open(url, 'share', winOptions);
+          break;
+        case 'twitter':
+          height = 253;
+          let text = `Check out ${title} at #{$ hashtag $}: ${shareUrl}`;
+          url = `${url}${encodeURIComponent(text)}`;
+          window.open(url, 'share', winOptions);
+          break;
+        default:
+          return;
+      }
+    }
+  }
+</script>

@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../mixins/share-mixin.html">
 
 <dom-module id="footer-social">
   <template>
@@ -31,14 +32,24 @@
         display: inline-block;
       }
 
-      .share-gplus {
+      .share {
         height: 30px;
         padding: 8px;
         width: 23px;
+        display: inline-block;
+        margin: 0;
       }
 
-      .share-gplus paper-icon-button {
+      .share-gplus  {
         color: var(--gplus-color);
+      }
+
+      .share-twitter {
+        color: var(--twitter-color);
+      }
+
+      .share-facebook {
+        color: var(--facebook-color);
       }
 
       a {
@@ -120,9 +131,17 @@
     <div class="social-group google-plus">
       <div class="title">{$ share $}</div>
       <div class="nav-inline">
-          <a class="share-gplus" href="{$ gplusShareLink $}"  target="_blank" rel="noopener noreferrer">
-            <paper-icon-button icon="hoverboard:gplus"></paper-icon-button>
-          </a>
+        {% for socShare in socialNetwork.share %}
+          <div class="share">
+            <paper-icon-button
+              class="share-{$ socShare.name $}"
+              icon="hoverboard:{$ socShare.name $}-share"
+              share="{$ socShare.name $}"
+              url="{$ socShare.url $}"
+              on-tap="share">
+            </paper-icon-button>
+          </div>
+        {% endfor %}
       </div>
     </div>
 
@@ -136,10 +155,10 @@
     <div class="social-group social-networks">
       <div class="title">{$ followUs $} </div>
       <ul class="nav-inline">
-        {% for soc in socialNetwork %}
+        {% for socFollow in socialNetwork.follow %}
           <li>
-            <a href="{$ soc.url $}" target="_blank" rel="noopener noreferrer">
-              <paper-icon-button icon="hoverboard:{$ soc.name $}"></paper-icon-button>
+            <a href="{$ socFollow.url $}" target="_blank" rel="noopener noreferrer">
+              <paper-icon-button icon="hoverboard:{$ socFollow.name $}"></paper-icon-button>
             </a>
           </li>
         {% endfor %}
@@ -156,7 +175,7 @@
 
   <script>
 
-    class FooterSocial extends Polymer.Element {
+    class FooterSocial extends ShareMixin(Polymer.Element) {
       static get is() { return 'footer-social' }
     }
 
