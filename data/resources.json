@@ -13,7 +13,7 @@
   "eventResources": "Event Resources",
   "footerRelBlock": [
     {
-      "headTitle": "About",
+      "title": "About",
       "links": [
           {
             "name": "GDG Lviv",
@@ -30,7 +30,7 @@
       ]
     },
     {
-      "headTitle": "Explore Past DevFests",
+      "title": "Explore Past DevFests",
       "links": [
           {
             "name": "DFUA 2013",
@@ -51,7 +51,7 @@
         ]
     },
     {
-      "headTitle": "Event Resources",
+      "title": "Event Resources",
       "links": [
         {
           "name": "Partnership Proposition",

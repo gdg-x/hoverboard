@@ -17,7 +17,7 @@
         --divider-color: #EDEDED;
         --footer-background-color: #F5F5F5;
         --footer-text-color: #616161;
-        --red-gplus-color: #DF312D;
+        --gplus-color: #DF312D;
         --border-light-color: #E2E2E2;
 
         /* Custom */
@@ -46,10 +46,10 @@
       a {
         color: var(--default-primary-color);
         text-decoration: none;
-      }
-
-      .roboto-font {
-        font-family: 'Roboto', 'Noto', sans-serif;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        border-bottom: 1px solid transparent;
+        transition: border-color .3s ease-out;
       }
 
     </style>

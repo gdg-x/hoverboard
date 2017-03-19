@@ -31,16 +31,16 @@
       }
 
       a {
-        border-bottom: 1px solid transparent;
         color: var(--footer-text-color);
         padding-bottom: 2px;
         text-decoration: none;
-        transition: border-color .3s ease-out;
+        pointer-events: all;
       }
 
       li {
         display: list-item;
         line-height: 25px;
+        pointer-events: none;
       }
 
       li:hover {
@@ -62,8 +62,8 @@
 
     </style>
     {% for footerRel in footerRelBlock %}
-      <div class="col" layout vertical flex wrap flex-auto>
-        <div class="col-heading">{$ footerRel.headTitle $}</div>
+      <div class="col" layout vertical wrap flex-auto>
+        <div class="col-heading">{$ footerRel.title $}</div>
         <ul class="nav">
           {% for link in footerRel.links %}
           <li><a href="{$ link.url $}" target="_blank" rel="noopener noreferrer">{$ link.name $}</a></li>
@@ -87,12 +87,7 @@
   <script>
 
     class FooterRel extends Polymer.Element {
-
       static get is() { return 'footer-rel' }
-
-      constructor() {
-        super();
-      }
     }
 
     customElements.define(FooterRel.is, FooterRel);

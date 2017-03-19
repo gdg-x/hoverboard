@@ -5,7 +5,9 @@
   "analytics": "UA-43643469-8",
   "organizer": {
     "name": "GDG Lviv",
-    "twitter": "gdglviv"
+    "twitter": "gdglviv",
+    "blog": "https://medium.com/gdg-lviv",
+    "url": "http://lviv.gdg.org.ua/"
   },
   "webapp": {
     "shortName": "DevFest",
@@ -75,13 +77,11 @@
     }
   ],
   "gplusShareLink": "https://plus.google.com/share?url=https://devfest.gdg.org.ua/",
-  "blogLink": "https://medium.com/gdg-lviv",
   "mailto": "devfest@gdg.org.ua",
   "mailchimp": {
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
   },
-  "gdgLvivUrl": "http://lviv.gdg.org.ua/",
   "codUrl": "https://devfest.gdg.org.ua/cod/",
-  "gdgName": "GDG Lviv"
+  "chapterName": "GDG Lviv"
 }

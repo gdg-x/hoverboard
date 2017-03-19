@@ -1,7 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
-
 
 <dom-module id="footer-social">
   <template>
@@ -9,8 +7,6 @@
     <style>
       :host {
         padding-left: 4px;
-        position: relative;
-        color: var(--footer-text-color);;
       }
 
       .title {
@@ -19,6 +15,7 @@
         font-weight: 500;
         font-size: 14px;
         margin: 0;
+        color: var(--footer-text-color);
       }
 
       .nav-inline {
@@ -41,7 +38,7 @@
       }
 
       .share-gplus paper-icon-button {
-        color: var(--red-gplus-color);
+        color: var(--gplus-color);
       }
 
       a {
@@ -56,54 +53,35 @@
         box-sizing: border-box;
       }
 
-      .social-group.email h4 {
+      .email .title {
         padding-right: 0;
         padding-top: 17px;
       }
 
-      .social-group.email a {
+      .email a {
         border-bottom: 1px solid var(--footer-text-color);
         padding-bottom: 1px;
       }
 
-      .social-group.social-networks {
-        padding-top: 5px;
+      .social-networks {
+        padding-top: 8px;
       }
 
-      .social-group.social-networks ul {
+      .social-networks ul {
         list-style-type: disc;
       }
 
-      .social-group.blog {
+      .blog {
         padding-top: 17px;
       }
 
-      .blog h4 {
+      .blog .title {
         padding-right: 55px;
       }
 
       .blog a {
         border-bottom: 1px solid var(--footer-text-color);
         padding-bottom: 1px;
-      }
-
-      .fab paper-fab {
-        transform: scale(1);
-        background: #fff;
-        color: inherit;
-        transition: transform 200ms cubic-bezier(0, 0, 0.2, 1), -webkit-transform 200ms cubic-bezier(0, 0, 0.2, 1);
-        will-change: transform;
-        pointer-events: all;
-        box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.12), 0px 8px 8px 0px rgba(0,0,0,0.24);
-      }
-
-      .fab {
-        transform: translateY(2px);
-        position: absolute;
-        right: 0;
-        bottom: 40px;
-        pointer-events: none;
-        z-index: 1;
       }
 
       @media (max-width: 811px) {
@@ -119,12 +97,12 @@
           padding-top: 0;
         }
 
-        .social-group.blog,
-        .social-group.social-networks {
+        .blog,
+        .social-networks {
           padding-top: 0;
         }
 
-        .social-group.social-networks {
+        .social-networks {
           margin-bottom: -10px;
         }
 
@@ -135,19 +113,12 @@
         .nav-inline li a {
           padding: 0;
         }
-
-        .fab {
-          transform: translateY(-130px);
-        }
       }
 
     </style>
 
-    <div class="fab">
-      <paper-fab class="back-to-top" icon="hoverboard:up" on-click="backToTop"></paper-fab>
-    </div>
     <div class="social-group google-plus">
-      <h4 class="title roboto-font">{$ share $}</h4>
+      <div class="title">{$ share $}</div>
       <div class="nav-inline">
           <a class="share-gplus" href="{$ gplusShareLink $}"  target="_blank" rel="noopener noreferrer">
             <paper-icon-button icon="hoverboard:gplus"></paper-icon-button>
@@ -156,14 +127,14 @@
     </div>
 
     <div class="social-group blog">
-      <h4 class="title roboto-font">
+      <div class="title">
         {$ followOur $}
-        <a href="{$ blogLink $}" target="_blank" rel="noopener noreferrer">{$ blog $}</a>
-      </h4>
+        <a href="{$ organizer.blog $}" target="_blank" rel="noopener noreferrer">{$ blog $}</a>
+      </div>
     </div>
 
     <div class="social-group social-networks">
-      <h4 class="title roboto-font">{$ followUs $} </h4>
+      <div class="title">{$ followUs $} </div>
       <ul class="nav-inline">
         {% for soc in socialNetwork %}
           <li>
@@ -176,9 +147,9 @@
     </div>
 
     <div class="social-group email">
-      <h4 class="title roboto-font">
-        <a aria-label="Email us" href="mailto:{$ mailto $}">{$ emailUs $}</a>
-      </h4>
+      <div class="title">
+        <a aria-label="{$ emailUs $}" href="mailto:{$ mailto $}">{$ emailUs $}</a>
+      </div>
     </div>
 
   </template>
@@ -186,23 +157,7 @@
   <script>
 
     class FooterSocial extends Polymer.Element {
-
       static get is() { return 'footer-social' }
-
-      constructor() {
-        super();
-      }
-
-      backToTop(e) {
-        var scrollDuration = 500;
-        var scrollStep = -window.scrollY / (scrollDuration / 15),
-          scrollInterval = setInterval(function(){
-            if ( window.scrollY != 0 ) {
-              window.scrollBy( 0, scrollStep );
-            }
-            else clearInterval(scrollInterval);
-          },15);
-      }
     }
 
     customElements.define(FooterSocial.is, FooterSocial);

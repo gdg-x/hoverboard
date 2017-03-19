@@ -14,7 +14,7 @@
         padding: 0;
       }
 
-      .gdg-logo {
+      .footer-logo {
         margin: 10px 30px 0 0;
         height: 24px;
         width: 120px;
@@ -35,13 +35,9 @@
       }
 
       a {
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-font-smoothing: antialiased;
-        border-bottom: 1px solid transparent;
-        color: #616161;
+        color: var(--footer-text-color);
         padding-bottom: 2px;
         text-decoration: none;
-        transition: border-color .3s ease-out;
       }
 
       a:hover {
@@ -66,12 +62,12 @@
 
     <div class="nav-inline" layout flex>
 
-      <a href="{$ gdgLvivUrl $}" target="_blank" rel="noopener noreferrer">
+      <a href="{$ organizer.url $}" target="_blank" rel="noopener noreferrer">
         <iron-image
-          class="gdg-logo"
+          class="footer-logo"
           src="../../images/gdg-logo.svg"
           sizing="contain"
-          alt="{$ gdgName $}">
+          alt="{$ chapterName $}">
         </iron-image>
       </a>
       <a class="cod" href="{$ codUrl $}" target="_blank" rel="noopener noreferrer">{$ codeOfConduct $}</a>
@@ -88,12 +84,7 @@
   <script>
 
     class FooterNav extends Polymer.Element {
-
       static get is() { return 'footer-nav' }
-
-      constructor() {
-        super();
-      }
     }
 
     customElements.define(FooterNav.is, FooterNav);
