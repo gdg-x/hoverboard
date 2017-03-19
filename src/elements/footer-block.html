@@ -4,7 +4,7 @@
 <link rel="import" href="footer-rel.html">
 <link rel="import" href="footer-nav.html">
 <link rel="import" href="hoverboard-icons.html">
-
+<link rel="import" href="../mixins/animation-frame.html">
 
 
 <dom-module id="footer-block">
@@ -70,18 +70,11 @@
 
   <script>
 
-    class FooterBlock extends Polymer.Element {
+    class FooterBlock extends AnimationFrame(Polymer.Element) {
       static get is() { return 'footer-block' }
 
       backToTop(e) {
-        let scrollDuration = 500;
-        let scrollStep = -window.scrollY / (scrollDuration / 15),
-          scrollInterval = setInterval(function(){
-            if ( window.scrollY != 0 ) {
-              window.scrollBy( 0, scrollStep );
-            }
-            else clearInterval(scrollInterval);
-          },15);
+        super.scrollToY(0, 1500, 'easeInOutSine');
       }
     }
 
