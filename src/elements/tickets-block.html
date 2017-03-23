@@ -77,16 +77,18 @@
       </div>
       <div class="tickets-wrapper">
         <template is="dom-repeat" items="[[app.tickets.elements]]" as="ticket">
-          <ticket-element
-            type="[[ticket.name]]"
-            price="[[ticket.price]]"
-            currency="[[ticket.currency]]"
-            starts="[[ticket.starts]]"
-            ends="[[ticket.ends]]"
-            info="[[ticket.info]]"
-            sold-out="[[ticket.soldOut]]",
-            sold-out-text="{$ soldOutTickets $}">
-          </ticket-element>
+          <a href="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
+            <ticket-element
+              type="[[ticket.name]]"
+              price="[[ticket.price]]"
+              currency="[[ticket.currency]]"
+              starts="[[ticket.starts]]"
+              ends="[[ticket.ends]]"
+              info="[[ticket.info]]"
+              sold-out="[[ticket.soldOut]]",
+              sold-out-text="{$ soldOutTickets $}">
+            </ticket-element>
+          </a>
         </template>
       </div>
       <div class="details">{$ ticketsDetails $}</div>

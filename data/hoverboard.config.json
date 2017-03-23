@@ -33,7 +33,7 @@
   "disqusShortName": "dfua",
   "email": "devfest@gdg.org.ua",
   "tweetsSource": "https://dfua-tweets.herokuapp.com/favoritesjson.php?c=10&cache_interval=8000",
-  "partnershipProposition": "http://bit.ly/df16-sponsor",
+  "partnershipProposition": "https://bit.ly/dfua17-partners",
   "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en",
   "enableSessionsRating": false,
   "navigation": [
