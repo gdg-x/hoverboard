@@ -20,21 +20,6 @@ Or you may use [Docker container for development](docker.md)
         npm -v
         2.15.8
 
-1. Install [gulp 4](https://github.com/gulpjs/gulp/tree/4.0):
-      
-        npm i -g gulpjs/gulp#4.0 
-
-and Install [Bower](https://bower.io/):
-
-        npm install -g bower
-
-Note: the `-g` flag installs Gulp and Bower globally, so you may need to
-execute the script with `sudo` privileges. The reason they are installed
-globally is because some scripts in the Hoverboard expect `bower` to be 
-available from the command line.
-    
-
-
 1.  [Fork](https://github.com/gdg-x/hoverboard/fork) this repository
 
 1.  Clone it locally.
@@ -43,7 +28,7 @@ available from the command line.
 
 1.  Install the application dependencies.
 
-        bower install && npm install
+        npm install
 
 ## Directory structure
 
@@ -91,11 +76,11 @@ The Hoverboard is ready to be built and ran locally.
 
 1.  Serve the app locally.
 
-        gulp serve
+        npm run serve
 
 1.  Build the app.
 
-        gulp
+        npm run build
 
 
 ## Next steps

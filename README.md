@@ -33,42 +33,38 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 ### Setup
 :book: [Full documentation](/docs/).
 
-##### Docker based development env
+##### Docker-based development environment
 
-If you don't want to bother with the dependencies, you can develop in the docker container.
+If you don't want to bother with the dependencies, you can use the docker container for development.
 
-Build:
+Build the docker image:
 
     docker build -t hoverboard .
 
-and run:
-
-    docker run -it -v "$PWD":/app -p 3000:3000 hoverboard
+and execute the commands associated to the docker env in the following documentation:
 
 :book: Read more in [docker docs](/docs/tutorials/docker.md).
-
-###### Prerequisites
-
-Install [gulp 4](https://github.com/gulpjs/gulp/tree/4.0):
-
-    npm i -g gulpjs/gulp#4.0
-
-and [Bower](https://bower.io/):
-
-    npm i -g bower
 
 :point_right: **[Fork](https://github.com/gdg-x/hoverboard/fork) this repository** and clone it locally.
 
 ##### Install dependencies
 
-    bower install && npm install
+    npm install
+    
+Or you can install with Docker container: 
+     
+    docker run -v "$PWD":/app hoverboard npm install 
 
 ##### Start the development server
 
 This command serves the app at `http://localhost:3000` and provides basic URL
 routing for the app:
 
-    gulp serve
+    npm run serve
+    
+Or you can serve Docker container:
+
+    docker run -v "$PWD":/app hoverboard
 
 :book: Read more in [setup docs](/docs/tutorials/set-up.md).
 
@@ -80,11 +76,11 @@ dependencies, and generates a service-worker.js file with code to pre-cache the
 dependencies based on the entrypoint and fragments specified in `polymer.json`.
 The minified files are output to the `build`.
 
-    gulp
+    npm run build
 
 Or you can build in Docker container:
 
-    docker run -v "$PWD":/app hoverboard gulp
+    docker run -v "$PWD":/app hoverboard npm run build
 
 :book: Read more in [deploy docs](/docs/tutorials/deploy.md).   
 
@@ -119,7 +115,8 @@ pull request, so we can include you in this list.
 | [GDG DevFest NYC 2016](https://devfestnyc.com/)                 | [GDG DevFest Los Angeles 2016](https://devfest.gdgla.org/)                  | [GDG DevFest West](https://devfest2016.gdgsv.com)           |
 | [GDG DevFest Florida 2016](https://devfestflorida.org)          | [GDG DevFest Madrid 2016](https://gdgmadrid.com)                            | [GDG DevFest SBA 2016](https://devfest.gdgsba.org/)         |
 | [GDG Foumban Website](https://gdgfoumban.org)                   | [GDG DevFest Granada 2016](http://devfest.gdggranada.com/)                  | [GDG DevFest Taipei 2016](http://devfest.gdg-taipei.org/)    |
-| [2016 Valley DevFest](https://valleydevfest.com)                |
+| [2016 Valley DevFest](https://valleydevfest.com)                | [IWDC 2017 Fresno (WTM)](https://iwdc.wtmfresno.com/)                       | [ngVikings 2017](https://ngvikings.org)
+| [Mobile Era 2017](https://mobileera.rocks)                      |                                                                             |                
 
 
 ### Roadmap :rocket:
