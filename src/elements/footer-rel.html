@@ -9,19 +9,19 @@
       :host {
         border-top: 1px solid var(--border-light-color);
         border-bottom: 1px solid var(--border-light-color);
-        margin: 15px 0px;
+        margin: 0 20px 0 20px;
         overflow: auto;
         overflow-y: hidden;
-        padding: 30px 0;
+        padding: 10px 0;
         color: var(--footer-text-color);
-        box-sizing: border-box;
       }
 
       .col-heading {
-        font-size: 18px;
+        font-size: 14px;
         font-weight: 500;
         line-height: 21px;
-        margin-bottom: 25px;
+        margin-top: 25px;
+        margin-bottom: 10px;
       }
 
       .nav {
@@ -47,16 +47,15 @@
         text-decoration: underline;
       }
 
-      @media (max-width: 767px) {
+      @media (min-width: 768px) {
         :host {
-          margin: 0 20px 0 20px;
-          padding: 10px 0;
+          margin: 15px 0;
+          padding: 30px 0;
         }
 
         .col-heading {
-          font-size: 14px;
-          margin-top: 25px;
-          margin-bottom: 10px;
+          font-size: 18px;
+          margin-top: 0;
         }
       }
 

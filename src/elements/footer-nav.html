@@ -8,6 +8,23 @@
 
     <style>
 
+      :host  {
+        margin: 0 10px 0 20px;
+      }
+
+      .copyright {
+        text-align: center;
+        margin-right: -15px;
+        padding: 15px 0 0 0;
+        float: right;
+      }
+
+      .cod {
+        float: right;
+        margin-right: 0;
+        padding: 15px 0 0 0;
+      }
+
       .nav-inline {
         list-style: none;
         margin: 0;
@@ -21,19 +38,6 @@
         float: left;
       }
 
-      .copyright {
-        margin-right: 0;
-        padding: 15px 0 0 0;
-        box-sizing: border-box;
-        float: right;
-      }
-
-      .cod {
-        margin-right: 0;
-        padding: 15px 0 0 0;
-        float: left;
-      }
-
       a {
         color: var(--footer-text-color);
         padding-bottom: 2px;
@@ -44,18 +48,22 @@
         text-decoration: underline;
       }
 
-      @media (max-width: 811px) {
+      @media (min-width: 812px) {
         :host  {
-          margin: 0 10px 0 20px;
+          margin: 0;
         }
 
         .copyright {
-          text-align: center;
-          width: 100%;
+          margin: 0;
+          padding: 15px 0 0 0;
+          float: right;
+          text-align: right;
         }
 
         .cod {
-          float: right;
+          margin-right: 0;
+          padding: 15px 0 0 0;
+          float: left;
         }
       }
     </style>
@@ -65,14 +73,14 @@
       <a href="{$ organizer.url $}" target="_blank" rel="noopener noreferrer">
         <iron-image
           class="footer-logo"
-          src="../../images/gdg-logo.svg"
+          src="../../images/organizer-logo.svg"
           sizing="contain"
-          alt="{$ chapterName $}">
+          alt="{$ organizerName $}">
         </iron-image>
       </a>
       <a class="cod" href="{$ codUrl $}" target="_blank" rel="noopener noreferrer">{$ codeOfConduct $}</a>
 
-      <div class="copyright" layout flex self-end>
+      <div class="copyright">
         &copy; 2017 Based on <a href="https://github.com/gdg-x/hoverboard" target="_blank" rel="noopener noreferrer">Project
         Hoverboard</a>
       </div>

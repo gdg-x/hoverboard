@@ -1,14 +1,6 @@
 <script>
-  window.requestAnimFrame = (function(){
-    return  window.requestAnimationFrame ||
-      window.webkitRequestAnimationFrame ||
-      window.mozRequestAnimationFrame    ||
-      function( callback ){
-        window.setTimeout(callback, 1000 / 60);
-      };
-  })();
 
-  const AnimationFrame = subclass => class extends subclass {
+  const ScrollFunctions = subclass => class extends subclass {
     /**
      * Scroll function
      * @param {Number} scrollTargetY - the target scrollY property of the window
@@ -26,8 +18,7 @@
       let time = Math.max(.1, Math.min(Math.abs(scrollY - scrollTargetY) / speed, .8));
 
       // easing equations from https://github.com/danro/easing-js/blob/master/easing.js
-      let PI_D2 = Math.PI / 2,
-        easingEquations = {
+      let easingEquations = {
           easeOutSine: function (pos) {
             return Math.sin(pos * (Math.PI / 2));
           },
@@ -50,7 +41,7 @@
         var t = easingEquations[easing](p);
 
         if (p < 1) {
-          requestAnimFrame(tick);
+          window.requestAnimationFrame(tick);
 
           window.scrollTo(0, scrollY + ((scrollTargetY - scrollY) * t));
         } else {

@@ -8,6 +8,8 @@
     <style>
       :host {
         padding-left: 4px;
+        margin: 0 10px 0 10px;
+        display: block;
       }
 
       .title {
@@ -17,6 +19,10 @@
         font-size: 14px;
         margin: 0;
         color: var(--footer-text-color);
+      }
+
+      .nav-inline li a {
+        padding: 0;
       }
 
       .nav-inline {
@@ -32,10 +38,14 @@
         display: inline-block;
       }
 
+     .social-group.share-block {
+        margin-bottom: 17px;
+      }
+
       .share {
         height: 30px;
         padding: 8px;
-        width: 23px;
+        width: 35px;
         display: inline-block;
         margin: 0;
       }
@@ -60,8 +70,14 @@
       }
 
       .social-group {
-        margin-right: 30px;
-        box-sizing: border-box;
+        margin-right: 0;
+        margin-bottom: 10px;
+        padding-top: 0;
+      }
+
+      .email {
+        margin-bottom: 20px;
+        width: 85px;
       }
 
       .email .title {
@@ -75,15 +91,16 @@
       }
 
       .social-networks {
-        padding-top: 8px;
+        margin-bottom: -10px;
+      }
+
+      .social-networks,
+      .blog {
+        padding-top: 0;
       }
 
       .social-networks ul {
         list-style-type: disc;
-      }
-
-      .blog {
-        padding-top: 17px;
       }
 
       .blog .title {
@@ -95,40 +112,34 @@
         padding-bottom: 1px;
       }
 
-      @media (max-width: 811px) {
+      @media (min-width: 812px) {
         :host  {
-          margin: 0 10px 0 10px;
-          display: block;
+          margin: 0;
+          display: inline-flex;
+        }
+
+        .social-group,
+        .social-networks,
+        .email {
+          margin-bottom: 0;
         }
 
         .social-group {
           margin-right: 0;
-          margin-bottom: 10px;
-          width: 100%;
-          padding-top: 0;
-        }
-
-        .blog,
-        .social-networks {
-          padding-top: 0;
         }
 
         .social-networks {
-          margin-bottom: -10px;
+          padding-top: 8px;
         }
 
-        .email {
-          margin-bottom: 20px;
-        }
-
-        .nav-inline li a {
-          padding: 0;
+        .blog {
+          padding-top: 17px;
         }
       }
 
     </style>
 
-    <div class="social-group google-plus">
+    <div class="social-group share-block">
       <div class="title">{$ share $}</div>
       <div class="nav-inline">
         {% for socShare in socialNetwork.share %}

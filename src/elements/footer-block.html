@@ -4,7 +4,7 @@
 <link rel="import" href="footer-rel.html">
 <link rel="import" href="footer-nav.html">
 <link rel="import" href="hoverboard-icons.html">
-<link rel="import" href="../mixins/animation-frame.html">
+<link rel="import" href="../mixins/scroll-functions.html">
 
 
 <dom-module id="footer-block">
@@ -19,7 +19,6 @@
         left: 0;
         right: 0;
         margin: 20px 0 0 0;
-        box-sizing: border-box;
         color: var(--footer-text-color);
         background: var(--footer-background-color);
         font-size: 14px;
@@ -30,7 +29,6 @@
       .container {
         margin: 0 auto;
         padding: 20px 0;
-        box-sizing: border-box;
         position: relative;
       }
 
@@ -52,7 +50,6 @@
       @media (min-width: 640px) {
         .container {
           padding: 15px 60px;
-          box-sizing: border-box;
         }
       }
 
@@ -70,7 +67,7 @@
 
   <script>
 
-    class FooterBlock extends AnimationFrame(Polymer.Element) {
+    class FooterBlock extends ScrollFunctions(Polymer.Element) {
       static get is() { return 'footer-block' }
 
       backToTop(e) {
