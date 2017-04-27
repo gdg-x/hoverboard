@@ -9,6 +9,9 @@
     "blog": "https://medium.com/gdg-lviv",
     "url": "http://lviv.gdg.org.ua/"
   },
+  "location": {
+    "short": "Lviv, Ukraine"
+  },
   "webapp": {
     "shortName": "DevFest",
     "themeColor": "#673AB7",
@@ -95,7 +98,5 @@
   "mailchimp": {
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
-  },
-  "codUrl": "https://devfest.gdg.org.ua/cod/",
-  "organizerName": "GDG Lviv"
+  }
 }

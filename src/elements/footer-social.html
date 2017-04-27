@@ -8,7 +8,7 @@
     <style>
       :host {
         padding-left: 4px;
-        margin: 0 10px 0 10px;
+        margin: 0 20px 0 20px;
         display: block;
       }
 
@@ -16,7 +16,6 @@
         display: inline-block;
         text-transform: uppercase;
         font-weight: 500;
-        font-size: 14px;
         margin: 0;
         color: var(--footer-text-color);
       }
@@ -112,9 +111,14 @@
         padding-bottom: 1px;
       }
 
-      @media (min-width: 812px) {
+      @media (min-width: 768px) {
+        :host {
+          margin: 15px 0;
+        }
+      }
+
+      @media (min-width: 439px) {
         :host  {
-          margin: 0;
           display: inline-flex;
         }
 
@@ -142,17 +146,30 @@
     <div class="social-group share-block">
       <div class="title">{$ share $}</div>
       <div class="nav-inline">
-        {% for socShare in socialNetwork.share %}
-          <div class="share">
-            <paper-icon-button
-              class="share-{$ socShare.name $}"
-              icon="hoverboard:{$ socShare.name $}-share"
-              share="{$ socShare.name $}"
-              url="{$ socShare.url $}"
-              on-tap="share">
-            </paper-icon-button>
-          </div>
-        {% endfor %}
+        <div class="share">
+          <paper-icon-button
+            class="share-gplus"
+            icon="hoverboard:gplus-alt"
+            share="gplus"
+            on-tap="share">
+          </paper-icon-button>
+        </div>
+        <div class="share">
+          <paper-icon-button
+            class="share-facebook"
+            icon="hoverboard:facebook-alt"
+            share="facebook"
+            on-tap="share">
+          </paper-icon-button>
+        </div>
+        <div class="share">
+          <paper-icon-button
+            class="share-twitter"
+            icon="hoverboard:twitter-alt"
+            share="twitter"
+            on-tap="share">
+          </paper-icon-button>
+        </div>
       </div>
     </div>
 

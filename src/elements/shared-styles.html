@@ -26,6 +26,12 @@
         --default-background-color: #FAFAFA;
       }
 
+      * {
+        box-sizing: border-box;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+      }
+
       h1,
       h2,
       h3,
@@ -48,14 +54,12 @@
       a {
         color: var(--default-primary-color);
         text-decoration: none;
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-font-smoothing: antialiased;
         border-bottom: 1px solid transparent;
         transition: border-color .3s ease-out;
       }
 
-      * {
-        box-sizing: border-box;
+      body {
+        text-rendering: optimizeLegibility;
       }
 
     </style>

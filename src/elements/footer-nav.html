@@ -9,20 +9,16 @@
     <style>
 
       :host  {
-        margin: 0 10px 0 20px;
+        margin: 0 20px;
       }
 
       .copyright {
-        text-align: center;
-        margin-right: -15px;
-        padding: 15px 0 0 0;
-        float: right;
+        padding: 15px 0 0;
+        float: left;
       }
 
       .cod {
-        float: right;
-        margin-right: 0;
-        padding: 15px 0 0 0;
+        display: block;
       }
 
       .nav-inline {
@@ -48,10 +44,13 @@
         text-decoration: underline;
       }
 
-      @media (min-width: 812px) {
-        :host  {
-          margin: 0;
+      @media (min-width: 768px) {
+        :host {
+          margin: 15px 0;
         }
+      }
+
+      @media (min-width: 505px) {
 
         .copyright {
           margin: 0;
@@ -61,9 +60,7 @@
         }
 
         .cod {
-          margin-right: 0;
-          padding: 15px 0 0 0;
-          float: left;
+          display: inline-flex;
         }
       }
     </style>
@@ -75,14 +72,14 @@
           class="footer-logo"
           src="../../images/organizer-logo.svg"
           sizing="contain"
-          alt="{$ organizerName $}">
+          alt="{$ organizer.name $}">
         </iron-image>
       </a>
-      <a class="cod" href="{$ codUrl $}" target="_blank" rel="noopener noreferrer">{$ codeOfConduct $}</a>
 
       <div class="copyright">
         &copy; 2017 Based on <a href="https://github.com/gdg-x/hoverboard" target="_blank" rel="noopener noreferrer">Project
-        Hoverboard</a>
+        Hoverboard</a> &middot; <a class="cod" href="/cod" target="_blank" rel="noopener noreferrer">{$ codeOfConduct $}</a>
+
       </div>
     </div>
 

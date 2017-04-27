@@ -132,7 +132,7 @@
         <app-toolbar layout vertical start>
           <iron-image class="toolbar-logo" src="/images/logo.svg" alt="{$ title $}"></iron-image>
           <h2 class="dates">{$ dates $}</h2>
-          <h3 class="location">{$ locationAddressShort $}</h3>
+          <h3 class="location">{$ location.short $}</h3>
         </app-toolbar>
 
         <iron-selector
@@ -179,8 +179,9 @@
         </app-header>
 
         <h1>{{routeData.page}}</h1>
+
+        <footer-block></footer-block>
       </app-header-layout>
-      <footer-block></footer-block>
     </app-drawer-layout>
   </template>
 
