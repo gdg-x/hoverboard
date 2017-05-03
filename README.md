@@ -151,7 +151,7 @@ See [list of contributors](https://github.com/gdg-x/hoverboard/graphs/contributo
 __Maintainer:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
 
 
-######The GDG App, GDG[x] are not endorsed and/or supported by Google, the corporation.
+###### The GDG App, GDG[x] are not endorsed and/or supported by Google, the corporation.
 
 
 ### License
