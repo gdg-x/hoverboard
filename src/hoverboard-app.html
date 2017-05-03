@@ -22,6 +22,7 @@
 <link rel="import" href="elements/shared-styles.html">
 <link rel="import" href="elements/flex-layout-attr.html">
 <link rel="import" href="elements/hoverboard-icons.html">
+<link rel="import" href="elements/footer-block.html">
 
 
 <dom-module id="hoverboard-app">
@@ -131,7 +132,7 @@
         <app-toolbar layout vertical start>
           <iron-image class="toolbar-logo" src="/images/logo.svg" alt="{$ title $}"></iron-image>
           <h2 class="dates">{$ dates $}</h2>
-          <h3 class="location">{$ locationAddressShort $}</h3>
+          <h3 class="location">{$ location.short $}</h3>
         </app-toolbar>
 
         <iron-selector
@@ -150,7 +151,7 @@
         <app-header id="header" slot="header" effects="waterfall" condenses reveals>
           <app-toolbar>
             <paper-icon-button
-              icon="h-icons:menu"
+              icon="hoverboard:menu"
               aria-label="Menu"
               hidden$="[[!isPhoneSize]]"
               on-tap="openDrawer">
@@ -179,9 +180,9 @@
 
         <h1>{{routeData.page}}</h1>
 
+        <footer-block></footer-block>
       </app-header-layout>
     </app-drawer-layout>
-
   </template>
 
   <script>

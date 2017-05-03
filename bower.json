@@ -14,7 +14,9 @@
     "paper-icon-button": "PolymerElements/paper-icon-button#2.0-preview",
     "iron-image": "PolymerElements/iron-image#2.0-preview",
     "paper-tabs": "PolymerElements/paper-tabs#2.0-preview",
-    "polymer-redux": "tur-nr/polymer-redux#polymer-2"
+    "polymer-redux": "tur-nr/polymer-redux#polymer-2",
+    "paper-input": "PolymerElements/paper-input#2.0-preview",
+    "paper-fab": "PolymerElements/paper-fab#2.0-preview"
   },
   "devDependencies": {
     "web-component-tester": "^6.0.0-prerelease.6"

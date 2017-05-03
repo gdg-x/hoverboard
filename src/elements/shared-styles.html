@@ -15,9 +15,21 @@
         --secondary-text-color: #757575;
         --disabled-text-color: #BDBDBD;
         --divider-color: #EDEDED;
+        --footer-background-color: #F5F5F5;
+        --footer-text-color: #616161;
+        --gplus-color: #DF312D;
+        --twitter-color: #4099FF;
+        --facebook-color: #3B5998;
+        --border-light-color: #E2E2E2;
 
         /* Custom */
         --default-background-color: #FAFAFA;
+      }
+
+      * {
+        box-sizing: border-box;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
       }
 
       h1,
@@ -42,6 +54,12 @@
       a {
         color: var(--default-primary-color);
         text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: border-color .3s ease-out;
+      }
+
+      body {
+        text-rendering: optimizeLegibility;
       }
 
     </style>
