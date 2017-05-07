@@ -40,6 +40,35 @@
       "title": "Team"
     }
   ],
+  "heroSettings": {
+    "home": {
+      "background": {
+        "color": "#FF9800",
+        "image": "/images/backgrounds/home.png"
+      }
+    },
+    "blog": {
+      "background": {
+        "color": "#03a9f4"
+      }
+    },
+    "speakers": {
+      "background": {
+        "color": "#3f51b5",
+        "image": "/images/backgrounds/speakers.png"
+      }
+    },
+    "schedule": {
+      "background": {
+        "color": "#673ab7"
+      }
+    },
+    "team": {
+      "background": {
+        "color": "#009688"
+      }
+    }
+  },
   "mediaQueries": {
     "xs": {
       "max": "639px"

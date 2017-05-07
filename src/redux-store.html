@@ -5,7 +5,9 @@
   const initialState = {
     ui: {
       isDrawerOpened: false
-    }
+    },
+    route: 'home',
+    heroSettings: {$ heroSettings | dump | safe $}
   };
 
   const reducer = (state, action) => {
@@ -18,6 +20,9 @@
             isDrawerOpened: action.value !== null ? action.value : !state.ui.isDrawerOpened
           }
         });
+      case 'SET_ROUTE':
+        const { route } = action;
+        return Object.assign({}, state, { route });
     }
   };
 
@@ -32,6 +37,15 @@
       store.dispatch({
         type: 'TOGGLE_DRAWER',
         value
+      });
+    }
+  };
+
+  const routeActions = {
+    setRoute: route => {
+      store.dispatch({
+        type: 'SET_ROUTE',
+        route
       });
     }
   }

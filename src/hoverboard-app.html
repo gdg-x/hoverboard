@@ -14,6 +14,7 @@
 <link rel="import" href="../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
@@ -22,6 +23,7 @@
 <link rel="import" href="elements/shared-styles.html">
 <link rel="import" href="elements/flex-layout-attr.html">
 <link rel="import" href="elements/hoverboard-icons.html">
+<link rel="import" href="elements/hero-block/hero-block.html">
 
 
 <dom-module id="hoverboard-app">
@@ -77,6 +79,7 @@
       app-toolbar {
         padding: 0;
         height: auto;
+        max-width: 1800px;
       }
 
       .toolbar-logo {
@@ -136,7 +139,7 @@
 
         <iron-selector
           class="drawer-list"
-          selected="[[routeData.page]]"
+          selected="[[route]]"
           attr-for-selected="path"
           selected-class="selected"
           role="navigation">
@@ -163,7 +166,7 @@
 
             <paper-tabs
               class="nav-items"
-              selected="[[routeData.page]]"
+              selected="[[route]]"
               attr-for-selected="name"
               hidden$="[[isPhoneSize]]"
               role="navigation"
@@ -177,7 +180,15 @@
           </app-toolbar>
         </app-header>
 
-        <h1>{{routeData.page}}</h1>
+        <hero-block background="[[hero.background]]">
+          <iron-pages selected="[[route]]" attr-for-selected="route">
+            {% for nav in navigation %}
+            <div route="{$ nav.route $}">
+              <h1>{$ nav.title $}</h1>
+            </div>
+            {% endfor %}
+          </iron-pages>
+        </hero-block>
 
       </app-header-layout>
     </app-drawer-layout>
@@ -197,8 +208,24 @@
           ui: {
             type: Object,
             statePath: 'ui'
+          },
+          route: {
+            type: String,
+            statePath: 'route'
+          },
+          hero: {
+            type: Object,
+            statePath(state) {
+              return state.heroSettings[state.route]
+            }
           }
         };
+      }
+
+      static get observers() {
+        return [
+          '_routeChanged(routeData.page)'
+        ];
       }
 
       constructor() {
@@ -232,6 +259,14 @@
             });
           });
         }
+      }
+
+      _routeChanged(page) {
+        if (page === undefined) {
+          return;
+        }
+        console.log(page);
+//        routeActions.setRoute(page);
       }
     }
 

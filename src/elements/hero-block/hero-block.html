@@ -1,0 +1,63 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../redux-store.html">
+<link rel="import" href="../shared-styles.html">
+<link rel="import" href="../flex-layout-attr.html">
+
+
+<dom-module id="hero-block">
+
+  <template>
+
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+    <style>
+
+      :host {
+        display: block;
+        position: relative;
+        min-height: 360px;
+        background-color: dimgrey;
+      }
+
+      @media (min-width: 640px) {
+        :host {
+          min-height: 460px;
+        }
+      }
+
+    </style>
+
+    <div class="content" layout vertical end-justified fit style$="background-color: [[background.color]]">
+      <slot></slot>
+    </div>
+
+  </template>
+
+  <script>
+
+    class HeroBlock extends ReduxMixin(Polymer.Element) {
+
+      static get is() {
+        return 'hero-block';
+      }
+
+      static get properties() {
+        return {
+          background: {
+            type: Object
+          }
+        };
+      }
+
+      constructor() {
+        super();
+        window.performance && performance.mark && performance.mark('hero-block.created');
+      }
+
+    }
+
+    customElements.define(HeroBlock.is, HeroBlock);
+
+  </script>
+
+</dom-module>
