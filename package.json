@@ -25,7 +25,7 @@
     "gulp-uglify": "^2.1.2",
     "merge-stream": "^1.0.1",
     "plylog": "^0.5.0",
-    "polymer-build": "^1.2.1",
+    "polymer-build": "^1.2.4",
     "require-uncached": "^1.0.3",
     "sw-precache": "^5.1.1"
   },
