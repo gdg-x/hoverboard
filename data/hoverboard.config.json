@@ -155,6 +155,15 @@
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
+    },
+    "gdg-summit": {
+      "title": "Hey GDG Organizer, we are waiting for you at DevFest Ukraine",
+      "headerSettings": {
+        "backgroundColor": "#00838F",
+        "backgroundImage": "/images/backgrounds/gdg-summit.jpg",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
     }
   }
 }
