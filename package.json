@@ -22,7 +22,7 @@
     "gulp-imagemin": "^3.2.0",
     "gulp-nunjucks": "^3.0.0",
     "gulp-replace": "^0.5.4",
-    "gulp-uglify": "^2.1.2",
+    "gulp-uglify": "^3.0.0",
     "merge-stream": "^1.0.1",
     "plylog": "^0.5.0",
     "polymer-build": "^1.2.4",
