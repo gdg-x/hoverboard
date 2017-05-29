@@ -8,10 +8,22 @@
     "images/**/*",
     "scripts/**/*",
     "src/**/*",
-    "manifest.json"
+    "bower.json"
   ],
   "extraDependencies": [
+    "manifest.json",
     "bower_components/webcomponentsjs/webcomponents-*.js",
     "node_modules/redux/dist/redux.min.js"
-  ]
+  ],
+  "lint": {
+    "rules": ["polymer-2"]
+  },
+  "builds": [{
+    "bundle": true,
+    "insertPrefetchLinks": true,
+    "addServiceWorker": true,
+    "js": {"minify": true},
+    "css": {"minify": true},
+    "html": {"minify": true}
+  }]
 }

@@ -85,7 +85,7 @@ function build() {
             console.log('Analyzing and optimizing...');
           });
 
-        buildStream = buildStream.pipe(polymerProject.bundler);
+        buildStream = buildStream.pipe(polymerProject.bundler());
         buildStream = buildStream.pipe(gulp.dest(config.build.rootDirectory));
         return waitFor(buildStream);
       })
