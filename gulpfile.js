@@ -3,13 +3,17 @@
 const del = require('del');
 const gulp = require('gulp');
 const gulpif = require('gulp-if');
-const uglify = require('gulp-uglify');
+const uglifyes = require('uglify-es');
+const composer = require('gulp-uglify/composer');
 const cssSlam = require('css-slam').gulp;
 const mergeStream = require('merge-stream');
 const polymerBuild = require('polymer-build');
-const HtmlSplitter = require('polymer-build').HtmlSplitter;
 const browserSync = require('browser-sync').create();
 const history = require('connect-history-api-fallback');
+
+const HtmlSplitter = polymerBuild.HtmlSplitter;
+const PolymerProject = polymerBuild.PolymerProject;
+const uglify = composer(uglifyes, console);
 
 const logging = require('plylog');
 // logging.setVerbose();
@@ -17,8 +21,7 @@ const logging = require('plylog');
 const config = {
   polymerJsonPath: './polymer.json',
   build: {
-    rootDirectory: 'build',
-    bundled: true
+    rootDirectory: 'build'
   },
   swPrecacheConfigPath: './sw-precache-config.js',
   templateData: [
@@ -54,7 +57,7 @@ function build() {
 
         const compileStream = template.compile(config, polymerJson)
           .on('end', () => {
-            polymerProject = new polymerBuild.PolymerProject(buildPolymerJson);
+            polymerProject = new PolymerProject(buildPolymerJson);
           });
         return waitFor(compileStream);
       })
@@ -65,7 +68,7 @@ function build() {
         const sourcesStream = polymerProject.sources()
           .pipe(sourcesHtmlSplitter.split())
           // splitHtml doesn't split CSS https://github.com/Polymer/polymer-build/issues/32
-          // .pipe(gulpif(/\.js$/, uglify()))
+          .pipe(gulpif(/\.js$/, uglify()))
           .pipe(gulpif(/\.(html|css)$/, cssSlam()))
           .pipe(gulpif(/\.html$/, html.minify()))
           .pipe(gulpif(/\.(png|gif|jpg|svg)$/, images.minify()))
@@ -75,7 +78,7 @@ function build() {
         const dependenciesStream = polymerProject.dependencies()
           .pipe(dependenciesHtmlSplitter.split())
           // Doesn't work for now
-          // .pipe(gulpif(/\.js$/, uglify()))
+          .pipe(gulpif(/\.js$/, uglify()))
           .pipe(gulpif(/\.(html|css)$/, cssSlam()))
           .pipe(gulpif(/\.html$/, html.minify()))
           .pipe(dependenciesHtmlSplitter.rejoin());
@@ -85,7 +88,9 @@ function build() {
             console.log('Analyzing and optimizing...');
           });
 
-        buildStream = buildStream.pipe(polymerProject.bundler());
+        buildStream = buildStream.pipe(polymerProject.bundler({
+          stripComments: true
+        }));
         buildStream = buildStream.pipe(gulp.dest(config.build.rootDirectory));
         return waitFor(buildStream);
       })
@@ -108,6 +113,11 @@ function build() {
           });
 
         return waitFor(normalizeStream);
+      })
+      .then(() => {
+        return gulp.src(prependPath(config.build.rootDirectory, 'service-worker.js'))
+          .pipe(uglify())
+          .pipe(gulp.dest(config.build.rootDirectory));
       })
       .then(() => {
         console.log('Build complete!');
