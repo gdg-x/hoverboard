@@ -77,7 +77,7 @@
       </div>
       <div class="tickets-wrapper">
         <template is="dom-repeat" items="[[app.tickets.elements]]" as="ticket">
-          <a href="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
+          <a href="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick" ga-info$="[[ticket.price]]">
             <ticket-element
               type="[[ticket.name]]"
               price="[[ticket.price]]"
@@ -85,14 +85,14 @@
               starts="[[ticket.starts]]"
               ends="[[ticket.ends]]"
               info="[[ticket.info]]"
-              sold-out="[[ticket.soldOut]]",
+              sold-out="[[ticket.soldOut]]"
               sold-out-text="{$ soldOutTickets $}">
             </ticket-element>
           </a>
         </template>
       </div>
       <div class="details">{$ ticketsDetails $}</div>
-      <a href="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
+      <a href="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick" ga-info="button">
         <paper-button class="buy-button" raised>
           <iron-icon icon="ticket"></iron-icon>
           {$ buyTicket $}
@@ -110,11 +110,12 @@
         is: 'tickets-block',
 
         ready: function () {
-          HOVERBOARD.Elements.Tickets = this
+          HOVERBOARD.Elements.Tickets = this;
         },
 
         _trackBuyClick: function (e) {
-          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', e.currentTarget.href);
+          var info = e.currentTarget.getAttribute('ga-info');
+          HOVERBOARD.Analytics.trackEvent('ticket ' + info, 'buy_click', e.currentTarget.href);
         }
 
       });
