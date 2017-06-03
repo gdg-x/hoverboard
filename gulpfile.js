@@ -45,6 +45,9 @@ const html = require('./gulp-tasks/html.js');
 function build() {
   return new Promise(resolve => {
     let polymerProject = null;
+    let sourcesStreamSplitter = new polymerBuild.HtmlSplitter();
+    let dependenciesStreamSplitter = new polymerBuild.HtmlSplitter();
+
     console.log(`Deleting ${config.build.rootDirectory} and ${config.tempDirectory} directories...`);
 
     del([config.build.rootDirectory, config.tempDirectory])
@@ -61,28 +64,27 @@ function build() {
         console.log(`Polymer building...`);
 
         const sourcesStream = polymerProject.sources()
-          .pipe(polymerProject.splitHtml())
+          .pipe(gulpif(/\.(png|gif|jpg|svg)$/, images.minify()))
+          .pipe(sourcesStreamSplitter.split())
           // splitHtml doesn't split CSS https://github.com/Polymer/polymer-build/issues/32
           .pipe(gulpif(/\.js$/, uglify()))
           .pipe(gulpif(/\.(html|css)$/, cssSlam()))
           .pipe(gulpif(/\.html$/, html.minify()))
-          .pipe(gulpif(/\.(png|gif|jpg|svg)$/, images.minify()))
-          .pipe(polymerProject.rejoinHtml());
+          .pipe(sourcesStreamSplitter.rejoin());
 
         const dependenciesStream = polymerProject.dependencies()
-          .pipe(polymerProject.splitHtml())
-          // Doesn't work for now
-          // .pipe(gulpif(/\.js$/, uglify()))
+          .pipe(dependenciesStreamSplitter.split())
+          .pipe(gulpif(/\.js$/, uglify()))
           .pipe(gulpif(/\.(html|css)$/, cssSlam()))
           .pipe(gulpif(/\.html$/, html.minify()))
-          .pipe(polymerProject.rejoinHtml());
+          .pipe(dependenciesStreamSplitter.rejoin());
 
         let buildStream = mergeStream(sourcesStream, dependenciesStream)
           .once('data', () => {
             console.log('Analyzing and optimizing...');
           });
 
-        buildStream = buildStream.pipe(polymerProject.bundler);
+        buildStream = buildStream.pipe(polymerProject.bundler());
         buildStream = buildStream.pipe(gulp.dest(config.build.rootDirectory));
         return waitFor(buildStream);
       })
@@ -105,6 +107,11 @@ function build() {
           });
 
         return waitFor(normalizeStream);
+      })
+      .then(() => {
+        return gulp.src(prependPath(config.build.rootDirectory, 'service-worker.js'))
+          .pipe(uglify())
+          .pipe(gulp.dest(config.build.rootDirectory));
       })
       .then(() => {
         console.log('Build complete!');

@@ -5,8 +5,8 @@
   ],
   "private": true,
   "dependencies": {
-    "app-layout": "PolymerElements/app-layout#^0.10.0",
-    "app-route": "PolymerElements/app-route#^0.9.0",
+    "app-layout": "PolymerElements/app-layout#^1.0.0",
+    "app-route": "PolymerElements/app-route#^1.0.0",
     "google-map": "GoogleWebComponents/google-map#^1.1.0",
     "google-youtube": "GoogleWebComponents/google-youtube#^1.2.0",
     "iron-ajax": "PolymerElements/iron-ajax#^1.4.0",
@@ -39,7 +39,7 @@
     "paper-toast": "PolymerElements/paper-toast#^1.3.0",
     "paper-toolbar": "PolymerElements/paper-toolbar#^1.1.0",
     "paper-tooltip": "PolymerElements/paper-tooltip#^1.1.0",
-    "polymer": "Polymer/polymer#^1.7.0",
+    "polymer": "Polymer/polymer#^1.9.0",
     "polymerfire": "firebase/polymerfire#^0.10.0",
     "time-elements": "github/time-elements#^0.6.0"
   },
