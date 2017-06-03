@@ -154,7 +154,7 @@ gulp.task('serve', gulp.series(compileTemplate, () => {
   gulp.watch([
     'data/**/*.{markdown,md}',
     'images/**/*.{png,gif,jpg,svg}',
-  ]).on('change', reload);
+  ]).on('change', browserSync.reload);
 
   gulp.watch([
     'data/**/*.json',
