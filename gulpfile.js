@@ -123,6 +123,14 @@ function waitFor(stream) {
   });
 }
 
+function copyAndReload(file) {
+  const dest = prependPath(config.tempDirectory, file.substring(0, file.lastIndexOf('/')))		
+  
+  gulp.src(file).pipe(gulp.dest(dest));
+
+  browserSync.reload();
+}
+
 function reload(done) {
   browserSync.reload();
   done();
@@ -154,7 +162,7 @@ gulp.task('serve', gulp.series(compileTemplate, () => {
   gulp.watch([
     'data/**/*.{markdown,md}',
     'images/**/*.{png,gif,jpg,svg}',
-  ]).on('change', reload);
+  ]).on('change', copyAndReload);
 
   gulp.watch([
     'data/**/*.json',
