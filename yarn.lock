@@ -60,13 +60,17 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*", "@types/node@6.0.*", "@types/node@^6.0.0", "@types/node@^6.0.41", "@types/node@^6.0.73":
+"@types/node@*", "@types/node@^4.0.30", "@types/node@^4.2.3":
+  version "4.2.8"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-4.2.8.tgz#26fd8fbc5b5ec7822614d950e237956ee92b88cd"
+
+"@types/node@6.0.*":
   version "6.0.73"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.73.tgz#85dc4bb6f125377c75ddd2519a1eeb63f0a4ed70"
 
-"@types/node@^4.0.30", "@types/node@^4.2.3":
-  version "4.2.8"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-4.2.8.tgz#26fd8fbc5b5ec7822614d950e237956ee92b88cd"
+"@types/node@^6.0.0", "@types/node@^6.0.41", "@types/node@^6.0.77":
+  version "6.0.77"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.77.tgz#3e4d569a427f17085e1ee4ecd3c31befb56af7b5"
 
 "@types/parse5@^0.0.31":
   version "0.0.31"
@@ -1126,7 +1130,7 @@ dom5@^1.3.1:
     clone "^1.0.2"
     parse5 "^1.4.1"
 
-dom5@^2.1.0, dom5@^2.2.0:
+dom5@^2.1.0, dom5@^2.2.0, dom5@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/dom5/-/dom5-2.3.0.tgz#f8204975bd0dacbbe5b58a8a93ffc1fed0ffcd2a"
   dependencies:
@@ -1227,13 +1231,13 @@ encodeurl@~1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/encodeurl/-/encodeurl-1.0.1.tgz#79e3d58655346909fe6f0f45a5de68103b294d20"
 
-end-of-stream@1.0.0:
+end-of-stream@1.0.0, end-of-stream@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/end-of-stream/-/end-of-stream-1.0.0.tgz#d4596e702734a93e40e9af864319eabd99ff2f0e"
   dependencies:
     once "~1.3.0"
 
-end-of-stream@^1.0.0, end-of-stream@^1.1.0:
+end-of-stream@^1.1.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/end-of-stream/-/end-of-stream-1.4.0.tgz#7a90d833efda6cfa6eac0f4949dbb0fad3a63206"
   dependencies:
@@ -1298,10 +1302,6 @@ es6-iterator@2, es6-iterator@^2.0.1:
     d "1"
     es5-ext "^0.10.14"
     es6-symbol "^3.1"
-
-es6-promise@^2.1.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-2.3.0.tgz#96edb9f2fdb01995822b263dd8aadab6748181bc"
 
 es6-promise@^4.0.5:
   version "4.1.0"
@@ -1928,9 +1928,9 @@ gulp-if@^2.0.2:
     ternary-stream "^2.0.1"
     through2 "^2.0.1"
 
-gulp-imagemin@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/gulp-imagemin/-/gulp-imagemin-3.2.0.tgz#26887ad65d2c51bb317c4b02b5604f4a78bf74a8"
+gulp-imagemin@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/gulp-imagemin/-/gulp-imagemin-3.3.0.tgz#c55764c260593e8595609e66a40126911ef22264"
   dependencies:
     chalk "^1.0.0"
     gulp-util "^3.0.0"
@@ -3087,7 +3087,7 @@ node-uuid@~1.4.7:
   version "1.4.8"
   resolved "https://registry.yarnpkg.com/node-uuid/-/node-uuid-1.4.8.tgz#b040eb0923968afabf8d32fb1f17f1167fdab907"
 
-nopt@3.0.x, nopt@^3.0.1:
+nopt@3.0.x:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/nopt/-/nopt-3.0.6.tgz#c6465dbf08abcd4db359317f79ac68a646b28ff9"
   dependencies:
@@ -3351,7 +3351,7 @@ parse5@^1.4.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-1.5.1.tgz#9b7f3b0de32be78dc2401b17573ccaf0f6f59d94"
 
-parse5@^2.2.1, parse5@^2.2.2:
+parse5@^2.2.1, parse5@^2.2.2, parse5@^2.2.3:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-2.2.3.tgz#0c4fc41c1000c5e6b93d48b03f8083837834e9f6"
 
@@ -3398,10 +3398,6 @@ path-is-inside@^1.0.1:
 path-key@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
-
-path-posix@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/path-posix/-/path-posix-1.0.0.tgz#06b26113f56beab042545a23bfa88003ccac260f"
 
 path-root-regex@^0.1.0:
   version "0.1.2"
@@ -3463,7 +3459,7 @@ plylog@^0.5.0:
     "@types/winston" "^2.2.0"
     winston "^2.2.0"
 
-polymer-analyzer@^2.0.0, polymer-analyzer@^2.0.1:
+polymer-analyzer@^2.0.0, polymer-analyzer@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/polymer-analyzer/-/polymer-analyzer-2.0.2.tgz#2c1d8711d3674b4db8a08e11b382217c6b042f44"
   dependencies:
@@ -3490,45 +3486,42 @@ polymer-analyzer@^2.0.0, polymer-analyzer@^2.0.1:
     strip-indent "^2.0.0"
     typescript "^2.2.0"
 
-polymer-build@^1.2.4:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/polymer-build/-/polymer-build-1.5.0.tgz#55631d3da8ffd0cefd62a5f6565a71614910ea84"
+polymer-build@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/polymer-build/-/polymer-build-1.5.1.tgz#ae4c1c5fc84b10b07ec2dba09d0af7f9100fcceb"
   dependencies:
     "@types/mz" "0.0.31"
-    "@types/node" "^6.0.73"
-    "@types/parse5" "^2.2.32"
+    "@types/node" "^6.0.77"
+    "@types/parse5" "^2.2.34"
     "@types/vinyl" "^2.0.0"
     "@types/vinyl-fs" "0.0.28"
-    dom5 "^2.2.0"
+    dom5 "^2.3.0"
     multipipe "^1.0.2"
     mz "^2.6.0"
-    parse5 "^2.2.2"
+    parse5 "^2.2.3"
     plylog "^0.5.0"
-    polymer-analyzer "^2.0.1"
-    polymer-bundler "^2.0.0"
-    polymer-project-config "^3.0.0"
+    polymer-analyzer "^2.0.2"
+    polymer-bundler "^2.0.2"
+    polymer-project-config "^3.2.1"
     sw-precache "^5.1.1"
-    vinyl "^1.1.1"
-    vinyl-fs "^2.4.3"
+    vinyl "^1.2.0"
+    vinyl-fs "^2.4.4"
 
-polymer-bundler@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/polymer-bundler/-/polymer-bundler-2.0.1.tgz#c5b8e78fffe0c789b9d123cd999ad7cdad6bb50d"
+polymer-bundler@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/polymer-bundler/-/polymer-bundler-2.0.2.tgz#f892239e123afc078de7db85d35603bbc387a294"
   dependencies:
     clone "^2.1.0"
     command-line-args "^3.0.1"
     command-line-usage "^3.0.3"
     dom5 "^2.2.0"
-    es6-promise "^2.1.0"
     espree "^3.4.0"
     mkdirp "^0.5.1"
-    nopt "^3.0.1"
     parse5 "^2.2.2"
-    path-posix "^1.0.0"
     polymer-analyzer "^2.0.0"
     source-map "^0.5.6"
 
-polymer-project-config@^3.0.0:
+polymer-project-config@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/polymer-project-config/-/polymer-project-config-3.2.1.tgz#e880e1a4dba436de9ecd85ed421742f6f3e0d1a2"
   dependencies:
@@ -3588,13 +3581,13 @@ qs@6.2.1:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.2.1.tgz#ce03c5ff0935bc1d9d69a9f14cbd18e568d67625"
 
-"qs@>= 0.4.0", qs@~6.4.0:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
-
-qs@~6.3.0:
+"qs@>= 0.4.0", qs@~6.3.0:
   version "6.3.2"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.3.2.tgz#e75bd5f6e268122a2a0e0bda630b2550c166502c"
+
+qs@~6.4.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
 
 randomatic@^1.1.3:
   version "1.1.6"
@@ -4571,7 +4564,7 @@ vinyl-assign@^1.0.1:
     object-assign "^4.0.1"
     readable-stream "^2.0.0"
 
-vinyl-fs@^2.0.0, vinyl-fs@^2.2.0, vinyl-fs@^2.4.3:
+vinyl-fs@^2.0.0, vinyl-fs@^2.2.0, vinyl-fs@^2.4.4:
   version "2.4.4"
   resolved "https://registry.yarnpkg.com/vinyl-fs/-/vinyl-fs-2.4.4.tgz#be6ff3270cb55dfd7d3063640de81f25d7532239"
   dependencies:
@@ -4614,7 +4607,7 @@ vinyl@^0.5.0:
     clone-stats "^0.0.1"
     replace-ext "0.0.1"
 
-vinyl@^1.0.0, vinyl@^1.1.1:
+vinyl@^1.0.0, vinyl@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/vinyl/-/vinyl-1.2.0.tgz#5c88036cf565e5df05558bfc911f8656df218884"
   dependencies:

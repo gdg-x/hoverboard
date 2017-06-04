@@ -74,8 +74,7 @@ function build() {
 
         const dependenciesStream = polymerProject.dependencies()
           .pipe(dependenciesStreamSplitter.split())
-          // Doesn't work for now
-          // .pipe(gulpif(/\.js$/, uglify()))
+          .pipe(gulpif(/\.js$/, uglify()))
           .pipe(gulpif(/\.(html|css)$/, cssSlam()))
           .pipe(gulpif(/\.html$/, html.minify()))
           .pipe(dependenciesStreamSplitter.rejoin());
@@ -108,6 +107,11 @@ function build() {
           });
 
         return waitFor(normalizeStream);
+      })
+      .then(() => {
+        return gulp.src(prependPath(config.build.rootDirectory, 'service-worker.js'))
+          .pipe(uglify())
+          .pipe(gulp.dest(config.build.rootDirectory));
       })
       .then(() => {
         console.log('Build complete!');
