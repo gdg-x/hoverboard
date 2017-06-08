@@ -7,17 +7,19 @@
   ],
   "private": true,
   "dependencies": {
-    "app-route": "PolymerElements/app-route#2.0-preview",
-    "app-layout": "PolymerElements/app-layout#2.0-preview",
-    "polymer": "polymer/polymer#2.0-preview",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#v1.0.0-rc.5",
-    "paper-icon-button": "PolymerElements/paper-icon-button#2.0-preview",
-    "iron-image": "PolymerElements/iron-image#2.0-preview",
+    "app-route": "PolymerElements/app-route#^2.0.0",
+    "app-layout": "PolymerElements/app-layout#^2.0.0",
+    "polymer": "Polymer/polymer#^2.0.1",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.1",
+    "paper-icon-button": "PolymerElements/paper-icon-button#^2.0.0",
+    "iron-image": "PolymerElements/iron-image#^2.0.0",
     "iron-pages": "PolymerElements/iron-pages#2.0-preview",
-    "paper-tabs": "PolymerElements/paper-tabs#2.0-preview",
-    "polymer-redux": "tur-nr/polymer-redux#polymer-2"
+    "paper-tabs": "PolymerElements/paper-tabs#^2.0",
+    "polymer-redux": "tur-nr/polymer-redux#polymer-2",
+    "paper-input": "PolymerElements/paper-input#^2.0.0",
+    "paper-fab": "PolymerElements/paper-fab#^2.0.0"
   },
   "devDependencies": {
-    "web-component-tester": "^6.0.0-prerelease.6"
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0"
   }
 }

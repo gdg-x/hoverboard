@@ -15,8 +15,8 @@ addons:
     - g++-4.8
 install:
 - npm install -g bower
-- npm install
 - bower install
+- npm install
 script: echo "Deploying!"
 before_deploy: npm run build
 deploy:

@@ -1,6 +1,10 @@
 <link rel="import" href="../bower_components/polymer-redux/polymer-redux.html">
 <script src="/node_modules/redux/dist/redux.min.js"></script>
 
+<script src="redux/constants.js" type="text/javascript"></script>
+<script src="redux/actions.js" type="text/javascript"></script>
+<script src="redux/reducer.js" type="text/javascript"></script>
+
 <script>
   const initialState = {
     ui: {
@@ -10,24 +14,18 @@
     heroSettings: {$ heroSettings | dump | safe $}
   };
 
-  const reducer = (state, action) => {
+  const appReducer = (state, action) => {
     if (!state) return initialState;
-
-    switch (action.type) {
-      case 'TOGGLE_DRAWER':
-        return Object.assign({}, state, {
-          ui: {
-            isDrawerOpened: action.value !== null ? action.value : !state.ui.isDrawerOpened
-          }
-        });
+    return {
+      ui: uiReducer(state.ui, action)
       case 'SET_ROUTE':
         const { route } = action;
         return Object.assign({}, state, { route });
-    }
+    };
   };
 
   const store = Redux.createStore(
-    reducer,
+    appReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
   const ReduxMixin = PolymerRedux(store);

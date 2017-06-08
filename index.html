@@ -1,26 +1,30 @@
 <!doctype html>
 <html lang="en" itemscope itemtype="http://schema.org/Event">
+
 <head>
-  <base href="/">
+  <base href="{$ basepath $}">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="description" content="{$ description $}">
   <meta name="keywords" content="{$ keywords $}">
   <meta name="author" content="{$ organizer.name $}">
+  <meta name="generator" content="Project Hoverboard">
 
   <title>{$ title $}</title>
 
   <link rel="canonical" href="{$ url $}">
 
-  <link rel="icon" href="/images/favicon.ico">
+  <link rel="icon" href="images/favicon.ico">
 
   <meta name="theme-color" content="{$ webapp.themeColor $}">
   <link rel="manifest" href="manifest.json">
 
   <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes"> <!-- fallback for manifest.json -->
-  <meta name="application-name" content="{$ title $}"> <!-- fallback for manifest.json -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <!-- fallback for manifest.json -->
+  <meta name="application-name" content="{$ title $}">
+  <!-- fallback for manifest.json -->
 
   <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -28,21 +32,21 @@
   <meta name="apple-mobile-web-app-title" content="{$ title $}">
 
   <!-- Homescreen icons. -->
-  <link rel="apple-touch-icon" href="/images/manifest/icon-48.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="/images/manifest/icon-72.png">
-  <link rel="apple-touch-icon" sizes="96x96" href="/images/manifest/icon-96.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="/images/manifest/icon-144.png">
-  <link rel="apple-touch-icon" sizes="192x192" href="/images/manifest/icon-192.png">
+  <link rel="apple-touch-icon" href="images/manifest/icon-48.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/icon-72.png">
+  <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/icon-96.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/icon-144.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/icon-192.png">
 
   <!-- Tile icon for Win8 (144x144 + tile color) -->
-  <meta name="msapplication-TileImage" content="/images/manifest/icon-144.png">
+  <meta name="msapplication-TileImage" content="images/manifest/icon-144.png">
   <meta name="msapplication-TileColor" content="#00aba9">
   <meta name="msapplication-tap-highlight" content="no">
 
   <!-- G+ sharing meta data -->
   <meta itemprop="name" content="{$ title $}">
   <meta itemprop="description" content="{$ description $}">
-  <meta itemprop="image" content="/images/social-share.jpg">
+  <meta itemprop="image" content="images/social-share.jpg">
   <meta itemprop="startDate" content="{$ startDate $}">
   <meta itemprop="endDate" content="{$ endDate $}">
 
@@ -53,7 +57,7 @@
   <meta property="og:url" content="{$ url $}">
   <meta property="og:description" content="{$ description $}">
   <meta property="og:type" content="Event">
-  <meta property="og:image" content="/images/social-share.jpg">
+  <meta property="og:image" content="images/social-share.jpg">
   <meta property="og:image:type" content="image/jpeg" />
 
   <!-- Twitter meta data -->
@@ -61,18 +65,29 @@
   <meta name="twitter:creator" content="@{$ organizer.twitter $}">
   <meta name="twitter:title" content="{$ title $}">
   <meta name="twitter:description" content="{$ description $}">
-  <meta name="twitter:image" content="/images/social-share.jpg">
+  <meta name="twitter:image" content="images/social-share.jpg">
 
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
   <link rel="dns-prefetch" href="https://apis.google.com">
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-  <link rel="import" href="/src/hoverboard-app.html">
+  <script>
+    // Register the base URL
+    const baseUrl = document.querySelector('base').href;
+
+    // Load and register pre-caching Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register(baseUrl + 'service-worker.js');
+      });
+    }
+  </script>
+
+  <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+  <link rel="import" href="src/hoverboard-app.html">
 
   <style>
-
     body {
       margin: 0;
       font-family: 'Roboto', 'Noto', sans-serif;
@@ -81,8 +96,8 @@
       min-height: 100vh;
       background-color: #FAFAFA;
     }
-
     /* styling for render while resources are loading */
+
     hoverboard-app[unresolved] {
       padding: 0 16px;
       display: block;
@@ -94,17 +109,22 @@
       color: #202020;
       overflow: visible;
     }
-
   </style>
 
 </head>
+
 <body>
 
-<hoverboard-app unresolved>{$ title $}</hoverboard-app>
+  <hoverboard-app unresolved>{$ title $}</hoverboard-app>
 
-<script>
-  window.performance && performance.mark && performance.mark('index.html');
-</script>
+  <noscript>
+    Please enable JavaScript to view this website.
+  </noscript>
+
+  <script>
+    window.performance && performance.mark && performance.mark('index.html');
+  </script>
 
 </body>
+
 </html>
