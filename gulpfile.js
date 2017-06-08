@@ -67,7 +67,6 @@ function build() {
         const sourcesHtmlSplitter = new HtmlSplitter();
         const sourcesStream = polymerProject.sources()
           .pipe(sourcesHtmlSplitter.split())
-          // splitHtml doesn't split CSS https://github.com/Polymer/polymer-build/issues/32
           .pipe(gulpif(/\.js$/, uglify()))
           .pipe(gulpif(/\.(html|css)$/, cssSlam()))
           .pipe(gulpif(/\.html$/, html.minify()))

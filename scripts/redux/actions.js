@@ -6,3 +6,12 @@ const uiActions = {
     });
   }
 };
+
+const routeActions = {
+  setRoute: route => {
+    store.dispatch({
+      type: SET_ROUTE,
+      route
+    });
+  }
+};

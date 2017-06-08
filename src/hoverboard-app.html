@@ -19,7 +19,7 @@
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 
-<link rel="import" href="redux-store.html">
+<link rel="import" href="redux-mixin.html">
 <link rel="import" href="elements/shared-styles.html">
 <link rel="import" href="elements/flex-layout-attr.html">
 <link rel="import" href="elements/hoverboard-icons.html">
@@ -217,7 +217,7 @@
           hero: {
             type: Object,
             statePath(state) {
-              return state.heroSettings[state.route]
+              return state.hero.settings[state.route]
             }
           }
         };
@@ -263,11 +263,15 @@
       }
 
       _routeChanged(page) {
-        if (page === undefined) {
+        if (!page || page === 'NaN') {
           return;
         }
         console.log(page);
-//        routeActions.setRoute(page);
+        routeActions.setRoute(page)
+//        this._debouncer = Polymer.Debouncer.debounce(
+//          this._debouncer, // initially undefined
+//          Polymer.Async.timeOut.after(1),
+//          () => routeActions.setRoute(page));
       }
     }
 
