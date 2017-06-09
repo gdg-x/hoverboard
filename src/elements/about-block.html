@@ -5,7 +5,7 @@
 
 <dom-module id="about-block">
     <template>
-        <style is="custom-style" include="shared-styles flex flex-alignment flex-reverse flex-factors"></style>
+        <style is="custom-style" include="shared-styles flex flex-alignment flex-reverse"></style>
 
         <style>
              :host {
@@ -16,15 +16,32 @@
 
             .container {
                 margin: 48px 40px;
+            }     
+
+            .description-block,
+            .statistics-block {
+                padding: 16px;
+            }       
+            
+            .block-cta paper-button {                
+                padding-left: 0;
+                margin-left: 0;
             }
 
-            /*.statistics-block,
-            .description-block {
-                padding: 0 32px;
-            }*/
+            .block-cta iron-icon {
+                margin-left: 8px;
+            }
+
+            .block-cta .cta-label {
+                font-size: 14px;
+            }
+
+            .block-subtitle {
+                color: var(--secondary-text-color);
+            }
 
             .count-info {
-                padding: 16px 16px 16px 0;
+                padding: 16px 0;
             }
 
             .numbers {
@@ -44,46 +61,46 @@
             }
         </style>
 
-        <div class="container" flex layout horizontal wrap-reverse center-center>
+        <div class="container" layout horizontal wrap-reverse center> 
 
-            <div class="description-block" flex center-center flex-2>
+            <div class="description-block" flex>
                 <h2 class="title">What you need to know, <br> before you ask.</h3>
 
                     <p class="block-subtitle">
-                        Stay a step ahead with the information you care about.
+                        GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases. 
                     </p>
 
                     <a class="block-cta" href="https://www.youtube.com/watch?v=TdpbgRgz6eE">
-                        <paper-button class="open-video">
-                            <iron-icon icon="hoverboard:people"></iron-icon>
-                            <span>EXPLORE</span>
+                        <paper-button>
+                            <span class="cta-label">EXPLORE FEATURED SESSIONS</span>
+                            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
                         </paper-button>
                     </a>
 
                     <p class="block-subtitle">
-                        Stay a step ahead with the information you care about.
+                        Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.
                     </p>
 
-                  <a class="block-cta" href="./learn-more/feed/">
-                        <paper-button class="open-video">
-                            <iron-icon icon="hoverboard:people"></iron-icon>
-                            <span>EXPLORE</span>
+                  <a class="block-cta" href="https://www.youtube.com/watch?v=TdpbgRgz6eE">
+                        <paper-button>
+                            <span class="cta-label">SEE HOW IT WAS IN 2016</span>
+                            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
                         </paper-button>
                     </a>
 
             </div>
 
-            <div class="statistics-block" flex layout horizontal>
+            <div class="statistics-block" flex>
 
-                <div class="row-1" flex layout vertical>
-                    <div class="attendees-count count-info" flex layout horizontal>
+                <div class="row-1" flex layout horizontal end-justified>
+                    <div class="attendees-count count-info" flex layout horizontal around-justified>
                         <span class="icon">
                             <iron-icon class="big-icon" icon="hoverboard:people"></iron-icon>
                         </span>
                         <span class="attendees-number numbers">900</span>
                     </div>
 
-                    <div class="days-count count-info " flex layout horizontal>
+                    <div class="days-count count-info " flex layout horizontal around-justified>
                         <span class="icon">
                      <iron-icon class="big-icon" icon="hoverboard:calendar"></iron-icon>
                 </span>
@@ -91,15 +108,15 @@
                     </div>
                 </div>
 
-                <div class="row-2" flex layout vertical end>
-                    <div class="sessions-count count-info" flex>
+                <div class="row-2" flex layout horizontal end-justified>
+                    <div class="sessions-count count-info" flex layout horizontal around-justified>
                         <span class="icon">
                      <iron-icon class="big-icon" icon="hoverboard:microphone"></iron-icon>
                 </span>
                         <span class="attendees-number numbers">50</span>
                     </div>
 
-                    <div class="tracks-count count-info" flex>
+                    <div class="tracks-count count-info" flex layout horizontal around-justified>
                         <span class="icon">
                      <iron-icon class="big-icon" icon="hoverboard:tracks"></iron-icon>
                 </span>
