@@ -1,0 +1,29 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../elements/about-block.html">
+
+<dom-module id="home-page">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+    <style>
+
+      :host  {
+        display: block;
+      }
+
+    </style>
+
+   <about-block></about-block>
+  </template>
+
+  <script>
+
+    class HomePage extends Polymer.Element {
+      static get is() { return 'home-page' }
+    }
+
+    customElements.define(HomePage.is, HomePage);
+
+  </script>
+</dom-module>
+

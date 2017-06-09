@@ -23,6 +23,7 @@
 <link rel="import" href="elements/flex-layout-attr.html">
 <link rel="import" href="elements/hoverboard-icons.html">
 <link rel="import" href="elements/footer-block.html">
+<link rel="import" href="pages/home-page.html">
 
 
 <dom-module id="hoverboard-app">
@@ -36,6 +37,13 @@
         display: block;
         position: relative;
         min-height: 100vh;
+      }
+
+      /* TODO: Remove after hero-block element implemeted */
+      .hero-block {
+        height: 300px;
+        background-image: url(https://devfest.gdg.org.ua/images/backgrounds/home.jpg);
+        background-size: contain;
       }
 
       app-drawer app-toolbar {
@@ -177,8 +185,14 @@
             </paper-tabs>
           </app-toolbar>
         </app-header>
+        
+        <!--TODO: Replace with hero-block element-->
+        <div class="hero-block">
+              <h1>{{routeData.page}}</h1>
+        </div>
 
-        <h1>{{routeData.page}}</h1>
+        <!-- TODO: Temporary implementation, should be improved after pages routing implemented with Redux -->
+        <home-page></home-page>
 
         <footer-block></footer-block>
       </app-header-layout>

@@ -1,0 +1,123 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="hoverboard-icons.html">
+
+<dom-module id="about-block">
+    <template>
+        <style is="custom-style" include="shared-styles flex flex-alignment flex-reverse flex-factors"></style>
+
+        <style>
+             :host {
+                display: block;
+                position: relative;
+                color: var(--dark-primary-color);
+            }
+
+            .container {
+                margin: 48px 40px;
+            }
+
+            /*.statistics-block,
+            .description-block {
+                padding: 0 32px;
+            }*/
+
+            .count-info {
+                padding: 16px 16px 16px 0;
+            }
+
+            .numbers {
+                margin-left: 16px;
+                font-size: 32px;
+                vertical-align: middle;
+            }
+
+            .icon iron-icon {
+                color: var(--dark-primary-color);
+            }
+
+            @media (min-width: 768px) {
+                .container[wrap-reverse] {
+                    flex-wrap: nowrap;
+                }
+            }
+        </style>
+
+        <div class="container" flex layout horizontal wrap-reverse center-center>
+
+            <div class="description-block" flex center-center flex-2>
+                <h2 class="title">What you need to know, <br> before you ask.</h3>
+
+                    <p class="block-subtitle">
+                        Stay a step ahead with the information you care about.
+                    </p>
+
+                    <a class="block-cta" href="https://www.youtube.com/watch?v=TdpbgRgz6eE">
+                        <paper-button class="open-video">
+                            <iron-icon icon="hoverboard:people"></iron-icon>
+                            <span>EXPLORE</span>
+                        </paper-button>
+                    </a>
+
+                    <p class="block-subtitle">
+                        Stay a step ahead with the information you care about.
+                    </p>
+
+                  <a class="block-cta" href="./learn-more/feed/">
+                        <paper-button class="open-video">
+                            <iron-icon icon="hoverboard:people"></iron-icon>
+                            <span>EXPLORE</span>
+                        </paper-button>
+                    </a>
+
+            </div>
+
+            <div class="statistics-block" flex layout horizontal>
+
+                <div class="row-1" flex layout vertical>
+                    <div class="attendees-count count-info" flex layout horizontal>
+                        <span class="icon">
+                            <iron-icon class="big-icon" icon="hoverboard:people"></iron-icon>
+                        </span>
+                        <span class="attendees-number numbers">900</span>
+                    </div>
+
+                    <div class="days-count count-info " flex layout horizontal>
+                        <span class="icon">
+                     <iron-icon class="big-icon" icon="hoverboard:calendar"></iron-icon>
+                </span>
+                        <span class="attendees-number numbers">2</span>
+                    </div>
+                </div>
+
+                <div class="row-2" flex layout vertical end>
+                    <div class="sessions-count count-info" flex>
+                        <span class="icon">
+                     <iron-icon class="big-icon" icon="hoverboard:microphone"></iron-icon>
+                </span>
+                        <span class="attendees-number numbers">50</span>
+                    </div>
+
+                    <div class="tracks-count count-info" flex>
+                        <span class="icon">
+                     <iron-icon class="big-icon" icon="hoverboard:tracks"></iron-icon>
+                </span>
+                        <span class="attendees-number numbers">4</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </template>
+
+    <script>
+        class AboutBlock extends Polymer.Element {
+            static get is() { return 'about-block' }
+        }
+
+        customElements.define(AboutBlock.is, AboutBlock);
+    </script>
+</dom-module>
