@@ -121,9 +121,9 @@
                       query="(min-width: {$ mediaQueries.md.min $})"
                       query-matches="{{isDesktopSize}}"></iron-media-query>
 
-    <app-location route="{{route}}"></app-location>
+    <app-location route="{{appRoute}}"></app-location>
     <app-route
-      route="{{route}}"
+      route="{{appRoute}}"
       pattern="/:page"
       data="{{routeData}}"
       tail="{{subroute}}">
@@ -263,15 +263,10 @@
       }
 
       _routeChanged(page) {
-        if (!page || page === 'NaN') {
+        if (!page && page !== '') {
           return;
         }
-        console.log(page);
-        routeActions.setRoute(page)
-//        this._debouncer = Polymer.Debouncer.debounce(
-//          this._debouncer, // initially undefined
-//          Polymer.Async.timeOut.after(1),
-//          () => routeActions.setRoute(page));
+        routeActions.setRoute(page);
       }
     }
 
