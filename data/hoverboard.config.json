@@ -21,7 +21,7 @@
   "hashtag": "DevFest17",
   "navigation": [
     {
-      "route": "",
+      "route": "home",
       "permalink": "/",
       "title": "Home"
     },

@@ -12,7 +12,7 @@ const uiReducer = (state = initialState.ui, action) => {
 const routeReducer = (state = initialState.route, action) => {
   switch (action.type) {
     case SET_ROUTE:
-      return action.route;
+      return action.route || 'home';
     default:
       return state;
   }

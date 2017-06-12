@@ -2,6 +2,7 @@
 <link rel="import" href="../bower_components/polymer/lib/utils/render-status.html">
 <link rel="import" href="../bower_components/polymer/lib/utils/import-href.html">
 
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
@@ -73,8 +74,18 @@
       }
 
       app-header {
-        background-color: var(--primary-background-color);
+        --app-header-background-front-layer: {
+          background: var(--hero-background-image) 50% 50%;
+          transition: background-image 0.5s;
+        };
+        transition: background-color 0.3s;
+        background-color: var(--hero-background-color);
         border-bottom: 1px solid var(--divider-color);
+      }
+
+      .header {
+        background-color: var(--primary-background-color);
+        z-index: 1;
       }
 
       app-toolbar {
@@ -93,6 +104,12 @@
         text-transform: uppercase;
       }
 
+      .hero-block {
+        display: block;
+        position: relative;
+        min-height: 360px;
+      }
+
       @media (min-width: 640px) {
         app-toolbar {
           padding: 0 36px;
@@ -104,6 +121,10 @@
           --paper-tabs: {
             height: 64px;
           };
+        }
+
+        .hero-block {
+          min-height: 460px;
         }
       }
 
@@ -151,8 +172,8 @@
       </app-drawer>
 
       <app-header-layout>
-        <app-header id="header" slot="header" effects="waterfall" condenses reveals>
-          <app-toolbar>
+        <app-header slot="header" effects="waterfall" condenses fixed>
+          <app-toolbar class="header" sticky>
             <paper-icon-button
               icon="hoverboard:menu"
               aria-label="Menu"
@@ -179,17 +200,28 @@
               {% endfor %}
             </paper-tabs>
           </app-toolbar>
+
+          <app-toolbar class="hero-block" layout start vertical end-justified>
+            <iron-pages selected="[[route]]" attr-for-selected="route">
+              {% for nav in navigation %}
+              <div route="{$ nav.route $}">
+                <h1>{$ nav.title $}</h1>
+              </div>
+              {% endfor %}
+            </iron-pages>
+          </app-toolbar>
+
+          <paper-tabs selected="0" sticky>
+            <paper-tab>
+              Day 1
+            </paper-tab>
+            <paper-tab>
+              Day 2
+            </paper-tab>
+          </paper-tabs>
         </app-header>
 
-        <hero-block background="[[hero.background]]">
-          <iron-pages selected="[[route]]" attr-for-selected="route">
-            {% for nav in navigation %}
-            <div route="{$ nav.route $}">
-              <h1>{$ nav.title $}</h1>
-            </div>
-            {% endfor %}
-          </iron-pages>
-        </hero-block>
+        <div style="height: 200vh"></div>
 
         <footer-block></footer-block>
       </app-header-layout>
@@ -218,14 +250,15 @@
             type: Object,
             statePath(state) {
               return state.hero.settings[state.route]
-            }
+            },
+            observer: '_heroChanged'
           }
         };
       }
 
       static get observers() {
         return [
-          '_routeChanged(routeData.page)'
+          '_routeDataChanged(routeData.page)'
         ];
       }
 
@@ -262,7 +295,14 @@
         }
       }
 
-      _routeChanged(page) {
+      _heroChanged() {
+        this.updateStyles({
+          '--hero-background-color': this.hero.background.color || '',
+          '--hero-background-image': this.hero.background.image || ''
+        });
+      }
+
+      _routeDataChanged(page) {
         if (!page && page !== '') {
           return;
         }
