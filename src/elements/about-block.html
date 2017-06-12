@@ -16,13 +16,13 @@
 
             .container {
                 margin: 48px 40px;
-            }  
+            }
 
             .description-block,
             .statistics-block {
                 padding: 16px;
             }
-            
+
             .statistics-block .row-1 {
                 margin-bottom: 16px;
             }
@@ -31,7 +31,7 @@
                 margin-top: 16px;
             }
 
-            .block-cta paper-button {                
+            .block-cta paper-button {
                 padding-left: 0;
                 margin-left: 0;
             }
@@ -48,6 +48,11 @@
                 color: var(--secondary-text-color);
             }
 
+            .icon-label {
+                color: var(--secondary-text-color);
+                margin-top: 8px;
+            }
+
             .count-info {
                 padding: 16px 0;
             }
@@ -62,37 +67,40 @@
                 color: var(--dark-primary-color);
             }
 
-            @media (min-width: 768px) {
+            @media (min-width: 868px) {
                 .container[wrap-reverse] {
                     flex-wrap: nowrap;
                 }
 
-                .row-1[justified],
-                .row-2[justified] {
+                .row-1[mobile-space-around],
+                .row-2[mobile-space-around] {
                     justify-content: space-around;
-                }                       
+                }
 
                 .description-block {
                     margin-right: 16px;
+                    padding: 48px;
                 }
 
                 .statistics-block {
                     margin-left: 16px;
                 }
 
-                 .description-block {
-                    padding: 48px;
-                }
+                 .numbers {
+                    font-size: 50px;
+                }                
             }
+
         </style>
 
-        <div class="container" flex layout horizontal wrap-reverse center> 
+        <div class="container" flex layout horizontal wrap-reverse center>
 
             <div class="description-block" flex>
                 <h2 class="title">What you need to know, <br> before you ask.</h3>
-                     
+
                     <p class="block-subtitle">
-                        GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases. 
+                        GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of
+                        sessions, workshops and showcases.
                     </p>
 
                     <a class="block-cta" href="https://www.youtube.com/watch?v=TdpbgRgz6eE">
@@ -103,10 +111,11 @@
                     </a>
 
                     <p class="block-subtitle">
-                        Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.
+                        Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal
+                        atmosphere.
                     </p>
 
-                  <a class="block-cta" href="https://www.youtube.com/watch?v=TdpbgRgz6eE">
+                    <a class="block-cta" href="https://www.youtube.com/watch?v=TdpbgRgz6eE">
                         <paper-button>
                             <span class="cta-label">SEE HOW IT WAS IN 2016</span>
                             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
@@ -117,34 +126,38 @@
 
             <div class="statistics-block" flex>
 
-                <div class="row-1" flex layout horizontal justified>
+                <div class="row-1" flex layout horizontal justified mobile-space-around>
                     <div class="attendees-count count-info" layout horizontal>
-                        <span class="icon">
+                        <span class="icon" layout vertical center>
                             <iron-icon class="big-icon" icon="hoverboard:people"></iron-icon>
+                            <span class="icon-label">Attendees</span>
                         </span>
                         <span class="attendees-number numbers">900</span>
                     </div>
 
                     <div class="days-count count-info" layout horizontal>
-                        <span class="icon">
-                     <iron-icon class="big-icon" icon="hoverboard:calendar"></iron-icon>
-                </span>
+                        <span class="icon" layout vertical center>
+                            <iron-icon class="big-icon" icon="hoverboard:calendar"></iron-icon>
+                            <span class="icon-label">Days</span>
+                        </span>
                         <span class="attendees-number numbers">2</span>
                     </div>
                 </div>
 
-                <div class="row-2"  flex layout horizontal justified>
+                <div class="row-2" flex layout horizontal justified mobile-space-around>
                     <div class="sessions-count count-info" layout horizontal>
-                        <span class="icon">
-                     <iron-icon class="big-icon" icon="hoverboard:microphone"></iron-icon>
-                </span>
+                        <span class="icon" layout vertical center>
+                            <iron-icon class="big-icon" icon="hoverboard:microphone"></iron-icon>
+                            <span class="icon-label">Sessions</span>
+                        </span>
                         <span class="attendees-number numbers">50</span>
                     </div>
 
                     <div class="tracks-count count-info" layout horizontal>
-                        <span class="icon">
-                     <iron-icon class="big-icon" icon="hoverboard:tracks"></iron-icon>
-                </span>
+                        <span class="icon" layout vertical center>
+                            <iron-icon class="big-icon" icon="hoverboard:tracks"></iron-icon>
+                            <span class="icon-label">Tracks</span>
+                        </span>
                         <span class="attendees-number numbers">4</span>
                     </div>
                 </div>
