@@ -50,29 +50,34 @@
     "home": {
       "background": {
         "color": "#FF9800",
-        "image": "/images/backgrounds/home.png"
-      }
+        "image": "/images/backgrounds/home.jpg"
+      },
+      "fontColor": "#FFF"
     },
     "blog": {
       "background": {
         "color": "#03a9f4"
-      }
+      },
+      "fontColor": "#FFF"
     },
     "speakers": {
       "background": {
         "color": "#3f51b5",
         "image": "/images/backgrounds/speakers.png"
-      }
+      },
+      "fontColor": "#FFF"
     },
     "schedule": {
       "background": {
         "color": "#673ab7"
-      }
+      },
+      "fontColor": "#FFF"
     },
     "team": {
       "background": {
         "color": "#009688"
-      }
+      },
+      "fontColor": "#FFF"
     }
   },
   "mediaQueries": {
