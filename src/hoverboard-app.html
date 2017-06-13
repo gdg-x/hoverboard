@@ -92,6 +92,7 @@
 
       .header {
         background-color: var(--primary-background-color);
+        border-bottom: 1px solid var(--divider-color);
         z-index: 1;
       }
 
@@ -111,15 +112,21 @@
       }
 
       .hero-block {
-        padding-bottom: 40px;
+        padding: 120px 60px 60px;
         display: block;
         position: relative;
         color: var(--hero-color);
         min-height: 360px;
+        max-width: 584px;
+      }
+
+      .hero-logo {
+        --iron-image-height: 80px;
       }
 
       .hero-title {
         font-size: 40px;
+        text-transform: capitalize;
       }
 
       @media (min-width: 640px) {
@@ -214,13 +221,20 @@
             </paper-tabs>
           </app-toolbar>
 
-          <app-toolbar class="hero-block" layout start vertical end-justified>
-            <iron-pages selected="[[route]]" attr-for-selected="route">
-              {% for nav in navigation %}
-              <div route="{$ nav.route $}">
-                <div class="hero-title">{$ nav.title $}</div>
+          <app-toolbar class="hero-block" layout start vertical center-justified>
+            <iron-pages selected="[[route]]" attr-for-selected="route" fallback-selection="default">
+              <div route="home">
+                <iron-image class="hero-logo" src="/images/logo.svg" alt="{$ title $}"></iron-image>
+                <p class="highlight-font">The biggest Google tech conference in CEE. All about Android, Web, and Cloud.</p>
               </div>
-              {% endfor %}
+              <div route="speakers">
+                <div class="hero-title highlight-font">[[route]]</div>
+                <p>Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back
+                  often as we add more speakers, including our customers and partners.</p>
+              </div>
+              <div route="default">
+                <div class="hero-title">[[route]]</div>
+              </div>
             </iron-pages>
           </app-toolbar>
 
@@ -253,9 +267,7 @@
           },
           hero: {
             type: Object,
-            statePath(state) {
-              return state.hero.settings[state.route]
-            },
+            statePath: 'hero',
             observer: '_heroChanged'
           }
         };
@@ -301,12 +313,12 @@
       }
 
       _heroChanged() {
+        if (!this.hero) return;
         this.updateStyles({
           '--hero-background-color': this.hero.background.color || '',
           '--hero-background-image': `url(${this.hero.background.image || ''})`,
           '--hero-color': this.hero.fontColor || ''
         });
-        console.log(this.hero.fontColor);
       }
 
       _routeDataChanged(page) {

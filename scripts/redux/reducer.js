@@ -12,7 +12,7 @@ const uiReducer = (state = initialState.ui, action) => {
 const routeReducer = (state = initialState.route, action) => {
   switch (action.type) {
     case SET_ROUTE:
-      return action.route || 'home';
+      return action.route;
     default:
       return state;
   }
@@ -22,8 +22,7 @@ const routeReducer = (state = initialState.route, action) => {
 const heroReducer = (state = initialState.hero, action) => {
   switch (action.type) {
     case SET_HERO:
-      const { hero } = action;
-      return Object.assign({}, state, hero);
+      return action.hero;
     default:
       return state;
   }

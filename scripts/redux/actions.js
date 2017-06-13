@@ -8,10 +8,15 @@ const uiActions = {
 };
 
 const routeActions = {
-  setRoute: route => {
+  setRoute: routeFromAction => {
+    const route = routeFromAction || 'home';
     store.dispatch({
       type: SET_ROUTE,
       route
+    });
+    store.dispatch({
+      type: SET_HERO,
+      hero: heroSettings[route]
     });
   }
 };

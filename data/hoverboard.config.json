@@ -49,35 +49,35 @@
   "heroSettings": {
     "home": {
       "background": {
-        "color": "#FF9800",
+        "color": "#673ab7",
         "image": "/images/backgrounds/home.jpg"
       },
       "fontColor": "#FFF"
     },
     "blog": {
       "background": {
-        "color": "#03a9f4"
+        "color": "#FFF"
       },
-      "fontColor": "#FFF"
+      "fontColor": "#424242"
     },
     "speakers": {
       "background": {
-        "color": "#3f51b5",
+        "color": "#FFF",
         "image": "/images/backgrounds/speakers.png"
       },
-      "fontColor": "#FFF"
+      "fontColor": "#424242"
     },
     "schedule": {
       "background": {
-        "color": "#673ab7"
+        "color": "#FFF"
       },
-      "fontColor": "#FFF"
+      "fontColor": "#424242"
     },
     "team": {
       "background": {
-        "color": "#009688"
+        "color": "#FFF"
       },
-      "fontColor": "#FFF"
+      "fontColor": "#424242"
     }
   },
   "mediaQueries": {
