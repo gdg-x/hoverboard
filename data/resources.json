@@ -149,5 +149,13 @@
   "callToAction": {
     "videoTitle": "GDG DevFest 2015",
     "videoId": "DfMnJAzOFng"
+  },
+  "countdown": {
+    "label": "Call for papers will close in",
+    "button": {
+      "link": "/blog/posts/c4p",
+      "label": "Submit proposal"
+    },
+    "deadline": "2017-07-01T00:00:00+03:00"
   }
 }

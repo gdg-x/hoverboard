@@ -1,0 +1,114 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+
+
+<dom-module id="countdown-block">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .container {
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+      }
+
+      .label {
+        @apply(--layout-self-center);
+        font-size: 24px;
+        font-weight: 300;
+      }
+
+      .number {
+        font-weight: 500;
+        color: var(--default-primary-color);
+      }
+
+      @media (min-width: 600px) {
+        .container {
+          @apply(--layout-horizontal);
+        }
+
+        .action {
+          margin-left: 32px;
+        }
+      }
+    </style>
+
+    <div class="container container-narrow">
+      <div class="label">
+        {$ countdown.label $}
+        <span class="timer"><span class="number">[[days]]</span>d <span class="number">[[hours]]</span>h
+          <span class="number">[[minutes]]</span>m <span class="number">[[seconds]]</span>s</span>
+      </div>
+
+      <a class="action" href="{$ countdown.button.link $}" on-tap="_trackClick">
+        <paper-button class="primary" raised>{$ countdown.button.label $}</paper-button>
+      </a>
+    </div>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'countdown-block',
+
+        properties: {
+          days: Number,
+          hours: Number,
+          minutes: Number,
+          seconds: Number,
+          deadline: {
+            type: Number,
+            value: function () {
+              return new Date("{$ countdown.deadline $}").getTime();
+            }
+          }
+        },
+
+        ready: function () {
+          this.next();
+        },
+
+        next: function () {
+          if (this.deadline) {
+            var now = new Date().getTime();
+            var distance = this.deadline - now;
+
+            this.days = this.pad(Math.floor(distance / (1000 * 60 * 60 * 24)), 2);
+            this.hours = this.pad(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)), 2);
+            this.minutes = this.pad(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)), 2);
+            this.seconds = this.pad(Math.floor((distance % (1000 * 60)) / 1000), 2);
+
+            if (distance > 0) {
+              this.async(this.next, 1000);
+            }
+          }
+        },
+
+        pad: function (num, size) {
+          var s = num + '';
+          while (s.length < size) s = '0' + s;
+          return s;
+        },
+
+        _trackClick: function () {
+          HOVERBOARD.Analytics.trackEvent('speakers', 'click button', 'c4p countdown');
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>
