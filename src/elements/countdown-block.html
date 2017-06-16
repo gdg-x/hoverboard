@@ -23,18 +23,34 @@
         @apply(--layout-self-center);
         font-size: 24px;
         font-weight: 300;
+        text-align: center;
+      }
+
+      .timer {
+        display: block;
       }
 
       .number {
         font-weight: 500;
       }
 
+      .action {
+        margin-top: 16px;
+        white-space: nowrap;
+      }
+
+
       @media (min-width: 600px) {
         .container {
           @apply(--layout-horizontal);
         }
 
+        .timer {
+          display: inline-block;
+        }
+
         .action {
+          margin-top: 0;
           margin-left: 32px;
         }
       }
