@@ -31,6 +31,7 @@
       }
 
       .number {
+        margin-left: 6px;
         font-weight: 500;
       }
 
@@ -38,7 +39,6 @@
         margin-top: 16px;
         white-space: nowrap;
       }
-
 
       @media (min-width: 600px) {
         .container {
@@ -60,7 +60,7 @@
       <div class="label">
         {$ countdown.label $}
         <span class="timer"><span class="number">[[days]]</span>d <span class="number">[[hours]]</span>h
-          <span class="number">[[minutes]]</span>m <span class="number">[[seconds]]</span>s</span>
+          <span class="number">[[minutes]]</span>m <span class="number"> [[seconds]]</span>s</span>
       </div>
 
       <a class="action" href="{$ countdown.button.link $}" on-tap="_trackClick">
