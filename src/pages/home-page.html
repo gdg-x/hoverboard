@@ -3,6 +3,7 @@
 <link rel="import" href="../behaviors/cascaded-behavior.html">
 <link rel="import" href="../behaviors/page-behavior.html">
 <link rel="import" href="../elements/statistics-block.html">
+<link rel="import" href="../elements/countdown-block.html">
 <link rel="import" href="../elements/subscribe-block.html">
 <link rel="import" href="../elements/tickets-block.html">
 <link rel="import" href="../elements/featured-people.html">
@@ -21,6 +22,7 @@
 
   <template>
 
+    <countdown-block app="{{app}}" cascaded></countdown-block>
     <statistics-block app="{{app}}" cascaded></statistics-block>
     <subscribe-block app="{{app}}" cascaded></subscribe-block>
     <quotes-block app="{{app}}" cascaded></quotes-block>
