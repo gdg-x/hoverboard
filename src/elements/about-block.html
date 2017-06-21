@@ -68,12 +68,12 @@
             }
 
             @media (min-width: 868px) {
-                .container[wrap-reverse] {
+                /*.container[wrap-reverse] {
                     flex-wrap: nowrap;
-                }
+                }*/
 
-                .row-1[mobile-space-around],
-                .row-2[mobile-space-around] {
+                .row-1[desktop-space-around],
+                .row-2[desktop-space-around] {
                     justify-content: space-around;
                 }
 
@@ -96,76 +96,62 @@
         <div class="container" flex layout horizontal wrap-reverse center>
 
             <div class="description-block" flex>
-                <h2 class="title">What you need to know, <br> before you ask.</h3>
+                <h2 class="title">{$ aboutBlock.title.partA $}</br>{$ aboutBlock.title.partB $}</h3>
 
-                    <p class="block-subtitle">
-                        GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of
-                        sessions, workshops and showcases.
-                    </p>
+                  {% for descriptionBlock in aboutBlock.descriptionBlocks %}
 
-                    <a class="block-cta" href="https://www.youtube.com/watch?v=TdpbgRgz6eE">
+                    <p class="block-subtitle"> {$ descriptionBlock.description $} </p>
+                     <a class="block-cta" href="{$ descriptionBlock.ctaLink $}" target="_blank" rel="noopener noreferrer">
                         <paper-button>
-                            <span class="cta-label">EXPLORE FEATURED SESSIONS</span>
+                            <span class="cta-label">{$ descriptionBlock.ctaLabel $}</span>
                             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
                         </paper-button>
                     </a>
 
-                    <p class="block-subtitle">
-                        Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal
-                        atmosphere.
-                    </p>
-
-                    <a class="block-cta" href="https://www.youtube.com/watch?v=TdpbgRgz6eE">
-                        <paper-button>
-                            <span class="cta-label">SEE HOW IT WAS IN 2016</span>
-                            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-                        </paper-button>
-                    </a>
-
+                  {% endfor %}
             </div>
 
             <div class="statistics-block" flex>
 
-                <div class="row-1" flex layout horizontal justified mobile-space-around>
-                    <div class="attendees-count count-info" layout horizontal>
+                <div class="row-1" flex layout horizontal justified desktop-space-around>
+                    <div class="count-info" layout horizontal>
                         <span class="icon" layout vertical center>
                             <iron-icon class="big-icon" icon="hoverboard:people"></iron-icon>
-                            <span class="icon-label">Attendees</span>
+                            <span class="icon-label">{$ aboutBlock.statisticsBlock.attendees.label $}</span>
                         </span>
-                        <span class="attendees-number numbers">900</span>
+                        <span class="numbers">{$ aboutBlock.statisticsBlock.attendees.number $}</span>
                     </div>
 
-                    <div class="days-count count-info" layout horizontal>
+                    <div class="count-info" layout horizontal>
                         <span class="icon" layout vertical center>
                             <iron-icon class="big-icon" icon="hoverboard:calendar"></iron-icon>
-                            <span class="icon-label">Days</span>
+                            <span class="icon-label">{$ aboutBlock.statisticsBlock.days.label $}</span>
                         </span>
-                        <span class="attendees-number numbers">2</span>
+                        <span class="numbers">{$ aboutBlock.statisticsBlock.days.number $}</span>
                     </div>
                 </div>
 
-                <div class="row-2" flex layout horizontal justified mobile-space-around>
-                    <div class="sessions-count count-info" layout horizontal>
+                <div class="row-2" flex layout horizontal justified desktop-space-around>
+                    <div class="count-info" layout horizontal>
                         <span class="icon" layout vertical center>
                             <iron-icon class="big-icon" icon="hoverboard:microphone"></iron-icon>
-                            <span class="icon-label">Sessions</span>
+                            <span class="icon-label">{$ aboutBlock.statisticsBlock.sessions.label $}</span>
                         </span>
-                        <span class="attendees-number numbers">50</span>
+                        <span class="numbers">{$ aboutBlock.statisticsBlock.sessions.number $}</span>
                     </div>
 
-                    <div class="tracks-count count-info" layout horizontal>
+                    <div class="count-info" layout horizontal>
                         <span class="icon" layout vertical center>
                             <iron-icon class="big-icon" icon="hoverboard:tracks"></iron-icon>
-                            <span class="icon-label">Tracks</span>
+                            <span class="icon-label">{$ aboutBlock.statisticsBlock.tracks.label $}</span>
                         </span>
-                        <span class="attendees-number numbers">4</span>
+                        <span class="numbers">{$ aboutBlock.statisticsBlock.tracks.number $}</span>
                     </div>
                 </div>
 
             </div>
 
         </div>
-
     </template>
 
     <script>
