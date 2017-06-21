@@ -166,10 +166,6 @@
         },
 
       _generateSchedule: function () {
-        if (!Object.keys(this._speakersRaw).length
-          || !Object.keys(this._sessionsRaw).length
-          || !Object.keys(this._scheduleRaw).length) return;
-
         var myWorker = new Worker('./scripts/helper/schedule-webworker.js');
 
         myWorker.postMessage({

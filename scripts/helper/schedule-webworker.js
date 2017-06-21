@@ -37,27 +37,33 @@ function getEndTime(date, startTime, endTime, totalNumber, number) {
   return result.getHours() + ':' + result.getMinutes();
 }
 
+function hasSpeakersAndSessionsAndSchedule(speakers, sessions, schedule) {
+  return  Object.keys(speakers).length && Object.keys(sessions).length && Object.keys(schedule).length ;
+}
+
 self.addEventListener('message', function (e) {
   var speakers = e.data.speakers;
   var sessions = e.data.sessions;
   var schedule = e.data.schedule;
 
-  schedule.tags = [];
-  for (var i = 0, scheduleLen = schedule.length; i < scheduleLen; i++) {
-    var day = schedule[i];
-    schedule[i].tags = [];
-    for (var j = 0, timeslotsLen = day.timeslots.length; j < timeslotsLen; j++) {
-      var timeslot = day.timeslots[j];
-      for (var k = 0, sessionsLen = timeslot.sessions.length; k < sessionsLen; k++) {
-        for (var l = 0, subSessionsLen = timeslot.sessions[k].length; l < subSessionsLen; l++) {
-          var session = getSession(sessions[timeslot.sessions[k][l]], day, i, schedule, speakers);
-          if (session && !session.track) {
-            session.track = day.tracks[k];
+  if (self.hasSpeakersAndSessionsAndSchedule(speakers, sessions, schedule)) {
+    schedule.tags = [];
+    for (var i = 0, scheduleLen = schedule.length; i < scheduleLen; i++) {
+      var day = schedule[i];
+      schedule[i].tags = [];
+      for (var j = 0, timeslotsLen = day.timeslots.length; j < timeslotsLen; j++) {
+        var timeslot = day.timeslots[j];
+        for (var k = 0, sessionsLen = timeslot.sessions.length; k < sessionsLen; k++) {
+          for (var l = 0, subSessionsLen = timeslot.sessions[k].length; l < subSessionsLen; l++) {
+            var session = getSession(sessions[timeslot.sessions[k][l]], day, i, schedule, speakers);
+            if (session && !session.track) {
+              session.track = day.tracks[k];
+            }
+            session.startTime = timeslot.startTime;
+            session.endTime = subSessionsLen > 1 ? getEndTime(day.date, timeslot.startTime, timeslot.endTime, subSessionsLen, l + 1) : timeslot.endTime;
+            session.dateReadable = day.dateReadable;
+            schedule[i].timeslots[j].sessions[k][l] = session;
           }
-          session.startTime = timeslot.startTime;
-          session.endTime = subSessionsLen > 1 ? getEndTime(day.date, timeslot.startTime, timeslot.endTime, subSessionsLen, l + 1) : timeslot.endTime;
-          session.dateReadable = day.dateReadable;
-          schedule[i].timeslots[j].sessions[k][l] = session;
         }
       }
     }
@@ -66,6 +72,6 @@ self.addEventListener('message', function (e) {
   self.postMessage({
     speakers: speakers,
     sessions: sessions,
-    schedule: schedule
+    schedule: Array.isArray(schedule) && Object.keys(sessions).length ? schedule : []
   });
 }, false);
