@@ -92,22 +92,6 @@
 
         </style>
 
-            <iron-media-query id="mq-phone"
-                      full
-                      query="(max-width: {$ mediaQueries.xs.max $})"
-                      query-matches="{{isPhoneSize}}"></iron-media-query>
-            <iron-media-query id="mq-tablet"
-                            full
-                            query="(min-width: {$ mediaQueries.sm.min $}) and (max-width: {$ mediaQueries.sm.max $})"
-                            query-matches="{{isTabletSize}}"></iron-media-query>
-            <iron-media-query id="mq-phone-tablet"
-                            full
-                            query="(max-width: {$ mediaQueries.sm.max $})"
-                            query-matches="{{isPhoneTabletSize}}"></iron-media-query>
-            <iron-media-query id="mq-desktop"
-                            query="(min-width: {$ mediaQueries.md.min $})"
-                            query-matches="{{isDesktopSize}}"></iron-media-query>
-
         <div class="container" flex layout horizontal center wrap-reverse>
 
             <div class="description-block" flex>
