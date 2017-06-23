@@ -14,7 +14,7 @@
     "paper-icon-button": "PolymerElements/paper-icon-button#^2.0.0",
     "iron-image": "PolymerElements/iron-image#^2.0.0",
     "paper-tabs": "PolymerElements/paper-tabs#^2.0",
-    "polymer-redux": "tur-nr/polymer-redux#polymer-2",
+    "polymer-redux": "tur-nr/polymer-redux",
     "paper-input": "PolymerElements/paper-input#^2.0.0",
     "paper-fab": "PolymerElements/paper-fab#^2.0.0"
   },
