@@ -65,22 +65,13 @@
 
             .icon iron-icon {
                 color: var(--dark-primary-color);
-            }
+            }  
 
-            @media (min-width: 868px) {
-                /*.container[wrap-reverse] {
-                    flex-wrap: nowrap;
-                }*/
-
-                .row-1[desktop-space-around],
-                .row-2[desktop-space-around] {
-                    justify-content: space-around;
-                }
-
+            @media (min-width: 868px) {               
                 .description-block {
                     margin-right: 16px;
                     padding: 48px;
-                }
+                }                
 
                 .statistics-block {
                     margin-left: 16px;
@@ -91,9 +82,33 @@
                 }                
             }
 
+             @media (min-width: 1150px) {
+                  .description-block,
+                  .statistics-block {
+                    padding: 48px 64px;
+                    margin: 0 48px;
+                }
+             }
+
         </style>
 
-        <div class="container" flex layout horizontal wrap-reverse center>
+            <iron-media-query id="mq-phone"
+                      full
+                      query="(max-width: {$ mediaQueries.xs.max $})"
+                      query-matches="{{isPhoneSize}}"></iron-media-query>
+            <iron-media-query id="mq-tablet"
+                            full
+                            query="(min-width: {$ mediaQueries.sm.min $}) and (max-width: {$ mediaQueries.sm.max $})"
+                            query-matches="{{isTabletSize}}"></iron-media-query>
+            <iron-media-query id="mq-phone-tablet"
+                            full
+                            query="(max-width: {$ mediaQueries.sm.max $})"
+                            query-matches="{{isPhoneTabletSize}}"></iron-media-query>
+            <iron-media-query id="mq-desktop"
+                            query="(min-width: {$ mediaQueries.md.min $})"
+                            query-matches="{{isDesktopSize}}"></iron-media-query>
+
+        <div class="container" flex layout horizontal center wrap-reverse>
 
             <div class="description-block" flex>
                 <h2 class="title">{$ aboutBlock.title.partA $}</br>{$ aboutBlock.title.partB $}</h3>
@@ -111,9 +126,13 @@
                   {% endfor %}
             </div>
 
-            <div class="statistics-block" flex>
+            <div class="statistics-block" flex vertical>
 
-                <div class="row-1" flex layout horizontal justified desktop-space-around>
+                <div class="row-1" flex
+                                   layout 
+                                   horizontal
+                                   justified>
+
                     <div class="count-info" layout horizontal>
                         <span class="icon" layout vertical center>
                             <iron-icon class="big-icon" icon="hoverboard:people"></iron-icon>
@@ -131,7 +150,10 @@
                     </div>
                 </div>
 
-                <div class="row-2" flex layout horizontal justified desktop-space-around>
+                <div class="row-2" flex
+                                   layout 
+                                   horizontal
+                                   justified>
                     <div class="count-info" layout horizontal>
                         <span class="icon" layout vertical center>
                             <iron-icon class="big-icon" icon="hoverboard:microphone"></iron-icon>
