@@ -2,8 +2,6 @@
 <link rel="import" href="../bower_components/polymer/lib/utils/render-status.html">
 <link rel="import" href="../bower_components/polymer/lib/utils/import-href.html">
 
-<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/blend-background.html">
-<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
@@ -13,19 +11,18 @@
 <link rel="import" href="../bower_components/app-route/app-route.html">
 
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/plastic-image/plastic-image.html">
 
 <link rel="import" href="redux-mixin.html">
 <link rel="import" href="elements/shared-styles.html">
 <link rel="import" href="elements/flex-layout-attr.html">
 <link rel="import" href="elements/hoverboard-icons.html">
-<link rel="import" href="elements/hero-block/hero-block.html">
 <link rel="import" href="elements/footer-block.html">
 
 
@@ -35,8 +32,7 @@
 
     <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
     <style>
-
-      :host {
+       :host {
         display: block;
         position: relative;
         min-height: 100vh;
@@ -75,17 +71,8 @@
       }
 
       app-header {
-        --app-header-background-front-layer: {
-          background-image: var(--hero-background-image);
-          background-position: 50% 50%;
-          transition: background-image 0.3s, background-color 0.3s;
-        };
-        --app-header-background-rear-layer: {
-          /* The header is blue when condensed */
-          background-color: var(--hero-background-color);;
-        };
         background-color: var(--hero-background-color);
-        color: var(--hero-color);
+        background-image: var(--hero-background-gradient);
         transition: background-color 0.3s;
         border-bottom: 1px solid var(--divider-color);
       }
@@ -111,22 +98,49 @@
         text-transform: uppercase;
       }
 
+      .hero-image {
+        background-color: var(--hero-background-color);
+        transition: background-color 0.3s;
+      }
+
+      app-header iron-pages {
+        z-index: 0;
+      }
+
+      .hero-overlay {
+        background-color: rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .hero-overlay[show] {
+        opacity: 1;
+      }
+
       .hero-block {
-        padding: 120px 60px 60px;
+        padding: 30px;
         display: block;
         position: relative;
         color: var(--hero-color);
-        min-height: 360px;
-        max-width: 584px;
+      }
+
+      .hero-content {
+        max-width: 480px;
       }
 
       .hero-logo {
-        --iron-image-height: 80px;
+        --iron-image-height: 50px;
+        margin-top: 30px;
       }
 
       .hero-title {
+        margin: 30px 0;
         font-size: 40px;
         text-transform: capitalize;
+      }
+
+      .hero-description {
+        margin-bottom: 30px;
       }
 
       @media (min-width: 640px) {
@@ -143,47 +157,35 @@
         }
 
         .hero-block {
-          min-height: 460px;
+          padding: 120px 60px 60px;
+        }
+
+        .hero-logo {
+          --iron-image-height: 70px;
+          margin-top: 0;
         }
       }
-
     </style>
 
-    <iron-media-query id="mq-phone"
-                      full
-                      query="(max-width: {$ mediaQueries.xs.max $})"
-                      query-matches="{{isPhoneSize}}"></iron-media-query>
-    <iron-media-query id="mq-tablet"
-                      full
-                      query="(min-width: {$ mediaQueries.sm.min $}) and (max-width: {$ mediaQueries.sm.max $})"
-                      query-matches="{{isTabletSize}}"></iron-media-query>
-    <iron-media-query id="mq-desktop"
-                      query="(min-width: {$ mediaQueries.md.min $})"
-                      query-matches="{{isDesktopSize}}"></iron-media-query>
+    <iron-media-query id="mq-phone" full query="(max-width: {$ mediaQueries.xs.max $})" query-matches="{{isPhoneSize}}"></iron-media-query>
+    <iron-media-query id="mq-tablet" full query="(min-width: {$ mediaQueries.sm.min $}) and (max-width: {$ mediaQueries.sm.max $})"
+      query-matches="{{isTabletSize}}"></iron-media-query>
+    <iron-media-query id="mq-desktop" query="(min-width: {$ mediaQueries.md.min $})" query-matches="{{isDesktopSize}}"></iron-media-query>
 
     <app-location route="{{appRoute}}"></app-location>
-    <app-route
-      route="{{appRoute}}"
-      pattern="/:page"
-      data="{{routeData}}"
-      tail="{{subroute}}">
+    <app-route route="{{appRoute}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}">
     </app-route>
 
     <app-drawer-layout drawer-width="300px" force-narrow fullbleed>
 
       <app-drawer id="drawer" slot="drawer" opened="[[ui.isDrawerOpened]]" swipe-open>
         <app-toolbar layout vertical start>
-          <iron-image class="toolbar-logo" src="/images/logo.svg" alt="{$ title $}"></iron-image>
+          <plastic-image class="toolbar-logo" srcset="/images/logo-monochrome.svg" alt="{$ title $}"></plastic-image>
           <h2 class="dates">{$ dates $}</h2>
           <h3 class="location">{$ location.short $}</h3>
         </app-toolbar>
 
-        <iron-selector
-          class="drawer-list"
-          selected="[[route]]"
-          attr-for-selected="path"
-          selected-class="selected"
-          role="navigation">
+        <iron-selector class="drawer-list" selected="[[route]]" attr-for-selected="path" selected-class="selected" role="navigation">
           {% for nav in navigation %}
           <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer">{$ nav.title $}</a>
           {% endfor %}
@@ -192,27 +194,16 @@
 
       <app-header-layout>
 
-        <app-header slot="header" effects="waterfall blend-background" condenses fixed>
+        <app-header id="appHeader" slot="header" condenses fixed>
           <app-toolbar class="header" sticky>
-            <paper-icon-button
-              icon="hoverboard:menu"
-              aria-label="Menu"
-              hidden$="[[!isPhoneSize]]"
-              on-tap="openDrawer">
-            </paper-icon-button>
+            <paper-icon-button icon="hoverboard:menu" aria-label="Menu" hidden$="[[!isPhoneSize]]" on-tap="openDrawer"></paper-icon-button>
             <div layout horizontal center flex>
               <a href="/" hidden$="[[isPhoneSize]]" layout horizontal>
-                <iron-image class="toolbar-logo" src="/images/logo.svg" alt="{$ title $}"></iron-image>
+                <plastic-image class="toolbar-logo" srcset="/images/logo-monochrome.svg" alt="{$ title $}"></plastic-image>
               </a>
             </div>
 
-            <paper-tabs
-              class="nav-items"
-              selected="[[route]]"
-              attr-for-selected="name"
-              hidden$="[[isPhoneSize]]"
-              role="navigation"
-              noink>
+            <paper-tabs class="nav-items" selected="[[route]]" attr-for-selected="name" hidden$="[[isPhoneSize]]" role="navigation" noink>
               {% for nav in navigation %}
               <paper-tab name="{$ nav.route $}" class="nav-item" link>
                 <a href="{$ nav.permalink $}" layout vertical center-center>{$ nav.title $}</a>
@@ -222,25 +213,22 @@
           </app-toolbar>
 
           <app-toolbar class="hero-block" layout start vertical center-justified>
+            <plastic-image class="hero-image" srcset="[[hero.background.image]]" sizing="cover" lazy-load preload fade fit></plastic-image>
+            <div class="hero-overlay" show$=[[hero.background.image]] fit></div>
             <iron-pages selected="[[route]]" attr-for-selected="route" fallback-selection="default">
-              <div route="home">
-                <iron-image class="hero-logo" src="/images/logo.svg" alt="{$ title $}"></iron-image>
-                <p class="highlight-font">The biggest Google tech conference in CEE. All about Android, Web, and Cloud.</p>
+              <div class="hero-content" route="home">
+                <plastic-image class="hero-logo" srcset="/images/logo.svg" alt="{$ title $}"></plastic-image>
+                <p class="hero-description highlight-font">[[hero.description]]</p>
               </div>
-              <div route="speakers">
-                <div class="hero-title highlight-font">[[route]]</div>
-                <p>Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back
-                  often as we add more speakers, including our customers and partners.</p>
-              </div>
-              <div route="default">
-                <div class="hero-title">[[route]]</div>
+              <div class="hero-content" route="default">
+                <div class="hero-title highlight-font">[[hero.title]]</div>
+                <p class="hero-description">[[hero.description]]</p>
               </div>
             </iron-pages>
           </app-toolbar>
 
         </app-header>
 
-        <div style="height: 200vh"></div>
 
         <footer-block></footer-block>
       </app-header-layout>
@@ -248,7 +236,6 @@
   </template>
 
   <script>
-
     class HoverboardApp extends ReduxMixin(Polymer.Element) {
 
       static get is() {
@@ -316,9 +303,10 @@
         if (!this.hero) return;
         this.updateStyles({
           '--hero-background-color': this.hero.background.color || '',
-          '--hero-background-image': `url(${this.hero.background.image || ''})`,
+          '--hero-background-gradient': this.hero.background.gradient || '',
           '--hero-color': this.hero.fontColor || ''
         });
+        if (this.hero.description) this.$.appHeader.resetLayout();
       }
 
       _routeDataChanged(page) {
@@ -330,7 +318,6 @@
     }
 
     customElements.define(HoverboardApp.is, HoverboardApp);
-
   </script>
 
 </dom-module>

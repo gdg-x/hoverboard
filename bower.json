@@ -15,9 +15,10 @@
     "iron-image": "PolymerElements/iron-image#^2.0.0",
     "iron-pages": "PolymerElements/iron-pages#2.0.0",
     "paper-tabs": "PolymerElements/paper-tabs#^2.0.0",
-    "polymer-redux": "tur-nr/polymer-redux#polymer-2",
+    "polymer-redux": "tur-nr/polymer-redux#^1.0.1",
     "paper-input": "PolymerElements/paper-input#^2.0.0",
-    "paper-fab": "PolymerElements/paper-fab#^2.0.0"
+    "paper-fab": "PolymerElements/paper-fab#^2.0.0",
+    "plastic-image": "mlisook/plastic-image#^1.0.4"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0"
