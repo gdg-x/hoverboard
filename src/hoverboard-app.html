@@ -192,9 +192,9 @@
         </iron-selector>
       </app-drawer>
 
-      <app-header-layout>
+      <app-header-layout id="headerLayout">
 
-        <app-header id="appHeader" slot="header" condenses fixed>
+        <app-header slot="header" condenses fixed>
           <app-toolbar class="header" sticky>
             <paper-icon-button icon="hoverboard:menu" aria-label="Menu" hidden$="[[!isPhoneSize]]" on-tap="openDrawer"></paper-icon-button>
             <div layout horizontal center flex>
@@ -306,7 +306,7 @@
           '--hero-background-gradient': this.hero.background.gradient || '',
           '--hero-color': this.hero.fontColor || ''
         });
-        if (this.hero.description) this.$.appHeader.resetLayout();
+        this.$.headerLayout.resetLayout();
       }
 
       _routeDataChanged(page) {

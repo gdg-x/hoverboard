@@ -2,7 +2,7 @@ const uiReducer = (state = initialState.ui, action) => {
   switch (action.type) {
     case TOGGLE_DRAWER:
       return Object.assign({}, state, {
-        isDrawerOpened: action.value !== null ? action.value : !state.ui.isDrawerOpened
+        isDrawerOpened: action.value || !state.isDrawerOpened
       });
     default:
       return state;
