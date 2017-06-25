@@ -1,5 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
 
 
 <dom-module id="footer-nav">
@@ -68,12 +68,12 @@
     <div class="nav-inline" layout flex>
 
       <a href="{$ organizer.url $}" target="_blank" rel="noopener noreferrer">
-        <iron-image
+        <plastic-image
           class="footer-logo"
-          src="../../images/organizer-logo.svg"
+          srcset="../../images/organizer-logo.svg"
           sizing="contain"
           alt="{$ organizer.name $}">
-        </iron-image>
+        </plastic-image>
       </a>
 
       <div class="copyright">
