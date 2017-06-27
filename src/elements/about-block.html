@@ -1,0 +1,210 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="shared-animations.html">
+<link rel="import" href="hoverboard-icons.html">
+
+<dom-module id="about-block">
+    <template>
+        <style is="custom-style" include="shared-styles flex flex-alignment flex-reverse fade-animations"></style>
+
+        <style>
+             :host {
+                display: block;
+                position: relative;
+                color: var(--dark-primary-color);
+            }
+
+            .container {
+                margin: 48px 40px;
+            }
+
+            .description-block,
+            .statistics-block {
+                padding: 16px;
+            }
+
+            .statistics-row:first-of-type {
+                margin-bottom: 16px;
+            }
+
+            .statistics-row:last-of-type {
+                margin-top: 16px;
+            }
+
+            .block-cta paper-button {
+                padding-left: 0;
+                margin-left: 0;
+            }
+
+            .block-cta iron-icon {
+                margin-left: 8px;
+            }
+
+            .block-cta .cta-label {
+                font-size: 14px;
+            }
+
+            .block-subtitle {
+                color: var(--secondary-text-color);
+            }
+
+            .icon-label {
+                color: var(--secondary-text-color);
+                margin-top: 8px;
+            }
+
+            .count-info {
+                padding: 16px 0;
+            }
+
+            .numbers {
+                margin-left: 16px;
+                font-size: 32px;
+                vertical-align: middle;
+            }
+
+            .icon iron-icon {
+                color: var(--dark-primary-color);
+            }
+
+            .title {
+                width: 300px;
+            }
+
+            .description-block {
+                animation-duration: 1s;
+                animation-fill-mode: both;
+                animation-name: fadeInUp;
+            } 
+
+            .attendees-count {
+                animation-duration: 1.5s;                
+                animation-delay: 1.5s;
+                animation-fill-mode: both;
+                animation-name: fadeInAttendeesCount;
+            }
+
+            .days-count {
+                
+                animation-duration: 1.5s;                
+                animation-delay: 1.5s;
+                animation-fill-mode: both;
+                animation-name: fadeInDaysCount;
+            }
+
+            .sessions-count {
+                animation-duration: 1.5s;                
+                animation-delay: 1.5s;
+                animation-fill-mode: both;
+                animation-name: fadeInSessionsCount;
+            }
+
+             .tracks-count {
+                animation-duration: 1.5s;             
+                animation-delay: 1.5s;
+                animation-fill-mode: both;
+                animation-name: fadeInTracksCount;
+            }          
+
+            @media (min-width: 868px) {               
+                .description-block {
+                    margin-right: 16px;
+                    padding: 48px;
+                }                
+
+                .statistics-block {
+                    margin-left: 16px;
+                }
+
+                 .numbers {
+                    font-size: 50px;
+                }                
+            }
+
+             @media (min-width: 1150px) {
+                  .description-block,
+                  .statistics-block {
+                    padding: 48px 64px;
+                    margin: 0 48px;
+                }
+             }
+
+        </style>
+
+        <div class="container" flex layout horizontal center wrap-reverse>
+
+            <div class="description-block" flex>
+                <h2 class="title">{$ aboutBlock.title $}</h2>
+
+                  {% for descriptionBlock in aboutBlock.descriptionBlocks %}
+
+                    <p class="block-subtitle"> {$ descriptionBlock.description $} </p>
+                     <a class="block-cta" href="{$ descriptionBlock.callToAction.link $}" target="_blank" rel="noopener noreferrer">
+                        <paper-button>
+                            <span class="cta-label">{$ descriptionBlock.callToAction.label $}</span>
+                            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+                        </paper-button>
+                    </a>
+
+                  {% endfor %}
+            </div>
+
+            <div class="statistics-block" flex vertical>
+
+                <div class="statistics-row" flex
+                                   layout 
+                                   horizontal
+                                   justified>
+
+                    <div class="count-info attendees-count" layout horizontal>
+                        <span class="icon" layout vertical center>
+                            <iron-icon class="big-icon" icon="hoverboard:people"></iron-icon>
+                            <span class="icon-label">{$ aboutBlock.statisticsBlock.attendees.label $}</span>
+                        </span>
+                        <span class="numbers">{$ aboutBlock.statisticsBlock.attendees.number $}</span>
+                    </div>
+
+                    <div class="count-info days-count" layout horizontal>
+                        <span class="icon" layout vertical center>
+                            <iron-icon class="big-icon" icon="hoverboard:calendar"></iron-icon>
+                            <span class="icon-label">{$ aboutBlock.statisticsBlock.days.label $}</span>
+                        </span>
+                        <span class="numbers">{$ aboutBlock.statisticsBlock.days.number $}</span>
+                    </div>
+                </div>
+
+                <div class="statistics-row" flex
+                                   layout 
+                                   horizontal
+                                   justified>
+                    <div class="count-info sessions-count" layout horizontal>
+                        <span class="icon" layout vertical center>
+                            <iron-icon class="big-icon" icon="hoverboard:microphone"></iron-icon>
+                            <span class="icon-label">{$ aboutBlock.statisticsBlock.sessions.label $}</span>
+                        </span>
+                        <span class="numbers">{$ aboutBlock.statisticsBlock.sessions.number $}</span>
+                    </div>
+
+                    <div class="count-info tracks-count" layout horizontal>
+                        <span class="icon" layout vertical center>
+                            <iron-icon class="big-icon" icon="hoverboard:tracks"></iron-icon>
+                            <span class="icon-label">{$ aboutBlock.statisticsBlock.tracks.label $}</span>
+                        </span>
+                        <span class="numbers">{$ aboutBlock.statisticsBlock.tracks.number $}</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </template>
+
+    <script>
+        class AboutBlock extends Polymer.Element {
+            static get is() { return 'about-block' }
+        }
+
+        customElements.define(AboutBlock.is, AboutBlock);
+    </script>
+</dom-module>

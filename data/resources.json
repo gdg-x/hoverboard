@@ -74,5 +74,42 @@
   "yourEmail": "Your email",
   "subscribe": "Subscribe",
   "subscribeNote": "No spam, only the latest news and updates!",
-  "codeOfConduct": "Code of Conduct"
+  "codeOfConduct": "Code of Conduct",
+  "aboutBlock": {
+    "title": "What you need to know, before you ask.",
+    "descriptionBlocks": [
+      {
+        "description": "GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases.",
+        "callToAction": {
+          "label": "Explore featured session",
+          "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        }
+      },
+      {
+        "description": "Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
+        "callToAction": {
+          "label": "See how it was in 2016",
+          "link": "https://www.youtube.com/watch?v=TdpbgRgz6eE"
+        }        
+      }        
+    ],
+    "statisticsBlock" : {
+      "attendees": {
+        "label": "Attendees",
+        "number": "900"
+      },
+      "days": {
+        "label": "Days",
+        "number": "2"
+      },
+      "sessions": {
+        "label": "Sessions",
+        "number": "50"
+      },
+      "tracks": {
+        "label": "Tracks",
+        "number": "4"
+      }
+    }
+  }
 }
