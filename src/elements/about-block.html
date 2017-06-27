@@ -24,11 +24,11 @@
                 padding: 16px;
             }
 
-            .statistics-block .row-1 {
+            .statistics-row:first-of-type {
                 margin-bottom: 16px;
             }
 
-            .statistics-block .row-2 {
+            .statistics-row:last-of-type {
                 margin-top: 16px;
             }
 
@@ -135,7 +135,7 @@
         <div class="container" flex layout horizontal center wrap-reverse>
 
             <div class="description-block" flex>
-                <h2 class="title">{$ aboutBlock.title $}</h3>
+                <h2 class="title">{$ aboutBlock.title $}</h2>
 
                   {% for descriptionBlock in aboutBlock.descriptionBlocks %}
 
@@ -152,7 +152,7 @@
 
             <div class="statistics-block" flex vertical>
 
-                <div class="row-1" flex
+                <div class="statistics-row" flex
                                    layout 
                                    horizontal
                                    justified>
@@ -174,7 +174,7 @@
                     </div>
                 </div>
 
-                <div class="row-2" flex
+                <div class="statistics-row" flex
                                    layout 
                                    horizontal
                                    justified>
