@@ -11,14 +11,15 @@
 <link rel="import" href="../bower_components/app-route/app-route.html">
 
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/plastic-image/plastic-image.html">
 
-<link rel="import" href="redux-store.html">
+<link rel="import" href="redux-mixin.html">
 <link rel="import" href="elements/shared-styles.html">
 <link rel="import" href="elements/flex-layout-attr.html">
 <link rel="import" href="elements/hoverboard-icons.html">
@@ -32,8 +33,7 @@
 
     <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
     <style>
-
-      :host {
+       :host {
         display: block;
         position: relative;
         min-height: 100vh;
@@ -72,8 +72,16 @@
       }
 
       app-header {
+        background-color: var(--hero-background-color);
+        background-image: var(--hero-background-gradient);
+        transition: background-color 0.3s;
+        border-bottom: 1px solid var(--divider-color);
+      }
+
+      .header {
         background-color: var(--primary-background-color);
         border-bottom: 1px solid var(--divider-color);
+        z-index: 1;
       }
 
       app-toolbar {
@@ -91,6 +99,51 @@
         text-transform: uppercase;
       }
 
+      .hero-image {
+        background-color: var(--hero-background-color);
+        transition: background-color 0.3s;
+      }
+
+      app-header iron-pages {
+        z-index: 0;
+      }
+
+      .hero-overlay {
+        background-color: rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .hero-overlay[show] {
+        opacity: 1;
+      }
+
+      .hero-block {
+        padding: 30px;
+        display: block;
+        position: relative;
+        color: var(--hero-color);
+      }
+
+      .hero-content {
+        max-width: 480px;
+      }
+
+      .hero-logo {
+        --iron-image-height: 50px;
+        margin-top: 30px;
+      }
+
+      .hero-title {
+        margin: 30px 0;
+        font-size: 40px;
+        text-transform: capitalize;
+      }
+
+      .hero-description {
+        margin-bottom: 30px;
+      }
+
       @media (min-width: 640px) {
         app-toolbar {
           padding: 0 36px;
@@ -103,73 +156,55 @@
             height: 64px;
           };
         }
-      }
 
+        .hero-block {
+          padding: 120px 60px 60px;
+        }
+
+        .hero-logo {
+          --iron-image-height: 70px;
+          margin-top: 0;
+        }
+      }
     </style>
 
-    <iron-media-query id="mq-phone"
-                      full
-                      query="(max-width: {$ mediaQueries.xs.max $})"
-                      query-matches="{{isPhoneSize}}"></iron-media-query>
-    <iron-media-query id="mq-tablet"
-                      full
-                      query="(min-width: {$ mediaQueries.sm.min $}) and (max-width: {$ mediaQueries.sm.max $})"
-                      query-matches="{{isTabletSize}}"></iron-media-query>
-    <iron-media-query id="mq-desktop"
-                      query="(min-width: {$ mediaQueries.md.min $})"
-                      query-matches="{{isDesktopSize}}"></iron-media-query>
+    <iron-media-query id="mq-phone" full query="(max-width: {$ mediaQueries.xs.max $})" query-matches="{{isPhoneSize}}"></iron-media-query>
+    <iron-media-query id="mq-tablet" full query="(min-width: {$ mediaQueries.sm.min $}) and (max-width: {$ mediaQueries.sm.max $})"
+      query-matches="{{isTabletSize}}"></iron-media-query>
+    <iron-media-query id="mq-desktop" query="(min-width: {$ mediaQueries.md.min $})" query-matches="{{isDesktopSize}}"></iron-media-query>
 
-    <app-location route="{{route}}"></app-location>
-    <app-route
-      route="{{route}}"
-      pattern="/:page"
-      data="{{routeData}}"
-      tail="{{subroute}}">
+    <app-location route="{{appRoute}}"></app-location>
+    <app-route route="{{appRoute}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}">
     </app-route>
 
     <app-drawer-layout drawer-width="300px" force-narrow fullbleed>
 
-      <app-drawer id="drawer" slot="drawer" opened="[[ui.isDrawerOpened]]">
+      <app-drawer id="drawer" slot="drawer" opened="[[ui.isDrawerOpened]]" swipe-open>
         <app-toolbar layout vertical start>
-          <iron-image class="toolbar-logo" src="/images/logo.svg" alt="{$ title $}"></iron-image>
+          <plastic-image class="toolbar-logo" srcset="/images/logo-monochrome.svg" alt="{$ title $}"></plastic-image>
           <h2 class="dates">{$ dates $}</h2>
           <h3 class="location">{$ location.short $}</h3>
         </app-toolbar>
 
-        <iron-selector
-          class="drawer-list"
-          selected="[[routeData.page]]"
-          attr-for-selected="path"
-          selected-class="selected"
-          role="navigation">
+        <iron-selector class="drawer-list" selected="[[route]]" attr-for-selected="path" selected-class="selected" role="navigation">
           {% for nav in navigation %}
           <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer">{$ nav.title $}</a>
           {% endfor %}
         </iron-selector>
       </app-drawer>
 
-      <app-header-layout>
-        <app-header id="header" slot="header" effects="waterfall" condenses reveals>
-          <app-toolbar>
-            <paper-icon-button
-              icon="hoverboard:menu"
-              aria-label="Menu"
-              hidden$="[[!isPhoneSize]]"
-              on-tap="openDrawer">
-            </paper-icon-button>
+      <app-header-layout id="headerLayout">
+
+        <app-header slot="header" condenses fixed>
+          <app-toolbar class="header" sticky>
+            <paper-icon-button icon="hoverboard:menu" aria-label="Menu" hidden$="[[!isPhoneSize]]" on-tap="openDrawer"></paper-icon-button>
             <div layout horizontal center flex>
               <a href="/" hidden$="[[isPhoneSize]]" layout horizontal>
-                <iron-image class="toolbar-logo" src="/images/logo.svg" alt="{$ title $}"></iron-image>
+                <plastic-image class="toolbar-logo" srcset="/images/logo-monochrome.svg" alt="{$ title $}"></plastic-image>
               </a>
             </div>
 
-            <paper-tabs
-              class="nav-items"
-              selected="[[routeData.page]]"
-              attr-for-selected="name"
-              hidden$="[[isPhoneSize]]"
-              role="navigation"
-              noink>
+            <paper-tabs class="nav-items" selected="[[route]]" attr-for-selected="name" hidden$="[[isPhoneSize]]" role="navigation" noink>
               {% for nav in navigation %}
               <paper-tab name="{$ nav.route $}" class="nav-item" link>
                 <a href="{$ nav.permalink $}" layout vertical center-center>{$ nav.title $}</a>
@@ -177,18 +212,32 @@
               {% endfor %}
             </paper-tabs>
           </app-toolbar>
+
+          <app-toolbar class="hero-block" layout start vertical center-justified>
+            <plastic-image class="hero-image" srcset="[[hero.background.image]]" sizing="cover" lazy-load preload fade fit></plastic-image>
+            <div class="hero-overlay" show$=[[hero.background.image]] fit></div>
+            <iron-pages selected="[[route]]" attr-for-selected="route" fallback-selection="default">
+              <div class="hero-content" route="home">
+                <plastic-image class="hero-logo" srcset="/images/logo.svg" alt="{$ title $}"></plastic-image>
+                <p class="hero-description highlight-font">[[hero.description]]</p>
+              </div>
+              <div class="hero-content" route="default">
+                <div class="hero-title highlight-font">[[hero.title]]</div>
+                <p class="hero-description">[[hero.description]]</p>
+              </div>
+            </iron-pages>
+          </app-toolbar>
+
         </app-header>
-
-        <!-- TODO: Temporary implementation, should be improved after pages routing implemented with Redux -->
+        
         <home-page></home-page>
-
+        
         <footer-block></footer-block>
       </app-header-layout>
     </app-drawer-layout>
   </template>
 
   <script>
-
     class HoverboardApp extends ReduxMixin(Polymer.Element) {
 
       static get is() {
@@ -200,8 +249,23 @@
           ui: {
             type: Object,
             statePath: 'ui'
+          },
+          route: {
+            type: String,
+            statePath: 'route'
+          },
+          hero: {
+            type: Object,
+            statePath: 'hero',
+            observer: '_heroChanged'
           }
         };
+      }
+
+      static get observers() {
+        return [
+          '_routeDataChanged(routeData.page)'
+        ];
       }
 
       constructor() {
@@ -236,10 +300,26 @@
           });
         }
       }
+
+      _heroChanged() {
+        if (!this.hero) return;
+        this.updateStyles({
+          '--hero-background-color': this.hero.background.color || '',
+          '--hero-background-gradient': this.hero.background.gradient || '',
+          '--hero-color': this.hero.fontColor || ''
+        });
+        this.$.headerLayout.resetLayout();
+      }
+
+      _routeDataChanged(page) {
+        if (!page && page !== '') {
+          return;
+        }
+        routeActions.setRoute(page);
+      }
     }
 
     customElements.define(HoverboardApp.is, HoverboardApp);
-
   </script>
 
 </dom-module>

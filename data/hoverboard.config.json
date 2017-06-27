@@ -21,7 +21,7 @@
   "hashtag": "DevFest17",
   "navigation": [
     {
-      "route": "",
+      "route": "home",
       "permalink": "/",
       "title": "Home"
     },
@@ -46,6 +46,47 @@
       "title": "Team"
     }
   ],
+  "heroSettings": {
+    "home": {
+      "description": "The biggest Google tech conference in CEE. All about Android, Web, and Cloud.",
+      "background": {
+        "color": "#673ab7",
+        "image": "/images/backgrounds/home.jpg"
+      },
+      "fontColor": "#FFF"
+    },
+    "blog": {
+      "title": "Blog",
+      "background": {
+        "color": "#FFF"
+      },
+      "fontColor": "#424242"
+    },
+    "speakers": {
+      "title": "Speakers",
+      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
+      "background": {
+        "color": "#FFF"
+      },
+      "fontColor": "#424242"
+    },
+    "schedule": {
+      "title": "Schedule",
+      "background": {
+        "color": "rgba(33, 147, 176, 0.1)",
+        "gradient": "linear-gradient(to right, #2193b0, #6dd5ed)"
+      },
+      "fontColor": "#fff"
+    },
+    "team": {
+      "title": "Team",
+      "background": {
+        "color": "rgba(0, 198, 255, 0.1)",
+        "gradient": "linear-gradient(to right, #00c6ff, #0072ff)"
+      },
+      "fontColor": "#fff"
+    }
+  },
   "mediaQueries": {
     "xs": {
       "max": "639px"
