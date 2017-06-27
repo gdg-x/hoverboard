@@ -1,0 +1,28 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="schedule-page">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+    <style>
+
+      :host  {
+        display: block;
+      }
+
+    </style>
+
+   <h3>Hello from the schedule page</h3>
+  </template>
+
+  <script>
+
+    class SchedulePage extends Polymer.Element {
+      static get is() { return 'schedule-page' }
+    }
+
+    customElements.define(SchedulePage.is, SchedulePage);
+
+  </script>
+</dom-module>
+
