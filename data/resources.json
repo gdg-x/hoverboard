@@ -10,44 +10,45 @@
   "blog": "Blog",
   "partnershipResources": "Partnership Resources",
   "eventResources": "Event Resources",
+  "buyTicket": "Buy ticket",
   "footerRelBlock": [
     {
       "title": "About",
       "links": [
-          {
-            "name": "GDG Lviv",
-            "url": "hhttp://lviv.gdg.org.ua/"
-          },
-          {
-            "name": "Google Developers Group",
-            "url": "https://developers.google.com/"
-          },
-          {
-            "name": "Meet the Team",
-            "url": "https://devfest.gdg.org.ua/team/"
-          }
+        {
+          "name": "GDG Lviv",
+          "url": "hhttp://lviv.gdg.org.ua/"
+        },
+        {
+          "name": "Google Developers Group",
+          "url": "https://developers.google.com/"
+        },
+        {
+          "name": "Meet the Team",
+          "url": "https://devfest.gdg.org.ua/team/"
+        }
       ]
     },
     {
       "title": "Explore Past DevFests",
       "links": [
-          {
-            "name": "DFUA 2013",
-            "url": "http://gdg-devfest-ua.appspot.com/"
-          },
-          {
-            "name": "DFUA 2014",
-            "url": "https://dfua14.firebaseapp.com//"
-          },
-          {
-            "name": "DFUA 2015",
-            "url": "https://dfua15.firebaseapp.com/"
-          },
-          {
-            "name": "DFUA 2016",
-            "url": "https://dfua16.firebaseapp.com/"
-          }
-        ]
+        {
+          "name": "DFUA 2013",
+          "url": "http://gdg-devfest-ua.appspot.com/"
+        },
+        {
+          "name": "DFUA 2014",
+          "url": "https://dfua14.firebaseapp.com//"
+        },
+        {
+          "name": "DFUA 2015",
+          "url": "https://dfua15.firebaseapp.com/"
+        },
+        {
+          "name": "DFUA 2016",
+          "url": "https://dfua16.firebaseapp.com/"
+        }
+      ]
     },
     {
       "title": "Event Resources",
@@ -90,10 +91,10 @@
         "callToAction": {
           "label": "See how it was in 2016",
           "link": "https://www.youtube.com/watch?v=TdpbgRgz6eE"
-        }        
-      }        
+        }
+      }
     ],
-    "statisticsBlock" : {
+    "statisticsBlock": {
       "attendees": {
         "label": "Attendees",
         "number": "900"
@@ -111,5 +112,10 @@
         "number": "4"
       }
     }
+  },
+  "ticketsBlock": {
+    "title": "Tickets",
+    "ticketsDetails": "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
+    "soldOut": "Sold out"
   }
 }

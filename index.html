@@ -72,6 +72,7 @@
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+  <script src="bower_components/firebase/firebase.js"></script>
   <script>
     // Register the base URL
     const baseUrl = document.querySelector('base').href;
@@ -82,6 +83,12 @@
         navigator.serviceWorker.register(baseUrl + 'service-worker.js');
       });
     }
+    firebase.initializeApp({
+      apiKey: '{$ firebase.apiKey $}',
+      authDomain: '{$ firebase.authDomain $}',
+      databaseURL: '{$ firebase.databaseURL $}',
+      projectId: '{$ firebase.projectId $}',
+    });
   </script>
 
   <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>

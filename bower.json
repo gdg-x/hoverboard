@@ -21,13 +21,13 @@
     "polymer": "Polymer/polymer#^2.0.1",
     "iron-icon": "PolymerElements/iron-icon#^2.0.0",
     "paper-button": "PolymerElements/paper-button#^2.0.0",
-    "iron-lazy-pages": "TimvdLippe/iron-lazy-pages#^2.0.2"
+    "iron-lazy-pages": "TimvdLippe/iron-lazy-pages#^2.0.2",
+    "firebase": "^4.1.3"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0"
   },
   "resolutions": {
-    "polymer": "^2.0.1",
-    "webcomponentsjs": "^1.0.1"
+    "polymer": "^2.0.1"
   }
 }

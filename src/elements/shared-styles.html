@@ -24,6 +24,7 @@
 
         /* Custom */
         --default-background-color: #FAFAFA;
+        --border-radius: 2px;
       }
 
       * {
@@ -63,7 +64,13 @@
 
       body {
         text-rendering: optimizeLegibility;
+        background-color: #fafafa;
         color: var(--primary-text-color);
+      }
+
+      paper-button[primary] {
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
       }
 
       .content {
