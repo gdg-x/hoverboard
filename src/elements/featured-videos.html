@@ -1,0 +1,83 @@
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+
+<dom-module id="featured-videos">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+    <style>
+
+      :host  {
+        display: block;
+        width: 100%;       
+      }
+
+       paper-card {
+            width: 400px;
+            height: 400px;
+            margin: 20px;
+        }
+
+    </style>
+
+    <div class="videos" flex layout horizontal center>
+          <paper-card image="donuts.png" alt="Donuts">
+              <div class="card-content">
+                <div class="cafe-header">Cafe Basilico
+                  <div class="cafe-location cafe-light">
+                    <span>250ft</span>
+                  </div>
+                </div>
+                <p>$・Italian, Cafe</p>
+                </div>
+              <div class="card-actions">
+                <p>Tonight's availability</p>
+                <paper-button class="cafe-reserve">Reserve</paper-button>
+              </div>
+            </paper-card>
+              <paper-card image="donuts.png" alt="Donuts">
+              <div class="card-content">
+                <div class="cafe-header">Cafe Basilico
+                  <div class="cafe-location cafe-light">
+                    <span>250ft</span>
+                  </div>
+                </div>
+                <p>$・Italian, Cafe</p>
+              </div>
+              <div class="card-actions">
+                <p>Tonight's availability</p>
+                <paper-button class="cafe-reserve">Reserve</paper-button>
+              </div>
+            </paper-card>
+              <paper-card image="donuts.png" alt="Donuts">
+              <div class="card-content">
+                <div class="cafe-header">Cafe Basilico
+                  <div class="cafe-location cafe-light">
+                    <span>250ft</span>
+                  </div>
+                </div>
+                <p>$・Italian, Cafe</p>
+              </div>
+              <div class="card-actions">
+                <p>Tonight's availability</p>
+                <paper-button class="cafe-reserve">Reserve</paper-button>
+              </div>
+            </paper-card>
+    </div>
+
+  
+
+  </template>
+
+  <script>
+
+    class FeaturedVideos extends Polymer.Element {
+      static get is() { return 'featured-videos' }
+    }
+
+    customElements.define(FeaturedVideos.is, FeaturedVideos);
+
+  </script>
+</dom-module>
+
