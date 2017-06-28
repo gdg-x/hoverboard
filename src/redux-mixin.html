@@ -10,17 +10,24 @@
 
   const initialState = {
     ui: {
-      isDrawerOpened: false
+      isDrawerOpened: false,
+      viewport: {
+        isPhone: true,
+        isTablet: false,
+        isDesktop: false
+      }
     },
     route: 'home',
-    hero: null
+    hero: null,
+    tickets: []
   };
 
   const appReducer = (state = initialState, action) => {
     return {
       ui: uiReducer(state.ui, action),
       route: routeReducer(state.route, action),
-      hero: heroReducer(state.hero, action)
+      hero: heroReducer(state.hero, action),
+      tickets: ticketsReducer(state.tickets, action)
     };
   };
 

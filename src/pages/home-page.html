@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../elements/about-block.html">
+<link rel="import" href="../elements/tickets-block.html">
 
 <dom-module id="home-page">
   <template>
@@ -7,19 +8,22 @@
 
     <style>
 
-      :host  {
+      :host {
         display: block;
       }
 
     </style>
 
-   <about-block></about-block>
+    <about-block></about-block>
+    <tickets-block></tickets-block>
   </template>
 
   <script>
 
     class HomePage extends Polymer.Element {
-      static get is() { return 'home-page' }
+      static get is() {
+        return 'home-page'
+      }
     }
 
     customElements.define(HomePage.is, HomePage);
