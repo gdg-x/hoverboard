@@ -5,7 +5,9 @@
 <link rel="import" href="../elements/statistics-block.html">
 <link rel="import" href="../elements/featured-people.html">
 <link rel="import" href="../elements/featured-videos.html">
-<link rel="import" href="../elements/call-to-action.html">
+{% if callToAction %}
+  <link rel="import" href="../elements/call-to-action.html">
+{% endif %}
 <link rel="import" href="../elements/about-block.html">
 <link rel="import" href="../elements/tickets-block.html">
 <link rel="import" href="../elements/latest-posts.html">
