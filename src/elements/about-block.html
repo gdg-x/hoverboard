@@ -37,10 +37,6 @@
                 margin-left: 0;
             }
 
-            .block-cta iron-icon {
-                margin-left: 8px;
-            }
-
             .block-cta .cta-label {
                 font-size: 14px;
             }
@@ -76,42 +72,42 @@
                 animation-duration: 1s;
                 animation-fill-mode: both;
                 animation-name: fadeInUp;
-            } 
+            }
 
             .attendees-count {
-                animation-duration: 1.5s;                
+                animation-duration: 1.5s;
                 animation-delay: 1.5s;
                 animation-fill-mode: both;
                 animation-name: fadeInAttendeesCount;
             }
 
             .days-count {
-                
-                animation-duration: 1.5s;                
+
+                animation-duration: 1.5s;
                 animation-delay: 1.5s;
                 animation-fill-mode: both;
                 animation-name: fadeInDaysCount;
             }
 
             .sessions-count {
-                animation-duration: 1.5s;                
+                animation-duration: 1.5s;
                 animation-delay: 1.5s;
                 animation-fill-mode: both;
                 animation-name: fadeInSessionsCount;
             }
 
              .tracks-count {
-                animation-duration: 1.5s;             
+                animation-duration: 1.5s;
                 animation-delay: 1.5s;
                 animation-fill-mode: both;
                 animation-name: fadeInTracksCount;
-            }          
+            }
 
-            @media (min-width: 868px) {               
+            @media (min-width: 868px) {
                 .description-block {
                     margin-right: 16px;
                     padding: 48px;
-                }                
+                }
 
                 .statistics-block {
                     margin-left: 16px;
@@ -119,7 +115,7 @@
 
                  .numbers {
                     font-size: 50px;
-                }                
+                }
             }
 
              @media (min-width: 1150px) {
@@ -141,7 +137,7 @@
 
                     <p class="block-subtitle"> {$ descriptionBlock.description $} </p>
                      <a class="block-cta" href="{$ descriptionBlock.callToAction.link $}" target="_blank" rel="noopener noreferrer">
-                        <paper-button>
+                        <paper-button class="icon-right">
                             <span class="cta-label">{$ descriptionBlock.callToAction.label $}</span>
                             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
                         </paper-button>
@@ -153,7 +149,7 @@
             <div class="statistics-block" flex vertical>
 
                 <div class="statistics-row" flex
-                                   layout 
+                                   layout
                                    horizontal
                                    justified>
 
@@ -175,7 +171,7 @@
                 </div>
 
                 <div class="statistics-row" flex
-                                   layout 
+                                   layout
                                    horizontal
                                    justified>
                     <div class="count-info sessions-count" layout horizontal>

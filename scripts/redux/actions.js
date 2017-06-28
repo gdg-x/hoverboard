@@ -37,3 +37,14 @@ const ticketsActions = {
       }));
   }
 };
+
+const partnersActions = {
+  fetchPartners: () => {
+    return firebase.database()
+      .ref('/partners')
+      .on('value', snapshot => store.dispatch({
+        type: FETCH_PARTNERS,
+        partners: snapshot.val()
+      }));
+  }
+};
