@@ -4,7 +4,6 @@ cache:
   yarn: true
   directories:
   - node_modules
-  - bower_components
   - "${NVM_PATH}_modules"
 env:
 - CXX=g++-4.8

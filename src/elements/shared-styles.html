@@ -24,6 +24,8 @@
 
         /* Custom */
         --default-background-color: #FAFAFA;
+        --animation: 0.3s ease-out;
+        --border-radius: 2px;
       }
 
       * {
@@ -58,17 +60,42 @@
         color: var(--default-primary-color);
         text-decoration: none;
         border-bottom: 1px solid transparent;
-        transition: border-color .3s ease-out;
+        transition: border-color var(--animation);
       }
 
       body {
         text-rendering: optimizeLegibility;
+        background-color: #fafafa;
         color: var(--primary-text-color);
+      }
+
+      paper-button[primary] {
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
+      }
+
+      paper-button.icon-right iron-icon {
+        margin-left: 8px;
+        --iron-icon-height: 20px;
+        --iron-icon-width: 20px;
+        transition: transform var(--animation);
+      }
+
+      paper-button.icon-right:hover iron-icon {
+        transform: translateX(4px);
       }
 
       .content {
         margin: 0 auto;
+        padding: 32px 16px;
         max-width: 1024px;
+      }
+
+      .content-title {
+        margin-bottom: 16px;
+        padding: 0;
+        font-size: 24px;
+        line-height: 30px;
       }
 
        .big-icon {

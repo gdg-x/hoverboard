@@ -21,6 +21,9 @@
 <link rel="import" href="../bower_components/iron-lazy-pages/iron-lazy-pages.html">
 <link rel="import" href="../bower_components/plastic-image/plastic-image.html">
 
+<link rel="import" href="../bower_components/iron-lazy-pages/iron-lazy-pages.html">
+<link rel="import" href="../bower_components/plastic-image/plastic-image.html">
+
 <link rel="import" href="redux-mixin.html">
 <link rel="import" href="elements/shared-styles.html">
 <link rel="import" href="elements/flex-layout-attr.html">
@@ -170,9 +173,6 @@
     </style>
 
     <iron-media-query id="mq-phone" full query="(max-width: {$ mediaQueries.xs.max $})" query-matches="{{isPhoneSize}}"></iron-media-query>
-    <iron-media-query id="mq-tablet" full query="(min-width: {$ mediaQueries.sm.min $}) and (max-width: {$ mediaQueries.sm.max $})"
-      query-matches="{{isTabletSize}}"></iron-media-query>
-    <iron-media-query id="mq-desktop" query="(min-width: {$ mediaQueries.md.min $})" query-matches="{{isDesktopSize}}"></iron-media-query>
 
     <app-location route="{{appRoute}}"></app-location>
     <app-route route="{{appRoute}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}">
@@ -231,7 +231,7 @@
 
         </app-header>
 
-        <iron-lazy-pages attr-for-selected="data-route" selected="{{route}}">
+        <iron-lazy-pages attr-for-selected="data-route" selected="[[route]]">
           <home-page data-route="home" data-path="pages/home-page.html"></home-page>
           <blog-page data-route="blog" data-path="pages/blog-page.html"></blog-page>
           <schedule-page data-route="schedule" data-path="pages/schedule-page.html"></schedule-page>
@@ -259,8 +259,7 @@
           },
           route: {
             type: String,
-            statePath: 'route',
-            notify: true
+            statePath: 'route'
           },
           hero: {
             type: Object,
@@ -272,7 +271,8 @@
 
       static get observers() {
         return [
-          '_routeDataChanged(routeData.page)'
+          '_routeDataChanged(routeData.page)',
+          '_isPhoneSizeChanged(isPhoneSize)'
         ];
       }
 
@@ -300,9 +300,6 @@
         if (!this.loadComplete) {
           Polymer.RenderStatus.afterNextRender(this, () => {
             Polymer.importHref(this.resolveUrl('lazy-resources.html'), () => {
-              if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/service-worker.js');
-              }
               this.loadComplete = true;
             });
           });
@@ -324,6 +321,10 @@
           return;
         }
         routeActions.setRoute(page);
+      }
+
+      _isPhoneSizeChanged(value) {
+        uiActions.setViewportSize({'isPhone': value});
       }
     }
 

@@ -1,0 +1,155 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../redux-mixin.html">
+<link rel="import" href="../elements/shared-styles.html">
+<link rel="import" href="../elements/flex-layout-attr.html">
+<link rel="import" href="../elements/hoverboard-icons.html">
+
+<dom-module id="tickets-block">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+
+    <style>
+      :host {
+        display: block;
+      }
+
+      .ticket-icon {
+        --iron-icon-height: 200px;
+        --iron-icon-width: 200px;
+        --iron-icon-fill-color: var(--default-primary-color);
+        max-width: 50%;
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .ticket-item {
+        padding: 16px 0;
+      }
+
+      .ticket-item:not(:last-of-type) {
+        border-bottom: 1px solid var(--divider-color);
+      }
+
+      .type-description {
+        font-size: 12px;
+        color: var(--secondary-text-color);
+      }
+
+      .ticket-dates:not(:first-of-type):not(:empty):before {
+        content: ' - ';
+      }
+
+      .ticket-dates:not(:empty) + .ticket-info:before {
+        content: '/ ';
+      }
+
+      .ticket-price-wrapper {
+        margin-left: 16px;
+        white-space: nowrap;
+      }
+
+      .price {
+        color: var(--default-primary-color);
+      }
+
+      .price[sold-out] {
+        opacity: 0.4;
+        text-decoration: line-through;
+      }
+
+      .sold-out {
+        margin-right: 8px;
+        display: none;
+        color: var(--default-primary-color);
+      }
+
+      .additional-info {
+        margin-top: 16px;
+        font-size: 14px;
+        color: var(--secondary-text-color);
+      }
+
+      .buy-button {
+        margin-top: 24px;
+      }
+    </style>
+
+    <div class="tickets-wrapper content" layout horizontal center justified>
+      <div layout horizontal center-center flex hidden$="[[viewport.isPhone]]">
+        <iron-icon class="ticket-icon" icon="hoverboard:tickets"></iron-icon>
+      </div>
+
+      <div class="tickets" flex>
+        <h1 class="content-title">{$ ticketsBlock.title $}</h1>
+        <ul>
+          <template is="dom-repeat" items="[[tickets.elements]]" as="ticket">
+            <li class="ticket-item">
+              <div layout horizontal justified center>
+                <div>
+                  [[ticket.name]]
+                  <div class="type-description">
+                    <span class="ticket-dates">[[ticket.starts]] </span>
+                    <span class="ticket-dates">[[ticket.ends]]</span>
+                    <span class="ticket-info">[[ticket.info]]</span>
+                  </div>
+                </div>
+                <div class="ticket-price-wrapper" layout horizontal>
+                  <div class="sold-out" block$="[[ticket.soldOut]]">{$ ticketsBlock.soldOut $}</div>
+                  <div class="price" sold-out$="[[ticket.soldOut]]">
+                    [[ticket.price]]
+                    <span class="currency">[[ticket.currency]]</span>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </template>
+        </ul>
+
+        <div class="additional-info">*{$ ticketsBlock.ticketsDetails $}</div>
+
+        <a href$="[[tickets.url]]" target="_blank" rel="noopener noreferrer">
+          <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>
+        </a>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+
+    class TicketsBlock extends ReduxMixin(Polymer.Element) {
+
+      static get is() {
+        return 'tickets-block'
+      }
+
+      static get properties() {
+        return {
+          tickets: {
+            type: Object,
+            statePath: 'tickets'
+          },
+          viewport: {
+            type: Object,
+            statePath: 'ui.viewport'
+          }
+        }
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        ticketsActions.fetchTickets();
+      }
+    }
+
+    customElements.define(TicketsBlock.is, TicketsBlock);
+  </script>
+</dom-module>
