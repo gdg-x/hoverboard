@@ -113,44 +113,48 @@
     </style>
 
     <div class="container">
-      <div class="videos-header">
-        <h4 class="heading">{$ featuredVideosTitle $}</h4>
-        <div class="controls">
-          <paper-icon-button icon="icons:chevron-left" on-tap="shiftContentLeft"></paper-icon-button>
-          <paper-icon-button icon="icons:chevron-right" on-tap="shiftContentRight"></paper-icon-button>
-        </div>
-      </div>
-      <div id="videos" class="videos">
-        <template is="dom-repeat" items="[[_videos]]" as="video">
-          <div class="video-item">
-            <paper-card class="card">
-              <div class="header paper-card">
-                <iron-image
-                  class="thumbnail"
-                  src="[[video.thumbnail]]"
-                  placeholder="[[video.preloadPlaceholder]]"
-                  sizing="cover"
-                  preload fade
-                ></iron-image>
-                <div class="play-video" on-tap="_playVideo">
-                  <iron-icon class="play-icon" icon="icons:play"></iron-icon>
-                </div>
-              </div>
-              <div class="paper-card-container">
-                <div class="card-content list">
-                  <div class="title">[[video.title]] [[video.preloadPlaceholder]]</div>
-                  <div class="speakers">[[video.speakers]]</div>
-                </div>
-              </div>
-            </paper-card>
+      <template is="dom-if" if="[[_videos]]">
+        <div class="videos-header">
+          <h4 class="heading">{$ featuredVideosTitle $}</h4>
+          <div class="controls">
+            <paper-icon-button icon="icons:chevron-left" on-tap="shiftContentLeft"></paper-icon-button>
+            <paper-icon-button icon="icons:chevron-right" on-tap="shiftContentRight"></paper-icon-button>
           </div>
-        </template>
-      </div>
-      <div layout>
-        <a href="{$ videosSessionsUrl $}" class="block-link" target="_blank" rel="noopener noreferrer">
-          <paper-button>{$ featuredVideosViewAll $}</paper-button>
-        </a>
-      </div>
+        </div>
+        <div id="videos" class="videos">
+          <template is="dom-repeat" items="[[_videos]]" as="video">
+            <div class="video-item">
+              <paper-card class="card">
+                <div class="header paper-card">
+                  <iron-image
+                    class="thumbnail"
+                    src="[[video.thumbnail]]"
+                    placeholder="[[video.preloadPlaceholder]]"
+                    sizing="cover"
+                    preload fade
+                  ></iron-image>
+                  <div class="play-video" on-tap="_playVideo">
+                    <iron-icon class="play-icon" icon="icons:play"></iron-icon>
+                  </div>
+                </div>
+                <div class="paper-card-container">
+                  <div class="card-content list">
+                    <div class="title">[[video.title]] [[video.preloadPlaceholder]]</div>
+                    <div class="speakers">[[video.speakers]]</div>
+                  </div>
+                </div>
+              </paper-card>
+            </div>
+          </template>
+        </div>
+      </template>
+      {% if videosSessionsUrl %}
+        <div layout>
+          <a href="{$ videosSessionsUrl $}" class="block-link" target="_blank" rel="noopener noreferrer">
+            <paper-button>{$ featuredVideosViewAll $}</paper-button>
+          </a>
+        </div>
+      {% endif %}
     </div>
 
   </template>
