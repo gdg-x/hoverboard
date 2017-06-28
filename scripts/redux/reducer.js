@@ -48,3 +48,12 @@ const partnersReducer = (state = initialState.partners, action) => {
       return state;
   }
 };
+
+const videosReducer = (state = initialState.videos, action) => {
+  switch (action.type) {
+    case FETCH_VIDEOS:
+      return action.videos;
+    default:
+      return state;
+  }
+};

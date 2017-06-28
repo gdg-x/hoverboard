@@ -48,3 +48,14 @@ const partnersActions = {
       }));
   }
 };
+
+const videosActions = {
+  fetchVideos: () => {
+    return firebase.database()
+      .ref('/videos')
+      .on('value', snapshot => store.dispatch({
+        type: FETCH_VIDEOS,
+        videos: snapshot.val()
+      }));
+  }
+};
