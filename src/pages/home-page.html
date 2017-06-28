@@ -27,7 +27,9 @@
       <call-to-action app="{{app}}" cascaded></call-to-action>
     {% endif %}
     <about-block app="{{app}}" cascaded></about-block>
-    <photo-block app="{{app}}" cascaded></photo-block>
+    {% if gallery %}
+      <photo-block app="{{app}}" cascaded></photo-block>
+    {% endif %}
     <tickets-block app="{{app}}" cascaded></tickets-block>
     <latest-posts app="{{app}}" posts="{{posts}}" cascaded></latest-posts>
     <social-feed app="{{app}}" cascaded></social-feed>
