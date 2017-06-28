@@ -8,7 +8,7 @@
 <link rel="import" href="./shared-styles.html">
 <link rel="import" href="./hoverboard-icons.html">
 
-<dom-module id="logos-block">
+<dom-module id="partners-block">
   <template>
     <style is="custom-style" include="shared-styles flex flex-alignment"></style>
 
@@ -97,9 +97,9 @@
 
   <script>
 
-    class LogosBlock extends ReduxMixin(Polymer.Element) {
+    class PartnersBlock extends ReduxMixin(Polymer.Element) {
       static get is() {
-        return 'logos-block'
+        return 'partners-block'
       }
 
       static get properties() {
@@ -117,6 +117,6 @@
       }
     }
 
-    customElements.define(LogosBlock.is, LogosBlock);
+    customElements.define(PartnersBlock.is, PartnersBlock);
   </script>
 </dom-module>
