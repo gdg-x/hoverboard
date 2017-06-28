@@ -1,0 +1,54 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../redux-mixin.html">
+<link rel="import" href="./shared-styles.html">
+
+<dom-module id="blog-list-page">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+    <style>
+
+      :host  {
+        display: block;
+      }
+
+    </style>
+
+    list
+
+    <template is="dom-repeat" items="[[posts]]" as="post">
+      <a href$="/blog/posts/[[post.id]]/" class="post" >
+        <iron-image class="image" src="[[post.image]]" style$="background-color: [[post.primaryColor]];"
+                    sizing="cover" preload fade></iron-image>
+        <div class="title" style$="background-color: [[post.secondaryColor]];">[[post.title]]</div>
+      </a>
+    </template>
+
+  </template>
+
+  <script>
+
+    class BlogListPage extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'blog-list-page';
+      }
+
+      static get properties() {
+        return {
+          posts: {
+            type: Object,
+            statePath: 'blog.list'
+          }
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        blogActions.fetchList();
+      }
+    }
+
+    customElements.define(BlogListPage.is, BlogListPage);
+  </script>
+</dom-module>

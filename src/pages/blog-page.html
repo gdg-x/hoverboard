@@ -1,28 +1,60 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-lazy-pages/iron-lazy-pages.html">
+
+<link rel="import" href="../redux-mixin.html">
+<link rel="import" href="../elements/shared-styles.html">
+
 <dom-module id="blog-page">
   <template>
     <style is="custom-style" include="shared-styles flex flex-alignment"></style>
 
     <style>
 
-      :host  {
+      :host {
         display: block;
       }
 
     </style>
 
-   <h3>Hello from the blog page</h3>
+    <app-route
+      route="[[route]]"
+      pattern="/:page"
+      data="{{routeData}}"
+      tail="{{subRoute}}"
+    ></app-route>
+
+    <iron-lazy-pages attr-for-selected="data-route" selected="[[routeData.page]]">
+      <blog-list-page data-route="" data-path="./blog-list-page.html"></blog-list-page>
+      <post-page data-route="posts" data-path="./post-page.html" route="[[subRoute]]"></post-page>
+    </iron-lazy-pages>
   </template>
 
   <script>
 
-    class BlogPage extends Polymer.Element {
-      static get is() { return 'blog-page' }
+    class BlogPage extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'blog-page'
+      }
+
+      static get properties() {
+        return {
+          route: Object
+        };
+      }
+
+      static get observers() {
+        return [
+          '_routeDataChanged(routeData.page)'
+        ];
+      }
+
+      _routeDataChanged(route) {
+        console.log(route);
+      }
     }
 
     customElements.define(BlogPage.is, BlogPage);
-
   </script>
 </dom-module>
-

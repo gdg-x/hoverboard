@@ -22,7 +22,8 @@
     "iron-icon": "PolymerElements/iron-icon#^2.0.0",
     "paper-button": "PolymerElements/paper-button#^2.0.0",
     "iron-lazy-pages": "TimvdLippe/iron-lazy-pages#^2.0.2",
-    "firebase": "^4.1.3"
+    "firebase": "^4.1.3",
+    "marked-element": "PolymerElements/marked-element#^2.1.1"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0"

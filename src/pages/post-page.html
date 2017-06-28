@@ -1,0 +1,70 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/marked-element/marked-element.html">
+
+<link rel="import" href="../redux-mixin.html">
+<link rel="import" href="../elements/shared-styles.html">
+
+<dom-module id="post-page">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+    <style>
+
+      :host  {
+        display: block;
+      }
+
+    </style>
+
+    <app-route
+      route="[[route]]"
+      pattern="/:id"
+      data="{{postData}}"
+    ></app-route>
+
+    post
+
+    <div class="content">
+      <marked-element markdown="[[post]]">
+        <div class="markdown-html"></div>
+      </marked-element>
+    </div>
+
+
+  </template>
+
+  <script>
+
+    class PostPage extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'post-page';
+      }
+
+      static get properties() {
+        return {
+          route: Object,
+
+          post: {
+            type: String,
+            statePath: 'blog.post'
+          }
+        };
+      }
+
+      static get observers() {
+        return [
+          '_postChanged(postData.id)'
+        ];
+      }
+
+      _postChanged(postId) {
+        console.log(postId);
+        blogActions.fetchPost(postId);
+      }
+    }
+
+    customElements.define(PostPage.is, PostPage);
+  </script>
+</dom-module>

@@ -48,3 +48,22 @@ const partnersActions = {
       }));
   }
 };
+
+const blogActions = {
+  fetchList: () => {
+    return firebase.database()
+      .ref('/blog/list')
+      .on('value', snapshot => store.dispatch({
+        type: FETCH_BLOG_LIST,
+        list: snapshot.val()
+      }));
+  },
+  fetchPost: (id) => {
+    return firebase.database()
+      .ref(`/blog/posts/${id}`)
+      .on('value', snapshot => store.dispatch({
+        type: FETCH_BLOG_POST,
+        post: snapshot.val()
+      }));
+  }
+};

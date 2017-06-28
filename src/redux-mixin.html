@@ -20,7 +20,11 @@
     route: 'home',
     hero: null,
     tickets: [],
-    partners: []
+    partners: [],
+    blog: {
+      list: {},
+      post: {}
+    }
   };
 
   const appReducer = (state = initialState, action) => {
@@ -29,7 +33,8 @@
       route: routeReducer(state.route, action),
       hero: heroReducer(state.hero, action),
       tickets: ticketsReducer(state.tickets, action),
-      partners: partnersReducer(state.partners, action)
+      partners: partnersReducer(state.partners, action),
+      blog: blogReducer(state.blog, action)
     };
   };
 
