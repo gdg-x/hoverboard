@@ -39,3 +39,12 @@ const ticketsReducer = (state = initialState.tickets, action) => {
       return state;
   }
 };
+
+const partnersReducer = (state = initialState.partners, action) => {
+  switch (action.type) {
+    case FETCH_PARTNERS:
+      return action.partners;
+    default:
+      return state;
+  }
+};

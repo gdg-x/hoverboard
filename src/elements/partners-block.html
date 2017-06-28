@@ -1,0 +1,122 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../redux-mixin.html">
+<link rel="import" href="./shared-styles.html">
+<link rel="import" href="./hoverboard-icons.html">
+
+<dom-module id="partners-block">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+    <style>
+
+      :host {
+        display: block;
+      }
+
+      .block-title {
+        margin: 24px 0 8px;
+      }
+
+      .logos {
+        margin: 0 -8px;
+      }
+
+      .logo-item {
+        margin: 8px;
+        padding: 24px 16px;
+        display: block;
+        width: calc(50% - 16px);
+        background-color: white;
+        border-radius: var(--border-radius);
+      }
+
+      .logo-img {
+        height: 60px;
+        width: 100%;
+      }
+
+      .cta-button {
+        margin-top: 32px;
+      }
+
+      @media (min-width: 640px) {
+        .logo-item {
+          width: calc(25% - 16px);
+        }
+      }
+
+      @media (min-width: 812px) {
+        .logo-item {
+          width: calc(20% - 16px);
+        }
+      }
+
+    </style>
+
+    <div class="content">
+      <h1 class="content-title">{$ partnersBlock.title $}</h1>
+
+      <template is="dom-repeat" items="[[partners]]" as="block">
+          <h4 class="block-title">[[block.title]]</h4>
+          <div class="logos" layout horizontal wrap>
+            <template is="dom-repeat" items="[[block.logos]]" as="logo">
+              <a
+                class="logo-item"
+                href="[[logo.url]]"
+                title="[[logo.name]]"
+                target="_blank"
+                rel="noopener noreferrer"
+                layout horizontal center-center
+              >
+                <plastic-image
+                  class="logo-img"
+                  srcset="[[logo.logoUrl]]"
+                  sizing="contain"
+                  lazy-load
+                  preload fade
+                ></plastic-image>
+              </a>
+            </template>
+          </div>
+      </template>
+
+      <a href="{$ partnershipProposition $}" target="_blank" rel="noopener noreferrer">
+        <paper-button class="cta-button icon-right">
+          <span>{$ partnersBlock.button $}</span>
+          <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+        </paper-button>
+      </a>
+    </div>
+
+  </template>
+
+  <script>
+
+    class PartnersBlock extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'partners-block'
+      }
+
+      static get properties() {
+        return {
+          partners: {
+            type: Object,
+            statePath: 'partners'
+          }
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        partnersActions.fetchPartners();
+      }
+    }
+
+    customElements.define(PartnersBlock.is, PartnersBlock);
+  </script>
+</dom-module>

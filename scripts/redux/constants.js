@@ -5,3 +5,5 @@ const SET_ROUTE = 'SET_ROUTE';
 const SET_HERO = 'SET_HERO';
 // tickets
 const FETCH_TICKETS = 'FETCH_TICKETS';
+// partners
+const FETCH_PARTNERS = 'FETCH_PARTNERS';

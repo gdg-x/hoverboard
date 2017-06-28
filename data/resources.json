@@ -3,6 +3,7 @@
   "description": "The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
   "dates": "October 13-14, 2017",
+  "partnershipProposition": "https://bit.ly/dfua17-partners",
   "share": "Share",
   "followOur": "Follow our",
   "followUs": "Follow us",
@@ -117,5 +118,9 @@
     "title": "Tickets",
     "ticketsDetails": "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
     "soldOut": "Sold out"
+  },
+  "partnersBlock": {
+    "title": "Partners",
+    "button": "Become a partner"
   }
 }

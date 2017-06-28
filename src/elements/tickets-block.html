@@ -15,12 +15,6 @@
     <style>
       :host {
         display: block;
-        padding: 60px 30px;
-      }
-
-      .title {
-        margin-bottom: 24px;
-        font-size: 24px;
       }
 
       .ticket-icon {
@@ -94,7 +88,7 @@
       </div>
 
       <div class="tickets" flex>
-        <h2 class="title">{$ ticketsBlock.title $}</h2>
+        <h1 class="content-title">{$ ticketsBlock.title $}</h1>
         <ul>
           <template is="dom-repeat" items="[[tickets.elements]]" as="ticket">
             <li class="ticket-item">
