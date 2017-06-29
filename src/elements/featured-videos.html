@@ -1,84 +1,217 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
-<link rel="import" href="../redux-mixin.html"> 
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../redux-mixin.html">
+<link rel="import" href="flex-layout-attr.html">
 
 <dom-module id="featured-videos">
-<template>
-  <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
 
-  <style>
-     :host {
-      display: block;
-    }
-
-     .preview-image {
-        height: 60px;
-        width: 100%;
+    <style>
+       :host {
+        display: block;
       }
-  </style>
+
+      .videos-wrapper {
+        padding: 60px 20px;
+      }
+
+      .header {
+        padding: 0 32px;
+        margin: 24px auto;
+      }
+
+      .title {
+        font-size: 24px;
+      }
+
+      .icon-label {
+        margin-left: 10px;
+      }
+
+      .video-list {
+        margin: 0 auto;
+        max-width: 1280px;
+        padding: 0 8px;
+        box-sizing: border-box;
+        overflow: hidden;
+        height: 300px;
+        perspective: 1000px;
+        width: 5400px;
+        backface-visibility: hidden;
+        transform: translateX(0px);
+        position: relative;
+      }
+
+      .videos {
+        transition: all 0.4s cubic-bezier(0, 0, 0.2, 1);
+        will-change: transition;
+      }
+
+      .video-item {
+        width: 420px;
+        min-width: 420px;
+        height: 260px;
+        box-sizing: border-box;
+        margin-bottom: 28px;
+        position: relative;
+        margin-bottom: 30px;
+        padding: 0 15px;
+        box-sizing: border-box;
+      }
+
+      .preview-image {
+        display: block;
+        cursor: pointer;
+        width: 100%;
+        min-width: 240px;
+        height: 221px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+
+      .video-play {
+        position: absolute;
+        z-index: 1;
+        width: 60px;
+        height: 60px;
+        color: white;
+        opacity: 0.6;
+        left: 50%;
+        top: 46%;
+        transform: translate(-50%, -54%);
+      }
+
+      .video-list:hover .chevron-icon {
+        display: block;
+      }
+
+      .next-video {
+        justify-content: flex-end;
+        right: -25px;
+      }
+
+      .last-video {
+        justify-content: flex-start;
+        left: -25px;
+      }
+
+      .chevron-icon {
+        width: 200px;
+        height: 200px;
+        color: white;
+        opacity: 0.6;
+        position: absolute;
+        z-index: 1;
+        top: 40%;
+        transform: translate(0, -55%);
+        display: none;
+      }
+
+      .video-title {
+        font-size: 18px;
+        line-height: 26px;
+        color: var(--secondary-text-color);
+      }
+    </style>
 
 
-  <div class="videos-wrapper content" layout horizontal justified>
-    <template is="dom-repeat" items="[[videos]]" as="block" index-as="index">
-           <div class="video-item">            
-              <div class="featured_videos_play">
-                <iron-icon icon="io-icons:play"></iron-icon>
-              </div>
-              <plastic-image
-                  id="image[[index]]"
-                  class="preview-image"
-                  srcset="[[getSessionsImageUrl(block.thumbnail, index)]]"
-                  sizing="contain"
-                  lazy-load
-                  preload fade
-                ></plastic-image>          
-            <div class="title">[[block.title]]</div>
-          </div>
-      </template>
+    <div class="videos-wrapper" layout justified>
+      <div class="header" flex layout horizontal center>
+        <div class="title">{$ featuredVideos.title $}</div>
+        <a class="all-videos-link" href="{$ featuredVideos.callToAction.link $}" target="_blank" rel="noopener noreferrer" flex layout horizontal end-justified>
+          <paper-button class="video-icon">
+            <iron-icon icon="hoverboard:video"></iron-icon>
+            <span class="icon-label">{$ featuredVideos.callToAction.label $}</span>
+          </paper-button>
+        </a>
+      </div>
 
-  </div>
+      <div class="video-list" layout flex horizontal>
+        <paper-icon-button class="last-video chevron-icon" icon="hoverboard:chevron-left" on-tap="shiftContentLeft"></paper-icon-button>
+        <div id="videos" class="videos" layout horizontal>
+          <template is="dom-repeat" items="[[videos]]" as="block" index-as="index">
+            <div class="video-item">
+              <paper-icon-button class="video-play" icon="hoverboard:play" on-tap="shiftContentLeft" flex layout horizontal center-center></paper-icon-button>
 
+              <plastic-image id="image[[index]]" class="preview-image" srcset="[[getSessionsImageUrl(block.thumbnail, index)]]" sizing="cover"
+                lazy-load preload fade></plastic-image>
 
-</template>
+              <div class="video-title">[[block.title]]</div>
+            </div>
+          </template>
+        </div>
+        <paper-icon-button class="next-video chevron-icon" icon="hoverboard:chevron-right" on-tap="shiftContentRight"></paper-icon-button>
 
-<script>
-  class FeaturedVideos extends ReduxMixin(Polymer.Element) {
-    static get is() {
-      return 'featured-videos'
-    }
+      </div>
 
-    static get properties() {
-      return {
-        videos: {
-          type: Object,
-          statePath: 'videos'
+    </div>
+  </template>
+
+  <script>
+    class FeaturedVideos extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'featured-videos'
+      }
+
+      static get properties() {
+        return {
+          videos: {
+            type: Object,
+            statePath: 'videos'
+          },
+          _currentIndex: {
+            type: Number,
+            value: 0
+          }
+        }
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        videosActions.fetchVideos();
+      }
+
+      getSessionsImageUrl(path, index) {
+        var id = '#image' + index;
+        firebase.storage()
+          .ref(path)
+          .getDownloadURL()
+          .then(function (url) {
+            let imageElement = this.shadowRoot.querySelector(id);
+            imageElement.srcset = url;
+          }.bind(this))
+          .catch(function (error) {
+            console.log(`Error occured during getting sessions images from storage: ${error}`);
+          });
+      }
+
+      shiftContentLeft() {
+        var videos = this.shadowRoot.querySelectorAll('.video-item');
+        var cardRect = videos[videos.length - 1].getBoundingClientRect();
+        var cardWidth = cardRect.width;
+        var newX = -(this._currentIndex - 1) * cardWidth;
+        if (this._currentIndex < videos.length && this._currentIndex > 0) {
+          this.$.videos.style.transform = 'translate3d(' + newX + 'px, 0, 0)';
+          this._currentIndex--;
+        }
+      }
+
+      shiftContentRight() {
+        var videos = this.shadowRoot.querySelectorAll('.video-item');
+        var cardRect = videos[videos.length - 1].getBoundingClientRect();
+        var cardWidth = cardRect.width;
+        var newX = -(this._currentIndex + 1) * cardWidth;
+        if (this._currentIndex >= 0 && this._currentIndex < videos.length - 1) {
+          this.$.videos.style.transform = 'translate3d(' + newX + 'px, 0, 0)';
+          this._currentIndex ++;
         }
       }
     }
 
-    connectedCallback() {
-      super.connectedCallback();
-      videosActions.fetchVideos();
-    }
-
-     getSessionsImageUrl (path, index) {
-      var id = '#image' + index;
-     
-
-       firebase.storage()
-              .ref('/images/sessions/101.JPG')
-              .getDownloadURL()
-              .then(function(url) {
-                 let imageElement = this.shadowRoot.querySelector(id);
-                imageElement.srcset = url;
-              }
-              .bind(this))
-              .catch(function(error) {
-                console.log(`Error occured during accessing storage: ${error}`);
-              });
-    }
-  }
-
-  customElements.define(FeaturedVideos.is, FeaturedVideos);
-</script>
+    customElements.define(FeaturedVideos.is, FeaturedVideos);
+  </script>
 </dom-module>
