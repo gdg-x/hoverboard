@@ -1,83 +1,84 @@
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../redux-mixin.html"> 
 
 <dom-module id="featured-videos">
-  <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+<template>
+  <style is="custom-style" include="shared-styles flex flex-alignment"></style>
 
-    <style>
-
-      :host  {
-        display: block;
-        width: 100%;       
-      }
-
-       paper-card {
-            width: 400px;
-            height: 400px;
-            margin: 20px;
-        }
-
-    </style>
-
-    <div class="videos" flex layout horizontal center>
-          <paper-card image="donuts.png" alt="Donuts">
-              <div class="card-content">
-                <div class="cafe-header">Cafe Basilico
-                  <div class="cafe-location cafe-light">
-                    <span>250ft</span>
-                  </div>
-                </div>
-                <p>$・Italian, Cafe</p>
-                </div>
-              <div class="card-actions">
-                <p>Tonight's availability</p>
-                <paper-button class="cafe-reserve">Reserve</paper-button>
-              </div>
-            </paper-card>
-              <paper-card image="donuts.png" alt="Donuts">
-              <div class="card-content">
-                <div class="cafe-header">Cafe Basilico
-                  <div class="cafe-location cafe-light">
-                    <span>250ft</span>
-                  </div>
-                </div>
-                <p>$・Italian, Cafe</p>
-              </div>
-              <div class="card-actions">
-                <p>Tonight's availability</p>
-                <paper-button class="cafe-reserve">Reserve</paper-button>
-              </div>
-            </paper-card>
-              <paper-card image="donuts.png" alt="Donuts">
-              <div class="card-content">
-                <div class="cafe-header">Cafe Basilico
-                  <div class="cafe-location cafe-light">
-                    <span>250ft</span>
-                  </div>
-                </div>
-                <p>$・Italian, Cafe</p>
-              </div>
-              <div class="card-actions">
-                <p>Tonight's availability</p>
-                <paper-button class="cafe-reserve">Reserve</paper-button>
-              </div>
-            </paper-card>
-    </div>
-
-  
-
-  </template>
-
-  <script>
-
-    class FeaturedVideos extends Polymer.Element {
-      static get is() { return 'featured-videos' }
+  <style>
+     :host {
+      display: block;
     }
 
-    customElements.define(FeaturedVideos.is, FeaturedVideos);
+     .preview-image {
+        height: 60px;
+        width: 100%;
+      }
+  </style>
 
-  </script>
+
+  <div class="videos-wrapper content" layout horizontal justified>
+    <template is="dom-repeat" items="[[videos]]" as="block" index-as="index">
+           <div class="video-item">            
+              <div class="featured_videos_play">
+                <iron-icon icon="io-icons:play"></iron-icon>
+              </div>
+              <plastic-image
+                  id="image[[index]]"
+                  class="preview-image"
+                  srcset="[[getSessionsImageUrl(block.thumbnail, index)]]"
+                  sizing="contain"
+                  lazy-load
+                  preload fade
+                ></plastic-image>          
+            <div class="title">[[block.title]]</div>
+          </div>
+      </template>
+
+  </div>
+
+
+</template>
+
+<script>
+  class FeaturedVideos extends ReduxMixin(Polymer.Element) {
+    static get is() {
+      return 'featured-videos'
+    }
+
+    static get properties() {
+      return {
+        videos: {
+          type: Object,
+          statePath: 'videos'
+        }
+      }
+    }
+
+    connectedCallback() {
+      super.connectedCallback();
+      videosActions.fetchVideos();
+    }
+
+     getSessionsImageUrl (path, index) {
+      var id = '#image' + index;
+     
+
+       firebase.storage()
+              .ref('/images/sessions/101.JPG')
+              .getDownloadURL()
+              .then(function(url) {
+                 let imageElement = this.shadowRoot.querySelector(id);
+                imageElement.srcset = url;
+              }
+              .bind(this))
+              .catch(function(error) {
+                console.log(`Error occured during accessing storage: ${error}`);
+              });
+    }
+  }
+
+  customElements.define(FeaturedVideos.is, FeaturedVideos);
+</script>
 </dom-module>
-
