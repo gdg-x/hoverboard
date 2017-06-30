@@ -15,11 +15,12 @@
       }
 
       .videos-wrapper {
-        padding: 60px 40px;
+        padding: 0;
       }
 
       .header {
         margin: 24px auto;
+        padding: 0 16px;
       }
 
       .title {
@@ -39,37 +40,37 @@
         position: relative;
         margin: 0 auto;
         max-width: 1280px;
-        height: 300px;
+        height: 250px;
         overflow: hidden;
       }
 
       .videos {
         transition: all 0.4s cubic-bezier(0, 0, 0.2, 1);
         will-change: transition;
-        perspective: 1000px;
-        width: 8400px;
         backface-visibility: hidden;
         transform: translateX(0px);
       }
 
       .video-item {
-        width: 420px;
-        min-width: 420px;
-        height: 260px;
+        width: 315px;
+        min-width: 315px;
+        height: 213px;
         box-sizing: border-box;
-        margin-bottom: 28px;
         position: relative;
-        margin-bottom: 30px;
         padding: 0 15px;
         box-sizing: border-box;
       }
+      
+      .video-item:first-of-type {
+        padding-left: 0;
+      }    
 
       .preview-image {
         display: block;
         cursor: pointer;
-        width: 100%;
-        min-width: 240px;
-        height: 221px;
+        width: 280px;
+        min-width: 270px;
+        height: 177px;
         border-radius: 5px;
         margin-bottom: 10px;
         overflow: hidden;
@@ -81,47 +82,42 @@
         z-index: 1;
         width: 60px;
         height: 60px;
-        color: white;
+        color: #fff;
         opacity: 0.8;
         left: 50%;
         top: 46%;
         transform: translate(-50%, -54%);
       }
 
-      .chevron-icon {
-        width: 200px;
-        height: 200px;
-        color: white;
-        opacity: 0.8;
-        position: absolute;
-        z-index: 1;
-        top: 40%;
-        transform: translate(0, -55%);
-        display: none;
-      }
-
-
-
       .video-title {
         font-size: 18px;
         line-height: 26px;
         color: var(--secondary-text-color);
       }
+      
+      @media (min-width: 768px) {    
 
-      @media (min-width: 868px) {
+        .videos-wrapper {
+          padding: 60px 40px;
+        }
+
+        .header {
+          padding: 0;
+        }
 
         .chevron-icon {
-          width: 200px;
-          height: 200px;
-          color: white;
-          opacity: 0.8;
+          width: 100px;
+          height: 100px;
+          color: #FFF;
+          opacity: 0.6;
           position: absolute;
           z-index: 1;
           top: 40%;
           transform: translate(0, -55%);
           display: none;
+          background-color: var(--default-primary-color);
+          border-radius: 50%;
         }
-
 
         .video-list:hover .chevron-icon {
           display: block;
@@ -134,18 +130,33 @@
 
         .last-video {
           justify-content: flex-start;
-          left: -25px;
+          left: -30px;
+        }
+      }
+
+      @media (min-width: 868px) {
+
+        .preview-image {
+          width: 100%;
+          min-width: 240px;
+          height: 221px;
         }
 
-        .header {
-          padding: 0 8px;
+        .video-item {
+          width: 420px;
+          min-width: 420px;
+          height: 260px;
         }
+
+         .video-list {
+          min-height: 300px;
+         }
       }
     </style>
 
     <iron-media-query id="mq-phone" full query="(max-width: {$ mediaQueries.xs.max $})" query-matches="{{isPhoneSize}}"></iron-media-query>
 
-    <div class="videos-wrapper" layout justified>
+    <div class="videos-wrapper container" layout justified>
       <div class="header" flex layout horizontal center wrap>
         <div class="title">{$ featuredVideos.title $}</div>
         <a class="all-videos-link" href="{$ featuredVideos.callToAction.link $}" target="_blank" rel="noopener noreferrer" flex layout
@@ -290,15 +301,12 @@
               imageElement.srcset = url;
             }.bind(this))
             .catch(function (error) {
-              console.log(`Error occured during getting sessions images from storage: ${error}`);
+              console.error(`Error occured during getting sessions images from storage: ${error}`);
             });
         }
-
-
     }
 
-
-
     customElements.define(FeaturedVideos.is, FeaturedVideos);
+    
   </script>
 </dom-module>
