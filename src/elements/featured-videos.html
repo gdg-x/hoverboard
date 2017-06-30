@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../redux-mixin.html">
 <link rel="import" href="flex-layout-attr.html">
 
@@ -14,11 +15,10 @@
       }
 
       .videos-wrapper {
-        padding: 60px 20px;
+        padding: 60px 40px;
       }
 
       .header {
-        padding: 0 32px;
         margin: 24px auto;
       }
 
@@ -30,23 +30,26 @@
         margin-left: 10px;
       }
 
+      .video-icon {
+        margin-left: 0;
+        padding-left: 0;
+      }
+
       .video-list {
+        position: relative;
         margin: 0 auto;
         max-width: 1280px;
-        padding: 0 8px;
-        box-sizing: border-box;
-        overflow: hidden;
         height: 300px;
-        perspective: 1000px;
-        width: 5400px;
-        backface-visibility: hidden;
-        transform: translateX(0px);
-        position: relative;
+        overflow: hidden;
       }
 
       .videos {
         transition: all 0.4s cubic-bezier(0, 0, 0.2, 1);
         will-change: transition;
+        perspective: 1000px;
+        width: 8400px;
+        backface-visibility: hidden;
+        transform: translateX(0px);
       }
 
       .video-item {
@@ -85,20 +88,6 @@
         transform: translate(-50%, -54%);
       }
 
-      .video-list:hover .chevron-icon {
-        display: block;
-      }
-
-      .next-video {
-        justify-content: flex-end;
-        right: -25px;
-      }
-
-      .last-video {
-        justify-content: flex-start;
-        left: -25px;
-      }
-
       .chevron-icon {
         width: 200px;
         height: 200px;
@@ -111,18 +100,56 @@
         display: none;
       }
 
+
+
       .video-title {
         font-size: 18px;
         line-height: 26px;
         color: var(--secondary-text-color);
       }
+
+      @media (min-width: 868px) {
+
+        .chevron-icon {
+          width: 200px;
+          height: 200px;
+          color: white;
+          opacity: 0.8;
+          position: absolute;
+          z-index: 1;
+          top: 40%;
+          transform: translate(0, -55%);
+          display: none;
+        }
+
+
+        .video-list:hover .chevron-icon {
+          display: block;
+        }
+
+        .next-video {
+          justify-content: flex-end;
+          right: -25px;
+        }
+
+        .last-video {
+          justify-content: flex-start;
+          left: -25px;
+        }
+
+        .header {
+          padding: 0 8px;
+        }
+      }
     </style>
 
+    <iron-media-query id="mq-phone" full query="(max-width: {$ mediaQueries.xs.max $})" query-matches="{{isPhoneSize}}"></iron-media-query>
 
     <div class="videos-wrapper" layout justified>
-      <div class="header" flex layout horizontal center>
+      <div class="header" flex layout horizontal center wrap>
         <div class="title">{$ featuredVideos.title $}</div>
-        <a class="all-videos-link" href="{$ featuredVideos.callToAction.link $}" target="_blank" rel="noopener noreferrer" flex layout horizontal end-justified>
+        <a class="all-videos-link" href="{$ featuredVideos.callToAction.link $}" target="_blank" rel="noopener noreferrer" flex layout
+          horizontal end-justified$="[[!isPhoneSize]]">
           <paper-button class="video-icon">
             <iron-icon icon="hoverboard:video"></iron-icon>
             <span class="icon-label">{$ featuredVideos.callToAction.label $}</span>
@@ -152,65 +179,125 @@
   </template>
 
   <script>
-    class FeaturedVideos extends ReduxMixin(Polymer.Element) {
+    class FeaturedVideos extends ReduxMixin(Polymer.GestureEventListeners(Polymer.Element)) {
       static get is() {
         return 'featured-videos'
       }
 
       static get properties() {
-        return {
-          videos: {
-            type: Object,
-            statePath: 'videos'
-          },
-          _currentIndex: {
-            type: Number,
-            value: 0
+          return {
+            videos: {
+              type: Object,
+              statePath: 'videos'
+            },
+            _currentIndex: {
+              type: Number,
+              value: 0
+            }
           }
         }
-      }
 
-      connectedCallback() {
-        super.connectedCallback();
-        videosActions.fetchVideos();
-      }
+        connectedCallback() {
+          super.connectedCallback();
+          videosActions.fetchVideos();
+        }
 
-      getSessionsImageUrl(path, index) {
-        var id = '#image' + index;
-        firebase.storage()
-          .ref(path)
-          .getDownloadURL()
-          .then(function (url) {
-            let imageElement = this.shadowRoot.querySelector(id);
-            imageElement.srcset = url;
-          }.bind(this))
-          .catch(function (error) {
-            console.log(`Error occured during getting sessions images from storage: ${error}`);
+        ready() {
+          super.ready();
+          let startPosition = 0;
+          let currentPosition = 0;
+          let distancePosition = 0;
+          let isMouseDown = false;
+          let videoListElement = this.$.videos;
+
+          Polymer.Gestures.addListener(this.$.videos, 'track', e => {
+            if (!isMouseDown) return;
+
+            let videoListWidth = this.getVideoListWidth();
+            distancePosition = (e.detail.x - startPosition) + currentPosition;
+
+            if (distancePosition < 0 && -distancePosition < (videoListWidth + 100 - window.innerWidth)) {
+              this.transformVideoList(videoListElement, distancePosition);
+            }
           });
-      }
 
-      shiftContentLeft() {
-        var videos = this.shadowRoot.querySelectorAll('.video-item');
-        var cardRect = videos[videos.length - 1].getBoundingClientRect();
-        var cardWidth = cardRect.width;
-        var newX = -(this._currentIndex - 1) * cardWidth;
-        if (this._currentIndex < videos.length && this._currentIndex > 0) {
-          this.$.videos.style.transform = 'translate3d(' + newX + 'px, 0, 0)';
-          this._currentIndex--;
-        }
-      }
+          Polymer.Gestures.addListener(this.$.videos, 'down', event => {
+            isMouseDown = true;
+            currentPosition = parseInt(getComputedStyle(videoListElement, null).getPropertyValue("transform").split(",")[4]);
+            startPosition = event.detail.x;
+          });
 
-      shiftContentRight() {
-        var videos = this.shadowRoot.querySelectorAll('.video-item');
-        var cardRect = videos[videos.length - 1].getBoundingClientRect();
-        var cardWidth = cardRect.width;
-        var newX = -(this._currentIndex + 1) * cardWidth;
-        if (this._currentIndex >= 0 && this._currentIndex < videos.length - 1) {
-          this.$.videos.style.transform = 'translate3d(' + newX + 'px, 0, 0)';
-          this._currentIndex ++;
+          Polymer.Gestures.addListener(this.$.videos, 'up', event => {
+            isMouseDown = false;
+          });
         }
-      }
+
+        shiftContentLeft() {
+          const {
+            cardWidth,
+            videosLength
+          } = this.getVideosDetails();
+
+          if (this._currentIndex < videosLength && this._currentIndex > 0) {
+            let newX = -(this._currentIndex - 1) * cardWidth;
+            this.transformVideoList(this.$.videos, newX);
+            this._currentIndex--;
+          }
+        }
+
+        shiftContentRight() {
+          const {
+            cardWidth,
+            videosLength
+          } = this.getVideosDetails();
+
+          if (this._currentIndex >= 0 && this._currentIndex < videosLength - 1) {
+            let newX = -(this._currentIndex + 1) * cardWidth;
+            this.transformVideoList(this.$.videos, newX);
+            this._currentIndex++;
+          }
+        }
+
+        getVideosDetails() {
+          let videos = this.shadowRoot.querySelectorAll('.video-item');
+          let cardRect = videos[videos.length - 1].getBoundingClientRect();
+          let cardWidth = cardRect.width;
+          let videosLength = videos.length;
+
+          return {
+            cardWidth,
+            videosLength
+          }
+        }
+
+        getVideoListWidth() {
+          let videos = this.shadowRoot.querySelectorAll('.video-item');
+          let cardRect = videos[videos.length - 1].getBoundingClientRect();
+          return cardRect.width * videos.length;
+        }
+
+        transformVideoList(el, newPosition) {
+          el.style.transform = 'translate3d(' + newPosition + 'px, 0, 0)';
+        }
+
+        getSessionsImageUrl(path, index) {
+          var id = '#image' + index;
+          firebase.storage()
+            .ref(path)
+            .getDownloadURL()
+            .then(function (url) {
+              let imageElement = this.shadowRoot.querySelector(id);
+              imageElement.srcset = url;
+            }.bind(this))
+            .catch(function (error) {
+              console.log(`Error occured during getting sessions images from storage: ${error}`);
+            });
+        }
+
+
     }
+
+
 
     customElements.define(FeaturedVideos.is, FeaturedVideos);
   </script>
