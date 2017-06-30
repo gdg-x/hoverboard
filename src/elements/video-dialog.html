@@ -1,0 +1,123 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/google-youtube/google-youtube.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../redux-mixin.html">
+
+<dom-module id="video-dialog">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+
+    <style>
+      :host {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: 0 !important;
+        padding: 0 !important;
+        position: fixed !important;
+        background: rgba(0, 0, 0, .5);
+         --paper-toolbar-height: 64px;
+      }
+
+      .video-wrapper {
+        z-index: 6;
+        overflow: hidden;
+      }
+
+      .go-back-icon {
+          z-index: 10;
+      }
+
+      .video {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 0;
+      }
+
+     
+    </style>  
+
+    
+    <paper-icon-button class="go-back-icon" icon="hoverboard:arrow-back" on-tap="_closeVideo"></paper-icon-button>
+    <div class="video-wrapper">
+      <google-youtube
+        id="video"
+        class="video"
+        video-id="[[youtubeId]]"
+        width="100%"
+        height="100%"
+        autohide="1"
+        chromeless="[[disableControls]]"
+      ></google-youtube>
+    </div>
+     
+  </template>
+
+  <script>
+
+    class VideoDialog extends Polymer.mixinBehaviors([Polymer.PaperDialogBehavior], ReduxMixin(Polymer.Element)) {
+
+      static get is() {
+        return 'video-dialog'
+      }
+
+       static get properties() {
+            return {
+                videoTitle: {
+                    type: String
+                },
+                opened: {
+                    type: Boolean                    
+                },
+                youtubeId: {
+                    type: String
+                },
+                disableControls: {
+                    type: Boolean,
+                    value: false
+                }
+            }
+        } 
+
+     static get observers() {
+        return [
+          'videoDialogActionMade(opened)'
+        ];
+      }   
+
+      videoDialogActionMade(opened) {
+          if (opened) {       
+             this._openVideo();
+          }
+          else {
+            this._closeVideo();
+          }
+      }
+
+      _openVideo() {
+            if (this.withBackdrop) {
+                this.backdropElement.open();
+            }
+            this.$.video.play();
+        }
+
+        _closeVideo() {
+            this.$.video.seekTo(0);
+            this.$.video.pause();
+            this.backdropElement.close();
+        }
+    }
+
+
+    customElements.define(VideoDialog.is, VideoDialog);
+  </script>
+</dom-module>

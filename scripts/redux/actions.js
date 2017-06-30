@@ -10,6 +10,12 @@ const uiActions = {
       type: SET_VIEWPORT_SIZE,
       value
     });
+  },
+  toggleVideoDialog: (value = null) => {
+    store.dispatch({
+      type: TOGGLE_DIALOG,
+      value
+    });
   }
 };
 

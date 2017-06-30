@@ -4,6 +4,7 @@
 <link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../redux-mixin.html">
 <link rel="import" href="flex-layout-attr.html">
+<link rel="import" href="video-dialog.html">
 
 <dom-module id="featured-videos">
   <template>
@@ -42,6 +43,7 @@
         max-width: 1280px;
         height: 250px;
         overflow: hidden;
+        margin-left: -15px;
       }
 
       .videos {
@@ -60,10 +62,6 @@
         padding: 0 15px;
         box-sizing: border-box;
       }
-      
-      .video-item:first-of-type {
-        padding-left: 0;
-      }    
 
       .preview-image {
         display: block;
@@ -173,7 +171,7 @@
         <div id="videos" class="videos" layout horizontal>
           <template is="dom-repeat" items="[[videos]]" as="block" index-as="index">
             <div class="video-item">
-              <paper-icon-button class="video-play" icon="hoverboard:play" on-tap="shiftContentLeft" flex layout horizontal center-center></paper-icon-button>
+              <paper-icon-button class="video-play" icon="hoverboard:play" on-tap="playVideo" flex layout horizontal center-center></paper-icon-button>
 
               <plastic-image id="image[[index]]" class="preview-image" srcset="[[getSessionsImageUrl(block.thumbnail, index)]]" sizing="cover"
                 lazy-load preload fade></plastic-image>
@@ -187,6 +185,13 @@
       </div>
 
     </div>
+
+    <video-dialog id="videoDialog"
+                video-title="[[video.title]]"
+                youtube-id="[[video.youtubeId]]"
+                entry-animation="scale-up-animation"
+                exit-animation="fade-out-animation"
+                disable-controls="[[!video.disableControls]]"></video-dialog>
   </template>
 
   <script>
@@ -303,6 +308,20 @@
             .catch(function (error) {
               console.error(`Error occured during getting sessions images from storage: ${error}`);
             });
+        }
+
+         playVideo(e) {
+          let presenters = e.model.__data.block.speakers ? (` by ${e.model.__data.block.speakers}`) : '';
+          let title = e.model.__data.block.title + presenters;
+          let youtubeId = e.model.__data.block.youtubeId;
+          console.log(presenters)
+
+            uiActions.toggleVideoDialog({
+            title: title,
+            youtubeId: youtubeId,
+            disableControls: true,
+            opened: true
+          });
         }
     }
 
