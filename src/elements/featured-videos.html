@@ -314,9 +314,8 @@
           let presenters = e.model.__data.block.speakers ? (` by ${e.model.__data.block.speakers}`) : '';
           let title = e.model.__data.block.title + presenters;
           let youtubeId = e.model.__data.block.youtubeId;
-          console.log(presenters)
 
-            uiActions.toggleVideoDialog({
+          uiActions.toggleVideoDialog({
             title: title,
             youtubeId: youtubeId,
             disableControls: true,
