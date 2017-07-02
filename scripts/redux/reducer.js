@@ -53,9 +53,7 @@ const partnersReducer = (state = initialState.partners, action) => {
 const blogReducer = (state = initialState.blog, action) => {
   switch (action.type) {
     case FETCH_BLOG_LIST:
-      return Object.assign({}, state, {list: action.list});
-    case FETCH_BLOG_POST:
-      return Object.assign({}, state, {post: action.post});
+      return Object.assign({}, state, { list: action.list });
     default:
       return state;
   }

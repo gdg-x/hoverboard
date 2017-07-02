@@ -10,20 +10,28 @@ const uiActions = {
       type: SET_VIEWPORT_SIZE,
       value
     });
+  },
+  setHero: hero => {
+    store.dispatch({
+      type: SET_HERO,
+      hero
+    });
   }
 };
 
 const routeActions = {
-  setRoute: routeFromAction => {
+  setRoute: (routeFromAction, hasSubroute = false) => {
     const route = routeFromAction || 'home';
     store.dispatch({
       type: SET_ROUTE,
       route
     });
-    store.dispatch({
-      type: SET_HERO,
-      hero: heroSettings[route]
-    });
+    if (!hasSubroute) {
+      store.dispatch({
+        type: SET_HERO,
+        hero: heroSettings[route]
+      });
+    }
   }
 };
 
@@ -56,14 +64,6 @@ const blogActions = {
       .on('value', snapshot => store.dispatch({
         type: FETCH_BLOG_LIST,
         list: snapshot.val()
-      }));
-  },
-  fetchPost: (id) => {
-    return firebase.database()
-      .ref(`/blog/posts/${id}`)
-      .on('value', snapshot => store.dispatch({
-        type: FETCH_BLOG_POST,
-        post: snapshot.val()
       }));
   }
 };

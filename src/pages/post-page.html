@@ -1,10 +1,13 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/marked-element/marked-element.html">
 
+<link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="../redux-mixin.html">
 <link rel="import" href="../elements/shared-styles.html">
+<link rel="import" href="../elements/posts-list.html">
 
 <dom-module id="post-page">
   <template>
@@ -12,8 +15,31 @@
 
     <style>
 
-      :host  {
+      :host {
         display: block;
+      }
+
+      .post {
+        margin-bottom: 32px;
+      }
+
+      [slot="markdown-html"] {
+        color: var(--primary-text-color);
+      }
+
+      [slot="markdown-html"] p {
+        margin-bottom: 24px;
+      }
+
+      .date {
+        font-size: 12px;
+        text-transform: uppercase;
+        color: var(--secondary-text-color);
+      }
+
+      .suggested-posts {
+        margin: 48px 0 -20px;
+        background-color: var(--primary-background-color);
       }
 
     </style>
@@ -24,20 +50,32 @@
       data="{{postData}}"
     ></app-route>
 
-    post
+    <iron-ajax
+      url="[[source]]"
+      handle-as="text"
+      last-response="{{postBody}}"
+      auto
+    ></iron-ajax>
 
-    <div class="content">
-      <marked-element markdown="[[post]]">
-        <div class="markdown-html"></div>
+    <div class="content content-narrow">
+      <marked-element class="post" markdown="[[postBody]]">
+        <div slot="markdown-html"></div>
       </marked-element>
+      <div class="date">{$ blog.published $}: [[published]]</div>
     </div>
 
+    <div class="suggested-posts">
+      <div class="content content-narrow">
+        <h3 class="content-title">{$ blog.suggested $}</h3>
+        <posts-list posts="[[suggestedPosts]]"></posts-list>
+      </div>
+    </div>
 
   </template>
 
   <script>
 
-    class PostPage extends ReduxMixin(Polymer.Element) {
+    class PostPage extends UtilsFunctions(ReduxMixin(Polymer.Element)) {
       static get is() {
         return 'post-page';
       }
@@ -46,22 +84,47 @@
         return {
           route: Object,
 
-          post: {
+          postsList: {
             type: String,
-            statePath: 'blog.post'
+            statePath: 'blog.list'
           }
         };
       }
 
       static get observers() {
         return [
-          '_postChanged(postData.id)'
+          '_postDataObserver(postData.id, postsList)'
         ];
       }
 
-      _postChanged(postId) {
-        console.log(postId);
-        blogActions.fetchPost(postId);
+      connectedCallback() {
+        super.connectedCallback();
+        if (!Object.keys(this.postsList).length) return blogActions.fetchList();
+      }
+
+      _postDataObserver(postId, postsList) {
+        if (!this.postsList || !Object.keys(this.postsList).length) return;
+        this._setHero(this.postsList[this.postData.id]);
+        this.set('source', this.postsList[this.postData.id].source);
+        this.set('published', this._getDate(this.postsList[this.postData.id].published));
+        const sortedPosts = this.transformToArray(this.postsList, 'id').sort((a, b) => b.published.localeCompare(a.published));
+        this.set('suggestedPosts', sortedPosts.filter(post => post.id !== this.postData.id).slice(0, 3));
+
+      }
+
+      _setHero(postInfo) {
+        uiActions.setHero({
+          "title": postInfo.title,
+          "background": {
+            "color": postInfo.primaryColor,
+            "image": postInfo.image
+          },
+          "fontColor": "#fff"
+        });
+      }
+
+      _getDate(date) {
+        return new Date(date).toLocaleString('en-us', { month: 'short', day: 'numeric', year: 'numeric' });
       }
     }
 

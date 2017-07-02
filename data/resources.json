@@ -122,5 +122,9 @@
   "partnersBlock": {
     "title": "Partners",
     "button": "Become a partner"
+  },
+  "blog": {
+    "published": "Published",
+    "suggested": "Up next"
   }
 }

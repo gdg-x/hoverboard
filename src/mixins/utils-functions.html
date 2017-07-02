@@ -1,0 +1,8 @@
+<script>
+
+  const UtilsFunctions = subclass => class extends subclass {
+    transformToArray(source, attribute) {
+      return Object.keys(source).map(key => Object.assign(!!attribute ? { [attribute]: key } : {}, source[key]));
+    }
+  };
+</script>

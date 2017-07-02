@@ -3,21 +3,8 @@
 <link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/iron-lazy-pages/iron-lazy-pages.html">
 
-<link rel="import" href="../redux-mixin.html">
-<link rel="import" href="../elements/shared-styles.html">
-
 <dom-module id="blog-page">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
-
-    <style>
-
-      :host {
-        display: block;
-      }
-
-    </style>
-
     <app-route
       route="[[route]]"
       pattern="/:page"
@@ -33,25 +20,9 @@
 
   <script>
 
-    class BlogPage extends ReduxMixin(Polymer.Element) {
+    class BlogPage extends Polymer.Element {
       static get is() {
         return 'blog-page'
-      }
-
-      static get properties() {
-        return {
-          route: Object
-        };
-      }
-
-      static get observers() {
-        return [
-          '_routeDataChanged(routeData.page)'
-        ];
-      }
-
-      _routeDataChanged(route) {
-        console.log(route);
       }
     }
 

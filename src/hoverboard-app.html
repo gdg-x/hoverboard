@@ -24,10 +24,11 @@
 <link rel="import" href="../bower_components/iron-lazy-pages/iron-lazy-pages.html">
 <link rel="import" href="../bower_components/plastic-image/plastic-image.html">
 
-<link rel="import" href="redux-mixin.html">
-<link rel="import" href="elements/shared-styles.html">
-<link rel="import" href="elements/hoverboard-icons.html">
-<link rel="import" href="elements/footer-block.html">
+<link rel="import" href="./redux-mixin.html">
+<link rel="import" href="./mixins/scroll-functions.html">
+<link rel="import" href="./elements/shared-styles.html">
+<link rel="import" href="./elements/hoverboard-icons.html">
+<link rel="import" href="./elements/footer-block.html">
 
 
 <dom-module id="hoverboard-app">
@@ -108,7 +109,7 @@
       }
 
       app-header iron-pages {
-        z-index: 0;
+        transform: translateZ(0);
       }
 
       .hero-overlay {
@@ -228,15 +229,19 @@
           </app-toolbar>
 
           <app-toolbar class="hero-block" layout start vertical center-justified>
-            <plastic-image class="hero-image" srcset="[[hero.background.image]]" sizing="cover" lazy-load preload fade
-                           fit></plastic-image>
+            <plastic-image
+              class="hero-image"
+              srcset="[[hero.background.image]]"
+              sizing="cover"
+              lazy-load preload fade fit
+            ></plastic-image>
             <div class="hero-overlay" show$=[[hero.background.image]] fit></div>
             <iron-pages selected="[[route]]" attr-for-selected="route" fallback-selection="default">
               <div class="hero-content" route="home">
                 <plastic-image class="hero-logo" srcset="/images/logo.svg" alt="{$ title $}"></plastic-image>
                 <p class="hero-description highlight-font">[[hero.description]]</p>
               </div>
-              <div class="hero-content" route="default">
+              <div route="default">
                 <div class="hero-title highlight-font">[[hero.title]]</div>
                 <p class="hero-description">[[hero.description]]</p>
               </div>
@@ -259,7 +264,7 @@
   </template>
 
   <script>
-    class HoverboardApp extends ReduxMixin(Polymer.Element) {
+    class HoverboardApp extends ScrollFunctions(ReduxMixin(Polymer.Element)) {
 
       static get is() {
         return 'hoverboard-app';
@@ -334,11 +339,15 @@
         if (!page && page !== '') {
           return;
         }
-        routeActions.setRoute(page);
+        this.scrollToY(0, 9000);
+        routeActions.setRoute(page, this.subroute.path !== '' && this.subroute.path !== '/');
       }
 
       _isPhoneSizeChanged(value) {
-        uiActions.setViewportSize({ 'isPhone': value });
+        uiActions.setViewportSize({
+          'isPhone': value,
+          'isTabletPlus': !value
+        });
       }
     }
 
