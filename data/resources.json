@@ -8,10 +8,12 @@
   "followOur": "Follow our",
   "followUs": "Follow us",
   "emailUs": "Email us",
-  "blog": "Blog",
   "partnershipResources": "Partnership Resources",
   "eventResources": "Event Resources",
   "buyTicket": "Buy ticket",
+  "footer": {
+    "blog": "Blog"
+  },
   "footerRelBlock": [
     {
       "title": "About",
