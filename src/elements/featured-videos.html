@@ -47,20 +47,18 @@
       }
 
       .videos {
-        transition: all 0.4s cubic-bezier(0, 0, 0.2, 1);
+        transition: var(--slideSmoothlyAnimation);
         will-change: transition;
         backface-visibility: hidden;
-        transform: translateX(0px);
+        transform: translateX(0);
       }
 
       .video-item {
         width: 315px;
         min-width: 315px;
         height: 213px;
-        box-sizing: border-box;
         position: relative;
         padding: 0 15px;
-        box-sizing: border-box;
       }
 
       .preview-image {
@@ -72,7 +70,6 @@
         border-radius: 5px;
         margin-bottom: 10px;
         overflow: hidden;
-        box-sizing: border-box;
       }
 
       .video-play {
@@ -120,16 +117,14 @@
         .video-list:hover .chevron-icon {
           display: block;
         }
-
-        .next-video {
-          justify-content: flex-end;
-          right: -25px;
-        }
-
+       
         .last-video {
-          justify-content: flex-start;
-          left: -30px;
+          left: -20px;
         }
+
+         .next-video {
+          right: -20px;
+         }
       }
 
       @media (min-width: 868px) {
@@ -152,13 +147,11 @@
       }
     </style>
 
-    <iron-media-query id="mq-phone" full query="(max-width: {$ mediaQueries.xs.max $})" query-matches="{{isPhoneSize}}"></iron-media-query>
-
     <div class="videos-wrapper container" layout justified>
       <div class="header" flex layout horizontal center wrap>
         <div class="title">{$ featuredVideos.title $}</div>
         <a class="all-videos-link" href="{$ featuredVideos.callToAction.link $}" target="_blank" rel="noopener noreferrer" flex layout
-          horizontal end-justified$="[[!isPhoneSize]]">
+          horizontal end-justified$="[[!viewport.isPhone]]">
           <paper-button class="video-icon">
             <iron-icon icon="hoverboard:video"></iron-icon>
             <span class="icon-label">{$ featuredVideos.callToAction.label $}</span>
@@ -206,6 +199,10 @@
               type: Object,
               statePath: 'videos'
             },
+            viewport: {
+              type: Object,
+              statePath: 'ui.viewport'
+            },
             _currentIndex: {
               type: Number,
               value: 0
@@ -224,7 +221,7 @@
           let currentPosition = 0;
           let distancePosition = 0;
           let isMouseDown = false;
-          let videoListElement = this.$.videos;
+          const videoListElement = this.$.videos;
 
           Polymer.Gestures.addListener(this.$.videos, 'track', e => {
             if (!isMouseDown) return;
@@ -255,7 +252,7 @@
           } = this.getVideosDetails();
 
           if (this._currentIndex < videosLength && this._currentIndex > 0) {
-            let newX = -(this._currentIndex - 1) * cardWidth;
+            const newX = -(this._currentIndex - 1) * cardWidth;
             this.transformVideoList(this.$.videos, newX);
             this._currentIndex--;
           }
@@ -268,17 +265,17 @@
           } = this.getVideosDetails();
 
           if (this._currentIndex >= 0 && this._currentIndex < videosLength - 1) {
-            let newX = -(this._currentIndex + 1) * cardWidth;
+            const newX = -(this._currentIndex + 1) * cardWidth;
             this.transformVideoList(this.$.videos, newX);
             this._currentIndex++;
           }
         }
 
         getVideosDetails() {
-          let videos = this.shadowRoot.querySelectorAll('.video-item');
-          let cardRect = videos[videos.length - 1].getBoundingClientRect();
-          let cardWidth = cardRect.width;
-          let videosLength = videos.length;
+          const videos = this.shadowRoot.querySelectorAll('.video-item');
+          const cardRect = videos[videos.length - 1].getBoundingClientRect();
+          const cardWidth = cardRect.width;
+          const videosLength = videos.length;
 
           return {
             cardWidth,
@@ -287,8 +284,8 @@
         }
 
         getVideoListWidth() {
-          let videos = this.shadowRoot.querySelectorAll('.video-item');
-          let cardRect = videos[videos.length - 1].getBoundingClientRect();
+          const videos = this.shadowRoot.querySelectorAll('.video-item');
+          const cardRect = videos[videos.length - 1].getBoundingClientRect();
           return cardRect.width * videos.length;
         }
 
@@ -301,19 +298,19 @@
           firebase.storage()
             .ref(path)
             .getDownloadURL()
-            .then(function (url) {
+            .then((url) => {
               let imageElement = this.shadowRoot.querySelector(id);
               imageElement.srcset = url;
-            }.bind(this))
-            .catch(function (error) {
+            })
+            .catch((error) => {
               console.error(`Error occured during getting sessions images from storage: ${error}`);
             });
         }
 
          playVideo(e) {
-          let presenters = e.model.__data.block.speakers ? (` by ${e.model.__data.block.speakers}`) : '';
-          let title = e.model.__data.block.title + presenters;
-          let youtubeId = e.model.__data.block.youtubeId;
+          const presenters = e.model.__data.block.speakers ? (` by ${e.model.__data.block.speakers}`) : '';
+          const title = e.model.__data.block.title + presenters;
+          const youtubeId = e.model.__data.block.youtubeId;
 
           uiActions.toggleVideoDialog({
             title: title,

@@ -13,7 +13,7 @@ const uiActions = {
   },
   toggleVideoDialog: (value = null) => {
     store.dispatch({
-      type: TOGGLE_DIALOG,
+      type: TOGGLE_VIDEO_DIALOG,
       value
     });
   }

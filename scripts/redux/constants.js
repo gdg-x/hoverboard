@@ -10,4 +10,4 @@ const FETCH_PARTNERS = 'FETCH_PARTNERS';
 // featured videos
 const FETCH_VIDEOS = 'FETCH_VIDEOS';
 // video dialog
-const TOGGLE_DIALOG = 'TOGGLE_DIALOG';
+const TOGGLE_VIDEO_DIALOG = 'TOGGLE_VIDEO_DIALOG';
