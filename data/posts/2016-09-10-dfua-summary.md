@@ -20,28 +20,27 @@ Some terrific facts about DevFest:
 
 - lots of sessions were full of deep knowledge and inspiration. Only technical stuff, only hardcore! Android sessions as always overcrowded.
 
-<img src="/images/posts/summary16_2.jpg" style="width: 70%;"/>
-
+<plastic-image srcset="/images/posts/summary16_2.jpg" lazy-load preload fade></plastic-image>
 
 - Progressive Web Apps (PWA) theme was the most popular on Web track, moreover, people could try it in practice on 2 workshops, hold by [Martin Splitt](http://localhost:4040/speakers/41/) and [Jakub Škvára](http://localhost:4040/speakers/18/).
 
-<img src="/images/posts/summary16_3.jpg" style="width: 70%;"/>
+<plastic-image srcset="/images/posts/summary16_3.jpg" lazy-load preload fade></plastic-image>
 
 - amazing demo zones were around (AR-music, DIY cardboards, Tilt Brush....)
 
-<img src="/images/posts/summary16_4.jpg" style="width: 70%;"/>
+<plastic-image srcset="/images/posts/summary16_4.jpg" lazy-load preload fade></plastic-image>
 
 - especially Emotobooth
 
-<img src="/images/posts/summary16_5.jpg" style="width: 70%;"/>
+<plastic-image srcset="/images/posts/summary16_5.jpg" lazy-load preload fade></plastic-image>
 
 - a big number of epic selfies :)
 
-<img src="/images/posts/summary16_6.jpg" style="width: 70%;"/>
+<plastic-image srcset="/images/posts/summary16_6.jpg" lazy-load preload fade></plastic-image>
 
 - the silent party was definitely something new for everyone! People rocked the floor like they never do before!
 
-<img src="/images/posts/summary16_8.jpg" style="width: 70%;"/>
+<plastic-image srcset="/images/posts/summary16_8.jpg" lazy-load preload fade></plastic-image>
 
 
 The conference became possible through the support of a number of companies.
@@ -53,7 +52,7 @@ The conference became possible through the support of a number of companies.
 
 And, of course, a BIG THANK to all the volunteers from different GDG groups of Ukraine for their priceless help.
 
-<img src="/images/posts/summary16_7.jpg" style="width: 100%;"/>
+<plastic-image srcset="/images/posts/summary16_7.jpg" lazy-load preload fade></plastic-image>
 
 We hope you found the conference informative and worthwhile. The primary goal of DevFest  was to bring together all of you - professionals and passionate geeks of our industry - from around the world to exchange experience, share valuable knowledges and to contribute in possible strategies as to how Ukraine can become recognized and more engaged in initiatives taking place in developing IT industry and education first of all.
 

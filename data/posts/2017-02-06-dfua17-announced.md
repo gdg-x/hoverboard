@@ -16,13 +16,12 @@ Smart home, IoT, AR/VR devices, face emotions recognition using Google Cloud. In
 **Unique networking and party.**
 Network with other like-minded industry colleagues and DevFest partners throughout the event and after-party.
 
-<div class="text-center">
-<a href="https://2event.com/events/800690" target="_blank" class="style-scope header-content" style="color: white; ">
-  <paper-button class="primary style-scope header-content x-scope paper-button-0" raised="" role="button" tabindex="0" animated="" aria-disabled="false" elevation="1"><iron-icon icon="ticket" style="margin-right: 8px;"></iron-icon> Buy ticket</paper-button>
+<div layout horizontal center-justified>
+<a href="https://2event.com/events/800690" rel="noopener noreferrer">
+  <paper-button primary>Buy ticket</paper-button>
 </a>
 </div>
 
-<br/>
 
 ## Stay in touch
 

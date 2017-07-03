@@ -3,6 +3,8 @@
 <link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/marked-element/marked-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
 
 <link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="../redux-mixin.html">
@@ -24,11 +26,22 @@
       }
 
       [slot="markdown-html"] {
+        font-size: 18px;
+        line-height: 1.8;
         color: var(--primary-text-color);
       }
 
       [slot="markdown-html"] p {
+        margin-top: 0;
         margin-bottom: 24px;
+      }
+
+      [slot="markdown-html"] plastic-image {
+        margin: 32px 0 8px -16px;
+        --iron-image-width: calc(100% + 32px);
+        width: calc(100% + 32px);
+        min-height: 200px;
+        background-color: var(--secondary-background-color);
       }
 
       .date {
@@ -38,8 +51,19 @@
       }
 
       .suggested-posts {
-        margin: 48px 0 -20px;
+        margin: 24px 0 -20px;
+        padding-top: 24px;
         background-color: var(--primary-background-color);
+      }
+
+      @media (min-width: 640px) {
+        [slot="markdown-html"] plastic-image {
+          min-height: 400px;
+        }
+
+        .suggested-posts {
+          margin-top: 48px;
+        }
       }
 
     </style>

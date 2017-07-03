@@ -144,6 +144,14 @@ function compileTemplate() {
     });
 }
 
+function copyStatic() {
+  return gulp.src([
+    'data/**/*.{markdown,md}',
+    'images/**/*.{png,gif,jpg,svg}'
+  ], {base: '.'})
+    .pipe(gulp.dest(config.tempDirectory));
+}
+
 function prependPath(pre, to) {
   return `${pre}/${to}`;
 }
@@ -163,7 +171,7 @@ gulp.task('serve', gulp.series(compileTemplate, () => {
   gulp.watch([
     'data/**/*.{markdown,md}',
     'images/**/*.{png,gif,jpg,svg}',
-  ]).on('change', reload);
+  ], gulp.series(copyStatic, reload));
 
   gulp.watch([
     'data/**/*.json',
