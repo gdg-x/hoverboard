@@ -1,0 +1,157 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+
+<link rel="import" href="../mixins/utils-functions.html">
+<link rel="import" href="../redux-mixin.html">
+<link rel="import" href="../elements/shared-styles.html">
+<link rel="import" href="../elements/posts-list.html">
+<link rel="import" href="../elements/text-truncate.html">
+
+<dom-module id="blog-list-page">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+
+    <style>
+
+      :host {
+        display: block;
+      }
+
+      .featured {
+        background-color: var(--secondary-background-color);
+      }
+
+      .featured-post {
+        margin: 12px 0;
+        height: 200px;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+      }
+
+      .image {
+        width: 100%;
+        height: 100%;
+      }
+
+      .image-overlay {
+        background-color: rgba(0, 0, 0, 0.6);
+      }
+
+      .details {
+        padding: 24px;
+        height: 100%;
+        transform: translateZ(0);
+        color: #fff;
+      }
+
+      .title {
+        line-height: 1.2;
+      }
+
+      .description {
+        margin-top: 8px;
+        opacity: 0.8;
+      }
+
+      .date {
+        font-size: 12px;
+        text-transform: uppercase;
+        opacity: 0.8;
+      }
+
+      @media (min-width: 640px) {
+        .featured-posts-wrapper {
+          padding: 24px 0;
+        }
+
+        .featured-post {
+          margin: 0 12px;
+          height: 256px;
+        }
+      }
+
+    </style>
+
+    <div class="featured">
+      <div class="content">
+        <div class="featured-posts-wrapper" layout vertical$="[[viewport.isPhone]]" horizontal$="[[viewport.isTabletPlus]]" justified>
+          <template is="dom-repeat" items="[[featuredPosts]]" as="post">
+            <a href$="/blog/posts/[[post.id]]/" class="featured-post" flex$="[[viewport.isTabletPlus]]" relative>
+              <plastic-image
+                class="image"
+                srcset="[[post.image]]"
+                style$="background-color: [[post.backgroundColor]];"
+                sizing="cover"
+                lazy-load preload fade fit
+              ></plastic-image>
+              <div class="image-overlay" fit></div>
+              <div class="details" layout vertical justified>
+                <div>
+                  <text-truncate lines="2">
+                    <h2 class="title">[[post.title]]</h2>
+                  </text-truncate>
+                  <text-truncate lines="[[_addIfNotPhone(2, 1)]]">
+                    <p class="description">[[post.brief]]</p>
+                  </text-truncate>
+                </div>
+                <span class="date">[[getDate(post.published)]]</span>
+              </div>
+            </a>
+          </template>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-narrow">
+      <posts-list posts="[[posts]]"></posts-list>
+    </div>
+
+  </template>
+
+  <script>
+
+    class BlogListPage extends UtilsFunctions(ReduxMixin(Polymer.Element)) {
+      static get is() {
+        return 'blog-list-page';
+      }
+
+      static get properties() {
+        return {
+          postsSource: {
+            type: Object,
+            statePath: 'blog.list',
+            observer: '_transformPosts'
+          },
+          viewport: {
+            type: Object,
+            statePath: 'ui.viewport'
+          },
+          posts: Array,
+          featuredPosts: Array
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        if (!Object.keys(this.postsSource).length) blogActions.fetchList();
+      }
+
+      _transformPosts(postsSource) {
+        const sortedPosts = this.transformToArray(postsSource, 'id').sort((a, b) => b.published.localeCompare(a.published));
+        this.set('featuredPosts', sortedPosts.slice(0, 3));
+        this.set('posts', sortedPosts.slice(3));
+      }
+
+      _addIfNotPhone(base, additional) {
+        if (this.viewport.isTabletPlus) {
+          return base + additional;
+        }
+        return base;
+      }
+
+    }
+
+    customElements.define(BlogListPage.is, BlogListPage);
+  </script>
+</dom-module>

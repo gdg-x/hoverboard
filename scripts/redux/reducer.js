@@ -61,3 +61,12 @@ const videosReducer = (state = initialState.videos, action) => {
       return state;
   }
 };
+
+const blogReducer = (state = initialState.blog, action) => {
+  switch (action.type) {
+    case FETCH_BLOG_LIST:
+      return Object.assign({}, state, { list: action.list });
+    default:
+      return state;
+  }
+};

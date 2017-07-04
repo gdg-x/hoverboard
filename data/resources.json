@@ -8,10 +8,12 @@
   "followOur": "Follow our",
   "followUs": "Follow us",
   "emailUs": "Email us",
-  "blog": "Blog",
   "partnershipResources": "Partnership Resources",
   "eventResources": "Event Resources",
   "buyTicket": "Buy ticket",
+  "footer": {
+    "blog": "Blog"
+  },
   "footerRelBlock": [
     {
       "title": "About",
@@ -129,5 +131,13 @@
       "label": "See all videos",
       "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
     }
+  },
+  "blog": {
+    "published": "Published",
+    "suggested": "Up next"
+  },
+  "latestPostsBlock": {
+    "title": "The latest news",
+    "button": "View all stories"
   }
 }

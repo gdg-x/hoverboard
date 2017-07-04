@@ -4,6 +4,7 @@
 
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
@@ -25,11 +26,10 @@
 <link rel="import" href="../bower_components/plastic-image/plastic-image.html">
 
 <link rel="import" href="redux-mixin.html">
+<link rel="import" href="mixins/scroll-functions.html">
 <link rel="import" href="elements/shared-styles.html">
-<link rel="import" href="elements/flex-layout-attr.html">
 <link rel="import" href="elements/hoverboard-icons.html">
 <link rel="import" href="elements/footer-block.html">
-<link rel="import" href="elements/video-dialog.html">
 
 
 <dom-module id="hoverboard-app">
@@ -38,7 +38,7 @@
 
     <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
     <style>
-       :host {
+      :host {
         display: block;
         position: relative;
         min-height: 100vh;
@@ -110,7 +110,7 @@
       }
 
       app-header iron-pages {
-        z-index: 0;
+        transform: translateZ(0);
       }
 
       .hero-overlay {
@@ -173,11 +173,16 @@
       }
     </style>
 
-    <iron-media-query id="mq-phone" full query="(max-width: {$ mediaQueries.xs.max $})" query-matches="{{isPhoneSize}}"></iron-media-query>
+    <iron-media-query id="mq-phone" full query="(max-width: {$ mediaQueries.xs.max $})"
+                      query-matches="{{isPhoneSize}}"></iron-media-query>
 
     <app-location route="{{appRoute}}"></app-location>
-    <app-route route="{{appRoute}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}">
-    </app-route>
+    <app-route
+      route="{{appRoute}}"
+      pattern="/:page"
+      data="{{routeData}}"
+      tail="{{subroute}}"
+    ></app-route>
 
     <app-drawer-layout drawer-width="300px" force-narrow fullbleed>
 
@@ -188,7 +193,13 @@
           <h3 class="location">{$ location.short $}</h3>
         </app-toolbar>
 
-        <iron-selector class="drawer-list" selected="[[route]]" attr-for-selected="path" selected-class="selected" role="navigation">
+        <iron-selector
+          class="drawer-list"
+          selected="[[route]]"
+          attr-for-selected="path"
+          selected-class="selected"
+          role="navigation"
+        >
           {% for nav in navigation %}
           <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer">{$ nav.title $}</a>
           {% endfor %}
@@ -197,16 +208,19 @@
 
       <app-header-layout id="headerLayout">
 
-        <app-header slot="header" condenses fixed>
+        <app-header slot="header" condenses fixed effects="waterfall">
           <app-toolbar class="header" sticky>
-            <paper-icon-button icon="hoverboard:menu" aria-label="Menu" hidden$="[[!isPhoneSize]]" on-tap="openDrawer"></paper-icon-button>
+            <paper-icon-button icon="hoverboard:menu" aria-label="Menu" hidden$="[[!isPhoneSize]]"
+                               on-tap="openDrawer"></paper-icon-button>
             <div layout horizontal center flex>
               <a href="/" hidden$="[[isPhoneSize]]" layout horizontal>
-                <plastic-image class="toolbar-logo" srcset="/images/logo-monochrome.svg" alt="{$ title $}"></plastic-image>
+                <plastic-image class="toolbar-logo" srcset="/images/logo-monochrome.svg"
+                               alt="{$ title $}"></plastic-image>
               </a>
             </div>
 
-            <paper-tabs class="nav-items" selected="[[route]]" attr-for-selected="name" hidden$="[[isPhoneSize]]" role="navigation" noink>
+            <paper-tabs class="nav-items" selected="[[route]]" attr-for-selected="name" hidden$="[[isPhoneSize]]"
+                        role="navigation" noink>
               {% for nav in navigation %}
               <paper-tab name="{$ nav.route $}" class="nav-item" link>
                 <a href="{$ nav.permalink $}" layout vertical center-center>{$ nav.title $}</a>
@@ -216,14 +230,19 @@
           </app-toolbar>
 
           <app-toolbar class="hero-block" layout start vertical center-justified>
-            <plastic-image class="hero-image" srcset="[[hero.background.image]]" sizing="cover" lazy-load preload fade fit></plastic-image>
+            <plastic-image
+              class="hero-image"
+              srcset="[[hero.background.image]]"
+              sizing="cover"
+              lazy-load preload fade fit
+            ></plastic-image>
             <div class="hero-overlay" show$=[[hero.background.image]] fit></div>
             <iron-pages selected="[[route]]" attr-for-selected="route" fallback-selection="default">
               <div class="hero-content" route="home">
                 <plastic-image class="hero-logo" srcset="/images/logo.svg" alt="{$ title $}"></plastic-image>
                 <p class="hero-description highlight-font">[[hero.description]]</p>
               </div>
-              <div class="hero-content" route="default">
+              <div route="default">
                 <div class="hero-title highlight-font">[[hero.title]]</div>
                 <p class="hero-description">[[hero.description]]</p>
               </div>
@@ -234,7 +253,7 @@
 
         <iron-lazy-pages attr-for-selected="data-route" selected="[[route]]">
           <home-page data-route="home" data-path="pages/home-page.html"></home-page>
-          <blog-page data-route="blog" data-path="pages/blog-page.html"></blog-page>
+          <blog-page data-route="blog" data-path="pages/blog-page.html" route="[[subroute]]"></blog-page>
           <schedule-page data-route="schedule" data-path="pages/schedule-page.html"></schedule-page>
           <speakers-page data-route="speakers" data-path="pages/speakers-page.html"></speakers-page>
           <team-page data-route="team" data-path="pages/team-page.html"></team-page>
@@ -256,7 +275,7 @@
   </template>
 
   <script>
-    class HoverboardApp extends ReduxMixin(Polymer.Element) {
+    class HoverboardApp extends ScrollFunctions(ReduxMixin(Polymer.Element)) {
 
       static get is() {
         return 'hoverboard-app';
@@ -331,11 +350,15 @@
         if (!page && page !== '') {
           return;
         }
-        routeActions.setRoute(page);
+        this.scrollToY(0, 9000);
+        routeActions.setRoute(page, this.subroute.path !== '' && this.subroute.path !== '/');
       }
 
       _isPhoneSizeChanged(value) {
-        uiActions.setViewportSize({'isPhone': value});
+        uiActions.setViewportSize({
+          'isPhone': value,
+          'isTabletPlus': !value
+        });
       }
     }
 

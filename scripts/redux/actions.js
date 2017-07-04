@@ -11,6 +11,12 @@ const uiActions = {
       value
     });
   },
+  setHero: hero => {
+    store.dispatch({
+      type: SET_HERO,
+      hero
+    });
+  },
   toggleVideoDialog: (value = null) => {
     store.dispatch({
       type: TOGGLE_VIDEO_DIALOG,
@@ -20,16 +26,18 @@ const uiActions = {
 };
 
 const routeActions = {
-  setRoute: routeFromAction => {
+  setRoute: (routeFromAction, hasSubroute = false) => {
     const route = routeFromAction || 'home';
     store.dispatch({
       type: SET_ROUTE,
       route
     });
-    store.dispatch({
-      type: SET_HERO,
-      hero: heroSettings[route]
-    });
+    if (!hasSubroute) {
+      store.dispatch({
+        type: SET_HERO,
+        hero: heroSettings[route]
+      });
+    }
   }
 };
 
@@ -62,6 +70,17 @@ const videosActions = {
       .on('value', snapshot => store.dispatch({
         type: FETCH_VIDEOS,
         videos: snapshot.val()
+      }));
+  }
+};
+
+const blogActions = {
+  fetchList: () => {
+    return firebase.database()
+      .ref('/blog/list')
+      .on('value', snapshot => store.dispatch({
+        type: FETCH_BLOG_LIST,
+        list: snapshot.val()
       }));
   }
 };

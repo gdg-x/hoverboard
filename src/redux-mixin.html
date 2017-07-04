@@ -13,8 +13,7 @@
       isDrawerOpened: false,
       viewport: {
         isPhone: true,
-        isTablet: false,
-        isDesktop: false
+        isTabletPlus: false
       },
       videoDialog: {
         opened: false,
@@ -27,7 +26,10 @@
     hero: null,
     tickets: [],
     partners: [],
-    videos: []
+    videos: [],
+    blog: {
+      list: {}
+    }
   };
 
   const appReducer = (state = initialState, action) => {
@@ -37,7 +39,8 @@
       hero: heroReducer(state.hero, action),
       tickets: ticketsReducer(state.tickets, action),
       partners: partnersReducer(state.partners, action),
-      videos: videosReducer(state.videos, action)
+      videos: videosReducer(state.videos, action),
+      blog: blogReducer(state.blog, action)
     };
   };
 

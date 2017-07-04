@@ -1,0 +1,158 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../mixins/utils-functions.html">
+<link rel="import" href="../redux-mixin.html">
+<link rel="import" href="./shared-styles.html">
+<link rel="import" href="../elements/text-truncate.html">
+
+<dom-module id="latest-posts-block">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+    <style>
+
+      :host {
+        display: block;
+      }
+
+      .posts-wrapper {
+        margin: 0 -8px;
+      }
+
+      .post {
+        margin: 8px;
+        width: calc(50% - 16px);
+        background-color: white;
+      }
+
+      .image {
+        width: 100%;
+        height: 128px;
+      }
+
+      .details {
+        padding: 16px;
+      }
+
+      .title {
+        font-size: 20px;
+        line-height: 1.2;
+      }
+
+      .description {
+        margin-top: 8px;
+        color: var(--secondary-text-color)
+      }
+
+      .date {
+        margin-top: 16px;
+        font-size: 12px;
+        text-transform: uppercase;
+        color: var(--secondary-text-color);
+      }
+
+      .cta-button {
+        margin-top: 24px;
+      }
+
+      @media (min-width: 640px) {
+        .post {
+          width: auto;
+          transition: box-shadow var(--animation);
+        }
+
+        .post:last-of-type {
+          display: none;
+        }
+
+        .post:hover {
+          box-shadow: var(--box-shadow);
+        }
+      }
+
+      @media (min-width: 812px) {
+        .post:last-of-type {
+          display: flex;
+        }
+      }
+
+    </style>
+
+    <div class="content">
+      <h1 class="content-title">{$ latestPostsBlock.title $}</h1>
+
+      <div class="posts-wrapper" layout horizontal wrap justified>
+        <template is="dom-repeat" items="[[posts]]" as="post">
+          <a href$="/blog/posts/[[post.id]]/" class="post" flex$="[[viewport.isTabletPlus]]" layout vertical>
+            <plastic-image
+              class="image"
+              srcset="[[post.image]]"
+              style$="background-color: [[post.backgroundColor]];"
+              sizing="cover"
+              lazy-load preload fade
+            ></plastic-image>
+            <div class="details" flex-auto layout vertical justified>
+              <div>
+                <text-truncate lines="2">
+                  <h3 class="title">[[post.title]]</h3>
+                </text-truncate>
+                <text-truncate lines="3">
+                  <p class="description">[[post.brief]]</p>
+                </text-truncate>
+              </div>
+              <div class="date">[[getDate(post.published)]]</div>
+            </div>
+          </a>
+        </template>
+      </div>
+
+      <a href="/blog/">
+        <paper-button class="cta-button icon-right">
+          <span>{$ latestPostsBlock.button $}</span>
+          <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+        </paper-button>
+      </a>
+    </div>
+
+  </template>
+
+  <script>
+
+    class LatestPostsBlock extends UtilsFunctions(ReduxMixin(Polymer.Element)) {
+      static get is() {
+        return 'latest-posts-block';
+      }
+
+      static get properties() {
+        return {
+          postsSource: {
+            type: Object,
+            statePath: 'blog.list',
+            observer: '_transformPosts'
+          },
+          viewport: {
+            type: Object,
+            statePath: 'ui.viewport'
+          },
+          posts: Array
+        }
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        if (!Object.keys(this.postsSource).length) blogActions.fetchList();
+      }
+
+      _transformPosts(postsSource) {
+        const sortedPosts = this.transformToArray(postsSource, 'id').sort((a, b) => b.published.localeCompare(a.published));
+        this.set('posts', sortedPosts.slice(0, 4));
+      }
+    }
+
+    customElements.define(LatestPostsBlock.is, LatestPostsBlock);
+  </script>
+</dom-module>
