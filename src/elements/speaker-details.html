@@ -84,8 +84,7 @@
                     characters="220"
                     break-last-word
                   ></truncate-marked-text>
-                  <a class="read-more" href$="/schedule/day[[session.day]]?sessionId=[[session.id]]" dialog-dismiss>{$ readMore $}</a>
-
+                  <a class="read-more" hidden$="{{!session.day}}" href$="/schedule/day[[session.day]]?sessionId=[[session.id]]" dialog-dismiss>{$ readMore $}</a>
                 </div>
               </div>
             </template>
@@ -170,9 +169,7 @@
             Polymer.IronDropdownScrollManager.removeScrollLock(this.$.scrollHeaderPanel);
             this._finishRenderClosed();
           }
-
         }
-
       });
 
     }());
