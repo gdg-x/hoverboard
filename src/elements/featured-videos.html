@@ -1,0 +1,327 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
+<link rel="import" href="../redux-mixin.html">
+<link rel="import" href="flex-layout-attr.html">
+<link rel="import" href="video-dialog.html">
+
+<dom-module id="featured-videos">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+    <style>
+       :host {
+        display: block;
+      }
+
+      .videos-wrapper {
+        padding: 0;
+      }
+
+      .header {
+        margin: 24px auto;
+        padding: 0 16px;
+      }
+
+      .title {
+        font-size: 24px;
+      }
+
+      .icon-label {
+        margin-left: 10px;
+      }
+
+      .video-icon {
+        margin-left: 0;
+        padding-left: 0;
+      }
+
+      .video-list {
+        position: relative;
+        margin: 0 auto;
+        max-width: 1280px;
+        height: 250px;
+        overflow: hidden;
+        margin-left: -15px;
+      }
+
+      .videos {
+        transition: var(--slideSmoothlyAnimation);
+        will-change: transition;
+        backface-visibility: hidden;
+        transform: translateX(0);
+      }
+
+      .video-item {
+        width: 315px;
+        min-width: 315px;
+        height: 213px;
+        position: relative;
+        padding: 0 15px;
+      }
+
+      .preview-image {
+        display: block;
+        cursor: pointer;
+        width: 280px;
+        min-width: 270px;
+        height: 177px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        overflow: hidden;
+      }
+
+      .video-play {
+        position: absolute;
+        z-index: 1;
+        width: 60px;
+        height: 60px;
+        color: #fff;
+        opacity: 0.8;
+        left: 50%;
+        top: 46%;
+        transform: translate(-50%, -54%);
+      }
+
+      .video-title {
+        font-size: 18px;
+        line-height: 26px;
+        color: var(--secondary-text-color);
+      }
+      
+      @media (min-width: 768px) {    
+
+        .videos-wrapper {
+          padding: 60px 40px;
+        }
+
+        .header {
+          padding: 0;
+        }
+
+        .chevron-icon {
+          width: 100px;
+          height: 100px;
+          color: #FFF;
+          opacity: 0.6;
+          position: absolute;
+          z-index: 1;
+          top: 40%;
+          transform: translate(0, -55%);
+          display: none;
+          background-color: var(--default-primary-color);
+          border-radius: 50%;
+        }
+
+        .video-list:hover .chevron-icon {
+          display: block;
+        }
+       
+        .last-video {
+          left: -20px;
+        }
+
+         .next-video {
+          right: -20px;
+         }
+      }
+
+      @media (min-width: 868px) {
+
+        .preview-image {
+          width: 100%;
+          min-width: 240px;
+          height: 221px;
+        }
+
+        .video-item {
+          width: 420px;
+          min-width: 420px;
+          height: 260px;
+        }
+
+         .video-list {
+          min-height: 300px;
+         }
+      }
+    </style>
+
+    <div class="videos-wrapper container" layout justified>
+      <div class="header" flex layout horizontal center wrap>
+        <div class="title">{$ featuredVideos.title $}</div>
+        <a class="all-videos-link" href="{$ featuredVideos.callToAction.link $}" target="_blank" rel="noopener noreferrer" flex layout
+          horizontal end-justified$="[[!viewport.isPhone]]">
+          <paper-button class="video-icon">
+            <iron-icon icon="hoverboard:video"></iron-icon>
+            <span class="icon-label">{$ featuredVideos.callToAction.label $}</span>
+          </paper-button>
+        </a>
+      </div>
+
+      <div class="video-list" layout flex horizontal>
+        <paper-icon-button class="last-video chevron-icon" icon="hoverboard:chevron-left" on-tap="shiftContentLeft"></paper-icon-button>
+        <div id="videos" class="videos" layout horizontal>
+          <template is="dom-repeat" items="[[videos]]" as="block" index-as="index">
+            <div class="video-item">
+              <paper-icon-button class="video-play" icon="hoverboard:play" on-tap="playVideo" flex layout horizontal center-center></paper-icon-button>
+
+              <plastic-image id="image[[index]]" class="preview-image" srcset="[[getSessionsImageUrl(block.thumbnail, index)]]" sizing="cover"
+                lazy-load preload fade></plastic-image>
+
+              <div class="video-title">[[block.title]]</div>
+            </div>
+          </template>
+        </div>
+        <paper-icon-button class="next-video chevron-icon" icon="hoverboard:chevron-right" on-tap="shiftContentRight"></paper-icon-button>
+
+      </div>
+
+    </div>
+
+    <video-dialog id="videoDialog"
+                video-title="[[video.title]]"
+                youtube-id="[[video.youtubeId]]"
+                entry-animation="scale-up-animation"
+                exit-animation="fade-out-animation"
+                disable-controls="[[!video.disableControls]]"></video-dialog>
+  </template>
+
+  <script>
+    class FeaturedVideos extends ReduxMixin(Polymer.GestureEventListeners(Polymer.Element)) {
+      static get is() {
+        return 'featured-videos'
+      }
+
+      static get properties() {
+          return {
+            videos: {
+              type: Object,
+              statePath: 'videos'
+            },
+            viewport: {
+              type: Object,
+              statePath: 'ui.viewport'
+            },
+            _currentIndex: {
+              type: Number,
+              value: 0
+            }
+          }
+        }
+
+        connectedCallback() {
+          super.connectedCallback();
+          videosActions.fetchVideos();
+        }
+
+        ready() {
+          super.ready();
+          let startPosition = 0;
+          let currentPosition = 0;
+          let distancePosition = 0;
+          let isMouseDown = false;
+          const videoListElement = this.$.videos;
+
+          Polymer.Gestures.addListener(this.$.videos, 'track', e => {
+            if (!isMouseDown) return;
+
+            let videoListWidth = this.getVideoListWidth();
+            distancePosition = (e.detail.x - startPosition) + currentPosition;
+
+            if (distancePosition < 0 && -distancePosition < (videoListWidth + 100 - window.innerWidth)) {
+              this.transformVideoList(videoListElement, distancePosition);
+            }
+          });
+
+          Polymer.Gestures.addListener(this.$.videos, 'down', event => {
+            isMouseDown = true;
+            currentPosition = parseInt(getComputedStyle(videoListElement, null).getPropertyValue("transform").split(",")[4]);
+            startPosition = event.detail.x;
+          });
+
+          Polymer.Gestures.addListener(this.$.videos, 'up', event => {
+            isMouseDown = false;
+          });
+        }
+
+        shiftContentLeft() {
+          const {
+            cardWidth,
+            videosLength
+          } = this.getVideosDetails();
+
+          if (this._currentIndex < videosLength && this._currentIndex > 0) {
+            const newX = -(this._currentIndex - 1) * cardWidth;
+            this.transformVideoList(this.$.videos, newX);
+            this._currentIndex--;
+          }
+        }
+
+        shiftContentRight() {
+          const {
+            cardWidth,
+            videosLength
+          } = this.getVideosDetails();
+
+          if (this._currentIndex >= 0 && this._currentIndex < videosLength - 1) {
+            const newX = -(this._currentIndex + 1) * cardWidth;
+            this.transformVideoList(this.$.videos, newX);
+            this._currentIndex++;
+          }
+        }
+
+        getVideosDetails() {
+          const videos = this.shadowRoot.querySelectorAll('.video-item');
+          const cardRect = videos[videos.length - 1].getBoundingClientRect();
+          const cardWidth = cardRect.width;
+          const videosLength = videos.length;
+
+          return {
+            cardWidth,
+            videosLength
+          }
+        }
+
+        getVideoListWidth() {
+          const videos = this.shadowRoot.querySelectorAll('.video-item');
+          const cardRect = videos[videos.length - 1].getBoundingClientRect();
+          return cardRect.width * videos.length;
+        }
+
+        transformVideoList(el, newPosition) {
+          el.style.transform = 'translate3d(' + newPosition + 'px, 0, 0)';
+        }
+
+        getSessionsImageUrl(path, index) {
+          var id = '#image' + index;
+          firebase.storage()
+            .ref(path)
+            .getDownloadURL()
+            .then((url) => {
+              let imageElement = this.shadowRoot.querySelector(id);
+              imageElement.srcset = url;
+            })
+            .catch((error) => {
+              console.error(`Error occured during getting sessions images from storage: ${error}`);
+            });
+        }
+
+         playVideo(e) {
+          const presenters = e.model.__data.block.speakers ? (` by ${e.model.__data.block.speakers}`) : '';
+          const title = e.model.__data.block.title + presenters;
+          const youtubeId = e.model.__data.block.youtubeId;
+
+          uiActions.toggleVideoDialog({
+            title: title,
+            youtubeId: youtubeId,
+            disableControls: true,
+            opened: true
+          });
+        }
+    }
+
+    customElements.define(FeaturedVideos.is, FeaturedVideos);
+    
+  </script>
+</dom-module>

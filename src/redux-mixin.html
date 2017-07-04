@@ -14,12 +14,19 @@
       viewport: {
         isPhone: true,
         isTabletPlus: false
+      },
+      videoDialog: {
+        opened: false,
+        disableControls: false,
+        youtubeId: '',
+        title: ''
       }
     },
     route: 'home',
     hero: null,
     tickets: [],
     partners: [],
+    videos: [],
     blog: {
       list: {}
     }
@@ -32,6 +39,7 @@
       hero: heroReducer(state.hero, action),
       tickets: ticketsReducer(state.tickets, action),
       partners: partnersReducer(state.partners, action),
+      videos: videosReducer(state.videos, action),
       blog: blogReducer(state.blog, action)
     };
   };

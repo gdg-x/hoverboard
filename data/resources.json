@@ -125,6 +125,13 @@
     "title": "Partners",
     "button": "Become a partner"
   },
+  "featuredVideos": {
+    "title": "DFUA'16 featured videos",
+    "callToAction": {
+      "label": "See all videos",
+      "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+    }
+  },
   "blog": {
     "published": "Published",
     "suggested": "Up next"
