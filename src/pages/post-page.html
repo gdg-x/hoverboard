@@ -69,6 +69,7 @@
 
         .suggested-posts {
           margin-top: 48px;
+          padding-bottom: 36px;
         }
       }
 
@@ -87,7 +88,7 @@
       auto
     ></iron-ajax>
 
-    <div class="content content-narrow">
+    <div class="content-narrow">
       <marked-element class="post" markdown="[[postBody]]">
         <div slot="markdown-html"></div>
       </marked-element>
@@ -95,7 +96,7 @@
     </div>
 
     <div class="suggested-posts">
-      <div class="content content-narrow">
+      <div class="content-narrow">
         <h3 class="content-title">{$ blog.suggested $}</h3>
         <posts-list posts="[[suggestedPosts]]"></posts-list>
       </div>

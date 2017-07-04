@@ -4,6 +4,7 @@
 
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
@@ -207,7 +208,7 @@
 
       <app-header-layout id="headerLayout">
 
-        <app-header slot="header" condenses fixed>
+        <app-header slot="header" condenses fixed effects="waterfall">
           <app-toolbar class="header" sticky>
             <paper-icon-button icon="hoverboard:menu" aria-label="Menu" hidden$="[[!isPhoneSize]]"
                                on-tap="openDrawer"></paper-icon-button>

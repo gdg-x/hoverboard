@@ -32,7 +32,6 @@
         display: block;
         width: calc(50% - 16px);
         background-color: white;
-        border-radius: var(--border-radius);
       }
 
       .logo-img {
@@ -41,12 +40,17 @@
       }
 
       .cta-button {
-        margin-top: 32px;
+        margin-top: 24px;
       }
 
       @media (min-width: 640px) {
         .logo-item {
           width: calc(25% - 16px);
+          transition: box-shadow var(--animation);
+        }
+
+        .logo-item:hover {
+          box-shadow: var(--box-shadow);
         }
       }
 

@@ -2,6 +2,7 @@
 
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
 
+<link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="./shared-styles.html">
 <link rel="import" href="../elements/text-truncate.html">
 
@@ -80,7 +81,7 @@
                 <p class="description">[[post.brief]]</p>
               </text-truncate>
             </div>
-            <span class="date">[[_getDate(post.published)]]</span>
+            <span class="date">[[getDate(post.published)]]</span>
           </div>
         </div>
       </a>
@@ -89,7 +90,7 @@
 
   <script>
 
-    class PostsList extends Polymer.Element {
+    class PostsList extends UtilsFunctions(Polymer.Element) {
       static get is() {
         return 'posts-list';
       }
@@ -98,10 +99,6 @@
         return {
           posts: Array
         }
-      }
-
-      _getDate(date) {
-        return new Date(date).toLocaleString('en-us', { month: 'short', day: 'numeric', year: 'numeric' });
       }
     }
 

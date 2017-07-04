@@ -42,7 +42,7 @@
         padding: 24px;
         height: 100%;
         transform: translateZ(0);
-        color: white;
+        color: #fff;
       }
 
       .title {
@@ -95,7 +95,7 @@
                     <p class="description">[[post.brief]]</p>
                   </text-truncate>
                 </div>
-                <span class="date">[[_getDate(post.published)]]</span>
+                <span class="date">[[getDate(post.published)]]</span>
               </div>
             </a>
           </template>
@@ -103,7 +103,7 @@
       </div>
     </div>
 
-    <div class="content content-narrow">
+    <div class="content-narrow">
       <posts-list posts="[[posts]]"></posts-list>
     </div>
 
@@ -134,17 +134,13 @@
 
       connectedCallback() {
         super.connectedCallback();
-        blogActions.fetchList();
+        if (!Object.keys(this.postsSource).length) blogActions.fetchList();
       }
 
       _transformPosts(postsSource) {
         const sortedPosts = this.transformToArray(postsSource, 'id').sort((a, b) => b.published.localeCompare(a.published));
         this.set('featuredPosts', sortedPosts.slice(0, 3));
         this.set('posts', sortedPosts.slice(3));
-      }
-
-      _getDate(date) {
-        return new Date(date).toLocaleString('en-us', { month: 'short', day: 'numeric', year: 'numeric' });
       }
 
       _addIfNotPhone(base, additional) {
