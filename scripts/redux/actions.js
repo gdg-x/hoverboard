@@ -10,6 +10,12 @@ const uiActions = {
       type: SET_VIEWPORT_SIZE,
       value
     });
+  },
+  toggleVideoDialog: (value = null) => {
+    store.dispatch({
+      type: TOGGLE_VIDEO_DIALOG,
+      value
+    });
   }
 };
 
@@ -45,6 +51,17 @@ const partnersActions = {
       .on('value', snapshot => store.dispatch({
         type: FETCH_PARTNERS,
         partners: snapshot.val()
+      }));
+  }
+};
+
+const videosActions = {
+  fetchVideos: () => {
+    return firebase.database()
+      .ref('/videos')
+      .on('value', snapshot => store.dispatch({
+        type: FETCH_VIDEOS,
+        videos: snapshot.val()
       }));
   }
 };

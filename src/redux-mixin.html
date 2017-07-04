@@ -15,12 +15,19 @@
         isPhone: true,
         isTablet: false,
         isDesktop: false
+      },
+      videoDialog: {
+        opened: false,
+        disableControls: false,
+        youtubeId: '',
+        title: ''
       }
     },
     route: 'home',
     hero: null,
     tickets: [],
-    partners: []
+    partners: [],
+    videos: []
   };
 
   const appReducer = (state = initialState, action) => {
@@ -29,7 +36,8 @@
       route: routeReducer(state.route, action),
       hero: heroReducer(state.hero, action),
       tickets: ticketsReducer(state.tickets, action),
-      partners: partnersReducer(state.partners, action)
+      partners: partnersReducer(state.partners, action),
+      videos: videosReducer(state.videos, action)
     };
   };
 

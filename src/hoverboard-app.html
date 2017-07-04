@@ -29,6 +29,7 @@
 <link rel="import" href="elements/flex-layout-attr.html">
 <link rel="import" href="elements/hoverboard-icons.html">
 <link rel="import" href="elements/footer-block.html">
+<link rel="import" href="elements/video-dialog.html">
 
 
 <dom-module id="hoverboard-app">
@@ -242,6 +243,16 @@
         <footer-block></footer-block>
       </app-header-layout>
     </app-drawer-layout>
+
+    <video-dialog id="videoDialog"
+                opened="[[ui.videoDialog.opened]]"
+                video-title="[[ui.videoDialog.title]]"
+                youtube-id="[[ui.videoDialog.youtubeId]]"
+                entry-animation="scale-up-animation"
+                exit-animation="fade-out-animation"
+                disable-controls="[[!ui.videoDialog.disableControls]]"
+                fit fixed-top></video-dialog>
+
   </template>
 
   <script>

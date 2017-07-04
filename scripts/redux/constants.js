@@ -7,3 +7,7 @@ const SET_HERO = 'SET_HERO';
 const FETCH_TICKETS = 'FETCH_TICKETS';
 // partners
 const FETCH_PARTNERS = 'FETCH_PARTNERS';
+// featured videos
+const FETCH_VIDEOS = 'FETCH_VIDEOS';
+// video dialog
+const TOGGLE_VIDEO_DIALOG = 'TOGGLE_VIDEO_DIALOG';

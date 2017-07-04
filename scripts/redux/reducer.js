@@ -4,6 +4,10 @@ const uiReducer = (state = initialState.ui, action) => {
       return Object.assign({}, state, {
         isDrawerOpened: action.value || !state.isDrawerOpened
       });
+    case TOGGLE_VIDEO_DIALOG:
+      return Object.assign({}, state,  {
+        videoDialog: Object.assign({}, state.videoDialog, action.value)
+      });
     case SET_VIEWPORT_SIZE:
       return Object.assign({}, state, {
         viewport: Object.assign({}, state.viewport, action.value)
@@ -44,6 +48,15 @@ const partnersReducer = (state = initialState.partners, action) => {
   switch (action.type) {
     case FETCH_PARTNERS:
       return action.partners;
+    default:
+      return state;
+  }
+};
+
+const videosReducer = (state = initialState.videos, action) => {
+  switch (action.type) {
+    case FETCH_VIDEOS:
+      return action.videos;
     default:
       return state;
   }
