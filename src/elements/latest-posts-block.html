@@ -25,7 +25,6 @@
 
       .post {
         margin: 8px;
-        display: block;
         width: calc(50% - 16px);
         background-color: white;
       }
@@ -88,7 +87,7 @@
 
       <div class="posts-wrapper" layout horizontal wrap justified>
         <template is="dom-repeat" items="[[posts]]" as="post">
-          <a href$="/blog/posts/[[post.id]]/" class="post" flex layout vertical>
+          <a href$="/blog/posts/[[post.id]]/" class="post" flex$="[[viewport.isTabletPlus]]" layout vertical>
             <plastic-image
               class="image"
               srcset="[[post.image]]"
