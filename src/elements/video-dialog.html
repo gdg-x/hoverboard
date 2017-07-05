@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../redux-mixin.html">
 
 <dom-module id="video-dialog">
     <template>
@@ -44,19 +45,10 @@
                 padding: 0;
             }
 
-            @media (min-width: 868px) {
-                .toolbar:hover .go-back-icon {
-                    display: block;
-                }
-
-                .go-back-icon {
-                    display: none;
-                }
-            }
         </style>
 
         <div class="toolbar">
-            <paper-icon-button dialog-dismiss class="go-back-icon" icon="hoverboard:arrow-back" on-tap="_closeVideo"></paper-icon-button>
+            <paper-icon-button dialog-dismiss class="go-back-icon" icon="hoverboard:arrow-back" on-tap="_closeSelf"></paper-icon-button>
         </div>
         <div class="video-wrapper">
             <google-youtube 
@@ -74,7 +66,7 @@
     </template>
 
     <script>
-        class VideoDialog extends Polymer.mixinBehaviors([Polymer.PaperDialogBehavior], Polymer.Element) {
+        class VideoDialog extends  ReduxMixin(Polymer.mixinBehaviors([Polymer.PaperDialogBehavior], Polymer.Element)) {
 
             static get is() {
                 return 'video-dialog'
@@ -97,25 +89,26 @@
 
             videoDialogActionMade() {
                 if (this.opened) {
-                    this._openVideo();
+                    if (this.withBackdrop) {
+                        this.backdropElement.open();
+                    }
+                    this.$.video.play(); 
                 }
                 else {
-                    this._closeVideo();
+                    this.$.video.seekTo(0);
+                    this.$.video.pause();
+                    this.backdropElement.close();
+                    this.opened = false;  
                 }
             }
 
-            _openVideo() {
-                if (this.withBackdrop) {
-                    this.backdropElement.open();
-                }
-                this.$.video.play();
-            }
-
-            _closeVideo() {                
-                this.$.video.seekTo(0);
-                this.$.video.pause();
-                this.backdropElement.close();
-                this.opened = false;                
+            _closeSelf() {
+                 uiActions.toggleVideoDialog({
+                   opened: false,
+                    disableControls: false,
+                    youtubeId: '',
+                    title: ''
+                });
             }
         }
 
