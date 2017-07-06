@@ -27,9 +27,8 @@
     tickets: [],
     partners: [],
     videos: [],
-    blog: {
-      list: {}
-    }
+    blog: {},
+    speakers: {}
   };
 
   const appReducer = (state = initialState, action) => {
@@ -40,7 +39,8 @@
       tickets: ticketsReducer(state.tickets, action),
       partners: partnersReducer(state.partners, action),
       videos: videosReducer(state.videos, action),
-      blog: blogReducer(state.blog, action)
+      blog: blogReducer(state.blog, action),
+      speakers: speakersReducer(state.speakers, action)
     };
   };
 

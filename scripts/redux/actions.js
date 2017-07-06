@@ -84,3 +84,14 @@ const blogActions = {
       }));
   }
 };
+
+const speakersActions = {
+  fetchList: () => {
+    return firebase.database()
+      .ref('/speakers')
+      .on('value', snapshot => store.dispatch({
+        type: FETCH_SPEAKERS_LIST,
+        list: snapshot.val()
+      }));
+  }
+};

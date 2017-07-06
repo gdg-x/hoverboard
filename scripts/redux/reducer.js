@@ -65,7 +65,16 @@ const videosReducer = (state = initialState.videos, action) => {
 const blogReducer = (state = initialState.blog, action) => {
   switch (action.type) {
     case FETCH_BLOG_LIST:
-      return Object.assign({}, state, { list: action.list });
+      return action.list;
+    default:
+      return state;
+  }
+};
+
+const speakersReducer = (state = initialState.speakers, action) => {
+  switch (action.type) {
+    case FETCH_SPEAKERS_LIST:
+      return action.list;
     default:
       return state;
   }
