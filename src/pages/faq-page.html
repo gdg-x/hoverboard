@@ -3,90 +3,137 @@
 <link rel="import" href="../elements/shared-styles.html">
 
 <dom-module id="faq-page">
-  <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+    <template>
+        <style is="custom-style" include="shared-styles flex flex-alignment"></style>
 
-    <style>
-
-      :host  {
-        display: block;
-      }
-
-    </style>
-
-   <div class="container">
-        <div class="content">
-
-        </div>
-        <div class="markdown-text">
-            <marked-element callback="[[callback]]">
-                <div slot="markdown-html"></div>
-                <script id="markdown-source" type="text/markdown" src$="[[source]]" onload="loaded()"></script>
-                </marked-element>
-        </div>
-   </div>
-  </template>
-
-  <script>
-
-    class FaqPage extends Polymer.Element {
-      static get is() { return 'faq-page' }      
-      static get properties() {
-        return {   
-           path: {
-            type: String,
-            value: '{$ faq $}'
-          },        
-           source: String,
-        }
-      }    
-
-      ready() {
-        super.ready();
-        this._setFileContentSource();
-        this.addEventListener('marked-render-complete', this._sourceUpdated);
-      }
-
-       _sourceUpdated() {
-          const heads = this.shadowRoot.querySelectorAll('.markdown-text h3');
-          const contentDom = Polymer.dom(this.shadowRoot.querySelector('.content'));
-          let lastHeadElement;
-
-          heads.forEach((head) => {
-            const headDom = Polymer.dom(head);
-
-            if (headDom.previousElementSibling.nodeName == 'H2') {                
-                const head2Element = headDom.previousElementSibling;
-                const colHeader = document.createElement("div");
-                colHeader.className = `col-header ${head2Element.id}`;
-                colHeader.textContent = head2Element.textContent;
-                contentDom.node.appendChild(colHeader);
-                lastHeadElement = colHeader;
+        <style>
+             :host {
+                display: block;
             }
 
-            const colContent = document.createElement("a");
-            colContent.className = 'col-content';
-            colContent.href = `#${head.id}`;
-            colContent.textContent = head.textContent;
-            Polymer.dom(lastHeadElement).node.appendChild(colContent); 
-          }) ;
-      }  
+            .content-wrapper {                
+                background-color: #4527A0;
+                background-image: linear-gradient(to right, #7E57C2, #4527A0);
+                width: 100%;
+                overflow: hidden;
+            }
 
-      _setFileContentSource() {          
-        firebase.storage()
-          .ref(this.path)
-          .getDownloadURL()
-          .then((url) => {
-              this.source = url;
-          })     
-          .catch((error) => {
-            console.error(`Error occurred during getting file ${this.path} from storage: ${error}`);
-          });
-      }     
-    }
+            .col {
+                font-size: 32px;
+                line-height: 48px;
+                margin-bottom: 24px;
+                z-index: 2;
+                color: #fff;
+            }
 
-    customElements.define(FaqPage.is, FaqPage);
+            .col-content {
+                line-height: 32px;
+                display: block;
+                font-size: 16px;
+                color: #fff;
+            }
 
-  </script>
+            @media (min-width: 640px) {
+                .content,
+                .markdown-text {
+                    padding: 0 40px;                    
+                }
+
+                .col {
+                    margin-right: 24px;
+                }
+
+                .col:last-of-type {
+                    margin-right: 0;
+                }
+
+                [slot="markdown-html"] h2 {
+                    display: inline-block;
+                    font-size: 40px;
+                }
+
+                 [slot="markdown-html"] h3,
+                 [slot="markdown-html"]  h4,
+                 [slot="markdown-html"]  p,
+                 [slot="markdown-html"]  ul {
+                   margin-left: 33%;
+                   margin-top: 0;
+                }
+            }
+        </style>
+        
+        <div class="content-wrapper">
+            <div class="container">                
+                <div class="content" layout justified horizontal wrap></div>
+        </div>
+        </div>   
+        <div class="container"> 
+            <div class="markdown-text">
+                <marked-element>
+                    <div slot="markdown-html"></div>
+                    <script type="text/markdown" src$="[[source]]"></script>
+                </marked-element>
+            </div>
+        </div>
+    </template>
+
+    <script>
+        class FaqPage extends Polymer.Element {
+            static get is() { return 'faq-page' }
+            static get properties() {
+                return {
+                    path: {
+                        type: String,
+                        value: '{$ faq $}'
+                    },
+                    source: String,
+                }
+            }
+
+            ready() {
+                super.ready();
+                this._setFileContentSource();
+                this.addEventListener('marked-render-complete', this._sourceUpdated);
+            }
+
+            _sourceUpdated() {
+                const heads = this.shadowRoot.querySelectorAll('.markdown-text h3');
+                const contentDom = Polymer.dom(this.shadowRoot.querySelector('.content'));
+                let lastHeadElement;
+
+                heads.forEach((head) => {
+                    const headDom = Polymer.dom(head);
+
+                    if (headDom.previousElementSibling.nodeName == 'H2') {
+                        const head2Element = headDom.previousElementSibling;
+                        const colHeader = document.createElement("div");
+                        colHeader.className = `col ${head2Element.id}`;
+                        colHeader.textContent = head2Element.textContent;
+                        contentDom.node.appendChild(colHeader);
+                        lastHeadElement = colHeader;
+                    }
+
+                    const colContent = document.createElement("a");
+                    colContent.className = 'col-content';
+                    colContent.href = `#${head.id}`;
+                    colContent.textContent = head.textContent;
+                    Polymer.dom(lastHeadElement).node.appendChild(colContent);
+                });
+            }
+
+            _setFileContentSource() {
+                firebase.storage()
+                    .ref(this.path)
+                    .getDownloadURL()
+                    .then((url) => {
+                        this.source = url;
+                    })
+                    .catch((error) => {
+                        console.error(`Error occurred during getting file ${this.path} from storage: ${error}`);
+                    });
+            }
+        }
+
+        customElements.define(FaqPage.is, FaqPage);
+    </script>
 </dom-module>
-
