@@ -73,6 +73,10 @@
         background-color: var(--secondary-background-color);
       }
 
+      .image-overlay {
+        background-color: rgba(0, 0, 0, 0.6);
+      }
+
       .video-play-icon {
         width: 60px;
         height: 60px;
@@ -125,7 +129,7 @@
                   sizing="cover"
                   lazy-load preload fade fit
                 ></plastic-image>
-
+                <div class="image-overlay" fit></div>
                 <paper-icon-button
                   class="video-play-icon"
                   icon="hoverboard:play"
