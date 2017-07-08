@@ -148,5 +148,6 @@
   "latestPostsBlock": {
     "title": "The latest news",
     "button": "View all stories"
-  }
+  },
+  "faq": "/markdown/faq.md"
 }

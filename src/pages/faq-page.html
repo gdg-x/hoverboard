@@ -1,4 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/marked-element/marked-element.html">
+<link rel="import" href="../elements/shared-styles.html">
 
 <dom-module id="faq-page">
   <template>
@@ -12,13 +14,52 @@
 
     </style>
 
-   <h3>Hello from the faq page</h3>
+   <div class="container">
+        <div class="agenda">
+
+        </div>
+        <div class="content">
+            <marked-element>
+                <div slot="markdown-html"></div>
+                <script id="markdown-source" type="text/markdown" src="[[source]]"></script>
+                </marked-element>
+        </div>
+   </div>
   </template>
 
   <script>
 
     class FaqPage extends Polymer.Element {
-      static get is() { return 'faq-page' }
+      static get is() { return 'faq-page' }      
+      static get properties() {
+        return {   
+           path: {
+            type: String,
+            value: '{$ faq $}'
+          },        
+           source: {
+            type: String
+          }
+        }
+      }
+
+       connectedCallback() {
+        super.connectedCallback();
+       this._setFileContentSource();
+       
+      }     
+
+      _setFileContentSource() {          
+        firebase.storage()
+          .ref(this.path)
+          .getDownloadURL()
+          .then((url) => {
+              this.source = url;
+          })
+          .catch((error) => {
+            console.error(`Error occurred during getting sessions images from storage: ${error}`);
+          });
+      }     
     }
 
     customElements.define(FaqPage.is, FaqPage);
