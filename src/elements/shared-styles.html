@@ -128,6 +128,23 @@
         --iron-icon-width: 48px;
       }
 
+       [slot="markdown-html"] {
+        font-size: 18px;
+        line-height: 1.8;
+        color: var(--primary-text-color);
+      }
+
+      [slot="markdown-html"] h1,
+      [slot="markdown-html"] h2,
+      [slot="markdown-html"] h3 {
+        margin: 48px 0 16px;
+      }
+
+      [slot="markdown-html"] p {
+        margin-top: 0;
+        margin-bottom: 24px;
+      }     
+
       @media (min-width: 640px) {
         .container,
         .container-narrow {

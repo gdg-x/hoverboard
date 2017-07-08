@@ -15,13 +15,13 @@
     </style>
 
    <div class="container">
-        <div class="agenda">
+        <div class="content">
 
         </div>
-        <div class="content">
-            <marked-element>
+        <div class="markdown-text">
+            <marked-element callback="[[callback]]">
                 <div slot="markdown-html"></div>
-                <script id="markdown-source" type="text/markdown" src="[[source]]"></script>
+                <script id="markdown-source" type="text/markdown" src$="[[source]]" onload="loaded()"></script>
                 </marked-element>
         </div>
    </div>
@@ -37,17 +37,40 @@
             type: String,
             value: '{$ faq $}'
           },        
-           source: {
-            type: String
-          }
+           source: String,
         }
+      }    
+
+      ready() {
+        super.ready();
+        this._setFileContentSource();
+        this.addEventListener('marked-render-complete', this._sourceUpdated);
       }
 
-       connectedCallback() {
-        super.connectedCallback();
-       this._setFileContentSource();
-       
-      }     
+       _sourceUpdated() {
+          const heads = this.shadowRoot.querySelectorAll('.markdown-text h3');
+          const contentDom = Polymer.dom(this.shadowRoot.querySelector('.content'));
+          let lastHeadElement;
+
+          heads.forEach((head) => {
+            const headDom = Polymer.dom(head);
+
+            if (headDom.previousElementSibling.nodeName == 'H2') {                
+                const head2Element = headDom.previousElementSibling;
+                const colHeader = document.createElement("div");
+                colHeader.className = `col-header ${head2Element.id}`;
+                colHeader.textContent = head2Element.textContent;
+                contentDom.node.appendChild(colHeader);
+                lastHeadElement = colHeader;
+            }
+
+            const colContent = document.createElement("a");
+            colContent.className = 'col-content';
+            colContent.href = `#${head.id}`;
+            colContent.textContent = head.textContent;
+            Polymer.dom(lastHeadElement).node.appendChild(colContent); 
+          }) ;
+      }  
 
       _setFileContentSource() {          
         firebase.storage()
@@ -55,9 +78,9 @@
           .getDownloadURL()
           .then((url) => {
               this.source = url;
-          })
+          })     
           .catch((error) => {
-            console.error(`Error occurred during getting sessions images from storage: ${error}`);
+            console.error(`Error occurred during getting file ${this.path} from storage: ${error}`);
           });
       }     
     }
