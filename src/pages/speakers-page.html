@@ -1,13 +1,18 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/marked-element/marked-element.html">
 
 <link rel="import" href="../mixins/utils-functions.html">
-<link rel="import" href="../redux-mixin.html">
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="../elements/text-truncate.html">
+<link rel="import" href="../elements/shared-styles.html">
 
 <dom-module id="speakers-page">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
 
     <style>
 
@@ -15,63 +20,173 @@
         display: block;
       }
 
+      .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 16px;
+      }
+
+      .speaker {
+        padding: 32px 24px;
+        background: #fff;
+        text-align: center;
+        transition: box-shadow var(--animation);
+      }
+
+      .speaker:hover {
+        box-shadow: var(--box-shadow);
+      }
+
       .photo {
         width: 128px;
         height: 128px;
         background-color: var(--secondary-background-color);
         border-radius: 50%;
+        overflow: hidden;
+      }
+
+      .badges {
+        position: absolute;
+        top: 0;
+        left: calc(50% + 32px);
+      }
+
+      .badge {
+        margin-left: -10px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+      }
+
+      .badge:hover {
+        transform: scale(1.1);
+      }
+
+      .badge:nth-of-type(2) {
+        transform: translate(25%, 75%);
+      }
+
+      .badge:nth-of-type(2):hover {
+        transform: translate3d(25%, 75%, 20px) scale(1.1);
+      }
+
+      .badge-icon {
+        --iron-icon-width: 14px;
+        --iron-icon-height: 14px;
+        color: #fff;
+      }
+
+      .company-logo {
+        width: 100%;
+        height: 16px;
+      }
+
+      .description {
+        color: var(--primary-text-color);
+      }
+
+      .name {
+        margin-top: 8px;
+        line-height: 1;
+      }
+
+      .origin {
+        font-size: 14px;
+      }
+
+      .bio {
+        margin-top: 16px;
+        color: var(--secondary-text-color);
+      }
+
+      .contacts {
+        margin-top: 16px;
+      }
+
+      .social-icon {
+        --paper-icon-button: {
+          padding: 6px;
+          width: 32px;
+          height: 32px;
+        };
+        color: var(--secondary-text-color);
+      }
+
+      @media (min-width: 640px) {
+        .container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 812px) {
+        .container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .container {
+          grid-template-columns: repeat(4, 1fr);
+        }
       }
 
     </style>
 
-    <div class="content" layout horizontal wrap>
-      <template is="dom-repeat" items="[[transformToArray(speakers)]]" as="speaker" on-dom-change="updateCascadedNodes">
-        <div class="speaker" flex-1>
-          <a href$="/speakers/[[speaker.id]]/">
+    <div class="container">
+      <template is="dom-repeat" items="[[transformToArray(speakers, 'id')]]" as="speaker">
+        <a class="speaker" href$="/speakers/[[speaker.id]]/">
+          <div relative>
             <plastic-image
               class="photo"
-              srcset="[[speaker.photoUrl]]"
+              srcset="[[speaker.photo]]"
               sizing="cover"
               lazy-load preload fade
             ></plastic-image>
-            <ul class="badges">
+            <div class="badges" layout horizontal>
               <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
-                <li class="badge">
-                  <a href$="[[badge.link]]" target="_blank" rel="noopener noreferrer">[[badge.name]]</a>
-                  <paper-tooltip>[[badge.description]]</paper-tooltip>
-                </li>
-              </template>
-            </ul>
-            <div class="description">
-              <h4 class="name">[[speaker.name]]</h4>
-              <span class="title">[[speaker.country]]</span>
-            </div>
-            <plastic-image
-              class="company-logo"
-              srcset="{{speaker.companyLogo}}"
-              sizing="contain"
-              lazy-load preload fade
-            ></plastic-image>
-            <div class="tags">{$ skills $}:
-              <template is="dom-repeat" items="[[speaker.tags]]" as="tag">
-                <span class="tag" style$="{{_getCustomStyleValue(tag)}}">[[tag]]</span>
+                <a
+                  class$="badge [[badge.name]]-b"
+                  href$="[[badge.link]]"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title$="[[badge.description]]"
+                  layout horizontal center-center
+                >
+                  <iron-icon class="badge-icon" icon="hoverboard:[[badge.name]]"></iron-icon>
+                </a>
               </template>
             </div>
-            <marked-element class="details-text" markdown="[[speaker.shortBio]]">
-              <div class="markdown-html"></div>
-            </marked-element>
-          </a>
-          <div class="card-actions">
+          </div>
+
+          <plastic-image
+            class="company-logo"
+            srcset="{{speaker.companyLogo}}"
+            sizing="contain"
+            lazy-load preload fade
+          ></plastic-image>
+
+          <div class="description">
+            <h2 class="name">[[speaker.name]]</h2>
+            <span class="origin">[[speaker.country]]</span>
+
+            <text-truncate lines="3">
+              <div class="bio">[[speaker.shortBio]]</div>
+            </text-truncate>
+          </div>
+
+          <div class="contacts">
             <template is="dom-repeat" items="[[speaker.socials]]" as="social">
               <a href="[[social.link]]" target="_blank" rel="noopener noreferrer">
                 <paper-icon-button
                   class="social-icon"
-                  icon$="icons:{{social.icon}}"
+                  icon="hoverboard:{{social.icon}}"
                 ></paper-icon-button>
               </a>
             </template>
           </div>
-        </div>
+
+        </a>
       </template>
     </div>
 
@@ -95,8 +210,7 @@
 
       connectedCallback() {
         super.connectedCallback();
-        speakersActions.fetchList();
-//        if (!Object.keys(this.speakersSource).length) speakersActions.fetchList();
+        if (!Object.keys(this.speakers).length) speakersActions.fetchList();
       }
     }
 

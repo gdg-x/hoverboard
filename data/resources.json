@@ -139,5 +139,8 @@
   "latestPostsBlock": {
     "title": "The latest news",
     "button": "View all stories"
+  },
+  "speakers": {
+    "skills": "Skills"
   }
 }
