@@ -27,6 +27,8 @@
         --default-background-color: #FAFAFA;
         --secondary-background-color: #F5F5F5;
         --animation: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        
+        --slideAnimation: 0.4s cubic-bezier(0, 0, 0.2, 1);
         --border-radius: 5px;
         --box-shadow: 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
         --font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif; /*TODO Change to Open Sans*/
@@ -127,6 +129,23 @@
         --iron-icon-height: 48px;
         --iron-icon-width: 48px;
       }
+
+       [slot="markdown-html"] {
+        font-size: 18px;
+        line-height: 1.8;
+        color: var(--primary-text-color);
+      }
+
+      [slot="markdown-html"] h1,
+      [slot="markdown-html"] h2,
+      [slot="markdown-html"] h3 {
+        margin: 48px 0 16px;
+      }
+
+      [slot="markdown-html"] p {
+        margin-top: 0;
+        margin-bottom: 24px;
+      }     
 
       @media (min-width: 640px) {
         .container,
