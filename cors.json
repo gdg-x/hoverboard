@@ -1,6 +1,6 @@
 [
   {
-    "origin": ["http://localhost:3000", "https://hoverboard-v2-dev.firebaseapp.com/"],
+    "origin": ["http://localhost:3000", "https://hoverboard-v2-dev.firebaseapp.com/", "http://localhost:8081", "https://hoverboard-experimental.firebaseapp.com"],
     "method": ["GET"],
     "maxAgeSeconds": 3600
   }

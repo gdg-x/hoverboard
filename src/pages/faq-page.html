@@ -13,8 +13,7 @@
             }
 
             .content-wrapper {
-                background-color: #4527A0;
-                background-image: linear-gradient(to right, #7E57C2, #4527A0);
+                background-color: var(--secondary-background-color);
                 width: 100%;
                 overflow: hidden;
                 transition: opacity, opacity 0.5s linear;
@@ -30,14 +29,12 @@
                 line-height: 48px;
                 margin-bottom: 24px;
                 z-index: 2;
-                color: #fff;
             }
 
             .col-content {
                 line-height: 32px;
                 display: block;
                 font-size: 16px;
-                color: #fff;
             }
 
             @media (min-width: 640px) {
@@ -56,8 +53,20 @@
 
                 [slot="markdown-html"] h2 {
                     font-size: 40px;
-                    max-width: 250px;
+                    max-width: 40%;
+                    width: 40%;
                     margin-bottom: 0;
+                    display: inline-block;
+                    padding-right: 16px;
+                    transform: translateY(50%);
+                    height: 130px;      
+                    vertical-align: bottom;     
+                    line-height: 1.1;         
+                }
+
+                [slot="markdown-html"] h2 + h3 {
+                    display: inline-block;
+                    margin-left: 0;
                 }
 
                 [slot="markdown-html"] h3,
@@ -75,12 +84,10 @@
             </div>
         </div>
         <div class="container">
-            <div class="markdown-text">
-                <marked-element>
+                <marked-element class="markdown-text">
                     <div slot="markdown-html"></div>
                     <script type="text/markdown" src$="[[source]]"></script>
                 </marked-element>
-            </div>
         </div>
     </template>
 
@@ -105,6 +112,11 @@
                 this.addEventListener('marked-render-complete', this._renderContent);
             }
 
+            constructor() {
+                super();
+                this._scrollToFaqChapter = this._scrollToFaqChapter.bind(this);
+            }
+
             _renderContent() {
                 const heads = this.shadowRoot.querySelectorAll('.markdown-text h3');
                 const contentDom = Polymer.dom(this.shadowRoot.querySelector('.content'));
@@ -126,7 +138,7 @@
                     colContent.className = 'col-content';
                     colContent.href = `#${head.id}`;
                     colContent.textContent = head.textContent;
-                    colContent.addEventListener('click', this._scrollToFaqChapter.bind(this));
+                    colContent.addEventListener('click', this._scrollToFaqChapter);
                     Polymer.dom(lastHeadElement).node.appendChild(colContent);
                 });
 

@@ -8,7 +8,9 @@
     "src/pages/post-page.html",
     "src/pages/schedule-page.html",
     "src/pages/speakers-page.html",
-    "src/pages/team-page.html"
+    "src/pages/team-page.html",
+    "src/pages/faq-page.html",
+    "src/elements/video-dialog.html"
   ],
   "sources": [
     "data/**/*",
