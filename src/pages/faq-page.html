@@ -16,7 +16,7 @@
                 background-color: var(--secondary-background-color);
                 width: 100%;
                 overflow: hidden;
-                transition: opacity, opacity 0.5s linear;
+                transition: opacity var(--animation), opacity var(--animation);
                 opacity: 0;
             }
 
@@ -53,7 +53,6 @@
 
                 [slot="markdown-html"] h2 {
                     font-size: 40px;
-                    max-width: 40%;
                     width: 40%;
                     margin-bottom: 0;
                     display: inline-block;

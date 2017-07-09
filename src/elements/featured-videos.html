@@ -24,7 +24,7 @@
       }
 
       .videos {
-        transition: transform var(--animation);
+        transition: transform var(--slideAnimation);
         will-change: transition;
         transform: translateX(0);
       }
@@ -37,7 +37,8 @@
         position: absolute;
         z-index: 1;
         top: calc(var(--video-item-height) / 2 - 25px);
-        opacity: 0;
+        display: block;
+        opacity: 0.9;
         background-color: #fff;
         border-radius: 50%;
         color: var(--default-primary-color);
@@ -73,7 +74,7 @@
       }
 
       .image-overlay {
-        background-color: rgba(0, 0, 0, 0.6);
+        background-color: rgba(0, 0, 0, 0.4);
       }
 
       .video-play-icon {
@@ -95,15 +96,6 @@
         margin-top: 24px;
       }
 
-      @media (min-width: 768px) {
-        .slide-icon {
-          display: block;
-        }
-
-        .video-list:hover .slide-icon {
-          opacity: 0.9;
-        }
-      }
     </style>
     <div class="container">
       <div class="header" layout horizontal justified center wrap>
