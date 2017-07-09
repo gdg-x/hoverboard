@@ -3,7 +3,7 @@
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
 
 <link rel="import" href="../mixins/utils-functions.html">
-<link rel="import" href="../redux-mixin.html">
+<link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="../elements/shared-styles.html">
 <link rel="import" href="../elements/posts-list.html">
 <link rel="import" href="../elements/text-truncate.html">
@@ -74,7 +74,7 @@
     </style>
 
     <div class="featured">
-      <div class="content">
+      <div class="container">
         <div class="featured-posts-wrapper" layout vertical$="[[viewport.isPhone]]" horizontal$="[[viewport.isTabletPlus]]" justified>
           <template is="dom-repeat" items="[[featuredPosts]]" as="post">
             <a href$="/blog/posts/[[post.id]]/" class="featured-post" flex$="[[viewport.isTabletPlus]]" relative>
@@ -103,7 +103,7 @@
       </div>
     </div>
 
-    <div class="content-narrow">
+    <div class="container-narrow">
       <posts-list posts="[[posts]]"></posts-list>
     </div>
 

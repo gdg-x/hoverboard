@@ -4,7 +4,7 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 
-<link rel="import" href="../redux-mixin.html">
+<link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="./shared-styles.html">
 <link rel="import" href="./hoverboard-icons.html">
 
@@ -62,8 +62,8 @@
 
     </style>
 
-    <div class="content">
-      <h1 class="content-title">{$ partnersBlock.title $}</h1>
+    <div class="container">
+      <h1 class="container-title">{$ partnersBlock.title $}</h1>
 
       <template is="dom-repeat" items="[[partners]]" as="block">
           <h4 class="block-title">[[block.title]]</h4>
@@ -90,7 +90,7 @@
       </template>
 
       <a href="{$ partnershipProposition $}" target="_blank" rel="noopener noreferrer">
-        <paper-button class="cta-button icon-right">
+        <paper-button class="cta-button animated icon-right">
           <span>{$ partnersBlock.button $}</span>
           <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
         </paper-button>

@@ -7,7 +7,7 @@
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
 
 <link rel="import" href="../mixins/utils-functions.html">
-<link rel="import" href="../redux-mixin.html">
+<link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="../elements/shared-styles.html">
 <link rel="import" href="../elements/posts-list.html">
 
@@ -88,7 +88,7 @@
       auto
     ></iron-ajax>
 
-    <div class="content-narrow">
+    <div class="container-narrow">
       <marked-element class="post" markdown="[[postBody]]">
         <div slot="markdown-html"></div>
       </marked-element>
@@ -96,8 +96,8 @@
     </div>
 
     <div class="suggested-posts">
-      <div class="content-narrow">
-        <h3 class="content-title">{$ blog.suggested $}</h3>
+      <div class="container-narrow">
+        <h3 class="container-title">{$ blog.suggested $}</h3>
         <posts-list posts="[[suggestedPosts]]"></posts-list>
       </div>
     </div>

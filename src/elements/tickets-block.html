@@ -3,7 +3,7 @@
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
-<link rel="import" href="../redux-mixin.html">
+<link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="../elements/shared-styles.html">
 <link rel="import" href="../elements/hoverboard-icons.html">
 
@@ -81,13 +81,13 @@
       }
     </style>
 
-    <div class="tickets-wrapper content" layout horizontal center justified>
+    <div class="tickets-wrapper container" layout horizontal center justified>
       <div layout horizontal center-center flex hidden$="[[viewport.isPhone]]">
         <iron-icon class="ticket-icon" icon="hoverboard:tickets"></iron-icon>
       </div>
 
       <div class="tickets" flex>
-        <h1 class="content-title">{$ ticketsBlock.title $}</h1>
+        <h1 class="container-title">{$ ticketsBlock.title $}</h1>
         <ul>
           <template is="dom-repeat" items="[[tickets.elements]]" as="ticket">
             <li class="ticket-item">
