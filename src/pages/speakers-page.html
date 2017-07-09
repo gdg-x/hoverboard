@@ -3,12 +3,12 @@
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="../../bower_components/marked-element/marked-element.html">
 
 <link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="../elements/text-truncate.html">
 <link rel="import" href="../elements/shared-styles.html">
+<link rel="import" href="../elements/speakers-details.html">
 
 <dom-module id="speakers-page">
   <template>
@@ -170,7 +170,7 @@
             <h2 class="name">[[speaker.name]]</h2>
             <span class="origin">[[speaker.country]]</span>
 
-            <text-truncate lines="3">
+            <text-truncate lines="5">
               <div class="bio">[[speaker.shortBio]]</div>
             </text-truncate>
           </div>
@@ -189,6 +189,11 @@
         </a>
       </template>
     </div>
+
+    <speakers-details
+      speaker-id=""
+      with-backdrop
+    ></speakers-details>
 
   </template>
 

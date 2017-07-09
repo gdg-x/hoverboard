@@ -27,7 +27,8 @@
     "clamp-js": "*",
     "iron-ajax": "PolymerElements/iron-ajax#^2.0.2",
     "google-youtube": "GoogleWebComponents/google-youtube#2.0-preview",
-    "paper-dialog-behavior": "PolymerElements/paper-dialog-behavior#^2.0.0"
+    "paper-dialog-behavior": "PolymerElements/paper-dialog-behavior#^2.0.0",
+    "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior#^2.0.0"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0"
