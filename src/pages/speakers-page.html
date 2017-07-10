@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
+<link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
@@ -8,7 +9,6 @@
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="../elements/text-truncate.html">
 <link rel="import" href="../elements/shared-styles.html">
-<link rel="import" href="../elements/speakers-details.html">
 
 <dom-module id="speakers-page">
   <template>
@@ -133,6 +133,12 @@
 
     </style>
 
+    <app-route
+      route="[[route]]"
+      pattern="/:page"
+      data="{{routeData}}"
+    ></app-route>
+
     <div class="container">
       <template is="dom-repeat" items="[[transformToArray(speakers, 'id')]]" as="speaker">
         <a class="speaker" href$="/speakers/[[speaker.id]]/">
@@ -190,11 +196,6 @@
       </template>
     </div>
 
-    <speakers-details
-      speaker-id=""
-      with-backdrop
-    ></speakers-details>
-
   </template>
 
   <script>
@@ -207,15 +208,27 @@
       static get properties() {
         return {
           speakers: {
-            type: Object,
+            route: Object,
             statePath: 'speakers'
           }
         };
       }
 
+      static get observers() {
+        return [
+          '_openSpeakerDetails(speakers, routeData.page)'
+        ];
+      }
+
       connectedCallback() {
         super.connectedCallback();
         if (!Object.keys(this.speakers).length) speakersActions.fetchList();
+      }
+
+      _openSpeakerDetails(speakers, id) {
+        if (speakers && Object.keys(speakers).length && id) {
+          dialogsActions.openDialog(DIALOGS.SPEAKER, speakers[id]);
+        }
       }
     }
 

@@ -24,6 +24,12 @@
     },
     route: 'home',
     hero: null,
+    dialogs: {
+      [DIALOGS.SPEAKER]: {
+        isOpened: false,
+        data: {}
+      }
+    },
     tickets: [],
     partners: [],
     videos: [],
@@ -36,6 +42,7 @@
       ui: uiReducer(state.ui, action),
       route: routeReducer(state.route, action),
       hero: heroReducer(state.hero, action),
+      dialogs: dialogsReducer(state.dialogs, action),
       tickets: ticketsReducer(state.tickets, action),
       partners: partnersReducer(state.partners, action),
       videos: videosReducer(state.videos, action),

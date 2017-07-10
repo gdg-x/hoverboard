@@ -22,7 +22,13 @@
 
     class BlogPage extends Polymer.Element {
       static get is() {
-        return 'blog-page'
+        return 'blog-page';
+      }
+
+      static get properties() {
+        return {
+          route: Object
+        };
       }
     }
 

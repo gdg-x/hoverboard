@@ -11,18 +11,30 @@
 <link rel="import" href="../../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
 <link rel="import" href="../../bower_components/marked-element/marked-element.html">
 
-<link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="./text-truncate.html">
 <link rel="import" href="./shared-styles.html">
 
-<dom-module id="speakers-details">
+<dom-module id="speaker-details">
   <template>
     <style is="custom-style" include="shared-styles flex flex-alignment"></style>
 
     <style>
 
       :host {
+        margin: 0;
+        padding: 24px;
         display: block;
+        min-height: 100%;
+        min-width: 100%;
+        background: #fff;
+        box-shadow: var(--box-shadow);
+      }
+
+      @media (min-width: 812px) {
+        :host {
+          min-height: 60%;
+          min-width: 800px;
+        }
       }
 
     </style>
@@ -69,25 +81,35 @@
 
   <script>
 
-    class SpeakerDetails extends ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element)) {
+    class SpeakerDetails extends Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element) {
       static get is() {
-        return 'speakers-details';
+        return 'speaker-details';
       }
 
       static get properties() {
         return {
-          speakerId: String,
-          speaker: Object,
-          speakers: {
+          speaker: {
             type: Object,
-            statePath: 'speakers',
-            observer: '_setSpeaker'
+            observer: '_speakerChanged'
           }
         }
       }
 
-      _setSpeaker(speakers) {
-        this.set('speaker', speakers[this.speakerId])
+      static get observers() {
+        return [
+          '_handleClose(opened)'
+        ];
+      }
+
+      _handleClose(opened) {
+        console.log('closed', opened);
+        if (!opened) {
+          dialogsActions.closeDialog(DIALOGS.SPEAKER, true);
+        }
+      }
+
+      _speakerChanged(speaker) {
+        console.log(speaker, this.opened);
       }
     }
 

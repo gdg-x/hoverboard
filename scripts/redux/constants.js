@@ -1,8 +1,16 @@
+// ui
 const TOGGLE_DRAWER = 'TOGGLE_DRAWER';
 const SET_VIEWPORT_SIZE = 'SET_VIEWPORT_SIZE';
 // router
 const SET_ROUTE = 'SET_ROUTE';
+// hero
 const SET_HERO = 'SET_HERO';
+// dialogs
+const OPEN_DIALOG = 'OPEN_DIALOG';
+const CLOSE_DIALOG = 'CLOSE_DIALOG';
+const DIALOGS = {
+  SPEAKER: 'speaker'
+};
 // tickets
 const FETCH_TICKETS = 'FETCH_TICKETS';
 // partners

@@ -41,6 +41,27 @@ const routeActions = {
   }
 };
 
+const dialogsActions = {
+  openDialog: (dialogName, data) => {
+    store.dispatch({
+      type: OPEN_DIALOG,
+      dialog: {
+        [dialogName]: {
+          isOpened: true,
+          data
+        }
+      }
+    });
+  },
+  closeDialog: (dialogName, historyBack = false) => {
+    store.dispatch({
+      type: CLOSE_DIALOG,
+      dialogName
+    });
+    historyBack && history.back();
+  }
+};
+
 const ticketsActions = {
   fetchTickets: () => {
     return firebase.database()
