@@ -16,18 +16,66 @@
 
 <dom-module id="speaker-details">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
 
     <style>
 
       :host {
         margin: 0;
-        padding: 24px;
         display: block;
         min-height: 100%;
         min-width: 100%;
         background: #fff;
         box-shadow: var(--box-shadow);
+      }
+
+      app-header {
+        background-color: #f7f7f7;
+      }
+
+      .header-toolbar {
+        border-bottom: 1px solid var(--border-light-color);
+        color: var(--secondary-text-color);
+      }
+
+      .photo {
+        margin-right: 16px;
+        width: 72px;
+        height: 72px;
+        background-color: #e8e8e8;
+        border: 5px solid #e8e8e8;
+        border-radius: 50%;
+        transform: translateZ(0);
+      }
+
+      .header-content {
+        padding: 24px;
+      }
+
+      .content {
+        padding: 24px;
+      }
+
+      .content-list {
+        margin: 0;
+        padding: 0;
+        color: var(--secondary-text-color);
+      }
+
+      .content-list-details {
+        margin-bottom: 16px;
+      }
+
+      .content-list-icon {
+        margin: 2px 43px 0 27px;
+        --iron-icon-width: 18px;
+        --iron-icon-height: 18px;
+      }
+
+      .contacts {
+        margin-top: 8px;
+        margin-left: 80px;
+        --iron-icon-fill-color: var(--secondary-text-color);
       }
 
       @media (min-width: 812px) {
@@ -39,41 +87,71 @@
 
     </style>
 
-    <app-header-layout>
-      <app-header slot="header" condenses fixed effects="waterfall">
+    <app-header-layout has-scrolling-region fit>
+      <app-header slot="header" class="header" fixed effects="waterfall">
 
-        <app-toolbar class="header" sticky>
+        <app-toolbar class="header-toolbar">
           <paper-icon-button
             icon="hoverboard:close"
-            on-tap="historyBack"
+            on-tap="close"
           ></paper-icon-button>
         </app-toolbar>
 
-        <app-toolbar layout horizontal center>
+        <app-toolbar class="header-content" layout horizontal center>
           <plastic-image
             class="photo"
-            srcset="[[speaker.photo]]"
+            srcset="[[speaker.photoUrl]]"
             sizing="cover"
             lazy-load preload fade
           ></plastic-image>
-          <div class="description">
-            <h2 class="name">[[speaker.name]]</h2>
-            <span class="origin">[[speaker.country]]</span>
-          </div>
+          <h2 class="name">[[speaker.name]]</h2>
         </app-toolbar>
       </app-header>
 
-      <p>[[speaker.bio]]</p>
+      <div class="content">
+        <ul class="content-list">
+          <li class="content-list-item" layout horizontal>
+            <iron-icon class="content-list-icon" icon="hoverboard:location"></iron-icon>
+            <div class="content-list-details" flex>[[speaker.country]]</div>
+          </li>
+          <li class="content-list-item" layout horizontal>
+            <iron-icon class="content-list-icon" icon="hoverboard:work"></iron-icon>
+            <div class="content-list-details" flex>[[speaker.company]]</div>
+          </li>
+          <li class="content-list-item" hidden$="[[_isEmpty(speaker.badges)]]" layout horizontal>
+            <iron-icon class="content-list-icon" icon="hoverboard:achievement"></iron-icon>
+            <div flex>
+              <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
+                <div class="content-list-details">
+                  <a
+                    class$="badge"
+                    href$="[[badge.link]]"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title$="[[badge.description]]"
+                  >
+                    [[badge.description]]
+                  </a>
+                </div>
+              </template>
+            </div>
+          </li>
+          <li class="content-list-item" layout horizontal>
+            <iron-icon class="content-list-icon" icon="hoverboard:document"></iron-icon>
+            <div class="content-list-details" flex>[[speaker.bio]]</div>
+          </li>
+        </ul>
 
-      <div class="contacts">
-        <template is="dom-repeat" items="[[speaker.socials]]" as="social">
-          <a href="[[social.link]]" target="_blank" rel="noopener noreferrer">
-            <paper-icon-button
-              class="social-icon"
-              icon="hoverboard:{{social.icon}}"
-            ></paper-icon-button>
-          </a>
-        </template>
+        <div class="contacts">
+          <template is="dom-repeat" items="[[speaker.socials]]" as="social">
+            <a href="[[social.link]]" target="_blank" rel="noopener noreferrer">
+              <paper-icon-button
+                class="social-icon"
+                icon="hoverboard:{{social.icon}}"
+              ></paper-icon-button>
+            </a>
+          </template>
+        </div>
       </div>
     </app-header-layout>
 
@@ -102,14 +180,18 @@
       }
 
       _handleClose(opened) {
-        console.log('closed', opened);
-        if (!opened) {
+        if (!opened && Object.keys(this.speaker).length) {
           dialogsActions.closeDialog(DIALOGS.SPEAKER, true);
         }
       }
 
       _speakerChanged(speaker) {
         console.log(speaker, this.opened);
+      }
+
+      // TODO: Move to utils
+      _isEmpty(array) {
+        return !array || !array.length;
       }
     }
 

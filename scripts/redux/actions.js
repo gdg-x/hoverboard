@@ -112,26 +112,31 @@ const speakersActions = {
       .ref('/speakers')
       .on('value', snapshot => {
 
-        const resolveUrls = speaker => new Promise(resolve => {
-          const companyLogoPromise = getImageUrl(speaker.companyLogo);
-          const photoPromise = getImageUrl(speaker.photo);
-          Promise.all([companyLogoPromise, photoPromise])
-            .then(result => {
-              resolve(Object.assign({}, speaker, {
-                companyLogo: result[0],
-                photo: result[1]
-              }))
-            })
+        store.dispatch({
+          type: FETCH_SPEAKERS_LIST,
+          list: snapshot.val()
         });
 
-        const promises = snapshot.val().filter(obj => !!obj).map(resolveUrls);
-        Promise.all(promises)
-          .then(list => {
-            store.dispatch({
-              type: FETCH_SPEAKERS_LIST,
-              list
-            });
-          });
+        // const resolveUrls = speaker => new Promise(resolve => {
+        //   const companyLogoPromise = getImageUrl(speaker.companyLogo);
+        //   const photoPromise = getImageUrl(speaker.photo);
+        //   Promise.all([companyLogoPromise, photoPromise])
+        //     .then(result => {
+        //       resolve(Object.assign({}, speaker, {
+        //         companyLogo: result[0],
+        //         photo: result[1]
+        //       }))
+        //     })
+        // });
+        //
+        // const promises = snapshot.val().filter(obj => !!obj).map(resolveUrls);
+        // Promise.all(promises)
+        //   .then(list => {
+        //     store.dispatch({
+        //       type: FETCH_SPEAKERS_LIST,
+        //       list
+        //     });
+        //   });
 
       });
   }

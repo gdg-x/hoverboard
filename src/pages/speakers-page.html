@@ -43,6 +43,7 @@
         background-color: var(--secondary-background-color);
         border-radius: 50%;
         overflow: hidden;
+        transform: translateZ(0);
       }
 
       .badges {
@@ -57,6 +58,7 @@
         height: 24px;
         border-radius: 50%;
         border: 2px solid #fff;
+        transition: transform var(--animation);
       }
 
       .badge:hover {
@@ -72,8 +74,8 @@
       }
 
       .badge-icon {
-        --iron-icon-width: 14px;
-        --iron-icon-height: 14px;
+        --iron-icon-width: 12px;
+        --iron-icon-height: 12px;
         color: #fff;
       }
 
@@ -145,7 +147,7 @@
           <div relative>
             <plastic-image
               class="photo"
-              srcset="[[speaker.photo]]"
+              srcset="[[speaker.photoUrl]]"
               sizing="cover"
               lazy-load preload fade
             ></plastic-image>
@@ -167,7 +169,7 @@
 
           <plastic-image
             class="company-logo"
-            srcset="{{speaker.companyLogo}}"
+            srcset="{{speaker.companyLogoUrl}}"
             sizing="contain"
             lazy-load preload fade
           ></plastic-image>
