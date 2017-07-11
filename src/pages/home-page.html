@@ -4,7 +4,9 @@
 <link rel="import" href="../behaviors/page-behavior.html">
 <link rel="import" href="../elements/statistics-block.html">
 <link rel="import" href="../elements/featured-people.html">
-<link rel="import" href="../elements/featured-videos.html">
+{% if videosSessionsUrl %}
+  <link rel="import" href="../elements/featured-videos.html">
+{% endif %}
 {% if callToAction %}
   <link rel="import" href="../elements/call-to-action.html">
 {% endif %}
@@ -26,7 +28,9 @@
 
     <statistics-block app="{{app}}" cascaded></statistics-block>
     <featured-people app="{{app}}" people="{{people}}" cascaded></featured-people>
-    <featured-videos app="{{app}}" cascaded></featured-videos>
+    {% if videosSessionsUrl %}
+      <featured-videos app="{{app}}" cascaded></featured-videos>
+    {% endif %}
     {% if callToAction %}
       <call-to-action app="{{app}}" cascaded></call-to-action>
     {% endif %}
