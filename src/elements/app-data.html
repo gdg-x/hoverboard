@@ -63,19 +63,22 @@
       persisted-data="{{app.partners}}">
     </app-indexeddb-mirror>
 
-    <firebase-document
-      id="queryVideos"
-      app-name="{$ firebase.name $}"
-      path="/videos"
-      data="{{_firebaseVideos}}">
-    </firebase-document>
+    <!-- Save requests if we do not display videos -->
+    {% if videosSessionsUrl %}
+      <firebase-document
+        id="queryVideos"
+        app-name="{$ firebase.name $}"
+        path="/videos"
+        data="{{_firebaseVideos}}">
+      </firebase-document>
 
-    <app-indexeddb-mirror
-      session="{$ firebase.indexedDbSession $}"
-      key="videos"
-      data="{{_firebaseVideos}}"
-      persisted-data="{{app.videos}}">
-    </app-indexeddb-mirror>
+      <app-indexeddb-mirror
+        session="{$ firebase.indexedDbSession $}"
+        key="videos"
+        data="{{_firebaseVideos}}"
+        persisted-data="{{app.videos}}">
+      </app-indexeddb-mirror>
+    {% endif %}
 
     <firebase-query
       id="queryTeam"
