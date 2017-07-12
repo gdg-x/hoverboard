@@ -8,18 +8,20 @@
     "src/pages/post-page.html",
     "src/pages/schedule-page.html",
     "src/pages/speakers-page.html",
-    "src/pages/team-page.html"
+    "src/pages/team-page.html",
+    "src/elements/speaker-details.html"
   ],
   "sources": [
     "data/**/*",
     "images/**/*",
     "scripts/**/*",
     "src/**/*",
+    "manifest.json",
     "bower.json"
   ],
   "extraDependencies": [
-    "manifest.json",
     "bower_components/webcomponentsjs/webcomponents-*.js",
+    "bower_components/iron-dropdown/iron-dropdown-scroll-manager.html",
     "bower_components/firebase/firebase.js",
     "node_modules/redux/dist/redux.min.js"
   ],
