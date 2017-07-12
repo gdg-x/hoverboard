@@ -371,9 +371,11 @@
         if (!page && page !== '') {
           return;
         }
-        // TODO: define exceptions
-//        this.scrollToY(0, 9000);
-        routeActions.setRoute(page, this.subroute.path !== '' && this.subroute.path !== '/');
+        const hasSubroute = this.subroute.path !== '' && this.subroute.path !== '/';
+        if (!hasSubroute && page !== this.route || page === 'blog') {
+          this.scrollToY(0, 9000);
+        }
+        routeActions.setRoute(page, hasSubroute);
       }
 
       _getSubroute(page, selectedPage, subroute) {
