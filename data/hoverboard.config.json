@@ -93,6 +93,13 @@
         "gradient": "linear-gradient(to right, #00c6ff, #0072ff)"
       },
       "fontColor": "#fff"
+    },
+     "faq": {
+      "title": "FAQs",
+      "background": {
+        "color": "#fff"
+      },
+      "fontColor": "#424242"
     }
   },
   "mediaQueries": {

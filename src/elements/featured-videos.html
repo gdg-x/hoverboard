@@ -7,7 +7,6 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="shared-styles.html">
-<link rel="import" href="video-dialog.html">
 
 <dom-module id="featured-videos">
   <template>
@@ -25,7 +24,7 @@
       }
 
       .videos {
-        transition: transform var(--animation);
+        transition: transform var(--slideAnimation);
         will-change: transition;
         transform: translateX(0);
       }
@@ -38,7 +37,8 @@
         position: absolute;
         z-index: 1;
         top: calc(var(--video-item-height) / 2 - 25px);
-        opacity: 0;
+        display: block;
+        opacity: 0.9;
         background-color: #fff;
         border-radius: 50%;
         color: var(--default-primary-color);
@@ -74,7 +74,7 @@
       }
 
       .image-overlay {
-        background-color: rgba(0, 0, 0, 0.6);
+        background-color: rgba(0, 0, 0, 0.4);
       }
 
       .video-play-icon {
@@ -96,15 +96,6 @@
         margin-top: 24px;
       }
 
-      @media (min-width: 768px) {
-        .slide-icon {
-          display: block;
-        }
-
-        .video-list:hover .slide-icon {
-          opacity: 0.9;
-        }
-      }
     </style>
     <div class="container">
       <div class="header" layout horizontal justified center wrap>
@@ -161,13 +152,6 @@
       </a>
 
     </div>
-
-    <video-dialog id="videoDialog"
-                  video-title="[[video.title]]"
-                  youtube-id="[[video.youtubeId]]"
-                  entry-animation="scale-up-animation"
-                  exit-animation="fade-out-animation"
-                  disable-controls="[[!video.disableControls]]"></video-dialog>
   </template>
 
   <script>

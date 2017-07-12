@@ -65,7 +65,7 @@
         <div class="col-heading">{$ footerRel.title $}</div>
         <ul class="nav">
           {% for link in footerRel.links %}
-          <li><a href="{$ link.url $}" target="_blank" rel="noopener noreferrer">{$ link.name $}</a></li>
+          <li><a href="{$ link.url $}"  {% if link.newTab %} target="_blank" rel="noopener noreferrer" {% endif %}>{$ link.name $}</a></li>
           {% endfor %}
         </ul>
       </div>
