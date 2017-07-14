@@ -43,5 +43,14 @@
     "secondaryColor": "#4CAF51",
     "image": "/images/posts/first-speakers-announced.jpg",
     "brief": "Can you believe this? Exactly 6 months are left till GDG DevFest Ukraine 2017 and we are excited to announce our first speakers!"
+  },
+  {
+    "id": "diamond-sponsor-core-value",
+    "title": "Meet our Diamond Sponsor - CoreValue",
+    "posted": "2017-07-14",
+    "primaryColor": "#2196F3",
+    "secondaryColor": "#1d8fea",
+    "image": "/images/posts/core-value-background.png",
+    "brief": "We are proud to announce **our Diamond Sponsor**, [CoreValue](http://corevalue.com.ua/) who has been with us for three years now!"
   }
 ]

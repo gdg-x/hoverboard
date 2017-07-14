@@ -22,7 +22,7 @@ Can you believe this? Exactly 6 months are left till GDG DevFest Ukraine 2017 an
   <div class="speaker-text-wrapper">
     <div >
             <h3>Michael Pustovit</h3>
-            <h4>Stanfy // Ukranie</h4>
+            <h4>Stanfy // Ukraine</h4>
             <div>
               Android developers, do you remember the <a href="https://youtu.be/We04nyIIsA0">best demos last year</a>? Michael Pustovit from Stanfy will rock the stage once again.
 
