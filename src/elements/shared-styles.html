@@ -26,6 +26,8 @@
         /* Custom */
         --default-background-color: #FAFAFA;
         --secondary-background-color: #F5F5F5;
+        --additional-background-color: #f7f7f7;
+        --contrast-additional-background-color: #e8e8e8;
         --animation: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
         --slideAnimation: 0.4s cubic-bezier(0, 0, 0.2, 1);
@@ -76,7 +78,7 @@
       }
 
       body {
-        font-family:
+        font-family: var(--font-family);
         text-rendering: optimizeLegibility;
         background-color: #fafafa;
         color: var(--primary-text-color);
@@ -167,7 +169,7 @@
       @media (min-width: 640px) {
         .container,
         .container-narrow {
-          padding: 32px 16px;
+          padding: 32px;
         }
       }
 
