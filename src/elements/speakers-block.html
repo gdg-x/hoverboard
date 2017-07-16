@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
@@ -26,6 +27,7 @@
       .speaker {
         padding: 32px 24px;
         text-align: center;
+        cursor: pointer;
       }
 
       .photo {
@@ -127,7 +129,7 @@
 
       <div class="speakers-wrapper">
         <template is="dom-repeat" items="[[speakers]]" as="speaker">
-          <a class="speaker card" href$="/speakers/[[speaker.id]]/">
+          <div class="speaker card" on-tap="_openSpeaker">
             <div relative>
               <plastic-image
                 class="photo"
@@ -163,7 +165,7 @@
               <div class="origin">[[speaker.country]]</div>
             </div>
 
-          </a>
+          </div>
         </template>
       </div>
 
@@ -180,7 +182,7 @@
 
   <script>
 
-    class SpeakersBlock extends UtilsFunctions(ReduxMixin(Polymer.Element)) {
+    class SpeakersBlock extends UtilsFunctions(ReduxMixin(Polymer.GestureEventListeners(Polymer.Element))) {
       static get is() {
         return 'speakers-block';
       }
@@ -198,6 +200,12 @@
       connectedCallback() {
         super.connectedCallback();
         if (!Object.keys(this.speakers).length) speakersActions.fetchList();
+      }
+
+      _openSpeaker(e) {
+        window.history.pushState({}, null, '/speakers/');
+        window.history.pushState({}, null, `/speakers/${e.model.speaker.id}/`);
+        window.dispatchEvent(new CustomEvent('location-changed'));
       }
 
       _generateSpeakers(speakers) {
