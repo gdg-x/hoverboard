@@ -94,7 +94,9 @@
       }
 
       .origin {
+        margin-top: 4px;
         font-size: 14px;
+        line-height: 1.1;
       }
 
       .bio {
@@ -143,7 +145,7 @@
 
     <div class="container">
       <template is="dom-repeat" items="[[transformToArray(speakers, 'id')]]" as="speaker">
-        <a class="speaker" href$="/speakers/[[speaker.id]]/">
+        <a class="speaker card" href$="/speakers/[[speaker.id]]/">
           <div relative>
             <plastic-image
               class="photo"
@@ -176,7 +178,7 @@
 
           <div class="description">
             <h2 class="name">[[speaker.name]]</h2>
-            <span class="origin">[[speaker.country]]</span>
+            <div class="origin">[[speaker.country]]</div>
 
             <text-truncate lines="5">
               <div class="bio">[[speaker.shortBio]]</div>

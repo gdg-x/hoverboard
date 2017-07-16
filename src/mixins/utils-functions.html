@@ -12,5 +12,9 @@
     isEmpty(array) {
       return !array || !array.length;
     }
+
+    randomOrder(array) {
+      return array.sort(() => 0.5 - Math.random());
+    }
   };
 </script>

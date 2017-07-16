@@ -166,10 +166,19 @@
         background-color: var(--gdg);
       }
 
+      .card {
+        background-color: #fff;
+        box-shadow: 0 0 2px 0 rgba(0,0,0,0.07), 0 2px 2px 0 rgba(0,0,0,0.15);
+        transition: box-shadow var(--animation);
+      }
       @media (min-width: 640px) {
         .container,
         .container-narrow {
           padding: 32px;
+        }
+
+        .card:hover {
+          box-shadow: var(--box-shadow);
         }
       }
 
