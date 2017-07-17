@@ -378,8 +378,10 @@
 
         if (page !== this.route) {
           !hasSubroute && this.scrollToY(0, 100);
-          requestAnimationFrame(() => uiActions.setHero(null, page));
+          uiActions.setHero(null, page);
           routeActions.setRoute(page);
+        } else if (page === 'blog' && !hasSubroute) {
+          uiActions.setHero(null, page);
         }
       }
 

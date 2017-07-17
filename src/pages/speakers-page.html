@@ -216,6 +216,10 @@
           speakers: {
             route: Object,
             statePath: 'speakers'
+          },
+          isDialogOpened: {
+            type: Object,
+            statePath: 'dialogs.speaker.isOpened'
           }
         };
       }
@@ -232,8 +236,15 @@
       }
 
       _openSpeakerDetails(active, speakers, id) {
-        if (active && speakers && Object.keys(speakers).length && id) {
-          requestAnimationFrame(() => dialogsActions.openDialog(DIALOGS.SPEAKER, speakers[id]));
+        if (active && speakers && Object.keys(speakers).length) {
+          requestAnimationFrame(() => {
+              if (id) {
+                dialogsActions.openDialog(DIALOGS.SPEAKER, speakers[id]);
+              } else if (this.isDialogOpened) {
+                dialogsActions.closeDialog(DIALOGS.SPEAKER);
+              }
+            }
+          )
         }
       }
     }

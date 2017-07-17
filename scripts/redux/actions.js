@@ -47,12 +47,11 @@ const dialogsActions = {
       }
     });
   },
-  closeDialog: (dialogName, historyBack = false) => {
+  closeDialog: (dialogName) => {
     store.dispatch({
       type: CLOSE_DIALOG,
       dialogName
     });
-    historyBack && history.back();
   }
 };
 

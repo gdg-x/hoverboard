@@ -211,7 +211,7 @@
 
       _handleClose(opened, speaker) {
         if (!opened && speaker && Object.keys(speaker).length) {
-          dialogsActions.closeDialog(DIALOGS.SPEAKER, true);
+          history.back();
         }
       }
     }
