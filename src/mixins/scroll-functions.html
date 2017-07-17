@@ -27,7 +27,6 @@
       // add animation loop
       function tick() {
         currentTime += 1 / 60;
-        console.log(currentTime, animationTime, currentTime / animationTime);
 
         const p = currentTime / animationTime;
         const t = easingEquations[easing](p);
