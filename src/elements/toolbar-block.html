@@ -156,6 +156,7 @@
           </paper-tabs>
         </template>
 
+        {% if enabledSignInButton %}
         <paper-tab class="signin-tab" on-tap="signIn" hidden$="[[app.user]]">{$ signIn $}</paper-tab>
 
         <paper-menu-button
@@ -184,12 +185,15 @@
             </div>
           </div>
         </paper-menu-button>
+        {% endif %}
 
+        {% if enabledBuyTicketsButton %}
         <div class="action-button-wrapper" hidden$="[[app.isPhoneSize]]" layout horizontal center-center>
           <a href="{$ tickets.url $}" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
             <paper-button class="action-button">{$ buyTicket $}</paper-button>
           </a>
         </div>
+        {% endif %}
       </div>
     </app-toolbar>
 
