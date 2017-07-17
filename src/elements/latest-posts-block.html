@@ -20,13 +20,9 @@
       }
 
       .posts-wrapper {
-        margin: 0 -8px;
-      }
-
-      .post {
-        margin: 8px;
-        width: calc(50% - 16px);
-        background-color: white;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 16px;
       }
 
       .image {
@@ -60,21 +56,20 @@
       }
 
       @media (min-width: 640px) {
-        .post {
-          width: auto;
-          transition: box-shadow var(--animation);
+        .posts-wrapper {
+          grid-template-columns: repeat(3, 1fr);
         }
 
         .post:last-of-type {
           display: none;
         }
-
-        .post:hover {
-          box-shadow: var(--box-shadow);
-        }
       }
 
       @media (min-width: 812px) {
+        .posts-wrapper {
+          grid-template-columns: repeat(4, 1fr);
+        }
+
         .post:last-of-type {
           display: flex;
         }
@@ -85,9 +80,9 @@
     <div class="container">
       <h1 class="container-title">{$ latestPostsBlock.title $}</h1>
 
-      <div class="posts-wrapper" layout horizontal wrap justified>
+      <div class="posts-wrapper">
         <template is="dom-repeat" items="[[posts]]" as="post">
-          <a href$="/blog/posts/[[post.id]]/" class="post" flex$="[[viewport.isTabletPlus]]" layout vertical>
+          <a href$="/blog/posts/[[post.id]]/" class="post card" flex layout vertical>
             <plastic-image
               class="image"
               srcset="[[post.image]]"
@@ -95,7 +90,7 @@
               sizing="cover"
               lazy-load preload fade
             ></plastic-image>
-            <div class="details" flex-auto layout vertical justified>
+            <div class="details" layout vertical justified flex-auto>
               <div>
                 <text-truncate lines="2">
                   <h3 class="title">[[post.title]]</h3>
@@ -110,9 +105,9 @@
         </template>
       </div>
 
-      <a href="/blog/">
+      <a href="{$ latestPostsBlock.button.link $}">
         <paper-button class="cta-button animated icon-right">
-          <span>{$ latestPostsBlock.button $}</span>
+          <span>{$ latestPostsBlock.button.label $}</span>
           <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
         </paper-button>
       </a>
@@ -131,7 +126,7 @@
         return {
           postsSource: {
             type: Object,
-            statePath: 'blog.list',
+            statePath: 'blog',
             observer: '_transformPosts'
           },
           viewport: {

@@ -10,18 +10,20 @@
     "src/pages/speakers-page.html",
     "src/pages/team-page.html",
     "src/pages/faq-page.html",
-    "src/elements/video-dialog.html"
+    "src/elements/video-dialog.html",
+    "src/elements/speaker-details.html"
   ],
   "sources": [
     "data/**/*",
     "images/**/*",
     "scripts/**/*",
     "src/**/*",
+    "manifest.json",
     "bower.json"
   ],
   "extraDependencies": [
-    "manifest.json",
     "bower_components/webcomponentsjs/webcomponents-*.js",
+    "bower_components/iron-dropdown/iron-dropdown-scroll-manager.html",
     "bower_components/firebase/firebase.js",
     "node_modules/redux/dist/redux.min.js"
   ],

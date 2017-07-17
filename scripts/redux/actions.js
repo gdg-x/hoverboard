@@ -11,10 +11,10 @@ const uiActions = {
       value
     });
   },
-  setHero: hero => {
+  setHero: (hero, route) => {
     store.dispatch({
       type: SET_HERO,
-      hero
+      hero: hero || (heroSettings ? heroSettings[route || 'home'] : null)
     });
   },
   toggleVideoDialog: (value = null) => {
@@ -26,18 +26,32 @@ const uiActions = {
 };
 
 const routeActions = {
-  setRoute: (routeFromAction, hasSubroute = false) => {
+  setRoute: (routeFromAction) => {
     const route = routeFromAction || 'home';
     store.dispatch({
       type: SET_ROUTE,
       route
     });
-    if (!hasSubroute) {
-      store.dispatch({
-        type: SET_HERO,
-        hero: heroSettings[route]
-      });
-    }
+  }
+};
+
+const dialogsActions = {
+  openDialog: (dialogName, data) => {
+    store.dispatch({
+      type: OPEN_DIALOG,
+      dialog: {
+        [dialogName]: {
+          isOpened: true,
+          data
+        }
+      }
+    });
+  },
+  closeDialog: (dialogName) => {
+    store.dispatch({
+      type: CLOSE_DIALOG,
+      dialogName
+    });
   }
 };
 
@@ -82,5 +96,18 @@ const blogActions = {
         type: FETCH_BLOG_LIST,
         list: snapshot.val()
       }));
+  }
+};
+
+const speakersActions = {
+  fetchList: () => {
+    return firebase.database()
+      .ref('/speakers')
+      .on('value', snapshot => {
+        store.dispatch({
+          type: FETCH_SPEAKERS_LIST,
+          list: snapshot.val()
+        });
+      });
   }
 };

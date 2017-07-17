@@ -147,7 +147,20 @@
   },
   "latestPostsBlock": {
     "title": "The latest news",
-    "button": "View all stories"
+    "button": {
+      "label": "View all stories",
+      "link": "/blog/"
+    }
   },
-  "faq": "/markdown/faq.md"
+  "faq": "/markdown/faq.md",
+  "speakers": {
+    "skills": "Skills"
+  },
+  "speakersBlock": {
+    "title": "Rockstar speakers",
+    "button": {
+      "label": "View all speakers",
+      "link": "/speakers/"
+    }
+  }
 }
