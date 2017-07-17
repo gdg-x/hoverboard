@@ -205,12 +205,12 @@
 
       static get observers() {
         return [
-          '_handleClose(opened)'
+          '_handleClose(opened, speaker)'
         ];
       }
 
-      _handleClose(opened) {
-        if (!opened && Object.keys(this.speaker).length) {
+      _handleClose(opened, speaker) {
+        if (!opened && speaker && Object.keys(speaker).length) {
           dialogsActions.closeDialog(DIALOGS.SPEAKER, true);
         }
       }

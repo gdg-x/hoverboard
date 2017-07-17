@@ -211,6 +211,8 @@
 
       static get properties() {
         return {
+          route: Object,
+          active: Boolean,
           speakers: {
             route: Object,
             statePath: 'speakers'
@@ -220,7 +222,7 @@
 
       static get observers() {
         return [
-          '_openSpeakerDetails(speakers, routeData.page)'
+          '_openSpeakerDetails(active, speakers, routeData.page)'
         ];
       }
 
@@ -229,9 +231,9 @@
         if (!Object.keys(this.speakers).length) speakersActions.fetchList();
       }
 
-      _openSpeakerDetails(speakers, id) {
-        if (speakers && Object.keys(speakers).length && id) {
-          dialogsActions.openDialog(DIALOGS.SPEAKER, speakers[id]);
+      _openSpeakerDetails(active, speakers, id) {
+        if (active && speakers && Object.keys(speakers).length && id) {
+          requestAnimationFrame(() => dialogsActions.openDialog(DIALOGS.SPEAKER, speakers[id]));
         }
       }
     }

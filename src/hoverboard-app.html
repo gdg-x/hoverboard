@@ -252,15 +252,14 @@
 
         </app-header>
 
-        <iron-lazy-pages attr-for-selected="data-route" selected="[[route]]">
+        <iron-lazy-pages attr-for-selected="data-route" selected="[[route]]" selected-attribute="active" hide-immediately>
           <home-page data-route="home" data-path="pages/home-page.html"></home-page>
-          <blog-page data-route="blog" data-path="pages/blog-page.html"
-                     route="[[_getSubroute('blog', route, subroute)]]"></blog-page>
+          <blog-page data-route="blog" data-path="pages/blog-page.html" route="[[subroute]]"></blog-page>
           <schedule-page data-route="schedule" data-path="pages/schedule-page.html"></schedule-page>
           <speakers-page data-route="speakers" data-path="pages/speakers-page.html"
-                         route="[[_getSubroute('speakers', route, subroute)]]"></speakers-page>
+                         route="[[subroute]]"></speakers-page>
           <team-page data-route="team" data-path="pages/team-page.html"></team-page>
-          <faq-page data-route="faq" data-path="pages/faq-page.html"></team-page>
+          <faq-page data-route="faq" data-path="pages/faq-page.html"></faq-page>
         </iron-lazy-pages>
 
         <footer-block></footer-block>
@@ -317,13 +316,16 @@
           viewport: {
             type: Object,
             statePath: 'ui.viewport'
+          },
+          _openedDialog: {
+            type: String
           }
         };
       }
 
       static get observers() {
         return [
-          '_routeDataChanged(routeData.page)',
+          '_routeDataChanged(routeData.page, subroute.path)',
           '_isPhoneSizeChanged(isPhoneSize)'
         ];
       }
@@ -358,29 +360,27 @@
         }
       }
 
-      _heroChanged() {
-        if (!this.hero) return;
+      _heroChanged(hero) {
+        if (!hero) return;
         this.updateStyles({
-          '--hero-background-color': this.hero.background.color || '',
-          '--hero-background-gradient': this.hero.background.gradient || '',
-          '--hero-color': this.hero.fontColor || ''
+          '--hero-background-color': hero.background.color || '',
+          '--hero-background-gradient': hero.background.gradient || '',
+          '--hero-color': hero.fontColor || ''
         });
         this.$.headerLayout.resetLayout();
       }
 
-      _routeDataChanged(page) {
+      _routeDataChanged(page, subroutePath) {
         if (!page && page !== '') {
           return;
         }
-        const hasSubroute = this.subroute.path !== '' && this.subroute.path !== '/';
-        if (!hasSubroute && page !== this.route || page === 'blog') {
-          this.scrollToY(0, 9000);
-        }
-        routeActions.setRoute(page, hasSubroute);
-      }
+        const hasSubroute = subroutePath !== '' && subroutePath !== '/';
 
-      _getSubroute(page, selectedPage, subroute) {
-        return page === selectedPage ? subroute : null;
+        if (page !== this.route) {
+          !hasSubroute && this.scrollToY(0, 100);
+          requestAnimationFrame(() => uiActions.setHero(null, page));
+          routeActions.setRoute(page);
+        }
       }
 
       _isPhoneSizeChanged(value) {
@@ -391,16 +391,12 @@
       }
 
       _dialogToggled(dialogs) {
-        if (this.openedDialog) {
-          Polymer.IronDropdownScrollManager.removeScrollLock(this.shadowRoot.querySelector(`#${this.openedDialog}Dialog`));
-          this.openedDialog = null;
+        if (this._openedDialog) {
+          Polymer.IronDropdownScrollManager.removeScrollLock(this.shadowRoot.querySelector(`#${this._openedDialog}Dialog`));
+          this._openedDialog = null;
         }
-        for (const dialogName in dialogs) {
-          if (dialogs[dialogName].isOpened) {
-            this.openedDialog = dialogName;
-          }
-        }
-        this.openedDialog && Polymer.IronDropdownScrollManager.pushScrollLock(this.shadowRoot.querySelector(`#${this.openedDialog}Dialog`));
+        this._openedDialog = Object.keys(dialogs).find(key => dialogs[key].isOpened);
+        this._openedDialog && Polymer.IronDropdownScrollManager.pushScrollLock(this.shadowRoot.querySelector(`#${this._openedDialog}Dialog`));
       }
     }
 

@@ -3,10 +3,13 @@
 <link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/iron-lazy-pages/iron-lazy-pages.html">
 
+<link rel="import" href="../mixins/scroll-functions.html">
+
+
 <dom-module id="blog-page">
   <template>
     <app-route
-      route="[[route]]"
+      route="[[_route]]"
       pattern="/:page"
       data="{{routeData}}"
       tail="{{subRoute}}"
@@ -20,15 +23,29 @@
 
   <script>
 
-    class BlogPage extends Polymer.Element {
+    class BlogPage extends ScrollFunctions(Polymer.Element) {
       static get is() {
         return 'blog-page';
       }
 
       static get properties() {
         return {
-          route: Object
+          route: Object,
+          active: Boolean
         };
+      }
+
+      static get observers() {
+        return [
+          '_routeChanged(active, route)'
+        ];
+      }
+
+      _routeChanged(active, route) {
+        if (active && route) {
+          this.scrollToY(0, 200);
+          this.set('_route',  route);
+        }
       }
     }
 
