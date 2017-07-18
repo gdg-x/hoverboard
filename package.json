@@ -38,6 +38,7 @@
   },
   "private": true,
   "dependencies": {
+    "autotrack": "^2.4.1",
     "redux": "^3.7.1"
   }
 }
