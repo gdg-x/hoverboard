@@ -2,48 +2,81 @@
 
 <link rel="import" href="../behaviors/cascaded-behavior.html">
 <link rel="import" href="../behaviors/page-behavior.html">
+{% if enabledStatisticsBlock %}
 <link rel="import" href="../elements/statistics-block.html">
-<link rel="import" href="../elements/featured-people.html">
+{% endif %}
+{% if enabledFeaturedBlock %}
+  <link rel="import" href="../elements/featured-people.html">
+{% endif %}
 {% if videosSessionsUrl %}
   <link rel="import" href="../elements/featured-videos.html">
 {% endif %}
 {% if callToAction %}
   <link rel="import" href="../elements/call-to-action.html">
 {% endif %}
-<link rel="import" href="../elements/about-block.html">
-<link rel="import" href="../elements/tickets-block.html">
+{% if enabledAboutBlock %}
+  <link rel="import" href="../elements/about-block.html">
+{% endif %}
+{% if enabledTicketsBlock %}
+  <link rel="import" href="../elements/tickets-block.html">
+{% endif %}
+{% if enabledPostsBlock %}
 <link rel="import" href="../elements/latest-posts.html">
-<link rel="import" href="../elements/footer-block.html">
+{% endif %}
+  <link rel="import" href="../elements/footer-block.html">
 {% if gallery %}
   <link rel="import" href="../elements/photo-block.html">
 {% endif %}
-<link rel="import" href="../elements/social-feed.html">
+{% if enabledSocialFeed %}
+  <link rel="import" href="../elements/social-feed.html">
+{% endif %}
+{% if enabledLogosBlock %}
 <link rel="import" href="../elements/logos-block.html">
+{% endif %}
+{% if enabledMapBlock %}
 <link rel="import" href="../elements/map-block.html">
-
+{% endif %}
 
 <dom-module id="home-page">
 
   <template>
 
-    <statistics-block app="{{app}}" cascaded></statistics-block>
-    <featured-people app="{{app}}" people="{{people}}" cascaded></featured-people>
+    {% if enabledStatisticsBlock %}
+      <statistics-block app="{{app}}" cascaded></statistics-block>
+    {% endif %}
+    {% if enabledFeaturedBlock %}
+      <featured-people app="{{app}}" people="{{people}}" cascaded></featured-people>
+    {% endif %}
     {% if videosSessionsUrl %}
       <featured-videos app="{{app}}" cascaded></featured-videos>
     {% endif %}
     {% if callToAction %}
       <call-to-action app="{{app}}" cascaded></call-to-action>
     {% endif %}
-    <about-block app="{{app}}" cascaded></about-block>
+    {% if enabledAboutBlock %}
+      <about-block app="{{app}}" cascaded></about-block>
+    {% endif %}
     {% if gallery %}
       <photo-block app="{{app}}" cascaded></photo-block>
     {% endif %}
-    <tickets-block app="{{app}}" cascaded></tickets-block>
-    <latest-posts app="{{app}}" posts="{{posts}}" cascaded></latest-posts>
-    <social-feed app="{{app}}" cascaded></social-feed>
-    <map-block app="{{app}}" selected="{{selected}}" cascaded></map-block>
-    <logos-block app="{{app}}" cascaded></logos-block>
-    <footer-block app="{{app}}" cascaded></footer-block>
+    {% if enabledTicketsBlock %}
+      <tickets-block app="{{app}}" cascaded></tickets-block>
+    {% endif %}
+    {% if enabledPostsBlock %}
+      <latest-posts app="{{app}}" posts="{{posts}}" cascaded></latest-posts>
+    {% endif %}
+    {% if enabledSocialFeedBlock %}
+      <social-feed app="{{app}}" cascaded></social-feed>
+    {% endif %}
+    {% if enabledMapBlock %}
+      <map-block app="{{app}}" selected="{{selected}}" cascaded></map-block>
+    {% endif %}
+    {% if enabledLogosBlock %}
+      <logos-block app="{{app}}" cascaded></logos-block>
+    {% endif %}
+    {% if enabledFooterBlock %}
+      <footer-block app="{{app}}" cascaded></footer-block>
+    {% endif %}
 
   </template>
 

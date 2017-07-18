@@ -138,9 +138,11 @@
                   {$ playIcon $}
                 </div>
               {% endif %}
+              {% if enabledBuyTicketsButton %}
               <div class="action-buttons">
                 <paper-button class="primary" on-tap="_scrollToTickets" raised>{$ buyTicket $}</paper-button>
               </div>
+              {% endif %}
             </div>
           </div>
         </animatable-content>

@@ -98,6 +98,7 @@
             {$ pages[nav.route].title $}
           </a>
         {% endfor %}
+        {% if enabledBuyTicketsButton %}
         <a class="navigation-link" href="{$ tickets.url $}" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
           {$ buyTicket $}
           <iron-icon
@@ -105,6 +106,7 @@
             icon="open-in-new"
           ></iron-icon>
         </a>
+        {% endif %}
       </paper-menu>
     </nav>
 

@@ -36,28 +36,23 @@
   "disqusShortName": "hoverboard-gdg-x",
   "tweetsSource": "/data/tweets.json",
   "partnershipProposition": "http://bit.ly/df16-sponsor",
-  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
+  "videosSessionsUrl": false,
   "enableSessionsRating": true,
+  "enabledTicketsBlock": true,
+  "enabledPostsBlock": false,
+  "enabledStatisticsBlock": true,
+  "enabledFeaturedBlock": false,
+  "enabledAboutBlock": true,
+  "enabledSocialFeed": false,
+  "enabledMapBlock": false,
+  "enabledLogosBlock": true,
+  "enabledFooterBlock": true,
+  "enabledBuyTicketsButton": false,
+  "enabledSignInButton": false,
   "navigation": [
     {
       "route": "home",
       "permalink": "/"
-    },
-    {
-      "route": "blog",
-      "permalink": "/blog/"
-    },
-    {
-      "route": "schedule",
-      "permalink": "/schedule/"
-    },
-    {
-      "route": "speakers",
-      "permalink": "/speakers/"
-    },
-    {
-      "route": "team",
-      "permalink": "/team/"
     }
   ],
   "social": [
