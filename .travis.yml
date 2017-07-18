@@ -23,6 +23,6 @@ deploy:
   on:
     branch: dev
   project: devfest-baltics
-  token: $FIREBASE_TOKEN
+  token: ${FIREBASE_TOKEN}
 notifications:
-  slack: $SLACK_TOKEN
+  slack: ${SLACK_TOKEN}
