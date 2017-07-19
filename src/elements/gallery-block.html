@@ -1,15 +1,14 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
-<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="./shared-styles.html">
 
 <dom-module id="gallery-block">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
 
     <style>
 
@@ -17,68 +16,138 @@
         display: block;
       }
 
-      .photos-wrapper {
+      .photos-grid {
         margin: 64px auto;
-        overflow: hidden;
+        display: grid;
+        width: 100%;
+        min-height: 400px;
+        height: calc(100vh - 40px);
+        max-height: 750px;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        grid-gap: 2px;
       }
 
-      .slide-icon {
-        margin: 16px;
-        width: 50px;
-        height: 50px;
-        background-color: #fff;
-        border-radius: 50%;
-        color: var(--default-primary-color);
-        opacity: 0.9;
-        transition: opacity var(--animation);
-      }
-
-      .slide-icon:hover {
-        opacity: 1;
-      }
-
-      .photo {
-        display: block;
-        --iron-image-height: 100%;
-        min-width: 56vw;
-        height: calc(100vh - 120px);
-        max-height: 560px;
-      }
-
-      plastic-image {
+      .grid-item {
         background-color: var(--secondary-background-color);
+      }
+
+      .grid-item:first-child {
+        grid-area: 1 / 1 / 3 / 4;
+      }
+
+      .grid-item:nth-child(2) {
+        grid-area: 3 / 1 / 5 / 3;
+      }
+
+      .grid-item:nth-child(3) {
+        grid-area: 3 / 3 / 3 / 3;
+      }
+
+      .grid-item:nth-child(4) {
+        grid-area: 4 / 3 / 4 / 3;
+      }
+
+      .grid-item:nth-child(5) {
+        grid-area: 5 / 1 / 5 / 1;
+      }
+
+      .grid-item:nth-child(6) {
+        display: none;
+      }
+
+      .grid-item:nth-child(7) {
+        display: none;
+      }
+
+      .grid-item:nth-child(8) {
+        display: none;
+      }
+
+      .gallery-info {
+        padding: 16px;
+        background-color: var(--default-primary-color);
+        color: var(--text-primary-color);
+        z-index: 1;
+        grid-area: 5 / 2 / 5 / 4;
+      }
+
+      paper-button {
+        margin-top: 16px;
+        color: var(--text-primary-color);
+      }
+
+      @media (min-width: 640px) {
+        .photos-grid {
+          height: calc(100vh - 64px);
+          grid-template-columns: repeat(5, 1fr);
+          grid-template-rows: repeat(3, 1fr);
+        }
+
+        .grid-item:first-child {
+          grid-area: 1 / 1 / 1 / 3;
+        }
+
+        .grid-item:nth-child(2) {
+          grid-area: 1 / 3 / 2 / 5;
+        }
+
+        .grid-item:nth-child(3) {
+          grid-area: 1 / 5 / 3 / 5;
+        }
+
+        .grid-item:nth-child(4) {
+          grid-area: 2 / 1 / 2 / 1;
+        }
+
+        .grid-item:nth-child(5) {
+          grid-area: 2 / 2 / 2 / 2;
+        }
+
+        .grid-item:nth-child(6) {
+          grid-area: 3 / 1 / 3 / 3;
+          display: block;
+        }
+
+        .grid-item:nth-child(7) {
+          grid-area: 3 / 3 / 3 / 3;
+          display: block;
+        }
+
+        .grid-item:nth-child(8) {
+          grid-area: 3 / 4 / 3 / 6;
+          display: block;
+        }
+
+        .gallery-info {
+          padding: 24px;
+          grid-area: 2 / 3 / 2 / 5;
+        }
       }
 
     </style>
 
-    <div class="photos-wrapper" relative>
-
-      <div id="slider" class="slider" layout horizontal>
-        <template is="dom-repeat" items="[[gallery.photos]]" as="photo">
-          <div class="photo" relative>
-            <plastic-image
-              srcset="[[photo]]"
-              sizing="cover"
-              lazy-load preload fade fit
-            ></plastic-image>
-          </div>
-        </template>
+    <div class="photos-grid">
+      <template is="dom-repeat" items="[[gallery.photos]]" as="photo">
+        <plastic-image
+          class="grid-item"
+          srcset="[[photo]]"
+          sizing="cover"
+          lazy-load preload fade
+        ></plastic-image>
+      </template>
+      <div class="gallery-info" layout vertical justified>
+        <div>
+          <h2>#dfua16 highlights</h2>
+          <p>
+            This year's festival built lots of excitement. Check out photos from featured talks, hands-on learning
+            sessions, and after-hours fun.
+          </p>
+        </div>
+        <a href="[[gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
+          <paper-button>See all photos</paper-button>
+        </a>
       </div>
-
-      <div class="container" layout horizontal center justified fit>
-        <paper-icon-button
-          class="slide-icon"
-          icon="hoverboard:chevron-left"
-          on-tap="shiftContentLeft"
-        ></paper-icon-button>
-
-        <paper-icon-button
-          class="slide-icon"
-          icon="hoverboard:chevron-right"
-          on-tap="shiftContentRight"
-        ></paper-icon-button>
-      </div>
-
     </div>
 
   </template>
@@ -102,30 +171,6 @@
       connectedCallback() {
         super.connectedCallback();
         if (!Object.keys(this.gallery).length) galleryActions.fetchGallery();
-      }
-
-      shiftContentLeft() {
-        const {
-          cardWidth,
-          videosLength
-        } = this.getVideosDetails();
-
-        if (this._currentIndex < videosLength && this._currentIndex > 0) {
-          const newX = -(this._currentIndex - 1) * cardWidth;
-          this.transformVideoList(this.$.videos, newX);
-          this._currentIndex--;
-        }
-      }
-
-      shiftContentRight() {
-        const card = this.shadowRoot.querySelector('.photo');
-        const cardWidth = card.getBoundingClientRect().width;
-
-        if (this._currentIndex >= 0 && this._currentIndex < videosLength - 1) {
-          const newX = -(this._currentIndex + 1) * cardWidth;
-          this.transformVideoList(this.$.videos, newX);
-          this._currentIndex++;
-        }
       }
     }
 
