@@ -23,6 +23,7 @@ deploy:
   on:
     branch: dev
   project: devfest-baltics
-  token: ${FIREBASE_TOKEN}
+  token: "${FIREBASE_TOKEN}"
 notifications:
-  slack: ${SLACK_DOMAIN}:${SLACK_TOKEN}
+  slack:
+    secure: pnQzxi1CK/029tU94gh91Qz7z1BF6VGbOdA+tz4dbdbrF+NfKE73Me5/RjD9kthJHhGpbAEqYVAZ//cFtBDaldR8fOltwrlEaMxfU7JuMmmBJVfWia0BLXWQRTwYlYmlPq1myhCVahabPLoRK3PKwHAqqlfjg/yly4Rj3MnzdBxYZzDp1VQs6/lJSUrn+Jb0M0E6havzRcyPBQrmGMiQyRn0uesOx7v6Ikht79VLUcaTNK+TcKVrn4nfldXKKzhb1xtfEl+eqIE7luob+rLSaaMUmpZ+9cfOtwHpjeY5b6wX+atKoPXSPOvt60Q9/IxYwCMBfQ3meqR+uAqUE4gl6EelSjZ6qmpwuF0TfNnA3pQyE/SqkA5KTZfBW966JZAeEVXsth8DQ1+HGO8FYcsdVALJCCvmyN/1UBAjpggiT2hZRq6MADMyGFdbue/XMqqF4VynpIp90Isk3gVr3BxY8EU21xag08Lao+tCWS5dEwhOKyKGu6ZRhVAEWkaKABJcg7Trp/iNMM389YPC25h0pkThrHlNX5PDXioY7XZ4kqbIbsThknZOs/x7ofETm2pSMee8/M4REQZ1wbJj7Ue4YfXvVlrLzapVu/5Xxlf6OJ4FBDSNWpdMJGCIsnk9A4V6ctrtqouUqI3X+OjNUrrEX3+v4Y0etCMIDrqrOosYFVA=
