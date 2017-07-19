@@ -50,32 +50,7 @@
         } catch (e) {
           // no-op
         }
-      };    
-
-      // HOTJAR
-      (function(h,o,t,j,a,r){
-        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-        h._hjSettings={hjid:407943,hjsv:5};
-        a=o.getElementsByTagName('head')[0];
-        r=o.createElement('script');r.async=1;
-        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-        a.appendChild(r);
-      })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
-
-      // FACEBOOK PIXEL CODE
-      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-        document,'script','https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1063132593772106');
-        fbq('track', 'PageView');
-
-      !function(e,t){
-        var n=e.getElementsByTagName("head")[0],
-        a=e.createElement("noscript"),i=e.createElement("img");
-        i.height=1,i.width=1,i.style.display="none",i.src=t,a.appendChild(i),n.appendChild(a)}
-        (document,"https://www.facebook.com/tr?id=1063132593772106&ev=PageView&noscript=1");
+      };  
     }
   }
   customElements.define('hoverboard-analytics', HoverboardAnalytics);

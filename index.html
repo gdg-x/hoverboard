@@ -75,8 +75,8 @@
   <script src="bower_components/firebase/firebase.js"></script>
   <script>
 
-    window.ENV = 'dev';
-    window.PREFIX = '/';
+    window.ENV = '{$ environment $}';
+    window.PREFIX = '{$ prefix $}';
 
     // Register the base URL
     const baseUrl = document.querySelector('base').href;
