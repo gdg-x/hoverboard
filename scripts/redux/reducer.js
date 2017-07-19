@@ -92,3 +92,12 @@ const speakersReducer = (state = initialState.speakers, action) => {
       return state;
   }
 };
+
+const galleryReducer = (state = initialState.gallery, action) => {
+  switch (action.type) {
+    case FETCH_GALLERY:
+      return action.gallery;
+    default:
+      return state;
+  }
+};

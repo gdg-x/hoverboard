@@ -171,7 +171,7 @@
 
           <plastic-image
             class="company-logo"
-            srcset="{{speaker.companyLogoUrl}}"
+            srcset="[[speaker.companyLogoUrl]]"
             sizing="contain"
             lazy-load preload fade
           ></plastic-image>
@@ -211,22 +211,16 @@
 
       static get properties() {
         return {
-          route: Object,
-          active: Boolean,
           speakers: {
             route: Object,
             statePath: 'speakers'
-          },
-          isDialogOpened: {
-            type: Object,
-            statePath: 'dialogs.speaker.isOpened'
           }
         };
       }
 
       static get observers() {
         return [
-          '_openSpeakerDetails(active, speakers, routeData.page)'
+          '_openSpeakerDetails(speakers, routeData.page)'
         ];
       }
 
@@ -235,16 +229,9 @@
         if (!Object.keys(this.speakers).length) speakersActions.fetchList();
       }
 
-      _openSpeakerDetails(active, speakers, id) {
-        if (active && speakers && Object.keys(speakers).length) {
-          requestAnimationFrame(() => {
-              if (id) {
-                dialogsActions.openDialog(DIALOGS.SPEAKER, speakers[id]);
-              } else if (this.isDialogOpened) {
-                dialogsActions.closeDialog(DIALOGS.SPEAKER);
-              }
-            }
-          )
+      _openSpeakerDetails(speakers, id) {
+        if (speakers && Object.keys(speakers).length && id) {
+          dialogsActions.openDialog(DIALOGS.SPEAKER, speakers[id]);
         }
       }
     }

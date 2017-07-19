@@ -1,0 +1,134 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="./shared-styles.html">
+
+<dom-module id="gallery-block">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+
+    <style>
+
+      :host {
+        display: block;
+      }
+
+      .photos-wrapper {
+        margin: 64px auto;
+        overflow: hidden;
+      }
+
+      .slide-icon {
+        margin: 16px;
+        width: 50px;
+        height: 50px;
+        background-color: #fff;
+        border-radius: 50%;
+        color: var(--default-primary-color);
+        opacity: 0.9;
+        transition: opacity var(--animation);
+      }
+
+      .slide-icon:hover {
+        opacity: 1;
+      }
+
+      .photo {
+        display: block;
+        --iron-image-height: 100%;
+        min-width: 56vw;
+        height: calc(100vh - 120px);
+        max-height: 560px;
+      }
+
+      plastic-image {
+        background-color: var(--secondary-background-color);
+      }
+
+    </style>
+
+    <div class="photos-wrapper" relative>
+
+      <div id="slider" class="slider" layout horizontal>
+        <template is="dom-repeat" items="[[gallery.photos]]" as="photo">
+          <div class="photo" relative>
+            <plastic-image
+              srcset="[[photo]]"
+              sizing="cover"
+              lazy-load preload fade fit
+            ></plastic-image>
+          </div>
+        </template>
+      </div>
+
+      <div class="container" layout horizontal center justified fit>
+        <paper-icon-button
+          class="slide-icon"
+          icon="hoverboard:chevron-left"
+          on-tap="shiftContentLeft"
+        ></paper-icon-button>
+
+        <paper-icon-button
+          class="slide-icon"
+          icon="hoverboard:chevron-right"
+          on-tap="shiftContentRight"
+        ></paper-icon-button>
+      </div>
+
+    </div>
+
+  </template>
+
+  <script>
+
+    class GalleryBlock extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'gallery-block';
+      }
+
+      static get properties() {
+        return {
+          gallery: {
+            route: Object,
+            statePath: 'gallery'
+          }
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        if (!Object.keys(this.gallery).length) galleryActions.fetchGallery();
+      }
+
+      shiftContentLeft() {
+        const {
+          cardWidth,
+          videosLength
+        } = this.getVideosDetails();
+
+        if (this._currentIndex < videosLength && this._currentIndex > 0) {
+          const newX = -(this._currentIndex - 1) * cardWidth;
+          this.transformVideoList(this.$.videos, newX);
+          this._currentIndex--;
+        }
+      }
+
+      shiftContentRight() {
+        const card = this.shadowRoot.querySelector('.photo');
+        const cardWidth = card.getBoundingClientRect().width;
+
+        if (this._currentIndex >= 0 && this._currentIndex < videosLength - 1) {
+          const newX = -(this._currentIndex + 1) * cardWidth;
+          this.transformVideoList(this.$.videos, newX);
+          this._currentIndex++;
+        }
+      }
+    }
+
+    customElements.define(GalleryBlock.is, GalleryBlock);
+  </script>
+</dom-module>
