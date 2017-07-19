@@ -128,7 +128,7 @@
     </style>
 
     <div class="photos-grid">
-      <template is="dom-repeat" items="[[gallery.photos]]" as="photo">
+      <template is="dom-repeat" items="[[gallery]]" as="photo">
         <plastic-image
           class="grid-item"
           srcset="[[photo]]"
@@ -138,14 +138,11 @@
       </template>
       <div class="gallery-info" layout vertical justified>
         <div>
-          <h2>#dfua16 highlights</h2>
-          <p>
-            This year's festival built lots of excitement. Check out photos from featured talks, hands-on learning
-            sessions, and after-hours fun.
-          </p>
+          <h2>{$ galleryBlock.title $}</h2>
+          <p>{$ galleryBlock.description $}</p>
         </div>
-        <a href="[[gallery.albumUrl]]" target="_blank" rel="noopener noreferrer">
-          <paper-button>See all photos</paper-button>
+        <a href="{$ galleryBlock.button.url $}" target="_blank" rel="noopener noreferrer">
+          <paper-button>{$ galleryBlock.button.label $}</paper-button>
         </a>
       </div>
     </div>
