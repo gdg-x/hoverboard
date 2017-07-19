@@ -7,61 +7,61 @@
   <template>
     <iron-ajax auto url="[[postsSource]]" handle-as="json" on-response="_reversePosts"></iron-ajax>
 
+    <!--<firebase-document-->
+      <!--id="queryPreviousSpeakers"-->
+      <!--app-name="{$ firebase.name $}"-->
+      <!--path="/previousSpeakers"-->
+      <!--data="{{_firebasePreviousSpeakersRaw}}">-->
+    <!--</firebase-document>-->
+
+    <!--<app-indexeddb-mirror-->
+      <!--session="{$ firebase.indexedDbSession $}"-->
+      <!--key="previousSpeakers"-->
+      <!--data="{{_firebasePreviousSpeakersRaw}}"-->
+      <!--persisted-data="{{app.previousSpeakers}}">-->
+    <!--</app-indexeddb-mirror>-->
+
     <firebase-document
-      id="queryPreviousSpeakers"
+      id="querySpeakers"
       app-name="{$ firebase.name $}"
-      path="/previousSpeakers"
-      data="{{_firebasePreviousSpeakersRaw}}">
+      path="/speakers"
+      data="{{_firebaseSpeakersRaw}}">
     </firebase-document>
 
     <app-indexeddb-mirror
       session="{$ firebase.indexedDbSession $}"
-      key="previousSpeakers"
-      data="{{_firebasePreviousSpeakersRaw}}"
-      persisted-data="{{app.previousSpeakers}}">
+      key="speakers"
+      data="{{_firebaseSpeakersRaw}}"
+      persisted-data="{{_speakersRaw}}">
     </app-indexeddb-mirror>
 
-    <!--<firebase-document-->
-      <!--id="querySpeakers"-->
-      <!--app-name="{$ firebase.name $}"-->
-      <!--path="/speakers"-->
-      <!--data="{{_firebaseSpeakersRaw}}">-->
-    <!--</firebase-document>-->
+    <firebase-document
+      id="querySessions"
+      app-name="{$ firebase.name $}"
+      path="/sessions"
+      data="{{_firebaseSessions}}">
+    </firebase-document>
 
-    <!--<app-indexeddb-mirror-->
-      <!--session="{$ firebase.indexedDbSession $}"-->
-      <!--key="speakers"-->
-      <!--data="{{_firebaseSpeakersRaw}}"-->
-      <!--persisted-data="{{_speakersRaw}}">-->
-    <!--</app-indexeddb-mirror>-->
+    <app-indexeddb-mirror
+      session="{$ firebase.indexedDbSession $}"
+      key="sessions"
+      data="{{_firebaseSessions}}"
+      persisted-data="{{_sessionsRaw}}">
+    </app-indexeddb-mirror>
 
-    <!--<firebase-document-->
-      <!--id="querySessions"-->
-      <!--app-name="{$ firebase.name $}"-->
-      <!--path="/sessions"-->
-      <!--data="{{_firebaseSessions}}">-->
-    <!--</firebase-document>-->
+    <firebase-document
+      id="querySchedule"
+      app-name="{$ firebase.name $}"
+      path="/schedule"
+      data="{{_firebaseSchedule}}">
+    </firebase-document>
 
-    <!--<app-indexeddb-mirror-->
-      <!--session="{$ firebase.indexedDbSession $}"-->
-      <!--key="sessions"-->
-      <!--data="{{_firebaseSessions}}"-->
-      <!--persisted-data="{{_sessionsRaw}}">-->
-    <!--</app-indexeddb-mirror>-->
-
-    <!--<firebase-document-->
-      <!--id="querySchedule"-->
-      <!--app-name="{$ firebase.name $}"-->
-      <!--path="/schedule"-->
-      <!--data="{{_firebaseSchedule}}">-->
-    <!--</firebase-document>-->
-
-    <!--<app-indexeddb-mirror-->
-      <!--session="{$ firebase.indexedDbSession $}"-->
-      <!--key="schedule"-->
-      <!--data="{{_firebaseSchedule}}"-->
-      <!--persisted-data="{{_scheduleRaw}}">-->
-    <!--</app-indexeddb-mirror>-->
+    <app-indexeddb-mirror
+      session="{$ firebase.indexedDbSession $}"
+      key="schedule"
+      data="{{_firebaseSchedule}}"
+      persisted-data="{{_scheduleRaw}}">
+    </app-indexeddb-mirror>
 
     <firebase-query
       id="queryPartners"
@@ -185,20 +185,16 @@
           }
         },
 
-//        observers: [
-//          '_generateSchedule(_speakersRaw, _sessionsRaw, _scheduleRaw)'
-//        ],
+        observers: [
+          '_generateSchedule(_speakersRaw, _sessionsRaw, _scheduleRaw)'
+        ],
 
         ready: function () {
           this.app = this.app || {};
         },
 
         _generateSchedule: function () {
-          if (!Object.keys(this._speakersRaw).length
-            || !Object.keys(this._sessionsRaw).length
-            || !Object.keys(this._scheduleRaw).length) return;
-
-          var myWorker = new Worker('./scripts/helper/schedule-webworker.js');
+          var myWorker = new Worker('/scripts/helper/schedule-webworker.js');
 
           myWorker.postMessage({
             speakers: this._speakersRaw,
@@ -206,7 +202,7 @@
             schedule: this._scheduleRaw
           });
 
-          myWorker.addEventListener('message', function (e) {
+          myWorker.addEventListener('message', function(e) {
             this.set('schedule', e.data.schedule);
             this.set('sessions', e.data.sessions);
             this.set('speakers', e.data.speakers);
