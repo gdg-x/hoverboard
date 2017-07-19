@@ -28,7 +28,6 @@
       ga('require', 'eventTracker');
       ga('require', 'outboundLinkTracker');
       ga('require', 'urlChangeTracker');
-      ga('require', 'maxScrollTracker');
       ga('require', 'pageVisibilityTracker');
 
       ga('send', 'pageview');
@@ -37,20 +36,21 @@
         ga('send', 'event', 'network', 'change', event.type);
       };
 
+      window.addEventListener('online', updateOnlineStatus);
+      window.addEventListener('offline', updateOnlineStatus); 
+
       window.onerror = function (message, file, lineNumber, columnNumber, error) {
+        // We don't want to trigger any errors inside window.onerror, so wrap in a try/catch.
         try {
+          // Some browsers don't support error param yet.
           if (error !== undefined) {
             message = error.stack;
           }
           ga('send', 'event', 'error', file + ':' + lineNumber, message);
-        } 
-        catch (err) {
-          ga('send', 'event', 'error', err);
+        } catch (e) {
+          // no-op
         }
-      };
-
-      window.addEventListener('online', updateOnlineStatus);
-      window.addEventListener('offline', updateOnlineStatus);     
+      };    
 
       // HOTJAR
       (function(h,o,t,j,a,r){
