@@ -82,7 +82,13 @@
 
       <div class="posts-wrapper">
         <template is="dom-repeat" items="[[posts]]" as="post">
-          <a href$="/blog/posts/[[post.id]]/" class="post card" flex layout vertical>
+          <a href$="/blog/posts/[[post.id]]/"
+              class="post card"
+              ga-on="click"
+              ga-event-category="blog"
+              ga-event-action="open post"
+              ga-event-label$="[[post.title]]"
+              flex layout vertical>
             <plastic-image
               class="image"
               srcset="[[post.image]]"
