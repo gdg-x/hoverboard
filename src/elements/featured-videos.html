@@ -203,7 +203,7 @@
 
         Polymer.Gestures.addListener(this.$.videos, 'down', event => {
           isMouseDown = true;
-          currentPosition = parseInt(getComputedStyle(videoListElement, null).getPropertyValue("transform").split(",")[4]);
+          currentPosition = parseInt(getComputedStyle(videoListElement, null).getPropertyValue('transform').split(',')[4]);
           startPosition = event.detail.x;
         });
 
@@ -249,8 +249,8 @@
         const cardRect = videos[videos.length - 1].getBoundingClientRect();
         const cardWidth = cardRect.width;
         const videosLength = videos.length;
-        const currentPosition = parseInt(getComputedStyle(this.$.videos, null).getPropertyValue("transform").split(",")[4]);
-        const slideIndex = Math.abs(Math.floor(currentPosition / cardWidth));
+        const currentPosition = parseInt(getComputedStyle(this.$.videos, null).getPropertyValue('transform').split(',')[4]);
+        const slideIndex = -(Math.floor(currentPosition / cardWidth));
 
         return {
           cardWidth,
