@@ -25,7 +25,4 @@ deploy:
   project: devfest-baltics
   token: ${FIREBASE_TOKEN}
 notifications:
-  slack:
-    rooms:
-      - ${SLACK_TOKEN}
-    on_success: always
+  slack: ${SLACK_DOMAIN}:${SLACK_TOKEN}
