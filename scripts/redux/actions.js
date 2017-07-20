@@ -111,3 +111,16 @@ const speakersActions = {
       });
   }
 };
+
+const galleryActions = {
+  fetchGallery: () => {
+    return firebase.database()
+      .ref('/gallery')
+      .on('value', snapshot => {
+        store.dispatch({
+          type: FETCH_GALLERY,
+          gallery: snapshot.val()
+        });
+      });
+  }
+};
