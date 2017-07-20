@@ -173,5 +173,8 @@
       "label": "See all photos",
       "link": "https://goo.gl/photos/H8s3CtPexCzkLqSt9"
     }
+  },
+  "mapBlock": {
+    "title": "Location"
   }
 }
