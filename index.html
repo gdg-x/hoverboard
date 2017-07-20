@@ -74,6 +74,10 @@
 
   <script src="bower_components/firebase/firebase.js"></script>
   <script>
+
+    window.ENV = '{$ environment $}';
+    window.PREFIX = '{$ prefix $}';
+
     // Register the base URL
     const baseUrl = document.querySelector('base').href;
 
@@ -105,6 +109,7 @@
           storageBucket: '{$ firebase.storageBucket $}',
         });
       });
+     
   </script>
 
   <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>

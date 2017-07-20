@@ -151,7 +151,11 @@
             class="share-gplus"
             icon="hoverboard:gplus"
             share="gplus"
-            on-tap="share">
+            on-tap="share"
+            ga-on="click"
+            ga-event-category="social"
+            ga-event-action="share"
+            ga-event-label="gplus">
           </paper-icon-button>
         </div>
         <div class="share">
@@ -159,7 +163,11 @@
             class="share-facebook"
             icon="hoverboard:facebook"
             share="facebook"
-            on-tap="share">
+            on-tap="share"
+            ga-on="click"
+            ga-event-category="social"
+            ga-event-action="share"
+            ga-event-label="facebook">
           </paper-icon-button>
         </div>
         <div class="share">
@@ -167,7 +175,11 @@
             class="share-twitter"
             icon="hoverboard:twitter"
             share="twitter"
-            on-tap="share">
+            on-tap="share"
+            ga-on="click"
+            ga-event-category="social"
+            ga-event-action="share"
+            ga-event-label="twitter">
           </paper-icon-button>
         </div>
       </div>
@@ -185,7 +197,13 @@
       <ul class="nav-inline">
         {% for socFollow in socialNetwork.follow %}
           <li>
-            <a href="{$ socFollow.url $}" target="_blank" rel="noopener noreferrer">
+            <a href="{$ socFollow.url $}" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                ga-on="click"
+                ga-event-category="social"
+                ga-event-action="follow"
+                ga-event-label="{$ socFollow.name $}">
               <paper-icon-button icon="hoverboard:{$ socFollow.name $}"></paper-icon-button>
             </a>
           </li>

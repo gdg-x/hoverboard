@@ -77,7 +77,14 @@
       <div class="container">
         <div class="featured-posts-wrapper" layout vertical$="[[viewport.isPhone]]" horizontal$="[[viewport.isTabletPlus]]" justified>
           <template is="dom-repeat" items="[[featuredPosts]]" as="post">
-            <a href$="/blog/posts/[[post.id]]/" class="featured-post" flex$="[[viewport.isTabletPlus]]" relative>
+            <a href$="/blog/posts/[[post.id]]/"
+               class="featured-post"
+               flex$="[[viewport.isTabletPlus]]"
+               ga-on="click"
+               ga-event-category="blog"
+               ga-event-action="open post"
+               ga-event-label$="[[post.title]]"
+               relative>
               <plastic-image
                 class="image"
                 srcset="[[post.image]]"

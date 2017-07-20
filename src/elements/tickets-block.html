@@ -114,7 +114,12 @@
 
         <div class="additional-info">*{$ ticketsBlock.ticketsDetails $}</div>
 
-        <a href$="[[tickets.url]]" target="_blank" rel="noopener noreferrer">
+        <a href$="[[tickets.url]]"
+            target="_blank"
+            rel="noopener noreferrer"
+            ga-on="click"
+            ga-event-category="ticket button"
+            ga-event-action="buy_click">
           <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>
         </a>
       </div>

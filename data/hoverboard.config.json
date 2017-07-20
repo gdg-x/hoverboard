@@ -3,7 +3,12 @@
   "url": "https://hoverboard-v2-dev.firebaseapp.com/",
   "startDate": "2017-10-013T09:00:00+03:00",
   "endDate": "2017-10-14T19:00:00+03:00",
-  "analytics": "UA-43643469-8",
+  "analytics": {
+    "prod": "UA-43643469-8",
+    "dev": "UA-43643469-9"
+  },
+  "environment": "dev",
+  "prefix": "/",
   "firebase": {
     "apiKey": "AIzaSyALDa2D7CMhK_wt2VkET1MaJuQXYVUJd2I",
     "authDomain": "hoverboard-experimental.firebaseapp.com",

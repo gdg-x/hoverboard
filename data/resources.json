@@ -20,15 +20,18 @@
       "links": [
         {
           "name": "GDG Lviv",
-          "url": "hhttp://lviv.gdg.org.ua/"
+          "url": "hhttp://lviv.gdg.org.ua/",
+          "newTab": true
         },
         {
           "name": "Google Developers Group",
-          "url": "https://developers.google.com/"
+          "url": "https://developers.google.com/",
+          "newTab": true
         },
         {
           "name": "Meet the Team",
-          "url": "https://devfest.gdg.org.ua/team/"
+          "url": "https://devfest.gdg.org.ua/team/",
+          "newTab": true
         }
       ]
     },
@@ -37,19 +40,23 @@
       "links": [
         {
           "name": "DFUA 2013",
-          "url": "http://gdg-devfest-ua.appspot.com/"
+          "url": "http://gdg-devfest-ua.appspot.com/",
+          "newTab": true
         },
         {
           "name": "DFUA 2014",
-          "url": "https://dfua14.firebaseapp.com//"
+          "url": "https://dfua14.firebaseapp.com//",
+          "newTab": true
         },
         {
           "name": "DFUA 2015",
-          "url": "https://dfua15.firebaseapp.com/"
+          "url": "https://dfua15.firebaseapp.com/",
+          "newTab": true
         },
         {
           "name": "DFUA 2016",
-          "url": "https://dfua16.firebaseapp.com/"
+          "url": "https://dfua16.firebaseapp.com/",
+          "newTab": true
         }
       ]
     },
@@ -90,22 +97,18 @@
   "codeOfConduct": "Code of Conduct",
   "aboutBlock": {
     "title": "What you need to know, before you ask.",
-    "descriptionBlocks": [
-      {
+    "callToAction": {
+      "featuredSessions": {
         "description": "GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases.",
-        "callToAction": {
-          "label": "Explore featured session",
-          "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
-        }
+        "label": "Explore featured session",
+        "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
       },
-      {
+      "howItWas": {
         "description": "Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
-        "callToAction": {
-          "label": "See how it was in 2016",
-          "link": "https://www.youtube.com/watch?v=TdpbgRgz6eE"
-        }
+        "label": "See how it was in 2016",
+        "youtubeId": "TdpbgRgz6eE"
       }
-    ],
+    },
     "statisticsBlock": {
       "attendees": {
         "label": "Attendees",

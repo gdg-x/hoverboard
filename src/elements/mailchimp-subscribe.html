@@ -50,7 +50,14 @@
           <paper-input label="{$ yourEmail $}" name="EMAIL" id="mce-EMAIL" autocomplete="off" no-label-float>
             <iron-icon icon="mail" prefix></iron-icon>
           </paper-input>
-          <paper-button class="subscribe-button" on-click="submitForm" layout flex self-end>{$ subscribe $}</paper-button>
+          <paper-button 
+            class="subscribe-button"
+            on-click="submitForm"
+            ga-on="click"
+            ga-event-category="attendees"
+            ga-event-action="subscribe"
+            ga-event-label="mailchimp footer"
+            layout flex self-end>{$ subscribe $}</paper-button>
         </div>
 
         <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups -->
