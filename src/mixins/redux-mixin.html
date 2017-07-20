@@ -35,7 +35,8 @@
     videos: [],
     blog: {},
     speakers: {},
-    gallery: []
+    gallery: [],
+    team: []
   };
 
   const appReducer = (state = initialState, action) => {
@@ -49,7 +50,8 @@
       videos: videosReducer(state.videos, action),
       blog: blogReducer(state.blog, action),
       speakers: speakersReducer(state.speakers, action),
-      gallery: galleryReducer(state.gallery, action)
+      gallery: galleryReducer(state.gallery, action),
+      team: teamReducer(state.team, action)
     };
   };
 
