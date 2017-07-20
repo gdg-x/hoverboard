@@ -147,7 +147,7 @@
   },
   "latestPostsBlock": {
     "title": "The latest news",
-    "button": {
+    "callToAction": {
       "label": "View all stories",
       "link": "/blog/"
     }
@@ -158,7 +158,7 @@
   },
   "speakersBlock": {
     "title": "Rockstar speakers",
-    "button": {
+    "callToAction": {
       "label": "View all speakers",
       "link": "/speakers/"
     }
@@ -166,7 +166,7 @@
   "galleryBlock": {
     "title": "#dfua16 highlights",
     "description": "This year's festival built lots of excitement. Check out photos from featured talks, hands-on learning sessions, and after-hours fun.",
-    "button": {
+    "callToAction": {
       "label": "See all photos",
       "link": "https://goo.gl/photos/H8s3CtPexCzkLqSt9"
     }
