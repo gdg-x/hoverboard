@@ -36,38 +36,36 @@
       }     
 
       .member {
-        padding: 32px 24px;
-        background: #fff;
-        text-align: center;
-        transition: box-shadow var(--animation);
+        padding: 16px 0;
+        min-width: 300px;
       }
 
-      .member:hover {
-        box-shadow: var(--box-shadow);
+      .member:hover .photo {
+        border: 5px solid var(--contrast-additional-background-color);
       }
 
       .photo {
-        width: 128px;
-        height: 128px;
-        background-color: var(--secondary-background-color);
+        width: 96px;
+        height: 96px;
+        background-color: var(--contrast-additional-background-color);
         border-radius: 50%;
         overflow: hidden;
         transform: translateZ(0);
+        border-radius: 50%;
       }
 
       .description {
         color: var(--primary-text-color);
+        margin-left: 16px;
       }
 
       .name {
-        margin-top: 8px;
-        line-height: 1.4;
+        padding-left: 6px;
       }
 
       .activity {
-        margin-top: 4px;
         font-size: 16px;
-        line-height: 1.5;
+        padding-left: 6px;
       }
 
       .social-icon {
@@ -88,17 +86,27 @@
         .team-block {
           grid-template-columns: repeat(2, 1fr);
         }
-      }
 
-      @media (min-width: 812px) {
-        .team-block {
-          grid-template-columns: repeat(3, 1fr);
+         .member {
+          padding: 32px 0;
         }
       }
 
-      @media (min-width: 1024px) {
+      @media (min-width: 812px) {
+        .photo {
+          width: 115px;
+          height: 115px;
+        }
+      }
+
+      @media (min-width: 1070px) {
         .team-block {
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+         .photo {
+          width: 128px;
+          height: 128px;
         }
       }
 
@@ -119,7 +127,7 @@
 
         <div class="team-block">
           <template is="dom-repeat" items="[[team.members]]" as="member">
-            <div class="member card">
+            <div class="member" layout horizontal>
               <plastic-image 
                 class="photo"
                 srcset="[[member.photoUrl]]"
@@ -127,21 +135,18 @@
                 lazy-load preload fade>
               </plastic-image>
 
-              <div class="description">
+              <div class="description" layout vertical center-justified start>
                 <h2 class="name">[[member.name]]</h2>
                 <div class="activity">[[member.title]]</div>
-              </div>
-
-              <div class="contacts">
-                <template is="dom-repeat" items="[[member.socials]]" as="social">
-                  <a href="[[social.link]]" target="_blank" rel="noopener noreferrer">
-                    <paper-icon-button class="social-icon" icon="hoverboard:{{social.icon}}"></paper-icon-button>
-                  </a>
-                </template>
-              </div>
-            </div>
-
-            
+                <div class="contacts">
+                  <template is="dom-repeat" items="[[member.socials]]" as="social">
+                    <a href="[[social.link]]" target="_blank" rel="noopener noreferrer">
+                      <paper-icon-button class="social-icon" icon="hoverboard:{{social.icon}}"></paper-icon-button>
+                    </a>
+                  </template>
+                </div>
+              </div>             
+            </div>            
           </template>
         </div>
       </template>
