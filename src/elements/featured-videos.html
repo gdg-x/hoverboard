@@ -203,7 +203,7 @@
 
         Polymer.Gestures.addListener(this.$.videos, 'down', event => {
           isMouseDown = true;
-          currentPosition = parseInt(getComputedStyle(videoListElement, null).getPropertyValue("transform").split(",")[4]);
+          currentPosition = parseInt(getComputedStyle(videoListElement, null).getPropertyValue('transform').split(',')[4]);
           startPosition = event.detail.x;
         });
 
@@ -215,8 +215,11 @@
       shiftContentLeft() {
         const {
           cardWidth,
-          videosLength
+          videosLength,
+          slideIndex
         } = this.getVideosDetails();
+
+        this._currentIndex = slideIndex < this._currentIndex ? slideIndex : this._currentIndex;
 
         if (this._currentIndex < videosLength && this._currentIndex > 0) {
           const newX = -(this._currentIndex - 1) * cardWidth;
@@ -228,8 +231,11 @@
       shiftContentRight() {
         const {
           cardWidth,
-          videosLength
+          videosLength,
+          slideIndex
         } = this.getVideosDetails();
+
+        this._currentIndex = slideIndex > this._currentIndex ? slideIndex : this._currentIndex;
 
         if (this._currentIndex >= 0 && this._currentIndex < videosLength - 1) {
           const newX = -(this._currentIndex + 1) * cardWidth;
@@ -243,10 +249,13 @@
         const cardRect = videos[videos.length - 1].getBoundingClientRect();
         const cardWidth = cardRect.width;
         const videosLength = videos.length;
+        const currentPosition = parseInt(getComputedStyle(this.$.videos, null).getPropertyValue('transform').split(',')[4]);
+        const slideIndex = -(Math.floor(currentPosition / cardWidth));
 
         return {
           cardWidth,
-          videosLength
+          videosLength,
+          slideIndex
         }
       }
 
