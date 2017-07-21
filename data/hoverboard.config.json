@@ -17,14 +17,12 @@
     "storageBucket": "hoverboard-experimental.appspot.com",
     "messagingSenderId": "1088172422905"
   },
+  "googleMapApiKey": "AIzaSyDWy6O98n-ueoVaYPWRPve23vjm3JP08gw",
   "organizer": {
     "name": "GDG Lviv",
     "twitter": "gdglviv",
     "blog": "https://medium.com/gdg-lviv",
     "url": "http://lviv.gdg.org.ua/"
-  },
-  "location": {
-    "short": "Lviv, Ukraine"
   },
   "webapp": {
     "shortName": "DevFest",
@@ -98,13 +96,27 @@
       },
       "fontColor": "#424242"
     },
-     "faq": {
+    "faq": {
       "title": "FAQs",
       "background": {
         "color": "#fff"
       },
       "fontColor": "#424242"
     }
+  },
+  "location": {
+    "short": "Lviv, Ukraine",
+    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "pointer": {
+      "latitude": 49.809841,
+      "longitude": 23.972805,
+      "zoom": 5
+    },
+    "mapCenter": {
+      "latitude": 48,
+      "longitude": 8
+    },
+    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
   },
   "mediaQueries": {
     "xs": {
@@ -123,38 +135,39 @@
     }
   },
   "socialNetwork": {
-    "follow" : [
-    {
-      "name": "facebook",
-      "url": "https://www.facebook.com/devfest.ukraine/"
-    },
-    {
-      "name": "twitter",
-      "url": "https://twitter.com/devfest_ukraine/"
-    },
-    {
-      "name": "instagram",
-      "url": "https://www.instagram.com/devfestukraine"
-    },
-    {
-      "name": "youtube",
-      "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
-    }
-  ],
-    "share" : [
+    "follow": [
       {
-        "name" : "gplus",
-        "url" :  "https://plus.google.com/share?url="
+        "name": "facebook",
+        "url": "https://www.facebook.com/devfest.ukraine/"
       },
       {
-        "name" : "facebook",
-        "url" :  "https://www.facebook.com/sharer.php?u="
+        "name": "twitter",
+        "url": "https://twitter.com/devfest_ukraine/"
       },
       {
-        "name" : "twitter",
-        "url" :  "https://twitter.com/intent/tweet?text="
+        "name": "instagram",
+        "url": "https://www.instagram.com/devfestukraine"
+      },
+      {
+        "name": "youtube",
+        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
       }
-    ]},
+    ],
+    "share": [
+      {
+        "name": "gplus",
+        "url": "https://plus.google.com/share?url="
+      },
+      {
+        "name": "facebook",
+        "url": "https://www.facebook.com/sharer.php?u="
+      },
+      {
+        "name": "twitter",
+        "url": "https://twitter.com/intent/tweet?text="
+      }
+    ]
+  },
   "mailto": "devfest@gdg.org.ua",
   "mailchimp": {
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
