@@ -69,6 +69,7 @@
             }
 
             .description-block {
+                min-width: 300px;
                 animation-duration: 1s;
                 animation-fill-mode: both;
                 animation-name: fadeInUp;
@@ -106,20 +107,22 @@
             @media (min-width: 868px) {
 
                 .container {
-                    margin: 48px 40px;
+                    margin: 48px auto;
                 }
-
-                .description-block{
-                    padding: 16px;
+                
+                .description-block,
+                .statistics-block {
+                    padding: 48px 0;
                 }
 
                 .description-block {
-                    margin-right: 16px;
-                    padding: 48px;
+                    margin-right: 64px;
+                    padding-right: 16px;
                 }
 
                 .statistics-block {
-                    margin-left: 16px;
+                    margin-left: 64px;
+                    padding-left: 16px;
                 }
 
                  .numbers {
@@ -127,13 +130,6 @@
                 }
             }
 
-             @media (min-width: 1150px) {
-                  .description-block,
-                  .statistics-block {
-                    padding: 48px 64px;
-                    margin: 0 48px;
-                }
-             }
 
         </style>
 

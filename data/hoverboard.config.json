@@ -94,10 +94,9 @@
     "team": {
       "title": "Team",
       "background": {
-        "color": "rgba(0, 198, 255, 0.1)",
-        "gradient": "linear-gradient(to right, #00c6ff, #0072ff)"
+        "color": "#fff"
       },
-      "fontColor": "#fff"
+      "fontColor": "#424242"
     },
      "faq": {
       "title": "FAQs",
