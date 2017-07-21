@@ -124,3 +124,16 @@ const galleryActions = {
       });
   }
 };
+
+const teamActions = {
+  fetchTeam: () => {
+    return firebase.database()
+      .ref('/team')
+      .on('value', snapshot => {
+        store.dispatch({
+          type: FETCH_TEAM,
+          team: snapshot.val()
+        });
+      });
+  }
+};
