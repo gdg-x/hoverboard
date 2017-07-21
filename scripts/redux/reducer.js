@@ -101,3 +101,12 @@ const galleryReducer = (state = initialState.gallery, action) => {
       return state;
   }
 };
+
+const teamReducer = (state = initialState.team, action) => {
+  switch (action.type) {
+    case FETCH_TEAM:
+      return action.team;
+    default:
+      return state;
+  }
+};

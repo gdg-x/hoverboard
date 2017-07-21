@@ -118,28 +118,27 @@
 
             _renderContent() {
                 const heads = this.shadowRoot.querySelectorAll('.markdown-text h3');
-                const contentDom = Polymer.dom(this.shadowRoot.querySelector('.content'));
+                const contentDom = this.shadowRoot.querySelector('.content');
                 let lastHeadElement;
 
-                heads.forEach((head) => {
-                    const headDom = Polymer.dom(head);
+               for(let i = 0; i < heads.length; i ++) {
 
-                    if (headDom.previousElementSibling.nodeName == 'H2') {
-                        const head2Element = headDom.previousElementSibling;
-                        const colHeader = document.createElement("div");
+                    if (heads[i].previousElementSibling.nodeName === 'H2') {
+                        const head2Element = heads[i].previousElementSibling;
+                        const colHeader = document.createElement('div');
                         colHeader.className = `col ${head2Element.id}`;
                         colHeader.textContent = head2Element.textContent;
-                        contentDom.node.appendChild(colHeader);
+                        contentDom.appendChild(colHeader);
                         lastHeadElement = colHeader;
                     }
 
-                    const colContent = document.createElement("a");
+                    const colContent = document.createElement('a');
                     colContent.className = 'col-content';
-                    colContent.href = `#${head.id}`;
-                    colContent.textContent = head.textContent;
+                    colContent.href = `#${heads[i].id}`;
+                    colContent.textContent = heads[i].textContent;
                     colContent.addEventListener('click', this._scrollToFaqChapter);
-                    Polymer.dom(lastHeadElement).node.appendChild(colContent);
-                });
+                    lastHeadElement.appendChild(colContent);
+                };
 
                 const contentWrapper = this.shadowRoot.querySelector('.content-wrapper');
                 contentWrapper.classList.add('visible');
