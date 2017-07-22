@@ -42,7 +42,8 @@
             <div class="photo" style$="background-image: url('[[speaker.photoUrl]]')" hidden$="{{app.isPhoneSize}}"></div>
             <div class="info">
               <h1 class="main-title" hidden$="{{app.isPhoneSize}}">[[speaker.name]]</h1>
-              <div class="meta highlight">[[speaker.company]], [[speaker.country]]</div>
+              <div class="meta highlight">[[speaker.title]] at [[speaker.company]]</div>
+              <div class="meta highlight">[[speaker.country]]</div>
               <div class="meta">
                 <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
                   <a class="badge" href$="[[badge.link]]" target="_blank" rel="noopener noreferrer">[[badge.description]]</a>
@@ -133,7 +134,7 @@
         },
 
         _speakerChanged: function () {
-          var generatedClass = this._generateClass(this.speaker.tags[0]);
+          var generatedClass = this._generateClass(this.speaker.track);
           this.customStyle['--paper-scroll-header-panel-color'] = 'var(--' + generatedClass + ')';
           this._previousBrowserColor = HOVERBOARD.Util.getMetaThemeColor();
           HOVERBOARD.Util.setMetaThemeColor(this.getComputedStyleValue('--' + generatedClass));
