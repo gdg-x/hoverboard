@@ -10,7 +10,9 @@ function attachSessionAndSpeakersTogether(session, speakersRaw) {
   if (isDefined(session.speakers)) {
     for (var speakerIdx = 0; speakerIdx < session.speakers.length; speakerIdx++) {
       if (isDefined(session.speakers[speakerIdx]) && !isDefined(session.speakers[speakerIdx].id)) {
-        session.speakers[speakerIdx] = speakersRaw[session.speakers[speakerIdx]];
+        session.speakers[speakerIdx] = speakersRaw.filter(function(speaker) {
+          return speaker.id === session.speakers[speakerIdx];
+        })[0];
         var tempSession = clone(session);
         delete tempSession.speakers;
         if (isDefined(session.speakers[speakerIdx])) {
