@@ -1,6 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../../bower_components/iron-dropdown/iron-dropdown-scroll-manager.html">
 <link rel="import" href="../../bower_components/iron-image/iron-image.html">
 
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
@@ -36,7 +35,7 @@
         </div>
         <div id="title" class="bottom title toolbar-title" hidden$="{{!app.isPhoneSize}}">[[speaker.name]]</div>
       </paper-toolbar>
-      <div class="content">
+      <div id="content" class="content">
         <div class="metadata-wrapper">
           <div class="main-info">
             <div class="photo" style$="background-image: url('[[speaker.photoUrl]]')" hidden$="{{app.isPhoneSize}}"></div>
@@ -165,10 +164,10 @@
 
         _onNeonAnimationFinish: function () {
           if (this.opened) {
-            Polymer.IronDropdownScrollManager.pushScrollLock(this.$.scrollHeaderPanel);
+            document.body.style.overflow = 'hidden';
             this._finishRenderOpened();
           } else {
-            Polymer.IronDropdownScrollManager.removeScrollLock(this.$.scrollHeaderPanel);
+            document.body.style.overflow = '';
             this._finishRenderClosed();
           }
 
