@@ -112,15 +112,13 @@
           <div class="main-info">
             <div class="info">
               <h1 class="main-title">[[session.title]]</h1>
-              <div class="meta highlight">[[session.dateReadable]] / [[session.startTime]] - [[session.endTime]] /
-                [[session.track.title]]
-                <span hidden$="[[!session.language]]">
-                  / [[session.language]]
-                </span>
-                <span hidden$="[[!session.complexity]]">
-                  / [[session.complexity]]
-                </span>
-              </div>
+              <ul class="meta highlight">
+                <li>[[session.dateReadable]]</li>
+                <li>[[session.startTime]] - [[session.endTime]]</li>
+                <li>[[session.track.title]]</li>
+                <li hidden$="[[!session.language]]">[[session.language]]</li>
+                <li hidden$="[[!session.complexity]]">[[session.complexity]]</li>
+              </ul>
               <span class="meta">[[_concatArray(session.tags)]]</span>
             </div>
           </div>

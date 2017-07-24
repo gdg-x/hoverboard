@@ -114,7 +114,19 @@
       }
 
       .meta.highlight {
+        margin: 0;
+        padding: 0;
         color: var(--primary-text-color);
+        list-style: none;
+      }
+
+      .meta.highlight li {
+        display: inline-block;
+      }
+
+      .meta.highlight li:not(:last-of-type)::after {
+        margin: 0 5px;
+        content: "/";
       }
 
       .badges {
