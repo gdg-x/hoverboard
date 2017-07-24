@@ -7,8 +7,8 @@
     "dev": "UA-43643469-9"
   },
   "organizer": {
-    "name": "GDG Baltics",
-    "twitter": "gdgbaltics"
+    "name": "GDG DevFest Baltics",
+    "twitter": "devfestbaltics"
   },
   "webapp": {
     "shortName": "DevFest",
@@ -58,13 +58,13 @@
   "social": [
     {
       "name": "twitter",
-      "nickname": "GDGBaltics",
-      "url": "https://twitter.com/gdgbaltics"
+      "nickname": "DevFestBaltics",
+      "url": "https://twitter.com/devfestbaltics"
     },
     {
       "name": "facebook",
-      "nickname": "GDGBaltics",
-      "url": "https://www.facebook.com/GDGBaltics"
+      "nickname": "DevFestBaltics",
+      "url": "https://www.facebook.com/DevFestBaltics"
     }
   ],
   "location": {
