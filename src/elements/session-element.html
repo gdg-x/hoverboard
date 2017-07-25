@@ -70,7 +70,7 @@
       }
 
       .session-meta li:not(:last-of-type)::after {
-        margin-left: 5px;
+        margin: 0 5px;
         content: "/";
       }
 
@@ -203,13 +203,13 @@
               </div>
             </div>
 
-            <iron-icon
+           <!--  <iron-icon
               class$="action-icon [[myScheduleIcon]]"
               icon$="[[myScheduleIcon]]"
               on-tap="toggleMyScheduleSession"
               session-id$="[[session.id]]"
               disabled$="[[!online]]"
-            ></iron-icon>
+            ></iron-icon> -->
           </div>
 
           <div

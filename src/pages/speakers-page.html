@@ -199,11 +199,11 @@
             </a>
             <a href$="/speakers/[[speaker.id]]/" class="card-content">
               <iron-image class="company-logo" src="{{speaker.companyLogo}}" sizing="contain"></iron-image>
-              <div class="tags">{$ skills $}:
+              <!-- <div class="tags">{$ skills $}:
                 <template is="dom-repeat" items="[[speaker.tags]]" as="tag">
                   <span class="tag" style$="{{_getCustomStyleValue(tag)}}">[[tag]]</span>
                 </template>
-              </div>
+              </div> -->
               <marked-element class="details-text" markdown="[[speaker.shortBio]]">
                 <div class="markdown-html"></div>
               </marked-element>
@@ -278,7 +278,9 @@
 
         _routePageChanged: function (speakerId) {
           if (speakerId && this.selected) {
-            var tempSpeaker = this.speakers[speakerId];
+            var tempSpeaker = this.speakers.filter(function(speaker) {
+              return speaker.id === speakerId;
+            })[0];
             if (tempSpeaker) {
               window.requestAnimationFrame(function () {
                 this._selectedSpeaker = tempSpeaker;

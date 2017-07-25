@@ -21,13 +21,13 @@
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^3.3.0",
     "gulp-nunjucks": "^3.0.0",
-    "gulp-replace": "^0.5.4",
+    "gulp-replace": "^0.6.1",
     "gulp-uglify": "^3.0.0",
     "merge-stream": "^1.0.1",
     "plylog": "^0.5.0",
     "polymer-build": "^1.5.1",
     "require-uncached": "^1.0.3",
-    "sw-precache": "^5.1.1"
+    "sw-precache": "^5.2.0"
   },
   "engines": {
     "node": ">=4.0"

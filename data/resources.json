@@ -25,7 +25,7 @@
   "becomePartner": "Become a partner",
   "featuredVideosTitle": "Featured #DFUA '16 Sessions",
   "featuredVideosViewAll": "View all videos",
-  "featuredPeopleTitle": "First DFUA'17 Speakers Announced",
+  "featuredPeopleTitle": "Meet #dfua Rockstars",
   "featuredPeopleViewAll": "View all speakers",
   "action": "See how it was",
   "locationTitle": "Pivdennyi Expo Center",
@@ -143,12 +143,12 @@
       "caption": "Days"
     },
     {
-      "counter": 50,
+      "counter": 42,
       "caption": "Sessions"
     },
     {
-      "counter": 4,
-      "caption": "Tracks"
+      "counter": 5,
+      "caption": "Workshops"
     }
   ],
   "callToAction": {

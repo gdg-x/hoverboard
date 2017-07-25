@@ -1,31 +1,29 @@
-function getSession(session, day, dayIndex, schedule, speakersRaw) {
-  session.mainTag = session.tags ? session.tags[0] : 'General';
-  session.day = dayIndex + 1;
+function isDefined(v) {
+  return v !== undefined;
+}
 
-  if (day.tags.indexOf(session.mainTag) < 0) {
-    day.tags.push(session.mainTag);
-  }
-  if (schedule.tags.indexOf(session.mainTag) < 0) {
-    schedule.tags.push(session.mainTag);
-  }
-  var speakers = [];
-  if (session.speakers) {
-    for (var j = 0, speakersLen = session.speakers.length; j < speakersLen; j++) {
-      if (!session.speakers[j].id) {
-        session.speakers[j] = speakersRaw[session.speakers[j]];
-        var tempSession = JSON.parse(JSON.stringify(session));
+function clone(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+
+function attachSessionAndSpeakersTogether(session, speakersRaw) {
+  if (isDefined(session.speakers)) {
+    for (var speakerIdx = 0; speakerIdx < session.speakers.length; speakerIdx++) {
+      if (isDefined(session.speakers[speakerIdx]) && !isDefined(session.speakers[speakerIdx].id)) {
+        session.speakers[speakerIdx] = speakersRaw.filter(function(speaker) {
+          return speaker.id === session.speakers[speakerIdx];
+        })[0];
+        var tempSession = clone(session);
         delete tempSession.speakers;
-        if (session.speakers[j]) {
-          if (!session.speakers[j].sessions) {
-            session.speakers[j].sessions = [];
+        if (isDefined(session.speakers[speakerIdx])) {
+          if (!isDefined(session.speakers[speakerIdx].sessions)) {
+            session.speakers[speakerIdx].sessions = [];
           }
-          session.speakers[j].sessions.push(tempSession);
-          speakers.push(session.speakers[j].name);
+          session.speakers[speakerIdx].sessions.push(tempSession);
         }
       }
     }
   }
-  return session;
 }
 
 function getEndTime(date, startTime, endTime, totalNumber, number) {
@@ -37,35 +35,70 @@ function getEndTime(date, startTime, endTime, totalNumber, number) {
   return result.getHours() + ':' + result.getMinutes();
 }
 
+function hasSpeakersAndSessionsAndSchedule(speakers, sessions, schedule) {
+  return hasSpeakersAndSessions(speakers, sessions) && Object.keys(schedule).length ;
+}
+
+function hasSpeakersAndSessions(speakers, sessions) {
+  return Object.keys(speakers).length && Object.keys(sessions).length;
+}
+
+function addTagTo(tag, tags) {
+  if (tags.indexOf(tag) < 0) {
+    tags.push(tag);
+  }
+}
+
 self.addEventListener('message', function (e) {
   var speakers = e.data.speakers;
   var sessions = e.data.sessions;
   var schedule = e.data.schedule;
 
-  schedule.tags = [];
-  for (var i = 0, scheduleLen = schedule.length; i < scheduleLen; i++) {
-    var day = schedule[i];
-    schedule[i].tags = [];
-    for (var j = 0, timeslotsLen = day.timeslots.length; j < timeslotsLen; j++) {
-      var timeslot = day.timeslots[j];
-      for (var k = 0, sessionsLen = timeslot.sessions.length; k < sessionsLen; k++) {
-        for (var l = 0, subSessionsLen = timeslot.sessions[k].length; l < subSessionsLen; l++) {
-          var session = getSession(sessions[timeslot.sessions[k][l]], day, i, schedule, speakers);
-          if (session && !session.track) {
-            session.track = day.tracks[k];
+  if (hasSpeakersAndSessionsAndSchedule(speakers, sessions, schedule)) {
+    schedule.tags = [];
+    for (var dayIdx = 0, scheduleLen = schedule.length; dayIdx < scheduleLen; dayIdx++) {
+      var day = schedule[dayIdx];
+      day.tags = [];
+      for (var timeSlotIdx = 0, timeslotsLen = day.timeslots.length; timeSlotIdx < timeslotsLen; timeSlotIdx++) {
+        var timeslot = day.timeslots[timeSlotIdx];
+        for (var sessionIndex = 0, sessionsLen = timeslot.sessions.length; sessionIndex < sessionsLen; sessionIndex++) {
+          for (var subSessIdx = 0, subSessionsLen = timeslot.sessions[sessionIndex].length; subSessIdx < subSessionsLen; subSessIdx++) {
+            var sessionId = timeslot.sessions[sessionIndex][subSessIdx];
+            var session = sessions[sessionId];
+            
+            if(!session) {
+              console.log("Failed to find session with id: " + sessionId + " in timeslot " + timeslot.startTime)
+            }
+            
+            session.mainTag = session.tags ? session.tags[0] : 'General';
+            session.day = dayIdx + 1;
+
+            addTagTo(session.mainTag, day.tags);
+            addTagTo(session.mainTag, schedule.tags);
+
+            if (!isDefined(session.track)) {
+              session.track = day.tracks[sessionIndex];
+            }
+            session.startTime = timeslot.startTime;
+            session.endTime = subSessionsLen > 1 ? getEndTime(day.date, timeslot.startTime, timeslot.endTime, subSessionsLen, subSessIdx + 1) : timeslot.endTime;
+            session.dateReadable = day.dateReadable;
+
+            attachSessionAndSpeakersTogether(session, speakers);
+
+            schedule[dayIdx].timeslots[timeSlotIdx].sessions[sessionIndex][subSessIdx] = session;
           }
-          session.startTime = timeslot.startTime;
-          session.endTime = subSessionsLen > 1 ? getEndTime(day.date, timeslot.startTime, timeslot.endTime, subSessionsLen, l + 1) : timeslot.endTime;
-          session.dateReadable = day.dateReadable;
-          schedule[i].timeslots[j].sessions[k][l] = session;
         }
       }
     }
+  } else if (hasSpeakersAndSessions(speakers, sessions)) {
+    Object.keys(sessions).forEach(function(sessionId) {
+      return attachSessionAndSpeakersTogether(sessions[sessionId], speakers)
+    });
   }
 
   self.postMessage({
     speakers: speakers,
     sessions: sessions,
-    schedule: schedule
+    schedule: Array.isArray(schedule) && Object.keys(sessions).length ? schedule : []
   });
 }, false);
