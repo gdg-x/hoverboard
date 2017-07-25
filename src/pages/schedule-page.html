@@ -1,7 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <link rel="import" href="../../bower_components/app-route/app-route.html">
-<link rel="import" href="../../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
+<!--<link rel="import" href="../../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">-->
 
 <link rel="import" href="../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
@@ -10,11 +10,11 @@
 
 <link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
 
-<link rel="import" href="../../bower_components/polymerfire/firebase-document.html">
+<!--<link rel="import" href="../../bower_components/polymerfire/firebase-document.html">-->
 
 <link rel="import" href="../elements/schedule-subnav.html">
 <link rel="import" href="../elements/schedule-day.html">
-<link rel="import" href="../elements/my-schedule.html">
+<!--<link rel="import" href="../elements/my-schedule.html">-->
 
 <link rel="import" href="../elements/session-details.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
@@ -48,19 +48,19 @@
       query-params="{{queryParams}}"
     ></app-route>
 
-    <firebase-document
-      id="userSessions"
-      app-name="{$ firebase.name $}"
-      path="{$ firebase.userSessionsPath $}/[[app.user.uid]]"
-      data="{{persistedData}}">
-    </firebase-document>
+    <!--<firebase-document-->
+      <!--id="userSessions"-->
+      <!--app-name="{$ firebase.name $}"-->
+      <!--path="{$ firebase.userSessionsPath $}/[[app.user.uid]]"-->
+      <!--data="{{persistedData}}">-->
+    <!--</firebase-document>-->
 
-    <app-indexeddb-mirror
-      session="{$ firebase.indexedDbSession $}"
-      key="mySchedule"
-      data="{{persistedData}}"
-      persisted-data="{{app.user.sessions}}">
-    </app-indexeddb-mirror>
+    <!--<app-indexeddb-mirror-->
+      <!--session="{$ firebase.indexedDbSession $}"-->
+      <!--key="mySchedule"-->
+      <!--data="{{persistedData}}"-->
+      <!--persisted-data="{{app.user.sessions}}">-->
+    <!--</app-indexeddb-mirror>-->
 
     <div class="container" phone$="{{app.isPhoneSize}}">
       <schedule-subnav
@@ -79,13 +79,13 @@
             filters="[[filters]]"
           ></schedule-day>
         </template>
-        <template is="dom-if" if="{{app.user}}">
-          <my-schedule
-            name="myschedule"
-            app="{{app}}"
-            schedule="[[schedule]]"
-          ></my-schedule>
-        </template>
+        <!--<template is="dom-if" if="{{app.user}}">-->
+          <!--<my-schedule-->
+            <!--name="myschedule"-->
+            <!--app="{{app}}"-->
+            <!--schedule="[[schedule]]"-->
+          <!--&gt;</my-schedule>-->
+        <!--</template>-->
       </neon-animated-pages>
     </div>
 
