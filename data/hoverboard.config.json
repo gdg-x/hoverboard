@@ -16,10 +16,10 @@
     "backgroundColor": "#2196F3"
   },
   "firebase": {
-    "name": "dfua-test",
-    "domain": "dfua-test.firebaseapp.com",
-    "database": "https://dfua-test.firebaseio.com",
-    "api": "AIzaSyDx0_Cpuh0ocKCXW5CWM4BH3i1b56Wzhb0",
+    "name": "hoverboard-firebase",
+    "domain": "hoverboard-firebase.firebaseapp.com",
+    "database": "https://hoverboard-firebase.firebaseio.com",
+    "api": "AIzaSyDWy6O98n-ueoVaYPWRPve23vjm3JP08gw",
     "userSessionsPath": "/userSessions",
     "ratingsPath": "/ratings",
     "indexedDbSession": "dfua"
