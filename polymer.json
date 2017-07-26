@@ -24,6 +24,7 @@
   "extraDependencies": [
     "assets/**/*",
     "bower_components/webcomponentsjs/*.js",
-    "bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror-worker.js"
+    "bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror-worker.js",
+    "bower_components/app-storage/app-indexeddb-mirror/common-worker-scope.js"
   ]
 }

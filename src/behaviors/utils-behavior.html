@@ -19,7 +19,7 @@
       },
 
       _generateClass: function (value) {
-        return value.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase();
+        return value ? value.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase() : '';
       },
 
       _randomOrder: function (array) {

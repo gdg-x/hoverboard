@@ -2,7 +2,6 @@
 
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/polymerfire/firebase-document.html">
-<link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
 <link rel="import" href="../../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
 
 <dom-module id="app-data">
@@ -23,13 +22,13 @@
       <!--persisted-data="{{app.previousSpeakers}}">-->
     <!--</app-indexeddb-mirror>-->
 
-    <firebase-query
+    <firebase-document
       id="querySpeakers"
       app-name="{$ firebase.name $}"
       path="/speakers"
       order-by-child="order"
       data="{{_firebaseSpeakersRaw}}">
-    </firebase-query>
+    </firebase-document>
 
     <app-indexeddb-mirror
       session="{$ firebase.indexedDbSession $}"

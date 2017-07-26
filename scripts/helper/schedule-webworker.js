@@ -10,9 +10,7 @@ function attachSessionAndSpeakersTogether(session, speakersRaw) {
   if (isDefined(session.speakers)) {
     for (var speakerIdx = 0; speakerIdx < session.speakers.length; speakerIdx++) {
       if (isDefined(session.speakers[speakerIdx]) && !isDefined(session.speakers[speakerIdx].id)) {
-        session.speakers[speakerIdx] = speakersRaw.filter(function(speaker) {
-          return speaker.id === session.speakers[speakerIdx];
-        })[0];
+        session.speakers[speakerIdx] = speakersRaw[session.speakers[speakerIdx]];
         var tempSession = clone(session);
         delete tempSession.speakers;
         if (isDefined(session.speakers[speakerIdx])) {
@@ -63,13 +61,7 @@ self.addEventListener('message', function (e) {
         var timeslot = day.timeslots[timeSlotIdx];
         for (var sessionIndex = 0, sessionsLen = timeslot.sessions.length; sessionIndex < sessionsLen; sessionIndex++) {
           for (var subSessIdx = 0, subSessionsLen = timeslot.sessions[sessionIndex].length; subSessIdx < subSessionsLen; subSessIdx++) {
-            var sessionId = timeslot.sessions[sessionIndex][subSessIdx];
-            var session = sessions[sessionId];
-            
-            if(!session) {
-              console.log("Failed to find session with id: " + sessionId + " in timeslot " + timeslot.startTime)
-            }
-            
+            var session = sessions[timeslot.sessions[sessionIndex][subSessIdx]];
             session.mainTag = session.tags ? session.tags[0] : 'General';
             session.day = dayIdx + 1;
 
