@@ -52,5 +52,14 @@
     "secondaryColor": "#1d8fea",
     "image": "/images/posts/core-value-background.png",
     "brief": "We are proud to announce **our Diamond Sponsor**, [CoreValue](http://corevalue.com.ua/) who has been with us for three years now!"
+  },
+  {
+    "id": "platinum-sponsor-n-ix",
+    "title": "Meet our Platinum Sponsor - N-iX",
+    "posted": "2017-07-27",
+    "primaryColor": "#F57C00",
+    "secondaryColor": "#EF6C00",
+    "image": "/images/posts/nix_header.jpg",
+    "brief": "N-iX continues to support GDG DevFest Ukraine in Lviv for a third year straight in its pursue to create quality tech events in Ukraine."
   }
 ]

@@ -135,10 +135,18 @@
         padding: 16px 24px;
       }
 
-      .bottom-meta iron-icon {
+      .tag-icon {
         --iron-icon-width: 14px;
         --iron-icon-height: 14px;
-        margin-right: 8px;
+        margin-right: 4px;
+      }
+
+      .photo {
+        @apply(--img-circle);
+        margin-right: 4px;
+        width: 32px;
+        height: 32px;
+        z-index: 1;
       }
 
       .speaker {
@@ -188,7 +196,7 @@
           <div class="bottom-caption" layout horizontal center justified>
             <div class="bottom-meta" flex hidden$="[[!_hasBottomMeta(session)]]">
               <div hidden$="[[!session.tags.length]]" layout horizontal center>
-                <iron-icon icon="tags"></iron-icon>
+                <iron-icon class="tag-icon" icon="tags"></iron-icon>
                 <span>[[_joinArray(session.tags)]]</span>
               </div>
 
@@ -225,7 +233,7 @@
 
             <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
               <div class="speaker" layout horizontal center>
-                <iron-icon icon="account"></iron-icon>
+                <div class="photo" style$="background-image: url('[[speaker.photoUrl]]')"></div>
                 <div class="person-detail" flex>
                   <span class="speaker-name">[[speaker.name]]</span>
                   <div class="speaker-title">[[speaker.company]] / [[speaker.country]]</div>
