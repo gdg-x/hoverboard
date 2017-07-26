@@ -278,9 +278,7 @@
 
         _routePageChanged: function (speakerId) {
           if (speakerId && this.selected) {
-            var tempSpeaker = this.speakers.filter(function(speaker) {
-              return speaker.id === speakerId;
-            })[0];
+            var tempSpeaker = this.speakers[speakerId];
             if (tempSpeaker) {
               window.requestAnimationFrame(function () {
                 this._selectedSpeaker = tempSpeaker;
