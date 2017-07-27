@@ -30,7 +30,8 @@
     "paper-dialog-behavior": "PolymerElements/paper-dialog-behavior#^2.0.0",
     "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior#^2.0.0",
     "iron-dropdown": "PolymerElements/iron-dropdown#^2.0.0",
-    "good-map": "keanulee/good-map#^0.0.1"
+    "good-map": "keanulee/good-map#^0.0.1",
+    "paper-menu-button": "^2.0.0"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0"

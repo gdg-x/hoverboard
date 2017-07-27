@@ -27,3 +27,9 @@ const FETCH_SPEAKERS_LIST = 'FETCH_SPEAKERS_LIST';
 const FETCH_GALLERY = 'FETCH_GALLERY';
 // team
 const FETCH_TEAM = 'FETCH_TEAM';
+// sign in
+const SIGN_IN = 'SIGN_IN';
+// sign out
+const SIGN_OUT = 'SIGN_OUT';
+// auto sign in
+const AUTO_SIGN_IN = 'AUTO_SIGN_IN';

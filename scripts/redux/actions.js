@@ -137,3 +137,86 @@ const teamActions = {
       });
   }
 };
+
+const userActions = {
+  signIn: () => {
+    let provider = new firebase.auth.GoogleAuthProvider();
+    return firebase.auth()
+      .signInWithPopup(provider)
+      .then((signInObject) => {
+
+        if (navigator.credentials) {
+          var cred = new FederatedCredential({
+            id: signInObject.user.email,
+            name: signInObject.user.displayName,
+            iconURL: signInObject.user.photoURL,
+            provider: 'https://accounts.google.com'
+          });
+
+          navigator.credentials.store(cred);
+        }
+
+        store.dispatch({
+          type: SIGN_IN,
+          user: Object.assign(signInObject.user, { signedIn: true })
+        });
+      });
+  },
+
+  autoSignIn: () => {
+    let currentUser = firebase.auth().currentUser;
+    if (currentUser) {
+      store.dispatch({
+        type: AUTO_SIGN_IN,
+        user: Object.assign(currentUser, { signedIn: true })
+      });
+    }
+    else {
+
+      if (navigator.credentials) {
+        return navigator.credentials.get({
+          password: true,
+          federated: {
+            providers: ['https://accounts.google.com']
+          },
+          mediation: 'silent'
+        }).then((cred) => {
+          (() => {
+            if (cred) {
+              var provider = new firebase.auth.GoogleAuthProvider();
+              provider.setCustomParameters({
+                'login_hint': cred.id || ''
+              });
+
+              return firebase.auth().signInWithPopup(provider)
+                .then((signInObject) => {
+
+                  store.dispatch({
+                    type: AUTO_SIGN_IN,
+                    user: Object.assign(signInObject.user, { signedIn: true })
+                  });
+                });
+            }
+          })();
+        });
+      }
+    }
+  },
+
+  signOut: () => {
+    return firebase.auth()
+      .signOut()
+      .then(() => {
+        store.dispatch({
+          type: SIGN_IN,
+          user: {
+            signedIn: false
+          }
+        });
+
+        if (navigator.credentials) {
+          navigator.credentials.requireUserMediation();
+        }
+      });
+  }
+};

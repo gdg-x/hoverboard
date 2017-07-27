@@ -24,6 +24,7 @@
 
 <link rel="import" href="../bower_components/iron-lazy-pages/iron-lazy-pages.html">
 <link rel="import" href="../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../bower_components/paper-menu-button/paper-menu-button.html">
 
 <link rel="import" href="mixins/redux-mixin.html">
 <link rel="import" href="mixins/scroll-functions.html">
@@ -42,6 +43,7 @@
         display: block;
         position: relative;
         min-height: 100vh;
+        --paper-menu-button-dropdown-background: #fff;
       }
 
       app-drawer app-toolbar {
@@ -98,10 +100,56 @@
         --iron-image-height: 32px;
       }
 
-      .nav-item a {
+      .nav-item a,
+      .signin-tab {
         padding: 0 14px;
         color: var(--primary-text-color);
         text-transform: uppercase;
+      }
+
+       .profile-image {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-position: center;
+        background-size: cover;
+      }
+
+      .signin-panel {
+        background: #fff;
+        color: var(--text-primary-color);
+      }
+
+      .profile-details {
+        padding: 16px;
+        border-bottom: 1px solid var(--divider-color);
+      }
+
+      .profile-details .profile-image {
+        margin-right: 16px;
+        width: 48px;
+        height: 48px;
+      }
+
+      .profile-name,
+      .profile-email {
+        font-size: 14px;
+        display: block;
+        white-space: nowrap;
+        color: var(--secondary-text-color);
+      }
+
+      .profile-action {
+        margin-top: 4px;
+        text-transform: uppercase;
+        color: var(--default-primary-color);
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      paper-button iron-icon {
+        margin-right: 8px;
+        --iron-icon-fill-color: var(--header-background);
       }
 
       .hero-image {
@@ -204,7 +252,10 @@
           {% for nav in navigation %}
           <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer">{$ nav.title $}</a>
           {% endfor %}
+
+          <a href="" on-tap="signIn" hidden$="[[user.signedIn]]" >{$ signIn $}</a>
         </iron-selector>
+      
       </app-drawer>
 
       <app-header-layout id="headerLayout">
@@ -227,7 +278,33 @@
                 <a href="{$ nav.permalink $}" layout vertical center-center>{$ nav.title $}</a>
               </paper-tab>
               {% endfor %}
+              <paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]">{$ signIn $}</paper-tab>
             </paper-tabs>
+             <paper-menu-button
+                class="auth-menu"
+                hidden$="[[!user.signedIn]]"
+                vertical-align="top"
+                horizontal-align="right"
+                no-animations
+                layout horizontal center-center>
+                <div
+                  class="profile-image" slot="dropdown-trigger"
+                  style="background-image: url('[[user.photoURL]]')"
+                ></div>
+                <div class="signin-panel" slot="dropdown-content">
+                  <div class="profile-details" layout horizontal>
+                    <div
+                      class="profile-image" slot="dropdown-trigger"
+                      style="background-image: url('[[user.photoURL]]')"
+                    ></div>
+                    <div layout vertical center-justified>
+                      <span class="profile-name">[[user.displayName]]</span>
+                      <span class="profile-email">[[user.email]]</span>
+                      <span class="profile-action" role="button" on-tap="signOut">{$ signOut $}</span>
+                    </div>
+                  </div>
+                </div>
+              </paper-menu-button>
           </app-toolbar>
 
           <app-toolbar class="hero-block" layout start vertical center-justified>
@@ -320,6 +397,10 @@
           },
           _openedDialog: {
             type: String
+          },
+          user: {
+            type: Object,
+            statePath: 'user'
           }
         };
       }
@@ -341,6 +422,7 @@
         console.log('Hoverboard v2 is ready!');
         this.removeAttribute('unresolved');
         this._ensureLazyLoaded();
+        userActions.autoSignIn();
       }
 
       openDrawer() {
@@ -349,6 +431,14 @@
 
       closeDrawer() {
         uiActions.toggleDrawer(false);
+      }
+
+      signIn() {
+        userActions.signIn();
+      }
+
+      signOut() {
+        userActions.signOut();
       }
 
       _ensureLazyLoaded() {

@@ -11,6 +11,8 @@
   "partnershipResources": "Partnership Resources",
   "eventResources": "Event Resources",
   "buyTicket": "Buy ticket",
+  "signIn": "Sign in",
+  "signOut": "Sign out",
   "footer": {
     "blog": "Blog"
   },
