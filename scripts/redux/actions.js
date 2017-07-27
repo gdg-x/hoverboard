@@ -174,6 +174,7 @@ const userActions = {
     else {
 
       if (navigator.credentials) {
+        
         return navigator.credentials.get({
           password: true,
           federated: {
@@ -209,13 +210,11 @@ const userActions = {
       .then(() => {
         store.dispatch({
           type: SIGN_IN,
-          user: {
-            signedIn: false
-          }
+          user: { signedIn: false }
         });
 
         if (navigator.credentials) {
-          navigator.credentials.requireUserMediation();
+          navigator.credentials.preventSilentAccess();
         }
       });
   }
