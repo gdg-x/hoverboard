@@ -1,0 +1,177 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="../elements/shared-styles.html">
+<link rel="import" href="../elements/hoverboard-icons.html">
+
+<dom-module id="subscribe-dialog">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+    <style>
+        :host {
+            margin: 0;
+            display: block;
+            height: 520px;
+            width: 85%;
+            max-width: 420px; 
+            background: #fff;
+            box-shadow: var(--box-shadow);
+            
+            --paper-input-container-focus-color: var(--default-primary-color);
+            --paper-input-container-color: var(--secondary-text-color);
+        }
+
+        .dialog-header {
+            background: var(--default-primary-color);
+            padding: 48px 32px 20px;
+            color: #fff;
+            font-size: 20px;
+            line-height: 1.5;
+        }
+
+        paper-input {
+            margin: 16px 32px;
+        }
+
+        .action-buttons {
+            padding: 0 12px;
+            margin-top: 16px;
+        }
+
+        .close-button {
+            color: var(--secondary-text-color);
+        }
+
+        .subscribe-button {
+            color: var(--dark-primary-color);            
+        }
+
+        .subscribe-button:hover {
+            color: var(--focused-color); 
+        }   
+
+        @media (min-width: 640px) {  
+
+            .action-buttons {
+                margin-top: 24px;
+            }
+
+            paper-input {
+                margin: 24px 32px;
+            }
+        }
+
+     
+    </style>
+
+    <div class="dialog-content" layout vertical>
+        <div class="dialog-header">{$ subscribeBlock.formTitle $}</div>
+            <paper-input id="firstNameInput"
+                         label="{$ subscribeBlock.firstName $}"
+                         value="{{firstName}}">
+            </paper-input>
+            <paper-input id="lastNameInput"
+                         label="{$ subscribeBlock.lastName $}"
+                         value="{{lastName}}">
+            </paper-input>
+            <paper-input id="emailInput" 
+                         label="{$ subscribeBlock.emailAddress $}"
+                         value="{{email}}"
+                         required auto-validate$="[[validate]]" error-message="{$ subscribeBlock.emailRequired $}">
+            </paper-input>   
+        <div class="action-buttons" layout horizontal justified>
+            <paper-button 
+                class="close-button"
+                on-tap="_closeDialog"
+                >{$ subscribeBlock.close $}</paper-button>
+
+             <paper-button 
+                class="subscribe-button"
+                on-tap="_subscribe"
+                ga-on="click"
+                ga-event-category="attendees"
+                ga-event-action="subscribe"
+                ga-event-label="subscribe block">
+                {$ subscribeBlock.subscribe $}</paper-button>
+        </div>
+        
+    </div>
+    
+    
+  </template>
+
+  <script>
+
+    class SubscribeDialog extends ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element)) {
+
+    static get is() {
+            return 'subscribe-dialog'
+        }
+
+        static get properties() {
+            return {                
+                subscribed: {
+                    type: Boolean,
+                    statePath: 'subscribed',
+                    observer: '_handleSubscribed'
+                },
+                validate: {
+                    type: Boolean,
+                    value: true
+                },
+                lastName: String,
+                firstName: String,
+                email: String
+            }
+        }    
+
+        _handleSubscribed(subscribed) {
+            if (subscribed) {
+                this._closeDialog();
+            }
+        }
+
+        _subscribe() {
+             const emailInput = this.shadowRoot.querySelector('#emailInput');
+
+             if (emailInput.validate()) {                 
+                subscribeActions.subscribe({
+                    email: this.email,
+                    firstName: this.firstName,
+                    lastName: this.lastName
+                });
+             }
+        }
+
+        _closeDialog() {
+            this._resetFields();
+            dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
+        }
+
+        _resetFields() {
+             this.validate = false;
+             this.shadowRoot.querySelector('#firstNameInput').value = "";
+             this.shadowRoot.querySelector('#lastNameInput').value = "";
+             const emailInput = this.shadowRoot.querySelector('#emailInput');
+             emailInput.value = "";
+             emailInput.invalid = false;
+             this.validate = true;             
+        }
+
+        connectedCallback() {
+            super.connectedCallback();
+
+            const emailInput = this.shadowRoot.querySelector('#emailInput');
+
+            emailInput.addEventListener('tap',() => {
+                    console.log(111)
+            });
+        }
+    }
+
+    customElements.define(SubscribeDialog.is, SubscribeDialog);
+  </script>
+</dom-module>

@@ -9,7 +9,8 @@ const SET_HERO = 'SET_HERO';
 const OPEN_DIALOG = 'OPEN_DIALOG';
 const CLOSE_DIALOG = 'CLOSE_DIALOG';
 const DIALOGS = {
-  SPEAKER: 'speaker'
+  SPEAKER: 'speaker',
+  SUBSCRIBE: 'subscribe'
 };
 // tickets
 const FETCH_TICKETS = 'FETCH_TICKETS';
@@ -33,3 +34,5 @@ const SIGN_IN = 'SIGN_IN';
 const SIGN_OUT = 'SIGN_OUT';
 // auto sign in
 const AUTO_SIGN_IN = 'AUTO_SIGN_IN';
+// subscribe
+const SUBSCRIBE = 'SUBSCRIBE';

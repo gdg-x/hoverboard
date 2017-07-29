@@ -1,5 +1,4 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 
 <dom-module id="mailchimp-subscribe">
@@ -47,8 +46,10 @@
         rel="noopener noreferrer"
         novalidate>
         <div class="mc-field-group" layout vertical flex>
-          <paper-input label="{$ yourEmail $}" name="EMAIL" id="mce-EMAIL" autocomplete="off" no-label-float>
-            <iron-icon icon="mail" prefix></iron-icon>
+          <paper-input label="{$ subscribeBlock.yourEmail $}"
+                       name="EMAIL"
+                       id="mce-EMAIL"
+                       autocomplete="off" no-label-float>
           </paper-input>
           <paper-button 
             class="subscribe-button"
@@ -57,7 +58,7 @@
             ga-event-category="attendees"
             ga-event-action="subscribe"
             ga-event-label="mailchimp footer"
-            layout flex self-end>{$ subscribe $}</paper-button>
+            layout flex self-end>{$ subscribeBlock.subscribe $}</paper-button>
         </div>
 
         <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups -->
@@ -65,7 +66,7 @@
           <input type="text" name="[[ name ]]" tabindex="-1">
         </div>
         <div class="mc-submit-group">
-          <input type="submit" value="{$ subscribe $}" name="subscribe" id="mc-embedded-subscribe"
+          <input type="submit" value="{$ subscribeBlock.subscribe $}" name="subscribe" id="mc-embedded-subscribe"
                  style="display:none">
         </div>
       </form>
@@ -92,7 +93,6 @@
 
       submitForm() {
         this.$['mc-embedded-subscribe-form'].submit();
-        //TODO: add tracking
      }
     }
 

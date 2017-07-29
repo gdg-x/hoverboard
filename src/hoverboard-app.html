@@ -360,6 +360,13 @@
       with-backdrop="[[viewport.isTabletPlus]]"
       no-cancel-on-outside-click="[[viewport.isPhone]]"
     ></speaker-details>
+    
+    <subscribe-dialog
+        id="subscribeDialog"
+        opened="[[dialogs.subscribe.isOpened]]"
+        with-backdrop
+        no-cancel-on-outside-click="[[viewport.isPhone]]">
+    </subscribe-dialog>  
         
     <hoverboard-analytics></hoverboard-analytics>
   </template>

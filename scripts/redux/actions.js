@@ -217,5 +217,30 @@ const userActions = {
           navigator.credentials.preventSilentAccess();
         }
       });
+  } 
+};
+
+const subscribeActions = {
+   subscribe: (data) => {
+    const id = data.email.replace(/[^\w\s]/gi, '');
+
+    firebase.database().ref(`subscribers/${id}`).set({
+      email: data.email,
+      firstName: data.firstName || '',
+      lastName: data.lastName || ''
+    })
+    .then(() => {
+       store.dispatch({
+          type: SUBSCRIBE,
+          subscribed: true
+        });
+    })
+    .catch(() => {
+       store.dispatch({
+          type: SUBSCRIBE,
+          subscribed: false
+        });
+    });
   }
 };
+

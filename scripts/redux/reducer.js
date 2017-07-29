@@ -121,3 +121,12 @@ const userReducer = (state = initialState.user, action) => {
       return state;
   }
 };
+
+const subscribeReducer = (state = initialState.subscribed, action) => {
+  switch (action.type) {   
+    case SUBSCRIBE:
+      return action.subscribed
+    default:
+      return state;
+  }
+};
