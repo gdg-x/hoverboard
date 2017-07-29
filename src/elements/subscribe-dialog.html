@@ -14,7 +14,6 @@
         :host {
             margin: 0;
             display: block;
-            height: 520px;
             width: 85%;
             max-width: 420px; 
             background: #fff;
@@ -34,11 +33,17 @@
 
         paper-input {
             margin: 16px 32px;
+            height: 40px;
+        }
+
+        paper-input:first-of-type {
+            margin-top: 24px;
         }
 
         .action-buttons {
             padding: 0 12px;
             margin-top: 16px;
+            height: 80px;
         }
 
         .close-button {
@@ -60,7 +65,11 @@
             }
 
             paper-input {
-                margin: 24px 32px;
+                height: 60px;
+            }
+
+            paper-input:first-of-type {
+                margin-top: 32px;
             }
         }
 
@@ -70,17 +79,20 @@
     <div class="dialog-content" layout vertical>
         <div class="dialog-header">{$ subscribeBlock.formTitle $}</div>
             <paper-input id="firstNameInput"
+                         on-touchend="_focus"
                          label="{$ subscribeBlock.firstName $}"
                          value="{{firstName}}">
             </paper-input>
             <paper-input id="lastNameInput"
+                         on-touchend="_focus"
                          label="{$ subscribeBlock.lastName $}"
                          value="{{lastName}}">
             </paper-input>
             <paper-input id="emailInput" 
+                         on-touchend="_focus"
                          label="{$ subscribeBlock.emailAddress $}"
                          value="{{email}}"
-                         required auto-validate$="[[validate]]" error-message="{$ subscribeBlock.emailRequired $}">
+                         required auto-validate$="[[validate]]" error-message="{$ subscribeBlock.emailRequired $}" autocomplete="off">
             </paper-input>   
         <div class="action-buttons" layout horizontal justified>
             <paper-button 
@@ -115,8 +127,7 @@
             return {                
                 subscribed: {
                     type: Boolean,
-                    statePath: 'subscribed',
-                    observer: '_handleSubscribed'
+                    statePath: 'subscribed'
                 },
                 validate: {
                     type: Boolean,
@@ -126,7 +137,14 @@
                 firstName: String,
                 email: String
             }
-        }    
+        }  
+
+        static get observers() {
+            return [
+                '_handleClose(opened)',
+                '_handleSubscribed(subscribed)'
+            ];
+        }  
 
         _handleSubscribed(subscribed) {
             if (subscribed) {
@@ -134,9 +152,12 @@
             }
         }
 
+        _handleClose() {
+            this._resetFields();
+        }
+
         _subscribe() {
              const emailInput = this.shadowRoot.querySelector('#emailInput');
-
              if (emailInput.validate()) {                 
                 subscribeActions.subscribe({
                     email: this.email,
@@ -147,7 +168,6 @@
         }
 
         _closeDialog() {
-            this._resetFields();
             dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
         }
 
@@ -158,17 +178,12 @@
              const emailInput = this.shadowRoot.querySelector('#emailInput');
              emailInput.value = "";
              emailInput.invalid = false;
+             emailInput.blur();
              this.validate = true;             
         }
 
-        connectedCallback() {
-            super.connectedCallback();
-
-            const emailInput = this.shadowRoot.querySelector('#emailInput');
-
-            emailInput.addEventListener('tap',() => {
-                    console.log(111)
-            });
+        _focus(e) {
+             e.target.focus();
         }
     }
 

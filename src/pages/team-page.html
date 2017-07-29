@@ -41,7 +41,7 @@
       }
 
       .member:hover .photo {
-        border: 5px solid var(--contrast-additional-background-color);
+        transform: scale(0.8);
       }
 
       .photo {
@@ -52,10 +52,12 @@
         overflow: hidden;
         transform: translateZ(0);
         border-radius: 50%;
+        border: 5px solid var(--contrast-additional-background-color);
       }
 
-      .description {
+      .member-details {
         color: var(--primary-text-color);
+        margin-left: 16px;
       }
 
       .name {
@@ -134,7 +136,7 @@
                 lazy-load preload fade>
               </plastic-image>
 
-              <div class="description" layout vertical center-justified start>
+              <div class="member-details" layout vertical center-justified start>
                 <h2 class="name">[[member.name]]</h2>
                 <div class="activity">[[member.title]]</div>
                 <div class="contacts">
