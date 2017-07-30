@@ -3,7 +3,7 @@
   "startDate": "2017-11-17T09:00:00+03:00",
   "endDate": "2017-11-17T19:00:00+03:00",
   "analytics": {
-    "prod": "UA-102993739-2",
+    "prod": "UA-102993739-2"
   },
   "organizer": {
     "name": "GDG DevFest Baltics",
