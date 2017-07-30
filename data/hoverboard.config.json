@@ -39,7 +39,7 @@
   "enabledTicketsBlock": false,
   "enabledPostsBlock": false,
   "enabledStatisticsBlock": true,
-  "enabledFeaturedBlock": false,
+  "enabledFeaturedBlock": true,
   "enabledAboutBlock": true,
   "enabledSocialFeed": false,
   "enabledMapBlock": false,
@@ -51,6 +51,10 @@
     {
       "route": "home",
       "permalink": "/"
+    },
+    {
+      "route": "speakers",
+      "permalink": "/speakers"
     }
   ],
   "social": [
