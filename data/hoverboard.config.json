@@ -1,10 +1,9 @@
 {
-  "url": "https://hoverboard.firebaseapp.com/",
-  "startDate": "2016-09-09T09:00:00+03:00",
-  "endDate": "2016-09-10T19:00:00+03:00",
+  "url": "https://devfest.gdg.lv",
+  "startDate": "2017-11-17T09:00:00+03:00",
+  "endDate": "2017-11-17T19:00:00+03:00",
   "analytics": {
-    "prod": "UA-43643469-8",
-    "dev": "UA-43643469-9"
+    "prod": "UA-102993739-2",
   },
   "organizer": {
     "name": "GDG DevFest Baltics",
