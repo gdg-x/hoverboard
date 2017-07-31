@@ -1,10 +1,10 @@
 {
   "title": "GDG DevFest Baltics 2017",
-  "description": "The biggest Google tech conference in the Baltics carefully crafted for you by GDG community! All about mobile development, Android and iOS, Mobile Crossplatform tools, UI/UX and prototyping, Internet of Things, VR and AR, bots, AI and more",
-  "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
+  "description": "DevFest Baltics is the first conference in the Baltics packed with topics about mobile development and carefully crafted for you by GDG Baltics community! All about mobile development, Android and iOS, Mobile Crossplatform tools, UI/UX and prototyping, Internet of Things, VR and AR, bots, AI and more",
+  "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev, ios, xcode",
   "dates": "November 17, 2017",
   "locationAddressShort": "Riga, Latvia",
-  "motto": "Be a GDG. Be a Hero!",
+  "motto": "First Mobile Conference in the Baltics",
   "c4p": "Become a speaker",
   "buyTicket": "Buy ticket",
   "backToTop": "Back to top",
@@ -105,7 +105,7 @@
       "caption": "Day"
     },
     {
-      "counter": 11,
+      "counter": 15,
       "caption": "Sessions"
     },
     {
