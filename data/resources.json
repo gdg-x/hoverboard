@@ -110,12 +110,12 @@
       "caption": "Day"
     },
     {
-      "counter": 12,
+      "counter": 11,
       "caption": "Sessions"
     },
     {
-      "counter": 1,
-      "caption": "Track"
+      "counter": 2,
+      "caption": "Tracks"
     }
   ]
 }
