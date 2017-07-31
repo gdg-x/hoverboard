@@ -163,10 +163,10 @@
 
         _onNeonAnimationFinish: function () {
           if (this.opened) {
-            Polymer.IronDropdownScrollManager.pushScrollLock(this.$.scrollHeaderPanel);
+            document.body.style.overflow = 'hidden';
             this._finishRenderOpened();
           } else {
-            Polymer.IronDropdownScrollManager.removeScrollLock(this.$.scrollHeaderPanel);
+            document.body.style.overflow = '';
             this._finishRenderClosed();
           }
         }
