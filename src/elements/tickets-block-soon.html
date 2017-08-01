@@ -1,0 +1,120 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+<link rel="import" href="ticket-element.html">
+
+
+<dom-module id="tickets-block-soon">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        --iron-icon-fill-color: var(--text-primary-color);
+        --paper-card-background-color: #FFFFFF;
+        display: block;
+        background: var(--default-primary-color);
+        color: var(--white-text-color);
+        text-align: center;
+      }
+
+      .tickets-wrapper {
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
+        @apply(--layout-center-justified);
+      }
+
+      ticket-element {
+        margin: 15px;
+      }
+
+      paper-button {
+        font-size: 0.9em;
+      }
+
+      .details {
+        margin: 60px auto 0;
+        font-size: 18px;
+        max-width: 600px;
+      }
+      .details a {
+        color: var(--light-primary-color);
+      }
+      .details a:hover {
+        color: var(--light-primary-color)0;
+        text-decoration: underline;
+      }
+      .details a:visited {
+        color: var(--light-primary-color);
+      }
+      .details a:active {
+        color: var(--light-primary-color);
+      }
+
+      .buy-button {
+        margin-top: 30px;
+        background: #fff;
+        color: var(--primary-text-color);
+      }
+
+      paper-dialog {
+        background: #fff;
+        color: var(--primary-text-color);
+      }
+
+      paper-dialog paper-button {
+        color: var(--default-primary-color);
+      }
+
+      @media (min-width: 601px) {
+        ticket-element {
+          max-width: 350px;
+        }
+      }
+    </style>
+
+    <div class="container">
+      <div class="block-header">
+        <h4 class="heading">Ticket sales are starting soon</h4>
+      </div>
+      <div class="tickets-wrapper">
+          <ticket-element
+            type="Awesome"
+            price="0.00"
+            currency="€"
+            starts="August"
+            ends="November"
+            sold-out="true"
+            info="">
+          </ticket-element>
+      </div>
+      <div class="details">Be the first who will know about ticket sales and special prices, <a href="http://eepurl.com/cWQGM5">subscribe to our news letter.</a></div>
+    </div>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        is: 'tickets-block-soon',
+
+        ready: function () {
+          HOVERBOARD.Elements.Tickets = this
+        },
+
+        _trackBuyClick: function (e) {
+          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', e.currentTarget.href);
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

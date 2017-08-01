@@ -1,0 +1,89 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+
+
+<dom-module id="cfp-block">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        --iron-icon-fill-color: var(--text-primary-color);
+        --paper-card-background-color: #FFFFFF;
+        display: block;
+        background: var(--light-primary-color);
+        color: var(--white-text-color);
+        text-align: center;
+      }
+
+      .tickets-wrapper {
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
+        @apply(--layout-center-justified);
+      }
+
+      ticket-element {
+        margin: 15px;
+      }
+
+      paper-button {
+        font-size: 0.9em;
+      }
+
+      .details {
+        margin: 10px auto 0;
+        font-size: 18px;
+        max-width: 600px;
+        color: var(--text-primary-color);
+
+      }
+
+      .heading {
+        color: var(--text-primary-color);
+      }
+
+      .button {
+        margin-top: 30px;
+        background: var(--dark-primary-color);
+        color: #ffffff;
+      }
+
+      paper-dialog {
+        background: #fff;
+        color: var(--primary-text-color);
+      }
+
+      paper-dialog paper-button {
+        color: var(--default-primary-color);
+      }
+    </style>
+
+    <div class="container">
+      <div class="block-header">
+        <h4 class="heading">Call for Papers is open</h4>
+      </div>
+      <div class="details">Do not miss the oportunity to rock on the stage!</div>
+      <a href="https://www.papercall.io/devfest-baltics" target="_blank" rel="noopener noreferrer">
+        <paper-button class="button" raised>Submit your CFP now</paper-button>
+      </a>
+    </div>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        is: 'cfp-block',
+      });
+
+    }());
+  </script>
+
+</dom-module>

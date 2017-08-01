@@ -8,6 +8,9 @@
 {% if enabledFeaturedBlock %}
   <link rel="import" href="../elements/featured-people.html">
 {% endif %}
+{% if enabledCfpBlock %}
+  <link rel="import" href="../elements/cfp-block.html">
+{% endif %}
 {% if videosSessionsUrl %}
   <link rel="import" href="../elements/featured-videos.html">
 {% endif %}
@@ -20,6 +23,10 @@
 {% if enabledTicketsBlock %}
   <link rel="import" href="../elements/tickets-block.html">
 {% endif %}
+{% if enabledTicketsSoonBlock %}
+  <link rel="import" href="../elements/tickets-block-soon.html">
+{% endif %}
+
 {% if enabledPostsBlock %}
 <link rel="import" href="../elements/latest-posts.html">
 {% endif %}
@@ -47,6 +54,9 @@
     {% if enabledFeaturedBlock %}
       <featured-people app="{{app}}" people="{{people}}" cascaded></featured-people>
     {% endif %}
+    {% if enabledCfpBlock %}
+      <cfp-block app="{{app}}" cascaded></cfp-block>
+    {% endif %}
     {% if videosSessionsUrl %}
       <featured-videos app="{{app}}" cascaded></featured-videos>
     {% endif %}
@@ -62,6 +72,10 @@
     {% if enabledTicketsBlock %}
       <tickets-block app="{{app}}" cascaded></tickets-block>
     {% endif %}
+    {% if enabledTicketsSoonBlock %}
+      <tickets-block-soon app="{{app}}" cascaded></tickets-block-soon>
+    {% endif %}
+
     {% if enabledPostsBlock %}
       <latest-posts app="{{app}}" posts="{{posts}}" cascaded></latest-posts>
     {% endif %}
