@@ -106,7 +106,7 @@
     "blog": {
       "title": "Blog",
       "headerSettings": {
-        "backgroundColor": "#03a9f4",
+        "backgroundColor": "#651fff",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
@@ -114,7 +114,7 @@
     "speakers": {
       "title": "Speakers",
       "headerSettings": {
-        "backgroundColor": "#3f51b5",
+        "backgroundColor": "#651fff",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
@@ -122,7 +122,7 @@
     "schedule": {
       "title": "Schedule",
       "headerSettings": {
-        "backgroundColor": "#673ab7",
+        "backgroundColor": "#651fff",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
@@ -130,7 +130,7 @@
     "team": {
       "title": "Team",
       "headerSettings": {
-        "backgroundColor": "#009688",
+        "backgroundColor": "#651fff",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
@@ -138,7 +138,7 @@
     "cod": {
       "title": "Cod of Conduct",
       "headerSettings": {
-        "backgroundColor": "#673ab7",
+        "backgroundColor": "#651fff",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
