@@ -24,7 +24,26 @@
     "title" : "General Partner"
   } ],
   "schedule" : [],
-  "sessions" : {},
+  "sessions" : {
+    "102": {
+      "complexity" : "Intermediate",
+      "description" : "You have a really cool and impactful project, but as soon as your codebase gets bigger, and more and more contributors come into play, things can become challenging in regards to aspects like: code consistency, technical debt, refactoring, application architecture and team organization. Let’s jump onboard on this journey and walk through different techniques that can help us keep our code sane and healthy for better scalability.\nDisclaimer: This talk is going to be focused from a mobile standpoint but most of the practices included can also be applied to any software project under development.",
+      "id" : 102,
+      "language" : "English",
+      "speakers" : [ 2 ],
+      "tags" : [ "Mobile", "Development" ],
+      "title" : "Hidden mysteries behind big mobile codebases RELOADED"
+    },
+    "103": {
+      "complexity" : "Intermediate",
+      "description" : "Have you ever heard about unidirectional data flow? Flux and/or Redux?\nIn this talk, we will talk about how to follow the principles that architectures like Flux and Redux do on the web, but on Android.\nWhat is a state? store? dispatcher? side effect? controller view? How do we glue all these parts together? How to keep our domain isolated from the outer world so is easily testable? how do we chain actions? how do keep everything unidirectional?\nWe will cover all these topics and much more!!, and you know what? everything with a bit of Kotlin sauce, so we will see how we can take advantage of the cool stuff this language provide us to make our architecture even better.",
+      "id" : 103,
+      "language" : "English",
+      "speakers" : [ 3 ],
+      "tags" : [ "Kotlin", "Android" ],
+      "title" : "Unidirectional dataflow on Android using Kotlin"
+    }
+  },
   "speakers" : [ null, {
     "bio" : "Right now he is a passionate Googler helping developers and companies in South CEE to be more successful and profitable.\n\nHe co-founded and lead several StartUPs such as Venzeo.com, TrashOut.ngo, Matura.sk and Stuzkova.EU.\n\nHe is TEDx speaker, Slovak Forbes 30-under-30, IT auditor for AIESEC International & TOP 5 Student Entrepreneurs in Slovakia. He gets things done.",
     "company" : "Google",
