@@ -93,6 +93,25 @@ const speakersReducer = (state = initialState.speakers, action) => {
   }
 };
 
+const sessionsReducer = (state = initialState.sessions, action) => {
+  switch (action.type) {
+    case FETCH_SESSIONS_LIST:
+    case UPDATE_SESSIONS:
+      return action.list;
+    default:
+      return state;
+  }
+};
+
+const scheduleReducer = (state = initialState.schedule, action) => {
+  switch (action.type) {
+    case FETCH_SCHEDULE:
+      return action.data;
+    default:
+      return state;
+  }
+};
+
 const galleryReducer = (state = initialState.gallery, action) => {
   switch (action.type) {
     case FETCH_GALLERY:

@@ -1,24 +1,68 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<link rel="import" href="../mixins/utils-functions.html">
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="../elements/shared-styles.html">
+<link rel="import" href="../elements/schedule-day.html">
+
 <dom-module id="schedule-page">
   <template>
     <style is="custom-style" include="shared-styles flex flex-alignment"></style>
 
     <style>
 
-      :host  {
+      :host {
         display: block;
+        background-color: #fff;
       }
 
     </style>
 
-   <h3>Hello from the schedule page</h3>
+    <app-route
+      route="[[route]]"
+      pattern="/:day"
+      data="{{routeData}}"
+      query-params="{{queryParams}}"
+    ></app-route>
+
+    <div class="container">
+
+      <iron-pages selected="2016-09-09" attr-for-selected="name">
+        <template is="dom-repeat" items="[[transformToArray(schedule, 'date')]]" as="day">
+          <schedule-day
+            name$="[[day.date]]"
+            day="[[day]]"
+          ></schedule-day>
+        </template>
+      </iron-pages>
+
+    </div>
   </template>
 
   <script>
 
-    class SchedulePage extends Polymer.Element {
-      static get is() { return 'schedule-page' }
+    class SchedulePage extends UtilsFunctions(ReduxMixin(Polymer.Element)) {
+      static get is() {
+        return 'schedule-page'
+      }
+
+      static get properties() {
+        return {
+          route:  Object,
+          schedule: {
+            type: Object,
+            statePath: 'schedule'
+          }
+        }
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        if (!Object.keys(this.schedule).length) scheduleActions.fetchSchedule();
+      }
     }
 
     customElements.define(SchedulePage.is, SchedulePage);

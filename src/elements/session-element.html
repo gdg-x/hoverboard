@@ -1,0 +1,203 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+
+<link rel="import" href="../mixins/utils-functions.html">
+<link rel="import" href="./shared-styles.html">
+
+<dom-module id="session-element">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+
+    <style>
+
+      :host {
+        display: block;
+      }
+
+      .session {
+        height: 100%;
+        color: var(--primary-text-color);
+      }
+
+      .session[with-background] {
+        color: #fff;
+      }
+
+      .session-image {
+        background-color: #fff;
+      }
+
+      .session-image-cover {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+
+      .session-header,
+      .session-content,
+      .session-footer {
+        padding: 16px;
+        z-index: 1;
+      }
+
+      .session-header {
+        background-color: var(--additional-background-color);
+      }
+
+      [with-background] .session-header {
+        background-color: transparent;
+      }
+
+      [with-background] .session-content {
+        padding-top: 0;
+      }
+
+      .session-title {
+        font-size: 17px;
+        line-height: 1.2;
+      }
+
+      [with-background] .session-title {
+        font-size: 20px;
+      }
+
+      .session-meta {
+        font-size: 12px;
+        color: var(--secondary-text-color);
+      }
+
+      [with-background]  .session-meta {
+        color: #fff;
+      }
+
+      .session-footer {
+        margin-top: 16px;
+        font-size: 14px;
+      }
+
+      .tag {
+        margin-right: 2px;
+        padding: 2px 4px;
+        font-size: 12px;
+        color: #fff;
+      }
+
+      .speakers {
+        margin-top: 10px;
+      }
+
+      .speaker-photo {
+        margin-right: 12px;
+        width: 32px;
+        height: 32px;
+        background-color: var(--secondary-background-color);
+        border-radius: 50%;
+        overflow: hidden;
+        transform: translateZ(0);
+      }
+
+      .speaker-name {
+        margin-bottom: 4px;
+        line-height: 1.2;
+      }
+
+      .speaker-title {
+        font-size: 12px;
+        line-height: 1;
+      }
+
+    </style>
+
+    <a
+      class="session card"
+      href$="/schedule/[[dayName]]?sessionId=[[session.id]]"
+      with-background$="[[session.image]]"
+      layout vertical
+      relative
+    >
+      <plastic-image
+        class="session-image"
+        srcset="[[session.image]]"
+        sizing="cover"
+        hidden$="[[!session.image]]"
+        lazy-load preload fade fit
+      ></plastic-image>
+
+      <span class="session-image-cover" fit hidden$="[[!session.image]]"></span>
+
+      <div class="session-header">
+        <h3 class="session-title">[[session.title]]</h3>
+      </div>
+
+      <span class="session-content" flex>
+        <ul class="session-meta">
+        <li hidden$="[[!session.language]]">[[session.language]]</li>
+        <li hidden$="[[!session.complexity]]">[[session.complexity]]</li>
+          <!--<li hidden$="[[!session.track.title]]">[[session.track.title]]</li>-->
+        </ul>
+        <div class="session-meta">
+          [[session.track.title]] - [[session.endTime]]
+        </div>
+      </span>
+
+      <div class="session-footer" hidden$="[[!_hasBottomMeta(session)]]">
+        <div hidden$="[[!session.tags.length]]">
+          <template is="dom-repeat" items="[[session.tags]]" as="tag">
+            <span class="tag" style$="background-color: [[_getTagColor(tag)]]">[[tag]]</span>
+          </template>
+        </div>
+
+        <div class="speakers" hidden$="[[!session.speakers.length]]">
+          <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
+            <div class="speaker" layout horizontal center>
+              <plastic-image
+                class="speaker-photo"
+                srcset="[[speaker.photoUrl]]"
+                sizing="cover"
+                lazy-load preload fade
+              ></plastic-image>
+
+              <div class="speaker-details" flex>
+                <div class="speaker-name">[[speaker.name]]</div>
+                <div class="speaker-title">[[speaker.company]] / [[speaker.country]]</div>
+              </div>
+            </div>
+          </template>
+        </div>
+
+      </div>
+
+    </a>
+
+  </template>
+
+  <script>
+
+    class SessionElement extends UtilsFunctions(Polymer.Element) {
+      static get is() {
+        return 'session-element';
+      }
+
+      static get properties() {
+        return {
+          session: Object,
+          sessionColor: {
+            type: String,
+            computed: '_getTagColor(session.mainTag)'
+          }
+        }
+      }
+
+      _getTagColor(value) {
+        if (ShadyCSS) {
+          return ShadyCSS.getComputedStyleValue(this, `--${this.generateClassName(value)}`);
+        }
+        return getComputedStyle(this, `--${this.generateClassName(value)}`);
+      }
+
+      _hasBottomMeta(session) {
+        return session.tags && session.tags.length || session.speakers && session.speakers.length;
+      }
+    }
+
+    customElements.define(SessionElement.is, SessionElement);
+  </script>
+</dom-module>

@@ -16,5 +16,9 @@
     randomOrder(array) {
       return array.sort(() => 0.5 - Math.random());
     }
+
+    generateClassName(value) {
+      return value ? value.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase() : '';
+    }
   };
 </script>
