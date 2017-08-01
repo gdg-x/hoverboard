@@ -56,7 +56,11 @@
     },
     {
       "route": "speakers",
-      "permalink": "/speakers"
+      "permalink": "/speakers/"
+    },
+    {
+      "route": "team",
+      "permalink": "/team/"
     }
   ],
   "social": [
