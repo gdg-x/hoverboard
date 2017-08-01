@@ -42,6 +42,15 @@
       "speakers" : [ 3 ],
       "tags" : [ "Kotlin", "Android" ],
       "title" : "Unidirectional dataflow on Android using Kotlin"
+    },
+    "104": {
+      "complexity" : "Intermediate",
+      "description" : "Have you ever had issues with codesigning on iOS? Are you tired of manually taking screenshots in your app for every release? Has your coworker ever asked you: “How do I have to build this again so I can distribute it to testers”? If you answered yes to any of these questions, you need fastlane!\nfastlane is a collection of tools that enables mobile developers to automate many of the common tasks that are necessary to create a continuous deployment pipeline. In this talk I will show you how fastlane works, show you an overview of the features that fastlane supports and give you an introduction to the DSL used to create these pipelines. After this talk you should be equipped with all the information you need to implement fastlane in your own apps.",
+      "id" : 104,
+      "language" : "English",
+      "speakers" : [ 4 ],
+      "tags" : [ "CI", "Fastlane" ],
+      "title" : "Introduction to Continuous Delivery with fastlane"
     }
   },
   "speakers" : [ null, {
@@ -124,6 +133,31 @@
     } ],
     "tags" : [ "Android", "Cross-Platform", "Kotlin", "Architecture" ],
     "title" : "Core Engineer"
+  }, {
+    "bio" : "Jack of all trades, master of none. iOS Developer. fastlane contributor since 2014.",
+    "company" : "Fastlane",
+    "companyLogo" : "/images/logos/fastlane.png",
+    "country" : "Vienna, Austria",
+    "featured" : true,
+    "id" : 4,
+    "name" : "Manu Wallner",
+    "photoUrl" : "/images/people/manu_wallner.jpg",
+    "shortBio" : "Jack of all trades, master of none. iOS Developer. fastlane contributor since 2014.",
+    "socials" : [ {
+      "icon" : "linkedin",
+      "link" : "https://www.linkedin.com/in/milch/",
+      "name" : "LinkedIn"
+    }, {
+      "icon" : "twitter",
+      "link" : "https://twitter.com/acrooow",
+      "name" : "Twitter"
+    }, {
+      "icon" : "github",
+      "link" : "https://github.com/milch",
+      "name" : "Github"
+    } ],
+    "tags" : [ "iOS", "Fastlane" ],
+    "title" : "iOS Developer"
   } ],
   "team" : [ {
     "members" : [ {
