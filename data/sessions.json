@@ -50,10 +50,10 @@
     },
     "131": {
         "id": 131,
-        "title": "Kullanıcılar da Bizi Görecek mi?",
-        "description": "Bu konuşmada uygulamanın kullanıcı deneyimini anlamak için birkaç temel doğru ve birkaç temel yanlıştan bahsedeceğim.'Uygulamamız nasıl bir deneyim sunuyor?' sorusu bugünlerde birçok girişimcinin ve yazılımcının aklına geliyor. Çoğunlukla bu deneyimi iyileştirmek de istiyorlar. İlk okudukları kaynaklarda uygulamaların nasıl kullanıldığını veriyle / datayla ölçmek gerektiği, kullanıcılarla konuşmak gerektiği, onlara ne istediklerini sormak gerektiğini okuyorlar. Kullanıcıları görmek, onlar da iyi deneyimleri görsün istiyorlar. Kullanıcı Deneyimi Tasarımı ve Araştırması bunu sağlıyor ve bu metodların doğru kullanılması için yol gösteriyor. Bu konuşmada izleyeceğiniz çok temel metodlarla geliştirmeyi planladığınız ya da kullandığınız uygulamalarda deneyimi nasıl anlayabileceğiniz; anladığınız deneyimi hangi sorularla iyileştirebileceğiniz ve elinizdeki verileri nasıl anlamlandırabileceğinizle ilgili fikir edinebilirsiniz. Bana da soru sorarak fikir verebilirsiniz.",
+        "title": "Android için erişilebilir tasarım yapmak",
+        "description": "Android için erişilebilir tasarım yapmak",
         "speakers": [
-            1
+            15
         ],
         "language": "Türkçe",
         "tags": [
@@ -70,8 +70,8 @@
     ],
     "language": "Türkçe",
     "tags": [
-      "ios",
-      "Desing"
+      "app",
+      "development"
     ]
   },
     "129": {
@@ -203,14 +203,15 @@
     },
     "119": {
         "id": 119,
-        "title": "Android Asysnctask pitfalls & Talking to UI Thread",
+        "title": "Android Asynctask pitfalls & Talking to UI Thread",
         "description": "Asynctask kullanirken yapilabilecek hatalarin nasil duzeltilebilecegi ve butun ui componentlarin uzerinde kostugu ui thread ile, baska threadler uzerinden nasil haberlerlesilebileceginin orneklerini bu konusmada bulabilirsiniz.",
         "speakers": [
             13
         ],
         "language": "Türkçe",
         "tags": [
-            "Android"
+            "Android",
+            "app"
         ]
     },
     "118": {
@@ -222,8 +223,10 @@
         ],
         "language": "Türkçe",
         "tags": [
-            "App",
-           "Mobile"
+          "Android",
+          "Work"
+
         ]
     }
+
 }

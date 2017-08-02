@@ -236,31 +236,6 @@
 
       ]
     },
-    "15": {
-      "id": 15,
-      "featured": "true",
-      "name": "Yakında Açıklanacak",
-      "title": "-",
-      "company": "-",
-      "companyLogo": "/images/logos/gdg-eskisehir.png",
-      "country": "İstanbul, Türkiye",
-      "photoUrl": "/images/logos/gdg-eskisehir.png",
-      "shortBio": "Yakında açıklanacak",
-      "bio": "Yakında Açıklanacak",
-      "tags": [
-        "GDG"
-      ],
-      "badges": [
-        {
-          "name": "GDG",
-          "description": "Google Developers Group Eskişehir",
-          "link": "https://developers.google.com/groups/chapter/115602346615910585045/"
-        }
-
-      ],
-      "socials": [
-      ]
-  },
     "11": {
     "id": 11,
     "featured": "true",
@@ -294,8 +269,8 @@
     "shortBio": "sahibinden.com'da iOS Developer olarak çalışıyorum. Mobil dünya ile yakından ilgileniyor, yenilikleri takip etmeyi seviyorum.",
     "bio": "sahibinden.com'da iOS Developer olarak çalışıyorum. Mobil dünya ile yakından ilgileniyor, yenilikleri takip etmeyi seviyorum.",
     "tags": [
-      "ios",
-      "apple"
+      "App",
+      "Development"
     ],
     "badges": [
       {
@@ -388,46 +363,6 @@
 
     ]
   },
-    "1": {
-    "id": 1,
-    "featured": "true",
-    "name": "Esin Işık",
-    "title": "UX Designer",
-    "company": "Bağımsız UX Tasarımcısı - esindesign",
-    "country": "İstanbul, Türkiye",
-    "photoUrl": "/images/people/esinisik.jpg",
-    "shortBio": "Esin is an independent user experience designer with 5 years experience in fields including banking IT, user research, emotional design, interaction design, service design and creative facilitation.",
-    "bio": "She completed a master's degree in TUDelft in the Netherlands in 2010 in the field of Design for Interaction after an undergarduate degree at the department of Industrial Design at METU (Middle East Technical University) in Ankara in 2007. She first started with digital experience design consulting in i-am Istanbul, then was in Denizbank and Garanti Bank's IT companies. Her current focus is getting startup teams to become more human centred, experience design conscious. She also keeps being a consultant for corporate design teams and IT projects.",
-    "tags": [
-      "Desing",
-      "UX"
-    ],
-    "badges": [
-      {
-        "name": "GDG",
-        "description": "Google Developers Group İstanbul",
-        "link": "https://developers.google.com/groups/chapter/100514812580249787371/"
-      },
-      {
-        "name": "GDE",
-        "description": "Google Developers Expert Android",
-        "link": "https://developers.google.com/experts/people/esin-i-ik"
-      }
-
-    ],
-    "socials": [
-      {
-        "icon": "linkedin",
-        "name": "LinkedIn",
-        "link": "tr.linkedin.com/in/esinis"
-      },
-      {
-        "icon": "twitter",
-        "name": "twitter",
-        "link": "https://twitter.com/esinishi"
-      }
-    ]
-  },
     "13": {
     "id": 13,
     "featured": "true",
@@ -455,34 +390,81 @@
     ]
   },
     "14": {
-    "id": 14,
+  "id": 14,
+  "featured": "true",
+  "name": "Erdem Lafcı",
+  "title": "Girişimci",
+  "company": "4PPS",
+  "country": "Ankara, Türkiye",
+  "companyLogo": "/images/logos/4pps.jpeg",
+  "photoUrl": "/images/people/erdemlafci.jpg",
+  "shortBio": "Erdem LAFCI, Hacettepe Üniversitesi Bilgisayar Mühendisliği mezunudur. 7 yıldır mobil teknolojiler ve mobil uygulamalar üzerine çalışmalar yapmaktadır. ",
+  "bio": "Kuruluşundan itibaren Google Developer Group Ankara'da çalışmakta ve Android Developer Days etkinliklerini düzenleyen ekipte yer almaktadır. Ayrıca Mobil Monday ekibinde Co-Organizer olarak çalışmaktadır.Öğrencilik zamanlarından beri Türkiye Bilişim Derneği Ankara şubesinde çalışmaktadır ve bir dönem TBD Genç başkanlığı yapmıştır.2014 yılından ekip arkadaşlarıyla birlikte kurduğu 4PPS firmasında ise mobil teknolojiler ile ilgili Ar-Ge çalışmaları yapmakta, kurumsal firmalar ve startup'lar  için mobil uygulamalar geliştirmektedir. ",
+  "tags": [
+    "Android",
+    "Mobil",
+    "Work"
+  ],
+  "badges": [
+    {
+      "name": "GDG",
+      "description": "Google Developers Group Ankara",
+      "link": "https://developers.google.com/groups/chapter/114568591151316164517/"
+    }
+  ],
+  "socials": [
+    {
+      "icon": "twitter",
+      "name": "twitter",
+      "link": "https://twitter.com/erdemlafci"
+    }
+
+  ]
+},
+    "15": {
+    "id": 15,
     "featured": "true",
-    "name": "Erdem Lafcı",
-    "title": "Girişimci",
-    "company": "4PPS",
-    "country": "Ankara, Türkiye",
-      "companyLogo": "/images/logos/4pps.png",
-      "photoUrl": "/images/people/erdemlafci.jpg",
-    "shortBio": "Erdem LAFCI, Hacettepe Üniversitesi Bilgisayar Mühendisliği mezunudur. 7 yıldır mobil teknolojiler ve mobil uygulamalar üzerine çalışmalar yapmaktadır. ",
-    "bio": "Kuruluşundan itibaren Google Developer Group Ankara'da çalışmakta ve Android Developer Days etkinliklerini düzenleyen ekipte yer almaktadır. Ayrıca Mobil Monday ekibinde Co-Organizer olarak çalışmaktadır.Öğrencilik zamanlarından beri Türkiye Bilişim Derneği Ankara şubesinde çalışmaktadır ve bir dönem TBD Genç başkanlığı yapmıştır.2014 yılından ekip arkadaşlarıyla birlikte kurduğu 4PPS firmasında ise mobil teknolojiler ile ilgili Ar-Ge çalışmaları yapmakta, kurumsal firmalar ve startup'lar  için mobil uygulamalar geliştirmektedir. ",
+    "name": "Resul Caner Yıldırım",
+    "title": "UX Designer",
+    "company": "InnovationBox",
+    "country": "İstanbul, Türkiye",
+    "companyLogo": "/images/logos/innovation.png",
+    "photoUrl": "/images/people/caner.jpg",
+    "shortBio": "Merhaba ben Caner, deneyim tasarımıcısı olarak çalışıyorum. Özellikle mobil uygulamaların tasarımı ve marketing'i üzerine yoğunlaştım. Layıkıyla yapılmış UX, IoT ve mobil projelere hayranlık duyuyorum.",
+    "bio": "Bugüne kadar dijital yayıncılık, elektronik, sosyal medya ve e-ticaret gibi farklı alanlarında çalıştım, tecrübe kazandım. Şu an ise Istanbul'da konumlanan InnovationBox isimli tasarım ajansında insanların severek kullanacakları uygulamalar üretmek için çalışıyorum.İşten kalan zamanımda ise GDG Istanbul ve Mobil Istanbul gruplarıyla etkinlikler düzenliyor, sektördeki insanlar için faydalı içerikler üretmeye çalışıyorum. 2013'de başlayan bu macera 2016 yılında Google Developer Expert olmamla da taçlandı. Bu arada, deneyimlerimi paylaşmak için sık sık konferanslara katılırım. Gördüğünüz taktirde koluma yapışmaktan geri durmayın.  ",
     "tags": [
-      "Android",
-      "Mobil"
+      "Design",
+      "Mobil",
+      "UX"
     ],
     "badges": [
       {
         "name": "GDG",
-        "description": "Google Developers Group Eskişehir",
-        "link": "https://developers.google.com/groups/chapter/114568591151316164517/"
+        "description": "Google Developers Group İstanbul",
+        "link": "https://developers.google.com/groups/chapter/100514812580249787371/"
+      },
+      {
+        "name": "GDE",
+        "description": "Google Developers Expert UX",
+        "link": "https://developers.google.com/experts/people/resul-caner-y-ld-r-m"
       }
     ],
     "socials": [
       {
         "icon": "twitter",
         "name": "twitter",
-        "link": "https://twitter.com/erdemlafci"
+        "link": "https://twitter.com/protechman"
+      },
+      {
+        "icon": "linkedin",
+        "name": "LinkedIn",
+        "link": "https://www.linkedin.com/in/protechman"
+      },
+      {
+        "icon": "facebook",
+        "name": "Facebook",
+        "link": "https://www.facebook.com/protechman?fref=ts"
       }
-
     ]
   }
 }
