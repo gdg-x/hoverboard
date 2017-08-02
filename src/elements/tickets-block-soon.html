@@ -8,7 +8,7 @@
 <link rel="import" href="ticket-element.html">
 
 
-<dom-module id="tickets-block">
+<dom-module id="tickets-block-soon">
 
   <template>
 
@@ -41,6 +41,19 @@
         font-size: 18px;
         max-width: 600px;
       }
+      .details a {
+        color: var(--light-primary-color);
+      }
+      .details a:hover {
+        color: var(--light-primary-color)0;
+        text-decoration: underline;
+      }
+      .details a:visited {
+        color: var(--light-primary-color);
+      }
+      .details a:active {
+        color: var(--light-primary-color);
+      }
 
       .buy-button {
         margin-top: 30px;
@@ -66,28 +79,20 @@
 
     <div class="container">
       <div class="block-header">
-        <h4 class="heading">{$ ticketsTitle $}</h4>
+        <h4 class="heading">Ticket sales are starting soon</h4>
       </div>
       <div class="tickets-wrapper">
-        <template is="dom-repeat" items="[[app.tickets.elements]]" as="ticket">
           <ticket-element
-            type="[[ticket.name]]"
-            price="[[ticket.price]]"
-            currency="[[ticket.currency]]"
-            starts="[[ticket.starts]]"
-            ends="[[ticket.ends]]"
-            info="[[ticket.info]]"
-            sold-out="[[ticket.soldOut]]",
-            sold-out-text="{$ soldOutTickets $}">
+            type="Awesome"
+            price="0.00"
+            currency="€"
+            starts="August"
+            ends="November"
+            sold-out="true"
+            info="">
           </ticket-element>
-        </template>
       </div>
-      <div class="details">{$ ticketsDetails $}</div>
-      {% if enabledBuyTicketsButton %}
-      <a href="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
-        <paper-button class="buy-button" raised>{$ buyTicket $}</paper-button>
-      </a>
-      {% endif %}
+      <div class="details">Be the first who will know about ticket sales and special prices,&nbsp;<a href="http://eepurl.com/cWQGM5">subscribe to our news letter.</a></div>
     </div>
 
   </template>
@@ -97,7 +102,7 @@
       'use strict';
 
       Polymer({
-        is: 'tickets-block',
+        is: 'tickets-block-soon',
 
         ready: function () {
           HOVERBOARD.Elements.Tickets = this
