@@ -61,5 +61,14 @@
     "secondaryColor": "#EF6C00",
     "image": "/images/posts/nix_header.jpg",
     "brief": "N-iX continues to support GDG DevFest Ukraine in Lviv for a third year straight in its pursue to create quality tech events in Ukraine."
+  },
+  {
+    "id": "platinum-sponsor-techmagic",
+    "title": "Meet our Platinum Sponsor - TechMagic",
+    "posted": "2017-08-04",
+    "primaryColor": "#009688",
+    "secondaryColor": "#00796B",
+    "image": "/images/posts/techmagic.png",
+    "brief": "[TechMagic](http://www.techmagic.co/dedicated-team) is a Lviv software development company with representative offices in San Francisco and Boston."
   }
 ]
