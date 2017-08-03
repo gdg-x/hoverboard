@@ -10,7 +10,8 @@ const OPEN_DIALOG = 'OPEN_DIALOG';
 const CLOSE_DIALOG = 'CLOSE_DIALOG';
 const DIALOGS = {
   SPEAKER: 'speaker',
-  SUBSCRIBE: 'subscribe'
+  SUBSCRIBE: 'subscribe',
+  SIGNIN: 'signin'
 };
 // tickets
 const FETCH_TICKETS = 'FETCH_TICKETS';
@@ -28,11 +29,8 @@ const FETCH_SPEAKERS_LIST = 'FETCH_SPEAKERS_LIST';
 const FETCH_GALLERY = 'FETCH_GALLERY';
 // team
 const FETCH_TEAM = 'FETCH_TEAM';
-// sign in
+// user
 const SIGN_IN = 'SIGN_IN';
-// sign out
 const SIGN_OUT = 'SIGN_OUT';
-// auto sign in
-const AUTO_SIGN_IN = 'AUTO_SIGN_IN';
 // subscribe
 const SUBSCRIBE = 'SUBSCRIBE';

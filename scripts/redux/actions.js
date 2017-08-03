@@ -139,37 +139,31 @@ const teamActions = {
 };
 
 const userActions = {
-  signIn: () => {
-    let provider = new firebase.auth.GoogleAuthProvider();
-    return firebase.auth()
-      .signInWithPopup(provider)
-      .then((signInObject) => {
+  signIn: (providerName) => {
+    const firebaseProvider = helperActions.getFederatedProvider(providerName);
 
+    return firebase.auth()
+      .signInWithPopup(firebaseProvider)
+      .then((signInObject) => {
         if (navigator.credentials) {
           var cred = new FederatedCredential({
-            id: signInObject.user.email,
+            id: signInObject.user.email ||  signInObject.user.providerData[0].email,
             name: signInObject.user.displayName,
             iconURL: signInObject.user.photoURL,
-            provider: 'https://accounts.google.com'
+            provider: providerName
           });
 
           navigator.credentials.store(cred);
         }
 
-        store.dispatch({
-          type: SIGN_IN,
-          user: Object.assign(signInObject.user, { signedIn: true })
-        });
+         helperActions.storeUser(signInObject.user);
       });
   },
 
-  autoSignIn: () => {
-    let currentUser = firebase.auth().currentUser;
-    if (currentUser) {
-      store.dispatch({
-        type: AUTO_SIGN_IN,
-        user: Object.assign(currentUser, { signedIn: true })
-      });
+  autoSignIn: (providerUrls) => {
+    const currentUser = firebase.auth().currentUser;
+    if (currentUser) {      
+      helperActions.storeUser(currentUser);
     }
     else {
 
@@ -178,24 +172,19 @@ const userActions = {
         return navigator.credentials.get({
           password: true,
           federated: {
-            providers: ['https://accounts.google.com']
-          },
-          mediation: 'silent'
+            providers: providerUrls.split(','),
+            mediation: 'silent'
+          }
         }).then((cred) => {
           (() => {
             if (cred) {
-              var provider = new firebase.auth.GoogleAuthProvider();
-              provider.setCustomParameters({
-                'login_hint': cred.id || ''
-              });
+              const provider = helperActions.getFederatedProvider(cred.provider);
+
+              if (!provider) return;
 
               return firebase.auth().signInWithPopup(provider)
                 .then((signInObject) => {
-
-                  store.dispatch({
-                    type: AUTO_SIGN_IN,
-                    user: Object.assign(signInObject.user, { signedIn: true })
-                  });
+                  helperActions.storeUser(signInObject.user);
                 });
             }
           })();
@@ -208,16 +197,14 @@ const userActions = {
     return firebase.auth()
       .signOut()
       .then(() => {
-        store.dispatch({
-          type: SIGN_IN,
-          user: { signedIn: false }
-        });
+        helperActions.storeUser();
+        subscribeActions.resetSubscribed();
 
         if (navigator.credentials) {
           navigator.credentials.preventSilentAccess();
         }
       });
-  } 
+  }
 };
 
 const subscribeActions = {
@@ -241,6 +228,45 @@ const subscribeActions = {
           subscribed: false
         });
     });
+  },
+  resetSubscribed: () => {
+     store.dispatch({
+        type: SUBSCRIBE,
+        subscribed: false
+     });
+  }
+};
+
+
+const helperActions = {
+ 
+  storeUser: (user) => {
+    let userToStore = { signedIn: false };
+
+    if (user) {
+      const email = user.email || user.providerData[0].email;
+      userToStore = Object.assign({}, user, { signedIn: true, email: email });
+    }
+
+    store.dispatch({
+      type: SIGN_IN,
+      user: userToStore
+    });
+  },
+
+  getFederatedProvider: (provider) => {
+    switch(provider) {
+      case 'https://accounts.google.com': 
+        return new firebase.auth.GoogleAuthProvider();
+      case 'https://www.facebook.com': {
+        let provider = new firebase.auth.FacebookAuthProvider();
+        provider.addScope('email');
+        provider.addScope('public_profile');
+        return provider;
+      }       
+      case 'https://twitter.com': 
+        return new firebase.auth.TwitterAuthProvider();
+    }
   }
 };
 

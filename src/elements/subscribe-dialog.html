@@ -25,7 +25,7 @@
 
         .dialog-header {
             background: var(--default-primary-color);
-            padding: 48px 32px 20px;
+            padding: 38px 32px 20px;
             color: #fff;
             font-size: 20px;
             line-height: 1.5;
@@ -65,7 +65,7 @@
             }
 
             paper-input {
-                height: 60px;
+                height: 56px;
             }
 
             paper-input:first-of-type {
@@ -141,7 +141,7 @@
 
         static get observers() {
             return [
-                '_handleClose(opened)',
+                '_handleDialogToggled(opened, data)',
                 '_handleSubscribed(subscribed)'
             ];
         }  
@@ -152,8 +152,8 @@
             }
         }
 
-        _handleClose() {
-            this._resetFields();
+        _handleDialogToggled(opened, data) {
+            this._prefillFields(data);
         }
 
         _subscribe() {
@@ -171,15 +171,15 @@
             dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
         }
 
-        _resetFields() {
-             this.validate = false;
-             this.shadowRoot.querySelector('#firstNameInput').value = "";
-             this.shadowRoot.querySelector('#lastNameInput').value = "";
-             const emailInput = this.shadowRoot.querySelector('#emailInput');
-             emailInput.value = "";
-             emailInput.invalid = false;
-             emailInput.blur();
-             this.validate = true;             
+        _prefillFields(userData) {
+            this.validate = false;
+            this.shadowRoot.querySelector('#firstNameInput').value = userData ? userData.firstName : '';
+            this.shadowRoot.querySelector('#lastNameInput').value = userData ? userData.lastName : '';
+            const emailInput = this.shadowRoot.querySelector('#emailInput');
+            emailInput.value = "";
+            emailInput.invalid = false;
+            emailInput.blur();
+            this.validate = true;     
         }
 
         _focus(e) {

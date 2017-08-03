@@ -115,7 +115,6 @@ const userReducer = (state = initialState.user, action) => {
   switch (action.type) {
     case SIGN_IN:
     case SIGN_OUT:
-    case AUTO_SIGN_IN:
       return action.user;
     default:
       return state;

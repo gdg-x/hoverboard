@@ -280,6 +280,8 @@
               {% endfor %}
               <paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]">{$ signIn $}</paper-tab>
             </paper-tabs>
+            
+            </paper-menu-button>
              <paper-menu-button
                 class="auth-menu"
                 hidden$="[[!user.signedIn]]"
@@ -300,7 +302,7 @@
                     <div layout vertical center-justified>
                       <span class="profile-name">[[user.displayName]]</span>
                       <span class="profile-email">[[user.email]]</span>
-                      <span  class="profile-action" role="button" on-touchend="signOut">{$ signOut $}</span>
+                      <span  class="profile-action" role="button" on-touchend="signOut"  on-click="signOut">{$ signOut $}</span>
                     </div>
                   </div>
                 </div>
@@ -363,10 +365,17 @@
     
     <subscribe-dialog
         id="subscribeDialog"
-        opened="[[dialogs.subscribe.isOpened]]"
+        opened="[[dialogs.subscribe.isOpened]]",
+        data="[[dialogs.subscribe.data]]"
         with-backdrop
         no-cancel-on-outside-click="[[viewport.isPhone]]">
     </subscribe-dialog>  
+
+    <signin-dialog
+        id="signinDialog"
+        opened="[[dialogs.signin.isOpened]]"
+        with-backdrop>
+    </signin-dialog>  
         
     <hoverboard-analytics></hoverboard-analytics>
   </template>
@@ -408,6 +417,10 @@
           user: {
             type: Object,
             statePath: 'user'
+          },
+          providerUrls: {
+            type: Object,
+            value: '{$ signInProviders.allowedProvidersUrl $}'
           }
         };
       }
@@ -415,7 +428,8 @@
       static get observers() {
         return [
           '_routeDataChanged(routeData.page, subroute.path)',
-          '_isPhoneSizeChanged(isPhoneSize)'
+          '_isPhoneSizeChanged(isPhoneSize)',
+          '_authStatusChanged(user.signedIn)'
         ];
       }
 
@@ -429,7 +443,7 @@
         console.log('Hoverboard v2 is ready!');
         this.removeAttribute('unresolved');
         this._ensureLazyLoaded();
-        userActions.autoSignIn();
+        userActions.autoSignIn(this.providerUrls);
       }
 
       openDrawer() {
@@ -441,7 +455,11 @@
       }
 
       signIn() {
-        userActions.signIn();
+        if (this.ui.isDrawerOpened) {
+          this.closeDrawer();
+        }
+        
+        dialogsActions.openDialog(DIALOGS.SIGNIN);
       }
 
       signOut() {
@@ -497,6 +515,12 @@
         }
         this._openedDialog = Object.keys(dialogs).find(key => dialogs[key].isOpened);
         this._openedDialog && Polymer.IronDropdownScrollManager.pushScrollLock(this.shadowRoot.querySelector(`#${this._openedDialog}Dialog`));
+      }
+
+      _authStatusChanged(signedIn) {
+        if (this.dialogs.signin.isOpened) {
+          dialogsActions.closeDialog(DIALOGS.SIGNIN);
+        }
       }
     }
 

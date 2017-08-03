@@ -103,24 +103,31 @@
 
      _handleSubscribed(subscribed) {
          if (subscribed) {
-            this.ctaIcon = "checked";
-            this.ctaLabel = "{$  subscribeBlock.subscribed $}"
+            this.ctaIcon = 'checked';
+            this.ctaLabel = '{$  subscribeBlock.subscribed $}'
+         }
+         else {
+            this.ctaIcon = 'arrow-right-circle';
+            this.ctaLabel = '{$  subscribeBlock.callToAction.label $}'
          }
      }
 
      _subscribe() {
+            let userData = null;
+
             if (this.user.signedIn) {
                 const fullNameSplit = this.user.displayName.split(' ');
-                const firstName = fullNameSplit[0];
-                const lastName = fullNameSplit[1];
-                subscribeActions.subscribe({
-                    email: this.user.email,
-                    firstName,
-                    lastName
-                });
+                userData = {
+                    firstName: fullNameSplit[0],
+                    lastName: fullNameSplit[1]
+                }
             }
-            else {
-                dialogsActions.openDialog(DIALOGS.SUBSCRIBE);
+
+            if (this.user.email) {
+                subscribeActions.subscribe(Object.assign({}, {email: this.user.email}, userData));
+            }
+            else {                
+                dialogsActions.openDialog(DIALOGS.SUBSCRIBE, userData);
             }
         }
     }
