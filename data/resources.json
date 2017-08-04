@@ -1,11 +1,11 @@
 {
-  "title": "GDG DevFest Season 2016",
-  "description": "The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts",
+  "title": "GDG DevFest Season 2017",
+  "description": "The biggest Google tech conference in Ohio carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "September 9-10, 2016",
-  "locationAddressShort": "Lviv, Ukraine",
+  "dates": "November 18th, 2017",
+  "locationAddressShort": "Columbus, Ohio",
   "motto": "Be a GDG. Be a Hero!",
-  "playIcon": "See how it was in 2015",
+  "playIcon": "See how it was in 2016",
   "c4p": "Become a speaker",
   "buyTicket": "Buy ticket",
   "backToTop": "Back to top",
@@ -23,16 +23,16 @@
   "clickToViewPhotos": "Click here to view more photos",
   "partners": "Partners",
   "becomePartner": "Become a partner",
-  "featuredVideosTitle": "Featured #DFUA '15 Sessions",
+  "featuredVideosTitle": "Featured Sessions",
   "featuredVideosViewAll": "View all videos",
   "featuredPeopleTitle": "Rockstar Speakers",
   "featuredPeopleViewAll": "View all speakers",
   "action": "See how it was",
-  "locationTitle": "Pivdennyi Expo Center",
-  "locationDescription": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event",
-  "locationAddress": "Shchyretska St, 36",
+  "locationTitle": "The Point at Otterbein",
+  "locationDescription": "Otterbein has partnered with leading organizations from the private and public sectors in central Ohio to create The Point at Otterbein University, a new science, technology, engineering, arts and math (STEAM) Innovation Center that combines academics with the business and manufacturing needs of our community.",
+  "locationAddress": "60 Collegeview Road, Westerville, OH 43081",
   "organizerTitle": "Organizer",
-  "aboutOrganizers": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
+  "aboutOrganizers": "GDG Cincinnati and GDG Columbus are proud to organize of DevFest Ohio",
   "openTeamPage": "Open team page",
   "whatIsGdg": "What is GDG?",
   "aboutGdg": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion",
@@ -78,18 +78,13 @@
           "newTab": true
         },
         {
-          "text": "GDG DevFest Ukraine 2013",
-          "url": "http://gdg-devfest-ua.appspot.com/",
+          "text": "GDG Cincinnati",
+          "url": "https://www.meetup.com/cincy-android/",
           "newTab": true
         },
         {
-          "text": "GDG DevFest Ukraine 2014",
-          "url": "http://devfest.gdg.org.ua/2014/",
-          "newTab": true
-        },
-        {
-          "text": "GDG DevFest Ukraine 2015",
-          "url": "http://devfest.gdg.org.ua/2015/",
+          "text": "GDG Columbus",
+          "url": "https://www.meetup.com/GDG-Columbus/",
           "newTab": true
         }
       ]
@@ -99,12 +94,12 @@
       "links": [
         {
           "text": "Partnership Proposition",
-          "url": "http://bit.ly/df16-sponsor",
+          "url": "FIXME",
           "newTab": true
         },
         {
           "text": "Media Kit",
-          "url": "http://bit.ly/df16-media",
+          "url": "FIXME",
           "newTab": true
         }
       ]
@@ -113,24 +108,24 @@
   "contactBlock": {
     "links": [
       {
-        "text": "devfest@google.com",
-        "url": "mailto:devfest@google.com"
+        "text": "contact@ohiodevfest.com",
+        "url": "mailto:contact@ohiodevfest.com"
       }
     ]
   },
   "teamPageTitle": "Team",
-  "teamPageText": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT.",
+  "teamPageText": "Ohio DevFest is a joint effort between GDG Cincinnati and GDG Columbus. We're just a few people that believe in the amazing capability of this region and want to give back to the community.",
   "statistics": [
     {
-      "counter": 600,
+      "counter": 200,
       "caption": "Attendees"
     },
     {
-      "counter": 2,
-      "caption": "Days"
+      "counter": 1,
+      "caption": "Day"
     },
     {
-      "counter": 30,
+      "counter": 12,
       "caption": "Sessions"
     },
     {
@@ -139,7 +134,7 @@
     }
   ],
   "callToAction": {
-    "videoTitle": "GDG DevFest 2015",
+    "videoTitle": "Ohio DevFest 2017",
     "videoId": "DfMnJAzOFng"
   }
 }
