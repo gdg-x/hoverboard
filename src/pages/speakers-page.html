@@ -278,7 +278,7 @@
 
         _routePageChanged: function (speakerId) {
           if (speakerId && this.selected) {
-            var tempSpeaker = this.speakers[speakerId];
+            var tempSpeaker = this._findSpeakerById(speakerId);
             if (tempSpeaker) {
               window.requestAnimationFrame(function () {
                 this._selectedSpeaker = tempSpeaker;
@@ -286,6 +286,14 @@
               }.bind(this));
             }
           }
+        },
+
+        _findSpeakerById: function(id) {
+          if (!this.speakers.filter) {
+            return undefined;
+          }
+
+          return this.speakers.filter(function(s) {return s.id === +id;})[0];
         },
 
         _getCustomStyleValue: function (value) {
