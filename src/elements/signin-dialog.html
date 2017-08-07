@@ -47,20 +47,13 @@
         .icon-facebook {
             color: var(--facebook-color);
         }
-      
-
-        @media (min-width: 640px) {  
-
-         
-        }
-
      
     </style>
 
     <div class="dialog-content" layout vertical start>
         {% for provider in signInProviders.providersData %}
             <paper-button 
-                on-tap="{$ provider.name $}SignIn"
+                on-tap="_signIn"
                 provider-url="{$ provider.url $}"
                 ga-on="click"
                 ga-event-category="attendees"
@@ -68,7 +61,7 @@
                 ga-event-label="signIn dialog - {$ provider.name $}"
                 layout horizontal center-center>
                 <iron-icon class="icon-{$ provider.name $}" icon="hoverboard:{$ provider.name $}"></iron-icon>
-                <span class="provider-label">{$ provider.label $}</span>
+                <span class="provider-label" provider-url="{$ provider.url $}">{$ provider.label $}</span>
             </paper-button>
         {% endfor %}
     </div>
@@ -93,18 +86,19 @@
             }
         }  
 
-        googleSignIn() {
-            userActions.signIn('https://accounts.google.com');
+        constructor() {
+            super();
+            this.addEventListener('iron-overlay-canceled', this._close);
         }
 
-        facebookSignIn() {
-            userActions.signIn('https://www.facebook.com');
+        _close() {
+            dialogsActions.closeDialog(DIALOGS.SIGNIN);
         }
-
-        twitterSignIn() {
-            userActions.signIn('https://twitter.com');
-        }
-    
+        
+        _signIn(event) {
+            const providerUrl = event.target.getAttribute('provider-url');
+            userActions.signIn(providerUrl);
+        }    
     }
 
     customElements.define(SigninDialog.is, SigninDialog);

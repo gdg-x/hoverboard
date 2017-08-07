@@ -146,6 +146,15 @@
             ];
         }  
 
+        constructor() {
+            super();                     
+            this.addEventListener('iron-overlay-canceled', this._close);
+        }
+
+        _close() {
+          dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
+        }
+
         _handleSubscribed(subscribed) {
             if (subscribed) {
                 this._closeDialog();
