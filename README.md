@@ -114,9 +114,9 @@ pull request, so we can include you in this list.
 | [GDG DevFest Switzerland 2016](https://devfest.ch/)             | [GDG DevFest Toulouse 2016](https://devfesttoulouse.fr/)                    | [GDG Ohio DevFest](https://ohiodevfest.com/)                |
 | [GDG DevFest NYC 2016](https://devfestnyc.com/)                 | [GDG DevFest Los Angeles 2016](https://devfest.gdgla.org/)                  | [GDG DevFest West](https://devfest2016.gdgsv.com)           |
 | [GDG DevFest Florida 2016](https://devfestflorida.org)          | [GDG DevFest Madrid 2016](https://gdgmadrid.com)                            | [GDG DevFest SBA 2016](https://devfest.gdgsba.org/)         |
-| [GDG Foumban Website](https://gdgfoumban.org)                   | [GDG DevFest Granada 2016](http://devfest.gdggranada.com/)                  | [GDG DevFest Taipei 2016](http://devfest.gdg-taipei.org/)    |
-| [2016 Valley DevFest](https://valleydevfest.com)                | [IWDC 2017 Fresno (WTM)](https://iwdc.wtmfresno.com/)                       | [ngVikings 2017](https://ngvikings.org)
-| [Mobile Era 2017](https://mobileera.rocks)                      | [DevFest Nantes 2017](https://devfest.gdgnantes.com)                   |                
+| [GDG Foumban Website](https://gdgfoumban.org)                   | [GDG DevFest Granada 2016](http://devfest.gdggranada.com/)                  | [GDG DevFest Taipei 2016](http://devfest.gdg-taipei.org/)   |
+| [2016 Valley DevFest](https://valleydevfest.com)                | [IWDC 2017 Fresno (WTM)](https://iwdc.wtmfresno.com/)                       | [ngVikings 2017](https://ngvikings.org)                     |
+| [Mobile Era 2017](https://mobileera.rocks)                      | [DevFest Nantes 2017](https://devfest.gdgnantes.com)                        | [GDG DevFest Hamburg 2017](https://hamburg.devfest.de/)     |
 
 
 ### Roadmap :rocket:
