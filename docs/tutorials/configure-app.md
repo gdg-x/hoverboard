@@ -136,7 +136,11 @@ Or you can upload the files to a server hosting any website in the public_html d
 ```
 "tweetsSource": "http://domain/tweetledee/favoritesjson.php?c=10&cache_interval=8000",
 ```
-
+Add 
+```
+header("Access-Control-Allow-Origin: *");
+```
+at the top of your tweetledee_keys.php file to enable CORS.
 
 # Next steps
 
