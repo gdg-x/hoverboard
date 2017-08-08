@@ -132,6 +132,11 @@ Download the latest version of Tweetledee; unzip and deploy on their server.
 **Note:** don't forget to enable CORS, changing `$TLD_JS = 0;` to `$TLD_JS = 1;`.  
 Read [full documentation](http://chrissimpkins.github.io/tweetledee/) on the official website.
 
+Or you can upload the files to a server hosting any website in the public_html directory and use the link pointing to the files in your tweetSource.
+```
+"tweetsSource": "http://domain/tweetledee/favoritesjson.php?c=10&cache_interval=8000",
+```
+
 
 # Next steps
 
