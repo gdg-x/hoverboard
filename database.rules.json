@@ -21,6 +21,10 @@
     "speakers": {
       ".read": true,
       ".write": "root.child('users').child(auth.uid).child('rules').child('speakers').val() === true"
+    },
+    "subscribers": {
+       ".read": false,
+       ".write": true
     }
   }
 }
