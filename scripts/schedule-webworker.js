@@ -7,6 +7,19 @@ function getEndTime(date, startTime, endTime, totalNumber, number) {
   return result.getHours() + ':' + result.getMinutes();
 }
 
+function getDuration(date, startTime, endTime) {
+  const timezone = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
+  const timeStart = new Date(date + ' ' + startTime + ' ' + timezone).getTime();
+  const timeEnd = new Date(date + ' ' + endTime + ' ' + timezone).getTime();
+  let difference = timeEnd - timeStart;
+  const hh = Math.floor(difference / 1000 / 60 / 60);
+  difference -= hh * 1000 * 60 * 60;
+  return {
+    hh,
+    mm: Math.floor(difference / 1000 / 60)
+  }
+}
+
 function addTagTo(array, element) {
   if (array.indexOf(element) < 0) {
     return [...array, element];
@@ -39,9 +52,15 @@ self.addEventListener('message', ({ data }) => {
           const sessionId = timeslot.sessions[sessionIndex].items[subSessionIndex];
           const subsession = sessionsRaw[sessionId];
           const mainTag = subsession.tags ? subsession.tags[0] : 'General';
-          const endTime = subSessionsLen > 1
-            ? getEndTime(dayKey, timeslot.startTime, timeslot.endTime, subSessionsLen, subSessionIndex + 1)
+          const endTimeRaw = timeslot.sessions[sessionIndex].extend
+            ? day.timeslots[timeslotsIndex + timeslot.sessions[sessionIndex].extend - 1].endTime
             : timeslot.endTime;
+          const endTime = subSessionsLen > 1
+            ? getEndTime(dayKey, timeslot.startTime, endTimeRaw, subSessionsLen, subSessionIndex + 1)
+            : endTimeRaw;
+          const startTime = subSessionsLen > 1 && subSessionIndex > 0
+            ? sessions[timeslot.sessions[sessionIndex].items[subSessionIndex - 1]].endTime
+            : timeslot.startTime;
 
           dayTags = addTagTo((dayTags || []), mainTag);
           scheduleTags = addTagTo((scheduleTags || []), mainTag);
@@ -52,8 +71,9 @@ self.addEventListener('message', ({ data }) => {
             id: sessionId,
             day: dayKey,
             track: subsession.track || day.tracks[sessionIndex],
-            startTime: timeslot.startTime,
+            startTime,
             endTime,
+            duration: getDuration(dayKey, startTime, endTime),
             dateReadable: day.dateReadable,
             speakers: subsession.speakers ? subsession.speakers.map(speakerId => speakers[speakerId]) : []
           };

@@ -17,6 +17,7 @@
       .session {
         height: 100%;
         color: var(--primary-text-color);
+        border: 1px solid var(--border-light-color);
       }
 
       .session[with-background] {
@@ -39,7 +40,7 @@
       }
 
       .session-header {
-        background-color: var(--additional-background-color);
+        /*background-color: var(--additional-background-color);*/
       }
 
       [with-background] .session-header {
@@ -51,7 +52,7 @@
       }
 
       .session-title {
-        font-size: 17px;
+        font-size: 20px;
         line-height: 1.2;
       }
 
@@ -69,7 +70,6 @@
       }
 
       .session-footer {
-        margin-top: 16px;
         font-size: 14px;
       }
 
@@ -77,7 +77,7 @@
         margin-right: 2px;
         padding: 2px 4px;
         font-size: 12px;
-        color: #fff;
+        border: 1px solid currentColor;
       }
 
       .speakers {
@@ -107,7 +107,7 @@
     </style>
 
     <a
-      class="session card"
+      class="session"
       href$="/schedule/[[dayName]]?sessionId=[[session.id]]"
       with-background$="[[session.image]]"
       layout vertical
@@ -127,22 +127,29 @@
         <h3 class="session-title">[[session.title]]</h3>
       </div>
 
-      <span class="session-content" flex>
-        <ul class="session-meta">
-        <li hidden$="[[!session.language]]">[[session.language]]</li>
-        <li hidden$="[[!session.complexity]]">[[session.complexity]]</li>
-          <!--<li hidden$="[[!session.track.title]]">[[session.track.title]]</li>-->
-        </ul>
-        <div class="session-meta">
-          [[session.track.title]] - [[session.endTime]]
-        </div>
-      </span>
+      <!--<div class="session-content" flex>-->
+        <!--&lt;!&ndash;<ul class="session-meta">&ndash;&gt;-->
+          <!--&lt;!&ndash;<li hidden$="[[!session.language]]">[[session.language]]</li>&ndash;&gt;-->
+          <!--&lt;!&ndash;<li hidden$="[[!session.complexity]]">[[session.complexity]]</li>&ndash;&gt;-->
+          <!--&lt;!&ndash;&lt;!&ndash;<li hidden$="[[!session.track.title]]">[[session.track.title]]</li>&ndash;&gt;&ndash;&gt;-->
+        <!--&lt;!&ndash;</ul>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="session-meta">&ndash;&gt;-->
+          <!--&lt;!&ndash;[[session.track.title]] / [[session.language]]&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+      <!--</div>-->
+      <div flex></div>
 
-      <div class="session-footer" hidden$="[[!_hasBottomMeta(session)]]">
-        <div hidden$="[[!session.tags.length]]">
-          <template is="dom-repeat" items="[[session.tags]]" as="tag">
-            <span class="tag" style$="background-color: [[_getTagColor(tag)]]">[[tag]]</span>
-          </template>
+      <div class="session-footer">
+        <div layout horizontal justified center-aligned>
+          <div class="session-meta" flex>
+            <span hidden$="[[!session.duration.hh]]">[[session.duration.hh]] hour[[_getEnding(session.duration.hh)]]</span>
+            <span hidden$="[[!session.duration.mm]]">[[session.duration.mm]] minute[[_getEnding(session.duration.mm)]]</span>
+          </div>
+          <div hidden$="[[!session.tags.length]]">
+            <template is="dom-repeat" items="[[session.tags]]" as="tag">
+              <span class="tag" style$="color: [[_getTagColor(tag)]]">[[tag]]</span>
+            </template>
+          </div>
         </div>
 
         <div class="speakers" hidden$="[[!session.speakers.length]]">
@@ -193,8 +200,8 @@
         return getComputedStyle(this, `--${this.generateClassName(value)}`);
       }
 
-      _hasBottomMeta(session) {
-        return session.tags && session.tags.length || session.speakers && session.speakers.length;
+      _getEnding(number) {
+        return number > 1 ? 's' : '';
       }
     }
 
