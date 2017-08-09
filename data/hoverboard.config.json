@@ -16,10 +16,10 @@
     "backgroundColor": "#F57C00"
   },
   "firebase": {
-    "name": "hoverboard-experimental",
-    "domain": "hoverboard-experimental.firebaseapp.com",
-    "database": "https://hoverboard-experimental.firebaseio.com",
-    "api": "AIzaSyALDa2D7CMhK_wt2VkET1MaJuQXYVUJd2I",
+    "name": "Test Ohio DevFest",
+    "domain": "test-ohio-devfest.firebaseapp.com",
+    "database": "https://test-ohio-devfest.firebaseio.com",
+    "api": "AIzaSyA5mFckCvG4oJNq6tonjFg4Fhz7v5wE4Dg",
     "userSessionsPath": "/userSessions",
     "ratingsPath": "/ratings",
     "indexedDbSession": "hoverboard"
