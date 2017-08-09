@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 
 <link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="./shared-styles.html">
@@ -18,18 +19,21 @@
         height: 100%;
         color: var(--primary-text-color);
         border: 1px solid var(--border-light-color);
+        overflow: hidden;
+        position: relative;
       }
 
-      .session[with-background] {
-        color: #fff;
+      .session:hover {
+        background-color: var(--additional-background-color);
       }
 
-      .session-image {
-        background-color: #fff;
-      }
-
-      .session-image-cover {
-        background-color: rgba(0, 0, 0, 0.3);
+      .session-icon {
+        --iron-icon-width: 88px;
+        --iron-icon-height: 88px;
+        position: absolute;
+        right: 40px;
+        bottom: -4px;
+        color: var(--border-light-color);
       }
 
       .session-header,
@@ -40,15 +44,27 @@
       }
 
       .session-header {
-        /*background-color: var(--additional-background-color);*/
+        padding-bottom: 8px;
       }
 
-      [with-background] .session-header {
-        background-color: transparent;
+      .language {
+        margin-left: 8px;
+        font-size: 12px;
+        text-transform: uppercase;
+        color: var(--secondary-text-color);
       }
 
-      [with-background] .session-content {
+      .session-content {
         padding-top: 0;
+        padding-bottom: 40px;
+      }
+
+      .bookmark-session {
+        color: var(--secondary-text-color);
+      }
+
+      .bookmark-session:hover {
+        color: var(--default-primary-color);
       }
 
       .session-title {
@@ -56,17 +72,11 @@
         line-height: 1.2;
       }
 
-      [with-background] .session-title {
-        font-size: 20px;
-      }
-
       .session-meta {
+        margin: 0;
+        padding: 0;
         font-size: 12px;
         color: var(--secondary-text-color);
-      }
-
-      [with-background]  .session-meta {
-        color: #fff;
       }
 
       .session-footer {
@@ -109,41 +119,35 @@
     <a
       class="session"
       href$="/schedule/[[dayName]]?sessionId=[[session.id]]"
-      with-background$="[[session.image]]"
       layout vertical
       relative
     >
-      <plastic-image
-        class="session-image"
-        srcset="[[session.image]]"
-        sizing="cover"
-        hidden$="[[!session.image]]"
-        lazy-load preload fade fit
-      ></plastic-image>
+      <iron-icon
+        class="session-icon"
+        icon="hoverboard:[[session.icon]]"
+      ></iron-icon>
 
-      <span class="session-image-cover" fit hidden$="[[!session.image]]"></span>
-
-      <div class="session-header">
-        <h3 class="session-title">[[session.title]]</h3>
+      <div class="session-header" layout horizontal justified>
+        <div flex>
+          <h3 class="session-title">[[session.title]]</h3>
+        </div>
+        <span class="language">[[slice(session.language, 2)]]</span>
       </div>
 
-      <!--<div class="session-content" flex>-->
-        <!--&lt;!&ndash;<ul class="session-meta">&ndash;&gt;-->
-          <!--&lt;!&ndash;<li hidden$="[[!session.language]]">[[session.language]]</li>&ndash;&gt;-->
-          <!--&lt;!&ndash;<li hidden$="[[!session.complexity]]">[[session.complexity]]</li>&ndash;&gt;-->
-          <!--&lt;!&ndash;&lt;!&ndash;<li hidden$="[[!session.track.title]]">[[session.track.title]]</li>&ndash;&gt;&ndash;&gt;-->
-        <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-        <!--&lt;!&ndash;<div class="session-meta">&ndash;&gt;-->
-          <!--&lt;!&ndash;[[session.track.title]] / [[session.language]]&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-      <!--</div>-->
-      <div flex></div>
+      <div class="session-content" flex layout horizontal justified>
+        <div class="session-meta">
+          <div hidden$="[[!session.complexity]]">[[session.complexity]]</div>
+        </div>
+        <iron-icon class="bookmark-session" icon="hoverboard:bookmark-plus"></iron-icon>
+      </div>
 
       <div class="session-footer">
         <div layout horizontal justified center-aligned>
           <div class="session-meta" flex>
-            <span hidden$="[[!session.duration.hh]]">[[session.duration.hh]] hour[[_getEnding(session.duration.hh)]]</span>
-            <span hidden$="[[!session.duration.mm]]">[[session.duration.mm]] minute[[_getEnding(session.duration.mm)]]</span>
+            <span
+              hidden$="[[!session.duration.hh]]">[[session.duration.hh]] hour[[_getEnding(session.duration.hh)]]</span>
+            <span
+              hidden$="[[!session.duration.mm]]">[[session.duration.mm]] min[[_getEnding(session.duration.mm)]]</span>
           </div>
           <div hidden$="[[!session.tags.length]]">
             <template is="dom-repeat" items="[[session.tags]]" as="tag">

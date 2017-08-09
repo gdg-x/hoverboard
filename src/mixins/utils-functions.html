@@ -20,5 +20,9 @@
     generateClassName(value) {
       return value ? value.replace(/\W+/g, '-').replace(/([a-z\d])([A-Z])/g, '$1-$2').toLowerCase() : '';
     }
+
+    slice(text, number) {
+      return text && text.slice(0, number);
+    }
   };
 </script>
