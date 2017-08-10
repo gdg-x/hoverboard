@@ -13,12 +13,13 @@
 
       :host {
         display: block;
+        background-color: #fff;
+        border-bottom: 1px solid var(--border-light-color);
       }
 
       .session {
         height: 100%;
         color: var(--primary-text-color);
-        border: 1px solid var(--border-light-color);
         overflow: hidden;
         position: relative;
       }
@@ -112,6 +113,12 @@
       .speaker-title {
         font-size: 12px;
         line-height: 1;
+      }
+
+      @media (min-width: 640px) {
+        :host {
+          border: 1px solid var(--border-light-color);
+        }
       }
 
     </style>

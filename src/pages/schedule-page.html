@@ -16,7 +16,18 @@
 
       :host {
         display: block;
-        background-color: #fff;
+      }
+
+      @media (max-width: 640px) {
+        .container {
+          padding: 0 0 32px;
+        }
+      }
+
+      @media (min-width: 640px) {
+        :host {
+          background-color: #fff;
+        }
       }
 
     </style>
@@ -29,7 +40,6 @@
     ></app-route>
 
     <div class="container">
-
       <iron-pages selected="2016-09-09" attr-for-selected="name">
         <template is="dom-repeat" items="[[transformToArray(schedule, 'date')]]" as="day">
           <schedule-day

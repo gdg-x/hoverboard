@@ -10,27 +10,17 @@
     <style>
 
       :host {
-        margin-left: auto;
         display: block;
-        max-width: calc(100% - 64px);
-      }
-
-      .grid {
-        display: grid;
-        grid-column-gap: 16px;
-        grid-row-gap: 32px;
-        grid-template-columns: repeat(3, 1fr);
       }
 
       .start-time {
-        text-align: right;
-        transform: translateX(calc(-100% - 16px));
+        padding: 8px 16px;
         color: var(--secondary-text-color);
         letter-spacing: -0.04em;
       }
 
       .hours {
-        font-size: 32px;
+        font-size: 24px;
         font-weight: 300;
       }
 
@@ -38,8 +28,37 @@
         font-size: 16px;
       }
 
-      .subsession:not(:last-of-type) {
-        margin-bottom: 16px;
+      .start-time + .session .subsession {
+        border-top: 1px solid var(--border-light-color);
+      }
+
+      @media (min-width: 640px) {
+        :host {
+          margin-left: auto;
+          display: block;
+          max-width: calc(100% - 64px);
+        }
+
+        .grid {
+          display: grid;
+          grid-column-gap: 16px;
+          grid-row-gap: 32px;
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .start-time {
+          padding: 0;
+          text-align: right;
+          transform: translateX(calc(-100% - 16px));
+        }
+
+        .hours {
+          font-size: 32px;
+        }
+
+        .subsession:not(:last-of-type) {
+          margin-bottom: 16px;
+        }
       }
 
     </style>
