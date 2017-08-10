@@ -44,7 +44,7 @@
   "enabledCfpBlock": true,
   "enabledAboutBlock": true,
   "enabledSocialFeed": false,
-  "enabledMapBlock": false,
+  "enabledMapBlock": true,
   "enabledLogosBlock": false,
   "enabledFooterBlock": true,
   "enabledBuyTicketsButton": false,
@@ -77,7 +77,7 @@
   ],
   "location": {
     "apiKey": "",
-    "name": "Riga Islande Hotel",
+    "name": "Islande Hotel",
     "address": "Kipsalas iela 20, Riga, Latvia",
     "link": "https://www.facebook.com/rigaislandehotel/",
     "pointer": {
