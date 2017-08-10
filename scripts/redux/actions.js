@@ -32,6 +32,12 @@ const routeActions = {
       type: SET_ROUTE,
       route
     });
+  },
+  setSubRoute: subRoute => {
+    store.dispatch({
+      type: SET_SUB_ROUTE,
+      subRoute
+    });
   }
 };
 

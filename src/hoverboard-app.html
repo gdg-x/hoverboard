@@ -25,6 +25,7 @@
 <link rel="import" href="../bower_components/iron-lazy-pages/iron-lazy-pages.html">
 <link rel="import" href="../bower_components/plastic-image/plastic-image.html">
 
+<link rel="import" href="mixins/utils-functions.html">
 <link rel="import" href="mixins/redux-mixin.html">
 <link rel="import" href="mixins/scroll-functions.html">
 <link rel="import" href="elements/shared-styles.html">
@@ -84,7 +85,6 @@
       }
 
       .header {
-        background-color: var(--primary-background-color);
         border-bottom: 1px solid var(--divider-color);
         z-index: 1;
       }
@@ -92,6 +92,7 @@
       app-toolbar {
         padding: 0;
         height: auto;
+        background-color: var(--primary-background-color);
       }
 
       .toolbar-logo {
@@ -196,7 +197,7 @@
 
         <iron-selector
           class="drawer-list"
-          selected="[[route]]"
+          selected="[[route.route]]"
           attr-for-selected="path"
           selected-class="selected"
           role="navigation"
@@ -209,7 +210,8 @@
 
       <app-header-layout id="headerLayout">
 
-        <app-header slot="header" condenses fixed effects="waterfall">
+        <app-header slot="header" condenses fixed threshold-triggered="{{threshold}}" effects="waterfall">
+
           <app-toolbar class="header" sticky>
             <paper-icon-button icon="hoverboard:menu" aria-label="Menu" hidden$="[[viewport.isTabletPlus]]"
                                on-tap="openDrawer"></paper-icon-button>
@@ -220,7 +222,7 @@
               </a>
             </div>
 
-            <paper-tabs class="nav-items" selected="[[route]]" attr-for-selected="name" hidden$="[[viewport.isPhone]]"
+            <paper-tabs class="nav-items" selected="[[route.route]]" attr-for-selected="name" hidden$="[[viewport.isPhone]]"
                         role="navigation" noink>
               {% for nav in navigation %}
               <paper-tab name="{$ nav.route $}" class="nav-item" link>
@@ -238,7 +240,7 @@
               lazy-load preload fade fit
             ></plastic-image>
             <div class="hero-overlay" show$=[[hero.background.image]] fit></div>
-            <iron-pages selected="[[route]]" attr-for-selected="route" fallback-selection="default">
+            <iron-pages selected="[[route.route]]" attr-for-selected="route" fallback-selection="default">
               <div class="hero-content" route="home">
                 <plastic-image class="hero-logo" srcset="/images/logo.svg" alt="{$ title $}"></plastic-image>
                 <p class="hero-description highlight-font">[[hero.description]]</p>
@@ -250,9 +252,24 @@
             </iron-pages>
           </app-toolbar>
 
+          <app-toolbar class="bottom-toolbar" sticky hidden="[[!isEqual(route.route, 'schedule')]]">
+            <paper-tabs
+              class="nav-items"
+              selected="[[route.subRoute]]"
+              attr-for-selected="day"
+              noink
+            >
+              <template is="dom-repeat" items="[[transformToArray(schedule.days, 'date')]]" as="day">
+                <paper-tab class="nav-item" day="[[day.date]]" link>
+                  <a href$="/schedule/[[day.date]]" layout vertical center-center>[[day.dateReadable]]</a>
+                </paper-tab>
+              </template>
+            </paper-tabs>
+          </app-toolbar>
+
         </app-header>
 
-        <iron-lazy-pages attr-for-selected="data-route" selected="[[route]]" selected-attribute="active"
+        <iron-lazy-pages attr-for-selected="data-route" selected="[[route.route]]" selected-attribute="active"
                          hide-immediately>
           <home-page
             data-route="home"
@@ -309,7 +326,7 @@
   </template>
 
   <script>
-    class HoverboardApp extends ScrollFunctions(ReduxMixin(Polymer.Element)) {
+    class HoverboardApp extends UtilsFunctions(ScrollFunctions(ReduxMixin(Polymer.Element))) {
 
       static get is() {
         return 'hoverboard-app';
@@ -338,6 +355,10 @@
           viewport: {
             type: Object,
             statePath: 'ui.viewport'
+          },
+          schedule: {
+            type: Object,
+            statePath: 'schedule'
           },
           _openedDialog: {
             type: String
@@ -402,7 +423,7 @@
         }
         const hasSubroute = subroutePath !== '' && subroutePath !== '/';
 
-        if (page !== this.route) {
+        if (!this.route || (page !== this.route.route)) {
           !hasSubroute && this.scrollToY(0, 100);
           uiActions.setHero(null, page);
           routeActions.setRoute(page);

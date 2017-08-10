@@ -62,7 +62,9 @@ self.addEventListener('message', ({ data }) => {
             ? sessions[timeslot.sessions[sessionIndex].items[subSessionIndex - 1]].endTime
             : timeslot.startTime;
 
-          dayTags = addTagTo((dayTags || []), mainTag);
+          if (subsession.tags) {
+            dayTags = [...new Set([...dayTags, ...subsession.tags])];
+          }
           scheduleTags = addTagTo((scheduleTags || []), mainTag);
 
           const finalSubsession = {
@@ -102,12 +104,14 @@ self.addEventListener('message', ({ data }) => {
 
     schedule = {
       ...schedule,
-      [dayKey]: {
-        ...day,
-        timeslots,
-        tags: dayTags
-      },
-      scheduleTags
+      days: {
+        ...schedule.days,
+        [dayKey]: {
+          ...day,
+          timeslots,
+          tags: dayTags
+        }
+      }
     }
   }
 

@@ -40,15 +40,14 @@
     ></app-route>
 
     <div class="container">
-      <iron-pages selected="2016-09-09" attr-for-selected="name">
-        <template is="dom-repeat" items="[[transformToArray(schedule, 'date')]]" as="day">
+      <iron-pages selected="[[subRoute]]" attr-for-selected="name">
+        <template is="dom-repeat" items="[[transformToArray(schedule.days, 'date')]]" as="day">
           <schedule-day
             name$="[[day.date]]"
             day="[[day]]"
           ></schedule-day>
         </template>
       </iron-pages>
-
     </div>
   </template>
 
@@ -61,17 +60,34 @@
 
       static get properties() {
         return {
-          route:  Object,
+          route: Object,
+          active: Boolean,
           schedule: {
             type: Object,
             statePath: 'schedule'
+          },
+          subRoute: {
+            type: Object,
+            statePath: 'route.subRoute'
           }
         }
       }
 
+      static get observers() {
+        return [
+          '_setDay(active, routeData.day, schedule.days)'
+        ];
+      }
+
       connectedCallback() {
         super.connectedCallback();
-        if (!Object.keys(this.schedule).length) scheduleActions.fetchSchedule();
+        if (!this.schedule.days) scheduleActions.fetchSchedule();
+      }
+
+      _setDay(active, day, scheduleDays) {
+        if (active && scheduleDays) {
+          routeActions.setSubRoute(day || Object.keys(scheduleDays)[0]);
+        }
       }
     }
 

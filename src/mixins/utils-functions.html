@@ -2,7 +2,7 @@
 
   const UtilsFunctions = subclass => class extends subclass {
     transformToArray(source, attribute) {
-      return Object.keys(source).map(key => Object.assign(!!attribute ? { [attribute]: key } : {}, source[key]));
+      return source && Object.keys(source).map(key => Object.assign(!!attribute ? { [attribute]: key } : {}, source[key]));
     }
 
     getDate(date) {
@@ -23,6 +23,10 @@
 
     slice(text, number) {
       return text && text.slice(0, number);
+    }
+
+    isEqual(string1, string2) {
+      return string1 === string2;
     }
   };
 </script>

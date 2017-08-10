@@ -20,7 +20,13 @@ const uiReducer = (state = initialState.ui, action) => {
 const routeReducer = (state = initialState.route, action) => {
   switch (action.type) {
     case SET_ROUTE:
-      return action.route;
+      return Object.assign({}, state, {
+        route: action.route
+      });
+    case SET_SUB_ROUTE:
+      return Object.assign({}, state, {
+        subRoute: action.subRoute
+      });
     default:
       return state;
   }
