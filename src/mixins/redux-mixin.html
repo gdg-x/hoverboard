@@ -30,7 +30,15 @@
       [DIALOGS.SPEAKER]: {
         isOpened: false,
         data: {}
-      }
+      },
+      [DIALOGS.SUBSCRIBE]: {
+        isOpened: false,
+        data: {}
+      },
+      [DIALOGS.SIGNIN]: {
+        isOpened: false,
+        data: {}
+      },
     },
     tickets: [],
     partners: [],
@@ -40,7 +48,11 @@
     sessions: {},
     schedule: {},
     gallery: [],
-    team: []
+    team: [],
+    user: {
+      signedIn: false
+    },
+    subscribed: false
   };
 
   const appReducer = (state = initialState, action) => {
@@ -57,7 +69,9 @@
       sessions: sessionsReducer(state.sessions, action),
       schedule: scheduleReducer(state.schedule, action),
       gallery: galleryReducer(state.gallery, action),
-      team: teamReducer(state.team, action)
+      team: teamReducer(state.team, action),
+      user: userReducer(state.user, action),
+      subscribed: subscribeReducer(state.subscribed, action)
     };
   };
 

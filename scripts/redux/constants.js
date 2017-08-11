@@ -10,7 +10,9 @@ const SET_HERO = 'SET_HERO';
 const OPEN_DIALOG = 'OPEN_DIALOG';
 const CLOSE_DIALOG = 'CLOSE_DIALOG';
 const DIALOGS = {
-  SPEAKER: 'speaker'
+  SPEAKER: 'speaker',
+  SUBSCRIBE: 'subscribe',
+  SIGNIN: 'signin'
 };
 // tickets
 const FETCH_TICKETS = 'FETCH_TICKETS';
@@ -33,3 +35,8 @@ const FETCH_SCHEDULE = 'FETCH_SCHEDULE';
 const FETCH_GALLERY = 'FETCH_GALLERY';
 // team
 const FETCH_TEAM = 'FETCH_TEAM';
+// user
+const SIGN_IN = 'SIGN_IN';
+const SIGN_OUT = 'SIGN_OUT';
+// subscribe
+const SUBSCRIBE = 'SUBSCRIBE';
