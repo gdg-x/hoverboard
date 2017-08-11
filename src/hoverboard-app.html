@@ -31,6 +31,7 @@
 <link rel="import" href="elements/shared-styles.html">
 <link rel="import" href="elements/hoverboard-icons.html">
 <link rel="import" href="elements/footer-block.html">
+<link rel="import" href="effects/sticky-bottom-toolbar.html">
 
 
 <dom-module id="hoverboard-app">
@@ -151,6 +152,25 @@
         max-width: 600px;
       }
 
+      app-toolbar[bottom-sticky]::before {
+        position: absolute;
+        right: 0;
+        bottom: -5px;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        content: "";
+        transition: opacity 0.4s;
+        pointer-events: none;
+        opacity: 0;
+        box-shadow: inset 0 5px 6px -3px rgba(0, 0, 0, 0.4);
+        will-change: opacity;
+      }
+
+      app-toolbar[bottom-sticky][bottom-shadow]::before {
+        opacity: 1;
+      }
+
       @media (min-width: 640px) {
         app-toolbar {
           padding: 0 36px;
@@ -210,7 +230,7 @@
 
       <app-header-layout id="headerLayout">
 
-        <app-header slot="header" condenses fixed threshold-triggered="{{threshold}}" effects="waterfall">
+        <app-header slot="header" condenses fixed effects="waterfall sticky-bottom-toolbar">
 
           <app-toolbar class="header" sticky>
             <paper-icon-button icon="hoverboard:menu" aria-label="Menu" hidden$="[[viewport.isTabletPlus]]"
@@ -252,7 +272,7 @@
             </iron-pages>
           </app-toolbar>
 
-          <app-toolbar class="bottom-toolbar" sticky hidden="[[!isEqual(route.route, 'schedule')]]">
+          <app-toolbar id="bottom-toolbar" class="bottom-toolbar" sticky bottom-sticky hidden="[[!isEqual(route.route, 'schedule')]]">
             <paper-tabs
               class="nav-items"
               selected="[[route.subRoute]]"
@@ -340,7 +360,7 @@
           },
           route: {
             type: String,
-            statePath: 'route'
+            statePath: 'routing'
           },
           hero: {
             type: Object,
@@ -426,7 +446,7 @@
         if (!this.route || (page !== this.route.route)) {
           !hasSubroute && this.scrollToY(0, 100);
           uiActions.setHero(null, page);
-          routeActions.setRoute(page);
+          routingActions.setRoute(page);
         } else if (page === 'blog' && !hasSubroute) {
           uiActions.setHero(null, page);
         }

@@ -22,7 +22,7 @@
         title: ''
       }
     },
-    route: {
+    routing: {
       route: 'home'
     },
     hero: null,
@@ -46,7 +46,7 @@
   const appReducer = (state = initialState, action) => {
     return {
       ui: uiReducer(state.ui, action),
-      route: routeReducer(state.route, action),
+      routing: routingReducer(state.routing, action),
       hero: heroReducer(state.hero, action),
       dialogs: dialogsReducer(state.dialogs, action),
       tickets: ticketsReducer(state.tickets, action),

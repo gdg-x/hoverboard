@@ -25,7 +25,7 @@ const uiActions = {
   }
 };
 
-const routeActions = {
+const routingActions = {
   setRoute: (routeFromAction) => {
     const route = routeFromAction || 'home';
     store.dispatch({

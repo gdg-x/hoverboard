@@ -68,7 +68,7 @@
           },
           subRoute: {
             type: Object,
-            statePath: 'route.subRoute'
+            statePath: 'routing.subRoute'
           }
         }
       }
@@ -86,7 +86,7 @@
 
       _setDay(active, day, scheduleDays) {
         if (active && scheduleDays) {
-          routeActions.setSubRoute(day || Object.keys(scheduleDays)[0]);
+          routingActions.setSubRoute(day || Object.keys(scheduleDays)[0]);
         }
       }
     }

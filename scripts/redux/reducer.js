@@ -17,7 +17,7 @@ const uiReducer = (state = initialState.ui, action) => {
   }
 };
 
-const routeReducer = (state = initialState.route, action) => {
+const routingReducer = (state = initialState.routing, action) => {
   switch (action.type) {
     case SET_ROUTE:
       return Object.assign({}, state, {
