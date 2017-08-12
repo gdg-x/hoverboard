@@ -90,9 +90,9 @@
       "longitude": 24.0841499
     },
     "images": [
-      "http://www.islandehotel.lv/block_files/big/9_0006.jpg",
-      "https://images.trvl-media.com/hotels/2000000/1460000/1458500/1458473/1458473_68_z.jpg",
-      "http://www.latvia.travel/sites/default/files/styles/lightbox/public/accommodation//371-islande-hotel-facade.jpg?itok=f3qsaGDJ"
+      "/images/backgrounds/location_1.jpg",
+      "/images/backgrounds/location_2.jpg",
+      "/images/backgrounds/location_3.jpg"
     ]
   },
   "gallery": false,
