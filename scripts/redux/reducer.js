@@ -38,6 +38,7 @@ const heroReducer = (state = initialState.hero, action) => {
 const dialogsReducer = (state = initialState.dialogs, action) => {
   switch (action.type) {
     case OPEN_DIALOG:
+    case SET_DIALOG_DATA:
       return Object.assign({}, state, action.dialog);
     case CLOSE_DIALOG:
       return Object.assign({}, state, {

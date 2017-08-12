@@ -209,7 +209,7 @@ const userActions = {
 
 const subscribeActions = {
    subscribe: (data) => {
-    const id = data.email.replace(/[^\w\s]/gi, '');
+    const id = data.email.replace(/[^\w\s]/gi, '');     
 
     firebase.database().ref(`subscribers/${id}`).set({
       email: data.email,
@@ -223,6 +223,16 @@ const subscribeActions = {
         });
     })
     .catch(() => {
+       store.dispatch({
+        type: SET_DIALOG_DATA,
+        dialog: {
+          ['subscribe']: {
+            isOpened: true,
+            data: Object.assign(data, { errorOcurred: true })
+          }
+        }
+      });
+
        store.dispatch({
           type: SUBSCRIBE,
           subscribed: false
