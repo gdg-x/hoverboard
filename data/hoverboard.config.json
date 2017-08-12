@@ -15,10 +15,10 @@
     "backgroundColor": "#F57C00"
   },
   "firebase": {
-    "name": "devfest-baltics",
-    "domain": "devfest-baltics.firebaseapp.com",
-    "database": "https://devfest-baltics.firebaseio.com",
-    "api": "AIzaSyA8Zb3XAjbugC595tYutAJe5vAL9RD3VGg",
+    "name": "devfest-baltics-dev",
+    "domain": "devfest-baltics-dev.firebaseapp.com",
+    "database": "https://devfest-baltics-dev.firebaseio.com",
+    "api": "AIzaSyBwYkDGegrs6-DsXgAm7kTLedW7q_be0Fk",
     "userSessionsPath": "/userSessions",
     "ratingsPath": "/ratings",
     "indexedDbSession": "hoverboard"
@@ -44,7 +44,7 @@
   "enabledCfpBlock": true,
   "enabledAboutBlock": true,
   "enabledSocialFeed": false,
-  "enabledMapBlock": false,
+  "enabledMapBlock": true,
   "enabledLogosBlock": false,
   "enabledFooterBlock": true,
   "enabledBuyTicketsButton": false,
@@ -77,7 +77,7 @@
   ],
   "location": {
     "apiKey": "",
-    "name": "Riga Islande Hotel",
+    "name": "Islande Hotel",
     "address": "Kipsalas iela 20, Riga, Latvia",
     "link": "https://www.facebook.com/rigaislandehotel/",
     "pointer": {
