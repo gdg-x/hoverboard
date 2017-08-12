@@ -51,6 +51,15 @@
       "speakers" : [ 4 ],
       "tags" : [ "CI", "Fastlane" ],
       "title" : "Introduction to Continuous Delivery with fastlane"
+    },
+    "105": {
+      "complexity" : "Intermediate",
+      "description" : "Lets take a look at recently released Sourcery and how it can be applied in variety of different use-cases to make development more powerful and enjoyable, while at the same time limiting amount of human mistakes.",
+      "id" : 105,
+      "language" : "English",
+      "speakers" : [ 5 ],
+      "tags" : [ "iOS" ],
+      "title" : "Metaprogramming in Swift"
     }
   },
   "speakers" : [ null, {
@@ -158,6 +167,31 @@
     } ],
     "tags" : [ "iOS", "Fastlane" ],
     "title" : "iOS Developer"
+  }, {
+    "bio" : "Krzysztof is an iOS developer, known for creating Objective-C Playgrounds, Apple’s Essential Apps like Foldify and 3D Game Engines. Passionate about writing quality code and helping other do the same. He blogs on http://merowing.info and open sources tools/libraries on https://github.com/krzysztofzablocki, making it into top 50 most starred Cocoa accounts worldwide.",
+    "company" : "New York Times",
+    "companyLogo" : "/images/logos/nytimes.svg",
+    "country" : "Warsaw, Poland",
+    "featured" : true,
+    "id" : 5,
+    "name" : "Krzysztof Zabłocki",
+    "photoUrl" : "/images/people/krysztof_zablocki.jpg",
+    "shortBio" : "Dev, Speaker, Creator. Currently Lead iOS @NYTimes",
+    "socials" : [ {
+      "icon" : "linkedin",
+      "link" : "https://www.linkedin.com/in/merowing/",
+      "name" : "LinkedIn"
+    }, {
+      "icon" : "twitter",
+      "link" : "https://twitter.com/merowing_",
+      "name" : "Twitter"
+    }, {
+      "icon" : "github",
+      "link" : "https://github.com/krzysztofzablocki",
+      "name" : "Github"
+    } ],
+    "tags" : [ "iOS" ],
+    "title" : "Lead iOS Engineer"
   } ],
   "team" : [ {
     "members" : [ {
