@@ -18,7 +18,7 @@
         --paper-card-background-color: #FFFFFF;
         display: block;
         background: var(--default-primary-color);
-        color: var(--text-primary-color);
+        color: var(--white-text-color);
         text-align: center;
       }
 
@@ -37,8 +37,8 @@
       }
 
       .details {
-        margin: 10px auto 0;
-        font-size: 14px;
+        margin: 60px auto 0;
+        font-size: 18px;
         max-width: 600px;
       }
 
@@ -83,9 +83,11 @@
         </template>
       </div>
       <div class="details">{$ ticketsDetails $}</div>
+      {% if enabledBuyTicketsButton %}
       <a href="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
         <paper-button class="buy-button" raised>{$ buyTicket $}</paper-button>
       </a>
+      {% endif %}
     </div>
 
   </template>

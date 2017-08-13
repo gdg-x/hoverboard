@@ -5,3 +5,4 @@ build
 .idea/
 .temp/
 .firebaserc
+npm-debug.log
