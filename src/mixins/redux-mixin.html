@@ -22,7 +22,9 @@
         title: ''
       }
     },
-    route: 'home',
+    routing: {
+      route: 'home'
+    },
     hero: null,
     dialogs: {
       [DIALOGS.SPEAKER]: {
@@ -43,6 +45,8 @@
     videos: [],
     blog: {},
     speakers: {},
+    sessions: {},
+    schedule: {},
     gallery: [],
     team: [],
     user: {
@@ -54,7 +58,7 @@
   const appReducer = (state = initialState, action) => {
     return {
       ui: uiReducer(state.ui, action),
-      route: routeReducer(state.route, action),
+      routing: routingReducer(state.routing, action),
       hero: heroReducer(state.hero, action),
       dialogs: dialogsReducer(state.dialogs, action),
       tickets: ticketsReducer(state.tickets, action),
@@ -62,6 +66,8 @@
       videos: videosReducer(state.videos, action),
       blog: blogReducer(state.blog, action),
       speakers: speakersReducer(state.speakers, action),
+      sessions: sessionsReducer(state.sessions, action),
+      schedule: scheduleReducer(state.schedule, action),
       gallery: galleryReducer(state.gallery, action),
       team: teamReducer(state.team, action),
       user: userReducer(state.user, action),

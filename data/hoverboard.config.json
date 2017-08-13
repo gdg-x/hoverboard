@@ -84,10 +84,9 @@
     "schedule": {
       "title": "Schedule",
       "background": {
-        "color": "rgba(33, 147, 176, 0.1)",
-        "gradient": "linear-gradient(to right, #2193b0, #6dd5ed)"
+        "color": "#fff"
       },
-      "fontColor": "#fff"
+      "fontColor": "#424242"
     },
     "team": {
       "title": "Team",

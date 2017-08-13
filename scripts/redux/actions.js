@@ -25,12 +25,18 @@ const uiActions = {
   }
 };
 
-const routeActions = {
+const routingActions = {
   setRoute: (routeFromAction) => {
     const route = routeFromAction || 'home';
     store.dispatch({
       type: SET_ROUTE,
       route
+    });
+  },
+  setSubRoute: subRoute => {
+    store.dispatch({
+      type: SET_SUB_ROUTE,
+      subRoute
     });
   }
 };
@@ -101,13 +107,113 @@ const blogActions = {
 
 const speakersActions = {
   fetchList: () => {
-    return firebase.database()
-      .ref('/speakers')
-      .on('value', snapshot => {
-        store.dispatch({
-          type: FETCH_SPEAKERS_LIST,
-          list: snapshot.val()
+    const state = store.getState();
+    const sessionsPromise = Object.keys(state.sessions).length
+      ? Promise.resolve(state.sessions)
+      : sessionsActions.fetchList();
+
+    const speakersPromise = new Promise(resolve => {
+      firebase.database()
+        .ref('/speakers')
+        .on('value', snapshot => {
+          resolve(snapshot.val());
+        })
+    });
+
+    return new Promise(resolve => {
+      Promise.all([sessionsPromise, speakersPromise])
+        .then(([sessions, speakers]) => {
+          let updatedSpeakers = {};
+
+          for (let key of Object.keys(sessions)) {
+            if (sessions[key].speakers) {
+              sessions[key].speakers.map(id => {
+                if (speakers[id])
+                  updatedSpeakers = {
+                    ...updatedSpeakers,
+                    [id]: {
+                      ...speakers[id],
+                      sessions: speakers[id].sessions ? [...speakers[id].sessions, sessions[key]] : [sessions[key]]
+                    }
+                  };
+              });
+            }
+          }
+
+          const list = {
+            ...speakers,
+            ...updatedSpeakers
+          };
+
+          store.dispatch({
+            type: FETCH_SPEAKERS_LIST,
+            list
+          });
+
+          resolve(list);
         });
+    });
+  }
+};
+
+const sessionsActions = {
+  fetchList: () => {
+    const result = new Promise(resolve => {
+      firebase.database()
+        .ref('/sessions')
+        .on('value', snapshot => {
+          resolve(snapshot.val());
+        })
+    });
+
+    result
+      .then(list => {
+        store.dispatch({
+          type: FETCH_SESSIONS_LIST,
+          list
+        });
+      });
+
+    return result;
+  }
+};
+
+const scheduleActions = {
+  fetchSchedule: () => {
+    const state = store.getState();
+    const speakersPromise = Object.keys(state.speakers).length
+      ? Promise.resolve(state.speakers)
+      : speakersActions.fetchList();
+    const schedulePromise = new Promise(resolve => {
+      firebase.database()
+        .ref('/schedule')
+        .on('value', snapshot => {
+          resolve(snapshot.val());
+        })
+    });
+
+    return Promise.all([speakersPromise, schedulePromise])
+      .then(([speakers, schedule]) => {
+        const scheduleWorker = new Worker('/scripts/schedule-webworker.js');
+
+        scheduleWorker.postMessage({
+          speakers,
+          sessions: store.getState().sessions,
+          schedule
+        });
+
+        scheduleWorker.addEventListener('message', ({ data }) => {
+          store.dispatch({
+            type: FETCH_SCHEDULE,
+            data: data.schedule
+          });
+          store.dispatch({
+            type: UPDATE_SESSIONS,
+            list: data.sessions
+          });
+          scheduleWorker.terminate();
+        }, false);
+
       });
   }
 };

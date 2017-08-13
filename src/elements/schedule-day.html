@@ -1,0 +1,124 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="./session-element.html">
+<link rel="import" href="./shared-styles.html">
+
+<dom-module id="schedule-day">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+    <style>
+
+      :host {
+        display: block;
+      }
+
+      .start-time {
+        padding: 8px 16px;
+        color: var(--secondary-text-color);
+        letter-spacing: -0.04em;
+      }
+
+      .hours {
+        font-size: 24px;
+        font-weight: 300;
+      }
+
+      .minutes {
+        font-size: 16px;
+      }
+
+      .start-time + .session .subsession {
+        border-top: 1px solid var(--border-light-color);
+      }
+
+      @media (min-width: 640px) {
+        :host {
+          margin-left: auto;
+          display: block;
+          max-width: calc(100% - 64px);
+        }
+
+        .grid {
+          display: grid;
+          grid-column-gap: 16px;
+          grid-row-gap: 32px;
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .start-time {
+          padding: 0;
+          text-align: right;
+          transform: translateX(calc(-100% - 16px));
+        }
+
+        .hours {
+          font-size: 32px;
+        }
+
+        .subsession:not(:last-of-type) {
+          margin-bottom: 16px;
+        }
+      }
+
+    </style>
+
+    <div class="grid">
+      <template is="dom-repeat" items="[[day.timeslots]]" as="timeslot" index-as="timeslotIndex">
+
+        <div class="start-time" style$="grid-area: [[_getTimePosition(timeslotIndex)]]">
+          <span class="hours">[[_splitText(timeslot.startTime, ':', 0)]]</span>
+          <span class="minutes">[[_splitText(timeslot.startTime, ':', 1)]]</span>
+        </div>
+
+        <template is="dom-repeat" items="[[timeslot.sessions]]" as="session" index-as="sessionIndex">
+
+          <div
+            class="session"
+            style$="grid-area: [[session.gridArea]]"
+            layout
+            vertical
+          >
+            <template is="dom-repeat" items="[[session.items]]" as="subSession">
+              <session-element
+                class="subsession"
+                day-name="[[name]]"
+                session="[[subSession]]"
+                flex
+              ></session-element>
+            </template>
+          </div>
+
+        </template>
+
+      </template>
+    </div>
+
+  </template>
+
+  <script>
+
+    class ScheduleDay extends Polymer.Element {
+      static get is() {
+        return 'schedule-day';
+      }
+
+      static get properties() {
+        return {
+          day: Object,
+          name: String
+        }
+      }
+
+      _getTimePosition(timeslotIndex) {
+        return `${timeslotIndex + 1} / 1`;
+      }
+
+      _splitText (text, divider, index) {
+        return text.split(divider)[index];
+      }
+    }
+
+    customElements.define(ScheduleDay.is, ScheduleDay);
+  </script>
+</dom-module>

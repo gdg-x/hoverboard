@@ -1,0 +1,221 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../mixins/utils-functions.html">
+<link rel="import" href="./shared-styles.html">
+
+<dom-module id="session-element">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+
+    <style>
+
+      :host {
+        display: block;
+        background-color: #fff;
+        border-bottom: 1px solid var(--border-light-color);
+      }
+
+      .session {
+        height: 100%;
+        color: var(--primary-text-color);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .session:hover {
+        background-color: var(--additional-background-color);
+      }
+
+      .session-icon {
+        --iron-icon-width: 88px;
+        --iron-icon-height: 88px;
+        position: absolute;
+        right: 40px;
+        bottom: -4px;
+        color: var(--border-light-color);
+      }
+
+      .session-header,
+      .session-content,
+      .session-footer {
+        padding: 16px;
+        z-index: 1;
+      }
+
+      .session-header {
+        padding-bottom: 8px;
+      }
+
+      .language {
+        margin-left: 8px;
+        font-size: 12px;
+        text-transform: uppercase;
+        color: var(--secondary-text-color);
+      }
+
+      .session-content {
+        padding-top: 0;
+        padding-bottom: 40px;
+      }
+
+      .bookmark-session {
+        color: var(--secondary-text-color);
+      }
+
+      .bookmark-session:hover {
+        color: var(--default-primary-color);
+      }
+
+      .session-title {
+        font-size: 20px;
+        line-height: 1.2;
+      }
+
+      .session-meta {
+        margin: 0;
+        padding: 0;
+        font-size: 12px;
+        color: var(--secondary-text-color);
+      }
+
+      .session-footer {
+        font-size: 14px;
+      }
+
+      .tag {
+        margin-right: 2px;
+        padding: 2px 4px;
+        font-size: 12px;
+        border: 1px solid currentColor;
+      }
+
+      .speakers {
+        margin-top: 10px;
+      }
+
+      .speaker-photo {
+        margin-right: 12px;
+        width: 32px;
+        height: 32px;
+        background-color: var(--secondary-background-color);
+        border-radius: 50%;
+        overflow: hidden;
+        transform: translateZ(0);
+      }
+
+      .speaker-name {
+        margin-bottom: 4px;
+        line-height: 1.2;
+      }
+
+      .speaker-title {
+        font-size: 12px;
+        line-height: 1;
+      }
+
+      @media (min-width: 640px) {
+        :host {
+          border: 1px solid var(--border-light-color);
+        }
+      }
+
+    </style>
+
+    <a
+      class="session"
+      href$="/schedule/[[dayName]]?sessionId=[[session.id]]"
+      layout vertical
+      relative
+    >
+      <iron-icon
+        class="session-icon"
+        icon="hoverboard:[[session.icon]]"
+      ></iron-icon>
+
+      <div class="session-header" layout horizontal justified>
+        <div flex>
+          <h3 class="session-title">[[session.title]]</h3>
+        </div>
+        <span class="language">[[slice(session.language, 2)]]</span>
+      </div>
+
+      <div class="session-content" flex layout horizontal justified>
+        <div class="session-meta">
+          <div hidden$="[[!session.complexity]]">[[session.complexity]]</div>
+        </div>
+        <iron-icon class="bookmark-session" icon="hoverboard:bookmark-plus"></iron-icon>
+      </div>
+
+      <div class="session-footer">
+        <div layout horizontal justified center-aligned>
+          <div class="session-meta" flex>
+            <span
+              hidden$="[[!session.duration.hh]]">[[session.duration.hh]] hour[[_getEnding(session.duration.hh)]]</span>
+            <span
+              hidden$="[[!session.duration.mm]]">[[session.duration.mm]] min[[_getEnding(session.duration.mm)]]</span>
+          </div>
+          <div hidden$="[[!session.tags.length]]">
+            <template is="dom-repeat" items="[[session.tags]]" as="tag">
+              <span class="tag" style$="color: [[_getTagColor(tag)]]">[[tag]]</span>
+            </template>
+          </div>
+        </div>
+
+        <div class="speakers" hidden$="[[!session.speakers.length]]">
+          <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
+            <div class="speaker" layout horizontal center>
+              <plastic-image
+                class="speaker-photo"
+                srcset="[[speaker.photoUrl]]"
+                sizing="cover"
+                lazy-load preload fade
+              ></plastic-image>
+
+              <div class="speaker-details" flex>
+                <div class="speaker-name">[[speaker.name]]</div>
+                <div class="speaker-title">[[speaker.company]] / [[speaker.country]]</div>
+              </div>
+            </div>
+          </template>
+        </div>
+
+      </div>
+
+    </a>
+
+  </template>
+
+  <script>
+
+    class SessionElement extends UtilsFunctions(Polymer.Element) {
+      static get is() {
+        return 'session-element';
+      }
+
+      static get properties() {
+        return {
+          session: Object,
+          sessionColor: {
+            type: String,
+            computed: '_getTagColor(session.mainTag)'
+          }
+        }
+      }
+
+      _getTagColor(value) {
+        if (ShadyCSS) {
+          return ShadyCSS.getComputedStyleValue(this, `--${this.generateClassName(value)}`);
+        }
+        return getComputedStyle(this, `--${this.generateClassName(value)}`);
+      }
+
+      _getEnding(number) {
+        return number > 1 ? 's' : '';
+      }
+    }
+
+    customElements.define(SessionElement.is, SessionElement);
+  </script>
+</dom-module>

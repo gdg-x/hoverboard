@@ -1,0 +1,28 @@
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/app-scroll-effects-behavior.html">
+
+<script>
+  Polymer.AppLayout.registerEffect('sticky-bottom-toolbar', {
+    setUp: function () {
+      const stickyElements = this.shadowRoot.querySelector('slot').assignedNodes({ flatten: true })
+        .filter(node => node.nodeType === Node.ELEMENT_NODE && node.hasAttribute('sticky'));
+      this._topSticky = stickyElements[0];
+      this._bottomSticky = stickyElements[1];
+    },
+
+    run: function run(p, y) {
+      if (this._bottomSticky) {
+        const sticked = y >= Math.max(this._bottomSticky.offsetTop - this._topSticky.offsetHeight, this._topSticky.offsetHeight);
+        this.translate3d(0, sticked ? y - this._bottomSticky.offsetTop + this._topSticky.offsetHeight + 'px' : 0, 0, this._bottomSticky);
+        if (sticked) {
+          this._bottomSticky.setAttribute('bottom-shadow', sticked);
+        } else {
+          this._bottomSticky.removeAttribute('bottom-shadow');
+        }
+      }
+    },
+
+    tearDown: function tearDown() {
+      delete this._bottomSticky;
+    }
+  });
+</script>

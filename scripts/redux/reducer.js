@@ -17,10 +17,16 @@ const uiReducer = (state = initialState.ui, action) => {
   }
 };
 
-const routeReducer = (state = initialState.route, action) => {
+const routingReducer = (state = initialState.routing, action) => {
   switch (action.type) {
     case SET_ROUTE:
-      return action.route;
+      return Object.assign({}, state, {
+        route: action.route
+      });
+    case SET_SUB_ROUTE:
+      return Object.assign({}, state, {
+        subRoute: action.subRoute
+      });
     default:
       return state;
   }
@@ -88,6 +94,25 @@ const speakersReducer = (state = initialState.speakers, action) => {
   switch (action.type) {
     case FETCH_SPEAKERS_LIST:
       return action.list;
+    default:
+      return state;
+  }
+};
+
+const sessionsReducer = (state = initialState.sessions, action) => {
+  switch (action.type) {
+    case FETCH_SESSIONS_LIST:
+    case UPDATE_SESSIONS:
+      return action.list;
+    default:
+      return state;
+  }
+};
+
+const scheduleReducer = (state = initialState.schedule, action) => {
+  switch (action.type) {
+    case FETCH_SCHEDULE:
+      return action.data;
     default:
       return state;
   }
