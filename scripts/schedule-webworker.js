@@ -1,17 +1,20 @@
-function getEndTime(date, startTime, endTime, totalNumber, number) {
+function getTimeDifference(date, startTime, endTime) {
   const timezone = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
   const timeStart = new Date(date + ' ' + startTime + ' ' + timezone).getTime();
   const timeEnd = new Date(date + ' ' + endTime + ' ' + timezone).getTime();
-  const difference = Math.floor((timeEnd - timeStart) / totalNumber);
+ return timeEnd - timeStart;
+}
+
+function getEndTime(date, startTime, endTime, totalNumber, number) {
+  const timezone = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
+  const timeStart = new Date(`${date} ${startTime } ${timezone}`).getTime();
+  const difference = Math.floor(getTimeDifference(date, startTime, endTime) / totalNumber);
   const result = new Date(timeStart + difference * number);
   return result.getHours() + ':' + result.getMinutes();
 }
 
 function getDuration(date, startTime, endTime) {
-  const timezone = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
-  const timeStart = new Date(date + ' ' + startTime + ' ' + timezone).getTime();
-  const timeEnd = new Date(date + ' ' + endTime + ' ' + timezone).getTime();
-  let difference = timeEnd - timeStart;
+  let difference = getTimeDifference(date, startTime, endTime);
   const hh = Math.floor(difference / 1000 / 60 / 60);
   difference -= hh * 1000 * 60 * 60;
   return {
