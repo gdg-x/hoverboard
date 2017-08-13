@@ -58,6 +58,10 @@ const dialogsActions = {
       type: CLOSE_DIALOG,
       dialogName
     });
+    this.dispatchEvent(new CustomEvent('reset-query-params', {
+      bubbles: true,
+      composed: true
+    }));
   }
 };
 
@@ -268,13 +272,13 @@ const userActions = {
 
   autoSignIn: (providerUrls) => {
     const currentUser = firebase.auth().currentUser;
-    if (currentUser) {      
+    if (currentUser) {
       helperActions.storeUser(currentUser);
     }
     else {
 
       if (navigator.credentials) {
-        
+
         return navigator.credentials.get({
           password: true,
           federated: {
@@ -345,7 +349,7 @@ const subscribeActions = {
 
 
 const helperActions = {
- 
+
   storeUser: (user) => {
     let userToStore = { signedIn: false };
 
@@ -362,15 +366,15 @@ const helperActions = {
 
   getFederatedProvider: (provider) => {
     switch(provider) {
-      case 'https://accounts.google.com': 
+      case 'https://accounts.google.com':
         return new firebase.auth.GoogleAuthProvider();
       case 'https://www.facebook.com': {
         let provider = new firebase.auth.FacebookAuthProvider();
         provider.addScope('email');
         provider.addScope('public_profile');
         return provider;
-      }       
-      case 'https://twitter.com': 
+      }
+      case 'https://twitter.com':
         return new firebase.auth.TwitterAuthProvider();
     }
   }

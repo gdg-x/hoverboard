@@ -11,6 +11,7 @@ const OPEN_DIALOG = 'OPEN_DIALOG';
 const CLOSE_DIALOG = 'CLOSE_DIALOG';
 const DIALOGS = {
   SPEAKER: 'speaker',
+  SESSION: 'session',
   SUBSCRIBE: 'subscribe',
   SIGNIN: 'signin'
 };

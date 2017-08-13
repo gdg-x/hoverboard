@@ -16,7 +16,7 @@
 <link rel="import" href="./text-truncate.html">
 <link rel="import" href="./shared-styles.html">
 
-<dom-module id="speaker-details">
+<dom-module id="session-details">
   <template>
     <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
 
@@ -120,13 +120,7 @@
         </app-toolbar>
 
         <app-toolbar class="header-content" layout horizontal center>
-          <plastic-image
-            class="photo"
-            srcset="[[speaker.photoUrl]]"
-            sizing="cover"
-            lazy-load preload fade
-          ></plastic-image>
-          <h2 class="name" flex>[[speaker.name]]</h2>
+          <h2 class="name" flex>[[session.title]]</h2>
           <paper-icon-button
             icon="hoverboard:close"
             on-tap="close"
@@ -136,49 +130,7 @@
       </app-header>
 
       <div class="content">
-        <ul class="content-list">
-          <li class="content-list-item" layout horizontal>
-            <iron-icon class="content-list-icon" icon="hoverboard:location"></iron-icon>
-            <div class="content-list-details" flex>[[speaker.country]]</div>
-          </li>
-          <li class="content-list-item" layout horizontal>
-            <iron-icon class="content-list-icon" icon="hoverboard:work"></iron-icon>
-            <div class="content-list-details" flex>[[speaker.title]], [[speaker.company]]</div>
-          </li>
-          <li class="content-list-item" hidden$="[[isEmpty(speaker.badges)]]" layout horizontal>
-            <iron-icon class="content-list-icon" icon="hoverboard:achievement"></iron-icon>
-            <div flex>
-              <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
-                <div class="content-list-details">
-                  <a
-                    class$="badge"
-                    href$="[[badge.link]]"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title$="[[badge.description]]"
-                  >
-                    [[badge.description]]
-                  </a>
-                </div>
-              </template>
-            </div>
-          </li>
-          <li class="content-list-item" layout horizontal>
-            <iron-icon class="content-list-icon" icon="hoverboard:document"></iron-icon>
-            <div class="content-list-details" flex>[[speaker.bio]]</div>
-          </li>
-        </ul>
-
-        <div class="contacts">
-          <template is="dom-repeat" items="[[speaker.socials]]" as="social">
-            <a href="[[social.link]]" target="_blank" rel="noopener noreferrer">
-              <paper-icon-button
-                class="social-icon"
-                icon="hoverboard:{{social.icon}}"
-              ></paper-icon-button>
-            </a>
-          </template>
-        </div>
+        [[session.description]]
       </div>
     </app-header-layout>
 
@@ -186,14 +138,14 @@
 
   <script>
 
-    class SpeakerDetails extends UtilsFunctions(ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element))) {
+    class SessionDetails extends UtilsFunctions(ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element))) {
       static get is() {
-        return 'speaker-details';
+        return 'session-details';
       }
 
       static get properties() {
         return {
-          speaker: {
+          session: {
             type: Object
           },
           viewport: {
@@ -210,22 +162,29 @@
 
       static get observers() {
         return [
-          '_handleClose(opened, speaker)'
+          '_handleClose(opened, session)'
         ];
       }
 
       _close() {
-        dialogsActions.closeDialog(DIALOGS.SPEAKER);
-        history.back();
+        dialogsActions.closeDialog(DIALOGS.SESSION);
+//        this.dispatchEvent(new CustomEvent('reset-query-params', {
+//          bubbles: true,
+//          composed: true
+//        }));
       }
 
-      _handleClose(opened, speaker) {
-        if (!opened && speaker && Object.keys(speaker).length) {
-          history.back();
+      _handleClose(opened, session) {
+        if (!opened && session && Object.keys(session).length) {
+          dialogsActions.closeDialog(DIALOGS.SESSION);
+//          this.dispatchEvent(new CustomEvent('reset-query-params', {
+//            bubbles: true,
+//            composed: true
+//          }));
         }
       }
     }
 
-    customElements.define(SpeakerDetails.is, SpeakerDetails);
+    customElements.define(SessionDetails.is, SessionDetails);
   </script>
 </dom-module>
