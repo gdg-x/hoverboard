@@ -261,6 +261,88 @@
       "title" : "Social media, website"
     } ],
     "title" : "Core Team"
+  }, {
+    "members" : [ {
+      "name" : "Artjoms Haleckis",
+      "photoUrl" : "/images/people/artjoms.png",
+      "socials" : [ {
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/haleckis/",
+        "name" : "Linkedin"
+      }, {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/crazyjooe",
+        "name" : "Twitter"
+      } ],
+      "title" : "Pipedrive"
+    }, {
+      "name" : "Romans Karpelcevs",
+      "photoUrl" : "/images/people/roman.png",
+      "socials" : [ {
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/romanskarpelcevs/",
+        "name" : "Linkedin"
+      }, {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/cvbk",
+        "name" : "Twitter"
+      } ],
+      "title" : "Pipedrive"
+    }, {
+      "name" : "Sergejs Luhmirins",
+      "photoUrl" : "/images/people/sergej_l.png",
+      "socials" : [ {
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/sergejs-luhmirins-61a58937/",
+        "name" : "Linkedin"
+      }],
+      "title" : "FullContact"
+    }, {
+      "name" : "Dmitrijs Beloborodovs",
+      "photoUrl" : "/images/people/dmitrijs.png",
+      "socials" : [ {
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/dmi3j",
+        "name" : "Linkedin"
+      }, {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/dmi3j",
+        "name" : "Twitter"
+      } ]
+    }, {
+      "name" : "Igors Nemenonoks",
+      "photoUrl" : "/images/people/igors.png",
+      "socials" : [ {
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/igors-nemenonoks-9b359330",
+        "name" : "Linkedin"
+      }],
+      "title" : "Chili Labs"
+    }, {
+      "name" : "Vilius Kraujutis",
+      "photoUrl" : "/images/people/vilius.png",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/viliusk",
+        "name" : "Twitter"
+      } ],
+      "title" : "GDG Vilnius"
+    }, {
+      "name" : "Sergii Zhuk",
+      "photoUrl" : "/images/people/sergii.png",
+      "socials" : [ {
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/sergiizhuk",
+        "name" : "Linkedin"
+      }, 
+      {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/sergiizhuk",
+        "name" : "Twitter"
+      }],
+      "title" : "Zalando SE"
+    } ],
+    "title" : "Program Committee"
   } ],
   "tickets" : {
     "elements" : [ {
