@@ -18,61 +18,61 @@
 
 <dom-module id="home-page">
 
-  <template>
+    <template>
 
-    <statistics-block app="{{app}}" cascaded></statistics-block>
-    <featured-people app="{{app}}" people="{{people}}" cascaded></featured-people>
-    <featured-videos app="{{app}}" cascaded></featured-videos>
-    <call-to-action app="{{app}}" cascaded></call-to-action>
-    <about-block app="{{app}}" cascaded></about-block>
-    <photo-block app="{{app}}" cascaded></photo-block>
-    <tickets-block app="{{app}}" cascaded></tickets-block>
-    <latest-posts app="{{app}}" posts="{{posts}}" cascaded></latest-posts>
-    <social-feed app="{{app}}" cascaded></social-feed>
-    <map-block app="{{app}}" selected="{{selected}}" cascaded></map-block>
-    <logos-block app="{{app}}" cascaded></logos-block>
-    <footer-block app="{{app}}" cascaded></footer-block>
+        <statistics-block app="{{app}}" cascaded></statistics-block>
+        <featured-people app="{{app}}" people="{{people}}" cascaded></featured-people>
+        <featured-videos app="{{app}}" cascaded></featured-videos>
+        <call-to-action app="{{app}}" cascaded></call-to-action>
+        <about-block app="{{app}}" cascaded></about-block>
+        <photo-block app="{{app}}" cascaded></photo-block>
+        <tickets-block app="{{app}}" cascaded></tickets-block>
+        <latest-posts app="{{app}}" posts="{{posts}}" cascaded></latest-posts>
+        <social-feed app="{{app}}" cascaded></social-feed>
+        <map-block app="{{app}}" selected="{{selected}}" cascaded></map-block>
+        <logos-block app="{{app}}" cascaded></logos-block>
+        <footer-block app="{{app}}" cascaded></footer-block>
 
-  </template>
+    </template>
 
-  <script>
-    (function () {
-      'use strict';
+    <script>
+        (function () {
+            'use strict';
 
-      Polymer({
+            Polymer({
 
-        is: 'home-page',
+                is: 'home-page',
 
-        behaviors: [
-          HOVERBOARD.PageBehavior,
-          HOVERBOARD.CascadedBehavior
-        ],
+                behaviors: [
+                    HOVERBOARD.PageBehavior,
+                    HOVERBOARD.CascadedBehavior
+                ],
 
-        properties: {
-          people: {
-            type: Array
-          },
+                properties: {
+                    people: {
+                        type: Array
+                    },
 
-          posts: {
-            type: Array
-          },
+                    posts: {
+                        type: Array
+                    },
 
-          logos: {
-            type: Array
-          },
+                    logos: {
+                        type: Array
+                    },
 
-          videos: {
-            type: Array
-          }
-        },
+                    videos: {
+                        type: Array
+                    }
+                },
 
-        ready: function() {
-          this.updateCascadedNodes();
-        }
+                ready: function () {
+                    this.updateCascadedNodes();
+                }
 
-      });
+            });
 
-    }());
-  </script>
+        }());
+    </script>
 
 </dom-module>
