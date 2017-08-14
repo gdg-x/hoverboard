@@ -71,20 +71,15 @@
   <link rel="dns-prefetch" href="https://apis.google.com">
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <script src="bower_components/firebase/firebase.js"></script>
   <script>
 
     window.ENV = '{$ environment $}';
     window.PREFIX = '{$ prefix $}';
 
-    // Register the base URL
-    const baseUrl = document.querySelector('base').href;
-
     // Load and register pre-caching Service Worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
-        navigator.serviceWorker.register(baseUrl + 'service-worker.js');
+        navigator.serviceWorker.register(`${document.querySelector('base').href}service-worker.js`);
       });
     }
 
