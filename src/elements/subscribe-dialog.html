@@ -131,7 +131,11 @@
         }
 
         static get properties() {
-            return {                
+            return {   
+                ui: {
+                    type: Object,
+                    statePath: 'ui'
+                },             
                 subscribed: {
                     type: Boolean,
                     statePath: 'subscribed'
@@ -144,9 +148,13 @@
                     type: Boolean,
                     value: false
                 },
+                keyboardOpened: {
+                    type: Boolean,
+                    value: false
+                },
                 lastName: String,
                 firstName: String,
-                email: String
+                initialHeight: Number
             }
         }  
 
@@ -155,12 +163,19 @@
                 '_handleDialogToggled(opened, data)',
                 '_handleSubscribed(subscribed)'
             ];
-        }  
+        } 
+
+        ready() {
+            super.ready();
+            this.initialHeight = window.innerHeight; 
+        } 
 
         constructor() {
-            super();                     
+            super();  
             this.addEventListener('iron-overlay-canceled', this._close);
-        }
+            this.addEventListener('iron-resize', this._resize);
+            window.addEventListener('resize', this._windowResize.bind(this));
+        } 
 
         _close() {
           dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
@@ -209,6 +224,24 @@
         _focus(e) {
              e.target.focus();
         }
+
+        _windowResize() {
+            this.keyboardOpened = this.ui.viewport.isPhone && window.innerHeight < this.initialHeight - 100;
+        }
+
+        _resize(e) {
+            if (this.keyboardOpened) {
+                const header = this.shadowRoot.querySelector('.dialog-header');
+                const headerHeight = header.offsetHeight;
+
+                setTimeout(() => {
+                    requestAnimationFrame(() => {
+                        this.style.maxHeight = `${this.initialHeight}px`;
+                        this.style.top = `-${headerHeight}px`; 
+                    });
+                }, 10);  
+            }            
+       }
     }
 
     customElements.define(SubscribeDialog.is, SubscribeDialog);
