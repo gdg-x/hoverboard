@@ -79,5 +79,14 @@
     "secondaryColor": "#7B1FA2",
     "image": "/images/posts/hotels.jpg",
     "brief": "We’ve partnered with several hotels to make your staying in Lviv the most comfortable and memorable. As our participant, you’ll get a discount for the DevFest dates."
+  },
+  {
+    "id": "platinum-sponsor-perfectial",
+    "title": "Meet our Platinum Sponsor - Perfectial",
+    "posted": "2017-08-15",
+    "primaryColor": "#B81F3C",
+    "secondaryColor": "#931E34",
+    "image": "/images/posts/perfectial-header.jpg",
+    "brief": "We are proud to introduce our Platinum Sponsor - one of the top software development companies from Ukraine - Perfectial."
   }
 ]
