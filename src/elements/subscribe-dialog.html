@@ -29,6 +29,7 @@
             color: #fff;
             font-size: 20px;
             line-height: 1.5;
+            margin-bottom: 32px;
         }
 
         paper-input {
@@ -37,13 +38,17 @@
         }
 
         paper-input:first-of-type {
-            margin-top: 24px;
+            margin-top: 0;
         }
 
         .action-buttons {
             padding: 0 12px;
             margin-top: 16px;
-            height: 80px;
+            height: 72px;
+        }
+
+        paper-button {
+            height: 48px;
         }
 
         .close-button {
@@ -56,7 +61,12 @@
 
         .subscribe-button:hover {
             color: var(--focused-color); 
-        }   
+        } 
+
+        .general-error {
+            color: var(--error-color);
+            margin: 0 32px;
+        }  
 
         @media (min-width: 640px) {  
 
@@ -66,11 +76,7 @@
 
             paper-input {
                 height: 56px;
-            }
-
-            paper-input:first-of-type {
-                margin-top: 32px;
-            }
+            }            
         }
 
      
@@ -78,6 +84,7 @@
 
     <div class="dialog-content" layout vertical>
         <div class="dialog-header">{$ subscribeBlock.formTitle $}</div>
+            <div hidden$="[[!errorOcurred]]" class="general-error">{$ subscribeBlock.generalError $}</div> 
             <paper-input id="firstNameInput"
                          on-touchend="_focus"
                          label="{$ subscribeBlock.firstName $}"
@@ -124,7 +131,11 @@
         }
 
         static get properties() {
-            return {                
+            return {   
+                ui: {
+                    type: Object,
+                    statePath: 'ui'
+                },             
                 subscribed: {
                     type: Boolean,
                     statePath: 'subscribed'
@@ -133,9 +144,17 @@
                     type: Boolean,
                     value: true
                 },
+                errorOcurred: {
+                    type: Boolean,
+                    value: false
+                },
+                keyboardOpened: {
+                    type: Boolean,
+                    value: false
+                },
                 lastName: String,
                 firstName: String,
-                email: String
+                initialHeight: Number
             }
         }  
 
@@ -144,12 +163,19 @@
                 '_handleDialogToggled(opened, data)',
                 '_handleSubscribed(subscribed)'
             ];
-        }  
+        } 
+
+        ready() {
+            super.ready();
+            this.initialHeight = window.innerHeight; 
+        } 
 
         constructor() {
-            super();                     
+            super();  
             this.addEventListener('iron-overlay-canceled', this._close);
-        }
+            this.addEventListener('iron-resize', this._resize);
+            window.addEventListener('resize', this._windowResize.bind(this));
+        } 
 
         _close() {
           dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
@@ -162,6 +188,10 @@
         }
 
         _handleDialogToggled(opened, data) {
+            if (data) {
+                this.errorOcurred = data.errorOcurred;
+            }
+
             this._prefillFields(data);
         }
 
@@ -194,6 +224,24 @@
         _focus(e) {
              e.target.focus();
         }
+
+        _windowResize() {
+            this.keyboardOpened = this.ui.viewport.isPhone && window.innerHeight < this.initialHeight - 100;
+        }
+
+        _resize(e) {
+            if (this.keyboardOpened) {
+                const header = this.shadowRoot.querySelector('.dialog-header');
+                const headerHeight = header.offsetHeight;
+
+                setTimeout(() => {
+                    requestAnimationFrame(() => {
+                        this.style.maxHeight = `${this.initialHeight}px`;
+                        this.style.top = `-${headerHeight}px`; 
+                    });
+                }, 10);  
+            }            
+       }
     }
 
     customElements.define(SubscribeDialog.is, SubscribeDialog);
