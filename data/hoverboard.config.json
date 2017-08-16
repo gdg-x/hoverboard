@@ -7,8 +7,8 @@
     "dev": "UA-79888667-1"
   },
   "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv"
+    "name": "GDG Cincinnati and GDG Columbus",
+    "twitter": "ohiodevfest"
   },
   "webapp": {
     "shortName": "DevFest",
@@ -99,11 +99,6 @@
         "backgroundImage": "/images/backgrounds/home.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff",
-        "video": {
-          "title": "GDG DevFest Ukraine 2016",
-          "youtubeId": "TdpbgRgz6eE",
-          "text": "See how it was in 2016"
-        },
         "hideLogo": true,
         "minHeight": "360px"
       }
@@ -141,7 +136,7 @@
       }
     },
     "cod": {
-      "title": "Cod of Conduct",
+      "title": "Code of Conduct",
       "headerSettings": {
         "backgroundColor": "#673ab7",
         "fontColor": "#fff",
