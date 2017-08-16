@@ -136,10 +136,13 @@
         <paper-card class="card">
           <div class="header paper-card">
             <div class="header-image" style$="background-image: url([[_currentImage]])"></div>
-            <div class="title-text">{$ locationTitle $}</div>
           </div>
           <div class="paper-card-container">
             <div class="card-content list">
+              <paper-icon-item disabled>
+                <iron-icon icon="" item-icon></iron-icon>
+                <paper-item-body><h2>{$ locationTitle $}</h2></paper-item-body>
+              </paper-icon-item>
               <paper-icon-item disabled>
                 <iron-icon icon="icons:feedback" item-icon></iron-icon>
                 <paper-item-body>{$ locationDescription $}</paper-item-body>
@@ -159,6 +162,7 @@
                  rel="noopener noreferrer"
               >
                 <paper-icon-button icon="icons:directions"></paper-icon-button>
+                Directions
               </a>
             </div>
           </div>

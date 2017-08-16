@@ -4,7 +4,7 @@
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
   "dates": "November 18th, 2017",
   "locationAddressShort": "Columbus, Ohio",
-  "motto": "Be a GDG. Be a Hero!",
+  "motto": "Ohio DevFest 2017",
   "playIcon": "See how it was in 2016",
   "c4p": "Become a speaker",
   "buyTicket": "Buy ticket",
@@ -14,7 +14,7 @@
   "subscribeNote": "No spam, only the latest news and updates!",
   "contactUs": "Contact us",
   "ticketsTitle": "Tickets",
-  "ticketsDetails": "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
+  "ticketsDetails": "Tickets grant access to all conference sessions, coffee breaks, and lunch. Accommodation is NOT included in the ticket price.",
   "close": "Close",
   "soldOutTickets": "Sold Out",
   "socialTitle": "Social",
@@ -112,7 +112,7 @@
   "teamPageText": "Ohio DevFest is a joint effort between GDG Cincinnati and GDG Columbus. We're just a few people that believe in the amazing capability of this region and want to give back to the community.",
   "statistics": [
     {
-      "counter": 200,
+      "counter": 150,
       "caption": "Attendees"
     },
     {
@@ -127,9 +127,5 @@
       "counter": 3,
       "caption": "Tracks"
     }
-  ],
-  "callToAction": {
-    "videoTitle": "Ohio DevFest 2017",
-    "videoId": "DfMnJAzOFng"
-  }
+  ]
 }
