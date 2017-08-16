@@ -91,6 +91,12 @@
 
     <div class="container">
       <h4 class="heading">{$ featuredPeopleTitle $}</h4>
+
+      <div class="c4p">Ohio DevFest 2017 is now accepting submissions for presentations!</div>
+      <a href="https://goo.gl/643T6A" class="block-link">
+        <paper-button class="primary" raised>Submit your presentation</paper-button>
+      </a>
+
       <div class="people-wrapper">
         <template is="dom-repeat" items="[[featuredPeople]]" as="person">
           <a href$="/speakers/[[person.id]]" class="person">
@@ -109,11 +115,11 @@
           </a>
         </template>
       </div>
-      <div>
+      <!-- <div>
         <a href="/speakers" class="block-link">
           <paper-button>{$ featuredPeopleViewAll $}</paper-button>
         </a>
-      </div>
+      </div> -->
     </div>
 
   </template>

@@ -35,8 +35,7 @@
   "hashtag": "ohiodevfest",
   "disqusShortName": "hoverboard-gdg-x",
   "tweetsSource": "/data/tweets.json",
-  "partnershipProposition": "http://bit.ly/df16-sponsor",
-  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
+  "partnershipProposition": "https://drive.google.com/file/d/0B-tskuDPl8JZZ0E2UDE0aGNtUlU/view",
   "enableSessionsRating": false,
   "navigation": [
     {
@@ -71,11 +70,11 @@
     "pointer": {
       "latitude": 40.122928,
       "longitude": -82.943200,
-      "zoom": 11
+      "zoom": 10
     },
     "mapCenter": {
       "latitude": 40.121928,
-      "longitude": -82.943200
+      "longitude": -82.70
     },
     "images": [
       "/images/backgrounds/location_1.jpg"
