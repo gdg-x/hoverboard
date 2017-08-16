@@ -1,0 +1,59 @@
+[ {
+  "name" : "Casey Borders",
+  "photoUrl" : "",
+  "socials" : {
+    "2" : {
+      "icon" : "twitter",
+      "link" : "https://twitter.com/ohiodevfest",
+      "name" : "Twitter"
+    }
+  },
+  "title" : "GDG Columbus Organizer"
+}, {
+  "name" : "Pete Gordon",
+  "photoUrl" : "",
+  "socials" : [ {
+    "icon" : "twitter",
+    "link" : "https://twitter.com/ohiodevfest",
+    "name" : "Twitter"
+  } ],
+  "title" : "GDG Columbus Organizer"
+}, {
+  "name" : "Patrick Hammond",
+  "photoUrl" : "",
+  "socials" : [ null, {
+    "icon" : "twitter",
+    "link" : "https://twitter.com/patrickhammond",
+    "name" : "Twitter"
+  } ],
+  "title" : "GDG Cincinnati Organizer"
+}, {
+  "name" : "James Power",
+  "photoUrl" : "",
+  "socials" : [ {
+    "icon" : "twitter",
+    "link" : "https://asdf",
+    "name" : "Twitter"
+  } ],
+  "title" : "GDG Columbus Organizer"
+}, {
+  "name" : "Greg Williams",
+  "photoUrl" : "",
+  "socials" : {
+    "2" : {
+      "icon" : "twitter",
+      "link" : "https://twitter.com/g_willi",
+      "name" : "Twitter"
+    }
+  },
+  "title" : "GDG Cincinnati Organizer"
+}, {
+  "name" : "David Straight",
+  "photoUrl" : "",
+  "socials" : [ {
+    "icon" : "twitter",
+    "link" : "https://twitter.com/davidstr8",
+    "name" : "Twitter"
+  } ],
+  "title" : "Logo Design"
+} ]
