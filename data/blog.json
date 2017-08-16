@@ -88,5 +88,14 @@
     "secondaryColor": "#931E34",
     "image": "/images/posts/perfectial-header.jpg",
     "brief": "We are proud to introduce our Platinum Sponsor - one of the top software development companies from Ukraine - Perfectial."
+  },
+  {
+    "id": "what-to-do-in-lviv",
+    "title": "How to get to Lviv and what to do afterwards",
+    "posted": "2017-08-16",
+    "primaryColor": "#304FFE",
+    "secondaryColor": "#536DFE",
+    "image": "/images/posts/lviv-background.jpg",
+    "brief": "For the 4th time GDG DevFest Ukraine will take place in Lviv. So what exactly is Lviv and what so special about it?"
   }
 ]
