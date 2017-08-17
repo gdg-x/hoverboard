@@ -10,123 +10,122 @@
 
 <dom-module id="photo-block">
 
-  <template>
+    <template>
+        <style include="shared-styles">
+            :host {
+                display: block;
+            }
 
-    <style include="shared-styles">
-      :host {
-        display: block;
-      }
+            iron-image {
+                @apply(--layout-fit);
+            }
 
-      iron-image {
-        @apply(--layout-fit);
-      }
+            .photo-wrapper {
+                @apply(--layout-horizontal);
+                height: 200px;
+            }
 
-      .photo-wrapper {
-        @apply(--layout-horizontal);
-        height: 200px;
-      }
+            .photo {
+                @apply(--layout-flex);
+                position: relative;
+            }
 
-      .photo {
-        @apply(--layout-flex);
-        position: relative;
-      }
+            .photo:not(:first-of-type) {
+                display: none;
+            }
 
-      .photo:not(:first-of-type) {
-        display: none;
-      }
+            .vertical-block {
+                @apply(--layout-vertical);
+                @apply(--layout-flex);
+            }
 
-      .vertical-block {
-        @apply(--layout-vertical);
-        @apply(--layout-flex);
-      }
+            .open-photos {
+                @apply(--layout-vertical);
+                @apply(--layout-center-center);
+                @apply(--layout-fit);
+                padding: 16px;
+                background: rgba(0, 0, 0, .3);
+                color: #fff;
+                font-size: 21px;
+                opacity: 0;
+                transition: opacity .3s;
+                text-align: center;
+            }
 
-      .open-photos {
-        @apply(--layout-vertical);
-        @apply(--layout-center-center);
-        @apply(--layout-fit);
-        padding: 16px;
-        background: rgba(0, 0, 0, .3);
-        color: #fff;
-        font-size: 21px;
-        opacity: 0;
-        transition: opacity .3s;
-        text-align: center;
-      }
+            .open-photos:hover {
+                opacity: 1;
+                cursor: pointer;
+            }
 
-      .open-photos:hover {
-        opacity: 1;
-        cursor: pointer;
-      }
+            @media (min-width: 601px) {
+                .photo-wrapper {
+                    height: 500px;
+                }
 
-      @media (min-width: 601px) {
-        .photo-wrapper {
-          height: 500px;
-        }
+                .big {
+                    @apply(--layout-flex-2);
+                }
 
-        .big {
-          @apply(--layout-flex-2);
-        }
+                .photo:not(:first-of-type) {
+                    display: flex;
+                }
+            }
+        </style>
 
-        .photo:not(:first-of-type) {
-          display: flex;
-        }
-      }
-    </style>
-
-    <div class="photo-wrapper">
-      <div class="photo big">
-        <iron-image
-          class="placeholder-color"
-          src="{$ gallery.photos.big $}"
-          sizing="cover"
-          preload fade
-        ></iron-image>
-        <a class="open-photos" href="{$ gallery.albumUrl $}" target="_blank" rel="noopener noreferrer">
-          <paper-ripple></paper-ripple>
-          <span>{$ clickToViewPhotos $} <iron-icon icon="open-in-new"/></span>
-        </a>
-      </div>
-      <div class="vertical-block">
-        <div class="photo">
-          <iron-image
-            class="placeholder-color"
-            src="{$ gallery.photos.small[0] $}"
-            sizing="cover"
-            preload fade
-          ></iron-image>
-          <a class="open-photos" href="{$ gallery.albumUrl $}" target="_blank" rel="noopener noreferrer">
-            <paper-ripple></paper-ripple>
-            <span>{$ clickToViewPhotos $} <iron-icon icon="open-in-new"/></span>
-          </a>
+        <div class="photo-wrapper">
+            <div class="photo big">
+                <iron-image
+                        class="placeholder-color"
+                        src="{$ gallery.photos.big $}"
+                        sizing="cover"
+                        preload fade
+                ></iron-image>
+                <a class="open-photos" href="{$ gallery.albumUrl $}" target="_blank" rel="noopener noreferrer">
+                    <paper-ripple></paper-ripple>
+                    <span>{$ clickToViewPhotos $} <iron-icon icon="open-in-new"/></span>
+                </a>
+            </div>
+            <div class="vertical-block">
+                <div class="photo">
+                    <iron-image
+                            class="placeholder-color"
+                            src="{$ gallery.photos.small[0] $}"
+                            sizing="cover"
+                            preload fade
+                    ></iron-image>
+                    <a class="open-photos" href="{$ gallery.albumUrl $}" target="_blank" rel="noopener noreferrer">
+                        <paper-ripple></paper-ripple>
+                        <span>{$ clickToViewPhotos $} <iron-icon icon="open-in-new"/></span>
+                    </a>
+                </div>
+                <div class="photo">
+                    <iron-image
+                            class="placeholder-color"
+                            src="{$ gallery.photos.small[1] $}"
+                            sizing="cover"
+                            preload fade
+                    ></iron-image>
+                    <a class="open-photos" href="{$ gallery.albumUrl $}" target="_blank" rel="noopener noreferrer">
+                        <paper-ripple></paper-ripple>
+                        <span>{$ clickToViewPhotos $} <iron-icon icon="open-in-new"/></span>
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="photo">
-          <iron-image
-            class="placeholder-color"
-            src="{$ gallery.photos.small[1] $}"
-            sizing="cover"
-            preload fade
-          ></iron-image>
-          <a class="open-photos" href="{$ gallery.albumUrl $}" target="_blank" rel="noopener noreferrer">
-            <paper-ripple></paper-ripple>
-            <span>{$ clickToViewPhotos $} <iron-icon icon="open-in-new"/></span>
-          </a>
-        </div>
-      </div>
-    </div>
 
-  </template>
+    </template>
 
-  <script>
-    (function () {
-      'use strict';
+    <script>
+        (function () {
+            'use strict';
 
-      Polymer({
+            Polymer({
 
-        is: 'photo-block'
+                is: 'photo-block'
 
-      });
+            });
 
-    }());
-  </script>
+        }());
+    </script>
 
 </dom-module>
