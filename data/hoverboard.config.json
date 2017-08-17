@@ -79,22 +79,22 @@
   ],
   "location": {
     "apiKey": "",
-    "name": "Pivdennyi Expo Center",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
-    "link": "https://www.facebook.com/expopivdennij",
+    "name": "Technische Universität Berlin",
+    "address": "Straße des 17. Juni 135, 10623 Berlin, Germany",
+    "link": "http://www.tu-berlin.de",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
+      "latitude": 52.5131105,
+      "longitude": 13.3259064,
       "zoom": 15
     },
     "mapCenter": {
-      "latitude": 49.809841,
-      "longitude": 23.982805
+      "latitude": 52.5131105,
+      "longitude": 13.3259064
     },
     "images": [
-      "/images/backgrounds/location_1.jpg",
-      "/images/backgrounds/location_2.jpg",
-      "/images/backgrounds/location_3.jpg"
+      "/images/backgrounds/tu_1.jpg",
+      "/images/backgrounds/tu_2.jpg",
+      "/images/backgrounds/tu_3.jpg"
     ]
   },
   "gallery": {
