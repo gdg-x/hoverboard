@@ -128,13 +128,13 @@
                         <div class="home-wrapper">
                             <iron-image class="logo" src="/images/logo-light.svg" sizing="contain" alt="GDG DevFest Berlin 2017"></iron-image>
                             <h3 class="dates">{$ dates $}</h3>
-                            <h2 class="motto">{$ motto $}</h2>
-                            <div class="open-video" on-tap="_openVideo">
-                                <iron-icon icon="play"></iron-icon>
-                                {$ playIcon $}
-                            </div>
+                            <!--<h2 class="motto">{$ motto $}</h2>-->
+                            <!--<div class="open-video" on-tap="_openVideo">-->
+                                <!--<iron-icon icon="play"></iron-icon>-->
+                                <!--{$ playIcon $}-->
+                            <!--</div>-->
                             <div class="action-buttons">
-                                <paper-button class="primary" on-tap="_scrollToTickets" raised>{$ buyTicket $}</paper-button>
+                                <a href="#"><paper-button class="primary" on-tap="_scrollToTickets" raised>{$ homePageCfpButton $}</paper-button></a>
                             </div>
                         </div>
                     </div>

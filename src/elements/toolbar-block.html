@@ -16,234 +16,234 @@
 
 <dom-module id="toolbar-block">
 
-  <template>
+    <template>
 
-    <style include="shared-styles">
-      :host {
-        --header-color: #fff;
-        --paper-menu-button-dropdown-background: #fff;
+        <style include="shared-styles">
+            :host {
+                --header-color: #fff;
+                --paper-menu-button-dropdown-background: #fff;
 
-        --paper-tabs: {
-          height: 64px;
-        };
-        --iron-icon-fill-color: var(--header-color);
-        --paper-tabs-selection-bar-color: var(--header-color);
+                --paper-tabs: {
+                    height: 64px;
+                };
+                --iron-icon-fill-color: var(--header-color);
+                --paper-tabs-selection-bar-color: var(--header-color);
 
-        display: block;
-        position: relative;
-        color: var(--header-color);
-      }
+                display: block;
+                position: relative;
+                color: var(--header-color);
+            }
 
-      .logo-wrapper {
-        @apply(--layout-flex);
-      }
+            .logo-wrapper {
+                @apply(--layout-flex);
+            }
 
-      .logo {
-        margin-top: 7px;
-        height: 40px;
-        width: 130px;
-      }
+            .logo {
+                margin-top: 7px;
+                height: 40px;
+                width: 130px;
+            }
 
-      iron-image {
-        background-color: transparent;
-      }
+            iron-image {
+                background-color: transparent;
+            }
 
-      paper-tabs a {
-        color: var(--header-color);
-        transition: color .7s
-      }
+            paper-tabs a {
+                color: var(--header-color);
+                transition: color .7s
+            }
 
-      paper-tab {
-        flex: none;
-        padding: 0 10px;
-        text-transform: uppercase;
-      }
+            paper-tab {
+                flex: none;
+                padding: 0 10px;
+                text-transform: uppercase;
+            }
 
-      .nav-link {
-        @apply(--layout-horizontal);
-        @apply(--layout-center-center);
-        height: 100%;
-        text-transform: uppercase;
-      }
+            .nav-link {
+                @apply(--layout-horizontal);
+                @apply(--layout-center-center);
+                height: 100%;
+                text-transform: uppercase;
+            }
 
-      .action-button-wrapper {
-        margin-left: 16px;
-      }
+            .action-button-wrapper {
+                margin-left: 16px;
+            }
 
-      .action-button {
-        color: var(--header-background);
-        background: var(--header-color);
-        font-size: 13px;
-      }
+            .action-button {
+                color: var(--header-background);
+                background: var(--header-color);
+                font-size: 13px;
+            }
 
-      .signin-tab {
-        --paper-tab-content-unselected: {
-          opacity: 1;
-        };
-        height: 64px;
-        font-size: 14px;
-        font-weight: 500;
-      }
+            .signin-tab {
+                --paper-tab-content-unselected: {
+                    opacity: 1;
+                };
+                height: 64px;
+                font-size: 14px;
+                font-weight: 500;
+            }
 
-      .auth-menu[phoneSize] {
-        padding: 0;
-        transform: translateY(-16px);
-      }
+            .auth-menu[phoneSize] {
+                padding: 0;
+                transform: translateY(-16px);
+            }
 
-      .profile-image {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        background-position: center;
-        background-size: cover;
-      }
+            .profile-image {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                background-position: center;
+                background-size: cover;
+            }
 
-      .signin-panel {
-        background: #fff;
-        color: var(--text-primary-color);
-      }
+            .signin-panel {
+                background: #fff;
+                color: var(--text-primary-color);
+            }
 
-      .profile-details {
-        padding: 16px;
-        border-bottom: 1px solid var(--divider-color);
-      }
+            .profile-details {
+                padding: 16px;
+                border-bottom: 1px solid var(--divider-color);
+            }
 
-      .profile-details .profile-image {
-        margin-right: 16px;
-        width: 48px;
-        height: 48px;
-      }
+            .profile-details .profile-image {
+                margin-right: 16px;
+                width: 48px;
+                height: 48px;
+            }
 
-      .profile-name,
-      .profile-email {
-        font-size: 14px;
-        display: block;
-        white-space: nowrap;
-        color: var(--secondary-text-color);
-      }
+            .profile-name,
+            .profile-email {
+                font-size: 14px;
+                display: block;
+                white-space: nowrap;
+                color: var(--secondary-text-color);
+            }
 
-      .profile-action {
-        margin-top: 4px;
-        text-transform: uppercase;
-        color: var(--default-primary-color);
-        font-size: 14px;
-        cursor: pointer;
-      }
-    </style>
+            .profile-action {
+                margin-top: 4px;
+                text-transform: uppercase;
+                color: var(--default-primary-color);
+                font-size: 14px;
+                cursor: pointer;
+            }
+        </style>
 
-    <app-toolbar id="mainToolbar">
-      <div class="navItem leftItem" hidden$="{{!app.isPhoneSize}}">
-        <paper-icon-button icon="menu" on-tap="togglePanel"></paper-icon-button>
-      </div>
-      <div class="logo-wrapper">
-        <a href="/" hidden$="{{hideLogo}}" fade>
-          <iron-image
-            class="logo"
-            src="/images/logo-white.svg"
-            sizing="contain"
-            alt="{$ title $}"
-          ></iron-image>
-        </a>
-      </div>
-      <div class="navItem" layout horizontal self-end>
-        <template is="dom-if" if="[[!app.isPhoneSize]]">
-          <paper-tabs selected="[[app.page]]" attr-for-selected="name" noink>
-            {% for nav in navigation %}
-              <paper-tab name="{$ nav.route $}" link>
-                <a href="{$ nav.permalink $}" class="nav-link">{$ pages[nav.route].title $}</a>
-              </paper-tab>
-            {% endfor %}
-          </paper-tabs>
-        </template>
-
-        <paper-tab class="signin-tab" on-tap="signIn" hidden$="[[app.user]]">{$ signIn $}</paper-tab>
-
-        <paper-menu-button
-          class="auth-menu"
-          hidden$="[[!app.user]]"
-          vertical-align="top"
-          horizontal-align="right"
-          phoneSize$="[[app.isPhoneSize]]"
-          layout horizontal center-center
-        >
-          <div
-            class="profile-image dropdown-trigger"
-            style="background-image: url('[[app.user.photoURL]]')"
-          ></div>
-          <div class="signin-panel dropdown-content">
-            <div class="profile-details" layout horizontal>
-              <div
-                class="profile-image dropdown-trigger"
-                style="background-image: url('[[app.user.photoURL]]')"
-              ></div>
-              <div layout vertical center-justified>
-                <span class="profile-name">[[app.user.displayName]]</span>
-                <span class="profile-email">[[app.user.email]]</span>
-                <span class="profile-action" role="button" on-tap="signOut">{$ signOut $}</span>
-              </div>
+        <app-toolbar id="mainToolbar">
+            <div class="navItem leftItem" hidden$="{{!app.isPhoneSize}}">
+                <paper-icon-button icon="menu" on-tap="togglePanel"></paper-icon-button>
             </div>
-          </div>
-        </paper-menu-button>
+            <div class="logo-wrapper">
+                <a href="/" hidden$="{{hideLogo}}" fade>
+                    <iron-image
+                            class="logo"
+                            src="/images/logo-white.svg"
+                            sizing="contain"
+                            alt="{$ title $}"
+                    ></iron-image>
+                </a>
+            </div>
+            <div class="navItem" layout horizontal self-end>
+                <template is="dom-if" if="[[!app.isPhoneSize]]">
+                    <paper-tabs selected="[[app.page]]" attr-for-selected="name" noink>
+                        {% for nav in navigation %}
+                        <paper-tab name="{$ nav.route $}" link>
+                            <a href="{$ nav.permalink $}" class="nav-link">{$ pages[nav.route].title $}</a>
+                        </paper-tab>
+                        {% endfor %}
+                    </paper-tabs>
+                </template>
 
-        <div class="action-button-wrapper" hidden$="[[app.isPhoneSize]]" layout horizontal center-center>
-          <a href="{$ tickets.url $}" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
-            <paper-button class="action-button">{$ buyTicket $}</paper-button>
-          </a>
-        </div>
-      </div>
-    </app-toolbar>
+                <!--<paper-tab class="signin-tab" on-tap="signIn" hidden$="[[app.user]]">{$ signIn $}</paper-tab>-->
 
-  </template>
+                <paper-menu-button
+                        class="auth-menu"
+                        hidden$="[[!app.user]]"
+                        vertical-align="top"
+                        horizontal-align="right"
+                        phoneSize$="[[app.isPhoneSize]]"
+                        layout horizontal center-center
+                >
+                    <div
+                            class="profile-image dropdown-trigger"
+                            style="background-image: url('[[app.user.photoURL]]')"
+                    ></div>
+                    <div class="signin-panel dropdown-content">
+                        <div class="profile-details" layout horizontal>
+                            <div
+                                    class="profile-image dropdown-trigger"
+                                    style="background-image: url('[[app.user.photoURL]]')"
+                            ></div>
+                            <div layout vertical center-justified>
+                                <span class="profile-name">[[app.user.displayName]]</span>
+                                <span class="profile-email">[[app.user.email]]</span>
+                                <span class="profile-action" role="button" on-tap="signOut">{$ signOut $}</span>
+                            </div>
+                        </div>
+                    </div>
+                </paper-menu-button>
 
-  <script>
-    (function () {
-      'use strict';
+                <!--<div class="action-button-wrapper" hidden$="[[app.isPhoneSize]]" layout horizontal center-center>-->
+                <!--<a href="{$ tickets.url $}" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">-->
+                <!--<paper-button class="action-button">{$ buyTicket $}</paper-button>-->
+                <!--</a>-->
+                <!--</div>-->
+            </div>
+        </app-toolbar>
 
-      Polymer({
+    </template>
 
-        is: 'toolbar-block',
+    <script>
+        (function () {
+            'use strict';
 
-        behaviors: [
-          HOVERBOARD.UtilsBehavior
-        ],
+            Polymer({
 
-        properties: {
-          hideLogo: {
-            type: Boolean
-          }
-        },
+                is: 'toolbar-block',
 
-        observers: [
-          '_stylesChanged(app.headerSettings)'
-        ],
+                behaviors: [
+                    HOVERBOARD.UtilsBehavior
+                ],
 
-        togglePanel: function () {
-          HOVERBOARD.Elements.Template.toggleDrawer();
-        },
+                properties: {
+                    hideLogo: {
+                        type: Boolean
+                    }
+                },
 
-        signIn: function () {
-          HOVERBOARD.Elements.Template.signIn();
-        },
+                observers: [
+                    '_stylesChanged(app.headerSettings)'
+                ],
 
-        signOut: function () {
-          HOVERBOARD.Elements.Template.signOut();
-        },
+                togglePanel: function () {
+                    HOVERBOARD.Elements.Template.toggleDrawer();
+                },
 
-        _stylesChanged: function (headerSettings) {
-          if (headerSettings) {
-            this.customStyle['--header-color'] = headerSettings.fontColor;
-            this.hideLogo = headerSettings.hideLogo;
-            this.updateStyles();
-          }
-        },
+                signIn: function () {
+                    HOVERBOARD.Elements.Template.signIn();
+                },
 
-        _trackBuyClick: function () {
-          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'toolbar');
-        }
+                signOut: function () {
+                    HOVERBOARD.Elements.Template.signOut();
+                },
 
-      });
+                _stylesChanged: function (headerSettings) {
+                    if (headerSettings) {
+                        this.customStyle['--header-color'] = headerSettings.fontColor;
+                        this.hideLogo = headerSettings.hideLogo;
+                        this.updateStyles();
+                    }
+                },
 
-    }());
-  </script>
+                _trackBuyClick: function () {
+                    HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'toolbar');
+                }
+
+            });
+
+        }());
+    </script>
 
 </dom-module>
