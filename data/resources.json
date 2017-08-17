@@ -24,7 +24,7 @@
   "clickToViewPhotos": "Click here to view more photos",
   "partners": "Partners",
   "becomePartner": "Become a partner",
-  "featuredVideosTitle": "Featured #DFUA '15 Sessions",
+  "featuredVideosTitle": "Featured #DevFest17 '15 Sessions",
   "featuredVideosViewAll": "View all videos",
   "featuredPeopleTitle": "Speakers",
   "featuredPeopleViewAll": "View all speakers",
@@ -33,10 +33,10 @@
   "locationDescription": "The internationally renowned Technische Universität Berlin is located in Germany’s capital city at the heart of Europe.",
   "locationAddress": "Straße des 17. Juni 135",
   "organizerTitle": "Organizer",
-  "aboutOrganizers": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
+  "aboutOrganizers": "Organisers of this event are _GDG Android_ and _Women Techmakers Berlin_.",
   "openTeamPage": "Open team page",
   "whatIsGdg": "What is GDG?",
-  "aboutGdg": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion",
+  "aboutGdg": "<b>Google Developers Group (GDG)</b> - is a open group of people who use technologies & software developed by Google. <br/>It is composed of 2 sub-groups:<br/>• [**GDG Berlin**](http://gdg-berlin.org/) <br/>• [**Women Techmakers Berlin**](https://www.facebook.com/WomenTechmakersBerlinPage)",
   "readMore": "Read more",
   "copyLink": "Copy link",
   "filteredBy": "filtered by",
@@ -61,51 +61,56 @@
   "rateSession": "Rate session",
   "footerBlocks": [
     {
-      "title": "For visitors",
+      "title": "Links",
       "links": [
-        {
-          "text": "Team",
-          "url": "/team/",
-          "newTab": false
-        },
         {
           "text": "Code of Conduct",
           "url": "/cod/",
           "newTab": false
         },
         {
+          "text": "GDG Berlin Meetup",
+          "url": "https://www.meetup.com/gdg-berlin/",
+          "newTab": true
+        },
+        {
+          "text": "GDG Berlin",
+          "url": "http://gdg-berlin.org/",
+          "newTab": true
+        },
+        {
+          "text": "GDG Berlin Android Meetup",
+          "url": "https://www.meetup.com/GDG-Berlin-Android/",
+          "newTab": true
+        },
+        {
+          "text": "GDG Berlin Golang Meetup",
+          "url": "https://www.meetup.com/golang-users-berlin/",
+          "newTab": true
+        },
+        {
           "text": "Google Developers",
           "url": "https://developers.google.com/",
-          "newTab": true
-        },
-        {
-          "text": "GDG DevFest Ukraine 2013",
-          "url": "http://gdg-devfest-ua.appspot.com/",
-          "newTab": true
-        },
-        {
-          "text": "GDG DevFest Ukraine 2014",
-          "url": "http://devfest.gdg.org.ua/2014/",
-          "newTab": true
-        },
-        {
-          "text": "GDG DevFest Ukraine 2015",
-          "url": "http://devfest.gdg.org.ua/2015/",
           "newTab": true
         }
       ]
     },
     {
-      "title": "For Partners",
+      "title": "Previous DevFests",
       "links": [
         {
-          "text": "Partnership Proposition",
-          "url": "http://bit.ly/df16-sponsor",
+          "text": "GDG DevFest Berlin 2014",
+          "url": "https://2014.devfest-berlin.de",
           "newTab": true
         },
         {
-          "text": "Media Kit",
-          "url": "http://bit.ly/df16-media",
+          "text": "GDG DevFest Berlin 2015",
+          "url": "https://2015.devfest-berlin.de",
+          "newTab": true
+        },
+        {
+          "text": "GDG DevFest Berlin 2016",
+          "url": "https://2016.devfest-berlin.de",
           "newTab": true
         }
       ]
@@ -114,8 +119,8 @@
   "contactBlock": {
     "links": [
       {
-        "text": "devfest@google.com",
-        "url": "mailto:devfest@google.com"
+        "text": "team@devfest-berlin.de",
+        "url": "mailto:team@devfest-berlin.de"
       }
     ]
   },
