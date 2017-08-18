@@ -80,7 +80,10 @@ self.addEventListener('message', ({ data }) => {
             endTime,
             duration: getDuration(dayKey, startTime, endTime),
             dateReadable: day.dateReadable,
-            speakers: subsession.speakers ? subsession.speakers.map(speakerId => speakers[speakerId]) : []
+            speakers: subsession.speakers ? subsession.speakers.map(speakerId => ({
+              id: speakerId,
+              ...speakers[speakerId]
+            })) : []
           };
 
           subsessions.push(finalSubsession);

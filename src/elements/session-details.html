@@ -4,7 +4,7 @@
 <link rel="import" href="../../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
 <link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 
-<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
 
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
@@ -28,6 +28,7 @@
         height: 100%;
         width: 100%;
         background: #fff;
+        color: var(--primary-text-color);
         box-shadow: var(--box-shadow);
       }
 
@@ -35,56 +36,96 @@
         background-color: var(--additional-background-color);
       }
 
-      .header-toolbar {
-        padding: 8px 0;
-        border-bottom: 1px solid var(--border-light-color);
-        color: var(--secondary-text-color);
+      app-toolbar {
+        padding: 0;
         height: auto;
       }
 
-      .photo {
-        margin-right: 16px;
-        width: 72px;
-        height: 72px;
-        background-color: var(--contrast-additional-background-color);
-        border: 5px solid var(--contrast-additional-background-color);
-        border-radius: 50%;
-        transform: translateZ(0);
+      .dialog-container {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 584px;
+      }
+
+      .close-icon {
+        margin: 16px;
+        cursor: pointer;
+      }
+
+      .header-content,
+      .content {
+        padding: 24px;
       }
 
       .header-content {
-        padding: 16px 8px;
-        height: auto;
+        min-height: 160px;
+        position: relative;
       }
 
       .name {
-        line-height: 1.1;
+        line-height: 1.2;
+      }
+
+      .tag {
+        margin-top: 8px;
+      }
+
+      .float-button {
+        position: absolute;
+        right: 24px;
+        bottom: 0;
+        transform: translateY(50%);
       }
 
       .content {
-        padding: 24px 16px;
+        font-size: 15px;
+        line-height: 1.87;
       }
 
-      .content-list {
-        margin: 0;
-        padding: 0;
-        color: var(--secondary-text-color);
+      .meta-info {
+        line-height: 1.6;
       }
 
-      .content-list-details {
-        margin-bottom: 16px;
+      .description {
+        margin: 24px 0 40px;
       }
 
-      .content-list-icon {
-        margin: 2px 43px 0 19px;
-        --iron-icon-width: 18px;
-        --iron-icon-height: 18px;
+      .action {
+        color: var(--primary-text-color);
       }
 
-      .contacts {
-        margin-top: 8px;
-        margin-left: 80px;
-        --iron-icon-fill-color: var(--secondary-text-color);
+      .action iron-icon {
+        margin-right: 4px;
+      }
+
+      .speakers {
+        margin-top: 32px;
+      }
+
+      .speaker {
+        margin-top: 16px;
+        display: block;
+        color: var(--primary-text-color);
+      }
+
+      .speaker-photo {
+        margin-right: 12px;
+        width: 48px;
+        height: 48px;
+        background-color: var(--secondary-background-color);
+        border-radius: 50%;
+        overflow: hidden;
+        transform: translateZ(0);
+      }
+
+      .speaker-name {
+        margin-bottom: 4px;
+        line-height: 1.2;
+      }
+
+      .speaker-title {
+        font-size: 12px;
+        line-height: 1;
       }
 
       @media (min-width: 812px) {
@@ -93,8 +134,11 @@
           width: 800px;
         }
 
-        .header-toolbar {
-          padding: 16px 0;
+        .close-icon {
+          position: absolute;
+          top: -8px;
+          right: -48px;
+          --iron-icon-fill-color: #fff;
         }
 
         .header-content,
@@ -102,8 +146,14 @@
           padding: 24px;
         }
 
-        .content-list-icon {
-          margin-left: 27px;
+        .header-content {
+          min-height: 224px;
+        }
+
+        .float-button {
+          right: 0;
+          bottom: 0;
+          transform: translate(50%, 50%);
         }
       }
 
@@ -111,26 +161,72 @@
 
     <app-header-layout has-scrolling-region fit>
       <app-header slot="header" class="header" fixed effects="waterfall">
-
-        <app-toolbar class="header-toolbar" hidden$="[[viewport.isTabletPlus]]">
-          <paper-icon-button
-            icon="hoverboard:close"
-            on-tap="close"
-          ></paper-icon-button>
-        </app-toolbar>
-
-        <app-toolbar class="header-content" layout horizontal center>
-          <h2 class="name" flex>[[session.title]]</h2>
-          <paper-icon-button
-            icon="hoverboard:close"
-            on-tap="close"
-            hidden$="[[viewport.isPhone]]"
-          ></paper-icon-button>
+        <iron-icon
+          class="close-icon"
+          icon="hoverboard:close"
+          on-tap="close"
+        ></iron-icon>
+        <app-toolbar>
+          <div class="dialog-container header-content" layout vertical end-justified>
+            <h2 class="name">[[session.title]]</h2>
+            <div class="tags" hidden$="[[!session.tags.length]]">
+              <template is="dom-repeat" items="[[session.tags]]" as="tag">
+                <span class="tag" style$="color: [[_getTagColor(tag)]]">[[tag]]</span>
+              </template>
+            </div>
+            <paper-fab
+              class="float-button"
+              icon="hoverboard:bookmark-plus"
+              session-id$="[[session.id]]"
+            ></paper-fab>
+          </div>
         </app-toolbar>
       </app-header>
 
-      <div class="content">
-        [[session.description]]
+      <div class="dialog-container content">
+        <h3 class="meta-info">[[session.dateReadable]], [[session.startTime]] - [[session.endTime]]</h3>
+        <h3 class="meta-info">[[session.track.title]]</h3>
+        <h3 class="meta-info" hidden$="[[!session.complexity]]">{$ sessionDetails.contentLevel $}: [[session.complexity]]</h3>
+
+        <marked-element class="description" markdown="[[session.description]]">
+          <div class="markdown-html"></div>
+        </marked-element>
+
+        <div class="actions">
+          <a
+            class="action"
+            href$="[[session.presentation]]"
+            hidden$="[[!session.presentation]]"
+            target="_blank"
+            rel="noopener noreferrer"
+            layout horizontal center-aligned
+          >
+              <iron-icon icon="hoverboard:presentation"></iron-icon>
+              {$ sessionDetails.viewPresentation $}
+          </a>
+        </div>
+
+        <div class="speakers" hidden$="[[!session.speakers.length]]">
+          <h3>{$ sessionDetails.speakers $}</h3>
+
+          <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
+            <a href$="/speakers/[[speaker.id]]" class="speaker" on-tap="close">
+              <div layout horizontal center>
+                <plastic-image
+                  class="speaker-photo"
+                  srcset="[[speaker.photoUrl]]"
+                  sizing="cover"
+                  lazy-load preload fade
+                ></plastic-image>
+
+                <div class="speaker-details" flex>
+                  <div class="speaker-name">[[speaker.name]]</div>
+                  <div class="speaker-title">[[speaker.company]] / [[speaker.country]]</div>
+                </div>
+              </div>
+            </a>
+          </template>
+        </div>
       </div>
     </app-header-layout>
 
@@ -182,6 +278,13 @@
 //            composed: true
 //          }));
         }
+      }
+
+      _getTagColor(value) {
+        if (ShadyCSS) {
+          return ShadyCSS.getComputedStyleValue(this, `--${this.generateClassName(value)}`);
+        }
+        return getComputedStyle(this, `--${this.generateClassName(value)}`);
       }
     }
 
