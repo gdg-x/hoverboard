@@ -9,6 +9,7 @@ const SET_HERO = 'SET_HERO';
 // dialogs
 const OPEN_DIALOG = 'OPEN_DIALOG';
 const CLOSE_DIALOG = 'CLOSE_DIALOG';
+const SET_DIALOG_DATA = 'SET_DIALOG_DATA';
 const DIALOGS = {
   SPEAKER: 'speaker',
   SESSION: 'session',
