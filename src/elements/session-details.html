@@ -1,7 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html">
-<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
 <link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 
 <link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
@@ -34,6 +33,7 @@
 
       app-header {
         background-color: var(--additional-background-color);
+        z-index: 0;
       }
 
       app-toolbar {
@@ -48,7 +48,7 @@
       }
 
       .close-icon {
-        margin: 16px;
+        margin: 24px 24px 24px;
         cursor: pointer;
       }
 
@@ -58,7 +58,6 @@
       }
 
       .header-content {
-        min-height: 160px;
         position: relative;
       }
 
@@ -73,11 +72,13 @@
       .float-button {
         position: absolute;
         right: 24px;
-        bottom: 0;
-        transform: translateY(50%);
+        top: 0;
+        z-index: 2;
+        transform: translateY(-50%);
       }
 
       .content {
+        position: relative;
         font-size: 15px;
         line-height: 1.87;
       }
@@ -87,11 +88,14 @@
       }
 
       .description {
-        margin: 24px 0 40px;
+        margin: 24px 0 32px;
       }
 
       .action {
+        margin-right: 16px;
         color: var(--primary-text-color);
+        cursor: pointer;
+        user-select: none;
       }
 
       .action iron-icon {
@@ -109,7 +113,7 @@
       }
 
       .speaker-photo {
-        margin-right: 12px;
+        margin-right: 16px;
         width: 48px;
         height: 48px;
         background-color: var(--secondary-background-color);
@@ -131,10 +135,11 @@
       @media (min-width: 812px) {
         :host {
           height: 70%;
-          width: 800px;
+          width: 720px;
         }
 
         .close-icon {
+          margin: 16px;
           position: absolute;
           top: -8px;
           right: -48px;
@@ -151,6 +156,7 @@
         }
 
         .float-button {
+          top: auto;
           right: 0;
           bottom: 0;
           transform: translate(50%, 50%);
@@ -159,11 +165,11 @@
 
     </style>
 
-    <app-header-layout has-scrolling-region fit>
-      <app-header slot="header" class="header" fixed effects="waterfall">
+    <app-header-layout has-scrolling-region>
+      <app-header slot="header" class="header" fixed="[[viewport.isTabletPlus]]">
         <iron-icon
           class="close-icon"
-          icon="hoverboard:close"
+          icon="hoverboard:[[_getCLoseBtnIcon(viewport.isPhone)]]"
           on-tap="close"
         ></iron-icon>
         <app-toolbar>
@@ -174,25 +180,36 @@
                 <span class="tag" style$="color: [[_getTagColor(tag)]]">[[tag]]</span>
               </template>
             </div>
-            <paper-fab
-              class="float-button"
-              icon="hoverboard:bookmark-plus"
-              session-id$="[[session.id]]"
-            ></paper-fab>
+
+            <div class="float-button">
+              <paper-fab
+                icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
+                hidden$="[[viewport.isPhone]]"
+                on-tap="_toggleFeaturedSession"
+              ></paper-fab>
+            </div>
           </div>
         </app-toolbar>
       </app-header>
 
       <div class="dialog-container content">
+        <div class="float-button">
+          <paper-fab
+            icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
+            hidden$="[[viewport.isTabletPlus]]"
+            on-tap="_toggleFeaturedSession"
+          ></paper-fab>
+        </div>
         <h3 class="meta-info">[[session.dateReadable]], [[session.startTime]] - [[session.endTime]]</h3>
         <h3 class="meta-info">[[session.track.title]]</h3>
-        <h3 class="meta-info" hidden$="[[!session.complexity]]">{$ sessionDetails.contentLevel $}: [[session.complexity]]</h3>
+        <h3 class="meta-info" hidden$="[[!session.complexity]]">{$ sessionDetails.contentLevel $}:
+          [[session.complexity]]</h3>
 
         <marked-element class="description" markdown="[[session.description]]">
           <div class="markdown-html"></div>
         </marked-element>
 
-        <div class="actions">
+        <div class="actions" layout horizontal>
           <a
             class="action"
             href$="[[session.presentation]]"
@@ -201,9 +218,18 @@
             rel="noopener noreferrer"
             layout horizontal center-aligned
           >
-              <iron-icon icon="hoverboard:presentation"></iron-icon>
-              {$ sessionDetails.viewPresentation $}
+            <iron-icon icon="hoverboard:presentation"></iron-icon>
+            <span>{$ sessionDetails.viewPresentation $}</span>
           </a>
+          <div
+            class="action"
+            hidden$="[[!session.videoId]]"
+            on-tap="_openVideo"
+            layout horizontal center-aligned
+          >
+            <iron-icon icon="hoverboard:video"></iron-icon>
+            {$ sessionDetails.viewVideo $}
+          </div>
         </div>
 
         <div class="speakers" hidden$="[[!session.speakers.length]]">
@@ -247,6 +273,14 @@
           viewport: {
             type: Object,
             statePath: 'ui.viewport'
+          },
+          user: {
+            type: Object,
+            statePath: 'user'
+          },
+          featuredSessions: {
+            type: Object,
+            statePath: 'sessions.featured'
           }
         }
       }
@@ -264,19 +298,11 @@
 
       _close() {
         dialogsActions.closeDialog(DIALOGS.SESSION);
-//        this.dispatchEvent(new CustomEvent('reset-query-params', {
-//          bubbles: true,
-//          composed: true
-//        }));
       }
 
       _handleClose(opened, session) {
         if (!opened && session && Object.keys(session).length) {
           dialogsActions.closeDialog(DIALOGS.SESSION);
-//          this.dispatchEvent(new CustomEvent('reset-query-params', {
-//            bubbles: true,
-//            composed: true
-//          }));
         }
       }
 
@@ -285,6 +311,46 @@
           return ShadyCSS.getComputedStyleValue(this, `--${this.generateClassName(value)}`);
         }
         return getComputedStyle(this, `--${this.generateClassName(value)}`);
+      }
+
+      _getCLoseBtnIcon(isPhoneViewport) {
+        return isPhoneViewport ? 'arrow-left' : 'close';
+      }
+
+      _openVideo() {
+        uiActions.toggleVideoDialog({
+          title: this.session.title,
+          youtubeId: this.session.videoId,
+          disableControls: true,
+          opened: true
+        });
+      }
+
+      _toggleFeaturedSession(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (!this.user.signedIn) {
+          toastActions.showToast({
+            message: '{$ schedule.saveSessionsSignedOut $}',
+            action: {
+              title: 'Sign in',
+              callback: () => {
+                dialogsActions.openDialog(DIALOGS.SIGNIN);
+              }
+            }
+          });
+          return;
+        }
+        const sessions = {
+          ...this.featuredSessions,
+          [this.session.id]: !this.featuredSessions[this.session.id] ? true : null
+        };
+
+        sessionsActions.setUserFeaturedSessions(this.user.uid, sessions);
+      }
+
+      _getFeaturedSessionIcon(featuredSessions, sessionId) {
+        return featuredSessions && featuredSessions[sessionId] ? 'bookmark-check' : 'bookmark-plus';
       }
     }
 

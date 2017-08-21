@@ -43,6 +43,7 @@ self.addEventListener('message', ({ data }) => {
     const tracksNumber = day.tracks.length;
     let dayTags = [];
     let timeslots = [];
+    let extensions = {};
 
     for (let timeslotsIndex = 0, timeslotLen = day.timeslots.length; timeslotsIndex < timeslotLen; timeslotsIndex++) {
       const timeslot = day.timeslots[timeslotsIndex];
@@ -94,7 +95,23 @@ self.addEventListener('message', ({ data }) => {
         }
 
         const start = `${timeslotsIndex + 1 } / ${sessionIndex + 1}`;
-        const end = `${timeslotsIndex + (timeslot.sessions[sessionIndex].extend || 0) + 1 } / ${sessionsLen !== 1 ? sessionIndex + 2 : tracksNumber + 1}`;
+        const end = `${timeslotsIndex + (timeslot.sessions[sessionIndex].extend || 0) + 1 } / ${sessionsLen !== 1 ? sessionIndex + 2 : (Object.keys(extensions) ? Object.keys(extensions)[0] - 1 : tracksNumber + 1 )}`;
+        if (timeslot.sessions[sessionIndex].extend) {
+          console.log(sessionIndex + 1, timeslot.sessions[sessionIndex].extend);
+          extensions = {
+            ...extensions,
+            [sessionIndex + 1]: timeslot.sessions[sessionIndex].extend
+          };
+        }
+        console.log(extensions);
+
+        for (let key in Object.keys(extensions)) {
+          if (extensions[key] === 1) {
+            delete extensions[key];
+          } else {
+            extensions[key] -= 1;
+          }
+        }
 
         innnerSessions = [...innnerSessions, {
           gridArea: `${start} / ${end}`,

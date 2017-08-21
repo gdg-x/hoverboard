@@ -45,6 +45,8 @@
           <schedule-day
             name$="[[day.date]]"
             day="[[day]]"
+            user="[[user]]"
+            featured-sessions="[[sessions.featured]]"
           ></schedule-day>
         </template>
       </iron-pages>
@@ -66,6 +68,10 @@
             type: Object,
             statePath: 'schedule'
           },
+          user: {
+            type: Object,
+            statePath: 'user'
+          },
           sessions: {
             type: Object,
             statePath: 'sessions'
@@ -84,13 +90,20 @@
       static get observers() {
         return [
           '_setDay(active, routeData.day, schedule.days)',
-          '_openSessionDetails(active, sessions, queryParams.sessionId)'
+          '_openSessionDetails(active, sessions.list, queryParams.sessionId)',
+          '_fetchFeaturedSessions(active, user.uid)'
         ];
       }
 
       connectedCallback() {
         super.connectedCallback();
         if (!this.schedule.days) scheduleActions.fetchSchedule();
+      }
+
+      _fetchFeaturedSessions(active, userUid) {
+        if (active && userUid && !this.sessions || this.sessions && this.sessions.featured && !this.sessions.featured.length) {
+          sessionsActions.fetchUserFeaturedSessions(userUid);
+        }
       }
 
       _setDay(active, day, scheduleDays) {

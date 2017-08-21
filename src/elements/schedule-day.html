@@ -84,6 +84,8 @@
                 class="subsession"
                 day-name="[[name]]"
                 session="[[subSession]]"
+                user="[[user]]"
+                featured-sessions="[[featuredSessions]]"
                 flex
               ></session-element>
             </template>
@@ -106,7 +108,9 @@
       static get properties() {
         return {
           day: Object,
-          name: String
+          name: String,
+          user: Object,
+          featuredSessions: Object
         }
       }
 

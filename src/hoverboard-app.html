@@ -284,8 +284,14 @@
         <app-header slot="header" condenses fixed effects="waterfall sticky-bottom-toolbar">
 
           <app-toolbar class="header" sticky>
-            <paper-icon-button icon="hoverboard:menu" aria-label="Menu" hidden$="[[viewport.isTabletPlus]]"
-                               on-tap="openDrawer"></paper-icon-button>
+            <div>
+              <paper-icon-button
+                icon="hoverboard:menu"
+                hidden$="[[viewport.isTabletPlus]]"
+                aria-label="menu"
+                on-tap="openDrawer"
+              ></paper-icon-button>
+            </div>
             <div layout horizontal center flex>
               <a href="/" hidden$="[[viewport.isPhone]]" layout horizontal>
                 <plastic-image class="toolbar-logo" srcset="/images/logo-monochrome.svg"
@@ -353,8 +359,12 @@
             </iron-pages>
           </app-toolbar>
 
-          <app-toolbar id="bottom-toolbar" class="bottom-toolbar" sticky bottom-sticky
-                       hidden="[[!isEqual(route.route, 'schedule')]]">
+          <app-toolbar
+            id="bottom-toolbar"
+            class="bottom-toolbar"
+            hidden="[[!isEqual(route.route, 'schedule')]]"
+            sticky bottom-sticky
+          >
             <paper-tabs
               class="nav-items"
               selected="[[route.subRoute]]"
@@ -447,6 +457,7 @@
     </signin-dialog>
 
     <hoverboard-analytics></hoverboard-analytics>
+    <toast-element></toast-element>
   </template>
 
   <script>
@@ -527,7 +538,7 @@
         console.log('Hoverboard v2 is ready!');
         this.removeAttribute('unresolved');
         this._ensureLazyLoaded();
-        userActions.autoSignIn(this.providerUrls);
+//        userActions.autoSignIn(this.providerUrls);
       }
 
       openDrawer() {
@@ -612,7 +623,7 @@
       }
 
       _removeQueryParams() {
-        this.set('queryParams.sessionId', null);
+        this.set('queryParams', null);
       }
     }
 
