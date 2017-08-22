@@ -29,13 +29,30 @@ function addTagTo(array, element) {
   }
 }
 
+function updateSpeakersSessions(speakersRaw, speakerIds, session) {
+  let result = {};
+  for (let i = 0; i < speakerIds.length; i++) {
+    const speaker = speakersRaw[speakerIds[i]];
+    if (speaker) {
+      result[speakerIds[i]] = {
+        ...speaker,
+        sessions: speaker.sessions ?
+          speaker.sessions.map(speakerSession => speakerSession.id === session.id ? session : speakerSession)
+          : [session]
+      }
+    }
+  }
+  return result;
+}
+
 self.addEventListener('message', ({ data }) => {
-  const speakers = data.speakers;
+  const speakersRaw = data.speakers;
   const sessionsRaw = data.sessions;
   const scheduleRaw = data.schedule;
 
   let schedule = {};
   let sessions = {};
+  let speakers = {};
   let scheduleTags = [];
 
   for (const dayKey of Object.keys(scheduleRaw)) {
@@ -74,7 +91,7 @@ self.addEventListener('message', ({ data }) => {
           const finalSubsession = {
             ...subsession,
             mainTag,
-            id: sessionId,
+            id: sessionId.toString(),
             day: dayKey,
             track: subsession.track || day.tracks[sessionIndex],
             startTime,
@@ -83,12 +100,19 @@ self.addEventListener('message', ({ data }) => {
             dateReadable: day.dateReadable,
             speakers: subsession.speakers ? subsession.speakers.map(speakerId => ({
               id: speakerId,
-              ...speakers[speakerId]
+              ...speakersRaw[speakerId],
+              sessions: null
             })) : []
           };
 
           subsessions.push(finalSubsession);
           sessions[sessionId] = finalSubsession;
+          if (subsession.speakers) {
+            speakers = {
+              ...speakers,
+              ...updateSpeakersSessions(speakersRaw, subsession.speakers, finalSubsession)
+            }
+          }
         }
 
         const start = `${timeslotsIndex + 1 } / ${sessionIndex + 1}`;
@@ -136,6 +160,7 @@ self.addEventListener('message', ({ data }) => {
   }
 
   self.postMessage({
+    speakers,
     schedule,
     sessions
   });

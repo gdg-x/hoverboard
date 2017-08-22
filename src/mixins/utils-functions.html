@@ -28,5 +28,12 @@
     isEqual(string1, string2) {
       return string1 === string2;
     }
+
+    getVariableColor(value) {
+      if (ShadyCSS) {
+        return ShadyCSS.getComputedStyleValue(this, `--${this.generateClassName(value)}`);
+      }
+      return getComputedStyle(this, `--${this.generateClassName(value)}`);
+    }
   };
 </script>

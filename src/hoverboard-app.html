@@ -244,6 +244,8 @@
 
     <iron-media-query id="mq-phone" full query="(max-width: {$ mediaQueries.xs.max $})"
                       query-matches="{{isPhoneSize}}"></iron-media-query>
+    <iron-media-query id="mq-phone" full query="(min-width: {$ mediaQueries.md.min $})"
+                      query-matches="{{isLaptopSize}}"></iron-media-query>
 
     <app-location route="{{appRoute}}"></app-location>
     <app-route
@@ -512,7 +514,7 @@
       static get observers() {
         return [
           '_routeDataChanged(routeData.page, subroute.path)',
-          '_isPhoneSizeChanged(isPhoneSize)',
+          '_viewportChanged(isPhoneSize, isLaptopSize)',
           '_authStatusChanged(user.signedIn)'
         ];
       }
@@ -600,10 +602,11 @@
         }
       }
 
-      _isPhoneSizeChanged(value) {
+      _viewportChanged(isPhoneSize, isLaptopSize) {
         uiActions.setViewportSize({
-          'isPhone': value,
-          'isTabletPlus': !value
+          isPhone: isPhoneSize,
+          isTabletPlus: !isPhoneSize,
+          isLaptopPlus: isLaptopSize
         });
       }
 

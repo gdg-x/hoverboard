@@ -204,5 +204,8 @@
     "viewPresentation": "View presentation",
     "viewVideo": "View video",
     "speakers": "Speakers"
+  },
+  "speakerDetails": {
+    "sessions": "Sessions"
   }
 }
