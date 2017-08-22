@@ -94,6 +94,7 @@ const blogReducer = (state = initialState.blog, action) => {
 const speakersReducer = (state = initialState.speakers, action) => {
   switch (action.type) {
     case FETCH_SPEAKERS_LIST:
+    case UPDATE_SPEAKERS:
       return action.list;
     default:
       return state;

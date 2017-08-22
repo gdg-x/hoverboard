@@ -159,14 +159,16 @@ const speakersActions = {
           for (let key of Object.keys(sessions)) {
             if (sessions[key].speakers) {
               sessions[key].speakers.map(id => {
-                if (speakers[id])
-                  updatedSpeakers = {
-                    ...updatedSpeakers,
-                    [id]: {
-                      ...speakers[id],
-                      sessions: speakers[id].sessions ? [...speakers[id].sessions, sessions[key]] : [sessions[key]]
-                    }
+                if (speakers[id]) {
+                  const session = {
+                    ...sessions[key],
+                    id: key
                   };
+                  updatedSpeakers[id] = {
+                    ...speakers[id],
+                    sessions: speakers[id].sessions ? [...speakers[id].sessions, session] : [session]
+                  };
+                }
               });
             }
           }
@@ -277,6 +279,10 @@ const scheduleActions = {
           store.dispatch({
             type: UPDATE_SESSIONS,
             list: data.sessions
+          });
+          store.dispatch({
+            type: UPDATE_SPEAKERS,
+            list: data.speakers
           });
           scheduleWorker.terminate();
         }, false);
