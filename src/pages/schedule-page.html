@@ -45,6 +45,8 @@
           <schedule-day
             name$="[[day.date]]"
             day="[[day]]"
+            user="[[user]]"
+            featured-sessions="[[sessions.featured]]"
           ></schedule-day>
         </template>
       </iron-pages>
@@ -66,16 +68,30 @@
             type: Object,
             statePath: 'schedule'
           },
+          user: {
+            type: Object,
+            statePath: 'user'
+          },
+          sessions: {
+            type: Object,
+            statePath: 'sessions'
+          },
           subRoute: {
             type: Object,
             statePath: 'routing.subRoute'
+          },
+          isDialogOpened: {
+            type: Object,
+            statePath: 'dialogs.session.isOpened'
           }
         }
       }
 
       static get observers() {
         return [
-          '_setDay(active, routeData.day, schedule.days)'
+          '_setDay(active, routeData.day, schedule.days)',
+          '_openSessionDetails(active, sessions.list, queryParams.sessionId)',
+          '_fetchFeaturedSessions(active, user.uid)'
         ];
       }
 
@@ -84,9 +100,28 @@
         if (!this.schedule.days) scheduleActions.fetchSchedule();
       }
 
+      _fetchFeaturedSessions(active, userUid) {
+        if (active && userUid && !this.sessions || this.sessions && this.sessions.featured && !this.sessions.featured.length) {
+          sessionsActions.fetchUserFeaturedSessions(userUid);
+        }
+      }
+
       _setDay(active, day, scheduleDays) {
         if (active && scheduleDays) {
           routingActions.setSubRoute(day || Object.keys(scheduleDays)[0]);
+        }
+      }
+
+      _openSessionDetails(active, sessions, id) {
+        if (active && sessions && Object.keys(sessions).length) {
+          requestAnimationFrame(() => {
+              if (id) {
+                dialogsActions.openDialog(DIALOGS.SESSION, sessions[id]);
+              } else if (this.isDialogOpened) {
+                dialogsActions.closeDialog(DIALOGS.SESSION);
+              }
+            }
+          )
         }
       }
     }

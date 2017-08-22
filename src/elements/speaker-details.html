@@ -204,18 +204,19 @@
       }
 
       constructor() {
-            super();            
-            this.addEventListener('iron-overlay-canceled', this._close);
-        }
+        super();
+        this.addEventListener('iron-overlay-canceled', this._close);
+      }
 
       static get observers() {
         return [
           '_handleClose(opened, speaker)'
         ];
-      }     
+      }
 
       _close() {
-          dialogsActions.closeDialog(DIALOGS.SPEAKER);
+        dialogsActions.closeDialog(DIALOGS.SPEAKER);
+        history.back();
       }
 
       _handleClose(opened, speaker) {

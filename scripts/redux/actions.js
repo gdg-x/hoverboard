@@ -58,6 +58,37 @@ const dialogsActions = {
       type: CLOSE_DIALOG,
       dialogName
     });
+    this.dispatchEvent(new CustomEvent('reset-query-params', {
+      bubbles: true,
+      composed: true
+    }));
+  }
+};
+
+let toastHideTimeOut;
+const toastActions = {
+  showToast: toast => {
+    const duration = toast.duration || 5000;
+    store.dispatch({
+      type: SHOW_TOAST,
+      toast: {
+        ...toast,
+        duration,
+        visible: true
+      }
+    });
+
+    clearTimeout(toastHideTimeOut);
+    toastHideTimeOut = setTimeout(() => {
+      toastActions.hideToast();
+    }, duration);
+  },
+
+  hideToast: () => {
+    clearTimeout(toastHideTimeOut);
+    store.dispatch({
+      type: HIDE_TOAST
+    });
   }
 };
 
@@ -108,8 +139,8 @@ const blogActions = {
 const speakersActions = {
   fetchList: () => {
     const state = store.getState();
-    const sessionsPromise = Object.keys(state.sessions).length
-      ? Promise.resolve(state.sessions)
+    const sessionsPromise = Object.keys(state.sessions.list).length
+      ? Promise.resolve(state.session.list)
       : sessionsActions.fetchList();
 
     const speakersPromise = new Promise(resolve => {
@@ -175,6 +206,42 @@ const sessionsActions = {
       });
 
     return result;
+  },
+
+  fetchUserFeaturedSessions: userId => {
+    const result = new Promise(resolve => {
+      firebase.database()
+        .ref(`/featuredSessions/${userId}`)
+        .on('value', snapshot => {
+          resolve(snapshot.val());
+        })
+    });
+
+    result
+      .then(featuredSessions => {
+        store.dispatch({
+          type: FETCH_USER_FEATURED_SESSIONS,
+          featuredSessions
+        });
+      });
+
+    return result;
+  },
+
+  setUserFeaturedSessions: (userId, featuredSessions) => {
+    const result = firebase.database()
+      .ref(`/featuredSessions/${userId}`)
+      .set(featuredSessions);
+
+    result
+      .then(() => {
+        store.dispatch({
+          type: SET_USER_FEATURED_SESSIONS,
+          featuredSessions
+        });
+      });
+
+    return result;
   }
 };
 
@@ -198,7 +265,7 @@ const scheduleActions = {
 
         scheduleWorker.postMessage({
           speakers,
-          sessions: store.getState().sessions,
+          sessions: store.getState().sessions.list,
           schedule
         });
 
@@ -252,8 +319,8 @@ const userActions = {
       .signInWithPopup(firebaseProvider)
       .then((signInObject) => {
         if (navigator.credentials) {
-          var cred = new FederatedCredential({
-            id: signInObject.user.email ||  signInObject.user.providerData[0].email,
+          const cred = new FederatedCredential({
+            id: signInObject.user.email || signInObject.user.providerData[0].email,
             name: signInObject.user.displayName,
             iconURL: signInObject.user.photoURL,
             provider: providerName
@@ -262,19 +329,19 @@ const userActions = {
           navigator.credentials.store(cred);
         }
 
-         helperActions.storeUser(signInObject.user);
+        helperActions.storeUser(signInObject.user);
       });
   },
 
   autoSignIn: (providerUrls) => {
     const currentUser = firebase.auth().currentUser;
-    if (currentUser) {      
+    if (currentUser) {
       helperActions.storeUser(currentUser);
     }
     else {
 
       if (navigator.credentials) {
-        
+
         return navigator.credentials.get({
           password: true,
           federated: {
@@ -314,54 +381,61 @@ const userActions = {
 };
 
 const subscribeActions = {
-   subscribe: (data) => {
-    const id = data.email.replace(/[^\w\s]/gi, '');     
+  subscribe: (data) => {
+    const id = data.email.replace(/[^\w\s]/gi, '');
 
     firebase.database().ref(`subscribers/${id}`).set({
       email: data.email,
       firstName: data.firstName || '',
       lastName: data.lastName || ''
     })
-    .then(() => {
-       store.dispatch({
+      .then(() => {
+        store.dispatch({
           type: SUBSCRIBE,
           subscribed: true
         });
-    })
-    .catch(() => {
-       store.dispatch({
-        type: SET_DIALOG_DATA,
-        dialog: {
-          ['subscribe']: {
-            isOpened: true,
-            data: Object.assign(data, { errorOcurred: true })
+      })
+      .catch(() => {
+        store.dispatch({
+          type: SET_DIALOG_DATA,
+          dialog: {
+            ['subscribe']: {
+              isOpened: true,
+              data: Object.assign(data, { errorOcurred: true })
+            }
           }
-        }
-      });
+        });
 
-       store.dispatch({
+        store.dispatch({
           type: SUBSCRIBE,
           subscribed: false
         });
-    });
+      });
   },
   resetSubscribed: () => {
-     store.dispatch({
-        type: SUBSCRIBE,
-        subscribed: false
-     });
+    store.dispatch({
+      type: SUBSCRIBE,
+      subscribed: false
+    });
   }
 };
 
-
 const helperActions = {
- 
   storeUser: (user) => {
     let userToStore = { signedIn: false };
 
     if (user) {
+      const { uid, displayName, photoURL, refreshToken } = user;
       const email = user.email || user.providerData[0].email;
-      userToStore = Object.assign({}, user, { signedIn: true, email: email });
+
+      userToStore = {
+        signedIn: true,
+        uid,
+        email,
+        displayName,
+        photoURL,
+        refreshToken
+      };
     }
 
     store.dispatch({
@@ -371,16 +445,16 @@ const helperActions = {
   },
 
   getFederatedProvider: (provider) => {
-    switch(provider) {
-      case 'https://accounts.google.com': 
+    switch (provider) {
+      case 'https://accounts.google.com':
         return new firebase.auth.GoogleAuthProvider();
       case 'https://www.facebook.com': {
         let provider = new firebase.auth.FacebookAuthProvider();
         provider.addScope('email');
         provider.addScope('public_profile');
         return provider;
-      }       
-      case 'https://twitter.com': 
+      }
+      case 'https://twitter.com':
         return new firebase.auth.TwitterAuthProvider();
     }
   }

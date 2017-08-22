@@ -1,0 +1,361 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
+<link rel="import" href="../../bower_components/marked-element/marked-element.html">
+
+<link rel="import" href="../mixins/utils-functions.html">
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="./text-truncate.html">
+<link rel="import" href="./shared-styles.html">
+
+<dom-module id="session-details">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+
+    <style>
+
+      :host {
+        margin: 0;
+        display: block;
+        height: 100%;
+        width: 100%;
+        background: #fff;
+        color: var(--primary-text-color);
+        box-shadow: var(--box-shadow);
+      }
+
+      app-header {
+        background-color: var(--additional-background-color);
+      }
+
+      app-toolbar {
+        padding: 0;
+        height: auto;
+      }
+
+      .dialog-container {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 584px;
+      }
+
+      .close-icon {
+        margin: 24px 24px 24px;
+        cursor: pointer;
+      }
+
+      .header-content,
+      .content {
+        padding: 24px;
+      }
+
+      .content {
+        min-height: 100%;
+      }
+
+      .header-content {
+        position: relative;
+      }
+
+      .name {
+        line-height: 1.2;
+      }
+
+      .tag {
+        margin-top: 8px;
+      }
+
+      .float-button {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+      }
+
+      .content {
+        position: relative;
+        font-size: 15px;
+        line-height: 1.87;
+      }
+
+      .meta-info {
+        line-height: 1.6;
+      }
+
+      .description {
+        margin: 24px 0 32px;
+      }
+
+      .action {
+        margin-right: 16px;
+        color: var(--primary-text-color);
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .action iron-icon {
+        margin-right: 4px;
+      }
+
+      .speakers {
+        margin-top: 32px;
+      }
+
+      .speaker {
+        margin-top: 16px;
+        display: block;
+        color: var(--primary-text-color);
+      }
+
+      .speaker-photo {
+        margin-right: 16px;
+        width: 48px;
+        height: 48px;
+        background-color: var(--secondary-background-color);
+        border-radius: 50%;
+        overflow: hidden;
+        transform: translateZ(0);
+      }
+
+      .speaker-name {
+        margin-bottom: 4px;
+        line-height: 1.2;
+      }
+
+      .speaker-title {
+        font-size: 12px;
+        line-height: 1;
+      }
+
+      @media (min-width: 812px) {
+        :host {
+          height: 70%;
+          width: 720px;
+        }
+
+        .close-icon {
+          margin: 16px;
+          position: absolute;
+          top: -8px;
+          right: -48px;
+          --iron-icon-fill-color: #fff;
+        }
+
+        .header-content,
+        .content {
+          padding: 24px;
+        }
+
+        .header-content {
+          min-height: 224px;
+        }
+
+        .float-button {
+          position: absolute;
+          top: auto;
+          right: 0;
+          bottom: 0;
+          transform: translate(50%, 50%);
+        }
+      }
+
+    </style>
+
+    <app-header-layout has-scrolling-region>
+      <app-header slot="header" class="header" fixed="[[viewport.isTabletPlus]]">
+        <iron-icon
+          class="close-icon"
+          icon="hoverboard:[[_getCLoseBtnIcon(viewport.isPhone)]]"
+          on-tap="close"
+        ></iron-icon>
+        <app-toolbar>
+          <div class="dialog-container header-content" layout vertical end-justified>
+            <h2 class="name">[[session.title]]</h2>
+            <div class="tags" hidden$="[[!session.tags.length]]">
+              <template is="dom-repeat" items="[[session.tags]]" as="tag">
+                <span class="tag" style$="color: [[_getTagColor(tag)]]">[[tag]]</span>
+              </template>
+            </div>
+
+            <div class="float-button">
+              <paper-fab
+                icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
+                hidden$="[[viewport.isPhone]]"
+                on-tap="_toggleFeaturedSession"
+              ></paper-fab>
+            </div>
+          </div>
+        </app-toolbar>
+      </app-header>
+
+      <div class="dialog-container content">
+        <div class="float-button">
+          <paper-fab
+            icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
+            hidden$="[[viewport.isTabletPlus]]"
+            on-tap="_toggleFeaturedSession"
+          ></paper-fab>
+        </div>
+        <h3 class="meta-info">[[session.dateReadable]], [[session.startTime]] - [[session.endTime]]</h3>
+        <h3 class="meta-info">[[session.track.title]]</h3>
+        <h3 class="meta-info" hidden$="[[!session.complexity]]">{$ sessionDetails.contentLevel $}:
+          [[session.complexity]]</h3>
+
+        <marked-element class="description" markdown="[[session.description]]">
+          <div class="markdown-html"></div>
+        </marked-element>
+
+        <div class="actions" layout horizontal>
+          <a
+            class="action"
+            href$="[[session.presentation]]"
+            hidden$="[[!session.presentation]]"
+            target="_blank"
+            rel="noopener noreferrer"
+            layout horizontal center-aligned
+          >
+            <iron-icon icon="hoverboard:presentation"></iron-icon>
+            <span>{$ sessionDetails.viewPresentation $}</span>
+          </a>
+          <div
+            class="action"
+            hidden$="[[!session.videoId]]"
+            on-tap="_openVideo"
+            layout horizontal center-aligned
+          >
+            <iron-icon icon="hoverboard:video"></iron-icon>
+            {$ sessionDetails.viewVideo $}
+          </div>
+        </div>
+
+        <div class="speakers" hidden$="[[!session.speakers.length]]">
+          <h3>{$ sessionDetails.speakers $}</h3>
+
+          <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
+            <a href$="/speakers/[[speaker.id]]" class="speaker" on-tap="close">
+              <div layout horizontal center>
+                <plastic-image
+                  class="speaker-photo"
+                  srcset="[[speaker.photoUrl]]"
+                  sizing="cover"
+                  lazy-load preload fade
+                ></plastic-image>
+
+                <div class="speaker-details" flex>
+                  <div class="speaker-name">[[speaker.name]]</div>
+                  <div class="speaker-title">[[speaker.company]] / [[speaker.country]]</div>
+                </div>
+              </div>
+            </a>
+          </template>
+        </div>
+      </div>
+    </app-header-layout>
+
+  </template>
+
+  <script>
+
+    class SessionDetails extends UtilsFunctions(ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element))) {
+      static get is() {
+        return 'session-details';
+      }
+
+      static get properties() {
+        return {
+          session: {
+            type: Object
+          },
+          viewport: {
+            type: Object,
+            statePath: 'ui.viewport'
+          },
+          user: {
+            type: Object,
+            statePath: 'user'
+          },
+          featuredSessions: {
+            type: Object,
+            statePath: 'sessions.featured'
+          }
+        }
+      }
+
+      constructor() {
+        super();
+        this.addEventListener('iron-overlay-canceled', this._close);
+      }
+
+      static get observers() {
+        return [
+          '_handleClose(opened, session)'
+        ];
+      }
+
+      _close() {
+        dialogsActions.closeDialog(DIALOGS.SESSION);
+      }
+
+      _handleClose(opened, session) {
+        if (!opened && session && Object.keys(session).length) {
+          dialogsActions.closeDialog(DIALOGS.SESSION);
+        }
+      }
+
+      _getTagColor(value) {
+        if (ShadyCSS) {
+          return ShadyCSS.getComputedStyleValue(this, `--${this.generateClassName(value)}`);
+        }
+        return getComputedStyle(this, `--${this.generateClassName(value)}`);
+      }
+
+      _getCLoseBtnIcon(isPhoneViewport) {
+        return isPhoneViewport ? 'arrow-left' : 'close';
+      }
+
+      _openVideo() {
+        uiActions.toggleVideoDialog({
+          title: this.session.title,
+          youtubeId: this.session.videoId,
+          disableControls: true,
+          opened: true
+        });
+      }
+
+      _toggleFeaturedSession(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (!this.user.signedIn) {
+          toastActions.showToast({
+            message: '{$ schedule.saveSessionsSignedOut $}',
+            action: {
+              title: 'Sign in',
+              callback: () => {
+                dialogsActions.openDialog(DIALOGS.SIGNIN);
+              }
+            }
+          });
+          return;
+        }
+        const sessions = {
+          ...this.featuredSessions,
+          [this.session.id]: !this.featuredSessions[this.session.id] ? true : null
+        };
+
+        sessionsActions.setUserFeaturedSessions(this.user.uid, sessions);
+      }
+
+      _getFeaturedSessionIcon(featuredSessions, sessionId) {
+        return featuredSessions && featuredSessions[sessionId] ? 'bookmark-check' : 'bookmark-plus';
+      }
+    }
+
+    customElements.define(SessionDetails.is, SessionDetails);
+  </script>
+</dom-module>

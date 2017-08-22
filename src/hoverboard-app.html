@@ -134,7 +134,7 @@
         text-transform: uppercase;
       }
 
-       .profile-image {
+      .profile-image {
         width: 32px;
         height: 32px;
         border-radius: 50%;
@@ -251,6 +251,7 @@
       pattern="/:page"
       data="{{routeData}}"
       tail="{{subroute}}"
+      query-params="{{queryParams}}"
     ></app-route>
 
     <app-drawer-layout drawer-width="300px" force-narrow fullbleed>
@@ -273,9 +274,9 @@
           <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer">{$ nav.title $}</a>
           {% endfor %}
 
-          <a href="" on-tap="signIn" hidden$="[[user.signedIn]]" >{$ signIn $}</a>
+          <a href="" on-tap="signIn" hidden$="[[user.signedIn]]">{$ signIn $}</a>
         </iron-selector>
-      
+
       </app-drawer>
 
       <app-header-layout id="headerLayout">
@@ -283,8 +284,14 @@
         <app-header slot="header" condenses fixed effects="waterfall sticky-bottom-toolbar">
 
           <app-toolbar class="header" sticky>
-            <paper-icon-button icon="hoverboard:menu" aria-label="Menu" hidden$="[[viewport.isTabletPlus]]"
-                               on-tap="openDrawer"></paper-icon-button>
+            <div>
+              <paper-icon-button
+                icon="hoverboard:menu"
+                hidden$="[[viewport.isTabletPlus]]"
+                aria-label="menu"
+                on-tap="openDrawer"
+              ></paper-icon-button>
+            </div>
             <div layout horizontal center flex>
               <a href="/" hidden$="[[viewport.isPhone]]" layout horizontal>
                 <plastic-image class="toolbar-logo" srcset="/images/logo-monochrome.svg"
@@ -292,7 +299,8 @@
               </a>
             </div>
 
-            <paper-tabs class="nav-items" selected="[[route.route]]" attr-for-selected="name" hidden$="[[viewport.isPhone]]"
+            <paper-tabs class="nav-items" selected="[[route.route]]" attr-for-selected="name"
+                        hidden$="[[viewport.isPhone]]"
                         role="navigation" noink>
               {% for nav in navigation %}
               <paper-tab name="{$ nav.route $}" class="nav-item" link>
@@ -301,33 +309,34 @@
               {% endfor %}
               <paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]">{$ signIn $}</paper-tab>
             </paper-tabs>
-            
+
             </paper-menu-button>
-             <paper-menu-button
-                class="auth-menu"
-                hidden$="[[!user.signedIn]]"
-                vertical-align="top"
-                horizontal-align="right"
-                no-animations
-                layout horizontal center-center>
-                <div
-                  class="profile-image" slot="dropdown-trigger"
-                  style="background-image: url('[[user.photoURL]]')"
-                ></div>
-                <div class="signin-panel" slot="dropdown-content">
-                  <div class="profile-details" layout horizontal>
-                    <div
-                      class="profile-image" slot="dropdown-trigger" self-center
-                      style="background-image: url('[[user.photoURL]]')"
-                    ></div>
-                    <div layout vertical center-justified>
-                      <span class="profile-name">[[user.displayName]]</span>
-                      <span class="profile-email">[[user.email]]</span>
-                      <span  class="profile-action" role="button" on-touchend="signOut"  on-click="signOut">{$ signOut $}</span>
-                    </div>
+            <paper-menu-button
+              class="auth-menu"
+              hidden$="[[!user.signedIn]]"
+              vertical-align="top"
+              horizontal-align="right"
+              no-animations
+              layout horizontal center-center>
+              <div
+                class="profile-image" slot="dropdown-trigger"
+                style="background-image: url('[[user.photoURL]]')"
+              ></div>
+              <div class="signin-panel" slot="dropdown-content">
+                <div class="profile-details" layout horizontal>
+                  <div
+                    class="profile-image" slot="dropdown-trigger" self-center
+                    style="background-image: url('[[user.photoURL]]')"
+                  ></div>
+                  <div layout vertical center-justified>
+                    <span class="profile-name">[[user.displayName]]</span>
+                    <span class="profile-email">[[user.email]]</span>
+                    <span class="profile-action" role="button" on-touchend="signOut"
+                          on-click="signOut">{$ signOut $}</span>
                   </div>
                 </div>
-              </paper-menu-button>
+              </div>
+            </paper-menu-button>
           </app-toolbar>
 
           <app-toolbar class="hero-block" layout start vertical center-justified>
@@ -350,7 +359,12 @@
             </iron-pages>
           </app-toolbar>
 
-          <app-toolbar id="bottom-toolbar" class="bottom-toolbar" sticky bottom-sticky hidden="[[!isEqual(route.route, 'schedule')]]">
+          <app-toolbar
+            id="bottom-toolbar"
+            class="bottom-toolbar"
+            hidden="[[!isEqual(route.route, 'schedule')]]"
+            sticky bottom-sticky
+          >
             <paper-tabs
               class="nav-items"
               selected="[[route.subRoute]]"
@@ -420,21 +434,30 @@
       no-cancel-on-outside-click="[[viewport.isPhone]]"
     ></speaker-details>
 
+    <session-details
+      id="sessionDialog"
+      opened="[[dialogs.session.isOpened]]"
+      session="[[dialogs.session.data]]"
+      with-backdrop="[[viewport.isTabletPlus]]"
+      no-cancel-on-outside-click="[[viewport.isPhone]]"
+    ></session-details>
+
     <subscribe-dialog
-        id="subscribeDialog"
-        opened="[[dialogs.subscribe.isOpened]]",
-        data="[[dialogs.subscribe.data]]"
-        with-backdrop
-        no-cancel-on-outside-click="[[viewport.isPhone]]">
-    </subscribe-dialog>  
+      id="subscribeDialog"
+      opened="[[dialogs.subscribe.isOpened]]"
+      data="[[dialogs.subscribe.data]]"
+      with-backdrop
+      no-cancel-on-outside-click="[[viewport.isPhone]]">
+    </subscribe-dialog>
 
     <signin-dialog
-        id="signinDialog"
-        opened="[[dialogs.signin.isOpened]]"
-        with-backdrop>
-    </signin-dialog>  
-        
+      id="signinDialog"
+      opened="[[dialogs.signin.isOpened]]"
+      with-backdrop>
+    </signin-dialog>
+
     <hoverboard-analytics></hoverboard-analytics>
+    <toast-element></toast-element>
   </template>
 
   <script>
@@ -497,6 +520,17 @@
       constructor() {
         super();
         window.performance && performance.mark && performance.mark('hoverboard-app.created');
+        this._removeQueryParams = this._removeQueryParams.bind(this);
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        window.addEventListener('reset-query-params', this._removeQueryParams);
+      }
+
+      disconnectedCallback() {
+        super.disconnectedCallback();
+        window.removeEventListener('reset-query-params', this._removeQueryParams);
       }
 
       ready() {
@@ -504,7 +538,7 @@
         console.log('Hoverboard v2 is ready!');
         this.removeAttribute('unresolved');
         this._ensureLazyLoaded();
-        userActions.autoSignIn(this.providerUrls);
+//        userActions.autoSignIn(this.providerUrls);
       }
 
       openDrawer() {
@@ -519,7 +553,7 @@
         if (this.ui.isDrawerOpened) {
           this.closeDrawer();
         }
-        
+
         dialogsActions.openDialog(DIALOGS.SIGNIN);
       }
 
@@ -586,6 +620,10 @@
         if (this.dialogs.signin.isOpened) {
           dialogsActions.closeDialog(DIALOGS.SIGNIN);
         }
+      }
+
+      _removeQueryParams() {
+        this.set('queryParams', null);
       }
     }
 

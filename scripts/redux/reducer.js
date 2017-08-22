@@ -5,7 +5,7 @@ const uiReducer = (state = initialState.ui, action) => {
         isDrawerOpened: action.value || !state.isDrawerOpened
       });
     case TOGGLE_VIDEO_DIALOG:
-      return Object.assign({}, state,  {
+      return Object.assign({}, state, {
         videoDialog: Object.assign({}, state.videoDialog, action.value)
       });
     case SET_VIEWPORT_SIZE:
@@ -104,7 +104,16 @@ const sessionsReducer = (state = initialState.sessions, action) => {
   switch (action.type) {
     case FETCH_SESSIONS_LIST:
     case UPDATE_SESSIONS:
-      return action.list;
+      return {
+        ...state,
+        list: action.list
+      };
+    case FETCH_USER_FEATURED_SESSIONS:
+    case SET_USER_FEATURED_SESSIONS:
+      return {
+        ...state,
+        featured: action.featuredSessions
+      };
     default:
       return state;
   }
@@ -148,9 +157,20 @@ const userReducer = (state = initialState.user, action) => {
 };
 
 const subscribeReducer = (state = initialState.subscribed, action) => {
-  switch (action.type) {   
+  switch (action.type) {
     case SUBSCRIBE:
-      return action.subscribed
+      return action.subscribed;
+    default:
+      return state;
+  }
+};
+
+const toastReducer = (state = initialState.toast, action) => {
+  switch (action.type) {
+    case SHOW_TOAST:
+      return action.toast;
+    case HIDE_TOAST:
+      return initialState.toast;
     default:
       return state;
   }

@@ -2,7 +2,7 @@ function getTimeDifference(date, startTime, endTime) {
   const timezone = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
   const timeStart = new Date(date + ' ' + startTime + ' ' + timezone).getTime();
   const timeEnd = new Date(date + ' ' + endTime + ' ' + timezone).getTime();
- return timeEnd - timeStart;
+  return timeEnd - timeStart;
 }
 
 function getEndTime(date, startTime, endTime, totalNumber, number) {
@@ -43,6 +43,7 @@ self.addEventListener('message', ({ data }) => {
     const tracksNumber = day.tracks.length;
     let dayTags = [];
     let timeslots = [];
+    let extensions = {};
 
     for (let timeslotsIndex = 0, timeslotLen = day.timeslots.length; timeslotsIndex < timeslotLen; timeslotsIndex++) {
       const timeslot = day.timeslots[timeslotsIndex];
@@ -80,23 +81,39 @@ self.addEventListener('message', ({ data }) => {
             endTime,
             duration: getDuration(dayKey, startTime, endTime),
             dateReadable: day.dateReadable,
-            speakers: subsession.speakers ? subsession.speakers.map(speakerId => speakers[speakerId]) : []
+            speakers: subsession.speakers ? subsession.speakers.map(speakerId => ({
+              id: speakerId,
+              ...speakers[speakerId]
+            })) : []
           };
 
           subsessions.push(finalSubsession);
-          sessions = {
-            ...sessions,
-            [sessionId]: finalSubsession
-          }
+          sessions[sessionId] = finalSubsession;
         }
 
         const start = `${timeslotsIndex + 1 } / ${sessionIndex + 1}`;
-        const end = `${timeslotsIndex + (timeslot.sessions[sessionIndex].extend || 0) + 1 } / ${sessionsLen !== 1 ? sessionIndex + 2 : tracksNumber + 1}`;
+        const end = `${timeslotsIndex + (timeslot.sessions[sessionIndex].extend || 0) + 1 } / ${sessionsLen !== 1
+          ? sessionIndex + 2
+          : (Object.keys(extensions).length
+            ? Object.keys(extensions)[0]
+            : tracksNumber + 1 )}`;
+
+        if (timeslot.sessions[sessionIndex].extend) {
+          extensions[sessionIndex + 1] = timeslot.sessions[sessionIndex].extend;
+        }
 
         innnerSessions = [...innnerSessions, {
           gridArea: `${start} / ${end}`,
           items: subsessions
         }];
+      }
+
+      for (const [key, value] of Object.entries(extensions)) {
+        if (value === 1) {
+          delete extensions[key];
+        } else {
+          extensions[key] = value - 1;
+        }
       }
 
       timeslots.push({
