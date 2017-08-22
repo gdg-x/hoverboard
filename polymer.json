@@ -11,7 +11,8 @@
     "src/pages/team-page.html",
     "src/pages/faq-page.html",
     "src/elements/video-dialog.html",
-    "src/elements/speaker-details.html"
+    "src/elements/dialogs/speaker-details.html",
+    "src/elements/dialogs/session-details.html"
   ],
   "sources": [
     "data/**/*",
