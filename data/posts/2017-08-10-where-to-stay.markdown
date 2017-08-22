@@ -4,6 +4,16 @@
 We’ve partnered with several hotels to make your staying in Lviv the most comfortable and memorable. As our participant, you’ll get a discount for the DevFest dates, 13-14th of October (+1 day before and after, if needed). All the hotels are placed in the central part of Lviv, so you can enjoy your weekend and see how beautiful is our city during golden autumn.
 </br>
 </br>
+### <a href="http://www.ibis.com/9709" target="_blank">Ibis Styles Lviv Center</a>
+
+Ibis Styles Lviv Center is bright, modern and stylish hotel with perfect combination of Ukrainian national touch in small details and functional comfort. Hotel is ideally equipped to exceed expectations of both tourists and businessmen. All rates include all-you-can-eat buffet breakfast and unlimited WIFI connection. Bedding quality proved by world-known brand Sweet bed by ibis Styles. Conviviality area as well as kid's zone are available for guests 24 hours 7 days a week.
+
+Our visitors will get **10% discount**! To get the discount make your booking through email [h9709-RE@accor.com](h9709-RE@accor.com) and attach the copy of your ticket to the email. 
+
+Website: <a href="http://www.ibis.com/9709" target="_blank">http://www.ibis.com/9709</a></br>
+Address: <a href="https://goo.gl/maps/vNjGJhrDzQy" target="_blank">Shukhevycha St, 3</a>
+</br>
+</br>
 ### <a href="https://dnister-hotel.phnr.com/en" target="_blank">Premier Hotel Dnister</a>
 
 Premier Hotel Dnister is a modern property in the heart of ancient city of Lviv. Warm atmosphere, delightful breakfast and the best panorama of the Old Town included in the UNESCO World Heritage List make the hotel a great venue for any kind of event – romantic getaway, family weekend or business meeting.
