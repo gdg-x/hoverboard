@@ -31,7 +31,7 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 	}
 	```
 	
-5. Import data to the Firebase Database. You can use [default-firebase-data.json](https://github.com/gdg-x/hoverboard/blob/master/docs/default-firebase-data.json) schema and then update it with your information.
+5. Import data to the Firebase Database. You can use [default-firebase-data.json](../default-firabase-data.json) schema and then update it with your information.
 
 6. Whoa! You've set up Firebase into your app.
 
