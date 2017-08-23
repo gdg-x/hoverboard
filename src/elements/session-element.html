@@ -249,10 +249,9 @@
           });
           return;
         }
-        const sessions = {
-          ...this.featuredSessions,
+        const sessions = Object.assign({}, this.featuredSessions, {
           [this.session.id]: !this.featuredSessions[this.session.id] ? true : null
-        };
+        });
 
         sessionsActions.setUserFeaturedSessions(this.user.uid, sessions);
       }

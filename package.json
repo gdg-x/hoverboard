@@ -10,10 +10,6 @@
     "serve": "gulp serve"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
     "bower": "^1.8.0",
     "browser-sync": "^2.18.13",
     "connect-history-api-fallback": "^1.3.0",
@@ -23,7 +19,6 @@
     "eslint-config-google": "^0.9.1",
     "eslint-plugin-html": "^3.2.0",
     "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-babel": "^7.0.0",
     "gulp-cli": "^1.4.0",
     "gulp-htmlmin": "^3.0.0",
     "gulp-if": "^2.0.2",

@@ -7,7 +7,7 @@ function getTimeDifference(date, startTime, endTime) {
 
 function getEndTime(date, startTime, endTime, totalNumber, number) {
   const timezone = new Date().toString().match(/([A-Z]+[\+-][0-9]+.*)/)[1];
-  const timeStart = new Date(`${date} ${startTime } ${timezone}`).getTime();
+  const timeStart = new Date(`${date} ${startTime} ${timezone}`).getTime();
   const difference = Math.floor(getTimeDifference(date, startTime, endTime) / totalNumber);
   const result = new Date(timeStart + difference * number);
   return result.getHours() + ':' + result.getMinutes();
@@ -20,7 +20,7 @@ function getDuration(date, startTime, endTime) {
   return {
     hh,
     mm: Math.floor(difference / 1000 / 60)
-  }
+  };
 }
 
 function addTagTo(array, element) {
@@ -34,12 +34,9 @@ function updateSpeakersSessions(speakersRaw, speakerIds, session) {
   for (let i = 0; i < speakerIds.length; i++) {
     const speaker = speakersRaw[speakerIds[i]];
     if (speaker) {
-      result[speakerIds[i]] = {
-        ...speaker,
-        sessions: speaker.sessions ?
-          speaker.sessions.map(speakerSession => speakerSession.id === session.id ? session : speakerSession)
-          : [session]
-      }
+      result[speakerIds[i]] = Object.assign({}, speaker, {
+        sessions: speaker.sessions ? speaker.sessions.map(speakerSession => speakerSession.id === session.id ? session : speakerSession) : [session]
+      });
     }
   }
   return result;
@@ -73,23 +70,16 @@ self.addEventListener('message', ({ data }) => {
           const sessionId = timeslot.sessions[sessionIndex].items[subSessionIndex];
           const subsession = sessionsRaw[sessionId];
           const mainTag = subsession.tags ? subsession.tags[0] : 'General';
-          const endTimeRaw = timeslot.sessions[sessionIndex].extend
-            ? day.timeslots[timeslotsIndex + timeslot.sessions[sessionIndex].extend - 1].endTime
-            : timeslot.endTime;
-          const endTime = subSessionsLen > 1
-            ? getEndTime(dayKey, timeslot.startTime, endTimeRaw, subSessionsLen, subSessionIndex + 1)
-            : endTimeRaw;
-          const startTime = subSessionsLen > 1 && subSessionIndex > 0
-            ? sessions[timeslot.sessions[sessionIndex].items[subSessionIndex - 1]].endTime
-            : timeslot.startTime;
+          const endTimeRaw = timeslot.sessions[sessionIndex].extend ? day.timeslots[timeslotsIndex + timeslot.sessions[sessionIndex].extend - 1].endTime : timeslot.endTime;
+          const endTime = subSessionsLen > 1 ? getEndTime(dayKey, timeslot.startTime, endTimeRaw, subSessionsLen, subSessionIndex + 1) : endTimeRaw;
+          const startTime = subSessionsLen > 1 && subSessionIndex > 0 ? sessions[timeslot.sessions[sessionIndex].items[subSessionIndex - 1]].endTime : timeslot.startTime;
 
           if (subsession.tags) {
             dayTags = [...new Set([...dayTags, ...subsession.tags])];
           }
-          scheduleTags = addTagTo((scheduleTags || []), mainTag);
+          scheduleTags = addTagTo(scheduleTags || [], mainTag);
 
-          const finalSubsession = {
-            ...subsession,
+          const finalSubsession = Object.assign({}, subsession, {
             mainTag,
             id: sessionId.toString(),
             day: dayKey,
@@ -98,29 +88,22 @@ self.addEventListener('message', ({ data }) => {
             endTime,
             duration: getDuration(dayKey, startTime, endTime),
             dateReadable: day.dateReadable,
-            speakers: subsession.speakers ? subsession.speakers.map(speakerId => ({
-              id: speakerId,
-              ...speakersRaw[speakerId],
+            speakers: subsession.speakers ? subsession.speakers.map(speakerId => Object.assign({
+              id: speakerId
+            }, speakersRaw[speakerId], {
               sessions: null
             })) : []
-          };
+          });
 
           subsessions.push(finalSubsession);
           sessions[sessionId] = finalSubsession;
           if (subsession.speakers) {
-            speakers = {
-              ...speakers,
-              ...updateSpeakersSessions(speakersRaw, subsession.speakers, finalSubsession)
-            }
+            speakers = Object.assign({}, speakers, updateSpeakersSessions(speakersRaw, subsession.speakers, finalSubsession));
           }
         }
 
-        const start = `${timeslotsIndex + 1 } / ${sessionIndex + 1}`;
-        const end = `${timeslotsIndex + (timeslot.sessions[sessionIndex].extend || 0) + 1 } / ${sessionsLen !== 1
-          ? sessionIndex + 2
-          : (Object.keys(extensions).length
-            ? Object.keys(extensions)[0]
-            : tracksNumber + 1 )}`;
+        const start = `${timeslotsIndex + 1} / ${sessionIndex + 1}`;
+        const end = `${timeslotsIndex + (timeslot.sessions[sessionIndex].extend || 0) + 1} / ${sessionsLen !== 1 ? sessionIndex + 2 : Object.keys(extensions).length ? Object.keys(extensions)[0] : tracksNumber + 1}`;
 
         if (timeslot.sessions[sessionIndex].extend) {
           extensions[sessionIndex + 1] = timeslot.sessions[sessionIndex].extend;
@@ -140,23 +123,19 @@ self.addEventListener('message', ({ data }) => {
         }
       }
 
-      timeslots.push({
-        ...timeslot,
+      timeslots.push(Object.assign({}, timeslot, {
         sessions: innnerSessions
-      })
+      }));
     }
 
-    schedule = {
-      ...schedule,
-      days: {
-        ...schedule.days,
-        [dayKey]: {
-          ...day,
+    schedule = Object.assign({}, schedule, {
+      days: Object.assign({}, schedule.days, {
+        [dayKey]: Object.assign({}, day, {
           timeslots,
           tags: dayTags
-        }
-      }
-    }
+        })
+      })
+    });
   }
 
   self.postMessage({

@@ -10,7 +10,6 @@ const mergeStream = require('merge-stream');
 const polymerBuild = require('polymer-build');
 const browserSync = require('browser-sync').create();
 const history = require('connect-history-api-fallback');
-const babel = require('gulp-babel');
 
 const HtmlSplitter = polymerBuild.HtmlSplitter;
 const PolymerProject = polymerBuild.PolymerProject;
@@ -68,7 +67,6 @@ function build() {
         const sourcesHtmlSplitter = new HtmlSplitter();
         const sourcesStream = polymerProject.sources()
           .pipe(sourcesHtmlSplitter.split())
-          .pipe(gulpif(/\.js$/, babel({presets: ['env'], plugins: ['transform-object-rest-spread']})))
           .pipe(gulpif(/\.js$/, uglify()))
           .pipe(gulpif(/\.(html|css)$/, cssSlam()))
           .pipe(gulpif(/\.html$/, html.minify()))

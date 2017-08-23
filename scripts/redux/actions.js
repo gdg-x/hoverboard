@@ -71,11 +71,10 @@ const toastActions = {
     const duration = toast.duration || 5000;
     store.dispatch({
       type: SHOW_TOAST,
-      toast: {
-        ...toast,
+      toast: Object.assign({}, toast, {
         duration,
         visible: true
-      }
+      })
     });
 
     clearTimeout(toastHideTimeOut);
@@ -160,23 +159,18 @@ const speakersActions = {
             if (sessions[key].speakers) {
               sessions[key].speakers.map(id => {
                 if (speakers[id]) {
-                  const session = {
-                    ...sessions[key],
+                  const session = Object.assign({}, sessions[key], {
                     id: key
-                  };
-                  updatedSpeakers[id] = {
-                    ...speakers[id],
+                  });
+                  updatedSpeakers[id] = Object.assign({}, speakers[id], {
                     sessions: speakers[id].sessions ? [...speakers[id].sessions, session] : [session]
-                  };
+                  });
                 }
               });
             }
           }
 
-          const list = {
-            ...speakers,
-            ...updatedSpeakers
-          };
+          const list = Object.assign({}, speakers, updatedSpeakers);
 
           store.dispatch({
             type: FETCH_SPEAKERS_LIST,

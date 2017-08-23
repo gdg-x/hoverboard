@@ -1,10 +1,10 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
-<link rel="import" href="../mixins/redux-mixin.html">
-<link rel="import" href="../elements/shared-styles.html">
-<link rel="import" href="../elements/hoverboard-icons.html">
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
+<link rel="import" href="../../mixins/redux-mixin.html">
+<link rel="import" href="../shared-styles.html">
+<link rel="import" href="../hoverboard-icons.html">
 
 <dom-module id="subscribe-dialog">
   <template>
@@ -15,10 +15,10 @@
             margin: 0;
             display: block;
             width: 85%;
-            max-width: 420px; 
+            max-width: 420px;
             background: #fff;
             box-shadow: var(--box-shadow);
-            
+
             --paper-input-container-focus-color: var(--default-primary-color);
             --paper-input-container-color: var(--secondary-text-color);
         }
@@ -56,19 +56,19 @@
         }
 
         .subscribe-button {
-            color: var(--dark-primary-color);            
+            color: var(--dark-primary-color);
         }
 
         .subscribe-button:hover {
-            color: var(--focused-color); 
-        } 
+            color: var(--focused-color);
+        }
 
         .general-error {
             color: var(--error-color);
             margin: 0 32px;
-        }  
+        }
 
-        @media (min-width: 640px) {  
+        @media (min-width: 640px) {
 
             .action-buttons {
                 margin-top: 24px;
@@ -76,15 +76,15 @@
 
             paper-input {
                 height: 56px;
-            }            
+            }
         }
 
-     
+
     </style>
 
     <div class="dialog-content" layout vertical>
         <div class="dialog-header">{$ subscribeBlock.formTitle $}</div>
-            <div hidden$="[[!errorOcurred]]" class="general-error">{$ subscribeBlock.generalError $}</div> 
+            <div hidden$="[[!errorOcurred]]" class="general-error">{$ subscribeBlock.generalError $}</div>
             <paper-input id="firstNameInput"
                          on-touchend="_focus"
                          label="{$ subscribeBlock.firstName $}"
@@ -95,19 +95,19 @@
                          label="{$ subscribeBlock.lastName $}"
                          value="{{lastName}}">
             </paper-input>
-            <paper-input id="emailInput" 
+            <paper-input id="emailInput"
                          on-touchend="_focus"
                          label="{$ subscribeBlock.emailAddress $}"
                          value="{{email}}"
                          required auto-validate$="[[validate]]" error-message="{$ subscribeBlock.emailRequired $}" autocomplete="off">
-            </paper-input>   
+            </paper-input>
         <div class="action-buttons" layout horizontal justified>
-            <paper-button 
+            <paper-button
                 class="close-button"
                 on-tap="_closeDialog"
                 >{$ subscribeBlock.close $}</paper-button>
 
-             <paper-button 
+             <paper-button
                 class="subscribe-button"
                 on-tap="_subscribe"
                 ga-on="click"
@@ -116,10 +116,10 @@
                 ga-event-label="subscribe block">
                 {$ subscribeBlock.subscribe $}</paper-button>
         </div>
-        
+
     </div>
-    
-    
+
+
   </template>
 
   <script>
@@ -131,11 +131,11 @@
         }
 
         static get properties() {
-            return {   
+            return {
                 ui: {
                     type: Object,
                     statePath: 'ui'
-                },             
+                },
                 subscribed: {
                     type: Boolean,
                     statePath: 'subscribed'
@@ -156,26 +156,26 @@
                 firstName: String,
                 initialHeight: Number
             }
-        }  
+        }
 
         static get observers() {
             return [
                 '_handleDialogToggled(opened, data)',
                 '_handleSubscribed(subscribed)'
             ];
-        } 
+        }
 
         ready() {
             super.ready();
-            this.initialHeight = window.innerHeight; 
-        } 
+            this.initialHeight = window.innerHeight;
+        }
 
         constructor() {
-            super();  
+            super();
             this.addEventListener('iron-overlay-canceled', this._close);
             this.addEventListener('iron-resize', this._resize);
             window.addEventListener('resize', this._windowResize.bind(this));
-        } 
+        }
 
         _close() {
           dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
@@ -197,7 +197,7 @@
 
         _subscribe() {
              const emailInput = this.shadowRoot.querySelector('#emailInput');
-             if (emailInput.validate()) {                 
+             if (emailInput.validate()) {
                 subscribeActions.subscribe({
                     email: this.email,
                     firstName: this.firstName,
@@ -218,7 +218,7 @@
             emailInput.value = "";
             emailInput.invalid = false;
             emailInput.blur();
-            this.validate = true;     
+            this.validate = true;
         }
 
         _focus(e) {
@@ -237,10 +237,10 @@
                 setTimeout(() => {
                     requestAnimationFrame(() => {
                         this.style.maxHeight = `${this.initialHeight}px`;
-                        this.style.top = `-${headerHeight}px`; 
+                        this.style.top = `-${headerHeight}px`;
                     });
-                }, 10);  
-            }            
+                }, 10);
+            }
        }
     }
 
