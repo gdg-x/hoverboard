@@ -334,7 +334,7 @@
         "icon" : "linkedin",
         "link" : "https://www.linkedin.com/in/sergiizhuk",
         "name" : "Linkedin"
-      }, 
+      },
       {
         "icon" : "twitter",
         "link" : "https://twitter.com/sergiizhuk",
@@ -346,30 +346,29 @@
   } ],
   "tickets" : {
     "elements" : [ {
-      "currency" : "₴",
-      "ends" : "Sep 8",
-      "info" : "Requires valid student ID",
-      "name" : "Student",
-      "price" : 500,
-      "soldOut" : false,
-      "starts" : "May 1"
-    }, {
-      "currency" : "₴",
-      "ends" : "July 1",
-      "info" : "Or first 100 tickets",
+      "currency" : "€",
+      "ends" : "Oct 1",
       "name" : "Early Bird",
-      "price" : 750,
-      "soldOut" : true,
-      "starts" : "May 1"
-    }, {
-      "currency" : "₴",
-      "ends" : "Sep 8",
-      "name" : "Lazy Bird",
-      "price" : 1000,
+      "price" : 49.95,
       "soldOut" : false,
-      "starts" : "July 1"
+      "starts" : "Aug 25"
+    }, {
+      "currency" : "€",
+      "ends" : "Nov 17",
+      "name" : "Regular",
+      "price" : 69.99,
+      "soldOut" : false,
+      "starts" : "Oct 1"
+    }, {
+      "currency" : "€",
+      "ends" : "Nov 17",
+      "name" : "Batch",
+      "info" : "10% discount for more than 5 tickets. Contact us via email.",
+      "price" : 60.99,
+      "soldOut" : false,
+      "starts" : "Oct 1"
     } ],
-    "url" : "http://2event.com/events/630032"
+    "url" : "https://en.xing-events.com/DevFestBaltics2017"
   },
   "videos" : [ {
     "speakers" : "Jakub Škvára",
