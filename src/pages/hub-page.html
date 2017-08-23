@@ -14,7 +14,6 @@
 <link rel="import" href="../elements/footer-block.html">
 
 
-
 <dom-module id="hub-page">
 
   <template>
@@ -29,6 +28,7 @@
       }
 
       h2 {
+        margin-top: 2em;
         font-size: 2.5em;
       }
 
@@ -76,14 +76,14 @@
       }
 
       .quote {
-        padding: 40px !important;
+        padding: 20px !important;
       }
 
       .quote img {
         float: left;
         margin: 0 20px 20px 0;
         border-radius: 50%;
-        width: 150px;
+        width: 100px;
       }
 
       .quote .text {
@@ -94,6 +94,7 @@
       .quote .author {
         font-weight: bold;
         text-align: right;
+        text-style: italic;
         margin: 10px 0 0 0;
       }
 
@@ -124,175 +125,222 @@
     <div class="container">
       <div class="layout">
         <div id="guidelines" class="c1">
-          <paper-card cascaded>
-            <div class="paper-card-container quote">
-              <div class="card-content">
-                <img src="/images/people/vitaliy_zasadnyy.jpg">
-                <p class="text">Welcome to center stage for the 5th Annual GDG DevFest Ukraine. We are excited to be returning to Lviv
-                and thrilled that you chose to participate. Please read on for information that will help your session
-                succeed, and drive value for you both before and after the conference as well.</p>
-                <p class="author">- Vitaliy Zasadnyy, Speakers and Content Manager</p>
-              </div>
-            </div>
-          </paper-card>
-          <paper-card cascaded>
-            <div class="paper-card-container">
-              <div class="card-content">
-                <h2>Session Design</h2>
-                <h3>Presentation template</h3>
-                <div>
-                  Visit the <a href="https://drive.google.com/folderview?id=0B3UBk7uINu2jZHRXZnh4Rk53Yzg&usp=sharing"
-                               target="_blank">Google Drive folder</a> to get template for Keynote, PowerPoint, Google
-                  Slides or use provided images to customize slides in your favourite tool.
-                </div>
-                <h3>Timing</h3>
-                <div>
-                  <b>Session time:</b> 30 minutes plus 10 minutes of Q&A.<br/>
-                  <b>Long workshop:</b> consist from 3 parts 40 minutes each with 10 minutes breakes in between.<br/>
-                  <b>Short workshop:</b> consist from 2 parts 40 minutes each with 10 minutes breakes in between.
-                </div>
-                <h3>Key elements for well designed session</h3>
-                <ol>
-                  <li>NO SALES PITCHES! The needs of the audience come first</li>
-                  <li>Practical data which can not be found elsewhere (e.g. documentation)</li>
-                  <li>Real-life stories both successful and not successful</li>
-                </ol>
-                <h3>Be prepared</h3>
-                <div>
-                  Without exception, we can tell which sessions will be good and which will not by how well the speaker
-                  has prepared his or her slides with detailed and useful information. Don't try to wing it, it doesn't
-                  work.
-                </div>
-              </div>
-            </div>
-          </paper-card>
-          <paper-card cascaded>
-            <div class="paper-card-container">
-              <div class="card-content">
-                <h2>Session Logistics</h2>
-                <div>
-                  With only 10 minutes between sessions and video recording, it is vital that we do everything possible
-                  to avoid technical difficulties.
-                </div>
-                <h3>Present for the camera</h3>
-                <ul>
-                  <li>Your online audience is huge. On average, online views are TEN TIMES that of in-person audience
-                    numbers, so please imagine that you are in a recording studio.
-                  </li>
-                  <li>Always use the microphone.</li>
-                  <li>Always summarize questions from the live audience using your microphone for the online audience.
-                  </li>
-                  <li>Refrain from making comments not fit for distribution, such as how drunk you are from the previous
-                    night's party, etc. These comments are not relevant for the online audience and will need to be cut
-                    out after the session.
-                  </li>
-                </ul>
-                <h3>It is better to use provided laptop</h3>
-                <div>
-                  With pre-tested display/sound, the provided laptop will minimize video/audio issues. If you have any
-                  audio or video clips in your presentation, you MUST set a time to test before your presentation.
-                </div>
-                <h3>Upload your final slides</h3>
-                <div>
-                  The slides marked as _FINAL and sent to Vitaliy will be pre-loaded on the provided laptop. Please
-                  bring a backup copy of your final slides on a flash drive incase a technical error occured while
-                  uploading your slides.
-                </div>
-                <h3>Bringing your own computer?</h3>
-                <div>
-                  If you do decide to use your own computer, please bring necessary adapters and plugs, and be sure to
-                  arrange a time to test it in the lecture hall before the conference.<br/>
-                  Common adapters for Mac products and laptops will be provided, but please bring your own adapters as a
-                  backup.
-                </div>
-                <h3>Be ready to present offline</h3>
-                <div>
-                  We're working hard to provide reliable internet connection but, as you know, "shit happens" so be
-                  ready to make presentation offline.
-                </div>
-              </div>
-            </div>
-          </paper-card>
-          <paper-card cascaded>
-            <div class="paper-card-container">
-              <div class="card-content">
-                <h2>Attendees Statistics</h2>
-                <div>
-                  We prepared an attendees statistics, so you know what specialization and level of experience to expect from the audience.
-                </div>
-                <img src="/images/posts/attendees-statistics-specialization.png">
-                <img src="/images/posts/attendees-statistics-experience.png">
 
-              </div>
-            </div>
-          </paper-card>
-          <paper-card cascaded>
-            <div class="paper-card-container">
-              <div class="card-content">
-                <h2>Extra Resources</h2>
-                <div>
-                  Here you can find links to several external resources that can help you to prepare better presentaion.
-                </div>
-                <ul>
-                  <li><a href="https://prezi.com/1vno843ijfdz/presentation-tips/"
-                         target="_blank">Presentation Tips</a></li>
-                  <li><a href="http://www.slideshare.net/thewikiman/stop-breaking-the-basic-rules-of-presenting"
-                         target="_blank">Presentation: "Stop Breaking The Basic Rules of Presenting"</a></li>
-                  <li><a href="http://www.inc.com/jeff-haden/10-things-speakers-should-never-say-th.html"
-                         target="_blank">Post: "10 Phrases Great Speakers Never Say"</a></li>
-                </ul>
-              </div>
-            </div>
-          </paper-card>
+          <div class="quote">
+            <img src="/images/people/vitaliy_zasadnyy.jpg">
+            <p class="text">Welcome to the DevFest Ukraine speakers' team. We're excited to have you on board. Below you
+              can find the information about talk timings, slides templates, audience statistics and neat tips from our
+              team to get the most out of the DevFest. Let's work together to prepare the best talk possible.</p>
+            <p class="author">- Vitaliy Zasadnyy</p>
+          </div>
+
+
+          <h2>What are we looking for?</h2>
+          <p>We're looking for <b>experience-based talks</b>, the information that can not be found in the documentation
+            or
+            easily googled. We're looking for your stories, your struggles, research results and experiences with the
+            frontier tools or technologies.</p>
+
+          <p><b>What is not going to work:</b> sales pitches, read-try-share information from the documentation,
+            recruitment
+            talks to attract talent.</p>
+
+
+          <h2>Preparation</h2>
+
+          <h3>Slide reviews</h3>
+          <p>We ask you to submit slides for the review to ensure there are no collisions in the content between talks,
+            talk structure is clear, slides will be visible from the back rows, etc. Each review is followed by a series
+            of feedback from our team.</p>
+
+          <p>Deadlines:</p>
+          <ul>
+            <li><b>September 29:</b> draft slides submission deadline. Draft version may lack graphics or some content,
+              but the
+              structure and takeaways should be clear. <a target="_blank"
+                                                          href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=MTI2OWVpcGc0c3A4OTUxMG9xMTV1cmtvZGcgemFzYWRueXkudml0YWxpa0Bt&tmsrc=zasadnyy.vitalik%40gmail.com">[Add
+                to calendar]</a>
+            </li>
+            <li><b>October 9:</b> final slides submission deadline. Final presentation will be uploaded to the backup
+              laptop on the stage. <a target="_blank"
+                                      href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=OG1xcXRsaW1lajhtcTlha29qYml1dHBxamsgemFzYWRueXkudml0YWxpa0Bt&tmsrc=zasadnyy.vitalik%40gmail.com">[Add
+                to calendar]</a>
+            </li>
+          </ul>
+          <p>To submit a presentation for the review, email it with "_DRAFT" or "_FINAL" suffix in the filename to <a
+            href="mailto:vitaliy.zasadnyy@gdg.org.ua" target="_blank">vitaliy.zasadnyy@gdg.org.ua</a>.</p>
+
+          <h3>Slot duration</h3>
+          <ul>
+            <li><b>Session:</b> 40 minutes, we recommend using 30 minutes for the content and 10 for Q&A.</li>
+            <li><b>Long workshop:</b> consist from 3 parts 40 minutes each with 10 minutes breakes in between.</li>
+            <li><b>Short workshop:</b> consist from 2 parts 40 minutes each with 10 minutes breakes in between.</li>
+          </ul>
+
+
+          <h3>Presentation template</h3>
+          <p>To let you focus on the content and save some time on the design we've prepared <a
+            href="https://drive.google.com/drive/folders/0B3UBk7uINu2jNERGaUtuajFISHM?usp=sharing" target="_blank">slide
+            templates for Keynote,
+            PowerPoint and Google Slides</a>. If you are using other prentation software use the guide to adopt the
+            style.</p>
+
+          <p>Take those templates as a set of recommendations and do not limit your creativity.</p>
+
+
+          <h3>Audience statistics</h3>
+          <p>Check the audience stats below to learn who is going to listen to you and adapt complexity accordingly.</p>
+          <img src="/images/posts/chart-audience-roles.png">
+          <img src="/images/posts/chart-audience-experience.png">
+
+
+          <h3>Expert tips</h3>
+
+          <p><b>Get ready to present offline.</b> We're working hard to provide reliable internet connection but "shit
+            happens". Be ready to present offline, e.g., download videos, make demos work offline, have a backup plan.
+          </p>
+
+          <p><b>Nail the demos.</b> On-stage demos are hard, make sure you practice them at least twice. As a backup,
+            have a recorded version of the demo.</p>
+
+          <p><b>More tips.</b> Check <a href="http://speaking.io/" target="_blank">speaking.io</a> - my favourite
+            website/guide while preparing for the talk. It contains
+            tips on how to structure your ideas, build slides, getting comfortable on the stage and deliver a killing
+            talk.</p>
+
+
+          <h2>On the DevFest</h2>
+
+          <h3>Stage sizes</h3>
+          <ul>
+            <li><b>Stage 1:</b> 600 seats.</li>
+            <li><b>Stage 2:</b> 300 seats.</li>
+            <li><b>Stage 3:</b> 200 seats.</li>
+            <li><b>Workshops hall:</b> 36 seats with tables.</li>
+          </ul>
+
+          <h3>Stage equipment</h3>
+          <ul>
+            <li>Private Wi-Fi network for speakers.</li>
+            <li>Head or hand mic for your choice.</li>
+            <li>Backup laptop with your "_FINAL" slides preloaded.</li>
+            <li>HDMI and 3.5mm audio jack cables to connect your laptop.</li>
+            <li>We will prepare a set of video cable adapters for mac, but we recommend having your own HDMI adapter.
+            </li>
+          </ul>
+
+          <p>Additionally in the workshops hall we will provide:</p>
+          <ul>
+            <li>A couple of flipcharts.</li>
+            <li>Power outlets for all attendees.</li>
+          </ul>
+
+          <p>For special stage arrangements, please, email Vitaliy or Ostap.</p>
+
+          <h3>Recording</h3>
+          <p>All sessions (but not workshops) will be recorded and published from the <a href="https://www.youtube.com/channel/UC5nknQj-2llSNd-jqXr4d_w" target="_blank">GDG Lviv YouTube
+            account</a>.</p>
+          <p>Closer to the event you'll receive a Google Form with a request for additional information and ability to
+            opt-out from recording publishing.</p>
+
+
+          <h2>Session feedback</h2>
+          <p>To give you insight on how did the talk go and find top performing speakers we collect two types of the
+            session
+            feedback: on-site right after your session and detailed feedback after the event.</p>
+          <p>We will share both metrics with you after the event.</p>
+
         </div>
+
         <div class="c2">
 
           <paper-card class="info-card" cascaded>
             <div class="card-content header">
-              <div class="title-text"><iron-icon icon="date-range"></iron-icon>  Key dates</div>
+              <div class="title-text">
+                <iron-icon icon="date-range"></iron-icon>
+                Key Dates
+              </div>
             </div>
             <div class="card-content">
-              <b>August 21:</b> submit a presentation for review with "_DRAFT" in the filename <a target="_blank" href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=YzFwZ292bDQzN2pkaHZ2OTVhZ3NzNWQwMDAgemFzYWRueXkudml0YWxpa0Bt&tmsrc=zasadnyy.vitalik%40gmail.com">[Add to calendar]</a></br></br>
-              <b>September 6:</b> submit final presentation with "_FINAL" in the filename <a target="_blank" href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=OWdmZjZnaWg0NzRmcWg2cWRmYm10YnVsY2sgemFzYWRueXkudml0YWxpa0Bt&tmsrc=zasadnyy.vitalik%40gmail.com">[Add to calendar]</a></br></br>
-              <b>September 9:</b> game on, DevFest Ukraine 2016 openning
+              <b>September 29:</b> "_DRAFT" slides submission deadline. <a
+              target="_blank"
+              href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=MTI2OWVpcGc0c3A4OTUxMG9xMTV1cmtvZGcgemFzYWRueXkudml0YWxpa0Bt&tmsrc=zasadnyy.vitalik%40gmail.com">[Add
+              to calendar]</a></br></br>
+              <b>October 9:</b> "_FINAL" slides submission deadline. <a target="_blank"
+                                                                        href="https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=OG1xcXRsaW1lajhtcTlha29qYml1dHBxamsgemFzYWRueXkudml0YWxpa0Bt&tmsrc=zasadnyy.vitalik%40gmail.com">[Add
+              to calendar]</a></br></br>
+              <b>October 13:</b> game on, DevFest Ukraine 2017 openning.
             </div>
           </paper-card>
 
           <paper-card class="info-card" cascaded>
             <div class="card-content header">
-              <div class="title-text"><iron-icon icon="perm-media"/></iron-icon>  Slides template</div>
+              <div class="title-text">
+                <iron-icon icon="perm-media"/>
+                </iron-icon>  Slides Template
+              </div>
             </div>
             <div class="card-content">
-              <a href="https://drive.google.com/folderview?id=0B3UBk7uINu2jZHRXZnh4Rk53Yzg&usp=sharing" target="_blank">Download slides template from Google Drive</a>
+              Download <a href="https://drive.google.com/drive/folders/0B3UBk7uINu2jNERGaUtuajFISHM?usp=sharing"
+                          target="_blank">slides templates for Keynote, PowerPoint and Google Slides</a>
             </div>
-          </paper-card>
-
-          <paper-card class="info-card">
-              <div class="card-content header">
-                  <div class="title-text"><iron-icon icon="local-activity"/></iron-icon> Special party</div>
-              </div>
-              <div class="card-content">
-                  Special speakers and organizers party will be held on Saturday evening. The time and location will be announced later.
-              </div>
-          </paper-card>
-
-          <paper-card class="info-card">
-              <div class="card-content header">
-                  <div class="title-text"><iron-icon icon="place"/></iron-icon> Important locations</div>
-              </div>
-              <div class="card-content">
-                  <b>Hotel Ibis Styles</b>: <a href="https://goo.gl/maps/hSSx5GbMUgC2" target=_blank>Shukhevycha St, 3, Lviv</a><br/></br>
-                  <b>Pivdennyi Expo</b> (DevFest venue): <a href="https://goo.gl/maps/JVZpjMmYYok" target=_blank>Shchyretska St, 36, Lviv</a>
-              </div>
           </paper-card>
 
           <paper-card class="info-card" cascaded>
             <div class="card-content header">
-              <div class="title-text"><iron-icon icon="help-outline"/></iron-icon> Need help?</div>
+              <div class="title-text">
+                <iron-icon icon="star"/>
+                </iron-icon>  Preparation Tips
+              </div>
             </div>
             <div class="card-content">
-              With any questions or equeries feel free to ping Vitaliy at <a href="mailto:vitaliy.zasadnyy@gdg.org.ua">vitaliy.zasadnyy@gdg.org.ua</a>
-              or via phone +38 063 863 20 62
+              Check <a href="http://speaking.io/" target="_blank">speaking.io</a>
+            </div>
+          </paper-card>
+
+          <paper-card class="info-card">
+            <div class="card-content header">
+              <div class="title-text">
+                <iron-icon icon="local-activity"/>
+                </iron-icon> Special Events
+              </div>
+            </div>
+            <div class="card-content">
+              <b>Speakers' dinner</b> on Thursday evening.<br/>
+              <b>Speacial party</b> on Saturday after the event.<br/>
+              <b>Lviv city tour</b> on Sunday morning.<br/>
+              <br/>
+              Details will be announced later.
+            </div>
+          </paper-card>
+
+          <paper-card class="info-card">
+            <div class="card-content header">
+              <div class="title-text">
+                <iron-icon icon="place"/>
+                </iron-icon> Important Locations
+              </div>
+            </div>
+            <div class="card-content">
+              <b>Hotel Ibis Styles</b>: <a href="https://goo.gl/maps/hSSx5GbMUgC2" target=_blank>Shukhevycha St, 3,
+              Lviv</a><br/></br>
+              <b>Pivdennyi Expo</b> (DevFest venue): <a href="https://goo.gl/maps/JVZpjMmYYok" target=_blank>Shchyretska
+              St, 36, Lviv</a>
+            </div>
+          </paper-card>
+
+          <paper-card class="info-card" cascaded>
+            <div class="card-content header">
+              <div class="title-text">
+                <iron-icon icon="help-outline"/>
+                </iron-icon> Need Help?
+              </div>
+            </div>
+            <div class="card-content">
+              With any questions or equeries feel free to ping:<br/><br/>
+              <b>Vitaliy</b> at <a href="mailto:vitaliy.zasadnyy@gdg.org.ua">vitaliy.zasadnyy@gdg.org.ua</a> or via
+              phone +38 063 863 20 62<br/><br/>
+              <b>Ostap</b> at <a href="mailto:ostap.andrusiv@gdg.org.ua">ostap.andrusiv@gdg.org.ua</a><br/>
             </div>
           </paper-card>
         </div>

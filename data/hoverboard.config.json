@@ -188,6 +188,15 @@
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
+    },
+    "hub": {
+      "title": "Speaker's Hub",
+      "headerSettings": {
+        "backgroundColor": "#00838F",
+        "backgroundImage": "/images/backgrounds/hub.jpg",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
     }
   }
 }
