@@ -1,8 +1,8 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
-<link rel="import" href="../mixins/redux-mixin.html">
-<link rel="import" href="../elements/shared-styles.html">
-<link rel="import" href="../elements/hoverboard-icons.html">
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
+<link rel="import" href="../../mixins/redux-mixin.html">
+<link rel="import" href="../shared-styles.html">
+<link rel="import" href="../hoverboard-icons.html">
 
 <dom-module id="signin-dialog">
   <template>
@@ -15,7 +15,7 @@
             padding: 24px 32px;
             background: #fff;
             box-shadow: var(--box-shadow);
-            
+
         }
 
         .dialog-content {
@@ -47,12 +47,12 @@
         .icon-facebook {
             color: var(--facebook-color);
         }
-     
+
     </style>
 
     <div class="dialog-content" layout vertical start>
         {% for provider in signInProviders.providersData %}
-            <paper-button 
+            <paper-button
                 on-tap="_signIn"
                 provider-url="{$ provider.url $}"
                 ga-on="click"
@@ -65,8 +65,8 @@
             </paper-button>
         {% endfor %}
     </div>
-    
-    
+
+
   </template>
 
   <script>
@@ -78,13 +78,13 @@
         }
 
         static get properties() {
-            return {                
+            return {
                 subscribed: {
                     type: Boolean,
                     statePath: 'subscribed'
                 }
             }
-        }  
+        }
 
         constructor() {
             super();
@@ -94,11 +94,11 @@
         _close() {
             dialogsActions.closeDialog(DIALOGS.SIGNIN);
         }
-        
+
         _signIn(event) {
             const providerUrl = event.target.getAttribute('provider-url');
             userActions.signIn(providerUrl);
-        }    
+        }
     }
 
     customElements.define(SigninDialog.is, SigninDialog);
