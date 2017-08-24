@@ -2,7 +2,7 @@
 
 
   class HoverboardAnalytics extends HTMLElement {
-    
+
     connectedCallback() {
 
       // GOOGLE ANALYTICS TRACKING
@@ -17,9 +17,9 @@
       (function(s,o,g,a,m){a=s.createElement(o),m=s.getElementsByTagName('body')[0];
       a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})
       (document,'script','../../node_modules/autotrack/autotrack.js');
- 
+
       ga('create', {
-        trackingId: window.ENV === 'prod' ? '{$ analytics.prod $}' : '{$ analytics.dev $}', 
+        trackingId: window.ENV === 'prod' ? '{$ analytics.prod $}' : '{$ analytics.dev $}',
         cookieDomain: 'auto',
         cookiePath: window.ENV !== 'dev' ? window.PREFIX || '/' : null,
         siteSpeedSampleRate: 10
@@ -32,12 +32,12 @@
 
       ga('send', 'pageview');
 
-      let updateOnlineStatus = (event) => {   
+      let updateOnlineStatus = (event) => {
         ga('send', 'event', 'network', 'change', event.type);
       };
 
       window.addEventListener('online', updateOnlineStatus);
-      window.addEventListener('offline', updateOnlineStatus); 
+      window.addEventListener('offline', updateOnlineStatus);
 
       window.onerror = function (message, file, lineNumber, columnNumber, error) {
         // We don't want to trigger any errors inside window.onerror, so wrap in a try/catch.
@@ -50,9 +50,9 @@
         } catch (e) {
           // no-op
         }
-      };  
+      };
     }
   }
-  customElements.define('hoverboard-analytics', HoverboardAnalytics);
+  window.customElements.define('hoverboard-analytics', HoverboardAnalytics);
 
 </script>

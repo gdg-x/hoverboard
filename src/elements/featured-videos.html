@@ -110,8 +110,8 @@
 
         <div id="videos" class="videos" layout horizontal>
           <template is="dom-repeat" items="[[videos]]" as="block" index-as="index">
-            <div class="video-item" 
-                  on-tap="playVideo" 
+            <div class="video-item"
+                  on-tap="playVideo"
                   ga-on="click"
                   ga-event-category="video"
                   ga-event-action="watch"
@@ -301,7 +301,7 @@
       }
     }
 
-    customElements.define(FeaturedVideos.is, FeaturedVideos);
+    window.customElements.define(FeaturedVideos.is, FeaturedVideos);
 
   </script>
 </dom-module>

@@ -64,8 +64,8 @@
             <template is="dom-repeat" items="[[block.logos]]" as="logo">
               <a
                 class="logo-item card"
-                href="[[logo.url]]"
-                title="[[logo.name]]"
+                href$="[[logo.url]]"
+                title$="[[logo.name]]"
                 target="_blank"
                 rel="noopener noreferrer"
                 layout horizontal center-center
@@ -114,6 +114,6 @@
       }
     }
 
-    customElements.define(PartnersBlock.is, PartnersBlock);
+    window.customElements.define(PartnersBlock.is, PartnersBlock);
   </script>
 </dom-module>

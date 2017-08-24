@@ -76,8 +76,6 @@
           <div
             class="session"
             style$="grid-area: [[session.gridArea]]"
-            layout
-            vertical
           >
             <template is="dom-repeat" items="[[session.items]]" as="subSession">
               <session-element
@@ -86,7 +84,6 @@
                 session="[[subSession]]"
                 user="[[user]]"
                 featured-sessions="[[featuredSessions]]"
-                flex
               ></session-element>
             </template>
           </div>
@@ -123,6 +120,6 @@
       }
     }
 
-    customElements.define(ScheduleDay.is, ScheduleDay);
+    window.customElements.define(ScheduleDay.is, ScheduleDay);
   </script>
 </dom-module>

@@ -39,7 +39,7 @@
       <form
         id="mc-embedded-subscribe-form"
         class="mc-embedded-subscribe-form validate"
-        action="[[url]]"
+        action$="[[url]]"
         method="post"
         name="mc-embedded-subscribe-form"
         target="_blank"
@@ -51,7 +51,7 @@
                        id="mce-EMAIL"
                        autocomplete="off" no-label-float>
           </paper-input>
-          <paper-button 
+          <paper-button
             class="subscribe-button"
             on-click="submitForm"
             ga-on="click"
@@ -63,7 +63,7 @@
 
         <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups -->
         <div style="position: absolute; left: -5000px;">
-          <input type="text" name="[[ name ]]" tabindex="-1">
+          <input type="text" name$="[[ name ]]" tabindex="-1">
         </div>
         <div class="mc-submit-group">
           <input type="submit" value="{$ subscribeBlock.subscribe $}" name="subscribe" id="mc-embedded-subscribe"
@@ -96,6 +96,6 @@
      }
     }
 
-    customElements.define(MailchimpSubscribe.is, MailchimpSubscribe);
+    window.customElements.define(MailchimpSubscribe.is, MailchimpSubscribe);
   </script>
 </dom-module>
