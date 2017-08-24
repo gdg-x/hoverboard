@@ -360,11 +360,11 @@
       "soldOut" : false,
       "starts" : "Oct 1"
     }, {
-      "currency" : "€",
+      "currency" : "",
       "ends" : "Nov 17",
-      "name" : "Batch",
-      "info" : "10% discount for more than 5 tickets. Contact us via email.",
-      "price" : 60.95,
+      "name" : "Groups",
+      "info" : "Discount for groups of 5+. Contact us by mail",
+      "price" : "Discount",
       "soldOut" : false,
       "starts" : "Oct 1"
     } ],
