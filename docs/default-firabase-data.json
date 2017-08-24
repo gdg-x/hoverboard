@@ -365,7 +365,7 @@
       "currency" : "",
       "ends" : "Nov 17",
       "name" : "Groups",
-      "info" : "Discount for groups of 5+. Contact us by mail",
+      "info" : "Discount for groups of 5+. Contact us by mail.",
       "price" : "Discount",
       "soldOut" : false,
       "soldOutText": "Sold Out",      
