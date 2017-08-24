@@ -60,6 +60,15 @@
       "speakers" : [ 5 ],
       "tags" : [ "iOS" ],
       "title" : "Metaprogramming in Swift"
+    },
+    "106": {
+      "complexity" : "Intermediate",
+      "description" : "Conversational interfaces are here to stay. Almost all IM clients have now the possibility to create bots, and with devices as Google Home or Amazon Alexa solely based on voice, bots and NLP will be more important every day. API.AI allows us to easily create a smart agent with ability to learn and to interact with all those services (and much more). In the talk we will review the steps to create a Google Action that can answer questions about the Star Wars characters in a natural and fluid way.",
+      "id" : 106,
+      "language" : "English",
+      "speakers" : [ 6 ],
+      "tags" : [ "Android" ],
+      "title" : "Let's talk about Star Wars"
     }
   },
   "speakers" : [ null, {
@@ -192,6 +201,57 @@
     } ],
     "tags" : [ "iOS" ],
     "title" : "Lead iOS Engineer"
+  }, {
+    "bio" : "I’m an Android GDE in Barcelona, Spain. My passion has been always to interact with the community and share knowledge. I’ve been working on development for more than 20 years and focused in mobile for the last 6 years. I love working on UI and user interaction in any way (screen, voice, text, etc).",
+    "badges" : [ {
+      "description" : "Technology Expert",
+      "link" : "https://developers.google.com/experts/people/sergi-mart-nez",
+      "name" : "GDE"
+    } ],
+    "company" : "Schibsted Spain",
+    "companyLogo" : "/images/logos/schibsted.png",
+    "country" : "Barcelona, Spain",
+    "featured" : true,
+    "id" : 6,
+    "name" : "Sergi Martínez",
+    "photoUrl" : "/images/people/sergi_martinez.jpg",
+    "shortBio" : "Android GDE from Barcelona, Spain. Developer with 20+ years of experience.",
+    "socials" : [ {
+      "icon" : "twitter",
+      "link" : "https://twitter.com/SergiAndReplace",
+      "name" : "Twitter"
+    }, {
+      "icon" : "github",
+      "link" : "https://github.com/sergiandreplace",
+      "name" : "Github"
+    } ],
+    "tags" : [ "Android" ],
+    "title" : "Android GDE"
+  }, {
+    "bio" : "Marcin is a software developer who works on mobile applications in these days. With the head full of ideas, in the spare time, he creates new projects and contributes himself back to OSS community. The author of Natalie, CryptoSwift and ObjectivePGP. Trying to bring privacy to the masses with PrivacyApp.io. Infrequent blogger.",
+    "company" : "PSPDFKit",
+    "companyLogo" : "/images/logos/pdfkit.png",
+    "country" : "Warsaw, Poland",
+    "featured" : true,
+    "id" : 7,
+    "name" : "Marcin Krzyzanowski",
+    "photoUrl" : "/images/people/marcin_krzyzanowski.jpg",
+    "shortBio" : "iOS Ninja",
+    "socials" : [ {
+      "icon" : "linkedin",
+      "link" : "https://www.linkedin.com/in/marcinkrzyzanowski",
+      "name" : "LinkedIn"
+    }, {
+      "icon" : "twitter",
+      "link" : "https://twitter.com/krzyzanowskim",
+      "name" : "Twitter"
+    }, {
+      "icon" : "github",
+      "link" : "https://github.com/krzyzanowskim",
+      "name" : "Github"
+    } ],
+    "tags" : [ "iOS" ],
+    "title" : "iOS Developer"
   } ],
   "team" : [ {
     "members" : [ {
@@ -334,7 +394,7 @@
         "icon" : "linkedin",
         "link" : "https://www.linkedin.com/in/sergiizhuk",
         "name" : "Linkedin"
-      }, 
+      },
       {
         "icon" : "twitter",
         "link" : "https://twitter.com/sergiizhuk",
@@ -346,30 +406,32 @@
   } ],
   "tickets" : {
     "elements" : [ {
-      "currency" : "₴",
-      "ends" : "Sep 8",
-      "info" : "Requires valid student ID",
-      "name" : "Student",
-      "price" : 500,
-      "soldOut" : false,
-      "starts" : "May 1"
-    }, {
-      "currency" : "₴",
-      "ends" : "July 1",
-      "info" : "Or first 100 tickets",
+      "currency" : "€",
+      "ends" : "Oct 1",
       "name" : "Early Bird",
-      "price" : 750,
-      "soldOut" : true,
-      "starts" : "May 1"
-    }, {
-      "currency" : "₴",
-      "ends" : "Sep 8",
-      "name" : "Lazy Bird",
-      "price" : 1000,
+      "price" : 49.95,
       "soldOut" : false,
-      "starts" : "July 1"
+      "soldOutText": "Sold Out",      
+      "starts" : "Aug 25"
+    }, {
+      "currency" : "€",
+      "ends" : "Nov 17",
+      "name" : "Regular",
+      "price" : 69.95,
+      "soldOut" : true,
+      "soldOutText": "",
+      "starts" : "Oct 1"
+    }, {
+      "currency" : "",
+      "ends" : "Nov 17",
+      "name" : "Groups",
+      "info" : "Discount for groups of 5+. Contact us by mail.",
+      "price" : "Discount",
+      "soldOut" : false,
+      "soldOutText": "Sold Out",      
+      "starts" : "Oct 1"
     } ],
-    "url" : "http://2event.com/events/630032"
+    "url" : "https://en.xing-events.com/DevFestBaltics2017"
   },
   "videos" : [ {
     "speakers" : "Jakub Škvára",

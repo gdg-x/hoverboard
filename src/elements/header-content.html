@@ -93,6 +93,12 @@
         color: #fff;
       }
 
+      .buy-button {
+        color: var(--header-background);
+        background: var(--header-color);
+        font-size: 13px;
+      }
+
       .open-video {
         @apply(--layout-horizontal);
         @apply(--layout-center);
@@ -136,11 +142,6 @@
                   <iron-icon icon="play"></iron-icon>
                   {$ playIcon $}
                 </div>
-              {% endif %}
-              {% if enabledBuyTicketsButton %}
-              <div class="action-buttons">
-                <paper-button class="primary" on-tap="_scrollToTickets" raised>{$ buyTicket $}</paper-button>
-              </div>
               {% endif %}
             </div>
           </div>

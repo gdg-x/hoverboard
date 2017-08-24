@@ -36,8 +36,8 @@
   "partnershipProposition": "http://bit.ly/df16-sponsor",
   "videosSessionsUrl": false,
   "enableSessionsRating": true,
-  "enabledTicketsBlock": false,
-  "enabledTicketsSoonBlock": true,
+  "enabledTicketsBlock": true,
+  "enabledTicketsSoonBlock": false,
   "enabledPostsBlock": false,
   "enabledStatisticsBlock": true,
   "enabledFeaturedBlock": true,
@@ -47,7 +47,7 @@
   "enabledMapBlock": true,
   "enabledLogosBlock": false,
   "enabledFooterBlock": true,
-  "enabledBuyTicketsButton": false,
+  "enabledBuyTicketsButton": true,
   "enabledSignInButton": false,
   "navigation": [
     {
