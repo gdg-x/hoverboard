@@ -227,6 +227,31 @@
     } ],
     "tags" : [ "Android" ],
     "title" : "Android GDE"
+  }, {
+    "bio" : "Marcin is a software developer who works on mobile applications in these days. With the head full of ideas, in the spare time, he creates new projects and contributes himself back to OSS community. The author of Natalie, CryptoSwift and ObjectivePGP. Trying to bring privacy to the masses with PrivacyApp.io. Infrequent blogger.",
+    "company" : "PSPDFKit",
+    "companyLogo" : "/images/logos/pdfkit.png",
+    "country" : "Warsaw, Poland",
+    "featured" : true,
+    "id" : 7,
+    "name" : "Marcin Krzyzanowski",
+    "photoUrl" : "/images/people/marcin_krzyzanowski.jpg",
+    "shortBio" : "iOS Ninja",
+    "socials" : [ {
+      "icon" : "linkedin",
+      "link" : "https://www.linkedin.com/in/marcinkrzyzanowski",
+      "name" : "LinkedIn"
+    }, {
+      "icon" : "twitter",
+      "link" : "https://twitter.com/krzyzanowskim",
+      "name" : "Twitter"
+    }, {
+      "icon" : "github",
+      "link" : "https://github.com/krzyzanowskim",
+      "name" : "Github"
+    } ],
+    "tags" : [ "iOS" ],
+    "title" : "iOS Developer"
   } ],
   "team" : [ {
     "members" : [ {
