@@ -60,6 +60,15 @@
       "speakers" : [ 5 ],
       "tags" : [ "iOS" ],
       "title" : "Metaprogramming in Swift"
+    },
+    "106": {
+      "complexity" : "Intermediate",
+      "description" : "Conversational interfaces are here to stay. Almost all IM clients have now the possibility to create bots, and with devices as Google Home or Amazon Alexa solely based on voice, bots and NLP will be more important every day. API.AI allows us to easily create a smart agent with ability to learn and to interact with all those services (and much more). In the talk we will review the steps to create a Google Action that can answer questions about the Star Wars characters in a natural and fluid way.",
+      "id" : 106,
+      "language" : "English",
+      "speakers" : [ 6 ],
+      "tags" : [ "Android" ],
+      "title" : "Let's talk about Star Wars"
     }
   },
   "speakers" : [ null, {
@@ -192,6 +201,32 @@
     } ],
     "tags" : [ "iOS" ],
     "title" : "Lead iOS Engineer"
+  }, {
+    "bio" : "I’m an Android GDE in Barcelona, Spain. My passion has been always to interact with the community and share knowledge. I’ve been working on development for more than 20 years and focused in mobile for the last 6 years. I love working on UI and user interaction in any way (screen, voice, text, etc).",
+    "badges" : [ {
+      "description" : "Technology Expert",
+      "link" : "https://developers.google.com/experts/people/sergi-mart-nez",
+      "name" : "GDE"
+    } ],
+    "company" : "Schibsted Spain",
+    "companyLogo" : "/images/logos/schibsted.png",
+    "country" : "Barcelona, Spain",
+    "featured" : true,
+    "id" : 6,
+    "name" : "Sergi Martínez",
+    "photoUrl" : "/images/people/sergi_martinez.jpg",
+    "shortBio" : "Android GDE from Barcelona, Spain. Developer with 20+ years of experience.",
+    "socials" : [ {
+      "icon" : "twitter",
+      "link" : "https://twitter.com/SergiAndReplace",
+      "name" : "Twitter"
+    }, {
+      "icon" : "github",
+      "link" : "https://github.com/sergiandreplace",
+      "name" : "Github"
+    } ],
+    "tags" : [ "Android" ],
+    "title" : "Android GDE"
   } ],
   "team" : [ {
     "members" : [ {
