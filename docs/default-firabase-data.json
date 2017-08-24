@@ -356,7 +356,7 @@
       "currency" : "€",
       "ends" : "Nov 17",
       "name" : "Regular",
-      "price" : 69.99,
+      "price" : 69.95,
       "soldOut" : false,
       "starts" : "Oct 1"
     }, {
@@ -364,7 +364,7 @@
       "ends" : "Nov 17",
       "name" : "Batch",
       "info" : "10% discount for more than 5 tickets. Contact us via email.",
-      "price" : 60.99,
+      "price" : 60.95,
       "soldOut" : false,
       "starts" : "Oct 1"
     } ],
