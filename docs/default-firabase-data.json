@@ -351,13 +351,15 @@
       "name" : "Early Bird",
       "price" : 49.95,
       "soldOut" : false,
+      "soldOutText": "Sold Out",      
       "starts" : "Aug 25"
     }, {
       "currency" : "€",
       "ends" : "Nov 17",
       "name" : "Regular",
       "price" : 69.95,
-      "soldOut" : false,
+      "soldOut" : true,
+      "soldOutText": "",
       "starts" : "Oct 1"
     }, {
       "currency" : "",
@@ -366,6 +368,7 @@
       "info" : "Discount for groups of 5+. Contact us by mail",
       "price" : "Discount",
       "soldOut" : false,
+      "soldOutText": "Sold Out",      
       "starts" : "Oct 1"
     } ],
     "url" : "https://en.xing-events.com/DevFestBaltics2017"
