@@ -130,7 +130,7 @@
       <div class="speakers-wrapper">
         <template is="dom-repeat" items="[[speakers]]" as="speaker">
           <div class="speaker card"
-                on-tap="_openSpeaker"               
+                on-tap="_openSpeaker"
                 ga-on="click"
                 ga-event-category="speaker"
                 ga-event-action="open details"
@@ -219,6 +219,6 @@
       }
     }
 
-    customElements.define(SpeakersBlock.is, SpeakersBlock);
+    window.customElements.define(SpeakersBlock.is, SpeakersBlock);
   </script>
 </dom-module>

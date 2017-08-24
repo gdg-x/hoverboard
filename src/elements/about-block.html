@@ -19,7 +19,7 @@
             .container {
                 overflow: hidden;
             }
-           
+
             .statistics-block {
                 padding: 16px;
             }
@@ -109,7 +109,7 @@
                 .container {
                     margin: 48px auto;
                 }
-                
+
                 .description-block,
                 .statistics-block {
                     padding: 48px 0;
@@ -139,7 +139,7 @@
                 <h2 class="title">{$ aboutBlock.title $}</h2>
 
                    <p class="block-subtitle"> {$ aboutBlock.callToAction.featuredSessions.description $} </p>
-                     <a class="block-cta" 
+                     <a class="block-cta"
                         href="{$ aboutBlock.callToAction.featuredSessions.link $}"
                         ga-on="click"
                         ga-event-category="video"
@@ -230,6 +230,6 @@
             }
         }
 
-        customElements.define(AboutBlock.is, AboutBlock);
+        window.customElements.define(AboutBlock.is, AboutBlock);
     </script>
 </dom-module>

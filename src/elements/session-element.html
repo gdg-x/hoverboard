@@ -17,13 +17,13 @@
         display: block;
         background-color: #fff;
         border-bottom: 1px solid var(--border-light-color);
+        height: 100%;
       }
 
       .session {
         height: 100%;
         color: var(--primary-text-color);
         overflow: hidden;
-        position: relative;
       }
 
       .session:hover {
@@ -257,6 +257,6 @@
       }
     }
 
-    customElements.define(SessionElement.is, SessionElement);
+    window.customElements.define(SessionElement.is, SessionElement);
   </script>
 </dom-module>

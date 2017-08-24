@@ -197,8 +197,8 @@
       <ul class="nav-inline">
         {% for socFollow in socialNetwork.follow %}
           <li>
-            <a href="{$ socFollow.url $}" 
-                target="_blank" 
+            <a href="{$ socFollow.url $}"
+                target="_blank"
                 rel="noopener noreferrer"
                 ga-on="click"
                 ga-event-category="social"
@@ -225,7 +225,7 @@
       static get is() { return 'footer-social' }
     }
 
-    customElements.define(FooterSocial.is, FooterSocial);
+    window.customElements.define(FooterSocial.is, FooterSocial);
 
   </script>
 </dom-module>
