@@ -12,19 +12,69 @@
 
     <style>
       :host {
+        --gap: 8px;
         display: block;
       }
+
+      .photos-grid {
+        display: grid;
+        width: 100%;
+        height:100%;
+        grid-auto-rows: calc((100% / 30) - var(--gap));
+        grid-auto-columns: calc((100% / 30) - var(--gap));
+        justify-content: center;
+        align-content: center;
+        grid-gap: var(--gap);
+      }
+
+      .grid-item {
+        background-color: var(--secondary-background-color);
+      }
+
+      .grid-item:first-child { grid-area: 11 / 1 / 17 / 5; }
+      .grid-item:nth-child(2) { grid-area: 22 / 6 / 28 / 10; }
+      .grid-item:nth-child(3) { grid-area: 8 / 5 / 22 / 15; }
+      .grid-item:nth-child(4) { grid-area: 22 / 10 / 29 / 15; }
+      .grid-item:nth-child(5) { grid-area: 1 / 11 / 8 / 15; }
+      .grid-item:nth-child(6) { grid-area: 17 / 15 / 24 / 20; }
+      .grid-item:nth-child(7) { grid-area: 9 / 15 / 17 / 23; }
+      .grid-item:nth-child(8) { grid-area: 2 / 18 / 9 / 23; }
+      .grid-item:nth-child(9) { grid-area: 17 / 20 / 22 / 26; }
+      .grid-item:nth-child(10) { grid-area: 22 / 20 / 28 / 23; }
+      .grid-item:nth-child(11) { grid-area: 4 / 23 / 11 / 27; }
+      .grid-item:nth-child(12) { grid-area: 11 / 23 / 17	/ 30; }
+      .grid-item:nth-child(13) { grid-area: 17 / 26 / 22 / 28; }
+
       .block:not(:last-of-type) {
         margin-bottom: 32px;
+      }
+
+      .description {
+        color: var(--secondary-text-color);
+      }
+
+      paper-button {
+        margin: 0;
       }
     </style>
 
     <div class="container" layout horizontal>
-      <div flex></div>
+      <div flex>
+        <div class="photos-grid">
+          {% for photo in aboutOrganizerBlock.photos %}
+          <plastic-image
+            class="grid-item"
+            srcset="{$ photo $}"
+            sizing="cover"
+            lazy-load preload fade
+          ></plastic-image>
+          {% endfor %}
+        </div>
+      </div>
       <div class="description-block" flex>
         {% for block in aboutOrganizerBlock.blocks %}
         <div class="block">
-          <h1 class="container-title">{$ block.title $}</h1>
+          <h2>{$ block.title $}</h2>
           <marked-element class="description" markdown="{$ block.description $}">
             <div slot="markdown-html"></div>
           </marked-element>
