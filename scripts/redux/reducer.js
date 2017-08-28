@@ -174,3 +174,10 @@ const toastReducer = (state = initialState.toast, action) => {
       return state;
   }
 };
+
+const notificationsReducer = (state = initialState.notifications, action) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};

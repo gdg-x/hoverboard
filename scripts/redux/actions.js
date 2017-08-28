@@ -330,6 +330,7 @@ const userActions = {
         }
 
         helperActions.storeUser(signInObject.user);
+        notificationsActions.getToken(true);
       });
   },
 
@@ -417,6 +418,50 @@ const subscribeActions = {
       type: SUBSCRIBE,
       subscribed: false
     });
+  }
+};
+
+const notificationsActions = {
+  requestPermission: () => {
+    const messaging = firebase.messaging();
+    messaging.requestPermission()
+      .then(() => {
+        notificationsActions.getToken();
+      })
+      .catch(error => {
+        console.log('Unable to get permission to notify.', error);
+      });
+
+    messaging.onMessage(payload => {
+      console.log("Message received. ", payload);
+    });
+  },
+  getToken: silent => {
+    const messaging = firebase.messaging();
+    const result = messaging.getToken();
+    result
+      .then(currentToken => {
+        if (currentToken) {
+          console.log('currentToken', currentToken);
+          firebase.database()
+            .ref(`/notifications/subscribers/${currentToken}`)
+            .set(true);
+          const state = store.getState();
+          const userUid = state.user && state.user.uid ? state.user.uid : null;
+          if (userUid) {
+            firebase.database()
+              .ref(`/notifications/users/${userUid}/${currentToken}`)
+              .set(true);
+          }
+        } else {
+          console.log('No Instance ID token available. Request permission to generate one.');
+          !silent && notificationsActions.requestPermission();
+        }
+      })
+      .catch(error => {
+        console.log('An error occurred while retrieving token. ', error);
+      });
+    return result;
   }
 };
 

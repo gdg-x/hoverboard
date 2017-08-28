@@ -311,6 +311,10 @@
               {% endfor %}
               <paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]">{$ signIn $}</paper-tab>
             </paper-tabs>
+            <paper-icon-button
+              icon="hoverboard:bell"
+              on-tap="_toggleNotifications"
+            ></paper-icon-button>
 
             </paper-menu-button>
             <paper-menu-button
@@ -627,6 +631,10 @@
 
       _removeQueryParams() {
         this.set('queryParams', null);
+      }
+
+      _toggleNotifications() {
+        notificationsActions.getToken();
       }
     }
 
