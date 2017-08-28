@@ -133,8 +133,8 @@
     "country" : "Berlin, Germany",
     "featured" : true,
     "id" : 3,
-    "name" : "Cesar Valentine",
-    "photoUrl" : "/images/people/cesar_valentine.jpg",
+    "name" : "Cesar Valiente",
+    "photoUrl" : "/images/people/cesar_valiente.jpg",
     "shortBio" : "Cesar Valiente is a passionate software engineer working at Microsoft in the One Note team.",
     "socials" : [ {
       "icon" : "linkedin",
