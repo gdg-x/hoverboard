@@ -50,6 +50,17 @@
         padding: 16px;
       }
 
+      .card-content .title-text {
+        @apply(--layout-horizontal);
+        @apply(--layout-center);
+      }
+
+      .card-content iron-icon {
+        --iron-icon-width: 20px;
+        --iron-icon-height: 20px;
+        margin-right: 8px;
+      }
+
       .info-card {
         margin-bottom: 20px;
       }
@@ -258,7 +269,7 @@
             <div class="card-content header">
               <div class="title-text">
                 <iron-icon icon="date-range"></iron-icon>
-                Key Dates
+                <span>Key Dates</span>
               </div>
             </div>
             <div class="card-content">
@@ -276,8 +287,8 @@
           <paper-card class="info-card" cascaded>
             <div class="card-content header">
               <div class="title-text">
-                <iron-icon icon="perm-media"/>
-                </iron-icon>  Slides Template
+                <iron-icon icon="perm-media"/></iron-icon>
+                <span>Slides Template</span>
               </div>
             </div>
             <div class="card-content">
@@ -289,8 +300,8 @@
           <paper-card class="info-card" cascaded>
             <div class="card-content header">
               <div class="title-text">
-                <iron-icon icon="star"/>
-                </iron-icon>  Preparation Tips
+                <iron-icon icon="star"/></iron-icon>
+                <span>Preparation Tips</span>
               </div>
             </div>
             <div class="card-content">
@@ -301,13 +312,14 @@
           <paper-card class="info-card">
             <div class="card-content header">
               <div class="title-text">
-                <iron-icon icon="local-activity"/>
-                </iron-icon> Special Events
+                <iron-icon icon="local-activity"/></iron-icon>
+                Special Events
               </div>
             </div>
             <div class="card-content">
               <b>Speakers' dinner</b> on Thursday evening.<br/>
-              <b>Speacial party</b> on Saturday after the event.<br/>
+              <b>Conference party</b> on Friday after the first day.<br/>
+              <b>Special party</b> on Saturday after the event.<br/>
               <b>Lviv city tour</b> on Sunday morning.<br/>
               <br/>
               Details will be announced later.
@@ -317,8 +329,8 @@
           <paper-card class="info-card">
             <div class="card-content header">
               <div class="title-text">
-                <iron-icon icon="place"/>
-                </iron-icon> Important Locations
+                <iron-icon icon="place"/></iron-icon>
+                <span>Important Locations</span>
               </div>
             </div>
             <div class="card-content">
@@ -332,8 +344,8 @@
           <paper-card class="info-card" cascaded>
             <div class="card-content header">
               <div class="title-text">
-                <iron-icon icon="help-outline"/>
-                </iron-icon> Need Help?
+                <iron-icon icon="help-outline"/></iron-icon>
+                <span>Need Help?</span>
               </div>
             </div>
             <div class="card-content">
