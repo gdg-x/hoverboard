@@ -69,6 +69,15 @@
       "speakers" : [ 6 ],
       "tags" : [ "Android" ],
       "title" : "Let's talk about Star Wars"
+    },
+    "107": {
+      "complexity" : "Intermediate",
+      "description" : "Swift is advertised as a C++ replacement. In this talk, I discuss how true is this claim, how Swift is built to compete on the same field, what is the current status of Swift 4 performance and how it compares to other languages. You’ll learn about Swift Intermediate Language, about memory management details and what to do to get the best out of Swift to make it fast.",
+      "id" : 107,
+      "language" : "English",
+      "speakers" : [ 7 ],
+      "tags" : [ "iOS" ],
+      "title" : "Swift on fast rails"
     }
   },
   "speakers" : [ null, {
@@ -228,7 +237,7 @@
     "tags" : [ "Android" ],
     "title" : "Android GDE"
   }, {
-    "bio" : "Marcin is a software developer who works on mobile applications in these days. With the head full of ideas, in the spare time, he creates new projects and contributes himself back to OSS community. The author of Natalie, CryptoSwift and ObjectivePGP. Trying to bring privacy to the masses with PrivacyApp.io. Infrequent blogger.",
+    "bio" : "Marcin Krzyżanowski, PSPDFKit GmbH. A software developer who works on mobile applications in these days. With the head full of ideas, in the spare time, he creates new projects and contributes himself back to OSS community. The author of Natalie, CryptoSwift, and ObjectivePGP. Trying to bring privacy to the masses with privacyapp.io. Infrequent blogger.",
     "company" : "PSPDFKit",
     "companyLogo" : "/images/logos/pdfkit.png",
     "country" : "Warsaw, Poland",
@@ -236,7 +245,7 @@
     "id" : 7,
     "name" : "Marcin Krzyzanowski",
     "photoUrl" : "/images/people/marcin_krzyzanowski.jpg",
-    "shortBio" : "iOS Ninja",
+    "shortBio" : "iOS Ninja at PSPDFKit",
     "socials" : [ {
       "icon" : "linkedin",
       "link" : "https://www.linkedin.com/in/marcinkrzyzanowski",
