@@ -81,13 +81,13 @@ exports.sessionsNotifications = functions.pubsub.topic('session-tick').onPublish
     .then(scheduleSnapshot => {
       const schedule = scheduleSnapshot.val();
       if (Object.keys(schedule).indexOf(todayDay) > -1) {
-        const beforeTime = moment().utcOffset(timezone).subtract(3, 'minutes');
-        const afterTime = moment().utcOffset(timezone).add(3, 'minutes');
+        const beforeTime = moment().subtract(3, 'minutes');
+        const afterTime = moment().add(3, 'minutes');
         console.log('Looking for sessions between', beforeTime, afterTime);
 
         const upcomingTimeslot = schedule[todayDay].timeslots
           .filter(timeslot => {
-            const timeslotTime = moment(`${timeslot.startTime}${timezone}`, `${format}Z`).utcOffset(timezone);
+            const timeslotTime = moment(`${timeslot.startTime}${timezone}`, `${format}Z`);
             console.log(timeslot.startTime, timeslotTime, timeslotTime.isBetween(beforeTime, afterTime));
             return timeslotTime.isBetween(beforeTime, afterTime);
           });
@@ -103,7 +103,7 @@ exports.sessionsNotifications = functions.pubsub.topic('session-tick').onPublish
               const userIdsFeaturedSession = Object.keys(results[0].val());
               const session = results[1].val();
               console.log('Users', userIdsFeaturedSession, 'featured', session);
-              const end = moment(upcomingTimeslot[0].startTime, format); // another date
+              const end = moment(upcomingTimeslot[0].startTime, format);
               const duration = moment.duration(moment().diff(end));
               const minutes = duration.asMinutes();
               sendPushNotificationToUsers(userIdsFeaturedSession, {

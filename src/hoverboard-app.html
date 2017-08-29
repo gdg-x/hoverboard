@@ -92,6 +92,10 @@
         z-index: 1;
       }
 
+      .header {
+        --iron-icon-fill-color: var(--secondary-text-color);
+      }
+
       app-toolbar {
         height: auto;
         background-color: var(--primary-background-color);
@@ -312,7 +316,8 @@
               <paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]">{$ signIn $}</paper-tab>
             </paper-tabs>
             <paper-icon-button
-              icon="hoverboard:bell"
+              icon="hoverboard:[[_getNotificationsIcon(notifications.status)]]"
+              disabled="[[_isNotificationsDisabled(notifications.status)]]"
               on-tap="_toggleNotifications"
             ></paper-icon-button>
 
@@ -501,6 +506,10 @@
             type: Object,
             statePath: 'schedule'
           },
+          notifications: {
+            type: Boolean,
+            statePath: 'notifications'
+          },
           _openedDialog: {
             type: String
           },
@@ -544,6 +553,7 @@
         console.log('Hoverboard v2 is ready!');
         this.removeAttribute('unresolved');
         this._ensureLazyLoaded();
+        notificationsActions.getToken(true);
 //        userActions.autoSignIn(this.providerUrls);
       }
 
@@ -634,7 +644,23 @@
       }
 
       _toggleNotifications() {
+        if(this.notifications.status === NOTIFICATIONS_STATUS.GRANTED) {
+          notificationsActions.unsubscribe(this.notifications.token);
+          return;
+        }
         notificationsActions.getToken();
+      }
+
+      _getNotificationsIcon(status) {
+        return status === NOTIFICATIONS_STATUS.DEFAULT
+          ? 'bell-outline'
+          : status === NOTIFICATIONS_STATUS.GRANTED
+            ? 'bell'
+            : 'bell-off';
+      }
+
+      _isNotificationsDisabled(status) {
+        return status === NOTIFICATIONS_STATUS.DENIED;
       }
     }
 

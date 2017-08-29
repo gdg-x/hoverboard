@@ -48,3 +48,10 @@ const SIGN_IN = 'SIGN_IN';
 const SIGN_OUT = 'SIGN_OUT';
 // subscribe
 const SUBSCRIBE = 'SUBSCRIBE';
+// notifications
+const UPDATE_NOTIFICATIONS_STATUS = 'UPDATE_NOTIFICATIONS_STATUS';
+const NOTIFICATIONS_STATUS = {
+  GRANTED: 'granted',
+  DENIED: 'denied',
+  DEFAULT: 'default'
+};

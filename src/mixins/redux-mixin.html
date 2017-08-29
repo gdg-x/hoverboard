@@ -61,7 +61,10 @@
     },
     subscribed: false,
     toast: {},
-    notifications: {}
+    notifications: {
+      token: null,
+      status: NOTIFICATIONS_STATUS.DEFAULT
+    }
   };
 
   const appReducer = (state = initialState, action) => {

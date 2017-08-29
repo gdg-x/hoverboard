@@ -430,11 +430,11 @@ const notificationsActions = {
       })
       .catch(error => {
         console.log('Unable to get permission to notify.', error);
+        store.dispatch({
+          type: UPDATE_NOTIFICATIONS_STATUS,
+          status: NOTIFICATIONS_STATUS.DENIED
+        });
       });
-
-    messaging.onMessage(payload => {
-      console.log("Message received. ", payload);
-    });
   },
   getToken: silent => {
     const messaging = firebase.messaging();
@@ -442,10 +442,16 @@ const notificationsActions = {
     result
       .then(currentToken => {
         if (currentToken) {
-          console.log('currentToken', currentToken);
           firebase.database()
             .ref(`/notifications/subscribers/${currentToken}`)
-            .set(true);
+            .set(true)
+            .then(() => {
+              store.dispatch({
+                type: UPDATE_NOTIFICATIONS_STATUS,
+                status: NOTIFICATIONS_STATUS.GRANTED,
+                token: currentToken
+              });
+            });
           const state = store.getState();
           const userUid = state.user && state.user.uid ? state.user.uid : null;
           if (userUid) {
@@ -456,12 +462,37 @@ const notificationsActions = {
         } else {
           console.log('No Instance ID token available. Request permission to generate one.');
           !silent && notificationsActions.requestPermission();
+          store.dispatch({
+            type: UPDATE_NOTIFICATIONS_STATUS,
+            status: Notification.permission,
+            token: null
+          });
         }
       })
       .catch(error => {
         console.log('An error occurred while retrieving token. ', error);
       });
+
+    messaging.onMessage(payload => {
+      console.log("Message received. ", payload);
+      const notification = new Notification(payload.title, payload);
+      notification.show();
+    });
+    messaging.onTokenRefresh(() => {
+      notificationsActions.getToken(true);
+    });
     return result;
+  },
+  unsubscribe: token => {
+    const messaging = firebase.messaging();
+    messaging.deleteToken(token)
+      .then(() => {
+        store.dispatch({
+          type: UPDATE_NOTIFICATIONS_STATUS,
+          status: NOTIFICATIONS_STATUS.DEFAULT,
+          token: null
+        });
+      });
   }
 };
 
