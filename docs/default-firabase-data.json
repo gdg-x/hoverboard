@@ -23,8 +23,86 @@
   ],
     "title" : "General Partner"
   } ],
-  "schedule" : [],
+  "schedule" : [ {
+    "date" : "2017-11-17",
+    "dateReadable" : "November 17",
+    "timeslots" : [ {
+      "startTime" : "09:00",
+      "sessions" : [ [ 201 ] ],
+      "endTime" : "10:00"
+    }, {
+      "startTime" : "10:00",
+      "sessions" : [ [ 202 ] ],
+      "endTime" : "10:15"
+    }, {
+      "startTime" : "10:15",
+      "sessions" : [ [ 101 ] ],
+      "endTime" : "11:00"
+    }, {
+      "startTime" : "11:15",
+      "sessions" : [ [ 102 ], [ 108 ] ],
+      "endTime" : "12:15"
+    }, {
+      "startTime" : "12:30",
+      "sessions" : [ [ 103 ], [ 105 ] ],
+      "endTime" : "13:30"
+    }, {
+      "startTime" : "13:30",
+      "sessions" : [ [ 203 ] ],
+      "endTime" : "13:45"
+    }, {
+      "startTime" : "13:45",
+      "sessions" : [ [ 301 ], [ 302 ] ],
+      "endTime" : "14:00"
+    }, {
+      "startTime" : "14:00",
+      "sessions" : [ [ 303 ], [ 304 ] ],
+      "endTime" : "14:15"
+    }, {
+      "startTime" : "14:15",
+      "sessions" : [ [ 204 ] ],
+      "endTime" : "14:30"
+    }, {
+      "startTime" : "14:30",
+      "sessions" : [ [ 106 ], [ 104 ] ],
+      "endTime" : "15:30"
+    }, {
+      "startTime" : "15:45",
+      "sessions" : [ [ 404 ], [ 404 ] ],
+      "endTime" : "16:45"
+    }, {
+      "startTime" : "16:45",
+      "sessions" : [ [ 206 ] ],
+      "endTime" : "17:15"
+    }, {
+      "startTime" : "17:15",
+      "sessions" : [ [ 404 ], [ 404 ] ],
+      "endTime" : "18:15"
+    }, {
+      "startTime" : "18:30",
+      "sessions" : [ [ 208 ] ],
+      "endTime" : "18:45"
+    }, {
+      "startTime" : "20:00",
+      "sessions" : [ [ 209 ] ],
+      "endTime" : "22:00"
+    }  ],
+    "tracks" : [ {
+      "title" : "Room 1"
+    }, {
+      "title" : "Room 2"
+    } ]
+  } ],
   "sessions" : {
+    "101": {
+      "complexity" : "Beginner",
+      "description" : "Let the conference begin!",
+      "id" : 101,
+      "language" : "English",
+      "speakers" : [ 1 ],
+      "tags" : [ "Mobile", "Development" ],
+      "title" : "Keynote"
+    },
     "102": {
       "complexity" : "Intermediate",
       "description" : "You have a really cool and impactful project, but as soon as your codebase gets bigger, and more and more contributors come into play, things can become challenging in regards to aspects like: code consistency, technical debt, refactoring, application architecture and team organization. Let’s jump onboard on this journey and walk through different techniques that can help us keep our code sane and healthy for better scalability.\nDisclaimer: This talk is going to be focused from a mobile standpoint but most of the practices included can also be applied to any software project under development.",
@@ -78,6 +156,94 @@
       "speakers" : [ 7 ],
       "tags" : [ "iOS" ],
       "title" : "Swift on fast rails"
+    },
+    "108": {
+      "complexity" : "Beginner",
+      "description" : "Context is a primary consideration when designing a user interface and as mobile asserts its dominance, many designers adhere to a mobile-first approach. The question is, should context stop at the device level? Today we’re seeing a blurring of the lines, with UI elements making their way from native apps to mobile web, and vice versa. While some standardization makes sense, there is still inherent differences that need to be taken into account.\nJoin creative technologist George Eid for a talk and Q&A on designing for mobile. Framed by the principles of Design Thinking and Collaborative Design, his talk will include an introduction to AREA 17, their philosophy towards mobile design, and actionable design techniques for designers and developers alike.",
+      "id" : 108,
+      "language" : "English",
+      "speakers" : [ 8 ],
+      "tags" : [ "Design" ],
+      "title" : "Designing for mobile: context matters"
+    },
+    "201" : {
+      "description" : "Get your badge, coffee, enjoy talking with tech addicts around",
+      "id" : 201,
+      "image" : "/images/backgrounds/registration.jpg",
+      "title" : "Registration & morning Coffee"
+    },
+    "202" : {
+      "description" : "Official start of the conference. Greetings from the organizers, sponsors and partners.",
+      "id" : 202,
+      "image" : "/images/backgrounds/opening.jpg",
+      "language" : "English",
+      "title" : "GDG DevFest Baltics 2017 Opening"
+    },
+    "203" : {
+      "description" : "Foooooooood!",
+      "id" : 203,
+      "image" : "/images/backgrounds/lunch.jpg",
+      "title" : "Lunch starts"
+    },
+    "204" : {
+      "description" : "Foooooooood!",
+      "id" : 204,
+      "image" : "/images/backgrounds/lunch.jpg",
+      "title" : "Lunch ends"
+    },
+    "205" : {
+      "description" : "Coffeeeeeee!",
+      "id" : 205,
+      "image" : "/images/backgrounds/coffee-break.jpg",
+      "title" : "Coffee break"
+    },
+    "206" : {
+      "description" : "Coffeeeeeee!",
+      "id" : 206,
+      "image" : "/images/backgrounds/coffee-break-2.jpg",
+      "title" : "Coffee break"
+    },
+    "207" : {
+      "description" : "Socialize, look around",
+      "id" : 207,
+      "image" : "/images/backgrounds/coffee-break-2.jpg",
+      "title" : "Break"
+    },
+    "208" : {
+      "description" : "Make sure you won't miss closing ceremony, all gifts from out sponsors and partners will find their owners during this session.",
+      "id" : 208,
+      "title" : "Conference closing and contest winners announcements"
+    },
+    "209" : {
+      "description" : "Afterparty is a great time to have some fun and meet new people",
+      "id" : 209,
+      "image" : "/images/backgrounds/party.jpg",
+      "title" : "Afterparty & Networking"
+    },
+    "301" : {
+      "description" : "Lightning talk (TBD)",
+      "id" : 301,
+      "title" : "Lightning talk (TBD)"
+    },
+    "302" : {
+      "description" : "Lightning talk (TBD)",
+      "id" : 302,
+      "title" : "Lightning talk (TBD)"
+    },
+    "303" : {
+      "description" : "Lightning talk (TBD)",
+      "id" : 303,
+      "title" : "Lightning talk (TBD)"
+    },
+    "304" : {
+      "description" : "Lightning talk (TBD)",
+      "id" : 304,
+      "title" : "Lightning talk (TBD)"
+    },
+    "404" : {
+      "description" : "TBD",
+      "id" : 404,
+      "title" : "TBD"
     }
   },
   "speakers" : [ null, {
@@ -261,6 +427,44 @@
     } ],
     "tags" : [ "iOS" ],
     "title" : "iOS Developer"
+  }, {
+    "bio" : "George Eid is a creative strategist with 23 years experience working on the Internet. With a degree in theatre, he spent the first part of his career writing for the stage and producing films. In 2003, he founded AREA 17, a digital product agency in Paris and New York. In 2008, he started an incubator within the agency, launching web and mobile products such as Slash, Krrb and Subfolio. His agency has produced over 300 digital products and brands for many of the most respected brands in the world.",
+    "company" : "AREA 17",
+    "companyLogo" : "/images/logos/area17.svg",
+    "country" : "Paris - New York",
+    "featured" : true,
+    "id" : 8,
+    "name" : "George Eid",
+    "photoUrl" : "/images/people/george_eid.jpg",
+    "shortBio" : "Creative strategist with 23 years experience working on the Internet. Founder of AREA 17. Design agency working with Apple, Google, Facebook.",
+    "socials" : [ {
+      "icon" : "twitter",
+      "link" : "https://twitter.com/opticalcortex",
+      "name" : "Twitter"
+    } ],
+    "tags" : [ "Design" ],
+    "title" : "Founder of AREA 17. Design agency working with Apple, Google, Facebook."
+  }, {
+    "bio" : "I’m an Android Engineer working at Plex, writing the best media software of all times.\nIn my free time, I love learning about Kotlin and share all this knowledge with the Android community in my blog antonioleiva.com. A couple of years ago, I wrote a book, Kotlin for Android Developers, that was meant to help other developers start diving into the languages without knowledge in a very practical way.\nThis year, I also published an online course based on the same methodology. Apart from this, I do live workshops in Spain, go to great events like this, I teach at the University.\nDon’t doubt to come and say hello during the event!",
+    "company" : "Plex",
+    "companyLogo" : "/images/logos/plex.png",
+    "country" : "Madrid, Spain",
+    "featured" : true,
+    "id" : 9,
+    "name" : "Antonio Leiva",
+    "photoUrl" : "/images/people/antonio_leiva.jpg",
+    "shortBio" : "Author of \"Kotlin for Android Developers\" book",
+    "socials" : [ {
+      "icon" : "twitter",
+      "link" : "https://twitter.com/lime_cl",
+      "name" : "Twitter"
+    }, {
+      "icon" : "github",
+      "link" : "https://github.com/antoniolg",
+      "name" : "Github"
+    } ],
+    "tags" : [ "Android", "Kotlin" ],
+    "title" : "Android Engineer"
   } ],
   "team" : [ {
     "members" : [ {
