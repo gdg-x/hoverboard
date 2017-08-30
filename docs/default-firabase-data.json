@@ -39,17 +39,9 @@
       "sessions" : [ [ 101 ] ],
       "endTime" : "11:00"
     }, {
-      "startTime" : "11:00",
-      "sessions" : [ [ 207 ] ],
-      "endTime" : "11:15"
-    }, {
       "startTime" : "11:15",
       "sessions" : [ [ 102 ], [ 108 ] ],
       "endTime" : "12:15"
-    }, {
-      "startTime" : "12:15",
-      "sessions" : [ [ 207 ] ],
-      "endTime" : "12:30"
     }, {
       "startTime" : "12:30",
       "sessions" : [ [ 103 ], [ 105 ] ],
@@ -75,10 +67,6 @@
       "sessions" : [ [ 106 ], [ 104 ] ],
       "endTime" : "15:30"
     }, {
-      "startTime" : "15:30",
-      "sessions" : [ [ 207 ] ],
-      "endTime" : "15:45"
-    }, {
       "startTime" : "15:45",
       "sessions" : [ [ 404 ], [ 404 ] ],
       "endTime" : "16:45"
@@ -90,10 +78,6 @@
       "startTime" : "17:15",
       "sessions" : [ [ 404 ], [ 404 ] ],
       "endTime" : "18:15"
-    }, {
-      "startTime" : "18:15",
-      "sessions" : [ [ 207 ] ],
-      "endTime" : "18:30"
     }, {
       "startTime" : "18:30",
       "sessions" : [ [ 208 ] ],
@@ -452,14 +436,14 @@
     "id" : 8,
     "name" : "George Eid",
     "photoUrl" : "/images/people/george_eid.jpg",
-    "shortBio" : "Creative strategist with 23 years experience working on the Internet. Founder of AREA 17.",
+    "shortBio" : "Creative strategist with 23 years experience working on the Internet. Founder of AREA 17. Design agency working with Apple, Google, Facebook.",
     "socials" : [ {
       "icon" : "twitter",
       "link" : "https://twitter.com/opticalcortex",
       "name" : "Twitter"
     } ],
     "tags" : [ "Design" ],
-    "title" : "Founder of AREA 17"
+    "title" : "Founder of AREA 17. Design agency working with Apple, Google, Facebook."
   }, {
     "bio" : "I’m an Android Engineer working at Plex, writing the best media software of all times.\nIn my free time, I love learning about Kotlin and share all this knowledge with the Android community in my blog antonioleiva.com. A couple of years ago, I wrote a book, Kotlin for Android Developers, that was meant to help other developers start diving into the languages without knowledge in a very practical way.\nThis year, I also published an online course based on the same methodology. Apart from this, I do live workshops in Spain, go to great events like this, I teach at the University.\nDon’t doubt to come and say hello during the event!",
     "company" : "Plex",
