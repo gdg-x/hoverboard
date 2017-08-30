@@ -68,7 +68,7 @@
       "endTime" : "15:30"
     }, {
       "startTime" : "15:45",
-      "sessions" : [ [ 404 ], [ 404 ] ],
+      "sessions" : [ [ 109 ], [ 107 ] ],
       "endTime" : "16:45"
     }, {
       "startTime" : "16:45",
@@ -165,6 +165,15 @@
       "speakers" : [ 8 ],
       "tags" : [ "Design" ],
       "title" : "Designing for mobile: context matters"
+    },
+    "109": {
+      "complexity" : "Intermediate",
+      "description" : "Kotlin is the new official language to develop Android Apps, and it can be used almost everywhere. But did you know you could write a complete App without using other language rather than Kotlin? It can substitute Java in your code, XML in your views and Groovy in your Gradle files.",
+      "id" : 109,
+      "language" : "English",
+      "speakers" : [ 9 ],
+      "tags" : [ "Kotlin" ],
+      "title" : "Yo Dawg! I heard you like Kotlin"
     },
     "201" : {
       "description" : "Get your badge, coffee, enjoy talking with tech addicts around",
