@@ -10,13 +10,9 @@ admin.initializeApp(functions.config().firebase);
 exports.sendGeneralNotification = functions.database.ref('/notifications/messages/{timestamp}').onWrite(event => {
   const timestamp = event.params.timestamp;
   const message = event.data.val();
-
   console.log('New message added at ', timestamp, ' with message ', message);
-
   const getDeviceTokensPromise = admin.database().ref(`/notifications/subscribers`).once('value');
-
   return getDeviceTokensPromise.then(tokensSnapshot => {
-
     if (!tokensSnapshot.hasChildren()) {
       return console.log('There are no notification tokens to send to.');
     }
@@ -53,10 +49,11 @@ const sendPushNotificationToUsers = (userIds, payload) => {
   const tokensPromise = userIds.map(id => admin.database().ref(`/notifications/users/${id}`).once('value'));
   Promise.all(tokensPromise)
     .then(results => {
-      const tokens = results.map(result => Object.keys(result.val()));
+      const tokens = results.reduce((result, tokens) => result.concat(Object.keys(tokens.val())), []);
+      console.log('tokens', tokens);
 
       admin.messaging().sendToDevice(tokens, payload).then(response => {
-        const tokensToRemove = [];
+        // const tokensToRemove = [];
 
         response.results.forEach((result, index) => {
           const error = result.error;
@@ -64,7 +61,7 @@ const sendPushNotificationToUsers = (userIds, payload) => {
             console.error('Failure sending notification to', tokens[index], error);
             if (error.code === 'messaging/invalid-registration-token' ||
               error.code === 'messaging/registration-token-not-registered') {
-              tokensToRemove.push(tokensSnapshot.ref.child(tokens[index]).remove());
+              // tokensToRemove.push(tokensSnapshot.ref.child(tokens[index]).remove());
             }
           }
         });
@@ -96,25 +93,23 @@ exports.sessionsNotifications = functions.pubsub.topic('session-tick').onPublish
         const upcomingSessions = upcomingTimeslot.reduce((result, timeslot) => timeslot.sessions.reduce((result, current) => result.concat(current.items), []), []);
 
         for (let i = 0; i < upcomingSessions.length; i++) {
-          const userFeaturedSessionsPromise = admin.database().ref(`/featuredSessions/jfVBrDJj8qP7I1BmchxeMVGMVHd2/${upcomingSessions[i]}`).once('value');
+          const userFeaturedSessionsPromise = admin.database().ref(`/featuredSessions`).once('value');
           const sessionInfoPromise = admin.database().ref(`/sessions/${upcomingSessions[i]}`).once('value');
 
           Promise.all([userFeaturedSessionsPromise, sessionInfoPromise])
             .then(results => {
-              console.log(results);
-              console.log('results[1].val()', results[1].val());
-              if (results[0].val()) {
-                console.log('results[0].val()', results[0].val());
-                const userIdsFeaturedSession = Object.keys(results[0].val() || {});
-                const session = results[1].val();
-                console.log('Users', userIdsFeaturedSession, 'featured', session);
-                const end = moment(upcomingTimeslot[0].startTime, format);
-                const duration = moment.duration(moment().diff(end));
-                const minutes = duration.asMinutes();
+              const usersIds = results[0].val();
+              const userIdsFeaturedSession = Object.keys(usersIds)
+                .filter(userId => !!Object.keys(usersIds[userId]).filter(sessionId => sessionId.toString() === upcomingSessions[i].toString()).length);
+              const session = results[1].val();
+              // console.log('Users', userIdsFeaturedSession, 'featured', session);
+              const end = moment(`${upcomingTimeslot[0].startTime}${timezone}`, `${format}Z`);
+              const fromNow = end.fromNow();
+              if (userIdsFeaturedSession.length) {
                 sendPushNotificationToUsers(userIdsFeaturedSession, {
                   notification: {
                     title: session.title,
-                    body: `Starts in ${minutes} minutes`,
+                    body: `Starts ${fromNow}`,
                     icon: 'images/icon.svg'
                   }
                 });
