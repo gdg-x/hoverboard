@@ -660,7 +660,7 @@
       }
 
       _isNotificationsDisabled(status) {
-        return status === NOTIFICATIONS_STATUS.DENIED;
+        return status !== NOTIFICATIONS_STATUS.DEFAULT;
       }
     }
 

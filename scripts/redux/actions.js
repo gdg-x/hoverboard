@@ -489,8 +489,7 @@ const notificationsActions = {
       .then(() => {
         store.dispatch({
           type: UPDATE_NOTIFICATIONS_STATUS,
-          status: NOTIFICATIONS_STATUS.DEFAULT,
-          token: null
+          status: NOTIFICATIONS_STATUS.DEFAULT
         });
       });
   }
