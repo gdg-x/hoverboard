@@ -121,7 +121,10 @@
                   / [[session.complexity]]
                 </span>
               </div>
-              <span class="meta">[[_concatArray(session.tags)]]</span>
+              <span class="meta">
+                  <span>[[_concatArray(session.tags)]]</span>
+                  <span hidden$="[[!session.type]]"> / [[session.type]]</span>
+              </span>
             </div>
           </div>
         </div>

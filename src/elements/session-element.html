@@ -192,6 +192,11 @@
                 <span>[[_joinArray(session.tags)]]</span>
               </div>
 
+              <div hidden$="[[!session.type]]" layout horizontal center>
+                <iron-icon icon="info"></iron-icon>
+                <span>[[session.type]]</span>
+              </div>
+
               <div hidden$="[[!session.videoId]]" layout horizontal center>
                 <iron-icon icon="video"></iron-icon>
                 <span>Recording available</span>
