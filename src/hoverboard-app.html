@@ -17,6 +17,8 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-menu-button/paper-menu-button.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 
 <link rel="import" href="../bower_components/iron-lazy-pages/iron-lazy-pages.html">
@@ -24,7 +26,6 @@
 
 <link rel="import" href="../bower_components/iron-lazy-pages/iron-lazy-pages.html">
 <link rel="import" href="../bower_components/plastic-image/plastic-image.html">
-<link rel="import" href="../bower_components/paper-menu-button/paper-menu-button.html">
 
 <link rel="import" href="mixins/utils-functions.html">
 <link rel="import" href="mixins/redux-mixin.html">
@@ -39,7 +40,7 @@
 
   <template>
 
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+    <style is="custom-style" include="shared-styles flex flex-reverse flex-alignment positioning"></style>
     <style>
       :host {
         display: block;
@@ -146,14 +147,12 @@
         background-size: cover;
       }
 
-      .signin-panel {
-        background: #fff;
-        color: var(--text-primary-color);
-      }
-
-      .profile-details {
+      .dropdown-panel {
         padding: 16px;
-        border-bottom: 1px solid var(--divider-color);
+        max-width: 300px;
+        background: #fff;
+        font-size: 16px;
+        color: var(--primary-text-color);
       }
 
       .profile-details .profile-image {
@@ -315,13 +314,42 @@
               {% endfor %}
               <paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]">{$ signIn $}</paper-tab>
             </paper-tabs>
-            <paper-icon-button
-              icon="hoverboard:[[_getNotificationsIcon(notifications.status)]]"
-              disabled="[[_isNotificationsDisabled(notifications.status)]]"
-              on-tap="_toggleNotifications"
-            ></paper-icon-button>
 
+            <paper-menu-button
+              id="notificationsMenu"
+              class="notifications-menu"
+              vertical-align="top"
+              horizontal-align="right"
+              no-animations
+            >
+              <paper-icon-button
+                icon="hoverboard:[[_getNotificationsIcon(notifications.status)]]"
+                slot="dropdown-trigger"
+              ></paper-icon-button>
+              <div class="dropdown-panel" slot="dropdown-content">
+                <div hidden$="[[_hideNotificationBlock(notifications.status, 'DEFAULT')]]">
+                  <p>{$ notifications.default $}</p>
+                  <div layout horizontal-reverse>
+                    <paper-button on-tap="_toggleNotifications">{$ notifications.subscribe $}</paper-button>
+                  </div>
+                </div>
+                <div hidden$="[[_hideNotificationBlock(notifications.status, 'GRANTED')]]">
+                  <p>{$ notifications.enabled $}</p>
+                  <div layout horizontal-reverse>
+                    <paper-button on-tap="_toggleNotifications">{$ notifications.unsubscribe $}</paper-button>
+                  </div>
+                </div>
+                <div hidden$="[[_hideNotificationBlock(notifications.status, 'DENIED')]]">
+                  <p>{$ notifications.blocked $}</p>
+                  <div layout horizontal-reverse>
+                    <a href="{$ notifications.enable.link $}" target="_blank" rel="noopener noreferrer">
+                      <paper-button on-tap="_closeNotificationMenu">{$ notifications.enable.label $}</paper-button>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </paper-menu-button>
+
             <paper-menu-button
               class="auth-menu"
               hidden$="[[!user.signedIn]]"
@@ -333,18 +361,15 @@
                 class="profile-image" slot="dropdown-trigger"
                 style$="background-image: url('[[user.photoURL]]')"
               ></div>
-              <div class="signin-panel" slot="dropdown-content">
-                <div class="profile-details" layout horizontal>
-                  <div
-                    class="profile-image" slot="dropdown-trigger" self-center
-                    style$="background-image: url('[[user.photoURL]]')"
-                  ></div>
-                  <div layout vertical center-justified>
-                    <span class="profile-name">[[user.displayName]]</span>
-                    <span class="profile-email">[[user.email]]</span>
-                    <span class="profile-action" role="button" on-touchend="signOut"
-                          on-click="signOut">{$ signOut $}</span>
-                  </div>
+              <div class="dropdown-panel profile-details" slot="dropdown-content" layout horizontal>
+                <div
+                  class="profile-image" slot="dropdown-trigger" self-center
+                  style$="background-image: url('[[user.photoURL]]')"
+                ></div>
+                <div layout vertical center-justified>
+                  <span class="profile-name">[[user.displayName]]</span>
+                  <span class="profile-email">[[user.email]]</span>
+                  <span class="profile-action" role="button" on-tap="signOut">{$ signOut $}</span>
                 </div>
               </div>
             </paper-menu-button>
@@ -427,18 +452,18 @@
       </app-header-layout>
     </app-drawer-layout>
 
-    <video-dialog id="videoDialog"
-                  opened="[[ui.videoDialog.opened]]"
-                  video-title="[[ui.videoDialog.title]]"
-                  youtube-id="[[ui.videoDialog.youtubeId]]"
-                  entry-animation="scale-up-animation"
-                  exit-animation="fade-out-animation"
-                  disable-controls="[[!ui.videoDialog.disableControls]]"
-                  fit fixed-top></video-dialog>
+    <video-dialog
+      opened="[[ui.videoDialog.opened]]"
+      video-title="[[ui.videoDialog.title]]"
+      youtube-id="[[ui.videoDialog.youtubeId]]"
+      entry-animation="scale-up-animation"
+      exit-animation="fade-out-animation"
+      disable-controls="[[!ui.videoDialog.disableControls]]"
+      fit fixed-top
+    ></video-dialog>
 
 
     <speaker-details
-      id="speakerDialog"
       opened="[[dialogs.speaker.isOpened]]"
       speaker="[[dialogs.speaker.data]]"
       with-backdrop="[[viewport.isTabletPlus]]"
@@ -446,7 +471,6 @@
     ></speaker-details>
 
     <session-details
-      id="sessionDialog"
       opened="[[dialogs.session.isOpened]]"
       session="[[dialogs.session.data]]"
       with-backdrop="[[viewport.isTabletPlus]]"
@@ -454,7 +478,6 @@
     ></session-details>
 
     <subscribe-dialog
-      id="subscribeDialog"
       opened="[[dialogs.subscribe.isOpened]]"
       data="[[dialogs.subscribe.data]]"
       with-backdrop
@@ -462,7 +485,6 @@
     </subscribe-dialog>
 
     <signin-dialog
-      id="signinDialog"
       opened="[[dialogs.signin.isOpened]]"
       with-backdrop>
     </signin-dialog>
@@ -553,7 +575,7 @@
         console.log('Hoverboard v2 is ready!');
         this.removeAttribute('unresolved');
         this._ensureLazyLoaded();
-        notificationsActions.getToken(true);
+        notificationsActions.getToken();
 //        userActions.autoSignIn(this.providerUrls);
       }
 
@@ -644,11 +666,12 @@
       }
 
       _toggleNotifications() {
-        if(this.notifications.status === NOTIFICATIONS_STATUS.GRANTED) {
+        this._closeNotificationMenu();
+        if (this.notifications.status === NOTIFICATIONS_STATUS.GRANTED) {
           notificationsActions.unsubscribe(this.notifications.token);
           return;
         }
-        notificationsActions.getToken();
+        notificationsActions.requestPermission();
       }
 
       _getNotificationsIcon(status) {
@@ -659,8 +682,13 @@
             : 'bell-off';
       }
 
-      _isNotificationsDisabled(status) {
-        return status !== NOTIFICATIONS_STATUS.DEFAULT;
+      _hideNotificationBlock(status, blockStatus) {
+        console.log(status, blockStatus);
+        return status !== NOTIFICATIONS_STATUS[blockStatus];
+      }
+
+      _closeNotificationMenu() {
+        this.$.notificationsMenu.close();
       }
     }
 
