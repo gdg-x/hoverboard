@@ -26,34 +26,41 @@ exports.sendGeneralNotification = functions.database.ref('/notifications/message
     };
 
     const tokens = Object.keys(tokensSnapshot.val());
-    return admin.messaging().sendToDevice(tokens, payload).then(response => {
-      const tokensToRemove = [];
-      response.results.forEach((result, index) => {
-        const error = result.error;
-        if (error) {
-          console.error('Failure sending notification to', tokens[index], error);
-          if (error.code === 'messaging/invalid-registration-token' ||
-            error.code === 'messaging/registration-token-not-registered') {
-            tokensToRemove.push(tokensSnapshot.ref.child(tokens[index]).remove());
+    return admin.messaging().sendToDevice(tokens, payload)
+      .then(response => {
+        const tokensToRemove = [];
+        response.results.forEach((result, index) => {
+          const error = result.error;
+          if (error) {
+            console.error('Failure sending notification to', tokens[index], error);
+            if (error.code === 'messaging/invalid-registration-token' ||
+              error.code === 'messaging/registration-token-not-registered') {
+              tokensToRemove.push(tokensSnapshot.ref.child(tokens[index]).remove());
+            }
           }
-        }
+        });
+        return Promise.all(tokensToRemove);
       });
-      return Promise.all(tokensToRemove);
-    });
   });
 });
 
+const removeUserTokens = tokensToUsers => {
+  Object.keys(tokensToUsers).forEach(token => {
+    admin.database().ref(`/notifications/users/${tokensToUsers[token]}/${token}`).remove();
+  });
+};
 
 const sendPushNotificationToUsers = (userIds, payload) => {
   console.log('sendPushNotificationToUsers user ids', userIds, payload);
   const tokensPromise = userIds.map(id => admin.database().ref(`/notifications/users/${id}`).once('value'));
   Promise.all(tokensPromise)
     .then(results => {
-      const tokens = results.reduce((result, tokens) => result.concat(Object.keys(tokens.val())), []);
+      const tokensInUser = results.reduce((result, tokens, index) => Object.assign(result, tokens.val().reduce((res, token) => (res[userIds[index]] = token), {})), {});
+      const tokens = Object.keys(tokensInUser);
       console.log('tokens', tokens);
 
       admin.messaging().sendToDevice(tokens, payload).then(response => {
-        // const tokensToRemove = [];
+        const tokensToRemove = {};
 
         response.results.forEach((result, index) => {
           const error = result.error;
@@ -62,13 +69,16 @@ const sendPushNotificationToUsers = (userIds, payload) => {
             if (error.code === 'messaging/invalid-registration-token' ||
               error.code === 'messaging/registration-token-not-registered') {
               // tokensToRemove.push(tokensSnapshot.ref.child(tokens[index]).remove());
+              const token = tokens[index];
+              tokensToRemove[token] = tokensInUser[token];
             }
           }
         });
+
+        removeUserTokens(tokensToRemove);
       });
     });
 };
-
 
 exports.sessionsNotifications = functions.pubsub.topic('session-tick').onPublish(() => {
   console.log("This job is ran every 5 minutes from 09:00 to 18:00!");
@@ -78,14 +88,14 @@ exports.sessionsNotifications = functions.pubsub.topic('session-tick').onPublish
   schedulePromise
     .then(scheduleSnapshot => {
       const schedule = scheduleSnapshot.val();
-      if (Object.keys(schedule).indexOf(todayDay) > -1) {
+      if (schedule[todayDay]) {
         const beforeTime = moment().subtract(3, 'minutes');
         const afterTime = moment().add(3, 'minutes');
-        console.log('Looking for sessions between', beforeTime.format(), afterTime.format());
+        console.log('Looking for sessions between', beforeTime.format(), afterTime.format()); // TODO: Fix time
 
         const upcomingTimeslot = schedule[todayDay].timeslots
           .filter(timeslot => {
-            const timeslotTime = moment(`${timeslot.startTime}${timezone}`, `${format}Z`);
+            const timeslotTime = moment(`${timeslot.startTime}${timezone}`, `${format}Z`).subtract(10, 'minutes');
             console.log(timeslot.startTime, timeslotTime, timeslotTime.isBetween(beforeTime, afterTime));
             return timeslotTime.isBetween(beforeTime, afterTime);
           });
@@ -93,7 +103,7 @@ exports.sessionsNotifications = functions.pubsub.topic('session-tick').onPublish
         const upcomingSessions = upcomingTimeslot.reduce((result, timeslot) => timeslot.sessions.reduce((result, current) => result.concat(current.items), []), []);
 
         for (let i = 0; i < upcomingSessions.length; i++) {
-          const userFeaturedSessionsPromise = admin.database().ref(`/featuredSessions`).once('value');
+          const userFeaturedSessionsPromise = admin.database().ref(`/featuredSessions`).once('value'); //TODO: move up
           const sessionInfoPromise = admin.database().ref(`/sessions/${upcomingSessions[i]}`).once('value');
 
           Promise.all([userFeaturedSessionsPromise, sessionInfoPromise])

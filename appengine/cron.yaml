@@ -1,4 +1,4 @@
 cron:
-- description: Push a "tick" onto pubsub every 10 minutes
-  url: /publish/session-tick
-  schedule: every 5 minutes
+#- description: Push a "tick" onto pubsub every 10 minutes
+#  url: /publish/session-tick
+#  schedule: every 5 minutes from 09:00 to 18:00
