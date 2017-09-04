@@ -11,7 +11,7 @@
     "src/pages/team-page.html",
     "src/pages/hub-page.html",
     "src/pages/quest-page.html",
-    "src/pages/gdg-summit-page.html"
+    "src/pages/gdd-page.html"
   ],
   "sources": [
     "data/**/*",

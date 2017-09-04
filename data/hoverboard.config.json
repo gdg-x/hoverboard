@@ -180,11 +180,11 @@
         "tabBarColor": "#fff"
       }
     },
-    "gdg-summit": {
-      "title": "Hey GDG Organizer, we are waiting for you at DevFest Ukraine",
+    "gdd": {
+      "title": "Quest from GDG Lviv",
       "headerSettings": {
-        "backgroundColor": "#00838F",
-        "backgroundImage": "/images/backgrounds/gdg-summit.jpg",
+        "backgroundColor": "#346DF1",
+        "backgroundImage": "/images/backgrounds/gdd.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
