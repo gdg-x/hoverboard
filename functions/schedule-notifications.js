@@ -22,10 +22,9 @@ const sendPushNotificationToUsers = (userIds, payload) => {
 
   return Promise.all(tokensPromise)
     .then(results => {
-      const tokensToUsers = results.reduce((result, tokens, index) => {
+      const tokensToUsers = results.reduce((result, tokens) => {
         if (!tokens.val()) return result;
-        return Object.assign(result, Object.keys(tokens.val()).reduce((res, token) =>
-          Object.assign(res, { [token]: userIds[index] }), {}));
+        return Object.assign(result, tokens.val());
       }, {});
       const tokens = Object.keys(tokensToUsers);
 
@@ -50,8 +49,7 @@ const sendPushNotificationToUsers = (userIds, payload) => {
     });
 };
 
-exports.scheduleNotifications = functions.pubsub.topic('session-tick').onPublish(() => {
-// exports.sessionsNotifications1 = functions.database.ref('/notifications/test/{time}').onWrite(() => {
+exports.scheduleNotifications = functions.pubsub.topic('schedule-tick').onPublish(() => {
   const todayDay = moment().utcOffset(TIMEZONE).format('YYYY-MM-DD');
 
   return admin.database().ref(`/schedule`).once('value')

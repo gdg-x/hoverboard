@@ -439,12 +439,6 @@ const notificationsActions = {
 
   getToken: subscribe => {
     const messaging = firebase.messaging();
-    messaging.onMessage(payload => {
-      console.log("Message received. ", payload);
-      const notification = new Notification(payload.title, payload);
-      notification.show();
-    });
-
     return messaging.getToken()
       .then(currentToken => {
         if (currentToken) {
@@ -472,7 +466,7 @@ const notificationsActions = {
                   token: currentToken
                 });
                 if (userUid && !isUserSubscribed) {
-                  userSubscriptionsRef.set(true);
+                  userSubscriptionsRef.set(userUid);
                 }
               } else if (!isSubscribed && subscribe) {
                 subscribersRef.set(true);
