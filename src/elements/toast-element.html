@@ -17,7 +17,6 @@
 
       paper-toast {
         user-select: none;
-        /*max-height: none !important;*/
       }
 
       paper-toast[fit-bottom] {
@@ -81,7 +80,6 @@
       }
 
       _handleTap() {
-        console.log('_handleTap', this.toast.action);
         this.toast.action && this.toast.action.callback();
         toastActions.hideToast();
       }

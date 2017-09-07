@@ -425,10 +425,24 @@ const subscribeActions = {
   }
 };
 
+const messaging = firebase.messaging();
+messaging.onMessage(({ notification }) => {
+  toastActions.showToast({
+    message: `${notification.title} ${notification.body}`,
+    action: {
+      title: '{$ notifications.toast.title $}',
+      callback: () => {
+        routingActions.setLocation(notification.click_action);
+      }
+    }
+  })
+});
+messaging.onTokenRefresh(() => {
+  notificationsActions.getToken(true);
+});
 const notificationsActions = {
   requestPermission: () => {
-    const messaging = firebase.messaging();
-    messaging.requestPermission()
+    return messaging.requestPermission()
       .then(() => {
         notificationsActions.getToken(true);
       })
@@ -442,18 +456,6 @@ const notificationsActions = {
   },
 
   getToken: subscribe => {
-    const messaging = firebase.messaging();
-    messaging.onMessage(({ notification }) => {
-      toastActions.showToast({
-        message: `${notification.title} ${notification.body}`,
-        action: {
-          title: '{$ notifications.toast.title $}',
-          callback: () => {
-            routingActions.setLocation(notification.click_action);
-          }
-        }
-      })
-    });
     return messaging.getToken()
       .then(currentToken => {
         if (currentToken) {
@@ -501,7 +503,7 @@ const notificationsActions = {
           });
         }
       })
-      .catch(error => {
+      .catch(() => {
         store.dispatch({
           type: UPDATE_NOTIFICATIONS_STATUS,
           status: NOTIFICATIONS_STATUS.DENIED,
@@ -511,8 +513,7 @@ const notificationsActions = {
   },
 
   unsubscribe: token => {
-    const messaging = firebase.messaging();
-    messaging.deleteToken(token)
+    return messaging.deleteToken(token)
       .then(() => {
         store.dispatch({
           type: UPDATE_NOTIFICATIONS_STATUS,
