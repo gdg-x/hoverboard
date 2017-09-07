@@ -27,8 +27,20 @@
       ".write": true
     },
     "notifications": {
-      ".read": true,
-      ".write": true
+      ".read": false,
+      ".write": false,
+      "subscribers": {
+        ".read": true,
+        ".write": true
+      },
+      "users": {
+        ".read": false,
+        ".write": false,
+        "$uid": {
+          ".read": "auth.uid === $uid",
+          ".write": "auth.uid === $uid"
+        }
+      }
     }
   }
 }
