@@ -148,11 +148,19 @@
       }
 
       .dropdown-panel {
-        padding: 16px;
+        padding: 24px;
         max-width: 300px;
         background: #fff;
         font-size: 16px;
         color: var(--primary-text-color);
+      }
+
+      .dropdown-panel p {
+        margin-top: 0;
+      }
+
+      .dropdown-panel .panel-actions {
+        margin: 0 -16px -16px 0;
       }
 
       .profile-details .profile-image {
@@ -329,21 +337,21 @@
               <div class="dropdown-panel" slot="dropdown-content">
                 <div hidden$="[[_hideNotificationBlock(notifications.status, 'DEFAULT')]]">
                   <p>{$ notifications.default $}</p>
-                  <div layout horizontal-reverse>
-                    <paper-button on-tap="_toggleNotifications">{$ notifications.subscribe $}</paper-button>
+                  <div class="panel-actions" layout horizontal end-justified>
+                    <paper-button primary-text on-tap="_toggleNotifications">{$ notifications.subscribe $}</paper-button>
                   </div>
                 </div>
                 <div hidden$="[[_hideNotificationBlock(notifications.status, 'GRANTED')]]">
                   <p>{$ notifications.enabled $}</p>
-                  <div layout horizontal-reverse>
-                    <paper-button on-tap="_toggleNotifications">{$ notifications.unsubscribe $}</paper-button>
+                  <div class="panel-actions" layout horizontal end-justified>
+                    <paper-button primary-text on-tap="_toggleNotifications">{$ notifications.unsubscribe $}</paper-button>
                   </div>
                 </div>
                 <div hidden$="[[_hideNotificationBlock(notifications.status, 'DENIED')]]">
                   <p>{$ notifications.blocked $}</p>
-                  <div layout horizontal-reverse>
+                  <div class="panel-actions" layout horizontal end-justified>
                     <a href="{$ notifications.enable.link $}" target="_blank" rel="noopener noreferrer">
-                      <paper-button on-tap="_closeNotificationMenu">{$ notifications.enable.label $}</paper-button>
+                      <paper-button primary-text on-tap="_closeNotificationMenu">{$ notifications.enable.label $}</paper-button>
                     </a>
                   </div>
                 </div>
