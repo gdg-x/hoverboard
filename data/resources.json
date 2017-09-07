@@ -217,6 +217,9 @@
     "enable": {
       "label": "Enable",
       "link": "https://pushassist.com/knowledgebase/how-to-enable-or-disable-push-notifications-on-chrome-firefox-safari-b/"
+    },
+    "toast": {
+      "title": "Open"
     }
   }
 }

@@ -648,11 +648,13 @@
 
       _dialogToggled(dialogs) {
         if (this._openedDialog) {
-          Polymer.IronDropdownScrollManager.removeScrollLock(this.shadowRoot.querySelector(`#${this._openedDialog}Dialog`));
+          document.body.style.overflow = '';
           this._openedDialog = null;
         }
         this._openedDialog = Object.keys(dialogs).find(key => dialogs[key].isOpened);
-        this._openedDialog && Polymer.IronDropdownScrollManager.pushScrollLock(this.shadowRoot.querySelector(`#${this._openedDialog}Dialog`));
+        if (this._openedDialog) {
+          document.body.style.overflow = 'hidden';
+        }
       }
 
       _authStatusChanged(signedIn) {

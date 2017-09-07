@@ -38,6 +38,10 @@ const routingActions = {
       type: SET_SUB_ROUTE,
       subRoute
     });
+  },
+  setLocation: url => {
+    window.history.pushState({}, '', url);
+    Polymer.Base.fire('location-changed', {}, { node: window });
   }
 };
 
@@ -439,6 +443,17 @@ const notificationsActions = {
 
   getToken: subscribe => {
     const messaging = firebase.messaging();
+    messaging.onMessage(({ notification }) => {
+      toastActions.showToast({
+        message: `${notification.title} ${notification.body}`,
+        action: {
+          title: '{$ notifications.toast.title $}',
+          callback: () => {
+            routingActions.setLocation(notification.click_action);
+          }
+        }
+      })
+    });
     return messaging.getToken()
       .then(currentToken => {
         if (currentToken) {

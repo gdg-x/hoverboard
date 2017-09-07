@@ -7,6 +7,7 @@ const moment = require('moment');
 const NOTIFICATION_ICON = 'https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fnotification.png?alt=media&token=689dde62-a152-4bb0-8ed8-6aca07eb8064';
 const FORMAT = 'HH:mm';
 const TIMEZONE = '+03:00';
+const BASE_URL = 'https://hoverboard-v2-dev.firebaseapp.com';
 
 const removeUserTokens = tokensToUsers => {
   let promises = [];
@@ -71,7 +72,7 @@ exports.scheduleNotifications = functions.pubsub.topic('schedule-tick').onPublis
             result.concat(current.items), []), []);
         const userFeaturedSessionsPromise = admin.database().ref(`/featuredSessions`).once('value');
 
-        upcomingSessions.forEach(upcomingSession => {
+        upcomingSessions.forEach((upcomingSession, sessionIndex) => {
           const sessionInfoPromise = admin.database().ref(`/sessions/${upcomingSession}`).once('value');
 
           return Promise.all([userFeaturedSessionsPromise, sessionInfoPromise])
@@ -91,6 +92,7 @@ exports.scheduleNotifications = functions.pubsub.topic('schedule-tick').onPublis
                   notification: {
                     title: session.title,
                     body: `Starts ${fromNow}`,
+                    click_action: `${BASE_URL}/schedule/${todayDay}?sessionId=${upcomingSessions[sessionIndex]}`,
                     icon: NOTIFICATION_ICON
                   }
                 });
