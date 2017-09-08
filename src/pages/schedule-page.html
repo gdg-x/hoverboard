@@ -170,7 +170,7 @@
         },
 
         _queryParamsChanged: function (params, sessions) {
-          if (this.selected) {
+          if (this.selected && sessions && Object.keys(sessions).length) {
             if (params.sessionId) {
               var session = this.sessions[params.sessionId];
               if (!session) {
