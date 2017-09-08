@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/marked-element/marked-element.html">
+<link rel="import" href="../elements/hoverboard-icons.html">
 
 <link rel="import" href="hoverboard-icons.html">
 
@@ -12,41 +13,18 @@
 
     <style>
       :host {
-        --gap: 8px;
         display: block;
       }
 
-      .photos-grid {
-        display: grid;
-        width: 100%;
-        height:100%;
-        grid-auto-rows: calc((100% / 30) - var(--gap));
-        grid-auto-columns: calc((100% / 30) - var(--gap));
-        justify-content: center;
-        align-content: center;
-        grid-gap: var(--gap);
-      }
-
-      .grid-item {
-        background-color: var(--secondary-background-color);
-      }
-
-      .grid-item:first-child { grid-area: 11 / 1 / 17 / 5; }
-      .grid-item:nth-child(2) { grid-area: 22 / 6 / 28 / 10; }
-      .grid-item:nth-child(3) { grid-area: 8 / 5 / 22 / 15; }
-      .grid-item:nth-child(4) { grid-area: 22 / 10 / 29 / 15; }
-      .grid-item:nth-child(5) { grid-area: 1 / 11 / 8 / 15; }
-      .grid-item:nth-child(6) { grid-area: 17 / 15 / 24 / 20; }
-      .grid-item:nth-child(7) { grid-area: 9 / 15 / 17 / 23; }
-      .grid-item:nth-child(8) { grid-area: 2 / 18 / 9 / 23; }
-      .grid-item:nth-child(9) { grid-area: 17 / 20 / 22 / 26; }
-      .grid-item:nth-child(10) { grid-area: 22 / 20 / 28 / 23; }
-      .grid-item:nth-child(11) { grid-area: 4 / 23 / 11 / 27; }
-      .grid-item:nth-child(12) { grid-area: 11 / 23 / 17	/ 30; }
-      .grid-item:nth-child(13) { grid-area: 17 / 26 / 22 / 28; }
-
       .block:not(:last-of-type) {
         margin-bottom: 32px;
+      }
+
+      .team-icon {
+        --iron-icon-height: 200px;
+        --iron-icon-width: 200px;
+        --iron-icon-fill-color: var(--default-primary-color);
+        max-width: 50%;
       }
 
       .description {
@@ -59,18 +37,10 @@
     </style>
 
     <div class="container" layout horizontal>
-      <div flex>
-        <div class="photos-grid">
-          {% for photo in aboutOrganizerBlock.photos %}
-          <plastic-image
-            class="grid-item"
-            srcset="{$ photo $}"
-            sizing="cover"
-            lazy-load preload fade
-          ></plastic-image>
-          {% endfor %}
-        </div>
+      <div layout horizontal center-center flex>
+        <iron-icon class="team-icon" icon="hoverboard:team"></iron-icon>
       </div>
+
       <div class="description-block" flex>
         {% for block in aboutOrganizerBlock.blocks %}
         <div class="block">
