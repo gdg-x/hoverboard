@@ -1,27 +1,25 @@
 [ {
   "name" : "Casey Borders",
-  "photoUrl" : "",
-  "socials" : {
-    "2" : {
-      "icon" : "twitter",
-      "link" : "https://twitter.com/ohiodevfest",
-      "name" : "Twitter"
-    }
-  },
+  "photoUrl" : "https://pbs.twimg.com/profile_images/774597192/Casey_Small_400x400.jpg",
+  "socials" : [ {
+    "icon" : "twitter",
+    "link" : "https://twitter.com/CaseyBorders",
+    "name" : "Twitter"
+  } ],
   "title" : "GDG Columbus Organizer"
 }, {
   "name" : "Pete Gordon",
-  "photoUrl" : "",
+  "photoUrl" : "https://pbs.twimg.com/profile_images/838426231343366146/oYc9EvlN_400x400.jpg",
   "socials" : [ {
     "icon" : "twitter",
-    "link" : "https://twitter.com/ohiodevfest",
+    "link" : "https://twitter.com/petegordon",
     "name" : "Twitter"
   } ],
   "title" : "GDG Columbus Organizer"
 }, {
   "name" : "Patrick Hammond",
-  "photoUrl" : "",
-  "socials" : [ null, {
+  "photoUrl" : "https://pbs.twimg.com/profile_images/1236711495/IMG_0046_400x400.JPG",
+  "socials" : [ {
     "icon" : "twitter",
     "link" : "https://twitter.com/patrickhammond",
     "name" : "Twitter"
@@ -29,27 +27,25 @@
   "title" : "GDG Cincinnati Organizer"
 }, {
   "name" : "James Power",
-  "photoUrl" : "",
+  "photoUrl" : "https://pbs.twimg.com/profile_images/224740617/2647_755083404765_12426274_47284119_6573604_n_400x400.jpg",
   "socials" : [ {
     "icon" : "twitter",
-    "link" : "https://asdf",
+    "link" : "https://twitter.com/powerje",
     "name" : "Twitter"
   } ],
   "title" : "GDG Columbus Organizer"
 }, {
   "name" : "Greg Williams",
-  "photoUrl" : "",
-  "socials" : {
-    "2" : {
-      "icon" : "twitter",
-      "link" : "https://twitter.com/g_willi",
-      "name" : "Twitter"
-    }
-  },
+  "photoUrl" : "https://pbs.twimg.com/profile_images/436215064/greg-n402mb_400x400.jpg",
+  "socials" : [ {
+    "icon" : "twitter",
+    "link" : "https://twitter.com/g_willi",
+    "name" : "Twitter"
+  } ],
   "title" : "GDG Cincinnati Organizer"
 }, {
   "name" : "David Straight",
-  "photoUrl" : "",
+  "photoUrl" : "https://pbs.twimg.com/profile_images/855284531699396608/Q_yzU8wQ_400x400.jpg",
   "socials" : [ {
     "icon" : "twitter",
     "link" : "https://twitter.com/davidstr8",

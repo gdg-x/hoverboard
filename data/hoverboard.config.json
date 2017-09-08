@@ -81,7 +81,7 @@
     ]
   },
   "gallery": {
-    "albumUrl": "https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1",
+    "albumUrl": "https://goo.gl/photos/hxmMKiKvfyKCqB3Z8",
     "photos": {
       "big": "/images/backgrounds/session.jpg",
       "small": [
@@ -95,7 +95,7 @@
       "title": "Home",
       "headerSettings": {
         "backgroundColor": "#FF9800",
-        "backgroundImage": "/images/backgrounds/home.png",
+        "backgroundImage": "/images/backgrounds/columbus_skyline.jpg",
         "fontColor": "#fff",
         "tabBarColor": "#fff",
         "hideLogo": true,
