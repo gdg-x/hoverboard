@@ -12,11 +12,14 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
+<link rel="import" href="../bower_components/polymerfire/polymerfire.html">
+
 <link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/scale-up-animation.html">
 
 <link rel="import" href="effects/fade-effect.html">
 <link rel="import" href="behaviors/utils-behavior.html">
-<link rel="import" href="behaviors/localize-behavior.html">
 <link rel="import" href="elements/app-data.html">
 <link rel="import" href="elements/drawer-block.html">
 <link rel="import" href="elements/toolbar-block.html">
@@ -109,6 +112,13 @@
       data="{{routeData}}"
       tail="{{subRoute}}"></app-route>
 
+    <firebase-app
+      name="{$ firebase.name $}"
+      auth-domain="{$ firebase.domain $}"
+      database-url="{$ firebase.database $}"
+      api-key="{$ firebase.api $}">
+    </firebase-app>
+
     <app-data
       app="{{app}}"
       speakers="{{speakers}}"
@@ -117,12 +127,19 @@
       posts="{{posts}}"
     ></app-data>
 
+    <firebase-auth
+      id="auth"
+      provider="google"
+      app-name="{$ firebase.name $}"
+      user="{{app.user}}"
+      status-known="{{_authStatusKnown}}"
+    ></firebase-auth>
+
     <app-drawer-layout id="drawerLayout" drawer-width="599px" force-narrow>
 
       <app-drawer
         id="drawer"
-        swipe-open="[[app.isPhoneSize]]"
-      >
+        swipe-open="[[app.isPhoneSize]]">
         <template is="dom-if" if="[[app.isPhoneSize]]">
           <drawer-block
             app={{app}}
@@ -190,10 +207,10 @@
                   video-title="[[video.title]]"
                   youtube-id="[[video.youtubeId]]"
                   entry-animation="scale-up-animation"
-                  exit-animation="scale-down-animation"
+                  exit-animation="fade-out-animation"
                   disable-controls="[[!video.disableControls]]"></video-dialog>
 
-    <toast-element id="toast"></toast-element>
+    <toast-element id="toast" app="{{app}}"></toast-element>
 
   </template>
 
@@ -210,7 +227,6 @@
         is: 'hoverboard-app',
 
         behaviors: [
-          HOVERBOARD.LocalizeBehavior,
           HOVERBOARD.UtilsBehavior
         ],
 
@@ -220,19 +236,30 @@
             notify: true,
             value: function () {
               return {
-                lang: 'en'
+                user: {}
               };
             }
+          },
+
+          _authStatusKnown: {
+            type: Boolean,
+            value: false,
+            observer: '_autoSignIn'
           },
 
           page: {
             type: String,
             reflectToAttribute: true
+          },
+
+          pages: {
+            type: Array,
+            value: {$ pages | dump | safe $}
           }
         },
 
         observers: [
-          '_routePageChanged(routeData.page, app.data.navigation)',
+          '_routePageChanged(routeData.page)',
           '_pageChanged(app.page)',
           'stylesChanged(app.headerSettings)'
         ],
@@ -255,11 +282,9 @@
           this.set('app.page', (page || 'home'));
           // Close the drawer - in case the *route* change came from a link in the drawer.
           this.drawerOpened = false;
-          if (this.app.data) {
-            var navObject = this.app.data.pages[this.app.page];
-            if (navObject && navObject.headerSettings) {
-              this.set('app.headerSettings', navObject.headerSettings);
-            }
+          var navObject = this.pages[this.app.page];
+          if (navObject && navObject.headerSettings) {
+            this.set('app.headerSettings', navObject.headerSettings);
           }
         },
 
@@ -273,7 +298,11 @@
             this.app.headerSettings.backgroundColor + ' 140%)';
           this.customStyle['--min-header-height'] = this.app.headerSettings.minHeight;
           document.getElementsByName('theme-color')[0].content = this.app.headerSettings.backgroundColor;
-          this.updateStyles();
+
+          window.requestAnimationFrame(function () {
+            this.updateStyles();
+            this.$.header.resetLayout();
+          }.bind(this));
         },
 
         _pageChanged: function (page) {
@@ -294,7 +323,9 @@
         },
 
         toggleDrawer: function () {
-          this.$$('#drawer').toggle();
+          window.requestAnimationFrame(function () {
+            this.$$('#drawer').toggle();
+          }.bind(this));
         },
 
         _isPage: function (page, selectedPage) {
@@ -303,7 +334,9 @@
 
         closeDrawer: function () {
           if (this.$$('#drawer') && this.$$('#drawer').close) {
-            this.$$('#drawer').close();
+            window.requestAnimationFrame(function () {
+              this.$$('#drawer').close();
+            }.bind(this));
           }
         },
 
@@ -314,6 +347,64 @@
             disableControls: disableControls
           };
           this.$.videoDialog.open();
+        },
+
+        signIn: function () {
+          this.$.auth.signInWithPopup()
+            .then(function (signInObject) {
+              if (navigator.credentials) {
+                var cred = new FederatedCredential({
+                  id: signInObject.user.email,
+                  name: signInObject.user.displayName,
+                  iconURL: signInObject.user.photoURL,
+                  provider: 'https://accounts.google.com'
+                });
+
+                navigator.credentials.store(cred);
+              }
+            });
+        },
+
+        signOut: function () {
+          this.$.auth.signOut()
+            .then(function () {
+              if (navigator.credentials) {
+                navigator.credentials.requireUserMediation();
+              }
+            });
+        },
+
+        _autoSignIn: function (authStatusKnown) {
+          if (navigator.credentials
+            && authStatusKnown
+            && !this.app.user) {
+            return navigator.credentials.get({
+              password: true,
+              federated: {
+                providers: ['https://accounts.google.com']
+              },
+              unmediated: true
+            }).then(function (cred) {
+              if (cred) {
+                this.gSignIn(cred.id);
+              }
+            }.bind(this));
+          }
+        },
+
+        gSignIn: function (id) {
+          return (function () {
+            if (this.app.user && this.app.user.email === id) {
+              return Promise.resolve(this.app.user);
+            }
+
+            var provider = new firebase.auth.GoogleAuthProvider();
+            provider.setCustomParameters({
+              'login_hint': id || ''
+            });
+
+            return this.$.auth.signInWithPopup(provider);
+          }.bind(this))();
         }
 
       });

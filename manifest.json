@@ -1,6 +1,6 @@
 {
-  "name": "GDG DevFest Ukraine 2016",
-  "short_name": "GDG DevFest Ukraine 2016",
+  "name": "{$ title $}",
+  "short_name": "{$ webapp.shortName $}",
   "icons": [
     {
       "src": "images/touch/homescreen-48.png",
@@ -40,6 +40,8 @@
   ],
   "start_url": "./?utm_source=web_app_manifest",
   "display": "standalone",
-  "background_color": "#F57C00",
-  "theme_color": "#F57C00"
+  "background_color": "{$ webapp.backgroundColor $}",
+  "theme_color": "{$ webapp.themeColor $}",
+  "content_security_policy": "script-src 'self' https://apis.google.com https://www.googleapis.com https://securetoken.googleapis.com; object-src 'self'",
+  "permissions": ["https://*/*","activeTab"]
 }

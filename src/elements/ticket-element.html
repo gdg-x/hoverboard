@@ -131,9 +131,7 @@
           <iron-icon icon="icons:star"></iron-icon>
         </div>
         <div class="dates">[[starts]] - [[ends]]</div>
-        <template is="dom-if" if="[[info]]">
-          <div class="additional-info">[[info]]</div>
-        </template>
+        <div class="additional-info" hidden$="[[!info]]">[[info]]</div>
       </div>
     </div>
     <div class="side">
@@ -149,10 +147,6 @@
       Polymer({
 
         is: 'ticket-element',
-
-        behaviors: [
-          HOVERBOARD.LocalizeBehavior
-        ],
 
         properties: {
           type: {

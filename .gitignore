@@ -3,3 +3,5 @@ dist
 node_modules
 build
 .idea/
+.temp/
+.firebaserc

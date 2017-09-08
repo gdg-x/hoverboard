@@ -1,0 +1,198 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+
+<link rel="import" href="../behaviors/utils-behavior.html">
+<link rel="import" href="../behaviors/cascaded-behavior.html">
+<link rel="import" href="./session-element.html">
+
+
+<dom-module id="my-schedule">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+        --paper-card-background-color: var(--secondary-background-color);
+      }
+
+      .timeslot {
+        margin-top: 40px;
+      }
+
+      .timeslot:last-of-type {
+        margin-bottom: 64px;
+      }
+
+      .start-time {
+        padding-left: 24px;
+        min-width: 110px;
+        color: var(--secondary-text-color);
+      }
+
+      .hours {
+        font-size: 56px;
+        font-weight: 300;
+        letter-spacing: -0.04em;
+      }
+
+      .minutes {
+        margin-left: 3px;
+        font-size: 16px;
+      }
+
+      .session {
+        padding: 0 16px;
+      }
+
+      .session[flex] {
+        padding: 0 8px;
+      }
+
+      .browse-more {
+        margin: 32px 0 24px;
+        text-transform: uppercase;
+        font-size: 14px;
+        line-height: 1;
+      }
+
+      .browse-more iron-icon {
+        --iron-icon-width: 16px;
+        --iron-icon-height: 16px;
+        margin-right: 4px;
+      }
+    </style>
+
+    <template id='mySchedule' is="dom-repeat" items="{{schedule}}" as="day">
+      <div class="timeslot" layout vertical>
+        <div class="start-time">
+          <span class="hours">[[day.dateReadable]]</span>
+        </div>
+      </div>
+
+      <template is="dom-if" if="{{app.user.sessions}}">
+        <template is="dom-repeat" items="{{day.timeslots}}" as="timeslot"
+                  filter="{{_filterTimeslots(app.user.sessions)}}">
+          <div class="timeslot" layout vertical$="{{app.isPhoneSize}}" horizontal$="{{!app.isPhoneSize}}">
+
+            <div class="start-time">
+              <span class="hours">[[_splitText(timeslot.startTime, ':', 0)]]</span>
+              <span class="minutes">[[_splitText(timeslot.startTime, ':', 1)]]</span>
+            </div>
+
+            <div
+              class="sessions-wrapper"
+              layout
+              vertical$="{{app.isPhoneSize}}"
+              horizontal$="{{!app.isPhoneSize}}"
+              flex$="{{!app.isPhoneSize}}"
+            >
+              <template is="dom-repeat" items="{{timeslot.sessions}}" as="session">
+                <div class="session" layout vertical flex$="{{!app.isPhoneSize}}">
+                  <template is="dom-repeat" items="[[session]]" as="subSession"
+                            filter="{{_filterSession(app.user.sessions)}}">
+
+                    <session-element
+                      app="{{app}}"
+                      session="[[subSession]]"
+                      layout flex-auto
+                    ></session-element>
+
+                  </template>
+                </div>
+              </template>
+            </div>
+
+          </div>
+        </template>
+      </template>
+
+      <div layout horizontal center-justified>
+        <a class="browse-more" href$="/schedule/day[[_addToValue(index, 1)]]" layout horizontal center>
+          <iron-icon icon="calendar-plus"></iron-icon>
+          <span>{$ browseMore $}</span>
+        </a>
+      </div>
+    </template>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'my-schedule',
+
+        behaviors: [
+          HOVERBOARD.CascadedBehavior,
+          HOVERBOARD.UtilsBehavior
+        ],
+
+        properties: {
+          app: {
+            type: Object,
+            notify: true
+          },
+
+          schedule: {
+            type: Array
+          },
+
+          day: {
+            type: Object
+          },
+
+          filters: {
+            type: Array,
+            value: []
+          }
+        },
+
+        _removeFromMySchedule: function (e) {
+          e.stopPropagation();
+          e.preventDefault();
+          var id = e.target.sessionId;
+
+          if (this.app.user.sessions && this.app.user.sessions[id]) {
+            this.set('app.user.sessions.' + id, null);
+          }
+
+          HOVERBOARD.Elements.Template.$.toast.showMessage('{$ removedFromSchedule $}');
+        },
+
+        _splitText: function (text, divider, index) {
+          return text.split(divider)[index];
+        },
+
+        _filterTimeslots: function (savedSessionsIds) {
+          return function (timeslot) {
+            var result = false;
+            timeslot.sessions.map(function (session) {
+              if (savedSessionsIds && savedSessionsIds[session[0].id]) {
+                result = true;
+              }
+            });
+            return result;
+          }
+        },
+
+        _filterSession: function (savedSessionsIds) {
+          var filters = this.filters || [];
+
+          return function (session) {
+            return (savedSessionsIds && savedSessionsIds[session.id])
+              || (filters.length && filters.indexOf(session.mainTag) > -1);
+          };
+        }
+      });
+
+    }());
+  </script>
+
+</dom-module>

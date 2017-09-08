@@ -17,6 +17,7 @@
 <link rel="import" href="../elements/footer-block.html">
 <link rel="import" href="../behaviors/utils-behavior.html">
 <link rel="import" href="../behaviors/page-behavior.html">
+<link rel="import" href="../behaviors/cascaded-behavior.html">
 
 <dom-module id="speakers-page">
 
@@ -176,7 +177,7 @@
                data="{{routeData}}"></app-route>
 
     <div class="container speakers-container">
-      <template is="dom-repeat" items="[[_toArray(speakers)]]" as="speaker" on-dom-change="_updateCascadedNodes">
+      <template is="dom-repeat" items="[[_toArray(speakers)]]" as="speaker" on-dom-change="updateCascadedNodes">
         <div class="speaker" cascaded>
           <paper-material class="card">
             <a href$="/speakers/[[speaker.id]]/" class="header">
@@ -198,9 +199,9 @@
             </a>
             <a href$="/speakers/[[speaker.id]]/" class="card-content">
               <iron-image class="company-logo" src="{{speaker.companyLogo}}" sizing="contain"></iron-image>
-              <div class="tags">Skills:
+              <div class="tags">{$ skills $}:
                 <template is="dom-repeat" items="[[speaker.tags]]" as="tag">
-                  <span class="tag" style$="{{_getCustomStyleValue(tag)}}" target="_blank" rel="noopener noreferrer">[[tag]]</span>
+                  <span class="tag" style$="{{_getCustomStyleValue(tag)}}">[[tag]]</span>
                 </template>
               </div>
               <marked-element class="details-text" markdown="[[speaker.shortBio]]">
@@ -240,8 +241,8 @@
         is: 'speakers-page',
 
         behaviors: [
-          Polymer.NeonSharedElementAnimatableBehavior,
           HOVERBOARD.PageBehavior,
+          HOVERBOARD.CascadedBehavior,
           HOVERBOARD.UtilsBehavior
         ],
 
@@ -264,32 +265,11 @@
             type: Object
           },
 
-          _selectedSpeaker: Object,
-
-          animationConfig: {
-            type: Object,
-            value: function () {
-              return {
-                'entry': [{
-                  name: 'fade-in-animation',
-                  animation: 'fade-in-animation',
-                  node: this,
-                  timing: {
-                    delay: 500
-                  }
-                }],
-                'exit': [{
-                  name: 'fade-out-animation',
-                  animation: 'fade-out-animation',
-                  node: this
-                }]
-              };
-            }
-          }
+          _selectedSpeaker: Object
         },
 
         observers: [
-          '_routePageChanged(routeData.speakerId)'
+          '_routePageChanged(routeData.speakerId, speakers)'
         ],
 
         listeners: {
@@ -298,9 +278,9 @@
 
         _routePageChanged: function (speakerId) {
           if (speakerId && this.selected) {
-            var tempSpeaker = this.speakers[speakerId];
+            var tempSpeaker = this._findSpeakerById(speakerId);
             if (tempSpeaker) {
-              Polymer.RenderStatus.afterNextRender(this, function () {
+              window.requestAnimationFrame(function () {
                 this._selectedSpeaker = tempSpeaker;
                 this.$.speakerDetails.open();
               }.bind(this));
@@ -308,24 +288,12 @@
           }
         },
 
-        _updateCascadedNodes: function () {
-          var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
-          var cascadedArray = Array.prototype.slice.call(cascaded);
-          this.animationConfig.entry.push({
-            name: 'cascaded-animation',
-            animation: 'transform-animation',
-            transformFrom: 'translate3d(0, 100%, 0)',
-            timing: {
-              delay: 500
-            },
-            nodes: cascadedArray
-          });
-          this.animationConfig.exit.push({
-            name: 'cascaded-animation',
-            animation: 'transform-animation',
-            transformTo: 'translate3d(0, 100%, 0)',
-            nodes: cascadedArray
-          });
+        _findSpeakerById: function(id) {
+          if (!this.speakers.filter) {
+            return undefined;
+          }
+
+          return this.speakers.filter(function(s) {return s.id === +id;})[0];
         },
 
         _getCustomStyleValue: function (value) {
@@ -341,3 +309,4 @@
   </script>
 
 </dom-module>
+

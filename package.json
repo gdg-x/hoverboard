@@ -1,0 +1,36 @@
+{
+  "name": "hoverboard",
+  "version": "1.2.0",
+  "description": "Conference website template",
+  "scripts": {
+    "gulp": "gulp",
+    "bower": "bower",
+    "build": "gulp",
+    "postinstall": "bower install",
+    "serve": "gulp serve"
+  },
+  "devDependencies": {
+    "bower": "^1.8.0",
+    "browser-sync": "^2.18.8",
+    "connect-history-api-fallback": "^1.3.0",
+    "css-slam": "^1.2.1",
+    "del": "^2.2.2",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-cli": "^1.3.0",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-if": "^2.0.2",
+    "gulp-imagemin": "^3.3.0",
+    "gulp-nunjucks": "^3.0.0",
+    "gulp-replace": "^0.5.4",
+    "gulp-uglify": "^3.0.0",
+    "merge-stream": "^1.0.1",
+    "plylog": "^0.5.0",
+    "polymer-build": "^1.5.1",
+    "require-uncached": "^1.0.3",
+    "sw-precache": "^5.1.1"
+  },
+  "engines": {
+    "node": ">=4.0"
+  },
+  "private": true
+}

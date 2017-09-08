@@ -1,0 +1,75 @@
+<link rel='import' href='../../bower_components/polymer/polymer.html'>
+
+<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/cascaded-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-in-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/slide-from-bottom-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/slide-down-animation.html">
+<link rel="import" href="../../bower_components/neon-animation/animations/transform-animation.html">
+
+
+<script>
+  (function () {
+    'use strict';
+
+    /**
+     * @polymerBehavior HOVERBOARD.CascadedBehaviorImpl
+     */
+    HOVERBOARD.CascadedBehaviorImpl = {
+
+      properties: {
+        animationConfig: {
+          type: Object,
+          value: function () {
+            return {
+              'entry': [{
+                name: 'fade-in-animation',
+                animation: 'fade-in-animation',
+                node: this,
+                timing: {
+                  delay: 500
+                }
+              }],
+              'exit': [{
+                name: 'fade-out-animation',
+                animation: 'fade-out-animation',
+                node: this
+              }]
+            };
+          }
+        }
+      },
+
+      updateCascadedNodes: function () {
+        var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
+        var cascadedArray = Array.prototype.slice.call(cascaded);
+        this.animationConfig.entry.push({
+          name: 'cascaded-animation',
+          animation: 'transform-animation',
+          transformFrom: 'translate3d(0, 100%, 0)',
+          timing: {
+            delay: 500
+          },
+          nodes: cascadedArray
+        });
+        this.animationConfig.exit.push({
+          name: 'cascaded-animation',
+          animation: 'transform-animation',
+          transformTo: 'translate3d(0, 100%, 0)',
+          nodes: cascadedArray
+        });
+      }
+
+    };
+
+    /**
+     * @polymerBehavior HOVERBOARD.CascadedBehavior
+     */
+    HOVERBOARD.CascadedBehavior = [
+      Polymer.NeonSharedElementAnimatableBehavior,
+      HOVERBOARD.CascadedBehaviorImpl
+    ];
+
+  }());
+</script>

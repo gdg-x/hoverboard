@@ -14,7 +14,7 @@
         min-height: 100%;
         min-width: 100%;
         --content-padding: 24px;
-        --paper-scroll-header-panel-color: var(--default-primary-color);
+        --paper-scroll-header-panel-color: var(--general);
         --truncate-marked-text-style: {
           font-size: 15px;
           line-height: 1.5;
@@ -29,12 +29,6 @@
         --paper-fab-iron-icon: {
           color: var(--secondary-text-color);
         };
-        --paper-menu-button: {
-          margin-top: calc(-36px - var(--content-padding));
-          margin-right: var(--content-padding);
-          float: right;
-          z-index: 1;
-        };
       }
 
       paper-scroll-header-panel {
@@ -43,10 +37,10 @@
         background: #FFFFFF;
         height: 100%;
         --paper-scroll-header-panel-full-header: {
-          background-color: var(--paper-scroll-header-panel-color);
+          background-color: var(--paper-scroll-header-panel-color, var(--general));
         };
         --paper-scroll-header-panel-condensed-header: {
-          background-color: var(--paper-scroll-header-panel-color);
+          background-color: var(--paper-scroll-header-panel-color, var(--general));
         };
       }
 
@@ -56,6 +50,12 @@
         --paper-toolbar-title: {
           margin-left: 10px;
         };
+      }
+
+      .header-action {
+        margin-top: calc(-28px - var(--content-padding));
+        float: right;
+        z-index: 1;
       }
 
       .fallback-image-wrapper {
@@ -132,12 +132,17 @@
 
       .actions {
         @apply(--layout-horizontal);
+        @apply(--layout-wrap);
         margin-left: -9px;
       }
 
       .action {
         color: var(--secondary-text-color);
         text-transform: initial;
+      }
+
+      .action iron-icon {
+        margin-right: 8px;
       }
 
       .block-title {
@@ -201,11 +206,6 @@
         :host {
           min-height: 60%;
           min-width: 800px;
-          --paper-menu-button: {
-            margin-top: calc(-36px - var(--content-padding));
-            float: right;
-            z-index: 1;
-          }
         }
 
         .sections {
@@ -215,6 +215,10 @@
         .section {
           padding: 0 8px;
           width: calc(50% - 16px);
+        }
+
+        .section:last-of-type {
+          margin-bottom: 32px;
         }
       }
 

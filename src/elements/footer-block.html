@@ -6,12 +6,14 @@
 
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
 <link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
 
 <link rel="import" href="../styles/shared-styles.html">
 <link rel="import" href="../js-wrappers/g-plusone.html">
-<link rel="import" href="../behaviors/localize-behavior.html">
+<link rel="import" href="../behaviors/share-behavior.html">
 <link rel="import" href="mailchimp-subscribe.html">
 
 
@@ -30,6 +32,7 @@
           padding: 0;
         };
         --paper-menu-background-color: #fff;
+        --paper-menu-button-dropdown-background: #fff;
       }
 
       .container {
@@ -104,7 +107,7 @@
       }
 
       .subscribe {
-        @apply(--layout-flex);
+        @apply(--layout-flex-auto);
       }
 
       .copyright {
@@ -116,7 +119,8 @@
         margin-right: 4px;
       }
 
-      paper-item {
+      paper-item,
+      paper-icon-item {
         cursor: pointer;
       }
 
@@ -152,7 +156,8 @@
       }
 
       @media (min-width: 961px) {
-        .link-block-wrapper {
+        .link-block-wrapper,
+        .subscribe {
           @apply(--layout-flex);
         }
       }
@@ -164,51 +169,51 @@
           class="gdg-logo"
           src="/images/gdg-logo.svg"
           sizing="contain"
-          alt="[[app.data.organizer.name]]"
+          alt="{$ organizer.name $}"
         ></iron-image>
         <paper-button class="footer-backtotop" on-tap="scrollToTop" noink>
-          [[localize('back-to-top')]]
+          {$ backToTop $}
           <iron-icon icon="icons:expand-less"></iron-icon>
         </paper-button>
       </div>
       <div class="footer-content footer-links-container">
         <nav class="navigation">
-          <template is="dom-repeat" items="[[app.data.footerBlocks]]" as="block">
+          {% for block in footerBlocks %}
             <div class="link-block-wrapper">
-              <div class="link-block-title">[[localize(block.title)]]</div>
+              <div class="link-block-title">{$ block.title $}</div>
               <ul class="link-block">
-                <template is="dom-repeat" items="[[block.links]]" as="link">
+                {% for link in block.links %}
                   <li>
-                    <a href$="[[link.url]]" target="_getLinkTarget(link.newTab)">[[localize(link.text)]]</a>
+                    <a href="{$ link.url $}" {% if link.newTab %}target="_blank" rel="noopener noreferrer"{% endif %}>{$ link.text $}</a>
                   </li>
-                </template>
+                {% endfor %}
               </ul>
             </div>
-          </template>
+          {% endfor %}
           <div class="link-block-wrapper">
-            <div class="link-block-title">[[localize('contact-us')]]</div>
+            <div class="link-block-title">{$ contactUs $}</div>
             <ul class="link-block">
-              <template is="dom-repeat" items="[[app.data.contactBlock.links]]" as="link">
+              {% for link in contactBlock.links %}
                 <li>
-                  <a href$="[[link.url]]" target="_getLinkTarget(link.newTab)">[[link.text]]</a>
+                  <a href="{$ link.url $}" {% if link.newTab %}target="_blank" rel="noopener noreferrer"{% endif %}>{$ link.text $}</a>
                 </li>
-              </template>
+              {% endfor %}
             </ul>
             <div class="icons-wrapper align-pb-block">
-              <template is="dom-repeat" items="[[app.data.social]]" as="network">
-                <a class="button-link" href$="[[network.url]]" target="_blank" rel="noopener noreferrer">
-                  <paper-icon-button icon="icons:[[network.name]]"></paper-icon-button>
+              {% for network in social %}
+                <a class="button-link" href="{$ network.url $}" target="_blank" rel="noopener noreferrer">
+                  <paper-icon-button icon="{$ network.name $}"></paper-icon-button>
                 </a>
-              </template>
+              {% endfor %}
             </div>
           </div>
           <div class="subscribe">
-            <div class="link-block-title">[[localize('subscribe')]]</div>
-            <span>[[localize('subscribe-note')]]</span>
+            <div class="link-block-title">{$ subscribe $}</div>
+            <span>{$ subscribeNote $}</span>
             <mailchimp-subscribe
               app="[[app]]"
-              url="[[app.data.mailchimp.url]]"
-              name="[[app.data.mailchimp.name]]"
+              url="{$ mailchimp.url $}"
+              name="{$ mailchimp.name $}"
             ></mailchimp-subscribe>
           </div>
         </nav>
@@ -226,33 +231,31 @@
             size="medium"
             width="200"
             annotation="inline"
-            href$="{{app.data.url}}"
+            href="{$ url $}"
           ></g:plusone>
         </div>
 
-        <template is="dom-if" if="[[_showLanguageToggle(app.data.languages)]]">
-          <paper-menu-button vertical-align="bottom" horizontal-align="left">
-            <paper-button class="dropdown-trigger">
-              <iron-icon class="language-icon" icon="language"></iron-icon>
-              [[selectedLanguage.label]]
-              <iron-icon icon="arrow-drop-down"></iron-icon>
-            </paper-button>
-            <paper-menu
-              class="dropdown-content"
-              selected="{{app.lang}}"
-              selected-item="{{selectedLanguage}}"
-              attr-for-selected="value"
-            >
-              <template is="dom-repeat" items="[[app.data.languages]]" as="lang">
-                <paper-item
-                  value="[[lang.key]]"
-                  label="[[lang.name]]"
-                >[[lang.name]]
-                </paper-item>
-              </template>
-            </paper-menu>
-          </paper-menu-button>
-        </template>
+        <paper-menu-button vertical-align="bottom" horizontal-align="left" share-menu>
+          <paper-icon-button icon="share" class="dropdown-trigger"></paper-icon-button>
+          <div class="dropdown-content">
+            <paper-icon-item on-tap="share" share="gplus">
+              <iron-icon icon="gplus" item-icon></iron-icon>
+              Google+
+            </paper-icon-item>
+            <paper-icon-item on-tap="share" share="facebook">
+              <iron-icon icon="facebook" item-icon></iron-icon>
+              Facebook
+            </paper-icon-item>
+            <paper-icon-item on-tap="share" share="twitter">
+              <iron-icon icon="twitter" item-icon></iron-icon>
+              Twitter
+            </paper-icon-item>
+            <paper-icon-item on-tap="share" share="copy">
+              <iron-icon icon="link" item-icon></iron-icon>
+              {$ copyLink $}
+            </paper-icon-item>
+          </div>
+        </paper-menu-button>
       </div>
     </div>
 
@@ -267,27 +270,11 @@
         is: 'footer-block',
 
         behaviors: [
-          HOVERBOARD.LocalizeBehavior
-        ],
-
-        observers: [
-          'languageChanged(app.lang)'
+          HOVERBOARD.ShareBehavior
         ],
 
         scrollToTop: function (e) {
           HOVERBOARD.Elements.Template.backToTop(e);
-        },
-
-        languageChanged: function (lang) {
-          HOVERBOARD.Analytics.trackEvent('language', 'select', lang);
-        },
-
-        _getLinkTarget: function (newTab) {
-          return newTab ? '_blank' : '';
-        },
-
-        _showLanguageToggle: function (languages) {
-          return languages && (languages.length > 1);
         }
 
       });

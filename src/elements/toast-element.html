@@ -12,6 +12,17 @@
         cursor: pointer;
       }
 
+      paper-toast {
+        user-select: none;
+      }
+
+      paper-toast[fit-bottom] {
+        width: 100%;
+        min-width: 0;
+        border-radius: 0;
+        margin: 0;
+      }
+
       .toast-action {
         @apply(--layout-self-center);
         padding-left: 24px;
@@ -20,6 +31,7 @@
         font-weight: 600;
         cursor: pointer;
         white-space: nowrap;
+        user-select: none;
       }
     </style>
 
@@ -29,6 +41,7 @@
       duration="[[duration]]"
       text="[[text]]"
       on-tap="_handleTap" layout horizontal justified
+      fit-bottom$="{{app.isPhoneSize}}"
     >
 
       <span class="toast-action"
@@ -46,11 +59,11 @@
 
         is: 'toast-element',
 
-        behaviors: [
-          HOVERBOARD.LocalizeBehavior
-        ],
-
         properties: {
+
+          app: {
+            type: Object
+          },
 
           action: {
             type: String,

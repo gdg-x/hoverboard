@@ -8,5 +8,7 @@ module.exports = {
     '/images/**/*',
     '/data/**/*'
   ],
-  navigateFallback: '/index.html'
+  navigateFallback: '/index.html',
+  directoryIndex: 'index.html',
+  navigateFallbackWhitelist: [ /^\/[^\_]+\// ]
 };

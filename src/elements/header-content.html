@@ -7,7 +7,6 @@
 <link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
 
 <link rel="import" href="../styles/shared-styles.html">
-<link rel="import" href="../behaviors/localize-behavior.html">
 <link rel="import" href="animatable-content.html">
 
 
@@ -127,49 +126,40 @@
     <app-toolbar>
       <neon-animated-pages attr-for-selected="name" selected="{{app.page}}">
         <animatable-content name="home">
-          <div class="container">
+          <div class="container" center-justified>
             <div class="home-wrapper">
               <iron-image class="logo" src="/images/logo-light.svg" sizing="contain"
                           alt="GDG DevFest Ukraine 2016"></iron-image>
-              <h3 class="dates">{{localize('dates')}}</h3>
-              <h2 class="motto">{{localize('motto')}}</h2>
-              <div class="open-video" on-tap="_openVideo">
-                <iron-icon icon="play"></iron-icon>
-                {{localize('play-icon')}}
-              </div>
+              <h3 class="dates">{$ dates $}</h3>
+              <h2 class="motto">{$ motto $}</h2>
+              {% if pages.home.headerSettings.video %}
+                <div class="open-video" on-tap="_openVideo">
+                  <iron-icon icon="play"></iron-icon>
+                  {$ playIcon $}
+                </div>
+              {% endif %}
               <div class="action-buttons">
-                <paper-button class="primary" on-tap="_scrollToTickets" raised>{{localize('buy-ticket')}}</paper-button>
+                <paper-button class="primary" on-tap="_scrollToTickets" raised>{$ buyTicket $}</paper-button>
               </div>
             </div>
           </div>
         </animatable-content>
         <animatable-content name="blog">
           <div class="container">
-            <h3 class="page-title" hidden$="{{app.headerSettings.title}}">{{localize('blog')}}</h3>
+            <h3 class="page-title" hidden$="{{app.headerSettings.title}}">{$ pages.blog.title $}</h3>
             <h3 class="page-title" hidden$="{{!app.headerSettings.title}}">[[app.headerSettings.title]]</h3>
             <div class="page-subtitle" hidden$="{{!app.headerSettings.subtitle}}">[[app.headerSettings.subtitle]]</div>
           </div>
         </animatable-content>
-        <animatable-content name="speakers">
-          <div class="container">
-            <h3 class="page-title">{{localize('speakers')}}</h3>
-          </div>
-        </animatable-content>
-        <animatable-content name="schedule">
-          <div class="container">
-            <h3 class="page-title">{{localize('schedule')}}</h3>
-          </div>
-        </animatable-content>
-        <animatable-content name="team">
-          <div class="container">
-            <h3 class="page-title">{{localize('team')}}</h3>
-          </div>
-        </animatable-content>
-        <animatable-content name="cod">
-          <div class="container">
-            <h3 class="page-title">{{localize('cod')}}</h3>
-          </div>
-        </animatable-content>
+        {% for page, settings in pages %}
+          {% if page !== 'home' and page !== 'blog' %}
+            <animatable-content name="{$ page $}">
+              <div class="container">
+                <h3 class="page-title">{$ settings.title $}</h3>
+              </div>
+            </animatable-content>
+          {% endif %}
+        {% endfor %}
       </neon-animated-pages>
     </app-toolbar>
 
@@ -182,10 +172,6 @@
       Polymer({
 
         is: 'header-content',
-
-        behaviors: [
-          HOVERBOARD.LocalizeBehavior
-        ],
 
         properties: {
           app: {
@@ -200,8 +186,9 @@
         },
 
         _openVideo: function () {
-          HOVERBOARD.Elements.Template.openVideo('GDG DevFest Ukraine 2015', 'DfMnJAzOFng', true);
-          HOVERBOARD.Analytics.trackEvent('video', 'watch', 'GDG DevFest Ukraine 2015');
+          HOVERBOARD.Elements.Template.openVideo('{$ pages.home.headerSettings.video.title $}',
+            '{$ pages.home.headerSettings.video.youtubeId $}', true);
+          HOVERBOARD.Analytics.trackEvent('video', 'watch', '{$ pages.home.headerSettings.video.title $}');
         },
 
         _scrollToTickets: function () {

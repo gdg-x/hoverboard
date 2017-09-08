@@ -4,30 +4,26 @@ The most important file of configuration is `data/hoverboard.config.json`
 which looks like:
 
 ```
-  "pages": {..},
-  "navigation": [..],
   "url": "..",
+  "startDate": "..",
+  "endDate": "..",
+  "analytics": {..},
+  "organizer": {..},
+  "webapp": {..},
+  "firebase": {..},
   "mailchimp": {..},
-  "partnershipProposition": "..",
-  "languages": [..],
-  "footerBlocks": [..],
-  "contactBlock": {..},
-  "tickets": {..},
-  "teamPageTitle": "..",
-  "teamPageText": "..",
-  "statistics": [..],
   "hashtag": "..",
-  "social": [..],
+  "disqusShortName": "..",
   "tweetsSource": "..",
-  "gallery": {..},
-  "location": {..},
+  "partnershipProposition": "..",
   "videosSessionsUrl": "..",
-  "callToAction": {..}
+  "enableSessionsRating": "..",
+  "navigation": [..],
+  "social": [..],
+  "location": {..}
+  "social": [..],
+  "gallery": {..}
 ```
-
-**Note**, the project supports localization using [AppLocalizeBehavior][
-AppLocalizeBehavior], that's why some of the config values are keys in
-[localization resources][localization resources].
 
 ### SEO
 The project doesn't use any generators, so there is a need to edit manually
@@ -136,12 +132,22 @@ Download the latest version of Tweetledee; unzip and deploy on their server.
 **Note:** don't forget to enable CORS, changing `$TLD_JS = 0;` to `$TLD_JS = 1;`.  
 Read [full documentation](http://chrissimpkins.github.io/tweetledee/) on the official website.
 
+Or you can upload the files to a server hosting any website in the public_html directory and use the link pointing to the files in your tweetSource.
+```
+"tweetsSource": "http://domain/tweetledee/favoritesjson.php?c=10&cache_interval=8000",
+```
+Add 
+```
+header("Access-Control-Allow-Origin: *");
+```
+at the top of your tweetledee_keys.php file to enable CORS.
 
 # Next steps
 
-Now your Hoverboard is up configured, learn how to [style app][style app] and [deploy][deploy].
+Now your Hoverboard is up configured, learn how to integrate [firebase][firebase] in your app, [style app][style app] and [deploy][deploy].
 
 [AppLocalizeBehavior]: https://elements.polymer-project.org/elements/app-localize-behavior
-[localization resources]: /data/en/resources.json
+[localization resources]: /data/resources.json
 [style app]: styling.md
 [deploy]: deploy.md
+[firebase]: firebase.md

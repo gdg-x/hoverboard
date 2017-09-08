@@ -1,0 +1,327 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+
+<link rel="import" href="../../bower_components/app-storage/app-network-status-behavior.html">
+
+<link rel="import" href="../behaviors/utils-behavior.html">
+<link rel="import" href="../behaviors/my-schedule-behavior.html">
+
+
+<dom-module id="session-element">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .session {
+        @apply(--shadow-transition);
+        cursor: pointer;
+        color: var(--primary-text-color);
+      }
+
+      .session[with-background] {
+        color: #fff;
+      }
+
+      .session[with-background] .overlay {
+        background: rgba(0, 0, 0, 0.4);
+      }
+
+      .session:hover {
+        @apply(--shadow-elevation-4dp);
+      }
+
+      .session-content {
+        padding: 24px;
+        flex-basis: auto;
+      }
+
+      .session-content p {
+        margin: 24px 0 8px;
+      }
+
+      .session-title {
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 22px;
+      }
+
+      .session-meta {
+        margin: 8px 0 0;
+        padding: 0;
+        font-size: 15px;
+        color: var(--secondary-text-color);
+      }
+
+      .session[with-background] .tags,
+      .session[with-background] .session-meta {
+        color: #fff;
+      }
+
+      .session-meta li {
+        display: inline-block;
+      }
+
+      .session-meta li:not(:last-of-type)::after {
+        margin-left: 5px;
+        margin-right: 5px;
+        content: "/";
+      }
+
+      .speaker-block {
+        padding: 12px 24px;
+        color: #fff;
+      }
+
+      .image-overlay {
+        transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0.85;
+      }
+
+      .session[wide]:hover .image-overlay,
+      .session[wide]:hover .action-icon {
+        opacity: 1;
+      }
+
+      .action-icon[disabled],
+      .session[wide]:hover .action-icon[disabled] {
+        opacity: 0.2;
+        cursor: default;
+      }
+
+      .session[wide] .action-icon.calendar-check {
+        opacity: 1;
+      }
+
+      .session[with-background][wide] .image-overlay,
+      .session[with-background][wide]:hover .image-overlay {
+        opacity: 0;
+      }
+
+      .bottom-caption {
+        position: relative;
+        font-size: 13px;
+        color: var(--secondary-text-color);
+      }
+
+      .action-icon {
+        --iron-icon-width: 20px;
+        --iron-icon-height: 20px;
+        margin-left: 16px;
+        padding: 16px 24px;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+      }
+
+      .session[with-background] .action-icon,
+      .session[with-background] .bottom-meta {
+        color: #fff;
+      }
+
+      .session[wide] .action-icon {
+        opacity: 0;
+        transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .bottom-meta {
+        margin-right: 24px;
+        padding: 16px 24px;
+      }
+
+      .bottom-meta iron-icon {
+        --iron-icon-width: 14px;
+        --iron-icon-height: 14px;
+        margin-right: 8px;
+      }
+
+      .speaker {
+        margin: 4px 0;
+      }
+
+      .speaker:not(:last-of-type) {
+        margin-right: 24px;
+      }
+
+      .person-detail {
+        margin-left: 7px;
+        line-height: 1;
+        z-index: 1;
+      }
+
+      .speaker-title {
+        font-size: 13px;
+      }
+    </style>
+
+    <a
+      class="session"
+      href$="/schedule/[[dayName]]?sessionId=[[session.id]]"
+      with-background$="[[session.image]]"
+      wide$="{{!app.isPhoneSize}}"
+      layout flex-auto
+    >
+      <paper-card layout flex-auto>
+
+        <iron-image
+          src="[[session.image]]"
+          sizing="cover"
+          fit preload
+        ></iron-image>
+
+        <div class="overlay" relative layout vertical flex>
+          <div class="session-content" flex>
+            <h2 class="session-title">[[session.title]]</h2>
+            <ul class="session-meta">
+              <li hidden$="[[!session.language]]">[[session.language]]</li>
+              <li hidden$="[[!session.complexity]]">[[session.complexity]]</li>
+              <li hidden$="[[!session.track.title]]">[[session.track.title]]</li>
+            </ul>
+          </div>
+
+          <div class="bottom-caption" layout horizontal center justified>
+            <div class="bottom-meta" flex hidden$="[[!_hasBottomMeta(session)]]">
+              <div hidden$="[[!session.tags.length]]" layout horizontal center>
+                <iron-icon icon="tags"></iron-icon>
+                <span>[[_joinArray(session.tags)]]</span>
+              </div>
+
+              <div hidden$="[[!session.type]]" layout horizontal center>
+                <iron-icon icon="info"></iron-icon>
+                <span>[[session.type]]</span>
+              </div>
+
+              <div hidden$="[[!session.videoId]]" layout horizontal center>
+                <iron-icon icon="video"></iron-icon>
+                <span>Recording available</span>
+              </div>
+
+              <div hidden$="[[!session.presentation]]" layout horizontal center>
+                <iron-icon icon="presentation"></iron-icon>
+                <span>Presentation available</span>
+              </div>
+            </div>
+
+            <iron-icon
+              class$="action-icon [[myScheduleIcon]]"
+              icon$="[[myScheduleIcon]]"
+              on-tap="toggleMyScheduleSession"
+              session-id$="[[session.id]]"
+              disabled$="[[!online]]"
+            ></iron-icon>
+          </div>
+
+          <div
+            class="speaker-block"
+            hidden$="[[!session.speakers.length]]"
+            layout horizontal wrap relative
+          >
+            <div
+              class="image-overlay"
+              style$="background-color: [[sessionColor]]"
+              fit
+            ></div>
+
+            <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
+              <div class="speaker" layout horizontal center>
+                <iron-icon icon="account"></iron-icon>
+                <div class="person-detail" flex>
+                  <span class="speaker-name">[[speaker.name]]</span>
+                  <div class="speaker-title">[[speaker.company]] / [[speaker.country]]</div>
+                </div>
+              </div>
+            </template>
+
+          </div>
+
+        </div>
+      </paper-card>
+    </a>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'session-element',
+
+        behaviors: [
+          Polymer.AppNetworkStatusBehavior,
+          HOVERBOARD.UtilsBehavior,
+          HOVERBOARD.MyScheduleBehavior
+        ],
+
+        properties: {
+          app: {
+            type: Object,
+            notify: true
+          },
+
+          dayName: {
+            type: String
+          },
+
+          session: {
+            type: Object
+          },
+
+          sessionColor: {
+            type: String,
+            value: ''
+          },
+
+          myScheduleIcon: {
+            type: String,
+            value: 'calendar-plus'
+          }
+        },
+
+        observers: [
+          '_getMyScheduleIcon(session.id, app.user.sessions)',
+          '_userUpdated(app.user)'
+        ],
+
+        ready: function () {
+          this.async(function () {
+            this.sessionColor = this.getComputedStyleValue('--' + this._generateClass(this.session.mainTag));
+          });
+        },
+
+        _splitText: function (text, divider, index) {
+          return text.split(divider)[index];
+        },
+
+        _joinArray: function (array) {
+          if (!array) return;
+          return array.join(', ');
+        },
+
+        _getMyScheduleIcon: function (id) {
+          this.myScheduleIcon = this.isInMySchedule(id) ? 'calendar-check' : 'calendar-plus';
+        },
+
+        _userUpdated: function (user) {
+          if (!user && this.session) {
+            this._getMyScheduleIcon(this.session.id);
+          }
+        },
+
+        _hasBottomMeta: function (session) {
+          return session.tags && session.tags.length || session.presentation || session.videoId;
+        }
+      });
+
+    }());
+  </script>
+
+</dom-module>

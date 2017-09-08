@@ -67,14 +67,13 @@ in `pages` object. For instance:
 
 ### Web app
 
-Edit Web app colors in `manifest.json`
+Edit Web app colors in `hoverboard.config.json`
 ```
-  "background_color": "#F57C00",
-  "theme_color": "#F57C00"
-```
-and in `index.html`
-```
-<meta name="theme-color" content="#F57C00">
+  "webapp": {
+      "shortName": "DevFest",
+      "themeColor": "#F57C00",
+      "backgroundColor": "#F57C00"
+    }
 ```
 
 ## Next steps

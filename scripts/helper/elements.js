@@ -20,8 +20,8 @@ HOVERBOARD.Elements = (function () {
   function init() {
     HOVERBOARD.Elements.Template = document.getElementById('happ');
   }
-  
+
   return {
-    init : init
+    init: init
   };
 }());
