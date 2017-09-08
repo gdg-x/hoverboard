@@ -97,5 +97,14 @@
     "secondaryColor": "#536DFE",
     "image": "/images/posts/lviv-background.jpg",
     "brief": "For the 4th time GDG DevFest Ukraine will take place in Lviv. So what exactly is Lviv and what so special about it?"
+  },
+  {
+    "id": "platinum-sponsor-team-technologies",
+    "title": "Meet our Platinum Sponsor - Team Technologies",
+    "posted": "2017-09-08",
+    "primaryColor": "#E45E30",
+    "secondaryColor": "#E44D30",
+    "image": "/images/posts/team_technologies_cover.jpg",
+    "brief": "Team Technologies is a technology service provider. We drive our partners to engineer better digital products."
   }
 ]
