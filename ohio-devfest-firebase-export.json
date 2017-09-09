@@ -41,6 +41,10 @@
     "icon" : "twitter",
     "link" : "https://twitter.com/g_willi",
     "name" : "Twitter"
+  }, {
+    "icon" : "gplus",
+    "link" : "https://plus.google.com/116224595242016943891",
+    "name" : "Google+"
   } ],
   "title" : "GDG Cincinnati Organizer"
 }, {
