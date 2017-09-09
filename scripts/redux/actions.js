@@ -462,8 +462,8 @@ const notificationsActions = {
           const state = store.getState();
           const subscribersRef = firebase.database().ref(`/notifications/subscribers/${currentToken}`);
           const subscribersPromise = subscribersRef.once('value');
+          const userUid = state.user && (state.user.uid || null);
 
-          const userUid = state.user && state.user.uid ? state.user.uid : null;
           let userSubscriptionsPromise = Promise.resolve(null);
           let userSubscriptionsRef;
           if (userUid) {
@@ -473,10 +473,10 @@ const notificationsActions = {
 
           Promise.all([subscribersPromise, userSubscriptionsPromise])
             .then(results => {
-              const isSubscribed = results[0].val();
+              const isDeviceSubscribed = results[0].val();
               const isUserSubscribed = results[1] ? results[1].val() : false;
 
-              if (isSubscribed) {
+              if (isDeviceSubscribed) {
                 store.dispatch({
                   type: UPDATE_NOTIFICATIONS_STATUS,
                   status: NOTIFICATIONS_STATUS.GRANTED,
@@ -485,7 +485,7 @@ const notificationsActions = {
                 if (userUid && !isUserSubscribed) {
                   userSubscriptionsRef.set(userUid);
                 }
-              } else if (!isSubscribed && subscribe) {
+              } else if (!isDeviceSubscribed && subscribe) {
                 subscribersRef.set(true);
                 userUid && userSubscriptionsRef.set(true);
                 store.dispatch({

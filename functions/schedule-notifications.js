@@ -4,9 +4,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const moment = require('moment');
 
-const NOTIFICATION_ICON = 'https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fnotification.png?alt=media&token=689dde62-a152-4bb0-8ed8-6aca07eb8064';
 const FORMAT = 'HH:mm';
-const TIMEZONE = '+03:00';
 const BASE_URL = 'https://hoverboard-v2-dev.firebaseapp.com';
 
 const removeUserTokens = tokensToUsers => {
@@ -51,11 +49,16 @@ const sendPushNotificationToUsers = (userIds, payload) => {
 };
 
 exports.scheduleNotifications = functions.pubsub.topic('schedule-tick').onPublish(() => {
-  const todayDay = moment().utcOffset(TIMEZONE).format('YYYY-MM-DD');
+  const notificationsConfigPromise = admin.database().ref(`/notifications/config`).once('value');
+  const schedulePromise = admin.database().ref(`/schedule`).once('value');
 
-  return admin.database().ref(`/schedule`).once('value')
-    .then(scheduleSnapshot => {
+  return Promise.all([notificationsConfigPromise, schedulePromise])
+    .then(([notificationsConfigSnapshot, scheduleSnapshot]) => {
+      const notificationsConfig = notificationsConfigSnapshot.val();
       const schedule = scheduleSnapshot.val();
+      console.log('notificationsConfig', notificationsConfig);
+      console.log('schedule', schedule);
+      const todayDay = moment().utcOffset(notificationsConfig.timezone).format('YYYY-MM-DD');
 
       if (schedule[todayDay]) {
         const beforeTime = moment().subtract(3, 'minutes');
@@ -63,7 +66,7 @@ exports.scheduleNotifications = functions.pubsub.topic('schedule-tick').onPublis
 
         const upcomingTimeslot = schedule[todayDay].timeslots
           .filter(timeslot => {
-            const timeslotTime = moment(`${timeslot.startTime}${TIMEZONE}`, `${FORMAT}Z`).subtract(10, 'minutes');
+            const timeslotTime = moment(`${timeslot.startTime}${notificationsConfig.timezone}`, `${FORMAT}Z`).subtract(10, 'minutes');
             return timeslotTime.isBetween(beforeTime, afterTime);
           });
 
@@ -76,15 +79,15 @@ exports.scheduleNotifications = functions.pubsub.topic('schedule-tick').onPublis
           const sessionInfoPromise = admin.database().ref(`/sessions/${upcomingSession}`).once('value');
 
           return Promise.all([userFeaturedSessionsPromise, sessionInfoPromise])
-            .then(results => {
-              const usersIds = results[0].val();
+            .then(([usersIdsSnapshot, sessionInfoSnapshot]) => {
+              const usersIds = usersIdsSnapshot.val();
               const userIdsFeaturedSession = Object.keys(usersIds)
                 .filter(userId =>
                   !!Object.keys(usersIds[userId]).filter(sessionId =>
                     (sessionId.toString() === upcomingSession.toString()).length));
 
-              const session = results[1].val();
-              const end = moment(`${upcomingTimeslot[0].startTime}${TIMEZONE}`, `${FORMAT}Z`);
+              const session = sessionInfoSnapshot.val();
+              const end = moment(`${upcomingTimeslot[0].startTime}${notificationsConfig.timezone}`, `${FORMAT}Z`);
               const fromNow = end.fromNow();
 
               if (userIdsFeaturedSession.length) {
@@ -93,7 +96,7 @@ exports.scheduleNotifications = functions.pubsub.topic('schedule-tick').onPublis
                     title: session.title,
                     body: `Starts ${fromNow}`,
                     click_action: `${BASE_URL}/schedule/${todayDay}?sessionId=${upcomingSessions[sessionIndex]}`,
-                    icon: NOTIFICATION_ICON
+                    icon: notificationsConfig.icon
                   }
                 });
               }
