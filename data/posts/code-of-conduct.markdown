@@ -49,6 +49,4 @@ We expect all community participants to abide by this Code of Conduct in all com
 
 # 7. Contact info
 
-- [GDG Cincinnati](http://gdgcincinnati.com)
-- [GDG Columbus](https://www.meetup.com/GDG-Columbus/)
 - Ohio DevFest, [contact@ohiodevfest.com](mailto:contact@ohiodevfest.com)
