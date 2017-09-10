@@ -37,7 +37,24 @@
         background-color: var(--primary-background-color);
       }
 
-       [slot="markdown-html"] plastic-image {
+      [slot="markdown-html"] {
+        font-size: 18px;
+        line-height: 1.8;
+        color: var(--primary-text-color);
+      }
+
+      [slot="markdown-html"] h1,
+      [slot="markdown-html"] h2,
+      [slot="markdown-html"] h3 {
+        margin: 48px 0 16px;
+      }
+
+      [slot="markdown-html"] p {
+        margin-top: 0;
+        margin-bottom: 24px;
+      }
+
+      [slot="markdown-html"] plastic-image {
         margin: 32px 0 8px -16px;
         --iron-image-width: calc(100% + 32px);
         width: calc(100% + 32px);
