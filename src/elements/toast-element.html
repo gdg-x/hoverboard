@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 
 <link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 
@@ -26,7 +27,7 @@
       }
 
       .toast-action {
-        padding-left: 24px;
+        margin-left: 24px;
         color: var(--accent-color);
         text-transform: uppercase;
         font-weight: 600;
@@ -60,7 +61,7 @@
 
   <script>
 
-    class ToastElement extends ReduxMixin(Polymer.Element) {
+    class ToastElement extends ReduxMixin(Polymer.GestureEventListeners(Polymer.Element)) {
       static get is() {
         return 'toast-element'
       }

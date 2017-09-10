@@ -60,7 +60,10 @@
       signedIn: false
     },
     subscribed: false,
-    toast: {}
+    toast: {},
+    notifications: {
+      status: NOTIFICATIONS_STATUS.DEFAULT
+    }
   };
 
   const appReducer = (state = initialState, action) => {
@@ -80,7 +83,8 @@
       team: teamReducer(state.team, action),
       user: userReducer(state.user, action),
       subscribed: subscribeReducer(state.subscribed, action),
-      toast: toastReducer(state.toast, action)
+      toast: toastReducer(state.toast, action),
+      notifications: notificationsReducer(state.notifications, action)
     };
   };
 

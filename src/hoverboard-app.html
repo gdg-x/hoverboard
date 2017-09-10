@@ -17,6 +17,8 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-menu-button/paper-menu-button.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 
 <link rel="import" href="../bower_components/iron-lazy-pages/iron-lazy-pages.html">
@@ -24,7 +26,6 @@
 
 <link rel="import" href="../bower_components/iron-lazy-pages/iron-lazy-pages.html">
 <link rel="import" href="../bower_components/plastic-image/plastic-image.html">
-<link rel="import" href="../bower_components/paper-menu-button/paper-menu-button.html">
 
 <link rel="import" href="mixins/utils-functions.html">
 <link rel="import" href="mixins/redux-mixin.html">
@@ -39,7 +40,7 @@
 
   <template>
 
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+    <style is="custom-style" include="shared-styles flex flex-reverse flex-alignment positioning"></style>
     <style>
       :host {
         display: block;
@@ -92,6 +93,10 @@
         z-index: 1;
       }
 
+      .header {
+        --iron-icon-fill-color: var(--secondary-text-color);
+      }
+
       app-toolbar {
         height: auto;
         background-color: var(--primary-background-color);
@@ -142,14 +147,20 @@
         background-size: cover;
       }
 
-      .signin-panel {
+      .dropdown-panel {
+        padding: 24px;
+        max-width: 300px;
         background: #fff;
-        color: var(--text-primary-color);
+        font-size: 16px;
+        color: var(--primary-text-color);
       }
 
-      .profile-details {
-        padding: 16px;
-        border-bottom: 1px solid var(--divider-color);
+      .dropdown-panel p {
+        margin-top: 0;
+      }
+
+      .dropdown-panel .panel-actions {
+        margin: 0 -16px -16px 0;
       }
 
       .profile-details .profile-image {
@@ -312,7 +323,41 @@
               <paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]">{$ signIn $}</paper-tab>
             </paper-tabs>
 
+            <paper-menu-button
+              id="notificationsMenu"
+              class="notifications-menu"
+              vertical-align="top"
+              horizontal-align="right"
+              no-animations
+            >
+              <paper-icon-button
+                icon="hoverboard:[[_getNotificationsIcon(notifications.status)]]"
+                slot="dropdown-trigger"
+              ></paper-icon-button>
+              <div class="dropdown-panel" slot="dropdown-content">
+                <div hidden$="[[_hideNotificationBlock(notifications.status, 'DEFAULT')]]">
+                  <p>{$ notifications.default $}</p>
+                  <div class="panel-actions" layout horizontal end-justified>
+                    <paper-button primary-text on-tap="_toggleNotifications">{$ notifications.subscribe $}</paper-button>
+                  </div>
+                </div>
+                <div hidden$="[[_hideNotificationBlock(notifications.status, 'GRANTED')]]">
+                  <p>{$ notifications.enabled $}</p>
+                  <div class="panel-actions" layout horizontal end-justified>
+                    <paper-button primary-text on-tap="_toggleNotifications">{$ notifications.unsubscribe $}</paper-button>
+                  </div>
+                </div>
+                <div hidden$="[[_hideNotificationBlock(notifications.status, 'DENIED')]]">
+                  <p>{$ notifications.blocked $}</p>
+                  <div class="panel-actions" layout horizontal end-justified>
+                    <a href="{$ notifications.enable.link $}" target="_blank" rel="noopener noreferrer">
+                      <paper-button primary-text on-tap="_closeNotificationMenu">{$ notifications.enable.label $}</paper-button>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </paper-menu-button>
+
             <paper-menu-button
               class="auth-menu"
               hidden$="[[!user.signedIn]]"
@@ -324,18 +369,15 @@
                 class="profile-image" slot="dropdown-trigger"
                 style$="background-image: url('[[user.photoURL]]')"
               ></div>
-              <div class="signin-panel" slot="dropdown-content">
-                <div class="profile-details" layout horizontal>
-                  <div
-                    class="profile-image" slot="dropdown-trigger" self-center
-                    style$="background-image: url('[[user.photoURL]]')"
-                  ></div>
-                  <div layout vertical center-justified>
-                    <span class="profile-name">[[user.displayName]]</span>
-                    <span class="profile-email">[[user.email]]</span>
-                    <span class="profile-action" role="button" on-touchend="signOut"
-                          on-click="signOut">{$ signOut $}</span>
-                  </div>
+              <div class="dropdown-panel profile-details" slot="dropdown-content" layout horizontal>
+                <div
+                  class="profile-image" slot="dropdown-trigger" self-center
+                  style$="background-image: url('[[user.photoURL]]')"
+                ></div>
+                <div layout vertical center-justified>
+                  <span class="profile-name">[[user.displayName]]</span>
+                  <span class="profile-email">[[user.email]]</span>
+                  <span class="profile-action" role="button" on-tap="signOut">{$ signOut $}</span>
                 </div>
               </div>
             </paper-menu-button>
@@ -418,18 +460,18 @@
       </app-header-layout>
     </app-drawer-layout>
 
-    <video-dialog id="videoDialog"
-                  opened="[[ui.videoDialog.opened]]"
-                  video-title="[[ui.videoDialog.title]]"
-                  youtube-id="[[ui.videoDialog.youtubeId]]"
-                  entry-animation="scale-up-animation"
-                  exit-animation="fade-out-animation"
-                  disable-controls="[[!ui.videoDialog.disableControls]]"
-                  fit fixed-top></video-dialog>
+    <video-dialog
+      opened="[[ui.videoDialog.opened]]"
+      video-title="[[ui.videoDialog.title]]"
+      youtube-id="[[ui.videoDialog.youtubeId]]"
+      entry-animation="scale-up-animation"
+      exit-animation="fade-out-animation"
+      disable-controls="[[!ui.videoDialog.disableControls]]"
+      fit fixed-top
+    ></video-dialog>
 
 
     <speaker-details
-      id="speakerDialog"
       opened="[[dialogs.speaker.isOpened]]"
       speaker="[[dialogs.speaker.data]]"
       with-backdrop="[[viewport.isTabletPlus]]"
@@ -437,7 +479,6 @@
     ></speaker-details>
 
     <session-details
-      id="sessionDialog"
       opened="[[dialogs.session.isOpened]]"
       session="[[dialogs.session.data]]"
       with-backdrop="[[viewport.isTabletPlus]]"
@@ -445,7 +486,6 @@
     ></session-details>
 
     <subscribe-dialog
-      id="subscribeDialog"
       opened="[[dialogs.subscribe.isOpened]]"
       data="[[dialogs.subscribe.data]]"
       with-backdrop
@@ -453,7 +493,6 @@
     </subscribe-dialog>
 
     <signin-dialog
-      id="signinDialog"
       opened="[[dialogs.signin.isOpened]]"
       with-backdrop>
     </signin-dialog>
@@ -496,6 +535,10 @@
           schedule: {
             type: Object,
             statePath: 'schedule'
+          },
+          notifications: {
+            type: Boolean,
+            statePath: 'notifications'
           },
           _openedDialog: {
             type: String
@@ -568,6 +611,8 @@
           Polymer.RenderStatus.afterNextRender(this, () => {
             Polymer.importHref(this.resolveUrl('lazy-resources.html'), () => {
               this.loadComplete = true;
+              notificationsActions.initializeMessaging()
+                .then(notificationsActions.getToken);
             });
           });
         }
@@ -612,11 +657,13 @@
 
       _dialogToggled(dialogs) {
         if (this._openedDialog) {
-          Polymer.IronDropdownScrollManager.removeScrollLock(this.shadowRoot.querySelector(`#${this._openedDialog}Dialog`));
+          document.body.style.overflow = '';
           this._openedDialog = null;
         }
         this._openedDialog = Object.keys(dialogs).find(key => dialogs[key].isOpened);
-        this._openedDialog && Polymer.IronDropdownScrollManager.pushScrollLock(this.shadowRoot.querySelector(`#${this._openedDialog}Dialog`));
+        if (this._openedDialog) {
+          document.body.style.overflow = 'hidden';
+        }
       }
 
       _authStatusChanged(signedIn) {
@@ -627,6 +674,31 @@
 
       _removeQueryParams() {
         this.set('queryParams', null);
+      }
+
+      _toggleNotifications() {
+        this._closeNotificationMenu();
+        if (this.notifications.status === NOTIFICATIONS_STATUS.GRANTED) {
+          notificationsActions.unsubscribe(this.notifications.token);
+          return;
+        }
+        notificationsActions.requestPermission();
+      }
+
+      _getNotificationsIcon(status) {
+        return status === NOTIFICATIONS_STATUS.DEFAULT
+          ? 'bell-outline'
+          : status === NOTIFICATIONS_STATUS.GRANTED
+            ? 'bell'
+            : 'bell-off';
+      }
+
+      _hideNotificationBlock(status, blockStatus) {
+        return status !== NOTIFICATIONS_STATUS[blockStatus];
+      }
+
+      _closeNotificationMenu() {
+        this.$.notificationsMenu.close();
       }
     }
 

@@ -10,14 +10,6 @@
         ".write": "auth.uid === $uid"
       }
     },
-    "userSessions": {
-      ".read": false,
-      ".write": false,
-      "$uid": {
-        ".read": "auth.uid === $uid",
-        ".write": "auth.uid === $uid"
-      }
-    },
     "featuredSessions": {
       ".read": false,
       ".write": false,
@@ -31,8 +23,24 @@
       ".write": "root.child('users').child(auth.uid).child('rules').child('speakers').val() === true"
     },
     "subscribers": {
-       ".read": false,
-       ".write": true
+      ".read": false,
+      ".write": true
+    },
+    "notifications": {
+      ".read": false,
+      ".write": false,
+      "subscribers": {
+        ".read": true,
+        ".write": true
+      },
+      "users": {
+        ".read": false,
+        ".write": false,
+        "$uid": {
+          ".read": "auth.uid === $uid",
+          ".write": "auth.uid === $uid"
+        }
+      }
     }
   }
 }
