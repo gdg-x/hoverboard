@@ -7,7 +7,8 @@ exports.sendGeneralNotification = functions.database.ref('/notifications/message
   const timestamp = event.params.timestamp;
   const message = event.data.val();
 
-  console.log('New message added at ', timestamp, ' with message ', message);
+  if (!message) return null;
+  console.log('New message added at ', timestamp, ' with payload ', message);
   const deviceTokensPromise = admin.database().ref(`/notifications/subscribers`).once('value');
   const notificationsConfigPromise = admin.database().ref(`/notifications/config`).once('value');
 
@@ -21,7 +22,7 @@ exports.sendGeneralNotification = functions.database.ref('/notifications/message
       console.log('There are', tokensSnapshot.numChildren(), 'tokens to send notifications to.');
 
       const payload = {
-        notification: Object.assign({}, message, {
+        data: Object.assign({}, message, {
           icon: message.icon || notificationsConfig.icon
         })
       };

@@ -583,7 +583,6 @@
         console.log('Hoverboard v2 is ready!');
         this.removeAttribute('unresolved');
         this._ensureLazyLoaded();
-        notificationsActions.getToken();
 //        userActions.autoSignIn(this.providerUrls);
       }
 
@@ -612,6 +611,8 @@
           Polymer.RenderStatus.afterNextRender(this, () => {
             Polymer.importHref(this.resolveUrl('lazy-resources.html'), () => {
               this.loadComplete = true;
+              notificationsActions.initializeMessaging()
+                .then(notificationsActions.getToken);
             });
           });
         }

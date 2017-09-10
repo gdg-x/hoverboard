@@ -177,7 +177,7 @@ gulp.task('serve', gulp.series(compileTemplate, () => {
     'data/**/*.json',
     'scripts/**/*.js',
     'src/**/*.html',
-    './index.html',
+    '*.{html,js}',
     'manifest.json'
   ], gulp.series(compileTemplate, reload));
 }));

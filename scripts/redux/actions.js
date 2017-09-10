@@ -425,22 +425,28 @@ const subscribeActions = {
   }
 };
 
-const messaging = firebase.messaging();
-messaging.onMessage(({ notification }) => {
-  toastActions.showToast({
-    message: `${notification.title} ${notification.body}`,
-    action: {
-      title: '{$ notifications.toast.title $}',
-      callback: () => {
-        routingActions.setLocation(notification.click_action);
-      }
-    }
-  })
-});
-messaging.onTokenRefresh(() => {
-  notificationsActions.getToken(true);
-});
+let messaging;
 const notificationsActions = {
+  initializeMessaging: () => {
+    return new Promise(resolve => {
+      messaging = firebase.messaging();
+      messaging.onMessage(({ notification }) => {
+        toastActions.showToast({
+          message: `${notification.title} ${notification.body}`,
+          action: {
+            title: '{$ notifications.toast.title $}',
+            callback: () => {
+              routingActions.setLocation(notification.click_action);
+            }
+          }
+        });
+      });
+      messaging.onTokenRefresh(() => {
+        notificationsActions.getToken(true);
+      });
+      resolve(messaging);
+    });
+  },
   requestPermission: () => {
     return messaging.requestPermission()
       .then(() => {
@@ -472,9 +478,9 @@ const notificationsActions = {
           }
 
           Promise.all([subscribersPromise, userSubscriptionsPromise])
-            .then(results => {
-              const isDeviceSubscribed = results[0].val();
-              const isUserSubscribed = results[1] ? results[1].val() : false;
+            .then(([subscribersSnapshot, userSubscriptionsSnapshot]) => {
+              const isDeviceSubscribed = subscribersSnapshot.val();
+              const isUserSubscribed = userSubscriptionsSnapshot ? userSubscriptionsSnapshot.val() : false;
 
               if (isDeviceSubscribed) {
                 store.dispatch({

@@ -5,7 +5,6 @@ const admin = require('firebase-admin');
 const moment = require('moment');
 
 const FORMAT = 'HH:mm';
-const BASE_URL = 'https://hoverboard-v2-dev.firebaseapp.com';
 
 const removeUserTokens = tokensToUsers => {
   let promises = [];
@@ -56,8 +55,6 @@ exports.scheduleNotifications = functions.pubsub.topic('schedule-tick').onPublis
     .then(([notificationsConfigSnapshot, scheduleSnapshot]) => {
       const notificationsConfig = notificationsConfigSnapshot.val();
       const schedule = scheduleSnapshot.val();
-      console.log('notificationsConfig', notificationsConfig);
-      console.log('schedule', schedule);
       const todayDay = moment().utcOffset(notificationsConfig.timezone).format('YYYY-MM-DD');
 
       if (schedule[todayDay]) {
@@ -92,10 +89,10 @@ exports.scheduleNotifications = functions.pubsub.topic('schedule-tick').onPublis
 
               if (userIdsFeaturedSession.length) {
                 sendPushNotificationToUsers(userIdsFeaturedSession, {
-                  notification: {
+                  data: {
                     title: session.title,
                     body: `Starts ${fromNow}`,
-                    click_action: `${BASE_URL}/schedule/${todayDay}?sessionId=${upcomingSessions[sessionIndex]}`,
+                    click_action: `/schedule/${todayDay}?sessionId=${upcomingSessions[sessionIndex]}`,
                     icon: notificationsConfig.icon
                   }
                 });
