@@ -175,6 +175,15 @@
       "tags" : [ "Kotlin" ],
       "title" : "Yo Dawg! I heard you like Kotlin"
     },
+    "110": {
+      "complexity" : "Beginner",
+      "description" : "Building a high-quality Progressive Web App has incredible benefits, making it easy to delight your users, grow engagement and increase conversions. Join this talk to learn how to improve your app user experience using PWAs features combined with Firebase infrastructure.",
+      "id" : 110,
+      "language" : "English",
+      "speakers" : [ 10 ],
+      "tags" : [ "Firebase" ],
+      "title" : "Building Progressive Web Apps powered by Firebase"
+    },
     "201" : {
       "description" : "Get your badge, coffee, enjoy talking with tech addicts around",
       "id" : 201,
@@ -474,6 +483,32 @@
     } ],
     "tags" : [ "Android", "Kotlin" ],
     "title" : "Android Engineer"
+  }, {
+    "bio" : "Passionate about traveling and also to share his adventures with Web Technologies and Firebase. As a Google Developer Expert he is helping communities all over the world to learn, discover and have fun.",
+    "badges" : [ {
+      "description" : "Technology Expert",
+      "link" : "https://developers.google.com/experts/people/juarez-filho",
+      "name" : "GDE"
+    } ],
+    "company" : "Firebase",
+    "companyLogo" : "/images/logos/firebase.png",
+    "country" : "Dublin, Ireland",
+    "featured" : true,
+    "id" : 10,
+    "name" : "Juarez Filho",
+    "photoUrl" : "/images/people/juarez_filho.jpg",
+    "shortBio" : "Passionate about traveling and also to share his adventures with Web Technologies and Firebase.",
+    "socials" : [ {
+      "icon" : "twitter",
+      "link" : "https://twitter.com/juarezpaf",
+      "name" : "Twitter"
+    }, {
+      "icon" : "github",
+      "link" : "https://github.com/juarezpaf",
+      "name" : "Github"
+    } ],
+    "tags" : [ "Firebase" ],
+    "title" : "Firebase GDE"
   } ],
   "team" : [ {
     "members" : [ {
