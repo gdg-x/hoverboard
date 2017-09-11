@@ -2,29 +2,25 @@
 <link rel="import" href="../bower_components/polymer/lib/utils/render-status.html">
 <link rel="import" href="../bower_components/polymer/lib/utils/import-href.html">
 
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
-<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
-<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 
-<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+<link rel="import" href="../bower_components/iron-lazy-pages/iron-lazy-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
-<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 
-<link rel="import" href="../bower_components/iron-lazy-pages/iron-lazy-pages.html">
-<link rel="import" href="../bower_components/plastic-image/plastic-image.html">
-
-<link rel="import" href="../bower_components/iron-lazy-pages/iron-lazy-pages.html">
 <link rel="import" href="../bower_components/plastic-image/plastic-image.html">
 
 <link rel="import" href="mixins/utils-functions.html">
@@ -32,6 +28,7 @@
 <link rel="import" href="mixins/scroll-functions.html">
 <link rel="import" href="elements/shared-styles.html">
 <link rel="import" href="elements/hoverboard-icons.html">
+<link rel="import" href="elements/hero-block.html">
 <link rel="import" href="elements/footer-block.html">
 <link rel="import" href="effects/sticky-bottom-toolbar.html">
 
@@ -89,12 +86,9 @@
       }
 
       .header {
+        --iron-icon-fill-color: var(--secondary-text-color);
         border-bottom: 1px solid var(--divider-color);
         z-index: 1;
-      }
-
-      .header {
-        --iron-icon-fill-color: var(--secondary-text-color);
       }
 
       app-toolbar {
@@ -190,72 +184,17 @@
         --iron-icon-fill-color: var(--header-background);
       }
 
-      .hero-image {
-        background-color: var(--hero-background-color);
-        transition: background-color 0.3s;
-      }
-
-      app-header iron-pages {
-        transform: translateZ(0);
-      }
-
-      .hero-overlay {
-        background-color: rgba(0, 0, 0, 0.6);
-        opacity: 0;
-        transition: opacity 0.3s;
-      }
-
-      .hero-overlay[show] {
-        opacity: 1;
-      }
-
-      .hero-block {
-        padding: 30px;
-        display: block;
-        position: relative;
-        color: var(--hero-color);
-      }
-
-      .hero-content {
-        max-width: 480px;
-      }
-
-      .hero-logo {
-        --iron-image-height: 50px;
-        margin-top: 30px;
-      }
-
-      .hero-title {
-        margin: 30px 0;
-        font-size: 40px;
-        text-transform: capitalize;
-      }
-
-      .hero-description {
-        margin-bottom: 30px;
-        max-width: 600px;
-      }
-
       @media (min-width: 640px) {
         app-toolbar {
           padding: 0 36px;
           height: initial;
-        }
-
-        .hero-block {
-          padding: 120px 60px 60px;
-        }
-
-        .hero-logo {
-          --iron-image-height: 70px;
-          margin-top: 0;
         }
       }
     </style>
 
     <iron-media-query id="mq-phone" full query="(max-width: {$ mediaQueries.xs.max $})"
                       query-matches="{{isPhoneSize}}"></iron-media-query>
-    <iron-media-query id="mq-phone" full query="(min-width: {$ mediaQueries.md.min $})"
+    <iron-media-query id="mq-laptop" full query="(min-width: {$ mediaQueries.md.min $})"
                       query-matches="{{isLaptopSize}}"></iron-media-query>
 
     <app-location route="{{appRoute}}"></app-location>
@@ -383,25 +322,7 @@
             </paper-menu-button>
           </app-toolbar>
 
-          <app-toolbar class="hero-block" layout start vertical center-justified>
-            <plastic-image
-              class="hero-image"
-              srcset="[[hero.background.image]]"
-              sizing="cover"
-              lazy-load preload fade fit
-            ></plastic-image>
-            <div class="hero-overlay" show$=[[hero.background.image]] fit></div>
-            <iron-pages selected="[[route.route]]" attr-for-selected="route" fallback-selection="default">
-              <div class="hero-content" route="home">
-                <plastic-image class="hero-logo" srcset="/images/logo.svg" alt="{$ title $}"></plastic-image>
-                <p class="hero-description highlight-font">[[hero.description]]</p>
-              </div>
-              <div route="default">
-                <div class="hero-title highlight-font">[[hero.title]]</div>
-                <p class="hero-description">[[hero.description]]</p>
-              </div>
-            </iron-pages>
-          </app-toolbar>
+          <hero-block></hero-block>
 
           <app-toolbar
             id="bottom-toolbar"
