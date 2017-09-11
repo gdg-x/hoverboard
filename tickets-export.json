@@ -1,0 +1,34 @@
+"tickets" : {
+    "elements" : [ {
+      "currency" : "$",
+      "ends" : "October 18",
+      "info" : "Requires valid student ID",
+      "name" : "Early Bird Student",
+      "price" : 20,
+      "soldOut" : false,
+      "starts" : "September 11"
+    }, {
+      "currency" : "$",
+      "ends" : "October 18",
+      "name" : "Early Bird Professional",
+      "price" : 40,
+      "soldOut" : false,
+      "starts" : "September 11"
+    }, {
+      "currency" : "$",
+      "ends" : "November 18",
+      "info" : "Requires valid student ID",
+      "name" : "Student",
+      "price" : 30,
+      "soldOut" : false,
+      "starts" : "October 19"
+    }, {
+      "currency" : "$",
+      "ends" : "November 18",
+      "name" : "Professional",
+      "price" : 50,
+      "soldOut" : false,
+      "starts" : "October 19"
+    } ],
+    "url" : "https://www.eventbrite.com/e/ohio-devfest-2017-tickets-37510713554"
+ } 

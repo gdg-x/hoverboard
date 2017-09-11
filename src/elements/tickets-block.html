@@ -67,8 +67,6 @@
     <div class="container">
       <div class="block-header">
         <h4 class="heading">{$ ticketsTitle $}</h4>
-
-        <h4><b>Ticket sales have not been announced yet.</b></br>Follow @ohiodevfest or subscribe to our email newsletter to get updates on when tickets will go on sale.</h4>
       </div>
       <div class="tickets-wrapper">
         <template is="dom-repeat" items="[[app.tickets.elements]]" as="ticket">
@@ -86,9 +84,9 @@
       </div>
       <div class="details">{$ ticketsDetails $}</div>
 
-      <!-- <a href="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
+      <a href="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
         <paper-button class="buy-button disabled" raised disabled>{$ buyTicket $}</paper-button>
-      </a> -->
+      </a>
     </div>
 
   </template>
