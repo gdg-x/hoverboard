@@ -70,7 +70,7 @@ function build() {
           .pipe(gulpif(/\.js$/, uglify()))
           .pipe(gulpif(/\.(html|css)$/, cssSlam()))
           .pipe(gulpif(/\.html$/, html.minify()))
-          .pipe(gulpif(/\.(png|gif|jpg|svg)$/, images.minify()))
+          // .pipe(gulpif(/\.(png|gif|jpg|svg)$/, images.minify()))
           .pipe(sourcesHtmlSplitter.rejoin());
 
         const dependenciesHtmlSplitter = new HtmlSplitter();
