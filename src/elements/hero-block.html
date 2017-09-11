@@ -30,6 +30,7 @@
       .hero-overlay {
         background-color: rgba(0, 0, 0, 0.6);
         opacity: 0;
+        z-index: -1;
         transition: opacity 0.3s;
       }
 
@@ -38,16 +39,14 @@
       }
 
       .hero-image {
+        z-index: -1;
         background-color: var(--hero-background-color);
         transition: background-color 0.3s;
       }
 
       .container {
         width: 100%;
-      }
-
-      .hero-content {
-        transform: translateZ(0);
+        z-index: -1;
       }
 
       .home-content {
@@ -103,7 +102,7 @@
         sizing="cover"
         lazy-load preload fade fit
       ></plastic-image>
-      <div class="hero-overlay" show$=[[hero.background.image]] fit></div>
+      <div class="hero-overlay" show$="[[hero.background.image]]" fit></div>
       <div class="container">
         <iron-pages selected="[[route.route]]" attr-for-selected="route" fallback-selection="default">
           <div class="hero-content home-content" route="home">
