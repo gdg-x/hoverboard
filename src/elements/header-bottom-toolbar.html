@@ -1,0 +1,86 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../mixins/utils-functions.html">
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="./shared-styles.html">
+
+<dom-module id="header-bottom-toolbar">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+
+    <style>
+
+      :host  {
+        display: block;
+        background-color: var(--primary-background-color);
+      }
+
+      app-toolbar {
+        margin: 0 auto;
+        padding: 0 16px;
+        height: auto;
+        max-width: var(--max-container-width);
+      }
+
+      .nav-items {
+        --paper-tabs-selection-bar-color: var(--default-primary-color);
+        --paper-tabs: {
+          height: 64px;
+        };
+      }
+
+      .nav-item a {
+        padding: 0 14px;
+        color: var(--primary-text-color);
+        text-transform: uppercase;
+      }
+
+      @media (min-width: 640px) {
+        app-toolbar {
+          padding: 0 36px;
+        }
+      }
+
+    </style>
+
+    <app-toolbar class="bottom-toolbar">
+      <paper-tabs
+        class="nav-items"
+        selected="[[route.subRoute]]"
+        attr-for-selected="day"
+        noink
+      >
+        <template is="dom-repeat" items="[[transformToArray(schedule.days, 'date')]]" as="day">
+          <paper-tab class="nav-item" day="[[day.date]]" link>
+            <a href$="/schedule/[[day.date]]" layout vertical center-center>[[day.dateReadable]]</a>
+          </paper-tab>
+        </template>
+      </paper-tabs>
+    </app-toolbar>
+
+  </template>
+
+  <script>
+
+    class HeaderBottomToolbar extends UtilsFunctions(ReduxMixin(Polymer.Element)) {
+      static get is() {
+        return 'header-bottom-toolbar';
+      }
+
+      static get properties() {
+        return {
+          route: {
+            type: String,
+            statePath: 'routing'
+          },
+          schedule: {
+            type: Object,
+            statePath: 'schedule'
+          }
+        };
+      }
+    }
+
+    customElements.define(HeaderBottomToolbar.is, HeaderBottomToolbar);
+  </script>
+</dom-module>
