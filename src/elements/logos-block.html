@@ -62,16 +62,46 @@
         height: 45px;
         width: 100px;
       }
+
+      .large {
+        width: 350px;
+        height: 220px;
+      }
+
+      .medium {
+        width: 200px;
+        height: 130px;
+        margin: 0 10px;
+      }
+
+      .mediumTitle {
+        font-size: 26px;
+      }
+      
+      .largeTitle {
+        font-size: 32px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      
+      .organizersTitle {
+        margin-bottom: 10px;
+      }
+
+      .friendsTitle {
+        margin-bottom: 10px;
+        text-transform: none;
+      }
+
       .block-link paper-button {
         color: var(--white-text-color);
       }
     </style>
 
     <div class="container">
-      <h4 class="heading text-center">{$ partners $}</h4>
       <template is="dom-repeat" items="[[app.partners]]" as="block">
         <div class="logos-block-wrapper">
-          <h5 class="logos-block-title text-center">[[block.title]]</h5>
+          <h5 class$="logos-block-title text-center [[block.titleClass]]">[[block.title]]</h5>
           <div class="logos">
             <template is="dom-repeat" items="[[block.logos]]" as="logo">
               <a class="logo-item" href="[[logo.url]]" title="[[logo.name]]" target="_blank" rel="noopener noreferrer">
