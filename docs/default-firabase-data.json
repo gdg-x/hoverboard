@@ -1,27 +1,56 @@
 {
   "partners" : [ {
     "logos" : [ {
+      "logoUrl" : "../images/logos/google.svg",
+      "name" : "Google",
+      "url" : "https://www.google.lv/intl/en/about/"
+    },
+    {
+      "logoUrl" : "../images/logos/accenture.png",
+      "name" : "Accenture",
+      "url" : "https://www.accenture.com/lv-en/"
+    }
+  ],
+    "title" : "General Sponsors",
+    "logosClass": "large",
+    "titleClass": "largeTitle"
+  },
+  {
+    "logos" : [ {
+        "logoUrl" : "../images/logos/jetbrains.svg",
+        "name" : "JetBrains",
+        "url" : "https://www.jetbrains.com/"
+      }
+  ],
+    "title" : "Partners",
+    "logosClass": "medium",
+    "titleClass": "mediumTitle"
+  },
+  {
+    "logos" : [ {
       "logoUrl" : "../images/logos/gdg-riga.svg",
       "name" : "GDG Riga",
-      "url" : "https://gdgriga.lv/",
-      "width" : 170
+      "url" : "https://www.gdgriga.lv"
     },
     {
       "logoUrl" : "../images/logos/gdg-daugavpils.svg",
       "name" : "GDG Daugavpils",
-      "url" : "https://daugavpils.gdg.lv/",
-      "width" : 170
-    }
-   ],
-    "title" : "Template Creator"
-  }, {
-    "logos" : [ {
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
+      "url" : "https://daugavpils.gdg.lv"
+    },
+    {
+      "logoUrl" : "../images/logos/gdg-vilnius.png",
+      "name" : "GDG Vilnius",
+      "url" : "https://www.gdg-vilnius.lt/"
+    },
+    {
+      "logoUrl" : "../images/logos/gdg-tartu.png",
+      "name" : "GDG Tartu",
+      "url" : "https://www.meetup.com/GDG-Tartu/"
     }
   ],
-    "title" : "General Partner"
+    "title" : "Organizers of the event",
+    "logosClass": "medium",
+    "titleClass": "organizersTitle"
   } ],
   "schedule" : [ {
     "date" : "2017-11-17",
