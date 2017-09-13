@@ -11,8 +11,8 @@
   },
   "webapp": {
     "shortName": "DevFest",
-    "themeColor": "#F57C00",
-    "backgroundColor": "#F57C00"
+    "themeColor": "#651fff",
+    "backgroundColor": "#651fff"
   },
   "firebase": {
     "name": "devfest-baltics",
