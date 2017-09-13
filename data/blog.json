@@ -106,5 +106,14 @@
     "secondaryColor": "#E44D30",
     "image": "/images/posts/team_technologies_cover.jpg",
     "brief": "Team Technologies is a technology service provider. We drive our partners to engineer better digital products."
+  },
+  {
+    "id": "platinum-sponsor-dataart",
+    "title": "Meet our Platinum Sponsor - DataArt",
+    "posted": "2017-09-14",
+    "primaryColor": "#1B3E6B",
+    "secondaryColor": "#133356",
+    "image": "/images/posts/dataart_cover.jpg",
+    "brief": "DataArt is a global technology consultancy that designs, develops and supports unique software solutions, helping clients take their businesses forward..."
   }
 ]
