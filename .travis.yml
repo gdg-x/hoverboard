@@ -15,8 +15,9 @@ addons:
     - g++-4.8
 install:
 - yarn
+- cd functions && yarn && cd ..
 script: echo "Deploying!"
-before_deploy: npm run build
+before_deploy: yarn run build
 deploy:
 - provider: firebase
   skip_cleanup: true
