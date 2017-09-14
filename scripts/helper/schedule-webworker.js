@@ -13,7 +13,7 @@ function findSpeakerById(id, speakerList) {
 function attachSessionAndSpeakersTogether(session, speakersRaw) {
   if (isDefined(session.speakers)) {
     for (var speakerIdx = 0; speakerIdx < session.speakers.length; speakerIdx++) {
-      if (!isDefined(session.speakers[speakerIdx].id)) {
+      if (isDefined(session.speakers[speakerIdx]) && !isDefined(session.speakers[speakerIdx].id)) {
         session.speakers[speakerIdx] = findSpeakerById(session.speakers[speakerIdx], speakersRaw);
         var tempSession = clone(session);
         delete tempSession.speakers;
