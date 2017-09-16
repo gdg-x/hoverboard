@@ -213,6 +213,15 @@
       "tags" : [ "Firebase" ],
       "title" : "Building Progressive Web Apps powered by Firebase"
     },
+    "111": {
+      "complexity" : "Advanced",
+      "description" : "This time, we’ll get very serious. I will explain the importance of end-to-end trust, zero knowledge architectures and illustrate things by showing a zero knowledge application, built with available open source tools.",
+      "id" : 111,
+      "language" : "English",
+      "speakers" : [ 11 ],
+      "tags" : [ "iOS", "Security" ],
+      "title" : "Zero Knowledge Architectures for iOS Applications"
+    },
     "201" : {
       "description" : "Get your badge, coffee, enjoy talking with tech addicts around",
       "id" : 201,
@@ -537,6 +546,27 @@
       "name" : "Github"
     } ],
     "tags" : [ "Firebase" ],
+    "title" : "Firebase GDE"
+  }, {
+    "bio" : "Anastasiia is a software engineer, working on building mobile apps for years. She developed many applications, frequently taking care of both iOS and server sides of the system. Gradually she has developed the interest in computer security, and joined the forces of Cossack Labs first as iOS contributor and mobile consultant, then fully immersing into the world of data security and cryptography… still staying true to the roots and applying it to the beloved iOS platform. Now her primary goal is to make the world more safer place, so she speaks a lot about building secure mobile applications.",
+    "company" : "Firebase",
+    "companyLogo" : "/images/logos/stanfy.png",
+    "country" : "Kiev, Ukraine",
+    "featured" : true,
+    "id" : 11,
+    "name" : "Anastasiia Vixentael",
+    "photoUrl" : "/images/people/anastasiia_vixentael.jpg",
+    "shortBio" : "Security enthusiast and iOS developer",
+    "socials" : [ {
+      "icon" : "twitter",
+      "link" : "https://twitter.com/vixentael",
+      "name" : "Twitter"
+    }, {
+      "icon" : "github",
+      "link" : "https://github.com/vixentael",
+      "name" : "Github"
+    } ],
+    "tags" : [ "iOS", "Security" ],
     "title" : "Firebase GDE"
   } ],
   "team" : [ {
