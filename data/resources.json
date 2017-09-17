@@ -76,6 +76,11 @@
           "newTab": false
         },
         {
+          "text": "FAQ",
+          "url": "/faq/",
+          "newTab": false
+        },
+        {
           "text": "Code of Conduct",
           "url": "/cod/",
           "newTab": false
@@ -113,6 +118,11 @@
         {
           "text": "Partnership Proposition",
           "url": "https://bit.ly/dfua17-partners",
+          "newTab": true
+        }, 
+        {
+          "text": "Info Partnership Proposition",
+          "url": "http://bit.ly/2fdpCep",
           "newTab": true
         },
          {

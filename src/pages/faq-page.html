@@ -1,0 +1,362 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../elements/footer-block.html">
+<link rel="import" href="../behaviors/page-behavior.html">
+<link rel="import" href="../behaviors/utils-behavior.html">
+<link rel="import" href="../behaviors/cascaded-behavior.html">
+
+
+<dom-module id="faq-page">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .content-wrapper {
+          padding-bottom: 32px;
+      }
+
+      .content {
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
+        @apply(--layout-justified);
+      }
+
+      .col {
+            font-size: 32px;
+            line-height: 48px;
+            margin-bottom: 24px;
+            z-index: 2;
+        }
+
+        .col-content {
+            line-height: 32px;
+            display: block;
+            font-size: 16px;
+        }
+
+        a {
+            color: #346DF1;
+        }
+
+        section {
+            position: relative;
+            padding: 32px 0 72px 0;
+            @apply(--layout-vertical);
+            border-top: 2px solid #346DF1;
+        }
+        
+        section .title {
+            font-size: 35px;
+            font-weight: 400;
+            line-height: 1.2;
+            width: 100%;
+        }
+
+        section h3 {
+            margin: 32px 0 24px;
+        }
+
+        section .faqs {
+            width: 100%;
+        }
+
+        @media (min-width: 640px) {
+            .col {
+                margin-right: 24px;
+            }
+
+            .col:last-of-type {
+                margin-right: 0;
+            }
+
+            section {                
+                @apply(--layout-wrap);
+                @apply(--layout-horizontal);
+            }
+
+            section .title {
+                line-height: 54px;
+                width: 33.3%;
+                margin: 0 0 62px 0;
+            }
+
+            section .faqs {
+                box-sizing: border-box;
+                margin-top: -14px;
+                padding-left: 32px;
+                max-width: 710px;
+                padding-left: 64px;
+                width: 66.6666666667%;
+            }
+
+            section h3 {
+                font-size: 24px;
+                line-height: 1.3333333333;
+            }
+        }
+
+    
+    </style>
+
+      <div class="faq-wrapper">        
+        <div class="container">
+            <div class="content-wrapper">
+                    <div class="content">
+                        <div class="col general">General
+                            <a class="col-content" href="#dates-and-location" on-tap="_scrollToFaqChapter">Dates and location</a>
+                            <a class="col-content" href="#stay-informed" on-tap="_scrollToFaqChapter">Stay Informed</a>
+                            <a class="col-content" href="#content-formats" on-tap="_scrollToFaqChapter">Content Formats</a>
+                            <a class="col-content" href="#livestream-recordings" on-tap="_scrollToFaqChapter">Livestream &amp; Recordings</a>
+                        </div>
+                        <div class="col registration">Registration
+                            <a class="col-content" href="#drawing-dates" on-tap="_scrollToFaqChapter">Drawing Dates</a>
+                            <a class="col-content" href="#ticket-types" on-tap="_scrollToFaqChapter">Ticket Types</a>
+                            <a class="col-content" href="#registration-terms-conditions" on-tap="_scrollToFaqChapter">Registration Terms &amp; Conditions</a>
+                            <a class="col-content" href="#more-registration-details" on-tap="_scrollToFaqChapter">More Registration Details</a>
+                        </div>
+                        <div class="col attendance-details">Attendance Details
+                            <a class="col-content" href="#language" on-tap="_scrollToFaqChapter">Language</a>
+                            <a class="col-content" href="#pro-tips" on-tap="_scrollToFaqChapter">Pro Tips</a>
+                            <a class="col-content" href="#badges-badge-pick-up" on-tap="_scrollToFaqChapter">Badges &amp; Badge Pick-up</a>
+                            <a class="col-content" href="#afterparty" on-tap="_scrollToFaqChapter">Afterparty</a>
+                            <a class="col-content" href="#event-attire" on-tap="_scrollToFaqChapter">Event Attire</a>
+                            <a class="col-content" href="#smoking" on-tap="_scrollToFaqChapter">Smoking</a>
+                            <a class="col-content" href="#no-soliciting" on-tap="_scrollToFaqChapter">No Soliciting</a>
+                        </div>
+                    </div>
+            </div>
+
+         <section id="general" class="section general">
+            <div class="title">
+                <h2>General</h2>
+            </div>            
+            <div class="faqs">
+                    <h3 id="dates-and-location">Dates and location</h3>
+                    <p>GDG DevFest Ukraine will take place 13-14th of October at <a href="https://goo.gl/maps/d57gqbgqPPy">Pivdennyi Expo,</a> Lviv.</p>
+                    <h3 id="stay-informed">Stay Informed</h3>
+                    <p>To stay up to date on the latest information on sessions, speakers, and activities, be sure to visit the <a href="https://devfest.gdg.org.ua/">DevFest website</a>, RSVP on <a href="https://www.meetup.com/GDG-Lviv/events/240383203/">Meetup</a> and follow us on <a href="https://www.facebook.com/devfest.ukraine/">Facebook</a> and <a href="https://twitter.com/devfest_ukraine">Twitter</a>. You can also follow and join the social conversation about GDG DevFest Ukraine via official hashtags #dfua and #Devfest17. In addition, we'll be emailing important information to all registered attendees, along with check-in instructions prior to the conference.</p>
+                    <h3 id="content-formats">Content Formats</h3>
+                    <p>Throughout the two day conference, in-person attendees will be able to participate by attending sessions, getting hands-on in the workshops, chatting with experts and attendees at coffee breaks and after party, and more.</p>
+                    <h3 id="livestream-recordings">Livestream &amp; Recordings</h3>
+                    <p>If you’re unable to attend DevFest in-person, you can still be part of the magic. All the lectures from the sessions will be available for free on GDG Lviv <a href="https://www.youtube.com/channel/UC5nknQj-2llSNd-jqXr4d_w">youtube channel</a> few weeks after the conference. Workshops won’t be recorded. Also, there could be a livestream provided by participants which you can find via #dfua and #Devfest17 hashtags.</p>
+            </div>
+           </section>
+           <section id="registration" class="section registration">
+                <div class="title">
+                    <h2>Registration</h2>
+                </div>            
+                <div class="faqs">
+                    <h3 id="drawing-dates">Drawing Dates</h3>
+                    <p>The window to buy a ticket will be opened until 6PM GMT+2 on October 12th 2017, or earlier in case when the tickets are sold out. In case the ticket was bought after September 30th registered participants won’t get printed badge (their names will be written on the badge by marker). To buy a ticket <a href="https://2event.com/uk/events/800690">follow the link</a>, select required ticket type, will the required information and pay for it.</p>
+                    <p>Once you've successfully payed for the ticket you’ll reach a confirmation screen and receive an email with the ticket. Please don’t forget to download it on your device or print it, as it’s required for entrance.</p>
+                    <h3 id="ticket-types">Ticket Types</h3>
+                    <h4 id="-pre-early-birds-tickets-"><strong>Pre-Early birds tickets</strong></h4>
+                    <p>General Admission: ₴800</p>
+                    <p>Conditions: Feb 7 - Mar 7 or first 50 tickets</p>
+                    <h4 id="-early-birds-tickets-"><strong>Early birds tickets</strong></h4>
+                    <p>General Admission: ₴1200</p>
+                    <p>Conditions: Mar 7 - Jun 30 or first 200 tickets</p>
+                    <h4 id="-lazy-birds-tickets-"><strong>Lazy birds tickets</strong></h4>
+                    <p>General Admission: ₴1600</p>
+                    <p>Conditions: Jul 1 - Sep 30 or first 350 tickets</p>
+                    <h4 id="-edu-students-lecturers-tickets-"><strong>EDU (Students/lecturers) Tickets</strong></h4>
+                    <p>We offer a limited number of tickets at a discounted rate of ₴500 for full-time students and lecturers. To qualify, you need to be a student or a professor, faculty or staff at a higher education institution. Be aware that PhD students are not in the list. Once purchased, general admission tickets can't be converted to EDU tickets, and vice versa.</p>
+                    <p>When you check in at the conference, you'll need to provide a current student ID (active during the conference dates), transcript, credential, or other form of documentation which demonstrates that you’re qualified to receive this special rate. If you buy an academic ticket and can't provide academic documentation when you arrive at DevFest, you won't be admitted or offered a refund, nor will you be able to convert your ticket to general admission.</p>
+                    <h4 id="-press-tickets-"><strong>Press Tickets</strong></h4>
+                    <p>We’ll be offering a limited number of press passes to qualified members of the media. To submit a request, please fill out this <a href="https://goo.gl/forms/Hhlcq2FUDLXcQMd13">FORM</a>. If you have additional questions, please email <a href="mailto:devfest@gdg.org.ua">devfest@gdg.org.ua</a> for more information. Please note that we’ll have a limited number of press passes available and will be vetting requests. Filling out the form doesn’t guarantee you a press pass. Our team will contact you if we’re able to accommodate your request.</p>
+                    <h4 id="-i-love-dfua-"><strong>I Love DFUA</strong></h4>
+                    <p>General admission: ₴2800</p>
+                    <p>Special tickets for real supporters of our conference. As we’re organizing the event on non-profit basis, additional resources will help us to bring more cool speakers from all over the world and additionally invest into demo-zone, party, and other activities. Owners of “I love DFUA” tickets will get additional valuable benefits from our team.</p>
+                    <h3 id="registration-terms-conditions">Registration Terms &amp; Conditions</h3>
+                    <ul>
+                        <li>Tickets for GDG DevFest Ukraine are for the full two-day conference and no single-day tickets are available. </li>
+                    </br>
+                        <li>You may buy a ticket on behalf to other person (for example, make a gift). Just mention during purchase the name, company and title of the person who will attend the event. </li>
+                    </br>  
+                        <li>GDG DevFest Ukraine tickets must be used by the original registrant and are non-transferable. </li>
+                    </br>
+                        <li>By registering and accepting any discounts, gifts, or items of value related to GDG DevFest Ukraine, you certify that you are able to do so in compliance with applicable laws and the internal rules of your organization. </li>
+                    </br> 
+                        <li>At check-in, we’ll check your ticket prior to assigning you your GDG DevFest Ukraine badge. If you don’t have proper identification, you won’t be able to receive a badge and won’t be admitted into the conference. </li>
+                    </br>
+                        <li>If you buy an EDU ticket and can't provide academic documentation during check-in at GDG DevFest Ukraine, you won't be admitted or offered a refund, nor will you be able to convert your ticket to general admission. Please be sure to bring a current student ID or other proof that you are qualified to receive this special rate when you check in at the conference. </li>
+                    </br> 
+                        <li>Ticket purchases can be refunded through October 5th, 2017 via your profile at the <a href="https://2event.com/uk/events/800690">ticket service website</a>. </li>
+                    </br> 
+                        <li>After October 5th, 2017, all ticket sales are final. There will be no refunds or exchanges regardless of weather conditions, session availability, or any other circumstance. </li>
+                    </br> 
+                        <li>Attendees aren’t permitted to bring guests to GDG DevFest Ukraine or to the after hours party. If you have someone traveling with you, they’ll need to register themselves and purchase an attendee ticket. </li>
+                    </br> 
+                        <li>Photographs and/or video taken at GDG DevFest Ukraine by GDG Lviv, or others on behalf of the conference organizers, may include your image or likeness. You agree that GDG Lviv may use such photographs and/or video for any purpose without compensation to you. </li>
+                    </br> 
+                        <li>All information entered into the registration form must be correct and accurate to the best of your knowledge. All information expected to be entered in English. Some of the information entered (such as name, company and title), will be displayed on the attendee badge. </li>
+                    </br> 
+                        <li>By registering for a ticket you acknowledge that your information will be used in accordance with <a href="https://2event.com/en/agreement">Tickets provider Terms of Service</a>. </li>
+                    </br> 
+                        <li>All registered attendees agree to allow GDG Lviv to contact them regarding their registration and attendance at the event. By registering for a ticket, you agree to allow GDG Lviv to communicate with you via email with information regarding the event. </li>
+                    </br> 
+                        <li>You agree to be solely responsible for your own safety, belongings and well-being while participating in GDG DevFest Ukraine. Organizers won't be liable for your participation in GDG DevFest Ukraine. </li>
+                    </br> 
+                        <li>Applicants and attendees can request the deletion of their registration data after the event ends by emailing <a href="mailto:devfest@gdg.org.ua">devfest@gdg.org.ua</a>. </li>
+                    </ul>
+                    <h3 id="more-registration-details">More Registration Details</h3>
+                    <ul>
+                        <li>Please make sure to register using the name that matches the government-issued photo ID you’ll be presenting when you check in to the festival. </li>
+                    </br> 
+                        <li>Registration for GDG DevFest Ukraine includes two full days of sessions, product demos, admission to the after hours party, and attendance at the keynotes. We also provide complimentary lunch, and snacks each day. In addition, attendees receive a conference badge and may be offered additional gifts. </li>
+                    </br> 
+                        <li>If you aren’t a resident of the Ukraine, you should check with your local government to determine the required documents and arrangements needed for your travel to the Ukraine. If you require a visa letter regarding your GDG DevFest Ukraine attendance please indicate so when completing the registration form and we’ll email it to you within 7 business days. If you haven’t received your letter or have questions regarding the process, you can contact <a href="mailto:devfest@gdg.org.ua">devfest@gdg.org.ua</a>. GDG Lviv won’t be able to contact an embassy on your behalf. </li>
+                    </ul>
+                </div>
+            </section>
+        
+            <section id="attendance-details" class="section attendance-details">
+                <div class="title">
+                    <h2>Attendance Details</h2>
+                </div>            
+                <div class="faqs">
+                    <h3 id="language">Language</h3>
+                    <p>All presentations at GDG DevFest Ukraine will be in English.</p>
+                    <h3 id="pro-tips">Pro Tips</h3>
+                    <p>If you’re joining us in-person at Pivdennyi Expo, here are some useful tips to navigate your way through the conference:</p>
+                    <ul>
+                        <li>Lost &amp; Found: Will be located at the Conference Info Desk (Registration point) during event hours. Any items left overnight will be turned over to the Conference Security Office. </li>
+                        <li>Meals: Attendees are offered complimentary lunch and snacks on all days of the conference. </li>
+                        <li>After Hours: Day 1 afterparty you don’t want to miss! Attendees are invited to enjoy food, drinks, music, games, and more during the evening of October 13th at Pivdennyi Expo. Your attendee badge is required for entrance. </li>
+                    </ul>
+                    <h3 id="badges-badge-pick-up">Badges &amp; Badge Pick-up</h3>
+                    <p>To expedite the check-in process, we’ll begin badge pick-up on Wednesday, October 12, at <a href="https://goo.gl/maps/qPbFcvyr2Vv">Communa</a> coworking. Make sure to bring your ticket along with student/lecturer ID (for EDU tickets), as we’ll need to verify it prior to assigning you your GDG DevFest Ukraine badge. If you don’t have proper identification, you won’t be able to receive a badge and won’t be admitted into the conference.</p>
+                    <p>Everyone is guaranteed a seat for the keynotes but the best seats will be assigned on a first-come, first-served basis during badge pick-up beginning at 9AM on October 13th. So make sure to come in time!</p>
+                    <p>Please note, you may not share, give, or otherwise provide your badge to anyone. GDG DevFest Ukraine badges aren’t replaceable, so don't lose yours or you won’t be readmitted to the conference. You must wear your GDG DevFest Ukraine badge to gain admission to the conference, including the sessions, workshops, and afterparty. If requested by security, please display or provide additional identification. GDG DevFest Ukraine badges may include your name, company or work title (if provided).</p>
+                    <h3 id="afterparty">Afterparty</h3>
+                    <p>All registered attendees are invited to the afterparty on the evenings of October 13th. The conference badges will be required for entry. Please join us for food, drinks, music, games, and more. Alcoholic beverages will be available for those 18 and over.</p>
+                    <h3 id="event-attire">Event Attire</h3>
+                    <p>GDG DevFest is a developer event, so please be comfortable and casual. There is no enforced dress code.</p>
+                    <h3 id="smoking">Smoking</h3>
+                    <p>Smoking is only permitted in designated outdoor smoking areas.</p>
+                    <h3 id="no-soliciting">No Soliciting</h3>
+                    <p>No solicitation or selling of items or services is allowed at GDG DevFest Ukraine. Any attendee conducting these activities may be removed from the conference.</p>
+                </div>
+            </section>       
+        
+        </div>
+      </div>
+         
+      <footer-block app="{{app}}" cascaded></footer-block>
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'faq-page',
+
+        behaviors: [
+            Polymer.NeonSharedElementAnimatableBehavior,
+            HOVERBOARD.UtilsBehavior
+        ],
+
+        ready: function () {
+            this._scrollToFaqChapter = this._scrollToFaqChapter.bind(this);
+        },
+
+        properties: {
+            app: {
+              type: Object
+            },
+            team: {
+              type: Object
+            },
+            selected: {
+              type: Boolean,
+              observer: 'updateHeaderSettings'
+            },
+            headerSettings: {
+              type: Object,
+              notify: true
+            },
+            _headerSettings: {
+              type: Object,
+              value: function () {
+                return {
+                  backgroundColor: '#346DF1',
+                  fontColor: '#fff',
+                  tabBarColor: '#fff'
+                };
+              }
+            },
+  
+            animationConfig: {
+              type: Object,
+              value: function () {
+                return {
+                  'entry': [{
+                    name: 'fade-in-animation',
+                    animation: 'fade-in-animation',
+                    node: this,
+                    timing: {
+                      delay: 500
+                    }
+                  }],
+                  'exit': [{
+                    name: 'fade-out-animation',
+                    animation: 'fade-out-animation',
+                    node: this
+                  }]
+                };
+              }
+            }
+          },
+  
+          updateHeaderSettings: function () {
+            this.headerSettings = this.selected ? this._headerSettings : this.headerSettings;
+          },
+  
+          _updateCascadedNodes: function () {
+            var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
+            var cascadedArray = Array.prototype.slice.call(cascaded);
+            this.animationConfig.entry.push({
+              name: 'cascaded-animation',
+              animation: 'transform-animation',
+              transformFrom: 'translate3d(0, 100%, 0)',
+              timing: {
+                delay: 500
+              },
+              nodes: cascadedArray
+            });
+            this.animationConfig.exit.push({
+              name: 'cascaded-animation',
+              animation: 'transform-animation',
+              transformTo: 'translate3d(0, 100%, 0)',
+              nodes: cascadedArray
+            });
+          }, 
+          
+          _scrollToFaqChapter: function (e) {
+                e.preventDefault();
+
+                var elementIdToScroll = e.path[0].getAttribute('href');
+                var element = this.$$(elementIdToScroll);
+
+                Polymer.AppLayout.scroll({
+                    top: element.getBoundingClientRect().top,
+                    behavior: 'smooth',
+                    target: HOVERBOARD.Elements.Scroller
+                });
+            }  
+        });
+
+    }());
+  </script>
+
+</dom-module>

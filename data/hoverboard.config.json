@@ -197,6 +197,14 @@
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
+    },
+    "faq": {
+      "title": "FAQ",
+      "headerSettings": {
+        "backgroundColor": "#346DF1",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
     }
   }
 }
