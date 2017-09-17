@@ -115,5 +115,14 @@
     "secondaryColor": "#133356",
     "image": "/images/posts/dataart_cover.jpg",
     "brief": "DataArt is a global technology consultancy that designs, develops and supports unique software solutions, helping clients take their businesses forward..."
+  },
+  {
+    "id": "platinum-sponsor-symphony-solutions",
+    "title": "Meet our Platinum Sponsor - Symphony Solutions",
+    "posted": "2017-09-18",
+    "primaryColor": "#E5212D",
+    "secondaryColor": "#8B1A1F",
+    "image": "/images/posts/symphony-solutions.jpg",
+    "brief": "Symphony Solutions is a Dutch software development company with the headquarters in Amsterdam, the Netherlands."
   }
 ]
