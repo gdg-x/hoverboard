@@ -20,6 +20,11 @@
         "logoUrl" : "../images/logos/jetbrains.svg",
         "name" : "JetBrains",
         "url" : "https://www.jetbrains.com/"
+      },
+      {
+        "logoUrl" : "../images/logos/the-mill.svg",
+        "name" : "The Mill",
+        "url" : "https://www.millriga.com/"
       }
   ],
     "title" : "Partners",
