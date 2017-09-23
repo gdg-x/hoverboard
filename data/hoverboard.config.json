@@ -48,7 +48,7 @@
   "enabledLogosBlock": true,
   "enabledFooterBlock": true,
   "enabledBuyTicketsButton": true,
-  "enabledSignInButton": false,
+  "enabledSignInButton": true,
   "navigation": [
     {
       "route": "home",
