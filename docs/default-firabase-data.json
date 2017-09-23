@@ -25,6 +25,56 @@
         "logoUrl" : "../images/logos/the-mill.svg",
         "name" : "The Mill",
         "url" : "https://www.millriga.com/"
+      },
+      {
+        "logoUrl" : "../images/logos/rtg.svg",
+        "name" : "Riga Tech Girls",
+        "url" : "http://www.rigatechgirls.org/"
+      },
+      {
+        "logoUrl" : "../images/logos/norrskog.png",
+        "name" : "Norrksog Visual",
+        "url" : "http://www.norrskogvisual.com/"
+      },
+      {
+        "logoUrl" : "../images/logos/rdd2017.png",
+        "name" : "Riga Dev Days",
+        "url" : "https://rigadevdays.lv/"
+      },
+      {
+        "logoUrl" : "../images/logos/rdd2017.png",
+        "name" : "Riga Dev Days",
+        "url" : "https://rigadevdays.lv/"
+      },
+      {
+        "logoUrl" : "../images/logos/juglv.png",
+        "name" : "Java User Group Latvia",
+        "url" : "https://jug.lv/"
+      },
+      {
+        "logoUrl" : "../images/logos/juglv.png",
+        "name" : "Java User Group Latvia",
+        "url" : "https://jug.lv/"
+      },
+      {
+        "logoUrl" : "../images/logos/kaunasjug.png",
+        "name" : "Java User Group Kaunas",
+        "url" : "http://kaunas-jug.lt/"
+      },
+      {
+        "logoUrl" : "../images/logos/devclubee.png",
+        "name" : "DevClub",
+        "url" : "http://devclub.eu/"
+      },
+      {
+        "logoUrl" : "../images/logos/devopsdaysriga.png",
+        "name" : "DevOps Days Riga",
+        "url" : "https://www.devopsdays.org/events/2017-riga/welcome/"
+      },
+      {
+        "logoUrl" : "../images/logos/mdl.png",
+        "name" : "Mobile Developers Latvia",
+        "url" : "https://www.meetup.com/preview/Mobile-Developers-Latvia"
       }
   ],
     "title" : "Partners",
@@ -51,6 +101,11 @@
       "logoUrl" : "../images/logos/gdg-tartu.png",
       "name" : "GDG Tartu",
       "url" : "https://www.meetup.com/GDG-Tartu/"
+    },
+    {
+      "logoUrl" : "../images/logos/gdg-kaunas.png",
+      "name" : "GDG Kaunas",
+      "url" : "https://www.meetup.com/GDG-Kaunas"
     }
   ],
     "title" : "Organizers of the event",
