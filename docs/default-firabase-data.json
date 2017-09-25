@@ -17,6 +17,17 @@
   },
   {
     "logos" : [ {
+      "logoUrl" : "../images/logos/jrebel.png",
+      "name" : "JRebel for Android",
+      "url" : "https://zeroturnaround.com/software/jrebel-for-android/"
+    }
+  ],
+    "title" : "Standard Sponsors",
+    "logosClass": "medium",
+    "titleClass": "mediumTitle"
+  },
+  {
+    "logos" : [ {
         "logoUrl" : "../images/logos/jetbrains.svg",
         "name" : "JetBrains",
         "url" : "https://www.jetbrains.com/"
@@ -65,6 +76,11 @@
         "logoUrl" : "../images/logos/mdl.png",
         "name" : "Mobile Developers Latvia",
         "url" : "https://www.meetup.com/preview/Mobile-Developers-Latvia"
+      },
+      {
+        "logoUrl" : "../images/logos/genymotion.png",
+        "name" : "Genymotion",
+        "url" : "https://www.genymotion.com/"
       }
   ],
     "title" : "Partners",
