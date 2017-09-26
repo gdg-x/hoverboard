@@ -20,6 +20,11 @@
       "logoUrl" : "../images/logos/jrebel.png",
       "name" : "JRebel for Android",
       "url" : "https://zeroturnaround.com/software/jrebel-for-android/"
+    },
+    {
+      "logoUrl" : "../images/logos/testdevlab.png",
+      "name" : "Test Dev Lab",
+      "url" : "https://www.testdevlab.com/"
     }
   ],
     "title" : "Standard Sponsors",
@@ -81,6 +86,11 @@
         "logoUrl" : "../images/logos/genymotion.png",
         "name" : "Genymotion",
         "url" : "https://www.genymotion.com/"
+      },
+      {
+        "logoUrl" : "../images/logos/teikums.png",
+        "name" : "TEIKUMS",
+        "url" : "https://teikums.lv/"
       }
   ],
     "title" : "Partners",
