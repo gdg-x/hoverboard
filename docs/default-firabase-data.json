@@ -33,17 +33,17 @@
   },
   {
     "logos" : [ {
-        "logoUrl" : "../images/logos/jetbrains.svg",
+        "logoUrl" : "../images/logos/jetbrains.png",
         "name" : "JetBrains",
         "url" : "https://www.jetbrains.com/"
       },
       {
-        "logoUrl" : "../images/logos/the-mill.svg",
+        "logoUrl" : "../images/logos/the-mill.png",
         "name" : "The Mill",
         "url" : "https://www.millriga.com/"
       },
       {
-        "logoUrl" : "../images/logos/rtg.svg",
+        "logoUrl" : "../images/logos/rtg.png",
         "name" : "Riga Tech Girls",
         "url" : "http://www.rigatechgirls.org/"
       },
@@ -99,12 +99,12 @@
   },
   {
     "logos" : [ {
-      "logoUrl" : "../images/logos/gdg-riga.svg",
+      "logoUrl" : "../images/logos/gdg-riga.png",
       "name" : "GDG Riga",
       "url" : "https://www.gdgriga.lv"
     },
     {
-      "logoUrl" : "../images/logos/gdg-daugavpils.svg",
+      "logoUrl" : "../images/logos/gdg-daugavpils.png",
       "name" : "GDG Daugavpils",
       "url" : "https://daugavpils.gdg.lv"
     },
