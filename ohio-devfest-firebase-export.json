@@ -1,59 +1,113 @@
-[ {
-  "name" : "Casey Borders",
-  "photoUrl" : "https://pbs.twimg.com/profile_images/774597192/Casey_Small_400x400.jpg",
-  "socials" : [ {
-    "icon" : "twitter",
-    "link" : "https://twitter.com/CaseyBorders",
-    "name" : "Twitter"
-  } ],
-  "title" : "GDG Columbus Organizer"
-}, {
-  "name" : "Pete Gordon",
-  "photoUrl" : "https://pbs.twimg.com/profile_images/838426231343366146/oYc9EvlN_400x400.jpg",
-  "socials" : [ {
-    "icon" : "twitter",
-    "link" : "https://twitter.com/petegordon",
-    "name" : "Twitter"
-  } ],
-  "title" : "GDG Columbus Organizer"
-}, {
-  "name" : "Patrick Hammond",
-  "photoUrl" : "https://pbs.twimg.com/profile_images/1236711495/IMG_0046_400x400.JPG",
-  "socials" : [ {
-    "icon" : "twitter",
-    "link" : "https://twitter.com/patrickhammond",
-    "name" : "Twitter"
-  } ],
-  "title" : "GDG Cincinnati Organizer"
-}, {
-  "name" : "James Power",
-  "photoUrl" : "https://pbs.twimg.com/profile_images/224740617/2647_755083404765_12426274_47284119_6573604_n_400x400.jpg",
-  "socials" : [ {
-    "icon" : "twitter",
-    "link" : "https://twitter.com/powerje",
-    "name" : "Twitter"
-  } ],
-  "title" : "GDG Columbus Organizer"
-}, {
-  "name" : "Greg Williams",
-  "photoUrl" : "https://pbs.twimg.com/profile_images/436215064/greg-n402mb_400x400.jpg",
-  "socials" : [ {
-    "icon" : "twitter",
-    "link" : "https://twitter.com/g_willi",
-    "name" : "Twitter"
+{
+  "partners" : [ {
+    "logos" : [ {
+      "logoUrl" : "../images/logos/google.svg",
+      "name" : "Google",
+      "url" : "https://www.google.com.ua/intl/en/about/"
+    } ],
+    "title" : "Event Partner"
   }, {
-    "icon" : "gplus",
-    "link" : "https://plus.google.com/116224595242016943891",
-    "name" : "Google+"
+    "logos" : [ {
+      "logoUrl" : "../images/logos/illumination-works.png",
+      "name" : "Illumination Works",
+      "url" : "http://www.illuminationworksllc.com/"
+    } ],
+    "title" : "Silver Partner"
   } ],
-  "title" : "GDG Cincinnati Organizer"
-}, {
-  "name" : "David Straight",
-  "photoUrl" : "https://pbs.twimg.com/profile_images/855284531699396608/Q_yzU8wQ_400x400.jpg",
-  "socials" : [ {
-    "icon" : "twitter",
-    "link" : "https://twitter.com/davidstr8",
-    "name" : "Twitter"
+  "team" : [ {
+    "members" : [ {
+      "name" : "Casey Borders",
+      "photoUrl" : "../images/people/casey_borders.jpg",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/CaseyBorders",
+        "name" : "Twitter"
+      } ],
+      "title" : "GDG Columbus Organizer"
+    }, {
+      "name" : "Pete Gordon",
+      "photoUrl" : "../images/people/pete_gordon.png",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/petegordon",
+        "name" : "Twitter"
+      } ],
+      "title" : "GDG Columbus Organizer"
+    }, {
+      "name" : "Patrick Hammond",
+      "photoUrl" : "../images/people/patrick_hammond.jpg",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/patrickhammond",
+        "name" : "Twitter"
+      } ],
+      "title" : "GDG Cincinnati Organizer"
+    }, {
+      "name" : "James Power",
+      "photoUrl" : "../images/people/james_power.jpg",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/powerje",
+        "name" : "Twitter"
+      } ],
+      "title" : "GDG Columbus Organizer"
+    }, {
+      "name" : "Greg Williams",
+      "photoUrl" : "../images/people/greg_williams.png",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/g_willi",
+        "name" : "Twitter"
+      }, {
+        "icon" : "gplus",
+        "link" : "https://plus.google.com/116224595242016943891",
+        "name" : "Google+"
+      } ],
+      "title" : "GDG Cincinnati Organizer"
+    }, {
+      "name" : "David Straight",
+      "photoUrl" : "../images/people/david_straight.jpg",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/davidstr8",
+        "name" : "Twitter"
+      } ],
+      "title" : "Logo Design"
+    } ],
+    "title" : "Core Team"
   } ],
-  "title" : "Logo Design"
-} ]
+  "tickets" : {
+    "elements" : [ {
+      "currency" : "$",
+      "ends" : "October 18",
+      "info" : "Requires valid student ID",
+      "name" : "EarlyBird Student",
+      "price" : 20,
+      "soldOut" : false,
+      "starts" : "September 11"
+    }, {
+      "currency" : "$",
+      "ends" : "October 18",
+      "name" : "EarlyBird Professional",
+      "price" : 40,
+      "soldOut" : false,
+      "starts" : "September 11"
+    }, {
+      "currency" : "$",
+      "ends" : "November 18",
+      "info" : "Requires valid student ID",
+      "name" : "Student",
+      "price" : 30,
+      "soldOut" : false,
+      "starts" : "October 19"
+    }, {
+      "currency" : "$",
+      "ends" : "November 18",
+      "name" : "Professional",
+      "price" : 50,
+      "soldOut" : false,
+      "starts" : "October 19"
+    } ],
+    "url" : "https://www.eventbrite.com/e/ohio-devfest-2017-tickets-37510713554"
+  }
+}
