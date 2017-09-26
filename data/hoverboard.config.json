@@ -99,7 +99,7 @@
       "title": "Home",
       "headerSettings": {
         "backgroundColor": "#FF9800",
-        "backgroundImage": "/images/backgrounds/columbus_skyline.jpg",
+        "backgroundImage": "/images/backgrounds/header.jpg",
         "fontColor": "#fff",
         "tabBarColor": "#fff",
         "hideLogo": true,
