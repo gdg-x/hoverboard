@@ -124,5 +124,14 @@
     "secondaryColor": "#8B1A1F",
     "image": "/images/posts/symphony-solutions.jpg",
     "brief": "Symphony Solutions is a Dutch software development company with the headquarters in Amsterdam, the Netherlands."
+  },
+  {
+    "id": "diamond-sponsor-softserve",
+    "title": "Meet our Diamond Sponsor - Soft Serve",
+    "posted": "2017-09-27",
+    "primaryColor": "#0D909E",
+    "secondaryColor": "#11BCDA",
+    "image": "/images/posts/softserve-cover.png",
+    "brief": "SoftServe is transforming the way thousands of global organizations do business by developing the most innovative technologies and processes in Big Data, IoT..."
   }
 ]
