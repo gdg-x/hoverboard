@@ -133,5 +133,14 @@
     "secondaryColor": "#11BCDA",
     "image": "/images/posts/softserve-cover.png",
     "brief": "SoftServe is transforming the way thousands of global organizations do business by developing the most innovative technologies and processes in Big Data, IoT..."
+  },
+  {
+    "id": "platinum-sponsor-levi9",
+    "title": "Meet our Platinum Sponsor - Levi9",
+    "posted": "2017-09-29",
+    "primaryColor": "#3153B8",
+    "secondaryColor": "#18379E",
+    "image": "/images/posts/levi-cover.jpg",
+    "brief": "[Levi9](https://www.levi9.com) is a Dutch Technology Services company with currently **over 900 highly educated and skilled IT professionals** in Eastern and Central Europe"
   }
 ]
