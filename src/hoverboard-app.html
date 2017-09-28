@@ -330,6 +330,10 @@
 //        userActions.autoSignIn(this.providerUrls);
       }
 
+      closeDrawer() {
+        uiActions.toggleDrawer(false);
+      }
+
       _ensureLazyLoaded() {
         if (!this.loadComplete) {
           Polymer.RenderStatus.afterNextRender(this, () => {
