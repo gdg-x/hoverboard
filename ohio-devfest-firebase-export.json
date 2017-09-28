@@ -14,14 +14,433 @@
     } ],
     "title" : "Silver Partner"
   } ],
+  "speakers" : [ null, {
+      "bio" : "Martin Omander works for Google in Mountain View, California. His job in the Developer Relations team is to support awesome developer communities, like the Google Developer Groups. On his spare time he manages to sneak in some programming, usually writing HTML5 apps running on top of Firebase. Before Google, Martin worked at string of startups in Silicon Valley as a software engineer.",
+      "company" : "Google",
+      "companyLogo" : "/images/logos/google.svg",
+      "country" : "Mountain View, CA",
+      "featured" : true,
+      "id" : 1,
+      "name" : "Martin Omander",
+      "photoUrl" : "/images/people/martin_omander.jpg",
+      "shortBio" : "Martin Omander works for Google in Mountain View, California. His job in the Developer Relations team is to support awesome developer communities, like the Google Developer Groups...",
+      "socials" : [ {
+        "icon" : "gplus",
+        "link" : "https://plus.google.com/+MartinOmander",
+        "name" : "Google Plus"
+      }, {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/martinomander",
+        "name" : "Twitter"
+      } ]
+    }, {
+      "bio" : "Benjamin Baxter grew up in Cincinnati and moved to San Jose, California. He has been developing with Android since 🍩 (how far we have come). He worked at Kroger on their Android App before leaving to join Google to work on Android TV Developer Relations. 📺 For a cheese coney (Oh how he misses those 🌭), I will gladly talk Android with you. 😀 ",
+      "company" : "Google",
+      "companyLogo" : "/images/logos/google.svg",
+      "country" : "San Jose, CA",
+      "featured" : true,
+      "id" : 2,
+      "name" : "Benjamin Baxter",
+      "photoUrl" : "/images/people/benjamin_baxter.png",
+      "shortBio" : "Benjamin Baxter works for Google in Mountain View, California. He is on the Developer Relations team for Android TV...",
+      "socials" : [ {
+        "icon" : "gplus",
+        "link" : "https://plus.google.com/115314784213798316744",
+        "name" : "Google Plus"
+      }, {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/benjamintravels",
+        "name" : "Twitter"
+      } ]
+    }, {
+      "bio" : "Wesley Workman is Software Architect at Batterii. He's spent the past 5 years building a cutting edge application on GCP at Batterii. Batterii is a collaborative platform built to assist users who are conducting design research and design thinking activities.",
+      "company" : "Batterii",
+      "country" : "Maineville, OH",
+      "featured" : true,
+      "id" : 3,
+      "name" : "Wesley Workman",
+      "photoUrl" : "/images/people/wesley_workman.jpg",
+      "shortBio" : "Wesley Workman is Software Architect at Batterii. He's spent the past 5 years building a cutting edge application on GCP at Batterii...",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/workmanw",
+        "name" : "Twitter"
+      } ]
+    }, {
+      "bio" : "Eric Maxwell is a Product Engineer at Realm and co-organizer of the Columbus Kotlin User Group. He has spent over a decade architecting and developing software for various companies across many industries. He has developed and taught courses on Java, Android and iOS. When he’s not working, he enjoys time with family, traveling and improv comedy.",
+      "company" : "Realm",
+      "country" : "Columbus, OH",
+      "featured" : true,
+      "id" : 4,
+      "name" : "Eric Maxwell",
+      "photoUrl" : "/images/people/eric_maxwell.jpg",
+      "shortBio" : "Eric Maxwell is a Product Engineer at Realm and co-organizer of the Columbus Kotlin User Group...",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/emmax",
+        "name" : "Twitter"
+      } ]
+    }, {
+      "bio" : "Aaron Rietschlin is an Android developer who has been working on Android since 2010. He has published over 20 applications to the Google Play Store and is currently an Android Developer at JPMorgan Chase.",
+      "company" : "JPMorgan Chase",
+      "country" : "Columbus, OH",
+      "featured" : true,
+      "id" : 5,
+      "name" : "Aaron Rietschlin",
+      "photoUrl" : "/images/people/aaron_rietschlin.jpg",
+      "shortBio" : "Aaron Rietschlin is an Android developer who has been working on Android since 2010...",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/AaronRietschlin",
+        "name" : "Twitter"
+      } ]
+    }, {
+      "bio" : "Jim is a software developer from Columbus, OH with Pillar Technology.  He's worked on a variety of projects ranging from agriculture software to scientific search engines and mobile marketing apps.  This basically means he's had the opportunity to make a lot of mistakes along the way, and he doesn't mind sharing what he's learned.  When he isn't writing code Jim enjoys cooking, reading (mostly fantasy and sci-fi), and spending time with his family.",
+      "company" : "Pillar Technology",
+      "country" : "Columbus, OH",
+      "featured" : true,
+      "id" : 6,
+      "name" : "Jim Kirkbride",
+      "photoUrl" : "/images/people/james_kirkbride.jpeg",
+      "shortBio" : "Jim is a software developer from Columbus, OH with Pillar Technology...",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/jameskbride",
+        "name" : "Twitter"
+      } ]
+    }, {
+      "bio" : "Katie Sasso is a Data Scientist at the Columbus Collaboratory. She studied at the Ohio State University to receive a Ph.D. in Experimental Psychology. Katie is passionate about integrating background in personality research, statistics, experimental methods, and data analysis in order to answer challenging questions and promote process improvement.",
+      "company" : "Columbus Collaboratory",
+      "country" : "Columbus, OH",
+      "featured" : true,
+      "id" : 8,
+      "name" : "Katie Sasso",
+      "photoUrl" : "/images/people/katie_sasso.jpg",
+      "shortBio" : "Katie Sasso is a Data Scientist at the Columbus Collaboratory...",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/KatieSasso",
+        "name" : "Twitter"
+      } ]
+    }, {
+      "bio" : "Taron Foxworth is focused on one question: How do we create more engineers? Taron is a hardware hacker and the Developer Evangelist at Losant. His goal is to translate technology for people to learn, love, and be inspired. Taron is currently interesting in IoT, Blockchain, Node.js, functional programming, and other really random things. ",
+      "company" : "Losant",
+      "country" : "Cincinnati, OH",
+      "featured" : true,
+      "id" : 9,
+      "name" : "Taron Foxworth",
+      "photoUrl" : "/images/people/taron_foxworth.jpg",
+      "shortBio" : "Taron Foxworth is focused on one question: How do we create more engineers?...",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/anaptfox",
+        "name" : "Twitter"
+      } ]
+    }, {
+      "bio" : "Dhiraj Mahapatro is a Software Developer at NetJets Inc.",
+      "company" : "NetJets",
+      "country" : "Columbus, OH",
+      "featured" : true,
+      "id" : 10,
+      "name" : "Dhiraj Mahapatro",
+      "photoUrl" : "/images/people/dhiraj_mahapatro.png",
+      "shortBio" : "Dhiraj Mahapatro is a Software Developer at NetJets Inc.",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/dhirajmahapatro",
+        "name" : "Twitter"
+        }, {
+        "icon" : "github",
+        "link" : "https://github.com/dmahapatro",
+        "name" : "GitHub"
+        }, {
+          "icon" : "link",
+          "link" : "https://stackoverflow.com/cv/dmahapatro",
+          "name" : "StackOverflow"
+        } ]
+    }, {
+      "bio" : "Doug is a Principal Consultant at Improving Enterprises in Columbus Ohio.  He started developing software as a high school freshman on a TRS-80 16K.  He loved programming so much that he decided to get a BSCIS from Ohio State University.  Since then he has developed software for Graphics Kiosks, Rules Engines, Specialized Hardware and ASP.Net websites.  Over the last several years, he has helped grow the Windows Developer Community in Central Ohio.  He spends his free time developing Windows applications and Unity games.",
+      "company" : "Improving Enterprises",
+      "country" : "Westerville, OH",
+      "featured" : true,
+      "id" : 11,
+      "name" : "Doug Mair",
+      "photoUrl" : "/images/people/doug_mair.jpg",
+      "shortBio" : "Doug is a Principal Consultant at Improving Enterprises in Columbus Ohio...",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/Doug_Mair",
+        "name" : "Twitter"
+      } ]
+    }, {
+      "bio" : "Michael Pinnegar is a senior developer and currently employed at Chemical Abstracts as a software developer, devops expert, and team lead. His favorite programming language is Java (static typing woo!), and his experience is mainly in webstack applications. When not coding Michael enjoys playing Magic: The Gathering, tons of games on Steam, and teaching others when he can.",
+      "company" : "Chemical Abstracts",
+      "country" : "Columbus, OH",
+      "featured" : true,
+      "id" : 12,
+      "name" : "Michael Pinnegar",
+      "photoUrl" : "/images/people/michael_pinnegar.png",
+      "shortBio" : "Michael Pinnegar is a senior developer and currently employed at Chemical Abstracts as a software developer, devops expert, and team lead...",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/Jazzepi",
+        "name" : "Twitter"
+      } ]
+    }, {
+      "bio" : "Marlena Bowen is a Mobile Developer at Root Car Insurance.",
+      "company" : "Root Car Insurance",
+      "country" : "Columbus, OH",
+      "featured" : true,
+      "id" : 13,
+      "name" : "Marlena Bowen",
+      "photoUrl" : "/images/people/marlena_bowen.jpg",
+      "shortBio" : "Marlena Bowen is a Mobile Developer at Root Car Insurance.",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/marlenacodes",
+        "name" : "Twitter"
+      } ]
+    }, {
+      "bio" : "Mike traded in a decade of full stack development for Wall Street for mobile development. Since then he has worked on native iOS & Android apps for large corporations and startups. He's developed Hillary 2016 for Android, games for Ringling Bro's Circus and apps for the last Twitter Flight conference. Currently he's working on enterprise iOS apps for the New York Yankees. He's beat stage 3 cancer twice and always looks to give back to the tech community by speaking at local meetups or organizing and sponsoring DevFest Florida.",
+      "company" : "Traversoft",
+      "country" : "Tampa, FL",
+      "featured" : true,
+      "id" : 14,
+      "name" : "Mike Traverso",
+      "photoUrl" : "/images/people/mike_traverso.jpg",
+      "shortBio" : "Mike traded in a decade of full stack development for Wall Street for mobile development. Since then he has worked on native iOS & Android apps for large corporations and startups.",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/traversoft",
+        "name" : "Twitter"
+      } ]
+    } ],
+  "sessions" : {
+    "100" : {
+      "complexity" : "",
+      "description" : "TBD",
+      "id" : 100,
+      "speakers" : [ ],
+      "tags" : [ "General" ],
+      "title" : "TBD"
+    },
+    "101" : {
+      "complexity" : "Intermediate",
+      "description" : "In this talk, I will provide a short overview of bootstrapping a low cost application leveraging GCP's \"Platform as a Service\" offerings. The focus of the talk will be how to easily leverage many of machine analysis services provided by Google such as Image Analysis, Video Analysis, Speech Analysis and Text Analysis. Time permitting, I'd also like to discuss how GCP's services can help scale from 1 user to 1 million users. ",
+      "id" : 101,
+      "speakers" : [ 3 ],
+      "tags" : [ "Cloud", "GCP", "Machine Learning" ],
+      "title" : "Visual Analysis with Google Could Platform"
+    },
+    "102" : {
+      "complexity" : "Intermediate",
+      "description" : "Today we have advanced with cloud based application infrastructure and with variety of clients (hybrid mobile apps, tablets, desktop) for our web applications. We have Spring Security for Grails and Spring Boot applications. We have Spring Security Rest plugin for Grails applications which eases token based authentication for our apps. In addition to all of the above, there is scope to add a multi-factor authentication step on webapps which confirms a user. With advancement of smart devices (phones and tablets), it is imminent that devices will be present with users at all times. Having DUO (a multi-factor authentication tool) integrated to web apps helps confirm that the actual registered user is fully authenticated. With a seamless integration of DUO API with Spring Boot and Grails we can have \"2FA at our finger tips\". This session will include pros of using DUO, a live demo and walk through DUO administration. Get your smartphones ready for some cool stuff.",
+      "id" : 102,
+      "speakers" : [ 10 ],
+      "tags" : [ "Cloud", "2FA", "Spring", "Grails", "Security", "DUO" ],
+      "title" : "2FA at your Fingertips"
+    },
+    "103" : {
+      "complexity" : "Intermediate",
+      "description" : "Most applications have some sort of authentication system. Authentication is a hard problem for any developer. It needs to be safe, secure and easy for the user. In this talk, we will explore the tools provided by the Google Identity platform to help you build frictionless and secure authentication for your application. ",
+      "id" : 103,
+      "speakers" : [ 5 ],
+      "tags" : [ "Identity", "Android" ],
+      "title" : "Simplifying Signups with the Google Identity Platform"
+    },
+    "104" : {
+      "complexity" : "Beginner",
+      "description" : "Android TV’s home screen has received a makeover with Android Oreo. With this update, users can decide what to watch from multiple apps at once from the home screen. In addition, the Google Assistant is also available for users to discover and control playback of content on their Android TV. We will look at how to surface your app’s content on the home screen by creating channels. We will also examine how to integrate your app with the Google Assistant with MediaSession. ",
+      "id" : 104,
+      "speakers" : [ 2 ],
+      "tags" : [ "TV", "Android" ],
+      "title" : "Android TV's new home screen"
+    },
+    "105" : {
+      "complexity" : "Intermediate",
+      "description" : "Kotlin has a lot of great features that improve developer productivity and make the overall code base more stable. This all works great when you're entire code base is written in Kotlin. However, while Kotlin adoption is growing by leaps and bounds, the fact is that many applications and libraries are still on Java and will be for some time. This means, if you're a library provider like Realm that 100k+ developers rely on, you must provide an API that works well for both platforms. In this talk, you'll learn about some of the challenges faced and approaches taken by Realm to solve this problem and how you might apply these same approaches to your own libraries. You'll also learn about some of the key Kotlin features they used to simplify Realm Mobile Database development with Kotlin.",
+      "id" : 105,
+      "speakers" : [ 4 ],
+      "tags" : [ "Kotlin", "Android", "Realm" ],
+      "title" : "Building Libraries for Kotlin"
+    },
+    "106" : {
+      "complexity" : "Intermediate",
+      "description" : "Lombok, Retrofit, Dagger. These project all have one thing in common; they all use Java's annotation API.  Many developers look at these libraries as black magic which is effective but inscrutable.  No more!  In this session developers will learn how they can create their own annotation library in order to reduce boilerplate code and improve the lives of their fellow developers.  We'll shed light on how to create annotations, how to parse the AST using the AbstractProcessor, and how to generate code using the JavaPoet library. By the end of this session developers will come away with a better understanding of how annotations work and how they can create them themselves.",
+      "id" : 106,
+      "speakers" : [ 6 ],
+      "tags" : [ "Java", "Annotations", "AST" ],
+      "title" : "Annotation Processing - Demystifying Java's Dark Arts"
+    },
+    "107" : {
+      "complexity" : "Beginner",
+      "description" : "This talk will provide a broad overview of some of the most popular machine learning algorithms and techniques. Specific topics may include Decision Trees, Random Forests, Neural Networks, and associated ensemble methods (gradient boosting vs. bagging/bootstrapping). Attendees can expect  a high-level overview of techniques, a review of the circumstances under which they are and aren't appropriate for use, and a brief crash course on how to implement some popular algorithms using open source software.",
+      "id" : 107,
+      "speakers" : [ 8 ],
+      "tags" : [ "Machine Learning" ],
+      "title" : "Using Popular Machine Learning Models and Techniques"
+    },
+    "108" : {
+      "complexity" : "Beginner",
+      "description" : "The Flutter SDK looks incredibly promising. Let's face it though, not a lot of us are Dart developers. Let's see some of the basics of Dart & Flutter to implement both iOS & Android apps using Firebase as a backend. In this talk, we'll first take a look at Dart, see its similarities & differences compared to Java. Then take a look at what it takes to write an app with one codebase for Android & iOS. Finally we'll pull our conference data into our app using Firebase as our datasource.",
+      "id" : 108,
+      "speakers" : [ 14 ],
+      "tags" : [ "Flutter", "Android", "iOS", "Firebase" ],
+      "title" : "Developing iOS and Android apps with Flutter"
+    },
+    "109" : {
+      "complexity" : "Beginner",
+      "description" : "Currently, we are in the wave of IoT data collection. We are figuring out ways to attach microchips and sensors to everything to collect as much data possible -- this is solely for one purpose: Machine Learning. The next big part of IoT is learning from all the information we can collect. This talk will cover the process of collecting data from hardware and using TensorFlow to predict future values. With this foundation, one can use these same learnings to build more complex ML & IoT solutions. ",
+      "id" : 109,
+      "speakers" : [ 9 ],
+      "tags" : [ "Tensorflow", "IoT", "Machine Learning" ],
+      "title" : "Predicting the Internet of Things With Tensorflow"
+    },
+    "110" : {
+      "complexity" : "Beginner",
+      "description" : "Take your build toolchain to the next level by putting all your build tools (gulp, maven, gradle, grunt, make, rake) into a Docker container. In this talk we'll go over the basics of getting started putting your toolchain into Docker, explore a few examples, and talk about common problems you might encounter.",
+      "id" : 110,
+      "speakers" : [ 12 ],
+      "tags" : [ "Docker", "CI" ],
+      "title" : "Dockerize Your Build Toolchain"
+    },
+    "111" : {
+      "complexity" : "Beginner",
+      "description" : "Google Home is a voice-activated speaker powered by the Google Assistant. While the Assistant is good at answering general questions, you can make Google Home even smarter by building your own app for it and publishing that app to the world. In this session we will go through the steps to do just that, including how to tune the AI, starting from a blank slate.",
+      "id" : 111,
+      "speakers" : [ 1 ],
+      "tags" : [ "Actions on Google", "Android", "Google Assistant", "AI" ],
+      "title" : "Build your own app for Google Home"
+    },
+    "112" : {
+      "complexity" : "Intermediate",
+      "description" : "At first glance, visualizing data in JavaScript seems too daunting to approach. Fortunately there are open source JavaScript libraries which help developers create compelling visualizations. We will talk about D3.js, DC.js and CrossFilter.js.",
+      "id" : 112,
+      "speakers" : [ 10 ],
+      "tags" : [ "Web", "JavaScript", "Data Science" ],
+      "title" : "Feed your inner data scientist: JavaScript tools for data visualization and filtering."
+    },
+    "113" : {
+      "complexity" : "Beginner",
+      "description" : "Getting new features (and bug fixes) into the hands of your users is an important part of the app lifecycle. Scripting and automation can help you get the most of your submission process by ensuring efficiency and stability when shipping new versions of your app. This talk will cover several tips and tricks to trim your submission/release process down to a reliable and reproducible set of commands.",
+      "id" : 113,
+      "speakers" : [ 13 ],
+      "tags" : [ "Android", "CI" ],
+      "title" : "Ship It Faster: Making the Most of Mobile App Submission"
+    },
+    "200" : {
+      "complexity" : "Beginner",
+      "description" : "Check-in, grab some breakfast, visit our partners' booths, and socialize.",
+      "id" : 200,
+      "speakers" : [ ],
+      "tags" : [ "General", "Food" ],
+      "title" : "Check-in & Breakfast"
+    },
+    "201" : {
+      "complexity" : "Beginner",
+      "description" : "",
+      "id" : 201,
+      "speakers" : [ ],
+      "tags" : [ "General", "Food" ],
+      "title" : "Lunch"
+    },
+    "202" : {
+      "complexity" : "Beginner",
+      "description" : "Open forum Q&A with all Ohio DevFest speakers",
+      "id" : 202,
+      "speakers" : [ ],
+      "tags" : [ "General" ],
+      "title" : "Fireside Chat"
+    },
+    "203" : {
+      "complexity" : "Beginner",
+      "description" : "Hands on coding lab for Actions on Google. More details to come!",
+      "id" : 203,
+      "speakers" : [ ],
+      "tags" : [ "Actions on Google", "Code Lab", "Google Assistant", "Android" ],
+      "title" : "Actions on Google Code Lab"
+    },
+    "204" : {
+      "complexity" : "Beginner",
+      "description" : "Hands on coding lab for Actions on Google. More details to come!",
+      "id" : 203,
+      "speakers" : [ ],
+      "tags" : [ "Actions on Google", "Code Lab", "Google Assistant", "Android" ],
+      "title" : "Actions on Google Code Lab (continued)"
+    },
+    "205" : {
+      "complexity" : "Beginner",
+      "description" : "We don't want Ohio DevFest to end! Let's keep the fun going. Join us at Zaftig Brewing Company (7020 A Huntley Road, Worthington, OH 43229) for food, beer, and socializing! Everyone is invited! Under 21 food and beverages available. Proper ID and wristbands will be required for alcohol consumption. Please drink responsibly!",
+      "id" : 205,
+      "speakers" : [ ],
+      "tags" : [ "General", "Food"],
+      "title" : "After Party"
+    }
+  },
+  "schedule" : [ {
+    "date" : "2017-11-18",
+    "dateReadable" : "November 18",
+    "timeslots" : [ {
+      "endTime" : "09:00",
+      "sessions" : [ [ 200 ] ],
+      "startTime" : "07:30"
+    }, {
+      "endTime" : "09:50",
+      "sessions" : [ [ 100 ] ],
+      "startTime" : "09:00"
+    }, {
+      "endTime" : "10:50",
+      "sessions" : [ [ 104 ], [ 110 ], [ 109 ] ],
+      "startTime" : "10:00"
+    }, {
+      "endTime" : "11:50",
+      "sessions" : [ [ 100 ], [ 102 ], [ 100 ] ],
+      "startTime" : "11:00"
+    }, {
+      "endTime" : "13:00",
+      "sessions" : [ [ 201 ] ],
+      "startTime" : "12:00"
+    }, {
+      "endTime" : "13:50",
+      "sessions" : [ [ 105 ], [ 100 ], [ 203 ] ],
+      "startTime" : "13:00"
+    }, {
+      "endTime" : "14:50",
+      "sessions" : [ [ 108 ], [ 101 ], [ 204 ] ],
+      "startTime" : "14:00"
+    }, {
+      "endTime" : "15:50",
+      "sessions" : [ [ 106 ], [ 103 ], [ 107 ] ],
+      "startTime" : "15:00"
+    }, {
+      "endTime" : "17:00",
+      "sessions" : [ [ 202 ] ],
+      "startTime" : "16:00"
+    }, {
+      "endTime" : "21:00",
+      "sessions" : [ [ 205 ] ],
+      "startTime" : "18:00"
+    } ],
+    "tracks" : [ {
+      "title" : "Room 1"
+    }, {
+      "title" : "Room 2"
+    }, {
+      "title" : "Room 3"
+    } ]
+  } ],
   "team" : [ {
     "members" : [ {
       "name" : "Casey Borders",
       "photoUrl" : "../images/people/casey_borders.jpg",
       "socials" : [ {
         "icon" : "twitter",
-        "link" : "https://twitter.com/CaseyBorders",
+        "link" : "https://twitter.com/thebeast13",
         "name" : "Twitter"
+      }, {
+        "icon" : "gplus",
+        "link" : "https://plus.google.com/+CaseyBorders",
+        "name" : "Google+"
       } ],
       "title" : "GDG Columbus Organizer"
     }, {
@@ -31,6 +450,10 @@
         "icon" : "twitter",
         "link" : "https://twitter.com/petegordon",
         "name" : "Twitter"
+      }, {
+        "icon" : "gplus",
+        "link" : "https://plus.google.com/+PeteGordonUSA",
+        "name" : "Google+"
       } ],
       "title" : "GDG Columbus Organizer"
     }, {
@@ -40,6 +463,10 @@
         "icon" : "twitter",
         "link" : "https://twitter.com/patrickhammond",
         "name" : "Twitter"
+      }, {
+        "icon" : "gplus",
+        "link" : "https://plus.google.com/+PatrickHammond",
+        "name" : "Google+"
       } ],
       "title" : "GDG Cincinnati Organizer"
     }, {
@@ -49,6 +476,10 @@
         "icon" : "twitter",
         "link" : "https://twitter.com/powerje",
         "name" : "Twitter"
+      }, {
+        "icon" : "gplus",
+        "link" : "https://plus.google.com/+JamesPower",
+        "name" : "Google+"
       } ],
       "title" : "GDG Columbus Organizer"
     }, {

@@ -92,9 +92,9 @@
     <div class="container">
       <h4 class="heading">{$ featuredPeopleTitle $}</h4>
 
-      <div class="c4p">Ohio DevFest 2017 is no longer accepting submissions for presentations.<br/>
+      <!-- <div class="c4p">Ohio DevFest 2017 is no longer accepting submissions for presentations.<br/>
         Stay tuned, we'll be announcing our speaker selection very soon!
-      </div>
+      </div> -->
       <!-- <a href="https://goo.gl/643T6A" class="block-link">
         <paper-button class="primary" raised>Submit your presentation today</paper-button>
       </a> -->
@@ -107,11 +107,16 @@
               src="[[person.photoUrl]]"
               sizing="cover"
             ></iron-image>
-            <iron-image
-              class="company-logo"
-              src="[[person.companyLogo]]"
-              sizing="contain"
-            ></iron-image>
+            <template is="dom-if" if="{{person.companyLogo}}">
+              <iron-image
+                class="company-logo"
+                src="[[person.companyLogo]]"
+                sizing="contain"
+              ></iron-image>
+            </template>
+            <template is="dom-if" if="{{_isUndefined(person.companyLogo)}}">
+               <span class="details-text">[[person.company]]</span>
+            </template>
             <h4 class="name">[[person.name]]</h4>
             <span class="company">[[person.country]]</span>
           </a>
@@ -154,7 +159,9 @@
             }
           }
           this.featuredPeople = this._randomOrder(filteredPeople).slice(0, 4);
-        }
+        },
+
+        _isUndefined: function(item)  { return ! Boolean(item); }
 
       });
 

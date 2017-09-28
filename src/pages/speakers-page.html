@@ -198,7 +198,12 @@
               </div>
             </a>
             <a href$="/speakers/[[speaker.id]]/" class="card-content">
-              <iron-image class="company-logo" src="{{speaker.companyLogo}}" sizing="contain"></iron-image>
+              <template is="dom-if" if="{{speaker.companyLogo}}">
+                <iron-image class="company-logo" src="{{speaker.companyLogo}}" sizing="contain"></iron-image>
+              </template>
+              <template is="dom-if" if="{{_isUndefined(speaker.companyLogo)}}">
+                  <span class="details-text">[[speaker.company]]</span>
+              </template>
               <!-- <div class="tags">{$ skills $}:
                 <template is="dom-repeat" items="[[speaker.tags]]" as="tag">
                   <span class="tag" style$="{{_getCustomStyleValue(tag)}}">[[tag]]</span>
@@ -294,7 +299,10 @@
 
         _resetSpeakerIdParam: function () {
           this.set('routeData.speakerId', null);
-        }
+        },
+
+        _isUndefined: function(item)  { return ! Boolean(item); }
+
       });
 
     }());
