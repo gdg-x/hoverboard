@@ -46,6 +46,16 @@
         font-size: 16px;
       }
 
+      .united .session:first-of-type {
+        flex: calc(100% / 4 * 3);
+        box-sizing: border-box;
+      }
+
+      .united .session:last-of-type {
+        flex: calc(100% / 4 * 1);
+        box-sizing: border-box;
+      }
+
       .session {
         padding: 0 16px;
       }
@@ -70,7 +80,7 @@
         </div>
 
         <div
-          class="sessions-wrapper"
+          class$="sessions-wrapper [[_getConnectedCells(timeslot.sessions)]]"
           layout
           vertical$="{{app.isPhoneSize}}"
           horizontal$="{{!app.isPhoneSize}}"
@@ -135,6 +145,9 @@
           }
         },
 
+        _getConnectedCells: function(sessions) {
+            return sessions.length == 2 ? 'united': '';
+        },
 
         _splitText: function (text, divider, index) {
           return text.split(divider)[index];

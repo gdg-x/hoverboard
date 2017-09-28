@@ -361,9 +361,9 @@
         },
 
         _getDayLabel: function (selectedDay) {
-          if (!this.schedule || this._isMySchedulePage(selectedDay)) return;
+          if (!this.schedule || !this.schedule.length || this._isMySchedulePage(selectedDay)) return;
 
-          var index = Number(selectedDay.match(/\d+/)[0]);
+          var index = Number(selectedDay.match(/\d+/)[0]) || 1;
           return this.schedule[index - 1].dateReadable;
         }
       });
