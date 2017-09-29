@@ -1,6 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<link rel="import" href="../../bower_components/iron-dropdown/iron-dropdown-scroll-manager.html">
 <link rel="import" href="../../bower_components/iron-image/iron-image.html">
 
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
@@ -163,10 +162,10 @@
 
         _onNeonAnimationFinish: function () {
           if (this.opened) {
-            Polymer.IronDropdownScrollManager.pushScrollLock(this.$.scrollHeaderPanel);
+            document.body.style.overflow = 'hidden';
             this._finishRenderOpened();
           } else {
-            Polymer.IronDropdownScrollManager.removeScrollLock(this.$.scrollHeaderPanel);
+            document.body.style.overflow = '';
             this._finishRenderClosed();
           }
         }
