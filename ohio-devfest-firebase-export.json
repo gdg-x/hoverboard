@@ -109,6 +109,20 @@
         "name" : "Twitter"
       } ]
     }, {
+      "bio" : "Ezgi is a PhD Student at the College of Pharmacy at Ohio State University. She works with large scale genomic and clinical datasets to determine the factors affecting the leukemia patient survival following bone marrow transplants. She mostly uses R for her analyses but she also uses bash/shell very frequently as she works on the HPC cluster on a daily basis. Ezgi is also one of the organizers of the R-Ladies Columbus chapter. She received her undegraduate degree in Biology in Turkey, where she's originally from. She then switched to Bioinformatics and joined a dual degree master's program, where she received an MS in Systems Biology degree from the University of Luxembourg and an MS in Cancer Biology from the University at Buffalo and Roswell Park Cancer Institute.",
+      "company" : "Ohio State University",
+      "country" : "Columbus, OH",
+      "featured" : true,
+      "id" : 7,
+      "name" : "Ezgi Karaesmen",
+      "photoUrl" : "/images/people/ezgi_karaesmen.jpg",
+      "shortBio" : "Ezgi is a PhD Student at the College of Pharmacy at Ohio State University. She works with large scale genomic and clinical datasets...",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/e_Karaesmen",
+        "name" : "Twitter"
+      } ]
+    }, {
       "bio" : "Katie Sasso is a Data Scientist at the Columbus Collaboratory. She studied at the Ohio State University to receive a Ph.D. in Experimental Psychology. Katie is passionate about integrating background in personality research, statistics, experimental methods, and data analysis in order to answer challenging questions and promote process improvement.",
       "company" : "Columbus Collaboratory",
       "country" : "Columbus, OH",
@@ -320,13 +334,13 @@
       "tags" : [ "Web", "JavaScript", "Data Science" ],
       "title" : "Feed your inner data scientist: JavaScript tools for data visualization and filtering."
     },
-    "113" : {
-      "complexity" : "Beginner",
-      "description" : "Getting new features (and bug fixes) into the hands of your users is an important part of the app lifecycle. Scripting and automation can help you get the most of your submission process by ensuring efficiency and stability when shipping new versions of your app. This talk will cover several tips and tricks to trim your submission/release process down to a reliable and reproducible set of commands.",
-      "id" : 113,
-      "speakers" : [ 13 ],
-      "tags" : [ "Android", "CI" ],
-      "title" : "Ship It Faster: Making the Most of Mobile App Submission"
+    "114" : {
+      "complexity" : "Intermediate",
+      "description" : "This talk will provide a broad overview of some of the most popular machine learning algorithms and techniques. Specific topics may include Decision Trees, Random Forests, Neural Networks, and associated ensemble methods (gradient boosting vs. bagging/bootstrapping). Attendees can expect a high-level overview of techniques, a review of the circumstances under which they are and aren't appropriate for use, and a brief crash course on how to implement some popular algorithms using open source software.",
+      "id" : 114,
+      "speakers" : [ 7 ],
+      "tags" : [ "Machine Learning", "Data Science" ],
+      "title" : "Genomic Data Science and Personalized Medicine"
     },
     "200" : {
       "complexity" : "Beginner",
@@ -390,11 +404,11 @@
       "startTime" : "09:00"
     }, {
       "endTime" : "10:50",
-      "sessions" : [ [ 104 ], [ 110 ], [ 109 ] ],
+      "sessions" : [ [ 104 ], [ 110 ], [ 114 ] ],
       "startTime" : "10:00"
     }, {
       "endTime" : "11:50",
-      "sessions" : [ [ 100 ], [ 102 ], [ 100 ] ],
+      "sessions" : [ [ 100 ], [ 102 ], [ 109 ] ],
       "startTime" : "11:00"
     }, {
       "endTime" : "13:00",
