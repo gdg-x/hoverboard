@@ -11,8 +11,23 @@
       "logoUrl" : "../images/logos/illumination-works.png",
       "name" : "Illumination Works",
       "url" : "http://www.illuminationworksllc.com/"
+    }, {
+      "logoUrl" : "../images/logos/callibrity.png",
+      "name" : "Callibrity",
+      "url" : "http://www.callibrity.com/"
     } ],
     "title" : "Silver Partner"
+  }, {
+    "logos" : [ {
+      "logoUrl" : "../images/logos/gdg_cincinnati.png",
+      "name" : "GDG Cincinnati",
+      "url" : "https://www.meetup.com/cincy-android/"
+    }, {
+      "logoUrl" : "../images/logos/gdg_columbus.png",
+      "name" : "GDG Columbus",
+      "url" : "https://www.meetup.com/GDG-Columbus/"
+    } ],
+    "title" : "Organizers"
   } ],
   "speakers" : [ null, {
       "bio" : "Martin Omander works for Google in Mountain View, California. His job in the Developer Relations team is to support awesome developer communities, like the Google Developer Groups. On his spare time he manages to sneak in some programming, usually writing HTML5 apps running on top of Firebase. Before Google, Martin worked at string of startups in Silicon Valley as a software engineer.",
