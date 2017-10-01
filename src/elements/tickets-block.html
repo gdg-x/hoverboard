@@ -7,6 +7,7 @@
 
 <link rel="import" href="../styles/shared-styles.html">
 <link rel="import" href="ticket-element.html">
+<link rel="import" href="sold-out-dialog.html">
 
 
 <dom-module id="tickets-block">
@@ -77,28 +78,34 @@
       </div>
       <div class="tickets-wrapper">
         <template is="dom-repeat" items="[[app.tickets.elements]]" as="ticket">
-          <a href$="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick" ga-info$="[[ticket.price]]">
-            <ticket-element
-              type="[[ticket.name]]"
-              price="[[ticket.price]]"
-              currency="[[ticket.currency]]"
-              starts="[[ticket.starts]]"
-              ends="[[ticket.ends]]"
-              info="[[ticket.info]]"
-              sold-out="[[ticket.soldOut]]"
-              sold-out-text="{$ soldOutTickets $}">
-            </ticket-element>
-          </a>
+          <ticket-element
+            type="[[ticket.name]]"
+            price="[[ticket.price]]"
+            currency="[[ticket.currency]]"
+            starts="[[ticket.starts]]"
+            ends="[[ticket.ends]]"
+            info="[[ticket.info]]"
+            sold-out="[[ticket.soldOut]]"
+            sold-out-text="{$ soldOutTickets $}">
+          </ticket-element>
         </template>
       </div>
       <div class="details">{$ ticketsDetails $}</div>
-      <a href$="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick" ga-info="button">
-        <paper-button class="buy-button" raised>
-          <iron-icon icon="ticket"></iron-icon>
-          {$ buyTicket $}
-        </paper-button>
-      </a>
+      <paper-button class="buy-button" raised on-tap="_trackBuyClick">
+        <iron-icon icon="ticket"></iron-icon>
+        {$ buyTicket $}
+      </paper-button>
     </div>
+
+    <sold-out-dialog
+      id="soldOut"
+      app="[[app]]"
+      class="sold-out-dialog"
+      entry-animation="scale-up-animation"
+      exit-animation="fade-out-animation"
+      with-background
+    >
+    </sold-out-dialog>
 
   </template>
 
@@ -114,9 +121,8 @@
         },
 
         _trackBuyClick: function (e) {
-          var info = e.currentTarget.getAttribute('ga-info');
-          HOVERBOARD.Analytics.trackEvent('ticket ' + info, 'buy_click', e.currentTarget.href);
-        }
+          this.$.soldOut.open();
+        },
 
       });
 

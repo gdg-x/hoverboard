@@ -8,6 +8,8 @@
   "playIcon": "See how it was in 2016",
   "c4p": "Become a speaker",
   "buyTicket": "Buy ticket",
+  "watchTeaser": "Watch teaser",
+  "soldOut": "Sold out",
   "backToTop": "Back to top",
   "subscribe": "Subscribe",
   "yourEmail": "Your email",
@@ -119,7 +121,7 @@
           "text": "Partnership Proposition",
           "url": "https://bit.ly/dfua17-partners",
           "newTab": true
-        }, 
+        },
         {
           "text": "Info Partnership Proposition",
           "url": "http://bit.ly/2fdpCep",
@@ -172,5 +174,9 @@
       "label": "Submit proposal"
     },
     "deadline": "2017-07-01T00:00:00+03:00"
+  },
+  "teaser": {
+    "title": "GDG DevFest Ukraine 2017 - Teaser",
+    "youTubeId": "213KE48Gu6U"
   }
 }

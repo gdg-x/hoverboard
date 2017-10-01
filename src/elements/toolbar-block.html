@@ -154,9 +154,9 @@
         <template is="dom-if" if="[[!app.isPhoneSize]]">
           <paper-tabs selected="[[app.page]]" attr-for-selected="name" noink>
             {% for nav in navigation %}
-              <paper-tab name="{$ nav.route $}" link>
-                <a href="{$ nav.permalink $}" class="nav-link">{$ pages[nav.route].title $}</a>
-              </paper-tab>
+            <paper-tab name="{$ nav.route $}" link>
+              <a href="{$ nav.permalink $}" class="nav-link">{$ pages[nav.route].title $}</a>
+            </paper-tab>
             {% endfor %}
           </paper-tabs>
         </template>
@@ -189,15 +189,6 @@
             </div>
           </div>
         </paper-menu-button>
-
-        <div class="action-button-wrapper" hidden$="[[app.isPhoneSize]]" layout horizontal center-center>
-          <a href$="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
-            <paper-button class="action-button">
-              <iron-icon icon="ticket"></iron-icon>
-              {$ buyTicket $}
-            </paper-button>
-          </a>
-        </div>
       </div>
     </app-toolbar>
 
@@ -245,8 +236,9 @@
           }
         },
 
-        _trackBuyClick: function () {
-          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'toolbar');
+        _openTeaser: function () {
+          HOVERBOARD.Analytics.trackEvent('video', 'watch_teaser', 'toolbar');
+          HOVERBOARD.Elements.Template.openVideo('{$ teaser.title $}', '{$ teaser.youTubeId $}', true);
         }
 
       });

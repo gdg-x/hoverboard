@@ -1,0 +1,81 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
+
+<link rel="import" href="../../bower_components/neon-animation/neon-animation-runner-behavior.html">
+
+<link rel="import" href="../styles/dialog-styles.html">
+<link rel="import" href="../styles/shared-styles.html">
+
+
+<dom-module id="sold-out-dialog">
+
+  <template>
+    <style include="shared-styles"></style>
+
+    <style>
+      :host {
+        padding: 32px;
+        display: block;
+        width: 100%;
+        background: white;
+        color: var(--primary-text-color);
+        max-width: 520px;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      h2 {
+        font-size: 42px;
+        line-height: 1;
+      }
+    </style>
+
+    <h2>All tickets are sold out</h2>
+    <p>You still have a small chance. Join our <a href="https://www.facebook.com/devfest.ukraine" target="_blank" rel="noopener noreferrer">Facebook</a> group, maybe somebody will post tickets for re-sale.</p>
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'sold-out-dialog',
+
+        behaviors: [
+          Polymer.PaperDialogBehavior,
+          Polymer.NeonAnimationRunnerBehavior
+        ],
+
+        listeners: {
+          'neon-animation-finish': '_onNeonAnimationFinish'
+        },
+
+        _renderOpened: function () {
+          this.backdropElement.open();
+          this.playAnimation('entry');
+        },
+
+        _renderClosed: function () {
+          this.backdropElement.close();
+          this.playAnimation('exit');
+        },
+
+        _onNeonAnimationFinish: function () {
+          if (this.opened) {
+            document.body.style.overflow = 'hidden';
+            this._finishRenderOpened();
+          } else {
+            document.body.style.overflow = '';
+            this._finishRenderClosed();
+          }
+
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

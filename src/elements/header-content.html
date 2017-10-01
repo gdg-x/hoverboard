@@ -113,6 +113,17 @@
         margin-right: 8px;
       }
 
+      .watch-video {
+        margin-top: 8px;
+        cursor: pointer;
+        font-size: 15px;
+        letter-spacing: 0.2px;
+      }
+
+      .watch-video iron-icon {
+        margin-right: 4px;
+      }
+
       @media (min-width: 601px) {
         .container {
           padding-bottom: 40px;
@@ -152,10 +163,10 @@
               <h2 class="motto">{$ motto $}</h2>
 
               <div class="action-buttons">
-                <paper-button class="primary-white" on-tap="_scrollToTickets" raised>
-                  <iron-icon icon="ticket"></iron-icon>
-                  <span>{$ buyTicket $}</span>
-                </paper-button>
+                <span class="watch-video" on-tap="_openTeaser">
+                  <iron-icon icon="play"></iron-icon>
+                  <span>{$ watchTeaser $}</span>
+                </span>
               </div>
             </div>
           </div>
@@ -201,13 +212,9 @@
           }
         },
 
-        _scrollToTickets: function () {
-          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'header');
-          Polymer.AppLayout.scroll({
-            top: HOVERBOARD.Elements.Tickets.getBoundingClientRect().top,
-            behavior: 'smooth',
-            target: HOVERBOARD.Elements.Scroller
-          });
+        _openTeaser: function () {
+          HOVERBOARD.Analytics.trackEvent('video', 'watch_teaser', 'header');
+          HOVERBOARD.Elements.Template.openVideo('{$ teaser.title $}', '{$ teaser.youTubeId $}', true);
         }
 
       });
