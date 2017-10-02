@@ -27,7 +27,7 @@
       "url" : "https://www.testdevlab.com/"
     }
   ],
-    "title" : "Standard Sponsors",
+    "title" : "Sponsors",
     "logosClass": "medium",
     "titleClass": "mediumTitle"
   },
@@ -91,6 +91,11 @@
         "logoUrl" : "../images/logos/teikums.png",
         "name" : "TEIKUMS",
         "url" : "https://teikums.lv/"
+      },
+      {
+        "logoUrl" : "../images/logos/vgc.png",
+        "name" : "Vilnius Girls Code",
+        "url" : "hhttps://www.facebook.com/vilniusgirlscode/"
       }
   ],
     "title" : "Partners",
