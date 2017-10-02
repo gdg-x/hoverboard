@@ -30,7 +30,7 @@
     "sw-precache": "^5.1.1"
   },
   "engines": {
-    "node": ">=4.0"
+    "node": ">=8.1"
   },
   "private": true
 }
