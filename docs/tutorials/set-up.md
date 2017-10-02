@@ -7,18 +7,18 @@ Or you may use [Docker container for development](docker.md)
 
 ## Install the Hoverboard and dependencies
 
-1.  Install [Node.js](https://nodejs.org/) (`node`) version 4 or above.
+1.  Install [Node.js](https://nodejs.org/) (`node`) version 8 or above.
     Node.js includes Node Package Manager (`npm`) by default. The Hoverboard
     uses `npm` for Polymer CLI.
 
-1.  Verify that you're running `node` version 4 or above and `npm`
-    version 2.15 or above.
+1.  Verify that you're running `node` version 8.1 or above and `npm`
+    version 5.0.3 or above.
 
         node -v
-        v4.4.7
+        v8.1.0
 
         npm -v
-        2.15.8
+        5.0.3
 
 1.  [Fork](https://github.com/gdg-x/hoverboard/fork) this repository
 
