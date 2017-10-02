@@ -141,6 +141,15 @@
     "primaryColor": "#3153B8",
     "secondaryColor": "#18379E",
     "image": "/images/posts/levi-cover.jpg",
-    "brief": "[Levi9](https://www.levi9.com) is a Dutch Technology Services company with currently **over 900 highly educated and skilled IT professionals** in Eastern and Central Europe"
+    "brief": "[Levi9](https://www.levi9.com) is a Dutch Technology Services company with currently **over 900 highly educated and skilled IT professionals** in Eastern and Central Europe..."
+  },
+  {
+    "id": "platinum-sponsor-global-logic",
+    "title": "Meet our Platinum Sponsor - GlobalLogic",
+    "posted": "2017-10-03",
+    "primaryColor": "#ED7523",
+    "secondaryColor": "#EB8C23",
+    "image": "/images/posts/global-logic-cover.jpg",
+    "brief": "[GlobalLogic](http://www.globallogic.com/) is a full-lifecycle software development company that combines experience design, complex engineering, and agile delivery to produce the best software product in the shortest time."
   }
 ]
