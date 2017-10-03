@@ -151,5 +151,14 @@
     "secondaryColor": "#EB8C23",
     "image": "/images/posts/global-logic-cover.jpg",
     "brief": "[GlobalLogic](http://www.globallogic.com/) is a full-lifecycle software development company that combines experience design, complex engineering, and agile delivery to produce the best software product in the shortest time."
+  },
+  {
+    "id": "joanna-chwastowska-interview",
+    "title": "Interview with Joanna Chwastowska",
+    "posted": "2017-10-04",
+    "primaryColor": "#1F4FFF",
+    "secondaryColor": "#5473FF",
+    "image": "/images/posts/chwastowska-interview.png",
+    "brief": "Joanna, we know you recently started working at DeepMind. Our congratulations! Please, tell a bit about the work you do. How did you first get involved into this work?"
   }
 ]

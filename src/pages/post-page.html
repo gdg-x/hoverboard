@@ -100,6 +100,15 @@
         height: 40px;
       }
 
+      .markdown-html .highlight-quote {
+        margin: 24px;
+        color: #EF3C79;
+        font-size: 1.4em;
+        font-style: italic;
+        text-transform: uppercase;
+        line-height: 1.1;
+      }
+
       @media (min-width: 601px) {
         .latest-post-wrapper {
           @apply(--layout-horizontal);
@@ -112,6 +121,10 @@
 
         .post {
           margin: var(--grid-gutter);
+        }
+
+        .markdown-html .highlight-quote {
+          font-size: 2em;
         }
       }
     </style>
