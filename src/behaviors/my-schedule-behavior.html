@@ -54,6 +54,7 @@
           HOVERBOARD.Elements.Template.$.toast.showMessage('{$ addedToSchedule $}');     
 
           if (isWorkshop) {
+            this.close && this.close();
             HOVERBOARD.Elements.Template.$.infoDialog.headerText = '{$ workshopWarning.headerText $}';
             HOVERBOARD.Elements.Template.$.infoDialog.infoText = '{$ workshopWarning.infoText $}';
             HOVERBOARD.Elements.Template.$.infoDialog.ctaButtonText = '{$ workshopWarning.ctaButtonText $}';
