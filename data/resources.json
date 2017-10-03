@@ -178,5 +178,10 @@
   "teaser": {
     "title": "GDG DevFest Ukraine 2017 - Teaser",
     "youTubeId": "213KE48Gu6U"
+  },
+  "workshopWarning": {
+    "headerText": "Capacity for this workshop is limited.",
+    "infoText": "Session seats will be distributed on first-come, first-served basis.",
+    "ctaButtonText": "Got it"
   }
 }

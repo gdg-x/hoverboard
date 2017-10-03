@@ -1,0 +1,125 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animation-runner-behavior.html">
+
+<link rel="import" href="../styles/dialog-styles.html">
+<link rel="import" href="../styles/shared-styles.html">
+
+
+<dom-module id="info-dialog">
+
+  <template>
+    <style include="shared-styles"></style>
+
+    <style>
+      :host {
+        padding: 32px;
+        display: block;
+        width: 100%;
+        background: white;
+        color: var(--primary-text-color);
+        max-width: 520px;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      .info-icon {
+        --iron-icon-height: 56px;
+        --iron-icon-width: 56px;
+        --iron-icon-fill-color: var(--default-primary-color);
+        margin-right: 20px;
+      }
+
+      h3 {
+        font-size: 20px;
+      }
+
+      p {
+        font-size: 16px;
+        margin-left: 5px;
+      }
+
+      paper-button {
+        background-color: var(--default-primary-color);
+        color: #fff;        
+        float: right;
+      }
+
+      @media (min-width: 601px) {
+        h3 {
+          font-size: 24px;
+        }
+  
+        p {
+          font-size: 18px;
+        }
+      }
+
+    </style>
+  
+    <div class="header" layout horizontal>
+      <iron-icon class="info-icon" icon="info"></iron-icon>
+      <h3>[[headerText]]</h3>
+    </div>
+    <p>[[infoText]]</p>
+    <paper-button class="cta-button" on-tap="close">[[ctaButtonText]]</paper-button>
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'info-dialog',
+
+        behaviors: [
+          Polymer.PaperDialogBehavior,
+          Polymer.NeonAnimationRunnerBehavior
+        ],
+
+        properties: {
+          headerText: {
+            type: String
+          },
+          infoText: {
+            type: String
+          },
+          ctaButtonText: {
+            type: String
+          }
+        },
+
+        listeners: {
+          'neon-animation-finish': '_onNeonAnimationFinish'
+        },
+
+        _renderOpened: function () {
+          this.backdropElement.open();
+          this.playAnimation('entry');
+        },
+
+        _renderClosed: function () {
+          this.backdropElement.close();
+          this.playAnimation('exit');
+        },
+
+        _onNeonAnimationFinish: function () {
+          if (this.opened) {
+            document.body.style.overflow = 'hidden';
+            this._finishRenderOpened();
+          } else {
+            document.body.style.overflow = '';
+            this._finishRenderClosed();
+          }
+
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>

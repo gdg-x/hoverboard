@@ -26,6 +26,7 @@
 <link rel="import" href="elements/header-content.html">
 <link rel="import" href="elements/video-dialog.html">
 <link rel="import" href="elements/toast-element.html">
+<link rel="import" href="elements/info-dialog.html">
 
 <link rel="import" href="pages/home-page.html">
 
@@ -220,7 +221,17 @@
                   exit-animation="fade-out-animation"
                   disable-controls="[[!video.disableControls]]"></video-dialog>
 
-    <toast-element id="toast" app="{{app}}"></toast-element>
+    <toast-element id="toast" app="{{app}}"></toast-element>   
+
+    <info-dialog
+      id="infoDialog"
+      app="[[app]]"
+      class="info-dialog"
+      entry-animation="scale-up-animation"
+      exit-animation="fade-out-animation"
+      with-backdrop
+    >
+    </info-dialog>
 
   </template>
 

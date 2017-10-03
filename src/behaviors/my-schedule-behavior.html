@@ -35,6 +35,8 @@
         }
 
         var id = e.target.getAttribute('session-id');
+        var track = e.target.getAttribute('session-track');
+        var isWorkshop = track && track.toLowerCase() == 'workshops hall';
 
         if (this.app.user.sessions && this.app.user.sessions[id]) {
           this.set('app.user.sessions.' + id, null);
@@ -43,8 +45,21 @@
           if (!this.app.user.sessions) {
             this.app.user.sessions = {};
           }
-          this.set('app.user.sessions.' + id, true);
-          HOVERBOARD.Elements.Template.$.toast.showMessage('{$ addedToSchedule $}');
+          this.set('app.user.sessions.' + id, true);    
+          
+          // [temp fix] to trigger app.sessions observer and re-filter my-schedule
+          // @ozasadnyy, I hope you won't have heart attack
+          // DevFest is coming :)
+          this.set('app.user.sessions.000', null);          
+          HOVERBOARD.Elements.Template.$.toast.showMessage('{$ addedToSchedule $}');     
+
+          if (isWorkshop) {
+            HOVERBOARD.Elements.Template.$.infoDialog.headerText = '{$ workshopWarning.headerText $}';
+            HOVERBOARD.Elements.Template.$.infoDialog.infoText = '{$ workshopWarning.infoText $}';
+            HOVERBOARD.Elements.Template.$.infoDialog.ctaButtonText = '{$ workshopWarning.ctaButtonText $}';
+            
+            HOVERBOARD.Elements.Template.$.infoDialog.open();
+          }
         }
       },
 
