@@ -50,12 +50,13 @@ function addTagTo(tag, tags) {
 self.addEventListener('message', function (e) {
   var speakers = e.data.speakers;
   var sessions = e.data.sessions;
-  var schedule = e.data.schedule;
+  var days = e.data.schedule;
+  var schedule = { days: days };
 
-  if (hasSpeakersAndSessionsAndSchedule(speakers, sessions, schedule)) {
+  if (hasSpeakersAndSessionsAndSchedule(speakers, sessions, schedule.days)) {
     schedule.tags = [];
-    for (var dayIdx = 0, scheduleLen = schedule.length; dayIdx < scheduleLen; dayIdx++) {
-      var day = schedule[dayIdx];
+    for (var dayIdx = 0, scheduleLen = schedule.days.length; dayIdx < scheduleLen; dayIdx++) {
+      var day = schedule.days[dayIdx];
       day.tags = [];
       for (var timeSlotIdx = 0, timeslotsLen = day.timeslots.length; timeSlotIdx < timeslotsLen; timeSlotIdx++) {
         var timeslot = day.timeslots[timeSlotIdx];
@@ -84,7 +85,7 @@ self.addEventListener('message', function (e) {
 
             attachSessionAndSpeakersTogether(session, speakers);
 
-            schedule[dayIdx].timeslots[timeSlotIdx].sessions[sessionIndex][subSessIdx] = session;
+            schedule.days[dayIdx].timeslots[timeSlotIdx].sessions[sessionIndex][subSessIdx] = session;
           }
         }
       }
@@ -98,6 +99,6 @@ self.addEventListener('message', function (e) {
   self.postMessage({
     speakers: speakers,
     sessions: sessions,
-    schedule: Array.isArray(schedule) && Object.keys(sessions).length ? schedule : []
+    schedule: Array.isArray(schedule.days) && Object.keys(sessions).length ? schedule : {}
   });
 }, false);

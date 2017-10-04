@@ -88,6 +88,11 @@
         cursor: pointer;
       }
 
+      paper-icon-button,
+      .myscheduleback {
+        color: #fff;
+      }
+
       .info-banner {
         padding: 16px;
         background: rgba(236, 239, 241, 0.6);
@@ -140,7 +145,7 @@
           relative
           hide-scroll-buttons
         >
-          <template is="dom-repeat" items="[[schedule]]" as="day">
+          <template is="dom-repeat" items="[[days]]" as="day">
             <paper-tab day$="day[[_addToValue(index, 1)]]" link>
               <a href$="/schedule/day[[_addToValue(index, 1)]]" layout center>
                 [[day.dateReadable]]
@@ -160,7 +165,7 @@
       <template is="dom-if" if="[[_showDaySelector(app.isPhoneSize, selectedDay)]]">
         <paper-menu-button vertical-align="top" horizontal-align="left">
           <paper-button class="dropdown-trigger">
-            [[_getDayLabel(selectedDay, schedule)]]
+            [[_getDayLabel(selectedDay, days)]]
             <iron-icon icon="arrow-drop-down"></iron-icon>
           </paper-button>
           <paper-menu
@@ -168,7 +173,7 @@
             selected="[[selectedDay]]"
             attr-for-selected="day">
 
-            <template is="dom-repeat" items="[[schedule]]" as="day">
+            <template is="dom-repeat" items="[[days]]" as="day">
               <paper-item label$="[[day.dateReadable]]" day$="day[[_addToValue(index, 1)]]" link>
                 <a href$="/schedule/day[[_addToValue(index, 1)]]"
                    layout center>[[day.dateReadable]]</a>
@@ -213,7 +218,7 @@
             selected-values="{{filters}}"
             multi
           >
-            <template is="dom-repeat" items="[[schedule.tags]]" as="tag">
+            <template is="dom-repeat" items="[[tags]]" as="tag">
               <paper-checkbox
                 value="[[tag]]"
                 checked="{{_isChecked(tag)}}"
@@ -230,7 +235,7 @@
 
     <div class="info-banner" layout horizontal justified>
       <div class="legend" layout horizontal wrap>
-        <template is="dom-repeat" items="[[schedule.tags]]" as="tag">
+        <template is="dom-repeat" items="[[tags]]" as="tag">
           <div class="legend-item">
             <i class="point"
                style$="background: [[_getCustomStyleValue(tag)]]"></i>[[tag]]
@@ -258,6 +263,14 @@
 
         properties: {
           schedule: {
+            type: Object
+          },
+
+          days: {
+            type: Array
+          },
+
+          tags: {
             type: Array
           },
 
@@ -360,11 +373,11 @@
           window.history.go(-1);
         },
 
-        _getDayLabel: function (selectedDay) {
-          if (!this.schedule || !this.schedule.length || this._isMySchedulePage(selectedDay)) return;
+        _getDayLabel: function (selectedDay, days) {
+          if (!days || !days.length || this._isMySchedulePage(selectedDay)) return;
 
           var index = Number(selectedDay.match(/\d+/)[0]) || 1;
-          return this.schedule[index - 1].dateReadable;
+          return days[index - 1].dateReadable;
         }
       });
 

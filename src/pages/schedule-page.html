@@ -65,13 +65,14 @@
     <div class="container" phone$="{{app.isPhoneSize}}">
       <schedule-subnav
         app="{{app}}"
-        schedule="[[schedule]]"
+        days="[[schedule.days]]"
+        tags="[[schedule.tags]]"
         selected-day="[[app.selectedDay]]"
         filters="{{filters}}"
       ></schedule-subnav>
 
       <neon-animated-pages selected="[[app.selectedDay]]" attr-for-selected="name">
-        <template is="dom-repeat" items="[[schedule]]" as="day" on-dom-change="updateCascadedNodes">
+        <template is="dom-repeat" items="[[schedule.days]]" as="day" on-dom-change="updateCascadedNodes">
           <schedule-day
             name$="day[[_addToValue(index, 1)]]"
             app="{{app}}"
@@ -83,7 +84,7 @@
           <my-schedule
             name="myschedule"
             app="{{app}}"
-            schedule="[[schedule]]"
+            days="[[schedule.days]]"
           ></my-schedule>
         </template>
       </neon-animated-pages>
@@ -125,7 +126,7 @@
           },
 
           schedule: {
-            type: Array
+            type: Object
           },
 
           sessions: {
@@ -153,9 +154,9 @@
             if (!day) {
               var dayToSelect = null;
               var today = new Date().toISOString().substring(0, 10);
-              if (this.schedule) {
-                for (var i = 0, length = this.schedule.length; i < length; i++) {
-                  if (today === this.schedule[i].date) {
+              if (this.schedule.days) {
+                for (var i = 0, length = this.schedule.days.length; i < length; i++) {
+                  if (today === this.schedule.days[i].date) {
                     dayToSelect = 'day' + (i + 1);
                   }
                 }

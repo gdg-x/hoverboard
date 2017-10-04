@@ -77,7 +77,7 @@
       }
     </style>
 
-    <template id='mySchedule' is="dom-repeat" items="{{schedule}}" as="day">
+    <template id='mySchedule' is="dom-repeat" items="{{days}}" as="day">
       <div class="timeslot" layout vertical>
         <div class="start-time">
           <span class="hours">[[day.dateReadable]]</span>
@@ -150,7 +150,7 @@
             notify: true
           },
 
-          schedule: {
+          days: {
             type: Array
           },
 
