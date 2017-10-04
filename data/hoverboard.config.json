@@ -41,7 +41,7 @@
   "enabledPostsBlock": false,
   "enabledStatisticsBlock": true,
   "enabledFeaturedBlock": true,
-  "enabledCfpBlock": true,
+  "enabledCfpBlock": false,
   "enabledAboutBlock": true,
   "enabledSocialFeed": false,
   "enabledMapBlock": true,

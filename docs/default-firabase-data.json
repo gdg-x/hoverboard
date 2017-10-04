@@ -95,7 +95,17 @@
       {
         "logoUrl" : "../images/logos/vgc.png",
         "name" : "Vilnius Girls Code",
-        "url" : "hhttps://www.facebook.com/vilniusgirlscode/"
+        "url" : "https://www.facebook.com/vilniusgirlscode/"
+      },
+      {
+        "logoUrl" : "../images/logos/ditfsp.png",
+        "name" : "RTU DITF",
+        "url" : "https://www.facebook.com/ditfsp"
+      },
+      {
+        "logoUrl" : "../images/logos/labs.png",
+        "name" : "Labs of Latvia",
+        "url" : "http://www.labsoflatvia.com/"
       }
   ],
     "title" : "Partners",
@@ -358,9 +368,13 @@
       "title" : "Afterparty & Networking"
     },
     "301" : {
+      "complexity" : "Beginner",
       "description" : "Lightning talk (TBD)",
       "id" : 301,
-      "title" : "Lightning talk (TBD)"
+      "language" : "English",
+      "speakers" : [ 12 ],
+      "tags" : [ "Android", "AR" ],
+      "title" : "Google Tango & Microsoft Hololens - Nike AR Application"
     },
     "302" : {
       "description" : "Lightning talk (TBD)",
@@ -648,7 +662,24 @@
       "name" : "Github"
     } ],
     "tags" : [ "iOS", "Security" ],
-    "title" : "Firebase GDE"
+    "title" : "Security Expert"
+  }, {
+    "bio" : "With about 6 years experience in work with visual effects, 3D Graphics, and motion design, Maxim works with Augmented, Mixed and Virtual reality applications development, 3D graphics and design.\nMaxim holds a Magister degree (2014), Humanities Institute of TV & Radio Broadcasting, Faculty of Directing TV and Multimedia.\nThe Winner of the First Prize on the AR Hackathon with Trond Nilsen.\nAuthor and director of documentary films: “Generation of free people” and «Soul of stranger» (two prizes at the international festival «Telemania - 2014»). Human Rights Academy (Oslo, Norway) took the film to be used in educational seminars.\nPhotographer, a nominee in the second edition of Fine Art Photography Awards (London). Three Honorable Mentions in International Photography Awards (USA).\nPassionate about AR/VR/MR.",
+    "company" : "Stanfy",
+    "companyLogo" : "/images/logos/accenture.png",
+    "country" : "Riga, Latvia",
+    "featured" : false,
+    "id" : 12,
+    "name" : "Maxim Velichkin",
+    "photoUrl" : "/images/people/maxim_v.jpg",
+    "shortBio" : "AR/VR/MR Enthusiast",
+    "socials" : [ {
+      "icon" : "twitter",
+      "link" : "https://twitter.com/RumataM",
+      "name" : "Twitter"
+    }],
+    "tags" : [ "Android", "AR" ],
+    "title" : "AR/VR/MR Enthusiast"
   } ],
   "team" : [ {
     "members" : [ {
@@ -808,7 +839,7 @@
       "name" : "Early Bird",
       "price" : 49.95,
       "soldOut" : false,
-      "soldOutText": "Sold Out",      
+      "soldOutText": "Sold Out",
       "starts" : "Aug 25"
     }, {
       "currency" : "€",
@@ -825,7 +856,7 @@
       "info" : "Discount for groups of 5+. Contact us by mail.",
       "price" : "Discount",
       "soldOut" : false,
-      "soldOutText": "Sold Out",      
+      "soldOutText": "Sold Out",
       "starts" : "Oct 1"
     } ],
     "url" : "https://en.xing-events.com/DevFestBaltics2017"
