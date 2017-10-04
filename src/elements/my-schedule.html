@@ -53,6 +53,16 @@
         padding: 0 8px;
       }
 
+      .united .session:first-of-type {
+        flex: calc(100% / 4 * 3);
+        box-sizing: border-box;
+      }
+
+      .united .session:last-of-type {
+        flex: calc(100% / 4 * 1);
+        box-sizing: border-box;
+      }
+
       .browse-more {
         margin: 32px 0 24px;
         text-transform: uppercase;
@@ -85,7 +95,7 @@
             </div>
 
             <div
-              class="sessions-wrapper"
+              class$="sessions-wrapper [[_getConnectedCells(timeslot.sessions)]]"
               layout
               vertical$="{{app.isPhoneSize}}"
               horizontal$="{{!app.isPhoneSize}}"
@@ -164,6 +174,10 @@
           }
 
           HOVERBOARD.Elements.Template.$.toast.showMessage('{$ removedFromSchedule $}');
+        },
+
+        _getConnectedCells: function(sessions) {
+            return sessions.length == 2 ? 'united': '';
         },
 
         _splitText: function (text, divider, index) {
