@@ -345,7 +345,7 @@
       "complexity" : "Intermediate",
       "description" : "At first glance, visualizing data in JavaScript seems too daunting to approach. Fortunately there are open source JavaScript libraries which help developers create compelling visualizations. We will talk about D3.js, DC.js and CrossFilter.js.",
       "id" : 112,
-      "speakers" : [ 10 ],
+      "speakers" : [ 11 ],
       "tags" : [ "Web", "JavaScript", "Data Science" ],
       "title" : "Feed your inner data scientist: JavaScript tools for data visualization and filtering."
     },
@@ -356,6 +356,14 @@
       "speakers" : [ 7 ],
       "tags" : [ "Machine Learning", "Data Science" ],
       "title" : "Genomic Data Science and Personalized Medicine"
+    },
+    "115" : {
+      "complexity" : "Beginner",
+      "description" : "Getting new features (and bug fixes) into the hands of your users is an important part of the app lifecycle. Scripting and automation can help you get the most of your submission process by ensuring efficiency and stability when shipping new versions of your app. This talk will cover several tips and tricks to trim your submission/release process down to a reliable and reproducible set of commands.",
+      "id" : 115,
+      "speakers" : [ 13 ],
+      "tags" : [ "Android", "CI" ],
+      "title" : "Ship It Faster: Making the Most of Mobile App Submission"
     },
     "200" : {
       "complexity" : "Beginner",
@@ -423,7 +431,7 @@
       "startTime" : "10:00"
     }, {
       "endTime" : "11:50",
-      "sessions" : [ [ 100 ], [ 102 ], [ 109 ] ],
+      "sessions" : [ [ 115 ], [ 102 ], [ 109 ] ],
       "startTime" : "11:00"
     }, {
       "endTime" : "13:00",
@@ -431,7 +439,7 @@
       "startTime" : "12:00"
     }, {
       "endTime" : "13:50",
-      "sessions" : [ [ 105 ], [ 100 ], [ 203 ] ],
+      "sessions" : [ [ 105 ], [ 112 ], [ 203 ] ],
       "startTime" : "13:00"
     }, {
       "endTime" : "14:50",
