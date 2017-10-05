@@ -160,5 +160,14 @@
     "secondaryColor": "#5473FF",
     "image": "/images/posts/chwastowska-interview.png",
     "brief": "Joanna, we know you recently started working at DeepMind. Our congratulations! Please, tell a bit about the work you do. How did you first get involved into this work?"
+  },
+  {
+    "id": "ng-girls-workshop",
+    "title": "NgGirls Workshop",
+    "posted": "2017-10-05",
+    "primaryColor": "#FF3D00",
+    "secondaryColor": "#FF3D00",
+    "image": "/images/posts/ngGirls.jpg",
+    "brief": "Are you a woman, interested in learning how to build web applications with the latest technologies?"
   }
 ]
