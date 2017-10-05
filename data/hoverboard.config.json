@@ -43,10 +43,7 @@
       "route": "home",
       "permalink": "/"
     },
-    {
-      "route": "blog",
-      "permalink": "/blog/"
-    },
+
     {
       "route": "team",
       "permalink": "/team/"
@@ -57,16 +54,6 @@
       "name": "twitter",
       "nickname": "GDG Berlin",
       "url": "https://twitter.com/GDGBerlin"
-    },
-    {
-      "name": "gplus",
-      "nickname": "102464661817600154044",
-      "url": "https://plus.google.com/102464661817600154044"
-    },
-    {
-      "name": "facebook",
-      "nickname": "GDG Berlin",
-      "url": "https://www.facebook.com/GDGBerlin"
     }
   ],
   "location": {
