@@ -138,39 +138,6 @@
             </button>
           </div>
         </div>
-
-        <div class="container latest-post-wrapper">
-          <div class="latest-post">
-            <div hidden$="[[!_latestPosts.0]]">
-              <span class="latest-post-label">Next post</span>
-              <a href$="/blog/posts/[[_latestPosts.0.id]]/"
-                 class="post" cascaded>
-                <iron-image class="image" src="[[_latestPosts.0.image]]"
-                            style$="background-color: [[_latestPosts.0.primaryColor]];" sizing="cover"
-                            preload
-                            fade></iron-image>
-                <div class="title" style$="background-color: [[_latestPosts.0.secondaryColor]];">
-                  [[_latestPosts.0.title]]
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="latest-post">
-            <div hidden$="[[!_latestPosts.1]]">
-              <span class="latest-post-label">Previous post</span>
-              <a href$="/blog/posts/[[_latestPosts.1.id]]/"
-                 class="post" cascaded>
-                <iron-image class="image" src="[[_latestPosts.1.image]]"
-                            style$="background-color: [[_latestPosts.1.primaryColor]];" sizing="cover"
-                            preload
-                            fade></iron-image>
-                <div class="title" style$="background-color: [[_latestPosts.1.secondaryColor]];">
-                  [[_latestPosts.1.title}}
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
 
       <footer-block app="{{app}}" cascaded></footer-block>

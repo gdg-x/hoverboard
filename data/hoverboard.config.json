@@ -43,7 +43,10 @@
       "route": "home",
       "permalink": "/"
     },
-
+    {
+      "route": "blog",
+      "permalink": "/blog/"
+    },
     {
       "route": "team",
       "permalink": "/team/"
@@ -107,6 +110,7 @@
       "title": "Blog",
       "headerSettings": {
         "backgroundColor": "#03a9f4",
+        "backgroundImage": "/images/backgrounds/blog.jpg",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
@@ -130,6 +134,7 @@
     "team": {
       "title": "Team",
       "headerSettings": {
+        "backgroundImage": "/images/backgrounds/team.jpg",
         "backgroundColor": "#009688",
         "fontColor": "#fff",
         "tabBarColor": "#fff"

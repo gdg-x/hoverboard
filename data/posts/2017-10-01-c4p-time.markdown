@@ -1,0 +1,44 @@
+GDG DevFest Berlin 2017 has been announced!
+It will take on **November 3-5** in a sexy city of Berlin.
+
+That means that it is time to open [call for talk submissions](http://bit.ly/df16-c4p).
+If you are passionate about your work and want to share your experience with the tech audience in Berlin, you knocked on the right door.
+
+Do you want to talk about
+
+* Artificial Intelligence
+* Android
+* Cloud
+* Firebase
+* Go
+* Internet of Things
+* VR or
+* Web
+
+then please
+<div class="text-center">
+<a href="http://bit.ly/df16-c4p" target="_blank" class="style-scope header-content" style="color: white; ">
+  <paper-button class="primary style-scope header-content x-scope paper-button-0" raised="" role="button" tabindex="0" animated="" aria-disabled="false" elevation="1">Submit a proposal</paper-button>
+</a>
+</div>
+<br/>
+
+
+If you are not the talking type, you can help out by signing up as **volunteer**.
+<br/>
+<br/>
+<div class="text-center">
+<a href="http://bit.ly/df16-c4p" target="_blank" class="style-scope header-content" style="color: white; ">
+  <paper-button class="primary style-scope header-content x-scope paper-button-0" raised="" role="button" tabindex="0" animated="" aria-disabled="false" elevation="1">Be a volunteer</paper-button>
+</a>
+</div>
+
+<br/>
+See you in November.
+
+**Please note:** There is no guarantee that a submission will be put onto the conference agenda! The program committee picks the most interesting talk proposals and informs the selected submitters.
+
+Any questions? Email organizers at [team@devfest-berlin.de](mailto:team@devfest-berlin.de)
+
+
+
