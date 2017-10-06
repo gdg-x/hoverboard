@@ -1,7 +1,7 @@
 GDG DevFest Berlin 2017 has been announced!
 It will take on **November 3-5** in a sexy city of Berlin.
 
-That means that it is time to open [call for talk submissions](http://bit.ly/df16-c4p).
+That means that it is time to open until 20.10.2017.
 If you are passionate about your work and want to share your experience with the tech audience in Berlin, you knocked on the right door.
 
 Do you want to talk about
@@ -17,7 +17,7 @@ Do you want to talk about
 
 then please
 <div class="text-center">
-<a href="https://goo.gl/forms/VHFMooOzMrvAvaBg2" target="_blank" class="style-scope header-content" style="color: white; ">
+<a href="https://bit.ly/devfestberlin17cfp" target="_blank" class="style-scope header-content" style="color: white; ">
   <paper-button class="primary style-scope header-content x-scope paper-button-0" raised="" role="button" tabindex="0" animated="" aria-disabled="false" elevation="1">Submit a proposal</paper-button>
 </a>
 </div>
@@ -28,7 +28,7 @@ If you are not the talking type, you can help out by signing up as **volunteer**
 <br/>
 <br/>
 <div class="text-center">
-<a href="https://goo.gl/forms/VHFMooOzMrvAvaBg2" target="_blank" class="style-scope header-content" style="color: white; ">
+<a href="#" target="_blank" class="style-scope header-content" style="color: white; ">
   <paper-button class="primary style-scope header-content x-scope paper-button-0" raised="" role="button" tabindex="0" animated="" aria-disabled="false" elevation="1">Be a volunteer</paper-button>
 </a>
 </div>
