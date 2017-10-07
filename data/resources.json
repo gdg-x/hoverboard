@@ -69,23 +69,28 @@
           "newTab": false
         },
         {
-          "text": "GDG Berlin Meetup",
-          "url": "https://www.meetup.com/gdg-berlin/",
-          "newTab": true
-        },
-        {
           "text": "GDG Berlin",
           "url": "http://gdg-berlin.org/",
           "newTab": true
         },
         {
-          "text": "GDG Berlin Android Meetup",
-          "url": "https://www.meetup.com/GDG-Berlin-Android/",
+          "text": "GDG Berlin Android",
+          "url": "http://berlindroid.de/",
           "newTab": true
         },
         {
-          "text": "GDG Berlin Golang Meetup",
+          "text": "GDG Berlin Cloud",
+          "url": "https://www.meetup.com/Cloud-GDG-Berlin/",
+          "newTab": true
+        },
+        {
+          "text": "GDG Berlin Golang",
           "url": "https://www.meetup.com/golang-users-berlin/",
+          "newTab": true
+        },
+        {
+          "text": "Women Techmakers Berlin",
+          "url": "https://www.facebook.com/WomenTechmakersBerlinPage",
           "newTab": true
         },
         {
