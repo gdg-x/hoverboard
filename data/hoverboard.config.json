@@ -16,10 +16,10 @@
     "backgroundColor": "#2196F3"
   },
   "firebase": {
-    "name": "hoverboard-firebase",
-    "domain": "hoverboard-firebase.firebaseapp.com",
-    "database": "https://hoverboard-firebase.firebaseio.com",
-    "api": "AIzaSyDWy6O98n-ueoVaYPWRPve23vjm3JP08gw",
+    "name": "hoverboard-dev",
+    "domain": "hoverboard-dev.firebaseapp.com",
+    "database": "https://hoverboard-dev.firebaseio.com",
+    "api": "AIzaSyBu9LI-hY4NfUOPJJKuV3BfQm7edLr2-aE",
     "userSessionsPath": "/userSessions",
     "ratingsPath": "/ratings",
     "indexedDbSession": "dfua"
