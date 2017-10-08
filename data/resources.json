@@ -1,5 +1,5 @@
 {
-  "title": "GDG DevFest Season 2017",
+  "title": "GDG DevFest Berlin 2017",
   "description": "The Community based Google tech conference carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts to you",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
   "dates": "November 3-5, 2017",
@@ -33,10 +33,10 @@
   "locationDescription": "The internationally renowned Technische Universität Berlin is located in Germany’s capital city at the heart of Europe.",
   "locationAddress": "Straße des 17. Juni 135",
   "organizerTitle": "Organizer",
-  "aboutOrganizers": "Organisers of this event are _GDG Android_ and _Women Techmakers Berlin_.",
-  "openTeamPage": "Open team page",
+  "aboutOrganizers": "This community-driven developer event is organized by members of the various Google Developer Groups in Berlin.",
+  "openTeamPage": "Visit the team page to learn more",
   "whatIsGdg": "What is GDG?",
-  "aboutGdg": "<b>Google Developers Group (GDG)</b> - is a open group of people who use technologies & software developed by Google. <br/>It is composed of 2 sub-groups:<br/>• [**GDG Berlin**](http://gdg-berlin.org/) <br/>• [**Women Techmakers Berlin**](https://www.facebook.com/WomenTechmakersBerlinPage)",
+  "aboutGdg": "<p><b>Google Developers Group (GDG)</b> - is a open group of people who use technologies & software developed by Google.</p><p>In Berlin the following groups exist:</p><ul><li>[GDG Berlin](http://gdg-berlin.org/)</li><li>[GDG Berlin Android](http://berlindroid.de/)</li><li>[GDG Berlin Cloud](https://www.meetup.com/Cloud-GDG-Berlin/)</li><li>[GDG Berlin Golang](https://www.meetup.com/golang-users-berlin/)</li><li>[Women Techmakers Berlin](https://www.facebook.com/WomenTechmakersBerlinPage)</li></ul>",
   "readMore": "Read more",
   "copyLink": "Copy link",
   "filteredBy": "filtered by",
@@ -69,23 +69,28 @@
           "newTab": false
         },
         {
-          "text": "GDG Berlin Meetup",
-          "url": "https://www.meetup.com/gdg-berlin/",
-          "newTab": true
-        },
-        {
           "text": "GDG Berlin",
           "url": "http://gdg-berlin.org/",
           "newTab": true
         },
         {
-          "text": "GDG Berlin Android Meetup",
-          "url": "https://www.meetup.com/GDG-Berlin-Android/",
+          "text": "GDG Berlin Android",
+          "url": "http://berlindroid.de/",
           "newTab": true
         },
         {
-          "text": "GDG Berlin Golang Meetup",
+          "text": "GDG Berlin Cloud",
+          "url": "https://www.meetup.com/Cloud-GDG-Berlin/",
+          "newTab": true
+        },
+        {
+          "text": "GDG Berlin Golang",
           "url": "https://www.meetup.com/golang-users-berlin/",
+          "newTab": true
+        },
+        {
+          "text": "Women Techmakers Berlin",
+          "url": "https://www.facebook.com/WomenTechmakersBerlinPage",
           "newTab": true
         },
         {
