@@ -1,8 +1,6 @@
-GDG DevFest Berlin 2017 has been announced!
-It will take on **November 3-5** in a sexy city of Berlin.
+GDG DevFest Berlin 2017 will take place on **November 3-5**.
 
-That means that it is time to open until 20.10.2017.
-If you are passionate about your work and want to share your experience with the tech audience in Berlin, you knocked on the right door.
+That means it's time to open the *Call for Participation*. If you are passionate about a topic and want to share your experience with the tech audience in Berlin, you found the right place.
 
 Do you want to talk about
 
@@ -12,33 +10,25 @@ Do you want to talk about
 * Firebase
 * Go
 * Internet of Things
-* VR or
+* Virtual Reality, or any of the other realities (Augmented Reality, Mixed Reality)
 * Web
+* something we forgot to put on this list?
 
-then please
+Then please
 <div class="text-center">
 <a href="https://bit.ly/devfestberlin17cfp" target="_blank" class="style-scope header-content" style="color: white; ">
   <paper-button class="primary style-scope header-content x-scope paper-button-0" raised="" role="button" tabindex="0" animated="" aria-disabled="false" elevation="1">Submit a proposal</paper-button>
 </a>
 </div>
-<br/>
 
+**Submission deadline is 2017-10-20.**
 
-If you are not the talking type, you can help out by signing up as **volunteer**.
-<br/>
-<br/>
-<div class="text-center">
-<a href="#" target="_blank" class="style-scope header-content" style="color: white; ">
-  <paper-button class="primary style-scope header-content x-scope paper-button-0" raised="" role="button" tabindex="0" animated="" aria-disabled="false" elevation="1">Be a volunteer</paper-button>
-</a>
-</div>
-
-<br/>
+<br>
 See you in November.
 
-**Please note:** There is no guarantee that a submission will be put onto the conference agenda! The program committee picks the most interesting talk proposals and informs the selected submitters.
+**Please note:** There is no guarantee that a submission will be put onto the conference agenda! The program committee will pick the most interesting talk proposals and will inform all submitters until 2017-10-23.
 
-Any questions? Email organizers at [team@devfest-berlin.de](mailto:team@devfest-berlin.de)
+Any questions? Email the organizers at [team@devfest-berlin.de](mailto:team@devfest-berlin.de)
 
 
 
