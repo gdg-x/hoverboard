@@ -169,5 +169,23 @@
     "secondaryColor": "#FF3D00",
     "image": "/images/posts/ngGirls.jpg",
     "brief": "Are you a woman, interested in learning how to build web applications with the latest technologies?"
+  },
+  {
+    "id": "shmuela-interview",
+    "title": "Interview with Shmuela Jacobs",
+    "posted": "2017-10-10",
+    "primaryColor": "#C2185B",
+    "secondaryColor": "#E91E63",
+    "image": "/images/posts/interview-shmuela.png",
+    "brief": "The world of opportunities in programming was discovered to me in a relatively late stage. But I was lucky to be exposed to programming again and again..."
+  },  
+  {
+    "id": "graphene-sponsor-toptal",
+    "title": "Welcome our Graphene sponsor - Toptal!",
+    "posted": "2017-10-10",
+    "primaryColor": "#01579B",
+    "secondaryColor": "#01579B",
+    "image": "/images/posts/toptal.jpg",
+    "brief": "Toptal connects the world’s best organizations with the world’s top talent. We are a network of senior software engineers, designers..."
   }
 ]
