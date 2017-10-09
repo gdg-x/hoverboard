@@ -5,7 +5,7 @@ const admin = require('firebase-admin');
 
 admin.initializeApp(functions.config().firebase);
 
-// exports.saveUserData = require('./users');
+exports.saveUserData = require('./users');
 
 const scheduleGenerator = require('./schedule-generator-helper.js').generateSchedule;
 
