@@ -114,6 +114,7 @@
 
      paper-button {
         text-transform: none;
+        background: #0288d1;
       }
 
       a {
@@ -282,6 +283,16 @@
             type: Array,
             value: [],
             notify: true
+          },
+
+          showPopupForAuthenticatedUser: {
+            type: Boolean,
+            value: false
+          },
+
+          sessionsChangedCount: {
+            type: Number,
+            value: 0
           }
         },
 
@@ -289,6 +300,11 @@
           'iron-select': '_refreshFiltersLabel',
           'iron-deselect': '_refreshFiltersLabel'
         },
+
+        observers: [
+          '_selectedDayChanged(app.user, selectedDay)',
+          '_userChanged(app.user, app.user.sessions)'
+        ],
 
         attached: function () {
           this._target = this.$.filtersMenuToggle;
@@ -317,6 +333,52 @@
           Array.prototype.forEach.call(checkboxes, function (checkbox) {
             checkbox.checked = false;
           });
+        },
+
+        _userChanged: function(user, userSessions) {      
+
+          // user's sessions object is filled after 2nd call of observer
+          this.sessionsChangedCount ++;
+
+          if (!this.showPopupForAuthenticatedUser ||
+              this.sessionsChangedCount <= 1 ||
+              !this._shouldOpenMySchedulePopup(this.selectedDay)) {
+              return;
+            }
+
+          if (!Object.keys(userSessions).length) {
+            this._showMySchedulePopup('{$ mySchedulePopup.infoTextAuthenticated $}');
+            this.showPopupForAuthenticatedUser = false;  
+          }
+          else {
+            window.localStorage.setItem('mySchedulePopupShown', 'true');
+          }
+        },
+
+        _selectedDayChanged: function(user, selectedDay) {   
+           if (!this._shouldOpenMySchedulePopup(selectedDay)) { 
+              window.localStorage.setItem('mySchedulePopupShown', 'true');
+              return;
+           }
+
+           if (user) {
+             this.showPopupForAuthenticatedUser = true;
+           }
+           else {
+            this._showMySchedulePopup();            
+            window.localStorage.setItem('mySchedulePopupShown', 'true');
+           }
+        },
+
+        _shouldOpenMySchedulePopup: function(selectedDay) {
+          return !window.localStorage.getItem('mySchedulePopupShown') && !this._isMySchedulePage(selectedDay);
+        },
+
+        _showMySchedulePopup: function(infoText) {
+            HOVERBOARD.Elements.Template.$.infoDialog.headerText = '{$ mySchedulePopup.headerText $}';
+            HOVERBOARD.Elements.Template.$.infoDialog.ctaButtonText = '{$ mySchedulePopup.ctaButtonText $}';
+            HOVERBOARD.Elements.Template.$.infoDialog.infoText = infoText || '{$ mySchedulePopup.infoText $}';   
+            HOVERBOARD.Elements.Template.$.infoDialog.open();
         },
 
         _isChecked: function (tag) {
@@ -374,6 +436,7 @@
         },
 
         _getDayLabel: function (selectedDay, days) {
+
           if (!days || !days.length || this._isMySchedulePage(selectedDay)) return;
 
           var index = Number(selectedDay.match(/\d+/)[0]) || 1;

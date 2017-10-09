@@ -183,5 +183,11 @@
     "headerText": "Capacity for this workshop is limited.",
     "infoText": "Session seats will be distributed on first-come, first-served basis.",
     "ctaButtonText": "Got it"
+  },
+  "mySchedulePopup": {
+    "headerText": "⚡ Introducing MY SCHEDULE ⚡",
+    "infoText": "Sign in and add your favorite sessions to your personal schedule to not miss a thing!",
+    "infoTextAuthenticated": "Add your favorite sessions to your personal schedule and don't miss a thing!",
+    "ctaButtonText": "Got it"
   }
 }
