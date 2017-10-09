@@ -335,50 +335,50 @@
           });
         },
 
-        _userChanged: function(user, userSessions) {         
+        _userChanged: function(user, userSessions) {      
 
+          // user's sessions object is filled after 2nd call of observer
           this.sessionsChangedCount ++;
 
-          if (!this.showPopupForAuthenticatedUser || this.sessionsChangedCount <= 1) {
-            return;
-          }
+          if (!this.showPopupForAuthenticatedUser ||
+              this.sessionsChangedCount <= 1 ||
+              !this._shouldOpenMySchedulePopup(this.selectedDay)) {
+              return;
+            }
 
           if (!Object.keys(userSessions).length) {
-
-            HOVERBOARD.Elements.Template.$.infoDialog.headerText = '{$ mySchedulePopup.headerText $}';
-            HOVERBOARD.Elements.Template.$.infoDialog.ctaButtonText = '{$ mySchedulePopup.ctaButtonText $}';
-            HOVERBOARD.Elements.Template.$.infoDialog.infoText = '{$ mySchedulePopup.infoTextAuthenticated $}'; 
-
-            HOVERBOARD.Elements.Template.$.infoDialog.open();            
+            this._showMySchedulePopup('{$ mySchedulePopup.infoTextAuthenticated $}');
+            this.showPopupForAuthenticatedUser = false;  
           }
           else {
-            localStorage.setItem('mySchedulePopupShown', 'true');
+            window.localStorage.setItem('mySchedulePopupShown', 'true');
           }
         },
 
         _selectedDayChanged: function(user, selectedDay) {   
-           if (!this._showMySchedulePopup(selectedDay)) { 
-            localStorage.setItem('mySchedulePopupShown', 'true');
-            return;
+           if (!this._shouldOpenMySchedulePopup(selectedDay)) { 
+              window.localStorage.setItem('mySchedulePopupShown', 'true');
+              return;
            }
 
            if (user) {
              this.showPopupForAuthenticatedUser = true;
            }
            else {
-            HOVERBOARD.Elements.Template.$.infoDialog.headerText = '{$ mySchedulePopup.headerText $}';
-            HOVERBOARD.Elements.Template.$.infoDialog.ctaButtonText = '{$ mySchedulePopup.ctaButtonText $}';
-            HOVERBOARD.Elements.Template.$.infoDialog.infoText = '{$ mySchedulePopup.infoText $}';
-
-            HOVERBOARD.Elements.Template.$.infoDialog.open();
-            
-            localStorage.setItem('mySchedulePopupShown', 'true');
+            this._showMySchedulePopup();            
+            window.localStorage.setItem('mySchedulePopupShown', 'true');
            }
         },
 
-        _showMySchedulePopup: function(selectedDay) {
-          return !window.localStorage.getItem('mySchedulePopupShown') &&
-                  selectedDay && !this._isMySchedulePage(selectedDay);
+        _shouldOpenMySchedulePopup: function(selectedDay) {
+          return !window.localStorage.getItem('mySchedulePopupShown') && !this._isMySchedulePage(selectedDay);
+        },
+
+        _showMySchedulePopup: function(infoText) {
+            HOVERBOARD.Elements.Template.$.infoDialog.headerText = '{$ mySchedulePopup.headerText $}';
+            HOVERBOARD.Elements.Template.$.infoDialog.ctaButtonText = '{$ mySchedulePopup.ctaButtonText $}';
+            HOVERBOARD.Elements.Template.$.infoDialog.infoText = infoText || '{$ mySchedulePopup.infoText $}';   
+            HOVERBOARD.Elements.Template.$.infoDialog.open();
         },
 
         _isChecked: function (tag) {
