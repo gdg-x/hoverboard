@@ -14,7 +14,8 @@ addons:
     packages:
     - g++-4.8
 install:
-- npm install
+- yarn
+- cd functions && yarn && cd ..
 script: echo "Deploying!"
 before_deploy: npm run build
 deploy:
