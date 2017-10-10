@@ -12,7 +12,8 @@
     "src/pages/hub-page.html",
     "src/pages/quest-page.html",
     "src/pages/gdd-page.html",
-    "src/pages/faq-page.html"
+    "src/pages/faq-page.html",
+    "src/pages/quest-page.html"
   ],
   "sources": [
     "data/**/*",

@@ -205,6 +205,15 @@
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
+    },
+    "quest": {
+      "title": "GDG Quest",
+      "headerSettings": {
+        "backgroundColor": "#EF6C00",
+        "backgroundImage": "/images/backgrounds/quest.jpg",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
     }
   }
 }

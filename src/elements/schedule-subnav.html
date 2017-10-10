@@ -378,7 +378,8 @@
         _showMySchedulePopup: function(infoText) {
             HOVERBOARD.Elements.Template.$.infoDialog.headerText = '{$ mySchedulePopup.headerText $}';
             HOVERBOARD.Elements.Template.$.infoDialog.ctaButtonText = '{$ mySchedulePopup.ctaButtonText $}';
-            HOVERBOARD.Elements.Template.$.infoDialog.infoText = infoText || '{$ mySchedulePopup.infoText $}';   
+            HOVERBOARD.Elements.Template.$.infoDialog.infoText = infoText || '{$ mySchedulePopup.infoText $}';
+            HOVERBOARD.Elements.Template.$.infoDialog.displayImage = true;   
             HOVERBOARD.Elements.Template.$.infoDialog.open();
         },
 

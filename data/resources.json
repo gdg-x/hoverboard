@@ -67,6 +67,7 @@
   "view": "View",
   "highlights": "Highlights",
   "subscribeForUpdates": "Get notified about the conference updates",
+  "quest": "GDG Quest",
 
   "footerBlocks": [
     {
@@ -187,7 +188,7 @@
   "mySchedulePopup": {
     "headerText": "⚡ Introducing MY SCHEDULE ⚡",
     "infoText": "Sign in and add your favorite sessions to your personal schedule to not miss a thing!",
-    "infoTextAuthenticated": "Add your favorite sessions to your personal schedule and don't miss a thing!",
+    "infoTextAuthenticated": "Add your favorite sessions to your personal schedule to not miss a thing!",
     "ctaButtonText": "Got it"
   }
 }

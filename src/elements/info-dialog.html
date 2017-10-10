@@ -47,6 +47,16 @@
         float: right;
       }
 
+      img[displayed] {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+      }
+
+      img {
+        display: none;
+      }
+
       @media (min-width: 601px) {
         h3 {
           font-size: 24px;
@@ -64,6 +74,8 @@
       <h3>[[headerText]]</h3>
     </div>
     <p>[[infoText]]</p>
+    <img displayed$="[[displayImage]]" src="/images/my-schedule.png">
+
     <paper-button class="cta-button" on-tap="close">[[ctaButtonText]]</paper-button>
   </template>
 
@@ -89,6 +101,10 @@
           },
           ctaButtonText: {
             type: String
+          },
+          displayImage: {
+            type: Boolean,
+            notify: true
           }
         },
 
