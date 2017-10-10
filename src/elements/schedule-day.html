@@ -118,6 +118,10 @@
       Polymer({
 
         is: 'schedule-day',
+        
+        attached: function() {
+          this.set('rendered', true);
+        },
 
         behaviors: [
           HOVERBOARD.CascadedBehavior,
@@ -142,6 +146,11 @@
           filters: {
             type: Array,
             value: []
+          },
+          rendered: {
+            type: Boolean,
+            value: false,
+            notify: true
           }
         },
 

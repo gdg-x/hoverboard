@@ -41,7 +41,8 @@
     "paper-tooltip": "PolymerElements/paper-tooltip#^1.1.0",
     "polymer": "Polymer/polymer#^1.9.0",
     "polymerfire": "firebase/polymerfire#^0.10.0",
-    "time-elements": "github/time-elements#^0.6.0"
+    "time-elements": "github/time-elements#^0.6.0",
+    "paper-progress": "PolymerElements/paper-progress#1.x"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^4.3.0"

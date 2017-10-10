@@ -11,6 +11,7 @@
 <link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
 
 <link rel="import" href="../../bower_components/polymerfire/firebase-document.html">
+<link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
 
 <link rel="import" href="../elements/schedule-subnav.html">
 <link rel="import" href="../elements/schedule-day.html">
@@ -38,6 +39,12 @@
 
       schedule-day {
         margin-bottom: 64px;
+      }      
+
+      paper-progress {
+        width: 100%;
+        --paper-progress-active-color: var(--default-primary-color);
+        --paper-progress-secondary-color: var(--default-primary-color);
       }
     </style>
 
@@ -69,7 +76,9 @@
         tags="[[schedule.tags]]"
         selected-day="[[app.selectedDay]]"
         filters="{{filters}}"
-      ></schedule-subnav>
+      ></schedule-subnav>      
+
+      <paper-progress id="progressBar" indeterminate></paper-progress>
 
       <neon-animated-pages selected="[[app.selectedDay]]" attr-for-selected="name">
         <template is="dom-repeat" items="[[schedule.days]]" as="day" on-dom-change="updateCascadedNodes">
@@ -77,6 +86,7 @@
             name$="day[[_addToValue(index, 1)]]"
             app="{{app}}"
             day="[[day]]"
+            rendered="{{scheduleRendered}}"
             filters="[[filters]]"
           ></schedule-day>
         </template>
@@ -135,6 +145,12 @@
 
           filters: {
             type: Array
+          },    
+
+          scheduleRendered: {
+            type: Boolean,
+            value: false,
+            notify: true
           }
         },
 
@@ -142,11 +158,18 @@
           '_routePageChanged(routeData.day)',
           '_userChanged(app.user)',
           '_queryParamsChanged(queryParams, sessions)',
-          '_filtersChanged(filters.splices)'
+          '_filtersChanged(filters.splices)',
+          '_scheduleRenderedChanged(scheduleRendered)'
         ],
 
         listeners: {
           'iron-overlay-closed': '_resetSessionIdParam'
+        },
+
+        _scheduleRenderedChanged: function (scheduleRendered) {
+          if (scheduleRendered) {
+            this.$.progressBar.remove();
+          }
         },
 
         _routePageChanged: function (day) {
