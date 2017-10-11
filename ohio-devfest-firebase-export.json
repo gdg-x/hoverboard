@@ -8,6 +8,13 @@
     "title" : "Event Partner"
   }, {
     "logos" : [ {
+      "logoUrl" : "../images/logos/kroger.png",
+      "name" : "Kroger Technology",
+      "url" : "https://www.kroger.com/LiveKT/"
+    } ],
+    "title" : "Gold Partner"
+  }, {
+    "logos" : [ {
       "logoUrl" : "../images/logos/illumination-works.png",
       "name" : "Illumination Works",
       "url" : "http://www.illuminationworksllc.com/"
@@ -49,7 +56,7 @@
         "name" : "Twitter"
       } ]
     }, {
-      "bio" : "Benjamin Baxter grew up in Cincinnati and moved to San Jose, California. He has been developing with Android since 🍩 (how far we have come). He worked at Kroger on their Android App before leaving to join Google to work on Android TV Developer Relations. 📺 For a cheese coney (Oh how he misses those 🌭), I will gladly talk Android with you. 😀 ",
+      "bio" : "Benjamin Baxter grew up in Cincinnati and moved to San Jose, California. He has been developing with Android since 🍩 (how far we have come). He worked at Kroger on their Android App before leaving to join Google to work on Android TV Developer Relations. 📺 For a cheese coney (Oh how he misses those 🌭), he will gladly talk Android with you. 😀 ",
       "company" : "Google",
       "companyLogo" : "/images/logos/google.svg",
       "country" : "San Jose, CA",
