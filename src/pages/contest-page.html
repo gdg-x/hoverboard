@@ -1,0 +1,237 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-material/paper-material.html">
+
+<link rel="import" href="../../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+
+<link rel="import" href="../behaviors/utils-behavior.html">
+<link rel="import" href="../elements/footer-block.html">
+
+
+
+<dom-module id="contest-page">
+
+  <template>
+
+    <style include="shared-styles">
+       :host {
+        display: block;
+      }
+
+      .header {
+        margin-bottom: 20px;
+      }
+
+      .paper-card-container {
+        padding: 16px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      paper-card {
+        background-color: #ffffff;        
+        padding: 40px;
+      }
+
+      .card-content {
+        padding: 16px;
+      }
+
+      td {
+        padding: 5px 20px;
+      }
+
+
+      @media (max-width: 676px) {
+
+        paper-card,
+        .paper-card-container {
+         width: 100%;  
+        }
+
+        paper-card {       
+         padding: 20px;
+        }
+
+        td {
+          padding: 5px 10px;
+        }
+
+      }
+    </style>
+
+    <div class="container">
+      <div class="layout" layout horizontal center-center>
+          <paper-card cascaded>
+            <div class="paper-card-container">
+
+              <div class="header">
+                  <i>Try your luck and win cool prizes from #dfua's partners!</i>
+              </div>
+
+              <table class="tg">
+                <tr>
+                  <td class="tg-yw4l"><b>Company</b></td>
+                  <td class="tg-yw4l"><b>Friday (13.10)</b></td>
+                  <td class="tg-yw4l"><b>Saturday (14.10)</b></td>
+                </tr>
+                <tr>
+                  <td class="tg-yw4l">Perfectial</td>
+                  <td class="tg-yw4l">15:40</td>
+                  <td class="tg-yw4l">12:45</td>
+                </tr>
+                <tr>
+                  <td class="tg-yw4l">Levi9</td>
+                  <td class="tg-yw4l">13:50</td>
+                  <td class="tg-yw4l">15:40</td>
+                </tr>
+                <tr>
+                  <td class="tg-yw4l">GL</td>
+                  <td class="tg-yw4l">16:40</td>
+                  <td class="tg-yw4l">15:50</td>
+                </tr>
+                <tr>
+                  <td class="tg-yw4l">N-iX</td>
+                  <td class="tg-yw4l">-</td>
+                  <td class="tg-yw4l">13:00</td>
+                </tr>
+                <tr>
+                  <td class="tg-yw4l">Symphony Solutions</td>
+                  <td class="tg-yw4l">15:45</td>
+                  <td class="tg-yw4l">15:45</td>
+                </tr>
+                <tr>
+                  <td class="tg-yw4l">TeamTechnologies</td>
+                  <td class="tg-yw4l">-</td>
+                  <td class="tg-yw4l">13:10</td>
+                </tr>
+                <tr>
+                  <td class="tg-yw4l">CoreValue</td>
+                  <td class="tg-yw4l">17:30</td>
+                  <td class="tg-yw4l">13:40</td>
+                </tr>
+                <tr>
+                  <td class="tg-yw4l">TechMagic</td>
+                  <td class="tg-yw4l">-</td>
+                  <td class="tg-yw4l">13:30</td>
+                </tr>
+                <tr>
+                  <td class="tg-yw4l">DataArt</td>
+                  <td class="tg-yw4l">15:50</td>
+                  <td class="tg-yw4l">13:50</td>
+                </tr>                
+                <tr>
+                    <td class="tg-yw4l">Shulga Massage</td>
+                    <td class="tg-yw4l">16:30</td>
+                    <td class="tg-yw4l">16:30</td>
+                  </tr>
+              </table>
+
+            </div>
+          </paper-card>
+      </div>
+    </div>
+    <footer-block app="{{app}}"></footer-block>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'contest-page',
+        
+                behaviors: [
+                  Polymer.NeonSharedElementAnimatableBehavior,
+                  HOVERBOARD.UtilsBehavior
+                ],
+        
+                properties: {
+                  app: {
+                    type: Object
+                  },
+                  team: {
+                    type: Object
+                  },
+                  selected: {
+                    type: Boolean,
+                    observer: 'updateHeaderSettings'
+                  },
+                  headerSettings: {
+                    type: Object,
+                    notify: true
+                  },
+                  _headerSettings: {
+                    type: Object,
+                    value: function () {
+                      return {
+                        backgroundImage: '/images/backgrounds/hub.jpg',
+                        backgroundColor: '#FF5722',
+                        fontColor: '#fff',
+                        tabBarColor: '#fff'
+                      };
+                    }
+                  },
+        
+                  animationConfig: {
+                    type: Object,
+                    value: function () {
+                      return {
+                        'entry': [{
+                          name: 'fade-in-animation',
+                          animation: 'fade-in-animation',
+                          node: this,
+                          timing: {
+                            delay: 500
+                          }
+                        }],
+                        'exit': [{
+                          name: 'fade-out-animation',
+                          animation: 'fade-out-animation',
+                          node: this
+                        }]
+                      };
+                    }
+                  }
+                },
+        
+                updateHeaderSettings: function () {
+                  this.headerSettings = this.selected ? this._headerSettings : this.headerSettings;
+                },
+        
+                _updateCascadedNodes: function () {
+                  var cascaded = Polymer.dom(this.root).querySelectorAll('[cascaded]');
+                  var cascadedArray = Array.prototype.slice.call(cascaded);
+                  this.animationConfig.entry.push({
+                    name: 'cascaded-animation',
+                    animation: 'transform-animation',
+                    transformFrom: 'translate3d(0, 100%, 0)',
+                    timing: {
+                      delay: 500
+                    },
+                    nodes: cascadedArray
+                  });
+                  this.animationConfig.exit.push({
+                    name: 'cascaded-animation',
+                    animation: 'transform-animation',
+                    transformTo: 'translate3d(0, 100%, 0)',
+                    nodes: cascadedArray
+                  });
+                }
+        
+              });
+        
+
+    })();
+  </script>
+
+</dom-module>

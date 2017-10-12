@@ -214,6 +214,14 @@
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
+    },
+    "contest": {
+      "title": "Partners' Contest Schedule",
+      "headerSettings": {
+        "backgroundColor": "#EF6C00",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
     }
   }
 }
