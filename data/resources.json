@@ -36,7 +36,7 @@
   "aboutOrganizers": "This community-driven developer event is organized by members of the various Google Developer Groups in Berlin.",
   "openTeamPage": "Visit the team page to learn more",
   "whatIsGdg": "What is GDG?",
-  "aboutGdg": "<p><b>Google Developers Group (GDG)</b> - is a open group of people who use technologies & software developed by Google.</p><p>In Berlin the following groups exist:</p><ul><li>[GDG Berlin](http://gdg-berlin.org/)</li><li>[GDG Berlin Android](http://berlindroid.de/)</li><li>[GDG Berlin Cloud](https://www.meetup.com/Cloud-GDG-Berlin/)</li><li>[GDG Berlin Golang](https://www.meetup.com/golang-users-berlin/)</li><li>[Women Techmakers Berlin](https://www.wtmberlin.com/)</li></ul>",
+  "aboutGdg": "<p><b>Google Developers Group (GDG)</b> - is a open group of people who use technologies & software developed by Google.</p><p>In Berlin the following groups exist:</p><ul><li>[GDG Berlin](http://gdg-berlin.org/)</li><li>[GDG Berlin Android](http://berlindroid.de/)</li><li>[GDG Berlin Cloud](https://www.meetup.com/Cloud-GDG-Berlin/)</li><li>[GDG Berlin Golang](https://www.meetup.com/golang-users-berlin/)</li><li>[Women Techmakers Berlin](http://www.wtmberlin.com/)</li></ul>",
   "readMore": "Read more",
   "copyLink": "Copy link",
   "filteredBy": "filtered by",
@@ -90,7 +90,7 @@
         },
         {
           "text": "Women Techmakers Berlin",
-          "url": "https://www.wtmberlin.com",
+          "url": "http://www.wtmberlin.com",
           "newTab": true
         },
         {
