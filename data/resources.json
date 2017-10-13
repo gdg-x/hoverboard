@@ -90,7 +90,7 @@
         },
         {
           "text": "Women Techmakers Berlin",
-          "url": "https://www.facebook.com/WomenTechmakersBerlinPage",
+          "url": "https://www.wtmberlin.com",
           "newTab": true
         },
         {
@@ -103,6 +103,11 @@
     {
       "title": "Previous DevFests",
       "links": [
+              {
+          "text": "GDG DevFest Berlin 2013",
+          "url": "https://2013.devfest-berlin.de",
+          "newTab": true
+        },
         {
           "text": "GDG DevFest Berlin 2014",
           "url": "https://2014.devfest-berlin.de",
