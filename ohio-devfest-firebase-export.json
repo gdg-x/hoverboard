@@ -19,9 +19,13 @@
       "name" : "Illumination Works",
       "url" : "http://www.illuminationworksllc.com/"
     }, {
-      "logoUrl" : "../images/logos/callibrity.png",
+      "logoUrl" : "../images/logos/callibrity.svg",
       "name" : "Callibrity",
       "url" : "http://www.callibrity.com/"
+    }, {
+      "logoUrl" : "../images/logos/AWH.svg",
+      "name" : "AWH",
+      "url" : "http://awh.net/"
     } ],
     "title" : "Silver Partner"
   }, {
