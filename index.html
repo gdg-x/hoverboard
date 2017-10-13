@@ -63,15 +63,9 @@
   <meta name="twitter:description" content="{$ description $}">
   <!--<meta name="twitter:image" content="/images/social-share.jpg">-->
 
-  <link rel="dns-prefetch" href="https://www.google-analytics.com">
   <link rel="dns-prefetch" href="https://apis.google.com">
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- Unsupported browser checks need to come before webcomponents.js is loaded,
-       otherwise unsupported browsers will error out and not record a pageview.
-       Analytics lib is also loaded up front for error reporting. -->
-  <script src="https://www.google-analytics.com/analytics.js" async></script>
 
   <style>
 
@@ -93,34 +87,6 @@
 
     // setup Polymer options
     window.Polymer = {lazyRegister: true, dom: 'shadow'};
-
-    // Initializes the analytics.js command queue.
-    window.ga = window.ga || function () {
-        (ga.q = ga.q || []).push(arguments)
-      };
-    ga.l = +new Date;
-
-    // Creates the tracker.
-    ga('create', {
-      trackingId: window.ENV === 'prod' ? '{$ analytics.prod $}' : '{$ analytics.dev $}',
-      cookieDomain: 'auto',
-      cookiePath: window.ENV !== 'dev' ? window.PREFIX || '/' : null,
-      siteSpeedSampleRate: 10 // 10% of users.
-    });
-
-    // Setup error tracking before anything else runs.
-    window.onerror = function (message, file, lineNumber, columnNumber, error) {
-      // We don't want to trigger any errors inside window.onerror, so wrap in a try/catch.
-      try {
-        // Some browsers don't support error param yet.
-        if (error !== undefined) {
-          message = error.stack;
-        }
-        ga('send', 'event', 'error', file + ':' + lineNumber, message);
-      } catch (e) {
-        // no-op
-      }
-    };
 
   </script>
 
