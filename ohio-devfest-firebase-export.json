@@ -8,7 +8,7 @@
     "title" : "Event Partner"
   }, {
     "logos" : [ {
-      "logoUrl" : "../images/logos/kroger.png",
+      "logoUrl" : "../images/logos/kroger-technology.svg",
       "name" : "Kroger Technology",
       "url" : "https://www.kroger.com/LiveKT/"
     } ],
@@ -37,22 +37,21 @@
     "title" : "Organizers"
   } ],
   "speakers" : [ null, {
-      "bio" : "Martin Omander works for Google in Mountain View, California. His job in the Developer Relations team is to support awesome developer communities, like the Google Developer Groups. On his spare time he manages to sneak in some programming, usually writing HTML5 apps running on top of Firebase. Before Google, Martin worked at string of startups in Silicon Valley as a software engineer.",
-      "company" : "Google",
-      "companyLogo" : "/images/logos/google.svg",
-      "country" : "Mountain View, CA",
+      "bio" : "An experienced developer, start-up founder, and international speaker, Abraham Williams brings a broad range of skills to his current role as a senior developer at Bendyworks. A top 1% contributor at Stack Overflow and an active member of Google Developer Groups, Abraham has been recognized by Google as a Developer Expert for his ability to identify technology problems and provide quality solutions in the community.",
+      "company" : "Bendyworks",
+      "country" : "Madison, WI",
       "featured" : true,
       "id" : 1,
-      "name" : "Martin Omander",
-      "photoUrl" : "/images/people/martin_omander.jpg",
-      "shortBio" : "Martin Omander works for Google in Mountain View, California. His job in the Developer Relations team is to support awesome developer communities, like the Google Developer Groups...",
+      "name" : "Abraham Williams",
+      "photoUrl" : "/images/people/abraham_williams.jpg",
+      "shortBio" : "An experienced developer, start-up founder, and international speaker, Abraham Williams brings a broad range of skills to his current role as a senior developer at Bendyworks...",
       "socials" : [ {
         "icon" : "gplus",
-        "link" : "https://plus.google.com/+MartinOmander",
+        "link" : "https://plus.google.com/114233674199568482864",
         "name" : "Google Plus"
       }, {
         "icon" : "twitter",
-        "link" : "https://twitter.com/martinomander",
+        "link" : "https://twitter.com/abraham",
         "name" : "Twitter"
       } ]
     }, {
@@ -254,11 +253,11 @@
   "sessions" : {
     "100" : {
       "complexity" : "",
-      "description" : "TBD",
+      "description" : "Let your users be the voice talent with Actions on Google. Learn how to design, develop, and distribute rich conversational experiences with Node.js. We’ll show you how to approach voice-driven, natural language interactions with Dialogflow’s powerful bot platform.",
       "id" : 100,
-      "speakers" : [ ],
-      "tags" : [ "General" ],
-      "title" : "TBD"
+      "speakers" : [ 1 ],
+      "tags" : [ "Actions on Google", "JavaScript" ],
+      "title" : "Get talking with Actions on Google"
     },
     "101" : {
       "complexity" : "Intermediate",
@@ -400,7 +399,7 @@
       "complexity" : "Beginner",
       "description" : "Hands on coding lab for Actions on Google. More details to come!",
       "id" : 203,
-      "speakers" : [ ],
+      "speakers" : [ 1 ],
       "tags" : [ "Actions on Google", "Code Lab", "Google Assistant", "Android" ],
       "title" : "Actions on Google Code Lab"
     },
@@ -408,7 +407,7 @@
       "complexity" : "Beginner",
       "description" : "Hands on coding lab for Actions on Google. More details to come!",
       "id" : 203,
-      "speakers" : [ ],
+      "speakers" : [ 1 ],
       "tags" : [ "Actions on Google", "Code Lab", "Google Assistant", "Android" ],
       "title" : "Actions on Google Code Lab (continued)"
     },
