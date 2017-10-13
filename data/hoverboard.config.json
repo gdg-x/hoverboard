@@ -1,10 +1,10 @@
 {
-  "url": "https://hoverboard.firebaseapp.com/",
-  "startDate": "2016-09-09T09:00:00+03:00",
-  "endDate": "2016-09-10T19:00:00+03:00",
+  "url": "https://2017.devfest-berlin.de/",
+  "startDate": "2017-11-03T14:00:00+02:00",
+  "endDate": "2017-11-05T20:00:00+02:00",
   "analytics": {
-    "prod": "UA-43643469-8",
-    "dev": "UA-43643469-9"
+    "prod": null,
+    "dev": null
   },
   "organizer": {
     "name": "GDG Berlin",
@@ -25,19 +25,19 @@
     "indexedDbSession": "hoverboard"
   },
   "mailchimp": {
-    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
-    "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
+    "url": null,
+    "name": null
   },
   "dateFormat": {
     "locale": "en-US",
     "blog": {"month": "short", "day": "numeric", "year": "numeric"}
   },
   "hashtag": "DevFest17",
-  "disqusShortName": "hoverboard-gdg-x",
+  "disqusShortName": null,
   "tweetsSource": "/data/tweets.json",
-  "partnershipProposition": "http://bit.ly/df16-sponsor",
-  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
-  "enableSessionsRating": true,
+  "partnershipProposition": null,
+  "videosSessionsUrl": null,
+  "enableSessionsRating": false,
   "navigation": [
     {
       "route": "home",
@@ -141,7 +141,7 @@
       }
     },
     "cod": {
-      "title": "Cod of Conduct",
+      "title": "Code of Conduct",
       "headerSettings": {
         "backgroundColor": "#673ab7",
         "fontColor": "#fff",
