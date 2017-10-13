@@ -31,7 +31,7 @@
 
       .start-time {
         padding-left: 24px;
-        min-width: 110px;
+        min-width: 140px;
         color: var(--secondary-text-color);
       }
 
@@ -43,7 +43,7 @@
 
       .minutes {
         margin-left: 3px;
-        font-size: 16px;
+        font-size: 26px;
       }
 
       .session {
@@ -65,8 +65,8 @@
       <div class="timeslot" layout vertical$="{{app.isPhoneSize}}" horizontal$="{{!app.isPhoneSize}}">
 
         <div class="start-time">
-          <span class="hours">[[_splitText(timeslot.startTime, ':', 0)]]</span>
-          <span class="minutes">[[_splitText(timeslot.startTime, ':', 1)]]</span>
+          <span class="hours">[[_getHour(timeslot.startTime, ':')]]</span>
+          <span class="minutes">[[_getMinute(timeslot.startTime, ':')]]</span>
         </div>
 
         <div
@@ -138,6 +138,19 @@
 
         _splitText: function (text, divider, index) {
           return text.split(divider)[index];
+        },
+
+        _getHour: function(text, divider) {
+          var hour = text.split(divider)[0];
+          if (hour > 12) return hour - 12;
+          return hour - 0;
+        },
+
+        _getMinute: function(text, divider) {
+          var hour = text.split(divider)[0];
+          var minute = text.split(divider)[1];
+          if (hour + minute > 1159) return minute + ' pm';
+          return minute + ' am';
         },
 
         _filterSession: function () {
