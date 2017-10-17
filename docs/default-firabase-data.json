@@ -137,6 +137,21 @@
       "logoUrl" : "../images/logos/gdg-kaunas.png",
       "name" : "GDG Kaunas",
       "url" : "https://www.meetup.com/GDG-Kaunas"
+    },
+    {
+      "logoUrl" : "../images/logos/vilniusjug.jpg",
+      "name" : "Vilnius JUG",
+      "url" : "http://vilnius-jug.lt/"
+    },
+    {
+      "logoUrl" : "../images/logos/revolut.png",
+      "name" : "Revolut",
+      "url" : "https://www.revolut.com/"
+    },
+    {
+      "logoUrl" : "../images/logos/startinlv.png",
+      "name" : "Start In LV",
+      "url" : "http://startin.lv/"
     }
   ],
     "title" : "Organizers of the event",
@@ -377,9 +392,13 @@
       "title" : "Google Tango & Microsoft Hololens - Nike AR Application"
     },
     "302" : {
-      "description" : "Lightning talk (TBD)",
+      "complexity" : "Beginner",
+      "description" : "Google is introducing Flutter, a new mobile development sdk. Strongly based on React and reactive architecture, it could become a revolution on how mobile apps are done. Let’s review why you should care about it.",
       "id" : 302,
-      "title" : "Lightning talk (TBD)"
+      "language" : "English",
+      "speakers" : [ 6 ],
+      "tags" : [ "Android", "Flutter" ],
+      "title" : "What is Flutter and Why should I care?"
     },
     "303" : {
       "complexity" : "Beginner",
