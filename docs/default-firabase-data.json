@@ -382,9 +382,13 @@
       "title" : "Lightning talk (TBD)"
     },
     "303" : {
-      "description" : "Lightning talk (TBD)",
+      "complexity" : "Beginner",
+      "description" : "Testing is a boring and tedious task, that's why we built a robot to do it for us!\nIn this speech you will find out how to build your own Robot for mobile application automation.",
       "id" : 303,
-      "title" : "Lightning talk (TBD)"
+      "language" : "English",
+      "speakers" : [ 13 ],
+      "tags" : [ "Android", "iOS", "Test" ],
+      "title" : "OMG! Robot is testing my app!"
     },
     "304" : {
       "description" : "Lightning talk (TBD)",
@@ -680,6 +684,19 @@
     }],
     "tags" : [ "Android", "AR" ],
     "title" : "AR/VR/MR Enthusiast"
+  }, {
+    "bio" : "Working as System Administrator at TestDevLab. Passionate about how electronics and things in general work.",
+    "company" : "TestDev Lab",
+    "companyLogo" : "/images/logos/testdevlab.png",
+    "country" : "Riga, Latvia",
+    "featured" : false,
+    "id" : 13,
+    "name" : "Guntis Šusts",
+    "photoUrl" : "/images/people/guntis-susts.jpg",
+    "shortBio" : "Passionate about how electronics and things in general work.",
+    "socials" : [],
+    "tags" : [ "Android", "iOS", "Test" ],
+    "title" : "Engineer"
   } ],
   "team" : [ {
     "members" : [ {
