@@ -1,7 +1,7 @@
 {
   "partners" : [ {
     "logos" : [ {
-      "logoUrl" : "../images/logos/google.svg",
+      "logoUrl" : "../images/logos/google.png",
       "name" : "Google",
       "url" : "https://www.google.lv/intl/en/about/"
     },
