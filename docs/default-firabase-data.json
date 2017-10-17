@@ -106,6 +106,21 @@
         "logoUrl" : "../images/logos/labs.png",
         "name" : "Labs of Latvia",
         "url" : "http://www.labsoflatvia.com/"
+      },
+      {
+        "logoUrl" : "../images/logos/vilniusjug.jpg",
+        "name" : "Vilnius JUG",
+        "url" : "http://vilnius-jug.lt/"
+      },
+      {
+        "logoUrl" : "../images/logos/revolut.png",
+        "name" : "Revolut",
+        "url" : "https://www.revolut.com/"
+      },
+      {
+        "logoUrl" : "../images/logos/startinlv.png",
+        "name" : "Start In LV",
+        "url" : "http://startin.lv/"
       }
   ],
     "title" : "Partners",
@@ -137,21 +152,6 @@
       "logoUrl" : "../images/logos/gdg-kaunas.png",
       "name" : "GDG Kaunas",
       "url" : "https://www.meetup.com/GDG-Kaunas"
-    },
-    {
-      "logoUrl" : "../images/logos/vilniusjug.jpg",
-      "name" : "Vilnius JUG",
-      "url" : "http://vilnius-jug.lt/"
-    },
-    {
-      "logoUrl" : "../images/logos/revolut.png",
-      "name" : "Revolut",
-      "url" : "https://www.revolut.com/"
-    },
-    {
-      "logoUrl" : "../images/logos/startinlv.png",
-      "name" : "Start In LV",
-      "url" : "http://startin.lv/"
     }
   ],
     "title" : "Organizers of the event",
