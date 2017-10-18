@@ -1,53 +1,52 @@
-# 1. Purpose
+ Why do we have an official anti-harassment policy for GDG Montreal Android events?
 
+ - It sets expectations for behavior at the event. Simply having an anti-harassment policy can prevent harassment.
+ - It encourages people to attend who have had bad experiences at other events.
+ - It gives event staff/volunteers instructions on how to handle harassment quickly, with the minimum amount of disruption for the event.
 
-A primary goal of [GDG Lviv](http://lviv.gdg.org.ua/) is to be inclusive to the largest number of contributors, with the most varied and diverse backgrounds possible. As such, we are committed to providing a friendly, safe and welcoming environment for all, regardless of gender, sexual orientation, ability, ethnicity, socioeconomic status, and religion (or lack thereof). 
-GDG Lviv prides itself on being an open, respectful, and inclusive community. That means the [jerky behavior](https://meta.wikimedia.org/wiki/Don%27t_be_a_jerk) isn’t allowed at GDG meetings.
+GDG Montreal Android is dedicated to providing a harassment-free event experience for everyone, regardless of:
 
-This code of conduct outlines our expectations for all those who participate in our community, as well as the consequences for unacceptable behavior.
-We invite all those who participate in Google Developers Group to help us create safe and positive experiences for everyone.
+ - gender
+ - sexual orientation
+ - disability
+ - gender identity
+ - age
+ - race
+ - religion
+ - nationality
 
-# 2. Open [Source/Culture/Tech] Citizenship
+The above is not an exhaustive list — we do not tolerate harassment of event participants in any form.
 
-A supplemental goal of this Code of Conduct is to increase open [source/culture/tech] citizenship by encouraging participants to recognize and strengthen the relationships between our actions and their effects on our community. Communities mirror the societies in which they exist, and positive action is essential to counteract the many forms of inequality and abuses of power that exist in society. If you see someone who is making an extra effort to ensure our community is welcoming, friendly, and encourages all participants to contribute to the fullest extent, we want to know.
+Sexual language and imagery is not appropriate for any event venue, including talks. Event participants violating these rules may be expelled from the event, and even banned from future events at the discretion of the event organizers/management.
 
-# 3. Expected Behavior
+Harassment includes (but is not limited to):
 
-The following behaviors are expected and requested of all community members:
+ - offensive verbal comments related to gender, sexual orientation, disability, gender identity, age, race, religion
+ - the use or display of sexual images in public spaces
+ - deliberate intimidation
+ - stalking
+ - harassing photography or recording
+ - sustained disruption of talks or other events
+ - inappropriate physical contact
+ - unwelcome sexual attention
 
-- Participate in an authentic and active way. In doing so, you contribute to the health and longevity of this community.
-- Exercise consideration and respect in your speech and actions.
-- Attempt collaboration before a conflict.
-- Refrain from demeaning, discriminatory, or harassing behavior and speech.
-- Be mindful of your surroundings and your fellow participants. Alert community leaders if you notice a dangerous situation, someone in distress, or violations of this Code of Conduct, even if they seem inconsequential.
+​​​Participants asked to stop any harassing behavior are expected to comply immediately.
 
-# 4. Unacceptable Behavior
+Exhibiting partners and guest speakers are also subject to the anti-harassment policy. In particular, exhibitors and speakers should not use sexualized images, activities, or other material, or otherwise create a sexualized environment in their slide decks, exhibit material, exhibit staffing, promotional items or demo material.
 
-The following actions are considered harassment and are unacceptable within our community:
+If you are being harassed, notice that someone else is being harassed, or have any other concerns, please contact an organizer or event volunteer immediately. Organizers and event volunteers may be identified by t-shirts or special badges/lanyards. Organizers will investigate the issue and take appropriate action. This may include helping participants contact venue security or local law enforcement, provide escorts, or otherwise assist those experiencing harassment to feel safe for the duration of the event.
 
-- Violence, threats of violence or violent language directed against another person.
-- Sexist, racist, homophobic, transphobic, ableist or otherwise discriminatory jokes and language.
-- Posting or displaying sexually explicit or violent material.
-- Posting or threatening to post other people’s personally identifying information ("doxing").
-- Personal insults, particularly those related to gender, sexual orientation, race, religion, or disability.
-- Inappropriate photography or recording.
-- Inappropriate physical contact. You should have someone’s consent before touching them.
-- Unwelcome sexual attention. This includes sexualized comments or jokes; inappropriate touching, groping, and unwelcomed sexual advances.
-- Deliberate intimidation, stalking or following (online or in person).
-- Advocating for, or encouraging, any of the above behavior.
-- Sustained disruption of community events, including talks and, presentations.
+### Contacts:
 
-#  5. Consequences of Unacceptable Behavior
+ - info@android-montreal.com
+ - laurence@android-montreal.com
+ - marcos@android-montreal.com
+ - samuel@android-montreal.com
+ - boris@android-montreal.com
+ - philippe@android-montreal.com
 
-Unacceptable behavior from any community member, including sponsors and those with decision-making authority, will not be tolerated.
-Anyone asked to stop unacceptable behavior is expected to comply immediately.
-If a community member engages in unacceptable behavior, the community organizers may take any action they deem appropriate, up to and including a temporary ban or permanent expulsion from the community without warning (and without refund in the case of a paid event.
+Though we hope that we never have to invoke this policy, we believe that having this document helps everyone think a little more about how their actions and words affect the whole community, as well as individuals in the community.
 
-# 6. Scope
+# License and attribution
 
-We expect all community participants to abide by this Code of Conduct in all community venues–online and in-person–as well as in all one-on-one communications about community business. This code of conduct and its related procedures also applies to unacceptable behavior occurring outside the scope of community activities when such behavior has the potential to affect the safety and well-being of community members adversely.
-
-# 7. Contact info
-
-- Oleh Zasadnyy, +38 093 486 64 60, [oleh.zasadnyy@gdg.org.ua](mailto:oleh.zasadnyy@gdg.org.ua)
-- Sofiya Huts, +38 093 486 14 25, [sofia.huts@gmail.com](mailto:sofia.huts@gmail.com)
+This policy is licensed under the Creative Commons Zero license. This policy is based on several other policies, including the Ohio LinuxFest anti-harassment policy, written by Esther Filderman and Beth Lynn Eicher, and the Con Anti-Harassment Project. Mary Gardiner, Valerie Aurora, Sarah Smith, and Donna Benjamin generalized the policies and added supporting material. Many members of LinuxChix, Geek Feminism and other groups contributed to this work.
