@@ -121,6 +121,11 @@
         "logoUrl" : "../images/logos/startinlv.png",
         "name" : "Start In LV",
         "url" : "http://startin.lv/"
+      },
+      {
+        "logoUrl" : "../images/logos/proandroiddev.png",
+        "name" : "Pro Android Dev",
+        "url" : "https://proandroiddev.com/"
       }
   ],
     "title" : "Partners",
