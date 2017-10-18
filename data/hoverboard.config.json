@@ -3,8 +3,8 @@
   "startDate": "2017-11-18T09:00:00-04:00",
   "endDate": "2017-11-18T19:00:00-04:00",
   "analytics": {
-    "prod": "UA-43643469-8",
-    "dev": "UA-43643469-9"
+    "prod": "UA-108223893-1",
+    "dev": "UA-108223893-1"
   },
   "organizer": {
     "name": "GDG Montreal Android",
