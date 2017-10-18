@@ -115,10 +115,10 @@
     <div class="container">
       <div class="videos-header">
         <h4 class="heading">{$ featuredVideosTitle $}</h4>
-        <div class="controls">
+        <!-- <div class="controls">
           <paper-icon-button icon="icons:chevron-left" on-tap="shiftContentLeft"></paper-icon-button>
           <paper-icon-button icon="icons:chevron-right" on-tap="shiftContentRight"></paper-icon-button>
-        </div>
+        </div> -->
       </div>
       <div id="videos" class="videos">
         <template is="dom-repeat" items="[[_videos]]" as="video">
@@ -200,7 +200,7 @@
 
         _onTouchEnd: function (e) {
           //required min distance traveled to be considered swipe
-          this.threshold = this.nodeWidth / 4;
+          this.threshold = this.nodeWidth / 2;
           // maximum distance allowed at the same time in perpendicular direction
           this.restraint = 100;
           var touchObj = e.changedTouches[0];
@@ -221,7 +221,7 @@
 
         _videosChanged: function () {
           if (this.app.videos && Object.keys(this.app.videos).length) {
-            this._videos = this._randomOrder(this.app.videos).slice(0, 6);
+            this._videos = this._randomOrder(this.app.videos).slice(0, 2);
           }
         },
 

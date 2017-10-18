@@ -13,6 +13,7 @@
 <link rel="import" href="../../bower_components/polymerfire/firebase-document.html">
 
 <link rel="import" href="../elements/schedule-subnav.html">
+<link rel="import" href="../elements/comming-soon.html">
 <link rel="import" href="../elements/schedule-day.html">
 <link rel="import" href="../elements/my-schedule.html">
 
@@ -20,6 +21,8 @@
 <link rel="import" href="../behaviors/utils-behavior.html">
 <link rel="import" href="../behaviors/page-behavior.html">
 <link rel="import" href="../behaviors/cascaded-behavior.html">
+<link rel="import" href="../elements/footer-block.html">
+
 
 
 <dom-module id="schedule-page">
@@ -41,12 +44,12 @@
       }
     </style>
 
-    <app-route
+    <!-- <app-route
       route="{{route}}"
       pattern="/:day"
       data="{{routeData}}"
       query-params="{{queryParams}}"
-    ></app-route>
+    ></app-route> -->
 
     <firebase-document
       id="userSessions"
@@ -63,14 +66,21 @@
     </app-indexeddb-mirror>
 
     <div class="container" phone$="{{app.isPhoneSize}}">
-      <schedule-subnav
+
+
+    <comming-soon
+      text="We are sorry this page will be updated soon !"
+      description="Subscribe to our news letter to get the notification when the schedule will be available !"
+    ></comming-soon>
+
+      <!-- <schedule-subnav
         app="{{app}}"
         schedule="[[schedule]]"
         selected-day="[[app.selectedDay]]"
         filters="{{filters}}"
-      ></schedule-subnav>
+      ></schedule-subnav> -->
 
-      <neon-animated-pages selected="[[app.selectedDay]]" attr-for-selected="name">
+      <!-- <neon-animated-pages selected="[[app.selectedDay]]" attr-for-selected="name">
         <template is="dom-repeat" items="[[schedule]]" as="day" on-dom-change="updateCascadedNodes">
           <schedule-day
             name$="day[[_addToValue(index, 1)]]"
@@ -96,7 +106,7 @@
       entry-animation="scale-up-animation"
       exit-animation="fade-out-animation"
       with-backdrop
-    ></session-details>
+    ></session-details> -->
 
   </template>
 

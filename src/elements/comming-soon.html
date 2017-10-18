@@ -1,0 +1,49 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<link rel="import" href="../../bower_components/paper-input/paper-input-container.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+<link rel="import" href="mailchimp-subscribe.html">
+
+
+<dom-module id="comming-soon">
+  <template>
+
+      <style include="shared-styles">
+        .subscribe {
+          @apply(--layout-flex-auto);
+        }
+
+        @media (min-width: 961px) {
+          .link-block-wrapper,
+          .subscribe {
+            @apply(--layout-flex);
+          }
+        }
+      </style>
+      <h1>[[text]]</h1>
+      <h3>[[description]]</h3>
+    </br>
+      <div class="subscribe">
+        <div class="link-block-title">{$ subscribe $}</div>
+        <span>{$ subscribeNote $}</span>
+        <mailchimp-subscribe
+          app="[[app]]"
+          url="{$ mailchimp.url $}"
+          name="{$ mailchimp.name $}"
+        ></mailchimp-subscribe>
+      </div>
+  </template>
+
+    <script>
+      Polymer({
+        is: 'comming-soon',
+        properties: {
+          text: String
+        }
+      });
+    </script>
+</dom-module>

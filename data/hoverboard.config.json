@@ -1,51 +1,47 @@
 {
   "url": "https://hoverboard.firebaseapp.com/",
-  "startDate": "2016-09-09T09:00:00+03:00",
-  "endDate": "2016-09-10T19:00:00+03:00",
+  "startDate": "2017-11-18T09:00:00-04:00",
+  "endDate": "2017-11-18T19:00:00-04:00",
   "analytics": {
-    "prod": "UA-43643469-8",
-    "dev": "UA-43643469-9"
+    "prod": "UA-108223893-1",
+    "dev": "UA-108223893-1"
   },
   "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv"
+    "name": "GDG Montreal Android",
+    "twitter": "androidmontreal"
   },
   "webapp": {
     "shortName": "DevFest",
-    "themeColor": "#F57C00",
-    "backgroundColor": "#F57C00"
+    "themeColor": "#418153",
+    "backgroundColor": "#418153"
   },
   "firebase": {
-    "name": "hoverboard-master",
-    "domain": "hoverboard-master.firebaseapp.com",
-    "database": "https://hoverboard-master.firebaseio.com",
-    "api": "AIzaSyCaSkhtHekxAqXXzzbuNs2s6CpGdhZdta8",
+    "name": "devfest2017-10ea7",
+    "domain": "devfest2017-10ea7.firebaseapp.com",
+    "database": "https://devfest2017-10ea7.firebaseio.com",
+    "api": "AIzaSyDl-EJYfuCklgpaZB8gBAnT-0pCtIgbnrA",
     "userSessionsPath": "/userSessions",
     "ratingsPath": "/ratings",
     "indexedDbSession": "hoverboard"
   },
   "mailchimp": {
-    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
-    "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
+    "url": "https://android-montreal.us16.list-manage.com/subscribe/post?u=b67911fe761c783416e8ef670&amp;id=9f765fa0af",
+    "name": "b_b67911fe761c783416e8ef670_9f765fa0af"
   },
   "dateFormat": {
     "locale": "en-US",
     "blog": {"month": "short", "day": "numeric", "year": "numeric"}
   },
-  "hashtag": "dfua",
+  "hashtag": "GDGAndroidMtl ",
   "disqusShortName": "hoverboard-gdg-x",
   "tweetsSource": "/data/tweets.json",
-  "partnershipProposition": "http://bit.ly/df16-sponsor",
-  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
+  "partnershipProposition": "http://android-montreal.com/wp-content/uploads/2017/10/GDG-Sponsorship-DevFest.pdf",
+  "videosSessionsUrl": "https://www.youtube.com/watch?v=joQE9s1Wlpg&list=UUQJAjybgXIWFqILujHQ_8GQ",
   "enableSessionsRating": true,
   "navigation": [
     {
       "route": "home",
       "permalink": "/"
-    },
-    {
-      "route": "blog",
-      "permalink": "/blog/"
     },
     {
       "route": "schedule",
@@ -63,38 +59,33 @@
   "social": [
     {
       "name": "twitter",
-      "nickname": "GDGLviv",
-      "url": "https://twitter.com/gdglviv"
+      "nickname": "androidmontreal",
+      "url": "https://twitter.com/androidmontreal"
     },
     {
       "name": "gplus",
-      "nickname": "102444623953913144164",
-      "url": "https://plus.google.com/102444623953913144164"
+      "nickname": "109736270049664372028",
+      "url": "https://plus.google.com/109736270049664372028"
     },
     {
       "name": "facebook",
-      "nickname": "GDGLviv",
-      "url": "https://www.facebook.com/GDGLviv"
-    },
-    {
-      "name": "linkedin",
-      "nickname": "google-developers-group-lviv",
-      "url": "https://www.linkedin.com/company/google-developers-group-lviv"
+      "nickname": "AndroidMontreal",
+      "url": "https://www.facebook.com/AndroidMontreal"
     }
   ],
   "location": {
     "apiKey": "",
-    "name": "Pivdennyi Expo Center",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
-    "link": "https://www.facebook.com/expopivdennij",
+    "name": "Shopify",
+    "address": "490 Rue de la Gauchetière O, Montréal, QC H2Z 0B2",
+    "link": "https://www.shopify.ca/",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
+      "latitude": 45.5026023,
+      "longitude": -73.56606465,
       "zoom": 15
     },
     "mapCenter": {
-      "latitude": 49.809841,
-      "longitude": 23.982805
+      "latitude": 45.5026023,
+      "longitude": -73.5660646
     },
     "images": [
       "/images/backgrounds/location_1.jpg",
@@ -103,12 +94,12 @@
     ]
   },
   "gallery": {
-    "albumUrl": "https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1",
+    "albumUrl": "https://goo.gl/photos/S3xozfZBvGQinpnu9",
     "photos": {
-      "big": "/images/backgrounds/2015_1.jpg",
+      "big": "/images/backgrounds/2016_1.jpg",
       "small": [
-        "/images/backgrounds/2015_2.jpg",
-        "/images/backgrounds/2015_3.jpg"
+        "/images/backgrounds/2016_2.jpeg",
+        "/images/backgrounds/2016_3.jpg"
       ]
     }
   },
@@ -116,31 +107,24 @@
     "home": {
       "title": "Home",
       "headerSettings": {
-        "backgroundColor": "#FF9800",
+        "backgroundColor": "#455259",
         "backgroundImage": "/images/backgrounds/home.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff",
         "video": {
-          "title": "GDG DevFest Ukraine 2016",
-          "youtubeId": "TdpbgRgz6eE",
+          "title": "GDG DevFest 2016",
+          "youtubeId": "OrXbBA88qXo",
           "text": "See how it was in 2016"
         },
         "hideLogo": true,
         "minHeight": "360px"
       }
     },
-    "blog": {
-      "title": "Blog",
-      "headerSettings": {
-        "backgroundColor": "#03a9f4",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
     "speakers": {
       "title": "Speakers",
       "headerSettings": {
-        "backgroundColor": "#3f51b5",
+        "backgroundColor": "#455259",
+        "backgroundImage": "/images/backgrounds/home.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
@@ -148,7 +132,8 @@
     "schedule": {
       "title": "Schedule",
       "headerSettings": {
-        "backgroundColor": "#673ab7",
+        "backgroundColor": "#455259",
+        "backgroundImage": "/images/backgrounds/home.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
@@ -156,7 +141,8 @@
     "team": {
       "title": "Team",
       "headerSettings": {
-        "backgroundColor": "#009688",
+        "backgroundColor": "#455259",
+        "backgroundImage": "/images/backgrounds/home.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
@@ -164,7 +150,8 @@
     "cod": {
       "title": "Cod of Conduct",
       "headerSettings": {
-        "backgroundColor": "#673ab7",
+        "backgroundColor": "#455259",
+        "backgroundImage": "/images/backgrounds/home.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
