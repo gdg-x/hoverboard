@@ -1037,5 +1037,16 @@
     "thumbnail" : "/images/sessions/123.JPG",
     "title" : "Google WebRTC on Mobile",
     "youtubeId" : "YWaOdwCenZM"
-  } ]
+  } ],
+  "venues": [
+    {
+      "address": "20 Kipsalas iela",
+      "coordinates": "56.9511783,24.0841499",
+      "description": "Riga Islande Hotel is a modern hotel, which can fulfill the needs of the large-scale event.",
+      "imageUrl": "/images/backgrounds/location_1.jpg",
+      "name": "Riga Islande Hotel",
+      "title": "Conference",
+      "web": "http://www.islandehotel.lv/"
+    }
+  ]
 }
