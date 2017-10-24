@@ -568,14 +568,14 @@
       "info" : "Requires valid student ID",
       "name" : "EarlyBird Student",
       "price" : 20,
-      "soldOut" : false,
+      "soldOut" : true,
       "starts" : "September 11"
     }, {
       "currency" : "$",
       "ends" : "October 18",
       "name" : "EarlyBird Professional",
       "price" : 40,
-      "soldOut" : false,
+      "soldOut" : true,
       "starts" : "September 11"
     }, {
       "currency" : "$",
