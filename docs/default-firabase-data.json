@@ -425,9 +425,13 @@
       "title" : "OMG! Robot is testing my app!"
     },
     "304" : {
-      "description" : "Lightning talk (TBD)",
+      "complexity" : "Beginner",
+      "description" : "Have you ever wondered what it takes to  make an event for 100 people? Would you like to create your own workshop but don't know where to start? Join our talk and see how our 2 year experience in various event organisation can give your first stepping stones.\nRiga TechGirls can offer you to lead your own workshop & tune up your leadership skills, help you prepare the materials, teach & show behind scenes of workshop organisation, practise public speaking & gain some visibility or gain mentoring skills by joining one of our current workshops.\nWe, Riga TechGirls, are working to bring more women in IT by inspiring them and making first tech steps together.\nJoin the talk & check out how you can become awesome workshop lead & spice up the IT world!",
       "id" : 304,
-      "title" : "Lightning talk (TBD)"
+      "language" : "English",
+      "speakers" : [ 14 ],
+      "tags" : [ "General" ],
+      "title" : "Running your first community workshop"
     },
     "404" : {
       "description" : "TBD",
@@ -731,6 +735,19 @@
     "socials" : [],
     "tags" : [ "Android", "iOS", "Test" ],
     "title" : "Engineer"
+  }, {
+    "bio" : "IT project manager, tech enthusiast & learning to code in free time.",
+    "company" : "Riga Tech Girls",
+    "companyLogo" : "/images/logos/rtg.png",
+    "country" : "Riga, Latvia",
+    "featured" : false,
+    "id" : 14,
+    "name" : "Inta Kriskane",
+    "photoUrl" : "/images/people/inta_kriskane.jpg",
+    "shortBio" : "Workshop leads for Riga TechGirls.",
+    "socials" : [],
+    "tags" : [ "General" ],
+    "title" : "Workshop leads for Riga TechGirls."
   } ],
   "team" : [ {
     "members" : [ {
