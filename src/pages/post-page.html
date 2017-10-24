@@ -229,7 +229,7 @@
 
             this._post = this.posts[postIndex];
             this._updateHeaderSettings();
-            this.notifyPath('_post.date', new Date(this._post.posted).toDateString().slice(4));
+            this.notifyPath('_post.date', new Date(this._post.posted).toLocaleString('{$ dateFormat.locale $}', {$ dateFormat.blog | dump | safe $}));
 
             this._postUrl = '/data/posts/' + this._post.posted + '-' + this.postId + '.markdown';
             this.$.ajax.generateRequest();
@@ -249,7 +249,7 @@
               fontColor: '#fff',
               tabBarColor: '#fff',
               title: this._post.title,
-              subtitle: new Date(this._post.posted).toDateString().slice(4)
+              subtitle: new Date(this._post.posted).toLocaleString('{$ dateFormat.locale $}', {$ dateFormat.blog | dump | safe $})
             });
           }
         }
