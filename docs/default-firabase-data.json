@@ -126,6 +126,16 @@
         "logoUrl" : "../images/logos/proandroiddev.png",
         "name" : "Pro Android Dev",
         "url" : "https://proandroiddev.com/"
+      },
+      {
+        "logoUrl" : "../images/logos/techhub.png",
+        "name" : "Tech Hub Riga",
+        "url" : "https://riga.techhub.com/"
+      },
+      {
+        "logoUrl" : "../images/logos/lvoug.png",
+        "name" : "LVOUG",
+        "url" : "http://lvoug.lv/"
       }
   ],
     "title" : "Partners",
