@@ -30,6 +30,13 @@
     "title" : "Silver Partner"
   }, {
     "logos" : [ {
+      "logoUrl" : "../images/logos/columbus_collaboratory.png",
+      "name" : "Columbus Collaboratory",
+      "url" : "http://columbuscollaboratory.com/"
+    } ],
+    "title" : "Copper Partner"
+  }, {
+    "logos" : [ {
       "logoUrl" : "../images/logos/gdg_cincinnati.png",
       "name" : "GDG Cincinnati",
       "url" : "https://www.meetup.com/cincy-android/"
