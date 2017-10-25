@@ -16,6 +16,23 @@
         }
       },
 
+      nativeShare: function (e) {
+        if (navigator.share !== undefined) {
+          navigator.share({
+            url: location.href,
+            title: document.title,
+            text: 'Check out ' + document.title + ' at #{$ hashtag $}',
+          }).catch(function(err){
+            console.log('Web Share API failed', err);
+          });
+
+          // Prevent default action
+          // (do not popup share choices menu)
+          // as we already show native one
+          e.stopPropagation();
+        }
+      },
+
       share: function (e) {
         var type = e.currentTarget.getAttribute('share');
         var url = null;
