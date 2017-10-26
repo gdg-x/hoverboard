@@ -1,42 +1,11 @@
 language: node_js
-node_js: 7
-cache:
-  yarn: true
-  directories:
-  - node_modules
-  - "${NVM_PATH}_modules"
-env:
-- CXX=g++-4.8
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-4.8
-install:
-- yarn
-- cd functions && yarn && cd ..
-script: echo "Deploying!"
-before_deploy: yarn run build
+node_js:
+  - "8.1.0"
+
 deploy:
-- provider: firebase
   skip_cleanup: true
-  on:
-    branch: master
-  project: hoverboard-master
+  provider: firebase
   token:
-    secure: fQOOIF4mkqH438Dawy2v27Qw7UsVizfJ1ZIeTno2sGfq9an8mZk13YWBuYJcOc1hSnEEp3G7/pkBcwykCj1CYpoOS+wMxpVbOQw6ogMGFD8rv+208Ddt1VJw/uUuFdf4k07+eRGokykCsCmcv2J+5wnLw34CKzXYTxLpL6JrxGzkuAcKIRNNda13yxJfYXz7HtQiNo3aMYnv2MCffNnSaR+OJ9Cl0JGYDCg3zuJIqrq7CFJqnUXE5TsO0VGCLY46rLvICY6inNlgZvA4RWi6Yf4rs2swzgC7HKbcIipjptlCRpPdRigLKoxhv6HZUIpkVgDu10Jq6OWU5gj4VpNYYd+c+E4F23nvm+3BEToUuEGURZ9Ins1SSHr3d+WxneQ+jreHCGrEBhKkLknbPQuOQF3khtk9CHu+07fBafBCLt4dGC6oQu+QwTdn+JQ/rYxWAUq8yJjrTsKevgXAVyMqDTU1Fy7FH5QP7HRyI71C6Q7Ij3cVwrFrVXNGzg2h2q8qTX2Yn6Ph9NJUpS+QmVsymblh38zwlyThZ1T4XudYM5iZTzNKKVqCmR9upl8nSLMEez1ukhBETJCslb2nFXJI3k7dsFA5cGO51sbYB44bxIXJwZkQ0s9p8XBNsU9gI2hX6UvE5+tephbohd6YGHmfc+qaJkLpcYKjRbhFsysf60k=
-- provider: firebase
-  skip_cleanup: true
+    secure: "S/Tryi8MT1kGvyW1D9vDv2FXuN2p6VE4YxCe3Wd0a6Kg5OTG6yRZYdYMIQEanoXpwcrb9sb3NQm+LzeeykyAZ9rqFedPMit3/wSE417JrV7uzUxOlxTJ+4Vx0fsyEiR5F/WpId0/RfIBajRW4o9mJva4Z6ptPhDbYVWhOaaeBAVZWs1U60MvBO99V8bNZTHU+u/8A58FCI+rqDL6Kc8jovnUD81lAdnaD3XuurcnIkpd3UCwykWk0itvTTSXZuRMWKkBm86AMntobSnKI3LFSr2PLt1laADhV0Jxm936Lo+Qyxb1qAOs2IJnJ3mfidgmjl1WISuWa9YsVzky7cHqMCo0xXyRXhXy58diWKpBI06fTJ30eUQ3JaUNQFyo5Lh3NYBtFcLuxvrj12lgeiziPmf5FL0LRXKX08RZboT6FqlhbSDBdDW+g6XRkvt50hFEcLUpXkuw7FwoQ5Q3JsmXxKhvQ9YAaVjXgOiSODDFiJTBYlsc2Iz7M3khuL1Sr3R7Jx/C5TIwUY5YZ6og36DIlZUpxXihAHM6ac3OzHbskZktlvWLOIW3GCFeaAYWA6iURIf73sIgpmqfM5Vi+t4IBQQ/zuR4ue4zAl13zq1eh1paM14TG6vexHr525s+bLmaXTf62VAJGHy6FUDU7J/M5jqj2Ctc/R+mf99FrABfzUI="
   on:
-    branch: develop
-  project: hoverboard-dev
-  token:
-    secure: Quq/Ys1GKDYFjqMCD107saKj005L0RaM7Ian9yLIW/er4KdMzwjYw7TVXmtMeJPIfEy/e2/4WJ63K1SaXieBoFndoUcpGWqPOoTrnkkj5K7tzeZKM32XqIarF+BNmOoqW5M7+kuN8L7N3RLp00ywFDOgKgiZJeoaDV6sIRRAIFVh+xHWabVWpFCwCUSeBZpufOsZhMXkicyRe0XhMmkUvS1P5CI3AyZZdIfWG+sguFsPOWRjMFKWrbnsilDFDjf7N0Wd8Z1H2Z0LBn/V00bNb95MSIuOhkdk3a1wP0P5Eollet+Y8g+NpdWyFq0/C+6+ECvFLBjtvbtMY1BVfdxkCo5XlogZx31OmkMWVX6PXOD5Va8aFoJnwvjovUT8oZbSCWEuyMxI91jDsLxXZt542MNfUfQ1Q2+SpUShdcRlwoV2c/XOYvme95HnI1LSqzLubooKWxz8wpa/aovkdZbum54t/z5nA54AXN1lYKsi+hcAFHOeucqd/kHOLG0bx05Ev86wcvNH8qGx+v7S644YH37No7PGnKU3g3Jq/m6quo1B/bMEIaatVnR40D301wAi8tsNWnqEdWFKnAlGrTIDd1qek9OHnApmgBQI8o0FOy6WbzLMwl9PnMl+t+wew/ggSY0IdWhjFWR/S1d6xML8cYHXHVpE0wxkat5ETbIYXlg=
-- provider: firebase
-  skip_cleanup: true
-  on:
-    branch: hoverboard-v2
-  project: hoverboard-v2-dev
-  token:
-    secure: QQlKbdfP/hmlbLceLitaZCRNGP6yuFZflPGXA2N3ALy3UpVitOu7DCSX5XAmlTFYuhHAcA9ayIl7FpyKyWWD4pg/2k4x4MOWfZgty7SHv1HW/K5PKfpsVQAkd8w+aMkqtpH+W4SXqFOUOjK1li9c/pdYtyKyQm+ENfBbHdsq2Z9fqXz8iZ1J0Uz9EegL6HWlfhSU3XLM9uVbkdzz51Z1RPNDcoZ8lsLHJGmVVFO+qZga/Sz1UcSIS7/k6c180/BJ3P4p3Trmv1LX2BtDBhF7VkaAV3xR83XB6P89IGjU81UxcqWYSP5X6ybaw4/itwpQ1AU4b7VLjewP+3R8jY76BxCBU9I3p0zfpyOYf78jmQntXPC13xPyHuD4w6BZns13nPGX35GrlsqZP6ImaoyKk77E0/M7L6mIogjSR03wpNIXdLKXwiV8PnfesNOVQS5NYf+9aKommYtIZJUEplZz9fhaMfDlvq4UZuRnbc0oUBGb4/ZIqASIREI0bJpDliEGHSDfdxdfEM2orFcRkc8MKV6RTOB6B3hGWIl76JeNBbLS81jCysLBRzyofE32mR7lOWc6a92NtKyfa8oEqCTIQ8YP7d9+OU0z2f+kZJL9hXbXtpBcUt1aFmx7uZDIqfAFB4nlNOIvptN8w2su+pE7Ed2ngkSY32Vs8YNb9QaP0+M=
+    branch: devfest2017

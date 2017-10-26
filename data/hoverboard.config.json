@@ -17,6 +17,22 @@
     "storageBucket": "hoverboard-experimental.appspot.com",
     "messagingSenderId": "1088172422905"
   },
+  "firebase1": {
+    "apiKey": "AIzaSyALDa2D7CMhK_wt2VkET1MaJuQXYVUJd2I",
+    "authDomain": "hoverboard-experimental.firebaseapp.com",
+    "databaseURL": "https://hoverboard-experimental.firebaseio.com",
+    "projectId": "hoverboard-experimental",
+    "storageBucket": "hoverboard-experimental.appspot.com",
+    "messagingSenderId": "1088172422905"
+  },
+  "firebase2": {
+    "apiKey": "AIzaSyCzCA6c0iKI18dgpbL8CGRmALy1xvIyucE",
+    "authDomain": "devfest-2017-2285e.firebaseapp.com",
+    "databaseURL": "https://devfest-2017-2285e.firebaseio.com",
+    "projectId": "devfest-2017-2285e",
+    "storageBucket": "devfest-2017-2285e.appspot.com",
+    "messagingSenderId": "721819088667"
+  },
   "googleMapApiKey": "AIzaSyDWy6O98n-ueoVaYPWRPve23vjm3JP08gw",
   "organizer": {
     "name": "GDG Lviv",
@@ -178,12 +194,12 @@
         "name": "google",
         "label": "Sign-in with Google",
         "url": "https://accounts.google.com"
-      }, 
+      },
       {
         "name": "facebook",
         "label": "Sign-in with Facebook",
         "url": "https://www.facebook.com"
-      }, 
+      },
       {
         "name": "twitter",
         "label": "Sign-in with Twitter",

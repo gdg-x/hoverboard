@@ -6,7 +6,7 @@
     "gulp": "gulp",
     "bower": "bower",
     "build": "gulp",
-    "postinstall": "bower install",
+    "postinstall": "bower install; cd functions; npm install; cd ..; if [ $BUILD_CODE ]; then npm run build; fi",
     "serve": "gulp serve"
   },
   "devDependencies": {
