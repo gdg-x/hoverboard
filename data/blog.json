@@ -7,5 +7,14 @@
     "secondaryColor": "#455a64",
     "image": "/images/posts/2016header.png",
     "brief": "Ohio DevFest 2016 is now over. It was a huge success. We are happy to share with you some facts, emotions and, of course, photos from the first Google Developers Conference in Ohio!"
+  },
+  {
+    "id": "after-party-at-zaftig",
+    "title": "After Party at Zaftig!",
+    "posted": "2017-10-25",
+    "primaryColor": "#5a7785",
+    "secondaryColor": "#455a64",
+    "image": "/images/posts/zaftig_drafts.jpg",
+    "brief": "The fun isn't over just because the talks are finished! We're headed to Zaftig."
   }
 ]
