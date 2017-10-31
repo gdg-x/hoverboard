@@ -1,18 +1,18 @@
 {
   "title": "GDG DevFest Cochabamba 2017",
-  "description": "The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts",
+  "description": "El evento más grande de tecnología Google en Cochabamba, organizado por la comunidad GDG Cochabamba! Android, Web, Angular y Cloud y mucho más, con la participación de expertos y profesionales!",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
   "dates": "25/11/2017",
   "partnershipProposition": "https://bit.ly/dfua17-partners",
   "share": "Comparte",
-  "followOur": "Follow our",
+  "followOur": "Sigue nuestro",
   "followUs": "Síguenos",
   "emailUs": "Escríbenos",
   "partnershipResources": "Partnership Resources",
   "eventResources": "Event Resources",
   "buyTicket": "Comprar entrada",
-  "signIn": "Sign in",
-  "signOut": "Sign out",
+  "signIn": "Ingresar",
+  "signOut": "Salir",
   "footer": {
     "blog": "Blog"
   },
@@ -38,25 +38,25 @@
       ]
     },
     {
-      "title": "Explore Past DevFests",
+      "title": "DevFests pasados",
       "links": [
         {
-          "name": "DFUA 2013",
+          "name": "DevFest Cochabamba 2013",
           "url": "http://gdg-devfest-ua.appspot.com/",
           "newTab": true
         },
         {
-          "name": "DFUA 2014",
+          "name": "DevFest Cochabamba 2014",
           "url": "https://dfua14.firebaseapp.com//",
           "newTab": true
         },
         {
-          "name": "DFUA 2015",
+          "name": "DevFest Cochabamba 2015",
           "url": "https://dfua15.firebaseapp.com/",
           "newTab": true
         },
         {
-          "name": "DFUA 2016",
+          "name": "DevFest Cochabamba 2016",
           "url": "https://dfua16.firebaseapp.com/",
           "newTab": true
         }
@@ -93,14 +93,14 @@
       ]
     }
   ],
-  "subscribeNote": "No spam, only the latest news and updates!",
+  "subscribeNote": "No spam, sólo las mejores noticias y eventos!",
   "codeOfConduct": "Code of Conduct",
   "aboutBlock": {
-    "title": "What you need to know, before you ask.",
+    "title": "Esto es lo que necesitas saber!",
     "callToAction": {
       "featuredSessions": {
-        "description": "GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases.",
-        "label": "Explore featured session",
+        "description": "El GDG DevFest Cochabamba junta en la ciudad a expertos en Android, Web y tecnologías Cloud por 2 días de charlas, talleres y más.",
+        "label": "Mira una charla pasada destacada",
         "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
       },
       "howItWas": {
@@ -129,9 +129,9 @@
     }
   },
   "ticketsBlock": {
-    "title": "Tickets",
+    "title": "Entradas",
     "ticketsDetails": "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
-    "soldOut": "Sold out"
+    "soldOut": "Agotado"
   },
   "partnersBlock": {
     "title": "Partners",
@@ -157,12 +157,12 @@
   },
   "faq": "/markdown/faq.md",
   "speakers": {
-    "skills": "Skills"
+    "skills": "Habilidades"
   },
   "speakersBlock": {
-    "title": "Rockstar speakers",
+    "title": "Speakers destacados",
     "callToAction": {
-      "label": "View all speakers",
+      "label": "Ver todos los speakers",
       "link": "/speakers/"
     }
   },
@@ -170,28 +170,28 @@
     "title": "#dfua16 highlights",
     "description": "This year's festival built lots of excitement. Check out photos from featured talks, hands-on learning sessions, and after-hours fun.",
     "callToAction": {
-      "label": "See all photos",
+      "label": "Ver todas",
       "link": "https://goo.gl/photos/H8s3CtPexCzkLqSt9"
     }
   },
   "mapBlock": {
-    "title": "Location"
+    "title": "Ubicación"
   },
   "subscribeBlock": {
     "callToAction": {
-      "description": "Get notified about the important conference updates",
-      "label": "Subscribe"
+      "description": "Obtén noticias sobre este y otros eventos del GDG Cochabamba!",
+      "label": "Suscríbete"
     },
-    "yourEmail": "Your email",
-    "emailAddress": "Email Address",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "formTitle": "Get the latest updates, insights and news about GDG DevFest Ukraine sent to your inbox.",
-    "emailRequired": "Please enter a valid email address.",
-    "subscribe": "Subscribe",
-    "subscribed": "Subscribed",
-    "close": "Close",
-    "generalError": "Some error has occured. Please, try again later."
+    "yourEmail": "Tu correo electrónico",
+    "emailAddress": "Dirección de correo electrónico",
+    "firstName": "Nombre(s)",
+    "lastName": "Apellido(s)",
+    "formTitle": "Obtén las últimas novedades del GDG Cochabamba y eventos afines.",
+    "emailRequired": "Por favor ingresa un correo electrónico válido.",
+    "subscribe": "Suscribir",
+    "subscribed": "Suscrito",
+    "close": "Cerrar",
+    "generalError": "Surgió un error. Por favor, intenta más tarde."
   },
   "team": {
     "description": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT."
@@ -206,7 +206,7 @@
     "speakers": "Speakers"
   },
   "speakerDetails": {
-    "sessions": "Sessions"
+    "sessions": "Charlas"
   },
   "notifications": {
     "default": "Enable notifications",
@@ -225,18 +225,18 @@
   "aboutOrganizerBlock": {
     "blocks": [
       {
-        "title": "Organizer",
-        "description": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
+        "title": "Organizadores",
+        "description": "El <a href='http://gdg.com.bo' target='_blank'>GDG Cochabamba</a> cuenta actualmente con X miembros activos, orgullosos de poder organizar el GDG DevFest Cochabamba por 4to.(?) año consecutivo",
         "callToAction": {
-          "label": "Open team page",
+          "label": "Ir a gdg.com.bo",
           "link": "/team"
         }
       },
       {
-        "title": "What is GDG?",
-        "description": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion",
+        "title": "Qué es GDG?",
+        "description": "Google Developers Group (GDG) es una comunidad geek abierta y voluntaria apasionada por la tecnología, trabajan en proyectos emocionantes y comparten experiencias apasionantes sobre tecnologías Google.",
         "callToAction": {
-          "label": "Read more",
+          "label": "Lee más",
           "link": "https://developers.google.com/groups/",
           "newTab": true
         }
