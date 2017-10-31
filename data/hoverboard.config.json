@@ -10,12 +10,12 @@
   "environment": "dev",
   "prefix": "/",
   "firebase": {
-    "apiKey": "AIzaSyALDa2D7CMhK_wt2VkET1MaJuQXYVUJd2I",
-    "authDomain": "hoverboard-experimental.firebaseapp.com",
-    "databaseURL": "https://hoverboard-experimental.firebaseio.com",
-    "projectId": "hoverboard-experimental",
-    "storageBucket": "hoverboard-experimental.appspot.com",
-    "messagingSenderId": "1088172422905"
+    "apiKey": "AIzaSyCzCA6c0iKI18dgpbL8CGRmALy1xvIyucE",
+    "authDomain": "devfest-2017-2285e.firebaseapp.com",
+    "databaseURL": "https://devfest-2017-2285e.firebaseio.com",
+    "projectId": "devfest-2017-2285e",
+    "storageBucket": "devfest-2017-2285e.appspot.com",
+    "messagingSenderId": "721819088667"
   },
   "firebase1": {
     "apiKey": "AIzaSyALDa2D7CMhK_wt2VkET1MaJuQXYVUJd2I",
@@ -55,7 +55,7 @@
     {
       "route": "schedule",
       "permalink": "/schedule/",
-      "title": "Schedule"
+      "title": "Cronograma"
     },
     {
       "route": "speakers",
@@ -65,12 +65,12 @@
     {
       "route": "team",
       "permalink": "/team/",
-      "title": "Team"
+      "title": "Equipo"
     }
   ],
   "heroSettings": {
     "home": {
-      "description": "The biggest Google tech conference in CEE. All about Android, Web, and Cloud.",
+      "description": "El evento más grande de tecnología Google en Cochabamba, organizado por la comunidad GDG! Android, Web, Angular y Cloud y mucho más, con la participación de expertos y profesionales!",
       "background": {
         "color": "#673ab7",
         "image": "/images/backgrounds/home.jpg"
@@ -79,21 +79,21 @@
     },
     "speakers": {
       "title": "Speakers",
-      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
+      "description": "Miembros del GDG Cochabamba, miembros de otros GDGs, Socios e invitados especiales.",
       "background": {
         "color": "#FFF"
       },
       "fontColor": "#424242"
     },
     "schedule": {
-      "title": "Schedule",
+      "title": "Cronograma",
       "background": {
         "color": "#fff"
       },
       "fontColor": "#424242"
     },
     "team": {
-      "title": "Team",
+      "title": "Equipo",
       "background": {
         "color": "#fff"
       },
@@ -113,13 +113,13 @@
     "pointer": {
       "latitude": -17.4034288,
       "longitude": -66.2287641,
-      "zoom": 10
+      "zoom": 14
     },
     "mapCenter": {
-      "latitude": -18.7,
-      "longitude": -69.7
+      "latitude": -17.389,
+      "longitude": -66.186
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": "Aún no se tiene confirmado la ubicación de este evento pero de seguro que tiene que ser en un lugar amplio y cool."
   },
   "mediaQueries": {
     "xs": {
