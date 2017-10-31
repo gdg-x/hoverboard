@@ -1,16 +1,16 @@
 {
-  "title": "GDG DevFest Season 2017",
+  "title": "GDG DevFest Cochabamba 2017",
   "description": "The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "October 13-14, 2017",
+  "dates": "25/11/2017",
   "partnershipProposition": "https://bit.ly/dfua17-partners",
-  "share": "Share",
+  "share": "Comparte",
   "followOur": "Follow our",
-  "followUs": "Follow us",
-  "emailUs": "Email us",
+  "followUs": "Síguenos",
+  "emailUs": "Escríbenos",
   "partnershipResources": "Partnership Resources",
   "eventResources": "Event Resources",
-  "buyTicket": "Buy ticket",
+  "buyTicket": "Comprar entrada",
   "signIn": "Sign in",
   "signOut": "Sign out",
   "footer": {
@@ -18,11 +18,11 @@
   },
   "footerRelBlock": [
     {
-      "title": "About",
+      "title": "Acerca de",
       "links": [
         {
-          "name": "GDG Lviv",
-          "url": "http://lviv.gdg.org.ua/",
+          "name": "GDG Cochabamba",
+          "url": "http://gdg.com.bo/",
           "newTab": true
         },
         {
@@ -111,15 +111,15 @@
     },
     "statisticsBlock": {
       "attendees": {
-        "label": "Attendees",
-        "number": "900"
+        "label": "Asistentes",
+        "number": "500"
       },
       "days": {
-        "label": "Days",
+        "label": "Días",
         "number": "2"
       },
       "sessions": {
-        "label": "Sessions",
+        "label": "Charlas",
         "number": "50"
       },
       "tracks": {

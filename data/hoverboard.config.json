@@ -35,15 +35,15 @@
   },
   "googleMapApiKey": "AIzaSyDWy6O98n-ueoVaYPWRPve23vjm3JP08gw",
   "organizer": {
-    "name": "GDG Lviv",
+    "name": "GDG Cochabamba",
     "twitter": "gdglviv",
     "blog": "https://medium.com/gdg-lviv",
     "url": "http://lviv.gdg.org.ua/"
   },
   "webapp": {
     "shortName": "DevFest",
-    "themeColor": "#673AB7",
-    "backgroundColor": "#673AB7"
+    "themeColor": "#FB067F",
+    "backgroundColor": "#211F35"
   },
   "hashtag": "DevFest17",
   "navigation": [
@@ -51,11 +51,6 @@
       "route": "home",
       "permalink": "/",
       "title": "Home"
-    },
-    {
-      "route": "blog",
-      "permalink": "/blog/",
-      "title": "Blog"
     },
     {
       "route": "schedule",
@@ -81,13 +76,6 @@
         "image": "/images/backgrounds/home.jpg"
       },
       "fontColor": "#FFF"
-    },
-    "blog": {
-      "title": "Blog",
-      "background": {
-        "color": "#FFF"
-      },
-      "fontColor": "#424242"
     },
     "speakers": {
       "title": "Speakers",
@@ -120,16 +108,16 @@
     }
   },
   "location": {
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "short": "Cochabamba, Bolivia",
+    "address": "Ubicación desconocida, Cochabamba, Bolivia",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 5
+      "latitude": -17.4034288,
+      "longitude": -66.2287641,
+      "zoom": 10
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": -18.7,
+      "longitude": -69.7
     },
     "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
   },
@@ -153,15 +141,11 @@
     "follow": [
       {
         "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
+        "url": "https://www.facebook.com/GDGCochabamba"
       },
       {
         "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
-      },
-      {
-        "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
+        "url": "https://twitter.com/GDGCochabamba"
       },
       {
         "name": "youtube",
@@ -183,7 +167,7 @@
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
+  "mailto": "cochabamba@gdg.com.bo",
   "mailchimp": {
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
