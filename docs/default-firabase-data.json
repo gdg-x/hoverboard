@@ -244,70 +244,70 @@
     } ]
   } ],
   "sessions" : {
-    "101": {
+    "101" : {
       "complexity" : "Beginner",
       "description" : "Let the conference begin!",
       "id" : 101,
       "language" : "English",
       "speakers" : [ 1 ],
-      "tags" : [ "Mobile", "Development" ],
-      "title" : "Keynote"
+      "tags" : [ "General" ],
+      "title" : "Keynote: Think beyond IT"
     },
-    "102": {
+    "102" : {
       "complexity" : "Intermediate",
       "description" : "You have a really cool and impactful project, but as soon as your codebase gets bigger, and more and more contributors come into play, things can become challenging in regards to aspects like: code consistency, technical debt, refactoring, application architecture and team organization. Let’s jump onboard on this journey and walk through different techniques that can help us keep our code sane and healthy for better scalability.\nDisclaimer: This talk is going to be focused from a mobile standpoint but most of the practices included can also be applied to any software project under development.",
       "id" : 102,
       "language" : "English",
       "speakers" : [ 2 ],
-      "tags" : [ "Mobile", "Development" ],
+      "tags" : [ "General" ],
       "title" : "Hidden mysteries behind big mobile codebases RELOADED"
     },
-    "103": {
+    "103" : {
       "complexity" : "Intermediate",
       "description" : "Have you ever heard about unidirectional data flow? Flux and/or Redux?\nIn this talk, we will talk about how to follow the principles that architectures like Flux and Redux do on the web, but on Android.\nWhat is a state? store? dispatcher? side effect? controller view? How do we glue all these parts together? How to keep our domain isolated from the outer world so is easily testable? how do we chain actions? how do keep everything unidirectional?\nWe will cover all these topics and much more!!, and you know what? everything with a bit of Kotlin sauce, so we will see how we can take advantage of the cool stuff this language provide us to make our architecture even better.",
       "id" : 103,
       "language" : "English",
       "speakers" : [ 3 ],
-      "tags" : [ "Kotlin", "Android" ],
+      "tags" : [ "Android", "Kotlin" ],
       "title" : "Unidirectional dataflow on Android using Kotlin"
     },
-    "104": {
+    "104" : {
       "complexity" : "Intermediate",
       "description" : "Have you ever had issues with codesigning on iOS? Are you tired of manually taking screenshots in your app for every release? Has your coworker ever asked you: “How do I have to build this again so I can distribute it to testers”? If you answered yes to any of these questions, you need fastlane!\nfastlane is a collection of tools that enables mobile developers to automate many of the common tasks that are necessary to create a continuous deployment pipeline. In this talk I will show you how fastlane works, show you an overview of the features that fastlane supports and give you an introduction to the DSL used to create these pipelines. After this talk you should be equipped with all the information you need to implement fastlane in your own apps.",
       "id" : 104,
       "language" : "English",
       "speakers" : [ 4 ],
-      "tags" : [ "CI", "Fastlane" ],
+      "tags" : [ "Tools", "CD" ],
       "title" : "Introduction to Continuous Delivery with fastlane"
     },
-    "105": {
+    "105" : {
       "complexity" : "Intermediate",
       "description" : "Lets take a look at recently released Sourcery and how it can be applied in variety of different use-cases to make development more powerful and enjoyable, while at the same time limiting amount of human mistakes.",
       "id" : 105,
       "language" : "English",
       "speakers" : [ 5 ],
-      "tags" : [ "iOS" ],
+      "tags" : [ "iOS", "Tools", "Swift" ],
       "title" : "Metaprogramming in Swift"
     },
-    "106": {
+    "106" : {
       "complexity" : "Intermediate",
       "description" : "Conversational interfaces are here to stay. Almost all IM clients have now the possibility to create bots, and with devices as Google Home or Amazon Alexa solely based on voice, bots and NLP will be more important every day. API.AI allows us to easily create a smart agent with ability to learn and to interact with all those services (and much more). In the talk we will review the steps to create a Google Action that can answer questions about the Star Wars characters in a natural and fluid way.",
       "id" : 106,
       "language" : "English",
       "speakers" : [ 6 ],
-      "tags" : [ "Android" ],
+      "tags" : [ "Tools", "Google Assistant" ],
       "title" : "Let's talk about Star Wars"
     },
-    "107": {
+    "107" : {
       "complexity" : "Intermediate",
       "description" : "Swift is advertised as a C++ replacement. In this talk, I discuss how true is this claim, how Swift is built to compete on the same field, what is the current status of Swift 4 performance and how it compares to other languages. You’ll learn about Swift Intermediate Language, about memory management details and what to do to get the best out of Swift to make it fast.",
       "id" : 107,
       "language" : "English",
       "speakers" : [ 7 ],
-      "tags" : [ "iOS" ],
+      "tags" : [ "iOS", "Swift" ],
       "title" : "Swift on fast rails"
     },
-    "108": {
+    "108" : {
       "complexity" : "Beginner",
       "description" : "Context is a primary consideration when designing a user interface and as mobile asserts its dominance, many designers adhere to a mobile-first approach. The question is, should context stop at the device level? Today we’re seeing a blurring of the lines, with UI elements making their way from native apps to mobile web, and vice versa. While some standardization makes sense, there is still inherent differences that need to be taken into account.\nJoin creative technologist George Eid for a talk and Q&A on designing for mobile. Framed by the principles of Design Thinking and Collaborative Design, his talk will include an introduction to AREA 17, their philosophy towards mobile design, and actionable design techniques for designers and developers alike.",
       "id" : 108,
@@ -316,31 +316,31 @@
       "tags" : [ "Design" ],
       "title" : "Designing for mobile: context matters"
     },
-    "109": {
+    "109" : {
       "complexity" : "Intermediate",
       "description" : "Kotlin is the new official language to develop Android Apps, and it can be used almost everywhere. But did you know you could write a complete App without using other language rather than Kotlin? It can substitute Java in your code, XML in your views and Groovy in your Gradle files.",
       "id" : 109,
       "language" : "English",
       "speakers" : [ 9 ],
-      "tags" : [ "Kotlin" ],
+      "tags" : [ "Android", "Kotlin" ],
       "title" : "Yo Dawg! I heard you like Kotlin"
     },
-    "110": {
+    "110" : {
       "complexity" : "Beginner",
       "description" : "Building a high-quality Progressive Web App has incredible benefits, making it easy to delight your users, grow engagement and increase conversions. Join this talk to learn how to improve your app user experience using PWAs features combined with Firebase infrastructure.",
       "id" : 110,
       "language" : "English",
       "speakers" : [ 10 ],
-      "tags" : [ "Firebase" ],
+      "tags" : [ "Firebase", "PWA" ],
       "title" : "Building Progressive Web Apps powered by Firebase"
     },
-    "111": {
+    "111" : {
       "complexity" : "Advanced",
       "description" : "This time, we’ll get very serious. I will explain the importance of end-to-end trust, zero knowledge architectures and illustrate things by showing a zero knowledge application, built with available open source tools.",
       "id" : 111,
       "language" : "English",
       "speakers" : [ 11 ],
-      "tags" : [ "iOS", "Security" ],
+      "tags" : [ "iOS", "Swift" ],
       "title" : "Zero Knowledge Architectures for iOS Applications"
     },
     "201" : {
@@ -403,7 +403,7 @@
       "id" : 301,
       "language" : "English",
       "speakers" : [ 12 ],
-      "tags" : [ "Android", "AR" ],
+      "tags" : [ "Design", "AR" ],
       "title" : "Google Tango & Microsoft Hololens - Nike AR Application"
     },
     "302" : {
@@ -412,7 +412,7 @@
       "id" : 302,
       "language" : "English",
       "speakers" : [ 6 ],
-      "tags" : [ "Android", "Flutter" ],
+      "tags" : [ "General", "Flutter" ],
       "title" : "What is Flutter and Why should I care?"
     },
     "303" : {
@@ -421,7 +421,7 @@
       "id" : 303,
       "language" : "English",
       "speakers" : [ 13 ],
-      "tags" : [ "Android", "iOS", "Test" ],
+      "tags" : [ "Tools", "Testing" ],
       "title" : "OMG! Robot is testing my app!"
     },
     "304" : {
@@ -430,7 +430,7 @@
       "id" : 304,
       "language" : "English",
       "speakers" : [ 14 ],
-      "tags" : [ "General" ],
+      "tags" : [ "General", "Community" ],
       "title" : "Running your first community workshop"
     },
     "404" : {
