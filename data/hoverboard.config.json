@@ -73,7 +73,7 @@
       "description": "El evento más grande de tecnología Google en Cochabamba, organizado por la comunidad GDG! Android, Web, Angular y Cloud y mucho más, con la participación de expertos y profesionales!",
       "background": {
         "color": "#673ab7",
-        "image": "/images/backgrounds/home.jpg"
+        "image": "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fwebassets%2Fhome.jpg?alt=media&token=62f7af44-631d-4960-ac3d-58968e0cebcb"
       },
       "fontColor": "#FFF"
     },
