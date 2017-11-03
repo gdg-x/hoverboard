@@ -41,23 +41,18 @@
       "title": "DevFests pasados",
       "links": [
         {
+          "name": "DevFest Cochabamba 2012",
+          "url": "https://www.facebook.com/events/365305126886075/",
+          "newTab": true
+        },
+        {
           "name": "DevFest Cochabamba 2013",
-          "url": "http://gdg-devfest-ua.appspot.com/",
-          "newTab": true
-        },
-        {
-          "name": "DevFest Cochabamba 2014",
-          "url": "https://dfua14.firebaseapp.com//",
-          "newTab": true
-        },
-        {
-          "name": "DevFest Cochabamba 2015",
-          "url": "https://dfua15.firebaseapp.com/",
+          "url": "https://www.facebook.com/events/209731662538281/",
           "newTab": true
         },
         {
           "name": "DevFest Cochabamba 2016",
-          "url": "https://dfua16.firebaseapp.com/",
+          "url": "https://www.facebook.com/events/219656418439952/",
           "newTab": true
         }
       ]
@@ -100,8 +95,8 @@
     "callToAction": {
       "featuredSessions": {
         "description": "El GDG DevFest Cochabamba junta en la ciudad a expertos en Android, Web y tecnologías Cloud por 2 días de charlas, talleres y más.",
-        "label": "Mira una charla pasada destacada",
-        "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "label": "Mira la intro para el DevFest 2016",
+        "link": "https://www.youtube.com/watch?v=IgCpptnImYA"
       },
       "howItWas": {
         "description": "Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
