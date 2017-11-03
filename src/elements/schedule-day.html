@@ -157,7 +157,11 @@
           var filters = this.filters || [];
           if (!filters.length) return false;
           return function (session) {
-            return filters.indexOf(session.mainTag) > -1;
+            var found = false;
+            for (var i = session.tags.length - 1; i >= 0; i--) {
+              found = found || filters.indexOf(session.tags[i]) > -1
+            }
+            return found;
           };
         }
       });
