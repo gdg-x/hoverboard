@@ -260,13 +260,27 @@
         "link" : "https://twitter.com/traversoft",
         "name" : "Twitter"
       } ]
+    }, {
+      "bio" : "Pearl Latteier is a software engineer at Bendyworks in Madison WI, a Google Developer Expert in web technologies, and co-organizer of Madison’s Google Developer Group. She builds JavaScript applications for web and mobile, and she has spoken at conferences around the world on topics including Progressive Web Apps, Web Components, and Polymer. Long ago, Pearl earned a PhD from the University of Wisconsin-Madison, where for five years she taught courses in the Department of Communication Arts.",
+      "company" : "Bendyworks",
+      "country" : "Madison, WI",
+      "featured" : true,
+      "id" : 15,
+      "name" : "Pearl Latteier",
+      "photoUrl" : "/images/people/pearl_latteier.jpg",
+      "shortBio" : "Pearl Latteier is a software engineer at Bendyworks in Madison WI, a Google Developer Expert in web technologies, and co-organizer of Madison’s Google Developer Group...",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/pblatteier",
+        "name" : "Twitter"
+      } ]
     } ],
   "sessions" : {
     "100" : {
       "complexity" : "",
       "description" : "Let your users be the voice talent with Actions on Google. Learn how to design, develop, and distribute rich conversational experiences with Node.js. We’ll show you how to approach voice-driven, natural language interactions with Dialogflow’s powerful bot platform.",
       "id" : 100,
-      "speakers" : [ 1 ],
+      "speakers" : [ 1, 15 ],
       "tags" : [ "Actions on Google", "JavaScript" ],
       "title" : "Get talking with Actions on Google"
     },
@@ -275,7 +289,7 @@
       "description" : "In this talk, I will provide a short overview of bootstrapping a low cost application leveraging GCP's \"Platform as a Service\" offerings. The focus of the talk will be how to easily leverage many of machine analysis services provided by Google such as Image Analysis, Video Analysis, Speech Analysis and Text Analysis. Time permitting, I'd also like to discuss how GCP's services can help scale from 1 user to 1 million users. ",
       "id" : 101,
       "speakers" : [ 3 ],
-      "tags" : [ "Cloud", "GCP", "Machine Learning" ],
+      "tags" : [ "GCP", "Cloud", "Machine Learning" ],
       "title" : "Visual Analysis with Google Could Platform"
     },
     "102" : {
