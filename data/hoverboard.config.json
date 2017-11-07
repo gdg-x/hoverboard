@@ -91,10 +91,10 @@
   "gallery": {
     "albumUrl": "https://photos.google.com/share/AF1QipMLPU0pbgGhXZHxyq7xVt2Gol4WYbEVbAa-tcb2hcKVL_mXbkbNY0aJE-RUXJO_Jw?hl=tr&key=OFhMMEpwRDgydFBsbERILW1PN1FXUmwxUmdrWWRR",
     "photos": {
-      "big": "/images/backgrounds/2015_1.jpg",
+      "big": "images/backgrounds/2015_1.jpg",
       "small": [
-        "/images/backgrounds/2015_2.jpg",
-        "/images/backgrounds/2015_3.jpg"
+        "images/backgrounds/2015_2.jpg",
+        "images/backgrounds/2015_3.jpg"
       ]
     }
   },
