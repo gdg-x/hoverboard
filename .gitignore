@@ -6,3 +6,4 @@ build
 .temp/
 .vscode/
 *.log
+yarn.lock
