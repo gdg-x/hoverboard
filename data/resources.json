@@ -1,6 +1,6 @@
 {
   "title": "GDG DevFest Cochabamba 2017",
-  "description": "El evento más grande de tecnología Google en Cochabamba, organizado por la comunidad GDG Cochabamba! Android, Web, Angular y Cloud y mucho más, con la participación de expertos y profesionales!",
+  "description": "El evento más grande de tecnología Google en Cochabamba, organizado por la comunidad GDG Cochabamba!",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
   "dates": "25/11/2017",
   "partnershipProposition": "https://bit.ly/dfua17-partners",
@@ -14,7 +14,7 @@
   "signIn": "Ingresar",
   "signOut": "Salir",
   "footer": {
-    "blog": "Blog"
+    "blog": ""
   },
   "footerRelBlock": [
     {
@@ -93,15 +93,10 @@
   "aboutBlock": {
     "title": "Esto es lo que necesitas saber!",
     "callToAction": {
-      "featuredSessions": {
-        "description": "El GDG DevFest Cochabamba junta en la ciudad a expertos en Android, Web y tecnologías Cloud por 2 días de charlas, talleres y más.",
-        "label": "Mira la intro para el DevFest 2016",
-        "link": "https://www.youtube.com/watch?v=IgCpptnImYA"
-      },
       "howItWas": {
-        "description": "Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
-        "label": "See how it was in 2016",
-        "youtubeId": "TdpbgRgz6eE"
+        "description": "El GDG DevFest Cochabamba junta a expertos en Android, Web, Cloud y más tecnologías Google en un día de charlas y talleres.",
+        "label": "Mira la intro para el DevFest 2016",
+        "youtubeId": "IgCpptnImYA"
       }
     },
     "statisticsBlock": {
@@ -109,16 +104,16 @@
         "label": "Asistentes",
         "number": "500"
       },
-      "days": {
-        "label": "Días",
-        "number": "2"
+      "labs": {
+        "label": "Laboratorios",
+        "number": "6"
       },
       "sessions": {
         "label": "Charlas",
-        "number": "50"
+        "number": "14"
       },
       "tracks": {
-        "label": "Tracks",
+        "label": "Ambientes",
         "number": "4"
       }
     }
@@ -221,9 +216,9 @@
     "blocks": [
       {
         "title": "Organizadores",
-        "description": "El <a href='http://gdg.com.bo' target='_blank'>GDG Cochabamba</a> cuenta actualmente con X miembros activos, orgullosos de poder organizar el GDG DevFest Cochabamba por 4to.(?) año consecutivo",
+        "description": "El <a href='http://gdg.com.bo' target='_blank'>GDG Cochabamba</a> cuenta actualmente con X miembros activos, orgullosos de poder organizar el GDG DevFest Cochabamba por 2do. año consecutivo y el 4to. desde 2012.",
         "callToAction": {
-          "label": "Ir a gdg.com.bo",
+          "label": "Conoce al equipo",
           "link": "/team"
         }
       },

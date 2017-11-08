@@ -66,8 +66,8 @@ self.addEventListener('message', ({ data }) => {
       for (let sessionIndex = 0, sessionsLen = timeslot.sessions.length; sessionIndex < sessionsLen; sessionIndex++) {
         let subsessions = [];
 
-        for (let subSessionIndex = 0, subSessionsLen = timeslot.sessions[sessionIndex].items.length; subSessionIndex < subSessionsLen; subSessionIndex++) {
-          const sessionId = timeslot.sessions[sessionIndex].items[subSessionIndex];
+        for (let subSessionIndex = 0, subSessionsLen = timeslot.sessions[sessionIndex].length; subSessionIndex < subSessionsLen; subSessionIndex++) {
+          const sessionId = timeslot.sessions[sessionIndex][subSessionIndex];
           const subsession = sessionsRaw[sessionId];
           const mainTag = subsession.tags ? subsession.tags[0] : 'General';
           const endTimeRaw = timeslot.sessions[sessionIndex].extend ? day.timeslots[timeslotsIndex + timeslot.sessions[sessionIndex].extend - 1].endTime : timeslot.endTime;
