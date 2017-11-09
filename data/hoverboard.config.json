@@ -109,17 +109,17 @@
   },
   "location": {
     "short": "Cochabamba, Bolivia",
-    "address": "Ubicación desconocida, Cochabamba, Bolivia",
+    "address": "Calle Sucre y Parque la Torre Cochabamba, Bolivia",
     "pointer": {
-      "latitude": -17.4034288,
-      "longitude": -66.2287641,
-      "zoom": 14
+      "latitude": -17.3927150,
+      "longitude": -66.145590,
+      "zoom": 17
     },
     "mapCenter": {
-      "latitude": -17.389,
-      "longitude": -66.186
+      "latitude": -17.3930225,
+      "longitude": -66.1456679
     },
-    "description": "Aún no se tiene confirmado la ubicación de este evento pero de seguro que tiene que ser en un lugar amplio y cool."
+    "description": "Auditorio Facultad de Ciencias y Tecnología Universidad Mayor de San Simón"
   },
   "mediaQueries": {
     "xs": {
