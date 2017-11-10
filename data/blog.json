@@ -16,5 +16,14 @@
     "secondaryColor": "#455a64",
     "image": "/images/posts/zaftig_drafts.jpg",
     "brief": "The fun isn't over just because the talks are finished! We're headed to Zaftig."
+  },
+  {
+    "id": "no-better-place-to-be-on-saturday",
+    "title": "No better place to be Saturday Nov 18th!",
+    "posted": "2017-11-09",
+    "primaryColor": "#5a7785",
+    "secondaryColor": "#455a64",
+    "image": "https://aiyprojects.withgoogle.com/static/images/aiy-projects-voice/hero-box.png",
+    "brief": "Just take a peek at all that is going on Satuday at Ohio DevFest.  There's no better place to be Saturday November 18th."
   }
 ]
