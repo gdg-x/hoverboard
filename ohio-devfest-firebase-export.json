@@ -183,27 +183,14 @@
         "name" : "Twitter"
       } ]
     }, {
-      "bio" : "Dhiraj Mahapatro is a Software Developer at NetJets Inc.",
-      "company" : "NetJets",
+      "bio" : "Martha Lindeman is a usability consultant who for 25+ years has provided design input for many different types of systems and environments. She received her Bachelor's from Ohio State and her Ph.D. from Harvard University, focusing first on the mind-body relationship and then on how people's cognitive processes can be simulated by computer models.  Her latest projects involve designing for virtual reality (VR), augmented reality (AR), and mixed reality (MR). She is passionate about making systems and the process to create them both easy to learn and easy to use.",
+      "company" : "Agile Interactions",
       "country" : "Columbus, OH",
       "featured" : true,
       "id" : 10,
-      "name" : "Dhiraj Mahapatro",
-      "photoUrl" : "/images/people/dhiraj_mahapatro.png",
-      "shortBio" : "Dhiraj Mahapatro is a Software Developer at NetJets Inc.",
-      "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/dhirajmahapatro",
-        "name" : "Twitter"
-        }, {
-        "icon" : "github",
-        "link" : "https://github.com/dmahapatro",
-        "name" : "GitHub"
-        }, {
-          "icon" : "link",
-          "link" : "https://stackoverflow.com/cv/dmahapatro",
-          "name" : "StackOverflow"
-        } ]
+      "name" : "Martha Lindeman",
+      "photoUrl" : "/images/people/martha_lindeman.jpg",
+      "shortBio" : "Martha Lindeman is a usability consultant who for 25+ years has provided design input for many different types of systems and environments..."
     }, {
       "bio" : "Doug is a Principal Consultant at Improving Enterprises in Columbus Ohio.  He started developing software as a high school freshman on a TRS-80 16K.  He loved programming so much that he decided to get a BSCIS from Ohio State University.  Since then he has developed software for Graphics Kiosks, Rules Engines, Specialized Hardware and ASP.Net websites.  Over the last several years, he has helped grow the Windows Developer Community in Central Ohio.  He spends his free time developing Windows applications and Unity games.",
       "company" : "Improving Enterprises",
@@ -294,11 +281,11 @@
     },
     "102" : {
       "complexity" : "Intermediate",
-      "description" : "Today we have advanced with cloud based application infrastructure and with variety of clients (hybrid mobile apps, tablets, desktop) for our web applications. We have Spring Security for Grails and Spring Boot applications. We have Spring Security Rest plugin for Grails applications which eases token based authentication for our apps. In addition to all of the above, there is scope to add a multi-factor authentication step on webapps which confirms a user. With advancement of smart devices (phones and tablets), it is imminent that devices will be present with users at all times. Having DUO (a multi-factor authentication tool) integrated to web apps helps confirm that the actual registered user is fully authenticated. With a seamless integration of DUO API with Spring Boot and Grails we can have \"2FA at our finger tips\". This session will include pros of using DUO, a live demo and walk through DUO administration. Get your smartphones ready for some cool stuff.",
+      "description" : "Immersive virtual reality (VR), augmented reality (AR), and mixed reality (MR) are becoming mainstream while their software and hardware are rapidly changing.  They introduce new and novel usability issues ranging from high-level project methodology down to detailed design of sensory elements in their user interfaces. They also sometimes affect non-users who are interacting with AR and MR users.   Key questions include defining (a) new usability-design strategies and (b) new procedures and processes for usability testing.  The Five-Finger project life cycle and the GAINS™ design framework provide an approach to answering these questions and designing excellent user interfaces.",
       "id" : 102,
       "speakers" : [ 10 ],
-      "tags" : [ "Cloud", "2FA", "Spring", "Grails", "Security", "DUO" ],
-      "title" : "2FA at your Fingertips"
+      "tags" : [ "VR", "AR" ],
+      "title" : "How to Save Time and Decrease Risk in VR/AR/MR User-Interface Design"
     },
     "103" : {
       "complexity" : "Intermediate",
