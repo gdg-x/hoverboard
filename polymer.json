@@ -26,6 +26,7 @@
     "bower_components/iron-dropdown/iron-dropdown-scroll-manager.html",
     "bower_components/firebase/*.js",
     "bower_components/plastic-image/intersection-observer.js",
+    "bower_components/ua-parser-js/dist/ua-parser.min.js",
     "node_modules/redux/dist/redux.min.js",
     "node_modules/autotrack/autotrack.js"
   ],
