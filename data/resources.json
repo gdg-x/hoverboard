@@ -94,7 +94,7 @@
     "title": "Esto es lo que necesitas saber!",
     "callToAction": {
       "howItWas": {
-        "description": "El GDG DevFest Cochabamba junta a expertos en Android, Web, Cloud y más tecnologías Google en un día de charlas y talleres.",
+        "description": "El GDG DevFest Cochabamba junta a expertos en Web, Android, VR, Cloud y más tecnologías Google en un día de charlas y talleres.",
         "label": "Mira la intro para el DevFest 2016",
         "youtubeId": "IgCpptnImYA"
       }
@@ -216,7 +216,7 @@
     "blocks": [
       {
         "title": "Organizadores",
-        "description": "El <a href='http://gdg.com.bo' target='_blank'>GDG Cochabamba</a> cuenta actualmente con X miembros activos, orgullosos de poder organizar el GDG DevFest Cochabamba por 2do. año consecutivo y el 4to. desde 2012.",
+        "description": "El <a href='http://gdg.com.bo' target='_blank'>GDG Cochabamba</a> cuenta actualmente con 40+ miembros activos, orgullosos de poder organizar el GDG DevFest Cochabamba por 2do. año consecutivo y el 4to. desde 2012.",
         "callToAction": {
           "label": "Conoce al equipo",
           "link": "/team"
