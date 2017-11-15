@@ -5,4 +5,5 @@ build
 .idea/
 .temp/
 .vscode/
-.firebaserc
+*.log
+yarn.lock

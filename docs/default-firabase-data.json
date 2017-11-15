@@ -16,42 +16,6 @@
       "logoUrl" : "../images/logos/gdg-x.svg",
       "name" : "GDG[x]",
       "url" : "https://github.com/gdg-x"
-    }, {
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
     } ],
     "title" : "General Partner"
   } ],
@@ -543,7 +507,7 @@
     "featured" : true,
     "id" : 1,
     "name" : "Mete Atamel",
-    "photoUrl" : "/images/people/mete_atamel.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Mete is a Developer Advocate at Google, currently focused on helping developers with Google Cloud...",
     "socials" : [ {
       "icon" : "linkedin",
@@ -573,7 +537,7 @@
     "featured" : true,
     "id" : 2,
     "name" : "Yonatan Levin",
-    "photoUrl" : "/images/people/yonatan_levin.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Born with the spirit of an entrepreneur, Yonatan loves to create, build and just do fun stuff in...",
     "socials" : [ {
       "icon" : "facebook",
@@ -598,7 +562,7 @@
     "featured" : true,
     "id" : 3,
     "name" : "Sascha Wolter",
-    "photoUrl" : "/images/people/sascha_wolter.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "UX enthusiast with passion for the IoT. Board member of the Usability & User Experience committee at the federal association BITKOM.",
     "socials" : [ {
       "icon" : "website",
@@ -623,7 +587,7 @@
     "featured" : true,
     "id" : 4,
     "name" : "Rustem Arzymbetov",
-    "photoUrl" : "/images/people/rustem_arzymbetov.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Rustem is working at Google for last 8 years. Was in Search and Android teams. Big fan of perform...",
     "socials" : [ {
       "icon" : "gplus",
@@ -640,7 +604,7 @@
     "featured" : true,
     "id" : 5,
     "name" : "Adrian Kajda",
-    "photoUrl" : "/images/people/adrian_kajda.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Creator of Fuelio app. Fuelio was his hooby project started in 2012. Three years later the app wa...",
     "socials" : [ {
       "icon" : "gplus",
@@ -662,7 +626,7 @@
     "featured" : true,
     "id" : 6,
     "name" : "Gerard Sans",
-    "photoUrl" : "/images/people/gerard_sans.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Angular Google Developer Expert. International speaker and trainer.  Enjoy running AngularLabs London.",
     "socials" : [ {
       "icon" : "twitter",
@@ -683,7 +647,7 @@
     "featured" : true,
     "id" : 7,
     "name" : "Jozef Vodicka",
-    "photoUrl" : "/images/people/jozef_vodicka.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "TEDx speaker, Slovak Forbes 30-under-30, IT auditor for AIESEC International & TOP 5 Student Entrepreneurs in Slovakia.",
     "socials" : [ {
       "icon" : "linkedin",
@@ -721,7 +685,7 @@
     "featured" : true,
     "id" : 8,
     "name" : "Mateusz Herych",
-    "photoUrl" : "/images/people/mateusz_herych.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "3x rockstar of DevFest Ukraine stage. Android GDE. Co-organizer of GDG Krakow.",
     "socials" : [ {
       "icon" : "gplus",
@@ -746,7 +710,7 @@
     "featured" : false,
     "id" : 9,
     "name" : "David Mayboroda",
-    "photoUrl" : "/images/people/david_mayboroda.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Ex Yandex emproyee. Android enthusiast.",
     "socials" : [ {
       "icon" : "facebook",
@@ -776,7 +740,7 @@
     "featured" : true,
     "id" : 10,
     "name" : "Konrad Dzwinel",
-    "photoUrl" : "/images/people/konrad_dzwinel.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Fighting for 60FPS on Web. GDE on Web Technologies. Co-organizer of GDG Krakow.",
     "socials" : [ {
       "icon" : "github",
@@ -802,7 +766,7 @@
     "featured" : false,
     "id" : 11,
     "name" : "Jean-Baptiste Clion",
-    "photoUrl" : "/images/people/jean-baptiste_clion.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Founder and co-organiser of GDG Basel. Worked in Defence & Aeronautics, Finance & Consulting industries.",
     "socials" : [ {
       "icon" : "facebook",
@@ -836,7 +800,7 @@
     "featured" : true,
     "id" : 12,
     "name" : "Paul Lammertsma",
-    "photoUrl" : "/images/people/paul_lammertsma.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Paul is CTO and co-founder of Pixplicity, Holland's leading Android-specific consulting and app-b...",
     "socials" : [ {
       "icon" : "gplus",
@@ -857,7 +821,7 @@
     "featured" : false,
     "id" : 13,
     "name" : "Aleksander Piotrowski",
-    "photoUrl" : "/images/people/aleksander_piotrowski.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Became a mobile developer after long run as a backend developer. Because of age, holding senior p...",
     "socials" : [ {
       "icon" : "twitter",
@@ -886,7 +850,7 @@
     "featured" : false,
     "id" : 14,
     "name" : "Carmen Popovicu",
-    "photoUrl" : "/images/people/carmen_popovicu.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Angular JS committer. Founder of Dutch Angular JS Community, co-organizer of NG-NL.",
     "socials" : [ {
       "icon" : "gplus",
@@ -907,7 +871,7 @@
     "featured" : true,
     "id" : 15,
     "name" : "Sergii Khomenko",
-    "photoUrl" : "/images/people/sergii_khomenko.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Data scientist at one of the biggest fashion communities, STYLIGHT. Data analysis and visualisati...",
     "socials" : [ {
       "icon" : "twitter",
@@ -933,7 +897,7 @@
     "featured" : false,
     "id" : 16,
     "name" : "Dmytro Danylyk",
-    "photoUrl" : "/images/people/dmytro_danylyk.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "First Android GDE in Ukraine. Frequent speaker on tech conferences.",
     "socials" : [ {
       "icon" : "website",
@@ -971,7 +935,7 @@
     "featured" : false,
     "id" : 17,
     "name" : "Jana Moudra",
-    "photoUrl" : "/images/people/jana_moudra.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "GDG Prague organizer. Android and Dart enthusiast. Co-founder of a company called Juicymo.",
     "socials" : [ {
       "icon" : "gplus",
@@ -1005,7 +969,7 @@
     "featured" : false,
     "id" : 18,
     "name" : "Jakub Škvára",
-    "photoUrl" : "/images/people/jakub_škvára.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Jakub is a front-end engineer at Shipito interested in modern web frameworks, libraries and tools...",
     "socials" : [ {
       "icon" : "twitter",
@@ -1031,7 +995,7 @@
     "featured" : true,
     "id" : 19,
     "name" : "David Vávra",
-    "photoUrl" : "/images/people/david_vávra.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Founder and CEO of Step Up Labs. Android GDE.",
     "socials" : [ {
       "icon" : "gplus",
@@ -1069,7 +1033,7 @@
     "featured" : false,
     "id" : 20,
     "name" : "Valentyn Shybanov",
-    "photoUrl" : "/images/people/valentyn_shybanov.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Google Developer Expert on Cloud. Co-organizer of GDG Kyiv-Center.",
     "socials" : [ {
       "icon" : "gplus",
@@ -1095,7 +1059,7 @@
     "featured" : false,
     "id" : 21,
     "name" : "Sergiy Mokienko",
-    "photoUrl" : "/images/people/sergiy_mokienko.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Sergiy is an android developer that has experience from building apps from scratch to developing...",
     "socials" : [ {
       "icon" : "linkedin",
@@ -1125,7 +1089,7 @@
     "featured" : false,
     "id" : 22,
     "name" : "Ihor Dvoretskyi",
-    "photoUrl" : "/images/people/ihor_dvoretskyi.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "OpenStack Foundation member, Kubernetes upstream contributor and OpenStack special interest group lead in Kubernetes Community.",
     "socials" : [ {
       "icon" : "gplus",
@@ -1150,7 +1114,7 @@
     "featured" : false,
     "id" : 23,
     "name" : "Michael Pustovit",
-    "photoUrl" : "/images/people/michael_pustovit.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Michael is a software engineer at Stanfy. He is KPI FICT Computer Science graduate and has 4+ yea...",
     "socials" : [ {
       "icon" : "github",
@@ -1175,7 +1139,7 @@
     "featured" : false,
     "id" : 24,
     "name" : "Anton  Minashkin",
-    "photoUrl" : "/images/people/anton_minashkin.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Android developer, currently works at EPAM. Have experience in both server and mobile side develo...",
     "socials" : [ {
       "icon" : "facebook",
@@ -1205,7 +1169,7 @@
     "featured" : false,
     "id" : 25,
     "name" : "Constantine Mars",
-    "photoUrl" : "/images/people/constantine_mars.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Constantine is Senior Android Developer at DataArt and GDG Dnipro Organizer. He was speaker on De...",
     "socials" : [ {
       "icon" : "gplus",
@@ -1231,7 +1195,7 @@
     "featured" : false,
     "id" : 26,
     "name" : "Resul Caner  Yildirim",
-    "photoUrl" : "/images/people/resul caner_yildirim.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Caner is a GDE on UX/UI who is also a technology geek. Mainly focused on the design and marketing...",
     "socials" : [ {
       "icon" : "twitter",
@@ -1273,7 +1237,7 @@
     "featured" : false,
     "id" : 27,
     "name" : "Roman Herasymenko",
-    "photoUrl" : "/images/people/roman_herasymenko.jpg",
+    "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
     "shortBio" : "Roman is Founder and CEO at Yamert and a co-organizer of GDG Dnipropetrovsk. Roman is interesting...",
     "socials" : [ {
       "icon" : "gplus",
@@ -1290,7 +1254,7 @@
   "team" : [ {
     "members" : [ {
       "name" : "Oleh Zasadnyy",
-      "photoUrl" : "/images/people/oleh_zasadnyy.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
       "socials" : [ {
         "icon" : "gplus",
         "link" : "https://plus.google.com/+OlehZasadnyy",
@@ -1311,7 +1275,7 @@
       "title" : "Website and sponsors"
     }, {
       "name" : "Sofiya Huts",
-      "photoUrl" : "/images/people/sofiya_huts.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
       "socials" : [ {
         "icon" : "gplus",
         "link" : "https://plus.google.com/+SofiaHuts",
@@ -1324,7 +1288,7 @@
       "title" : "Social and media"
     }, {
       "name" : "Vitaliy Zasadnyy",
-      "photoUrl" : "/images/people/vitaliy_zasadnyy.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
       "socials" : [ {
         "icon" : "linkedin",
         "link" : "https://www.linkedin.com/in/zasadnyy",
@@ -1341,7 +1305,7 @@
       "title" : "Speakers"
     }, {
       "name" : "Marta Maxymiak",
-      "photoUrl" : "/images/people/marta_maxymiak.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
       "socials" : [ {
         "icon" : "gplus",
         "link" : "https://plus.google.com/104036874811391520583",
@@ -1354,7 +1318,7 @@
       "title" : "Party and happiness"
     }, {
       "name" : "Ostap Andrusiv",
-      "photoUrl" : "/images/people/ostap_andrusiv.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
       "socials" : [ {
         "icon" : "gplus",
         "link" : "https://google.com/+OstapAndrusiv",
@@ -1375,7 +1339,7 @@
       "title" : "Sponsors"
     }, {
       "name" : "Vasylyna Mytsak",
-      "photoUrl" : "/images/people/vasylyna_mytsak.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
       "socials" : [ {
         "icon" : "gplus",
         "link" : "https://plus.google.com/+ВасилинаМицак",
@@ -1388,7 +1352,7 @@
       "title" : "Party and happiness"
     }, {
       "name" : "Volodya Karpliuk",
-      "photoUrl" : "/images/people/volodya_karpliuk.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
       "socials" : [ {
         "icon" : "gplus",
         "link" : "https://plus.google.com/+VolodyaKarpliuk23",
@@ -1405,7 +1369,7 @@
       "title" : "Speakers"
     }, {
       "name" : "Diana Pinchuk",
-      "photoUrl" : "/images/people/diana_pinchuk.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
       "socials" : [ {
         "icon" : "gplus",
         "link" : "https://plus.google.com/+DianaPinchuk",
@@ -1421,7 +1385,7 @@
   }, {
     "members" : [ {
       "name" : "Ihor Dvoretskyi",
-      "photoUrl" : "/images/people/ihor_dvoretskyi.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
       "socials" : [ {
         "icon" : "facebook",
         "link" : "https://www.facebook.com/idvoretskyi",
@@ -1434,7 +1398,7 @@
       "title" : "Cloud stream"
     }, {
       "name" : "Dmytro Danylyk",
-      "photoUrl" : "/images/people/dmytro_danylyk.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fpeople%2Fsergii_khomenko.jpg?alt=media&token=cb65c333-dda8-4bbd-a1b9-0544f5aa406a",
       "socials" : [ {
         "icon" : "gplus",
         "link" : "https://plus.google.com/+DmytroDanylyk",

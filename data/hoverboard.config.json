@@ -10,6 +10,14 @@
   "environment": "dev",
   "prefix": "/",
   "firebase": {
+    "apiKey": "AIzaSyCzCA6c0iKI18dgpbL8CGRmALy1xvIyucE",
+    "authDomain": "devfest-2017-2285e.firebaseapp.com",
+    "databaseURL": "https://devfest-2017-2285e.firebaseio.com",
+    "projectId": "devfest-2017-2285e",
+    "storageBucket": "devfest-2017-2285e.appspot.com",
+    "messagingSenderId": "721819088667"
+  },
+  "firebase1": {
     "apiKey": "AIzaSyALDa2D7CMhK_wt2VkET1MaJuQXYVUJd2I",
     "authDomain": "hoverboard-experimental.firebaseapp.com",
     "databaseURL": "https://hoverboard-experimental.firebaseio.com",
@@ -17,34 +25,37 @@
     "storageBucket": "hoverboard-experimental.appspot.com",
     "messagingSenderId": "1088172422905"
   },
+  "firebase2": {
+    "apiKey": "AIzaSyCzCA6c0iKI18dgpbL8CGRmALy1xvIyucE",
+    "authDomain": "devfest-2017-2285e.firebaseapp.com",
+    "databaseURL": "https://devfest-2017-2285e.firebaseio.com",
+    "projectId": "devfest-2017-2285e",
+    "storageBucket": "devfest-2017-2285e.appspot.com",
+    "messagingSenderId": "721819088667"
+  },
   "googleMapApiKey": "AIzaSyDWy6O98n-ueoVaYPWRPve23vjm3JP08gw",
   "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv",
-    "blog": "https://medium.com/gdg-lviv",
-    "url": "http://lviv.gdg.org.ua/"
+    "name": "GDG Cochabamba",
+    "twitter": "GDGCochabamba",
+    "url": "http://gdg.com.bo/"
   },
   "webapp": {
     "shortName": "DevFest",
-    "themeColor": "#673AB7",
-    "backgroundColor": "#673AB7"
+    "themeColor": "#FB067F",
+    "backgroundColor": "#211F35"
   },
   "hashtag": "DevFest17",
   "navigation": [
     {
       "route": "home",
       "permalink": "/",
-      "title": "Home"
-    },
-    {
-      "route": "blog",
-      "permalink": "/blog/",
-      "title": "Blog"
+      "title": "Inicio"
     },
     {
       "route": "schedule",
-      "permalink": "/schedule/",
-      "title": "Schedule"
+      "permalink": "/schedule/2017-11-25",
+
+      "title": "Cronograma"
     },
     {
       "route": "speakers",
@@ -54,42 +65,35 @@
     {
       "route": "team",
       "permalink": "/team/",
-      "title": "Team"
+      "title": "Equipo"
     }
   ],
   "heroSettings": {
     "home": {
-      "description": "The biggest Google tech conference in CEE. All about Android, Web, and Cloud.",
+      "description": "El evento más grande de tecnologías Google en Cochabamba.\n Organizado por la comunidad GDG Cochabamba!",
       "background": {
         "color": "#673ab7",
-        "image": "/images/backgrounds/home.jpg"
+        "image": "https://firebasestorage.googleapis.com/v0/b/devfest-2017-2285e.appspot.com/o/images%2Fwebassets%2Fhome.jpg?alt=media&token=bc33c528-0280-4a91-9e95-32e9f043a0c9"
       },
       "fontColor": "#FFF"
     },
-    "blog": {
-      "title": "Blog",
-      "background": {
-        "color": "#FFF"
-      },
-      "fontColor": "#424242"
-    },
     "speakers": {
       "title": "Speakers",
-      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
+      "description": "Miembros del GDG Cochabamba, miembros de otros GDGs, Socios e invitados especiales.",
       "background": {
         "color": "#FFF"
       },
       "fontColor": "#424242"
     },
     "schedule": {
-      "title": "Schedule",
+      "title": "Cronograma",
       "background": {
         "color": "#fff"
       },
       "fontColor": "#424242"
     },
     "team": {
-      "title": "Team",
+      "title": "Equipo",
       "background": {
         "color": "#fff"
       },
@@ -104,18 +108,18 @@
     }
   },
   "location": {
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "short": "Cochabamba, Bolivia",
+    "address": "Calle Sucre y Parque la Torre Cochabamba, Bolivia",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 5
+      "latitude": -17.3927150,
+      "longitude": -66.145590,
+      "zoom": 17
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": -17.3930225,
+      "longitude": -66.1456679
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": "Auditorio Facultad de Ciencias y Tecnología Universidad Mayor de San Simón"
   },
   "mediaQueries": {
     "xs": {
@@ -137,15 +141,11 @@
     "follow": [
       {
         "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
+        "url": "https://www.facebook.com/GDGCochabamba"
       },
       {
         "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
-      },
-      {
-        "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
+        "url": "https://twitter.com/GDGCochabamba"
       },
       {
         "name": "youtube",
@@ -167,7 +167,7 @@
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
+  "mailto": "cochabamba@gdg.com.bo",
   "mailchimp": {
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
@@ -176,17 +176,17 @@
     "providersData": [
       {
         "name": "google",
-        "label": "Sign-in with Google",
+        "label": "Registrarse con Google",
         "url": "https://accounts.google.com"
-      }, 
+      },
       {
         "name": "facebook",
-        "label": "Sign-in with Facebook",
+        "label": "Registrarse con Facebook",
         "url": "https://www.facebook.com"
-      }, 
+      },
       {
         "name": "twitter",
-        "label": "Sign-in with Twitter",
+        "label": "Registrarse con Twitter",
         "url": "https://twitter.com"
       }
     ],
