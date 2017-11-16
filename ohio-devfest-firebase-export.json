@@ -416,7 +416,7 @@
       "complexity" : "Beginner",
       "description" : "Hands on coding lab for Actions on Google. More details to come!",
       "id" : 203,
-      "speakers" : [ 1 ],
+      "speakers" : [ 1, 15 ],
       "tags" : [ "Actions on Google", "Code Lab", "Google Assistant", "Android" ],
       "title" : "Actions on Google Code Lab"
     },
@@ -424,7 +424,7 @@
       "complexity" : "Beginner",
       "description" : "Hands on coding lab for Actions on Google. More details to come!",
       "id" : 203,
-      "speakers" : [ 1 ],
+      "speakers" : [ 1, 15 ],
       "tags" : [ "Actions on Google", "Code Lab", "Google Assistant", "Android" ],
       "title" : "Actions on Google Code Lab (continued)"
     },
