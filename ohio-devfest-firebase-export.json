@@ -239,18 +239,18 @@
         "name" : "Twitter"
       } ]
     }, {
-      "bio" : "Mike traded in a decade of full stack development for Wall Street for mobile development. Since then he has worked on native iOS & Android apps for large corporations and startups. He's developed Hillary 2016 for Android, games for Ringling Bro's Circus and apps for the last Twitter Flight conference. Currently he's working on enterprise iOS apps for the New York Yankees. He's beat stage 3 cancer twice and always looks to give back to the tech community by speaking at local meetups or organizing and sponsoring DevFest Florida.",
-      "company" : "Traversoft",
-      "country" : "Tampa, FL",
+      "bio" : "Slava is a Data Scientist at Columbus Collaboratory...",
+      "company" : "Columbus Collaboratory",
+      "country" : "Columbus, OH",
       "featured" : true,
       "id" : 14,
-      "name" : "Mike Traverso",
-      "photoUrl" : "/images/people/mike_traverso.jpg",
-      "shortBio" : "Mike traded in a decade of full stack development for Wall Street for mobile development. Since then he has worked on native iOS & Android apps for large corporations and startups.",
+      "name" : "Slava Nikitin",
+      "photoUrl" : "/images/people/slava_nikitin.jpg",
+      "shortBio" : "Slava is a Data Scientist at Columbus Collaboratory",
       "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/traversoft",
-        "name" : "Twitter"
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/slava-nikitin-7a4915107/",
+        "name" : "LinkedIn"
       } ]
     }, {
       "bio" : "Pearl Latteier is a software engineer at Bendyworks in Madison WI, a Google Developer Expert in web technologies, and co-organizer of Madison’s Google Developer Group. She builds JavaScript applications for web and mobile, and she has spoken at conferences around the world on topics including Progressive Web Apps, Web Components, and Polymer. Long ago, Pearl earned a PhD from the University of Wisconsin-Madison, where for five years she taught courses in the Department of Communication Arts.",
@@ -333,12 +333,12 @@
       "title" : "Using Popular Machine Learning Models and Techniques"
     },
     "108" : {
-      "complexity" : "Beginner",
-      "description" : "The Flutter SDK looks incredibly promising. Let's face it though, not a lot of us are Dart developers. Let's see some of the basics of Dart & Flutter to implement both iOS & Android apps using Firebase as a backend. In this talk, we'll first take a look at Dart, see its similarities & differences compared to Java. Then take a look at what it takes to write an app with one codebase for Android & iOS. Finally we'll pull our conference data into our app using Firebase as our datasource.",
+      "complexity" : "Intermediate",
+      "description" : "Description coming soon!",
       "id" : 108,
       "speakers" : [ 14 ],
-      "tags" : [ "Flutter", "Android", "iOS", "Firebase" ],
-      "title" : "Developing iOS and Android apps with Flutter"
+      "tags" : [ "Machine Learning", "AI", "Data Science" ],
+      "title" : "AI is Automated Inference -- AI is eating software while Software is eating the world"
     },
     "109" : {
       "complexity" : "Beginner",
