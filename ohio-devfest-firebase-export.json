@@ -190,7 +190,12 @@
       "id" : 10,
       "name" : "Martha Lindeman",
       "photoUrl" : "/images/people/martha_lindeman.jpg",
-      "shortBio" : "Martha Lindeman is a usability consultant who for 25+ years has provided design input for many different types of systems and environments..."
+      "shortBio" : "Martha Lindeman is a usability consultant who for 25+ years has provided design input for many different types of systems and environments...",
+      "socials" : [ {
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/marthalindeman/",
+        "name" : "LinkedIn"
+      } ]
     }, {
       "bio" : "Doug is a Principal Consultant at Improving Enterprises in Columbus Ohio.  He started developing software as a high school freshman on a TRS-80 16K.  He loved programming so much that he decided to get a BSCIS from Ohio State University.  Since then he has developed software for Graphics Kiosks, Rules Engines, Specialized Hardware and ASP.Net websites.  Over the last several years, he has helped grow the Windows Developer Community in Central Ohio.  He spends his free time developing Windows applications and Unity games.",
       "company" : "Improving Enterprises",
