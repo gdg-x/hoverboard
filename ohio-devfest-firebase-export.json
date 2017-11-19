@@ -239,14 +239,14 @@
         "name" : "Twitter"
       } ]
     }, {
-      "bio" : "Slava is a Data Scientist at Columbus Collaboratory...",
+      "bio" : "Slava Nikitin is a data scientist at the Columbus Collaboratory. He mixes statistical and computational ideas to build automated inference systems across 7 industry verticals that make up the Collaboratory. Outside of Collaboratory, he teaches a data analytics course at the Otterbein University Business School, sharing the modern data technology stack and how it can be used to create new businesses, or transform existing ones.",
       "company" : "Columbus Collaboratory",
       "country" : "Columbus, OH",
       "featured" : true,
       "id" : 14,
       "name" : "Slava Nikitin",
       "photoUrl" : "/images/people/slava_nikitin.jpg",
-      "shortBio" : "Slava is a Data Scientist at Columbus Collaboratory",
+      "shortBio" : "Slava Nikitin is a data scientist at the Columbus Collaboratory...",
       "socials" : [ {
         "icon" : "linkedin",
         "link" : "https://www.linkedin.com/in/slava-nikitin-7a4915107/",
@@ -334,7 +334,7 @@
     },
     "108" : {
       "complexity" : "Intermediate",
-      "description" : "Description coming soon!",
+      "description" : "AI powered software is showing huge growth. What is it, how is it built and what is special about it? This talk will provide a perspective on these questions starting with the idea of AI as automated inference. The story will involve theories of probability and statistics, design space of inference systems, their pros and cons, probabilistic programming, hardware accelerators, data, with examples tying the different points together. Overall, the proposed perspective, powered by a certain stack of hardware and software, provide a powerful framework for solving many interesting and valuable problems.",
       "id" : 108,
       "speakers" : [ 14 ],
       "tags" : [ "Machine Learning", "AI", "Data Science" ],
@@ -374,7 +374,7 @@
     },
     "114" : {
       "complexity" : "Intermediate",
-      "description" : "This talk will provide a broad overview of some of the most popular machine learning algorithms and techniques. Specific topics may include Decision Trees, Random Forests, Neural Networks, and associated ensemble methods (gradient boosting vs. bagging/bootstrapping). Attendees can expect a high-level overview of techniques, a review of the circumstances under which they are and aren't appropriate for use, and a brief crash course on how to implement some popular algorithms using open source software.",
+      "description" : "This talk aims to familiarize the audience with different types and structures of large scale biological datasets, such as genomic, transcriptomic and proteomic data. It will touch upon the main programming questions/problems to analyze these data and will explain why it is so relevant to pharma and healthcare industry in achieving the personalized medicine.",
       "id" : 114,
       "speakers" : [ 7 ],
       "tags" : [ "Machine Learning", "Data Science" ],
@@ -589,14 +589,14 @@
       "info" : "Requires valid student ID",
       "name" : "Student",
       "price" : 30,
-      "soldOut" : false,
+      "soldOut" : true,
       "starts" : "October 19"
     }, {
       "currency" : "$",
       "ends" : "November 18",
       "name" : "Professional",
       "price" : 50,
-      "soldOut" : false,
+      "soldOut" : true,
       "starts" : "October 19"
     } ],
     "url" : "https://www.eventbrite.com/e/ohio-devfest-2017-tickets-37510713554"
