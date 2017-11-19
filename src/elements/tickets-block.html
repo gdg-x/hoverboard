@@ -68,7 +68,7 @@
       <div class="block-header">
         <h4 class="heading">{$ ticketsTitle $}</h4>
       </div>
-      <div class="tickets-wrapper">
+      <!-- <div class="tickets-wrapper">
         <template is="dom-repeat" items="[[app.tickets.elements]]" as="ticket">
           <ticket-element
             type="[[ticket.name]]"
@@ -82,11 +82,15 @@
           </ticket-element>
         </template>
       </div>
-      <div class="details">{$ ticketsDetails $}</div>
+      <div class="details">{$ ticketsDetails $}</div> -->
 
-      <a href="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
+      <div class="description">
+        Ticket sales is closed for 2017, but Ohio DevFest will return to Cincinnati for 2018<br/><br/>
+        Stay tuned date and venue!
+      </div>
+      <!-- <a href="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
         <paper-button class="buy-button disabled" raised disabled>{$ buyTicket $}</paper-button>
-      </a>
+      </a> -->
     </div>
 
   </template>
