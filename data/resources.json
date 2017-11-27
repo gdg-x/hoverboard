@@ -5,7 +5,7 @@
   "dates": "2 Aralık, 2017",
   "locationAddressShort": "Corlu, Tekirdag",
   "motto": "Be a GDG. Be a Hero!",
-  "playIcon": "See how it was in 2016",
+  "playIcon": "See how it was in 2017",
   "c4p": "Konuşmacı ol",
   "buyTicket": "Kayıt Ol",
   "backToTop": "Sayfa Başı",
@@ -64,13 +64,8 @@
       "links": [
         {
           "text": "Takım",
-          "url": "#",
-          "newTab": false
-        },
-        {
-          "text": "Code of Conduct",
-          "url": "#",
-          "newTab": false
+          "url": "https://www.meetup.com/tr-TR/gdgtekirdag/",
+          "newTab": true
         },
         {
           "text": "Google Developers",
