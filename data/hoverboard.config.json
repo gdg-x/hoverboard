@@ -1,14 +1,14 @@
 {
-  "url": "https://hoverboard.firebaseapp.com/",
+  "url": "https://devfest-tekirdag.firebaseapp.com/",
   "startDate": "2016-09-09T09:00:00+03:00",
   "endDate": "2016-09-10T19:00:00+03:00",
   "analytics": {
-    "prod": "UA-43643469-8",
+    "prod": "UA-107855243-1",
     "dev": "UA-43643469-9"
   },
   "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv"
+    "name": "GDG Tekirdağ",
+    "twitter": "gdgtekirdag"
   },
   "webapp": {
     "shortName": "DevFest",
@@ -16,36 +16,31 @@
     "backgroundColor": "#F57C00"
   },
   "firebase": {
-    "name": "hoverboard-master",
-    "domain": "hoverboard-master.firebaseapp.com",
-    "database": "https://hoverboard-master.firebaseio.com",
-    "api": "AIzaSyCaSkhtHekxAqXXzzbuNs2s6CpGdhZdta8",
+    "name": "devfest-tekirdag",
+    "domain": "devfest-tekirdag.firebaseapp.com",
+    "database": "https://devfest-tekirdag.firebaseio.com",
+    "api": "AIzaSyBr8SESCQQPBtwrh8bAzgLKaWfQGxLumfo",
     "userSessionsPath": "/userSessions",
     "ratingsPath": "/ratings",
     "indexedDbSession": "hoverboard"
   },
   "mailchimp": {
-    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
+    "url": "#",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
   },
   "dateFormat": {
-    "locale": "en-US",
+    "locale": "tr-TR",
     "blog": {"month": "short", "day": "numeric", "year": "numeric"}
   },
-  "hashtag": "dfua",
+  "hashtag": "dftek",
   "disqusShortName": "hoverboard-gdg-x",
-  "tweetsSource": "/data/tweets.json",
+  "tweetsSource": "https://dftek.herokuapp.com/favoritesjson.php?c=10&cache_interval=8000",
   "partnershipProposition": "http://bit.ly/df16-sponsor",
-  "videosSessionsUrl": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AX3-ONkkWmDOZezu9Cmnv",
   "enableSessionsRating": true,
   "navigation": [
     {
       "route": "home",
       "permalink": "/"
-    },
-    {
-      "route": "blog",
-      "permalink": "/blog/"
     },
     {
       "route": "schedule",
@@ -54,47 +49,38 @@
     {
       "route": "speakers",
       "permalink": "/speakers/"
-    },
-    {
-      "route": "team",
-      "permalink": "/team/"
     }
   ],
   "social": [
     {
       "name": "twitter",
-      "nickname": "GDGLviv",
-      "url": "https://twitter.com/gdglviv"
+      "nickname": "GDG Tekirdag",
+      "url": "https://twitter.com/gdgtekirdag"
     },
     {
       "name": "gplus",
-      "nickname": "102444623953913144164",
-      "url": "https://plus.google.com/102444623953913144164"
+      "nickname": "101591578664230961035",
+      "url": "https://plus.google.com/101591578664230961035"
     },
     {
       "name": "facebook",
-      "nickname": "GDGLviv",
-      "url": "https://www.facebook.com/GDGLviv"
-    },
-    {
-      "name": "linkedin",
-      "nickname": "google-developers-group-lviv",
-      "url": "https://www.linkedin.com/company/google-developers-group-lviv"
+      "nickname": "GDG Tekirdag",
+      "url": "https://www.facebook.com/gdgtekirdag/"
     }
   ],
   "location": {
     "apiKey": "",
-    "name": "Pivdennyi Expo Center",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
-    "link": "https://www.facebook.com/expopivdennij",
+    "name": "Çorlu Mühendislik Fakültesi",
+    "address": "Silahtarağa Mah. Üniversite Sok. No:1, Çorlu, Tekirdağ",
+    "link": "https://www.facebook.com/%C3%87orlu-M%C3%BChendislik-Fak%C3%BCltesi-132639699634/",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
+      "latitude": 41.181699,
+      "longitude": 27.817607,
       "zoom": 15
     },
     "mapCenter": {
-      "latitude": 49.809841,
-      "longitude": 23.982805
+      "latitude": 41.181699,
+      "longitude": 27.817607
     },
     "images": [
       "/images/backgrounds/location_1.jpg",
@@ -103,42 +89,29 @@
     ]
   },
   "gallery": {
-    "albumUrl": "https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1",
+    "albumUrl": "https://photos.google.com/share/AF1QipMLPU0pbgGhXZHxyq7xVt2Gol4WYbEVbAa-tcb2hcKVL_mXbkbNY0aJE-RUXJO_Jw?hl=tr&key=OFhMMEpwRDgydFBsbERILW1PN1FXUmwxUmdrWWRR",
     "photos": {
-      "big": "/images/backgrounds/2015_1.jpg",
+      "big": "https://lh3.googleusercontent.com/HmuhL62R5Ce86jKVeJq9-bEdGkAgB4FUaquO0epxH3_WVNR7A6vHCuQ4BiKwqtGhtd4EFv78Ubl-WOcQPZK29HO5ZO5IlJRIezCv_1shHCnXWYT1XVMKRg339CLiI2dzVxT3nJLbT2LhYG7-G0arH5-gvSjBu2JdgRnUvv04QNHNhpaRNWgPgmU7lbT7VwdeDgqv6cnOFUIqxr0gqe_lW4LMfP91u0oRaK2MfGL0wKxc5MesrHK9Hdc3tZZJ_V-T1qpW_RuoMybS0iD8btMBNoiPtCXBJOncgLbFMFIAD_F3RO46g_cZ2KLn5oNb6wz1hGcX4v-c8xhfgMW79QYvtoxYBLnGqaD0ubjfNptZ-SmqkISfZRMxi9JHE2qmkos4MltFuGJguzpyCF1DYuD5HV7lwgjdUPBOUim694XW0b_oKrbpd8T3pbULmDZAtAsvlZKLUnTII6Sb3EDQ9zuuwgNHpH_lNi9uNFGuFlsPnJEnhYXtGqINGUbPsha-Ed5mTKOz601E9yzn5U6ItxdJGPysidhcEDSFjRdljYBxMhBA-zEGkEXLhu6NyRG6Cc3AF8pFgIbqwMIX_vPyNatPIJ5ilL8-4wR1T6raKkx1j8VtekeoGJ_hfqfD4O5NRb7ghE8Q8qQSBhpRVvKjp0YkkYor5sVz2To6VKU=w1144-h760-no",
       "small": [
-        "/images/backgrounds/2015_2.jpg",
-        "/images/backgrounds/2015_3.jpg"
+        "https://lh3.googleusercontent.com/E4zPEZs6vYuyzWGVaFkIfIgKpay1XpLfkejSDJIsv65Rm_MFRieJr8xfbkWZ35oNskpmWELmI3BaVe1xgYqh0qrj-Wk7bomtpmSyHqKqGuEXMZXgHlLVXiExoWQsXeDjzgVo6iKAVw9i7Ol-h20We4CfB8VGhMalSElzE95bZwwDoZff4yAOhtg1LgsRhlPqTLfl9Zax7yCduHZFxf1KOiuUzdBSKj8gb0enfS-N1E137ya98OMpn1KPOD9Kz2y_2XPW_LFOhXk9ToD4X2WX7Y0MC5uuUx0ju-Wq-EF1xVcMgv2JNl7aBogjoTiEIdyK6Dqw_oi7R7WEZiRgHPjnCrHKcHm7UPh0--i59Hh9iJ3sebs2Y-8xoO70exTc-njZUHY2N_Jqwm4j4DnSDSa8OoZwQF-ViJHZfkZnUWd3LfJ4jYhiuXhKh1ddfS4Qg9iXB1ddYA00YkhvVa74YNDA_VJnMrdrFuR8udxCjrW1bMGLts_4zC5abkZ9VeOOvxbopmh_EBkoPyLFlmf9hncTLva5-ar0qdzEJC5GOIS_mkNmC8ouukgnR7Hf9uoOWcouAqowMK_7TPh9hbP8ExYpmzMb8gCg2PsyxNfrTn74bVSqSeVA7jOH8Iv2PoJtOrrs7ISD1tshThPX_I0_gKzXmirPFFnyoX94GZg=w2862-h1900-no",
+        "https://lh3.googleusercontent.com/wFq_3QCVygQgW6DbjhRXswC1QkbbUW4G9QzIiq9hJctZ0I04wxMuT967MGeUejN5BwnoBJxVe2jDIReu-Huk5tNZpBxuFfgxtle3zhqYUZM9RteQorkfKjJC4xN2jBBRcNTMHl2LpiWMSXYAnNbTNko4lO0TYck6TS8pcjDP-LfVW470034LmbeVtYxF5TvUEuCzEHFQSvMdXVylPqaNF-KQXQPxxFIgaFSYz2vUwgASsBAhO_zB2eHLAchtY5cT0wKfhLBT2b_TU8Sj2YgBB971iv282QcxrYOridUhKCAisem4cvb_xP2SLrxw0NilzAFVGgAq-IjntXvZlMPBh3Xa4-An6jqKd8-W62jG5P0FQasyYextdRs_vU2qAPq7WaHohyR_qRkZ82BJLIHKx3dRHMG4K1en7vEooI2qmibZHJMU7AePt9kdVhLVBqHOgz1UK554cLQNlGRSpKOa_mPo-yLgDem5CWcpkBjuPHE_hnMZc29yLDoYu2xb-QQJttoMBmOQCFlgGgni2n0CSGy11fOzL69m_O1UBSzeu0Y77AIBvG4Dv24UF9BIk77zMvAzde7g4v3bAQ2ynuWJ-qBE1JEEy_qtyYhk0VNrM8ls2CPWETVOE_LQ1vi0v1BtAReA4GkD6mUlqYz4Wj6Jp7MvqYBxBqMlqoY=w2862-h1902-no"
       ]
     }
   },
   "pages": {
     "home": {
-      "title": "Home",
+      "title": "Ana Sayfa",
       "headerSettings": {
         "backgroundColor": "#FF9800",
         "backgroundImage": "/images/backgrounds/home.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff",
-        "video": {
-          "title": "GDG DevFest Ukraine 2016",
-          "youtubeId": "TdpbgRgz6eE",
-          "text": "See how it was in 2016"
-        },
         "hideLogo": true,
         "minHeight": "360px"
       }
     },
-    "blog": {
-      "title": "Blog",
-      "headerSettings": {
-        "backgroundColor": "#03a9f4",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
     "speakers": {
-      "title": "Speakers",
+      "title": "Konuşmacılar",
       "headerSettings": {
         "backgroundColor": "#3f51b5",
         "fontColor": "#fff",
@@ -146,23 +119,7 @@
       }
     },
     "schedule": {
-      "title": "Schedule",
-      "headerSettings": {
-        "backgroundColor": "#673ab7",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "team": {
-      "title": "Team",
-      "headerSettings": {
-        "backgroundColor": "#009688",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "cod": {
-      "title": "Code of Conduct",
+      "title": "Program",
       "headerSettings": {
         "backgroundColor": "#673ab7",
         "fontColor": "#fff",

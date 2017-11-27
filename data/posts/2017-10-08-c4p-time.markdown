@@ -1,0 +1,46 @@
+GDG DevFest Tekirdağ 2017 duyuruldu! Bu sene 4.sü düzenlenecek olan DevFest Tekirdağ, **2 Aralık'ta**  Tekirdağ'ın Çorlu ilçesinde düzenlenecek.
+
+Eğer siz de yazılım ve teknolojiye merak salıyor, bunlarla ilgileniyor ve bunlarla çalışıyorsanız, emin olun bu etkinlikte aradığınız bir çok şeyi bulacaksınız.
+
+**Geçen seneki DevFest istatistiklerimize göre:**
+* 300'ü aşan katılımcı
+* Farklı farklı konularda sunum yapan 8 konuşmacı,
+* Birbirinden farklı teknolojik deneyimler sunan standlar
+* Çeşitli katılımcı hediyeleri
+* Yüksek motivasyon ve aksiyon sağlandı.
+
+
+### Temalar ve konular neler ve sizleri neler bekliyor?
+
+GDG Tekirdağ olarak katılımcıların bilgi ve tecrübe seviyelerine göre ayarlanmış birbirinden farklı Google ve diğer yazılım teknolojilerini konu alıyoruz.
+
+#### Android
+* Oreo versiyonundaki yenilikler
+* Kotlin
+* RxJava
+* Data Binding
+* Testing and Architecture best practices (MVP, MVVP, Clean Architecture)
+
+#### Web
+* Progressive Web Apps
+* Polymer
+* Service Workers
+* Physical Web
+* RAIL
+
+#### Cloud ( Bulut )
+* Makine Öğrenmesi (TensorFlow, Vision API, Speech API, vb.)
+* Big Data (PubSub, BigQuery, Dataflow)
+* Firebase
+* Kubernetes
+
+<br/>
+
+**Unutmayın 2 Aralık 2017'de Çorlu Mühendislik Fakültesinde..**
+
+**Not:** Etkinlik alanına Çorlu merkezden gelmek için 6 numaraya binin "Abi Çorlu Mühendislik.." der demez zaten başını sallar, binersiniz. İndiğinizde gördüğünüz binaya girin ve sesimize gelin :)
+
+Herhang bir sorunuz olursa size bir email kadar yakınız. [GDG Ekibi](mailto:srcnysf@gmail.com)
+
+
+
