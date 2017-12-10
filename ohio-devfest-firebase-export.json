@@ -274,7 +274,8 @@
       "id" : 100,
       "speakers" : [ 1, 15 ],
       "tags" : [ "Actions on Google", "JavaScript" ],
-      "title" : "Get talking with Actions on Google"
+      "title" : "Get talking with Actions on Google",
+      "videoId" : "7F1SdOL5hO4"
     },
     "101" : {
       "complexity" : "Intermediate",
@@ -298,7 +299,8 @@
       "id" : 103,
       "speakers" : [ 5 ],
       "tags" : [ "Identity", "Android" ],
-      "title" : "Simplifying Signups with the Google Identity Platform"
+      "title" : "Simplifying Signups with the Google Identity Platform",
+      "videoId" : "Bh_z1kvjc-s"
     },
     "104" : {
       "complexity" : "Beginner",
@@ -378,7 +380,8 @@
       "id" : 114,
       "speakers" : [ 7 ],
       "tags" : [ "Machine Learning", "Data Science" ],
-      "title" : "Genomic Data Science and Personalized Medicine"
+      "title" : "Genomic Data Science and Personalized Medicine",
+      "videoId" : "YdQTRtAoEwU"
     },
     "115" : {
       "complexity" : "Beginner",
