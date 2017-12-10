@@ -85,12 +85,12 @@
     ]
   },
   "gallery": {
-    "albumUrl": "https://goo.gl/photos/hxmMKiKvfyKCqB3Z8",
+    "albumUrl": "https://photos.app.goo.gl/Ap3CpXB514Qmjxt73",
     "photos": {
-      "big": "/images/backgrounds/session.jpg",
+      "big": "/images/backgrounds/OhioDevFest2017-session.jpg",
       "small": [
-        "/images/backgrounds/vr.jpg",
-        "/images/backgrounds/crowd.jpg"
+        "/images/backgrounds/OhioDevFest2017-lab.jpg",
+        "/images/backgrounds/OhioDevFest2017-crowd.jpg"
       ]
     }
   },
