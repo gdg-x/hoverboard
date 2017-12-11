@@ -1,0 +1,92 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+
+<link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
+
+<link rel="import" href="../behaviors/page-behavior.html">
+<link rel="import" href="../behaviors/cascaded-behavior.html">
+<link rel="import" href="../behaviors/share-behavior.html">
+<link rel="import" href="blog-list.html">
+<link rel="import" href="post-page.html">
+
+
+<dom-module id="blog-page">
+
+  <template>
+
+    <app-route route="{{route}}"
+               pattern="/:page"
+               data="{{pageData}}"
+               tail="{{subRoute}}"></app-route>
+
+    <app-route route="{{subRoute}}"
+               pattern="/:id"
+               data="{{postData}}"></app-route>
+
+
+    <neon-animated-pages id="pages"
+                         selected="{{pageData.page}}"
+                         attr-for-selected="name"
+                         selected-attribute="selected">
+
+      <blog-list name=""
+                 app="{{app}}"
+                 posts="[[posts]]"></blog-list>
+
+      <post-page name="posts"
+                 app="{{app}}"
+                 posts="[[posts]]"
+                 post-id="[[postData.id]]"></post-page>
+
+    </neon-animated-pages>
+
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'blog-page',
+
+        behaviors: [
+          HOVERBOARD.PageBehavior,
+          HOVERBOARD.CascadedBehavior
+        ],
+
+        properties: {
+          app: {
+            type: Object
+          },
+
+          route: {
+            type: Object
+          },
+
+          pageData: {
+            type: Object
+          },
+
+          posts: {
+            type: Array
+          }
+        },
+
+        observers: [
+          '_routeChanged(pageData.page)'
+        ],
+
+        _routeChanged: function (page) {
+          if (this.app.page === 'blog' && !page) {
+            this.set('pageData.page', '');
+          }
+        }
+
+      });
+
+    }());
+  </script>
+
+</dom-module>
