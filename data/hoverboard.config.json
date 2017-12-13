@@ -11,7 +11,7 @@
     "twitter": "ozuieee"
   },
   "webapp": {
-    "shortName": "GGK",
+    "shortName": "GGJ",
     "themeColor": "#F57C00",
     "backgroundColor": "#F57C00"
   },
@@ -82,11 +82,11 @@
     "apiKey": "",
     "name": "Ozyegin University",
     "address": "Nişantepe Mah., Orman Sok., 34794 Çekmeköy/İstanbul",
-    "link": "https://www.facebook.com/expopivdennij",
+    "link": "",
     "pointer": {
       "latitude": 41.031302,
       "longitude": 29.258561,
-      "zoom": 20
+      "zoom": 17
     },
     "mapCenter": {
       "latitude": 41.031302,
