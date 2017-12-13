@@ -155,7 +155,11 @@
           {% if page !== 'home' and page !== 'blog' %}
             <animatable-content name="{$ page $}">
               <div class="container">
-                <h3 class="page-title">{$ settings.title $}</h3>
+                {% if page === 'sss' %}
+                  <h3 class="page-title">Sıkça Sorulan Sorular</h3>
+                {% else %}
+                  <h3 class="page-title">{$ settings.title $}</h3>
+                {% endif %}
               </div>
             </animatable-content>
           {% endif %}
