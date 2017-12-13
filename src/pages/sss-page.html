@@ -1,0 +1,28 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="sss-page">
+
+  <template>
+    <div class="container" phone$="{{app.isPhoneSize}}">
+      <p>TODO</p>
+    </div>
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'sss-page',
+
+        behaviors: [
+          HOVERBOARD.PageBehavior,
+          HOVERBOARD.CascadedBehavior
+        ]
+
+      });
+
+    }());
+  </script>
+</dom-module>
