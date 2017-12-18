@@ -46,14 +46,6 @@
     {
       "route": "sss",
       "permalink": "/sss/"
-    },
-    {
-      "route": "speakers",
-      "permalink": "/speakers/"
-    },
-    {
-      "route": "schedule",
-      "permalink": "/schedule/"
     }
   ],
   "social": [
@@ -93,18 +85,16 @@
       "longitude": 29.258561
     },
     "images": [
-      "/images/backgrounds/location_1.jpg",
-      "/images/backgrounds/location_2.jpg",
-      "/images/backgrounds/location_3.jpg"
+      "/images/backgrounds/ozu.png"
     ]
   },
   "gallery": {
     "albumUrl": "https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1",
     "photos": {
-      "big": "/images/backgrounds/2015_1.jpg",
+      "big": "/images/backgrounds/ggj-2017-1.jpg",
       "small": [
-        "/images/backgrounds/2015_2.jpg",
-        "/images/backgrounds/2015_3.jpg"
+        "/images/backgrounds/ggj-2017-2.JPG",
+        "/images/backgrounds/ggj-2017-3.jpg"
       ]
     }
   },

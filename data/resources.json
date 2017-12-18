@@ -1,14 +1,14 @@
 {
   "title": "GGJ x OzU",
-  "description": "enter description",
+  "description": "Bu sene dördüncüsünü düzenlediğimiz oyun geliştirme Jam'i olan Global Game Jam'e davetlisiniz!",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
   "dates": "September 9-10, 2016",
-  "locationAddressShort": "Lviv, Ukraine",
+  "locationAddressShort": "34794 Çekmeköy/İstanbul",
   "motto": "Be a GDG. Be a Hero!",
   "playIcon": "See how it was in 2015",
   "c4p": "Become a speaker",
   "buyTicket": "Kayıt Ol",
-  "backToTop": "Back to top",
+  "backToTop": "Yukarı Dön",
   "subscribe": "Subscribe",
   "yourEmail": "Your email",
   "subscribeNote": "No spam, only the latest news and updates!",
@@ -28,14 +28,14 @@
   "featuredPeopleTitle": "Rockstar Speakers",
   "featuredPeopleViewAll": "View all speakers",
   "action": "See how it was",
-  "locationTitle": "Pivdennyi Expo Center",
+  "locationTitle": "Özyeğin Üniversitesi",
   "locationDescription": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event",
-  "locationAddress": "Shchyretska St, 36",
-  "organizerTitle": "Organizer",
-  "aboutOrganizers": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
+  "locationAddress": "Nişantepe Mah., Orman Sok.",
+  "organizerTitle": "ORGANIZASYON",
+  "aboutOrganizers": "<a href='http://ieeeozu.com/'>IEEE OZU</a> Özyeğin Üniversitesi Elektrik-Elektronik Mühendisliği ve Bilgisayar Mühendisliği öğrencilerinin çabaları ile 2013-2014 eğitim öğretim yılında dünyanın en büyük mesleki ve teknik organizasyonu olan IEEE’nin 1430 öğrenci kolundan biri olarak faaliyete geçmiştir",
   "openTeamPage": "Open team page",
-  "whatIsGdg": "What is GDG?",
-  "aboutGdg": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion",
+  "whatIsGdg": "GGJ NEDIR?",
+  "aboutGdg": "GGJ, çevrenizdeki yetenekli kişileri bir araya getiren bir etkinliktir. Yeteneklerinizin sınırlarını keşfedebileceğiniz ve alışılagelmiş çalışma yöntemlerinize meydan okuyabileceğiniz eşi bulunmaz bir fırsattır. Katılımcılar tüm dünyadaki diğer geliştiricilerle eş zamanlı olarak çalışmaktadır; tüm katılımcılar ortak bir tema üzerine yoğunlaşır ve 48 saat içinde oyunlarını geliştirirler",
   "readMore": "Read more",
   "copyLink": "Copy link",
   "filteredBy": "filtered by",
@@ -60,51 +60,22 @@
   "rateSession": "Rate session",
   "footerBlocks": [
     {
-      "title": "For visitors",
+      "title": "Önceki senelerde GGJxOzU",
       "links": [
-        {
-          "text": "Team",
-          "url": "/team/",
-          "newTab": false
-        },
+
         {
           "text": "Code of Conduct",
           "url": "/cod/",
           "newTab": false
-        },
-        {
-          "text": "Google Developers",
-          "url": "https://developers.google.com/",
-          "newTab": true
-        },
-        {
-          "text": "GDG DevFest Ukraine 2013",
-          "url": "http://gdg-devfest-ua.appspot.com/",
-          "newTab": true
-        },
-        {
-          "text": "GDG DevFest Ukraine 2014",
-          "url": "http://devfest.gdg.org.ua/2014/",
-          "newTab": true
-        },
-        {
-          "text": "GDG DevFest Ukraine 2015",
-          "url": "http://devfest.gdg.org.ua/2015/",
-          "newTab": true
         }
       ]
     },
     {
-      "title": "For Partners",
+      "title": "Kurallar",
       "links": [
         {
-          "text": "Partnership Proposition",
+          "text": "Kurallar",
           "url": "http://bit.ly/df16-sponsor",
-          "newTab": true
-        },
-        {
-          "text": "Media Kit",
-          "url": "http://bit.ly/df16-media",
           "newTab": true
         }
       ]
@@ -113,8 +84,8 @@
   "contactBlock": {
     "links": [
       {
-        "text": "devfest@google.com",
-        "url": "mailto:devfest@google.com"
+        "text": "ozuieee@gmail.com",
+        "url": "mailto:ozuieee@gmail.com"
       }
     ]
   },
