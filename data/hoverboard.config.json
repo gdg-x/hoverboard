@@ -45,7 +45,11 @@
     },
     {
       "route": "sss",
-      "permalink": "/sss/"
+      "permalink": "/sss"
+    },
+    {
+      "route": "signup",
+      "permalink": "/signup"
     }
   ],
   "social": [
@@ -83,7 +87,7 @@
     "photos": {
       "big": "/images/backgrounds/ggj-2017-1.jpg",
       "small": [
-        "/images/backgrounds/ggj-2017-2.JPG",
+        "/images/backgrounds/ggj-2017-2.jpg",
         "/images/backgrounds/ggj-2017-3.jpg"
       ]
     }
@@ -106,12 +110,13 @@
       }
     },
     "sss": {
-      "title": "sss",
+      "title": "SSS",
       "headerSettings": {
         "backgroundColor": "#03a9f4",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
-      }
+      },
+      "hideLogo": true
     },
     "speakers": {
       "title": "Konuşmacılar",
@@ -121,28 +126,11 @@
         "tabBarColor": "#fff"
       }
     },
-    "schedule": {
-      "title": "Takvim",
+    "signup": {
+      "title": "",
+      "hideLogo": true,
       "headerSettings": {
-        "backgroundColor": "#673ab7",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "team": {
-      "title": "Team",
-      "headerSettings": {
-        "backgroundColor": "#009688",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "cod": {
-      "title": "Code of Conduct",
-      "headerSettings": {
-        "backgroundColor": "#673ab7",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
+        "isHidden": true
       }
     }
   }

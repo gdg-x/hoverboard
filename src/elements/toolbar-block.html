@@ -136,6 +136,7 @@
         <paper-icon-button icon="menu" on-tap="togglePanel"></paper-icon-button>
       </div>
       <div class="logo-wrapper">
+      <!--
         <a href="/" hidden$="{{hideLogo}}" fade>
           <iron-image
             class="logo"
@@ -144,14 +145,17 @@
             alt="{$ title $}"
           ></iron-image>
         </a>
+      -->
       </div>
       <div class="navItem" layout horizontal self-end>
         <template is="dom-if" if="[[!app.isPhoneSize]]">
           <paper-tabs selected="[[app.page]]" attr-for-selected="name" noink>
             {% for nav in navigation %}
+              {% if pages[nav.route].title %}
               <paper-tab name="{$ nav.route $}" link>
                 <a href="{$ nav.permalink $}" class="nav-link">{$ pages[nav.route].title $}</a>
               </paper-tab>
+              {% endif %}
             {% endfor %}
           </paper-tabs>
         </template>
@@ -186,7 +190,9 @@
         </paper-menu-button>
 
         <div class="action-button-wrapper" hidden$="[[app.isPhoneSize]]" layout horizontal center-center>
-            <paper-button class="action-button" on-tap="_scrollToTickets">{$ buyTicket $}</paper-button>
+          <a href="/signup">
+            <paper-button class="action-button" on-tap="s">{$ buyTicket $}</paper-button>
+          </a>
         </div>
       </div>
     </app-toolbar>
@@ -237,15 +243,6 @@
 
         _trackBuyClick: function () {
           HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'toolbar');
-        },
-
-        _scrollToTickets: function () {
-          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'header');
-          Polymer.AppLayout.scroll({
-            top: HOVERBOARD.Elements.Tickets.getBoundingClientRect().top,
-            behavior: 'smooth',
-            target: HOVERBOARD.Elements.Scroller
-          });
         }
 
       });
