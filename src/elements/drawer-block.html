@@ -77,13 +77,14 @@
     </style>
 
     <paper-toolbar class="tall">
+      <!--
       <div class="top">
-        <iron-image class="logo" src="/images/logo-white.svg" sizing="contain"
-                    alt="{$ title $}"></iron-image>
+        <iron-image class="logo" src="/images/logo-white.svg" sizing="contain" alt="{$ title $}"></iron-image>
       </div>
+      -->
       <div class="bottom">
         <span class="dates">{$ dates $}</span>
-        <span class="location">{$ locationAddressShort $}</span>
+        <span class="location" style="color: #212121;">{$ locationAddressShort $}</span>
       </div>
     </paper-toolbar>
     <nav>
@@ -94,11 +95,13 @@
         selected-class="selected"
       >
         {% for nav in navigation %}
+          {% if pages[nav.route].title %}
           <a class="navigation-link" href="{$ nav.permalink $}" name="{$ nav.route $}" on-tap="closeDrawer">
             {$ pages[nav.route].title $}
           </a>
+          {% endif %}
         {% endfor %}
-        <a class="navigation-link" href="{$ tickets.url $}" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
+        <a class="navigation-link" href="/signup" on-tap="closeDrawer">
           {$ buyTicket $}
           <iron-icon
             class="open-in-new"

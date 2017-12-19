@@ -1,17 +1,17 @@
 {
   "url": "https://hoverboard.firebaseapp.com/",
-  "startDate": "2016-09-09T09:00:00+03:00",
-  "endDate": "2016-09-10T19:00:00+03:00",
+  "startDate": "2018-01-26T00:00:00+03:00",
+  "endDate": "2018-01-28T00:00:00+03:00",
   "analytics": {
-    "prod": "UA-43643469-8",
-    "dev": "UA-43643469-9"
+    "prod": "",
+    "dev": ""
   },
   "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv"
+    "name": "OzU IEEE",
+    "twitter": "ozuieee"
   },
   "webapp": {
-    "shortName": "DevFest",
+    "shortName": "GGJ",
     "themeColor": "#F57C00",
     "backgroundColor": "#F57C00"
   },
@@ -25,8 +25,8 @@
     "indexedDbSession": "hoverboard"
   },
   "mailchimp": {
-    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
-    "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
+    "url": " ",
+    "name": " "
   },
   "dateFormat": {
     "locale": "en-US",
@@ -44,84 +44,64 @@
       "permalink": "/"
     },
     {
-      "route": "blog",
-      "permalink": "/blog/"
+      "route": "sss",
+      "permalink": "/sss"
     },
     {
-      "route": "schedule",
-      "permalink": "/schedule/"
-    },
-    {
-      "route": "speakers",
-      "permalink": "/speakers/"
-    },
-    {
-      "route": "team",
-      "permalink": "/team/"
+      "route": "signup",
+      "permalink": "/signup"
     }
   ],
   "social": [
     {
       "name": "twitter",
-      "nickname": "GDGLviv",
-      "url": "https://twitter.com/gdglviv"
-    },
-    {
-      "name": "gplus",
-      "nickname": "102444623953913144164",
-      "url": "https://plus.google.com/102444623953913144164"
+      "nickname": "GGJxOzU",
+      "url": "https://twitter.com/ggjxozu"
     },
     {
       "name": "facebook",
-      "nickname": "GDGLviv",
-      "url": "https://www.facebook.com/GDGLviv"
-    },
-    {
-      "name": "linkedin",
-      "nickname": "google-developers-group-lviv",
-      "url": "https://www.linkedin.com/company/google-developers-group-lviv"
+      "nickname": "GGJxOzU",
+      "url": "https://www.facebook.com/ozuieee"
     }
   ],
   "location": {
-    "apiKey": "",
-    "name": "Pivdennyi Expo Center",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
-    "link": "https://www.facebook.com/expopivdennij",
+    "apiKey": "AIzaSyDurxk7I5RqU9AUquZhZKYyFzl9a-rTYmE",
+    "name": "Ozyegin University",
+    "address": "Nişantepe Mah., Orman Sok., 34794 Çekmeköy/İstanbul",
+    "link": "",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 15
+      "latitude": 41.031302,
+      "longitude": 29.258561,
+      "zoom": 13
     },
     "mapCenter": {
-      "latitude": 49.809841,
-      "longitude": 23.982805
+      "latitude": 41.031302,
+      "longitude": 29.258561
     },
     "images": [
-      "/images/backgrounds/location_1.jpg",
-      "/images/backgrounds/location_2.jpg",
-      "/images/backgrounds/location_3.jpg"
+      "/images/backgrounds/ozu.png"
     ]
   },
   "gallery": {
-    "albumUrl": "https://plus.google.com/events/gallery/cc6tosp4ohkp6qj9pg5jb4g6o3k?sort=1",
+    "albumUrl": "https://www.facebook.com/pg/ozuieee/photos/?tab=album&album_id=476838789107292",
     "photos": {
-      "big": "/images/backgrounds/2015_1.jpg",
+      "big": "/images/backgrounds/ggj-2017-1.jpg",
       "small": [
-        "/images/backgrounds/2015_2.jpg",
-        "/images/backgrounds/2015_3.jpg"
+        "/images/backgrounds/ggj-2017-2.jpg",
+        "/images/backgrounds/ggj-2017-3.jpg"
       ]
     }
   },
   "pages": {
     "home": {
-      "title": "Home",
+      "title": "Anasayfa",
       "headerSettings": {
         "backgroundColor": "#FF9800",
         "backgroundImage": "/images/backgrounds/home.png",
         "fontColor": "#fff",
         "tabBarColor": "#fff",
+        "title": "GGJ x OzU",
         "video": {
-          "title": "GDG DevFest Ukraine 2016",
           "youtubeId": "TdpbgRgz6eE",
           "text": "See how it was in 2016"
         },
@@ -129,44 +109,28 @@
         "minHeight": "360px"
       }
     },
-    "blog": {
-      "title": "Blog",
+    "sss": {
+      "title": "SSS",
       "headerSettings": {
         "backgroundColor": "#03a9f4",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
-      }
+      },
+      "hideLogo": true
     },
     "speakers": {
-      "title": "Speakers",
+      "title": "Konuşmacılar",
       "headerSettings": {
         "backgroundColor": "#3f51b5",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
     },
-    "schedule": {
-      "title": "Schedule",
+    "signup": {
+      "title": "",
+      "hideLogo": true,
       "headerSettings": {
-        "backgroundColor": "#673ab7",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "team": {
-      "title": "Team",
-      "headerSettings": {
-        "backgroundColor": "#009688",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
-    "cod": {
-      "title": "Code of Conduct",
-      "headerSettings": {
-        "backgroundColor": "#673ab7",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
+        "isHidden": true
       }
     }
   }

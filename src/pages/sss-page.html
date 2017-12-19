@@ -1,0 +1,45 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="sss-page">
+  <style>
+    :host {
+
+    }
+  </style>
+
+  <template>
+    <div class="container" phone$="{{app.isPhoneSize}}">
+      <p>S: GGJ’de bir yaş ya da eğitim sınırlaması var mı?</p>
+      <p>Hayır, GGJxÖzÜ’de yaş ya da eğitim sınırlaması bulunmamaktadır.</p>
+      <p>S: GGJ’ye Önceden Oluşturulmuş Bir Takımla mı Gelmeliyim?</p>
+      <p>Hayır, Jam’e bir takımla birlikte gelmek zorunda değilsiniz. Herkesin düşünmek ve bir fikir bulmak için zamanı olacaktır. Takdir ettiğiniz yeni arkadaşlarla iş birliği yapın.</p>
+      <p>S: GGJ’ye Katılmak için Özel Yeteneklerim Olmalı mı?</p>
+      <p>Bilgisayar yetkinliklerine sahip olmanız yararınıza olacak olsa da, kodlama deneyimi gerekmemektedir. Tasarımcılar, geliştiriciler, sanatçılar, herkes; bir oyun geliştirilmesi doğrultusunda ellerinden geleni denemek için GGJ’ye katılabilir</p>
+      <p>S: GGJ Yalnızca Profesyoneller için midir?</p>
+      <p>Hayır, herkes katılabilir.</p>
+      <p>S: Neden GGJ Genellikle Üniversitelerde Gerçekleştirilmektedir?</p>
+      <p>Okulların, genelde stüdyolarda rastlanamayacak genişlikte laboratuvar ve fiziksel alanlara erişimi bulunmaktadır. Eğitim kurumları aynı zamanda en iyi internet ağı erişimine de sahiptirler. Ancak alan türleri bakımından ayrıcalıklı herhangi bir organizasyon yoktur. Şirketler, oyun toplulukları, çevresel toplantılar ve diğer tüm alan türleri etkinliğe katılabilir.</p>
+      <p>S: GGJ Sırasında Geliştirilen Oyunların Telif Hakları Kime Aittir?</p>
+      <p>Takımlar ve oyun geliştiricileri, oyunlarının tüm fikir haklarının sahibidirler. Ancak Global Game Jam, uygun gördüğü oyunları gösterim amaçlı kullanabilir. Tüm oyunlar, GGJ etkinliği kapanışına yaklaşıldığında (Pazar günü) oldukları haliyle mutlaka siteye yüklenmelidir. Eğer takım ya da oyun geliştiricileri, daha sonra oyunlarının güncellenmiş sürümlerini de siteye yüklemek isterlerse, bunu destekliyor ve web arşivimizde saklıyoruz. GGJ’ye katılan tüm katılımcı ve oyunlar, <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons, share, alter, no sell license</a> lisansındaki maddeleri kabul etmiş sayılırlar.</p></p>
+
+    </div>
+  </template>
+
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+
+        is: 'sss-page',
+
+        behaviors: [
+          HOVERBOARD.PageBehavior,
+          HOVERBOARD.CascadedBehavior
+        ]
+
+      });
+
+    }());
+  </script>
+</dom-module>

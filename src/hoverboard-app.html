@@ -162,6 +162,7 @@
           app="{{app}}"
           selected-day="{{selectedDay}}"
           fade
+          hidden$="{{app.headerSettings.isHidden}}"
         ></header-content>
       </app-header>
 
@@ -176,27 +177,13 @@
                      posts="{{posts}}"
                      videos="{{videos}}"></home-page>
 
-          <blog-page name="blog"
+          <sss-page name="sss"
                      app="{{app}}"
                      route="{{subRoute}}"
-                     posts="{{posts}}"></blog-page>
+                     posts="{{posts}}"></sss-page>
 
-          <speakers-page name="speakers"
-                         app="{{app}}"
-                         route="{{subRoute}}"
-                         speakers="{{speakers}}"></speakers-page>
-
-          <schedule-page name="schedule"
-                         app="{{app}}"
-                         route="{{subRoute}}"
-                         schedule="{{schedule}}"
-                         sessions="{{sessions}}"></schedule-page>
-
-          <team-page name="team"
-                     app="{{app}}"></team-page>
-
-          <cod-page name="cod"
-                    app="{{app}}"></cod-page>
+          <signup-page name="signup"
+                     app="{{app}}"></signup-page>
 
         </neon-animated-pages>
       </div>
