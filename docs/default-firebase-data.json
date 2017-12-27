@@ -1287,6 +1287,31 @@
     "tags" : [ "Android", "Firebase", "Security" ],
     "title" : "CEO"
   } ],
+  "team" : [ {
+    "members" : [ {
+      "name" : "Oleh Zasadnyy",
+      "photoUrl" : "/images/people/oleh_zasadnyy.jpg",
+      "socials" : [ {
+        "icon" : "gplus",
+        "link" : "https://plus.google.com/+OlehZasadnyy",
+        "name" : "Google+"
+      }, {
+        "icon" : "facebook",
+        "link" : "https://www.facebook.com/oleh.zasadnyy",
+        "name" : "Facebook"
+      }, {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/ozasadnyy",
+        "name" : "Twitter"
+      }, {
+        "icon" : "website",
+        "link" : "http://o.zasadnyy.com/",
+        "name" : "Blog"
+      } ],
+      "title" : "Website and sponsors"
+    } ],
+    "title" : "Core Team"
+  } ],
   "tickets" : {
     "elements" : [ {
       "currency" : "₴",
