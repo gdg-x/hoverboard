@@ -10,9 +10,9 @@
       :root {
         /* Generate theme at https://www.materialpalette.com */
 
-        --dark-primary-color:       rgba(214, 43, 37, 0.897);
-        --default-primary-color:    rgba(214, 58, 52, 0.897);
-        --light-primary-color:      rgba(212, 69, 64, 0.897);
+        --dark-primary-color:       #c9424b;
+        --default-primary-color:    #fb4552;
+        --light-primary-color:      #ff5762;
         --text-primary-color:       #FFFFFF;
         --accent-color:             #FF9800;
         --primary-background-color: #FFCDD2;
@@ -26,8 +26,8 @@
         --secondary-background-color: #FFFFFF;
 
         /* Footer */
-        --footer-background-color:    #fcfcfc;
-        --footer-text-color:          #757575;
+        --footer-background-color:    var(--default-primary-color);
+        --footer-text-color:          var(--text-primary-color);
 
         /* Tags colors */
         --general: #bdbdbd;
@@ -157,7 +157,7 @@
       }
       body,
       .markdown-html {
-        font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-family: 'Barlow','Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         color: var(--primary-text-color);
         font-size: 18px;
         font-weight: 300;
