@@ -76,7 +76,7 @@
     "home": {
       "title": "Home",
       "headerSettings": {
-        "backgroundColor": "#ff3b00",
+        "backgroundColor": "#fb4552",
         "backgroundImage": "/images/backgrounds/bandeau-twitter.jpg",
         "fontColor": "#fff",
         "tabBarColor": "#fff",
