@@ -1,10 +1,10 @@
 {
-  "title": "GDG DevFest Season 2016",
-  "description": "The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts",
+  "title": "Sunny Tech Season 2018",
+  "description": "Sunny Tech est la 1ère conférence Tech organisée à Montpellier. Une conférence annuelle des technologies du numérique, créée par des passionnés, pour des passionnés avec l’ambition de rayonner nationalement, et même internationalement, à travers l’intervention de conférenciers étrangers de renom.",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "September 9-10, 2016",
-  "locationAddressShort": "Lviv, Ukraine",
-  "motto": "Be a GDG. Be a Hero!",
+  "dates": "June 28-29, 2018",
+  "locationAddressShort": "Montpellier, France",
+  "motto": "A quality conference for tech enthusiasts",
   "playIcon": "See how it was in 2015",
   "c4p": "Become a speaker",
   "buyTicket": "Buy ticket",
@@ -28,14 +28,14 @@
   "featuredPeopleTitle": "Rockstar Speakers",
   "featuredPeopleViewAll": "View all speakers",
   "action": "See how it was",
-  "locationTitle": "Pivdennyi Expo Center",
-  "locationDescription": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event",
-  "locationAddress": "Shchyretska St, 36",
+  "locationTitle": "I.U.F.M de Montpellier",
+  "locationDescription": "Situé au coeur de la ville, l’IUFM nous offre un cadre ouvert et des salles pouvant accueillir jusqu’à 250 personnes.",
+  "locationAddress": "2 place Marcel Godechot",
   "organizerTitle": "Organizer",
-  "aboutOrganizers": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
+  "aboutOrganizers": "Sunny Tech non-profit & voluntary association with developers, speakers, meetups & designers",
   "openTeamPage": "Open team page",
-  "whatIsGdg": "What is GDG?",
-  "aboutGdg": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion",
+  "whatIsSunnyTech": "Values",
+  "aboutSunnyTech": "Sharing, openness, originality & passion",
   "readMore": "Read more",
   "copyLink": "Copy link",
   "filteredBy": "filtered by",
@@ -66,46 +66,6 @@
           "text": "Team",
           "url": "/team/",
           "newTab": false
-        },
-        {
-          "text": "Code of Conduct",
-          "url": "/cod/",
-          "newTab": false
-        },
-        {
-          "text": "Google Developers",
-          "url": "https://developers.google.com/",
-          "newTab": true
-        },
-        {
-          "text": "GDG DevFest Ukraine 2013",
-          "url": "http://gdg-devfest-ua.appspot.com/",
-          "newTab": true
-        },
-        {
-          "text": "GDG DevFest Ukraine 2014",
-          "url": "http://devfest.gdg.org.ua/2014/",
-          "newTab": true
-        },
-        {
-          "text": "GDG DevFest Ukraine 2015",
-          "url": "http://devfest.gdg.org.ua/2015/",
-          "newTab": true
-        }
-      ]
-    },
-    {
-      "title": "For Partners",
-      "links": [
-        {
-          "text": "Partnership Proposition",
-          "url": "http://bit.ly/df16-sponsor",
-          "newTab": true
-        },
-        {
-          "text": "Media Kit",
-          "url": "http://bit.ly/df16-media",
-          "newTab": true
         }
       ]
     }
@@ -113,16 +73,16 @@
   "contactBlock": {
     "links": [
       {
-        "text": "devfest@google.com",
-        "url": "mailto:devfest@google.com"
+        "text": "contact@sunny-tech.io",
+        "url": "mailto:contact@sunny-tech.io"
       }
     ]
   },
   "teamPageTitle": "Team",
-  "teamPageText": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT.",
+  "teamPageText": "Sunny tech is the first tech conference in Montpellier",
   "statistics": [
     {
-      "counter": 600,
+      "counter": 300,
       "caption": "Attendees"
     },
     {
@@ -134,12 +94,8 @@
       "caption": "Sessions"
     },
     {
-      "counter": 3,
+      "counter": 2,
       "caption": "Tracks"
     }
-  ],
-  "callToAction": {
-    "videoTitle": "GDG DevFest 2015",
-    "videoId": "DfMnJAzOFng"
-  }
+  ]
 }
