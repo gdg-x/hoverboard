@@ -3,8 +3,8 @@
   "startDate": "2016-09-09T09:00:00+03:00",
   "endDate": "2016-09-10T19:00:00+03:00",
   "analytics": {
-    "prod": "UA-43643469-8",
-    "dev": "UA-43643469-9"
+    "prod": "UA-110450364-2",
+    "dev": "UA-110450364-2"
   },
   "organizer": {
     "name": "Sunny Tech",
@@ -25,8 +25,8 @@
     "indexedDbSession": "hoverboard"
   },
   "mailchimp": {
-    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
-    "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
+    "url": "https://sunny-tech.us16.list-manage.com/subscribe/post?u=bc52bec3c758ad9f9e5b5bce7&amp;id=d9ed0e9aab",
+    "name": "b_bc52bec3c758ad9f9e5b5bce7_d9ed0e9aab"
   },
   "dateFormat": {
     "locale": "en-US",
