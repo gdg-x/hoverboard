@@ -2,17 +2,17 @@
   "title": "Sunny Tech Season 2018",
   "description": "Sunny Tech est la 1ère conférence Tech organisée à Montpellier. Une conférence annuelle des technologies du numérique, créée par des passionnés, pour des passionnés avec l’ambition de rayonner nationalement, et même internationalement, à travers l’intervention de conférenciers étrangers de renom.",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "June 28-29, 2018",
+  "dates": "28-29 Juin, 2018",
   "locationAddressShort": "Montpellier, France",
-  "motto": "A quality conference for tech enthusiasts",
+  "motto": "Une conférence de qualité pour des techs passionnés",
   "playIcon": "See how it was in 2015",
   "c4p": "Become a speaker",
   "buyTicket": "Buy ticket",
-  "backToTop": "Back to top",
-  "subscribe": "Subscribe",
-  "yourEmail": "Your email",
-  "subscribeNote": "No spam, only the latest news and updates!",
-  "contactUs": "Contact us",
+  "backToTop": "Retour en haut",
+  "subscribe": "Souscrire",
+  "yourEmail": "Votre email",
+  "subscribeNote": "Pas de spam, seulement les dernières nouvelles",
+  "contactUs": "Nous contactez",
   "ticketsTitle": "Tickets",
   "ticketsDetails": "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
   "close": "Close",
@@ -31,11 +31,11 @@
   "locationTitle": "I.U.F.M de Montpellier",
   "locationDescription": "Situé au coeur de la ville, l’IUFM nous offre un cadre ouvert et des salles pouvant accueillir jusqu’à 250 personnes.",
   "locationAddress": "2 place Marcel Godechot",
-  "organizerTitle": "Organizer",
-  "aboutOrganizers": "Sunny Tech non-profit & voluntary association with developers, speakers, meetups & designers",
-  "openTeamPage": "Open team page",
-  "whatIsSunnyTech": "Values",
-  "aboutSunnyTech": "Sharing, openness, originality & passion",
+  "organizerTitle": "Organisation",
+  "aboutOrganizers": "Sunny Tech est une association bénévole à but non lucratif composée de développeurs, orateurs, designers et de membres de meetups",
+  "openTeamPage": "Ouvrir la page descriptive de l'équipe",
+  "whatIsSunnyTech": "Valeurs",
+  "aboutSunnyTech": "Partage, ouverture, originalité & passion",
   "readMore": "Read more",
   "copyLink": "Copy link",
   "filteredBy": "filtered by",
@@ -60,7 +60,7 @@
   "rateSession": "Rate session",
   "footerBlocks": [
     {
-      "title": "For visitors",
+      "title": "Pour les visiteurs",
       "links": [
         {
           "text": "Team",
@@ -79,15 +79,15 @@
     ]
   },
   "teamPageTitle": "Team",
-  "teamPageText": "Sunny Tech is a non-profit & voluntary association (loi 1901) created by active members of tech company in Montpellier like Teads & Tabmo with the help of local meetups & Montpellier Tech Hub.",
+  "teamPageText": "Sunny Tech est une assocation bénévole à but non lucratif (loi 1901) créée par des membres actifs de la communauté tech de Montpellier, venant d'entreprise comme Teads ou Tabmo avec l'aide des meetups locaux et le Montpellier Tech Hub.",
   "statistics": [
     {
       "counter": 300,
-      "caption": "Attendees"
+      "caption": "Participants"
     },
     {
       "counter": 2,
-      "caption": "Days"
+      "caption": "Jours"
     },
     {
       "counter": 30,
