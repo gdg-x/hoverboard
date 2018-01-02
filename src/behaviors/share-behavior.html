@@ -21,7 +21,7 @@
           navigator.share({
             url: location.href,
             title: document.title,
-            text: 'Check out ' + document.title + ' at #{$ hashtag $}',
+            text: 'Jette un oeil à l\'' + document.title + ' via #{$ hashtag $}',
           }).catch(function(err){
             console.log('Web Share API failed', err);
           });
@@ -64,7 +64,7 @@
 
           case 'twitter':
             height = 253;
-            var text = 'Check out ' + title + ' at #{$ hashtag $}: ' + shareUrl;
+            var text = 'Jette un oeil à l\'' + title + ' via #{$ hashtag $}: ' + shareUrl;
             url = 'https://twitter.com/intent/tweet?text=' +
               encodeURIComponent(text);
             window.open(url, 'share', winOptions);
