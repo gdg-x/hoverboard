@@ -63,7 +63,7 @@
       "title": "Pour les visiteurs",
       "links": [
         {
-          "text": "Team",
+          "text": "Équipe",
           "url": "/team/",
           "newTab": false
         }
@@ -78,7 +78,7 @@
       }
     ]
   },
-  "teamPageTitle": "Team",
+  "teamPageTitle": "Équipe",
   "teamPageText": "Sunny Tech est une assocation bénévole à but non lucratif (loi 1901) créée par des membres actifs de la communauté tech de Montpellier, venant d'entreprise comme Teads ou Tabmo avec l'aide des meetups locaux et le Montpellier Tech Hub.",
   "statistics": [
     {
