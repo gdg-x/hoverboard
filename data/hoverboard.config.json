@@ -74,7 +74,7 @@
   },
   "pages": {
     "home": {
-      "title": "Home",
+      "title": "Accueil",
       "headerSettings": {
         "backgroundColor": "#fb4552",
         "backgroundImage": "/images/backgrounds/bandeau-twitter.jpg",
