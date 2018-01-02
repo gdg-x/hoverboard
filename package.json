@@ -7,7 +7,8 @@
     "bower": "bower",
     "build": "gulp",
     "postinstall": "bower install",
-    "serve": "gulp serve"
+    "serve": "gulp serve",
+    "deploy": "npm run build && firebase deploy --project sunnytechwebsite"
   },
   "devDependencies": {
     "bower": "^1.8.2",
