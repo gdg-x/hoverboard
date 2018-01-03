@@ -1,5 +1,6 @@
 <script>
 
+  /* @polymerMixin */
   const UtilsFunctions = subclass => class extends subclass {
     transformToArray(source, attribute) {
       return source && Object.keys(source).map(key => Object.assign(!!attribute ? { [attribute]: key } : {}, source[key]));
