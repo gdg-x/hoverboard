@@ -21,7 +21,8 @@ const routingReducer = (state = initialState.routing, action) => {
   switch (action.type) {
     case SET_ROUTE:
       return Object.assign({}, state, {
-        route: action.route
+        route: action.route,
+        subRoute: null
       });
     case SET_SUB_ROUTE:
       return Object.assign({}, state, {
