@@ -1,7 +1,7 @@
 {
   "url": "https://hoverboard.firebaseapp.com/",
-  "startDate": "2016-09-09T09:00:00+03:00",
-  "endDate": "2016-09-10T19:00:00+03:00",
+  "startDate": "2018-06-28T09:00:00+01:00",
+  "endDate": "2018-07-29T19:00:00+01:00",
   "analytics": {
     "prod": "UA-110450364-2",
     "dev": "UA-110450364-2"
