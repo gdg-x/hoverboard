@@ -65,23 +65,33 @@
       }
 
       .home-wrapper {
+        display: flex;
+        flex-direction: column;
         width: 100%;
-        font-size: 18px;
+        font-size: 32px;
       }
 
       .logo {
-        width: 240px;
-        min-height: 250px;
+        width: 150px;
+        min-height: 150px;
+        text-align: left
       }
 
       .dates {
-        font-size: 18px;
-        text-transform: uppercase;
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .hashtag{ 
+        font-size: 16px;
+        font-weight: 600;
+        color:#F55A56;
+        font-family: 'Barlow Semi Condensed', 'Roboto Condensed';
       }
 
       .motto {
-        margin-top: 20px;
-        font-size: 22px;
+        margin: 10px 0 20px;
+        font-size: 24px;
         line-height: 1;
       }
 
@@ -111,14 +121,38 @@
           padding-bottom: 40px;
         }
 
-        .home-wrapper {
-          width: 50%;
-          max-width: 500px;
-        }
-
         app-toolbar {
           min-height: 360px;
         }
+
+        .logo {
+          width: 240px;
+          min-height: 300px;
+        }
+
+        .dates {
+          font-size: 20px;
+          font-weight: 600;
+        }
+
+        .hashtag{ 
+          font-size: 20px;
+          font-weight: 600;
+          color:#F55A56;
+          font-family: 'Barlow Semi Condensed', 'Roboto Condensed';
+        }
+
+        .motto {
+          margin: 10px 0;
+          font-size: 26px;
+          line-height: 1;
+        }
+        
+        .home-wrapper {
+          flex-direction: row;
+          align-items: center;        
+        }
+
       }
 
     </style>
@@ -130,8 +164,11 @@
             <div class="home-wrapper">
               <iron-image class="logo" src="/images/sunny-tech-logo.svg" sizing="contain"
                           alt="Sunny Tech Montpellier 2018"></iron-image>
-              <h3 class="dates">{$ dates $}</h3>
-              <h2 class="motto">{$ motto $}</h2>
+              <div>
+                <h2 class="dates">{$ dates $}, {$ locationAddressShort $}</h2>
+                <h1 class="motto">{$ motto $}</h1>
+                <h3 class="hashtag"> {$ hashtag $}</h3>
+              </div>
               {% if pages.home.headerSettings.video %}
                 <div class="open-video" on-tap="_openVideo">
                   <iron-icon icon="play"></iron-icon>
