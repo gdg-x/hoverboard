@@ -15,7 +15,10 @@
       tail="{{subRoute}}"
     ></app-route>
 
-    <iron-lazy-pages attr-for-selected="data-route" selected="[[routeData.page]]">
+    <iron-lazy-pages
+      attr-for-selected="data-route"
+      selected="[[routeData.page]]"
+    >
       <blog-list-page data-route="" data-path="./blog-list-page.html"></blog-list-page>
       <post-page data-route="posts" data-path="./post-page.html" route="[[subRoute]]"></post-page>
     </iron-lazy-pages>
@@ -44,7 +47,9 @@
       _routeChanged(active, route) {
         if (active && route) {
           this.scrollToY(0, 200);
+          this.set('subRoute',  {});
           this.set('_route',  route);
+          routingActions.setSubRoute(this.routeData.page);
         }
       }
     }
