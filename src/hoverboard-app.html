@@ -247,8 +247,8 @@
   </template>
 
   <script>
+    // eslint-disable-next-line no-undef
     class HoverboardApp extends UtilsFunctions(ScrollFunctions(ReduxMixin(Polymer.Element))) {
-
       static get is() {
         return 'hoverboard-app';
       }
@@ -257,52 +257,52 @@
         return {
           ui: {
             type: Object,
-            statePath: 'ui'
+            statePath: 'ui',
           },
           route: {
             type: String,
-            statePath: 'routing'
+            statePath: 'routing',
           },
           hero: {
             type: Object,
             statePath: 'hero',
-            observer: '_heroChanged'
+            observer: '_heroChanged',
           },
           dialogs: {
             type: Object,
             statePath: 'dialogs',
-            observer: '_dialogToggled'
+            observer: '_dialogToggled',
           },
           viewport: {
             type: Object,
-            statePath: 'ui.viewport'
+            statePath: 'ui.viewport',
           },
           schedule: {
             type: Object,
-            statePath: 'schedule'
+            statePath: 'schedule',
           },
           notifications: {
             type: Boolean,
-            statePath: 'notifications'
+            statePath: 'notifications',
           },
           _openedDialog: {
-            type: String
+            type: String,
           },
           user: {
             type: Object,
-            statePath: 'user'
+            statePath: 'user',
           },
           providerUrls: {
             type: Object,
-            value: '{$ signInProviders.allowedProvidersUrl $}'
-          }
+            value: '{$ signInProviders.allowedProvidersUrl $}',
+          },
         };
       }
 
       static get observers() {
         return [
           '_routeDataChanged(routeData.page, subroute.path)',
-          '_viewportChanged(isPhoneSize, isLaptopSize)'
+          '_viewportChanged(isPhoneSize, isLaptopSize)',
         ];
       }
 
@@ -324,10 +324,11 @@
 
       ready() {
         super.ready();
+        // eslint-disable-next-line no-console
         console.log('Hoverboard v2 is ready!');
         this.removeAttribute('unresolved');
         this._ensureLazyLoaded();
-//        userActions.autoSignIn(this.providerUrls);
+        // userActions.autoSignIn(this.providerUrls);
       }
 
       closeDrawer() {
@@ -351,7 +352,7 @@
         this.updateStyles({
           '--hero-background-color': hero.background.color || '',
           '--hero-background-gradient': hero.background.gradient || '',
-          '--hero-color': hero.fontColor || ''
+          '--hero-color': hero.fontColor || '',
         });
         setTimeout(() => {
           requestAnimationFrame(() => {
@@ -379,7 +380,7 @@
         uiActions.setViewportSize({
           isPhone: isPhoneSize,
           isTabletPlus: !isPhoneSize,
-          isLaptopPlus: isLaptopSize
+          isLaptopPlus: isLaptopSize,
         });
       }
 
@@ -388,7 +389,7 @@
           document.body.style.overflow = '';
           this._openedDialog = null;
         }
-        this._openedDialog = Object.keys(dialogs).find(key => dialogs[key].isOpened);
+        this._openedDialog = Object.keys(dialogs).find((key) => dialogs[key].isOpened);
         if (this._openedDialog) {
           document.body.style.overflow = 'hidden';
         }

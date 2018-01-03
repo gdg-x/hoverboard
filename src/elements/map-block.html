@@ -114,7 +114,7 @@
           viewport: {
             type: Object,
             statePath: 'ui.viewport',
-            observer: '_viewportChanged'
+            observer: '_viewportChanged',
           },
           options: {
             type: Object,
@@ -126,46 +126,46 @@
                 draggable: false,
                 styles: [{
                   stylers: [{
-                    lightness: 40
+                    lightness: 40,
                   }, {
-                    visibility: 'on'
+                    visibility: 'on',
                   }, {
-                    gamma: 0.9
+                    gamma: 0.9,
                   }, {
-                    weight: 0.4
-                  }]
+                    weight: 0.4,
+                  }],
                 }, {
                   elementType: 'labels',
                   stylers: [{
-                    visibility: 'on'
-                  }]
+                    visibility: 'on',
+                  }],
                 }, {
                   featureType: 'water',
                   stylers: [{
-                    color: '#5dc7ff'
-                  }]
+                    color: '#5dc7ff',
+                  }],
                 }, {
                   featureType: 'road',
                   stylers: [{
-                    visibility: 'off'
-                  }]
-                }]
+                    visibility: 'off',
+                  }],
+                }],
               }
-            )
-          }
-        }
+            ),
+          },
+        };
       }
 
       _viewportChanged({ isTabletPlus }) {
         isTabletPlus && Polymer.RenderStatus.afterNextRender(this, () => {
           const map = this.shadowRoot.querySelector('#map');
-          map.addEventListener('google-map-ready', e => {
+          map.addEventListener('google-map-ready', (e) => {
             new google.maps.Marker({
               position: {
                 lat: parseFloat('{$ location.pointer.latitude $}'),
-                lng: parseFloat('{$ location.pointer.longitude $}')
+                lng: parseFloat('{$ location.pointer.longitude $}'),
               },
-              map: e.detail
+              map: e.detail,
             });
           });
         });
