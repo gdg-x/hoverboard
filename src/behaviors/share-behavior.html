@@ -21,7 +21,7 @@
           navigator.share({
             url: location.href,
             title: document.title,
-            text: 'Jette un oeil à + document.title + ' via {$ hashtag $}',
+            text: 'Jette un oeil à ' + document.title + ' via {$ hashtag $}',
           }).catch(function(err){
             console.log('Web Share API failed', err);
           });
