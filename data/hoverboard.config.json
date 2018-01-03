@@ -78,7 +78,7 @@
       "headerSettings": {
         "backgroundColor": "#fb4552",
         "backgroundImage": "/images/backgrounds/bandeau-header.jpg",
-        "fontColor": "#fff",
+        "fontColor": "#4A4A4A",
         "tabBarColor": "#fff",
         "hideLogo": true,
         "minHeight": "360px"
