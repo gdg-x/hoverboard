@@ -8,7 +8,6 @@
 > *Do you :heart: it?* Show your support - please, :star: the project.
 
 :zap: [Live demo](https://hoverboard-v2-dev.firebaseapp.com/)
- 
 
 ### Setup
 :book: [Full documentation](/docs/).
@@ -65,13 +64,19 @@ Or you can build in Docker container:
 :book: Read more in [deploy docs](/docs/tutorials/deploy.md).   
 
 
+### Compatibility
+:white_check_mark: Compatible with latest two version of Chrome, Chrome for Android, Firefox, Opera, Safari, Edge.
+
+:x: IE and Opera Mini aren't supported.
+
+
 ### Contributors :sparkles:
 See [list of contributors](https://github.com/gdg-x/hoverboard/graphs/contributors).
 
 __Maintainer:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
 
 
-######The GDG App, GDG[x] are not endorsed and/or supported by Google, the corporation.
+###### The GDG App, GDG[x] are not endorsed and/or supported by Google, the corporation.
 
 
 ### License
