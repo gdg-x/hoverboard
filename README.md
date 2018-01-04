@@ -30,6 +30,15 @@ from [GDG Lviv](http://lviv.gdg.org.ua/).
 :white_check_mark: Firebase Data Loading :new:  
 :white_check_mark: Sessions star rating :new:  
 
+### Compatibility
+:white_chek_mark: Chrome 60, Chrome for Android 62 and higher
+:white_chek_mark: Firefox 57 and higher
+:white_chek_mark: Opera 47 and higher
+:white_chek_mark: Safari 10.1, iOS Safari 10.3 and higher
+:white_chek_mark: Edge 17 and higher
+:x: IE 11
+:x: Opera Mini
+
 ### Setup
 :book: [Full documentation](/docs/).
 
