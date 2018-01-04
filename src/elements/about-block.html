@@ -18,8 +18,15 @@
       }
 
       .about-item {
-        @apply(--layout-flex-5);
+        @apply(--layout-flex-10);
         text-align: justify;
+        @apply(--layout-vertical);
+        @apply(--layout-center);
+      }
+
+      .heading{
+        @apply (--layout-horizontal);
+        @apply (--layout-center);
       }
 
       .about-item:not(:first-of-type) {
@@ -34,6 +41,12 @@
         margin-top: 18px;
         display: block;
         font-size: 16px;
+      }
+
+      .icons{
+        width: 30px;
+        min-height: 30px;
+        margin-right: 10px;
       }
 
       @media (min-width: 601px) {
@@ -52,20 +65,37 @@
     </style>
 
     <div class="container">
+      <span class="divider"></span>      
       <div class="about-item">
-        <h4 class="heading">{$ organizerTitle $}</h4>
-        <marked-element markdown="{$ aboutOrganizers $}">
-          <div class="markdown-html"></div>
-        </marked-element>
-        <a class="page-link" href="/team">{$ openTeamPage $}</a>
+          
+          <h4 class="heading">
+            <iron-image class="icons" src="/images/icons/icons_contenu.svg" sizing="contain"
+            alt="Sunny Tech Montpellier"></iron-image> {$ content $}
+          </h4>
+          <marked-element markdown="{$ contentDesc $}">
+            <div class="markdown-html"></div>
+          </marked-element>
       </div>
       <span class="divider"></span>
       <div class="about-item">
-        <h4 class="heading">{$ whatIsSunnyTech $}</h4>
+          
+        <h4 class="heading"><iron-image class="icons" src="/images/icons/icons_valeurs.svg" sizing="contain"
+          alt="Sunny Tech Montpellier"></iron-image>{$ whatIsSunnyTech $}</h4>
         <marked-element markdown="{$ aboutSunnyTech $}">
           <div class="markdown-html"></div>
         </marked-element>
       </div>
+      <span class="divider"></span>
+      
+      <div class="about-item">
+          
+          <h4 class="heading"><iron-image class="icons" src="/images/icons/icons_solidarite.svg" sizing="contain"
+            alt="Sunny Tech Montpellier"></iron-image>{$ organizerTitle $}</h4>
+          <marked-element markdown="{$ aboutOrganizers $}">
+            <div class="markdown-html"></div>
+          </marked-element>
+          <a class="page-link" href="/team">{$ openTeamPage $}</a>
+        </div>
     </div>
 
   </template>
