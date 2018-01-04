@@ -11,11 +11,17 @@
  
 ### Compatibility
 :white_check_mark: Chrome 60, Chrome for Android 62 and higher
+
 :white_check_mark: Firefox 57 and higher
+
 :white_check_mark: Opera 47 and higher
+
 :white_check_mark: Safari 10.1, iOS Safari 10.3 and higher
+
 :white_check_mark: Edge 17 and higher
+
 :x: IE 11
+
 :x: Opera Mini
 
 ### Setup
