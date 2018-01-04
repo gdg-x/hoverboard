@@ -8,7 +8,6 @@
 > *Do you :heart: it?* Show your support - please, :star: the project.
 
 :zap: [Live demo](https://hoverboard-v2-dev.firebaseapp.com/)
- 
 
 ### Setup
 :book: [Full documentation](/docs/).
@@ -63,6 +62,12 @@ Or you can build in Docker container:
     docker run -v "$PWD":/app hoverboard npm run build
 
 :book: Read more in [deploy docs](/docs/tutorials/deploy.md).   
+
+
+### Compatibility
+:white_check_mark: Compatible with latest two version of Chrome, Chrome for Android, Firefox, Opera, Safari, Edge.
+
+:x: IE 11 and Opera Mini aren't supported.
 
 
 ### Contributors :sparkles:
