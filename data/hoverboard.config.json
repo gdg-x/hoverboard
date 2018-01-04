@@ -114,8 +114,7 @@
         "backgroundColor": "rgba(212, 69, 64, 0.897)",
         "fontColor": "#fff",
         "tabBarColor": "#fff",
-        "minHeight": "100px",
-        "maxHeight": "100px"
+        "minHeight": "160px"
       }
     },
     "cod": {
