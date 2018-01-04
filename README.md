@@ -67,7 +67,7 @@ Or you can build in Docker container:
 ### Compatibility
 :white_check_mark: Compatible with latest two version of Chrome, Chrome for Android, Firefox, Opera, Safari, Edge.
 
-:x: IE 11 and Opera Mini aren't supported.
+:x: IE and Opera Mini aren't supported.
 
 
 ### Contributors :sparkles:
@@ -76,7 +76,7 @@ See [list of contributors](https://github.com/gdg-x/hoverboard/graphs/contributo
 __Maintainer:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
 
 
-######The GDG App, GDG[x] are not endorsed and/or supported by Google, the corporation.
+###### The GDG App, GDG[x] are not endorsed and/or supported by Google, the corporation.
 
 
 ### License
