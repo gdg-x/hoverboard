@@ -64,19 +64,9 @@ Or you can build in Docker container:
 :book: Read more in [deploy docs](/docs/tutorials/deploy.md).   
 
 ### Compatibility
-:white_check_mark: Chrome 60, Chrome for Android 62 and higher
+:white_check_mark: Compatible with latest two version of Chrome, Chrome for Android, Firefox, Opera, Safari, Edge
 
-:white_check_mark: Firefox 57 and higher
-
-:white_check_mark: Opera 47 and higher
-
-:white_check_mark: Safari 10.1, iOS Safari 10.3 and higher
-
-:white_check_mark: Edge 17 and higher
-
-:x: IE 11
-
-:x: Opera Mini
+:x: IE 11 and Opera Mini aren't supported 
 
 
 ### Contributors :sparkles:
