@@ -1,5 +1,5 @@
 {
-  "url": "https://hoverboard.firebaseapp.com/",
+  "url": "https://sunny-tech.io/",
   "startDate": "2018-06-28T09:00:00+01:00",
   "endDate": "2018-07-29T19:00:00+01:00",
   "analytics": {
@@ -113,7 +113,9 @@
       "headerSettings": {
         "backgroundColor": "rgba(212, 69, 64, 0.897)",
         "fontColor": "#fff",
-        "tabBarColor": "#fff"
+        "tabBarColor": "#fff",
+        "minHeight": "100px",
+        "maxHeight": "100px"
       }
     },
     "cod": {
