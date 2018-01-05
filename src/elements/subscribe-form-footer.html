@@ -64,18 +64,16 @@
           <iron-icon icon="hoverboard:checked" slot="suffix" hidden$="[[!subscribed]]"></iron-icon>
           </paper-input>
           <paper-button
-            class="subscribe-button"
             on-tap="_subscribe"
             ga-on="click"
             disabled="[[subscribed]]"
             ga-event-category="attendees"
             ga-event-action="subscribe"
             ga-event-label="subscribe footer"
-            layout flex self-end>
+            layout self-end>
             [[ctaLabel]]
           </paper-button>
     </div>
-
   </template>
 
   <script>
