@@ -120,6 +120,10 @@
           height: initial;
         }
       }
+
+      .buy-button {
+        margin-left: 12px;
+      }
     </style>
 
     <iron-media-query id="mq-phone" full query="(max-width: {$ mediaQueries.xs.max $})"
@@ -156,6 +160,10 @@
           <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer">{$ nav.title $}</a>
           {% endfor %}
         </iron-selector>
+
+        <a href$="[[tickets.url]]" target="_blank" rel="noopener noreferrer" ga-on="click" ga-event-category="ticket button" ga-event-action="buy_click">
+          <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>
+        </a>
 
       </app-drawer>
 
@@ -295,6 +303,10 @@
           providerUrls: {
             type: Object,
             value: '{$ signInProviders.allowedProvidersUrl $}'
+          },
+          tickets:{
+            type: Object,
+            statePath: 'tickets'
           }
         };
       }
