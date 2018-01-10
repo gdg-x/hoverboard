@@ -19,9 +19,9 @@
       (document,'script','../../node_modules/autotrack/autotrack.js');
 
       ga('create', {
-        trackingId: window.ENV === 'prod' ? '{$ analytics.prod $}' : '{$ analytics.dev $}',
+        trackingId: '{$ analytics $}',
         cookieDomain: 'auto',
-        cookiePath: window.ENV !== 'dev' ? window.PREFIX || '/' : null,
+        cookiePath: '{$ prefix $}',
         siteSpeedSampleRate: 10
       });
 
