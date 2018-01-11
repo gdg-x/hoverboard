@@ -9,7 +9,8 @@
 
 :zap: [Live demo](https://hoverboard-v2-dev.firebaseapp.com/)
 
-### Setup
+Setup
+--------
 :book: [Full documentation](/docs/).
 
 ##### Docker based development env
