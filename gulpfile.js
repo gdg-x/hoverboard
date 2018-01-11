@@ -160,10 +160,10 @@ function prependPath(pre, to) {
 }
 
 function getConfigPath() {
-  const path = process.env.BUILD_ENV ? `config/${process.env.BUILD_ENV}` : 'config/default';
+  const path = process.env.BUILD_ENV ? `config/${process.env.BUILD_ENV}` : 'config/development';
 
   if (!fs.existsSync(`${path}.json`)) {
-    console.error(`ERROR: Config path '${path}' does not exists. Please, add/use production|development|default.json files.`);
+    console.error(`ERROR: Config path '${path}' does not exists. Please, add/use production|development.json files.`);
     return null;
   }
 

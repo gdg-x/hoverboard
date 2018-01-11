@@ -4,7 +4,9 @@
         "twitter": "gdglviv",
         "blog": "https://medium.com/gdg-lviv",
         "url": "http://lviv.gdg.org.ua/"
-    },
+    },    
+    "startDate": "2017-10-013T09:00:00+03:00",
+    "endDate": "2017-10-14T19:00:00+03:00",
     "webapp": {
         "shortName": "DevFest",
         "themeColor": "#673AB7",

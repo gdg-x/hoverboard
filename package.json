@@ -5,8 +5,8 @@
   "scripts": {
     "gulp": "gulp",
     "bower": "bower",
-    "build-prod": "cross-env BUILD_ENV=production gulp",
-    "build-dev": "cross-env BUILD_ENV=development gulp",
+    "build": "gulp",
+    "build:prod": "cross-env BUILD_ENV=production gulp",
     "postinstall": "bower install",
     "serve": "gulp serve"
   },
