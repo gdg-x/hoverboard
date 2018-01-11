@@ -26,10 +26,11 @@ docker build -t hoverboard .
 docker run -v "$PWD":/app hoverboard npm install
 ```
 :book: Read more in [docker docs](/docs/tutorials/docker.md).
+
 :book: [Full documentation](/docs/).
 
 
-Build
+Build & Deploy
 --------
 This command performs HTML, CSS, and JS minification on the application
 dependencies, and generates a service-worker.js file with code to pre-cache the
