@@ -1,9 +1,10 @@
-![preview-web](https://cloud.githubusercontent.com/assets/2954281/17777476/5dbbbe1c-6569-11e6-9cc4-77185ae9bf92.png)
-
 Project Hoverboard 2
 --------
+```
+Project Hoverboard 2 is the next generation conference website template full
+```
 
-
+![preview-web](https://cloud.githubusercontent.com/assets/2954281/17777476/5dbbbe1c-6569-11e6-9cc4-77185ae9bf92.png)
 > Template is brought by [GDG Lviv team](http://lviv.gdg.org.ua/).
 
 > *Do you :heart: it?* Show your support - please, :star: the project.
