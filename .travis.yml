@@ -13,6 +13,8 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - g++-4.8
+before_install:
+- openssl aes-256-cbc -K $encrypted_6613b71914c8_key -iv $encrypted_6613b71914c8_iv -in production.json.enc -out production.json -d
 install:
 - yarn
 - cd functions && yarn && cd ..
