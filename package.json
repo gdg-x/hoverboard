@@ -6,6 +6,7 @@
     "gulp": "gulp",
     "bower": "bower",
     "build": "gulp",
+    "build:prod": "cross-env BUILD_ENV=production gulp",
     "postinstall": "bower install",
     "serve": "gulp serve"
   },
@@ -13,6 +14,7 @@
     "bower": "^1.8.2",
     "browser-sync": "^2.23.2",
     "connect-history-api-fallback": "^1.5.0",
+    "cross-env": "^5.1.3",
     "css-slam": "^2.0.2",
     "del": "^3.0.0",
     "eslint": "^4.14.0",

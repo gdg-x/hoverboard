@@ -1,6 +1,7 @@
 'use strict';
 
 const del = require('del');
+const fs = require('fs');
 const gulp = require('gulp');
 const gulpif = require('gulp-if');
 const uglifyes = require('uglify-es');
@@ -25,11 +26,13 @@ const config = {
   },
   swPrecacheConfigPath: './sw-precache-config.js',
   templateData: [
-    'data/hoverboard.config',
+    `${getConfigPath()}`,
+    'data/settings',
     'data/resources'
   ],
   tempDirectory: '.temp'
 };
+
 const swPrecacheConfig = require(config.swPrecacheConfigPath);
 const polymerJson = require(config.polymerJsonPath);
 const buildPolymerJson = {
@@ -154,6 +157,18 @@ function copyStatic() {
 
 function prependPath(pre, to) {
   return `${pre}/${to}`;
+}
+
+function getConfigPath() {
+  const path = process.env.BUILD_ENV ? `config/${process.env.BUILD_ENV}` : 'config/development';
+
+  if (!fs.existsSync(`${path}.json`)) {
+    console.error(`ERROR: Config path '${path}' does not exists. Please, add/use production|development.json files.`);
+    return null;
+  }
+
+  console.log(`File path ${path}.json selected as config...`);
+  return path;
 }
 
 gulp.task('default', build);

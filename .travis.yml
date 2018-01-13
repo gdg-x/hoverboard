@@ -17,7 +17,7 @@ install:
 - yarn
 - cd functions && yarn && cd ..
 script: echo "Deploying!"
-before_deploy: yarn run build
+before_deploy: yarn run build:prod
 deploy:
 - provider: firebase
   skip_cleanup: true
