@@ -19,9 +19,6 @@ const HtmlSplitter = polymerBuild.HtmlSplitter;
 const PolymerProject = polymerBuild.PolymerProject;
 const uglify = composer(uglifyes, console);
 
-// const logging = require('plylog');
-// logging.setVerbose();
-
 const config = {
   polymerJsonPath: './polymer.json',
   build: {

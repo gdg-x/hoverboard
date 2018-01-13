@@ -35,7 +35,6 @@
     "gulp-replace": "^0.6.1",
     "gulp-uglify": "^3.0.0",
     "merge-stream": "^1.0.1",
-    "plylog": "^0.5.0",
     "polymer-build": "^2.1.1",
     "pre-commit": "^1.2.2",
     "require-uncached": "^1.0.3",
