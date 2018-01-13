@@ -6,4 +6,3 @@ build
 .temp/
 .vscode/
 .firebaserc
-config/production.json
