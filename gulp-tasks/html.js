@@ -5,7 +5,6 @@ const htmlmin = require('gulp-htmlmin');
 function minify() {
   return htmlmin({
     caseSensitive: true,
-    collapseWhitespace: true,
     collapseInlineTagWhitespace: true,
     removeComments: true,
     removeCommentsFromCDATA: true,
