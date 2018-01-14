@@ -7,6 +7,7 @@
 <link rel="import" href="../elements/shared-styles.html">
 <link rel="import" href="../elements/posts-list.html">
 <link rel="import" href="../elements/text-truncate.html">
+<link rel="import" href="../elements/content-loader.html">
 
 <dom-module id="blog-list-page">
   <template>
@@ -18,12 +19,17 @@
         display: block;
       }
 
+      .featured-posts-wrapper {
+        grid-template-columns: 1fr;
+        display: grid;
+        grid-gap: 24px;
+      }
+
       .featured {
         background-color: var(--secondary-background-color);
       }
 
       .featured-post {
-        margin: 12px 0;
         height: 200px;
         border-radius: var(--border-radius);
         overflow: hidden;
@@ -62,12 +68,17 @@
 
       @media (min-width: 640px) {
         .featured-posts-wrapper {
-          padding: 24px 0;
+          grid-template-columns: repeat(2, 1fr);
         }
 
         .featured-post {
-          margin: 0 12px;
           height: 256px;
+        }
+      }
+
+      @media (min-width: 812px) {
+        .featured-posts-wrapper {
+          grid-template-columns: repeat(3, 1fr);
         }
       }
 
@@ -75,7 +86,21 @@
 
     <div class="featured">
       <div class="container">
-        <div class="featured-posts-wrapper" layout vertical$="[[viewport.isPhone]]" horizontal$="[[viewport.isTabletPlus]]" justified>
+        <content-loader 
+          class="featured-posts-wrapper"
+          card-padding="24px"
+          card-height="256px"
+          avatar-size="0px"
+          avatar-circle="0px"
+          border-radius="var(--border-radius)"
+          title-top-position="32px"
+          title-height="42px"
+          title-width="70%"
+          items-count="3"
+          hidden$="[[contentLoaderVisibility]]">
+        </content-loader>
+
+        <div class="featured-posts-wrapper">
           <template is="dom-repeat" items="[[featuredPosts]]" as="post">
             <a href$="/blog/posts/[[post.id]]/"
                class="featured-post"
@@ -135,13 +160,29 @@
             statePath: 'ui.viewport'
           },
           posts: Array,
-          featuredPosts: Array
+          featuredPosts: Array,
+          contentLoaderVisibility: {
+            type: String,
+            value: null
+          }
         };
       }
 
       connectedCallback() {
         super.connectedCallback();
         if (!Object.keys(this.postsSource).length) blogActions.fetchList();
+      }
+
+      static get observers() {
+        return [
+          '_postsChanged(postsSource)'
+        ];
+      }
+
+      _postsChanged() {
+        if (this.postsSource && Object.keys(this.postsSource).length) {
+          this.contentLoaderVisibility = "hidden";          
+        }
       }
 
       _transformPosts(postsSource) {

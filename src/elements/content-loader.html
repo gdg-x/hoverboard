@@ -12,6 +12,9 @@
         --darkgrey-lighter: rgba(211, 211, 211, 0.8);
         --card-padding: 24px;
         --card-height: 340px;
+        --card-width: auto;
+        --card-border-radius: 0;
+        --card-margin: 0;
         --card-skeleton: linear-gradient(lightgrey var(--card-height), transparent 0);
         --horizontal-position: var(--card-padding);
         
@@ -22,15 +25,16 @@
         
         --title-height: 32px;
         --title-width: 200px;
-        --title-position: var(--horizontal-position) 180px;
+        --title-top-position: 180px;
+        --title-position: var(--horizontal-position) var(--title-top-position);
         --title-skeleton: linear-gradient(white var(--title-height), transparent 0);
         
         --desc-line-height: 16px;
         --desc-line-skeleton: linear-gradient(white var(--desc-line-height), transparent 0);
         --desc-line-1-width: 230px;
-        --desc-line-1-position: var(--horizontal-position) 242px;
+        --desc-line-1-position: var(--horizontal-position) calc(var(--title-top-position) + 62px);
         --desc-line-2-width: 180px;
-        --desc-line-2-position: var(--horizontal-position) 265px;
+        --desc-line-2-position: var(--horizontal-position) calc(var(--title-top-position) + 85px);
         
         --footer-height: 0px;
         --footer-position: 0 calc(var(--card-height) - var(--footer-height));
@@ -41,8 +45,9 @@
     }
 
     .content {
-        width: auto;
+        width: var(--card-width);
         height: var(--card-height);
+        margin: var(--card-margin);
     }
   
     .content::after { 
@@ -51,6 +56,7 @@
         width: 100%;
         height: 100%;
         box-shadow: 0 10px 45px rgba(0,0,0, .1);
+        border-radius: var(--card-border-radius);
 
         background-image: 
             linear-gradient(90deg, var(--darkgrey) 0,
@@ -99,7 +105,9 @@
 
     </style>
 
-    <div class="content"></div>
+    <template is="dom-repeat" items="[[_getArray()]]">
+        <div class="content"></div>
+    </template>
   </template>
 
   <script>
@@ -110,10 +118,20 @@
       static get properties() {
         return {
             cardPadding: String,
+            cardMargin: String,
             cardHeight: String,
+            cardWidth: String,
+            borderRadius: String,
             horizontalPosition: String,
             avatarSize: String,  
-            avatarCircle: String         
+            avatarCircle: String,
+            titleTopPosition: String,
+            titleHeight: String,
+            titleWidth: String,
+            itemsCount: {
+                type: Number,
+                value: 0
+            }         
         };
       }
 
@@ -122,11 +140,21 @@
 
         this.updateStyles({
             '--card-padding': this.cardPadding || '',
+            '--card-margin': this.cardMargin || '',
             '--card-height': this.cardHeight || '',
+            '--card-width': this.cardWidth || '',
+            '--card-border-radius': this.borderRadius || '',
             '--horizontal-position': this.horizontalPosition || '',
             '--avatar-size': this.avatarSize || '',
             '--avatar-circle': this.avatarCircle || '',
+            '--title-top-position': this.titleTopPosition || '',
+            '--title-height': this.titleHeight || '',
+            '--title-width': this.titleWidth || '',
           });
+      }
+
+      _getArray() {
+        return new Array(Number(this.itemsCount));
       }
     }
 
