@@ -10,14 +10,15 @@
     :host {
         --darkgrey: rgba(211, 211, 211, 0);
         --darkgrey-lighter: rgba(211, 211, 211, 0.8);
-        --card-padding: 32px;
-        --card-height: 400px;
+        --card-padding: 24px;
+        --card-height: 340px;
         --card-skeleton: linear-gradient(lightgrey var(--card-height), transparent 0);
-        --horizontal-position: 50%;
+        --horizontal-position: var(--card-padding);
         
-        --avatar-size: 128px;
+        --avatar-size: 32px;
+        --avatar-circle: 16px;
         --avatar-position: var(--horizontal-position) var(--card-padding);
-        --avatar-skeleton: radial-gradient(circle 64px at center, white 99%, transparent 0);
+        --avatar-skeleton: radial-gradient(circle var(--avatar-circle) at center, white 99%, transparent 0);
         
         --title-height: 32px;
         --title-width: 200px;
@@ -26,9 +27,9 @@
         
         --desc-line-height: 16px;
         --desc-line-skeleton: linear-gradient(white var(--desc-line-height), transparent 0);
-        --desc-line-1-width:230px;
+        --desc-line-1-width: 230px;
         --desc-line-1-position: var(--horizontal-position) 242px;
-        --desc-line-2-width:180px;
+        --desc-line-2-width: 180px;
         --desc-line-2-position: var(--horizontal-position) 265px;
         
         --footer-height: 0px;
@@ -105,6 +106,28 @@
 
     class ContentLoader extends Polymer.Element {
       static get is() { return 'content-loader' }
+
+      static get properties() {
+        return {
+            cardPadding: String,
+            cardHeight: String,
+            horizontalPosition: String,
+            avatarSize: String,  
+            avatarCircle: String         
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+
+        this.updateStyles({
+            '--card-padding': this.cardPadding || '',
+            '--card-height': this.cardHeight || '',
+            '--horizontal-position': this.horizontalPosition || '',
+            '--avatar-size': this.avatarSize || '',
+            '--avatar-circle': this.avatarCircle || '',
+          });
+      }
     }
 
     window.customElements.define(ContentLoader.is, ContentLoader);

@@ -146,7 +146,13 @@
 
     <div class="container" hidden$="[[contentLoaderVisibility]]">
       <template is="dom-repeat" items="[[_getArray()]]">
-        <content-loader></content-loader>
+        <content-loader
+          card-padding="32px"
+          card-height="400px"
+          avatar-size="128px"
+          avatar-circle="64px"
+          horizontal-position="50%"
+        ></content-loader>
       </template>
     </div>
     <div class="container">            
