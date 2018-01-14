@@ -9,6 +9,7 @@
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="../elements/text-truncate.html">
 <link rel="import" href="../elements/shared-styles.html">
+<link rel="import" href="../elements/content-loader.html">
 
 <dom-module id="speakers-page">
   <template>
@@ -143,7 +144,12 @@
       data="{{routeData}}"
     ></app-route>
 
-    <div class="container">
+    <div class="container" hidden$="[[contentLoaderVisibility]]">
+      <template is="dom-repeat" items="[[_getArray()]]">
+        <content-loader></content-loader>
+      </template>
+    </div>
+    <div class="container">            
       <template is="dom-repeat" items="[[transformToArray(speakers, 'id')]]" as="speaker">
         <a class="speaker card"
             href$="/speakers/[[speaker.id]]/"
@@ -225,19 +231,34 @@
           isDialogOpened: {
             type: Object,
             statePath: 'dialogs.speaker.isOpened'
+          },
+          contentLoaderVisibility: {
+            type: String,
+            value: null
           }
         };
       }
 
       static get observers() {
         return [
-          '_openSpeakerDetails(active, speakers, routeData.page)'
+          '_openSpeakerDetails(active, speakers, routeData.page)',
+          '_speakersChanged(speakers)'
         ];
       }
 
       connectedCallback() {
         super.connectedCallback();
         if (!Object.keys(this.speakers).length) speakersActions.fetchList();
+      }
+
+      _getArray() {
+        return new Array(4);
+      }
+
+      _speakersChanged() {
+        if (this.speakers && Object.keys(this.speakers).length) {
+          this.contentLoaderVisibility = null;          
+        }
       }
 
       _openSpeakerDetails(active, speakers, id) {

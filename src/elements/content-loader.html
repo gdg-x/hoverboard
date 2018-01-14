@@ -1,0 +1,113 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+
+<dom-module id="content-loader">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+    <style>
+
+    :host {
+        --darkgrey: rgba(211, 211, 211, 0);
+        --darkgrey-lighter: rgba(211, 211, 211, 0.8);
+        --card-padding: 32px;
+        --card-height: 400px;
+        --card-skeleton: linear-gradient(lightgrey var(--card-height), transparent 0);
+        --horizontal-position: 50%;
+        
+        --avatar-size: 128px;
+        --avatar-position: var(--horizontal-position) var(--card-padding);
+        --avatar-skeleton: radial-gradient(circle 64px at center, white 99%, transparent 0);
+        
+        --title-height: 32px;
+        --title-width: 200px;
+        --title-position: var(--horizontal-position) 180px;
+        --title-skeleton: linear-gradient(white var(--title-height), transparent 0);
+        
+        --desc-line-height: 16px;
+        --desc-line-skeleton: linear-gradient(white var(--desc-line-height), transparent 0);
+        --desc-line-1-width:230px;
+        --desc-line-1-position: var(--horizontal-position) 242px;
+        --desc-line-2-width:180px;
+        --desc-line-2-position: var(--horizontal-position) 265px;
+        
+        --footer-height: 0px;
+        --footer-position: 0 calc(var(--card-height) - var(--footer-height));
+        --footer-skeleton: linear-gradient(white var(--footer-height), transparent 0);
+        
+        --blur-width: 200px;
+        --blur-size: var(--blur-width) calc(var(--card-height) - var(--footer-height));
+    }
+
+    .content {
+        width: auto;
+        height: var(--card-height);
+    }
+  
+    .content::after { 
+        content:"";
+        display:block;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 10px 45px rgba(0,0,0, .1);
+
+        background-image: 
+            linear-gradient(90deg, var(--darkgrey) 0,
+            var(--darkgrey-lighter) 50%,
+            var(--darkgrey) 100%),
+            var(--title-skeleton),
+            var(--desc-line-skeleton),
+            var(--desc-line-skeleton),
+            var(--avatar-skeleton),
+            var(--footer-skeleton),
+            var(--card-skeleton);
+
+        background-size: 
+            var(--blur-size),
+            var(--title-width) var(--title-height),
+            var(--desc-line-1-width) var(--desc-line-height),
+            var(--desc-line-2-width) var(--desc-line-height),
+            var(--avatar-size) var(--avatar-size),
+            100% var(--footer-height),
+            100% 100%;
+
+        background-position: 
+            -150% 0,
+            var(--title-position), 
+            var(--desc-line-1-position),
+            var(--desc-line-2-position),
+            var(--avatar-position),
+            var(--footer-position), 0 0;
+
+        background-repeat: no-repeat;
+        animation: loading 1.5s infinite;
+    }
+
+    @keyframes loading {
+        to {
+            background-position:
+            350% 0,        
+            var(--title-position),  
+            var(--desc-line-1-position),
+            var(--desc-line-2-position),
+            var(--avatar-position),
+            var(--footer-position),
+            0 0;
+        }
+    }     
+
+    </style>
+
+    <div class="content"></div>
+  </template>
+
+  <script>
+
+    class ContentLoader extends Polymer.Element {
+      static get is() { return 'content-loader' }
+    }
+
+    window.customElements.define(ContentLoader.is, ContentLoader);
+
+  </script>
+</dom-module>
