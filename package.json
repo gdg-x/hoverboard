@@ -8,7 +8,12 @@
     "build": "gulp",
     "build:prod": "cross-env BUILD_ENV=production gulp",
     "postinstall": "bower install",
-    "serve": "gulp serve"
+    "serve": "gulp serve",
+    "lint": "gulp lint"
+  },
+  "dependencies": {
+    "autotrack": "^2.4.1",
+    "redux": "^3.7.2"
   },
   "devDependencies": {
     "bower": "^1.8.2",
@@ -19,9 +24,12 @@
     "del": "^3.0.0",
     "eslint": "^4.14.0",
     "eslint-config-google": "^0.9.1",
+    "eslint-friendly-formatter": "^3.0.0",
     "eslint-plugin-html": "^4.0.1",
+    "eslint-plugin-polymer": "^0.1.0",
     "gulp": "^4.0.0",
     "gulp-cli": "^2.0.0",
+    "gulp-eslint": "^4.0.0",
     "gulp-htmlmin": "^4.0.0",
     "gulp-if": "^2.0.2",
     "gulp-imagemin": "^4.1.0",
@@ -29,18 +37,15 @@
     "gulp-replace": "^0.6.1",
     "gulp-uglify": "^3.0.0",
     "merge-stream": "^1.0.1",
-    "plylog": "^0.5.0",
     "polymer-build": "^2.1.1",
+    "pre-commit": "^1.2.2",
     "require-uncached": "^1.0.3",
     "sw-precache": "^5.2.0",
     "uglify-es": "^3.3.4"
   },
   "engines": {
-    "node": ">=6.0"
+    "node": ">=8.9.4"
   },
   "private": true,
-  "dependencies": {
-    "autotrack": "^2.4.1",
-    "redux": "^3.7.2"
-  }
+  "pre-commit": "lint"
 }

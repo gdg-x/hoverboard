@@ -187,7 +187,10 @@
 
   <script>
 
-    class SpeakersBlock extends UtilsFunctions(ReduxMixin(Polymer.GestureEventListeners(Polymer.Element))) {
+    // eslint-disable-next-line no-undef
+    class SpeakersBlock extends UtilsFunctions(
+      ReduxMixin(Polymer.GestureEventListeners(Polymer.Element))
+    ) {
       static get is() {
         return 'speakers-block';
       }
@@ -197,8 +200,8 @@
           speakersRaw: {
             route: Object,
             statePath: 'speakers',
-            observer: '_generateSpeakers'
-          }
+            observer: '_generateSpeakers',
+          },
         };
       }
 
@@ -214,7 +217,8 @@
       }
 
       _generateSpeakers(speakers) {
-        const filteredSpeakers = this.transformToArray(speakers, 'id').filter(speaker => speaker.featured);
+        const filteredSpeakers = this.transformToArray(speakers, 'id')
+          .filter((speaker) => speaker.featured);
         this.set('speakers', this.randomOrder(filteredSpeakers).slice(0, 4));
       }
     }

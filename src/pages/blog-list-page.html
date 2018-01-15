@@ -118,6 +118,7 @@
 
   <script>
 
+    // eslint-disable-next-line no-undef
     class BlogListPage extends UtilsFunctions(ReduxMixin(Polymer.Element)) {
       static get is() {
         return 'blog-list-page';
@@ -128,14 +129,14 @@
           postsSource: {
             type: Object,
             statePath: 'blog',
-            observer: '_transformPosts'
+            observer: '_transformPosts',
           },
           viewport: {
             type: Object,
-            statePath: 'ui.viewport'
+            statePath: 'ui.viewport',
           },
           posts: Array,
-          featuredPosts: Array
+          featuredPosts: Array,
         };
       }
 
@@ -145,7 +146,8 @@
       }
 
       _transformPosts(postsSource) {
-        const sortedPosts = this.transformToArray(postsSource, 'id').sort((a, b) => b.published.localeCompare(a.published));
+        const sortedPosts = this.transformToArray(postsSource, 'id')
+          .sort((a, b) => b.published.localeCompare(a.published));
         this.set('featuredPosts', sortedPosts.slice(0, 3));
         this.set('posts', sortedPosts.slice(3));
       }
@@ -156,7 +158,6 @@
         }
         return base;
       }
-
     }
 
     window.customElements.define(BlogListPage.is, BlogListPage);

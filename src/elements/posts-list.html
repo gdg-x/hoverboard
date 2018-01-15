@@ -90,6 +90,7 @@
 
   <script>
 
+    // eslint-disable-next-line no-undef
     class PostsList extends UtilsFunctions(Polymer.Element) {
       static get is() {
         return 'posts-list';
@@ -97,8 +98,8 @@
 
       static get properties() {
         return {
-          posts: Array
-        }
+          posts: Array,
+        };
       }
     }
 

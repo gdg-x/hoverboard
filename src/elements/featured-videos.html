@@ -111,11 +111,11 @@
         <div id="videos" class="videos" layout horizontal>
           <template is="dom-repeat" items="[[videos]]" as="block" index-as="index">
             <div class="video-item"
-                  on-tap="playVideo"
-                  ga-on="click"
-                  ga-event-category="video"
-                  ga-event-action="watch"
-                  ga-event-label$="[[block.title]]">
+                 on-tap="playVideo"
+                 ga-on="click"
+                 ga-event-category="video"
+                 ga-event-action="watch"
+                 ga-event-label$="[[block.title]]">
               <div class="thumbnail" relative layout horizontal center-center>
                 <plastic-image
                   id="image[[index]]"
@@ -161,24 +161,24 @@
   <script>
     class FeaturedVideos extends ReduxMixin(Polymer.GestureEventListeners(Polymer.Element)) {
       static get is() {
-        return 'featured-videos'
+        return 'featured-videos';
       }
 
       static get properties() {
         return {
           videos: {
             type: Object,
-            statePath: 'videos'
+            statePath: 'videos',
           },
           viewport: {
             type: Object,
-            statePath: 'ui.viewport'
+            statePath: 'ui.viewport',
           },
           _currentIndex: {
             type: Number,
-            value: 0
-          }
-        }
+            value: 0,
+          },
+        };
       }
 
       connectedCallback() {
@@ -194,7 +194,7 @@
         let isMouseDown = false;
         const videoListElement = this.$.videos;
 
-        Polymer.Gestures.addListener(this.$.videos, 'track', e => {
+        Polymer.Gestures.addListener(this.$.videos, 'track', (e) => {
           if (!isMouseDown) return;
 
           const videoListWidth = this.getVideoListWidth();
@@ -205,9 +205,10 @@
           }
         });
 
-        Polymer.Gestures.addListener(this.$.videos, 'down', event => {
+        Polymer.Gestures.addListener(this.$.videos, 'down', (event) => {
           isMouseDown = true;
-          currentPosition = parseInt(getComputedStyle(videoListElement, null).getPropertyValue('transform').split(',')[4]);
+          currentPosition = parseInt(getComputedStyle(videoListElement, null)
+            .getPropertyValue('transform').split(',')[4]);
           startPosition = event.detail.x;
         });
 
@@ -220,7 +221,7 @@
         const {
           cardWidth,
           videosLength,
-          slideIndex
+          slideIndex,
         } = this.getVideosDetails();
 
         this._currentIndex = slideIndex < this._currentIndex ? slideIndex : this._currentIndex;
@@ -236,7 +237,7 @@
         const {
           cardWidth,
           videosLength,
-          slideIndex
+          slideIndex,
         } = this.getVideosDetails();
 
         this._currentIndex = slideIndex > this._currentIndex ? slideIndex : this._currentIndex;
@@ -253,14 +254,15 @@
         const cardRect = videos[videos.length - 1].getBoundingClientRect();
         const cardWidth = cardRect.width;
         const videosLength = videos.length;
-        const currentPosition = parseInt(getComputedStyle(this.$.videos, null).getPropertyValue('transform').split(',')[4]);
+        const currentPosition = parseInt(getComputedStyle(this.$.videos, null)
+          .getPropertyValue('transform').split(',')[4]);
         const slideIndex = -(Math.floor(currentPosition / cardWidth));
 
         return {
           cardWidth,
           videosLength,
-          slideIndex
-        }
+          slideIndex,
+        };
       }
 
       getVideoListWidth() {
@@ -283,12 +285,15 @@
             imageElement.srcset = url;
           })
           .catch((error) => {
+            // eslint-disable-next-line no-console
             console.error(`Error occurred during getting sessions images from storage: ${error}`);
           });
       }
 
       playVideo(e) {
-        const presenters = e.model.__data.block.speakers ? (` by ${e.model.__data.block.speakers}`) : '';
+        const presenters = e.model.__data.block.speakers
+          ? (` by ${e.model.__data.block.speakers}`)
+          : '';
         const title = e.model.__data.block.title + presenters;
         const youtubeId = e.model.__data.block.youtubeId;
 
@@ -296,7 +301,7 @@
           title: title,
           youtubeId: youtubeId,
           disableControls: true,
-          opened: true
+          opened: true,
         });
       }
     }

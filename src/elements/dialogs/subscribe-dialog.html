@@ -11,111 +11,114 @@
     <style is="custom-style" include="shared-styles flex flex-alignment"></style>
 
     <style>
-        :host {
-            margin: 0;
-            display: block;
-            width: 85%;
-            max-width: 420px;
-            background: #fff;
-            box-shadow: var(--box-shadow);
+      :host {
+        margin: 0;
+        display: block;
+        width: 85%;
+        max-width: 420px;
+        background: #fff;
+        box-shadow: var(--box-shadow);
 
-            --paper-input-container-focus-color: var(--default-primary-color);
-            --paper-input-container-color: var(--secondary-text-color);
-        }
+        --paper-input-container-focus-color: var(--default-primary-color);
+        --paper-input-container-color: var(--secondary-text-color);
+      }
 
-        .dialog-header {
-            background: var(--default-primary-color);
-            padding: 38px 32px 20px;
-            color: #fff;
-            font-size: 20px;
-            line-height: 1.5;
-            margin-bottom: 32px;
+      .dialog-header {
+        background: var(--default-primary-color);
+        padding: 38px 32px 20px;
+        color: #fff;
+        font-size: 20px;
+        line-height: 1.5;
+        margin-bottom: 32px;
+      }
+
+      paper-input {
+        margin: 16px 32px;
+        height: 40px;
+      }
+
+      paper-input:first-of-type {
+        margin-top: 0;
+      }
+
+      .action-buttons {
+        padding: 0 12px;
+        margin-top: 16px;
+        height: 72px;
+      }
+
+      paper-button {
+        height: 48px;
+      }
+
+      .close-button {
+        color: var(--secondary-text-color);
+      }
+
+      .subscribe-button {
+        color: var(--dark-primary-color);
+      }
+
+      .subscribe-button:hover {
+        color: var(--focused-color);
+      }
+
+      .general-error {
+        color: var(--error-color);
+        margin: 0 32px;
+      }
+
+      @media (min-width: 640px) {
+
+        .action-buttons {
+          margin-top: 24px;
         }
 
         paper-input {
-            margin: 16px 32px;
-            height: 40px;
+          height: 56px;
         }
-
-        paper-input:first-of-type {
-            margin-top: 0;
-        }
-
-        .action-buttons {
-            padding: 0 12px;
-            margin-top: 16px;
-            height: 72px;
-        }
-
-        paper-button {
-            height: 48px;
-        }
-
-        .close-button {
-            color: var(--secondary-text-color);
-        }
-
-        .subscribe-button {
-            color: var(--dark-primary-color);
-        }
-
-        .subscribe-button:hover {
-            color: var(--focused-color);
-        }
-
-        .general-error {
-            color: var(--error-color);
-            margin: 0 32px;
-        }
-
-        @media (min-width: 640px) {
-
-            .action-buttons {
-                margin-top: 24px;
-            }
-
-            paper-input {
-                height: 56px;
-            }
-        }
+      }
 
 
     </style>
 
     <div class="dialog-content" layout vertical>
-        <div class="dialog-header">{$ subscribeBlock.formTitle $}</div>
-            <div hidden$="[[!errorOcurred]]" class="general-error">{$ subscribeBlock.generalError $}</div>
-            <paper-input id="firstNameInput"
-                         on-touchend="_focus"
-                         label="{$ subscribeBlock.firstName $}"
-                         value="{{firstName}}">
-            </paper-input>
-            <paper-input id="lastNameInput"
-                         on-touchend="_focus"
-                         label="{$ subscribeBlock.lastName $}"
-                         value="{{lastName}}">
-            </paper-input>
-            <paper-input id="emailInput"
-                         on-touchend="_focus"
-                         label="{$ subscribeBlock.emailAddress $}"
-                         value="{{email}}"
-                         required auto-validate$="[[validate]]" error-message="{$ subscribeBlock.emailRequired $}" autocomplete="off">
-            </paper-input>
-        <div class="action-buttons" layout horizontal justified>
-            <paper-button
-                class="close-button"
-                on-tap="_closeDialog"
-                >{$ subscribeBlock.close $}</paper-button>
+      <div class="dialog-header">{$ subscribeBlock.formTitle $}</div>
+      <div hidden$="[[!errorOccurred]]" class="general-error">{$ subscribeBlock.generalError $}</div>
+      <paper-input id="firstNameInput"
+                   on-touchend="_focus"
+                   label="{$ subscribeBlock.firstName $}"
+                   value="{{firstName}}">
+      </paper-input>
+      <paper-input id="lastNameInput"
+                   on-touchend="_focus"
+                   label="{$ subscribeBlock.lastName $}"
+                   value="{{lastName}}">
+      </paper-input>
+      <paper-input id="emailInput"
+                   on-touchend="_focus"
+                   label="{$ subscribeBlock.emailAddress $}"
+                   value="{{email}}"
+                   required auto-validate$="[[validate]]" error-message="{$ subscribeBlock.emailRequired $}"
+                   autocomplete="off">
+      </paper-input>
+      <div class="action-buttons" layout horizontal justified>
+        <paper-button
+          class="close-button"
+          on-tap="_closeDialog"
+        >{$ subscribeBlock.close $}
+        </paper-button>
 
-             <paper-button
-                class="subscribe-button"
-                on-tap="_subscribe"
-                ga-on="click"
-                ga-event-category="attendees"
-                ga-event-action="subscribe"
-                ga-event-label="subscribe block">
-                {$ subscribeBlock.subscribe $}</paper-button>
-        </div>
+        <paper-button
+          class="subscribe-button"
+          on-tap="_subscribe"
+          ga-on="click"
+          ga-event-category="attendees"
+          ga-event-action="subscribe"
+          ga-event-label="subscribe block">
+          {$ subscribeBlock.subscribe $}
+        </paper-button>
+      </div>
 
     </div>
 
@@ -124,124 +127,126 @@
 
   <script>
 
-    class SubscribeDialog extends ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element)) {
+    class SubscribeDialog extends ReduxMixin(
+      Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element)
+    ) {
+      static get is() {
+        return 'subscribe-dialog';
+      }
 
-    static get is() {
-            return 'subscribe-dialog'
+      static get properties() {
+        return {
+          ui: {
+            type: Object,
+            statePath: 'ui',
+          },
+          subscribed: {
+            type: Boolean,
+            statePath: 'subscribed',
+          },
+          validate: {
+            type: Boolean,
+            value: true,
+          },
+          errorOccurred: {
+            type: Boolean,
+            value: false,
+          },
+          keyboardOpened: {
+            type: Boolean,
+            value: false,
+          },
+          lastName: String,
+          firstName: String,
+          initialHeight: Number,
+        };
+      }
+
+      static get observers() {
+        return [
+          '_handleDialogToggled(opened, data)',
+          '_handleSubscribed(subscribed)',
+        ];
+      }
+
+      ready() {
+        super.ready();
+        this.initialHeight = window.innerHeight;
+      }
+
+      constructor() {
+        super();
+        this.addEventListener('iron-overlay-canceled', this._close);
+        this.addEventListener('iron-resize', this._resize);
+        window.addEventListener('resize', this._windowResize.bind(this));
+      }
+
+      _close() {
+        dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
+      }
+
+      _handleSubscribed(subscribed) {
+        if (subscribed) {
+          this._closeDialog();
+        }
+      }
+
+      _handleDialogToggled(opened, data) {
+        if (data) {
+          this.errorOccurred = data.errorOccurred;
         }
 
-        static get properties() {
-            return {
-                ui: {
-                    type: Object,
-                    statePath: 'ui'
-                },
-                subscribed: {
-                    type: Boolean,
-                    statePath: 'subscribed'
-                },
-                validate: {
-                    type: Boolean,
-                    value: true
-                },
-                errorOcurred: {
-                    type: Boolean,
-                    value: false
-                },
-                keyboardOpened: {
-                    type: Boolean,
-                    value: false
-                },
-                lastName: String,
-                firstName: String,
-                initialHeight: Number
-            }
+        this._prefillFields(data);
+      }
+
+      _subscribe() {
+        const emailInput = this.shadowRoot.querySelector('#emailInput');
+        if (emailInput.validate()) {
+          subscribeActions.subscribe({
+            email: this.email,
+            firstName: this.firstName,
+            lastName: this.lastName,
+          });
         }
+      }
 
-        static get observers() {
-            return [
-                '_handleDialogToggled(opened, data)',
-                '_handleSubscribed(subscribed)'
-            ];
+      _closeDialog() {
+        dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
+      }
+
+      _prefillFields(userData) {
+        this.validate = false;
+        this.shadowRoot.querySelector('#firstNameInput').value = userData ? userData.firstName : '';
+        this.shadowRoot.querySelector('#lastNameInput').value = userData ? userData.lastName : '';
+        const emailInput = this.shadowRoot.querySelector('#emailInput');
+        emailInput.value = '';
+        emailInput.invalid = false;
+        emailInput.blur();
+        this.validate = true;
+      }
+
+      _focus(e) {
+        e.target.focus();
+      }
+
+      _windowResize() {
+        this.keyboardOpened = this.ui.viewport.isPhone &&
+          window.innerHeight < this.initialHeight - 100;
+      }
+
+      _resize(e) {
+        if (this.keyboardOpened) {
+          const header = this.shadowRoot.querySelector('.dialog-header');
+          const headerHeight = header.offsetHeight;
+
+          setTimeout(() => {
+            requestAnimationFrame(() => {
+              this.style.maxHeight = `${this.initialHeight}px`;
+              this.style.top = `-${headerHeight}px`;
+            });
+          }, 10);
         }
-
-        ready() {
-            super.ready();
-            this.initialHeight = window.innerHeight;
-        }
-
-        constructor() {
-            super();
-            this.addEventListener('iron-overlay-canceled', this._close);
-            this.addEventListener('iron-resize', this._resize);
-            window.addEventListener('resize', this._windowResize.bind(this));
-        }
-
-        _close() {
-          dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
-        }
-
-        _handleSubscribed(subscribed) {
-            if (subscribed) {
-                this._closeDialog();
-            }
-        }
-
-        _handleDialogToggled(opened, data) {
-            if (data) {
-                this.errorOcurred = data.errorOcurred;
-            }
-
-            this._prefillFields(data);
-        }
-
-        _subscribe() {
-             const emailInput = this.shadowRoot.querySelector('#emailInput');
-             if (emailInput.validate()) {
-                subscribeActions.subscribe({
-                    email: this.email,
-                    firstName: this.firstName,
-                    lastName: this.lastName
-                });
-             }
-        }
-
-        _closeDialog() {
-            dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
-        }
-
-        _prefillFields(userData) {
-            this.validate = false;
-            this.shadowRoot.querySelector('#firstNameInput').value = userData ? userData.firstName : '';
-            this.shadowRoot.querySelector('#lastNameInput').value = userData ? userData.lastName : '';
-            const emailInput = this.shadowRoot.querySelector('#emailInput');
-            emailInput.value = "";
-            emailInput.invalid = false;
-            emailInput.blur();
-            this.validate = true;
-        }
-
-        _focus(e) {
-             e.target.focus();
-        }
-
-        _windowResize() {
-            this.keyboardOpened = this.ui.viewport.isPhone && window.innerHeight < this.initialHeight - 100;
-        }
-
-        _resize(e) {
-            if (this.keyboardOpened) {
-                const header = this.shadowRoot.querySelector('.dialog-header');
-                const headerHeight = header.offsetHeight;
-
-                setTimeout(() => {
-                    requestAnimationFrame(() => {
-                        this.style.maxHeight = `${this.initialHeight}px`;
-                        this.style.top = `-${headerHeight}px`;
-                    });
-                }, 10);
-            }
-       }
+      }
     }
 
     window.customElements.define(SubscribeDialog.is, SubscribeDialog);
