@@ -209,9 +209,10 @@
 
   <script>
 
+    // eslint-disable-next-line no-undef
     class SpeakersPage extends UtilsFunctions(ReduxMixin(Polymer.Element)) {
       static get is() {
-        return 'speakers-page'
+        return 'speakers-page';
       }
 
       static get properties() {
@@ -220,18 +221,18 @@
           active: Boolean,
           speakers: {
             type: Object,
-            statePath: 'speakers'
+            statePath: 'speakers',
           },
           isDialogOpened: {
             type: Object,
-            statePath: 'dialogs.speaker.isOpened'
-          }
+            statePath: 'dialogs.speaker.isOpened',
+          },
         };
       }
 
       static get observers() {
         return [
-          '_openSpeakerDetails(active, speakers, routeData.page)'
+          '_openSpeakerDetails(active, speakers, routeData.page)',
         ];
       }
 
@@ -249,7 +250,7 @@
                 dialogsActions.closeDialog(DIALOGS.SPEAKER);
               }
             }
-          )
+          );
         }
       }
     }

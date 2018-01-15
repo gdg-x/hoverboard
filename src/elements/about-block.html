@@ -6,230 +6,232 @@
 <link rel="import" href="hoverboard-icons.html">
 
 <dom-module id="about-block">
-    <template>
-        <style is="custom-style" include="shared-styles flex flex-alignment flex-reverse fade-animations"></style>
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment flex-reverse fade-animations"></style>
 
-        <style>
-             :host {
-                display: block;
-                position: relative;
-                color: var(--dark-primary-color);
-            }
+    <style>
+      :host {
+        display: block;
+        position: relative;
+        color: var(--dark-primary-color);
+      }
 
-            .container {
-                overflow: hidden;
-            }
+      .container {
+        overflow: hidden;
+      }
 
-            .statistics-block {
-                padding: 16px;
-            }
+      .statistics-block {
+        padding: 16px;
+      }
 
-            .statistics-row:first-of-type {
-                margin-bottom: 16px;
-            }
+      .statistics-row:first-of-type {
+        margin-bottom: 16px;
+      }
 
-            .statistics-row:last-of-type {
-                margin-top: 16px;
-            }
+      .statistics-row:last-of-type {
+        margin-top: 16px;
+      }
 
-            .block-cta paper-button {
-                padding-left: 0;
-                margin-left: 0;
-            }
+      .block-cta paper-button {
+        padding-left: 0;
+        margin-left: 0;
+      }
 
-            .block-cta .cta-label {
-                font-size: 14px;
-            }
+      .block-cta .cta-label {
+        font-size: 14px;
+      }
 
-            .block-subtitle {
-                color: var(--secondary-text-color);
-            }
+      .block-subtitle {
+        color: var(--secondary-text-color);
+      }
 
-            .icon-label {
-                color: var(--secondary-text-color);
-                margin-top: 8px;
-            }
+      .icon-label {
+        color: var(--secondary-text-color);
+        margin-top: 8px;
+      }
 
-            .count-info {
-                padding: 16px 0;
-            }
+      .count-info {
+        padding: 16px 0;
+      }
 
-            .numbers {
-                margin-left: 16px;
-                font-size: 32px;
-                vertical-align: middle;
-            }
+      .numbers {
+        margin-left: 16px;
+        font-size: 32px;
+        vertical-align: middle;
+      }
 
-            .icon iron-icon {
-                color: var(--dark-primary-color);
-            }
+      .icon iron-icon {
+        color: var(--dark-primary-color);
+      }
 
-            .title {
-                width: 300px;
-            }
+      .title {
+        width: 300px;
+      }
 
-            .description-block {
-                min-width: 300px;
-                animation-duration: 1s;
-                animation-fill-mode: both;
-                animation-name: fadeInUp;
-            }
+      .description-block {
+        min-width: 300px;
+        animation-duration: 1s;
+        animation-fill-mode: both;
+        animation-name: fadeInUp;
+      }
 
-            .attendees-count {
-                animation-duration: 1.5s;
-                animation-delay: 1.5s;
-                animation-fill-mode: both;
-                animation-name: fadeInAttendeesCount;
-            }
+      .attendees-count {
+        animation-duration: 1.5s;
+        animation-delay: 1.5s;
+        animation-fill-mode: both;
+        animation-name: fadeInAttendeesCount;
+      }
 
-            .days-count {
+      .days-count {
 
-                animation-duration: 1.5s;
-                animation-delay: 1.5s;
-                animation-fill-mode: both;
-                animation-name: fadeInDaysCount;
-            }
+        animation-duration: 1.5s;
+        animation-delay: 1.5s;
+        animation-fill-mode: both;
+        animation-name: fadeInDaysCount;
+      }
 
-            .sessions-count {
-                animation-duration: 1.5s;
-                animation-delay: 1.5s;
-                animation-fill-mode: both;
-                animation-name: fadeInSessionsCount;
-            }
+      .sessions-count {
+        animation-duration: 1.5s;
+        animation-delay: 1.5s;
+        animation-fill-mode: both;
+        animation-name: fadeInSessionsCount;
+      }
 
-             .tracks-count {
-                animation-duration: 1.5s;
-                animation-delay: 1.5s;
-                animation-fill-mode: both;
-                animation-name: fadeInTracksCount;
-            }
+      .tracks-count {
+        animation-duration: 1.5s;
+        animation-delay: 1.5s;
+        animation-fill-mode: both;
+        animation-name: fadeInTracksCount;
+      }
 
-            @media (min-width: 868px) {
+      @media (min-width: 868px) {
 
-                .container {
-                    margin: 48px auto;
-                }
+        .container {
+          margin: 48px auto;
+        }
 
-                .description-block,
-                .statistics-block {
-                    padding: 48px 0;
-                }
+        .description-block,
+        .statistics-block {
+          padding: 48px 0;
+        }
 
-                .description-block {
-                    margin-right: 64px;
-                    padding-right: 16px;
-                }
+        .description-block {
+          margin-right: 64px;
+          padding-right: 16px;
+        }
 
-                .statistics-block {
-                    margin-left: 64px;
-                    padding-left: 16px;
-                }
+        .statistics-block {
+          margin-left: 64px;
+          padding-left: 16px;
+        }
 
-                 .numbers {
-                    font-size: 50px;
-                }
-            }
+        .numbers {
+          font-size: 50px;
+        }
+      }
 
 
-        </style>
+    </style>
 
-        <div class="container" flex layout horizontal center wrap-reverse>
+    <div class="container" flex layout horizontal center wrap-reverse>
 
-            <div class="description-block" flex>
-                <h2 class="title">{$ aboutBlock.title $}</h2>
+      <div class="description-block" flex>
+        <h2 class="title">{$ aboutBlock.title $}</h2>
 
-                   <p class="block-subtitle"> {$ aboutBlock.callToAction.featuredSessions.description $} </p>
-                     <a class="block-cta"
-                        href="{$ aboutBlock.callToAction.featuredSessions.link $}"
+        <p class="block-subtitle"> {$ aboutBlock.callToAction.featuredSessions.description $} </p>
+        <a class="block-cta"
+           href="{$ aboutBlock.callToAction.featuredSessions.link $}"
+           ga-on="click"
+           ga-event-category="video"
+           ga-event-action="watch"
+           ga-event-label="about block - {$ aboutBlock.callToAction.featuredSessions.label $}"
+           target="_blank"
+           rel="noopener noreferrer">
+          <paper-button class="animated icon-right">
+            <span class="cta-label">{$ aboutBlock.callToAction.featuredSessions.label $}</span>
+            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+          </paper-button>
+        </a>
+        <p class="block-subtitle"> {$ aboutBlock.callToAction.howItWas.description $} </p>
+        <div class="block-cta">
+          <paper-button class="animated icon-right"
+                        on-tap="_playVideo"
                         ga-on="click"
                         ga-event-category="video"
                         ga-event-action="watch"
-                        ga-event-label="about block - {$ aboutBlock.callToAction.featuredSessions.label $}"
-                        target="_blank"
-                        rel="noopener noreferrer">
-                        <paper-button class="animated icon-right">
-                            <span class="cta-label">{$ aboutBlock.callToAction.featuredSessions.label $}</span>
-                            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-                        </paper-button>
-                    </a>
-                    <p class="block-subtitle"> {$ aboutBlock.callToAction.howItWas.description $} </p>
-                    <div class="block-cta">
-                        <paper-button class="animated icon-right"
-                                        on-tap="_playVideo"
-                                        ga-on="click"
-                                        ga-event-category="video"
-                                        ga-event-action="watch"
-                                        ga-event-label="about block - {$ aboutBlock.callToAction.howItWas.label $}">
-                            <span class="cta-label">{$  aboutBlock.callToAction.howItWas.label $}</span>
-                            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-                        </paper-button>
-                    </div>
-            </div>
+                        ga-event-label="about block - {$ aboutBlock.callToAction.howItWas.label $}">
+            <span class="cta-label">{$  aboutBlock.callToAction.howItWas.label $}</span>
+            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+          </paper-button>
+        </div>
+      </div>
 
-            <div class="statistics-block" flex vertical>
+      <div class="statistics-block" flex vertical>
 
-                <div class="statistics-row" flex
-                                   layout
-                                   horizontal
-                                   justified>
+        <div class="statistics-row" flex
+             layout
+             horizontal
+             justified>
 
-                    <div class="count-info attendees-count" layout horizontal>
+          <div class="count-info attendees-count" layout horizontal>
                         <span class="icon" layout vertical center>
                             <iron-icon class="big-icon" icon="hoverboard:people"></iron-icon>
                             <span class="icon-label">{$ aboutBlock.statisticsBlock.attendees.label $}</span>
                         </span>
-                        <span class="numbers">{$ aboutBlock.statisticsBlock.attendees.number $}</span>
-                    </div>
+            <span class="numbers">{$ aboutBlock.statisticsBlock.attendees.number $}</span>
+          </div>
 
-                    <div class="count-info days-count" layout horizontal>
+          <div class="count-info days-count" layout horizontal>
                         <span class="icon" layout vertical center>
                             <iron-icon class="big-icon" icon="hoverboard:calendar"></iron-icon>
                             <span class="icon-label">{$ aboutBlock.statisticsBlock.days.label $}</span>
                         </span>
-                        <span class="numbers">{$ aboutBlock.statisticsBlock.days.number $}</span>
-                    </div>
-                </div>
+            <span class="numbers">{$ aboutBlock.statisticsBlock.days.number $}</span>
+          </div>
+        </div>
 
-                <div class="statistics-row" flex
-                                   layout
-                                   horizontal
-                                   justified>
-                    <div class="count-info sessions-count" layout horizontal>
+        <div class="statistics-row" flex
+             layout
+             horizontal
+             justified>
+          <div class="count-info sessions-count" layout horizontal>
                         <span class="icon" layout vertical center>
                             <iron-icon class="big-icon" icon="hoverboard:microphone"></iron-icon>
                             <span class="icon-label">{$ aboutBlock.statisticsBlock.sessions.label $}</span>
                         </span>
-                        <span class="numbers">{$ aboutBlock.statisticsBlock.sessions.number $}</span>
-                    </div>
+            <span class="numbers">{$ aboutBlock.statisticsBlock.sessions.number $}</span>
+          </div>
 
-                    <div class="count-info tracks-count" layout horizontal>
+          <div class="count-info tracks-count" layout horizontal>
                         <span class="icon" layout vertical center>
                             <iron-icon class="big-icon" icon="hoverboard:tracks"></iron-icon>
                             <span class="icon-label">{$ aboutBlock.statisticsBlock.tracks.label $}</span>
                         </span>
-                        <span class="numbers">{$ aboutBlock.statisticsBlock.tracks.number $}</span>
-                    </div>
-                </div>
-
-            </div>
-
+            <span class="numbers">{$ aboutBlock.statisticsBlock.tracks.number $}</span>
+          </div>
         </div>
-    </template>
 
-    <script>
-        class AboutBlock extends ReduxMixin(Polymer.Element) {
-            static get is() { return 'about-block' }
+      </div>
 
-            _playVideo() {
-                uiActions.toggleVideoDialog({
-                    title: '{$  aboutBlock.callToAction.howItWas.title $}',
-                    youtubeId: '{$  aboutBlock.callToAction.howItWas.youtubeId $}',
-                    disableControls: true,
-                    opened: true
-                });
-            }
-        }
+    </div>
+  </template>
 
-        window.customElements.define(AboutBlock.is, AboutBlock);
-    </script>
+  <script>
+    class AboutBlock extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'about-block';
+      }
+
+      _playVideo() {
+        uiActions.toggleVideoDialog({
+          title: '{$  aboutBlock.callToAction.howItWas.title $}',
+          youtubeId: '{$  aboutBlock.callToAction.howItWas.youtubeId $}',
+          disableControls: true,
+          opened: true,
+        });
+      }
+    }
+
+    window.customElements.define(AboutBlock.is, AboutBlock);
+  </script>
 </dom-module>

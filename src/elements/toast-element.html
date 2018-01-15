@@ -63,20 +63,20 @@
 
     class ToastElement extends ReduxMixin(Polymer.GestureEventListeners(Polymer.Element)) {
       static get is() {
-        return 'toast-element'
+        return 'toast-element';
       }
 
       static get properties() {
         return {
           toast: {
             type: Object,
-            statePath: 'toast'
+            statePath: 'toast',
           },
           viewport: {
             type: Object,
-            statePath: 'ui.viewport'
-          }
-        }
+            statePath: 'ui.viewport',
+          },
+        };
       }
 
       _handleTap() {
@@ -90,7 +90,6 @@
           toastActions.hideToast();
         }
       }
-
     }
 
     window.customElements.define(ToastElement.is, ToastElement);

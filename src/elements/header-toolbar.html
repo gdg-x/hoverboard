@@ -217,30 +217,30 @@
         return {
           route: {
             type: String,
-            statePath: 'routing'
+            statePath: 'routing',
           },
           viewport: {
             type: Object,
-            statePath: 'ui.viewport'
+            statePath: 'ui.viewport',
           },
           dialogs: {
             type: Object,
-            statePath: 'dialogs'
+            statePath: 'dialogs',
           },
           notifications: {
             type: Boolean,
-            statePath: 'notifications'
+            statePath: 'notifications',
           },
           user: {
             type: Object,
-            statePath: 'user'
-          }
+            statePath: 'user',
+          },
         };
       }
 
       static get observers() {
         return [
-          '_authStatusChanged(user.signedIn)'
+          '_authStatusChanged(user.signedIn)',
         ];
       }
 

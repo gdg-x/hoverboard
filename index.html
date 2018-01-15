@@ -72,25 +72,27 @@
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <script>
-    
-    window.Polymer = {rootPath: '{$ basepath $}'};
+
+    window.Polymer = { rootPath: '{$ basepath $}' };
 
     // Load and register pre-caching Service Worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
         navigator.serviceWorker.register(`service-worker.js`, {
-          scope: Polymer.rootPath
+          scope: Polymer.rootPath,
         });
       });
     }
 
     function loadFirebaseModule() {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         const script = document.createElement('script');
         script.src = `bower_components/firebase/firebase.js`;
         script.async = true;
         script.onload = () => resolve();
-        script.onerror = () => { throw new Error(); };
+        script.onerror = () => {
+          throw new Error();
+        };
         document.head.appendChild(script);
       });
     }
@@ -103,7 +105,7 @@
           databaseURL: '{$ firebase.databaseURL $}',
           projectId: '{$ firebase.projectId $}',
           storageBucket: '{$ firebase.storageBucket $}',
-          messagingSenderId: '{$ firebase.messagingSenderId $}'
+          messagingSenderId: '{$ firebase.messagingSenderId $}',
         });
       });
 
@@ -120,6 +122,7 @@
       line-height: 1.5;
       min-height: 100vh;
     }
+
     /* styling for render while resources are loading */
 
     hoverboard-app[unresolved] {
@@ -139,15 +142,15 @@
 
 <body>
 
-  <hoverboard-app unresolved>{$ title $}</hoverboard-app>
+<hoverboard-app unresolved>{$ title $}</hoverboard-app>
 
-  <noscript>
-    Please enable JavaScript to view this website.
-  </noscript>
+<noscript>
+  Please enable JavaScript to view this website.
+</noscript>
 
-  <script>
-    window.performance && performance.mark && performance.mark('index.html');
-  </script>
+<script>
+  window.performance && performance.mark && performance.mark('index.html');
+</script>
 
 </body>
 

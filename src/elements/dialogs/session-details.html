@@ -115,7 +115,10 @@
 
   <script>
 
-    class SessionDetails extends UtilsFunctions(ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element))) {
+    // eslint-disable-next-line no-undef
+    class SessionDetails extends UtilsFunctions(
+      ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element))
+    ) {
       static get is() {
         return 'session-details';
       }
@@ -123,21 +126,21 @@
       static get properties() {
         return {
           session: {
-            type: Object
+            type: Object,
           },
           viewport: {
             type: Object,
-            statePath: 'ui.viewport'
+            statePath: 'ui.viewport',
           },
           user: {
             type: Object,
-            statePath: 'user'
+            statePath: 'user',
           },
           featuredSessions: {
             type: Object,
-            statePath: 'sessions.featured'
-          }
-        }
+            statePath: 'sessions.featured',
+          },
+        };
       }
 
       constructor() {
@@ -147,7 +150,7 @@
 
       static get observers() {
         return [
-          '_handleClose(opened, session)'
+          '_handleClose(opened, session)',
         ];
       }
 
@@ -177,7 +180,7 @@
           title: this.session.title,
           youtubeId: this.session.videoId,
           disableControls: true,
-          opened: true
+          opened: true,
         });
       }
 
@@ -191,13 +194,13 @@
               title: 'Sign in',
               callback: () => {
                 dialogsActions.openDialog(DIALOGS.SIGNIN);
-              }
-            }
+              },
+            },
           });
           return;
         }
         const sessions = Object.assign({}, this.featuredSessions, {
-          [this.session.id]: !this.featuredSessions[this.session.id] ? true : null
+          [this.session.id]: !this.featuredSessions[this.session.id] ? true : null,
         });
 
         sessionsActions.setUserFeaturedSessions(this.user.uid, sessions);

@@ -4,166 +4,171 @@
 <link rel="import" href="../mixins/scroll-functions.html">
 
 <dom-module id="faq-page">
-    <template>
-        <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
 
-        <style>
-             :host {
-                display: block;
-            }
+    <style>
+      :host {
+        display: block;
+      }
 
-            .content-wrapper {
-                background-color: var(--secondary-background-color);
-                width: 100%;
-                overflow: hidden;
-                transition: opacity var(--animation), opacity var(--animation);
-                opacity: 0;
-            }
+      .content-wrapper {
+        background-color: var(--secondary-background-color);
+        width: 100%;
+        overflow: hidden;
+        transition: opacity var(--animation), opacity var(--animation);
+        opacity: 0;
+      }
 
-            .content-wrapper.visible {
-                opacity: 1;
-            }
+      .content-wrapper.visible {
+        opacity: 1;
+      }
 
-            .col {
-                font-size: 32px;
-                line-height: 48px;
-                margin-bottom: 24px;
-                z-index: 2;
-            }
+      .col {
+        font-size: 32px;
+        line-height: 48px;
+        margin-bottom: 24px;
+        z-index: 2;
+      }
 
-            .col-content {
-                line-height: 32px;
-                display: block;
-                font-size: 16px;
-            }
+      .col-content {
+        line-height: 32px;
+        display: block;
+        font-size: 16px;
+      }
 
-            @media (min-width: 640px) {
-                .content,
-                .markdown-text {
-                    padding: 0 40px;
-                }
-
-                .col {
-                    margin-right: 24px;
-                }
-
-                .col:last-of-type {
-                    margin-right: 0;
-                }
-
-                [slot="markdown-html"] h2 {
-                    font-size: 40px;
-                    width: 40%;
-                    margin-bottom: 0;
-                    display: inline-block;
-                    padding-right: 16px;
-                    transform: translateY(50%);
-                    height: 130px;
-                    vertical-align: bottom;
-                    line-height: 1.1;
-                }
-
-                [slot="markdown-html"] h2 + h3 {
-                    display: inline-block;
-                    margin-left: 0;
-                }
-
-                [slot="markdown-html"] h3,
-                [slot="markdown-html"] h4,
-                [slot="markdown-html"] p,
-                [slot="markdown-html"] ul {
-                    margin-left: 40%;
-                }
-            }
-        </style>
-
-        <div class="content-wrapper">
-            <div class="container">
-                <div class="content" layout justified horizontal wrap></div>
-            </div>
-        </div>
-        <div class="container">
-                <marked-element class="markdown-text">
-                    <div slot="markdown-html"></div>
-                    <script type="text/markdown" src$="[[source]]"></script>
-                </marked-element>
-        </div>
-    </template>
-
-    <script>
-        class FaqPage extends ScrollFunctions(Polymer.Element) {
-            static get is() { return 'faq-page' }
-            static get properties() {
-                return {
-                    path: {
-                        type: String,
-                        value: '{$ faq $}'
-                    },
-                    source: String,
-                    self: Object
-                }
-            }
-
-            ready() {
-                super.ready();
-                this.self = this;
-                this._setFileContentSource();
-                this.addEventListener('marked-render-complete', this._renderContent);
-            }
-
-            constructor() {
-                super();
-                this._scrollToFaqChapter = this._scrollToFaqChapter.bind(this);
-            }
-
-            _renderContent() {
-                const heads = this.shadowRoot.querySelectorAll('.markdown-text h3');
-                const contentDom = this.shadowRoot.querySelector('.content');
-                let lastHeadElement;
-
-               for(let i = 0; i < heads.length; i ++) {
-
-                    if (heads[i].previousElementSibling.nodeName === 'H2') {
-                        const head2Element = heads[i].previousElementSibling;
-                        const colHeader = document.createElement('div');
-                        colHeader.className = `col ${head2Element.id}`;
-                        colHeader.textContent = head2Element.textContent;
-                        contentDom.appendChild(colHeader);
-                        lastHeadElement = colHeader;
-                    }
-
-                    const colContent = document.createElement('a');
-                    colContent.className = 'col-content';
-                    colContent.href = `#${heads[i].id}`;
-                    colContent.textContent = heads[i].textContent;
-                    colContent.addEventListener('click', this._scrollToFaqChapter);
-                    lastHeadElement.appendChild(colContent);
-                };
-
-                const contentWrapper = this.shadowRoot.querySelector('.content-wrapper');
-                contentWrapper.classList.add('visible');
-            }
-
-            _setFileContentSource() {
-                firebase.storage()
-                    .ref(this.path)
-                    .getDownloadURL()
-                    .then((url) => {
-                        this.source = url;
-                    })
-                    .catch((error) => {
-                        console.error(`Error occurred during getting file ${this.path} from storage: ${error}`);
-                    });
-            }
-
-            _scrollToFaqChapter(e) {
-                e.preventDefault();
-                var elementIdToScroll = e.target.getAttribute('href');
-                var element = this.shadowRoot.querySelector(elementIdToScroll);
-                this.scrollToY(element.getBoundingClientRect().top - 100, 1500, 'easeInOutSine');
-            }
+      @media (min-width: 640px) {
+        .content,
+        .markdown-text {
+          padding: 0 40px;
         }
 
-        window.customElements.define(FaqPage.is, FaqPage);
-    </script>
+        .col {
+          margin-right: 24px;
+        }
+
+        .col:last-of-type {
+          margin-right: 0;
+        }
+
+        [slot="markdown-html"] h2 {
+          font-size: 40px;
+          width: 40%;
+          margin-bottom: 0;
+          display: inline-block;
+          padding-right: 16px;
+          transform: translateY(50%);
+          height: 130px;
+          vertical-align: bottom;
+          line-height: 1.1;
+        }
+
+        [slot="markdown-html"] h2 + h3 {
+          display: inline-block;
+          margin-left: 0;
+        }
+
+        [slot="markdown-html"] h3,
+        [slot="markdown-html"] h4,
+        [slot="markdown-html"] p,
+        [slot="markdown-html"] ul {
+          margin-left: 40%;
+        }
+      }
+    </style>
+
+    <div class="content-wrapper">
+      <div class="container">
+        <div class="content" layout justified horizontal wrap></div>
+      </div>
+    </div>
+    <div class="container">
+      <marked-element class="markdown-text">
+        <div slot="markdown-html"></div>
+        <script type="text/markdown" src$="[[source]]"></script>
+      </marked-element>
+    </div>
+  </template>
+
+  <script>
+
+    // eslint-disable-next-line no-undef
+    class FaqPage extends ScrollFunctions(Polymer.Element) {
+      static get is() {
+        return 'faq-page';
+      }
+
+      static get properties() {
+        return {
+          path: {
+            type: String,
+            value: '{$ faq $}',
+          },
+          source: String,
+          self: Object,
+        };
+      }
+
+      ready() {
+        super.ready();
+        this.self = this;
+        this._setFileContentSource();
+        this.addEventListener('marked-render-complete', this._renderContent);
+      }
+
+      constructor() {
+        super();
+        this._scrollToFaqChapter = this._scrollToFaqChapter.bind(this);
+      }
+
+      _renderContent() {
+        const heads = this.shadowRoot.querySelectorAll('.markdown-text h3');
+        const contentDom = this.shadowRoot.querySelector('.content');
+        let lastHeadElement;
+
+        for (let i = 0; i < heads.length; i++) {
+          if (heads[i].previousElementSibling.nodeName === 'H2') {
+            const head2Element = heads[i].previousElementSibling;
+            const colHeader = document.createElement('div');
+            colHeader.className = `col ${head2Element.id}`;
+            colHeader.textContent = head2Element.textContent;
+            contentDom.appendChild(colHeader);
+            lastHeadElement = colHeader;
+          }
+
+          const colContent = document.createElement('a');
+          colContent.className = 'col-content';
+          colContent.href = `#${heads[i].id}`;
+          colContent.textContent = heads[i].textContent;
+          colContent.addEventListener('click', this._scrollToFaqChapter);
+          lastHeadElement.appendChild(colContent);
+        }
+
+        const contentWrapper = this.shadowRoot.querySelector('.content-wrapper');
+        contentWrapper.classList.add('visible');
+      }
+
+      _setFileContentSource() {
+        firebase.storage()
+          .ref(this.path)
+          .getDownloadURL()
+          .then((url) => {
+            this.source = url;
+          })
+          .catch((error) => {
+            // eslint-disable-next-line no-console
+            console.error(`Error occurred during getting file ${this.path} from storage: ${error}`);
+          });
+      }
+
+      _scrollToFaqChapter(e) {
+        e.preventDefault();
+        var elementIdToScroll = e.target.getAttribute('href');
+        var element = this.shadowRoot.querySelector(elementIdToScroll);
+        this.scrollToY(element.getBoundingClientRect().top - 100, 1500, 'easeInOutSine');
+      }
+    }
+
+    window.customElements.define(FaqPage.is, FaqPage);
+  </script>
 </dom-module>

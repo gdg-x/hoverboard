@@ -70,45 +70,44 @@
   <script>
 
     class SubscribeBlock extends ReduxMixin(Polymer.Element) {
-
       static get is() {
-        return 'subscribe-block'
+        return 'subscribe-block';
       }
 
       static get properties() {
         return {
           user: {
             type: Object,
-            statePath: 'user'
+            statePath: 'user',
           },
           viewport: {
             type: Object,
-            statePath: 'ui.viewport'
+            statePath: 'ui.viewport',
           },
           subscribed: {
             type: Boolean,
             statePath: 'subscribed',
-            observer: '_handleSubscribed'
+            observer: '_handleSubscribed',
           },
           ctaIcon: {
               type: String,
-              value: 'arrow-right-circle'
+              value: 'arrow-right-circle',
           },
           ctaLabel: {
               type: String,
-              value: '{$  subscribeBlock.callToAction.label $}'
-          }
-        }
+              value: '{$  subscribeBlock.callToAction.label $}',
+          },
+        };
       }
 
      _handleSubscribed(subscribed) {
          if (subscribed) {
             this.ctaIcon = 'checked';
-            this.ctaLabel = '{$  subscribeBlock.subscribed $}'
+            this.ctaLabel = '{$  subscribeBlock.subscribed $}';
          }
          else {
             this.ctaIcon = 'arrow-right-circle';
-            this.ctaLabel = '{$  subscribeBlock.callToAction.label $}'
+            this.ctaLabel = '{$  subscribeBlock.callToAction.label $}';
          }
      }
 
@@ -119,12 +118,12 @@
                 const fullNameSplit = this.user.displayName.split(' ');
                 userData = {
                     firstName: fullNameSplit[0],
-                    lastName: fullNameSplit[1]
-                }
+                    lastName: fullNameSplit[1],
+                };
             }
 
             if (this.user.email) {
-                subscribeActions.subscribe(Object.assign({}, {email: this.user.email}, userData));
+                subscribeActions.subscribe(Object.assign({}, { email: this.user.email }, userData));
             }
             else {
                 dialogsActions.openDialog(DIALOGS.SUBSCRIBE, userData);
