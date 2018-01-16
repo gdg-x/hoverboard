@@ -110,7 +110,7 @@
 
       _setDay(active, day, scheduleDays) {
         if (active && scheduleDays) {
-          routingActions.setSubRoute(day || scheduleDays[0].date);
+          routingActions.setSubRoute(day || Object.keys(scheduleDays)[0]);
         }
       }
 
