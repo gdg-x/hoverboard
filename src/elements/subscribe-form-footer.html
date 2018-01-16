@@ -51,73 +51,75 @@
     </style>
 
     <div class="form-content" layout vertical center>
-          <paper-input id="emailInput"
-                    on-touchend="_focus"
-                    label="{$ subscribeBlock.yourEmail $}"
-                    value="{{email}}"
-                    required 
-                    auto-validate$="[[validate]]"
-                    error-message="{$ subscribeBlock.emailRequired $}"
-                    autocomplete="off"
-                    disabled="[[subscribed]]">
-                    
-          <iron-icon icon="hoverboard:checked" slot="suffix" hidden$="[[!subscribed]]"></iron-icon>
-          </paper-input>
-          <paper-button
-            on-tap="_subscribe"
-            ga-on="click"
-            disabled="[[subscribed]]"
-            ga-event-category="attendees"
-            ga-event-action="subscribe"
-            ga-event-label="subscribe footer"
-            layout self-end>
-            [[ctaLabel]]
-          </paper-button>
+      <paper-input id="emailInput"
+                   on-touchend="_focus"
+                   label="{$ subscribeBlock.yourEmail $}"
+                   value="{{email}}"
+                   required
+                   auto-validate$="[[validate]]"
+                   error-message="{$ subscribeBlock.emailRequired $}"
+                   autocomplete="off"
+                   disabled="[[subscribed]]">
+
+        <iron-icon icon="hoverboard:checked" slot="suffix" hidden$="[[!subscribed]]"></iron-icon>
+      </paper-input>
+      <paper-button
+
+        on-tap="_subscribe"
+        ga-on="click"
+        disabled="[[subscribed]]"
+        ga-event-category="attendees"
+        ga-event-action="subscribe"
+        ga-event-label="subscribe footer"
+        layout self-end>
+        [[ctaLabel]]
+      </paper-button>
     </div>
   </template>
 
   <script>
 
     class SubscribeFormFooter extends ReduxMixin(Polymer.Element) {
-
-      static get is() { return 'subscribe-form-footer' }
+      static get is() {
+        return 'subscribe-form-footer';
+      }
 
       static get properties() {
         return {
-            subscribed: {
-                type: Boolean,
-                statePath: 'subscribed'
-            },
-            validate: {
-                type: Boolean,
-                value: false
-            },
-            ctaLabel: {
-                type: String,
-                computed: '_computeButtonLabel(subscribed)'
-            }
+          subscribed: {
+            type: Boolean,
+            statePath: 'subscribed',
+          },
+          validate: {
+            type: Boolean,
+            value: false,
+          },
+          ctaLabel: {
+            type: String,
+            computed: '_computeButtonLabel(subscribed)',
+          },
+        };
+      }
+
+      _subscribe() {
+        this.validate = true;
+        const emailInput = this.shadowRoot.querySelector('#emailInput');
+
+        if (!this.subscribed && emailInput.validate()) {
+          subscribeActions.subscribe({
+            email: this.email,
+          });
         }
-    }
+      }
 
-    _subscribe() {      
-      this.validate = true;
-      const emailInput = this.shadowRoot.querySelector('#emailInput');
-
-      if (!this.subscribed && emailInput.validate()) {
-        subscribeActions.subscribe({
-            email: this.email
-        });
-      } 
+      _computeButtonLabel(subscribed) {
+        return subscribed ?
+          '{$  subscribeBlock.subscribed $}' :
+          '{$  subscribeBlock.subscribe $}';
+      }
     }
-
-    _computeButtonLabel(subscribed) {
-        return subscribed ? 
-        '{$  subscribeBlock.subscribed $}' : 
-        '{$  subscribeBlock.subscribe $}';
-    }
-  }
 
     window.customElements.define(SubscribeFormFooter.is, SubscribeFormFooter);
-    
+
   </script>
 </dom-module>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // ui
 const TOGGLE_DRAWER = 'TOGGLE_DRAWER';
 const SET_VIEWPORT_SIZE = 'SET_VIEWPORT_SIZE';
@@ -14,7 +15,7 @@ const DIALOGS = {
   SPEAKER: 'speaker',
   SESSION: 'session',
   SUBSCRIBE: 'subscribe',
-  SIGNIN: 'signin'
+  SIGNIN: 'signin',
 };
 // toast
 const SHOW_TOAST = 'SHOW_TOAST';
@@ -53,5 +54,5 @@ const UPDATE_NOTIFICATIONS_STATUS = 'UPDATE_NOTIFICATIONS_STATUS';
 const NOTIFICATIONS_STATUS = {
   GRANTED: 'granted',
   DENIED: 'denied',
-  DEFAULT: 'default'
+  DEFAULT: 'default',
 };

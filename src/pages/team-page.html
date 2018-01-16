@@ -158,14 +158,14 @@
   <script>
 
     class TeamPage extends ReduxMixin(Polymer.Element) {
-      static get is() { return 'team-page' }
+      static get is() {return 'team-page';}
 
        static get properties() {
         return {
           team: {
             type: Object,
-            statePath: 'team'
-          }
+            statePath: 'team',
+          },
         };
       }
 

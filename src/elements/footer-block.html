@@ -56,14 +56,15 @@
       </div>
       <footer-social layout flex flex-auto horizontal wrap></footer-social>
       <footer-rel layout flex horizontal wrap></footer-rel>
-      <footer-nav  layout flex horizontal wrap></footer-nav>
+      <footer-nav layout flex horizontal wrap></footer-nav>
     </div>
   </template>
 
   <script>
 
+    // eslint-disable-next-line no-undef
     class FooterBlock extends ScrollFunctions(Polymer.Element) {
-      static get is() { return 'footer-block' }
+      static get is() {return 'footer-block';}
 
       backToTop(e) {
         this.scrollToY(0, 600, 'easeInOutSine');

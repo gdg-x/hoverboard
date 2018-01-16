@@ -71,9 +71,10 @@
 
   <script>
 
+    // eslint-disable-next-line no-undef
     class SchedulePage extends UtilsFunctions(ReduxMixin(Polymer.Element)) {
       static get is() {
-        return 'schedule-page'
+        return 'schedule-page';
       }
 
       static get properties() {
@@ -82,29 +83,29 @@
           active: Boolean,
           schedule: {
             type: Object,
-            statePath: 'schedule'
+            statePath: 'schedule',
           },
           user: {
             type: Object,
-            statePath: 'user'
+            statePath: 'user',
           },
           sessions: {
             type: Object,
-            statePath: 'sessions'
+            statePath: 'sessions',
           },
           subRoute: {
             type: Object,
-            statePath: 'routing.subRoute'
+            statePath: 'routing.subRoute',
           },
           isDialogOpened: {
             type: Object,
-            statePath: 'dialogs.session.isOpened'
+            statePath: 'dialogs.session.isOpened',
           },
           contentLoaderVisibility: {
             type: String,
-            value: null
-          }
-        }
+            value: null,          
+          },
+        };
       }
 
       static get observers() {
@@ -112,7 +113,7 @@
           '_setDay(active, routeData.day, schedule.days)',
           '_openSessionDetails(active, sessions.list, queryParams.sessionId)',
           '_fetchFeaturedSessions(active, user.uid)',
-          '_scheduleChanged(schedule.days)'
+          '_scheduleChanged(schedule.days)',
         ];
       }
 
@@ -128,7 +129,8 @@
       }
 
       _fetchFeaturedSessions(active, userUid) {
-        if (active && userUid && !this.sessions || this.sessions && this.sessions.featured && !this.sessions.featured.length) {
+        if (active && userUid && !this.sessions ||
+          this.sessions && this.sessions.featured && !this.sessions.featured.length) {
           sessionsActions.fetchUserFeaturedSessions(userUid);
         }
       }
@@ -148,7 +150,7 @@
                 dialogsActions.closeDialog(DIALOGS.SESSION);
               }
             }
-          )
+          );
         }
       }
     }

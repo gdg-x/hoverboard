@@ -123,6 +123,7 @@
 
   <script>
 
+    // eslint-disable-next-line no-undef
     class LatestPostsBlock extends UtilsFunctions(ReduxMixin(Polymer.Element)) {
       static get is() {
         return 'latest-posts-block';
@@ -133,14 +134,14 @@
           postsSource: {
             type: Object,
             statePath: 'blog',
-            observer: '_transformPosts'
+            observer: '_transformPosts',
           },
           viewport: {
             type: Object,
-            statePath: 'ui.viewport'
+            statePath: 'ui.viewport',
           },
-          posts: Array
-        }
+          posts: Array,
+        };
       }
 
       connectedCallback() {
@@ -149,7 +150,8 @@
       }
 
       _transformPosts(postsSource) {
-        const sortedPosts = this.transformToArray(postsSource, 'id').sort((a, b) => b.published.localeCompare(a.published));
+        const sortedPosts = this.transformToArray(postsSource, 'id')
+          .sort((a, b) => b.published.localeCompare(a.published));
         this.set('posts', sortedPosts.slice(0, 4));
       }
     }

@@ -19,8 +19,8 @@
         return {
           lines: {
             type: String,
-            value: '2'
-          }
+            value: '2',
+          },
         };
       }
 
@@ -28,8 +28,9 @@
         super.ready();
         this._observer = new Polymer.FlattenedNodesObserver(this.$.text, (info) => {
           const target = info.addedNodes.filter(function (node) {
-            return (node.nodeType === Node.ELEMENT_NODE)
+            return (node.nodeType === Node.ELEMENT_NODE);
           })[0];
+          // eslint-disable-next-line no-undef
           $clamp(target, { clamp: this._getClampValue() });
         });
       }
