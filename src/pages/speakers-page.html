@@ -151,7 +151,7 @@
       avatar-size="128px"
       avatar-circle="64px"
       horizontal-position="50%"
-      items-count="4"
+      items-count="{$ contentLoaders.speakers.itemsCount $}"
       hidden$="[[contentLoaderVisibility]]"
     ></content-loader>
     <div class="container">            
@@ -258,7 +258,7 @@
 
       _speakersChanged() {
         if (this.speakers && Object.keys(this.speakers).length) {
-          this.contentLoaderVisibility = null;          
+          this.contentLoaderVisibility = 'hidden';          
         }
       }
 

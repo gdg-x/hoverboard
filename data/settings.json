@@ -178,5 +178,16 @@
             "https://www.facebook.com",
             "https://twitter.com"
         ]
+    },
+    "contentLoaders": {
+        "schedule": {
+            "itemsCount": 3
+        },
+        "blog": {
+            "itemsCount": 3
+        },
+        "speakers": {
+            "itemsCount": 4
+        }
     }
 }

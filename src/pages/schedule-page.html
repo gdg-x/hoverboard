@@ -7,6 +7,7 @@
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="../elements/shared-styles.html">
 <link rel="import" href="../elements/schedule-day.html">
+<link rel="import" href="../elements/content-loader.html">
 
 <dom-module id="schedule-page">
   <template>
@@ -37,9 +38,24 @@
       pattern="/:day"
       data="{{routeData}}"
       query-params="{{queryParams}}"
-    ></app-route>
+    ></app-route>   
 
     <div class="container">
+      
+      <content-loader         
+        card-padding="15px"
+        card-margin="16px 0"
+        card-height="140px"
+        avatar-size="0"
+        avatar-circle="0"
+        title-top-position="20px"
+        title-height="42px"
+        title-width="70%"
+        animation-time="3s"
+        items-count="{$ contentLoaders.schedule.itemsCount $}"                        
+        hidden$="[[contentLoaderVisibility]]" layout>
+      </content-loader>
+
       <iron-pages selected="[[subRoute]]" attr-for-selected="name">
         <template is="dom-repeat" items="[[transformToArray(schedule.days, 'date')]]" as="day">
           <schedule-day
@@ -83,6 +99,10 @@
           isDialogOpened: {
             type: Object,
             statePath: 'dialogs.session.isOpened'
+          },
+          contentLoaderVisibility: {
+            type: String,
+            value: null
           }
         }
       }
@@ -91,13 +111,20 @@
         return [
           '_setDay(active, routeData.day, schedule.days)',
           '_openSessionDetails(active, sessions.list, queryParams.sessionId)',
-          '_fetchFeaturedSessions(active, user.uid)'
+          '_fetchFeaturedSessions(active, user.uid)',
+          '_scheduleChanged(schedule.days)'
         ];
       }
 
       connectedCallback() {
         super.connectedCallback();
         if (!this.schedule.days) scheduleActions.fetchSchedule();
+      }
+
+      _scheduleChanged() {
+        if (this.schedule.days) {
+          this.contentLoaderVisibility = 'hidden';
+        }
       }
 
       _fetchFeaturedSessions(active, userUid) {

@@ -96,7 +96,7 @@
           title-top-position="32px"
           title-height="42px"
           title-width="70%"
-          items-count="3"
+          items-count="{$ contentLoaders.blog.itemsCount $}"
           hidden$="[[contentLoaderVisibility]]">
         </content-loader>
 
@@ -181,7 +181,7 @@
 
       _postsChanged() {
         if (this.postsSource && Object.keys(this.postsSource).length) {
-          this.contentLoaderVisibility = "hidden";          
+          this.contentLoaderVisibility = 'hidden';          
         }
       }
 
