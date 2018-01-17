@@ -20,9 +20,9 @@
             "title": "Home"
         },
         {
-            "route": "blog",
-            "permalink": "/blog/",
-            "title": "Blog"
+            "route": "speakers",
+            "permalink": "/speakers/",
+            "title": "Speakers"
         },
         {
             "route": "schedule",
@@ -30,14 +30,14 @@
             "title": "Schedule"
         },
         {
-            "route": "speakers",
-            "permalink": "/speakers/",
-            "title": "Speakers"
-        },
-        {
             "route": "team",
             "permalink": "/team/",
             "title": "Team"
+        },
+        {
+            "route": "blog",
+            "permalink": "/blog/",
+            "title": "Blog"
         }
     ],
     "heroSettings": {
