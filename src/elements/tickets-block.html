@@ -130,22 +130,21 @@
   <script>
 
     class TicketsBlock extends ReduxMixin(Polymer.Element) {
-
       static get is() {
-        return 'tickets-block'
+        return 'tickets-block';
       }
 
       static get properties() {
         return {
           tickets: {
             type: Object,
-            statePath: 'tickets'
+            statePath: 'tickets',
           },
           viewport: {
             type: Object,
-            statePath: 'ui.viewport'
-          }
-        }
+            statePath: 'ui.viewport',
+          },
+        };
       }
 
       connectedCallback() {

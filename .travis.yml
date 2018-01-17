@@ -1,5 +1,5 @@
 language: node_js
-node_js: 7
+node_js: 8
 cache:
   yarn: true
   directories:
@@ -17,7 +17,7 @@ install:
 - yarn
 - cd functions && yarn && cd ..
 script: echo "Deploying!"
-before_deploy: yarn run build
+before_deploy: yarn run build:prod
 deploy:
 - provider: firebase
   skip_cleanup: true

@@ -71,19 +71,20 @@
 
   <script>
 
-    class SigninDialog extends ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element)) {
-
+    class SigninDialog extends ReduxMixin(
+      Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element)
+    ) {
     static get is() {
-            return 'signin-dialog'
+            return 'signin-dialog';
         }
 
         static get properties() {
             return {
                 subscribed: {
                     type: Boolean,
-                    statePath: 'subscribed'
-                }
-            }
+                    statePath: 'subscribed',
+                },
+            };
         }
 
         constructor() {

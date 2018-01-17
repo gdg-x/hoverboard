@@ -197,6 +197,7 @@
 
   <script>
 
+    // eslint-disable-next-line no-undef
     class SessionElement extends UtilsFunctions(Polymer.GestureEventListeners(Polymer.Element)) {
       static get is() {
         return 'session-element';
@@ -209,13 +210,13 @@
           featuredSessions: Object,
           sessionColor: {
             type: String,
-            computed: '_getTagColor(session.mainTag)'
+            computed: '_getTagColor(session.mainTag)',
           },
           isFeatured: {
             type: String,
-            computed: '_isFeatured(featuredSessions, session.id)'
-          }
-        }
+            computed: '_isFeatured(featuredSessions, session.id)',
+          },
+        };
       }
 
       _getTagColor(value) {
@@ -248,13 +249,13 @@
               title: 'Sign in',
               callback: () => {
                 dialogsActions.openDialog(DIALOGS.SIGNIN);
-              }
-            }
+              },
+            },
           });
           return;
         }
         const sessions = Object.assign({}, this.featuredSessions, {
-          [this.session.id]: !this.featuredSessions[this.session.id] ? true : null
+          [this.session.id]: !this.featuredSessions[this.session.id] ? true : null,
         });
 
         sessionsActions.setUserFeaturedSessions(this.user.uid, sessions);

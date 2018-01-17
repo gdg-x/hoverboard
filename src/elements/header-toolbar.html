@@ -138,6 +138,7 @@
           <a href="{$ nav.permalink $}" layout vertical center-center>{$ nav.title $}</a>
         </paper-tab>
         {% endfor %}
+        
         <paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]">{$ signIn $}</paper-tab>
 
         <a href$="[[tickets.url]]" target="_blank" rel="noopener noreferrer" ga-on="click" ga-event-category="ticket button" ga-event-action="buy_click">
@@ -225,19 +226,19 @@
         return {
           route: {
             type: String,
-            statePath: 'routing'
+            statePath: 'routing',
           },
           viewport: {
             type: Object,
-            statePath: 'ui.viewport'
+            statePath: 'ui.viewport',
           },
           dialogs: {
             type: Object,
-            statePath: 'dialogs'
+            statePath: 'dialogs',
           },
           notifications: {
             type: Boolean,
-            statePath: 'notifications'
+            statePath: 'notifications',
           },
           user: {
             type: Object,
@@ -252,7 +253,7 @@
 
       static get observers() {
         return [
-          '_authStatusChanged(user.signedIn)'
+          '_authStatusChanged(user.signedIn)',
         ];
       }
 
