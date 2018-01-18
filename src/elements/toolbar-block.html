@@ -71,8 +71,8 @@
       }
 
       .action-button {
-        color: var(--header-background);
-        background: var(--header-color);
+        color: #ffffff;
+        background: #F8955C;
         font-size: 13px;
       }
 
@@ -183,6 +183,14 @@
             </div>
           </div>
         </paper-menu-button>
+
+
+        <div class="action-button-wrapper" hidden$="[[app.isPhoneSize]]" layout horizontal center-center>
+          <a href="{$ cfpUrl $}" target="_blank" rel="noopener noreferrer" on-tap="_trackCfpClick">
+            <paper-button class="action-button">{$ cfp $}</paper-button>
+          </a>
+        </div>
+
       </div>
     </app-toolbar>
 
@@ -232,6 +240,10 @@
 
         _trackBuyClick: function () {
           HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'toolbar');
+        },
+
+        _trackCfpClick: function () {
+          HOVERBOARD.Analytics.trackEvent('cfp', 'cfp_click', 'toolbar');
         }
 
       });

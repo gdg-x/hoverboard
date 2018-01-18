@@ -98,6 +98,14 @@
             {$ pages[nav.route].title $}
           </a>
         {% endfor %}
+
+        <a class="navigation-link" href="{$ cfpUrl $}" target="_blank" rel="noopener noreferrer" on-tap="_trackCfpClick">
+          {$ cfp $}
+          <iron-icon
+            class="open-in-new"
+            icon="open-in-new"
+          ></iron-icon>
+        </a>
       </paper-menu>
     </nav>
 
@@ -117,6 +125,11 @@
 
         _trackBuyClick: function () {
           HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'drawer');
+          this.closeDrawer();
+        },
+
+        _trackCfpClick: function () {
+          HOVERBOARD.Analytics.trackEvent('cfp', 'cfp_click', 'drawer');
           this.closeDrawer();
         }
 

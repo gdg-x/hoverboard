@@ -7,6 +7,8 @@
   "locationAddressShort": "Montpellier",
   "motto": "Une conférence de qualité pour des techs passionnés",
   "playIcon": "See how it was in 2015",
+  "cfp": "CFP",
+  "cfpUrl": "https://sunnytech.cfp.io/",
   "c4p": "Become a speaker",
   "buyTicket": "Buy ticket",
   "backToTop": "Retour en haut",
@@ -29,8 +31,8 @@
   "featuredPeopleTitle": "Rockstar Speakers",
   "featuredPeopleViewAll": "View all speakers",
   "action": "See how it was",
-  "locationTitle": "I.U.F.M de Montpellier",
-  "locationDescription": "Situé au coeur de la ville, l’IUFM nous offre un cadre ouvert et des salles pouvant accueillir jusqu’à 250 personnes.",
+  "locationTitle": "Faculté d’Education de l’Université de Montpellier",
+  "locationDescription": "Situé au coeur de la ville, la faculté d'éducation nous offre un cadre ouvert avec de grandes salles.",
   "locationAddress": "2 place Marcel Godechot",
   "organizerTitle": "Organisation",
   "aboutOrganizers": "Sunny Tech est une association bénévole à but non lucratif composée de développeurs, orateurs, designers et membres de meetups",
@@ -82,7 +84,7 @@
     ]
   },
   "teamPageTitle": "Équipe",
-  "teamPageText": "Sunny Tech est une assocation bénévole à but non lucratif (loi 1901) créée par des membres actifs de la communauté tech de Montpellier, venant d'entreprise comme Teads ou Tabmo, et avec l'aide des meetups locaux et du Montpellier Tech Hub.",
+  "teamPageText": "Sunny Tech est une assocation bénévole à but non lucratif (loi 1901) créée par des membres actifs de la communauté tech de Montpellier avec l'aide des meetups locaux et du Montpellier Tech Hub.",
   "statistics": [
     {
       "counter": 300,
