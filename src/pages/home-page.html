@@ -7,8 +7,11 @@
 {% if videosSessionsUrl %}
   <link rel="import" href="../elements/featured-videos.html">
 {% endif %}
+{% if callToPaper %}
+  <link rel="import" href="../elements/call-to-paper.html">
+{% endif %}
 {% if callToAction %}
-  <link rel="import" href="../elements/call-to-action.html">
+<link rel="import" href="../elements/call-to-action.html">
 {% endif %}
 <link rel="import" href="../elements/about-block.html">
 <link rel="import" href="../elements/tickets-block.html">
@@ -31,9 +34,12 @@
       <featured-videos app="{{app}}" cascaded></featured-videos>
     {% endif %}
     {% if callToAction %}
-      <call-to-action app="{{app}}" cascaded></call-to-action>
+      <call-to-action app="{{app}}" cascaded></call-to-paper>
     {% endif %}
-    <about-block app="{{app}}" cascaded></about-block>
+      <about-block app="{{app}}" cascaded></about-block>
+    {% if callToPaper %}
+      <call-to-paper app="{{app}}" cascaded></call-to-paper>
+    {% endif %}
     {% if gallery %}
       <photo-block app="{{app}}" cascaded></photo-block>
     {% endif %}
