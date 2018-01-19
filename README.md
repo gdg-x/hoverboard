@@ -1,17 +1,19 @@
-Project Hoverboard 2
+![hoverboard-logo](https://user-images.githubusercontent.com/5227233/35153062-a2331e34-fd2d-11e7-8e38-fd9f36e34fce.png)
+![preview-web](https://cloud.githubusercontent.com/assets/2954281/17777476/5dbbbe1c-6569-11e6-9cc4-77185ae9bf92.png)
+[Live demo](https://hoverboard-v2-dev.firebaseapp.com/)  [Get Started](/docs/) 
+
+Overview
 --------
 ```
-Project Hoverboard 2 is the next generation conference website template
+Project Hoverboard is the conference website template that helps you to set up mobile first conference website with blog, speakers and schedule management in a few minutes.
+
+Template is created based on 7 years of [GDG Lviv](https://www.meetup.com/GDG-Lviv/) team experience of running conferences and feedback from more than 500 event organizers from all around the world who were using previous Hoverboard versions.
+
+Our goal is to allow event organizers to set up professional conference website with minimum resources. To get started you need only basic knowledge of web technologies and a free Firebase account.
+
 ```
 
-![preview-web](https://cloud.githubusercontent.com/assets/2954281/17777476/5dbbbe1c-6569-11e6-9cc4-77185ae9bf92.png)
-> Template is brought by [GDG Lviv team](http://lviv.gdg.org.ua/).
-
-> *Do you :heart: it?* Show your support - please, :star: the project.
-
-:zap: [Live demo](https://hoverboard-v2-dev.firebaseapp.com/)
-
-Install
+Features
 --------
 ```
 npm install
@@ -53,6 +55,21 @@ Compatibility
 
 :x: IE and Opera Mini aren't supported.
 
+Contributing
+--------
+Here is a git workflow for updating your fork (or downloaded copy) to the latest version:
+```
+Project is still under development, and it is open for contributions. Feel free to send your pool request. If you have any questions, feel free to contact [Oleh Zasadnyy](https://plus.google.com/+OlehZasadnyy).
+```
+##### General workflow
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Make your changes
+4. Run the tests, adding new ones for your code if necessary
+5. Commit your changes (`git commit -am 'Added some feature'`)
+6. Push to the branch (`git push origin my-new-feature`)
+7. Create new Pull Request
+
 
 Contributors :sparkles:
 --------
@@ -69,3 +86,116 @@ License
 
 Project is published under the [MIT license](https://github.com/gdg-x/hoverboard/blob/master/LICENSE.md).  
 Feel free to clone and modify repo as you want, but don't forget to add reference to authors :)
+# Project Hoverboard 2
+
+<p align="center">
+<img src="https://user-images.githubusercontent.com/5227233/35153062-a2331e34-fd2d-11e7-8e38-fd9f36e34fce.png">
+<img src="https://user-images.githubusercontent.com/5227233/35154021-4c608c04-fd31-11e7-9a68-4649c507fd76.png">
+</p>
+<p align="center">
+<a href="https://hoverboard-v2-dev.firebaseapp.com" align="center"> Live demo</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="/docs/">Get Started</a>
+</p>
+
+# Overview
+Project Hoverboard is the conference website template that helps you to set up mobile first conference website with blog, speakers and schedule management in a few minutes.
+
+The template is created based on 7 years of [GDG Lviv](https://www.meetup.com/GDG-Lviv/) team experience of running conferences and feedback from more than 500 event organizers from all around the world who were using previous Hoverboard versions.
+
+Our goal is to allow event organizers to set up professional conference website with minimum resources. To get started you need only basic knowledge of web technologies and a free Firebase account.
+
+# Features
+**Blog**: post announcements, updates and useful information <br>
+**Speakers and schedule management:** keep and update all information in the  Firebase <br>
+**My schedule:** let attendees save sessions they want to visit <br>
+**Session ratings:** collect feedback to understand speaker performance <br>
+**Customizable theme:** change colors to match your style <br>
+**Fast and optimized:** 91/100 PWA on Lighthouse <br>
+**Mobile first:** layouts optimized for small screens, on Android Hoverboard can be installed as a native app <br>
+**Works offline:** shitty WiFi on the venue is not a problem anymore <br>
+**Push notifications:** remind about sessions in My schedule, session feedback or target users with a custom message <br>
+**SEO optimized:** index all content and get to the top in search results
+
+# Getting Started
+1. Fork repo and clone it locally
+2. Setup Environment
+   * Install `Node.js (v8.9.4 or above)`
+   * Instal Firebase CLI: `npm i -g firebase-cli`
+3. Create Firebase account and login into cli firebase login
+4. Update Hoverboard config
+5. Run locally
+   * `cd` into the base directory
+   * `npm install` or `yarn`
+   * `npm run serve` or `yarn serve`
+6. Deploy
+   * `npm run deploy`
+
+Read the [Full Setup Guide](/docs/)
+
+# Updating
+Here is a git workflow for updating your fork (or downloaded copy) to the latest version:
+`git remote add upstream https://github.com/gdg-x/hoverboard.git` <br>
+`git fetch upstream` <br>
+`git merge upstream/hoverboard-v2` or `git merge upstream/develop` <br>
+> resolve the merge conflicts in your editor
+
+`git add . -u` <br>
+`git commit -m 'Updated to the latest version'` <br>
+
+# Documentation
+
+The [Getting Started guide](/docs/) is probably a good first point of call! <br>
+:book: [Full documentation](/docs/).
+
+# Compatibility
+
+:white_check_mark: Compatible with **latest two** version of Chrome, Chrome for Android, Firefox, Opera, Safari, Edge.<br>
+:x: IE and Opera Mini aren't supported.
+
+# Technology Stack
+
+* Polymer 2
+* Firebase
+* Service Worker
+* CSS Grid
+
+# Contributing
+
+Awesome! Contributions of all kinds are greatly appreciated. To help smoothen the process we have a few non-exhaustive guidelines to follow which should get you going in no time.
+
+### Using GitHub Issues
+
+* Feel free to use GitHub issues for questions, bug reports, and feature requests
+* Use the search feature to check for an existing issue
+* Include as much information as possible and provide any relevant resources (Eg. screenshots)
+* For bug reports ensure you have a reproducible test case
+   * A pull request with a breaking test would be super preferable here but isn't required
+
+### Submitting a Pull Request
+
+* Squash commits
+* Lint your code with eslint (config provided)
+* Include relevant test updates/additions
+
+# Code of Conduct
+
+Read the full version [Code of Conduct](/code/).
+
+# Contributors
+
+See [list of contributors](https://github.com/gdg-x/hoverboard/graphs/contributors).
+
+__Maintainer:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
+
+# Sponsoring
+Most of the core team members, hoverboard contributors and contributors in the ecosystem do this open source work in their free time. If you like this project and it makes your life easier, please donate. [Become a backer](https://opencollective.com/hoverboard) <br>
+<a href="https://opencollective.com/hoverboard"> <img src="https://opencollective.com/hoverboard/tiers/backer.svg"> </a>
+
+# License
+
+Project is published under the MIT license <br>
+Feel free to clone and modify repo as you want, but don't forget to add reference to authors :)
+
+[![Build Status](https://travis-ci.org/gdg-x/hoverboard.svg?branch=master)](https://travis-ci.org/gdg-x/hoverboard)
+
+_GDG[x] are not endorsed and/or supported by Google, the corporation._
