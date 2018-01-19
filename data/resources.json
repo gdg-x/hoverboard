@@ -102,5 +102,36 @@
       "counter": 2,
       "caption": "Tracks"
     }
-  ]
+  ], 
+  "callToPaper": {
+    "display": true,
+    "title" :"Speaker ?", 
+    "description": "Notre appel à orateur est ouvert jusqu'au 18 mars. Délibération prévue le 31 mars. Propose une conférence longue, courte ou encore un atelier. ", 
+    "action": "Accéder au CFP",
+    "categories": [
+      {
+      "title": "Data & Machine Learning",
+      "icon":"/images/icons/bubble1.svg"
+      }, 
+      {
+      "title": "Devops & Cloud",
+      "icon":"/images/icons/bubble2.svg"
+      }, 
+      {
+      "title": "Architecture et paradigmes",
+      "icon":"/images/icons/bubble3.svg"
+      }, 
+      {
+      "title": "Design",
+      "icon":"/images/icons/bubble4.svg"
+      }, 
+      {
+      "title": "Langages & frameworks",
+      "icon":"/images/icons/bubble5.svg"
+      }, 
+      {
+      "title": "Random",
+      "icon":"/images/icons/bubble6.svg"
+      }
+    ]}
 }
