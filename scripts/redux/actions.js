@@ -12,12 +12,6 @@ const uiActions = {
       value,
     });
   },
-  setHero: (hero, route) => {
-    store.dispatch({
-      type: SET_HERO,
-      hero: hero || (heroSettings ? heroSettings[route || 'home'] : null),
-    });
-  },
   toggleVideoDialog: (value = null) => {
     store.dispatch({
       type: TOGGLE_VIDEO_DIALOG,

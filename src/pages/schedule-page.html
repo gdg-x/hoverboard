@@ -6,6 +6,8 @@
 <link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="../elements/shared-styles.html">
+<link rel="import" href="../elements/sticky-element.html">
+<link rel="import" href="../elements/header-bottom-toolbar.html">
 <link rel="import" href="../elements/schedule-day.html">
 
 <dom-module id="schedule-page">
@@ -16,6 +18,7 @@
 
       :host {
         display: block;
+        overflow: auto;
       }
 
       @media (max-width: 640px) {
@@ -38,6 +41,18 @@
       data="{{routeData}}"
       query-params="{{queryParams}}"
     ></app-route>
+
+    <hero-block
+      background-image="{$ heroSettings.schedule.background.image $}"
+      background-color="{$ heroSettings.schedule.background.color $}"
+      font-color="{$ heroSettings.schedule.fontColor $}"
+    >
+      <div class="hero-title highlight-font">{$ heroSettings.schedule.title $}</div>
+      <p class="hero-description">{$ heroSettings.schedule.description $}</p>
+      <sticky-element slot="bottom" active="[[active]]">
+        <header-bottom-toolbar></header-bottom-toolbar>
+      </sticky-element>
+    </hero-block>
 
     <div class="container">
       <iron-pages selected="[[subRoute]]" attr-for-selected="name">

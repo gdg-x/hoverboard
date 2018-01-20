@@ -73,6 +73,17 @@
 
     </style>
 
+
+
+    <hero-block
+      background-image="{$ heroSettings.blog.background.image $}"
+      background-color="{$ heroSettings.blog.background.color $}"
+      font-color="{$ heroSettings.blog.fontColor $}"
+    >
+      <div class="hero-title highlight-font">{$ heroSettings.blog.title $}</div>
+      <p class="hero-description">{$ heroSettings.blog.description $}</p>
+    </hero-block>
+
     <div class="featured">
       <div class="container">
         <div class="featured-posts-wrapper" layout vertical$="[[viewport.isPhone]]" horizontal$="[[viewport.isTabletPlus]]" justified>

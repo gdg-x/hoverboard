@@ -34,15 +34,6 @@ const routingReducer = (state = initialState.routing, action) => {
   }
 };
 
-const heroReducer = (state = initialState.hero, action) => {
-  switch (action.type) {
-    case SET_HERO:
-      return action.hero;
-    default:
-      return state;
-  }
-};
-
 const dialogsReducer = (state = initialState.dialogs, action) => {
   switch (action.type) {
     case OPEN_DIALOG:

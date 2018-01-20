@@ -5,8 +5,6 @@ const SET_VIEWPORT_SIZE = 'SET_VIEWPORT_SIZE';
 // router
 const SET_ROUTE = 'SET_ROUTE';
 const SET_SUB_ROUTE = 'SET_SUB_ROUTE';
-// hero
-const SET_HERO = 'SET_HERO';
 // dialogs
 const OPEN_DIALOG = 'OPEN_DIALOG';
 const CLOSE_DIALOG = 'CLOSE_DIALOG';
