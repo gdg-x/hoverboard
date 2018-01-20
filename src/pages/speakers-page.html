@@ -146,11 +146,11 @@
     <div class="container">
       <template is="dom-repeat" items="[[transformToArray(speakers, 'id')]]" as="speaker">
         <a class="speaker card"
-            href$="/speakers/[[speaker.id]]/"
-            ga-on="click"
-            ga-event-category="speaker"
-            ga-event-action="open details"
-            ga-event-label$="[[speaker.name]]">
+           href$="/speakers/[[speaker.id]]/"
+           ga-on="click"
+           ga-event-category="speaker"
+           ga-event-action="open details"
+           ga-event-label$="[[speaker.name]]">
           <div relative>
             <plastic-image
               class="photo"
@@ -245,7 +245,8 @@
         if (active && speakers && Object.keys(speakers).length) {
           requestAnimationFrame(() => {
               if (id) {
-                dialogsActions.openDialog(DIALOGS.SPEAKER, speakers[id]);
+                const speakerData = speakers[id];
+                speakerData && dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
               } else if (this.isDialogOpened) {
                 dialogsActions.closeDialog(DIALOGS.SPEAKER);
               }
