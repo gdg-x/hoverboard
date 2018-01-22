@@ -69,10 +69,11 @@
   </template>
 
   <script>
-    class VideoDialog extends ReduxMixin(Polymer.mixinBehaviors([Polymer.PaperDialogBehavior], Polymer.Element)) {
-
+    class VideoDialog extends ReduxMixin(
+      Polymer.mixinBehaviors([Polymer.PaperDialogBehavior], Polymer.Element)
+    ) {
       static get is() {
-        return 'video-dialog'
+        return 'video-dialog';
       }
 
       static get properties() {
@@ -80,14 +81,14 @@
           videoTitle: String,
           opened: {
             type: Boolean,
-            observer: 'videoDialogActionMade'
+            observer: 'videoDialogActionMade',
           },
           youtubeId: String,
           disableControls: {
             type: Boolean,
-            value: false
-          }
-        }
+            value: false,
+          },
+        };
       }
 
       videoDialogActionMade() {
@@ -110,11 +111,10 @@
           opened: false,
           disableControls: false,
           youtubeId: '',
-          title: ''
+          title: '',
         });
       }
     }
-
 
     window.customElements.define(VideoDialog.is, VideoDialog);
   </script>

@@ -106,6 +106,7 @@
 
   <script>
 
+    // eslint-disable-next-line no-undef
     class PostPage extends UtilsFunctions(ReduxMixin(Polymer.Element)) {
       static get is() {
         return 'post-page';
@@ -117,14 +118,14 @@
 
           postsList: {
             type: String,
-            statePath: 'blog'
-          }
+            statePath: 'blog',
+          },
         };
       }
 
       static get observers() {
         return [
-          '_postDataObserver(postData.id, postsList)'
+          '_postDataObserver(postData.id, postsList)',
         ];
       }
 
@@ -138,24 +139,29 @@
         this._setHero(this.postsList[this.postData.id]);
         this.set('source', this.postsList[this.postData.id].source);
         this.set('published', this._getDate(this.postsList[this.postData.id].published));
-        const sortedPosts = this.transformToArray(this.postsList, 'id').sort((a, b) => b.published.localeCompare(a.published));
-        this.set('suggestedPosts', sortedPosts.filter(post => post.id !== this.postData.id).slice(0, 3));
-
+        const sortedPosts = this.transformToArray(this.postsList, 'id')
+          .sort((a, b) => b.published.localeCompare(a.published));
+        this.set('suggestedPosts', sortedPosts.filter((post) => post.id !== this.postData.id)
+          .slice(0, 3));
       }
 
       _setHero(postInfo) {
         uiActions.setHero({
-          "title": postInfo.title,
-          "background": {
-            "color": postInfo.primaryColor,
-            "image": postInfo.image
+          'title': postInfo.title,
+          'background': {
+            'color': postInfo.primaryColor,
+            'image': postInfo.image,
           },
-          "fontColor": "#fff"
+          'fontColor': '#fff',
         });
       }
 
       _getDate(date) {
-        return new Date(date).toLocaleString('en-us', { month: 'short', day: 'numeric', year: 'numeric' });
+        return new Date(date).toLocaleString('en-us', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+        });
       }
     }
 

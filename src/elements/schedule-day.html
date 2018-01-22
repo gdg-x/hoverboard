@@ -107,15 +107,15 @@
           day: Object,
           name: String,
           user: Object,
-          featuredSessions: Object
-        }
+          featuredSessions: Object,
+        };
       }
 
       _getTimePosition(timeslotIndex) {
         return `${timeslotIndex + 1} / 1`;
       }
 
-      _splitText (text, divider, index) {
+      _splitText(text, divider, index) {
         return text.split(divider)[index];
       }
     }

@@ -86,6 +86,7 @@
 
   <script>
 
+    // eslint-disable-next-line no-undef
     class HeaderBottomToolbar extends UtilsFunctions(ReduxMixin(Polymer.Element)) {
       static get is() {
         return 'header-bottom-toolbar';
@@ -95,16 +96,16 @@
         return {
           route: {
             type: String,
-            statePath: 'routing'
+            statePath: 'routing',
           },
           schedule: {
             type: Object,
-            statePath: 'schedule'
+            statePath: 'schedule',
           },
           contentLoaderVisibility: {
             type: String,
-            value: null
-          }
+            value: null,
+          },
         };
       }
 

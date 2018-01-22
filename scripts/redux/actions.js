@@ -1,28 +1,29 @@
+/* eslint-disable no-unused-vars,no-undef */
 const uiActions = {
   toggleDrawer: (value = null) => {
     store.dispatch({
       type: TOGGLE_DRAWER,
-      value
+      value,
     });
   },
-  setViewportSize: value => {
+  setViewportSize: (value) => {
     store.dispatch({
       type: SET_VIEWPORT_SIZE,
-      value
+      value,
     });
   },
   setHero: (hero, route) => {
     store.dispatch({
       type: SET_HERO,
-      hero: hero || (heroSettings ? heroSettings[route || 'home'] : null)
+      hero: hero || (heroSettings ? heroSettings[route || 'home'] : null),
     });
   },
   toggleVideoDialog: (value = null) => {
     store.dispatch({
       type: TOGGLE_VIDEO_DIALOG,
-      value
+      value,
     });
-  }
+  },
 };
 
 const routingActions = {
@@ -30,19 +31,19 @@ const routingActions = {
     const route = routeFromAction || 'home';
     store.dispatch({
       type: SET_ROUTE,
-      route
+      route,
     });
   },
-  setSubRoute: subRoute => {
+  setSubRoute: (subRoute) => {
     store.dispatch({
       type: SET_SUB_ROUTE,
-      subRoute
+      subRoute,
     });
   },
-  setLocation: url => {
+  setLocation: (url) => {
     window.history.pushState({}, '', url);
     Polymer.Base.fire('location-changed', {}, { node: window });
-  }
+  },
 };
 
 const dialogsActions = {
@@ -52,33 +53,33 @@ const dialogsActions = {
       dialog: {
         [dialogName]: {
           isOpened: true,
-          data
-        }
-      }
+          data,
+        },
+      },
     });
   },
   closeDialog: (dialogName) => {
     store.dispatch({
       type: CLOSE_DIALOG,
-      dialogName
+      dialogName,
     });
     this.dispatchEvent(new CustomEvent('reset-query-params', {
       bubbles: true,
-      composed: true
+      composed: true,
     }));
-  }
+  },
 };
 
 let toastHideTimeOut;
 const toastActions = {
-  showToast: toast => {
+  showToast: (toast) => {
     const duration = toast.duration || 5000;
     store.dispatch({
       type: SHOW_TOAST,
       toast: Object.assign({}, toast, {
         duration,
-        visible: true
-      })
+        visible: true,
+      }),
     });
 
     clearTimeout(toastHideTimeOut);
@@ -90,53 +91,53 @@ const toastActions = {
   hideToast: () => {
     clearTimeout(toastHideTimeOut);
     store.dispatch({
-      type: HIDE_TOAST
+      type: HIDE_TOAST,
     });
-  }
+  },
 };
 
 const ticketsActions = {
   fetchTickets: () => {
     return firebase.database()
       .ref('/tickets')
-      .on('value', snapshot => store.dispatch({
+      .on('value', (snapshot) => store.dispatch({
         type: FETCH_TICKETS,
-        tickets: snapshot.val()
+        tickets: snapshot.val(),
       }));
-  }
+  },
 };
 
 const partnersActions = {
   fetchPartners: () => {
     return firebase.database()
       .ref('/partners')
-      .on('value', snapshot => store.dispatch({
+      .on('value', (snapshot) => store.dispatch({
         type: FETCH_PARTNERS,
-        partners: snapshot.val()
+        partners: snapshot.val(),
       }));
-  }
+  },
 };
 
 const videosActions = {
   fetchVideos: () => {
     return firebase.database()
       .ref('/videos')
-      .on('value', snapshot => store.dispatch({
+      .on('value', (snapshot) => store.dispatch({
         type: FETCH_VIDEOS,
-        videos: snapshot.val()
+        videos: snapshot.val(),
       }));
-  }
+  },
 };
 
 const blogActions = {
   fetchList: () => {
     return firebase.database()
       .ref('/blog/list')
-      .on('value', snapshot => store.dispatch({
+      .on('value', (snapshot) => store.dispatch({
         type: FETCH_BLOG_LIST,
-        list: snapshot.val()
+        list: snapshot.val(),
       }));
-  }
+  },
 };
 
 const speakersActions = {
@@ -146,28 +147,30 @@ const speakersActions = {
       ? Promise.resolve(state.session.list)
       : sessionsActions.fetchList();
 
-    const speakersPromise = new Promise(resolve => {
+    const speakersPromise = new Promise((resolve) => {
       firebase.database()
         .ref('/speakers')
-        .on('value', snapshot => {
+        .on('value', (snapshot) => {
           resolve(snapshot.val());
-        })
+        });
     });
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       Promise.all([sessionsPromise, speakersPromise])
         .then(([sessions, speakers]) => {
           let updatedSpeakers = {};
 
           for (let key of Object.keys(sessions)) {
             if (sessions[key].speakers) {
-              sessions[key].speakers.map(id => {
+              sessions[key].speakers.map((id) => {
                 if (speakers[id]) {
                   const session = Object.assign({}, sessions[key], {
-                    id: key
+                    id: key,
                   });
                   updatedSpeakers[id] = Object.assign({}, speakers[id], {
-                    sessions: speakers[id].sessions ? [...speakers[id].sessions, session] : [session]
+                    sessions: speakers[id].sessions
+                      ? [...speakers[id].sessions, session]
+                      : [session],
                   });
                 }
               });
@@ -178,50 +181,50 @@ const speakersActions = {
 
           store.dispatch({
             type: FETCH_SPEAKERS_LIST,
-            list
+            list,
           });
 
           resolve(list);
         });
     });
-  }
+  },
 };
 
 const sessionsActions = {
   fetchList: () => {
-    const result = new Promise(resolve => {
+    const result = new Promise((resolve) => {
       firebase.database()
         .ref('/sessions')
-        .on('value', snapshot => {
+        .on('value', (snapshot) => {
           resolve(snapshot.val());
-        })
+        });
     });
 
     result
-      .then(list => {
+      .then((list) => {
         store.dispatch({
           type: FETCH_SESSIONS_LIST,
-          list
+          list,
         });
       });
 
     return result;
   },
 
-  fetchUserFeaturedSessions: userId => {
-    const result = new Promise(resolve => {
+  fetchUserFeaturedSessions: (userId) => {
+    const result = new Promise((resolve) => {
       firebase.database()
         .ref(`/featuredSessions/${userId}`)
-        .on('value', snapshot => {
+        .on('value', (snapshot) => {
           resolve(snapshot.val());
-        })
+        });
     });
 
     result
-      .then(featuredSessions => {
+      .then((featuredSessions) => {
         store.dispatch({
           type: FETCH_USER_FEATURED_SESSIONS,
-          featuredSessions
+          featuredSessions,
         });
       });
 
@@ -237,12 +240,12 @@ const sessionsActions = {
       .then(() => {
         store.dispatch({
           type: SET_USER_FEATURED_SESSIONS,
-          featuredSessions
+          featuredSessions,
         });
       });
 
     return result;
-  }
+  },
 };
 
 const scheduleActions = {
@@ -251,12 +254,12 @@ const scheduleActions = {
     const speakersPromise = Object.keys(state.speakers).length
       ? Promise.resolve(state.speakers)
       : speakersActions.fetchList();
-    const schedulePromise = new Promise(resolve => {
+    const schedulePromise = new Promise((resolve) => {
       firebase.database()
         .ref('/schedule')
-        .on('value', snapshot => {
+        .on('value', (snapshot) => {
           resolve(snapshot.val());
-        })
+        });
     });
 
     return Promise.all([speakersPromise, schedulePromise])
@@ -266,53 +269,52 @@ const scheduleActions = {
         scheduleWorker.postMessage({
           speakers,
           sessions: store.getState().sessions.list,
-          schedule
+          schedule,
         });
 
         scheduleWorker.addEventListener('message', ({ data }) => {
           store.dispatch({
             type: FETCH_SCHEDULE,
-            data: data.schedule
+            data: data.schedule,
           });
           store.dispatch({
             type: UPDATE_SESSIONS,
-            list: data.sessions
+            list: data.sessions,
           });
           store.dispatch({
             type: UPDATE_SPEAKERS,
-            list: data.speakers
+            list: data.speakers,
           });
           scheduleWorker.terminate();
         }, false);
-
       });
-  }
+  },
 };
 
 const galleryActions = {
   fetchGallery: () => {
     return firebase.database()
       .ref('/gallery')
-      .on('value', snapshot => {
+      .on('value', (snapshot) => {
         store.dispatch({
           type: FETCH_GALLERY,
-          gallery: snapshot.val()
+          gallery: snapshot.val(),
         });
       });
-  }
+  },
 };
 
 const teamActions = {
   fetchTeam: () => {
     return firebase.database()
       .ref('/team')
-      .on('value', snapshot => {
+      .on('value', (snapshot) => {
         store.dispatch({
           type: FETCH_TEAM,
-          team: snapshot.val()
+          team: snapshot.val(),
         });
       });
-  }
+  },
 };
 
 const userActions = {
@@ -327,7 +329,7 @@ const userActions = {
             id: signInObject.user.email || signInObject.user.providerData[0].email,
             name: signInObject.user.displayName,
             iconURL: signInObject.user.photoURL,
-            provider: providerName
+            provider: providerName,
           });
 
           navigator.credentials.store(cred);
@@ -344,15 +346,13 @@ const userActions = {
       helperActions.storeUser(currentUser);
     }
     else {
-
       if (navigator.credentials) {
-
         return navigator.credentials.get({
           password: true,
           federated: {
             providers: providerUrls.split(','),
-            mediation: 'silent'
-          }
+            mediation: 'silent',
+          },
         }).then((cred) => {
           (() => {
             if (cred) {
@@ -382,7 +382,7 @@ const userActions = {
           navigator.credentials.preventSilentAccess();
         }
       });
-  }
+  },
 };
 
 const subscribeActions = {
@@ -392,12 +392,12 @@ const subscribeActions = {
     firebase.database().ref(`subscribers/${id}`).set({
       email: data.email,
       firstName: data.firstName || '',
-      lastName: data.lastName || ''
+      lastName: data.lastName || '',
     })
       .then(() => {
         store.dispatch({
           type: SUBSCRIBE,
-          subscribed: true
+          subscribed: true,
         });
       })
       .catch(() => {
@@ -406,29 +406,29 @@ const subscribeActions = {
           dialog: {
             ['subscribe']: {
               isOpened: true,
-              data: Object.assign(data, { errorOcurred: true })
-            }
-          }
+              data: Object.assign(data, { errorOccurred: true }),
+            },
+          },
         });
 
         store.dispatch({
           type: SUBSCRIBE,
-          subscribed: false
+          subscribed: false,
         });
       });
   },
   resetSubscribed: () => {
     store.dispatch({
       type: SUBSCRIBE,
-      subscribed: false
+      subscribed: false,
     });
-  }
+  },
 };
 
 let messaging;
 const notificationsActions = {
   initializeMessaging: () => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       messaging = firebase.messaging();
       messaging.onMessage(({ notification }) => {
         toastActions.showToast({
@@ -437,8 +437,8 @@ const notificationsActions = {
             title: '{$ notifications.toast.title $}',
             callback: () => {
               routingActions.setLocation(notification.click_action);
-            }
-          }
+            },
+          },
         });
       });
       messaging.onTokenRefresh(() => {
@@ -452,41 +452,44 @@ const notificationsActions = {
       .then(() => {
         notificationsActions.getToken(true);
       })
-      .catch(error => {
-        console.log('Unable to get permission to notify.', error);
+      .catch(() => {
         store.dispatch({
           type: UPDATE_NOTIFICATIONS_STATUS,
-          status: NOTIFICATIONS_STATUS.DENIED
+          status: NOTIFICATIONS_STATUS.DENIED,
         });
       });
   },
 
-  getToken: subscribe => {
+  getToken: (subscribe) => {
     return messaging.getToken()
-      .then(currentToken => {
+      .then((currentToken) => {
         if (currentToken) {
           const state = store.getState();
-          const subscribersRef = firebase.database().ref(`/notifications/subscribers/${currentToken}`);
+          const subscribersRef = firebase.database()
+            .ref(`/notifications/subscribers/${currentToken}`);
           const subscribersPromise = subscribersRef.once('value');
           const userUid = state.user && (state.user.uid || null);
 
           let userSubscriptionsPromise = Promise.resolve(null);
           let userSubscriptionsRef;
           if (userUid) {
-            userSubscriptionsRef = firebase.database().ref(`/notifications/users/${userUid}/${currentToken}`);
+            userSubscriptionsRef = firebase.database()
+              .ref(`/notifications/users/${userUid}/${currentToken}`);
             userSubscriptionsPromise = userSubscriptionsRef.once('value');
           }
 
           Promise.all([subscribersPromise, userSubscriptionsPromise])
             .then(([subscribersSnapshot, userSubscriptionsSnapshot]) => {
               const isDeviceSubscribed = subscribersSnapshot.val();
-              const isUserSubscribed = userSubscriptionsSnapshot ? userSubscriptionsSnapshot.val() : false;
+              const isUserSubscribed = userSubscriptionsSnapshot
+                ? userSubscriptionsSnapshot.val() :
+                false;
 
               if (isDeviceSubscribed) {
                 store.dispatch({
                   type: UPDATE_NOTIFICATIONS_STATUS,
                   status: NOTIFICATIONS_STATUS.GRANTED,
-                  token: currentToken
+                  token: currentToken,
                 });
                 if (userUid && !isUserSubscribed) {
                   userSubscriptionsRef.set(userUid);
@@ -497,7 +500,7 @@ const notificationsActions = {
                 store.dispatch({
                   type: UPDATE_NOTIFICATIONS_STATUS,
                   status: NOTIFICATIONS_STATUS.GRANTED,
-                  token: currentToken
+                  token: currentToken,
                 });
               }
             });
@@ -505,7 +508,7 @@ const notificationsActions = {
           store.dispatch({
             type: UPDATE_NOTIFICATIONS_STATUS,
             status: Notification.permission,
-            token: null
+            token: null,
           });
         }
       })
@@ -513,21 +516,21 @@ const notificationsActions = {
         store.dispatch({
           type: UPDATE_NOTIFICATIONS_STATUS,
           status: NOTIFICATIONS_STATUS.DENIED,
-          token: null
+          token: null,
         });
       });
   },
 
-  unsubscribe: token => {
+  unsubscribe: (token) => {
     return messaging.deleteToken(token)
       .then(() => {
         store.dispatch({
           type: UPDATE_NOTIFICATIONS_STATUS,
           status: NOTIFICATIONS_STATUS.DEFAULT,
-          token: null
+          token: null,
         });
       });
-  }
+  },
 };
 
 const helperActions = {
@@ -544,13 +547,13 @@ const helperActions = {
         email,
         displayName,
         photoURL,
-        refreshToken
+        refreshToken,
       };
     }
 
     store.dispatch({
       type: SIGN_IN,
-      user: userToStore
+      user: userToStore,
     });
   },
 
@@ -567,6 +570,6 @@ const helperActions = {
       case 'https://twitter.com':
         return new firebase.auth.TwitterAuthProvider();
     }
-  }
+  },
 };
 
