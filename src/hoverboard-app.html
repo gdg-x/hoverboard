@@ -31,6 +31,7 @@
 <link rel="import" href="elements/header-toolbar.html">
 <link rel="import" href="elements/hero-block.html">
 <link rel="import" href="elements/footer-block.html">
+<link rel="import" href="effects/transparent-scroll.html">
 
 
 <dom-module id="hoverboard-app">
@@ -92,6 +93,13 @@
       app-header.remove-shadow::before {
         opacity: 0;
       }
+
+      /*app-header {*/
+        /*--app-header-background-front-layer: {*/
+          /*background-color: var(--primary-background-color);*/
+          /*transition: opacity var(--animation);*/
+        /*};*/
+      /*}*/
 
       iron-lazy-pages {
         background-color: #fff;
@@ -158,7 +166,13 @@
 
       <app-header-layout id="headerLayout">
 
-        <app-header id="header" slot="header" condenses fixed effects="waterfall">
+        <app-header
+          id="header"
+          slot="header"
+          effects="waterfall transparent-scroll"
+          transparent="[[_isHeaderTransparent()]]"
+          condenses fixed
+        >
           <header-toolbar></header-toolbar>
         </app-header>
 
@@ -383,6 +397,10 @@
 
       _toggleHeaderShadow(e) {
         this.$.header.classList.toggle('remove-shadow', e.detail.sticked);
+      }
+
+      _isHeaderTransparent() {
+
       }
     }
 
