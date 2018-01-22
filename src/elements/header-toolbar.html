@@ -100,6 +100,10 @@
         }
       }
 
+      .buy-button{
+        margin-top: 12px;
+      }
+
     </style>
 
     <app-toolbar class="header">
@@ -134,7 +138,12 @@
           <a href="{$ nav.permalink $}" layout vertical center-center>{$ nav.title $}</a>
         </paper-tab>
         {% endfor %}
+        
         <paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]">{$ signIn $}</paper-tab>
+
+        <a href$="[[tickets.url]]" target="_blank" rel="noopener noreferrer" ga-on="click" ga-event-category="ticket button" ga-event-action="buy_click">
+          <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>
+        </a>
       </paper-tabs>
 
       <paper-menu-button
@@ -233,8 +242,12 @@
           },
           user: {
             type: Object,
-            statePath: 'user',
+            statePath: 'user'
           },
+          tickets:{
+            type: Object,
+            statePath: 'tickets'
+          }
         };
       }
 
