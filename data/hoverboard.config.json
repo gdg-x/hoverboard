@@ -43,6 +43,10 @@
     {
       "route": "team",
       "permalink": "/team/"
+    }, 
+    {
+      "route": "cod",
+      "permalink": "/cod/"
     }
   ],
   "social": [
@@ -50,6 +54,11 @@
       "name": "twitter",
       "nickname": "Sunny Tech",
       "url": "https://twitter.com/sunnytech_mtp"
+    }, 
+    {
+      "name": "linkedin",
+      "nickname":"Sunny Tech Event", 
+      "url":"https://www.linkedin.com/company/sunny-tech-event/"
     }
   ],
   "location": {
@@ -118,11 +127,12 @@
       }
     },
     "cod": {
-      "title": "Code of Conduct",
+      "title": "Code de Conduite",
       "headerSettings": {
-        "backgroundColor": "#673ab7",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
+        "backgroundColor": "#F4724E",
+        "fontColor": "#FFFFFF",
+        "tabBarColor": "#FFFFFF", 
+        "minHeight": "160px"
       }
     }
   }
