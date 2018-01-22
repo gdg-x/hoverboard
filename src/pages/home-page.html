@@ -29,22 +29,22 @@
 
   <template>
 
-    <statistics-block app="{{app}}" cascaded></statistics-block>
+    <statistics-block app="{{app}}"></statistics-block>
     {% if videosSessionsUrl %}
-      <featured-videos app="{{app}}" cascaded></featured-videos>
+      <featured-videos app="{{app}}"></featured-videos>
     {% endif %}
     {% if callToAction %}
-      <call-to-action app="{{app}}" cascaded></call-to-paper>
+      <call-to-action app="{{app}}"></call-to-paper>
     {% endif %}
-      <about-block app="{{app}}" cascaded></about-block>
+      <about-block app="{{app}}"></about-block>
     {% if callToPaper %}
-      <call-to-paper app="{{app}}" cascaded></call-to-paper>
+      <call-to-paper app="{{app}}"></call-to-paper>
     {% endif %}
     {% if gallery %}
-      <photo-block app="{{app}}" cascaded></photo-block>
+      <photo-block app="{{app}}"></photo-block>
     {% endif %}
-    <map-block app="{{app}}" selected="{{selected}}" cascaded></map-block>
-    <footer-block app="{{app}}" cascaded></footer-block>
+    <map-block app="{{app}}" selected="{{selected}}"></map-block>
+    <footer-block app="{{app}}"></footer-block>
 
   </template>
 
