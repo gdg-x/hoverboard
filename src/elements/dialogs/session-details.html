@@ -24,8 +24,8 @@
       <app-header slot="header" class="header" fixed="[[viewport.isTabletPlus]]">
         <iron-icon
           class="close-icon"
-          icon="hoverboard:[[_getCLoseBtnIcon(viewport.isLaptopPlus)]]"
-          on-tap="close"
+          icon="hoverboard:[[_getCloseBtnIcon(viewport.isLaptopPlus)]]"
+          on-tap="_close"
         ></iron-icon>
         <app-toolbar>
           <div class="dialog-container header-content" layout vertical end-justified>
@@ -156,6 +156,10 @@
 
       _close() {
         dialogsActions.closeDialog(DIALOGS.SESSION);
+        this.dispatchEvent(new CustomEvent('reset-query-params', {
+          bubbles: true,
+          composed: true,
+        }));
       }
 
       _handleClose(opened, session) {
@@ -171,7 +175,7 @@
         return getComputedStyle(this, `--${this.generateClassName(value)}`);
       }
 
-      _getCLoseBtnIcon(isLaptopViewport) {
+      _getCloseBtnIcon(isLaptopViewport) {
         return isLaptopViewport ? 'close' : 'arrow-left';
       }
 
