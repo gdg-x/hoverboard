@@ -24,7 +24,7 @@
       <app-header slot="header" class="header" fixed="[[viewport.isTabletPlus]]">
         <iron-icon
           class="close-icon"
-          icon="hoverboard:[[getCloseBtnIcon(viewport.isLaptopPlus)]]"
+          icon="hoverboard:[[_getCloseBtnIcon(viewport.isLaptopPlus)]]"
           on-tap="_close"
         ></iron-icon>
         <app-toolbar>
@@ -175,7 +175,7 @@
         return getComputedStyle(this, `--${this.generateClassName(value)}`);
       }
 
-      getCloseBtnIcon(isLaptopViewport) {
+      _getCloseBtnIcon(isLaptopViewport) {
         return isLaptopViewport ? 'close' : 'arrow-left';
       }
 
