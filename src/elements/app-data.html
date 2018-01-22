@@ -122,10 +122,10 @@
             notify: true
           },
 
-          postsSource: {
-            type: String,
-            value: 'data/blog.json'
-          },
+          // postsSource: {
+          //   type: String,
+          //   value: 'data/blog.json'
+          // },
 
           posts: {
             type: Array,
@@ -178,9 +178,9 @@
         });
 
         myWorker.addEventListener('message', function(e) {
-          this.set('schedule', e.data.schedule);
-          this.set('sessions', e.data.sessions);
-          this.set('speakers', e.data.speakers);
+          // this.set('schedule', e.data.schedule);
+          // this.set('sessions', e.data.sessions);
+          // this.set('speakers', e.data.speakers);
           myWorker.terminate();
         }.bind(this), false);
 
