@@ -1,6 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
 
 <link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="../mixins/redux-mixin.html">
@@ -66,6 +66,12 @@
         opacity: 0.8;
       }
 
+      paper-progress {
+        width: 100%;
+        --paper-progress-active-color: var(--default-primary-color);
+        --paper-progress-secondary-color: var(--default-primary-color);
+      }	
+
       @media (min-width: 640px) {
         .featured-posts-wrapper {
           grid-template-columns: repeat(2, 1fr);
@@ -84,6 +90,8 @@
 
     </style>
 
+    <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
+
     <div class="featured">
       <div class="container">
         <content-loader 
@@ -95,7 +103,10 @@
           border-radius="var(--border-radius)"
           title-top-position="32px"
           title-height="42px"
-          title-width="70%"
+          title-width="70%"          
+          load-from="-70%"
+          load-to="130%"
+          animation-time="1s"
           items-count="{$ contentLoaders.blog.itemsCount $}"
           hidden$="[[contentLoaderVisibility]]">
         </content-loader>
