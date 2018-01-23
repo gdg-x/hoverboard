@@ -108,7 +108,7 @@ Most of the core team members, hoverboard contributors and contributors in the e
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard?ref=badge_large)
 
-Project is published under the MIT license <br>
+Project is published under the [MIT license](/LICENSE.md)  
 Feel free to clone and modify repo as you want, but don't forget to add reference to authors :)
 
 _GDG[x] are not endorsed and/or supported by Google, the corporation._
