@@ -30,12 +30,12 @@ Our goal is to allow event organizers to set up professional conference website 
 | **Blog** | post announcements, updates and useful information |
 
 ## Getting Started
-1. Fork repo and clone it locally
+1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone it locally
 2. Setup Environment
-   * Install `Node.js (v8.9.4 or above)`
+   * Install [Node.js (v8.9.4 or above)](https://nodejs.org/en/download/)
    * Instal Firebase CLI: `npm i -g firebase-cli`
-3. Create Firebase account and login into cli firebase login
-4. Update Hoverboard config
+3. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `firebase login`
+4. Update [Hoverboard config](/data)
 5. Run locally
    * `cd` into the base directory
    * `npm install` or `yarn`
@@ -43,7 +43,7 @@ Our goal is to allow event organizers to set up professional conference website 
 6. Deploy
    * `npm run deploy` or `yarn deploy`
 
-Read the [Full Setup Guide](/docs/)
+Read the [Full Setup Guide](/docs/).
 
 ## Updating
 Here is a git workflow for updating your fork (or downloaded copy) to the latest version:
@@ -102,13 +102,13 @@ See [list of contributors](https://github.com/gdg-x/hoverboard/graphs/contributo
 __Maintainer:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
 
 # Sponsoring
-Most of the core team members, hoverboard contributors and contributors in the ecosystem do this open source work in their free time. If you like this project and it makes your life easier, please donate. [Become a backer](https://opencollective.com/hoverboard) <br>
+Most of the core team members, hoverboard contributors and contributors in the ecosystem do this open source work in their free time. If you like this project and it makes your life easier, please donate.  
 <a href="https://opencollective.com/hoverboard"> <img src="https://opencollective.com/hoverboard/tiers/backer.svg"> </a>
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard?ref=badge_large)
 
-Project is published under the [MIT license](/LICENSE.md)  
+Project is published under the [MIT license](/LICENSE.md).  
 Feel free to clone and modify repo as you want, but don't forget to add reference to authors :)
 
 _GDG[x] are not endorsed and/or supported by Google, the corporation._
