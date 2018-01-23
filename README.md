@@ -2,8 +2,8 @@
 <img width="720px" src="https://user-images.githubusercontent.com/2954281/35304027-be342c32-009c-11e8-9be9-bb5be8b26d1d.png">
 </p>
 <p align="center">
-<a href="https://hoverboard-v2-dev.firebaseapp.com" align="center"> Live demo</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="#getting-started">Get Started</a>
+<a href="https://hoverboard-v2-dev.firebaseapp.com" align="center">:zap: Live demo</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="#getting-started">:rocket: Get Started</a>
 </p>
 
 [![Build Status](https://travis-ci.org/gdg-x/hoverboard.svg?branch=master)](https://travis-ci.org/gdg-x/hoverboard) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard?ref=badge_shield)
