@@ -4,7 +4,7 @@
 </p>
 <p align="center">
 <a href="https://hoverboard-v2-dev.firebaseapp.com" align="center"> Live demo</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="/#getting-started">Get Started</a>
+<a href="#getting-started">Get Started</a>
 </p>
 
 [![Build Status](https://travis-ci.org/gdg-x/hoverboard.svg?branch=master)](https://travis-ci.org/gdg-x/hoverboard) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard?ref=badge_shield)
@@ -56,7 +56,7 @@ Here is a git workflow for updating your fork (or downloaded copy) to the latest
 
 ## Documentation
 
-The [Getting Started guide](https://github.com/h4rdmol/hoverboard/tree/Documentation-v2#getting-started) is probably a good first point of call! <br>
+The [Getting Started guide]("#getting-started") is probably a good first point of call! <br>
 :book: [Full documentation](/docs/).
 
 ## Compatibility
@@ -91,7 +91,7 @@ Awesome! Contributions of all kinds are greatly appreciated. To help smoothen th
 
 ## Code of Conduct
 
-Read the full version [Code of Conduct](/docs/tutorials/Code-of-Conduct).
+Read the full version [Code of Conduct](/docs/tutorials/Code-of-Conduct.md).
 
 ## Contributors
 
