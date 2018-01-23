@@ -1,6 +1,5 @@
 <p align="center">
-<img src="https://user-images.githubusercontent.com/5227233/35153062-a2331e34-fd2d-11e7-8e38-fd9f36e34fce.png">
-<img src="https://user-images.githubusercontent.com/5227233/35154021-4c608c04-fd31-11e7-9a68-4649c507fd76.png">
+<img width="720px" src="https://user-images.githubusercontent.com/2954281/35304027-be342c32-009c-11e8-9be9-bb5be8b26d1d.png">
 </p>
 <p align="center">
 <a href="https://hoverboard-v2-dev.firebaseapp.com" align="center"> Live demo</a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -17,16 +16,18 @@ The template is created based on 7 years of [GDG Lviv](https://www.meetup.com/GD
 Our goal is to allow event organizers to set up professional conference website with minimum resources. To get started you need only basic knowledge of web technologies and a free Firebase account.
 
 ## Features
-**Blog**: post announcements, updates and useful information <br>
-**Speakers and schedule management:** keep and update all information in the  Firebase <br>
-**My schedule:** let attendees save sessions they want to visit <br>
-**Session ratings:** collect feedback to understand speaker performance <br>
-**Customizable theme:** change colors to match your style <br>
-**Fast and optimized:** 91/100 PWA on [Lighthouse](https://www.webpagetest.org/lighthouse.php?test=180111_1P_027a041bc5102982f074014807320a86&run=3) <br>
-**Mobile first:** layouts optimized for small screens, on Android Hoverboard can be installed as a native app <br>
-**Works offline:** shitty WiFi on the venue is not a problem anymore <br>
-**Push notifications:** remind about sessions in My schedule, session feedback or target users with a custom message <br>
-**SEO optimized:** index all content and get to the top in search results
+| Feature | Description |
+|---|---|
+| **Fast and optimized** | 91/100 PWA on [Lighthouse](https://www.webpagetest.org/lighthouse.php?test=180111_1P_027a041bc5102982f074014807320a86&run=3) |
+| **Works offline** | shitty WiFi on the venue is not a problem anymore |
+| **Mobile first** | layouts optimized for small screens, on Android Hoverboard can be installed as a native app |
+| **Push notifications** | remind about sessions in My schedule, session feedback or target users with a custom message |
+| **SEO optimized** | index all content and get to the top in search results |
+| **Speakers and schedule management** | keep and update all information in the  Firebase |
+| **My schedule** | let attendees save sessions they want to visit |
+| **Session ratings** | collect feedback to understand speaker performance |
+| **Customizable theme** | change colors to match your style |
+| **Blog** | post announcements, updates and useful information |
 
 ## Getting Started
 1. Fork repo and clone it locally
@@ -40,19 +41,20 @@ Our goal is to allow event organizers to set up professional conference website 
    * `npm install` or `yarn`
    * `npm run serve` or `yarn serve`
 6. Deploy
-   * `npm run deploy`
+   * `npm run deploy` or `yarn deploy`
 
 Read the [Full Setup Guide](/docs/)
 
 ## Updating
 Here is a git workflow for updating your fork (or downloaded copy) to the latest version:
-`git remote add upstream https://github.com/gdg-x/hoverboard.git` <br>
-`git fetch upstream` <br>
-`git merge upstream/hoverboard-v2` or `git merge upstream/develop` <br>
-> resolve the merge conflicts in your editor
-
-`git add . -u` <br>
-`git commit -m 'Updated to the latest version'` <br>
+```
+git remote add upstream https://github.com/gdg-x/hoverboard.git
+git fetch upstream
+git merge upstream/hoverboard-v2
+# resolve the merge conflicts in your editor
+git add . -u
+git commit -m 'Updated to the latest version'
+```
 
 ## Documentation
 
@@ -104,9 +106,9 @@ Most of the core team members, hoverboard contributors and contributors in the e
 <a href="https://opencollective.com/hoverboard"> <img src="https://opencollective.com/hoverboard/tiers/backer.svg"> </a>
 
 ## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard?ref=badge_large)
 
 Project is published under the MIT license <br>
 Feel free to clone and modify repo as you want, but don't forget to add reference to authors :)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard?ref=badge_large)
 
 _GDG[x] are not endorsed and/or supported by Google, the corporation._
