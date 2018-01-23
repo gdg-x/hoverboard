@@ -1,5 +1,3 @@
-# Project Hoverboard 2
-
 <p align="center">
 <img src="https://user-images.githubusercontent.com/5227233/35153062-a2331e34-fd2d-11e7-8e38-fd9f36e34fce.png">
 <img src="https://user-images.githubusercontent.com/5227233/35154021-4c608c04-fd31-11e7-9a68-4649c507fd76.png">
@@ -9,14 +7,16 @@
 <a href="/docs/">Get Started</a>
 </p>
 
-# Overview
+[![Build Status](https://travis-ci.org/gdg-x/hoverboard.svg?branch=master)](https://travis-ci.org/gdg-x/hoverboard) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard?ref=badge_shield)
+
+## Overview
 Project Hoverboard is the conference website template that helps you to set up mobile first conference website with blog, speakers and schedule management in a few minutes.
 
 The template is created based on 7 years of [GDG Lviv](https://www.meetup.com/GDG-Lviv/) team experience of running conferences and feedback from more than 500 event organizers from all around the world who were using previous Hoverboard versions.
 
 Our goal is to allow event organizers to set up professional conference website with minimum resources. To get started you need only basic knowledge of web technologies and a free Firebase account.
 
-# Features
+## Features
 **Blog**: post announcements, updates and useful information <br>
 **Speakers and schedule management:** keep and update all information in the  Firebase <br>
 **My schedule:** let attendees save sessions they want to visit <br>
@@ -28,7 +28,7 @@ Our goal is to allow event organizers to set up professional conference website 
 **Push notifications:** remind about sessions in My schedule, session feedback or target users with a custom message <br>
 **SEO optimized:** index all content and get to the top in search results
 
-# Getting Started
+## Getting Started
 1. Fork repo and clone it locally
 2. Setup Environment
    * Install `Node.js (v8.9.4 or above)`
@@ -44,7 +44,7 @@ Our goal is to allow event organizers to set up professional conference website 
 
 Read the [Full Setup Guide](/docs/)
 
-# Updating
+## Updating
 Here is a git workflow for updating your fork (or downloaded copy) to the latest version:
 `git remote add upstream https://github.com/gdg-x/hoverboard.git` <br>
 `git fetch upstream` <br>
@@ -54,24 +54,24 @@ Here is a git workflow for updating your fork (or downloaded copy) to the latest
 `git add . -u` <br>
 `git commit -m 'Updated to the latest version'` <br>
 
-# Documentation
+## Documentation
 
 The [Getting Started guide](https://github.com/h4rdmol/hoverboard/tree/Documentation-v2#getting-started) is probably a good first point of call! <br>
 :book: [Full documentation](/docs/).
 
-# Compatibility
+## Compatibility
 
 :white_check_mark: Compatible with **latest two** version of Chrome, Chrome for Android, Firefox, Opera, Safari, Edge.<br>
 :x: IE and Opera Mini aren't supported.
 
-# Technology Stack
+## Technology Stack
 
 * Polymer 2
 * Firebase
 * Service Worker
 * CSS Grid
 
-# Contributing
+## Contributing
 
 Awesome! Contributions of all kinds are greatly appreciated. To help smoothen the process we have a few non-exhaustive guidelines to follow which should get you going in no time.
 
@@ -89,11 +89,11 @@ Awesome! Contributions of all kinds are greatly appreciated. To help smoothen th
 * Lint your code with eslint (config provided)
 * Include relevant test updates/additions
 
-# Code of Conduct
+## Code of Conduct
 
 Read the full version [Code of Conduct](/code/).
 
-# Contributors
+## Contributors
 
 See [list of contributors](https://github.com/gdg-x/hoverboard/graphs/contributors).
 
@@ -103,11 +103,10 @@ __Maintainer:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](
 Most of the core team members, hoverboard contributors and contributors in the ecosystem do this open source work in their free time. If you like this project and it makes your life easier, please donate. [Become a backer](https://opencollective.com/hoverboard) <br>
 <a href="https://opencollective.com/hoverboard"> <img src="https://opencollective.com/hoverboard/tiers/backer.svg"> </a>
 
-# License
+## License
 
 Project is published under the MIT license <br>
 Feel free to clone and modify repo as you want, but don't forget to add reference to authors :)
-
-[![Build Status](https://travis-ci.org/gdg-x/hoverboard.svg?branch=master)](https://travis-ci.org/gdg-x/hoverboard)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard?ref=badge_large)
 
 _GDG[x] are not endorsed and/or supported by Google, the corporation._
