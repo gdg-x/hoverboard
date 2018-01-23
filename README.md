@@ -56,7 +56,7 @@ Here is a git workflow for updating your fork (or downloaded copy) to the latest
 
 # Documentation
 
-The [Getting Started guide](/docs/) is probably a good first point of call! <br>
+The [Getting Started guide](https://github.com/h4rdmol/hoverboard/tree/Documentation-v2#getting-started) is probably a good first point of call! <br>
 :book: [Full documentation](/docs/).
 
 # Compatibility
