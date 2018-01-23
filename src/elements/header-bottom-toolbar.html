@@ -12,7 +12,7 @@
 
     <style>
 
-      :host  {
+      :host {
         display: block;
         background-color: var(--primary-background-color);
       }
@@ -46,11 +46,10 @@
     </style>
 
 
-
     <app-toolbar class="bottom-toolbar">
 
-      <content-loader     
-        class="nav-items"    
+      <content-loader
+        class="nav-items"
         card-padding="15px"
         card-width="105px"
         card-margin="0 14px 0 0"
@@ -73,7 +72,7 @@
         selected="[[route.subRoute]]"
         attr-for-selected="day"
         noink
-      >     
+      >
         <template is="dom-repeat" items="[[transformToArray(schedule.days, 'date')]]" as="day">
           <paper-tab class="nav-item" day="[[day.date]]" link>
             <a href$="/schedule/[[day.date]]" layout vertical center-center>[[day.dateReadable]]</a>
@@ -111,7 +110,7 @@
 
       static get observers() {
         return [
-          '_scheduleChanged(schedule.days)'
+          '_scheduleChanged(schedule.days)',
         ];
       }
 

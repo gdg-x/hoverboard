@@ -153,8 +153,8 @@
 
     <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
-    <content-loader 
-      class="container"          
+    <content-loader
+      class="container"
       card-padding="32px"
       card-height="400px"
       avatar-size="128px"
@@ -164,7 +164,7 @@
       items-count="{$ contentLoaders.speakers.itemsCount $}"
       hidden$="[[contentLoaderVisibility]]"
     ></content-loader>
-    <div class="container">            
+    <div class="container">
       <template is="dom-repeat" items="[[transformToArray(speakers, 'id')]]" as="speaker">
         <a class="speaker card"
            href$="/speakers/[[speaker.id]]/"
@@ -269,21 +269,20 @@
 
       _speakersChanged() {
         if (this.speakers && Object.keys(this.speakers).length) {
-          this.contentLoaderVisibility = 'hidden';          
+          this.contentLoaderVisibility = 'hidden';
         }
       }
 
       _openSpeakerDetails(active, speakers, id) {
         if (active && speakers && Object.keys(speakers).length) {
           requestAnimationFrame(() => {
-              if (id) {
-                const speakerData = speakers[id];
-                speakerData && dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
-              } else if (this.isDialogOpened) {
-                dialogsActions.closeDialog(DIALOGS.SPEAKER);
-              }
+            if (id) {
+              const speakerData = speakers[id];
+              speakerData && dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
+            } else if (this.isDialogOpened) {
+              dialogsActions.closeDialog(DIALOGS.SPEAKER);
             }
-          );
+          });
         }
       }
     }
