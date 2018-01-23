@@ -124,7 +124,7 @@
         }
       }
 
-      .buy-ticket{
+      .buy-ticket {
         display: block;
         position: absolute;
         bottom: 120px;
@@ -133,7 +133,7 @@
 
       .buy-ticket iron-icon {
         width: 18px;
-        margin-bottom: 2px;  
+        margin-bottom: 2px;
       }
     </style>
 
@@ -170,14 +170,15 @@
           {% for nav in navigation %}
           <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer">{$ nav.title $}</a>
           {% endfor %}
-       </iron-selector>
-      
-       <a href$="[[tickets.url]]" target="_blank" class="buy-ticket" rel="noopener noreferrer" ga-on="click" ga-event-category="ticket button" ga-event-action="buy_click">
-        <span>{$ buyTicket $}</span>
-          <iron-icon icon="hoverboard:open-in-new"></iron-icon> 
-      </a>
+        </iron-selector>
 
-       </app-drawer>
+        <a href$="[[tickets.url]]" target="_blank" class="buy-ticket" rel="noopener noreferrer" ga-on="click"
+           ga-event-category="ticket button" ga-event-action="buy_click">
+          <span>{$ buyTicket $}</span>
+          <iron-icon icon="hoverboard:open-in-new"></iron-icon>
+        </a>
+
+      </app-drawer>
 
       <app-header-layout id="headerLayout">
 
@@ -314,12 +315,12 @@
           },
           providerUrls: {
             type: Object,
-            value: '{$ signInProviders.allowedProvidersUrl $}'
+            value: '{$ signInProviders.allowedProvidersUrl $}',
           },
-          tickets:{
+          tickets: {
             type: Object,
-            statePath: 'tickets'
-          }
+            statePath: 'tickets',
+          },
         };
       }
 
