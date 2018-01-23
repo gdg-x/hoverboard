@@ -4,7 +4,7 @@
 </p>
 <p align="center">
 <a href="https://hoverboard-v2-dev.firebaseapp.com" align="center"> Live demo</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="/docs/">Get Started</a>
+<a href="https://github.com/h4rdmol/hoverboard/tree/Documentation-v2#getting-started">Get Started</a>
 </p>
 
 [![Build Status](https://travis-ci.org/gdg-x/hoverboard.svg?branch=master)](https://travis-ci.org/gdg-x/hoverboard) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard?ref=badge_shield)
