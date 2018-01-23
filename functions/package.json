@@ -2,9 +2,9 @@
   "name": "hoverboard-functions",
   "description": "Hoverboard serverless functions",
   "dependencies": {
-    "firebase-admin": "^5.2.1",
-    "firebase-functions": "^0.6.2",
-    "moment": "^2.18.1"
+    "firebase-admin": "^5.8.1",
+    "firebase-functions": "^0.8.1",
+    "moment": "^2.20.1"
   },
   "private": true
 }
