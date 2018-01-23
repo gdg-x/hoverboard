@@ -45,7 +45,7 @@
       <app-header slot="header" class="header" fixed="[[viewport.isTabletPlus]]">
         <iron-icon
           class="close-icon"
-          icon="hoverboard:[[_getCLoseBtnIcon(viewport.isLaptopPlus)]]"
+          icon="hoverboard:[[_getCloseBtnIcon(viewport.isLaptopPlus)]]"
           on-tap="close"
         ></iron-icon>
 
@@ -156,11 +156,12 @@
 
       _handleClose(opened, speaker) {
         if (!opened && speaker && Object.keys(speaker).length) {
+          this._close();
           history.back();
         }
       }
 
-      _getCLoseBtnIcon(isLaptopViewport) {
+      _getCloseBtnIcon(isLaptopViewport) {
         return isLaptopViewport ? 'close' : 'arrow-left';
       }
     }
