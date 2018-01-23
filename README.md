@@ -56,7 +56,7 @@ Here is a git workflow for updating your fork (or downloaded copy) to the latest
 
 ## Documentation
 
-The [Getting Started guide]("#getting-started") is probably a good first point of call! <br>
+The [Getting Started guide](#getting-started) is probably a good first point of call! <br>
 :book: [Full documentation](/docs/).
 
 ## Compatibility
