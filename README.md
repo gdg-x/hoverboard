@@ -22,7 +22,7 @@ Our goal is to allow event organizers to set up professional conference website 
 **My schedule:** let attendees save sessions they want to visit <br>
 **Session ratings:** collect feedback to understand speaker performance <br>
 **Customizable theme:** change colors to match your style <br>
-**Fast and optimized:** 91/100 PWA on Lighthouse <br>
+**Fast and optimized:** 91/100 PWA on [Lighthouse](https://www.webpagetest.org/lighthouse.php?test=180111_1P_027a041bc5102982f074014807320a86&run=3) <br>
 **Mobile first:** layouts optimized for small screens, on Android Hoverboard can be installed as a native app <br>
 **Works offline:** shitty WiFi on the venue is not a problem anymore <br>
 **Push notifications:** remind about sessions in My schedule, session feedback or target users with a custom message <br>
