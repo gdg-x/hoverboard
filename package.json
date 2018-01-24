@@ -9,7 +9,9 @@
     "build:prod": "cross-env BUILD_ENV=production gulp",
     "postinstall": "bower install",
     "serve": "gulp serve",
-    "lint": "gulp lint"
+    "lint": "gulp lint",
+    "pretest": "npm run lint",
+    "test": "echo \"No tests\""
   },
   "dependencies": {
     "autotrack": "^2.4.1",
