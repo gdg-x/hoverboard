@@ -8,8 +8,11 @@ cache:
 install:
 - yarn
 - cd functions && yarn && cd ..
-script: echo "Deploying!"
-before_deploy: yarn run build:prod
+script:
+- yarn lint
+before_deploy:
+- echo "Deploying!"
+- yarn build:prod
 deploy:
 - provider: firebase
   skip_cleanup: true
