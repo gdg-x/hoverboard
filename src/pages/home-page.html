@@ -1,4 +1,15 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../behaviors/cascaded-behavior.html">
+<link rel="import" href="../behaviors/page-behavior.html">
+<link rel="import" href="../elements/statistics-block.html">
+<link rel="import" href="../elements/featured-people.html">
+{% if videosSessionsUrl %}
+  <link rel="import" href="../elements/featured-videos.html">
+{% endif %}
+{% if callToAction %}
+  <link rel="import" href="../elements/call-to-action.html">
+{% endif %}
 <link rel="import" href="../elements/about-block.html">
 <link rel="import" href="../elements/speakers-block.html">
 <link rel="import" href="../elements/latest-posts-block.html">

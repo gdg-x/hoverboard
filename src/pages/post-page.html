@@ -128,10 +128,16 @@
         ];
       }
 
+<<<<<<< HEAD
       connectedCallback() {
         super.connectedCallback();
         if (!Object.keys(this.postsList).length) return blogActions.fetchList();
       }
+=======
+            this._post = this.posts[postIndex];
+            this._updateHeaderSettings();
+            this.notifyPath('_post.date', new Date(this._post.posted).toLocaleString('{$ dateFormat.locale $}', {$ dateFormat.blog | dump | safe $}));
+>>>>>>> master
 
       _postDataObserver(postId, postsList) {
         if (!this.postsList || !Object.keys(this.postsList).length) return;
@@ -143,6 +149,7 @@
 
       }
 
+<<<<<<< HEAD
       _setHero(postInfo) {
         uiActions.setHero({
           "title": postInfo.title,
@@ -153,6 +160,20 @@
           "fontColor": "#fff"
         });
       }
+=======
+        _updateHeaderSettings: function () {
+          if (this._post) {
+            this.set('app.headerSettings', {
+              backgroundColor: this._post.primaryColor,
+              backgroundImage: this._post.image,
+              fontColor: '#fff',
+              tabBarColor: '#fff',
+              title: this._post.title,
+              subtitle: new Date(this._post.posted).toLocaleString('{$ dateFormat.locale $}', {$ dateFormat.blog | dump | safe $})
+            });
+          }
+        }
+>>>>>>> master
 
       _getDate(date) {
         return new Date(date).toLocaleString('en-us', { month: 'short', day: 'numeric', year: 'numeric' });

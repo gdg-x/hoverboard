@@ -240,6 +240,7 @@
         if (!Object.keys(this.speakers).length) speakersActions.fetchList();
       }
 
+<<<<<<< HEAD
       _openSpeakerDetails(active, speakers, id) {
         if (active && speakers && Object.keys(speakers).length) {
           requestAnimationFrame(() => {
@@ -250,6 +251,45 @@
               }
             }
           )
+=======
+          _selectedSpeaker: Object
+        },
+
+        observers: [
+          '_routePageChanged(routeData.speakerId, speakers)'
+        ],
+
+        listeners: {
+          'iron-overlay-closed': '_resetSpeakerIdParam'
+        },
+
+        _routePageChanged: function (speakerId) {
+          if (speakerId && this.selected) {
+            var tempSpeaker = this._findSpeakerById(speakerId);
+            if (tempSpeaker) {
+              window.requestAnimationFrame(function () {
+                this._selectedSpeaker = tempSpeaker;
+                this.$.speakerDetails.open();
+              }.bind(this));
+            }
+          }
+        },
+
+        _findSpeakerById: function(id) {
+          if (!this.speakers.filter) {
+            return undefined;
+          }
+
+          return this.speakers.filter(function(s) {return s.id === +id;})[0];
+        },
+
+        _getCustomStyleValue: function (value) {
+          return 'background-color: ' + this.getComputedStyleValue('--' + this._generateClass(value)) || this.getComputedStyleValue('--general');
+        },
+
+        _resetSpeakerIdParam: function () {
+          this.set('routeData.speakerId', null);
+>>>>>>> master
         }
       }
     }

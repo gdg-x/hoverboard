@@ -133,6 +133,7 @@
       layout vertical
       relative
     >
+<<<<<<< HEAD
       <iron-icon
         class="session-icon"
         icon="hoverboard:[[session.icon]]"
@@ -144,6 +145,48 @@
         </div>
         <span class="language">[[slice(session.language, 2)]]</span>
       </div>
+=======
+      <paper-card layout flex-auto>
+
+        <iron-image
+          src="[[session.image]]"
+          sizing="cover"
+          fit preload
+        ></iron-image>
+
+        <div class="overlay" relative layout vertical flex>
+          <div class="session-content" flex>
+            <h2 class="session-title">[[session.title]]</h2>
+            <ul class="session-meta">
+              <li hidden$="[[!session.language]]">[[session.language]]</li>
+              <li hidden$="[[!session.complexity]]">[[session.complexity]]</li>
+              <li hidden$="[[!session.track.title]]">[[session.track.title]]</li>
+            </ul>
+          </div>
+
+          <div class="bottom-caption" layout horizontal center justified>
+            <div class="bottom-meta" flex hidden$="[[!_hasBottomMeta(session)]]">
+              <div hidden$="[[!session.tags.length]]" layout horizontal center>
+                <iron-icon icon="tags"></iron-icon>
+                <span>[[_joinArray(session.tags)]]</span>
+              </div>
+
+              <div hidden$="[[!session.type]]" layout horizontal center>
+                <iron-icon icon="info"></iron-icon>
+                <span>[[session.type]]</span>
+              </div>
+
+              <div hidden$="[[!session.videoId]]" layout horizontal center>
+                <iron-icon icon="video"></iron-icon>
+                <span>Recording available</span>
+              </div>
+
+              <div hidden$="[[!session.presentation]]" layout horizontal center>
+                <iron-icon icon="presentation"></iron-icon>
+                <span>Presentation available</span>
+              </div>
+            </div>
+>>>>>>> master
 
       <div class="session-content" flex layout horizontal justified>
         <div class="session-meta">

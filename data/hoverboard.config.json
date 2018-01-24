@@ -165,6 +165,7 @@
         "name": "twitter",
         "url": "https://twitter.com/intent/tweet?text="
       }
+<<<<<<< HEAD
     ]
   },
   "mailto": "devfest@gdg.org.ua",
@@ -188,6 +189,15 @@
         "name": "twitter",
         "label": "Sign-in with Twitter",
         "url": "https://twitter.com"
+=======
+    },
+    "cod": {
+      "title": "Code of Conduct",
+      "headerSettings": {
+        "backgroundColor": "#673ab7",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+>>>>>>> master
       }
     ],
     "allowedProvidersUrl": [

@@ -51,8 +51,103 @@
     </style>
 
     <div class="container">
+<<<<<<< HEAD
       <div class="fab">
         <paper-fab class="back-to-top" icon="hoverboard:up" on-click="backToTop"></paper-fab>
+=======
+      <div class="footer-content">
+        <iron-image
+          class="gdg-logo"
+          src="/images/gdg-logo.svg"
+          sizing="contain"
+          alt="{$ organizer.name $}"
+        ></iron-image>
+        <paper-button class="footer-backtotop" on-tap="scrollToTop" noink>
+          {$ backToTop $}
+          <iron-icon icon="icons:expand-less"></iron-icon>
+        </paper-button>
+      </div>
+      <div class="footer-content footer-links-container">
+        <nav class="navigation">
+          {% for block in footerBlocks %}
+            <div class="link-block-wrapper">
+              <div class="link-block-title">{$ block.title $}</div>
+              <ul class="link-block">
+                {% for link in block.links %}
+                  <li>
+                    <a href="{$ link.url $}" {% if link.newTab %}target="_blank" rel="noopener noreferrer"{% endif %}>{$ link.text $}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          {% endfor %}
+          <div class="link-block-wrapper">
+            <div class="link-block-title">{$ contactUs $}</div>
+            <ul class="link-block">
+              {% for link in contactBlock.links %}
+                <li>
+                  <a href="{$ link.url $}" {% if link.newTab %}target="_blank" rel="noopener noreferrer"{% endif %}>{$ link.text $}</a>
+                </li>
+              {% endfor %}
+            </ul>
+            <div class="icons-wrapper align-pb-block">
+              {% for network in social %}
+                <a class="button-link" href="{$ network.url $}" target="_blank" rel="noopener noreferrer">
+                  <paper-icon-button icon="{$ network.name $}"></paper-icon-button>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="subscribe">
+            <div class="link-block-title">{$ subscribe $}</div>
+            <span>{$ subscribeNote $}</span>
+            <mailchimp-subscribe
+              app="[[app]]"
+              url="{$ mailchimp.url $}"
+              name="{$ mailchimp.name $}"
+            ></mailchimp-subscribe>
+          </div>
+        </nav>
+      </div>
+      <div class="footer-content footer-bottom">
+        <!-- Please do NOT delete next block -->
+        <div class="copyright">
+          &copy; 2016 Based on <a href="https://github.com/gdg-x/hoverboard" target="_blank" rel="noopener noreferrer">Project
+          Hoverboard</a>. Designed and created by <a href="http://o.zasadnyy.com/" target="_blank" rel="noopener noreferrer">Oleh
+          Zasadnyy</a> &middot;
+          <a href="http://lviv.gdg.org.ua" target="_blank" rel="noopener noreferrer">GDG Lviv</a>
+        </div>
+        <div class="gplus">
+          <g:plusone
+            size="medium"
+            width="200"
+            annotation="inline"
+            href="{$ url $}"
+          ></g:plusone>
+        </div>
+
+        <paper-menu-button vertical-align="bottom" horizontal-align="left" share-menu>
+          <paper-icon-button icon="share" class="dropdown-trigger" on-tap="nativeShare"></paper-icon-button>
+          <div class="dropdown-content">
+            <paper-icon-item on-tap="share" share="gplus">
+              <iron-icon icon="gplus" item-icon></iron-icon>
+              Google+
+            </paper-icon-item>
+            <paper-icon-item on-tap="share" share="facebook">
+              <iron-icon icon="facebook" item-icon></iron-icon>
+              Facebook
+            </paper-icon-item>
+            <paper-icon-item on-tap="share" share="twitter">
+              <iron-icon icon="twitter" item-icon></iron-icon>
+              Twitter
+            </paper-icon-item>
+            <paper-icon-item on-tap="share" share="copy">
+              <iron-icon icon="link" item-icon></iron-icon>
+              {$ copyLink $}
+            </paper-icon-item>
+          </div>
+        </paper-menu-button>
+>>>>>>> master
       </div>
       <footer-social layout flex flex-auto horizontal wrap></footer-social>
       <footer-rel layout flex horizontal wrap></footer-rel>

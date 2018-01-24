@@ -49,6 +49,9 @@ const html = require('./gulp-tasks/html.js');
 function build() {
   return new Promise(resolve => {
     let polymerProject = null;
+    let sourcesStreamSplitter = new polymerBuild.HtmlSplitter();
+    let dependenciesStreamSplitter = new polymerBuild.HtmlSplitter();
+
     console.log(`Deleting ${config.build.rootDirectory} and ${config.tempDirectory} directories...`);
 
     del([config.build.rootDirectory, config.tempDirectory])
@@ -66,30 +69,52 @@ function build() {
 
         const sourcesHtmlSplitter = new HtmlSplitter();
         const sourcesStream = polymerProject.sources()
+<<<<<<< HEAD
           .pipe(sourcesHtmlSplitter.split())
           // .pipe(gulpif(/\.js$/, uglify()))
           .pipe(gulpif(/\.(html|css)$/, cssSlam()))
           .pipe(gulpif(/\.html$/, html.minify()))
           // .pipe(gulpif(/\.(png|gif|jpg|svg)$/, images.minify()))
           .pipe(sourcesHtmlSplitter.rejoin());
+=======
+          .pipe(gulpif(/\.(png|gif|jpg|svg)$/, images.minify()))
+          .pipe(sourcesStreamSplitter.split())
+          // splitHtml doesn't split CSS https://github.com/Polymer/polymer-build/issues/32
+          .pipe(gulpif(/\.js$/, uglify()))
+          .pipe(gulpif(/\.(html|css)$/, cssSlam()))
+          .pipe(gulpif(/\.html$/, html.minify()))
+          .pipe(sourcesStreamSplitter.rejoin());
+>>>>>>> master
 
         const dependenciesHtmlSplitter = new HtmlSplitter();
         const dependenciesStream = polymerProject.dependencies()
+<<<<<<< HEAD
           .pipe(dependenciesHtmlSplitter.split())
           // Doesn't work for now
           // .pipe(gulpif(/\.js$/, uglify()))
           .pipe(gulpif(/\.(html|css)$/, cssSlam()))
           .pipe(gulpif(/\.html$/, html.minify()))
           .pipe(dependenciesHtmlSplitter.rejoin());
+=======
+          .pipe(dependenciesStreamSplitter.split())
+          .pipe(gulpif(/\.js$/, uglify()))
+          .pipe(gulpif(/\.(html|css)$/, cssSlam()))
+          .pipe(gulpif(/\.html$/, html.minify()))
+          .pipe(dependenciesStreamSplitter.rejoin());
+>>>>>>> master
 
         let buildStream = mergeStream(sourcesStream, dependenciesStream)
           .once('data', () => {
             console.log('Analyzing and optimizing...');
           });
 
+<<<<<<< HEAD
         buildStream = buildStream.pipe(polymerProject.bundler({
           stripComments: true
         }));
+=======
+        buildStream = buildStream.pipe(polymerProject.bundler());
+>>>>>>> master
         buildStream = buildStream.pipe(gulp.dest(config.build.rootDirectory));
         return waitFor(buildStream);
       })
@@ -132,6 +157,14 @@ function waitFor(stream) {
   });
 }
 
+function copyAndReload(file) {
+  const dest = prependPath(config.tempDirectory, file.substring(0, file.lastIndexOf('/')))		
+  
+  gulp.src(file).pipe(gulp.dest(dest));
+
+  browserSync.reload();
+}
+
 function reload(done) {
   browserSync.reload();
   done();
@@ -171,7 +204,11 @@ gulp.task('serve', gulp.series(compileTemplate, () => {
   gulp.watch([
     'data/**/*.{markdown,md}',
     'images/**/*.{png,gif,jpg,svg}',
+<<<<<<< HEAD
   ], gulp.series(copyStatic, reload));
+=======
+  ]).on('change', copyAndReload);
+>>>>>>> master
 
   gulp.watch([
     'data/**/*.json',

@@ -1,0 +1,196 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<link rel="import" href="../../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
+
+<dom-module id="app-data">
+  <template>
+    <iron-ajax auto url="[[postsSource]]" handle-as="json" on-response="_reversePosts"></iron-ajax>
+
+    <firebase-document
+      id="querySpeakers"
+      app-name="{$ firebase.name $}"
+      path="/speakers"
+      data="{{_firebaseSpeakersRaw}}">
+    </firebase-document>
+
+    <app-indexeddb-mirror
+      session="{$ firebase.indexedDbSession $}"
+      key="speakers"
+      data="{{_firebaseSpeakersRaw}}"
+      persisted-data="{{_speakersRaw}}">
+    </app-indexeddb-mirror>
+
+    <firebase-document
+      id="querySessions"
+      app-name="{$ firebase.name $}"
+      path="/sessions"
+      data="{{_firebaseSessions}}">
+    </firebase-document>
+
+    <app-indexeddb-mirror
+      session="{$ firebase.indexedDbSession $}"
+      key="sessions"
+      data="{{_firebaseSessions}}"
+      persisted-data="{{_sessionsRaw}}">
+    </app-indexeddb-mirror>
+
+    <firebase-document
+      id="querySchedule"
+      app-name="{$ firebase.name $}"
+      path="/schedule"
+      data="{{_firebaseSchedule}}">
+    </firebase-document>
+
+    <app-indexeddb-mirror
+      session="{$ firebase.indexedDbSession $}"
+      key="schedule"
+      data="{{_firebaseSchedule}}"
+      persisted-data="{{_scheduleRaw}}">
+    </app-indexeddb-mirror>
+
+    <firebase-query
+      id="queryPartners"
+      app-name="{$ firebase.name $}"
+      path="/partners"
+      data="{{_firebasePartners}}">
+    </firebase-query>
+
+    <app-indexeddb-mirror
+      session="{$ firebase.indexedDbSession $}"
+      key="partners"
+      data="{{_firebasePartners}}"
+      persisted-data="{{app.partners}}">
+    </app-indexeddb-mirror>
+
+    <!-- Save requests if we do not display videos -->
+    {% if videosSessionsUrl %}
+      <firebase-document
+        id="queryVideos"
+        app-name="{$ firebase.name $}"
+        path="/videos"
+        data="{{_firebaseVideos}}">
+      </firebase-document>
+
+      <app-indexeddb-mirror
+        session="{$ firebase.indexedDbSession $}"
+        key="videos"
+        data="{{_firebaseVideos}}"
+        persisted-data="{{app.videos}}">
+      </app-indexeddb-mirror>
+    {% endif %}
+
+    <firebase-query
+      id="queryTeam"
+      app-name="{$ firebase.name $}"
+      path="/team"
+      data="{{_firebaseTeam}}">
+    </firebase-query>
+
+    <app-indexeddb-mirror
+      session="{$ firebase.indexedDbSession $}"
+      key="team"
+      data="{{_firebaseTeam}}"
+      persisted-data="{{app.team}}">
+    </app-indexeddb-mirror>
+
+    <firebase-document
+      id="queryTickets"
+      app-name="{$ firebase.name $}"
+      path="/tickets"
+      data="{{_firebaseTickets}}">
+    </firebase-document>
+
+    <app-indexeddb-mirror
+      session="{$ firebase.indexedDbSession $}"
+      key="team"
+      data="{{_firebaseTickets}}"
+      persisted-data="{{app.tickets}}">
+    </app-indexeddb-mirror>
+
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        is: 'app-data',
+
+        properties: {
+          app: {
+            type: Object,
+            notify: true
+          },
+
+          postsSource: {
+            type: String,
+            value: 'data/blog.json'
+          },
+
+          posts: {
+            type: Array,
+            notify: true
+          },
+
+          speakers: {
+            type: Array,
+            notify: true
+          },
+
+          sessions: {
+            type: Array,
+            notify: true
+          },
+
+          schedule: {
+            type: Array,
+            notify: true
+          },
+
+          _speakersRaw: {
+            type: Object
+          },
+
+          _sessionsRaw: {
+            type: Object
+          },
+
+          _scheduleRaw: {
+            type: Array
+          }
+        },
+
+        observers: [
+          '_generateSchedule(_speakersRaw, _sessionsRaw, _scheduleRaw)'
+        ],
+
+        ready: function () {
+          this.app = this.app || {};
+        },
+
+      _generateSchedule: function () {
+        var myWorker = new Worker('./scripts/helper/schedule-webworker.js');
+
+        myWorker.postMessage({
+          speakers: this._speakersRaw,
+          sessions: this._sessionsRaw,
+          schedule: this._scheduleRaw
+        });
+
+        myWorker.addEventListener('message', function(e) {
+          this.set('schedule', e.data.schedule);
+          this.set('sessions', e.data.sessions);
+          this.set('speakers', e.data.speakers);
+          myWorker.terminate();
+        }.bind(this), false);
+
+      },
+
+      _reversePosts: function (response) {
+        this.posts = response.detail.response.reverse();
+      }
+    });
+
+  }());
+  </script>
+</dom-module>
