@@ -12,7 +12,7 @@
 ### Setup
 :book: [Full documentation](/docs/).
 
-##### Docker based development env
+##### Docker based development envi
 
 If you don't want to bother with the dependencies, you can develop in the docker container.
 
