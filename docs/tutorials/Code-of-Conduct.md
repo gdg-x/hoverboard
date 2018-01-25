@@ -1,6 +1,6 @@
 ## Contributor Code of Conduct
 
-As contributors and maintainers of the Hoverboard-v2 project, we pledge to respect everyone who contributes by posting issues, updating documentation, submitting pull requests, providing feedback in comments, creating issues and any other activities.
+As contributors and maintainers of the Hoverboard project, we pledge to respect everyone who contributes by posting issues, updating documentation, submitting pull requests, providing feedback in comments, creating issues and any other activities.
 
 Communication must be constructive and never resort to personal attacks, trolling, public or private harassment, insults, or other unprofessional conduct.
 
