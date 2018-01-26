@@ -6,7 +6,7 @@
     "gulp": "gulp",
     "bower": "bower",
     "build": "gulp",
-    "postinstall": "bower install",
+    "postinstall": "bower install && opencollective postinstall",
     "serve": "gulp serve"
   },
   "devDependencies": {
@@ -32,5 +32,13 @@
   "engines": {
     "node": ">=8.1"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "opencollective": "^1.0.3"
+  },
+  "collective": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/hoverboard",
+    "logo": "https://opencollective.com/hoverboard/logo.txt"
+  }
 }
