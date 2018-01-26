@@ -96,14 +96,15 @@ Awesome! Contributions of all kinds are greatly appreciated. To help smoothen th
 Read the full version [Code of Conduct](/docs/tutorials/Code-of-Conduct.md).
 
 ## Contributors
-
-See [list of contributors](https://github.com/gdg-x/hoverboard/graphs/contributors).
-
 __Maintainer:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
 
-# Sponsoring
+This project exists thanks to all the [people who contribute](https://github.com/gdg-x/hoverboard/graphs/contributors). [[Contribute](CONTRIBUTING.md)].
+
+<a href="graphs/contributors"><img src="https://opencollective.com/hoverboard/contributors.svg?width=890" /></a>
+
+## Sponsoring
 Most of the core team members, hoverboard contributors and contributors in the ecosystem do this open source work in their free time. If you like this project and it makes your life easier, please donate.  
-<a href="https://opencollective.com/hoverboard"> <img src="https://opencollective.com/hoverboard/tiers/backer.svg"> </a>
+<a href="https://opencollective.com/hoverboard#backers" target="_blank"><img src="https://opencollective.com/hoverboard/backers.svg?width=890"></a>
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard?ref=badge_large)
