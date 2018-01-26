@@ -149,9 +149,16 @@ Feel free to send PR. If you have any questions, feel free to contact
 
 
 ### Contributors :sparkles:
-See [list of contributors](https://github.com/gdg-x/hoverboard/graphs/contributors).
-
 __Maintainer:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
+
+This project exists thanks to all the [people who contribute](https://github.com/gdg-x/hoverboard/graphs/contributors). [[Contribute](CONTRIBUTING.md)].
+
+<a href="graphs/contributors"><img src="https://opencollective.com/hoverboard/contributors.svg?width=890" /></a>
+
+
+### Sponsoring
+Most of the core team members, hoverboard contributors and contributors in the ecosystem do this open source work in their free time. If you like this project and it makes your life easier, please donate.  
+<a href="https://opencollective.com/hoverboard#backers" target="_blank"><img src="https://opencollective.com/hoverboard/backers.svg?width=890"></a>
 
 
 ###### The GDG App, GDG[x] are not endorsed and/or supported by Google, the corporation.
