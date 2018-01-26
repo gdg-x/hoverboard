@@ -2,7 +2,7 @@
 
 # Project Hoverboard
 
-[![Join the chat at https://gitter.im/gdg-x/hoverboard](https://badges.gitter.im/gdg-x/hoverboard.svg)](https://gitter.im/gdg-x/hoverboard?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Backers on Open Collective](https://opencollective.com/hoverboard/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/hoverboard/sponsors/badge.svg)](#sponsors) [![Join the chat at https://gitter.im/gdg-x/hoverboard](https://badges.gitter.im/gdg-x/hoverboard.svg)](https://gitter.im/gdg-x/hoverboard?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard?ref=badge_shield)
 
 > Project Hoverboard is the next generation conference website template after
@@ -155,6 +155,35 @@ __Maintainer:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](
 
 
 ###### The GDG App, GDG[x] are not endorsed and/or supported by Google, the corporation.
+
+
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="graphs/contributors"><img src="https://opencollective.com/hoverboard/contributors.svg?width=890" /></a>
+
+
+### Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/hoverboard#backer)]
+
+<a href="https://opencollective.com/hoverboard#backers" target="_blank"><img src="https://opencollective.com/hoverboard/backers.svg?width=890"></a>
+
+
+### Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/hoverboard#sponsor)]
+
+<a href="https://opencollective.com/hoverboard/sponsor/0/website" target="_blank"><img src="https://opencollective.com/hoverboard/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/hoverboard/sponsor/1/website" target="_blank"><img src="https://opencollective.com/hoverboard/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/hoverboard/sponsor/2/website" target="_blank"><img src="https://opencollective.com/hoverboard/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/hoverboard/sponsor/3/website" target="_blank"><img src="https://opencollective.com/hoverboard/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/hoverboard/sponsor/4/website" target="_blank"><img src="https://opencollective.com/hoverboard/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/hoverboard/sponsor/5/website" target="_blank"><img src="https://opencollective.com/hoverboard/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/hoverboard/sponsor/6/website" target="_blank"><img src="https://opencollective.com/hoverboard/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/hoverboard/sponsor/7/website" target="_blank"><img src="https://opencollective.com/hoverboard/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/hoverboard/sponsor/8/website" target="_blank"><img src="https://opencollective.com/hoverboard/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/hoverboard/sponsor/9/website" target="_blank"><img src="https://opencollective.com/hoverboard/sponsor/9/avatar.svg"></a>
+
 
 
 ### License
