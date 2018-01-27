@@ -333,6 +333,7 @@
 
       constructor() {
         super();
+        Polymer.setPassiveTouchGestures(true);
         window.performance && performance.mark && performance.mark('hoverboard-app.created');
         this._removeQueryParams = this._removeQueryParams.bind(this);
       }
