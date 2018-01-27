@@ -23,7 +23,7 @@
     "max-len": ["error", { "code": 100 }],
     "object-curly-spacing": ["error", "always"],
     "space-before-function-paren": ["error", {"anonymous": "always", "named": "never", "asyncArrow": "always"}],
-    "linebreak-style": ["error", "windows"]
+    "linebreak-style": 0
   },
   "globals": {
     "Polymer": true,
