@@ -194,11 +194,11 @@
         let isMouseDown = false;
         const videoListElement = this.$.videos;
 
-        Polymer.Gestures.addListener(this.$.videos, 'track', (e) => {
+        Polymer.Gestures.addListener(this.$.videos, 'track', (event) => {
           if (!isMouseDown) return;
 
           const videoListWidth = this.getVideoListWidth();
-          distancePosition = (e.detail.x - startPosition) + currentPosition;
+          distancePosition = (event.detail.x - startPosition) + currentPosition;
 
           if (distancePosition < 0 && -distancePosition < (videoListWidth + 100 - window.innerWidth)) {
             this.transformVideoList(videoListElement, distancePosition);
