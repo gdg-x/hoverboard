@@ -48,6 +48,7 @@ Our goal is to allow event organizers to set up professional conference website 
 ### Docker-based development environment
 
 If you don't want to bother with the dependencies, you can use the docker container for development.
+
 :book: Read more in [docker docs](/docs/tutorials/docker.md).
 
 ## Updating
