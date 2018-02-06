@@ -45,15 +45,9 @@ Our goal is to allow event organizers to set up professional conference website 
 
 :book: Read the [Full Setup Guide](/docs/).
 
-#### Docker-based development environment
+### Docker-based development environment
 
 If you don't want to bother with the dependencies, you can use the docker container for development.
-
-Build the docker image:
-  `docker build -t hoverboard .`
-
-and execute the commands associated to the docker env in the following documentation:
-
 :book: Read more in [docker docs](/docs/tutorials/docker.md).
 
 ## Updating
