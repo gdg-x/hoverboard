@@ -7,6 +7,8 @@
     "bower": "bower",
     "build": "gulp",
     "build:prod": "cross-env BUILD_ENV=production gulp",
+    "deploy": "gulp && firebase deploy",
+    "deploy:prod": "cross-env BUILD_ENV=production gulp && firebase deploy",
     "postinstall": "bower install",
     "serve": "gulp serve",
     "lint": "gulp lint",
