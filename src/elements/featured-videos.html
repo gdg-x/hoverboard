@@ -238,15 +238,15 @@
           cardWidth,
           videosLength,
           slideIndex,
-          maxSlide,
+          maxRightPosition,
         } = this.getVideosDetails();
 
         this._currentIndex = slideIndex > this._currentIndex ? this._currentIndex : slideIndex;
 
         if (this._currentIndex >= 0 && this._currentIndex < videosLength - 1) {
           let newX = -(this._currentIndex + 1) * cardWidth;
-          if (newX < maxSlide) {
-            newX = maxSlide;
+          if (newX < maxRightPosition) {
+            newX = maxRightPosition;
           }
           this.transformVideoList(this.$.videos, newX);
           this._currentIndex++;
@@ -262,7 +262,7 @@
           .getPropertyValue('width'));
         const videosWidth = parseInt(getComputedStyle(this.$.videos, null)
           .getPropertyValue('width'));
-        const maxSlide = -(videosWidth - videosContainerWidth) - 16;
+        const maxRightPosition = -(videosWidth - videosContainerWidth) - 16;
         const currentPosition = parseInt(getComputedStyle(this.$.videos, null)
           .getPropertyValue('transform').split(',')[4]);
         const slideIndex = -(Math.floor(currentPosition / cardWidth));
@@ -271,7 +271,7 @@
           cardWidth,
           videosLength,
           slideIndex,
-          maxSlide,
+          maxRightPosition,
         };
       }
 
