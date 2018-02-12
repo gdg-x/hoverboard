@@ -101,7 +101,7 @@
         <h1 class="container-title">{$ featuredVideos.title $}</h1>
       </div>
 
-      <div class="video-list" layout flex horizontal>
+      <div id="videoList" class="video-list" layout flex horizontal>
         <paper-icon-button
           class="last-video slide-icon"
           icon="hoverboard:chevron-left"
@@ -238,12 +238,16 @@
           cardWidth,
           videosLength,
           slideIndex,
+          maxRightPosition,
         } = this.getVideosDetails();
 
-        this._currentIndex = slideIndex > this._currentIndex ? slideIndex : this._currentIndex;
+        this._currentIndex = slideIndex > this._currentIndex ? this._currentIndex : slideIndex;
 
         if (this._currentIndex >= 0 && this._currentIndex < videosLength - 1) {
-          const newX = -(this._currentIndex + 1) * cardWidth;
+          let newX = -(this._currentIndex + 1) * cardWidth;
+          if (newX < maxRightPosition) {
+            newX = maxRightPosition;
+          }
           this.transformVideoList(this.$.videos, newX);
           this._currentIndex++;
         }
@@ -254,6 +258,11 @@
         const cardRect = videos[videos.length - 1].getBoundingClientRect();
         const cardWidth = cardRect.width;
         const videosLength = videos.length;
+        const videosContainerWidth = parseInt(getComputedStyle(this.$.videoList, null)
+          .getPropertyValue('width'));
+        const videosWidth = parseInt(getComputedStyle(this.$.videos, null)
+          .getPropertyValue('width'));
+        const maxRightPosition = -(videosWidth - videosContainerWidth) - 16;
         const currentPosition = parseInt(getComputedStyle(this.$.videos, null)
           .getPropertyValue('transform').split(',')[4]);
         const slideIndex = -(Math.floor(currentPosition / cardWidth));
@@ -262,6 +271,7 @@
           cardWidth,
           videosLength,
           slideIndex,
+          maxRightPosition,
         };
       }
 
