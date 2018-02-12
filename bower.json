@@ -18,7 +18,7 @@
     "paper-input": "PolymerElements/paper-input#^2.0.0",
     "paper-fab": "PolymerElements/paper-fab#^2.0.0",
     "plastic-image": "mlisook/plastic-image#^1.0.4",
-    "polymer": "Polymer/polymer#^2.0.1",
+    "polymer": "Polymer/polymer#^2.4.0",
     "iron-icon": "PolymerElements/iron-icon#^2.0.0",
     "paper-button": "PolymerElements/paper-button#^2.0.0",
     "iron-lazy-pages": "TimvdLippe/iron-lazy-pages#^2.0.2",

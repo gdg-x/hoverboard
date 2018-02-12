@@ -43,7 +43,13 @@ Our goal is to allow event organizers to set up professional conference website 
 6. Deploy
    * `npm run deploy` or `yarn deploy`
 
-Read the [Full Setup Guide](/docs/).
+:book: Read the [Full Setup Guide](/docs/).
+
+### Docker-based development environment
+
+If you don't want to bother with the dependencies, you can use the docker container for development.
+
+:book: Read more in [docker docs](/docs/tutorials/docker.md).
 
 ## Updating
 Here is a git workflow for updating your fork (or downloaded copy) to the latest version:
