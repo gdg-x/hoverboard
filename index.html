@@ -124,7 +124,6 @@
     }
 
     /* styling for render while resources are loading */
-
     hoverboard-app[unresolved] {
       padding: 0 16px;
       display: block;
@@ -150,6 +149,13 @@
 
 <script>
   window.performance && performance.mark && performance.mark('index.html');
+
+  window.onload = function () {
+    var indexRenderTime = window.measureDuration('index.html');
+    if (indexRenderTime) {
+      ga('send', 'timing', 'index.html', 'render', indexRenderTime);
+    }
+  };
 </script>
 
 </body>
