@@ -1,10 +1,22 @@
 {
   "name": "hoverboard-functions",
   "description": "Hoverboard serverless functions",
+  "private": true,
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/babel src --out-dir lib --source-maps"
+  },
   "dependencies": {
+    "@google-cloud/storage": "^1.5.2",
+    "child-process-promise": "^2.2.1",
     "firebase-admin": "^5.8.1",
     "firebase-functions": "^0.8.1",
+    "mkdirp-promise": "^5.0.1",
     "moment": "^2.20.1"
   },
-  "private": true
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.38",
+    "@babel/core": "^7.0.0-beta.38",
+    "@babel/preset-env": "^7.0.0-beta.38"
+  }
 }
