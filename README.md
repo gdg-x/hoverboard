@@ -120,7 +120,7 @@ pull request, so we can include you in this list.
 | [Mobile Era 2017](https://mobileera.rocks)                      | [DevFest Nantes 2017](https://devfest.gdgnantes.com)                        | [GDG DevFest Hamburg 2017](https://hamburg.devfest.de/)     |
 | [GDG DevFest Baroda 2017](https://devfest.gdgbaroda.com/)       | [GDG DevFest Ahmedabad 2017](http://devfest.gdgahmedabad.com/)              | [GDG DevFest Sri Lanka 2017](https://devfest.gdgsrilanka.org/)     |
 | [GDG DevFest The Netherlands 2017](https://devfest.nl/)         | [GDG DevFest Manaus](https://devfestmanaus.com.br/)                         | [GDG DevFest Taipei 2017](https://devfest.gdg-taipei.org)   |
-| [2017 Valley DevFest](https://valleydevfest.com)                |||
+| [2017 Valley DevFest](https://valleydevfest.com)                | [GDG DevFest Pisa 0.1](https://devfest.gdgpisa.it/)                         ||
 
 ### Roadmap :rocket:
 :x: Admin panel    
