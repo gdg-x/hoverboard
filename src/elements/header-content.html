@@ -97,7 +97,8 @@
       }
 
       .action-buttons {
-        margin-top: 40px;
+        margin-top: 10px;
+        font-size: 0.7em;
       }
 
       paper-button {
@@ -140,7 +141,7 @@
           font-size: 20px;
           font-weight: 600;
           color:#F55A56;
-          font-family: 'Barlow Semi Condensed', 'Roboto Condensed';
+          font-family: 'Barlow Semi Condensed', 'Roboto Condensed', sans-serif;
         }
 
         .motto {
@@ -169,7 +170,12 @@
                 <h2 class="dates">{$ dates $}, {$ locationAddressShort $}</h2>
                 <h1 class="motto">{$ motto $}</h1>
                 <h3 class="hashtag"> {$ hashtag $}</h3>
+
+                <div class="action-buttons">
+                    <paper-button class="primary" on-tap="_scrollToTickets" raised>{$ buyTicket $}</paper-button>
+                </div>
               </div>
+
               {% if pages.home.headerSettings.video %}
                 <div class="open-video" on-tap="_openVideo">
                   <iron-icon icon="play"></iron-icon>
@@ -234,7 +240,6 @@
             target: HOVERBOARD.Elements.Scroller
           });
         }
-
       });
 
     }());

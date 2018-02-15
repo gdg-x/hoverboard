@@ -129,6 +129,11 @@
         font-size: 14px;
         cursor: pointer;
       }
+
+      .noBackGround{
+        color: #4A4A4A;
+        background-color: transparent; border : 1px solid #4A4A4A;
+      }
     </style>
 
     <app-toolbar id="mainToolbar">
@@ -184,11 +189,14 @@
           </div>
         </paper-menu-button>
 
-
         <div class="action-button-wrapper" hidden$="[[app.isPhoneSize]]" layout horizontal center-center>
           <a href="{$ cfpUrl $}" target="_blank" rel="noopener noreferrer" on-tap="_trackCfpClick">
-            <paper-button class="action-button">{$ cfp $}</paper-button>
+            <paper-button class="action-button noBackGround">{$ cfp $}</paper-button>
           </a>
+        </div>
+
+        <div class="action-button-wrapper" hidden$="[[app.isPhoneSize]]" layout horizontal center-center>
+            <paper-button class="action-button" on-tap="_scrollToTickets">{$ buyTicket $}</paper-button>
         </div>
 
       </div>
@@ -244,6 +252,15 @@
 
         _trackCfpClick: function () {
           HOVERBOARD.Analytics.trackEvent('cfp', 'cfp_click', 'toolbar');
+        },
+
+        _scrollToTickets: function () {
+          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'header');
+          Polymer.AppLayout.scroll({
+            top: HOVERBOARD.Elements.Tickets.getBoundingClientRect().top,
+            behavior: 'smooth',
+            target: HOVERBOARD.Elements.Scroller
+          });
         }
 
       });

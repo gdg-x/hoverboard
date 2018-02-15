@@ -17,8 +17,8 @@
         --iron-icon-fill-color: var(--text-primary-color);
         --paper-card-background-color: #FFFFFF;
         display: block;
-        background: var(--default-primary-color);
-        color: var(--text-primary-color);
+        background: var(--tertiary-background-color);
+        color: var(--primary-text-color);
         text-align: center;
       }
 
@@ -33,19 +33,19 @@
       }
 
       paper-button {
-        font-size: 0.9em;
+        font-size: 0.95em;
       }
 
       .details {
         margin: 10px auto 0;
-        font-size: 14px;
+        font-size: 16px;
         max-width: 600px;
       }
 
       .buy-button {
         margin-top: 30px;
-        background: #fff;
-        color: var(--primary-text-color);
+        background: var(--default-primary-color);
+        color: var(--text-primary-color);
       }
 
       paper-dialog {
@@ -84,7 +84,7 @@
       </div>
       <div class="details">{$ ticketsDetails $}</div>
       <a href="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
-        <paper-button class="buy-button" raised>{$ buyTicket $}</paper-button>
+        <paper-button class="buy-button" raised>{$ accessBuyTicket $}</paper-button>
       </a>
     </div>
 

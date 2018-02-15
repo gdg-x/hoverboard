@@ -18,7 +18,7 @@
         @apply(--shadow-elevation-2dp);
         @apply(--shadow-transition);
         --ticket-color: #fff;
-        --background-color: var(--default-primary-color);
+        --background-color: var(--tertiary-background-color);
 
         background: var(--ticket-color);
         position: relative;
@@ -63,7 +63,7 @@
         @apply(--layout-vertical);
         @apply(--layout-center-center);
         width: 50px;
-        border-left: 2px dotted var(--background-color);
+        border-left: 2px dotted var(--default-primary-color);;
         overflow: hidden;
       }
 
@@ -130,7 +130,6 @@
         <div class="divider">
           <iron-icon icon="icons:star"></iron-icon>
         </div>
-        <div class="dates">[[starts]] - [[ends]]</div>
         <div class="additional-info" hidden$="[[!info]]">[[info]]</div>
       </div>
     </div>

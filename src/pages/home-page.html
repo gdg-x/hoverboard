@@ -40,11 +40,12 @@
     {% if callToPaper %}
       <call-to-paper app="{{app}}"></call-to-paper>
     {% endif %}
+    <tickets-block app="{{app}}" cascaded></tickets-block>
     {% if gallery %}
       <photo-block app="{{app}}"></photo-block>
     {% endif %}
-    <map-block app="{{app}}" selected="{{selected}}"></map-block>
     <logos-block app="{{app}}" cascaded></logos-block>
+    <map-block app="{{app}}" selected="{{selected}}"></map-block>
     <footer-block app="{{app}}"></footer-block>
 
   </template>
