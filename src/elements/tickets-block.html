@@ -21,12 +21,20 @@
       }
 
       .ticket-item {
-        margin: 8px;
-        padding: 16px 24px;
-        max-width: 200px;
+        margin: 16px 8px;
+        padding: 24px;
         width: 100%;
         text-align: center;
-        border: 1px solid var(--divider-color);
+        color: var(--primary-text-color);
+      }
+
+      .ticket-item[in-demand] {
+        transform: scale(1.1);
+        box-shadow: var(--box-shadow-primary-color);
+      }
+
+      .ticket-item[in-demand]:hover {
+        box-shadow: var(--box-shadow-primary-color-hover);
       }
 
       .type-description {
@@ -34,30 +42,26 @@
         color: var(--secondary-text-color);
       }
 
-      .ticket-dates:not(:first-of-type):not(:empty):before {
-        content: ' - ';
-      }
-
-      .ticket-dates:not(:empty) + .ticket-info:before {
-        content: '/ ';
+      .ticket-price-wrapper {
+        color: var(--default-primary-color);
+        white-space: nowrap;
       }
 
       .price {
         margin: 16px auto;
         font-size: 40px;
-        color: var(--default-primary-color);
-        white-space: nowrap;
       }
 
       .price[sold-out] {
-        opacity: 0.4;
+        opacity: 0.1;
         text-decoration: line-through;
       }
 
       .sold-out {
-        margin-right: 8px;
         display: none;
-        color: var(--default-primary-color);
+        position: absolute;
+        font-size: 32px;
+        color: var(--accent-color);
       }
 
       .additional-info {
@@ -70,6 +74,16 @@
       .buy-button {
         margin-top: 24px;
       }
+
+      @media (min-width: 640px) {
+        .ticket-item {
+          max-width: 200px;
+        }
+
+        .ticket-item[in-demand] {
+          transform: scale(1.15);
+        }
+      }
     </style>
 
     <div class="tickets-wrapper container">
@@ -77,32 +91,45 @@
 
       <div class="tickets" layout horizontal wrap center-justified>
         <template is="dom-repeat" items="[[tickets.elements]]" as="ticket">
-          <div class="ticket-item">
+          <a
+            class="ticket-item card"
+            href$="[[tickets.url]]"
+            target="_blank"
+            rel="noopener noreferrer"
+            in-demand$="[[ticket.inDemand]]"
+            ga-on="click"
+            ga-event-category="ticket"
+            ga-event-action="buy_click"
+            ga-event-label$="[[ticket.name]]"
+          >
             <h3>[[ticket.name]]</h3>
             <div class="ticket-price-wrapper" layout horizontal center-center>
-              <div class="sold-out" block$="[[ticket.soldOut]]">{$ ticketsBlock.soldOut $}</div>
               <div class="price" sold-out$="[[ticket.soldOut]]">
                 <span class="currency">[[ticket.currency]][[ticket.price]]</span>
               </div>
+              <div class="sold-out" block$="[[ticket.soldOut]]">{$ ticketsBlock.soldOut $}</div>
             </div>
             <div class="type-description">
-              <span class="ticket-dates">[[ticket.starts]] </span>
-              <span class="ticket-dates">[[ticket.ends]]</span>
-              <span class="ticket-info">[[ticket.info]]</span>
+              <div class="ticket-dates" hidden$="[[!ticket.starts]]">[[ticket.starts]] - [[ticket.ends]]</div>
+              <div class="ticket-info">[[ticket.info]]</div>
             </div>
-          </div>
+          </a>
         </template>
       </div>
 
       <div class="additional-info">*{$ ticketsBlock.ticketsDetails $}</div>
 
-      <a href$="[[tickets.url]]"
-         target="_blank"
-         rel="noopener noreferrer"
-         ga-on="click"
-         ga-event-category="ticket button"
-         ga-event-action="buy_click">
-        <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>
+      <a
+        href$="[[tickets.url]]"
+        target="_blank"
+        rel="noopener noreferrer"
+        ga-on="click"
+        ga-event-category="ticket button"
+        ga-event-action="buy_click">
+        <paper-button class="buy-button" primary
+        >
+          {$ buyTicket $}
+        </paper-button>
       </a>
     </div>
 
