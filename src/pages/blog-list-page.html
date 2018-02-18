@@ -79,6 +79,7 @@
       background-image="{$ heroSettings.blog.background.image $}"
       background-color="{$ heroSettings.blog.background.color $}"
       font-color="{$ heroSettings.blog.fontColor $}"
+      active="[[active]]"
     >
       <div class="hero-title highlight-font">{$ heroSettings.blog.title $}</div>
       <p class="hero-description">{$ heroSettings.blog.description $}</p>
@@ -137,6 +138,7 @@
 
       static get properties() {
         return {
+          active: Boolean,
           postsSource: {
             type: Object,
             statePath: 'blog',

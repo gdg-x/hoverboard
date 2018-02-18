@@ -43,8 +43,13 @@
       :host {
         display: block;
         position: relative;
-        min-height: 100vh;
+        min-height: 100%;
+        height: 100%;
         --paper-menu-button-dropdown-background: #fff;
+        --app-drawer-content-container: {
+          display: flex;
+          flex-direction: column;
+        };
       }
 
       app-drawer app-toolbar {
@@ -90,27 +95,27 @@
         --iron-image-height: 32px;
       }
 
+      app-header-layout {
+        margin-top: -1px;
+      }
+
       app-header.remove-shadow::before {
         opacity: 0;
       }
 
-      /*app-header {*/
-        /*--app-header-background-front-layer: {*/
-          /*background-color: var(--primary-background-color);*/
-          /*transition: opacity var(--animation);*/
-        /*};*/
-      /*}*/
-
       iron-lazy-pages {
         background-color: #fff;
-        min-height: 100vh;
+        min-height: 100%;
+        height: 100%;
+      }
+
+      .drawer-content iron-icon {
+        --iron-icon-width: 14px;
+        margin-left: 6px;
       }
 
       .buy-ticket {
-        display: block;
-        position: absolute;
-        bottom: 120px;
-        padding: 16px;
+        padding: 16px 24px;
       }
 
       @media (min-width: 640px) {
@@ -144,33 +149,42 @@
           <h3 class="location">{$ location.short $}</h3>
         </app-toolbar>
 
-        <iron-selector
-          class="drawer-list"
-          selected="[[route.route]]"
-          attr-for-selected="path"
-          selected-class="selected"
-          role="navigation"
-        >
-          {% for nav in navigation %}
-          <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer">{$ nav.title $}</a>
-          {% endfor %}
-        </iron-selector>
+        <div class="drawer-content" layout vertical justified flex>
+          <iron-selector
+            class="drawer-list"
+            selected="[[route.route]]"
+            attr-for-selected="path"
+            selected-class="selected"
+            role="navigation"
+          >
+            {% for nav in navigation %}
+            <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer">{$ nav.title $}</a>
+            {% endfor %}
+          </iron-selector>
 
-        <a href$="[[tickets.url]]" target="_blank" class="buy-ticket" rel="noopener noreferrer" ga-on="click"
-           ga-event-category="ticket button" ga-event-action="buy_click">
-          <span>{$ buyTicket $}</span>
-          <iron-icon icon="hoverboard:open-in-new"></iron-icon>
-        </a>
+          <a
+            class="buy-ticket"
+            href$="[[tickets.url]]"
+            target="_blank"
+            rel="noopener noreferrer"
+            ga-on="click"
+            ga-event-category="ticket button"
+            ga-event-action="buy_click"
+            layout horizontal center
+          >
+            <span>{$ buyTicket $}</span>
+            <iron-icon icon="hoverboard:open-in-new"></iron-icon>
+          </a>
+        </div>
 
       </app-drawer>
 
-      <app-header-layout id="headerLayout">
+      <app-header-layout id="headerLayout" fullbleed>
 
         <app-header
           id="header"
           slot="header"
           effects="waterfall transparent-scroll"
-          transparent="[[_isHeaderTransparent()]]"
           condenses fixed
         >
           <header-toolbar></header-toolbar>
@@ -211,7 +225,6 @@
           ></faq-page>
         </iron-lazy-pages>
 
-        <footer-block></footer-block>
       </app-header-layout>
     </app-drawer-layout>
 
@@ -397,10 +410,6 @@
 
       _toggleHeaderShadow(e) {
         this.$.header.classList.toggle('remove-shadow', e.detail.sticked);
-      }
-
-      _isHeaderTransparent() {
-
       }
     }
 

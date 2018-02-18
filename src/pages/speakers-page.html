@@ -18,12 +18,14 @@
 
       :host {
         display: block;
+        height: 100%;
       }
 
       .container {
         display: grid;
         grid-template-columns: 1fr;
         grid-gap: 16px;
+        min-height: 80%;
       }
 
       .speaker {
@@ -147,6 +149,7 @@
       background-image="{$ heroSettings.speakers.background.image $}"
       background-color="{$ heroSettings.speakers.background.color $}"
       font-color="{$ heroSettings.speakers.fontColor $}"
+      active="[[active]]"
     >
       <div class="hero-title highlight-font">{$ heroSettings.speakers.title $}</div>
       <p class="hero-description">{$ heroSettings.speakers.description $}</p>
@@ -213,6 +216,8 @@
         </a>
       </template>
     </div>
+
+    <footer-block></footer-block>
 
   </template>
 

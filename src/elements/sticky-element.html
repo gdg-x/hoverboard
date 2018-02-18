@@ -24,7 +24,7 @@
       }
 
       .sticked {
-        margin-top: 64px;
+        margin-top: 56px;
         position: fixed;
         top: 0;
         right: 0;
@@ -34,6 +34,12 @@
 
       #content.sticked::before {
         opacity: 1;
+      }
+
+      @media (min-width: 640px) {
+        .sticked {
+          margin-top: 64px;
+        }
       }
 
     </style>

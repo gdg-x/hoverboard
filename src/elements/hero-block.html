@@ -11,6 +11,7 @@
     <style>
 
       :host {
+        margin-top: -56px;
         display: block;
         border-bottom: 1px solid var(--divider-color);
       }
@@ -42,7 +43,7 @@
       }
 
       .hero-content {
-        padding: 32px;
+        padding: 80px 32px 32px;
       }
 
       ::slotted(.hero-title) {
@@ -57,9 +58,9 @@
       }
 
       @media (min-width: 640px) {
-        /*.hero-block {*/
-          /*height: initial;*/
-        /*}*/
+        :host {
+          margin-top: -64px;
+        }
 
         .hero-content {
           padding-top: 120px;
@@ -101,14 +102,33 @@
 
       static get properties() {
         return {
+          active: Boolean,
           backgroundImage: String,
           backgroundColor: String,
           fontColor: String,
+          hideLogo: Boolean,
         };
+      }
+
+      static get observers() {
+        return [
+          '_setState(active, backgroundImage, backgroundColor, fontColor, hideLogo)',
+        ];
       }
 
       _showOverlay(backgroundImage) {
         return !!backgroundImage;
+      }
+
+      _setState(active, backgroundImage, backgroundColor, fontColor, hideLogo) {
+        if (active) {
+          uiActions.setHeroSettings({
+            backgroundImage,
+            backgroundColor,
+            fontColor,
+            hideLogo,
+          });
+        }
       }
     }
 

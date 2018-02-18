@@ -52,10 +52,10 @@
         --design: #E91E63;
       }
 
-      * {
-        box-sizing: border-box;
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-font-smoothing: antialiased;
+      body {
+        font-family: var(--font-family);
+        text-rendering: optimizeLegibility;
+        color: var(--primary-text-color);
       }
 
       .highlight-font {
@@ -86,15 +86,14 @@
         transition: border-color var(--animation);
       }
 
-      body {
-        font-family: var(--font-family);
-        text-rendering: optimizeLegibility;
-        color: var(--primary-text-color);
+      paper-button[primary] {
+        background-color: var(--default-primary-color);
+        color: var(--text-primary-color);
       }
 
-      paper-button[primary] {
-        background: var(--default-primary-color);
-        color: var(--text-primary-color);
+      paper-button[primary][invert] {
+        color: var(--default-primary-color);
+        background-color: var(--text-primary-color);
       }
 
       paper-button[primary-text] {

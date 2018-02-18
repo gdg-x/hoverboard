@@ -18,7 +18,11 @@
 
       :host {
         display: block;
-        overflow: auto;
+        height: 100%;
+      }
+
+      .container {
+        min-height: 80%;
       }
 
       @media (max-width: 640px) {
@@ -46,6 +50,7 @@
       background-image="{$ heroSettings.schedule.background.image $}"
       background-color="{$ heroSettings.schedule.background.color $}"
       font-color="{$ heroSettings.schedule.fontColor $}"
+      active="[[active]]"
     >
       <div class="hero-title highlight-font">{$ heroSettings.schedule.title $}</div>
       <p class="hero-description">{$ heroSettings.schedule.description $}</p>
@@ -66,6 +71,8 @@
         </template>
       </iron-pages>
     </div>
+
+    <footer-block></footer-block>
   </template>
 
   <script>

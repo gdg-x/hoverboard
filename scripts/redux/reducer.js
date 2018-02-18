@@ -13,6 +13,10 @@ const uiReducer = (state = initialState.ui, action) => {
       return Object.assign({}, state, {
         viewport: Object.assign({}, state.viewport, action.value),
       });
+    case SET_HERO_SETTINGS:
+      return Object.assign({}, state, {
+        heroSettings: Object.assign({}, state.heroSettings, action.value),
+      });
     default:
       return state;
   }

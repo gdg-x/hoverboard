@@ -18,6 +18,12 @@ const uiActions = {
       value,
     });
   },
+  setHeroSettings: (value) => {
+    store.dispatch({
+      type: SET_HERO_SETTINGS,
+      value,
+    });
+  },
 };
 
 const routingActions = {

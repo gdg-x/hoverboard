@@ -10,7 +10,7 @@
     <style>
 
       :host {
-        --iron-icon-fill-color: var(--secondary-text-color);
+        --iron-icon-fill-color: currentColor;
         display: block;
         z-index: 1;
         border-bottom: 1px solid var(--divider-color);
@@ -20,10 +20,14 @@
       }
 
       :host([transparent]) {
-        --iron-icon-fill-color: #fff;
+        --iron-icon-fill-color: var(--hero-font-color, '#fff');
         background-color: transparent;
         border-bottom-color: transparent;
-        color: #fff;
+        color: var(--hero-font-color, '#fff');
+      }
+
+      :host([transparent]) .toolbar-logo {
+        opacity: var(--hero-logo-opacity, 1);
       }
 
       app-toolbar {
@@ -99,7 +103,7 @@
 
       paper-button iron-icon {
         margin-right: 8px;
-        --iron-icon-fill-color: var(--header-background);
+        --iron-icon-fill-color: var(--hero-font-color);
       }
 
       @media (min-width: 640px) {
@@ -115,7 +119,7 @@
 
     </style>
 
-    <app-toolbar class="header" has-background="[[]]">
+    <app-toolbar class="header">
       <div>
         <paper-icon-button
           icon="hoverboard:menu"
@@ -242,6 +246,11 @@
             type: Object,
             statePath: 'ui.viewport',
           },
+          heroSettings: {
+            type: Object,
+            statePath: 'ui.heroSettings',
+            observer: '_setToolbarSettings',
+          },
           dialogs: {
             type: Object,
             statePath: 'dialogs',
@@ -316,6 +325,14 @@
 
       _isAccountIconHidden(userSignedIn, isTabletPlus) {
         return userSignedIn || isTabletPlus;
+      }
+
+      _setToolbarSettings(settings) {
+        if (!settings) return;
+        this.updateStyles({
+          '--hero-font-color': settings.fontColor || '',
+          '--hero-logo-opacity': settings.hideLogo ? 0 : 1,
+        });
       }
     }
 

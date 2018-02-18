@@ -92,6 +92,7 @@
       background-image="[[postInfo.image]]"
       background-color="[[postInfo.primaryColor]]"
       font-color="#fff"
+      active="[[active]]"
     >
       <div class="hero-title highlight-font">[[postInfo.title]]</div>
     </hero-block>
@@ -122,6 +123,7 @@
 
       static get properties() {
         return {
+          active: Boolean,
           route: Object,
           postInfo: Object,
           postsList: {
