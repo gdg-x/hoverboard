@@ -150,6 +150,8 @@
       connectedCallback() {
         super.connectedCallback();
         ticketsActions.fetchTickets();
+        // eslint-disable-next-line no-undef
+        HOVERBOARD.Elements.Tickets = this;
       }
     }
 

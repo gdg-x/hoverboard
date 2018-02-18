@@ -58,7 +58,7 @@
   <meta property="og:description" content="{$ description $}">
   <meta property="og:type" content="Event">
   <meta property="og:image" content="images/social-share.jpg">
-  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:type" content="image/jpeg"/>
 
   <!-- Twitter meta data -->
   <meta name="twitter:card" content="summary_large_image">
@@ -74,6 +74,7 @@
   <script>
 
     window.Polymer = { rootPath: '{$ basepath $}' };
+    window.HOVERBOARD = { Elements: {} };
 
     // Load and register pre-caching Service Worker
     if ('serviceWorker' in navigator) {

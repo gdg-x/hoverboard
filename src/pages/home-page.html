@@ -12,6 +12,7 @@
 <link rel="import" href="../elements/gallery-block.html">
 <link rel="import" href="../elements/map-block.html">
 <link rel="import" href="../elements/about-organizer-block.html">
+<link rel="import" href="../mixins/scroll-functions.html">
 
 <dom-module id="home-page">
   <template>
@@ -119,8 +120,27 @@
         <div class="hero-description highlight-font">{$ heroSettings.home.description $}</div>
 
         <div class="action-buttons" layout horizontal>
-          <paper-button><iron-icon icon="hoverboard:movie"></iron-icon> {$ viewHighlights $}</paper-button>
-          <paper-button primary invert><iron-icon icon="hoverboard:cart"></iron-icon> {$ buyTicket $}</paper-button>
+          <paper-button
+            on-tap="_playVideo"
+            ga-on="click"
+            ga-event-category="video"
+            ga-event-action="watch"
+            ga-event-label="hero block - view highlights"
+          >
+            <iron-icon icon="hoverboard:movie"></iron-icon>
+            {$ viewHighlights $}
+          </paper-button>
+          <paper-button
+            on-tap="_scrollToTickets"
+            ga-on="click"
+            ga-event-category="tickets"
+            ga-event-action="scroll"
+            ga-event-label="hero block - scroll to tickets"
+            primary invert
+          >
+            <iron-icon icon="hoverboard:cart"></iron-icon>
+            {$ buyTicket $}
+          </paper-button>
         </div>
 
         <div class="scroll-down">
@@ -147,7 +167,8 @@
 
   <script>
 
-    class HomePage extends Polymer.Element {
+    // eslint-disable-next-line no-undef
+    class HomePage extends ScrollFunctions(Polymer.Element) {
       static get is() {
         return 'home-page';
       }
@@ -156,6 +177,21 @@
         return {
           active: Boolean,
         };
+      }
+
+      _playVideo() {
+        uiActions.toggleVideoDialog({
+          title: '{$  aboutBlock.callToAction.howItWas.title $}',
+          youtubeId: '{$  aboutBlock.callToAction.howItWas.youtubeId $}',
+          disableControls: true,
+          opened: true,
+        });
+      }
+
+      _scrollToTickets() {
+        // eslint-disable-next-line no-undef
+        const ticketsBlockPositionY = HOVERBOARD.Elements.Tickets.getBoundingClientRect().top - 128;
+        this.scrollToY(ticketsBlockPositionY, 600, 'easeInOutSine');
       }
     }
 
