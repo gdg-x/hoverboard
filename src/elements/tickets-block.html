@@ -16,25 +16,17 @@
         display: block;
       }
 
-      .ticket-icon {
-        --iron-icon-height: 200px;
-        --iron-icon-width: 200px;
-        --iron-icon-fill-color: var(--default-primary-color);
-        max-width: 50%;
-      }
-
-      ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
+      .tickets-wrapper {
+        text-align: center;
       }
 
       .ticket-item {
-        padding: 16px 0;
-      }
-
-      .ticket-item:not(:last-of-type) {
-        border-bottom: 1px solid var(--divider-color);
+        margin: 8px;
+        padding: 16px 24px;
+        max-width: 200px;
+        width: 100%;
+        text-align: center;
+        border: 1px solid var(--divider-color);
       }
 
       .type-description {
@@ -50,13 +42,11 @@
         content: '/ ';
       }
 
-      .ticket-price-wrapper {
-        margin-left: 16px;
-        white-space: nowrap;
-      }
-
       .price {
+        margin: 16px auto;
+        font-size: 40px;
         color: var(--default-primary-color);
+        white-space: nowrap;
       }
 
       .price[sold-out] {
@@ -71,7 +61,8 @@
       }
 
       .additional-info {
-        margin-top: 16px;
+        margin: 16px auto 0;
+        max-width: 480px;
         font-size: 14px;
         color: var(--secondary-text-color);
       }
@@ -81,48 +72,38 @@
       }
     </style>
 
-    <div class="tickets-wrapper container" layout horizontal center justified>
-      <div layout horizontal center-center flex hidden$="[[viewport.isPhone]]">
-        <iron-icon class="ticket-icon" icon="hoverboard:tickets"></iron-icon>
-      </div>
+    <div class="tickets-wrapper container">
+      <h1 class="container-title">{$ ticketsBlock.title $}</h1>
 
-      <div class="tickets" flex>
-        <h1 class="container-title">{$ ticketsBlock.title $}</h1>
-        <ul>
-          <template is="dom-repeat" items="[[tickets.elements]]" as="ticket">
-            <li class="ticket-item">
-              <div layout horizontal justified center>
-                <div>
-                  [[ticket.name]]
-                  <div class="type-description">
-                    <span class="ticket-dates">[[ticket.starts]] </span>
-                    <span class="ticket-dates">[[ticket.ends]]</span>
-                    <span class="ticket-info">[[ticket.info]]</span>
-                  </div>
-                </div>
-                <div class="ticket-price-wrapper" layout horizontal>
-                  <div class="sold-out" block$="[[ticket.soldOut]]">{$ ticketsBlock.soldOut $}</div>
-                  <div class="price" sold-out$="[[ticket.soldOut]]">
-                    [[ticket.price]]
-                    <span class="currency">[[ticket.currency]]</span>
-                  </div>
-                </div>
+      <div class="tickets" layout horizontal wrap center-justified>
+        <template is="dom-repeat" items="[[tickets.elements]]" as="ticket">
+          <div class="ticket-item">
+            <h3>[[ticket.name]]</h3>
+            <div class="ticket-price-wrapper" layout horizontal center-center>
+              <div class="sold-out" block$="[[ticket.soldOut]]">{$ ticketsBlock.soldOut $}</div>
+              <div class="price" sold-out$="[[ticket.soldOut]]">
+                <span class="currency">[[ticket.currency]][[ticket.price]]</span>
               </div>
-            </li>
-          </template>
-        </ul>
-
-        <div class="additional-info">*{$ ticketsBlock.ticketsDetails $}</div>
-
-        <a href$="[[tickets.url]]"
-            target="_blank"
-            rel="noopener noreferrer"
-            ga-on="click"
-            ga-event-category="ticket button"
-            ga-event-action="buy_click">
-          <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>
-        </a>
+            </div>
+            <div class="type-description">
+              <span class="ticket-dates">[[ticket.starts]] </span>
+              <span class="ticket-dates">[[ticket.ends]]</span>
+              <span class="ticket-info">[[ticket.info]]</span>
+            </div>
+          </div>
+        </template>
       </div>
+
+      <div class="additional-info">*{$ ticketsBlock.ticketsDetails $}</div>
+
+      <a href$="[[tickets.url]]"
+         target="_blank"
+         rel="noopener noreferrer"
+         ga-on="click"
+         ga-event-category="ticket button"
+         ga-event-action="buy_click">
+        <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>
+      </a>
     </div>
 
   </template>
