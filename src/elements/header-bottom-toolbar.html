@@ -4,13 +4,15 @@
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="./shared-styles.html">
 
+<link rel="import" href="./content-loader.html">
+
 <dom-module id="header-bottom-toolbar">
   <template>
     <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
 
     <style>
 
-      :host  {
+      :host {
         display: block;
         background-color: var(--primary-background-color);
       }
@@ -43,7 +45,28 @@
 
     </style>
 
+
     <app-toolbar class="bottom-toolbar">
+
+      <content-loader
+        class="nav-items"
+        card-padding="15px"
+        card-width="105px"
+        card-margin="0 14px 0 0"
+        card-height="64px"
+        avatar-size="0"
+        avatar-circle="0"
+        title-top-position="20px"
+        title-height="24px"
+        title-width="75%"
+        load-from="-240%"
+        load-to="350%"
+        blur-width="80px"
+        items-count="{$ contentLoaders.schedule.itemsCount $}"
+        layout horizontal
+        hidden$="[[contentLoaderVisibility]]">
+      </content-loader>
+
       <paper-tabs
         class="nav-items"
         selected="[[route.subRoute]]"
@@ -78,7 +101,23 @@
             type: Object,
             statePath: 'schedule',
           },
+          contentLoaderVisibility: {
+            type: String,
+            value: null,
+          },
         };
+      }
+
+      static get observers() {
+        return [
+          '_scheduleChanged(schedule.days)',
+        ];
+      }
+
+      _scheduleChanged() {
+        if (this.schedule.days) {
+          this.contentLoaderVisibility = 'hidden';
+        }
       }
     }
 

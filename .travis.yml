@@ -5,19 +5,14 @@ cache:
   directories:
   - node_modules
   - "${NVM_PATH}_modules"
-env:
-- CXX=g++-4.8
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-4.8
 install:
 - yarn
 - cd functions && yarn && cd ..
-script: echo "Deploying!"
-before_deploy: yarn run build:prod
+script:
+- yarn lint
+before_deploy:
+- echo "Deploying!"
+- yarn build:prod
 deploy:
 - provider: firebase
   skip_cleanup: true

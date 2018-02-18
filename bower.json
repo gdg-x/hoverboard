@@ -18,7 +18,7 @@
     "paper-input": "PolymerElements/paper-input#^2.0.0",
     "paper-fab": "PolymerElements/paper-fab#^2.0.0",
     "plastic-image": "mlisook/plastic-image#^1.0.4",
-    "polymer": "Polymer/polymer#^2.0.1",
+    "polymer": "Polymer/polymer#^2.4.0",
     "iron-icon": "PolymerElements/iron-icon#^2.0.0",
     "paper-button": "PolymerElements/paper-button#^2.0.0",
     "iron-lazy-pages": "TimvdLippe/iron-lazy-pages#^2.0.2",
@@ -32,7 +32,8 @@
     "iron-dropdown": "PolymerElements/iron-dropdown#^2.0.0",
     "good-map": "keanulee/good-map#^0.0.1",
     "paper-menu-button": "PolymerElements/paper-menu-button#^2.0.0",
-    "paper-toast": "^2.0.0"
+    "paper-toast": "^2.0.0",
+    "paper-progress": "^2.0.1"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0"

@@ -63,10 +63,6 @@ const dialogsActions = {
       type: CLOSE_DIALOG,
       dialogName,
     });
-    this.dispatchEvent(new CustomEvent('reset-query-params', {
-      bubbles: true,
-      composed: true,
-    }));
   },
 };
 

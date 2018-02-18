@@ -4,11 +4,13 @@
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
 
 <link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="../elements/text-truncate.html">
 <link rel="import" href="../elements/shared-styles.html">
+<link rel="import" href="../elements/content-loader.html">
 
 <dom-module id="speakers-page">
   <template>
@@ -119,6 +121,12 @@
         color: var(--secondary-text-color);
       }
 
+      paper-progress {
+        width: 100%;
+        --paper-progress-active-color: var(--default-primary-color);
+        --paper-progress-secondary-color: var(--default-primary-color);
+      }
+
       @media (min-width: 640px) {
         .container {
           grid-template-columns: repeat(2, 1fr);
@@ -155,14 +163,27 @@
       <p class="hero-description">{$ heroSettings.speakers.description $}</p>
     </hero-block>
 
+    <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
+
+    <content-loader
+      class="container"
+      card-padding="32px"
+      card-height="400px"
+      avatar-size="128px"
+      avatar-circle="64px"
+      horizontal-position="50%"
+      box-shadow="var(--box-shadow)"
+      items-count="{$ contentLoaders.speakers.itemsCount $}"
+      hidden$="[[contentLoaderVisibility]]"
+    ></content-loader>
     <div class="container">
       <template is="dom-repeat" items="[[transformToArray(speakers, 'id')]]" as="speaker">
         <a class="speaker card"
-            href$="/speakers/[[speaker.id]]/"
-            ga-on="click"
-            ga-event-category="speaker"
-            ga-event-action="open details"
-            ga-event-label$="[[speaker.name]]">
+           href$="/speakers/[[speaker.id]]/"
+           ga-on="click"
+           ga-event-category="speaker"
+           ga-event-action="open details"
+           ga-event-label$="[[speaker.name]]">
           <div relative>
             <plastic-image
               class="photo"
@@ -241,12 +262,17 @@
             type: Object,
             statePath: 'dialogs.speaker.isOpened',
           },
+          contentLoaderVisibility: {
+            type: String,
+            value: null,
+          },
         };
       }
 
       static get observers() {
         return [
           '_openSpeakerDetails(active, speakers, routeData.page)',
+          '_speakersChanged(speakers)',
         ];
       }
 
@@ -255,16 +281,22 @@
         if (!Object.keys(this.speakers).length) speakersActions.fetchList();
       }
 
+      _speakersChanged() {
+        if (this.speakers && Object.keys(this.speakers).length) {
+          this.contentLoaderVisibility = 'hidden';
+        }
+      }
+
       _openSpeakerDetails(active, speakers, id) {
         if (active && speakers && Object.keys(speakers).length) {
           requestAnimationFrame(() => {
-              if (id) {
-                dialogsActions.openDialog(DIALOGS.SPEAKER, speakers[id]);
-              } else if (this.isDialogOpened) {
-                dialogsActions.closeDialog(DIALOGS.SPEAKER);
-              }
+            if (id) {
+              const speakerData = speakers[id];
+              speakerData && dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
+            } else if (this.isDialogOpened) {
+              dialogsActions.closeDialog(DIALOGS.SPEAKER);
             }
-          );
+          });
         }
       }
     }
