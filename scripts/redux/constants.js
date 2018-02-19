@@ -2,11 +2,10 @@
 // ui
 const TOGGLE_DRAWER = 'TOGGLE_DRAWER';
 const SET_VIEWPORT_SIZE = 'SET_VIEWPORT_SIZE';
+const SET_HERO_SETTINGS = 'SET_HERO_SETTINGS';
 // router
 const SET_ROUTE = 'SET_ROUTE';
 const SET_SUB_ROUTE = 'SET_SUB_ROUTE';
-// hero
-const SET_HERO = 'SET_HERO';
 // dialogs
 const OPEN_DIALOG = 'OPEN_DIALOG';
 const CLOSE_DIALOG = 'CLOSE_DIALOG';

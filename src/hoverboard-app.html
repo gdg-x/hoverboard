@@ -29,11 +29,10 @@
 <link rel="import" href="elements/shared-styles.html">
 <link rel="import" href="elements/hoverboard-icons.html">
 <link rel="import" href="elements/header-toolbar.html">
-<link rel="import" href="elements/header-bottom-toolbar.html">
 <link rel="import" href="elements/hero-block.html">
 <link rel="import" href="elements/footer-block.html">
 <link rel="import" href="elements/hoverboard-analytics.html">
-<link rel="import" href="effects/sticky-bottom-toolbar.html">
+<link rel="import" href="effects/transparent-scroll.html">
 
 
 <dom-module id="hoverboard-app">
@@ -45,8 +44,13 @@
       :host {
         display: block;
         position: relative;
-        min-height: 100vh;
+        min-height: 100%;
+        height: 100%;
         --paper-menu-button-dropdown-background: #fff;
+        --app-drawer-content-container: {
+          display: flex;
+          flex-direction: column;
+        };
       }
 
       app-drawer app-toolbar {
@@ -92,30 +96,27 @@
         --iron-image-height: 32px;
       }
 
-      app-header {
-        background-color: var(--hero-background-color);
-        background-image: var(--hero-background-gradient);
-        transition: background-color 0.3s;
-        border-bottom: 1px solid var(--divider-color);
+      app-header-layout {
+        margin-top: -1px;
       }
 
-      [bottom-sticky]::before {
-        position: absolute;
-        right: 0;
-        bottom: -5px;
-        left: 0;
-        width: 100%;
-        height: 5px;
-        content: "";
-        transition: opacity 0.4s;
-        pointer-events: none;
+      app-header.remove-shadow::before {
         opacity: 0;
-        box-shadow: inset 0 5px 6px -3px rgba(0, 0, 0, 0.4);
-        will-change: opacity;
       }
 
-      [bottom-sticky][bottom-shadow]::before {
-        opacity: 1;
+      iron-lazy-pages {
+        background-color: #fff;
+        min-height: 100%;
+        height: 100%;
+      }
+
+      .drawer-content iron-icon {
+        --iron-icon-width: 14px;
+        margin-left: 6px;
+      }
+
+      .buy-ticket {
+        padding: 16px 24px;
       }
 
       @media (min-width: 640px) {
@@ -123,18 +124,6 @@
           padding: 0 36px;
           height: initial;
         }
-      }
-
-      .buy-ticket {
-        display: block;
-        position: absolute;
-        bottom: 120px;
-        padding: 16px;
-      }
-
-      .buy-ticket iron-icon {
-        width: 18px;
-        margin-bottom: 2px;
       }
     </style>
 
@@ -161,39 +150,53 @@
           <h3 class="location">{$ location.short $}</h3>
         </app-toolbar>
 
-        <iron-selector
-          class="drawer-list"
-          selected="[[route.route]]"
-          attr-for-selected="path"
-          selected-class="selected"
-          role="navigation"
-        >
-          {% for nav in navigation %}
-          <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer">{$ nav.title $}</a>
-          {% endfor %}
-        </iron-selector>
+        <div class="drawer-content" layout vertical justified flex>
+          <iron-selector
+            class="drawer-list"
+            selected="[[route.route]]"
+            attr-for-selected="path"
+            selected-class="selected"
+            role="navigation"
+          >
+            {% for nav in navigation %}
+            <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer">{$ nav.title $}</a>
+            {% endfor %}
+          </iron-selector>
 
-        <a href$="[[tickets.url]]" target="_blank" class="buy-ticket" rel="noopener noreferrer" ga-on="click"
-           ga-event-category="ticket button" ga-event-action="buy_click">
-          <span>{$ buyTicket $}</span>
-          <iron-icon icon="hoverboard:open-in-new"></iron-icon>
-        </a>
+          <a
+            class="buy-ticket"
+            href$="[[tickets.url]]"
+            target="_blank"
+            rel="noopener noreferrer"
+            ga-on="click"
+            ga-event-category="ticket button"
+            ga-event-action="buy_click"
+            layout horizontal center
+          >
+            <span>{$ buyTicket $}</span>
+            <iron-icon icon="hoverboard:open-in-new"></iron-icon>
+          </a>
+        </div>
 
       </app-drawer>
 
-      <app-header-layout id="headerLayout">
+      <app-header-layout id="headerLayout" fullbleed>
 
-        <app-header slot="header" condenses fixed effects="waterfall sticky-bottom-toolbar">
-          <header-toolbar sticky></header-toolbar>
-          <hero-block></hero-block>
-          <header-bottom-toolbar
-            hidden="[[!isEqual(route.route, 'schedule')]]"
-            sticky bottom-sticky
-          ></header-bottom-toolbar>
+        <app-header
+          id="header"
+          slot="header"
+          effects="waterfall transparent-scroll"
+          condenses fixed
+        >
+          <header-toolbar></header-toolbar>
         </app-header>
 
-        <iron-lazy-pages attr-for-selected="data-route" selected="[[route.route]]" selected-attribute="active"
-                         hide-immediately>
+        <iron-lazy-pages
+          attr-for-selected="data-route"
+          selected="[[route.route]]"
+          selected-attribute="active"
+          hide-immediately
+        >
           <home-page
             data-route="home"
             data-path="pages/home-page.html"
@@ -223,7 +226,6 @@
           ></faq-page>
         </iron-lazy-pages>
 
-        <footer-block></footer-block>
       </app-header-layout>
     </app-drawer-layout>
 
@@ -285,11 +287,6 @@
             type: String,
             statePath: 'routing',
           },
-          hero: {
-            type: Object,
-            statePath: 'hero',
-            observer: '_heroChanged',
-          },
           dialogs: {
             type: Object,
             statePath: 'dialogs',
@@ -337,16 +334,19 @@
         Polymer.setPassiveTouchGestures(true);
         window.performance && performance.mark && performance.mark('hoverboard-app.created');
         this._removeQueryParams = this._removeQueryParams.bind(this);
+        this._toggleHeaderShadow = this._toggleHeaderShadow.bind(this);
       }
 
       connectedCallback() {
         super.connectedCallback();
         window.addEventListener('reset-query-params', this._removeQueryParams);
+        window.addEventListener('element-sticked', this._toggleHeaderShadow);
       }
 
       disconnectedCallback() {
         super.disconnectedCallback();
         window.removeEventListener('reset-query-params', this._removeQueryParams);
+        window.removeEventListener('element-sticked', this._toggleHeaderShadow);
       }
 
       ready() {
@@ -374,20 +374,6 @@
         }
       }
 
-      _heroChanged(hero) {
-        if (!hero) return;
-        this.updateStyles({
-          '--hero-background-color': hero.background.color || '',
-          '--hero-background-gradient': hero.background.gradient || '',
-          '--hero-color': hero.fontColor || '',
-        });
-        setTimeout(() => {
-          requestAnimationFrame(() => {
-            this.$.headerLayout.resetLayout();
-          });
-        }, 10);
-      }
-
       _routeDataChanged(page, subroutePath) {
         if (!page && page !== '') {
           return;
@@ -396,10 +382,8 @@
 
         if (!this.route || (page !== this.route.route)) {
           !hasSubroute && this.scrollToY(0, 100);
-          uiActions.setHero(null, page);
           routingActions.setRoute(page);
-        } else if (page === 'blog' && !hasSubroute) {
-          uiActions.setHero(null, page);
+          this.$.header.classList.remove('remove-shadow');
         }
       }
 
@@ -424,6 +408,10 @@
 
       _removeQueryParams() {
         this.set('queryParams', null);
+      }
+
+      _toggleHeaderShadow(e) {
+        this.$.header.classList.toggle('remove-shadow', e.detail.sticked);
       }
     }
 

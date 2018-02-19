@@ -1,8 +1,8 @@
 {
-  "title": "GDG DevFest Season 2017",
-  "description": "The biggest Google tech conference in Ukraine carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts",
+  "title": "GDG DevFest Season 2018",
+  "description": "Be a hero. Be a GDG!",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "October 13-14, 2017",
+  "dates": "October 12-13, 2018",
   "partnershipProposition": "https://bit.ly/dfua17-partners",
   "share": "Share",
   "followOur": "Follow our",
@@ -13,6 +13,7 @@
   "buyTicket": "Buy ticket",
   "signIn": "Sign in",
   "signOut": "Sign out",
+  "viewHighlights": "View Highlights",
   "footer": {
     "blog": "Blog"
   },

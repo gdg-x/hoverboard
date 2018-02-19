@@ -7,6 +7,8 @@
 <link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="../elements/shared-styles.html">
+<link rel="import" href="../elements/sticky-element.html">
+<link rel="import" href="../elements/header-bottom-toolbar.html">
 <link rel="import" href="../elements/schedule-day.html">
 <link rel="import" href="../elements/content-loader.html">
 
@@ -18,6 +20,11 @@
 
       :host {
         display: block;
+        height: 100%;
+      }
+
+      .container {
+        min-height: 80%;
       }
 
       paper-progress {
@@ -46,6 +53,19 @@
       data="{{routeData}}"
       query-params="{{queryParams}}"
     ></app-route>
+
+    <hero-block
+      background-image="{$ heroSettings.schedule.background.image $}"
+      background-color="{$ heroSettings.schedule.background.color $}"
+      font-color="{$ heroSettings.schedule.fontColor $}"
+      active="[[active]]"
+    >
+      <div class="hero-title highlight-font">{$ heroSettings.schedule.title $}</div>
+      <p class="hero-description">{$ heroSettings.schedule.description $}</p>
+      <sticky-element slot="bottom" active="[[active]]">
+        <header-bottom-toolbar></header-bottom-toolbar>
+      </sticky-element>
+    </hero-block>
 
     <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
@@ -77,6 +97,8 @@
         </template>
       </iron-pages>
     </div>
+
+    <footer-block></footer-block>
   </template>
 
   <script>
