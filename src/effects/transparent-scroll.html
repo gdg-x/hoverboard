@@ -8,9 +8,9 @@
           && node.localName === 'header-toolbar')[0];
     },
 
-    run: function run(p, y) {
+    run: function run(position) {
       if (this._headerToolbar) {
-        if (p) {
+        if (position) {
           this._headerToolbar.removeAttribute('transparent');
         } else {
           this._headerToolbar.setAttribute('transparent', true);
