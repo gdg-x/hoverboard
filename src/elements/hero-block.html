@@ -1,14 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
-<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
-
-<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
-
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
 
-<link rel="import" href="../mixins/redux-mixin.html">
-<link rel="import" href="./hoverboard-icons.html">
 <link rel="import" href="./shared-styles.html">
 
 <dom-module id="hero-block">
@@ -18,19 +11,20 @@
     <style>
 
       :host {
+        margin-top: -56px;
         display: block;
+        border-bottom: 1px solid var(--divider-color);
       }
 
       .hero-block {
-        padding: 0;
-        height: auto;
-        color: var(--hero-color);
+        height: 100%;
+        position: relative;
+        color: inherit;
       }
 
       .hero-overlay {
         background-color: rgba(0, 0, 0, 0.6);
         opacity: 0;
-        z-index: -1;
         transition: opacity 0.3s;
       }
 
@@ -39,114 +33,102 @@
       }
 
       .hero-image {
-        z-index: -1;
-        background-color: var(--hero-background-color);
         transition: background-color 0.3s;
       }
 
       .container {
+        padding: 0;
         width: 100%;
-        z-index: -1;
+        z-index: 0;
       }
 
-      .home-content {
-        max-width: 480px;
+      .hero-content {
+        padding: 80px 32px 32px;
       }
 
-      .hero-logo {
-        --iron-image-height: 48px;
-        margin-top: 30px;
-      }
-
-      .hero-title {
+      ::slotted(.hero-title) {
         margin: 30px 0;
         font-size: 40px;
         text-transform: capitalize;
       }
 
-      .info-items {
-        margin-top: 8px;
-      }
-
-      .info-item:not(:last-of-type) {
-        margin-right: 8px;
-      }
-
-      .hero-description {
+      ::slotted(.hero-description) {
         margin-bottom: 30px;
         max-width: 600px;
       }
 
       @media (min-width: 640px) {
-        .hero-block {
-          height: initial;
+        :host {
+          margin-top: -64px;
         }
 
-        .container {
+        .hero-content {
           padding-top: 120px;
           padding-bottom: 60px;
-        }
-
-        .hero-logo {
-          --iron-image-height: 70px;
-          margin-top: 0;
         }
       }
 
     </style>
 
-    <app-toolbar class="hero-block" layout start vertical center-justified>
+    <div
+      class="hero-block"
+      style$="color: [[fontColor]]"
+      layout start vertical center-justified
+    >
       <plastic-image
         class="hero-image"
-        srcset="[[hero.background.image]]"
+        srcset="[[backgroundImage]]"
+        style$="background-color: [[backgroundColor]]"
         sizing="cover"
         lazy-load preload fade fit
       ></plastic-image>
-      <div class="hero-overlay" show$="[[hero.background.image]]" fit></div>
+      <div class="hero-overlay" show$="[[_showOverlay(backgroundImage)]]" fit></div>
       <div class="container">
-        <iron-pages selected="[[route.route]]" attr-for-selected="route" fallback-selection="default">
-          <div class="hero-content home-content" route="home">
-            <plastic-image class="hero-logo" srcset="/images/logo.svg" alt="{$ title $}"></plastic-image>
-            <div class="info-items highlight-font" layout horizontal wrap>
-              <div class="info-item">
-                <iron-icon icon="hoverboard:calendar"></iron-icon>
-                {$ dates $}
-              </div>
-              <div class="info-item">
-                <iron-icon icon="hoverboard:location"></iron-icon>
-                {$ location.short $}
-              </div>
-            </div>
-            <p class="hero-description highlight-font">[[hero.description]]</p>
-          </div>
-          <div class="hero-content" route="default">
-            <div class="hero-title highlight-font">[[hero.title]]</div>
-            <p class="hero-description">[[hero.description]]</p>
-          </div>
-        </iron-pages>
+        <div class="hero-content">
+          <slot></slot>
+        </div>
       </div>
-    </app-toolbar>
+    </div>
+    <slot name="bottom"></slot>
 
   </template>
 
   <script>
 
-    class HeroBlock extends ReduxMixin(Polymer.Element) {
+    class HeroBlock extends Polymer.Element {
       static get is() {
         return 'hero-block';
       }
 
       static get properties() {
         return {
-          route: {
-            type: String,
-            statePath: 'routing',
-          },
-          hero: {
-            type: Object,
-            statePath: 'hero',
-          },
+          active: Boolean,
+          backgroundImage: String,
+          backgroundColor: String,
+          fontColor: String,
+          hideLogo: Boolean,
         };
+      }
+
+      static get observers() {
+        return [
+          '_setState(active, backgroundImage, backgroundColor, fontColor, hideLogo)',
+        ];
+      }
+
+      _showOverlay(backgroundImage) {
+        return !!backgroundImage;
+      }
+
+      _setState(active, backgroundImage, backgroundColor, fontColor, hideLogo) {
+        if (active) {
+          uiActions.setHeroSettings({
+            backgroundImage,
+            backgroundColor,
+            fontColor,
+            hideLogo,
+          });
+        }
       }
     }
 

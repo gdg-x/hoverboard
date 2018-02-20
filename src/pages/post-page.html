@@ -88,6 +88,15 @@
       auto
     ></iron-ajax>
 
+    <hero-block
+      background-image="[[postInfo.image]]"
+      background-color="[[postInfo.primaryColor]]"
+      font-color="#fff"
+      active="[[active]]"
+    >
+      <div class="hero-title highlight-font">[[postInfo.title]]</div>
+    </hero-block>
+
     <div class="container-narrow">
       <marked-element class="post" markdown="[[postBody]]">
         <div slot="markdown-html"></div>
@@ -114,8 +123,9 @@
 
       static get properties() {
         return {
+          active: Boolean,
           route: Object,
-
+          postInfo: Object,
           postsList: {
             type: String,
             statePath: 'blog',
@@ -136,24 +146,13 @@
 
       _postDataObserver(postId, postsList) {
         if (!this.postsList || !Object.keys(this.postsList).length) return;
-        this._setHero(this.postsList[this.postData.id]);
+        this.postInfo = this.postsList[this.postData.id];
         this.set('source', this.postsList[this.postData.id].source);
         this.set('published', this._getDate(this.postsList[this.postData.id].published));
         const sortedPosts = this.transformToArray(this.postsList, 'id')
           .sort((a, b) => b.published.localeCompare(a.published));
         this.set('suggestedPosts', sortedPosts.filter((post) => post.id !== this.postData.id)
           .slice(0, 3));
-      }
-
-      _setHero(postInfo) {
-        uiActions.setHero({
-          'title': postInfo.title,
-          'background': {
-            'color': postInfo.primaryColor,
-            'image': postInfo.image,
-          },
-          'fontColor': '#fff',
-        });
       }
 
       _getDate(date) {

@@ -20,12 +20,14 @@
 
       :host {
         display: block;
+        height: 100%;
       }
 
       .container {
         display: grid;
         grid-template-columns: 1fr;
         grid-gap: 16px;
+        min-height: 80%;
       }
 
       .speaker {
@@ -151,6 +153,16 @@
       data="{{routeData}}"
     ></app-route>
 
+    <hero-block
+      background-image="{$ heroSettings.speakers.background.image $}"
+      background-color="{$ heroSettings.speakers.background.color $}"
+      font-color="{$ heroSettings.speakers.fontColor $}"
+      active="[[active]]"
+    >
+      <div class="hero-title highlight-font">{$ heroSettings.speakers.title $}</div>
+      <p class="hero-description">{$ heroSettings.speakers.description $}</p>
+    </hero-block>
+
     <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
     <content-loader
@@ -225,6 +237,8 @@
         </a>
       </template>
     </div>
+
+    <footer-block></footer-block>
 
   </template>
 

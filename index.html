@@ -58,7 +58,7 @@
   <meta property="og:description" content="{$ description $}">
   <meta property="og:type" content="Event">
   <meta property="og:image" content="images/social-share.jpg">
-  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:type" content="image/jpeg"/>
 
   <!-- Twitter meta data -->
   <meta name="twitter:card" content="summary_large_image">
@@ -74,6 +74,7 @@
   <script>
 
     window.Polymer = { rootPath: '{$ basepath $}' };
+    window.HOVERBOARD = { Elements: {} };
 
     // Load and register pre-caching Service Worker
     if ('serviceWorker' in navigator) {
@@ -115,19 +116,31 @@
   <link rel="import" href="src/hoverboard-app.html">
 
   <style>
+
+    html, body {
+      min-height: 100%;
+      height: 100%;
+    }
+
     body {
       margin: 0;
       font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 16px;
       line-height: 1.5;
-      min-height: 100vh;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* styling for render while resources are loading */
     hoverboard-app[unresolved] {
       padding: 0 16px;
       display: block;
-      min-height: 101vh;
       line-height: 68px;
       text-align: center;
       font-weight: 600;

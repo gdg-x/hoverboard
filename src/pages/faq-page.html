@@ -77,6 +77,16 @@
       }
     </style>
 
+    <hero-block
+      background-image="{$ heroSettings.faq.background.image $}"
+      background-color="{$ heroSettings.faq.background.color $}"
+      font-color="{$ heroSettings.faq.fontColor $}"
+      active="[[active]]"
+    >
+      <div class="hero-title highlight-font">{$ heroSettings.faq.title $}</div>
+      <p class="hero-description">{$ heroSettings.faq.description $}</p>
+    </hero-block>
+
     <div class="content-wrapper">
       <div class="container">
         <div class="content" layout justified horizontal wrap></div>
@@ -88,6 +98,7 @@
         <script type="text/markdown" src$="[[source]]"></script>
       </marked-element>
     </div>
+    <footer-block></footer-block>
   </template>
 
   <script>
@@ -100,6 +111,7 @@
 
       static get properties() {
         return {
+          active: Boolean,
           path: {
             type: String,
             value: '{$ faq $}',

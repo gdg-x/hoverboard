@@ -10,11 +10,24 @@
     <style>
 
       :host {
-        --iron-icon-fill-color: var(--secondary-text-color);
+        --iron-icon-fill-color: currentColor;
         display: block;
         z-index: 1;
         border-bottom: 1px solid var(--divider-color);
         background-color: var(--primary-background-color);
+        transition: background-color var(--animation), border-bottom-color var(--animation), color var(--animation);
+        color: var(--primary-text-color);
+      }
+
+      :host([transparent]) {
+        --iron-icon-fill-color: var(--hero-font-color, '#fff');
+        background-color: transparent;
+        border-bottom-color: transparent;
+        color: var(--hero-font-color, '#fff');
+      }
+
+      :host([transparent]) .toolbar-logo {
+        opacity: var(--hero-logo-opacity, 1);
       }
 
       app-toolbar {
@@ -38,7 +51,7 @@
       .nav-item a,
       .signin-tab {
         padding: 0 14px;
-        color: var(--primary-text-color);
+        color: inherit;
         text-transform: uppercase;
       }
 
@@ -90,7 +103,7 @@
 
       paper-button iron-icon {
         margin-right: 8px;
-        --iron-icon-fill-color: var(--header-background);
+        --iron-icon-fill-color: var(--hero-font-color);
       }
 
       @media (min-width: 640px) {
@@ -233,6 +246,11 @@
             type: Object,
             statePath: 'ui.viewport',
           },
+          heroSettings: {
+            type: Object,
+            statePath: 'ui.heroSettings',
+            observer: '_setToolbarSettings',
+          },
           dialogs: {
             type: Object,
             statePath: 'dialogs',
@@ -307,6 +325,14 @@
 
       _isAccountIconHidden(userSignedIn, isTabletPlus) {
         return userSignedIn || isTabletPlus;
+      }
+
+      _setToolbarSettings(settings) {
+        if (!settings) return;
+        this.updateStyles({
+          '--hero-font-color': settings.fontColor || '',
+          '--hero-logo-opacity': settings.hideLogo ? 0 : 1,
+        });
       }
     }
 

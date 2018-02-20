@@ -13,6 +13,10 @@ const uiReducer = (state = initialState.ui, action) => {
       return Object.assign({}, state, {
         viewport: Object.assign({}, state.viewport, action.value),
       });
+    case SET_HERO_SETTINGS:
+      return Object.assign({}, state, {
+        heroSettings: Object.assign({}, state.heroSettings, action.value),
+      });
     default:
       return state;
   }
@@ -29,15 +33,6 @@ const routingReducer = (state = initialState.routing, action) => {
       return Object.assign({}, state, {
         subRoute: action.subRoute,
       });
-    default:
-      return state;
-  }
-};
-
-const heroReducer = (state = initialState.hero, action) => {
-  switch (action.type) {
-    case SET_HERO:
-      return action.hero;
     default:
       return state;
   }

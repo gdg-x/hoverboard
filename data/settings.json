@@ -42,7 +42,7 @@
   ],
   "heroSettings": {
     "home": {
-      "description": "The biggest Google tech conference in CEE. All about Android, Web, and Cloud.",
+      "description": "Be a hero. Be a GDG!",
       "background": {
         "color": "#673ab7",
         "image": "/images/backgrounds/home.jpg"
@@ -87,6 +87,8 @@
     }
   },
   "location": {
+    "name": "Planeta kino",
+    "city": "Lviv",
     "short": "Lviv, Ukraine",
     "address": "36 Shchyretska St, Lviv, Ukraine",
     "pointer": {

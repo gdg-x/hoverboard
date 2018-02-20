@@ -8,9 +8,6 @@
 <script>
   /* eslint-disable no-undef */
 
-  // eslint-disable-next-line no-unused-vars
-  const heroSettings = JSON.parse('{$ heroSettings | dump | safe $}');
-
   const initialState = {
     ui: {
       isDrawerOpened: false,
@@ -24,11 +21,11 @@
         youtubeId: '',
         title: '',
       },
+      heroSettings: {},
     },
     routing: {
       route: 'home',
     },
-    hero: null,
     dialogs: {
       [DIALOGS.SPEAKER]: {
         isOpened: false,
@@ -73,7 +70,6 @@
     return {
       ui: uiReducer(state.ui, action),
       routing: routingReducer(state.routing, action),
-      hero: heroReducer(state.hero, action),
       dialogs: dialogsReducer(state.dialogs, action),
       tickets: ticketsReducer(state.tickets, action),
       partners: partnersReducer(state.partners, action),
