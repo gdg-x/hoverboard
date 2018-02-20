@@ -200,7 +200,7 @@
           const videoListWidth = this.getVideoListWidth();
           distancePosition = (event.detail.x - startPosition) + currentPosition;
 
-          if (distancePosition < 0 && -distancePosition < (videoListWidth + 100 - window.innerWidth)) {
+          if (distancePosition < 0 && -distancePosition < (videoListWidth + 200 - window.innerWidth)) {
             this.transformVideoList(videoListElement, distancePosition);
           }
         });
@@ -215,6 +215,8 @@
         Polymer.Gestures.addListener(this.$.videos, 'up', () => {
           isMouseDown = false;
         });
+
+        Polymer.Gestures.setTouchAction(this.$.videos, 'pan-y pinch-zoom');
       }
 
       shiftContentLeft() {
