@@ -6,6 +6,7 @@
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="../elements/shared-styles.html">
 <link rel="import" href="../elements/hoverboard-icons.html">
+<link rel="import" href="../elements/content-loader.html">
 
 <dom-module id="tickets-block">
   <template>
@@ -20,21 +21,35 @@
         text-align: center;
       }
 
+      .tickets {
+        margin: 32px 0 24px;
+      }
+
       .ticket-item {
         margin: 16px 8px;
-        padding: 24px;
         width: 100%;
         text-align: center;
         color: var(--primary-text-color);
       }
 
       .ticket-item[in-demand] {
-        transform: scale(1.1);
+        transform: scale(1.05);
         box-shadow: var(--box-shadow-primary-color);
+        z-index: 1;
       }
 
       .ticket-item[in-demand]:hover {
         box-shadow: var(--box-shadow-primary-color-hover);
+      }
+
+      .header {
+        padding: 16px;
+        background-color: var(--default-primary-color);
+        color: var(--text-primary-color);
+      }
+
+      .content {
+        padding: 24px 24px 0;
       }
 
       .type-description {
@@ -43,25 +58,29 @@
       }
 
       .ticket-price-wrapper {
-        color: var(--default-primary-color);
+        margin: 16px auto;
         white-space: nowrap;
       }
 
       .price {
-        margin: 16px auto;
+        color: var(--default-primary-color);
         font-size: 40px;
       }
 
-      .price[sold-out] {
-        opacity: 0.1;
-        text-decoration: line-through;
+      .discount {
+        font-size: 14px;
+        color: var(--accent-color);
       }
 
-      .sold-out {
+      .sold-out,
+      .available-soon {
         display: none;
-        position: absolute;
-        font-size: 32px;
-        color: var(--accent-color);
+        font-size: 18px;
+        color: var(--secondary-text-color);
+      }
+
+      .available-soon {
+        background-color: rgba(255, 255, 255, 0.95);
       }
 
       .additional-info {
@@ -71,11 +90,21 @@
         color: var(--secondary-text-color);
       }
 
-      .buy-button {
-        margin-top: 24px;
+      .actions {
+        padding: 24px;
+        position: relative;
+      }
+
+      .tickets-placeholder {
+        display: grid;
+        width: 100%;
       }
 
       @media (min-width: 640px) {
+        .tickets-placeholder {
+          grid-template-columns: repeat(auto-fill, 200px);
+        }
+
         .ticket-item {
           max-width: 200px;
         }
@@ -88,30 +117,63 @@
 
     <div class="tickets-wrapper container">
       <h1 class="container-title">{$ ticketsBlock.title $}</h1>
+      <content-loader
+        class="tickets-placeholder"
+        card-padding="24px"
+        card-height="216px"
+        border-radius="var(--border-radius)"
+        title-top-position="32px"
+        title-height="42px"
+        title-width="70%"
+        load-from="-70%"
+        load-to="130%"
+        animation-time="1s"
+        items-count="{$ contentLoaders.tickets.itemsCount $}"
+        hidden$="[[contentLoaderVisibility]]">
+      </content-loader>
 
       <div class="tickets" layout horizontal wrap center-justified>
-        <template is="dom-repeat" items="[[tickets.elements]]" as="ticket">
+        <template is="dom-repeat" items="[[tickets]]" as="ticket">
           <a
             class="ticket-item card"
-            href$="[[tickets.url]]"
+            href$="[[ticket.url]]"
             target="_blank"
             rel="noopener noreferrer"
             in-demand$="[[ticket.inDemand]]"
+            on-tap="_onTicketTap"
             ga-on="click"
             ga-event-category="ticket"
             ga-event-action="buy_click"
             ga-event-label$="[[ticket.name]]"
+            layout vertical justified
           >
-            <h3>[[ticket.name]]</h3>
-            <div class="ticket-price-wrapper" layout horizontal center-center>
-              <div class="price" sold-out$="[[ticket.soldOut]]">
-                <span class="currency">[[ticket.currency]][[ticket.price]]</span>
-              </div>
-              <div class="sold-out" block$="[[ticket.soldOut]]">{$ ticketsBlock.soldOut $}</div>
+            <div class="header">
+              <h3>[[ticket.name]]</h3>
             </div>
-            <div class="type-description">
-              <div class="ticket-dates" hidden$="[[!ticket.starts]]">[[ticket.starts]] - [[ticket.ends]]</div>
-              <div class="ticket-info">[[ticket.info]]</div>
+            <div class="content">
+              <div class="ticket-price-wrapper" layout vertical center-center>
+                <div class="price">[[ticket.currency]][[ticket.price]]</div>
+                <div class="discount">[[_getDiscount(ticket)]]</div>
+              </div>
+              <div class="type-description">
+                <div class="ticket-dates" hidden$="[[!ticket.starts]]">[[ticket.starts]] - [[ticket.ends]]</div>
+                <div class="ticket-info">[[ticket.info]]</div>
+              </div>
+            </div>
+            <div class="actions">
+              <div class="sold-out" block$="[[ticket.soldOut]]">
+                {$ ticketsBlock.soldOut $}
+              </div>
+              <paper-button primary hidden$="[[ticket.soldOut]]" >
+                {$ buyTicket $}
+              </paper-button>
+              <div
+                class="available-soon"
+                layout horizontal center-center fit
+                hidden$="[[_hidePlaceholder(ticket)]]"
+              >
+                <span>{$ ticketsBlock.availableSoon $}</span>
+              </div>
             </div>
           </a>
         </template>
@@ -119,18 +181,6 @@
 
       <div class="additional-info">*{$ ticketsBlock.ticketsDetails $}</div>
 
-      <a
-        href$="[[tickets.url]]"
-        target="_blank"
-        rel="noopener noreferrer"
-        ga-on="click"
-        ga-event-category="ticket button"
-        ga-event-action="buy_click">
-        <paper-button class="buy-button" primary
-        >
-          {$ buyTicket $}
-        </paper-button>
-      </a>
     </div>
 
   </template>
@@ -145,19 +195,45 @@
       static get properties() {
         return {
           tickets: {
-            type: Object,
+            type: Array,
             statePath: 'tickets',
+            observer: '_ticketsChanged',
           },
           viewport: {
             type: Object,
             statePath: 'ui.viewport',
           },
+          contentLoaderVisibility: Boolean,
         };
       }
 
       connectedCallback() {
         super.connectedCallback();
         ticketsActions.fetchTickets();
+      }
+
+      _ticketsChanged(tickets) {
+        if (tickets && tickets.length) {
+          this.set('contentLoaderVisibility', true);
+        }
+      }
+
+      _getDiscount(ticket) {
+        const maxPrice = this.tickets.find((ticket) => ticket.primary).price;
+        if (!ticket.regular || ticket.primary || ticket.soldOut || !maxPrice) return;
+        const discount = 100 - parseInt(ticket.price) * 100 / parseInt(maxPrice);
+        return `{$ ticketsBlock.save $} ${Math.floor(discount)}% {$ ticketsBlock.today $}!`;
+      }
+
+      _hidePlaceholder(ticket) {
+        return ticket.soldOut || ticket.available;
+      }
+
+      _onTicketTap(e) {
+        if (e.model.ticket.soldOut || !e.model.ticket.available) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
       }
     }
 
