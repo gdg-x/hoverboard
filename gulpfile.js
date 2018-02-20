@@ -5,6 +5,7 @@
 const del = require('del');
 const fs = require('fs');
 const gulp = require('gulp');
+const path = require('path');
 const gulpif = require('gulp-if');
 const uglifyes = require('uglify-es');
 const composer = require('gulp-uglify/composer');
@@ -15,6 +16,7 @@ const browserSync = require('browser-sync').create();
 const history = require('connect-history-api-fallback');
 const eslint = require('gulp-eslint');
 const friendlyFormatter = require('eslint-friendly-formatter');
+const run = require('gulp-run');
 
 const HtmlSplitter = polymerBuild.HtmlSplitter;
 const PolymerProject = polymerBuild.PolymerProject;
@@ -153,6 +155,14 @@ function lint() {
     .pipe(eslint.failAfterError());
 }
 
+function deploy() {
+  let metadata = {};
+  for (let file of config.templateData) {
+    metadata = Object.assign({}, metadata, require(path.join(process.cwd(), file)));
+  }
+  return run(`firebase use ${metadata.firebase.projectId} && firebase deploy`).exec();
+}
+
 function waitFor(stream) {
   return new Promise((resolve, reject) => {
     stream.on('end', resolve);
@@ -202,6 +212,7 @@ gulp.task('default', build);
 gulp.task('default', gulp.series(lint, build));
 
 gulp.task('lint', lint);
+gulp.task('deploy', deploy);
 
 gulp.task('serve', gulp.series(compileTemplate, () => {
   browserSync.init({
