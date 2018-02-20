@@ -73,13 +73,13 @@
       }
 
       .sold-out,
-      .available-soon {
+      .not-available-yet {
         display: none;
         font-size: 18px;
         color: var(--secondary-text-color);
       }
 
-      .available-soon {
+      .not-available-yet {
         background-color: rgba(255, 255, 255, 0.95);
       }
 
@@ -168,11 +168,11 @@
                 {$ buyTicket $}
               </paper-button>
               <div
-                class="available-soon"
+                class="not-available-yet"
                 layout horizontal center-center fit
                 hidden$="[[_hidePlaceholder(ticket)]]"
               >
-                <span>{$ ticketsBlock.availableSoon $}</span>
+                <span>{$ ticketsBlock.notAvailableYet $}</span>
               </div>
             </div>
           </a>
