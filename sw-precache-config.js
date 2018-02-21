@@ -5,7 +5,8 @@ module.exports = {
     '/bower_components/webcomponentsjs/*.js',
     '/src/**/*',
     '/scripts/**/*',
-    '/data/**/*'
+    '/data/**/*',
+    '/images/**/*'
   ],
   navigateFallback: '/index.html',
   directoryIndex: 'index.html',
