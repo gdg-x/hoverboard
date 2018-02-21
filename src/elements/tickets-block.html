@@ -6,6 +6,7 @@
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="../elements/shared-styles.html">
 <link rel="import" href="../elements/hoverboard-icons.html">
+<link rel="import" href="../elements/content-loader.html">
 
 <dom-module id="tickets-block">
   <template>
@@ -16,25 +17,39 @@
         display: block;
       }
 
-      .ticket-icon {
-        --iron-icon-height: 200px;
-        --iron-icon-width: 200px;
-        --iron-icon-fill-color: var(--default-primary-color);
-        max-width: 50%;
+      .tickets-wrapper {
+        text-align: center;
       }
 
-      ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
+      .tickets {
+        margin: 32px 0 24px;
       }
 
       .ticket-item {
-        padding: 16px 0;
+        margin: 16px 8px;
+        width: 100%;
+        text-align: center;
+        color: var(--primary-text-color);
       }
 
-      .ticket-item:not(:last-of-type) {
-        border-bottom: 1px solid var(--divider-color);
+      .ticket-item[in-demand] {
+        transform: scale(1.05);
+        box-shadow: var(--box-shadow-primary-color);
+        z-index: 1;
+      }
+
+      .ticket-item[in-demand]:hover {
+        box-shadow: var(--box-shadow-primary-color-hover);
+      }
+
+      .header {
+        padding: 16px;
+        background-color: var(--default-primary-color);
+        color: var(--text-primary-color);
+      }
+
+      .content {
+        padding: 24px 24px 0;
       }
 
       .type-description {
@@ -42,87 +57,130 @@
         color: var(--secondary-text-color);
       }
 
-      .ticket-dates:not(:first-of-type):not(:empty):before {
-        content: ' - ';
-      }
-
-      .ticket-dates:not(:empty) + .ticket-info:before {
-        content: '/ ';
-      }
-
       .ticket-price-wrapper {
-        margin-left: 16px;
+        margin: 16px auto;
         white-space: nowrap;
       }
 
       .price {
         color: var(--default-primary-color);
+        font-size: 40px;
       }
 
-      .price[sold-out] {
-        opacity: 0.4;
-        text-decoration: line-through;
+      .discount {
+        font-size: 14px;
+        color: var(--accent-color);
       }
 
-      .sold-out {
-        margin-right: 8px;
+      .sold-out,
+      .not-available-yet {
         display: none;
-        color: var(--default-primary-color);
+        font-size: 18px;
+        color: var(--secondary-text-color);
+      }
+
+      .not-available-yet {
+        background-color: rgba(255, 255, 255, 0.95);
       }
 
       .additional-info {
-        margin-top: 16px;
+        margin: 16px auto 0;
+        max-width: 480px;
         font-size: 14px;
         color: var(--secondary-text-color);
       }
 
-      .buy-button {
-        margin-top: 24px;
+      .actions {
+        padding: 24px;
+        position: relative;
+      }
+
+      .tickets-placeholder {
+        display: grid;
+        width: 100%;
+      }
+
+      @media (min-width: 640px) {
+        .tickets-placeholder {
+          grid-template-columns: repeat(auto-fill, 200px);
+        }
+
+        .ticket-item {
+          max-width: 200px;
+        }
+
+        .ticket-item[in-demand] {
+          transform: scale(1.15);
+        }
       }
     </style>
 
-    <div class="tickets-wrapper container" layout horizontal center justified>
-      <div layout horizontal center-center flex hidden$="[[viewport.isPhone]]">
-        <iron-icon class="ticket-icon" icon="hoverboard:tickets"></iron-icon>
-      </div>
+    <div class="tickets-wrapper container">
+      <h1 class="container-title">{$ ticketsBlock.title $}</h1>
+      <content-loader
+        class="tickets-placeholder"
+        card-padding="24px"
+        card-height="216px"
+        border-radius="var(--border-radius)"
+        title-top-position="32px"
+        title-height="42px"
+        title-width="70%"
+        load-from="-70%"
+        load-to="130%"
+        animation-time="1s"
+        items-count="{$ contentLoaders.tickets.itemsCount $}"
+        hidden$="[[contentLoaderVisibility]]">
+      </content-loader>
 
-      <div class="tickets" flex>
-        <h1 class="container-title">{$ ticketsBlock.title $}</h1>
-        <ul>
-          <template is="dom-repeat" items="[[tickets.elements]]" as="ticket">
-            <li class="ticket-item">
-              <div layout horizontal justified center>
-                <div>
-                  [[ticket.name]]
-                  <div class="type-description">
-                    <span class="ticket-dates">[[ticket.starts]] </span>
-                    <span class="ticket-dates">[[ticket.ends]]</span>
-                    <span class="ticket-info">[[ticket.info]]</span>
-                  </div>
-                </div>
-                <div class="ticket-price-wrapper" layout horizontal>
-                  <div class="sold-out" block$="[[ticket.soldOut]]">{$ ticketsBlock.soldOut $}</div>
-                  <div class="price" sold-out$="[[ticket.soldOut]]">
-                    [[ticket.price]]
-                    <span class="currency">[[ticket.currency]]</span>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </template>
-        </ul>
-
-        <div class="additional-info">*{$ ticketsBlock.ticketsDetails $}</div>
-
-        <a href$="[[tickets.url]]"
+      <div class="tickets" layout horizontal wrap center-justified>
+        <template is="dom-repeat" items="[[tickets]]" as="ticket">
+          <a
+            class="ticket-item card"
+            href$="[[ticket.url]]"
             target="_blank"
             rel="noopener noreferrer"
+            in-demand$="[[ticket.inDemand]]"
+            on-tap="_onTicketTap"
             ga-on="click"
-            ga-event-category="ticket button"
-            ga-event-action="buy_click">
-          <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>
-        </a>
+            ga-event-category="ticket"
+            ga-event-action="buy_click"
+            ga-event-label$="[[ticket.name]]"
+            layout vertical justified
+          >
+            <div class="header">
+              <h3>[[ticket.name]]</h3>
+            </div>
+            <div class="content">
+              <div class="ticket-price-wrapper" layout vertical center-center>
+                <div class="price">[[ticket.currency]][[ticket.price]]</div>
+                <div class="discount">[[_getDiscount(ticket)]]</div>
+              </div>
+              <div class="type-description">
+                <div class="ticket-dates" hidden$="[[!ticket.starts]]">[[ticket.starts]] - [[ticket.ends]]</div>
+                <div class="ticket-info">[[ticket.info]]</div>
+              </div>
+            </div>
+            <div class="actions">
+              <div class="sold-out" block$="[[ticket.soldOut]]">
+                {$ ticketsBlock.soldOut $}
+              </div>
+              <paper-button primary hidden$="[[ticket.soldOut]]" >
+                {$ buyTicket $}
+              </paper-button>
+              <div
+                class="not-available-yet"
+                layout horizontal center-center fit
+                hidden$="[[_hidePlaceholder(ticket)]]"
+              >
+                <span>{$ ticketsBlock.notAvailableYet $}</span>
+              </div>
+            </div>
+          </a>
+        </template>
       </div>
+
+      <div class="additional-info">*{$ ticketsBlock.ticketsDetails $}</div>
+
     </div>
 
   </template>
@@ -137,13 +195,15 @@
       static get properties() {
         return {
           tickets: {
-            type: Object,
+            type: Array,
             statePath: 'tickets',
+            observer: '_ticketsChanged',
           },
           viewport: {
             type: Object,
             statePath: 'ui.viewport',
           },
+          contentLoaderVisibility: Boolean,
         };
       }
 
@@ -152,6 +212,30 @@
         ticketsActions.fetchTickets();
         // eslint-disable-next-line no-undef
         HOVERBOARD.Elements.Tickets = this;
+      }
+
+      _ticketsChanged(tickets) {
+        if (tickets && tickets.length) {
+          this.set('contentLoaderVisibility', true);
+        }
+      }
+
+      _getDiscount(ticket) {
+        const maxPrice = this.tickets.find((ticket) => ticket.primary).price;
+        if (!ticket.regular || ticket.primary || ticket.soldOut || !maxPrice) return;
+        const discount = 100 - parseInt(ticket.price) * 100 / parseInt(maxPrice);
+        return `{$ ticketsBlock.save $} ${Math.floor(discount)}% {$ ticketsBlock.today $}!`;
+      }
+
+      _hidePlaceholder(ticket) {
+        return ticket.soldOut || ticket.available;
+      }
+
+      _onTicketTap(e) {
+        if (e.model.ticket.soldOut || !e.model.ticket.available) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
       }
     }
 

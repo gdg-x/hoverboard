@@ -132,7 +132,10 @@
   "ticketsBlock": {
     "title": "Tickets",
     "ticketsDetails": "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
-    "soldOut": "Sold out"
+    "soldOut": "You missed it!",
+    "notAvailableYet": "Not available yet",
+    "save": "Save",
+    "today": "today"
   },
   "partnersBlock": {
     "title": "Partners",
