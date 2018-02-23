@@ -14,6 +14,10 @@
   "signIn": "Sign in",
   "signOut": "Sign out",
   "viewHighlights": "View Highlights",
+  "offlineMessage": "You can still work offline.",
+  "cachingComplete": "Caching complete! Future visits will work offline.",
+  "newVersionAvailable": "A new version of this app is available.",
+  "refresh": "Refresh",
   "footer": {
     "blog": "Blog"
   },

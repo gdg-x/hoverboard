@@ -341,6 +341,11 @@
         super.connectedCallback();
         window.addEventListener('reset-query-params', this._removeQueryParams);
         window.addEventListener('element-sticked', this._toggleHeaderShadow);
+        window.addEventListener('offline', () => {
+          toastActions.showToast({
+            message: '{$ offlineMessage $}',
+          });
+        });
       }
 
       disconnectedCallback() {

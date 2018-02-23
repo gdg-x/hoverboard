@@ -3,9 +3,10 @@ module.exports = {
     '/index.html',
     '/manifest.json',
     '/bower_components/webcomponentsjs/*.js',
-    '/src/**/*',
+    '/images/**/*',
     '/scripts/**/*',
-    '/data/**/*'
+    '/src/**/*',
+    '/data/**/*',
   ],
   navigateFallback: '/index.html',
   directoryIndex: 'index.html',
@@ -13,12 +14,31 @@ module.exports = {
   runtimeCaching: [
     {
       urlPattern: /\/images\/.*/,
-      handler: 'fastest',
+      handler: 'networkFirst',
       options: {
         cache: {
           maxEntries: 200,
-          name: 'items-cache'
-        }
-      }
-    }]
+          name: 'items-cache',
+        },
+      },
+    },
+    {
+      urlPattern: /\/bower_components\/.*/,
+      handler: 'cacheFirst',
+      options: {
+        cache: {
+          name: 'bower-components-cache',
+        },
+      },
+    },
+    {
+      urlPattern: /\/node_modules\/.*/,
+      handler: 'cacheFirst',
+      options: {
+        cache: {
+          name: 'node-modules-cache',
+        },
+      },
+    },
+  ],
 };
