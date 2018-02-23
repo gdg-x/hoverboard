@@ -26,6 +26,7 @@
         background-color: rgba(0, 0, 0, 0.6);
         opacity: 0;
         transition: opacity 0.3s;
+        position: absolute;
       }
 
       .hero-overlay[show] {
@@ -34,25 +35,29 @@
 
       .hero-image {
         transition: background-color 0.3s;
+        position: absolute;
       }
 
       .container {
         padding: 0;
         width: 100%;
+        height: unset;
         z-index: 0;
+        position: unset;
       }
 
       .hero-content {
         padding: 80px 32px 32px;
+        position: unset;
       }
 
-      ::slotted(.hero-title) {
+      div ::slotted(.hero-title) {
         margin: 30px 0;
         font-size: 40px;
         text-transform: capitalize;
       }
 
-      ::slotted(.hero-description) {
+      div ::slotted(.hero-description) {
         margin-bottom: 30px;
         max-width: 600px;
       }
