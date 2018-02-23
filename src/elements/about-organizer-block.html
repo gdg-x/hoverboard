@@ -45,6 +45,7 @@
         {% for block in aboutOrganizerBlock.blocks %}
         <div class="block">
           <h2>{$ block.title $}</h2>
+
           <marked-element class="description" markdown="{$ block.description $}">
             <div slot="markdown-html"></div>
           </marked-element>

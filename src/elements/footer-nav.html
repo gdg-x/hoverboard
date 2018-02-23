@@ -8,7 +8,7 @@
 
     <style>
 
-      :host  {
+      :host {
         margin: 0 20px;
       }
 
@@ -78,8 +78,9 @@
       </a>
 
       <div class="copyright">
-        &copy; 2017 Based on <a href="https://github.com/gdg-x/hoverboard" target="_blank" rel="noopener noreferrer">Project
-        Hoverboard</a> &middot; <a class="cod" href="/cod" target="_blank" rel="noopener noreferrer">{$ codeOfConduct $}</a>
+        &copy; [[_getYear()]] Based on <a href="https://github.com/gdg-x/hoverboard" target="_blank" rel="noopener noreferrer">Project
+        Hoverboard</a> &middot; <a class="cod" href="/cod" target="_blank" rel="noopener noreferrer">{$ codeOfConduct
+        $}</a>
 
       </div>
     </div>
@@ -90,7 +91,13 @@
   <script>
 
     class FooterNav extends Polymer.Element {
-      static get is() {return 'footer-nav';}
+      static get is() {
+        return 'footer-nav';
+      }
+
+      _getYear() {
+        return new Date().getFullYear();
+      }
     }
 
     window.customElements.define(FooterNav.is, FooterNav);

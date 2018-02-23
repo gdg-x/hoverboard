@@ -6,6 +6,7 @@
 
 <link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="../elements/text-truncate.html">
 <link rel="import" href="./shared-styles.html">
 
 <dom-module id="speakers-block">
@@ -73,6 +74,7 @@
       }
 
       .company-logo {
+        margin-top: 6px;
         width: 100%;
         height: 16px;
       }
@@ -166,8 +168,12 @@
             ></plastic-image>
 
             <div class="description">
-              <h2 class="name">[[speaker.name]]</h2>
-              <div class="origin">[[speaker.country]]</div>
+              <text-truncate lines="1">
+                <h2 class="name">[[speaker.name]]</h2>
+              </text-truncate>
+              <text-truncate lines="1">
+                <div class="origin">[[speaker.country]]</div>
+              </text-truncate>
             </div>
 
           </div>
