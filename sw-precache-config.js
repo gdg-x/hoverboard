@@ -5,7 +5,7 @@ module.exports = {
     '/bower_components/webcomponentsjs/*.js',
     '/src/**/*',
     '/scripts/**/*',
-    '/data/**/*'
+    '/data/**/*',
   ],
   navigateFallback: '/index.html',
   directoryIndex: 'index.html',
@@ -17,8 +17,9 @@ module.exports = {
       options: {
         cache: {
           maxEntries: 200,
-          name: 'items-cache'
-        }
-      }
-    }]
+          name: 'items-cache',
+        },
+      },
+    },
+  ],
 };

@@ -2,15 +2,15 @@ importScripts('bower_components/firebase/firebase-app.js');
 importScripts('bower_components/firebase/firebase-messaging.js');
 
 firebase.initializeApp({
-  messagingSenderId: '{$ firebase.messagingSenderId $}'
+  messagingSenderId: '{$ firebase.messagingSenderId $}',
 });
 const messaging = firebase.messaging();
 
 messaging.setBackgroundMessageHandler(({ data }) => {
   const notification = Object.assign({}, data, {
     data: {
-      click_action: data.click_action
-    }
+      click_action: data.click_action,
+    },
   });
   return self.registration.showNotification(notification.title, notification);
 });
