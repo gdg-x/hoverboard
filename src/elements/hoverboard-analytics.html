@@ -58,7 +58,6 @@
       window.measureDuration = function(mark, opt_reference) {
         let reference = opt_reference || 'responseEnd';
         let name = `${reference}:${mark}`;
-        console.log('name', name)
 
         // Clears any existing measurements with the same name.
         performance.clearMeasures(name);
