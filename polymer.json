@@ -18,8 +18,7 @@
     "scripts/**/*",
     "src/**/*",
     "manifest.json",
-    "firebase-messaging-sw.js",
-    "bower.json"
+    "firebase-messaging-sw.js"
   ],
   "extraDependencies": [
     "bower_components/webcomponentsjs/webcomponents-*.js",
