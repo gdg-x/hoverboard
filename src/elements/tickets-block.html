@@ -35,6 +35,7 @@
       .ticket-item[in-demand] {
         transform: scale(1.05);
         box-shadow: var(--box-shadow-primary-color);
+        border-top: 2px solid var(--default-primary-color);
         z-index: 1;
       }
 
@@ -43,13 +44,12 @@
       }
 
       .header {
-        padding: 16px;
-        background-color: var(--default-primary-color);
-        color: var(--text-primary-color);
+        padding: 24px 0 16px;
+        font-size: 16px;
       }
 
       .content {
-        padding: 24px 24px 0;
+        padding: 0 24px;
       }
 
       .type-description {
@@ -58,7 +58,7 @@
       }
 
       .ticket-price-wrapper {
-        margin: 16px auto;
+        margin-bottom: 16px;
         white-space: nowrap;
       }
 
@@ -72,15 +72,12 @@
         color: var(--accent-color);
       }
 
-      .sold-out,
-      .not-available-yet {
+      .sold-out {
         display: none;
-        font-size: 18px;
+        font-size: 14px;
+        text-transform: uppercase;
+        height: 32px;
         color: var(--secondary-text-color);
-      }
-
-      .not-available-yet {
-        background-color: rgba(255, 255, 255, 0.95);
       }
 
       .additional-info {
@@ -98,6 +95,11 @@
       .tickets-placeholder {
         display: grid;
         width: 100%;
+      }
+
+      paper-button[disabled] {
+        background-color: var(--primary-color-transparent);
+        font-size: 12px;
       }
 
       @media (min-width: 640px) {
@@ -148,7 +150,7 @@
             layout vertical justified
           >
             <div class="header">
-              <h3>[[ticket.name]]</h3>
+              <h4>[[ticket.name]]</h4>
             </div>
             <div class="content">
               <div class="ticket-price-wrapper" layout vertical center-center>
@@ -164,16 +166,9 @@
               <div class="sold-out" block$="[[ticket.soldOut]]">
                 {$ ticketsBlock.soldOut $}
               </div>
-              <paper-button primary hidden$="[[ticket.soldOut]]" >
-                {$ buyTicket $}
+              <paper-button primary hidden$="[[ticket.soldOut]]" disabled$="[[!ticket.available]]">
+                [[_getButtonText(ticket.available)]]
               </paper-button>
-              <div
-                class="not-available-yet"
-                layout horizontal center-center fit
-                hidden$="[[_hidePlaceholder(ticket)]]"
-              >
-                <span>{$ ticketsBlock.notAvailableYet $}</span>
-              </div>
             </div>
           </a>
         </template>
@@ -227,15 +222,15 @@
         return `{$ ticketsBlock.save $} ${Math.floor(discount)}% {$ ticketsBlock.today $}!`;
       }
 
-      _hidePlaceholder(ticket) {
-        return ticket.soldOut || ticket.available;
-      }
-
       _onTicketTap(e) {
         if (e.model.ticket.soldOut || !e.model.ticket.available) {
           e.preventDefault();
           e.stopPropagation();
         }
+      }
+
+      _getButtonText(available) {
+        return available ? '{$ buyTicket $}' : '{$ ticketsBlock.notAvailableYet $}';
       }
     }
 
