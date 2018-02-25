@@ -27,6 +27,7 @@
       }
 
       :host([transparent]) .toolbar-logo {
+        background-color: var(--hero-logo-color);
         opacity: var(--hero-logo-opacity, 1);
       }
 
@@ -38,7 +39,12 @@
       }
 
       .toolbar-logo {
-        --iron-image-height: 32px;
+        display: block;
+        width: 150px;
+        height: 32px;
+        background-color: var(--default-primary-color);
+        transition: background-color var(--animation);
+        -webkit-mask: url('/images/logo-monochrome.svg') no-repeat;
       }
 
       .nav-items {
@@ -129,13 +135,6 @@
         ></paper-icon-button>
       </div>
       <div layout horizontal center flex>
-        <a href="/" hidden$="[[!viewport.isLaptopPlus]]" layout horizontal>
-          <plastic-image
-            class="toolbar-logo"
-            srcset="/images/logo-monochrome.svg"
-            alt="{$ title $}"
-          ></plastic-image>
-        </a>
         <a class="toolbar-logo" href="/" hidden$="[[!viewport.isLaptopPlus]]" layout horizontal title="{$ title $}"></a>
       </div>
 
@@ -333,6 +332,7 @@
         this.updateStyles({
           '--hero-font-color': settings.fontColor || '',
           '--hero-logo-opacity': settings.hideLogo ? 0 : 1,
+          '--hero-logo-color': settings.backgroundImage ? '#fff' : 'var(--default-primary-color)',
         });
       }
     }

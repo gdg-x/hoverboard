@@ -231,6 +231,7 @@
     }
   },
   "aboutOrganizerBlock": {
+    "image": "/images/team.jpg",
     "blocks": [
       {
         "title": "Organizer",

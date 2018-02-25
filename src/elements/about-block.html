@@ -13,15 +13,10 @@
       :host {
         display: block;
         position: relative;
-        color: var(--dark-primary-color);
       }
 
       .container {
         overflow: hidden;
-      }
-
-      .statistics-block {
-        padding: 16px;
       }
 
       .statistics-row:first-of-type {
@@ -33,12 +28,8 @@
       }
 
       .block-cta paper-button {
-        padding-left: 0;
-        margin-left: 0;
-      }
-
-      .block-cta .cta-label {
-        font-size: 14px;
+        margin: 0;
+        color: var(--default-primary-color);
       }
 
       .block-subtitle {
@@ -58,14 +49,11 @@
         margin-left: 16px;
         font-size: 32px;
         vertical-align: middle;
+        color: var(--default-primary-color);
       }
 
       .icon iron-icon {
         color: var(--dark-primary-color);
-      }
-
-      .title {
-        width: 300px;
       }
 
       .description-block {
@@ -83,7 +71,6 @@
       }
 
       .days-count {
-
         animation-duration: 1.5s;
         animation-delay: 1.5s;
         animation-fill-mode: both;
@@ -105,14 +92,8 @@
       }
 
       @media (min-width: 868px) {
-
         .container {
           margin: 48px auto;
-        }
-
-        .description-block,
-        .statistics-block {
-          padding: 48px 0;
         }
 
         .description-block {
@@ -130,13 +111,12 @@
         }
       }
 
-
     </style>
 
     <div class="container" flex layout horizontal center wrap-reverse>
 
       <div class="description-block" flex>
-        <h2 class="title">{$ aboutBlock.title $}</h2>
+        <h1 class="container-title">{$ aboutBlock.title $}</h1>
 
         <p class="block-subtitle"> {$ aboutBlock.callToAction.featuredSessions.description $} </p>
         <a class="block-cta"

@@ -7,3 +7,4 @@ functions/lib/
 .temp/
 .vscode/
 .firebaserc
+/appengine/lib/

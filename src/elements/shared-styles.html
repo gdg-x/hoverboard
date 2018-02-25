@@ -40,6 +40,10 @@
         --font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif; /*TODO Change to Open Sans*/
         --max-container-width: 1280px;
 
+        --primary-color-transparent: rgba(103, 58, 183, 0.1);
+        --primary-color-light: rgba(103, 58, 183, 0.8);
+        --primary-color-white: #EDE7F6;
+
         /* Labels */
         --gde: #3d5afe;
         --wtm: #1de9b6;
@@ -88,14 +92,33 @@
         transition: border-color var(--animation);
       }
 
+      paper-button {
+        padding: 0.7em;
+        border-radius: 2px;
+        font-size: 14px;
+        transition: background-color var(--animation);
+      }
+
+      paper-button:hover {
+        background-color: var(--primary-color-transparent);
+      }
+
       paper-button[primary] {
         background-color: var(--default-primary-color);
         color: var(--text-primary-color);
       }
 
+      paper-button[primary]:hover {
+        background-color: var(--primary-color-light);
+      }
+
       paper-button[primary][invert] {
         color: var(--default-primary-color);
         background-color: var(--text-primary-color);
+      }
+
+      paper-button[primary][invert]:hover {
+        background-color: var(--primary-color-white);
       }
 
       paper-button[primary-text] {

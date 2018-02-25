@@ -41,17 +41,20 @@
       }
 
       .info-items {
-        margin-top: 32px;
+        margin: 48px auto;
+        font-size: 28px;
         line-height: 1.1;
       }
 
-      .hero-description {
+      .info-items > *:not(:first-of-type) {
         margin-top: 4px;
       }
 
       .action-buttons {
-        margin-top: 36px;
         font-size: 14px;
+        display: grid;
+        grid-auto-flow: column;
+        grid-gap: 16px;
       }
 
       .action-buttons iron-icon {
@@ -114,15 +117,12 @@
       <div class="home-content" layout vertical center>
         <plastic-image class="hero-logo" srcset="/images/logo.svg" alt="{$ title $}"></plastic-image>
         <div class="info-items highlight-font">
-          <div class="info-item">
-            <!--<iron-icon icon="hoverboard:calendar"></iron-icon>-->
-            {$ location.city $}. {$ dates $}
-          </div>
+          <div class="info-item">{$ location.city $}. {$ dates $}</div>
+          <div class="info-item">{$ heroSettings.home.description $}</div>
         </div>
 
-        <div class="hero-description highlight-font">{$ heroSettings.home.description $}</div>
 
-        <div class="action-buttons" layout horizontal>
+        <div class="action-buttons">
           <paper-button
             on-tap="_playVideo"
             ga-on="click"
@@ -141,7 +141,7 @@
             ga-event-label="hero block - scroll to tickets"
             primary invert
           >
-            <iron-icon icon="hoverboard:cart"></iron-icon>
+            <iron-icon icon="hoverboard:ticket"></iron-icon>
             {$ buyTicket $}
           </paper-button>
         </div>
@@ -158,11 +158,11 @@
     <about-block></about-block>
     <speakers-block></speakers-block>
     <subscribe-block></subscribe-block>
-    <featured-videos></featured-videos>
-    <about-organizer-block></about-organizer-block>
-    <latest-posts-block></latest-posts-block>
-    <gallery-block></gallery-block>
     <tickets-block></tickets-block>
+    <gallery-block></gallery-block>
+    <about-organizer-block></about-organizer-block>
+    <featured-videos></featured-videos>
+    <latest-posts-block></latest-posts-block>
     <map-block></map-block>
     <partners-block></partners-block>
     <footer-block></footer-block>
