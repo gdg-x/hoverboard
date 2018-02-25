@@ -106,15 +106,15 @@
         --iron-icon-fill-color: var(--hero-font-color);
       }
 
+      .buy-button {
+        margin-top: 12px;
+      }
+
       @media (min-width: 640px) {
         app-toolbar {
           padding: 0 36px;
           height: initial;
         }
-      }
-
-      .buy-button {
-        margin-top: 12px;
       }
 
     </style>
@@ -123,26 +123,27 @@
       <div>
         <paper-icon-button
           icon="hoverboard:menu"
-          hidden$="[[viewport.isTabletPlus]]"
+          hidden$="[[viewport.isLaptopPlus]]"
           aria-label="menu"
           on-tap="openDrawer"
         ></paper-icon-button>
       </div>
       <div layout horizontal center flex>
-        <a href="/" hidden$="[[viewport.isPhone]]" layout horizontal>
+        <a href="/" hidden$="[[!viewport.isLaptopPlus]]" layout horizontal>
           <plastic-image
             class="toolbar-logo"
             srcset="/images/logo-monochrome.svg"
             alt="{$ title $}"
           ></plastic-image>
         </a>
+        <a class="toolbar-logo" href="/" hidden$="[[!viewport.isLaptopPlus]]" layout horizontal title="{$ title $}"></a>
       </div>
 
       <paper-tabs
         class="nav-items"
         selected="[[route.route]]"
         attr-for-selected="name"
-        hidden$="[[viewport.isPhone]]"
+        hidden$="[[!viewport.isLaptopPlus]]"
         role="navigation"
         noink
       >
@@ -223,7 +224,7 @@
       <paper-icon-button
         icon="hoverboard:account"
         on-tap="signIn"
-        hidden$="[[_isAccountIconHidden(user.signedIn, viewport.isTabletPlus)]]"
+        hidden$="[[_isAccountIconHidden(user.signedIn, viewport.isLaptopPlus)]]"
       ></paper-icon-button>
     </app-toolbar>
 
