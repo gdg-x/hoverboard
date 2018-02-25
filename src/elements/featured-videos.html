@@ -6,11 +6,12 @@
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="shared-animations.html">
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="featured-videos">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning scale-animations"></style>
 
     <style>
       :host {
@@ -31,8 +32,8 @@
 
       .slide-icon {
         margin: 8px;
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
         position: absolute;
         z-index: 1;
         top: calc(var(--video-item-height) / 2 - 25px);
@@ -42,6 +43,8 @@
         border-radius: 50%;
         color: var(--default-primary-color);
         transition: opacity var(--animation);
+        animation-duration: 0.5s;
+        animation-name: grow;
       }
 
       .slide-icon:last-of-type {
@@ -105,7 +108,12 @@
         <paper-icon-button
           class="last-video slide-icon"
           icon="hoverboard:chevron-left"
-          on-tap="shiftContentLeft"
+          on-tap="shiftContentLeft"          
+          ga-on="click"
+          ga-event-category="video-list-arrow"
+          ga-event-action="click"
+          ga-event-label="left"
+          hidden$="[[_leftArrowHidden]]"
         ></paper-icon-button>
 
         <div id="videos" class="videos" layout horizontal>
@@ -130,7 +138,6 @@
                   icon="hoverboard:play"
                 ></paper-icon-button>
               </div>
-
               <h4 class="video-title">[[block.title]]</h4>
             </div>
           </template>
@@ -140,6 +147,11 @@
           class="next-video slide-icon"
           icon="hoverboard:chevron-right"
           on-tap="shiftContentRight"
+          ga-on="click"
+          ga-event-category="video-list-arrow"
+          ga-event-action="click"
+          ga-event-label="right"
+          hidden$="[[_rightArrowHidden]]">
         ></paper-icon-button>
 
       </div>
@@ -174,9 +186,13 @@
             type: Object,
             statePath: 'ui.viewport',
           },
-          _currentIndex: {
-            type: Number,
-            value: 0,
+          _leftArrowHidden: {
+            type: Boolean,
+            value: true,
+          },
+          _rightArrowHidden: {
+            type: Boolean,
+            value: false,
           },
         };
       }
@@ -189,7 +205,6 @@
       ready() {
         super.ready();
         let startPosition = 0;
-        let currentPosition = 0;
         let distancePosition = 0;
         let isMouseDown = false;
         const videoListElement = this.$.videos;
@@ -197,59 +212,110 @@
         Polymer.Gestures.addListener(this.$.videos, 'track', (event) => {
           if (!isMouseDown) return;
 
-          const videoListWidth = this.getVideoListWidth();
+          const {
+            currentPosition,
+            maxRightPosition,
+          } = this.getVideosDetails();
+
           distancePosition = (event.detail.x - startPosition) + currentPosition;
 
-          if (distancePosition < 0 && -distancePosition < (videoListWidth + 100 - window.innerWidth)) {
-            this.transformVideoList(videoListElement, distancePosition);
+          if (distancePosition < maxRightPosition) {
+            distancePosition = maxRightPosition;
           }
+
+          if (distancePosition > 0) {
+            distancePosition = 0;
+          }
+
+          this.transformVideoList(videoListElement, distancePosition);
+          ga('send', 'event', 'video-list', 'swipe', distancePosition);
+
+          this._leftArrowHidden = true;
+          this._rightArrowHidden = true;
         });
 
         Polymer.Gestures.addListener(this.$.videos, 'down', (event) => {
           isMouseDown = true;
-          currentPosition = parseInt(getComputedStyle(videoListElement, null)
-            .getPropertyValue('transform').split(',')[4]);
           startPosition = event.detail.x;
         });
 
         Polymer.Gestures.addListener(this.$.videos, 'up', () => {
           isMouseDown = false;
+
+          const {
+            currentPosition,
+            maxRightPosition,
+          } = this.getVideosDetails();
+
+          if (currentPosition == maxRightPosition) {
+            this._rightArrowHidden = true;
+          }
+          else {
+            this._rightArrowHidden = false;
+          }
+
+          if (currentPosition == 0) {
+            this._leftArrowHidden = true;
+          }
+          else {
+           this._leftArrowHidden = false;
+          }
         });
+
+        Polymer.Gestures.setTouchAction(this.$.videos, 'pan-y pinch-zoom');
       }
 
       shiftContentLeft() {
         const {
           cardWidth,
-          videosLength,
-          slideIndex,
+          currentPosition,
         } = this.getVideosDetails();
 
-        this._currentIndex = slideIndex < this._currentIndex ? slideIndex : this._currentIndex;
+        let newX = currentPosition + cardWidth;
 
-        if (this._currentIndex < videosLength && this._currentIndex > 0) {
-          const newX = -(this._currentIndex - 1) * cardWidth;
+        if (currentPosition < 0) {
+          const adjustToLeft = newX > 0 || (Math.abs(0 - Math.abs(newX)) < cardWidth);
+
+          if (adjustToLeft) {
+            newX = 0;
+          }
+
           this.transformVideoList(this.$.videos, newX);
-          this._currentIndex--;
+
+          if (newX == 0) {
+            this._leftArrowHidden = true;
+          }
+          else {
+            this._rightArrowHidden = false;
+          }
         }
       }
 
       shiftContentRight() {
         const {
           cardWidth,
-          videosLength,
-          slideIndex,
           maxRightPosition,
+          currentPosition,
         } = this.getVideosDetails();
 
-        this._currentIndex = slideIndex > this._currentIndex ? this._currentIndex : slideIndex;
+        let newX = currentPosition - cardWidth;
 
-        if (this._currentIndex >= 0 && this._currentIndex < videosLength - 1) {
-          let newX = -(this._currentIndex + 1) * cardWidth;
-          if (newX < maxRightPosition) {
+        if (currentPosition >= maxRightPosition) {
+          const adjustToRight = newX < maxRightPosition ||
+              (Math.abs(maxRightPosition) - Math.abs(newX) < cardWidth);
+
+          if (adjustToRight) {
             newX = maxRightPosition;
           }
+
           this.transformVideoList(this.$.videos, newX);
-          this._currentIndex++;
+
+          if (newX == maxRightPosition) {
+            this._rightArrowHidden = true;
+          }
+          else {
+            this._leftArrowHidden = false;
+          }
         }
       }
 
@@ -265,13 +331,12 @@
         const maxRightPosition = -(videosWidth - videosContainerWidth) - 16;
         const currentPosition = parseInt(getComputedStyle(this.$.videos, null)
           .getPropertyValue('transform').split(',')[4]);
-        const slideIndex = -(Math.floor(currentPosition / cardWidth));
 
         return {
           cardWidth,
           videosLength,
-          slideIndex,
           maxRightPosition,
+          currentPosition,
         };
       }
 

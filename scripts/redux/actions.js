@@ -69,7 +69,7 @@ const dialogsActions = {
 let toastHideTimeOut;
 const toastActions = {
   showToast: (toast) => {
-    const duration = toast.duration || 5000;
+    const duration = typeof toast.duration !== 'undefined' ? toast.duration : 5000;
     store.dispatch({
       type: SHOW_TOAST,
       toast: Object.assign({}, toast, {
@@ -78,6 +78,7 @@ const toastActions = {
       }),
     });
 
+    if (duration === 0) return;
     clearTimeout(toastHideTimeOut);
     toastHideTimeOut = setTimeout(() => {
       toastActions.hideToast();
