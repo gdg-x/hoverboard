@@ -143,7 +143,13 @@
   },
   "partnersBlock": {
     "title": "Partners",
-    "button": "Become a partner"
+    "button": "Become a partner",
+    "form": {
+      "title": "Become a partner!",
+      "submitLabel": "Submit",
+      "fullName": "Full Name",
+      "companyName": "Company Name"
+    }
   },
   "featuredVideos": {
     "title": "DFUA'16 featured videos",

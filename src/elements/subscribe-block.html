@@ -112,13 +112,13 @@
      }
 
      _subscribe() {
-            let userData = null;
+            let userData = {};
 
             if (this.user.signedIn) {
                 const fullNameSplit = this.user.displayName.split(' ');
                 userData = {
-                    firstName: fullNameSplit[0],
-                    lastName: fullNameSplit[1],
+                    firstFieldValue: fullNameSplit[0],
+                    secondFieldValue: fullNameSplit[1],
                 };
             }
 
@@ -126,7 +126,15 @@
                 subscribeActions.subscribe(Object.assign({}, { email: this.user.email }, userData));
             }
             else {
-                dialogsActions.openDialog(DIALOGS.SUBSCRIBE, userData);
+                dialogsActions.openDialog(DIALOGS.SUBSCRIBE, {
+                    title: '{$ subscribeBlock.formTitle $}',
+                    submitLabel: ' {$ subscribeBlock.subscribe $}',
+                    firstFieldLabel: '{$ subscribeBlock.firstName $}',
+                    secondFieldLabel: '{$ subscribeBlock.lastName $}',
+                    firstFieldValue: userData.firstFieldValue,
+                    secondFieldValue: userData.secondFieldValue,
+                    submit: subscribeActions.subscribe,
+                });
             }
         }
     }

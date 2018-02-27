@@ -26,6 +26,10 @@
       ".read": false,
       ".write": true
     },
+    "potentialPartners": {
+      ".read": false,
+      ".write": true
+    },
     "notifications": {
       ".read": false,
       ".write": false,
