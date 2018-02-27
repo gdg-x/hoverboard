@@ -24,7 +24,17 @@
     },
     "subscribers": {
       ".read": false,
-      ".write": true
+      ".write": false,
+      "$id": {
+        ".write": true
+       }
+    },
+    "potentialPartners": {
+      ".read": false,
+      ".write": false,
+      "$id": {
+        ".write": true
+       }
     },
     "notifications": {
       ".read": false,
