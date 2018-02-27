@@ -7,6 +7,7 @@
     "bower": "bower",
     "build": "gulp",
     "build:prod": "cross-env BUILD_ENV=production gulp",
+    "predeploy": "cd ./functions && npm i",
     "deploy": "gulp deploy",
     "deploy:prod": "cross-env BUILD_ENV=production gulp deploy",
     "postinstall": "bower install",

@@ -78,6 +78,7 @@
       .drawer-list a {
         display: block;
         color: var(--primary-text-color);
+        outline: 0;
       }
 
       app-drawer a {
@@ -360,7 +361,7 @@
         console.log('Hoverboard v2 is ready!');
         this.removeAttribute('unresolved');
         this._ensureLazyLoaded();
-        // userActions.autoSignIn(this.providerUrls);
+        userActions.autoSignIn();
       }
 
       closeDrawer() {

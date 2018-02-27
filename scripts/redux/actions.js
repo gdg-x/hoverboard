@@ -337,35 +337,35 @@ const userActions = {
       });
   },
 
-  autoSignIn: (providerUrls) => {
+  autoSignIn: () => {
     const currentUser = firebase.auth().currentUser;
     if (currentUser) {
       helperActions.storeUser(currentUser);
     }
-    else {
-      if (navigator.credentials) {
-        return navigator.credentials.get({
-          password: true,
-          federated: {
-            providers: providerUrls.split(','),
-            mediation: 'silent',
-          },
-        }).then((cred) => {
-          (() => {
-            if (cred) {
-              const provider = helperActions.getFederatedProvider(cred.provider);
-
-              if (!provider) return;
-
-              return firebase.auth().signInWithPopup(provider)
-                .then((signInObject) => {
-                  helperActions.storeUser(signInObject.user);
-                });
-            }
-          })();
-        });
-      }
-    }
+    // else {
+    //   if (navigator.credentials) {
+    //     return navigator.credentials.get({
+    //       password: true,
+    //       federated: {
+    //         providers: providerUrls.split(','),
+    //         mediation: 'silent',
+    //       },
+    //     }).then((cred) => {
+    //       (() => {
+    //         if (cred) {
+    //           const provider = helperActions.getFederatedProvider(cred.provider);
+    //
+    //           if (!provider) return;
+    //
+    //           return firebase.auth().signInWithPopup(provider)
+    //             .then((signInObject) => {
+    //               helperActions.storeUser(signInObject.user);
+    //             });
+    //         }
+    //       })();
+    //     });
+    //   }
+    // }
   },
 
   signOut: () => {
