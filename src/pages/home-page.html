@@ -51,10 +51,12 @@
       }
 
       .action-buttons {
+        margin: 0 -8px;
         font-size: 14px;
-        display: grid;
-        grid-auto-flow: column;
-        grid-gap: 16px;
+      }
+
+      .action-buttons paper-button {
+        margin: 8px;
       }
 
       .action-buttons iron-icon {
@@ -122,7 +124,7 @@
         </div>
 
 
-        <div class="action-buttons">
+        <div class="action-buttons" layout horizontal center-justified wrap>
           <paper-button
             on-tap="_playVideo"
             ga-on="click"

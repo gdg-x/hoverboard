@@ -44,7 +44,7 @@
       }
 
       .header {
-        padding: 24px 0 16px;
+        padding: 24px 0 0;
         font-size: 16px;
       }
 
@@ -58,7 +58,7 @@
       }
 
       .ticket-price-wrapper {
-        margin-bottom: 16px;
+        margin: 24px 0;
         white-space: nowrap;
       }
 
@@ -147,17 +147,17 @@
             ga-event-category="ticket"
             ga-event-action="buy_click"
             ga-event-label$="[[ticket.name]]"
-            layout vertical justified
+            layout vertical
           >
             <div class="header">
               <h4>[[ticket.name]]</h4>
             </div>
-            <div class="content">
-              <div class="ticket-price-wrapper" layout vertical center-center>
+            <div class="content" layout vertical flex-auto>
+              <div class="ticket-price-wrapper">
                 <div class="price">[[ticket.currency]][[ticket.price]]</div>
                 <div class="discount">[[_getDiscount(ticket)]]</div>
               </div>
-              <div class="type-description">
+              <div class="type-description" layout vertical flex-auto center-justified>
                 <div class="ticket-dates" hidden$="[[!ticket.starts]]">[[ticket.starts]] - [[ticket.ends]]</div>
                 <div class="ticket-info">[[ticket.info]]</div>
               </div>
@@ -219,7 +219,7 @@
         const maxPrice = this.tickets.find((ticket) => ticket.primary).price;
         if (!ticket.regular || ticket.primary || ticket.soldOut || !maxPrice) return;
         const discount = 100 - parseInt(ticket.price) * 100 / parseInt(maxPrice);
-        return `{$ ticketsBlock.save $} ${Math.floor(discount)}% {$ ticketsBlock.today $}!`;
+        return ((discount) => `{$ ticketsBlock.save $}`)(discount);
       }
 
       _onTicketTap(e) {
