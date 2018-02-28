@@ -83,24 +83,29 @@
     </style>
 
     <div class="dialog-content" layout vertical>
-      <div class="dialog-header">{$ subscribeBlock.formTitle $}</div>
+      <div class="dialog-header">[[title]]</div>
       <div hidden$="[[!errorOccurred]]" class="general-error">{$ subscribeBlock.generalError $}</div>
-      <paper-input id="firstNameInput"
+      <paper-input id="firstFieldInput"
                    on-touchend="_focus"
-                   label="{$ subscribeBlock.firstName $}"
-                   value="{{firstName}}">
+                   label="[[firstFieldLabel]]"
+                   value="{{firstFieldValue}}"
+                   autocomplete="off"
+                   autofocus="false">
       </paper-input>
-      <paper-input id="lastNameInput"
+      <paper-input id="secondFieldInput"
                    on-touchend="_focus"
-                   label="{$ subscribeBlock.lastName $}"
-                   value="{{lastName}}">
+                   label="[[secondFieldLabel]]"
+                   value="{{secondFieldValue}}"
+                   autocomplete="off"
+                   autofocus="false">
       </paper-input>
       <paper-input id="emailInput"
                    on-touchend="_focus"
-                   label="{$ subscribeBlock.emailAddress $}"
+                   label="{$ subscribeBlock.emailAddress $} *"
                    value="{{email}}"
                    required auto-validate$="[[validate]]" error-message="{$ subscribeBlock.emailRequired $}"
-                   autocomplete="off">
+                   autocomplete="off"
+                   autofocus="false">
       </paper-input>
       <div class="action-buttons" layout horizontal justified>
         <paper-button
@@ -116,7 +121,7 @@
           ga-event-category="attendees"
           ga-event-action="subscribe"
           ga-event-label="subscribe block">
-          {$ subscribeBlock.subscribe $}
+         [[submitLabel]]
         </paper-button>
       </div>
 
@@ -156,9 +161,13 @@
             type: Boolean,
             value: false,
           },
-          lastName: String,
-          firstName: String,
+          secondFieldValue: String,
+          firstFieldValue: String,
           initialHeight: Number,
+          title: String,
+          submitLabel: String,
+          firstFieldLabel: String,
+          secondFieldLabel: String,
         };
       }
 
@@ -196,16 +205,20 @@
           this.errorOccurred = data.errorOccurred;
         }
 
+        this.title = data.title || '{$ subscribeBlock.formTitle $}';
+        this.submitLabel = data.submitLabel || ' {$ subscribeBlock.subscribe $}';
+        this.firstFieldLabel = data.firstFieldLabel || '{$ subscribeBlock.firstName $}';
+        this.secondFieldLabel = data.secondFieldLabel || '{$ subscribeBlock.lastName $}';
         this._prefillFields(data);
       }
 
       _subscribe() {
         const emailInput = this.shadowRoot.querySelector('#emailInput');
         if (emailInput.validate()) {
-          subscribeActions.subscribe({
+          this.data.submit({
             email: this.email,
-            firstName: this.firstName,
-            lastName: this.lastName,
+            firstFieldValue: this.firstFieldValue,
+            secondFieldValue: this.secondFieldValue,
           });
         }
       }
@@ -216,12 +229,18 @@
 
       _prefillFields(userData) {
         this.validate = false;
-        this.shadowRoot.querySelector('#firstNameInput').value = userData ? userData.firstName : '';
-        this.shadowRoot.querySelector('#lastNameInput').value = userData ? userData.lastName : '';
+        const firstField = this.shadowRoot.querySelector('#firstFieldInput');
+        const secondField = this.shadowRoot.querySelector('#secondFieldInput');
         const emailInput = this.shadowRoot.querySelector('#emailInput');
+        firstField.value = userData ? userData.firstFieldValue : '';
+        secondField.value = userData ? userData.secondFieldValue : '';
+        firstField.focus();
+        firstField.blur();
+        secondField.focus();
+        secondField.blur();
+        emailInput.blur();
         emailInput.value = '';
         emailInput.invalid = false;
-        emailInput.blur();
         this.validate = true;
       }
 

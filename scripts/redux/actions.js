@@ -383,13 +383,24 @@ const userActions = {
 };
 
 const subscribeActions = {
+  addPartner: (data) => {
+    const id = data.email.replace(/[^\w\s]/gi, '');
+
+    firebase.database().ref(`potentialPartners/${id}`).set({
+      email: data.email,
+      fullName: data.firstFieldValue || '',
+      companyName: data.secondFieldValue || '',
+    }).then(() => {
+      dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
+    });
+  },
   subscribe: (data) => {
     const id = data.email.replace(/[^\w\s]/gi, '');
 
     firebase.database().ref(`subscribers/${id}`).set({
       email: data.email,
-      firstName: data.firstName || '',
-      lastName: data.lastName || '',
+      firstName: data.firstFieldValue || '',
+      lastName: data.secondFieldValue || '',
     })
       .then(() => {
         store.dispatch({
