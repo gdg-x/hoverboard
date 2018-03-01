@@ -30,6 +30,7 @@
   <template>
 
     <statistics-block app="{{app}}"></statistics-block>
+    <featured-people app="{{app}}" people="{{people}}" cascaded></featured-people>
     {% if videosSessionsUrl %}
       <featured-videos app="{{app}}"></featured-videos>
     {% endif %}
