@@ -219,6 +219,9 @@
         properties: {
           hideLogo: {
             type: Boolean
+          },
+          tickets: {
+            type: Object
           }
         },
 
@@ -255,12 +258,16 @@
         },
 
         _scrollToTickets: function () {
-          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'header');
-          Polymer.AppLayout.scroll({
-            top: HOVERBOARD.Elements.Tickets.getBoundingClientRect().top,
-            behavior: 'smooth',
-            target: HOVERBOARD.Elements.Scroller
-          });
+          if(this.app.page === "home") {
+            HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', 'header');
+            Polymer.AppLayout.scroll({
+              top: HOVERBOARD.Elements.Tickets.getBoundingClientRect().top,
+              behavior: 'smooth',
+              target: HOVERBOARD.Elements.Scroller
+            });
+          } else {
+            window.open(this.app.tickets.url, '_blank');
+          }
         }
 
       });
