@@ -1,56 +1,71 @@
 {
   "rules": {
-    ".read": true,
-    ".write": false,
-    "ratings": {
-      ".read": false,
-      ".write": false,
-      "$uid": {
-        ".read": "auth.uid === $uid",
-        ".write": "auth.uid === $uid"
-      }
+    "blog": {
+      ".read": true,
     },
     "featuredSessions": {
-      ".read": false,
-      ".write": false,
       "$uid": {
         ".read": "auth.uid === $uid",
         ".write": "auth.uid === $uid"
       }
     },
-    "speakers": {
+    "gallery": {
       ".read": true,
-      ".write": "root.child('users').child(auth.uid).child('rules').child('speakers').val() === true"
-    },
-    "subscribers": {
-      ".read": false,
-      ".write": false,
-      "$id": {
-        ".write": true
-       }
-    },
-    "potentialPartners": {
-      ".read": false,
-      ".write": false,
-      "$id": {
-        ".write": true
-       }
     },
     "notifications": {
-      ".read": false,
-      ".write": false,
       "subscribers": {
         ".read": true,
         ".write": true
       },
       "users": {
-        ".read": false,
-        ".write": false,
         "$uid": {
           ".read": "auth.uid === $uid",
           ".write": "auth.uid === $uid"
         }
       }
+    },
+    "partners": {
+      ".read": true
+    },
+    "potentialPartners": {
+      "$id": {
+        ".write": true
+      }
+    },
+    "ratings": {
+      "$uid": {
+        ".read": "auth.uid === $uid",
+        ".write": "auth.uid === $uid"
+      }
+    },
+    "schedule": {
+      ".read": true,
+    },
+    "sessions": {
+      ".read": true,
+    },
+    "speakers": {
+      ".read": true
+    },
+    "subscribers": {
+      "$id": {
+        ".write": true
+      }
+    },
+    "team": {
+      ".read": true
+    },
+    "tickets": {
+      ".read": true
+    },
+    "users": {
+      "$uid": {
+        ".read": "auth.uid === $uid",
+        ".write": "auth.uid === $uid"
+      }
+    },
+    "videos": {
+      ".read": true
     }
   }
 }
