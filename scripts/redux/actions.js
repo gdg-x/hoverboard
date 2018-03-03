@@ -116,13 +116,28 @@ const partnersActions = {
 };
 
 const videosActions = {
-  fetchVideos: () => {
-    return firebase.database()
-      .ref('/videos')
-      .on('value', (snapshot) => store.dispatch({
-        type: FETCH_VIDEOS,
-        videos: snapshot.val(),
-      }));
+  fetchVideos: () => (dispatch) => {
+    dispatch({
+      type: FETCH_VIDEOS,
+    });
+
+    return firebase.firestore().collection('videos')
+      .get()
+      .then((snaps) => {
+        const list = snaps.docs
+          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+
+        dispatch({
+          type: FETCH_VIDEOS_SUCCESS,
+          payload: { list },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: FETCH_VIDEOS_FAILURE,
+          payload: { error },
+        });
+      });
   },
 };
 
