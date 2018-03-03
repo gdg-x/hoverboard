@@ -24,8 +24,12 @@ const HIDE_TOAST = 'HIDE_TOAST';
 const FETCH_TICKETS = 'FETCH_TICKETS';
 // partners
 const FETCH_PARTNERS = 'FETCH_PARTNERS';
+
 // featured videos
-const FETCH_VIDEOS = 'FETCH_VIDEOS';
+const FETCH_VIDEOS = 'app/Videos/FETCH_VIDEOS';
+const FETCH_VIDEOS_FAILURE = 'app/Videos/FETCH_VIDEOS_FAILURE';
+const FETCH_VIDEOS_SUCCESS = 'app/Videos/FETCH_VIDEOS_SUCCESS';
+
 // video dialog
 const TOGGLE_VIDEO_DIALOG = 'TOGGLE_VIDEO_DIALOG';
 // blog
