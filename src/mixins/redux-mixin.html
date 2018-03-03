@@ -49,7 +49,11 @@
         data: {},
       },
     },
-    tickets: [],
+    tickets: {
+      fetching: false,
+      fetchingError: null,
+      list: [],
+    },
     partners: [],
     videos: {
       fetching: false,
