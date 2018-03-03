@@ -307,10 +307,10 @@
       _toggleNotifications() {
         this._closeNotificationMenu();
         if (this.notifications.status === NOTIFICATIONS_STATUS.GRANTED) {
-          notificationsActions.unsubscribe(this.notifications.token);
+          this.dispatch(notificationsActions.unsubscribe(this.notifications.token));
           return;
         }
-        notificationsActions.requestPermission();
+        this.dispatch(notificationsActions.requestPermission());
       }
 
       _getNotificationsIcon(status) {

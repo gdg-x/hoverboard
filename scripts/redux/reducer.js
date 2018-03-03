@@ -111,9 +111,6 @@ const speakersReducer = (state = initialState.speakers, action) => {
         obj: action.payload.obj,
       });
 
-    case FETCH_SPEAKERS_LIST:
-    case UPDATE_SPEAKERS:
-      return action.list;
     default:
       return state;
   }
@@ -159,12 +156,6 @@ const sessionsReducer = (state = initialState.sessions, action) => {
         },
       });
 
-
-    case FETCH_SESSIONS_LIST:
-    case UPDATE_SESSIONS:
-      return Object.assign({}, state, {
-        list: action.list,
-      });
     case FETCH_USER_FEATURED_SESSIONS:
     case SET_USER_FEATURED_SESSIONS:
       return Object.assign({}, state, {
@@ -177,7 +168,7 @@ const sessionsReducer = (state = initialState.sessions, action) => {
 
 const scheduleReducer = (state = initialState.schedule, action) => {
   switch (action.type) {
-    case FETCH_SCHEDULE:
+    case FETCH_SCHEDULE_SUCCESS:
       return action.data;
     default:
       return state;

@@ -12,6 +12,8 @@
 
 <link rel="import" href="../../mixins/utils-functions.html">
 <link rel="import" href="../../mixins/redux-mixin.html">
+<link rel="import" href="../../mixins/sessions-hoc.html">
+<link rel="import" href="../../mixins/speakers-hoc.html">
 <link rel="import" href="../text-truncate.html">
 <link rel="import" href="../shared-styles.html">
 <link rel="import" href="dialog-styles.html">
@@ -98,10 +100,12 @@
           </div>
         </div>
 
-        <div class="additional-sections" hidden$="[[!session.speakers.length]]">
+        <div class="additional-sections" hidden$="[[!sessionSpeakers.length]]">
           <h3>{$ sessionDetails.speakers $}</h3>
 
           <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
+            <a href$="/speakers/[[speaker.id]]" class="section">
+          <template is="dom-repeat" items="[[sessionSpeakers]]" as="speaker">
             <a href$="/speakers/[[speaker.id]]" class="section">
               <div layout horizontal center>
                 <plastic-image
@@ -127,9 +131,9 @@
   <script>
 
     // eslint-disable-next-line no-undef
-    class SessionDetails extends UtilsFunctions(
+    class SessionDetails extends UtilsFunctions(SessionsHoC(SpeakersHoC(
       ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element))
-    ) {
+    ))) {
       static get is() {
         return 'session-details';
       }
@@ -150,6 +154,10 @@
           featuredSessions: {
             type: Object,
             statePath: 'sessions.featured',
+          },
+          sessionSpeakers: {
+            type: Array,
+            computed: '_computeSpeakers(session, speakersMap)',
           },
         };
       }
@@ -207,6 +215,14 @@
 
       _getFeaturedSessionIcon(featuredSessions, sessionId) {
         return featuredSessions && featuredSessions[sessionId] ? 'bookmark-check' : 'bookmark-plus';
+      }
+
+      _computeSpeakers(session, speakersMap) {
+        if (Array.isArray(session.speakers) && speakersMap) {
+          return session.speakers.map((speakerId) => speakersMap[speakerId]);
+        }
+
+        return [];
       }
     }
 
