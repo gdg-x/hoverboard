@@ -138,6 +138,7 @@ const videosActions = {
     });
 
     return firebase.firestore().collection('videos')
+      .orderBy('order', 'asc')
       .get()
       .then((snaps) => {
         const list = snaps.docs
@@ -176,6 +177,7 @@ const speakersActions = {
 
     firebase.firestore()
       .collection('speakers')
+      .orderBy('order', 'asc')
       .get()
       .then((snaps) => {
         const list = snaps.docs
