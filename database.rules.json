@@ -1,10 +1,7 @@
 {
   "rules": {
-    "ratings": {
-      "$uid": {
-        ".read": "auth.uid === $uid",
-        ".write": "auth.uid === $uid"
-      }
+    "blog": {
+      ".read": true,
     },
     "featuredSessions": {
       "$uid": {
@@ -12,18 +9,8 @@
         ".write": "auth.uid === $uid"
       }
     },
-    "speakers": {
-      ".read": true
-    },
-    "subscribers": {
-      "$id": {
-        ".write": true
-      }
-    },
-    "potentialPartners": {
-      "$id": {
-        ".write": true
-      }
+    "gallery": {
+      ".read": true,
     },
     "notifications": {
       "subscribers": {
@@ -36,6 +23,37 @@
           ".write": "auth.uid === $uid"
         }
       }
+    },
+    "potentialPartners": {
+      "$id": {
+        ".write": true
+      }
+    },
+    "ratings": {
+      "$uid": {
+        ".read": "auth.uid === $uid",
+        ".write": "auth.uid === $uid"
+      }
+    },
+    "schedule": {
+      ".read": true,
+    },
+    "sessions": {
+      ".read": true,
+    },
+    "speakers": {
+      ".read": true
+    },
+    "subscribers": {
+      "$id": {
+        ".write": true
+      }
+    },
+    "team": {
+      ".read": true
+    },
+    "videos": {
+      ".read": true
     }
   }
 }
