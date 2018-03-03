@@ -269,11 +269,16 @@ const sessionsActions = {
 };
 
 const scheduleActions = {
-  fetchSchedule: () => {
-    const state = store.getState();
-    const speakersPromise = Object.keys(state.speakers).length
-      ? Promise.resolve(state.speakers)
-      : speakersActions.fetchList();
+  fetchSchedule: () => (dispatch, getState) => {
+    dispatch({
+      type: FETCH_SCHEDULE,
+    });
+
+    const state = getState();
+    const speakersPromise = Object.keys(state.speakers.obj).length
+      ? Promise.resolve(state.speakers.obj)
+      : speakersActions.fetchList()(dispatch, getState);
+
     const schedulePromise = new Promise((resolve) => {
       firebase.database()
         .ref('/schedule')
@@ -288,23 +293,23 @@ const scheduleActions = {
 
         scheduleWorker.postMessage({
           speakers,
-          sessions: store.getState().sessions.list,
+          sessions: getState().sessions.list.obj,
           schedule,
         });
 
         scheduleWorker.addEventListener('message', ({ data }) => {
-          store.dispatch({
-            type: FETCH_SCHEDULE,
+          dispatch({
+            type: FETCH_SCHEDULE_SUCCESS,
             data: data.schedule,
           });
-          store.dispatch({
-            type: UPDATE_SESSIONS,
-            list: data.sessions,
-          });
-          store.dispatch({
-            type: UPDATE_SPEAKERS,
-            list: data.speakers,
-          });
+          // store.dispatch({
+          //   type: UPDATE_SESSIONS,
+          //   list: data.sessions,
+          // });
+          // store.dispatch({
+          //   type: UPDATE_SPEAKERS,
+          //   list: data.speakers,
+          // });
           scheduleWorker.terminate();
         }, false);
       });
@@ -470,13 +475,13 @@ const notificationsActions = {
       resolve(messaging);
     });
   },
-  requestPermission: () => {
+  requestPermission: () => (dispatch) => {
     return messaging.requestPermission()
       .then(() => {
         notificationsActions.getToken(true);
       })
-      .catch((error) => {
-        store.dispatch({
+      .catch(() => {
+        dispatch({
           type: UPDATE_NOTIFICATIONS_STATUS,
           status: NOTIFICATIONS_STATUS.DENIED,
         });
@@ -485,11 +490,11 @@ const notificationsActions = {
       });
   },
 
-  getToken: (subscribe) => {
+  getToken: (subscribe) => (dispatch, getState) => {
     return messaging.getToken()
       .then((currentToken) => {
         if (currentToken) {
-          const state = store.getState();
+          const state = getState();
           const subscribersRef = firebase.database()
             .ref(`/notifications/subscribers/${currentToken}`);
           const subscribersPromise = subscribersRef.once('value');
@@ -511,7 +516,7 @@ const notificationsActions = {
                 false;
 
               if (isDeviceSubscribed) {
-                store.dispatch({
+                dispatch({
                   type: UPDATE_NOTIFICATIONS_STATUS,
                   status: NOTIFICATIONS_STATUS.GRANTED,
                   token: currentToken,
@@ -522,7 +527,7 @@ const notificationsActions = {
               } else if (!isDeviceSubscribed && subscribe) {
                 subscribersRef.set(true);
                 userUid && userSubscriptionsRef.set(true);
-                store.dispatch({
+                dispatch({
                   type: UPDATE_NOTIFICATIONS_STATUS,
                   status: NOTIFICATIONS_STATUS.GRANTED,
                   token: currentToken,
@@ -530,15 +535,15 @@ const notificationsActions = {
               }
             });
         } else {
-          store.dispatch({
+          dispatch({
             type: UPDATE_NOTIFICATIONS_STATUS,
             status: Notification.permission,
             token: null,
           });
         }
       })
-      .catch((error) => {
-        store.dispatch({
+      .catch(() => {
+        dispatch({
           type: UPDATE_NOTIFICATIONS_STATUS,
           status: NOTIFICATIONS_STATUS.DENIED,
           token: null,
@@ -548,10 +553,10 @@ const notificationsActions = {
       });
   },
 
-  unsubscribe: (token) => {
+  unsubscribe: (token) => (dispatch) => {
     return messaging.deleteToken(token)
       .then(() => {
-        store.dispatch({
+        dispatch({
           type: UPDATE_NOTIFICATIONS_STATUS,
           status: NOTIFICATIONS_STATUS.DEFAULT,
           token: null,
