@@ -55,7 +55,24 @@ const dialogsReducer = (state = initialState.dialogs, action) => {
 const ticketsReducer = (state = initialState.tickets, action) => {
   switch (action.type) {
     case FETCH_TICKETS:
-      return action.tickets;
+      return Object.assign({}, state, {
+        fetching: true,
+        fetchingError: null,
+        list: [],
+      });
+
+    case FETCH_TICKETS_FAILURE:
+      return Object.assign({}, state, {
+        fetching: false,
+        fetchingError: action.payload.error,
+      });
+
+    case FETCH_TICKETS_SUCCESS:
+      return Object.assign({}, state, {
+        fetching: false,
+        list: action.payload.list,
+      });
+
     default:
       return state;
   }

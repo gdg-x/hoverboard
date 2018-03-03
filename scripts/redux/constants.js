@@ -20,8 +20,12 @@ const DIALOGS = {
 // toast
 const SHOW_TOAST = 'SHOW_TOAST';
 const HIDE_TOAST = 'HIDE_TOAST';
+
 // tickets
-const FETCH_TICKETS = 'FETCH_TICKETS';
+const FETCH_TICKETS = 'app/Tickets/FETCH_TICKETS';
+const FETCH_TICKETS_FAILURE = 'app/Tickets/FETCH_TICKETS_FAILURE';
+const FETCH_TICKETS_SUCCESS = 'app/Tickets/FETCH_TICKETS_SUCCESS';
+
 // partners
 const FETCH_PARTNERS = 'FETCH_PARTNERS';
 
