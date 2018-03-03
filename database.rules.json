@@ -24,6 +24,9 @@
         }
       }
     },
+    "partners": {
+      ".read": true
+    },
     "potentialPartners": {
       "$id": {
         ".write": true
@@ -51,6 +54,15 @@
     },
     "team": {
       ".read": true
+    },
+    "tickets": {
+      ".read": true
+    },
+    "users": {
+      "$uid": {
+        ".read": "auth.uid === $uid",
+        ".write": "auth.uid === $uid"
+      }
     },
     "videos": {
       ".read": true
