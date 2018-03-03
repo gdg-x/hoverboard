@@ -1,5 +1,16 @@
 service cloud.firestore {
   match /databases/{database}/documents {
+    match /gallery/{photo} {
+      // Applies to single document read requests
+      allow get;
+
+      // Applies to queries and collection read requests
+      allow list;
+
+      // Disallow writes
+      allow write: if false;
+    }
+
     match /sessions/{session} {
       // Applies to single document read requests
       allow get;

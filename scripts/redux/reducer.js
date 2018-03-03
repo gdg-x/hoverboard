@@ -178,7 +178,24 @@ const scheduleReducer = (state = initialState.schedule, action) => {
 const galleryReducer = (state = initialState.gallery, action) => {
   switch (action.type) {
     case FETCH_GALLERY:
-      return action.gallery;
+      return Object.assign({}, state, {
+        fetching: true,
+        fetchingError: null,
+        list: [],
+      });
+
+    case FETCH_GALLERY_FAILURE:
+      return Object.assign({}, state, {
+        fetching: false,
+        fetchingError: action.payload.error,
+      });
+
+    case FETCH_GALLERY_SUCCESS:
+      return Object.assign({}, state, {
+        fetching: false,
+        list: action.payload.list,
+      });
+
     default:
       return state;
   }

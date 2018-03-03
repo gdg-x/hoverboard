@@ -70,7 +70,11 @@
       featured: {},
     },
     schedule: {},
-    gallery: [],
+    gallery: {
+      fetching: false,
+      fetchingError: null,
+      list: [],
+    },
     team: [],
     user: {
       signedIn: false,
