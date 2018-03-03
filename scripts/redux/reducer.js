@@ -90,6 +90,27 @@ const blogReducer = (state = initialState.blog, action) => {
 
 const speakersReducer = (state = initialState.speakers, action) => {
   switch (action.type) {
+    case FETCH_SPEAKERS:
+      return Object.assign({}, state, {
+        fetching: true,
+        fetchingError: null,
+        list: [],
+        obj: {},
+      });
+
+    case FETCH_SPEAKERS_FAILURE:
+      return Object.assign({}, state, {
+        fetching: false,
+        fetchingError: action.payload.error,
+      });
+
+    case FETCH_SPEAKERS_SUCCESS:
+      return Object.assign({}, state, {
+        fetching: false,
+        list: action.payload.list,
+        obj: action.payload.obj,
+      });
+
     case FETCH_SPEAKERS_LIST:
     case UPDATE_SPEAKERS:
       return action.list;
@@ -109,6 +130,36 @@ const previousSpeakersReducer = (state = initialState.previousSpeakers, action) 
 
 const sessionsReducer = (state = initialState.sessions, action) => {
   switch (action.type) {
+    case FETCH_SESSIONS:
+      return Object.assign({}, state, {
+        list: {
+          fetching: true,
+          fetchingError: null,
+          list: [],
+          obj: {},
+          objBySpeaker: {},
+        },
+      });
+
+    case FETCH_SESSIONS_FAILURE:
+      return Object.assign({}, state, {
+        list: {
+          fetching: false,
+          fetchingError: action.payload.error,
+        },
+      });
+
+    case FETCH_SESSIONS_SUCCESS:
+      return Object.assign({}, state, {
+        list: {
+          fetching: false,
+          list: action.payload.list,
+          obj: action.payload.obj,
+          objBySpeaker: action.payload.objBySpeaker,
+        },
+      });
+
+
     case FETCH_SESSIONS_LIST:
     case UPDATE_SESSIONS:
       return Object.assign({}, state, {

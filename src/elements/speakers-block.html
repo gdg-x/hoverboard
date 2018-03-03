@@ -6,6 +6,7 @@
 
 <link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="../mixins/speakers-hoc.html">
 <link rel="import" href="../elements/text-truncate.html">
 <link rel="import" href="./shared-styles.html">
 
@@ -135,7 +136,7 @@
       <h1 class="container-title">{$ speakersBlock.title $}</h1>
 
       <div class="speakers-wrapper">
-        <template is="dom-repeat" items="[[speakers]]" as="speaker">
+        <template is="dom-repeat" items="[[featuredSpeakers]]" as="speaker">
           <div class="speaker"
                 on-tap="_openSpeaker"
                 ga-on="click"
@@ -199,9 +200,10 @@
   <script>
 
     // eslint-disable-next-line no-undef
-    class SpeakersBlock extends UtilsFunctions(
+    class SpeakersBlock extends UtilsFunctions(SpeakersHoC(
+      // eslint-disable-next-line no-undef
       ReduxMixin(Polymer.GestureEventListeners(Polymer.Element))
-    ) {
+    )) {
       static get is() {
         return 'speakers-block';
       }
@@ -210,15 +212,10 @@
         return {
           speakersRaw: {
             type: Object,
-            statePath: 'speakers',
+            statePath: 'speakers.list',
             observer: '_generateSpeakers',
           },
         };
-      }
-
-      connectedCallback() {
-        super.connectedCallback();
-        if (!Object.keys(this.speakers).length) speakersActions.fetchList();
       }
 
       _openSpeaker(e) {
@@ -228,9 +225,9 @@
       }
 
       _generateSpeakers(speakers) {
-        const filteredSpeakers = this.transformToArray(speakers, 'id')
+        const filteredSpeakers = this.speakers
           .filter((speaker) => speaker.featured);
-        this.set('speakers', this.randomOrder(filteredSpeakers).slice(0, 4));
+        this.set('featuredSpeakers', this.randomOrder(filteredSpeakers).slice(0, 4));
       }
     }
 

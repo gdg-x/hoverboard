@@ -11,6 +11,7 @@
 
 <link rel="import" href="../../mixins/utils-functions.html">
 <link rel="import" href="../../mixins/redux-mixin.html">
+<link rel="import" href="../../mixins/sessions-hoc.html">
 <link rel="import" href="../text-truncate.html">
 <link rel="import" href="../shared-styles.html">
 <link rel="import" href="dialog-styles.html">
@@ -103,10 +104,10 @@
           </template>
         </div>
 
-        <div class="additional-sections" hidden$="[[!speaker.sessions.length]]">
+        <div class="additional-sections" hidden$="[[!getSessionsBySpeaker(speaker.id).length]]">
           <h3>{$ speakerDetails.sessions $}</h3>
 
-          <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
+          <template is="dom-repeat" items="[[getSessionsBySpeaker(speaker.id)]]" as="session">
             <a href$="/schedule?sessionId=[[session.id]]" class="section">
               <div layout horizontal center>
                 <div class="section-details" flex>
@@ -133,7 +134,8 @@
 
     // eslint-disable-next-line no-undef
     class SpeakerDetails extends UtilsFunctions(
-      ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element))
+      // eslint-disable-next-line no-undef
+      ReduxMixin(SessionsHoC(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element)))
     ) {
       static get is() {
         return 'speaker-details';

@@ -1,0 +1,36 @@
+<link rel="import" href="../mixins/redux-mixin.html">
+<script>
+  /* eslint-disable no-unused-vars */
+
+  /* @polymerMixin */
+  const SpeakersHoC = (subclass) => class extends ReduxMixin(subclass) {
+    static get properties() {
+      return {
+        speakers: {
+          type: Array,
+          statePath: 'speakers.list',
+        },
+        speakersMap: {
+          type: Object,
+          statePath: 'speakers.obj',
+        },
+        speakersFetching: {
+          type: Boolean,
+          statePath: 'speakers.fetching',
+        },
+        speakersFetchingError: {
+          type: Object,
+          statePath: 'speakers.fetchingError',
+        },
+      };
+    }
+
+    connectedCallback() {
+      super.connectedCallback();
+
+      if (!this.speakersFetching && (!this.speakers || !this.speakers.length)) {
+        this.dispatch(speakersActions.fetchList());
+      }
+    }
+  };
+</script>
