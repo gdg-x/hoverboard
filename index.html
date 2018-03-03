@@ -81,19 +81,29 @@
     window.HOVERBOARD = { Elements: {} };
 
     function loadFirebaseModule() {
-      return new Promise((resolve) => {
+      return new Promise((resolve, reject) => {
         const script = document.createElement('script');
         script.src = `bower_components/firebase/firebase.js`;
         script.async = false;
         script.onload = () => resolve();
-        script.onerror = () => {
-          throw new Error();
-        };
+        script.onerror = () => reject();
+        document.head.appendChild(script);
+      });
+    }
+
+    function loadFirestoreModule() {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = `bower_components/firebase/firebase-firestore.js`;
+        script.async = true;
+        script.onload = () => resolve();
+        script.onerror = () => reject();
         document.head.appendChild(script);
       });
     }
 
     loadFirebaseModule()
+      .then(loadFirestoreModule)
       .then(() => {
         firebase.initializeApp({
           apiKey: '{$ firebase.apiKey $}',
