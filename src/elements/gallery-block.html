@@ -131,7 +131,7 @@
       <template is="dom-repeat" items="[[gallery]]" as="photo">
         <plastic-image
           class="grid-item"
-          srcset="[[photo]]"
+          srcset="[[photo.url]]"
           sizing="cover"
           lazy-load preload fade
         ></plastic-image>
@@ -159,15 +159,26 @@
       static get properties() {
         return {
           gallery: {
-            route: Object,
-            statePath: 'gallery',
+            type: Array,
+            statePath: 'gallery.list',
+          },
+          galleryFetching: {
+            type: Boolean,
+            statePath: 'gallery.fetching',
+          },
+          galleryFetchingError: {
+            type: Object,
+            statePath: 'gallery.fetchingError',
           },
         };
       }
 
       connectedCallback() {
         super.connectedCallback();
-        if (!Object.keys(this.gallery).length) galleryActions.fetchGallery();
+
+        if (!this.gallery || !this.gallery.length) {
+          this.dispatch(galleryActions.fetchGallery());
+        }
       }
     }
 
