@@ -33,7 +33,7 @@ Our goal is to allow event organizers to set up professional conference website 
 1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone it locally
 2. Setup Environment
    * Install [Node.js (v8.9.4 or above)](https://nodejs.org/en/download/)
-   * Instal Firebase CLI: `npm i -g firebase-cli`
+   * Instal Firebase CLI: `npm i -g firebase-tools`
 3. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `firebase login`
 4. Update [Hoverboard config](/config) and [Resources](/data)
 5. Run locally
