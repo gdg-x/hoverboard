@@ -1,7 +1,7 @@
 {
   "rules": {
     "blog": {
-      ".read": true,
+      ".read": true
     },
     "featuredSessions": {
       "$uid": {
@@ -10,7 +10,7 @@
       }
     },
     "gallery": {
-      ".read": true,
+      ".read": true
     },
     "notifications": {
       "subscribers": {
@@ -39,10 +39,10 @@
       }
     },
     "schedule": {
-      ".read": true,
+      ".read": true
     },
     "sessions": {
-      ".read": true,
+      ".read": true
     },
     "speakers": {
       ".read": true
