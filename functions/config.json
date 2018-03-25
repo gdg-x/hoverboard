@@ -1,0 +1,6 @@
+{
+    "mailchimp": {
+        "apiKey": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+        "listId": "XXXXXXXXXX"
+    }
+}
