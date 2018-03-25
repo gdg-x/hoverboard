@@ -27,7 +27,7 @@ export const mailchimpSubscribe = functions.database.ref('/subscribers/{id}')
                 subscriberData.status = 'pending';
                 const hash = md5(subscriberData.email_address);
 
-                subscribeToMailchimp('PATCH', mailchimpConfig, subscriberData, (bodyObj) => {
+                return subscribeToMailchimp('PATCH', mailchimpConfig, subscriberData, (bodyObj) => {
                     console.log(`${bodyObj.email_address} was updated to subscribe list.`);
                 }, hash);
             }
