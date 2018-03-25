@@ -231,14 +231,6 @@
         videosActions.fetchVideos();
       }
 
-      ready() {
-        super.ready();
-        let startPosition = 0;
-        let distancePosition = 0;
-        let isMouseDown = false;
-        const videoListElement = this.$.videos;      
-      }
-
       shiftContentLeft() {
         const {
           cardWidth,
@@ -297,7 +289,6 @@
         const videos = this.shadowRoot.querySelectorAll('.video-item');
         const cardRect = videos[videos.length - 1].getBoundingClientRect();
         const cardWidth = cardRect.width;
-        const videosLength = videos.length;
         const videosContainerWidth = parseInt(getComputedStyle(this.$.videoList, null)
           .getPropertyValue('width'));
         const videosWidth = parseInt(getComputedStyle(this.$.videos, null)
