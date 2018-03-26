@@ -140,10 +140,9 @@
             ga-event-label="left"
             hidden$="[[_leftArrowHidden]]"
         ></paper-icon-button>
-
         <div id="videoList" class="video-list" layout flex horizontal>
           <div id="videos" class="videos" layout horizontal>
-            <template is="dom-repeat" items="[[videos]]" as="block" index-as="index">
+             <template is="dom-repeat" items="[[videos]]" as="block" index-as="index">
               <div class="video-item"
                   on-tap="playVideo"
                   ga-on="click"
@@ -154,7 +153,7 @@
                   <plastic-image
                     id="image[[index]]"
                     class="thumbnail-image"
-                    srcset="[[getSessionsImageUrl(block.thumbnail, index)]]"
+                    srcset="[[block.thumbnail]]"
                     sizing="cover"
                     lazy-load preload fade fit
                   ></plastic-image>
@@ -169,7 +168,6 @@
             </template>
           </div>
         </div>
-
         <paper-icon-button
           class="next-video slide-icon"
           icon="hoverboard:chevron-right"
@@ -181,7 +179,6 @@
           hidden$="[[_rightArrowHidden]]">
         ></paper-icon-button>
       </div>
-
       <a
         href="{$ featuredVideos.callToAction.link $}"
         target="_blank"
@@ -192,7 +189,6 @@
           <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
         </paper-button>
       </a>
-
     </div>
   </template>
 
@@ -309,21 +305,6 @@
 
       transformVideoList(el, newPosition) {
         el.style.transform = 'translate3d(' + newPosition + 'px, 0, 0)';
-      }
-
-      getSessionsImageUrl(path, index) {
-        const id = '#image' + index;
-        firebase.storage()
-          .ref(path)
-          .getDownloadURL()
-          .then((url) => {
-            let imageElement = this.shadowRoot.querySelector(id);
-            imageElement.srcset = url;
-          })
-          .catch((error) => {
-            // eslint-disable-next-line no-console
-            console.error(`Error occurred during getting sessions images from storage: ${error}`);
-          });
       }
 
       playVideo(e) {
