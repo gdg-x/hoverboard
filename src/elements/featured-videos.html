@@ -11,17 +11,24 @@
 
 <dom-module id="featured-videos">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning scale-animations"></style>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
 
     <style>
       :host {
         display: block;
-        --video-item-height: 256px;
+        --video-item-height: 200px;
+      }
+
+      .videos-wrapper {
+        position: relative;
+        overflow: hidden;
       }
 
       .video-list {
-        position: relative;
-        overflow: hidden;
+        margin-bottom: -20px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
       }
 
       .videos {
@@ -31,34 +38,16 @@
       }
 
       .slide-icon {
-        margin: 8px;
-        width: 40px;
-        height: 40px;
-        position: absolute;
-        z-index: 1;
-        top: calc(var(--video-item-height) / 2 - 25px);
-        display: block;
-        opacity: 0.9;
-        background-color: #fff;
-        border-radius: 50%;
-        color: var(--default-primary-color);
-        transition: opacity var(--animation);
-        animation-duration: 0.5s;
-        animation-name: grow;
-      }
-
-      .slide-icon:last-of-type {
-        right: 0;
-      }
+        display: none;
+      }      
 
       .video-item {
-        width: calc(var(--max-container-width) / 3 - 16px);
-        cursor: pointer;
+        width: 300px;
       }
 
       .video-item:not(:last-of-type) {
-        padding-right: 30px;
-      }
+          padding-right: 18px;
+      }     
 
       .video-item:hover .video-play-icon {
         transform: scale(1.2) translateZ(0);
@@ -98,51 +87,87 @@
         margin-top: 24px;
       }
 
+      @media (min-width: 640px) {
+
+        :host {
+          --video-item-height: 256px;
+        }
+
+        .video-item {
+          width: calc(var(--max-container-width) / 3 - 16px);
+          cursor: pointer;
+        }        
+        
+        .video-item:not(:last-of-type) {
+          padding-right: 30px;
+        }
+
+        .slide-icon {
+          margin: 8px;
+          width: 40px;
+          height: 40px;
+          position: absolute;
+          z-index: 1;
+          top: calc(var(--video-item-height) / 2 - 25px);
+          display: block;
+          opacity: 0.9;
+          background-color: #fff;
+          border-radius: 50%;
+          color: var(--default-primary-color);
+          transition: opacity var(--animation);
+          display: block;
+        }
+
+        .slide-icon:last-of-type {
+          right: 0;
+        }
+      }
+
     </style>
     <div class="container">
       <div class="header" layout horizontal justified center wrap>
         <h1 class="container-title">{$ featuredVideos.title $}</h1>
       </div>
 
-      <div id="videoList" class="video-list" layout flex horizontal>
-        <paper-icon-button
-          class="last-video slide-icon"
-          icon="hoverboard:chevron-left"
-          on-tap="shiftContentLeft"          
-          ga-on="click"
-          ga-event-category="video-list-arrow"
-          ga-event-action="click"
-          ga-event-label="left"
-          hidden$="[[_leftArrowHidden]]"
+      <div class="videos-wrapper" layout flex horizontal>
+          <paper-icon-button
+            class="last-video slide-icon"
+            icon="hoverboard:chevron-left"
+            on-tap="shiftContentLeft"          
+            ga-on="click"
+            ga-event-category="video-list-arrow"
+            ga-event-action="click"
+            ga-event-label="left"
+            hidden$="[[_leftArrowHidden]]"
         ></paper-icon-button>
-
-        <div id="videos" class="videos" layout horizontal>
-          <template is="dom-repeat" items="[[videos]]" as="block" index-as="index">
-            <div class="video-item"
-                 on-tap="playVideo"
-                 ga-on="click"
-                 ga-event-category="video"
-                 ga-event-action="watch"
-                 ga-event-label$="[[block.title]]">
-              <div class="thumbnail" relative layout horizontal center-center>
-                <plastic-image
-                  id="image[[index]]"
-                  class="thumbnail-image"
-                  srcset="[[block.thumbnail]]"
-                  sizing="cover"
-                  lazy-load preload fade fit
-                ></plastic-image>
-                <div class="image-overlay" fit></div>
-                <paper-icon-button
-                  class="video-play-icon"
-                  icon="hoverboard:play"
-                ></paper-icon-button>
+        <div id="videoList" class="video-list" layout flex horizontal>
+          <div id="videos" class="videos" layout horizontal>
+             <template is="dom-repeat" items="[[videos]]" as="block" index-as="index">
+              <div class="video-item"
+                  on-tap="playVideo"
+                  ga-on="click"
+                  ga-event-category="video"
+                  ga-event-action="watch"
+                  ga-event-label$="[[block.title]]">
+                <div class="thumbnail" relative layout horizontal center-center>
+                  <plastic-image
+                    id="image[[index]]"
+                    class="thumbnail-image"
+                    srcset="[[block.thumbnail]]"
+                    sizing="cover"
+                    lazy-load preload fade fit
+                  ></plastic-image>
+                  <div class="image-overlay" fit></div>
+                  <paper-icon-button
+                    class="video-play-icon"
+                    icon="hoverboard:play"
+                  ></paper-icon-button>
+                </div>
+                <h4 class="video-title">[[block.title]]</h4>
               </div>
-              <h4 class="video-title">[[block.title]]</h4>
-            </div>
-          </template>
+            </template>
+          </div>
         </div>
-
         <paper-icon-button
           class="next-video slide-icon"
           icon="hoverboard:chevron-right"
@@ -153,9 +178,7 @@
           ga-event-label="right"
           hidden$="[[_rightArrowHidden]]">
         ></paper-icon-button>
-
       </div>
-
       <a
         href="{$ featuredVideos.callToAction.link $}"
         target="_blank"
@@ -166,12 +189,11 @@
           <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
         </paper-button>
       </a>
-
     </div>
   </template>
 
   <script>
-    class FeaturedVideos extends ReduxMixin(Polymer.GestureEventListeners(Polymer.Element)) {
+    class FeaturedVideos extends ReduxMixin(Polymer.Element) {
       static get is() {
         return 'featured-videos';
       }
@@ -200,69 +222,6 @@
       connectedCallback() {
         super.connectedCallback();
         videosActions.fetchVideos();
-      }
-
-      ready() {
-        super.ready();
-        let startPosition = 0;
-        let distancePosition = 0;
-        let isMouseDown = false;
-        const videoListElement = this.$.videos;
-
-        Polymer.Gestures.addListener(this.$.videos, 'track', (event) => {
-          if (!isMouseDown) return;
-
-          const {
-            currentPosition,
-            maxRightPosition,
-          } = this.getVideosDetails();
-
-          distancePosition = (event.detail.x - startPosition) + currentPosition;
-
-          if (distancePosition < maxRightPosition) {
-            distancePosition = maxRightPosition;
-          }
-
-          if (distancePosition > 0) {
-            distancePosition = 0;
-          }
-
-          this.transformVideoList(videoListElement, distancePosition);
-          ga('send', 'event', 'video-list', 'swipe', distancePosition);
-
-          this._leftArrowHidden = true;
-          this._rightArrowHidden = true;
-        });
-
-        Polymer.Gestures.addListener(this.$.videos, 'down', (event) => {
-          isMouseDown = true;
-          startPosition = event.detail.x;
-        });
-
-        Polymer.Gestures.addListener(this.$.videos, 'up', () => {
-          isMouseDown = false;
-
-          const {
-            currentPosition,
-            maxRightPosition,
-          } = this.getVideosDetails();
-
-          if (currentPosition == maxRightPosition) {
-            this._rightArrowHidden = true;
-          }
-          else {
-            this._rightArrowHidden = false;
-          }
-
-          if (currentPosition == 0) {
-            this._leftArrowHidden = true;
-          }
-          else {
-           this._leftArrowHidden = false;
-          }
-        });
-
-        Polymer.Gestures.setTouchAction(this.$.videos, 'pan-y pinch-zoom');
       }
 
       shiftContentLeft() {
@@ -323,7 +282,6 @@
         const videos = this.shadowRoot.querySelectorAll('.video-item');
         const cardRect = videos[videos.length - 1].getBoundingClientRect();
         const cardWidth = cardRect.width;
-        const videosLength = videos.length;
         const videosContainerWidth = parseInt(getComputedStyle(this.$.videoList, null)
           .getPropertyValue('width'));
         const videosWidth = parseInt(getComputedStyle(this.$.videos, null)
@@ -334,7 +292,6 @@
 
         return {
           cardWidth,
-          videosLength,
           maxRightPosition,
           currentPosition,
         };
