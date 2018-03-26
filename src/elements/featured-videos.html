@@ -128,7 +128,7 @@
                 <plastic-image
                   id="image[[index]]"
                   class="thumbnail-image"
-                  srcset="[[getSessionsImageUrl(block.thumbnail, index)]]"
+                  srcset="[[block.thumbnail]]"
                   sizing="cover"
                   lazy-load preload fade fit
                 ></plastic-image>
@@ -348,21 +348,6 @@
 
       transformVideoList(el, newPosition) {
         el.style.transform = 'translate3d(' + newPosition + 'px, 0, 0)';
-      }
-
-      getSessionsImageUrl(path, index) {
-        const id = '#image' + index;
-        firebase.storage()
-          .ref(path)
-          .getDownloadURL()
-          .then((url) => {
-            let imageElement = this.shadowRoot.querySelector(id);
-            imageElement.srcset = url;
-          })
-          .catch((error) => {
-            // eslint-disable-next-line no-console
-            console.error(`Error occurred during getting sessions images from storage: ${error}`);
-          });
       }
 
       playVideo(e) {
