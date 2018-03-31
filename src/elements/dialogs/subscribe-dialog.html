@@ -219,17 +219,19 @@
           emailInput.invalid = true;
           return;
         }
-       
+
         this.data.submit({
           email: this.email,
           firstFieldValue: this.firstFieldValue,
           secondFieldValue: this.secondFieldValue,
-        }); 
+        });
       }
 
       _validateEmail(email) {
-        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
+        /* eslint-disable */
+        const emailRegularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return emailRegularExpression.test(email);
+        /* eslint-enable */
       }
 
       _closeDialog() {
