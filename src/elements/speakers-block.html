@@ -20,21 +20,21 @@
       }
 
       .speakers-wrapper {
+        margin: 40px 0 32px;
         display: grid;
-        grid-template-columns: 1fr;
-        grid-gap: 16px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 32px 16px;
       }
 
       .speaker {
-        padding: 32px 24px;
         text-align: center;
         cursor: pointer;
       }
 
       .photo {
-        width: 128px;
-        height: 128px;
-        background-color: var(--secondary-background-color);
+        width: 72px;
+        height: 72px;
+        background-color: var(--accent-color);
         border-radius: 50%;
         overflow: hidden;
         transform: translateZ(0);
@@ -85,7 +85,7 @@
 
       .name {
         margin-top: 8px;
-        line-height: 1;
+        line-height: 1.1;
       }
 
       .origin {
@@ -99,8 +99,13 @@
       }
 
       @media (min-width: 640px) {
-        .speakers-wrapper {
-          grid-template-columns: repeat(2, 1fr);
+        .photo {
+          width: 128px;
+          height: 128px;
+        }
+
+        .name {
+          font-size: 24px;
         }
       }
 
@@ -131,7 +136,7 @@
 
       <div class="speakers-wrapper">
         <template is="dom-repeat" items="[[speakers]]" as="speaker">
-          <div class="speaker card"
+          <div class="speaker"
                 on-tap="_openSpeaker"
                 ga-on="click"
                 ga-event-category="speaker"
@@ -169,7 +174,7 @@
 
             <div class="description">
               <text-truncate lines="1">
-                <h2 class="name">[[speaker.name]]</h2>
+                <h3 class="name">[[speaker.name]]</h3>
               </text-truncate>
               <text-truncate lines="1">
                 <div class="origin">[[speaker.country]]</div>
