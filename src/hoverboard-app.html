@@ -336,12 +336,14 @@
         window.performance && performance.mark && performance.mark('hoverboard-app.created');
         this._removeQueryParams = this._removeQueryParams.bind(this);
         this._toggleHeaderShadow = this._toggleHeaderShadow.bind(this);
+        this._toggleDrawer = this._toggleDrawer.bind(this);
       }
 
       connectedCallback() {
         super.connectedCallback();
         window.addEventListener('reset-query-params', this._removeQueryParams);
         window.addEventListener('element-sticked', this._toggleHeaderShadow);
+        this.$.drawer.addEventListener('opened-changed', this._toggleDrawer);
         window.addEventListener('offline', () => {
           toastActions.showToast({
             message: '{$ offlineMessage $}',
@@ -353,6 +355,7 @@
         super.disconnectedCallback();
         window.removeEventListener('reset-query-params', this._removeQueryParams);
         window.removeEventListener('element-sticked', this._toggleHeaderShadow);
+        this.$.drawer.removeEventListener('opened-changed', this._toggleDrawer);
       }
 
       ready() {
@@ -418,6 +421,10 @@
 
       _toggleHeaderShadow(e) {
         this.$.header.classList.toggle('remove-shadow', e.detail.sticked);
+      }
+
+      _toggleDrawer(e) {
+        uiActions.toggleDrawer(e.detail.value);
       }
     }
 
