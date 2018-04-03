@@ -10,9 +10,11 @@ install:
 - cd functions && yarn && cd ..
 script:
 - yarn lint
+- echo "Building..."
+- $TRAVIS_BRANCH == "develop" && yarn build
+- ($TRAVIS_BRANCH == "master" || $TRAVIS_BRANCH == "hoverboard-v2") && yarn build:prod
 before_deploy:
 - echo "Deploying!"
-- yarn build:prod
 deploy:
 - provider: firebase
   skip_cleanup: true
