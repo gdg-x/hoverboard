@@ -11,8 +11,8 @@ install:
 script:
 - yarn lint
 - echo "Building..."
-- $TRAVIS_BRANCH == "develop" && yarn build
-- ($TRAVIS_BRANCH == "master" || $TRAVIS_BRANCH == "hoverboard-v2") && yarn build:prod
+- if [ "$TRAVIS_BRANCH" == "develop" ]; then yarn build; fi
+- if [ "$TRAVIS_BRANCH" == "hoverboard-v2" ]; then yarn build:prod; fi
 before_deploy:
 - echo "Deploying!"
 deploy:
