@@ -14,10 +14,9 @@
         overflow-y: hidden;
         padding: 10px 0;
         color: var(--footer-text-color);
-      }
-
-      .col {
-        margin-right: 16px;
+        display: grid;
+        grid-gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       }
 
       .col-heading {
@@ -57,10 +56,6 @@
           padding: 30px 0;
         }
 
-        .col {
-            max-width: 280px;
-        }
-
         .col-heading {
           font-size: 18px;
           margin-top: 0;
@@ -69,14 +64,14 @@
 
     </style>
     {% for footerRel in footerRelBlock %}
-      <div class="col" layout vertical wrap flex-auto>
-        <div class="col-heading">{$ footerRel.title $}</div>
-        <ul class="nav">
-          {% for link in footerRel.links %}
-          <li><a href="{$ link.url $}"  {% if link.newTab %} target="_blank" rel="noopener noreferrer" {% endif %}>{$ link.name $}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
+    <div class="col" layout vertical wrap flex-auto>
+      <div class="col-heading">{$ footerRel.title $}</div>
+      <ul class="nav">
+        {% for link in footerRel.links %}
+        <li><a href="{$ link.url $}"  {% if link.newTab %} target="_blank" rel="noopener noreferrer" {% endif %}>{$ link.name $}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
     {% endfor %}
 
     <div class="col" layout vertical flex-auto wrap>

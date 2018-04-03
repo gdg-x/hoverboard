@@ -29,7 +29,7 @@
       }
 
       .fab paper-fab {
-        background: #fff;
+        background: var(--primary-background-color);
         color: inherit;
         pointer-events: all;
         box-shadow: 0 0 8px 0 rgba(0,0,0,0.12), 0 8px 8px 0 rgba(0,0,0,0.24);
@@ -56,8 +56,8 @@
         <paper-fab class="back-to-top" icon="hoverboard:up" on-click="backToTop"></paper-fab>
       </div>
       <footer-social layout flex flex-auto horizontal wrap></footer-social>
-      <footer-rel layout flex horizontal wrap></footer-rel>
-      <footer-nav layout flex horizontal wrap></footer-nav>
+      <footer-rel></footer-rel>
+      <footer-nav layout horizontal wrap justified center></footer-nav>
     </div>
   </template>
 
