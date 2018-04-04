@@ -33,17 +33,25 @@
         const p = currentTime / animationTime;
         const t = easingEquations[easing](p);
 
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+                          || document.body.scrollTop || 0;
+        const difference = scrollTargetY - scrollTop;
+
+        const newPosition = (scrollTop + ((scrollTargetY - scrollTop) * t));
+
         if (p < 1) {
           window.requestAnimationFrame(tick);
-
-          window.scrollTo(0, scrollY + ((scrollTargetY - scrollY) * t));
-        } else {
-          window.scrollTo(0, scrollTargetY);
+          document.body.scrollTop = document.documentElement.scrollTop = newPosition;
         }
       }
 
-      // call it once to get started
       tick();
+    }
+
+    offsetTop(element) {
+          return element.getBoundingClientRect().top +
+              (window.pageYOffset || document.documentElement.scrollTop) -
+              (document.documentElement.clientTop || 0);
     }
   };
 </script>
