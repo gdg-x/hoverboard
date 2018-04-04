@@ -13,6 +13,7 @@
 <link rel="import" href="../elements/map-block.html">
 <link rel="import" href="../elements/about-organizer-block.html">
 <link rel="import" href="../mixins/scroll-functions.html">
+<link rel="import" href="../mixins/redux-mixin.html">
 
 <dom-module id="home-page">
   <template>
@@ -51,6 +52,7 @@
 
       .action-buttons paper-button {
         margin: 8px;
+        color: #fff;
       }
 
       .action-buttons iron-icon {
@@ -93,7 +95,7 @@
 
       @media (min-height: 500px) {
         hero-block {
-          height: calc(100% + 56px);
+          height: calc(100% + 57px);
           max-height: calc(100vh + 1px);
         }
 
@@ -112,7 +114,7 @@
 
       @media (min-width: 812px) {
         hero-block {
-          height: calc(100% + 64px);
+          height: calc(100% + 65px);
         }
 
         .hero-logo {
@@ -192,7 +194,7 @@
   <script>
 
     // eslint-disable-next-line no-undef
-    class HomePage extends ScrollFunctions(Polymer.Element) {
+    class HomePage extends ScrollFunctions(ReduxMixin(Polymer.Element)) {
       static get is() {
         return 'home-page';
       }
@@ -200,6 +202,10 @@
       static get properties() {
         return {
           active: Boolean,
+          viewport: {
+            type: Object,
+            statePath: 'ui.viewport',
+          },
         };
       }
 
@@ -214,7 +220,10 @@
 
       _scrollToTickets() {
         // eslint-disable-next-line no-undef
-        const ticketsBlockPositionY = HOVERBOARD.Elements.Tickets.getBoundingClientRect().top - 128;
+        const toolbarHeight = HOVERBOARD.Elements.HeaderToolbar.getBoundingClientRect().height - 1;
+        // eslint-disable-next-line no-undef
+        const ticketsBlockPositionY = HOVERBOARD.Elements.Tickets.getBoundingClientRect().top
+          - toolbarHeight;
         this.scrollToY(ticketsBlockPositionY, 600, 'easeInOutSine');
       }
 

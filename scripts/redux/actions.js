@@ -392,6 +392,7 @@ const subscribeActions = {
       companyName: data.secondFieldValue || '',
     }).then(() => {
       dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
+      toastActions.showToast({ message: '{$ partnersBlock.toast $}' });
     });
   },
   subscribe: (data) => {
@@ -407,6 +408,7 @@ const subscribeActions = {
           type: SUBSCRIBE,
           subscribed: true,
         });
+        toastActions.showToast({ message: '{$ subscribeBlock.toast $}' });
       })
       .catch(() => {
         store.dispatch({

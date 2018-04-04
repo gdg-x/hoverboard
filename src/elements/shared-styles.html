@@ -58,6 +58,14 @@
         --design: #E91E63;
       }
 
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+      }
+
       body {
         font-family: var(--font-family);
         text-rendering: optimizeLegibility;
@@ -96,11 +104,18 @@
         padding: 0.7em;
         border-radius: 2px;
         font-size: 14px;
+        color: var(--default-primary-color);
         transition: background-color var(--animation);
       }
 
       paper-button:hover {
         background-color: var(--primary-color-transparent);
+      }
+
+      paper-button[disabled] {
+        cursor: default;
+        background-color: var(--primary-color-transparent);
+        opacity: 0.8;
       }
 
       paper-button[primary] {
@@ -186,7 +201,7 @@
       }
 
       .card {
-        background-color: #fff;
+        background-color: var(--default-background-color);
         box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.07), 0 2px 2px 0 rgba(0, 0, 0, 0.15);
         transition: box-shadow var(--animation);
         cursor: pointer;

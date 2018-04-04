@@ -276,6 +276,12 @@
         ];
       }
 
+      connectedCallback() {
+        super.connectedCallback();
+        // eslint-disable-next-line no-undef
+        HOVERBOARD.Elements.HeaderToolbar = this;
+      }
+
       openDrawer() {
         uiActions.toggleDrawer(true);
       }
