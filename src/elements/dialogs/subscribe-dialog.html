@@ -16,7 +16,7 @@
         display: block;
         width: 85%;
         max-width: 420px;
-        background: #fff;
+        background: var(--primary-background-color);
         box-shadow: var(--box-shadow);
 
         --paper-input-container-focus-color: var(--default-primary-color);
@@ -24,17 +24,16 @@
       }
 
       .dialog-header {
+        margin-bottom: 24px;
+        padding: 32px 32px 16px;
         background: var(--default-primary-color);
-        padding: 38px 32px 20px;
         color: #fff;
         font-size: 20px;
         line-height: 1.5;
-        margin-bottom: 32px;
       }
 
       paper-input {
-        margin: 16px 32px;
-        height: 40px;
+        margin: 16px 32px 0;
       }
 
       paper-input:first-of-type {
@@ -42,43 +41,17 @@
       }
 
       .action-buttons {
-        padding: 0 12px;
-        margin-top: 16px;
-        height: 72px;
-      }
-
-      paper-button {
-        height: 48px;
+        margin: 32px 24px 24px;
       }
 
       .close-button {
         color: var(--secondary-text-color);
       }
 
-      .subscribe-button {
-        color: var(--dark-primary-color);
-      }
-
-      .subscribe-button:hover {
-        color: var(--focused-color);
-      }
-
       .general-error {
-        color: var(--error-color);
         margin: 0 32px;
+        color: var(--error-color);
       }
-
-      @media (min-width: 640px) {
-
-        .action-buttons {
-          margin-top: 24px;
-        }
-
-        paper-input {
-          height: 56px;
-        }
-      }
-
 
     </style>
 
@@ -115,12 +88,13 @@
         </paper-button>
 
         <paper-button
-          class="subscribe-button"
           on-tap="_subscribe"
           ga-on="click"
           ga-event-category="attendees"
           ga-event-action="subscribe"
-          ga-event-label="subscribe block">
+          ga-event-label="subscribe block"
+          primary
+        >
          [[submitLabel]]
         </paper-button>
       </div>
