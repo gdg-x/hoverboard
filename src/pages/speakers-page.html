@@ -147,6 +147,12 @@
 
     </style>
 
+    <polymer-helmet
+      title="Speakers | GDG DevFest Ukraine"
+      description="Learn more about speakers"
+      active="[[_setHelmetData(active, isDialogOpened)]]"
+    ></polymer-helmet>
+
     <app-route
       route="[[route]]"
       pattern="/:page"
@@ -298,6 +304,10 @@
             }
           });
         }
+      }
+
+      _setHelmetData(active, isDialogOpened) {
+        return active && !isDialogOpened;
       }
     }
 

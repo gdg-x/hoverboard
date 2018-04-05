@@ -111,6 +111,12 @@
 
     </style>
 
+    <polymer-helmet
+      title="{$ heroSettings.team.title $} | {$ title $}"
+      description="{$ heroSettings.team.metaDescription $}"
+      active="[[active]]"
+    ></polymer-helmet>
+
     <hero-block
       background-image="{$ heroSettings.team.background.image $}"
       background-color="{$ heroSettings.team.background.color $}"

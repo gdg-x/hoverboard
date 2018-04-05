@@ -41,6 +41,13 @@
 
     </style>
 
+    <polymer-helmet
+      title="[[speaker.name]] | {$ title $}"
+      description="[[speaker.bi]]"
+      image="[[speaker.photoUrl]]"
+      active="[[opened]]"
+    ></polymer-helmet>
+
     <app-header-layout has-scrolling-region>
       <app-header slot="header" class="header" fixed="[[viewport.isTabletPlus]]">
         <iron-icon

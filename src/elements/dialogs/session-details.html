@@ -20,6 +20,13 @@
   <template>
     <style is="custom-style" include="shared-styles dialog-styles flex flex-alignment positioning"></style>
 
+    <polymer-helmet
+      title="[[session.title]] | {$ title $}"
+      description="[[session.description]]"
+      image="[[speaker.0.photoUrl]]"
+      active="[[opened]]"
+    ></polymer-helmet>
+
     <app-header-layout has-scrolling-region>
       <app-header slot="header" class="header" fixed="[[viewport.isTabletPlus]]">
         <iron-icon
