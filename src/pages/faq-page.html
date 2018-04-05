@@ -168,10 +168,10 @@
         if (window.location.hash) {
           setTimeout(() => {
             const path = window.location.hash.slice(1).split('#');
-            const element = path.reduce(function (host, id) {
+            const element = path.reduce((host, id) => {
               const target = host.shadowRoot ? host.shadowRoot.querySelector(`#${id}`) : host;
               return target ? target : host;
-            }, this);
+            });
             const offset = this.offsetTop(element);
             this.scrollToY(offset - this.toolbarOffset, 100);
           }, 500);
