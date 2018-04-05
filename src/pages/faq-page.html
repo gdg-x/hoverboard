@@ -37,10 +37,24 @@
         font-size: 16px;
       }
 
+      [slot="markdown-html"] h2 {
+        line-height: 2;
+      }
+
+      [slot="markdown-html"] h3::after {
+        content: '';
+        background-image: url('../../images/link-icon.svg');
+        width: 22px;
+        height: 18px;
+        display: inline-block;
+        margin-left: 10px;
+        cursor: pointer;
+      }
+
       @media (min-width: 640px) {
         .content,
         .markdown-text {
-          padding: 0 40px;
+          padding: 0 18px;
         }
 
         .col {
@@ -56,16 +70,13 @@
           width: 40%;
           margin-bottom: 0;
           display: inline-block;
-          padding-right: 16px;
-          transform: translateY(50%);
-          height: 130px;
+          transform: translateY(85%);
           vertical-align: bottom;
-          line-height: 1.1;
+          line-height: 1;
         }
 
-        [slot="markdown-html"] h2 + h3 {
-          display: inline-block;
-          margin-left: 0;
+        [slot="markdown-html"] h3 {
+          line-height: 1.5;
         }
 
         [slot="markdown-html"] h3,
@@ -73,6 +84,21 @@
         [slot="markdown-html"] p,
         [slot="markdown-html"] ul {
           margin-left: 40%;
+        }
+
+        [slot="markdown-html"] h3::after {
+          display: none;
+        }
+
+        [slot="markdown-html"] h3:hover::after {
+          display: inline-block;
+        }   
+      }
+
+      @media (min-width: 812px) {
+        .content,
+        .markdown-text {
+          padding: 0 40px;
         }
       }
     </style>
@@ -112,25 +138,44 @@
       static get properties() {
         return {
           active: Boolean,
-          path: {
+          source: {
             type: String,
             value: '{$ faq $}',
           },
-          source: String,
           self: Object,
+          toolbarOffset: {
+            type: Number,
+            value: 70,
+          },
         };
-      }
-
-      ready() {
-        super.ready();
-        this.self = this;
-        this._setFileContentSource();
-        this.addEventListener('marked-render-complete', this._renderContent);
       }
 
       constructor() {
         super();
         this._scrollToFaqChapter = this._scrollToFaqChapter.bind(this);
+        this._changeUrl = this._changeUrl.bind(this);
+      }
+
+      ready() {
+        super.ready();
+        this.self = this;
+        this.addEventListener('marked-render-complete', this._renderContent);
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+
+        if (window.location.hash) {
+          setTimeout(() => {
+            const path = window.location.hash.slice(1).split('#');
+            const element = path.reduce((host, id) => {
+              const target = host.shadowRoot ? host.shadowRoot.querySelector(`#${id}`) : host;
+              return target ? target : host;
+            });
+            const offset = this.offsetTop(element);
+            this.scrollToY(offset - this.toolbarOffset, 100);
+          }, 500);
+        }
       }
 
       _renderContent() {
@@ -154,30 +199,61 @@
           colContent.textContent = heads[i].textContent;
           colContent.addEventListener('click', this._scrollToFaqChapter);
           lastHeadElement.appendChild(colContent);
+
+          heads[i].addEventListener('click', this._changeUrl);
         }
 
         const contentWrapper = this.shadowRoot.querySelector('.content-wrapper');
         contentWrapper.classList.add('visible');
-      }
-
-      _setFileContentSource() {
-        firebase.storage()
-          .ref(this.path)
-          .getDownloadURL()
-          .then((url) => {
-            this.source = url;
-          })
-          .catch((error) => {
-            // eslint-disable-next-line no-console
-            console.error(`Error occurred during getting file ${this.path} from storage: ${error}`);
-          });
-      }
+    }
 
       _scrollToFaqChapter(e) {
         e.preventDefault();
-        var elementIdToScroll = e.target.getAttribute('href');
-        var element = this.shadowRoot.querySelector(elementIdToScroll);
-        this.scrollToY(element.getBoundingClientRect().top - 100, 1500, 'easeInOutSine');
+        const elementIdToScroll = e.target.getAttribute('href');
+        const element = this.shadowRoot.querySelector(elementIdToScroll);
+        const offset = this.offsetTop(element);
+        this.scrollToY(offset - this.toolbarOffset, 1500, 'easeInOutSine');
+        window.location.hash = elementIdToScroll;
+      }
+
+      _changeUrl(e) {
+        const targetElement = e.path && e.path[0];
+        const offset = this.offsetTop(targetElement);
+        const canBeScrolled = Math.abs(document.documentElement.scrollTop +
+                              this.toolbarOffset - offset) >= 50;
+        if (canBeScrolled) {
+          this.scrollToY(offset - this.toolbarOffset, 100);
+        }
+
+        window.location.hash = targetElement.id;
+        this._copyTextToClipboard(window.location.href);
+      }
+
+      _copyTextToClipboard(text) {
+        if (!navigator.clipboard) {
+          this._fallbackCopyTextToClipboard(text);
+          return;
+        }
+        navigator.clipboard.writeText(text);
+      }
+
+      _fallbackCopyTextToClipboard(text) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.setAttribute('readonly', '');
+        textArea.style.position = 'fixed';
+        textArea.style.top = 0;
+        textArea.style.left = 0;
+        textArea.style.padding = 0;
+        textArea.style.border = 'none';
+        textArea.style.outline = 'none';
+        textArea.style.boxShadow = 'none';
+        textArea.style.background = 'transparent';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
       }
     }
 
