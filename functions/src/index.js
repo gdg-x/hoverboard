@@ -6,7 +6,7 @@ import * as admin from 'firebase-admin';
 // import { scheduleNotifications } from './schedule-notifications';
 // import { optimizeImages } from './optimize-images';
 // import { mailchimpSubscribe } from './mailchimp-subscribe';
-import { prerender } from './prerender';
+import prerender from './prerender';
 
 admin.initializeApp(functions.config().firebase);
 

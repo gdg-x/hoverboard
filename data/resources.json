@@ -19,6 +19,9 @@
   "cachingComplete": "Caching complete! Future visits will work offline.",
   "newVersionAvailable": "A new version of this app is available.",
   "refresh": "Refresh",
+  "position": "Position",
+  "country": "Country",
+  "time": "Time",
   "footer": {
     "blog": "Blog"
   },

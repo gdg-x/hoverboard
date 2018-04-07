@@ -5,8 +5,6 @@
 
   <script>
     /* eslint-disable max-len */
-
-
     class PolymerHelmet extends Polymer.Element {
       static get is() {
         return 'polymer-helmet';
@@ -18,6 +16,10 @@
           title: String,
           description: String,
           image: String,
+          label1: String,
+          data1: String,
+          label2: String,
+          data2: String,
           _defaultTitle: {
             type: String,
             value: '{$ title $}',
@@ -30,32 +32,61 @@
             type: String,
             value: '{$ image if image.startsWith("http") else (url + image) $}',
           },
+          _defaultLabel1: {
+            type: String,
+            value: '{$ location.label $}',
+          },
+          _defaultData1: {
+            type: String,
+            value: '{$ location.name $}',
+          },
+          _defaultLabel2: {
+            type: String,
+            value: '',
+          },
+          _defaultData2: {
+            type: String,
+            value: '',
+          },
         };
       }
 
       static get observers() {
         return [
-          '_setMetaInfo(active, title, description, image)',
+          '_setMetaInfo(active, title, description, image, label1, data1, label2, data2)',
         ];
       }
 
-      _setMetaInfo(active, title, description, image) {
+      _setMetaInfo(active, title, description, image, label1, data1, label2, data2) {
         if (active) {
+          let processedImage = this._defaultImage;
+          if (image) {
+            processedImage = image.startsWith('http') ? image : `{$ url $}${image}`;
+          }
           document.title = title || this._defaultTitle;
-          document.querySelector('meta[name="description"]').content = description || this._defaultDescription;
+          document.querySelector('meta[name="description"]').setAttribute('content', description || this._defaultDescription);
           // G+
-          document.querySelector('meta[itemprop="name"]').content = title || this._defaultTitle;
-          document.querySelector('meta[itemprop="description"]').content = description || this._defaultDescription;
-          document.querySelector('meta[itemprop="image"]').content = image || this._defaultImage;
+          document.querySelector('meta[itemprop="name"]').setAttribute('content', title || this._defaultTitle);
+          document.querySelector('meta[itemprop="description"]').setAttribute('content', description || this._defaultDescription);
+          document.querySelector('meta[itemprop="image"]').setAttribute('content', processedImage);
           // Facebook
-          document.querySelector('meta[property="og:title"]').content = title || this._defaultTitle;
-          document.querySelector('meta[property="og:description"]').content = description || this._defaultDescription;
-          document.querySelector('meta[property="og:image"]').content = image || this._defaultImage;
+          document.querySelector('meta[property="og:title"]').setAttribute('content', title || this._defaultTitle);
+          document.querySelector('meta[property="og:description"]').setAttribute('content', description || this._defaultDescription);
+          document.querySelector('meta[property="og:image"]').setAttribute('content', processedImage);
+          document.querySelector('meta[property="og:url"]').setAttribute('content', this._getUrl());
           // Twitter
-          document.querySelector('meta[name="twitter:title"]').content = title || this._defaultTitle;
-          document.querySelector('meta[name="twitter:description"]').content = description || this._defaultDescription;
-          document.querySelector('meta[name="twitter:image"]').content = image || this._defaultImage;
+          document.querySelector('meta[name="twitter:title"]').setAttribute('content', title || this._defaultTitle);
+          document.querySelector('meta[name="twitter:description"]').setAttribute('content', description || this._defaultDescription);
+          document.querySelector('meta[name="twitter:image"]').setAttribute('content', processedImage);
+          document.querySelector('meta[name="twitter:label1"]').setAttribute('value', label1 || this._defaultLabel1);
+          document.querySelector('meta[name="twitter:data1"]').setAttribute('value', data1 || this._defaultData1);
+          document.querySelector('meta[name="twitter:label2"]').setAttribute('value', label2 || this._defaultLabel2);
+          document.querySelector('meta[name="twitter:data2"]').setAttribute('value', data2 || this._defaultData2);
         }
+      }
+
+      _getUrl() {
+        return window.location.href;
       }
     }
 

@@ -15,8 +15,8 @@ const generateUrl = (request) => {
   // the request? Because it'll give you the wrong domain (pointed at the
   // cloudfunctions.net)
   return url.format({
-    protocol: 'https:',
-    host: 'https://hoverboard-experimental.firebaseapp.com',
+    protocol: request.protocol,
+    host: functions.config().site.domain,
     pathname: request.originalUrl,
   });
 };
@@ -44,22 +44,13 @@ const checkForBots = (userAgent) => {
 app.get('*', (req, res) => {
   // What say you bot tester?
   const botResult = checkForBots(req.headers['user-agent']);
-
-  console.log(req.originalUrl, botResult, req.headers['user-agent']);
   if (botResult) {
     // Get me the url all nice
-    // const targetUrl = generateUrl(req);
-    const targetUrl = `https://hoverboard-experimental.firebaseapp.com${req.originalUrl}`;
-    console.log('targetUrl', targetUrl);
+    const targetUrl = generateUrl(req);
 
     // Did you read the README? You should have set functions.config().rendertron.server
     // to where ever you deployed https://github.com/GoogleChrome/rendertron on AppEngine
-    fetch(`http://service.prerender.cloud/${targetUrl}`, {
-      headers: {
-        "x-prerender-token": "dXMtd2VzdC0yOjkxOGZkMjRiLTdkNWEtNGYwYy1hZWIxLWE2N2E4ZDlhNmNkYQ.cJPHGgviWFThEb3tHW0XI414FCPwF-7btTe65m_P2yA",
-        "Prerender-Wait-Extra-Long": true,
-      }
-    })
+    fetch(`${functions.config().rendertron.server}/render/${targetUrl}`)
       .then((res) => res.text())
       .then((body) => {
         // We set Vary because we only want to cache this result for the bots
@@ -86,6 +77,4 @@ app.get('*', (req, res) => {
 
 const prerender = functions.https.onRequest(app);
 
-module.exports = {
-  prerender,
-};
+export default prerender;

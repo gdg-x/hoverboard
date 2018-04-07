@@ -43,9 +43,13 @@
 
     <polymer-helmet
       title="[[speaker.name]] | {$ title $}"
-      description="[[speaker.bi]]"
+      description="[[speaker.bio]]"
       image="[[speaker.photoUrl]]"
       active="[[opened]]"
+      label1="{$ position $}"
+      data1="[[speaker.title]], [[speaker.company]]"
+      label2="{$ country $}"
+      data2="[[speaker.country]]"
     ></polymer-helmet>
 
     <app-header-layout has-scrolling-region>

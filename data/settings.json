@@ -92,6 +92,7 @@
     }
   },
   "location": {
+    "label": "Location",
     "name": "Planeta kino",
     "city": "Lviv",
     "short": "Lviv, Ukraine",
