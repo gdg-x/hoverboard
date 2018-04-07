@@ -1,8 +1,7 @@
 import { auth } from 'firebase-functions';
 import { database } from 'firebase-admin';
 
-const saveUserData = auth.user().onCreate((userRecord, context) => {
-  console.log(userRecord, context);
+const saveUserData = auth.user().onCreate((userRecord) => {
   const uid = userRecord.uid || userRecord.providerData[0].uid;
   const userData = {
     email: userRecord.email || userRecord.providerData[0].email || '',
