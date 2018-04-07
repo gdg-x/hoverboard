@@ -1,10 +1,11 @@
 import * as functions from 'firebase-functions';
 import { database, messaging } from 'firebase-admin';
 
-export const sendGeneralNotification = functions.database.ref('/notifications/messages/{timestamp}')
-  .onWrite(async (event) => {
-    const timestamp = event.params.timestamp;
-    const message = event.data.val();
+const sendGeneralNotification = functions.database.ref('/notifications/messages/{timestamp}')
+  .onCreate(async (snapshot, context) => {
+    const timestamp = context.params.timestamp;
+    const message = snapshot.val();
+    console.log(timestamp, message);
 
     if (!message) return null;
     console.log('New message added at ', timestamp, ' with payload ', message);
@@ -42,3 +43,5 @@ export const sendGeneralNotification = functions.database.ref('/notifications/me
     });
     return Promise.all(tokensToRemove);
   });
+
+export default sendGeneralNotification;
