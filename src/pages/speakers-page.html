@@ -199,11 +199,11 @@
             </a>
             <a href$="/speakers/[[speaker.id]]/" class="card-content">
               <iron-image class="company-logo" src="{{speaker.companyLogo}}" sizing="contain"></iron-image>
-              <!-- <div class="tags">{$ skills $}:
+              <div class="tags">{$ skills $}:
                 <template is="dom-repeat" items="[[speaker.tags]]" as="tag">
                   <span class="tag" style$="{{_getCustomStyleValue(tag)}}">[[tag]]</span>
                 </template>
-              </div> -->
+              </div>
               <marked-element class="details-text" markdown="[[speaker.shortBio]]">
                 <div class="markdown-html"></div>
               </marked-element>
