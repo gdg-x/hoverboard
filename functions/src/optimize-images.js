@@ -8,38 +8,25 @@ import fs from 'fs';
 
 const gcs = new Storage();
 
-exports.optimizeImages = storage.object().onChange(({ data }) => {
-  const { contentType, resourceState, metageneration } = data;
+const optimizeImages = storage.object().onFinalize((object) => {
+  const { contentType } = object;
   // Exit if this is triggered on a file that is not an image.
   if (!contentType.startsWith('image/')) {
     console.log('This is not an image.');
     return null;
   }
 
-  // Exit if file exists but is not new and is only being triggered
-  // because of a metadata change.
-  if (resourceState === 'exists' && metageneration > 1) {
-    console.log('This is a metadata change event.');
-    return null;
-  }
-
-  // Exit if this is a move or deletion event.
-  if (resourceState === 'not_exists') {
-    console.log('This is a deletion event.');
-    return null;
-  }
-
-  return optimizeImage(data);
+  return optimizeImage(object);
 });
 
-async function optimizeImage(data) {
+async function optimizeImage(object) {
   // File and directory paths.
-  const filePath = data.name;
+  const filePath = object.name;
   const tempLocalFile = path.join(os.tmpdir(), filePath);
   const tempLocalDir = path.dirname(tempLocalFile);
 
   // Cloud Storage files.
-  const bucket = gcs.bucket(data.bucket);
+  const bucket = gcs.bucket(object.bucket);
   const file = bucket.file(filePath);
 
   const [metadata] = await file.getMetadata();
@@ -71,3 +58,5 @@ async function optimizeImage(data) {
   // Once the image has been uploaded delete the local files to free up disk space.
   return Promise.all([fs.unlinkSync(tempLocalFile)]);
 }
+
+export default optimizeImages;
