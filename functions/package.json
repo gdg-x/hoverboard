@@ -2,11 +2,11 @@
   "name": "hoverboard-functions",
   "description": "Hoverboard serverless functions",
   "private": true,
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "prebuild": "rimraf lib",
-    "build": "babel src --out-dir lib --source-maps",
-    "postbuild": "cp ../build/index.html lib/"
+    "build": "babel src --out-dir dist --source-maps",
+    "postbuild": "cp ../build/index.html dist/"
   },
   "dependencies": {
     "@google-cloud/storage": "^1.6.0",
