@@ -1,20 +1,20 @@
 import * as functions from 'firebase-functions';
-import * as admin from 'firebase-admin';
+import admin from 'firebase-admin';
 
-// import { saveUserData } from './users';
-// import { sendGeneralNotification } from './notifications';
-// import { scheduleNotifications } from './schedule-notifications';
-// import { optimizeImages } from './optimize-images';
-// import { mailchimpSubscribe } from './mailchimp-subscribe';
+import saveUserData from './save-user-data';
+import sendGeneralNotification from './notifications';
+import scheduleNotifications from './schedule-notifications';
+import optimizeImages from './optimize-images';
+import mailchimpSubscribe from './mailchimp-subscribe';
 import prerender from './prerender';
 
-admin.initializeApp(functions.config().firebase);
+admin.initializeApp();
 
 export {
-  // saveUserData,
-  // sendGeneralNotification,
-  // scheduleNotifications,
-  // optimizeImages,
-  // mailchimpSubscribe,
+  saveUserData,
+  sendGeneralNotification,
+  scheduleNotifications,
+  optimizeImages,
+  mailchimpSubscribe,
   prerender,
 }
