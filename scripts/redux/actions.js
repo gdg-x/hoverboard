@@ -159,13 +159,38 @@ const videosActions = {
 };
 
 const blogActions = {
-  fetchList: () => {
-    return firebase.database()
-      .ref('/blog/list')
-      .on('value', (snapshot) => store.dispatch({
-        type: FETCH_BLOG_LIST,
-        list: snapshot.val(),
-      }));
+  fetchList: () => (dispatch) => {
+    dispatch({
+      type: FETCH_BLOG_LIST,
+    });
+
+    firebase.firestore()
+      .collection('blog')
+      .orderBy('published', 'desc')
+      .get()
+      .then((snaps) => {
+        const list = snaps.docs
+          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+
+        const obj = list.reduce(
+          (acc, curr) => Object.assign({}, acc, { [curr.id]: curr }),
+          {}
+        );
+
+        dispatch({
+          type: FETCH_BLOG_LIST_SUCCESS,
+          payload: {
+            obj,
+            list,
+          },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: FETCH_BLOG_LIST_FAILURE,
+          payload: { error },
+        });
+      });
   },
 };
 
