@@ -81,7 +81,24 @@ const ticketsReducer = (state = initialState.tickets, action) => {
 const partnersReducer = (state = initialState.partners, action) => {
   switch (action.type) {
     case FETCH_PARTNERS:
-      return action.partners;
+      return Object.assign({}, state, {
+        fetching: true,
+        fetchingError: null,
+        list: [],
+      });
+
+    case FETCH_PARTNERS_FAILURE:
+      return Object.assign({}, state, {
+        fetching: false,
+        fetchingError: action.payload.error,
+      });
+
+    case FETCH_PARTNERS_SUCCESS:
+      return Object.assign({}, state, {
+        fetching: false,
+        list: action.payload.list,
+      });
+
     default:
       return state;
   }
