@@ -257,7 +257,24 @@ const galleryReducer = (state = initialState.gallery, action) => {
 const teamReducer = (state = initialState.team, action) => {
   switch (action.type) {
     case FETCH_TEAM:
-      return action.team;
+      return Object.assign({}, state, {
+        fetching: true,
+        fetchingError: null,
+        list: [],
+      });
+
+    case FETCH_TEAM_FAILURE:
+      return Object.assign({}, state, {
+        fetching: false,
+        fetchingError: action.payload.error,
+      });
+
+    case FETCH_TEAM_SUCCESS:
+      return Object.assign({}, state, {
+        fetching: false,
+        list: action.payload.list,
+      });
+
     default:
       return state;
   }
