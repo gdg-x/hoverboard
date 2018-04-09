@@ -62,7 +62,7 @@
       <template is="dom-repeat" items="[[partners]]" as="block">
           <h4 class="block-title">[[block.title]]</h4>
           <div class="logos-wrapper">
-            <template is="dom-repeat" items="[[block.logos]]" as="logo">
+            <template is="dom-repeat" items="[[block.items]]" as="logo">
               <a
                 class="logo-item card"
                 href$="[[logo.url]]"
@@ -102,15 +102,25 @@
       static get properties() {
         return {
           partners: {
+            type: Array,
+            statePath: 'partners.list',
+          },
+          partnersFetching: {
+            type: Boolean,
+            statePath: 'partners.fetching',
+          },
+          partnersFetchingError: {
             type: Object,
-            statePath: 'partners',
+            statePath: 'partners.fetchingError',
           },
         };
       }
 
       connectedCallback() {
         super.connectedCallback();
-        partnersActions.fetchPartners();
+        if (!this.partnersFetching && (!this.partners || !this.partners.length)) {
+          this.dispatch(partnersActions.fetchPartners());
+        }
       }
 
       _addPotentialPartner() {
@@ -119,7 +129,8 @@
           submitLabel: '{$ partnersBlock.form.submitLabel $}',
           firstFieldLabel: '{$ partnersBlock.form.fullName $}',
           secondFieldLabel: '{$ partnersBlock.form.companyName $}',
-          submit: subscribeActions.addPartner });
+          submit: subscribeActions.addPartner,
+        });
       }
     }
 
