@@ -1,7 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <link rel="import" href="../../bower_components/app-route/app-route.html">
-<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/marked-element/marked-element.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
@@ -90,27 +89,20 @@
       data="{{postData}}"
     ></app-route>
 
-    <iron-ajax
-      url="[[source]]"
-      handle-as="text"
-      last-response="{{postBody}}"
-      auto
-    ></iron-ajax>
-
     <hero-block
-      background-image="[[postInfo.image]]"
-      background-color="[[postInfo.primaryColor]]"
+      background-image="[[post.image]]"
+      background-color="[[post.primaryColor]]"
       font-color="#fff"
       active="[[active]]"
     >
-      <div class="hero-title highlight-font">[[postInfo.title]]</div>
+      <div class="hero-title highlight-font">[[post.title]]</div>
     </hero-block>
 
     <div class="container-narrow">
-      <marked-element class="post" markdown="[[postBody]]">
+      <marked-element class="post" markdown="[[post.content]]">
         <div slot="markdown-html"></div>
       </marked-element>
-      <div class="date">{$ blog.published $}: [[published]]</div>
+      <div class="date">{$ blog.published $}: [[getDate(post.published)]]</div>
     </div>
 
     <div class="suggested-posts">
@@ -134,10 +126,26 @@
         return {
           active: Boolean,
           route: Object,
-          postInfo: Object,
+          post: Object,
           postsList: {
-            type: String,
-            statePath: 'blog',
+            type: Array,
+            statePath: 'blog.list',
+          },
+          postsMap: {
+            type: Object,
+            statePath: 'blog.obj',
+          },
+          postsFetching: {
+            type: Boolean,
+            statePath: 'blog.fetching',
+          },
+          postsFetchingError: {
+            type: Object,
+            statePath: 'blog.fetchingError',
+          },
+          viewport: {
+            type: Object,
+            statePath: 'ui.viewport',
           },
         };
       }
@@ -150,18 +158,22 @@
 
       connectedCallback() {
         super.connectedCallback();
-        if (!Object.keys(this.postsList).length) return blogActions.fetchList();
+        if (!this.postsFetching && (!this.postsList || !this.postsList.length)) {
+          this.dispatch(blogActions.fetchList());
+        }
       }
 
       _postDataObserver(postId, postsList) {
-        if (!this.postsList || !Object.keys(this.postsList).length) return;
-        this.postInfo = this.postsList[this.postData.id];
-        this.set('source', this.postsList[this.postData.id].source);
-        this.set('published', this.getDate(this.postsList[this.postData.id].published));
-        const sortedPosts = this.transformToArray(this.postsList, 'id')
-          .sort((a, b) => b.published.localeCompare(a.published));
-        this.set('suggestedPosts', sortedPosts.filter((post) => post.id !== this.postData.id)
-          .slice(0, 3));
+        if (!this.postsList || !this.postsList.length || !this.postsMap[this.postData.id]) {
+          return;
+        }
+
+        const post = this.postsMap[this.postData.id];
+        this.set('post', post);
+        this.set('suggestedPosts', this.postsList
+          .filter((post) => post.id !== this.postData.id)
+          .slice(0, 3)
+        );
       }
     }
 

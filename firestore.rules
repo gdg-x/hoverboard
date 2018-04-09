@@ -1,5 +1,16 @@
 service cloud.firestore {
   match /databases/{database}/documents {
+    match /blog/{post} {
+      // Applies to single document read requests
+      allow get;
+
+      // Applies to queries and collection read requests
+      allow list;
+
+      // Disallow writes
+      allow write: if false;
+    }
+
     match /gallery/{photo} {
       // Applies to single document read requests
       allow get;
@@ -33,7 +44,7 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    match /videos/{video} {
+    match /tickets/{ticket} {
       // Applies to single document read requests
       allow get;
 
@@ -44,7 +55,7 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    match /tickets/{ticket} {
+    match /videos/{video} {
       // Applies to single document read requests
       allow get;
 
