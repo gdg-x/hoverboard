@@ -178,15 +178,25 @@
         return {
           active: Boolean,
           team: {
+            type: Array,
+            statePath: 'team.list',
+          },
+          teamFetching: {
+            type: Boolean,
+            statePath: 'team.fetching',
+          },
+          teamFetchingError: {
             type: Object,
-            statePath: 'team',
+            statePath: 'team.fetchingError',
           },
         };
       }
 
       connectedCallback() {
         super.connectedCallback();
-        teamActions.fetchTeam();
+        if (!this.teamFetching && (!this.team || !this.team.length)) {
+          this.dispatch(teamActions.fetchTeam());
+        }
       }
     }
 

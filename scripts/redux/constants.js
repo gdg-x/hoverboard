@@ -68,7 +68,10 @@ const FETCH_GALLERY_FAILURE = 'app/Gallery/FETCH_GALLERY_FAILURE';
 const FETCH_GALLERY_SUCCESS = 'app/Gallery/FETCH_GALLERY_SUCCESS';
 
 // team
-const FETCH_TEAM = 'FETCH_TEAM';
+const FETCH_TEAM = 'app/Team/FETCH_TEAM';
+const FETCH_TEAM_FAILURE = 'app/Team/FETCH_TEAM_FAILURE';
+const FETCH_TEAM_SUCCESS = 'app/Team/FETCH_TEAM_SUCCESS';
+
 // user
 const SIGN_IN = 'SIGN_IN';
 const SIGN_OUT = 'SIGN_OUT';
