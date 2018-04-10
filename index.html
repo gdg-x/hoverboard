@@ -46,7 +46,7 @@
   <!-- G+ sharing meta data -->
   <meta itemprop="name" content="{$ title $}">
   <meta itemprop="description" content="{$ description $}">
-  <meta itemprop="image" content="{$ url $}images/social-share.jpg">
+  <meta itemprop="image" content="{$ image if image.startsWith('http') else (url + image) $}">
   <meta itemprop="startDate" content="{$ startDate $}">
   <meta itemprop="endDate" content="{$ endDate $}">
 
@@ -57,7 +57,7 @@
   <meta property="og:url" content="{$ url $}">
   <meta property="og:description" content="{$ description $}">
   <meta property="og:type" content="Event">
-  <meta property="og:image" content="{$ url $}images/social-share.jpg">
+  <meta property="og:image" content="{$ image if image.startsWith('http') else (url + image) $}">
   <meta property="og:image:type" content="image/jpeg"/>
 
   <!-- Twitter meta data -->
@@ -65,7 +65,11 @@
   <meta name="twitter:creator" content="@{$ organizer.twitter $}">
   <meta name="twitter:title" content="{$ title $}">
   <meta name="twitter:description" content="{$ description $}">
-  <meta name="twitter:image" content="{$ url $}images/social-share.jpg">
+  <meta name="twitter:image" content="{$ image if image.startsWith('http') else (url + image) $}">
+  <meta name="twitter:label1" value="{$ location.label $}">
+  <meta name="twitter:data1" value="{$ location.name $}">
+  <meta name="twitter:label2" value="">
+  <meta name="twitter:data2" value="">
 
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
   <link rel="dns-prefetch" href="https://apis.google.com">

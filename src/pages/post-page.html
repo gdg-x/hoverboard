@@ -75,6 +75,15 @@
 
     </style>
 
+    <polymer-helmet
+      title="[[postInfo.title]] | {$ title $}"
+      description="[[postInfo.brief]]"
+      image="[[postInfo.image]]"
+      active="[[active]]"
+      label1="{$ blog.published $}"
+      data1="[[published]]"
+    ></polymer-helmet>
+
     <app-route
       route="[[route]]"
       pattern="/:id"

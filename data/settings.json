@@ -51,6 +51,7 @@
     },
     "blog": {
       "title": "Blog",
+      "metaDescription": "Read stories from our team",
       "background": {
         "color": "#FFF"
       },
@@ -58,6 +59,7 @@
     },
     "speakers": {
       "title": "Speakers",
+      "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
       "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
       "background": {
         "color": "#FFF"
@@ -66,6 +68,7 @@
     },
     "schedule": {
       "title": "Schedule",
+      "metaDescription": "Choose your sessions to visit",
       "background": {
         "color": "#fff"
       },
@@ -73,6 +76,7 @@
     },
     "team": {
       "title": "Team",
+      "metaDescription": "Get more info about organizers",
       "background": {
         "color": "#fff"
       },
@@ -80,6 +84,7 @@
     },
     "faq": {
       "title": "FAQs",
+      "metaDescription": "Find you answer right here!",
       "background": {
         "color": "#fff"
       },
@@ -87,6 +92,7 @@
     }
   },
   "location": {
+    "label": "Location",
     "name": "Planeta kino",
     "city": "Lviv",
     "short": "Lviv, Ukraine",

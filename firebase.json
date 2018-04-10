@@ -5,12 +5,10 @@
   "hosting": {
     "public": "./build",
     "cleanUrls": true,
-    "rewrites": [
-      {
-        "source": "**/*",
-        "destination": "/index.html"
-      }
-    ],
+    "rewrites": [{
+      "source": "/**",
+      "function": "prerender"
+    }],
     "ignore": [
       "/test/**",
       "bower.json",

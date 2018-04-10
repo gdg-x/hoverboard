@@ -47,6 +47,12 @@
 
     </style>
 
+    <polymer-helmet
+      title="{$ heroSettings.schedule.title $} | {$ title $}"
+      description="{$ heroSettings.schedule.metaDescription $}"
+      active="[[_setHelmetData(active, isDialogOpened)]]"
+    ></polymer-helmet>
+
     <app-route
       route="[[route]]"
       pattern="/:day"
@@ -183,6 +189,10 @@
             }
           });
         }
+      }
+
+      _setHelmetData(active, isDialogOpened) {
+        return active && !isDialogOpened;
       }
     }
 

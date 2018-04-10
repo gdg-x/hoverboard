@@ -90,7 +90,11 @@
 
     </style>
 
-
+    <polymer-helmet
+      title="{$ heroSettings.blog.title $} | {$ title $}"
+      description="{$ heroSettings.blog.metaDescription $}"
+      active="[[active]]"
+    ></polymer-helmet>
 
     <hero-block
       background-image="{$ heroSettings.blog.background.image $}"

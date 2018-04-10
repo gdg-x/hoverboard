@@ -1,6 +1,7 @@
 {
   "title": "GDG DevFest Season 2018",
   "description": "Be a hero. Be a GDG!",
+  "image": "images/social-share.jpg",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
   "dates": "October 12-13, 2018",
   "partnershipProposition": "https://bit.ly/dfua17-partners",
@@ -18,6 +19,9 @@
   "cachingComplete": "Caching complete! Future visits will work offline.",
   "newVersionAvailable": "A new version of this app is available.",
   "refresh": "Refresh",
+  "position": "Position",
+  "country": "Country",
+  "time": "Time",
   "footer": {
     "blog": "Blog"
   },
