@@ -45,6 +45,10 @@
       "permalink": "/speakers/"
     },
     {
+      "route": "talks",
+      "permalink": "/talks/"
+    },
+    {
       "route": "team",
       "permalink": "/team/"
     }, 
@@ -109,6 +113,14 @@
       "title": "Speakers",
       "headerSettings": {
         "backgroundColor": "#3f51b5",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
+    },
+    "talks": {
+      "title": "Talks",
+      "headerSettings": {
+        "backgroundColor": "#673ab7",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }

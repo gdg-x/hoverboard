@@ -186,6 +186,12 @@
                          route="{{subRoute}}"
                          speakers="{{speakers}}"></speakers-page>
 
+          <talks-page name="talks"
+                      app="{{app}}"
+                      route="{{subRoute}}"
+                      schedule="{{schedule}}"
+                      sessions="{{sessions}}"></talks-page>
+
           <schedule-page name="schedule"
                          app="{{app}}"
                          route="{{subRoute}}"
@@ -268,6 +274,7 @@
           Polymer.RenderStatus.afterNextRender(this, function () {
             HOVERBOARD.ServiceWorkerRegistration.register();
             this.importHref(this.resolveUrl('pages/schedule-page.html'), null, null, true);
+            this.importHref(this.resolveUrl('pages/talks-page.html'), null, null, true);
             this.importHref(this.resolveUrl('pages/speakers-page.html'), null, null, true);
             this.importHref(this.resolveUrl('pages/blog-page.html'), null, null, true);
           }.bind(this));

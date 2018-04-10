@@ -178,8 +178,8 @@
         });
 
         myWorker.addEventListener('message', function(e) {
-          // this.set('schedule', e.data.schedule);
-          // this.set('sessions', e.data.sessions);
+          this.set('schedule', e.data.schedule);
+          this.set('sessions', e.data.sessions);
           this.set('speakers', e.data.speakers);
           myWorker.terminate();
         }.bind(this), false);

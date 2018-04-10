@@ -62,6 +62,7 @@ self.addEventListener('message', function (e) {
         for (var sessionIndex = 0, sessionsLen = timeslot.sessions.length; sessionIndex < sessionsLen; sessionIndex++) {
           for (var subSessIdx = 0, subSessionsLen = timeslot.sessions[sessionIndex].length; subSessIdx < subSessionsLen; subSessIdx++) {
             var session = sessions[timeslot.sessions[sessionIndex][subSessIdx]];
+            if(!session) continue
             session.mainTag = session.tags ? session.tags[0] : 'General';
             session.day = dayIdx + 1;
 
