@@ -34,7 +34,7 @@
   },
   "hashtag": "SeaTechAndSun",
   "tweetsSource": "/data/tweets.json",
-  "enableSessionsRating": true,
+  "enableSessionsRating": false,
   "navigation": [
     {
       "route": "home",
