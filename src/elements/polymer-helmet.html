@@ -59,29 +59,35 @@
 
       _setMetaInfo(active, title, description, image, label1, data1, label2, data2) {
         if (active) {
-          let processedImage = this._defaultImage;
+          const updatedTitle = title || this._defaultTitle;
+          const updatedDescription = description || this._defaultDescription;
+          const updatedLabel1 = label1 || this._defaultLabel1;
+          const updatedData1 = data1 || this._defaultData1;
+          const updatedLabel2 = label2 || this._defaultLabel2;
+          const updatedData2 = data2 || this._defaultData2;
+          let updatedImage = this._defaultImage;
           if (image) {
-            processedImage = image.startsWith('http') ? image : `{$ url $}${image}`;
+            updatedImage = image.startsWith('http') ? image : `{$ url $}${image}`;
           }
-          document.title = title || this._defaultTitle;
-          document.querySelector('meta[name="description"]').setAttribute('content', description || this._defaultDescription);
+          document.title = updatedTitle;
+          document.querySelector('meta[name="description"]').setAttribute('content', updatedDescription);
           // G+
-          document.querySelector('meta[itemprop="name"]').setAttribute('content', title || this._defaultTitle);
-          document.querySelector('meta[itemprop="description"]').setAttribute('content', description || this._defaultDescription);
-          document.querySelector('meta[itemprop="image"]').setAttribute('content', processedImage);
+          document.querySelector('meta[itemprop="name"]').setAttribute('content', updatedTitle);
+          document.querySelector('meta[itemprop="description"]').setAttribute('content', updatedDescription);
+          document.querySelector('meta[itemprop="image"]').setAttribute('content', updatedImage);
           // Facebook
-          document.querySelector('meta[property="og:title"]').setAttribute('content', title || this._defaultTitle);
-          document.querySelector('meta[property="og:description"]').setAttribute('content', description || this._defaultDescription);
-          document.querySelector('meta[property="og:image"]').setAttribute('content', processedImage);
+          document.querySelector('meta[property="og:title"]').setAttribute('content', updatedTitle);
+          document.querySelector('meta[property="og:description"]').setAttribute('content', updatedDescription);
+          document.querySelector('meta[property="og:image"]').setAttribute('content', updatedImage);
           document.querySelector('meta[property="og:url"]').setAttribute('content', this._getUrl());
           // Twitter
-          document.querySelector('meta[name="twitter:title"]').setAttribute('content', title || this._defaultTitle);
-          document.querySelector('meta[name="twitter:description"]').setAttribute('content', description || this._defaultDescription);
-          document.querySelector('meta[name="twitter:image"]').setAttribute('content', processedImage);
-          document.querySelector('meta[name="twitter:label1"]').setAttribute('value', label1 || this._defaultLabel1);
-          document.querySelector('meta[name="twitter:data1"]').setAttribute('value', data1 || this._defaultData1);
-          document.querySelector('meta[name="twitter:label2"]').setAttribute('value', label2 || this._defaultLabel2);
-          document.querySelector('meta[name="twitter:data2"]').setAttribute('value', data2 || this._defaultData2);
+          document.querySelector('meta[name="twitter:title"]').setAttribute('content', updatedTitle);
+          document.querySelector('meta[name="twitter:description"]').setAttribute('content', updatedDescription);
+          document.querySelector('meta[name="twitter:image"]').setAttribute('content', updatedImage);
+          document.querySelector('meta[name="twitter:label1"]').setAttribute('value', updatedLabel1);
+          document.querySelector('meta[name="twitter:data1"]').setAttribute('value', updatedData1);
+          document.querySelector('meta[name="twitter:label2"]').setAttribute('value', updatedLabel2);
+          document.querySelector('meta[name="twitter:data2"]').setAttribute('value', updatedData2);
         }
       }
 
