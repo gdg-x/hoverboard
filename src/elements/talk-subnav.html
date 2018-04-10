@@ -195,6 +195,37 @@
             <paper-icon-button icon="person" aria-label="{$ mySchedule $}"></paper-icon-button>
           </a>
         </div>
+        
+        <paper-menu-button
+          id="filtersMenuToggle"
+          horizontal-align="right"
+          ignore-select
+          allow-outside-scroll
+          opened="{{_filtersOpened}}"
+        >
+          <paper-button class="filter-button dropdown-trigger">
+            {$ filter $}
+            <iron-icon class="filter-icon" icon="filter-list"></iron-icon>
+          </paper-button>
+          <paper-menu
+            id="filters"
+            class="filters-content dropdown-content"
+            attr-for-selected="value"
+            selected-values="{{filters}}"
+            multi
+          >
+            <template is="dom-repeat" items="[[schedule.tags]]" as="tag">
+              <paper-checkbox
+                value="[[tag]]"
+                checked="{{_isChecked(tag)}}"
+                layout horizontal center flex
+              >
+                [[tag]]
+              </paper-checkbox>
+            </template>
+            <paper-item on-tap="clearFilters">{$ clearAll $}</paper-item>
+          </paper-menu>
+        </paper-menu-button>
       </div>
     </nav>
 
