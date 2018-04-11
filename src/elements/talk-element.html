@@ -279,8 +279,6 @@
         },
 
         observers: [
-          '_getMyScheduleIcon(session.id, app.user.sessions)',
-          '_userUpdated(app.user)'
         ],
 
         ready: function () {
@@ -296,16 +294,6 @@
         _joinArray: function (array) {
           if (!array) return;
           return array.join(', ');
-        },
-
-        _getMyScheduleIcon: function (id) {
-          this.myScheduleIcon = this.isInMySchedule(id) ? 'calendar-check' : 'calendar-plus';
-        },
-
-        _userUpdated: function (user) {
-          if (!user && this.session) {
-            this._getMyScheduleIcon(this.session.id);
-          }
         },
 
         _hasBottomMeta: function (session) {
