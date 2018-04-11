@@ -4,7 +4,7 @@
   "private": true,
   "main": "dist/index.js",
   "scripts": {
-    "prebuild": "rimraf lib",
+    "prebuild": "rimraf dist",
     "build": "babel src --out-dir dist --source-maps",
     "postbuild": "cp ../build/index.html dist/"
   },
