@@ -62,7 +62,7 @@
     </style>
 
     <template is="dom-repeat" items="[[day.timeslots]]" as="timeslot">
-      <div class="timeslot" layout vertical$="{{app.isPhoneSize}}" horizontal$="{{!app.isPhoneSize}}">
+      <div class="timeslot" hidden$="[[timeslot.display]]" layout vertical$="{{app.isPhoneSize}}" horizontal$="{{!app.isPhoneSize}}">
 
         <div class="start-time">
           <span class="hours">[[_splitText(timeslot.startTime, ':', 0)]]</span>
