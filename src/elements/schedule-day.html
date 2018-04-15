@@ -59,10 +59,12 @@
       session-element:not(:first-of-type) {
         margin-top: 16px;
       }
+
+      .clear-schedule { display: block; margin: 50px 0; }
     </style>
 
     <template is="dom-repeat" items="[[day.timeslots]]" as="timeslot">
-      <div class="timeslot" hidden$="[[timeslot.display]]" layout vertical$="{{app.isPhoneSize}}" horizontal$="{{!app.isPhoneSize}}">
+      <div class="timeslot" hidden$="[[timeslot.hidden]]" layout vertical$="{{app.isPhoneSize}}" horizontal$="{{!app.isPhoneSize}}">
 
         <div class="start-time">
           <span class="hours">[[_splitText(timeslot.startTime, ':', 0)]]</span>
@@ -98,6 +100,8 @@
 
       </div>
     </template>
+
+    <div class="clear-schedule"> </div>
 
   </template>
 
