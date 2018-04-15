@@ -171,9 +171,6 @@
         height: 25px;
       }
 
-      speaker-details {
-        min-height: 300px;
-      }
     </style>
 
     <app-route route="{{route}}"
@@ -293,11 +290,7 @@
         },
 
         _findSpeakerById: function(id) {
-          if (!this.speakers.filter) {
-            return undefined;
-          }
-
-          return this.speakers.filter(function(s) {return s.id === +id;})[0];
+          return this.speakers[id]
         },
 
         _getCustomStyleValue: function (value) {

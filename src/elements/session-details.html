@@ -82,8 +82,8 @@
         content: "/";
       }
 
-      .session-details-0 .fallback-image.session-details {
-        width: auto;
+      .fallback-image {
+        --iron-image-width: 50px;
       }
 
     </style>
@@ -103,10 +103,10 @@
     </app-indexeddb-mirror>
 
     <paper-scroll-header-panel id="scrollHeaderPanel" no-reveal>
-      <paper-toolbar class="tall">
+      <paper-toolbar class="">
         <paper-icon-button class="back-button" dialog-dismiss icon="arrow-back"></paper-icon-button>
         <div class="middle fallback-image-wrapper">
-          <iron-image class="fallback-image" src="/images/sunny-tech-white.png"
+          <iron-image class="fallback-image" src="/images/sunny-tech-white.svg"
                       alt="{$ title $}"></iron-image>
         </div>
       </paper-toolbar>
@@ -142,7 +142,7 @@
               </div>
               <span class="meta">
                   <span>[[_concatArray(session.tags)]]</span>
-                  <span hidden$="[[!session.type]]"> / [[session.type]]</span>
+                  <span hidden$="[[!session.type]]"> [[session.type]]</span>
               </span>
             </div>
           </div>

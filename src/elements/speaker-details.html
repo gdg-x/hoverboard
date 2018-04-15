@@ -22,13 +22,23 @@
 
   <template>
 
-    <style include="shared-styles dialog-styles"></style>
+    <style include="shared-styles dialog-styles">
+      
+      .fallback-image {
+        --iron-image-width: 50px;
+      }
+      
+    </style>
 
     <paper-scroll-header-panel id="scrollHeaderPanel" condenses="{{app.isPhoneSize}}" no-reveal="{{!app.isPhoneSize}}">
-      <paper-toolbar class="tall">
+      <paper-toolbar class="">
         <a href="/speakers">
           <paper-icon-button class="back-button" dialog-dismiss icon="arrow-back"></paper-icon-button>
         </a>
+        <div class="middle fallback-image-wrapper" hidden$="{{app.isPhoneSize}}">
+          <iron-image class="fallback-image" src="/images/sunny-tech-white.svg"
+                      alt="{$ title $}"></iron-image>
+        </div>
         <div id="title" class="bottom title toolbar-title" hidden$="{{!app.isPhoneSize}}">[[speaker.name]]</div>
       </paper-toolbar>
       <div class="content">
