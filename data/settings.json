@@ -167,17 +167,17 @@
     "providersData": [
       {
         "name": "google",
-        "label": "Sign-in with Google",
+        "label": "Sign in with Google",
         "url": "https://accounts.google.com"
       },
       {
         "name": "facebook",
-        "label": "Sign-in with Facebook",
+        "label": "Sign in with Facebook",
         "url": "https://www.facebook.com"
       },
       {
         "name": "twitter",
-        "label": "Sign-in with Twitter",
+        "label": "Sign in with Twitter",
         "url": "https://twitter.com"
       }
     ],
