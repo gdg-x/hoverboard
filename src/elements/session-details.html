@@ -43,7 +43,7 @@
 
       paper-fab {
         --paper-fab-iron-icon: {
-          color: inherit;
+          color: var(--default-primary-color);
         };
         transition: background 0.28s cubic-bezier(0.4, 0, 0.2, 1);
       }
@@ -51,7 +51,7 @@
       paper-fab.calendar-check {
         @apply(--shadow-elevation-4dp);
         @apply(--shadow-transition);
-        color: #fff;
+        color: var(--default-primary-color);
         background: var(--accent-color);
       }
 
