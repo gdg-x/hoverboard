@@ -579,14 +579,14 @@ const helperActions = {
     switch (provider) {
       case 'https://accounts.google.com':
       case 'google.com': {
-        let provider = new firebase.auth.GoogleAuthProvider();
+        const provider = new firebase.auth.GoogleAuthProvider();
         provider.addScope('profile');
         provider.addScope('email');
         return provider;
       }
       case 'https://www.facebook.com':
       case 'facebook.com': {
-        let provider = new firebase.auth.FacebookAuthProvider();
+        const provider = new firebase.auth.FacebookAuthProvider();
         provider.addScope('email');
         provider.addScope('public_profile');
         return provider;
