@@ -182,7 +182,7 @@
             <ul class="session-meta">
               <li >[[session.startTime]] - [[session.endTime]]</li>
               <li hidden$="[[!session.complexity]]">[[session.complexity]]</li>
-              <li hidden$="[[!session.track.title]]">[[session.track.title]]</li>
+              <li hidden$="[[_hideTitle(session)]]">[[session.track.title]]</li>
             </ul>
           </div>
 
@@ -318,6 +318,10 @@
 
         _hasBottomMeta: function (session) {
           return session.tags && session.tags.length || session.presentation || session.videoId;
+        },
+
+        _hideTitle: function(session) {
+          return (!session.track.title || session.image)
         }
       });
 
