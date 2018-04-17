@@ -19,7 +19,7 @@
     "name": "sunnytechwebsite",
     "domain": "sunny-tech.io",
     "database": "https://sunnytechwebsite.firebaseio.com/",
-    "api": "AIzaSyCaSkhtHekxAqXXzzbuNs2s6CpGdhZdta8",
+    "api": "AIzaSyDGTE3sUI4j-juB1HCpa91b2JI0UIxtUmk",
     "userSessionsPath": "/userSessions",
     "ratingsPath": "/ratings",
     "indexedDbSession": "hoverboard"
