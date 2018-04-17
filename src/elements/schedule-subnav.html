@@ -277,22 +277,6 @@
           'iron-deselect': '_refreshFiltersLabel'
         },
 
-        attached: function () {
-          this._target = this.$.filtersMenuToggle;
-
-          this.listen(this._target, 'mouseenter', '_showFilters');
-          this.listen(this._target, 'mouseleave', '_hideFilters');
-          this.listen(this._target, 'tap', '_hideFilters');
-        },
-
-        detached: function () {
-          if (this._target) {
-            this.unlisten(this._target, 'mouseenter', '_showFilters');
-            this.unlisten(this._target, 'mouseleave', '_hideFilters');
-            this.unlisten(this._target, 'tap', '_hideFilters');
-          }
-        },
-
         clearFilters: function (e) {
           if (e) {
             e.preventDefault();
