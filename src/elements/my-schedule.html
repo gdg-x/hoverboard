@@ -77,7 +77,7 @@
       <template is="dom-if" if="{{app.user.sessions}}">
         <template is="dom-repeat" items="{{day.timeslots}}" as="timeslot"
                   filter="{{_filterTimeslots(app.user.sessions)}}">
-          <div class="timeslot" layout vertical$="{{app.isPhoneSize}}" horizontal$="{{!app.isPhoneSize}}">
+          <div class="timeslot" hidden$="[[timeslot.hidden]]" layout vertical$="{{app.isPhoneSize}}" horizontal$="{{!app.isPhoneSize}}">
 
             <div class="start-time">
               <span class="hours">[[_splitText(timeslot.startTime, ':', 0)]]</span>
