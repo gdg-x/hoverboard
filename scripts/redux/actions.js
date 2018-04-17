@@ -321,51 +321,43 @@ const userActions = {
     return firebase.auth()
       .signInWithPopup(firebaseProvider)
       .then((signInObject) => {
-        if (navigator.credentials) {
-          const cred = new FederatedCredential({
-            id: signInObject.user.email || signInObject.user.providerData[0].email,
-            name: signInObject.user.displayName,
-            iconURL: signInObject.user.photoURL,
-            provider: providerName,
-          });
-
-          navigator.credentials.store(cred);
-        }
-
         helperActions.storeUser(signInObject.user);
         notificationsActions.getToken(true);
+      })
+      .catch((error) => {
+        if (error.code === 'auth/account-exists-with-different-credential' ||
+          error.code === 'auth/email-already-in-use') {
+          firebase.auth().fetchProvidersForEmail(error.email)
+            .then((providers) => {
+              helperActions.storeUser({
+                signedIn: false,
+                initialProviderId: providers[0],
+                email: error.email,
+                pendingCredential: error.credential,
+              });
+            });
+        }
+        helperActions.trackError('userActions', 'signIn', error);
       });
   },
 
-  autoSignIn: () => {
-    const currentUser = firebase.auth().currentUser;
-    if (currentUser) {
-      helperActions.storeUser(currentUser);
-    }
-    // else {
-    //   if (navigator.credentials) {
-    //     return navigator.credentials.get({
-    //       password: true,
-    //       federated: {
-    //         providers: providerUrls.split(','),
-    //         mediation: 'silent',
-    //       },
-    //     }).then((cred) => {
-    //       (() => {
-    //         if (cred) {
-    //           const provider = helperActions.getFederatedProvider(cred.provider);
-    //
-    //           if (!provider) return;
-    //
-    //           return firebase.auth().signInWithPopup(provider)
-    //             .then((signInObject) => {
-    //               helperActions.storeUser(signInObject.user);
-    //             });
-    //         }
-    //       })();
-    //     });
-    //   }
-    // }
+  mergeAccounts: (initialProviderId, pendingCredential) => {
+    const firebaseProvider = helperActions.getFederatedProvider(initialProviderId);
+
+    return firebase.auth()
+    .signInWithPopup(firebaseProvider)
+    .then((result) => {
+      result.user.linkWithCredential(pendingCredential);
+    })
+    .catch((error) => {
+      helperActions.trackError('userActions', 'mergeAccounts', error);
+    });
+  },
+
+  updateUser: () => {
+    firebase.auth().onAuthStateChanged((user) => {
+      helperActions.storeUser(user);
+    });
   },
 
   signOut: () => {
@@ -374,10 +366,6 @@ const userActions = {
       .then(() => {
         helperActions.storeUser();
         subscribeActions.resetSubscribed();
-
-        if (navigator.credentials) {
-          navigator.credentials.preventSilentAccess();
-        }
       });
   },
 };
@@ -410,7 +398,7 @@ const subscribeActions = {
         });
         toastActions.showToast({ message: '{$ subscribeBlock.toast $}' });
       })
-      .catch(() => {
+      .catch((error) => {
         store.dispatch({
           type: SET_DIALOG_DATA,
           dialog: {
@@ -425,6 +413,8 @@ const subscribeActions = {
           type: SUBSCRIBE,
           subscribed: false,
         });
+
+        helperActions.trackError('subscribeActions', 'subscribe', error);
       });
   },
   resetSubscribed: () => {
@@ -462,11 +452,13 @@ const notificationsActions = {
       .then(() => {
         notificationsActions.getToken(true);
       })
-      .catch(() => {
+      .catch((error) => {
         store.dispatch({
           type: UPDATE_NOTIFICATIONS_STATUS,
           status: NOTIFICATIONS_STATUS.DENIED,
         });
+
+        helperActions.trackError('notificationActions', 'requestPermission', error);
       });
   },
 
@@ -522,12 +514,14 @@ const notificationsActions = {
           });
         }
       })
-      .catch(() => {
+      .catch((error) => {
         store.dispatch({
           type: UPDATE_NOTIFICATIONS_STATUS,
           status: NOTIFICATIONS_STATUS.DENIED,
           token: null,
         });
+
+        helperActions.trackError('notificationActions', 'getToken', error);
       });
   },
 
@@ -548,16 +542,30 @@ const helperActions = {
     let userToStore = { signedIn: false };
 
     if (user) {
-      const { uid, displayName, photoURL, refreshToken } = user;
-      const email = user.email || user.providerData[0].email;
+      const {
+        uid,
+        displayName,
+        photoURL,
+        refreshToken,
+        actualProvider,
+        pendingCredential,
+      } = user;
+
+      const email = user.email || (user.providerData && user.providerData[0].email);
+      const initialProviderId =
+      (user.providerData && user.providerData[0].providerId) || user.initialProviderId;
+      const signedIn = (user.uid && true) || user.signedIn;
 
       userToStore = {
-        signedIn: true,
+        signedIn,
         uid,
         email,
         displayName,
         photoURL,
         refreshToken,
+        initialProviderId,
+        actualProvider,
+        pendingCredential,
       };
     }
 
@@ -570,15 +578,44 @@ const helperActions = {
   getFederatedProvider: (provider) => {
     switch (provider) {
       case 'https://accounts.google.com':
-        return new firebase.auth.GoogleAuthProvider();
-      case 'https://www.facebook.com': {
-        let provider = new firebase.auth.FacebookAuthProvider();
+      case 'google.com': {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        provider.addScope('profile');
+        provider.addScope('email');
+        return provider;
+      }
+      case 'https://www.facebook.com':
+      case 'facebook.com': {
+        const provider = new firebase.auth.FacebookAuthProvider();
         provider.addScope('email');
         provider.addScope('public_profile');
         return provider;
       }
       case 'https://twitter.com':
+      case 'twitter.com':
         return new firebase.auth.TwitterAuthProvider();
+    }
+  },
+
+  getProviderCompanyName: (provider) => {
+    switch (provider) {
+      case 'https://accounts.google.com':
+      case 'google.com': {
+        return 'Google';
+      }
+      case 'https://www.facebook.com':
+      case 'facebook.com': {
+        return 'Facebook';
+      }
+      case 'https://twitter.com':
+      case 'twitter.com':
+        return 'Twitter';
+    }
+  },
+
+  trackError: (action, method, message) => {
+    if (window.ga) {
+      ga('send', 'event', 'error', action + ':' + method, message);
     }
   },
 };
