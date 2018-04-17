@@ -17,7 +17,7 @@
   },
   "firebase": {
     "name": "sunnytechwebsite",
-    "domain": "sunnytechwebsite.firebaseapp.com",
+    "domain": "sunny-tech.io",
     "database": "https://sunnytechwebsite.firebaseio.com/",
     "api": "AIzaSyCaSkhtHekxAqXXzzbuNs2s6CpGdhZdta8",
     "userSessionsPath": "/userSessions",
