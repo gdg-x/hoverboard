@@ -41,12 +41,12 @@
       "permalink": "/"
     },
     {
-      "route": "speakers",
-      "permalink": "/speakers/"
-    },
-    {
       "route": "schedule",
       "permalink": "/schedule/"
+    },
+    {
+      "route": "speakers",
+      "permalink": "/speakers/"
     },
     {
       "route": "team",
@@ -109,18 +109,18 @@
         "tabBarColor": "#fff"
       }
     },
-    "speakers": {
-      "title": "Speakers",
-      "headerSettings": {
-        "backgroundColor": "#3f51b5",
-        "fontColor": "#fff",
-        "tabBarColor": "#fff"
-      }
-    },
     "schedule": {
       "title": "Schedule",
       "headerSettings": {
         "backgroundColor": "#673ab7",
+        "fontColor": "#fff",
+        "tabBarColor": "#fff"
+      }
+    },
+    "speakers": {
+      "title": "Speakers",
+      "headerSettings": {
+        "backgroundColor": "#3f51b5",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
       }
