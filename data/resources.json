@@ -141,6 +141,7 @@
       "title" :"2 jours de conférences", 
       "description": "Avec 11 ateliers, 12 conférences courtes, 26 conférences longues, 2 keynotes, 6 catégories, 4 tracks", 
       "action": "Accéder au Programme",
+      "url": "/schedule/",
       "categories": [
         {
         "title": "Data & Machine Learning",
