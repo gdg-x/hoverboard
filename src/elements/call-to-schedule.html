@@ -1,0 +1,103 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../styles/shared-styles.html">
+
+
+<dom-module id="call-to-schedule">
+
+  <template>
+
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+
+      .container {
+        @apply(--layout-vertical);
+      }
+
+      .heading {
+        @apply(--layout-self-center);
+        margin-bottom: 0 !important;
+      }
+
+      .action-container{
+        padding: 0 50px;
+        @apply(--layout-flex-5);
+        @apply(--layout-vertical);
+        @apply(--layout-center);
+        text-align:center;
+      }
+
+      .categories-container{
+        padding: 0 50px;
+        @apply(--layout-flex-2);
+        @apply(--layout-vertical);
+        @apply(--layout-left);
+        margin:30px auto;
+      }
+
+      .icons{
+        width: 20px;
+        min-height: 20px;
+        margin-right: 10px;
+      }
+
+      @media (max-width: 599px) {
+        .open-dialog-button {
+          margin-top: 10px;
+        }
+      }
+
+      @media (min-width: 600px) {
+        .container {
+          @apply(--layout-horizontal);
+        }
+
+        .categories-container{
+         padding: 0;
+         margin:0 auto;
+        }
+
+        .heading {
+          text-align: left;
+        }
+      }
+    </style>
+
+    <div class="container">
+      <div class="action-container">
+          <h4 class="heading">{$ callToSchedule.title $}</h4>
+          <p>{$ callToSchedule.description $}</p>
+         <div>
+            <a href="{$ cfpUrl $}" target="_blank">
+              <paper-button class="primary" raised>{$ callToSchedule.action $}</paper-button>
+            </a>
+        </div> 
+      </div>
+      <span class="divider"></span>
+    <div class="categories-container">
+      {% for cat in callToSchedule.categories %}
+      <div>
+        <div><iron-image class="icons" src="{$ cat.icon $}" sizing="contain"
+          alt="Sunny Tech Montpellier"></iron-image><span>{$ cat.title $}</span></div>
+      </div>
+      {% endfor %}
+    </div>
+    </div>
+    
+
+  </template>
+  <script>
+    (function () {
+      'use strict';
+
+      Polymer({
+        is: 'call-to-schedule'
+      });
+
+    }());
+  </script>
+</dom-module>

@@ -7,8 +7,8 @@
 {% if videosSessionsUrl %}
   <link rel="import" href="../elements/featured-videos.html">
 {% endif %}
-{% if callToPaper %}
-  <link rel="import" href="../elements/call-to-paper.html">
+{% if callToSchedule %}
+  <link rel="import" href="../elements/call-to-schedule.html">
 {% endif %}
 {% if callToAction %}
 <link rel="import" href="../elements/call-to-action.html">
@@ -38,8 +38,8 @@
       <call-to-action app="{{app}}"></call-to-paper>
     {% endif %}
       <about-block app="{{app}}"></about-block>
-    {% if callToPaper %}
-      <call-to-paper app="{{app}}"></call-to-paper>
+    {% if callToSchedule %}
+    <call-to-schedule app="{{app}}"></call-to-schedule>
     {% endif %}
     <tickets-block app="{{app}}" cascaded></tickets-block>
     {% if gallery %}
