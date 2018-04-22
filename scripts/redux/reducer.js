@@ -98,6 +98,15 @@ const speakersReducer = (state = initialState.speakers, action) => {
   }
 };
 
+const previousSpeakersReducer = (state = initialState.previousSpeakers, action) => {
+  switch (action.type) {
+    case FETCH_PREVIOUS_SPEAKERS_LIST:
+      return action.list;
+    default:
+      return state;
+  }
+};
+
 const sessionsReducer = (state = initialState.sessions, action) => {
   switch (action.type) {
     case FETCH_SESSIONS_LIST:

@@ -217,6 +217,11 @@
             data-path="pages/speakers-page.html"
             route="[[subroute]]"
           ></speakers-page>
+          <previous-speakers-page
+            data-route="previous-speakers"
+            data-path="pages/previous-speakers-page.html"
+            route="[[subroute]]"
+          ></previous-speakers-page>
           <team-page
             data-route="team"
             data-path="pages/team-page.html"
@@ -247,6 +252,13 @@
       with-backdrop="[[viewport.isTabletPlus]]"
       no-cancel-on-outside-click="[[viewport.isPhone]]"
     ></speaker-details>
+
+    <previous-speaker-details
+      opened="[[dialogs.previousSpeaker.isOpened]]"
+      speaker="[[dialogs.previousSpeaker.data]]"
+      with-backdrop="[[viewport.isTabletPlus]]"
+      no-cancel-on-outside-click="[[viewport.isPhone]]"
+    ></previous-speaker-details>
 
     <session-details
       opened="[[dialogs.session.isOpened]]"

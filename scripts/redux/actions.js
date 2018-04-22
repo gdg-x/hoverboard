@@ -187,6 +187,17 @@ const speakersActions = {
   },
 };
 
+const previousSpeakersActions = {
+  fetchList: () => {
+    return firebase.database()
+      .ref('/previousSpeakers')
+      .on('value', (snapshot) => store.dispatch({
+        type: FETCH_PREVIOUS_SPEAKERS_LIST,
+        list: snapshot.val(),
+      }));
+  },
+};
+
 const sessionsActions = {
   fetchList: () => {
     const result = new Promise((resolve) => {

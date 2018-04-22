@@ -175,13 +175,22 @@
   },
   "faq": "/data/faq.md",
   "speakers": {
-    "skills": "Skills"
+    "skills": "Skills",
+    "previousYears": "Years",
+    "previousYear": "Year"
   },
   "speakersBlock": {
     "title": "Rockstar speakers",
     "callToAction": {
       "label": "View all speakers",
       "link": "/speakers/"
+    }
+  },
+  "previousSpeakersBlock": {
+    "title": "Previous speakers",
+    "callToAction": {
+      "label": "View all",
+      "link": "/previous-speakers/"
     }
   },
   "galleryBlock": {

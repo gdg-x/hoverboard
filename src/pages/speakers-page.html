@@ -11,6 +11,7 @@
 <link rel="import" href="../elements/text-truncate.html">
 <link rel="import" href="../elements/shared-styles.html">
 <link rel="import" href="../elements/content-loader.html">
+<link rel="import" href="../elements/previous-speakers-block.html">
 
 <dom-module id="speakers-page">
   <template>
@@ -182,8 +183,9 @@
       items-count="{$ contentLoaders.speakers.itemsCount $}"
       hidden$="[[contentLoaderVisibility]]"
     ></content-loader>
+
     <div class="container">
-      <template is="dom-repeat" items="[[transformToArray(speakers, 'id')]]" as="speaker">
+      <template is="dom-repeat" items="[[speakersToDisplay]]" as="speaker">
         <a class="speaker card"
            href$="/speakers/[[speaker.id]]/"
            ga-on="click"
@@ -244,6 +246,8 @@
       </template>
     </div>
 
+    <previous-speakers-block></previous-speakers-block>
+
     <footer-block></footer-block>
 
   </template>
@@ -260,6 +264,7 @@
         return {
           route: Object,
           active: Boolean,
+          speakersToDisplay: Array,
           speakers: {
             type: Object,
             statePath: 'speakers',
@@ -289,6 +294,8 @@
 
       _speakersChanged() {
         if (this.speakers && Object.keys(this.speakers).length) {
+          this.set('speakersToDisplay', this.transformToArray(this.speakers, 'id')
+            .sort((a, b) => a.order - b.order));
           this.contentLoaderVisibility = 'hidden';
         }
       }
