@@ -127,7 +127,7 @@
 
     <app-route
       route="[[route]]"
-      pattern="/:page"
+      pattern="/:speakerId"
       data="{{routeData}}"
     ></app-route>
 
@@ -203,6 +203,7 @@
       static get properties() {
         return {
           route: Object,
+          routeData: Object,
           active: Boolean,
           speakers: Array,
           previousSpeakers: {
@@ -212,6 +213,7 @@
           isDialogOpened: {
             type: Object,
             statePath: 'dialogs.previousSpeaker.isOpened',
+            observer: '_dialogStatusChanged',
           },
           contentLoaderVisibility: {
             type: String,
@@ -222,7 +224,7 @@
 
       static get observers() {
         return [
-          '_openSpeakerDetails(active, previousSpeakers, routeData.page)',
+          '_openSpeakerDetails(active, previousSpeakers, routeData.speakerId)',
           '_previousSpeakersChanged(previousSpeakers)',
         ];
       }
@@ -240,10 +242,16 @@
         }
       }
 
+      _dialogStatusChanged(nextState, prevState) {
+        if (!nextState && prevState && this.active && this.routeData.speakerId) {
+          history.back();
+        }
+      }
+
       _openSpeakerDetails(active, previousSpeakers, id) {
-        if (active && previousSpeakers && Object.keys(previousSpeakers).length) {
+        if (previousSpeakers && Object.keys(previousSpeakers).length) {
           requestAnimationFrame(() => {
-            if (id) {
+            if (active && id) {
               const speakerData = previousSpeakers[id];
               speakerData && dialogsActions.openDialog(DIALOGS.PREVIOUS_SPEAKER, speakerData);
             } else if (this.isDialogOpened) {

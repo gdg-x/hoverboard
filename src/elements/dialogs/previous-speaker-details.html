@@ -28,6 +28,7 @@
         border-radius: 50%;
         background-color: var(--contrast-additional-background-color);
         transform: translateZ(0);
+        flex-shrink: 0;
       }
 
       .action {
@@ -52,7 +53,7 @@
         <iron-icon
           class="close-icon"
           icon="hoverboard:[[_getCloseBtnIcon(viewport.isLaptopPlus)]]"
-          on-tap="close"
+          on-tap="_close"
         ></iron-icon>
 
         <app-toolbar>
@@ -160,21 +161,8 @@
         this.addEventListener('iron-overlay-canceled', this._close);
       }
 
-      static get observers() {
-        return [
-          '_handleClose(opened, speaker)',
-        ];
-      }
-
       _close() {
         dialogsActions.closeDialog(DIALOGS.PREVIOUS_SPEAKER);
-      }
-
-      _handleClose(opened, speaker) {
-        if (!opened && speaker && Object.keys(speaker).length) {
-          this._close();
-          history.back();
-        }
       }
 
       _getCloseBtnIcon(isLaptopViewport) {
