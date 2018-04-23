@@ -82,7 +82,7 @@
             hidden$="[[!session.presentation]]"
             target="_blank"
             rel="noopener noreferrer"
-            layout horizontal center-aligned
+            layout horizontal center
           >
             <iron-icon icon="hoverboard:presentation"></iron-icon>
             <span>{$ sessionDetails.viewPresentation $}</span>
@@ -91,7 +91,7 @@
             class="action"
             hidden$="[[!session.videoId]]"
             on-tap="_openVideo"
-            layout horizontal center-aligned
+            layout horizontal center
           >
             <iron-icon icon="hoverboard:video"></iron-icon>
             {$ sessionDetails.viewVideo $}

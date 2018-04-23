@@ -31,6 +31,10 @@
         isOpened: false,
         data: {},
       },
+      [DIALOGS.PREVIOUS_SPEAKER]: {
+        isOpened: false,
+        data: {},
+      },
       [DIALOGS.SESSION]: {
         isOpened: false,
         data: {},
@@ -48,6 +52,7 @@
     partners: [],
     videos: [],
     blog: {},
+    previousSpeakers: {},
     speakers: {},
     sessions: {
       list: {},
@@ -76,6 +81,7 @@
       videos: videosReducer(state.videos, action),
       blog: blogReducer(state.blog, action),
       speakers: speakersReducer(state.speakers, action),
+      previousSpeakers: previousSpeakersReducer(state.previousSpeakers, action),
       sessions: sessionsReducer(state.sessions, action),
       schedule: scheduleReducer(state.schedule, action),
       gallery: galleryReducer(state.gallery, action),

@@ -47,6 +47,9 @@
     "speakers": {
       ".read": true
     },
+    "previousSpeakers": {
+      ".read": true
+    },
     "subscribers": {
       "$id": {
         ".write": true
