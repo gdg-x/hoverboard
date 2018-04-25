@@ -66,6 +66,14 @@
       },
       "fontColor": "#424242"
     },
+    "previousSpeakers": {
+      "title": "Previous Speakers",
+      "metaDescription": "Check who was with us last years",
+      "background": {
+        "color": "#FFF"
+      },
+      "fontColor": "#424242"
+    },
     "schedule": {
       "title": "Schedule",
       "metaDescription": "Choose your sessions to visit",
@@ -196,6 +204,9 @@
     },
     "speakers": {
       "itemsCount": 4
+    },
+    "previousSpeakers": {
+      "itemsCount": 6
     },
     "tickets": {
       "itemsCount": 5

@@ -12,6 +12,7 @@
     "deploy:prod": "cross-env BUILD_ENV=production gulp deploy",
     "postinstall": "bower install",
     "serve": "gulp serve",
+    "serve:prod": "cross-env BUILD_ENV=production gulp serve",
     "lint": "gulp lint",
     "pretest": "npm run lint",
     "test": "echo \"No tests\""

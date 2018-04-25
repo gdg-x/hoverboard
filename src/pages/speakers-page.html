@@ -11,6 +11,7 @@
 <link rel="import" href="../elements/text-truncate.html">
 <link rel="import" href="../elements/shared-styles.html">
 <link rel="import" href="../elements/content-loader.html">
+<link rel="import" href="../elements/previous-speakers-block.html">
 
 <dom-module id="speakers-page">
   <template>
@@ -155,7 +156,7 @@
 
     <app-route
       route="[[route]]"
-      pattern="/:page"
+      pattern="/:speakerId"
       data="{{routeData}}"
     ></app-route>
 
@@ -182,8 +183,9 @@
       items-count="{$ contentLoaders.speakers.itemsCount $}"
       hidden$="[[contentLoaderVisibility]]"
     ></content-loader>
+
     <div class="container">
-      <template is="dom-repeat" items="[[transformToArray(speakers, 'id')]]" as="speaker">
+      <template is="dom-repeat" items="[[speakersToDisplay]]" as="speaker">
         <a class="speaker card"
            href$="/speakers/[[speaker.id]]/"
            ga-on="click"
@@ -244,6 +246,8 @@
       </template>
     </div>
 
+    <previous-speakers-block></previous-speakers-block>
+
     <footer-block></footer-block>
 
   </template>
@@ -259,7 +263,9 @@
       static get properties() {
         return {
           route: Object,
+          routeData: Object,
           active: Boolean,
+          speakersToDisplay: Array,
           speakers: {
             type: Object,
             statePath: 'speakers',
@@ -267,6 +273,7 @@
           isDialogOpened: {
             type: Object,
             statePath: 'dialogs.speaker.isOpened',
+            observer: '_dialogStatusChanged',
           },
           contentLoaderVisibility: {
             type: String,
@@ -277,7 +284,7 @@
 
       static get observers() {
         return [
-          '_openSpeakerDetails(active, speakers, routeData.page)',
+          '_openSpeakerDetails(active, speakers, routeData.speakerId)',
           '_speakersChanged(speakers)',
         ];
       }
@@ -289,14 +296,22 @@
 
       _speakersChanged() {
         if (this.speakers && Object.keys(this.speakers).length) {
+          this.set('speakersToDisplay', this.transformToArray(this.speakers, 'id')
+            .sort((a, b) => a.order - b.order));
           this.contentLoaderVisibility = 'hidden';
         }
       }
 
+      _dialogStatusChanged(nextState, prevState) {
+        if (!nextState && prevState && this.active && this.routeData.speakerId) {
+          history.back();
+        }
+      }
+
       _openSpeakerDetails(active, speakers, id) {
-        if (active && speakers && Object.keys(speakers).length) {
+        if (speakers && Object.keys(speakers).length) {
           requestAnimationFrame(() => {
-            if (id) {
+            if (active && id) {
               const speakerData = speakers[id];
               speakerData && dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
             } else if (this.isDialogOpened) {

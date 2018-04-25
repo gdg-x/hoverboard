@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/app-route/app-route-converter.html">
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
 
@@ -57,7 +58,6 @@
       route="[[route]]"
       pattern="/:day"
       data="{{routeData}}"
-      query-params="{{queryParams}}"
     ></app-route>
 
     <hero-block
@@ -118,6 +118,7 @@
       static get properties() {
         return {
           route: Object,
+          queryParams: Object,
           active: Boolean,
           schedule: {
             type: Object,
@@ -138,6 +139,7 @@
           isDialogOpened: {
             type: Object,
             statePath: 'dialogs.session.isOpened',
+            observer: '_dialogStatusChanged',
           },
           contentLoaderVisibility: {
             type: String,
@@ -175,14 +177,21 @@
 
       _setDay(active, day, scheduleDays) {
         if (active && scheduleDays) {
-          routingActions.setSubRoute(day || Object.keys(scheduleDays)[0]);
+          const selectedDay = day || Object.keys(scheduleDays)[0];
+          routingActions.setSubRoute(selectedDay);
+        }
+      }
+
+      _dialogStatusChanged(nextState, prevState) {
+        if (!nextState && prevState && this.active && this.queryParams.sessionId) {
+          history.back();
         }
       }
 
       _openSessionDetails(active, sessions, id) {
-        if (active && sessions && Object.keys(sessions).length) {
+        if (sessions && Object.keys(sessions).length) {
           requestAnimationFrame(() => {
-            if (id) {
+            if (active && id) {
               dialogsActions.openDialog(DIALOGS.SESSION, sessions[id]);
             } else if (this.isDialogOpened) {
               dialogsActions.closeDialog(DIALOGS.SESSION);

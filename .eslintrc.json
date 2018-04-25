@@ -41,6 +41,7 @@
     "videosActions": true,
     "blogActions": true,
     "speakersActions": true,
+    "previousSpeakersActions": true,
     "sessionsActions": true,
     "scheduleActions": true,
     "galleryActions": true,

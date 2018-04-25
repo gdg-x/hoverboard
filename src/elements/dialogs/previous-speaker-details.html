@@ -15,7 +15,7 @@
 <link rel="import" href="../shared-styles.html">
 <link rel="import" href="dialog-styles.html">
 
-<dom-module id="speaker-details">
+<dom-module id="previous-speaker-details">
   <template>
     <style is="custom-style" include="shared-styles dialog-styles flex flex-alignment positioning"></style>
 
@@ -29,11 +29,6 @@
         background-color: var(--contrast-additional-background-color);
         transform: translateZ(0);
         flex-shrink: 0;
-      }
-
-      .badge:not(:last-of-type)::after {
-        margin-left: -4px;
-        content: ',';
       }
 
       .action {
@@ -77,19 +72,6 @@
       <div class="dialog-container content">
         <h3 class="meta-info">[[speaker.country]]</h3>
         <h3 class="meta-info">[[speaker.title]], [[speaker.company]]</h3>
-        <h3 class="meta-info" hidden$="[[isEmpty(speaker.badges)]]">
-          <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
-            <a
-              class="badge"
-              href$="[[badge.link]]"
-              target="_blank"
-              rel="noopener noreferrer"
-              title$="[[badge.description]]"
-            >
-              [[badge.description]]
-            </a>
-          </template>
-        </h3>
 
         <marked-element class="description" markdown="[[speaker.bio]]">
           <div slot="markdown-html"></div>
@@ -103,24 +85,47 @@
           </template>
         </div>
 
-        <div class="additional-sections" hidden$="[[!speaker.sessions.length]]">
+        <div class="additional-sections" hidden$="[[!speaker.sessions]]">
           <h3>{$ speakerDetails.sessions $}</h3>
 
-          <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
-            <a href$="/schedule?sessionId=[[session.id]]" class="section">
-              <div layout horizontal center>
-                <div class="section-details" flex>
-                  <div class="section-primary-text">[[session.title]]</div>
-                  <div class="section-secondary-text" hidden$="[[!session.dateReadable]]">[[session.dateReadable]], [[session.startTime]] - [[session.endTime]]</div>
-                  <div class="section-secondary-text" hidden$="[[!session.track.title]]">[[session.track.title]]</div>
-                  <div class="tags" hidden$="[[!session.tags.length]]">
-                    <template is="dom-repeat" items="[[session.tags]]" as="tag">
-                      <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
-                    </template>
+          <template is="dom-repeat" items="[[_getSessions(speaker.sessions)]]" as="session">
+            <div layout horizontal center>
+              <div class="section" flex>
+                <div class="section-primary-text">[[session.title]]</div>
+                <div class="section-secondary-text">{$ speakers.previousYear $}: [[session.year]]</div>
+                <div class="tags" hidden$="[[!session.tags.length]]">
+                  <template is="dom-repeat" items="[[session.tags]]" as="tag">
+                    <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
+                  </template>
+                </div>
+                <div class="actions" layout horizontal>
+                  <div
+                    class="action"
+                    hidden$="[[!session.videoId]]"
+                    on-tap="_openVideo"
+                    layout horizontal center
+                  >
+                    <iron-icon icon="hoverboard:video"></iron-icon>
+                    <span>{$ sessionDetails.viewVideo $}</span>
                   </div>
+                  <a
+                    class="action"
+                    href$="[[session.presentation]]"
+                    hidden$="[[!session.presentation]]"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    ga-on="click"
+                    ga-event-category="previous speaker"
+                    ga-event-action="open video"
+                    ga-event-label$="[[session.title]]"
+                    layout horizontal center
+                  >
+                    <iron-icon icon="hoverboard:presentation"></iron-icon>
+                    <span>{$ sessionDetails.viewPresentation $}</span>
+                  </a>
                 </div>
               </div>
-            </a>
+            </div>
           </template>
         </div>
 
@@ -132,11 +137,11 @@
   <script>
 
     // eslint-disable-next-line no-undef
-    class SpeakerDetails extends UtilsFunctions(
+    class PreviousSpeakerDetails extends UtilsFunctions(
       ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element))
     ) {
       static get is() {
-        return 'speaker-details';
+        return 'previous-speaker-details';
       }
 
       static get properties() {
@@ -157,14 +162,32 @@
       }
 
       _close() {
-        dialogsActions.closeDialog(DIALOGS.SPEAKER);
+        dialogsActions.closeDialog(DIALOGS.PREVIOUS_SPEAKER);
       }
 
       _getCloseBtnIcon(isLaptopViewport) {
         return isLaptopViewport ? 'close' : 'arrow-left';
       }
+
+      _getSessions(sessions) {
+        return sessions && Object.keys(sessions)
+          .reduce((aggregator, year) => {
+            return aggregator
+              .concat(sessions[year].map((session) => Object.assign({}, session, { year })));
+          }, [])
+          .sort((a, b) => b.year - a.year);
+      }
+
+      _openVideo(event) {
+        event.model.session && uiActions.toggleVideoDialog({
+          title: event.model.session.title,
+          youtubeId: event.model.session.videoId,
+          disableControls: true,
+          opened: true,
+        });
+      }
     }
 
-    window.customElements.define(SpeakerDetails.is, SpeakerDetails);
+    window.customElements.define(PreviousSpeakerDetails.is, PreviousSpeakerDetails);
   </script>
 </dom-module>

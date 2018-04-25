@@ -82,7 +82,7 @@
             hidden$="[[!session.presentation]]"
             target="_blank"
             rel="noopener noreferrer"
-            layout horizontal center-aligned
+            layout horizontal center
           >
             <iron-icon icon="hoverboard:presentation"></iron-icon>
             <span>{$ sessionDetails.viewPresentation $}</span>
@@ -91,7 +91,7 @@
             class="action"
             hidden$="[[!session.videoId]]"
             on-tap="_openVideo"
-            layout horizontal center-aligned
+            layout horizontal center
           >
             <iron-icon icon="hoverboard:video"></iron-icon>
             {$ sessionDetails.viewVideo $}
@@ -102,7 +102,7 @@
           <h3>{$ sessionDetails.speakers $}</h3>
 
           <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
-            <a href$="/speakers/[[speaker.id]]" class="section" on-tap="close">
+            <a href$="/speakers/[[speaker.id]]" class="section">
               <div layout horizontal center>
                 <plastic-image
                   class="section-photo"
@@ -159,24 +159,8 @@
         this.addEventListener('iron-overlay-canceled', this._close);
       }
 
-      static get observers() {
-        return [
-          '_handleClose(opened, session)',
-        ];
-      }
-
       _close() {
         dialogsActions.closeDialog(DIALOGS.SESSION);
-        this.dispatchEvent(new CustomEvent('reset-query-params', {
-          bubbles: true,
-          composed: true,
-        }));
-      }
-
-      _handleClose(opened, session) {
-        if (!opened && session && Object.keys(session).length) {
-          dialogsActions.closeDialog(DIALOGS.SESSION);
-        }
       }
 
       _getTagColor(value) {
