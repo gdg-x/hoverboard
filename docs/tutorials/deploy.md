@@ -26,13 +26,13 @@ The instructions below are based on the [Firebase quick start][Firebase quick st
     [Firebase console][Firebase console] to create a new app.
     
 1.  When you initialize your app, you will be prompted for
-- Database: select
-- Functions: select
-- Hosting: select
+    - Database: select
+    - Functions: select
+    - Hosting: select
     
     Select a directory to use as the public root (default is "public"). 
     Enter `build` contains everything your application needs to run. 
-
+    
 1.  Edit firebase.json, change firebase name, and add `rewrites` section 
 ([see example firebase.json](/docs/firebase.json)).
 
