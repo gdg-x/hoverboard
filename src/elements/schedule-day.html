@@ -11,6 +11,7 @@
 
       :host {
         display: block;
+        --tracks-number: 3;
       }
 
       .start-time {
@@ -43,7 +44,7 @@
           display: grid;
           grid-column-gap: 16px;
           grid-row-gap: 32px;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(var(--tracks-number), 1fr);
         }
 
         .start-time {
@@ -75,7 +76,7 @@
 
           <div
             class="session"
-            style$="grid-area: [[session.gridArea]]" 
+            style$="grid-area: [[session.gridArea]]"
             layout vertical>
             <template is="dom-repeat" items="[[session.items]]" as="subSession">
               <session-element
@@ -108,7 +109,18 @@
           name: String,
           user: Object,
           featuredSessions: Object,
+          tracksNumber: {
+            type: Number,
+            value: 3,
+            observer: '_tracksNumberChanged',
+          },
         };
+      }
+
+      _tracksNumberChanged(newValue, oldValue) {
+        this.updateStyles({
+          '--tracks-number': newValue,
+        });
       }
 
       _getTimePosition(timeslotIndex) {

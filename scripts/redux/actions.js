@@ -367,12 +367,15 @@ const scheduleActions = {
       ? Promise.resolve(state.speakers.obj)
       : speakersActions.fetchList()(dispatch, getState);
 
-    const schedulePromise = new Promise((resolve) => {
-      firebase.database()
-        .ref('/schedule')
-        .on('value', (snapshot) => {
-          resolve(snapshot.val());
-        });
+    const schedulePromise = new Promise((resolve, reject) => {
+      firebase.firestore()
+        .collection('schedule')
+        .orderBy('date', 'desc')
+        .get()
+        .then((snaps) => {
+          resolve(snaps.docs.map((s) => s.data()));
+        })
+        .catch(reject);
     });
 
     return Promise.all([speakersPromise, schedulePromise])
@@ -400,6 +403,12 @@ const scheduleActions = {
           // });
           scheduleWorker.terminate();
         }, false);
+      })
+      .catch((error) => {
+        dispatch({
+          type: FETCH_SCHEDULE_FAILURE,
+          payload: { error },
+        });
       });
   },
 };
