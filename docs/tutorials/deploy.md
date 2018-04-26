@@ -26,7 +26,7 @@ The instructions below are based on the [Firebase quick start][Firebase quick st
     [Firebase console][Firebase console] to create a new app.
     
 1.  When you initialize your app, you will be prompted for
-- Database: space
+- Database: select
 - Functions: space
 - Hosting: select
     
