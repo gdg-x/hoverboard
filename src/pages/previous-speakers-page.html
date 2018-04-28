@@ -205,10 +205,21 @@
           route: Object,
           routeData: Object,
           active: Boolean,
-          speakers: Array,
-          previousSpeakers: {
+          speakers: {
+            type: Array,
+            statePath: 'previousSpeakers.list',
+          },
+          speakersMap: {
             type: Object,
-            statePath: 'previousSpeakers',
+            statePath: 'previousSpeakers.obj',
+          },
+          speakersFetching: {
+            type: Boolean,
+            statePath: 'previousSpeakers.fetching',
+          },
+          speakersFetchingError: {
+            type: Object,
+            statePath: 'previousSpeakers.fetchingError',
           },
           isDialogOpened: {
             type: Object,
@@ -224,20 +235,20 @@
 
       static get observers() {
         return [
-          '_openSpeakerDetails(active, previousSpeakers, routeData.speakerId)',
-          '_previousSpeakersChanged(previousSpeakers)',
+          '_openSpeakerDetails(active, speakers, speakersMap, routeData.speakerId)',
+          '_previousSpeakersChanged(speakers)',
         ];
       }
 
       connectedCallback() {
         super.connectedCallback();
-        if (!Object.keys(this.previousSpeakers).length) previousSpeakersActions.fetchList();
+        if (!this.speakersFetching && (!this.speakers || !this.speakers.length)) {
+          this.dispatch(previousSpeakersActions.fetchList());
+        }
       }
 
       _previousSpeakersChanged() {
-        if (this.previousSpeakers && Object.keys(this.previousSpeakers).length) {
-          this.set('speakers', this.transformToArray(this.previousSpeakers, 'id')
-            .sort((a, b) => a.order - b.order));
+        if (this.speakers && this.speakers.length) {
           this.contentLoaderVisibility = 'hidden';
         }
       }
@@ -248,11 +259,11 @@
         }
       }
 
-      _openSpeakerDetails(active, previousSpeakers, id) {
-        if (previousSpeakers && Object.keys(previousSpeakers).length) {
+      _openSpeakerDetails(active, speakers, speakersMap, id) {
+        if (speakers && speakers.length) {
           requestAnimationFrame(() => {
             if (active && id) {
-              const speakerData = previousSpeakers[id];
+              const speakerData = speakersMap[id];
               speakerData && dialogsActions.openDialog(DIALOGS.PREVIOUS_SPEAKER, speakerData);
             } else if (this.isDialogOpened) {
               dialogsActions.closeDialog(DIALOGS.PREVIOUS_SPEAKER);

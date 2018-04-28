@@ -261,13 +261,38 @@ const speakersActions = {
 };
 
 const previousSpeakersActions = {
-  fetchList: () => {
-    return firebase.database()
-      .ref('/previousSpeakers')
-      .on('value', (snapshot) => store.dispatch({
-        type: FETCH_PREVIOUS_SPEAKERS_LIST,
-        list: snapshot.val(),
-      }));
+  fetchList: () => (dispatch) => {
+    dispatch({
+      type: FETCH_PREVIOUS_SPEAKERS,
+    });
+
+    firebase.firestore()
+      .collection('previousSpeakers')
+      .orderBy('order', 'asc')
+      .get()
+      .then((snaps) => {
+        const list = snaps.docs
+          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+
+        const obj = list.reduce(
+          (acc, curr) => Object.assign({}, acc, { [curr.id]: curr }),
+          {}
+        );
+
+        dispatch({
+          type: FETCH_PREVIOUS_SPEAKERS_SUCCESS,
+          payload: {
+            obj,
+            list,
+          },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: FETCH_PREVIOUS_SPEAKERS_FAILURE,
+          payload: { error },
+        });
+      });
   },
 };
 
