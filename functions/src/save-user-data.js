@@ -1,5 +1,5 @@
 import { auth } from 'firebase-functions';
-import { database } from 'firebase-admin';
+import { firestore } from 'firebase-admin';
 
 const saveUserData = auth.user().onCreate((userRecord) => {
   const uid = userRecord.uid || userRecord.providerData[0].uid;
@@ -9,7 +9,7 @@ const saveUserData = auth.user().onCreate((userRecord) => {
     photoURL: userRecord.photoURL || userRecord.providerData[0].photoURL || ''
   };
 
-  return database().ref(`/users/${uid}`).set(userData);
+  return firestore().collection('users').doc(uid).set(userData);
 });
 
 export default saveUserData;
