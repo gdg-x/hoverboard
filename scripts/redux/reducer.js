@@ -248,8 +248,24 @@ const sessionsReducer = (state = initialState.sessions, action) => {
     case FETCH_USER_FEATURED_SESSIONS:
     case SET_USER_FEATURED_SESSIONS:
       return Object.assign({}, state, {
-        featured: action.featuredSessions || {},
+        featuredError: null,
+        featuredFetching: true,
       });
+
+    case FETCH_USER_FEATURED_SESSIONS_FAILURE:
+    case SET_USER_FEATURED_SESSIONS_FAILURE:
+      return Object.assign({}, state, {
+        featuredError: action.payload.error,
+        featuredFetching: false,
+      });
+
+    case FETCH_USER_FEATURED_SESSIONS_SUCCESS:
+    case SET_USER_FEATURED_SESSIONS_SUCCESS:
+      return Object.assign({}, state, {
+        featured: action.payload.featuredSessions || {},
+        featuredFetching: false,
+      });
+
     default:
       return state;
   }

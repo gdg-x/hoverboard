@@ -1,17 +1,5 @@
 {
   "rules": {
-    "blog": {
-      ".read": true
-    },
-    "featuredSessions": {
-      "$uid": {
-        ".read": "auth.uid === $uid",
-        ".write": "auth.uid === $uid"
-      }
-    },
-    "gallery": {
-      ".read": true
-    },
     "notifications": {
       "subscribers": {
         ".read": true,
@@ -24,9 +12,6 @@
         }
       }
     },
-    "partners": {
-      ".read": true
-    },
     "potentialPartners": {
       "$id": {
         ".write": true
@@ -38,37 +23,16 @@
         ".write": "auth.uid === $uid"
       }
     },
-    "schedule": {
-      ".read": true
-    },
-    "sessions": {
-      ".read": true
-    },
-    "speakers": {
-      ".read": true
-    },
-    "previousSpeakers": {
-      ".read": true
-    },
     "subscribers": {
       "$id": {
         ".write": true
       }
-    },
-    "team": {
-      ".read": true
-    },
-    "tickets": {
-      ".read": true
     },
     "users": {
       "$uid": {
         ".read": "auth.uid === $uid",
         ".write": "auth.uid === $uid"
       }
-    },
-    "videos": {
-      ".read": true
     }
   }
 }

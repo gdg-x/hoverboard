@@ -100,7 +100,7 @@
             name$="[[day.date]]"
             day="[[day]]"
             user="[[user]]"
-            featured-sessions="[[sessions.featured]]"
+            featured-sessions="[[featuredSessions]]"
           ></schedule-day>
         </template>
       </iron-pages>
@@ -126,6 +126,10 @@
             type: Object,
             statePath: 'schedule',
           },
+          featuredSessions: {
+            type: Object,
+            statePath: 'sessions.featured',
+          },
           user: {
             type: Object,
             statePath: 'user',
@@ -150,7 +154,7 @@
         return [
           '_setDay(active, routeData.day, schedule.days)',
           '_openSessionDetails(active, sessions, queryParams.sessionId)',
-          '_fetchFeaturedSessions(active, user.uid)',
+          '_fetchFeaturedSessions(active, sessions, user.uid)',
           '_scheduleChanged(schedule.days)',
           '_sessionsAndSpeakersChanged(sessions, speakers)',
         ];
@@ -168,10 +172,10 @@
         }
       }
 
-      _fetchFeaturedSessions(active, userUid) {
-        if (active && userUid && !this.sessions ||
-          this.sessions && this.sessions.featured && !this.sessions.featured.length) {
-          sessionsActions.fetchUserFeaturedSessions(userUid);
+      _fetchFeaturedSessions(active, sessions, userUid) {
+        if (active && userUid && sessions && sessions.length &&
+          (!this.featuredSessions || !Object.keys(this.featuredSessions).length)) {
+          this.dispatch(sessionsActions.fetchUserFeaturedSessions(userUid));
         }
       }
 
