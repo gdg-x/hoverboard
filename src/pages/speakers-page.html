@@ -287,8 +287,6 @@
 
       _speakersChanged() {
         if (this.speakers && this.speakers.length) {
-          this.set('speakersToDisplay', this.transformToArray(this.speakers, 'id')
-            .sort((a, b) => a.order - b.order));
           this.contentLoaderVisibility = 'hidden';
         }
       }

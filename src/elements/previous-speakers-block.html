@@ -103,10 +103,18 @@
 
       static get properties() {
         return {
-          previousSpeakersRaw: {
-            type: Object,
-            statePath: 'previousSpeakers',
+          speakersRaw: {
+            type: Array,
+            statePath: 'previousSpeakers.list',
             observer: '_generateSpeakers',
+          },
+          speakersFetching: {
+            type: Boolean,
+            statePath: 'previousSpeakers.fetching',
+          },
+          speakersFetchingError: {
+            type: Object,
+            statePath: 'previousSpeakers.fetchingError',
           },
           viewport: {
             type: Object,
@@ -117,12 +125,13 @@
 
       connectedCallback() {
         super.connectedCallback();
-        if (!Object.keys(this.speakers).length) previousSpeakersActions.fetchList();
+        if (!this.speakersFetching && (!this.speakers || !this.speakers.length)) {
+          this.dispatch(previousSpeakersActions.fetchList());
+        }
       }
 
-      _generateSpeakers(speakers) {
-        const speakersArray = this.transformToArray(speakers, 'id');
-        this.set('speakers', this.randomOrder(speakersArray).slice(0, this.viewport.isPhone ? 8 : 14));
+      _generateSpeakers(speakersRaw) {
+        this.set('speakers', this.randomOrder(speakersRaw).slice(0, this.viewport.isPhone ? 8 : 14));
       }
     }
 
