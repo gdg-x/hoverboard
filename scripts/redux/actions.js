@@ -609,23 +609,25 @@ const userActions = {
 };
 
 const subscribeActions = {
-  subscribe: (data) => {
+  subscribe: (data) => (dispatch) => {
     const id = data.email.replace(/[^\w\s]/gi, '');
 
-    firebase.database().ref(`subscribers/${id}`).set({
-      email: data.email,
-      firstName: data.firstFieldValue || '',
-      lastName: data.secondFieldValue || '',
-    })
+    firebase.firestore().collection('subscribers')
+      .doc(id)
+      .set({
+        email: data.email,
+        firstName: data.firstFieldValue || '',
+        lastName: data.secondFieldValue || '',
+      })
       .then(() => {
-        store.dispatch({
+        dispatch({
           type: SUBSCRIBE,
           subscribed: true,
         });
         toastActions.showToast({ message: '{$ subscribeBlock.toast $}' });
       })
       .catch((error) => {
-        store.dispatch({
+        dispatch({
           type: SET_DIALOG_DATA,
           dialog: {
             ['subscribe']: {

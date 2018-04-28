@@ -99,6 +99,13 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    match /subscribers/{subscriberId} {
+      allow read, update, delete: if false;
+
+      // Applies to document create requests
+      allow create;
+    }
+
     match /team/{teamId} {
       // Applies to single document read requests
       allow get;
