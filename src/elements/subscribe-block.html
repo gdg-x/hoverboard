@@ -122,9 +122,8 @@
         }
 
         if (this.user.email) {
-          subscribeActions.subscribe(Object.assign({}, { email: this.user.email }, userData));
-        }
-        else {
+          this._subscribeAction(Object.assign({}, { email: this.user.email }, userData));
+        } else {
           dialogsActions.openDialog(DIALOGS.SUBSCRIBE, {
             title: '{$ subscribeBlock.formTitle $}',
             submitLabel: ' {$ subscribeBlock.subscribe $}',
@@ -132,9 +131,13 @@
             secondFieldLabel: '{$ subscribeBlock.lastName $}',
             firstFieldValue: userData.firstFieldValue,
             secondFieldValue: userData.secondFieldValue,
-            submit: subscribeActions.subscribe,
+            submit: (data) => this._subscribeAction(data),
           });
         }
+      }
+
+      _subscribeAction(data) {
+        this.dispatch(subscribeActions.subscribe(data));
       }
     }
 
