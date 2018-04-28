@@ -344,40 +344,54 @@ const sessionsActions = {
       });
   },
 
-  fetchUserFeaturedSessions: (userId) => {
-    const result = new Promise((resolve) => {
-      firebase.database()
-        .ref(`/featuredSessions/${userId}`)
-        .on('value', (snapshot) => {
-          resolve(snapshot.val());
-        });
+  fetchUserFeaturedSessions: (userId) => (dispatch) => {
+    dispatch({
+      type: FETCH_USER_FEATURED_SESSIONS,
+      payload: { userId },
     });
 
-    result
-      .then((featuredSessions) => {
-        store.dispatch({
-          type: FETCH_USER_FEATURED_SESSIONS,
-          featuredSessions,
+    firebase.firestore()
+      .collection('featuredSessions')
+      .doc(userId)
+      .get()
+      .then((doc) => {
+        dispatch({
+          type: FETCH_USER_FEATURED_SESSIONS_SUCCESS,
+          payload: {
+            featuredSessions: doc.exists ? doc.data() : {},
+          },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: FETCH_USER_FEATURED_SESSIONS_FAILURE,
+          payload: { error },
         });
       });
-
-    return result;
   },
 
-  setUserFeaturedSessions: (userId, featuredSessions) => {
-    const result = firebase.database()
-      .ref(`/featuredSessions/${userId}`)
-      .set(featuredSessions);
+  setUserFeaturedSessions: (userId, featuredSessions) => (dispatch) => {
+    dispatch({
+      type: SET_USER_FEATURED_SESSIONS,
+      payload: { userId, featuredSessions },
+    });
 
-    result
+    firebase.firestore()
+      .collection('featuredSessions')
+      .doc(userId)
+      .set(featuredSessions)
       .then(() => {
-        store.dispatch({
-          type: SET_USER_FEATURED_SESSIONS,
-          featuredSessions,
+        dispatch({
+          type: SET_USER_FEATURED_SESSIONS_SUCCESS,
+          payload: { featuredSessions },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: SET_USER_FEATURED_SESSIONS_FAILURE,
+          payload: { error },
         });
       });
-
-    return result;
   },
 };
 

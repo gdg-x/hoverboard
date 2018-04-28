@@ -11,6 +11,10 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    match /featuredSessions/{userId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+
     match /gallery/{photo} {
       // Applies to single document read requests
       allow get;

@@ -5,6 +5,7 @@
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 
 <link rel="import" href="../mixins/utils-functions.html">
+<link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="./shared-styles.html">
 
 <dom-module id="session-element">
@@ -198,7 +199,9 @@
   <script>
 
     // eslint-disable-next-line no-undef
-    class SessionElement extends UtilsFunctions(Polymer.GestureEventListeners(Polymer.Element)) {
+    class SessionElement extends UtilsFunctions(
+      ReduxMixin(Polymer.GestureEventListeners(Polymer.Element))
+    ) {
       static get is() {
         return 'session-element';
       }
@@ -254,11 +257,12 @@
           });
           return;
         }
+
         const sessions = Object.assign({}, this.featuredSessions, {
           [this.session.id]: !this.featuredSessions[this.session.id] ? true : null,
         });
 
-        sessionsActions.setUserFeaturedSessions(this.user.uid, sessions);
+        this.dispatch(sessionsActions.setUserFeaturedSessions(this.user.uid, sessions));
       }
     }
 
