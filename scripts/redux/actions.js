@@ -64,6 +64,10 @@ const dialogsActions = {
       dialogName,
     });
   },
+  setDialogError: (dialogName) => ({
+    type: SET_DIALOG_ERROR,
+    payload: { dialogName },
+  }),
 };
 
 let toastHideTimeOut;
@@ -128,6 +132,35 @@ const _getPartnerItems = (groupId) => firebase.firestore()
   );
 
 const partnersActions = {
+  addPartner: (data) => (dispatch) => {
+    dispatch({
+      type: ADD_POTENTIAL_PARTNER,
+      payload: data,
+    });
+
+    const id = data.email.replace(/[^\w\s]/gi, '');
+    const partner = {
+      email: data.email,
+      fullName: data.firstFieldValue || '',
+      companyName: data.secondFieldValue || '',
+    };
+
+    firebase.firestore().collection('potentialPartners')
+      .doc(id)
+      .set(partner)
+      .then(() => {
+        dispatch({
+          type: ADD_POTENTIAL_PARTNER_SUCCESS,
+          payload: { partner },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: ADD_POTENTIAL_PARTNER_FAILURE,
+          payload: { error },
+        });
+      });
+  },
   fetchPartners: () => (dispatch) => {
     dispatch({
       type: FETCH_PARTNERS,
@@ -576,18 +609,6 @@ const userActions = {
 };
 
 const subscribeActions = {
-  addPartner: (data) => {
-    const id = data.email.replace(/[^\w\s]/gi, '');
-
-    firebase.database().ref(`potentialPartners/${id}`).set({
-      email: data.email,
-      fullName: data.firstFieldValue || '',
-      companyName: data.secondFieldValue || '',
-    }).then(() => {
-      dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
-      toastActions.showToast({ message: '{$ partnersBlock.toast $}' });
-    });
-  },
   subscribe: (data) => {
     const id = data.email.replace(/[^\w\s]/gi, '');
 

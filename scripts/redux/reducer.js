@@ -43,6 +43,18 @@ const dialogsReducer = (state = initialState.dialogs, action) => {
     case OPEN_DIALOG:
     case SET_DIALOG_DATA:
       return Object.assign({}, state, action.dialog);
+
+    case SET_DIALOG_ERROR: {
+      const dialog = state[action.payload.dialogName];
+
+      return Object.assign({}, state, {
+        [action.payload.dialogName]: {
+          isOpened: dialog.isOpened,
+          data: Object.assign({}, dialog.data, { errorOccurred: true }),
+        },
+      });
+    }
+
     case CLOSE_DIALOG:
       return Object.assign({}, state, {
         [action.dialogName]: initialState.dialogs[action.dialogName],
@@ -97,6 +109,23 @@ const partnersReducer = (state = initialState.partners, action) => {
       return Object.assign({}, state, {
         fetching: false,
         list: action.payload.list,
+      });
+
+    case ADD_POTENTIAL_PARTNER:
+      return Object.assign({}, state, {
+        adding: true,
+        addingError: null,
+      });
+
+    case ADD_POTENTIAL_PARTNER_FAILURE:
+      return Object.assign({}, state, {
+        adding: false,
+        addingError: action.payload.error,
+      });
+
+    case ADD_POTENTIAL_PARTNER_SUCCESS:
+      return Object.assign({}, state, {
+        adding: false,
       });
 
     default:

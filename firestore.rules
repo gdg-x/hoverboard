@@ -48,6 +48,13 @@ service cloud.firestore {
       }
     }
 
+    match /potentialPartners/{partnerId} {
+      allow read, update, delete: if false;
+
+      // Applies to document create requests
+      allow create;
+    }
+
     match /previousSpeakers/{speaker} {
       // Applies to single document read requests
       allow get;
