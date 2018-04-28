@@ -139,6 +139,15 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    match /users/{userId} {
+      allow list: if false;
+
+      allow get: if request.auth.uid == userId;
+
+      allow create, delete: if false;
+      allow update: if request.auth.uid == userId;
+    }
+
     match /videos/{video} {
       // Applies to single document read requests
       allow get;

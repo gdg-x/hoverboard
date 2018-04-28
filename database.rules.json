@@ -12,23 +12,7 @@
         }
       }
     },
-    "potentialPartners": {
-      "$id": {
-        ".write": true
-      }
-    },
     "ratings": {
-      "$uid": {
-        ".read": "auth.uid === $uid",
-        ".write": "auth.uid === $uid"
-      }
-    },
-    "subscribers": {
-      "$id": {
-        ".write": true
-      }
-    },
-    "users": {
       "$uid": {
         ".read": "auth.uid === $uid",
         ".write": "auth.uid === $uid"
