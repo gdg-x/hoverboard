@@ -95,7 +95,7 @@
       return new Promise((resolve, reject) => {
         const script = document.createElement('script');
         script.src = `bower_components/firebase/firebase-firestore.js`;
-        script.async = true;
+        script.async = false;
         script.onload = () => resolve();
         script.onerror = () => reject();
         document.head.appendChild(script);
