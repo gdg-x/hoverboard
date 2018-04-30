@@ -1,33 +1,33 @@
 import * as functions from 'firebase-functions';
-import { database, messaging } from 'firebase-admin';
+import { firestore, messaging } from 'firebase-admin';
 
-const sendGeneralNotification = functions.database.ref('/notifications/messages/{timestamp}')
+const sendGeneralNotification = functions.firestore.document('/notifications/{timestamp}')
   .onCreate(async (snapshot, context) => {
     const timestamp = context.params.timestamp;
-    const message = snapshot.val();
+    const message = snapshot.data();
     console.log(timestamp, message);
 
     if (!message) return null;
     console.log('New message added at ', timestamp, ' with payload ', message);
-    const deviceTokensPromise = database().ref(`/notifications/subscribers`).once('value');
-    const notificationsConfigPromise = database().ref(`/notifications/config`).once('value');
+    const deviceTokensPromise = firestore().collection('notificationsSubscribers').get();
+    const notificationsConfigPromise = firestore().collection('config').doc('notifications').get();
 
     const [tokensSnapshot, notificationsConfigSnapshot] = await Promise.all([deviceTokensPromise, notificationsConfigPromise]);
-    const notificationsConfig = notificationsConfigSnapshot.val();
+    const notificationsConfig = notificationsConfigSnapshot.exists ? notificationsConfigSnapshot.data() : {};
 
-    if (!tokensSnapshot.hasChildren()) {
+    const tokens = tokensSnapshot.docs.map(doc => doc.id);
+
+    if (!tokens.length) {
       console.log('There are no notification tokens to send to.');
       return null;
     }
-    console.log('There are', tokensSnapshot.numChildren(), 'tokens to send notifications to.');
+    console.log('There are', tokens.length, 'tokens to send notifications to.');
 
     const payload = {
       data: Object.assign({}, message, {
         icon: message.icon || notificationsConfig.icon
       })
     };
-
-    const tokens = Object.keys(tokensSnapshot.val());
 
     const tokensToRemove = [];
     const messagingResponse = await messaging().sendToDevice(tokens, payload);

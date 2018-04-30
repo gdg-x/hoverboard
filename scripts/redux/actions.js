@@ -695,25 +695,35 @@ const notificationsActions = {
       .then((currentToken) => {
         if (currentToken) {
           const state = getState();
-          const subscribersRef = firebase.database()
-            .ref(`/notifications/subscribers/${currentToken}`);
-          const subscribersPromise = subscribersRef.once('value');
+
+          const subscribersRef = firebase.firestore()
+            .collection('notificationsSubscribers')
+            .doc(currentToken);
+          const subscribersPromise = subscribersRef.get();
+
           const userUid = state.user && (state.user.uid || null);
 
           let userSubscriptionsPromise = Promise.resolve(null);
           let userSubscriptionsRef;
           if (userUid) {
-            userSubscriptionsRef = firebase.database()
-              .ref(`/notifications/users/${userUid}/${currentToken}`);
-            userSubscriptionsPromise = userSubscriptionsRef.once('value');
+            userSubscriptionsRef = firebase.firestore()
+              .collection('notificationsUsers')
+              .doc(userUid);
+            userSubscriptionsPromise = userSubscriptionsRef.get();
           }
 
           Promise.all([subscribersPromise, userSubscriptionsPromise])
             .then(([subscribersSnapshot, userSubscriptionsSnapshot]) => {
-              const isDeviceSubscribed = subscribersSnapshot.val();
-              const isUserSubscribed = userSubscriptionsSnapshot
-                ? userSubscriptionsSnapshot.val() :
-                false;
+              const isDeviceSubscribed = subscribersSnapshot.exists
+                ? subscribersSnapshot.data()
+                : false;
+              const userSubscriptions = subscribersSnapshot.exists
+                ? userSubscriptionsSnapshot.data()
+                : {};
+
+              const isUserSubscribed = !!(
+                userSubscriptions.tokens && userSubscriptions.tokens[currentToken]
+              );
 
               if (isDeviceSubscribed) {
                 dispatch({
@@ -722,11 +732,17 @@ const notificationsActions = {
                   token: currentToken,
                 });
                 if (userUid && !isUserSubscribed) {
-                  userSubscriptionsRef.set(userUid);
+                  userSubscriptionsRef.set({
+                    tokens: { [currentToken]: true },
+                  }, { merge: true });
                 }
               } else if (!isDeviceSubscribed && subscribe) {
-                subscribersRef.set(true);
-                userUid && userSubscriptionsRef.set(true);
+                subscribersRef.set({ value: true });
+                if (userUid) {
+                  userSubscriptionsRef.set({
+                    tokens: { [currentToken]: true },
+                  }, { merge: true });
+                }
                 dispatch({
                   type: UPDATE_NOTIFICATIONS_STATUS,
                   status: NOTIFICATIONS_STATUS.GRANTED,

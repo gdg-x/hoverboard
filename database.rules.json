@@ -1,22 +1,6 @@
 {
   "rules": {
-    "notifications": {
-      "subscribers": {
-        ".read": true,
-        ".write": true
-      },
-      "users": {
-        "$uid": {
-          ".read": "auth.uid === $uid",
-          ".write": "auth.uid === $uid"
-        }
-      }
-    },
-    "ratings": {
-      "$uid": {
-        ".read": "auth.uid === $uid",
-        ".write": "auth.uid === $uid"
-      }
-    }
+    ".read": false,
+    ".write": false
   }
 }
