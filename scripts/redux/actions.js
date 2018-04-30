@@ -758,7 +758,7 @@ const notificationsActions = {
           });
         }
       })
-      .catch(() => {
+      .catch((error) => {
         dispatch({
           type: UPDATE_NOTIFICATIONS_STATUS,
           status: NOTIFICATIONS_STATUS.DENIED,
