@@ -157,19 +157,11 @@
         if (!this.postsList || !Object.keys(this.postsList).length) return;
         this.postInfo = this.postsList[this.postData.id];
         this.set('source', this.postsList[this.postData.id].source);
-        this.set('published', this._getDate(this.postsList[this.postData.id].published));
+        this.set('published', this.getDate(this.postsList[this.postData.id].published));
         const sortedPosts = this.transformToArray(this.postsList, 'id')
           .sort((a, b) => b.published.localeCompare(a.published));
         this.set('suggestedPosts', sortedPosts.filter((post) => post.id !== this.postData.id)
           .slice(0, 3));
-      }
-
-      _getDate(date) {
-        return new Date(date).toLocaleString('en-us', {
-          month: 'short',
-          day: 'numeric',
-          year: 'numeric',
-        });
       }
     }
 
