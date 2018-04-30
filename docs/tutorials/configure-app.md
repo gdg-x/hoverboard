@@ -1,6 +1,6 @@
 # Configure
 
-The most important file of configuration is `data/hoverboard.config.json`
+The most important file of configuration is `data/settings.json`
 which looks like:
 
 ```
