@@ -1,24 +1,52 @@
 import * as functions from 'firebase-functions';
-import { database, messaging } from 'firebase-admin';
+import { firestore, messaging } from 'firebase-admin';
 import moment from 'moment';
 
 const FORMAT = 'HH:mm';
 
 const removeUserTokens = tokensToUsers => {
-  const promises = [];
-  Object.keys(tokensToUsers).forEach(token => {
-    promises.push(database().ref(`/notifications/users/${tokensToUsers[token]}/${token}`).remove());
+  const userTokens = Object.keys(tokensToUsers).reduce((acc, token) => {
+    const userId = tokensToUsers[token];
+    const userTokens = acc[userId] || [];
+
+    return { ...acc, [userId]: [ ...userTokens, token ]};
+  }, {});
+
+  const promises = Object.keys(userTokens).map(userId => {
+    const ref = firestore().collection('notificationsUsers').doc(userId);
+
+    return firestore.runTransaction(transaction => transaction
+      .get(ref)
+      .then(doc => {
+        if (!doc.exists) {
+          return;
+        }
+
+        const val = doc.data();
+        const newVal = Object.keys(val).reduce((acc, token) => {
+          if (tokensToUsers[token]) return acc;
+
+          return { ...acc, [token]: true };
+        }, {});
+
+        transaction.set(newVal);
+      })
+    );
   });
+
   return Promise.all(promises);
 };
 
 const sendPushNotificationToUsers = async (userIds, payload) => {
   console.log('sendPushNotificationToUsers user ids', userIds, 'with notification', payload);
-  const tokensPromise = userIds.map(id => database().ref(`/notifications/users/${id}`).once('value'));
+
+  const tokensPromise = userIds.map(id => firestore().collection('notificationsUsers').doc(id).get());
+
   const usersTokens = await Promise.all(tokensPromise);
   const tokensToUsers = usersTokens.reduce((aggregator, userTokens) => {
-    if (!userTokens.val()) return aggregator;
-    return Object.assign(aggregator, userTokens.val());
+    if (!userTokens.exists) return aggregator;
+    const { tokens } = userTokens.data();
+    return { ...aggregator, tokens };
   }, {});
   const tokens = Object.keys(tokensToUsers);
 
@@ -40,12 +68,13 @@ const sendPushNotificationToUsers = async (userIds, payload) => {
 };
 
 const scheduleNotifications = functions.pubsub.topic('schedule-tick').onPublish(async () => {
-    const notificationsConfigPromise = database().ref(`/notifications/config`).once('value');
-    const schedulePromise = database().ref(`/schedule`).once('value');
+    const notificationsConfigPromise = firestore().collection('config').doc('notifications').get();
+    const schedulePromise = firestore().collection('schedule').get();
 
     const [notificationsConfigSnapshot, scheduleSnapshot] = await Promise.all([notificationsConfigPromise, schedulePromise]);
-    const notificationsConfig = notificationsConfigSnapshot.val();
-    const schedule = scheduleSnapshot.val();
+    const notificationsConfig = notificationsConfigSnapshot.exists ? notificationsConfigSnapshot.data() : {};
+
+    const schedule = scheduleSnapshot.docs.reduce((acc, doc) => ({ ...acc, [doc.id]: doc.data() }), {});
     const todayDay = moment().utcOffset(notificationsConfig.timezone).format('YYYY-MM-DD');
 
     if (schedule[todayDay]) {
@@ -60,16 +89,21 @@ const scheduleNotifications = functions.pubsub.topic('schedule-tick').onPublish(
 
       const upcomingSessions = upcomingTimeslot.reduce((result, timeslot) =>
         timeslot.sessions.reduce((aggregatedSessions, current) => [...aggregatedSessions, ...current.items], []));
-      const usersIdsSnapshot = await database().ref(`/featuredSessions`).once('value');
+      const usersIdsSnapshot = await firestore().collection('featuredSessions').get();
 
       upcomingSessions.forEach(async (upcomingSession, sessionIndex) => {
-        const sessionInfoSnapshot = await database().ref(`/sessions/${upcomingSession}`).once('value');
-        const usersIds = usersIdsSnapshot.val();
+        const sessionInfoSnapshot = await firestore().collection('sessions').doc(upcomingSession).get();
+        if (!sessionInfoSnapshot.exists) return;
+
+        const usersIds = usersIdsSnapshot.docs.reduce((acc, doc) => ({ ...acc, [doc.id]: doc.data() }), {});
+
         const userIdsFeaturedSession = Object.keys(usersIds)
           .filter(userId => !!Object.keys(usersIds[userId])
-            .filter(sessionId => (sessionId.toString() === upcomingSession.toString())).length);
+            .filter(sessionId => (sessionId.toString() === upcomingSession.toString()))
+            .length
+          );
 
-        const session = sessionInfoSnapshot.val();
+        const session = sessionInfoSnapshot.data();
         const end = moment(`${upcomingTimeslot[0].startTime}${notificationsConfig.timezone}`, `${FORMAT}Z`);
         const fromNow = end.fromNow();
 

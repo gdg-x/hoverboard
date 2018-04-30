@@ -5,5 +5,8 @@
         "node": "6.9.1"
       }
     }]
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-object-rest-spread"
   ]
 }

@@ -11,6 +11,10 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    match /config/{config} {
+      allow read, write: if false; // allow each section separately
+    }
+
     match /featuredSessions/{userId} {
       allow read, write: if request.auth.uid == userId;
     }
@@ -24,6 +28,18 @@ service cloud.firestore {
 
       // Disallow writes
       allow write: if false;
+    }
+
+    match /notificationsSubscribers/{token} {
+      allow list, update, delete: if false;
+
+      // Applies to document create requests
+      allow create;
+      allow get;
+    }
+
+    match /notificationsUsers/{userId} {
+      allow read, write: if request.auth.uid == userId;
     }
 
     match /partners/{groupId} {
