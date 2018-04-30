@@ -12,6 +12,9 @@
     "themeColor": "#673AB7",
     "backgroundColor": "#673AB7"
   },
+  "dateFormat": {
+    "locale": "en-US"
+  },
   "hashtag": "DevFest17",
   "navigation": [
     {
