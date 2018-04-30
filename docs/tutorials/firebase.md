@@ -17,7 +17,7 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 	- YOUR_FIREBASE_DATABASE - The Firebase Realtime Database (for storing users' schedule)
 	- YOUR_API_KEY - Web API Key
 
-4. *Copy* all needed data, then paste it in `data/hoverboard.config.json`. This configuration looks like this:
+4. *Copy* all needed data, then paste it in `config/development.json` (and `config/production.json` if you use the same project in production). This configuration looks like this:
 
 	```
 	"firebase": {
