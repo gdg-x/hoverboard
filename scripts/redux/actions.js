@@ -637,7 +637,7 @@ const subscribeActions = {
           },
         });
 
-        store.dispatch({
+        dispatch({
           type: SUBSCRIBE,
           subscribed: false,
         });
@@ -680,7 +680,7 @@ const notificationsActions = {
       .then(() => {
         notificationsActions.getToken(true);
       })
-      .catch(() => {
+      .catch((error) => {
         dispatch({
           type: UPDATE_NOTIFICATIONS_STATUS,
           status: NOTIFICATIONS_STATUS.DENIED,
@@ -717,7 +717,8 @@ const notificationsActions = {
               const isDeviceSubscribed = subscribersSnapshot.exists
                 ? subscribersSnapshot.data()
                 : false;
-              const userSubscriptions = subscribersSnapshot.exists
+              const userSubscriptions =
+                (userSubscriptionsSnapshot && userSubscriptionsSnapshot.exists)
                 ? userSubscriptionsSnapshot.data()
                 : {};
 
