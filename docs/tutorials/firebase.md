@@ -17,7 +17,7 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 	- YOUR_FIREBASE_DATABASE - The Firebase Realtime Database (for storing users' schedule)
 	- YOUR_API_KEY - Web API Key
 
-4. *Copy* all needed data, then paste it in `data/hoverboard.config.json`. This configuration looks like this:
+4. *Copy* all needed data, then paste it in `config/development.json` (and `config/production.json` if you use the same project in production). This configuration looks like this:
 
 	```
 	"firebase": {
@@ -31,7 +31,7 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 	}
 	```
 	
-5. Import data to the Firebase Database. You can use [default-firebase-data.json](https://github.com/gdg-x/hoverboard/blob/master/docs/default-firebase-data.json) schema and then update it with your information.
+5. Import data to the Firebase Database. You can use [default-firebase-data.json](../default-firebase-data.json) schema and then update it with your information.
 
 6. Whoa! You've set up Firebase into your app.
 

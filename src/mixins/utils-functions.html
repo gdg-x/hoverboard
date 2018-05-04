@@ -9,7 +9,7 @@
     }
 
     getDate(date) {
-      return new Date(date).toLocaleString('en-us', {
+      return new Date(date).toLocaleString('{$ dateFormat.locale $}', {
         month: 'short',
         day: 'numeric',
         year: 'numeric',
