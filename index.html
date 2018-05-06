@@ -83,7 +83,7 @@
     function loadFirebaseModule() {
       return new Promise((resolve, reject) => {
         const script = document.createElement('script');
-        script.src = `bower_components/firebase/firebase.js`;
+        script.src = 'bower_components/firebase/firebase.js';
         script.async = false;
         script.onload = () => resolve();
         script.onerror = () => reject();
@@ -94,12 +94,17 @@
     function loadFirestoreModule() {
       return new Promise((resolve, reject) => {
         const script = document.createElement('script');
-        script.src = `bower_components/firebase/firebase-firestore.js`;
+        script.src = 'bower_components/firebase/firebase-firestore.js';
         script.async = false;
         script.onload = () => resolve();
         script.onerror = () => reject();
         document.head.appendChild(script);
       });
+    }
+
+    function loadHoverboardApp() {
+      const app = document.createElement('hoverboard-app');
+      document.body.appendChild(app);
     }
 
     loadFirebaseModule()
@@ -113,7 +118,10 @@
           storageBucket: '{$ firebase.storageBucket $}',
           messagingSenderId: '{$ firebase.messagingSenderId $}',
         });
-      });
+        // eslint-disable-next-line no-console
+        console.log('Firebase App is ready!');
+      })
+      .then(() => loadHoverboardApp());
 
   </script>
 
@@ -160,7 +168,7 @@
 
 <body>
 
-<hoverboard-app unresolved>{$ title $}</hoverboard-app>
+<!--<hoverboard-app unresolved>{$ title $}</hoverboard-app>-->
 
 <noscript>
   Please enable JavaScript to view this website.
