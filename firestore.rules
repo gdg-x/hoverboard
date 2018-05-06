@@ -31,10 +31,11 @@ service cloud.firestore {
     }
 
     match /notificationsSubscribers/{token} {
-      allow list, update, delete: if false;
+      allow list, delete: if false;
 
       // Applies to document create requests
       allow create;
+      allow update;
       allow get;
     }
 
@@ -65,10 +66,14 @@ service cloud.firestore {
     }
 
     match /potentialPartners/{partnerId} {
-      allow read, update, delete: if false;
+      allow delete: if false;
+
+      allow get;
+      allow list: if false;
 
       // Applies to document create requests
-      allow create;
+      //allow create;
+      allow write;
     }
 
     match /previousSpeakers/{speaker} {
@@ -116,10 +121,14 @@ service cloud.firestore {
     }
 
     match /subscribers/{subscriberId} {
-      allow read, update, delete: if false;
+      allow delete: if false;
+
+      allow get;
+      allow list: if false;
 
       // Applies to document create requests
-      allow create;
+      //allow create;
+      allow write;
     }
 
     match /team/{teamId} {
