@@ -67,7 +67,7 @@
         performance.measure(name, reference, mark);
 
         // Gets the value of the measurement just created.
-        var measure = performance.getEntriesByName(name)[0];
+        const measure = performance.getEntriesByName(name)[0];
 
         // Returns the measure duration.
         return measure.duration;
