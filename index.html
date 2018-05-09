@@ -160,7 +160,7 @@
   window.performance && performance.mark && performance.mark('index.html');
 
   window.onload = function () {
-    var indexRenderTime = window.measureDuration('index.html');
+    const indexRenderTime = window.measureDuration && window.measureDuration('index.html');
     if (indexRenderTime) {
       ga('send', 'timing', 'index.html', 'render', indexRenderTime);
     }
