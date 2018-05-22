@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
 // ui
-const TOGGLE_DRAWER = 'TOGGLE_DRAWER';
-const SET_VIEWPORT_SIZE = 'SET_VIEWPORT_SIZE';
-const SET_HERO_SETTINGS = 'SET_HERO_SETTINGS';
+const TOGGLE_DRAWER = 'app/Drawer/TOGGLE_DRAWER';
+const SET_VIEWPORT_SIZE = 'app/Viewport/SET_VIEWPORT_SIZE';
+const SET_HERO_SETTINGS = 'app/Hero/SET_HERO_SETTINGS';
 // router
-const SET_ROUTE = 'SET_ROUTE';
-const SET_SUB_ROUTE = 'SET_SUB_ROUTE';
+const SET_ROUTE = 'app/Routing/SET_ROUTE';
+const SET_SUB_ROUTE = 'app/Routing/SET_SUB_ROUTE';
 // dialogs
-const OPEN_DIALOG = 'OPEN_DIALOG';
-const CLOSE_DIALOG = 'CLOSE_DIALOG';
-const SET_DIALOG_DATA = 'SET_DIALOG_DATA';
+const OPEN_DIALOG = 'app/Dialogs/OPEN_DIALOG';
+const CLOSE_DIALOG = 'app/Dialogs/CLOSE_DIALOG';
+const SET_DIALOG_DATA = 'app/Dialogs/SET_DIALOG_DATA';
 const SET_DIALOG_ERROR = 'app/Dialogs/SET_DIALOG_ERROR';
 const DIALOGS = {
   SPEAKER: 'speaker',
@@ -19,8 +19,8 @@ const DIALOGS = {
   SIGNIN: 'signin',
 };
 // toast
-const SHOW_TOAST = 'SHOW_TOAST';
-const HIDE_TOAST = 'HIDE_TOAST';
+const SHOW_TOAST = 'app/Toast/SHOW_TOAST';
+const HIDE_TOAST = 'app/Toast/HIDE_TOAST';
 
 // tickets
 const FETCH_TICKETS = 'app/Tickets/FETCH_TICKETS';
@@ -42,7 +42,8 @@ const FETCH_VIDEOS_FAILURE = 'app/Videos/FETCH_VIDEOS_FAILURE';
 const FETCH_VIDEOS_SUCCESS = 'app/Videos/FETCH_VIDEOS_SUCCESS';
 
 // video dialog
-const TOGGLE_VIDEO_DIALOG = 'TOGGLE_VIDEO_DIALOG';
+const TOGGLE_VIDEO_DIALOG = 'app/Dialogs/TOGGLE_VIDEO_DIALOG';
+
 // blog
 const FETCH_BLOG_LIST = 'app/Blog/FETCH_BLOG_LIST';
 const FETCH_BLOG_LIST_FAILURE = 'app/Blog/FETCH_BLOG_LIST_FAILURE';
@@ -53,16 +54,16 @@ const FETCH_SPEAKERS = 'app/Speakers/FETCH_SPEAKERS';
 const FETCH_SPEAKERS_FAILURE = 'app/Speakers/FETCH_SPEAKERS_FAILURE';
 const FETCH_SPEAKERS_SUCCESS = 'app/Speakers/FETCH_SPEAKERS_SUCCESS';
 
-const FETCH_SPEAKERS_LIST = 'FETCH_SPEAKERS_LIST';
-const UPDATE_SPEAKERS = 'UPDATE_SPEAKERS';
 // previous speakers
 const FETCH_PREVIOUS_SPEAKERS = 'app/PreviousSpeakers/FETCH_SPEAKERS';
 const FETCH_PREVIOUS_SPEAKERS_FAILURE = 'app/PreviousSpeakers/FETCH_SPEAKERS_FAILURE';
 const FETCH_PREVIOUS_SPEAKERS_SUCCESS = 'app/PreviousSpeakers/FETCH_SPEAKERS_SUCCESS';
+
 // sessions
 const FETCH_SESSIONS = 'app/Sessions/FETCH_SESSIONS';
 const FETCH_SESSIONS_FAILURE = 'app/Sessions/FETCH_SESSIONS_FAILURE';
 const FETCH_SESSIONS_SUCCESS = 'app/Sessions/FETCH_SESSIONS_SUCCESS';
+const UPDATE_SESSIONS = 'app/Sessions/UPDATE_SESSIONS';
 
 const FETCH_USER_FEATURED_SESSIONS = 'app/Sessions/FETCH_USER_FEATURED_SESSIONS';
 const FETCH_USER_FEATURED_SESSIONS_FAILURE = 'app/Sessions/FETCH_USER_FEATURED_SESSIONS_FAILURE';
@@ -87,12 +88,12 @@ const FETCH_TEAM_FAILURE = 'app/Team/FETCH_TEAM_FAILURE';
 const FETCH_TEAM_SUCCESS = 'app/Team/FETCH_TEAM_SUCCESS';
 
 // user
-const SIGN_IN = 'SIGN_IN';
-const SIGN_OUT = 'SIGN_OUT';
+const SIGN_IN = 'app/SIGN_IN';
+const SIGN_OUT = 'app/SIGN_OUT';
 // subscribe
-const SUBSCRIBE = 'SUBSCRIBE';
+const SUBSCRIBE = 'app/Subscribe/SUBSCRIBE';
 // notifications
-const UPDATE_NOTIFICATIONS_STATUS = 'UPDATE_NOTIFICATIONS_STATUS';
+const UPDATE_NOTIFICATIONS_STATUS = 'app/Notifications/UPDATE_NOTIFICATIONS_STATUS';
 const NOTIFICATIONS_STATUS = {
   GRANTED: 'granted',
   DENIED: 'denied',
