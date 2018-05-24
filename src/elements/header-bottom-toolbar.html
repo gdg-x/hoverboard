@@ -115,7 +115,7 @@
       _scheduleChanged() {
         if (this.schedule.days) {
           this.contentLoaderVisibility = 'hidden';
-          this.days = this.transformToArray(this.schedule.days, 'date')
+          this.days = Object.values(this.schedule.days)
             .sort((a, b) => a.date.localeCompare(b.date));
         }
       }

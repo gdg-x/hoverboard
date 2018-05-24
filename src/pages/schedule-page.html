@@ -182,7 +182,8 @@
 
       _setDay(active, day, scheduleDays) {
         if (active && scheduleDays) {
-          const selectedDay = day || Object.values(scheduleDays)[0].date;
+          const selectedDay = day || Object.values(scheduleDays)
+            .sort((a, b) => a.date.localeCompare(b.date))[0].date;
           routingActions.setSubRoute(selectedDay);
         }
       }
