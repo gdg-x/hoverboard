@@ -22,6 +22,8 @@
   "position": "Position",
   "country": "Country",
   "time": "Time",
+  "faq": "/data/faq.md",
+  "cod": "/data/cod.md",
   "footer": {
     "blog": "Blog"
   },
@@ -173,7 +175,6 @@
       "link": "/blog/"
     }
   },
-  "faq": "/data/faq.md",
   "speakers": {
     "skills": "Skills",
     "previousYears": "Years",
