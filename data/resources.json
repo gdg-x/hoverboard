@@ -25,6 +25,9 @@
   "footer": {
     "blog": "Blog"
   },
+  "mySchedule": {
+    "title": "My Schedule"
+  },
   "footerRelBlock": [
     {
       "title": "About",

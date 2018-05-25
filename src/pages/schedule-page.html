@@ -14,6 +14,7 @@
 <link rel="import" href="../elements/header-bottom-toolbar.html">
 <link rel="import" href="../elements/schedule-day.html">
 <link rel="import" href="../elements/content-loader.html">
+<link rel="import" href="../elements/my-schedule.html">
 
 <dom-module id="schedule-page">
   <template>
@@ -95,7 +96,7 @@
       </content-loader>
 
       <iron-pages selected="[[subRoute]]" attr-for-selected="name">
-        <template is="dom-repeat" items="[[transformToArray(schedule.days, 'date')]]" as="day">
+        <template is="dom-repeat" items="[[schedule]]" as="day">
           <schedule-day
             name$="[[day.date]]"
             day="[[day]]"
@@ -103,6 +104,12 @@
             featured-sessions="[[featuredSessions]]"
           ></schedule-day>
         </template>
+        <my-schedule
+          name="my-schedule"
+          schedule="[[schedule]]"
+          user="[[user]]"
+          featured-sessions="[[featuredSessions]]"
+        ></my-schedule>
       </iron-pages>
     </div>
 
@@ -123,7 +130,7 @@
           queryParams: Object,
           active: Boolean,
           schedule: {
-            type: Object,
+            type: Array,
             statePath: 'schedule',
           },
           featuredSessions: {
@@ -152,23 +159,23 @@
 
       static get observers() {
         return [
-          '_setDay(active, routeData.day, schedule.days)',
+          '_setDay(active, routeData.day, schedule)',
           '_openSessionDetails(active, sessions, queryParams.sessionId)',
           '_fetchFeaturedSessions(active, sessions, user.uid)',
-          '_scheduleChanged(schedule.days)',
+          '_scheduleChanged(schedule)',
           '_sessionsAndSpeakersChanged(sessions, speakers)',
         ];
       }
 
       _sessionsAndSpeakersChanged(sessions, speakers) {
-        if (!Object.keys(this.schedule).length
+        if (!this.schedule.length
           && sessions && sessions.length && speakers && speakers.length) {
           this.dispatch(scheduleActions.fetchSchedule());
         }
       }
 
-      _scheduleChanged() {
-        if (this.schedule.days) {
+      _scheduleChanged(schedule) {
+        if (schedule.length) {
           this.contentLoaderVisibility = 'hidden';
         }
       }
@@ -180,10 +187,9 @@
         }
       }
 
-      _setDay(active, day, scheduleDays) {
-        if (active && scheduleDays) {
-          const selectedDay = day || Object.values(scheduleDays)
-            .sort((a, b) => a.date.localeCompare(b.date))[0].date;
+      _setDay(active, day, schedule) {
+        if (active && schedule.length) {
+          const selectedDay = day || schedule[0].date;
           routingActions.setSubRoute(selectedDay);
         }
       }

@@ -72,7 +72,15 @@
           <span class="minutes">[[_splitText(timeslot.startTime, ':', 1)]]</span>
         </div>
 
+
+        <div
+          hidden$="[[!_isTimeslotEmpty(timeslot)]]"
+          style$="grid-area: [[timeslot.sessions.0.gridArea]]"
+        >+ add more
+        </div>
+
         <template is="dom-repeat" items="[[timeslot.sessions]]" as="session" index-as="sessionIndex">
+
 
           <div
             class="session"
@@ -109,6 +117,7 @@
           name: String,
           user: Object,
           featuredSessions: Object,
+          onlyFeatured: Boolean,
           tracksNumber: {
             type: Number,
             value: 3,
@@ -129,6 +138,12 @@
 
       _splitText(text, divider, index) {
         return text.split(divider)[index];
+      }
+
+      _isTimeslotEmpty(timeslot) {
+        return !timeslot.sessions.reduce((aggregator, sessionBlock) =>
+          aggregator + sessionBlock.items.length
+          , 0);
       }
     }
 
