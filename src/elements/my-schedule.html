@@ -16,12 +16,19 @@
       }
 
       .date {
-        margin-bottom: 16px;
-        font-size: 32px;
+        margin: 16px;
+        font-size: 24px;
       }
 
       .date:not(:first-of-type) {
         margin-top: 64px;
+      }
+
+      @media (min-width: 640px) {
+        .date {
+          margin-left: 64px;
+          font-size: 32px;
+        }
       }
 
     </style>

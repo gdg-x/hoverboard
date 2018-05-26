@@ -95,13 +95,18 @@
         hidden$="[[contentLoaderVisibility]]" layout>
       </content-loader>
 
-      <iron-pages selected="[[subRoute]]" attr-for-selected="name">
+      <iron-pages
+        attr-for-selected="name"
+        selected="[[subRoute]]"
+        selected-attribute="active"
+      >
         <template is="dom-repeat" items="[[schedule]]" as="day">
           <schedule-day
             name$="[[day.date]]"
             day="[[day]]"
             user="[[user]]"
             featured-sessions="[[featuredSessions]]"
+            viewport="[[viewport]]"
           ></schedule-day>
         </template>
         <my-schedule
@@ -150,9 +155,10 @@
             statePath: 'dialogs.session.isOpened',
             observer: '_dialogStatusChanged',
           },
-          contentLoaderVisibility: {
-            type: String,
-            value: null,
+          contentLoaderVisibility: String,
+          viewport: {
+            type: Object,
+            statePath: 'ui.viewport',
           },
         };
       }

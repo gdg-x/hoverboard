@@ -26,7 +26,8 @@
     "blog": "Blog"
   },
   "mySchedule": {
-    "title": "My Schedule"
+    "title": "My Schedule",
+    "browseSession": "Browse sessions"
   },
   "footerRelBlock": [
     {
