@@ -4,7 +4,7 @@
 <link rel="import" href="../elements/footer-block.html">
 <link rel="import" href="../elements/md-content.html">
 
-<dom-module id="faq-page">
+<dom-module id="cod-page">
   <template>
     <style>
       :host {
@@ -13,19 +13,19 @@
     </style>
 
     <polymer-helmet
-      title="{$ heroSettings.faq.title $} | {$ title $}"
-      description="{$ heroSettings.faq.metaDescription $}"
+      title="{$ heroSettings.cod.title $} | {$ title $}"
+      description="{$ heroSettings.cod.metaDescription $}"
       active="[[active]]"
     ></polymer-helmet>
 
     <hero-block
-      background-image="{$ heroSettings.faq.background.image $}"
-      background-color="{$ heroSettings.faq.background.color $}"
-      font-color="{$ heroSettings.faq.fontColor $}"
+      background-image="{$ heroSettings.cod.background.image $}"
+      background-color="{$ heroSettings.cod.background.color $}"
+      font-color="{$ heroSettings.cod.fontColor $}"
       active="[[active]]"
     >
-      <div class="hero-title highlight-font">{$ heroSettings.faq.title $}</div>
-      <p class="hero-description">{$ heroSettings.faq.description $}</p>
+      <div class="hero-title highlight-font">{$ heroSettings.cod.title $}</div>
+      <p class="hero-description">{$ heroSettings.cod.description $}</p>
     </hero-block>
 
     <md-content md-source="[[source]]"></md-content>
@@ -36,9 +36,9 @@
   <script>
 
     // eslint-disable-next-line no-undef
-    class FaqPage extends Polymer.Element {
+    class CodPage extends Polymer.Element {
       static get is() {
-        return 'faq-page';
+        return 'cod-page';
       }
 
       static get properties() {
@@ -46,12 +46,12 @@
           active: Boolean,
           source: {
             type: String,
-            value: '{$ faq $}',
+            value: '{$ cod $}',
           },
         };
       }
     }
 
-    window.customElements.define(FaqPage.is, FaqPage);
+    window.customElements.define(CodPage.is, CodPage);
   </script>
 </dom-module>
