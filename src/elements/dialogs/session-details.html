@@ -100,10 +100,10 @@
           </div>
         </div>
 
-        <div class="additional-sections" hidden$="[[!sessionSpeakers.length]]">
+        <div class="additional-sections" hidden$="[[!session.speakers.length]]">
           <h3>{$ sessionDetails.speakers $}</h3>
 
-          <template is="dom-repeat" items="[[sessionSpeakers]]" as="speaker">
+          <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
             <a href$="/speakers/[[speaker.id]]" class="section">
               <div layout horizontal center>
                 <plastic-image
@@ -152,10 +152,6 @@
           featuredSessions: {
             type: Object,
             statePath: 'sessions.featured',
-          },
-          sessionSpeakers: {
-            type: Array,
-            computed: '_computeSpeakers(session, speakersMap)',
           },
         };
       }
@@ -213,14 +209,6 @@
 
       _getFeaturedSessionIcon(featuredSessions, sessionId) {
         return featuredSessions && featuredSessions[sessionId] ? 'bookmark-check' : 'bookmark-plus';
-      }
-
-      _computeSpeakers(session, speakersMap) {
-        if (Array.isArray(session.speakers) && speakersMap) {
-          return session.speakers.map((speakerId) => speakersMap[speakerId]);
-        }
-
-        return [];
       }
     }
 

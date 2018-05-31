@@ -274,6 +274,15 @@ const sessionsReducer = (state = initialState.sessions, action) => {
         },
       });
 
+    case UPDATE_SESSIONS:
+      return Object.assign({}, state, {
+        list: {
+          list: action.payload.list,
+          obj: action.payload.obj,
+          objBySpeaker: action.payload.objBySpeaker,
+        },
+      });
+
     case FETCH_USER_FEATURED_SESSIONS:
     case SET_USER_FEATURED_SESSIONS:
       return Object.assign({}, state, {

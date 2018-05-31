@@ -161,7 +161,8 @@
       }
 
       _sessionsAndSpeakersChanged(sessions, speakers) {
-        if (sessions && sessions.length && speakers && speakers.length) {
+        if (!Object.keys(this.schedule).length
+          && sessions && sessions.length && speakers && speakers.length) {
           this.dispatch(scheduleActions.fetchSchedule());
         }
       }
@@ -181,7 +182,8 @@
 
       _setDay(active, day, scheduleDays) {
         if (active && scheduleDays) {
-          const selectedDay = day || Object.keys(scheduleDays)[0];
+          const selectedDay = day || Object.values(scheduleDays)
+            .sort((a, b) => a.date.localeCompare(b.date))[0].date;
           routingActions.setSubRoute(selectedDay);
         }
       }

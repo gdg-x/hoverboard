@@ -465,14 +465,30 @@ const scheduleActions = {
             type: FETCH_SCHEDULE_SUCCESS,
             data: data.schedule,
           });
-          // store.dispatch({
-          //   type: UPDATE_SESSIONS,
-          //   list: data.sessions,
-          // });
-          // store.dispatch({
-          //   type: UPDATE_SPEAKERS,
-          //   list: data.speakers,
-          // });
+
+          const sessionsObjBySpeaker = {};
+          const sessionsList = Object.values(data.sessions);
+
+          sessionsList.forEach((session) => {
+            if (Array.isArray(session.speakers)) {
+              session.speakers.forEach((speakerId) => {
+                if (Array.isArray(sessionsObjBySpeaker[speakerId])) {
+                  sessionsObjBySpeaker[speakerId].push(session);
+                } else {
+                  sessionsObjBySpeaker[speakerId] = [session];
+                }
+              });
+            }
+          });
+          store.dispatch({
+            type: UPDATE_SESSIONS,
+            payload: {
+              obj: data.sessions,
+              list: sessionsList,
+              objBySpeaker: sessionsObjBySpeaker,
+            },
+          });
+
           scheduleWorker.terminate();
         }, false);
       })
@@ -583,13 +599,13 @@ const userActions = {
     const firebaseProvider = helperActions.getFederatedProvider(initialProviderId);
 
     return firebase.auth()
-    .signInWithPopup(firebaseProvider)
-    .then((result) => {
-      result.user.linkWithCredential(pendingCredential);
-    })
-    .catch((error) => {
-      helperActions.trackError('userActions', 'mergeAccounts', error);
-    });
+      .signInWithPopup(firebaseProvider)
+      .then((result) => {
+        result.user.linkWithCredential(pendingCredential);
+      })
+      .catch((error) => {
+        helperActions.trackError('userActions', 'mergeAccounts', error);
+      });
   },
 
   updateUser: () => {
@@ -670,7 +686,7 @@ const notificationsActions = {
         });
       });
       messaging.onTokenRefresh(() => {
-        notificationsActions.getToken(true);
+        store.dispatch(notificationsActions.getToken(true));
       });
       resolve(messaging);
     });
@@ -678,7 +694,7 @@ const notificationsActions = {
   requestPermission: () => (dispatch) => {
     return messaging.requestPermission()
       .then(() => {
-        notificationsActions.getToken(true);
+        dispatch(notificationsActions.getToken(true));
       })
       .catch((error) => {
         dispatch({
@@ -719,8 +735,8 @@ const notificationsActions = {
                 : false;
               const userSubscriptions =
                 (userSubscriptionsSnapshot && userSubscriptionsSnapshot.exists)
-                ? userSubscriptionsSnapshot.data()
-                : {};
+                  ? userSubscriptionsSnapshot.data()
+                  : {};
 
               const isUserSubscribed = !!(
                 userSubscriptions.tokens && userSubscriptions.tokens[currentToken]
@@ -798,7 +814,7 @@ const helperActions = {
 
       const email = user.email || (user.providerData && user.providerData[0].email);
       const initialProviderId =
-      (user.providerData && user.providerData[0].providerId) || user.initialProviderId;
+        (user.providerData && user.providerData[0].providerId) || user.initialProviderId;
       const signedIn = (user.uid && true) || user.signedIn;
 
       userToStore = {
