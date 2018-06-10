@@ -10,7 +10,7 @@
     "predeploy": "cd ./functions && npm i",
     "deploy": "gulp deploy",
     "deploy:prod": "cross-env BUILD_ENV=production gulp deploy",
-    "import": "firebase firestore:delete -y -r --all-collections && node ./docs/import ./serviceAccount.json",
+    "import": "firebase firestore:delete -r --all-collections && node ./docs/import ./serviceAccount.json",
     "postinstall": "bower install",
     "serve": "gulp serve",
     "serve:prod": "cross-env BUILD_ENV=production gulp serve",
