@@ -49,6 +49,10 @@
       "permalink": "/speakers/"
     },
     {
+      "route": "location",
+      "permalink": "/location/"
+    }, 
+    {
       "route": "team",
       "permalink": "/team/"
     }, 
@@ -123,6 +127,15 @@
         "backgroundColor": "#3f51b5",
         "fontColor": "#fff",
         "tabBarColor": "#fff"
+      }
+    },
+    "location": {
+      "title": "Lieu",
+      "headerSettings": {
+        "backgroundColor": "#F4724E",
+        "fontColor": "#FFFFFF",
+        "tabBarColor": "#FFFFFF", 
+        "minHeight": "160px"
       }
     },
     "team": {
