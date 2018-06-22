@@ -9,7 +9,8 @@
     "src/pages/talks-page.html",
     "src/pages/schedule-page.html",
     "src/pages/speakers-page.html",
-    "src/pages/team-page.html"
+    "src/pages/team-page.html",
+    "src/pages/location-page.html"
   ],
   "sources": [
     "data/**/*",
