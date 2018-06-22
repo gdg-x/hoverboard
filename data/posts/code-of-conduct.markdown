@@ -15,6 +15,6 @@ Ce genre de comportements pourra nous amener à vous faire exclure de nos réuni
 Sunny Tech est une association bénévole à but non lucratif composée de tech passionnées, notre priorité est l’organisation d’un évènement convivial, ou chacun puisse être respectueux d’autrui. 
 Ce “code de bonne conduite" est une version courte, plus lisible qu'un "Code of Conduct policy". Vous trouverez le lien pour aller consulter la [Version complète](http://meta.wikimedia.org/wiki/Don%27t_be_a_dick).
 
-Pour toute question, merci de contacter l’équipe SunnyTech par email : [contact@sunnytech.io](mailto:contact@sunnytech.io)
+Pour toute question, merci de contacter l’équipe SunnyTech par email : [contact@sunny-tech.io](mailto:contact@sunny-tech.io)
 
 Original source and credit: [DevFestNantes](https://devfest2015.gdgnantes.com/cod), [Devoxx](https://www.devoxx.fr/code-of-conduct), [ThingMonk Code of Conduct](http://thingmonk.com/coc.html)
