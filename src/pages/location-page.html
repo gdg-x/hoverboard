@@ -30,7 +30,7 @@
 
       .details-item {
         @apply(--layout-horizontal);
-        margin: 40px auto;
+        margin: 0 auto 40px;
         padding-bottom: 32px;
       }
 
@@ -70,19 +70,14 @@
 
         <h1 class="dates">Lieu</h1>
 
-        <google-map
-          class="googlemap"
-          zoom="14"
-          latitude="{$ location.mapCenter.latitude $}"
-          longitude="{$ location.mapCenter.longitude $}"
-          api-key="{$ location.apiKey $}"
-          styles="[[options]]"
-        >
-          <google-map-marker
-            latitude="{$ location.pointer.latitude $}"
-            longitude="{$ location.pointer.longitude $}"
-          ></google-map-marker>
-        </google-map>
+
+        <iframe
+          width="100%"
+          height="300"
+          frameborder="0" style="border:0"
+          src="https://www.google.com/maps/embed/v1/place?key={$ location.apiKeyLocationPage $}
+            &q=Institut Universitaire de Formation des Maitres (I.U.F.M),Montpellier,France&zoom=15" allowfullscreen>
+        </iframe>
 
         <div class="details-item" cascaded>
           <marked-element markdown="[[location]]">
@@ -110,17 +105,6 @@
         ],
 
         properties: {
-          options: {
-            type: String,
-            value: function () {
-              return [{
-                'elementType': 'labels',
-                'stylers': [{
-                  'visibility': 'on'
-                }]
-              }];
-            }
-          },
           source: {
             type: String,
             value: 'data/posts/location.markdown'
