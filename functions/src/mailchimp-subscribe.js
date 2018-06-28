@@ -2,15 +2,15 @@ import * as functions from 'firebase-functions';
 import md5 from 'md5';
 import fetch from 'node-fetch';
 
-const mailchimpSubscribe = functions.database.ref('/subscribers/{id}')
-  .onCreate(async (snapshot) => {
+const mailchimpSubscribe = functions.firestore.document('/subscribers/{id}')
+  .onCreate((snapshot) => {
 
     const mailchimpConfig = functions.config().mailchimp;
     if (!mailchimpConfig) {
       console.log('Can\'t subscribe user, Mailchimp config is empty.');
     }
 
-    const subscriber = snapshot.val();
+    const subscriber = snapshot.data();
 
     const subscriberData = {
       email_address: subscriber.email,
@@ -38,7 +38,7 @@ function subscribeToMailchimp(mailchimpConfig, subscriberData, emailHash) {
     },
   });
 
-  subscribePromise
+  return subscribePromise
     .then((res) => res.json())
     .then(({ status, title }) => {
       if (status === 400 && title === 'Member Exists') {
@@ -51,9 +51,7 @@ function subscribeToMailchimp(mailchimpConfig, subscriberData, emailHash) {
         console.log(`${subscriberData.email_address} was updated in subscribe list.`);
       }
     })
-    .catch((error) => console.log(`Error occured during Mailchimp subscription: ${error}`));
-
-  return subscribePromise;
+    .catch((error) => console.error(`Error occured during Mailchimp subscription: ${error}`));
 }
 
 export default mailchimpSubscribe;

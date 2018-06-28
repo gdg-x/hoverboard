@@ -73,7 +73,7 @@
         attr-for-selected="day"
         noink
       >
-        <template is="dom-repeat" items="[[transformToArray(schedule.days, 'date')]]" as="day">
+        <template is="dom-repeat" items="[[days]]" as="day">
           <paper-tab class="nav-item" day="[[day.date]]" link>
             <a href$="/schedule/[[day.date]]" layout vertical center-center>[[day.dateReadable]]</a>
           </paper-tab>
@@ -101,10 +101,8 @@
             type: Object,
             statePath: 'schedule',
           },
-          contentLoaderVisibility: {
-            type: String,
-            value: null,
-          },
+          contentLoaderVisibility: String,
+          days: Array,
         };
       }
 
@@ -117,6 +115,8 @@
       _scheduleChanged() {
         if (this.schedule.days) {
           this.contentLoaderVisibility = 'hidden';
+          this.days = Object.values(this.schedule.days)
+            .sort((a, b) => a.date.localeCompare(b.date));
         }
       }
     }

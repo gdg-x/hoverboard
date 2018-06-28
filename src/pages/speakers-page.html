@@ -8,6 +8,7 @@
 
 <link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="../mixins/speakers-hoc.html">
 <link rel="import" href="../elements/text-truncate.html">
 <link rel="import" href="../elements/shared-styles.html">
 <link rel="import" href="../elements/content-loader.html">
@@ -185,7 +186,7 @@
     ></content-loader>
 
     <div class="container">
-      <template is="dom-repeat" items="[[speakersToDisplay]]" as="speaker">
+      <template is="dom-repeat" items="[[speakers]]" as="speaker">
         <a class="speaker card"
            href$="/speakers/[[speaker.id]]/"
            ga-on="click"
@@ -255,7 +256,7 @@
   <script>
 
     // eslint-disable-next-line no-undef
-    class SpeakersPage extends UtilsFunctions(ReduxMixin(Polymer.Element)) {
+    class SpeakersPage extends UtilsFunctions(ReduxMixin(SpeakersHoC(Polymer.Element))) {
       static get is() {
         return 'speakers-page';
       }
@@ -265,11 +266,6 @@
           route: Object,
           routeData: Object,
           active: Boolean,
-          speakersToDisplay: Array,
-          speakers: {
-            type: Object,
-            statePath: 'speakers',
-          },
           isDialogOpened: {
             type: Object,
             statePath: 'dialogs.speaker.isOpened',
@@ -284,20 +280,13 @@
 
       static get observers() {
         return [
-          '_openSpeakerDetails(active, speakers, routeData.speakerId)',
+          '_openSpeakerDetails(active, speakers, speakersMap, routeData.speakerId)',
           '_speakersChanged(speakers)',
         ];
       }
 
-      connectedCallback() {
-        super.connectedCallback();
-        if (!Object.keys(this.speakers).length) speakersActions.fetchList();
-      }
-
       _speakersChanged() {
-        if (this.speakers && Object.keys(this.speakers).length) {
-          this.set('speakersToDisplay', this.transformToArray(this.speakers, 'id')
-            .sort((a, b) => a.order - b.order));
+        if (this.speakers && this.speakers.length) {
           this.contentLoaderVisibility = 'hidden';
         }
       }
@@ -308,11 +297,11 @@
         }
       }
 
-      _openSpeakerDetails(active, speakers, id) {
-        if (speakers && Object.keys(speakers).length) {
+      _openSpeakerDetails(active, speakers, speakersMap, id) {
+        if (speakers && speakers.length) {
           requestAnimationFrame(() => {
             if (active && id) {
-              const speakerData = speakers[id];
+              const speakerData = speakersMap[id];
               speakerData && dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
             } else if (this.isDialogOpened) {
               dialogsActions.closeDialog(DIALOGS.SPEAKER);

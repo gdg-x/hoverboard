@@ -62,7 +62,7 @@
       <template is="dom-repeat" items="[[partners]]" as="block">
           <h4 class="block-title">[[block.title]]</h4>
           <div class="logos-wrapper">
-            <template is="dom-repeat" items="[[block.logos]]" as="logo">
+            <template is="dom-repeat" items="[[block.items]]" as="logo">
               <a
                 class="logo-item card"
                 href$="[[logo.url]]"
@@ -102,15 +102,34 @@
       static get properties() {
         return {
           partners: {
+            type: Array,
+            statePath: 'partners.list',
+          },
+          partnersFetching: {
+            type: Boolean,
+            statePath: 'partners.fetching',
+          },
+          partnersFetchingError: {
             type: Object,
-            statePath: 'partners',
+            statePath: 'partners.fetchingError',
+          },
+          partnerAdding: {
+            type: Boolean,
+            statePath: 'partners.adding',
+            observer: '_partnerAddingChanged',
+          },
+          partnerAddingError: {
+            type: Object,
+            statePath: 'partners.addingError',
           },
         };
       }
 
       connectedCallback() {
         super.connectedCallback();
-        partnersActions.fetchPartners();
+        if (!this.partnersFetching && (!this.partners || !this.partners.length)) {
+          this.dispatch(partnersActions.fetchPartners());
+        }
       }
 
       _addPotentialPartner() {
@@ -119,7 +138,21 @@
           submitLabel: '{$ partnersBlock.form.submitLabel $}',
           firstFieldLabel: '{$ partnersBlock.form.fullName $}',
           secondFieldLabel: '{$ partnersBlock.form.companyName $}',
-          submit: subscribeActions.addPartner });
+          submit: (data) => {
+            this.dispatch(partnersActions.addPartner(data));
+          },
+        });
+      }
+
+      _partnerAddingChanged(newPartnerAdding, oldPartnerAdding) {
+        if (oldPartnerAdding && !newPartnerAdding) {
+          if (this.partnerAddingError) {
+            this.dispatch(dialogsActions.setDialogError(DIALOGS.SUBSCRIBE));
+          } else {
+            dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
+            toastActions.showToast({ message: '{$ partnersBlock.toast $}' });
+          }
+        }
       }
     }
 

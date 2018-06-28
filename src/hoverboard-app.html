@@ -394,7 +394,7 @@
             Polymer.importHref(this.resolveUrl('lazy-resources.html'), () => {
               this.loadComplete = true;
               notificationsActions.initializeMessaging()
-                .then(notificationsActions.getToken);
+                .then(() => this.dispatch(notificationsActions.getToken()));
             });
           });
         }

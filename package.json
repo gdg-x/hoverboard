@@ -10,6 +10,7 @@
     "predeploy": "cd ./functions && npm i",
     "deploy": "gulp deploy",
     "deploy:prod": "cross-env BUILD_ENV=production gulp deploy",
+    "import": "firebase firestore:delete -r --all-collections && node ./docs/import ./serviceAccount.json",
     "postinstall": "bower install",
     "serve": "gulp serve",
     "serve:prod": "cross-env BUILD_ENV=production gulp serve",
@@ -19,7 +20,9 @@
   },
   "dependencies": {
     "autotrack": "^2.4.1",
-    "redux": "^3.7.2"
+    "firebase-admin": "^5.12.1",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "bower": "^1.8.2",

@@ -12,6 +12,8 @@
 
 <link rel="import" href="../../mixins/utils-functions.html">
 <link rel="import" href="../../mixins/redux-mixin.html">
+<link rel="import" href="../../mixins/sessions-hoc.html">
+<link rel="import" href="../../mixins/speakers-hoc.html">
 <link rel="import" href="../text-truncate.html">
 <link rel="import" href="../shared-styles.html">
 <link rel="import" href="dialog-styles.html">
@@ -127,9 +129,9 @@
   <script>
 
     // eslint-disable-next-line no-undef
-    class SessionDetails extends UtilsFunctions(
+    class SessionDetails extends UtilsFunctions(SessionsHoC(SpeakersHoC(
       ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element))
-    ) {
+    ))) {
       static get is() {
         return 'session-details';
       }
@@ -202,7 +204,7 @@
           [this.session.id]: !this.featuredSessions[this.session.id] ? true : null,
         });
 
-        sessionsActions.setUserFeaturedSessions(this.user.uid, sessions);
+        this.dispatch(sessionsActions.setUserFeaturedSessions(this.user.uid, sessions));
       }
 
       _getFeaturedSessionIcon(featuredSessions, sessionId) {

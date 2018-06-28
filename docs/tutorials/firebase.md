@@ -31,7 +31,14 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 	}
 	```
 	
-5. Import data to the Firebase Database. You can use [default-firebase-data.json](../default-firebase-data.json) schema and then update it with your information.
+5. Import data to the Firebase Database.
+	- Generate `serviceAccount.json` file (go to https://console.firebase.google.com/project/%YOUR_PROJECT_ID%/settings/serviceaccounts/adminsdk)
+		- Go to https://console.firebase.google.com/project/%YOUR_PROJECT_ID%/settings/serviceaccounts/adminsdk
+		- Ensure that `Node.js` is selected
+		- Press `GENERATE NEW PRIVATE KEY`
+	- Rename downloaded file to `serviceAccount.json` and place it to root of your hoverboard directory
+	- [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
+	- Run `# yarn run import`
 
 6. Whoa! You've set up Firebase into your app.
 

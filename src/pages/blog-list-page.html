@@ -49,6 +49,7 @@
         height: 100%;
         transform: translateZ(0);
         color: #fff;
+        box-sizing: border-box;
       }
 
       .title {
@@ -171,10 +172,17 @@
       static get properties() {
         return {
           active: Boolean,
-          postsSource: {
+          postsList: {
+            type: Array,
+            statePath: 'blog.list',
+          },
+          postsFetching: {
+            type: Boolean,
+            statePath: 'blog.fetching',
+          },
+          postsFetchingError: {
             type: Object,
-            statePath: 'blog',
-            observer: '_transformPosts',
+            statePath: 'blog.fetchingError',
           },
           viewport: {
             type: Object,
@@ -191,26 +199,23 @@
 
       connectedCallback() {
         super.connectedCallback();
-        if (!Object.keys(this.postsSource).length) blogActions.fetchList();
+        if (!this.postsFetching && (!this.postsList || !this.postsList.length)) {
+          this.dispatch(blogActions.fetchList());
+        }
       }
 
       static get observers() {
         return [
-          '_postsChanged(postsSource)',
+          '_postsChanged(postsList)',
         ];
       }
 
       _postsChanged() {
-        if (this.postsSource && Object.keys(this.postsSource).length) {
+        if (this.postsList && this.postsList.length) {
           this.contentLoaderVisibility = 'hidden';
+          this.set('featuredPosts', this.postsList.slice(0, 3));
+          this.set('posts', this.postsList.slice(3));
         }
-      }
-
-      _transformPosts(postsSource) {
-        const sortedPosts = this.transformToArray(postsSource, 'id')
-          .sort((a, b) => b.published.localeCompare(a.published));
-        this.set('featuredPosts', sortedPosts.slice(0, 3));
-        this.set('posts', sortedPosts.slice(3));
       }
 
       _addIfNotPhone(base, additional) {

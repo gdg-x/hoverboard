@@ -80,20 +80,29 @@
     window.Polymer = { rootPath: '{$ basepath $}' };
     window.HOVERBOARD = { Elements: {} };
 
-    function loadFirebaseModule() {
-      return new Promise((resolve) => {
-        const script = document.createElement('script');
-        script.src = `bower_components/firebase/firebase.js`;
-        script.async = false;
-        script.onload = () => resolve();
-        script.onerror = () => {
-          throw new Error();
-        };
-        document.head.appendChild(script);
-      });
+    function loadFirebaseModules(modules) {
+      return Promise.all(
+        modules.map((module) => new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = `bower_components/firebase/${module}.js`;
+          script.async = false;
+          script.onload = () => resolve();
+          script.onerror = () => reject();
+          document.head.appendChild(script);
+        })));
     }
 
-    loadFirebaseModule()
+    function loadHoverboardApp() {
+      const app = document.createElement('hoverboard-app');
+      document.body.appendChild(app);
+    }
+
+    loadFirebaseModules([
+      'firebase-app',
+      'firebase-firestore',
+      'firebase-auth',
+      'firebase-messaging',
+    ])
       .then(() => {
         firebase.initializeApp({
           apiKey: '{$ firebase.apiKey $}',
@@ -103,7 +112,13 @@
           storageBucket: '{$ firebase.storageBucket $}',
           messagingSenderId: '{$ firebase.messagingSenderId $}',
         });
-      });
+        const firestore = firebase.firestore();
+        firestore.settings({ timestampsInSnapshots: true });
+
+        // eslint-disable-next-line no-console
+        console.log('Firebase App is ready!');
+      })
+      .then(() => loadHoverboardApp());
 
   </script>
 
@@ -150,7 +165,7 @@
 
 <body>
 
-<hoverboard-app unresolved>{$ title $}</hoverboard-app>
+<!--<hoverboard-app unresolved>{$ title $}</hoverboard-app>-->
 
 <noscript>
   Please enable JavaScript to view this website.

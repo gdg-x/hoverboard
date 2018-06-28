@@ -7,6 +7,8 @@
 
 <link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="../mixins/speakers-hoc.html">
+<link rel="import" href="../mixins/sessions-hoc.html">
 <link rel="import" href="../elements/shared-styles.html">
 <link rel="import" href="../elements/sticky-element.html">
 <link rel="import" href="../elements/header-bottom-toolbar.html">
@@ -98,7 +100,7 @@
             name$="[[day.date]]"
             day="[[day]]"
             user="[[user]]"
-            featured-sessions="[[sessions.featured]]"
+            featured-sessions="[[featuredSessions]]"
           ></schedule-day>
         </template>
       </iron-pages>
@@ -110,7 +112,7 @@
   <script>
 
     // eslint-disable-next-line no-undef
-    class SchedulePage extends UtilsFunctions(ReduxMixin(Polymer.Element)) {
+    class SchedulePage extends UtilsFunctions(ReduxMixin(SessionsHoC(SpeakersHoC(Polymer.Element)))) {
       static get is() {
         return 'schedule-page';
       }
@@ -124,13 +126,13 @@
             type: Object,
             statePath: 'schedule',
           },
+          featuredSessions: {
+            type: Object,
+            statePath: 'sessions.featured',
+          },
           user: {
             type: Object,
             statePath: 'user',
-          },
-          sessions: {
-            type: Object,
-            statePath: 'sessions',
           },
           subRoute: {
             type: Object,
@@ -151,15 +153,18 @@
       static get observers() {
         return [
           '_setDay(active, routeData.day, schedule.days)',
-          '_openSessionDetails(active, sessions.list, queryParams.sessionId)',
-          '_fetchFeaturedSessions(active, user.uid)',
+          '_openSessionDetails(active, sessions, queryParams.sessionId)',
+          '_fetchFeaturedSessions(active, sessions, user.uid)',
           '_scheduleChanged(schedule.days)',
+          '_sessionsAndSpeakersChanged(sessions, speakers)',
         ];
       }
 
-      connectedCallback() {
-        super.connectedCallback();
-        if (!this.schedule.days) scheduleActions.fetchSchedule();
+      _sessionsAndSpeakersChanged(sessions, speakers) {
+        if (!Object.keys(this.schedule).length
+          && sessions && sessions.length && speakers && speakers.length) {
+          this.dispatch(scheduleActions.fetchSchedule());
+        }
       }
 
       _scheduleChanged() {
@@ -168,16 +173,17 @@
         }
       }
 
-      _fetchFeaturedSessions(active, userUid) {
-        if (active && userUid && !this.sessions ||
-          this.sessions && this.sessions.featured && !this.sessions.featured.length) {
-          sessionsActions.fetchUserFeaturedSessions(userUid);
+      _fetchFeaturedSessions(active, sessions, userUid) {
+        if (active && userUid && sessions && sessions.length &&
+          (!this.featuredSessions || !Object.keys(this.featuredSessions).length)) {
+          this.dispatch(sessionsActions.fetchUserFeaturedSessions(userUid));
         }
       }
 
       _setDay(active, day, scheduleDays) {
         if (active && scheduleDays) {
-          const selectedDay = day || Object.keys(scheduleDays)[0];
+          const selectedDay = day || Object.values(scheduleDays)
+            .sort((a, b) => a.date.localeCompare(b.date))[0].date;
           routingActions.setSubRoute(selectedDay);
         }
       }
@@ -189,10 +195,10 @@
       }
 
       _openSessionDetails(active, sessions, id) {
-        if (sessions && Object.keys(sessions).length) {
+        if (sessions && sessions.length) {
           requestAnimationFrame(() => {
             if (active && id) {
-              dialogsActions.openDialog(DIALOGS.SESSION, sessions[id]);
+              dialogsActions.openDialog(DIALOGS.SESSION, this.sessionsMap[id]);
             } else if (this.isDialogOpened) {
               dialogsActions.closeDialog(DIALOGS.SESSION);
             }

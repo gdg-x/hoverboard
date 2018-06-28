@@ -39,7 +39,7 @@
 
       .slide-icon {
         display: none;
-      }      
+      }
 
       .video-item {
         width: 300px;
@@ -47,7 +47,7 @@
 
       .video-item:not(:last-of-type) {
           padding-right: 18px;
-      }     
+      }
 
       .video-item:hover .video-play-icon {
         transform: scale(1.2) translateZ(0);
@@ -96,8 +96,8 @@
         .video-item {
           width: calc(var(--max-container-width) / 3 - 16px);
           cursor: pointer;
-        }        
-        
+        }
+
         .video-item:not(:last-of-type) {
           padding-right: 30px;
         }
@@ -130,15 +130,15 @@
       </div>
 
       <div class="videos-wrapper" layout flex horizontal>
-          <paper-icon-button
-            class="last-video slide-icon"
-            icon="hoverboard:chevron-left"
-            on-tap="shiftContentLeft"          
-            ga-on="click"
-            ga-event-category="video-list-arrow"
-            ga-event-action="click"
-            ga-event-label="left"
-            hidden$="[[_leftArrowHidden]]"
+        <paper-icon-button
+          class="last-video slide-icon"
+          icon="hoverboard:chevron-left"
+          on-tap="shiftContentLeft"
+          ga-on="click"
+          ga-event-category="video-list-arrow"
+          ga-event-action="click"
+          ga-event-label="left"
+          hidden$="[[_leftArrowHidden]]"
         ></paper-icon-button>
         <div id="videoList" class="video-list" layout flex horizontal>
           <div id="videos" class="videos" layout horizontal>
@@ -201,8 +201,16 @@
       static get properties() {
         return {
           videos: {
+            type: Array,
+            statePath: 'videos.list',
+          },
+          videosFetching: {
+            type: Boolean,
+            statePath: 'videos.fetching',
+          },
+          videosFetchingError: {
             type: Object,
-            statePath: 'videos',
+            statePath: 'videos.fetchingError',
           },
           viewport: {
             type: Object,
@@ -221,7 +229,7 @@
 
       connectedCallback() {
         super.connectedCallback();
-        videosActions.fetchVideos();
+        this.dispatch(videosActions.fetchVideos());
       }
 
       shiftContentLeft() {

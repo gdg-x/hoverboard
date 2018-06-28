@@ -199,8 +199,16 @@
         return {
           tickets: {
             type: Array,
-            statePath: 'tickets',
+            statePath: 'tickets.list',
             observer: '_ticketsChanged',
+          },
+          ticketsFetching: {
+            type: Boolean,
+            statePath: 'tickets.fetching',
+          },
+          ticketsFetchingError: {
+            type: Object,
+            statePath: 'tickets.fetchingError',
           },
           viewport: {
             type: Object,
@@ -212,7 +220,7 @@
 
       connectedCallback() {
         super.connectedCallback();
-        ticketsActions.fetchTickets();
+        this.dispatch(ticketsActions.fetchTickets());
         // eslint-disable-next-line no-undef
         HOVERBOARD.Elements.Tickets = this;
       }

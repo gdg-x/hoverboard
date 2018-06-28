@@ -43,6 +43,18 @@ const dialogsReducer = (state = initialState.dialogs, action) => {
     case OPEN_DIALOG:
     case SET_DIALOG_DATA:
       return Object.assign({}, state, action.dialog);
+
+    case SET_DIALOG_ERROR: {
+      const dialog = state[action.payload.dialogName];
+
+      return Object.assign({}, state, {
+        [action.payload.dialogName]: {
+          isOpened: dialog.isOpened,
+          data: Object.assign({}, dialog.data, { errorOccurred: true }),
+        },
+      });
+    }
+
     case CLOSE_DIALOG:
       return Object.assign({}, state, {
         [action.dialogName]: initialState.dialogs[action.dialogName],
@@ -55,7 +67,24 @@ const dialogsReducer = (state = initialState.dialogs, action) => {
 const ticketsReducer = (state = initialState.tickets, action) => {
   switch (action.type) {
     case FETCH_TICKETS:
-      return action.tickets;
+      return Object.assign({}, state, {
+        fetching: true,
+        fetchingError: null,
+        list: [],
+      });
+
+    case FETCH_TICKETS_FAILURE:
+      return Object.assign({}, state, {
+        fetching: false,
+        fetchingError: action.payload.error,
+      });
+
+    case FETCH_TICKETS_SUCCESS:
+      return Object.assign({}, state, {
+        fetching: false,
+        list: action.payload.list,
+      });
+
     default:
       return state;
   }
@@ -64,7 +93,41 @@ const ticketsReducer = (state = initialState.tickets, action) => {
 const partnersReducer = (state = initialState.partners, action) => {
   switch (action.type) {
     case FETCH_PARTNERS:
-      return action.partners;
+      return Object.assign({}, state, {
+        fetching: true,
+        fetchingError: null,
+        list: [],
+      });
+
+    case FETCH_PARTNERS_FAILURE:
+      return Object.assign({}, state, {
+        fetching: false,
+        fetchingError: action.payload.error,
+      });
+
+    case FETCH_PARTNERS_SUCCESS:
+      return Object.assign({}, state, {
+        fetching: false,
+        list: action.payload.list,
+      });
+
+    case ADD_POTENTIAL_PARTNER:
+      return Object.assign({}, state, {
+        adding: true,
+        addingError: null,
+      });
+
+    case ADD_POTENTIAL_PARTNER_FAILURE:
+      return Object.assign({}, state, {
+        adding: false,
+        addingError: action.payload.error,
+      });
+
+    case ADD_POTENTIAL_PARTNER_SUCCESS:
+      return Object.assign({}, state, {
+        adding: false,
+      });
+
     default:
       return state;
   }
@@ -73,7 +136,24 @@ const partnersReducer = (state = initialState.partners, action) => {
 const videosReducer = (state = initialState.videos, action) => {
   switch (action.type) {
     case FETCH_VIDEOS:
-      return action.videos;
+      return Object.assign({}, state, {
+        fetching: true,
+        fetchingError: null,
+        list: [],
+      });
+
+    case FETCH_VIDEOS_FAILURE:
+      return Object.assign({}, state, {
+        fetching: false,
+        fetchingError: action.payload.error,
+      });
+
+    case FETCH_VIDEOS_SUCCESS:
+      return Object.assign({}, state, {
+        fetching: false,
+        list: action.payload.list,
+      });
+
     default:
       return state;
   }
@@ -82,7 +162,26 @@ const videosReducer = (state = initialState.videos, action) => {
 const blogReducer = (state = initialState.blog, action) => {
   switch (action.type) {
     case FETCH_BLOG_LIST:
-      return action.list;
+      return Object.assign({}, state, {
+        fetching: true,
+        fetchingError: null,
+        list: [],
+        obj: {},
+      });
+
+    case FETCH_BLOG_LIST_FAILURE:
+      return Object.assign({}, state, {
+        fetching: false,
+        fetchingError: action.payload.error,
+      });
+
+    case FETCH_BLOG_LIST_SUCCESS:
+      return Object.assign({}, state, {
+        fetching: false,
+        list: action.payload.list,
+        obj: action.payload.obj,
+      });
+
     default:
       return state;
   }
@@ -90,9 +189,27 @@ const blogReducer = (state = initialState.blog, action) => {
 
 const speakersReducer = (state = initialState.speakers, action) => {
   switch (action.type) {
-    case FETCH_SPEAKERS_LIST:
-    case UPDATE_SPEAKERS:
-      return action.list;
+    case FETCH_SPEAKERS:
+      return Object.assign({}, state, {
+        fetching: true,
+        fetchingError: null,
+        list: [],
+        obj: {},
+      });
+
+    case FETCH_SPEAKERS_FAILURE:
+      return Object.assign({}, state, {
+        fetching: false,
+        fetchingError: action.payload.error,
+      });
+
+    case FETCH_SPEAKERS_SUCCESS:
+      return Object.assign({}, state, {
+        fetching: false,
+        list: action.payload.list,
+        obj: action.payload.obj,
+      });
+
     default:
       return state;
   }
@@ -100,8 +217,27 @@ const speakersReducer = (state = initialState.speakers, action) => {
 
 const previousSpeakersReducer = (state = initialState.previousSpeakers, action) => {
   switch (action.type) {
-    case FETCH_PREVIOUS_SPEAKERS_LIST:
-      return action.list;
+    case FETCH_PREVIOUS_SPEAKERS:
+      return Object.assign({}, state, {
+        fetching: true,
+        fetchingError: null,
+        list: [],
+        obj: {},
+      });
+
+    case FETCH_PREVIOUS_SPEAKERS_FAILURE:
+      return Object.assign({}, state, {
+        fetching: false,
+        fetchingError: action.payload.error,
+      });
+
+    case FETCH_PREVIOUS_SPEAKERS_SUCCESS:
+      return Object.assign({}, state, {
+        fetching: false,
+        list: action.payload.list,
+        obj: action.payload.obj,
+      });
+
     default:
       return state;
   }
@@ -109,16 +245,65 @@ const previousSpeakersReducer = (state = initialState.previousSpeakers, action) 
 
 const sessionsReducer = (state = initialState.sessions, action) => {
   switch (action.type) {
-    case FETCH_SESSIONS_LIST:
+    case FETCH_SESSIONS:
+      return Object.assign({}, state, {
+        list: {
+          fetching: true,
+          fetchingError: null,
+          list: [],
+          obj: {},
+          objBySpeaker: {},
+        },
+      });
+
+    case FETCH_SESSIONS_FAILURE:
+      return Object.assign({}, state, {
+        list: {
+          fetching: false,
+          fetchingError: action.payload.error,
+        },
+      });
+
+    case FETCH_SESSIONS_SUCCESS:
+      return Object.assign({}, state, {
+        list: {
+          fetching: false,
+          list: action.payload.list,
+          obj: action.payload.obj,
+          objBySpeaker: action.payload.objBySpeaker,
+        },
+      });
+
     case UPDATE_SESSIONS:
       return Object.assign({}, state, {
-        list: action.list,
+        list: {
+          list: action.payload.list,
+          obj: action.payload.obj,
+          objBySpeaker: action.payload.objBySpeaker,
+        },
       });
+
     case FETCH_USER_FEATURED_SESSIONS:
     case SET_USER_FEATURED_SESSIONS:
       return Object.assign({}, state, {
-        featured: action.featuredSessions || {},
+        featuredError: null,
+        featuredFetching: true,
       });
+
+    case FETCH_USER_FEATURED_SESSIONS_FAILURE:
+    case SET_USER_FEATURED_SESSIONS_FAILURE:
+      return Object.assign({}, state, {
+        featuredError: action.payload.error,
+        featuredFetching: false,
+      });
+
+    case FETCH_USER_FEATURED_SESSIONS_SUCCESS:
+    case SET_USER_FEATURED_SESSIONS_SUCCESS:
+      return Object.assign({}, state, {
+        featured: action.payload.featuredSessions || {},
+        featuredFetching: false,
+      });
+
     default:
       return state;
   }
@@ -126,7 +311,7 @@ const sessionsReducer = (state = initialState.sessions, action) => {
 
 const scheduleReducer = (state = initialState.schedule, action) => {
   switch (action.type) {
-    case FETCH_SCHEDULE:
+    case FETCH_SCHEDULE_SUCCESS:
       return action.data;
     default:
       return state;
@@ -136,7 +321,24 @@ const scheduleReducer = (state = initialState.schedule, action) => {
 const galleryReducer = (state = initialState.gallery, action) => {
   switch (action.type) {
     case FETCH_GALLERY:
-      return action.gallery;
+      return Object.assign({}, state, {
+        fetching: true,
+        fetchingError: null,
+        list: [],
+      });
+
+    case FETCH_GALLERY_FAILURE:
+      return Object.assign({}, state, {
+        fetching: false,
+        fetchingError: action.payload.error,
+      });
+
+    case FETCH_GALLERY_SUCCESS:
+      return Object.assign({}, state, {
+        fetching: false,
+        list: action.payload.list,
+      });
+
     default:
       return state;
   }
@@ -145,7 +347,24 @@ const galleryReducer = (state = initialState.gallery, action) => {
 const teamReducer = (state = initialState.team, action) => {
   switch (action.type) {
     case FETCH_TEAM:
-      return action.team;
+      return Object.assign({}, state, {
+        fetching: true,
+        fetchingError: null,
+        list: [],
+      });
+
+    case FETCH_TEAM_FAILURE:
+      return Object.assign({}, state, {
+        fetching: false,
+        fetchingError: action.payload.error,
+      });
+
+    case FETCH_TEAM_SUCCESS:
+      return Object.assign({}, state, {
+        fetching: false,
+        list: action.payload.list,
+      });
+
     default:
       return state;
   }

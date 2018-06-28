@@ -131,28 +131,36 @@
 
       static get properties() {
         return {
-          postsSource: {
-            type: Object,
-            statePath: 'blog',
-            observer: '_transformPosts',
-          },
           viewport: {
             type: Object,
             statePath: 'ui.viewport',
           },
           posts: Array,
+          postsList: {
+            type: Array,
+            statePath: 'blog.list',
+            observer: '_transformPosts',
+          },
+          postsFetching: {
+            type: Boolean,
+            statePath: 'blog.fetching',
+          },
+          postsFetchingError: {
+            type: Object,
+            statePath: 'blog.fetchingError',
+          },
         };
       }
 
       connectedCallback() {
         super.connectedCallback();
-        if (!Object.keys(this.postsSource).length) blogActions.fetchList();
+        if (!this.postsFetching && (!this.postsList || !this.postsList.length)) {
+          this.dispatch(blogActions.fetchList());
+        }
       }
 
-      _transformPosts(postsSource) {
-        const sortedPosts = this.transformToArray(postsSource, 'id')
-          .sort((a, b) => b.published.localeCompare(a.published));
-        this.set('posts', sortedPosts.slice(0, 4));
+      _transformPosts(postsList) {
+        this.set('posts', postsList.slice(0, 4));
       }
     }
 
