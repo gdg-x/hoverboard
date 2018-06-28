@@ -22,7 +22,7 @@
     "iron-icon": "PolymerElements/iron-icon#^2.0.0",
     "paper-button": "PolymerElements/paper-button#^2.0.0",
     "iron-lazy-pages": "TimvdLippe/iron-lazy-pages#^2.0.2",
-    "firebase": "^4.12.0",
+    "firebase": "^5.1.0",
     "marked-element": "PolymerElements/marked-element#^2.1.1",
     "clamp-js": "*",
     "iron-ajax": "PolymerElements/iron-ajax#^2.0.2",
