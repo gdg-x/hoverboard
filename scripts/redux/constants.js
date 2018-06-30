@@ -88,8 +88,8 @@ const FETCH_TEAM_FAILURE = 'app/Team/FETCH_TEAM_FAILURE';
 const FETCH_TEAM_SUCCESS = 'app/Team/FETCH_TEAM_SUCCESS';
 
 // user
-const SIGN_IN = 'app/SIGN_IN';
-const SIGN_OUT = 'app/SIGN_OUT';
+const SIGN_IN = 'app/Auth/SIGN_IN';
+const SIGN_OUT = 'app/Auth/SIGN_OUT';
 // subscribe
 const SUBSCRIBE = 'app/Subscribe/SUBSCRIBE';
 // notifications

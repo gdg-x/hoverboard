@@ -142,6 +142,10 @@
             type: Object,
             statePath: 'sessions.featured',
           },
+          featuredSessions: {
+            type: Object,
+            statePath: 'sessions.featured',
+          },
           user: {
             type: Object,
             statePath: 'user',
@@ -174,7 +178,7 @@
       }
 
       _sessionsAndSpeakersChanged(sessions, speakers) {
-        if (!this.schedule.length
+        if (!Object.keys(this.schedule).length
           && sessions && sessions.length && speakers && speakers.length) {
           this.dispatch(scheduleActions.fetchSchedule());
         }
@@ -193,9 +197,10 @@
         }
       }
 
-      _setDay(active, day, schedule) {
-        if (active && schedule.length) {
-          const selectedDay = day || schedule[0].date;
+      _setDay(active, day, scheduleDays) {
+        if (active && scheduleDays) {
+          const selectedDay = day || Object.values(scheduleDays)
+            .sort((a, b) => a.date.localeCompare(b.date))[0].date;
           routingActions.setSubRoute(selectedDay);
         }
       }
