@@ -187,6 +187,14 @@
             </paper-button>
           </a>
 
+          <a href$="[[session.github]]" hidden$="[[!session.github]]" target="_blank"
+          rel="noopener noreferrer">
+         <paper-button class="action">
+           <iron-icon icon="github"></iron-icon>
+           {$ viewGithub $}
+         </paper-button>
+       </a>
+
           <div on-tap="_openVideo" hidden$="[[!session.videoId]]">
             <paper-button class="action">
               <iron-icon icon="video"></iron-icon>
