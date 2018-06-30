@@ -463,10 +463,8 @@ const scheduleActions = {
         scheduleWorker.addEventListener('message', ({ data }) => {
           dispatch({
             type: FETCH_SCHEDULE_SUCCESS,
-            data: data.schedule,
+            data: Object.values(data.schedule.days).sort((a, b) => a.date.localeCompare(b.date)),
           });
-          
-          // Object.values(data.schedule.days).sort((a, b) => a.date.localeCompare(b.date))
 
           const sessionsObjBySpeaker = {};
           const sessionsList = Object.values(data.sessions);
