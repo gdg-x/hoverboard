@@ -1,0 +1,87 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="../elements/schedule-day.html">
+<link rel="import" href="./shared-styles.html">
+
+
+<dom-module id="my-schedule">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+    <style>
+
+      :host {
+        display: block;
+      }
+
+      .date {
+        margin: 16px;
+        font-size: 24px;
+      }
+
+      .date:not(:first-of-type) {
+        margin-top: 64px;
+      }
+
+      @media (min-width: 640px) {
+        .date {
+          margin-left: 64px;
+          font-size: 32px;
+        }
+      }
+
+    </style>
+
+    <template is="dom-repeat" items="[[filteredSchedule]]" as="day">
+      <div class="date">[[day.dateReadable]]</div>
+
+      <schedule-day
+        name$="[[day.date]]"
+        day="[[day]]"
+        user="[[user]]"
+        featured-sessions="[[featuredSessions]]"
+        only-featured
+      ></schedule-day>
+
+    </template>
+  </template>
+
+  <script>
+
+    class MySchedule extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'my-schedule';
+      }
+
+      static get properties() {
+        return {
+          schedule: Array,
+          filteredSchedule: Array,
+          featuredSessions: Object,
+          user: Object,
+        };
+      }
+
+      static get observers() {
+        return [
+          '_filterSchedule(schedule, featuredSessions)',
+        ];
+      }
+
+      _filterSchedule(schedule, featuredSessions) {
+        if (schedule.length) {
+          this.filteredSchedule = schedule.map((day) => Object.assign({}, day, {
+            timeslots: day.timeslots.map((timeslot) => Object.assign({}, timeslot, {
+              sessions: timeslot.sessions.map((sessionBlock) => Object.assign({}, sessionBlock, {
+                items: sessionBlock.items.filter((session) => featuredSessions[session.id]),
+              })),
+            })),
+          }));
+        }
+      }
+    }
+
+    customElements.define(MySchedule.is, MySchedule);
+  </script>
+</dom-module>

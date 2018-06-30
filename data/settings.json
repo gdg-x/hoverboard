@@ -208,7 +208,7 @@
   },
   "contentLoaders": {
     "schedule": {
-      "itemsCount": 3
+      "itemsCount": 2
     },
     "blog": {
       "itemsCount": 3

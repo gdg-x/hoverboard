@@ -29,12 +29,12 @@
         --paper-tabs: {
           height: 64px;
         };
+        width: 100%;
       }
 
       .nav-item a {
         padding: 0 14px;
         color: var(--primary-text-color);
-        text-transform: uppercase;
       }
 
       @media (min-width: 640px) {
@@ -71,13 +71,19 @@
         class="nav-items"
         selected="[[route.subRoute]]"
         attr-for-selected="day"
+        hidden$="[[!contentLoaderVisibility]]"
+        scrollable
+        hide-scroll-buttons
         noink
       >
-        <template is="dom-repeat" items="[[days]]" as="day">
+        <template is="dom-repeat" items="[[schedule]]" as="day">
           <paper-tab class="nav-item" day="[[day.date]]" link>
             <a href$="/schedule/[[day.date]]" layout vertical center-center>[[day.dateReadable]]</a>
           </paper-tab>
         </template>
+        <paper-tab class="nav-item" day="my-schedule" hidden$="[[!user.signedIn]]" link>
+          <a href="/schedule/my-schedule" layout vertical center-center>{$ mySchedule.title $}</a>
+        </paper-tab>
       </paper-tabs>
     </app-toolbar>
 
@@ -98,25 +104,35 @@
             statePath: 'routing',
           },
           schedule: {
-            type: Object,
+            type: Array,
             statePath: 'schedule',
           },
-          contentLoaderVisibility: String,
-          days: Array,
+          contentLoaderVisibility: {
+            type: Boolean,
+            value: false,
+          },
+          user: {
+            type: Object,
+            statePath: 'user',
+          },
         };
       }
 
       static get observers() {
         return [
-          '_scheduleChanged(schedule.days)',
+          '_scheduleChanged(schedule)',
         ];
       }
 
-      _scheduleChanged() {
-        if (this.schedule.days) {
-          this.contentLoaderVisibility = 'hidden';
-          this.days = Object.values(this.schedule.days)
-            .sort((a, b) => a.date.localeCompare(b.date));
+      connectedCallback() {
+        super.connectedCallback();
+        // eslint-disable-next-line no-undef
+        HOVERBOARD.Elements.StickyHeaderToolbar = this;
+      }
+
+      _scheduleChanged(schedule) {
+        if (schedule.length) {
+          this.contentLoaderVisibility = true;
         }
       }
     }
