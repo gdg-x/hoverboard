@@ -41,10 +41,10 @@
     {% if callToSchedule %}
     <call-to-schedule app="{{app}}"></call-to-schedule>
     {% endif %}
-    <tickets-block app="{{app}}" cascaded></tickets-block>
     {% if gallery %}
-      <photo-block app="{{app}}"></photo-block>
+    <photo-block app="{{app}}"></photo-block>
     {% endif %}
+    <tickets-block app="{{app}}" cascaded></tickets-block>
     <logos-block app="{{app}}" cascaded></logos-block>
     <map-block app="{{app}}" selected="{{selected}}"></map-block>
     <footer-block app="{{app}}"></footer-block>
