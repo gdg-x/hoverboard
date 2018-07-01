@@ -50,7 +50,7 @@
         margin-right: 8px;
       }
 
-      @media (min-width: 640px) {
+      @media (min-width: 812px) {
         :host {
           margin-left: auto;
           display: block;
@@ -87,7 +87,7 @@
 
     </style>
 
-    <div class="grid">
+    <div class="grid" style$="--tracks-number: [[day.tracks.length]];">
       <template is="dom-repeat" items="[[day.timeslots]]" as="timeslot" index-as="timeslotIndex">
 
         <div id$="[[timeslot.startTime]]" class="start-time" style$="grid-area: [[_getTimePosition(timeslotIndex)]]">
@@ -155,11 +155,6 @@
           user: Object,
           featuredSessions: Object,
           onlyFeatured: Boolean,
-          tracksNumber: {
-            type: Number,
-            value: 3,
-            observer: '_tracksNumberChanged',
-          },
           viewport: Object,
         };
       }
@@ -183,12 +178,6 @@
             });
           }
         }
-      }
-
-      _tracksNumberChanged(newValue, oldValue) {
-        this.updateStyles({
-          '--tracks-number': newValue,
-        });
       }
 
       _getTimePosition(timeslotIndex) {
