@@ -94,6 +94,16 @@
       "/images/backgrounds/location_3.jpg"
     ]
   },
+  "gallery": {
+    "albumUrl": "https://photos.app.goo.gl/i1S38qRjjCRYxkak7",
+    "photos": {
+      "big": "/images/backgrounds/site_image_3.jpeg",
+      "small": [
+        "/images/backgrounds/site_image_2.jpeg",
+        "/images/backgrounds/site_image_1.jpeg"
+      ]
+    }
+  },
   "pages": {
     "home": {
       "title": "Accueil",
