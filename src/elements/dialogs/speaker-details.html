@@ -107,12 +107,14 @@
         <div class="additional-sections" hidden$="[[!getSessionsBySpeaker(speaker.id).length]]">
           <h3>{$ speakerDetails.sessions $}</h3>
 
-          <template is="dom-repeat" items="[[getSessionsBySpeaker(speaker.id)]]" as="session">
-            <a href$="/schedule?sessionId=[[session.id]]" class="section">
+          <template is="dom-repeat" items="[[getSessionsBySpeaker(speaker.id, sessions)]]" as="session">
+            <a href$="/schedule?sessionId=[[session.id]]" on-tap="_openSession" session-id$="[[session.id]]" class="section">
               <div layout horizontal center>
                 <div class="section-details" flex>
                   <div class="section-primary-text">[[session.title]]</div>
-                  <div class="section-secondary-text" hidden$="[[!session.dateReadable]]">[[session.dateReadable]], [[session.startTime]] - [[session.endTime]]</div>
+                  <div class="section-secondary-text" hidden$="[[!session.dateReadable]]">[[session.dateReadable]],
+                    [[session.startTime]] - [[session.endTime]]
+                  </div>
                   <div class="section-secondary-text" hidden$="[[!session.track.title]]">[[session.track.title]]</div>
                   <div class="tags" hidden$="[[!session.tags.length]]">
                     <template is="dom-repeat" items="[[session.tags]]" as="tag">
@@ -150,6 +152,10 @@
             type: Object,
             statePath: 'ui.viewport',
           },
+          disabledSchedule: {
+            type: Boolean,
+            value: () => JSON.parse('{$ disabledSchedule $}'),
+          },
         };
       }
 
@@ -160,6 +166,14 @@
 
       _close() {
         dialogsActions.closeDialog(DIALOGS.SPEAKER);
+      }
+
+      _openSession(e) {
+        if (this.disabledSchedule) {
+          e.preventDefault();
+          const sessionId = e.currentTarget.getAttribute('session-id');
+          dialogsActions.openDialog(DIALOGS.SESSION, this.sessionsMap[sessionId]);
+        }
       }
 
       _getCloseBtnIcon(isLaptopViewport) {
