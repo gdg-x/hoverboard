@@ -154,7 +154,7 @@
 
         <paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]">{$ signIn $}</paper-tab>
 
-        <a href$="[[tickets.url]]" target="_blank" rel="noopener noreferrer" ga-on="click"
+        <a href$="[[_getTicketUrl(tickets)]]" target="_blank" rel="noopener noreferrer" ga-on="click"
            ga-event-category="ticket button" ga-event-action="buy_click">
           <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>
         </a>
@@ -331,6 +331,12 @@
 
       _isAccountIconHidden(userSignedIn, isTabletPlus) {
         return userSignedIn || isTabletPlus;
+      }
+
+      _getTicketUrl(tickets) {
+        if (!tickets.list.length) return '';
+        const availableTicket = tickets.list.filter((ticket) => ticket.available)[0];
+        return availableTicket ? availableTicket.url : tickets.list[0].url;
       }
 
       _setToolbarSettings(settings) {
