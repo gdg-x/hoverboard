@@ -16,6 +16,7 @@
     "locale": "en-US"
   },
   "hashtag": "DevFest17",
+  "disabledSchedule": false,
   "navigation": [
     {
       "route": "home",
