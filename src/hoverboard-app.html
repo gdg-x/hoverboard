@@ -366,6 +366,7 @@
             message: '{$ offlineMessage $}',
           });
         });
+        this.dispatch(ticketsActions.fetchTickets());
       }
 
       disconnectedCallback() {
