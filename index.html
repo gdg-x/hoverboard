@@ -93,8 +93,10 @@
     }
 
     function loadHoverboardApp() {
-      const app = document.createElement('hoverboard-app');
-      document.body.appendChild(app);
+      requestAnimationFrame(() => {
+        const app = document.createElement('hoverboard-app');
+        document.body.appendChild(app);
+      });
     }
 
     loadFirebaseModules([

@@ -1,5 +1,4 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/polymer/lib/utils/render-status.html">
 
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/good-map/good-map.html">
@@ -114,7 +113,6 @@
           viewport: {
             type: Object,
             statePath: 'ui.viewport',
-            observer: '_viewportChanged',
           },
           options: {
             type: Object,
@@ -156,19 +154,25 @@
         };
       }
 
-      _viewportChanged({ isTabletPlus }) {
-        isTabletPlus && Polymer.RenderStatus.afterNextRender(this, () => {
-          const map = this.shadowRoot.querySelector('#map');
-          map.addEventListener('google-map-ready', (e) => {
+      connectedCallback() {
+        super.connectedCallback();
+        this.addEventListener('dom-change', () => {
+          this.shadowRoot.querySelector('#map').addEventListener('google-map-ready', (e) => {
+            if (!this.viewport.isTabletPlus) return;
             new google.maps.Marker({
               position: {
                 lat: parseFloat('{$ location.pointer.latitude $}'),
                 lng: parseFloat('{$ location.pointer.longitude $}'),
               },
+              icon: {
+                url: 'images/map-marker.svg',
+                anchor: new google.maps.Point(25, 50),
+                scaledSize: new google.maps.Size(50, 50),
+              },
               map: e.detail,
             });
-          });
-        });
+          }, { once: true });
+        }, { once: true });
       }
     }
 
