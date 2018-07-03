@@ -114,8 +114,13 @@
           storageBucket: '{$ firebase.storageBucket $}',
           messagingSenderId: '{$ firebase.messagingSenderId $}',
         });
+
         const firestore = firebase.firestore();
         firestore.settings({ timestampsInSnapshots: true });
+        firebase.firestore().enablePersistence()
+          .catch(() => {
+            console.warn('DB offline support not available'); // eslint-disable-line no-console
+          });
 
         // eslint-disable-next-line no-console
         console.log('Firebase App is ready!');
