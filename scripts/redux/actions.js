@@ -471,11 +471,11 @@ const scheduleActions = {
 
           sessionsList.forEach((session) => {
             if (Array.isArray(session.speakers)) {
-              session.speakers.forEach((speakerId) => {
-                if (Array.isArray(sessionsObjBySpeaker[speakerId])) {
-                  sessionsObjBySpeaker[speakerId].push(session);
+              session.speakers.forEach((speaker) => {
+                if (Array.isArray(sessionsObjBySpeaker[speaker.id])) {
+                  sessionsObjBySpeaker[speaker.id].push(session);
                 } else {
-                  sessionsObjBySpeaker[speakerId] = [session];
+                  sessionsObjBySpeaker[speaker.id] = [session];
                 }
               });
             }
