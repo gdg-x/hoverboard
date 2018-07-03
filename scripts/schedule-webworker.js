@@ -66,11 +66,11 @@ self.addEventListener('message', ({ data }) => {
     const timeslotLen = day.timeslots.length;
     for (let timeslotsIndex = 0; timeslotsIndex < timeslotLen; timeslotsIndex++) {
       const timeslot = day.timeslots[timeslotsIndex];
-      let innnerSessions = [];
+      let innerSessions = [];
 
       const sessionsLen = timeslot.sessions.length;
       for (let sessionIndex = 0; sessionIndex < sessionsLen; sessionIndex++) {
-        let subsessions = [];
+        let subSessions = [];
 
         const subSessionsLen = timeslot.sessions[sessionIndex].items.length;
         for (let subSessionIndex = 0; subSessionIndex < subSessionsLen; subSessionIndex++) {
@@ -98,7 +98,7 @@ self.addEventListener('message', ({ data }) => {
           }
           scheduleTags = addTagTo(scheduleTags || [], mainTag);
 
-          const finalSubsession = Object.assign({}, subsession, {
+          const finalSubSession = Object.assign({}, subsession, {
             mainTag,
             id: sessionId.toString(),
             day: dayKey,
@@ -114,13 +114,13 @@ self.addEventListener('message', ({ data }) => {
             })) : [],
           });
 
-          subsessions.push(finalSubsession);
-          sessions[sessionId] = finalSubsession;
+          subSessions.push(finalSubSession);
+          sessions[sessionId] = finalSubSession;
           if (subsession.speakers) {
             speakers = Object.assign(
               {},
               speakers,
-              updateSpeakersSessions(speakersRaw, subsession.speakers, finalSubsession)
+              updateSpeakersSessions(speakersRaw, subsession.speakers, finalSubSession)
             );
           }
         }
@@ -135,9 +135,9 @@ self.addEventListener('message', ({ data }) => {
           extensions[sessionIndex + 1] = timeslot.sessions[sessionIndex].extend;
         }
 
-        innnerSessions = [...innnerSessions, {
+        innerSessions = [...innerSessions, {
           gridArea: `${start} / ${end}`,
-          items: subsessions,
+          items: subSessions,
         }];
       }
 
@@ -150,7 +150,7 @@ self.addEventListener('message', ({ data }) => {
       }
 
       timeslots.push(Object.assign({}, timeslot, {
-        sessions: innnerSessions,
+        sessions: innerSessions,
       }));
     }
 
