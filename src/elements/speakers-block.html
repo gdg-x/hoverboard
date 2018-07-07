@@ -44,7 +44,7 @@
       .badges {
         position: absolute;
         top: 0;
-        left: calc(50% + 32px);
+        left: calc(50% + 24px);
       }
 
       .badge {
@@ -61,11 +61,11 @@
       }
 
       .badge:nth-of-type(2) {
-        transform: translate(25%, 75%);
+        transform: translate(0, 100%);
       }
 
       .badge:nth-of-type(2):hover {
-        transform: translate3d(25%, 75%, 20px) scale(1.1);
+        transform: translate3d(0, 100%, 20px) scale(1.1);
       }
 
       .badge-icon {
@@ -117,6 +117,18 @@
 
         .speaker:last-of-type {
           display: none;
+        }
+
+        .badges {
+          left: calc(50% + 32px);
+        }
+
+        .badge:nth-of-type(2) {
+          transform: translate(25%, 75%);
+        }
+
+        .badge:nth-of-type(2):hover {
+          transform: translate3d(25%, 75%, 20px) scale(1.1);
         }
       }
 
