@@ -1,19 +1,5 @@
-const path = require('path');
-
-const admin = require('firebase-admin');
-
-const serviceAccountFile = path.resolve(process.cwd(), process.argv[2]);
-const serviceAccount = require(serviceAccountFile);
-const data = require(path.resolve(__dirname, 'default-firebase-data.json'));
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`,
-  storageBucket: `${serviceAccount.project_id}.appspot.com`,
-});
-
-const firestore = admin.firestore();
-const bucket = admin.storage().bucket();
+import { initializeFirebase, firestore } from './firebase-config';
+import data from '../docs/default-firebase-data.json';
 
 const importSpeakers = () => {
   const speakers = data.speakers;
@@ -265,7 +251,7 @@ const importNotificationsConfig = async () => {
 
 };
 
-Promise.resolve()
+initializeFirebase()
   .then(() => importBlog())
   .then(() => importGallery())
   .then(() => importNotificationsConfig())
