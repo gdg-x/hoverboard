@@ -10,7 +10,8 @@
     "predeploy": "cd ./functions && npm i",
     "deploy": "gulp deploy",
     "deploy:prod": "cross-env BUILD_ENV=production gulp deploy",
-    "import": "firebase firestore:delete -r --all-collections && node ./docs/import ./serviceAccount.json",
+    "firestore:init": "firebase firestore:delete -r --all-collections && babel-node ./internals/import-default-data",
+    "firestore:copy": "babel-node ./internals/firestore-copy-data",
     "postinstall": "bower install",
     "serve": "gulp serve",
     "serve:prod": "cross-env BUILD_ENV=production gulp serve",
@@ -20,11 +21,13 @@
   },
   "dependencies": {
     "autotrack": "^2.4.1",
-    "firebase-admin": "^5.12.1",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.52",
+    "@babel/node": "^7.0.0-beta.52",
+    "@babel/preset-env": "^7.0.0-beta.52",
     "bower": "^1.8.2",
     "browser-sync": "^2.23.2",
     "connect-history-api-fallback": "^1.5.0",
@@ -36,6 +39,7 @@
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-plugin-html": "^4.0.1",
     "eslint-plugin-polymer": "^0.1.0",
+    "firebase-admin": "^5.12.1",
     "gulp": "^4.0.0",
     "gulp-cli": "^2.0.0",
     "gulp-eslint": "^4.0.0",
