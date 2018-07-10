@@ -160,7 +160,7 @@
             role="navigation"
           >
             {% for nav in navigation %}
-            <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer">{$ nav.title $}</a>
+            <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer">{$ nav.label $}</a>
             {% endfor %}
           </iron-selector>
 

@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/marked-element/marked-element.html">
 
 <link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="./shared-styles.html">
@@ -78,7 +79,9 @@
                 <h2 class="title">[[post.title]]</h2>
               </text-truncate>
               <text-truncate lines="3">
-                <p class="description">[[post.brief]]</p>
+                <marked-element class="description" markdown="[[post.brief]]">
+                  <div slot="markdown-html"></div>
+                </marked-element>
               </text-truncate>
             </div>
             <span class="date">[[getDate(post.published)]]</span>

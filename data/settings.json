@@ -21,27 +21,27 @@
     {
       "route": "home",
       "permalink": "/",
-      "title": "Home"
+      "label": "Home"
     },
     {
       "route": "speakers",
       "permalink": "/speakers/",
-      "title": "Speakers"
+      "label": "Speakers"
     },
     {
       "route": "schedule",
       "permalink": "/schedule/",
-      "title": "Schedule"
+      "label": "Schedule"
     },
     {
       "route": "team",
       "permalink": "/team/",
-      "title": "Team"
+      "label": "Team"
     },
     {
       "route": "blog",
       "permalink": "/blog/",
-      "title": "Blog"
+      "label": "Blog"
     }
   ],
   "heroSettings": {

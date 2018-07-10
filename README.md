@@ -25,23 +25,32 @@ Our goal is to allow event organizers to set up professional conference website 
 | **SEO optimized** | index all content and get to the top in search results |
 | **Speakers and schedule management** | keep and update all information in the  Firebase |
 | **My schedule** | let attendees save sessions they want to visit |
-| **Session ratings** | collect feedback to understand speaker performance |
 | **Customizable theme** | change colors to match your style |
 | **Blog** | post announcements, updates and useful information |
 
 ## Getting Started
 1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone it locally
-2. Setup Environment
+1. Setup Environment
    * Install [Node.js (v8.9.4 or above)](https://nodejs.org/en/download/)
-   * Instal Firebase CLI: `npm i -g firebase-tools`
-3. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `firebase login`
-4. Update [Hoverboard config](/config) and [Resources](/data)
-5. Run locally
+   * Install Firebase CLI: `npm i -g firebase-tools` or `yarn global add firebase-tools`
+1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `firebase login`
+1. Update [Hoverboard config](/config) and [Resources](/data)
+1. Import initial data to the Firebase Database
+    * Generate `serviceAccount.json` file (go to https://console.firebase.google.com/project/%YOUR_PROJECT_ID%/settings/serviceaccounts/adminsdk)
+      - Go to https://console.firebase.google.com/project/%YOUR_PROJECT_ID%/settings/serviceaccounts/adminsdk
+      - Ensure that **Node.js** is selected and press **GENERATE NEW PRIVATE KEY** 
+      - Save the file as `serviceAccount.json` and to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
+    * [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
+    * Run `npm run firestore:init` or `yarn firestore:init`
+1. Run locally
    * `cd` into the base directory
    * `npm install` or `yarn`
    * `npm run serve` or `yarn serve`
-6. Deploy
+1. Build and deploy
    * `npm run deploy` or `yarn deploy`
+   
+*NOTE:* By default command using configurations from `/configs/development.json`.
+To serve locally or deploy the production app use `yarn serve:prod` and `yarn deploy:prod` respectively.
 
 :book: Read the [Full Setup Guide](/docs/).
 
@@ -53,7 +62,7 @@ If you don't want to bother with the dependencies, you can use the docker contai
 
 ## Updating
 Here is a git workflow for updating your fork (or downloaded copy) to the latest version:
-```
+```console
 git remote add upstream https://github.com/gdg-x/hoverboard.git
 git fetch upstream
 git merge upstream/hoverboard-v2

@@ -1,14 +1,11 @@
 # Styling
 
-Styling of your app can be found in `src/styles/shared-styles.html`.
+Styling of your app can be found in `src/elements/shared-styles.html`.
  
 ### Colors
-Generate your own color scheme with [Material Palette][Material Palette]
-and click download Polymer
-![material_design_palette_generator](https://cloud.githubusercontent.com/assets/2954281/17750340/a02f8e76-64ca-11e6-80f0-53392b30f89a.png)
+Adjust the color scheme to your conference style. 
 
-Now Replace next section
-```
+```html
  /* Primary colors */
 --dark-primary-color:       #F57C00;
 --default-primary-color:    #FF9800;
@@ -31,35 +28,31 @@ Now Replace next section
 
 ```
 
-
-### Tags
-
-Additionally it's possible to edit/add tags which is used on speakers and session
-```
-/* Tags colors */
---general: #bdbdbd;
---android: #78c257;
---web: #2196f3;
---cloud: #3f51b5;
---community: #e91e63;
---angular-js: #e0343d;
-... 
-```
+**Tip:** Choose base colors with [Material Palette][Material Palette]  
+![material_design_palette_generator](https://cloud.githubusercontent.com/assets/2954281/17750340/a02f8e76-64ca-11e6-80f0-53392b30f89a.png)
 
 
-### Headers
+### Hero
 
-Color and images for header can be configured via `data/hoverboard.config.json`
-in `pages` object. For instance:
-```
-"pages": {
+Color and images for header can be configured via `data/settings.json`
+in `heroSettings` object:
+```json
+"heroSettings": {
   "home": {
-    "headerSettings": {
-      "backgroundColor": "#03a9f4",
-      "backgroundImage": "/images/backgrounds/home.png",
-      "fontColor": "#fff",
-      "tabBarColor": "#fff"
-    }
+    "description": "Be a hero. Be a GDG!",
+    "background": {
+      "color": "#673ab7",
+      "image": "/images/backgrounds/home.jpg"
+    },
+    "fontColor": "#FFF"
+  },
+  "blog": {
+    "title": "Blog",
+    "metaDescription": "Read stories from our team",
+    "background": {
+      "color": "#FFF"
+    },
+    "fontColor": "#424242"
   },
   ...
  }
@@ -67,13 +60,13 @@ in `pages` object. For instance:
 
 ### Web app
 
-Edit Web app colors in `hoverboard.config.json`
-```
-  "webapp": {
-      "shortName": "DevFest",
-      "themeColor": "#F57C00",
-      "backgroundColor": "#F57C00"
-    }
+Edit Web app colors via `webapp` in `data/settings.json`
+```json
+"webapp": {
+  "shortName": "DevFest",
+  "themeColor": "#F57C00",
+  "backgroundColor": "#F57C00"
+}
 ```
 
 ## Next steps
