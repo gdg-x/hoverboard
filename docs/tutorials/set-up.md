@@ -58,9 +58,10 @@ The diagram below is a brief summary of the directories within the project.
 *   `functions/` directory with Firebase [cloud functions](https://firebase.google.com/docs/functions/) used for notifications, optimizations, saving data, etc.
 *   `gulp-tasks/` contains gulp tasks moved from `gulpfile.js` to make the file cleaner.
 *   `images/` is for static images.
+*   `internals/` contains scripts that helps user to work with the project and it's data ([docs](./firebase-utils.md)).
+*   `node_moduler/` is the place of Node dependencies.
 *   `scripts/` is the place for JS scripts.
-*   `src/` is where you store all of your source code and do all of your
-    development.
+*   `src/` is where you store all of your source code and do all of your development.
 *   `effects/` is where you keep your effects for instance `transparent-scroll.html` that helps to achieve transparent toolbar before the scroll.
 *   `elements/` is where you keep your custom elements.
 *   `pages/` is where you keep your pages' description.
