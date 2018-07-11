@@ -20,7 +20,7 @@ Our goal is to allow event organizers to set up professional conference website 
 |---|---|
 | **Fast and optimized** | 91/100 PWA on [Lighthouse](https://www.webpagetest.org/lighthouse.php?test=180111_1P_027a041bc5102982f074014807320a86&run=3) |
 | **Works offline** | shitty WiFi on the venue is not a problem anymore |
-| **Mobile first** | layouts optimized for small screens, on Android Hoverboard can be installed as a native app |
+| **Mobile first** | layouts optimized for small screens, Hoverboard can be installed as a native app on your phone |
 | **Push notifications** | remind about sessions in My schedule, session feedback or target users with a custom message |
 | **SEO optimized** | index all content and get to the top in search results |
 | **Speakers and schedule management** | keep and update all information in the  Firebase |
@@ -36,7 +36,7 @@ Our goal is to allow event organizers to set up professional conference website 
 1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `firebase login`
 1. Update [Hoverboard config](/config) and [Resources](/data)
 1. Import initial data to the Firebase Database
-    * Generate `serviceAccount.json` file (go to https://console.firebase.google.com/project/%YOUR_PROJECT_ID%/settings/serviceaccounts/adminsdk)
+    * Generate `serviceAccount.json` file
       - Go to https://console.firebase.google.com/project/%YOUR_PROJECT_ID%/settings/serviceaccounts/adminsdk
       - Ensure that **Node.js** is selected and press **GENERATE NEW PRIVATE KEY** 
       - Save the file as `serviceAccount.json` and to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
@@ -84,6 +84,7 @@ The [Getting Started guide](#getting-started) is probably a good first point of 
 ## Technology Stack
 
 * Polymer 2
+* Redux
 * Firebase
 * Service Worker
 * CSS Grid
@@ -91,6 +92,14 @@ The [Getting Started guide](#getting-started) is probably a good first point of 
 ## Contributing
 
 Awesome! Contributions of all kinds are greatly appreciated. To help smoothen the process we have a few non-exhaustive guidelines to follow which should get you going in no time.
+
+### Good First Issue
+
+Issues labeled [`good first issue`](https://github.com/gdg-x/hoverboard/labels/good%20first%20issue) are a great way to ease into development on this project. 
+
+### Help Wanted Label
+
+Any other issue labeled [`help wanted`](https://github.com/gdg-x/hoverboard/labels/help%20wanted) is ready for a PR.
 
 ### Using GitHub Issues
 
