@@ -1,0 +1,161 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="./shared-styles.html">
+<link rel="import" href="./hoverboard-icons.html">
+
+<dom-module id="partners-block">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+    <style>
+
+      :host {
+        display: block;
+      }
+
+      .block-title {
+        margin: 24px 0 8px;
+      }
+
+      .logos-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-gap: 8px;
+      }
+
+      .logo-item {
+        padding: 24px;
+      }
+
+      .logo-img {
+        height: 60px;
+        width: 100%;
+      }
+
+      .cta-button {
+        margin-top: 24px;
+        color: var(--default-primary-color);
+      }
+
+      @media (min-width: 640px) {
+        .logos-wrapper {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      @media (min-width: 812px) {
+        .logos-wrapper {
+          grid-template-columns: repeat(5, 1fr);
+        }
+      }
+
+    </style>
+
+    <div class="container">
+      <h1 class="container-title">{$ partnersBlock.title $}</h1>
+
+      <template is="dom-repeat" items="[[partners]]" as="block">
+          <h4 class="block-title">[[block.title]]</h4>
+          <div class="logos-wrapper">
+            <template is="dom-repeat" items="[[block.items]]" as="logo">
+              <a
+                class="logo-item card"
+                href$="[[logo.url]]"
+                title$="[[logo.name]]"
+                target="_blank"
+                rel="noopener noreferrer"
+                layout horizontal center-center
+              >
+                <plastic-image
+                  class="logo-img"
+                  srcset="[[logo.logoUrl]]"
+                  sizing="contain"
+                  lazy-load
+                  preload fade
+                ></plastic-image>
+              </a>
+            </template>
+          </div>
+      </template>
+
+      <paper-button class="cta-button animated icon-right"
+        on-tap="_addPotentialPartner">
+        <span>{$ partnersBlock.button $}</span>
+        <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+      </paper-button>
+    </div>
+
+  </template>
+
+  <script>
+
+    class PartnersBlock extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'partners-block';
+      }
+
+      static get properties() {
+        return {
+          partners: {
+            type: Array,
+            statePath: 'partners.list',
+          },
+          partnersFetching: {
+            type: Boolean,
+            statePath: 'partners.fetching',
+          },
+          partnersFetchingError: {
+            type: Object,
+            statePath: 'partners.fetchingError',
+          },
+          partnerAdding: {
+            type: Boolean,
+            statePath: 'partners.adding',
+            observer: '_partnerAddingChanged',
+          },
+          partnerAddingError: {
+            type: Object,
+            statePath: 'partners.addingError',
+          },
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        if (!this.partnersFetching && (!this.partners || !this.partners.length)) {
+          this.dispatch(partnersActions.fetchPartners());
+        }
+      }
+
+      _addPotentialPartner() {
+        dialogsActions.openDialog(DIALOGS.SUBSCRIBE, {
+          title: '{$ partnersBlock.form.title $}',
+          submitLabel: '{$ partnersBlock.form.submitLabel $}',
+          firstFieldLabel: '{$ partnersBlock.form.fullName $}',
+          secondFieldLabel: '{$ partnersBlock.form.companyName $}',
+          submit: (data) => {
+            this.dispatch(partnersActions.addPartner(data));
+          },
+        });
+      }
+
+      _partnerAddingChanged(newPartnerAdding, oldPartnerAdding) {
+        if (oldPartnerAdding && !newPartnerAdding) {
+          if (this.partnerAddingError) {
+            this.dispatch(dialogsActions.setDialogError(DIALOGS.SUBSCRIBE));
+          } else {
+            dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
+            toastActions.showToast({ message: '{$ partnersBlock.toast $}' });
+          }
+        }
+      }
+    }
+
+    window.customElements.define(PartnersBlock.is, PartnersBlock);
+  </script>
+</dom-module>

@@ -1,56 +1,32 @@
 # Deploy to Firebase
 
-Firebase is a very simple and secure way to deploy a Hoverboard site. 
-You can sign up for a free account and deploy your application in less than 5 minutes.
+1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): 
+    ```console
+      firebase login
+    ```
 
-The instructions below are based on the [Firebase quick start][Firebase quick start].
-
-1.  [Sign up for a Firebase account][Firebase console]
-
-1.  Install the Firebase command line tools
-
-        npm install -g firebase-tools
-
-    The `-g` flag instructs `npm` to install the package globally so that you
-    can use the `firebase` command from any directory. You may need
-    to install the package with `sudo` privileges.
-
-1.  `cd` into your project directory
-
-1.  Inititalize the Firebase application
-
-        firebase init
-
-    Running the firebase init command creates a firebase.json settings file 
-    in the root of your project directory. Otherwise, go to
-    [Firebase console][Firebase console] to create a new app.
+1.  Build with `/config/development.json`
+    ```console
+      yarn build
+    ```
     
-1.  When you initialize your app, you will be prompted for
-- Database: select
-- Functions: space
-- Hosting: select
-    
-    Select a directory to use as the public root (default is "public"). 
-    Enter `build` contains everything your application needs to run. 
-
-1.  Edit firebase.json, change firebase name, and add `rewrites` section 
-([see example firebase.json](/docs/firebase.json)).
-
-1.  Build
-
-        npm run build
+    or with `/config/production.json`
+    ```console
+      yarn build:prod
+    ```
 
 1.  Deploy
+    ```console
+      firebase deploy
+    ```
 
-        firebase deploy
-
-    The URL to your live site is listed in the output.
+The URL to your live site is listed in the output.
     
 
 ### Continuous integration with Travis CI
 In the root folder you can find [.travis.yml](/.travis.yml) which configures
 [Travis CI][Travis CI] build and deployment on Firebase hosting:
-```
+```yaml
 ... 
  - provider: firebase
    skip_cleanup: true
@@ -64,37 +40,48 @@ In the root folder you can find [.travis.yml](/.travis.yml) which configures
 To generate secure do next steps:
 
 1. Login into Firebase console
-
-        firebase login:ci
+    ```console
+      firebase login:ci
+    ```
 
     You will get your token:
-   
+    ```console
         ✔  Success! Use this token to login on a CI server:
 
         1/9YmsNEh87G3cRyt_FXQbsYI_uV4FUMmUBXkbl_CHANGED
-   
+    ```
 1. Install travis tool to encrypt token
-
-        gem install travis
+    ```console
+      gem install travis
+    ```
         
 1. Login into your account
-
-        travis login --auto
+    ```console
+      travis login --auto
+    ```
         
 1. Encrypt your token
-
-        travis encrypt "1/9YmsNEh87G3cRyt_FXQbsYI_uV4FUMmUBXkbl_CHANGED"
+    ```console
+      travis encrypt "1/9YmsNEh87G3cRyt_FXQbsYI_uV4FUMmUBXkbl_CHANGED"
+    ```
 
     Approximate output:
-  
-        secure: "cioDQ571EZpnuGiDn7ofvEghNFP82vz7N+SqIL5ZjOK0CBgaWO3OoePoh1eO1dvIsdLDr7yNs5kBIx8NIuOqUA9YLyIIasC7ah1QLtiK5zRVaCcgwt4aBqRLKJVbXPl08MIyk9GFYl2+J+oLOzoEOnVUuCpUcGYWdmDRTKis5KP6naK1msRmTu5ymQn55cyxpmSZS2F+iEsAgV7d0/h+HGgPPd77M26j8wV9JEFJp3iMhudaCkWdoBf9z9WP0cpPzTHgSHEU/Mski4oMfU1BqCFRiaKfcw/uLzMcTpjcf+YG2dc3qTMcuBNKNvhANnaYrxePtuW1VWb+xl19qVQWrsGpQgyWIbp+icSXF3KGR1wfNrC9zNQWKm112BckYn6id8w4M3JeRdWRaCwWitG9C5CWQ3ZepPpgBu2SYSfZQg5heIbVSYOgbXUfeR8ByJqyAGCrYrB3lyyR49cr+GAnILbOgxE7FRYuHmagLD+xa8cHUFcZUu6CxgrhOFa+28Lvrtvod1WqbIioZfhWRcdIZNdJxR4gxXaGycp5n0qjJ0o1VDFAUcy93ImYyVZFY+OmqfVLFQChAD9NnPT1a0v3gHYR3IMd5aXXtbOo9e6cAjuXU/NQCry10Y0bNiMKkHbvnj3aGfAWlA34CRj3iOK2Nz1udDwBMdUKsgt1xiVh3h8="
+    ```console
+      secure: "cioDQ571EZpnuGiDn7ofvEghNFP82vz7N+SqIL5ZjOK0CBgaWO3OoePoh1eO1dvIsdLDr7yNs5kBIx8NIuOqUA9YLyIIasC7ah1QLtiK5zRVaCcgwt4aBqRLKJVbXPl08MIyk9GFYl2+J+oLOzoEOnVUuCpUcGYWdmDRTKis5KP6naK1msRmTu5ymQn55cyxpmSZS2F+iEsAgV7d0/h+HGgPPd77M26j8wV9JEFJp3iMhudaCkWdoBf9z9WP0cpPzTHgSHEU/Mski4oMfU1BqCFRiaKfcw/uLzMcTpjcf+YG2dc3qTMcuBNKNvhANnaYrxePtuW1VWb+xl19qVQWrsGpQgyWIbp+icSXF3KGR1wfNrC9zNQWKm112BckYn6id8w4M3JeRdWRaCwWitG9C5CWQ3ZepPpgBu2SYSfZQg5heIbVSYOgbXUfeR8ByJqyAGCrYrB3lyyR49cr+GAnILbOgxE7FRYuHmagLD+xa8cHUFcZUu6CxgrhOFa+28Lvrtvod1WqbIioZfhWRcdIZNdJxR4gxXaGycp5n0qjJ0o1VDFAUcy93ImYyVZFY+OmqfVLFQChAD9NnPT1a0v3gHYR3IMd5aXXtbOo9e6cAjuXU/NQCry10Y0bNiMKkHbvnj3aGfAWlA34CRj3iOK2Nz1udDwBMdUKsgt1xiVh3h8="
+    ```
 
 1. Replace generated encrypted token with existing one
 
-1. Push to a branch
+1. **Tip:** deploy different builds depending on the branch:
+    ```yaml
+      script:
+       - yarn lint
+       - echo "Building..."
+       - if [ "$TRAVIS_BRANCH" == "develop" ]; then yarn build; fi
+       - if [ "$TRAVIS_BRANCH" == "master" ]; then yarn build:prod; fi
+    ```
+1. Push to a repository
 
 1. Enjoy
 
-[Firebase quick start]: https://firebase.google.com/docs/hosting/quickstart
-[Firebase console]: https://firebase.google.com/console/
 [Travis CI]: https://travis-ci.com/

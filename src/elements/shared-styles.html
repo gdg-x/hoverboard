@@ -1,0 +1,230 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="./flex-layout-attr.html">
+
+<!-- shared styles for all views -->
+<dom-module id="shared-styles">
+  <template>
+    <style>
+      :host {
+        --dark-primary-color: #512DA8;
+        --default-primary-color: #673AB7;
+        --focused-color: #311B92;
+        --light-primary-color: #D1C4E9;
+        --text-primary-color: #FFFFFF;
+        --accent-color: #FF5252;
+        --primary-background-color: #FFFFFF;
+        --primary-text-color: #424242;
+        --secondary-text-color: #757575;
+        --disabled-text-color: #BDBDBD;
+        --divider-color: #EDEDED;
+        --footer-background-color: #F5F5F5;
+        --footer-text-color: #616161;
+        --gplus-color: #DF312D;
+        --twitter-color: #4099FF;
+        --facebook-color: #3B5998;
+        --border-light-color: #E2E2E2;
+        --error-color: #e64a19;
+
+        /* Custom */
+        --default-background-color: #FFFFFF;
+        --secondary-background-color: #F5F5F5;
+        --additional-background-color: #f7f7f7;
+        --contrast-additional-background-color: #e8e8e8;
+        --animation: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        --slideAnimation: 0.4s cubic-bezier(0, 0, 0.2, 1);
+        --border-radius: 5px;
+        --box-shadow: 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12);
+        --box-shadow-primary-color: 0 3px 3px -2px rgba(103, 58, 183, 0.3), 0 3px 4px 0 rgba(103, 58, 183, 0.3), 0 1px 8px 0 rgba(103, 58, 183, 0.3);
+        --box-shadow-primary-color-hover: 0 1px 3px -2px rgba(103, 58, 183, 0.4), 0 4px 5px 0 rgba(103, 58, 183, 0.4), 0 2px 9px 0 rgba(103, 58, 183, 0.4);
+        --font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif; /*TODO Change to Open Sans*/
+        --max-container-width: 1280px;
+
+        --primary-color-transparent: rgba(103, 58, 183, 0.1);
+        --primary-color-light: rgba(103, 58, 183, 0.8);
+        --primary-color-white: #EDE7F6;
+
+        /* Labels */
+        --gde: #3d5afe;
+        --wtm: #1de9b6;
+        --gdg: #00B0ff;
+
+        /* Tags */
+        --general: #9E9E9E;
+        --android: #78c257;
+        --web: #2196f3;
+        --cloud: #3f51b5;
+        --community: #e91e63;
+        --design: #E91E63;
+      }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body {
+        font-family: var(--font-family);
+        text-rendering: optimizeLegibility;
+        color: var(--primary-text-color);
+      }
+
+      .highlight-font {
+        font-family: "Product Sans", arial, sans-serif;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 0;
+        font-family: "Product Sans", arial, sans-serif;
+        font-weight: normal;
+      }
+
+      h1 {
+        padding: 8px 8px 24px 14px;
+        font-size: 24px;
+        line-height: 30px;
+        font-weight: 500;
+      }
+
+      a {
+        color: var(--default-primary-color);
+        text-decoration: none;
+        transition: border-color var(--animation);
+      }
+
+      paper-button {
+        padding: 0.7em;
+        border-radius: 2px;
+        font-size: 14px;
+        color: var(--default-primary-color);
+        transition: background-color var(--animation);
+      }
+
+      paper-button:hover {
+        background-color: var(--primary-color-transparent);
+      }
+
+      paper-button[disabled] {
+        cursor: default;
+        background-color: var(--primary-color-transparent);
+        opacity: 0.8;
+      }
+
+      paper-button[primary] {
+        background-color: var(--default-primary-color);
+        color: var(--text-primary-color);
+      }
+
+      paper-button[primary]:hover {
+        background-color: var(--primary-color-light);
+      }
+
+      paper-button[primary][invert] {
+        color: var(--default-primary-color);
+        background-color: var(--text-primary-color);
+      }
+
+      paper-button[primary][invert]:hover {
+        background-color: var(--primary-color-white);
+      }
+
+      paper-button[primary-text] {
+        color: var(--default-primary-color);
+      }
+
+      paper-button iron-icon {
+        --iron-icon-height: 20px;
+        --iron-icon-width: 20px;
+      }
+
+      paper-button.icon-right iron-icon {
+        margin-left: 8px;
+      }
+
+      paper-button.icon-left iron-icon {
+        margin-right: 8px;
+      }
+
+      paper-button.animated iron-icon {
+        transition: transform var(--animation);
+      }
+
+      paper-button.animated.icon-right:hover iron-icon {
+        transform: translateX(4px);
+      }
+
+      paper-button.animated.icon-left:hover iron-icon {
+        transform: translateX(-4px);
+      }
+
+      .container,
+      .container-narrow {
+        margin: 0 auto;
+        padding: 24px 16px;
+        max-width: var(--max-container-width);
+      }
+
+      .container-narrow {
+        max-width: 800px;
+      }
+
+      .container-title {
+        margin-bottom: 24px;
+        padding: 0;
+        font-size: 32px;
+        line-height: 30px;
+      }
+
+      .big-icon {
+        --iron-icon-height: 48px;
+        --iron-icon-width: 48px;
+      }
+
+      .gde-b {
+        background-color: var(--gde);
+      }
+
+      .wtm-b {
+        background-color: var(--wtm);
+      }
+
+      .gdg-b {
+        background-color: var(--gdg);
+      }
+
+      .card {
+        background-color: var(--default-background-color);
+        box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.07), 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+        transition: box-shadow var(--animation);
+        cursor: pointer;
+      }
+
+      .tag {
+        margin-right: 2px;
+        padding: 2px 4px;
+        font-size: 12px;
+        border: 1px solid currentColor;
+      }
+
+      @media (min-width: 640px) {
+        .container,
+        .container-narrow {
+          padding: 32px;
+        }
+
+        .card:hover {
+          box-shadow: var(--box-shadow);
+        }
+      }
+
+    </style>
+  </template>
+</dom-module>

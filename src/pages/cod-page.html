@@ -1,84 +1,57 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
-
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
-
-<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../../bower_components/paper-material/paper-material.html">
-
-<link rel="import" href="../../bower_components/marked-element/marked-element.html">
-
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../elements/polymer-helmet.html">
+<link rel="import" href="../elements/hero-block.html">
 <link rel="import" href="../elements/footer-block.html">
-<link rel="import" href="../behaviors/page-behavior.html">
-<link rel="import" href="../behaviors/cascaded-behavior.html">
-
+<link rel="import" href="../elements/md-content.html">
 
 <dom-module id="cod-page">
-
   <template>
-
-    <style include="shared-styles">
+    <style>
       :host {
         display: block;
       }
-
-      .details {
-        @apply(--layout-vertical);
-        @apply(--layout-center-justified);
-      }
-
-      .details-item {
-        @apply(--layout-horizontal);
-        margin: 0 auto;
-        padding-bottom: 32px;
-      }
-
-      @media (min-width: 1600px) {
-        .container {
-          max-width: 960px;
-        }
-      }
     </style>
 
-    <iron-ajax auto id="ajax" url="[[source]]" handle-as="text" on-response="updateCascadedNodes" last-response="{{cod}}"></iron-ajax>
+    <polymer-helmet
+      title="{$ heroSettings.cod.title $} | {$ title $}"
+      description="{$ heroSettings.cod.metaDescription $}"
+      active="[[active]]"
+    ></polymer-helmet>
 
-    <div class="container">
-      <div class="details">
-        <div class="details-item" cascaded>
-          <marked-element markdown="[[cod]]">
-            <div class="markdown-html"></div>
-          </marked-element>
-        </div>
-      </div>
-    </div>
+    <hero-block
+      background-image="{$ heroSettings.cod.background.image $}"
+      background-color="{$ heroSettings.cod.background.color $}"
+      font-color="{$ heroSettings.cod.fontColor $}"
+      active="[[active]]"
+    >
+      <div class="hero-title highlight-font">{$ heroSettings.cod.title $}</div>
+      <p class="hero-description">{$ heroSettings.cod.description $}</p>
+    </hero-block>
 
-    <footer-block app="{{app}}" cascaded></footer-block>
+    <md-content md-source="[[source]]"></md-content>
 
+    <footer-block></footer-block>
   </template>
 
   <script>
-    (function () {
-      'use strict';
 
-      Polymer({
+    // eslint-disable-next-line no-undef
+    class CodPage extends Polymer.Element {
+      static get is() {
+        return 'cod-page';
+      }
 
-        is: 'cod-page',
-
-        behaviors: [
-          HOVERBOARD.PageBehavior,
-          HOVERBOARD.CascadedBehavior
-        ],
-
-        properties: {
+      static get properties() {
+        return {
+          active: Boolean,
           source: {
             type: String,
-            value: 'data/posts/code-of-conduct.markdown'
-          }
-        }
+            value: '{$ cod $}',
+          },
+        };
+      }
+    }
 
-      });
-
-    })();
+    window.customElements.define(CodPage.is, CodPage);
   </script>
-
 </dom-module>
