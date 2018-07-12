@@ -12,7 +12,7 @@ script:
 - yarn lint
 - echo "Building..."
 - if [ "$TRAVIS_BRANCH" == "develop" ]; then yarn build; fi
-- if [ "$TRAVIS_BRANCH" == "hoverboard-v2" ]; then yarn build:prod; fi
+- if [ "$TRAVIS_BRANCH" == "master" ]; then yarn build:prod; fi
 before_deploy:
 - echo "Deploying!"
 deploy:
@@ -30,10 +30,3 @@ deploy:
   project: hoverboard-dev
   token:
     secure: Quq/Ys1GKDYFjqMCD107saKj005L0RaM7Ian9yLIW/er4KdMzwjYw7TVXmtMeJPIfEy/e2/4WJ63K1SaXieBoFndoUcpGWqPOoTrnkkj5K7tzeZKM32XqIarF+BNmOoqW5M7+kuN8L7N3RLp00ywFDOgKgiZJeoaDV6sIRRAIFVh+xHWabVWpFCwCUSeBZpufOsZhMXkicyRe0XhMmkUvS1P5CI3AyZZdIfWG+sguFsPOWRjMFKWrbnsilDFDjf7N0Wd8Z1H2Z0LBn/V00bNb95MSIuOhkdk3a1wP0P5Eollet+Y8g+NpdWyFq0/C+6+ECvFLBjtvbtMY1BVfdxkCo5XlogZx31OmkMWVX6PXOD5Va8aFoJnwvjovUT8oZbSCWEuyMxI91jDsLxXZt542MNfUfQ1Q2+SpUShdcRlwoV2c/XOYvme95HnI1LSqzLubooKWxz8wpa/aovkdZbum54t/z5nA54AXN1lYKsi+hcAFHOeucqd/kHOLG0bx05Ev86wcvNH8qGx+v7S644YH37No7PGnKU3g3Jq/m6quo1B/bMEIaatVnR40D301wAi8tsNWnqEdWFKnAlGrTIDd1qek9OHnApmgBQI8o0FOy6WbzLMwl9PnMl+t+wew/ggSY0IdWhjFWR/S1d6xML8cYHXHVpE0wxkat5ETbIYXlg=
-- provider: firebase
-  skip_cleanup: true
-  on:
-    branch: hoverboard-v2
-  project: hoverboard-v2-dev
-  token:
-    secure: QQlKbdfP/hmlbLceLitaZCRNGP6yuFZflPGXA2N3ALy3UpVitOu7DCSX5XAmlTFYuhHAcA9ayIl7FpyKyWWD4pg/2k4x4MOWfZgty7SHv1HW/K5PKfpsVQAkd8w+aMkqtpH+W4SXqFOUOjK1li9c/pdYtyKyQm+ENfBbHdsq2Z9fqXz8iZ1J0Uz9EegL6HWlfhSU3XLM9uVbkdzz51Z1RPNDcoZ8lsLHJGmVVFO+qZga/Sz1UcSIS7/k6c180/BJ3P4p3Trmv1LX2BtDBhF7VkaAV3xR83XB6P89IGjU81UxcqWYSP5X6ybaw4/itwpQ1AU4b7VLjewP+3R8jY76BxCBU9I3p0zfpyOYf78jmQntXPC13xPyHuD4w6BZns13nPGX35GrlsqZP6ImaoyKk77E0/M7L6mIogjSR03wpNIXdLKXwiV8PnfesNOVQS5NYf+9aKommYtIZJUEplZz9fhaMfDlvq4UZuRnbc0oUBGb4/ZIqASIREI0bJpDliEGHSDfdxdfEM2orFcRkc8MKV6RTOB6B3hGWIl76JeNBbLS81jCysLBRzyofE32mR7lOWc6a92NtKyfa8oEqCTIQ8YP7d9+OU0z2f+kZJL9hXbXtpBcUt1aFmx7uZDIqfAFB4nlNOIvptN8w2su+pE7Ed2ngkSY32Vs8YNb9QaP0+M=
