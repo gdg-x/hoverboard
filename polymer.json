@@ -2,24 +2,42 @@
   "entrypoint": "index.html",
   "shell": "src/hoverboard-app.html",
   "fragments": [
-    "src/pages/blog-list.html",
+    "src/pages/blog-list-page.html",
     "src/pages/blog-page.html",
-    "src/pages/cod-page.html",
+    "src/pages/home-page.html",
     "src/pages/post-page.html",
     "src/pages/schedule-page.html",
     "src/pages/speakers-page.html",
-    "src/pages/team-page.html"
+    "src/pages/previous-speakers-page.html",
+    "src/pages/team-page.html",
+    "src/pages/faq-page.html",
+    "src/lazy-resources.html"
   ],
   "sources": [
     "data/**/*",
     "images/**/*",
     "scripts/**/*",
     "src/**/*",
-    "bower.json",
-    "manifest.json"
+    "manifest.json",
+    "firebase-messaging-sw.js"
   ],
   "extraDependencies": [
-    "bower_components/webcomponentsjs/webcomponents-lite.min.js",
-    "bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror-worker.js"
-  ]
+    "bower_components/webcomponentsjs/webcomponents-*.js",
+    "bower_components/iron-dropdown/iron-dropdown-scroll-manager.html",
+    "bower_components/firebase/*.js",
+    "bower_components/plastic-image/intersection-observer.js",
+    "node_modules/redux/dist/redux.min.js",
+    "node_modules/autotrack/autotrack.js"
+  ],
+  "lint": {
+    "rules": ["polymer-2"]
+  },
+  "builds": [{
+    "bundle": true,
+    "insertPrefetchLinks": true,
+    "addServiceWorker": true,
+    "js": {"minify": true},
+    "css": {"minify": true},
+    "html": {"minify": true}
+  }]
 }
