@@ -117,7 +117,7 @@ Any other issue labeled [`help wanted`](https://github.com/gdg-x/hoverboard/labe
 
 ## Code of Conduct
 
-Read the full version [Code of Conduct](/docs/tutorials/Code-of-Conduct.md).
+Read the full version [Code of Conduct](/CODE_OF_CONDUCT.md).
 
 ## Contributors
 __Maintainer:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
