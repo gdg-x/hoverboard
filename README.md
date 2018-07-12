@@ -2,7 +2,7 @@
 <img width="720px" src="https://user-images.githubusercontent.com/2954281/39627047-0ced461a-4fad-11e8-84bb-65e8f090d67d.png">
 </p>
 <p align="center">
-<a href="https://hoverboard-v2-dev.firebaseapp.com" align="center">:zap: Live demo</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="https://hoverboard-master.firebaseapp.com" align="center">:zap: Live demo</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 <a href="#getting-started">:rocket: Get Started</a>
 </p>
 
@@ -65,7 +65,7 @@ Here is a git workflow for updating your fork (or downloaded copy) to the latest
 ```console
 git remote add upstream https://github.com/gdg-x/hoverboard.git
 git fetch upstream
-git merge upstream/hoverboard-v2
+git merge upstream/hoverboard
 # resolve the merge conflicts in your editor
 git add . -u
 git commit -m 'Updated to the latest version'
