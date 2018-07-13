@@ -1,5 +1,5 @@
 <p align="center">
-<img width="720px" src="https://user-images.githubusercontent.com/2954281/39627047-0ced461a-4fad-11e8-84bb-65e8f090d67d.png">
+<img width="800px" src="https://user-images.githubusercontent.com/2954281/42683571-55ba6be6-8696-11e8-8ff7-e9acd0db63e8.png">
 </p>
 <p align="center">
 <a href="https://hoverboard-master.firebaseapp.com" align="center">:zap: Live demo</a>&nbsp;&nbsp;|&nbsp;&nbsp;
