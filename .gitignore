@@ -8,3 +8,4 @@ functions/lib/
 .vscode/
 .firebaserc
 /appengine/dist/
+serviceAccount.json
