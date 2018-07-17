@@ -68,8 +68,8 @@
             on-tap="_toggleFeaturedSession"
           ></paper-fab>
         </div>
-        <h3 class="meta-info">[[session.dateReadable]], [[session.startTime]] - [[session.endTime]]</h3>
-        <h3 class="meta-info">[[session.track.title]]</h3>
+        <h3 class="meta-info" hidden$="[[disabledSchedule]]">[[session.dateReadable]], [[session.startTime]] - [[session.endTime]]</h3>
+        <h3 class="meta-info" hidden$="[[disabledSchedule]]">[[session.track.title]]</h3>
         <h3 class="meta-info" hidden$="[[!session.complexity]]">{$ sessionDetails.contentLevel $}:
           [[session.complexity]]</h3>
 
@@ -103,7 +103,7 @@
         <div class="additional-sections" hidden$="[[!session.speakers.length]]">
           <h3>{$ sessionDetails.speakers $}</h3>
 
-          <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
+          <template is="dom-repeat" items="[[_findSpeakers(session.speakers)]]" as="speaker">
             <a href$="/speakers/[[speaker.id]]" class="section">
               <div layout horizontal center>
                 <plastic-image
@@ -138,6 +138,10 @@
 
       static get properties() {
         return {
+          disabledSchedule: {
+            type: Boolean,
+            value: () => JSON.parse('{$ disabledSchedule $}'),
+          },
           session: {
             type: Object,
           },
@@ -209,6 +213,13 @@
 
       _getFeaturedSessionIcon(featuredSessions, sessionId) {
         return featuredSessions && featuredSessions[sessionId] ? 'bookmark-check' : 'bookmark-plus';
+      }
+
+      _findSpeakers(speakers) {
+        if (speakers && typeof speakers[0] !== 'object') {
+          return speakers.map((speakerId) => this.speakersMap[speakerId]);
+        }
+        return speakers;
       }
     }
 
