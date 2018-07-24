@@ -6,11 +6,12 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "babel src --out-dir dist --source-maps",
-    "postbuild": "cp ../build/index.html dist/"
+    "postbuild": "cpx ../build/index.html dist/"
   },
   "dependencies": {
     "@google-cloud/storage": "^1.6.0",
     "child-process-promise": "^2.2.1",
+    "cpx": "^1.5.0",
     "express": "^4.16.3",
     "firebase-admin": "^5.12.0",
     "firebase-functions": "^1.0.1",
@@ -20,10 +21,10 @@
     "node-fetch": "^2.1.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.44",
-    "@babel/core": "^7.0.0-beta.44",
-    "@babel/preset-env": "^7.0.0-beta.44",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.44",
+    "@babel/cli": "^7.0.0-beta.54",
+    "@babel/core": "^7.0.0-beta.54",
+    "@babel/preset-env": "^7.0.0-beta.54",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.54",
     "rimraf": "^2.6.2"
   }
 }
