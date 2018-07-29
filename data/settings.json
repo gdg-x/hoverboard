@@ -1,12 +1,12 @@
 {
   "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv",
-    "blog": "https://medium.com/gdg-lviv",
-    "url": "http://lviv.gdg.org.ua/"
+    "name": "GDG Wroclaw",
+    "twitter": "gdgwroclaw",
+    "blog": "wroclaw",
+    "url": "https://www.facebook.com/gdgwroclaw/"
   },
-  "startDate": "2017-10-013T09:00:00+03:00",
-  "endDate": "2017-10-14T19:00:00+03:00",
+  "startDate": "2018-10-22T09:00:00+03:00",
+  "endDate": "2018-10-23T19:00:00+03:00",
   "webapp": {
     "shortName": "DevFest",
     "themeColor": "#673AB7",
@@ -15,7 +15,7 @@
   "dateFormat": {
     "locale": "en-US"
   },
-  "hashtag": "DevFest17",
+  "hashtag": "DevFest18",
   "disabledSchedule": false,
   "navigation": [
     {
@@ -26,12 +26,14 @@
     {
       "route": "speakers",
       "permalink": "/speakers/",
-      "label": "Speakers"
+      "label": "Speakers",
+      "status": "disabled"
     },
     {
       "route": "schedule",
       "permalink": "/schedule/",
-      "label": "Schedule"
+      "label": "Schedule",
+      "status": "disabled"
     },
     {
       "route": "team",
@@ -41,7 +43,8 @@
     {
       "route": "blog",
       "permalink": "/blog/",
-      "label": "Blog"
+      "label": "Blog",
+      "status": "disabled"
     }
   ],
   "heroSettings": {
@@ -113,20 +116,20 @@
   },
   "location": {
     "label": "Location",
-    "name": "Planeta kino",
-    "city": "Lviv",
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "name": "ibis Styles Wrocław",
+    "city": "Wrocław",
+    "short": "Wrocław, Poland",
+    "address": "plac Konstytucji 3 Maja 3, 50-083 Wrocław",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 5
+      "latitude": 51.0994166,
+      "longitude": 17.0401047,
+      "zoom": 6
     },
     "mapCenter": {
       "latitude": 48,
       "longitude": 8
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": "Set in a glass-sided tower, this contemporary hotel is a 5-minute walk from Wrocław Główny train station and 2 km from the medieval Market Square."
   },
   "mediaQueries": {
     "xs": {
@@ -148,19 +151,15 @@
     "follow": [
       {
         "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
-      },
-      {
-        "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
+        "url": "https://www.facebook.com/events/2156621857903104/"
       },
       {
         "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
+        "url": "https://www.instagram.com/"
       },
       {
         "name": "youtube",
-        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "url": "https://www.youtube.com/"
       }
     ],
     "share": [
@@ -178,10 +177,10 @@
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
+  "mailto": "#",
   "mailchimp": {
-    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
-    "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
+    "url": "https://devfest.us18.list-manage.com/subscribe/post?u=0f59847babaf7af8430f18dbb&amp;id=6899ae3952",
+    "name": "b_0f59847babaf7af8430f18dbb_6899ae3952"
   },
   "signInProviders": {
     "providersData": [

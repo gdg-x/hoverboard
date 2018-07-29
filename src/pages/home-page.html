@@ -33,7 +33,6 @@
 
       .hero-logo {
         --iron-image-width: 100%;
-        max-width: 240px;
       }
 
       .info-items {
@@ -118,7 +117,7 @@
         }
 
         .hero-logo {
-          max-width: 320px;
+          max-width: 650px;
         }
 
         .info-items {
@@ -140,14 +139,15 @@
       hide-logo
     >
       <div class="home-content" layout vertical center>
-        <plastic-image class="hero-logo" srcset="/images/logo.svg" alt="{$ title $}"></plastic-image>
+        <plastic-image class="hero-logo" srcset="/images/logoDevFest.png" alt="{$ title $}"></plastic-image>
         <div class="info-items highlight-font">
-          <div class="info-item">{$ location.city $}. {$ dates $}</div>
+          <div class="info-item">{$ dates $}</div>
           <div class="info-item">{$ heroSettings.home.description $}</div>
         </div>
 
 
         <div class="action-buttons" layout horizontal center-justified wrap>
+<!--
           <paper-button
             on-tap="_playVideo"
             ga-on="click"
@@ -158,13 +158,14 @@
             <iron-icon icon="hoverboard:movie"></iron-icon>
             {$ viewHighlights $}
           </paper-button>
+-->
           <paper-button
             on-tap="_scrollToTickets"
             ga-on="click"
             ga-event-category="tickets"
             ga-event-action="scroll"
             ga-event-label="hero block - scroll to tickets"
-            primary invert
+            primary invert disabled
           >
             <iron-icon icon="hoverboard:ticket"></iron-icon>
             {$ buyTicket $}
@@ -181,13 +182,13 @@
       </div>
     </hero-block>
     <about-block></about-block>
-    <speakers-block></speakers-block>
+<!--    <speakers-block></speakers-block>-->
     <subscribe-block></subscribe-block>
-    <tickets-block></tickets-block>
-    <gallery-block></gallery-block>
+<!--    <tickets-block></tickets-block>-->
+<!--    <gallery-block></gallery-block>-->
     <about-organizer-block></about-organizer-block>
-    <featured-videos></featured-videos>
-    <latest-posts-block></latest-posts-block>
+<!--    <featured-videos></featured-videos>-->
+    <!--<latest-posts-block></latest-posts-block>-->
     <map-block></map-block>
     <partners-block></partners-block>
     <footer-block></footer-block>

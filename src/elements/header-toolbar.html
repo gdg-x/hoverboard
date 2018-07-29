@@ -123,6 +123,13 @@
         }
       }
 
+    paper-tab[aria-disabled="true"] {
+        color: gray;
+        display: inline-block;  /* For IE11/ MS Edge bug */
+        pointer-events: none;
+        text-decoration: none;
+    }
+
     </style>
 
     <app-toolbar class="header">
@@ -147,16 +154,16 @@
         noink
       >
         {% for nav in navigation %}
-        <paper-tab name="{$ nav.route $}" class="nav-item" link>
+        <paper-tab name="{$ nav.route $}" class="nav-item" link {$ nav.status $} >
           <a href="{$ nav.permalink $}" layout vertical center-center>{$ nav.label $}</a>
         </paper-tab>
         {% endfor %}
 
         <paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]">{$ signIn $}</paper-tab>
 
-        <a href$="[[_getTicketUrl(tickets)]]" target="_blank" rel="noopener noreferrer" ga-on="click"
+        <a href$="[[_getTicketUrl(tickets)]]" rel="noopener noreferrer" ga-on="click"
            ga-event-category="ticket button" ga-event-action="buy_click">
-          <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>
+          <paper-button class="buy-button" primary disabled>{$ buyTicket $}</paper-button>
         </a>
       </paper-tabs>
 
