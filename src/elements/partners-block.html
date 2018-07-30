@@ -59,7 +59,7 @@
     <div class="container">
       <h1 class="container-title">{$ partnersBlock.title $}</h1>
 
-      <template is="dom-repeat" items="[[partners]]" as="block">
+      <template is="dom-repeat" items="[[partners]]" as="block" filter="isNotEmpty">
           <h4 class="block-title">[[block.title]]</h4>
           <div class="logos-wrapper">
             <template is="dom-repeat" items="[[block.items]]" as="logo">
@@ -130,6 +130,10 @@
         if (!this.partnersFetching && (!this.partners || !this.partners.length)) {
           this.dispatch(partnersActions.fetchPartners());
         }
+      }
+
+      isNotEmpty(item) {
+        return item.items.length > 0;
       }
 
       _addPotentialPartner() {
