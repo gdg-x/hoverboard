@@ -123,7 +123,7 @@
     "pointer": {
       "latitude": 51.0994166,
       "longitude": 17.0401047,
-      "zoom": 6
+      "zoom": 5
     },
     "mapCenter": {
       "latitude": 48,
@@ -158,8 +158,8 @@
         "url": "https://www.instagram.com/"
       },
       {
-        "name": "youtube",
-        "url": "https://www.youtube.com/"
+        "name": "twitter",
+        "url": "https://twitter.com/devfest_wro"
       }
     ],
     "share": [
@@ -177,7 +177,7 @@
       }
     ]
   },
-  "mailto": "#",
+  "mailto": "wroclawgdg@gmail.com?subject=DevFest Poland in Wroclaw",
   "mailchimp": {
     "url": "https://devfest.us18.list-manage.com/subscribe/post?u=0f59847babaf7af8430f18dbb&amp;id=6899ae3952",
     "name": "b_0f59847babaf7af8430f18dbb_6899ae3952"
