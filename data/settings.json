@@ -40,6 +40,12 @@
       "permalink": "/team/",
       "label": "Team",
       "status": "disabled"
+    },
+    {
+      "route": "C4P",
+      "permalink": "#",
+      "label": "C4P",
+      "status": "disabled"
     }
   ],
   "heroSettings": {
