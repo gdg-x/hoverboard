@@ -169,11 +169,7 @@
     "blocks": [
       {
         "title": "Organizer",
-        "description": "<a href='https://www.facebook.com/gdgwroclaw/' target='_blank'>GDG Wroclaw</a> with support of all Polish GDGs is proud organizer of DevFest Poland",
-        "callToAction": {
-          "label": "Open team page",
-          "link": "/team"
-        }
+        "description": "<a href='https://www.facebook.com/gdgwroclaw/' target='_blank'>GDG Wroclaw</a> with support of all Polish GDGs is proud organizer of DevFest Poland"
       },
       {
         "title": "What is GDG?",

@@ -51,12 +51,12 @@
       <div layout horizontal center-center flex hidden$="[[viewport.isPhone]]">
 
         <a
-          href="/team"
+          href="#"
           class="image-link"
           ga-on="click"
           ga-event-category="link"
           ga-event-action="open"
-          ga-event-label="open team page"
+          ga-event-label="open teamen page"
         >
           <plastic-image
             class="organizers-photo card"
@@ -75,6 +75,7 @@
           <marked-element class="description" markdown="{$ block.description $}">
             <div slot="markdown-html"></div>
           </marked-element>
+          {% if block.callToAction %}
           <a
             href="{$ block.callToAction.link $}"
             {% if block.callToAction.newTab %}
@@ -86,6 +87,7 @@
               <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
             </paper-button>
           </a>
+          {% endif %}
         </div>
         {% endfor %}
       </div>
