@@ -38,6 +38,7 @@
     "toastActions": true,
     "ticketsActions": true,
     "partnersActions": true,
+    "sponsorsActions": true,
     "videosActions": true,
     "blogActions": true,
     "speakersActions": true,

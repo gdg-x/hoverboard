@@ -7,7 +7,6 @@
     <style is="custom-style" include="shared-styles flex flex-alignment"></style>
 
     <style>
-
       :host {
         margin: 0 20px;
       }
@@ -29,8 +28,8 @@
 
       .footer-logo {
         margin: 10px 30px 0 0;
-        height: 24px;
-        width: 120px;
+        height: 50px;
+        width: 200px;
         float: left;
       }
 
@@ -67,19 +66,15 @@
 
     <div class="nav-inline" layout flex>
 
-      <a href="{$ organizer.url $}" target="_blank" rel="noopener noreferrer">
-        <plastic-image
-          class="footer-logo"
-          srcset="../../images/logos/gdg-wroclaw.png"
-          sizing="contain"
-          alt="{$ organizer.name $}"
-          lazy-load
-        ></plastic-image>
+      <a href="" target="_blank" rel="noopener noreferrer">
+        <plastic-image class="footer-logo" srcset="../../images/logos/logo_dark.svg" sizing="contain" alt="{$ organizer.name $}"
+          lazy-load></plastic-image>
       </a>
 
       <div class="copyright">
-        &copy; [[_getYear()]] Based on <a href="https://github.com/gdg-x/hoverboard" target="_blank" rel="noopener noreferrer">Project
-        Hoverboard</a>
+        &copy; [[_getYear()]] Based on
+        <a href="https://github.com/gdg-x/hoverboard" target="_blank" rel="noopener noreferrer">Project Hoverboard
+        </a>
 
       </div>
     </div>
@@ -103,4 +98,3 @@
 
   </script>
 </dom-module>
-

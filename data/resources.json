@@ -2,7 +2,8 @@
   "title": "GDG DevFest Wroclaw 2018",
   "description": "Be a hero. Be a GDG!",
   "image": "images/social-share.jpg",
-  "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
+  "keywords":
+    "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
   "dates": "October 27-28, 2018",
   "partnershipProposition": "https://bit.ly/dfua17-partners",
   "share": "Share",
@@ -50,14 +51,13 @@
     {
       "title": "Event Resources",
       "links": [
-
         {
           "name": "Call for Papers",
           "url": "#",
           "newTab": true
         },
         {
-          "name": "Code ofConduct",
+          "name": "Code of Conduct",
           "url": "/cod/",
           "newTab": true
         },
@@ -75,7 +75,8 @@
     "title": "What you need to know, before you ask.",
     "callToAction": {
       "featuredSessions": {
-        "description": "GDG DevFest Poland 2018 in Wrocław brings together the world class experts in Android, Web and Cloud technologies to Wroclaw for 2 days of sessions, workshops and showcases."
+        "description":
+          "GDG DevFest Poland 2018 in Wrocław brings together the world class experts in Android, Web and Cloud technologies to Wroclaw for 2 days of sessions, workshops and showcases."
       }
     },
     "statisticsBlock": {
@@ -99,7 +100,8 @@
   },
   "ticketsBlock": {
     "title": "Tickets",
-    "ticketsDetails": "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
+    "ticketsDetails":
+      "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
     "soldOut": "You missed it!",
     "notAvailableYet": "Not available yet",
     "save": "Save ${discount}% today"
@@ -114,6 +116,17 @@
       "companyName": "Company Name"
     },
     "toast": "We’ve got your partnership request!"
+  },
+  "sponsorsBlock": {
+    "title": "Sponsors",
+    "button": "Become a sponsor",
+    "form": {
+      "title": "Sponsorship offer available soon.",
+      "submitLabel": "Submit",
+      "fullName": "Full Name",
+      "companyName": "Company Name"
+    },
+    "toast": "We’ve got your sporsors request!"
   },
   "mapBlock": {
     "title": "Location"
@@ -136,7 +149,8 @@
     "toast": "Successfully subscribed!"
   },
   "team": {
-    "description": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Wroclaw](https://www.facebook.com/gdgwroclaw/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Polish audience to boost development of IT."
+    "description":
+      "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Wroclaw](https://www.facebook.com/gdgwroclaw/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Polish audience to boost development of IT."
   },
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"
@@ -158,7 +172,8 @@
     "unsubscribe": "Unsubscribe",
     "enable": {
       "label": "Enable",
-      "link": "https://pushassist.com/knowledgebase/how-to-enable-or-disable-push-notifications-on-chrome-firefox-safari-b/"
+      "link":
+        "https://pushassist.com/knowledgebase/how-to-enable-or-disable-push-notifications-on-chrome-firefox-safari-b/"
     },
     "toast": {
       "title": "Open"
@@ -169,11 +184,13 @@
     "blocks": [
       {
         "title": "Organizer",
-        "description": "<a href='https://www.facebook.com/gdgwroclaw/' target='_blank'>GDG Wroclaw</a> with support of all Polish GDGs is proud organizer of DevFest Poland"
+        "description":
+          "<a href='https://www.facebook.com/gdgwroclaw/' target='_blank'>GDG Wroclaw</a> with support of all Polish GDGs is proud organizer of DevFest Poland"
       },
       {
         "title": "What is GDG?",
-        "description": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion",
+        "description":
+          "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion",
         "callToAction": {
           "label": "Read more",
           "link": "https://developers.google.com/programs/community/gdg/",

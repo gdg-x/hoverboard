@@ -8,7 +8,6 @@
     <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
 
     <style>
-
       :host {
         --iron-icon-fill-color: currentColor;
         display: block;
@@ -27,8 +26,8 @@
       }
 
       :host([transparent]) .toolbar-logo {
-        background-color: var(--hero-logo-color);
-        opacity: var(--hero-logo-opacity, 1);
+        /* background-color: var(--hero-logo-color); */
+        opacity: 1;
       }
 
       app-toolbar {
@@ -38,20 +37,25 @@
         max-width: var(--max-container-width);
       }
 
+      .logo-box {
+        padding-top: 15px;
+      }
+
       .toolbar-logo {
         display: block;
-        width: 150px;
-        height: 32px;
-        background-color: var(--default-primary-color);
-        transition: background-color var(--animation);
-        -webkit-mask: url('/images/logo-monochrome.svg') no-repeat;
+        width: 200px;
+        height: 45px;
+        /* background-color: var(--default-primary-color);
+        transition: background-color var(--animation); */
+        background: url('/images/logos/logo_dark.svg') no-repeat;
       }
 
       .nav-items {
         --paper-tabs-selection-bar-color: var(--default-primary-color);
         --paper-tabs: {
           height: 64px;
-        };
+        }
+        ;
       }
 
       .nav-item a,
@@ -123,38 +127,27 @@
         }
       }
 
-    paper-tab[aria-disabled="true"] {
+      paper-tab[aria-disabled="true"] {
         color: gray;
-        display: inline-block;  /* For IE11/ MS Edge bug */
+        display: inline-block;
+        /* For IE11/ MS Edge bug */
         pointer-events: none;
         text-decoration: none;
-    }
-
+      }
     </style>
 
     <app-toolbar class="header">
       <div>
-        <paper-icon-button
-          icon="hoverboard:menu"
-          hidden$="[[viewport.isLaptopPlus]]"
-          aria-label="menu"
-          on-tap="openDrawer"
-        ></paper-icon-button>
+        <paper-icon-button icon="hoverboard:menu" hidden$="[[viewport.isLaptopPlus]]" aria-label="menu" on-tap="openDrawer"></paper-icon-button>
       </div>
-      <div layout horizontal center flex>
+      <div layout horizontal center flex class="logo-box">
         <a class="toolbar-logo" href="/" hidden$="[[!viewport.isLaptopPlus]]" layout horizontal title="{$ title $}"></a>
       </div>
 
-      <paper-tabs
-        class="nav-items"
-        selected="[[route.route]]"
-        attr-for-selected="name"
-        hidden$="[[!viewport.isLaptopPlus]]"
-        role="navigation"
-        noink
-      >
+      <paper-tabs class="nav-items" selected="[[route.route]]" attr-for-selected="name" hidden$="[[!viewport.isLaptopPlus]]" role="navigation"
+        noink>
         {% for nav in navigation %}
-        <paper-tab name="{$ nav.route $}" class="nav-item" link {$ nav.status $} >
+        <paper-tab name="{$ nav.route $}" class="nav-item" link {$ nav.status $}>
           <a href="{$ nav.permalink $}" layout vertical center-center>{$ nav.label $}</a>
         </paper-tab>
         {% endfor %}
@@ -162,22 +155,13 @@
         <!--<paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]">{$ signIn $}</paper-tab>-->
 
         <!--<a href$="[[_getTicketUrl(tickets)]]" rel="noopener noreferrer" ga-on="click"-->
-           <!--ga-event-category="ticket button" ga-event-action="buy_click">-->
-          <!--<paper-button class="buy-button" primary disabled>{$ buyTicket $}</paper-button>-->
+        <!--ga-event-category="ticket button" ga-event-action="buy_click">-->
+        <!--<paper-button class="buy-button" primary disabled>{$ buyTicket $}</paper-button>-->
         <!--</a>-->
       </paper-tabs>
 
-      <paper-menu-button
-        id="notificationsMenu"
-        class="notifications-menu"
-        vertical-align="top"
-        horizontal-align="right"
-        no-animations
-      >
-        <paper-icon-button
-          icon="hoverboard:[[_getNotificationsIcon(notifications.status)]]"
-          slot="dropdown-trigger"
-        ></paper-icon-button>
+      <paper-menu-button id="notificationsMenu" class="notifications-menu" vertical-align="top" horizontal-align="right" no-animations>
+        <paper-icon-button icon="hoverboard:[[_getNotificationsIcon(notifications.status)]]" slot="dropdown-trigger"></paper-icon-button>
         <div class="dropdown-panel" slot="dropdown-content">
           <div hidden$="[[_hideNotificationBlock(notifications.status, 'DEFAULT')]]">
             <p>{$ notifications.default $}</p>
@@ -204,33 +188,33 @@
       </paper-menu-button>
 
       <!--<paper-menu-button-->
-        <!--class="auth-menu"-->
-        <!--hidden$="[[!user.signedIn]]"-->
-        <!--vertical-align="top"-->
-        <!--horizontal-align="right"-->
-        <!--no-animations-->
-        <!--layout horizontal center-center>-->
-        <!--<div-->
-          <!--class="profile-image" slot="dropdown-trigger"-->
-          <!--style$="background-image: url('[[user.photoURL]]')"-->
-        <!--&gt;</div>-->
-        <!--<div class="dropdown-panel profile-details" slot="dropdown-content" layout horizontal>-->
-          <!--<div-->
-            <!--class="profile-image" slot="dropdown-trigger" self-center-->
-            <!--style$="background-image: url('[[user.photoURL]]')"-->
-          <!--&gt;</div>-->
-          <!--<div layout vertical center-justified>-->
-            <!--<span class="profile-name">[[user.displayName]]</span>-->
-            <!--<span class="profile-email">[[user.email]]</span>-->
-            <!--<span class="profile-action" role="button" on-tap="signOut">{$ signOut $}</span>-->
-          <!--</div>-->
-        <!--</div>-->
+      <!--class="auth-menu"-->
+      <!--hidden$="[[!user.signedIn]]"-->
+      <!--vertical-align="top"-->
+      <!--horizontal-align="right"-->
+      <!--no-animations-->
+      <!--layout horizontal center-center>-->
+      <!--<div-->
+      <!--class="profile-image" slot="dropdown-trigger"-->
+      <!--style$="background-image: url('[[user.photoURL]]')"-->
+      <!--&gt;</div>-->
+      <!--<div class="dropdown-panel profile-details" slot="dropdown-content" layout horizontal>-->
+      <!--<div-->
+      <!--class="profile-image" slot="dropdown-trigger" self-center-->
+      <!--style$="background-image: url('[[user.photoURL]]')"-->
+      <!--&gt;</div>-->
+      <!--<div layout vertical center-justified>-->
+      <!--<span class="profile-name">[[user.displayName]]</span>-->
+      <!--<span class="profile-email">[[user.email]]</span>-->
+      <!--<span class="profile-action" role="button" on-tap="signOut">{$ signOut $}</span>-->
+      <!--</div>-->
+      <!--</div>-->
       <!--</paper-menu-button>-->
 
       <!--<paper-icon-button-->
-        <!--icon="hoverboard:account"-->
-        <!--on-tap="signIn"-->
-        <!--hidden$="[[_isAccountIconHidden(user.signedIn, viewport.isLaptopPlus)]]"-->
+      <!--icon="hoverboard:account"-->
+      <!--on-tap="signIn"-->
+      <!--hidden$="[[_isAccountIconHidden(user.signedIn, viewport.isLaptopPlus)]]"-->
       <!--&gt;</paper-icon-button>-->
     </app-toolbar>
 
