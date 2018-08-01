@@ -1,0 +1,109 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="./shared-styles.html">
+<link rel="import" href="./hoverboard-icons.html">
+
+<dom-module id="sponsors-block">
+    <template>
+        <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+        <style>
+            :host {
+                display: block;
+            }
+
+            .block-title {
+                margin: 24px 0 8px;
+            }
+        </style>
+
+        <div class="container">
+            <h1 class="container-title">{$ sponsorsBlock.title $}</h1>
+
+            <a class="cta-button animated icon-right" target="_blank" href="http://bit.ly/dfpl2018-sponsors">
+                <span>{$ sponsorsBlock.button $}</span>
+                <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+            </a>
+        </div>
+
+    </template>
+
+    <script>
+
+      class SponsorsBlock extends ReduxMixin(Polymer.Element) {
+        static get is() {
+            return 'sponsors-block';
+        }
+
+            static get properties() {
+                return {
+                    sponsors: {
+                        type: Array,
+                        statePath: 'sponsors.list',
+                    },
+                    sponsorsFetching: {
+                        type: Boolean,
+                        statePath: 'sponsors.fetching',
+                    },
+                    sponsorsFetchingError: {
+                        type: Object,
+                        statePath: 'sponsors.fetchingError',
+                    },
+                    sponsorAdding: {
+                        type: Boolean,
+                        statePath: 'sponsors.adding',
+                        observer: '_sponsorsAddingChanged',
+                    },
+                    sponsorAddingError: {
+                        type: Object,
+                        statePath: 'sponsors.addingError',
+                    },
+                };
+            }
+
+            connectedCallback() {
+                super.connectedCallback();
+                if (!this.sponsorsFetching && (!this.sponsors || !this.sponsors.length)) {
+                    this.dispatch(sponsorsActions.fetchSponsors());
+                }
+            }
+
+            isNotEmpty(item) {
+                return item.items.length > 0;
+            }
+
+            _addPotentialSponsor() {
+                dialogsActions.openDialog(DIALOGS.INFO, {
+                    title: '{$ sponsorsBlock.form.title $}',
+                });
+                // dialogsActions.openDialog(DIALOGS.SUBSCRIBE, {
+                //     title: '{$ partnersBlock.form.title $}',
+                //     submitLabel: '{$ partnersBlock.form.submitLabel $}',
+                //     firstFieldLabel: '{$ partnersBlock.form.fullName $}',
+                //     secondFieldLabel: '{$ partnersBlock.form.companyName $}',
+                //     submit: (data) => {
+                //         this.dispatch(partnersActions.addPartner(data));
+                //     },
+                // });
+            }
+
+            _sponsorAddingChanged(newSponsorAdding, oldSponsorAdding) {
+                if (oldSponsorAdding && !newSponsorAdding) {
+                    if (this.sponsorAddingError) {
+                        this.dispatch(dialogsActions.setDialogError(DIALOGS.INFO));
+                    } else {
+                        dialogsActions.closeDialog(DIALOGS.INFO);
+                        toastActions.showToast({ message: '{$ sponsorsBlock.toast $}' });
+                    }
+                }
+            }
+        }
+
+        window.customElements.define(SponsorsBlock.is, SponsorsBlock);
+    </script>
+</dom-module>

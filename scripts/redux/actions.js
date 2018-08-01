@@ -194,6 +194,77 @@ const partnersActions = {
   },
 };
 
+const _getSponsorItems = (groupId) => firebase.firestore()
+  .collection('sponsors').doc(groupId).collection('items')
+  .get()
+  .then((snaps) => snaps.docs
+    .map((snap) => Object.assign({}, snap.data(), { id: snap.id }))
+  );
+
+const sponsorsActions = {
+  addSponsor: (data) => (dispatch) => {
+    dispatch({
+      type: ADD_POTENTIAL_SPONSOR,
+      payload: data,
+    });
+
+    const id = data.email.replace(/[^\w\s]/gi, '');
+    const sponsor = {
+      email: data.email,
+      fullName: data.firstFieldValue || '',
+      companyName: data.secondFieldValue || '',
+    };
+
+    firebase.firestore().collection('potentialSponsors')
+      .doc(id)
+      .set(sponsor)
+      .then(() => {
+        dispatch({
+          type: ADD_POTENTIAL_SPONSORS_SUCCESS,
+          payload: { sponsor },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: ADD_POTENTIAL_SPONSOR_FAILURE,
+          payload: { error },
+        });
+      });
+  },
+  fetchSponsors: () => (dispatch) => {
+    dispatch({
+      type: FETCH_SPONSORS,
+    });
+
+    firebase.firestore()
+      .collection('sponsors')
+      .get()
+      .then((snaps) => Promise.all(
+        snaps.docs.map((snap) => Promise.all([
+          snap.data(),
+          snap.id,
+          _getSponsorItems(snap.id),
+        ]))
+      ))
+      .then((groups) => groups.map(([group, id, items]) => Object.assign({}, group, { id, items })))
+      .then((list) => {
+        dispatch({
+          type: FETCH_SPONSORS_SUCCESS,
+          payload: {
+            list,
+          },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: FETCH_SPONSORS_FAILURE,
+          payload: { error },
+        });
+      });
+  },
+};
+
+
 const videosActions = {
   fetchVideos: () => (dispatch) => {
     dispatch({
