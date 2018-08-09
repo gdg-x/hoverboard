@@ -1,11 +1,11 @@
 {
-  "title": "Ohio DevFest 2017",
-  "description": "The biggest Google tech conference in Ohio carefully crafted for you by GDG community! All about Android, Web and Cloud from the world experts.",
+  "title": "Ohio DevFest 2018",
+  "description": "The biggest Google tech conference in Ohio carefully crafted for you by GDG community! All about Android, Web, Machine Learning, and Cloud from the world experts.",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "November 18th, 2017",
-  "locationAddressShort": "Columbus, Ohio",
-  "motto": "Ohio DevFest 2017",
-  "playIcon": "See how it was in 2016",
+  "dates": "October 13th, 2018",
+  "locationAddressShort": "Cincinnati, Ohio 45221",
+  "motto": "Ohio DevFest 2018",
+  "playIcon": "See how it was in 2017",
   "c4p": "Become a speaker",
   "buyTicket": "Buy ticket",
   "backToTop": "Back to top",
@@ -28,9 +28,9 @@
   "featuredPeopleTitle": "Amazing Speakers",
   "featuredPeopleViewAll": "View all speakers",
   "action": "See how it was",
-  "locationTitle": "The Point at Otterbein",
-  "locationDescription": "Otterbein has partnered with leading organizations from the private and public sectors in central Ohio to create The Point at Otterbein University, a new science, technology, engineering, arts and math (STEAM) Innovation Center that combines academics with the business and manufacturing needs of our community.",
-  "locationAddress": "60 Collegeview Road, Westerville, OH 43081",
+  "locationTitle": "University of Cincinnati",
+  "locationDescription": "The University of Cincinnati's Tangeman University Center (TUC) is the campus student center located in the heart of MainStreet UC. The four-story building is home to the UC Bookstore, PNC Bank, and several eateries.",
+  "locationAddress": "2766 UC Main Street",
   "organizerTitle": "Organizer",
   "aboutOrganizers": "GDG Cincinnati and GDG Columbus are proud to organize of Ohio DevFest.",
   "openTeamPage": "Open team page",
@@ -94,7 +94,7 @@
       "links": [
         {
           "text": "Partnership Proposition",
-          "url": "https://drive.google.com/file/d/0B-tskuDPl8JZZ0E2UDE0aGNtUlU/view",
+          "url": "https://drive.google.com/open?id=1jXlkC_-FPCnQrzy0geys9A-ODTSCkHyC",
           "newTab": true
         }
       ]

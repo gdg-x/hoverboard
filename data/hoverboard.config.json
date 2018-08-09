@@ -1,7 +1,7 @@
 {
   "url": "https://ohiodevfest.com/",
-  "startDate": "2017-11-18T08:00:00+05:00",
-  "endDate": "2017-11-18T17:00:00+05:00",
+  "startDate": "2018-10-13T08:00:00+05:00",
+  "endDate": "2018-10-13T17:00:00+05:00",
   "analytics": {
     "prod": "UA-79888667-1",
     "dev": "UA-79888667-1"
@@ -35,7 +35,7 @@
   "hashtag": "ohiodevfest",
   "disqusShortName": "hoverboard-gdg-x",
   "tweetsSource": "/data/tweets.json",
-  "partnershipProposition": "https://drive.google.com/file/d/0B-tskuDPl8JZZ0E2UDE0aGNtUlU/view",
+  "partnershipProposition": "https://drive.google.com/open?id=1jXlkC_-FPCnQrzy0geys9A-ODTSCkHyC",
   "enableSessionsRating": false,
   "navigation": [
     {
@@ -68,20 +68,20 @@
   ],
   "location": {
     "apiKey": "AIzaSyDNFE5RChWZGz2uq6CTtLEOtzD4fTSjPoI",
-    "name": "The Point at Otterbein",
-    "address": "60 Collegeview Rd, Westerville, OH 43081",
-    "link": "https://otterbeinpoint.com/",
+    "name": "Tangeman University Center",
+    "address": "2766 UC Main Street, Cincinnati, OH 45221",
+    "link": "https://www.uc.edu/eventservices/venues/tangeman.html",
     "pointer": {
-      "latitude": 40.122928,
-      "longitude": -82.943200,
-      "zoom": 10
+      "latitude": 39.1317988,
+      "longitude": -84.5177259,
+      "zoom": 15
     },
     "mapCenter": {
-      "latitude": 40.121928,
-      "longitude": -82.70
+      "latitude": 39.1317988,
+      "longitude": -84.513
     },
     "images": [
-      "/images/the_point.jpg"
+      "/images/tangeman.jpg"
     ]
   },
   "gallery": {
