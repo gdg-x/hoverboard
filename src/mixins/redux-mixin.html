@@ -1,0 +1,151 @@
+<link rel="import" href="../../bower_components/polymer-redux/polymer-redux.html">
+<script src="/node_modules/redux/dist/redux.min.js"></script>
+<script src="/node_modules/redux-thunk/dist/redux-thunk.min.js"></script>
+
+<script src="../../scripts/redux/constants.js" type="text/javascript"></script>
+<script src="../../scripts/redux/actions.js" type="text/javascript"></script>
+<script src="../../scripts/redux/reducer.js" type="text/javascript"></script>
+
+<script>
+  /* eslint-disable no-undef */
+
+  const initialState = {
+    ui: {
+      isDrawerOpened: false,
+      viewport: {
+        isPhone: true,
+        isTabletPlus: false,
+      },
+      videoDialog: {
+        opened: false,
+        disableControls: false,
+        youtubeId: '',
+        title: '',
+      },
+      heroSettings: {},
+    },
+    routing: {
+      route: 'home',
+      subRoute: '',
+    },
+    dialogs: {
+      [DIALOGS.SPEAKER]: {
+        isOpened: false,
+        data: {},
+      },
+      [DIALOGS.PREVIOUS_SPEAKER]: {
+        isOpened: false,
+        data: {},
+      },
+      [DIALOGS.SESSION]: {
+        isOpened: false,
+        data: {},
+      },
+      [DIALOGS.SUBSCRIBE]: {
+        isOpened: false,
+        data: {},
+      },
+      [DIALOGS.SIGNIN]: {
+        isOpened: false,
+        data: {},
+      },
+    },
+    tickets: {
+      fetching: false,
+      fetchingError: null,
+      list: [],
+    },
+    videos: {
+      fetching: false,
+      fetchingError: null,
+      list: [],
+    },
+    blog: {
+      fetching: false,
+      fetchingError: null,
+      list: [],
+      obj: {},
+    },
+    partners: {
+      fetching: false,
+      fetchingError: null,
+      list: [],
+      adding: false,
+      addingError: false,
+    },
+    previousSpeakers: {
+      fetching: false,
+      fetchingError: null,
+      list: [],
+      obj: {},
+    },
+    speakers: {
+      fetching: false,
+      fetchingError: null,
+      list: [],
+      obj: {},
+    },
+    sessions: {
+      list: {
+        fetching: false,
+        fetchingError: null,
+        list: [],
+        obj: {},
+      },
+      featured: {},
+      featuredFetching: false,
+      featuredError: null,
+    },
+    schedule: [],
+    gallery: {
+      fetching: false,
+      fetchingError: null,
+      list: [],
+    },
+    team: {
+      fetching: false,
+      fetchingError: null,
+      list: [],
+    },
+    user: {
+      signedIn: false,
+    },
+    subscribed: false,
+    toast: {},
+    notifications: {
+      status: NOTIFICATIONS_STATUS.DEFAULT,
+    },
+  };
+
+  const appReducer = (state = initialState, action) => {
+    return {
+      ui: uiReducer(state.ui, action),
+      routing: routingReducer(state.routing, action),
+      dialogs: dialogsReducer(state.dialogs, action),
+      tickets: ticketsReducer(state.tickets, action),
+      partners: partnersReducer(state.partners, action),
+      videos: videosReducer(state.videos, action),
+      blog: blogReducer(state.blog, action),
+      speakers: speakersReducer(state.speakers, action),
+      previousSpeakers: previousSpeakersReducer(state.previousSpeakers, action),
+      sessions: sessionsReducer(state.sessions, action),
+      schedule: scheduleReducer(state.schedule, action),
+      gallery: galleryReducer(state.gallery, action),
+      team: teamReducer(state.team, action),
+      user: userReducer(state.user, action),
+      subscribed: subscribeReducer(state.subscribed, action),
+      toast: toastReducer(state.toast, action),
+      notifications: notificationsReducer(state.notifications, action),
+    };
+  };
+
+  const store = Redux.createStore(
+    appReducer,
+    Redux.compose(
+      Redux.applyMiddleware(window.ReduxThunk.default),
+      window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    )
+  );
+
+  ReduxMixin = PolymerRedux(store);
+</script>

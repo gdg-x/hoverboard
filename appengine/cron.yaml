@@ -1,0 +1,5 @@
+cron:
+- description: Push a "schedule-tick" onto pubsub every 10 minutes from 08:00 to 20:00
+  url: /publish/schedule-tick
+  schedule: every 10 minutes from 08:00 to 20:00
+  timezone: Europe/Kiev

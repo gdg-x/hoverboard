@@ -1,0 +1,121 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="hoverboard-icons.html">
+
+<dom-module id="subscribe-form-footer">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+
+    <style>
+      :host {
+        --paper-input-container-color: var(--footer-text-color);
+        --paper-input-container-focus-color: var(--default-primary-color);
+        --paper-input-container-input-color: var(--footer-text-color);
+      }
+
+      paper-input {
+        padding-bottom: 0;
+      }
+
+      paper-input,
+      .form-content {
+        width: 100%;
+      }
+
+      paper-input-container input,
+      paper-input-container label {
+        font-size: 14px;
+      }
+
+      iron-icon {
+        margin-bottom: 5px;
+      }
+
+      paper-button {
+        margin-top: 8px;
+        color: var(--secondary-text-color);
+      }
+
+      paper-button:hover {
+        cursor: pointer;
+      }
+
+      paper-button[disabled] {
+        background: none;
+        padding-right: 0;
+      }
+
+    </style>
+
+    <div class="form-content" layout vertical center>
+      <paper-input id="emailInput"
+                   on-touchend="_focus"
+                   label="{$ subscribeBlock.yourEmail $}"
+                   value="{{email}}"
+                   required
+                   auto-validate$="[[validate]]"
+                   error-message="{$ subscribeBlock.emailRequired $}"
+                   autocomplete="off"
+                   disabled="[[subscribed]]">
+
+        <iron-icon icon="hoverboard:checked" slot="suffix" hidden$="[[!subscribed]]"></iron-icon>
+      </paper-input>
+      <paper-button
+        on-tap="_subscribe"
+        ga-on="click"
+        disabled="[[subscribed]]"
+        ga-event-category="attendees"
+        ga-event-action="subscribe"
+        ga-event-label="subscribe footer"
+        layout self-end>
+        [[ctaLabel]]
+      </paper-button>
+    </div>
+  </template>
+
+  <script>
+
+    class SubscribeFormFooter extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'subscribe-form-footer';
+      }
+
+      static get properties() {
+        return {
+          subscribed: {
+            type: Boolean,
+            statePath: 'subscribed',
+          },
+          validate: {
+            type: Boolean,
+            value: false,
+          },
+          ctaLabel: {
+            type: String,
+            computed: '_computeButtonLabel(subscribed)',
+          },
+        };
+      }
+
+      _subscribe() {
+        this.validate = true;
+        const emailInput = this.shadowRoot.querySelector('#emailInput');
+
+        if (!this.subscribed && emailInput.validate()) {
+          this.dispatch(subscribeActions.subscribe({ email: this.email }));
+        }
+      }
+
+      _computeButtonLabel(subscribed) {
+        return subscribed ?
+          '{$  subscribeBlock.subscribed $}' :
+          '{$  subscribeBlock.subscribe $}';
+      }
+    }
+
+    window.customElements.define(SubscribeFormFooter.is, SubscribeFormFooter);
+
+  </script>
+</dom-module>

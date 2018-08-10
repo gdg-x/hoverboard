@@ -1,0 +1,14 @@
+{
+    "env": {
+        "development": {
+            "presets": [
+                [
+                    "@babel/preset-env",
+                    {
+                        "shippedProposals": true
+                    }
+                ]
+            ]
+        }
+    }
+}

@@ -1,92 +1,73 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-lazy-pages/iron-lazy-pages.html">
 
-<link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
-
-<link rel="import" href="../behaviors/page-behavior.html">
-<link rel="import" href="../behaviors/cascaded-behavior.html">
-<link rel="import" href="../behaviors/share-behavior.html">
-<link rel="import" href="blog-list.html">
-<link rel="import" href="post-page.html">
-
+<link rel="import" href="../mixins/scroll-functions.html">
 
 <dom-module id="blog-page">
-
   <template>
+    <style>
 
-    <app-route route="{{route}}"
-               pattern="/:page"
-               data="{{pageData}}"
-               tail="{{subRoute}}"></app-route>
+      :host {
+        display: block;
+        height: 100%;
+      }
 
-    <app-route route="{{subRoute}}"
-               pattern="/:id"
-               data="{{postData}}"></app-route>
+      iron-lazy-pages {
+        min-height: 100%;
+      }
 
+    </style>
+    <app-route
+      route="[[_route]]"
+      pattern="/:page"
+      data="{{routeData}}"
+      tail="{{subRoute}}"
+    ></app-route>
 
-    <neon-animated-pages id="pages"
-                         selected="{{pageData.page}}"
-                         attr-for-selected="name"
-                         selected-attribute="selected">
-
-      <blog-list name=""
-                 app="{{app}}"
-                 posts="[[posts]]"></blog-list>
-
-      <post-page name="posts"
-                 app="{{app}}"
-                 posts="[[posts]]"
-                 post-id="[[postData.id]]"></post-page>
-
-    </neon-animated-pages>
-
+    <iron-lazy-pages
+      attr-for-selected="data-route"
+      selected="[[routeData.page]]"
+      selected-attribute="active"
+    >
+      <blog-list-page data-route="" data-path="./blog-list-page.html"></blog-list-page>
+      <post-page data-route="posts" data-path="./post-page.html" route="[[subRoute]]"></post-page>
+    </iron-lazy-pages>
+    <footer-block></footer-block>
   </template>
 
   <script>
-    (function () {
-      'use strict';
 
-      Polymer({
+    // eslint-disable-next-line no-undef
+    class BlogPage extends ScrollFunctions(Polymer.Element) {
+      static get is() {
+        return 'blog-page';
+      }
 
-        is: 'blog-page',
+      static get properties() {
+        return {
+          route: Object,
+          active: Boolean,
+        };
+      }
 
-        behaviors: [
-          HOVERBOARD.PageBehavior,
-          HOVERBOARD.CascadedBehavior
-        ],
+      static get observers() {
+        return [
+          '_routeChanged(active, route)',
+        ];
+      }
 
-        properties: {
-          app: {
-            type: Object
-          },
-
-          route: {
-            type: Object
-          },
-
-          pageData: {
-            type: Object
-          },
-
-          posts: {
-            type: Array
-          }
-        },
-
-        observers: [
-          '_routeChanged(pageData.page)'
-        ],
-
-        _routeChanged: function (page) {
-          if (this.app.page === 'blog' && !page) {
-            this.set('pageData.page', '');
-          }
+      _routeChanged(active, route) {
+        if (active && route) {
+          this.scrollToY(0, 200);
+          this.set('subRoute', {});
+          this.set('_route', route);
+          routingActions.setSubRoute(this.routeData.page);
         }
+      }
+    }
 
-      });
-
-    }());
+    window.customElements.define(BlogPage.is, BlogPage);
   </script>
-
 </dom-module>

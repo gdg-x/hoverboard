@@ -1,0 +1,43 @@
+<script>
+  /* eslint-disable no-unused-vars */
+
+  /* @polymerMixin */
+  const ShareMixin = (subclass) => class extends subclass {
+    share(e) {
+      let type = e.currentTarget.getAttribute('share');
+      let shareUrl = location.href;
+      let width = 600;
+      let height = 600;
+      let winOptions = `menubar=no,toolbar=no,resizable=yes,scrollbars=yes,` +
+        `height=${height},width=${width}`;
+      let title = document.title;
+      let url;
+
+      switch (type) {
+        case 'facebook': {
+          height = 229;
+          url = `https://www.facebook.com/sharer.php?` +
+            `u=${encodeURIComponent(shareUrl)}&t=${encodeURIComponent(title)}`;
+          break;
+        }
+        case 'gplus': {
+          height = 348;
+          width = 512;
+          url = `https://plus.google.com/share?` +
+            `url=${encodeURIComponent(shareUrl)}` +
+            `&hl=${encodeURIComponent(document.documentElement.lang)}`;
+          break;
+        }
+        case 'twitter': {
+          height = 253;
+          let text = `Check out ${title} at #{$ hashtag $}: ${shareUrl}`;
+          url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+          break;
+        }
+        default:
+          return;
+      }
+      window.open(url, 'share', winOptions);
+    }
+  };
+</script>
