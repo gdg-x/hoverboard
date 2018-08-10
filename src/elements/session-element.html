@@ -1,327 +1,278 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 
-<link rel="import" href="../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 
-<link rel="import" href="../../bower_components/paper-card/paper-card.html">
-
-<link rel="import" href="../../bower_components/app-storage/app-network-status-behavior.html">
-
-<link rel="import" href="../behaviors/utils-behavior.html">
-<link rel="import" href="../behaviors/my-schedule-behavior.html">
-
+<link rel="import" href="../mixins/utils-functions.html">
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="./shared-styles.html">
 
 <dom-module id="session-element">
-
   <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
 
-    <style include="shared-styles">
+    <style>
+
       :host {
         display: block;
+        background-color: var(--primary-background-color);
+        border-bottom: 1px solid var(--border-light-color);
+        height: 100%;
       }
 
       .session {
-        @apply(--shadow-transition);
-        cursor: pointer;
+        height: 100%;
         color: var(--primary-text-color);
-      }
-
-      .session[with-background] {
-        color: #fff;
-      }
-
-      .session[with-background] .overlay {
-        background: rgba(0, 0, 0, 0.4);
+        overflow: hidden;
       }
 
       .session:hover {
-        @apply(--shadow-elevation-4dp);
+        background-color: var(--additional-background-color);
+      }
+
+      .session-icon {
+        --iron-icon-width: 88px;
+        --iron-icon-height: 88px;
+        --iron-icon-fill-color: var(--border-light-color);
+        position: absolute;
+        right: 40px;
+        bottom: -4px;
+      }
+
+      .session-header,
+      .session-content,
+      .session-footer {
+        padding: 16px;
+        z-index: 1;
+      }
+
+      .session-header {
+        padding-bottom: 8px;
+      }
+
+      .language {
+        margin-left: 8px;
+        font-size: 12px;
+        text-transform: uppercase;
+        color: var(--secondary-text-color);
       }
 
       .session-content {
-        padding: 24px;
-        flex-basis: auto;
+        padding-top: 0;
+        padding-bottom: 40px;
       }
 
-      .session-content p {
-        margin: 24px 0 8px;
+      .bookmark-session {
+        color: var(--secondary-text-color);
+      }
+
+      .session[featured] .bookmark-session {
+        color: var(--default-primary-color);
+      }
+
+      .bookmark-session:hover {
+        color: var(--default-primary-color);
       }
 
       .session-title {
         font-size: 20px;
-        font-weight: 400;
-        line-height: 22px;
+        line-height: 1.2;
       }
 
       .session-meta {
-        margin: 8px 0 0;
+        margin: 0;
         padding: 0;
-        font-size: 15px;
+        font-size: 12px;
         color: var(--secondary-text-color);
       }
 
-      .session[with-background] .tags,
-      .session[with-background] .session-meta {
-        color: #fff;
+      .session-footer {
+        font-size: 14px;
       }
 
-      .session-meta li {
-        display: inline-block;
-      }
-
-      .session-meta li:not(:last-of-type)::after {
-        margin-left: 5px;
-        margin-right: 5px;
-        content: "/";
-      }
-
-      .speaker-block {
-        padding: 12px 24px;
-        color: #fff;
-      }
-
-      .image-overlay {
-        transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-        opacity: 0.85;
-      }
-
-      .session[wide]:hover .image-overlay,
-      .session[wide]:hover .action-icon {
-        opacity: 1;
-      }
-
-      .action-icon[disabled],
-      .session[wide]:hover .action-icon[disabled] {
-        opacity: 0.2;
-        cursor: default;
-      }
-
-      .session[wide] .action-icon.calendar-check {
-        opacity: 1;
-      }
-
-      .session[with-background][wide] .image-overlay,
-      .session[with-background][wide]:hover .image-overlay {
-        opacity: 0;
-      }
-
-      .bottom-caption {
-        position: relative;
-        font-size: 13px;
-        color: var(--secondary-text-color);
-      }
-
-      .action-icon {
-        --iron-icon-width: 20px;
-        --iron-icon-height: 20px;
-        margin-left: 16px;
-        padding: 16px 24px;
-        position: absolute;
-        right: 0;
-        bottom: 0;
-      }
-
-      .session[with-background] .action-icon,
-      .session[with-background] .bottom-meta {
-        color: #fff;
-      }
-
-      .session[wide] .action-icon {
-        opacity: 0;
-        transition: opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .bottom-meta {
-        margin-right: 24px;
-        padding: 16px 24px;
-      }
-
-      .bottom-meta iron-icon {
-        --iron-icon-width: 14px;
-        --iron-icon-height: 14px;
-        margin-right: 8px;
-      }
-
-      .speaker {
-        margin: 4px 0;
+      .speakers {
+        margin-top: 10px;
       }
 
       .speaker:not(:last-of-type) {
-        margin-right: 24px;
+        padding-bottom: 10px;
       }
 
-      .person-detail {
-        margin-left: 7px;
-        line-height: 1;
-        z-index: 1;
+      .speaker-photo {
+        margin-right: 12px;
+        width: 32px;
+        height: 32px;
+        background-color: var(--secondary-background-color);
+        border-radius: 50%;
+        overflow: hidden;
+        transform: translateZ(0);
+      }
+
+      .speaker-name {
+        margin-bottom: 4px;
+        line-height: 1.2;
       }
 
       .speaker-title {
-        font-size: 13px;
+        font-size: 12px;
+        line-height: 1;
       }
+
+      @media (min-width: 640px) {
+        :host {
+          border: 1px solid var(--border-light-color);
+          border-top: 0;
+        }
+      }
+
+      @media (min-width: 812px) {
+        :host {
+          border: 1px solid var(--border-light-color);
+        }
+      }
+
     </style>
 
     <a
       class="session"
       href$="/schedule/[[dayName]]?sessionId=[[session.id]]"
-      with-background$="[[session.image]]"
-      wide$="{{!app.isPhoneSize}}"
-      layout flex-auto
+      featured$="[[isFeatured]]"
+      layout vertical
+      relative
     >
-      <paper-card layout flex-auto>
+      <iron-icon
+        class="session-icon"
+        icon="hoverboard:[[session.icon]]"
+      ></iron-icon>
 
-        <iron-image
-          src="[[session.image]]"
-          sizing="cover"
-          fit preload
-        ></iron-image>
+      <div class="session-header" layout horizontal justified>
+        <div flex>
+          <h3 class="session-title">[[session.title]]</h3>
+        </div>
+        <span class="language">[[slice(session.language, 2)]]</span>
+      </div>
 
-        <div class="overlay" relative layout vertical flex>
-          <div class="session-content" flex>
-            <h2 class="session-title">[[session.title]]</h2>
-            <ul class="session-meta">
-              <li hidden$="[[!session.language]]">[[session.language]]</li>
-              <li hidden$="[[!session.complexity]]">[[session.complexity]]</li>
-              <li hidden$="[[!session.track.title]]">[[session.track.title]]</li>
-            </ul>
+      <div class="session-content" flex layout horizontal justified>
+        <div class="session-meta">
+          <div hidden$="[[!session.complexity]]">[[session.complexity]]</div>
+        </div>
+        <iron-icon
+          class="bookmark-session"
+          icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
+          on-tap="_toggleFeaturedSession"
+        ></iron-icon>
+      </div>
+
+      <div class="session-footer">
+        <div layout horizontal justified center-aligned>
+          <div class="session-meta" flex>
+            <span
+              hidden$="[[!session.duration.hh]]">[[session.duration.hh]] hour[[_getEnding(session.duration.hh)]]</span>
+            <span
+              hidden$="[[!session.duration.mm]]">[[session.duration.mm]] min[[_getEnding(session.duration.mm)]]</span>
           </div>
+          <div hidden$="[[!session.tags.length]]">
+            <template is="dom-repeat" items="[[session.tags]]" as="tag">
+              <span class="tag" style$="color: [[_getTagColor(tag)]]">[[tag]]</span>
+            </template>
+          </div>
+        </div>
 
-          <div class="bottom-caption" layout horizontal center justified>
-            <div class="bottom-meta" flex hidden$="[[!_hasBottomMeta(session)]]">
-              <div hidden$="[[!session.tags.length]]" layout horizontal center>
-                <iron-icon icon="tags"></iron-icon>
-                <span>[[_joinArray(session.tags)]]</span>
-              </div>
+        <div class="speakers" hidden$="[[!session.speakers.length]]">
+          <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
+            <div class="speaker" layout horizontal center>
+              <plastic-image
+                class="speaker-photo"
+                srcset="[[speaker.photoUrl]]"
+                sizing="cover"
+                lazy-load preload fade
+              ></plastic-image>
 
-              <div hidden$="[[!session.type]]" layout horizontal center>
-                <iron-icon icon="info"></iron-icon>
-                <span>[[session.type]]</span>
-              </div>
-
-              <div hidden$="[[!session.videoId]]" layout horizontal center>
-                <iron-icon icon="video"></iron-icon>
-                <span>Recording available</span>
-              </div>
-
-              <div hidden$="[[!session.presentation]]" layout horizontal center>
-                <iron-icon icon="presentation"></iron-icon>
-                <span>Presentation available</span>
+              <div class="speaker-details" flex>
+                <div class="speaker-name">[[speaker.name]]</div>
+                <div class="speaker-title">[[speaker.company]] / [[speaker.country]]</div>
               </div>
             </div>
-
-            <iron-icon
-              class$="action-icon [[myScheduleIcon]]"
-              icon$="[[myScheduleIcon]]"
-              on-tap="toggleMyScheduleSession"
-              session-id$="[[session.id]]"
-              disabled$="[[!online]]"
-            ></iron-icon>
-          </div>
-
-          <div
-            class="speaker-block"
-            hidden$="[[!session.speakers.length]]"
-            layout horizontal wrap relative
-          >
-            <div
-              class="image-overlay"
-              style$="background-color: [[sessionColor]]"
-              fit
-            ></div>
-
-            <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
-              <div class="speaker" layout horizontal center>
-                <iron-icon icon="account"></iron-icon>
-                <div class="person-detail" flex>
-                  <span class="speaker-name">[[speaker.name]]</span>
-                  <div class="speaker-title">[[speaker.company]] / [[speaker.country]]</div>
-                </div>
-              </div>
-            </template>
-
-          </div>
-
+          </template>
         </div>
-      </paper-card>
+
+      </div>
+
     </a>
 
   </template>
 
   <script>
-    (function () {
-      'use strict';
 
-      Polymer({
+    // eslint-disable-next-line no-undef
+    class SessionElement extends UtilsFunctions(
+      ReduxMixin(Polymer.GestureEventListeners(Polymer.Element))
+    ) {
+      static get is() {
+        return 'session-element';
+      }
 
-        is: 'session-element',
-
-        behaviors: [
-          Polymer.AppNetworkStatusBehavior,
-          HOVERBOARD.UtilsBehavior,
-          HOVERBOARD.MyScheduleBehavior
-        ],
-
-        properties: {
-          app: {
-            type: Object,
-            notify: true
-          },
-
-          dayName: {
-            type: String
-          },
-
-          session: {
-            type: Object
-          },
-
+      static get properties() {
+        return {
+          user: Object,
+          session: Object,
+          featuredSessions: Object,
           sessionColor: {
             type: String,
-            value: ''
+            computed: '_getTagColor(session.mainTag)',
           },
-
-          myScheduleIcon: {
+          isFeatured: {
             type: String,
-            value: 'calendar-plus'
-          }
-        },
+            computed: '_isFeatured(featuredSessions, session.id)',
+          },
+        };
+      }
 
-        observers: [
-          '_getMyScheduleIcon(session.id, app.user.sessions)',
-          '_userUpdated(app.user)'
-        ],
-
-        ready: function () {
-          this.async(function () {
-            this.sessionColor = this.getComputedStyleValue('--' + this._generateClass(this.session.mainTag));
-          });
-        },
-
-        _splitText: function (text, divider, index) {
-          return text.split(divider)[index];
-        },
-
-        _joinArray: function (array) {
-          if (!array) return;
-          return array.join(', ');
-        },
-
-        _getMyScheduleIcon: function (id) {
-          this.myScheduleIcon = this.isInMySchedule(id) ? 'calendar-check' : 'calendar-plus';
-        },
-
-        _userUpdated: function (user) {
-          if (!user && this.session) {
-            this._getMyScheduleIcon(this.session.id);
-          }
-        },
-
-        _hasBottomMeta: function (session) {
-          return session.tags && session.tags.length || session.presentation || session.videoId;
+      _getTagColor(value) {
+        if (ShadyCSS) {
+          return ShadyCSS.getComputedStyleValue(this, `--${this.generateClassName(value)}`);
         }
-      });
+        return getComputedStyle(this, `--${this.generateClassName(value)}`);
+      }
 
-    }());
+      _isFeatured(featuredSessions, sessionId) {
+        if (!featuredSessions || !sessionId) return false;
+        return featuredSessions[sessionId];
+      }
+
+      _getEnding(number) {
+        return number > 1 ? 's' : '';
+      }
+
+      _getFeaturedSessionIcon(featuredSessions, sessionId) {
+        return this.isFeatured ? 'bookmark-check' : 'bookmark-plus';
+      }
+
+      _toggleFeaturedSession(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (!this.user.signedIn) {
+          toastActions.showToast({
+            message: '{$ schedule.saveSessionsSignedOut $}',
+            action: {
+              title: 'Sign in',
+              callback: () => {
+                dialogsActions.openDialog(DIALOGS.SIGNIN);
+              },
+            },
+          });
+          return;
+        }
+
+        const sessions = Object.assign({}, this.featuredSessions, {
+          [this.session.id]: !this.featuredSessions[this.session.id] ? true : null,
+        });
+
+        this.dispatch(sessionsActions.setUserFeaturedSessions(this.user.uid, sessions));
+      }
+    }
+
+    window.customElements.define(SessionElement.is, SessionElement);
   </script>
-
 </dom-module>

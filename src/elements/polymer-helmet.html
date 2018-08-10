@@ -1,0 +1,101 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="polymer-helmet">
+  <template></template>
+
+  <script>
+    /* eslint-disable max-len */
+    class PolymerHelmet extends Polymer.Element {
+      static get is() {
+        return 'polymer-helmet';
+      }
+
+      static get properties() {
+        return {
+          active: Boolean,
+          title: String,
+          description: String,
+          image: String,
+          label1: String,
+          data1: String,
+          label2: String,
+          data2: String,
+          _defaultTitle: {
+            type: String,
+            value: '{$ title $}',
+          },
+          _defaultDescription: {
+            type: String,
+            value: '{$ description $}',
+          },
+          _defaultImage: {
+            type: String,
+            value: '{$ image if image.startsWith("http") else (url + image) $}',
+          },
+          _defaultLabel1: {
+            type: String,
+            value: '{$ location.label $}',
+          },
+          _defaultData1: {
+            type: String,
+            value: '{$ location.name $}',
+          },
+          _defaultLabel2: {
+            type: String,
+            value: '',
+          },
+          _defaultData2: {
+            type: String,
+            value: '',
+          },
+        };
+      }
+
+      static get observers() {
+        return [
+          '_setMetaInfo(active, title, description, image, label1, data1, label2, data2)',
+        ];
+      }
+
+      _setMetaInfo(active, title, description, image, label1, data1, label2, data2) {
+        if (active) {
+          const updatedTitle = title || this._defaultTitle;
+          const updatedDescription = description || this._defaultDescription;
+          const updatedLabel1 = label1 || this._defaultLabel1;
+          const updatedData1 = data1 || this._defaultData1;
+          const updatedLabel2 = label2 || this._defaultLabel2;
+          const updatedData2 = data2 || this._defaultData2;
+          let updatedImage = this._defaultImage;
+          if (image) {
+            updatedImage = image.startsWith('http') ? image : `{$ url $}${image}`;
+          }
+          document.title = updatedTitle;
+          document.querySelector('meta[name="description"]').setAttribute('content', updatedDescription);
+          // G+
+          document.querySelector('meta[itemprop="name"]').setAttribute('content', updatedTitle);
+          document.querySelector('meta[itemprop="description"]').setAttribute('content', updatedDescription);
+          document.querySelector('meta[itemprop="image"]').setAttribute('content', updatedImage);
+          // Facebook
+          document.querySelector('meta[property="og:title"]').setAttribute('content', updatedTitle);
+          document.querySelector('meta[property="og:description"]').setAttribute('content', updatedDescription);
+          document.querySelector('meta[property="og:image"]').setAttribute('content', updatedImage);
+          document.querySelector('meta[property="og:url"]').setAttribute('content', this._getUrl());
+          // Twitter
+          document.querySelector('meta[name="twitter:title"]').setAttribute('content', updatedTitle);
+          document.querySelector('meta[name="twitter:description"]').setAttribute('content', updatedDescription);
+          document.querySelector('meta[name="twitter:image"]').setAttribute('content', updatedImage);
+          document.querySelector('meta[name="twitter:label1"]').setAttribute('value', updatedLabel1);
+          document.querySelector('meta[name="twitter:data1"]').setAttribute('value', updatedData1);
+          document.querySelector('meta[name="twitter:label2"]').setAttribute('value', updatedLabel2);
+          document.querySelector('meta[name="twitter:data2"]').setAttribute('value', updatedData2);
+        }
+      }
+
+      _getUrl() {
+        return window.location.href;
+      }
+    }
+
+    customElements.define(PolymerHelmet.is, PolymerHelmet);
+  </script>
+</dom-module>

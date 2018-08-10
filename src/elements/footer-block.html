@@ -1,284 +1,78 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
-
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../../bower_components/iron-image/iron-image.html">
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
-
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../../bower_components/paper-menu-button/paper-menu-button.html">
-<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
-<link rel="import" href="../../bower_components/paper-menu/paper-menu.html">
-<link rel="import" href="../../bower_components/paper-item/paper-item.html">
-
-<link rel="import" href="../styles/shared-styles.html">
-<link rel="import" href="../js-wrappers/g-plusone.html">
-<link rel="import" href="../behaviors/share-behavior.html">
-<link rel="import" href="mailchimp-subscribe.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="footer-social.html">
+<link rel="import" href="footer-rel.html">
+<link rel="import" href="footer-nav.html">
+<link rel="import" href="hoverboard-icons.html">
+<link rel="import" href="../mixins/scroll-functions.html">
 
 
 <dom-module id="footer-block">
-
   <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+    <style>
 
-    <style include="shared-styles">
       :host {
+        margin-top: 40px;
         display: block;
-        background: var(--footer-background-color, #fcfcfc);
-        color: var(--footer-text-color, #757575);
-        border-top: 1px solid #eee;
+        position: relative;
+        color: var(--footer-text-color);
+        background: var(--footer-background-color);
         font-size: 14px;
-        --paper-menu-button: {
-          padding: 0;
-        };
-        --paper-menu-background-color: #fff;
-        --paper-menu-button-dropdown-background: #fff;
+        line-height: 1.5;
       }
 
       .container {
-        @apply(--layout-vertical);
-        padding-top: 0;
-        padding-bottom: 0;
+        margin: 0 auto;
+        padding: 20px 0;
+        position: relative;
       }
 
-      .gdg-logo {
-        margin: 10px 10px 0 0;
-        height: 24px;
-        width: 120px;
-        display: block;
+      .fab paper-fab {
+        background: var(--primary-background-color);
+        color: inherit;
+        pointer-events: all;
+        box-shadow: 0 0 8px 0 rgba(0,0,0,0.12), 0 8px 8px 0 rgba(0,0,0,0.24);
       }
 
-      a {
-        color: inherit !important;
+      .fab {
+        position: absolute;
+        right: 25px;
+        top: -25px;
+        pointer-events: none;
+        z-index: 1;
       }
 
-      a:not(.button-link):hover {
-        text-decoration: underline;
-      }
-
-      .footer-backtotop {
-        margin-right: -14px;
-        margin-bottom: 20px;
-      }
-
-      .footer-content {
-        @apply(--layout-horizontal);
-        @apply(--layout-justified);
-        padding-top: 16px;
-      }
-
-      .navigation {
-        @apply(--layout-vertical);
-        @apply(--layout-flex);
-      }
-
-      .link-block-title {
-        margin-bottom: 10px;
-        font-size: 18px;
-      }
-
-      .link-block {
-        padding: 0;
-      }
-
-      .link-block li {
-        margin-bottom: 9px;
-        list-style-type: none;
-      }
-
-      .link-block-wrapper {
-        margin-bottom: 30px;
-      }
-
-      .icons-wrapper {
-        margin-top: -5px;
-      }
-
-      .gplus {
-        padding-top: 10px;
-      }
-
-      .footer-bottom {
-        @apply(--layout-horizontal);
-        @apply(--layout-justified);
-        @apply(--layout-center);
-        margin-top: 16px;
-        padding: 16px 0;
-      }
-
-      .subscribe {
-        @apply(--layout-flex-auto);
-      }
-
-      .copyright {
-        @apply(--layout-flex);
-        margin-right: 10px;
-      }
-
-      .language-icon {
-        margin-right: 4px;
-      }
-
-      paper-item,
-      paper-icon-item {
-        cursor: pointer;
-      }
-
-      @media (min-width: 601px) {
-        .footer-backtotop {
-          margin-bottom: 0;
-        }
-
-        .footer-content {
-          padding-top: 32px;
-        }
-
-        .navigation {
-          @apply(--layout-horizontal);
-          @apply(--layout-wrap);
-        }
-
-        .link-block-wrapper {
-          width: 50%;
-        }
-
-        .link-block-title {
-          margin-bottom: 15px;
-        }
-
-        .gplus {
-          padding: 0;
-        }
-
-        .footer-bottom {
-          margin-top: 0;
+      @media (min-width: 640px) {
+        .container {
+          padding: 15px 36px;
         }
       }
 
-      @media (min-width: 961px) {
-        .link-block-wrapper,
-        .subscribe {
-          @apply(--layout-flex);
-        }
-      }
     </style>
 
     <div class="container">
-      <div class="footer-content">
-        <iron-image
-          class="gdg-logo"
-          src="/images/gdg-logo.svg"
-          sizing="contain"
-          alt="{$ organizer.name $}"
-        ></iron-image>
-        <paper-button class="footer-backtotop" on-tap="scrollToTop" noink>
-          {$ backToTop $}
-          <iron-icon icon="icons:expand-less"></iron-icon>
-        </paper-button>
+      <div class="fab">
+        <paper-fab class="back-to-top" icon="hoverboard:up" on-click="backToTop"></paper-fab>
       </div>
-      <div class="footer-content footer-links-container">
-        <nav class="navigation">
-          {% for block in footerBlocks %}
-            <div class="link-block-wrapper">
-              <div class="link-block-title">{$ block.title $}</div>
-              <ul class="link-block">
-                {% for link in block.links %}
-                  <li>
-                    <a href="{$ link.url $}" {% if link.newTab %}target="_blank" rel="noopener noreferrer"{% endif %}>{$ link.text $}</a>
-                  </li>
-                {% endfor %}
-              </ul>
-            </div>
-          {% endfor %}
-          <div class="link-block-wrapper">
-            <div class="link-block-title">{$ contactUs $}</div>
-            <ul class="link-block">
-              {% for link in contactBlock.links %}
-                <li>
-                  <a href="{$ link.url $}" {% if link.newTab %}target="_blank" rel="noopener noreferrer"{% endif %}>{$ link.text $}</a>
-                </li>
-              {% endfor %}
-            </ul>
-            <div class="icons-wrapper align-pb-block">
-              {% for network in social %}
-                <a class="button-link" href="{$ network.url $}" target="_blank" rel="noopener noreferrer">
-                  <paper-icon-button icon="{$ network.name $}"></paper-icon-button>
-                </a>
-              {% endfor %}
-            </div>
-          </div>
-          <div class="subscribe">
-            <div class="link-block-title">{$ subscribe $}</div>
-            <span>{$ subscribeNote $}</span>
-            <mailchimp-subscribe
-              app="[[app]]"
-              url="{$ mailchimp.url $}"
-              name="{$ mailchimp.name $}"
-            ></mailchimp-subscribe>
-          </div>
-        </nav>
-      </div>
-      <div class="footer-content footer-bottom">
-        <!-- Please do NOT delete next block -->
-        <div class="copyright">
-          &copy; 2016 Based on <a href="https://github.com/gdg-x/hoverboard" target="_blank" rel="noopener noreferrer">Project
-          Hoverboard</a>. Designed and created by <a href="http://o.zasadnyy.com/" target="_blank" rel="noopener noreferrer">Oleh
-          Zasadnyy</a> &middot;
-          <a href="http://lviv.gdg.org.ua" target="_blank" rel="noopener noreferrer">GDG Lviv</a>
-        </div>
-        <div class="gplus">
-          <g:plusone
-            size="medium"
-            width="200"
-            annotation="inline"
-            href="{$ url $}"
-          ></g:plusone>
-        </div>
-
-        <paper-menu-button vertical-align="bottom" horizontal-align="left" share-menu>
-          <paper-icon-button icon="share" class="dropdown-trigger" on-tap="nativeShare"></paper-icon-button>
-          <div class="dropdown-content">
-            <paper-icon-item on-tap="share" share="gplus">
-              <iron-icon icon="gplus" item-icon></iron-icon>
-              Google+
-            </paper-icon-item>
-            <paper-icon-item on-tap="share" share="facebook">
-              <iron-icon icon="facebook" item-icon></iron-icon>
-              Facebook
-            </paper-icon-item>
-            <paper-icon-item on-tap="share" share="twitter">
-              <iron-icon icon="twitter" item-icon></iron-icon>
-              Twitter
-            </paper-icon-item>
-            <paper-icon-item on-tap="share" share="copy">
-              <iron-icon icon="link" item-icon></iron-icon>
-              {$ copyLink $}
-            </paper-icon-item>
-          </div>
-        </paper-menu-button>
-      </div>
+      <footer-social layout flex flex-auto horizontal wrap></footer-social>
+      <footer-rel></footer-rel>
+      <footer-nav layout horizontal wrap justified center></footer-nav>
     </div>
-
   </template>
 
   <script>
-    (function () {
-      'use strict';
 
-      Polymer({
+    // eslint-disable-next-line no-undef
+    class FooterBlock extends ScrollFunctions(Polymer.Element) {
+      static get is() {return 'footer-block';}
 
-        is: 'footer-block',
+      backToTop(e) {
+        this.scrollToY(0, 600, 'easeInOutSine');
+      }
+    }
 
-        behaviors: [
-          HOVERBOARD.ShareBehavior
-        ],
+    window.customElements.define(FooterBlock.is, FooterBlock);
 
-        scrollToTop: function (e) {
-          HOVERBOARD.Elements.Template.backToTop(e);
-        }
-
-      });
-
-    }());
   </script>
 </dom-module>

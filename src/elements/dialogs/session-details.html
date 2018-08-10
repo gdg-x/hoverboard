@@ -1,0 +1,228 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
+<link rel="import" href="../../../bower_components/paper-fab/paper-fab.html">
+
+<link rel="import" href="../../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
+<link rel="import" href="../../../bower_components/marked-element/marked-element.html">
+
+<link rel="import" href="../../mixins/utils-functions.html">
+<link rel="import" href="../../mixins/redux-mixin.html">
+<link rel="import" href="../../mixins/sessions-hoc.html">
+<link rel="import" href="../../mixins/speakers-hoc.html">
+<link rel="import" href="../text-truncate.html">
+<link rel="import" href="../shared-styles.html">
+<link rel="import" href="dialog-styles.html">
+
+<dom-module id="session-details">
+  <template>
+    <style is="custom-style" include="shared-styles dialog-styles flex flex-alignment positioning"></style>
+
+    <polymer-helmet
+      title="[[session.title]] | {$ title $}"
+      description="[[session.description]]"
+      image="[[session.speakers.0.photoUrl]]"
+      active="[[opened]]"
+      label1="{$ time $}"
+      data1="[[session.dateReadable]], [[session.startTime]] - [[session.endTime]]"
+      label2="{$ sessionDetails.contentLevel $}"
+      data2="[[session.complexity]]"
+    ></polymer-helmet>
+
+    <app-header-layout has-scrolling-region>
+      <app-header slot="header" class="header" fixed="[[viewport.isTabletPlus]]">
+        <iron-icon
+          class="close-icon"
+          icon="hoverboard:[[_getCloseBtnIcon(viewport.isLaptopPlus)]]"
+          on-tap="_close"
+        ></iron-icon>
+        <app-toolbar>
+          <div class="dialog-container header-content" layout vertical end-justified>
+            <h2 class="name">[[session.title]]</h2>
+            <div class="tags" hidden$="[[!session.tags.length]]">
+              <template is="dom-repeat" items="[[session.tags]]" as="tag">
+                <span class="tag" style$="color: [[_getTagColor(tag)]]">[[tag]]</span>
+              </template>
+            </div>
+
+            <div class="float-button">
+              <paper-fab
+                icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
+                hidden$="[[!viewport.isLaptopPlus]]"
+                on-tap="_toggleFeaturedSession"
+              ></paper-fab>
+            </div>
+          </div>
+        </app-toolbar>
+      </app-header>
+
+      <div class="dialog-container content">
+        <div class="float-button">
+          <paper-fab
+            icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
+            hidden$="[[viewport.isLaptopPlus]]"
+            on-tap="_toggleFeaturedSession"
+          ></paper-fab>
+        </div>
+        <h3 class="meta-info" hidden$="[[disabledSchedule]]">[[session.dateReadable]], [[session.startTime]] - [[session.endTime]]</h3>
+        <h3 class="meta-info" hidden$="[[disabledSchedule]]">[[session.track.title]]</h3>
+        <h3 class="meta-info" hidden$="[[!session.complexity]]">{$ sessionDetails.contentLevel $}:
+          [[session.complexity]]</h3>
+
+        <marked-element class="description" markdown="[[session.description]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
+
+        <div class="actions" layout horizontal>
+          <a
+            class="action"
+            href$="[[session.presentation]]"
+            hidden$="[[!session.presentation]]"
+            target="_blank"
+            rel="noopener noreferrer"
+            layout horizontal center
+          >
+            <iron-icon icon="hoverboard:presentation"></iron-icon>
+            <span>{$ sessionDetails.viewPresentation $}</span>
+          </a>
+          <div
+            class="action"
+            hidden$="[[!session.videoId]]"
+            on-tap="_openVideo"
+            layout horizontal center
+          >
+            <iron-icon icon="hoverboard:video"></iron-icon>
+            {$ sessionDetails.viewVideo $}
+          </div>
+        </div>
+
+        <div class="additional-sections" hidden$="[[!session.speakers.length]]">
+          <h3>{$ sessionDetails.speakers $}</h3>
+
+          <template is="dom-repeat" items="[[_findSpeakers(session.speakers)]]" as="speaker">
+            <a href$="/speakers/[[speaker.id]]" class="section">
+              <div layout horizontal center>
+                <plastic-image
+                  class="section-photo"
+                  srcset="[[speaker.photoUrl]]"
+                  sizing="cover"
+                  lazy-load preload fade
+                ></plastic-image>
+
+                <div class="section-details" flex>
+                  <div class="section-primary-text">[[speaker.name]]</div>
+                  <div class="section-secondary-text">[[speaker.company]] / [[speaker.country]]</div>
+                </div>
+              </div>
+            </a>
+          </template>
+        </div>
+      </div>
+    </app-header-layout>
+
+  </template>
+
+  <script>
+
+    // eslint-disable-next-line no-undef
+    class SessionDetails extends UtilsFunctions(SessionsHoC(SpeakersHoC(
+      ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element))
+    ))) {
+      static get is() {
+        return 'session-details';
+      }
+
+      static get properties() {
+        return {
+          disabledSchedule: {
+            type: Boolean,
+            value: () => JSON.parse('{$ disabledSchedule $}'),
+          },
+          session: {
+            type: Object,
+          },
+          viewport: {
+            type: Object,
+            statePath: 'ui.viewport',
+          },
+          user: {
+            type: Object,
+            statePath: 'user',
+          },
+          featuredSessions: {
+            type: Object,
+            statePath: 'sessions.featured',
+          },
+        };
+      }
+
+      constructor() {
+        super();
+        this.addEventListener('iron-overlay-canceled', this._close);
+      }
+
+      _close() {
+        dialogsActions.closeDialog(DIALOGS.SESSION);
+      }
+
+      _getTagColor(value) {
+        if (ShadyCSS) {
+          return ShadyCSS.getComputedStyleValue(this, `--${this.generateClassName(value)}`);
+        }
+        return getComputedStyle(this, `--${this.generateClassName(value)}`);
+      }
+
+      _getCloseBtnIcon(isLaptopViewport) {
+        return isLaptopViewport ? 'close' : 'arrow-left';
+      }
+
+      _openVideo() {
+        uiActions.toggleVideoDialog({
+          title: this.session.title,
+          youtubeId: this.session.videoId,
+          disableControls: true,
+          opened: true,
+        });
+      }
+
+      _toggleFeaturedSession(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (!this.user.signedIn) {
+          toastActions.showToast({
+            message: '{$ schedule.saveSessionsSignedOut $}',
+            action: {
+              title: 'Sign in',
+              callback: () => {
+                dialogsActions.openDialog(DIALOGS.SIGNIN);
+              },
+            },
+          });
+          return;
+        }
+        const sessions = Object.assign({}, this.featuredSessions, {
+          [this.session.id]: !this.featuredSessions[this.session.id] ? true : null,
+        });
+
+        this.dispatch(sessionsActions.setUserFeaturedSessions(this.user.uid, sessions));
+      }
+
+      _getFeaturedSessionIcon(featuredSessions, sessionId) {
+        return featuredSessions && featuredSessions[sessionId] ? 'bookmark-check' : 'bookmark-plus';
+      }
+
+      _findSpeakers(speakers) {
+        if (speakers && typeof speakers[0] !== 'object') {
+          return speakers.map((speakerId) => this.speakersMap[speakerId]);
+        }
+        return speakers;
+      }
+    }
+
+    window.customElements.define(SessionDetails.is, SessionDetails);
+  </script>
+</dom-module>

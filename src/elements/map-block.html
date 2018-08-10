@@ -1,247 +1,181 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
-
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../../bower_components/paper-item/paper-icon-item.html">
-<link rel="import" href="../../bower_components/paper-item/paper-item-body.html">
-<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/good-map/good-map.html">
 
-<link rel="import" href="../../bower_components/google-map/google-map.html">
-
-<link rel="import" href="../styles/shared-styles.html">
-
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="./hoverboard-icons.html">
+<link rel="import" href="./shared-styles.html">
 
 <dom-module id="map-block">
-
   <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
 
-    <style include="shared-styles">
+    <style>
+
       :host {
+        margin: 32px auto;
         display: block;
-        padding: 40px 0;
-        position: relative;
-        overflow: hidden;
-        min-height: 300px;
-        --paper-item-disabled-color: var(--primary-text-color);
-      }
-
-      google-map,
-      .disable-map-events {
-        @apply(--layout-fit);
-      }
-
-      .container {
-        @apply(--layout-horizontal);
-      }
-
-      .card-wrapper {
-        @apply(--layout-horizontal);
-        @apply(--layout-flex);
-        @apply(--layout-around-justified);
-      }
-
-      .card-content {
-        padding-right: 8px;
-        padding-left: 8px;
-      }
-
-      .card {
-        --paper-card-header-text: {
-          color: #FFFFFF;
-          font-weight: 300;
-        };
-        min-width: 320px;
-        max-width: 400px;
-        background: #FFFFFF;
-      }
-
-      paper-icon-item {
-        --paper-item-disabled-color: inherit;
-      }
-
-      paper-icon-item iron-icon {
-        --iron-icon-fill-color: var(--default-primary-color);
-      }
-
-      .card .bottom-link {
-        color: var(--secondary-text-color);
-      }
-
-      .header {
-        height: 250px;
         position: relative;
       }
 
-      .header-image {
-        @apply(--layout-fit);
-        width: 100%;
-        background-size: cover;
-        background-position: 50% 50%;
-        transition: background-image 1s ease-in-out;
-        will-change: background-image;
-      }
-
-      .title-text {
+      .description-card {
+        margin: 0 -16px;
         padding: 16px;
-        position: absolute;
-        bottom: 0;
-        font-size: 24px;
-        color: #fff;
+        background-color: var(--default-primary-color);
+        color: var(--text-primary-color);
       }
 
-      .additional-space {
-        display: none;
+      .bottom-info {
+        margin-top: 24px;
       }
 
-      @media (min-width: 601px) {
-        .card {
-          min-width: 400px;
-        }
+      .directions {
+        --paper-icon-button: {
+          width: 48px;
+          height: 48px;
+          color: var(--text-primary-color);
+        };
       }
 
-      @media (min-width: 961px) {
+      @media (min-width: 640px) {
         :host {
-          padding: 100px 0;
+          margin: 64px auto 72px;
         }
 
-        .additional-space {
-          @apply(--layout);
-          @apply(--layout-flex);
+        .map-container {
+          height: 640px;
+          overflow: hidden;
+        }
+
+        good-map {
+          display: block;
+          height: 664px;
+        }
+
+        .description-card {
+          margin: 0;
+          padding: 24px;
+          max-width: 320px;
+          transform: translateY(80px);
+        }
+
+        .address {
+          font-size: 12px;
         }
       }
+
     </style>
 
-    <template is="dom-if" if="[[selected]]">
-      <google-map
-        zoom="{$ location.pointer.zoom $}"
-        latitude="{$ location.mapCenter.latitude $}"
-        longitude="{$ location.mapCenter.longitude $}"
-        api-key="{$ location.apiKey $}"
-        styles="[[options]]"
-        disable-zoom disable-default-ui
-      >
-        <google-map-marker
-          latitude="{$ location.pointer.latitude $}"
-          longitude="{$ location.pointer.longitude $}"
-        ></google-map-marker>
-      </google-map>
+    <template is="dom-if" if="[[viewport.isTabletPlus]]">
+      <div class="map-container">
+        <good-map
+          id="map"
+          api-key="{$ googleMapApiKey $}"
+          latitude="{$ location.mapCenter.latitude $}"
+          longitude="{$ location.mapCenter.longitude $}"
+          zoom="{$ location.pointer.zoom $}"
+          map-options="[[options]]"
+        ></good-map>
+      </div>
     </template>
-    >
-    <div class="disable-map-events"></div>
-    <div class="container">
-      <div class="additional-space"></div>
-      <div class="card-wrapper">
-        <paper-card class="card">
-          <div class="header paper-card">
-            <div class="header-image" style$="background-image: url([[_currentImage]])"></div>
-            <div class="title-text">{$ locationTitle $}</div>
-          </div>
-          <div class="paper-card-container">
-            <div class="card-content list">
-              <paper-icon-item disabled>
-                <iron-icon icon="icons:feedback" item-icon></iron-icon>
-                <paper-item-body>{$ locationDescription $}</paper-item-body>
-              </paper-icon-item>
-              <paper-icon-item disabled>
-                <iron-icon icon="icons:location" item-icon></iron-icon>
-                <paper-item-body two-line>
-                  <div>{$ locationAddress $}</div>
-                  <div secondary>{$ locationAddressShort $}</div>
-                </paper-item-body>
-              </paper-icon-item>
-            </div>
-            <div class="card-actions">
-              <a class="bottom-link"
-                 href="https://www.google.com/maps/dir/{$ location.pointer.latitude $},{$ location.pointer.longitude $}/@{$ location.pointer.latitude $},{$ location.pointer.longitude $},18z"
-                 target="_blank"
-                 rel="noopener noreferrer"
-              >
-                <paper-icon-button icon="icons:directions"></paper-icon-button>
-              </a>
-            </div>
-          </div>
-        </paper-card>
+
+    <div class="container" layout vertical end-justified fit$="[[viewport.isTabletPlus]]">
+      <div class="description-card" layout vertical justified>
+        <div>
+          <h2>{$ mapBlock.title $}</h2>
+          <p>{$ location.description $}</p>
+        </div>
+        <div class="bottom-info" layout horizontal justified center>
+          <span class="address">{$ location.address $}</span>
+          <a
+            href="https://www.google.com/maps/dir/?api=1&destination={$ location.pointer.latitude $},{$ location.pointer.longitude $}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <paper-icon-button class="directions" icon="hoverboard:directions"></paper-icon-button>
+          </a>
+        </div>
       </div>
     </div>
 
   </template>
 
   <script>
-    (function () {
-      'use strict';
 
-      Polymer({
+    class MapBlock extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'map-block';
+      }
 
-        is: 'map-block',
-
-        properties: {
+      static get properties() {
+        return {
+          viewport: {
+            type: Object,
+            statePath: 'ui.viewport',
+          },
           options: {
-            type: String,
-            value: function () {
-              return [{
-                stylers: [{
-                  'lightness': 40
+            type: Object,
+            value: () => (
+              {
+                disableDefaultUI: true,
+                disableDoubleClickZoom: true,
+                scrollwheel: false,
+                draggable: false,
+                styles: [{
+                  stylers: [{
+                    lightness: 40,
+                  }, {
+                    visibility: 'on',
+                  }, {
+                    gamma: 0.9,
+                  }, {
+                    weight: 0.4,
+                  }],
                 }, {
-                  'visibility': 'on'
+                  elementType: 'labels',
+                  stylers: [{
+                    visibility: 'on',
+                  }],
                 }, {
-                  'gamma': 0.9
+                  featureType: 'water',
+                  stylers: [{
+                    color: '#5dc7ff',
+                  }],
                 }, {
-                  'weight': 0.4
-                }]
-              }, {
-                'elementType': 'labels',
-                'stylers': [{
-                  'visibility': 'on'
-                }]
-              }, {
-                'featureType': 'water',
-                'stylers': [{
-                  'color': '#5dc7ff'
-                }]
-              }];
-            }
+                  featureType: 'road',
+                  stylers: [{
+                    visibility: 'off',
+                  }],
+                }],
+              }
+            ),
           },
+        };
+      }
 
-          images: {
-            type: Array,
-            value: {$ location.images | dump | safe $}
-          },
+      connectedCallback() {
+        super.connectedCallback();
+        this.addEventListener('dom-change', () => {
+          this.shadowRoot.querySelector('#map').addEventListener('google-map-ready', (e) => {
+            if (!this.viewport.isTabletPlus) return;
+            new google.maps.Marker({
+              position: {
+                lat: parseFloat('{$ location.pointer.latitude $}'),
+                lng: parseFloat('{$ location.pointer.longitude $}'),
+              },
+              icon: {
+                url: 'images/map-marker.svg',
+                anchor: new google.maps.Point(25, 50),
+                scaledSize: new google.maps.Size(50, 50),
+              },
+              map: e.detail,
+            });
+          }, { once: true });
+        }, { once: true });
+      }
+    }
 
-          _currentSourceIndex: {
-            type: Number,
-            value: 0
-          },
-
-          _currentImage: {
-            type: String
-          }
-        },
-
-        ready: function () {
-          this._currentImage = this.images[this._currentSourceIndex];
-          if (this.images.length > 1) {
-            var that = this;
-            setInterval(function () {
-              that.nextImage();
-            }, 4000);
-          }
-        },
-
-        previousImage: function () {
-          this._currentSourceIndex = (this._currentSourceIndex > 0) ? this._currentSourceIndex - 1 : this.images.length - 1;
-          this._currentImage = this.images[this._currentSourceIndex];
-        },
-
-        nextImage: function () {
-          this._currentSourceIndex = (this._currentSourceIndex < this.images.length - 1) ? this._currentSourceIndex + 1 : 0;
-          this._currentImage = this.images[this._currentSourceIndex];
-        }
-
-      });
-
-    }());
+    window.customElements.define(MapBlock.is, MapBlock);
   </script>
-
 </dom-module>
