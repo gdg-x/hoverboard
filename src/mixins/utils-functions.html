@@ -38,11 +38,11 @@
       return string1 === string2;
     }
 
-    getVariableColor(value) {
-      if (ShadyCSS) {
-        return ShadyCSS.getComputedStyleValue(this, `--${this.generateClassName(value)}`);
-      }
-      return getComputedStyle(this, `--${this.generateClassName(value)}`);
+    getVariableColor(value, fallback) {
+      let calculated = ShadyCSS
+        ? ShadyCSS.getComputedStyleValue(this, `--${this.generateClassName(value)}`)
+        : getComputedStyle(this, `--${this.generateClassName(value)}`);
+      return calculated || (fallback && this.getVariableColor(fallback));
     }
   };
 </script>

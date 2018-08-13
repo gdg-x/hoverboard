@@ -45,7 +45,7 @@
             <h2 class="name">[[session.title]]</h2>
             <div class="tags" hidden$="[[!session.tags.length]]">
               <template is="dom-repeat" items="[[session.tags]]" as="tag">
-                <span class="tag" style$="color: [[_getTagColor(tag)]]">[[tag]]</span>
+                <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
               </template>
             </div>
 
@@ -167,13 +167,6 @@
 
       _close() {
         dialogsActions.closeDialog(DIALOGS.SESSION);
-      }
-
-      _getTagColor(value) {
-        if (ShadyCSS) {
-          return ShadyCSS.getComputedStyleValue(this, `--${this.generateClassName(value)}`);
-        }
-        return getComputedStyle(this, `--${this.generateClassName(value)}`);
       }
 
       _getCloseBtnIcon(isLaptopViewport) {
