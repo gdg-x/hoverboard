@@ -108,6 +108,7 @@
               class="section"
               href$="/speakers/[[speaker.id]]/"
               on-tap="_openSpeaker"
+              speaker-id$="[[speaker.id]]"
             >
               <div layout horizontal center>
                 <plastic-image
@@ -161,6 +162,10 @@
             type: Object,
             statePath: 'sessions.featured',
           },
+          currentSpeaker: {
+            type: String,
+            statePath: 'routing.subRoute',
+          },
         };
       }
 
@@ -173,8 +178,12 @@
         dialogsActions.closeDialog(DIALOGS.SESSION);
       }
 
-      _openSpeaker() {
+      _openSpeaker(e) {
         if (this.disabledSchedule) {
+          const speakerId = e.currentTarget.getAttribute('session-id');
+          if (this.currentSpeaker === speakerId) {
+            e.preventDefault();
+          }
           this._close();
         }
       }
