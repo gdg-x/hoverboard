@@ -311,7 +311,7 @@
       _speakersChanged(speakers, selectedFilters) {
         if (this.speakers && this.speakers.length) {
           this.contentLoaderVisibility = 'hidden';
-          const filters = selectedFilters ? selectedFilters.tag : [];
+          const filters = selectedFilters && selectedFilters.tag ? selectedFilters.tag : [];
           const updatedSpeakers = this._filterItems(speakers, filters)
             .map((speaker) => Object.assign({}, speaker, {
               link: `/speakers/${speaker.id}${this.queryParams ? `?${this.queryParams}` : ''}`,
@@ -365,7 +365,7 @@
 
       _filterItems(speakers, selectedFilters) {
         return speakers.filter((speaker) => {
-          if (!selectedFilters) return true;
+          if (!selectedFilters || !selectedFilters.length) return true;
           return speaker.tags
             && !!speaker.tags.filter((tag) =>
               selectedFilters.includes(this.generateClassName(tag))).length;

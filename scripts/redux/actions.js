@@ -281,15 +281,18 @@ const speakersActions = {
 
     return Promise.all([speakersPromise, sessionsPromise])
       .then(([speakers, sessions]) => {
-        const updatedSpeakersList = speakers.map((speaker) => Object.assign({}, speaker, {
-          tags: sessions.objBySpeaker[speaker.id]
-            ? sessions.objBySpeaker[speaker.id].reduce((aggr, session) => {
-              return aggr.concat(session.tags
-                ? session.tags.filter((tag) => aggr.indexOf(tag) < 0)
-                : []);
-            }, [])
-            : [],
-        }));
+        const updatedSpeakersList = speakers.map((speaker) => {
+          const speakersTags = new Set();
+          if (sessions.objBySpeaker[speaker.id]) {
+            sessions.objBySpeaker[speaker.id].map((session) => {
+              if (session.tags) session.tags.map(speakersTags.add.bind(speakersTags));
+            });
+          }
+
+          return Object.assign({}, speaker, {
+            tags: [...speakersTags],
+          });
+        });
         dispatch({
           type: FETCH_SPEAKERS_SUCCESS,
           payload: {
@@ -490,7 +493,7 @@ const scheduleActions = {
 
         scheduleWorker.postMessage({
           speakers,
-          sessions: getState().sessions.list.obj,
+          sessions: getState().sessions.obj,
           schedule,
         });
 
