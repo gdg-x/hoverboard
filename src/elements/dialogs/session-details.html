@@ -104,7 +104,11 @@
           <h3>{$ sessionDetails.speakers $}</h3>
 
           <template is="dom-repeat" items="[[_findSpeakers(session.speakers)]]" as="speaker">
-            <a href$="/speakers/[[speaker.id]]" class="section">
+            <a
+              class="section"
+              href$="/speakers/[[speaker.id]]/"
+              on-tap="_openSpeaker"
+            >
               <div layout horizontal center>
                 <plastic-image
                   class="section-photo"
@@ -167,6 +171,12 @@
 
       _close() {
         dialogsActions.closeDialog(DIALOGS.SESSION);
+      }
+
+      _openSpeaker() {
+        if (this.disabledSchedule) {
+          this._close();
+        }
       }
 
       _getTagColor(value) {
