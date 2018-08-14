@@ -258,29 +258,47 @@ const blogActions = {
 };
 
 const speakersActions = {
-  fetchList: () => (dispatch) => {
+  fetchList: () => (dispatch, getState) => {
     dispatch({
       type: FETCH_SPEAKERS,
     });
 
-    firebase.firestore()
-      .collection('speakers')
-      .orderBy('order', 'asc')
-      .get()
-      .then((snaps) => {
-        const list = snaps.docs
-          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+    const state = getState();
+    const sessionsPromise = Object.keys(state.sessions.list).length
+      ? Promise.resolve(state.sessions)
+      : sessionsActions.fetchList()(dispatch, getState);
 
-        const obj = list.reduce(
-          (acc, curr) => Object.assign({}, acc, { [curr.id]: curr }),
-          {}
-        );
+    const speakersPromise = new Promise((resolve, reject) => {
+      firebase.firestore()
+        .collection('speakers')
+        .orderBy('order', 'asc')
+        .get()
+        .then((snaps) => {
+          resolve(snaps.docs.map((snap) => Object.assign({}, snap.data(), { id: snap.id })));
+        })
+        .catch(reject);
+    });
 
+    return Promise.all([speakersPromise, sessionsPromise])
+      .then(([speakers, sessions]) => {
+        const updatedSpeakersList = speakers.map((speaker) => {
+          const speakersTags = new Set();
+          if (sessions.objBySpeaker[speaker.id]) {
+            sessions.objBySpeaker[speaker.id].map((session) => {
+              if (session.tags) session.tags.map(speakersTags.add.bind(speakersTags));
+            });
+          }
+
+          return Object.assign({}, speaker, {
+            tags: [...speakersTags],
+          });
+        });
         dispatch({
           type: FETCH_SPEAKERS_SUCCESS,
           payload: {
-            obj,
-            list,
+            obj: updatedSpeakersList.reduce((acc, curr) =>
+              Object.assign({}, acc, { [curr.id]: curr }), {}),
+            list: updatedSpeakersList,
           },
         });
       })
@@ -335,46 +353,65 @@ const sessionsActions = {
       type: FETCH_SESSIONS,
     });
 
-    firebase.firestore()
-      .collection('sessions')
-      .get()
-      .then((snaps) => {
-        const list = [];
-        const obj = {};
-        const objBySpeaker = {};
+    return new Promise((resolve, reject) => {
+      firebase.firestore()
+        .collection('sessions')
+        .get()
+        .then((snaps) => {
+          const list = [];
+          const obj = {};
+          const objBySpeaker = {};
+          const tagFilters = new Set();
+          const complexityFilters = new Set();
 
-        snaps.docs.forEach((doc) => {
-          const data = doc.data();
-          const session = Object.assign({}, data, { id: doc.id });
-          list.push(session);
-          obj[doc.id] = session;
+          snaps.docs.forEach((doc) => {
+            const data = doc.data();
+            const session = Object.assign({}, data, { id: doc.id });
+            list.push(session);
+            session.tags && session.tags.map((tag) => tagFilters.add(tag.trim()));
+            session.complexity && complexityFilters.add(session.complexity.trim());
+            obj[doc.id] = session;
 
-          if (Array.isArray(data.speakers)) {
-            data.speakers.forEach((speakerId) => {
-              if (Array.isArray(objBySpeaker[speakerId])) {
-                objBySpeaker[speakerId].push(session);
-              } else {
-                objBySpeaker[speakerId] = [session];
-              }
-            });
-          }
-        });
+            if (Array.isArray(data.speakers)) {
+              data.speakers.forEach((speakerId) => {
+                if (Array.isArray(objBySpeaker[speakerId])) {
+                  objBySpeaker[speakerId].push(session);
+                } else {
+                  objBySpeaker[speakerId] = [session];
+                }
+              });
+            }
+          });
 
-        dispatch({
-          type: FETCH_SESSIONS_SUCCESS,
-          payload: {
+          const payload = {
             obj,
             list,
             objBySpeaker,
-          },
+          };
+
+          dispatch({
+            type: FETCH_SESSIONS_SUCCESS,
+            payload,
+          });
+
+          dispatch({
+            type: SET_FILTERS,
+            payload: {
+              tags: [...tagFilters],
+              complexity: [...complexityFilters],
+            },
+          });
+
+          resolve(payload);
+        })
+        .catch((error) => {
+          dispatch({
+            type: FETCH_SESSIONS_FAILURE,
+            payload: { error },
+          });
+          reject(error);
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: FETCH_SESSIONS_FAILURE,
-          payload: { error },
-        });
-      });
+    });
   },
 
   fetchUserFeaturedSessions: (userId) => (dispatch) => {
@@ -456,7 +493,7 @@ const scheduleActions = {
 
         scheduleWorker.postMessage({
           speakers,
-          sessions: getState().sessions.list.obj,
+          sessions: getState().sessions.obj,
           schedule,
         });
 

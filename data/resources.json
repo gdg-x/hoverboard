@@ -284,5 +284,12 @@
       "part1": "Sign in with",
       "part2": "to continue."
     }
+  },
+  "filters": {
+    "title": "Filters",
+    "results": "Results",
+    "tags": "Tags",
+    "complexity": "Complexity",
+    "clear": "Clear all"
   }
 }

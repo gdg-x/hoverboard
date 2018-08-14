@@ -13,6 +13,7 @@
 <link rel="import" href="../elements/shared-styles.html">
 <link rel="import" href="../elements/content-loader.html">
 <link rel="import" href="../elements/previous-speakers-block.html">
+<link rel="import" href="../elements/filter-menu.html">
 
 <dom-module id="speakers-page">
   <template>
@@ -155,6 +156,8 @@
       active="[[_setHelmetData(active, isDialogOpened)]]"
     ></polymer-helmet>
 
+    <iron-location query="{{queryParams}}"></iron-location>
+
     <app-route
       route="[[route]]"
       pattern="/:speakerId"
@@ -173,6 +176,12 @@
 
     <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
+    <filter-menu
+      filters="[[_filters]]"
+      selected="[[_selectedFilters]]"
+      results-count="[[speakersToRender.length]]"
+    ></filter-menu>
+
     <content-loader
       class="container"
       card-padding="32px"
@@ -186,9 +195,13 @@
     ></content-loader>
 
     <div class="container">
-      <template is="dom-repeat" items="[[speakers]]" as="speaker">
+      <template
+        is="dom-repeat"
+        items="[[speakersToRender]]"
+        as="speaker"
+      >
         <a class="speaker card"
-           href$="/speakers/[[speaker.id]]/"
+           href$="[[speaker.link]]"
            ga-on="click"
            ga-event-category="speaker"
            ga-event-action="open details"
@@ -266,11 +279,21 @@
           route: Object,
           routeData: Object,
           active: Boolean,
+          queryParams: {
+            type: Object,
+            observer: '_paramsUpdated',
+          },
           isDialogOpened: {
             type: Object,
             statePath: 'dialogs.speaker.isOpened',
             observer: '_dialogStatusChanged',
           },
+          filters: {
+            type: Object,
+            statePath: 'filters',
+            observer: '_onFiltersLoad',
+          },
+          speakersToRender: Array,
           contentLoaderVisibility: {
             type: String,
             value: null,
@@ -281,13 +304,19 @@
       static get observers() {
         return [
           '_openSpeakerDetails(active, speakers, speakersMap, routeData.speakerId)',
-          '_speakersChanged(speakers)',
+          '_speakersChanged(speakers, _selectedFilters)',
         ];
       }
 
-      _speakersChanged() {
+      _speakersChanged(speakers, selectedFilters) {
         if (this.speakers && this.speakers.length) {
           this.contentLoaderVisibility = 'hidden';
+          const filters = selectedFilters && selectedFilters.tag ? selectedFilters.tag : [];
+          const updatedSpeakers = this._filterItems(speakers, filters)
+            .map((speaker) => Object.assign({}, speaker, {
+              link: `/speakers/${speaker.id}${this.queryParams ? `?${this.queryParams}` : ''}`,
+            }));
+          this.set('speakersToRender', updatedSpeakers);
         }
       }
 
@@ -312,6 +341,35 @@
 
       _setHelmetData(active, isDialogOpened) {
         return active && !isDialogOpened;
+      }
+
+      _onFiltersLoad(filters) {
+        this.set('_filters', [{
+          title: '{$ filters.tags $}',
+          key: 'tag',
+          items: filters.tags,
+        }]);
+      }
+
+      _paramsUpdated(queryParams) {
+        const selected = queryParams.split('&')
+          .map((query) => query.split('='))
+          .filter((filter) => filter[0] && filter[1])
+          .reduce((aggr, filter) => Object.assign({}, aggr, {
+            [filter[0]]: aggr[filter[0]]
+              ? aggr[filter[0]].concat(filter[1])
+              : [filter[1]],
+          }), {});
+        this.set('_selectedFilters', selected);
+      }
+
+      _filterItems(speakers, selectedFilters) {
+        return speakers.filter((speaker) => {
+          if (!selectedFilters || !selectedFilters.length) return true;
+          return speaker.tags
+            && !!speaker.tags.filter((tag) =>
+              selectedFilters.includes(this.generateClassName(tag))).length;
+        });
       }
     }
 

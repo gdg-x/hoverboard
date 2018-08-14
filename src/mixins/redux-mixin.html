@@ -86,12 +86,10 @@
       obj: {},
     },
     sessions: {
-      list: {
-        fetching: false,
-        fetchingError: null,
-        list: [],
-        obj: {},
-      },
+      fetching: false,
+      fetchingError: null,
+      list: [],
+      obj: {},
       featured: {},
       featuredFetching: false,
       featuredError: null,
@@ -115,6 +113,10 @@
     notifications: {
       status: NOTIFICATIONS_STATUS.DEFAULT,
     },
+    filters: {
+      tags: [],
+      complexity: [],
+    },
   };
 
   const appReducer = (state = initialState, action) => {
@@ -136,6 +138,7 @@
       subscribed: subscribeReducer(state.subscribed, action),
       toast: toastReducer(state.toast, action),
       notifications: notificationsReducer(state.notifications, action),
+      filters: filtersReducer(state.filters, action),
     };
   };
 
