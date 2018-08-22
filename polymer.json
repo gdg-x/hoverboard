@@ -26,9 +26,11 @@
     "bower_components/webcomponentsjs/webcomponents-*.js",
     "bower_components/iron-dropdown/iron-dropdown-scroll-manager.html",
     "bower_components/firebase/*.js",
+    "bower_components/firebase/*.js.map",
     "bower_components/plastic-image/intersection-observer.js",
     "node_modules/redux/dist/redux.min.js",
-    "node_modules/autotrack/autotrack.js"
+    "node_modules/autotrack/autotrack.js",
+    "node_modules/autotrack/autotrack.js.map"
   ],
   "lint": {
     "rules": ["polymer-2"]
