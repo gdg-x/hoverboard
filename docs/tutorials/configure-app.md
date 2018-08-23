@@ -92,6 +92,11 @@ Define a page's label and url in `navigation` in `data/settings.json`
 ]
 ```
 
+### "Become a partner" - how it works?
+
+`Become a partner` button opens a form with `company name`, `name` and `email` fields. After a user (potential partner) filled a form, this data is saved into Frirestore DB, `potentialPartners` node. It gives a possibility to contact back those people who are interested to be a partner with you and coloborate earlier.
+
+
 # Next steps
 
 Now your Hoverboard is up configured, learn how to integrate [firebase][firebase] in your app, [style app][style app] and [deploy][deploy].
