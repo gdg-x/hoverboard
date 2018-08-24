@@ -1,15 +1,15 @@
 {
   "basepath": "/",
-  "url": "https://hoverboard-dev.firebaseapp.com/",
-  "analytics": "UA-43643469-8",
+  "url": "https://devfest-taipei-2018.firebaseapp.com/",
+  "analytics": "UA-124004035-1",
   "prefix": "/",
   "firebase": {
-    "apiKey": "AIzaSyBu9LI-hY4NfUOPJJKuV3BfQm7edLr2-aE",
-    "authDomain": "hoverboard-dev.firebaseapp.com",
-    "databaseURL": "https://hoverboard-dev.firebaseio.com",
-    "projectId": "hoverboard-dev",
-    "storageBucket": "hoverboard-dev.appspot.com",
-    "messagingSenderId": "1083195713896"
+    "apiKey": "AIzaSyAwD3hcFlrbiYjhbjjB_GxbDMmStoEdsVE",
+    "authDomain": "devfest-taipei-2018.firebaseapp.com",
+    "databaseURL": "https://devfest-taipei-2018.firebaseio.com",
+    "projectId": "devfest-taipei-2018",
+    "storageBucket": "devfest-taipei-2018.appspot.com",
+    "messagingSenderId": "580281997420"
   },
-  "googleMapApiKey": "AIzaSyDWy6O98n-ueoVaYPWRPve23vjm3JP08gw"
+  "googleMapApiKey": "AIzaSyAwD3hcFlrbiYjhbjjB_GxbDMmStoEdsVE"
 }
