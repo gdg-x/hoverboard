@@ -136,7 +136,7 @@
 
     <a
       class="session"
-      href$="/schedule/[[dayName]]?sessionId=[[session.id]]"
+      href$="/schedule/[[dayName]]?[[toggleQueryParam(queryParams, 'sessionId', session.id)]]"
       featured$="[[isFeatured]]"
       layout vertical
       relative
@@ -218,6 +218,7 @@
           user: Object,
           session: Object,
           featuredSessions: Object,
+          queryParams: String,
           sessionColor: {
             type: String,
             computed: 'getVariableColor(session.mainTag)',

@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/app-route/app-route-converter.html">
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/iron-location/iron-location.html">
 <link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
 
 <link rel="import" href="../mixins/utils-functions.html">
@@ -15,6 +16,8 @@
 <link rel="import" href="../elements/schedule-day.html">
 <link rel="import" href="../elements/content-loader.html">
 <link rel="import" href="../elements/my-schedule.html">
+<link rel="import" href="../elements/filter-menu.html">
+
 
 <dom-module id="schedule-page">
   <template>
@@ -57,6 +60,16 @@
       active="[[_setHelmetData(active, isDialogOpened)]]"
     ></polymer-helmet>
 
+    <iron-location query="{{queryParams}}"></iron-location>
+
+    <app-route
+      route="{{appRoute}}"
+      pattern="/:page"
+      data="{{routeData}}"
+      tail="{{subroute}}"
+      query-params="{{nQueryParams}}"
+    ></app-route>
+
     <app-route
       route="[[route]]"
       pattern="/:day"
@@ -77,6 +90,12 @@
     </hero-block>
 
     <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
+
+    <filter-menu
+      filters="[[_filters]]"
+      selected="[[_selectedFilters]]"
+      results-count="[[sessionsToRender.length]]"
+    ></filter-menu>
 
     <div class="container">
       <content-loader
@@ -106,7 +125,9 @@
             day="[[day]]"
             user="[[user]]"
             featured-sessions="[[featuredSessions]]"
+            selected-filters="[[_selectedFilters]]"
             viewport="[[viewport]]"
+            query-params="[[queryParams]]"
           ></schedule-day>
         </template>
         <my-schedule
@@ -160,16 +181,23 @@
             type: Object,
             statePath: 'ui.viewport',
           },
+          filters: {
+            type: Object,
+            statePath: 'filters',
+            observer: '_onFiltersLoad',
+          },
+          _selectedFilters: Object,
         };
       }
 
       static get observers() {
         return [
           '_setDay(active, routeData.day, schedule)',
-          '_openSessionDetails(active, sessions, queryParams.sessionId)',
+          '_openSessionDetails(active, sessions, _selectedFilters.sessionId)',
           '_fetchFeaturedSessions(active, sessions, user.uid)',
-          '_scheduleChanged(schedule)',
+          '_scheduleChanged(schedule, _selectedFilters)',
           '_sessionsAndSpeakersChanged(sessions, speakers)',
+          '_paramsUpdated(queryParams)',
         ];
       }
 
@@ -201,7 +229,8 @@
       }
 
       _dialogStatusChanged(nextState, prevState) {
-        if (!nextState && prevState && this.active && this.queryParams.sessionId) {
+        if (!nextState && prevState && this.active
+          && this._selectedFilters.sessionId && this._selectedFilters.sessionId.length) {
           history.back();
         }
       }
@@ -210,7 +239,7 @@
         if (sessions && sessions.length) {
           requestAnimationFrame(() => {
             if (active && id) {
-              dialogsActions.openDialog(DIALOGS.SESSION, this.sessionsMap[id]);
+              dialogsActions.openDialog(DIALOGS.SESSION, this.sessionsMap[id[0]]);
             } else if (this.isDialogOpened) {
               dialogsActions.closeDialog(DIALOGS.SESSION);
             }
@@ -220,6 +249,22 @@
 
       _setHelmetData(active, isDialogOpened) {
         return active && !isDialogOpened;
+      }
+
+      _onFiltersLoad(filters) {
+        this.set('_filters', [{
+          title: '{$ filters.tags $}',
+          key: 'tag',
+          items: filters.tags,
+        }, {
+          title: '{$ filters.complexity $}',
+          key: 'complexity',
+          items: filters.complexity,
+        }]);
+      }
+
+      _paramsUpdated(queryParams) {
+        this.set('_selectedFilters', this.parseQueryParamsFilters(queryParams));
       }
     }
 

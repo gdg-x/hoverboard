@@ -4,6 +4,7 @@
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-location/iron-location.html">
 <link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
 
 <link rel="import" href="../mixins/utils-functions.html">
@@ -288,16 +289,17 @@
             statePath: 'dialogs.speaker.isOpened',
             observer: '_dialogStatusChanged',
           },
+          contentLoaderVisibility: {
+            type: String,
+            value: null,
+          },
           filters: {
             type: Object,
             statePath: 'filters',
             observer: '_onFiltersLoad',
           },
+          _selectedFilters: Object,
           speakersToRender: Array,
-          contentLoaderVisibility: {
-            type: String,
-            value: null,
-          },
         };
       }
 
@@ -352,15 +354,7 @@
       }
 
       _paramsUpdated(queryParams) {
-        const selected = queryParams.split('&')
-          .map((query) => query.split('='))
-          .filter((filter) => filter[0] && filter[1])
-          .reduce((aggr, filter) => Object.assign({}, aggr, {
-            [filter[0]]: aggr[filter[0]]
-              ? aggr[filter[0]].concat(filter[1])
-              : [filter[1]],
-          }), {});
-        this.set('_selectedFilters', selected);
+        this.set('_selectedFilters', this.parseQueryParamsFilters(queryParams));
       }
 
       _filterItems(speakers, selectedFilters) {
