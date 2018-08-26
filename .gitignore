@@ -6,6 +6,7 @@ functions/lib/
 .idea/
 .temp/
 .vscode/
+.firebase/
 .firebaserc
 /appengine/dist/
 serviceAccount.json
