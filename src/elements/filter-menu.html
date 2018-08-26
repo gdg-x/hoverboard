@@ -86,7 +86,7 @@
     <div class="filters-toolbar container">
       <div layout horizontal center>
         <div layout horizontal center flex>
-          <div class="results" hidden$="[[_showResultsText(resultsCount, _selectedArray)]]">
+          <div class="results" hidden$="[[_hideResultText(resultsCount, _selectedArray)]]">
             [[resultsCount]] {$ filters.results $}
           </div>
         </div>
@@ -163,13 +163,18 @@
           },
           _selectedArray: {
             type: Array,
-            computed: '_generateSelectedArray(selected)',
+            computed: '_generateSelectedArray(selected, filters)',
           },
           _openedBoard: {
             type: Boolean,
             value: false,
           },
         };
+      }
+
+      constructor() {
+        super();
+        this._clickOutsideListener = this._clickOutsideListener.bind(this);
       }
 
       _isSelected(selectedFilters, key, value) {
@@ -180,32 +185,14 @@
       _toggleFilter(e) {
         const filterKey = e.currentTarget.getAttribute('filter-key');
         const filter = this.generateClassName(e.currentTarget.getAttribute('filter-value').trim());
-        let resultQueryObject;
-
-        if (this.selected[filterKey]) {
-          resultQueryObject = Object.assign({}, this.selected, {
-            [filterKey]: this._isSelected(this.selected, filterKey, filter)
-              ? this.selected[filterKey].filter((selectedFilter) => selectedFilter !== filter)
-              : this.selected[filterKey].concat([filter]),
-          });
-        } else {
-          resultQueryObject = Object.assign({}, this.selected, {
-            [filterKey]: [filter],
-          });
-        }
-
-        const searchParams = Object.entries(resultQueryObject).reduce((aggr, entry) => {
-          const filters = entry[1].map((filter) => `${entry[0]}=${filter}`);
-          if (!aggr.length) {
-            return filters;
-          }
-          return aggr.concat(filters);
-        }, []).join('&');
-        this.set('queryParams', searchParams);
+        this.set('queryParams', this.toggleQueryParam(this.queryParams, filterKey, filter));
       }
 
-      _generateSelectedArray(selected) {
+      _generateSelectedArray(selected, filters) {
+        if (!selected || !filters) return;
+        const targetFilters = filters.map((filter) => filter.key);
         return Object.keys(selected)
+          .filter((key) => targetFilters.includes(key))
           .reduce((aggr, key) =>
               aggr.concat(selected[key].map((value) =>
                 ({ key, value })))
@@ -213,6 +200,11 @@
       }
 
       _toggleBoard() {
+        if (this._openedBoard) {
+          this._clickOutsideUnlisten();
+        } else {
+          this._clickOutsideListen();
+        }
         this.set('_openedBoard', !this._openedBoard);
       }
 
@@ -225,8 +217,25 @@
         return state ? 'close' : 'filter-list';
       }
 
-      _showResultsText(resultsCount, _selectedArray) {
-        return !_selectedArray.length || typeof resultsCount === 'undefined';
+      _hideResultText(resultsCount, _selectedArray) {
+        return !_selectedArray || !_selectedArray.length || typeof resultsCount === 'undefined';
+      }
+
+      _clickOutsideListen() {
+        this._clickOutsideUnlisten();
+        window.addEventListener('click', this._clickOutsideListener, false);
+      }
+
+      _clickOutsideUnlisten() {
+        window.removeEventListener('click', this._clickOutsideListener, false);
+      }
+
+      _clickOutsideListener(e) {
+        const isOutside = !e.path.find((path) => path === this);
+        if (isOutside) {
+          this._toggleBoard();
+          this._clickOutsideUnlisten();
+        }
       }
     }
 

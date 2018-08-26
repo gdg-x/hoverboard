@@ -139,7 +139,6 @@
       pattern="/:page"
       data="{{routeData}}"
       tail="{{subroute}}"
-      query-params="{{queryParams}}"
     ></app-route>
 
     <app-drawer-layout drawer-width="300px" force-narrow fullbleed>
@@ -211,7 +210,6 @@
             data-route="schedule"
             data-path="pages/schedule-page.html"
             route="[[subroute]]"
-            query-params="[[queryParams]]"
           ></schedule-page>
           <speakers-page
             data-route="speakers"
@@ -351,14 +349,12 @@
         super();
         Polymer.setPassiveTouchGestures(true);
         window.performance && performance.mark && performance.mark('hoverboard-app.created');
-        this._removeQueryParams = this._removeQueryParams.bind(this);
         this._toggleHeaderShadow = this._toggleHeaderShadow.bind(this);
         this._toggleDrawer = this._toggleDrawer.bind(this);
       }
 
       connectedCallback() {
         super.connectedCallback();
-        window.addEventListener('reset-query-params', this._removeQueryParams);
         window.addEventListener('element-sticked', this._toggleHeaderShadow);
         this.$.drawer.addEventListener('opened-changed', this._toggleDrawer);
         window.addEventListener('offline', () => {
@@ -371,7 +367,6 @@
 
       disconnectedCallback() {
         super.disconnectedCallback();
-        window.removeEventListener('reset-query-params', this._removeQueryParams);
         window.removeEventListener('element-sticked', this._toggleHeaderShadow);
         this.$.drawer.removeEventListener('opened-changed', this._toggleDrawer);
       }
@@ -431,10 +426,6 @@
         if (this._openedDialog) {
           document.body.style.overflow = 'hidden';
         }
-      }
-
-      _removeQueryParams() {
-        this.set('queryParams', null);
       }
 
       _toggleHeaderShadow(e) {
