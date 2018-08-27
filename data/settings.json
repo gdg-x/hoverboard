@@ -118,13 +118,13 @@
     "short": "臺灣臺北市",
     "address": "106臺北市大安區羅斯福路四段1號",
     "pointer": {
-      "latitude": 121.534515,
-      "longitude": 25.0188305,
-      "zoom": 5
+      "latitude": 25.0187545,
+      "longitude": 121.5365612,
+      "zoom": 17
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": 25.0187545,
+      "longitude": 121.5365612
     },
     "description": "國立臺灣大學博雅教學館是台灣大學校園中的新式建築，足以容納此次活動人數"
   },
