@@ -22,7 +22,7 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 	```
 	
 1. Import data to the Firebase Database.
-	- Generate `serviceAccount.json` file (go to https://console.firebase.google.com/project/%YOUR_PROJECT_ID%/settings/serviceaccounts/adminsdk)
+	- Generate `serviceAccount.json` file
 		- Go to https://console.firebase.google.com/project/%YOUR_PROJECT_ID%/settings/serviceaccounts/adminsdk
 		- Ensure that **Node.js** is selected
 		- Press **GENERATE NEW PRIVATE KEY**
