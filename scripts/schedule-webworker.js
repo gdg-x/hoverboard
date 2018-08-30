@@ -29,17 +29,24 @@ function addTagTo(array, element) {
   }
 }
 
-function updateSpeakersSessions(speakersRaw, speakerIds, session) {
+function updateSpeakersSessions(speakersRaw, speakerIds, session, generatedSpeakers) {
   let result = {};
   for (let i = 0; i < speakerIds.length; i++) {
     const speaker = speakersRaw[speakerIds[i]];
+    const generatedSpeaker = generatedSpeakers[speakerIds[i]];
+    const hasSessionsAssigned = generatedSpeaker && generatedSpeaker.sessions && generatedSpeaker.sessions.length;
+
     if (speaker) {
+      const speakerSessions = hasSessionsAssigned
+        ? [].concat(generatedSpeaker.sessions)
+        : [];
+
+      if (!speakerSessions.filter((speakerSession) => speakerSession.id === session.id).length) {
+        speakerSessions.push(session)
+      }
+
       result[speakerIds[i]] = Object.assign({}, speaker, {
-        sessions: speaker.sessions
-          ? speaker.sessions.map((speakerSession) => speakerSession.id === session.id
-            ? session
-            : speakerSession)
-          : [session],
+        sessions: speakerSessions
       });
     }
   }
@@ -50,6 +57,7 @@ self.addEventListener('message', ({ data }) => {
   const speakersRaw = data.speakers;
   const sessionsRaw = data.sessions;
   const scheduleRaw = data.schedule;
+
 
   let schedule = {};
   let sessions = {};
@@ -114,13 +122,15 @@ self.addEventListener('message', ({ data }) => {
             })) : [],
           });
 
+
           subSessions.push(finalSubSession);
           sessions[sessionId] = finalSubSession;
+
           if (subsession.speakers) {
             speakers = Object.assign(
               {},
               speakers,
-              updateSpeakersSessions(speakersRaw, subsession.speakers, finalSubSession)
+              updateSpeakersSessions(speakersRaw, subsession.speakers, finalSubSession, speakers)
             );
           }
         }
