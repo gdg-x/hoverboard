@@ -1,6 +1,6 @@
-# Looking Back at Ohio DevFest 2018
+# Looking Back at Ohio DevFest 2017
 
-Ohio DevFest 2018 was the first year in Columbus and it was awesome! We were excited to welcome 15 speaker and over 200 attendees!
+Ohio DevFest 2017 was the first year in Columbus and it was awesome! We were excited to welcome 15 speaker and over 200 attendees!
 
 We kicked the day off right with [Duck Donuts](https://www.duckdonuts.com/) and coffee.
 ![Duck Donuts](https://lh3.googleusercontent.com/Mlw4XNq_iEkaFZ1ubSC0UVjje9KYss7JEeLOaOVPcnJD-M8HEvqEvK9FklOGdhbwAng0ufCNpX0iH3kDEwSwv5AamdskNiPBOOJNzP4bVLHitvAo_JTM0A_7sQkjXeHBQaqq-2KyJR2KFg63E5HbCxvZYaKtrMdR0ZsutEHBQaTM7UZbaOS33IxNW-EaMlljD_vVbo2hS0nFWlQb_n4tit8tDEun0nDbzm0jlbVYz-BTXJ-6ELDQQ0lE2a8LrlA_n6mkj_7M8Fs6bY1dF1uwEIYpKtTqka0E8r5IgHFzTTbejMxHqRV9tJJnv-gzuNrtXNklBZ6nBy6bFZxjtmiRb-JTVlWiKCkUAPrM9AEqWefAxUFcy4QV9DIAF5ouBL2aOsxKlfyzMUAQbtjdDaJzEk_XMvuwikuc5nrwZg6crDVHc4ynPADe10lN5Lq6U91VKRFWV2BfQz-CezrYt7ng3UeO1VbG1Df6C2Sl8259HMvkIFj8beQMfI5btN5ojBGBTfbQJy9tk1kEYR63Uye-ePMXncuiBiqg2_MqlvFwj4FXvQquneuIDPPsSGi1CjQE7Maugut9t3Ok04XbZ5Ui6MwVmxP-eORnGDvAV4e_q40jowPDlHJ9K2fjKoz_8JqzkCy6VayMhtghmOgzeX2TLKiXB-PTUSm5Kw=w1280-h855-no)
