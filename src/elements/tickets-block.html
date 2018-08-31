@@ -88,9 +88,7 @@
         Ticket sales is closed for 2018, but Ohio DevFest will return to Columbus for 2019<br/><br/>
         Stay tuned for date and venue!
       </div> -->
-      <a href="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
-        <paper-button class="buy-button disabled" raised disabled>{$ buyTicket $}</paper-button>
-      </a>
+      <paper-button class="buy-button disabled" raised disabled on-tap="_trackBuyClick">{$ buyTicket $}</paper-button>
     </div>
 
   </template>
@@ -107,6 +105,8 @@
         },
 
         _trackBuyClick: function (e) {
+          // This is a hack!!!
+          window.location.href = "https://www.eventbrite.com/e/ohio-devfest-2018-tickets-40801993862";
           HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', e.currentTarget.href);
         }
 
