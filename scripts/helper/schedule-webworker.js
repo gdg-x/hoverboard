@@ -47,6 +47,13 @@ function addTagTo(tag, tags) {
   }
 }
 
+function getById(array, id) {
+  for (var i = array.length - 1; i >= 0; i--) {
+    if (array[i].id == id) return array[i];
+  }
+  return undefined; 
+}
+
 self.addEventListener('message', function (e) {
   var speakers = e.data.speakers;
   var sessions = e.data.sessions;
@@ -69,7 +76,7 @@ self.addEventListener('message', function (e) {
             addTagTo(session.mainTag, schedule.tags);
 
             if (!isDefined(session.track)) {
-              session.track = day.tracks[sessionIndex];
+              session.track = getById(day.tracks, timeslot.trackIds[sessionIndex]);
             }
             session.startTime = timeslot.startTime;
             session.endTime = subSessionsLen > 1 ? getEndTime(day.date, timeslot.startTime, timeslot.endTime, subSessionsLen, subSessIdx + 1) : timeslot.endTime;
