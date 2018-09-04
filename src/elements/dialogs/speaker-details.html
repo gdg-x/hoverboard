@@ -41,6 +41,10 @@
         color: var(--secondary-text-color);
       }
 
+      .section {
+        cursor: pointer;
+      }
+
     </style>
 
     <polymer-helmet
@@ -108,7 +112,7 @@
           <h3>{$ speakerDetails.sessions $}</h3>
 
           <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
-            <a href$="/schedule?sessionId=[[session.id]]" on-tap="_openSession" session-id$="[[session.id]]" class="section">
+            <div on-tap="_openSession" session-id$="[[session.id]]" class="section">
               <div layout horizontal center>
                 <div class="section-details" flex>
                   <div class="section-primary-text">[[session.title]]</div>
@@ -123,7 +127,7 @@
                   </div>
                 </div>
               </div>
-            </a>
+            </div>
           </template>
         </div>
 
@@ -164,35 +168,19 @@
         this.addEventListener('iron-overlay-canceled', this._close);
       }
 
-      static get observers() {
-        return [
-          '_userChanged(speaker)',
-        ];
-      }
-
-      _userChanged(speaker) {
-        console.log(speaker)
-      }
-
       _close() {
         dialogsActions.closeDialog(DIALOGS.SPEAKER);
+        history.back()
       }
 
       _openSession(e) {
-        if (this.disabledSchedule) {
-          e.preventDefault();
           const sessionId = e.currentTarget.getAttribute('session-id');
+          const sessionData = this.sessionsMap[sessionId];
 
-          console.log(this._getSessionFromId(sessionId))
+          if (!sessionData) return;
 
-          dialogsActions.openDialog(DIALOGS.SESSION, this._getSessionFromId(sessionId));
-        }
-      }
-
-      _getSessionFromId(sessionId) {
-        if (!this.speaker || !this.speaker.sessions.length) return;
-        
-        return this.speaker.sessions.filter(session => session.id === sessionId)[0]
+          dialogsActions.openDialog(DIALOGS.SESSION, sessionData);
+          dialogsActions.closeDialog(DIALOGS.SPEAKER);
       }
 
       _getCloseBtnIcon(isLaptopViewport) {

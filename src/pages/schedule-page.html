@@ -174,7 +174,6 @@
           isDialogOpened: {
             type: Object,
             statePath: 'dialogs.session.isOpened',
-            observer: '_dialogStatusChanged',
           },
           contentLoaderVisibility: String,
           viewport: {
@@ -228,18 +227,10 @@
         }
       }
 
-      _dialogStatusChanged(nextState, prevState) {
-        if (!nextState && prevState && this.active
-          && this._selectedFilters.sessionId && this._selectedFilters.sessionId.length) {
-          history.back();
-        }
-      }
-
       _openSessionDetails(active, sessions, id) {
         if (sessions && sessions.length) {
           requestAnimationFrame(() => {
             if (active && id) {
-              console.log('_openSessionDetails', this.sessionsMap[id[0]])
               dialogsActions.openDialog(DIALOGS.SESSION, this.sessionsMap[id[0]]);
             } else if (this.isDialogOpened) {
               dialogsActions.closeDialog(DIALOGS.SESSION);
