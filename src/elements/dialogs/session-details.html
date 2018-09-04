@@ -228,6 +228,7 @@
       }
 
       _findSpeakers(speakers) {
+        console.log('_findSpeakers', speakers)
         if (speakers && typeof speakers[0] !== 'object') {
           return speakers.map((speakerId) => this.speakersMap[speakerId]);
         }

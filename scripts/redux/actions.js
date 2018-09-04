@@ -263,14 +263,14 @@ const speakersActions = {
       type: FETCH_SPEAKERS,
     });
 
-    const state = getState();
-    const sessionsPromise = Object.keys(state.sessions.list).length
-      ? Promise.resolve(state.sessions)
-      : sessionsActions.fetchList()(dispatch, getState);
+    // const state = getState();
+    // const sessionsPromise = Object.keys(state.sessions.list).length
+    //   ? Promise.resolve(state.sessions)
+    //   : sessionsActions.fetchList()(dispatch, getState);
 
     const speakersPromise = new Promise((resolve, reject) => {
       firebase.firestore()
-        .collection('speakers')
+        .collection('generatedSpeakers')
         .orderBy('order', 'asc')
         .get()
         .then((snaps) => {
@@ -279,12 +279,13 @@ const speakersActions = {
         .catch(reject);
     });
 
-    return Promise.all([speakersPromise, sessionsPromise])
-      .then(([speakers, sessions]) => {
+    return Promise.all([speakersPromise])
+      .then(([speakers]) => {
+        console.log('updatedSpeakersList', speakers)
         const updatedSpeakersList = speakers.map((speaker) => {
           const speakersTags = new Set();
-          if (sessions.objBySpeaker[speaker.id]) {
-            sessions.objBySpeaker[speaker.id].map((session) => {
+          if (speaker.sessions.length) {
+            speaker.sessions.map((session) => {
               if (session.tags) session.tags.map(speakersTags.add.bind(speakersTags));
             });
           }
@@ -293,6 +294,8 @@ const speakersActions = {
             tags: [...speakersTags],
           });
         });
+
+        // console.log('updatedSpeakersList', speakers)
         dispatch({
           type: FETCH_SPEAKERS_SUCCESS,
           payload: {
@@ -372,16 +375,26 @@ const sessionsActions = {
             session.complexity && complexityFilters.add(session.complexity.trim());
             obj[doc.id] = session;
 
+            // if (session.speakers.length > 1) {
+            //   console.log('session.speakers.length > 1', session, session.speakers)
+            // }
+
             if (Array.isArray(data.speakers)) {
-              data.speakers.forEach((speakerId) => {
-                if (Array.isArray(objBySpeaker[speakerId])) {
-                  objBySpeaker[speakerId].push(session);
+              data.speakers.forEach((speaker) => {
+                if (Array.isArray(objBySpeaker[speaker.id])) {
+                  objBySpeaker[speaker.id].push(session);
                 } else {
-                  objBySpeaker[speakerId] = [session];
+                  objBySpeaker[speaker.id] = [session];
                 }
               });
             }
           });
+
+          console.log(obj)
+          console.log(list)
+
+          console.log(objBySpeaker)
+
 
           const payload = {
             obj,
@@ -489,6 +502,9 @@ const scheduleActions = {
 
     return Promise.all([speakersPromise, schedulePromise])
       .then(([speakers, schedule]) => {
+        console.log('speakers webworker!!!', speakers
+      )
+
         const scheduleWorker = new Worker('/scripts/schedule-webworker.js');
 
         scheduleWorker.postMessage({
@@ -502,6 +518,9 @@ const scheduleActions = {
             type: FETCH_SCHEDULE_SUCCESS,
             data: Object.values(data.schedule.days).sort((a, b) => a.date.localeCompare(b.date)),
           });
+
+          console.log('webworker!!!', data)
+
 
           const sessionsObjBySpeaker = {};
           const sessionsList = Object.values(data.sessions);

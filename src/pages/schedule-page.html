@@ -239,6 +239,7 @@
         if (sessions && sessions.length) {
           requestAnimationFrame(() => {
             if (active && id) {
+              console.log('_openSessionDetails', this.sessionsMap[id[0]])
               dialogsActions.openDialog(DIALOGS.SESSION, this.sessionsMap[id[0]]);
             } else if (this.isDialogOpened) {
               dialogsActions.closeDialog(DIALOGS.SESSION);

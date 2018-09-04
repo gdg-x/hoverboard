@@ -104,10 +104,10 @@
           </template>
         </div>
 
-        <div class="additional-sections" hidden$="[[!getSessionsBySpeaker(speaker.id).length]]">
+        <div class="additional-sections" hidden$="[[!speaker.sessions.length]]">
           <h3>{$ speakerDetails.sessions $}</h3>
 
-          <template is="dom-repeat" items="[[getSessionsBySpeaker(speaker.id, sessions)]]" as="session">
+          <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
             <a href$="/schedule?sessionId=[[session.id]]" on-tap="_openSession" session-id$="[[session.id]]" class="section">
               <div layout horizontal center>
                 <div class="section-details" flex>
@@ -164,6 +164,16 @@
         this.addEventListener('iron-overlay-canceled', this._close);
       }
 
+      static get observers() {
+        return [
+          '_userChanged(speaker)',
+        ];
+      }
+
+      _userChanged(speaker) {
+        console.log(speaker)
+      }
+
       _close() {
         dialogsActions.closeDialog(DIALOGS.SPEAKER);
       }
@@ -172,8 +182,17 @@
         if (this.disabledSchedule) {
           e.preventDefault();
           const sessionId = e.currentTarget.getAttribute('session-id');
-          dialogsActions.openDialog(DIALOGS.SESSION, this.sessionsMap[sessionId]);
+
+          console.log(this._getSessionFromId(sessionId))
+
+          dialogsActions.openDialog(DIALOGS.SESSION, this._getSessionFromId(sessionId));
         }
+      }
+
+      _getSessionFromId(sessionId) {
+        if (!this.speaker || !this.speaker.sessions.length) return;
+        
+        return this.speaker.sessions.filter(session => session.id === sessionId)[0]
       }
 
       _getCloseBtnIcon(isLaptopViewport) {
