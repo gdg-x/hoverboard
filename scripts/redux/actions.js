@@ -472,64 +472,15 @@ const scheduleActions = {
       type: FETCH_SCHEDULE,
     });
 
-    const state = getState();
-    const speakersPromise = Object.keys(state.speakers.obj).length
-      ? Promise.resolve(state.speakers.obj)
-      : speakersActions.fetchList()(dispatch, getState);
-
-    const schedulePromise = new Promise((resolve, reject) => {
-      firebase.firestore()
-        .collection('schedule')
-        .orderBy('date', 'desc')
-        .get()
-        .then((snaps) => {
-          resolve(snaps.docs.map((s) => s.data()));
-        })
-        .catch(reject);
-    });
-
-    return Promise.all([speakersPromise, schedulePromise])
-      .then(([speakers, schedule]) => {
-       
-        const scheduleWorker = new Worker('/scripts/schedule-webworker.js');
-
-        scheduleWorker.postMessage({
-          speakers,
-          sessions: getState().sessions.obj,
-          schedule,
+    return firebase.firestore()
+      .collection('generatedSchedule')
+      .doc('days')
+      .get()
+      .then((doc) => {
+        dispatch({
+          type: FETCH_SCHEDULE_SUCCESS,
+          data: Object.values(doc.data()).sort((a, b) => a.date.localeCompare(b.date)),
         });
-
-        scheduleWorker.addEventListener('message', ({ data }) => {
-          dispatch({
-            type: FETCH_SCHEDULE_SUCCESS,
-            data: Object.values(data.schedule.days).sort((a, b) => a.date.localeCompare(b.date)),
-          });
-
-          const sessionsObjBySpeaker = {};
-          const sessionsList = Object.values(data.sessions);
-
-          sessionsList.forEach((session) => {
-            if (Array.isArray(session.speakers)) {
-              session.speakers.forEach((speaker) => {
-                if (Array.isArray(sessionsObjBySpeaker[speaker.id])) {
-                  sessionsObjBySpeaker[speaker.id].push(session);
-                } else {
-                  sessionsObjBySpeaker[speaker.id] = [session];
-                }
-              });
-            }
-          });
-          store.dispatch({
-            type: UPDATE_SESSIONS,
-            payload: {
-              obj: data.sessions,
-              list: sessionsList,
-              objBySpeaker: sessionsObjBySpeaker,
-            },
-          });
-
-          scheduleWorker.terminate();
-        }, false);
       })
       .catch((error) => {
         dispatch({
