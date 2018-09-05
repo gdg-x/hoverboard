@@ -287,7 +287,6 @@
           isDialogOpened: {
             type: Object,
             statePath: 'dialogs.speaker.isOpened',
-            observer: '_dialogStatusChanged',
           },
           contentLoaderVisibility: {
             type: String,
@@ -319,12 +318,6 @@
               link: `/speakers/${speaker.id}${this.queryParams ? `?${this.queryParams}` : ''}`,
             }));
           this.set('speakersToRender', updatedSpeakers);
-        }
-      }
-
-      _dialogStatusChanged(nextState, prevState) {
-        if (!nextState && prevState && this.active && this.routeData.speakerId) {
-          history.back();
         }
       }
 

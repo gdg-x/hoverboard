@@ -174,7 +174,6 @@
           isDialogOpened: {
             type: Object,
             statePath: 'dialogs.session.isOpened',
-            observer: '_dialogStatusChanged',
           },
           contentLoaderVisibility: String,
           viewport: {
@@ -225,13 +224,6 @@
         if (active && schedule.length) {
           const selectedDay = day || schedule[0].date;
           routingActions.setSubRoute(selectedDay);
-        }
-      }
-
-      _dialogStatusChanged(nextState, prevState) {
-        if (!nextState && prevState && this.active
-          && this._selectedFilters.sessionId && this._selectedFilters.sessionId.length) {
-          history.back();
         }
       }
 

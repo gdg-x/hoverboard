@@ -21,6 +21,11 @@
 <dom-module id="session-details">
   <template>
     <style is="custom-style" include="shared-styles dialog-styles flex flex-alignment positioning"></style>
+    <style>
+      .section {
+        cursor: pointer;
+      }
+    </style>
 
     <polymer-helmet
       title="[[session.title]] | {$ title $}"
@@ -104,9 +109,8 @@
           <h3>{$ sessionDetails.speakers $}</h3>
 
           <template is="dom-repeat" items="[[_findSpeakers(session.speakers)]]" as="speaker">
-            <a
+            <div
               class="section"
-              href$="/speakers/[[speaker.id]]/"
               on-tap="_openSpeaker"
               speaker-id$="[[speaker.id]]"
             >
@@ -123,7 +127,7 @@
                   <div class="section-secondary-text">[[speaker.company]] / [[speaker.country]]</div>
                 </div>
               </div>
-            </a>
+            </div>
           </template>
         </div>
       </div>
@@ -176,16 +180,16 @@
 
       _close() {
         dialogsActions.closeDialog(DIALOGS.SESSION);
+        history.back();
       }
 
       _openSpeaker(e) {
-        if (this.disabledSchedule) {
-          const speakerId = e.currentTarget.getAttribute('session-id');
-          if (this.currentSpeaker === speakerId) {
-            e.preventDefault();
-          }
-          this._close();
-        }
+        const speakerId = e.currentTarget.getAttribute('speaker-id');
+        const speakerData = this.speakersMap[speakerId];
+
+        if (!speakerData) return;
+        dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
+        dialogsActions.closeDialog(DIALOGS.SESSION);
       }
 
       _getCloseBtnIcon(isLaptopViewport) {
