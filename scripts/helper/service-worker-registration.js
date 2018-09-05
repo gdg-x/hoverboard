@@ -46,7 +46,8 @@ HOVERBOARD.ServiceWorkerRegistration = (function () {
                   break;
 
                 case 'redundant':
-                  throw Error('The installing service worker became redundant.');
+                  registration.update();
+                  //throw Error('The installing service worker became redundant.');
               }
             };
           };
