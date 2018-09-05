@@ -57,7 +57,7 @@
     <polymer-helmet
       title="{$ heroSettings.schedule.title $} | {$ title $}"
       description="{$ heroSettings.schedule.metaDescription $}"
-      active="[[_setHelmetData(active, isDialogOpened)]]"
+      active="[[_setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened)]]"
     ></polymer-helmet>
 
     <iron-location query="{{queryParams}}"></iron-location>
@@ -171,7 +171,11 @@
             type: Object,
             statePath: 'routing.subRoute',
           },
-          isDialogOpened: {
+          isSpeakerDialogOpened: {
+            type: Object,
+            statePath: 'dialogs.speaker.isOpened',
+          },
+          isSessionDialogOpened: {
             type: Object,
             statePath: 'dialogs.session.isOpened',
           },
@@ -232,15 +236,16 @@
           requestAnimationFrame(() => {
             if (active && id) {
               dialogsActions.openDialog(DIALOGS.SESSION, this.sessionsMap[id[0]]);
-            } else if (this.isDialogOpened) {
-              dialogsActions.closeDialog(DIALOGS.SESSION);
+            } else {
+               this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
+               this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
             }
           });
         }
       }
 
-      _setHelmetData(active, isDialogOpened) {
-        return active && !isDialogOpened;
+      _setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened) {
+        return active && !isSpeakerDialogOpened && !isSessionDialogOpened;
       }
 
       _onFiltersLoad(filters) {
