@@ -154,7 +154,7 @@
     <polymer-helmet
       title="Speakers | GDG DevFest Ukraine"
       description="Learn more about speakers"
-      active="[[_setHelmetData(active, isDialogOpened)]]"
+      active="[[_setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened)]]"
     ></polymer-helmet>
 
     <iron-location query="{{queryParams}}"></iron-location>
@@ -284,10 +284,13 @@
             type: Object,
             observer: '_paramsUpdated',
           },
-          isDialogOpened: {
+          isSpeakerDialogOpened: {
             type: Object,
             statePath: 'dialogs.speaker.isOpened',
-            observer: '_dialogStatusChanged',
+          },
+          isSessionDialogOpened: {
+            type: Object,
+            statePath: 'dialogs.session.isOpened',
           },
           contentLoaderVisibility: {
             type: String,
@@ -322,27 +325,22 @@
         }
       }
 
-      _dialogStatusChanged(nextState, prevState) {
-        if (!nextState && prevState && this.active && this.routeData.speakerId) {
-          history.back();
-        }
-      }
-
       _openSpeakerDetails(active, speakers, speakersMap, id) {
         if (speakers && speakers.length) {
           requestAnimationFrame(() => {
             if (active && id) {
               const speakerData = speakersMap[id];
               speakerData && dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
-            } else if (this.isDialogOpened) {
-              dialogsActions.closeDialog(DIALOGS.SPEAKER);
+            } else {
+               this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
+               this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
             }
           });
         }
       }
 
-      _setHelmetData(active, isDialogOpened) {
-        return active && !isDialogOpened;
+      _setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened) {
+        return active && !isSpeakerDialogOpened && !isSessionDialogOpened;
       }
 
       _onFiltersLoad(filters) {
