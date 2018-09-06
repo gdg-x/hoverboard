@@ -5,7 +5,6 @@ const sendGeneralNotification = functions.firestore.document('/notifications/{ti
   .onCreate(async (snapshot, context) => {
     const timestamp = context.params.timestamp;
     const message = snapshot.data();
-    console.log(timestamp, message);
 
     if (!message) return null;
     console.log('New message added at ', timestamp, ' with payload ', message);
