@@ -8,7 +8,9 @@ export const sessionsWrite = functions.firestore.document('sessions/{sessionId}'
 });
 
 export const scheduleWrite = functions.firestore.document('schedule/{scheduleId}').onWrite( async (change, context) => {
-    return generateAndSaveData();
+    const scheduleConfig = functions.config().schedule;
+    const scheduleEnabled = scheduleConfig && scheduleConfig.enabled === 'true';
+    return scheduleEnabled && generateAndSaveData();
 });
 
 export const speakersWrite = functions.firestore.document('speakers/{speakerId}').onWrite( async (change, context) => {
@@ -45,7 +47,7 @@ async function generateAndSaveData() {
     if (!Object.keys(sessions).length) {
         generatedData = Object.assign({}, speakers);
     }
-    else if (!Object.keys(schedule).length || !scheduleEnabled) {
+    else if (!scheduleEnabled || !Object.keys(schedule).length) {
         generatedData = mapSessionsSpeakers(sessions, speakers);
     }
     else {

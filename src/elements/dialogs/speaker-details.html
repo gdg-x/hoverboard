@@ -108,10 +108,10 @@
           </template>
         </div>
 
-        <div class="additional-sections" hidden$="[[!getSessionsBySpeaker(speaker.id).length]]">
+        <div class="additional-sections" hidden$="[[!speaker.sessions.length]]">
           <h3>{$ speakerDetails.sessions $}</h3>
 
-          <template is="dom-repeat" items="[[getSessionsBySpeaker(speaker.id, sessions)]]" as="session">
+          <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
             <div on-tap="_openSession" session-id$="[[session.id]]" class="section">
               <div layout horizontal center>
                 <div class="section-details" flex>

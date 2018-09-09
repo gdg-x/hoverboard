@@ -159,15 +159,24 @@ function updateSpeakersSessions(speakersRaw, speakerIds, session, generatedSpeak
 
         if (speaker) {
             const speakerSessions = hasSessionsAssigned
-                ? [].concat(generatedSpeaker.sessions)
+                ? [...generatedSpeaker.sessions]
                 : [];
 
             if (!speakerSessions.filter((speakerSession) => speakerSession.id === session.id).length) {
                 speakerSessions.push(session)
             }
 
+            const speakerTags = hasSessionsAssigned ? [...generatedSpeaker.tags] : [];
+            speakerSessions.forEach((session) => {
+                if (session.tags) session.tags.forEach(tag => {
+                    if (!speakerTags.includes(tag)) speakerTags.push(tag);
+                });
+            });
+
             result[speakerIds[i]] = Object.assign({}, speaker, {
-                sessions: speakerSessions
+                id: speakerIds[i],
+                sessions: speakerSessions,
+                tags: [...speakerTags],
             });
         }
     }

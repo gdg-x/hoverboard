@@ -108,7 +108,7 @@
         <div class="additional-sections" hidden$="[[!session.speakers.length]]">
           <h3>{$ sessionDetails.speakers $}</h3>
 
-          <template is="dom-repeat" items="[[_findSpeakers(session.speakers)]]" as="speaker">
+          <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
             <div
               class="section"
               on-tap="_openSpeaker"
@@ -138,9 +138,9 @@
   <script>
 
     // eslint-disable-next-line no-undef
-    class SessionDetails extends UtilsFunctions(SessionsHoC(SpeakersHoC(
+    class SessionDetails extends UtilsFunctions(SpeakersHoC(
       ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element))
-    ))) {
+    )) {
       static get is() {
         return 'session-details';
       }
@@ -229,13 +229,6 @@
 
       _getFeaturedSessionIcon(featuredSessions, sessionId) {
         return featuredSessions && featuredSessions[sessionId] ? 'bookmark-check' : 'bookmark-plus';
-      }
-
-      _findSpeakers(speakers) {
-        if (speakers && typeof speakers[0] !== 'object') {
-          return speakers.map((speakerId) => this.speakersMap[speakerId]);
-        }
-        return speakers;
       }
     }
 

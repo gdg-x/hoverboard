@@ -6,7 +6,7 @@ import scheduleNotifications from './schedule-notifications';
 import optimizeImages from './optimize-images';
 import mailchimpSubscribe from './mailchimp-subscribe';
 import prerender from './prerender';
-import { scheduleWrite, sessionsWrite, speakersWrite } from './schedule-generator';
+import { scheduleWrite, sessionsWrite, speakersWrite } from './generate-sessions-speakers-schedule';
 
 admin.initializeApp();
 
