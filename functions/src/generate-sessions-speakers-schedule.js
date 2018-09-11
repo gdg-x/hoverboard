@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import { firestore } from 'firebase-admin';
-import mapSessionsSpeakersSchedule from './schedule-generator/speakers-sessions-schedule-map'
-import mapSessionsSpeakers from './schedule-generator/speakers-sessions-map'
+import mapSessionsSpeakersSchedule from './schedule-generator/speakers-sessions-schedule-map';
+import mapSessionsSpeakers from './schedule-generator/speakers-sessions-map';
 
 export const sessionsWrite = functions.firestore.document('sessions/{sessionId}').onWrite( async (change, context) => {
     return generateAndSaveData();
@@ -45,7 +45,7 @@ async function generateAndSaveData() {
     const scheduleEnabled = scheduleConfig && scheduleConfig.enabled === 'true';
 
     if (!Object.keys(sessions).length) {
-        generatedData = Object.assign({}, speakers);
+        generatedData = { ...speakers };
     }
     else if (!scheduleEnabled || !Object.keys(schedule).length) {
         generatedData = mapSessionsSpeakers(sessions, speakers);
@@ -53,7 +53,7 @@ async function generateAndSaveData() {
     else {
         generatedData = mapSessionsSpeakersSchedule(sessions, speakers, schedule);
     }
-    
+
     saveGeneratedData(generatedData.sessions, 'generatedSessions');
     saveGeneratedData(generatedData.speakers, 'generatedSpeakers');
     saveGeneratedData(generatedData.schedule, 'generatedSchedule');

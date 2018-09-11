@@ -11,10 +11,10 @@ function sessionsSpeakersMap(sessionsRaw, speakersRaw) {
         currentSession.speakers &&
             currentSession.speakers.forEach(speakerId => {
                 if (!speakersRaw[speakerId]) return;
-                sessionSpeakers.push(Object.assign({}, { id: speakerId }, speakersRaw[speakerId]));
+                sessionSpeakers.push({ id: speakerId, ...speakersRaw[speakerId]});
 
                 const generatedSpeaker = speakers[speakerId];
-                const sessionBySpeaker = Object.assign({}, currentSession, { id: sessionId, mainTag: mainTag });
+                const sessionBySpeaker = { id: sessionId, mainTag: mainTag, ...currentSession };
 
                 if (generatedSpeaker) {
                     const speakerTags = generatedSpeaker.tags ? [...generatedSpeaker.tags] : [];
@@ -25,20 +25,28 @@ function sessionsSpeakersMap(sessionsRaw, speakersRaw) {
                     [...generatedSpeaker.sessions, sessionBySpeaker] :
                     [sessionBySpeaker];
 
-                    speakers[speakerId] = Object.assign({}, generatedSpeaker, {
+                    speakers[speakerId] = { 
+                        ...generatedSpeaker,
+                        tags: [...speakerTags],
                         sessions: speakerSessions,
-                        tags: [...speakerTags]
-                    });
+                    };
                 }
                 else {
-                    speakers[speakerId] = Object.assign({},
-                        speakersRaw[speakerId],
-                        { id: speakerId, tags: sessionBySpeaker.tags, sessions: [sessionBySpeaker] });
+                    speakers[speakerId] = {
+                        ...speakersRaw[speakerId],
+                        id: speakerId,
+                        tags: sessionBySpeaker.tags,
+                        sessions: [sessionBySpeaker],
+                    };
                 }
             });
 
-        sessions[sessionId] = Object.assign({}, currentSession,
-            { id: sessionId, mainTag: mainTag, speakers: sessionSpeakers });
+        sessions[sessionId] = {
+            ...currentSession,
+            id: sessionId,
+            mainTag: mainTag,
+            speakers: sessionSpeakers,
+        };
     };
 
     return { sessions, speakers };

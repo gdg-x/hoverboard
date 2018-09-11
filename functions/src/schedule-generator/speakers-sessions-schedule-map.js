@@ -174,7 +174,7 @@ function updateSpeakersSessions(speakersRaw, speakerIds, session, generatedSpeak
             result[speakerIds[i]] = Object.assign({}, speaker, {
                 id: speakerIds[i],
                 sessions: speakerSessions,
-                tags: [...speakerTags],
+                tags: speakerTags,
             });
         }
     }
