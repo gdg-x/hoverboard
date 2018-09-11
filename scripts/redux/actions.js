@@ -258,47 +258,30 @@ const blogActions = {
 };
 
 const speakersActions = {
-  fetchList: () => (dispatch, getState) => {
+  fetchList: () => (dispatch) => {
     dispatch({
       type: FETCH_SPEAKERS,
     });
 
-    const state = getState();
-    const sessionsPromise = Object.keys(state.sessions.list).length
-      ? Promise.resolve(state.sessions)
-      : sessionsActions.fetchList()(dispatch, getState);
-
     const speakersPromise = new Promise((resolve, reject) => {
       firebase.firestore()
-        .collection('speakers')
+        .collection('generatedSpeakers')
         .orderBy('order', 'asc')
         .get()
         .then((snaps) => {
-          resolve(snaps.docs.map((snap) => Object.assign({}, snap.data(), { id: snap.id })));
+          resolve(snaps.docs.map((snap) => Object.assign({}, snap.data())));
         })
         .catch(reject);
     });
 
-    return Promise.all([speakersPromise, sessionsPromise])
-      .then(([speakers, sessions]) => {
-        const updatedSpeakersList = speakers.map((speaker) => {
-          const speakersTags = new Set();
-          if (sessions.objBySpeaker[speaker.id]) {
-            sessions.objBySpeaker[speaker.id].map((session) => {
-              if (session.tags) session.tags.map(speakersTags.add.bind(speakersTags));
-            });
-          }
-
-          return Object.assign({}, speaker, {
-            tags: [...speakersTags],
-          });
-        });
+    return Promise.all([speakersPromise])
+      .then(([speakers]) => {
         dispatch({
           type: FETCH_SPEAKERS_SUCCESS,
           payload: {
-            obj: updatedSpeakersList.reduce((acc, curr) =>
+            obj: speakers.reduce((acc, curr) =>
               Object.assign({}, acc, { [curr.id]: curr }), {}),
-            list: updatedSpeakersList,
+            list: speakers,
           },
         });
       })
@@ -355,7 +338,7 @@ const sessionsActions = {
 
     return new Promise((resolve, reject) => {
       firebase.firestore()
-        .collection('sessions')
+        .collection('generatedSessions')
         .get()
         .then((snaps) => {
           const list = [];
@@ -365,22 +348,11 @@ const sessionsActions = {
           const complexityFilters = new Set();
 
           snaps.docs.forEach((doc) => {
-            const data = doc.data();
-            const session = Object.assign({}, data, { id: doc.id });
+            const session = Object.assign({}, doc.data());
             list.push(session);
             session.tags && session.tags.map((tag) => tagFilters.add(tag.trim()));
             session.complexity && complexityFilters.add(session.complexity.trim());
             obj[doc.id] = session;
-
-            if (Array.isArray(data.speakers)) {
-              data.speakers.forEach((speakerId) => {
-                if (Array.isArray(objBySpeaker[speakerId])) {
-                  objBySpeaker[speakerId].push(session);
-                } else {
-                  objBySpeaker[speakerId] = [session];
-                }
-              });
-            }
           });
 
           const payload = {
@@ -466,68 +438,20 @@ const sessionsActions = {
 };
 
 const scheduleActions = {
-  fetchSchedule: () => (dispatch, getState) => {
+  fetchSchedule: () => (dispatch) => {
     dispatch({
       type: FETCH_SCHEDULE,
     });
 
-    const state = getState();
-    const speakersPromise = Object.keys(state.speakers.obj).length
-      ? Promise.resolve(state.speakers.obj)
-      : speakersActions.fetchList()(dispatch, getState);
-
-    const schedulePromise = new Promise((resolve, reject) => {
-      firebase.firestore()
-        .collection('schedule')
-        .orderBy('date', 'desc')
-        .get()
-        .then((snaps) => {
-          resolve(snaps.docs.map((s) => s.data()));
-        })
-        .catch(reject);
-    });
-
-    return Promise.all([speakersPromise, schedulePromise])
-      .then(([speakers, schedule]) => {
-        const scheduleWorker = new Worker('/scripts/schedule-webworker.js');
-
-        scheduleWorker.postMessage({
-          speakers,
-          sessions: getState().sessions.obj,
-          schedule,
+    return firebase.firestore()
+      .collection('generatedSchedule')
+      .get()
+      .then((snaps) => {
+        const scheduleDays = snaps.docs.map((snap) => snap.data());
+        dispatch({
+          type: FETCH_SCHEDULE_SUCCESS,
+          data: scheduleDays.sort((a, b) => a.date.localeCompare(b.date)),
         });
-
-        scheduleWorker.addEventListener('message', ({ data }) => {
-          dispatch({
-            type: FETCH_SCHEDULE_SUCCESS,
-            data: Object.values(data.schedule.days).sort((a, b) => a.date.localeCompare(b.date)),
-          });
-
-          const sessionsObjBySpeaker = {};
-          const sessionsList = Object.values(data.sessions);
-
-          sessionsList.forEach((session) => {
-            if (Array.isArray(session.speakers)) {
-              session.speakers.forEach((speaker) => {
-                if (Array.isArray(sessionsObjBySpeaker[speaker.id])) {
-                  sessionsObjBySpeaker[speaker.id].push(session);
-                } else {
-                  sessionsObjBySpeaker[speaker.id] = [session];
-                }
-              });
-            }
-          });
-          store.dispatch({
-            type: UPDATE_SESSIONS,
-            payload: {
-              obj: data.sessions,
-              list: sessionsList,
-              objBySpeaker: sessionsObjBySpeaker,
-            },
-          });
-
-          scheduleWorker.terminate();
-        }, false);
       })
       .catch((error) => {
         dispatch({
