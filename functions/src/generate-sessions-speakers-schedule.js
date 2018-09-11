@@ -3,17 +3,17 @@ import { firestore } from 'firebase-admin';
 import mapSessionsSpeakersSchedule from './schedule-generator/speakers-sessions-schedule-map';
 import mapSessionsSpeakers from './schedule-generator/speakers-sessions-map';
 
-export const sessionsWrite = functions.firestore.document('sessions/{sessionId}').onWrite( async (change, context) => {
+export const sessionsWrite = functions.firestore.document('sessions/{sessionId}').onWrite( async () => {
     return generateAndSaveData();
 });
 
-export const scheduleWrite = functions.firestore.document('schedule/{scheduleId}').onWrite( async (change, context) => {
+export const scheduleWrite = functions.firestore.document('schedule/{scheduleId}').onWrite( async () => {
     const scheduleConfig = functions.config().schedule;
     const scheduleEnabled = scheduleConfig && scheduleConfig.enabled === 'true';
     return scheduleEnabled && generateAndSaveData();
 });
 
-export const speakersWrite = functions.firestore.document('speakers/{speakerId}').onWrite( async (change, context) => {
+export const speakersWrite = functions.firestore.document('speakers/{speakerId}').onWrite( async () => {
     return generateAndSaveData();
 });
 
