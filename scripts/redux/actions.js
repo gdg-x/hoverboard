@@ -445,12 +445,12 @@ const scheduleActions = {
 
     return firebase.firestore()
       .collection('generatedSchedule')
-      .doc('days')
       .get()
-      .then((doc) => {
+      .then((snaps) => {
+        const scheduleDays = snaps.docs.map((snap) => snap.data());
         dispatch({
           type: FETCH_SCHEDULE_SUCCESS,
-          data: Object.values(doc.data()).sort((a, b) => a.date.localeCompare(b.date)),
+          data: scheduleDays.sort((a, b) => a.date.localeCompare(b.date)),
         });
       })
       .catch((error) => {

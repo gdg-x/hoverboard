@@ -1,9 +1,10 @@
 function sessionsSpeakersMap(sessionsRaw, speakersRaw) {
-    let sessions = {};
-    let speakers = {};
+    const sessions = {};
+    const speakers = {};
 
-    Object.keys(sessionsRaw).forEach((sessionId) => {
-        const currentSession = sessionsRaw[sessionId]
+    for (let index = 0; index < Object.keys(sessionsRaw).length; index++) {
+        const sessionId = Object.keys(sessionsRaw)[index];
+        const currentSession = sessionsRaw[sessionId];
         const sessionSpeakers = [];
         const mainTag = currentSession.tags ? currentSession.tags[0] : 'General';
 
@@ -32,15 +33,15 @@ function sessionsSpeakersMap(sessionsRaw, speakersRaw) {
                 else {
                     speakers[speakerId] = Object.assign({},
                         speakersRaw[speakerId],
-                        { id: speakerId, tags: sessionBySpeaker.tags, sessions: [sessionBySpeaker] })
+                        { id: speakerId, tags: sessionBySpeaker.tags, sessions: [sessionBySpeaker] });
                 }
             });
 
         sessions[sessionId] = Object.assign({}, currentSession,
-            { id: sessionId, mainTag: mainTag, speakers: sessionSpeakers });;
-    });
+            { id: sessionId, mainTag: mainTag, speakers: sessionSpeakers });
+    };
 
-    return { sessions, speakers }
+    return { sessions, speakers };
 }
 
 export default sessionsSpeakersMap;

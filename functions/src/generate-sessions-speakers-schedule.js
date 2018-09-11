@@ -51,40 +51,21 @@ async function generateAndSaveData() {
         generatedData = mapSessionsSpeakers(sessions, speakers);
     }
     else {
-        generatedData = mapSessionsSpeakersSchedule(sessions, schedule, speakers);
+        generatedData = mapSessionsSpeakersSchedule(sessions, speakers, schedule);
     }
-
-    saveGeneratedSessions(generatedData.sessions);
-    saveGeneratedSpeakers(generatedData.speakers);
-    saveGeneratedSchedule(generatedData.schedule);
+    
+    saveGeneratedData(generatedData.sessions, 'generatedSessions');
+    saveGeneratedData(generatedData.speakers, 'generatedSpeakers');
+    saveGeneratedData(generatedData.schedule, 'generatedSchedule');
 }
 
-function saveGeneratedSessions(sessions) {
-    if (!sessions || !Object.keys(sessions).length) return;
+function saveGeneratedData(data, collectionName) {
+    if (!data || !Object.keys(data).length) return;
 
-    Object.keys(sessions).forEach((key) => {
-        firestore().collection('generatedSessions')
+    for (let index = 0; index < Object.keys(data).length; index++) {
+        const key = Object.keys(data)[index];
+        firestore().collection(collectionName)
             .doc(key)
-            .set(sessions[key])
-    });
-}
-
-function saveGeneratedSpeakers(speakers) {
-    if (!speakers || !Object.keys(speakers).length) return;
-
-    Object.keys(speakers).forEach((key) => {
-        firestore().collection('generatedSpeakers')
-            .doc(key)
-            .set(speakers[key])
-    });
-}
-
-function saveGeneratedSchedule(schedule) {
-    if (!schedule || !Object.keys(schedule).length) return;
-
-    Object.keys(schedule).forEach((key) => {
-        firestore().collection('generatedSchedule')
-            .doc(key)
-            .set(schedule[key])
-    });
+            .set(data[key]);
+    }
 }

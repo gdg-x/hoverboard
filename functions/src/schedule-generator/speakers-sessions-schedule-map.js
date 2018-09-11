@@ -1,4 +1,4 @@
-function sessionsSpeakersScheduleMap(sessionsRaw, scheduleRaw, speakersRaw) {
+function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
     let schedule = {};
     let sessions = {};
     let speakers = {};
@@ -103,11 +103,9 @@ function sessionsSpeakersScheduleMap(sessionsRaw, scheduleRaw, speakersRaw) {
         }
 
         schedule = Object.assign({}, schedule, {
-            days: Object.assign({}, schedule.days, {
-                [dayKey]: Object.assign({}, day, {
-                    timeslots,
-                    tags: dayTags,
-                }),
+            [dayKey]: Object.assign({}, day, {
+                timeslots,
+                tags: dayTags,
             }),
         });
     }
