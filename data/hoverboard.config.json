@@ -113,7 +113,12 @@
         "fontColor": "#4A4A4A",
         "tabBarColor": "#fff",
         "hideLogo": true,
-        "minHeight": "360px"
+        "minHeight": "360px",
+        "video": {
+          "title": "Sunny Tech 2018",
+          "youtubeId": "vSLPCtKLObM",
+          "text": "Édition 2018"
+        }
       }
     },
     "blog": {
