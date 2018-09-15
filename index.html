@@ -118,7 +118,8 @@
 
         const firestore = firebase.firestore();
         firestore.settings({ timestampsInSnapshots: true });
-        firebase.firestore().enablePersistence()
+        firebase.firestore()
+          .enablePersistence({ experimentalTabSynchronization: true })
           .catch(() => {
             console.warn('DB offline support not available'); // eslint-disable-line no-console
           });
