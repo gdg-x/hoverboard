@@ -29,7 +29,7 @@ Our goal is to allow event organizers to set up professional conference website 
 | **Blog** | post announcements, updates and useful information |
 
 ## Getting Started
-1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone it locally
+1. Clone this repository locally
 1. Setup Environment
    * Install [Node.js (v8.9.4 or above)](https://nodejs.org/en/download/)
    * Install Firebase CLI: `npm i -g firebase-tools` or `yarn global add firebase-tools`
