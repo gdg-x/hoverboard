@@ -57,6 +57,7 @@
     }
 
     toggleQueryParam(currentQueryParams, key, value) {
+      if (!currentQueryParams) return '';
       const keyValue = `${key}=${value}`;
       const currentKeyValuePairs = currentQueryParams.split('&');
       const resultArray = currentKeyValuePairs.includes(keyValue)

@@ -208,6 +208,7 @@
       }
 
       _filterSessions(sessions, selectedFilters) {
+        if (!selectedFilters) return sessions;
         return sessions.filter((session) => {
           return (
             !selectedFilters.tag
