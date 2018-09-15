@@ -10,3 +10,4 @@ functions/lib/
 .firebaserc
 /appengine/dist/
 serviceAccount.json
+npm-debug.log
