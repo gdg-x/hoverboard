@@ -24,6 +24,11 @@
       "label": "Home"
     },
     {
+      "route": "speakers",
+      "permalink": "/speakers/",
+      "label": "Speakers"
+    },
+    {
       "route": "schedule",
       "permalink": "/schedule/",
       "label": "Schedule"
@@ -108,20 +113,20 @@
   },
   "location": {
     "label": "Location",
-    "name": "The LaLiT Ashok Bangalore",
-    "city": "Bangalore",
-    "short": "Bangalore, India",
-    "address": "Kumara Krupa High Grounds, Next to CM Guest House, Kumara Park East, Sheshadripuram, Bengaluru, Karnataka 560001",
+    "name": "Planeta kino",
+    "city": "Lviv",
+    "short": "Lviv, Ukraine",
+    "address": "36 Shchyretska St, Lviv, Ukraine",
     "pointer": {
-      "latitude": 12.9919749,
-      "longitude": 77.581773,
+      "latitude": 49.809841,
+      "longitude": 23.972805,
       "zoom": 5
     },
     "mapCenter": {
-      "latitude": 12,
-      "longitude": 60
+      "latitude": 48,
+      "longitude": 8
     },
-    "description": "Set amid 4 hectares of landscaped gardens, this upscale hotel lies 4 minutes' walk from Bangalore Golf Club and 2.3 km from Bangalore City Junction train station."
+    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
   },
   "mediaQueries": {
     "xs": {
