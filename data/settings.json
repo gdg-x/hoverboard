@@ -115,11 +115,11 @@
     "pointer": {
       "latitude": 12.9919749,
       "longitude": 77.581773,
-      "zoom": 5
+      "zoom": 13
     },
     "mapCenter": {
-      "latitude": 12,
-      "longitude": 60
+      "latitude": 12.9919749,
+      "longitude": 77.581773
     },
     "description": "Set amid 4 hectares of landscaped gardens, this upscale hotel lies 4 minutes' walk from Bangalore Golf Club and 2.3 km from Bangalore City Junction train station."
   },
