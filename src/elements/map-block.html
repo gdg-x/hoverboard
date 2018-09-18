@@ -84,10 +84,10 @@
       <div class="description-card" layout vertical justified>
         <div>
           <h2>{$ mapBlock.title $}</h2>
-          <p>{$ location.description $}</p>
+          <p>{$ location.address $}</p>
         </div>
         <div class="bottom-info" layout horizontal justified center>
-          <span class="address">{$ location.address $}</span>
+          <span class="address">{$ location.name $}</span>
           <a
             href="https://www.google.com/maps/dir/?api=1&destination={$ location.pointer.latitude $},{$ location.pointer.longitude $}"
             target="_blank"
