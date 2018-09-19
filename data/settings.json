@@ -1,222 +1,127 @@
 {
-  "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv",
-    "blog": "https://medium.com/gdg-lviv",
-    "url": "http://lviv.gdg.org.ua/"
-  },
-  "startDate": "2017-10-013T09:00:00+03:00",
-  "endDate": "2017-10-14T19:00:00+03:00",
-  "webapp": {
-    "shortName": "DevFest",
-    "themeColor": "#673AB7",
-    "backgroundColor": "#673AB7"
-  },
-  "dateFormat": {
-    "locale": "en-US"
-  },
-  "hashtag": "DevFest17",
-  "disabledSchedule": false,
-  "navigation": [
-    {
-      "route": "home",
-      "permalink": "/",
-      "label": "Home"
-    },
-    {
-      "route": "schedule",
-      "permalink": "/schedule/",
-      "label": "Schedule"
-    },
-    {
-      "route": "team",
-      "permalink": "/team/",
-      "label": "Team"
-    },
-    {
-      "route": "blog",
-      "permalink": "/blog/",
-      "label": "Blog"
-    }
-  ],
-  "heroSettings": {
-    "home": {
-      "description": "Be a hero. Be a GDG!",
-      "background": {
-        "color": "#673ab7",
-        "image": "/images/backgrounds/home.jpg"
-      },
-      "fontColor": "#FFF"
-    },
-    "blog": {
-      "title": "Blog",
-      "metaDescription": "Read stories from our team",
-      "background": {
-        "color": "#FFF"
-      },
-      "fontColor": "#424242"
-    },
-    "speakers": {
-      "title": "Speakers",
-      "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "background": {
-        "color": "#FFF"
-      },
-      "fontColor": "#424242"
-    },
-    "previousSpeakers": {
-      "title": "Previous Speakers",
-      "metaDescription": "Check who was with us last years",
-      "background": {
-        "color": "#FFF"
-      },
-      "fontColor": "#424242"
-    },
-    "schedule": {
-      "title": "Schedule",
-      "metaDescription": "Choose your sessions to visit",
-      "background": {
-        "color": "#fff"
-      },
-      "fontColor": "#424242"
-    },
-    "team": {
-      "title": "Team",
-      "metaDescription": "Get more info about organizers",
-      "background": {
-        "color": "#fff"
-      },
-      "fontColor": "#424242"
-    },
-    "faq": {
-      "title": "FAQs",
-      "metaDescription": "Find you answer right here!",
-      "background": {
-        "color": "#fff"
-      },
-      "fontColor": "#424242"
-    },
-    "cod": {
-      "title": "Code Of Conduct",
-      "metaDescription": "Lear more about our expectations for all those who participate in our community",
-      "background": {
-        "color": "#fff"
-      },
-      "fontColor": "#424242"
-    }
-  },
-  "location": {
-    "label": "Location",
-    "name": "The LaLiT Ashok Bangalore",
-    "city": "Bangalore",
-    "short": "Bangalore, India",
-    "address": "Kumara Krupa High Grounds, Next to CM Guest House, Kumara Park East, Sheshadripuram, Bengaluru, Karnataka 560001",
-    "pointer": {
-      "latitude": 12.9919749,
-      "longitude": 77.581773,
-      "zoom": 13
-    },
-    "mapCenter": {
-      "latitude": 12.9919749,
-      "longitude": 77.581773
-    },
-    "description": "Set amid 4 hectares of landscaped gardens, this upscale hotel lies 4 minutes' walk from Bangalore Golf Club and 2.3 km from Bangalore City Junction train station."
-  },
-  "mediaQueries": {
-    "xs": {
-      "max": "639px"
-    },
-    "sm": {
-      "min": "640px",
-      "max": "811px"
-    },
-    "md": {
-      "min": "812px",
-      "max": "1023px"
-    },
-    "lg": {
-      "min": "1024px"
-    }
-  },
-  "socialNetwork": {
-    "follow": [
-      {
-        "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
-      },
-      {
-        "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
-      },
-      {
-        "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
-      },
-      {
-        "name": "youtube",
-        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
-      }
-    ],
-    "share": [
-      {
-        "name": "gplus",
-        "url": "https://plus.google.com/share?url="
-      },
-      {
-        "name": "facebook",
-        "url": "https://www.facebook.com/sharer.php?u="
-      },
-      {
-        "name": "twitter",
-        "url": "https://twitter.com/intent/tweet?text="
-      }
-    ]
-  },
-  "mailto": "devfest@gdg.org.ua",
-  "mailchimp": {
-    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
-    "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
-  },
-  "signInProviders": {
-    "providersData": [
-      {
-        "name": "google",
-        "label": "Sign in with Google",
-        "url": "https://accounts.google.com"
-      },
-      {
-        "name": "facebook",
-        "label": "Sign in with Facebook",
-        "url": "https://www.facebook.com"
-      },
-      {
-        "name": "twitter",
-        "label": "Sign in with Twitter",
-        "url": "https://twitter.com"
-      }
-    ],
-    "allowedProvidersUrl": [
-      "https://accounts.google.com",
-      "https://www.facebook.com",
-      "https://twitter.com"
-    ]
-  },
-  "contentLoaders": {
-    "schedule": {
-      "itemsCount": 2
-    },
-    "blog": {
-      "itemsCount": 3
-    },
-    "speakers": {
-      "itemsCount": 4
-    },
-    "previousSpeakers": {
-      "itemsCount": 6
-    },
-    "tickets": {
-      "itemsCount": 5
-    }
-  }
+	"organizer": {
+		"name": "GDG BlrDroid & GDG Bangalore",
+		"twitter": "blrdroid",
+		"url": "http:#meetup.com/blrdroid/"
+	},
+	"startDate": "2017-10-013T09:00:00+03:00",
+	"endDate": "2017-10-13T19:00:00+03:00",
+	"webapp": {
+		"shortName": "DevFest Bangalore 2018",
+		"themeColor": "#673AB7",
+		"backgroundColor": "#673AB7"
+	},
+	"dateFormat": {
+		"locale": "en-US"
+	},
+	"hashtag": "DevFest18",
+	"disabledSchedule": false,
+	"navigation": [{
+			"route": "home",
+			"permalink": "/",
+			"label": "Home"
+		},
+		{
+			"route": "schedule",
+			"permalink": "/schedule/",
+			"label": "Schedule"
+		}
+	],
+	"heroSettings": {
+		"home": {
+			"description": "Be a hero. Be a GDG!",
+			"background": {
+				"color": "#673ab7",
+				"image": "/images/backgrounds/home.jpg"
+			},
+			"fontColor": "#FFF"
+		},
+		"schedule": {
+			"title": "Agenda",
+			"metaDescription": "Look at the talks' lineup",
+			"background": {
+				"color": "#fff"
+			},
+			"fontColor": "#424242"
+		}
+	},
+	"location": {
+		"label": "Location",
+		"name": "The LaLiT Ashok Bangalore",
+		"city": "Bangalore",
+		"short": "Bangalore, India",
+		"address": "Kumara Krupa High Grounds, Next to CM Guest House, Kumara Park East, Sheshadripuram, Bengaluru, Karnataka 560001",
+		"pointer": {
+			"latitude": 12.9919749,
+			"longitude": 77.581773,
+			"zoom": 13
+		},
+		"mapCenter": {
+			"latitude": 12.9919749,
+			"longitude": 77.581773
+		},
+		"description": "Set amid 4 hectares of landscaped gardens, this upscale hotel lies 4 minutes' walk from Bangalore Golf Club and 2.3 km from Bangalore City Junction train station."
+	},
+	"mediaQueries": {
+		"xs": {
+			"max": "639px"
+		},
+		"sm": {
+			"min": "640px",
+			"max": "811px"
+		},
+		"md": {
+			"min": "812px",
+			"max": "1023px"
+		},
+		"lg": {
+			"min": "1024px"
+		}
+	},
+	"socialNetwork": {
+		"follow": [{
+				"name": "facebook",
+				"url": "https:#www.facebook.com/groups/blrdroid/"
+			},
+			{
+				"name": "twitter",
+				"url": "https:#twitter.com/blrdroid"
+			},
+			{
+				"name": "youtube",
+				"url": "https:#www.youtube.com/channel/UCNnreSgFZPtKk7R1Ks9aD_g"
+			}
+		],
+		"share": [{
+				"name": "gplus",
+				"url": "https:#plus.google.com/share?url="
+			},
+			{
+				"name": "facebook",
+				"url": "https:#www.facebook.com/sharer.php?u="
+			},
+			{
+				"name": "twitter",
+				"url": "https:#twitter.com/intent/tweet?text="
+			}
+		]
+	},
+	"mailto": "gdgblrdroid@gmail.com",
+	"contentLoaders": {
+		"schedule": {
+			"itemsCount": 2
+		},
+		"blog": {
+			"itemsCount": 3
+		},
+		"speakers": {
+			"itemsCount": 0
+		},
+		"previousSpeakers": {
+			"itemsCount": 0
+		},
+		"tickets": {
+			"itemsCount": 5
+		}
+	}
 }
