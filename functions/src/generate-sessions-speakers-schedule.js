@@ -13,11 +13,12 @@ export const scheduleWrite = functions.firestore.document('schedule/{scheduleId}
     return scheduleEnabled && generateAndSaveData();
 });
 
-export const speakersWrite = functions.firestore.document('speakers/{speakerId}').onWrite( async () => {
-    return generateAndSaveData();
+export const speakersWrite = functions.firestore.document('speakers/{speakerId}').onWrite( async (change, context) => {
+    const changedSpeaker = change.after.exists ? { id: context.params.speakerId, ...change.after.data() } : null;
+    return generateAndSaveData(changedSpeaker);
 });
 
-async function generateAndSaveData() {
+async function generateAndSaveData(changedSpeaker) {
     const sessionsPromise = firestore().collection('sessions').get();
     const schedulePromise = firestore().collection('schedule').orderBy('date', 'desc').get();
     const speakersPromise = firestore().collection('speakers').get();
@@ -52,6 +53,11 @@ async function generateAndSaveData() {
     }
     else {
         generatedData = mapSessionsSpeakersSchedule(sessions, speakers, schedule);
+    }
+
+    // If changed speaker does not have assigned session(s) yet
+    if (changedSpeaker && !generatedData.speakers[changedSpeaker.id]) {
+        generatedData.speakers[changedSpeaker.id] = changedSpeaker;
     }
 
     saveGeneratedData(generatedData.sessions, 'generatedSessions');
