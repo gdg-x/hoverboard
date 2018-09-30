@@ -1,6 +1,6 @@
 {
   "organizer": {
-    "name": "GDG Lviv",
+    "name": "GDG Paris",
     "twitter": "gdglviv",
     "blog": "https://medium.com/gdg-lviv",
     "url": "http://lviv.gdg.org.ua/"
@@ -99,7 +99,7 @@
   "location": {
     "label": "Location",
     "name": "Planeta kino",
-    "city": "Lviv",
+    "city": "Paris",
     "short": "Lviv, Ukraine",
     "address": "36 Shchyretska St, Lviv, Ukraine",
     "pointer": {
