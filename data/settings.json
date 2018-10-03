@@ -147,6 +147,10 @@
   "socialNetwork": {
     "follow": [
       {
+        "name": "meetup",
+        "url": "https://www.meetup.com/GDG-Lviv/events/244342635/"
+      },
+      {
         "name": "facebook",
         "url": "https://www.facebook.com/devfest.ukraine/"
       },
