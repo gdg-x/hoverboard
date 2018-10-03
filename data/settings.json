@@ -64,7 +64,7 @@
     "speakers": {
       "title": "Speakers",
       "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
+      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners. More details coming soon...",
       "background": {
         "color": "#FFF"
       },
@@ -152,7 +152,7 @@
       },
       {
         "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
+        "url": "https://twitter.com/dev_fest"
       },
       {
         "name": "instagram",
