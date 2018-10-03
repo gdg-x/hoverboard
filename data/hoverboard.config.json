@@ -1,7 +1,7 @@
 {
   "url": "https://ohiodevfest.com/",
-  "startDate": "2018-10-13T08:00:00+05:00",
-  "endDate": "2018-10-13T17:00:00+05:00",
+  "startDate": "2018-10-13T08:00:00-04:00",
+  "endDate": "2018-10-13T17:00:00-04:00",
   "analytics": {
     "prod": "UA-79888667-1",
     "dev": "UA-79888667-1"
@@ -70,6 +70,11 @@
     "apiKey": "AIzaSyDNFE5RChWZGz2uq6CTtLEOtzD4fTSjPoI",
     "name": "Tangeman University Center",
     "address": "2766 UC Main Street, Cincinnati, OH 45221",
+    "streetAddress": "2766 UC Main Street",
+    "city": "Cincinnati",
+    "state": "OH",
+    "zipcode": "45221",
+    "country": "US",
     "link": "https://www.uc.edu/eventservices/venues/tangeman.html",
     "pointer": {
       "latitude": 39.1317988,
