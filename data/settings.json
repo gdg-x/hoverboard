@@ -1,12 +1,12 @@
 {
   "organizer": {
     "name": "GDG Paris",
-    "twitter": "gdglviv",
+    "twitter": "GDGParis",
     "blog": "https://medium.com/gdg-lviv",
-    "url": "http://lviv.gdg.org.ua/"
+    "url": "https://www.meetup.com/fr-FR/gdg-paris/"
   },
-  "startDate": "2017-10-013T09:00:00+03:00",
-  "endDate": "2017-10-14T19:00:00+03:00",
+  "startDate": "2019-02-08T09:00:00+03:00",
+  "endDate": "2019-02-08T19:00:00+03:00",
   "webapp": {
     "shortName": "DevFest",
     "themeColor": "#673AB7",
@@ -15,7 +15,7 @@
   "dateFormat": {
     "locale": "en-US"
   },
-  "hashtag": "DevFest17",
+  "hashtag": "DevFest19",
   "disabledSchedule": false,
   "navigation": [
     {
@@ -98,20 +98,20 @@
   },
   "location": {
     "label": "Location",
-    "name": "Planeta kino",
+    "name": "La Grande Crypte",
     "city": "Paris",
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "short": "Paris, France",
+    "address": "69 bis Rue Boissière, 75016 Paris, France",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
+      "latitude": 48.897386,
+      "longitude": 2.5231119,
       "zoom": 5
     },
     "mapCenter": {
       "latitude": 48,
-      "longitude": 8
+      "longitude": 2
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": "La Grande Crypte is located in heart of Paris and specialised to fulfill the needs of the large-scale event"
   },
   "mediaQueries": {
     "xs": {
@@ -133,19 +133,15 @@
     "follow": [
       {
         "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
+        "url": "https://www.facebook.com/devfestparis/"
       },
       {
         "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
-      },
-      {
-        "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
+        "url": "https://twitter.com/devfestparis/"
       },
       {
         "name": "youtube",
-        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "url": "https://www.youtube.com/user/GDGParis"
       }
     ],
     "share": [
@@ -163,7 +159,7 @@
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
+  "mailto": "contact@gdgparis.com",
   "mailchimp": {
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
