@@ -22,11 +22,6 @@
       "route": "home",
       "permalink": "/",
       "label": "Home"
-    },
-    {
-      "route": "team",
-      "permalink": "/team/",
-      "label": "Team"
     }
   ],
   "heroSettings": {
@@ -111,7 +106,7 @@
       "latitude": 48,
       "longitude": 2
     },
-    "description": "La Grande Crypte is located in heart of Paris and specialised to fulfill the needs of the large-scale event"
+    "description": "Located in the center of Paris, La Grande Crypte is the perfect place to host you, our speakers and our sponsors."
   },
   "mediaQueries": {
     "xs": {
@@ -131,10 +126,6 @@
   },
   "socialNetwork": {
     "follow": [
-      {
-        "name": "facebook",
-        "url": "https://www.facebook.com/devfestparis/"
-      },
       {
         "name": "twitter",
         "url": "https://twitter.com/devfestparis/"

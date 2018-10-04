@@ -53,31 +53,16 @@
       ]
     },
     {
-      "title": "Explore Past DevFests",
-      "links": [
-        {
-          "name": "DFParis 2016",
-          "url": "http://devfest.gdgparis.com/",
-          "newTab": true
-        },
-        {
-          "name": "DFParis 2015",
-          "url": "http://2015.devfest.gdgparis.com/",
-          "newTab": true
-        }
-      ]
-    },
-    {
       "title": "Event Resources",
       "links": [
         {
           "name": "Partnership Proposition",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
+          "url": "https://drive.google.com/open?id=1_BDZNxKl17R6T3-6l2_qnxl6aXajJlty",
           "newTab": true
         },
         {
           "name": "Call for Papers",
-          "url": "https://drive.google.com/open?id=10tPuu_7ASM8C70SotqRqIW5Uzos9BzALilMMQPg_JvA",
+          "url": "http://cfp.devfest.gdgparis.com/",
           "newTab": true
         }
       ]
@@ -88,13 +73,8 @@
   "aboutBlock": {
     "title": "What you need to know, before you ask.",
     "callToAction": {
-      "featuredSessions": {
-        "description": "GDG DevFest Paris brings together the world class experts in Android, Web and Cloud technologies to Paris for 1 day of sessions, workshops and showcases.",
-        "label": "Explore Feature Session",
-        "link": "https://www.youtube.com/watch?v=sIyRe8eXrC8"
-      },
       "howItWas": {
-        "description": "Described by many as 'Google I/O of France', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
+        "description": "GDG DevFest Paris brings together the world class experts in Web and Cloud technologies to Paris for 1 day of sessions, workshops and showcases.The GDG DevFest Paris is back for it's 3rd edition !",
         "label": "See how it was in 2016",
         "youtubeId": "Dlr5cN3IQes"
       }
@@ -191,7 +171,7 @@
     "toast": "Successfully subscribed!"
   },
   "team": {
-    "description": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Paris](https://www.meetup.com/fr-FR/gdg-paris/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with France audience to boost development of IT."
+    "description": "<p>The <a href='http://developers.google.com/groups' target='_blank'>Google Developers Groups (GDGs)</a> are groups of people interested in Google Platforms and Technologies: Android, Chrome, Google Apps, Angular, Cloud, AppEngine... These groups promoting sharing can be found all around the world.</p><p>The objective of GDG Nantes is to organise events regularly:</p><ul><li>Google Technology Conferences and others on the Web, Cloud, Mobile.</li><li>Informal theme-based evening sessions around an Aperitif to facilitate meetings of similar minds and thoughts </li><li>Competitions (Hackathon, ...)</li></ul>"
   },
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"
@@ -224,19 +204,10 @@
     "blocks": [
       {
         "title": "Organizer",
-        "description": "<a href='https://www.meetup.com/fr-FR/gdg-paris/' target='_blank'>GDG Paris</a> with support of passionate GDGs from all around Paris is proud organizer of DevFest Paris",
+        "description": "The <a href='https://www.meetup.com/fr-FR/gdg-paris/' target='_blank'>GDG Paris</a> is an open and volunteer geek community who create exciting projects and share experience about technologies with a passion.",
         "callToAction": {
-          "label": "Open team page",
-          "link": "/team"
-        }
-      },
-      {
-        "title": "What is GDG?",
-        "description": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion",
-        "callToAction": {
-          "label": "Read more",
-          "link": "https://developers.google.com/groups/",
-          "newTab": true
+          "label": "Meet the team",
+          "link": "#"
         }
       }
     ]
