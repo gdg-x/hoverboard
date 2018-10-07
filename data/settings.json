@@ -1,9 +1,9 @@
 {
   "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv",
+    "name": "GDG Warsaw",
+    "twitter": "dev_fest",
     "blog": "https://medium.com/gdg-lviv",
-    "url": "http://lviv.gdg.org.ua/"
+    "url": "https://gdgwarszawa.pl/"
   },
   "startDate": "2017-10-013T09:00:00+03:00",
   "endDate": "2017-10-14T19:00:00+03:00",
@@ -15,7 +15,7 @@
   "dateFormat": {
     "locale": "en-US"
   },
-  "hashtag": "DevFest17",
+  "hashtag": "DevFest18",
   "disabledSchedule": false,
   "navigation": [
     {
@@ -64,7 +64,7 @@
     "speakers": {
       "title": "Speakers",
       "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
+      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners. More details coming soon...",
       "background": {
         "color": "#FFF"
       },
@@ -113,20 +113,20 @@
   },
   "location": {
     "label": "Location",
-    "name": "Planeta kino",
-    "city": "Lviv",
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "name": "Campus Warsaw - A Google Space",
+    "city": "Warsaw",
+    "short": "Warsaw, Poland",
+    "address": "Plac Konesera 10, Warsaw, Poland",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
+      "latitude": 52.2561467,
+      "longitude": 21.0431318,
       "zoom": 5
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": 52,
+      "longitude": 21
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": "Campus Warsaw, a Google Space. With free Wi-Fi, an infectious energy, and lots of fellow founders, the Campus Cafe is a great place to get things done, take a break, or collaborate with like-minded people."
   },
   "mediaQueries": {
     "xs": {
@@ -152,7 +152,7 @@
       },
       {
         "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
+        "url": "https://twitter.com/dev_fest"
       },
       {
         "name": "instagram",

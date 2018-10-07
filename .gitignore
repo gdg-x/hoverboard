@@ -11,3 +11,7 @@ functions/lib/
 /appengine/dist/
 serviceAccount.json
 npm-debug.log
+
+yarn\.lock
+
+functions/package-lock\.json

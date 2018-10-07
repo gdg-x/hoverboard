@@ -51,7 +51,7 @@
     <div class="container" layout vertical center$="[[viewport.isTabletPlus]]">
       <div class="description"> {$ subscribeBlock.callToAction.description $}</div>
       <div class="cta-button">
-        <paper-button class="animated icon-right"
+<!--         <paper-button class="animated icon-right"
                       disabled$="[[subscribed]]"
                       on-tap="_subscribe"
                       ga-on="click"
@@ -60,7 +60,13 @@
                       ga-event-label="subscribe block">
           <span class="cta-label">[[ctaLabel]]</span>
           <iron-icon icon$="hoverboard:[[ctaIcon]]"></iron-icon>
-        </paper-button>
+        </paper-button> -->
+      <a href="https://landing.mailerlite.com/webforms/landing/g0p3s3" target="_blank">
+          <paper-button class="animated icon-right">
+            <span class="cta-label">[[ctaLabel]]</span>
+            <iron-icon icon$="hoverboard:[[ctaIcon]]"></iron-icon>
+          </paper-button>
+      </a>
       </div>
     </div>
 
