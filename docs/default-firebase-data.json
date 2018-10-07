@@ -68,57 +68,71 @@
   },
   "partners" : [ {
     "logos" : [ {
+      "order" : 0,
       "logoUrl" : "../images/logos/gdg-lviv.svg",
       "name" : "GDG Lviv",
       "url" : "https://plus.google.com/102444623953913144164"
     } ],
+    "order" : 0,
     "title" : "Template Creator"
   }, {
     "logos" : [ {
+      "order" : 0,
       "logoUrl" : "../images/logos/google.svg",
       "name" : "Google",
       "url" : "https://www.google.com.ua/intl/en/about/"
     }, {
+      "order" : 1,
       "logoUrl" : "../images/logos/gdg-x.svg",
       "name" : "GDG[x]",
       "url" : "https://github.com/gdg-x"
     }, {
+      "order" : 2,
       "logoUrl" : "../images/logos/google.svg",
       "name" : "Google",
       "url" : "https://www.google.com.ua/intl/en/about/"
     }, {
+      "order" : 3,
       "logoUrl" : "../images/logos/gdg-x.svg",
       "name" : "GDG[x]",
       "url" : "https://github.com/gdg-x"
     }, {
+      "order" : 4,
       "logoUrl" : "../images/logos/google.svg",
       "name" : "Google",
       "url" : "https://www.google.com.ua/intl/en/about/"
     }, {
+      "order" : 5,
       "logoUrl" : "../images/logos/gdg-x.svg",
       "name" : "GDG[x]",
       "url" : "https://github.com/gdg-x"
     }, {
+      "order" : 6,
       "logoUrl" : "../images/logos/google.svg",
       "name" : "Google",
       "url" : "https://www.google.com.ua/intl/en/about/"
     }, {
+      "order" : 7,
       "logoUrl" : "../images/logos/gdg-x.svg",
       "name" : "GDG[x]",
       "url" : "https://github.com/gdg-x"
     }, {
+      "order" : 8,
       "logoUrl" : "../images/logos/google.svg",
       "name" : "Google",
       "url" : "https://www.google.com.ua/intl/en/about/"
     }, {
+      "order" : 9,
       "logoUrl" : "../images/logos/gdg-x.svg",
       "name" : "GDG[x]",
       "url" : "https://github.com/gdg-x"
     }, {
+      "order" : 10,
       "logoUrl" : "../images/logos/google.svg",
       "name" : "Google",
       "url" : "https://www.google.com.ua/intl/en/about/"
     } ],
+    "order" : 1,
     "title" : "General Partner"
   } ],
   "schedule" : {
@@ -680,6 +694,7 @@
         "link" : "plus.google.com/+AdrianKajda",
         "name" : "Google+"
       } ],
+      "order" : 0,
       "title" : "Product Manager/Developer"
     },
     "aleksander_piotrowski" : {
@@ -710,6 +725,7 @@
         "link" : "https://www.instagram.com/pelotasplus/",
         "name" : "Google+"
       } ],
+      "order" : 1,
       "title" : "Code Monkey"
     },
     "anton__minashkin" : {
@@ -736,6 +752,7 @@
         "link" : "https://ua.linkedin.com/in/anton-minashkin-606a1b4b",
         "name" : "LinkedIn"
       } ],
+      "order" : 2,
       "title" : "Lead Software Developer"
     },
     "carmen_popovicu" : {
@@ -758,6 +775,7 @@
         "link" : "https://twitter.com/CarmenPopoviciu",
         "name" : "Twitter"
       } ],
+      "order" : 3,
       "title" : "Front-end Engineer"
     },
     "constantine_mars" : {
@@ -781,6 +799,7 @@
         "link" : "https://plus.google.com/+ConstantineMars",
         "name" : "Google+"
       } ],
+      "order" : 4,
       "title" : "Senior Android Developer"
     },
     "david_mayboroda" : {
@@ -803,6 +822,7 @@
         "link" : "https://github.com/dmayboroda",
         "name" : "GitHub"
       } ],
+      "order" : 5,
       "title" : "Android Engineer"
     },
     "david_vávra" : {
@@ -838,6 +858,7 @@
         "link" : "https://github.com/davidvavra",
         "name" : "GitHub"
       } ],
+      "order" : 6,
       "title" : "Founder/CEO/Android Lead"
     },
     "dmytro_danylyk" : {
@@ -873,6 +894,7 @@
         "link" : "https://plus.google.com/+DmytroDanylyk",
         "name" : "Google+"
       } ],
+      "order" : 7,
       "title" : "Senior Android Developer"
     },
     "gerard_sans" : {
@@ -900,6 +922,7 @@
         "link" : "https://medium.com/@gerard.sans",
         "name" : "Website"
       } ],
+      "order" : 8,
       "title" : "Technical Evangelist"
     },
     "ihor_dvoretskyi" : {
@@ -931,6 +954,7 @@
         "link" : "https://twitter.com/idvoretskyi",
         "name" : "Twitter"
       } ],
+      "order" : 9,
       "title" : "Deployment Engineer"
     },
     "jakub_škvára" : {
@@ -958,6 +982,7 @@
         "link" : "https://plus.google.com/+JakubSkvara/",
         "name" : "Google+"
       } ],
+      "order" : 10,
       "title" : "Frontend engineer"
     },
     "jana_moudra" : {
@@ -997,6 +1022,7 @@
         "link" : "https://github.com/Janamou",
         "name" : "GitHub"
       } ],
+      "order" : 11,
       "title" : "Co-Founder"
     },
     "jean-baptiste_clion" : {
@@ -1032,6 +1058,7 @@
         "link" : "https://plus.google.com/+JeanBaptisteClionBasel/posts",
         "name" : "Google+"
       } ],
+      "order" : 12,
       "title" : "Founder"
     },
     "jozef_vodicka" : {
@@ -1063,6 +1090,7 @@
         "link" : "https://www.facebook.com/jozef.vodicka",
         "name" : "Facebook"
       } ],
+      "order" : 13,
       "title" : "Developer Relations Program Manager"
     },
     "konrad_dzwinel" : {
@@ -1094,6 +1122,7 @@
         "link" : "https://twitter.com/kdzwinel",
         "name" : "Twitter"
       } ],
+      "order" : 14,
       "title" : "Front-End Engineer"
     },
     "mateusz_herych" : {
@@ -1129,6 +1158,7 @@
         "link" : "https://www.linkedin.com/in/herych",
         "name" : "LinkedIn"
       } ],
+      "order" : 15,
       "title" : "Android Tech Lead"
     },
     "mete_atamel" : {
@@ -1155,6 +1185,7 @@
         "link" : "https://github.com/meteatamel/",
         "name" : "GitHub"
       } ],
+      "order" : 16,
       "title" : "Developer Advocate"
     },
     "michael_pustovit" : {
@@ -1181,6 +1212,7 @@
         "link" : "https://twitter.com/pustovit",
         "name" : "Twitter"
       } ],
+      "order" : 17,
       "title" : "Senior Android Developer"
     },
     "paul_lammertsma" : {
@@ -1203,6 +1235,7 @@
         "link" : "https://twitter.com/officesunshine",
         "name" : "Twitter"
       } ],
+      "order" : 18,
       "title" : "CTO"
     },
     "resul_caner__yildirim" : {
@@ -1246,6 +1279,7 @@
         "link" : "https://linkedin.com/in/protechman",
         "name" : "LinkedIn"
       } ],
+      "order" : 19,
       "title" : "User Experience Expert"
     },
     "roman_herasymenko" : {
@@ -1277,6 +1311,7 @@
         "link" : "http://ua.linkedin.com/pub/roman-gerasimenko/",
         "name" : "LinkedIn"
       } ],
+      "order" : 20,
       "title" : "CEO"
     },
     "rustem_arzymbetov" : {
@@ -1295,6 +1330,7 @@
         "link" : "https://plus.google.com/102117493667558776856",
         "name" : "Google+"
       } ],
+      "order" : 21,
       "title" : "Software Engineer"
     },
     "sascha_wolter" : {
@@ -1321,6 +1357,7 @@
         "link" : "http://www.linkedin.com/pub/sascha-wolter/5/a38/493",
         "name" : "LinkedIn"
       } ],
+      "order" : 22,
       "title" : "Senior Developer Evangelist Connected Home"
     },
     "sergii_khomenko" : {
@@ -1339,6 +1376,7 @@
         "link" : "https://twitter.com/lc0d3r",
         "name" : "Twitter"
       } ],
+      "order" : 23,
       "title" : "Data Scientist"
     },
     "sergiy_mokienko" : {
@@ -1370,6 +1408,7 @@
         "link" : "https://plus.google.com/107094180736796042888",
         "name" : "Google+"
       } ],
+      "order" : 24,
       "title" : "Android Team Lead"
     },
     "valentyn_shybanov" : {
@@ -1401,6 +1440,7 @@
         "link" : "http://olostan.name/",
         "name" : "Website"
       } ],
+      "order" : 25,
       "title" : "Software Engineer/Country Manager"
     },
     "yonatan_levin" : {
@@ -1432,6 +1472,7 @@
         "link" : "https://plus.google.com/+YonatanLevin",
         "name" : "Google+"
       } ],
+      "order" : 26,
       "title" : "Android Evangelist & Developer"
     }
   },
@@ -1457,6 +1498,7 @@
         "link" : "http://o.zasadnyy.com/",
         "name" : "Blog"
       } ],
+      "order" : 0,
       "title" : "Website and sponsors"
     }, {
       "name" : "Sofiya Huts",
@@ -1471,6 +1513,7 @@
         "link" : "https://www.facebook.com/sophie.huts.7",
         "name" : "Facebook"
       } ],
+      "order" : 1,
       "title" : "Social and media"
     }, {
       "name" : "Vitaliy Zasadnyy",
@@ -1489,6 +1532,7 @@
         "link" : "http://v.zasadnyy.com/",
         "name" : "Blog"
       } ],
+      "order" : 2,
       "title" : "Speakers"
     }, {
       "name" : "Marta Maxymiak",
@@ -1503,6 +1547,7 @@
         "link" : "https://www.facebook.com/marta.maxymiak",
         "name" : "Facebook"
       } ],
+      "order" : 3,
       "title" : "Party and happiness"
     }, {
       "name" : "Ostap Andrusiv",
@@ -1525,6 +1570,7 @@
         "link" : "http://andrusiv.com/",
         "name" : "Blog"
       } ],
+      "order" : 4,
       "title" : "Sponsors"
     }, {
       "name" : "Vasylyna Mytsak",
@@ -1539,6 +1585,7 @@
         "link" : "https://www.facebook.com/vasylyna.mytsak",
         "name" : "Facebook"
       } ],
+      "order" : 5,
       "title" : "Party and happiness"
     }, {
       "name" : "Volodya Karpliuk",
@@ -1557,6 +1604,7 @@
         "link" : "https://twitter.com/keyv23",
         "name" : "Twitter"
       } ],
+      "order" : 6,
       "title" : "Speakers"
     }, {
       "name" : "Diana Pinchuk",
@@ -1571,6 +1619,7 @@
         "link" : "https://www.facebook.com/diana.pinchuk.9",
         "name" : "Facebook"
       } ],
+      "order" : 7,
       "title" : "Social and media"
     } ],
     "title" : "Core Team"
@@ -1588,6 +1637,7 @@
         "link" : "https://twitter.com/idvoretskyi",
         "name" : "Twitter"
       } ],
+      "order" : 0,
       "title" : "Cloud stream"
     }, {
       "name" : "Dmytro Danylyk",
@@ -1606,6 +1656,7 @@
         "link" : "http://www.dmytrodanylyk.com/#/about",
         "name" : "Website"
       } ],
+      "order" : 1,
       "title" : "Android Stream"
     } ],
     "title" : "Program Committee"

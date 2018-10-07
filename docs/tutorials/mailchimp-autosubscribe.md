@@ -11,4 +11,5 @@ This tutorial describes how to enable Mailchimp autosubscription feature. So tha
     ```console
       firebase deploy --only functions
     ```
+1.  As per the currently existing Firebase subscription plans, the free plan does not support calls to external APIs from Firebase functions (which is being used for the Mailchimp integration). This means that you will need other subscription plan - we recommend Blaze (pay-as-you-go) subscription plan, which is the cheapest option that will allow you to make the integration
 1.  Done 

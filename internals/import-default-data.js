@@ -83,7 +83,8 @@ const importPartners = () => {
   Object.keys(partners).forEach((docId) => {
     batch.set(
         firestore.collection('partners').doc(docId),
-        { title: partners[docId].title },
+        { title: partners[docId].title,
+          order: partners[docId].order },
     );
 
     partners[docId].logos.forEach((item, id) => {
