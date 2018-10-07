@@ -47,14 +47,14 @@
     }
   },
   "gallery" : [
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4185.jpg?alt=media&token=ff3fd161-3d68-401a-90cd-74b90bd2a4d8",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4411.jpg?alt=media&token=7fda0d66-a631-4816-bd85-b93ef49ed3a6",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4577.jpg?alt=media&token=f14205b5-be75-447c-8bca-73a15ca2df41",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4525.jpg?alt=media&token=0428f0e3-fda0-4119-8249-69f98e936ce5",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4611.jpg?alt=media&token=b080143c-161c-4d9f-96f3-ebb6bdcdfd95",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4720.jpg?alt=media&token=75de0c2d-8bd9-48bb-9117-1349c9bc381f",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4646.jpg?alt=media&token=eafb0320-6f21-47bc-8ba4-8eec708f2076",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_5294.jpg?alt=media&token=72ab5141-d21b-4e71-a58b-faa2b00d1d02"
+    "https://firebasestorage.googleapis.com/v0/b/devfest-waw-2018.appspot.com/o/images%2Fpast-photos%2F11223717_873354392760079_7105497519733897847_o.jpg?alt=media&token=49ab3aeb-dc97-4539-a4ec-cd7fd0a691b7",
+    "https://firebasestorage.googleapis.com/v0/b/devfest-waw-2018.appspot.com/o/images%2Fpast-photos%2F12239194_873354742760044_7215461713502455443_o.jpg?alt=media&token=741c31c3-70ef-48dc-9b90-163c38447e9d",
+    "https://firebasestorage.googleapis.com/v0/b/devfest-waw-2018.appspot.com/o/images%2Fpast-photos%2F12304077_873356686093183_8199110532883477610_o.jpg?alt=media&token=b2768815-fd0f-49b5-9565-96fb44b524c1",
+    "https://firebasestorage.googleapis.com/v0/b/devfest-waw-2018.appspot.com/o/images%2Fpast-photos%2F12314172_873354626093389_8407811650852289308_o.jpg?alt=media&token=3d882730-4a26-46c9-ae25-fcaf02e29a00",
+    "https://firebasestorage.googleapis.com/v0/b/devfest-waw-2018.appspot.com/o/images%2Fpast-photos%2F24883670_1496664350429077_3842951957684624510_o.jpg?alt=media&token=6659cc05-1e0a-4488-b0e1-cf142cecaf79",
+    "https://firebasestorage.googleapis.com/v0/b/devfest-waw-2018.appspot.com/o/images%2Fpast-photos%2F24955432_1496671560428356_3319728860652781889_o.jpg?alt=media&token=3fc2a6c2-90da-4cdf-b15d-b479a1a38f34",
+    "https://firebasestorage.googleapis.com/v0/b/devfest-waw-2018.appspot.com/o/images%2Fpast-photos%2F12291738_873591669403018_6744379309082216685_o.jpg?alt=media&token=eb9a8633-c3a5-45b8-a8c1-7364f843beef",
+    "https://firebasestorage.googleapis.com/v0/b/devfest-waw-2018.appspot.com/o/images%2Fpast-photos%2F25075098_1496664237095755_6078477299320834633_o.jpg?alt=media&token=b054d297-f131-4b9c-bfe4-7a073203fc69"
   ],
   "notifications" : {
     "config" : {
@@ -68,53 +68,6 @@
   },
   "partners" : [ {
     "logos" : [ {
-      "logoUrl" : "../images/logos/gdg-lviv.svg",
-      "name" : "GDG Lviv",
-      "url" : "https://plus.google.com/102444623953913144164"
-    } ],
-    "title" : "Template Creator"
-  }, {
-    "logos" : [ {
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
       "logoUrl" : "../images/logos/google.svg",
       "name" : "Google",
       "url" : "https://www.google.com.ua/intl/en/about/"
@@ -1437,178 +1390,91 @@
   },
   "team" : [ {
     "members" : [ {
-      "name" : "Oleh Zasadnyy",
-      "photo" : "/images/people/oleh_zasadnyy.jpg",
-      "photoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/oleh_zasadnyy.jpg",
+      "name" : "Andrii Kovalchuk",
+      "photo" : "/images/people/andrii.png",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-waw-2018.appspot.com/o/images%2Fpeople%2Fandrii.png?alt=media&token=ba663b26-7bf6-4ac5-ac78-ca7ecf6c44d4",
       "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+OlehZasadnyy",
-        "name" : "Google+"
+        "icon" : "github",
+        "link" : "https://github.com/tieorange",
+        "name" : "GitHub"
       }, {
         "icon" : "facebook",
-        "link" : "https://www.facebook.com/oleh.zasadnyy",
-        "name" : "Facebook"
-      }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/ozasadnyy",
-        "name" : "Twitter"
-      }, {
-        "icon" : "website",
-        "link" : "http://o.zasadnyy.com/",
-        "name" : "Blog"
-      } ],
-      "title" : "Website and sponsors"
-    }, {
-      "name" : "Sofiya Huts",
-      "photo" : "/images/people/sofiya_huts.jpg",
-      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fsofiya_huts.jpg?alt=media&token=a911eafb-f709-4af7-b1cb-58a6604b70d1",
-      "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+SofiaHuts",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/sophie.huts.7",
+        "link" : "https://fb.com/tieorange",
         "name" : "Facebook"
       } ],
-      "title" : "Social and media"
+      "title" : "DevFest Creator"
     }, {
-      "name" : "Vitaliy Zasadnyy",
-      "photo" : "/images/people/vitaliy_zasadnyy.jpg",
-      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fvitaliy_zasadnyy.jpg?alt=media&token=930e05c8-ae43-4628-8d4c-3e8f5193cda3",
+      "name" : "Sara Grynfelder-Renk",
+      "photo" : "/images/people/sara.png",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-waw-2018.appspot.com/o/images%2Fpeople%2Fsara.png?alt=media&token=22ca178e-43ba-45ae-8a3e-19adf134c544",
+      "socials" : [ ],
+      "title" : "DevFest Creator"
+    }, {
+      "name" : "Maciej Sawicki",
+      "photo" : "/images/people/maciek.png",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-waw-2018.appspot.com/o/images%2Fpeople%2Fmaciek.png?alt=media&token=88805836-85e6-4c76-9cc4-8bfdd7fbe275",
+      "socials" : [ ],
+      "title" : "DevFest Creator"
+    }, {
+      "name" : "Dariusz Kalbarczyk",
+      "photo" : "/images/people/darek.png",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-waw-2018.appspot.com/o/images%2Fpeople%2Fdarek.png?alt=media&token=48fd6884-cc36-4375-8c53-05260cf8a859",
       "socials" : [ {
         "icon" : "linkedin",
-        "link" : "https://www.linkedin.com/in/zasadnyy",
-        "name" : "Linkedin"
+        "link" : "https://www.linkedin.com/in/ngkalbarczyk/",
+        "name" : "LinkedIn+"
       }, {
         "icon" : "twitter",
-        "link" : "https://twitter.com/zasadnyy",
-        "name" : "Twitter"
-      }, {
-        "icon" : "website",
-        "link" : "http://v.zasadnyy.com/",
-        "name" : "Blog"
-      } ],
-      "title" : "Speakers"
-    }, {
-      "name" : "Marta Maxymiak",
-      "photo" : "/images/people/marta_maxymiak.jpg",
-      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fmarta_maxymiak.jpg?alt=media&token=6532f039-7f86-4304-8558-dbfbb3ae8d68",
-      "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/104036874811391520583",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/marta.maxymiak",
-        "name" : "Facebook"
-      } ],
-      "title" : "Party and happiness"
-    }, {
-      "name" : "Ostap Andrusiv",
-      "photo" : "/images/people/ostap_andrusiv.jpg",
-      "photoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/ostap_andrusiv.jpg",
-      "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://google.com/+OstapAndrusiv",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/ostap.andrusiv",
-        "name" : "Facebook"
-      }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/p1f",
-        "name" : "Twitter"
-      }, {
-        "icon" : "website",
-        "link" : "http://andrusiv.com/",
-        "name" : "Blog"
-      } ],
-      "title" : "Sponsors"
-    }, {
-      "name" : "Vasylyna Mytsak",
-      "photo" : "/images/people/vasylyna_mytsak.jpg",
-      "photoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/vasylyna_mytsak.jpg",
-      "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+ВасилинаМицак",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/vasylyna.mytsak",
-        "name" : "Facebook"
-      } ],
-      "title" : "Party and happiness"
-    }, {
-      "name" : "Volodya Karpliuk",
-      "photo" : "/images/people/volodya_karpliuk.jpg",
-      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fvolodya_karpliuk.jpg?alt=media&token=aa08d9c9-c42a-435f-8672-c3a004e3aa08",
-      "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+VolodyaKarpliuk23",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/volodya.karpluk",
-        "name" : "Facebook"
-      }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/keyv23",
+        "link" : "https://twitter.com/ngkalbarczyk",
         "name" : "Twitter"
       } ],
-      "title" : "Speakers"
+      "title" : "DevFest Creator"
     }, {
-      "name" : "Diana Pinchuk",
-      "photo" : "/images/people/diana_pinchuk.jpg",
-      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fdiana_pinchuk.jpg?alt=media&token=189d67d1-004f-4a3c-9e0c-13bc992bbaf7",
+      "name" : "Tomasz Wojda",
+      "photo" : "/images/people/tomek.png",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-waw-2018.appspot.com/o/images%2Fpeople%2Ftomek.png?alt=media&token=68576edc-439d-465c-9db3-3f55025d8ada",
+      "socials" : [ ],
+      "title" : "DevFest Creator"
+    }, {
+      "name" : "Asia Krawczyk",
+      "photo" : "/images/people/asia.png",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-waw-2018.appspot.com/o/images%2Fpeople%2Fasia.png?alt=media&token=0418a8bb-48e8-4864-ac73-78ce3d516de9",
+      "socials" : [ ],
+      "title" : "DevFest Creator"
+    }, {
+      "name" : "Magdalena Komar",
+      "photo" : "/images/people/magda.png",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-waw-2018.appspot.com/o/images%2Fpeople%2Fmagda.png?alt=media&token=d107674a-8deb-4d69-8946-7684ddefa45a",
+      "socials" : [ ],
+      "title" : "DevFest Creator"
+    }, {
+      "name" : "Ola Woźniak",
+      "photo" : "/images/people/ola.png",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-waw-2018.appspot.com/o/images%2Fpeople%2Fola.png?alt=media&token=e9789df1-4206-41c1-8bcd-a81096af0cef",
       "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+DianaPinchuk",
-        "name" : "Google+"
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/aleksandra-wozniak/",
+        "name" : "LinkedIn+"
       }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/diana.pinchuk.9",
-        "name" : "Facebook"
+        "icon" : "github",
+        "link" : " https://github.com/AleksandraWozniak",
+        "name" : "GitHub"
       } ],
-      "title" : "Social and media"
+      "title" : "DevFest Creator"
+    }, {
+      "name" : "Paulina Krzypkowska",
+      "photo" : "/images/people/paulina.png",
+      "photoUrl" : "",
+      "socials" : [ ],
+      "title" : "DevFest Creator"
+    }, {
+      "name" : "Dominika Zaleska",
+      "photo" : "/images/people/dominika.png",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-waw-2018.appspot.com/o/images%2Fpeople%2Fdominika.png?alt=media&token=1382e086-9fc0-42bd-9eb4-333501f12bef",
+      "socials" : [ ],
+      "title" : "DevFest Creator"
     } ],
     "title" : "Core Team"
-  }, {
-    "members" : [ {
-      "name" : "Ihor Dvoretskyi",
-      "photo" : "/images/people/ihor_dvoretskyi.jpg",
-      "photoUrl" : "",
-      "socials" : [ {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/idvoretskyi",
-        "name" : "Facebook"
-      }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/idvoretskyi",
-        "name" : "Twitter"
-      } ],
-      "title" : "Cloud stream"
-    }, {
-      "name" : "Dmytro Danylyk",
-      "photo" : "/images/people/dmytro_danylyk.jpg",
-      "photoUrl" : "",
-      "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+DmytroDanylyk",
-        "name" : "Google+"
-      }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/dmytrodanylyk",
-        "name" : "Twitter"
-      }, {
-        "icon" : "website",
-        "link" : "http://www.dmytrodanylyk.com/#/about",
-        "name" : "Website"
-      } ],
-      "title" : "Android Stream"
-    } ],
-    "title" : "Program Committee"
   } ],
   "tickets" : [ {
     "available" : true,
