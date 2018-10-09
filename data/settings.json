@@ -98,9 +98,9 @@
     "short": "Paris, France",
     "address": "69 bis Rue Boissière, 75016 Paris, France",
     "pointer": {
-      "latitude": 48.897386,
-      "longitude": 2.5231119,
-      "zoom": 5
+      "latitude": 48.8684567,
+      "longitude": 2.2847801,
+      "zoom": 7
     },
     "mapCenter": {
       "latitude": 48,
