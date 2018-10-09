@@ -207,7 +207,7 @@
         "description": "The <a href='https://www.meetup.com/fr-FR/gdg-paris/' target='_blank'>GDG Paris</a> is an open and volunteer geek community who create exciting projects and share experience about technologies with a passion.",
         "callToAction": {
           "label": "Meet the team",
-          "link": "#"
+          "link": "http://devfest.gdgparis.com/team/"
         }
       }
     ]

@@ -59,7 +59,7 @@
   "notifications" : {
     "config" : {
       "icon" : "",
-      "timezone" : "+03:00"
+      "timezone" : "+01:00"
     },
     "messages" : { },
     "subscribers" : { },
@@ -1437,68 +1437,95 @@
   },
   "team" : [ {
     "members" : [ {
-      "name" : "Oleh Zasadnyy",
-      "photo" : "/images/people/oleh_zasadnyy.jpg",
-      "photoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/oleh_zasadnyy.jpg",
+      "name" : "Alain Regnier",
+      "photo" : "/images/people/alain_regnier.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-paris-2019.appspot.com/o/images%2Fteam%2Falain_regnier.png?alt=media&token=396719e5-4e8f-4a4e-b177-57ed3af75ff9",
       "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+OlehZasadnyy",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/oleh.zasadnyy",
-        "name" : "Facebook"
-      }, {
         "icon" : "twitter",
-        "link" : "https://twitter.com/ozasadnyy",
+        "link" : "https://twitter.com/altolabs",
         "name" : "Twitter"
-      }, {
-        "icon" : "website",
-        "link" : "http://o.zasadnyy.com/",
-        "name" : "Blog"
+      }],
+      "title" : ""
+    }, {
+      "name" : "Benjamin LACROIX",
+      "photo" : "/images/people/benjamin_lacroix.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-paris-2019.appspot.com/o/images%2Fteam%2Fbenjamin_lacroix.jpeg?alt=media&token=5fefadfa-186c-4c72-8dca-e44710c1f35a",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/benjlacroix",
+        "name" : "Twitter"
+      }],
+      "title" : ""
+    }, {
+      "name" : "Cyril Balit",
+      "photo" : "/images/people/cyril_balit.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-paris-2019.appspot.com/o/images%2Fteam%2Fcyril_balit.jpeg?alt=media&token=58b19414-821d-413e-a61d-2b34c284c8b0",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/cablit",
+        "name" : "Twitter"
+      }],
+      "title" : ""
+    }, {
+      "name" : "Leena Kasundra",
+      "photo" : "/images/people/leena_kasundra.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-paris-2019.appspot.com/o/images%2Fteam%2Fleena_kasundra.jpg?alt=media&token=68ccded9-e39a-4ace-9885-1e9b759a9ac4",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/LeenaK26",
+        "name" : "Twitter"
+      }],
+      "title" : ""
+    }, {
+      "name" : "Paul Chabot",
+      "photo" : "/images/people/paul_chabot.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-paris-2019.appspot.com/o/images%2Fteam%2Fpaul_chabot.jpg?alt=media&token=62a2e171-d669-4940-9108-131deddd8439",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/paulch4bot",
+        "name" : "Twitter"
       }, {
         "icon" : "linkedin",
-        "link" : "https://www.linkedin.com/in/zasadnyy",
+        "link" : "https://www.linkedin.com/in/pchabot",
         "name" : "Linkedin"
-      } ],
-      "title" : "Website and sponsors"
+      }],
+      "title" : ""
+    }, {
+      "name" : "Pritesh Bheemanee",
+      "photo" : "/images/people/pritesh_heemanee.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-paris-2019.appspot.com/o/images%2Fteam%2Fpritesh_heemanee.jpg?alt=media&token=f6c557c8-e87d-4d81-a001-44448ac65e81",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/PriteshP23",
+        "name" : "Twitter"
+      }, {
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/priteshbheemanee",
+        "name" : "Linkedin"
+      }],
+      "title" : ""
+    }, {
+      "name" : "Thibault Pouget",
+      "photo" : "/images/people/thibault_pouget.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-paris-2019.appspot.com/o/images%2Fteam%2Fthibault_pouget.jpeg?alt=media&token=66c1eaaa-dc3a-4cae-b124-fdce83e567ac",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/thibaultpouget",
+        "name" : "Twitter"
+      }],
+      "title" : ""
+    }, {
+      "name" : "Tiffany Souterre",
+      "photo" : "/images/people/tiffany_souterre.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/devfest-paris-2019.appspot.com/o/images%2Fteam%2Ftiffany_souterre.jpg?alt=media&token=107d4ded-e0d9-4d04-8a30-d387af2f760f",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/TiffanySouterre",
+        "name" : "Twitter"
+      }],
+      "title" : ""
     } ],
     "title" : "Core Team"
-  }, {
-    "members" : [ {
-      "name" : "Ihor Dvoretskyi",
-      "photo" : "/images/people/ihor_dvoretskyi.jpg",
-      "photoUrl" : "",
-      "socials" : [ {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/idvoretskyi",
-        "name" : "Facebook"
-      }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/idvoretskyi",
-        "name" : "Twitter"
-      } ],
-      "title" : "Cloud stream"
-    }, {
-      "name" : "Dmytro Danylyk",
-      "photo" : "/images/people/dmytro_danylyk.jpg",
-      "photoUrl" : "",
-      "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+DmytroDanylyk",
-        "name" : "Google+"
-      }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/dmytrodanylyk",
-        "name" : "Twitter"
-      }, {
-        "icon" : "website",
-        "link" : "http://www.dmytrodanylyk.com/#/about",
-        "name" : "Website"
-      } ],
-      "title" : "Android Stream"
-    } ],
-    "title" : "Program Committee"
   } ],
   "tickets" : [ {
     "available" : true,
