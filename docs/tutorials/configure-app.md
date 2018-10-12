@@ -24,7 +24,7 @@ The top block (aka 'hero') view of the page can be adjusted via `heroSettings` i
 ```json
 "heroSettings": {
   "home": {
-    "description": "Be a hero. Be a GDG!",
+    "description": "Be a hero. Start coding!",
     "background": {
       "color": "#673ab7",
       "image": "/images/backgrounds/home.jpg"

@@ -39,7 +39,7 @@ in `heroSettings` object:
 ```json
 "heroSettings": {
   "home": {
-    "description": "Be a hero. Be a GDG!",
+    "description": "Be a hero. Start coding!",
     "background": {
       "color": "#673ab7",
       "image": "/images/backgrounds/home.jpg"

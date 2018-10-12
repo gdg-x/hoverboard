@@ -22,11 +22,16 @@
       "route": "home",
       "permalink": "/",
       "label": "Home"
+    },
+    {
+      "route": "team",
+      "permalink": "/team/",
+      "label": "Team"
     }
   ],
   "heroSettings": {
     "home": {
-      "description": "Be a hero. Be a GDG!",
+      "description": "Be a hero. Start coding!",
       "background": {
         "color": "#673ab7",
         "image": "/images/backgrounds/home.jpg"
@@ -98,8 +103,8 @@
     "short": "Paris, France",
     "address": "69 bis Rue Boissière, 75016 Paris, France",
     "pointer": {
-      "latitude": 48.8684567,
-      "longitude": 2.2847801,
+      "latitude": 48.868453,
+      "longitude": 2.286974,
       "zoom": 7
     },
     "mapCenter": {
