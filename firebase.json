@@ -10,6 +10,17 @@
         "destination": "/index.html"
       }
     ],
+    "headers": [
+      {
+        "source": "/@(index.html|service-worker.js)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      }
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",
