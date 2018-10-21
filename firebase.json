@@ -4,11 +4,21 @@
   },
   "hosting": {
     "public": "build",
-    "cleanUrls": true,
     "rewrites": [
       {
         "source": "**",
         "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/@(index.html|service-worker.js)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
       }
     ],
     "ignore": [
