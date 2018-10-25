@@ -9,3 +9,4 @@ functions/lib/
 .firebaserc
 /appengine/dist/
 serviceAccount.json
+.DS_Store
