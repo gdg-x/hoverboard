@@ -116,10 +116,6 @@
         margin-top: 12px;
       }
 
-      .add-to-homescreen {
-        font-size: 10px;
-      }
-
       @media (min-width: 640px) {
         app-toolbar {
           padding: 0 36px;
@@ -163,16 +159,6 @@
           <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>
         </a>
       </paper-tabs>
-
-      <paper-button
-        class="add-to-homescreen"
-        on-tap="_onAddToHomescreen"
-        hidden$="[[_isAddToHomeScreenHidden(addToHomescreen, viewport.isLaptopPlus)]]"
-        primary
-        invert$="[[transparent]]"
-      >
-        {$ addToHomeScreen.cta $}
-      </paper-button>
 
       <paper-menu-button
         id="notificationsMenu"
@@ -352,10 +338,6 @@
         return userSignedIn || isTabletPlus;
       }
 
-      _isAddToHomeScreenHidden(addToHomescreen, isTabletPlus) {
-        return isTabletPlus || !addToHomescreen;
-      }
-
       _getTicketUrl(tickets) {
         if (!tickets.list.length) return '';
         const availableTicket = tickets.list.filter((ticket) => ticket.available)[0];
@@ -369,19 +351,6 @@
           '--hero-logo-opacity': settings.hideLogo ? 0 : 1,
           '--hero-logo-color': settings.backgroundImage ? '#fff' : 'var(--default-primary-color)',
         });
-      }
-
-      _onAddToHomescreen() {
-        this.addToHomescreen.prompt();
-        this.addToHomescreen.userChoice
-          .then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-              ga('send', 'event', 'prompt', 'accepted');
-            } else {
-              ga('send', 'event', 'prompt', 'dismissed');
-            }
-            uiActions.setAddToHomeScreen(null);
-          });
       }
     }
 
