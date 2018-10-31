@@ -3,6 +3,7 @@
 const TOGGLE_DRAWER = 'app/Drawer/TOGGLE_DRAWER';
 const SET_VIEWPORT_SIZE = 'app/Viewport/SET_VIEWPORT_SIZE';
 const SET_HERO_SETTINGS = 'app/Hero/SET_HERO_SETTINGS';
+const SET_ADD_TO_HOMESCREEN = 'app/APP/SET_ADD_TO_HOMESCREEN';
 // router
 const SET_ROUTE = 'app/Routing/SET_ROUTE';
 const SET_SUB_ROUTE = 'app/Routing/SET_SUB_ROUTE';

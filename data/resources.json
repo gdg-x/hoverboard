@@ -291,5 +291,8 @@
     "tags": "Tags",
     "complexity": "Complexity",
     "clear": "Clear all"
+  },
+  "addToHomeScreen": {
+    "cta": "Add to Home Screen"
   }
 }

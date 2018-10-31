@@ -17,6 +17,10 @@ const uiReducer = (state = initialState.ui, action) => {
       return Object.assign({}, state, {
         heroSettings: Object.assign({}, state.heroSettings, action.value),
       });
+    case SET_ADD_TO_HOMESCREEN:
+      return Object.assign({}, state, {
+        addToHomescreen: action.value,
+      });
     default:
       return state;
   }

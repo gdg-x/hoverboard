@@ -189,6 +189,11 @@
       ga('send', 'timing', 'index.html', 'render', indexRenderTime);
     }
   };
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    uiActions.setAddToHomeScreen(e);
+  });
 </script>
 
 </body>

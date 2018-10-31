@@ -116,8 +116,9 @@
         margin-left: 6px;
       }
 
-      .buy-ticket {
+      .bottom-drawer-link {
         padding: 16px 24px;
+        cursor: pointer;
       }
 
       @media (min-width: 640px) {
@@ -163,19 +164,30 @@
             {% endfor %}
           </iron-selector>
 
-          <a
-            class="buy-ticket"
-            href$="[[tickets.url]]"
-            target="_blank"
-            rel="noopener noreferrer"
-            ga-on="click"
-            ga-event-category="ticket button"
-            ga-event-action="buy_click"
-            layout horizontal center
-          >
-            <span>{$ buyTicket $}</span>
-            <iron-icon icon="hoverboard:open-in-new"></iron-icon>
-          </a>
+          <div>
+            <a
+              class="bottom-drawer-link"
+              on-tap="_onAddToHomescreen"
+              hidden$="[[_isAddToHomeScreenHidden(ui.addToHomescreen, viewport.isLaptopPlus)]]"
+            >
+              {$ addToHomeScreen.cta $}
+            </a>
+
+            <a
+              class="bottom-drawer-link"
+              href$="[[_getTicketUrl(tickets)]]"
+              target="_blank"
+              rel="noopener noreferrer"
+              on-tap="closeDrawer"
+              ga-on="click"
+              ga-event-category="ticket button"
+              ga-event-action="buy_click"
+              layout horizontal center
+            >
+              <span>{$ buyTicket $}</span>
+              <iron-icon icon="hoverboard:open-in-new"></iron-icon>
+            </a>
+          </div>
         </div>
 
       </app-drawer>
@@ -434,6 +446,31 @@
 
       _toggleDrawer(e) {
         uiActions.toggleDrawer(e.detail.value);
+      }
+
+      _getTicketUrl(tickets) {
+        if (!tickets.list.length) return '';
+        const availableTicket = tickets.list.filter((ticket) => ticket.available)[0];
+        return availableTicket ? availableTicket.url : tickets.list[0].url;
+      }
+
+      _isAddToHomeScreenHidden(addToHomescreen, isTabletPlus) {
+        return isTabletPlus || !addToHomescreen;
+      }
+
+      _onAddToHomescreen() {
+        if (!this.ui.addToHomescreen) this.closeDrawer();
+        this.ui.addToHomescreen.prompt();
+        this.ui.addToHomescreen.userChoice
+          .then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              ga('send', 'event', 'add_to_home_screen_prompt', 'accepted');
+            } else {
+              ga('send', 'event', 'add_to_home_screen_prompt', 'dismissed');
+            }
+            uiActions.setAddToHomeScreen(null);
+            this.closeDrawer();
+          });
       }
     }
 
