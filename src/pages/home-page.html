@@ -36,6 +36,12 @@
         max-width: 240px;
       }
 
+      .title {
+        font-family: var(--major-font-family);
+        margin: 100px auto 0 auto;
+        font-size: 50px;
+      }
+
       .info-items {
         margin: 24px auto;
         font-size: 22px;
@@ -125,7 +131,7 @@
         }
 
         .info-items {
-          margin: 48px auto;
+          margin: 0 auto 48px auto;
           font-size: 28px;
           line-height: 1.1;
         }
@@ -143,7 +149,8 @@
       hide-logo
     >
       <div class="home-content" layout vertical center>
-        <plastic-image class="hero-logo" srcset="/images/logo.svg" alt="{$ title $}"></plastic-image>
+        <div class="title">RadicalxChange</div>
+        <plastic-image class="hero-logo" srcset="/images/logo.gif" alt="{$ title $}"></plastic-image>
         <div class="info-items highlight-font">
           <div class="info-item">{$ location.city $}. {$ dates $}</div>
           <div class="info-item">{$ heroSettings.home.description $}</div>
