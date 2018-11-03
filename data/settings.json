@@ -196,21 +196,5 @@
       "https://twitter.com"
     ]
   },
-  "contentLoaders": {
-    "schedule": {
-      "itemsCount": 2
-    },
-    "blog": {
-      "itemsCount": 3
-    },
-    "speakers": {
-      "itemsCount": 4
-    },
-    "previousSpeakers": {
-      "itemsCount": 6
-    },
-    "tickets": {
-      "itemsCount": 5
-    }
-  }
+  "contentLoaders": {}
 }
