@@ -1,15 +1,15 @@
 {
   "basepath": "/",
-  "url": "https://hoverboard-dev.firebaseapp.com/",
+  "url": "https://sunny-tech-test.firebaseapp.com/",
   "analytics": "UA-43643469-8",
   "prefix": "/",
   "firebase": {
-    "apiKey": "AIzaSyBu9LI-hY4NfUOPJJKuV3BfQm7edLr2-aE",
-    "authDomain": "hoverboard-dev.firebaseapp.com",
-    "databaseURL": "https://hoverboard-dev.firebaseio.com",
-    "projectId": "hoverboard-dev",
-    "storageBucket": "hoverboard-dev.appspot.com",
-    "messagingSenderId": "1083195713896"
+    "apiKey": "AIzaSyB_n7dYVRdCs0zQ5WrKE9nMEtTSURR0wh8",
+    "authDomain": "sunny-tech-test.firebaseapp.com",
+    "databaseURL": "https://sunny-tech-test.firebaseio.com",
+    "projectId": "sunny-tech-test",
+    "storageBucket": "sunny-tech-test.appspot.com",
+    "messagingSenderId": "578715049012"
   },
-  "googleMapApiKey": "AIzaSyDWy6O98n-ueoVaYPWRPve23vjm3JP08gw"
+  "googleMapApiKey": "AIzaSyBa8D7jHmFlW5c6vq1wH0cgIQK-PYmgL-A"
 }
