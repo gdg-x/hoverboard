@@ -1,26 +1,25 @@
 {
-  "title": "GDG DevFest Season 2018",
-  "description": "Be a hero. Be a GDG!",
+  "title": "Sunny Tech - 27/28 juin 2019 Montpellier",
+  "description": "Sunny Tech est la 1ère conférence Tech organisée à Montpellier. Une conférence annuelle des technologies du numérique, créée par des passionnés, pour des passionnés avec l’ambition de rayonner nationalement, et même internationalement, à travers l’intervention de conférenciers étrangers de renom.",
   "image": "images/social-share.jpg",
-  "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "October 12-13, 2018",
-  "partnershipProposition": "https://bit.ly/dfua17-partners",
-  "share": "Share",
-  "followOur": "Follow our",
-  "followUs": "Follow us",
-  "emailUs": "Email us",
+  "keywords": "sunnytech, évènement, event, montpellier, Sunny, Tech, programming, android, chrome, developers, web, cloud, conférence, seatechandsun, docker, devops, ux, design, back, scala, fonctionnel",  "dates": "27-29 Juin, 2019",
+  "partnershipProposition": "mailto:contact@sunny-tech.io",
+  "share": "Partager",
+  "followOur": "Suit notre",
+  "followUs": "Suit nous",
+  "emailUs": "Envoyez-nous un email",
   "partnershipResources": "Partnership Resources",
   "eventResources": "Event Resources",
   "buyTicket": "Buy ticket",
-  "signIn": "Sign in",
-  "signOut": "Sign out",
-  "viewHighlights": "View Highlights",
+  "signIn": "Connexion",
+  "signOut": "Déconnexion",
+  "viewHighlights": "Moment fort",
   "offlineMessage": "You can still work offline.",
   "cachingComplete": "Caching complete! Future visits will work offline.",
   "newVersionAvailable": "A new version of this app is available.",
   "refresh": "Refresh",
   "position": "Position",
-  "country": "Country",
+  "country": "Pays",
   "time": "Time",
   "faq": "/data/faq.md",
   "cod": "/data/cod.md",
@@ -33,104 +32,47 @@
   },
   "footerRelBlock": [
     {
-      "title": "About",
+      "title": "A propos",
       "links": [
         {
-          "name": "GDG Lviv",
-          "url": "http://lviv.gdg.org.ua/",
-          "newTab": true
-        },
-        {
-          "name": "Google Developers Group",
-          "url": "https://developers.google.com/",
-          "newTab": true
-        },
-        {
-          "name": "Meet the Team",
-          "url": "https://devfest.gdg.org.ua/team/",
+          "name": "Découvrez l'équipe organisatrice",
+          "url": "/team",
           "newTab": true
         }
       ]
     },
     {
-      "title": "Explore Past DevFests",
+      "title": "Voir les éditions antérieures",
       "links": [
         {
-          "name": "DFUA 2013",
-          "url": "http://gdg-devfest-ua.appspot.com/",
+          "name": "Sunny Tech 2018",
+          "url": "https://sunny-tech.io",
           "newTab": true
-        },
-        {
-          "name": "DFUA 2014",
-          "url": "https://dfua14.firebaseapp.com//",
-          "newTab": true
-        },
-        {
-          "name": "DFUA 2015",
-          "url": "https://dfua15.firebaseapp.com/",
-          "newTab": true
-        },
-        {
-          "name": "DFUA 2016",
-          "url": "https://dfua16.firebaseapp.com/",
-          "newTab": true
-        }
-      ]
-    },
-    {
-      "title": "Event Resources",
-      "links": [
-        {
-          "name": "Partnership Proposition",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
-          "newTab": true
-        },
-        {
-          "name": "Info Partnership Proposition",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
-          "newTab": true
-        },
-        {
-          "name": "Media Kit",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
-          "newTab": true
-        },
-        {
-          "name": "Call for Papers",
-          "url": "https://drive.google.com/open?id=10tPuu_7ASM8C70SotqRqIW5Uzos9BzALilMMQPg_JvA",
-          "newTab": true
-        },
-        {
-          "name": "FAQs",
-          "url": "/faq/",
-          "newTab": false
         }
       ]
     }
   ],
-  "subscribeNote": "No spam, only the latest news and updates!",
-  "codeOfConduct": "Code of Conduct",
+  "subscribeNote": "Pas de spam, seulement les dernières nouvelles",
+  "codeOfConduct": "Code de conduite",
   "aboutBlock": {
-    "title": "What you need to know, before you ask.",
+    "title": "Contenu et Valeurs",
     "callToAction": {
       "featuredSessions": {
-        "description": "GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases.",
-        "label": "Explore featured session",
-        "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "description": "Plusieurs conférences et ateliers en parallèle sur 2 journées, articulés autour de sujets transverses allant des outils, méthodologies de conception et développement logiciel jusqu’à la gestion de produit et notamment l’expérience utilisateur"
       },
       "howItWas": {
-        "description": "Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
-        "label": "See how it was in 2016",
-        "youtubeId": "TdpbgRgz6eE"
+        "description": "Les valeurs que porte Sunny Tech sont définies et partagées par ses membres, vous pourrez les retrouver le jour de l'évènement. Ces valeurs sont: Partage, ouverture, originalité & passion.",
+        "label": "Voir la vidéo de l'édition 2018",
+        "youtubeId": "vSLPCtKLObM"
       }
     },
     "statisticsBlock": {
       "attendees": {
-        "label": "Attendees",
-        "number": "900"
+        "label": "Participants",
+        "number": "400"
       },
       "days": {
-        "label": "Days",
+        "label": "Jours",
         "number": "2"
       },
       "sessions": {
@@ -139,7 +81,7 @@
       },
       "tracks": {
         "label": "Tracks",
-        "number": "4"
+        "number": "5"
       }
     }
   },
@@ -151,45 +93,15 @@
     "save": "Save ${discount}% today"
   },
   "partnersBlock": {
-    "title": "Partners",
-    "button": "Become a partner",
+    "title": "Partenaire",
+    "button": "Devenir un partenaire",
     "form": {
-      "title": "Become a partner!",
-      "submitLabel": "Submit",
-      "fullName": "Full Name",
-      "companyName": "Company Name"
+      "title": "Devenir un partenaire!",
+      "submitLabel": "Soumettre",
+      "fullName": "Nom",
+      "companyName": "Nom de l'entreprise"
     },
-    "toast": "We will contact you soon!"
-  },
-  "featuredVideos": {
-    "title": "DFUA'16 featured videos",
-    "callToAction": {
-      "label": "See all videos",
-      "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
-    }
-  },
-  "blog": {
-    "published": "Published",
-    "suggested": "Up next"
-  },
-  "latestPostsBlock": {
-    "title": "The latest news",
-    "callToAction": {
-      "label": "View all stories",
-      "link": "/blog/"
-    }
-  },
-  "speakers": {
-    "skills": "Skills",
-    "previousYears": "Years",
-    "previousYear": "Year"
-  },
-  "speakersBlock": {
-    "title": "Rockstar speakers",
-    "callToAction": {
-      "label": "View all speakers",
-      "link": "/speakers/"
-    }
+    "toast": "Nous revenons vers vous dans les plus brefs délais!"
   },
   "previousSpeakersBlock": {
     "title": "Previous speakers",
@@ -199,35 +111,35 @@
     }
   },
   "galleryBlock": {
-    "title": "#dfua16 highlights",
-    "description": "This year's festival built lots of excitement. Check out photos from featured talks, hands-on learning sessions, and after-hours fun.",
+    "title": "Moment fort de Sunny Tech 2018",
+    "description": "Retrouvez tous les moments forts de l'édition 2018.",
     "callToAction": {
-      "label": "See all photos",
-      "link": "https://goo.gl/photos/H8s3CtPexCzkLqSt9"
+      "label": "Voir toutes les photos",
+      "link": "https://photos.app.goo.gl/i1S38qRjjCRYxkak7"
     }
   },
   "mapBlock": {
-    "title": "Location"
+    "title": "Localisation"
   },
   "subscribeBlock": {
     "callToAction": {
-      "description": "Get notified about the important conference updates",
-      "label": "Subscribe"
+      "description": "Recevoir les informations importantes de la conférence",
+      "label": "Souscrire"
     },
-    "yourEmail": "Your email",
-    "emailAddress": "Email Address",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "formTitle": "Get the latest updates, insights and news about GDG DevFest Ukraine sent to your inbox.",
-    "emailRequired": "Please enter a valid email address.",
-    "subscribe": "Subscribe",
-    "subscribed": "Subscribed",
-    "close": "Close",
-    "generalError": "Some error has occured. Please, try again later.",
-    "toast": "Successfully subscribed!"
+    "yourEmail": "Votre email",
+    "emailAddress": "Adresse email",
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "formTitle": "Recevez les dernières nouvelles à propos de Sunny Tech dans votre boite email.",
+    "emailRequired": "Entrez une adresse valide.",
+    "subscribe": "Souscrire",
+    "subscribed": "Souscrit",
+    "close": "Fermer",
+    "generalError": "Une erreur est survenue, ré-essayez plus tard.",
+    "toast": "Souscription effectuée!"
   },
   "team": {
-    "description": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT."
+    "description": "Sunny Tech est une assocation bénévole à but non lucratif (loi 1901) créée par des membres actifs de la communauté tech de Montpellier avec l'aide des meetups locaux et du <a href='https://www.montpellier-techhub.org/' target='_blank'>Montpellier Tech Hub</a>."
   },
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"
@@ -242,13 +154,13 @@
     "sessions": "Sessions"
   },
   "notifications": {
-    "default": "Enable notifications",
-    "enabled": "We will miss you but you can unsubscribe anytime",
-    "blocked": "We can't send you notifications right now. Please enable notifications in your browser",
-    "subscribe": "Subscribe",
-    "unsubscribe": "Unsubscribe",
+    "default": "Activer les notifications",
+    "enabled": "Vous pouvez vous désinscrire à tout moment",
+    "blocked": "Nous ne pouvonx pas vous envoyez des notifications actuellement. Veuillez activer les notifications depuis votre navigateur",
+    "subscribe": "Souscrire",
+    "unsubscribe": "Se désinscrire",
     "enable": {
-      "label": "Enable",
+      "label": "Activer",
       "link": "https://pushassist.com/knowledgebase/how-to-enable-or-disable-push-notifications-on-chrome-firefox-safari-b/"
     },
     "toast": {
@@ -256,33 +168,28 @@
     }
   },
   "aboutOrganizerBlock": {
-    "image": "/images/team.jpg",
+    "image": "/images/team.jpeg",
     "blocks": [
       {
-        "title": "Organizer",
-        "description": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
-        "callToAction": {
-          "label": "Open team page",
-          "link": "/team"
-        }
+        "title": "Qu'est-ce que Sunny Tech?",
+        "description": "Sunny Tech est la 1ère conférence Tech organisée à Montpellier. Une conférence annuelle des technologies du numérique, créée par des passionnés, pour des passionnés avec l’ambition de rayonner nationalement, et même internationalement, à travers l’intervention de conférenciers étrangers de renom."
       },
       {
-        "title": "What is GDG?",
-        "description": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion",
+        "title": "Équipe organisatrice",
+        "description": "Sunny Tech est une association bénévole à but non lucratif composée de développeurs, orateurs, designers et membres de meetups",
         "callToAction": {
-          "label": "Read more",
-          "link": "https://developers.google.com/groups/",
-          "newTab": true
+          "label": "Découvrez l'équipe organisatrice",
+          "link": "/team"
         }
       }
     ]
   },
   "signInDialog": {
-    "alreadyHaveAccount": "You already have an account",
-    "alreadyUsed": "You've already used",
+    "alreadyHaveAccount": "Vous possédez déjà un compte",
+    "alreadyUsed": "Vous avez déjà utiliser",
     "signInToContinue": {
-      "part1": "Sign in with",
-      "part2": "to continue."
+      "part1": "Se connecter avec",
+      "part2": "continuez."
     }
   }
 }
