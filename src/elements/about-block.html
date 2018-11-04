@@ -83,6 +83,14 @@
             alt="icon valeur"></iron-image>{$ aboutBlock.callToAction.howItWas.title $}</h1>
           <p>{$ aboutBlock.callToAction.howItWas.description $}</p>
           <p><b>{$ aboutBlock.callToAction.howItWas.important $}</b></p>
+          <a
+            href="/cod/"
+          >
+            <paper-button class="cta-button animated icon-right">
+              <span>{$ aboutBlock.callToAction.howItWas.labelCod $}</span>
+              <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+            </paper-button>
+          </a>
           <paper-button
             class="animated icon-right"
             on-tap="_playVideo"

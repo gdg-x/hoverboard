@@ -26,6 +26,11 @@
       "route": "team",
       "permalink": "/team/",
       "label": "Équipe"
+    },
+    {
+      "route": "cod",
+      "permalink": "/cod/",
+      "label": "Code de conduite"
     }
   ],
   "heroSettings": {
@@ -87,8 +92,8 @@
       "fontColor": "#424242"
     },
     "cod": {
-      "title": "Code Of Conduct",
-      "metaDescription": "Lear more about our expectations for all those who participate in our community",
+      "title": "Code de conduite",
+      "metaDescription": "En apprendre plus sur les attentes que nous avons vis-à-vis des participants",
       "background": {
         "color": "#fff"
       },
@@ -98,7 +103,7 @@
   "location": {
     "label": "Localisation",
     "name": "I.U.F.M",
-    "city": "Montpellier",
+    "city": "Montpellier, France",
     "short": "Montpellier, France",
     "address": "2 place Marcel Godechot, 34090 Montpellier",
     "pointer": {

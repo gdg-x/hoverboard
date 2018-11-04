@@ -1,52 +1,21 @@
-### 1. Purpose
+### 1. À lire
+Tous les participants, conférenciers, sponsors et bénévoles de notre conférence doivent accepter le code de conduite suivant. Nous attendons de tous les participants leur coopération afin d’assurer un environnement respectueux et sûr pour tout le monde.
+ 
+### 2. Besoin d’aide ?
 
-A primary goal of [GDG Lviv](http://lviv.gdg.org.ua/) is to be inclusive to the largest number of contributors, with the most varied and diverse backgrounds possible. As such, we are committed to providing a friendly, safe and welcoming environment for all, regardless of gender, sexual orientation, ability, ethnicity, socioeconomic status, and religion (or lack thereof). 
-GDG Lviv prides itself on being an open, respectful, and inclusive community. That means the [jerky behavior](https://meta.wikimedia.org/wiki/Don%27t_be_a_jerk) isn’t allowed at GDG meetings.
+Durant la conférence, nous invitons toute personne ayant besoin d'aide à contacter de préférence l'équipe d'organisation.
+ 
+### 3. Version courte du code de bonne conduite
 
-This code of conduct outlines our expectations for all those who participate in our community, as well as the consequences for unacceptable behavior.
-We invite all those who participate in Google Developers Group to help us create safe and positive experiences for everyone.
+Sunny Tech est une communauté où l’on prône le partage, l’ouverture, l’originalité et la passion. Nous respectons les différences et la diversité.
+Nous ne tolérons pas le harcèlement sous quelque forme que ce soit des participants et de toutes personnes faisant partie de la conférence indépendamment du sexe, du genre, de l'âge, de  l'orientation sexuelle, du handicap, de l'apparence physique, de la taille du corps,de la race ou encore de la religion (ou son absence).
+Un langage explicite ou des images non appropriées ne sont pas tolérés à Sunny Tech sur tous les médias (réseaux sociaux, présentations etc.).
+ 
+Ce genre de comportements pourra nous amener à vous faire exclure de nos réunions et/ou de la conférence Sunny Tech.
+ 
+Sunny Tech est une association bénévole à but non lucratif composée de tech passionnées, notre priorité est l’organisation d’un évènement convivial, ou chacun puisse être respectueux d’autrui. 
+Ce “code de bonne conduite" est une version courte, plus lisible qu'un "Code of Conduct policy". Vous trouverez le lien pour aller consulter la [Version complète](http://meta.wikimedia.org/wiki/Don%27t_be_a_dick).
 
-### 2. Open [Source/Culture/Tech] Citizenship
+Pour toute question, merci de contacter l’équipe SunnyTech par email : [contact@sunny-tech.io](mailto:contact@sunny-tech.io)
 
-A supplemental goal of this Code of Conduct is to increase open [source/culture/tech] citizenship by encouraging participants to recognize and strengthen the relationships between our actions and their effects on our community. Communities mirror the societies in which they exist, and positive action is essential to counteract the many forms of inequality and abuses of power that exist in society. If you see someone who is making an extra effort to ensure our community is welcoming, friendly, and encourages all participants to contribute to the fullest extent, we want to know.
-
-### 3. Expected Behavior
-
-The following behaviors are expected and requested of all community members:
-
-- Participate in an authentic and active way. In doing so, you contribute to the health and longevity of this community.
-- Exercise consideration and respect in your speech and actions.
-- Attempt collaboration before a conflict.
-- Refrain from demeaning, discriminatory, or harassing behavior and speech.
-- Be mindful of your surroundings and your fellow participants. Alert community leaders if you notice a dangerous situation, someone in distress, or violations of this Code of Conduct, even if they seem inconsequential.
-
-### 4. Unacceptable Behavior
-
-The following actions are considered harassment and are unacceptable within our community:
-
-- Violence, threats of violence or violent language directed against another person.
-- Sexist, racist, homophobic, transphobic, ableist or otherwise discriminatory jokes and language.
-- Posting or displaying sexually explicit or violent material.
-- Posting or threatening to post other people’s personally identifying information ("doxing").
-- Personal insults, particularly those related to gender, sexual orientation, race, religion, or disability.
-- Inappropriate photography or recording.
-- Inappropriate physical contact. You should have someone’s consent before touching them.
-- Unwelcome sexual attention. This includes sexualized comments or jokes; inappropriate touching, groping, and unwelcomed sexual advances.
-- Deliberate intimidation, stalking or following (online or in person).
-- Advocating for, or encouraging, any of the above behavior.
-- Sustained disruption of community events, including talks and, presentations.
-
-###  5. Consequences of Unacceptable Behavior
-
-Unacceptable behavior from any community member, including sponsors and those with decision-making authority, will not be tolerated.
-Anyone asked to stop unacceptable behavior is expected to comply immediately.
-If a community member engages in unacceptable behavior, the community organizers may take any action they deem appropriate, up to and including a temporary ban or permanent expulsion from the community without warning (and without refund in the case of a paid event.
-
-### 6. Scope
-
-We expect all community participants to abide by this Code of Conduct in all community venues–online and in-person–as well as in all one-on-one communications about community business. This code of conduct and its related procedures also applies to unacceptable behavior occurring outside the scope of community activities when such behavior has the potential to affect the safety and well-being of community members adversely.
-
-### 7. Contact info
-
-- Oleh Zasadnyy, +38 093 486 64 60, [o.zasadnyy@gdg.org.ua](mailto:o.zasadnyy@gdg.org.ua)
-- Sofiya Huts, +38 093 486 14 25, [s.huts@gdg.org.ua](mailto:s.huts@gdg.org.ua)
+Original source and credit: [DevFestNantes](https://devfest2015.gdgnantes.com/cod), [Devoxx](https://www.devoxx.fr/code-of-conduct), [ThingMonk Code of Conduct](http://thingmonk.com/coc.html)
