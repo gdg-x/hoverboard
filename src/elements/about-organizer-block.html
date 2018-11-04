@@ -45,6 +45,12 @@
       paper-button {
         margin: 0;
       }
+
+      .icons{
+        width: 47px;
+        min-height: 32px;
+        margin-right: 10px;
+      }
     </style>
 
     <div class="container" layout horizontal>
@@ -68,26 +74,32 @@
       </div>
 
       <div class="description-block" flex>
-        {% for block in aboutOrganizerBlock.blocks %}
         <div class="block">
-          <h2>{$ block.title $}</h2>
+          <h2>{$ aboutOrganizerBlock.blocks[0].title $}</h2>
 
-          <marked-element class="description" markdown="{$ block.description $}">
+          <marked-element class="description" markdown="{$ aboutOrganizerBlock.blocks[0].description $}">
+            <div slot="markdown-html"></div>
+          </marked-element>
+        </div>
+        <div class="block">
+          <h2><iron-image class="icons" sizing="cover" src="../../images/icons/icon-organization.svg"
+            alt="icon valeur"></iron-image>{$ aboutOrganizerBlock.blocks[1].title $}</h2>
+
+          <marked-element class="description" markdown="{$ aboutOrganizerBlock.blocks[1].description $}">
             <div slot="markdown-html"></div>
           </marked-element>
           <a
-            href="{$ block.callToAction.link $}"
+            href="{$ aboutOrganizerBlock.blocks[1].callToAction.link $}"
             {% if block.callToAction.newTab %}
             target="_blank" rel="noopener noreferrer"
             {% endif %}
           >
             <paper-button class="cta-button animated icon-right">
-              <span>{$ block.callToAction.label $}</span>
+              <span>{$ aboutOrganizerBlock.blocks[1].callToAction.label $}</span>
               <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
             </paper-button>
           </a>
         </div>
-        {% endfor %}
       </div>
     </div>
   </template>
