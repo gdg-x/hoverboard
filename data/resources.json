@@ -55,13 +55,15 @@
   "subscribeNote": "Pas de spam, seulement les dernières nouvelles",
   "codeOfConduct": "Code de conduite",
   "aboutBlock": {
-    "title": "Contenu et Valeurs",
+    "title": "Contenu",
     "callToAction": {
       "featuredSessions": {
         "description": "Plusieurs conférences et ateliers en parallèle sur 2 journées, articulés autour de sujets transverses allant des outils, méthodologies de conception et développement logiciel jusqu’à la gestion de produit et notamment l’expérience utilisateur"
       },
       "howItWas": {
-        "description": "Les valeurs que porte Sunny Tech sont définies et partagées par ses membres, vous pourrez les retrouver le jour de l'évènement. Ces valeurs sont: Partage, ouverture, originalité & passion.",
+        "title": "Valeurs",
+        "description": "Les valeurs que porte Sunny Tech sont définies et partagées par ses membres, vous pourrez les retrouver le jour de l'évènement.",
+        "important": "Ces valeurs sont: Partage, ouverture, originalité & passion.",
         "label": "Voir la vidéo de l'édition 2018",
         "youtubeId": "vSLPCtKLObM"
       }
