@@ -47,7 +47,7 @@ Our goal is to allow event organizers to set up professional conference website 
    * `npm run serve` or `yarn serve`
 1. Build and deploy
    * `npm run build` or `yarn build`
-   * `npm run deploy` or `yarn deploy`
+   * `firebase deploy`
    
 *NOTE:* By default command using configurations from `/configs/development.json`.
 To serve locally or deploy the production app use `yarn serve:prod` and `yarn deploy:prod` respectively.
