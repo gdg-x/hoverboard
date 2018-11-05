@@ -1090,6 +1090,11 @@
         "link" : "https://www.facebook.com/jozef.vodicka",
         "name" : "Facebook"
       } ],
+      "badges": [ {
+        "name": "google",
+        "link": "https://www.linkedin.com/in/jozefvodicka",
+        "description": "Developer Relations Regional Lead"
+      } ],
       "order" : 13,
       "title" : "Developer Relations Program Manager"
     },
@@ -1184,6 +1189,11 @@
         "icon" : "github",
         "link" : "https://github.com/meteatamel/",
         "name" : "GitHub"
+      } ],
+      "badges": [ {
+        "name": "google",
+        "link": "https://www.linkedin.com/in/meteatamel/",
+        "description": "Developer Advocate"
       } ],
       "order" : 16,
       "title" : "Developer Advocate"
