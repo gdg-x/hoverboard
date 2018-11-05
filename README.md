@@ -29,20 +29,17 @@ Our goal is to allow event organizers to set up professional conference website 
 | **Blog** | post announcements, updates and useful information |
 
 ## Getting Started
-1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone it locally
+1. Clone repo locally
 1. Setup Environment
    * Install [Node.js (v8.9.4 or above)](https://nodejs.org/en/download/)
    * Install Firebase CLI: `npm i -g firebase-tools` or `yarn global add firebase-tools`
-1. Install project dependencies: `npm install` or `yarn`
-1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `firebase login`
-1. Update [Hoverboard config](/config) and [Resources](/data)
-1. Import initial data to the Firebase Database
-    * Generate `serviceAccount.json` file
-      - Go to https://console.firebase.google.com/project/%YOUR_PROJECT_ID%/settings/serviceaccounts/adminsdk
-      - Ensure that **Node.js** is selected and press **GENERATE NEW PRIVATE KEY** 
-      - Save the file as `serviceAccount.json` and to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
-    * [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
-    * Run `npm run firestore:init` or `yarn firestore:init`
+1. Install project dependencies: 
+    1. `npm install` or `yarn` from project root
+    1. From inside the **functions** folder, run: 
+	    `npm install firebase-functions@latest firebase-admin@latest --save`
+	    `npm install -g firebase-tools`
+1. Login into [Firebase CLI](https://firebase.google.com/docs/cli/): `firebase login`
+1. Save `serviceAccount.json` (obtain from our Google Drive) to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
 1. Run locally
    * `npm run serve` or `yarn serve`
 1. Build and deploy
@@ -50,7 +47,7 @@ Our goal is to allow event organizers to set up professional conference website 
    * `firebase deploy`
    
 *NOTE:* By default command using configurations from `/configs/development.json`.
-To serve locally or deploy the production app use `yarn serve:prod` and `yarn deploy:prod` respectively.
+To serve locally or deploy the production app use `yarn serve:prod` and `firebase deploy -P <prod project name here>` respectively.
 
 :book: Read the [Full Setup Guide](/docs/).
 
