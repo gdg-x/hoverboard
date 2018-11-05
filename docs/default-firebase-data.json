@@ -522,6 +522,7 @@
     "120" : {
       "complexity" : "Beginner",
       "description" : "\"Remember back when AJAX completely changed what was possible in the desktop web? Progressive web apps are that same fundamental shift for the mobile web.\" said Rahul Row-Chowdhury (Google’s product lead for chrome and the web platform) on stage at Google I/O 2016. - Progressive web apps use service workers, app shell, push notifications, RAIL and other capabilities to deliver an app-like user experience.",
+      "shortDescription": "Progressive web apps are are fundamental shift for the mobile web, learn what they are and how they are made. Click to see more...",
       "language" : "English",
       "presentation" : "https://speakerdeck.com/gdglviv/jakub-skvara-progressive-web-apps-prepare-your-web-for-2017",
       "speakers" : [ "jana_moudra" ],

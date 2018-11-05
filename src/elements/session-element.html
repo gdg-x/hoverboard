@@ -80,6 +80,10 @@
         line-height: 1.2;
       }
 
+      .session-description {
+        margin-top: 8px;
+      }
+
       .session-meta {
         margin: 0;
         padding: 0;
@@ -149,6 +153,7 @@
       <div class="session-header" layout horizontal justified>
         <div flex>
           <h3 class="session-title">[[session.title]]</h3>
+          <div class="session-description" hidden$="[[!session.shortDescription]]">[[session.shortDescription]]</div>
         </div>
         <span class="language">[[slice(session.language, 2)]]</span>
       </div>
