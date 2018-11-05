@@ -110,37 +110,8 @@
   "subscribeNote": "No spam, only the latest news and updates!",
   "codeOfConduct": "Code of Conduct",
   "aboutBlock": {
-    "title": "What you need to know, before you ask.",
-    "callToAction": {
-      "featuredSessions": {
-        "description": "GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases.",
-        "label": "Explore featured session",
-        "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
-      },
-      "howItWas": {
-        "description": "Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
-        "label": "See how it was in 2016",
-        "youtubeId": "TdpbgRgz6eE"
-      }
-    },
-    "statisticsBlock": {
-      "attendees": {
-        "label": "Attendees",
-        "number": "900"
-      },
-      "days": {
-        "label": "Days",
-        "number": "2"
-      },
-      "sessions": {
-        "label": "Sessions",
-        "number": "50"
-      },
-      "tracks": {
-        "label": "Tracks",
-        "number": "4"
-      }
-    }
+    "title": "Mission Statement",
+    "description": "RadicalxChange convenes a community of activists, artists, entrepreneurs and scholars committed to using dramatically expanded competitive, free and open market mechanism to reduce inequality, build widely-shared prosperity, heal global political divides and build a richer and more cooperative social life. As advocates of radical social change, the RadicalxChange community challenges long-established social institutions such as private property, one-person-one-vote and the primacy of the individual on the one hand and the nation state on the other. To achieve this change the community seeks to harness the emancipatory potential of insights from the field of mechanism design in dialog with a range of other academic fields such as computer science, philosophy and history, the communicative imagination of artists, the pragmatic ingenuity of entrepreneurs and the idealism of activists for social justice."
   },
   "ticketsBlock": {
     "title": "Tickets",
