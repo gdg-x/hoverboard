@@ -38,6 +38,11 @@
           "name": "Découvrez l'équipe organisatrice",
           "url": "/team",
           "newTab": true
+        },
+        {
+          "name": "Code de conduite",
+          "url": "/cod",
+          "newTab": true
         }
       ]
     },
