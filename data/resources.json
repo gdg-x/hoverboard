@@ -156,8 +156,8 @@
   },
   "subscribeBlock": {
     "callToAction": {
-      "description": "Sign up for conference updates",
-      "label": "Join"
+      "description": "Get notified about the important conference updates",
+      "label": "Subscribe"
     },
     "yourEmail": "Your email",
     "emailAddress": "Email Address",
@@ -174,10 +174,6 @@
   "team": {
     "description": "We're a volunteer driven community united by our vision for building more efficient and equal societies."
   },
-  "conference": {
-    "description": "Put some info here describing the conference tracks, activities, etc.."
-  },
-
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"
   },
