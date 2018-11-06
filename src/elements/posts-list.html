@@ -64,7 +64,7 @@
 
     <template is="dom-repeat" items="[[posts]]" as="post">
       <a href$="/blog/posts/[[post.id]]/" class="post" layout horizontal>
-        <plastic-image
+<!--         <plastic-image
           class="image"
           srcset="[[post.image]]"
           style$="background-color: [[post.backgroundColor]];"
@@ -72,7 +72,7 @@
           hidden$="[[!post.image]]"
           lazy-load preload fade
         ></plastic-image>
-        <div flex>
+ -->        <div flex>
           <div class="details" layout vertical justified>
             <div>
               <text-truncate lines="2">

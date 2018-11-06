@@ -22,14 +22,9 @@
       "label": "Home"
     },
     {
-      "route": "speakers",
-      "permalink": "/speakers/",
-      "label": "Speakers"
-    },
-    {
-      "route": "schedule",
-      "permalink": "/schedule/",
-      "label": "Schedule"
+      "route": "conference",
+      "permalink": "/conference/",
+      "label": "Conference"
     },
     {
       "route": "team",
@@ -91,6 +86,14 @@
       },
       "fontColor": "#424242"
     },
+    "conference": {
+      "title": "Conference",
+      "metaDescription": "Get more info about organizers",
+      "background": {
+        "color": "#fff"
+      },
+      "fontColor": "#424242"
+    },
     "faq": {
       "title": "FAQs",
       "metaDescription": "Find you answer right here!",
@@ -123,7 +126,7 @@
       "latitude": 42,
       "longitude": -83
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": "Right here"
   },
   "mediaQueries": {
     "xs": {

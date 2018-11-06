@@ -1,0 +1,119 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/marked-element/marked-element.html">
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="../elements/shared-styles.html">
+
+<dom-module id="conference-page">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+    <style>
+
+      :host  {
+        display: block;
+      }
+
+      .description-wrapper {
+          background-color: var(--secondary-background-color);
+          width: 100%;
+          overflow: hidden;
+      }
+
+      @media (min-width: 640px) {
+        .team-block {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+         .member {
+          padding: 32px 0;
+        }
+      }
+
+      @media (min-width: 812px) {
+        .photo {
+          width: 115px;
+          height: 115px;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .team-block {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+         .photo {
+          width: 128px;
+          height: 128px;
+        }
+      }
+
+    </style>
+
+    <polymer-helmet
+      title="{$ heroSettings.team.title $} | {$ title $}"
+      description="{$ heroSettings.team.metaDescription $}"
+      active="[[active]]"
+    ></polymer-helmet>
+
+    <hero-block
+      background-image="{$ heroSettings.team.background.image $}"
+      background-color="{$ heroSettings.team.background.color $}"
+      font-color="{$ heroSettings.team.fontColor $}"
+      active="[[active]]"
+    >
+      <div class="hero-title highlight-font">{$ heroSettings.conference.title $}</div>
+      <p class="hero-description">{$ heroSettings.conference.description $}</p>
+    </hero-block>
+
+    <div class="description-wrapper">
+      <div class="container" layout horizontal justified>
+        <marked-element class="description" markdown="{$ conference.description $}">
+          <div slot="markdown-html"></div>
+        </marked-element>
+      </div>
+    </div>
+
+
+    <footer-block></footer-block>
+  </template>
+
+  <script>
+
+    class ConferencePage extends ReduxMixin(Polymer.Element) {
+      static get is() {return 'conference-page';}
+
+       static get properties() {
+        return {
+          active: Boolean,
+          team: {
+            type: Array,
+            statePath: 'team.list',
+          },
+          teamFetching: {
+            type: Boolean,
+            statePath: 'team.fetching',
+          },
+          teamFetchingError: {
+            type: Object,
+            statePath: 'team.fetchingError',
+          },
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        if (!this.teamFetching && (!this.team || !this.team.length)) {
+          this.dispatch(teamActions.fetchTeam());
+        }
+      }
+    }
+
+    window.customElements.define(ConferencePage.is, ConferencePage);
+
+  </script>
+</dom-module>
+
