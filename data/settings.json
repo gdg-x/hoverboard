@@ -75,14 +75,6 @@
       },
       "fontColor": "#424242"
     },
-    "schedule": {
-      "title": "Schedule",
-      "metaDescription": "Choose your sessions to visit",
-      "background": {
-        "color": "#fff"
-      },
-      "fontColor": "#424242"
-    },
     "team": {
       "title": "Team",
       "metaDescription": "Get more info about organizers",
