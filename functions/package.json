@@ -8,6 +8,9 @@
     "build": "babel src --out-dir dist --source-maps",
     "postbuild": "cpx ../build/index.html dist/"
   },
+  "engines": {
+    "node": "8"
+  },
   "dependencies": {
     "@google-cloud/storage": "^1.7.0",
     "child-process-promise": "^2.2.1",

@@ -2,12 +2,11 @@
   "presets": [
     ["@babel/env", {
       "targets": {
-        "node": "6.9.1"
+        "node": "8.0.0"
       }
     }]
   ],
   "plugins": [
-    "@babel/plugin-proposal-object-rest-spread",
-    "transform-es2017-object-entries"
+    "@babel/plugin-proposal-object-rest-spread"
   ]
 }

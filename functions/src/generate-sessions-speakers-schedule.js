@@ -41,7 +41,7 @@ async function generateAndSaveData(changedSpeaker) {
         speakers[doc.id] = doc.data();
     });
 
-    let generatedData = {}
+    let generatedData = {};
     const scheduleConfig = functions.config().schedule;
     const scheduleEnabled = scheduleConfig && scheduleConfig.enabled === 'true';
 
