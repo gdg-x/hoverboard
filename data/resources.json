@@ -52,7 +52,7 @@
       ]
     }
   ],
-  "subscribeNote": "No spam, only the latest news and updates!",
+  "subscribeNote": "Sign up for updates!",
   "codeOfConduct": "Code of Conduct",
   "aboutBlock": {
     "title": "Mission Statement",
@@ -88,9 +88,9 @@
     "suggested": "Up next"
   },
   "latestPostsBlock": {
-    "title": "The latest news",
+    "title": "News",
     "callToAction": {
-      "label": "View all stories",
+      "label": "View all news",
       "link": "/blog/"
     }
   },
@@ -126,8 +126,8 @@
   },
   "subscribeBlock": {
     "callToAction": {
-      "description": "THINK BIG WITH US",
-      "label": "Join"
+      "description": "Sign up for updates",
+      "label": "Sign up"
     },
     "yourEmail": "Your email",
     "emailAddress": "Email Address",

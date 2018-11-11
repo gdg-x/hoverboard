@@ -47,7 +47,7 @@
     },
     "blog": {
       "title": "Blog",
-      "metaDescription": "Read stories from our team",
+      "metaDescription": "News from the radical world",
       "background": {
         "color": "#FFF"
       },
@@ -72,7 +72,7 @@
     },
     "team": {
       "title": "Team",
-      "metaDescription": "Get more info about organizers",
+      "metaDescription": "Project Organizers",
       "background": {
         "color": "#fff"
       },
@@ -110,7 +110,7 @@
       "latitude": 42,
       "longitude": -83
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": "College of Creative Studies in Detroit"
   },
   "mediaQueries": {
     "xs": {
@@ -131,24 +131,8 @@
   "socialNetwork": {
     "follow": [
       {
-        "name": "meetup",
-        "url": "https://www.meetup.com/GDG-Lviv/events/244342635/"
-      },
-      {
-        "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
-      },
-      {
         "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
-      },
-      {
-        "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
-      },
-      {
-        "name": "youtube",
-        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "url": "https://twitter.com/radical_xchange/"
       }
     ],
     "share": [
@@ -166,7 +150,7 @@
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
+  "mailto": "webdev.radicalxchange@gmail.com",
   "mailchimp": {
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
