@@ -87,7 +87,7 @@
       "title": "FAQs",
       "metaDescription": "Find you answer right here!",
       "background": {
-        "color": "#fff"
+        "color": "#fb4552"
       },
       "fontColor": "#424242"
     },
@@ -103,8 +103,8 @@
   "location": {
     "label": "Localisation",
     "name": "I.U.F.M",
-    "city": "Montpellier, France",
-    "short": "Montpellier, France",
+    "city": "Montpellier",
+    "short": "Montpellier",
     "address": "2 place Marcel Godechot, 34090 Montpellier",
     "pointer": {
       "latitude": 43.6202051,

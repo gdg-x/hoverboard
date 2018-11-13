@@ -1,8 +1,9 @@
 {
-  "title": "Sunny Tech - 27/28 juin 2019 Montpellier",
+  "title": "Sunny Tech - 27 & 28 juin 2019 Montpellier",
   "description": "Sunny Tech est la 1ère conférence Tech organisée à Montpellier. Une conférence annuelle des technologies du numérique, créée par des passionnés, pour des passionnés avec l’ambition de rayonner nationalement, et même internationalement, à travers l’intervention de conférenciers étrangers de renom.",
   "image": "images/social-share.jpg",
-  "keywords": "sunnytech, évènement, event, montpellier, Sunny, Tech, programming, android, chrome, developers, web, cloud, conférence, seatechandsun, docker, devops, ux, design, back, scala, fonctionnel",  "dates": "27-28 Juin, 2019",
+  "keywords": "sunnytech, évènement, event, montpellier, Sunny, Tech, programming, android, chrome, developers, web, cloud, conférence, seatechandsun, docker, devops, ux, design, back, scala, fonctionnel",  
+  "dates": "27 & 28 juin 2019",
   "partnershipProposition": "mailto:contact@sunny-tech.io",
   "share": "Partager",
   "followOur": "Suit notre",
@@ -13,7 +14,7 @@
   "buyTicket": "Buy ticket",
   "signIn": "Connexion",
   "signOut": "Déconnexion",
-  "viewHighlights": "Moment fort",
+  "viewHighlights": "Moment fort 2018",
   "offlineMessage": "You can still work offline.",
   "cachingComplete": "Caching complete! Future visits will work offline.",
   "newVersionAvailable": "A new version of this app is available.",
@@ -68,7 +69,7 @@
       "howItWas": {
         "title": "Valeurs",
         "description": "Les valeurs que porte Sunny Tech sont définies et partagées par ses membres, vous pourrez les retrouver le jour de l'évènement.",
-        "important": "Ces valeurs sont: Partage, ouverture, originalité & passion.",
+        "important": "Ces valeurs sont : partage, ouverture, originalité & passion.",
         "labelCod": "Lire notre code de conduite",
         "label": "Voir la vidéo de l'édition 2018",
         "youtubeId": "vSLPCtKLObM"
@@ -77,7 +78,7 @@
     "statisticsBlock": {
       "attendees": {
         "label": "Participants",
-        "number": "400"
+        "number": "450"
       },
       "days": {
         "label": "Jours",

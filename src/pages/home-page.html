@@ -54,6 +54,7 @@
 
       .action-buttons .watch-video {
         color: #fff;
+        font-size: 18px
       }
 
       .action-buttons iron-icon {
@@ -143,7 +144,7 @@
       <div class="home-content" layout vertical center>
         <plastic-image class="hero-logo" srcset="/images/logo.svg" alt="{$ title $}"></plastic-image>
         <div class="info-items highlight-font">
-          <div class="info-item">{$ location.city $}. {$ dates $}</div>
+          <div class="info-item">{$ dates $} à {$ location.city $}</div>
           <div class="info-item">{$ heroSettings.home.description $}</div>
         </div>
 
@@ -157,7 +158,7 @@
             ga-event-action="watch"
             ga-event-label="hero block - view highlights"
           >
-            <iron-icon icon="hoverboard:movie"></iron-icon>
+            <iron-icon icon="hoverboard:play"></iron-icon>
             {$ viewHighlights $}
           </paper-button>
         </div>
