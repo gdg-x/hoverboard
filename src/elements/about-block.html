@@ -71,6 +71,17 @@
         <div>
           <h1 class="container-narrow">{$ aboutBlock.title $}</h1>
           <p class="container-narrow">{$ aboutBlock.description $}</p>
+          <p class="container-narrow"><a
+            href="{$ aboutBlock.callToAction.findOutMore.link $}"
+            ga-on="click"
+            ga-event-category="about"
+            ga-event-action="findOutMore"
+            ga-event-label="about block">
+            <paper-button class="animated icon-right">
+              <span class="cta-label">{$ aboutBlock.callToAction.findOutMore.label $}</span>
+              <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+            </paper-button>
+          </a></p>
         </div>
         
       </div>
