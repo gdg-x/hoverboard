@@ -47,14 +47,14 @@
     }
   },
   "gallery" : [
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4185.jpg?alt=media&token=ff3fd161-3d68-401a-90cd-74b90bd2a4d8",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4411.jpg?alt=media&token=7fda0d66-a631-4816-bd85-b93ef49ed3a6",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4577.jpg?alt=media&token=f14205b5-be75-447c-8bca-73a15ca2df41",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4525.jpg?alt=media&token=0428f0e3-fda0-4119-8249-69f98e936ce5",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4611.jpg?alt=media&token=b080143c-161c-4d9f-96f3-ebb6bdcdfd95",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4720.jpg?alt=media&token=75de0c2d-8bd9-48bb-9117-1349c9bc381f",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4646.jpg?alt=media&token=eafb0320-6f21-47bc-8ba4-8eec708f2076",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_5294.jpg?alt=media&token=72ab5141-d21b-4e71-a58b-faa2b00d1d02"
+    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/IMG_1810.jpg?alt=media&token=a2809111-c70e-44ed-af55-8b2098ff9afd",
+    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/IMG_1810.jpg?alt=media&token=a2809111-c70e-44ed-af55-8b2098ff9afd",
+    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/IMG_1810.jpg?alt=media&token=a2809111-c70e-44ed-af55-8b2098ff9afd",
+    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/IMG_1810.jpg?alt=media&token=a2809111-c70e-44ed-af55-8b2098ff9afd",
+    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/IMG_1810.jpg?alt=media&token=a2809111-c70e-44ed-af55-8b2098ff9afd",
+    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/IMG_1810.jpg?alt=media&token=a2809111-c70e-44ed-af55-8b2098ff9afd",
+    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/IMG_1810.jpg?alt=media&token=a2809111-c70e-44ed-af55-8b2098ff9afd",
+    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/IMG_1810.jpg?alt=media&token=a2809111-c70e-44ed-af55-8b2098ff9afd"
   ],
   "notifications" : {
     "config" : {
@@ -1680,59 +1680,38 @@
   } ],
   "tickets" : [ {
     "available" : true,
-    "currency" : "$",
-    "ends" : "Oct 13",
-    "info" : "Requires valid student/lecturer ID",
-    "name" : "EDU",
-    "price" : 80,
+    "currency" : "€",
+    "ends" : "26 Sept",
+    "info" : "Requiert une carte étudiante",
+    "name" : "Étudiant",
+    "price" : 40,
     "soldOut" : false,
-    "starts" : "Feb 7",
-    "url" : "https://2event.com/events/1027108"
-  }, {
-    "available" : false,
-    "currency" : "$",
-    "ends" : "Mar 31",
-    "inDemand" : false,
-    "info" : "Or first 50 tickets",
-    "name" : "Pre Early Bird",
-    "price" : 100,
-    "regular" : true,
-    "soldOut" : true,
-    "starts" : "Feb 7",
-    "url" : "https://2event.com/events/1027108"
+    "starts" : "1er Dec",
+    "url" : "https://www.billetweb.fr/sunny-tech-2018"
   }, {
     "available" : true,
-    "currency" : "$",
-    "ends" : "Jun 30",
+    "currency" : "€",
+    "ends" : "31 Mars",
     "inDemand" : true,
-    "info" : "Or first 200 tickets",
+    "info" : "Ou les premiers xxx billets",
     "name" : "Early Bird",
-    "price" : 120,
+    "price" : 60,
     "regular" : true,
     "soldOut" : false,
-    "starts" : "Feb 7",
-    "url" : "https://2event.com/events/1027108"
+    "starts" : "1er Dec",
+    "url" : "https://www.billetweb.fr/sunny-tech-2018"
   }, {
     "available" : false,
-    "currency" : "$",
-    "ends" : "Sep 30",
+    "currency" : "€",
+    "ends" : "26 Sept",
     "inDemand" : false,
-    "info" : "Or first 350 tickets",
-    "name" : "Regular",
-    "price" : 160,
+    "name" : "Classique",
+    "price" : 90,
     "primary" : true,
     "regular" : true,
     "soldOut" : false,
-    "starts" : "Jul 1",
-    "url" : "https://2event.com/events/1027108"
-  }, {
-    "available" : true,
-    "currency" : "$",
-    "info" : "Money worth nothing when you love it",
-    "name" : "I Love DFUA",
-    "price" : 280,
-    "soldOut" : false,
-    "url" : "https://2event.com/events/1027108"
+    "starts" : "1er Dec",
+    "url" : "https://www.billetweb.fr/sunny-tech-2018"
   } ],
   "triggers" : {
     "images" : false

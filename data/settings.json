@@ -181,5 +181,9 @@
       "https://twitter.com"
     ]
   },
-  "contentLoaders": {}
+  "contentLoaders": {
+    "tickets": {
+      "itemsCount": 5
+    }
+  }
 }

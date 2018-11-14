@@ -11,7 +11,7 @@
   "emailUs": "Envoyez-nous un email",
   "partnershipResources": "Partnership Resources",
   "eventResources": "Event Resources",
-  "buyTicket": "Buy ticket",
+  "buyTicket": "Achetez un billet",
   "signIn": "Connexion",
   "signOut": "Déconnexion",
   "viewHighlights": "Moment fort 2018",
@@ -43,6 +43,11 @@
         {
           "name": "Code de conduite",
           "url": "/cod",
+          "newTab": true
+        },
+        {
+          "name": "Billeterie",
+          "url": "https://www.billetweb.fr/sunny-tech-2018",
           "newTab": true
         }
       ]
@@ -95,11 +100,11 @@
     }
   },
   "ticketsBlock": {
-    "title": "Tickets",
-    "ticketsDetails": "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
-    "soldOut": "You missed it!",
-    "notAvailableYet": "Not available yet",
-    "save": "Save ${discount}% today"
+    "title": "Billeterie",
+    "ticketsDetails": "Votre billet vous donne accès à toutes les conférences et déjeuners. L'hébergement n'est PAS inclus dans le prix du billet.",
+    "soldOut": "Vous l'avez manqué!",
+    "notAvailableYet": "Pas encore disponible",
+    "save": "Économisez ${discount}%"
   },
   "partnersBlock": {
     "title": "Partenaire",
