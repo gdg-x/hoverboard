@@ -95,21 +95,21 @@
       "title": "Code de conduite",
       "metaDescription": "En apprendre plus sur les attentes que nous avons vis-à-vis des participants",
       "background": {
-        "color": "#fb4552"
+        "color": "#ffffff"
       },
       "fontColor": "#424242"
     }
   },
   "location": {
     "label": "Localisation",
-    "name": "I.U.F.M",
+    "name": "Faculté d’Education",
     "city": "Montpellier",
     "short": "Montpellier",
     "address": "2 place Marcel Godechot, 34090 Montpellier",
     "pointer": {
       "latitude": 43.6202051,
       "longitude": 3.8675719,
-      "zoom": 15
+      "zoom": 14
     },
     "mapCenter": {
       "latitude": 43.6202051,
