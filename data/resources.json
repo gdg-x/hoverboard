@@ -78,9 +78,9 @@
   },
   "partnersBlock": {
     "title": "Partners",
-    "button": "Become a partner",
+    "button": "Become a partner or donor",
     "form": {
-      "title": "Become a partner!",
+      "title": "If you send us your details, we will reach out about becoming a partner or donor.",
       "submitLabel": "Submit",
       "fullName": "Full Name",
       "companyName": "Company Name"
