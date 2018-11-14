@@ -35,6 +35,20 @@
         margin-bottom: 32px;
       }
 
+      .description-wrapper .container{
+        flex-direction: column;
+        height:auto;
+      }
+
+      .team-container {
+        height: 200px;
+      }
+
+      .organizers-photo {
+        width: 100%;
+        height: 100%;
+      }
+
       .member {
         padding: 16px 0;
         min-width: 300px;
@@ -97,6 +111,12 @@
           width: 115px;
           height: 115px;
         }
+        .description-wrapper .container{
+          flex-direction: row;
+        }
+        .team-container {
+          margin-right: 30px;
+        }
       }
 
       @media (min-width: 1024px) {
@@ -104,9 +124,13 @@
           grid-template-columns: repeat(3, 1fr);
         }
 
-         .photo {
+        .photo {
           width: 128px;
           height: 128px;
+        }
+
+        .team-container {
+          height: 300px;
         }
       }
 
@@ -130,9 +154,29 @@
 
     <div class="description-wrapper">
       <div class="container" layout horizontal justified>
-        <marked-element class="description" markdown="{$ team.description $}">
-          <div slot="markdown-html"></div>
-        </marked-element>
+
+        <div class="team-container" flex>
+          <a
+            href="/team"
+            class="image-link"
+            ga-on="click"
+            ga-event-category="link"
+            ga-event-action="open"
+            ga-event-label="open team page"
+          >
+            <plastic-image
+              class="organizers-photo card"
+              srcset="{$ aboutOrganizerBlock.image $}"
+              sizing="cover"
+              lazy-load preload fade
+            ></plastic-image>
+          </a>
+        </div>
+        <div flex>
+          <marked-element class="description" markdown="{$ team.description $}">
+            <div slot="markdown-html"></div>
+          </marked-element>
+        </div>
       </div>
     </div>
 
