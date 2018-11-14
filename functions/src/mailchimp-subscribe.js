@@ -24,6 +24,32 @@ const mailchimpSubscribe = functions.firestore.document('/subscribers/{id}')
     return subscribeToMailchimp(mailchimpConfig, subscriberData);
   });
 
+export const mailchimpPotentialPartnerSubscribe = functions.firestore.document('/potentialPartners/{id}')
+  .onCreate((snapshot) => {
+
+    const mailchimpConfig = functions.config().mailchimp;
+    if (!mailchimpConfig) {
+      console.log('Can\'t subscribe potential partner, Mailchimp config is empty.');
+    }
+    
+    const partnerMailchimpConfig = Object.assign({}, mailchimpConfig, {
+      listid: mailchimpConfig.potentialpartnerlistid,
+    });
+
+    const potentialPartner = snapshot.data();
+
+    const subscriberData = {
+      email_address: potentialPartner.email,
+      status: 'subscribed',
+      merge_fields: {
+        COMPANY: potentialPartner.companyName,
+        NAME: potentialPartner.fullName,
+      },
+    };
+
+    return subscribeToMailchimp(partnerMailchimpConfig, subscriberData);
+  });
+
 function subscribeToMailchimp(mailchimpConfig, subscriberData, emailHash) {
   const uri = `https://${mailchimpConfig.dc}.api.mailchimp.com/3.0/lists/${mailchimpConfig.listid}/members`;
   const url = emailHash ? `${uri}/${emailHash}` : uri;
