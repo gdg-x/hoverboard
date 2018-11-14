@@ -119,10 +119,10 @@
 
         const firestore = firebase.firestore();
         firestore.settings({ timestampsInSnapshots: true });
-        firebase.firestore().enablePersistence()
-          .catch(() => {
-            console.warn('DB offline support not available'); // eslint-disable-line no-console
-          });
+        // firebase.firestore().enablePersistence()
+        //   .catch(() => {
+        //     console.warn('DB offline support not available'); // eslint-disable-line no-console
+        //   });
 
         // eslint-disable-next-line no-console
         console.log('Firebase App is ready!');
@@ -133,7 +133,7 @@
 
   <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
   <link rel="import" href="src/hoverboard-app.html">
-  <script src="scripts/service-worker-registration.js" async defer></script>
+  <!-- <script src="scripts/service-worker-registration.js" async defer></script> -->
 
   <style>
 
