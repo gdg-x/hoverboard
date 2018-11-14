@@ -22,6 +22,11 @@
       "label": "Home"
     },
     {
+      "route": "about",
+      "permalink": "/about/",
+      "label": "About"
+    },
+    {
       "route": "speakers",
       "permalink": "/speakers/",
       "label": "Speakers"
@@ -79,8 +84,8 @@
       "fontColor": "#424242"
     },
     "faq": {
-      "title": "FAQs",
-      "metaDescription": "Find you answer right here!",
+      "title": "About",
+      "metaDescription": "Find out more.",
       "background": {
         "color": "#fff"
       },
