@@ -145,6 +145,23 @@
         background-color: var(--secondary-background-color);
       }
 
+      table {
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      tr:nth-child(odd) > td {
+        background: #f9f9f9;
+      }
+      tr > td, table > tfoot > tr > td {
+        padding: 8px;
+        vertical-align: top;
+        border-top: 1px solid #ddd;
+      }
+      th {
+        text-align: center;
+      }
+
       @media (min-width: 640px) {
         [slot="markdown-html"] plastic-image {
           min-height: 400px;
