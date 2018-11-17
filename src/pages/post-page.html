@@ -37,26 +37,80 @@
       }
 
       [slot="markdown-html"] {
-        font-size: 18px;
-        line-height: 1.8;
+        font-size: 16px;
+        line-height: 1.6;
         color: var(--primary-text-color);
       }
 
-      [slot="markdown-html"] h1,
-      [slot="markdown-html"] h2,
+      blockquote {
+        padding: 10px 20px;
+        border-left: 5px solid #eee;
+        margin: 0 0 20px;
+      }
+
+      pre {
+        background: #eee;
+        padding: 1.25em;
+        color: currentColor;
+      }
+
+      pre code {
+        color: currentColor;
+      }
+
+      code {
+        color: #ff3860;
+        background: #eee;
+        padding: .25em .5em;
+      }
+
+      [slot="markdown-html"] li p {
+        margin-bottom: .8em;
+      }
+
+      [slot="markdown-html"] h1 {
+        margin: 1.5em 0 1em;
+        font-size: 2.2em;
+        padding: 0
+      }
+
+      [slot="markdown-html"] h2 {
+        font-size: 2em;
+        margin: 1em 0 .7em;
+      }
+
       [slot="markdown-html"] h3 {
-        margin: 48px 0 16px;
+        font-size: 1.8em;
+        margin: .8em 0 .5em;
+      }
+
+      [slot="markdown-html"] h4 {
+        font-size: 1.5em;
+        margin: .6em 0 .4em;
+      }
+
+      [slot="markdown-html"] h4 {
+        font-size: 1.3em;
+        margin: .5em 0 .3em;
+      }
+      [slot="markdown-html"] h5 {
+        font-size: 1.1em;
+        margin: .5em 0 .3em;
+      }
+      [slot="markdown-html"] h6 {
+        font-size: 1em;
+        margin: .4em 0 .2em;
       }
 
       [slot="markdown-html"] p {
         margin-top: 0;
-        margin-bottom: 24px;
+        margin-bottom: 1em;
       }
 
       [slot="markdown-html"] plastic-image {
-        margin: 32px 0 8px -16px;
+        /* margin: 32px 0 8px -16px; */
         --iron-image-width: calc(100% + 32px);
-        width: calc(100% + 32px);
+        /* width: calc(100% + 32px); */
         min-height: 200px;
         background-color: var(--secondary-background-color);
       }
