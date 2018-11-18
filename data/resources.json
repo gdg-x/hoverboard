@@ -133,7 +133,8 @@
     }
   },
   "mapBlock": {
-    "title": "Localisation"
+    "title": "Localisation",
+    "photo": "/images/backgrounds/amphi.jpg"
   },
   "subscribeBlock": {
     "callToAction": {
