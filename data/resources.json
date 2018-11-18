@@ -107,13 +107,13 @@
     "save": "Économisez ${discount}%"
   },
   "partnersBlock": {
-    "title": "Partenaire",
-    "button": "Devenir un partenaire",
+    "title": "Sponsors de l'année 2019",
+    "button": "Devenir un sponsor",
     "form": {
-      "title": "Devenir un partenaire!",
+      "title": "Devenir un sponsor!",
       "submitLabel": "Soumettre",
-      "fullName": "Nom",
-      "companyName": "Nom de l'entreprise"
+      "fullName": "Nom Prénom",
+      "companyName": "Entreprise"
     },
     "toast": "Nous revenons vers vous dans les plus brefs délais!"
   },
