@@ -37,7 +37,7 @@ We have four primary ‘tracks’ in our community, across which we actively pro
 
 #### Track Lead
 
-[Mark Lutter](linkedin.com/in/mark-lutter-a23a7669)
+[Mark Lutter](https://www.linkedin.com/in/mark-lutter-a23a7669)
 
 #### Participation
 
@@ -48,7 +48,7 @@ Activism and Government is a collection of community-builders and change agents.
 
 #### Track Lead
 
-[Jennifer Morone](linkedin.com/in/jennifermorone)
+[Jennifer Morone](https://www.linkedin.com/in/jennifermorone)
 
 #### Participation
 
@@ -58,7 +58,7 @@ Arts and Communications is a collection of creative, abstract, expressive, criti
 
 #### Track Lead
 
-[Mamie Rheingold](linkedin.com/in/mamie-rheingold-257237121)
+[Mamie Rheingold](https://www.linkedin.com/in/mamie-rheingold-257237121)
 
 #### Participation
 
