@@ -1,7 +1,7 @@
 {
   "basepath": "/",
   "url": "https://hoverboard-site-8fb1d.firebaseapp.com/",
-  "analytics": "UA-43643469-8",
+  "analytics": "",
   "prefix": "/",
   "firebase": {
     "apiKey": "AIzaSyAO3ta4JtzLwn2y-ZM6oAUWF6Jv_sFEdoc",
