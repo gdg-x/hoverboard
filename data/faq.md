@@ -62,7 +62,7 @@ Arts and Communications is a collection of creative, abstract, expressive, criti
 
 #### Participation
 
-Arts and Communications is a collection of doers and builders who challenge norms and turn ideas into action. These individuals can supercharge movements by connecting ideas with markets.Participants in this track include entrepreneurs, technologists, engineers, developers, executives, investors, all for-profit business leaders and employees and blockchain community members.
+Entrepreneurship and Technology is a collection of doers and builders who challenge norms and turn ideas into action. These individuals can supercharge movements by connecting ideas with markets. Participants in this track include entrepreneurs, technologists, engineers, developers, executives, investors, all for-profit business leaders and employees and blockchain community members.
 
 ### Ideas and Research
 
