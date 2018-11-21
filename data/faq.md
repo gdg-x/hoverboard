@@ -79,5 +79,7 @@ Ideas and Research is a collection of experts and specialists. Rigorous, thought
 ## Attendance Details  
 
 ### Tickets
+
+Ticketing info coming soon!
   
 

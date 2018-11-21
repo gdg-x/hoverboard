@@ -3,7 +3,7 @@
   "description": "Joining artists, entrepreneurs and scholars to heal political divides and inequality through political and economic mechanism design.",
   "image": "images/social-share.jpg",
   "keywords": "event, RadicalxChange, RxC, radical, exchange, political, uprooting, capitalism, democracy, artists, entrepreneurs, scholars, COST, QV",
-  "dates": "March, 2019",
+  "dates": "March 22-24, 2019",
   "partnershipProposition": "",
   "share": "Share",
   "followOur": "Follow our",
@@ -55,8 +55,8 @@
   "subscribeNote": "Subscribe for updates",
   "codeOfConduct": "Code of Conduct",
   "aboutBlock": {
-    "title": "Mission Statement",
-    "description": "RadicalxChange convenes a community of activists, artists, entrepreneurs and scholars committed to using dramatically expanded competitive, free and open market mechanisms to reduce inequality, build widely-shared prosperity, heal global political divides and build a richer and more cooperative social life. As advocates of radical social change, the RadicalxChange community challenges long-established social institutions such as private property, one-person-one-vote and the primacy of the individual on the one hand and the nation state on the other. To achieve this change the community seeks to harness the emancipatory potential of insights from the field of mechanism design in dialog with a range of other academic fields such as computer science, philosophy and history, the communicative imagination of artists, the pragmatic ingenuity of entrepreneurs and the idealism of activists for social justice.",
+    "title": "About the Conference",
+    "description": "Join us as we convene RadicalxChange’s rapidly growing community of activists, artists, entrepreneurs and scholars who are *harnessing market mechanisms to create radical social change. This March, we will gather for three days in Detroit to collaborate, innovate, and create a more inclusive future -- and a movement that lasts long after the conference ends. If you’re sick of the current stagnation, inequality, and polarization, come join a movement that offers something different! It’s not radical to envision a better world. It is radical to build one.",
     "callToAction": {
       "findOutMore": {
         "label": "Find out more",
@@ -137,23 +137,23 @@
   },
   "subscribeBlock": {
     "callToAction": {
-      "description": "Tune in.",
-      "label": "Join us"
+      "description": "Tickets will be available very soon! Sign up for updates.",
+      "label": "Subscribe"
     },
     "yourEmail": "Your email",
     "emailAddress": "Email Address",
     "firstName": "First Name",
     "lastName": "Last Name",
-    "formTitle": "Get the latest updates, insights and news about RadicalxChange sent to your inbox.",
+    "formTitle": "Get the latest updates, insights and news about RadicalxChange in your inbox.",
     "emailRequired": "Please enter a valid email address.",
     "subscribe": "Subscribe",
     "subscribed": "Subscribed",
     "close": "Close",
-    "generalError": "Some error has occured. Please, try again later.",
+    "generalError": "We're awfully sorry. An error has occured. Please try again later.",
     "toast": "Successfully subscribed!"
   },
   "team": {
-    "description": "We're a volunteer driven community united by our vision for building more efficient and equal societies."
+    "description": "We're a volunteer-driven community united by our vision for building more efficient and egalitarian societies."
   },
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"
