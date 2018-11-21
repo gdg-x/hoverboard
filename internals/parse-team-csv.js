@@ -30,7 +30,8 @@ const rankMembers = items => items.sort((a, b) => {
   return 0
 })
 
-const baseImgUrl = 'https://firebasestorage.googleapis.com/v0/b/hoverboard-site-8fb1d.appspot.com/o/team%2F'
+const baseImgUrl = 'https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2F'
+// const baseImgUrl = 'https://firebasestorage.googleapis.com/v0/b/hoverboard-site-8fb1d.appspot.com/o/team%2F'
 
 const restructure = items => items.map((item, order) => {
   const output = {
