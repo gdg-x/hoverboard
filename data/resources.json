@@ -48,6 +48,11 @@
           "name": "College for Creative Studies",
           "url": "https://www.collegeforcreativestudies.edu",
           "newTab": true
+        },
+        {
+          "name": "Radical Markets",
+          "url": "http://radicalmarkets.com",
+          "newTab": true
         }
       ]
     }
