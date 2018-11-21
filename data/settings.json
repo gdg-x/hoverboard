@@ -27,14 +27,14 @@
       "label": "About"
     },
     {
-      "route": "speakers",
-      "permalink": "/speakers/",
-      "label": "Speakers"
-    },
-    {
       "route": "team",
       "permalink": "/team/",
       "label": "Team"
+    },
+    {
+      "route": "speakers",
+      "permalink": "/speakers/",
+      "label": "Speakers"
     },
     {
       "route": "blog",
@@ -44,7 +44,7 @@
   ],
   "heroSettings": {
     "home": {
-      "description": "Egalitarian mechanisms",
+      "description": "Market mechanisms for equality and cooperation",
       "background": {
         "color": "#fefcfe"
       },
@@ -60,8 +60,8 @@
     },
     "speakers": {
       "title": "Speakers",
-      "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
+      "metaDescription": "",
+      "description": "We're currently bringing together speakers across four tracks: Ideas and Research, Arts and Communication, Entrepreneurship and Technology, and Activism and Governance. Please stay tuned as we add confirmed speakers here.",
       "background": {
         "color": "#FFF"
       },
@@ -105,11 +105,11 @@
     "name": "College for Creative Studies",
     "city": "Detroit",
     "short": "Detroit, MI",
-    "address": "201 E Kirby St, Detroit, MI 48202",
+    "address": "460 W Baltimore St, Detroit, MI 48202, USA",
     "pointer": {
       "latitude": 42.3613975,
       "longitude": -83.0649751,
-      "zoom": 5
+      "zoom": 7
     },
     "mapCenter": {
       "latitude": 42,

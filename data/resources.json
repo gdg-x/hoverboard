@@ -52,7 +52,7 @@
       ]
     }
   ],
-  "subscribeNote": "Sign up for updates!",
+  "subscribeNote": "Subscribe for updates",
   "codeOfConduct": "Code of Conduct",
   "aboutBlock": {
     "title": "Mission Statement",
@@ -137,8 +137,8 @@
   },
   "subscribeBlock": {
     "callToAction": {
-      "description": "Sign up for updates",
-      "label": "Sign up"
+      "description": "Tune in.",
+      "label": "Join us"
     },
     "yourEmail": "Your email",
     "emailAddress": "Email Address",
