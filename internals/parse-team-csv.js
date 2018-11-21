@@ -27,7 +27,7 @@ const rankMembers = items => items.sort((a, b) => {
     if (a.Role.includes(r)) return -1
     else if (b.Role.includes(r)) return 1
   }
-  return 0
+  return Math.random() > 0.5 ? -1 : 1
 })
 
 const baseImgUrl = 'https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2F'
