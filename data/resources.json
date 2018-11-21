@@ -137,7 +137,8 @@
   },
   "subscribeBlock": {
     "callToAction": {
-      "description": "Tickets will be available very soon! Sign up for updates.",
+      "text": "We will be launching ticket sales on December 1. Check back then!",
+      "description": "Sign up for updates.",
       "label": "Subscribe"
     },
     "yourEmail": "Your email",
