@@ -30,6 +30,29 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    match /becomeSponsorGallery/{photo} {
+      // Applies to single document read requests
+      allow get;
+
+      // Applies to queries and collection read requests
+      allow list;
+
+      // Disallow writes
+      allow write: if false;
+    }
+
+
+    match /become-sponsor-gallery/{photo} {
+      // Applies to single document read requests
+      allow get;
+
+      // Applies to queries and collection read requests
+      allow list;
+
+      // Disallow writes
+      allow write: if false;
+    }
+
     match /notificationsSubscribers/{token} {
       allow list, delete: if false;
 

@@ -2,6 +2,7 @@
 
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="./shared-styles.html">
+<link rel="import" href="../mixins/scroll-functions.html">
 
 <dom-module id="header-toolbar">
   <template>
@@ -153,9 +154,14 @@
         {% endfor %}
 
         <a href$="[[_getTicketUrl(tickets)]]" target="_blank" rel="noopener noreferrer" ga-on="click"
-        ga-event-category="ticket button" ga-event-action="buy_click">
-       <paper-button class="buy-button" primary>{$ buyTicketTopRight $}</paper-button>
-     </a>
+          ga-event-category="ticket button" ga-event-action="buy_click">
+          <paper-button class="buy-button" primary>{$ buyTicketTopRight $}</paper-button>
+        </a>
+        
+        <a target="_scrollToBecomeSponsor" rel="noopener noreferrer" ga-on="click" on-tap="_scrollToBecomeSponsor"
+        ga-event-category="becomSponsorGallery"  ga-event-action="scroll" ga-event-action="become_sponsor_click">
+        <paper-button class="buy-button" primary>{$ becomeSponsorMenu $}</paper-button>
+      </a>
       </paper-tabs>
     </app-toolbar>
 
@@ -163,7 +169,7 @@
 
   <script>
 
-    class HeaderToolbar extends ReduxMixin(Polymer.Element) {
+    class HeaderToolbar extends ScrollFunctions(ReduxMixin(Polymer.Element)) {
       static get is() {
         return 'header-toolbar';
       }
@@ -234,6 +240,15 @@
         if (this.dialogs.signin.isOpened) {
           dialogsActions.closeDialog(DIALOGS.SIGNIN);
         }
+      }
+
+      _scrollToBecomeSponsor() {
+        // eslint-disable-next-line no-undef
+        const toolbarHeight = HOVERBOARD.Elements.HeaderToolbar.getBoundingClientRect().height - 1;
+        // eslint-disable-next-line no-undef
+        const becomeSponsorGalleryBlockPositionY = HOVERBOARD.Elements.BecomeSponsorGallery.getBoundingClientRect().top
+          - toolbarHeight;
+        this.scrollToY(becomeSponsorGalleryBlockPositionY, 600, 'easeInOutSine');
       }
 
       _toggleNotifications() {

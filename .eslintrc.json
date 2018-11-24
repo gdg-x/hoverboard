@@ -20,7 +20,7 @@
     "new-cap": "off",
     "no-var": "off",
     "require-jsdoc": "off",
-    "max-len": ["error", { "code": 100 }],
+    "max-len": ["error", { "code": 120 }],
     "object-curly-spacing": ["error", "always"],
     "space-before-function-paren": ["error", {"anonymous": "always", "named": "never", "asyncArrow": "always"}],
     "linebreak-style": 0
@@ -45,6 +45,7 @@
     "sessionsActions": true,
     "scheduleActions": true,
     "galleryActions": true,
+    "becomeSponsorGalleryActions": true,
     "teamActions": true,
     "userActions": true,
     "subscribeActions": true,

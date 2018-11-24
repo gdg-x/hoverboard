@@ -344,6 +344,32 @@ const galleryReducer = (state = initialState.gallery, action) => {
   }
 };
 
+const becomeSponsorGalleryReducer = (state = initialState.becomeSponsorGallery, action) => {
+  switch (action.type) {
+    case FETCH_BECOME_SPONSOR_GALLERY:
+      return Object.assign({}, state, {
+        fetching: true,
+        fetchingError: null,
+        list: [],
+      });
+
+    case FETCH_BECOME_SPONSOR_GALLERY_FAILURE:
+      return Object.assign({}, state, {
+        fetching: false,
+        fetchingError: action.payload.error,
+      });
+
+    case FETCH_BECOME_SPONSOR_GALLERY_SUCCESS:
+      return Object.assign({}, state, {
+        fetching: false,
+        list: action.payload.list,
+      });
+
+    default:
+      return state;
+  }
+};
+
 const teamReducer = (state = initialState.team, action) => {
   switch (action.type) {
     case FETCH_TEAM:

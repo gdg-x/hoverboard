@@ -140,6 +140,32 @@ const importGallery = () => {
     });
 };
 
+const importBecomeSponsorGallery = () => {
+  const becomeSponsorGallery = data.becomeSponsorGallery;
+  if (!Object.keys(becomeSponsorGallery).length) {
+    return false;
+  }
+  console.log('\tImporting become sponsor gallery...');
+
+  const batch = firestore.batch();
+
+  Object.keys(becomeSponsorGallery).forEach((docId) => {
+    batch.set(
+      firestore.collection('becomeSponsorGallery').doc(`${docId}`.padStart(3, 0)),
+      {
+        url: becomeSponsorGallery[docId],
+        order: docId,
+      },
+    );
+  });
+
+  return batch.commit()
+    .then(results => {
+      console.log('\tImported data for', results.length, 'images');
+      return results;
+    });
+};
+
 const importBlog = () => {
   const blog = data.blog;
   if (!Object.keys(blog).length) {
@@ -285,6 +311,7 @@ const importNotificationsConfig = async () => {
 initializeFirebase()
   .then(() => importBlog())
   .then(() => importGallery())
+  .then(() => importBecomeSponsorGallery())
   .then(() => importNotificationsConfig())
   .then(() => importPartners())
   .then(() => importPreviousSpeakers())

@@ -102,6 +102,11 @@
       fetchingError: null,
       list: [],
     },
+    becomeSponsorGallery: {
+      fetching: false,
+      fetchingError: null,
+      list: [],
+    },
     team: {
       fetching: false,
       fetchingError: null,
@@ -131,6 +136,7 @@
       sessions: sessionsReducer(state.sessions, action),
       schedule: scheduleReducer(state.schedule, action),
       gallery: galleryReducer(state.gallery, action),
+      becomeSponsorGallery: becomeSponsorGalleryReducer(state.becomeSponsorGallery, action),
       team: teamReducer(state.team, action),
       user: userReducer(state.user, action),
       subscribed: subscribeReducer(state.subscribed, action),

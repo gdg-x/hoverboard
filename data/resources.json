@@ -13,6 +13,7 @@
   "eventResources": "Event Resources",
   "buyTicket": "Achetez un billet",
   "buyTicketTopRight": "Billeterie",
+  "becomeSponsorMenu": "Devenir sponsor",
   "signIn": "Connexion",
   "signOut": "Déconnexion",
   "viewHighlights": "Moments forts 2018",
@@ -108,15 +109,7 @@
     "save": "Économisez ${discount}%"
   },
   "partnersBlock": {
-    "title": "Sponsors de l'année 2019",
-    "button": "Devenir un sponsor",
-    "form": {
-      "title": "Devenir un sponsor!",
-      "submitLabel": "Soumettre",
-      "fullName": "Nom Prénom",
-      "companyName": "Entreprise"
-    },
-    "toast": "Nous revenons vers vous dans les plus brefs délais!"
+    "title": "Sponsors de l'année 2019"
   },
   "previousSpeakersBlock": {
     "title": "Previous speakers",
@@ -125,9 +118,24 @@
       "link": "/previous-speakers/"
     }
   },
+  "becomeSponsorGalleryBlock": {
+    "title": "Sponsorisez l'événement!",
+    "buttonSponsoring": "Devenir un sponsor",
+    "callToAction": {
+      "label": "Dossier de sponsoring",
+      "link": "https://docs.google.com/presentation/d/1TpKT5fHgiTXH3MzTZJN1kaUM7IbQ6mFfKynu1RA-Kz8/preview#slide=id.p1"
+    },
+    "form": {
+      "title": "Devenir un sponsor!",
+      "submitLabel": "Soumettre",
+      "fullName": "Nom Prénom",
+      "companyName": "Entreprise"
+    },
+    "toast": "Nous revenons vers vous dans les plus brefs délais!"
+  },
   "galleryBlock": {
     "title": "Moments forts de Sunny Tech 2018",
-    "description": "Grâce à nos photographes, revivez l'expérience offerte par l'édition 2018.",
+    "description": "Grâce à nos photographes, revivez l'expérience offerte par l'édition 2018",
     "callToAction": {
       "label": "Voir toutes les photos",
       "link": "https://photos.app.goo.gl/i1S38qRjjCRYxkak7"

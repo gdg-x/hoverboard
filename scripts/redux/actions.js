@@ -528,6 +528,32 @@ const galleryActions = {
   },
 };
 
+const becomeSponsorGalleryActions = {
+  fetchGallery: () => (dispatch) => {
+    dispatch({
+      type: FETCH_BECOME_SPONSOR_GALLERY,
+    });
+
+    return firebase.firestore().collection('becomeSponsorGallery')
+      .get()
+      .then((snaps) => {
+        const list = snaps.docs
+          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+
+        dispatch({
+          type: FETCH_BECOME_SPONSOR_GALLERY_SUCCESS,
+          payload: { list },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: FETCH_BECOME_SPONSOR_GALLERY_FAILURE,
+          payload: { error },
+        });
+      });
+  },
+};
+
 const _getTeamMembers = (teamId) => firebase.firestore()
   .collection('team').doc(teamId).collection('members').orderBy('order', 'asc')
   .get()
