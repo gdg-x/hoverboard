@@ -3,6 +3,7 @@
 const TOGGLE_DRAWER = 'app/Drawer/TOGGLE_DRAWER';
 const SET_VIEWPORT_SIZE = 'app/Viewport/SET_VIEWPORT_SIZE';
 const SET_HERO_SETTINGS = 'app/Hero/SET_HERO_SETTINGS';
+const SET_ADD_TO_HOMESCREEN = 'app/APP/SET_ADD_TO_HOMESCREEN';
 // router
 const SET_ROUTE = 'app/Routing/SET_ROUTE';
 const SET_SUB_ROUTE = 'app/Routing/SET_SUB_ROUTE';
@@ -90,8 +91,10 @@ const FETCH_TEAM_SUCCESS = 'app/Team/FETCH_TEAM_SUCCESS';
 // user
 const SIGN_IN = 'app/Auth/SIGN_IN';
 const SIGN_OUT = 'app/Auth/SIGN_OUT';
+
 // subscribe
 const SUBSCRIBE = 'app/Subscribe/SUBSCRIBE';
+
 // notifications
 const UPDATE_NOTIFICATIONS_STATUS = 'app/Notifications/UPDATE_NOTIFICATIONS_STATUS';
 const NOTIFICATIONS_STATUS = {
@@ -99,3 +102,6 @@ const NOTIFICATIONS_STATUS = {
   DENIED: 'denied',
   DEFAULT: 'default',
 };
+
+// filters
+const SET_FILTERS = 'app/Filters/SET_FILTERS';

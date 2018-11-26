@@ -21,6 +21,11 @@
 <dom-module id="session-details">
   <template>
     <style is="custom-style" include="shared-styles dialog-styles flex flex-alignment positioning"></style>
+    <style>
+      .section {
+        cursor: pointer;
+      }
+    </style>
 
     <polymer-helmet
       title="[[session.title]] | {$ title $}"
@@ -45,7 +50,7 @@
             <h2 class="name">[[session.title]]</h2>
             <div class="tags" hidden$="[[!session.tags.length]]">
               <template is="dom-repeat" items="[[session.tags]]" as="tag">
-                <span class="tag" style$="color: [[_getTagColor(tag)]]">[[tag]]</span>
+                <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
               </template>
             </div>
 
@@ -103,8 +108,12 @@
         <div class="additional-sections" hidden$="[[!session.speakers.length]]">
           <h3>{$ sessionDetails.speakers $}</h3>
 
-          <template is="dom-repeat" items="[[_findSpeakers(session.speakers)]]" as="speaker">
-            <a href$="/speakers/[[speaker.id]]" class="section">
+          <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
+            <div
+              class="section"
+              on-tap="_openSpeaker"
+              speaker-id$="[[speaker.id]]"
+            >
               <div layout horizontal center>
                 <plastic-image
                   class="section-photo"
@@ -118,7 +127,7 @@
                   <div class="section-secondary-text">[[speaker.company]] / [[speaker.country]]</div>
                 </div>
               </div>
-            </a>
+            </div>
           </template>
         </div>
       </div>
@@ -129,9 +138,9 @@
   <script>
 
     // eslint-disable-next-line no-undef
-    class SessionDetails extends UtilsFunctions(SessionsHoC(SpeakersHoC(
+    class SessionDetails extends UtilsFunctions(SpeakersHoC(
       ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element))
-    ))) {
+    )) {
       static get is() {
         return 'session-details';
       }
@@ -157,6 +166,10 @@
             type: Object,
             statePath: 'sessions.featured',
           },
+          currentSpeaker: {
+            type: String,
+            statePath: 'routing.subRoute',
+          },
         };
       }
 
@@ -167,13 +180,16 @@
 
       _close() {
         dialogsActions.closeDialog(DIALOGS.SESSION);
+        history.back();
       }
 
-      _getTagColor(value) {
-        if (ShadyCSS) {
-          return ShadyCSS.getComputedStyleValue(this, `--${this.generateClassName(value)}`);
-        }
-        return getComputedStyle(this, `--${this.generateClassName(value)}`);
+      _openSpeaker(e) {
+        const speakerId = e.currentTarget.getAttribute('speaker-id');
+        const speakerData = this.speakersMap[speakerId];
+
+        if (!speakerData) return;
+        dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
+        dialogsActions.closeDialog(DIALOGS.SESSION);
       }
 
       _getCloseBtnIcon(isLaptopViewport) {
@@ -213,13 +229,6 @@
 
       _getFeaturedSessionIcon(featuredSessions, sessionId) {
         return featuredSessions && featuredSessions[sessionId] ? 'bookmark-check' : 'bookmark-plus';
-      }
-
-      _findSpeakers(speakers) {
-        if (speakers && typeof speakers[0] !== 'object') {
-          return speakers.map((speakerId) => this.speakersMap[speakerId]);
-        }
-        return speakers;
       }
     }
 

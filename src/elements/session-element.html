@@ -140,7 +140,7 @@
 
     <a
       class="session"
-      href$="/schedule/[[dayName]]?sessionId=[[session.id]]"
+      href$="/schedule/[[dayName]]?[[toggleQueryParam(queryParams, 'sessionId', session.id)]]"
       featured$="[[isFeatured]]"
       layout vertical
       relative
@@ -179,7 +179,7 @@
           </div>
           <div hidden$="[[!session.tags.length]]">
             <template is="dom-repeat" items="[[session.tags]]" as="tag">
-              <span class="tag" style$="color: [[_getTagColor(tag)]]">[[tag]]</span>
+              <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
             </template>
           </div>
         </div>
@@ -223,9 +223,10 @@
           user: Object,
           session: Object,
           featuredSessions: Object,
+          queryParams: String,
           sessionColor: {
             type: String,
-            computed: '_getTagColor(session.mainTag)',
+            computed: 'getVariableColor(session.mainTag)',
           },
           isFeatured: {
             type: String,
@@ -236,13 +237,6 @@
             value: () => JSON.parse('{$ showSessionShortAbstract $}'),
           },
         };
-      }
-
-      _getTagColor(value) {
-        if (ShadyCSS) {
-          return ShadyCSS.getComputedStyleValue(this, `--${this.generateClassName(value)}`);
-        }
-        return getComputedStyle(this, `--${this.generateClassName(value)}`);
       }
 
       _isFeatured(featuredSessions, sessionId) {

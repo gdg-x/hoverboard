@@ -24,6 +24,12 @@ const uiActions = {
       value,
     });
   },
+  setAddToHomeScreen: (value) => {
+    store.dispatch({
+      type: SET_ADD_TO_HOMESCREEN,
+      value,
+    });
+  },
 };
 
 const routingActions = {
@@ -264,24 +270,25 @@ const speakersActions = {
       type: FETCH_SPEAKERS,
     });
 
-    firebase.firestore()
-      .collection('speakers')
-      .orderBy('order', 'asc')
-      .get()
-      .then((snaps) => {
-        const list = snaps.docs
-          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+    const speakersPromise = new Promise((resolve, reject) => {
+      firebase.firestore()
+        .collection('generatedSpeakers')
+        .orderBy('order', 'asc')
+        .get()
+        .then((snaps) => {
+          resolve(snaps.docs.map((snap) => Object.assign({}, snap.data())));
+        })
+        .catch(reject);
+    });
 
-        const obj = list.reduce(
-          (acc, curr) => Object.assign({}, acc, { [curr.id]: curr }),
-          {}
-        );
-
+    return Promise.all([speakersPromise])
+      .then(([speakers]) => {
         dispatch({
           type: FETCH_SPEAKERS_SUCCESS,
           payload: {
-            obj,
-            list,
+            obj: speakers.reduce((acc, curr) =>
+              Object.assign({}, acc, { [curr.id]: curr }), {}),
+            list: speakers,
           },
         });
       })
@@ -336,46 +343,54 @@ const sessionsActions = {
       type: FETCH_SESSIONS,
     });
 
-    firebase.firestore()
-      .collection('sessions')
-      .get()
-      .then((snaps) => {
-        const list = [];
-        const obj = {};
-        const objBySpeaker = {};
+    return new Promise((resolve, reject) => {
+      firebase.firestore()
+        .collection('generatedSessions')
+        .get()
+        .then((snaps) => {
+          const list = [];
+          const obj = {};
+          const objBySpeaker = {};
+          const tagFilters = new Set();
+          const complexityFilters = new Set();
 
-        snaps.docs.forEach((doc) => {
-          const data = doc.data();
-          const session = Object.assign({}, data, { id: doc.id });
-          list.push(session);
-          obj[doc.id] = session;
+          snaps.docs.forEach((doc) => {
+            const session = Object.assign({}, doc.data());
+            list.push(session);
+            session.tags && session.tags.map((tag) => tagFilters.add(tag.trim()));
+            session.complexity && complexityFilters.add(session.complexity.trim());
+            obj[doc.id] = session;
+          });
 
-          if (Array.isArray(data.speakers)) {
-            data.speakers.forEach((speakerId) => {
-              if (Array.isArray(objBySpeaker[speakerId])) {
-                objBySpeaker[speakerId].push(session);
-              } else {
-                objBySpeaker[speakerId] = [session];
-              }
-            });
-          }
-        });
-
-        dispatch({
-          type: FETCH_SESSIONS_SUCCESS,
-          payload: {
+          const payload = {
             obj,
             list,
             objBySpeaker,
-          },
+          };
+
+          dispatch({
+            type: FETCH_SESSIONS_SUCCESS,
+            payload,
+          });
+
+          dispatch({
+            type: SET_FILTERS,
+            payload: {
+              tags: [...tagFilters],
+              complexity: [...complexityFilters],
+            },
+          });
+
+          resolve(payload);
+        })
+        .catch((error) => {
+          dispatch({
+            type: FETCH_SESSIONS_FAILURE,
+            payload: { error },
+          });
+          reject(error);
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: FETCH_SESSIONS_FAILURE,
-          payload: { error },
-        });
-      });
+    });
   },
 
   fetchUserFeaturedSessions: (userId) => (dispatch) => {
@@ -430,68 +445,20 @@ const sessionsActions = {
 };
 
 const scheduleActions = {
-  fetchSchedule: () => (dispatch, getState) => {
+  fetchSchedule: () => (dispatch) => {
     dispatch({
       type: FETCH_SCHEDULE,
     });
 
-    const state = getState();
-    const speakersPromise = Object.keys(state.speakers.obj).length
-      ? Promise.resolve(state.speakers.obj)
-      : speakersActions.fetchList()(dispatch, getState);
-
-    const schedulePromise = new Promise((resolve, reject) => {
-      firebase.firestore()
-        .collection('schedule')
-        .orderBy('date', 'desc')
-        .get()
-        .then((snaps) => {
-          resolve(snaps.docs.map((s) => s.data()));
-        })
-        .catch(reject);
-    });
-
-    return Promise.all([speakersPromise, schedulePromise])
-      .then(([speakers, schedule]) => {
-        const scheduleWorker = new Worker('/scripts/schedule-webworker.js');
-
-        scheduleWorker.postMessage({
-          speakers,
-          sessions: getState().sessions.list.obj,
-          schedule,
+    return firebase.firestore()
+      .collection('generatedSchedule')
+      .get()
+      .then((snaps) => {
+        const scheduleDays = snaps.docs.map((snap) => snap.data());
+        dispatch({
+          type: FETCH_SCHEDULE_SUCCESS,
+          data: scheduleDays.sort((a, b) => a.date.localeCompare(b.date)),
         });
-
-        scheduleWorker.addEventListener('message', ({ data }) => {
-          dispatch({
-            type: FETCH_SCHEDULE_SUCCESS,
-            data: Object.values(data.schedule.days).sort((a, b) => a.date.localeCompare(b.date)),
-          });
-
-          const sessionsObjBySpeaker = {};
-          const sessionsList = Object.values(data.sessions);
-
-          sessionsList.forEach((session) => {
-            if (Array.isArray(session.speakers)) {
-              session.speakers.forEach((speaker) => {
-                if (Array.isArray(sessionsObjBySpeaker[speaker.id])) {
-                  sessionsObjBySpeaker[speaker.id].push(session);
-                } else {
-                  sessionsObjBySpeaker[speaker.id] = [session];
-                }
-              });
-            }
-          });
-          store.dispatch({
-            type: UPDATE_SESSIONS,
-            payload: {
-              obj: data.sessions,
-              list: sessionsList,
-              objBySpeaker: sessionsObjBySpeaker,
-            },
-          });
-
-          scheduleWorker.terminate();
-        }, false);
       })
       .catch((error) => {
         dispatch({

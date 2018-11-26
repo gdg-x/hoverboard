@@ -50,6 +50,10 @@
         cursor: not-allowed;
       }
 
+      .ticket-item[sold-out]:hover {
+        box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.07), 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+      }
+
       .header {
         padding: 24px 0 0;
         font-size: 16px;
@@ -231,7 +235,8 @@
       }
 
       _getDiscount(ticket) {
-        const maxPrice = this.tickets.find((ticket) => ticket.primary).price;
+        const primaryTicket = this.tickets.find((ticket) => ticket.primary);
+        const maxPrice = primaryTicket && primaryTicket.price;
         if (!ticket.regular || ticket.primary || ticket.soldOut || !maxPrice) return;
         const discount = 100 - parseInt(ticket.price) * 100 / parseInt(maxPrice);
         return ((discount) => `{$ ticketsBlock.save $}`)(Math.round(discount));
