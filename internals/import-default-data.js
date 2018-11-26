@@ -3,6 +3,9 @@ import data from '../docs/default-firebase-data.json';
 
 const importSpeakers = () => {
   const speakers = data.speakers;
+  if (!Object.keys(speakers).length) {
+    return false;
+  }
   console.log('\tImporting', Object.keys(speakers).length, 'speakers...');
 
   const batch = firestore.batch();
@@ -26,6 +29,9 @@ const importSpeakers = () => {
 
 const importPreviousSpeakers = () => {
   const previousSpeakers = data.previousSpeakers;
+  if (!Object.keys(previousSpeakers).length) {
+    return false;
+  }
   console.log('\tImporting', Object.keys(previousSpeakers).length, 'previous speakers...');
 
   const batch = firestore.batch();
@@ -49,6 +55,9 @@ const importPreviousSpeakers = () => {
 
 const importTeam = () => {
   const teams = data.team;
+  if (!Object.keys(teams).length) {
+    return false;
+  }
   console.log('\tImporting', Object.keys(teams).length, 'subteam...');
 
   const batch = firestore.batch();
@@ -76,6 +85,9 @@ const importTeam = () => {
 
 const importPartners = () => {
   const partners = data.partners;
+  if (!Object.keys(partners).length) {
+    return false;
+  }
   console.log('\tImporting partners...');
 
   const batch = firestore.batch();
@@ -83,7 +95,8 @@ const importPartners = () => {
   Object.keys(partners).forEach((docId) => {
     batch.set(
         firestore.collection('partners').doc(docId),
-        { title: partners[docId].title },
+        { title: partners[docId].title,
+          order: partners[docId].order },
     );
 
     partners[docId].logos.forEach((item, id) => {
@@ -103,6 +116,9 @@ const importPartners = () => {
 
 const importGallery = () => {
   const gallery = data.gallery;
+  if (!Object.keys(gallery).length) {
+    return false;
+  }
   console.log('\tImporting gallery...');
 
   const batch = firestore.batch();
@@ -126,6 +142,9 @@ const importGallery = () => {
 
 const importBlog = () => {
   const blog = data.blog;
+  if (!Object.keys(blog).length) {
+    return false;
+  }
   console.log('\tImporting blog...');
 
   const batch = firestore.batch();
@@ -146,6 +165,9 @@ const importBlog = () => {
 
 const importVideos = () => {
   const docs = data.videos;
+  if (!Object.keys(docs).length) {
+    return false;
+  }
   console.log('\tImporting videos...');
 
   const batch = firestore.batch();
@@ -169,6 +191,9 @@ const importVideos = () => {
 
 const importTickets = () => {
   const docs = data.tickets;
+  if (!Object.keys(docs).length) {
+    return false;
+  }
   console.log('\tImporting tickets...');
 
   const batch = firestore.batch();
@@ -192,6 +217,9 @@ const importTickets = () => {
 
 const importSessions = () => {
   const docs = data.sessions;
+  if (!Object.keys(docs).length) {
+    return false;
+  }
   console.log('\tImporting sessions...');
 
   const batch = firestore.batch();
@@ -212,6 +240,9 @@ const importSessions = () => {
 
 const importSchedule = () => {
   const docs = data.schedule;
+  if (!Object.keys(docs).length) {
+    return false;
+  }
   console.log('\tImporting schedule...');
 
   const batch = firestore.batch();

@@ -131,7 +131,7 @@ const ticketsActions = {
 };
 
 const _getPartnerItems = (groupId) => firebase.firestore()
-  .collection('partners').doc(groupId).collection('items')
+  .collection('partners').doc(groupId).collection('items').orderBy('order', 'asc')
   .get()
   .then((snaps) => snaps.docs
     .map((snap) => Object.assign({}, snap.data(), { id: snap.id }))
@@ -174,6 +174,7 @@ const partnersActions = {
 
     firebase.firestore()
       .collection('partners')
+      .orderBy('order', 'asc')
       .get()
       .then((snaps) => Promise.all(
         snaps.docs.map((snap) => Promise.all([
@@ -495,7 +496,7 @@ const galleryActions = {
 };
 
 const _getTeamMembers = (teamId) => firebase.firestore()
-  .collection('team').doc(teamId).collection('members')
+  .collection('team').doc(teamId).collection('members').orderBy('order', 'asc')
   .get()
   .then((snaps) => snaps.docs
     .map((snap) => Object.assign({}, snap.data(), { id: snap.id }))

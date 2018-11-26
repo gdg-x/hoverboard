@@ -16,9 +16,10 @@ Or you may use [Docker container for development](docker.md)
 1. Import initial data to the Firebase Database
     * Generate `serviceAccount.json` file (go to https://console.firebase.google.com/project/%YOUR_PROJECT_ID%/settings/serviceaccounts/adminsdk)
       - Go to https://console.firebase.google.com/project/%YOUR_PROJECT_ID%/settings/serviceaccounts/adminsdk
-      - Ensure that **Node.js** is selected and press **GENERATE NEW PRIVATE KEY** 
+      - Ensure that **Node.js** is selected and press **GENERATE NEW PRIVATE KEY**
       - Save the file as `serviceAccount.json` and to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
     * [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
+    * Run `npm install` or `yarn`
     * Run `npm run firestore:init` or `yarn firestore:init`
 
 
@@ -37,7 +38,6 @@ The diagram below is a brief summary of the directories within the project.
     |---functions/
     |---gulp-tasks/
     |---images/
-    |---scripts/
     |---internals/
     |---node_modules/
     |---scripts/
@@ -59,7 +59,7 @@ The diagram below is a brief summary of the directories within the project.
 *   `gulp-tasks/` contains gulp tasks moved from `gulpfile.js` to make the file cleaner.
 *   `images/` is for static images.
 *   `internals/` contains scripts that helps user to work with the project and it's data ([docs](./firebase-utils.md)).
-*   `node_moduler/` is the place of Node dependencies.
+*   `node_modules/` is the place of Node dependencies.
 *   `scripts/` is the place for JS scripts.
 *   `src/` is where you store all of your source code and do all of your development.
 *   `effects/` is where you keep your effects for instance `transparent-scroll.html` that helps to achieve transparent toolbar before the scroll.
@@ -75,11 +75,11 @@ The diagram below is a brief summary of the directories within the project.
    * `npm run serve` or `yarn serve`
 1. Deploy
    * `npm run deploy` or `yarn deploy`
-   
+
 *NOTE:* By default command using configurations from `/configs/development.json`.
 To serve locally or deploy the production app use `yarn serve:prod` and `yarn deploy:prod` respectively.
 
 ## Next steps
 
-Now that your Hoverboard is up and running, learn how to 
+Now that your Hoverboard is up and running, learn how to
 [configure app](configure-app.md) for your needs, or how to [deploy the app to the web](deploy.md).

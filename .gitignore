@@ -11,3 +11,6 @@ functions/lib/
 /appengine/dist/
 serviceAccount.json
 npm-debug.log
+firebase-debug.log
+.DS_Store
+.firebase/
