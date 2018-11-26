@@ -43,14 +43,9 @@
           margin: 64px auto 72px;
         }
 
-        .map-container {
-          height: 640px;
-          overflow: hidden;
-        }
-
         good-map {
           display: block;
-          height: 664px;
+          height: 640px;
         }
 
         .description-card {
@@ -68,16 +63,14 @@
     </style>
 
     <template is="dom-if" if="[[viewport.isTabletPlus]]">
-      <div class="map-container">
-        <good-map
-          id="map"
-          api-key="{$ googleMapApiKey $}"
-          latitude="{$ location.mapCenter.latitude $}"
-          longitude="{$ location.mapCenter.longitude $}"
-          zoom="{$ location.pointer.zoom $}"
-          map-options="[[options]]"
-        ></good-map>
-      </div>
+      <good-map
+        id="map"
+        api-key="{$ googleMapApiKey $}"
+        latitude="{$ location.mapCenter.latitude $}"
+        longitude="{$ location.mapCenter.longitude $}"
+        zoom="{$ location.pointer.zoom $}"
+        map-options="[[options]]"
+      ></good-map>
     </template>
 
     <div class="container" layout vertical end-justified fit$="[[viewport.isTabletPlus]]">
