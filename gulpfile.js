@@ -27,7 +27,6 @@ const config = {
   build: {
     rootDirectory: 'build',
   },
-  swPrecacheConfigPath: './sw-precache-config.js',
   templateData: [
     `${getConfigPath()}`,
     'data/settings',
@@ -36,7 +35,6 @@ const config = {
   tempDirectory: '.temp',
 };
 
-const swPrecacheConfig = require(config.swPrecacheConfigPath);
 const polymerJson = require(config.polymerJsonPath);
 const buildPolymerJson = {
   entrypoint: prependPath(config.tempDirectory, polymerJson.entrypoint),
@@ -71,6 +69,10 @@ function build() {
         return waitFor(compileStream);
       })
       .then(() => {
+        return gulp.src('./service-worker.js')
+          .pipe(gulp.dest(config.build.rootDirectory));
+      })
+      .then(() => {
         console.log(`Polymer building...`);
 
         const sourcesHtmlSplitter = new HtmlSplitter();
@@ -103,20 +105,6 @@ function build() {
         return waitFor(buildStream);
       })
       .then(() => {
-        console.log('Generating the Service Worker...');
-
-        return polymerBuild.addServiceWorker({
-          project: polymerProject,
-          buildRoot: prependPath(
-            config.build.rootDirectory,
-            config.tempDirectory
-          )
-            .replace('\\', '/'),
-          bundled: config.build.bundled,
-          swPrecacheConfig,
-        });
-      })
-      .then(() => {
         console.log('Normalizing...');
 
         const normalizeStream = normalize(config)
@@ -128,14 +116,6 @@ function build() {
           });
 
         return waitFor(normalizeStream);
-      })
-      .then(() => {
-        return gulp.src(prependPath(
-          config.build.rootDirectory,
-          'service-worker.js'
-        ))
-          .pipe(uglify())
-          .pipe(gulp.dest(config.build.rootDirectory));
       })
       .then(() => {
         console.log('Build complete!');
