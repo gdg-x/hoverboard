@@ -33,7 +33,7 @@ Papers related to this core idea might explore legal ramifications of treating d
 Papers related to this core idea might compare different immigration regimes and their socio-economic effects; propose novel mechanisms for migrant sponsorship; explore the relationship between migration and development; trace the history of current immigration regimes and discourses surrounding immigration, and consider legal and democratic frameworks for immigration reform. 
 
 4. Radical Democracy: As observers of political gerrymandering in the US know, the principle of one-person, one-vote does not necessarily lead to democratic outcomes. Imagine a world where political minorities could protect their most cherished interests at the ballot box without relying on the whims of judges, and compromises on sensitive issue could be hammered out transparently in the public square. If citizens were able to trade influence on issues they don’t care or know about for influence on the issues most important to them, the voting process itself could help create reasoned compromises among citizens.
-Papers related to this core idea may propose novel electoral designs, such as quadratic voting; assess the effects on societies and cities that have adopted such novel voting systems; explore the intellectual history of voting or forgotten thinkers who may help revitalize our intuitions about democratic institutions today.
+Papers related to this core idea may propose novel electoral designs, such as quadratic voting; assess the effects on societies and cities that have adopted such novel voting systems; explore the intellectual history of voting or forgotten thinkers and philosophical traditions that may help revitalize our intuitions about democratic institutions aand democracy in general today.
 
 These ideas are inspired by Eric Posner and Glen Weyl, Radical Markets (Princeton University Press, 2018). To learn more, please visit [their website](http://radicalmarkets.com).
 
@@ -49,7 +49,9 @@ These ideas are inspired by Eric Posner and Glen Weyl, Radical Markets (Princeto
 
 5. Please include a brief biography, alongside your abstract, including your full name, your current professional affiliation and position (if any), your contact details, including mailing and email address.  
 
-6. Please submit your abstract to our application portal, available here.
+6. Please submit your abstract on our [application form](https://goo.gl/forms/GhfYthCruzgcPZfA3).
+
+For further information, contact info@radicalxchange.org. A form to submit applications will be available on this page shortly. 
 
 
 
