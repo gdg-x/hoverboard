@@ -22,6 +22,7 @@
   "country": "Country",
   "time": "Time",
   "faq": "/data/faq.md",
+  "callForPapers": "/data/call-for-papers.md",
   "cod": "/data/cod.md",
   "footer": {
     "blog": "Blog"
