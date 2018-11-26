@@ -1,15 +1,15 @@
 {
   "basepath": "/",
-  "url": "https://sunny-tech-test.firebaseapp.com/",
+  "url": "https://sunnytechwebsite.firebaseapp.com/",
   "analytics": "UA-110450364-2",
   "prefix": "/",
   "firebase": {
-    "apiKey": "AIzaSyB_n7dYVRdCs0zQ5WrKE9nMEtTSURR0wh8",
-    "authDomain": "sunny-tech-test.firebaseapp.com",
-    "databaseURL": "https://sunny-tech-test.firebaseio.com",
-    "projectId": "sunny-tech-test",
-    "storageBucket": "sunny-tech-test.appspot.com",
-    "messagingSenderId": "578715049012"
+    "apiKey": "AIzaSyDGTE3sUI4j-juB1HCpa91b2JI0UIxtUmk",
+    "authDomain": "sunnytechwebsite.firebaseapp.com",
+    "databaseURL": "https://sunnytechwebsite.firebaseio.com",
+    "projectId": "sunnytechwebsite",
+    "storageBucket": "sunnytechwebsite.appspot.com",
+    "messagingSenderId": "728710060844"
   },
   "googleMapApiKey": "AIzaSyBa8D7jHmFlW5c6vq1wH0cgIQK-PYmgL-A"
 }
