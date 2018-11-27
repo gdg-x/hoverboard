@@ -8,7 +8,7 @@ service cloud.firestore {
       allow list;
 
       // Disallow writes
-      allow write: if false;
+      allow write: if true;
     }
 
     match /config/{config} {

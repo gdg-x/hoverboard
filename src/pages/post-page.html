@@ -43,6 +43,28 @@
         color: var(--primary-text-color);
       }
 
+      [slot="markdown-html"] a {
+        position: relative;
+      }
+      [slot="markdown-html"] a:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        /* z-index: -1; */
+        left: 0;
+        bottom: 0;
+        top: 75%;
+        opacity: .2;
+        background: #8259ce;
+
+      }
+
+      [slot="markdown-html"] a:hover:after {
+        content: "";
+        opacity: .5;
+      }
+
+
       blockquote {
         font-family: 'Amiri', serif;
         padding-left: 15px;
@@ -161,16 +183,53 @@
       th {
         text-align: center;
       }
+      
+      strong {
+        font-weight: 500;
+      }
 
+      em {
+        font-weight: 700;
+        font-style: italic;
+      }
+
+      .author-date {
+        color: #494949;
+      }
+
+      .author-date h4 {
+        font-style: italic;
+        font-weight: 200;
+        font-size: 1.2em;
+      }
+
+      .author {
+        max-width: 800px;
+        width: 90%;
+        margin: 1.5em auto 2em;
+        text-align: right;
+      }
+
+      .date {
+        margin: 0 0 1.5em;
+        text-align: center;
+      }
       @media (min-width: 640px) {
         [slot="markdown-html"] plastic-image {
           min-height: 400px;
         }
+        
+        [slot="markdown-html"] {
+        font-size: 18px;
+
+      }
 
         .suggested-posts {
           margin-top: 48px;
           padding-bottom: 36px;
         }
+
+
       }
 
     </style>
@@ -200,6 +259,9 @@
     </hero-block>
 
     <div class="container-narrow">
+        <div class="author-date author">
+            <h4>[[post.author]]</h4>
+          </div>
       <marked-element class="post" markdown="[[post.content]]">
         <div slot="markdown-html"></div>
       </marked-element>
