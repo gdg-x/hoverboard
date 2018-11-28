@@ -45,23 +45,22 @@
 
       [slot="markdown-html"] a {
         position: relative;
+        box-shadow: inset 0 -5px 0 #eee5ff;
       }
-      [slot="markdown-html"] a:after {
+      /* [slot="markdown-html"] a:after {
         content: "";
         position: absolute;
         width: 100%;
-        /* z-index: -1; */
         left: 0;
         bottom: 0;
         top: 75%;
         opacity: .2;
-        background: #8259ce;
+        background: #a07ce2;
+      } */
 
-      }
+      [slot="markdown-html"] a:hover {
 
-      [slot="markdown-html"] a:hover:after {
-        content: "";
-        opacity: .5;
+        box-shadow: inset 0 -5px 0 #c8b7e8;
       }
 
 
