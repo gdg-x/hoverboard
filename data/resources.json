@@ -76,7 +76,7 @@
   },
   "ticketsBlock": {
     "title": "Tickets",
-    "ticketsDetails": "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
+    "ticketsDetails": "Tickets are not for resale. IDs will be checked at the door. In line with RadicalxChange's values, these tickets are being sold to real unique humans (that's you!) not as commodities, so we want to make sure it is the inspired community members who bought the tickets and who we know will contribute to the event who are showing up with them.",
     "soldOut": "You missed it!",
     "notAvailableYet": "Not available yet",
     "save": "Save ${discount}% today"
