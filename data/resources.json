@@ -105,7 +105,7 @@
   },
   "ticketsBlock": {
     "title": "Billeterie",
-    "ticketsDetails": "Votre billet vous donne accès à toutes les conférences et déjeuners. L'hébergement n'est PAS inclus dans le prix du billet.",
+    "ticketsDetails": "Votre billet vous donne accès à toutes les conférences, déjeuners ainsi que la soirée networking. L'hébergement n'est PAS inclus dans le prix du billet.",
     "soldOut": "Vous l'avez manqué!",
     "notAvailableYet": "Pas encore disponible",
     "save": "Économisez ${discount}%"
