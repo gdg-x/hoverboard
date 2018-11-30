@@ -12,7 +12,7 @@ script:
 - yarn lint
 - echo "Building..."
 - if [ "$TRAVIS_BRANCH" == "develop" ]; then yarn build; fi
-- if [ "$TRAVIS_BRANCH" == "master" ]; then yarn build:prod; fi
+- if [ "$TRAVIS_BRANCH" == "master" ]; then yarn build; fi
 before_deploy:
 - echo "Deploying!"
 deploy:
@@ -20,7 +20,7 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
-  project: hoverboard-site-prod
+  project: hoverboard-site
   token:
     secure: zkSVHwRB/4O2Q17lXJUSTSq96tt5qswhYTlXoYLL8g/NxRdT70Syvp4SikjevSm+Y6Z3fiIdj2m/A5w4D0z0yQuipxL+LWt0+T/IbL3rodbi9q97w2Dpt3dZ+tgkQthPE3stx7CxZUslRnyYx2x+tGnjfpXFvjBARNWxEvng/hERJe+C/W7SDEn5P9HQp8a8qvfRQwKqrWDVzzaVFkhSt4foMeFFGhySYHcb3kmQ2z7lNnEdZpAO/IBgQGlFYv7Q0BFbQ4Bo7A71Hxvne4SRaOQ9cHLvrItMAUKLU9uDE4TObIJoMKXzCYOIscvuF/sgfTNN7849tIymQqKms/ya5jOIN1xyjqV9kdBDvBNSiWU0CgErZk2VL8PGWNEirZKETClw7tZ2OjNL4O0exSwSf8N6yDDVkWS6yCibqyY94KRFAEC8DPe18EwmdeE0e7u0ujm9z8/lWNTadMP5/O0820Ms++fIQRTo4RL8zWlvC9h2ACH9+omJxZY+bTrtkpGpvkFuaNB5QyBNM6hdDW8B+EepOe1lBXLeyGuiI746hDZU9UZdJQMX2Jqiohhl3yFmoFkwRZGUBfjAYbHjKmBe+2OGTkm0m5JgqEfFFRUkVy0PsRx2lNyX9AsQjYQzGWLNjutLwweootsDhrlEw3B2uB/WDID0/lsYDYF50abHRrk=
 - provider: firebase
