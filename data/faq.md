@@ -103,7 +103,7 @@ RadicalxChange is offering four types of scholarships this year: Radical Action 
  
  - **Student Scholarship**: Are you a student interested in the ideas shared within Radical Markets or the RadicalxChange Community? Young people will shape the future, and we believe these ideas will help build a brighter one. We do not want cost to prevent you from attending, so by proving that you currently attend a high school, university, or other institution of higher learning you can receive a highly discounted ticket. [Apply Here.](http://bit.ly/RadicalStudent)
  
- - **Community Organizer Scholarship**: If you have founded a local RadicalxChange chapter, or are a regular participant within a local chapter, you are eligible for this scholarship. This is the shortest application because most of the information about you will be verified externally by either the chapter founder (if you are a participant) or by the RadicalxChange chapter coordinator (if you are a founder).
+ - **Community Organizer Scholarship**: If you have founded a local RadicalxChange chapter, or are a regular participant within a local chapter, you are eligible for this scholarship. This is the shortest application because most of the information about you will be verified externally by either the chapter founder (if you are a participant) or by the RadicalxChange chapter coordinator (if you are a founder). [Apply Here.] (http://bit.ly/RadicalCommunity)
 
 #### Scholarship Process
 
