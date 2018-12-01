@@ -75,7 +75,7 @@
   },
   "ticketsBlock": {
     "title": "Tickets",
-    "ticketsDetails": "Tickets are non-transferable. For complete information on tickets and scholarships, please see our <a href='/about/#tickets'>About</a> page.",
+    "ticketsDetails": "Tickets are non-transferable. Prices will increase for general admission. For complete information on tickets and scholarships, please see our <a href='/about/#tickets'>About</a> page.",
     "soldOut": "You missed it!",
     "save": "Save ${discount}% today"
   },
