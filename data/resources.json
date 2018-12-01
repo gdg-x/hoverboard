@@ -11,7 +11,6 @@
   "emailUs": "Email us",
   "partnershipResources": "Partnership Resources",
   "eventResources": "Event Resources",
-  "buyTicket": "Buy ticket",
   "signIn": "Sign in",
   "signOut": "Sign out",
   "offlineMessage": "You can still work offline.",
@@ -78,7 +77,6 @@
     "title": "Tickets",
     "ticketsDetails": "Tickets are non-transferrable. For complete information on tickets and scholarships, please see our About page.",
     "soldOut": "You missed it!",
-    "notAvailableYet": "Not available yet",
     "save": "Save ${discount}% today"
   },
   "partnersBlock": {
@@ -142,7 +140,7 @@
   },
   "subscribeBlock": {
     "callToAction": {
-      "text": "We will be launching ticket sales on December 1. Check back then!",
+      "text": "Interested in staying engaged with our community? Subscribe here for updates.",
       "description": "Sign up for updates.",
       "label": "Subscribe"
     },

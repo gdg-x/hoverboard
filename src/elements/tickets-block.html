@@ -176,7 +176,7 @@
                 {$ ticketsBlock.soldOut $}
               </div>
               <paper-button primary hidden$="[[ticket.soldOut]]" disabled$="[[!ticket.available]]">
-                [[_getButtonText(ticket.available)]]
+                 [[ticket.buttonText]]
               </paper-button>
             </div>
           </a>
@@ -243,10 +243,6 @@
           e.preventDefault();
           e.stopPropagation();
         }
-      }
-
-      _getButtonText(available) {
-        return available ? '{$ buyTicket $}' : '{$ ticketsBlock.notAvailableYet $}';
       }
     }
 
