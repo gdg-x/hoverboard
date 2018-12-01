@@ -141,7 +141,7 @@
   "subscribeBlock": {
     "callToAction": {
       "text": "Interested in staying engaged with our community? Subscribe here for updates.",
-      "description": "Sign up for updates.",
+      "description": "",
       "label": "Subscribe"
     },
     "yourEmail": "Your email",
