@@ -183,8 +183,10 @@
         </template>
       </div>
 
-      <div class="additional-info">*{$ ticketsBlock.ticketsDetails $}</div>
-
+      <div class="additional-info">
+          <marked-element markdown="*{$ ticketsBlock.ticketsDetails $}">
+            <div slot="markdown-html"></div>
+          </marked-element>
     </div>
 
   </template>
