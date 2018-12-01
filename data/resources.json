@@ -12,7 +12,7 @@
   "partnershipResources": "Partnership Resources",
   "eventResources": "Event Resources",
   "buyTicket": "Achetez un billet",
-  "buyTicketTopRight": "Billeterie",
+  "buyTicketTopRight": "Billetterie",
   "cfpHeader": "Call For Paper",
   "cfpLink": "https://conference-hall.io/public/event/dWsbvnSTdg5v1pxwKhLM",
   "becomeSponsorMenu": "Devenir sponsor",
@@ -50,7 +50,7 @@
           "newTab": true
         },
         {
-          "name": "Billeterie",
+          "name": "Billetterie",
           "url": "https://www.billetweb.fr/sunny-tech-2019",
           "newTab": true
         }
@@ -104,7 +104,7 @@
     }
   },
   "ticketsBlock": {
-    "title": "Billeterie",
+    "title": "Billetterie",
     "ticketsDetails": "Votre billet vous donne accès à toutes les conférences, déjeuners ainsi que la soirée networking. L'hébergement n'est PAS inclus dans le prix du billet.",
     "soldOut": "Vous l'avez manqué!",
     "notAvailableYet": "Pas encore disponible",
