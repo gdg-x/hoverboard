@@ -105,7 +105,7 @@ RadicalxChange is offering four types of scholarships this year: Radical Action 
 
 #### Scholarship Process
 
-Scholarship applications do not correspond with regularly priced ticket waves and applications are currently live. Applications are accepted on a rolling basis, but we encourage you to apply as soon as possible. We will continue to process and award scholarships until all scholarship tickets have been allocated. We would love to provide scholarships to all those in need, but unfortunately funds are limited. Should we be unable to grant you a scholarship at this time, we hope you will apply again next year.
+Scholarship applications do not correspond with regularly priced ticket waves and applications are currently live. Applications are accepted on a rolling basis, but we encourage you to apply as soon as possible. We will continue to process and award scholarships until all scholarship tickets available have been allocated. We would love to provide scholarships to all those in need, but unfortunately the number of scholarship tickets we can offer is limited.
 
 Please direct all questions regarding scholarships to: [ticketing@radicalxchange.org](mailto:ticketing@radicalxchange.org)
 
