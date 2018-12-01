@@ -102,9 +102,9 @@
     "suggested": "Up next"
   },
   "latestPostsBlock": {
-    "title": "News",
+    "title": "Blog",
     "callToAction": {
-      "label": "View all news",
+      "label": "View all news on our blog",
       "link": "/blog/"
     }
   },
