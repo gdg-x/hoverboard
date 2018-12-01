@@ -80,7 +80,7 @@ Ideas and Research is a collection of experts and specialists. Rigorous, thought
 
 ### Tickets
 
-Check this section regularly for ticketing information. To purchase tickets through eventbrite, [click here.](https://www.eventbrite.com/e/radicalxchange-tickets-53060613724)
+Check this section regularly for ticketing information. To purchase tickets through eventbrite, **[click here.](https://www.eventbrite.com/e/radicalxchange-tickets-53060613724)**
 
 Early bird tickets will be available from December 1st at 5PM EST until December 15th or until they sell out. There is a limited number of tickets, so buy them as soon as you can! The price will increase for our first round of general admission tickets, which will go live on January 1st. 
 
