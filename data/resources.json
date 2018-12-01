@@ -52,7 +52,13 @@
           "name": "Radical Markets",
           "url": "http://radicalmarkets.com",
           "newTab": true
+        },
+        {
+          "name": "Contact our web team",
+          "url": "mailto:webdev.radicalxchange@gmail.com",
+          "newTab": true
         }
+
       ]
     }
   ],
