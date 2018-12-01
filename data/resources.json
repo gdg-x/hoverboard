@@ -76,7 +76,7 @@
   },
   "ticketsBlock": {
     "title": "Tickets",
-    "ticketsDetails": "For complete information on tickets and scholarships, please see our About page",
+    "ticketsDetails": "Tickets are non-transferrable. For complete information on tickets and scholarships, please see our About page.",
     "soldOut": "You missed it!",
     "notAvailableYet": "Not available yet",
     "save": "Save ${discount}% today"
