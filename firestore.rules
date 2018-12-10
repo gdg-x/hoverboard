@@ -97,6 +97,17 @@ service cloud.firestore {
       // Disallow writes
       allow write: if false;
     }
+    
+    match /generatedSchedule/{day} {
+      // Applies to single document read requests
+      allow get;
+
+      // Applies to queries and collection read requests
+      allow list;
+
+      // Disallow writes
+      allow write: if false;
+    }
 
     match /sessions/{session} {
       // Applies to single document read requests
@@ -109,7 +120,29 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    match /generatedSessions/{session} {
+      // Applies to single document read requests
+      allow get;
+
+      // Applies to queries and collection read requests
+      allow list;
+
+      // Disallow writes
+      allow write: if false;
+    }
+
     match /speakers/{speaker} {
+      // Applies to single document read requests
+      allow get;
+
+      // Applies to queries and collection read requests
+      allow list;
+
+      // Disallow writes
+      allow write: if false;
+    }
+
+    match /generatedSpeakers/{speaker} {
       // Applies to single document read requests
       allow get;
 

@@ -1,8 +1,9 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
+<link rel="import" href="./shared-styles.html">
 <link rel="import" href="./session-element.html">
 <link rel="import" href="../mixins/scroll-functions.html">
-<link rel="import" href="./shared-styles.html">
+<link rel="import" href="../mixins/utils-functions.html">
 
 <dom-module id="schedule-day">
   <template>
@@ -117,14 +118,20 @@
           <div
             class="session"
             style$="grid-area: [[session.gridArea]]"
-            layout vertical>
-            <template is="dom-repeat" items="[[session.items]]" as="subSession">
+            layout vertical
+          >
+            <template
+              is="dom-repeat"
+              items="[[_filterSessions(session.items, selectedFilters)]]"
+              as="subSession"
+            >
               <session-element
                 class="subsession"
                 day-name="[[name]]"
                 session="[[subSession]]"
                 user="[[user]]"
                 featured-sessions="[[featuredSessions]]"
+                query-params="[[queryParams]]"
               ></session-element>
             </template>
           </div>
@@ -139,7 +146,7 @@
   <script>
 
     // eslint-disable-next-line no-undef
-    class ScheduleDay extends ScrollFunctions(Polymer.Element) {
+    class ScheduleDay extends UtilsFunctions(ScrollFunctions(Polymer.Element)) {
       static get is() {
         return 'schedule-day';
       }
@@ -156,6 +163,8 @@
           featuredSessions: Object,
           onlyFeatured: Boolean,
           viewport: Object,
+          selectedFilters: Object,
+          queryParams: String,
         };
       }
 
@@ -196,6 +205,24 @@
 
       _isNotEmpty(sessionBlock) {
         return !!sessionBlock.items.length;
+      }
+
+      _filterSessions(sessions, selectedFilters) {
+        if (!selectedFilters) return sessions;
+        return sessions.filter((session) => {
+          return (
+            !selectedFilters.tag
+            || !selectedFilters.tag.length
+            || session.tags
+            && !!session.tags.filter((tag) =>
+              selectedFilters.tag.includes(this.generateClassName(tag))).length
+          ) && (
+            !selectedFilters.complexity
+            || !selectedFilters.complexity.length
+            || session.complexity
+            && selectedFilters.complexity.includes(this.generateClassName(session.complexity))
+          );
+        });
       }
     }
 
