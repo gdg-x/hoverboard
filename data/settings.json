@@ -1,28 +1,29 @@
 {
   "organizer": {
-    "name": "GDG Lviv",
+    "name": "GDG Winnipeg",
     "twitter": "gdglviv",
-    "blog": "https://medium.com/gdg-lviv",
-    "url": "http://lviv.gdg.org.ua/"
+    "blog": "",
+    "url": "https://www.meetup.com/GDG-Winnipeg/"
   },
-  "startDate": "2017-10-013T09:00:00+03:00",
-  "endDate": "2017-10-14T19:00:00+03:00",
+  "startDate": "2019-02-23T08:00:00-06:00",
+  "endDate": "2019-03-02T12:00:00-06:00",
   "webapp": {
     "shortName": "DevFest",
     "themeColor": "#673AB7",
     "backgroundColor": "#673AB7"
   },
   "dateFormat": {
-    "locale": "en-US"
+    "locale": "en-CA"
   },
-  "hashtag": "DevFest17",
-  "disabledSchedule": false,
-  "showSessionShortAbstract": true,
+  "hashtag": "DevFest19",
+  "disabledSchedule": true,
+  "showSessionShortAbstract": false,
   "navigation": [
     {
       "route": "home",
       "permalink": "/",
-      "label": "Home"
+      "label": "Home",
+      "enabled": true
     },
     {
       "route": "speakers",
@@ -105,7 +106,7 @@
     },
     "cod": {
       "title": "Code Of Conduct",
-      "metaDescription": "Lear more about our expectations for all those who participate in our community",
+      "metaDescription": "Learn more about our expectations for all those who participate in our community",
       "background": {
         "color": "#fff"
       },
@@ -114,10 +115,10 @@
   },
   "location": {
     "label": "Location",
-    "name": "Planeta kino",
+    "name": "TBD",
     "city": "Winnipeg",
     "short": "Winnipeg, Canada",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "address": "TBD",
     "pointer": {
       "latitude": 49.809841,
       "longitude": 23.972805,
@@ -127,7 +128,7 @@
       "latitude": 48,
       "longitude": 8
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": ""
   },
   "mediaQueries": {
     "xs": {
@@ -149,44 +150,44 @@
     "follow": [
       {
         "name": "meetup",
-        "url": "https://www.meetup.com/GDG-Lviv/events/244342635/"
+        "url": "https://www.meetup.com/GDG-Winnipeg/"
       },
       {
         "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
+        "url": ""
       },
       {
         "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
+        "url": ""
       },
       {
         "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
+        "url": ""
       },
       {
         "name": "youtube",
-        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "url": ""
       }
     ],
     "share": [
       {
         "name": "gplus",
-        "url": "https://plus.google.com/share?url="
+        "url": ""
       },
       {
         "name": "facebook",
-        "url": "https://www.facebook.com/sharer.php?u="
+        "url": ""
       },
       {
         "name": "twitter",
-        "url": "https://twitter.com/intent/tweet?text="
+        "url": ""
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
+  "mailto": "gdgwinnipeg@gmail.com",
   "mailchimp": {
-    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
-    "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
+    "url": "",
+    "name": ""
   },
   "signInProviders": {
     "providersData": [

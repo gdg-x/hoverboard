@@ -1673,7 +1673,7 @@
     "title" : "Program Committee"
   } ],
   "tickets" : [ {
-    "available" : true,
+    "available" : false,
     "currency" : "$",
     "ends" : "Oct 13",
     "info" : "Requires valid student/lecturer ID",
