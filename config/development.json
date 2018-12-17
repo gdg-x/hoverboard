@@ -4,12 +4,12 @@
   "analytics": "UA-43643469-8",
   "prefix": "/",
   "firebase": {
-    "apiKey": "AIzaSyCYaTy9OZ39GH7fLN5ysoPXzxhCone14MU",
-    "authDomain": "devfest-wpg.firebaseapp.com",
-    "databaseURL": "https://devfest-wpg.firebaseio.com",
-    "projectId": "devfest-wpg",
-    "storageBucket": "devfest-wpg.appspot.com",
-    "messagingSenderId": "1083195713896"
+    "apiKey": "AIzaSyDoqE8_S7pUKLsPZQtE19rvl_k4ljijTuY",
+    "authDomain": "devfest2019.firebaseapp.com",
+    "databaseURL": "https://devfest2019.firebaseio.com",
+    "projectId": "devfest2019",
+    "storageBucket": "devfest2019.appspot.com",
+    "messagingSenderId": "901227269892"
   },
   "googleMapApiKey": ""
 }
