@@ -72,6 +72,13 @@
                    autocomplete="off"
                    autofocus="false">
       </paper-input>
+      <paper-input id="thirdFieldInput"
+                   on-touchend="_focus"
+                   label="[[thirdFieldLabel]]"
+                   value="{{thirdFieldValue}}"
+                   autocomplete="off"
+                   autofocus="false">
+      </paper-input>
       <paper-input id="emailInput"
                    on-touchend="_focus"
                    label="{$ subscribeBlock.emailAddress $} *"
@@ -135,6 +142,7 @@
             type: Boolean,
             value: false,
           },
+          thirdFieldValue: String,
           secondFieldValue: String,
           firstFieldValue: String,
           initialHeight: Number,
@@ -142,6 +150,7 @@
           submitLabel: String,
           firstFieldLabel: String,
           secondFieldLabel: String,
+          thirdFieldLabel: String,
         };
       }
 
@@ -183,6 +192,7 @@
         this.submitLabel = data.submitLabel || ' {$ subscribeBlock.subscribe $}';
         this.firstFieldLabel = data.firstFieldLabel || '{$ subscribeBlock.firstName $}';
         this.secondFieldLabel = data.secondFieldLabel || '{$ subscribeBlock.lastName $}';
+        this.thirdFieldLabel = data.thirdFieldLabel || 'Country';
         this._prefillFields(data);
       }
 
@@ -198,6 +208,7 @@
           email: this.email,
           firstFieldValue: this.firstFieldValue,
           secondFieldValue: this.secondFieldValue,
+          thirdFieldValue: this.thirdFieldValue,
         });
       }
 
@@ -216,13 +227,17 @@
         this.validate = false;
         const firstField = this.shadowRoot.querySelector('#firstFieldInput');
         const secondField = this.shadowRoot.querySelector('#secondFieldInput');
+        const thirdField = this.shadowRoot.querySelector('#thirdFieldInput');
         const emailInput = this.shadowRoot.querySelector('#emailInput');
         firstField.value = userData ? userData.firstFieldValue : '';
         secondField.value = userData ? userData.secondFieldValue : '';
+        thirdField.value = userData ? userData.thirdFieldValue : '';
         firstField.focus();
         firstField.blur();
         secondField.focus();
         secondField.blur();
+        thirdField.focus();
+        thirdField.blur();
         emailInput.blur();
         emailInput.value = '';
         emailInput.invalid = false;

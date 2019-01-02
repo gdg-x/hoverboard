@@ -602,6 +602,7 @@ const subscribeActions = {
         email: data.email,
         firstName: data.firstFieldValue || '',
         lastName: data.secondFieldValue || '',
+        countryCode: data.thirdFieldValue || '',
       })
       .then(() => {
         dispatch({

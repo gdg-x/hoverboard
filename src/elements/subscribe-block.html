@@ -123,6 +123,10 @@
           };
         }
 
+        if (navigator.language) {
+          userData.thirdFieldValue = navigator.language.split('-')[1] || '';
+        }
+
         if (this.user.email) {
           this._subscribeAction(Object.assign({}, { email: this.user.email }, userData));
         } else {
@@ -131,8 +135,10 @@
             submitLabel: ' {$ subscribeBlock.subscribe $}',
             firstFieldLabel: '{$ subscribeBlock.firstName $}',
             secondFieldLabel: '{$ subscribeBlock.lastName $}',
+            thirdFieldLabel: 'Country',
             firstFieldValue: userData.firstFieldValue,
             secondFieldValue: userData.secondFieldValue,
+            thirdFieldValue: userData.thirdFieldValue,
             submit: (data) => this._subscribeAction(data),
           });
         }
