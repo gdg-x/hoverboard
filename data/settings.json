@@ -15,7 +15,6 @@
   },
   "hashtag": "RadicalxChange",
   "disabledSchedule": false,
-  "showSessionShortAbstract": true,
   "navigation": [
     {
       "route": "home",

@@ -8,23 +8,23 @@
       return {
         sessions: {
           type: Array,
-          statePath: 'sessions.list',
+          statePath: 'sessions.list.list',
         },
         sessionsMap: {
           type: Object,
-          statePath: 'sessions.obj',
+          statePath: 'sessions.list.obj',
         },
         sessionsBySpeaker: {
           type: Object,
-          statePath: 'sessions.objBySpeaker',
+          statePath: 'sessions.list.objBySpeaker',
         },
         sessionsFetching: {
           type: Boolean,
-          statePath: 'sessions.fetching',
+          statePath: 'sessions.list.fetching',
         },
         sessionsFetchingError: {
           type: Object,
-          statePath: 'sessions.fetchingError',
+          statePath: 'sessions.list.fetchingError',
         },
       };
     }
@@ -35,6 +35,14 @@
       if (!this.sessionsFetching && (!this.sessions || !this.sessions.length)) {
         this.dispatch(sessionsActions.fetchList());
       }
+    }
+
+    getSessionsBySpeaker(speakerId) {
+      if (this.sessionsBySpeaker) {
+        return this.sessionsBySpeaker[speakerId];
+      }
+
+      return null;
     }
   };
 </script>

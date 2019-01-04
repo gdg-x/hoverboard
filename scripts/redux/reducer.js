@@ -17,10 +17,6 @@ const uiReducer = (state = initialState.ui, action) => {
       return Object.assign({}, state, {
         heroSettings: Object.assign({}, state.heroSettings, action.value),
       });
-    case SET_ADD_TO_HOMESCREEN:
-      return Object.assign({}, state, {
-        addToHomescreen: action.value,
-      });
     default:
       return state;
   }
@@ -251,32 +247,40 @@ const sessionsReducer = (state = initialState.sessions, action) => {
   switch (action.type) {
     case FETCH_SESSIONS:
       return Object.assign({}, state, {
-        fetching: true,
-        fetchingError: null,
-        list: [],
-        obj: {},
-        objBySpeaker: {},
+        list: {
+          fetching: true,
+          fetchingError: null,
+          list: [],
+          obj: {},
+          objBySpeaker: {},
+        },
       });
 
     case FETCH_SESSIONS_FAILURE:
       return Object.assign({}, state, {
-        fetching: false,
-        fetchingError: action.payload.error,
+        list: {
+          fetching: false,
+          fetchingError: action.payload.error,
+        },
       });
 
     case FETCH_SESSIONS_SUCCESS:
       return Object.assign({}, state, {
-        fetching: false,
-        list: action.payload.list,
-        obj: action.payload.obj,
-        objBySpeaker: action.payload.objBySpeaker,
+        list: {
+          fetching: false,
+          list: action.payload.list,
+          obj: action.payload.obj,
+          objBySpeaker: action.payload.objBySpeaker,
+        },
       });
 
     case UPDATE_SESSIONS:
       return Object.assign({}, state, {
-        list: action.payload.list,
-        obj: action.payload.obj,
-        objBySpeaker: action.payload.objBySpeaker,
+        list: {
+          list: action.payload.list,
+          obj: action.payload.obj,
+          objBySpeaker: action.payload.objBySpeaker,
+        },
       });
 
     case FETCH_USER_FEATURED_SESSIONS:
@@ -403,15 +407,6 @@ const notificationsReducer = (state = initialState.notifications, action) => {
         status: action.status,
         token: action.token,
       });
-    default:
-      return state;
-  }
-};
-
-const filtersReducer = (state = initialState.filters, action) => {
-  switch (action.type) {
-    case SET_FILTERS:
-      return Object.assign({}, state, action.payload);
     default:
       return state;
   }

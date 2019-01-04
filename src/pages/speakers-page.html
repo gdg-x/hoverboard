@@ -4,7 +4,6 @@
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="../../bower_components/iron-location/iron-location.html">
 <link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
 
 <link rel="import" href="../mixins/utils-functions.html">
@@ -14,7 +13,6 @@
 <link rel="import" href="../elements/shared-styles.html">
 <link rel="import" href="../elements/content-loader.html">
 <link rel="import" href="../elements/previous-speakers-block.html">
-<link rel="import" href="../elements/filter-menu.html">
 
 <dom-module id="speakers-page">
   <template>
@@ -154,10 +152,8 @@
     <polymer-helmet
       title="{$ heroSettings.speakers.title $} | {$ title $}"
       description="{$ heroSettings.speakers.metaDescription $}"
-      active="[[_setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened)]]"
+      active="[[_setHelmetData(active, isDialogOpened)]]"
     ></polymer-helmet>
-
-    <iron-location query="{{queryParams}}"></iron-location>
 
     <app-route
       route="[[route]]"
@@ -177,12 +173,6 @@
 
     <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
-    <filter-menu
-      filters="[[_filters]]"
-      selected="[[_selectedFilters]]"
-      results-count="[[speakersToRender.length]]"
-    ></filter-menu>
-
     <content-loader
       class="container"
       card-padding="32px"
@@ -196,13 +186,9 @@
     ></content-loader>
 
     <div class="container">
-      <template
-        is="dom-repeat"
-        items="[[speakersToRender]]"
-        as="speaker"
-      >
+      <template is="dom-repeat" items="[[speakers]]" as="speaker">
         <a class="speaker card"
-           href$="[[speaker.link]]"
+           href$="/speakers/[[speaker.id]]/"
            ga-on="click"
            ga-event-category="speaker"
            ga-event-action="open details"
@@ -280,48 +266,34 @@
           route: Object,
           routeData: Object,
           active: Boolean,
-          queryParams: {
-            type: Object,
-            observer: '_paramsUpdated',
-          },
-          isSpeakerDialogOpened: {
+          isDialogOpened: {
             type: Object,
             statePath: 'dialogs.speaker.isOpened',
-          },
-          isSessionDialogOpened: {
-            type: Object,
-            statePath: 'dialogs.session.isOpened',
+            observer: '_dialogStatusChanged',
           },
           contentLoaderVisibility: {
             type: String,
             value: null,
           },
-          filters: {
-            type: Object,
-            statePath: 'filters',
-            observer: '_onFiltersLoad',
-          },
-          _selectedFilters: Object,
-          speakersToRender: Array,
         };
       }
 
       static get observers() {
         return [
           '_openSpeakerDetails(active, speakers, speakersMap, routeData.speakerId)',
-          '_speakersChanged(speakers, _selectedFilters)',
+          '_speakersChanged(speakers)',
         ];
       }
 
-      _speakersChanged(speakers, selectedFilters) {
+      _speakersChanged() {
         if (this.speakers && this.speakers.length) {
           this.contentLoaderVisibility = 'hidden';
-          const filters = selectedFilters && selectedFilters.tag ? selectedFilters.tag : [];
-          const updatedSpeakers = this._filterItems(speakers, filters)
-            .map((speaker) => Object.assign({}, speaker, {
-              link: `/speakers/${speaker.id}${this.queryParams ? `?${this.queryParams}` : ''}`,
-            }));
-          this.set('speakersToRender', updatedSpeakers);
+        }
+      }
+
+      _dialogStatusChanged(nextState, prevState) {
+        if (!nextState && prevState && this.active && this.routeData.speakerId) {
+          history.back();
         }
       }
 
@@ -331,37 +303,15 @@
             if (active && id) {
               const speakerData = speakersMap[id];
               speakerData && dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
-            } else {
-               this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
-               this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
+            } else if (this.isDialogOpened) {
+              dialogsActions.closeDialog(DIALOGS.SPEAKER);
             }
           });
         }
       }
 
-      _setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened) {
-        return active && !isSpeakerDialogOpened && !isSessionDialogOpened;
-      }
-
-      _onFiltersLoad(filters) {
-        this.set('_filters', [{
-          title: '{$ filters.tags $}',
-          key: 'tag',
-          items: filters.tags,
-        }]);
-      }
-
-      _paramsUpdated(queryParams) {
-        this.set('_selectedFilters', this.parseQueryParamsFilters(queryParams));
-      }
-
-      _filterItems(speakers, selectedFilters) {
-        return speakers.filter((speaker) => {
-          if (!selectedFilters || !selectedFilters.length) return true;
-          return speaker.tags
-            && !!speaker.tags.filter((tag) =>
-              selectedFilters.includes(this.generateClassName(tag))).length;
-        });
+      _setHelmetData(active, isDialogOpened) {
+        return active && !isDialogOpened;
       }
     }
 
