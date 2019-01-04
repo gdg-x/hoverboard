@@ -42,14 +42,5 @@ module.exports = {
         },
       },
     },
-    {
-      urlPattern: /https:\/\/maps\.googleapis\.com\/maps.*/,
-      handler: 'cacheFirst',
-      options: {
-        cache: {
-          name: 'google-maps-cache',
-        },
-      },
-    },
   ],
 };
