@@ -116,9 +116,8 @@
         margin-left: 6px;
       }
 
-      .bottom-drawer-link {
+      .buy-ticket {
         padding: 16px 24px;
-        cursor: pointer;
       }
 
       @media (min-width: 640px) {
@@ -140,6 +139,7 @@
       pattern="/:page"
       data="{{routeData}}"
       tail="{{subroute}}"
+      query-params="{{queryParams}}"
     ></app-route>
 
     <app-drawer-layout drawer-width="300px" force-narrow fullbleed>
@@ -164,30 +164,19 @@
             {% endfor %}
           </iron-selector>
 
-          <div>
-            <a
-              class="bottom-drawer-link"
-              on-tap="_onAddToHomescreen"
-              hidden$="[[_isAddToHomeScreenHidden(ui.addToHomescreen, viewport.isLaptopPlus)]]"
-            >
-              {$ addToHomeScreen.cta $}
-            </a>
-
-            <a
-              class="bottom-drawer-link"
-              href$="[[_getTicketUrl(tickets)]]"
-              target="_blank"
-              rel="noopener noreferrer"
-              on-tap="closeDrawer"
-              ga-on="click"
-              ga-event-category="ticket button"
-              ga-event-action="buy_click"
-              layout horizontal center
-            >
-              <span>{$ buyTicket $}</span>
-              <iron-icon icon="hoverboard:open-in-new"></iron-icon>
-            </a>
-          </div>
+          <a
+            class="buy-ticket"
+            href$="[[tickets.url]]"
+            target="_blank"
+            rel="noopener noreferrer"
+            ga-on="click"
+            ga-event-category="ticket button"
+            ga-event-action="buy_click"
+            layout horizontal center
+          >
+            <span>{$ buyTicket $}</span>
+            <iron-icon icon="hoverboard:open-in-new"></iron-icon>
+          </a>
         </div>
 
       </app-drawer>
@@ -222,6 +211,7 @@
             data-route="schedule"
             data-path="pages/schedule-page.html"
             route="[[subroute]]"
+            query-params="[[queryParams]]"
           ></schedule-page>
           <speakers-page
             data-route="speakers"
@@ -361,12 +351,14 @@
         super();
         Polymer.setPassiveTouchGestures(true);
         window.performance && performance.mark && performance.mark('hoverboard-app.created');
+        this._removeQueryParams = this._removeQueryParams.bind(this);
         this._toggleHeaderShadow = this._toggleHeaderShadow.bind(this);
         this._toggleDrawer = this._toggleDrawer.bind(this);
       }
 
       connectedCallback() {
         super.connectedCallback();
+        window.addEventListener('reset-query-params', this._removeQueryParams);
         window.addEventListener('element-sticked', this._toggleHeaderShadow);
         this.$.drawer.addEventListener('opened-changed', this._toggleDrawer);
         window.addEventListener('offline', () => {
@@ -379,6 +371,7 @@
 
       disconnectedCallback() {
         super.disconnectedCallback();
+        window.removeEventListener('reset-query-params', this._removeQueryParams);
         window.removeEventListener('element-sticked', this._toggleHeaderShadow);
         this.$.drawer.removeEventListener('opened-changed', this._toggleDrawer);
       }
@@ -440,37 +433,16 @@
         }
       }
 
+      _removeQueryParams() {
+        this.set('queryParams', null);
+      }
+
       _toggleHeaderShadow(e) {
         this.$.header.classList.toggle('remove-shadow', e.detail.sticked);
       }
 
       _toggleDrawer(e) {
         uiActions.toggleDrawer(e.detail.value);
-      }
-
-      _getTicketUrl(tickets) {
-        if (!tickets.list.length) return '';
-        const availableTicket = tickets.list.filter((ticket) => ticket.available)[0];
-        return availableTicket ? availableTicket.url : tickets.list[0].url;
-      }
-
-      _isAddToHomeScreenHidden(addToHomescreen, isTabletPlus) {
-        return isTabletPlus || !addToHomescreen;
-      }
-
-      _onAddToHomescreen() {
-        if (!this.ui.addToHomescreen) this.closeDrawer();
-        this.ui.addToHomescreen.prompt();
-        this.ui.addToHomescreen.userChoice
-          .then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-              ga('send', 'event', 'add_to_home_screen_prompt', 'accepted');
-            } else {
-              ga('send', 'event', 'add_to_home_screen_prompt', 'dismissed');
-            }
-            uiActions.setAddToHomeScreen(null);
-            this.closeDrawer();
-          });
       }
     }
 
