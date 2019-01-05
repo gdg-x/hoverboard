@@ -1,10 +1,12 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../bower_components/paper-dropdown-input/paper-dropdown-input.html">
 <link rel="import" href="../../../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
 <link rel="import" href="../../mixins/redux-mixin.html">
 <link rel="import" href="../shared-styles.html">
 <link rel="import" href="../hoverboard-icons.html">
+<link rel="import" href="../countries.html">
 
 <dom-module id="subscribe-dialog">
   <template>
@@ -32,7 +34,7 @@
         line-height: 1.5;
       }
 
-      paper-input {
+      paper-input, paper-dropdown-input {
         margin: 16px 32px 0;
       }
 
@@ -72,13 +74,26 @@
                    autocomplete="off"
                    autofocus="false">
       </paper-input>
-      <paper-input id="thirdFieldInput"
+      <!-- <paper-dropdown-input id="thirdFieldInput"
                    on-touchend="_focus"
                    label="[[thirdFieldLabel]]"
                    value="{{thirdFieldValue}}"
                    autocomplete="off"
                    autofocus="false">
-      </paper-input>
+      </paper-dropdown-input> -->
+      <paper-dropdown-input id="thirdFieldInput"
+                            on-touchend="_focus"
+                            label="[[thirdFieldLabel]]"
+                            items="[[countries]]"
+                            max-size="[[countriesLength]]"
+                            filter="[[filterCountries]]"
+                            value="{{thirdFieldValue}}">
+      <template>
+        <template is="dom-repeat" items="[[items]]" as="item">
+          <paper-item value="[[item.value]]">[[item.name]]</paper-item>
+        </template>
+      </template>
+    </paper-dropdown-input>
       <paper-input id="emailInput"
                    on-touchend="_focus"
                    label="{$ subscribeBlock.emailAddress $} *"
@@ -151,6 +166,28 @@
           firstFieldLabel: String,
           secondFieldLabel: String,
           thirdFieldLabel: String,
+          countries: {
+            type: Array,
+            // eslint-disable-next-line no-undef
+            value: countries,
+          },
+          countriesLength: {
+            type: Number,
+            // eslint-disable-next-line no-undef
+            value: countries.length,
+          },
+          filterCountries: {
+            type: Function,
+            value: function () {
+              return function (items, searchValue) {
+                const u = searchValue.toUpperCase();
+                const l = searchValue.toLowerCase();
+                return items.filter((item) =>
+                  item.value === u ||
+                  item.name.toLowerCase().includes(l));
+              };
+            },
+          },
         };
       }
 
