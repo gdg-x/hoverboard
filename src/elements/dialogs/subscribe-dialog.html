@@ -233,6 +233,12 @@
         this._prefillFields(data);
       }
 
+      _countryCodeForName(name) {
+        // eslint-disable-next-line no-undef
+        const item = countries.find((item) => item.name === name);
+        return item ? item.value : '';
+      }
+
       _subscribe() {
         const emailInput = this.shadowRoot.querySelector('#emailInput');
 
@@ -245,7 +251,7 @@
           email: this.email,
           firstFieldValue: this.firstFieldValue,
           secondFieldValue: this.secondFieldValue,
-          thirdFieldValue: this.thirdFieldValue,
+          thirdFieldValue: this._countryCodeForName(this.thirdFieldValue),
         });
       }
 
