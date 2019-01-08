@@ -27,14 +27,19 @@
       "label": "About"
     },
     {
+      "route": "speakers",
+      "permalink": "/speakers/",
+      "label": "Speakers"
+    },
+    {
       "route": "team",
       "permalink": "/team/",
       "label": "Team"
     },
     {
-      "route": "speakers",
-      "permalink": "/speakers/",
-      "label": "Speakers"
+      "route": "schedule",
+      "permalink": "/schedule/",
+      "label": "Schedule"
     },
     {
       "route": "blog",
@@ -66,6 +71,7 @@
         "color": "#FFF"
       },
       "fontColor": "#424242"
+
     },
     "previousSpeakers": {
       "title": "Previous Speakers",
@@ -74,6 +80,14 @@
         "color": "#FFF"
       },
       "fontColor": "#424242"
+    },
+    "schedule": {
+     "title": "Schedule",
+     "metaDescription": "Choose your sessions to visit",
+      "background": {
+	"color": "#fff"
+       },
+       "fontColor": "#424242"
     },
     "team": {
       "title": "Team",
