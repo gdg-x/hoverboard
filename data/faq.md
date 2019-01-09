@@ -108,7 +108,7 @@ Scholarship applications do not correspond with regularly priced ticket waves an
 Please direct all questions regarding scholarships to: [ticketing@radicalxchange.org](mailto:ticketing@radicalxchange.org)
   
 
-### AGENDA
+### Agenda
 
  
 Join us over three days to inspire and connect, learn and experience, and catalyze action as we convene RadicalxChange’s rapidly growing community of activists, artists, entrepreneurs and scholars to further explore the ideas of Radical Markets through keynote addresses, panels, and breakout sessions.
