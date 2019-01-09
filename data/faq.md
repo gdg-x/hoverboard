@@ -108,7 +108,7 @@ Scholarship applications do not correspond with regularly priced ticket waves an
 Please direct all questions regarding scholarships to: [ticketing@radicalxchange.org](mailto:ticketing@radicalxchange.org)
   
 
-## Agenda
+### Agenda
 
  
 Join us over three days to inspire and connect, learn and experience, and catalyze action as we convene RadicalxChange’s rapidly growing community of activists, artists, entrepreneurs and scholars to further explore the ideas of Radical Markets through keynote addresses, panels, and breakout sessions.
@@ -127,7 +127,7 @@ Breakout sessions will be devoted to academic panels, fireside chats, project sh
 Conference Agenda will feature the following speakers and sessions. Please check back for a full agenda as we continue to confirm speakers. For more information on each speaker and panelist, visit our [Speakers](https://radicalxchange.org/speakers/) page.
 
   
-### Keynote Addresses
+#### Keynote Addresses
 
  - **Margaret Levi**: Political Scientist and Director of the Center for Advanced Study in the Behavioral Sciences, Stanford University
  - **Vitalik Buterin**: co-founder of Ethereum and co-author of “Liberal Radicalism: A Flexible Design For Philanthropic Matching Funds”
@@ -138,7 +138,7 @@ Conference Agenda will feature the following speakers and sessions. Please check
  - **Jaron Lanier**: visionary technologist, writer, entrepreneur and musician
  - **Tristan Harris**: co-founder, Center for Humane Technology 
  
-### Panel Discussions  
+#### Panel Discussions  
 
 **`Economy`**
 
@@ -186,7 +186,7 @@ Conference Agenda will feature the following speakers and sessions. Please check
   
 **`Identity`**
 
-### Screenings
+#### Screenings
 
 *Bisbee ‘17* (dir. Robert Greene, 2018)
 
@@ -220,7 +220,7 @@ Conference Agenda will feature the following speakers and sessions. Please check
 > with the director.
 
 
-### Workshops, Project Showcases, Design Sessions
+#### Workshops, Project Showcases, Design Sessions
 
   
 
