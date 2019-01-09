@@ -108,13 +108,15 @@ Scholarship applications do not correspond with regularly priced ticket waves an
 Please direct all questions regarding scholarships to: [ticketing@radicalxchange.org](mailto:ticketing@radicalxchange.org)
   
 
-### Agenda
+## Agenda
 
  
 Join us over three days to inspire and connect, learn and experience, and catalyze action as we convene RadicalxChange’s rapidly growing community of activists, artists, entrepreneurs and scholars to further explore the ideas of Radical Markets through keynote addresses, panels, and breakout sessions.
-|**Friday, March 22, 2019**  | **Saturday, March 23, 2019** | **Sunday, March 24, 2019**
-|--|--| --|
-| *Day 1: Inspire + Connect* | *Day 2: Learn + Experience* | *Day 3: Catalyze Action* |
+**Friday, March 22, 2019**: *Day 1: Inspire + Connect* 
+
+**Saturday, March 23, 2019**: *Day 2: Learn + Experience*
+
+**Sunday, March 24, 2019**: *Day 3: Catalyze Action*
   
 Breakout sessions will be devoted to academic panels, fireside chats, project showcases workshops and discussions on the following themes:
  
@@ -126,20 +128,14 @@ Conference Agenda will feature the following speakers and sessions. Please check
   
 #### Keynote Addresses
 
-- **Margaret Levi**, Political Scientist and Director of the Center for Advanced Study in the Behavioral Sciences, Stanford University
-     
--  **Vitalik Buterin**, co-founder of Ethereum and co-author of “Liberal Radicalism: A Flexible Design For Philanthropic Matching Funds”
-    
-- **Yvonne Adhiambo Owuor**, Award winning author of the novel Dust and Weight of Whispers, winner of the Caine Prize for African Writing and Jomo Kenyatta Prize for Literature, formerly executive director of the Zanzibar International Film Festival
-     
-- **Natalia Olson-Urtecho**, Co-Founder, Chief Innovation & Strategy Officer, The Disruptive Factory in conversation with Rahilla Zafar, Managing Director, ConsenSys
-        
-- **James A. Evans**, Director of Knowledge Lab and Professor of Sociology, University of Chicago"Towards continuous market mechanisms
+ - **Margaret Levi**: Political Scientist and Director of the Center for Advanced Study in the Behavioral Sciences, Stanford University
+ - **Vitalik Buterin**: co-founder of Ethereum and co-author of “Liberal Radicalism: A Flexible Design For Philanthropic Matching Funds”
+ - **Yvonne Adhiambo Owuor**: Award winning author of the novel Dust and Weight of Whispers, winner of the Caine Prize for African Writing and Jomo Kenyatta Prize for Literature, formerly executive director of the Zanzibar International Film Festival
+ - **Natalia Olson-Urtecho**: Co-Founder, Chief Innovation & Strategy Officer, The Disruptive Factory in conversation with Rahilla Zafar, Managing Director, ConsenSys
+ - **James A. Evans**: Director of Knowledge Lab and Professor of Sociology, University of Chicago"Towards continuous market mechanisms
    that mobilize private property, public decisions, and everything in between”
-     
-- **Jaron Lanier**, visionary technologist, writer, entrepreneur and musician
-      
-- **Tristan Harris**, co-founder, Center for Humane Technology 
+ - **Jaron Lanier**: visionary technologist, writer, entrepreneur and musician
+ - **Tristan Harris**: co-founder, Center for Humane Technology 
  
 #### Panel Discussions  
 
