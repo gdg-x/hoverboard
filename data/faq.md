@@ -112,6 +112,7 @@ Please direct all questions regarding scholarships to: [ticketing@radicalxchange
 
  
 Join us over three days to inspire and connect, learn and experience, and catalyze action as we convene RadicalxChange’s rapidly growing community of activists, artists, entrepreneurs and scholars to further explore the ideas of Radical Markets through keynote addresses, panels, and breakout sessions.
+
 **Friday, March 22, 2019**: *Day 1: Inspire + Connect* 
 
 **Saturday, March 23, 2019**: *Day 2: Learn + Experience*
@@ -126,7 +127,7 @@ Breakout sessions will be devoted to academic panels, fireside chats, project sh
 Conference Agenda will feature the following speakers and sessions. Please check back for a full agenda as we continue to confirm speakers. For more information on each speaker and panelist, visit our [Speakers](https://radicalxchange.org/speakers/) page.
 
   
-#### Keynote Addresses
+### Keynote Addresses
 
  - **Margaret Levi**: Political Scientist and Director of the Center for Advanced Study in the Behavioral Sciences, Stanford University
  - **Vitalik Buterin**: co-founder of Ethereum and co-author of “Liberal Radicalism: A Flexible Design For Philanthropic Matching Funds”
@@ -137,32 +138,24 @@ Conference Agenda will feature the following speakers and sessions. Please check
  - **Jaron Lanier**: visionary technologist, writer, entrepreneur and musician
  - **Tristan Harris**: co-founder, Center for Humane Technology 
  
-#### Panel Discussions  
+### Panel Discussions  
 
 **`Economy`**
 
 *Competition Policy in Global Perspective*
 
-- **Fiona Scott Morton**, Theodore Nierenberg Professor of Economics at the Yale University School of Management
-    
-- **Juliana Oliveira Domingues**, Professor of Economic Law, Universidade de São Paulo, Faculdade de Direito de Ribeirão Preto
-    
-- **Andrea Butelmann**, Director of the Masters in Applied Economics and Public Policy (MAPE), Universidad Alberto Hurtado, Santiago de Chile, Chile and former minister of the tribunal for the Defense of Free Competition; Chief of the Market Development Division at the Ministry of Economy and President of the Central Anti-Monopoly Preventive Commission for Chile
-    
-- **Cristina Caffarra**, Vice President, Head of European Competition Practice, Charles River Associates
-    
-- Moderator: **Glen Weyl**, Principal Research, Microsoft Research and Chairman, RadicalxChange Foundation
-    
+ - **Fiona Scott Morton**: Theodore Nierenberg Professor of Economics at the Yale University School of Management
+ - **Juliana Oliveira Domingues**: Professor of Economic Law, Universidade de São Paulo, Faculdade de Direito de Ribeirão Preto
+ - **Andrea Butelmann**: Director of the Masters in Applied Economics and Public Policy (MAPE), Universidad Alberto Hurtado, Santiago de Chile, Chile and former minister of the tribunal for the Defense of Free Competition; Chief of the Market Development Division at the Ministry of Economy and President of the Central Anti-Monopoly Preventive Commission for Chile
+ - **Cristina Caffarra**: Vice President, Head of European Competition Practice, Charles River Associates
+ - Moderator: **Glen Weyl**, Principal Research, Microsoft Research and Chairman, RadicalxChange Foundation
 
 *New Directions for Economic Development in the Global South*
 
-- **Mwiya Musokotwane**, CEO, Thebe Investment Management, Zambia
-    
-- **Tamara Winter**, Center for Innovative Governance Research and Mercatus Center at George Mason University
-    
-- **Michael Matheson Miller**, Research Fellow at The Acton Institute and Director and Producer of Poverty, Inc. (2014), an award-winning documentary on the global poverty industrial complex
-    
-- Moderator: **Ananya Chakravarti**, Assistant Professor of History, Georgetown University and Board Member, RadicalxChange Foundation
+ - **Mwiya Musokotwane**:CEO, Thebe Investment Management, Zambia
+ - **Tamara Winter**:  Center for Innovative Governance Research and Mercatus Center at George Mason University
+ - **Michael Matheson Miller**: Research Fellow at The Acton Institute and Director and Producer of Poverty, Inc. (2014), an award-winning documentary on the global poverty industrial complex
+ - Moderator: **Glen Weyl**, **Ananya Chakravarti**, Assistant Professor of History, Georgetown University and Board Member, RadicalxChange Foundation
 
 **`Politics`**
   
@@ -170,28 +163,21 @@ Conference Agenda will feature the following speakers and sessions. Please check
  
 *Uniting the World’s Workers*
 
-- **Katie Benton-Cohen**, Associate Professor of History, Georgetown University, “Inventing the Immigration Problem: The Dillingham Commission and Its Legacy”
-    
-- **Md Mizanur Rahman**, Associate Professor of Gulf Studies, Qatar University, “South-South Migration”
- 
+ - **Katie Benton-Cohen**: Associate Professor of History, Georgetown University, “Inventing the Immigration Problem: The Dillingham Commission and Its Legacy”
+ - **Md Mizanur Rahman**: Associate Professor of Gulf Studies, Qatar University, “South-South Migration”
 
 *Improving Cities*
 
-- **Jake Auchincloss**, City Councilor, Newton, MA
-    
-- Additional panelists TBA
-
+ - **Jake Auchincloss**:  City Councilor, Newton, MA
+ - Additional panelists TBA
   
 **`Collective Action`** 
 
 *Building the RadicalxChange Movement*
 
-- **Nathan Schneider**, Journalist and Assistant Professor of Media Studies, University of Colorado, Boulder
-    
-- **Marcia Chatelain**, Provost’s Distinguished Associate Professor of History and African American Studies, Georgetown University
-    
-- Facilitated by **Mona Hamdy**, Teaching Fellow, Harvard University
-    
+ - **Nathan Schneider**: Journalist and Assistant Professor of Media Studies, University of Colorado, Boulder
+ - **Marcia Chatelain**: Provost’s Distinguished Associate Professor of History and African American Studies, Georgetown University
+ - Facilitated by **Mona Hamdy**, Teaching Fellow, Harvard University  
  
 **Zooko Wilcox**, CEO and Co-founder of Zcash, will share his experiences in multiple techno - activism communities over the decades
 
@@ -200,7 +186,7 @@ Conference Agenda will feature the following speakers and sessions. Please check
   
 **`Identity`**
 
-#### Screenings
+### Screenings
 
 *Bisbee ‘17* (dir. Robert Greene, 2018)
 
@@ -234,7 +220,7 @@ Conference Agenda will feature the following speakers and sessions. Please check
 > with the director.
 
 
-#### Workshops, Project Showcases, Design Sessions
+### Workshops, Project Showcases, Design Sessions
 
   
 
