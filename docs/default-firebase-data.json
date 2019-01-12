@@ -40,7 +40,60 @@
     "test" : { },
     "users" : { }
   },
-  "partners" : [ {
+  "partners" : [ 
+    {
+      "logos" : [ {
+        "order" : 0,
+        "logoUrl" : "../images/logos/maif.png",
+        "name" : "MAIF Horizon",
+        "url" : "https://www.maif.fr/"
+      } ],
+      "order" : 0,
+      "title" : "Platinium"
+    },
+    {
+      "logos" : [ {
+        "order" : 0,
+        "logoUrl" : "../images/logos/teads.jpg",
+        "name" : "Teads",
+        "url" : "https://www.teads.tv/"
+      },
+      {
+        "order" : 1,
+        "logoUrl" : "../images/logos/apside.png",
+        "name" : "Apside",
+        "url" : "https://www.apside.com/"
+      } ],
+      "order" : 1,
+      "title" : "Gold"
+    },
+    {
+      "logos" : [ {
+        "order" : 0,
+        "logoUrl" : "../images/logos/sequoiasoft.png",
+        "name" : "Sequoiasoft",
+        "url" : "https://www.sequoiasoft.com/"
+      },
+      {
+        "order" : 1,
+        "logoUrl" : "../images/logos/agysoft.jpeg",
+        "name" : "Agysoft",
+        "url" : "https://www.agysoft.fr/"
+      } ],
+      "order" : 2,
+      "title" : "Silver"
+    },
+    {
+      "logos" : [ {
+        "order" : 0,
+        "logoUrl" : "../images/logos/tellmeplus.jpg",
+        "name" : "TellMePlus",
+        "url" : "https://www.tellmeplus.com/"
+      } ],
+      "order" : 3,
+      "title" : "Bronze"
+    },
+    {
     "logos" : [ {
       "order" : 0,
       "logoUrl" : "../images/logos/mth.png",
