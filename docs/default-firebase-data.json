@@ -1666,7 +1666,7 @@
     "starts" : "",
     "url" : "https://www.billetweb.fr/sunny-tech-2019"
   }, {
-    "available" : false,
+    "available" : true,
     "currency" : "€",
     "ends" : "",
     "inDemand" : true,
