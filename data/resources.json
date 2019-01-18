@@ -81,13 +81,13 @@
   },
   "ticketsBlock": {
     "title": "Tickets",
-    "ticketsDetails": "Tickets are non-transferable. Prices will increase for general admission. For complete information on tickets and scholarships, please see our <a href='/about/#tickets'>About</a> page.",
+    "ticketsDetails": "Tickets are non-transferable. Prices will increase for General Admission 2. For complete information on tickets and scholarships, please see our <a href='/about/#tickets'>About</a> page.",
     "soldOut": "You missed it!",
     "save": "Save ${discount}% today"
   },
   "partnersBlock": {
     "title": "Partners",
-    "button": "Become a partner or donor",
+    "button": "Become a partner",
     "form": {
       "title": "If you send us your details, we will reach out about becoming a partner or donor.",
       "submitLabel": "Submit",
