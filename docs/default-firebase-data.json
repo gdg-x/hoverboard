@@ -681,24 +681,20 @@
   "speakers" : {},
   "team" : [ {
     "members" : [ {
-      "name" : "Oleh Zasadnyy",
+      "name" : "Joao Squillace Teixeira",
       "photo" : "/images/people/oleh_zasadnyy.jpg",
-      "photoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/oleh_zasadnyy.jpg",
+      "photoUrl" : "https://avatars0.githubusercontent.com/u/1086713?s=460&v=4",
       "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+OlehZasadnyy",
-        "name" : "Google+"
-      }, {
         "icon" : "facebook",
-        "link" : "https://www.facebook.com/oleh.zasadnyy",
+        "link" : "https://www.facebook.com/squillace91",
         "name" : "Facebook"
       }, {
         "icon" : "twitter",
-        "link" : "https://twitter.com/ozasadnyy",
+        "link" : "https://twitter.com/zzeks",
         "name" : "Twitter"
       }, {
         "icon" : "website",
-        "link" : "http://o.zasadnyy.com/",
+        "link" : "http://leveled.co",
         "name" : "Blog"
       } ],
       "order" : 0,
@@ -866,15 +862,15 @@
   } ],
   "tickets" : [ {
     "available" : true,
-    "currency" : "$",
-    "ends" : "Jun 30",
+    "currency" : "$0",
+    "ends" : "Fev 22",
     "inDemand" : true,
     "info" : "Or first 200 tickets",
     "name" : "Early Bird",
     "price" : 120,
     "regular" : true,
     "soldOut" : false,
-    "starts" : "Feb 7",
+    "starts" : "Jan 30",
     "url" : "https://goo.gl/forms/P4iYUfFaOoXGMHIN2"
   } ],
   "triggers" : {
