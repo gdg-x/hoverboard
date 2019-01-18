@@ -196,6 +196,7 @@
       <div class="title">{$ followUs $} </div>
       <ul class="nav-inline">
         {% for socFollow in socialNetwork.follow %}
+        {% if socFollow.url %}
           <li>
             <a href="{$ socFollow.url $}"
                 target="_blank"
@@ -207,6 +208,7 @@
               <paper-icon-button icon="hoverboard:{$ socFollow.name $}"></paper-icon-button>
             </a>
           </li>
+        {% endif %}
         {% endfor %}
       </ul>
     </div>

@@ -160,7 +160,9 @@
             role="navigation"
           >
             {% for nav in navigation %}
+            {% if nav.enabled %}
             <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer">{$ nav.label $}</a>
+            {% endif %}
             {% endfor %}
           </iron-selector>
 
@@ -184,7 +186,7 @@
               ga-event-action="buy_click"
               layout horizontal center
             >
-              <span>{$ buyTicket $}</span>
+              <span>{$ reserveTicket $}</span>
               <iron-icon icon="hoverboard:open-in-new"></iron-icon>
             </a>
           </div>

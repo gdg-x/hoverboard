@@ -11,8 +11,7 @@
   "emailUs": "Email us",
   "partnershipResources": "Partnership Resources",
   "eventResources": "Event Resources",
-  "buyTicket": "Buy ticket",
-  "signIn": "Sign in",
+  "reserveTicket": "Call for Speakers",
   "signOut": "Sign out",
   "viewHighlights": "View Highlights",
   "offlineMessage": "You can still work offline.",
@@ -260,7 +259,7 @@
     "blocks": [
       {
         "title": "Organizer",
-        "description": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
+        "description": "<a href='https://www.meetup.com/GDG-Winnipeg/' target='_blank'>GDG Winnipeg</a> is made by 5 volunteers that are passionate about technology. See our team in the link below",
         "callToAction": {
           "label": "Open team page",
           "link": "/team"
@@ -268,7 +267,7 @@
       },
       {
         "title": "What is GDG?",
-        "description": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion",
+        "description": "Google Developers Group (GDG)  are local communities of developers around the world interested in creating and sharing experiences about technology",
         "callToAction": {
           "label": "Read more",
           "link": "https://developers.google.com/groups/",
