@@ -28,7 +28,8 @@
     {
       "route": "speakers",
       "permalink": "/speakers/",
-      "label": "Speakers"
+      "label": "Speakers",
+      "enabled":true
     },
     {
       "route": "schedule",
@@ -66,16 +67,8 @@
     },
     "speakers": {
       "title": "Speakers",
-      "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "background": {
-        "color": "#FFF"
-      },
-      "fontColor": "#424242"
-    },
-    "previousSpeakers": {
-      "title": "Previous Speakers",
-      "metaDescription": "Check who was with us last years",
+      "metaDescription": "Hear from the Partners, and Guest Speakers who are building the future of tech and cloud. Check back often as we add more speakers, including our customers and partners.",
+      "description": "Hear from the Partners, and Guest Speakers who are building the future of tech and cloud. Check back often as we add more speakers, including our customers and partners.",
       "background": {
         "color": "#FFF"
       },
@@ -223,9 +216,6 @@
     },
     "speakers": {
       "itemsCount": 4
-    },
-    "previousSpeakers": {
-      "itemsCount": 6
     },
     "tickets": {
       "itemsCount": 0

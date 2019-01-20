@@ -678,7 +678,184 @@
       "title" : "TBD"
     }
   },
-  "speakers" : {},
+  "speakers" : {
+    "leonardo_miranda" : {
+      "bio" : "I am a Lead/Architect Cloud Devops/Systems Engineer. Working with infrastructure and managing servers for over 16+ years. Passionate about Open Source, Linux and Computers. My expertise are based on four skill sets: Coding and Scripting, Process re-engineering, Systems and IT Operations and Collaboration with others (Teamwork). \n\n Huge experience with: SaaS, IaaS and PaaS environments. Lover of artificial technology, deep learning, data scientist, cloud servers and technology evangelist. Inspire and Motivate, if you are motivating someone to become someone better, congratulations! If you're not, you're wasting your time!",
+      "company" : "SkipTheDishes",
+      "companyLogo" : "/images/logos/gdg-lviv.svg",
+      "companyLogoUrl" : "https://cdn.shopify.com/s/files/1/2804/1892/files/1000x300-Primary-Red-RGB.png?v=1527781272",
+      "country" : "Winnipeg, Canada",
+      "featured" : true,
+      "name" : "Leonardo Miranda Nunes",
+      "photo" : "/images/people/adrian_kajda.jpg",
+      "photoUrl" : "https://media.licdn.com/dms/image/C4D03AQFlCxiSS6oR4Q/profile-displayphoto-shrink_200_200/0?e=1553731200&v=beta&t=w_UGliycnohG5kLk8BU1oGJoRx3nYDLgDkQqKHkXcCg",
+      "shortBio" : "I am a Lead/Architect Cloud Devops/Systems Engineer. Working with infrastructure and managing ...",
+      "socials" : [ {
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/leonardomn/",
+        "name" : "Linkedin"
+      } ],
+      "order" : 0,
+      "title" : "Lead Cloud DevOps Engineer"
+    },
+    "petterson_andrade" : {
+      "bio" : "What’s up, I’m Petterson. I’m a Brazilian living in Winnipeg, Manitoba, Canada. I am Computer Scientist focused on software architecture and software engineering.",
+      "company" : "SkipTheDishes",
+      "companyLogo" : "/images/logos/gdg-lviv.svg",
+      "companyLogoUrl" : "https://cdn.shopify.com/s/files/1/2804/1892/files/1000x300-Primary-Red-RGB.png?v=1527781272",
+      "country" : "Winnipeg, Canada",
+      "featured" : true,
+      "name" : "Petterson De Andrade",
+      "photo" : "/images/people/adrian_kajda.jpg",
+      "photoUrl" : "https://aboutme.imgix.net/background/users/p/e/t/pett4j_1547065992_855.jpg?q=40&dpr=2&auto=format&fit=max&w=600&h=800",
+      "shortBio" : "What’s up, I’m Petterson. I’m a Brazilian living in Winnipeg, Manitoba, Canada...",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/pett4j",
+        "name" : "Twitter"
+      } ],
+      "order" : 1,
+      "title" : "Computer Scientist"
+    },
+    "matheus_schettino" : {
+      "bio" : "Matheus Schettino is passionate developer, musician and life enthusiast. He has been working with front end development since before jQuery and he's always looking forward to helping everyone to achieve the best experience when writing code.",
+      "company" : "SkipTheDishes",
+      "companyLogo" : "/images/logos/gdg-lviv.svg",
+      "companyLogoUrl" : "https://cdn.shopify.com/s/files/1/2804/1892/files/1000x300-Primary-Red-RGB.png?v=1527781272",
+      "country" : "Winnipeg, Canada",
+      "featured" : true,
+      "name" : "Matheus Schettino",
+      "photo" : "/images/people/adrian_kajda.jpg",
+      "photoUrl" : "",
+      "shortBio" : "Matheus Schettino is passionate developer, musician and life enthusiast...",
+      "socials" : [],
+      "order" : 2,
+      "title" : "Software Developer"
+    },
+    "moe_touban" : {
+      "bio" : "Moe finds it particularly awkward to write about himself in the third person. But once he gets past the awkwardness, he points out that he's a Mobile Software Developer on the CourierCore team at SkipTheDishes. He's been doing Android for a good long time now and is really happy that with Kotlin he can worry less on shipping bugs to prod.",
+      "company" : "SkipTheDishes",
+      "companyLogo" : "/images/logos/gdg-lviv.svg",
+      "companyLogoUrl" : "https://cdn.shopify.com/s/files/1/2804/1892/files/1000x300-Primary-Red-RGB.png?v=1527781272",
+      "country" : "Winnipeg, Canada",
+      "featured" : true,
+      "name" : "Moe Touban",
+      "photo" : "/images/people/carmen_popovicu.jpg",
+      "photoUrl" : "https://i.ibb.co/Ms27t8v/IMG-20171102-173540.jpg",
+      "shortBio" : "Moe finds it particularly awkward to write about himself in the third person...",
+      "socials" : [],
+      "order" : 3,
+      "title" : "Software Engineer"
+    },
+    "cleo_espiritu" : {
+      "badges" : [ {
+        "description" : "Google Developers Expert",
+        "link" : "https://developers.google.com/experts/people/cleo-espiritu",
+        "name" : "gde"
+      } ],
+      "bio" : "Cleo holds an MSc in computing science from the University of Alberta and has experience working in various roles, such as user experience designer, software developer, business analyst, and system designer. Her passion for designing and developing software that improves end-users' lives led her to champion and educate on the use of App Maker, Apps Script and G-Suite for people to transform the way they work.",
+      "company" : "",
+      "companyLogo" : "",
+      "companyLogoUrl" : "",
+      "country" : "Edmonton, Canada",
+      "featured" : true,
+      "name" : "Cleo Espiritu",
+      "photo" : "/images/people/carmen_popovicu.jpg",
+      "photoUrl" : "https://i.ibb.co/VWT0G0s/GDE-G-Suite-Profile-Badge-Cleo-Espiritu.png",
+      "shortBio" : "Cleo holds an MSc in computing science from the University of Alberta and has experience...",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/cinfourthirds",
+        "name" : "Twitter"
+      } ],
+      "order" : 4,
+      "title" : "Product Manager / Google Developer Expert"
+    },
+    "ado_kukic" : {
+      "badges" : [ {
+        "description" : "Google Developers Expert",
+        "link" : "https://developers.google.com/experts/people/ado-kukic",
+        "name" : "gde"
+      } ],
+      "bio" : "Ado is a developer evangelist at Auth0 and Google Developer Expert for Web Technologies. Mixing his passion of programming and education, he creates tutorials, talks, courses, and other educational content focusing on security, authentication, and much more. On the front-end, he prefers Angular, while on the backend he flip-flops between Node.js and Golang.",
+      "company" : "Auth0",
+      "companyLogo" : "",
+      "companyLogoUrl" : "",
+      "country" : "Las Vegas, USA",
+      "featured" : true,
+      "name" : "Ado Kukic",
+      "photo" : "/images/people/carmen_popovicu.jpg",
+      "photoUrl" : "https://pbs.twimg.com/profile_images/1786365249/386370_127058754079230_100003253187707_128776_466675623_n_400x400.jpg",
+      "shortBio" : "Ado is a developer evangelist at Auth0 and Google Developer Expert for Web Technologies. Mixing...",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/kukicado",
+        "name" : "Twitter"
+      } ],
+      "order" : 5,
+      "title" : "Developer Evangelist"
+    },
+    "alexandre_martins" : {
+      "bio" : "",
+      "company" : "SkipTheDishes",
+      "companyLogo" : "",
+      "companyLogoUrl" : "https://cdn.shopify.com/s/files/1/2804/1892/files/1000x300-Primary-Red-RGB.png?v=1527781272",
+      "country" : "Winnipeg, Canada",
+      "featured" : false,
+      "name" : "Alexandre Martins",
+      "photo" : "",
+      "photoUrl" : "",
+      "shortBio" : "",
+      "socials" : [],
+      "order" : 6,
+      "title" : "Software Engineer"
+    },
+    "joao_gilberto" : {
+      "bio" : "",
+      "company" : "SkipTheDishes",
+      "companyLogo" : "",
+      "companyLogoUrl" : "https://cdn.shopify.com/s/files/1/2804/1892/files/1000x300-Primary-Red-RGB.png?v=1527781272",
+      "country" : "Winnipeg, Canada",
+      "featured" : false,
+      "name" : "Joao Gilberto Magalhaes",
+      "photo" : "",
+      "photoUrl" : "",
+      "shortBio" : "",
+      "socials" : [],
+      "order" : 7,
+      "title" : "Software Engineer"
+    },
+    "rasit_eskicioglu" : {
+      "bio" : "",
+      "company" : "University of Winnipeg",
+      "companyLogo" : "",
+      "companyLogoUrl" : "",
+      "country" : "Winnipeg, Canada",
+      "featured" : false,
+      "name" : "Rasit Eskicioglu",
+      "photo" : "",
+      "photoUrl" : "",
+      "shortBio" : "",
+      "socials" : [],
+      "order" : 7,
+      "title" : "Assoc. Prof."
+    },
+    "kaviyarasu_ponnuswamy" : {
+      "bio" : "",
+      "company" : "SkipTheDishes",
+      "companyLogo" : "",
+      "companyLogoUrl" : "https://cdn.shopify.com/s/files/1/2804/1892/files/1000x300-Primary-Red-RGB.png?v=1527781272",
+      "country" : "Winnipeg, Canada",
+      "featured" : false,
+      "name" : "Kaviyarasu Ponnuswamy",
+      "photo" : "",
+      "photoUrl" : "",
+      "shortBio" : "",
+      "socials" : [],
+      "order" : 7,
+      "title" : ""
+    }
+  },
   "team" : [ {
     "members" : [ {
       "name" : "Joao Vitor Squillace",
