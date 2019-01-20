@@ -681,189 +681,71 @@
   "speakers" : {},
   "team" : [ {
     "members" : [ {
-      "name" : "Oleh Zasadnyy",
+      "name" : "Joao Vitor Squillace",
       "photo" : "/images/people/oleh_zasadnyy.jpg",
-      "photoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/oleh_zasadnyy.jpg",
+      "photoUrl" : "https://avatars0.githubusercontent.com/u/1086713?s=460&v=4",
       "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+OlehZasadnyy",
-        "name" : "Google+"
-      }, {
         "icon" : "facebook",
-        "link" : "https://www.facebook.com/oleh.zasadnyy",
+        "link" : "https://www.facebook.com/squillace91",
         "name" : "Facebook"
       }, {
         "icon" : "twitter",
-        "link" : "https://twitter.com/ozasadnyy",
+        "link" : "https://twitter.com/zzeks",
         "name" : "Twitter"
       }, {
         "icon" : "website",
-        "link" : "http://o.zasadnyy.com/",
+        "link" : "http://leveled.co",
         "name" : "Blog"
       } ],
       "order" : 0,
-      "title" : "Website and sponsors"
+      "title" : "Software Developer at SkipTheDishes"
     }, {
-      "name" : "Sofiya Huts",
+      "name" : "Guangxiang(Eric) Dai",
       "photo" : "/images/people/sofiya_huts.jpg",
-      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fsofiya_huts.jpg?alt=media&token=a911eafb-f709-4af7-b1cb-58a6604b70d1",
-      "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+SofiaHuts",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/sophie.huts.7",
-        "name" : "Facebook"
-      } ],
-      "order" : 1,
-      "title" : "Social and media"
-    }, {
-      "name" : "Vitaliy Zasadnyy",
-      "photo" : "/images/people/vitaliy_zasadnyy.jpg",
-      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fvitaliy_zasadnyy.jpg?alt=media&token=930e05c8-ae43-4628-8d4c-3e8f5193cda3",
+      "photoUrl" : "https://i.ibb.co/MCkMsCF/eric.png",
       "socials" : [ {
         "icon" : "linkedin",
-        "link" : "https://www.linkedin.com/in/zasadnyy",
+        "link" : "https://www.linkedin.com/in/guangxiang-eric-dai-84631a51/",
         "name" : "Linkedin"
-      }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/zasadnyy",
-        "name" : "Twitter"
-      }, {
-        "icon" : "website",
-        "link" : "http://v.zasadnyy.com/",
-        "name" : "Blog"
-      } ],
-      "order" : 2,
-      "title" : "Speakers"
-    }, {
-      "name" : "Marta Maxymiak",
-      "photo" : "/images/people/marta_maxymiak.jpg",
-      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fmarta_maxymiak.jpg?alt=media&token=6532f039-7f86-4304-8558-dbfbb3ae8d68",
-      "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/104036874811391520583",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/marta.maxymiak",
-        "name" : "Facebook"
-      } ],
-      "order" : 3,
-      "title" : "Party and happiness"
-    }, {
-      "name" : "Ostap Andrusiv",
-      "photo" : "/images/people/ostap_andrusiv.jpg",
-      "photoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/ostap_andrusiv.jpg",
-      "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://google.com/+OstapAndrusiv",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/ostap.andrusiv",
-        "name" : "Facebook"
-      }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/p1f",
-        "name" : "Twitter"
-      }, {
-        "icon" : "website",
-        "link" : "http://andrusiv.com/",
-        "name" : "Blog"
-      } ],
-      "order" : 4,
-      "title" : "Sponsors"
-    }, {
-      "name" : "Vasylyna Mytsak",
-      "photo" : "/images/people/vasylyna_mytsak.jpg",
-      "photoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/vasylyna_mytsak.jpg",
-      "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+ВасилинаМицак",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/vasylyna.mytsak",
-        "name" : "Facebook"
-      } ],
-      "order" : 5,
-      "title" : "Party and happiness"
-    }, {
-      "name" : "Volodya Karpliuk",
-      "photo" : "/images/people/volodya_karpliuk.jpg",
-      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fvolodya_karpliuk.jpg?alt=media&token=aa08d9c9-c42a-435f-8672-c3a004e3aa08",
-      "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+VolodyaKarpliuk23",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/volodya.karpluk",
-        "name" : "Facebook"
-      }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/keyv23",
-        "name" : "Twitter"
-      } ],
-      "order" : 6,
-      "title" : "Speakers"
-    }, {
-      "name" : "Diana Pinchuk",
-      "photo" : "/images/people/diana_pinchuk.jpg",
-      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fdiana_pinchuk.jpg?alt=media&token=189d67d1-004f-4a3c-9e0c-13bc992bbaf7",
-      "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+DianaPinchuk",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/diana.pinchuk.9",
-        "name" : "Facebook"
-      } ],
-      "order" : 7,
-      "title" : "Social and media"
-    } ],
-    "title" : "Core Team"
-  }, {
-    "members" : [ {
-      "name" : "Ihor Dvoretskyi",
-      "photo" : "/images/people/ihor_dvoretskyi.jpg",
-      "photoUrl" : "",
-      "socials" : [ {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/idvoretskyi",
-        "name" : "Facebook"
-      }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/idvoretskyi",
-        "name" : "Twitter"
-      } ],
-      "order" : 0,
-      "title" : "Cloud stream"
-    }, {
-      "name" : "Dmytro Danylyk",
-      "photo" : "/images/people/dmytro_danylyk.jpg",
-      "photoUrl" : "",
-      "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+DmytroDanylyk",
-        "name" : "Google+"
-      }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/dmytrodanylyk",
-        "name" : "Twitter"
-      }, {
-        "icon" : "website",
-        "link" : "http://www.dmytrodanylyk.com/#/about",
-        "name" : "Website"
       } ],
       "order" : 1,
-      "title" : "Android Stream"
+      "title" : "Software Developer at SkipTheDishes"
+    }, {
+      "name" : "Wilson Reid",
+      "photo" : "/images/people/vitaliy_zasadnyy.jpg",
+      "photoUrl" : "https://media.licdn.com/dms/image/C4E03AQHWXmidhvW19Q/profile-displayphoto-shrink_800_800/0?e=1553731200&v=beta&t=E8lzK2IW_Q0Vug56HNBCmU4ouuxqvqbv5M6UG0st5DY",
+      "socials" : [ {
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/wilson-reid/",
+        "name" : "Linkedin"
+      } ],
+      "order" : 2,
+      "title" : "Software Developer at SkipTheDishes"
+    }, {
+      "name" : "Jiunn Wai Wong",
+      "photo" : "/images/people/marta_maxymiak.jpg",
+      "photoUrl" : "https://media.licdn.com/dms/image/C4D03AQFsKTkvbtj0Xw/profile-displayphoto-shrink_800_800/0?e=1553731200&v=beta&t=-R4V2WC0P-Tl3HtB2SMYJdzsTF7-3Un0eHGgv1P3sh4",
+      "socials" : [ {
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/jiunn-wai-wong-659397156/",
+        "name" : "Linkedin"
+      } ],
+      "order" : 3,
+      "title" : "Software Developer at SkipTheDishes"
+    }, {
+      "name" : "Nicolas Isnardi",
+      "photo" : "/images/people/ostap_andrusiv.jpg",
+      "photoUrl" : "https://media.licdn.com/dms/image/C4E03AQG7byUoYKMO0g/profile-displayphoto-shrink_800_800/0?e=1553731200&v=beta&t=auHjC2B9xCDvj9rLrMWweX18GdDOv_FbSVZlp25HqCI",
+      "socials" : [ {
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/nicolasisnardi/",
+        "name" : "Linkedin"
+      } ],
+      "order" : 4,
+      "title" : "React Developer at SkipTheDishes"
     } ],
-    "title" : "Program Committee"
-  } ],
+    "title" : "Core Team"
+  }],
   "tickets" : [ {
     "available" : true,
     "currency" : "$",

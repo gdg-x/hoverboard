@@ -8,15 +8,19 @@
   },
   "hosting": {
     "public": "./build",
-    "redirects": [{
-      "source": "/index.html",
-      "destination": "/",
-      "type" : 301
-    }],
-    "rewrites": [{
-      "source": "**",
-      "function": "prerender"
-    }],
+    "redirects": [
+      {
+        "source": "/index.html",
+        "destination": "/",
+        "type": 301
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "prerender"
+      }
+    ],
     "ignore": [
       "/test/**",
       "bower.json",
@@ -52,6 +56,7 @@
     "predeploy": [
       "npm run predeploy",
       "npm --prefix ./functions run build"
-    ]
+    ],
+    "source": "functions"
   }
 }
