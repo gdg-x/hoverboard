@@ -115,20 +115,20 @@
   },
   "location": {
     "label": "Location",
-    "name": "TBD",
+    "name": "University of Winnipeg",
     "city": "Winnipeg",
     "short": "Winnipeg, Canada",
-    "address": "TBD",
+    "address": "515 Portage Ave, Winnipeg, MB R3B 2E9",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
+      "latitude": 49.890240,
+      "longitude": -97.154030,
       "zoom": 5
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": 49,
+      "longitude": -97
     },
-    "description": ""
+    "description": "The University of Winnipeg will be hosting the first day of the event on Saturday, where the talks/workshops will be happening. On Sunday, SkipTheDishes Social Space will be hosting the hackathon. (Skip Social Space Address: 140 Bannatyne Avenue, Winnipeg)"
   },
   "mediaQueries": {
     "xs": {
