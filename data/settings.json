@@ -38,7 +38,8 @@
     {
       "route": "team",
       "permalink": "/team/",
-      "label": "Team"
+      "label": "Team",
+      "enabled": true
     },
     {
       "route": "blog",
