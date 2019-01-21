@@ -822,7 +822,7 @@
   },
   "team" : [ {
     "members" : [ {
-      "name" : "Joao Vitor Squillace",
+      "name" : "Joao Squillace Teixeira",
       "photo" : "/images/people/oleh_zasadnyy.jpg",
       "photoUrl" : "https://avatars0.githubusercontent.com/u/1086713?s=460&v=4",
       "socials" : [ {
@@ -889,15 +889,15 @@
   }],
   "tickets" : [ {
     "available" : true,
-    "currency" : "$",
-    "ends" : "Jun 30",
+    "currency" : "$0",
+    "ends" : "Fev 22",
     "inDemand" : true,
     "info" : "Or first 200 tickets",
     "name" : "Early Bird",
     "price" : 120,
     "regular" : true,
     "soldOut" : false,
-    "starts" : "Feb 7",
+    "starts" : "Jan 30",
     "url" : "https://goo.gl/forms/P4iYUfFaOoXGMHIN2"
   } ],
   "triggers" : {
