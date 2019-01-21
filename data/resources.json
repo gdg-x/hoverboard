@@ -46,7 +46,7 @@
         },
         {
           "name": "Meet the Team",
-          "url": "https://devfest.gdg.org.ua/team/",
+          "url": "https://devfest2019.firebaseapp.com/team",
           "newTab": true
         }
       ]
@@ -190,13 +190,6 @@
       "link": "/speakers/"
     }
   },
-  "previousSpeakersBlock": {
-    "title": "Previous speakers",
-    "callToAction": {
-      "label": "View all",
-      "link": "/previous-speakers/"
-    }
-  },
   "galleryBlock": {
     "title": "#dfua16 highlights",
     "description": "This year's festival built lots of excitement. Check out photos from featured talks, hands-on learning sessions, and after-hours fun.",
@@ -226,7 +219,7 @@
     "toast": "Successfully subscribed!"
   },
   "team": {
-    "description": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT."
+    "description": "[Google Developers Group (GDG) Winnipeg](https://www.meetup.com/GDG-Winnipeg/) - is an open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Winnipeg audience to boost development of IT in the prairies."
   },
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"
