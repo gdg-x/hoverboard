@@ -69,72 +69,36 @@
   "partners" : [ {
     "logos" : [ {
       "order" : 0,
-      "logoUrl" : "../images/logos/gdg-lviv.svg",
-      "name" : "GDG Lviv",
+      "logoUrl" : "https://secure.meetupstatic.com/photos/event/e/7/b/6/600_476219318.jpeg",
+      "name" : "GDG Winnipeg",
       "url" : "https://plus.google.com/102444623953913144164"
-    } ],
+    }, {
+      "order" : 1,
+      "logoUrl" : "../images/logos/google.svg",
+      "name" : "Google",
+      "url" : "https://www.google.com"
+    }  ],
     "order" : 0,
-    "title" : "Template Creator"
+    "title" : "Conference Organizer"
   }, {
     "logos" : [ {
       "order" : 0,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "order" : 1,
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "order" : 2,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "order" : 3,
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "order" : 4,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "order" : 5,
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "order" : 6,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "order" : 7,
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "order" : 8,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "order" : 9,
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "order" : 10,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    } ],
+      "logoUrl" : "https://cdn.shopify.com/s/files/1/2804/1892/files/1000x300-Primary-Red-RGB.png?v=1527781272",
+      "name" : "SkipTheDishes",
+      "url" : "https://www.skipthedishes.com/"
+    }],
     "order" : 1,
-    "title" : "General Partner"
-  } ],
+    "title" : "Gold Partner"
+  }, {
+    "logos" : [ {
+      "order" : 0,
+      "logoUrl" : "https://i.ibb.co/59wC7NS/Neovation-logo-tall-1920-colour.png",
+      "name" : "Neovation",
+      "url" : "https://www.neovation.com/"
+    }],
+    "order" : 1,
+    "title" : "Bronze Partner"
+  }  ],
   "schedule" : {
     "2016-09-09" : {
       "dateReadable" : "September 9",
