@@ -160,15 +160,23 @@
            ga-event-category="ticket button" ga-event-action="buy_click">
           <paper-button class="buy-button" primary>{$ reserveTicket $}</paper-button>
         </a>
+
+        <a href="https://www.eventbrite.ca/e/gdg-winnipeg-devfest-2019-registration-55122804793?ref=estw" target="_blank">
+          <paper-button class="buy-button">Register</paper-button>
+        </a>
+        <!-- <a href$="[[_getTicketUrl(tickets)]]" target="_blank" rel="noopener noreferrer" ga-on="click"
+          ga-event-category="ticket button" ga-event-action="buy_click">
+          <paper-button class="buy-button" primary>{$ reserveTicket $}</paper-button>
+        </a> -->
       </paper-tabs>
 
-      <paper-menu-button
+      <!-- <paper-menu-button
         id="notificationsMenu"
         class="notifications-menu"
         vertical-align="top"
         horizontal-align="right"
         no-animations
-      >
+      > -->
         <paper-icon-button
           icon="hoverboard:[[_getNotificationsIcon(notifications.status)]]"
           slot="dropdown-trigger"

@@ -96,7 +96,7 @@ Special tickets for real supporters of our conference. As we’re organizing the
 
 ### Language
 
-All presentations at GDG DevFest Ukraine will be in English.
+All presentations at GDG Winnipeg Ukraine will be in English.
 
 ### Pro Tips
 
