@@ -31,7 +31,9 @@ RadicalxChange is an inclusive, open community that seeks to promote rich and me
   
 We have four primary ‘tracks’ in our community, across which we actively promote dialogue and the xChange of ideas, passions, partnered experimentations and building - namely, Activism and Government, Arts and Communications, Entrepreneurship and Technology and Ideas and Research.
   
-  
+### Local Chapters and Meetups
+
+RadicalxChange chapters are self-organized community groups working to educate and experiment with egalitarian market mechanisms.  Finding or founding a local chapter is a great way to learn and contribute to the ongoing conversation.  Please note that RadicalxChange Foundation Ltd. does not direct, and is not responsible for, the actions or events of local chapters or chapter organizers.
   
 ### Activism and Government 
 
