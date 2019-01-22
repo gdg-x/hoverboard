@@ -203,10 +203,10 @@ Conference Agenda will feature the following speakers and sessions. Please check
 > on the film, visit their [website](https://www.bisbee17.com/about).
 > 
 > This exclusive screening of the multiple award winning film, Bisbee
-> ‘17, will be followed by a panel discussion featuring the
-> award-winning director, Robert Greene, and Katherine Benton Cohen,
-> associate professor of history at Georgetown University and historical
-> advisor for the film. 
+> ‘17, is a collaboration between the I+R and A+C tracks, and will be 
+> followed by a discussion featuring the award-winning director
+> Robert Greene and Katherine Benton Cohen, associate professor of 
+> history at Georgetown University and historical advisor for the film. 
 
 *Poverty, Inc.* (dir. Michael Matheson Miller, 2014)  
 
