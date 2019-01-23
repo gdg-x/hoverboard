@@ -18,7 +18,7 @@ const mailchimpSubscribe = functions.firestore.document('/subscribers/{id}')
       merge_fields: {
         FNAME: subscriber.firstName,
         LNAME: subscriber.lastName,
-        ADDRESS: subscriber.countryCode,
+        CCODE: subscriber.countryCode,
       },
     };
 
