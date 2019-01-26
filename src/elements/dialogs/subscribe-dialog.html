@@ -1,10 +1,12 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../bower_components/paper-dropdown-input/paper-dropdown-input.html">
 <link rel="import" href="../../../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
 <link rel="import" href="../../mixins/redux-mixin.html">
 <link rel="import" href="../shared-styles.html">
 <link rel="import" href="../hoverboard-icons.html">
+<link rel="import" href="../countries.html">
 
 <dom-module id="subscribe-dialog">
   <template>
@@ -32,7 +34,7 @@
         line-height: 1.5;
       }
 
-      paper-input {
+      paper-input, paper-dropdown-input {
         margin: 16px 32px 0;
       }
 
@@ -72,6 +74,19 @@
                    autocomplete="off"
                    autofocus="false">
       </paper-input>
+      <paper-dropdown-input id="thirdFieldInput"
+                            on-touchend="_focus"
+                            label="[[thirdFieldLabel]]"
+                            items="[[countries]]"
+                            max-size="[[countriesLength]]"
+                            filter="[[filterCountries]]"
+                            value="{{thirdFieldValue}}">
+      <template>
+        <template is="dom-repeat" items="[[items]]" as="item">
+          <paper-item value="[[item.value]]">[[item.name]]</paper-item>
+        </template>
+      </template>
+    </paper-dropdown-input>
       <paper-input id="emailInput"
                    on-touchend="_focus"
                    label="{$ subscribeBlock.emailAddress $} *"
@@ -135,6 +150,7 @@
             type: Boolean,
             value: false,
           },
+          thirdFieldValue: String,
           secondFieldValue: String,
           firstFieldValue: String,
           initialHeight: Number,
@@ -142,6 +158,29 @@
           submitLabel: String,
           firstFieldLabel: String,
           secondFieldLabel: String,
+          thirdFieldLabel: String,
+          countries: {
+            type: Array,
+            // eslint-disable-next-line no-undef
+            value: countries,
+          },
+          countriesLength: {
+            type: Number,
+            // eslint-disable-next-line no-undef
+            value: countries.length,
+          },
+          filterCountries: {
+            type: Function,
+            value: function () {
+              return function (items, searchValue) {
+                const u = searchValue.toUpperCase();
+                const l = searchValue.toLowerCase();
+                return items.filter((item) =>
+                  item.value === u ||
+                  item.name.toLowerCase().includes(l));
+              };
+            },
+          },
         };
       }
 
@@ -183,7 +222,14 @@
         this.submitLabel = data.submitLabel || ' {$ subscribeBlock.subscribe $}';
         this.firstFieldLabel = data.firstFieldLabel || '{$ subscribeBlock.firstName $}';
         this.secondFieldLabel = data.secondFieldLabel || '{$ subscribeBlock.lastName $}';
+        this.thirdFieldLabel = data.thirdFieldLabel || 'Country';
         this._prefillFields(data);
+      }
+
+      _countryCodeForName(name) {
+        // eslint-disable-next-line no-undef
+        const item = countries.find((item) => item.name === name);
+        return item ? item.value : '';
       }
 
       _subscribe() {
@@ -198,6 +244,7 @@
           email: this.email,
           firstFieldValue: this.firstFieldValue,
           secondFieldValue: this.secondFieldValue,
+          thirdFieldValue: this._countryCodeForName(this.thirdFieldValue),
         });
       }
 
@@ -216,13 +263,17 @@
         this.validate = false;
         const firstField = this.shadowRoot.querySelector('#firstFieldInput');
         const secondField = this.shadowRoot.querySelector('#secondFieldInput');
+        const thirdField = this.shadowRoot.querySelector('#thirdFieldInput');
         const emailInput = this.shadowRoot.querySelector('#emailInput');
         firstField.value = userData ? userData.firstFieldValue : '';
         secondField.value = userData ? userData.secondFieldValue : '';
+        thirdField.value = userData ? userData.thirdFieldValue : '';
         firstField.focus();
         firstField.blur();
         secondField.focus();
         secondField.blur();
+        thirdField.focus();
+        thirdField.blur();
         emailInput.blur();
         emailInput.value = '';
         emailInput.invalid = false;
