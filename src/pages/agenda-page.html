@@ -1,0 +1,69 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../elements/polymer-helmet.html">
+<link rel="import" href="../elements/hero-block.html">
+<link rel="import" href="../elements/footer-block.html">
+<link rel="import" href="../elements/md-content.html">
+
+
+<dom-module id="agenda-page">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      md-content .content-wrapper.visible {
+        display: none;
+      }
+
+      @media (min-width: 640px) {
+        .hero-title {
+          margin-left: 40%;
+        }
+
+      }
+    </style>
+
+
+    <polymer-helmet
+      title="{$ heroSettings.agenda.title $} | {$ title $}"
+      description="{$ heroSettings.agenda.metaDescription $}"
+      active="[[active]]"
+    ></polymer-helmet>
+
+    <hero-block
+      background-image="{$ heroSettings.faq.background.image $}"
+      font-color="{$ heroSettings.faq.fontColor $}"
+      active="[[active]]"
+    >
+      <div class="hero-title highlight-font">{$ heroSettings.agenda.title $}</div>
+    </hero-block>
+
+    <md-content md-source="[[source]]"></md-content>
+
+    <footer-block></footer-block>
+  </template>
+
+  <script>
+
+    // eslint-disable-next-line no-undef
+    class AgendaPage extends Polymer.Element {
+      static get is() {
+        return 'agenda-page';
+      }
+
+      static get properties() {
+        return {
+          active: Boolean,
+          source: {
+            type: String,
+            value: '{$ agenda $}',
+          },
+        };
+      }
+    }
+
+    window.customElements.define(AgendaPage.is, AgendaPage);
+
+  </script>
+</dom-module>
+

@@ -14,13 +14,14 @@
   "signIn": "Sign in",
   "signOut": "Sign out",
   "offlineMessage": "You can still work offline.",
-  "cachingComplete": "Caching complete! Future visits will work offline.",
+  "cachingComplete": "Site is now viewable offline.",
   "newVersionAvailable": "A new version of this app is available.",
   "refresh": "Refresh",
   "position": "Position",
   "country": "Country",
   "time": "Time",
   "faq": "/data/faq.md",
+  "agenda": "/data/agenda.md",
   "cod": "/data/cod.md",
   "footer": {
     "blog": "Blog"

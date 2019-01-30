@@ -38,7 +38,7 @@
     },
     {
       "route": "agenda",
-      "permalink": "/about/#agenda",
+      "permalink": "/agenda/",
       "label": "Agenda"
     },
     {
@@ -105,9 +105,9 @@
       },
       "fontColor": "#424242"
     },
-    "cod": {
-      "title": "Code Of Conduct",
-      "metaDescription": "Lear more about our expectations for all those who participate in our community",
+    "agenda": {
+      "title": "Conference Agenda",
+      "metaDescription": "Learn more about what's going on at the conference.",
       "background": {
         "color": "#fff"
       },
