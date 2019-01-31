@@ -8,7 +8,7 @@ functions/lib/
 .vscode/
 .firebaserc
 /appengine/dist/
-serviceAccount.json
+*serviceAccount*.json
 firebase-debug.log
 .DS_Store
 .firebase/
