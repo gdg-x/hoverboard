@@ -45,7 +45,13 @@
       "route": "blog",
       "permalink": "/blog/",
       "label": "Blog"
+    },
+    {
+      "permalink": "https://forum.radicalxchange.org",
+      "label": "Forum",
+      "target": "_blank"
     }
+
   ],
   "heroSettings": {
     "home": {
