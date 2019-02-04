@@ -148,9 +148,10 @@
       >
         {% for nav in navigation %}
         <paper-tab name="{$ nav.route $}" class="nav-item" link>
-          <a href="{$ nav.permalink $}" target="{$ nav.target $}" layout vertical center-center>{$ nav.label $}</a>
+          <a href="{$ nav.permalink $}" {% if nav.newTab %} target="_blank" rel="noopener noreferrer" {% endif %} layout vertical center-center>{$ nav.label $}</a>
         </paper-tab>
         {% endfor %}
+
 
 <!--         <paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]">{$ signIn $}</paper-tab>
  -->

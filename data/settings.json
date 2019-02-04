@@ -49,7 +49,7 @@
     {
       "permalink": "https://forum.radicalxchange.org",
       "label": "Forum",
-      "target": "_blank"
+      "newTab": true
     }
 
   ],
