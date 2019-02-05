@@ -116,20 +116,20 @@
   },
   "location": {
     "label": "Location",
-    "name": "College for Creative Studies",
+    "name": "College for Creative Studies, A. Alfred Taubman Center for Design Education.",
     "city": "Detroit",
     "short": "Detroit, MI",
     "address": "460 W Baltimore St, Detroit, MI 48202, USA",
     "pointer": {
-      "latitude": 42.3613975,
-      "longitude": -83.0649751,
+      "latitude": 42.366351,
+      "longitude": -83.080573,
       "zoom": 7
     },
     "mapCenter": {
       "latitude": 42,
       "longitude": -83
     },
-    "description": "College of Creative Studies in Detroit"
+    "description": "College for Creative Studies, A. Alfred Taubman Center for Design Education."
   },
   "mediaQueries": {
     "xs": {
