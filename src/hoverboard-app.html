@@ -166,7 +166,7 @@
 
           <a
             class="buy-ticket"
-            href$="[[tickets.url]]"
+            href$="[[_getTicketUrl(tickets)]]"
             target="_blank"
             rel="noopener noreferrer"
             ga-on="click"
@@ -445,6 +445,13 @@
 
       _toggleDrawer(e) {
         uiActions.toggleDrawer(e.detail.value);
+      }
+
+      _getTicketUrl(tickets) {
+        if (!tickets.list.length) return '';
+        const availableTicket = tickets.list.filter((ticket) =>
+          ticket.available && !ticket.name.includes('Scholarship'))[0];
+        return availableTicket ? availableTicket.url : tickets.list[0].url;
       }
     }
 
