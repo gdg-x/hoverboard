@@ -12,7 +12,6 @@
     "src/pages/team-page.html",
     "src/pages/faq-page.html",
     "src/pages/cod-page.html",
-    "src/pages/agenda-page.html",
     "src/lazy-resources.html"
   ],
   "sources": [

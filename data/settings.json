@@ -22,19 +22,9 @@
       "label": "Home"
     },
     {
-      "route": "about",
-      "permalink": "/about/",
-      "label": "About"
-    },
-    {
       "route": "speakers",
       "permalink": "/speakers/",
       "label": "Speakers"
-    },
-    {
-      "route": "team",
-      "permalink": "/team/",
-      "label": "Team"
     },
     {
       "route": "agenda",
@@ -42,16 +32,10 @@
       "label": "Agenda"
     },
     {
-      "route": "blog",
-      "permalink": "/blog/",
-      "label": "Blog"
-    },
-    {
-      "permalink": "https://forum.radicalxchange.org",
-      "label": "Forum",
-      "newTab": true
+      "route": "team",
+      "permalink": "/team/",
+      "label": "Team"
     }
-
   ],
   "heroSettings": {
     "home": {
@@ -88,7 +72,7 @@
       "fontColor": "#424242"
     },
     "schedule": {
-     "title": "Schedule",
+     "title": "Agenda",
      "metaDescription": "Choose your sessions to visit",
       "background": {
 	"color": "#fff"
