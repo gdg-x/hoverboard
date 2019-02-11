@@ -37,9 +37,9 @@
       "label": "Team"
     },
     {
-      "route": "agenda",
-      "permalink": "/agenda/",
-      "label": "Agenda"
+      "route": "schedule",
+      "permalink": "/schedule/",
+      "label": "Schedule"
     },
     {
       "route": "blog",
