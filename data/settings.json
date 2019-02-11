@@ -22,24 +22,19 @@
       "label": "Home"
     },
     {
-      "route": "about",
-      "permalink": "/about/",
-      "label": "About"
-    },
-    {
       "route": "speakers",
       "permalink": "/speakers/",
       "label": "Speakers"
     },
     {
+      "route": "agenda",
+      "permalink": "/agenda/",
+      "label": "Agenda"
+    },
+    {
       "route": "team",
       "permalink": "/team/",
       "label": "Team"
-    },
-    {
-      "route": "schedule",
-      "permalink": "/schedule/",
-      "label": "Schedule"
     }
   ],
   "heroSettings": {
@@ -77,7 +72,7 @@
       "fontColor": "#424242"
     },
     "schedule": {
-     "title": "Schedule",
+     "title": "Agenda",
      "metaDescription": "Choose your sessions to visit",
       "background": {
 	"color": "#fff"
