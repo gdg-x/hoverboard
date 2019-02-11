@@ -1,16 +1,22 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
 
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html" />
+<link
+  rel="import"
+  href="../../bower_components/paper-button/paper-button.html"
+/>
 
-<link rel="import" href="../mixins/redux-mixin.html">
-<link rel="import" href="../elements/shared-styles.html">
-<link rel="import" href="../elements/hoverboard-icons.html">
-<link rel="import" href="../elements/content-loader.html">
+<link rel="import" href="../mixins/redux-mixin.html" />
+<link rel="import" href="../elements/shared-styles.html" />
+<link rel="import" href="../elements/hoverboard-icons.html" />
+<link rel="import" href="../elements/content-loader.html" />
 
 <dom-module id="tickets-block">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+    <style
+      is="custom-style"
+      include="shared-styles flex flex-alignment positioning"
+    ></style>
 
     <style>
       :host {
@@ -33,6 +39,18 @@
         background-color: var(--default-background-color);
       }
 
+      .ticket-alt-subheader-top {
+        color: var(--default-primary-color);
+        font-weight: bold;
+        font-size: 1.1em;
+      }
+
+      .ticket-alt-subheader-bottom {
+        color: var(--secondary-text-color);
+        font-weight: bold;
+        font-size: 1.5em;
+      }
+
       .ticket-item[in-demand] {
         transform: scale(1.05);
         box-shadow: var(--box-shadow-primary-color);
@@ -45,7 +63,7 @@
       }
 
       .ticket-item[sold-out] {
-        opacity: .5;
+        opacity: 0.5;
         filter: grayscale(1);
         cursor: not-allowed;
       }
@@ -53,6 +71,10 @@
       .header {
         padding: 24px 0 0;
         font-size: 16px;
+      }
+
+      .header h4 {
+        color: var(--default-primary-color);
       }
 
       .content {
@@ -139,7 +161,8 @@
         load-to="130%"
         animation-time="1s"
         items-count="{$ contentLoaders.tickets.itemsCount $}"
-        hidden$="[[contentLoaderVisibility]]">
+        hidden$="[[contentLoaderVisibility]]"
+      >
       </content-loader>
 
       <div class="tickets" layout horizontal wrap center-justified>
@@ -151,12 +174,13 @@
             rel="noopener noreferrer"
             sold-out$="[[ticket.soldOut]]"
             in-demand$="[[ticket.inDemand]]"
-            on-tap="_onTicketTap"
+            on-tap="(_onTicketTap)"
             ga-on="click"
             ga-event-category="ticket"
             ga-event-action="buy_click"
             ga-event-label$="[[ticket.name]]"
-            layout vertical
+            layout
+            vertical
           >
             <div class="header">
               <h4>[[ticket.name]]</h4>
@@ -166,33 +190,44 @@
                 <div class="price">[[ticket.currency]][[ticket.price]]</div>
                 <div class="discount">[[_getDiscount(ticket)]]</div>
               </div>
-              <div class="type-description" layout vertical flex-auto center-justified>
-                <div class="ticket-dates" hidden$="[[!ticket.starts]]">[[ticket.starts]] - [[ticket.ends]]</div>
+              <div
+                class="type-description"
+                layout
+                vertical
+                flex-auto
+                center-justified
+              >
+                <div class="ticket-dates" hidden$="[[!ticket.starts]]">
+                  [[ticket.starts]] - [[ticket.ends]]
+                </div>
                 <div class="ticket-info">[[ticket.info]]</div>
+                <div class="ticket-alt-subheader-top">
+                  [[ticket.subheaderTop]]
+                </div>
+                <div class="ticket-alt-subheader-bottom">
+                  [[ticket.subheaderBottom]]
+                </div>
               </div>
             </div>
             <div class="actions">
               <div class="sold-out" block$="[[ticket.soldOut]]">
                 {$ ticketsBlock.soldOut $}
               </div>
-              <paper-button primary hidden$="[[ticket.soldOut]]" disabled$="[[!ticket.available]]">
-                 [[ticket.buttonText]]
+              <paper-button
+                primary
+                hidden$="[[_isButtonEmpty(ticket)]]"
+                disabled$="[[!ticket.available]]"
+              >
+                [[ticket.buttonText]]
               </paper-button>
             </div>
           </a>
         </template>
       </div>
-
-      <div class="additional-info">
-          <marked-element markdown="*{$ ticketsBlock.ticketsDetails $}">
-            <div slot="markdown-html"></div>
-          </marked-element>
     </div>
-
   </template>
 
   <script>
-
     class TicketsBlock extends ReduxMixin(Polymer.Element) {
       static get is() {
         return 'tickets-block';
@@ -235,9 +270,16 @@
 
       _getDiscount(ticket) {
         const maxPrice = this.tickets.find((ticket) => ticket.primary).price;
-        if (!ticket.regular || ticket.primary || ticket.soldOut || !maxPrice) return;
-        const discount = 100 - parseInt(ticket.price) * 100 / parseInt(maxPrice);
+        if (!ticket.regular || ticket.primary || ticket.soldOut || !maxPrice) {
+          return;
+        }
+        const discount =
+          100 - (parseInt(ticket.price) * 100) / parseInt(maxPrice);
         return ((discount) => `{$ ticketsBlock.save $}`)(Math.round(discount));
+      }
+
+      _isButtonEmpty(ticket) {
+        return !ticket.buttonText || ticket.soldOut;
       }
 
       _onTicketTap(e) {
