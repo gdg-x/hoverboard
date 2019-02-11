@@ -21,7 +21,7 @@
   "country": "Country",
   "time": "Time",
   "faq": "/data/faq.md",
-  "cod": "/data/cod.md",
+  "travel": "/data/travel.md",
   "footer": {
     "blog": "Blog"
   },

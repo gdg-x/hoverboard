@@ -32,6 +32,11 @@
       "label": "Agenda"
     },
     {
+      "route": "travel",
+      "permalink": "/travel/",
+      "label": "Travel"
+    },
+    {
       "route": "team",
       "permalink": "/team/",
       "label": "Team"
@@ -90,6 +95,14 @@
     "faq": {
       "title": "About",
       "metaDescription": "Find out more.",
+      "background": {
+        "color": "#fff"
+      },
+      "fontColor": "#424242"
+    },
+    "travel": {
+      "title": "Travel",
+      "metaDescription": "Travel and accommodations.",
       "background": {
         "color": "#fff"
       },
