@@ -27,8 +27,8 @@
       "label": "Speakers"
     },
     {
-      "route": "agenda",
-      "permalink": "/agenda/",
+      "route": "schedule",
+      "permalink": "/schedule/",
       "label": "Agenda"
     },
     {
@@ -209,7 +209,7 @@
       "itemsCount": 3
     },
     "speakers": {
-      "itemsCount": 4
+      "itemsCount": 8
     },
     "previousSpeakers": {
       "itemsCount": 6
