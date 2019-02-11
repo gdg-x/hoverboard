@@ -1,0 +1,57 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../elements/polymer-helmet.html">
+<link rel="import" href="../elements/hero-block.html">
+<link rel="import" href="../elements/footer-block.html">
+<link rel="import" href="../elements/md-content.html">
+
+<dom-module id="travel-page">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <polymer-helmet
+      title="{$ heroSettings.travel.title $} | {$ title $}"
+      description="{$ heroSettings.travel.metaDescription $}"
+      active="[[active]]"
+    ></polymer-helmet>
+
+    <hero-block
+      background-image="{$ heroSettings.travel.background.image $}"
+      background-color="{$ heroSettings.travel.background.color $}"
+      font-color="{$ heroSettings.faq.fontColor $}"
+      active="[[active]]"
+    >
+      <div class="hero-title highlight-font">{$ heroSettings.travel.title $}</div>
+      <p class="hero-description">{$ heroSettings.travel.description $}</p>
+    </hero-block>
+
+    <md-content md-source="[[source]]"></md-content>
+
+    <footer-block></footer-block>
+  </template>
+
+  <script>
+
+    // eslint-disable-next-line no-undef
+    class TravelPage extends Polymer.Element {
+      static get is() {
+        return 'travel-page';
+      }
+
+      static get properties() {
+        return {
+          active: Boolean,
+          source: {
+            type: String,
+            value: '{$ travel $}',
+          },
+        };
+      }
+    }
+
+    window.customElements.define(TravelPage.is, TravelPage);
+  </script>
+</dom-module>
