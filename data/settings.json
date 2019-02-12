@@ -44,7 +44,8 @@
   ],
   "heroSettings": {
     "home": {
-      "description": "Market mechanisms for equality and cooperation",
+      "description1": "It’s not radical to critique our current society.",
+      "description2": "It’s radical to build a better one.",
       "background": {
         "color": "#fefcfe"
       },
@@ -66,7 +67,6 @@
         "color": "#FFF"
       },
       "fontColor": "#424242"
-
     },
     "previousSpeakers": {
       "title": "Previous Speakers",
@@ -77,12 +77,12 @@
       "fontColor": "#424242"
     },
     "schedule": {
-     "title": "Agenda",
-     "metaDescription": "Choose your sessions to visit",
+      "title": "Agenda",
+      "metaDescription": "Choose your sessions to visit",
       "background": {
-	"color": "#fff"
-       },
-       "fontColor": "#424242"
+        "color": "#fff"
+      },
+      "fontColor": "#424242"
     },
     "team": {
       "title": "Team",
