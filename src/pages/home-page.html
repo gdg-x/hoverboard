@@ -31,6 +31,22 @@
         text-align: center;
       }
 
+      .home-content {
+          position: absolute;
+          top: 64px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          align-items: center;
+        }
+
+      .bottom {
+        align-self: center;
+      }
+
       .hero-logo {
         --iron-image-width: 100%;
         max-width: 240px;
@@ -38,23 +54,23 @@
 
       .title {
         font-family: var(--major-font-family);
-        margin: 100px auto 0;
-        font-size: 1.5em;
+        margin: auto 0;
+        font-size: 1.8em;
         position: relative;
       }
 
       .info-items {
         margin: 24px auto;
-        max-width: 300px;
+        max-width: 350px;
+        width: 80%;
       }
 
-      .info-items--date {
+      .date-location {
         font-size: 1em;
       }
 
       .info-items--quote {
         position: relative;
-        margin-bottom: 10vh;
       }
 
       .info-items--quote i {
@@ -127,10 +143,6 @@
           max-height: calc(100vh + 1px);
         }
 
-        .home-content {
-          margin-top: -48px;
-        }
-
         .scroll-down {
           position: absolute;
           bottom: 24px;
@@ -140,9 +152,24 @@
         }
       }
 
+      @media (max-height: 499px) and (orientation: landscape){
+        .home-content {
+          display: grid;
+          grid-template-rows: 2fr 1fr;
+          top: 64px;
+          left: 0;
+          width: 100vw;
+          justify-items: center;
+          align-items: end;
+        }
+        hero-block {
+          height: calc(100% + 65px);
+        }
+      }
+
       @media (min-width: 812px) {
         .title {
-          font-size: 2.1em;
+          font-size: 2.5em;
         }
         hero-block {
           height: calc(100% + 65px);
@@ -153,10 +180,10 @@
         }
 
         .info-items {
-          margin: 0 auto 5vh auto;
+          margin: 0 auto;
           font-size: 22px;
           line-height: 1.1;
-          max-width: 400px;
+          max-width: 480px;
         }
       }
     </style>
@@ -171,39 +198,43 @@
       active="[[active]]"
       hide-logo
     >
-      <div class="home-content" layout vertical center>
-        <div class="title">RadicalxChange</div>
-        <plastic-image
-          class="hero-logo"
-          srcset="/images/logo.gif"
-          alt="{$ title $}"
-        ></plastic-image>
-        <div class="info-items highlight-font">
-          <div class="info-items--quote">
-            {$ heroSettings.home.description1 $}
-            <i> {$ heroSettings.home.description2 $}</i>
+      <div class="home-content">
+        <div class="top">
+          <div class="title">RadicalxChange</div>
+          <plastic-image
+            class="hero-logo"
+            srcset="/images/logo.gif"
+            alt="{$ title $}"
+          ></plastic-image>
+          <div class="info-items highlight-font">
+            <div class="info-items--quote">
+              {$ heroSettings.home.description1 $}
+              <i> {$ heroSettings.home.description2 $}</i>
+            </div>
           </div>
-          <div class="info-items--date">{$ dates $}</div>
-          <div class="info-items--date">{$ location.short $}</div>
         </div>
-
-        <div class="action-buttons" layout horizontal center-justified wrap>
-          <paper-button
-            class="join-btn"
-            raised
-            elevation="1"
-            on-tap="_scrollToTickets"
-            ga-on="click"
-            ga-event-category="tickets"
-            ga-event-action="scroll"
-            ga-event-label="hero block - scroll to tickets"
-            primary
-            invert
-            animated
-          >
-            <iron-icon icon="hoverboard:ticket"></iron-icon>
-            JOIN THE xCHANGE
-          </paper-button>
+        
+        <div class="bottom">
+          <div class="date-location">{$ location.short $}</div>
+          <div class="date-location">{$ dates $} </div>
+          <div class="action-buttons" layout horizontal center-justified wrap>
+            <paper-button
+              class="join-btn"
+              raised
+              elevation="1"
+              on-tap="_scrollToTickets"
+              ga-on="click"
+              ga-event-category="tickets"
+              ga-event-action="scroll"
+              ga-event-label="hero block - scroll to tickets"
+              primary
+              invert
+              animated
+            >
+              <iron-icon icon="hoverboard:ticket"></iron-icon>
+              JOIN THE xCHANGE
+            </paper-button>
+          </div>
         </div>
 
         <!--         <div class="scroll-down" on-tap="_scrollNextBlock">
@@ -264,7 +295,7 @@
         const hovEl = HOVERBOARD.Elements;
         const toolbarHeight = hovEl.HeaderToolbar.getBoundingClientRect().height - 1;
         const ticketsBlockPositionY = hovEl.Tickets.getBoundingClientRect().top - toolbarHeight;
-        this.scrollToY(ticketsBlockPositionY, 4000, 'easeInOutSine');
+        this.scrollToY(ticketsBlockPositionY, 2000, 'easeInOutSine');
       }
 
       _scrollNextBlock() {
