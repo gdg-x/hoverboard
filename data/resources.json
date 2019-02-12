@@ -88,7 +88,7 @@
   },
   "ticketsBlock": {
     "title": "Tickets",
-    "ticketsDetails": "Tickets are non-transferable. Prices will increase for General Admission 2. For complete information on tickets and scholarships, please see our <a href='/about/#tickets'>About</a> page.",
+    "ticketsDetails": "*Ticket price covers food for the three days of attendance and additional event costs.",
     "soldOut": "You missed it!",
     "save": "Save ${discount}% today"
   },
