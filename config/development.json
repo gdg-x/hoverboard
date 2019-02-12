@@ -1,15 +1,15 @@
 {
   "basepath": "/",
-  "url": "https://hoverboard-dev.firebaseapp.com/",
+  "url": "https://libertyjs-staging.firebaseapp.com/",
   "analytics": "UA-43643469-8",
   "prefix": "/",
   "firebase": {
-    "apiKey": "AIzaSyBu9LI-hY4NfUOPJJKuV3BfQm7edLr2-aE",
-    "authDomain": "hoverboard-dev.firebaseapp.com",
-    "databaseURL": "https://hoverboard-dev.firebaseio.com",
-    "projectId": "hoverboard-dev",
-    "storageBucket": "hoverboard-dev.appspot.com",
-    "messagingSenderId": "1083195713896"
+    "apiKey": "AIzaSyB73fz26tj6mktqxmXFVfnmhp5x04_mCKA",
+    "authDomain": "libertyjs-staging.firebaseapp.com",
+    "databaseURL": "https://libertyjs-staging.firebaseio.com",
+    "projectId": "libertyjs-staging",
+    "storageBucket": "libertyjs-staging.appspot.com",
+    "messagingSenderId": "1048865718362"
   },
   "googleMapApiKey": ""
 }

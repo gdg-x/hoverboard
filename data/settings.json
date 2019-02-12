@@ -1,21 +1,21 @@
 {
   "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv",
+    "name": "LibertyJS",
+    "twitter": "liberty_js",
     "blog": "https://medium.com/gdg-lviv",
-    "url": "http://lviv.gdg.org.ua/"
+    "url": "https://libertyjs.com"
   },
-  "startDate": "2017-10-013T09:00:00+03:00",
-  "endDate": "2017-10-14T19:00:00+03:00",
+  "startDate": "2019-10-024T09:00:00+05:00",
+  "endDate": "2019-10-25T19:00:00+05:00",
   "webapp": {
-    "shortName": "DevFest",
-    "themeColor": "#673AB7",
-    "backgroundColor": "#673AB7"
+    "shortName": "LibertyJS",
+    "themeColor": "#ffc214",
+    "backgroundColor": "#ffc214"
   },
   "dateFormat": {
     "locale": "en-US"
   },
-  "hashtag": "DevFest17",
+  "hashtag": "LibertyJS19",
   "disabledSchedule": false,
   "showSessionShortAbstract": true,
   "navigation": [
@@ -49,8 +49,8 @@
     "home": {
       "description": "Be a hero. Be a GDG!",
       "background": {
-        "color": "#673ab7",
-        "image": "/images/backgrounds/home.jpg"
+        "color": "#ffc214",
+        "image": "/images/backgrounds/ljs-hero-dark.png"
       },
       "fontColor": "#FFF"
     },
@@ -114,20 +114,20 @@
   },
   "location": {
     "label": "Location",
-    "name": "Planeta kino",
-    "city": "Lviv",
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "name": "National Museum of American Jewish History",
+    "city": "Philadelphia",
+    "short": "Philadelphia, PA",
+    "address": "101 S Independence Mall E, Philadelphia, PA 19106",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
+      "latitude": 39.953360,
+      "longitude": -75.148550,
       "zoom": 5
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": 40,
+      "longitude": -75
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": "The National Museum of American Jewish History, on Independence Mall in Philadelphia, presents educational programs and experiences that preserve, explore, and celebrate the history of Jews in America. Its purpose is to connect Jews more closely to their heritage and to inspire in people of all backgrounds a greater appreciation for the diversity of the American Jewish experience and the freedoms to which Americans aspire."
   },
   "mediaQueries": {
     "xs": {
@@ -148,31 +148,23 @@
   "socialNetwork": {
     "follow": [
       {
-        "name": "meetup",
-        "url": "https://www.meetup.com/GDG-Lviv/events/244342635/"
-      },
-      {
         "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
+        "url": "https://www.facebook.com/hashtag/libertyjs"
       },
       {
         "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
+        "url": "https://twitter.com/liberty_js/"
       },
       {
         "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
+        "url": "https://www.instagram.com/explore/tags/libertyjs/"
       },
       {
         "name": "youtube",
-        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "url": "https://www.youtube.com/channel/UCbbeyEpxDT53afqFUqG-KJQ"
       }
     ],
     "share": [
-      {
-        "name": "gplus",
-        "url": "https://plus.google.com/share?url="
-      },
       {
         "name": "facebook",
         "url": "https://www.facebook.com/sharer.php?u="
@@ -183,7 +175,7 @@
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
+  "mailto": "libertyjs@gmail.com",
   "mailchimp": {
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
