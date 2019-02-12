@@ -1,13 +1,19 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../mixins/redux-mixin.html">
-<link rel="import" href="shared-animations.html">
-<link rel="import" href="hoverboard-icons.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html" />
+<link
+  rel="import"
+  href="../../bower_components/paper-button/paper-button.html"
+/>
+<link rel="import" href="../mixins/redux-mixin.html" />
+<link rel="import" href="shared-animations.html" />
+<link rel="import" href="hoverboard-icons.html" />
 
 <dom-module id="about-block">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment flex-reverse"></style>
+    <style
+      is="custom-style"
+      include="shared-styles flex flex-alignment flex-reverse"
+    ></style>
 
     <style>
       :host {
@@ -36,15 +42,38 @@
       }
 
       .numbers::after {
-        content: "";
+        content: '';
         display: block;
         height: 2px;
         width: 64px;
         background-color: var(--default-primary-color);
       }
 
+      .call-to-action {
+        font-size: 1.2em;
+        margin-top: 2em;
+        font-weight: 400;
+      }
+
+      .header {
+        padding-bottom: 0;
+      }
+
+      .call-to-action a {
+        font-weight: bold;
+      }
+
+      .button-row {
+        display: flex;
+        justify-content: center;
+      }
+
       .label {
         margin-top: 4px;
+      }
+
+      h3 {
+        margin-top: 2em;
       }
 
       @media (min-width: 640px) {
@@ -61,36 +90,64 @@
           font-size: 56px;
         }
       }
-
     </style>
 
     <div class="container">
-
       <div class="content">
-
         <div>
-          <h1 class="container-narrow">{$ aboutBlock.title $}</h1>
+          <h1 class="container-narrow header">What Will We Build?</h1>
           <div class="container-narrow">
-            <p>Join us as we convene RadicalxChange’s rapidly growing community of activists, artists, entrepreneurs and scholars who are harnessing market mechanisms to challenge outmoded rigid forms of capitalism and unresponsive politics. 
-            <p >This March, we will gather for three days in Detroit to collaborate, imagine, innovate, and create a more inclusive future -- and a movement that lasts long after the conference ends. </p>
-            <p >If you’re sick of the current stagnation, inequality, and polarization, join us and be the change you want to see! It’s not radical to critique our current society. It's radical to build a better one.</p>
+            <p>
+              We stand at a unique crossroads as a society. The signs of our
+              social and economic system failing are everywhere: rising
+              inequality, stagnating economies and increasing threats to liberal
+              democracy from populists of the left and right. Over the past few
+              months positive alternatives, grounded in rigorous social science,
+              that embrace markets, technology, community and diversity have
+              emerged.
+            </p>
+            <h3>The RadicalxChange</h3>
+            <p>
+              Together we are building a comprehensive alternative that solves
+              our most divisive social problems while affirming the human values
+              we all share and we want you to be a part of it.
+            </p>
+            <p>
+              Momentum is building as we convene RadicalxChange’s rapidly
+              growing community of artists, scholars, entrepreneurs and
+              activists who are imagining, designing, building and fighting for
+              a brighter future. A future where power is returned from elites to
+              diverse democratic organizations.
+            </p>
+            <p class="call-to-action">
+              Are you sick of polarization? Are you ready for a more humane
+              future?
+              <a
+                href="https://www.eventbrite.com/e/radicalxchange-tickets-53060613724"
+                >Get your ticket</a
+              >
+              and join us as we build it together.
+            </p>
           </div>
-          <p class="container-narrow"><a
-            href="{$ aboutBlock.callToAction.findOutMore.link $}"
-            ga-on="click"
-            ga-event-category="about"
-            ga-event-action="findOutMore"
-            ga-event-label="about block">
-            <paper-button class="animated icon-right">
-              <span class="cta-label">{$ aboutBlock.callToAction.findOutMore.label $}</span>
-              <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-            </paper-button>
-          </a></p>
+          <p class="container-narrow button-row">
+            <a
+              href="{$ aboutBlock.callToAction.findOutMore.link $}"
+              ga-on="click"
+              ga-event-category="about"
+              ga-event-action="findOutMore"
+              ga-event-label="about block"
+            >
+              <paper-button class="animated icon-right" raised elevation="1">
+                <span class="cta-label"
+                  >{$ aboutBlock.callToAction.findOutMore.label $}</span
+                >
+                <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+              </paper-button>
+            </a>
+          </p>
         </div>
-        
       </div>
     </div>
-
   </template>
 
   <script>
