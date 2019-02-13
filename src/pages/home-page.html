@@ -1,35 +1,50 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
 
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html" />
 
-<link rel="import" href="../elements/about-block.html">
-<link rel="import" href="../elements/call-for-papers-block.html">
-<link rel="import" href="../elements/speakers-block.html">
-<link rel="import" href="../elements/latest-posts-block.html">
-<link rel="import" href="../elements/tickets-block.html">
-<link rel="import" href="../elements/partners-block.html">
-<link rel="import" href="../elements/featured-videos.html">
-<link rel="import" href="../elements/subscribe-block.html">
-<link rel="import" href="../elements/gallery-block.html">
-<link rel="import" href="../elements/map-block.html">
-<link rel="import" href="../elements/about-organizer-block.html">
-<link rel="import" href="../mixins/scroll-functions.html">
-<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="../elements/about-block.html" />
+<link rel="import" href="../elements/call-for-papers-block.html" />
+<link rel="import" href="../elements/speakers-block.html" />
+<link rel="import" href="../elements/latest-posts-block.html" />
+<link rel="import" href="../elements/tickets-block.html" />
+<link rel="import" href="../elements/partners-block.html" />
+<link rel="import" href="../elements/featured-videos.html" />
+<link rel="import" href="../elements/subscribe-block.html" />
+<link rel="import" href="../elements/gallery-block.html" />
+<link rel="import" href="../elements/map-block.html" />
+<link rel="import" href="../elements/about-organizer-block.html" />
+<link rel="import" href="../mixins/scroll-functions.html" />
+<link rel="import" href="../mixins/redux-mixin.html" />
 
 <dom-module id="home-page">
   <template>
     <style is="custom-style" include="shared-styles flex flex-alignment"></style>
 
     <style>
-
       :host {
         display: block;
         height: 100%;
       }
 
       hero-block {
-        font-size: 24px;
+        font-size: 20px;
         text-align: center;
+      }
+
+      .home-content {
+          position: absolute;
+          top: 64px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          align-items: center;
+        }
+
+      .bottom {
+        align-self: center;
       }
 
       .hero-logo {
@@ -39,13 +54,28 @@
 
       .title {
         font-family: var(--major-font-family);
-        margin: 100px auto 0 auto;
-        font-size: 45px;
+        margin: auto 0;
+        font-size: 1.8em;
+        position: relative;
       }
 
       .info-items {
         margin: 24px auto;
-        font-size: 22px;
+        max-width: 350px;
+        width: 80%;
+      }
+
+      .date-location {
+        font-size: 1em;
+      }
+
+      .info-items--quote {
+        position: relative;
+      }
+
+      .info-items--quote i {
+        color: var(--default-primary-color);
+        font-weight: 700;
       }
 
       .info-items > *:not(:first-of-type) {
@@ -91,15 +121,19 @@
         animation: updown 2s infinite;
       }
 
+      .join-btn {
+        text-transform: none;
+      }
+
       @keyframes updown {
         0% {
-          transform: translate(0, 0)
+          transform: translate(0, 0);
         }
         50% {
-          transform: translate(0, 5px)
+          transform: translate(0, 5px);
         }
         100% {
-          transform: translate(0, 0)
+          transform: translate(0, 0);
         }
       }
 
@@ -107,10 +141,6 @@
         hero-block {
           height: calc(100% + 57px);
           max-height: calc(100vh + 1px);
-        }
-
-        .home-content {
-          margin-top: -48px;
         }
 
         .scroll-down {
@@ -122,19 +152,38 @@
         }
       }
 
+      @media (max-height: 499px) and (orientation: landscape){
+        .home-content {
+          display: grid;
+          grid-template-rows: 2fr 1fr;
+          top: 64px;
+          left: 0;
+          width: 100vw;
+          justify-items: center;
+          align-items: end;
+        }
+        hero-block {
+          height: calc(100% + 65px);
+        }
+      }
+
       @media (min-width: 812px) {
+        .title {
+          font-size: 2.5em;
+        }
         hero-block {
           height: calc(100% + 65px);
         }
 
         .hero-logo {
-          max-width: 320px;
+          max-width: 400px;
         }
 
         .info-items {
-          margin: 0 auto 48px auto;
-          font-size: 28px;
+          margin: 0 auto;
+          font-size: 22px;
           line-height: 1.1;
+          max-width: 480px;
         }
       }
     </style>
@@ -149,56 +198,73 @@
       active="[[active]]"
       hide-logo
     >
-      <div class="home-content" layout vertical center>
-        <div class="title">RadicalxChange</div>
-        <plastic-image class="hero-logo" srcset="/images/logo.gif" alt="{$ title $}"></plastic-image>
-        <div class="info-items highlight-font">
-          <div class="info-item">{$ location.city $}. {$ dates $}</div>
-          <div class="info-item">{$ heroSettings.home.description $}</div>
+      <div class="home-content">
+        <div class="top">
+          <div class="title">RadicalxChange</div>
+          <plastic-image
+            class="hero-logo"
+            srcset="/images/logo.gif"
+            alt="{$ title $}"
+          ></plastic-image>
+          <div class="info-items highlight-font">
+            <div class="info-items--quote">
+              {$ heroSettings.home.description1 $}
+              <i> {$ heroSettings.home.description2 $}</i>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bottom">
+          <div class="date-location">{$ location.short $}</div>
+          <div class="date-location">{$ dates $} </div>
+          <div class="action-buttons" layout horizontal center-justified wrap>
+            <paper-button
+              class="join-btn"
+              raised
+              elevation="1"
+              on-tap="_scrollToTickets"
+              ga-on="click"
+              ga-event-category="tickets"
+              ga-event-action="scroll"
+              ga-event-label="hero block - scroll to tickets"
+              primary
+              invert
+              animated
+            >
+              <iron-icon icon="hoverboard:ticket"></iron-icon>
+              JOIN THE xCHANGE
+            </paper-button>
+          </div>
         </div>
 
-
-        <div class="action-buttons" layout horizontal center-justified wrap>
-<!--           <paper-button
-            on-tap="_scrollToTickets"
-            ga-on="click"
-            ga-event-category="tickets"
-            ga-event-action="scroll"
-            ga-event-label="hero block - scroll to tickets"
-            primary invert
-          >
-            <iron-icon icon="hoverboard:ticket"></iron-icon>
-            {$ buyTicket $}
-          </paper-button>
- -->        </div>
-
-<!--         <div class="scroll-down" on-tap="_scrollNextBlock">
+        <!--         <div class="scroll-down" on-tap="_scrollNextBlock">
           <svg xmlns="http://www.w3.org/2000/svg"  version="1.1" id="Layer_2" x="0px" y="0px" viewBox="0 0 25.166666 37.8704414" enable-background="new 0 0 25.166666 37.8704414" xml:space="preserve">
         <path class="stroke" fill="none" stroke="#c7c4b8" stroke-width="2.5" stroke-miterlimit="10" d="M12.5833445 36.6204414h-0.0000229C6.3499947 36.6204414 1.25 31.5204487 1.25 25.2871208V12.5833216C1.25 6.3499947 6.3499951 1.25 12.5833216 1.25h0.0000229c6.2333269 0 11.3333216 5.0999947 11.3333216 11.3333216v12.7037992C23.916666 31.5204487 18.8166714 36.6204414 12.5833445 36.6204414z"></path>
         <path class="scroller" fill="#c7c4b8" d="M13.0833359 19.2157116h-0.9192753c-1.0999985 0-1.9999971-0.8999996-1.9999971-1.9999981v-5.428606c0-1.0999994 0.8999987-1.9999981 1.9999971-1.9999981h0.9192753c1.0999985 0 1.9999981 0.8999987 1.9999981 1.9999981v5.428606C15.083334 18.315712 14.1833344 19.2157116 13.0833359 19.2157116z"></path>
     </svg>
           <i class="icon icon-arrow-down"></i>
         </div>
- -->      </div>
+ -->
+      </div>
     </hero-block>
     <about-block></about-block>
-    <speakers-block></speakers-block>    
-     <tickets-block></tickets-block>
+    <speakers-block></speakers-block>
+    <tickets-block></tickets-block>
     <call-for-papers-block></call-for-papers-block>
     <subscribe-block></subscribe-block>
 
-<!--     <gallery-block></gallery-block>
+    <!--     <gallery-block></gallery-block>
     <about-organizer-block></about-organizer-block>
     <featured-videos></featured-videos>    
- --> 
+ -->
     <latest-posts-block></latest-posts-block>
-<!--     <map-block></map-block>
- -->    <partners-block></partners-block>
+    <!--     <map-block></map-block>
+ -->
+    <partners-block></partners-block>
     <footer-block></footer-block>
   </template>
 
   <script>
-
     // eslint-disable-next-line no-undef
     class HomePage extends ScrollFunctions(ReduxMixin(Polymer.Element)) {
       static get is() {
@@ -226,11 +292,10 @@
 
       _scrollToTickets() {
         // eslint-disable-next-line no-undef
-        const toolbarHeight = HOVERBOARD.Elements.HeaderToolbar.getBoundingClientRect().height - 1;
-        // eslint-disable-next-line no-undef
-        const ticketsBlockPositionY = HOVERBOARD.Elements.Tickets.getBoundingClientRect().top
-          - toolbarHeight;
-        this.scrollToY(ticketsBlockPositionY, 600, 'easeInOutSine');
+        const hovEl = HOVERBOARD.Elements;
+        const toolbarHeight = hovEl.HeaderToolbar.getBoundingClientRect().height - 1;
+        const ticketsBlockPositionY = hovEl.Tickets.getBoundingClientRect().top - toolbarHeight;
+        this.scrollToY(ticketsBlockPositionY, 2000, 'easeInOutSine');
       }
 
       _scrollNextBlock() {
@@ -240,7 +305,5 @@
     }
 
     window.customElements.define(HomePage.is, HomePage);
-
   </script>
 </dom-module>
-
