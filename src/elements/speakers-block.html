@@ -23,6 +23,18 @@
       .container-title {
         margin: 0 auto 70px;
         text-align: center;
+        color: var(--primary-text-color);
+      }
+
+      .header-text {
+        max-width: 1000px;
+        text-align: justify;
+        margin: 0 auto 70px;
+        color: var(--primary-text-color);
+      }
+      
+      .header-text strong {
+        font-style: italic;
       }
 
       .speakers-wrapper {
@@ -43,8 +55,8 @@
       }
 
       .photo {
-        width: 200px;
-        height: 200px;
+        width: 160px;
+        height: 160px;
         background-color: var(--default-primary-color);
         border-radius: 50%;
         overflow: hidden;
@@ -154,7 +166,8 @@
 
     <div class="container">
       <h1 class="container-title">{$ speakersBlock.title $}</h1>
-
+      <p class="header-text">The event will feature exciting speakers such as <strong>Vitalik Buterin</strong>, founder of the cryptocurrency Ethereum, <strong>Natalia Urtecho</strong>, Co-Founder, Chief
+          Innovation & Strategy Officer, The Disruptive Factory, <strong>Yvonne Uwuor</strong>, Writer, producer, <strong>Margaret Levi</strong>, Director, Center for Advanced Study in the Behavioral Sciences, Stanford University, and special guest, <strong>Boots Riley</strong>.<p>
       <div class="speakers-wrapper">
         <template is="dom-repeat" items="[[featuredSpeakers]]" as="speaker">
           <div class="speaker"
@@ -207,10 +220,11 @@
       </div>
       <div class="button-row">
         <a href="{$ speakersBlock.callToAction.link $}">
-          <paper-button class="cta-button animated"
+          <paper-button class="cta-button animated icon-right"
             raised
+            primary
             elevation="1"
-            animated>
+            animate>
             <span>{$ speakersBlock.callToAction.label $}</span>
             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
           </paper-button>
