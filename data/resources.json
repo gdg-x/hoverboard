@@ -60,6 +60,11 @@
           "newTab": true
         },
         {
+          "name": "Forum",
+          "url": "https://forum.radicalxchange.org/",
+          "newTab": true
+        },
+        {
           "name": "Contact our web team",
           "url": "mailto:webdev.radicalxchange@gmail.com",
           "newTab": true
