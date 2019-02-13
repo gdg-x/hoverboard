@@ -20,22 +20,32 @@
         display: block;
       }
 
+      .container-title {
+        margin: 0 auto 70px;
+        text-align: center;
+      }
+
       .speakers-wrapper {
-        margin: 40px 0 32px;
-        display: grid;
+        margin: 0 0 40px;
+        /* display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-gap: 32px 16px;
+        grid-gap: 32px 16px; */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
       }
 
       .speaker {
+        margin-bottom: 40px;
         text-align: center;
         cursor: pointer;
+        width: 250px;
       }
 
       .photo {
-        width: 72px;
-        height: 72px;
-        background-color: var(--accent-color);
+        width: 200px;
+        height: 200px;
+        background-color: var(--default-primary-color);
         border-radius: 50%;
         overflow: hidden;
         transform: translateZ(0);
@@ -89,20 +99,22 @@
         line-height: 1.1;
       }
 
+      .button-row {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 50px;
+      }
+
       .origin {
         margin-top: 4px;
         font-size: 14px;
         line-height: 1.1;
       }
 
-      .cta-button {
-        margin-top: 24px;
-      }
-
       @media (min-width: 640px) {
         .photo {
-          width: 128px;
-          height: 128px;
+          width: 170px;
+          height: 170px;
         }
 
         .name {
@@ -113,10 +125,6 @@
       @media (min-width: 812px) {
         .speakers-wrapper {
           grid-template-columns: repeat(3, 1fr);
-        }
-
-        .speaker:last-of-type {
-          display: none;
         }
 
         .badges {
@@ -197,14 +205,17 @@
           </div>
         </template>
       </div>
-
-      <a href="{$ speakersBlock.callToAction.link $}">
-        <paper-button class="cta-button animated icon-right">
-          <span>{$ speakersBlock.callToAction.label $}</span>
-          <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-        </paper-button>
-      </a>
-
+      <div class="button-row">
+        <a href="{$ speakersBlock.callToAction.link $}">
+          <paper-button class="cta-button animated"
+            raised
+            elevation="1"
+            animated>
+            <span>{$ speakersBlock.callToAction.label $}</span>
+            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+          </paper-button>
+        </a>
+      </div>
     </div>
 
   </template>
