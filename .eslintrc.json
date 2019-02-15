@@ -51,6 +51,7 @@
     "notificationsActions": true,
     "helperActions": true,
     "DIALOGS": true,
-    "NOTIFICATIONS_STATUS": true
+    "NOTIFICATIONS_STATUS": true,
+    "Sentry": true
   }
 }
