@@ -77,10 +77,17 @@
   <link rel="preconnect" href="https://firestore.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Vollkorn:400,400italic,700,700italic%7CMontserrat:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic%7CRoboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic%7CPlayfair+Display:regular,700%7CCrimson+Text:regular,700">
+  <script src="https://browser.sentry-cdn.com/4.6.1/bundle.min.js" crossorigin="anonymous"></script>
+
   <script>
 
     window.Polymer = { rootPath: '{$ basepath $}' };
     window.HOVERBOARD = { Elements: {} };
+
+    // Sentry crash reporting
+    function loadSentry() {
+      return Sentry.init({ dsn: 'https://59f42765e8f94560a0640963511e3ee4@sentry.io/1394686' });
+    }
 
     function loadFirebaseModules(modules) {
       return Promise.all(
@@ -101,6 +108,8 @@
       });
     }
 
+    loadSentry();
+
     loadFirebaseModules([
       'firebase-app',
       'firebase-firestore',
@@ -119,7 +128,8 @@
 
         const firestore = firebase.firestore();
         firestore.settings({ timestampsInSnapshots: true });
-        firebase.firestore().enablePersistence()
+        firebase.firestore()
+          .enablePersistence({ experimentalTabSynchronization: true })
           .catch(() => {
             console.warn('DB offline support not available'); // eslint-disable-line no-console
           });

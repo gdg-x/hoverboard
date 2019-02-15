@@ -28,6 +28,7 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 		- Press **GENERATE NEW PRIVATE KEY**
 	- Rename downloaded file to `serviceAccount.json` and place it to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
 	- [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
+	- Select your Firebase project `firebase use <YOUR_PROJECT_ID>`
 	- Run `yarn firestore:init`
 
 1. Whoa! You've set up Firebase into your app.
