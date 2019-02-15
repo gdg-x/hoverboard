@@ -45,7 +45,8 @@
     {
       "route": "blog",
       "permalink": "/blog/",
-      "label": "Blog"
+      "label": "Blog",
+      "enabled": true
     }
   ],
   "heroSettings": {
