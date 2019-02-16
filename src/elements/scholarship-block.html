@@ -4,7 +4,6 @@
   rel="import"
   href="../../bower_components/paper-button/paper-button.html"
 />
-<link rel="import" href="../mixins/redux-mixin.html" />
 <link rel="import" href="shared-animations.html" />
 <link rel="import" href="hoverboard-icons.html" />
 
@@ -211,7 +210,7 @@
   </template>
 
   <script>
-    class ScholarshipBlock extends ReduxMixin(Polymer.Element) {
+    class ScholarshipBlock extends Polymer.Element {
       static get is() {
         return 'scholarship-block';
       }
