@@ -1,0 +1,164 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html" />
+<link
+  rel="import"
+  href="../../bower_components/paper-button/paper-button.html"
+/>
+<link rel="import" href="../mixins/redux-mixin.html" />
+<link rel="import" href="shared-animations.html" />
+<link rel="import" href="hoverboard-icons.html" />
+
+<dom-module id="scholarship-block">
+  <template>
+    <style
+      is="custom-style"
+      include="shared-styles flex flex-alignment flex-reverse"
+    ></style>
+
+    <style>
+      :host {
+        display: block;
+      }
+
+      .header {
+        color: var(--primary-text-color);
+      }
+
+      .scholarship-sect {
+        position: relative;
+      }
+
+      .scholarship-sect h2 {
+        font-size: 1.2em;
+        text-align: center;
+      }
+
+      .scholarship-sect {
+        color: #fff;
+        background: var(--medium1-primary-color);
+      }
+
+      .scholarship-sect:nth-of-type(even) {
+        background: var(--medium2-primary-color);
+      }
+
+
+    </style>
+
+    <div class="content">
+      <h1 class="header container-narrow">Scholarships</h1>
+      <section class="scholarship-sect container-narrow">
+        <div class="section-inner-wrap">
+          <h2 class="">Radical Action Scholarship: $400</h2>
+          <p>
+            Are you working on a project that applies ideas inspired by Radical Markets? We want people building on
+            these ideas to be able to attend the conference and gain the insight they need to propel their projects
+            forward. The RadicalxChange community is made up of developers, researchers, artists, entrepreneurs,
+            activists and more. This scholarship is suited for those working on small projects, a few months to two years
+            old, those with less than five employees, or those with little access to capital. If you are unsure about
+            whether or not you meet these qualifications, we encourage you to apply and describe the size and
+            capabilities of your organization.
+          </p>
+          <div class="action-buttons" layout horizontal center-justified wrap>
+            <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSfFUbPtbnp4FXRbBjW1icicbvSDdB0j-5a1AkOvKpJAF83RvA/viewform">
+              <paper-button class="cta-button animated icon-right"
+                primary
+                invert
+                animated
+                >
+                <span>Apply Now</span>
+                <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+              </paper-button>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section class="scholarship-sect container-narrow">
+        <div class="section-inner-wrap">
+          <h2 class="">Diversity and Equity Scholarship: $0 - $250</h2>
+          <p>
+            Diversity is vital to the success of the RxC mission. Do you come from a community that is typically
+            underrepresented at conferences like this? We want to make sure that cost is not a burden that prevents
+            you from attending. Some examples of groups that are not always well represented include racial and
+            ethnic minorities, women, low-income attendees, disabled attendees, members of the LGBT community,
+            and members from developing countries — members of underrepresented communities that are not listed
+            above are also welcome to apply. Apply Here.
+          </p>
+          <div class="action-buttons" layout horizontal center-justified wrap>
+            <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSdY9msPgujCvlVYP6jsOTO1t1WR8OEStIQA4HcsnkgxyRhQVw/viewform">
+              <paper-button class="cta-button animated icon-right"
+                primary
+                invert
+                animated
+                >
+                <span>Apply Now</span>
+                <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+              </paper-button>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section class="scholarship-sect container-narrow">
+        <div class="section-inner-wrap">
+          <h2 class="">Student Scholarship: $250</h2>
+          <p>
+            Are you a student interested in the ideas shared within Radical Markets or the RadicalxChange
+            Community? Young people will shape the future, and we believe these ideas will help build a brighter one.
+            We do not want cost to prevent you from attending, so by proving that you currently attend a high school,
+            university, or other institution of higher learning you can receive a highly discounted ticket. Apply Here.
+          </p>
+          <div class="action-buttons" layout horizontal center-justified wrap>
+            <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSetSldcR1CJYhmhRuyshB8hr8rjdRk0C-Spu0g15va5mGZWmA/viewform">
+              <paper-button class="cta-button animated icon-right"
+                primary
+                invert
+                animated
+                >
+                <span>Apply Now</span>
+                <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+              </paper-button>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section class="scholarship-sect container-narrow">
+        <div class="section-inner-wrap">
+          <h2 class="">Community Organizer Scholarship: $400</h2>
+          <p>
+            If you have founded a local RadicalxChange chapter, or are a regular participant within a local chapter, you
+            are eligible for this scholarship. This is the shortest application because most of the information about you
+            will be verified externally by either the chapter founder (if you are a participant) or by the RadicalxChange
+            chapter coordinator (if you are a founder). Apply Here.
+          </p>
+          <div class="action-buttons" layout horizontal center-justified wrap>
+            <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSd1TR0wmH6F5EvJ1A7ZjBHh6MWzHgKR31qlxtrO4188yuy3eA/viewform">
+              <paper-button class="cta-button animated icon-right"
+                primary
+                invert
+                animated
+                >
+                <span>Apply Now</span>
+                <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+              </paper-button>
+            </a>
+          </div>
+        </div>
+      </section>
+      <div class="container-narrow">
+        <h1 class="header">Scholarship Process</h1>
+        <p>Scholarships are based on specific eligibility criteria. See requirements in application descriptions. Scholarship tickets will grant you the same access as a general admission ticket.</p>
+            
+        <p>Please direct all questions regarding scholarships to: <a href="mailto:ticketing@radicalxchange.org" target="_top">ticketing@radicalxchange.org</a></p>
+      </div>
+  </template>
+
+  <script>
+    class ScholarshipBlock extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'scholarship-block';
+      }
+    }
+
+    window.customElements.define(ScholarshipBlock.is, ScholarshipBlock);
+  </script>
+</dom-module>
