@@ -1,0 +1,199 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html" />
+<link
+  rel="import"
+  href="../../bower_components/paper-button/paper-button.html"
+/>
+<link rel="import" href="../mixins/redux-mixin.html" />
+<link rel="import" href="shared-animations.html" />
+<link rel="import" href="hoverboard-icons.html" />
+
+<dom-module id="scholarship-block">
+  <template>
+    <style
+      is="custom-style"
+      include="shared-styles flex flex-alignment flex-reverse"
+    ></style>
+
+    <style>
+      :host {
+        display: block;
+      }
+
+      .container-narrow {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+  
+      .content {
+        background: var(--default-primary-color);
+        color: #fff;
+        padding-bottom: 60px;
+      }
+
+      .header {
+        padding-top: 1em;
+        text-align: center;
+      }
+
+      .top-sect {
+        font-style: italic;
+        text-align: center;
+        margin: 1em auto;
+      }
+
+      .bottom-section {
+        text-align: center;
+        margin: 0 auto;
+      }
+
+      .numbers-sect {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+      }
+
+      .number-sect {
+        display: grid;
+        margin: 0 auto 2em;
+        grid-template-rows: 100px content content;
+        max-width: 240px;
+        width: 100%;
+      }
+
+      .number {
+        text-align: center;
+        font-size: 80px;
+        font-weight: bold;
+      }
+
+      .number-text {
+        margin-bottom: 1em;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .price {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 1.4em;
+      }
+
+      @media (min-width: 500px){
+        .numbers-sect {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .number-sect {
+          grid-template-columns: repeat(1, 1fr);
+        }
+        
+      @media (min-width: 1000px){
+        .numbers-sect {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+    }
+
+    </style>
+
+    <div class="content">
+      <header>
+        <h1 class="header container-title">Scholarships</h1>
+      </header>
+      <div class="container-narrow">
+        <p class="top-sect">We want the event to be accessible to everyone, especially those that might
+            not otherwise be able to pay full price. We are therefore proud to offer
+            scholarships consistent with our&nbsp;values.</p>
+      </div>
+      <div class="container">
+        <section class="numbers-sect">
+          <div class="number-sect">
+            <div class="number">1.</div>
+            <div class="number-text">Radical Action Scholarships for builders.</div>
+            <div class="action-buttons" layout center-justified center vertical>
+              <span class="price">$400</span>
+              <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSfFUbPtbnp4FXRbBjW1icicbvSDdB0j-5a1AkOvKpJAF83RvA/viewform">
+                <paper-button class="cta-button animated icon-right"
+                  primary
+                  invert
+                  animated
+                  raised
+                  >
+                  <span>Apply Now</span>
+                  <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+                </paper-button>
+              </a>
+            </div>
+          </div>
+          <div class="number-sect">
+            <div class="number">2.</div>
+            <div class="number-text">Diversity and Equity Scholarships to ensure inclusivity.</div>
+            <div class="action-buttons" layout center-justified center vertical>
+              <span class="price">$0-250</span>
+              <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSdY9msPgujCvlVYP6jsOTO1t1WR8OEStIQA4HcsnkgxyRhQVw/viewform">
+                <paper-button class="cta-button animated icon-right"
+                  primary
+                  invert
+                  animated
+                  raised
+                  >
+                  <span>Apply Now</span>
+                  <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+                </paper-button>
+              </a>
+            </div>
+          </div>
+          <div class="number-sect">
+            <div class="number">3.</div>
+            <div class="number-text">Student Scholarships to make sure we have young voices and minds present.</div>
+            <div class="action-buttons" layout center-justified center vertical>
+              <span class="price">$250</span>
+              <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSetSldcR1CJYhmhRuyshB8hr8rjdRk0C-Spu0g15va5mGZWmA/viewform">
+                <paper-button class="cta-button animated icon-right"
+                  primary
+                  invert
+                  animated
+                  raised
+                  >
+                  <span>Apply Now</span>
+                  <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+                </paper-button>
+              </a>
+            </div>
+          </div>
+          <div class="number-sect">
+            <div class="number">4.</div>
+            <div class="number-text">Community Organizer
+                Scholarships for people
+                founding or involved with
+                local RxC chapters.</div>
+            <div class="action-buttons" layout center-justified center vertical>
+              <span class="price">$400</span>
+              <a target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSd1TR0wmH6F5EvJ1A7ZjBHh6MWzHgKR31qlxtrO4188yuy3eA/viewform">
+                <paper-button class="cta-button animated icon-right"
+                  primary
+                  invert
+                  animated
+                  raised
+                  >
+                  <span>Apply Now</span>
+                  <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+                </paper-button>
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+        <p class="bottom-section container-narrow">Scholarships are based on specific eligibility criteria. See requirements in application descriptions. Scholarship tickets will grant you the same access as a general admission&nbsp;ticket.</p>
+    </div>
+  </template>
+
+  <script>
+    class ScholarshipBlock extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'scholarship-block';
+      }
+    }
+
+    window.customElements.define(ScholarshipBlock.is, ScholarshipBlock);
+  </script>
+</dom-module>
