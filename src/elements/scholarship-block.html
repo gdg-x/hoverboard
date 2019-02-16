@@ -31,9 +31,30 @@
         padding-bottom: 60px;
       }
 
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      .container-title {
+        margin: 0;
+        padding: 0 1em;
+      }
+
       .header {
+        overflow: hidden;
         padding-top: 1em;
         text-align: center;
+      }
+
+      .barcode {
+        height: 70px;
+        width: 400px;
+        position: relative;
+        background-image: url('/images/barcode_white.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
       }
 
       .top-sect {
@@ -97,8 +118,10 @@
 
     <div class="content">
       <header>
-        <h1 class="header container-title">Scholarships</h1>
+        <h1 class="container-title">Scholarships</h1>
+        <div class="barcode"></div>
       </header>
+
       <div class="container-narrow">
         <p class="top-sect">We want the event to be accessible to everyone, especially those that might
             not otherwise be able to pay full price. We are therefore proud to offer
