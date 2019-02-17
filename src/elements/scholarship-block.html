@@ -1,11 +1,10 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html" />
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html" />
+<link rel="import" href="../elements/barcode-header.html" />
 <link
   rel="import"
   href="../../bower_components/paper-button/paper-button.html"
 />
-<link rel="import" href="shared-animations.html" />
-<link rel="import" href="hoverboard-icons.html" />
 
 <dom-module id="scholarship-block">
   <template>
@@ -41,15 +40,9 @@
         padding: 0 1em;
       }
 
-      .header {
-        overflow: hidden;
-        padding-top: 1em;
-        text-align: center;
-      }
-
       .barcode {
         height: 70px;
-        width: 400px;
+        width: 30%;
         position: relative;
         background-image: url('/images/barcode_white.svg');
         background-repeat: no-repeat;
@@ -59,12 +52,12 @@
       .top-sect {
         font-style: italic;
         text-align: center;
-        margin: 1em auto;
+        margin: 50px auto 0;
       }
 
       .bottom-section {
         text-align: center;
-        margin: 0 auto;
+        margin: 1em auto;
       }
 
       .numbers-sect {
@@ -116,10 +109,7 @@
     </style>
 
     <div class="content">
-      <header>
-        <h1 class="container-title">Scholarships</h1>
-        <div class="barcode"></div>
-      </header>
+      <barcode-header invert >Scholarships</barcode-header>
 
       <div class="container-narrow">
         <p class="top-sect">We want the event to be accessible to everyone, especially those that might
