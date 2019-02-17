@@ -21,7 +21,7 @@
       }
 
       .container-title {
-        margin: 0 auto 70px;
+        margin: 0 auto 40px;
         text-align: center;
         color: var(--primary-text-color);
       }
@@ -29,7 +29,7 @@
       .header-text {
         max-width: 1000px;
         text-align: justify;
-        margin: 0 auto 70px;
+        margin: 0 auto 40px;
         color: var(--primary-text-color);
       }
       
@@ -38,20 +38,18 @@
       }
 
       .speakers-wrapper {
-        margin: 0 0 40px;
-        /* display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 32px 16px; */
+        margin: 0;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
+        margin-bottom: 20px;
       }
 
       .speaker {
-        margin-bottom: 40px;
+        margin: 0 20px 40px;
         text-align: center;
         cursor: pointer;
-        width: 250px;
+        width: 210px;
       }
 
       .photo {
@@ -125,8 +123,8 @@
 
       @media (min-width: 640px) {
         .photo {
-          width: 170px;
-          height: 170px;
+          width: 150px;
+          height: 150px;
         }
 
         .name {
@@ -165,11 +163,11 @@
     </style>
 
     <div class="container">
-      <div class="container-narrow">
+    
         <h1 class="container-title">{$ speakersBlock.title $}</h1>
         <p class="header-text">The event will feature exciting speakers such as <strong>Vitalik Buterin</strong>, founder of the cryptocurrency Ethereum, <strong>Natalia Urtecho</strong>, Co-Founder, Chief
             Innovation & Strategy Officer, The Disruptive Factory, <strong>Yvonne Uwuor</strong>, Writer, producer, <strong>Margaret Levi</strong>, Director, Center for Advanced Study in the Behavioral Sciences, Stanford University, and special guest, <strong>Boots Riley</strong>.<p>
-      </div>
+
       <div class="speakers-wrapper">
         <template is="dom-repeat" items="[[featuredSpeakers]]" as="speaker">
           <div class="speaker"
@@ -225,7 +223,7 @@
           <paper-button class="cta-button animated icon-right"
             raised
             primary
-            elevation="1"
+            invert
             animate>
             <span>{$ speakersBlock.callToAction.label $}</span>
             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
