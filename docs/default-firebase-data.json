@@ -70,6 +70,34 @@
         "logoUrl" : "../images/logos/klanik.png",
         "name" : "Klanik",
         "url" : "https://www.klanik.com/"
+      },
+      {
+        "order" : 1,
+        "height": 100,
+        "logoUrl" : "../images/logos/talkspirit.png",
+        "name" : "talkspirit",
+        "url" : "https://www.talkspirit.com/fr/"
+      },
+      {
+        "order" : 1,
+        "height": 100,
+        "logoUrl" : "../images/logos/zendesk.png",
+        "name" : "Zendesk",
+        "url" : "https://www.zendesk.com/"
+      },
+      {
+        "order" : 1,
+        "height": 100,
+        "logoUrl" : "../images/logos/kaliop.png",
+        "name" : "Kaliop",
+        "url" : "https://www.kaliop.com/"
+      },
+      {
+        "order" : 1,
+        "height": 100,
+        "logoUrl" : "../images/logos/esii.png",
+        "name" : "ESII",
+        "url" : "https://www.esii.com/fr"
       } ],
       "order" : 1,
       "title" : "Gold"
@@ -95,6 +123,20 @@
         "logoUrl" : "../images/logos/gitlab.png",
         "name" : "Gitlab",
         "url" : "https://about.gitlab.com/"
+      },
+      {
+        "order" : 1,
+        "height": 75,
+        "logoUrl" : "../images/logos/sada.png",
+        "name" : "Sada",
+        "url" : "http://www.sada.fr/"
+      },
+      {
+        "order" : 1,
+        "height": 75,
+        "logoUrl" : "../images/logos/lunchr.svg",
+        "name" : "Lunchr",
+        "url" : "https://www.lunchr.co/"
       } ],
       "order" : 2,
       "title" : "Silver"
@@ -129,7 +171,77 @@
   } ],
   "schedule" : {},
   "sessions" : {},
-  "speakers" : {},
+  "speakers" : {
+    "david_pilato" : {
+      "bio" : "Depuis 2013, David Pilato est développeur et évangéliste chez elastic.co, après avoir passé les deux années précédentes à promouvoir le projet open-source Elasticsearch. Il en anime la communauté française et organise des [BBLs](http://brownbaglunch.fr) au sein des entreprises.",
+      "company" : "Elastic",
+      "companyLogo" : "/images/logos/elastic.svg",
+      "companyLogoUrl" : "/images/logos/elastic.svg",
+      "country" : "Cergy - Le Haut, Cergy, France",
+      "featured" : true,
+      "name" : "David Pilato",
+      "photo" : "/images/people/david_pilato.jpg",
+      "photoUrl" : "/images/people/david_pilato.jpg",
+      "shortBio" : "Depuis 2013, David Pilato est développeur et évangéliste chez elastic.co, après avoir passé les deux années précédentes à promouvoir le projet open-source Elasticsearch.",
+      "socials" : [ {
+        "icon" : "github",
+        "link" : "https://github.com/dadoonet",
+        "name" : "GitHub"
+      }, {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/dadoonet",
+        "name" : "Twitter"
+      } ],
+      "order" : 0,
+      "title" : "Developer"
+    },
+    "tugdual_grall" : {
+      "bio" : "Tugdual Grall est Director of Product Management chez Red Hat dans l'équipe \"Dev Tools\" ou il participe a la définition de l'Experience Développeur des outils comme OpenShift/Kubernetes et les offres Middleware (JBoss)\n\nAvant de travailler chez Red hat, \"Tug\", était Technical Evangelist chez MapR, MongoDB et Couchbase. Tug a également travaillé comme CTO chez eXo Platform, et comme Product Manager et Développeur sur la platform JavaEE d'Oracle.\n\nTugdual est également co-fondateur du Nantes JUG (Java Users Group) qui réunit tous les mois depuis 2008 les développeurs et architectes de la région nantaise.",
+      "company" : "Elastic",
+      "companyLogo" : "/images/logos/redhat.png",
+      "companyLogoUrl" : "/images/logos/redhat.png",
+      "country" : "Nantes, France",
+      "featured" : true,
+      "name" : "Tugdual Grall",
+      "photo" : "/images/people/tugdual_grall.jpg",
+      "photoUrl" : "/images/people/tugdual_grall.jpg",
+      "shortBio" : "Director of Product Management chez Red Hat...",
+      "socials" : [ {
+        "icon" : "github",
+        "link" : "https://github.com/tgrall",
+        "name" : "GitHub"
+      }, {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/tgrall",
+        "name" : "Twitter"
+      } ],
+      "order" : 0,
+      "title" : "Director of Product Management"
+    },
+    "tugdual_grall" : {
+      "bio" : "Tugdual Grall est Director of Product Management chez Red Hat dans l'équipe \"Dev Tools\" ou il participe a la définition de l'Experience Développeur des outils comme OpenShift/Kubernetes et les offres Middleware (JBoss)\n\nAvant de travailler chez Red hat, \"Tug\", était Technical Evangelist chez MapR, MongoDB et Couchbase. Tug a également travaillé comme CTO chez eXo Platform, et comme Product Manager et Développeur sur la platform JavaEE d'Oracle.\n\nTugdual est également co-fondateur du Nantes JUG (Java Users Group) qui réunit tous les mois depuis 2008 les développeurs et architectes de la région nantaise.",
+      "company" : "Elastic",
+      "companyLogo" : "/images/logos/redhat.png",
+      "companyLogoUrl" : "/images/logos/redhat.png",
+      "country" : "Nantes, France",
+      "featured" : true,
+      "name" : "Tugdual Grall",
+      "photo" : "/images/people/tugdual_grall.jpg",
+      "photoUrl" : "/images/people/tugdual_grall.jpg",
+      "shortBio" : "Director of Product Management chez Red Hat...",
+      "socials" : [ {
+        "icon" : "github",
+        "link" : "https://github.com/tgrall",
+        "name" : "GitHub"
+      }, {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/tgrall",
+        "name" : "Twitter"
+      } ],
+      "order" : 0,
+      "title" : "Director of Product Management"
+    },
+  },
   "team" : [ {
     "members" : [ {
       "name" : "Loïc Talon",
