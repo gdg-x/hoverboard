@@ -1,0 +1,185 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="./shared-styles.html">
+
+<dom-module id="building-momentum-gallery">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+    <style>
+
+      :host {
+        display: block;
+      }
+
+      .photos-grid--top {
+        margin: 2px auto;
+        display: grid;
+        width: 100%;
+        min-height: 400px;
+        height: calc(200vh - 40px);
+        grid-template-columns: repeat(3, 1fr);
+        /* grid-template-rows: repeat(6, 1fr); */
+        grid-gap: 2px;
+      }
+
+      .grid-item {
+        background-color: var(--secondary-background-color);
+      }
+
+      .grid-item:first-child {
+        grid-area: 1 / 1 / 3 / 4;
+      }
+
+      /* .grid-item:nth-child(2) {
+        grid-area: 3 / 1 / 5 / 3;
+      }
+
+      .grid-item:nth-child(3) {
+        grid-area: 3 / 3 / 3 / 3;
+      }
+
+      .grid-item:nth-child(4) {
+        grid-area: 4 / 3 / 4 / 3;
+      }
+
+      .grid-item:nth-child(5) {
+        grid-area: 5 / 1 / 5 / 1;
+      }
+
+      .grid-item:nth-child(6) {
+        display: none;
+      }
+
+      .grid-item:nth-child(7) {
+        display: none;
+      }
+
+      .grid-item:nth-child(8) {
+        display: none;
+      } */
+
+      .gallery-info {
+        padding: 16px;
+        background-color: var(--default-primary-color);
+        color: var(--text-primary-color);
+        z-index: 1;
+        grid-area: 5 / 2 / 5 / 4;
+      }
+
+      paper-button {
+        margin-top: 16px;
+        color: var(--text-primary-color);
+      }
+
+      @media (min-width: 640px) {
+        .photos-grid--top {
+          grid-template-columns: repeat(12, 1fr);
+          grid-template-rows: repeat(22, 1fr);
+        }
+
+        .grid-item:first-child {
+          grid-area: 1 / 1 / 12 / 7;
+        }
+
+        .grid-item:nth-child(2) {
+          grid-area: 2 / 7 / 8 / 13;
+        }
+
+        .grid-item:nth-child(3) {
+          grid-area: 8 / 7 / 12 / 11;
+        }
+
+        .grid-item:nth-child(4) {
+          grid-area: 8 / 11 / 12 / 13;
+        }
+
+        .grid-item:nth-child(5) {
+          grid-area: 12 / 1 / 16 / 3;
+        }
+
+        .grid-item:nth-child(6) {
+          grid-area: 12 / 3 / 16 / 7;
+          display: block;
+        }
+
+        .grid-item:nth-child(7) {
+          grid-area: 16 / 1 / 21 / 7;
+          display: block;
+        } 
+
+        .grid-item:nth-child(8) {
+          grid-area: 12 / 7 / 22 / 13;
+          display: block;
+        }
+/* 
+        .gallery-info {
+          padding: 24px;
+          grid-area: 2 / 3 / 2 / 5;
+        } */
+      }
+
+    </style>
+
+    <div class="photos-grid--top">
+      <template is="dom-repeat" items="[[gallery]]" as="photo">
+        <plastic-image
+          class="grid-item"
+          srcset="[[photo.url]]"
+          sizing="cover"
+          lazy-load preload fade
+        ></plastic-image>
+      </template>
+      <!-- <div class="gallery-info" layout vertical justified>
+        <div>
+          <h2>{$ galleryBlock.title $}</h2>
+          <p>{$ galleryBlock.description $}</p>
+        </div>
+        <a href="{$ galleryBlock.callToAction.link $}" target="_blank" rel="noopener noreferrer">
+          <paper-button>{$ galleryBlock.callToAction.label $}</paper-button>
+        </a>
+      </div> -->
+    </div>
+
+  </template>
+
+  <script>
+
+    class GalleryBlock extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'building-momentum-gallery';
+      }
+
+      static get properties() {
+        return {
+          gallery: {
+            type: Array,
+            statePath: 'gallery.list',
+          },
+          galleryFetching: {
+            type: Boolean,
+            statePath: 'gallery.fetching',
+          },
+          galleryFetchingError: {
+            type: Object,
+            statePath: 'gallery.fetchingError',
+          },
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+
+        if (!this.gallery || !this.gallery.length) {
+          this.dispatch(galleryActions.fetchGallery());
+        }
+      }
+    }
+
+    window.customElements.define(GalleryBlock.is, GalleryBlock);
+  </script>
+</dom-module>
