@@ -4,6 +4,7 @@
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="shared-animations.html">
 <link rel="import" href="hoverboard-icons.html">
+<link rel="import" href="../elements/barcode-header.html" />
 
 <dom-module id="call-for-papers-block">
   <template>
@@ -15,71 +16,43 @@
       }
 
       .container {
-        padding-top: 64px;
-      }
-
-      .content {
-        display: grid;
-        grid-gap: 32px;
-        grid-template-columns: 1fr;
-      }
-
-      .statistics-block {
-        width: 100%;
-        display: grid;
-        grid-gap: 32px 16px;
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .numbers {
-        font-size: 40px;
-      }
-
-      .numbers::after {
-        content: "";
-        display: block;
-        height: 2px;
-        width: 64px;
-        background-color: var(--default-primary-color);
+        padding-top: 30px;
+        text-align: center;
       }
 
       .label {
         margin-top: 4px;
       }
 
-      @media (min-width: 640px) {
-        .content {
-          grid-gap: 64px;
-          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-        }
-
-        .statistics-block {
-          grid-gap: 32px;
-        }
-
-        .numbers {
-          font-size: 56px;
-        }
+      .bold {
+        font-size: 24px;
+        color:  var(--default-primary-color);
+        max-width: 550px;
       }
+
+      .buttons {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
     </style>
 
+    <barcode-header no-border right>Call for Papers</barcode-header>
     <div class="container">
-
       <div class="content">
-
         <div>
-          <h1 class="container-narrow">Call for Papers</h1>
-          <p class="container-narrow">We are soliciting applications to present in the Ideas + Research track.</p>
-          <p class="container-narrow"><a href="https://radicalxchange.org/blog/posts/2018-11-27-0vdrny/" ga-on="click"
+          <p class="container-narrow bold">We are soliciting applications to present in the Ideas + Research track.</p>
+          <p class="container-narrow buttons">
+            <a href="https://radicalxchange.org/blog/posts/2018-11-27-0vdrny/" ga-on="click"
               ga-event-category="call-for-papers" ga-event-action="call-for-papers" ga-event-label="call-for-papers block">
-              <paper-button class="animated icon-right">
+              <paper-button class="animated icon-right" raised>
                 <span class="cta-label">More info</span>
                 <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
               </paper-button>
             </a>
             <a href="https://goo.gl/forms/GhfYthCruzgcPZfA3" ga-on="click" ga-event-category="aall-for-papers"
               ga-event-action="call-for-papers" ga-event-label="call-for-papers submit block">
-              <paper-button class="animated icon-right">
+              <paper-button class="animated icon-right" raised>
                 <span class="cta-label">Submit</span>
                 <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
               </paper-button>
