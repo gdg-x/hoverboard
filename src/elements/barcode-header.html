@@ -1,0 +1,106 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="barcode-header">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+    <style>
+
+      header {
+        display: flex;
+        align-items: center;
+        background: #fff;   
+        color: var(--default-primary-color);
+        height: 100%;
+      }
+
+      .container-title {
+        margin: 0;
+        padding: 0 3%;
+        white-space: nowrap;
+        border: 1px solid var(--default-primary-color);
+        justify-self: stretch;
+        align-self: stretch;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .barcode {
+        height: 100%;
+        position: relative;
+        background-image: url('/images/barcode_purple.svg');
+        background-repeat: repeat;
+        background-size: auto 100%;
+        display: flex;
+        flex-grow: 1;
+      }
+
+      .left {
+        max-width: 25%;
+      }
+
+      @media (max-width: 500px) {
+        .container-title {
+          font-size: 24px;
+        }
+      }
+
+    </style>
+      <template is="dom-if" if="{{noBorder}}">
+        <style>
+          .container-title { 
+            border:none;
+            }
+        </style>
+      </template>
+      <template is="dom-if" if="{{invert}}">
+        <style>
+          header {
+            color: #fff;
+            background: var(--default-primary-color);
+            }
+          .barcode { background-image: url('/images/barcode_white.svg');}
+        </style>
+      </template>
+      <template is="dom-if" if="{{right}}">
+        <style>
+          header { justify-content: flex-end; }
+          .left { max-width: none; }
+          .right { max-width: 25%; }
+        </style>
+        <header>
+          <h1 class="container-title">
+            <slot></slot>
+          </h1>
+          <div class="barcode right"></div>
+        </header>
+      </template>
+      <template is="dom-if" if="{{!right}}">
+        <header>
+          <div class="barcode left"></div>
+          <h1 class="container-title">
+            <slot></slot>
+          </h1>
+        </header>
+      </template>
+  </template>
+
+  <script>
+
+    class BarcodeHeader extends Polymer.Element {
+      static get is() {return 'barcode-header';}
+      static get properties() {
+        return {
+          right: { type: Boolean, value: false },
+          invert: { type: Boolean, value: false },
+          noBorder: { type: Boolean, value: false },
+        };
+      }
+    }
+
+    window.customElements.define(BarcodeHeader.is, BarcodeHeader);
+
+  </script>
+</dom-module>
+
