@@ -176,6 +176,13 @@
     "viewVideo": "View video",
     "speakers": "Speakers"
   },
+  "speakersBlock": {
+    "title": "Ils seront présents !",
+    "callToAction": {
+      "label": "Voir tous les speakers",
+      "link": "/speakers/"
+    }
+},
   "speakerDetails": {
     "sessions": "Sessions"
   },

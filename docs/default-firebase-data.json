@@ -91,13 +91,6 @@
         "logoUrl" : "../images/logos/kaliop.png",
         "name" : "Kaliop",
         "url" : "https://www.kaliop.com/"
-      },
-      {
-        "order" : 1,
-        "height": 100,
-        "logoUrl" : "../images/logos/esii.png",
-        "name" : "ESII",
-        "url" : "https://www.esii.com/fr"
       } ],
       "order" : 1,
       "title" : "Gold"
@@ -137,6 +130,13 @@
         "logoUrl" : "../images/logos/lunchr.svg",
         "name" : "Lunchr",
         "url" : "https://www.lunchr.co/"
+      },
+      {
+        "order" : 1,
+        "height": 100,
+        "logoUrl" : "../images/logos/esii.png",
+        "name" : "ESII",
+        "url" : "https://www.esii.com/fr"
       } ],
       "order" : 2,
       "title" : "Silver"
@@ -193,18 +193,18 @@
         "name" : "Twitter"
       } ],
       "order" : 0,
-      "title" : "Developer"
+      "title" : "Developer & Evangelist at Elastic"
     },
     "tugdual_grall" : {
       "bio" : "Tugdual Grall est Director of Product Management chez Red Hat dans l'équipe \"Dev Tools\" ou il participe a la définition de l'Experience Développeur des outils comme OpenShift/Kubernetes et les offres Middleware (JBoss)\n\nAvant de travailler chez Red hat, \"Tug\", était Technical Evangelist chez MapR, MongoDB et Couchbase. Tug a également travaillé comme CTO chez eXo Platform, et comme Product Manager et Développeur sur la platform JavaEE d'Oracle.\n\nTugdual est également co-fondateur du Nantes JUG (Java Users Group) qui réunit tous les mois depuis 2008 les développeurs et architectes de la région nantaise.",
-      "company" : "Elastic",
+      "company" : "Red Hat",
       "companyLogo" : "/images/logos/redhat.png",
       "companyLogoUrl" : "/images/logos/redhat.png",
       "country" : "Nantes, France",
       "featured" : true,
       "name" : "Tugdual Grall",
-      "photo" : "/images/people/tugdual_grall.jpg",
-      "photoUrl" : "/images/people/tugdual_grall.jpg",
+      "photo" : "/images/people/tugdual_grall.png",
+      "photoUrl" : "/images/people/tugdual_grall.png",
       "shortBio" : "Director of Product Management chez Red Hat...",
       "socials" : [ {
         "icon" : "github",
@@ -216,30 +216,95 @@
         "name" : "Twitter"
       } ],
       "order" : 0,
-      "title" : "Director of Product Management"
+      "title" : "Director of Product Management - Developer tools & Experience at Red Hat"
     },
-    "tugdual_grall" : {
-      "bio" : "Tugdual Grall est Director of Product Management chez Red Hat dans l'équipe \"Dev Tools\" ou il participe a la définition de l'Experience Développeur des outils comme OpenShift/Kubernetes et les offres Middleware (JBoss)\n\nAvant de travailler chez Red hat, \"Tug\", était Technical Evangelist chez MapR, MongoDB et Couchbase. Tug a également travaillé comme CTO chez eXo Platform, et comme Product Manager et Développeur sur la platform JavaEE d'Oracle.\n\nTugdual est également co-fondateur du Nantes JUG (Java Users Group) qui réunit tous les mois depuis 2008 les développeurs et architectes de la région nantaise.",
-      "company" : "Elastic",
-      "companyLogo" : "/images/logos/redhat.png",
-      "companyLogoUrl" : "/images/logos/redhat.png",
-      "country" : "Nantes, France",
+    "xavier_detant" : {
+      "bio" : "Co-organisateur de la communauté software craftsmanship de Paris et de la non-conférence SoCraTes France, le partage de savoir est au cœur de mon état d'esprit.\nAmoureux de la programmation fonctionnelle et du code élégant, le plaisir de programmer et d'expliquer cet art ont fait de moi un crafter passionné.",
+      "shortBio" : "CTO de Zenika, co-organisateur de la communauté software craftmanship & SoCraTes France, ...",
+      "company" : "Zenika",
+      "companyLogo" : "/images/logos/zenika.png",
+      "companyLogoUrl" : "/images/logos/zenika.png",
+      "country" : "Paris, France",
       "featured" : true,
-      "name" : "Tugdual Grall",
-      "photo" : "/images/people/tugdual_grall.jpg",
-      "photoUrl" : "/images/people/tugdual_grall.jpg",
-      "shortBio" : "Director of Product Management chez Red Hat...",
+      "name" : "Xavier Detant",
+      "photo" : "/images/people/Xavier_Detant.jpg",
+      "photoUrl" : "/images/people/Xavier_Detant.jpg",
       "socials" : [ {
         "icon" : "github",
-        "link" : "https://github.com/tgrall",
+        "link" : "https://github.com/FaustXVI",
         "name" : "GitHub"
       }, {
         "icon" : "twitter",
-        "link" : "https://twitter.com/tgrall",
+        "link" : "https://twitter.com/XDetant",
         "name" : "Twitter"
       } ],
       "order" : 0,
-      "title" : "Director of Product Management"
+      "title" : "CTO de Zenika"
+    },
+    "tiffany_souterre" : {
+      "bio" : "I love science and I love data! After finishing a PhD in genetic engineering, I continued my quest for discovering new patterns through data science and machine learning. I currently work as a Data Scientist and I play with machine learning algorithms on my free time. Someday, I wish to leverage artificial intelligence and genetics to improve people's life.",
+      "shortBio" : "I love science and I love data! After finishing a PhD in genetic engineering, I continued my quest for discovering new patterns through data science and machine learning...",
+      "company" : "JEMS Datafactory",
+      "companyLogo" : "/images/logos/JEMS-Datafactory.png",
+      "companyLogoUrl" : "/images/logos/JEMS-Datafactory.png",
+      "country" : "Paris, France",
+      "featured" : true,
+      "name" : "Tiffany Souterre",
+      "photo" : "/images/people/tiffany_souterre.jpg",
+      "photoUrl" : "/images/people/tiffany_souterre.jpg",
+      "socials" : [ {
+        "icon" : "github",
+        "link" : "https://github.com/amagash",
+        "name" : "GitHub"
+      }, {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/tiffanysouterre",
+        "name" : "Twitter"
+      } ],
+      "order" : 0,
+      "title" : "Data Engineer at JEMS datafactory"
+    },
+    "igor_laborie" : {
+      "bio" : "Développeur passionné depuis plus de 18 ans, expert dans les technos Java et Web. Je suis impliqué dans les rendez-vous techniques toulousains (Devfest Toulouse, GDG, JUG, Software Craftsmanship Toulouse).\nJ’apprécie la programmation fonctionnelle, et donc particulièrement je suis attiré par les nouveaux langages et frameworks qui vont dans cette direction. \n\nEt puis je sais dessiner une 🦄 en CSS.",
+      "shortBio" : "Développeur passionné depuis plus de 18 ans, expert dans les technos Java et Web....",
+      "company" : "MonkeyPatch.io",
+      "companyLogo" : "/images/logos/monkeypatch.png",
+      "companyLogoUrl" : "/images/logos/monkeypatch.png",
+      "country" : "Toulouse, France",
+      "featured" : true,
+      "name" : "Igor Laborie",
+      "photo" : "/images/people/Igor_Laborie.jpg",
+      "photoUrl" : "/images/people/Igor_Laborie.jpg",
+      "socials" : [ {
+        "icon" : "github",
+        "link" : "https://github.com/ilaborie",
+        "name" : "GitHub"
+      }, {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/ilaborie",
+        "name" : "Twitter"
+      } ],
+      "order" : 0,
+      "title" : "Expert Java / Web at MonkeyPatch.io"
+    },
+    "emmanuelle_marevery" : {
+      "bio" : "Consultante et formatrice en Expérience Utilisateur, Emmanuelle accompagne les entreprises dans leur stratégie digitale, leur expérience utilisateur (UX) et l'innovation centrée utilisateurs (transformation numérique, audits, études et tests utilisateurs, ateliers Design Sprint, personas, recherche utilisateur avancée, data mining, …).\n\nIngénieur généraliste et diplômée en psychologie, elle a crée et animé le pole User Sciences chez Décathlon avant de rejoindre Ubisoft en tant qu'UX strategist. Spécialiste des activités de loisirs (sport, jeux vidéos, jeux de société,  luxe, ... ), elle a travaillé pour des grands comptes (Axa, Asmodee, Michelin, Picard, Eres, Le petit Marseillais, Sodexo, Midas,...) et aussi des entreprises et start up régionales (Phytocontrol, Fruition Sciences, ... )",
+      "shortBio" : "Consultante et formatrice en Expérience Utilisateur, Emmanuelle accompagne les entreprises dans leur stratégie digitale, leur expérience utilisateur (UX) et l'innovation centrée utilisateurs...",
+      "company" : "ColorLink",
+      "companyLogo" : "/images/logos/colorlink.png",
+      "companyLogoUrl" : "/images/logos/colorlink.png",
+      "country" : "Montpellier, France",
+      "featured" : true,
+      "name" : "Emmanuelle Marevery",
+      "photo" : "/images/people/Emmanuelle_Marevery.jpg",
+      "photoUrl" : "/images/people/Emmanuelle_Marevery.jpg",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/mareverie",
+        "name" : "Twitter"
+      } ],
+      "order" : 0,
+      "title" : "Directrice innovation & UX"
     }
   },
   "team" : [ {
