@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "autotrack": "^2.4.1",
+    "firebase": "^5.8.3",
     "firebase-functions": "^2.1.0",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
