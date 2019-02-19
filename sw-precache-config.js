@@ -3,12 +3,8 @@ module.exports = {
     '/index.html',
     '/manifest.json',
     '/bower_components/webcomponentsjs/*.js',
-    // Looks like caching old versions of firebase can cause some weirdness.
-    // I was getting IndexedDB mismatch problems and commenting out these lines
-    // resolved them.
-    // https://github.com/firebase/firebase-js-sdk/issues/1339
-    // '/bower_components/firebase/firebase.js',
-    // '/bower_components/firebase/firebase-firestore.js',
+    '/bower_components/firebase/firebase.js',
+    '/bower_components/firebase/firebase-firestore.js',
     '/images/**/*',
     '/scripts/**/*',
     '/data/**/*',
@@ -30,7 +26,7 @@ module.exports = {
     },
     {
       urlPattern: /\/bower_components\/.*/,
-      handler: 'cacheFirst',
+      handler: 'networkFirst',
       options: {
         cache: {
           name: 'bower-components-cache',
