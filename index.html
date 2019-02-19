@@ -126,8 +126,6 @@
           messagingSenderId: '{$ firebase.messagingSenderId $}',
         });
 
-        const firestore = firebase.firestore();
-        firestore.settings({ timestampsInSnapshots: true });
         firebase.firestore()
           .enablePersistence({ experimentalTabSynchronization: true })
           .catch(() => {
