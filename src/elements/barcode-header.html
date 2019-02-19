@@ -10,6 +10,7 @@
         align-items: center;
         background: #fff;   
         color: var(--default-primary-color);
+        height: 100%;
       }
 
       .container-title {
@@ -26,7 +27,7 @@
       }
 
       .barcode {
-        height: 70px;
+        height: 100%;
         position: relative;
         background-image: url('/images/barcode_purple.svg');
         background-repeat: repeat;
@@ -37,6 +38,13 @@
 
       .left {
         max-width: 25%;
+      }
+
+
+      @media (max-width: 500px) {
+        .container-title {
+          font-size: 24px;
+        }
       }
 
     </style>
@@ -75,7 +83,6 @@
           <h1 class="container-title">
             <slot></slot>
           </h1>
-          <!-- <div class="barcode right"></div> -->
         </header>
       </template>
   </template>

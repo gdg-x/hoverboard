@@ -15,7 +15,7 @@
   "signOut": "Sign out",
   "offlineMessage": "You can still work offline.",
   "cachingComplete": "Site is now viewable offline.",
-  "newVersionAvailable": "A new version of this app is available.",
+  "newVersionAvailable": "Please refresh to get the latest and greatest.",
   "refresh": "Refresh",
   "position": "Position",
   "country": "Country",
@@ -144,8 +144,8 @@
     }
   },
   "galleryBlock": {
-    "title": "#dfua16 highlights",
-    "description": "This year's festival built lots of excitement. Check out photos from featured talks, hands-on learning sessions, and after-hours fun.",
+    "title": "",
+    "description": "In just a few months since first growing out of the ideas in Glen Weyl & Eric Posner’s book Radical Markets, an Economist book of the year in 2018, the RadicalxChange movement has exploded, giving rise to dozens of start-ups, more than 100 local clubs around the world, major changes in antitrust and data regulations and a wide range of artistic projects. Glen was also recognized as a Bloomberg Top 50, one of Wired Magazine’s 25 leaders shaping the next 25 years of technology, and one of Coindesk’s most influential people in blockchain in 2018.",
     "callToAction": {
       "label": "See all photos",
       "link": "https://goo.gl/photos/H8s3CtPexCzkLqSt9"

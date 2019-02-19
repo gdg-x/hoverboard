@@ -79,6 +79,7 @@
     "schedule": {
       "title": "Agenda",
       "metaDescription": "Choose your sessions to visit",
+      "description": "Tentative agenda, subject to change",
       "background": {
         "color": "#fff"
       },
