@@ -26,7 +26,7 @@ module.exports = {
     },
     {
       urlPattern: /\/bower_components\/.*/,
-      handler: 'cacheFirst',
+      handler: 'networkFirst',
       options: {
         cache: {
           name: 'bower-components-cache',

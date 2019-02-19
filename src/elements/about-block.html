@@ -20,33 +20,10 @@
         display: block;
       }
 
-      .container {
-        padding-top: 64px;
-      }
-
-      .content {
-        display: grid;
-        grid-gap: 32px;
-        grid-template-columns: 1fr;
-      }
-
-      .statistics-block {
-        width: 100%;
-        display: grid;
-        grid-gap: 32px 16px;
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .numbers {
-        font-size: 40px;
-      }
-
-      .numbers::after {
-        content: '';
-        display: block;
-        height: 2px;
-        width: 64px;
-        background-color: var(--default-primary-color);
+      .container-narrow {
+        padding-top: 30px;
+        padding-bottom: 70px;
+        color: var(--primary-text-color);
       }
 
       .call-to-action {
@@ -56,7 +33,9 @@
       }
 
       .header {
-        padding-bottom: 0;
+        text-align: center;
+        padding: 1em 0 1em;
+        font-size: 32px;
       }
 
       .call-to-action a {
@@ -76,76 +55,42 @@
         margin-top: 2em;
       }
 
-      @media (min-width: 640px) {
-        .content {
-          grid-gap: 64px;
-          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-        }
-
-        .statistics-block {
-          grid-gap: 32px;
-        }
-
-        .numbers {
-          font-size: 56px;
-        }
-      }
     </style>
 
-    <div class="container">
-      <div class="content">
-        <div>
-          <h1 class="container-narrow header">What Will We Build?</h1>
-          <div class="container-narrow">
-            <p>
-              We stand at a unique crossroads as a society. The signs of our
-              social and economic system failing are everywhere: rising
-              inequality, stagnating economies and increasing threats to liberal
-              democracy from populists of the left and right. Over the past few
-              months positive alternatives, grounded in rigorous social science,
-              that embrace markets, technology, community and diversity have
-              emerged.
-            </p>
-            <h3>The RadicalxChange</h3>
-            <p>
-              Together we are building a comprehensive alternative that solves
-              our most divisive social problems while affirming the human values
-              we all share and we want you to be a part of it.
-            </p>
-            <p>
-              Momentum is building as we convene RadicalxChange’s rapidly
-              growing community of artists, scholars, entrepreneurs and
-              activists who are imagining, designing, building and fighting for
-              a brighter future. A future where power rests in diverse
-              democratic organizations.
-            </p>
-            <p class="call-to-action">
-              Are you sick of polarization? Are you ready for a more humane
-              future?
-              <a
-                href="https://www.eventbrite.com/e/radicalxchange-tickets-53060613724"
-                >Get your ticket</a
-              >
-              and join us as we build it together.
-            </p>
-          </div>
-          <!-- <p class="container-narrow button-row">
-            <a
-              href="{$ aboutBlock.callToAction.findOutMore.link $}"
-              ga-on="click"
-              ga-event-category="about"
-              ga-event-action="findOutMore"
-              ga-event-label="about block"
-            >
-              <paper-button class="animated icon-right" raised elevation="1">
-                <span class="cta-label"
-                  >{$ aboutBlock.callToAction.findOutMore.label $}</span
-                >
-                <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-              </paper-button>
-            </a>
-          </p> -->
-        </div>
+    <div class="container-narrow">
+      <div>
+        <h1 class="header">What Will We Build?</h1>
+        <p>
+          We stand at a unique crossroads as a society. The signs of our
+          social and economic system failing are everywhere: rising
+          inequality, stagnating economies and increasing threats to liberal
+          democracy from populists of the left and right. Over the past few
+          months positive alternatives, grounded in rigorous social science,
+          that embrace markets, technology, community and diversity have
+          emerged.
+        </p>
+        <h3>The RadicalxChange</h3>
+        <p>
+          Together we are building a comprehensive alternative that solves
+          our most divisive social problems while affirming the human values
+          we all share and we want you to be a part of it.
+        </p>
+        <p>
+          Momentum is building as we convene RadicalxChange’s rapidly
+          growing community of artists, scholars, entrepreneurs and
+          activists who are imagining, designing, building and fighting for
+          a brighter future. A future where power rests in diverse
+          democratic organizations.
+        </p>
+        <p class="call-to-action">
+          Are you sick of polarization? Are you ready for a more humane
+          future?
+          <a
+            href="https://www.eventbrite.com/e/radicalxchange-tickets-53060613724"
+            >Get your ticket</a
+          >
+          and join us as we build it together.
+        </p>
       </div>
     </div>
   </template>

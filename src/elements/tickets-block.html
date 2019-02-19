@@ -24,7 +24,28 @@
       }
 
       .tickets-wrapper {
+        padding-top: 0;
+        padding-bottom: 60px;
+      }
+
+      .container-title {
+        color: var(--dark-primary-color);
+      }
+
+      .subheader-top {
+        color: var(--default-primary-color);
+        font-weight: bold;
+      }
+
+      .subheader-bottom {
+        color: var(--secondary-text-color);
+        font-style: italic;
+        font-size: 14px;
+      }
+
+      .tickets-wrapper {
         text-align: center;
+        padding-bottom: 60px;
       }
 
       .tickets {
@@ -97,7 +118,6 @@
       }
 
       .discount {
-        /* font-size: 14px; */
         font-size: 0px;
         color: var(--accent-color);
       }
@@ -133,6 +153,7 @@
       }
 
       @media (min-width: 640px) {
+
         .tickets-placeholder {
           grid-template-columns: repeat(auto-fill, 200px);
         }
@@ -148,7 +169,11 @@
     </style>
 
     <div class="tickets-wrapper container">
-      <h1 class="container-title">{$ ticketsBlock.title $}</h1>
+      <header class="container">
+        <h1 class="container-title">Reserve Your Spot Now</h1>
+        <p class="subheader-top">Our early bird tickets sold out in 48 hours. Grab your tickets now before prices go up!</p>
+        <p class="subheader-bottom">We will be doing much more than listening to speeches and panels. There will be a project fair, games night, and many activities to help you meet your next collaborator or common visionary.</p>
+      </header>
       <content-loader
         class="tickets-placeholder"
         card-padding="24px"
