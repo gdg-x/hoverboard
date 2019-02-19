@@ -37,7 +37,8 @@
       }
 
       .speakers-wrapper {
-        margin: 0;
+        max-width: 1100px;
+        margin: 0 auto;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
@@ -45,7 +46,7 @@
       }
 
       .speaker {
-        margin: 0 20px 40px;
+        margin: 0 8px 40px;
         text-align: center;
         cursor: pointer;
         width: 210px;
@@ -118,6 +119,18 @@
         margin-top: 4px;
         font-size: 14px;
         line-height: 1.1;
+      }
+
+      .bottom-text {
+        color: var(--default-primary-color);
+        padding-top: 0;
+        padding-bottom: 16px;
+        text-align: center;
+      }
+
+      .themes {
+        font-weight: bold;
+        font-size: 20px;
       }
 
       @media (min-width: 640px) {
@@ -217,12 +230,15 @@
           </div>
         </template>
       </div>
+      <div class="container-narrow bottom-text">
+        <p><strong>Breakout sessions</strong> will be devoted to academic panels, fireside chats, project showcases workshops and discussions on the following themes:</p>
+        <p class="themes">Economy &nbsp|&nbsp Politics &nbsp|&nbsp Space &nbsp|&nbsp Collective Action &nbsp|&nbsp Identity</p>
+      </div>
       <div class="button-row">
         <a href="{$ speakersBlock.callToAction.link $}">
           <paper-button class="cta-button animated icon-right"
             raised
             primary
-            invert
             animate>
             <span>{$ speakersBlock.callToAction.label $}</span>
             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
