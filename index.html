@@ -126,11 +126,7 @@
           messagingSenderId: '{$ firebase.messagingSenderId $}',
         });
 
-        firebase.firestore()
-          .enablePersistence({ experimentalTabSynchronization: true })
-          .catch(() => {
-            console.warn('DB offline support not available'); // eslint-disable-line no-console
-          });
+        firebase.firestore();
 
         // eslint-disable-next-line no-console
         console.log('Firebase App is ready!');
