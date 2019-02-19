@@ -20,22 +20,42 @@
         display: block;
       }
 
+      .container-title {
+        margin: 0 auto 40px;
+        text-align: left;
+      }
+
+      .header-text {
+        max-width: 1000px;
+        text-align: justify;
+        margin: 0 auto 40px;
+        color: var(--primary-text-color);
+      }
+      
+      .header-text strong {
+        font-style: italic;
+      }
+
       .speakers-wrapper {
-        margin: 40px 0 32px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 32px 16px;
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        margin-bottom: 20px;
       }
 
       .speaker {
+        margin: 0 8px 40px;
         text-align: center;
         cursor: pointer;
+        width: 210px;
       }
 
       .photo {
-        width: 72px;
-        height: 72px;
-        background-color: var(--accent-color);
+        width: 160px;
+        height: 160px;
+        background-color: var(--default-primary-color);
         border-radius: 50%;
         overflow: hidden;
         transform: translateZ(0);
@@ -89,20 +109,34 @@
         line-height: 1.1;
       }
 
+      .button-row {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 50px;
+      }
+
       .origin {
         margin-top: 4px;
         font-size: 14px;
         line-height: 1.1;
       }
 
-      .cta-button {
-        margin-top: 24px;
+      .bottom-text {
+        color: var(--default-primary-color);
+        padding-top: 0;
+        padding-bottom: 16px;
+        text-align: center;
+      }
+
+      .themes {
+        font-weight: bold;
+        font-size: 20px;
       }
 
       @media (min-width: 640px) {
         .photo {
-          width: 128px;
-          height: 128px;
+          width: 150px;
+          height: 150px;
         }
 
         .name {
@@ -113,10 +147,6 @@
       @media (min-width: 812px) {
         .speakers-wrapper {
           grid-template-columns: repeat(3, 1fr);
-        }
-
-        .speaker:last-of-type {
-          display: none;
         }
 
         .badges {
@@ -145,6 +175,10 @@
     </style>
 
     <div class="container">
+        <header class="header-text">
+          <h1 class="container-title">{$ speakersBlock.title $}</h1>
+          <p>The event will feature keynotes by exciting speakers aligned to our entrepreneurship and technology, ideas and research, activism and government, and arts and communications tracks, including:<p>
+        </header>
       <div class="speakers-wrapper">
         <template is="dom-repeat" items="[[featuredSpeakers]]" as="speaker">
           <div class="speaker"
@@ -195,14 +229,21 @@
           </div>
         </template>
       </div>
-
-      <a href="{$ speakersBlock.callToAction.link $}">
-        <paper-button class="cta-button animated icon-right">
-          <span>{$ speakersBlock.callToAction.label $}</span>
-          <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-        </paper-button>
-      </a>
-
+      <div class="container-narrow bottom-text">
+        <p><strong>Breakout sessions</strong> will be devoted to academic panels, fireside chats, project showcases workshops and discussions on the following themes:</p>
+        <p class="themes">Economy &nbsp|&nbsp Politics &nbsp|&nbsp Space &nbsp|&nbsp Collective Action &nbsp|&nbsp Identity</p>
+      </div>
+      <div class="button-row">
+        <a href="{$ speakersBlock.callToAction.link $}">
+          <paper-button class="cta-button animated icon-right"
+            raised
+            primary
+            animate>
+            <span>{$ speakersBlock.callToAction.label $}</span>
+            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+          </paper-button>
+        </a>
+      </div>
     </div>
 
   </template>

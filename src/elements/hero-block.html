@@ -1,15 +1,15 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
 
-<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html" />
 
-<link rel="import" href="./shared-styles.html">
+<link rel="import" href="./shared-styles.html" />
 
 <dom-module id="hero-block">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"
+    ></style>
 
     <style>
-
       :host {
         margin-top: -56px;
         display: block;
@@ -72,22 +72,30 @@
           padding-bottom: 60px;
         }
       }
-
     </style>
 
     <div
       class="hero-block"
       style$="color: [[fontColor]]"
-      layout start vertical center-justified
+      layout
+      start
+      vertical center-justified
     >
       <plastic-image
         class="hero-image"
         srcset="[[backgroundImage]]"
         style$="background-color: [[backgroundColor]]"
         sizing="cover"
-        lazy-load preload fade fit
+        lazy-load
+        preload
+        fade
+        fit
       ></plastic-image>
-      <div class="hero-overlay" show$="[[_showOverlay(backgroundImage)]]" fit></div>
+      <div
+        class="hero-overlay"
+        show$="[[_showOverlay(backgroundImage)]]"
+        fit
+      ></div>
       <div class="container">
         <div class="hero-content">
           <slot></slot>
@@ -95,11 +103,9 @@
       </div>
     </div>
     <slot name="bottom"></slot>
-
   </template>
 
   <script>
-
     class HeroBlock extends Polymer.Element {
       static get is() {
         return 'hero-block';

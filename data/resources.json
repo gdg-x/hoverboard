@@ -130,9 +130,9 @@
     "previousYear": "Year"
   },
   "speakersBlock": {
-    "title": "Agenda highlights",
+    "title": "Agenda Highlights",
     "callToAction": {
-      "label": "View all speakers",
+      "label": "View More",
       "link": "/speakers/"
     }
   },
