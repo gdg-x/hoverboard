@@ -2,7 +2,6 @@
   "organizer": {
     "name": "LibertyJS",
     "twitter": "liberty_js",
-    "blog": "https://medium.com/gdg-lviv",
     "url": "https://libertyjs.com"
   },
   "startDate": "2019-10-024T09:00:00+05:00",
@@ -47,20 +46,12 @@
   ],
   "heroSettings": {
     "home": {
-      "description": "Be a hero. Be a GDG!",
+      "description": "The largest Javascript conference in town",
       "background": {
         "color": "#ffc214",
         "image": "/images/backgrounds/ljs-hero-dark.png"
       },
       "fontColor": "#FFF"
-    },
-    "blog": {
-      "title": "Blog",
-      "metaDescription": "Read stories from our team",
-      "background": {
-        "color": "#FFF"
-      },
-      "fontColor": "#424242"
     },
     "speakers": {
       "title": "Speakers",
@@ -121,11 +112,11 @@
     "pointer": {
       "latitude": 39.953360,
       "longitude": -75.148550,
-      "zoom": 5
+      "zoom": 16
     },
     "mapCenter": {
-      "latitude": 40,
-      "longitude": -75
+      "latitude": 39.953360,
+      "longitude": -75.148550
     },
     "description": "The National Museum of American Jewish History, on Independence Mall in Philadelphia, presents educational programs and experiences that preserve, explore, and celebrate the history of Jews in America. Its purpose is to connect Jews more closely to their heritage and to inspire in people of all backgrounds a greater appreciation for the diversity of the American Jewish experience and the freedoms to which Americans aspire."
   },
