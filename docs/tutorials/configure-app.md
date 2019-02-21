@@ -41,8 +41,8 @@ The top block (aka 'hero') view of the page can be adjusted via `heroSettings` i
   },
   "speakers": {
     "title": "Speakers",
-    "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-    "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
+    "metaDescription": "The Call for Speakers is OPEN for all 2019 LibertyJS Speaking Opportunities!",
+    "description": "The Call for Speakers is OPEN for all 2019 LibertyJS Speaking Opportunities!",
     "background": {
       "color": "#FFF"
     },
