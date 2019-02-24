@@ -1,12 +1,12 @@
 {
   "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv",
-    "blog": "https://medium.com/gdg-lviv",
-    "url": "http://lviv.gdg.org.ua/"
+    "name": "GDG Strasbourg",
+    "twitter": "GDGStrasbourg67",
+    "blog": "",
+    "url": "http://gdgstrasbourg.fr/"
   },
-  "startDate": "2017-10-013T09:00:00+03:00",
-  "endDate": "2017-10-14T19:00:00+03:00",
+  "startDate": "2019-10-013T09:00:00+03:00",
+  "endDate": "2019-10-14T19:00:00+03:00",
   "webapp": {
     "shortName": "DevFest",
     "themeColor": "#673AB7",
@@ -15,7 +15,7 @@
   "dateFormat": {
     "locale": "en-US"
   },
-  "hashtag": "DevFest17",
+  "hashtag": "DevFest19",
   "disabledSchedule": false,
   "navigation": [
     {
@@ -24,29 +24,14 @@
       "label": "Home"
     },
     {
-      "route": "speakers",
-      "permalink": "/speakers/",
-      "label": "Speakers"
-    },
-    {
-      "route": "schedule",
-      "permalink": "/schedule/",
-      "label": "Schedule"
-    },
-    {
       "route": "team",
       "permalink": "/team/",
-      "label": "Team"
-    },
-    {
-      "route": "blog",
-      "permalink": "/blog/",
-      "label": "Blog"
+      "label": "Equipe"
     }
   ],
   "heroSettings": {
     "home": {
-      "description": "Be a hero. Be a GDG!",
+      "description": "Campus CCI Strasbourg",
       "background": {
         "color": "#673ab7",
         "image": "/images/backgrounds/home.jpg"
@@ -87,8 +72,8 @@
       "fontColor": "#424242"
     },
     "team": {
-      "title": "Team",
-      "metaDescription": "Get more info about organizers",
+      "title": "Equipe",
+      "metaDescription": "Plus d'information sur les organisateurs",
       "background": {
         "color": "#fff"
       },
@@ -112,21 +97,21 @@
     }
   },
   "location": {
-    "label": "Location",
-    "name": "Planeta kino",
-    "city": "Lviv",
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "label": "Le lieu",
+    "name": "CCI Strasbourg",
+    "city": "Strasbourg",
+    "short": "Strasbourg, France",
+    "address": "224 Avenue de Colmar, 67100 Strasbourg",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
+      "latitude": 48.5547142,
+      "longitude": 7.7451147,
       "zoom": 5
     },
     "mapCenter": {
       "latitude": 48,
       "longitude": 8
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": "Le campus CCI est situé à proximité du centre de Strasbourg et est directement accessible avec la ligne A en 10 minutes du centre ville"
   },
   "mediaQueries": {
     "xs": {
@@ -148,23 +133,19 @@
     "follow": [
       {
         "name": "meetup",
-        "url": "https://www.meetup.com/GDG-Lviv/events/244342635/"
+        "url": "https://www.meetup.com/fr-FR/GDG-Strasbourg/"
       },
       {
         "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
+        "url": "https://www.facebook.com/GDGStrasbourg67/ "
       },
       {
         "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
-      },
-      {
-        "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
+        "url": "https://twitter.com/GDGStrasbourg67/"
       },
       {
         "name": "youtube",
-        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "url": "https://www.youtube.com/channel/UCzcm36FRd4HrU_WQsjsl_3Q"
       }
     ],
     "share": [
@@ -178,30 +159,30 @@
       },
       {
         "name": "twitter",
-        "url": "https://twitter.com/intent/tweet?text="
+        "url": "https://twitter.com/intent/tweet?text=hi"
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
+  "mailto": "devfest@gdgstrasbourg.fr",
   "mailchimp": {
-    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
-    "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
+    "url": "",
+    "name": ""
   },
   "signInProviders": {
     "providersData": [
       {
         "name": "google",
-        "label": "Sign in with Google",
+        "label": "Se connecter avec Google",
         "url": "https://accounts.google.com"
       },
       {
         "name": "facebook",
-        "label": "Sign in with Facebook",
+        "label": "Se connecter avec Facebook",
         "url": "https://www.facebook.com"
       },
       {
         "name": "twitter",
-        "label": "Sign in with Twitter",
+        "label": "Se connecter avec Twitter",
         "url": "https://twitter.com"
       }
     ],
@@ -225,7 +206,7 @@
       "itemsCount": 6
     },
     "tickets": {
-      "itemsCount": 5
+      "itemsCount": 3
     }
   }
 }

@@ -164,17 +164,30 @@
             {% endfor %}
           </iron-selector>
 
+          <!--<a-->
+            <!--class="buy-ticket"-->
+            <!--href$="[[tickets.url]]"-->
+            <!--target="_blank"-->
+            <!--rel="noopener noreferrer"-->
+            <!--ga-on="click"-->
+            <!--ga-event-category="ticket button"-->
+            <!--ga-event-action="buy_click"-->
+            <!--layout horizontal center-->
+          <!--&gt;-->
+            <!--<span>{$ buyTicket $}</span>-->
+            <!--<iron-icon icon="hoverboard:open-in-new"></iron-icon>-->
+          <!--</a>-->
           <a
             class="buy-ticket"
-            href$="[[tickets.url]]"
+            href$="https://google.fr"
             target="_blank"
             rel="noopener noreferrer"
             ga-on="click"
-            ga-event-category="ticket button"
-            ga-event-action="buy_click"
+            ga-event-category="callForPapers button"
+            ga-event-action="callForPapers_click"
             layout horizontal center
           >
-            <span>{$ buyTicket $}</span>
+            <span>{$ CallForPapers $}</span>
             <iron-icon icon="hoverboard:open-in-new"></iron-icon>
           </a>
         </div>
@@ -207,17 +220,17 @@
             data-path="pages/blog-page.html"
             route="[[subroute]]"
           ></blog-page>
-          <schedule-page
-            data-route="schedule"
-            data-path="pages/schedule-page.html"
-            route="[[subroute]]"
-            query-params="[[queryParams]]"
-          ></schedule-page>
-          <speakers-page
-            data-route="speakers"
-            data-path="pages/speakers-page.html"
-            route="[[subroute]]"
-          ></speakers-page>
+          <!--<schedule-page-->
+            <!--data-route="schedule"-->
+            <!--data-path="pages/schedule-page.html"-->
+            <!--route="[[subroute]]"-->
+            <!--query-params="[[queryParams]]"-->
+          <!--&gt;</schedule-page>-->
+          <!--<speakers-page-->
+            <!--data-route="speakers"-->
+            <!--data-path="pages/speakers-page.html"-->
+            <!--route="[[subroute]]"-->
+          <!--&gt;</speakers-page>-->
           <previous-speakers-page
             data-route="previous-speakers"
             data-path="pages/previous-speakers-page.html"

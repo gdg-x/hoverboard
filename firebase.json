@@ -9,10 +9,21 @@
   "hosting": {
     "public": "./build",
     "cleanUrls": true,
-    "rewrites": [{
-      "source": "/**",
-      "function": "prerender"
-    }],
+    "rewrites": [
+      {
+        "source": "/partners",
+        "destination": "https://drive.google.com/file/d/1PSTKk_l0BYztQ4cHytRgc0QMWKrpCFp9/view?usp=drivesdk",
+        "type": 301
+      },
+      {
+        "source": "/**",
+        "function": "prerender"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
     "ignore": [
       "/test/**",
       "bower.json",
