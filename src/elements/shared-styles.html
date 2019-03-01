@@ -6,9 +6,14 @@
   <template>
     <style>
       :host {
-        --dark-primary-color: #c09622; 
-        --default-primary-color: #ffc214;
-        --focused-color: #311B92;
+        --primary-gold: #ffc214;
+        --dark-gold: #F4B01A;
+        --compound-blue: #699CD3;
+        --compound-blue-alpha-80: rgba(105, 156, 211, 0.80);
+        --compound-blue-alpha-10: rgba(105, 156, 211, 0.1);
+        --dark-primary-color: var(--dark-gold);
+        --default-primary-color: var(--primary-gold);
+        --focused-color: var(--compound-blue);
         --light-primary-color: #D1C4E9;
         --text-primary-color: #FFFFFF;
         --accent-color: #FF5252;
@@ -40,8 +45,8 @@
         --font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif; /*TODO Change to Open Sans*/
         --max-container-width: 1280px;
 
-        --primary-color-transparent: rgba(103, 58, 183, 0.1);
-        --primary-color-light: rgba(103, 58, 183, 0.8);
+        --primary-color-transparent: var(--compound-blue-alpha-80);
+        --primary-color-light: var(--compound-blue-alpha-80);
         --primary-color-white: #EDE7F6;
 
         /* Labels */
@@ -95,7 +100,7 @@
       }
 
       a {
-        color: var(--default-primary-color);
+        color: var(--dark-primary-color);
         text-decoration: none;
         transition: border-color var(--animation);
       }
@@ -104,16 +109,19 @@
         padding: 0.7em;
         border-radius: 2px;
         font-size: 14px;
-        color: var(--default-primary-color);
+        font-weight: 500;
+        color: var(--dark-primary-color);
         transition: background-color var(--animation);
       }
 
       paper-button:hover {
+        color: var(--text-primary-color);
         background-color: var(--primary-color-transparent);
       }
 
       paper-button[disabled] {
         cursor: default;
+        color: var(--text-primary-color);
         background-color: var(--primary-color-transparent);
         opacity: 0.8;
       }
@@ -128,7 +136,7 @@
       }
 
       paper-button[primary][invert] {
-        color: var(--default-primary-color);
+        color: var(--dark-primary-color);
         background-color: var(--text-primary-color);
       }
 
@@ -137,7 +145,7 @@
       }
 
       paper-button[primary-text] {
-        color: var(--default-primary-color);
+        color: var(--dark-primary-color);
       }
 
       paper-button iron-icon {
@@ -203,13 +211,13 @@
       .google-b {
         background-color: var(--secondary-background-color);
       }
-      
+
       .google-b .badge-icon {
         --iron-icon-width: 18px;
         --iron-icon-height: 18px;
         color: #fff;
       }
-      
+
       .card {
         background-color: var(--default-background-color);
         box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.07), 0 2px 2px 0 rgba(0, 0, 0, 0.15);
