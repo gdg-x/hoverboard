@@ -57,13 +57,8 @@
       "title": "Event Resources",
       "links": [
         {
-          "name": "Partnership Proposition",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
-          "newTab": true
-        },
-        {
-          "name": "Call for Papers",
-          "url": "/",
+          "name": "Call for Speakers",
+          "url": "speakers/",
           "newTab": true
         },
         {
