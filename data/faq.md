@@ -77,7 +77,7 @@ Special tickets for real supporters of our conference. As we’re organizing the
 - By registering for a ticket you acknowledge that your information will be used in accordance with [Tickets provider Terms of Service](https://2event.com/en/agreement). 
 - All registered attendees agree to allow GDG Lviv to contact them regarding their registration and attendance at the event. By registering for a ticket, you agree to allow GDG Lviv to communicate with you via email with information regarding the event. 
 - You agree to be solely responsible for your own safety, belongings and well-being while participating in LibertyJS. Organizers won't be liable for your participation in LibertyJS. 
-- Applicants and attendees can request the deletion of their registration data after the event ends by emailing [libertyjs@gmail.com](mailto:libertyjs@gmail.com). 
+- Applicants and attendees can request the deletion of their registration data after the event ends by emailing [libertyjsconf@gmail.com](mailto:libertyjsconf@gmail.com). 
 
 ## Attendance Details
 
