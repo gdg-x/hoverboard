@@ -2,7 +2,7 @@
 
 We've secured discount rates at the following hotels:
 
-**Westin Book Cadillac Detroit**  
+**Westin Book Cadillac Detroit (Discount cutoff: March 5, 2019)**  
 Address: 1114 Washington Blvd. Detroit, MI 48226  
 Room Block Info: $209/night  
 Distance from CCS: 10 minutes (4 miles)  
@@ -12,7 +12,7 @@ Instructions:
 - Link to book online: https://www.marriott.com/event-reservations/reservation-link.mi?id=1548255661306&key=GRP&app=resvlink 
 - Call-In Reservations: 888-627-7150
 
-**Motorcity Casino Hotel**  
+**Motorcity Casino Hotel (Discount cutoff: March 8, 2019)**  
 Address: 2901 Grand River Ave, Detroit MI 48201  
 Room Block Info: $169/night  
 Distance from CCS: Approx. 7 minutes (2.8 miles)  
@@ -23,7 +23,7 @@ Instructions:
 - Link to book online: https://booking.motorcitycasino.com?package=031919RADI
 - Call-In Reservations: 1-866-STAY-MCC or 1-866-782-9622 
 
-**Marriott Renaissance Center**  
+**Marriott Renaissance Center (Discount cutoff: March 7, 2019)**  
 Address: Renaissance Center, 400 Renaissance Dr W, Detroit, MI 48243  
 Room Block Info: $149/night  
 Distance from CCS: Approx. 9 minutes (3.5  miles)  
