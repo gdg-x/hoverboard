@@ -11,6 +11,17 @@ service cloud.firestore {
       allow write: if true;
     }
 
+    match /press/{article} {
+      // Applies to single document read requests
+      allow get;
+
+      // Applies to queries and collection read requests
+      allow list;
+
+      // Disallow writes
+      allow write: if false;
+    }
+
     match /config/{config} {
       allow read, write: if false; // allow each section separately
     }
