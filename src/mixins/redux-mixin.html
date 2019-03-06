@@ -66,6 +66,12 @@
       list: [],
       obj: {},
     },
+    press: {
+      fetching: false,
+      fetchingError: null,
+      list: [],
+      obj: {},
+    },
     partners: {
       fetching: false,
       fetchingError: null,
@@ -126,6 +132,7 @@
       partners: partnersReducer(state.partners, action),
       videos: videosReducer(state.videos, action),
       blog: blogReducer(state.blog, action),
+      press: pressReducer(state.press, action),
       speakers: speakersReducer(state.speakers, action),
       previousSpeakers: previousSpeakersReducer(state.previousSpeakers, action),
       sessions: sessionsReducer(state.sessions, action),

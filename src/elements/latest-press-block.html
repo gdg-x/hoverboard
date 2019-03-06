@@ -1,0 +1,191 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/marked-element/marked-element.html">
+
+<link rel="import" href="../mixins/utils-functions.html">
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="./shared-styles.html">
+<link rel="import" href="../elements/text-truncate.html">>
+
+<dom-module id="latest-press-block">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+    <style>
+
+      :host {
+        display: block;
+      }
+
+      .article-wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 40px;
+        margin: 60px auto 80px;
+      }
+
+      .image {
+        width: 100%;
+        height: 128px;
+      }
+
+      .details {
+        padding: 16px;
+      }
+
+      .title {
+        font-size: 20px;
+        line-height: 1.2;
+      }
+
+      .description {
+        margin-top: 8px;
+        color: var(--secondary-text-color)
+      }
+
+      .date {
+        margin-top: 16px;
+        font-size: 12px;
+        text-transform: uppercase;
+        color: var(--secondary-text-color);
+      }
+
+      .cta-button {
+        margin-top: 24px;
+      }
+
+      @media (max-width: 639px){
+      .article:nth-of-type(n+4) {
+          display: none;
+        }
+      }
+
+      @media (min-width: 640px) {
+        .article-wrapper {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .article:nth-of-type(n+4) {
+          display: none;
+        }
+      }
+
+      @media (min-width: 812px) {
+        .article-wrapper {
+          grid-template-columns: repeat(4, 1fr);
+        }
+        
+        .article:nth-of-type(n+5) {
+          display: none;
+        }
+      }
+
+      @media (min-width: 1000px) {
+        .article-wrapper {
+          grid-template-columns: repeat(5, 1fr);
+        }
+        
+        .article:nth-of-type(n) {
+          display: block;
+        }
+      }
+
+    </style>
+
+
+    <div class="container">
+      <h1 class="container-title">Press</h1>
+      <div class="article-wrapper content">
+        <template is="dom-repeat" items="[[articles]]" as="article">
+          <a href$="[[article.link]]"
+              class="article card"
+              ga-on="click"
+              ga-event-category="press"
+              ga-event-action="open article"
+              ga-event-label$="[[article.title]]"
+              flex layout vertical
+              target="_blank"
+              >
+            <plastic-image
+              class="image"
+              srcset="[[article.image]]"
+              style$="background-color: [[article.backgroundColor]];"
+              sizing="cover"
+              lazy-load preload fade
+            ></plastic-image>
+            <div class="details" layout vertical justified flex-auto>
+              <div>
+                <text-truncate lines="2">
+                  <h3 class="title">[[article.title]]</h3>
+                </text-truncate>
+                <text-truncate lines="3">
+                  <marked-element class="description" markdown="[[article.brief]]">
+                    <div slot="markdown-html"></div>
+                  </marked-element>
+                </text-truncate>
+              </div>
+              <div class="date">[[getDate(article.published)]]</div>
+            </div>
+          </a>
+        </template>
+      </div>
+<!-- 
+      <a href="{$ latestPressBlock.callToAction.link $}">
+        <paper-button class="cta-button animated icon-right">
+          <span>View All Press</span>
+          <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+        </paper-button>
+      </a> -->
+    </div>
+
+  </template>
+
+  <script>
+
+    // eslint-disable-next-line no-undef
+    class LatestPressBlock extends UtilsFunctions(ReduxMixin(Polymer.Element)) {
+      static get is() {
+        return 'latest-press-block';
+      }
+
+      static get properties() {
+        return {
+          viewport: {
+            type: Object,
+            statePath: 'ui.viewport',
+          },
+          articles: Array,
+          articleList: {
+            type: Array,
+            statePath: 'press.list',
+            observer: '_transformArticles',
+          },
+          articleFetching: {
+            type: Boolean,
+            statePath: 'press.fetching',
+          },
+          articleFetchingError: {
+            type: Object,
+            statePath: 'press.fetchingError',
+          },
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        if (!this.articleFetching && (!this.articleList || !this.articleList.length)) {
+          this.dispatch(pressActions.fetchList());
+        }
+      }
+
+      _transformArticles(articleList) {
+        this.set('articles', articleList.slice(0, 5));
+      }
+    }
+
+    window.customElements.define(LatestPressBlock.is, LatestPressBlock);
+  </script>
+</dom-module>

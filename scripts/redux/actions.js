@@ -258,6 +258,43 @@ const blogActions = {
   },
 };
 
+const pressActions = {
+  fetchList: () => (dispatch) => {
+    dispatch({
+      type: FETCH_PRESS_LIST,
+    });
+
+    firebase.firestore()
+      .collection('press')
+      .orderBy('published', 'asc')
+      .get()
+      .then((snaps) => {
+        const list = snaps.docs
+          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+
+        const obj = list.reduce(
+          (acc, curr) => Object.assign({}, acc, { [curr.id]: curr }),
+          {}
+        );
+
+
+        dispatch({
+          type: FETCH_PRESS_LIST_SUCCESS,
+          payload: {
+            obj,
+            list,
+          },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: FETCH_PRESS_LIST_FAILURE,
+          payload: { error },
+        });
+      });
+  },
+};
+
 const speakersActions = {
   fetchList: () => (dispatch) => {
     dispatch({
