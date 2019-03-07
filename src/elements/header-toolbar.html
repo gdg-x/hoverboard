@@ -345,7 +345,7 @@
         if (!settings) return;
         this.updateStyles({
           '--hero-font-color': settings.fontColor || '',
-          '--hero-logo-opacity': settings.hideLogo ? 0 : 1,
+          '--hero-logo-opacity': settings.hideLogo ? '0' : '1',
           '--hero-logo-color': settings.backgroundImage ? '#fff' : 'var(--default-primary-color)',
         });
       }
