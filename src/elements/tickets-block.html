@@ -41,6 +41,8 @@
         color: var(--secondary-text-color);
         font-style: italic;
         font-size: 14px;
+        max-width: 800px;
+        margin: 0 auto;
       }
 
       .tickets-wrapper {
@@ -135,7 +137,19 @@
         max-width: 480px;
         font-size: 14px;
         color: var(--secondary-text-color);
+        margin-bottom: 40px;
       }
+
+      .bottom-text {
+        color: var(--default-primary-color);
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .bottom-text a {
+        color: var(--medium2-primary-color)
+      }
+
 
       .actions {
         padding: 24px;
@@ -171,7 +185,7 @@
     <div class="tickets-wrapper container">
       <header class="container">
         <h1 class="container-title">Reserve Your Spot Now</h1>
-        <p class="subheader-top">Grab your tickets now before prices go up!</p>
+        <p class="subheader-top">Grab your tickets now!</p>
         <p class="subheader-bottom">We will be doing much more than listening to speeches and panels. There will be a project fair, games night, and many activities to help you meet your next collaborator or common visionary.</p>
       </header>
       <content-loader
@@ -209,6 +223,7 @@
           >
             <div class="header">
               <h4>[[ticket.name]]</h4>
+              <h4>[[ticket.name2]]</h4>
             </div>
             <div class="content" layout vertical flex-auto>
               <div class="ticket-price-wrapper">
@@ -252,6 +267,7 @@
       <div class="additional-info">
         {$ ticketsBlock.ticketsDetails $}
       </div>
+      <div class="bottom-text"><p><strong>Free Tickets for Students & Underrepresented Groups:</strong></p><p> Are you a student or someone who would qualify for our diversity/equity scholarship category? We are providing more free tickets thanks to our sponsors. Just email <strong><a href="mailto:ticketing@radicalxchange.org">ticketing@radicalxchange.org</a></strong> Quantity limited.</p>
     </div>
   </template>
 
