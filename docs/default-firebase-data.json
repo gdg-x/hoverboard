@@ -34,9 +34,9 @@
   }, {
     "logos" : [ {
       "order" : 0,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
+      "logoUrl" : "../images/logos/ljs-vistar-logo.png",
+      "name" : "Vistar",
+      "url" : "https://www.vistarmedia.com/"
     }, {
       "order" : 1,
       "logoUrl" : "../images/logos/gdg-x.svg",
