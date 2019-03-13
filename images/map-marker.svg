@@ -1,1 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><path fill="#673ab7" d="M24 22.8c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6M24 0C14.7 0 7.2 7.5 7.2 16.8 7.2 29.4 24 48 24 48s16.8-18.6 16.8-31.2C40.8 7.5 33.3 0 24 0z"/><circle cx="24" cy="16.8" r="7" fill="#512da8"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="34px" height="48px" viewBox="0 0 34 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>map-marker</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="map-marker">
+            <path d="M17,22.8 C13.7,22.8 11,20.1 11,16.8 C11,13.5 13.7,10.8 17,10.8 C20.3,10.8 23,13.5 23,16.8 C23,20.1 20.3,22.8 17,22.8 Z M17,0 C7.7,0 0.2,7.5 0.2,16.8 C0.2,29.4 17,48 17,48 C17,48 33.8,29.4 33.8,16.8 C33.8,7.5 26.3,0 17,0 Z" id="Shape" fill="#699CD3" fill-rule="nonzero"></path>
+            <circle id="Oval" fill="#4E759E" cx="17" cy="16.8" r="7"></circle>
+        </g>
+    </g>
+</svg>
