@@ -137,6 +137,13 @@
         "logoUrl" : "../images/logos/esii.png",
         "name" : "ESII",
         "url" : "https://www.esii.com/fr"
+      },
+      {
+        "order" : 1,
+        "height": 100,
+        "logoUrl" : "../images/logos/esii.png",
+        "name" : "ESII",
+        "url" : "https://www.esii.com/fr/"
       } ],
       "order" : 2,
       "title" : "Silver"
