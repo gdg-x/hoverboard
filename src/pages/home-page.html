@@ -62,6 +62,18 @@
         position: relative;
       }
 
+      .stream {
+        margin: 0 auto;
+        padding: 20px;
+        max-width: 776px;
+        font-size: 0.8em;
+      }
+
+      .stream paper-button {
+        background: var(--dark-primary-color);
+        color: #fff;
+      }
+
       .info-items {
         margin: 24px auto;
         max-width: 350px;
@@ -204,6 +216,23 @@
       <div class="home-content">
         <div class="top">
           <div class="title">RadicalxChange</div>
+          <div class="stream">
+            <p>We will be livestreaming most of the conference on Youtube! Streams will start on March 22 at 1pm Central time.</p>
+            <a
+              href="https://www.youtube.com/channel/UCxRk8v1Wcxa1TIKTvqrtSOw/featured"
+              ga-on="click"
+              ga-event-category="stream"
+              ga-event-action="stream"
+              ga-event-label="hero block - stream"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <paper-button class="animated icon-right" raised elevation="1">
+                <span class="cta-label">See Channel</span>
+                <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+              </paper-button>
+            </a>
+          </div>
           <plastic-image
             class="hero-logo"
             srcset="/images/logo.gif"
