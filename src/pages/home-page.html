@@ -32,6 +32,7 @@
       hero-block {
         font-size: 20px;
         text-align: center;
+        height: 800px;
       }
 
       .home-content {
@@ -60,6 +61,23 @@
         margin: auto 0;
         font-size: 1.8em;
         position: relative;
+      }
+
+      .stream-frame {
+        background-color: rgb(122, 78, 250);
+        margin: 10px 0;
+      }
+
+      .stream {
+        margin: 0 auto;
+        padding: 10px 20px;
+        max-width: 776px;
+        font-size: 0.8em;
+        color: white;
+      }
+
+      .stream paper-button {
+        background: white;
       }
 
       .info-items {
@@ -141,11 +159,6 @@
       }
 
       @media (min-height: 500px) {
-        hero-block {
-          height: calc(100% + 57px);
-          max-height: calc(100vh + 1px);
-        }
-
         .scroll-down {
           position: absolute;
           bottom: 24px;
@@ -165,17 +178,11 @@
           justify-items: center;
           align-items: end;
         }
-        hero-block {
-          height: calc(100% + 65px);
-        }
       }
 
       @media (min-width: 812px) {
         .title {
           font-size: 2.5em;
-        }
-        hero-block {
-          height: calc(100% + 65px);
         }
 
         .hero-logo {
@@ -204,6 +211,25 @@
       <div class="home-content">
         <div class="top">
           <div class="title">RadicalxChange</div>
+            <div class="stream-frame">
+              <div class="stream">
+                <p>We will be livestreaming most of the conference on Youtube! Streams will start on March 22 at 1pm Central time.</p>
+                <a
+                  href="https://www.youtube.com/channel/UCxRk8v1Wcxa1TIKTvqrtSOw/featured"
+                  ga-on="click"
+                  ga-event-category="stream"
+                  ga-event-action="stream"
+                  ga-event-label="hero block - stream"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <paper-button class="animated icon-right" raised elevation="1">
+                    <span class="cta-label">See Channel</span>
+                    <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+                  </paper-button>
+                </a>
+              </div>
+            </div>
           <plastic-image
             class="hero-logo"
             srcset="/images/logo.gif"
