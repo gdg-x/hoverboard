@@ -419,6 +419,9 @@
           routingActions.setRoute(page);
           this.$.header.classList.remove('remove-shadow');
         }
+
+        const canonicalLink = `{$ url $}${page}${subroutePath}`;
+        document.querySelector('link[rel="canonical"]').setAttribute('href', canonicalLink);
       }
 
       _viewportChanged(isPhoneSize, isLaptopSize) {
