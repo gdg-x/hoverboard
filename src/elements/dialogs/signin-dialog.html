@@ -3,6 +3,8 @@
 <link rel="import" href="../../mixins/redux-mixin.html">
 <link rel="import" href="../shared-styles.html">
 <link rel="import" href="../hoverboard-icons.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
 
 <dom-module id="signin-dialog">
   <template>
@@ -12,7 +14,7 @@
       :host {
         margin: 0 auto;
         display: block;
-        padding: 24px 32px;
+        padding: 24px 32px 20px 20px;
         background: var(--primary-background-color);
         box-shadow: var(--box-shadow);
       }
@@ -43,6 +45,15 @@
 
     <div class="dialog-content">
       <div class="initial-signin"  hidden$="[[isMergeState]]">
+
+        <div class="instructions">
+          Sign in with the email address associated with your Eventbrite ticket to access the fundraiser.
+        </div>
+        <div class="instructions">
+           If you have any trouble, stop by the Fundraiser booth for help!
+        </div>
+
+
         {% for provider in signInProviders.providersData %}
         <paper-button
           class="sign-in-button"
@@ -79,8 +90,31 @@
           <span>{$ signInDialog.signInToContinue.part1 $} [[providerCompanyName]]</span>
         </paper-button>
         </div>
+      </div>
+      <div class="instructions" hidden$="[[!emailSigninSelected]]">
+        <paper-input id="emailInput"
+                     on-touchend="_focus"
+                     label="{$ subscribeBlock.emailAddress $} *"
+                     value="{{email}}"
+                     required auto-validate$="[[validate]]" error-message="{$ subscribeBlock.emailRequired $}"
+                     autocomplete="off"
+                     autofocus="false">
+        </paper-input>
+        <paper-button
+          on-tap="_signInViaEmail"
+          ga-on="click"
+          ga-event-category="attendees"
+          ga-event-action="subscribe"
+          ga-event-label="subscribe block"
+          primary
+          invert
+        >
+         Send email
+        </paper-button>
+
 
       </div>
+
     </div>
 
   </template>
@@ -105,6 +139,14 @@
           },
           email: String,
           providerCompanyName: String,
+          validate: {
+            type: Boolean,
+            value: true,
+          },
+          emailSigninSelected: {
+            type: Boolean,
+            value: false,
+          },
         };
       }
 
@@ -139,15 +181,45 @@
 
       _close() {
         this.isMergeState = false;
+        this.emailSigninSelected = false;
+        this.email = '';
         dialogsActions.closeDialog(DIALOGS.SIGNIN);
       }
 
       _signIn(event) {
         const providerUrl = event.target.getAttribute('provider-url');
-        userActions.signIn(providerUrl);
+        if (providerUrl==='email') {
+          this.emailSigninSelected = !this.emailSigninSelected;
+        } else {
+          userActions.signIn(providerUrl);
+        }
+      }
+
+      _signInViaEmail() {
+        const emailInput = this.shadowRoot.querySelector('#emailInput');
+
+        if (!emailInput.validate() || !this._validateEmail(emailInput.value)) {
+          emailInput.invalid = true;
+          return;
+        }
+
+        // This is nasty but I'm doing it here to work around some problems
+        // with the queryparams that google provides for email signin.
+        userActions.signInWithEmail(emailInput.value, window.location.origin + '/fundraiser');
+      }
+
+      _focus(e) {
+        e.target.focus();
+      }
+
+      _validateEmail(email) {
+        /* eslint-disable */
+        const emailRegularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return emailRegularExpression.test(email);
+        /* eslint-enable */
       }
     }
-
+    
     window.customElements.define(SigninDialog.is, SigninDialog);
   </script>
 </dom-module>

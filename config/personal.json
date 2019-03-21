@@ -1,0 +1,15 @@
+{
+  "basepath": "/",
+  "url": "https://hoverboard-personal.firebaseapp.com/",
+  "analytics": "",
+  "prefix": "/",
+  "firebase": {
+    "apiKey": "AIzaSyD1NdGCePXvtTc6yHdnjb8vMQMT4rm3pTI",
+    "authDomain": "hoverboard-personal.firebaseapp.com",
+    "databaseURL": "https://hoverboard-personal.firebaseio.com",
+    "projectId": "hoverboard-personal",
+    "storageBucket": "hoverboard-personal.appspot.com",
+    "messagingSenderId": "435114088125"
+  },
+  "googleMapApiKey": "AIzaSyDcW6FEOYGeiE6IsFAIpT-RAb3mfx3rkcI"
+}

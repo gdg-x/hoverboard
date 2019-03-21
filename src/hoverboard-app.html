@@ -239,8 +239,12 @@
             data-route="agenda"
             data-path="pages/agenda-page.html"
           ></agenda-page>
-
-
+          <fundraiser-page
+            data-route="fundraiser"
+            data-path="pages/fundraiser-page.html"
+            route="[[subroute]]"
+            query-params="[[queryParams]]"
+          ></fundraiser-page>
         </iron-lazy-pages>
 
       </app-header-layout>
@@ -256,13 +260,19 @@
       fit fixed-top
     ></video-dialog>
 
-
     <speaker-details
       opened="[[dialogs.speaker.isOpened]]"
       speaker="[[dialogs.speaker.data]]"
       with-backdrop="[[viewport.isTabletPlus]]"
       no-cancel-on-outside-click="[[viewport.isPhone]]"
     ></speaker-details>
+
+    <project-details
+      opened="[[dialogs.project.isOpened]]"
+      project="[[dialogs.project.data]]"
+      with-backdrop="[[viewport.isTabletPlus]]"
+      no-cancel-on-outside-click="[[viewport.isPhone]]"
+    ></project-details>
 
     <previous-speaker-details
       opened="[[dialogs.previousSpeaker.isOpened]]"
@@ -284,6 +294,13 @@
       with-backdrop
       no-cancel-on-outside-click="[[viewport.isPhone]]">
     </subscribe-dialog>
+
+    <new-project-dialog
+      opened="[[dialogs.newProject.isOpened]]"
+      data="[[dialogs.newProject.data]]"
+      with-backdrop="[[viewport.isTabletPlus]]"
+      no-cancel-on-outside-click="[[viewport.isPhone]]">
+    </new-project-dialog>    
 
     <signin-dialog
       opened="[[dialogs.signin.isOpened]]"
@@ -373,6 +390,9 @@
           });
         });
         this.dispatch(ticketsActions.fetchTickets());
+        if (this.user && this.user.email) {
+          this.dispatch(userActions.isRegistered(this.user.email));
+        }
       }
 
       disconnectedCallback() {
@@ -389,6 +409,7 @@
         this.removeAttribute('unresolved');
         this._ensureLazyLoaded();
         userActions.updateUser();
+        userActions.checkEmailSignin();
       }
 
       closeDrawer() {

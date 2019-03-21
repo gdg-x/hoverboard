@@ -1,0 +1,387 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
+<link rel="import" href="../../../bower_components/marked-element/marked-element.html">
+<link rel="import" href="../../../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+
+
+<link rel="import" href="../../../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
+<link rel="import" href="../../mixins/redux-mixin.html">
+<link rel="import" href="../shared-styles.html">
+<link rel="import" href="../hoverboard-icons.html">
+<link rel="import" href="../../mixins/utils-functions.html">
+<link rel="import" href="dialog-styles.html">
+<link rel="import" href="../text-truncate.html">
+
+
+<dom-module id="new-project-dialog">
+  <template>
+    <style is="custom-style" include="shared-styles dialog-styles flex flex-alignment positioning"></style>
+
+    <style>
+      :host {
+        margin: 0;
+        display: block;
+        background: var(--primary-background-color);
+        box-shadow: var(--box-shadow);
+
+        --paper-input-container-focus-color: var(--default-primary-color);
+        --paper-input-container-color: var(--secondary-text-color);
+      }
+
+      .dialog-header {
+        margin-bottom: 24px;
+        padding: 32px 32px 16px;
+        background: var(--default-primary-color);
+        color: #fff;
+        font-size: 20px;
+        line-height: 1.5;
+      }
+
+      [slot="markdown-html"] h1 {
+        padding: 32px 32px 16px 0px;
+      }
+
+/*      .content {
+        padding: 32px 32px 16px;
+      }
+*/
+      paper-input, paper-dropdown-input, paper-textarea {
+        margin: 16px 32px 0px 16px;
+      }
+
+      paper-input:first-of-type {
+        margin-top: 0;
+      }
+
+      .action-buttons {
+        margin: 32px 24px 24px;
+      }
+
+      .close-button {
+        color: var(--secondary-text-color);
+      }
+
+      .name {
+        margin-left: 16px;
+      }
+
+      .general-error {
+        margin: 0 32px;
+        color: var(--error-color);
+      }
+
+      .dialog-content {
+        overflow: auto;
+      }
+
+
+    </style>
+    <app-header-layout has-scrolling-region>
+      <app-header slot="header" class="header" fixed="[[viewport.isTabletPlus]]">
+        <iron-icon
+          class="close-icon"
+          icon="hoverboard:[[_getCloseBtnIcon(viewport.isLaptopPlus, previewMode)]]"
+          on-tap="_close"
+        ></iron-icon>
+
+        <app-toolbar>
+          <div class="dialog-container header-content" layout horizontal center>
+            <h2 class="name" flex>[[_getHeader(title, previewMode)]]</h2>
+          </div>
+        </app-toolbar>
+      </app-header>
+
+      <div class="content">
+        <div hidden$="[[!errorOccurred]]" class="general-error">Error!</div>
+
+        <div hidden$="[[previewMode]]">
+          <paper-input id="titleInput"
+                       on-touchend="_focus"
+                       label="[[firstFieldLabel]]"
+                       value="{{firstFieldValue}}"
+                       autofocus="false">
+          </paper-input>
+
+          <paper-textarea id="descriptionInput"
+                       on-touchend="_focus"
+                       label="[[secondFieldLabel]]"
+                       value="{{secondFieldValue}}"
+                       autofocus="false"
+                       rows=6
+                       maxlength=5000
+                       required="true"
+                       placeholder="Project Description. Max length: 5000 characters. Basic markdown syntax is supported.">
+          </paper-textarea>
+       
+          <paper-input id="budgetInput"
+                       on-touchend="_focus"
+                       label="Estimated budget (US Dollars, at least $100) *"
+                       value="{{budget}}"
+                       autofocus="false">
+          </paper-input>
+        </div>
+        <div hidden$="[[!previewMode]]" class="content">
+          <marked-element class="project-description" markdown="[[secondFieldValue]]">
+            <div slot="markdown-html"></div>
+          </marked-element>
+          <h3 class="budget">Budget: $[[budget]]</h3>
+
+        </div>
+
+        <div class="cta-button" layout horizontal justified>
+          <paper-button
+            class="close-button"
+            on-tap="_closeDialog"
+          >Abandon
+          </paper-button>
+
+          <paper-button
+            on-tap="_leavePreview"
+            hidden$="[[!previewMode]]"
+          >Edit
+          </paper-button>
+
+          <paper-button
+            class="animated cta-button"
+            on-tap="_submit"
+            ga-on="click"
+            ga-event-category="projects"
+            ga-event-action="submit"
+            ga-event-label="submit button"
+            primary
+            invert
+            raiser
+          >
+           <span class="cta-label">[[_getSubmitLabel(previewMode)]]</span>
+          </paper-button>
+        </div>
+
+      </div>
+    </app-header-layout>
+
+
+  </template>
+
+  <script>
+
+    class NewProjectDialog extends ReduxMixin(
+      Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element)
+    ) {
+      static get is() {
+        return 'new-project-dialog';
+      }
+
+      static get properties() {
+        return {
+          ui: {
+            type: Object,
+            statePath: 'ui',
+          },
+          validate: {
+            type: Boolean,
+            value: true,
+          },
+          errorOccurred: {
+            type: Boolean,
+            value: false,
+          },
+          keyboardOpened: {
+            type: Boolean,
+            value: false,
+          },
+          viewport: {
+            type: Object,
+            statePath: 'ui.viewport',
+          },
+
+
+          // submitted: {
+          //   type: Boolean,
+          //   statePath: 'subscribed',
+          // },
+
+          secondFieldValue: String,
+          firstFieldValue: String,
+          initialHeight: Number,
+          title: String,
+          submitLabel: String,
+          firstFieldLabel: String,
+          secondFieldLabel: String,
+          previewMode: {
+            type: Boolean,
+            value: false,
+          },
+        };
+      }
+
+      static get observers() {
+        return [
+          '_handleDialogToggled(opened, data)',
+          // '_handleSubscribed(subscribed)',
+        ];
+      }
+
+      ready() {
+        super.ready();
+        this.initialHeight = window.innerHeight;
+      }
+
+      constructor() {
+        super();
+        this.addEventListener('iron-overlay-canceled', this._close);
+        this.addEventListener('iron-resize', this._resize);
+        window.addEventListener('resize', this._windowResize.bind(this));
+      }
+
+      _close() {
+        dialogsActions.closeDialog(DIALOGS.NEW_PROJECT);
+      }
+
+      // _handleSubscribed(subscribed) {
+      //   if (subscribed) {
+      //     this._closeDialog();
+      //   }
+      // }
+
+      _handleDialogToggled(opened, data) {
+        if (data) {
+          this.errorOccurred = data.errorOccurred;
+        }
+
+        this.title = data.title || 'Create a new project!';
+        this.submitLabel = data.submitLabel || ' Submit!';
+        this.firstFieldLabel = data.firstFieldLabel || 'Project Title';
+        this.secondFieldLabel = data.secondFieldLabel || 'Project Description';
+        this.previewMode = false;
+        this._prefillFields(data);
+      }
+
+      _leavePreview() {
+        this.previewMode = false;
+      }
+
+      _getHeader(title, previewMode) {
+        if (!previewMode) {
+          return title;
+        } else {
+          return this.firstFieldValue;
+        }
+      }
+
+      _getSubmitLabel() {
+        return this.previewMode? 'Submit' : 'Preview';
+      }
+
+      _getCloseBtnIcon(isLaptopViewport, previewMode) {
+        return previewMode? '' : (isLaptopViewport ? 'close' : 'arrow-left');
+      }
+
+
+      _submit() {
+        const titleInput = this.shadowRoot.querySelector('#titleInput');
+        const title = titleInput.value;
+        var invalid = false;
+
+        if (title == undefined || title.trim() === '') {
+          titleInput.invalid = true;
+          invalid = true;
+        } else {
+          titleInput.invalid = false;
+        }
+
+        const descriptionInput = this.shadowRoot.querySelector('#descriptionInput');
+        const description = descriptionInput.value;
+
+        if (description == undefined || description.trim() === '') {
+          descriptionInput.invalid = true;
+          invalid = true;
+        } else {
+          descriptionInput.invalid = false;
+        }
+
+        const budgetInput = this.shadowRoot.querySelector('#budgetInput');
+
+        if (!this._validateBudget(budgetInput.value)) {
+          budgetInput.invalid = true;
+          invalid = true;
+        } else {
+          budgetInput.invalid = false;
+        }
+        if (invalid) {
+          return;
+        }
+
+        if (!this.previewMode) {
+          this.previewMode = true;
+          return;
+        }
+
+        this.data.submit({
+          budget: this.budget,
+          firstFieldValue: this.firstFieldValue,
+          secondFieldValue: this.secondFieldValue,
+        });
+
+        // Everything checks out, now we clear out the fields and submit
+        this.firstFieldValue = null;
+        this.secondFieldValue = null;
+        this.budget = null;
+      }
+      _validateBudget(budget) {
+        const value = parseFloat(budget);
+        return value > 100;
+      }
+
+      _closeDialog() {
+        dialogsActions.closeDialog(DIALOGS.NEW_PROJECT);
+      }
+
+      _prefillFields(userData) {
+        // this.validate = false;
+        // const firstField = this.shadowRoot.querySelector('#titleInput');
+        // const secondField = this.shadowRoot.querySelector('#descriptionInput');
+        // const budgetInput = this.shadowRoot.querySelector('#budgetInput');
+        // firstField.value = userData ? userData.firstFieldValue : '';
+        // secondField.value = userData ? userData.secondFieldValue : '';
+        // firstField.focus();
+        // firstField.blur();
+        // secondField.focus();
+        // secondField.blur();
+        // budgetInput.blur();
+        // budgetInput.value = '';
+        // budgetInput.invalid = false;
+        // this.validate = true;
+      }
+
+      _focus(e) {
+        e.target.focus();
+      }
+
+      _windowResize() {
+        this.keyboardOpened = this.ui.viewport.isPhone &&
+          window.innerHeight < this.initialHeight - 100;
+      }
+
+      _resize(e) {
+        if (this.keyboardOpened) {
+          const header = this.shadowRoot.querySelector('.dialog-header');
+          const headerHeight = header.offsetHeight;
+
+          setTimeout(() => {
+            requestAnimationFrame(() => {
+              this.style.maxHeight = `${this.initialHeight}px`;
+              this.style.top = `-${headerHeight}px`;
+            });
+          }, 10);
+        }
+      }
+    }
+
+    window.customElements.define(NewProjectDialog.is, NewProjectDialog);
+  </script>
+</dom-module>

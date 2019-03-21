@@ -71,7 +71,7 @@
 
       .dropdown-panel {
         padding: 24px;
-        max-width: 300px;
+        max-width: 340px;
         background: #fff;
         font-size: 16px;
         color: var(--primary-text-color);
@@ -86,9 +86,12 @@
       }
 
       .profile-details .profile-image {
-        margin-right: 16px;
         width: 48px;
         height: 48px;
+      }
+
+      .profile-description {
+        margin-left: 16px;
       }
 
       .profile-name,
@@ -142,7 +145,7 @@
         class="nav-items"
         selected="[[route.route]]"
         attr-for-selected="name"
-        hidden$="[[!viewport.isLaptopPlus]]"
+        hidden$="[[_hideTabs(route, viewport)]]"
         role="navigation"
         noink
       >
@@ -203,17 +206,19 @@
         vertical-align="top"
         horizontal-align="right"
         no-animations
-        layout horizontal center-center>
+        layout horizontal center-center
+        icon="hoverboard:account">
         <div
           class="profile-image" slot="dropdown-trigger"
-          style$="background-image: url('[[user.photoURL]]')"
-        ></div>
+        >
+          <iron-icon icon="hoverboard:account"></iron-icon>
+        </div>
         <div class="dropdown-panel profile-details" slot="dropdown-content" layout horizontal>
           <div
             class="profile-image" slot="dropdown-trigger" self-center
             style$="background-image: url('[[user.photoURL]]')"
           ></div>
-          <div layout vertical center-justified>
+          <div class="profile-description layout vertical center-justified">
             <span class="profile-name">[[user.displayName]]</span>
             <span class="profile-email">[[user.email]]</span>
             <span class="profile-action" role="button" on-tap="signOut">{$ signOut $}</span>
@@ -226,7 +231,8 @@
         on-tap="signIn"
         hidden$="[[_isAccountIconHidden(user.signedIn, viewport.isLaptopPlus)]]"
       ></paper-icon-button>
- -->    </app-toolbar>
+ -->    
+      </app-toolbar>
 
   </template>
 
@@ -348,6 +354,10 @@
           '--hero-logo-opacity': settings.hideLogo ? '0' : '1',
           '--hero-logo-color': settings.backgroundImage ? '#fff' : 'var(--default-primary-color)',
         });
+      }
+
+      _hideTabs(route, viewport) {
+        return !viewport.isLaptopPlus || route.route == 'fundraiser';
       }
     }
 

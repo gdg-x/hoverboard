@@ -49,6 +49,14 @@
         isOpened: false,
         data: {},
       },
+      [DIALOGS.NEW_PROJECT]: {
+        isOpened: false,
+        data: {},
+      },
+      [DIALOGS.PROJECT]: {
+        isOpened: false,
+        data: {},
+      },
     },
     tickets: {
       fetching: false,
@@ -91,6 +99,12 @@
       list: [],
       obj: {},
     },
+    projects: {
+      fetching: false,
+      fetchingError: null,
+      list: [],
+      obj: {},
+    },
     sessions: {
       list: {
         fetching: false,
@@ -117,6 +131,7 @@
       signedIn: false,
     },
     subscribed: false,
+    registered: false,
     toast: {},
     notifications: {
       status: NOTIFICATIONS_STATUS.DEFAULT,
@@ -134,6 +149,7 @@
       blog: blogReducer(state.blog, action),
       press: pressReducer(state.press, action),
       speakers: speakersReducer(state.speakers, action),
+      projects: projectsReducer(state.projects, action),
       previousSpeakers: previousSpeakersReducer(state.previousSpeakers, action),
       sessions: sessionsReducer(state.sessions, action),
       schedule: scheduleReducer(state.schedule, action),
@@ -141,6 +157,7 @@
       team: teamReducer(state.team, action),
       user: userReducer(state.user, action),
       subscribed: subscribeReducer(state.subscribed, action),
+      registered: registeredReducer(state.registered, action),
       toast: toastReducer(state.toast, action),
       notifications: notificationsReducer(state.notifications, action),
     };

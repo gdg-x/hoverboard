@@ -17,6 +17,8 @@ const DIALOGS = {
   SESSION: 'session',
   SUBSCRIBE: 'subscribe',
   SIGNIN: 'signin',
+  NEW_PROJECT: 'newProject',
+  PROJECT: 'project',
 };
 // toast
 const SHOW_TOAST = 'app/Toast/SHOW_TOAST';
@@ -53,6 +55,13 @@ const FETCH_BLOG_LIST_SUCCESS = 'app/Blog/FETCH_BLOG_LIST_SUCCESS';
 const FETCH_PRESS_LIST = 'app/Press/FETCH_PRESS_LIST';
 const FETCH_PRESS_LIST_FAILURE = 'app/Press/FETCH_PRESS_LIST_FAILURE';
 const FETCH_PRESS_LIST_SUCCESS = 'app/Press/FETCH_PRESS_LIST_SUCCESS';
+
+// projects
+const FETCH_PROJECTS = 'app/Projects/FETCH_PROJECTS';
+const FETCH_PROJECTS_FAILURE = 'app/Projects/FETCH_PROJECTS_FAILURE';
+const FETCH_PROJECTS_SUCCESS = 'app/Projects/FETCH_PROJECTS_SUCCESS';
+const CREATE_PROJECT = 'app/Projects/CREATE_PROJECT';
+const ADD_PLEDGE = 'app/Projects/ADD_PLEDGE';
 
 // speakers
 const FETCH_SPEAKERS = 'app/Speakers/FETCH_SPEAKERS';
@@ -95,6 +104,11 @@ const FETCH_TEAM_SUCCESS = 'app/Team/FETCH_TEAM_SUCCESS';
 // user
 const SIGN_IN = 'app/Auth/SIGN_IN';
 const SIGN_OUT = 'app/Auth/SIGN_OUT';
+
+const IS_REGISTERED = 'app/Users/IS_REGISTERED';
+const IS_REGISTERED_FAILURE = 'app/Users/IS_REGISTERED_FAILURE';
+const IS_REGISTERED_SUCCESS = 'app/Users/IS_REGISTERED_SUCCESS';
+
 // subscribe
 const SUBSCRIBE = 'app/Subscribe/SUBSCRIBE';
 // notifications

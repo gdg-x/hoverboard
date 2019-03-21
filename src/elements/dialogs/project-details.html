@@ -1,0 +1,245 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
+<link rel="import" href="../../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
+<link rel="import" href="../../../bower_components/marked-element/marked-element.html">
+<link rel="import" href="../../../bower_components/paper-number-input/paper-number-input.html">
+
+<link rel="import" href="../../mixins/utils-functions.html">
+<link rel="import" href="../../mixins/redux-mixin.html">
+<link rel="import" href="../text-truncate.html">
+<link rel="import" href="../shared-styles.html">
+<link rel="import" href="dialog-styles.html">
+
+<dom-module id="project-details">
+  <template>
+    <style is="custom-style" include="shared-styles dialog-styles flex flex-alignment positioning"></style>
+
+    <style>
+      .action {
+        color: var(--secondary-text-color);
+      }
+
+      .cta-button {
+        margin-top: 50px;
+        max-width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+
+      }
+
+      .your-pledge {
+        margin-left: 80px;
+        margin-bottom: 32px;
+        font-weight: bold;
+        font-color: var(--secondary-text-color);
+      }
+
+      paper-number-input {
+        max-width: 140px;
+        margin: auto;
+      }
+
+    </style>
+
+    <polymer-helmet
+      title="[[project.name]] | {$ title $}"
+      description="[[project.description]]"
+      active="[[opened]]"
+    ></polymer-helmet>
+
+    <app-header-layout has-scrolling-region>
+      <app-header slot="header" class="header" fixed="[[viewport.isTabletPlus]]">
+        <iron-icon
+          class="close-icon"
+          icon="hoverboard:[[_getCloseBtnIcon(viewport.isLaptopPlus)]]"
+          on-tap="_close"
+        ></iron-icon>
+
+        <app-toolbar>
+          <div class="dialog-container header-content" layout horizontal center>
+            <h2 class="name" flex>[[project.name]]</h2>
+          </div>
+        </app-toolbar>
+        <div class="your-pledge">Your Current pledge: $ [[currentPledge]]</div>
+
+      </app-header>
+
+      <div class="dialog-container content">
+        <marked-element class="description" markdown="[[project.description]]">
+          <div slot="markdown-html"></div>
+        </marked-element>
+
+        <paper-number-input
+          label="Pledge amount (US Dollars, increments of $10)"
+          min="0"
+          max="100000"
+          value={{updatedPledge}}
+          step="10"
+          fallback-value="0"
+        ></paper-number-input>
+        <paper-button class="cta-button animated icon-right"
+                      on-tap="_pledge"
+                      raised
+                      primary
+                      animate
+                      layout
+                      horizontal
+                      justified
+                      >
+          <span class="cta-label">[[_getLabel(currentPledge, updatedPledge)]]</span>
+          <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+         </paper-button>
+      </div>
+    </app-header-layout>
+
+  </template>
+
+  <script>
+
+    // TODO Mixin for shared properties
+    // eslint-disable-next-line no-undef
+    class ProjectDetails extends UtilsFunctions(
+      // eslint-disable-next-line no-undef
+      ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element))
+    ) {
+      static get is() {
+        return 'project-details';
+      }
+
+      static get properties() {
+        return {
+
+          project: {
+            type: Object,
+          },
+          id: {
+            type: String,
+          },
+          viewport: {
+            type: Object,
+            statePath: 'ui.viewport',
+          },
+          projects: {
+            type: Array,
+            statePath: 'projects.list',
+          },
+          projectsFetching: {
+            type: Boolean,
+            statePath: 'projects.fetching',
+          },
+          projectsFetchingError: {
+            type: Object,
+            statePath: 'projects.fetchingError',
+          },
+          currentPledge: {
+            type: Number,
+            computed: '_getCurrentPledge(project)',
+          },
+          user: {
+            type: Object,
+            statePath: 'user',
+          },
+          registered: {
+            type: Boolean,
+            statePath: 'registered',
+          },
+          updatedPledge: {
+            type: Number,
+            value: 20,
+          },
+        };
+      }
+
+      constructor() {
+        super();
+        this.addEventListener('iron-overlay-canceled', this._close);
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+
+        if (!this.projectsFetching && (!this.projects || !this.projects.length)) {
+         this.dispatch(fundraiserActions.fetchList());
+        }
+      }
+
+      _close() {
+        // This helps when there was a deeplink to a fundraiser project, ensures that when
+        // the dialog gets closed it goes back to the fundraiser screen.
+        window.history.pushState({}, null, '/fundraiser/');
+        window.dispatchEvent(new CustomEvent('location-changed'));
+
+        dialogsActions.closeDialog(DIALOGS.PROJECT);
+      }
+
+      _getCurrentPledge(project) {
+        if (this.user.signedIn && this.project && this.project.contributions) {
+          return project.contributions[this.user.uid] != null ?
+                  project.contributions[this.user.uid] : 0;
+        } else {
+          return 0;
+        }
+      }
+
+      _getLabel(currentPledge, updatedPledge) {
+        if (currentPledge && updatedPledge) {
+          if (parseInt(updatedPledge) === 0) {
+            return 'DELETE PLEDGE';
+          }
+          if (parseFloat(this.updatedPledge) != parseFloat(currentPledge)) {
+            return 'UPDATE PLEDGE';
+          }
+        }
+        return 'PLEDGE';
+      }
+
+      _pledge(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (!this.user.signedIn) {
+          dialogsActions.openDialog(DIALOGS.SIGNIN);
+          return;
+        }
+
+        if (!this.registered) {
+           // eslint-disable-next-line max-len
+           alert('Your email address isn\'t yet associated with the conference! Make sure you\'re signed in with the same email address that\'s on your Eventbrite ticket. You can log out by tapping the upper-right corner of this web page, then log in again with a new address. Send an email to webdev.radicalxchange@gmail.com or stop by the fundraiser booth to get your name on the list!');
+          return;
+        }
+
+        const updatedPledge = parseFloat(this.updatedPledge);
+
+        if (updatedPledge == null || updatedPledge < 0 || updatedPledge > 1000000) {
+          return;
+        }
+
+        var toastText;
+
+        if (updatedPledge <= 0.0) {
+          if (this.currentPledge) {
+            toastText = 'Pledge deleted';
+            delete this.project.contributions[this.user.uid];
+          } else {
+            toastText = 'No pledge made';
+          }
+        } else {
+          this.project.contributions[this.user.uid] = updatedPledge;
+        }
+        this.dispatch(fundraiserActions.pledge(this.project.id, this.project, toastText));
+      }
+
+      _getCloseBtnIcon(isLaptopViewport) {
+        return isLaptopViewport ? 'close' : 'arrow-left';
+      }
+    }
+
+    window.customElements.define(ProjectDetails.is, ProjectDetails);
+  </script>
+</dom-module>

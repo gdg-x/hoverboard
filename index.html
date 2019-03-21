@@ -127,7 +127,7 @@
           messagingSenderId: '{$ firebase.messagingSenderId $}',
         });
 
-        firebase.firestore();
+        firebase.firestore().enablePersistence({ experimentalTabSynchronization: true });
 
         // eslint-disable-next-line no-console
         console.log('Firebase App is ready!');

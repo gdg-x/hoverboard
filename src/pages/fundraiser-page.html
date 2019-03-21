@@ -1,0 +1,527 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-lazy-pages/iron-lazy-pages.html">
+<link rel="import" href="../../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+
+<link rel="import" href="../mixins/utils-functions.html">
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="../mixins/scroll-functions.html">
+<link rel="import" href="../elements/text-truncate.html">
+<link rel="import" href="../elements/shared-styles.html">
+<link rel="import" href="../elements/content-loader.html">
+<link rel="import" href="../elements/hoverboard-icons.html">
+
+<dom-module id="fundraiser-page">
+  <template>
+
+    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
+
+    <style>
+
+      :host {
+        display: block;
+        height: 100%;
+
+        --paper-slider-input: {
+          display: none;
+          width: 0px;
+        }
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 16px;
+        min-height: 80%;
+      }
+
+      .project {
+        padding: 32px 24px;
+        background: var(--primary-background-color);
+        text-align: center;
+        transition: box-shadow var(--animation);
+      }
+
+      .project:hover {
+        box-shadow: var(--box-shadow);
+      }
+
+      .description {
+        color: var(--primary-text-color);
+      }
+
+      .name {
+        margin-top: 8px;
+        line-height: 1;
+      }
+
+      paper-progress {
+        width: 100%;
+        --paper-progress-active-color: var(--default-primary-color);
+        --paper-progress-secondary-color: var(--default-primary-color);
+      }
+
+      paper-slider {
+        --paper-slider-height: 4px;
+        width: 140px;
+        --paper-slider-active-color: var(--default-primary-color);
+        --paper-slider-secondary-color: var(--default-secondary-color);
+        --paper-slider-knob-color: var(--default-secondary-color);
+      }
+
+      @media (min-width: 640px) {
+        .container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 812px) {
+        .container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .container {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      iron-lazy-pages {
+        min-height: 100%;
+      }
+
+      table, .hero-title {
+        margin-left: auto;
+        margin-right: auto;
+        font-style: italic;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .message {
+        margin-left: 32px;
+        margin-top: 32px;
+        margin-bottom: 32px;
+        margin-right: 32px;
+      }
+
+      .cta-label {
+        font-size: 13px;
+        font-weight: bold;
+      }
+
+
+      @media (min-width: 812px) {
+        table {
+          font-size: 24px;
+        }
+        .cta-label {
+          font-size: 20px;
+        }
+      }
+
+      .badges {
+        position: absolute;
+        top: 0;
+        left: calc(50% + 32px);
+      }
+
+      .badge {
+        margin-left: -10px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        transition: transform var(--animation);
+      }
+
+      .badge:hover {
+        transform: scale(1.1);
+      }
+
+      .badge:nth-of-type(2) {
+        transform: translate(25%, 75%);
+      }
+
+      .badge:nth-of-type(2):hover {
+        transform: translate3d(25%, 75%, 20px) scale(1.1);
+      }
+
+      .badge-icon {
+        --iron-icon-width: 12px;
+        --iron-icon-height: 12px;
+        color: #fff;
+      }
+
+      paper-button iron-icon {
+        --iron-icon-height: 40px;
+        --iron-icon-width: 40px;
+      }
+
+    </style>
+
+    <polymer-helmet
+      title="Fundraiser"
+      description="CLR fundraiser"
+      active="[[_setHelmetData(active, isDialogOpened)]]"
+    ></polymer-helmet>
+
+    <app-route
+      route="[[route]]"
+      pattern="/:projectId"
+      data="{{routeData}}"
+      query-params="{{queryParams}}"
+    ></app-route>
+
+    <hero-block
+      background-image="{$ heroSettings.speakers.background.image $}"
+      background-color="{$ heroSettings.speakers.background.color $}"
+      font-color="{$ heroSettings.speakers.fontColor $}"
+      active="[[active]]"
+    >
+      <div class="hero-title highlight-font">FUNDRAISER</div>
+
+        <marked-element class="description" markdown='{$ fundraiser.rules $}' hidden='[[!showRules]]'>
+          <div slot="markdown-html"></div>
+        </marked-element>
+
+<!--       <h4> How radical will we go? </h4>  
+ -->
+      <table class="alpha-slider">
+        <tr> 
+          <td>
+            CAPITALIST
+          </td>
+          <td>
+            <paper-slider
+              min="0"
+              value="{{alpha100}}"
+              max="100"
+              editable>
+             </paper-slider>            
+          </td>
+          <td>
+            RADICAL
+          </td>
+        </tr>
+      </table>
+
+      <h5>Adjusting the slider will change the matching funding formula; all the way to the right will fully fund the projects according to the Liberal Radicalism mechanism, and all the way to the left is standard capitalism with no matching. We hope to fully fund each project, but we will determine the final "alpha" slider value after matching funds are secured.</h5>
+
+    </hero-block>
+
+    <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
+<!-- 
+    <content-loader
+      class="container"
+      card-padding="32px"
+      card-height="400px"
+      avatar-size="128px"
+      avatar-circle="64px"
+      horizontal-position="50%"
+      box-shadow="var(--box-shadow)"
+      items-count="{$ contentLoaders.projects.itemsCount $}"
+      hidden$="[[contentLoaderVisibility]]"
+    ></content-loader>
+ -->
+
+    <h4 class="message">Tap a project to view details and contribute. Having trouble? Email webdev.radicalxchange@gmail.com</h5>
+
+    <paper-button class="animated icon-right message"
+                  on-tap="_add"
+                  ga-on="click"
+                  raised
+                  primary
+                  animate
+                  layout
+                  horizontal
+                  center
+                  >
+      <span class="cta-label">What should we bring to life?</span>
+      <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+    </paper-button>
+
+    <div class="container">
+
+      <template is="dom-repeat" items="[[projects]]" as="project" sort="_sort">
+        <a class="project card"
+           href$="/fundraiser/[[project.id]]/"
+           ga-on="click"
+           ga-event-category="project"
+           ga-event-action="open details"
+           ga-event-label$="[[project.name]]">
+
+          <div class="description">
+            <h2 class="name">[[project.name]]</h2>
+            <br/>
+            <h3 class="contributions">Pledges: {{_contrLength(project.id)}}</h3>
+            <h3 class="contributions">Pledge value: ${{_contrSum(project.id)}}</h3>
+            <h3 class="contributions">Estimated match: ${{_projectMatching(project.id, alpha)}}</h3>
+            <h3 class="contributions">Requested budget: $[[project.budget]]</h3>
+            <div class="badges" layout horizontal>
+              <iron-icon class="badge-icon badge" icon="hoverboard:account" layout horizontal   center-center></iron-icon>
+            </div>
+
+          </div>
+
+        </a>
+      </template>
+<!--       <div class="cta-button" hidden$="[[projects.length < 9]]">
+        <paper-button class="cta-button animated icon-right"
+                      on-tap="_add"
+                      ga-on="click"
+                      raised
+                      primary
+                      animate
+                      layout
+                      horizontal
+                      center
+                      >
+          <span class="cta-label">Your idea here</span>
+          <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+        </paper-button>
+      </div>      
+ -->    </div>
+  </template>
+
+  <script>
+
+    // eslint-disable-next-line no-undef
+    class FundraiserPage extends UtilsFunctions(ReduxMixin(Polymer.Element)) {
+      static get is() {
+        return 'fundraiser-page';
+      }
+
+      static get properties() {
+        return {
+          route: Object,
+          routeData: Object,
+          queryParams: Object,
+          active: Boolean,
+          contentLoaderVisibility: {
+            type: String,
+            value: null,
+          },
+          projects: {
+            type: Array,
+            statePath: 'projects.list',
+          },
+          projectsMap: {
+            type: Object,
+            statePath: 'projects.obj',
+          },
+          projectsFetching: {
+            type: Boolean,
+            statePath: 'projects.fetching',
+          },
+          projectsFetchingError: {
+            type: Object,
+            statePath: 'projects.fetchingError',
+          },
+          alpha: {
+            type: Number,
+            computed: '_divideBy100(alpha100)',
+          },
+          alpha100: {
+            type: Number,
+            value: 20,
+          },
+          snapshotUnsubscribe: Function,
+          user: {
+            type: Object,
+            statePath: 'user',
+          },
+          isDialogOpened: {
+            type: Object,
+            statePath: 'dialogs.project.isOpened',
+            observer: '_dialogStatusChanged',
+          },
+          contributionsByProject: {
+            type: Object,
+            computed: '_computeContributionsByProject(projectsMap)',
+          },
+          registered: {
+            type: Boolean,
+            statePath: 'registered',
+            observer: '_registrationChanged',
+          },
+          rulesShown: {
+            type: Boolean,
+            value: true,
+          },
+        };
+      }
+
+      static get observers() {
+        return [
+          '_projectsChanged(projects)',
+          '_openProjectDetails(active, projects, projectsMap, routeData.projectId)',
+          '_fetchRegistration(active, user.email)',
+        ];
+      }
+
+      _computeContributionsByProject(projectsMap) {
+        let contributionsByProject = {};
+        // eslint-disable-next-line guard-for-in
+        for (var projectId in projectsMap) {
+          let contributionsList = [];
+          let contributionsObject = projectsMap[projectId].contributions;
+
+          // eslint-disable-next-line guard-for-in
+          for (var userId in contributionsObject) {
+            contributionsList.push(contributionsObject[userId]);
+          }
+          contributionsByProject[projectId] = contributionsList;
+        }
+        return contributionsByProject;
+      }
+
+      _fetchRegistration(active, email) {
+        if (active && email) {
+          this.dispatch(userActions.isRegistered(email));
+        }
+      }
+
+      _projectsChanged() {
+        if (this.projects && this.projects.length) {
+          this.contentLoaderVisibility = 'hidden';
+        }
+      }
+
+      _dialogStatusChanged(nextState, prevState) {
+        if (!nextState && prevState && this.active && this.routeData.projectId) {
+          history.back();
+        }
+      }
+
+      _contrSum(projectId) {
+        return this._sum(this.contributionsByProject[projectId]);
+      }
+
+      _projectMatching(projectId, alpha) {
+        return this._clrFunding(this.contributionsByProject[projectId]) - this._contrSum(projectId);
+      }
+
+      _sum(contributions) {
+        if (contributions && contributions.length) {
+          return contributions.reduce((a, b)=>{return a+b;});
+        } else {
+          return 0;
+        }
+      }
+
+      _contrLength(projectId) {
+        return this.contributionsByProject[projectId].length;
+      }
+
+      _lrFunding(contributions) {
+        return Math.pow(this._sum(
+          contributions.map((contribution) => Math.sqrt(contribution))), 2);
+      }
+
+      _divideBy100(value) {
+        return value/100.0;
+      }
+
+      _clrFunding(contributions) {
+        if (contributions && contributions.length) {
+          return (this.alpha*this._lrFunding(contributions) +
+           (1-this.alpha)*this._sum(contributions)).toFixed(0);
+        } else {
+          return 0;
+        }
+      }
+
+      _registrationChanged(registration) {
+        this.registration = registration;
+      }
+
+      _sort(project1, project2) {
+        var p1match = this._projectMatching(project1.id, this.alpha);
+        var p2match = this._projectMatching(project2.id, this.alpha);
+        if (p1match === p2match) {
+          return 1;
+        }
+        return p1match > p2match ? -1 : 1;
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+
+        // Listen for updates on the data, and refresh then. So we can get realtime updates
+        this.snapshotUnsubscribe = firebase.firestore().collection('projects')
+          .onSnapshot(function (snapshot) {
+            // There's a correct way to do this but I didn't figure out how.
+            // eslint-disable-next-line no-undef
+            store.dispatch(fundraiserActions.fetchList());
+          });
+        if (this.user.signedIn) {
+           this._removeQueryParams();
+        }
+      }
+
+      disconnectedCallback() {
+        super.disconnectedCallback();
+        this.snapshotUnsubscribe();
+      }
+
+      _removeQueryParams() {
+        window.history.replaceState({}, document.title, this.route.prefix + this.route.path);
+      }
+
+      _add(event) {
+        this._removeQueryParams();
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (!this.user.signedIn) {
+          dialogsActions.openDialog(DIALOGS.SIGNIN);
+          return;
+        }
+
+        if (!this.registered) {
+           // eslint-disable-next-line max-len
+           alert('Your email address isn\'t yet associated with the conference! Make sure you\'re signed in with the same email address that\'s on your Eventbrite ticket. You can log out by tapping the upper-right corner of this web page, then log in again with a new address. Send an email to webdev.radicalxchange@gmail.com or stop by the fundraiser booth to get your name on the list!');
+          return;
+        }
+
+        dialogsActions.openDialog(DIALOGS.NEW_PROJECT, {
+            title: 'Suggest a project',
+            submitLabel: ' Submit!',
+            firstFieldLabel: 'Project Title *',
+            secondFieldLabel: 'Project Description *',
+            previewMode: false,
+            submit: (data) => this._submitAction(data),
+        });
+      }
+
+      _submitAction(data) {
+        this.dispatch(fundraiserActions.create(data));
+      }
+
+      _openProjectDetails(active, projects, projectsMap, id) {
+        if (projects && projects.length) {
+          requestAnimationFrame(() => {
+            if (active && id) {
+              const projectData = projectsMap[id];
+              projectData && dialogsActions.openDialog(DIALOGS.PROJECT, projectData);
+            } else if (this.isDialogOpened) {
+              dialogsActions.closeDialog(DIALOGS.PROJECT);
+            }
+          });
+        }
+      }
+
+      _setHelmetData(active, isDialogOpened) {
+        return active && !isDialogOpened;
+      }
+    }
+
+    window.customElements.define(FundraiserPage.is, FundraiserPage);
+  </script>
+</dom-module>

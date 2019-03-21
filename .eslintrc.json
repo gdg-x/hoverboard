@@ -49,6 +49,7 @@
     "teamActions": true,
     "userActions": true,
     "subscribeActions": true,
+    "fundraiserActions": true,
     "notificationsActions": true,
     "helperActions": true,
     "DIALOGS": true,

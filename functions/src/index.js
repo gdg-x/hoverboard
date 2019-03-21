@@ -17,5 +17,5 @@ export {
   optimizeImages,
   mailchimpSubscribe,
   mailchimpPotentialPartnerSubscribe,
-  prerender,
+  prerender
 }

@@ -22,6 +22,29 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    match /projects/{project} {
+      // Applies to single document read requests
+      allow get;
+
+      // Applies to queries and collection read requests
+      allow list;
+
+      // Allow writes if authenticated
+      allow write: if request.auth.uid != null;
+    }
+
+    match /attendees2019/{atteendees} {
+      // Applies to single document read requests
+      allow get;
+
+      // Applies to queries and collection read requests
+      allow list;
+
+      // Allow writes
+      allow write: if false;
+    }
+
+
     match /config/{config} {
       allow read, write: if false; // allow each section separately
     }

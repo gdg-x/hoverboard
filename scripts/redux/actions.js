@@ -277,7 +277,6 @@ const pressActions = {
           {}
         );
 
-
         dispatch({
           type: FETCH_PRESS_LIST_SUCCESS,
           payload: {
@@ -363,6 +362,93 @@ const previousSpeakersActions = {
           type: FETCH_PREVIOUS_SPEAKERS_FAILURE,
           payload: { error },
         });
+      });
+  },
+};
+
+const fundraiserActions = {
+  fetchList: () => (dispatch) => {
+    dispatch({
+      type: FETCH_PROJECTS,
+    });
+
+    firebase.firestore()
+      .collection('projects')
+      .get()
+      .then((snaps) => {
+        const list = snaps.docs
+          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+
+        const obj = list.reduce(
+          (acc, curr) => Object.assign({}, acc, { [curr.id]: curr }),
+          {}
+        );
+
+        dispatch({
+          type: FETCH_PROJECTS_SUCCESS,
+          payload: {
+            obj,
+            list,
+          },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: FETCH_PROJECTS_FAILURE,
+          payload: { error },
+        });
+      });
+  },
+  create: (data) => (dispatch) => {
+    dialogsActions.closeDialog(DIALOGS.NEW_PROJECT);
+    toastActions.showToast({ message: 'Project submitted!' });
+    dispatch({
+      type: CREATE_PROJECT,
+    });
+    firebase.firestore().collection('projects')
+      .add({
+        name: data.firstFieldValue,
+        description: data.secondFieldValue || '',
+        budget: data.budget,
+        contributions: {},
+      })
+      .catch((error) => {
+        alert(error);
+        dispatch({
+          type: SET_DIALOG_DATA,
+          dialog: {
+            ['submit-project']: {
+              isOpened: true,
+              data: Object.assign(data, { errorOccurred: true }),
+            },
+          },
+        });
+
+        helperActions.trackError('projectActions', 'submit', error);
+      });
+  },
+  pledge: (id, project, toastText) => (dispatch) => {
+    toastActions.showToast({ message: toastText ?
+      toastText : 'Pledge submitted! You can adjust or set to zero until the fundraiser ends!' });
+    dispatch({
+      type: ADD_PLEDGE,
+    });
+    firebase.firestore()
+      .collection('projects')
+      .doc(id)
+      .set(project)
+      .catch((error) => {
+        dispatch({
+          type: SET_DIALOG_DATA,
+          dialog: {
+            ['project-details']: {
+              isOpened: true,
+              data: Object.assign(data, { errorOccurred: true }),
+            },
+          },
+        });
+
+        helperActions.trackError('projectActions', 'pledge', error);
       });
   },
 };
@@ -649,7 +735,81 @@ const userActions = {
   updateUser: () => {
     firebase.auth().onAuthStateChanged((user) => {
       helperActions.storeUser(user);
+      if (user) {
+        userActions.isRegistered(user.email);
+      }
     });
+  },
+
+  signInWithEmail: (email, url) => {
+    var actionCodeSettings = {
+      // URL you want to redirect back to. The domain (www.example.com) for this
+      // URL must be whitelisted in the Firebase Console.
+      url: url,
+      // This must be true.
+      handleCodeInApp: true,
+    };
+
+    firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
+      .then(function () {
+        // The link was successfully sent. Inform the user.
+        // Save the email locally so you don't need to ask the user for it again
+        // if they open the link on the same device.
+        window.localStorage.setItem('emailForSignIn', email);
+        dialogsActions.closeDialog(DIALOGS.SIGNIN);
+        toastActions.showToast({ message: 'Success! Check your email for a sign in link!' });
+      })
+      .catch(function (error) {
+        // Some error occurred, you can inspect the code: error.code
+        helperActions.trackError('userActions', 'signInWithEmail', error);
+        alert(error);
+      });
+  },
+
+  checkEmailSignin: ()=> {
+    // Confirm the link is a sign-in with email link.
+    if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+      // Additional state parameters can also be passed via URL.
+      // This can be used to continue the user's intended action before triggering
+      // the sign-in operation.
+      // Get the email if available. This should be available if the user completes
+      // the flow on the same device where they started it.
+      var email = window.localStorage.getItem('emailForSignIn');
+      if (!email) {
+        // User opened the link on a different device. To prevent session fixation
+        // attacks, ask the user to provide the associated email again. For example:
+        email = window.prompt('Please provide your email for confirmation');
+      }
+
+      // eslint-disable-next-line max-len, no-useless-escape
+      const emailRegularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const validEmail = emailRegularExpression.test(email);
+      if (validEmail) {
+      // The client SDK will parse the code from the link for you.
+      firebase.auth().signInWithEmailLink(email, window.location.href)
+        .then(function (result) {
+          // Clear email from storage.
+          window.localStorage.removeItem('emailForSignIn');
+
+          // Clear out the query params.
+          window.history.replaceState({}, document.title, window.location.href.split('?')[0]);
+
+          // You can access the new user via result.user
+          // Additional user info profile not available via:
+          // result.additionalUserInfo.profile == null
+          // You can check if the user is new or existing:
+          // result.additionalUserInfo.isNewUser
+        })
+        .catch(function (error) {
+          // Some error occurred, you can inspect the code: error.code
+          // Common errors could be invalid email and invalid or expired OTPs.
+          alert(error + 'You are probably already signed in so this is no problem!');
+        });
+      }
+      // if (this.user && this.user.email) {
+      //   this.dispatch(userActions.isRegistered(this.user.email));
+      // }
+    }
   },
 
   signOut: () => {
@@ -660,6 +820,29 @@ const userActions = {
         subscribeActions.resetSubscribed();
       });
   },
+
+  isRegistered: (email) => (dispatch) => {
+    dispatch({
+      type: IS_REGISTERED,
+    });
+
+    firebase.firestore()
+      .collection('attendees2019')
+      .doc(email.toLowerCase())
+      .get()
+      .then((doc) => {
+        dispatch({
+          type: IS_REGISTERED_SUCCESS,
+          registered: doc.exists,
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: IS_REGISTERED_FAILURE,
+          payload: { error },
+        });
+      });
+    },
 };
 
 const subscribeActions = {
@@ -867,6 +1050,8 @@ const helperActions = {
         actualProvider,
         pendingCredential,
       };
+
+      userActions.isRegistered(email);
     }
 
     store.dispatch({
