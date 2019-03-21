@@ -59,6 +59,19 @@
         line-height: 1;
       }
 
+      .alpha-slider {
+        margin-top: 50px;
+      }
+
+      .capitalism {
+        color: green;
+      }
+
+      .radicalism {
+        color: orange;
+        font-weight: bold;        
+      }
+
       paper-progress {
         width: 100%;
         --paper-progress-active-color: var(--default-primary-color);
@@ -98,7 +111,6 @@
       table, .hero-title {
         margin-left: auto;
         margin-right: auto;
-        font-style: italic;
         font-weight: bold;
         text-align: center;
       }
@@ -158,9 +170,31 @@
         color: #fff;
       }
 
+      .italic {
+        font-style: italic;
+        text-align: center;      
+      }
+
+      .explainer {
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+      }
+
       paper-button iron-icon {
         --iron-icon-height: 40px;
         --iron-icon-width: 40px;
+      }
+
+      iron-icon {
+        margin-left: 5px;
+      }
+
+      .submit-button {
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
       }
 
     </style>
@@ -184,9 +218,17 @@
       font-color="{$ heroSettings.speakers.fontColor $}"
       active="[[active]]"
     >
-      <div class="hero-title highlight-font">FUNDRAISER</div>
+      <h3 class="explainer italic">For conference attendees</h3>
 
-        <marked-element class="description" markdown='{$ fundraiser.rules $}' hidden='[[!showRules]]'>
+      <div class="hero-title highlight-font">Suggest projects, pledge support, get funded</div>
+
+      <h3 class="explainer" layout horizontal justified>Adjusting the slider will change the matching funding formula; all the way to the right will fully fund the projects according to the Liberal Radicalism mechanism, and all the way to the left is standard capitalism with no matching. We hope to fully fund each project, but we will determine the final "alpha" slider value after matching funds are secured from our philanthropic supporters.</h3>
+
+      <div on-tap='_toggleRules' class="explainer" layout horizontal>
+        Show/hide full rules  
+        <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>        
+      </div>
+        <marked-element class="description explainer" markdown='{$ fundraiser.rules $}' hidden='[[!rulesShown]]'>
           <div slot="markdown-html"></div>
         </marked-element>
 
@@ -194,7 +236,7 @@
  -->
       <table class="alpha-slider">
         <tr> 
-          <td>
+          <td class="capitalism">
             CAPITALIST
           </td>
           <td>
@@ -205,14 +247,11 @@
               editable>
              </paper-slider>            
           </td>
-          <td>
+          <td class="radicalism">
             RADICAL
           </td>
         </tr>
       </table>
-
-      <h5>Adjusting the slider will change the matching funding formula; all the way to the right will fully fund the projects according to the Liberal Radicalism mechanism, and all the way to the left is standard capitalism with no matching. We hope to fully fund each project, but we will determine the final "alpha" slider value after matching funds are secured.</h5>
-
     </hero-block>
 
     <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
@@ -230,8 +269,7 @@
     ></content-loader>
  -->
 
-    <h4 class="message">Tap a project to view details and contribute. Having trouble? Email webdev.radicalxchange@gmail.com</h5>
-
+<div class="submit-button">
     <paper-button class="animated icon-right message"
                   on-tap="_add"
                   ga-on="click"
@@ -245,6 +283,7 @@
       <span class="cta-label">What should we bring to life?</span>
       <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
     </paper-button>
+  </div>
 
     <div class="container">
 
@@ -287,6 +326,7 @@
         </paper-button>
       </div>      
  -->    </div>
+     <h4 class="message">Having trouble? Email webdev.radicalxchange@gmail.com</h5>
   </template>
 
   <script>
@@ -352,7 +392,7 @@
           },
           rulesShown: {
             type: Boolean,
-            value: true,
+            value: false,
           },
         };
       }
@@ -391,6 +431,10 @@
         if (this.projects && this.projects.length) {
           this.contentLoaderVisibility = 'hidden';
         }
+      }
+
+      _toggleRules() {
+        this.rulesShown = !this.rulesShown;
       }
 
       _dialogStatusChanged(nextState, prevState) {
