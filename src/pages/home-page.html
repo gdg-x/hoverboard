@@ -32,12 +32,13 @@
       hero-block {
         font-size: 20px;
         text-align: center;
-        height: 800px;
+        height: 600px;
+        margin-top: 0px;
       }
 
       .home-content {
           position: absolute;
-          top: 64px;
+          top: 0;
           left: 0;
           right: 0;
           bottom: 0;
@@ -59,25 +60,39 @@
       .title {
         font-family: var(--major-font-family);
         margin: auto 0;
+        margin-top: 0px;
         font-size: 1.8em;
         position: relative;
       }
 
       .stream-frame {
-        background-color: rgb(122, 78, 250);
-        margin: 10px 0;
+        margin: 50px 0;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 776px;        
+        position: relative;
       }
 
       .stream {
-        margin: 0 auto;
-        padding: 10px 20px;
-        max-width: 776px;
-        font-size: 0.8em;
+        margin: 10px;
+        padding: 5px 10px;
+        font-size: 1.0em;
+        background-color: rgb(122, 78, 250);
         color: white;
+        position: relative;
       }
 
       .stream paper-button {
         background: white;
+      }
+
+      .stream a {
+        margin: auto;
+        margin-right: 0px;
+      }
+
+      .stream p {
+        margin: 3px;
       }
 
       .info-items {
@@ -172,7 +187,6 @@
         .home-content {
           display: grid;
           grid-template-rows: 2fr 1fr;
-          top: 64px;
           left: 0;
           width: 100vw;
           justify-items: center;
@@ -183,6 +197,7 @@
       @media (min-width: 812px) {
         .title {
           font-size: 2.5em;
+          margin-top: 10px;
         }
 
         .hero-logo {
@@ -200,6 +215,40 @@
 
     <polymer-helmet active="[[active]]"></polymer-helmet>
 
+            <div class="stream-frame">
+              <div class="stream" layout horizontal>
+                <p>The fundraiser is now open for conference attendees!</p>
+                <a
+                  href="/fundraiser"
+                  ga-on="click"
+                  ga-event-category="fundraiser"
+                  ga-event-action="fundraiser-click"
+                  ga-event-label="fundraiser-click"
+                >
+                  <paper-button class="animated icon-right" raised elevation="1">
+                    <span class="cta-label">Go</span>
+                  </paper-button>
+                </a>
+              </div>
+              <div class="stream" layout horizontal>
+                <p>Free livestream starts March 22 at 1pm Central</p>
+                <a
+                  href="https://www.youtube.com/channel/UCxRk8v1Wcxa1TIKTvqrtSOw/featured"
+                  ga-on="click"
+                  ga-event-category="stream"
+                  ga-event-action="stream"
+                  ga-event-label="hero block - stream"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <paper-button class="animated icon-right" raised elevation="1">
+                    <span class="cta-label">Go</span>
+                  </paper-button>
+                </a>
+              </div>
+            </div>
+
+
     <hero-block
       id="hero"
       background-image="{$ heroSettings.home.background.image $}"
@@ -211,25 +260,6 @@
       <div class="home-content">
         <div class="top">
           <div class="title">RadicalxChange</div>
-            <div class="stream-frame">
-              <div class="stream">
-                <p>We will be livestreaming most of the conference on Youtube! Streams will start on March 22 at 1pm Central time.</p>
-                <a
-                  href="https://www.youtube.com/channel/UCxRk8v1Wcxa1TIKTvqrtSOw/featured"
-                  ga-on="click"
-                  ga-event-category="stream"
-                  ga-event-action="stream"
-                  ga-event-label="hero block - stream"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <paper-button class="animated icon-right" raised elevation="1">
-                    <span class="cta-label">See Channel</span>
-                    <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-                  </paper-button>
-                </a>
-              </div>
-            </div>
           <plastic-image
             class="hero-logo"
             srcset="/images/logo.gif"
