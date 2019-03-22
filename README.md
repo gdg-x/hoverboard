@@ -41,6 +41,7 @@ Our goal is to allow event organizers to set up professional conference website 
       - Go to https://console.firebase.google.com/project/%YOUR_PROJECT_ID%/settings/serviceaccounts/adminsdk
       - Ensure that **Node.js** is selected and press **GENERATE NEW PRIVATE KEY** 
       - Save the file as `serviceAccount.json` and to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
+    * Enable Firestore in web console (https://console.firebase.google.com -> Database -> Cloud Firestore)
     * [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
     * Run `npm run firestore:init` or `yarn firestore:init`
 1. Run locally
