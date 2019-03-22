@@ -1,3 +1,9 @@
+### Venue details
+
+The conference venue is The College for Creative Studies, Taubman Center. The address is 460 West Baltimore, Detroit, MI 48202.
+
+**Note:** The College for Creative Studies has two locations in Detroit. Make sure you go to the Taubman Center!
+
 ### Hotel information
 
 We've secured discount rates at the following hotels:
