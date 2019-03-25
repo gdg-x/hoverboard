@@ -15,15 +15,14 @@ During two conference days attendees will be able to attend sessions and hands-o
 ### Livestream & Recordings
 
 We may be recording stuff.
-  
-## Registration
 
+[comment]: # (## Registration)
 
-### Drawing Dates
+[comment]: # "### Drawing Dates
 
 The window to buy a ticket will be opened until 6PM GMT+2 on October 11th 2018, or earlier if the tickets are sold out. If the ticket was bought after September 30th registered participants won’t get printed badge (their names will be written on the badge by marker). To buy a ticket [follow the link]( https://2event.com/events/1027108), select required ticket type, fill in the required information and pay for it.
 
-Once you've successfully payed for the ticket you’ll reach a confirmation screen and receive an email with the ticket. Please don’t forget to download it on your device or print it, as it’s required for entrance.
+Once you've successfully payed for the ticket you’ll reach a confirmation screen and receive an email with the ticket. Please don’t forget to download it on your device or print it, as it’s required for entrance. 
 
   
 
@@ -79,7 +78,7 @@ Special tickets for real supporters of our conference. As we’re organizing the
 - You agree to be solely responsible for your own safety, belongings and well-being while participating in LibertyJS. Organizers won't be liable for your participation in LibertyJS. 
 - Applicants and attendees can request the deletion of their registration data after the event ends by emailing [libertyjsconf@gmail.com](mailto:libertyjsconf@gmail.com). 
 
-## Attendance Details
+[comment]: # (## Attendance Details)
 
 ### Language
 
@@ -117,4 +116,5 @@ Smoking is only permitted in designated outdoor smoking areas.
 
 ### No Soliciting
 
-No solicitation or selling of items or services is allowed at LibertyJS. Any attendee conducting these activities may be removed from the conference.
+No solicitation or selling of items or services is allowed at LibertyJS. Any attendee conducting these activities may be removed from the conference."
+
