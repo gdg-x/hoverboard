@@ -38,6 +38,12 @@
         "logoUrl" : "../images/logos/maif.png",
         "name" : "MAIF Horizon",
         "url" : "https://www.maif.fr/"
+      }, {
+        "order" : 0,
+        "height": 150,
+        "logoUrl" : "../images/logos/microsoft.png",
+        "name" : "Microsoft",
+        "url" : "https://microsoft.fr/"
       } ],
       "order" : 0,
       "title" : "Platinium"
@@ -144,6 +150,27 @@
         "logoUrl" : "../images/logos/esii.png",
         "name" : "ESII",
         "url" : "https://www.esii.com/fr/"
+      },
+      {
+        "order" : 1,
+        "height": 100,
+        "logoUrl" : "../images/logos/backelite.png",
+        "name" : "Backelite",
+        "url" : "https://www.backelite.com/fr/"
+      },
+      {
+        "order" : 1,
+        "height": 100,
+        "logoUrl" : "../images/logos/netheos.png",
+        "name" : "Netheos",
+        "url" : "https://www.netheos.com/"
+      },
+      {
+        "order" : 1,
+        "height": 100,
+        "logoUrl" : "../images/logos/laposte.png",
+        "name" : "La Poste",
+        "url" : "https://www.laposte.fr/"
       } ],
       "order" : 2,
       "title" : "Silver"
@@ -161,6 +188,24 @@
         "logoUrl" : "../images/logos/saagie.png",
         "name" : "Saagie",
         "url" : "https://www.saagie.com/"
+      }, {
+        "order" : 0,
+        "height": 50,
+        "logoUrl" : "../images/logos/decisionbrain.png",
+        "name" : "DecisionBrain",
+        "url" : "https://decisionbrain.com/"
+      }, {
+        "order" : 0,
+        "height": 50,
+        "logoUrl" : "../images/logos/devensys.png",
+        "name" : "Devensys",
+        "url" : "https://www.devensys.com/"
+      }, {
+        "order" : 0,
+        "height": 50,
+        "logoUrl" : "../images/logos/smartview.png",
+        "name" : "Smartview",
+        "url" : "http://www.smartview.fr/"
       } ],
       "order" : 3,
       "title" : "Bronze"
