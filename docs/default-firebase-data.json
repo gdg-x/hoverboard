@@ -147,13 +147,6 @@
       {
         "order" : 1,
         "height": 100,
-        "logoUrl" : "../images/logos/esii.png",
-        "name" : "ESII",
-        "url" : "https://www.esii.com/fr/"
-      },
-      {
-        "order" : 1,
-        "height": 100,
         "logoUrl" : "../images/logos/backelite.png",
         "name" : "Backelite",
         "url" : "https://www.backelite.com/fr/"
