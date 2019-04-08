@@ -24,7 +24,7 @@
   "country": "Country",
   "time": "Time",
   "faq": "/data/faq.md",
-  "cod": "/data/cod.md",
+  "cod": "/data/code-of-conduct.md",
   "footer": {
     "blog": "Blog"
   },
@@ -39,6 +39,11 @@
         {
           "name": "Meet the Team",
           "url": "/team/",
+          "newTab": false
+        },
+        {
+          "name": "Code of Conduct",
+          "url": "/code-of-conduct/",
           "newTab": false
         }
       ]
