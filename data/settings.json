@@ -8,8 +8,8 @@
   "endDate": "2019-10-25T19:00:00+05:00",
   "webapp": {
     "shortName": "LibertyJS",
-    "themeColor": "#ffc214",
-    "backgroundColor": "#ffc214"
+    "themeColor": "#173472",
+    "backgroundColor": "#173472"
   },
   "dateFormat": {
     "locale": "en-US"
@@ -43,7 +43,7 @@
     "home": {
       "description": "The largest Javascript conference in town",
       "background": {
-        "color": "#ffc214",
+        "color": "#173472",
         "image": "/images/backgrounds/ljs-hero2.jpg"
       },
       "fontColor": "#FFF"
