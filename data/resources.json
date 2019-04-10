@@ -174,7 +174,7 @@
     "description": "Sunny Tech est une assocation bénévole à but non lucratif (loi 1901) créée par des membres actifs de la communauté tech de Montpellier avec l'aide des meetups locaux et du <a href='https://www.montpellier-techhub.org/' target='_blank'>Montpellier Tech Hub</a>."
   },
   "schedule": {
-    "saveSessionsSignedOut": "Sign in to save sessions"
+    "saveSessionsSignedOut": "Connectez-vous pour sauvegarder des sessions"
   },
   "sessionDetails": {
     "contentLevel": "Content level",

@@ -171,16 +171,6 @@
         "name": "google",
         "label": "S'enregistrer avec Google",
         "url": "https://accounts.google.com"
-      },
-      {
-        "name": "facebook",
-        "label": "S'enregistrer avec Facebook",
-        "url": "https://www.facebook.com"
-      },
-      {
-        "name": "twitter",
-        "label": "S'enregistrer avec Twitter",
-        "url": "https://twitter.com"
       }
     ],
     "allowedProvidersUrl": [
