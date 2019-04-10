@@ -1,6 +1,6 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../mixins/share-mixin.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html" />
+<link rel="import" href="../mixins/share-mixin.html" />
 
 <dom-module id="footer-social">
   <template>
@@ -37,7 +37,7 @@
         display: inline-block;
       }
 
-     .social-group.share-block {
+      .social-group.share-block {
         margin-bottom: 17px;
       }
 
@@ -49,7 +49,7 @@
         margin: 0;
       }
 
-      .share-gplus  {
+      .share-gplus {
         color: var(--gplus-color);
       }
 
@@ -118,7 +118,7 @@
       }
 
       @media (min-width: 439px) {
-        :host  {
+        :host {
           display: inline-flex;
         }
 
@@ -140,7 +140,6 @@
           padding-top: 17px;
         }
       }
-
     </style>
 
     <div class="social-group share-block">
@@ -155,7 +154,8 @@
             ga-on="click"
             ga-event-category="social"
             ga-event-action="share"
-            ga-event-label="gplus">
+            ga-event-label="gplus"
+          >
           </paper-icon-button>
         </div>
         <div class="share">
@@ -167,7 +167,8 @@
             ga-on="click"
             ga-event-category="social"
             ga-event-action="share"
-            ga-event-label="facebook">
+            ga-event-label="facebook"
+          >
           </paper-icon-button>
         </div>
         <div class="share">
@@ -179,7 +180,8 @@
             ga-on="click"
             ga-event-category="social"
             ga-event-action="share"
-            ga-event-label="twitter">
+            ga-event-label="twitter"
+          >
           </paper-icon-button>
         </div>
       </div>
@@ -187,26 +189,29 @@
 
     <div class="social-group blog">
       <div class="title">
-        {$ followOur $}
-        <a href="{$ organizer.blog $}" target="_blank" rel="noopener noreferrer">{$ footer.blog $}</a>
+        <a href="/blog/" rel="noopener noreferrer"
+          >Blog</a
+        >
       </div>
     </div>
 
     <div class="social-group social-networks">
-      <div class="title">{$ followUs $} </div>
+      <div class="title">{$ followUs $}</div>
       <ul class="nav-inline">
         {% for socFollow in socialNetwork.follow %}
-          <li>
-            <a href="{$ socFollow.url $}"
-                target="_blank"
-                rel="noopener noreferrer"
-                ga-on="click"
-                ga-event-category="social"
-                ga-event-action="follow"
-                ga-event-label="{$ socFollow.name $}">
-              <paper-icon-button icon="hoverboard:{$ socFollow.name $}"></paper-icon-button>
-            </a>
-          </li>
+        <li>
+          <a
+            href="{$ socFollow.url $}"
+            target="_blank"
+            rel="noopener noreferrer"
+            ga-on="click"
+            ga-event-category="social"
+            ga-event-action="follow"
+            ga-event-label="{$ socFollow.name $}"
+          >
+            <paper-icon-button icon="hoverboard:{$ socFollow.name $}"></paper-icon-button>
+          </a>
+        </li>
         {% endfor %}
       </ul>
     </div>
@@ -216,18 +221,16 @@
         <a aria-label="{$ emailUs $}" href="mailto:{$ mailto $}">{$ emailUs $}</a>
       </div>
     </div>
-
   </template>
 
   <script>
-
     // eslint-disable-next-line no-undef
     class FooterSocial extends ShareMixin(Polymer.Element) {
-      static get is() {return 'footer-social';}
+      static get is() {
+        return 'footer-social';
+      }
     }
 
     window.customElements.define(FooterSocial.is, FooterSocial);
-
   </script>
 </dom-module>
-

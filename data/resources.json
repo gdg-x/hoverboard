@@ -48,16 +48,6 @@
           "newTab": false
         },
         {
-          "name": "College for Creative Studies,",
-          "url": "https://www.collegeforcreativestudies.edu",
-          "newTab": true
-        },
-        {
-          "name": "A. Alfred Taubman Center for Design Education.",
-          "url": "https://www.collegeforcreativestudies.edu",
-          "newTab": true
-        },
-        {
           "name": "Radical Markets",
           "url": "http://radicalmarkets.com",
           "newTab": true
@@ -133,10 +123,10 @@
     "previousYear": "Year"
   },
   "speakersBlock": {
-    "title": "Agenda Highlights",
+    "title": "Conference Highlights",
     "callToAction": {
       "label": "View More",
-      "link": "/speakers/"
+      "link": "/conference/"
     }
   },
   "previousSpeakersBlock": {

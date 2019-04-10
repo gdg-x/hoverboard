@@ -1,19 +1,13 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html" />
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html" />
-<link
-  rel="import"
-  href="../../bower_components/paper-button/paper-button.html"
-/>
+<link rel="import" href="../../bower_components/paper-button/paper-button.html" />
 <link rel="import" href="../mixins/redux-mixin.html" />
 <link rel="import" href="shared-animations.html" />
 <link rel="import" href="hoverboard-icons.html" />
 
 <dom-module id="about-block">
   <template>
-    <style
-      is="custom-style"
-      include="shared-styles flex flex-alignment flex-reverse"
-    ></style>
+    <style is="custom-style" include="shared-styles flex flex-alignment flex-reverse"></style>
 
     <style>
       :host {
@@ -45,6 +39,7 @@
       .button-row {
         display: flex;
         justify-content: center;
+        margin-top: 2em;
       }
 
       .label {
@@ -54,43 +49,36 @@
       h3 {
         margin-top: 2em;
       }
-
     </style>
 
     <div class="container-narrow">
       <div>
         <h1 class="header">What Will We Build?</h1>
         <p>
-          We stand at a unique crossroads as a society. The signs of our
-          social and economic system failing are everywhere: rising
-          inequality, stagnating economies and increasing threats to liberal
-          democracy from populists of the left and right. Over the past few
-          months positive alternatives, grounded in rigorous social science,
-          that embrace markets, technology, community and diversity have
+          We stand at a unique crossroads as a society. The signs of our social and economic system
+          failing are everywhere: rising inequality, stagnating economies and increasing threats to
+          liberal democracy from populists of the left and right. Positive alternatives, grounded in
+          rigorous social science, that embrace markets, technology, community and diversity have
           emerged.
         </p>
         <h3>The RadicalxChange</h3>
         <p>
-          Together we are building a comprehensive alternative that solves
-          our most divisive social problems while affirming the human values
-          we all share and we want you to be a part of it.
+          Together we are building a comprehensive alternative that solves our most divisive social
+          problems while affirming the human values we all share and we want you to be a part of it.
         </p>
         <p>
-          Momentum is building as we convene RadicalxChange’s rapidly
-          growing community of artists, scholars, entrepreneurs and
-          activists who are imagining, designing, building and fighting for
-          a brighter future. A future where power rests in diverse
-          democratic organizations.
+          Momentum is building as we convene RadicalxChange’s rapidly growing community of artists,
+          scholars, entrepreneurs and activists who are imagining, designing, building and fighting
+          for a brighter future. A future where power rests in diverse democratic organizations.
         </p>
-        <p class="call-to-action">
-          Are you sick of polarization? Are you ready for a more humane
-          future?
-          <a
-            href="https://www.eventbrite.com/e/radicalxchange-tickets-53060613724"
-            >Get your ticket</a
-          >
-          and join us as we build it together.
-        </p>
+      </div>
+      <div class="button-row">
+        <a href="https://www.youtube.com/channel/UCxRk8v1Wcxa1TIKTvqrtSOw/videos" target="_blank">
+          <paper-button class="cta-button animated icon-right" raised animate>
+            <span>Footage From Our Recent Conference</span>
+            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+          </paper-button>
+        </a>
       </div>
     </div>
   </template>
@@ -99,6 +87,12 @@
     class AboutBlock extends ReduxMixin(Polymer.Element) {
       static get is() {
         return 'about-block';
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        // eslint-disable-next-line no-undef
+        HOVERBOARD.Elements.About = this;
       }
 
       _playVideo() {

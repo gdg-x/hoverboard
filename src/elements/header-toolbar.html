@@ -1,21 +1,21 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
 
-<link rel="import" href="../mixins/redux-mixin.html">
-<link rel="import" href="./shared-styles.html">
+<link rel="import" href="../mixins/redux-mixin.html" />
+<link rel="import" href="./shared-styles.html" />
 
 <dom-module id="header-toolbar">
   <template>
     <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
 
     <style>
-
       :host {
         --iron-icon-fill-color: currentColor;
         display: block;
         z-index: 1;
         border-bottom: 1px solid var(--divider-color);
         background-color: var(--primary-background-color);
-        transition: background-color var(--animation), border-bottom-color var(--animation), color var(--animation);
+        transition: background-color var(--animation), border-bottom-color var(--animation),
+          color var(--animation);
         color: var(--primary-text-color);
       }
 
@@ -51,7 +51,7 @@
         --paper-tabs-selection-bar-color: var(--default-primary-color);
         --paper-tabs: {
           height: 64px;
-        };
+        }
       }
 
       .nav-item a,
@@ -125,7 +125,6 @@
           height: initial;
         }
       }
-
     </style>
 
     <app-toolbar class="header">
@@ -138,7 +137,14 @@
         ></paper-icon-button>
       </div>
       <div layout horizontal center flex>
-        <a class="toolbar-logo" href="/" hidden$="[[!viewport.isLaptopPlus]]" layout horizontal title="{$ title $}"></a>
+        <a
+          class="toolbar-logo"
+          href="/"
+          hidden$="[[!viewport.isLaptopPlus]]"
+          layout
+          horizontal
+          title="{$ title $}"
+        ></a>
       </div>
 
       <paper-tabs
@@ -155,67 +161,33 @@
         </paper-tab>
         {% endfor %}
 
-
-<!--         <paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]">{$ signIn $}</paper-tab>
- -->
-        <a href$="[[_getTicketUrl(tickets)]]" target="_blank" rel="noopener noreferrer" ga-on="click"
-           ga-event-category="ticket button" ga-event-action="buy_click">
-          <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>
+        <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HR4LF85TFSM5E"
+          target="_blank"
+          rel="noopener noreferrer">
+          <paper-button class="buy-button" primary>Donate</paper-button>
         </a>
       </paper-tabs>
+      
 
-<!--       <paper-menu-button
-        id="notificationsMenu"
-        class="notifications-menu"
-        vertical-align="top"
-        horizontal-align="right"
-        no-animations
-      >
-        <paper-icon-button
-          icon="hoverboard:[[_getNotificationsIcon(notifications.status)]]"
-          slot="dropdown-trigger"
-        ></paper-icon-button>
-        <div class="dropdown-panel" slot="dropdown-content">
-          <div hidden$="[[_hideNotificationBlock(notifications.status, 'DEFAULT')]]">
-            <p>{$ notifications.default $}</p>
-            <div class="panel-actions" layout horizontal end-justified>
-              <paper-button primary-text on-tap="_toggleNotifications">{$ notifications.subscribe $}</paper-button>
-            </div>
-          </div>
-          <div hidden$="[[_hideNotificationBlock(notifications.status, 'GRANTED')]]">
-            <p>{$ notifications.enabled $}</p>
-            <div class="panel-actions" layout horizontal end-justified>
-              <paper-button primary-text on-tap="_toggleNotifications">{$ notifications.unsubscribe $}</paper-button>
-            </div>
-          </div>
-          <div hidden$="[[_hideNotificationBlock(notifications.status, 'DENIED')]]">
-            <p>{$ notifications.blocked $}</p>
-            <div class="panel-actions" layout horizontal end-justified>
-              <a href="{$ notifications.enable.link $}" target="_blank" rel="noopener noreferrer">
-                <paper-button primary-text on-tap="_closeNotificationMenu">{$ notifications.enable.label $}
-                </paper-button>
-              </a>
-            </div>
-          </div>
-        </div>
-      </paper-menu-button>
- -->
       <paper-menu-button
         class="auth-menu"
         hidden$="[[!user.signedIn]]"
         vertical-align="top"
         horizontal-align="right"
         no-animations
-        layout horizontal center-center
-        icon="hoverboard:account">
-        <div
-          class="profile-image" slot="dropdown-trigger"
-        >
+        layout
+        horizontal
+        center-center
+        icon="hoverboard:account"
+      >
+        <div class="profile-image" slot="dropdown-trigger">
           <iron-icon icon="hoverboard:account"></iron-icon>
         </div>
         <div class="dropdown-panel profile-details" slot="dropdown-content" layout horizontal>
           <div
-            class="profile-image" slot="dropdown-trigger" self-center
+            class="profile-image"
+            slot="dropdown-trigger"
+            self-center
             style$="background-image: url('[[user.photoURL]]')"
           ></div>
           <div class="profile-description layout vertical center-justified">
@@ -225,19 +197,10 @@
           </div>
         </div>
       </paper-menu-button>
-
-<!--       <paper-icon-button
-        icon="hoverboard:account"
-        on-tap="signIn"
-        hidden$="[[_isAccountIconHidden(user.signedIn, viewport.isLaptopPlus)]]"
-      ></paper-icon-button>
- -->    
-      </app-toolbar>
-
+    </app-toolbar>
   </template>
 
   <script>
-
     class HeaderToolbar extends ReduxMixin(Polymer.Element) {
       static get is() {
         return 'header-toolbar';
@@ -278,9 +241,7 @@
       }
 
       static get observers() {
-        return [
-          '_authStatusChanged(user.signedIn)',
-        ];
+        return ['_authStatusChanged(user.signedIn)'];
       }
 
       connectedCallback() {
@@ -324,8 +285,8 @@
         return status === NOTIFICATIONS_STATUS.DEFAULT
           ? 'bell-outline'
           : status === NOTIFICATIONS_STATUS.GRANTED
-            ? 'bell'
-            : 'bell-off';
+          ? 'bell'
+          : 'bell-off';
       }
 
       _hideNotificationBlock(status, blockStatus) {
@@ -342,8 +303,9 @@
 
       _getTicketUrl(tickets) {
         if (!tickets.list.length) return '';
-        const availableTicket = tickets.list.filter((ticket) =>
-          ticket.available && !ticket.name.includes('Scholarship'))[0];
+        const availableTicket = tickets.list.filter(
+          (ticket) => ticket.available && !ticket.name.includes('Scholarship')
+        )[0];
         return availableTicket ? availableTicket.url : tickets.list[0].url;
       }
 

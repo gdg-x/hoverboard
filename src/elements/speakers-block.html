@@ -1,21 +1,20 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
+<link rel="import" href="../../bower_components/polymer/lib/mixins/gesture-event-listeners.html" />
 
-<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html" />
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html" />
 
-<link rel="import" href="../mixins/utils-functions.html">
-<link rel="import" href="../mixins/redux-mixin.html">
-<link rel="import" href="../mixins/speakers-hoc.html">
-<link rel="import" href="../elements/text-truncate.html">
-<link rel="import" href="./shared-styles.html">
+<link rel="import" href="../mixins/utils-functions.html" />
+<link rel="import" href="../mixins/redux-mixin.html" />
+<link rel="import" href="../mixins/speakers-hoc.html" />
+<link rel="import" href="../elements/text-truncate.html" />
+<link rel="import" href="./shared-styles.html" />
 
 <dom-module id="speakers-block">
   <template>
     <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
 
     <style>
-
       :host {
         display: block;
       }
@@ -31,7 +30,7 @@
         margin: 0 auto 40px;
         color: var(--primary-text-color);
       }
-      
+
       .header-text strong {
         font-style: italic;
       }
@@ -171,28 +170,37 @@
           display: block;
         }
       }
-
     </style>
 
     <div class="container">
-        <header class="header-text">
-          <h1 class="container-title">{$ speakersBlock.title $}</h1>
-          <p>The event will feature keynotes by exciting speakers aligned to our entrepreneurship and technology, ideas and research, activism and government, and arts and communications tracks, including:<p>
-        </header>
+      <header class="header-text">
+        <h1 class="container-title">Conference Highlights</h1>
+        <p>
+          Our inaugural conference in March 2019 was an incredible success, featuring keynotes by
+          exciting speakers aligned to entrepreneurship and technology, ideas and research, activism
+          and government, and arts and communications tracks, including:
+        </p>
+        <p></p>
+      </header>
+
       <div class="speakers-wrapper">
         <template is="dom-repeat" items="[[featuredSpeakers]]" as="speaker">
-          <div class="speaker"
-                on-tap="_openSpeaker"
-                ga-on="click"
-                ga-event-category="speaker"
-                ga-event-action="open details"
-                ga-event-label$="[[speaker.name]]">
+          <div
+            class="speaker"
+            on-tap="_openSpeaker"
+            ga-on="click"
+            ga-event-category="speaker"
+            ga-event-action="open details"
+            ga-event-label$="[[speaker.name]]"
+          >
             <div relative>
               <plastic-image
                 class="photo"
                 srcset="[[speaker.photoUrl]]"
                 sizing="cover"
-                lazy-load preload fade
+                lazy-load
+                preload
+                fade
               ></plastic-image>
               <div class="badges" layout horizontal>
                 <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
@@ -202,7 +210,9 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     title$="[[badge.description]]"
-                    layout horizontal center-center
+                    layout
+                    horizontal
+                    center-center
                   >
                     <iron-icon class="badge-icon" icon="hoverboard:[[badge.name]]"></iron-icon>
                   </a>
@@ -214,7 +224,9 @@
               class="company-logo"
               srcset="{{speaker.companyLogoUrl}}"
               sizing="contain"
-              lazy-load preload fade
+              lazy-load
+              preload
+              fade
             ></plastic-image>
 
             <div class="description">
@@ -225,36 +237,29 @@
                 <div class="origin">[[speaker.shortBio]]</div>
               </text-truncate>
             </div>
-
           </div>
         </template>
       </div>
-      <div class="container-narrow bottom-text">
-        <p><strong>Breakout sessions</strong> will be devoted to academic panels, fireside chats, project showcases workshops and discussions on the following themes:</p>
-        <p class="themes">Economy &nbsp|&nbsp Politics &nbsp|&nbsp Space &nbsp|&nbsp Collective Action &nbsp|&nbsp Identity</p>
-      </div>
       <div class="button-row">
         <a href="{$ speakersBlock.callToAction.link $}">
-          <paper-button class="cta-button animated icon-right"
-            raised
-            primary
-            animate>
+          <paper-button class="cta-button animated icon-right" raised primary animate>
             <span>{$ speakersBlock.callToAction.label $}</span>
             <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
           </paper-button>
         </a>
       </div>
     </div>
-
   </template>
 
   <script>
-
     // eslint-disable-next-line no-undef
-    class SpeakersBlock extends UtilsFunctions(SpeakersHoC(
+    class SpeakersBlock extends UtilsFunctions(
       // eslint-disable-next-line no-undef
-      ReduxMixin(Polymer.GestureEventListeners(Polymer.Element))
-    )) {
+      SpeakersHoC(
+        // eslint-disable-next-line no-undef
+        ReduxMixin(Polymer.GestureEventListeners(Polymer.Element))
+      )
+    ) {
       static get is() {
         return 'speakers-block';
       }
@@ -276,8 +281,7 @@
       }
 
       _generateSpeakers(speakers) {
-        const filteredSpeakers = this.speakers
-          .filter((speaker) => speaker.featured);
+        const filteredSpeakers = this.speakers.filter((speaker) => speaker.featured);
         this.set('featuredSpeakers', this.randomOrder(filteredSpeakers).slice(0, 8));
       }
     }
