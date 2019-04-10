@@ -1,6 +1,6 @@
 {
-  "blog" : {},
-  "gallery" : [
+  "blog": {},
+  "gallery": [
     "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/site_image_2.jpeg?alt=media&token=ae0a06f5-ac62-46d7-adec-62d70cae4bf9",
     "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/site_image_1.jpeg?alt=media&token=0718c239-0fc8-4a70-a41c-49d9d8917808",
     "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/IMG_6507.jpg?alt=media&token=19e8fd37-224c-40e9-8ec3-77f6b42f6bc9",
@@ -10,7 +10,7 @@
     "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/IMG_1838.jpg?alt=media&token=9d34d340-042f-46ed-805b-22311815d0ca",
     "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/IMG_1810.jpg?alt=media&token=a2809111-c70e-44ed-af55-8b2098ff9afd"
   ],
-  "becomeSponsorGallery" : [
+  "becomeSponsorGallery": [
     "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_6473.jpg?alt=media&token=74cf0b96-5f93-4be9-b150-389b700b1447",
     "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_5940.jpg?alt=media&token=9956bab1-a4a1-4022-bbd9-5e479df3bd26",
     "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_5668.jpg?alt=media&token=54d7106e-6011-4048-868c-1122116f77ec",
@@ -20,633 +20,2973 @@
     "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_1721.jpg?alt=media&token=52f977fa-307a-4812-b254-85d04a58f8fb",
     "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_1717.jpg?alt=media&token=d42f8de2-8a7b-4f48-85f0-b38967d3571f"
   ],
-  "notifications" : {
-    "config" : {
-      "icon" : "",
-      "timezone" : "+03:00"
+  "notifications": {
+    "config": {
+      "icon": "",
+      "timezone": "+02:00"
     },
-    "messages" : { },
-    "subscribers" : { },
-    "test" : { },
-    "users" : { }
+    "messages": {},
+    "subscribers": {},
+    "test": {},
+    "users": {}
   },
-  "partners" : [ 
-    {
-      "logos" : [ {
-        "order" : 0,
+  "partners": [{
+      "logos": [{
+        "order": 0,
         "height": 150,
-        "logoUrl" : "../images/logos/maif.png",
-        "name" : "MAIF Horizon",
-        "url" : "https://www.maif.fr/"
+        "logoUrl": "../images/logos/maif.png",
+        "name": "MAIF Horizon",
+        "url": "https://www.maif.fr/"
       }, {
-        "order" : 0,
+        "order": 0,
         "height": 150,
-        "logoUrl" : "../images/logos/microsoft.png",
-        "name" : "Microsoft",
-        "url" : "https://microsoft.fr/"
-      } ],
-      "order" : 0,
-      "title" : "Platinium"
+        "logoUrl": "../images/logos/microsoft.png",
+        "name": "Microsoft",
+        "url": "https://microsoft.fr/"
+      }],
+      "order": 0,
+      "title": "Platinium"
     },
     {
-      "logos" : [ {
-        "order" : 0,
-        "height": 100,
-        "logoUrl" : "../images/logos/teads.jpg",
-        "name" : "Teads",
-        "url" : "https://www.teads.tv/"
-      },
-      {
-        "order" : 1,
-        "height": 100,
-        "logoUrl" : "../images/logos/apside.png",
-        "name" : "Apside",
-        "url" : "https://www.apside.com/"
-      },
-      {
-        "order" : 1,
-        "height": 100,
-        "logoUrl" : "../images/logos/ca.png",
-        "name" : "Crédit Agricole Technologies et Services",
-        "url" : "https://www.groupecreditagricole.jobs/Notre-groupe/Marques/Credit-Agricole-Technologies-et-Services"
-      },
-      {
-        "order" : 1,
-        "height": 100,
-        "logoUrl" : "../images/logos/klanik.png",
-        "name" : "Klanik",
-        "url" : "https://www.klanik.com/"
-      },
-      {
-        "order" : 1,
-        "height": 100,
-        "logoUrl" : "../images/logos/talkspirit.png",
-        "name" : "talkspirit",
-        "url" : "https://www.talkspirit.com/fr/"
-      },
-      {
-        "order" : 1,
-        "height": 100,
-        "logoUrl" : "../images/logos/zendesk.png",
-        "name" : "Zendesk",
-        "url" : "https://www.zendesk.com/"
-      },
-      {
-        "order" : 1,
-        "height": 100,
-        "logoUrl" : "../images/logos/kaliop.png",
-        "name" : "Kaliop",
-        "url" : "https://www.kaliop.com/"
-      } ],
-      "order" : 1,
-      "title" : "Gold"
+      "logos": [{
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/teads.jpg",
+          "name": "Teads",
+          "url": "https://www.teads.tv/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/apside.png",
+          "name": "Apside",
+          "url": "https://www.apside.com/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/ca.png",
+          "name": "Crédit Agricole Technologies et Services",
+          "url": "https://www.groupecreditagricole.jobs/Notre-groupe/Marques/Credit-Agricole-Technologies-et-Services"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/klanik.png",
+          "name": "Klanik",
+          "url": "https://www.klanik.com/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/talkspirit.png",
+          "name": "talkspirit",
+          "url": "https://www.talkspirit.com/fr/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/zendesk.png",
+          "name": "Zendesk",
+          "url": "https://www.zendesk.com/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/kaliop.png",
+          "name": "Kaliop",
+          "url": "https://www.kaliop.com/"
+        }
+      ],
+      "order": 1,
+      "title": "Gold"
     },
     {
-      "logos" : [ {
-        "order" : 0,
-        "height": 75,
-        "logoUrl" : "../images/logos/sequoiasoft.png",
-        "name" : "Sequoiasoft",
-        "url" : "https://www.sequoiasoft.com/"
-      },
-      {
-        "order" : 1,
-        "height": 75,
-        "logoUrl" : "../images/logos/agysoft.jpeg",
-        "name" : "Agysoft",
-        "url" : "https://www.agysoft.fr/"
-      },
-      {
-        "order" : 1,
-        "height": 75,
-        "logoUrl" : "../images/logos/gitlab.png",
-        "name" : "Gitlab",
-        "url" : "https://about.gitlab.com/"
-      },
-      {
-        "order" : 1,
-        "height": 75,
-        "logoUrl" : "../images/logos/sada.png",
-        "name" : "Sada",
-        "url" : "http://www.sada.fr/"
-      },
-      {
-        "order" : 1,
-        "height": 75,
-        "logoUrl" : "../images/logos/lunchr.svg",
-        "name" : "Lunchr",
-        "url" : "https://www.lunchr.co/"
-      },
-      {
-        "order" : 1,
-        "height": 100,
-        "logoUrl" : "../images/logos/esii.png",
-        "name" : "ESII",
-        "url" : "https://www.esii.com/fr"
-      },
-      {
-        "order" : 1,
-        "height": 100,
-        "logoUrl" : "../images/logos/backelite.png",
-        "name" : "Backelite",
-        "url" : "https://www.backelite.com/fr/"
-      },
-      {
-        "order" : 1,
-        "height": 100,
-        "logoUrl" : "../images/logos/netheos.png",
-        "name" : "Netheos",
-        "url" : "https://www.netheos.com/"
-      },
-      {
-        "order" : 1,
-        "height": 100,
-        "logoUrl" : "../images/logos/laposte.png",
-        "name" : "La Poste",
-        "url" : "https://www.laposte.fr/"
-      } ],
-      "order" : 2,
-      "title" : "Silver"
+      "logos": [{
+          "order": 0,
+          "height": 75,
+          "logoUrl": "../images/logos/sequoiasoft.png",
+          "name": "Sequoiasoft",
+          "url": "https://www.sequoiasoft.com/"
+        },
+        {
+          "order": 1,
+          "height": 75,
+          "logoUrl": "../images/logos/agysoft.jpeg",
+          "name": "Agysoft",
+          "url": "https://www.agysoft.fr/"
+        },
+        {
+          "order": 1,
+          "height": 75,
+          "logoUrl": "../images/logos/gitlab.png",
+          "name": "Gitlab",
+          "url": "https://about.gitlab.com/"
+        },
+        {
+          "order": 1,
+          "height": 75,
+          "logoUrl": "../images/logos/sada.png",
+          "name": "Sada",
+          "url": "http://www.sada.fr/"
+        },
+        {
+          "order": 1,
+          "height": 75,
+          "logoUrl": "../images/logos/lunchr.svg",
+          "name": "Lunchr",
+          "url": "https://www.lunchr.co/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/esii.png",
+          "name": "ESII",
+          "url": "https://www.esii.com/fr"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/backelite.png",
+          "name": "Backelite",
+          "url": "https://www.backelite.com/fr/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/netheos.png",
+          "name": "Netheos",
+          "url": "https://www.netheos.com/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/laposte.png",
+          "name": "La Poste",
+          "url": "https://www.laposte.fr/"
+        }
+      ],
+      "order": 2,
+      "title": "Silver"
     },
     {
-      "logos" : [ {
-        "order" : 0,
+      "logos": [{
+        "order": 0,
         "height": 50,
-        "logoUrl" : "../images/logos/tellmeplus.jpg",
-        "name" : "TellMePlus",
-        "url" : "https://www.tellmeplus.com/"
+        "logoUrl": "../images/logos/tellmeplus.jpg",
+        "name": "TellMePlus",
+        "url": "https://www.tellmeplus.com/"
       }, {
-        "order" : 0,
+        "order": 0,
         "height": 50,
-        "logoUrl" : "../images/logos/saagie.png",
-        "name" : "Saagie",
-        "url" : "https://www.saagie.com/"
+        "logoUrl": "../images/logos/saagie.png",
+        "name": "Saagie",
+        "url": "https://www.saagie.com/"
       }, {
-        "order" : 0,
+        "order": 0,
         "height": 50,
-        "logoUrl" : "../images/logos/decisionbrain.png",
-        "name" : "DecisionBrain",
-        "url" : "https://decisionbrain.com/"
+        "logoUrl": "../images/logos/decisionbrain.png",
+        "name": "DecisionBrain",
+        "url": "https://decisionbrain.com/"
       }, {
-        "order" : 0,
+        "order": 0,
         "height": 50,
-        "logoUrl" : "../images/logos/devensys.png",
-        "name" : "Devensys",
-        "url" : "https://www.devensys.com/"
+        "logoUrl": "../images/logos/devensys.png",
+        "name": "Devensys",
+        "url": "https://www.devensys.com/"
       }, {
-        "order" : 0,
+        "order": 0,
         "height": 50,
-        "logoUrl" : "../images/logos/smartview.png",
-        "name" : "Smartview",
-        "url" : "http://www.smartview.fr/"
-      } ],
-      "order" : 3,
-      "title" : "Bronze"
+        "logoUrl": "../images/logos/smartview.png",
+        "name": "Smartview",
+        "url": "http://www.smartview.fr/"
+      }],
+      "order": 3,
+      "title": "Bronze"
     },
     {
-    "logos" : [ {
-      "order" : 0,
-      "height": 100,
-      "logoUrl" : "../images/logos/mth.png",
-      "name" : "Montpellier Tech Hub",
-      "url" : "https://www.montpellier-techhub.org/"
-    } ],
-    "order" : 4,
-    "title" : "Partenaires"
-  } ],
-  "schedule" : {},
-  "sessions" : {},
-  "speakers" : {
-    "david_pilato" : {
-      "bio" : "Depuis 2013, David Pilato est développeur et évangéliste chez elastic.co, après avoir passé les deux années précédentes à promouvoir le projet open-source Elasticsearch. Il en anime la communauté française et organise des [BBLs](http://brownbaglunch.fr) au sein des entreprises.",
-      "company" : "Elastic",
-      "companyLogo" : "/images/logos/elastic.svg",
-      "companyLogoUrl" : "/images/logos/elastic.svg",
-      "country" : "Cergy - Le Haut, Cergy, France",
-      "featured" : true,
-      "name" : "David Pilato",
-      "photo" : "/images/people/david_pilato.jpg",
-      "photoUrl" : "/images/people/david_pilato.jpg",
-      "shortBio" : "Depuis 2013, David Pilato est développeur et évangéliste chez elastic.co, après avoir passé les deux années précédentes à promouvoir le projet open-source Elasticsearch.",
-      "socials" : [ {
-        "icon" : "github",
-        "link" : "https://github.com/dadoonet",
-        "name" : "GitHub"
+      "logos": [{
+        "order": 0,
+        "height": 100,
+        "logoUrl": "../images/logos/mth.png",
+        "name": "Montpellier Tech Hub",
+        "url": "https://www.montpellier-techhub.org/"
+      }],
+      "order": 4,
+      "title": "Partenaires"
+    }
+  ],
+  "schedule": {
+
+    "2019-06-27" : {
+      "dateReadable" : "jeudi 27 juin",
+      "timeslots" : [ {
+        "sessions" : [ {
+          "items" : [ 100 ]
+        } ],
+        "startTime" : "09:00",
+        "endTime" : "9:50"
+      },{
+        "sessions" : [ {
+          "items" : [ 45 ]
+        },{
+          "items" : [ 50 ]
+        },{
+          "items" : [ 11 ]
+        },{
+          "items" : [ 36 ]
+        },{
+          "extend": 2,
+          "items" : [ 10 ]
+        } ],
+        "startTime" : "10:05",
+        "endTime" : "10:55"
+      },{
+        "sessions" : [ {
+          "items" : [ 48 ]
+        },{
+          "items" : [ 13 ]
+        },{
+          "items" : [ 57 ]
+        },{
+          "items" : [ 21 ]
+        } ],
+        "startTime" : "11:10",
+        "endTime" : "12:00"
+      },{
+        "sessions" : [ {
+          "items" : [ 32 ]
+        },{
+          "items" : [ 22 ]
+        },{
+          "items" : [ 51 ]
+        },{
+          "items" : [ 7 ]
+        },{
+          "extend": 2,
+          "items" : [ 39 ]
+        }],
+        "startTime" : "14:00",
+        "endTime" : "14:50"
       }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/dadoonet",
-        "name" : "Twitter"
-      } ],
-      "order" : 0,
-      "title" : "Developer & Evangelist at Elastic"
-    },
-    "tugdual_grall" : {
-      "bio" : "Tugdual Grall est Director of Product Management chez Red Hat dans l'équipe \"Dev Tools\" ou il participe a la définition de l'Experience Développeur des outils comme OpenShift/Kubernetes et les offres Middleware (JBoss)\n\nAvant de travailler chez Red hat, \"Tug\", était Technical Evangelist chez MapR, MongoDB et Couchbase. Tug a également travaillé comme CTO chez eXo Platform, et comme Product Manager et Développeur sur la platform JavaEE d'Oracle.\n\nTugdual est également co-fondateur du Nantes JUG (Java Users Group) qui réunit tous les mois depuis 2008 les développeurs et architectes de la région nantaise.",
-      "company" : "Red Hat",
-      "companyLogo" : "/images/logos/redhat.png",
-      "companyLogoUrl" : "/images/logos/redhat.png",
-      "country" : "Nantes, France",
-      "featured" : true,
-      "name" : "Tugdual Grall",
-      "photo" : "/images/people/tugdual_grall.png",
-      "photoUrl" : "/images/people/tugdual_grall.png",
-      "shortBio" : "Director of Product Management chez Red Hat...",
-      "socials" : [ {
-        "icon" : "github",
-        "link" : "https://github.com/tgrall",
-        "name" : "GitHub"
+        "sessions" : [ {
+          "items" : [ 55 ]
+        },{
+          "items" : [ 24 ]
+        },{
+          "items" : [ 27 ]
+        },{
+          "items" : [ 54 ]
+        } ],
+        "startTime" : "15:05",
+        "endTime" : "15:55"
+      },{
+        "sessions" : [ {
+          "items" : [ 2 ]
+        },{
+          "items" : [ 41 ]
+        },{
+          "items" : [ 18 ]
+        },{
+          "items" : [ 1 ]
+        },{
+          "extend": 3,
+          "items" : [ 16 ]
+        } ],
+        "startTime" : "16:10",
+        "endTime" : "17:00"
+        }
+
+      ,{
+          "sessions" : [ {
+            "items" : [ 33 ]
+          },{
+            "items" : [ 29 ]
+          },{
+            "items" : [ 19 ]
+          },{
+            "items" : [ 3 ]
+          },{
+            "items" : [ ]
+          } ],
+          "startTime" : "17:15",
+          "endTime" : "17:35"
+        }
+
+      ,{
+          "sessions" : [ {
+            "items" : [ 30 ]
+          },{
+            "items" : [ 35 ]
+          },{
+            "items" : [ 56 ]
+          },{
+            "items" : [ 14 ]
+          },{
+            "items" : [ ]
+          } ],
+          "startTime" : "17:45",
+          "endTime" : "18:05"
+        },{
+          "sessions" : [ {
+            "items" : [ 102 ]
+          } ],
+          "startTime" : "19:00",
+          "endTime" : "22:00"
+        }
+
+      ],
+      "tracks" : [ {
+        "title" : "Amphi D"
       }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/tgrall",
-        "name" : "Twitter"
-      } ],
-      "order" : 0,
-      "title" : "Director of Product Management - Developer tools & Experience at Red Hat"
-    },
-    "xavier_detant" : {
-      "bio" : "Co-organisateur de la communauté software craftsmanship de Paris et de la non-conférence SoCraTes France, le partage de savoir est au cœur de mon état d'esprit.\nAmoureux de la programmation fonctionnelle et du code élégant, le plaisir de programmer et d'expliquer cet art ont fait de moi un crafter passionné.",
-      "shortBio" : "CTO de Zenika, co-organisateur de la communauté software craftmanship & SoCraTes France, ...",
-      "company" : "Zenika",
-      "companyLogo" : "/images/logos/zenika.png",
-      "companyLogoUrl" : "/images/logos/zenika.png",
-      "country" : "Paris, France",
-      "featured" : true,
-      "name" : "Xavier Detant",
-      "photo" : "/images/people/Xavier_Detant.jpg",
-      "photoUrl" : "/images/people/Xavier_Detant.jpg",
-      "socials" : [ {
-        "icon" : "github",
-        "link" : "https://github.com/FaustXVI",
-        "name" : "GitHub"
+        "title" : "Amphi E"
       }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/XDetant",
-        "name" : "Twitter"
-      } ],
-      "order" : 0,
-      "title" : "CTO de Zenika"
-    },
-    "tiffany_souterre" : {
-      "bio" : "I love science and I love data! After finishing a PhD in genetic engineering, I continued my quest for discovering new patterns through data science and machine learning. I currently work as a Data Scientist and I play with machine learning algorithms on my free time. Someday, I wish to leverage artificial intelligence and genetics to improve people's life.",
-      "shortBio" : "I love science and I love data! After finishing a PhD in genetic engineering, I continued my quest for discovering new patterns through data science and machine learning...",
-      "company" : "JEMS Datafactory",
-      "companyLogo" : "/images/logos/JEMS-Datafactory.png",
-      "companyLogoUrl" : "/images/logos/JEMS-Datafactory.png",
-      "country" : "Paris, France",
-      "featured" : true,
-      "name" : "Tiffany Souterre",
-      "photo" : "/images/people/tiffany_souterre.jpg",
-      "photoUrl" : "/images/people/tiffany_souterre.jpg",
-      "socials" : [ {
-        "icon" : "github",
-        "link" : "https://github.com/amagash",
-        "name" : "GitHub"
+        "title" : "Salle 1"
       }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/tiffanysouterre",
-        "name" : "Twitter"
-      } ],
-      "order" : 0,
-      "title" : "Data Engineer at JEMS datafactory"
-    },
-    "igor_laborie" : {
-      "bio" : "Développeur passionné depuis plus de 18 ans, expert dans les technos Java et Web. Je suis impliqué dans les rendez-vous techniques toulousains (Devfest Toulouse, GDG, JUG, Software Craftsmanship Toulouse).\nJ’apprécie la programmation fonctionnelle, et donc particulièrement je suis attiré par les nouveaux langages et frameworks qui vont dans cette direction. \n\nEt puis je sais dessiner une 🦄 en CSS.",
-      "shortBio" : "Développeur passionné depuis plus de 18 ans, expert dans les technos Java et Web....",
-      "company" : "MonkeyPatch.io",
-      "companyLogo" : "/images/logos/monkeypatch.png",
-      "companyLogoUrl" : "/images/logos/monkeypatch.png",
-      "country" : "Toulouse, France",
-      "featured" : true,
-      "name" : "Igor Laborie",
-      "photo" : "/images/people/Igor_Laborie.jpg",
-      "photoUrl" : "/images/people/Igor_Laborie.jpg",
-      "socials" : [ {
-        "icon" : "github",
-        "link" : "https://github.com/ilaborie",
-        "name" : "GitHub"
+        "title" : "Salle 2"
       }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/ilaborie",
-        "name" : "Twitter"
-      } ],
-      "order" : 0,
-      "title" : "Expert Java / Web at MonkeyPatch.io"
+        "title" : "Salle 3"
+      } ]
     },
-    "emmanuelle_marevery" : {
-      "bio" : "Consultante et formatrice en Expérience Utilisateur, Emmanuelle accompagne les entreprises dans leur stratégie digitale, leur expérience utilisateur (UX) et l'innovation centrée utilisateurs (transformation numérique, audits, études et tests utilisateurs, ateliers Design Sprint, personas, recherche utilisateur avancée, data mining, …).\n\nIngénieur généraliste et diplômée en psychologie, elle a crée et animé le pole User Sciences chez Décathlon avant de rejoindre Ubisoft en tant qu'UX strategist. Spécialiste des activités de loisirs (sport, jeux vidéos, jeux de société,  luxe, ... ), elle a travaillé pour des grands comptes (Axa, Asmodee, Michelin, Picard, Eres, Le petit Marseillais, Sodexo, Midas,...) et aussi des entreprises et start up régionales (Phytocontrol, Fruition Sciences, ... )",
-      "shortBio" : "Consultante et formatrice en Expérience Utilisateur, Emmanuelle accompagne les entreprises dans leur stratégie digitale, leur expérience utilisateur (UX) et l'innovation centrée utilisateurs...",
-      "company" : "ColorLink",
-      "companyLogo" : "/images/logos/colorlink.png",
-      "companyLogoUrl" : "/images/logos/colorlink.png",
-      "country" : "Montpellier, France",
-      "featured" : true,
-      "name" : "Emmanuelle Marevery",
-      "photo" : "/images/people/Emmanuelle_Marevery.jpg",
-      "photoUrl" : "/images/people/Emmanuelle_Marevery.jpg",
-      "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/mareverie",
-        "name" : "Twitter"
-      } ],
-      "order" : 0,
-      "title" : "Directrice innovation & UX"
+    "2019-06-28" : {
+      "dateReadable" : "vendredi 28 juin",
+      "timeslots" : [ {
+        "sessions" : [ {
+          "items" : [  ]
+        },{
+          "items" : [ 52 ]
+        },{
+          "items" : [ 0 ]
+        },{
+          "items" : [ 46 ]
+        },{
+          "items" : [ 34 ]
+        } ],
+        "startTime" : "9:00",
+        "endTime" : "09:50"
+      },{
+        "sessions" : [ {
+          "items" : [ 49 ]
+        },{
+          "items" : [ 9 ]
+        },{
+          "items" : [ 15 ]
+        },{
+          "items" : [ 44 ],
+          "extend" : 2
+        },{
+          "items" : [ 8 ],
+          "extend" : 2
+        } ],
+        "startTime" : "10:05",
+        "endTime" : "10:55"
+      },{
+        "sessions" : [ {
+          "items" : [ 12 ]
+        },{
+          "items" : [ 31 ]
+        },{
+          "items" : [ 17 ]
+        } ],
+        "startTime" : "11:10",
+        "endTime" : "12:00"
+      },{
+        "sessions" : [ {
+          "items" : [ 43 ]
+        },{
+          "items" : [ 42 ]
+        },{
+          "items" : [ 20 ]
+        },{
+          "items" : [ 26 ],
+          "extend" : 3
+        },{
+          "items" : [ 38 ],
+          "extend" : 3
+        } ],
+        "startTime" : "14:00",
+        "endTime" : "14:20"
+      },{
+        "sessions" : [ {
+          "items" : [ 4 ]
+        },{
+          "items" : [ 37 ]
+        },{
+          "items" : [ 5 ]
+        } ],
+        "startTime" : "14:25",
+        "endTime" : "14:45"
+      },{
+        "sessions" : [ {
+          "items" : [ 23 ]
+        },{
+          "items" : [ 47 ]
+        } ],
+        "startTime" : "15:05",
+        "endTime" : "15:55"
+      },{
+        "sessions" : [ {
+          "items" : [ 28 ]
+        },{
+          "items" : [ 25 ]
+        },{
+          "items" : [ 6 ]
+        },{
+          "items" : [ 40 ]
+        },{
+          "items" : [ 53 ]
+        } ],
+        "startTime" : "16:10",
+        "endTime" : "17:00"
+      },{
+        "sessions" : [ {
+          "items" : [ 101 ]
+        } ],
+        "startTime" : "17:15",
+        "endTime" : "18:05"
+      }],
+      "tracks" : [ {
+        "title" : "Amphi D"
+      }, {
+        "title" : "Amphi E"
+      }, {
+        "title" : "Salle 1"
+      }, {
+        "title" : "Salle 2"
+      }, {
+        "title" : "Salle 3"
+      } ]
+    }
+
+
+
+
+
+
+
+  },
+  "sessions": {
+    "0": {
+      "title": "Redux: c'est compliqué de faire simple",
+      "complexity": "intermediate",
+      "description": "Redux s'est imposée en quelques années comme LA librairie majeure permettant de gérer l'état d'une application web. Il faut dire que la promesse est belle : nous aider à développer des applications dont le comportement est prévisible et facile à tester.\n\nReposant sur quelques principes en apparence relativement simples, son utilisation soulève cependant son lot d'interrogations. Comment bien structurer son état ? Comment gérer efficacement l'exécution des effets de bords ? Comment calculer une information depuis l'état ? Et bien d'autres...\n\nÀ travers cette présentation, je vous propose de découvrir quelques pièges à éviter ainsi qu'un ensemble de bonnes pratiques qui devraient vous permettre de profiter au mieux des avantages de Redux.",
+      "language": "French",
+      "tags": [
+        "Architecture & Paradigme"
+      ],
+      "speakers": [
+        "3UiCmc7gDjgMC6hMPreM6B0sYCI3"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "1": {
+      "title": "Le processus de boot: Une histoire moderne de l'informatique ",
+      "complexity": "intermediate",
+      "description": "Derriere le processus de démarrage d'un PC se cachent quelques-uns des aspects les plus intéressants de l'informatique. \n\nTout d'abord, et ce malgré les apparences, démarrer une machine est probablement la suite d’étapes logicielles et matérielles la plus complexe qu'elle va subir. Nous suivrons et décrirons ces étapes une par une, en nous placant du point de vu du processeur, depuis l'execution de la premiere instruction (cf. le reset vector), jusqu'au moment ou le noyau du système d'exploitation démarre la premiere application. Nous aborderons les concepts d'initialization hardware, de BIOS et de firmware, expliquerons ce qu'est réellement un boot loader pour finir par une description succincte du process de boot d'un noyau Linux. \n\nEn suivant ces étapes, nous nous attarderons en particulier sur les différents modes et états que le processeur traverse lors de ce processus de démarrage. Nous nous focaliserons sur les processeur a base d'architecture x86 car ceux ci ont une caractéristique qui nous intéressera tout particulièrement lors de cette presentation: Leur rétrocompatibilité. Un processeur Intel démarre toujours dans le meme état et mode que tous ses prédécesseurs, et ce depuis 40 ans. Pour lui, le processus de démarrage sera un long et pénible voyage dans le temps qui va démarrer en *real mode*, un mode qu'il partage avec son venerable ancêtre de 1978, le 8086. Armé de son premier et unique mega octet de mémoire adressable, il devra parvenir a démarrer tous ses autres frères (les cœurs du processeur), détecter les nombreux giga octets de mémoire a sa disposition pour enfin pouvoir atteindre le Graal: l'execution d'instructions 64-bits en *long mode*.  Parce qu'elle est entièrement contenue dans tous les processeurs Intel modernes, nous parcourrons brièvement l'histoire de l'informatique moderne a travers ces changements d’états matériels qui caractérisent le processus de boot de nos machines modernes.\n",
+      "language": "French",
+      "tags": [
+        "Random"
+      ],
+      "speakers": [
+        "Dkx1ZqVXOUb3UT3sVPNiBpFopto1"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "2": {
+      "title": "Entre industrialisation et artisanat, le métier de développeur",
+      "complexity": null,
+      "description": "Une conférence pour se poser la question de ce qu’est notre métier, et de pourquoi celui-ci ne est loin de se borner à la simple écriture de code source.\n\nDe comment sortir de la posture du développeur en tant que simple exécutant, et pourquoi notre métier à une très forte dimension stratégique.\n\nEnfin en regardant nos pratiques, méthodes et outils, nous replacerons ceux-ci dans leurs contextes en posant la question de ce qu’est l’ingénierie logicielle.",
+      "language": "French",
+      "tags": [
+        "Architecture & Paradigme"
+      ],
+      "speakers": [
+        "lhwORZ2dSGbF1OG6VkfbjkOCzR12"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "3": {
+      "title": "Jupyter Notebook: The Data Science Tool for Everybody",
+      "complexity": "beginner",
+      "description": "Jupyter Notebook is an emerging popular data science tool that enables to create and share documents that contain live code in more than 40 languages, equations, visualizations and narrative text. The official (and unofficial) tool description is complicated and does not capture its versatility and its ease of use. \n\nSo, we invite you to participate of a live demo that shows real examples about how Jupyter helps to improve the performance of software project teams. We will demonstrate Jupyter capabilities with 3 use-cases for different profiles:\n\n1. Data Scientist: data science, the bread and butter, how we generate easily and quickly live data reports  \n2. Product Owner: product documentation, how we document our data access API  \n3. DevOps Engineer: DevOps analysis, how we explore problematic Cassandra rows  \n\nAt the end of the talk, the attendees will be able to understand the power of Jupyter features.",
+      "language": "French",
+      "tags": [
+        "Data & Machine Learning"
+      ],
+      "speakers": [
+        "uwtDCeZKSOVND89EAdUu1q86zKj1",
+        "vz8s7Z7mu5e7vH6oOAXvWfdGltm1"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "4": {
+      "title": "Le sommeil, à la recherche du temps perdu",
+      "complexity": "beginner",
+      "description": "Les nouveautés d'Angular 7, de React 16.8 ou encore de TypeScript 3.3.3333...  \nEt Kubernetes, avec ses nodes, pods, ReplicaSet, DaemonSet, Jobs, NodePort, LoadBalancer, ou encore ses Ingress... 🤯  \nVous n'arrivez plus à tout suivre et à tout apprendre ?\n\nJ'ai un secret pour vous, une méthode révolutionnaire, ancestrale et 100% naturelle...  \nLe **sommeil** !\n\nNous passons un tiers de notre vie à dormir, tout du moins nous devrions ! Le sommeil est une activité essentielle, dont l'importance est malheureusement parfois encore méconnue ou minimisée.\n\nPourtant c'est l'un des mécanismes de base pour renforcer notre cerveau, optimiser notre mémoire et conserver notre santé.  \nEn tant que développeur, nous avons chaque jour besoin d'apprendre, comprendre et maîtriser de nouvelles notions et de nouvelles technologies. Le sommeil est certainement notre meilleur allié pour cela !\n\nNous verrons ensemble ce qu'est le sommeil, ses différentes phases et leurs multiples intérêts.  \nPar exemple comment notre mémoire est renforcée pendant que nous dormons ou encore pourquoi nos rêves développent notre capacité à résoudre des problèmes de plus en plus complexes.  \nEnfin nous aborderons les différentes manières d'avoir un sommeil de qualité !\n\nEt j'espère que cette présentation vous donnera une seule envie, celle de dormir 💤",
+      "language": "French",
+      "tags": [
+        "Random"
+      ],
+      "speakers": [
+        "27dsgKVju3Vy9E786QvdHCrtEYl1"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "5": {
+      "title": "A la chasse aux trolls avec Keras",
+      "complexity": "beginner",
+      "description": "Les contenus toxiques sont une problématique importante sur tous les sites donnant pleine liberté d'expression à ses utilisateurs.\nLes trolls sont partout, et peuvent venir polluer les échanges au sein d'une communauté bienveillante. A l'aide de différentes structures de réseaux de neurones nous explorons la construction d'un modèle capable de détecter ces contenus toxiques. Ce sera l'occasion d'utiliser le framework de deep learning Keras  et de dénicher quelques trolls sur un jeu de données issu du site Quora.",
+      "language": "French",
+      "tags": [
+        "Data & Machine Learning"
+      ],
+      "speakers": [
+        "TohrkKsx0XQlkAXwnGrfAA3LOM03"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "6": {
+      "title": "Fonctionnement et possibilités offertes par l'Open Data - illustré avec le cas Montpelliérain",
+      "complexity": "beginner",
+      "description": "Ce talk est proposé par Valentin Jérémie - Chef de projet Open Data - Montpellier Méditerranée Métropole \nIMPORTANT : Nous (enfin moi surtout, avec l'aval de plusieurs d'entre nous) les avons sollicités pour qu'ils proposent un sujet, ce qu'ils ont fait rapidement. Le talk présenté est une proposition de thématiques qui pourraient être couvertes, à discuter avec eux selon ce que l'on souhaiterait.\n\nContenu proposé (grandes lignes):\nL’open data d’où ça vient ?\n·         Le cadre législatif\n·         Etat des lieux en France\n·         Pourquoi on fait de l’open data ?\n·         Le cadre juridiques avec les licences de partage des données\n·         Quelques exemples de portails nationaux\n·         Le portail open data de la Métropole de Montpellier\n·         La politique de données de la Métropole\n·         La plateforme de données (ouverte et non ouvertes)\n·         Des données utiles à qui ? quelques exemples de réutilisation\n·         Les statistiques de téléchargement\n·         L’association Open Data France\n·         (optionnel) La collaboration avec OpenStreetMap\n\nDe mon côté je pousserai pour une présentation pratique de ce qu'il est possible de faire techniquement avec ces données (en tenant compte du contexte légal).",
+      "language": "French",
+      "tags": [
+        "Random"
+      ],
+      "speakers": [
+        "VzO198n3jiUG2I5BxnRGX0kp0xu2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "7": {
+      "title": "REX de Trois années d'Event Sourcing",
+      "complexity": "intermediate",
+      "description": "L'architecture Event Sourcing est de plus en plus adoptée dans les projets. Cependant réussir son implémentation demande beaucoup d'efforts et de rigueur.\n\nVenez découvrir un retour d'expérience sur une implémentation d'une architecture Event Sourcing dans la banque : les pièges à éviter et les pratiques à adopter!\n",
+      "language": "French",
+      "tags": [
+        "Architecture & Paradigme"
+      ],
+      "speakers": [
+        "O2L34hhaFhRxCscohqPkxEuxo132",
+        "qOI4EskiBthWo2hEfgaP9yDgHQD2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "8": {
+      "title": "Kubernetes 101 - hands-on",
+      "complexity": "beginner",
+      "description": "A travers un atelier _hands-on_, découvrez\n\n* les bases de l'orchestration de _containers_ via `Docker` et `docker compose`,\n* le fonctionnement de `Kubernetes`,\n* et comment déployer ses premières _stacks_ applicatives dessus\n* enfin, comment utiliser `Kubernetes` de manière fluide pendant le processus de développement en mode CI/CD.",
+      "language": "French",
+      "tags": [
+        "Devops & Cloud"
+      ],
+      "speakers": [
+        "UReg1U2dk9XFlCrkxjN6JWVCoB92",
+        "VeBTP8lqOYaXBCpwTlGjBW2n1yH2",
+        "6gcb9OjG5cgl14IQBEt5yu4TmTT2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "9": {
+      "title": "Du Storytelling au Storytell.UX en passant par le Storybullshit… Comment concevoir l'expérience comme une histoire dont l'utilisateur devient le héros ?",
+      "complexity": "beginner",
+      "description": "Tout petits déjà, nous adorions que papa/maman nous racontent des histoires. Nous avons grandit et c’est toujours pareil, nous adorons quand une marque nous raconte une histoire (ou un speaker…)\nMais dans la vraie vie ce n’est pas Pixar ou Dreamworks qui nous cocoonnent avec son storytelling. La réelle expérience vécue dans l’interaction produit et au contact des marques s’apparente souvent plus à un parcours du combattant qu’à un conte de fée.\nAlors peut-on réellement utiliser le storytelling pour sublimer l’expérience...sans chercher à “manipuler” l’utilisateur ?",
+      "language": "French",
+      "tags": [
+        "Design"
+      ],
+      "speakers": [
+        "uQa7PBe5RzPSp6sDO59AeK7oyTM2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "10": {
+      "title": "DIY: Construire ses propres ateliers d'innovation",
+      "complexity": "beginner",
+      "description": "Cet atelier vous apprendra comment bâtir de A à Z votre propre atelier, que cela soit pour un Post Mortem, un atelier de co-création, un brainstorm, une réunion ludique ou autre. Nous explorerons les ice breakers, le gamestorming, mais aussi les différentes techniques de facilitation. Suite à une petite présentation théorique, les participants se mettront en petits groupes et devront monter leur propre atelier selon une mise en situation proposée. Les différents groupes devront ensuite présenter leur idée d'atelier et une discussion s'en suivra.",
+      "language": "French",
+      "tags": [
+        "Design"
+      ],
+      "speakers": [
+        "QvPhV9AlPdQrqshYOjfAGmVhRXb2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "11": {
+      "title": "Hack My Legacy : (re)construire from scratch",
+      "complexity": "beginner",
+      "description": "#OSSbyMAIF : MAIF, nouvel acteur du monde open-source!! Pour répondre aux nouveaux enjeux liés à la transformation numérique et pérenniser son avenir, la MAIF pivote! Elle ouvre ainsi aux partages le coeur logiciel de sa plateforme micro-servicielles orientée SaaS/Cloud et contribuer ainsi, pour la première fois, au monde Open-Source. Voilà, entre autres outils homemade, Otoroshi, notre layer d'API management léger au dessus d'un reverse proxy http moderne, et Izanami, notre service de configuration partagée, feature flipping et A/B testing, qui sont désormais disponibles et accessibles à toutes les bonnes volontés. \n\nVoilà [**Otoroshi**](https://maif.github.io/otoroshi), notre layer d'API management légère au dessus d'un reverse proxy http moderne, et [**Izanami**](https://maif.github.io/izanami), notre service de configuration partagée, feature flipping et d'A/B testing, désormais disponibles et accessibles à toutes les bonnes volontés.\n\n**Au delà du bullshit digital, venez découvrir concrètement avec nous comment on a \"hacké notre legacy\" pour répondre au nouveaux enjeux du monde numérique**.\n\n#OSSbyMAIF ",
+      "language": "French",
+      "tags": [
+        "Devops & Cloud"
+      ],
+      "speakers": [
+        "9gElbcbH86Q8VUKzNThIWkQ0Wih2",
+        "WDm2hCGOlLfIYHPHjaEry7aIpbT2",
+        "9g2TJuw97VMd8Zwn9y2x0g0w7SB2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "12": {
+      "title": "Micro Frontend: le casse tête des micro services étendu au FrontEnd !",
+      "complexity": "beginner",
+      "description": "Les micro-services sont à la mode, et peut être avez vous déjà craqué et remplacé votre bon vieux monolithe côté back end par une ribambelle d’entre eux.\n\nMais avez vous déjà pensé à faire la même chose côté front end ? Encore plus hype (ou dingue, je vous laisse juger), avez vous déjà essayé de mixer plusieurs frameworks JavaScript (disons AngularJS, Angular et React au hasard) dans une Single Page Application ?\n\nC’est le principe du micro frontend et c’est que nous avons fait chez Saagie. Dans ce talk nous reviendrons sur les différentes architectures que nous avons essayé, leurs avantages et leurs inconvénients afin que vous puissiez décider de ce qui serait le mieux pour vous, juste au cas où vous décideriez de passer du côté obscur et un peu foufou du front end.\n",
+      "language": "French",
+      "tags": [
+        "Architecture & Paradigme"
+      ],
+      "speakers": [
+        "cDRmIAqbZjeTaxYD5PN97FflYqO2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "13": {
+      "title": "La face cachée du pixel @ Ubisoft",
+      "complexity": "beginner",
+      "description": "Les jeux vidéo, c'est de la 3D, des textures, behavior trees et autres algorithmes de pathfinding ?\nEh bien pour une fois, on va plutôt jaser scaling et plomberie…\n\nLe C++ en 2019 : toujours réservé aux gros barbus ou pas ?\n- Comment on gère des fichiers de projets de millions de lignes de code avec SharpMake\n- Comment on compile plus vite avec les paquets à la demande\n- Comment le C++ 11-14-17 (et bientôt 20) nous permet de monter en abstraction et réduire le nombre de lignes, sans sacrifier les performances\n\nLame de fond : toujours plus loin dans le back-end\n- Les challenges des serveurs de jeu en C++ (communication, scaling, fragmentation mémoire, déploiement, hébergement bare metal et cloud)\n- La longue marche vers les micro-services (Python, Node.js, C# .Net Core, Golang, Docker, Kubernetes, Helm)\n\nOlivier Cado a rejoint Ubisoft Montpellier en 2007 après avoir contribué au développement du MMORPG Ryzom de Nevrax. Rudy Pons a démarré à Ubisoft Montpellier en 2013. Ils font actuellement partie de l'équipe online de Beyond Good and Evil 2.\n\nCatégories : Langage & Framework, (Devops & Cloud)\n\nFormat : Conférence\n\nNiveau : Débutant++",
+      "language": "French",
+      "tags": [
+        "Langage & Framework"
+      ],
+      "speakers": [
+        "rFqizov3LlVh55Zbco4ppxmARkD2",
+        "x0K8lynbiudPDN33GBLvvs4HkCv1"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "14": {
+      "title": "Akka  typed :  Penser protocole, ",
+      "complexity": "beginner",
+      "description": "*Akka  typed :  Penser protocole, pour le meilleur et pour le pire.*\n\n*Une illustration au travers de l'histoire de la viscosité de  l'information.*\n\n\n\n\nPour mettre en évidence l'intérêt de penser et acteur et protocole dans nos \ndéveloppements, nous repartirons de la base.\nQu'est-ce qu'un software ?\n\n\nNous discuterons d'un premier point: un software \nn'est qu'une interface sur l'information, composer d'interface \nsur de l'information, etc.\n\nNous illustrerons ensuite notre propos par une représentation des échanges \nd'information dans  la société civile du 16e siècle. (sous forme d'acteur typé,  \névidemment.)\n\nCela nous permettra d'aborder le second point : l'évolution inévitable des \nsoftwares.\nQuelle stratégies sont possibles pour permettre à un système d'acteur \ntypé d'évoluer sainement ? ( aspect formalisme des protocoles)\n\nNous illustrerons le propos par une \nsérie d'évolution (3-4) de notre exemple. Notre représentation numerique du 16e \nsiècle évoluera donc jusqu'en 2019.\n\nEn fin de compte nous aurons discuter des avantages et des risques de concevoir des systèmes complexes à base d'acteur typé.\n\n\nMais nous apporterons aussi un soin particulier à comprendre cette notion de \nviscosité. Qui par bien des aspects, offre un exellent prisme pour mettre en \nlumière les mécanismes sous-jacents à la dynamique des groupes.\nQue l'on parle communication dans une équipe d'ingénieur, ou mouvement \nsocial.\n",
+      "language": "French",
+      "tags": [
+        "Architecture & Paradigme"
+      ],
+      "speakers": [
+        "yaTaDtCKwfZTe2hDdiRAhneXOy33"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "15": {
+      "title": "Le deep-learning démystifé",
+      "complexity": "beginner",
+      "description": "Le deep learning est au coeur de la révolution de l'IA, on en parle beaucoup, ça fascine et ça fait bien peur : on dirait de la \"magie noire\" hors de portée du spécialiste mais tout ça va contrôler nos vies ! ( ou les contrôle déjà ... )\n\nCe talk a pour but d'exposer les principes de base qui font marcher le deep-learning afin de démystifier cette technologie, pour les non spécialistes. Notez bien que talk a pour but d'être accessible si vous n'êtes ni une bête en math, ni un developpeur, et il n'est certainement pas pour vous si vous jouez à TensorFlow tout les jours, ou que vous avez lu et compris toute la biblio de LeCun, Hinton et Bengio... Vous n'en sortirez pas expert mais j'espère avec un peu moins l'impression de magie noire, et du coup de leurs limites. ",
+      "language": "French",
+      "tags": [
+        "Data & Machine Learning"
+      ],
+      "speakers": [
+        "rXHuMGTpijYG82yClvFtjmb4CwV2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "16": {
+      "title": "iot 101",
+      "complexity": "beginner",
+      "description": "Comment démarrer ? par quoi ? avec qui ?\n\nUn lab les mains dans le cambouis, ou tout du moins dans les composants, pour monter un premier objet intelligent.",
+      "language": "French",
+      "tags": [
+        "Random"
+      ],
+      "speakers": [
+        "2uYlHCCY3kap9HQTyUf2GF0Uptg2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "17": {
+      "title": "Introduction à Apache Pulsar",
+      "complexity": "beginner",
+      "description": "\"Apache Pulsar, encore un système de messages pub/sub\", me direz-vous ? C'est pas faux... Néanmoins, regardons de plus près... Pulsar est devenu un Top Level Project de la fondation Apache au mois de septembre 2018 et il se targue de vouloir unifier les modèles de messages traditionnels et le streaming, tout en fournissant un système extrêmement performant. Et si c'était le killer de Kafka ? Partons à la découverte de ce nouveau pulsar pour voir de quoi il retourne !",
+      "language": "French",
+      "tags": [
+        "Data & Machine Learning"
+      ],
+      "speakers": [
+        "Aow2VohW2SOMagU6kwU98RltKyT2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "18": {
+      "title": "Retroussez vos manches pour introduire l'UX dans une entreprise traditionnelle qui opère sa transformation agile et digitale",
+      "complexity": "intermediate",
+      "description": "Culture ingé, zéro designer, écrans digitaux conçus avec powerpoint et excel : tout était à construire chez CATS pour introduire l'UX dans une entreprise d'IT bancaire, et y diffuser la culture du design.\n\nDans un contexte de digitalisation des parcours clients et de passage à l'agile, la création d'un département UX se joue sur tous les fronts :\n- fournir aux équipes les outils et méthodes qui placent les utilisateurs au centre de toutes les démarches de conception\n- animer avec bienveillance et curiosité les compétences d'UX design, UI design et recherche utilisateur\n- expliquer sans relâche ce qu'est l'expérience utilisateur, pourquoi et comment elle concerne tous les rôles et métiers qui participent à la fabrication agiles des produits digitaux offerts aux clients du Crédit Agricole.\n\nL'UX se place alors au service des enjeux de transformation de l'entreprise : améliorer la satisfaction des utilisateurs, raccourcir le time to market des projets digitaux, challenger les idées reçues grâce à la recherche utilisateur, mais aussi faciliter les échanges par les mots et le dessin en démontrant sans cesse des qualités d'écoute et d'empathie.\n\nExemples, résultats et retours d'expérience au bout d'une année d'existence du Chapitre Expérience Utilisateur chez Crédit Agricole Technologies et Services.",
+      "language": "French",
+      "tags": [
+        "Design"
+      ],
+      "speakers": [
+        "Rm5deJSGLjX2ftBToiMch5CWS0T2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "19": {
+      "title": "Contour, un reverse proxy basé sur Envoy et qui envoie !",
+      "complexity": "intermediate",
+      "description": "Aujourd’hui il existe tout plein de solutions de proxy dans le monde de Kubernetes (Istio, Traefik, Nginx … je ne vais pas tous les citer!). \nEt quand on parle de proxy on parle d'Ingress, une ressource qui n'évolue plus beaucoup depuis Kubernetes v1.1 .\n\n\nDans un context multi-team ce type de ressource peut même devenir obsolète.\n\n\nDans cette session je vais vous parler Contour d’Heptio (récemment racheté par VMware). Via un live coding, nous verrons pourquoi et comment il comble certaines lacunes des ressources Ingress via ses ingressRoute. \n\nLa délégation de route, le déploiement Blue/Green , la gestion des Websocket, Contour rend la vie de vos teams vraiment plus facile dans vos clusters !\n\n----\n\n [Github Contour](https://github.com/heptio/contour)",
+      "language": "French",
+      "tags": [
+        "Devops & Cloud"
+      ],
+      "speakers": [
+        "QuCFwwCRLKQkT4tsxPMRfIu9IdP2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "20": {
+      "title": "L'éthique dans l'agriculture numérique",
+      "complexity": "beginner",
+      "description": "L'éthique dans l'agriculture numérique (quickie - 20min)\n\nMettre au coeur de la conception d'une nouvelle application agricole l'éthique. \n\nComment grâce à l'UX & l'UI design nous avons pu proposer une application plus responsable de l'environnement. Qui permet d'embarquer les agriculteurs dans une autre expérience métier.\n\nDétail :\nPrésentation de la structure / \nContexte & vocabulaires techniques (pour la bonne compréhension de la suite) / \n3 exemples concrets  de design éthique / \nRetours des tests - utilisations / \nOptimisation / \nEt la suite ? / \nConclusion du talk.",
+      "language": "French",
+      "tags": [
+        "Design"
+      ],
+      "speakers": [
+        "RcX2utpBETcNTT4zJneK3LL28dn1"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "21": {
+      "title": "Et si on ré-apprenait les code reviews ?",
+      "complexity": "beginner",
+      "description": "Beaucoup de monde a une idée en tête de ce que sont les revues de code,  et beaucoup de techs en pratiquent déjà de manière fréquente.  \n  \nCependant, certains peuvent trouver ces reviews trop chronophages, bloquantes pour la mise en production et même superflues car trop subjectives. D'autres n'osent pas se lancer dans le procédé car se jugent trop inexpérimentés pour apporter un avis constructif. Et finalement, cette tâche s'apparente plus à une corvée qu'autre chose pour ceux qui doivent s'en charger.  \n  \nTous ces points sont véritables et sont d'après moi dûs à un manque d'apprentissage sur le sujet. En effet, malgré les nombreuses personnes réalisant des revues de code, peu ont vraiment été formés à leur exécution avant de s'y attaquer. Et le résultat, c'est que nous apprenons sur le tas ce qui d'après **nous** est une bonne code review.   \n  \nDans ce talk, nous ré-établirons les objectifs de la code review, pour appliquer ensuite différents principes qui rendront, je l'espère, vos prochaines revues plus utiles et efficaces. Je prendrai aussi en exemple l'organisation des code reviews au sein de notre équipe chez Teads afin d'exposer comment nous essayons de les rendre le plus profitable possible pour toutes les personnes engagées.\n\n",
+      "language": "French",
+      "tags": [
+        "Random"
+      ],
+      "speakers": [
+        "Gxnp9MqHVYS8Zqv5z6nr8rx8Dpy2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "22": {
+      "title": "Surchargés Live : Episode 2 !",
+      "complexity": "intermediate",
+      "description": "L'année dernière Horacio & Jean-François avaient relevé le défi de re-coder Snapchat en 45 minutes et ils y sont arrivés. Il est donc temps de re-prendre des risques et de venir coder une nouvelle application en utilisant les dernières nouveautés du web sur une version de navigateurs instable sinon, ça ne serait pas drôle. \nVous aimez le livecoding, le web et les prises de risques, ce talk est là pour vous ! ",
+      "language": "French",
+      "tags": [
+        "Langage & Framework"
+      ],
+      "speakers": [
+        "pYuiGicpt0MenD8NEMhZXtk6VSr1",
+        "bAkrQrssjgU1zb5V2y2QpVnuCmf1"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "23": {
+      "title": "Ce que j'ai appris sur le comportement humain en 18 ans de user research et plus de 5000 personnes interviewées",
+      "complexity": "beginner",
+      "description": "Je compte faire un retour d’expérience très concret sur la difficulté d’anticiper le comportement humain face à une interface numérique, et de manière générale face à un produit ou service. Il s’agira de livrer les grands enseignements  illustrés de nombreux exemples vécus à la fois par les users interviewés. Incluant des choses qui m’ont surpris, mais aussi des fails de méthodo parfois. Différentes notions seront abordées : le paradoxe du comportement humain, la thick data, le ratio coût/bénéfice, le modèle mental, l’impact du in situ et du contexte, le poids des habitudes. \nJ’inclurai aussi des choses apprises sur moi, en tant qu’animateur en charge de recueillir les insights (notamment comment éviter les biais de recueil et à quel moment intégrer une phase d’écoute utilisateur). \n\nJe ne sais pas si vous avez plusieurs formats, mais je pense que c'est plutôt une conf longue. Je peux aussi adapter le contenu en fonction de la durée (j'ai l'habitude). \n",
+      "language": "French",
+      "tags": [
+        "Random"
+      ],
+      "speakers": [
+        "NQLD49SQ4gUOxdIJzFiOtAqwMvK2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "24": {
+      "title": "La Cryptographie en 55' chrono",
+      "complexity": "intermediate",
+      "description": "Plus que jamais, nous avons besoin de sécuriser nos échanges et de renforcer notre confiance dans nos outils pour garder nos données à l'abri des yeux indiscrets. Peut-être que franchir le pas vous semble insurmontable. Peut-être que vous vous dites que tout ça reste une affaire de groupes d'hackitivistes éclairés. Plus probablement, il vous manque sans doute juste une connaissance simple de l'univers du chiffrement, et de la fantastique boîte à outils qui l'accompagne.\n\nAlors profitons-en, on embarque pour un tour d'horizon de la crypto : chiffrement, techniques, outils… Nous regarderons quels outils existent, pourquoi et comment les utiliser. Et parce que le web ne serait pas parfait s'il n'était pas ouvert, nous nous intéresserons aussi bien aux clients \"lourds\" qu'aux alternatives web (et il en y en a plein).\n\nMieux : puisque nous ferons le tour des techniques, observons les outils que met à notre portée de dev le W3C avec l'API WebCrypto : ajouter du chiffrement et une gestion fine de la sécurisation se révèle désormais beaucoup plus pratique.\n\nCeinture et bretelles : attachez-vous bien, on chiffre !",
+      "language": "French",
+      "tags": [
+        "Architecture & Paradigme"
+      ],
+      "speakers": [
+        "kl8dIow7hxP69iJO2VEcAqkwT9L2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "25": {
+      "title": "WebAssembly : le navigateur est maintenant une vraie machine virtuelle",
+      "complexity": "intermediate",
+      "description": "WebAssembly est une nouvelle machine virtuelle dans le navigateur. Elle ne fait pas de transpilation vers JavaScript comme l'ont tenté ses prédécesseurs ; elle introduit un nouveau format, proche d'un assembleur, exécuté dans une machine virtuelle au sein de votre browser. Le coup de génie ? Offrir un bridge entre les API JavaScript et les exécutables WebAssembly ! Les dernières optimisations des navigateurs permettent maintenant un échange ultrarapide entre le code JS de votre interface, et votre code métier WASM.\n\nPartons d'un projet nécessitant un long temps de calcul, comme un modèle statistique. Nous développerons le core code en Rust, compilé vers WASM via LLVM, et nous afficherons l'ensemble des résultats dans une UI propulsée par JavaScript. Pas besoin de savoir comment tout ça fonctionne, c'est ce que nous allons découvrir ensemble !\n\nCe talk appartient à une nouvelle série sous le hashtag #StartFromNowhere : démarrons des savoir-faire des développeur·euse·s front (JS / HTML / CSS), et plongeons dans la mise en application d'une nouvelle technologie / framework dont beaucoup parlent sans pour autant y avoir déjà touché. En 45', vous obtiendrez tous les savoirs nécessaires à la poursuite de votre apprentissage. ",
+      "language": "French",
+      "tags": [
+        "Langage & Framework"
+      ],
+      "speakers": [
+        "kl8dIow7hxP69iJO2VEcAqkwT9L2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "26": {
+      "title": "Fear the ponies II :  l'histoire alternative du chiffrement",
+      "complexity": "beginner",
+      "description": "Suite à leur cuisante défaite lors de la précédente bataille, les poneys sont de retour, dans le but de conquérir  le monde et d’asservir enfin l’humanité. Leur nouveau plan de bataille est sur le point de débuter et notre plus grande crainte est en passe de se réaliser, les poneys pourraient avoir trouvé de nouveaux alliés. \n\nDans ce nouveau code dojo aux allures d’escape game, nous vous proposons de mettre à nouveau à l’épreuve vos connaissances en chiffrement et de les améliorer en vous amusant !\n\nQue vous fassiez partis des courageux guerriers du binaire, des héros portées aux nues qui sauvèrent le monde lors d'édition de Sunny Tech 2018, ou que vous soyez un nouveau combattant, nous comptons sur vous. Il n’y aura pas de seconde chance, vous êtes notre seul espoir. N’échouez pas !",
+      "language": "French",
+      "tags": [
+        "Architecture & Paradigme"
+      ],
+      "speakers": [
+        "CSZyjAMftrfCaH12X1yReJvBYy93",
+        "zPNPb3IvUgVc5rJ1vuik7tIuQnw2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "27": {
+      "title": "Et si on parlait Éthique ?",
+      "complexity": null,
+      "description": "Coder, c’est de plus en plus façonner le monde. Redéfinir ses contours et certaines interactions que nous pouvons avoir (ou pas) entre nous.\n\n\nSi certains métiers se sont déjà interrogés par le passé sur leur rôle et leur impact sur la société, il me semble que ces questions d’éthique ne nous traversent pas encore suffisamment dans la sphère des faiseuses et faiseurs de logiciels.\n\n\nEt si on se posait quelques minutes pour faire le tour de certaines d’entre elles ?\n",
+      "language": "French",
+      "tags": [
+        "Random"
+      ],
+      "speakers": [
+        "VUxPhy4Ad2VMU8EyphhUom3RSan1"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "28": {
+      "title": "Je gère mon entreprise et mes projets avec GitLab",
+      "complexity": "beginner",
+      "description": "Depuis le début de ma carrière (1992) j'ai eu / j'ai plusieurs métiers (dès fois simultanément): (dans le désordre): technico-commercial, développeur, responsable informatique, architecte, chef de projet, directeur de projet, directeur technique, directeur commercial, responsable avant-vente, solution engineer, solution architect, technical account manager, consultant, j'ai même été responsable de publication technique et directeur marketing adjoint. C'est dire si l'informatique mène à tout.\n\nPendant des années, mon outil de prédilection commun à tous ces métiers, c'était Excel, puis j'ai découvert les **DVCS***(distributed version control system), d'abord avec **GitHub** (chez qui je suis allé faire un petit tour), puis enfin avec **GitLab** 🦊(pour qui je travaille). \n\nJ'ai une conviction profonde: sur tout projet technique, tout le monde peut contribuer même sans compétence technique. Avec cette conviction et aussi mon passé de \"gestionnaire, pilote, ...\", j'ai tout de suite vu **GitLab** comme une sorte d'**ERP** (Enterprise Resource Planning) 🙀 sacrilège!!!? Pas si sûr 🤔...\n\nAujourd'hui j'utilise **GitLab** pour différent types d'activités (autres que le développement):\n\n- Ressources humaines:\n  - faire du e-learning\n  - aider au onboarding des nouveaux\n- Pilotage:\n  - gestion des risques\n  - pilotage \"agile\" de projet\n  - plans d'actions\n- Commerce:\n  - GitLab comme un CRM\n  - pilotage des avant-ventes\n\n> **Remarque**: Selon les activités je m'aide aussi de GitLab CI et de GitLab API.\n\nJe me propose donc de vous expliquer lors de cette présentation comment faire les mêmes choses. Et si vous avez d'autres idées je suis preneur 😉\n\n> *Disclaimer*: vous pouvez certainement le faire avec d'autres DVCS",
+      "language": "French",
+      "tags": [],
+      "speakers": [
+        "Vh46wnWADtXkX9Hjqcfli1Eqwqy1"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "29": {
+      "title": "Comment j’ai (presque) concurrencé Tinder",
+      "complexity": "intermediate",
+      "description": "En tant que développeur(euse) on a de l’or entre les mains. La capacité de développer des app et des sites en 2 temps 3 mouvements et la possibilité de devenir entrepreneur(e) sans même s’en rendre compte.\nConsciente que le marché de la rencontre en ligne transforme les humains en produit de consommation, j’ai voulu pour aider un de mes meilleurs amis, changer les règles du jeu. Adepte du “Quand on veut on peut” J’ai décidé de tout quitté avec un Arnaud (collègue développeur et associé) pour nous lancer à 100% dans cette aventure. Convaincue qu’on allait révolutionner la rencontre en ligne via notre nouvelle application plus ludique, fun et gratuite !\nVoici un retour d’expérience sur mon aventure entrepreneuriale de 3 ans. Je vous partagerai les erreurs et leçons que j’en ai tiré. Et vous verrez si oui ou non j’ai pu concurrencer Tinder ;) \n",
+      "language": "French",
+      "tags": [
+        "Random"
+      ],
+      "speakers": [
+        "WsFwYGpA6WcR4mCOahRGHiNQt5v1"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "30": {
+      "title": "Scaling on-call",
+      "complexity": "beginner",
+      "description": "Scaling your on-call team is crucial for most of the fast-growing startups that operate at a global level.   \nThe internet never sleeps, and even with the best design for resilience, one day, your system will go down.  \n  \nAt teads, we deliver advertising for the biggest content publishers in the world.   \nAny downtime has important repercussions on our revenue but also on the publisher’s revenue.   \nWe decided to carefully think about scaling our on-call team in order to minimize the downtime when a system goes down.   \nThis is the story of how and why we scaled our on-call team.   \nWe’ll start by discussing our early days on-duty strategy, move on to the failed iterations that we tried and end the talk with our current working strategy.  \n",
+      "language": "French",
+      "tags": [
+        "Random"
+      ],
+      "speakers": [
+        "vAQguQPbehbyRxkDuXzJ9HSHqVS2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "31": {
+      "title": "Spring Boot avec Kofu et les Coroutines",
+      "complexity": "beginner",
+      "description": "Cette présentation sera pour moi l'occasion de présenter le support officiel des Coroutines dans Spring (Framework, Boot, Data) ainsi que [Kofu](https://github.com/spring-projects/spring-fu/blob/master/kofu/README.adoc), la DSL Kotlin développée au sein de l'incubateur [Spring Fu](https://github.com/spring-projects/spring-fu) que j'ai créé il y a quelques mois et qui permet de configurer Spring Boot de manière explicite et encore plus performante.\n\nMon live coding montrera comment développer une application Spring Boot avec Kofu en utilisant les nouvelles API Coroutines de WebFlux  et [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc) (Reactive SQL). Nous comparerons également les API Reactive et Coroutines (avantages, inconvénients) pour vous aider à faire un choix en connaissance de cause.",
+      "language": "French",
+      "tags": [
+        "Langage & Framework"
+      ],
+      "speakers": [
+        "rLjKZWVoncNmVqbM4lVVZpU6pjs1"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "32": {
+      "title": "UX + Data = <3",
+      "complexity": "beginner",
+      "description": "Chacun de nous génère des données dès qu'il réalise une action sur un site, sur une application, qu'il utilise un objet connecté ou simplement quand il se déplace avec son smartphone.\n\nChaque jour,  c'est ainsi plus de 2,5 trillions d'octets de données qui sont crées. \n \nOr cette data peut grandement faciliter la vie des concepteurs : \nqu’il s’agisse de prendre les meilleures décisions pour les utilisateurs,  de mesurer son efficacité, de  convaincre sa hiérarchie ou de limiter les biais de sa User Research. \n\nEn 2019, ils existent désormais de nombreux outils pour rendre accessible et utilisable la donnée, mais il reste aussi plein de nouvelles méthodes à créer.\n\nAu travers d’exemples autour du text mining  (analyse de texte), venez découvrir la rencontre surprenante de l'UX et de la data ! \nCette conférence a pour objectif de répondre aux questions suivantes : \n- Qu'est-ce que la data ? \n- Comment la mettre en oeuvre pour une meilleure expérience utilisateur ? \n- Comment donner du sens aux avis clients et optimiser ses solutions ?\n- Quels sont les outils les plus accessibles et utiles en 2019 ?\n  \n\n",
+      "language": "French",
+      "tags": [
+        "Design"
+      ],
+      "speakers": [
+        "2SfYgp0kWfcc80zUha7sSUWa8lA2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "33": {
+      "title": "Recréons un mini LINQ en JS, grâce aux générateurs",
+      "complexity": "intermediate",
+      "description": "Lorsque LINQ est sorti en C# il y a une dizaine d'années, ça a été un petit événement. L'intérêt de ce \"langage dans le langage\" était de  pouvoir manipuler des ensembles de manière efficiente.\n\nJe vous propose de revenir sur une évolution récente de JavaScript, les générateurs, et d'illustrer leur intérêt en recréant un mini LINQ en JS, le tout lors d'une session de live coding.",
+      "language": "French",
+      "tags": [
+        "Langage & Framework"
+      ],
+      "speakers": [
+        "zoyriE2DMHXyKCSewITYQwlffO83"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "34": {
+      "title": "STOP aux réunions soporifiques !  Animons des réunions créatives et productives.  Des tips, formats et outils à découvrir au plus vite.  ",
+      "complexity": null,
+      "description": "Dans la vraie vie, il y a deux types de réunions... : les réunions \"Waouh !\" et les réunions \"Meh.\" Faisons un tour d'horizon des pratiques vous permettant de cultiver des réunions \"Waouh!\" qui soient créatives mais également collaboratives et productives. Des tips, formats et outils de facilitation à découvrir, tester et maitriser dans vos projets. \n",
+      "language": "French",
+      "tags": [
+        "Design"
+      ],
+      "speakers": [
+        "YrDZlRcxXmR5VitDMLjf2H31bA43"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "35": {
+      "title": " Bonheur & Performance : Comment activer son \"flow\" au travail ? ",
+      "complexity": "advanced",
+      "description": "Comment générer du bonheur au travail, tout étant performant, et ce le plus longtemps possible ? En développant son \"flow\" !! \n\nLe concept de \"Flow\", développé par le psychologue Mihály Csíkszentmihályi, est  « un état de concentration intense où l’on se sent complètement absorbé par ce que l’on fait\". En fait, le flow est une sorte d'état suprême qui favorise le plaisir au travail, l’auto-motivation et l’engagement.\n\nIl paraîtrait même que ce \"flow\", état quasi-mystique pour certains, amènerait un bon nombre de développeurs à faire des miracles en rapidité et qualité de programmation ! De quoi donner envie de se pencher un peu plus sur le sujet ! \n\nJe vous propose donc d'aborder ce concept de \"flow\" et voir comment concrètement on peut activer ce super pouvoir au quotidien dans son travail pour être plus performant et surtout plus heureux. ",
+      "language": "French",
+      "tags": [
+        "Random"
+      ],
+      "speakers": [
+        "j1w8by2BQaNVUb5EkwDdDsZ2Bcj2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "36": {
+      "title": "The Old Man Glitch - Escalade de bug dans la première génération de Pokemon sur GameBoy.",
+      "complexity": "beginner",
+      "description": "Un vieux bug dans du code 8-bit d'un jeu de 1996, des techniques obsolètes d'escalade de failles, et beaucoup trop de temps passé dessus par des passionnés - juste pour la beauté de la chose.\n\nOff-by-one error, underflow, buffer overflow, injection de code... mais avec des Pokémons alors même les parents vont comprendre.\n\n  #NoSlide #LiveGlitching #Debugger #Emulateur #OnVaBienSamuser\n",
+      "language": "French",
+      "tags": [
+        "Random"
+      ],
+      "speakers": [
+        "ZzM9y7R7msb0LDFW8fdwRBYthlJ2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "37": {
+      "title": "Découvrez Flutter",
+      "complexity": "beginner",
+      "description": "Après Facebook et react-native, le géant google arrive enfin sur le marché des technos cross-plateforme avec son framework Flutter. \n\nVenez découvrir comment créer *très rapidement* et *facilement* une application compatible avec Android et iOS avec un seul code source.\n\nCe talk sera porté sur la UI (représentation de l'écran en code Flutter) et ne comprendra pas de live coding mais une introduction et d'une explication pas à pas d'un exemple d'application, et sera fait de sorte qu'il soit compréhensible même pour des non-dev android",
+      "language": "French",
+      "tags": [
+        "Langage & Framework"
+      ],
+      "speakers": [
+        "s7ZsfYPdrDMVvmjtSGHyxa01ir63"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "38": {
+      "title": "Découvrez pourquoi Elixir sera votre prochain langage! (Workshop)",
+      "complexity": null,
+      "description": "Elixir est un langage fantastique construit par des crafters avec le test comme axe central  \nLe langage est construit sur Erlang la seule VM capable de prouver une disponibilité de 99,999999999% sur 20 ans.  \nElixir est à Erlang ce que Kotlin est a Java.  \nViens découvrir, on jouera aussi avec Stimulus pour faire un Slack :)  \nles pré-requis au workshop sont la :  \n[https://github.com/savoisn/elixir-workshop](https://github.com/savoisn/elixir-workshop)",
+      "language": "French",
+      "tags": [
+        "Langage & Framework"
+      ],
+      "speakers": [
+        "wWgewscLgKXvaA4zjRvt3fQj8f23"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "39": {
+      "title": "A la découverte des algorithmes génétiques",
+      "complexity": "intermediate",
+      "description": "On entend souvent parler des algorithmes génétiques. Ils sont utilisés dans de nombreux domaines et par de nombreux logiciels qu'on utilise couramment.\nA travers ce hands-on, je vous propose de vous présenter le fonctionnement d'un algorithme génétique ainsi que quelques stratégies d'optimisation 🤓.\n\nEnsuite, c'est à vous de jouer ! Par équipe, vous développerez un algorithme génétique. L'objectif sera d'optimiser le parcours d'un véhicule 🚗 afin qu'il puisse s'adapter au mieux à un terrain plus ou moins chaotique.\n\n\nHappy coding 😜",
+      "language": "French",
+      "tags": [
+        "Data & Machine Learning"
+      ],
+      "speakers": [
+        "leVEVOLM3HfPtzVfQA7WTWyQwoI3",
+        "6HmFtonMn8SZ9nTAS6l1WYWEP9o2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "40": {
+      "title": "Automate All The Things",
+      "complexity": "beginner",
+      "description": "Comment harmoniser les process d’une nouvelle équipe de dev qui se construit tout en ne ramenant pas de la lourdeur de process ? Consigne supplémentaire : fini de délivrer tous les 6 mois une nouvelle version de l’application, à partir de maintenant c’est tous les jours ! \nLa réponse à tout ça : en masquant la complexité et les actions répétitives avec de l’automatisation. \nNous verrons comment nous avons amené une rigueur et des conventions au sein d’une équipe afin de garantir une stabilité et une rapidité de livraison à travers différents outils que nous avons mis en place au fur et à mesure qui permettent d’automatiser (et de sécuriser le développeur). \nNous allons vous expliquer comment nous avons procédé à notre automatisation : De la mise en place de jobs sous Jenkins qui automatisent le process de build, de test, de package et qui s'occupent même de déployer en prod jusqu'à l'intégration de bot dans Slack qui permettent de gérer des actions répétitives contraignantes.\n",
+      "language": "French",
+      "tags": [
+        "Devops & Cloud"
+      ],
+      "speakers": [
+        "uPTrOsxxDKcCVEY9OPUmot0Dts02",
+        "0B4WN6hn3kghsIqMicYjfa5Wt7k2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "41": {
+      "title": "Tensorflow, there is no spoon",
+      "complexity": "beginner",
+      "description": "With the advance in Artificial Intelligence, neural networks are everywhere! But like all technologies, it has its flaws. Adversarial examples are able to fool neural networks used for critical applications such as self-driving cars, face recognition apps, security cameras... Together, we will see how to generate your own adversarial images and fool a neural network into seeing things that are not there. We'll also see how to defend against adversarial attacks.\n\nNo Tensorflow, there is no spoon!",
+      "language": "French",
+      "tags": [
+        "Data & Machine Learning"
+      ],
+      "speakers": [
+        "fEGtvUISb6VrUv4hpaHxRnw8hFZ2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "42": {
+      "title": "J'ai fait un plan à 3 avec VS Code !",
+      "complexity": "beginner",
+      "description": "Vous aimez VS Code car il est simple, intuitif et qu'il fait ce que vous lui demandez. \nMais saviez-vous que vous pouviez coder à plusieurs dans VS Code? et même permettre à une personne tierce de jouer avec votre débugger depuis l'autre bout du monde? Saviez-vous que vous pouviez avoir un client slack dans VS Code, et même un chat audio?\nEt avez-vous exploré toutes les possibilités que VS Code offre quand vous utilisez github?\nNous verrons dans ce talk tout ce qui fait de VS Code l'éditeur de code parfait pour faire du code collaboratif.",
+      "language": "French",
+      "tags": [],
+      "speakers": [
+        "fEGtvUISb6VrUv4hpaHxRnw8hFZ2",
+        "DNlgKL7C5DNK0y48Lf7ylPB4bmk2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "43": {
+      "title": "Dr Gopher, Anatomie du Scheduler",
+      "complexity": "intermediate",
+      "description": "Dr Gopher a décidé de comprendre comment fait le runtime Golang pour multiplexer des goroutines sur des threads système.\n\n\nIl va trifouiller dans les entrailles du scheduler, pour y découvrir ses éléments de base G M et P, ainsi que ses différents mécanismes : création de thread, thread parking, local queues, ou encore work stealing...\n\n\nLa programmation concurrentielle en Go permet au développeur de s'abstraire de la gestion des ressources systèmes ; penchons-nous avec Dr Gopher sur l'anatomie du scheduler et voyons comment il optimise naturellement l'utilisation de ces ressources.",
+      "language": "French",
+      "tags": [
+        "Langage & Framework"
+      ],
+      "speakers": [
+        "977YQDolbxde0ito7I2dUiee2ap1"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "44": {
+      "title": "XP Game ou Scrum par la pratique",
+      "complexity": "intermediate",
+      "description": "Cet atelier permet d’expérimenter la quasi totalité des pratiques Scrum. Du Release planning à la rétrospective en passant par les estimations, la planification, le management visuel, …\nPlusieurs équipes vont s’affronter pour produire le plus de valeur. Dans un rythme soutenable bien entendu.",
+      "language": "French",
+      "tags": [],
+      "speakers": [
+        "8zOOs7IFvcaR2eld6O0svwq5tRS2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "45": {
+      "title": "🏋️‍♂️ Refactoring sans les `for`",
+      "complexity": "beginner",
+      "description": "Peut-on se passer de la bonne vieille boucle `for` ?\nIl est toujours intéressant de creuser les alternatives comme les `Stream`, ou d'autres options.\nMais le plus important c'est de savoir quand il fuir cette instruction. Ou pas !\n\n\nAu quotidien, les boucles sont les briques de base de notre code.\nMais on oublie souvent les alternatives comme l'API `Stream`, la récursivité...\nC'est toujours bénéfique de prendre du recul sur le code que l'on écrit, pour analyser ce qui peut être amélioré.\nLes alternatives sont elles plus lisibles ? Plus maintenables ? Plus performantes ?\n\nIci on se contentera de regarder ce qui se passe en Java, avec quelques incursion coté Kotlin et Scala.\nMais le propos s'adapte aux autres langages de programmation.\n",
+      "language": "French",
+      "tags": [
+        "Langage & Framework"
+      ],
+      "speakers": [
+        "DOf7nxshJKYoWia2QQX8cTkJtRL2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "46": {
+      "title": "Programmation fonctionnelle probabiliste en Scala",
+      "complexity": "beginner",
+      "description": "Probabilités et programmation fonctionnelle peuvent être combinées pour créer un autre paradigme: la programmation probabiliste (probabilistic programming pour les intimes). Le but est de manipuler des variables aléatoires au sein d'un language de programmation. Nous allons voir comment utiliser ce paradigme à travers des uses cases concrets :\n\n- Sampling : nous avons parfois besoin de générer des données pour tester nos applications, car elles ne sont pas toujours accessibles (voire elles n'existent pas). Nous allons voir comment le faire de manière judicieuse.\n- Estimation: nous verrons comment calculer approximativement une valeur avec des variables aléatoires.\n- Machine learning: comment le théorème de Bayes nous permet de prédire des évènements avec une certaine confiance.\n\n",
+      "language": "French",
+      "tags": [
+        "Data & Machine Learning"
+      ],
+      "speakers": [
+        "WguCqxka0kY8cE90xzsHzXmbdpm1"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "47": {
+      "title": "Monitoring OVH: 300k serveurs, 27 DCs une plateforme de métriques ",
+      "complexity": "beginner",
+      "description": "Comment faire quand on doit faire le suivi de toute l'infrastructure du plus grand fournisseur de cloud Européen ?  Comment choisir un outil quand les plus populaires ne tient pas la marée à cette échèle ?  Comment construire une plateforme Metrics pour unifier, concilier et remplacer des années de legacy fragmenté et des solutions partielles ?\n\nDans ce talk nous racontons notre expérience sur la construction et la maintenance d'OVH Metrics, la plateforme utilisée pour monitorer toute l'infrastructure OVH. Nous avions besoin d'aller à des endroits ou la plupart de solutions de monitoring ne sont jamais allées, opérer à l'échelle du plus grand fournisseur Européen de cloud et hosting : 27 data centers, plus de 300k serveurs (physiques !) et des centaines de produits pour accomplir notre mission avec nos 1,3 millions de clients.\n\nVenez pour entendre cette histoire de séries temporelles, de solutions open-sources poussées à l'extreme, de clusters HBase opérés en limite de capacité, et de comment une petite équipe  s'est appuyé sur une poignée de solutions open-source et  une bonne dose de code maison pour construire une des solutions de monitoring les plus performantes au monde.",
+      "language": "French",
+      "tags": [
+        "Devops & Cloud"
+      ],
+      "speakers": [
+        "pYuiGicpt0MenD8NEMhZXtk6VSr1"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "48": {
+      "title": "Découvrir par l’exemple: Microservices et Event Sourcing avec Kafka et Kubernetes",
+      "complexity": "beginner",
+      "description": "Lorsque vous développez des applications vous avez besoin de vous adapter rapidements aux changements (métiers, comme technologiques). Pour cela les développeurs et les “ops” doivent travailler de concert, pour déployer toujours plus rapidement de nouveaux services tout en garantissant la haute disponibilité et la montée en charge des applications.\n\nLes microservices et l’event-sourcing offrent une grande flexibilité aux développeurs; et la containerization par la biais de Kubernetes permet de déployer ces services en toute tranquillité.\n\nCette présentation, en s’appuyant sur des cas d’usage et des démonstration, vous permettra de découvrir:\n* Les micro-services et l’event sourcing avec Apache Kafka\n* Les containers avec Docker\n* Le déploiement et management des services avec Kubernetes\n\nSi vous n’utilisez pas encore ces technologies, cette présentation vous donnera une bonne idées des avantages qu’elles apportent aux développeurs, administrateurs systèmes, et donc aux utilisateurs; et je suis certain que vous les adopterez rapidement pour vos prochains développements!\n",
+      "language": "French",
+      "tags": ["Architecture & Paradigme"],
+      "speakers": [
+        "bX6pDW3oCgV4bXcI7THJXU0KNWs2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "49": {
+      "title": "Acteur, un modèle élégant pour le calcul concurrentiel et distribué",
+      "complexity": "beginner",
+      "description": "Avec l’avènement des architectures multi-cœurs, nous avons besoin de moyens pour les exploiter. Généralement, cela se fait à l'aide des threads natifs et de primitives de synchronisation qui conduisent généralement à des solutions difficiles à mettre en oeuvre et à des problèmes pour appréhender le calcul.\n\nExplorons une approche différente: le modèle de l'acteur, un modèle conceptuel pour traiter le calcul concurrentiel.\n\nPar le biais de la conception d'un jeu vidéo nous illustrerons:\n- ce qu'est un acteur,\n- les interactions entre eux sans partager la mémoire,\n- la communication entre acteurs dans un système distribué et \n- comment avoir un système distribué tolérant aux pannes.",
+      "language": "French",
+      "tags": [
+        "Langage & Framework"
+      ],
+      "speakers": [
+        "thaZ3448ukeDRFYa4LeuBHt7zg43",
+        "EP7LDG2i6YgiNs027aplFVhEbv12"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "50": {
+      "title": "Recherche avancée pour votre application \"legacy\"",
+      "complexity": "beginner",
+      "description": "Comment mixer SQL et NoSQL sans faire la révolution ?\n\nCette \"live coding\" conférence vous montrera comment ajouter Elasticsearch à votre application existante sans changer vos habitudes. Vous aurez des fonctions de recherche avancées sans avoir à écrire du SQL complexe !\n\nDavid partira d'une application Spring Boot/Postgresql/MySQL et ajoutera Elasticsearch en live depuis la scène !\n\n",
+      "language": "French",
+      "tags": [
+        "Data & Machine Learning"
+      ],
+      "speakers": [
+        "eMFPF8fp2UTnePLtRCc0XgQddy12"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "51": {
+      "title": "Jouons avec Skaffold & Container Structure Test",
+      "complexity": "intermediate",
+      "description": "Vous développez des images Docker ? Vous les déployez sur K8S ? Venez découvrir deux outils bien pratiques : Skaffold & Container Structure Test\n\nL’un permet de valider vos images Docker tandis que l’autre permet de recharger votre cluster Kubernetes rapidement… à chaque sauvegarde par exemple.\n\nVenez découvrir l’utilisation conjointe des ces 2 outils pour être plus productif au jour le jour.",
+      "language": "French",
+      "tags": [
+        "Devops & Cloud"
+      ],
+      "speakers": [
+        "0rNZujyWZhWZkxHWh7NZdnLv2873"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "52": {
+      "title": "Docker, Kubernetes & Istio : Tips, tricks & tools",
+      "complexity": "beginner",
+      "description": "Il ne fait aucun doute que Docker et Kubernetes sont omniprésents dans le nouveau monde des microservices. Mais l'utilisation quotidienne peut être assez tricky.\n- Souhaitez-vous pouvoir créer des images plus petites, plus sûres et plus rapides à compiler ?\n- Avez-vous des difficultés avec les descripteurs Kubernetes YAML et les lignes de commande sans fin ?\n- Quand tout va mal, comment déboguez-vous un conteneur ? Et plusieurs pods ?\n- Souhaitez vous connaître des petits tips et outils pratiques ?\n- Vous êtes-vous demandé combien de temps et d'efforts vous pouviez économiser avec une solution de service mesh et à quoi cela servait réellement ?\n\nAurélie et Kevin vont vous partager de nombreux conseils et outils, qu'ils utilisent tous les jours dans leurs entreprises, dans l’optique de vous permettre de vous faciliter le quotidien. Et cela améliorera également vos applications !",
+      "language": "French",
+      "tags": [
+        "Devops & Cloud"
+      ],
+      "speakers": [
+        "MKkYzwlXx6dLM9cfE5vXYqJo5d43",
+        "rDKV0gUOk0O4WU9tpknPAngMF9A3"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "53": {
+      "title": "Back to the Feature",
+      "complexity": "beginner",
+      "description": "Quand l’artisanat du développement rencontre l’artisanat du recrutement il convient de parler d’un : Back to the Feature.\n\nNous allons donc voyager dans le temps avec un retour sur l’histoire de deux mondes qui se côtoient, qui se ressemblent, qui s’ignorent et qui décident de se rejoindre afin de caresser l’espoir d’une Feature en commun !\n\nPlus concrètement, nous allons aborder l'organisation du recrutement en entreprise en nous basant sur le principe de la Feature Team en informatique avec ses bonnes pratiques de développement (BDD, TDD) transposées au recrutement : analyse comportementale, expérimentation, etc \n",
+      "language": "French",
+      "tags": [
+        "Design"
+      ],
+      "speakers": [
+        "18IrtZT8ECbkgDtf3HYzvdyuq562",
+        "zQ0mhj745ZgtNDL3QL6pVT316ai2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "54": {
+      "title": "REX : Transmettre notre passion aux jeunes générations",
+      "complexity": "beginner",
+      "description": "Cette année, alors que j’étais bénévole lors du Devoxx4kids de Brest, j’ai pu constater que les enfants sont ravis de participer à la découverte du développement, à travers une approche ludique et pédagogique. Elle m’a incité à m’interroger sur cette première initiation : permet-elle de donner envie aux jeunes générations de continuer à apprendre la programmation ?\nCette idée m’est revenue après avoir participé à la première édition de Sunny tech. Mon cousin, qui habite dans la région, a découvert scratch un an plus tôt. Cela lui a permis de développer des premiers jeux et il envisage aujourd’hui de se mettre à Unity. J’ai été impressionné par sa capacité à être autonome sur ces outils malgré des problématiques complexes comme les collisions avec le décor ou encore le déplacement d’un personnage.\nJ’étais épaté de voir comment avec seulement quelques heures d’initiation, les enfants motivés continuaient leur apprentissage pour devenir des codeurs.\nDans cette présentation, je vais vous raconter notre voyage et vous donner des idées pour que vous puissiez faire de même avec les enfants de votre entourage.\n",
+      "language": "French",
+      "tags": [
+        "Random"
+      ],
+      "speakers": [
+        "uGGZuv5ZwmbTOZhWhBujIEIhQ7W2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "55": {
+      "title": "Les supers-pouvoirs des types",
+      "complexity": "beginner",
+      "description": "La différence entre un système de type statique et dynamique est souvent méconnue. Les pinceaux s’emmêlent encore plus si on parle de langages fortement typés et faiblement typés.\n\nPendant ce live coding, nous ferons la différence entre ces 4 termes puis nous verrons les usages souvent oubliés des types comme :\n - Les types en tant que tests\n - Les types en tant que documentation vivante\n - Les types en tant que détrompeurs\n - Les types en tant que preuve d'exécution\n - Les types en tant qu’abstraction de complexité",
+      "language": "French",
+      "tags": [
+        "Langage & Framework"
+      ],
+      "speakers": [
+        "ZPLUIeEJC6OqiGltQV1BgXpoXU62"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "56": {
+      "title": "La programmation modulaire, au delà des espaces noms",
+      "complexity": "beginner",
+      "description": "De plus en plus de langages introduisent la notion de \"modules\", cependant, \nles modules sont souvent confondus avec les espaces noms.\nDans cette présentation, je vous propose, au moyen du langage OCaml, un \nlangage réputé pour son système de modules et qui devient de plus en plus \npopulaire, notamment grâce à Reason (sa syntaxe alternative proposée par \nFacebook via ReasonReact, entre autre), de découvrir ce que sont réellement \nles modules, et les problématiques qu'ils couvrent, par exemple, en plus \nd'offrir une manière d'éviter les collisions de noms : \n\n- la compilation modulaire (et partielle)\n- l'injection de dépendances\n- génération de code et réutilisabilité\n- l'abstraction des types \n- l'extension d'interfaces\n- l'offre d'un langage \"module level\" pour faire des manipulation fines, \n  proche des systèmes de types dépendants\n- se passer, discutablement, des Higher Kinded Types (présent, par exemple, \n  en Haskell, Scala et Kotlin, via la bibliothèque Arrow)\n  \nConcrètement, les modules sont bien plus riches que des simples espaces \nnoms, et en comprendre les tenants et aboutissants permet d'imaginer \nl'évolution des langages plus populaires (comme Java, JavaScript et \nC#).",
+      "language": "French",
+      "tags": [
+        "Langage & Framework"
+      ],
+      "speakers": [
+        "9IyJKz9JQpRk2JPllAQ0kMA3yYV2"
+      ],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "57":{
+            "title": "Una-Gitlab",
+            "complexity": "intermediate",
+            "description": "A l'image de Perceval et Karadock, Logan et Kevin reviennent d'une quête dans la contrée de Gitlab et vont vous compter leurs aventures pleines de découvertes et de rebondissements. L'on espère que Père Blaise réussira à prendre des notes…\n\n![](https://i.pinimg.com/originals/60/4d/7c/604d7c710db34555e2e44e6508c66b27.jpg)\n\nLors de cette quête, il a été nécessaire de mettre en place une intégration continue pour une armée de développeurs sanguinaires qui avaient plein de besoins tout bizarres… Et à la force de leur épée, de leur courage et pas du tout de l'aide de Merlin (qui sait toujours rien faire…), Logan et Kevin ont mis à disposition une CI complète avec job, stage, intégration avec des outils externes (PostgreSQL, Artifactory, Google Cloud Platform…) tout en la gardant simple et versionnable.\n\nIls finiront même par la présentation d'un récent sortilège qui permet d'envoyer leur CI dans le Cloud de Google avec Kubernetes. Cela donne une solution hautement scalable et performante, à la demande avec Google Kubernetes Engine afin de vous présenter une solution scallable et automatique !",
+            "language": "French",
+            "tags": [
+                "Devops & Cloud"
+            ],
+            "speakers": [
+                "rDKV0gUOk0O4WU9tpknPAngMF9A3",
+                "4ik1uitpI4UlyflNSsF3IqoMCi53"
+            ],
+            "presentation": null,
+            "videoId": null,
+            "image": null,
+            "icon": null
+        },
+    "100": {
+      "title": "Keynote d'ouverture",
+      "complexity": "",
+      "description": "",
+      "language": "French",
+      "tags": [
+      ],
+      "speakers": [],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "101": {
+      "title": "Keynote de fermeture",
+      "complexity": "",
+      "description": "",
+      "language": "French",
+      "tags": [
+      ],
+      "speakers": [],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "102": {
+      "title": "Soirée networking",
+      "complexity": "",
+      "description": "",
+      "language": "French",
+      "tags": [
+      ],
+      "speakers": [],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
     }
   },
-  "team" : [ {
-    "members" : [ {
-      "name" : "Loïc Talon",
-      "photoUrl" : "/images/people/loic_talon.jpg",
-      "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/loic_talon/",
-        "name" : "Twitter"
+
+
+
+
+
+
+
+
+
+  "speakers": {
+      "UReg1U2dk9XFlCrkxjN6JWVCoB92": {
+        "bio": "Adrien est Tech & DataOps Evangelist chez Saagie, une startup qui propose une plateforme accélérant et industrialisant les projets data & AI. Avant cela, Adrien était Thought Leader chez Société Générale, en charge de l’adoption des pratiques et technos émergentes ; il y a aussi été en charge du déploiement des pratiques DevOps (infra-as-code, feature teams…) et des technos associées (delivery pipelines, Docker…). Par le passé, il a aussi  été consultant chez Octo Technologies, intervenant sur des projets de transformation des infra et participant à l’élaboration de l’offre devops de l’entreprise. Enfin, Adrien est très impliqué dans l'écosystème technologique, étant Docker Captain auprès de Docker Inc., ainsi que manager des communautés Meetup Docker, Kubernetes et Serverless Architecture de Paris.\n",
+        "company": "Saagie",
+        "companyLogoUrl": "/images/logos/saagie.png",
+        "country": "Rueil-Malmaison, France",
+        "name": "Adrien Blind",
+        "photoUrl": "https://lh3.googleusercontent.com/-s22-iji08Cc/AAAAAAAAAAI/AAAAAAAAAAA/L-fgk2Yky6o/photo.jpg",
+        "shortBio": "Tech & DataOps Evangelist à Saagie",
+        "socials": [{
+          "link": "https://twitter.com/adrienblind",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Tech & DataOps Evangelist"
       },
-      {
-        "icon" : "linkedin",
-        "link" : "https://fr.linkedin.com/in/loictalon",
-        "name" : "LinkedIn" 
-      } ],
-      "title" : "",
-      "order" : 0
-    }, {
-      "name" : "Estelle Landry",
-      "photoUrl" : "/images/people/estelle_landry.jpg",
-      "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/estelandry/",
-        "name" : "Twitter"
+      "EP7LDG2i6YgiNs027aplFVhEbv12": {
+        "bio": "Développeur à Clever Cloud.",
+        "company": "Clever Cloud",
+        "companyLogoUrl": "images/logos/clever-cloud.png",
+        "country": "Toulouse, France",
+        "name": "Alessio Coltellacci",
+        "photoUrl": "https://avatars3.githubusercontent.com/u/11367839?v=4",
+        "shortBio": "Développeur à Clever Cloud",
+        "socials": [{
+          "link": "https://github.com/NotBad4U",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/lightplay8",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Développeur"
       },
-      {
-        "icon" : "linkedin",
-        "link" : "https://fr.linkedin.com/in/estelle-landry-61866b71",
-        "name" : "LinkedIn" 
-      } ],
-      "title" : "",
-      "order" : 1
-    }, {
-      "name" : "Jérémy Barthe",
-      "photoUrl" : "/images/people/jeremy_barthe.jpg",
-      "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/jeremyb_/",
-        "name" : "Twitter"
+      "9g2TJuw97VMd8Zwn9y2x0g0w7SB2": {
+        "bio": "Dev scala / java / javascript à MAIF",
+        "company": "MAIF",
+        "companyLogoUrl": "/images/logos/logo-maif.png",
+        "country": "Niort, France",
+        "name": "Alexandre Delègue",
+        "photoUrl": "https://avatars2.githubusercontent.com/u/1575521?v=4",
+        "shortBio": "Dev scala / java / javascript à MAIF",
+        "socials": [{
+          "link": "https://github.com/larousso",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/chanksleroux",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Dev scala / java / javascript"
       },
-      {
-        "icon" : "linkedin",
-        "link" : "https://fr.linkedin.com/in/jeremybarthe",
-        "name" : "LinkedIn" 
-      } ],
-      "title" : "",
-      "order" : 2
-    }, {
-      "name" : "Chloé Pellen",
-      "photoUrl" : "/images/people/chloe_pellen.jpg",
-      "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/ChloePellen/",
-        "name" : "Twitter"
+      "lhwORZ2dSGbF1OG6VkfbjkOCzR12": {
+        "bio": "Speaker and Software Craftsman at LGO Group",
+        "shortBio": "Speaker and Software Craftsman at LGO Group",
+        "company": "LGO Group",
+        "companyLogoUrl": "/images/logos/lgo_group.jpg",
+        "country": "France",
+        "name": "Arnaud LEMAIRE",
+        "photoUrl": "https://avatars2.githubusercontent.com/u/335501?v=4",
+        "socials": [{
+          "link": "https://twitter.com/lilobase",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Speaker and Software Craftsman"
       },
-      {
-        "icon" : "linkedin",
-        "link" : "https://fr.linkedin.com/in/chloe-pellen-66816162",
-        "name" : "LinkedIn" 
-      } ],
-      "title" : "",
-      "order" : 3
-    }, {
-      "name" : "Lauriane Gresse",
-      "photoUrl" : "/images/people/lauriane_anthony.jpg",
-      "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/LaurianeAnthony/",
-        "name" : "Twitter"
+      "cDRmIAqbZjeTaxYD5PN97FflYqO2": {
+        "bio": "Audrey est développeur full-stack. Passionnée par son métier, Audrey a toujours été fortement engagée dans la communauté Java au travers de plusieurs JUGs et conférences (Duchess France, Paris JUG, Devoxx France, Devoxx UK) mais aussi au sein d’initiatives visant à faire découvrir la programmation aux plus jeunes (Programatoo, Devoxx4Kids). Plus récemment elle a également rejoint l’équipe des Cast Codeurs.",
+        "company": null,
+        "country": "Rouen, France",
+        "name": "Audrey Neveu",
+        "photoUrl": "https://lh5.googleusercontent.com/-SECie61I7cQ/AAAAAAAAAAI/AAAAAAAAHPU/rjsXo4n512I/photo.jpg",
+        "shortBio": "Développeuse full-stack",
+        "socials": [{
+          "link": "https://twitter.com/Audrey_Neveu",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Développeuse full-stack"
       },
-      {
-        "icon" : "linkedin",
-        "link" : "https://fr.linkedin.com/in/lauriane-gresse-a3696665",
-        "name" : "LinkedIn" 
-      } ],
-      "title" : "",
-      "order" : 4
-    }, {
-      "name" : "François Teychene",
-      "photoUrl" : "/images/people/francois_teychene.jpg",
-      "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/fteychene/",
-        "name" : "Twitter"
+      "YrDZlRcxXmR5VitDMLjf2H31bA43": {
+        "bio": "Coach agile et formatrice Scrum,  j’accompagne les équipes et les organisations dans leur transition et évolution vers l’agilité.\nJ'ai découvert le Scrum en 2010 en devenant Product Owner chez Vente-privée.com. Depuis, je suis partie à San Francisco travailler avec des entrepreneurs souhaitant déployer du Scrum dans leur équipe de développement. En parallèle, je me suis formée au coaching et à la facilitation de groupe pendant un an à San Francisco.\nAujourd’hui, je déploie, j’enseigne et je forme aux métiers de Scrum Master, Product Owner et Coach Agile. J'ai au cœur de mes pratiques l’avancement des projets en équipes agiles, le déploiement et le maintien d'approches de type Scrum ou Kanban dans le temps, l’amélioration de l’expérience utilisateur ainsi que les pratiques et rituels quotidiens qui contribuent à cultiver de l'amélioration continue en équipes.",
+        "company": "turn-on.fr",
+        "country": "Montpellier, France",
+        "name": "Aurelie Le Guillou",
+        "photoUrl": "https://lh3.googleusercontent.com/-jPLU9RTzpp0/AAAAAAAAAAI/AAAAAAAAHSA/U10mGuZyknY/photo.jpg",
+        "shortBio": "Coach agile et formatrice Scrum à Turn-on.fr",
+        "socials": [{
+          "link": "https://twitter.com/adcoate",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Coach agile et formatrice Scrum"
       },
-      {
-        "icon" : "linkedin",
-        "link" : "https://fr.linkedin.com/in/fteychene",
-        "name" : "LinkedIn" 
-      } ],
-      "title" : "",
-      "order" : 5
+      "MKkYzwlXx6dLM9cfE5vXYqJo5d43": {
+        "bio": "Aurélie est Cloud developer (& DevOps) chez Continental à Toulouse, en France. Elle travaille comme développeuse depuis plus de 10 ans. Ancienne développeuse Java / JEE, puis développeuse Web, Full-Stack et Lead, elle est maintenant Cloud developer et DevOps sur des projets de véhicules connectés et autonomes. En tant que l’une des leaders de Duchesse France, une association qui promeut les femmes développeurs et les femmes travaillant dans l'informatique, elle est fortement impliquée dans leur initiative de coaching #AdoptADuchess, qui aide les développeurs débutants et en reconversion. Elle est également l’une des organisatrices du DevFest Toulouse et un membre de la core team du Toulouse Data Science (TDS).\nElle est également rédactrice d'articles techniques et marraine de l’association Elles Bougent.",
+        "company": "Continental",
+        "companyLogoUrl": "/images/logos/continental.png",
+        "country": "Toulouse, France",
+        "name": "Aurélie Vache",
+        "photoUrl": "https://pbs.twimg.com/profile_images/726148230224949249/g2T2qehD_400x400.jpg",
+        "shortBio": "Cloud Dev(Ops) à Continental",
+        "socials": [{
+          "link": "https://github.com/scraly",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/aurelievache",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Cloud Dev(Ops)"
+      },
+      "uGGZuv5ZwmbTOZhWhBujIEIhQ7W2": {
+        "bio": "Aurélien Hébert is a french software engineer living near Brest. He started as a software engineer in the Alten R&D team on a Big data project. This project was about discovering pattern in mobility data. After this first experience he wanted to work on a technical project including more sensors data. He joined a Startup (Cityzen Data) building an open source Geo-Time-Series database (Warp 10) and its associated language to manipulate it. Here he got data, a lot of them. He joined recently the OVH Metrics team to continue his data adventure. He also like to share his experience in local conference such as FinistDev or meetups.",
+        "company": "OVH",
+        "shortBio": "Software engineer at OVH Metrics",
+        "companyLogoUrl": "/images/logos/ovh.png",
+        "country": "Brest, France",
+        "name": "Aurélien Hébert",
+        "photoUrl": "https://media.licdn.com/dms/image/C4D03AQEaF4rzhRkCpA/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=YOKnzA60OmKosOoXfi-10l0bPaC3eUdkETFy8cT4AWE",
+        "socials": [{
+          "link": "https://github.com/aurrelhebert",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/AurrelH95",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Software engineer"
+      },
+      "uQa7PBe5RzPSp6sDO59AeK7oyTM2": {
+        "bio": "Benjamin est __consultant-facilitateur__ dans le design de service, le digital design et l'innovation en cycle court. Son approche résolument centrée sur l'humain propulse les __équipes pluridisciplinaires__ au cœur de l'__expérience client et utilisateur__ (UX). \n\n__Formateur sur les méthodes__ qui mettent en jeu l'intelligence collective : Design Thinking pour innover par la créativité, Design Sprint pour passer de l'idée à l'action en 5 jours, Lean UX pour dérisquer ses projets. Son coup de cœur…le LEGO® Serious Play®.\"\n\nTwitter : @BenUserMood\nLinkedin : https://www.linkedin.com/in/benjamin-richy-b63452105/\nWeb : ben.usermood.net\nMedium : https://medium.com/@BenUserMood\n",
+        "shortBio": "consultant-facilitateur à WAT (Work Alone Together)",
+        "company": "WAT - Work Alone Together",
+        "companyLogoUrl": "",
+        "country": "Lyon, France",
+        "name": "Benjamin Richy",
+        "photoUrl": "https://pbs.twimg.com/profile_images/1100795909900771329/g800xsH5_400x400.png",
+        "socials": [{
+          "link": "https://github.com/benj-github",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/BenUserMood",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Consultant-facilitateur"
+      },
+      "27dsgKVju3Vy9E786QvdHCrtEYl1": {
+        "bio": "Développeur passionné, plutôt orienté back mais également curieux du front.\n\nJ'ai basculé depuis peu du côté ops et je m'intéresse fortement à tout ce qui touche à la sécurité.",
+        "shortBio": "Développeur @ZenikaBordeaux, Organisateur @bdxio",
+        "company": "Zenika",
+        "companyLogoUrl": "/images/logos/zenika.png",
+        "country": "Bordeaux, France",
+        "name": "Benoît Giraudou",
+        "photoUrl": "https://lh5.googleusercontent.com/-pT9hsK8XGiI/AAAAAAAAAAI/AAAAAAAAE9c/lP9_MC64dA8/photo.jpg",
+        "socials": [{
+          "link": "https://github.com/joow",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/joowgir",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Développeur"
+      },
+      "Aow2VohW2SOMagU6kwU98RltKyT2": {
+        "bio": "Vieux développeur. C'est tout et c'est déjà pas mal !",
+        "shortBio": "Architecte solutions à Zenika",
+        "company": "Zenika",
+        "country": "Nantes, France",
+        "companyLogoUrl": "/images/logos/zenika.png",
+        "name": "Bruno Bonnin",
+        "photoUrl": "https://avatars3.githubusercontent.com/u/1908593?v=4",
+        "socials": [{
+          "link": "https://github.com/bbonnin",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/_bruno_b_",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Architecte solutions"
+      },
+      "RcX2utpBETcNTT4zJneK3LL28dn1": {
+        "shortBio": "Livreur de clémentine à Smag",
+        "bio": "Livreur de clémentine à Smag",
+        "company": "Smag",
+        "companyLogoUrl": "/images/logos/smag.png",
+        "country": "Montpellier, France",
+        "name": "Clément Gresse",
+        "photoUrl": "https://lh6.googleusercontent.com/-uCWYfUJlKs0/AAAAAAAAAAI/AAAAAAAAL50/nwk98LUAjEw/photo.jpg",
+        "socials": [{
+          "link": "https://twitter.com/EndeoC",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "UI/UX Designer"
+      },
+      "vAQguQPbehbyRxkDuXzJ9HSHqVS2": {
+        "bio": "I am currently Director of Engineering - Infrastructure at teads.tv and have been in the industry for about 13 years.  \n\nPreviously, I was leading the cloud team at Softbank Robotics, making sure those humanoid robots were always connected.  \n\nMy main focus for those 13 years has been building dev and infra teams, leading them to scale the business in a very automated way.  \n\nI am a natural born geek with an entrepreneur spirit and love to discuss around anything tech related, management related or neat cultural differences.   \nI have lived in many countries / part of the world and love to meet new people from all around the globe.  \n",
+        "company": "Teads",
+        "companyLogoUrl": "/images/logos/3.svg",
+        "country": "Montpellier, France",
+        "name": "Damien Pacaud",
+        "photoUrl": "https://avatars1.githubusercontent.com/u/478729?v=4",
+        "shortBio": "Director of Engineering at Teads",
+        "socials": [{
+          "link": "https://github.com/dpacaud",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/damienpacaud",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Director of Engineering"
+      },
+      "eMFPF8fp2UTnePLtRCc0XgQddy12": {
+        "bio": "Depuis 2013, David Pilato est développeur et évangéliste chez elastic.co, après avoir passé les deux années précédentes à promouvoir le projet open-source Elasticsearch. Il en anime la communauté française et organise des [BBLs](http://brownbaglunch.fr) au sein des entreprises.",
+        "company": "Elastic",
+        "companyLogo": "/images/logos/elastic.svg",
+        "companyLogoUrl": "/images/logos/elastic.svg",
+        "country": "Cergy - Le Haut, Cergy, France",
+        "featured": true,
+        "name": "David Pilato",
+        "photo": "/images/people/david_pilato.jpg",
+        "photoUrl": "/images/people/david_pilato.jpg",
+        "shortBio": "Depuis 2013, David Pilato est développeur et évangéliste chez elastic.co, après avoir passé les deux années précédentes à promouvoir le projet open-source Elasticsearch.",
+        "socials": [{
+          "icon": "github",
+          "link": "https://github.com/dadoonet",
+          "name": "GitHub"
+        }, {
+          "icon": "twitter",
+          "link": "https://twitter.com/dadoonet",
+          "name": "Twitter"
+        }],
+        "order": 0,
+        "title": "Developer & Evangelist at Elastic"
+      },
+      "thaZ3448ukeDRFYa4LeuBHt7zg43": {
+        "bio": "I’m a compulsive designer of strong typed functional, logic and object-oriented programming languages! \nThe rest of the time, I'm a freelance software developer working really hard to produce usable and used applications.\n\n**Themes**: Language theory and design, Mobile Applications, Cloud Computing, Grid Computing, Actor-based  framewor​k and Distributed Computing.\n\nTalks: \n- DevFest Toulouse 2016, 2017 -De java à swift en 2 temps trois mouvements\n- Voxxed Luxembourg 2017 - De java à swift en 2 temps trois mouvements\n- DevFest Toulouse 2017 - Apéro fonctionnel (avec P. Charrière et al.)\n- Devoxx Marocco 2017 - Leçon de cuisine en Swift - Confection d'un Cake ... Pattern\n- NewCraft Paris 2018 - High Order \"Transformation\" Function\n- SunnyTech 2018 - Kotlin Parsec\n- ScalaIO 2018 - High Order \"Transformation\" Function\n- Capitole du Libre 2018 - Acteur, un modèle élégant pour le calcul concurrentiel et distribué - avec Alessio Coltallecci",
+        "company": "Fungus",
+        "shortBio": "Freelance software developer",
+        "country": "Toulouse, France",
+        "name": "Didier Plaindoux",
+        "photoUrl": "https://avatars2.githubusercontent.com/u/752324?v=4",
+        "socials": [{
+          "link": "https://github.com/d-plaindoux",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/dplaindoux",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Freelance software developer"
+      },
+      "vz8s7Z7mu5e7vH6oOAXvWfdGltm1": {
+        "bio": "Eduardo is in charge of the development of new software modules for big data analysis since 2018 at Qualtera. Since 2007, he contributed to software projects related to knowledge management, technical data analysis (oil/gas and semiconductor industries) and economic analysis. His primary areas of interest are Knowledge Management and Software Engineering.\n\nLinkedIn: https://www.linkedin.com/in/eduardoestima/ ",
+        "company": "Qualtera",
+        "companyLogoUrl": "/images/logos/Qualteralogo.png",
+        "country": "Montpellier, France",
+        "name": "Eduardo Studzinski Estima de Castro",
+        "photoUrl": "https://lh3.googleusercontent.com/-xXr6FZ07fgE/AAAAAAAAAAI/AAAAAAAArlk/m90_chJ74Gk/photo.jpg",
+        "shortBio": "Développeur software à Qualtera",
+        "socials": [],
+        "title": "Software developer"
+      },
+      "2uYlHCCY3kap9HQTyUf2GF0Uptg2": {
+        "bio": "Père de 3 garçon et gardien de nombreux microcontrolleurs, Emmanuel est un développeur passionné depuis bientôt 20 ans. Il a évolué dans de nombreux contextes de banque et assurance en France et en Suisse. KISS est son moto, le sourire des utilisateurs son but, Java/scala et l'iot sont ses armes ... Emmanuel aime partager son savoir et est impliqué dans plusieurs initiatives telles que Devoxx4kids, Devoxx France.",
+        "shortBio": "IT Architect à Compte-Nickel",
+        "company": "Compte-Nickel",
+        "companyLogoUrl": "/images/logos/comptenickel.jpg",
+        "country": "Niort, France",
+        "name": "Emmanuel Feller",
+        "photoUrl": "https://lh5.googleusercontent.com/-GUs9AGBi9Vk/AAAAAAAAAAI/AAAAAAAAAHw/qsIBw8PJMNw/photo.jpg",
+        "socials": [{
+          "link": "https://github.com/Mefl",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/moyowi",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "IT Architect"
+      },
+      "2SfYgp0kWfcc80zUha7sSUWa8lA2": {
+        "bio": "Consultante et formatrice en Expérience Utilisateur, Emmanuelle accompagne les entreprises dans leur stratégie digitale, leur expérience utilisateur (UX) et l'innovation centrée utilisateurs (transformation numérique, audits, études et tests utilisateurs, ateliers Design Sprint, personas, recherche utilisateur avancée, data mining, …).\n\nIngénieur généraliste et diplômée en psychologie, elle a crée et animé le pole User Sciences chez Décathlon avant de rejoindre Ubisoft en tant qu'UX strategist. Spécialiste des activités de loisirs (sport, jeux vidéos, jeux de société,  luxe, ... ), elle a travaillé pour des grands comptes (Axa, Asmodee, Michelin, Picard, Eres, Le petit Marseillais, Sodexo, Midas,...) et aussi des entreprises et start up régionales (Phytocontrol, Fruition Sciences, ... )",
+        "shortBio": "Consultante et formatrice en Expérience Utilisateur, Emmanuelle accompagne les entreprises dans leur stratégie digitale, leur expérience utilisateur (UX) et l'innovation centrée utilisateurs...",
+        "company": "ColorLink",
+        "companyLogo": "/images/logos/colorlink.png",
+        "companyLogoUrl": "/images/logos/colorlink.png",
+        "country": "Montpellier, France",
+        "featured": true,
+        "name": "Emmanuelle Marevery",
+        "photo": "/images/people/Emmanuelle_Marevery.jpg",
+        "photoUrl": "/images/people/Emmanuelle_Marevery.jpg",
+        "socials": [{
+          "icon": "twitter",
+          "link": "https://twitter.com/mareverie",
+          "name": "Twitter"
+        }],
+        "order": 0,
+        "title": "Directrice innovation & UX"
+      },
+      "3UiCmc7gDjgMC6hMPreM6B0sYCI3": {
+        "bio": "Développeur Front-End, je suis passionné par le développement web, l'écosystème JavaScript et la programmation fonctionnelle.\n\nMembre du [JUG Montpellier](https://www.jug-montpellier.org/) et de l'association [Montpellier Tech Hub](https://www.montpellier-techhub.org/), je laisse ma curiosité et ma passion me guider dans mon apprentissage.",
+        "shortBio": "Développeur Front-End à Teads",
+        "company": "Teads",
+        "companyLogoUrl": "/images/logos/3.svg",
+        "country": "Montpellier, France",
+        "name": "Fabien Bernard",
+        "photoUrl": "https://media.licdn.com/dms/image/C5103AQH9ibbkB4zfHg/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=PedebhqGoUkusmFfswYTVxLFBWe-yvvFzykuYjRZKZY",
+        "socials": [{
+          "link": "https://github.com/f4b13n",
+          "icon": "github",
+          "name": "GitHub"
+        }],
+        "title": "Développeur Front-End"
+      },
+      "ZzM9y7R7msb0LDFW8fdwRBYthlJ2": {
+        "bio": "After spending 10+ years of my life coding, I started to feel that the problems in software development were not in the code and tryed finding solutions elsewhere. Since I started doing that, I started to love coding again :)",
+        "company": null,
+        "country": "Toulouse",
+        "name": "Fabien Trégan",
+        "photoUrl": "https://pbs.twimg.com/profile_images/981531162790285313/6ZcVrehB_400x400.jpg",
+        "shortBio": "Developper, tech leader, agile companion",
+        "socials": [{
+          "link": "https://github.com/fabientregan",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/ftregan",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Developer"
+      },
+      "uwtDCeZKSOVND89EAdUu1q86zKj1": {
+        "bio": "Florent is in charge of the software pre-production management and DevOps at Qualtera since 2015. He works in big data software projects for the semiconductor industry.",
+        "shortBio": "DevOps at Qualtera",
+        "company": "Qualtera",
+        "companyLogoUrl": "/images/logos/qualtera.jpg",
+        "country": "France",
+        "name": "Florent Casanovas",
+        "photoUrl": "https://lh4.googleusercontent.com/-V1wX4bsAi4c/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfzamE_cwi8jSZroyy6fhLAlP7-hA/mo/photo.jpg",
+        "socials": [],
+        "title": "DevOps"
+      },
+      "s7ZsfYPdrDMVvmjtSGHyxa01ir63": {
+        "bio": "Passionné d'android,\nmembre très actif sur github, je possède plusieurs, voire plein de librairies Android :)\n\nFondateur du slack Android-Dev-FR\n\nJ'aime les communautés android, écrire des articles,  créer des libs",
+        "company": "Idean",
+        "companyLogoUrl": "/images/logos/idean-logo-555x308.png",
+        "country": "Montpellier, France",
+        "name": "Florent Champigny",
+        "photoUrl": "https://lh5.googleusercontent.com/-3XzSqSjRjtY/AAAAAAAAAAI/AAAAAAAAVjo/cjRtRZQCvNU/photo.jpg",
+        "shortBio": "Développeur Android à Idean",
+        "socials": [{
+          "link": "https://github.com/florent37/",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/florent_champ",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Développeur Android"
+      },
+      "rXHuMGTpijYG82yClvFtjmb4CwV2": {
+        "bio": "- Master de microtechnique ( option robotique, machine learning ) EPFL\n- Candidat doctorant, puis ingénieur de recherche au [LASA - EPFL](http://lasa.epfl.ch/)  ( un labo qui fait du machine learning pour la robotique )\n- Schlumberger  Montpellier - data scientist de 2011 - 2016\n- [Netheos]( http://www.netheos.com ) - data scientist 2016 - ajourd'hui\n\n\n## talks : \n- pandas à sunny-tech 2018 (quickie) [lien](]https://github.com/flo-dhalluin/python-pandas-talk/blob/master/pandas-talk-run.ipynb)\n- live-coding clojure au meetup fp de Montpellier [lien](https://github.com/flo-dhalluin/python-pandas-talk/blob/master/pandas-talk-run.ipynb)\n\n",
+        "company": "Netheos",
+        "companyLogoUrl": "/images/logos/NETHEOS-logo.png",
+        "country": "Montpellier",
+        "name": "Florent D'halluin",
+        "photoUrl": "https://avatars1.githubusercontent.com/u/496379?v=4",
+        "shortBio": "Data Scientist à Netheos",
+        "socials": [{
+          "link": "https://github.com/flo-dhalluin",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/flal",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Data Scientist"
+      },
+      "9gElbcbH86Q8VUKzNThIWkQ0Wih2": {
+        "bio": "Couteau suisse #OSSbyMAIF",
+        "company": "MAIF",
+        "companyLogoUrl": "/images/logos/logo-maif.png",
+        "country": "NIORT",
+        "name": "Francois Desmier",
+        "photoUrl": "https://avatars1.githubusercontent.com/u/16403287?v=4",
+        "shortBio": "Architectures et initiatives numériques à MAIF",
+        "socials": [{
+          "link": "https://github.com/desmfr",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/desmfr",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Architectures et initiatives numériques"
+      },
+      "QuCFwwCRLKQkT4tsxPMRfIu9IdP2": {
+        "bio": "Développeuse PHP depuis plus de 15 ans, je suis maintenant Dev dans le Cloud @iAdvize. \n\nDepuis 1 an mes nouvelles passions sont : Kubernetes & tout ce qui tourne autour du PaaS & FaaS. Je suis devenue Cloud Addict, j’adore jouer avec les containers, surfer sur les skills Dev&Ops & jongler dans le monde du Serverless\n",
+        "company": "iAdvize",
+        "companyLogoUrl": "/images/logos/Iadvize-black.png",
+        "country": "Nantes, France",
+        "name": "Gaëlle Acas",
+        "photoUrl": "https://lh3.googleusercontent.com/-84I3J4cxDuU/AAAAAAAAAAI/AAAAAAAAWtA/Q6I71wRIR0I/photo.jpg",
+        "shortBio": "Développeurs PHP à iAdvize",
+        "socials": [{
+          "link": "https://github.com/gaelleiadvize",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/Gaelleacas",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Développeuse PHP"
+      },
+      "uPTrOsxxDKcCVEY9OPUmot0Dts02": {
+        "bio": "Développeur passionné et touche à tout depuis 15 ans. Adepte du principe KISS avec une tendance craftsman.\nUn peu ops sur les bords..",
+        "company": "Saagie",
+        "companyLogoUrl": "/images/logos/saagie.png",
+        "shortBio": "Développeur à Saagie",
+        "country": "Toulouse, France",
+        "name": "Ghislain Mahieux",
+        "photoUrl": "https://avatars2.githubusercontent.com/u/2302324?v=4",
+        "socials": [{
+          "link": "https://github.com/gmahieux",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/GhislainMahieux",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Développeur"
+      },
+      "O2L34hhaFhRxCscohqPkxEuxo132": {
+        "bio": "",
+        "company": "SGCIB",
+        "companyLogoUrl": "/images/logos/societegeneral.png",
+        "country": "Paris, France",
+        "name": "HaythemZ",
+        "photoUrl": "https://avatars3.githubusercontent.com/u/9342571?v=4",
+        "socials": [{
+          "link": "https://github.com/HaythemZ",
+          "icon": "github",
+          "name": "GitHub"
+        }],
+        "title": ""
+      },
+      "pYuiGicpt0MenD8NEMhZXtk6VSr1": {
+        "bio": "Malgré ce que son accent espagnol bien prononcé peut suggérer, Horacio est arrivé en France il y a plus d'une quinzaine d'années. Passionné d'informatique, dans laquelle il est tombé depuis tout petit, il a découvert le développement web en 1997 et depuis il n'a pas arrêté de bosser autour.\n\nAprès quelques années comme tech leader de la partie frontend de [@warp10io](https://twitter.com/warp10io/) chez [Cityzen Data](https://twitter.com/cityendata/), Horacio a rejoint [OVH](](https://twitter.com/ovh/) en janvier 2018 en tant que Developer Advocate. Il est cofondateur du [FinistDevs](https://twitter.com/finistdevs/), le JUG/GDG français le plus proche de la Silicon Valley.\n\nPassionné par le développement web et tout ce qui gravite autour des composants web, Horacio est [Google Developer Expert (GDE)](https://developers.google.com/experts/people/horacio-gonzalez) en Web Technologies et Flutter.\n\nVous pouvez voir mes dernières talks sur [mon profil Notist](https://noti.st/lostinbrittany)",
+        "company": "OVH",
+        "companyLogoUrl": "/images/logos/ovh.png",
+        "country": "Brest, France",
+        "name": "Horacio Gonzalez (LostInBrittany)",
+        "photoUrl": "https://lh4.googleusercontent.com/-6krIgoWnkGk/AAAAAAAAAAI/AAAAAAABR4o/EJH0Fh-m16k/photo.jpg",
+        "shortBio": "DevRel à OVH",
+        "socials": [{
+          "link": "https://github.com/LostInBrittany",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/LostInBrittany",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "DevRel"
+      },
+      "DOf7nxshJKYoWia2QQX8cTkJtRL2": {
+        "bio": "Développeur passionné depuis plus de 18 ans, expert dans les technos Java et Web. Je suis impliqué dans les rendez-vous techniques toulousains (Devfest Toulouse, GDG, JUG, Software Craftsmanship Toulouse).\nJ’apprécie la programmation fonctionnelle, et donc particulièrement je suis attiré par les nouveaux langages et frameworks qui vont dans cette direction. \n\nEt puis je sais dessiner une 🦄 en CSS.",
+        "shortBio": "Développeur passionné depuis plus de 18 ans, expert dans les technos Java et Web....",
+        "company": "MonkeyPatch.io",
+        "companyLogo": "/images/logos/monkeypatch.png",
+        "companyLogoUrl": "/images/logos/monkeypatch.png",
+        "country": "Toulouse, France",
+        "featured": true,
+        "name": "Igor Laborie",
+        "photo": "/images/people/Igor_Laborie.jpg",
+        "photoUrl": "/images/people/Igor_Laborie.jpg",
+        "socials": [{
+          "icon": "github",
+          "link": "https://github.com/ilaborie",
+          "name": "GitHub"
+        }, {
+          "icon": "twitter",
+          "link": "https://twitter.com/ilaborie",
+          "name": "Twitter"
+        }],
+        "order": 0,
+        "title": "Expert Java / Web at MonkeyPatch.io"
+      },
+      "bAkrQrssjgU1zb5V2y2QpVnuCmf1": {
+        "bio": "GDE Web Technology, je travaille pour Sfeir en tant que CTO de l'agence de Nantes.\n\nEn dehors du travail, je suis co-fondateur du GDG Nantes, organisateur du DevFest Nantes, co-créateur des Nantes Wit\n\nRetrouvez l'ensemble de mes contributions sur https://github.com/jefBinomed",
+        "company": "Sfeir / GDG Nantes",
+        "shortBio": "CTO Sfeir Nantes, co-fondateur GDG Nantes, organisateur DevFest Nantes, co-créateur des Nantes Wit. ",
+        "companyLogoUrl": "/images/logos/sfeir.png",
+        "country": "Nantes, France",
+        "name": "Jean-Francois Garreau",
+        "photoUrl": "https://lh6.googleusercontent.com/-jDbKZi8b1pE/AAAAAAAAAAI/AAAAAAAASRc/rrjQ9nn1LgQ/photo.jpg",
+        "socials": [{
+          "link": "https://github.com/jefbinomed",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/jefbinomed",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "CTO"
+      },
+      "j1w8by2BQaNVUb5EkwDdDsZ2Bcj2": {
+        "bio": "Impresario du Bonheur au Travail et Chief Happiness Officer de ma propre vie.\n\nJ’accompagne les femmes et les hommes actifs à la découverte des mécanismes sous-jacents du bien-être individuel et je les amène à cultiver une nouvelle vision du travail pour leur permettre de retrouver du plaisir et de l’équilibre dans leur quotidien professionnel.\n\nJ’interviens dans les entreprises et auprès des particuliers à travers des conférences et des ateliers en présentiel. Je propose également des ateliers pratique en ligne pour expérimenter et avancer à son propre rythme sur le chemin du bonheur au travail.",
+        "company": null,
+        "country": "Montpellier, France",
+        "name": "Julie Artis",
+        "photoUrl": "https://pbs.twimg.com/profile_images/988093465568432129/-2Sl9a_J_400x400.jpg",
+        "shortBio": "Consultante bien-être au travail par passion | Chief Happiness Officer engagée",
+        "socials": [{
+          "link": "https://twitter.com/julieartis",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Consultante bien-être au travail"
+      },
+      "0rNZujyWZhWZkxHWh7NZdnLv2873": {
+        "bio": "CTO de Zenika Nantes, Julien est aussi Google Developer Expert Cloud. Il a co-fondé en Janvier 2011 le GDG Nantes, une communauté de développeurs des technologies Google et organise chaque année le DevFest Nantes.",
+        "shortBio": "CTO de Zenika Nantes & Google Developer Expert Cloud",
+        "company": "Zenika",
+        "companyLogoUrl": "/images/logos/zenika.png",
+        "country": "Nantes",
+        "name": "Julien Landuré",
+        "photoUrl": "https://lh5.googleusercontent.com/-BrUtXil2gXA/AAAAAAAAAAI/AAAAAAAArDA/X8QWXTZ-ZrA/photo.jpg",
+        "socials": [{
+          "link": "https://github.com/jlandure",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/jlandure",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "CTO"
+      },
+      "VzO198n3jiUG2I5BxnRGX0kp0xu2": {
+        "bio": "Chef de projet Open Data chez Montpellier Méditerranée Métropole.\nDocteur en géographie: Open Data, Neogeography, Geoweb",
+        "shortBio": "Chef de projet Open Data chez Montpellier Méditerranée Métropole.\nDocteur en géographie: Open Data, Neogeography, Geoweb",
+        "company": "Montpellier Méditerranée Métropole",
+        "companyLogoUrl": "https://upload.wikimedia.org/wikipedia/fr/0/0f/MONTPELLIER_MEDITERRANEE_METROPOLE.png",
+        "country": "France",
+        "name": "Jérémie Valentin",
+        "title": "Chef de projet Open Data",
+        "photoUrl": "https://media.licdn.com/dms/image/C4D03AQEjtGXZ-z8byw/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=uOMQeAPhAysPf9eu0QABglDCUG9PV0oKhOmPDhGpozg",
+        "socials": [{
+          "icon": "linkedin",
+          "name": "linkedin",
+          "link": "https://www.linkedin.com/in/j%C3%A9r%C3%A9mie-valentin-45231115/?originalSubdomain=fr"
+        }],
+        "title": "Chef de projet Open Data"
+      },
+      "leVEVOLM3HfPtzVfQA7WTWyQwoI3": {
+        "bio": "",
+        "company": null,
+        "country": "France",
+        "name": "Jérémy Rouanet",
+        "photoUrl": "https://lh5.googleusercontent.com/-63xnsIvQtFQ/AAAAAAAAAAI/AAAAAAAAAAc/APnbBAIlFUo/photo.jpg",
+        "socials": [],
+        "title": null
+      },
+      "zoyriE2DMHXyKCSewITYQwlffO83": {
+        "bio": "Software crafter, XP fan, DDD addict, Event stormer, Rugby player, father of 2",
+        "shortBio": "Software crafter",
+        "company": "FretLink",
+        "companyLogoUrl": "/images/logos/fretlink.jpg",
+        "country": "Montpellier, France",
+        "name": "Jérôme Avoustin",
+        "photoUrl": "https://pbs.twimg.com/profile_images/1059339172144705536/LVFiFt9l_normal.jpg",
+        "socials": [{
+          "link": "https://github.com/rehia",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/JeromeAvoustin",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Software crafter"
+      },
+      "rDKV0gUOk0O4WU9tpknPAngMF9A3": {
+        "bio": "Google Developer Expert on Google Cloud, I am above all passionate about tech, languages, infrastructure, and automation. \n\nJava, Kotlin, Javascript or TypeScript are my day-to-day languages. I deploy all of those on the Google Kubernetes Engine with the Continuous Integration of Gitlab 🚀. \n\nAddict of agility and devops, some of my work was to help teams to follow those philosophies. From the analysis of the code quality (with code-review or static analysis tool) to the setup of unit or end-to-end tests and ending by the continuous deployment of the application directly on the Google Cloud platform. \n\nMy mantra is to go to production as soon as possible! In my activity in Stack Labs and also in my personal time, I contribute on open source projects (Spring boot, Spring Security, Angular, Protractor, Jest schematics for Angular, NgxOpenlayers...). . \n\nI'm involved in the GDG Toulouse, on the organization part (for the video capture part) and to provide some talks too. Following that, I'm also into the DevFest Toulouse team since day 1. I'm mainly managing the website during the Devfest season. Thanks to that, I became the first external contributor to the GDG-X/hoverboard project. \n\nI'm currently CTO (and one of the founder) of Stack Labs, a company specialized in architecture and development of cloud solution. I supervise about twenty passionate and talented developers in their missions and during our internal events",
+        "shortBio": "CTO & co-founder at Stack Labs",
+        "companyLogoUrl": "/images/logos/stacklabs.png",
+        "company": "Stack Labs",
+        "country": "Toulouse, France",
+        "name": "Kevin Davin",
+        "photoUrl": "https://media.licdn.com/dms/image/C4D03AQGMKKOF2a9IXg/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=Q38xCLZdKMdT7eEnu_mALvc7l-dseQXD8OlQbmNW4vc",
+        "socials": [{
+          "link": "https://github.com/davinkevin",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/davinkevin",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "CTO & co-founder"
+      },
+      "VeBTP8lqOYaXBCpwTlGjBW2n1yH2": {
+        "bio": "Laurent Grangeau is a Cloud Solution Architect with more than 10+ years of experience. Former Java developer, he has since developed in .NET, with Agile and DevOps mindsets. He has been experimenting with cloud providers for more than 5+ years. Docker enthusiast from the beginning, he has experienced with building microservices and distributed systems. He loves to automate things and run distributed applications at scale.",
+        "shortBio": "Cloud Solution Architect at Sogeti",
+        "company": "Sogeti",
+        "companyLogoUrl": "/images/logos/sogeti.png",
+        "country": "Paris, France",
+        "name": "Laurent Grangeau",
+        "photoUrl": "https://avatars3.githubusercontent.com/u/4910715?v=4",
+        "socials": [{
+          "link": "https://github.com/laurentgrangeau",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/laurentgrangeau",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Cloud Solution Architect"
+      },
+      "4ik1uitpI4UlyflNSsF3IqoMCi53": {
+        "bio": "Proud dad and software automation engineer @airbusgeo. 🌟: Typescript, Angular, Golang, Gitlab, GCP... Also DIY IOT fanatic: Arduino, MQTT, 3D printing.",
+        "shortBio": "Software automation engineer @airbusgeo",
+        "company": "Airbus Defence and Space",
+        "companyLogoUrl": "/images/logos/airbus-defence.png",
+        "country": "Toulouse, France",
+        "name": "Logan Weber",
+        "photoUrl": "https://lh5.googleusercontent.com/-C_sUtM9ZrXg/AAAAAAAAAAI/AAAAAAAAcXA/0yHm3ULHTWw/photo.jpg",
+        "socials": [{
+          "link": "Neonox31",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "@Neonox31",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Software automation engineer"
+      },
+      "6gcb9OjG5cgl14IQBEt5yu4TmTT2": {
+        "bio": "# -- English version --  \nLudovic felt into _DevOps_ in 2004 with first _Infra as Code_ deployments on _bare-metal_ blade servers. He's found of empowering project teams through automated tools and friendly collaboration, and then welcome `Docker` and `Kubernetes` as the ultimate tools to leverage his favorite practice. Through meetups, conferences and forums, he shares his love for _cloud_, _infra as code_, _devops_ and performance topics. \n\n# -- French version --  \nLudovic est tombé dans le _DevOps_ en 2004, soit… 3 ans avant l'invention du mot _DevOps_. ;-) A l'époque, il fait des déploiements en _Infra as Code_ sur les premiers serveurs blade, en _bare-metal_. Il adore aider les équipes projet à gagner en autonomie via l'usage d'outils et d'automatisation et à travers une collaboration libre et sans contrainte. C'est donc tout naturellement qu'il a accueilli `Docker` et `Kubernetes` comme les outils ultimes pour l'aider dans sa marotte favorite. En _meetups_ comme en conférences, il aime partager son amour pour le _Cloud_, l'_Infra as Code_, le _DevOps_ et les sujets d'optimisation de performance. ",
+        "shortBio": "Head of DevOps/Cloud team at SOAT",
+        "company": "SOAT",
+        "companyLogoUrl": "/images/logos/soat.svg",
+        "country": "Savigny-sur-Orge, France",
+        "name": "Ludovic Piot",
+        "photoUrl": "https://lh4.googleusercontent.com/-e48Nhdo-ubE/AAAAAAAAAAI/AAAAAAAANS0/iek18uwtDEw/photo.jpg",
+        "socials": [{
+          "link": "https://github.com/ludovicpiot",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/lpiot",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Head of DevOps/Cloud"
+      },
+      "kl8dIow7hxP69iJO2VEcAqkwT9L2": {
+        "bio": "Le m4dz est un animal curieux. Au travers de plusieurs vies, il a toujours cherché à transmettre aux autres ce qu'il avait pu comprendre et connaître. Au départ developpeur web (personne n'est parfait), soucieux de vie privée, de l'usage respecteux des données de chacun, et de sécurité, Il est maintenant Tech Evangelist chez alwaysdata. Il essaie de sensibiliser les autres aux enjeux d'aujourd'hui et de demain sur les réalités du numérique. Son livre préféré restera toujours « Alice au Pays des Merveilles ».",
+        "shortBio": "Tech Evangelist at @alwaysdata",
+        "company": "alwaysdata",
+        "companyLogoUrl": "/images/logos/alwaysdata.png",
+        "country": "Paris",
+        "name": "M4dz",
+        "photoUrl": "https://pbs.twimg.com/profile_images/1060870327914369024/iF65Lkie_400x400.jpg",
+        "socials": [{
+          "link": "https://github.com/m4dz",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/m4d_z",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Tech Evangelist"
+      },
+      "Rm5deJSGLjX2ftBToiMch5CWS0T2": {
+        "bio": "Après des études en sciences politiques et management des médias, Marie fait ses armes en marketing web au Monde.fr et chez Canal Plus. Au sein de l’agence Backelite (aujourd'hui Idean) à partir de 2009, elle exerce différents métiers pour les plus grandes marques du digital : chef de projet, conceptrice fonctionnelle, consultante en stratégie mobile, manager conseil… avant de créer et de piloter la Direction de l’Expérience Utilisateur. En 2018, elle rejoint Crédit Agricole Technologies et Services pour mettre en place le département d’UX design et participer à la transformation de l’entreprise IT au service des Caisses régionales du Crédit Agricole.\n",
+        "shortBio": "Leader du Chapitre Expérience Utilisateur à Crédit Agricole Technologies et Services",
+        "company": "Crédit Agricole Technologies & Services",
+        "companyLogoUrl": "/images/logos/ca.png",
+        "country": "Paris",
+        "name": "Marie Petit",
+        "photoUrl": "https://media.licdn.com/dms/image/C5603AQE76G7TCQgBFw/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=GSZpFqd2Z2_tT2MblxNnQcOWCc25EsGrjJWD46OR7Ts",
+        "socials": [{
+          "link": "https://twitter.com/@aglaee",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Leader du Chapitre Expérience Utilisateur"
+      },
+      "QvPhV9AlPdQrqshYOjfAGmVhRXb2": {
+        "bio": "Canadienne passionnée par le comportement humain dans le milieu des technologies, Marie-Pier a étudié les sciences de la communication à l'Université de Montréal. Aujourd'hui UX Designer chez Genapi, elle se spécialise principalement sur les méthodologies de recherche ethnographique et la facilitation de groupe. Organisatrice de meetups FLUPA, elle a animés de nombreux ateliers UX sur Montpellier depuis maintenant 2 ans. Sa mission aujourd'hui? Trouver des méthodes pour faciliter la communication de groupe dans les équipes d'innovation afin de développer des produits numériques centrés utilisateurs de haute qualité.\n",
+        "company": "Genapi",
+        "companyLogoUrl": "/images/logos/Logo_GB_original.png",
+        "country": "Montpellier, France",
+        "name": "Marie-Pier Pipon-Lavoie",
+        "photoUrl": "https://media.licdn.com/dms/image/C5103AQHEIfn-TEhPYA/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=-CAsDHkEAWP1IOGSKWvGYiZtEMWffRXmukE03bdS9X8",
+        "shortBio": "Ergonome/Designer UX à GenApi",
+        "socials": [],
+        "title": "Ergonome/Designer UX"
+      },
+      "WsFwYGpA6WcR4mCOahRGHiNQt5v1": {
+        "bio": "Développeuse freelance iOS et Web, passionnée par la tech depuis 8 ans, je suis aussi co-fondatrice de Maplr : société spécialisée en mobilité internationale des développeurs(euses) vers le Canada.\nJ'accompagne les développeurs(euses) dans leur projet d'expatriation de A à Z (analyse du projet, recherche d'emploi, visa, relocalisation et intégration sur place). ",
+        "shortBio": "Co-fondatrice de Maplr",
+        "company": "Maplr",
+        "companyLogoUrl": "/images/logos/maplr.png",
+        "country": "Montpellier",
+        "name": "Marion Félix",
+        "photoUrl": "https://media.licdn.com/dms/image/C5603AQFbyKkI2B-w5w/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=-NE8E4KhmvfZxAFY6iKiTNLVvmNSc08KicaeT6FV3BI",
+        "socials": [{
+          "link": "https://twitter.com/marionflex",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Co-fondatrice"
+      },
+      "WDm2hCGOlLfIYHPHjaEry7aIpbT2": {
+        "bio": "Mathieu Ancelin est développeur chez SERLI, spécialisé dans la programmation web avec Scala, Java, JavaScript, des streams, de la data et cloud. Et s'il y du React, c'est encore mieux ;-) Mathieu est le lead développeur de quelques projets open-source comme ReactiveCouchbase ou Otoroshi, un reverse-proxy moderne avec de l'api managment léger. Vous pouvez régulièrement le croiser au Poitou-Charentes JUG.",
+        "company": "SERLI",
+        "shortBio": "Software engineer chez SERLI",
+        "companyLogoUrl": "/images/logos/serli.png",
+        "country": "Poitiers",
+        "name": "Mathieu Ancelin",
+        "photoUrl": "https://avatars3.githubusercontent.com/u/277206?v=4",
+        "socials": [{
+          "link": "https://github.com/mathieuancelin",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/TrevorReznik",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Software engineer"
+      },
+      "zPNPb3IvUgVc5rJ1vuik7tIuQnw2": {
+        "bio": "Développeur et formateur indépendant, co-organisateur de SoCraTes-Fr et F# addicte, j'aime construire des solutions pertinentes pour résoudre des problèmes.",
+        "shortBio": "Développeur à Softcraft, formateur indépendant, co-organisateur de SoCraTes-Fr et F# addicte",
+        "companyLogoUrl": "/images/logos/softcraft.png",
+        "company": "SOFTCRAFT",
+        "country": "Paris",
+        "name": "Mickael Metesreau",
+        "photoUrl": "https://media.licdn.com/dms/image/C4D03AQFGN7Y1C2yQlQ/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=RRUdxCsxjUWgsFKcg48eI6RuktTODfNn7uRe3Wc0kjI",
+        "socials": [{
+          "link": "https://github.com/MiKaDoO",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/MiKaDo_O",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Développeur"
+      },
+      "NQLD49SQ4gUOxdIJzFiOtAqwMvK2": {
+        "bio": "Directeur d’études/ UX Researcher. 18 années d’expérience dans les études marketing et les tests utilisateurs d’interfaces numériques (évaluation du parcours de navigation, du contenu, de l’ergonomie, des fonctionnalités, compréhension de l’offre, évaluation de l'UX de manière globale, hors interface…). \nCo-fondateur de l’institut d’étude Personae User Lab en 2012 (aujourd’hui le lab de l’agence Intuiti). Ex-directeur d’étude OpinionWay/LH2/TMO Régions. \nCréateur du baromètre Smartphone Street Observer (observation et analyse du comportement lié au smartphone in situ). \nPrésident de l’association Flupa (et organisateur de meetup UX depuis 2014 à Nantes). \nEnseignant et intervenant dans différentes écoles (Paris 2 Assas, ECV Digital Nantes, Digital Campus Rennes, Audencia, Wis school, IAE Nantes) et conférences. \nDiplômé d’un master de Sémiologie et d’un master Communication et multimédia/chef de projet web",
+        "company": "Intuiti",
+        "companyLogoUrl": "/images/logos/Intuiti.png",
+        "country": "Nantes",
+        "name": "Nabil THALMANN",
+        "photoUrl": "https://pbs.twimg.com/profile_images/457216915451432960/iLEyzYRb_400x400.jpeg",
+        "shortBio": "Directeur d’études/ UX Researcher à Intuiti",
+        "socials": [{
+          "link": "https://twitter.com/nabilthalmann",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Directeur d’études/ UX Researcher"
+      },
+      "TohrkKsx0XQlkAXwnGrfAA3LOM03": {
+        "bio": "Un data scientist passionné par le Machine Learning et la science en général. Après un doctorat en statistiques Bayésiennes, j'ai choisi de me lancer dans le monde fascinant de la data science. Depuis 2018, je suis data scientist chez Adagio.",
+        "company": "Adagio",
+        "shortBio": "Data scientist à Adagio",
+        "companyLogoUrl": "/images/logos/adagio-labs.png",
+        "country": "Montpellier",
+        "name": "Nicolas Duforet",
+        "photoUrl": "https://media.licdn.com/dms/image/C4D03AQH4r-mI2i5tVg/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=fBb3S-Rdpj0iR2nFkPdribYE534LM4H4SVZdKqvERvI",
+        "socials": [{
+          "link": "https://twitter.com/NDuforet",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Data scientist"
+      },
+      "977YQDolbxde0ito7I2dUiee2ap1": {
+        "bio": "Développeur depuis plus de 10 ans, Nicolas est actuellement consultant et formateur chez Zenika Nantes.\n\nAprès de trop longues années de développement Java, il prend le contrepied et s'intéresse maintenant à tout ! Sa quête de nouveauté l'amène à explorer les mondes du front avec ReactJS, du NoSQL avec MongoDB, et des langages modernes tels que Go(lang) ou encore Kotlin.\n\nSon goût du partage le pousse à devenir formateur, notamment sur Go(lang), et à se lancer dans l'open source en créant [immutad●t](https://github.com/Zenika/immutadot), une bibliothèque JavaScript pour manipuler les structures immuables imbriquées.",
+        "shortBio": "Consultant et formateur chez Zenika Nantes",
+        "company": "Zenika",
+        "country": "Nantes, France",
+        "companyLogoUrl": "/images/logos/zenika.png",
+        "name": "Nicolas Lepage",
+        "photoUrl": "https://lh6.googleusercontent.com/-96ltg2kr4oc/AAAAAAAAAAI/AAAAAAAAAG4/bk0-E9b9kuU/photo.jpg",
+        "socials": [{
+          "link": "https://github.com/nlepage",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/njblepage",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Consultant et formateur"
+      },
+      "wWgewscLgKXvaA4zjRvt3fQj8f23": {
+        "bio": "CTO  depuis quelques années.\n\nD’abord d'une startup interne dans une grand banque puis dans une ESN pour la transformer en ESN 2.0 (...) \n\nFan d’Elixir, de Programmation Fonctionnel, et d'Agilité.\n\nJe pense que l'IT en France a raté pas mal de virage technologique et méthodologique et n'est pas en train de prendre de virage du tout... j'essaye d’éduquer mes clients et collègues pour que ça change !\n\n[LinkedIn](https://www.linkedin.com/in/savoisn/)",
+        "shortBio": "CTO à TalanLabs",
+        "company": "TalanLabs",
+        "companyLogoUrl": "https://www.talan.com/wp-content/uploads/2016/02/logo-talanlabs.png",
+        "country": "Chantilly, France",
+        "name": "Nicolas Savois",
+        "photoUrl": "https://avatars3.githubusercontent.com/u/576605?v=4",
+        "socials": [{
+          "link": "https://github.com/savoisn",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/nicosavois",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "CTO"
+      },
+      "qOI4EskiBthWo2hEfgaP9yDgHQD2": {
+        "bio": "Technical Leader à la Société générale, avec plus de 10 d'expériences, je m’intéresse aux Software Craftsmanship, Devops et tout ce qui se termine par DD.",
+        "company": "SOCIETE GENERALE",
+        "companyLogoUrl": "/images/logos/societegeneral.png",
+        "country": "PARIS",
+        "name": "Nizar KEFI",
+        "photoUrl": "https://pbs.twimg.com/profile_images/378800000693584620/67a791df046ab89c92eb27989cb342a6_normal.jpeg",
+        "shortBio": "Technical leader à la Société générale",
+        "socials": [{
+          "link": "https://github.com/6kV",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/nkefi",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Technical leader"
+      },
+      "rFqizov3LlVh55Zbco4ppxmARkD2": {
+        "bio": "Senior Software Engineer at Ubisoft",
+        "shortBio": "Senior Software Engineer at Ubisoft",
+        "company": "Ubisoft",
+        "companyLogoUrl": "/images/logos/6810_ubisoft-prev-500x500.png",
+        "country": "Montpellier",
+        "name": "Olivier Cado",
+        "photoUrl": "https://media.licdn.com/dms/image/C4D03AQEHIYG4gfrLmg/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=hFkwyiEpFKy43vVET2tY0o8QhkYISe3VaC8SpFq6H8o",
+        "socials": [{
+          "link": "https://github.com/Gwened",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/ocado3456",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Senior Software Engineer"
+      },
+      "DNlgKL7C5DNK0y48Lf7ylPB4bmk2": {
+        "bio": "Developer Relation Manager at Microsoft and Google Developer Expert in Web Technologies. I love to share knowledge (and love) among developers and people in general.",
+        "company": "Microsoft",
+        "companyLogoUrl": "/images/logos/logo-microsoft.png",
+        "country": "Paris, France",
+        "name": "Olivier Leplus",
+        "photoUrl": "https://lh4.googleusercontent.com/-lZ1NmzauJJc/AAAAAAAAAAI/AAAAAAAAgeg/Jaiqf1L_EPM/photo.jpg",
+        "shortBio": "Développeur Relations @Microsoft - Google Developer Expert",
+        "socials": [{
+          "link": "https://github.com/tagazok",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/olivierleplus",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Développeur Relations, GDE"
+      },
+      "zQ0mhj745ZgtNDL3QL6pVT316ai2": {
+        "bio": "Geek, ex-nerd repenti, je code, je teste, je bricole, je soude. Software Craftsman, Coach, je suis libriste dans l'âme et suis donc très impliqué dans le mouvement de logiciels libres.",
+        "shortBio": "Software Craftsman à Suricats Consulting",
+        "company": "Suricats Consulting",
+        "companyLogoUrl": "/images/logos/suricats.png",
+        "country": "Massy, France",
+        "name": "Olivier PONCET",
+        "photoUrl": "https://avatars2.githubusercontent.com/u/29702924?v=4",
+        "socials": [{
+          "link": "https://twitter.com/ponceto91",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Software Craftsman"
+      },
+      "Vh46wnWADtXkX9Hjqcfli1Eqwqy1": {
+        "bio": "#### Jobs\n- TAM at GitLab\n- Boss at Bots.Garden\n- Chief Stickers Officer at Clever Cloud\n\n#### Quoi d'autre?\n- Plat préféré: Pot au feu\n- Cocktail préféré: Spritz\n- Activités:  Geek, Pêche, Cuisine, Série TV\n- Signe particulier: grosse addiction aux emojis\n- ScalaIO team member\n- GDG Cloud et IOT Lyon co leader\n- BlendWebMix comité éditorial technique\n\n\n",
+        "shortBio": "TAM at GitLab, Boss at Bots.Garden, Chief Stickers Officer at Clever Cloud",
+        "company": "Bots.Garden",
+        "companyLogoUrl": "/images/logos/gitlab.png",
+        "country": "Lyon, France",
+        "name": "Philippe Charrière",
+        "photoUrl": "/images/people/phCharriere.jpg",
+        "socials": [{
+          "link": "https://github.com/k33g",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/k33g_org",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "TAM, CSO, Boss"
+      },
+      "0B4WN6hn3kghsIqMicYjfa5Wt7k2": {
+        "bio": "Développeur, DevOps, Lead Dev, IntelliJ fanboy, … autant de termes me définissant, mais avant tout une personne qui aime créer par le code mais qui doute (ne dit-on pas ”tester c’est douter” ? ). Java, Kotlin ... mais principalement tout ce qui touche au backend ... (la magie noire du CSS pour moi, non merci ... )",
+        "company": "Saagie",
+        "companyLogoUrl": "/images/logos/saagie.png",
+        "country": "Rouen",
+        "name": "Pierre LERESTEUX",
+        "photoUrl": "https://lh3.googleusercontent.com/-j3Ueavrt96M/AAAAAAAAAAI/AAAAAAAAR_I/V9bOf2Cnozg/photo.jpg",
+        "shortBio": "Dev/Agile/Ops à Saagie",
+        "socials": [{
+          "link": "https://twitter.com/pierreLeresteux",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Dev/Agile/Ops"
+      },
+      "CSZyjAMftrfCaH12X1yReJvBYy93": {
+        "bio": "Software engineer, Apple technologies expert at SOAT, Swift & iOS programming, iOS Tech leader at Chanel, founder of a couple cool things, author of Fear the ponies coding dojo.",
+        "shortBio": "Software engineer at SOAT, iOS tech leader at Chanel",
+        "company": "SOAT",
+        "companyLogoUrl": "/images/logos/soat.png",
+        "country": "Paris, France",
+        "name": "Raphaël Wach",
+        "photoUrl": "https://media.licdn.com/dms/image/C5603AQGwNafa8acV6g/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=W3rxmnraAxfXV6tOUXhHrDaS1WrtT3WlyrJr3ywSGeI",
+        "socials": [{
+          "link": "https://twitter.com/raphaelwach",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Software engineer"
+      },
+      "yaTaDtCKwfZTe2hDdiRAhneXOy33": {
+        "bio": "Software engineer at Teads",
+        "shortBio": "Software engineer at Teads",
+        "company": "Teads",
+        "companyLogoUrl": "/images/logos/3.svg",
+        "country": "France",
+        "name": "Roch Dardie",
+        "photoUrl": "https://media.licdn.com/dms/image/C5103AQELBR4R9yx-AA/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=u9vtjaNPdiWUuKDKag0zmqKVIMDjedYT11m_xKK0p5k",
+        "socials": [],
+        "title": "Software engineer"
+      },
+      "x0K8lynbiudPDN33GBLvvs4HkCv1": {
+        "bio": "Senior Network Programmer à Ubisoft",
+        "company": "Ubisoft",
+        "companyLogoUrl": "/images/logos/6810_ubisoft-prev-500x500.png",
+        "country": "Montpellier, France",
+        "name": "Rudy Pons",
+        "photoUrl": "https://avatars3.githubusercontent.com/u/306744?v=4",
+        "shortBio": "Senior Network Programmer à Ubisoft",
+        "socials": [{
+          "link": "https://twitter.com/ilodenarp",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Senior Network Programmer"
+      },
+      "Dkx1ZqVXOUb3UT3sVPNiBpFopto1": {
+        "bio": "Samuel is a Principal Engineer at Intel's Open Source Technology Center, where he currently leads the Kata Containers and Clear Containers project. He's also the Linux kernel NFC maintainer and one of the CRI-O maintainers. In previous lives Samuel worked on networking and connectivity, maintaining pieces of the kernel, entire wireless stacks and dealing with obsolete protocols like infrared. He also worked on scaling and lowering production costs for Android by building the IRDA stack. Samuel holds a MS in Computer Science and Automation from Ecole des Mines de Paris.",
+        "shortBio": "Principal software engineer at Intel",
+        "company": "Intel",
+        "companyLogoUrl": "",
+        "country": "France",
+        "name": "Samuel Ortiz",
+        "photoUrl": "https://avatars2.githubusercontent.com/u/1043863?v=4",
+        "socials": [{
+          "link": "https://github.com/sameo",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/sameo",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Principal software engineer"
+      },
+      "WguCqxka0kY8cE90xzsHzXmbdpm1": {
+        "bio": "Samy Zarour est ingénieur diplômé de l'ENSAI (école d'ingénieur spécialisée en statistiques).\nIl a de l'expérience en data science, data engineering et développement web.\nNiveau language, il programme depuis 3 ans en Scala, mais il a également réalisé des projets en R, Python et Java.\nIl s'est spécialisé dans le framework Spark, ainsi que dans l'écosystème Big Data (Kafka, Hadoop, Cloud...).\nCe qu'il aime dans son métier: résoudre de manière abstraite des problèmes concrets.",
+        "shortBio": "Big Data Engineer & Data Scientist à TabMo",
+        "company": "TabMo",
+        "companyLogoUrl": "/images/logos/tabmo.png",
+        "country": "Montpellier",
+        "name": "Samy Zarour",
+        "photoUrl": "https://avatars3.githubusercontent.com/u/14804744?v=4",
+        "socials": [{
+          "link": "https://github.com/zaroursamy",
+          "icon": "github",
+          "name": "GitHub"
+        }],
+        "title": "Big Data Engineer & Data Scientist"
+      },
+      "6HmFtonMn8SZ9nTAS6l1WYWEP9o2": {
+        "bio": "Développeur et directeur technique de Zenika Bordeaux, j'interviens pour des missions de conseils et d'expertises. Passionné par tout ce qui touche à la sécurité et à l'intelligence artificielle, j'aime discuter de ces sujets dans des meetups ou des conférences.",
+        "shortBio": "Développeur et directeur technique de Zenika Bordeaux",
+        "company": "Zenika",
+        "companyLogoUrl": "/images/logos/zenika.png",
+        "country": "Bordeaux, France",
+        "name": "Sebastien Descamps",
+        "photoUrl": "https://media.licdn.com/dms/image/C5103AQG2zJgisPQ4gg/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=paABw6_KgLTjBSMCObO2tBAOaMESs3Bd9de0XAgXVC8",
+        "socials": [{
+          "link": "https://github.com/sebastienD",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/seb_express",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "CTO Zenika Bordeaux"
+      },
+      "18IrtZT8ECbkgDtf3HYzvdyuq562": {
+        "bio": "Recruteuse informatique à mon compte (Build RH), entrepreneuse sociale en tant que Présidente de l'association la Clinique RH et Co-fondatrice de l'entreprise Idée for Good (conseil en innovation sociale), militante de la qualité avec le lancement du mouvement recruitment craftsmanship (https://www.meetup.com/fr-FR/RecruitmentCraftsmanship/), je suis souvent souvent visionnaire avec une bière, j'adore faire réfléchir à l'apéro, partager mes idées et mes blagues au dessert, jusqu'à en faire des jeux de maux",
+        "shortBio": "Recruteuse informatique à mon compte (Build RH)",
+        "company": "BUILD RH",
+        "companyLogoUrl": "",
+        "country": "Paris",
+        "name": "Shirley Almosni Chiche",
+        "photoUrl": "https://pbs.twimg.com/profile_images/805113530433339393/PCJQ-_sP_normal.jpg",
+        "socials": [{
+          "link": "https://twitter.com/shirleyalmosni",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Recruteuse informatique"
+      },
+      "rLjKZWVoncNmVqbM4lVVZpU6pjs1": {
+        "bio": "Committer Spring Framework, Kotlin @ Spring et organisateur de la conférence MiXiT.",
+        "shortBio": "Spring Framework committer at Pivotal",
+        "company": "Pivotal",
+        "companyLogoUrl": "/images/logos/pivotal.png",
+        "country": "Lyon, France",
+        "name": "Sébastien Deleuze",
+        "photoUrl": "https://pbs.twimg.com/profile_images/770349799036026880/snZVTigC_normal.jpg",
+        "socials": [{
+          "link": "https://github.com/sdeleuze",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/sdeleuze",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Spring Framework committer"
+      },
+      "VUxPhy4Ad2VMU8EyphhUom3RSan1": {
+        "bio": "Co-organisateur du meetup __*DDD FR*__   mais aussi du meetup __*BDD Paris*__.    Speaker international (mais avec un accent de ...).\n\nMalgré une certaine passion pour le développement logiciel (écoles XP & DDD) ainsi que pour le travail en équipe, Thomas ne désespère pas de trouver un autre moyen d’expression ou sa créativité sera -il l’espère- un peu plus reconnue.\n\n\n \nAprès s’être essayé en vain à la musique, au Tai-Chi-Chuan, à la cuisine, au poker-live et à la philosophie… Thomas le sait : un jour il sera astrophysicien ou même publicitaire (d’ailleurs il offrira -20% sur l’esprit de la forêt lors de son prochain talk).\n",
+        "company": "42 skillz",
+        "companyLogoUrl": "/images/logos/42skillz.png",
+        "shortBio": "Change agent (powered by Software). Badass developer & Co-founder of 42skillz",
+        "country": "Paris, France",
+        "name": "Thomas Pierrain",
+        "photoUrl": "https://media.licdn.com/dms/image/C5603AQG8pCd2-O4tHQ/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=6fXs_5HHK9yTypGlR07Q2IjA5v9HWM5krUnLYkfm53Y",
+        "socials": [{
+          "link": "https://github.com/tpierrain",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/tpierrain",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Developer & co-founder"
+      },
+      "fEGtvUISb6VrUv4hpaHxRnw8hFZ2": {
+        "bio": "I love science and I love data! After finishing a PhD in genetic engineering, I continued my quest for discovering new patterns through data science and machine learning. I currently work as a Data Scientist and I play with machine learning algorithms on my free time. Someday, I wish to leverage artificial intelligence and genetics to improve people's life.",
+        "shortBio": "I love science and I love data! After finishing a PhD in genetic engineering, I continued my quest for discovering new patterns through data science and machine learning...",
+        "company": "JEMS Datafactory",
+        "companyLogo": "/images/logos/JEMS-Datafactory.png",
+        "companyLogoUrl": "/images/logos/JEMS-Datafactory.png",
+        "country": "Paris, France",
+        "featured": true,
+        "name": "Tiffany Souterre",
+        "photo": "/images/people/tiffany_souterre.jpg",
+        "photoUrl": "/images/people/tiffany_souterre.jpg",
+        "socials": [{
+          "icon": "github",
+          "link": "https://github.com/amagash",
+          "name": "GitHub"
+        }, {
+          "icon": "twitter",
+          "link": "https://twitter.com/tiffanysouterre",
+          "name": "Twitter"
+        }],
+        "order": 0,
+        "title": "Data Engineer at JEMS datafactory"
+      },
+      "Gxnp9MqHVYS8Zqv5z6nr8rx8Dpy2": {
+        "bio": "Software Engineer, enjoying and using Scala at work for ~3 years now.  \nLove working on scalability and high availability.  \nThink we can improve hard skills by tackling soft skills.",
+        "company": "Teads",
+        "companyLogoUrl": "/images/logos/3.svg",
+        "country": "Montpellier, France",
+        "name": "Tristan Sallé",
+        "photoUrl": "https://pbs.twimg.com/profile_images/887002639258574848/_qCdCmz3_400x400.jpg",
+        "shortBio": "Software Engineer à Teads",
+        "socials": [{
+          "link": "https://github.com/Elyrixia",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/TristanSoullz",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Software Engineer"
+      },
+      "bX6pDW3oCgV4bXcI7THJXU0KNWs2": {
+        "bio": "Tugdual Grall est Director of Product Management chez Red Hat dans l'équipe \"Dev Tools\" ou il participe a la définition de l'Experience Développeur des outils comme OpenShift/Kubernetes et les offres Middleware (JBoss)\n\nAvant de travailler chez Red hat, \"Tug\", était Technical Evangelist chez MapR, MongoDB et Couchbase. Tug a également travaillé comme CTO chez eXo Platform, et comme Product Manager et Développeur sur la platform JavaEE d'Oracle.\n\nTugdual est également co-fondateur du Nantes JUG (Java Users Group) qui réunit tous les mois depuis 2008 les développeurs et architectes de la région nantaise.",
+        "company": "Red Hat",
+        "companyLogo": "/images/logos/redhat.png",
+        "companyLogoUrl": "/images/logos/redhat.png",
+        "country": "Nantes, France",
+        "featured": true,
+        "name": "Tugdual Grall",
+        "photo": "/images/people/tugdual_grall.png",
+        "photoUrl": "/images/people/tugdual_grall.png",
+        "shortBio": "Director of Product Management chez Red Hat...",
+        "socials": [{
+          "icon": "github",
+          "link": "https://github.com/tgrall",
+          "name": "GitHub"
+        }, {
+          "icon": "twitter",
+          "link": "https://twitter.com/tgrall",
+          "name": "Twitter"
+        }],
+        "order": 0,
+        "title": "Director of Product Management - Developer tools & Experience at Red Hat"
+      },
+      "ZPLUIeEJC6OqiGltQV1BgXpoXU62": {
+        "bio": "Co-organisateur de la communauté software craftsmanship de Paris et de la non-conférence SoCraTes France, le partage de savoir est au cœur de mon état d'esprit.\nAmoureux de la programmation fonctionnelle et du code élégant, le plaisir de programmer et d'expliquer cet art ont fait de moi un crafter passionné.",
+        "shortBio": "CTO de Zenika, co-organisateur de la communauté software craftmanship & SoCraTes France, ...",
+        "company": "Zenika",
+        "companyLogo": "/images/logos/zenika.png",
+        "companyLogoUrl": "/images/logos/zenika.png",
+        "country": "Paris, France",
+        "featured": true,
+        "name": "Xavier Detant",
+        "photo": "/images/people/Xavier_Detant.jpg",
+        "photoUrl": "/images/people/Xavier_Detant.jpg",
+        "socials": [{
+          "icon": "github",
+          "link": "https://github.com/FaustXVI",
+          "name": "GitHub"
+        }, {
+          "icon": "twitter",
+          "link": "https://twitter.com/XDetant",
+          "name": "Twitter"
+        }],
+        "order": 0,
+        "title": "CTO de Zenika"
+      },
+      "9IyJKz9JQpRk2JPllAQ0kMA3yYV2": {
+        "bio": "Je suis Data Engineer chez Margo Bank. \nJ'aime beaucoup la programmation fonctionnelle statiquement typé et le web en règle général. \nJe m'occupe du Meetup \"LilleFP\", un meetup dédié à la programmation fonctionnelle à Lille.",
+        "company": "Margo Bank",
+        "companyLogoUrl": "/images/logos/margo-bank.png",
+        "country": "Lille, France",
+        "name": "Xavier Van de Woestyne",
+        "photoUrl": "https://avatars2.githubusercontent.com/u/5732466?v=4",
+        "shortBio": "Data Engineer à Margo Bank",
+        "socials": [{
+          "link": "https://github.com/xvw",
+          "icon": "github",
+          "name": "GitHub"
+        }, {
+          "link": "https://twitter.com/vdwxv",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Data Engineer"
+      },
+      "8zOOs7IFvcaR2eld6O0svwq5tRS2": {
+        "bio": "Coach et formateur Agile, j'accompagne les équipes et les organisations dans leur transformation Agile afin de favoriser la production de valeur, l'auto-organisation, la cohésion d'équipe et le time to market.",
+        "company": "SmartView",
+        "companyLogoUrl": "/images/logos/Logo-smartview-noir-800.png",
+        "country": "Montpellier, France",
+        "name": "Yassine Zakaria",
+        "photoUrl": "https://lh4.googleusercontent.com/--5nw4ChZ0fs/AAAAAAAAAAI/AAAAAAAAANc/Is9OZoes8Ew/photo.jpg",
+        "shortBio": "Consultant associé SmartView - Coach Agile : Formation & accompagnement à la transformation Agile.",
+        "socials": [{
+          "link": "https://twitter.com/yassinezakaria",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Consultant associé SmartView - Coach Agile"
+      }
+    },
+
+
+
+
+
+  "team": [{
+    "members": [{
+      "name": "Loïc Talon",
+      "photoUrl": "/images/people/loic_talon.jpg",
+      "socials": [{
+          "icon": "twitter",
+          "link": "https://twitter.com/loic_talon/",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://fr.linkedin.com/in/loictalon",
+          "name": "LinkedIn"
+        }
+      ],
+      "title": "",
+      "order": 0
     }, {
-      "name" : "Benjamin Davy",
-      "photoUrl" : "/images/people/benjamin_davy.jpeg",
-      "socials" : [ {
-        "icon" : "linkedin",
-        "link" : "https://www.linkedin.com/in/benjamin-davy-a52a02b/",
-        "name" : "LinkedIn"
-      } ],
-      "title" : "",
-      "order" : 6
+      "name": "Estelle Landry",
+      "photoUrl": "/images/people/estelle_landry.jpg",
+      "socials": [{
+          "icon": "twitter",
+          "link": "https://twitter.com/estelandry/",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://fr.linkedin.com/in/estelle-landry-61866b71",
+          "name": "LinkedIn"
+        }
+      ],
+      "title": "",
+      "order": 1
     }, {
-      "name" : "Emmanuelle Cohet",
-      "photoUrl" : "/images/people/emanuel_cohet.jpg",
-      "socials" : [ {
-        "icon" : "linkedin",
-        "link" : "https://www.linkedin.com/in/emmanuelle-battata-3897821a/",
-        "name" : "LinkedIn"
-      } ],
-      "title" : "",
-      "order" : 7
+      "name": "Jérémy Barthe",
+      "photoUrl": "/images/people/jeremy_barthe.jpg",
+      "socials": [{
+          "icon": "twitter",
+          "link": "https://twitter.com/jeremyb_/",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://fr.linkedin.com/in/jeremybarthe",
+          "name": "LinkedIn"
+        }
+      ],
+      "title": "",
+      "order": 2
     }, {
-      "name" : "Hugo Gresse",
-      "photoUrl" : "/images/people/hugo_gresse.jpg",
-      "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/HugoGresse",
-        "name" : "Twitter"
+      "name": "Chloé Pellen",
+      "photoUrl": "/images/people/chloe_pellen.jpg",
+      "socials": [{
+          "icon": "twitter",
+          "link": "https://twitter.com/ChloePellen/",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://fr.linkedin.com/in/chloe-pellen-66816162",
+          "name": "LinkedIn"
+        }
+      ],
+      "title": "",
+      "order": 3
+    }, {
+      "name": "Lauriane Gresse",
+      "photoUrl": "/images/people/lauriane_anthony.jpg",
+      "socials": [{
+          "icon": "twitter",
+          "link": "https://twitter.com/LaurianeAnthony/",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://fr.linkedin.com/in/lauriane-gresse-a3696665",
+          "name": "LinkedIn"
+        }
+      ],
+      "title": "",
+      "order": 4
+    }, {
+      "name": "François Teychene",
+      "photoUrl": "/images/people/francois_teychene.jpg",
+      "socials": [{
+          "icon": "twitter",
+          "link": "https://twitter.com/fteychene/",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://fr.linkedin.com/in/fteychene",
+          "name": "LinkedIn"
+        }
+      ],
+      "title": "",
+      "order": 5
+    }, {
+      "name": "Benjamin Davy",
+      "photoUrl": "/images/people/benjamin_davy.jpeg",
+      "socials": [{
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/benjamin-davy-a52a02b/",
+        "name": "LinkedIn"
+      }],
+      "title": "",
+      "order": 6
+    }, {
+      "name": "Emmanuelle Cohet",
+      "photoUrl": "/images/people/emanuel_cohet.jpg",
+      "socials": [{
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/emmanuelle-battata-3897821a/",
+        "name": "LinkedIn"
+      }],
+      "title": "",
+      "order": 7
+    }, {
+      "name": "Hugo Gresse",
+      "photoUrl": "/images/people/hugo_gresse.jpg",
+      "socials": [{
+          "icon": "twitter",
+          "link": "https://twitter.com/HugoGresse",
+          "name": "Twitter"
+        }, {
+          "icon": "website",
+          "link": "https://hugo.gresse.io",
+          "name": "Website"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://fr.linkedin.com/in/hugogresse",
+          "name": "LinkedIn"
+        }
+      ],
+      "title": "",
+      "order": 8
+    }, {
+      "name": "Baptiste Haudegand",
+      "photoUrl": "/images/people/baptiste_haudegand.jpg",
+      "socials": [{
+          "icon": "twitter",
+          "link": "https://twitter.com/Viewtiful_/",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://fr.linkedin.com/in/baptistehaudegand",
+          "name": "LinkedIn"
+        }
+      ],
+      "title": "",
+      "order": 9
+    }, {
+      "name": "Emilien Bajeux",
+      "photoUrl": "/images/people/emilien_bajeux.jpg",
+      "socials": [{
+          "icon": "twitter",
+          "link": "https://twitter.com/miy_1",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://fr.linkedin.com/in/emilien-bajeux-b4835366",
+          "name": "LinkedIn"
+        }
+      ],
+      "title": "",
+      "order": 10
+    }, {
+      "name": "Sadri Gora",
+      "photoUrl": "/images/people/sadri_gora.jpg",
+      "socials": [{
+          "icon": "twitter",
+          "link": "https://twitter.com/hellosadri",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://fr.linkedin.com/in/sadri-gora-360b6a83",
+          "name": "LinkedIn"
+        }
+      ],
+      "title": "",
+      "order": 11
+    }, {
+      "name": "Emmanuelle Chauvot",
+      "photoUrl": "/images/people/emmanuelle_chauvot.jpg",
+      "socials": [{
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/emmanuelle-chauvot",
+        "name": "LinkedIn"
+      }],
+      "title": "",
+      "order": 12
+    }, {
+      "name": "Magali Baude",
+      "photoUrl": "/images/people/magali_baude.jpg",
+      "socials": [{
+          "icon": "twitter",
+          "link": "https://twitter.com/magalibaude",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://fr.linkedin.com/in/magalibaude",
+          "name": "LinkedIn"
+        }
+      ],
+      "title": "",
+      "order": 13
+    }, {
+      "name": "Severine Wiltgen",
+      "photoUrl": "/images/people/nope.png",
+      "title": "",
+      "order": 14
+    }, {
+      "name": "Brice Favre",
+      "photoUrl": "/images/people/brice_favre.jpg",
+      "socials": [{
+        "icon": "twitter",
+        "link": "https://twitter.com/briceatwork",
+        "name": "Twitter"
+      }],
+      "title": "",
+      "order": 15
+    }, {
+      "name": "Julien Champ",
+      "photoUrl": "/images/people/julien-champ.jpg",
+      "socials": [{
+        "icon": "twitter",
+        "link": "https://twitter.com/julien314",
+        "name": "Twitter"
       }, {
-        "icon" : "website",
-        "link" : "https://hugo.gresse.io",
-        "name" : "Website"
-      },
-      {
-        "icon" : "linkedin",
-        "link" : "https://fr.linkedin.com/in/hugogresse",
-        "name" : "LinkedIn" 
-      } ],
-      "title" : "",
-      "order" : 8
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/julienchamp/",
+        "name": "Linked In"
+      }],
+      "order": 16
     }, {
-      "name" : "Baptiste Haudegand",
-      "photoUrl" : "/images/people/baptiste_haudegand.jpg",
-      "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/Viewtiful_/",
-        "name" : "Twitter"
-      },
-      {
-        "icon" : "linkedin",
-        "link" : "https://fr.linkedin.com/in/baptistehaudegand",
-        "name" : "LinkedIn" 
-      } ],
-      "title" : "",
-      "order" : 9
-    }, {
-      "name" : "Emilien Bajeux",
-      "photoUrl" : "/images/people/emilien_bajeux.jpg",
-      "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/miy_1",
-        "name" : "Twitter"
-      },
-      {
-        "icon" : "linkedin",
-        "link" : "https://fr.linkedin.com/in/emilien-bajeux-b4835366",
-        "name" : "LinkedIn" 
-      } ],
-      "title" : "",
-      "order" : 10
-    }, {
-      "name" : "Sadri Gora",
-      "photoUrl" : "/images/people/sadri_gora.jpg",
-      "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/hellosadri",
-        "name" : "Twitter"
-      },
-      {
-        "icon" : "linkedin",
-        "link" : "https://fr.linkedin.com/in/sadri-gora-360b6a83",
-        "name" : "LinkedIn" 
-      } ],
-      "title" : "",
-      "order" : 11
-    }, {
-      "name" : "Emmanuelle Chauvot",
-      "photoUrl" : "/images/people/emmanuelle_chauvot.jpg",
-      "socials" : [ {
-        "icon" : "linkedin",
-        "link" : "https://www.linkedin.com/in/emmanuelle-chauvot",
-        "name" : "LinkedIn"
-      } ],
-      "title" : "",
-      "order" : 12
-    }, {
-      "name" : "Magali Baude",
-      "photoUrl" : "/images/people/magali_baude.jpg",
-      "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/magalibaude",
-        "name" : "Twitter"
-      },
-      {
-        "icon" : "linkedin",
-        "link" : "https://fr.linkedin.com/in/magalibaude",
-        "name" : "LinkedIn" 
-      } ],
-      "title" : "",
-      "order" : 13
-    }, {
-      "name" : "Severine Wiltgen",
-      "photoUrl" : "/images/people/nope.png",
-      "title" : "",
-      "order" : 14
-    }, {
-      "name" : "Brice Favre",
-      "photoUrl" : "/images/people/brice_favre.jpg",
-      "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/briceatwork",
-        "name" : "Twitter"
-      } ],
-      "title" : "",
-      "order" : 15
-    }, {
-      "name" : "Julien Champ",
-      "photoUrl" : "/images/people/julien-champ.jpg",
-      "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/julien314",
-        "name" : "Twitter"
+      "name": "Aurélien Tison",
+      "photoUrl": "/images/people/aurelien_tison.jpg",
+      "socials": [{
+        "icon": "twitter",
+        "link": "https://twitter.com/Aurel_Tyson",
+        "name": "Twitter"
       }, {
-        "icon" : "linkedin",
-        "link" : "https://www.linkedin.com/in/julienchamp/",
-        "name" : "Linked In"
-      } ],
-      "order" : 16
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/aurelien-tison/",
+        "name": "Linked In"
+      }],
+      "order": 17
     }, {
-      "name" : "Aurélien Tison",
-      "photoUrl" : "/images/people/aurelien_tison.jpg",
-      "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/Aurel_Tyson",
-        "name" : "Twitter"
+      "name": "Quentin Boileau",
+      "photoUrl": "/images/people/quentin_boileau.jpeg",
+      "socials": [{
+        "icon": "twitter",
+        "link": "https://twitter.com/01kite",
+        "name": "Twitter"
       }, {
-        "icon" : "linkedin",
-        "link" : "https://www.linkedin.com/in/aurelien-tison/",
-        "name" : "Linked In"
-      } ],
-      "order" : 17
-    }, {
-      "name" : "Quentin Boileau",
-      "photoUrl" : "/images/people/quentin_boileau.jpeg",
-      "socials" : [ {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/01kite",
-        "name" : "Twitter"
-      }, {
-        "icon" : "linkedin",
-        "link" : "https://www.linkedin.com/in/qboileau/",
-        "name" : "Linked In"
-      } ],
-      "order" : 18
-    } ],
-    "title" : "Membres"
-  } ],
-  "tickets" : [ {
-    "available" : true,
-    "currency" : "€",
-    "ends" : "",
-    "inDemand" : false,
-    "info" : "Quantité limitée",
-    "name" : "Early Bird",
-    "price" : 60,
-    "regular" : false,
-    "soldOut" : true,
-    "starts" : "",
-    "url" : "https://www.billetweb.fr/sunny-tech-2019"
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/qboileau/",
+        "name": "Linked In"
+      }],
+      "order": 18
+    }],
+    "title": "Membres"
+  }],
+  "tickets": [{
+    "available": true,
+    "currency": "€",
+    "ends": "",
+    "inDemand": false,
+    "info": "Quantité limitée",
+    "name": "Early Bird",
+    "price": 60,
+    "regular": false,
+    "soldOut": true,
+    "starts": "",
+    "url": "https://www.billetweb.fr/sunny-tech-2019"
   }, {
-    "available" : true,
-    "currency" : "€",
-    "ends" : "",
-    "inDemand" : true,
-    "name" : "Regular",
-    "price" : 90,
-    "primary" : true,
-    "regular" : true,
-    "soldOut" : false,
-    "starts" : "",
-    "url" : "https://www.billetweb.fr/sunny-tech-2019"
+    "available": true,
+    "currency": "€",
+    "ends": "",
+    "inDemand": true,
+    "name": "Regular",
+    "price": 90,
+    "primary": true,
+    "regular": true,
+    "soldOut": false,
+    "starts": "",
+    "url": "https://www.billetweb.fr/sunny-tech-2019"
   }, {
-    "available" : true,
-    "currency" : "€",
-    "ends" : "",
-    "info" : "Requiert une carte étudiante",
-    "name" : "Étudiant",
-    "price" : 40,
-    "soldOut" : false,
-    "starts" : "",
-    "url" : "https://www.billetweb.fr/sunny-tech-2019"
-  } ],
-  "triggers" : {
-    "images" : false
+    "available": true,
+    "currency": "€",
+    "ends": "",
+    "info": "Requiert une carte étudiante",
+    "name": "Étudiant",
+    "price": 40,
+    "soldOut": false,
+    "starts": "",
+    "url": "https://www.billetweb.fr/sunny-tech-2019"
+  }],
+  "triggers": {
+    "images": false
   },
-  "videos" : [ ],
+  "videos": [],
   "previousSpeakers": {}
 }

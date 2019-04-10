@@ -32,8 +32,8 @@
     "blog": "Blog"
   },
   "mySchedule": {
-    "title": "My Schedule",
-    "browseSession": "Browse sessions"
+    "title": "Mon programme",
+    "browseSession": "Parcourir les sessions"
   },
   "footerRelBlock": [
     {
@@ -42,12 +42,17 @@
         {
           "name": "Découvrez l'équipe organisatrice",
           "url": "/team",
-          "newTab": true
+          "newTab": false
+        },
+        {
+          "name": "Schedule",
+          "url": "/schedule",
+          "newTab": false
         },
         {
           "name": "Code de conduite",
           "url": "/cod",
-          "newTab": true
+          "newTab": false
         },
         {
           "name": "Billetterie",
@@ -73,7 +78,8 @@
     "title": "Contenu",
     "callToAction": {
       "featuredSessions": {
-        "description": "Plusieurs conférences et ateliers en parallèle sur 2 journées, sujets transverses allant des outils, méthodologies de conception et développement logiciel jusqu’à la gestion de produit et notamment l’expérience utilisateur."
+        "description": "Plusieurs conférences et ateliers en parallèle sur 2 journées, sujets transverses allant des outils, méthodologies de conception et développement logiciel jusqu’à la gestion de produit et notamment l’expérience utilisateur.",
+        "link": "Voir le programme"
       },
       "howItWas": {
         "title": "Valeurs",
