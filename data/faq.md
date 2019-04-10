@@ -78,33 +78,3 @@ Ideas and Research is a collection of experts and specialists. Rigorous, thought
   
 
   
-## Attendance and Agenda
-
-### Tickets
-
-Check this section regularly for ticketing information. To purchase tickets through eventbrite, [click here.](https://www.eventbrite.com/e/radicalxchange-tickets-53060613724)
-
-The first round of general admission tickets will become available on January 9th 5pm EST. There is a limited number of tickets, so buy them as soon as you can! Our early bird tickets sold out in 48 hours. The price will increase for round two of general admission sales. Tickets are not for resale. IDs will be checked at the door. In line with RadicalxChange's values, these tickets are being sold to real unique humans (that's you!) not as commodities, so we want to make sure it is the inspired community members who will contribute to the event that are showing up with the tickets they purchased.
-
-We want the event to be accessible to everyone, especially those that might not otherwise be able to pay full price. We are therefore proud to offer scholarships consistent with our values. That being said, if you have the means to pay, we encourage you to purchase a ticket before they sell out as scholarships will be limited and carefully evaluated. To learn more about the types of scholarships we offer and the process for getting them, read the section below.
-
-
-### Scholarship Information
-
-
-RadicalxChange is offering four types of scholarships this year: Radical Action Scholarships for builders, Diversity and Equity Scholarships to ensure inclusivity, Student Scholarships to make sure we have young voices and minds present, and Community Organizer Scholarships for people founding or involved with local RxC chapters. These scholarships are intended for those individuals who cannot afford a general admission ticket -- please only apply if this is true for you. Scholarship tickets will grant you the same access as a general admission ticket.
-
-
-#### Types of Scholarships 
-
- - **Radical Action Scholarship**: Are you working on a project that applies ideas inspired by Radical Markets? We want people building on these ideas to be able to attend the conference and gain the insight they need to propel their projects forward. The RadicalxChange community is made up of developers, researchers, artists, entrepreneurs, activists and more. This scholarship is suited for those working on small projects, a few months to two years old, those with less than five employees, or those with little access to capital. If you are unsure about whether or not you meet these qualifications, we encourage you to apply and describe the size and capabilities of your organization. **[Apply Here.](http://bit.ly/RadicalActors)**
- - **Diversity and Equity Scholarship**: Diversity is vital to the success of the RxC mission. Do you come from a community that is typically underrepresented at conferences like this? We want to make sure that cost is not a burden that prevents you from attending. Some examples of groups that are not always well represented include racial and ethnic minorities, women, low-income attendees, disabled attendees, members of the LGBT community, and members from developing countries -- members of underrepresented communities that are not listed above are also welcome to apply. **[Apply Here.](http://bit.ly/DiversityandEquity)**
- - **Student Scholarship**: Are you a student interested in the ideas shared within Radical Markets or the RadicalxChange Community? Young people will shape the future, and we believe these ideas will help build a brighter one. We do not want cost to prevent you from attending, so by proving that you currently attend a high school, university, or other institution of higher learning you can receive a highly discounted ticket. **[Apply Here.](http://bit.ly/RadicalStudent)**
- - **Community Organizer Scholarship**: If you have founded a local RadicalxChange chapter, or are a regular participant within a local chapter, you are eligible for this scholarship. This is the shortest application because most of the information about you will be verified externally by either the chapter founder (if you are a participant) or by the RadicalxChange chapter coordinator (if you are a founder). **[Apply Here.](http://bit.ly/RadicalCommunity)**
-
-
-#### Scholarship Process
-
-Scholarship applications do not correspond with regularly priced ticket waves and applications are currently live. Applications are accepted on a rolling basis, but we encourage you to apply as soon as possible. We will continue to process and award scholarships until all scholarship tickets available have been allocated. We would love to provide scholarships to all those in need, but unfortunately the number of scholarship tickets we can offer is limited.
-
-Please direct all questions regarding scholarships to: [ticketing@radicalxchange.org](mailto:ticketing@radicalxchange.org)

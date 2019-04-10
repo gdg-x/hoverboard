@@ -22,24 +22,24 @@
       "label": "Home"
     },
     {
-      "route": "speakers",
-      "permalink": "/speakers/",
-      "label": "Speakers"
+      "route": "about",
+      "permalink": "/about/",
+      "label": "About"
     },
     {
-      "route": "schedule",
-      "permalink": "/schedule/",
-      "label": "Agenda"
-    },
-    {
-      "route": "travel",
-      "permalink": "/travel/",
-      "label": "Travel"
+      "route": "blog",
+      "permalink": "/blog/",
+      "label": "Blog"
     },
     {
       "route": "team",
       "permalink": "/team/",
       "label": "Team"
+    },
+    {
+      "route": "conference",
+      "permalink": "/speakers/",
+      "label": "Conference"
     }
   ],
   "heroSettings": {
@@ -60,9 +60,9 @@
       "fontColor": "#424242"
     },
     "speakers": {
-      "title": "Speakers",
+      "title": "2019 Conference",
       "metaDescription": "",
-      "description": "We're bringing together speakers across four tracks: Ideas and Research, Arts and Communication, Entrepreneurship and Technology, and Activism and Governance. Please come back for updates as we add confirmed speakers here.",
+      "description": "",
       "background": {
         "color": "#FFF"
       },
@@ -173,7 +173,7 @@
       }
     ]
   },
-  "mailto": "webdev.radicalxchange@gmail.com",
+  "mailto": "info@radicalxchange.org",
   "mailchimp": {
     "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
     "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"

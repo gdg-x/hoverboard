@@ -1,56 +1,53 @@
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/polymer/lib/utils/render-status.html">
-<link rel="import" href="../bower_components/polymer/lib/utils/import-href.html">
-
-<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
-<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
-<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
-<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
-<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
-<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
-<link rel="import" href="../bower_components/app-route/app-location.html">
-<link rel="import" href="../bower_components/app-route/app-route.html">
-
-<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
-<link rel="import" href="../bower_components/iron-lazy-pages/iron-lazy-pages.html">
-<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
-<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
-
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../bower_components/paper-menu-button/paper-menu-button.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
-
-<link rel="import" href="../bower_components/plastic-image/plastic-image.html">
-
-<link rel="import" href="mixins/utils-functions.html">
-<link rel="import" href="mixins/redux-mixin.html">
-<link rel="import" href="mixins/scroll-functions.html">
-<link rel="import" href="elements/shared-styles.html">
-<link rel="import" href="elements/hoverboard-icons.html">
-<link rel="import" href="elements/header-toolbar.html">
-<link rel="import" href="elements/hero-block.html">
-<link rel="import" href="elements/footer-block.html">
-<link rel="import" href="elements/hoverboard-analytics.html">
-<link rel="import" href="effects/transparent-scroll.html">
-
+<link rel="import" href="../bower_components/polymer/polymer-element.html" />
+<link rel="import" href="../bower_components/polymer/lib/utils/render-status.html"/>
+<link rel="import" href="../bower_components/polymer/lib/utils/import-href.html"/>
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/waterfall.html"/>
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html"/>
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html"/>
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html"/>
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html"/>
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html"/>
+<link rel="import" href="../bower_components/app-route/app-location.html" />
+<link rel="import" href="../bower_components/app-route/app-route.html" />
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html"/>
+<link rel="import" href="../bower_components/iron-lazy-pages/iron-lazy-pages.html"/>
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html"/>
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html" />
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html"/>
+<link rel="import" href="../bower_components/paper-menu-button/paper-menu-button.html"/>
+<link rel="import" href="../bower_components/paper-button/paper-button.html" />
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html" />
+<link rel="import" href="../bower_components/plastic-image/plastic-image.html"/>
+<link rel="import" href="mixins/utils-functions.html" />
+<link rel="import" href="mixins/redux-mixin.html" />
+<link rel="import" href="mixins/scroll-functions.html" />
+<link rel="import" href="elements/shared-styles.html" />
+<link rel="import" href="elements/hoverboard-icons.html" />
+<link rel="import" href="elements/header-toolbar.html" />
+<link rel="import" href="elements/hero-block.html" />
+<link rel="import" href="elements/footer-block.html" />
+<link rel="import" href="elements/hoverboard-analytics.html" />
+<link rel="import" href="effects/transparent-scroll.html" />
 
 <dom-module id="hoverboard-app">
-
   <template>
-
-    <style is="custom-style" include="shared-styles flex flex-reverse flex-alignment positioning"></style>
+    <style
+      is="custom-style"
+      include="shared-styles flex flex-reverse flex-alignment positioning"
+    ></style>
     <style>
       :host {
         display: block;
         position: relative;
         min-height: 100%;
         height: 100%;
-        --paper-menu-button-dropdown-background: var(--primary-background-color);;
+        --paper-menu-button-dropdown-background: var(
+          --primary-background-color
+        );
         --app-drawer-content-container: {
           display: flex;
           flex-direction: column;
-        };
+        }
       }
 
       app-drawer app-toolbar {
@@ -106,7 +103,7 @@
       }
 
       iron-lazy-pages {
-        background-color: var(--primary-background-color);;
+        background-color: var(--primary-background-color);
         min-height: 100%;
         height: 100%;
       }
@@ -116,7 +113,7 @@
         margin-left: 6px;
       }
 
-      .buy-ticket {
+      .donate {
         padding: 16px 24px;
       }
 
@@ -128,10 +125,18 @@
       }
     </style>
 
-    <iron-media-query id="mq-phone" full query="(max-width: {$ mediaQueries.xs.max $})"
-                      query-matches="{{isPhoneSize}}"></iron-media-query>
-    <iron-media-query id="mq-laptop" full query="(min-width: {$ mediaQueries.md.min $})"
-                      query-matches="{{isLaptopSize}}"></iron-media-query>
+    <iron-media-query
+      id="mq-phone"
+      full
+      query="(max-width: {$ mediaQueries.xs.max $})"
+      query-matches="{{isPhoneSize}}"
+    ></iron-media-query>
+    <iron-media-query
+      id="mq-laptop"
+      full
+      query="(min-width: {$ mediaQueries.md.min $})"
+      query-matches="{{isLaptopSize}}"
+    ></iron-media-query>
 
     <app-location route="{{appRoute}}"></app-location>
     <app-route
@@ -143,12 +148,18 @@
     ></app-route>
 
     <app-drawer-layout drawer-width="300px" force-narrow fullbleed>
-
-      <app-drawer id="drawer" slot="drawer" opened="[[ui.isDrawerOpened]]" swipe-open>
+      <app-drawer
+        id="drawer"
+        slot="drawer"
+        opened="[[ui.isDrawerOpened]]"
+        swipe-open
+      >
         <app-toolbar layout vertical start>
-          <plastic-image class="toolbar-logo" srcset="/images/logo-monochrome.svg" alt="{$ title $}"></plastic-image>
-          <h2 class="dates">{$ dates $}</h2>
-          <h3 class="location">{$ location.short $}</h3>
+          <plastic-image
+            class="toolbar-logo"
+            srcset="/images/logo-monochrome.svg"
+            alt="{$ title $}"
+          ></plastic-image>
         </app-toolbar>
 
         <div class="drawer-content" layout vertical justified flex>
@@ -160,34 +171,34 @@
             role="navigation"
           >
             {% for nav in navigation %}
-            <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer">{$ nav.label $}</a>
+            <a
+              href="{$ nav.permalink $}"
+              path="{$ nav.route $}"
+              on-tap="closeDrawer"
+              >{$ nav.label $}</a
+            >
             {% endfor %}
           </iron-selector>
-
           <a
-            class="buy-ticket"
-            href$="[[_getTicketUrl(tickets)]]"
+            class="donate"
+            href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HR4LF85TFSM5E"
             target="_blank"
             rel="noopener noreferrer"
-            ga-on="click"
-            ga-event-category="ticket button"
-            ga-event-action="buy_click"
             layout horizontal center
           >
-            <span>{$ buyTicket $}</span>
+            <span>Donate</span>
             <iron-icon icon="hoverboard:open-in-new"></iron-icon>
           </a>
         </div>
-
       </app-drawer>
 
       <app-header-layout id="headerLayout" fullbleed>
-
         <app-header
           id="header"
           slot="header"
           effects="waterfall transparent-scroll"
-          condenses fixed
+          condenses
+          fixed
         >
           <header-toolbar></header-toolbar>
         </app-header>
@@ -246,7 +257,6 @@
             query-params="[[queryParams]]"
           ></fundraiser-page>
         </iron-lazy-pages>
-
       </app-header-layout>
     </app-drawer-layout>
 
@@ -257,7 +267,8 @@
       entry-animation="scale-up-animation"
       exit-animation="fade-out-animation"
       disable-controls="[[!ui.videoDialog.disableControls]]"
-      fit fixed-top
+      fit
+      fixed-top
     ></video-dialog>
 
     <speaker-details
@@ -292,19 +303,19 @@
       opened="[[dialogs.subscribe.isOpened]]"
       data="[[dialogs.subscribe.data]]"
       with-backdrop
-      no-cancel-on-outside-click="[[viewport.isPhone]]">
+      no-cancel-on-outside-click="[[viewport.isPhone]]"
+    >
     </subscribe-dialog>
 
     <new-project-dialog
       opened="[[dialogs.newProject.isOpened]]"
       data="[[dialogs.newProject.data]]"
       with-backdrop="[[viewport.isTabletPlus]]"
-      no-cancel-on-outside-click="[[viewport.isPhone]]">
-    </new-project-dialog>    
+      no-cancel-on-outside-click="[[viewport.isPhone]]"
+    >
+    </new-project-dialog>
 
-    <signin-dialog
-      opened="[[dialogs.signin.isOpened]]"
-      with-backdrop>
+    <signin-dialog opened="[[dialogs.signin.isOpened]]" with-backdrop>
     </signin-dialog>
 
     <hoverboard-analytics></hoverboard-analytics>
@@ -313,7 +324,10 @@
 
   <script>
     // eslint-disable-next-line no-undef
-    class HoverboardApp extends UtilsFunctions(ScrollFunctions(ReduxMixin(Polymer.Element))) {
+    class HoverboardApp extends UtilsFunctions(
+      // eslint-disable-next-line no-undef
+      ScrollFunctions(ReduxMixin(Polymer.Element))
+    ) {
       static get is() {
         return 'hoverboard-app';
       }
@@ -373,7 +387,9 @@
       constructor() {
         super();
         Polymer.setPassiveTouchGestures(true);
-        window.performance && performance.mark && performance.mark('hoverboard-app.created');
+        window.performance &&
+          performance.mark &&
+          performance.mark('hoverboard-app.created');
         this._removeQueryParams = this._removeQueryParams.bind(this);
         this._toggleHeaderShadow = this._toggleHeaderShadow.bind(this);
         this._toggleDrawer = this._toggleDrawer.bind(this);
@@ -397,7 +413,10 @@
 
       disconnectedCallback() {
         super.disconnectedCallback();
-        window.removeEventListener('reset-query-params', this._removeQueryParams);
+        window.removeEventListener(
+          'reset-query-params',
+          this._removeQueryParams
+        );
         window.removeEventListener('element-sticked', this._toggleHeaderShadow);
         this.$.drawer.removeEventListener('opened-changed', this._toggleDrawer);
       }
@@ -421,7 +440,8 @@
           Polymer.RenderStatus.afterNextRender(this, () => {
             Polymer.importHref(this.resolveUrl('lazy-resources.html'), () => {
               this.loadComplete = true;
-              notificationsActions.initializeMessaging()
+              notificationsActions
+                .initializeMessaging()
                 .then(() => this.dispatch(notificationsActions.getToken()));
             });
           });
@@ -434,14 +454,16 @@
         }
         const hasSubroute = subroutePath !== '' && subroutePath !== '/';
 
-        if (!this.route || (page !== this.route.route)) {
+        if (!this.route || page !== this.route.route) {
           !hasSubroute && this.scrollToY(0, 100);
           routingActions.setRoute(page);
           this.$.header.classList.remove('remove-shadow');
         }
 
         const canonicalLink = `{$ url $}${page}${subroutePath}`;
-        document.querySelector('link[rel="canonical"]').setAttribute('href', canonicalLink);
+        document
+          .querySelector('link[rel="canonical"]')
+          .setAttribute('href', canonicalLink);
       }
 
       _viewportChanged(isPhoneSize, isLaptopSize) {
@@ -457,7 +479,9 @@
           document.body.style.overflow = '';
           this._openedDialog = null;
         }
-        this._openedDialog = Object.keys(dialogs).find((key) => dialogs[key].isOpened);
+        this._openedDialog = Object.keys(dialogs).find(
+          (key) => dialogs[key].isOpened
+        );
         if (this._openedDialog) {
           document.body.style.overflow = 'hidden';
         }
@@ -477,13 +501,13 @@
 
       _getTicketUrl(tickets) {
         if (!tickets.list.length) return '';
-        const availableTicket = tickets.list.filter((ticket) =>
-          ticket.available && !ticket.name.includes('Scholarship'))[0];
+        const availableTicket = tickets.list.filter(
+          (ticket) => ticket.available && !ticket.name.includes('Scholarship')
+        )[0];
         return availableTicket ? availableTicket.url : tickets.list[0].url;
       }
     }
 
     window.customElements.define(HoverboardApp.is, HoverboardApp);
   </script>
-
 </dom-module>

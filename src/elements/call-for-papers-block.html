@@ -1,9 +1,9 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../mixins/redux-mixin.html">
-<link rel="import" href="shared-animations.html">
-<link rel="import" href="hoverboard-icons.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html" />
+<link rel="import" href="../../bower_components/paper-button/paper-button.html" />
+<link rel="import" href="../mixins/redux-mixin.html" />
+<link rel="import" href="shared-animations.html" />
+<link rel="import" href="hoverboard-icons.html" />
 
 <dom-module id="call-for-papers-block">
   <template>
@@ -29,7 +29,7 @@
 
       .bold {
         font-size: 24px;
-        color:  var(--default-primary-color);
+        color: var(--default-primary-color);
         max-width: 550px;
       }
 
@@ -37,34 +37,44 @@
         padding-left: 0;
         padding-right: 0;
       }
-
     </style>
 
     <div class="container">
       <div class="content">
         <div>
           <h1 class="container-title">Call for Papers</h1>
-          <p class="container-narrow bold">We are soliciting applications to present in the Ideas + Research track.</p>
+          <p class="container-narrow bold">
+            We are soliciting applications to present in the Ideas + Research track.
+          </p>
           <p class="container-narrow buttons">
-            <a href="https://radicalxchange.org/blog/posts/2018-11-27-0vdrny/" ga-on="click"
-              ga-event-category="call-for-papers" ga-event-action="call-for-papers" ga-event-label="call-for-papers block">
+            <a
+              href="https://radicalxchange.org/blog/posts/2018-11-27-0vdrny/"
+              ga-on="click"
+              ga-event-category="call-for-papers"
+              ga-event-action="call-for-papers"
+              ga-event-label="call-for-papers block"
+            >
               <paper-button class="animated icon-right" raised>
                 <span class="cta-label">More info</span>
                 <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
               </paper-button>
             </a>
-            <a href="https://goo.gl/forms/GhfYthCruzgcPZfA3" ga-on="click" ga-event-category="aall-for-papers"
-              ga-event-action="call-for-papers" ga-event-label="call-for-papers submit block">
+            <a
+              href="https://goo.gl/forms/GhfYthCruzgcPZfA3"
+              ga-on="click"
+              ga-event-category="aall-for-papers"
+              ga-event-action="call-for-papers"
+              ga-event-label="call-for-papers submit block"
+            >
               <paper-button class="animated icon-right" raised>
                 <span class="cta-label">Submit</span>
                 <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
               </paper-button>
-            </a></p>
+            </a>
+          </p>
         </div>
-
       </div>
     </div>
-
   </template>
 
   <script>
