@@ -1394,9 +1394,8 @@
   },
   "team" : [ {
     "members" : [ {
-      "name" : "Oleh Zasadnyy",
-      "photo" : "/images/people/oleh_zasadnyy.jpg",
-      "photoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/oleh_zasadnyy.jpg",
+      "name" : "CF",
+      "photoUrl" : "/images/team/teamPhotos_cf-headshot.jpg",
       "socials" : [ {
         "icon" : "gplus",
         "link" : "https://plus.google.com/+OlehZasadnyy",
@@ -1417,9 +1416,8 @@
       "order" : 0,
       "title" : "Website and sponsors"
     }, {
-      "name" : "Sofiya Huts",
-      "photo" : "/images/people/sofiya_huts.jpg",
-      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fsofiya_huts.jpg?alt=media&token=a911eafb-f709-4af7-b1cb-58a6604b70d1",
+      "name" : "Jenn Voss",
+      "photoUrl" : "/images/team/teamPhotos_Jennifer Voss.jpg",
       "socials" : [ {
         "icon" : "gplus",
         "link" : "https://plus.google.com/+SofiaHuts",
@@ -1430,11 +1428,10 @@
         "name" : "Facebook"
       } ],
       "order" : 1,
-      "title" : "Social and media"
+      "title" : "Sponsors"
     }, {
-      "name" : "Vitaliy Zasadnyy",
-      "photo" : "/images/people/vitaliy_zasadnyy.jpg",
-      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fvitaliy_zasadnyy.jpg?alt=media&token=930e05c8-ae43-4628-8d4c-3e8f5193cda3",
+      "name" : "Kat Stracquatanio",
+      "photoUrl" : "/images/team/teamPhotos_katStracquatanio.jpg",
       "socials" : [ {
         "icon" : "linkedin",
         "link" : "https://www.linkedin.com/in/zasadnyy",
@@ -1451,9 +1448,8 @@
       "order" : 2,
       "title" : "Speakers"
     }, {
-      "name" : "Marta Maxymiak",
-      "photo" : "/images/people/marta_maxymiak.jpg",
-      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fmarta_maxymiak.jpg?alt=media&token=6532f039-7f86-4304-8558-dbfbb3ae8d68",
+      "name" : "Nayonna Purnell",
+      "photoUrl" : "/images/team/teamPhotos_Nayonna_Purnell-2.jpeg",
       "socials" : [ {
         "icon" : "gplus",
         "link" : "https://plus.google.com/104036874811391520583",
@@ -1464,11 +1460,10 @@
         "name" : "Facebook"
       } ],
       "order" : 3,
-      "title" : "Party and happiness"
+      "title" : "Registration and Website"
     }, {
-      "name" : "Ostap Andrusiv",
-      "photo" : "/images/people/ostap_andrusiv.jpg",
-      "photoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/ostap_andrusiv.jpg",
+      "name" : "Beth Dickerson",
+      "photoUrl" : "/images/team/teamPhotos_bethd-headhot.jpg",
       "socials" : [ {
         "icon" : "gplus",
         "link" : "https://google.com/+OstapAndrusiv",
@@ -1487,10 +1482,9 @@
         "name" : "Blog"
       } ],
       "order" : 4,
-      "title" : "Sponsors"
+      "title" : "Volunteers"
     }, {
-      "name" : "Vasylyna Mytsak",
-      "photo" : "/images/people/vasylyna_mytsak.jpg",
+      "name" : "James Sacra",
       "photoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/vasylyna_mytsak.jpg",
       "socials" : [ {
         "icon" : "gplus",
@@ -1504,9 +1498,8 @@
       "order" : 5,
       "title" : "Party and happiness"
     }, {
-      "name" : "Volodya Karpliuk",
-      "photo" : "/images/people/volodya_karpliuk.jpg",
-      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fvolodya_karpliuk.jpg?alt=media&token=aa08d9c9-c42a-435f-8672-c3a004e3aa08",
+      "name" : "Jordy Walsh",
+      "photoUrl" : "/images/team/teamPhotos_jordy.jpg",
       "socials" : [ {
         "icon" : "gplus",
         "link" : "https://plus.google.com/+VolodyaKarpliuk23",
@@ -1521,9 +1514,27 @@
         "name" : "Twitter"
       } ],
       "order" : 6,
-      "title" : "Speakers"
+      "title" : "Agent of Good Times"
     }, {
-      "name" : "Diana Pinchuk",
+      "name" : "Alex Clark",
+      "photoUrl" : "/images/team/teamPhotos_jordy.jpg",
+      "socials" : [ {
+        "icon" : "gplus",
+        "link" : "https://plus.google.com/+VolodyaKarpliuk23",
+        "name" : "Google+"
+      }, {
+        "icon" : "facebook",
+        "link" : "https://www.facebook.com/volodya.karpluk",
+        "name" : "Facebook"
+      }, {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/keyv23",
+        "name" : "Twitter"
+      } ],
+      "order" : 7,
+      "title" : "Speakers"
+    },{
+      "name" : "JB",
       "photo" : "/images/people/diana_pinchuk.jpg",
       "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fdiana_pinchuk.jpg?alt=media&token=189d67d1-004f-4a3c-9e0c-13bc992bbaf7",
       "socials" : [ {
@@ -1535,47 +1546,10 @@
         "link" : "https://www.facebook.com/diana.pinchuk.9",
         "name" : "Facebook"
       } ],
-      "order" : 7,
-      "title" : "Social and media"
+      "order" : 8,
+      "title" : "Master of Web Things"
     } ],
     "title" : "Core Team"
-  }, {
-    "members" : [ {
-      "name" : "Ihor Dvoretskyi",
-      "photo" : "/images/people/ihor_dvoretskyi.jpg",
-      "photoUrl" : "",
-      "socials" : [ {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/idvoretskyi",
-        "name" : "Facebook"
-      }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/idvoretskyi",
-        "name" : "Twitter"
-      } ],
-      "order" : 0,
-      "title" : "Cloud stream"
-    }, {
-      "name" : "Dmytro Danylyk",
-      "photo" : "/images/people/dmytro_danylyk.jpg",
-      "photoUrl" : "",
-      "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+DmytroDanylyk",
-        "name" : "Google+"
-      }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/dmytrodanylyk",
-        "name" : "Twitter"
-      }, {
-        "icon" : "website",
-        "link" : "http://www.dmytrodanylyk.com/#/about",
-        "name" : "Website"
-      } ],
-      "order" : 1,
-      "title" : "Android Stream"
-    } ],
-    "title" : "Program Committee"
   } ],
   "tickets" : [ {
     "available" : true,
