@@ -1440,6 +1440,174 @@
       "videoId": null,
       "image": null,
       "icon": null
+    },
+    "110": {
+      "title": "Badge pickup",
+      "complexity": "",
+      "description": "Récupérez votre badge et faites connaissance !",
+      "tags": [
+      ],
+      "speakers": [],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "111": {
+      "title": "Pause croissant",
+      "complexity": "",
+      "description": "Croissants et chocolatine, un peu d’eau et du café vous attendent déjà",
+      "tags": [
+      ],
+      "speakers": [],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "112": {
+      "title": "Pause chocolatine",
+      "complexity": "",
+      "description": "Croissants et chocolatine, un peu d’eau et du café vous attendent déjà",
+      "tags": [
+      ],
+      "speakers": [],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "113": {
+      "title": "Goûter",
+      "complexity": "",
+      "description": "",
+      "tags": [
+      ],
+      "speakers": [],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "114": {
+      "title": "Goûter",
+      "complexity": "",
+      "description": "",
+      "tags": [
+      ],
+      "speakers": [],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "115": {
+      "title": "Pause",
+      "complexity": "",
+      "description": "",
+      "tags": [
+      ],
+      "speakers": [],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "116": {
+      "title": "Pause",
+      "complexity": "",
+      "description": "",
+      "tags": [
+      ],
+      "speakers": [],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "117": {
+      "title": "Déjeuner",
+      "complexity": "",
+      "description": "Un buffet est servi au niveau du parc juste derrière les amphis.",
+      "tags": [
+      ],
+      "speakers": [],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "118": {
+      "title": "Déjeuner",
+      "complexity": "",
+      "description": "Un buffet est servi au niveau du parc juste derrière les amphis.",
+      "tags": [
+      ],
+      "speakers": [],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "119": {
+      "title": "Pause",
+      "complexity": "",
+      "description": "",
+      "tags": [
+      ],
+      "speakers": [],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "12O": {
+      "title": "Pause",
+      "complexity": "",
+      "description": "",
+      "tags": [
+      ],
+      "speakers": [],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "121": {
+      "title": "Pause",
+      "complexity": "",
+      "description": "",
+      "tags": [
+      ],
+      "speakers": [],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "122": {
+      "title": "Pause",
+      "complexity": "",
+      "description": "",
+      "tags": [
+      ],
+      "speakers": [],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
+    },
+    "123": {
+      "title": "Pause",
+      "complexity": "",
+      "description": "",
+      "tags": [
+      ],
+      "speakers": [],
+      "presentation": null,
+      "videoId": null,
+      "image": null,
+      "icon": null
     }
   },
 
