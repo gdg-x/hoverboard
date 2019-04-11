@@ -222,10 +222,22 @@
       "dateReadable" : "jeudi 27 juin",
       "timeslots" : [ {
         "sessions" : [ {
+          "items" : [ 110 ]
+        } ],
+        "startTime" : "08:30",
+        "endTime" : "9:00"
+      },{
+        "sessions" : [ {
           "items" : [ 100 ]
         } ],
         "startTime" : "09:00",
         "endTime" : "9:50"
+      },{
+        "sessions" : [ {
+          "items" : [ 111 ]
+        } ],
+        "startTime" : "09:50",
+        "endTime" : "10:10"
       },{
         "sessions" : [ {
           "items" : [ 45 ]
@@ -239,8 +251,14 @@
           "extend": 2,
           "items" : [ 10 ]
         } ],
-        "startTime" : "10:05",
-        "endTime" : "10:55"
+        "startTime" : "10:10",
+        "endTime" : "11:00"
+      },{
+        "sessions" : [ {
+          "items" : [ 115 ]
+        } ],
+        "startTime" : "11:00",
+        "endTime" : "11:20"
       },{
         "sessions" : [ {
           "items" : [ 48 ]
@@ -251,8 +269,14 @@
         },{
           "items" : [ 21 ]
         } ],
-        "startTime" : "11:10",
-        "endTime" : "12:00"
+        "startTime" : "11:20",
+        "endTime" : "12:10"
+      },{
+        "sessions" : [ {
+          "items" : [ 117 ]
+        } ],
+        "startTime" : "12:10",
+        "endTime" : "14:00"
       },{
         "sessions" : [ {
           "items" : [ 32 ]
@@ -268,6 +292,12 @@
         }],
         "startTime" : "14:00",
         "endTime" : "14:50"
+      },{
+        "sessions" : [ {
+          "items" : [ 116 ]
+        } ],
+        "startTime" : "14:50",
+        "endTime" : "15:10"
       }, {
         "sessions" : [ {
           "items" : [ 55 ]
@@ -278,8 +308,14 @@
         },{
           "items" : [ 54 ]
         } ],
-        "startTime" : "15:05",
-        "endTime" : "15:55"
+        "startTime" : "15:10",
+        "endTime" : "16:00"
+      },{
+        "sessions" : [ {
+          "items" : [ 113 ]
+        } ],
+        "startTime" : "16:00",
+        "endTime" : "16:20"
       },{
         "sessions" : [ {
           "items" : [ 2 ]
@@ -293,11 +329,15 @@
           "extend": 3,
           "items" : [ 16 ]
         } ],
-        "startTime" : "16:10",
-        "endTime" : "17:00"
-        }
-
-      ,{
+        "startTime" : "16:20",
+        "endTime" : "17:10"
+        },{
+          "sessions" : [ {
+            "items" : [ 119 ]
+          } ],
+          "startTime" : "17:10",
+          "endTime" : "17:30"
+        },{
           "sessions" : [ {
             "items" : [ 33 ]
           },{
@@ -309,11 +349,9 @@
           },{
             "items" : [ ]
           } ],
-          "startTime" : "17:15",
-          "endTime" : "17:35"
-        }
-
-      ,{
+          "startTime" : "17:30",
+          "endTime" : "17:50"
+        },{
           "sessions" : [ {
             "items" : [ 30 ]
           },{
@@ -325,8 +363,8 @@
           },{
             "items" : [ ]
           } ],
-          "startTime" : "17:45",
-          "endTime" : "18:05"
+          "startTime" : "18:00",
+          "endTime" : "18:20"
         },{
           "sessions" : [ {
             "items" : [ 102 ]
@@ -352,6 +390,12 @@
       "dateReadable" : "vendredi 28 juin",
       "timeslots" : [ {
         "sessions" : [ {
+          "sessions" : [ {
+            "items" : [ 112 ]
+          } ],
+          "startTime" : "08:30",
+          "endTime" : "9:00"
+        },{
           "items" : [  ]
         },{
           "items" : [ 52 ]
@@ -366,6 +410,12 @@
         "endTime" : "09:50"
       },{
         "sessions" : [ {
+          "items" : [ 120 ]
+        } ],
+        "startTime" : "09:50",
+        "endTime" : "10:10"
+      },{
+        "sessions" : [ {
           "items" : [ 49 ]
         },{
           "items" : [ 9 ]
@@ -378,8 +428,14 @@
           "items" : [ 8 ],
           "extend" : 2
         } ],
-        "startTime" : "10:05",
-        "endTime" : "10:55"
+        "startTime" : "10:10",
+        "endTime" : "11:00"
+      },{
+        "sessions" : [ {
+          "items" : [ 121 ]
+        } ],
+        "startTime" : "11:00",
+        "endTime" : "11:20"
       },{
         "sessions" : [ {
           "items" : [ 12 ]
@@ -388,8 +444,14 @@
         },{
           "items" : [ 17 ]
         } ],
-        "startTime" : "11:10",
-        "endTime" : "12:00"
+        "startTime" : "11:20",
+        "endTime" : "12:10"
+      },{
+        "sessions" : [ {
+          "items" : [ 118 ]
+        } ],
+        "startTime" : "12:10",
+        "endTime" : "14:00"
       },{
         "sessions" : [ {
           "items" : [ 43 ]
@@ -414,16 +476,28 @@
         },{
           "items" : [ 5 ]
         } ],
-        "startTime" : "14:25",
-        "endTime" : "14:45"
+        "startTime" : "14:30",
+        "endTime" : "14:50"
+      },{
+        "sessions" : [ {
+          "items" : [ 122 ]
+        } ],
+        "startTime" : "14:50",
+        "endTime" : "15:10"
       },{
         "sessions" : [ {
           "items" : [ 23 ]
         },{
           "items" : [ 47 ]
         } ],
-        "startTime" : "15:05",
-        "endTime" : "15:55"
+        "startTime" : "15:10",
+        "endTime" : "16:00"
+      },{
+        "sessions" : [ {
+          "items" : [ 114 ]
+        } ],
+        "startTime" : "16:00",
+        "endTime" : "16:20"
       },{
         "sessions" : [ {
           "items" : [ 28 ]
@@ -436,14 +510,20 @@
         },{
           "items" : [ 53 ]
         } ],
-        "startTime" : "16:10",
-        "endTime" : "17:00"
+        "startTime" : "16:20",
+        "endTime" : "17:10"
+      },{
+        "sessions" : [ {
+          "items" : [ 123 ]
+        } ],
+        "startTime" : "17:10",
+        "endTime" : "17:30"
       },{
         "sessions" : [ {
           "items" : [ 101 ]
         } ],
-        "startTime" : "17:15",
-        "endTime" : "18:05"
+        "startTime" : "17:30",
+        "endTime" : "18:20"
       }],
       "tracks" : [ {
         "title" : "Amphi D"
