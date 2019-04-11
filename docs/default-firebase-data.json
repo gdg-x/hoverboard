@@ -248,7 +248,7 @@
         },{
           "items" : [ 36 ]
         },{
-          "extend": 2,
+          "extend": 3,
           "items" : [ 10 ]
         } ],
         "startTime" : "10:10",
@@ -287,7 +287,7 @@
         },{
           "items" : [ 7 ]
         },{
-          "extend": 2,
+          "extend": 3,
           "items" : [ 39 ]
         }],
         "startTime" : "14:00",
@@ -326,7 +326,7 @@
         },{
           "items" : [ 1 ]
         },{
-          "extend": 3,
+          "extend": 4,
           "items" : [ 16 ]
         } ],
         "startTime" : "16:20",
@@ -388,14 +388,16 @@
     },
     "2019-06-28" : {
       "dateReadable" : "vendredi 28 juin",
-      "timeslots" : [ {
-        "sessions" : [ {
+      "timeslots" : [ 
+        {
           "sessions" : [ {
             "items" : [ 112 ]
           } ],
           "startTime" : "08:30",
           "endTime" : "9:00"
-        },{
+        },
+        {
+          "sessions" : [{
           "items" : [  ]
         },{
           "items" : [ 52 ]
@@ -423,10 +425,10 @@
           "items" : [ 15 ]
         },{
           "items" : [ 44 ],
-          "extend" : 2
+          "extend" : 3
         },{
           "items" : [ 8 ],
-          "extend" : 2
+          "extend" : 3
         } ],
         "startTime" : "10:10",
         "endTime" : "11:00"
@@ -461,10 +463,10 @@
           "items" : [ 20 ]
         },{
           "items" : [ 26 ],
-          "extend" : 3
+          "extend" : 4
         },{
           "items" : [ 38 ],
-          "extend" : 3
+          "extend" : 4
         } ],
         "startTime" : "14:00",
         "endTime" : "14:20"
@@ -1641,7 +1643,7 @@
       "image": null,
       "icon": null
     },
-    "12O": {
+    "120": {
       "title": "Pause",
       "complexity": "",
       "description": "",
