@@ -566,7 +566,7 @@
     "6": {
       "title": "Fonctionnement et possibilités offertes par l'Open Data - illustré avec le cas Montpelliérain",
       "complexity": "beginner",
-      "description": "Ce talk est proposé par Valentin Jérémie - Chef de projet Open Data - Montpellier Méditerranée Métropole \nIMPORTANT : Nous (enfin moi surtout, avec l'aval de plusieurs d'entre nous) les avons sollicités pour qu'ils proposent un sujet, ce qu'ils ont fait rapidement. Le talk présenté est une proposition de thématiques qui pourraient être couvertes, à discuter avec eux selon ce que l'on souhaiterait.\n\nContenu proposé (grandes lignes):\nL’open data d’où ça vient ?\n·         Le cadre législatif\n·         Etat des lieux en France\n·         Pourquoi on fait de l’open data ?\n·         Le cadre juridiques avec les licences de partage des données\n·         Quelques exemples de portails nationaux\n·         Le portail open data de la Métropole de Montpellier\n·         La politique de données de la Métropole\n·         La plateforme de données (ouverte et non ouvertes)\n·         Des données utiles à qui ? quelques exemples de réutilisation\n·         Les statistiques de téléchargement\n·         L’association Open Data France\n·         (optionnel) La collaboration avec OpenStreetMap\n\nDe mon côté je pousserai pour une présentation pratique de ce qu'il est possible de faire techniquement avec ces données (en tenant compte du contexte légal).",
+      "description": "L'open data d'où ça vient ? · Le cadre législatif · Etat des lieux en France · Pourquoi on fait de l'open data ? · Le cadre juridiques avec les licences de partage des données · Quelques exemples de portails nationaux · Le portail open data de la Métropole de Montpellier · La politique de données de la Métropole · La plateforme de données (ouverte et non ouvertes) · Des données utiles à qui ? quelques exemples de réutilisation",
       "language": "French",
       "tags": [
         "Random"
@@ -1725,9 +1725,9 @@
         "country": "Montpellier, France",
         "name": "Eduardo Studzinski Estima de Castro",
         "photoUrl": "https://lh3.googleusercontent.com/-xXr6FZ07fgE/AAAAAAAAAAI/AAAAAAAArlk/m90_chJ74Gk/photo.jpg",
-        "shortBio": "Développeur software à Qualtera",
+        "shortBio": "Software Architect at Qualtera",
         "socials": [],
-        "title": "Software developer"
+        "title": "Software Architect"
       },
       "2uYlHCCY3kap9HQTyUf2GF0Uptg2": {
         "bio": "Père de 3 garçon et gardien de nombreux microcontrolleurs, Emmanuel est un développeur passionné depuis bientôt 20 ans. Il a évolué dans de nombreux contextes de banque et assurance en France et en Suisse. KISS est son moto, le sourire des utilisateurs son but, Java/scala et l'iot sont ses armes ... Emmanuel aime partager son savoir et est impliqué dans plusieurs initiatives telles que Devoxx4kids, Devoxx France.",
