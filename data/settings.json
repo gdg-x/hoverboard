@@ -1,21 +1,21 @@
 {
   "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv",
-    "blog": "https://medium.com/gdg-lviv",
-    "url": "http://lviv.gdg.org.ua/"
+    "name": "FOSS4G Oceania",
+    "twitter": "foss4g_oceania",
+    "blog": "https://foss4g-oceania/blog",
+    "url": "https://foss4g-oceania"
   },
-  "startDate": "2017-10-013T09:00:00+03:00",
-  "endDate": "2017-10-14T19:00:00+03:00",
+  "startDate": "2019-11-123T09:00:00+12:00",
+  "endDate": "2019-11-15T17:00:00+12:00",
   "webapp": {
-    "shortName": "DevFest",
-    "themeColor": "#673AB7",
-    "backgroundColor": "#673AB7"
+    "shortName": "FOSS4G SotM Oceania",
+    "themeColor": "#5AAFE1",
+    "backgroundColor": "#F3E9E3"
   },
   "dateFormat": {
-    "locale": "en-US"
+    "locale": "en-NZ"
   },
-  "hashtag": "DevFest17",
+  "hashtag": "FOSS4GOceania",
   "disabledSchedule": false,
   "showSessionShortAbstract": true,
   "navigation": [
@@ -47,10 +47,10 @@
   ],
   "heroSettings": {
     "home": {
-      "description": "Be a hero. Be a GDG!",
+      "description": "The stars to guide you.",
       "background": {
-        "color": "#673ab7",
-        "image": "/images/backgrounds/home.jpg"
+        "color": "#F3E9E3",
+        "image": "/images/backgrounds/home.png"
       },
       "fontColor": "#FFF"
     },
@@ -64,8 +64,8 @@
     },
     "speakers": {
       "title": "Speakers",
-      "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
+      "metaDescription": "Check back often as more speakers are confirmed.",
+      "description": "Check back often as more speakers are confirmed.",
       "background": {
         "color": "#FFF"
       },
@@ -73,7 +73,7 @@
     },
     "previousSpeakers": {
       "title": "Previous Speakers",
-      "metaDescription": "Check who was with us last years",
+      "metaDescription": "Check out who was with us last year",
       "background": {
         "color": "#FFF"
       },
@@ -81,7 +81,7 @@
     },
     "schedule": {
       "title": "Schedule",
-      "metaDescription": "Choose your sessions to visit",
+      "metaDescription": "Pick the sessions you're interested in",
       "background": {
         "color": "#fff"
       },
@@ -89,7 +89,7 @@
     },
     "team": {
       "title": "Team",
-      "metaDescription": "Get more info about organizers",
+      "metaDescription": "Get more info about the organisers",
       "background": {
         "color": "#fff"
       },
@@ -97,7 +97,7 @@
     },
     "faq": {
       "title": "FAQs",
-      "metaDescription": "Find you answer right here!",
+      "metaDescription": "Questions? We got answers.",
       "background": {
         "color": "#fff"
       },
@@ -105,7 +105,7 @@
     },
     "cod": {
       "title": "Code Of Conduct",
-      "metaDescription": "Lear more about our expectations for all those who participate in our community",
+      "metaDescription": "Learn more about our expectations for all those who participate in our community",
       "background": {
         "color": "#fff"
       },
@@ -114,20 +114,20 @@
   },
   "location": {
     "label": "Location",
-    "name": "Planeta kino",
-    "city": "Lviv",
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "name": "Tiakiwai Conference Centre",
+    "city": "Wellington",
+    "short": "Wellington, New Zealand",
+    "address": "Cnr Aitken and Molesworth Streets, Wellington",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 5
+      "latitude": -41.2770037,
+      "longitude": 174.7777053,
+      "zoom": 12
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": -41.2770037,
+      "longitude": 174.7777053
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": "The Tiakiwai Conference Centre at the National Library is a unique conference and events venue in the centre of Wellington."
   },
   "mediaQueries": {
     "xs": {
@@ -148,31 +148,15 @@
   "socialNetwork": {
     "follow": [
       {
-        "name": "meetup",
-        "url": "https://www.meetup.com/GDG-Lviv/events/244342635/"
-      },
-      {
-        "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
-      },
-      {
         "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
-      },
-      {
-        "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
+        "url": "https://twitter.com/foss4g_oceania/"
       },
       {
         "name": "youtube",
-        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "url": "https://www.youtube.com/channel/UCbqmnF77HxLCmO9d7LrEbpg"
       }
     ],
     "share": [
-      {
-        "name": "gplus",
-        "url": "https://plus.google.com/share?url="
-      },
       {
         "name": "facebook",
         "url": "https://www.facebook.com/sharer.php?u="
@@ -183,10 +167,10 @@
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
+  "mailto": "admin@foss4g-oceania.org",
   "mailchimp": {
-    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
-    "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
+    "url": "https://foss4g-oceania.us17.list-manage.com/subscribe/post?u=26f3c80da46835144592b59b6&amp;id=3d38178ba0",
+    "name": "b_26f3c80da46835144592b59b6_3d38178ba0"
   },
   "signInProviders": {
     "providersData": [

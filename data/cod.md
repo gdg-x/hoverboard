@@ -1,52 +1,30 @@
-### 1. Purpose
+### The Short Version
 
-A primary goal of [GDG Lviv](http://lviv.gdg.org.ua/) is to be inclusive to the largest number of contributors, with the most varied and diverse backgrounds possible. As such, we are committed to providing a friendly, safe and welcoming environment for all, regardless of gender, sexual orientation, ability, ethnicity, socioeconomic status, and religion (or lack thereof). 
-GDG Lviv prides itself on being an open, respectful, and inclusive community. That means the [jerky behavior](https://meta.wikimedia.org/wiki/Don%27t_be_a_jerk) isn’t allowed at GDG meetings.
+FOSS4G SotM Oceania is dedicated to providing a harassment-free conference experience for everyone, regardless of gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, age or religion. We do not tolerate harassment of conference participants in any form. Sexual language and imagery is not appropriate for any conference venue, including talks. Attendees violating these rules may be asked to leave the conference without a refund at the sole discretion of the conference organisers. The Code of Conduct applies at all official and unofficial events. Unofficial events include any location where attendees may be congregating.
 
-This code of conduct outlines our expectations for all those who participate in our community, as well as the consequences for unacceptable behavior.
-We invite all those who participate in Google Developers Group to help us create safe and positive experiences for everyone.
+### The Longer Version
 
-### 2. Open [Source/Culture/Tech] Citizenship
+Harassment includes offensive communication related to gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, age, religion, sexual images in public spaces, deliberate intimidation, stalking, following, harassing photography or recording, sustained disruption of talks or other events, inappropriate physical contact, and unwelcome sexual attention.
 
-A supplemental goal of this Code of Conduct is to increase open [source/culture/tech] citizenship by encouraging participants to recognize and strengthen the relationships between our actions and their effects on our community. Communities mirror the societies in which they exist, and positive action is essential to counteract the many forms of inequality and abuses of power that exist in society. If you see someone who is making an extra effort to ensure our community is welcoming, friendly, and encourages all participants to contribute to the fullest extent, we want to know.
+Participants asked to stop any harassing behaviour are expected to comply immediately.
 
-### 3. Expected Behavior
+Exhibitors at sponsor booths or similar activities are also subject to the anti-harassment policy. In particular, exhibitors should not use sexualised images, activities, or other material. Booth staff (including volunteers) should not use sexualised clothing/uniforms/costumes, or otherwise create a sexualised environment.
 
-The following behaviors are expected and requested of all community members:
+Be careful in the words that you choose. Remember that sexist, racist, and other exclusionary jokes can be offensive to those around you. Excessive swearing and offensive jokes are not appropriate for FOSS4G SotM Oceania.
 
-- Participate in an authentic and active way. In doing so, you contribute to the health and longevity of this community.
-- Exercise consideration and respect in your speech and actions.
-- Attempt collaboration before a conflict.
-- Refrain from demeaning, discriminatory, or harassing behavior and speech.
-- Be mindful of your surroundings and your fellow participants. Alert community leaders if you notice a dangerous situation, someone in distress, or violations of this Code of Conduct, even if they seem inconsequential.
+If a participant engages in behaviour that violates this code of conduct, the conference organizers may take any action they deem appropriate, including warning the offender or expulsion from the conference with no refund.
 
-### 4. Unacceptable Behavior
+### Contact Information
 
-The following actions are considered harassment and are unacceptable within our community:
+Conference organisers and/or volunteers will be happy to help participants contact venue security or local law enforcement, provide escorts, or otherwise assist those experiencing harassment to feel safe for the duration of the conference. We value your attendance.
 
-- Violence, threats of violence or violent language directed against another person.
-- Sexist, racist, homophobic, transphobic, ableist or otherwise discriminatory jokes and language.
-- Posting or displaying sexually explicit or violent material.
-- Posting or threatening to post other people’s personally identifying information ("doxing").
-- Personal insults, particularly those related to gender, sexual orientation, race, religion, or disability.
-- Inappropriate photography or recording.
-- Inappropriate physical contact. You should have someone’s consent before touching them.
-- Unwelcome sexual attention. This includes sexualized comments or jokes; inappropriate touching, groping, and unwelcomed sexual advances.
-- Deliberate intimidation, stalking or following (online or in person).
-- Advocating for, or encouraging, any of the above behavior.
-- Sustained disruption of community events, including talks and, presentations.
+### Reporting a Code of Conduct incident
 
-###  5. Consequences of Unacceptable Behavior
+1. To report an incident, contact any conference organiser or volunteer, who will put you in contact with the appropriate person to help you. You can also send an email to [admin@foss4g-oceania.org](mailto:admin@foss4g-oceania.org). All of our conference volunteers are informed of the Code of Conduct policy and procedure for handling incidents at the conference.
 
-Unacceptable behavior from any community member, including sponsors and those with decision-making authority, will not be tolerated.
-Anyone asked to stop unacceptable behavior is expected to comply immediately.
-If a community member engages in unacceptable behavior, the community organizers may take any action they deem appropriate, up to and including a temporary ban or permanent expulsion from the community without warning (and without refund in the case of a paid event.
+2. When reporting the event, try to include as much information as available, but do not interview people about the incident – the conference volunteer will assist you in writing the report/collecting information. The important information consists of:
+  - Date/time and location of the incident
+  - Identity of victims, responsible individuals, and witnesses, including names & contact details where possible.
+  - A description of the incident
 
-### 6. Scope
-
-We expect all community participants to abide by this Code of Conduct in all community venues–online and in-person–as well as in all one-on-one communications about community business. This code of conduct and its related procedures also applies to unacceptable behavior occurring outside the scope of community activities when such behavior has the potential to affect the safety and well-being of community members adversely.
-
-### 7. Contact info
-
-- Oleh Zasadnyy, +38 093 486 64 60, [o.zasadnyy@gdg.org.ua](mailto:o.zasadnyy@gdg.org.ua)
-- Sofiya Huts, +38 093 486 14 25, [s.huts@gdg.org.ua](mailto:s.huts@gdg.org.ua)
+3. If everyone present is physically safe, organisers will involve law enforcement or security only at a victim's request. If you feel your safety is in jeopardy, please do not hesitate to contact the police by dialling 111. If you do not have a mobile phone, you can simply ask a conference volunteer or organiser.

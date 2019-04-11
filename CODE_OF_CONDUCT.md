@@ -1,46 +1,30 @@
-# Contributor Covenant Code of Conduct
+### The Short Version
 
-## Our Pledge
+FOSS4G SotM Oceania is dedicated to providing a harassment-free conference experience for everyone, regardless of gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, age or religion. We do not tolerate harassment of conference participants in any form. Sexual language and imagery is not appropriate for any conference venue, including talks. Attendees violating these rules may be asked to leave the conference without a refund at the sole discretion of the conference organisers. The Code of Conduct applies at all official and unofficial events. Unofficial events include any location where attendees may be congregating.
 
-In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation in our project and our community a harassment-free experience for everyone, regardless of age, body size, disability, ethnicity, gender identity and expression, level of experience, nationality, personal appearance, race, religion, or sexual identity and orientation.
+### The Longer Version
 
-## Our Standards
+Harassment includes offensive communication related to gender, gender identity and expression, sexual orientation, disability, physical appearance, body size, race, age, religion, sexual images in public spaces, deliberate intimidation, stalking, following, harassing photography or recording, sustained disruption of talks or other events, inappropriate physical contact, and unwelcome sexual attention.
 
-Examples of behavior that contributes to creating a positive environment include:
+Participants asked to stop any harassing behaviour are expected to comply immediately.
 
-* Using welcoming and inclusive language
-* Being respectful of differing viewpoints and experiences
-* Gracefully accepting constructive criticism
-* Focusing on what is best for the community
-* Showing empathy towards other community members
+Exhibitors at sponsor booths or similar activities are also subject to the anti-harassment policy. In particular, exhibitors should not use sexualised images, activities, or other material. Booth staff (including volunteers) should not use sexualised clothing/uniforms/costumes, or otherwise create a sexualised environment.
 
-Examples of unacceptable behavior by participants include:
+Be careful in the words that you choose. Remember that sexist, racist, and other exclusionary jokes can be offensive to those around you. Excessive swearing and offensive jokes are not appropriate for FOSS4G SotM Oceania.
 
-* The use of sexualized language or imagery and unwelcome sexual attention or advances
-* Trolling, insulting/derogatory comments, and personal or political attacks
-* Public or private harassment
-* Publishing others' private information, such as a physical or electronic address, without explicit permission
-* Other conduct which could reasonably be considered inappropriate in a professional setting
+If a participant engages in behaviour that violates this code of conduct, the conference organizers may take any action they deem appropriate, including warning the offender or expulsion from the conference with no refund.
 
-## Our Responsibilities
+### Contact Information
 
-Project maintainers are responsible for clarifying the standards of acceptable behavior and are expected to take appropriate and fair corrective action in response to any instances of unacceptable behavior.
+Conference organisers and/or volunteers will be happy to help participants contact venue security or local law enforcement, provide escorts, or otherwise assist those experiencing harassment to feel safe for the duration of the conference. We value your attendance.
 
-Project maintainers have the right and responsibility to remove, edit, or reject comments, commits, code, wiki edits, issues, and other contributions that are not aligned to this Code of Conduct, or to ban temporarily or permanently any contributor for other behaviors that they deem inappropriate, threatening, offensive, or harmful.
+### Reporting a Code of Conduct incident
 
-## Scope
+1. To report an incident, contact any conference organiser or volunteer, who will put you in contact with the appropriate person to help you. You can also send an email to [admin@foss4g-oceania.org](mailto:admin@foss4g-oceania.org). All of our conference volunteers are informed of the Code of Conduct policy and procedure for handling incidents at the conference.
 
-This Code of Conduct applies both within project spaces and in public spaces when an individual is representing the project or its community. Examples of representing a project or community include using an official project e-mail address, posting via an official social media account, or acting as an appointed representative at an online or offline event. Representation of a project may be further defined and clarified by project maintainers.
+2. When reporting the event, try to include as much information as available, but do not interview people about the incident – the conference volunteer will assist you in writing the report/collecting information. The important information consists of:
+  - Date/time and location of the incident
+  - Identity of victims, responsible individuals, and witnesses, including names & contact details where possible.
+  - A description of the incident
 
-## Enforcement
-
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project team at support@gdgx.io. The project team will review and investigate all complaints, and will respond in a way that it deems appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident. Further details of specific enforcement policies may be posted separately.
-
-Project maintainers who do not follow or enforce the Code of Conduct in good faith may face temporary or permanent repercussions as determined by other members of the project's leadership.
-
-## Attribution
-
-This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 1.4, available at [http://contributor-covenant.org/version/1/4][version]
-
-[homepage]: http://contributor-covenant.org
-[version]: http://contributor-covenant.org/version/1/4/
+3. If everyone present is physically safe, organisers will involve law enforcement or security only at a victim's request. If you feel your safety is in jeopardy, please do not hesitate to contact the police by dialling 111. If you do not have a mobile phone, you can simply ask a conference volunteer or organiser.

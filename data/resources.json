@@ -1,15 +1,15 @@
 {
-  "title": "GDG DevFest Season 2018",
-  "description": "Be a hero. Be a GDG!",
+  "title": "FOSS4G SotM Oeania 2019",
+  "description": "Free and Open Source Software for Geospatial",
   "image": "images/social-share.jpg",
-  "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "October 12-13, 2018",
+  "keywords": "event, gis, openstreemap, open-source, geospatial, software, developers",
+  "dates": "November 12-15, 2019.",
   "partnershipProposition": "https://bit.ly/dfua17-partners",
   "share": "Share",
   "followOur": "Follow our",
   "followUs": "Follow us",
   "emailUs": "Email us",
-  "partnershipResources": "Partnership Resources",
+  "partnershipResources": "Sponsorship Resources",
   "eventResources": "Event Resources",
   "buyTicket": "Buy ticket",
   "signIn": "Sign in",
@@ -36,43 +36,28 @@
       "title": "About",
       "links": [
         {
-          "name": "GDG Lviv",
-          "url": "http://lviv.gdg.org.ua/",
+          "name": "Open Source Geospatial Foundation (OSGEO)",
+          "url": "https://www.osgeo.org/",
           "newTab": true
         },
         {
-          "name": "Google Developers Group",
-          "url": "https://developers.google.com/",
-          "newTab": true
-        },
-        {
-          "name": "Meet the Team",
-          "url": "https://devfest.gdg.org.ua/team/",
+          "name": "State of the Map (SotM)",
+          "url": "https://stateofthemap.org/",
           "newTab": true
         }
       ]
     },
     {
-      "title": "Explore Past DevFests",
+      "title": "Related Conferences",
       "links": [
         {
-          "name": "DFUA 2013",
-          "url": "http://gdg-devfest-ua.appspot.com/",
+          "name": "FOSS4G SotM Oceania 2018",
+          "url": "https://2018.foss4g-oceania.org/",
           "newTab": true
         },
         {
-          "name": "DFUA 2014",
-          "url": "https://dfua14.firebaseapp.com//",
-          "newTab": true
-        },
-        {
-          "name": "DFUA 2015",
-          "url": "https://dfua15.firebaseapp.com/",
-          "newTab": true
-        },
-        {
-          "name": "DFUA 2016",
-          "url": "https://dfua16.firebaseapp.com/",
+          "name": "FOSS4G-NA 2019",
+          "url": "https://2019.foss4g-na.org/",
           "newTab": true
         }
       ]
@@ -81,23 +66,23 @@
       "title": "Event Resources",
       "links": [
         {
-          "name": "Partnership Proposition",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
+          "name": "Sponsorship Proposition",
+          "url": "https://example.com",
           "newTab": true
         },
         {
-          "name": "Info Partnership Proposition",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
+          "name": "Info Sponsorship Proposition",
+          "url": "https://example.com",
           "newTab": true
         },
         {
           "name": "Media Kit",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
+          "url": "https://example.com",
           "newTab": true
         },
         {
           "name": "Call for Papers",
-          "url": "https://drive.google.com/open?id=10tPuu_7ASM8C70SotqRqIW5Uzos9BzALilMMQPg_JvA",
+          "url": "https://example.com",
           "newTab": true
         },
         {
@@ -111,50 +96,50 @@
   "subscribeNote": "No spam, only the latest news and updates!",
   "codeOfConduct": "Code of Conduct",
   "aboutBlock": {
-    "title": "What you need to know, before you ask.",
+    "title": "Curious? Here's how it was last time...",
     "callToAction": {
       "featuredSessions": {
-        "description": "GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases.",
-        "label": "Explore featured session",
-        "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "description": "In 2018, Oceania's open-source geospatial experts gathered in Melbourne for several days of workshops, presentations, a Community Day, and social events.",
+        "label": "Explore the presentations",
+        "link": "https://www.youtube.com/channel/UCbqmnF77HxLCmO9d7LrEbpg/featured"
       },
       "howItWas": {
-        "description": "Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
-        "label": "See how it was in 2016",
-        "youtubeId": "TdpbgRgz6eE"
+        "description": "We had a panel discussion on 'Human Evolution, Ethics, and Open Source Mapping'.",
+        "label": "Watch it here",
+        "youtubeId": "6TeRSfr1RfQ"
       }
     },
     "statisticsBlock": {
       "attendees": {
         "label": "Attendees",
-        "number": "900"
+        "number": "200+"
       },
       "days": {
         "label": "Days",
-        "number": "2"
+        "number": "3"
       },
       "sessions": {
-        "label": "Sessions",
+        "label": "Presentations",
         "number": "50"
       },
       "tracks": {
         "label": "Tracks",
-        "number": "4"
+        "number": "3"
       }
     }
   },
   "ticketsBlock": {
     "title": "Tickets",
-    "ticketsDetails": "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
-    "soldOut": "You missed it!",
-    "notAvailableYet": "Not available yet",
+    "ticketsDetails": "Tickets grant access to all conference sections, and include nibbles. Accommodation is NOT included in the ticket price.",
+    "soldOut": "We've sold out!",
+    "notAvailableYet": "Not yet available",
     "save": "Save ${discount}% today"
   },
   "partnersBlock": {
-    "title": "Partners",
-    "button": "Become a partner",
+    "title": "Sponsors",
+    "button": "Become a sponsor",
     "form": {
-      "title": "Become a partner!",
+      "title": "Become a sponsor!",
       "submitLabel": "Submit",
       "fullName": "Full Name",
       "companyName": "Company Name"
@@ -162,10 +147,10 @@
     "toast": "We will contact you soon!"
   },
   "featuredVideos": {
-    "title": "DFUA'16 featured videos",
+    "title": "FOSS4G SotM Oceania 2018 videos",
     "callToAction": {
-      "label": "See all videos",
-      "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+      "label": "Go to the channel",
+      "link": "https://www.youtube.com/channel/UCbqmnF77HxLCmO9d7LrEbpg/videos"
     }
   },
   "blog": {
@@ -175,7 +160,7 @@
   "latestPostsBlock": {
     "title": "The latest news",
     "callToAction": {
-      "label": "View all stories",
+      "label": "Read the blog",
       "link": "/blog/"
     }
   },
@@ -185,7 +170,7 @@
     "previousYear": "Year"
   },
   "speakersBlock": {
-    "title": "Rockstar speakers",
+    "title": "Speakers",
     "callToAction": {
       "label": "View all speakers",
       "link": "/speakers/"
@@ -195,15 +180,15 @@
     "title": "Previous speakers",
     "callToAction": {
       "label": "View all",
-      "link": "/previous-speakers/"
+      "link": "https://2018.foss4g-oceania.org/program/presentations.html"
     }
   },
   "galleryBlock": {
-    "title": "#dfua16 highlights",
-    "description": "This year's festival built lots of excitement. Check out photos from featured talks, hands-on learning sessions, and after-hours fun.",
+    "title": "FOSS4G SotM 2018 highlights",
+    "description": "Last year's gathering built lots of excitement. Check out photos from featured talks, our Community Day, and socialising.",
     "callToAction": {
-      "label": "See all photos",
-      "link": "https://goo.gl/photos/H8s3CtPexCzkLqSt9"
+      "label": "See submitted photos",
+      "link": "https://2018.foss4g-oceania.org/photos.html"
     }
   },
   "mapBlock": {
@@ -211,23 +196,23 @@
   },
   "subscribeBlock": {
     "callToAction": {
-      "description": "Get notified about the important conference updates",
+      "description": "Get notified about conference updates",
       "label": "Subscribe"
     },
     "yourEmail": "Your email",
     "emailAddress": "Email Address",
     "firstName": "First Name",
     "lastName": "Last Name",
-    "formTitle": "Get the latest updates, insights and news about GDG DevFest Ukraine sent to your inbox.",
+    "formTitle": "Get the latest updates about FOSS4G SotM Oceania sent to your inbox.",
     "emailRequired": "Please enter a valid email address.",
     "subscribe": "Subscribe",
     "subscribed": "Subscribed",
     "close": "Close",
-    "generalError": "Some error has occured. Please, try again later.",
+    "generalError": "Some error has occured. Please try again later.",
     "toast": "Successfully subscribed!"
   },
   "team": {
-    "description": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT."
+    "description": "The FOSS4G SotM Oceania 2018 organising committee is made up of geospatial enthusiasts from scientific, business, humanitarian, and government sectors."
   },
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"
@@ -243,7 +228,7 @@
   },
   "notifications": {
     "default": "Enable notifications",
-    "enabled": "We will miss you but you can unsubscribe anytime",
+    "enabled": "We will miss you, but you can unsubscribe anytime",
     "blocked": "We can't send you notifications right now. Please enable notifications in your browser",
     "subscribe": "Subscribe",
     "unsubscribe": "Unsubscribe",
@@ -259,19 +244,19 @@
     "image": "/images/team.jpg",
     "blocks": [
       {
-        "title": "Organizer",
-        "description": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
+        "title": "Organiser",
+        "description": "FOSS4G Oceania is a recently-created non-profit organisation, and is the proud organiser of FOSS4G SotM Oceania",
         "callToAction": {
           "label": "Open team page",
           "link": "/team"
         }
       },
       {
-        "title": "What is GDG?",
-        "description": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion",
+        "title": "What are FOSS4G, SotM and OSGeo?",
+        "description": "Free and Open Source Software for Geospatial (FOSS4G), is an annual global event hosted by the Open Source Geospatial Foundation (OSGeo) since 2006, with the origins going back to the GRASS and MapServer communities. OSGeo s a not-for-profit organization whose mission is to support and promote the collaborative development of open geospatial technologies and data.<br/>State of the Map (SotM) is the annual, international conference of OpenStreetMap, organised by the OpenStreetMap Foundation. Our regional SotM is organised separately.",
         "callToAction": {
-          "label": "Read more",
-          "link": "https://developers.google.com/groups/",
+          "label": "Read more about OSGeo",
+          "link": "http://www.osgeo.org/about/",
           "newTab": true
         }
       }
