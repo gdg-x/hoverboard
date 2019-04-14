@@ -38,11 +38,17 @@
         "name": "MAIF Horizon",
         "url": "https://www.maif.fr/"
       }, {
-        "order": 0,
+        "order": 1,
         "height": 150,
         "logoUrl": "../images/logos/microsoft.png",
         "name": "Microsoft",
         "url": "https://microsoft.fr/"
+      },{
+        "order": 2,
+        "height": 150,
+        "logoUrl": "../images/logos/septeo.png",
+        "name": "Septeo",
+        "url": "https://www.septeo.fr/"
       }],
       "order": 0,
       "title": "Platinium"
@@ -164,6 +170,13 @@
           "logoUrl": "../images/logos/laposte.png",
           "name": "La Poste",
           "url": "https://www.laposte.fr/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/aquafadas.png",
+          "name": "Aquafadas",
+          "url": "https://www.aquafadas.com/fr/"
         }
       ],
       "order": 2,
