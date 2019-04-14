@@ -225,7 +225,7 @@
 	"image": "/images/ljs-2018-org.jpg",
     "blocks": [
       {
-        "title": "Organizer",
+        "title": "Organizers",
         "description": "Many individuals have combined their efforts to bring you LibertyJS",
         "callToAction": {
           "label": "Open team page",
