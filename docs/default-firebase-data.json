@@ -1546,7 +1546,7 @@
       "presentation": null,
       "videoId": null,
       "image": null,
-      "icon": null
+      "icon": "registration"
     },
     "111": {
       "title": "Pause croissant",
@@ -1558,7 +1558,7 @@
       "presentation": null,
       "videoId": null,
       "image": null,
-      "icon": null
+      "icon": "coffee-break"
     },
     "112": {
       "title": "Pause chocolatine",
@@ -1570,7 +1570,7 @@
       "presentation": null,
       "videoId": null,
       "image": null,
-      "icon": null
+      "icon": "coffee-break"
     },
     "113": {
       "title": "Goûter",
@@ -1582,7 +1582,7 @@
       "presentation": null,
       "videoId": null,
       "image": null,
-      "icon": null
+      "icon": "coffee-break"
     },
     "114": {
       "title": "Goûter",
@@ -1594,7 +1594,7 @@
       "presentation": null,
       "videoId": null,
       "image": null,
-      "icon": null
+      "icon": "coffee-break"
     },
     "115": {
       "title": "Pause",
@@ -1606,7 +1606,7 @@
       "presentation": null,
       "videoId": null,
       "image": null,
-      "icon": null
+      "icon": "coffee-break"
     },
     "116": {
       "title": "Pause",
@@ -1618,7 +1618,7 @@
       "presentation": null,
       "videoId": null,
       "image": null,
-      "icon": null
+      "icon": "coffee-break"
     },
     "117": {
       "title": "Déjeuner",
@@ -1630,7 +1630,7 @@
       "presentation": null,
       "videoId": null,
       "image": null,
-      "icon": null
+      "icon": "lunch"
     },
     "118": {
       "title": "Déjeuner",
@@ -1642,7 +1642,7 @@
       "presentation": null,
       "videoId": null,
       "image": null,
-      "icon": null
+      "icon": "lunch"
     },
     "119": {
       "title": "Pause",
@@ -1654,7 +1654,7 @@
       "presentation": null,
       "videoId": null,
       "image": null,
-      "icon": null
+      "icon": "coffee-break"
     },
     "120": {
       "title": "Pause",
@@ -1666,7 +1666,7 @@
       "presentation": null,
       "videoId": null,
       "image": null,
-      "icon": null
+      "icon": "coffee-break"
     },
     "121": {
       "title": "Pause",
@@ -1678,7 +1678,7 @@
       "presentation": null,
       "videoId": null,
       "image": null,
-      "icon": null
+      "icon": "coffee-break"
     },
     "122": {
       "title": "Pause",
@@ -1690,7 +1690,7 @@
       "presentation": null,
       "videoId": null,
       "image": null,
-      "icon": null
+      "icon": "coffee-break"
     },
     "123": {
       "title": "Pause",
@@ -1702,7 +1702,7 @@
       "presentation": null,
       "videoId": null,
       "image": null,
-      "icon": null
+      "icon": "coffee-break"
     }
   },
 
