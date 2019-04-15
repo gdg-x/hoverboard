@@ -411,7 +411,7 @@
         },
         {
           "sessions" : [{
-          "items" : [  ]
+          "items" : [ 28 ]
         },{
           "items" : [ 52 ]
         },{
@@ -515,7 +515,7 @@
         "endTime" : "16:20"
       },{
         "sessions" : [ {
-          "items" : [ 28 ]
+          "items" : [ 58 ]
         },{
           "items" : [ 25 ]
         },{
@@ -1497,6 +1497,24 @@
             "image": null,
             "icon": null
         },
+
+    "58":{
+            "title": "Something Interesting about Kotlin on Android",
+            "complexity": "intermediate",
+            "description": "This talk will be about some really interesting thing about developing for Android using Kotlin.",
+            "language": "English",
+            "tags": [
+                "Langage & Framework"
+            ],
+            "speakers": [
+                "aaaaaacarottechetcarrote13239289199990999999999",
+                "ghrvhugeriureiuhgrhuiegriuhhiuegrromainghhuireguihgreuhigerhuioegr"
+            ],
+            "presentation": null,
+            "videoId": null,
+            "image": null,
+            "icon": null
+        },
     "100": {
       "title": "Keynote d'ouverture",
       "complexity": "",
@@ -1715,6 +1733,36 @@
 
 
   "speakers": {
+      "aaaaaacarottechetcarrote13239289199990999999999": {
+        "bio": "Chet leads the Android Toolkit, working on animations, graphics, UI, performance, and anything else that puts the pixels on the screen. And sometimes, just sometimes, he takes a break from comedy to give a technical talk.",
+        "company": "Google",
+        "companyLogoUrl": "/images/logos/google.svg",
+        "country": "Mountain View, United States",
+        "name": "Chet Haase",
+        "photoUrl": "https://androidmakers.fr/images/people/chet_haase.jpg",
+        "shortBio": "Android Toolkit leader at Google",
+        "socials": [{
+          "link": "https://twitter.com/chethaase",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Android Toolkit leader"
+      },
+      "ghrvhugeriureiuhgrhuiegriuhhiuegrromainghhuireguihgreuhigerhuioegr": {
+        "bio": "Romain works on 3D real-time graphics and Kotlin on the Android team at Google. He previously managed the UI toolkit team and the graphics team.",
+        "company": "Google",
+        "companyLogoUrl": "/images/logos/google.svg",
+        "country": "San Francisco, United States",
+        "name": "Romain Guy",
+        "photoUrl": "https://androidmakers.fr/images/people/romain_guy.jpg",
+        "shortBio": "Android 3D real-time graphics and Kotlin at Google",
+        "socials": [{
+          "link": "https://twitter.com/romainguy",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Android 3D real-time graphics and Kotlin "
+      },
       "UReg1U2dk9XFlCrkxjN6JWVCoB92": {
         "bio": "Adrien est Tech & DataOps Evangelist chez Saagie, une startup qui propose une plateforme accélérant et industrialisant les projets data & AI. Avant cela, Adrien était Thought Leader chez Société Générale, en charge de l’adoption des pratiques et technos émergentes ; il y a aussi été en charge du déploiement des pratiques DevOps (infra-as-code, feature teams…) et des technos associées (delivery pipelines, Docker…). Par le passé, il a aussi  été consultant chez Octo Technologies, intervenant sur des projets de transformation des infra et participant à l’élaboration de l’offre devops de l’entreprise. Enfin, Adrien est très impliqué dans l'écosystème technologique, étant Docker Captain auprès de Docker Inc., ainsi que manager des communautés Meetup Docker, Kubernetes et Serverless Architecture de Paris.\n",
         "company": "Saagie",
