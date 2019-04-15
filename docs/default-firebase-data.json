@@ -1514,40 +1514,7 @@
       } ],
       "order" : 6,
       "title" : "Agent of Good Times"
-    }, {
-      "name" : "Alex Clark",
-      "photoUrl" : "/images/team/teamPhotos_jordy.jpg",
-      "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+VolodyaKarpliuk23",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/volodya.karpluk",
-        "name" : "Facebook"
-      }, {
-        "icon" : "twitter",
-        "link" : "https://twitter.com/keyv23",
-        "name" : "Twitter"
-      } ],
-      "order" : 7,
-      "title" : "Speakers"
-    },{
-      "name" : "JB",
-      "photo" : "/images/people/diana_pinchuk.jpg",
-      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fdiana_pinchuk.jpg?alt=media&token=189d67d1-004f-4a3c-9e0c-13bc992bbaf7",
-      "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+DianaPinchuk",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/diana.pinchuk.9",
-        "name" : "Facebook"
-      } ],
-      "order" : 8,
-      "title" : "Master of Web Things"
-    } ],
+    }],
     "title" : "Core Team"
   } ],
   "tickets" : [ {
