@@ -504,6 +504,8 @@
           "items" : [ 23 ]
         },{
           "items" : [ 47 ]
+        }, {
+          "items": [59]
         } ],
         "startTime" : "15:10",
         "endTime" : "16:00"
