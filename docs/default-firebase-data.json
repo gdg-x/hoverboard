@@ -1755,7 +1755,7 @@
         "companyLogoUrl": "/images/logos/logo-maif.png",
         "country": "Niort, France",
         "name": "Alexandre Delègue",
-        "photoUrl": "https://avatars2.githubusercontent.com/u/1575521?v=4",
+        "photoUrl": "/images/people/delegue_alexandre.png",
         "shortBio": "Dev scala / java / javascript à MAIF",
         "socials": [{
           "link": "https://github.com/larousso",
@@ -2174,14 +2174,14 @@
         "company": "SGCIB",
         "companyLogoUrl": "/images/logos/societegeneral.png",
         "country": "Paris, France",
-        "name": "HaythemZ",
-        "photoUrl": "https://avatars3.githubusercontent.com/u/9342571?v=4",
+        "name": "Haythem Zayani",
+        "photoUrl": "/images/people/haythem_zayani.png",
         "socials": [{
           "link": "https://github.com/HaythemZ",
           "icon": "github",
           "name": "GitHub"
         }],
-        "title": ""
+        "title": "Software Engineer"
       },
       "pYuiGicpt0MenD8NEMhZXtk6VSr1": {
         "bio": "Malgré ce que son accent espagnol bien prononcé peut suggérer, Horacio est arrivé en France il y a plus d'une quinzaine d'années. Passionné d'informatique, dans laquelle il est tombé depuis tout petit, il a découvert le développement web en 1997 et depuis il n'a pas arrêté de bosser autour.\n\nAprès quelques années comme tech leader de la partie frontend de [@warp10io](https://twitter.com/warp10io/) chez [Cityzen Data](https://twitter.com/cityendata/), Horacio a rejoint [OVH](](https://twitter.com/ovh/) en janvier 2018 en tant que Developer Advocate. Il est cofondateur du [FinistDevs](https://twitter.com/finistdevs/), le JUG/GDG français le plus proche de la Silicon Valley.\n\nPassionné par le développement web et tout ce qui gravite autour des composants web, Horacio est [Google Developer Expert (GDE)](https://developers.google.com/experts/people/horacio-gonzalez) en Web Technologies et Flutter.\n\nVous pouvez voir mes dernières talks sur [mon profil Notist](https://noti.st/lostinbrittany)",
@@ -2701,7 +2701,7 @@
         "companyLogoUrl": "/images/logos/6810_ubisoft-prev-500x500.png",
         "country": "Montpellier, France",
         "name": "Rudy Pons",
-        "photoUrl": "https://avatars3.githubusercontent.com/u/306744?v=4",
+        "photoUrl": "/images/people/rudy_pons.jpg",
         "shortBio": "Senior Network Programmer à Ubisoft",
         "socials": [{
           "link": "https://twitter.com/ilodenarp",
@@ -2770,7 +2770,7 @@
         "companyLogoUrl": "",
         "country": "Paris",
         "name": "Shirley Almosni Chiche",
-        "photoUrl": "https://pbs.twimg.com/profile_images/805113530433339393/PCJQ-_sP_normal.jpg",
+        "photoUrl": "/images/people/shirley_almosni_chiche.jpg",
         "socials": [{
           "link": "https://twitter.com/shirleyalmosni",
           "icon": "twitter",
