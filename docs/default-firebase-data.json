@@ -1515,6 +1515,22 @@
             "image": null,
             "icon": null
         },
+        "59": {
+            "title": "Deep Learning en production vu par un Data Engineer",
+            "complexity": "advanced",
+            "description": "Vos collègues Data Scientists ont choisi un modèle de deep learning, charge à vous d’assurer son industrialisation.\nComment paralléliser vos prédictions ? Êtes-vous obligés de mettre du Python en production ? Comment réentrainer le modèle à l’échelle ? Comment suivre ses performances ?\nAutant de défis que nous avons relevés et dont nous vous partageons les solutions.",
+            "language": "French",
+            "tags": [
+                "Data & Machine Learning"
+            ],
+            "speakers": [
+                "fgehirughuigreeuhiegriuhprouthrviuherhuigeruih"
+            ],
+            "presentation": null,
+            "videoId": null,
+            "image": null,
+            "icon": null
+        },
     "100": {
       "title": "Keynote d'ouverture",
       "complexity": "",
@@ -1555,9 +1571,9 @@
       "icon": null
     },
     "110": {
-      "title": "Badge pickup",
+      "title": "Récupération des badges et petit déjeuner",
       "complexity": "",
-      "description": "Récupérez votre badge et faites connaissance !",
+      "description": "Récupérez votre badge, mangez un bout et faites connaissance !",
       "tags": [
       ],
       "speakers": [],
@@ -1762,6 +1778,21 @@
           "name": "Twitter"
         }],
         "title": "Android 3D real-time graphics and Kotlin "
+      },
+      "fgehirughuigreeuhiegriuhprouthrviuherhuigeruih": {
+        "bio": "Développeur depuis 4 ans, Romain « scauglog » s’intéresse à tout ce qui tourne autour de l’écosystème Big Data. UX de formation, il aime rapprocher ces deux mondes et code secrètement en JavaScript.",
+        "company": "Xebia",
+        "companyLogoUrl": "/images/logos/xebia.png",
+        "country": "Paris, France",
+        "name": "Romain Sagean",
+        "photoUrl": "https://media.licdn.com/dms/image/C5103AQHAEN78plYaVg/profile-displayphoto-shrink_800_800/0?e=1560988800&v=beta&t=bexxQhQ4wx6JzbPdWpCLW06lGuMqg13eBttxjwLuk0A",
+        "shortBio": "Data Ingénieur à Xebia",
+        "socials": [{
+          "link": "https://twitter.com/scauglog",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Data Ingénieur"
       },
       "UReg1U2dk9XFlCrkxjN6JWVCoB92": {
         "bio": "Adrien est Tech & DataOps Evangelist chez Saagie, une startup qui propose une plateforme accélérant et industrialisant les projets data & AI. Avant cela, Adrien était Thought Leader chez Société Générale, en charge de l’adoption des pratiques et technos émergentes ; il y a aussi été en charge du déploiement des pratiques DevOps (infra-as-code, feature teams…) et des technos associées (delivery pipelines, Docker…). Par le passé, il a aussi  été consultant chez Octo Technologies, intervenant sur des projets de transformation des infra et participant à l’élaboration de l’offre devops de l’entreprise. Enfin, Adrien est très impliqué dans l'écosystème technologique, étant Docker Captain auprès de Docker Inc., ainsi que manager des communautés Meetup Docker, Kubernetes et Serverless Architecture de Paris.\n",
