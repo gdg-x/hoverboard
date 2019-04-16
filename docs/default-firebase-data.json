@@ -17,7 +17,7 @@
     "/images/gallery/IMG_4405.jpg",
     "/images/gallery/451.jpg",
     "/images/gallery/282.jpg",
-    "/ images/gallery/232.jpg"
+    "/images/gallery/232.jpg"
   ],
   "notifications" : {
     "config" : {
@@ -1396,36 +1396,20 @@
       "name" : "CF",
       "photoUrl" : "/images/team/teamPhotos_cf-headshot.jpg",
       "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+OlehZasadnyy",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/oleh.zasadnyy",
-        "name" : "Facebook"
-      }, {
         "icon" : "twitter",
-        "link" : "https://twitter.com/ozasadnyy",
+        "link" : "https://twitter.com/che_effe",
         "name" : "Twitter"
-      }, {
-        "icon" : "website",
-        "link" : "http://o.zasadnyy.com/",
-        "name" : "Blog"
-      } ],
+      }],
       "order" : 0,
       "title" : "Website and sponsors"
     }, {
       "name" : "Jenn Voss",
       "photoUrl" : "/images/team/teamPhotos_Jennifer Voss.jpg",
       "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+SofiaHuts",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/sophie.huts.7",
-        "name" : "Facebook"
-      } ],
+        "icon" : "twitter",
+        "link" : "https://twitter.com/VossJenn",
+        "name" : "Twitter"
+      }],
       "order" : 1,
       "title" : "Sponsors"
     }, {
@@ -1433,30 +1417,30 @@
       "photoUrl" : "/images/team/teamPhotos_katStracquatanio.jpg",
       "socials" : [ {
         "icon" : "linkedin",
-        "link" : "https://www.linkedin.com/in/zasadnyy",
+        "link" : "https://www.linkedin.com/in/kstracq",
         "name" : "Linkedin"
       }, {
         "icon" : "twitter",
-        "link" : "https://twitter.com/zasadnyy",
+        "link" : "https://twitter.com/kstracq",
         "name" : "Twitter"
       }, {
-        "icon" : "website",
-        "link" : "http://v.zasadnyy.com/",
-        "name" : "Blog"
+        "icon" : "instagram",
+        "link" : "https://www.instagram.com/kstracq",
+        "name" : "Instagram"
       } ],
       "order" : 2,
       "title" : "Speakers"
     }, {
       "name" : "Nayonna Purnell",
-      "photoUrl" : "/images/team/teamPhotos_Nayonna_Purnell-2.jpeg",
+      "photoUrl" : "/images/team/teamPhotos_Nayonna_Purnell.jpeg",
       "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/104036874811391520583",
-        "name" : "Google+"
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/nayonnapurnell",
+        "name" : "Linkedin"
       }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/marta.maxymiak",
-        "name" : "Facebook"
+        "icon" : "twitter",
+        "link" : "https://twitter.com/nayonna1",
+        "name" : "Twitter"
       } ],
       "order" : 3,
       "title" : "Registration and Website"
@@ -1464,54 +1448,34 @@
       "name" : "Beth Dickerson",
       "photoUrl" : "/images/team/teamPhotos_bethd-headhot.jpg",
       "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://google.com/+OstapAndrusiv",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/ostap.andrusiv",
-        "name" : "Facebook"
-      }, {
+        "icon" : "linkedin",
+        "link" : "linkedin.com/in/beth-dickerson",
+        "name" : "LinkedIn"
+      },  {
         "icon" : "twitter",
-        "link" : "https://twitter.com/p1f",
+        "link" : "https://twitter.com/bethd803",
         "name" : "Twitter"
-      }, {
-        "icon" : "website",
-        "link" : "http://andrusiv.com/",
-        "name" : "Blog"
       } ],
       "order" : 4,
       "title" : "Volunteers"
     }, {
       "name" : "James Sacra",
-      "photoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/vasylyna_mytsak.jpg",
+      "photoUrl" : "/images/team/teamPhotos_James-Sacra.jpg",
       "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+ВасилинаМицак",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/vasylyna.mytsak",
-        "name" : "Facebook"
-      } ],
+        "icon" : "twitter",
+        "link" : "https://twitter.com/jsacra",
+        "name" : "Twitter"
+      }],
       "order" : 5,
       "title" : "Party and happiness"
     }, {
       "name" : "Jordy Walsh",
       "photoUrl" : "/images/team/teamPhotos_jordy.jpg",
       "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://plus.google.com/+VolodyaKarpliuk23",
-        "name" : "Google+"
-      }, {
-        "icon" : "facebook",
-        "link" : "https://www.facebook.com/volodya.karpluk",
-        "name" : "Facebook"
-      }, {
         "icon" : "twitter",
-        "link" : "https://twitter.com/keyv23",
+        "link" : "https://twitter.com/Jordalsh",
         "name" : "Twitter"
-      } ],
+      }],
       "order" : 6,
       "title" : "Agent of Good Times"
       } ],
