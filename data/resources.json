@@ -98,7 +98,7 @@
   },
   "ticketsBlock": {
     "title": "Tickets",
-    "ticketsDetails": "Votre billet vous donne accès à toutes les conférences, aux pauses café, et au repas durant les deux jours. L'hebergement n'est pas inclus dans ce prix.",
+    "ticketsDetails": "Votre billet vous donne accès à toutes les conférences, aux pauses café, et aux repas durant la journée entière.",
     "soldOut": "Vous l'avez raté!",
     "notAvailableYet": "Pas encore disponible",
     "save": "Economisez ${discount}%"
