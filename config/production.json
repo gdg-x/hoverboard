@@ -5,8 +5,8 @@
   "prefix": "/",
   "firebase": {
     "apiKey": "AIzaSyDclOKKLeScdCyCTl2cEpdMVGF8rCVuhEk",
-    "authDomain": "libertyjs-929bc.firebaseapp.com",
-    "databaseURL": "https://libertyjs-929bc.firebaseio.com",
+    "authDomain": "libertyjs-staging.firebaseapp.com",
+    "databaseURL": "https://libertyjs-929bc.firebaseapp.com/",
     "projectId": "libertyjs-929bc",
     "storageBucket": "libertyjs-929bc.appspot.com",
     "messagingSenderId": "680295009573"
