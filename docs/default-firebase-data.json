@@ -1399,6 +1399,18 @@
         "icon" : "twitter",
         "link" : "https://twitter.com/che_effe",
         "name" : "Twitter"
+      },{
+        "icon" : "facebook",
+        "link" : "https://www.facebook.com/charles.grugan",
+        "name" : "Facebook"
+      },{
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/charlesgrugan/",
+        "name" : "LinkedIn"
+      },{
+        "icon" : "instagram",
+        "link" : "https://www.instagram.com/che_effe/",
+        "name" : "Instagram"
       }],
       "order" : 0,
       "title" : "Website and sponsors"
