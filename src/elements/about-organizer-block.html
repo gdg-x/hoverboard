@@ -29,7 +29,7 @@
       }
 
 	  .about-organizer-container {
-		  min-height: 300px;
+		  min-height: 325px;
 	  }
 
       .image-link {
@@ -57,7 +57,6 @@
 
     <div class="container about-organizer-container" layout horizontal>
       <div layout horizontal center-center flex hidden$="[[viewport.isPhone]]">
-
         <a
           href="/team"
           class="image-link"
@@ -97,24 +96,6 @@
         </div>
         {% endfor %}
       </div>
-
-      <div center-center flex hidden$="[[viewport.isPhone]]" style="height: 320px;">
-          <a
-            href="/team"
-            class="image-link"
-            ga-on="click"
-            ga-event-category="link"
-            ga-event-action="open"
-            ga-event-label="open team page"
-          >
-            <plastic-image
-              class="organizers-photo card"
-              srcset="{$ aboutOrganizerBlock.image $}"
-              sizing="cover"
-              lazy-load preload fade
-            ></plastic-image>
-          </a>
-        </div>
     </div>
   </template>
 
