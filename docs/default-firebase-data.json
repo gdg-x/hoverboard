@@ -177,6 +177,13 @@
           "logoUrl": "../images/logos/aquafadas.png",
           "name": "Aquafadas",
           "url": "https://www.aquafadas.com/fr/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/logo_believe.png",
+          "name": "Believe IT",
+          "url": "http://www.believeit.fr/"
         }
       ],
       "order": 2,
