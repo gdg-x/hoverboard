@@ -220,6 +220,12 @@
         "logoUrl": "../images/logos/smartview.png",
         "name": "Smartview",
         "url": "http://www.smartview.fr/"
+      }, {
+        "order": 0,
+        "height": 50,
+        "logoUrl": "../images/logos/rh.png",
+        "name": "Recherches & Horizons",
+        "url": "https://reth.fr"
       }],
       "order": 3,
       "title": "Bronze"
@@ -2128,7 +2134,7 @@
         "companyLogoUrl": "/images/logos/qualtera.jpg",
         "country": "France",
         "name": "Florent Casanovas",
-        "photoUrl": "https://lh4.googleusercontent.com/-V1wX4bsAi4c/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfzamE_cwi8jSZroyy6fhLAlP7-hA/mo/photo.jpg",
+        "photoUrl": "/images/people/florent_casanovas.jpg",
         "socials": [],
         "title": "DevOps"
       },
