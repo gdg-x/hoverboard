@@ -39,10 +39,17 @@
       .icon-facebook {
         color: var(--facebook-color);
       }
+
+      .signin-notice {
+        width: 250px;
+      }
     </style>
 
     <div class="dialog-content">
       <div class="initial-signin"  hidden$="[[isMergeState]]">
+        <p class="signin-notice">
+          Sign in to create and save a custom conference agenda based on your interests
+        <p>
         {% for provider in signInProviders.providersData %}
         <paper-button
           class="sign-in-button"
@@ -66,7 +73,7 @@
           <div class="row-2">{$ signInDialog.signInToContinue.part1 $} [[providerCompanyName]] {$ signInDialog.signInToContinue.part2 $}</div>
         </div>
 
-        <div class="action-button" layout horizontal end-justified>        
+        <div class="action-button" layout horizontal end-justified>
           <paper-button
             class="merge-button"
             on-tap="_mergeAccounts"
