@@ -49,7 +49,7 @@
     "home": {
       "description": "The stars to guide you.",
       "background": {
-        "color": "#F3E9E3",
+        "color": "#F6E9E2",
         "image": "/images/backgrounds/home.png"
       },
       "fontColor": "#FFF"
