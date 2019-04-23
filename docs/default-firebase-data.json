@@ -104,18 +104,6 @@
          "logos":[
             {
                "order":0,
-               "logoUrl":"../images/logos/gdg-lviv.svg",
-               "name":"GDG Lviv",
-               "url":"https://plus.google.com/102444623953913144164"
-            }
-         ],
-         "order":0,
-         "title":"Template Creator"
-      },
-      {
-         "logos":[
-            {
-               "order":0,
                "logoUrl":"https://crownpropertydisposals.linz.govt.nz/sites/all/themes/linz/images/linz-logo.svg",
                "name":"Land Information New Zealand",
                "url":"https://www.linz.govt.nz/"
@@ -127,7 +115,7 @@
                "url":"https://www.landcareresearch.co.nz/"
             }
          ],
-         "order":1,
+         "order":0,
          "title":"Platinum Sponsors"
       },
       {

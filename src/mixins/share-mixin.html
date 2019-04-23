@@ -20,14 +20,6 @@
             `u=${encodeURIComponent(shareUrl)}&t=${encodeURIComponent(title)}`;
           break;
         }
-        case 'gplus': {
-          height = 348;
-          width = 512;
-          url = `https://plus.google.com/share?` +
-            `url=${encodeURIComponent(shareUrl)}` +
-            `&hl=${encodeURIComponent(document.documentElement.lang)}`;
-          break;
-        }
         case 'twitter': {
           height = 253;
           let text = `Check out ${title} at #{$ hashtag $}: ${shareUrl}`;
