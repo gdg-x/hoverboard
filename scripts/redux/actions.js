@@ -823,6 +823,13 @@ const helperActions = {
       case 'https://twitter.com':
       case 'twitter.com':
         return new firebase.auth.TwitterAuthProvider();
+      case 'https://github.com':
+      case 'github.com': {
+        const provider = new firebase.auth.GithubAuthProvider();
+        provider.addScope('user:email');
+        provider.addScope('read:user');
+        return provider;
+      }
     }
   },
 
@@ -839,6 +846,9 @@ const helperActions = {
       case 'https://twitter.com':
       case 'twitter.com':
         return 'Twitter';
+      case 'https://github.com':
+      case 'github.com':
+        return 'GitHub';
     }
   },
 
