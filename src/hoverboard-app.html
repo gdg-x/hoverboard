@@ -165,20 +165,6 @@
             <a target="_scrollToBecomeSponsor" rel="noopener noreferrer" ga-on="click" on-tap="_scrollToBecomeSponsor"
             ga-event-category="becomSponsorGallery"  ga-event-action="scroll" ga-event-action="become_sponsor_click">{$ becomeSponsorMenu $}</a>
           </iron-selector>
-
-          <a
-            class="buy-ticket"
-            href$="[[tickets.url]]"
-            target="_blank"
-            rel="noopener noreferrer"
-            ga-on="click"
-            ga-event-category="ticket button"
-            ga-event-action="buy_click"
-            layout horizontal center
-          >
-            <span>{$ buyTicketTopRight $}</span>
-            <iron-icon icon="hoverboard:open-in-new"></iron-icon>
-          </a>
         </div>
 
       </app-drawer>
@@ -232,6 +218,10 @@
             data-route="cod"
             data-path="pages/cod-page.html"
           ></cod-page>
+          <location-page
+            data-route="location"
+            data-path="pages/location-page.html"
+          ></location-page>
         </iron-lazy-pages>
 
       </app-header-layout>

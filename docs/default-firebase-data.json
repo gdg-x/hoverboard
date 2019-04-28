@@ -3329,7 +3329,7 @@
     "price": 90,
     "primary": true,
     "regular": true,
-    "soldOut": false,
+    "soldOut": true,
     "starts": "",
     "url": "https://www.billetweb.fr/sunny-tech-2019"
   }, {
@@ -3339,7 +3339,7 @@
     "info": "Requiert une carte étudiante",
     "name": "Étudiant",
     "price": 40,
-    "soldOut": false,
+    "soldOut": true,
     "starts": "",
     "url": "https://www.billetweb.fr/sunny-tech-2019"
   }],
