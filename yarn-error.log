@@ -2,7 +2,7 @@ Arguments:
   /usr/local/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js firestore:init
 
 PATH: 
-  /Users/cgruga200/.rvm/gems/ruby-2.4.1/bin:/Users/cgruga200/.rvm/gems/ruby-2.4.1@global/bin:/Users/cgruga200/.rvm/rubies/ruby-2.4.1/bin:/opt/local/bin:/opt/local/sbin:/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/share/python:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/local/bin:/opt/local/sbin:/usr/local:/usr/local/sbin:/usr/local/share/python:/Users/cgruga200/Library/Android/sdk/tools:/Users/cgruga200/Library/Android/sdk/platform-tools:/Development/adt-bundle/sdk/platform-tools:/Development/adt-bundle/sdk/tools:/Users/cgruga200/Library/Android/sdk/tools:/Users/cgruga200/Library/Android/sdk/platform-tools:/Development/adt-bundle/sdk/platform-tools:/Development/adt-bundle/sdk/tools:/Users/cgruga200/.rvm/bin
+  /opt/local/bin:/opt/local/sbin:/Users/cgruga200/.rvm/gems/ruby-2.4.1/bin:/Users/cgruga200/.rvm/gems/ruby-2.4.1@global/bin:/Users/cgruga200/.rvm/rubies/ruby-2.4.1/bin:/Users/cgruga200/.npm-global/bin:/usr/local:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/local/share/python:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/local/bin:/opt/local/sbin:/Users/cgruga200/.rvm/gems/ruby-2.4.1/bin:/Users/cgruga200/.rvm/gems/ruby-2.4.1@global/bin:/Users/cgruga200/.rvm/rubies/ruby-2.4.1/bin:/Users/cgruga200/.npm-global/bin:/usr/local:/usr/local/sbin:/usr/local/share/python:/Users/cgruga200/Library/Android/sdk/tools:/Users/cgruga200/Library/Android/sdk/platform-tools:/Development/adt-bundle/sdk/platform-tools:/Development/adt-bundle/sdk/tools:/Users/cgruga200/.rvm/bin:/Users/cgruga200/Library/Android/sdk/tools:/Users/cgruga200/Library/Android/sdk/platform-tools:/Development/adt-bundle/sdk/platform-tools:/Development/adt-bundle/sdk/tools:/Users/cgruga200/.rvm/bin
 
 Yarn version: 
   1.5.1
@@ -31,6 +31,7 @@ npm manifest:
       "postinstall": "bower install",
       "serve": "gulp serve",
       "serve:prod": "cross-env BUILD_ENV=production gulp serve",
+      "start": "npm run serve",
       "lint": "gulp lint",
       "pretest": "npm run lint",
       "test": "echo \"No tests\""
