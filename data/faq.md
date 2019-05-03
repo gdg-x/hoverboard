@@ -1,14 +1,26 @@
 
 ## Mission and Values  
   
-### Mission Statement  
-  
-RadicalxChange convenes a community of activists, artists, entrepreneurs and scholars committed to using dramatically expanded competitive, free and open market mechanisms to reduce inequality, build widely-shared prosperity, heal global political divides and build a richer and more cooperative social life. As advocates of radical social change, the RadicalxChange community challenges long-established social institutions such as private property, one-person-one-vote and the primacy of the individual on the one hand and the nation state on the other. To achieve this change the community seeks to increase public knowledge about the emancipatory potential of insights from the field of mechanism design, in dialog with a range of other academic fields such as computer science, philosophy and history, the communicative imagination of artists, the pragmatic ingenuity of entrepreneurs and the idealism of activists for social justice.
+### Mission Statement
+
+RadicalxChange aims to build a clear, coherent, and sustainable alternative to capitalism that embraces markets, egalitarianism, community, and decentralization.
+
+#### Method:
+
+Replacing capitalism from within by developing ideas, communities, and organizations that practice fairer and more efficient forms of organization.
+
+- Challenging basic inherited institutions by building better ones
+- Increasing public knowledge about the emancipatory potential of new ideas in mechanism design
+- Evolving our vision from the bottom up, coexisting with and working within existing institutions, and building public good providers that benefit people and communities
+
+#### Future we believe in:
+
+A world where power rests in diverse democratic organizations.
   
 ### Core Values
 
- - **Open**: RadicalxChange is open. It seeks to facilitate a free exchange of ideas in an environment of thoughtful discourse.
- - **Egalitarian**: Many of the ideas at RadicalxChange are animated by a belief that hyper-concentrations of wealth are not natural or efficient, and that a more genuinely competitive market system would result in a broader distribution of wealth.
+ - **Openness**: RadicalxChange is open. It seeks to facilitate a free exchange of ideas in an environment of thoughtful discourse.
+ - **Egalitarianism**: Many of the ideas at RadicalxChange are animated by a belief that hyper-concentrations of wealth are not natural or efficient, and that a more genuinely competitive market system would result in a broader distribution of wealth.
  - **Dignity**: Every person’s well-being (financial or otherwise) is a good in itself. We want our work to reflect and express this.
  - **Social Innovation**: At RadicalxChange we embrace the challenge of overturning stale categories and assumptions! We believe that thoughtful, collaborative innovation can help build better social institutions.
 
