@@ -38,7 +38,7 @@
       }
 
       .cta-button {
-        margin-top: 24px;
+        margin: 48px 0 10px;
         color: var(--dark-primary-color);
       }
 
@@ -83,11 +83,14 @@
           </div>
       </template>
 
-      <paper-button class="cta-button animated icon-right"
-        on-tap="_addPotentialPartner">
-        <span>{$ partnersBlock.button $}</span>
-        <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-      </paper-button>
+
+      <a href="https://docs.google.com/presentation/d/1YQH1ij3GsxpupgS6WPzJeg0DJKAMBHUZgnJAJNgDpnc/edit#slide=id.g543f1010fb_0_153" target="_blank">
+        <paper-button class="cta-button animated icon-right"
+          <span>{$ partnersBlock.button $}</span>
+          <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+        </paper-button>
+      </a>
+      <div>Interested in sponsoring? Email us at <a href="mailto:libertyjsconf@gmail.com">libertyjsconf@gmail.com</a></div>
     </div>
 
   </template>
