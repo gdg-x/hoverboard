@@ -1,15 +1,15 @@
 {
   "basepath": "/",
-  "url": "https://hoverboard-master.firebaseapp.com/",
-  "analytics": "UA-43643469-9",
+  "url": "https://foss4g-oceania-c8ffd.firebaseapp.com/",
+  "analytics": "",
   "prefix": "/",
   "firebase": {
-    "apiKey": "AIzaSyCaSkhtHekxAqXXzzbuNs2s6CpGdhZdta8",
-    "authDomain": "hoverboard-master.firebaseapp.com",
-    "databaseURL": "https://hoverboard-master.firebaseio.com",
-    "projectId": "hoverboard-master",
-    "storageBucket": "hoverboard-master.appspot.com",
-    "messagingSenderId": "516409946568"
+    "apiKey": "AIzaSyCaU0l3LvRWE_WPLcfDu7VW60FYVvF7zAM",
+    "authDomain": "foss4g-oceania-c8ffd.firebaseapp.com",
+    "databaseURL": "https://foss4g-oceania-c8ffd.firebaseio.com",
+    "projectId": "foss4g-oceania-c8ffd",
+    "storageBucket": "foss4g-oceania-c8ffd.appspot.com",
+    "messagingSenderId": "57330363394"
   },
   "googleMapApiKey": ""
 }
