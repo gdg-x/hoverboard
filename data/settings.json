@@ -110,6 +110,14 @@
         "color": "#fff"
       },
       "fontColor": "#424242"
+    },
+    "prospectus": {
+      "title": "Sponsorship Prospectus",
+      "metaDescription": "Learn more about the benefits of sponsoring this conference",
+      "background": {
+        "color": "#fff"
+      },
+      "fontColor": "#424242"
     }
   },
   "location": {

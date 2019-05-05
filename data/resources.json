@@ -24,6 +24,7 @@
   "time": "Time",
   "faq": "/data/faq.md",
   "cod": "/data/cod.md",
+  "prospectus": "data/sponsorship-prospectus.md",
   "footer": {
     "blog": "Blog"
   },
@@ -67,18 +68,8 @@
       "links": [
         {
           "name": "Sponsorship Proposition",
-          "url": "https://example.com",
-          "newTab": true
-        },
-        {
-          "name": "Info Sponsorship Proposition",
-          "url": "https://example.com",
-          "newTab": true
-        },
-        {
-          "name": "Media Kit",
-          "url": "https://example.com",
-          "newTab": true
+          "url": "/prospectus/",
+          "newTab": false
         },
         {
           "name": "Call for Papers",
