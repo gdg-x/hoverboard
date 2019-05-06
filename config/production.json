@@ -1,15 +1,15 @@
 {
   "basepath": "/",
-  "url": "https://libertyjs-929bc.firebaseapp.com/",
-  "analytics": "UA-135458394-2",
+  "url": "https://libertyjs-staging.firebaseapp.com/",
+  "analytics": "UA-135458394-1",
   "prefix": "/",
   "firebase": {
-    "apiKey": "AIzaSyDclOKKLeScdCyCTl2cEpdMVGF8rCVuhEk",
+    "apiKey": "AIzaSyB73fz26tj6mktqxmXFVfnmhp5x04_mCKA",
     "authDomain": "libertyjs-staging.firebaseapp.com",
-    "databaseURL": "https://libertyjs-929bc.firebaseapp.com/",
-    "projectId": "libertyjs-929bc",
-    "storageBucket": "libertyjs-929bc.appspot.com",
-    "messagingSenderId": "680295009573"
+    "databaseURL": "https://libertyjs-staging.firebaseio.com",
+    "projectId": "libertyjs-staging",
+    "storageBucket": "libertyjs-staging.appspot.com",
+    "messagingSenderId": "1048865718362"
   },
   "googleMapApiKey": "AIzaSyCaR6ZxmP5n79p5BABtVyS9VcUoaj5PyYw"
 }
