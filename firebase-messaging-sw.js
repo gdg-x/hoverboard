@@ -4,6 +4,7 @@ importScripts('bower_components/firebase/firebase-messaging.js');
 firebase.initializeApp({
   messagingSenderId: '{$ firebase.messagingSenderId $}',
 });
+
 const messaging = firebase.messaging();
 
 messaging.setBackgroundMessageHandler(({ data }) => {

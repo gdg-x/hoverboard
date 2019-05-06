@@ -661,7 +661,7 @@
       "title" : "Lead Software Developer"
     },
     "carmen_popovicu" : {
-      "bio" : "Carmen is a front-end engineer and a #1 fan of dev communities. She loves Angular but has since recently developed feelings for Polymer too. She strongly believes that adding at least one ASCII smiley in your emails will make the world a better place and hopes to one day make a difference for the web with the code she writes. If she had super powers, she would smiley all the things.",
+      "bio" : "Carmen is a front-end engineer and a #1 fan of dev communities. She loves Angular but has since recently developed feelings for Polymer too. She strongly believes that adding at least one ASCII smiley in your s will make the world a better place and hopes to one day make a difference for the web with the code she writes. If she had super powers, she would smiley all the things.",
       "company" : "Widespread",
       "companyLogo" : "/images/logos/gdg-lviv.svg",
       "companyLogoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/logos/gdg-lviv.svg",
@@ -1492,6 +1492,21 @@
       "title" : "Agent of Good Times"
       } ],
     "title" : "Core Team"
+  } ],
+  "contributor-team" : [ {
+    "contributing-members" : [{
+      "name" : "Chris Lorenzo",
+      "photoUrl" : "/images/team/teamPhotos_cf-headshot.jpg",
+      "socials" : [ {
+        "icon" : "twitter",
+        "link" : "https://twitter.com/che_effe",
+        "name" : "Twitter"
+      }],
+      "order" : 0,
+      "title" : "Technological Wizard"
+    }
+  ],
+    "title": "Contributors"
   } ],
   "tickets" : [ {
     "available" : true,
