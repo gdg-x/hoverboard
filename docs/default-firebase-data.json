@@ -153,9 +153,9 @@
         {
           "order": 1,
           "height": 100,
-          "logoUrl": "../images/logos/backelite.png",
-          "name": "Backelite",
-          "url": "https://www.backelite.com/fr/"
+          "logoUrl": "../images/logos/idean.png",
+          "name": "Idean",
+          "url": "https://www.idean.com/"
         },
         {
           "order": 1,
@@ -766,7 +766,6 @@
       ],
       "speakers": [
         "9gElbcbH86Q8VUKzNThIWkQ0Wih2",
-        "WDm2hCGOlLfIYHPHjaEry7aIpbT2",
         "9g2TJuw97VMd8Zwn9y2x0g0w7SB2"
       ],
       "presentation": null,
@@ -2521,25 +2520,6 @@
           "name": "Twitter"
         }],
         "title": "Co-fondatrice"
-      },
-      "WDm2hCGOlLfIYHPHjaEry7aIpbT2": {
-        "bio": "Mathieu Ancelin est développeur chez SERLI, spécialisé dans la programmation web avec Scala, Java, JavaScript, des streams, de la data et cloud. Et s'il y du React, c'est encore mieux ;-) Mathieu est le lead développeur de quelques projets open-source comme ReactiveCouchbase ou Otoroshi, un reverse-proxy moderne avec de l'api managment léger. Vous pouvez régulièrement le croiser au Poitou-Charentes JUG.",
-        "company": "SERLI",
-        "shortBio": "Software engineer chez SERLI",
-        "companyLogoUrl": "/images/logos/serli.png",
-        "country": "Poitiers",
-        "name": "Mathieu Ancelin",
-        "photoUrl": "https://avatars3.githubusercontent.com/u/277206?v=4",
-        "socials": [{
-          "link": "https://github.com/mathieuancelin",
-          "icon": "github",
-          "name": "GitHub"
-        }, {
-          "link": "https://twitter.com/TrevorReznik",
-          "icon": "twitter",
-          "name": "Twitter"
-        }],
-        "title": "Software engineer"
       },
       "zPNPb3IvUgVc5rJ1vuik7tIuQnw2": {
         "bio": "Développeur et formateur indépendant, co-organisateur de SoCraTes-Fr et F# addicte, j'aime construire des solutions pertinentes pour résoudre des problèmes.",
