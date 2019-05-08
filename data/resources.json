@@ -100,10 +100,10 @@
     "toast": "We will contact you soon!"
   },
   "featuredVideos": {
-    "title": "DFUA'16 featured videos",
+    "title": "Video highlights from the 2019 Conference",
     "callToAction": {
       "label": "See all videos",
-      "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+      "link": "https://www.youtube.com/channel/UCxRk8v1Wcxa1TIKTvqrtSOw/featured"
     }
   },
   "blog": {
