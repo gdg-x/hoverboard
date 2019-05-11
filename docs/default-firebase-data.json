@@ -4,7 +4,7 @@
 			"backgroundColor": "#3647a5",
 			"brief": "We have just launched our conference website",
 			"content": "This is ignored, use a Markdown source file",
-			"image": "/images/posts/c4p.jpg",
+			"image": "/images/manifest/icon-512.png",
 			"published": "2019-05-05",
 			"source": "/data/posts/website-announce.md",
 			"title": "New website!"
@@ -932,20 +932,20 @@
 			"soldOut": false,
 			"starts": "Sep 13",
 			"ends": "Oct 25",
-			"url": "https://2event.com/events/1027108"
+			"url": "https://ti.to"
 		},
 		{
-			"available": true,
+			"available": false,
 			"currency": "$",
 			"inDemand": false,
 			"info": "Our first tickets",
 			"name": "Early Bird",
-			"price": 100,
+			"price": 350,
 			"regular": false,
 			"soldOut": false,
 			"starts": "Jun 14",
 			"ends": "July 16",
-			"url": "https://2event.com/events/1027108"
+			"url": "https://ti.to"
 		},
 		{
 			"available": false,
@@ -958,7 +958,7 @@
 			"soldOut": false,
 			"starts": "Sep 13",
 			"ends": "Oct 25",
-			"url": "https://2event.com/events/1027108"
+			"url": "https://ti.to"
 		},
 		{
 			"available": false,
@@ -969,7 +969,7 @@
 			"soldOut": false,
 			"starts": "Sep 13",
 			"ends": "Oct 25",
-			"url": "https://2event.com/events/1027108"
+			"url": "https://ti.to"
 		}
 	],
 	"triggers": {
