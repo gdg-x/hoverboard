@@ -3,7 +3,7 @@
 		"website": {
 			"backgroundColor": "#3647a5",
 			"brief": "We have just launched our conference website",
-			"content": "This is a test",
+			"content": "This is ignored, use a Markdown source file",
 			"image": "/images/posts/c4p.jpg",
 			"published": "2019-05-05",
 			"source": "/data/posts/website-announce.md",
