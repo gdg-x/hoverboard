@@ -33,7 +33,8 @@
     "good-map": "keanulee/good-map#^0.0.1",
     "paper-menu-button": "PolymerElements/paper-menu-button#^2.0.0",
     "paper-toast": "^2.1.0",
-    "paper-progress": "^2.1.1"
+    "paper-progress": "^2.1.1",
+    "leaflet-map": "unicef-polymer/etools-leaflet-map#^2.0.2"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0"

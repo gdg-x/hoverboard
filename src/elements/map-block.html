@@ -1,11 +1,12 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../../bower_components/good-map/good-map.html">
 
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="./hoverboard-icons.html">
 <link rel="import" href="./shared-styles.html">
+
+<link rel="import" href="../../bower_components/leaflet-map/leaflet-map.html">
 
 <dom-module id="map-block">
   <template>
@@ -43,7 +44,7 @@
           margin: 64px auto 72px;
         }
 
-        good-map {
+        leaflet-map {
           display: block;
           height: 640px;
         }
@@ -63,14 +64,19 @@
     </style>
 
     <template is="dom-if" if="[[viewport.isTabletPlus]]">
-      <good-map
+      <leaflet-map
         id="map"
-        api-key="{$ googleMapApiKey $}"
         latitude="{$ location.mapCenter.latitude $}"
         longitude="{$ location.mapCenter.longitude $}"
-        zoom="{$ location.pointer.zoom $}"
-        map-options="[[options]]"
-      ></good-map>
+        zoom={$ location.pointer.zoom $}
+        scrollWheelZoom=false
+      >
+        <leaflet-marker
+          latitude="{$ location.pointer.latitude $}"
+          longitude="{$ location.pointer.longitude $}"
+          title="{$ location.name $}">
+        </leaflet-marker>
+      </leaflet-map>
     </template>
 
     <div class="container" layout vertical end-justified fit$="[[viewport.isTabletPlus]]">
@@ -110,38 +116,7 @@
           options: {
             type: Object,
             value: () => (
-              {
-                disableDefaultUI: true,
-                disableDoubleClickZoom: true,
-                scrollwheel: false,
-                draggable: false,
-                styles: [{
-                  stylers: [{
-                    lightness: 40,
-                  }, {
-                    visibility: 'on',
-                  }, {
-                    gamma: 0.9,
-                  }, {
-                    weight: 0.4,
-                  }],
-                }, {
-                  elementType: 'labels',
-                  stylers: [{
-                    visibility: 'on',
-                  }],
-                }, {
-                  featureType: 'water',
-                  stylers: [{
-                    color: '#5dc7ff',
-                  }],
-                }, {
-                  featureType: 'road',
-                  stylers: [{
-                    visibility: 'off',
-                  }],
-                }],
-              }
+              {}
             ),
           },
         };
@@ -150,21 +125,10 @@
       connectedCallback() {
         super.connectedCallback();
         this.addEventListener('dom-change', () => {
-          this.shadowRoot.querySelector('#map').addEventListener('google-map-ready', (e) => {
-            if (!this.viewport.isTabletPlus) return;
-            new google.maps.Marker({
-              position: {
-                lat: parseFloat('{$ location.pointer.latitude $}'),
-                lng: parseFloat('{$ location.pointer.longitude $}'),
-              },
-              icon: {
-                url: 'images/map-marker.svg',
-                anchor: new google.maps.Point(25, 50),
-                scaledSize: new google.maps.Size(50, 50),
-              },
-              map: e.detail,
-            });
-          }, { once: true });
+          this.shadowRoot.querySelector('#map').addEventListener('load', (e) => {
+            // "Let's all do GIS in the browser" they said
+            window.setTimeout(() => window.dispatchEvent(new Event('resize')), 1000);
+          });
         }, { once: true });
       }
     }

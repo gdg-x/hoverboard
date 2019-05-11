@@ -127,9 +127,9 @@
     "short": "Wellington, New Zealand",
     "address": "Cnr Aitken and Molesworth Streets, Wellington",
     "pointer": {
-      "latitude": -41.2770037,
-      "longitude": 174.7777053,
-      "zoom": 12
+      "latitude": -41.276596,
+      "longitude": 174.778410,
+      "zoom": 16
     },
     "mapCenter": {
       "latitude": -41.2770037,
