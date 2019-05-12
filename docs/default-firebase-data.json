@@ -66,29 +66,13 @@
 	"partners": [{
 			"logos": [{
 					"order": 0,
-					"logoUrl": "https://crownpropertydisposals.linz.govt.nz/sites/all/themes/linz/images/linz-logo.svg",
-					"name": "Land Information New Zealand",
-					"url": "https://www.linz.govt.nz/"
-				},
-				{
-					"order": 1,
-					"logoUrl": "https://upload.wikimedia.org/wikipedia/de/thumb/d/d7/Landcare_Research_New_Zealand_Logo.svg/2000px-Landcare_Research_New_Zealand_Logo.svg.png",
-					"name": "Manaaki Whenua | Landcare Research",
-					"url": "https://www.landcareresearch.co.nz/"
+					"logoUrl": "/images/token-brand.jpg",
+					"name": "Your Company Here",
+					"url": "/prospectus/"
 				}
 			],
 			"order": 0,
-			"title": "Platinum Sponsors"
-		},
-		{
-			"order": 2,
-			"title": "Gold Sponsors",
-			"logos": [{
-				"order": 0,
-				"logoUrl": "https://pbs.twimg.com/profile_images/658841747833753600/vZGRIRTs_400x400.png",
-				"name": "Koordinates",
-				"url": "https://koordinates.com/"
-			}]
+			"title": "Sponsors"
 		}
 	],
 	"schedule": {
