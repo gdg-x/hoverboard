@@ -3285,6 +3285,22 @@
         "name": "Linked In"
       }],
       "order": 18
+    }, {
+      "name": "Gilles Vieira",
+      "photoUrl": "/images/people/gvieira.jpg",
+      "socials": [{
+          "icon": "twitter",
+          "link": "https://twitter.com/vieira_gilles",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://fr.linkedin.com/in/gilles-vieira",
+          "name": "LinkedIn"
+        }
+      ],
+      "title": "",
+      "order": 9
     }],
     "title": "Membres"
   }],
