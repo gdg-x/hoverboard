@@ -117,7 +117,7 @@
         });
 
         firebase.firestore()
-          .enablePersistence({ experimentalTabSynchronization: true })
+          .enablePersistence({ tabSynchronization: true })
           .catch(() => {
             console.warn('DB offline support not available'); // eslint-disable-line no-console
           });
