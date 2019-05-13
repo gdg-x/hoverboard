@@ -39,19 +39,19 @@ Our goal is to allow event organizers to set up professional conference website 
 1. Import initial data to the Firebase Database
     * Generate `serviceAccount.json` file
       - Go to https://console.firebase.google.com/project/%YOUR_PROJECT_ID%/settings/serviceaccounts/adminsdk
-      - Ensure that **Node.js** is selected and press **GENERATE NEW PRIVATE KEY** 
+      - Ensure that **Node.js** is selected and press **GENERATE NEW PRIVATE KEY**
       - Save the file as `serviceAccount.json` and to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
     * Enable Firestore in web console (https://console.firebase.google.com -> Database -> Cloud Firestore)
     * [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
     * Run `npm run firestore:init` or `yarn firestore:init`
 1. Run locally
-   * `npm run serve` or `yarn serve`
+   * `npm start` or `yarn start`
 1. Build and deploy
    * `npm run build` or `yarn build`
    * `npm run deploy` or `yarn deploy`
-   
+
 *NOTE:* By default command using configurations from `/configs/development.json`.
-To serve locally or deploy the production app use `yarn serve:prod` and `yarn deploy:prod` respectively.
+To serve locally or deploy the production app use `yarn start:prod` and `yarn deploy:prod` respectively.
 
 :book: Read the [Full Setup Guide](/docs/).
 
@@ -96,7 +96,7 @@ Awesome! Contributions of all kinds are greatly appreciated. To help smoothen th
 
 ### Good First Issue
 
-Issues labeled [`good first issue`](https://github.com/gdg-x/hoverboard/labels/good%20first%20issue) are a great way to ease into development on this project. 
+Issues labeled [`good first issue`](https://github.com/gdg-x/hoverboard/labels/good%20first%20issue) are a great way to ease into development on this project.
 
 ### Help Wanted Label
 
@@ -128,13 +128,13 @@ This project exists thanks to all the [people who contribute](https://github.com
 <a href="graphs/contributors"><img src="https://opencollective.com/hoverboard/contributors.svg?width=890" /></a>
 
 ## Sponsoring
-Most of the core team members, hoverboard contributors and contributors in the ecosystem do this open source work in their free time. If you like this project and it makes your life easier, please donate.  
+Most of the core team members, hoverboard contributors and contributors in the ecosystem do this open source work in their free time. If you like this project and it makes your life easier, please donate.
 <a href="https://opencollective.com/hoverboard#backers" target="_blank"><img src="https://opencollective.com/hoverboard/backers.svg?width=890"></a>
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard?ref=badge_large)
 
-Project is published under the [MIT license](/LICENSE.md).  
+Project is published under the [MIT license](/LICENSE.md).
 Feel free to clone and modify repo as you want, but don't forget to add reference to authors :)
 
 _GDG[x] are not endorsed and/or supported by Google, the corporation._

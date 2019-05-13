@@ -13,8 +13,8 @@
     "firestore:init": "firebase firestore:delete -r --all-collections -y && firebase functions:config:set schedule.enabled=true && firebase deploy --except hosting && babel-node ./internals/import-default-data",
     "firestore:copy": "babel-node ./internals/firestore-copy-data",
     "postinstall": "bower install",
-    "serve": "gulp serve",
-    "serve:prod": "cross-env BUILD_ENV=production gulp serve",
+    "start": "gulp serve",
+    "start:prod": "cross-env BUILD_ENV=production gulp serve",
     "lint": "gulp lint",
     "pretest": "npm run lint",
     "test": "echo \"No tests\""
