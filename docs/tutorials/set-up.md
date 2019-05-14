@@ -72,12 +72,12 @@ The diagram below is a brief summary of the directories within the project.
 1. Run locally
    * `cd` into the base directory
    * `npm install` or `yarn`
-   * `npm run serve` or `yarn serve`
+   * `npm start` or `yarn start`
 1. Deploy
    * `npm run deploy` or `yarn deploy`
 
 *NOTE:* By default command using configurations from `/configs/development.json`.
-To serve locally or deploy the production app use `yarn serve:prod` and `yarn deploy:prod` respectively.
+To serve locally or deploy the production app use `yarn start:prod` and `yarn deploy:prod` respectively.
 
 ## Next steps
 
