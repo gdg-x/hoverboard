@@ -4,7 +4,7 @@
   Polymer.AppLayout.registerEffect('transparent-scroll', {
     setUp: function () {
       this._headerToolbar = this.shadowRoot.querySelector('slot').assignedNodes({ flatten: true })
-        .filter((node) => node.nodeType === Node.ELEMENT_NODE
+          .filter((node) => node.nodeType === Node.ELEMENT_NODE
           && node.localName === 'header-toolbar')[0];
     },
 
