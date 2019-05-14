@@ -1079,7 +1079,7 @@
       "icon": null
     },
     "31": {
-      "title": "Spring Boot avec Kofu et les Coroutines",
+      "title": "Spring Boot avec Kotlin, Kofu et les Coroutines",
       "complexity": "beginner",
       "description": "Cette présentation sera pour moi l'occasion de présenter le support officiel des Coroutines dans Spring (Framework, Boot, Data) ainsi que [Kofu](https://github.com/spring-projects/spring-fu/blob/master/kofu/README.adoc), la DSL Kotlin développée au sein de l'incubateur [Spring Fu](https://github.com/spring-projects/spring-fu) que j'ai créé il y a quelques mois et qui permet de configurer Spring Boot de manière explicite et encore plus performante.\n\nMon live coding montrera comment développer une application Spring Boot avec Kofu en utilisant les nouvelles API Coroutines de WebFlux  et [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc) (Reactive SQL). Nous comparerons également les API Reactive et Coroutines (avantages, inconvénients) pour vous aider à faire un choix en connaissance de cause.",
       "language": "French",
@@ -3300,7 +3300,7 @@
         }
       ],
       "title": "",
-      "order": 9
+      "order": 19
     }],
     "title": "Membres"
   }],
