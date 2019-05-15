@@ -226,6 +226,12 @@
         "logoUrl": "../images/logos/rh.png",
         "name": "Recherches & Horizons",
         "url": "https://reth.fr"
+      }, {
+        "order": 0,
+        "height": 50,
+        "logoUrl": "../images/logos/monkeypatch.png",
+        "name": "MonkeyPatch",
+        "url": "http://www.monkeypatch.io/"
       }],
       "order": 3,
       "title": "Bronze"
