@@ -2364,12 +2364,21 @@
         "title": "Chef de projet Open Data"
       },
       "leVEVOLM3HfPtzVfQA7WTWyQwoI3": {
-        "bio": "",
-        "company": null,
-        "country": "France",
-        "name": "Jérémy Rouanet",
-        "photoUrl": "https://lh5.googleusercontent.com/-63xnsIvQtFQ/AAAAAAAAAAI/AAAAAAAAAAc/APnbBAIlFUo/photo.jpg",
-        "socials": [],
+        "bio": "Développeur à Zenika",
+        "company": "Zenika",
+        "country": "Bordeaux, France",
+        "companyLogoUrl": "/images/logos/zenika.png",
+        "name": "Maxime Ribera",
+        "photoUrl": "/images/people/maxime.ribera.jpg",
+        "socials": [{
+          "icon": "linkedin",
+          "name": "linkedin",
+          "link": "https://fr.linkedin.com/in/maxime-ribera-01813284"
+        }, {
+          "link": "https://twitter.com/riberamaxime",
+          "icon": "twitter",
+          "name": "Twitter"
+        } ],
         "title": null
       },
       "zoyriE2DMHXyKCSewITYQwlffO83": {
