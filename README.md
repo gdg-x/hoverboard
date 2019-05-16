@@ -29,20 +29,20 @@ Our goal is to allow event organizers to set up professional conference website 
 | **Blog** | post announcements, updates and useful information |
 
 ## Getting Started
-1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone it locally
-1. Setup Environment
-   * Install [Node.js (v8.9.4 or above)](https://nodejs.org/en/download/)
-   * Install Firebase CLI: `npm i -g firebase-tools` or `yarn global add firebase-tools`
+1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone your fork locally
+1. Install [Node.js (v8.9.4 or above)](https://nodejs.org/en/download/)
 1. Install project dependencies: `npm install` or `yarn`
-1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `firebase login`
+1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `npx firebase login`
 1. Update [Hoverboard config](/config) and [Resources](/data)
 1. Import initial data to the Firebase Database
     * Generate `serviceAccount.json` file
-      - Go to https://console.firebase.google.com/project/%YOUR_PROJECT_ID%/settings/serviceaccounts/adminsdk
-      - Ensure that **Node.js** is selected and press **GENERATE NEW PRIVATE KEY**
+      - Go to [console.firebase.google.com](https://console.firebase.google.com) -> Project settings -> Service accounts
+      - Ensure that **Node.js** is selected and press **Generate new private key**
+      - Read the warning and press **Generate key**
       - Save the file as `serviceAccount.json` and to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
-    * Enable Firestore in web console (https://console.firebase.google.com -> Database -> Cloud Firestore)
+    * Enable Firestore in web console at [console.firebase.google.com](https://console.firebase.google.com) -> Database -> Cloud Firestore -> Create database. Select **locked mode** and press **Enable**
     * [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
+	  * Select your Firebase project `npx firebase use <YOUR_PROJECT_ID>`
     * Run `npm run firestore:init` or `yarn firestore:init`
 1. Run locally
    * `npm start` or `yarn start`
@@ -63,10 +63,11 @@ If you don't want to bother with the dependencies, you can use the docker contai
 
 ## Updating
 Here is a git workflow for updating your fork (or downloaded copy) to the latest version:
+
 ```console
 git remote add upstream https://github.com/gdg-x/hoverboard.git
 git fetch upstream
-git merge upstream/hoverboard
+git merge upstream/master
 # resolve the merge conflicts in your editor
 git add . -u
 git commit -m 'Updated to the latest version'
