@@ -2,6 +2,7 @@
 
 Configuration data is split into two files:
 `data/settings.json` (configuration data):
+
 ```json
   "organizer": {..},
   "url": "..",
@@ -18,6 +19,7 @@ Configuration data is split into two files:
 and `data/resources.json` (texts and other configurations):
 
 ### Pages configuration
+
 Disable, reorder or modify blocks for individual page inside their individual files that can be found in `/pages` folder.
 The top block (aka 'hero') view of the page can be adjusted via `heroSettings` in `data/settings.json`
 
@@ -75,7 +77,9 @@ in `hoverboard-app.html`
 ```
 
 ### Toolbar Navigation
+
 Define a page's label and url in `navigation` in `data/settings.json`
+
 ```json
 "navigation": [
   {
@@ -87,7 +91,7 @@ Define a page's label and url in `navigation` in `data/settings.json`
     "route": "speakers",
     "permalink": "/speakers/",
     "label": "Speakers"
-  },  
+  },
   ...
 ]
 ```
@@ -99,8 +103,8 @@ Define a page's label and url in `navigation` in `data/settings.json`
 
 # Next steps
 
-Now your Hoverboard is up configured, learn how to integrate [firebase][firebase] in your app, [style app][style app] and [deploy][deploy].
+Now your Hoverboard is configured, learn how to integrate [firebase][firebase] with, [style][style app] and [deploy][deploy] your app.
 
-[style app]: styling.md
-[deploy]: deploy.md
-[firebase]: firebase.md
+[style app]: 03-styling.md
+[deploy]: 04-deploy.md
+[firebase]: 02-firebase.md
