@@ -106,26 +106,25 @@
       'firebase-auth',
       'firebase-messaging',
     ])
-        .then(() => {
-          firebase.initializeApp({
-            apiKey: '{$ firebase.apiKey $}',
-            authDomain: '{$ firebase.authDomain $}',
-            databaseURL: '{$ firebase.databaseURL $}',
-            projectId: '{$ firebase.projectId $}',
-            storageBucket: '{$ firebase.storageBucket $}',
-            messagingSenderId: '{$ firebase.messagingSenderId $}',
+      .then(() => {
+        firebase.initializeApp({
+          apiKey: '{$ firebase.apiKey $}',
+          authDomain: '{$ firebase.authDomain $}',
+          databaseURL: '{$ firebase.databaseURL $}',
+          projectId: '{$ firebase.projectId $}',
+          storageBucket: '{$ firebase.storageBucket $}',
+          messagingSenderId: '{$ firebase.messagingSenderId $}',
+        });
+
+        firebase.firestore()
+          .enablePersistence({ tabSynchronization: true })
+          .catch(() => {
+            console.warn('DB offline support not available'); // eslint-disable-line no-console
           });
-
-          firebase.firestore()
-              .enablePersistence({ experimentalTabSynchronization: true })
-              .catch(() => {
-                console.warn('DB offline support not available'); // eslint-disable-line no-console
-              });
-
-          // eslint-disable-next-line no-console
-          console.log('Firebase App is ready!');
-        })
-        .then(() => loadHoverboardApp());
+        // eslint-disable-next-line no-console
+        console.log('Firebase App is ready!');
+      })
+      .then(() => loadHoverboardApp());
 
   </script>
 
