@@ -12,10 +12,7 @@
 
 <dom-module id="speakers-block">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
-
-    <style>
-
+    <style include="shared-styles flex flex-alignment positioning">
       :host {
         display: block;
       }
@@ -213,8 +210,8 @@
 
     // eslint-disable-next-line no-undef
     class SpeakersBlock extends UtilsFunctions(SpeakersHoC(
-      // eslint-disable-next-line no-undef
-      ReduxMixin(Polymer.GestureEventListeners(Polymer.Element))
+        // eslint-disable-next-line no-undef
+        ReduxMixin(Polymer.GestureEventListeners(Polymer.Element))
     )) {
       static get is() {
         return 'speakers-block';
@@ -238,7 +235,7 @@
 
       _generateSpeakers(speakers) {
         const filteredSpeakers = this.speakers
-          .filter((speaker) => speaker.featured);
+            .filter((speaker) => speaker.featured);
         this.set('featuredSpeakers', this.randomOrder(filteredSpeakers).slice(0, 4));
       }
     }

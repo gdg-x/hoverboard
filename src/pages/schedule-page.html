@@ -21,10 +21,7 @@
 
 <dom-module id="schedule-page">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
-
-    <style>
-
+    <style include="shared-styles flex flex-alignment">
       :host {
         display: block;
         height: 100%;
@@ -239,8 +236,8 @@
             if (active && id) {
               dialogsActions.openDialog(DIALOGS.SESSION, this.sessionsMap[id[0]]);
             } else {
-               this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
-               this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
+              this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
+              this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
             }
           });
         }

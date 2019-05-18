@@ -9,9 +9,7 @@
 
 <dom-module id="video-dialog">
   <template>
-    <style is="custom-style" include="positioning"></style>
-
-    <style>
+    <style include="positioning">
       :host {
         margin: 0;
         padding: 0;
@@ -70,7 +68,7 @@
 
   <script>
     class VideoDialog extends ReduxMixin(
-      Polymer.mixinBehaviors([Polymer.PaperDialogBehavior], Polymer.Element)
+        Polymer.mixinBehaviors([Polymer.PaperDialogBehavior], Polymer.Element)
     ) {
       static get is() {
         return 'video-dialog';

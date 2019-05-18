@@ -8,9 +8,7 @@
 
 <dom-module id="subscribe-dialog">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
-
-    <style>
+    <style include="shared-styles flex flex-alignment">
       :host {
         margin: 0;
         display: block;
@@ -107,7 +105,7 @@
   <script>
 
     class SubscribeDialog extends ReduxMixin(
-      Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element)
+        Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element)
     ) {
       static get is() {
         return 'subscribe-dialog';

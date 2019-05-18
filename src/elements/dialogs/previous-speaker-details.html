@@ -17,10 +17,7 @@
 
 <dom-module id="previous-speaker-details">
   <template>
-    <style is="custom-style" include="shared-styles dialog-styles flex flex-alignment positioning"></style>
-
-    <style>
-
+    <style include="shared-styles dialog-styles flex flex-alignment positioning">
       .photo {
         margin-right: 16px;
         width: 96px;
@@ -138,7 +135,7 @@
 
     // eslint-disable-next-line no-undef
     class PreviousSpeakerDetails extends UtilsFunctions(
-      ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element))
+        ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element))
     ) {
       static get is() {
         return 'previous-speaker-details';
@@ -171,11 +168,11 @@
 
       _getSessions(sessions) {
         return sessions && Object.keys(sessions)
-          .reduce((aggregator, year) => {
-            return aggregator
-              .concat(sessions[year].map((session) => Object.assign({}, session, { year })));
-          }, [])
-          .sort((a, b) => b.year - a.year);
+            .reduce((aggregator, year) => {
+              return aggregator
+                  .concat(sessions[year].map((session) => Object.assign({}, session, { year })));
+            }, [])
+            .sort((a, b) => b.year - a.year);
       }
 
       _openVideo(event) {

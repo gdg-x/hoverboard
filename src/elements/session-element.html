@@ -10,10 +10,7 @@
 
 <dom-module id="session-element">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
-
-    <style>
-
+    <style include="shared-styles flex flex-alignment positioning">
       :host {
         display: block;
         background-color: var(--primary-background-color);
@@ -212,7 +209,7 @@
 
     // eslint-disable-next-line no-undef
     class SessionElement extends UtilsFunctions(
-      ReduxMixin(Polymer.GestureEventListeners(Polymer.Element))
+        ReduxMixin(Polymer.GestureEventListeners(Polymer.Element))
     ) {
       static get is() {
         return 'session-element';

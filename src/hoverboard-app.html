@@ -38,9 +38,7 @@
 <dom-module id="hoverboard-app">
 
   <template>
-
-    <style is="custom-style" include="shared-styles flex flex-reverse flex-alignment positioning"></style>
-    <style>
+    <style include="shared-styles flex flex-reverse flex-alignment positioning">
       :host {
         display: block;
         position: relative;
@@ -402,7 +400,7 @@
             Polymer.importHref(this.resolveUrl('lazy-resources.html'), () => {
               this.loadComplete = true;
               notificationsActions.initializeMessaging()
-                .then(() => this.dispatch(notificationsActions.getToken()));
+                  .then(() => this.dispatch(notificationsActions.getToken()));
             });
           });
         }
@@ -465,15 +463,15 @@
         if (!this.ui.addToHomescreen) this.closeDrawer();
         this.ui.addToHomescreen.prompt();
         this.ui.addToHomescreen.userChoice
-          .then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-              ga('send', 'event', 'add_to_home_screen_prompt', 'accepted');
-            } else {
-              ga('send', 'event', 'add_to_home_screen_prompt', 'dismissed');
-            }
-            uiActions.setAddToHomeScreen(null);
-            this.closeDrawer();
-          });
+            .then((choiceResult) => {
+              if (choiceResult.outcome === 'accepted') {
+                ga('send', 'event', 'add_to_home_screen_prompt', 'accepted');
+              } else {
+                ga('send', 'event', 'add_to_home_screen_prompt', 'dismissed');
+              }
+              uiActions.setAddToHomeScreen(null);
+              this.closeDrawer();
+            });
       }
     }
 

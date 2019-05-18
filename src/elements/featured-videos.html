@@ -11,9 +11,7 @@
 
 <dom-module id="featured-videos">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
-
-    <style>
+    <style include="shared-styles flex flex-alignment positioning">
       :host {
         display: block;
         --video-item-height: 200px;
@@ -291,12 +289,12 @@
         const cardRect = videos[videos.length - 1].getBoundingClientRect();
         const cardWidth = cardRect.width;
         const videosContainerWidth = parseInt(getComputedStyle(this.$.videoList, null)
-          .getPropertyValue('width'));
+            .getPropertyValue('width'));
         const videosWidth = parseInt(getComputedStyle(this.$.videos, null)
-          .getPropertyValue('width'));
+            .getPropertyValue('width'));
         const maxRightPosition = -(videosWidth - videosContainerWidth) - 16;
         const currentPosition = parseInt(getComputedStyle(this.$.videos, null)
-          .getPropertyValue('transform').split(',')[4]);
+            .getPropertyValue('transform').split(',')[4]);
 
         return {
           cardWidth,

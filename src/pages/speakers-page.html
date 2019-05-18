@@ -18,10 +18,7 @@
 
 <dom-module id="speakers-page">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
-
-    <style>
-
+    <style include="shared-styles flex flex-alignment positioning">
       :host {
         display: block;
         height: 100%;
@@ -318,9 +315,9 @@
           this.contentLoaderVisibility = 'hidden';
           const filters = selectedFilters && selectedFilters.tag ? selectedFilters.tag : [];
           const updatedSpeakers = this._filterItems(speakers, filters)
-            .map((speaker) => Object.assign({}, speaker, {
-              link: `/speakers/${speaker.id}${this.queryParams ? `?${this.queryParams}` : ''}`,
-            }));
+              .map((speaker) => Object.assign({}, speaker, {
+                link: `/speakers/${speaker.id}${this.queryParams ? `?${this.queryParams}` : ''}`,
+              }));
           this.set('speakersToRender', updatedSpeakers);
         }
       }
@@ -332,8 +329,8 @@
               const speakerData = speakersMap[id];
               speakerData && dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
             } else {
-               this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
-               this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
+              this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
+              this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
             }
           });
         }

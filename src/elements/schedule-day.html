@@ -7,10 +7,7 @@
 
 <dom-module id="schedule-day">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
-
-    <style>
-
+    <style include="shared-styles flex flex-alignment positioning">
       :host {
         display: block;
         --tracks-number: 3;
@@ -177,10 +174,10 @@
               const offset = this.offsetTop(targetElement);
               // eslint-disable-next-line no-undef
               const toolbarHeight = HOVERBOARD.Elements.HeaderToolbar
-                .getBoundingClientRect().height - 1;
+                  .getBoundingClientRect().height - 1;
               // eslint-disable-next-line no-undef
               const stickyToolbarHeight = HOVERBOARD.Elements.StickyHeaderToolbar
-                .getBoundingClientRect().height;
+                  .getBoundingClientRect().height;
               const additionalMargin = this.viewport.isTabletPlus ? 8 : 0;
               const scrollTargetY = offset - toolbarHeight - stickyToolbarHeight - additionalMargin;
               this.scrollToY(scrollTargetY, 1500, 'easeInOutSine');
@@ -200,7 +197,7 @@
       _showAddSession(timeslot, onlyFeatured) {
         return onlyFeatured && !timeslot.sessions.reduce((aggregator, sessionBlock) =>
           aggregator + sessionBlock.items.length
-          , 0);
+            , 0);
       }
 
       _isNotEmpty(sessionBlock) {
