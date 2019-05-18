@@ -4,13 +4,13 @@
   /* @polymerMixin */
   const ShareMixin = (subclass) => class extends subclass {
     share(e) {
-      let type = e.currentTarget.getAttribute('share');
-      let shareUrl = location.href;
+      const type = e.currentTarget.getAttribute('share');
+      const shareUrl = location.href;
       let width = 600;
       let height = 600;
-      let winOptions = `menubar=no,toolbar=no,resizable=yes,scrollbars=yes,` +
+      const winOptions = `menubar=no,toolbar=no,resizable=yes,scrollbars=yes,` +
         `height=${height},width=${width}`;
-      let title = document.title;
+      const title = document.title;
       let url;
 
       switch (type) {
@@ -30,7 +30,7 @@
         }
         case 'twitter': {
           height = 253;
-          let text = `Check out ${title} at #{$ hashtag $}: ${shareUrl}`;
+          const text = `Check out ${title} at #{$ hashtag $}: ${shareUrl}`;
           url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
           break;
         }

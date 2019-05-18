@@ -144,11 +144,11 @@
   };
 
   const store = Redux.createStore(
-    appReducer,
-    Redux.compose(
-      Redux.applyMiddleware(window.ReduxThunk.default),
+      appReducer,
+      Redux.compose(
+          Redux.applyMiddleware(window.ReduxThunk.default),
       window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
-    )
+      )
   );
 
   ReduxMixin = PolymerRedux(store);

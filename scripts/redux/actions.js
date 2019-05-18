@@ -110,32 +110,32 @@ const ticketsActions = {
     });
 
     return firebase.firestore().collection('tickets')
-      .orderBy('order', 'asc')
-      .get()
-      .then((snaps) => {
-        const list = snaps.docs
-          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+        .orderBy('order', 'asc')
+        .get()
+        .then((snaps) => {
+          const list = snaps.docs
+              .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
 
-        dispatch({
-          type: FETCH_TICKETS_SUCCESS,
-          payload: { list },
+          dispatch({
+            type: FETCH_TICKETS_SUCCESS,
+            payload: { list },
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: FETCH_TICKETS_FAILURE,
+            payload: { error },
+          });
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: FETCH_TICKETS_FAILURE,
-          payload: { error },
-        });
-      });
   },
 };
 
 const _getPartnerItems = (groupId) => firebase.firestore()
-  .collection('partners').doc(groupId).collection('items').orderBy('order', 'asc')
-  .get()
-  .then((snaps) => snaps.docs
-    .map((snap) => Object.assign({}, snap.data(), { id: snap.id }))
-  );
+    .collection('partners').doc(groupId).collection('items').orderBy('order', 'asc')
+    .get()
+    .then((snaps) => snaps.docs
+        .map((snap) => Object.assign({}, snap.data(), { id: snap.id }))
+    );
 
 const partnersActions = {
   addPartner: (data) => (dispatch) => {
@@ -152,20 +152,20 @@ const partnersActions = {
     };
 
     firebase.firestore().collection('potentialPartners')
-      .doc(id)
-      .set(partner)
-      .then(() => {
-        dispatch({
-          type: ADD_POTENTIAL_PARTNER_SUCCESS,
-          payload: { partner },
+        .doc(id)
+        .set(partner)
+        .then(() => {
+          dispatch({
+            type: ADD_POTENTIAL_PARTNER_SUCCESS,
+            payload: { partner },
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: ADD_POTENTIAL_PARTNER_FAILURE,
+            payload: { error },
+          });
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: ADD_POTENTIAL_PARTNER_FAILURE,
-          payload: { error },
-        });
-      });
   },
   fetchPartners: () => (dispatch) => {
     dispatch({
@@ -173,31 +173,33 @@ const partnersActions = {
     });
 
     firebase.firestore()
-      .collection('partners')
-      .orderBy('order', 'asc')
-      .get()
-      .then((snaps) => Promise.all(
-        snaps.docs.map((snap) => Promise.all([
-          snap.data(),
-          snap.id,
-          _getPartnerItems(snap.id),
-        ]))
-      ))
-      .then((groups) => groups.map(([group, id, items]) => Object.assign({}, group, { id, items })))
-      .then((list) => {
-        dispatch({
-          type: FETCH_PARTNERS_SUCCESS,
-          payload: {
-            list,
-          },
+        .collection('partners')
+        .orderBy('order', 'asc')
+        .get()
+        .then((snaps) => Promise.all(
+            snaps.docs.map((snap) => Promise.all([
+              snap.data(),
+              snap.id,
+              _getPartnerItems(snap.id),
+            ]))
+        ))
+        .then((groups) => groups.map(([group, id, items]) => {
+          return Object.assign({}, group, { id, items });
+        }))
+        .then((list) => {
+          dispatch({
+            type: FETCH_PARTNERS_SUCCESS,
+            payload: {
+              list,
+            },
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: FETCH_PARTNERS_FAILURE,
+            payload: { error },
+          });
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: FETCH_PARTNERS_FAILURE,
-          payload: { error },
-        });
-      });
   },
 };
 
@@ -208,23 +210,23 @@ const videosActions = {
     });
 
     return firebase.firestore().collection('videos')
-      .orderBy('order', 'asc')
-      .get()
-      .then((snaps) => {
-        const list = snaps.docs
-          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+        .orderBy('order', 'asc')
+        .get()
+        .then((snaps) => {
+          const list = snaps.docs
+              .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
 
-        dispatch({
-          type: FETCH_VIDEOS_SUCCESS,
-          payload: { list },
+          dispatch({
+            type: FETCH_VIDEOS_SUCCESS,
+            payload: { list },
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: FETCH_VIDEOS_FAILURE,
+            payload: { error },
+          });
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: FETCH_VIDEOS_FAILURE,
-          payload: { error },
-        });
-      });
   },
 };
 
@@ -235,32 +237,32 @@ const blogActions = {
     });
 
     firebase.firestore()
-      .collection('blog')
-      .orderBy('published', 'desc')
-      .get()
-      .then((snaps) => {
-        const list = snaps.docs
-          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+        .collection('blog')
+        .orderBy('published', 'desc')
+        .get()
+        .then((snaps) => {
+          const list = snaps.docs
+              .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
 
-        const obj = list.reduce(
-          (acc, curr) => Object.assign({}, acc, { [curr.id]: curr }),
-          {}
-        );
+          const obj = list.reduce(
+              (acc, curr) => Object.assign({}, acc, { [curr.id]: curr }),
+              {}
+          );
 
-        dispatch({
-          type: FETCH_BLOG_LIST_SUCCESS,
-          payload: {
-            obj,
-            list,
-          },
+          dispatch({
+            type: FETCH_BLOG_LIST_SUCCESS,
+            payload: {
+              obj,
+              list,
+            },
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: FETCH_BLOG_LIST_FAILURE,
+            payload: { error },
+          });
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: FETCH_BLOG_LIST_FAILURE,
-          payload: { error },
-        });
-      });
   },
 };
 
@@ -272,32 +274,32 @@ const speakersActions = {
 
     const speakersPromise = new Promise((resolve, reject) => {
       firebase.firestore()
-        .collection('generatedSpeakers')
-        .orderBy('order', 'asc')
-        .get()
-        .then((snaps) => {
-          resolve(snaps.docs.map((snap) => Object.assign({}, snap.data())));
-        })
-        .catch(reject);
+          .collection('generatedSpeakers')
+          .orderBy('order', 'asc')
+          .get()
+          .then((snaps) => {
+            resolve(snaps.docs.map((snap) => Object.assign({}, snap.data())));
+          })
+          .catch(reject);
     });
 
     return Promise.all([speakersPromise])
-      .then(([speakers]) => {
-        dispatch({
-          type: FETCH_SPEAKERS_SUCCESS,
-          payload: {
-            obj: speakers.reduce((acc, curr) =>
-              Object.assign({}, acc, { [curr.id]: curr }), {}),
-            list: speakers,
-          },
+        .then(([speakers]) => {
+          dispatch({
+            type: FETCH_SPEAKERS_SUCCESS,
+            payload: {
+              obj: speakers.reduce((acc, curr) =>
+                Object.assign({}, acc, { [curr.id]: curr }), {}),
+              list: speakers,
+            },
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: FETCH_SPEAKERS_FAILURE,
+            payload: { error },
+          });
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: FETCH_SPEAKERS_FAILURE,
-          payload: { error },
-        });
-      });
   },
 };
 
@@ -308,32 +310,32 @@ const previousSpeakersActions = {
     });
 
     firebase.firestore()
-      .collection('previousSpeakers')
-      .orderBy('order', 'asc')
-      .get()
-      .then((snaps) => {
-        const list = snaps.docs
-          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+        .collection('previousSpeakers')
+        .orderBy('order', 'asc')
+        .get()
+        .then((snaps) => {
+          const list = snaps.docs
+              .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
 
-        const obj = list.reduce(
-          (acc, curr) => Object.assign({}, acc, { [curr.id]: curr }),
-          {}
-        );
+          const obj = list.reduce(
+              (acc, curr) => Object.assign({}, acc, { [curr.id]: curr }),
+              {}
+          );
 
-        dispatch({
-          type: FETCH_PREVIOUS_SPEAKERS_SUCCESS,
-          payload: {
-            obj,
-            list,
-          },
+          dispatch({
+            type: FETCH_PREVIOUS_SPEAKERS_SUCCESS,
+            payload: {
+              obj,
+              list,
+            },
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: FETCH_PREVIOUS_SPEAKERS_FAILURE,
+            payload: { error },
+          });
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: FETCH_PREVIOUS_SPEAKERS_FAILURE,
-          payload: { error },
-        });
-      });
   },
 };
 
@@ -345,51 +347,51 @@ const sessionsActions = {
 
     return new Promise((resolve, reject) => {
       firebase.firestore()
-        .collection('generatedSessions')
-        .get()
-        .then((snaps) => {
-          const list = [];
-          const obj = {};
-          const objBySpeaker = {};
-          const tagFilters = new Set();
-          const complexityFilters = new Set();
+          .collection('generatedSessions')
+          .get()
+          .then((snaps) => {
+            const list = [];
+            const obj = {};
+            const objBySpeaker = {};
+            const tagFilters = new Set();
+            const complexityFilters = new Set();
 
-          snaps.docs.forEach((doc) => {
-            const session = Object.assign({}, doc.data());
-            list.push(session);
-            session.tags && session.tags.map((tag) => tagFilters.add(tag.trim()));
-            session.complexity && complexityFilters.add(session.complexity.trim());
-            obj[doc.id] = session;
+            snaps.docs.forEach((doc) => {
+              const session = Object.assign({}, doc.data());
+              list.push(session);
+              session.tags && session.tags.map((tag) => tagFilters.add(tag.trim()));
+              session.complexity && complexityFilters.add(session.complexity.trim());
+              obj[doc.id] = session;
+            });
+
+            const payload = {
+              obj,
+              list,
+              objBySpeaker,
+            };
+
+            dispatch({
+              type: FETCH_SESSIONS_SUCCESS,
+              payload,
+            });
+
+            dispatch({
+              type: SET_FILTERS,
+              payload: {
+                tags: [...tagFilters],
+                complexity: [...complexityFilters],
+              },
+            });
+
+            resolve(payload);
+          })
+          .catch((error) => {
+            dispatch({
+              type: FETCH_SESSIONS_FAILURE,
+              payload: { error },
+            });
+            reject(error);
           });
-
-          const payload = {
-            obj,
-            list,
-            objBySpeaker,
-          };
-
-          dispatch({
-            type: FETCH_SESSIONS_SUCCESS,
-            payload,
-          });
-
-          dispatch({
-            type: SET_FILTERS,
-            payload: {
-              tags: [...tagFilters],
-              complexity: [...complexityFilters],
-            },
-          });
-
-          resolve(payload);
-        })
-        .catch((error) => {
-          dispatch({
-            type: FETCH_SESSIONS_FAILURE,
-            payload: { error },
-          });
-          reject(error);
-        });
     });
   },
 
@@ -400,23 +402,23 @@ const sessionsActions = {
     });
 
     firebase.firestore()
-      .collection('featuredSessions')
-      .doc(userId)
-      .get()
-      .then((doc) => {
-        dispatch({
-          type: FETCH_USER_FEATURED_SESSIONS_SUCCESS,
-          payload: {
-            featuredSessions: doc.exists ? doc.data() : {},
-          },
+        .collection('featuredSessions')
+        .doc(userId)
+        .get()
+        .then((doc) => {
+          dispatch({
+            type: FETCH_USER_FEATURED_SESSIONS_SUCCESS,
+            payload: {
+              featuredSessions: doc.exists ? doc.data() : {},
+            },
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: FETCH_USER_FEATURED_SESSIONS_FAILURE,
+            payload: { error },
+          });
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: FETCH_USER_FEATURED_SESSIONS_FAILURE,
-          payload: { error },
-        });
-      });
   },
 
   setUserFeaturedSessions: (userId, featuredSessions) => (dispatch) => {
@@ -426,21 +428,21 @@ const sessionsActions = {
     });
 
     firebase.firestore()
-      .collection('featuredSessions')
-      .doc(userId)
-      .set(featuredSessions)
-      .then(() => {
-        dispatch({
-          type: SET_USER_FEATURED_SESSIONS_SUCCESS,
-          payload: { featuredSessions },
+        .collection('featuredSessions')
+        .doc(userId)
+        .set(featuredSessions)
+        .then(() => {
+          dispatch({
+            type: SET_USER_FEATURED_SESSIONS_SUCCESS,
+            payload: { featuredSessions },
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: SET_USER_FEATURED_SESSIONS_FAILURE,
+            payload: { error },
+          });
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: SET_USER_FEATURED_SESSIONS_FAILURE,
-          payload: { error },
-        });
-      });
   },
 };
 
@@ -451,21 +453,21 @@ const scheduleActions = {
     });
 
     return firebase.firestore()
-      .collection('generatedSchedule')
-      .get()
-      .then((snaps) => {
-        const scheduleDays = snaps.docs.map((snap) => snap.data());
-        dispatch({
-          type: FETCH_SCHEDULE_SUCCESS,
-          data: scheduleDays.sort((a, b) => a.date.localeCompare(b.date)),
+        .collection('generatedSchedule')
+        .get()
+        .then((snaps) => {
+          const scheduleDays = snaps.docs.map((snap) => snap.data());
+          dispatch({
+            type: FETCH_SCHEDULE_SUCCESS,
+            data: scheduleDays.sort((a, b) => a.date.localeCompare(b.date)),
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: FETCH_SCHEDULE_FAILURE,
+            payload: { error },
+          });
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: FETCH_SCHEDULE_FAILURE,
-          payload: { error },
-        });
-      });
   },
 };
 
@@ -476,31 +478,31 @@ const galleryActions = {
     });
 
     return firebase.firestore().collection('gallery')
-      .get()
-      .then((snaps) => {
-        const list = snaps.docs
-          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+        .get()
+        .then((snaps) => {
+          const list = snaps.docs
+              .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
 
-        dispatch({
-          type: FETCH_GALLERY_SUCCESS,
-          payload: { list },
+          dispatch({
+            type: FETCH_GALLERY_SUCCESS,
+            payload: { list },
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: FETCH_GALLERY_FAILURE,
+            payload: { error },
+          });
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: FETCH_GALLERY_FAILURE,
-          payload: { error },
-        });
-      });
   },
 };
 
 const _getTeamMembers = (teamId) => firebase.firestore()
-  .collection('team').doc(teamId).collection('members').orderBy('order', 'asc')
-  .get()
-  .then((snaps) => snaps.docs
-    .map((snap) => Object.assign({}, snap.data(), { id: snap.id }))
-  );
+    .collection('team').doc(teamId).collection('members').orderBy('order', 'asc')
+    .get()
+    .then((snaps) => snaps.docs
+        .map((snap) => Object.assign({}, snap.data(), { id: snap.id }))
+    );
 
 const teamActions = {
   fetchTeam: () => (dispatch) => {
@@ -509,30 +511,32 @@ const teamActions = {
     });
 
     firebase.firestore()
-      .collection('team')
-      .get()
-      .then((snaps) => Promise.all(
-        snaps.docs.map((snap) => Promise.all([
-          snap.data(),
-          snap.id,
-          _getTeamMembers(snap.id),
-        ]))
-      ))
-      .then((teams) => teams.map(([team, id, members]) => Object.assign({}, team, { id, members })))
-      .then((list) => {
-        dispatch({
-          type: FETCH_TEAM_SUCCESS,
-          payload: {
-            list,
-          },
+        .collection('team')
+        .get()
+        .then((snaps) => Promise.all(
+            snaps.docs.map((snap) => Promise.all([
+              snap.data(),
+              snap.id,
+              _getTeamMembers(snap.id),
+            ]))
+        ))
+        .then((teams) => teams.map(([team, id, members]) => {
+          return Object.assign({}, team, { id, members });
+        }))
+        .then((list) => {
+          dispatch({
+            type: FETCH_TEAM_SUCCESS,
+            payload: {
+              list,
+            },
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: FETCH_TEAM_FAILURE,
+            payload: { error },
+          });
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: FETCH_TEAM_FAILURE,
-          payload: { error },
-        });
-      });
   },
 };
 
@@ -541,39 +545,39 @@ const userActions = {
     const firebaseProvider = helperActions.getFederatedProvider(providerName);
 
     return firebase.auth()
-      .signInWithPopup(firebaseProvider)
-      .then((signInObject) => {
-        helperActions.storeUser(signInObject.user);
-        notificationsActions.getToken(true);
-      })
-      .catch((error) => {
-        if (error.code === 'auth/account-exists-with-different-credential' ||
+        .signInWithPopup(firebaseProvider)
+        .then((signInObject) => {
+          helperActions.storeUser(signInObject.user);
+          notificationsActions.getToken(true);
+        })
+        .catch((error) => {
+          if (error.code === 'auth/account-exists-with-different-credential' ||
           error.code === 'auth/email-already-in-use') {
-          firebase.auth().fetchProvidersForEmail(error.email)
-            .then((providers) => {
-              helperActions.storeUser({
-                signedIn: false,
-                initialProviderId: providers[0],
-                email: error.email,
-                pendingCredential: error.credential,
-              });
-            });
-        }
-        helperActions.trackError('userActions', 'signIn', error);
-      });
+            firebase.auth().fetchProvidersForEmail(error.email)
+                .then((providers) => {
+                  helperActions.storeUser({
+                    signedIn: false,
+                    initialProviderId: providers[0],
+                    email: error.email,
+                    pendingCredential: error.credential,
+                  });
+                });
+          }
+          helperActions.trackError('userActions', 'signIn', error);
+        });
   },
 
   mergeAccounts: (initialProviderId, pendingCredential) => {
     const firebaseProvider = helperActions.getFederatedProvider(initialProviderId);
 
     return firebase.auth()
-      .signInWithPopup(firebaseProvider)
-      .then((result) => {
-        result.user.linkWithCredential(pendingCredential);
-      })
-      .catch((error) => {
-        helperActions.trackError('userActions', 'mergeAccounts', error);
-      });
+        .signInWithPopup(firebaseProvider)
+        .then((result) => {
+          result.user.linkWithCredential(pendingCredential);
+        })
+        .catch((error) => {
+          helperActions.trackError('userActions', 'mergeAccounts', error);
+        });
   },
 
   updateUser: () => {
@@ -584,11 +588,11 @@ const userActions = {
 
   signOut: () => {
     return firebase.auth()
-      .signOut()
-      .then(() => {
-        helperActions.storeUser();
-        subscribeActions.resetSubscribed();
-      });
+        .signOut()
+        .then(() => {
+          helperActions.storeUser();
+          subscribeActions.resetSubscribed();
+        });
   },
 };
 
@@ -597,37 +601,37 @@ const subscribeActions = {
     const id = data.email.replace(/[^\w\s]/gi, '');
 
     firebase.firestore().collection('subscribers')
-      .doc(id)
-      .set({
-        email: data.email,
-        firstName: data.firstFieldValue || '',
-        lastName: data.secondFieldValue || '',
-      })
-      .then(() => {
-        dispatch({
-          type: SUBSCRIBE,
-          subscribed: true,
-        });
-        toastActions.showToast({ message: '{$ subscribeBlock.toast $}' });
-      })
-      .catch((error) => {
-        dispatch({
-          type: SET_DIALOG_DATA,
-          dialog: {
-            ['subscribe']: {
-              isOpened: true,
-              data: Object.assign(data, { errorOccurred: true }),
+        .doc(id)
+        .set({
+          email: data.email,
+          firstName: data.firstFieldValue || '',
+          lastName: data.secondFieldValue || '',
+        })
+        .then(() => {
+          dispatch({
+            type: SUBSCRIBE,
+            subscribed: true,
+          });
+          toastActions.showToast({ message: '{$ subscribeBlock.toast $}' });
+        })
+        .catch((error) => {
+          dispatch({
+            type: SET_DIALOG_DATA,
+            dialog: {
+              ['subscribe']: {
+                isOpened: true,
+                data: Object.assign(data, { errorOccurred: true }),
+              },
             },
-          },
-        });
+          });
 
-        dispatch({
-          type: SUBSCRIBE,
-          subscribed: false,
-        });
+          dispatch({
+            type: SUBSCRIBE,
+            subscribed: false,
+          });
 
-        helperActions.trackError('subscribeActions', 'subscribe', error);
-      });
+          helperActions.trackError('subscribeActions', 'subscribe', error);
+        });
   },
   resetSubscribed: () => {
     store.dispatch({
@@ -661,108 +665,108 @@ const notificationsActions = {
   },
   requestPermission: () => (dispatch) => {
     return messaging.requestPermission()
-      .then(() => {
-        dispatch(notificationsActions.getToken(true));
-      })
-      .catch((error) => {
-        dispatch({
-          type: UPDATE_NOTIFICATIONS_STATUS,
-          status: NOTIFICATIONS_STATUS.DENIED,
-        });
+        .then(() => {
+          dispatch(notificationsActions.getToken(true));
+        })
+        .catch((error) => {
+          dispatch({
+            type: UPDATE_NOTIFICATIONS_STATUS,
+            status: NOTIFICATIONS_STATUS.DENIED,
+          });
 
-        helperActions.trackError('notificationActions', 'requestPermission', error);
-      });
+          helperActions.trackError('notificationActions', 'requestPermission', error);
+        });
   },
 
   getToken: (subscribe) => (dispatch, getState) => {
     return messaging.getToken()
-      .then((currentToken) => {
-        if (currentToken) {
-          const state = getState();
+        .then((currentToken) => {
+          if (currentToken) {
+            const state = getState();
 
-          const subscribersRef = firebase.firestore()
-            .collection('notificationsSubscribers')
-            .doc(currentToken);
-          const subscribersPromise = subscribersRef.get();
+            const subscribersRef = firebase.firestore()
+                .collection('notificationsSubscribers')
+                .doc(currentToken);
+            const subscribersPromise = subscribersRef.get();
 
-          const userUid = state.user && (state.user.uid || null);
+            const userUid = state.user && (state.user.uid || null);
 
-          let userSubscriptionsPromise = Promise.resolve(null);
-          let userSubscriptionsRef;
-          if (userUid) {
-            userSubscriptionsRef = firebase.firestore()
-              .collection('notificationsUsers')
-              .doc(userUid);
-            userSubscriptionsPromise = userSubscriptionsRef.get();
-          }
+            let userSubscriptionsPromise = Promise.resolve(null);
+            let userSubscriptionsRef;
+            if (userUid) {
+              userSubscriptionsRef = firebase.firestore()
+                  .collection('notificationsUsers')
+                  .doc(userUid);
+              userSubscriptionsPromise = userSubscriptionsRef.get();
+            }
 
-          Promise.all([subscribersPromise, userSubscriptionsPromise])
-            .then(([subscribersSnapshot, userSubscriptionsSnapshot]) => {
-              const isDeviceSubscribed = subscribersSnapshot.exists
+            Promise.all([subscribersPromise, userSubscriptionsPromise])
+                .then(([subscribersSnapshot, userSubscriptionsSnapshot]) => {
+                  const isDeviceSubscribed = subscribersSnapshot.exists
                 ? subscribersSnapshot.data()
                 : false;
-              const userSubscriptions =
+                  const userSubscriptions =
                 (userSubscriptionsSnapshot && userSubscriptionsSnapshot.exists)
                   ? userSubscriptionsSnapshot.data()
                   : {};
 
-              const isUserSubscribed = !!(
-                userSubscriptions.tokens && userSubscriptions.tokens[currentToken]
-              );
+                  const isUserSubscribed = !!(
+                    userSubscriptions.tokens && userSubscriptions.tokens[currentToken]
+                  );
 
-              if (isDeviceSubscribed) {
-                dispatch({
-                  type: UPDATE_NOTIFICATIONS_STATUS,
-                  status: NOTIFICATIONS_STATUS.GRANTED,
-                  token: currentToken,
+                  if (isDeviceSubscribed) {
+                    dispatch({
+                      type: UPDATE_NOTIFICATIONS_STATUS,
+                      status: NOTIFICATIONS_STATUS.GRANTED,
+                      token: currentToken,
+                    });
+                    if (userUid && !isUserSubscribed) {
+                      userSubscriptionsRef.set({
+                        tokens: { [currentToken]: true },
+                      }, { merge: true });
+                    }
+                  } else if (!isDeviceSubscribed && subscribe) {
+                    subscribersRef.set({ value: true });
+                    if (userUid) {
+                      userSubscriptionsRef.set({
+                        tokens: { [currentToken]: true },
+                      }, { merge: true });
+                    }
+                    dispatch({
+                      type: UPDATE_NOTIFICATIONS_STATUS,
+                      status: NOTIFICATIONS_STATUS.GRANTED,
+                      token: currentToken,
+                    });
+                  }
                 });
-                if (userUid && !isUserSubscribed) {
-                  userSubscriptionsRef.set({
-                    tokens: { [currentToken]: true },
-                  }, { merge: true });
-                }
-              } else if (!isDeviceSubscribed && subscribe) {
-                subscribersRef.set({ value: true });
-                if (userUid) {
-                  userSubscriptionsRef.set({
-                    tokens: { [currentToken]: true },
-                  }, { merge: true });
-                }
-                dispatch({
-                  type: UPDATE_NOTIFICATIONS_STATUS,
-                  status: NOTIFICATIONS_STATUS.GRANTED,
-                  token: currentToken,
-                });
-              }
+          } else {
+            dispatch({
+              type: UPDATE_NOTIFICATIONS_STATUS,
+              status: Notification.permission,
+              token: null,
             });
-        } else {
+          }
+        })
+        .catch((error) => {
           dispatch({
             type: UPDATE_NOTIFICATIONS_STATUS,
-            status: Notification.permission,
+            status: NOTIFICATIONS_STATUS.DENIED,
             token: null,
           });
-        }
-      })
-      .catch((error) => {
-        dispatch({
-          type: UPDATE_NOTIFICATIONS_STATUS,
-          status: NOTIFICATIONS_STATUS.DENIED,
-          token: null,
-        });
 
-        helperActions.trackError('notificationActions', 'getToken', error);
-      });
+          helperActions.trackError('notificationActions', 'getToken', error);
+        });
   },
 
   unsubscribe: (token) => (dispatch) => {
     return messaging.deleteToken(token)
-      .then(() => {
-        dispatch({
-          type: UPDATE_NOTIFICATIONS_STATUS,
-          status: NOTIFICATIONS_STATUS.DEFAULT,
-          token: null,
+        .then(() => {
+          dispatch({
+            type: UPDATE_NOTIFICATIONS_STATUS,
+            status: NOTIFICATIONS_STATUS.DEFAULT,
+            token: null,
+          });
         });
-      });
   },
 };
 

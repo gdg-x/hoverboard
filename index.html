@@ -83,14 +83,14 @@
 
     function loadFirebaseModules(modules) {
       return Promise.all(
-        modules.map((module) => new Promise((resolve, reject) => {
-          const script = document.createElement('script');
-          script.src = `bower_components/firebase/${module}.js`;
-          script.async = false;
-          script.onload = () => resolve();
-          script.onerror = () => reject();
-          document.head.appendChild(script);
-        })));
+          modules.map((module) => new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = `bower_components/firebase/${module}.js`;
+            script.async = false;
+            script.onload = () => resolve();
+            script.onerror = (error) => reject(error);
+            document.head.appendChild(script);
+          })));
     }
 
     function loadHoverboardApp() {
@@ -106,26 +106,26 @@
       'firebase-auth',
       'firebase-messaging',
     ])
-      .then(() => {
-        firebase.initializeApp({
-          apiKey: '{$ firebase.apiKey $}',
-          authDomain: '{$ firebase.authDomain $}',
-          databaseURL: '{$ firebase.databaseURL $}',
-          projectId: '{$ firebase.projectId $}',
-          storageBucket: '{$ firebase.storageBucket $}',
-          messagingSenderId: '{$ firebase.messagingSenderId $}',
-        });
-
-        firebase.firestore()
-          .enablePersistence({ experimentalTabSynchronization: true })
-          .catch(() => {
-            console.warn('DB offline support not available'); // eslint-disable-line no-console
+        .then(() => {
+          firebase.initializeApp({
+            apiKey: '{$ firebase.apiKey $}',
+            authDomain: '{$ firebase.authDomain $}',
+            databaseURL: '{$ firebase.databaseURL $}',
+            projectId: '{$ firebase.projectId $}',
+            storageBucket: '{$ firebase.storageBucket $}',
+            messagingSenderId: '{$ firebase.messagingSenderId $}',
           });
 
-        // eslint-disable-next-line no-console
-        console.log('Firebase App is ready!');
-      })
-      .then(() => loadHoverboardApp());
+          firebase.firestore()
+              .enablePersistence({ experimentalTabSynchronization: true })
+              .catch(() => {
+                console.warn('DB offline support not available'); // eslint-disable-line no-console
+              });
+
+          // eslint-disable-next-line no-console
+          console.log('Firebase App is ready!');
+        })
+        .then(() => loadHoverboardApp());
 
   </script>
 
