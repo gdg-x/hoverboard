@@ -18,6 +18,7 @@
         display: block;
         background-color: var(--primary-background-color);
         border-bottom: 1px solid var(--border-light-color);
+        border-radius: 8px;
         height: 100%;
       }
 
@@ -179,7 +180,7 @@
           </div>
           <div hidden$="[[!session.tags.length]]">
             <template is="dom-repeat" items="[[session.tags]]" as="tag">
-              <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
+              <span class="tag" style$="color: [[getVariableColor(tag)]]"><span>[[tag]]</span></span>
             </template>
           </div>
         </div>
