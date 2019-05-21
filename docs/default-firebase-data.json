@@ -866,10 +866,24 @@
 			},
 			{
 				"name": "John Bryant",
-				"photo": null,
-				"photoUrl": null,
+				"photo": "/images/team/jb.jpg",
+				"photoUrl": "/images/team/jb.jpg",
 				"socials": [
-
+					{
+						"icon": "linkedin",
+						"link": "https://www.linkedin.com/in/john-wesley-bryant",
+						"name": "LinkedIn"
+					},
+					{
+						"icon": "twitter",
+						"link": "https://twitter.com/MammothMapping",
+						"name": "Twitter"
+					},
+					{
+						"icon": "website",
+						"link": "http://mammothgeospatial.com",
+						"name": "Website"
+					}
 				],
 				"order": 11,
 				"title": null
