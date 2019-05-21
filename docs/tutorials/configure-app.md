@@ -94,7 +94,9 @@ Define a page's label and url in `navigation` in `data/settings.json`
 
 ### "Become a partner" - how it works?
 
-`Become a partner` button opens a form with `company name`, `name` and `email` fields. After a user (potential partner) filled a form, this data is saved into Firestore DB, `potentialPartners` node. It gives a possibility to contact back those people who are interested to be a partner with you and collaborate earlier.
+<!-- `Become a partner` button opens a form with `company name`, `name` and `email` fields. After a user (potential partner) filled a form, this data is saved into Firestore DB, `potentialPartners` node. It gives a possibility to contact back those people who are interested to be a partner with you and collaborate earlier. -->
+
+This button is wrapped with an anchor tag that includes an email address specified in the `partnersBlock` property of the `resources.json`. To function correctly, this should be of the form `mailto:x@domain.com`, with an optional subject/body of the usual form, encoded properly, e.g. `mailto:x@domain.com?subject=Something%20special`
 
 
 # Next steps

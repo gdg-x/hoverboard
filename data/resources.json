@@ -129,6 +129,7 @@
   "partnersBlock": {
     "title": "Sponsors",
     "button": "Become a sponsor",
+    "email": "mailto:sponsorship@foss4g-oceania.org?subject=Sponsorship%20proposition",
     "form": {
       "title": "Become a sponsor!",
       "submitLabel": "Submit",
