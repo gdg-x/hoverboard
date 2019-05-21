@@ -59,6 +59,10 @@
         .address {
           font-size: 12px;
         }
+
+        .container {
+          pointer-events: none;
+        }
       }
 
     </style>
@@ -69,13 +73,15 @@
         latitude="{$ location.mapCenter.latitude $}"
         longitude="{$ location.mapCenter.longitude $}"
         zoom={$ location.pointer.zoom $}
-        scrollWheelZoom=false
+        noScrollWheelZoom="{$ location.pointer.noScrollWheelZoom $}"
       >
         <leaflet-marker
           latitude="{$ location.pointer.latitude $}"
           longitude="{$ location.pointer.longitude $}"
           title="{$ location.name $}">
         </leaflet-marker>
+        <leaflet-scale-control metric position="bottomright">
+        </leaflet-scale-control>
       </leaflet-map>
     </template>
 
