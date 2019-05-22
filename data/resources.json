@@ -237,7 +237,7 @@
     "blocks": [
       {
         "title": "Organiser",
-        "description": "FOSS4G Oceania is a recently-created non-profit organisation, and is the proud organiser of FOSS4G SotM Oceania",
+        "description": "OSGeo Oceania is a recently-created non-profit organisation, and the proud organiser of the FOSS4G SotM Oceania conference series.",
         "callToAction": {
           "label": "Open team page",
           "link": "/team"
@@ -245,7 +245,7 @@
       },
       {
         "title": "What are FOSS4G, SotM and OSGeo?",
-        "description": "Free and Open Source Software for Geospatial (FOSS4G), is an annual global event hosted by the Open Source Geospatial Foundation (OSGeo) since 2006, with the origins going back to the GRASS and MapServer communities. OSGeo s a not-for-profit organization whose mission is to support and promote the collaborative development of open geospatial technologies and data.<br/>State of the Map (SotM) is the annual, international conference of OpenStreetMap, organised by the OpenStreetMap Foundation. Our regional SotM is organised separately.",
+        "description": "Free and Open Source Software for Geospatial (FOSS4G), is an annual global event hosted by the Open Source Geospatial Foundation (OSGeo) since 2006, with the origins going back to the GRASS and MapServer communities. OSGeo is a not-for-profit organization whose mission is to support and promote the collaborative development of open geospatial technologies and data.<br/><br/>State of the Map (SotM) is the annual international conference of OpenStreetMap, organised by the OpenStreetMap Foundation. Our regional SotM is organised separately.",
         "callToAction": {
           "label": "Read more about OSGeo",
           "link": "http://www.osgeo.org/about/",
