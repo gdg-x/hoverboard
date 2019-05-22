@@ -43,7 +43,7 @@ To generate the `secure` value do the following steps:
 
 1. Login into Firebase console
     ```console
-      npx firebase login:ci
+      npx firebase login:ci --interactive
     ```
 
     You will get your token:
