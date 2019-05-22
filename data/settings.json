@@ -2,8 +2,8 @@
   "organizer": {
     "name": "FOSS4G Oceania",
     "twitter": "foss4g_oceania",
-    "blog": "https://foss4g-oceania/blog",
-    "url": "https://foss4g-oceania"
+    "blog": "/blog/",
+    "url": "/"
   },
   "startDate": "2019-11-123T09:00:00+12:00",
   "endDate": "2019-11-15T17:00:00+12:00",
