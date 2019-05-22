@@ -752,11 +752,18 @@
 				"name": "Daniel Silk",
 				"photo": null,
 				"photoUrl": null,
-				"socials": [{
-					"icon": "twitter",
-					"link": "https://twitter.com/influink",
-					"name": "Twitter"
-				}],
+				"socials": [
+					{
+						"icon": "linkedin",
+						"link": "https://www.linkedin.com/in/daniel-silk-5524447a",
+						"name": "LinkedIn"
+					},
+					{
+						"icon": "twitter",
+						"link": "https://twitter.com/influink",
+						"name": "Twitter"
+					}
+				],
 				"order": 0,
 				"title": "Conference Chair"
 			},
@@ -764,16 +771,16 @@
 				"name": "Kim Fitter",
 				"photo": null,
 				"photoUrl": null,
-				"socials": [],
+				"socials": [
+				],
 				"order": 1,
-				"title": "Good Mojo Lead"
+				"title": "Community Lead"
 			},
 			{
 				"name": "Dionne Hansen",
-				"photo": null,
-				"photoUrl": null,
+				"photo": "/images/team/dh.jpg",
+				"photoUrl": "/images/team/dh.jpg",
 				"socials": [
-
 				],
 				"order": 2,
 				"title": "Design & Communication Lead"
@@ -783,7 +790,6 @@
 				"photo": null,
 				"photoUrl": null,
 				"socials": [
-
 				],
 				"order": 3,
 				"title": "Local & Logistics Lead"
@@ -793,76 +799,9 @@
 				"photo": null,
 				"photoUrl": null,
 				"socials": [
-
 				],
 				"order": 4,
 				"title": "Sponsorship Lead"
-			},
-			{
-				"name": "Dr Adam Steer",
-				"photo": null,
-				"photoUrl": null,
-				"socials": [
-
-				],
-				"order": 5,
-				"title": "Programme Lead"
-			},
-			{
-				"name": "Jan Ducnuigeen",
-				"photo": null,
-				"photoUrl": null,
-				"socials": [],
-				"order": 6,
-				"title": null
-			},
-			{
-				"name": "Dr Mairéad de Róiste",
-				"photo": "https://www.victoria.ac.nz/images/staffpics/mairead-deroiste.jpg",
-				"photoUrl": "https://www.victoria.ac.nz/images/staffpics/mairead-deroiste.jpg",
-				"socials": [{
-						"icon": "linkedin",
-						"link": "https://www.linkedin.com/in/mairead-de-roiste-9367ab1/",
-						"name": "LinkedIn"
-					},
-					{
-						"icon": "twitter",
-						"link": "https://twitter.com/GISTspace/",
-						"name": "Twitter"
-					}
-				],
-				"order": 7,
-				"title": null
-			},
-			{
-				"name": "David Garcia",
-				"photo": null,
-				"photoUrl": null,
-				"socials": [],
-				"order": 8,
-				"title": null
-			},
-			{
-				"name": "Richard Law",
-				"photo": "https://spatialparalysis.xyz/static/profile-632e3775ffa3d7f89e6b7e1fba57ebed.jpg",
-				"photoUrl": "https://spatialparalysis.xyz/static/profile-632e3775ffa3d7f89e6b7e1fba57ebed.jpg",
-				"socials": [{
-					"icon": "website",
-					"link": "https://spatialparalysis.xyz/",
-					"name": "Website"
-				}],
-				"order": 9,
-				"title": null
-			},
-			{
-				"name": "Dr Brent Wood",
-				"photo": null,
-				"photoUrl": null,
-				"socials": [
-
-				],
-				"order": 10,
-				"title": null
 			},
 			{
 				"name": "John Bryant",
@@ -885,28 +824,56 @@
 						"name": "Website"
 					}
 				],
-				"order": 11,
-				"title": null
+				"order": 6,
+				"title": "OSGeo Oceania President"
 			},
 			{
-				"name": "Alex Leith",
-				"photo": null,
-				"photoUrl": null,
-				"socials": [
-
+				"name": "Dr Mairéad de Róiste",
+				"photo": "https://www.victoria.ac.nz/images/staffpics/mairead-deroiste.jpg",
+				"photoUrl": "https://www.victoria.ac.nz/images/staffpics/mairead-deroiste.jpg",
+				"socials": [{
+						"icon": "linkedin",
+						"link": "https://www.linkedin.com/in/mairead-de-roiste-9367ab1/",
+						"name": "LinkedIn"
+					},
+					{
+						"icon": "twitter",
+						"link": "https://twitter.com/GISTspace/",
+						"name": "Twitter"
+					}
 				],
-				"order": 12,
-				"title": null
+				"order": 7,
+				"title": "Committee Member"
 			},
 			{
-				"name": "Greg Lauer",
+				"name": "Jan Ducnuigeen",
+				"photo": "/images/team/jd.jpg",
+				"photoUrl": "/images/team/jd.jpg",
+				"socials": [
+					{
+						"icon": "linkedin",
+						"link": "https://www.linkedin.com/in/janducnuigeen",
+						"name": "LinkedIn"
+					}
+				],
+				"order": 8,
+				"title": "Committee Member"
+			},
+			{
+				"name": "Matthew Fry",
 				"photo": null,
 				"photoUrl": null,
-				"socials": [
-
-				],
-				"order": 13,
-				"title": null
+				"socials": [],
+				"order": 9,
+				"title": "Committee Member"
+			},
+			{
+				"name": "David Garcia",
+				"photo": null,
+				"photoUrl": null,
+				"socials": [],
+				"order": 10,
+				"title": "Committee Member"
 			},
 			{
 				"name": "Emma Hain",
@@ -915,11 +882,67 @@
 				"socials": [
 
 				],
+				"order": 11,
+				"title": "Committee Member"
+			},
+			{
+				"name": "Greg Lauer",
+				"photo": null,
+				"photoUrl": null,
+				"socials": [
+
+				],
+				"order": 12,
+				"title": "OSGeo Oceania Secretary"
+			},
+			{
+				"name": "Richard Law",
+				"photo": "https://spatialparalysis.xyz/static/profile-632e3775ffa3d7f89e6b7e1fba57ebed.jpg",
+				"photoUrl": "https://spatialparalysis.xyz/static/profile-632e3775ffa3d7f89e6b7e1fba57ebed.jpg",
+				"socials": [{
+					"icon": "website",
+					"link": "https://spatialparalysis.xyz/",
+					"name": "Website"
+				}],
+				"order": 13,
+				"title": "Committee Member"
+			},
+			{
+				"name": "Alex Leith",
+				"photo": null,
+				"photoUrl": null,
+				"socials": [
+
+				],
 				"order": 14,
-				"title": null
+				"title": "OSGeo Oceania Treasurer"
+			},
+			{
+				"name": "Dr Adam Steer",
+				"photo": null,
+				"photoUrl": null,
+				"socials": [
+
+				],
+				"order": 15,
+				"title": "Committee Member"
 			}
 		],
 		"title": "Organising Committee"
+	},
+	{
+		"members": [{
+				"name": "Tim Denee",
+				"photo": null,
+				"photoUrl": null,
+				"socials": [
+
+				],
+				"order": 1,
+				"title": "Logo Designer"
+			}
+		],
+		"title": "Contributors"
 	}],
 	"tickets": [{
 			"available": false,
