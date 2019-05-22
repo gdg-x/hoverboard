@@ -6,6 +6,7 @@
 <link rel="import" href="./hoverboard-icons.html">
 <link rel="import" href="./shared-styles.html">
 
+<script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 <link rel="import" href="../../bower_components/leaflet-map/leaflet-map.html">
 
 <dom-module id="map-block">
@@ -47,6 +48,7 @@
         leaflet-map {
           display: block;
           height: 640px;
+          pointer-events: none;
         }
 
         .description-card {
@@ -56,12 +58,12 @@
           transform: translateY(80px);
         }
 
-        .address {
-          font-size: 12px;
+        .description-card a {
+          color: white;
         }
 
-        .container {
-          pointer-events: none;
+        .address {
+          font-size: 12px;
         }
       }
 
@@ -78,7 +80,8 @@
         <leaflet-marker
           latitude="{$ location.pointer.latitude $}"
           longitude="{$ location.pointer.longitude $}"
-          title="{$ location.name $}">
+          title="{$ location.name $}"
+        >
         </leaflet-marker>
         <leaflet-scale-control metric position="bottomright">
         </leaflet-scale-control>
