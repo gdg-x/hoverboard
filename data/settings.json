@@ -22,7 +22,7 @@
     {
       "route": "home",
       "permalink": "/",
-      "label": "Home"
+      "label": "About"
     },
     {
       "route": "schedule",
@@ -32,7 +32,7 @@
     {
       "route": "team",
       "permalink": "/team/",
-      "label": "Team"
+      "label": "Organisers"
     },
     {
       "route": "blog",
