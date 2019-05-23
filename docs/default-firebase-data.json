@@ -57,7 +57,7 @@
       "logos": [{
           "order": 0,
           "height": 100,
-          "logoUrl": "../images/logos/teads.jpg",
+          "logoUrl": "../images/logos/teads.png",
           "name": "Teads",
           "url": "https://www.teads.tv/"
         },
@@ -1993,7 +1993,7 @@
       "vAQguQPbehbyRxkDuXzJ9HSHqVS2": {
         "bio": "I am currently Director of Engineering - Infrastructure at teads.tv and have been in the industry for about 13 years.  \n\nPreviously, I was leading the cloud team at Softbank Robotics, making sure those humanoid robots were always connected.  \n\nMy main focus for those 13 years has been building dev and infra teams, leading them to scale the business in a very automated way.  \n\nI am a natural born geek with an entrepreneur spirit and love to discuss around anything tech related, management related or neat cultural differences.   \nI have lived in many countries / part of the world and love to meet new people from all around the globe.  \n",
         "company": "Teads",
-        "companyLogoUrl": "/images/logos/3.svg",
+        "companyLogoUrl": "/images/logos/teads.png",
         "country": "Montpellier, France",
         "name": "Damien Pacaud",
         "photoUrl": "https://avatars1.githubusercontent.com/u/478729?v=4",
@@ -2103,7 +2103,7 @@
         "bio": "Développeur Front-End, je suis passionné par le développement web, l'écosystème JavaScript et la programmation fonctionnelle.\n\nMembre du [JUG Montpellier](https://www.jug-montpellier.org/) et de l'association [Montpellier Tech Hub](https://www.montpellier-techhub.org/), je laisse ma curiosité et ma passion me guider dans mon apprentissage.",
         "shortBio": "Développeur Front-End à Teads",
         "company": "Teads",
-        "companyLogoUrl": "/images/logos/3.svg",
+        "companyLogoUrl": "/images/logos/teads.png",
         "country": "Montpellier, France",
         "name": "Fabien Bernard",
         "photoUrl": "https://media.licdn.com/dms/image/C5103AQH9ibbkB4zfHg/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=PedebhqGoUkusmFfswYTVxLFBWe-yvvFzykuYjRZKZY",
@@ -2748,7 +2748,7 @@
         "bio": "Software engineer at Teads",
         "shortBio": "Software engineer at Teads",
         "company": "Teads",
-        "companyLogoUrl": "/images/logos/3.svg",
+        "companyLogoUrl": "/images/logos/teads.png",
         "country": "France",
         "name": "Roch Dardie",
         "photoUrl": "https://media.licdn.com/dms/image/C5103AQELBR4R9yx-AA/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=u9vtjaNPdiWUuKDKag0zmqKVIMDjedYT11m_xKK0p5k",
@@ -2933,7 +2933,7 @@
       "Gxnp9MqHVYS8Zqv5z6nr8rx8Dpy2": {
         "bio": "Software Engineer, enjoying and using Scala at work for ~3 years now.  \nLove working on scalability and high availability.  \nThink we can improve hard skills by tackling soft skills.",
         "company": "Teads",
-        "companyLogoUrl": "/images/logos/3.svg",
+        "companyLogoUrl": "/images/logos/teads.png",
         "country": "Montpellier, France",
         "name": "Tristan Sallé",
         "photoUrl": "https://pbs.twimg.com/profile_images/887002639258574848/_qCdCmz3_400x400.jpg",
