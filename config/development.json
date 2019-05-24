@@ -1,6 +1,6 @@
 {
   "basepath": "/",
-  "url": "https://localhost:3000",
+  "url": "https://foss4g-oceania-dev.firebaseapp.com/",
   "analytics": "",
   "prefix": "/",
   "firebase": {
