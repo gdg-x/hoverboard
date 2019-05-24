@@ -24,6 +24,9 @@
   "time": "Time",
   "faq": "/data/faq.md",
   "cod": "/data/cod.md",
+  "about": "/data/about.md",
+  "tgp": "/data/travel.md",
+  "child": "/data/child.md",
   "prospectus": "data/sponsorship-prospectus.md",
   "footer": {
     "blog": "Blog"
@@ -68,7 +71,7 @@
       "links": [
         {
           "name": "Sponsorship Proposition",
-          "url": "/prospectus/",
+          "url": "/sponsor/",
           "newTab": false
         },
         {
@@ -205,6 +208,9 @@
   },
   "team": {
     "description": "The FOSS4G SotM Oceania 2018 organising committee is made up of geospatial enthusiasts from scientific, business, humanitarian, and government sectors."
+  },
+  "attend": {
+    "description": "Find out why you might like to attend the conference."
   },
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"

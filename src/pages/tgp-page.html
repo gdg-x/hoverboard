@@ -1,0 +1,57 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../elements/polymer-helmet.html">
+<link rel="import" href="../elements/hero-block.html">
+<link rel="import" href="../elements/footer-block.html">
+<link rel="import" href="../elements/md-content.html">
+
+<dom-module id="tgp-page">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <polymer-helmet
+      title="{$ heroSettings.tgp.title $} | {$ title $}"
+      description="{$ heroSettings.tgp.metaDescription $}"
+      active="[[active]]"
+    ></polymer-helmet>
+
+    <hero-block
+      background-image="{$ heroSettings.tgp.background.image $}"
+      background-color="{$ heroSettings.tgp.background.color $}"
+      font-color="{$ heroSettings.tgp.fontColor $}"
+      active="[[active]]"
+    >
+      <div class="hero-title highlight-font">{$ heroSettings.tgp.title $}</div>
+      <p class="hero-description">{$ heroSettings.tgp.description $}</p>
+    </hero-block>
+
+    <md-content md-source="[[source]]"></md-content>
+
+    <footer-block></footer-block>
+  </template>
+
+  <script>
+
+    // eslint-disable-next-line no-undef
+    class TGPPage extends Polymer.Element {
+      static get is() {
+        return 'tgp-page';
+      }
+
+      static get properties() {
+        return {
+          active: Boolean,
+          source: {
+            type: String,
+            value: '{$ tgp $}',
+          },
+        };
+      }
+    }
+
+    window.customElements.define(TGPPage.is, TGPPage);
+  </script>
+</dom-module>

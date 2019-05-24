@@ -25,6 +25,16 @@
       "label": "About"
     },
     {
+      "route": "attend",
+      "permalink": "/attend/",
+      "label": "Attend"
+    },
+    {
+      "route": "sponsor",
+      "permalink": "/sponsor/",
+      "label": "Sponsor"
+    },
+    {
       "route": "schedule",
       "permalink": "/schedule/",
       "label": "Schedule"
@@ -90,6 +100,14 @@
       },
       "fontColor": "#424242"
     },
+    "attend": {
+      "title": "Attend",
+      "metaDescription": "Find out why you might like to attend the conference.",
+      "background": {
+        "color": "#fff"
+      },
+      "fontColor": "#424242"
+    },
     "faq": {
       "title": "FAQs",
       "metaDescription": "Questions? We got answers.",
@@ -101,6 +119,22 @@
     "cod": {
       "title": "Code Of Conduct",
       "metaDescription": "Learn more about our expectations for all those who participate in our community",
+      "background": {
+        "color": "#fff"
+      },
+      "fontColor": "#424242"
+    },
+    "tgp": {
+      "title": "Travel Grant Programme",
+      "metaDescription": "Learn more about the possibilities of having your attendance paid for by others",
+      "background": {
+        "color": "#fff"
+      },
+      "fontColor": "#424242"
+    },
+    "child": {
+      "title": "A Child-Friendly Conference",
+      "metaDescription": "Learn about how this conference aims to be child-friendly",
       "background": {
         "color": "#fff"
       },

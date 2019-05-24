@@ -12,6 +12,43 @@
         display: block;
       }
 
+      table {
+        padding: 0;
+      }
+      table tr {
+        border-top: 1px solid #cccccc;
+        background-color: white;
+        margin: 0;
+        padding: 0;
+      }
+      table tr:nth-child(2n) {
+        background-color: #f8f8f8;
+      }
+      table tr th {
+        font-weight: bold;
+        border: 1px solid #cccccc;
+        margin: 0;
+        padding: 6px 13px;
+      }
+      table tr td {
+        border: 1px solid #cccccc;
+        margin: 0;
+        padding: 6px 13px;
+      }
+      table td {
+          text-align: center;
+      }
+      table td:first-child {
+          text-align: left;
+      }
+      table tr th :first-child, table tr td :first-child {
+        margin-top: 0;
+      }
+      table tr th :last-child, table tr td :last-child {
+        margin-bottom: 0;
+      }
+
+
       .content-wrapper {
         background-color: var(--secondary-background-color);
         width: 100%;
@@ -69,10 +106,10 @@
 
         [slot="markdown-html"] h2 {
           font-size: 40px;
-          width: 40%;
+          /* width: 40%; */
           margin-bottom: 0;
           display: inline-block;
-          transform: translateY(85%);
+          /* transform: translateY(85%); */
           vertical-align: bottom;
           line-height: 1;
         }
@@ -85,7 +122,7 @@
         [slot="markdown-html"] h4,
         [slot="markdown-html"] p,
         [slot="markdown-html"] ul {
-          margin-left: 40%;
+          /* margin-left: 40%; */
         }
 
         [slot="markdown-html"] h3::after {
@@ -111,7 +148,7 @@
       </div>
     </div>
     <div class="container">
-      <marked-element class="markdown-text">
+      <marked-element class="markdown-text" overrideRemoteSanitization>
         <div slot="markdown-html"></div>
         <script type="text/markdown" src$="[[mdSource]]"></script>
       </marked-element>
