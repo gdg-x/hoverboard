@@ -46,6 +46,8 @@ We have four primary ‘tracks’ in our community, across which we actively pro
 ### Local Chapters and Meetups
 
 RadicalxChange chapters are self-organized community groups working to educate and experiment with egalitarian market mechanisms.  Finding or founding a local chapter is a great way to learn and contribute to the ongoing conversation.  Please note that RadicalxChange Foundation Ltd. does not direct, and is not responsible for, the actions or events of local chapters or chapter organizers.
+
+If you would like to sign up to start a chapter, please fill out [this form](https://forms.gle/UQ6FtuC7rEf42cqE9). 
   
 ### Activism and Government 
 
