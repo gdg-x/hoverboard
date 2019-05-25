@@ -4,7 +4,7 @@ FOSS4G SotM Oceania is a child-friendly conference. This means we encourage pare
 
 ### How does this work?
 
-The conference Code of Conduct describes expected behaviour for everyone at the conference. Here are some additional principles for considering children:
+The conference [Code of Conduct](/cod/) describes expected behaviour for everyone at the conference. Here are some additional principles for considering children:
 
 As parents, we all know that it is impossible to expect our children to sit quietly for any length of time unless they are engaged with whatever is going on. As such, we request that parents take responsibility for their children; and:
 
