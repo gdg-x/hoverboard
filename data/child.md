@@ -33,8 +33,10 @@ We all know that children can eat in amazing disproportion to their physical siz
 
 ### What facilities are available for parents?
 
-On conference days, we'll provide a 'chill space' — a refuge for parents and children at the venue. There is green space in the Beehive and Parliament building complex which is across the street from both venues. Please use these, weather permitting.
+During the conference, a private room will be available for breast pumping/feeding — please ask one of the organisers or volunteers if you wish to use this space. Breastfeeding mums are also welcome to feed wherever they feel comfortable doing so. Baby change tables are available in sign-posted bathrooms.
 
-We are also looking into a specific space for breast pumping/feeding — however, breastfeeding mums are welcome to feed wherever they feel comfortable doing so (with respect also to the needs of your child).
+On Wednesday and Thursday at 11am, The National Library runs a children's guided experience of the [He Tohu exhibition](https://natlib.govt.nz/he-tohu). Children do need to be supervised while on this tour.
 
-Please use the [foss4g-oceania-discuss e-mail list](https://lists.osgeo.org/mailman/listinfo/foss4g-oceania-discuss) or join us on the [Maptime Oceania Slack](https://bit.ly/maptimeau) to discuss with the FOSS4G organisers and coordinate with other conference parents. (Many of the organisers are also parents.)
+There are large foyer areas and cafes in both of our venues. There is a green space in the Beehive and Parliament buildings complex which is across the street.
+
+Please use the [foss4g-oceania-discuss e-mail list](https://lists.osgeo.org/mailman/listinfo/foss4g-oceania-discuss) or join us on the [Maptime Oceania Slack](https://bit.ly/maptimeau) to discuss with the conference organisers and coordinate with other conference parents (many of the organisers are also parents).
