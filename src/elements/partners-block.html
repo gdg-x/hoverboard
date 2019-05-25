@@ -42,6 +42,13 @@
         color: var(--default-primary-color);
       }
 
+      .title {
+        display: inline-block;
+        font-weight: 500;
+        margin-top: 20px;
+        color: var(--footer-text-color);
+      }
+
       @media (min-width: 640px) {
         .logos-wrapper {
           grid-template-columns: repeat(4, 1fr);
@@ -89,12 +96,6 @@
         <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
       </paper-button>
 
-      <paper-button class="cta-button animated icon-right"
-        on-tap="_donateEth">
-        <span>Donate ETH</span>
-        <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-      </paper-button>
-
       <paper-button class="cta-button animated icon-right">
           <form 
             action="https://www.paypal.com/cgi-bin/webscr" 
@@ -107,6 +108,8 @@
             <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" /> 
           </form>
       </paper-button>
+
+      <div class="title">Donate ETH: 0xb1e14bccad2f1f5a58fa789d80f8e4142d9f7eaf</div>
     </div>
 
   </template>
@@ -161,71 +164,6 @@
             this.dispatch(partnersActions.addPartner(data));
           },
         });
-      }
-
-      _promptUserSendEth() {
-        alert('ETH donations will be accepted soon, thanks for your support!');
-        return;
-      }
-        // // @dev: change ETH address account here where you would like to receive donations
-        // const RADICAL_XCHANGE_ACCOUNT='0xb1E14BcCAD2f1f5A58fA789D80F8E4142d9f7EAF';
-
-        // dialogsActions.openDialog(DIALOGS.SUBSCRIBE, {
-        //   title: 'Thank you for considering donating to RadicalxChange!',
-        //   submitLabel: 'Submit',
-        //   firstFieldLabel: 'Amount of ETH to donate',
-        //   secondFieldLabel: 'Sending ETH to',
-        //   secondFieldValue: RADICAL_XCHANGE_ACCOUNT,
-        //   submit: (data) => {
-            // TODO: Awaiting legal sign-off to deploy ETH button
-            // // Prompt user to sign a transaction to send ETH
-            // // @dev: gasPrice by default is set to 25 gwei, which ensures
-            // // that the transaction goes through quickly.
-            // // More details: https://ethgasstation.info/
-            // let amountToSend = parseFloat(data.firstFieldValue);
-            // if (isNaN(amountToSend) || amountToSend <= 0) {
-            //   alert('Invalid amount, please try again!');
-            //   return;
-            // }
-
-            // window.web3.eth.sendTransaction({
-            //   to: RADICAL_XCHANGE_ACCOUNT,
-            //   value: window.web3.toWei(amountToSend, 'ether'),
-            //   gasPrice: window.web3.toWei('25', 'gwei'),
-            // }, function (err, transactionHash) {
-            //   if (err) {
-            //     alert('Transaction failed, please try again');
-            //     return;
-            //   } else {
-            //     alert('Thank you for donating!');
-            //     return;
-            //   }
-            // });
-        //   },
-        // });
-      // }
-
-      _donateEth() {
-        // Modern dapp browsers...
-        if (window.ethereum) {
-            // Request account access if needed
-            window.ethereum.enable().then((result) => {
-              // Accounts now exposed
-              this._promptUserSendEth();
-            }).catch((err) => {
-              dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
-              return;
-            });
-        }
-        // Legacy dapp browsers...
-        else if (window.web3) {
-            // Accounts always exposed
-            this._promptUserSendEth();
-        }
-        // Non-dapp browsers...
-        else {
-          alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
-        }
       }
 
       _partnerAddingChanged(newPartnerAdding, oldPartnerAdding) {
