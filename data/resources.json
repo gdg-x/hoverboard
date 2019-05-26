@@ -88,7 +88,7 @@
     "statisticsBlock": {
       "attendees": {
         "label": "Places",
-        "number": "500"
+        "number": "300"
       },
       "days": {
         "label": "Jours",
@@ -213,7 +213,7 @@
     "blocks": [
       {
         "title": "Organisateur",
-        "description": "<a href='http://gdgstrasbourg.fr' target='_blank'>GDG Strasbourg</a>, avec le support de 10 autres GDG en France, est fier d'organiser la DevFest Strasbourg",
+        "description": "<a href='http://gdgstrasbourg.fr' target='_blank'>GDG Strasbourg</a>, avec le support d'autres GDG en France, est fier d'organiser la DevFest Strasbourg",
         "callToAction": {
           "label": "Ouvrir la page de l'équipe",
           "link": "/team"
