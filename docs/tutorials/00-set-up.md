@@ -8,7 +8,7 @@ Or you may use [Docker container for development](05-docker.md)
 ## Install the Hoverboard and dependencies
 
 1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone your fork locally
-1. Install [Node.js (v8.9.4 or above)](https://nodejs.org/en/download/)
+1. Install [Node.js (v10+)](https://nodejs.org/en/download/)
 1. Install project dependencies: `npm install` or `yarn`
 1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `npx firebase login`
 1. Update [Hoverboard config](/config) and [Resources](/data). More info can be found [here](01-configure-app.md)
