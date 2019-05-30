@@ -2,17 +2,20 @@
   "entrypoint": "index.html",
   "shell": "src/hoverboard-app.html",
   "fragments": [
+    "src/pages/attend-page.html",
     "src/pages/blog-list-page.html",
     "src/pages/blog-page.html",
+    "src/pages/child-page.html",
+    "src/pages/cod-page.html",
+    "src/pages/faq-page.html",
     "src/pages/home-page.html",
     "src/pages/post-page.html",
+    "src/pages/previous-speakers-page.html",
+    "src/pages/prospectus-page.html",
     "src/pages/schedule-page.html",
     "src/pages/speakers-page.html",
-    "src/pages/previous-speakers-page.html",
     "src/pages/team-page.html",
-    "src/pages/faq-page.html",
-    "src/pages/cod-page.html",
-    "src/pages/prospectus-page.html",
+    "src/pages/tgp-page.html",
     "src/lazy-resources.html"
   ],
   "sources": [
@@ -25,6 +28,7 @@
   ],
   "extraDependencies": [
     "bower_components/webcomponentsjs/webcomponents-*.js",
+    "bower_components/leaflet/dist/*.js",
     "bower_components/iron-dropdown/iron-dropdown-scroll-manager.html",
     "bower_components/firebase/*.js",
     "bower_components/firebase/*.js.map",
