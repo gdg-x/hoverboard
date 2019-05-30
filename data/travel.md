@@ -38,7 +38,6 @@ We are grateful for the support of this program. The Travel Grant Program is fun
   - Support from FOSS4G SotM Oceania
   - Support from [OSGeo Foundation](https://www.osgeo.org/)
   - Extra conference and workshop ticket purchases by individuals or organisations
-  <!-- (tbc in Tito) -->
 
 ### You can talk to us
 

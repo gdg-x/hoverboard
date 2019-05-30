@@ -10,6 +10,37 @@
       :host {
         display: block;
       }
+
+      form {
+        display: flex;
+        justify-content: center;
+      }
+      form button {
+        -moz-box-shadow:inset 0px 0px 0px 0px #bee2f9;
+      	-webkit-box-shadow:inset 0px 0px 0px 0px #bee2f9;
+      	box-shadow:inset 0px 0px 0px 0px #bee2f9;
+      	background-color:#63b8ee;
+      	-moz-border-radius:15px;
+      	-webkit-border-radius:15px;
+      	border-radius:15px;
+      	border:1px solid #3866a3;
+      	display:inline-block;
+      	cursor:pointer;
+      	color:#fff;
+      	font-family:Arial;
+      	font-size:19px;
+      	font-weight:bold;
+      	padding:8px 24px;
+      	text-decoration:none;
+      	text-shadow:0px 0px 0px #7cacde;
+      }
+      form button:hover {
+        background-color:#80add6;
+        position:relative;
+        top:1px;
+      }
+
+
     </style>
 
     <polymer-helmet
@@ -29,6 +60,12 @@
     </hero-block>
 
     <md-content md-source="[[source]]"></md-content>
+
+    <form>
+      <button formtarget="_blank" formaction="{$ heroSettings.tgp.application_url $}">
+        Apply now
+      </button>
+    </form>
 
     <footer-block></footer-block>
   </template>

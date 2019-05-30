@@ -130,7 +130,8 @@
       "background": {
         "color": "#fff"
       },
-      "fontColor": "#424242"
+      "fontColor": "#424242",
+      "application_url": "https://docs.google.com/forms/d/e/1FAIpQLSc_d_m1jkLITTMfvDuTetnbGKodI4RvfPp3yt7reHw9_t7ufg/viewform"
     },
     "child": {
       "title": "A Child-Friendly Conference",
