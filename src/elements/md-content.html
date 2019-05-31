@@ -48,6 +48,12 @@
         margin-bottom: 0;
       }
 
+      h3 {
+        font-size: 150%;
+        padding-top: 60px;
+        font-weight: 700;
+      }
+
 
       .content-wrapper {
         background-color: var(--secondary-background-color);
@@ -87,7 +93,7 @@
         display: inline-block;
         width: 1.1em;
         height: 1em;
-        background: url('../../images/link-icon.svg') no-repeat;
+        /* background: url('../../images/link-icon.svg') no-repeat; */
         background-size: contain;
         cursor: pointer;
         vertical-align: middle;
@@ -249,6 +255,7 @@
         e.preventDefault();
         const elementIdToScroll = e.target.getAttribute('href');
         const element = this.shadowRoot.querySelector(`[id="${elementIdToScroll.slice(1)}"]`);
+        console.log({element});
         const offset = this.offsetTop(element);
         this.scrollToY(offset - this.toolbarOffset, 1500, 'easeInOutSine');
         window.location.hash = elementIdToScroll;
@@ -256,6 +263,7 @@
 
       _changeUrl(e) {
         const targetElement = e.path && e.path[0];
+        console.log({targetElement, e, p: e.path});
         const offset = this.offsetTop(targetElement);
         const canBeScrolled = Math.abs(document.documentElement.scrollTop +
           this.toolbarOffset - offset) >= 50;
