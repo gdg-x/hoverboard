@@ -518,7 +518,9 @@ const teamActions = {
           _getTeamMembers(snap.id),
         ]))
       ))
-      .then((teams) => teams.map(([team, id, members]) => Object.assign({}, team, { id, members })))
+      .then((teams) => teams.map(([team, id, members]) => {
+        return Object.assign({}, team, { id, members });
+      }))
       .then((list) => {
         dispatch({
           type: FETCH_TEAM_SUCCESS,

@@ -81,6 +81,14 @@
       },
       "fontColor": "#424242"
     },
+    "team-contributors": {
+      "title": "Contributors",
+      "metaDescription": "Get more info about our contributors",
+      "background": {
+        "color": "#fff"
+      },
+      "fontColor": "#424242"
+    },
     "faq": {
       "title": "FAQs",
       "metaDescription": "Find your answer right here!",

@@ -1399,19 +1399,19 @@
         "icon" : "twitter",
         "link" : "https://twitter.com/che_effe",
         "name" : "Twitter"
-      },{
+      }, {
         "icon" : "facebook",
         "link" : "https://www.facebook.com/charles.grugan",
         "name" : "Facebook"
-      },{
+      }, {
         "icon" : "linkedin",
         "link" : "https://www.linkedin.com/in/charlesgrugan/",
         "name" : "LinkedIn"
-      },{
+      }, {
         "icon" : "instagram",
         "link" : "https://www.instagram.com/che_effe/",
         "name" : "Instagram"
-      }],
+      } ],
       "order" : 0,
       "title" : "Swagmaster and Web Wizard"
     }, {
@@ -1421,7 +1421,7 @@
         "icon" : "twitter",
         "link" : "https://twitter.com/VossJenn",
         "name" : "Twitter"
-      }],
+      } ],
       "order" : 1,
       "title" : "Sponsors"
     }, {
@@ -1492,20 +1492,42 @@
       "title" : "Agent of Good Times"
       } ],
     "title" : "Core Team"
-  } ],
-  "contributor-team" : [ {
-    "contributing-members" : [{
+  }, {
+    "members" : [ {
       "name" : "Chris Lorenzo",
       "photoUrl" : "/images/team/teamPhotos_cf-headshot.jpg",
       "socials" : [ {
         "icon" : "twitter",
         "link" : "https://twitter.com/che_effe",
         "name" : "Twitter"
-      }],
+      } ],
       "order" : 0,
       "title" : "Technological Wizard"
-    }
-  ],
+    }, {
+      "name" : "Alex Clark",
+      "photoUrl" : "/images/team/teamPhotos_Alex.jpeg",
+      "socials" : [ {
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/alexander-clark-01a0b911/",
+        "name" : "LinkedIn"
+      } ],
+      "order" : 1,
+      "title" : "Influencer"
+    }, {
+      "name" : "Jonathan Belcher",
+      "photoUrl" : "/images/team/teamPhotos_JB.jpg",
+      "socials" : [ {
+        "icon" : "linkedin",
+        "link" : "https://www.linkedin.com/in/jonathanbelcher/",
+        "name" : "LinkedIn"
+      }, {
+        "icon" : "github",
+        "link" : "GitHub.com/belcherj",
+        "name" : "Github"
+      } ],
+      "order" : 2,
+      "title" : "Organizer Emeritus"
+    } ],
     "title": "Contributors"
   } ],
   "tickets" : [ {

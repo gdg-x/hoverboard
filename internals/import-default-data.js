@@ -292,6 +292,7 @@ initializeFirebase()
   .then(() => importSessions())
   .then(() => importSpeakers())
   .then(() => importTeam())
+  .then(() => importTeamContributors())
   .then(() => importTickets())
   .then(() => importVideos())
 
