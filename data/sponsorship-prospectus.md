@@ -1,8 +1,8 @@
 # FOSS4G and State of the Map: Information for sponsors
 
-FOSS4G SotM Oceania is a regional event that brings together the open source geospatial community. FOSS4G stands for 'Free and Open Source Software for Geospatial' and has been used since 2006 as a label for international and regional conferences of the Open Source Geospatial Foundation (OSGeo – [http://osgeo.org](http://osgeo.org)). OSGeo supports the development and adoption of open source geospatial technology. FOSS4G is part of the broader open source software philosophy (see [https://opensource.com/resources/what-open-source](https://opensource.com/resources/what-open-source)).
+FOSS4G SotM Oceania is a regional event that brings together the open source geospatial community. FOSS4G stands for 'Free and Open Source Software for Geospatial' and has been used since 2006 as a label for international and regional conferences of the [Open Source Geospatial Foundation (OSGeo)](http://osgeo.org). OSGeo supports the development and adoption of open source geospatial technology. FOSS4G is part of the broader [open source software philosophy](https://opensource.com/resources/what-open-source).
 
-SotM is an acronym for 'State of the Map'. It is an annual conference organised by the OpenStreetMap Foundation, giving individuals and organisations a platform to discuss the development of the OpenStreetMap project ([https://www.openstreetmap.org](https://www.openstreetmap.org)). OpenStreetMap is a long-running effort to build a free and open editable map of the world. State of the Map conferences take place around the world at a local and international level, giving participants the chance to discuss the wider strategy of the project, tools that support it, and share case studies that can inspire others.
+SotM is an acronym for 'State of the Map'. It is an annual conference organised by the OpenStreetMap Foundation, giving individuals and organisations a platform to discuss the development of the [OpenStreetMap](https://www.openstreetmap.org) project. OpenStreetMap is a long-running effort to build a free and open editable map of the world. State of the Map conferences take place around the world at a local and international level, giving participants the chance to discuss the wider strategy of the project, tools that support it, and share case studies that can inspire others.
 
 Given the alignment between these two projects, we have amalgamated them into one conference to focus Oceania's open source geospatial efforts. The conference also gives Oceania a link to global communities of developers and users; supported by OSGeo and the OpenStreetMap Foundation.
 
@@ -10,11 +10,12 @@ On the back of last year's success, we're moving the conference to Wellington, N
 
 ### Attendee Profile
 
-The inaugural FOSS4G SotM Oceania took place in Melbourne in 2018 and was an overwhelming success. All tickets were sold out with 248 attendees from 14 countries including many in Oceania, but also further afield from countries such as Canada, the United Kingdom and the United States. The backgrounds of attendees also varied and included spatial professionals, software developers, hobbyists, humanitarian workers, and government agencies.
+FOSS4G SotM Oceania 2018 in Melbourne was an overwhelming success:
+- The event sold out with 250 attendees during the conference
+- It represented 14 countries from Oceania and further afield such as Canada, the UK, and the USA
+- Attendees included GIS professionals, developers, hobbyists, humanitarian workers, and government agencies
 
-Sponsors of FOSS4G SotM Oceania are thus given access to a diverse group that is shaping the direction of open source geospatial software. The conference is a healthy balance representing both developers of the software and the end users, though of course many fall into both categories.
-
-In 2019 we aim to build upon this, broadening the diversity in terms of countries represented and the gender balance. We're also creating a more affordable conference ticket tier to include students and non-professional community mappers.
+Sponsors of FOSS4G SotM Oceania gain access to a diverse group of people shaping the evolution of open source geospatial software. The conference is a healthy mix of both software developers and end users.
 
 ### What happens at FOSS4G SotM Oceania?
 
@@ -75,54 +76,60 @@ A [dedicated conference committee](https://wiki.osgeo.org/wiki/FOSS4G_SotM_Ocean
 
 **The platinum sponsorship package includes:**
 
-- Prominent company logo, link and acknowledgement on the conference website
-- Prominent company logo on marketing materials
-- Custom rotational slide that will be displayed in-between sessions on monitors throughout the venue
+- Six conference registrations
+- Six workshop registrations
+- Six dinner tickets
+- Option to purchase up to four additional conference registrations at early bird rates
+- Trade table in first-choice location during the conference
 - Acknowledgement at opening and closing sessions
-- Trade table in prominent position, access to power, WiFi (on request)
-- Six complimentary registrations for the FOSS4G-SotM conference
-- Six complimentary conference dinner tickets
-- Prominent company logo on conference memento (issued to all attendees)
-- Option to display banner in the foyer on the workshop and community day
+- Primary logo placement on marketing materials (e.g. on-stage conference banner, rotational sponsor slides)
+- Custom rotational slide promoting your organisation (shown on large screen in foyer and before sessions start)
+- Logo, link and 300 word blurb on the conference website
+- One pull-up banner (supplied by you) displayed at the workshop and community days
 - Eligibility for [OSGeo Silver sponsor status](https://www.osgeo.org/about/how-to-become-a-sponsor/) (recognition that your organisation supports open source geospatial software)
 
 #### **Gold**
 
 **The gold sponsorship package includes:**
 
-- Prominent company logo, link and acknowledgement on the conference website
-- Prominent company logo on marketing materials
-- Custom rotational 1/2 slide that will be displayed in-between sessions on monitors throughout the venue
-- Half page advertisement in the conference booklet
+- Two conference registrations
+- Two workshop registrations
+- Two dinner tickets
+- Option to purchase up to two additional conference registrations at early bird rates
+- Trade table during the conference (select location after Platinum sponsors)
 - Acknowledgement at opening and closing sessions
-- Trade table, access to power, WiFi (on request)
-- Two complimentary registrations for the FOSS4G-SotM conference
-- Two complimentary conference dinner tickets
-- Option to display banner in the foyer on either the workshop or community day
+- Logo on marketing materials (e.g. on-stage conference banner, rotational sponsor slides)
+- Custom rotational half-slide promoting your organisation (shown on large screen in foyer and before sessions start)
+- Logo, link and 200 word blurb on the conference website
+- One pull-up banner (supplied by you) displayed at either the workshop day or the community day
 - Eligibility for [OSGeo Bronze sponsor status](https://www.osgeo.org/about/how-to-become-a-sponsor/) (recognition that your organisation supports open source geospatial software)
 
 #### **Silver**
 
 **The silver sponsorship package includes:**
 
-- Company logo, link and acknowledgement on the conference website
-- Company logo on marketing materials
-- Logo displayed in-between sessions on rotational slides throughout the venue
-- Trade table, access to power, WiFi (on request)
-- One complimentary registration for the FOSS4G-SotM conference
-- One complimentary conference dinner ticket
+- One conference registration
+- One workshop registration
+- One dinner ticket
+- Option to purchase an additional conference registration at early bird rates
+- Trade table during the conference (subject to availability, select location after Gold sponsors)
+- Acknowledgement at opening and closing sessions
+- Logo on marketing materials (e.g. on-stage conference banner, rotational sponsor slides)
+- Logo, link and 100 word blurb on the conference website
 
 #### **Bronze**
 
 **The bronze sponsorship package includes:**
 
-- Company logo, link and acknowledgement on the conference website
-- Company logo on marketing materials
-- Logo displayed in-between sessions on rotational slides throughout the venue
+- Acknowledgement at opening and closing sessions
+- Logo on marketing materials (e.g. on-stage conference banner, rotational sponsor slides)
+- Logo with link on the conference website
 
 ### Good Mojo
 
-The Good Mojo concept was developed in 2018 to give people and organisations the opportunity to donate whatever they can afford with the confidence that their contribution is going directly towards conference initiatives.
+The open source software community runs on an economy of giving.
+
+The Good Mojo concept gives people and organisations the opportunity to donate whatever they can afford, with contributions directly funding diversity and accessibility initiatives.
 
 The types of initiatives that Good Mojo aims to support in 2019 include:
 
