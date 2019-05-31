@@ -63,7 +63,7 @@
       "title": "Blog",
       "metaDescription": "Read stories from our team",
       "background": {
-        "color": "#FFF"
+        "color": "#EF4B39"
       },
       "fontColor": "#424242"
     },
@@ -72,7 +72,7 @@
       "metaDescription": "Check back often as more speakers are confirmed.",
       "description": "Check back often as more speakers are confirmed.",
       "background": {
-        "color": "#FFF"
+        "color": "#F2DEDE"
       },
       "fontColor": "#424242"
     },
@@ -80,7 +80,7 @@
       "title": "Previous Speakers",
       "metaDescription": "Check out who was with us last year",
       "background": {
-        "color": "#FFF"
+        "color": "#F2DEDE"
       },
       "fontColor": "#424242"
     },
@@ -88,7 +88,7 @@
       "title": "Schedule",
       "metaDescription": "Pick the sessions you're interested in",
       "background": {
-        "color": "#fff"
+        "color": "#FFF"
       },
       "fontColor": "#424242"
     },
@@ -96,15 +96,15 @@
       "title": "Team",
       "metaDescription": "Get more info about the organisers",
       "background": {
-        "color": "#fff"
+        "color": "#5AAFE1"
       },
       "fontColor": "#424242"
     },
     "attend": {
       "title": "Attend",
-      "metaDescription": "Find out why you might like to attend the conference.",
+      "metaDescription": "Information about attending the conference",
       "background": {
-        "color": "#fff"
+        "color": "#884F9A"
       },
       "fontColor": "#424242"
     },
@@ -112,7 +112,7 @@
       "title": "FAQs",
       "metaDescription": "Questions? We got answers.",
       "background": {
-        "color": "#fff"
+        "color": "#F2DEDE"
       },
       "fontColor": "#424242"
     },
@@ -120,7 +120,7 @@
       "title": "Code Of Conduct",
       "metaDescription": "Learn more about our expectations for all those who participate in our community",
       "background": {
-        "color": "#fff"
+        "color": "#F2DEDE"
       },
       "fontColor": "#424242"
     },
@@ -128,7 +128,7 @@
       "title": "Travel Grant Programme",
       "metaDescription": "Learn more about the possibilities of having your attendance paid for by others",
       "background": {
-        "color": "#fff"
+        "color": "#F2DEDE"
       },
       "fontColor": "#424242",
       "application_url": "https://docs.google.com/forms/d/e/1FAIpQLSc_d_m1jkLITTMfvDuTetnbGKodI4RvfPp3yt7reHw9_t7ufg/viewform"
@@ -137,7 +137,7 @@
       "title": "A Child-Friendly Conference",
       "metaDescription": "Learn about how this conference aims to be child-friendly",
       "background": {
-        "color": "#fff"
+        "color": "#F2DEDE"
       },
       "fontColor": "#424242"
     },
@@ -145,7 +145,7 @@
       "title": "Sponsorship Prospectus",
       "metaDescription": "Learn more about the benefits of sponsoring this conference",
       "background": {
-        "color": "#fff"
+        "color": "#F7B5C1"
       },
       "fontColor": "#424242"
     }

@@ -60,6 +60,9 @@
       .content-wrapper.visible {
         opacity: 1;
       }
+      .content-wrapper.invisible {
+        display: none;
+      }
 
       .col {
         font-size: 32px;
@@ -166,6 +169,10 @@
       static get properties() {
         return {
           mdSource: String,
+          noLinksHeader: {
+            type: Boolean,
+            value: false,
+          },
           toolbarOffset: {
             type: Number,
             value: 70,
@@ -231,7 +238,11 @@
         }
 
         const contentWrapper = this.shadowRoot.querySelector('.content-wrapper');
-        contentWrapper.classList.add('visible');
+        if (!this.noLinksHeader) {
+          contentWrapper.classList.add('visible');
+        } else {
+          contentWrapper.classList.add('invisible');
+        }
       }
 
       _scrollToChapter(e) {

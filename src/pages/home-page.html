@@ -2,6 +2,8 @@
 
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 
+<link rel="import" href="../elements/md-content.html">
+<link rel="import" href="../elements/about-block.html">
 <link rel="import" href="../elements/speakers-block.html">
 <link rel="import" href="../elements/latest-posts-block.html">
 <link rel="import" href="../elements/tickets-block.html">
@@ -79,6 +81,10 @@
       .scroll-down .scroller {
         fill: currentColor;
         animation: updown 2s infinite;
+      }
+
+      h3 {
+        font-size: 120%;
       }
 
       @keyframes updown {
@@ -182,7 +188,9 @@
       </div>
     </hero-block>
     <!-- <speakers-block></speakers-block> -->
+    <md-content md-source="[[source]]" no-links-header></md-content>
     <subscribe-block></subscribe-block>
+    <about-block></about-block>
     <tickets-block></tickets-block>
     <gallery-block></gallery-block>
     <featured-videos></featured-videos>
@@ -205,6 +213,10 @@
           viewport: {
             type: Object,
             statePath: 'ui.viewport',
+          },
+          source: {
+            type: String,
+            value: '{$ about $}',
           },
         };
       }

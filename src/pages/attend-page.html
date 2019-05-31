@@ -2,10 +2,8 @@
 
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 
-<link rel="import" href="../elements/about-block.html">
 <link rel="import" href="../elements/map-block.html">
 <link rel="import" href="../elements/about-organizer-block.html">
-<link rel="import" href="../elements/md-content.html">
 
 <dom-module id="attend-page">
   <template>
@@ -88,16 +86,14 @@
       <div class="hero-title highlight-font">{$ heroSettings.attend.title $}</div>
       <p class="hero-description">{$ heroSettings.attend.description $}</p>
     </hero-block>
-    <div class="description-wrapper">
+    <!-- <div class="description-wrapper">
       <div class="container" layout horizontal justified>
         <marked-element class="description" markdown="{$ attend.description $}" overrideRemoteSanitization>
           <div slot="markdown-html"></div>
         </marked-element>
       </div>
-    </div>
-    <about-block></about-block>
+    </div> -->
     <map-block></map-block>
-    <md-content md-source="[[source]]"></md-content>
     <about-organizer-block></about-organizer-block>
     <footer-block></footer-block>
   </template>
