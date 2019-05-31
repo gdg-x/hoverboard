@@ -80,6 +80,11 @@
           "newTab": false
         },
         {
+          "name": "Travel Grant Program",
+          "url": "/tgp/",
+          "newTab": false
+        },
+        {
           "name": "FAQs",
           "url": "/faq/",
           "newTab": false
