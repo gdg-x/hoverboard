@@ -58,7 +58,7 @@
       "links": [
         {
           "name": "Pack Partenaire",
-          "url": "",
+          "url": "https://drive.google.com/drive/folders/1FaDFCZhvcaoD_tE6zKpV-afadBi8JXJ1?usp=sharing",
           "newTab": true
         },
         {
@@ -68,7 +68,7 @@
         },
         {
           "name": "Call for Papers",
-          "url": "",
+          "url": "https://conference-hall.io/public/event/aGZR5FxYkEfomcXcAiYF",
           "newTab": true
         }
       ]
@@ -91,7 +91,7 @@
         "number": "300"
       },
       "days": {
-        "label": "Jours",
+        "label": "Jour",
         "number": "1"
       }
     }

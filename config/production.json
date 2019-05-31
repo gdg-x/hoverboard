@@ -1,7 +1,7 @@
 {
   "basepath": "/",
-  "url": "https://hoverboard-master.firebaseapp.com/",
-  "analytics": "UA-43643469-9",
+  "url": "https://devfest.gdgstrasbourg.fr/",
+  "analytics": "UA-141199107-1",
   "prefix": "/",
   "firebase": {
     "apiKey": "AIzaSyAncpamO3QRga2NN0vjxp_MkVKTFpSRxEU",
