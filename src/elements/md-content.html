@@ -255,7 +255,6 @@
         e.preventDefault();
         const elementIdToScroll = e.target.getAttribute('href');
         const element = this.shadowRoot.querySelector(`[id="${elementIdToScroll.slice(1)}"]`);
-        console.log({element});
         const offset = this.offsetTop(element);
         this.scrollToY(offset - this.toolbarOffset, 1500, 'easeInOutSine');
         window.location.hash = elementIdToScroll;
@@ -263,7 +262,6 @@
 
       _changeUrl(e) {
         const targetElement = e.path && e.path[0];
-        console.log({targetElement, e, p: e.path});
         const offset = this.offsetTop(targetElement);
         const canBeScrolled = Math.abs(document.documentElement.scrollTop +
           this.toolbarOffset - offset) >= 50;
