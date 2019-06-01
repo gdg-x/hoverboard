@@ -41,7 +41,7 @@
   ],
   "heroSettings": {
     "home": {
-      "description": "The largest Javascript conference in town",
+      "description": "The largest JavaScript conference in town",
       "background": {
         "color": "#173472",
         "image": "/images/backgrounds/ljs-hero2.jpg"
@@ -101,7 +101,7 @@
   "location": {
     "label": "Location",
     "name": "National Museum of American Jewish History",
-    "city": "Philadelphia",
+    "city": "Philadelphia, PA",
     "short": "Philadelphia, PA",
     "address": "101 S Independence Mall E, Philadelphia, PA 19106",
     "pointer": {
