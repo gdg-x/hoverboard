@@ -45,8 +45,8 @@
           "newTab": true
         },
         {
-          "name": "State of the Map (SotM)",
-          "url": "https://stateofthemap.org/",
+          "name": "OpenStreetMap Foundation",
+          "url": "https://wiki.osmfoundation.org/wiki/Main_Page",
           "newTab": true
         }
       ]
@@ -60,8 +60,13 @@
           "newTab": true
         },
         {
-          "name": "FOSS4G-NA 2019",
-          "url": "https://2019.foss4g-na.org/",
+          "name": "FOSS4G 2019",
+          "url": "https://2019.foss4g.org/",
+          "newTab": true
+        },
+        {
+          "name": "State of the Map 2019",
+          "url": "https://2019.stateofthemap.org//",
           "newTab": true
         }
       ]
@@ -70,14 +75,14 @@
       "title": "Event Resources",
       "links": [
         {
-          "name": "Sponsorship Proposition",
+          "name": "Sponsorship Prospectus",
           "url": "/sponsor/",
           "newTab": false
         },
         {
-          "name": "Call for Papers",
-          "url": "https://example.com",
-          "newTab": true
+          "name": "Travel Grant Program",
+          "url": "/tgp/",
+          "newTab": false
         },
         {
           "name": "FAQs",
