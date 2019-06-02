@@ -106,12 +106,14 @@
       <div class="date">{$ blog.published $}: [[getDate(post.published)]]</div>
     </div>
 
-    <div class="suggested-posts">
-      <div class="container-narrow">
-        <h3 class="container-title">{$ blog.suggested $}</h3>
-        <posts-list posts="[[suggestedPosts]]"></posts-list>
+    <template is="dom-if" if="[[ suggestedPosts.length ]]">
+      <div class="suggested-posts">
+        <div class="container-narrow">
+          <h3 class="container-title">{$ blog.suggested $}</h3>
+          <posts-list posts="[[suggestedPosts]]"></posts-list>
+        </div>
       </div>
-    </div>
+    </template>
 
     <iron-ajax auto url="[[post.source]]" handle-as="text" last-response="{{postBody}}"></iron-ajax>
 
