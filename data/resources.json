@@ -93,32 +93,32 @@
     "title": "Curious? Here's how it was last time...",
     "callToAction": {
       "featuredSessions": {
-        "description": "In 2018, Oceania's open-source geospatial experts gathered in Melbourne for several days of workshops, presentations, a Community Day, and social events.",
+        "description": "In 2018, Oceania's open-source geospatial experts gathered in Melbourne for four days of workshops, presentations, a Community Day, and social events.",
         "label": "Explore the presentations",
-        "link": "https://www.youtube.com/channel/UCbqmnF77HxLCmO9d7LrEbpg/featured"
+        "link": "https://www.youtube.com/channel/UCbqmnF77HxLCmO9d7LrEbpg/videos"
       },
       "howItWas": {
-        "description": "We had a panel discussion on 'Human Evolution, Ethics, and Open Source Mapping'.",
+        "description": "We had great lightning talks on a variety of topics.",
         "label": "Watch it here",
-        "youtubeId": "6TeRSfr1RfQ"
+        "youtubeId": "WPJC0VDceMk"
       }
     },
     "statisticsBlock": {
       "attendees": {
         "label": "Attendees",
-        "number": "200+"
+        "number": "250+"
       },
       "days": {
         "label": "Days",
-        "number": "3"
+        "number": "4"
       },
       "sessions": {
         "label": "Presentations",
-        "number": "50"
+        "number": "60+"
       },
       "tracks": {
-        "label": "Tracks",
-        "number": "3"
+        "label": "Workshops",
+        "number": "14"
       }
     }
   },
