@@ -2,7 +2,7 @@ FOSS4G SotM Oceania offers a Travel Grant Program (similar to the [OSGeo TGP](ht
 
 ### What we are looking for:
 
-- People from the Oceania region*, who wouldn't be able to attend without funding assistance
+- People from the Oceania region&ast;, who wouldn't be able to attend without funding assistance
 - People from under-represented communities, such as:    
   - Indigenous communities        
   - Residents of remote communities        
@@ -26,7 +26,7 @@ The number of grants available is dependent on the generosity of our sponsors an
 
 ### More:
 
-- We're defining the Oceania region as those countries within the [United Nations geoscheme for Oceania](https://en.wikipedia.org/wiki/United_Nations_geoscheme_for_Oceania), with the addition of West Papua and Timor-Leste.
+- &ast;We're defining the Oceania region as those countries within the [United Nations geoscheme for Oceania](https://en.wikipedia.org/wiki/United_Nations_geoscheme_for_Oceania), with the addition of West Papua and Timor-Leste.
 - Eligible travel expenses include transportation, accommodation, and visa costs.
 Please help us extend this program as widely as possible by applying for the smallest grant size that will adequately meet your needs.
 - We ask that you pay for your expenses up front, and we will reimburse you at the conference. You may be asked to provide receipts or similar evidence of expenditure.
@@ -50,6 +50,6 @@ Applications are now open for the FOSS4G SotM Oceania Travel Grant Program. To a
 All data will be held confidentially and only used for assessing TGP applications. Please ensure that the email address that you provide is regularly monitored, as the selection committee may wish to seek clarification of responses.
 
 #### Timeline:
-- 31 May: The Call for Applications is open! [Apply now!](https://docs.google.com/forms/d/e/1FAIpQLSc_d_m1jkLITTMfvDuTetnbGKodI4RvfPp3yt7reHw9_t7ufg/viewform)
+- 31 May: The Call for Applications is open!
 - 30 June: The Call for Applications closes. All applications must be in by this date.
 - 12 July: We will let you know whether you've been successful.
