@@ -81,11 +81,14 @@
           line-height: 1.5;
         }
 
+        [slot="markdown-html"] p {
+          margin-left: 5%;
+        }
+
         [slot="markdown-html"] h3,
         [slot="markdown-html"] h4,
-        [slot="markdown-html"] p,
         [slot="markdown-html"] ul {
-          margin-left: 40%;
+          font-size: 25px;
         }
 
         [slot="markdown-html"] h3::after {
@@ -144,7 +147,6 @@
 
       ready() {
         super.ready();
-        this.addEventListener('marked-render-complete', this._renderContent);
       }
 
       connectedCallback() {
@@ -159,42 +161,6 @@
             this.scrollToY(offset - this.toolbarOffset, 100);
           }, 500);
         }
-      }
-
-      _renderContent() {
-        const heads = this.shadowRoot.querySelectorAll('.markdown-text h3');
-        const contentDom = this.shadowRoot.querySelector('.content');
-        let lastHeadElement;
-
-        for (let i = 0; i < heads.length; i++) {
-          if (heads[i].previousElementSibling && heads[i].previousElementSibling.nodeName === 'H2') {
-            const head2Element = heads[i].previousElementSibling;
-            const colHeader = document.createElement('div');
-            colHeader.className = `col ${head2Element.id}`;
-            colHeader.textContent = head2Element.textContent;
-            contentDom.appendChild(colHeader);
-            lastHeadElement = colHeader;
-          }
-
-          if (!lastHeadElement) {
-            const col = document.createElement('div');
-            col.className = 'col';
-            contentDom.appendChild(col);
-            lastHeadElement = col;
-          }
-
-          const colContent = document.createElement('a');
-          colContent.className = 'col-content';
-          colContent.href = `#${heads[i].id}`;
-          colContent.textContent = heads[i].textContent;
-          colContent.addEventListener('click', this._scrollToChapter);
-          lastHeadElement.appendChild(colContent);
-
-          heads[i].addEventListener('click', this._changeUrl);
-        }
-
-        const contentWrapper = this.shadowRoot.querySelector('.content-wrapper');
-        contentWrapper.classList.add('visible');
       }
 
       _scrollToChapter(e) {
