@@ -7,10 +7,7 @@
 
 <dom-module id="filter-menu">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
-
-    <style>
-
+    <style include="shared-styles flex flex-alignment positioning">
       :host {
         display: block;
         width: 100%;
@@ -192,11 +189,11 @@
         if (!selected || !filters) return;
         const targetFilters = filters.map((filter) => filter.key);
         return Object.keys(selected)
-          .filter((key) => targetFilters.includes(key))
-          .reduce((aggr, key) =>
+            .filter((key) => targetFilters.includes(key))
+            .reduce((aggr, key) =>
               aggr.concat(selected[key].map((value) =>
                 ({ key, value })))
-            , []);
+                , []);
       }
 
       _toggleBoard() {

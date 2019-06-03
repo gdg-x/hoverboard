@@ -1,81 +1,81 @@
 <!doctype html>
-<html lang="en" itemscope itemtype="http://schema.org/Event">
+<html itemscope itemtype="http://schema.org/Event" lang="en">
 
 <head>
   <base href="{$ basepath $}">
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  <meta name="description" content="{$ description $}">
-  <meta name="keywords" content="{$ keywords $}">
-  <meta name="author" content="{$ organizer.name $}">
-  <meta name="generator" content="Project Hoverboard">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes" name="viewport">
+  <meta content="{$ description $}" name="description">
+  <meta content="{$ keywords $}" name="keywords">
+  <meta content="{$ organizer.name $}" name="author">
+  <meta content="Project Hoverboard" name="generator">
 
   <title>{$ title $}</title>
 
-  <link rel="canonical" href="{$ url $}">
+  <link href="{$ url $}" rel="canonical">
 
-  <link rel="icon" href="images/favicon.ico">
+  <link href="images/favicon.ico" rel="icon">
 
-  <meta name="theme-color" content="{$ webapp.themeColor $}">
-  <link rel="manifest" href="manifest.json">
+  <meta content="{$ webapp.themeColor $}" name="theme-color">
+  <link href="manifest.json" rel="manifest">
 
   <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes">
+  <meta content="yes" name="mobile-web-app-capable">
   <!-- fallback for manifest.json -->
-  <meta name="application-name" content="{$ title $}">
+  <meta content="{$ title $}" name="application-name">
   <!-- fallback for manifest.json -->
 
   <!-- Add to homescreen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="{$ title $}">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
+  <meta content="{$ title $}" name="apple-mobile-web-app-title">
 
   <!-- Homescreen icons. -->
-  <link rel="apple-touch-icon" href="images/manifest/icon-48.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/icon-72.png">
-  <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/icon-96.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/icon-144.png">
-  <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/icon-192.png">
+  <link href="images/manifest/icon-48.png" rel="apple-touch-icon">
+  <link href="images/manifest/icon-72.png" rel="apple-touch-icon" sizes="72x72">
+  <link href="images/manifest/icon-96.png" rel="apple-touch-icon" sizes="96x96">
+  <link href="images/manifest/icon-144.png" rel="apple-touch-icon" sizes="144x144">
+  <link href="images/manifest/icon-192.png" rel="apple-touch-icon" sizes="192x192">
 
   <!-- Tile icon for Win8 (144x144 + tile color) -->
-  <meta name="msapplication-TileImage" content="images/manifest/icon-144.png">
-  <meta name="msapplication-TileColor" content="#00aba9">
-  <meta name="msapplication-tap-highlight" content="no">
+  <meta content="images/manifest/icon-144.png" name="msapplication-TileImage">
+  <meta content="#00aba9" name="msapplication-TileColor">
+  <meta content="no" name="msapplication-tap-highlight">
 
   <!-- G+ sharing meta data -->
-  <meta itemprop="name" content="{$ title $}">
-  <meta itemprop="description" content="{$ description $}">
-  <meta itemprop="image" content="{$ image if image.startsWith('http') else (url + image) $}">
-  <meta itemprop="startDate" content="{$ startDate $}">
-  <meta itemprop="endDate" content="{$ endDate $}">
+  <meta content="{$ title $}" itemprop="name">
+  <meta content="{$ description $}" itemprop="description">
+  <meta content="{$ image if image.startsWith('http') else (url + image) $}" itemprop="image">
+  <meta content="{$ startDate $}" itemprop="startDate">
+  <meta content="{$ endDate $}" itemprop="endDate">
 
   <!-- Facebook sharing meta data -->
-  <meta property="og:title" content="{$ title $}">
-  <meta property="og:site_name" content="{$ title $}">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="{$ url $}">
-  <meta property="og:description" content="{$ description $}">
-  <meta property="og:type" content="Event">
-  <meta property="og:image" content="{$ image if image.startsWith('http') else (url + image) $}">
-  <meta property="og:image:type" content="image/jpeg"/>
+  <meta content="{$ title $}" property="og:title">
+  <meta content="{$ title $}" property="og:site_name">
+  <meta content="website" property="og:type">
+  <meta content="{$ url $}" property="og:url">
+  <meta content="{$ description $}" property="og:description">
+  <meta content="Event" property="og:type">
+  <meta content="{$ image if image.startsWith('http') else (url + image) $}" property="og:image">
+  <meta content="image/jpeg" property="og:image:type" />
 
   <!-- Twitter meta data -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:creator" content="@{$ organizer.twitter $}">
-  <meta name="twitter:title" content="{$ title $}">
-  <meta name="twitter:description" content="{$ description $}">
-  <meta name="twitter:image" content="{$ image if image.startsWith('http') else (url + image) $}">
+  <meta content="summary_large_image" name="twitter:card">
+  <meta content="@{$ organizer.twitter $}" name="twitter:creator">
+  <meta content="{$ title $}" name="twitter:title">
+  <meta content="{$ description $}" name="twitter:description">
+  <meta content="{$ image if image.startsWith('http') else (url + image) $}" name="twitter:image">
   <meta name="twitter:label1" value="{$ location.label $}">
   <meta name="twitter:data1" value="{$ location.name $}">
   <meta name="twitter:label2" value="">
   <meta name="twitter:data2" value="{$ location.city $}">
 
-  <link rel="dns-prefetch" href="https://apis.google.com">
-  <link rel="preconnect" href="https://www.google-analytics.com">
-  <link rel="preconnect" href="https://fcm.googleapis.com">
-  <link rel="preconnect" href="https://firestore.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://apis.google.com" rel="dns-prefetch">
+  <link href="https://www.google-analytics.com" rel="preconnect">
+  <link href="https://fcm.googleapis.com" rel="preconnect">
+  <link href="https://firestore.googleapis.com" rel="preconnect">
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
   <script>
 
     window.Polymer = { rootPath: '{$ basepath $}' };
@@ -83,14 +83,14 @@
 
     function loadFirebaseModules(modules) {
       return Promise.all(
-        modules.map((module) => new Promise((resolve, reject) => {
-          const script = document.createElement('script');
-          script.src = `bower_components/firebase/${module}.js`;
-          script.async = false;
-          script.onload = () => resolve();
-          script.onerror = () => reject();
-          document.head.appendChild(script);
-        })));
+          modules.map((module) => new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = `bower_components/firebase/${module}.js`;
+            script.async = false;
+            script.onload = () => resolve();
+            script.onerror = (error) => reject(error);
+            document.head.appendChild(script);
+          })));
     }
 
     function loadHoverboardApp() {
@@ -106,34 +106,31 @@
       'firebase-auth',
       'firebase-messaging',
     ])
-      .then(() => {
-        firebase.initializeApp({
-          apiKey: '{$ firebase.apiKey $}',
-          authDomain: '{$ firebase.authDomain $}',
-          databaseURL: '{$ firebase.databaseURL $}',
-          projectId: '{$ firebase.projectId $}',
-          storageBucket: '{$ firebase.storageBucket $}',
-          messagingSenderId: '{$ firebase.messagingSenderId $}',
-        });
-
-        const firestore = firebase.firestore();
-        firestore.settings({ timestampsInSnapshots: true });
-        firebase.firestore()
-          .enablePersistence({ experimentalTabSynchronization: true })
-          .catch(() => {
-            console.warn('DB offline support not available'); // eslint-disable-line no-console
+        .then(() => {
+          firebase.initializeApp({
+            apiKey: '{$ firebase.apiKey $}',
+            authDomain: '{$ firebase.authDomain $}',
+            databaseURL: '{$ firebase.databaseURL $}',
+            projectId: '{$ firebase.projectId $}',
+            storageBucket: '{$ firebase.storageBucket $}',
+            messagingSenderId: '{$ firebase.messagingSenderId $}',
           });
 
-        // eslint-disable-next-line no-console
-        console.log('Firebase App is ready!');
-      })
-      .then(() => loadHoverboardApp());
+          firebase.firestore()
+              .enablePersistence({ tabSynchronization: true })
+              .catch(() => {
+                console.warn('DB offline support not available'); // eslint-disable-line no-console
+              });
+          // eslint-disable-next-line no-console
+          console.log('Firebase App is ready!');
+        })
+        .then(() => loadHoverboardApp());
 
   </script>
 
   <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-  <link rel="import" href="src/hoverboard-app.html">
-  <script src="scripts/service-worker-registration.js" async defer></script>
+  <link href="src/hoverboard-app.html" rel="import">
+  <script async defer src="scripts/service-worker-registration.js"></script>
 
   <style>
 
@@ -187,12 +184,8 @@
       m.async = 1;
       m.src = i;
       p.parentNode.insertBefore(m, p);
-    }(
-      document,
-      'script',
-      'https://chimpstatic.com/mcjs-connected/js/users/'
-      + '26f3c80da46835144592b59b6/2df9527db2bb2e3b490841d41.js'
-    );
+      /* eslint max-len: ["error", { "code": 140 }] */
+    }(document, 'script', 'https://chimpstatic.com/mcjs-connected/js/users/26f3c80da46835144592b59b6/2df9527db2bb2e3b490841d41.js');
   </script>
 </head>
 

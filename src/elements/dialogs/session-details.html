@@ -20,8 +20,7 @@
 
 <dom-module id="session-details">
   <template>
-    <style is="custom-style" include="shared-styles dialog-styles flex flex-alignment positioning"></style>
-    <style>
+    <style include="shared-styles dialog-styles flex flex-alignment positioning">
       .section {
         cursor: pointer;
       }
@@ -139,7 +138,7 @@
 
     // eslint-disable-next-line no-undef
     class SessionDetails extends UtilsFunctions(SpeakersHoC(
-      ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element))
+        ReduxMixin(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element))
     )) {
       static get is() {
         return 'session-details';

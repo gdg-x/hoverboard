@@ -1,20 +1,14 @@
 (function () {
   'use strict';
 
-  // Ensure we only attempt to register the SW once.
-  let isAlreadyRegistered = false;
-
   const URL = 'service-worker.js';
   const SCOPE = Polymer.rootPath;
 
   const register = () => {
-    if (!isAlreadyRegistered) {
-      isAlreadyRegistered = true;
-
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register(URL, {
-          scope: SCOPE,
-        })
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register(URL, {
+        scope: SCOPE,
+      })
           .then((registration) => {
             registration.onupdatefound = () => {
               const installingWorker = registration.installing;
@@ -38,7 +32,6 @@
             // eslint-disable-next-line no-console
             console.error('Service worker registration failed:', e);
           });
-      }
     }
   };
 
