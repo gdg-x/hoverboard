@@ -1,4 +1,4 @@
-## FOSS4G SotM Oceania – Yeah, we know that's a mouthful. Here's what it means.
+### FOSS4G SotM Oceania - Yeah, we know that's a mouthful. Here's what it means.
 
 So let's break it down — 'Free and Open Source Software for Geospatial' or FOSS4G if you're a fan of efficiency (we are) is the name given to the conferences of the Open Source Geospatial Foundation (OSGeo). OSGeo is a non-profit with a mission to foster and promote the adoption of open source geospatial technology. All of this is done within the broader context of open source software philosophy and participatory community driven development.
 
@@ -22,17 +22,17 @@ If you're curious check out [last years presentations](https://www.youtube.com/c
 
 Day four is the 'Community day' – your chance to give back and get your hands dirty taking part in a code sprint and a mapathon. With everyone in the same space – we'll pool our resources and all figure out ways to contribute. Yes, we can all help!
 
-*&ast;FOSS4G SotM Oceania is a Child Friendly Conference.*
+*&ast; FOSS4G SotM Oceania is a child-friendly conference.*
 
 ### Who's gonna be there?
 
 Everyone.&#x2020;
 
-*&#x2020;almost everyone.*
-
 This conference is aimed at a broad swath of the community – developers, users, contributors, community mappers, academics, business, government and anyone interested in open source geospatial software and the OpenStreetMap project.
 
 This is your chance to connect with developers creating the next generation of geospatial technology. Get ahead of the curve and find out what's on the horizon.  FOSS4G and State of the Map events attract a very diverse audience on the global stage – so strap in for amazing content.
+
+*&#x2020; almost everyone.*
 
 ### Why should I go?
 
@@ -54,7 +54,9 @@ The longer version: check out our Sponsors page [here](/sponsor/).
 
 ### Who runs FOSS4G SotM Oceania?
 
-In line with the ethos of the OSGeo and OpenStreetMap communities, the conference is organised by a group of passionate volunteers all who are experienced geospatial practitioners and community mappers committed to the goals of both their respective international foundations. See our Committee and Contributors page [here](/team/).
+In line with the ethos of the OSGeo and OpenStreetMap communities, the conference is organised by a group of passionate volunteers all who are experienced geospatial practitioners and community mappers committed to the goals of both their respective international foundations.
+
+See our Committee and Contributors page [here](/team/).
 
 ### What else is there to know?
 
