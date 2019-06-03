@@ -750,8 +750,8 @@
 	"team": [{
 		"members": [{
 				"name": "Daniel Silk",
-				"photo": null,
-				"photoUrl": null,
+				"photo": "/images/team/ds.JPG",
+				"photoUrl": "/images/team/ds.JPG",
 				"socials": [
 					{
 						"icon": "linkedin",
@@ -769,12 +769,30 @@
 			},
 			{
 				"name": "Kim Fitter",
-				"photo": null,
-				"photoUrl": null,
+				"photo": "/images/team/kf.PNG",
+				"photoUrl": "/images/team/kf.PNG",
 				"socials": [
+					{
+						"icon": "linkedin",
+						"link": "https://www.linkedin.com/in/kim-fitter-nz/",
+						"name": "LinkedIn"
+					},
+					{
+						"icon": "twitter",
+						"link": "https://twitter.com/kim_fitter",
+						"name": "Twitter"
+					}
 				],
 				"order": 1,
 				"title": "Community Lead"
+			},
+			{
+				"name": "Matthew Fry",
+				"photo": null,
+				"photoUrl": null,
+				"socials": [],
+				"order": 2,
+				"title": "Program Lead"
 			},
 			{
 				"name": "Dionne Hansen",
@@ -782,7 +800,7 @@
 				"photoUrl": "/images/team/dh.jpg",
 				"socials": [
 				],
-				"order": 2,
+				"order": 3,
 				"title": "Design & Communication Lead"
 			},
 			{
@@ -791,16 +809,26 @@
 				"photoUrl": null,
 				"socials": [
 				],
-				"order": 3,
+				"order": 4,
 				"title": "Local & Logistics Lead"
 			},
 			{
 				"name": "Edoardo Neerhut",
-				"photo": null,
-				"photoUrl": null,
+				"photo": "/images/team/en.png",
+				"photoUrl": "/images/team/en.png",
 				"socials": [
+					{
+						"icon": "linkedin",
+						"link": "https://www.linkedin.com/in/edoardoneerhut/",
+						"name": "LinkedIn"
+					},
+					{
+						"icon": "twitter",
+						"link": "https://twitter.com/eneerhut",
+						"name": "Twitter"
+					}
 				],
-				"order": 4,
+				"order": 5,
 				"title": "Sponsorship Lead"
 			},
 			{
@@ -831,7 +859,8 @@
 				"name": "Dr Mairéad de Róiste",
 				"photo": "https://www.victoria.ac.nz/images/staffpics/mairead-deroiste.jpg",
 				"photoUrl": "https://www.victoria.ac.nz/images/staffpics/mairead-deroiste.jpg",
-				"socials": [{
+				"socials": [
+					{
 						"icon": "linkedin",
 						"link": "https://www.linkedin.com/in/mairead-de-roiste-9367ab1/",
 						"name": "LinkedIn"
@@ -860,19 +889,11 @@
 				"title": "Committee Member"
 			},
 			{
-				"name": "Matthew Fry",
-				"photo": null,
-				"photoUrl": null,
-				"socials": [],
-				"order": 9,
-				"title": "Committee Member"
-			},
-			{
 				"name": "David Garcia",
 				"photo": null,
 				"photoUrl": null,
 				"socials": [],
-				"order": 10,
+				"order": 9,
 				"title": "Committee Member"
 			},
 			{
@@ -882,7 +903,7 @@
 				"socials": [
 
 				],
-				"order": 11,
+				"order": 10,
 				"title": "Committee Member"
 			},
 			{
@@ -890,9 +911,18 @@
 				"photo": null,
 				"photoUrl": null,
 				"socials": [
-
+					{
+						"icon": "linkedin",
+						"link": "https://www.linkedin.com/in/glauer1/",
+						"name": "LinkedIn"
+					},
+					{
+						"icon": "twitter",
+						"link": "https://twitter.com/flashkiwi",
+						"name": "Twitter"
+					}
 				],
-				"order": 12,
+				"order": 11,
 				"title": "OSGeo Oceania Secretary"
 			},
 			{
@@ -904,17 +934,26 @@
 					"link": "https://spatialparalysis.xyz/",
 					"name": "Website"
 				}],
-				"order": 13,
+				"order": 12,
 				"title": "Committee Member"
 			},
 			{
 				"name": "Alex Leith",
-				"photo": null,
-				"photoUrl": null,
+				"photo": "/images/team/al.jpeg",
+				"photoUrl": "/images/team/al.jpeg",
 				"socials": [
-
+					{
+						"icon": "linkedin",
+						"link": "https://www.linkedin.com/in/alex-leith/",
+						"name": "LinkedIn"
+					},
+					{
+						"icon": "twitter",
+						"link": "https://twitter.com/alexgleith",
+						"name": "Twitter"
+					}
 				],
-				"order": 14,
+				"order": 13,
 				"title": "OSGeo Oceania Treasurer"
 			},
 			{
@@ -924,7 +963,7 @@
 				"socials": [
 
 				],
-				"order": 15,
+				"order": 14,
 				"title": "Committee Member"
 			}
 		],
