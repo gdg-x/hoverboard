@@ -29,6 +29,7 @@
   "time": "Time",
   "faq": "/data/faq.md",
   "cod": "/data/cod.md",
+  "location": "/data/location.md",
   "footer": {
     "blog": "Blog"
   },
@@ -48,6 +49,11 @@
         {
           "name": "Schedule",
           "url": "/schedule",
+          "newTab": false
+        },
+        {
+          "name": "Lieu",
+          "url": "/location",
           "newTab": false
         },
         {

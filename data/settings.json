@@ -41,6 +41,11 @@
       "route": "cod",
       "permalink": "/cod/",
       "label": "Code de conduite"
+    },
+    {
+      "route": "location",
+      "permalink": "/location/",
+      "label": "Lieu"
     }
   ],
   "heroSettings": {
@@ -102,6 +107,14 @@
     "cod": {
       "title": "Code de conduite",
       "metaDescription": "En apprendre plus sur les attentes que nous avons vis-à-vis des participants",
+      "background": {
+        "color": "#ffffff"
+      },
+      "fontColor": "#424242"
+    },
+    "location": {
+      "title": "Lieu",
+      "metaDescription": "Lieu de l'événement",
       "background": {
         "color": "#ffffff"
       },
