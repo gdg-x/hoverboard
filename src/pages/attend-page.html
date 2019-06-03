@@ -16,11 +16,6 @@
         height: 100%;
       }
 
-      hero-block {
-        font-size: 24px;
-        text-align: center;
-      }
-
       .hero-logo {
         --iron-image-width: 100%;
         max-width: 240px;
@@ -73,8 +68,8 @@
     </style>
 
     <polymer-helmet
-      title="Attend"
-      description="Description"
+      title="{$ heroSettings.attend.title $} | {$ title $}"
+      description="{$ heroSettings.attend.metaDescription $}"
       active="[[active]]"
     ></polymer-helmet>
     <hero-block
