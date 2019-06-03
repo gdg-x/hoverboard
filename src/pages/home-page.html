@@ -166,6 +166,19 @@ tr<link rel="import" href="../../bower_components/polymer/polymer-element.html">
             <iron-icon icon="hoverboard:play"></iron-icon>
             {$ viewHighlights $}
           </paper-button>
+          <a href="/schedule/">
+            <paper-button
+            class="watch-video"
+            primary
+              ga-on="click"
+              ga-event-category="redirect"
+              ga-event-action="schedule"
+              ga-event-label="hero block - view schedule"
+            >
+            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+              {$ viewSchedule $}
+            </paper-button>
+          </a>
         </div>
 
         <div class="scroll-down" on-tap="_scrollNextBlock">
