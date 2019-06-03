@@ -334,7 +334,7 @@
         "sessions" : [ {
           "items" : [ 55 ]
         },{
-          "items" : [ 24 ]
+          "items" : [ 60 ]
         },{
           "items" : [ 27 ]
         },{
@@ -536,9 +536,9 @@
         "endTime" : "16:20"
       },{
         "sessions" : [ {
-          "items" : [ 58 ]
+          "items" : [  ]
         },{
-          "items" : [ 25 ]
+          "items" : [ 61 ]
         },{
           "items" : [ 6 ]
         },{
@@ -967,38 +967,6 @@
       ],
       "speakers": [
         "NQLD49SQ4gUOxdIJzFiOtAqwMvK2"
-      ],
-      "presentation": null,
-      "videoId": null,
-      "image": null,
-      "icon": null
-    },
-    "24": {
-      "title": "La Cryptographie en 55' chrono",
-      "complexity": "intermediate",
-      "description": "Plus que jamais, nous avons besoin de sécuriser nos échanges et de renforcer notre confiance dans nos outils pour garder nos données à l'abri des yeux indiscrets. Peut-être que franchir le pas vous semble insurmontable. Peut-être que vous vous dites que tout ça reste une affaire de groupes d'hackitivistes éclairés. Plus probablement, il vous manque sans doute juste une connaissance simple de l'univers du chiffrement, et de la fantastique boîte à outils qui l'accompagne.\n\nAlors profitons-en, on embarque pour un tour d'horizon de la crypto : chiffrement, techniques, outils… Nous regarderons quels outils existent, pourquoi et comment les utiliser. Et parce que le web ne serait pas parfait s'il n'était pas ouvert, nous nous intéresserons aussi bien aux clients \"lourds\" qu'aux alternatives web (et il en y en a plein).\n\nMieux : puisque nous ferons le tour des techniques, observons les outils que met à notre portée de dev le W3C avec l'API WebCrypto : ajouter du chiffrement et une gestion fine de la sécurisation se révèle désormais beaucoup plus pratique.\n\nCeinture et bretelles : attachez-vous bien, on chiffre !",
-      "language": "French",
-      "tags": [
-        "Architecture & Paradigme"
-      ],
-      "speakers": [
-        "kl8dIow7hxP69iJO2VEcAqkwT9L2"
-      ],
-      "presentation": null,
-      "videoId": null,
-      "image": null,
-      "icon": null
-    },
-    "25": {
-      "title": "WebAssembly : le navigateur est maintenant une vraie machine virtuelle",
-      "complexity": "intermediate",
-      "description": "WebAssembly est une nouvelle machine virtuelle dans le navigateur. Elle ne fait pas de transpilation vers JavaScript comme l'ont tenté ses prédécesseurs ; elle introduit un nouveau format, proche d'un assembleur, exécuté dans une machine virtuelle au sein de votre browser. Le coup de génie ? Offrir un bridge entre les API JavaScript et les exécutables WebAssembly ! Les dernières optimisations des navigateurs permettent maintenant un échange ultrarapide entre le code JS de votre interface, et votre code métier WASM.\n\nPartons d'un projet nécessitant un long temps de calcul, comme un modèle statistique. Nous développerons le core code en Rust, compilé vers WASM via LLVM, et nous afficherons l'ensemble des résultats dans une UI propulsée par JavaScript. Pas besoin de savoir comment tout ça fonctionne, c'est ce que nous allons découvrir ensemble !\n\nCe talk appartient à une nouvelle série sous le hashtag #StartFromNowhere : démarrons des savoir-faire des développeur·euse·s front (JS / HTML / CSS), et plongeons dans la mise en application d'une nouvelle technologie / framework dont beaucoup parlent sans pour autant y avoir déjà touché. En 45', vous obtiendrez tous les savoirs nécessaires à la poursuite de votre apprentissage. ",
-      "language": "French",
-      "tags": [
-        "Langage & Framework"
-      ],
-      "speakers": [
-        "kl8dIow7hxP69iJO2VEcAqkwT9L2"
       ],
       "presentation": null,
       "videoId": null,
@@ -1517,24 +1485,6 @@
             "image": null,
             "icon": null
         },
-
-    "58":{
-            "title": "Something Interesting about Kotlin on Android",
-            "complexity": "intermediate",
-            "description": "This talk will be about some really interesting thing about developing for Android using Kotlin.",
-            "language": "English",
-            "tags": [
-                "Langage & Framework"
-            ],
-            "speakers": [
-                "aaaaaacarottechetcarrote13239289199990999999999",
-                "ghrvhugeriureiuhgrhuiegriuhhiuegrromainghhuireguihgreuhigerhuioegr"
-            ],
-            "presentation": null,
-            "videoId": null,
-            "image": null,
-            "icon": null
-        },
         "59": {
             "title": "Deep Learning en production vu par un Data Engineer",
             "complexity": "advanced",
@@ -1545,6 +1495,38 @@
             ],
             "speakers": [
                 "fgehirughuigreeuhiegriuhprouthrviuherhuigeruih"
+            ],
+            "presentation": null,
+            "videoId": null,
+            "image": null,
+            "icon": null
+        },
+        "60": {
+            "title": "Comment se faire hacker bien comme il faut!",
+            "complexity": "beginner",
+            "description": "Et encore une fuite de numéros de cartes de crédit sur internet [lien](https://www.infoq.com/news/2018/11/british-airways-data-breach)!  \n C'est révoltant n'est-ce pas ? Mais attends, qu'est-ce qu'on fait nous pour s'assurer que notre appli n'est pas une passoire? \n Dans cette live-coding-hacking session, venez découvrir les erreurs les plus communes en sécurité, que la grande majorité d'entre nous font sans même le savoir! \n Après cela, vous ne verrez plus votre application de la même manière...",
+            "language": "French",
+            "tags": [
+                "Langage & Framework"
+            ],
+            "speakers": [
+                "hguhreihugruhgirheuhugrehughiure"
+            ],
+            "presentation": null,
+            "videoId": null,
+            "image": null,
+            "icon": null
+        },
+        "61": {
+            "title": "WebAssembly dans la vraie vie",
+            "complexity": "beginner",
+            "description": "Une petite conférence pour essayer de cerner ce qu'est cet OVNI dans l'univers des technos web. Ce nouveau standard vient de débarquer dans les navigateurs et soulève pas mal de questions sur ses promesses (rapidité ! cible de compilation universelle !) et sur ses cas d’utilisations concrets. \n Lors de cette conférence je commencerai par un peu d'histoire et de technique pour s'éclaircir les idées et pour voir comment on travaille avec cette techno. Je présenterai ensuite mon retour d'expérience sur une étude menée pour le CNES pour expérimenter l'apport de WebAssembly pour la visualisation et le traitement de très grandes images satellites dans le navigateur. Il y aura de la lecture de format de fichier exotique (JPEG 2000), de la détection d'avions par machine learning et de la détection de nuages par deep learning. On ira même jusqu’à utiliser les Google Cloud Functions pour voir ce que WebAssembly a à raconter en dehors du navigateur.",
+            "language": "French",
+            "tags": [
+                "Langage & Framework"
+            ],
+            "speakers": [
+                "vnjbgkujikghhujikgriujhgrghiuyferhbiyjvbhygithuigefhjger"
             ],
             "presentation": null,
             "videoId": null,
@@ -1959,21 +1941,6 @@
           "name": "Twitter"
         }],
         "title": "Architecte solutions"
-      },
-      "aaaaaacarottechetcarrote13239289199990999999999": {
-        "bio": "Chet leads the Android Toolkit, working on animations, graphics, UI, performance, and anything else that puts the pixels on the screen. And sometimes, just sometimes, he takes a break from comedy to give a technical talk.",
-        "company": "Google",
-        "companyLogoUrl": "/images/logos/google.svg",
-        "country": "Mountain View, United States",
-        "name": "Chet Haase",
-        "photoUrl": "https://androidmakers.fr/images/people/chet_haase.jpg",
-        "shortBio": "Android Toolkit leader at Google",
-        "socials": [{
-          "link": "https://twitter.com/chethaase",
-          "icon": "twitter",
-          "name": "Twitter"
-        }],
-        "title": "Android Toolkit leader"
       },
       "RcX2utpBETcNTT4zJneK3LL28dn1": {
         "shortBio": "UX/UI chez Smag (Smart Agriculture)",
@@ -2476,25 +2443,6 @@
         }],
         "title": "Head of DevOps/Cloud"
       },
-      "kl8dIow7hxP69iJO2VEcAqkwT9L2": {
-        "bio": "Le m4dz est un animal curieux. Au travers de plusieurs vies, il a toujours cherché à transmettre aux autres ce qu'il avait pu comprendre et connaître. Au départ developpeur web (personne n'est parfait), soucieux de vie privée, de l'usage respecteux des données de chacun, et de sécurité, Il est maintenant Tech Evangelist chez alwaysdata. Il essaie de sensibiliser les autres aux enjeux d'aujourd'hui et de demain sur les réalités du numérique. Son livre préféré restera toujours « Alice au Pays des Merveilles ».",
-        "shortBio": "Tech Evangelist at @alwaysdata",
-        "company": "alwaysdata",
-        "companyLogoUrl": "/images/logos/alwaysdata.png",
-        "country": "Paris",
-        "name": "M4dz",
-        "photoUrl": "https://pbs.twimg.com/profile_images/1060870327914369024/iF65Lkie_400x400.jpg",
-        "socials": [{
-          "link": "https://github.com/m4dz",
-          "icon": "github",
-          "name": "GitHub"
-        }, {
-          "link": "https://twitter.com/m4d_z",
-          "icon": "twitter",
-          "name": "Twitter"
-        }],
-        "title": "Tech Evangelist"
-      },
       "Rm5deJSGLjX2ftBToiMch5CWS0T2": {
         "bio": "Après des études en sciences politiques et management des médias, Marie fait ses armes en marketing web au Monde.fr et chez Canal Plus. Au sein de l’agence Backelite (aujourd'hui Idean) à partir de 2009, elle exerce différents métiers pour les plus grandes marques du digital : chef de projet, conceptrice fonctionnelle, consultante en stratégie mobile, manager conseil… avant de créer et de piloter la Direction de l’Expérience Utilisateur. En 2018, elle rejoint Crédit Agricole Technologies et Services pour mettre en place le département d’UX design et participer à la transformation de l’entreprise IT au service des Caisses régionales du Crédit Agricole.\n",
         "shortBio": "Leader du Chapitre Expérience Utilisateur à Crédit Agricole Technologies et Services",
@@ -2755,21 +2703,6 @@
         "socials": [],
         "title": "Software engineer"
       },
-      "ghrvhugeriureiuhgrhuiegriuhhiuegrromainghhuireguihgreuhigerhuioegr": {
-        "bio": "Romain works on 3D real-time graphics and Kotlin on the Android team at Google. He previously managed the UI toolkit team and the graphics team.",
-        "company": "Google",
-        "companyLogoUrl": "/images/logos/google.svg",
-        "country": "San Francisco, United States",
-        "name": "Romain Guy",
-        "photoUrl": "https://androidmakers.fr/images/people/romain_guy.jpg",
-        "shortBio": "Android 3D real-time graphics and Kotlin at Google",
-        "socials": [{
-          "link": "https://twitter.com/romainguy",
-          "icon": "twitter",
-          "name": "Twitter"
-        }],
-        "title": "Android 3D real-time graphics and Kotlin "
-      },
       
       "fgehirughuigreeuhiegriuhprouthrviuherhuigeruih": {
         "bio": "Développeur depuis 4 ans, Romain « scauglog » s’intéresse à tout ce qui tourne autour de l’écosystème Big Data. UX de formation, il aime rapprocher ces deux mondes et code secrètement en JavaScript.",
@@ -3028,6 +2961,36 @@
           "name": "Twitter"
         }],
         "title": "Consultant associé SmartView - Coach Agile"
+      },
+      "hguhreihugruhgirheuhugrehughiure": {
+        "bio": "Senior Lead Developer à la Société Générale, je suis un fervent défenseur du Software Craftsmanship. \nJ'évangélise activement autour de DDD/Hexagonal Architecture, l'XP et le Kanban #NoEstimates au sein de cours et de conférences ainsi qu'à travers d'articles de [blog](https://medium.com/@julien.topcu). \n Membre de la fondation OWASP, je m'efforce de transmettre à la communauté une philosophie DevSecOps que je pense être l'avenir du métier de développeur. J'ai participé à la mise en place de pipeline de Continuous Security à l'échelles d'entreprises.",
+        "company": "Société Générale",
+        "companyLogoUrl": "/images/logos/societegeneral.png",
+        "country": "Paris, France",
+        "name": "Julien Topçu",
+        "photoUrl": "https://media.licdn.com/dms/image/C4E03AQHm8uwCNxxA9Q/profile-displayphoto-shrink_800_800/0?e=1565222400&v=beta&t=r2jzI-wLvh3QEe3-1HZujV1u04heMssYiWZifXBtEfA",
+        "shortBio": "Senior Lead Developer à la Société Générale, je suis un fervent défenseur du Software Craftsmanship. \nJ'évangélise activement autour de DDD/Hexagonal Architecture, l'XP et le Kanban #NoEstimates au sein de cours et de conférences ainsi qu'à travers d'articles de [blog](https://medium.com/@julien.topcu)...",
+        "socials": [{
+          "link": "https://twitter.com/JulienTopcu",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Developer Relations @ OWASP Fundation & Sr Lead Software Engineer @ Société Générale"
+      },
+      "vnjbgkujikghhujikgriujhgrghiuyferhbiyjvbhygithuigefhjger": {
+        "bio": "Informaticien curieux depuis 35 ans, de métier depuis 20 ans (principalement dans le spatial). Non spécialiste touche à tout : du développement logiciel à l'étude scientifique, du développement d'algorithmes de traitement à la mise en œuvre de systèmes, de la programmation en C++ ou Python à l'utilisation des technos Web, de la petite appli en ligne de commande aux IHM ou aux systèmes distribués. Ingénieur chez Magellium et co-fondateur et animateur à la Compagnie du Code.",
+        "company": "Magellium",
+        "companyLogoUrl": "/images/logos/magellium.png",
+        "country": "Toulouse, France",
+        "name": "Nicolas Decoster",
+        "photoUrl": "https://media.licdn.com/dms/image/C5103AQGaAw-6brPG4w/profile-displayphoto-shrink_800_800/0?e=1565222400&v=beta&t=dHAoCd-yNBk88PaRE5wiAmBLxAYBaeelI0wHgrqLeD8",
+        "shortBio": "Ingénieur chez Magellium et co-fondateur et animateur à la Compagnie du Code...",
+        "socials": [{
+          "link": "https://twitter.com/nnodot",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": " Ingénieur chez Magellium et co-fondateur et animateur à la Compagnie du Code."
       }
     },
 
