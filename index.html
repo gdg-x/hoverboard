@@ -49,10 +49,13 @@
   <meta itemprop="image" content="{$ image if image.startsWith('http') else (url + image) $}">
   <meta itemprop="startDate" content="{$ startDate $}">
   <meta itemprop="endDate" content="{$ endDate $}">
-  <meta itemprop="location" itemtype="http://schema.org/Place">
+  <meta itemprop="location" itemtype="http://schema.org/Place" content="{$ locationName $}, {$ locationAddress $} {$ locationCode $} {$ locationCity $}">
   <meta itemprop="locationAddressType" itemtype="http://schema.org/PostalAddress"/>
   <meta itemprop="streetAddress" content="{$ locationAddress $}"/>
   <meta itemprop="addressLocality" content="{$ locationCity $}"/>
+  <meta itemprop="postalCode" content="{$ locationCode $}"/>
+  <meta itemprop="addressRegion" content="{$ locationRegion $}"/>
+  <meta itemprop="addressCountry" content="{$ locationCountry $}"/>
 
   <script type="application/ld+json">
   {
