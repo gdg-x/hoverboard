@@ -43,12 +43,6 @@
   <meta name="msapplication-TileColor" content="#00aba9">
   <meta name="msapplication-tap-highlight" content="no">
 
-  <!-- G+ sharing meta data -->
-  <meta itemprop="name" content="{$ title $}">
-  <meta itemprop="description" content="{$ description $}">
-  <meta itemprop="image" content="{$ image if image.startsWith('http') else (url + image) $}">
-  <meta itemprop="startDate" content="{$ startDate $}">
-  <meta itemprop="endDate" content="{$ endDate $}">
 
   <script type="application/ld+json">
   {
@@ -75,7 +69,14 @@
     }
   }
   </script>
-  <meta itemprop="location.name" content="{$ locationName $}">
+  
+  <!-- G+ sharing meta data --><!-- 
+  <meta itemprop="name" content="{$ title $}">
+  <meta itemprop="description" content="{$ description $}">
+  <meta itemprop="image" content="{$ image if image.startsWith('http') else (url + image) $}">
+  <meta itemprop="startDate" content="{$ startDate $}">
+  <meta itemprop="endDate" content="{$ endDate $}"> -->
+
 
   <!-- Facebook sharing meta data -->
   <meta property="og:title" content="{$ title $}">
