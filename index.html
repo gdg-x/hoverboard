@@ -49,8 +49,10 @@
   <meta itemprop="image" content="{$ image if image.startsWith('http') else (url + image) $}">
   <meta itemprop="startDate" content="{$ startDate $}">
   <meta itemprop="endDate" content="{$ endDate $}">
-  <meta property="location:address:type" content="PostalAddress"/>
-  <meta property="location:address:streetAddress" content="{$ locationAddress $}"/>
+  <meta itemprop="location" itemtype="http://schema.org/Place">
+  <meta itemprop="locationAddressType" itemtype="http://schema.org/PostalAddress"/>
+  <meta itemprop="streetAddress" content="{$ locationAddress $}"/>
+  <meta itemprop="addressLocality" content="{$ locationCity $}"/>
 
   <script type="application/ld+json">
   {
@@ -68,7 +70,6 @@
     }
   }
   </script>
-
 
   <!-- Facebook sharing meta data -->
   <meta property="og:title" content="{$ title $}">
