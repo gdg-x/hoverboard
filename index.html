@@ -49,10 +49,24 @@
   <meta itemprop="image" content="{$ image if image.startsWith('http') else (url + image) $}">
   <meta itemprop="startDate" content="{$ startDate $}">
   <meta itemprop="endDate" content="{$ endDate $}">
-  <meta itemprop="location" content="{$ locationName $}, {$ locationAddress $}">
+
+  <script type="application/ld+json">
+  {
+    "location": {
+      "@type": "Place",
+      "name": "{$ locationName $}",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "{$ locationAddress $}",
+        "addressLocality": "{$ locationCity $}",
+        "postalCode": "{$ locationCode $}",
+        "addressRegion": "{$ locationRegion $}",
+        "addressCountry": "{$ locationCountry $}"
+      }
+    }
+  }
+  </script>
   <meta itemprop="location.name" content="{$ locationName $}">
-  <meta itemprop="location.adress" content="{$ locationAddress $}">
-  <meta itemprop="location.type" content="Event">
 
   <!-- Facebook sharing meta data -->
   <meta property="og:title" content="{$ title $}">
