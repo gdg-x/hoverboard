@@ -52,6 +52,15 @@
 
   <script type="application/ld+json">
   {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "{$ title $}",
+    "startDate": "{$ startDate $}",
+    "endDate": "{$ endDate $}",
+    "description": "{$ description $}",
+    "image": [
+      "{$ image if image.startsWith('http') else (url + image) $}"
+     ],
     "location": {
       "@type": "Place",
       "name": "{$ locationName $}",
