@@ -49,30 +49,14 @@
   <meta itemprop="image" content="{$ image if image.startsWith('http') else (url + image) $}">
   <meta itemprop="startDate" content="{$ startDate $}">
   <meta itemprop="endDate" content="{$ endDate $}">
-  <meta itemprop="location" itemtype="http://schema.org/Place" content="{$ locationName $}, {$ locationAddress $} {$ locationCode $} {$ locationCity $}">
-  <meta itemprop="locationAddressType" itemtype="http://schema.org/PostalAddress"/>
-  <meta itemprop="streetAddress" content="{$ locationAddress $}"/>
-  <meta itemprop="addressLocality" content="{$ locationCity $}"/>
-  <meta itemprop="postalCode" content="{$ locationCode $}"/>
-  <meta itemprop="addressRegion" content="{$ locationRegion $}"/>
-  <meta itemprop="addressCountry" content="{$ locationCountry $}"/>
 
-  <script type="application/ld+json">
-  {
-    "location": {
-      "@type": "Place",
-      "name": "{$ locationName $}",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "{$ locationAddress $}",
-        "addressLocality": "{$ locationCity $}",
-        "postalCode": "{$ locationCode $}",
-        "addressRegion": "{$ locationRegion $}",
-        "addressCountry": "{$ locationCountry $}"
-      }
-    }
-  }
-  </script>
+  <div class="event-venue" itemprop="location" itemscope itemtype="http://schema.org/Place">
+      <span itemprop="name">{$ locationName $}</span>
+      <div class="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+          <span itemprop="streetAddress">{$ locationAddress $}</span><br>
+          <span itemprop="addressLocality">{$ locationCity $}</span>, <span itemprop="addressRegion">{$ locationRegion $}</span> <span itemprop="postalCode">{$ locationCode $}</span><span itemprop="addressCountry">{$ locationCountry $}</span>
+      </div>
+  </div>
 
   <!-- Facebook sharing meta data -->
   <meta property="og:title" content="{$ title $}">
