@@ -43,18 +43,15 @@
   <meta name="msapplication-TileColor" content="#00aba9">
   <meta name="msapplication-tap-highlight" content="no">
 
+  <!-- G+ sharing meta data -->
+  <meta itemprop="name" content="{$ title $}">
+  <meta itemprop="description" content="{$ description $}">
+  <meta itemprop="image" content="{$ image if image.startsWith('http') else (url + image) $}">
+  <meta itemprop="startDate" content="{$ startDate $}">
+  <meta itemprop="endDate" content="{$ endDate $}">
 
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "Event",
-    "name": "{$ title $}",
-    "startDate": "{$ startDate $}",
-    "endDate": "{$ endDate $}",
-    "description": "{$ description $}",
-    "image": [
-      "{$ image if image.startsWith('http') else (url + image) $}"
-     ],
     "location": {
       "@type": "Place",
       "name": "{$ locationName $}",
@@ -69,13 +66,6 @@
     }
   }
   </script>
-  
-  <!-- G+ sharing meta data --><!-- 
-  <meta itemprop="name" content="{$ title $}">
-  <meta itemprop="description" content="{$ description $}">
-  <meta itemprop="image" content="{$ image if image.startsWith('http') else (url + image) $}">
-  <meta itemprop="startDate" content="{$ startDate $}">
-  <meta itemprop="endDate" content="{$ endDate $}"> -->
 
 
   <!-- Facebook sharing meta data -->
@@ -86,6 +76,7 @@
   <meta property="og:type" content="Event">
   <meta property="og:image" content="{$ image if image.startsWith('http') else (url + image) $}">
   <meta property="og:image:type" content="image/jpeg"/>
+  <meta property="og:location:address:streetAddress" content="{$ locationAddress $}"/>
 
   <!-- Twitter meta data -->
   <meta name="twitter:card" content="summary_large_image">
