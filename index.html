@@ -49,6 +49,8 @@
   <meta itemprop="image" content="{$ image if image.startsWith('http') else (url + image) $}">
   <meta itemprop="startDate" content="{$ startDate $}">
   <meta itemprop="endDate" content="{$ endDate $}">
+  <meta property="location:address:type" content="PostalAddress"/>
+  <meta property="location:address:streetAddress" content="{$ locationAddress $}"/>
 
   <script type="application/ld+json">
   {
@@ -76,7 +78,6 @@
   <meta property="og:type" content="Event">
   <meta property="og:image" content="{$ image if image.startsWith('http') else (url + image) $}">
   <meta property="og:image:type" content="image/jpeg"/>
-  <meta property="og:location:address:streetAddress" content="{$ locationAddress $}"/>
 
   <!-- Twitter meta data -->
   <meta name="twitter:card" content="summary_large_image">
