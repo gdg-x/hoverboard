@@ -1518,9 +1518,9 @@
             "icon": null
         },
         "61": {
-            "title": "WebAssembly dans la vraie vie",
+            "title": "Un éditeur collaboratif en Rust, WebAssembly et Vue.js",
             "complexity": "beginner",
-            "description": "Une petite conférence pour essayer de cerner ce qu'est cet OVNI dans l'univers des technos web. Ce nouveau standard vient de débarquer dans les navigateurs et soulève pas mal de questions sur ses promesses (rapidité ! cible de compilation universelle !) et sur ses cas d’utilisations concrets. \n Lors de cette conférence je commencerai par un peu d'histoire et de technique pour s'éclaircir les idées et pour voir comment on travaille avec cette techno. Je présenterai ensuite mon retour d'expérience sur une étude menée pour le CNES pour expérimenter l'apport de WebAssembly pour la visualisation et le traitement de très grandes images satellites dans le navigateur. Il y aura de la lecture de format de fichier exotique (JPEG 2000), de la détection d'avions par machine learning et de la détection de nuages par deep learning. On ira même jusqu’à utiliser les Google Cloud Functions pour voir ce que WebAssembly a à raconter en dehors du navigateur.",
+            "description": "La communauté Rust a été la première à adopter  WebAssembly avec un réel enthousiasme. Ils ont fait un travail  impressionnant pour faciliter les interactions entre JavaScript et Rust  en passant par WebAssembly, et cela ouvre des perspectives nouvelles  pour amener des outils robustes et rapides dans le navigateur. Dans ce talk, je vais vous présenter mon parcours pour explorer ces  possibilités. Mon cas d'expérimentation ? Un éditeur de texte  collaboratif offline first : Rust pour l'algorithme garantissant la  cohérence du contenu et Vue.js pour l'éditeur lui-même, mais aussi pour  débugger l'algorithme Rust en visualisant en live les structures de  données internes. Ce sera un talk code et démo : je partirai de la page blanche et  montrerai le code et son résultat pour le différentes étapes de  développement de l'éditeur.",
             "language": "French",
             "tags": [
                 "Langage & Framework"
