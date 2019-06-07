@@ -164,7 +164,7 @@
             {% endfor %}
           </iron-selector>
 
-          <!-- =<div>
+          <div>
             <a
               class="bottom-drawer-link"
               on-tap="_onAddToHomescreen"
@@ -175,7 +175,7 @@
 
             <a
               class="bottom-drawer-link"
-              href$="[[_getTicketUrl(tickets)]]"
+              href="https://libertyjs.ticketspice.com/libertyjs-2019"
               target="_blank"
               rel="noopener noreferrer"
               on-tap="closeDrawer"
@@ -183,11 +183,12 @@
               ga-event-category="ticket button"
               ga-event-action="buy_click"
               layout horizontal center
+              primary
             >
               <span>{$ buyTicket $}</span>
               <iron-icon icon="hoverboard:open-in-new"></iron-icon>
             </a>
-          <!-- </div> -->
+          </div>
         </div>
 
       </app-drawer>
