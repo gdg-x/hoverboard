@@ -113,13 +113,13 @@
     "short": "Philadelphia, PA",
     "address": "101 S Independence Mall E, Philadelphia, PA 19106",
     "pointer": {
-      "latitude": 39.953360,
-      "longitude": -75.148550,
+      "latitude": 39.950493,
+      "longitude": -75.148387,
       "zoom": 16
     },
     "mapCenter": {
-      "latitude": 39.953360,
-      "longitude": -75.148550
+      "latitude": 39.950493,
+      "longitude": -75.148387
     },
     "description": "The National Museum of American Jewish History, on Independence Mall in Philadelphia, presents educational programs and experiences that preserve, explore, and celebrate the history of Jews in America. Its purpose is to connect Jews more closely to their heritage and to inspire in people of all backgrounds a greater appreciation for the diversity of the American Jewish experience and the freedoms to which Americans aspire."
   },
