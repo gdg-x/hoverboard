@@ -102,7 +102,7 @@
 
       paper-button {
         padding: 0.7em;
-        border-radius: 2px;
+        border-radius: 4px;
         font-size: 14px;
         color: var(--default-primary-color);
         transition: background-color var(--animation);
@@ -215,13 +215,22 @@
         box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.07), 0 2px 2px 0 rgba(0, 0, 0, 0.15);
         transition: box-shadow var(--animation);
         cursor: pointer;
+        border-radius: 8px;
+        overflow: hidden;
       }
 
       .tag {
         margin-right: 2px;
-        padding: 2px 4px;
+        padding: 3px 4px;
         font-size: 12px;
-        border: 1px solid currentColor;
+        /* border: 1px solid currentColor; */
+        background-color: currentColor;
+        /* color: #FFF !important; */
+        border-radius: 4px;
+      }
+
+      .tag span {
+        color: white;
       }
 
       @media (min-width: 640px) {

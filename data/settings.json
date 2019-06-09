@@ -114,20 +114,20 @@
   },
   "location": {
     "label": "Location",
-    "name": "Planeta kino",
-    "city": "Lviv",
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "name": "University of Colombo School of Computing",
+    "city": "Colombo",
+    "short": "Colombo, Sri Lanka",
+    "address": "UCSC Building Complex, 35 Reid Ave, Colombo 00700",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 5
+      "latitude": 6.9021977,
+      "longitude": 79.8589599,
+      "zoom": 15
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": 6.9021977,
+      "longitude": 79.8589499
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": "Newly built Auditorium of University of Colombo School of Computing is a center in Colombo, which can fulfill the needs of the large-scale event"
   },
   "mediaQueries": {
     "xs": {
