@@ -13,4 +13,5 @@ speakers.json
 firebase-debug.log
 .DS_Store
 .firebase/
+.env
 temp/

@@ -182,7 +182,8 @@
       }
 
       _transformArticles(articleList) {
-        this.set('articles', articleList.slice(0, 5));
+        const list = articleList.sort(( a, b )=> new Date(b.published) - new Date(a.published));
+        this.set('articles', list.slice(0, 10));
       }
     }
 
