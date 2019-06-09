@@ -129,6 +129,84 @@
           line-height: 1.1;
         }
       }
+
+      @keyframes play390 {
+        0% {
+          background-position: 0px 0px;
+        }
+        100% {
+          background-position: -124800px 0px;
+        }
+      }
+
+      .shapeshifter {
+        margin: auto;
+        animation-duration: 6500ms;
+        animation-timing-function: steps(390);
+        animation-fill-mode: forwards;
+        width: 320px;
+        height: 76px;
+        background-repeat: no-repeat;
+      }
+
+      .shapeshifter.play {
+        animation-name: play390;
+      }
+
+      .custom-fade {
+        opacity: 0;
+
+        -webkit-animation: fadein 2s;
+        -moz-animation: fadein 2s;
+        -ms-animation: fadein 2s;
+        -o-animation: fadein 2s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @-moz-keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @-webkit-keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @-ms-keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @-o-keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
     </style>
 
     <polymer-helmet active="[[active]]"></polymer-helmet>
@@ -142,14 +220,17 @@
       hide-logo
     >
       <div class="home-content" layout vertical center>
-        <plastic-image class="hero-logo" srcset="/images/logo.svg" alt="{$ title $}"></plastic-image>
-        <div class="info-items highlight-font">
+        <!-- <plastic-image class="hero-logo" srcset="/images/logo.svg" alt="{$ title $}"></plastic-image> -->
+        <svg
+          class="shapeshifter play"
+          style="background-image: url(/images/logo-anim.svg)"></svg>
+          
+        <div class="info-items highlight-font custom-fade" style="animation-delay: 6.5s">
           <div class="info-item">{$ location.city $}. {$ dates $}</div>
           <div class="info-item">{$ heroSettings.home.description $}</div>
         </div>
 
-
-        <div class="action-buttons" layout horizontal center-justified wrap>
+        <div class="action-buttons custom-fade" style="animation-delay: 7.5s" layout horizontal center-justified wrap>
           <paper-button
             class="watch-video"
             on-tap="_playVideo"
