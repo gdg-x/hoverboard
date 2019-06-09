@@ -19,6 +19,18 @@
         --video-item-height: 200px;
       }
 
+      .container {
+        margin-bottom: 70px;
+        color: var(--primary-text-color);
+      }
+
+      h1 {
+        font-size: 32px;
+        text-align: center;
+        padding: 1em 0 2em;
+        margin: 0 auto;
+      }
+
       .videos-wrapper {
         position: relative;
         overflow: hidden;
@@ -121,12 +133,18 @@
         .slide-icon:last-of-type {
           right: 0;
         }
+
+        .button-row {
+          margin: 0 auto;
+          display: flex;
+          justify-content: center;
+        }
       }
 
     </style>
     <div class="container">
       <div class="header" layout horizontal justified center wrap>
-        <h1 class="container-title">{$ featuredVideos.title $}</h1>
+        <h1>{$ featuredVideos.title $}</h1>
       </div>
 
       <div class="videos-wrapper" layout flex horizontal>
@@ -179,16 +197,19 @@
           hidden$="[[_rightArrowHidden]]">
         ></paper-icon-button>
       </div>
-      <a
-        href="{$ featuredVideos.callToAction.link $}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <paper-button class="cta-button animated icon-right">
-          <span>{$ featuredVideos.callToAction.label $}</span>
-          <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-        </paper-button>
-      </a>
+      <div class="button-row">
+        <a
+          href="{$ featuredVideos.callToAction.link $}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="youtube-link"
+        >
+          <paper-button class="cta-button animated icon-right" primary raised elevation="1">
+            <span>{$ featuredVideos.callToAction.label $}</span>
+            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+          </paper-button>
+        </a> 
+    </div>   
     </div>
   </template>
 
