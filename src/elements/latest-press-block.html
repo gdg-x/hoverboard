@@ -33,11 +33,11 @@
       }
 
       .details {
-        padding: 16px;
+        padding: 10px;
       }
 
       .title {
-        font-size: 20px;
+        font-size: 16px;
         line-height: 1.2;
       }
 
@@ -68,7 +68,7 @@
           grid-template-columns: repeat(3, 1fr);
         }
 
-        .article:nth-of-type(n+4) {
+        .article:nth-of-type(n+7) {
           display: none;
         }
       }
@@ -78,7 +78,10 @@
           grid-template-columns: repeat(4, 1fr);
         }
         
-        .article:nth-of-type(n+5) {
+        .article:nth-of-type(n) {
+          display: block;
+        }
+        .article:nth-of-type(n+9) {
           display: none;
         }
       }
