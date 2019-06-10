@@ -257,13 +257,13 @@
           "items" : [ 110 ]
         } ],
         "startTime" : "08:30",
-        "endTime" : "9:00"
+        "endTime" : "09:00"
       },{
         "sessions" : [ {
           "items" : [ 100 ]
         } ],
         "startTime" : "09:00",
-        "endTime" : "9:50"
+        "endTime" : "09:50"
       },{
         "sessions" : [ {
           "items" : [ 111 ]
@@ -426,7 +426,7 @@
             "items" : [ 112 ]
           } ],
           "startTime" : "08:30",
-          "endTime" : "9:00"
+          "endTime" : "09:00"
         },
         {
           "sessions" : [{
@@ -440,7 +440,7 @@
         },{
           "items" : [ 34 ]
         } ],
-        "startTime" : "9:00",
+        "startTime" : "09:00",
         "endTime" : "09:50"
       },{
         "sessions" : [ {
