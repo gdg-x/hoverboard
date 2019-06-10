@@ -35,7 +35,7 @@
   "time": "Time",
   "faq": "/data/faq.md",
   "cod": "/data/cod.md",
-  "location": "/data/location.md",
+  "locationText": "/data/location.md",
   "footer": {
     "blog": "Blog"
   },
