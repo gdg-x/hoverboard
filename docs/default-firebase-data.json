@@ -193,12 +193,6 @@
       "logos": [{
         "order": 0,
         "height": 50,
-        "logoUrl": "../images/logos/tellmeplus.jpg",
-        "name": "TellMePlus",
-        "url": "https://www.tellmeplus.com/"
-      }, {
-        "order": 0,
-        "height": 50,
         "logoUrl": "../images/logos/saagie.png",
         "name": "Saagie",
         "url": "https://www.saagie.com/"

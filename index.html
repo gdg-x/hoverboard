@@ -50,6 +50,14 @@
   <meta itemprop="startDate" content="{$ startDate $}">
   <meta itemprop="endDate" content="{$ endDate $}">
 
+  <div class="event-venue" itemprop="location" itemscope itemtype="http://schema.org/Place">
+    <span itemprop="name">{$ locationName $}</span>
+    <div class="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+        <span itemprop="streetAddress">{$ locationAddress $}</span><br>
+        <span itemprop="addressLocality">{$ locationCity $}</span>, <span itemprop="addressRegion">{$ locationRegion $}</span> <span itemprop="postalCode">{$ locationCode $}</span><span itemprop="addressCountry">{$ locationCountry $}</span>
+    </div>
+  </div>
+
   <!-- Facebook sharing meta data -->
   <meta property="og:title" content="{$ title $}">
   <meta property="og:site_name" content="{$ title $}">
@@ -172,15 +180,6 @@
 <noscript>
   Please enable JavaScript to view this website.
 </noscript>
-
-
-  <div style="display:none;" class="event-venue" itemprop="location" itemscope itemtype="http://schema.org/Place">
-      <span itemprop="name">{$ locationName $}</span>
-      <div class="address" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-          <span itemprop="streetAddress">{$ locationAddress $}</span><br>
-          <span itemprop="addressLocality">{$ locationCity $}</span>, <span itemprop="addressRegion">{$ locationRegion $}</span> <span itemprop="postalCode">{$ locationCode $}</span><span itemprop="addressCountry">{$ locationCountry $}</span>
-      </div>
-  </div>
 
 
 <script>
