@@ -409,7 +409,7 @@
       "tracks" : [ {
         "title" : "Amphi D"
       }, {
-        "title" : "Amphi E"
+        "title" : "Amphi H"
       }, {
         "title" : "Salle 1"
       }, {
@@ -564,7 +564,7 @@
       "tracks" : [ {
         "title" : "Amphi D"
       }, {
-        "title" : "Amphi E"
+        "title" : "Amphi H"
       }, {
         "title" : "Salle 1"
       }, {
@@ -1571,7 +1571,7 @@
       "videoId": null,
       "image": "/images/backgrounds/party.jpg",
       "icon": null,
-      "listInFeedback": false
+      "hideInFeedback": true
     },
     "110": {
       "title": "Récupération des badges et petit déjeuner",
@@ -1584,7 +1584,7 @@
       "videoId": null,
       "image": "/images/backgrounds/registration.jpg",
       "icon": null,
-      "listInFeedback": false
+      "hideInFeedback": true
     },
     "111": {
       "title": "Pause croissant",
@@ -1597,7 +1597,7 @@
       "videoId": null,
       "image": "/images/backgrounds/croissant1.jpg",
       "icon": null,
-      "listInFeedback": false
+      "hideInFeedback": true
     },
     "112": {
       "title": "Pause chocolatine",
@@ -1610,7 +1610,7 @@
       "videoId": null,
       "image": "/images/backgrounds/croissant1.jpg",
       "icon": null,
-      "listInFeedback": false
+      "hideInFeedback": true
     },
     "113": {
       "title": "Goûter",
@@ -1623,7 +1623,7 @@
       "videoId": null,
       "image": "/images/backgrounds/croissant3.jpg",
       "icon": null,
-      "listInFeedback": false
+      "hideInFeedback": true
     },
     "114": {
       "title": "Goûter",
@@ -1636,7 +1636,7 @@
       "videoId": null,
       "image": "/images/backgrounds/croissant2.jpg",
       "icon": null,
-      "listInFeedback": false
+      "hideInFeedback": true
     },
     "115": {
       "title": "Pause",
@@ -1649,7 +1649,7 @@
       "videoId": null,
       "image": null,
       "icon": "coffee-break",
-      "listInFeedback": false
+      "hideInFeedback": true
     },
     "116": {
       "title": "Pause",
@@ -1662,7 +1662,7 @@
       "videoId": null,
       "image": null,
       "icon": "coffee-break",
-      "listInFeedback": false
+      "hideInFeedback": true
     },
     "117": {
       "title": "Déjeuner",
@@ -1675,7 +1675,7 @@
       "videoId": null,
       "image": "/images/backgrounds/lunch4.jpg",
       "icon": null,
-      "listInFeedback": false
+      "hideInFeedback": true
     },
     "118": {
       "title": "Déjeuner",
@@ -1688,7 +1688,7 @@
       "videoId": null,
       "image": "/images/backgrounds/lunch2.jpg",
       "icon": null,
-      "listInFeedback": false
+      "hideInFeedback": true
     },
     "119": {
       "title": "Pause",
@@ -1701,7 +1701,7 @@
       "videoId": null,
       "image": null,
       "icon": "coffee-break",
-      "listInFeedback": false
+      "hideInFeedback": true
     },
     "120": {
       "title": "Pause",
@@ -1714,7 +1714,7 @@
       "videoId": null,
       "image": null,
       "icon": "coffee-break",
-      "listInFeedback": false
+      "hideInFeedback": true
     },
     "121": {
       "title": "Pause",
@@ -1727,7 +1727,7 @@
       "videoId": null,
       "image": null,
       "icon": "coffee-break",
-      "listInFeedback": false
+      "hideInFeedback": true
     },
     "122": {
       "title": "Pause",
@@ -1740,7 +1740,7 @@
       "videoId": null,
       "image": null,
       "icon": "coffee-break",
-      "listInFeedback": false
+      "hideInFeedback": true
     },
     "123": {
       "title": "Pause",
@@ -1753,7 +1753,7 @@
       "videoId": null,
       "image": null,
       "icon": "coffee-break",
-      "listInFeedback": false
+      "hideInFeedback": true
     }
   },
 
