@@ -14,12 +14,10 @@
       :host {
         display: block;
       }
-
+      
       .plan {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 60%;
+        width: 100%;
+        height: 750px;
       }
     </style>
 
@@ -38,6 +36,8 @@
       <div class="hero-title highlight-font">{$ heroSettings.location.title $}</div>
       <p class="hero-description">{$ heroSettings.location.description $}</p>
     </hero-block>
+    
+    <iron-image class="plan" src="../../images/plan.jpg"sizing="contain" alt="Plan"></iron-image>
 
     <iframe
       width="100%"
@@ -65,7 +65,7 @@
           active: Boolean,
           source: {
             type: String,
-            value: '{$ location $}',
+            value: '{$ locationText $}',
           },
         };
       }
