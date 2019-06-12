@@ -19,6 +19,18 @@
         --video-item-height: 200px;
       }
 
+      .container {
+        margin-bottom: 70px;
+        color: var(--primary-text-color);
+      }
+
+      h1 {
+        font-size: 32px;
+        text-align: center;
+        padding: 1em 0 2em;
+        margin: 0 auto;
+      }
+
       .videos-wrapper {
         position: relative;
         overflow: hidden;
@@ -38,8 +50,24 @@
       }
 
       .slide-icon {
-        display: none;
-      }
+          margin: 8px;
+          width: 40px;
+          height: 40px;
+          position: absolute;
+          z-index: 1;
+          top: calc(var(--video-item-height) / 2 - 25px);
+          display: block;
+          opacity: 0.9;
+          background-color: #fff;
+          border-radius: 50%;
+          color: var(--default-primary-color);
+          transition: opacity var(--animation);
+          display: block;
+        }
+
+        .slide-icon:last-of-type {
+          right: 0;
+        }
 
       .video-item {
         width: 300px;
@@ -87,6 +115,12 @@
         margin-top: 24px;
       }
 
+      .button-row {
+          margin: 0 auto;
+          display: flex;
+          justify-content: center;
+        }
+
       @media (min-width: 640px) {
 
         :host {
@@ -102,31 +136,12 @@
           padding-right: 30px;
         }
 
-        .slide-icon {
-          margin: 8px;
-          width: 40px;
-          height: 40px;
-          position: absolute;
-          z-index: 1;
-          top: calc(var(--video-item-height) / 2 - 25px);
-          display: block;
-          opacity: 0.9;
-          background-color: #fff;
-          border-radius: 50%;
-          color: var(--default-primary-color);
-          transition: opacity var(--animation);
-          display: block;
-        }
-
-        .slide-icon:last-of-type {
-          right: 0;
-        }
       }
 
     </style>
     <div class="container">
       <div class="header" layout horizontal justified center wrap>
-        <h1 class="container-title">{$ featuredVideos.title $}</h1>
+        <h1>{$ featuredVideos.title $}</h1>
       </div>
 
       <div class="videos-wrapper" layout flex horizontal>
@@ -179,16 +194,19 @@
           hidden$="[[_rightArrowHidden]]">
         ></paper-icon-button>
       </div>
-      <a
-        href="{$ featuredVideos.callToAction.link $}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <paper-button class="cta-button animated icon-right">
-          <span>{$ featuredVideos.callToAction.label $}</span>
-          <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-        </paper-button>
-      </a>
+      <div class="button-row">
+        <a
+          href="{$ featuredVideos.callToAction.link $}"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="youtube-link"
+        >
+          <paper-button class="cta-button animated icon-right" primary raised elevation="1">
+            <span>{$ featuredVideos.callToAction.label $}</span>
+            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+          </paper-button>
+        </a> 
+    </div>   
     </div>
   </template>
 

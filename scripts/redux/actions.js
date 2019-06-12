@@ -635,7 +635,8 @@ const galleryActions = {
       .get()
       .then((snaps) => {
         const list = snaps.docs
-          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }))
+          .sort(( a, b )=> a.order - b.order);
 
         dispatch({
           type: FETCH_GALLERY_SUCCESS,
