@@ -700,6 +700,9 @@ let messaging;
 const notificationsActions = {
   initializeMessaging: () => {
     return new Promise((resolve) => {
+      if (!firebase.messaging.isSupported()) {
+        return;
+      }
       messaging = firebase.messaging();
       messaging.onMessage(({ notification }) => {
         toastActions.showToast({

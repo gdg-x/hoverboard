@@ -10,10 +10,7 @@
 
 <dom-module id="session-element">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
-
-    <style>
-
+    <style include="shared-styles flex flex-alignment positioning">
       :host {
         display: block;
         background-color: var(--primary-background-color);
@@ -32,11 +29,11 @@
       }
 
       .session-icon {
-        /* --iron-icon-width: 88px;
+        --iron-icon-width: 88px;
         --iron-icon-height: 88px;
-        --iron-icon-fill-color: var(--border-light-color); */
+        --iron-icon-fill-color: var(--border-light-color);
         position: absolute;
-        /* right: 40px; */
+        right: 40px;
         bottom: -4px;
       }
 
@@ -67,15 +64,15 @@
         color: var(--secondary-text-color);
       }
 
+      .session[featured] .bookmark-session {
+        color: var(--default-primary-color);
+      }
+
       .session[with-background] {
         color: #fff;
       }
-      .session[with-background] .overlay {
-        background: rgba(0, 0, 0, 0.4);
-      }
-
-      .session[featured] .bookmark-session {
-        color: var(--default-primary-color);
+      .session[with-background] > .backgroundImage{
+        filter: brightness(60%);
       }
 
       .bookmark-session:hover {
@@ -85,6 +82,10 @@
       .session-title {
         font-size: 20px;
         line-height: 1.2;
+      }
+
+      .session-description {
+        margin-top: 8px;
       }
 
       .session-meta {
@@ -150,63 +151,63 @@
       relative
     >
       <iron-image
+        class="backgroundImage"
         src="[[session.image]]"
         sizing="cover"
         fit preload
       ></iron-image>
-      <div class="overlay" relative layout vertical flex>
-        <div class="session-header" layout horizontal justified>
-          <div flex>
-            <h3 class="session-title">[[session.title]]</h3>
-          </div>
-          <span class="language">[[slice(session.language, 2)]]</span>
+
+
+      <div class="session-header" layout horizontal justified>
+        <div flex>
+          <h3 class="session-title">[[session.title]]</h3>
         </div>
+        <span class="language">[[slice(session.language, 2)]]</span>
+      </div>
 
-        <div class="session-content" flex layout horizontal justified>
-          <div class="session-meta">
-            <div hidden$="[[!session.track.title]]">[[session.track.title]]</div>
-            <div hidden$="[[!session.complexity]]">[[session.complexity]]</div>
-          </div>
-          <iron-icon
-            class="bookmark-session"
-            icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
-            on-tap="_toggleFeaturedSession"
-          ></iron-icon>
+      <div class="session-content" flex layout horizontal justified>
+        <div class="session-meta">
+          <div hidden$="[[!session.track.title]]">[[session.track.title]]</div>
+          <div hidden$="[[!session.complexity]]">[[session.complexity]]</div>
         </div>
+        <iron-icon
+          class="bookmark-session"
+          icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
+          on-tap="_toggleFeaturedSession"
+        ></iron-icon>
+      </div>
 
-        <div class="session-footer">
-          <div layout horizontal justified center-aligned>
-            <div class="session-meta" flex>
-              <span
-                hidden$="[[!session.duration.hh]]">[[session.duration.hh]] hour[[_getEnding(session.duration.hh)]]</span>
-              <span
-                hidden$="[[!session.duration.mm]]">[[session.duration.mm]] min[[_getEnding(session.duration.mm)]]</span>
-            </div>
-            <div hidden$="[[!session.tags.length]]">
-              <template is="dom-repeat" items="[[session.tags]]" as="tag">
-                <span class="tag" style$="color: [[_getTagColor(tag)]]">[[tag]]</span>
-              </template>
-            </div>
+      <div class="session-footer">
+        <div layout horizontal justified center-aligned>
+          <div class="session-meta" flex>
+            <span
+              hidden$="[[!session.duration.hh]]">[[session.duration.hh]] hour[[_getEnding(session.duration.hh)]]</span>
+            <span
+              hidden$="[[!session.duration.mm]]">[[session.duration.mm]] min[[_getEnding(session.duration.mm)]]</span>
           </div>
-
-          <div class="speakers" hidden$="[[!session.speakers.length]]">
-            <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
-              <div class="speaker" layout horizontal center>
-                <plastic-image
-                  class="speaker-photo"
-                  srcset="[[speaker.photoUrl]]"
-                  sizing="cover"
-                  lazy-load preload fade
-                ></plastic-image>
-
-                <div class="speaker-details" flex>
-                  <div class="speaker-name">[[speaker.name]]</div>
-                  <div class="speaker-title">[[speaker.company]] / [[speaker.country]]</div>
-                </div>
-              </div>
+          <div hidden$="[[!session.tags.length]]">
+            <template is="dom-repeat" items="[[session.tags]]" as="tag">
+              <span class="tag" style$="color: [[_getTagColor(tag)]]">[[tag]]</span>
             </template>
           </div>
+        </div>
 
+        <div class="speakers" hidden$="[[!session.speakers.length]]">
+          <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
+            <div class="speaker" layout horizontal center>
+              <plastic-image
+                class="speaker-photo"
+                srcset="[[speaker.photoUrl]]"
+                sizing="cover"
+                lazy-load preload fade
+              ></plastic-image>
+
+              <div class="speaker-details" flex>
+                <div class="speaker-name">[[speaker.name]]</div>
+                <div class="speaker-title">[[speaker.company]] / [[speaker.country]]</div>
+              </div>
+            </div>
+          </template>
         </div>
       </div>
     </a>
