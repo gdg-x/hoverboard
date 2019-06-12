@@ -226,6 +226,12 @@
         "logoUrl": "../images/logos/monkeypatch.png",
         "name": "MonkeyPatch",
         "url": "http://www.monkeypatch.io/"
+      }, {
+        "order": 0,
+        "height": 50,
+        "logoUrl": "../images/logos/aive.png",
+        "name": "Aive",
+        "url": "https://www.aive.com/"
       }],
       "order": 3,
       "title": "Bronze"
