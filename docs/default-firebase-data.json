@@ -184,6 +184,13 @@
           "logoUrl": "../images/logos/logo_believe.png",
           "name": "Believe IT",
           "url": "http://www.believeit.fr/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/clever-cloud.png",
+          "name": "Clever Cloud",
+          "url": "https://www.clever-cloud.com/fr/"
         }
       ],
       "order": 2,
@@ -243,6 +250,24 @@
         "logoUrl": "../images/logos/mth.png",
         "name": "Montpellier Tech Hub",
         "url": "https://www.montpellier-techhub.org/"
+      }, {
+        "order": 0,
+        "height": 100,
+        "logoUrl": "../images/logos/duchess.png",
+        "name": "Duchess",
+        "url": "https://www.duchess-france.org/"
+      }, {
+        "order": 0,
+        "height": 100,
+        "logoUrl": "../images/logos/ouisnap.png",
+        "name": "OuiSnap",
+        "url": "https://www.ouisnap.com/fr/"
+      }, {
+        "order": 0,
+        "height": 100,
+        "logoUrl": "../images/logos/compostons.png",
+        "name": "Compostons",
+        "url": "http://www.compostons.org/"
       }],
       "order": 4,
       "title": "Partenaires"
