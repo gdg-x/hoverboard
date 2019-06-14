@@ -561,7 +561,7 @@
         "endTime" : "16:20"
       },{
         "sessions" : [ {
-          "items" : [  ]
+          "items" : [ 62 ]
         },{
           "items" : [ 61 ]
         },{
@@ -1552,6 +1552,22 @@
             ],
             "speakers": [
                 "vnjbgkujikghhujikgriujhgrghiuyferhbiyjvbhygithuigefhjger"
+            ],
+            "presentation": null,
+            "videoId": null,
+            "image": null,
+            "icon": null
+        },
+        "62": {
+            "title": "Backend mobile en Kotlin",
+            "complexity": "intermediate",
+            "description": "Kotlin est très populaire pour le développement d’applications Android. Les développeurs mobile l’apprécient parce qu’il propose une API et un style modernes tout en étant compatible avec une grande variété de terminaux. De plus, il est complètement interopérable avec des librairies Java existantes. \n \n Mais Kotlin est polyvalent et peut aussi être utilisé côté serveur. Dans cette présentation, nous allons créer un backend mobile pour un lecteur de musique sur Android. Vous apprendrez comment utiliser la boîte à outils Vert.x pour construire un serveur HTTP. Puis nous exposerons une API web afin que notre application mobile puisse disposer d’un catalogue et, bien sûr, recevoir de la musique en streaming. \nProgrammeurs Kotlin, libérez vos talents et devenez programmeurs fullstack!",
+            "language": "French",
+            "tags": [
+                "Langage & Framework"
+            ],
+            "speakers": [
+                "azertyazertyuuiiooppnonetnon"
             ],
             "presentation": null,
             "videoId": null,
@@ -3030,7 +3046,26 @@
           "icon": "twitter",
           "name": "Twitter"
         }],
-        "title": " Ingénieur chez Magellium et co-fondateur et animateur à la Compagnie du Code."
+        "title": " Ingénieur chez Magellium et co-fondateur et animateur à la Compagnie du Code"
+      },
+      "azertyazertyuuiiooppnonetnon": {
+        "bio": "Je suis membre de la [Vert.x](https://vertx.io/) core team, particulièrement intéressé par le clustering et le monitoring. Je suis développeur depuis près de 15 ans et j’ai travaillé sur des projets très variés (finance, tourisme, banque, hébergeur). \nJ’ai rejoint [Red Hat](https://www.redhat.com/fr) en 2012 et je vis à Marseille avec ma femme et nos 4 enfants. Dans mon temps libre, j’essaie de devenir un meilleur judoka.",
+        "company": "Red Hat",
+        "companyLogoUrl": "/images/logos/redhat.png",
+        "country": "Marseille, France",
+        "name": "Thomas Segismont",
+        "photoUrl": "https://pbs.twimg.com/profile_images/1780054480/SOir_e_avec_les_SEGISMONT_011_400x400.JPG",
+        "shortBio": "Senior Software Engineer à Red Hat & membre de la Vert.x core team",
+        "socials": [{
+          "link": "https://twitter.com/tsegismont",
+          "icon": "twitter",
+          "name": "Twitter"
+        }, {
+          "link": "https://github.com/tsegismont",
+          "icon": "github",
+          "name": "GitHub"
+        }],
+        "title": "Senior Software Engineer à Red Hat"
       }
     },
 
