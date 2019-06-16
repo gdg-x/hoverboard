@@ -61,7 +61,7 @@
                 class="alternate"
                 label="Donnez votre avis !"
                 icon="hoverboard:feedback"
-                hidden$="[[!viewport.isLaptopPlus]]">
+                hidden$="[[_actionButtonVisible(viewport.isLaptopPlus, session.speakers)]]">
                 </paper-fab>
               </a>
 
@@ -84,7 +84,7 @@
             class="alternate"
             label="Donnez votre avis !"
             icon="hoverboard:feedback"
-            hidden$="[[viewport.isLaptopPlus]]">
+            hidden$="[[_actionButtonVisible(viewport.isLaptopPlus, session.speakers, 'toto')]]">
             </paper-fab>
           </a>
         </div>
@@ -237,6 +237,34 @@
 
       _getFeaturedSessionIcon(featuredSessions, sessionId) {
         return featuredSessions && featuredSessions[sessionId] ? 'bookmark-check' : 'bookmark-plus';
+      }
+
+      _hasSpeakers(speakers) {
+        if (speakers && speakers.length > 0) {
+          return true;
+        }
+        return false;
+      }
+
+      _actionButtonVisible(isLaptopViewport, speakers, isMobile) {
+        if (isMobile && isLaptopViewport) {
+          return true;
+        }
+        if (isMobile && !isLaptopViewport) {
+          if (!this._hasSpeakers(speakers)) {
+            return true;
+          }
+          return false;
+        }
+        if (!isMobile && isLaptopViewport) {
+          if (!this._hasSpeakers(speakers)) {
+            return true;
+          }
+          return false;
+        }
+        if (!isMobile && !isLaptopViewport) {
+          return true;
+        }
       }
 
       _findSpeakers(speakers) {
