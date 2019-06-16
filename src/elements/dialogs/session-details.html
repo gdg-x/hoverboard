@@ -49,24 +49,44 @@
               </template>
             </div>
 
-            <div class="float-button">
+            <div class="float-button multiple">
               <paper-fab
                 icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
                 hidden$="[[!viewport.isLaptopPlus]]"
                 on-tap="_toggleFeaturedSession"
               ></paper-fab>
+              
+              <a href="https://openfeedback.io/3xWvprYgxf1Tzmsj6J51/[[route.subRoute]]/[[session.id]]" target="_blank">
+                <paper-fab
+                class="alternate"
+                label="Donnez votre avis !"
+                icon="hoverboard:feedback"
+                hidden$="[[!viewport.isLaptopPlus]]">
+                </paper-fab>
+              </a>
+
             </div>
           </div>
         </app-toolbar>
       </app-header>
 
       <div class="dialog-container content">
-        <div class="float-button">
+        <div class="float-button multiplevertical">
           <paper-fab
             icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
             hidden$="[[viewport.isLaptopPlus]]"
             on-tap="_toggleFeaturedSession"
           ></paper-fab>
+
+
+          <a href="https://openfeedback.io/3xWvprYgxf1Tzmsj6J51/[[route.subRoute]]/[[session.id]]" target="_blank">
+            <paper-fab
+            class="alternate"
+            label="Donnez votre avis !"
+            icon="hoverboard:feedback"
+            hidden$="[[viewport.isLaptopPlus]]">
+            </paper-fab>
+          </a>
         </div>
         <h3 class="meta-info" hidden$="[[disabledSchedule]]">[[session.dateReadable]], [[session.startTime]] - [[session.endTime]]</h3>
         <h3 class="meta-info" hidden$="[[disabledSchedule]]">[[session.track.title]]</h3>
@@ -144,6 +164,10 @@
           },
           session: {
             type: Object,
+          },
+          route: {
+            type: String,
+            statePath: 'routing',
           },
           viewport: {
             type: Object,
