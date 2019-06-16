@@ -20,7 +20,7 @@
   "position": "Position",
   "country": "Country",
   "time": "Time",
-  "faq": "/data/faq.md",
+  "about": "/data/about.md",
   "travel": "/data/travel.md",
   "footer": {
     "blog": "Blog"
