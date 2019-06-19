@@ -19,6 +19,11 @@
         position: relative;
       }
 
+      .map-container {
+        background: url("/images/map.png") center no-repeat;
+        background-size: cover;
+      }
+
       .description-card {
         margin: 0 -16px;
         padding: 16px;
@@ -69,14 +74,6 @@
 
     <template is="dom-if" if="[[viewport.isTabletPlus]]">
       <div class="map-container">
-        <good-map
-          id="map"
-          api-key="{$ googleMapApiKey $}"
-          latitude="{$ location.mapCenter.latitude $}"
-          longitude="{$ location.mapCenter.longitude $}"
-          zoom="{$ location.pointer.zoom $}"
-          map-options="[[options]]"
-        ></good-map>
       </div>
     </template>
 
@@ -156,23 +153,23 @@
 
       connectedCallback() {
         super.connectedCallback();
-        this.addEventListener('dom-change', () => {
-          this.shadowRoot.querySelector('#map').addEventListener('google-map-ready', (e) => {
-            if (!this.viewport.isTabletPlus) return;
-            new google.maps.Marker({
-              position: {
-                lat: parseFloat('{$ location.pointer.latitude $}'),
-                lng: parseFloat('{$ location.pointer.longitude $}'),
-              },
-              icon: {
-                url: 'images/map-marker.svg',
-                anchor: new google.maps.Point(25, 50),
-                scaledSize: new google.maps.Size(50, 50),
-              },
-              map: e.detail,
-            });
-          }, { once: true });
-        }, { once: true });
+        // this.addEventListener('dom-change', () => {
+        //   this.shadowRoot.querySelector('#map').addEventListener('google-map-ready', (e) => {
+        //     if (!this.viewport.isTabletPlus) return;
+        //     new google.maps.Marker({
+        //       position: {
+        //         lat: parseFloat('{$ location.pointer.latitude $}'),
+        //         lng: parseFloat('{$ location.pointer.longitude $}'),
+        //       },
+        //       icon: {
+        //         url: 'images/map-marker.svg',
+        //         anchor: new google.maps.Point(25, 50),
+        //         scaledSize: new google.maps.Size(50, 50),
+        //       },
+        //       map: e.detail,
+        //     });
+        //   }, { once: true });
+        // }, { once: true });
       }
     }
 

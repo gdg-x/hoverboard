@@ -41,10 +41,10 @@
       .toolbar-logo {
         display: block;
         width: 150px;
-        height: 32px;
+        height: 18px;
         background-color: var(--default-primary-color);
         transition: background-color var(--animation);
-        -webkit-mask: url('/images/logo-monochrome.svg') no-repeat;
+        -webkit-mask: url('/images/logo-monochrome.png') no-repeat;
       }
 
       .nav-items {
@@ -152,11 +152,14 @@
         </paper-tab>
         {% endfor %}
 
-        <paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]">{$ signIn $}</paper-tab>
-
-        <a href$="[[_getTicketUrl(tickets)]]" target="_blank" rel="noopener noreferrer" ga-on="click"
+        <a href="https://drive.google.com/drive/folders/1FaDFCZhvcaoD_tE6zKpV-afadBi8JXJ1?usp=sharing" target="_blank" rel="noopener noreferrer" ga-on="click"
            ga-event-category="ticket button" ga-event-action="buy_click">
-          <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>
+          <paper-button class="buy-button" primary>Devenir partenaire</paper-button>
+        </a>
+
+        <a href="https://conference-hall.io/public/event/aGZR5FxYkEfomcXcAiYF" target="_blank" rel="noopener noreferrer" ga-on="click"
+           ga-event-category="ticket button" ga-event-action="buy_click">
+          <paper-button class="buy-button" primary>Call for Papers</paper-button>
         </a>
       </paper-tabs>
 

@@ -58,7 +58,7 @@
       "links": [
         {
           "name": "Pack Partenaire",
-          "url": "",
+          "url": "https://drive.google.com/drive/folders/1FaDFCZhvcaoD_tE6zKpV-afadBi8JXJ1?usp=sharing",
           "newTab": true
         },
         {
@@ -68,7 +68,7 @@
         },
         {
           "name": "Call for Papers",
-          "url": "",
+          "url": "https://conference-hall.io/public/event/aGZR5FxYkEfomcXcAiYF",
           "newTab": true
         }
       ]
@@ -88,17 +88,17 @@
     "statisticsBlock": {
       "attendees": {
         "label": "Places",
-        "number": "500"
+        "number": "300"
       },
       "days": {
-        "label": "Jours",
+        "label": "Jour",
         "number": "1"
       }
     }
   },
   "ticketsBlock": {
     "title": "Tickets",
-    "ticketsDetails": "Votre billet vous donne accès à toutes les conférences, aux pauses café, et au repas durant les deux jours. L'hebergement n'est pas inclus dans ce prix.",
+    "ticketsDetails": "Votre billet vous donne accès à toutes les conférences, aux pauses café, et aux repas durant la journée entière.",
     "soldOut": "Vous l'avez raté!",
     "notAvailableYet": "Pas encore disponible",
     "save": "Economisez ${discount}%"
@@ -213,7 +213,7 @@
     "blocks": [
       {
         "title": "Organisateur",
-        "description": "<a href='http://gdgstrasbourg.fr' target='_blank'>GDG Strasbourg</a>, avec le support de 10 autres GDG en France, est fier d'organiser la DevFest Strasbourg",
+        "description": "<a href='http://gdgstrasbourg.fr' target='_blank'>GDG Strasbourg</a>, avec le support d'autres GDG en France, est fier d'organiser la DevFest Strasbourg",
         "callToAction": {
           "label": "Ouvrir la page de l'équipe",
           "link": "/team"
