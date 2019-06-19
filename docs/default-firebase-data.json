@@ -1318,7 +1318,7 @@
     },
     "46": {
       "title": "Programmation fonctionnelle probabiliste en Scala",
-      "complexity": "beginner",
+      "complexity": "intermediate",
       "description": "Probabilités et programmation fonctionnelle peuvent être combinées pour créer un autre paradigme: la programmation probabiliste (probabilistic programming pour les intimes). Le but est de manipuler des variables aléatoires au sein d'un language de programmation. Nous allons voir comment utiliser ce paradigme à travers des uses cases concrets :\n\n- Sampling : nous avons parfois besoin de générer des données pour tester nos applications, car elles ne sont pas toujours accessibles (voire elles n'existent pas). Nous allons voir comment le faire de manière judicieuse.\n- Estimation: nous verrons comment calculer approximativement une valeur avec des variables aléatoires.\n- Machine learning: comment le théorème de Bayes nous permet de prédire des évènements avec une certaine confiance.\n\n",
       "language": "French",
       "tags": [
