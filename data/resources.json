@@ -70,6 +70,11 @@
           "name": "Call for Papers",
           "url": "https://conference-hall.io/public/event/aGZR5FxYkEfomcXcAiYF",
           "newTab": true
+        },
+        {
+          "name": "Code of Conduct",
+          "url": "/code-of-conduct",
+          "newTab": false
         }
       ]
     }
