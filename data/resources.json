@@ -196,7 +196,10 @@
     "description": "Brought to you by some awesome developers who are proud to call Philadelphia their home."
   },
   "team-contributors": {
-    "title": "Team Contributors"
+	"title": "Team Contributors"
+  },
+  "volunteer": {
+    "description": "LibertyJS would love your help as a volunteer this year!"
   },
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"

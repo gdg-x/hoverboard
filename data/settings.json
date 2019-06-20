@@ -32,7 +32,12 @@
       "route": "team",
       "permalink": "/team/",
       "label": "Team"
-    },
+	},
+	{
+		"route": "volunteer",
+		"permalink": "/volunteer/",
+		"label": "Volunteer"
+	  },
     {
       "route": "blog",
       "permalink": "/blog/",
@@ -89,6 +94,14 @@
       },
       "fontColor": "#424242"
     },
+	"volunteer": {
+		"title": "Volunteer",
+		"metaDescription": "Find out how to give back during LibertyJS",
+		"background": {
+		  "color": "#fff"
+		},
+		"fontColor": "#424242"
+	  },
     "faq": {
       "title": "FAQs",
       "metaDescription": "Find your answer right here!",
