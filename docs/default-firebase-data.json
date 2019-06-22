@@ -1929,7 +1929,7 @@
         "companyLogoUrl": "/images/logos/ovh.png",
         "country": "Brest, France",
         "name": "Aurélien Hébert",
-        "photoUrl": "https://media.licdn.com/dms/image/C4D03AQEaF4rzhRkCpA/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=YOKnzA60OmKosOoXfi-10l0bPaC3eUdkETFy8cT4AWE",
+        "photoUrl": "https://pbs.twimg.com/profile_images/1084472406721335297/9qzOfx91_400x400.jpg",
         "socials": [{
           "link": "https://github.com/aurrelhebert",
           "icon": "github",
@@ -2129,7 +2129,7 @@
         "companyLogoUrl": "/images/logos/teads.png",
         "country": "Montpellier, France",
         "name": "Fabien Bernard",
-        "photoUrl": "https://media.licdn.com/dms/image/C5103AQH9ibbkB4zfHg/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=PedebhqGoUkusmFfswYTVxLFBWe-yvvFzykuYjRZKZY",
+        "photoUrl": "/images/people/fabien_bernard.jpg",
         "socials": [{
           "link": "https://github.com/f4b13n",
           "icon": "github",
@@ -2378,7 +2378,7 @@
         "country": "France",
         "name": "Jérémie Valentin",
         "title": "Chef de projet Open Data",
-        "photoUrl": "https://media.licdn.com/dms/image/C4D03AQEjtGXZ-z8byw/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=uOMQeAPhAysPf9eu0QABglDCUG9PV0oKhOmPDhGpozg",
+        "photoUrl": "/images/people/jeremie_valentin.jpg",
         "socials": [{
           "icon": "linkedin",
           "name": "linkedin",
@@ -2430,7 +2430,7 @@
         "company": "Stack Labs",
         "country": "Toulouse, France",
         "name": "Kevin Davin",
-        "photoUrl": "https://media.licdn.com/dms/image/C4D03AQGMKKOF2a9IXg/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=Q38xCLZdKMdT7eEnu_mALvc7l-dseQXD8OlQbmNW4vc",
+        "photoUrl": "/images/people/kevin_davin.jpg",
         "socials": [{
           "link": "https://github.com/davinkevin",
           "icon": "github",
@@ -2506,7 +2506,7 @@
         "companyLogoUrl": "/images/logos/ca.png",
         "country": "Paris",
         "name": "Marie Petit",
-        "photoUrl": "https://media.licdn.com/dms/image/C5603AQE76G7TCQgBFw/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=GSZpFqd2Z2_tT2MblxNnQcOWCc25EsGrjJWD46OR7Ts",
+        "photoUrl": "https://pbs.twimg.com/profile_images/1862086496/225824_6062600085_588225085_333377_7104_n_400x400.jpg",
         "socials": [{
           "link": "https://twitter.com/@aglaee",
           "icon": "twitter",
@@ -2520,7 +2520,7 @@
         "companyLogoUrl": "/images/logos/Logo_GB_original.png",
         "country": "Montpellier, France",
         "name": "Marie-Pier Pipon-Lavoie",
-        "photoUrl": "https://media.licdn.com/dms/image/C5103AQHEIfn-TEhPYA/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=-CAsDHkEAWP1IOGSKWvGYiZtEMWffRXmukE03bdS9X8",
+        "photoUrl": "/images/people/marie_pipon.jpg",
         "shortBio": "Ergonome/Designer UX à GenApi",
         "socials": [],
         "title": "Ergonome/Designer UX"
@@ -2532,7 +2532,7 @@
         "companyLogoUrl": "/images/logos/maplr.png",
         "country": "Montpellier",
         "name": "Marion Félix",
-        "photoUrl": "https://media.licdn.com/dms/image/C5603AQFbyKkI2B-w5w/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=-NE8E4KhmvfZxAFY6iKiTNLVvmNSc08KicaeT6FV3BI",
+        "photoUrl": "images/people/marion_flex.jpg",
         "socials": [{
           "link": "https://twitter.com/marionflex",
           "icon": "twitter",
@@ -2547,7 +2547,7 @@
         "company": "SOFTCRAFT",
         "country": "Paris",
         "name": "Mickael Metesreau",
-        "photoUrl": "https://media.licdn.com/dms/image/C4D03AQFGN7Y1C2yQlQ/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=RRUdxCsxjUWgsFKcg48eI6RuktTODfNn7uRe3Wc0kjI",
+        "photoUrl": "/images/people/mickael_meteeresreau.jpg",
         "socials": [{
           "link": "https://github.com/MiKaDoO",
           "icon": "github",
@@ -2581,7 +2581,7 @@
         "companyLogoUrl": "/images/logos/adagio-labs.png",
         "country": "Montpellier",
         "name": "Nicolas Duforet",
-        "photoUrl": "https://media.licdn.com/dms/image/C4D03AQH4r-mI2i5tVg/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=fBb3S-Rdpj0iR2nFkPdribYE534LM4H4SVZdKqvERvI",
+        "photoUrl": "images/people/nicolas_duforet.jpg",
         "socials": [{
           "link": "https://twitter.com/NDuforet",
           "icon": "twitter",
@@ -2740,7 +2740,7 @@
         "companyLogoUrl": "/images/logos/soat.png",
         "country": "Paris, France",
         "name": "Raphaël Wach",
-        "photoUrl": "https://media.licdn.com/dms/image/C5603AQGwNafa8acV6g/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=W3rxmnraAxfXV6tOUXhHrDaS1WrtT3WlyrJr3ywSGeI",
+        "photoUrl": "images/people/raphael_wach.jpg",
         "socials": [{
           "link": "https://twitter.com/raphaelwach",
           "icon": "twitter",
@@ -2755,7 +2755,7 @@
         "companyLogoUrl": "/images/logos/teads.png",
         "country": "France",
         "name": "Roch Dardie",
-        "photoUrl": "https://media.licdn.com/dms/image/C5103AQELBR4R9yx-AA/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=u9vtjaNPdiWUuKDKag0zmqKVIMDjedYT11m_xKK0p5k",
+        "photoUrl": "images/people/roch_dardie.jpg",
         "socials": [],
         "title": "Software engineer"
       },
@@ -2766,7 +2766,7 @@
         "companyLogoUrl": "/images/logos/xebia.png",
         "country": "Paris, France",
         "name": "Romain Sagean",
-        "photoUrl": "https://media.licdn.com/dms/image/C5103AQHAEN78plYaVg/profile-displayphoto-shrink_800_800/0?e=1560988800&v=beta&t=bexxQhQ4wx6JzbPdWpCLW06lGuMqg13eBttxjwLuk0A",
+        "photoUrl": "images/people/romain_sagean.jpg",
         "shortBio": "Data Ingénieur à Xebia",
         "socials": [{
           "link": "https://twitter.com/scauglog",
@@ -2831,7 +2831,7 @@
         "companyLogoUrl": "/images/logos/zenika.png",
         "country": "Bordeaux, France",
         "name": "Sebastien Descamps",
-        "photoUrl": "https://media.licdn.com/dms/image/C5103AQG2zJgisPQ4gg/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=paABw6_KgLTjBSMCObO2tBAOaMESs3Bd9de0XAgXVC8",
+        "photoUrl": "images/people/sebastien_descamps.jpg",
         "socials": [{
           "link": "https://github.com/sebastienD",
           "icon": "github",
@@ -2884,7 +2884,7 @@
         "shortBio": "Change agent (powered by Software). Badass developer & Co-founder of 42skillz",
         "country": "Paris, France",
         "name": "Thomas Pierrain",
-        "photoUrl": "https://media.licdn.com/dms/image/C5603AQG8pCd2-O4tHQ/profile-displayphoto-shrink_800_800/0?e=1560384000&v=beta&t=6fXs_5HHK9yTypGlR07Q2IjA5v9HWM5krUnLYkfm53Y",
+        "photoUrl": "/images/people/thomas_pierrain.jpg",
         "socials": [{
           "link": "https://github.com/tpierrain",
           "icon": "github",
