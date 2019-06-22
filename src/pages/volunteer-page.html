@@ -75,6 +75,34 @@
       .social-icon:hover {
         transform: scale(1.1);
       }
+      .info-block{
+        padding: 30px 0;
+        border-bottom: 1px solid var(--divider-color);
+      }
+      .info-block h2{
+
+        color: var(--default-primary-color);
+      }
+
+      .info-block h3{
+        color: var(--dark-primary-color);
+        margin-bottom: 5px;
+      }
+      .info p {
+          margin-top:0;
+      }
+
+      .info-block ul{
+        list-style-position: inside;
+      }
+      ul.no-style{
+        list-style: none;
+      }
+      .no-style > li{
+        font-weight: 800;
+      }
+
+
 
       @media (min-width: 640px) {
         .volunteer-block {
@@ -123,29 +151,28 @@
 	  <marked-element class="description" markdown="{$ volunteer.description $}">
     </hero-block>
 
-	<div class="container" style="padding: 10px 15px; max-width: 60%">
-		<div style="text-align: center;">
+	<div class="container" style="padding: 10px 25px;">
+		<div class="info-block">
 			<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdJv59v74B8CX9kMGg__8ak4Kg2IKaseuFQMh38WmDAMJBNUw/viewform?embedded=true" width="640" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-			<hr style="width: 75%">
 		</div>
-		<div>
+		<div class="info-block info">
 			<h2>Want to help make LibertyJS the best JavaScript conference in Philadelphia?!</h2>
 			<br/>
-			<div style="padding-left: 25%;">
-				<h3 style="font-weight: 500;">Where:</h3>
+			<div style="padding-left: 5%;" class="info">
+				<h3>Where:</h3>
 				<p>National Museum of American Jewish History</p>
-				<h3 style="font-weight: 500;">When:</h3>
+				<h3 ">When:</h3>
 				<p>Thursday, October 24- Friday, October 25, 2019</p>
-				<h3 style="font-weight: 500;">Who:</h3>
+				<h3>Who:</h3>
 				<p>You!</p>
-				<h3 style="font-weight: 500;">How long?</h3>
+				<h3>How long?</h3>
 				<p>We’re aiming for 3- 4 hour shifts if we get enough people.</p>
 			</div>
-				<hr style="width: 75%">
 		</div>
-		<div>
-			<h1 style="font-weight: bold; font-style: italic; text-align: center;">What Are The Volunteer Roles?</h1>
-			<ul style="list-style: none;"><span style="font-size: 20px; font-weight: 500;">Here are a few ideas:</span>
+		<div class="info-block">
+			<h2>What Are The Volunteer Roles?</h2>
+      <ul class="no-style">
+        <h3>Here are a few ideas:</h3>
 				<li>Help the caterering company set up for breakfast, lunch or party</li>
 					<ul>
 						<li>Set up tables</li>
@@ -193,16 +220,16 @@
 						<li>Where's the bathroom?</li>
 						<li>Where's the food?</li>
 						<li>Can I bring my coffee in here?</li>
-					</ul>	
+					</ul>
 			</ul>
 		</div>
-		<div>
-			<hr style="width: 75%">
-			<h3 style="font-weight: bold; font-style: italic; text-align: center;">Tell your friends to sign up. The more the merrier!</h3>
-			<hr style="width: 75%">
+		<div class="info-block">
+			<h2 >Tell your friends to sign up. The more the merrier!</h2>
+
 		</div>
-		<div>
-			<ul style="list-style-type: square;"><span style="font-size: 20px; font-weight: 500">You'll get:</span>
+		<div class="info-block">
+      <ul>
+        <h3>You'll get:</h3>
 				<li>multi-day pass,</li>
 				<li>food/drink,</li>
 				<li>A T-shirt</li>
@@ -212,21 +239,19 @@
 				<li>Social media posting/photograhy</li>
 				<li>Random floor/navigation/event support</li>
 			</ul>
-			<hr style="width: 75%">
 		</div>
-		<div>
+		<div class="info-block">
 			<p>Fill out this form and we’ll send you an email with details on what time to show up.<br />
 			We'll invite you to the volunteer Slack channel sometime prior to event day.<br />
 			See you soon!<br />
 			LibertyJS<br />
 			volunteers@libertyjs.com
 			</p>
-			<hr style="width: 75%">
 		</div>
-		<div style="text-align: center;">
+		<div class="info-block">
 			<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSciFaxWOlp3vOXmS0H_le3sAdnZlDEuNBPmk0LzRCTVUvvCbw/viewform?embedded=true" width="640" height="2371" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
 		</div>
-		<div>
+		<div class="info-block">
 			<p style="font-style: italic;">Folks who apply and are not selected to volunteer will be offered discounted ticket prices</p>
 		</div>
     </div>
@@ -259,9 +284,9 @@
 
       connectedCallback() {
         super.connectedCallback();
-        if (!this.volunteerFetching && (!this.volunteer || !this.volunteer.length)) {
-          this.dispatch(volunteerActions.fetchVolunteer());
-        }
+        // if (!this.volunteerFetching && (!this.volunteer || !this.volunteer.length)) {
+        //   this.dispatch(volunteerActions.fetchVolunteer());
+        // }
       }
     }
 
