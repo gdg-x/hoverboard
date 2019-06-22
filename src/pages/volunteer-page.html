@@ -1,0 +1,272 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/marked-element/marked-element.html">
+<link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="../elements/shared-styles.html">
+
+<dom-module id="volunteer-page">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+    <style>
+
+      :host  {
+        display: block;
+      }
+
+      .team-title {
+        font-size: 30px;
+        line-height: 2.5;
+      }
+
+      .volunteer-block {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 24px;
+        margin-bottom: 32px;
+      }
+
+      .member {
+        padding: 16px 0;
+        min-width: 300px;
+      }
+
+      .photo {
+        flex: none;
+        width: 96px;
+        height: 96px;
+        background-color: var(--contrast-additional-background-color);
+        border-radius: 50%;
+        overflow: hidden;
+        transform: translateZ(0);
+        border-radius: 50%;
+        border: 5px solid var(--contrast-additional-background-color);
+      }
+
+      .member-details {
+        color: var(--primary-text-color);
+        margin-left: 16px;
+      }
+
+      .name {
+        padding-left: 6px;
+        line-height: 1.2;
+      }
+
+      .activity {
+        font-size: 16px;
+        padding-left: 6px;
+      }
+
+      .social-icon {
+        --paper-icon-button: {
+          padding: 6px;
+          width: 32px;
+          height: 32px;
+        };
+
+        color: var(--secondary-text-color);
+        transition: transform var(--animation);
+      }
+
+      .social-icon:hover {
+        transform: scale(1.1);
+      }
+
+      @media (min-width: 640px) {
+        .volunteer-block {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+         .member {
+          padding: 32px 0;
+        }
+      }
+
+      @media (min-width: 812px) {
+        .photo {
+          width: 115px;
+          height: 115px;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .volunteer-block {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+         .photo {
+          width: 128px;
+          height: 128px;
+        }
+      }
+
+    </style>
+
+    <polymer-helmet
+      title="{$ heroSettings.team.title $} | {$ title $}"
+      description="{$ heroSettings.team.metaDescription $}"
+      active="[[active]]"
+    ></polymer-helmet>
+
+    <hero-block
+      background-image="{$ heroSettings.team.background.image $}"
+      background-color="{$ heroSettings.team.background.color $}"
+      font-color="{$ heroSettings.team.fontColor $}"
+      active="[[active]]"
+    >
+      <div class="hero-title highlight-font">{$ heroSettings.volunteer.title $}</div>
+	  <p class="hero-description">{$ heroSettings.volunteer.description $}</p>
+	  <marked-element class="description" markdown="{$ volunteer.description $}">
+    </hero-block>
+
+	<div class="container" style="padding: 10px 15px; max-width: 60%">
+		<div style="text-align: center;">
+			<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdJv59v74B8CX9kMGg__8ak4Kg2IKaseuFQMh38WmDAMJBNUw/viewform?embedded=true" width="640" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+			<hr style="width: 75%">
+		</div>
+		<div>
+			<h2>Want to help make LibertyJS the best JavaScript conference in Philadelphia?!</h2>
+			<br/>
+			<div style="padding-left: 25%;">
+				<h3 style="font-weight: 500;">Where:</h3>
+				<p>National Museum of American Jewish History</p>
+				<h3 style="font-weight: 500;">When:</h3>
+				<p>Thursday, October 24- Friday, October 25, 2019</p>
+				<h3 style="font-weight: 500;">Who:</h3>
+				<p>You!</p>
+				<h3 style="font-weight: 500;">How long?</h3>
+				<p>We’re aiming for 3- 4 hour shifts if we get enough people.</p>
+			</div>
+				<hr style="width: 75%">
+		</div>
+		<div>
+			<h1 style="font-weight: bold; font-style: italic; text-align: center;">What Are The Volunteer Roles?</h1>
+			<ul style="list-style: none;"><span style="font-size: 20px; font-weight: 500;">Here are a few ideas:</span>
+				<li>Help the caterering company set up for breakfast, lunch or party</li>
+					<ul>
+						<li>Set up tables</li>
+						<li>Help with cleanup</li>
+						<li>Something else?</li>
+					</ul>
+				<li>Be a TA/Room Techie</li>
+					<ul>
+						<li>Make sure there are enough chairs</li>
+						<li>Help folks find seats as the room fills up</li>
+						<li>Make sure workshops have the cords and connectors needed for the workshop</li>
+					</ul>
+				<li>General setup</li>
+					<ul>
+						<li>Help folks find workshop and speaker session rooms</li>
+						<li>Help folks register who show up later in the day</li>
+						<li>Something else?</li>
+					</ul>
+				<li>General tear down</li>
+					<ul>
+						<li>Put away tables</li>
+						<li>Help with cleanup</li>
+						<li>Something else?</li>
+					</ul>
+				<li>Job board setup</li>
+					<ul>
+						<li>Make signs</li>
+						<li>Let folks know where the job board is located</li>
+						<li>Something else?</li>
+					</ul>
+				<li>Registration/sign-in</li>
+					<ul>
+						<li>Tickets</li>
+						<li>T-shirts</li>
+						<li>Something else?</li>
+					</ul>
+				<li>Social media posting/photograhy</li>
+					<ul>
+						<li>Take pics and record short videos</li>
+						<li>Post pics and short videos on Twitter, Insta</li>
+						<li>Something else?</li>
+					</ul>
+				<li>Random floor/navigation/event support</li>
+					<ul>
+						<li>Where's the bathroom?</li>
+						<li>Where's the food?</li>
+						<li>Can I bring my coffee in here?</li>
+					</ul>	
+			</ul>
+		</div>
+		<div>
+			<hr style="width: 75%">
+			<h3 style="font-weight: bold; font-style: italic; text-align: center;">Tell your friends to sign up. The more the merrier!</h3>
+			<hr style="width: 75%">
+		</div>
+		<div>
+			<ul style="list-style-type: square;"><span style="font-size: 20px; font-weight: 500">You'll get:</span>
+				<li>multi-day pass,</li>
+				<li>food/drink,</li>
+				<li>A T-shirt</li>
+				<li>Our best attempt for you to attend the sessions you want to participate in. You'll be able to choose the where and when for you volunteer hours. We want you to attend the conference too!</li>
+				<li>Many thank-you's and hopefully some new friends.</li>
+				<li>Registration/sign-in</li>
+				<li>Social media posting/photograhy</li>
+				<li>Random floor/navigation/event support</li>
+			</ul>
+			<hr style="width: 75%">
+		</div>
+		<div>
+			<p>Fill out this form and we’ll send you an email with details on what time to show up.<br />
+			We'll invite you to the volunteer Slack channel sometime prior to event day.<br />
+			See you soon!<br />
+			LibertyJS<br />
+			volunteers@libertyjs.com
+			</p>
+			<hr style="width: 75%">
+		</div>
+		<div style="text-align: center;">
+			<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSciFaxWOlp3vOXmS0H_le3sAdnZlDEuNBPmk0LzRCTVUvvCbw/viewform?embedded=true" width="640" height="2371" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+		</div>
+		<div>
+			<p style="font-style: italic;">Folks who apply and are not selected to volunteer will be offered discounted ticket prices</p>
+		</div>
+    </div>
+
+    <footer-block></footer-block>
+  </template>
+
+  <script>
+
+    class VolunteerPage extends ReduxMixin(Polymer.Element) {
+      static get is() {return 'volunteer-page';}
+
+       static get properties() {
+        return {
+          active: Boolean,
+          volunteer: {
+            type: Array,
+            statePath: 'volunteer.list',
+          },
+          volunteerFetching: {
+            type: Boolean,
+            statePath: 'volunteer.fetching',
+          },
+          volunteerFetchingError: {
+            type: Object,
+            statePath: 'volunteer.fetchingError',
+          },
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        if (!this.volunteerFetching && (!this.volunteer || !this.volunteer.length)) {
+          this.dispatch(volunteerActions.fetchVolunteer());
+        }
+      }
+    }
+
+    window.customElements.define(VolunteerPage.is, VolunteerPage);
+
+  </script>
+</dom-module>
+
