@@ -125,6 +125,8 @@
         if (!this.partnersFetching && (!this.partners || !this.partners.length)) {
           this.dispatch(partnersActions.fetchPartners());
         }
+        // eslint-disable-next-line no-undef
+        HOVERBOARD.Elements.Partners = this;
       }
 
       _partnerAddingChanged(newPartnerAdding, oldPartnerAdding) {

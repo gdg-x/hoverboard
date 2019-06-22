@@ -179,6 +179,18 @@ tr<link rel="import" href="../../bower_components/polymer/polymer-element.html">
               {$ viewSchedule $}
             </paper-button>
           </a>
+          <paper-button
+            class="watch-video"
+            on-tap="_scrollToSponsors"
+            ga-on="click"
+            ga-event-category="partners"
+            ga-event-action="scroll"
+            ga-event-label="hero block - scroll to partners"
+            primary
+          >
+          <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+            Sponsors
+          </paper-button>
         </div>
 
         <div class="scroll-down" on-tap="_scrollNextBlock">
@@ -234,6 +246,15 @@ tr<link rel="import" href="../../bower_components/polymer/polymer-element.html">
         const ticketsBlockPositionY = HOVERBOARD.Elements.Tickets.getBoundingClientRect().top
           - toolbarHeight;
         this.scrollToY(ticketsBlockPositionY, 600, 'easeInOutSine');
+      }
+
+      _scrollToSponsors() {
+        // eslint-disable-next-line no-undef
+        const toolbarHeight = HOVERBOARD.Elements.HeaderToolbar.getBoundingClientRect().height - 1;
+        // eslint-disable-next-line no-undef
+        const partnersBlockPositionY = HOVERBOARD.Elements.Partners.getBoundingClientRect().top
+          - toolbarHeight;
+        this.scrollToY(partnersBlockPositionY, 600, 'easeInOutSine');
       }
 
       _scrollNextBlock() {

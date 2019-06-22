@@ -34,7 +34,7 @@
       "logos": [{
         "order": 0,
         "height": 150,
-        "logoUrl": "../images/logos/maif.png",
+        "logoUrl": "../images/logos/logo-maif.svg",
         "name": "MAIF Horizon",
         "url": "https://www.maif.fr/"
       }, {
@@ -838,9 +838,9 @@
       "icon": null
     },
     "14": {
-      "title": "Akka  typed :  Penser protocole, ",
+      "title": "Akka  typed : Penser protocole, pour le meilleur et pour le pire",
       "complexity": "beginner",
-      "description": "*Akka  typed :  Penser protocole, pour le meilleur et pour le pire.*\n\n*Une illustration au travers de l'histoire de la viscosité de  l'information.*\n\n\n\n\nPour mettre en évidence l'intérêt de penser et acteur et protocole dans nos \ndéveloppements, nous repartirons de la base.\nQu'est-ce qu'un software ?\n\n\nNous discuterons d'un premier point: un software \nn'est qu'une interface sur l'information, composer d'interface \nsur de l'information, etc.\n\nNous illustrerons ensuite notre propos par une représentation des échanges \nd'information dans  la société civile du 16e siècle. (sous forme d'acteur typé,  \névidemment.)\n\nCela nous permettra d'aborder le second point : l'évolution inévitable des \nsoftwares.\nQuelle stratégies sont possibles pour permettre à un système d'acteur \ntypé d'évoluer sainement ? ( aspect formalisme des protocoles)\n\nNous illustrerons le propos par une \nsérie d'évolution (3-4) de notre exemple. Notre représentation numerique du 16e \nsiècle évoluera donc jusqu'en 2019.\n\nEn fin de compte nous aurons discuter des avantages et des risques de concevoir des systèmes complexes à base d'acteur typé.\n\n\nMais nous apporterons aussi un soin particulier à comprendre cette notion de \nviscosité. Qui par bien des aspects, offre un exellent prisme pour mettre en \nlumière les mécanismes sous-jacents à la dynamique des groupes.\nQue l'on parle communication dans une équipe d'ingénieur, ou mouvement \nsocial.\n",
+      "description": "*Akka  typed : Penser protocole, pour le meilleur et pour le pire.*\n\n*Une illustration au travers de l'histoire de la viscosité de  l'information.*\n\n\n\n\nPour mettre en évidence l'intérêt de penser et acteur et protocole dans nos \ndéveloppements, nous repartirons de la base.\nQu'est-ce qu'un software ?\n\n\nNous discuterons d'un premier point: un software \nn'est qu'une interface sur l'information, composer d'interface \nsur de l'information, etc.\n\nNous illustrerons ensuite notre propos par une représentation des échanges \nd'information dans  la société civile du 16e siècle. (sous forme d'acteur typé,  \névidemment.)\n\nCela nous permettra d'aborder le second point : l'évolution inévitable des \nsoftwares.\nQuelle stratégies sont possibles pour permettre à un système d'acteur \ntypé d'évoluer sainement ? ( aspect formalisme des protocoles)\n\nNous illustrerons le propos par une \nsérie d'évolution (3-4) de notre exemple. Notre représentation numerique du 16e \nsiècle évoluera donc jusqu'en 2019.\n\nEn fin de compte nous aurons discuter des avantages et des risques de concevoir des systèmes complexes à base d'acteur typé.\n\n\nMais nous apporterons aussi un soin particulier à comprendre cette notion de \nviscosité. Qui par bien des aspects, offre un exellent prisme pour mettre en \nlumière les mécanismes sous-jacents à la dynamique des groupes.\nQue l'on parle communication dans une équipe d'ingénieur, ou mouvement \nsocial.\n",
       "language": "French",
       "tags": [
         "Architecture & Paradigme"
@@ -1612,7 +1612,8 @@
       "videoId": null,
       "image": "/images/backgrounds/party.jpg",
       "icon": null,
-      "hideInFeedback": true
+      "hideInFeedback": true,
+      "hideTrackTitle": true
     },
     "110": {
       "title": "Récupération des badges et petit déjeuner",
@@ -1625,7 +1626,8 @@
       "videoId": null,
       "image": "/images/backgrounds/registration.jpg",
       "icon": null,
-      "hideInFeedback": true
+      "hideInFeedback": true,
+      "hideTrackTitle": true
     },
     "111": {
       "title": "Pause croissant",
@@ -1638,7 +1640,8 @@
       "videoId": null,
       "image": "/images/backgrounds/croissant1.jpg",
       "icon": null,
-      "hideInFeedback": true
+      "hideInFeedback": true,
+      "hideTrackTitle": true
     },
     "112": {
       "title": "Pause chocolatine",
@@ -1651,7 +1654,8 @@
       "videoId": null,
       "image": "/images/backgrounds/croissant1.jpg",
       "icon": null,
-      "hideInFeedback": true
+      "hideInFeedback": true,
+      "hideTrackTitle": true
     },
     "113": {
       "title": "Goûter",
@@ -1664,7 +1668,8 @@
       "videoId": null,
       "image": "/images/backgrounds/croissant3.jpg",
       "icon": null,
-      "hideInFeedback": true
+      "hideInFeedback": true,
+      "hideTrackTitle": true
     },
     "114": {
       "title": "Goûter",
@@ -1677,7 +1682,8 @@
       "videoId": null,
       "image": "/images/backgrounds/croissant2.jpg",
       "icon": null,
-      "hideInFeedback": true
+      "hideInFeedback": true,
+      "hideTrackTitle": true
     },
     "115": {
       "title": "Pause",
@@ -1690,7 +1696,8 @@
       "videoId": null,
       "image": null,
       "icon": "coffee-break",
-      "hideInFeedback": true
+      "hideInFeedback": true,
+      "hideTrackTitle": true
     },
     "116": {
       "title": "Pause",
@@ -1703,7 +1710,8 @@
       "videoId": null,
       "image": null,
       "icon": "coffee-break",
-      "hideInFeedback": true
+      "hideInFeedback": true,
+      "hideTrackTitle": true
     },
     "117": {
       "title": "Déjeuner",
@@ -1716,7 +1724,8 @@
       "videoId": null,
       "image": "/images/backgrounds/lunch4.jpg",
       "icon": null,
-      "hideInFeedback": true
+      "hideInFeedback": true,
+      "hideTrackTitle": true
     },
     "118": {
       "title": "Déjeuner",
@@ -1729,7 +1738,8 @@
       "videoId": null,
       "image": "/images/backgrounds/lunch2.jpg",
       "icon": null,
-      "hideInFeedback": true
+      "hideInFeedback": true,
+      "hideTrackTitle": true
     },
     "119": {
       "title": "Pause",
@@ -1742,7 +1752,8 @@
       "videoId": null,
       "image": null,
       "icon": "coffee-break",
-      "hideInFeedback": true
+      "hideInFeedback": true,
+      "hideTrackTitle": true
     },
     "120": {
       "title": "Pause",
@@ -1755,7 +1766,8 @@
       "videoId": null,
       "image": null,
       "icon": "coffee-break",
-      "hideInFeedback": true
+      "hideInFeedback": true,
+      "hideTrackTitle": true
     },
     "121": {
       "title": "Pause",
@@ -1768,7 +1780,8 @@
       "videoId": null,
       "image": null,
       "icon": "coffee-break",
-      "hideInFeedback": true
+      "hideInFeedback": true,
+      "hideTrackTitle": true
     },
     "122": {
       "title": "Pause",
@@ -1781,7 +1794,8 @@
       "videoId": null,
       "image": null,
       "icon": "coffee-break",
-      "hideInFeedback": true
+      "hideInFeedback": true,
+      "hideTrackTitle": true
     },
     "123": {
       "title": "Pause",
@@ -1794,7 +1808,8 @@
       "videoId": null,
       "image": null,
       "icon": "coffee-break",
-      "hideInFeedback": true
+      "hideInFeedback": true,
+      "hideTrackTitle": true
     }
   },
 
@@ -1844,7 +1859,7 @@
       "9g2TJuw97VMd8Zwn9y2x0g0w7SB2": {
         "bio": "Dev scala / java / javascript à MAIF",
         "company": "MAIF",
-        "companyLogoUrl": "/images/logos/logo-maif.png",
+        "companyLogoUrl": "/images/logos/logo-maif.svg",
         "country": "Niort, France",
         "name": "Alexandre Delègue",
         "photoUrl": "/images/people/delegue_alexandre.png",
@@ -2207,7 +2222,7 @@
       "9gElbcbH86Q8VUKzNThIWkQ0Wih2": {
         "bio": "Couteau suisse #OSSbyMAIF",
         "company": "MAIF",
-        "companyLogoUrl": "/images/logos/logo-maif.png",
+        "companyLogoUrl": "/images/logos/logo-maif.svg",
         "country": "NIORT",
         "name": "Francois Desmier",
         "photoUrl": "https://avatars1.githubusercontent.com/u/16403287?v=4",
@@ -3066,6 +3081,38 @@
           "name": "GitHub"
         }],
         "title": "Senior Software Engineer à Red Hat"
+      },
+      "32n421jn4j2bn4l3b53l2n4ljn2134ljknnkljn": {
+        "bio": "Domain-Driven Design, patterns, BDD & TDD enthusiast. CTO @Arollafr & Founder of the Paris Software Crafters Community. Author of https://amzn.com/0134689321",
+        "company": "Arolla",
+        "companyLogoUrl": "/images/logos/arolla.jpg",
+        "country": "Paris, France",
+        "name": "Cyrille Martraire",
+        "photoUrl": "images/people/cyrille_martraire.jpg",
+        "shortBio": "CTO, Domain-Driven Design, patterns, BDD & TDD enthusiast, Founder of the Paris Software Crafters Community.",
+        "socials": [{
+          "link": "https://twitter.com/cyriux",
+          "icon": "twitter",
+          "name": "Twitter"
+        }, {
+          "link": "https://www.linkedin.com/in/cyrille-martraire-1208426/",
+          "icon": "github",
+          "name": "GitHub"
+        }],
+        "title": "CTO Arolla | Coach craft & architecture BNP Paribas"
+      },
+      "mk3453jkb5kj3ln24cf2x4c35v3b46": {
+        "bio": "Auteur BD et illustrateur, créateur des bellaminettes. ",
+        "country": "Normandie, France",
+        "name": "Bruno Bellamy",
+        "photoUrl": "/images/people/bruno-bellamy.jpg",
+        "shortBio": "Auteur BD et illustrateur, créateur des bellaminettes. ",
+        "socials": [{
+          "link": "https://twitter.com/brunobellamy",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Auteur BD et illustrateur"
       }
     },
 
