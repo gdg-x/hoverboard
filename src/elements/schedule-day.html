@@ -55,6 +55,15 @@
         z-index: 1;
       }
 
+      .download iron-icon {
+        transform: rotate(90deg);
+      }
+
+      .download-link {
+        text-align: right;
+        margin-top: 20px;
+      }
+
       @media (min-width: 812px) {
         :host {
           margin-left: auto;
@@ -88,9 +97,30 @@
         .add-session {
           border: 1px solid var(--border-light-color);
         }
+
+        .download-link {
+          margin-top: 0;
+          margin-bottom: 20px;
+        }
+
       }
 
     </style>
+
+    <div class="download-link" >
+      <a target="_blank" href="/data/sunnytech-2019.pdf">
+        <paper-button
+          class="watch-video download"
+          ga-on="click"
+          ga-event-category="redirect"
+          ga-event-action="schedule"
+          ga-event-label="hero block - view schedule"
+        >
+        <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+          {$ downloadSchedule $}
+        </paper-button>
+      </a>
+    </div>
 
     <div class="grid" style$="--tracks-number: [[day.tracks.length]];">
       <template is="dom-repeat" items="[[day.timeslots]]" as="timeslot" index-as="timeslotIndex">
