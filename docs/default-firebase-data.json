@@ -2617,7 +2617,7 @@
         "companyLogoUrl": "/images/logos/maplr.png",
         "country": "Montpellier",
         "name": "Marion Félix",
-        "photoUrl": "images/people/marion_flex.jpg",
+        "photoUrl": "/images/people/marion_flex.jpg",
         "socials": [{
           "link": "https://twitter.com/marionflex",
           "icon": "twitter",
