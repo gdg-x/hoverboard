@@ -1842,7 +1842,7 @@
       "EP7LDG2i6YgiNs027aplFVhEbv12": {
         "bio": "Développeur à Clever Cloud.",
         "company": "Clever Cloud",
-        "companyLogoUrl": "images/logos/clever-cloud.png",
+        "companyLogoUrl": "/images/logos/clever-cloud.png",
         "country": "Toulouse, France",
         "name": "Alessio Coltellacci",
         "photoUrl": "https://avatars3.githubusercontent.com/u/11367839?v=4",
@@ -2049,7 +2049,7 @@
         "companyLogoUrl": "/images/logos/arolla.jpg",
         "country": "Paris, France",
         "name": "Cyrille Martraire",
-        "photoUrl": "images/people/cyrille_martraire.jpg",
+        "photoUrl": "/images/people/cyrille_martraire.jpg",
         "shortBio": "CTO, Domain-Driven Design, patterns, BDD & TDD enthusiast, Founder of the Paris Software Crafters Community.",
         "socials": [{
           "link": "https://twitter.com/cyriux",
@@ -2681,7 +2681,7 @@
         "companyLogoUrl": "/images/logos/adagio-labs.png",
         "country": "Montpellier",
         "name": "Nicolas Duforet",
-        "photoUrl": "images/people/nicolas_duforet.jpg",
+        "photoUrl": "/images/people/nicolas_duforet.jpg",
         "socials": [{
           "link": "https://twitter.com/NDuforet",
           "icon": "twitter",
@@ -2840,7 +2840,7 @@
         "companyLogoUrl": "/images/logos/soat.png",
         "country": "Paris, France",
         "name": "Raphaël Wach",
-        "photoUrl": "images/people/raphael_wach.jpg",
+        "photoUrl": "/images/people/raphael_wach.jpg",
         "socials": [{
           "link": "https://twitter.com/raphaelwach",
           "icon": "twitter",
@@ -2855,7 +2855,7 @@
         "companyLogoUrl": "/images/logos/teads.png",
         "country": "France",
         "name": "Roch Dardie",
-        "photoUrl": "images/people/roch_dardie.jpg",
+        "photoUrl": "/images/people/roch_dardie.jpg",
         "socials": [],
         "title": "Software engineer"
       },
@@ -2866,7 +2866,7 @@
         "companyLogoUrl": "/images/logos/xebia.png",
         "country": "Paris, France",
         "name": "Romain Sagean",
-        "photoUrl": "images/people/romain_sagean.jpg",
+        "photoUrl": "/images/people/romain_sagean.jpg",
         "shortBio": "Data Ingénieur à Xebia",
         "socials": [{
           "link": "https://twitter.com/scauglog",
@@ -2931,7 +2931,7 @@
         "companyLogoUrl": "/images/logos/zenika.png",
         "country": "Bordeaux, France",
         "name": "Sebastien Descamps",
-        "photoUrl": "images/people/sebastien_descamps.jpg",
+        "photoUrl": "/images/people/sebastien_descamps.jpg",
         "socials": [{
           "link": "https://github.com/sebastienD",
           "icon": "github",
