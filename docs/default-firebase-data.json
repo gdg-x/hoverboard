@@ -318,7 +318,7 @@
         "endTime" : "11:20"
       },{
         "sessions" : [ {
-          "items" : [ 48 ]
+          "items" : [ 63 ]
         },{
           "items" : [ 13 ]
         },{
@@ -1348,20 +1348,6 @@
       "image": null,
       "icon": null
     },
-    "48": {
-      "title": "Découvrir par l’exemple: Microservices et Event Sourcing avec Kafka et Kubernetes",
-      "complexity": "beginner",
-      "description": "Lorsque vous développez des applications vous avez besoin de vous adapter rapidements aux changements (métiers, comme technologiques). Pour cela les développeurs et les “ops” doivent travailler de concert, pour déployer toujours plus rapidement de nouveaux services tout en garantissant la haute disponibilité et la montée en charge des applications.\n\nLes microservices et l’event-sourcing offrent une grande flexibilité aux développeurs; et la containerization par la biais de Kubernetes permet de déployer ces services en toute tranquillité.\n\nCette présentation, en s’appuyant sur des cas d’usage et des démonstration, vous permettra de découvrir:\n* Les micro-services et l’event sourcing avec Apache Kafka\n* Les containers avec Docker\n* Le déploiement et management des services avec Kubernetes\n\nSi vous n’utilisez pas encore ces technologies, cette présentation vous donnera une bonne idées des avantages qu’elles apportent aux développeurs, administrateurs systèmes, et donc aux utilisateurs; et je suis certain que vous les adopterez rapidement pour vos prochains développements!\n",
-      "language": "French",
-      "tags": ["Architecture & Paradigme"],
-      "speakers": [
-        "bX6pDW3oCgV4bXcI7THJXU0KNWs2"
-      ],
-      "presentation": null,
-      "videoId": null,
-      "image": null,
-      "icon": null
-    },
     "49": {
       "title": "Acteur, un modèle élégant pour le calcul concurrentiel et distribué",
       "complexity": "beginner",
@@ -1568,6 +1554,22 @@
             ],
             "speakers": [
                 "azertyazertyuuiiooppnonetnon"
+            ],
+            "presentation": null,
+            "videoId": null,
+            "image": null,
+            "icon": null
+        },
+        "63": {
+            "title": "What a Mesh ! From Internet Driven Development to Service Mesh",
+            "complexity": "intermediate",
+            "description": "Have you seen all the hype about service mesh lately? New projects showing up to help us solve our architecture issues. But do you know what sort of problems does it help solving? How does it fit in the global cloud architecture picture, already full of reverse proxies, side-car proxies, configuration server, service directories and what not? Also is it something developers should care about or is it an ops thing? Do you have to install this yourself wether you are using a IaaS, CaaS or PaaS?\n In this talk we'll explain all these clouds architecture concepts and type of product from a developer's perspective.",
+            "language": "French",
+            "tags": [
+                "Architecture & Paradigme"
+            ],
+            "speakers": [
+                "787vnvrfhe895b7909GGdfeez44"
             ],
             "presentation": null,
             "videoId": null,
@@ -1994,6 +1996,19 @@
         }],
         "title": "Développeur"
       },
+      "mk3453jkb5kj3ln24cf2x4c35v3b46": {
+        "bio": "Auteur BD et illustrateur, créateur des bellaminettes. ",
+        "country": "Normandie, France",
+        "name": "Bruno Bellamy",
+        "photoUrl": "/images/people/bruno-bellamy.jpg",
+        "shortBio": "Auteur BD et illustrateur, créateur des bellaminettes. ",
+        "socials": [{
+          "link": "https://twitter.com/brunobellamy",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "Auteur BD et illustrateur"
+      },
       "Aow2VohW2SOMagU6kwU98RltKyT2": {
         "bio": "Vieux développeur. C'est tout et c'est déjà pas mal !",
         "shortBio": "Architecte solutions à Zenika",
@@ -2027,6 +2042,25 @@
           "name": "Twitter"
         }],
         "title": "UI/UX Designer"
+      },
+      "32n421jn4j2bn4l3b53l2n4ljn2134ljknnkljn": {
+        "bio": "Domain-Driven Design, patterns, BDD & TDD enthusiast. CTO @Arollafr & Founder of the Paris Software Crafters Community. Author of https://amzn.com/0134689321",
+        "company": "Arolla",
+        "companyLogoUrl": "/images/logos/arolla.jpg",
+        "country": "Paris, France",
+        "name": "Cyrille Martraire",
+        "photoUrl": "images/people/cyrille_martraire.jpg",
+        "shortBio": "CTO, Domain-Driven Design, patterns, BDD & TDD enthusiast, Founder of the Paris Software Crafters Community.",
+        "socials": [{
+          "link": "https://twitter.com/cyriux",
+          "icon": "twitter",
+          "name": "Twitter"
+        }, {
+          "link": "https://www.linkedin.com/in/cyrille-martraire-1208426/",
+          "icon": "linkedin",
+          "name": "linkedin"
+        }],
+        "title": "CTO Arolla | Coach craft & architecture BNP Paribas"
       },
       "vAQguQPbehbyRxkDuXzJ9HSHqVS2": {
         "bio": "I am currently Director of Engineering - Infrastructure at teads.tv and have been in the industry for about 13 years.  \n\nPreviously, I was leading the cloud team at Softbank Robotics, making sure those humanoid robots were always connected.  \n\nMy main focus for those 13 years has been building dev and infra teams, leading them to scale the business in a very automated way.  \n\nI am a natural born geek with an entrepreneur spirit and love to discuss around anything tech related, management related or neat cultural differences.   \nI have lived in many countries / part of the world and love to meet new people from all around the globe.  \n",
@@ -2352,6 +2386,22 @@
         }],
         "title": "CTO"
       },
+      "VzO198n3jiUG2I5BxnRGX0kp0xu2": {
+        "bio": "Chef de projet Open Data chez Montpellier Méditerranée Métropole.\nDocteur en géographie: Open Data, Neogeography, Geoweb",
+        "shortBio": "Chef de projet Open Data chez Montpellier Méditerranée Métropole.\nDocteur en géographie: Open Data, Neogeography, Geoweb",
+        "company": "Montpellier Méditerranée Métropole",
+        "companyLogoUrl": "https://upload.wikimedia.org/wikipedia/fr/0/0f/MONTPELLIER_MEDITERRANEE_METROPOLE.png",
+        "country": "France",
+        "name": "Jérémie Valentin",
+        "title": "Chef de projet Open Data",
+        "photoUrl": "/images/people/jeremie_valentin.jpg",
+        "socials": [{
+          "icon": "linkedin",
+          "name": "linkedin",
+          "link": "https://www.linkedin.com/in/j%C3%A9r%C3%A9mie-valentin-45231115/?originalSubdomain=fr"
+        }],
+        "title": "Chef de projet Open Data"
+      },
       "j1w8by2BQaNVUb5EkwDdDsZ2Bcj2": {
         "bio": "Impresario du Bonheur au Travail et Chief Happiness Officer de ma propre vie.\n\nJ’accompagne les femmes et les hommes actifs à la découverte des mécanismes sous-jacents du bien-être individuel et je les amène à cultiver une nouvelle vision du travail pour leur permettre de retrouver du plaisir et de l’équilibre dans leur quotidien professionnel.\n\nJ’interviens dans les entreprises et auprès des particuliers à travers des conférences et des ateliers en présentiel. Je propose également des ateliers pratique en ligne pour expérimenter et avancer à son propre rythme sur le chemin du bonheur au travail.",
         "company": null,
@@ -2385,21 +2435,21 @@
         }],
         "title": "CTO"
       },
-      "VzO198n3jiUG2I5BxnRGX0kp0xu2": {
-        "bio": "Chef de projet Open Data chez Montpellier Méditerranée Métropole.\nDocteur en géographie: Open Data, Neogeography, Geoweb",
-        "shortBio": "Chef de projet Open Data chez Montpellier Méditerranée Métropole.\nDocteur en géographie: Open Data, Neogeography, Geoweb",
-        "company": "Montpellier Méditerranée Métropole",
-        "companyLogoUrl": "https://upload.wikimedia.org/wikipedia/fr/0/0f/MONTPELLIER_MEDITERRANEE_METROPOLE.png",
-        "country": "France",
-        "name": "Jérémie Valentin",
-        "title": "Chef de projet Open Data",
-        "photoUrl": "/images/people/jeremie_valentin.jpg",
+
+      "hguhreihugruhgirheuhugrehughiure": {
+        "bio": "Senior Lead Developer à la Société Générale, je suis un fervent défenseur du Software Craftsmanship. \nJ'évangélise activement autour de DDD/Hexagonal Architecture, l'XP et le Kanban #NoEstimates au sein de cours et de conférences ainsi qu'à travers d'articles de [blog](https://medium.com/@julien.topcu). \n Membre de la fondation OWASP, je m'efforce de transmettre à la communauté une philosophie DevSecOps que je pense être l'avenir du métier de développeur. J'ai participé à la mise en place de pipeline de Continuous Security à l'échelles d'entreprises.",
+        "company": "Société Générale",
+        "companyLogoUrl": "/images/logos/societegeneral.png",
+        "country": "Paris, France",
+        "name": "Julien Topçu",
+        "photoUrl": "https://media.licdn.com/dms/image/C4E03AQHm8uwCNxxA9Q/profile-displayphoto-shrink_800_800/0?e=1565222400&v=beta&t=r2jzI-wLvh3QEe3-1HZujV1u04heMssYiWZifXBtEfA",
+        "shortBio": "Senior Lead Developer à la Société Générale, je suis un fervent défenseur du Software Craftsmanship. \nJ'évangélise activement autour de DDD/Hexagonal Architecture, l'XP et le Kanban #NoEstimates au sein de cours et de conférences ainsi qu'à travers d'articles de [blog](https://medium.com/@julien.topcu)...",
         "socials": [{
-          "icon": "linkedin",
-          "name": "linkedin",
-          "link": "https://www.linkedin.com/in/j%C3%A9r%C3%A9mie-valentin-45231115/?originalSubdomain=fr"
+          "link": "https://twitter.com/JulienTopcu",
+          "icon": "twitter",
+          "name": "Twitter"
         }],
-        "title": "Chef de projet Open Data"
+        "title": "Developer Relations @ OWASP Fundation & Sr Lead Software Engineer @ Société Générale"
       },
       "leVEVOLM3HfPtzVfQA7WTWyQwoI3": {
         "bio": "Développeur à Zenika",
@@ -2457,6 +2507,25 @@
         }],
         "title": "CTO & co-founder"
       },
+      "787vnvrfhe895b7909GGdfeez44": {
+        "bio": "Laurent Doguin VP, Developer Relation @ Clever Cloud",
+        "country": "Paris, France",
+        "companyLogoUrl": "/images/logos/clever-cloud.png",
+        "company": "Clever Cloud", 
+        "name": "Laurent Doguin",
+        "photoUrl": "https://sessionize.com/image?f=9b23a2eaaf548d0bcfd2dc7ddb84084d,200,200,True,False,d0-6128-46fb-ad46-3df540fcd145.4f08d96a-0b69-4f25-8b0c-41355c52a9ff.jpg",
+        "shortBio": "Laurent Doguin VP, Developer Relation @ Clever Cloud",
+        "socials": [{
+          "link": "https://www.linkedin.com/in/ldoguin/",
+          "icon": "linkedin",
+          "name": "LinkedIn"
+        },{
+          "link": "https://twitter.com/ldoguin",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": "VP, Developer Relation @ Clever Cloud"
+      },
       "VeBTP8lqOYaXBCpwTlGjBW2n1yH2": {
         "bio": "Laurent Grangeau is a Cloud Solution Architect with more than 10+ years of experience. Former Java developer, he has since developed in .NET, with Agile and DevOps mindsets. He has been experimenting with cloud providers for more than 5+ years. Docker enthusiast from the beginning, he has experienced with building microservices and distributed systems. He loves to automate things and run distributed applications at scale.",
         "shortBio": "Cloud Solution Architect at Sogeti",
@@ -2495,6 +2564,7 @@
         }],
         "title": "Software automation engineer"
       },
+
       "6gcb9OjG5cgl14IQBEt5yu4TmTT2": {
         "bio": "# -- English version --  \nLudovic felt into _DevOps_ in 2004 with first _Infra as Code_ deployments on _bare-metal_ blade servers. He's found of empowering project teams through automated tools and friendly collaboration, and then welcome `Docker` and `Kubernetes` as the ultimate tools to leverage his favorite practice. Through meetups, conferences and forums, he shares his love for _cloud_, _infra as code_, _devops_ and performance topics. \n\n# -- French version --  \nLudovic est tombé dans le _DevOps_ en 2004, soit… 3 ans avant l'invention du mot _DevOps_. ;-) A l'époque, il fait des déploiements en _Infra as Code_ sur les premiers serveurs blade, en _bare-metal_. Il adore aider les équipes projet à gagner en autonomie via l'usage d'outils et d'automatisation et à travers une collaboration libre et sans contrainte. C'est donc tout naturellement qu'il a accueilli `Docker` et `Kubernetes` comme les outils ultimes pour l'aider dans sa marotte favorite. En _meetups_ comme en conférences, il aime partager son amour pour le _Cloud_, l'_Infra as Code_, le _DevOps_ et les sujets d'optimisation de performance. ",
         "shortBio": "Head of DevOps/Cloud team at SOAT",
@@ -2588,6 +2658,21 @@
           "name": "Twitter"
         }],
         "title": "Directeur d’études/ UX Researcher"
+      },
+      "vnjbgkujikghhujikgriujhgrghiuyferhbiyjvbhygithuigefhjger": {
+        "bio": "Informaticien curieux depuis 35 ans, de métier depuis 20 ans (principalement dans le spatial). Non spécialiste touche à tout : du développement logiciel à l'étude scientifique, du développement d'algorithmes de traitement à la mise en œuvre de systèmes, de la programmation en C++ ou Python à l'utilisation des technos Web, de la petite appli en ligne de commande aux IHM ou aux systèmes distribués. Ingénieur chez Magellium et co-fondateur et animateur à la Compagnie du Code.",
+        "company": "Magellium",
+        "companyLogoUrl": "/images/logos/magellium.png",
+        "country": "Toulouse, France",
+        "name": "Nicolas Decoster",
+        "photoUrl": "https://media.licdn.com/dms/image/C5103AQGaAw-6brPG4w/profile-displayphoto-shrink_800_800/0?e=1565222400&v=beta&t=dHAoCd-yNBk88PaRE5wiAmBLxAYBaeelI0wHgrqLeD8",
+        "shortBio": "Ingénieur chez Magellium et co-fondateur et animateur à la Compagnie du Code...",
+        "socials": [{
+          "link": "https://twitter.com/nnodot",
+          "icon": "twitter",
+          "name": "Twitter"
+        }],
+        "title": " Ingénieur chez Magellium et co-fondateur et animateur à la Compagnie du Code"
       },
       "TohrkKsx0XQlkAXwnGrfAA3LOM03": {
         "bio": "Un data scientist passionné par le Machine Learning et la science en général. Après un doctorat en statistiques Bayésiennes, j'ai choisi de me lancer dans le monde fascinant de la data science. Depuis 2018, je suis data scientist chez Adagio.",
@@ -2715,8 +2800,8 @@
         "title": "Software Craftsman"
       },
       "Vh46wnWADtXkX9Hjqcfli1Eqwqy1": {
-        "bio": "#### Jobs\n- TAM at GitLab\n- Boss at Bots.Garden\n- Chief Stickers Officer at Clever Cloud\n\n#### Quoi d'autre?\n- Plat préféré: Pot au feu\n- Cocktail préféré: Spritz\n- Activités:  Geek, Pêche, Cuisine, Série TV\n- Signe particulier: grosse addiction aux emojis\n- ScalaIO team member\n- GDG Cloud et IOT Lyon co leader\n- BlendWebMix comité éditorial technique\n\n\n",
-        "shortBio": "TAM at GitLab, Boss at Bots.Garden, Chief Stickers Officer at Clever Cloud",
+        "bio": "#### Jobs\n- TAM at GitLab\n- Boss at Bots.Garden\n\n#### Quoi d'autre?\n- Plat préféré: Pot au feu\n- Cocktail préféré: Spritz\n- Activités:  Geek, Pêche, Cuisine, Série TV\n- Signe particulier: grosse addiction aux emojis\n- ScalaIO team member\n- GDG Cloud et IOT Lyon co leader\n- BlendWebMix comité éditorial technique\n\n\n",
+        "shortBio": "TAM at GitLab, Boss at Bots.Garden",
         "company": "Bots.Garden",
         "companyLogoUrl": "/images/logos/gitlab.png",
         "country": "Lyon, France",
@@ -2911,6 +2996,25 @@
         }],
         "title": "Developer & co-founder"
       },
+      "azertyazertyuuiiooppnonetnon": {
+        "bio": "Je suis membre de la [Vert.x](https://vertx.io/) core team, particulièrement intéressé par le clustering et le monitoring. Je suis développeur depuis près de 15 ans et j’ai travaillé sur des projets très variés (finance, tourisme, banque, hébergeur). \nJ’ai rejoint [Red Hat](https://www.redhat.com/fr) en 2012 et je vis à Marseille avec ma femme et nos 4 enfants. Dans mon temps libre, j’essaie de devenir un meilleur judoka.",
+        "company": "Red Hat",
+        "companyLogoUrl": "/images/logos/redhat.png",
+        "country": "Marseille, France",
+        "name": "Thomas Segismont",
+        "photoUrl": "https://pbs.twimg.com/profile_images/1780054480/SOir_e_avec_les_SEGISMONT_011_400x400.JPG",
+        "shortBio": "Senior Software Engineer à Red Hat & membre de la Vert.x core team",
+        "socials": [{
+          "link": "https://twitter.com/tsegismont",
+          "icon": "twitter",
+          "name": "Twitter"
+        }, {
+          "link": "https://github.com/tsegismont",
+          "icon": "github",
+          "name": "GitHub"
+        }],
+        "title": "Senior Software Engineer à Red Hat"
+      },
       "fEGtvUISb6VrUv4hpaHxRnw8hFZ2": {
         "bio": "I love science and I love data! After finishing a PhD in genetic engineering, I continued my quest for discovering new patterns through data science and machine learning. I currently work as a Data Scientist and I play with machine learning algorithms on my free time. Someday, I wish to leverage artificial intelligence and genetics to improve people's life.",
         "shortBio": "I love science and I love data! After finishing a PhD in genetic engineering, I continued my quest for discovering new patterns through data science and machine learning...",
@@ -2952,29 +3056,6 @@
           "name": "Twitter"
         }],
         "title": "Software Engineer"
-      },
-      "bX6pDW3oCgV4bXcI7THJXU0KNWs2": {
-        "bio": "Tugdual Grall est Director of Product Management chez Red Hat dans l'équipe \"Dev Tools\" ou il participe a la définition de l'Experience Développeur des outils comme OpenShift/Kubernetes et les offres Middleware (JBoss)\n\nAvant de travailler chez Red hat, \"Tug\", était Technical Evangelist chez MapR, MongoDB et Couchbase. Tug a également travaillé comme CTO chez eXo Platform, et comme Product Manager et Développeur sur la platform JavaEE d'Oracle.\n\nTugdual est également co-fondateur du Nantes JUG (Java Users Group) qui réunit tous les mois depuis 2008 les développeurs et architectes de la région nantaise.",
-        "company": "Red Hat",
-        "companyLogo": "/images/logos/redhat.png",
-        "companyLogoUrl": "/images/logos/redhat.png",
-        "country": "Nantes, France",
-        "featured": true,
-        "name": "Tugdual Grall",
-        "photo": "/images/people/tugdual_grall.png",
-        "photoUrl": "/images/people/tugdual_grall.png",
-        "shortBio": "Director of Product Management chez Red Hat...",
-        "socials": [{
-          "icon": "github",
-          "link": "https://github.com/tgrall",
-          "name": "GitHub"
-        }, {
-          "icon": "twitter",
-          "link": "https://twitter.com/tgrall",
-          "name": "Twitter"
-        }],
-        "order": 0,
-        "title": "Director of Product Management - Developer tools & Experience at Red Hat"
       },
       "ZPLUIeEJC6OqiGltQV1BgXpoXU62": {
         "bio": "Co-organisateur de la communauté software craftsmanship de Paris et de la non-conférence SoCraTes France, le partage de savoir est au cœur de mon état d'esprit.\nAmoureux de la programmation fonctionnelle et du code élégant, le plaisir de programmer et d'expliquer cet art ont fait de moi un crafter passionné.",
@@ -3033,87 +3114,6 @@
         }],
         "title": "Consultant associé SmartView - Coach Agile"
       },
-      "hguhreihugruhgirheuhugrehughiure": {
-        "bio": "Senior Lead Developer à la Société Générale, je suis un fervent défenseur du Software Craftsmanship. \nJ'évangélise activement autour de DDD/Hexagonal Architecture, l'XP et le Kanban #NoEstimates au sein de cours et de conférences ainsi qu'à travers d'articles de [blog](https://medium.com/@julien.topcu). \n Membre de la fondation OWASP, je m'efforce de transmettre à la communauté une philosophie DevSecOps que je pense être l'avenir du métier de développeur. J'ai participé à la mise en place de pipeline de Continuous Security à l'échelles d'entreprises.",
-        "company": "Société Générale",
-        "companyLogoUrl": "/images/logos/societegeneral.png",
-        "country": "Paris, France",
-        "name": "Julien Topçu",
-        "photoUrl": "https://media.licdn.com/dms/image/C4E03AQHm8uwCNxxA9Q/profile-displayphoto-shrink_800_800/0?e=1565222400&v=beta&t=r2jzI-wLvh3QEe3-1HZujV1u04heMssYiWZifXBtEfA",
-        "shortBio": "Senior Lead Developer à la Société Générale, je suis un fervent défenseur du Software Craftsmanship. \nJ'évangélise activement autour de DDD/Hexagonal Architecture, l'XP et le Kanban #NoEstimates au sein de cours et de conférences ainsi qu'à travers d'articles de [blog](https://medium.com/@julien.topcu)...",
-        "socials": [{
-          "link": "https://twitter.com/JulienTopcu",
-          "icon": "twitter",
-          "name": "Twitter"
-        }],
-        "title": "Developer Relations @ OWASP Fundation & Sr Lead Software Engineer @ Société Générale"
-      },
-      "vnjbgkujikghhujikgriujhgrghiuyferhbiyjvbhygithuigefhjger": {
-        "bio": "Informaticien curieux depuis 35 ans, de métier depuis 20 ans (principalement dans le spatial). Non spécialiste touche à tout : du développement logiciel à l'étude scientifique, du développement d'algorithmes de traitement à la mise en œuvre de systèmes, de la programmation en C++ ou Python à l'utilisation des technos Web, de la petite appli en ligne de commande aux IHM ou aux systèmes distribués. Ingénieur chez Magellium et co-fondateur et animateur à la Compagnie du Code.",
-        "company": "Magellium",
-        "companyLogoUrl": "/images/logos/magellium.png",
-        "country": "Toulouse, France",
-        "name": "Nicolas Decoster",
-        "photoUrl": "https://media.licdn.com/dms/image/C5103AQGaAw-6brPG4w/profile-displayphoto-shrink_800_800/0?e=1565222400&v=beta&t=dHAoCd-yNBk88PaRE5wiAmBLxAYBaeelI0wHgrqLeD8",
-        "shortBio": "Ingénieur chez Magellium et co-fondateur et animateur à la Compagnie du Code...",
-        "socials": [{
-          "link": "https://twitter.com/nnodot",
-          "icon": "twitter",
-          "name": "Twitter"
-        }],
-        "title": " Ingénieur chez Magellium et co-fondateur et animateur à la Compagnie du Code"
-      },
-      "azertyazertyuuiiooppnonetnon": {
-        "bio": "Je suis membre de la [Vert.x](https://vertx.io/) core team, particulièrement intéressé par le clustering et le monitoring. Je suis développeur depuis près de 15 ans et j’ai travaillé sur des projets très variés (finance, tourisme, banque, hébergeur). \nJ’ai rejoint [Red Hat](https://www.redhat.com/fr) en 2012 et je vis à Marseille avec ma femme et nos 4 enfants. Dans mon temps libre, j’essaie de devenir un meilleur judoka.",
-        "company": "Red Hat",
-        "companyLogoUrl": "/images/logos/redhat.png",
-        "country": "Marseille, France",
-        "name": "Thomas Segismont",
-        "photoUrl": "https://pbs.twimg.com/profile_images/1780054480/SOir_e_avec_les_SEGISMONT_011_400x400.JPG",
-        "shortBio": "Senior Software Engineer à Red Hat & membre de la Vert.x core team",
-        "socials": [{
-          "link": "https://twitter.com/tsegismont",
-          "icon": "twitter",
-          "name": "Twitter"
-        }, {
-          "link": "https://github.com/tsegismont",
-          "icon": "github",
-          "name": "GitHub"
-        }],
-        "title": "Senior Software Engineer à Red Hat"
-      },
-      "32n421jn4j2bn4l3b53l2n4ljn2134ljknnkljn": {
-        "bio": "Domain-Driven Design, patterns, BDD & TDD enthusiast. CTO @Arollafr & Founder of the Paris Software Crafters Community. Author of https://amzn.com/0134689321",
-        "company": "Arolla",
-        "companyLogoUrl": "/images/logos/arolla.jpg",
-        "country": "Paris, France",
-        "name": "Cyrille Martraire",
-        "photoUrl": "images/people/cyrille_martraire.jpg",
-        "shortBio": "CTO, Domain-Driven Design, patterns, BDD & TDD enthusiast, Founder of the Paris Software Crafters Community.",
-        "socials": [{
-          "link": "https://twitter.com/cyriux",
-          "icon": "twitter",
-          "name": "Twitter"
-        }, {
-          "link": "https://www.linkedin.com/in/cyrille-martraire-1208426/",
-          "icon": "linkedin",
-          "name": "linkedin"
-        }],
-        "title": "CTO Arolla | Coach craft & architecture BNP Paribas"
-      },
-      "mk3453jkb5kj3ln24cf2x4c35v3b46": {
-        "bio": "Auteur BD et illustrateur, créateur des bellaminettes. ",
-        "country": "Normandie, France",
-        "name": "Bruno Bellamy",
-        "photoUrl": "/images/people/bruno-bellamy.jpg",
-        "shortBio": "Auteur BD et illustrateur, créateur des bellaminettes. ",
-        "socials": [{
-          "link": "https://twitter.com/brunobellamy",
-          "icon": "twitter",
-          "name": "Twitter"
-        }],
-        "title": "Auteur BD et illustrateur"
-      }
     },
 
 
