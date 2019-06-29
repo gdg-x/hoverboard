@@ -1,85 +1,147 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
-
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
-
-<link rel="import" href="../../bower_components/marked-element/marked-element.html">
-
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="shared-animations.html">
+<link rel="import" href="hoverboard-icons.html">
 
 <dom-module id="about-block">
-
   <template>
-    <style include="shared-styles">
+    <style include="shared-styles flex flex-alignment flex-reverse">
       :host {
         display: block;
       }
 
       .container {
-        @apply(--layout-vertical);
+        padding-top: 64px;
       }
 
-      .about-item {
-        @apply(--layout-flex-5);
-        text-align: justify;
+      .content {
+        display: grid;
+        grid-gap: 32px;
+        grid-template-columns: 1fr;
       }
 
-      .about-item:not(:first-of-type) {
-        margin-top: 30px;
+      .statistics-block {
+        width: 100%;
+        display: grid;
+        grid-gap: 32px 16px;
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .divider {
-        @apply(--layout-flex);
+      .numbers {
+        font-size: 40px;
       }
 
-      .page-link {
-        margin-top: 18px;
+      .numbers::after {
+        content: "";
         display: block;
-        font-size: 16px;
+        height: 2px;
+        width: 64px;
+        background-color: var(--default-primary-color);
       }
 
-      @media (min-width: 601px) {
-        .container {
-          @apply(--layout-horizontal);
+      .label {
+        margin-top: 4px;
+      }
+
+      @media (min-width: 640px) {
+        .content {
+          grid-gap: 64px;
+          grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
         }
 
-        .container .heading {
-          margin-bottom: 20px;
+        .statistics-block {
+          grid-gap: 32px;
         }
 
-        .about-item:not(:first-of-type) {
-          margin-top: 0;
+        .numbers {
+          font-size: 56px;
         }
       }
+
     </style>
 
     <div class="container">
-      <div class="about-item">
-        <h4 class="heading">{$ organizerTitle $}</h4>
-        <marked-element markdown="{$ aboutOrganizers $}">
-          <div class="markdown-html"></div>
-        </marked-element>
-        <a class="page-link" href="/team">{$ openTeamPage $}</a>
-      </div>
-      <span class="divider"></span>
-      <div class="about-item">
-        <h4 class="heading">{$ whatIsGdg $}</h4>
-        <marked-element markdown="{$ aboutGdg $}">
-          <div class="markdown-html"></div>
-        </marked-element>
+
+      <div class="content">
+
+        <div>
+          <h1 class="container-title">{$ aboutBlock.title $}</h1>
+          <p>{$ aboutBlock.callToAction.featuredSessions.description $}</p>
+          <a
+            href="{$ aboutBlock.callToAction.featuredSessions.link $}"
+            ga-on="click"
+            ga-event-category="video"
+            ga-event-action="watch"
+            ga-event-label="about block - {$ aboutBlock.callToAction.featuredSessions.label $}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <paper-button class="animated icon-right">
+              <span class="cta-label">{$ aboutBlock.callToAction.featuredSessions.label $}</span>
+              <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+            </paper-button>
+          </a>
+
+          <p>{$ aboutBlock.callToAction.howItWas.description $}</p>
+          <paper-button
+            class="animated icon-right"
+            on-tap="_playVideo"
+            ga-on="click"
+            ga-event-category="video"
+            ga-event-action="watch"
+            ga-event-label="about block - {$ aboutBlock.callToAction.howItWas.label $}"
+          >
+            <span>{$  aboutBlock.callToAction.howItWas.label $}</span>
+            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+          </paper-button>
+        </div>
+
+        <div class="statistics-block">
+
+          <div class="item">
+            <div class="numbers">{$ aboutBlock.statisticsBlock.attendees.number $}</div>
+            <div class="label">{$ aboutBlock.statisticsBlock.attendees.label $}</div>
+          </div>
+
+          <div class="item">
+            <div class="numbers">{$ aboutBlock.statisticsBlock.days.number $}</div>
+            <div class="label">{$ aboutBlock.statisticsBlock.days.label $}</div>
+          </div>
+
+          <div class="item">
+            <div class="numbers">{$ aboutBlock.statisticsBlock.sessions.number $}</div>
+            <div class="label">{$ aboutBlock.statisticsBlock.sessions.label $}</div>
+          </div>
+
+          <div class="item">
+            <div class="numbers">{$ aboutBlock.statisticsBlock.tracks.number $}</div>
+            <div class="label">{$ aboutBlock.statisticsBlock.tracks.label $}</div>
+          </div>
+
+        </div>
       </div>
     </div>
 
   </template>
 
   <script>
-    (function () {
-      'use strict';
+    class AboutBlock extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'about-block';
+      }
 
-      Polymer({
+      _playVideo() {
+        uiActions.toggleVideoDialog({
+          title: '{$  aboutBlock.callToAction.howItWas.title $}',
+          youtubeId: '{$  aboutBlock.callToAction.howItWas.youtubeId $}',
+          disableControls: true,
+          opened: true,
+        });
+      }
+    }
 
-        is: 'about-block'
-
-      });
-
-    }());
+    window.customElements.define(AboutBlock.is, AboutBlock);
   </script>
 </dom-module>

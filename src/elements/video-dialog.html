@@ -1,39 +1,18 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
-
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../../bower_components/iron-dropdown/iron-dropdown-scroll-manager.html">
-
-<link rel="import" href="../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
-<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
-
-<link rel="import" href="../../bower_components/neon-animation/neon-animation-runner-behavior.html">
-
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/google-youtube/google-youtube.html">
-
-<link rel="import" href="../styles/shared-styles.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="shared-styles.html">
 
 
 <dom-module id="video-dialog">
-
   <template>
-
-    <style include="shared-styles">
+    <style include="positioning">
       :host {
-        @apply(--layout-fit);
-        --paper-toolbar-height: 64px;
-        margin: 0 !important;
-        padding: 0 !important;
-        position: fixed !important;
-        background: rgba(0, 0, 0, .5);
-      }
-
-      .toolbar {
-        text-transform: uppercase;
-        z-index: 9;
-        background: rgba(0, 0, 0, .5);
-        font-size: 18px;
-        color: #FFFFFF;
+        margin: 0;
+        padding: 0;
       }
 
       .video-wrapper {
@@ -41,16 +20,37 @@
         overflow: hidden;
       }
 
+      .go-back-icon {
+        margin: 16px;
+        z-index: 7;
+        width: 40px;
+        height: 40px;
+        color: #fff;
+        opacity: 0.6;
+        background-color: #000;
+        border-radius: 50%;
+        display: block;
+        transition: opacity var(--animation);
+      }
+
+      .go-back-icon:hover {
+        opacity: 0.9;
+      }
+
       .video {
-        @apply(--layout-fit);
         padding: 0;
       }
+
     </style>
 
-    <paper-toolbar class="toolbar">
-      <paper-icon-button icon="icons:arrow-back" on-tap="close"></paper-icon-button>
-      <span>[[videoTitle]]</span>
-    </paper-toolbar>
+    <div class="toolbar">
+      <paper-icon-button
+        class="go-back-icon"
+        icon="hoverboard:close"
+        on-tap="_closeSelf"
+        dialog-dismiss
+      ></paper-icon-button>
+    </div>
     <div class="video-wrapper">
       <google-youtube
         id="video"
@@ -60,79 +60,60 @@
         height="100%"
         autohide="1"
         chromeless="[[disableControls]]"
-      ></google-youtube>
+        fit>
+      </google-youtube>
     </div>
 
   </template>
 
   <script>
-    (function () {
-      'use strict';
+    class VideoDialog extends ReduxMixin(
+        Polymer.mixinBehaviors([Polymer.PaperDialogBehavior], Polymer.Element)
+    ) {
+      static get is() {
+        return 'video-dialog';
+      }
 
-      Polymer({
-
-        is: 'video-dialog',
-
-        behaviors: [
-          Polymer.PaperDialogBehavior,
-          Polymer.NeonAnimationRunnerBehavior
-        ],
-
-        properties: {
-          videoTitle: {
-            type: String
+      static get properties() {
+        return {
+          videoTitle: String,
+          opened: {
+            type: Boolean,
+            observer: 'videoDialogActionMade',
           },
-
-          youtubeId: {
-            type: String
-          },
-
+          youtubeId: String,
           disableControls: {
             type: Boolean,
-            value: false
+            value: false,
           },
+        };
+      }
 
-          _secondLayer: {
-            type: Boolean,
-            value: false
-          }
-        },
-
-        listeners: {
-          'neon-animation-finish': '_onNeonAnimationFinish'
-        },
-
-        _renderOpened: function () {
-          this._secondLayer = this.backdropElement.opened;
+      videoDialogActionMade() {
+        if (this.opened) {
           if (this.withBackdrop) {
             this.backdropElement.open();
           }
-          this.playAnimation('entry');
           this.$.video.play();
-        },
-
-        _renderClosed: function () {
+        }
+        else {
           this.$.video.seekTo(0);
           this.$.video.pause();
-          if (!this._secondLayer) {
-            this.backdropElement.close();
-          }
-          this.playAnimation('exit');
-        },
-
-        _onNeonAnimationFinish: function () {
-          if (this.opened) {
-            Polymer.IronDropdownScrollManager.pushScrollLock(this);
-            this._finishRenderOpened();
-          } else {
-            Polymer.IronDropdownScrollManager.removeScrollLock(this);
-            this._finishRenderClosed();
-          }
+          this.backdropElement.close();
+          this.opened = false;
         }
+      }
 
-      });
+      _closeSelf() {
+        uiActions.toggleVideoDialog({
+          opened: false,
+          disableControls: false,
+          youtubeId: '',
+          title: '',
+        });
+      }
+    }
 
-    })();
+    window.customElements.define(VideoDialog.is, VideoDialog);
   </script>
-
 </dom-module>

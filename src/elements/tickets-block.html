@@ -1,113 +1,257 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
-<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
-
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
-<link rel="import" href="../styles/shared-styles.html">
-<link rel="import" href="ticket-element.html">
-
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="../elements/shared-styles.html">
+<link rel="import" href="../elements/hoverboard-icons.html">
+<link rel="import" href="../elements/content-loader.html">
 
 <dom-module id="tickets-block">
-
   <template>
-
-    <style include="shared-styles">
+    <style include="shared-styles flex flex-alignment positioning">
       :host {
-        --iron-icon-fill-color: var(--text-primary-color);
-        --paper-card-background-color: #FFFFFF;
         display: block;
-        background: var(--default-primary-color);
-        color: var(--text-primary-color);
-        text-align: center;
       }
 
       .tickets-wrapper {
-        @apply(--layout-horizontal);
-        @apply(--layout-wrap);
-        @apply(--layout-center-justified);
+        text-align: center;
       }
 
-      ticket-element {
-        margin: 15px;
+      .tickets {
+        margin: 32px 0 24px;
       }
 
-      paper-button {
-        font-size: 0.9em;
-      }
-
-      .details {
-        margin: 10px auto 0;
-        font-size: 14px;
-        max-width: 600px;
-      }
-
-      .buy-button {
-        margin-top: 30px;
-        background: #fff;
+      .ticket-item {
+        margin: 16px 8px;
+        width: 100%;
+        text-align: center;
         color: var(--primary-text-color);
+        background-color: var(--default-background-color);
       }
 
-      paper-dialog {
-        background: #fff;
-        color: var(--primary-text-color);
+      .ticket-item[in-demand] {
+        transform: scale(1.05);
+        box-shadow: var(--box-shadow-primary-color);
+        border-top: 2px solid var(--default-primary-color);
+        z-index: 1;
       }
 
-      paper-dialog paper-button {
+      .ticket-item[in-demand]:hover {
+        box-shadow: var(--box-shadow-primary-color-hover);
+      }
+
+      .ticket-item[sold-out] {
+        opacity: .5;
+        filter: grayscale(1);
+        cursor: not-allowed;
+      }
+
+      .ticket-item[sold-out]:hover {
+        box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.07), 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+      }
+
+      .header {
+        padding: 24px 0 0;
+        font-size: 16px;
+      }
+
+      .content {
+        padding: 0 24px;
+      }
+
+      .type-description {
+        font-size: 12px;
+        color: var(--secondary-text-color);
+      }
+
+      .ticket-price-wrapper {
+        margin: 24px 0;
+        white-space: nowrap;
+      }
+
+      .price {
         color: var(--default-primary-color);
+        font-size: 40px;
       }
 
-      @media (min-width: 601px) {
-        ticket-element {
-          max-width: 350px;
+      .discount {
+        font-size: 14px;
+        color: var(--accent-color);
+      }
+
+      .sold-out {
+        display: none;
+        font-size: 14px;
+        text-transform: uppercase;
+        height: 32px;
+        color: var(--secondary-text-color);
+      }
+
+      .additional-info {
+        margin: 16px auto 0;
+        max-width: 480px;
+        font-size: 14px;
+        color: var(--secondary-text-color);
+      }
+
+      .actions {
+        padding: 24px;
+        position: relative;
+      }
+
+      .tickets-placeholder {
+        display: grid;
+        width: 100%;
+      }
+
+      paper-button[disabled] {
+        background-color: var(--primary-color-transparent);
+        font-size: 12px;
+      }
+
+      @media (min-width: 640px) {
+        .tickets-placeholder {
+          grid-template-columns: repeat(auto-fill, 200px);
+        }
+
+        .ticket-item {
+          max-width: 200px;
+        }
+
+        .ticket-item[in-demand] {
+          transform: scale(1.15);
         }
       }
     </style>
 
-    <div class="container">
-      <div class="block-header">
-        <h4 class="heading">{$ ticketsTitle $}</h4>
-      </div>
-      <div class="tickets-wrapper">
-        <template is="dom-repeat" items="[[app.tickets.elements]]" as="ticket">
-          <ticket-element
-            type="[[ticket.name]]"
-            price="[[ticket.price]]"
-            currency="[[ticket.currency]]"
-            starts="[[ticket.starts]]"
-            ends="[[ticket.ends]]"
-            info="[[ticket.info]]"
-            sold-out="[[ticket.soldOut]]",
-            sold-out-text="{$ soldOutTickets $}">
-          </ticket-element>
+    <div class="tickets-wrapper container">
+      <h1 class="container-title">{$ ticketsBlock.title $}</h1>
+      <content-loader
+        class="tickets-placeholder"
+        card-padding="24px"
+        card-height="216px"
+        border-radius="var(--border-radius)"
+        title-top-position="32px"
+        title-height="42px"
+        title-width="70%"
+        load-from="-70%"
+        load-to="130%"
+        animation-time="1s"
+        items-count="{$ contentLoaders.tickets.itemsCount $}"
+        hidden$="[[contentLoaderVisibility]]">
+      </content-loader>
+
+      <div class="tickets" layout horizontal wrap center-justified>
+        <template is="dom-repeat" items="[[tickets]]" as="ticket">
+          <a
+            class="ticket-item card"
+            href$="[[ticket.url]]"
+            target="_blank"
+            rel="noopener noreferrer"
+            sold-out$="[[ticket.soldOut]]"
+            in-demand$="[[ticket.inDemand]]"
+            on-tap="_onTicketTap"
+            ga-on="click"
+            ga-event-category="ticket"
+            ga-event-action="buy_click"
+            ga-event-label$="[[ticket.name]]"
+            layout vertical
+          >
+            <div class="header">
+              <h4>[[ticket.name]]</h4>
+            </div>
+            <div class="content" layout vertical flex-auto>
+              <div class="ticket-price-wrapper">
+                <div class="price">[[ticket.currency]][[ticket.price]]</div>
+                <div class="discount">[[_getDiscount(ticket)]]</div>
+              </div>
+              <div class="type-description" layout vertical flex-auto center-justified>
+                <div class="ticket-dates" hidden$="[[!ticket.starts]]">[[ticket.starts]] - [[ticket.ends]]</div>
+                <div class="ticket-info">[[ticket.info]]</div>
+              </div>
+            </div>
+            <div class="actions">
+              <div class="sold-out" block$="[[ticket.soldOut]]">
+                {$ ticketsBlock.soldOut $}
+              </div>
+              <paper-button primary hidden$="[[ticket.soldOut]]" disabled$="[[!ticket.available]]">
+                [[_getButtonText(ticket.available)]]
+              </paper-button>
+            </div>
+          </a>
         </template>
       </div>
-      <div class="details">{$ ticketsDetails $}</div>
-      <a href="[[app.tickets.url]]" target="_blank" rel="noopener noreferrer" on-tap="_trackBuyClick">
-        <paper-button class="buy-button" raised>{$ buyTicket $}</paper-button>
-      </a>
+
+      <div class="additional-info">*{$ ticketsBlock.ticketsDetails $}</div>
+
     </div>
 
   </template>
 
   <script>
-    (function () {
-      'use strict';
 
-      Polymer({
-        is: 'tickets-block',
+    class TicketsBlock extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'tickets-block';
+      }
 
-        ready: function () {
-          HOVERBOARD.Elements.Tickets = this
-        },
+      static get properties() {
+        return {
+          tickets: {
+            type: Array,
+            statePath: 'tickets.list',
+            observer: '_ticketsChanged',
+          },
+          ticketsFetching: {
+            type: Boolean,
+            statePath: 'tickets.fetching',
+          },
+          ticketsFetchingError: {
+            type: Object,
+            statePath: 'tickets.fetchingError',
+          },
+          viewport: {
+            type: Object,
+            statePath: 'ui.viewport',
+          },
+          contentLoaderVisibility: Boolean,
+        };
+      }
 
-        _trackBuyClick: function (e) {
-          HOVERBOARD.Analytics.trackEvent('ticket', 'buy_click', e.currentTarget.href);
+      connectedCallback() {
+        super.connectedCallback();
+        // eslint-disable-next-line no-undef
+        HOVERBOARD.Elements.Tickets = this;
+      }
+
+      _ticketsChanged(tickets) {
+        if (tickets && tickets.length) {
+          this.set('contentLoaderVisibility', true);
         }
+      }
 
-      });
+      _getDiscount(ticket) {
+        const primaryTicket = this.tickets.find((ticket) => ticket.primary);
+        const maxPrice = primaryTicket && primaryTicket.price;
+        if (!ticket.regular || ticket.primary || ticket.soldOut || !maxPrice) return;
+        const discount = 100 - parseInt(ticket.price) * 100 / parseInt(maxPrice);
+        return ((discount) => `{$ ticketsBlock.save $}`)(Math.round(discount));
+      }
 
-    }());
+      _onTicketTap(e) {
+        if (e.model.ticket.soldOut || !e.model.ticket.available) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }
+
+      _getButtonText(available) {
+        return available ? '{$ buyTicket $}' : '{$ ticketsBlock.notAvailableYet $}';
+      }
+    }
+
+    window.customElements.define(TicketsBlock.is, TicketsBlock);
   </script>
-
 </dom-module>
