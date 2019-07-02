@@ -1,52 +1,50 @@
-### 1. Purpose
+### 1. Règles
 
-A primary goal of [GDG Lviv](http://lviv.gdg.org.ua/) is to be inclusive to the largest number of contributors, with the most varied and diverse backgrounds possible. As such, we are committed to providing a friendly, safe and welcoming environment for all, regardless of gender, sexual orientation, ability, ethnicity, socioeconomic status, and religion (or lack thereof). 
-GDG Lviv prides itself on being an open, respectful, and inclusive community. That means the [jerky behavior](https://meta.wikimedia.org/wiki/Don%27t_be_a_jerk) isn’t allowed at GDG meetings.
+Le DevFest Strasbourg se veut être une expérience sans harcèlement, quel que soit votre
+sexe, votre identité sexuelle, votre âge, votre orientation sexuelle, votre handicap, votre
+apparence physique, votre poids ou votre religion.
 
-This code of conduct outlines our expectations for all those who participate in our community, as well as the consequences for unacceptable behavior.
-We invite all those who participate in Google Developers Group to help us create safe and positive experiences for everyone.
+Nous ne tolérons aucun harcèlement de la part des participants, quel que soit sa forme. Les
+expressions et les images à connotation sexuelle ne sont pas appropriées lors de la durée de
+l'événement. Ceci inclut les conférences, les ateliers, les soirées, Twitter et les autres médias
+en ligne. Les participants au DevFest qui violent ces règles peuvent se voir sanctionnés, voir
+exclu du festival.
 
-### 2. Open [Source/Culture/Tech] Citizenship
+Le harcèlement peut comprendre:
+- Les commentaires liés à la domination sociale, liés au genre, à l’identité et à
+l’expression de genre, à l’orientation sexuelle, au handicap, à l’apparence physique,
+à la taille, à l’origine, à l’âge, à la religion, aux choix technologiques
+- Les images sexuelles dans les espaces publiques
+- L’intimidation volontaire envers une personne
+- La photographie forcée
+- La perturbation prolongée d’une conférence
+- Un contact physique jugé inapproprié
+- L’encouragement à l’un des comportements cités ci-dessus
+Les participants qui se font avertir d’arrêter un comportement de harcèlement par un
+membre du personnel ou par un autre participant doivent s’y conformer immédiatement.
 
-A supplemental goal of this Code of Conduct is to increase open [source/culture/tech] citizenship by encouraging participants to recognize and strengthen the relationships between our actions and their effects on our community. Communities mirror the societies in which they exist, and positive action is essential to counteract the many forms of inequality and abuses of power that exist in society. If you see someone who is making an extra effort to ensure our community is welcoming, friendly, and encourages all participants to contribute to the fullest extent, we want to know.
+Nous nous réservons le droit de prendre toutes les mesures nécéssaires pour faire cesser
+tout comportement de harcèlement. Cela va du simple avertissement à l’expulsion
+définitive du festival, sans possibilité de remboursement.
 
-### 3. Expected Behavior
+Nous attendons de la part des participants à cet évènement un respect de ces règles sur les
+lieux de l’évènements, sur les réseaux sociaux et également au quotidien.
 
-The following behaviors are expected and requested of all community members:
+### 2. Signalement d'un comportement
+Si vous êtes témoin d'une personne ne respectant pas ce règlement, nous vous prions de
+bien vouloir vous rendre immédiatement auprès d’un organisateur du DevFest qui prendra
+les mesures nécéssaires.
 
-- Participate in an authentic and active way. In doing so, you contribute to the health and longevity of this community.
-- Exercise consideration and respect in your speech and actions.
-- Attempt collaboration before a conflict.
-- Refrain from demeaning, discriminatory, or harassing behavior and speech.
-- Be mindful of your surroundings and your fellow participants. Alert community leaders if you notice a dangerous situation, someone in distress, or violations of this Code of Conduct, even if they seem inconsequential.
+Tout organisateur du DevFest est identifiable par un tee-shirt “STAFF”.
 
-### 4. Unacceptable Behavior
+Vous pouvez également rédiger un rapport écrit et personnel aux organisateurs du DevFest
+Strasbourg, en incluant:
+- Le titre: “COC Violation”
+- Vos coordonnées personnelles
+- La date et l’heure de l’incident
+- Une description de l’incident
+- Les personnes impliquées ou témoins de l’incident
 
-The following actions are considered harassment and are unacceptable within our community:
+Chaque rapport restera entièrement confidentiel.
 
-- Violence, threats of violence or violent language directed against another person.
-- Sexist, racist, homophobic, transphobic, ableist or otherwise discriminatory jokes and language.
-- Posting or displaying sexually explicit or violent material.
-- Posting or threatening to post other people’s personally identifying information ("doxing").
-- Personal insults, particularly those related to gender, sexual orientation, race, religion, or disability.
-- Inappropriate photography or recording.
-- Inappropriate physical contact. You should have someone’s consent before touching them.
-- Unwelcome sexual attention. This includes sexualized comments or jokes; inappropriate touching, groping, and unwelcomed sexual advances.
-- Deliberate intimidation, stalking or following (online or in person).
-- Advocating for, or encouraging, any of the above behavior.
-- Sustained disruption of community events, including talks and, presentations.
-
-###  5. Consequences of Unacceptable Behavior
-
-Unacceptable behavior from any community member, including sponsors and those with decision-making authority, will not be tolerated.
-Anyone asked to stop unacceptable behavior is expected to comply immediately.
-If a community member engages in unacceptable behavior, the community organizers may take any action they deem appropriate, up to and including a temporary ban or permanent expulsion from the community without warning (and without refund in the case of a paid event.
-
-### 6. Scope
-
-We expect all community participants to abide by this Code of Conduct in all community venues–online and in-person–as well as in all one-on-one communications about community business. This code of conduct and its related procedures also applies to unacceptable behavior occurring outside the scope of community activities when such behavior has the potential to affect the safety and well-being of community members adversely.
-
-### 7. Contact info
-
-- Oleh Zasadnyy, +38 093 486 64 60, [o.zasadnyy@gdg.org.ua](mailto:o.zasadnyy@gdg.org.ua)
-- Sofiya Huts, +38 093 486 14 25, [s.huts@gdg.org.ua](mailto:s.huts@gdg.org.ua)
+Mail à contacter en cas d’incident: [contact@gdgstrasbourg.fr](mailto:contact@gdgstrasbourg.fr)
