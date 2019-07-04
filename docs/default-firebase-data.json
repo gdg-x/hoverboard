@@ -31,12 +31,17 @@
   },
   "partners" : [ {
     "logos" : [ {
-        "order" : 0,
-        "logoUrl" : "../images/logos/ljs-vistar-logo.png",
-        "name" : "Vistar",
-        "url" : "https://www.vistarmedia.com/"
-    }, {
+      "order" : 0,
+      "logoUrl" : "../images/logos/ljs-comcast-logo.png",
+      "name" : "Comcast",
+      "url" : "https://corporate.comcast.com/"
+    },{
       "order" : 1,
+      "logoUrl" : "../images/logos/ljs-vistar-logo.png",
+      "name" : "Vistar",
+      "url" : "https://www.vistarmedia.com/"
+    }, {
+      "order" : 2,
       "logoUrl" : "../images/logos/ljs-chariot-logo.jpg",
       "name" : "Chariot Solutions",
       "url" : "https://chariotsolutions.com/"
