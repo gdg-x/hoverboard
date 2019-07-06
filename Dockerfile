@@ -1,4 +1,4 @@
-FROM node
+FROM node:10.16.0
 
 ADD . /app
 RUN chown -R node:node /app
