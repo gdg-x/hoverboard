@@ -121,11 +121,11 @@
     "pointer": {
       "latitude": 53.562590,
       "longitude": 9.960060,
-      "zoom": 5
+      "zoom": 12
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": 53.562590,
+      "longitude": 9.960060
     },
     "description": "We are in the Betahaus again this year!"
   },
