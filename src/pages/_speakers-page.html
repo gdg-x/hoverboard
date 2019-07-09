@@ -207,15 +207,16 @@
       </a>
     </hero-block>
 
-    <div>
-    <!-- <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress> -->
-    <!-- <filter-menu
+    <div style="display:none">
+    <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
+
+    <filter-menu
       filters="[[_filters]]"
       selected="[[_selectedFilters]]"
       results-count="[[speakersToRender.length]]"
-    ></filter-menu> -->
+    ></filter-menu>
 
-    <!-- <content-loader
+    <content-loader
       class="container"
       card-padding="32px"
       card-height="400px"
@@ -225,7 +226,7 @@
       box-shadow="var(--box-shadow)"
       items-count="{$ contentLoaders.speakers.itemsCount $}"
       hidden$="[[contentLoaderVisibility]]"
-    ></content-loader> -->
+    ></content-loader>
 
     <div class="container">
       <template
@@ -234,7 +235,7 @@
         as="speaker"
       >
         <a class="speaker card"
-           on-tap="_openSpeakerDetails"
+           href$="[[speaker.link]]"
            ga-on="click"
            ga-event-category="speaker"
            ga-event-action="open details"
@@ -246,6 +247,20 @@
               sizing="cover"
               lazy-load preload fade
             ></plastic-image>
+            <div class="badges" layout horizontal>
+              <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
+                <a
+                  class$="badge [[badge.name]]-b"
+                  href$="[[badge.link]]"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title$="[[badge.description]]"
+                  layout horizontal center-center
+                >
+                  <iron-icon class="badge-icon" icon="hoverboard:[[badge.name]]"></iron-icon>
+                </a>
+              </template>
+            </div>
           </div>
         </div>
 
@@ -288,19 +303,14 @@
 
   <script>
 
-    Polymer({
-      is: 'speakers-page',
-      ready: function () {
-        var _this = this;
-        fetch('data/posts/speakers.json')
-        .then(function (response) {
-        return response.json();
-        })
-        .then(function (res) {
-          _this.speakersToRender = res.speakers;
-        });
-      },
-      properties: {
+    // eslint-disable-next-line no-undef
+    class SpeakersPage extends UtilsFunctions(ReduxMixin(SpeakersHoC(Polymer.Element))) {
+      static get is() {
+        return 'speakers-page';
+      }
+
+      static get properties() {
+        return {
           route: Object,
           routeData: Object,
           active: Boolean,
@@ -327,30 +337,17 @@
           },
           _selectedFilters: Object,
           speakersToRender: Array,
+        };
+      }
 
-      },
-      observers: function () {
+      static get observers() {
         return [
           '_openSpeakerDetails(active, speakers, speakersMap, routeData.speakerId)',
           '_speakersChanged(speakers, _selectedFilters)',
         ];
-      },
-      _openSpeakerDetails: function (active, speakers, speakersMap, id) {
-        // console.log("open speaker details", this.active, this.speakersToRender, speakers)
-        if (this.speakersToRender && this.speakersToRender.length) {
-          requestAnimationFrame(() => {
-            // console.log(active, this.id)
-            if (this.active && this.id) {
-              const speakerData = speakersMap[id];
-              speakerData && dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
-            } else {
-               this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
-               this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
-            }
-          });
-        }
-      },
-      _speakersChanged: function (speakers, selectedFilters) {
+      }
+
+      _speakersChanged(speakers, selectedFilters) {
         if (this.speakers && this.speakers.length) {
           this.contentLoaderVisibility = 'hidden';
           const filters = selectedFilters && selectedFilters.tag ? selectedFilters.tag : [];
@@ -360,46 +357,49 @@
             }));
           this.set('speakersToRender', updatedSpeakers);
         }
-      },
-      _setHelmetData: function (active, isSpeakerDialogOpened, isSessionDialogOpened) {
-        return active && !isSpeakerDialogOpened && !isSessionDialogOpened;
-      },
+      }
 
-      _onFiltersLoad: function (filters) {
+      _openSpeakerDetails(active, speakers, speakersMap, id) {
+        if (speakers && speakers.length) {
+          requestAnimationFrame(() => {
+            if (active && id) {
+              const speakerData = speakersMap[id];
+              speakerData && dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
+            } else {
+               this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
+               this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
+            }
+          });
+        }
+      }
+
+      _setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened) {
+        return active && !isSpeakerDialogOpened && !isSessionDialogOpened;
+      }
+
+      _onFiltersLoad(filters) {
         this.set('_filters', [{
           title: '{$ filters.tags $}',
           key: 'tag',
           items: filters.tags,
         }]);
-      },
+      }
 
-      _paramsUpdated: function (queryParams) {
+      _paramsUpdated(queryParams) {
         this.set('_selectedFilters', this.parseQueryParamsFilters(queryParams));
-      },
+      }
 
-      _filterItems: function (speakers, selectedFilters) {
+      _filterItems(speakers, selectedFilters) {
         return speakers.filter((speaker) => {
           if (!selectedFilters || !selectedFilters.length) return true;
           return speaker.tags
             && !!speaker.tags.filter((tag) =>
               selectedFilters.includes(this.generateClassName(tag))).length;
         });
-      },
-      parseQueryParamsFilters(queryParams) {
-      return queryParams.split('&')
-        .map((query) => query.split('='))
-        .filter((filter) => filter[0] && filter[1])
-        .reduce((aggr, filter) => Object.assign({}, aggr, {
-          [filter[0]]: aggr[filter[0]]
-            ? aggr[filter[0]].concat(filter[1])
-            : [filter[1]],
-        }), {});
-    },
+      }
+    }
 
-    });
-
-
-    // window.customElements.define(SpeakersPage.is, SpeakersPage);
+    window.customElements.define(SpeakersPage.is, SpeakersPage);
 
   </script>
 </dom-module>
