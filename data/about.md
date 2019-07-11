@@ -1,13 +1,12 @@
+## Mission and Values
 
-## Mission and Values  
-  
 ### Mission Statement
 
 RadicalxChange aims to build a clear, coherent, and sustainable alternative to capitalism that embraces markets, egalitarianism, community, and decentralization.
 
 #### Method:
 
-Replacing capitalism from within by developing ideas, communities, and organizations that practice fairer and more efficient forms of organization.
+Developing ideas, communities, and organizations that practice fairer and more efficient forms of organization.
 
 - Challenging basic inherited institutions by building better ones
 - Increasing public knowledge about the emancipatory potential of new ideas in mechanism design
@@ -16,7 +15,7 @@ Replacing capitalism from within by developing ideas, communities, and organizat
 #### Future we believe in:
 
 A world where power rests in diverse democratic organizations.
-  
+
 ### Core Values
 
  - **Openness**: RadicalxChange is open. It seeks to facilitate a free exchange of ideas in an environment of thoughtful discourse.
@@ -32,43 +31,43 @@ A world where power rests in diverse democratic organizations.
  - **Social Justice Mission**: RadicalxChange is primarily devoted to achieving its social justice mission, rather than achieving the private goals of any member. RadicalxChange should not become a source of personal enrichment for any individual to the exclusion of the community.
  - **Respect**: RadicalxChange community members treat each other as epistemic and social equals and should aim to empathize with the intellectual and personal perspective each member of the community brings to the table.
 
-  
-## Our Community  
-    
-### Community Overview  
-  
+
+## Our Community
+
+### Community Overview
+
 
 RadicalxChange is an inclusive, open community that seeks to promote rich and meaningful connections across a wide range of people from all walks of life. We believe in diversity of opinion and representation across different ethnicities and races, genders and sexual orientations, religions, nationalities, and socio-economic and professional backgrounds.
 
-  
-We have four primary ‘tracks’ in our community, across which we actively promote dialogue and the xChange of ideas, passions, partnered experimentations and building - namely, Activism and Government, Arts and Communications, Entrepreneurship and Technology and Ideas and Research.
-  
+
+We look at our community as an assembly of four basic ‘tracks’, across which we actively promote dialogue and xChange of ideas, passions, partnered experimentations and building.  The tracks are: Activism and Government, Environment and Arts, Entrepreneurship and Technology, and Ideas and Research.
+
 ### Local Chapters and Meetups
 
-RadicalxChange chapters are self-organized community groups working to educate and experiment with egalitarian market mechanisms.  Finding or founding a local chapter is a great way to learn and contribute to the ongoing conversation.  Please note that RadicalxChange Foundation Ltd. does not direct, and is not responsible for, the actions or events of local chapters or chapter organizers.
+RadicalxChange chapters are self-organized community groups working to build, experiment with, and educate about egalitarian market mechanisms.  Finding or founding a local chapter is a great way to learn and contribute to the ongoing conversation.  Please note that RadicalxChange Foundation Ltd. does not direct the actions or events of local chapters or chapter organizers.
 
-If you would like to sign up to start a chapter, please fill out [this form](https://forms.gle/UQ6FtuC7rEf42cqE9). 
-  
-### Activism and Government 
+If you would like to sign up to start a chapter, please fill out [this form](https://forms.gle/UQ6FtuC7rEf42cqE9).
+
+### Activism and Government
 
 #### Track Lead
 
-[Mark Lutter](https://www.linkedin.com/in/mark-lutter-a23a7669)
+[Natalia Olson-Urtecho](https://www.linkedin.com/in/nataliaolsonurtecho/)
 
 #### Participation
 
 Activism and Government is a collection of community-builders and change agents. Action oriented, pragmatic, and experimental individuals who build bridges from ideas to institutions and communities. Included in this track are politicians, policymakers, government bureaucrats, non-profit sector, labor unions, political campaigns and parties, lobbyists, “social media stars”, athletes, and short-form journalists.
 
 
-### Arts and Communications
+### Environment and Arts
 
 #### Track Lead
 
-[Jennifer Morone](https://www.linkedin.com/in/jennifermorone)
+[Mary Ellen Carroll](https://www.linkedin.com/in/mary-ellen-carroll-b335b589/)
 
 #### Participation
 
-Arts and Communications is a collection of creative, abstract, expressive, critical, out-of-the-box thinkers who create powerful, interactive, thought-provoking experiences. These individuals have the ability to communicate subtle, sophisticated insights to wide audiences. Participants in this track include artists, filmmakers, creative writers, long-form journalists, educators, musicians, entertainers, web designers, collectible makers, game-makers and virtual reality experience creators.
+Environment and Arts is a collection of creative, abstract, expressive, critical, out-of-the-box thinkers who create powerful, thought-provoking experiences that draw attention to our wider cultural and environmental context.  Participants in this track include artists, environmentalists, filmmakers, creative writers, long-form journalists, educators, musicians, entertainers, web designers, game-makers and virtual reality builders.
 
 ### Entrepreneurship and Technology
 
@@ -78,7 +77,7 @@ Arts and Communications is a collection of creative, abstract, expressive, criti
 
 #### Participation
 
-Entrepreneurship and Technology is a collection of doers and builders who challenge norms and turn ideas into action. These individuals can supercharge movements by connecting ideas with markets. Participants in this track include entrepreneurs, technologists, engineers, developers, executives, investors, all for-profit business leaders and employees and blockchain community members.
+Entrepreneurship and Technology is a collection of doers and builders who challenge norms and turn ideas into action. These individuals can supercharge movements by connecting ideas with markets. Participants include entrepreneurs, technologists, engineers, developers, executives, investors, all for-profit business leaders and employees and blockchain community members.
 
 ### Ideas and Research
 
@@ -89,6 +88,3 @@ Entrepreneurship and Technology is a collection of doers and builders who challe
 #### Participation
 
 Ideas and Research is a collection of experts and specialists. Rigorous, thoughtful individuals who synthesize information, scrutinize ideas, both theoretically and empirically, and generate new intellectual insights and refinements. Included in this track are academics, public intellectuals, bloggers, researchers, think tankers, non-fiction book authors and literary critics.
-  
-
-  
