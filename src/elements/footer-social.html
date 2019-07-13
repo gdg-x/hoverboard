@@ -48,10 +48,6 @@
         margin: 0;
       }
 
-      .share-gplus  {
-        color: var(--gplus-color);
-      }
-
       .share-twitter {
         color: var(--twitter-color);
       }
@@ -145,18 +141,6 @@
     <div class="social-group share-block">
       <div class="title">{$ share $}</div>
       <div class="nav-inline">
-        <div class="share">
-          <paper-icon-button
-            class="share-gplus"
-            icon="hoverboard:gplus"
-            share="gplus"
-            on-tap="share"
-            ga-on="click"
-            ga-event-category="social"
-            ga-event-action="share"
-            ga-event-label="gplus">
-          </paper-icon-button>
-        </div>
         <div class="share">
           <paper-icon-button
             class="share-facebook"
