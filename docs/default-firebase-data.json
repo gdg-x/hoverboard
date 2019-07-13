@@ -1,16 +1,6 @@
 {
   "blog": {},
   "gallery": [
-    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/site_image_2.jpeg?alt=media&token=ae0a06f5-ac62-46d7-adec-62d70cae4bf9",
-    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/site_image_1.jpeg?alt=media&token=0718c239-0fc8-4a70-a41c-49d9d8917808",
-    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/IMG_6507.jpg?alt=media&token=19e8fd37-224c-40e9-8ec3-77f6b42f6bc9",
-    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/IMG_5569.jpg?alt=media&token=9cf92b20-cf71-48fd-8ef3-e26093469fa1",
-    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/IMG_5532.jpg?alt=media&token=faf3e378-5adb-4ed2-aeb6-8a5cdc312954",
-    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/IMG_1886.jpg?alt=media&token=36189fad-690d-4697-b0cd-ba71770499cf",
-    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/IMG_1838.jpg?alt=media&token=9d34d340-042f-46ed-805b-22311815d0ca",
-    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/IMG_1810.jpg?alt=media&token=a2809111-c70e-44ed-af55-8b2098ff9afd"
-  ],
-  "becomeSponsorGallery": [
     "https://firebasestorage.googleapis.com/v0/b/sunnytechwebsite.appspot.com/o/Sunny%20Tech%20-%202019.06.27%20-%20019.jpg?alt=media&token=b010eb7f-3445-4242-bf00-a0c875dcea84",
     "https://firebasestorage.googleapis.com/v0/b/sunnytechwebsite.appspot.com/o/Sunny%20Tech%20-%202019.06.27%20-%20069.jpg?alt=media&token=019069dd-acc8-4038-a491-ce3be2d5f78e",
     "https://firebasestorage.googleapis.com/v0/b/sunnytechwebsite.appspot.com/o/Sunny%20Tech%20-%202019.06.27%20-%20092.jpg?alt=media&token=f0d14ab9-5379-42f2-875a-00150db0a7da",
@@ -19,6 +9,16 @@
     "https://firebasestorage.googleapis.com/v0/b/sunnytechwebsite.appspot.com/o/Sunny%20Tech%20-%202019.06.27%20-%20299.jpg?alt=media&token=3f7fa223-83ce-4165-b8da-344fd04c705f",
     "https://firebasestorage.googleapis.com/v0/b/sunnytechwebsite.appspot.com/o/Sunny%20Tech%20Repas%20Speakers%20-%202019.06.26%20-%20009.jpg?alt=media&token=463e7078-1e6f-4665-a33e-2ecdf37261ca",
     "https://firebasestorage.googleapis.com/v0/b/sunnytechwebsite.appspot.com/o/Sunny%20Tech%20Repas%20Speakers%20-%202019.06.26%20-%20018.jpg?alt=media&token=f8a645db-4b5f-4863-8cb5-a64f6fdb29b9"
+  ],
+  "becomeSponsorGallery": [
+    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_6473.jpg?alt=media&token=74cf0b96-5f93-4be9-b150-389b700b1447",
+    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_5940.jpg?alt=media&token=9956bab1-a4a1-4022-bbd9-5e479df3bd26",
+    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_5668.jpg?alt=media&token=54d7106e-6011-4048-868c-1122116f77ec",
+    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_6103.jpg?alt=media&token=fe4e83ee-c69f-4540-af31-6ceaf14c7cb3",
+    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_1759.jpg?alt=media&token=06df15fd-6a8e-484f-8b1f-e59ea134de3d",
+    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_1770.jpg?alt=media&token=8da5b16e-98ec-4906-83ed-14550ca2e27f",
+    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_1721.jpg?alt=media&token=52f977fa-307a-4812-b254-85d04a58f8fb",
+    "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_1717.jpg?alt=media&token=d42f8de2-8a7b-4f48-85f0-b38967d3571f"
   ],
   "notifications": {
     "config": {
