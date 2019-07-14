@@ -20,12 +20,19 @@ jobs:
       - run:
           name: Build project
           command: 'yarn build'
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - ./node_modules
+            - ./build
 
   deploy:
     working_directory: /app
     docker:
       - image: node:10
     steps:
+      - attach_workspace:
+          at: ./
       - run:
           name: LS
           command: ls
