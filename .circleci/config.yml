@@ -27,6 +27,9 @@ jobs:
       - image: node:10
     steps:
       - run:
+          name: LS
+          command: ls
+      - run:
           name: Deploy
           command: ./node_modules/.bin/firebase deploy --only hosting --token "$FIREBASE_TOKEN"
 
