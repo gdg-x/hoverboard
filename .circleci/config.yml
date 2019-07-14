@@ -7,9 +7,19 @@ jobs:
     docker:
       - image: node:10
     steps:
+      - checkout
+      - run:
+          name: list
+          command: 'ls'
+      - run:
+          name: test
+          command: 'pwd'
       - run:
           name: Install dependencies
           command: 'yarn install'
       - run:
           name: Run lint
           command: 'yarn lint'
+      - run:
+          name: Run build
+          command: 'yarn build'
