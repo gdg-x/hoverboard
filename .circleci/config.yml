@@ -37,9 +37,6 @@ jobs:
       - attach_workspace:
           at: ./
       - run:
-          name: LS
-          command: ls
-      - run:
           name: Deploy
           command: ./node_modules/.bin/firebase deploy --only hosting --project devfest-strasbourg-vitrine --token "$FIREBASE_TOKEN"
 
