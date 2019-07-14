@@ -41,7 +41,7 @@ jobs:
           command: ls
       - run:
           name: Deploy
-          command: ./node_modules/.bin/firebase deploy --only hosting --token "$FIREBASE_TOKEN"
+          command: ./node_modules/.bin/firebase deploy --only hosting --project devfest-strasbourg-vitrine --token "$FIREBASE_TOKEN"
 
 workflows:
   version: 2.1
