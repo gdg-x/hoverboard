@@ -24,6 +24,9 @@ jobs:
           root: ./
           paths:
             - ./node_modules
+            - ./functions
+            - ./.firebaserc
+            - ./firebase.json
             - ./build
 
   deploy:
