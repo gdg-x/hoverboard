@@ -85,7 +85,7 @@
       return Promise.all(
           modules.map((module) => new Promise((resolve, reject) => {
             const script = document.createElement('script');
-            script.src = `bower_components/firebase/${module}.js`;
+            script.src = `node_modules/firebase/${module}.js`;
             script.async = false;
             script.onload = () => resolve();
             script.onerror = (error) => reject(error);
@@ -105,9 +105,11 @@
       'firebase-firestore',
       'firebase-auth',
       'firebase-messaging',
+      'firebase-performance',
     ])
         .then(() => {
           firebase.initializeApp({
+            appId: '{$ firebase.appId $}',
             apiKey: '{$ firebase.apiKey $}',
             authDomain: '{$ firebase.authDomain $}',
             databaseURL: '{$ firebase.databaseURL $}',
@@ -116,6 +118,7 @@
             messagingSenderId: '{$ firebase.messagingSenderId $}',
           });
 
+          firebase.performance();
           firebase.firestore()
               .enablePersistence({ tabSynchronization: true })
               .catch(() => {
@@ -128,7 +131,7 @@
 
   </script>
 
-  <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
   <link href="src/hoverboard-app.html" rel="import">
   <script async defer src="scripts/service-worker-registration.js"></script>
 
