@@ -11,5 +11,5 @@ jobs:
           name: Install dependencies
           command: 'yarn install'
       - run:
-          name: Run test
-          command: 'yarn test'
+          name: Run lint
+          command: 'yarn lint'
