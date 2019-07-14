@@ -12,17 +12,32 @@ jobs:
           name: Reconfigure bower
           command: "echo '{ \"allow_root\": true }' > /root/.bowerrc"
       - run:
-          name: list
-          command: 'ls'
-      - run:
-          name: test
-          command: 'pwd'
-      - run:
           name: Install dependencies
           command: 'yarn install'
       - run:
-          name: Run lint
+          name: Lint project
           command: 'yarn lint'
       - run:
-          name: Run build
+          name: Build project
           command: 'yarn build'
+
+  deploy:
+    working_directory: /app
+    docker:
+      - image: node:10
+    steps:
+      - run:
+          name: Deploy
+          command: ./node_modules/.bin/firebase deploy --only hosting --token "$FIREBASE_TOKEN"
+
+workflows:
+  version: 2.1
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          # filters:
+          #   branches:
+          #     only: master
