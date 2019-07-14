@@ -1,0 +1,56 @@
+# Use the latest 2.1 version of CircleCI pipeline processing engine, see https://circleci.com/docs/2.0/configuration-reference/
+version: 2.1
+
+jobs:
+  build:
+    working_directory: /app
+    docker:
+      - image: node:10
+    steps:
+      - checkout
+      - run:
+          name: Reconfigure bower
+          command: "echo '{ \"allow_root\": true }' > /root/.bowerrc"
+      - run:
+          name: Install dependencies
+          command: 'yarn install'
+      - run:
+          name: Lint project
+          command: 'yarn lint'
+      - run:
+          name: Build project
+          command: 'yarn build'
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - ./node_modules
+            - ./functions
+            - ./.firebaserc
+            - ./firebase.json
+            - ./build
+
+  deploy:
+    working_directory: /app
+    docker:
+      - image: node:10
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: LS
+          command: ls
+      - run:
+          name: Deploy
+          command: ./node_modules/.bin/firebase deploy --only hosting --project devfest-strasbourg-vitrine --token "$FIREBASE_TOKEN"
+
+workflows:
+  version: 2.1
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
