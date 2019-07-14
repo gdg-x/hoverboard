@@ -10,7 +10,7 @@ jobs:
       - checkout
       - run:
           name: Reconfigure bower
-          command: 'echo \'{ "allow_root": true }\' > /root/.bowerrc'
+          command: 'echo '{ "allow_root": true }' > /root/.bowerrc'
       - run:
           name: list
           command: 'ls'
