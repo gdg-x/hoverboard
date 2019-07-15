@@ -41,6 +41,18 @@
         background: var(--primary-background-color);
         text-align: center;
         transition: box-shadow var(--animation);
+        display: block;
+      }
+      .shadowBlocker{
+        position: relative;
+      }
+      .shadowBlocker::after{
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left:0;
+        top:0;
       }
 
       .speaker:hover {
@@ -240,7 +252,7 @@
            ga-event-action="open details"
            ga-event-label$="[[speaker.name]]"
            id="[[speaker.id]]">
-          <div relative>
+          <div class="shadowBlocker">
             <plastic-image
               class="photo"
               srcset="[[speaker.photoUrl]]"
@@ -248,7 +260,6 @@
               lazy-load preload fade
             ></plastic-image>
           </div>
-        </div>
 
           <plastic-image
             class="company-logo"
@@ -281,7 +292,7 @@
       </template>
     </div>
 
-    <previous-speakers-block></previous-speakers-block>
+    <!-- <previous-speakers-block></previous-speakers-block> -->
 
     <footer-block></footer-block>
 
@@ -332,24 +343,35 @@
       },
       observers: function () {
         return [
-          // '_openSpeakerDetails(active, speakers, speakersMap, routeData.speakerId)',
+          '_routeOpenSpeakers(active, speakers, speakersMap, routeData.speakerId)',
           '_speakersChanged(speakers, _selectedFilters)',
         ];
       },
-      _openSpeakerDetails: function (e) {
-        var path = e.path[0].closest('a');
-        var id = path.id;
+      _routeOpenSpeakers(active, speakers, speakersMap, id) {
+        if (speakers && speakers.length) {
+          requestAnimationFrame(() => {
+            if (active && id) {
+              const speakerData = speakersMap[id];
+              speakerData && dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
+            } else {
+               this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
+               this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
+            }
+          });
+        }
+      },
 
+      _openSpeakerDetails: function (e) {
+        var a = e.target.closest('a');
+        var id = a.id;
         if (this.speakersToRender && this.speakersToRender.length) {
           requestAnimationFrame(() => {
             if (this.active && id) {
               const speakerData = this.speakersToRender.find( (speaker) => speaker.id === id);
               speakerData && dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
-              this.active = false;
             } else {
                this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
                this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
-               this.active = true;
             }
           });
         }
