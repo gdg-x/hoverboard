@@ -238,7 +238,8 @@
            ga-on="click"
            ga-event-category="speaker"
            ga-event-action="open details"
-           ga-event-label$="[[speaker.name]]">
+           ga-event-label$="[[speaker.name]]"
+           id="[[speaker.id]]">
           <div relative>
             <plastic-image
               class="photo"
@@ -331,21 +332,24 @@
       },
       observers: function () {
         return [
-          '_openSpeakerDetails(active, speakers, speakersMap, routeData.speakerId)',
+          // '_openSpeakerDetails(active, speakers, speakersMap, routeData.speakerId)',
           '_speakersChanged(speakers, _selectedFilters)',
         ];
       },
-      _openSpeakerDetails: function (active, speakers, speakersMap, id) {
-        // console.log("open speaker details", this.active, this.speakersToRender, speakers)
+      _openSpeakerDetails: function (e) {
+        var path = e.path[0].closest('a');
+        var id = path.id;
+
         if (this.speakersToRender && this.speakersToRender.length) {
           requestAnimationFrame(() => {
-            // console.log(active, this.id)
-            if (this.active && this.id) {
-              const speakerData = speakersMap[id];
+            if (this.active && id) {
+              const speakerData = this.speakersToRender.find( (speaker) => speaker.id === id);
               speakerData && dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
+              this.active = false;
             } else {
                this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
                this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
+               this.active = true;
             }
           });
         }
