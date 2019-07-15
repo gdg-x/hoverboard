@@ -170,10 +170,6 @@
     ],
     "share": [
       {
-        "name": "gplus",
-        "url": "https://plus.google.com/share?url="
-      },
-      {
         "name": "facebook",
         "url": "https://www.facebook.com/sharer.php?u="
       },
@@ -184,10 +180,6 @@
     ]
   },
   "mailto": "devfest@gdg.org.ua",
-  "mailchimp": {
-    "url": "https://gdg.us11.list-manage.com/subscribe/post?u=b7e853a79164ddfdbda3ed77b&amp;id=7993e39fbe",
-    "name": "b_b7e853a79164ddfdbda3ed77b_7993e39fbe"
-  },
   "signInProviders": {
     "providersData": [
       {

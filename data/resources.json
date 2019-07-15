@@ -42,7 +42,7 @@
         },
         {
           "name": "Google Developers Group",
-          "url": "https://developers.google.com/",
+          "url": "https://developers.google.com/groups/",
           "newTab": true
         },
         {
@@ -223,7 +223,7 @@
     "subscribe": "Subscribe",
     "subscribed": "Subscribed",
     "close": "Close",
-    "generalError": "Some error has occured. Please, try again later.",
+    "generalError": "An error has occurred. Please, try again later.",
     "toast": "Successfully subscribed!"
   },
   "team": {

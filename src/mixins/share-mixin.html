@@ -6,7 +6,7 @@
     share(e) {
       const type = e.currentTarget.getAttribute('share');
       const shareUrl = location.href;
-      let width = 600;
+      const width = 600;
       let height = 600;
       const winOptions = `menubar=no,toolbar=no,resizable=yes,scrollbars=yes,` +
         `height=${height},width=${width}`;
@@ -18,14 +18,6 @@
           height = 229;
           url = `https://www.facebook.com/sharer.php?` +
             `u=${encodeURIComponent(shareUrl)}&t=${encodeURIComponent(title)}`;
-          break;
-        }
-        case 'gplus': {
-          height = 348;
-          width = 512;
-          url = `https://plus.google.com/share?` +
-            `url=${encodeURIComponent(shareUrl)}` +
-            `&hl=${encodeURIComponent(document.documentElement.lang)}`;
           break;
         }
         case 'twitter': {
