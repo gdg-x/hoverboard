@@ -1,0 +1,40 @@
+<link rel="import" href="../mixins/redux-mixin.html">
+<script>
+  /* eslint-disable no-unused-vars */
+
+  /* @polymerMixin */
+  const SessionsHoC = (subclass) => class extends ReduxMixin(subclass) {
+    static get properties() {
+      return {
+        sessions: {
+          type: Array,
+          statePath: 'sessions.list',
+        },
+        sessionsMap: {
+          type: Object,
+          statePath: 'sessions.obj',
+        },
+        sessionsBySpeaker: {
+          type: Object,
+          statePath: 'sessions.objBySpeaker',
+        },
+        sessionsFetching: {
+          type: Boolean,
+          statePath: 'sessions.fetching',
+        },
+        sessionsFetchingError: {
+          type: Object,
+          statePath: 'sessions.fetchingError',
+        },
+      };
+    }
+
+    connectedCallback() {
+      super.connectedCallback();
+
+      if (!this.sessionsFetching && (!this.sessions || !this.sessions.length)) {
+        this.dispatch(sessionsActions.fetchList());
+      }
+    }
+  };
+</script>

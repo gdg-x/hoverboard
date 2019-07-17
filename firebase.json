@@ -2,21 +2,56 @@
   "database": {
     "rules": "database.rules.json"
   },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
   "hosting": {
     "public": "./build",
-    "cleanUrls": true,
-    "rewrites": [
-      {
-        "source": "**/*",
-        "destination": "/index.html"
-      }
-    ],
+    "redirects": [{
+      "source": "/index.html",
+      "destination": "/",
+      "type" : 301
+    }],
+    "rewrites": [{
+      "source": "**",
+      "function": "prerender"
+    }],
     "ignore": [
       "/test/**",
       "bower.json",
       "database.rules.json",
       "firebase.json",
       "README.md"
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "key": "X-Frame-Options",
+            "value": "DENY"
+          },
+          {
+            "key": "X-XSS-Protection",
+            "value": "1; mode=block"
+          },
+          {
+            "key": "Referrer-Policy",
+            "value": "same-origin"
+          }
+        ]
+      }
+    ]
+  },
+  "functions": {
+    "predeploy": [
+      "npm run predeploy",
+      "npm --prefix ./functions run build"
     ]
   }
 }

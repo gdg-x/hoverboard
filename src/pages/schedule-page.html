@@ -1,222 +1,271 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <link rel="import" href="../../bower_components/app-route/app-route.html">
-<link rel="import" href="../../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
+<link rel="import" href="../../bower_components/app-route/app-route-converter.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/iron-location/iron-location.html">
+<link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
 
-<link rel="import" href="../../bower_components/iron-image/iron-image.html">
-<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
-
-<link rel="import" href="../../bower_components/paper-card/paper-card.html">
-
-<link rel="import" href="../../bower_components/neon-animation/neon-animated-pages.html">
-
-<link rel="import" href="../../bower_components/polymerfire/firebase-document.html">
-
-<link rel="import" href="../elements/schedule-subnav.html">
+<link rel="import" href="../mixins/utils-functions.html">
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="../mixins/speakers-hoc.html">
+<link rel="import" href="../mixins/sessions-hoc.html">
+<link rel="import" href="../elements/shared-styles.html">
+<link rel="import" href="../elements/sticky-element.html">
+<link rel="import" href="../elements/header-bottom-toolbar.html">
 <link rel="import" href="../elements/schedule-day.html">
+<link rel="import" href="../elements/content-loader.html">
 <link rel="import" href="../elements/my-schedule.html">
-
-<link rel="import" href="../elements/session-details.html">
-<link rel="import" href="../behaviors/utils-behavior.html">
-<link rel="import" href="../behaviors/page-behavior.html">
-<link rel="import" href="../behaviors/cascaded-behavior.html">
+<link rel="import" href="../elements/filter-menu.html">
 
 
 <dom-module id="schedule-page">
-
   <template>
-
-    <style include="shared-styles">
+    <style include="shared-styles flex flex-alignment">
       :host {
         display: block;
+        height: 100%;
       }
 
-      .container[phone] {
-        padding-right: 0;
-        padding-left: 0;
+      .container {
+        min-height: 80%;
       }
 
-      schedule-day {
-        margin-bottom: 64px;
+      paper-progress {
+        width: 100%;
+        --paper-progress-active-color: var(--default-primary-color);
+        --paper-progress-secondary-color: var(--default-primary-color);
       }
+
+      @media (max-width: 640px) {
+        .container {
+          padding: 0 0 32px;
+        }
+      }
+
+      @media (min-width: 640px) {
+        :host {
+          background-color: #fff;
+        }
+      }
+
     </style>
 
+    <polymer-helmet
+      title="{$ heroSettings.schedule.title $} | {$ title $}"
+      description="{$ heroSettings.schedule.metaDescription $}"
+      active="[[_setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened)]]"
+    ></polymer-helmet>
+
+    <iron-location query="{{queryParams}}"></iron-location>
+
     <app-route
-      route="{{route}}"
-      pattern="/:day"
+      route="{{appRoute}}"
+      pattern="/:page"
       data="{{routeData}}"
-      query-params="{{queryParams}}"
+      tail="{{subroute}}"
+      query-params="{{nQueryParams}}"
     ></app-route>
 
-    <firebase-document
-      id="userSessions"
-      app-name="{$ firebase.name $}"
-      path="{$ firebase.userSessionsPath $}/[[app.user.uid]]"
-      data="{{persistedData}}">
-    </firebase-document>
+    <app-route
+      route="[[route]]"
+      pattern="/:day"
+      data="{{routeData}}"
+    ></app-route>
 
-    <app-indexeddb-mirror
-      session="{$ firebase.indexedDbSession $}"
-      key="mySchedule"
-      data="{{persistedData}}"
-      persisted-data="{{app.user.sessions}}">
-    </app-indexeddb-mirror>
+    <hero-block
+      background-image="{$ heroSettings.schedule.background.image $}"
+      background-color="{$ heroSettings.schedule.background.color $}"
+      font-color="{$ heroSettings.schedule.fontColor $}"
+      active="[[active]]"
+    >
+      <div class="hero-title highlight-font">{$ heroSettings.schedule.title $}</div>
+      <p class="hero-description">{$ heroSettings.schedule.description $}</p>
+      <sticky-element slot="bottom" active="[[active]]">
+        <header-bottom-toolbar></header-bottom-toolbar>
+      </sticky-element>
+    </hero-block>
 
-    <div class="container" phone$="{{app.isPhoneSize}}">
-      <schedule-subnav
-        app="{{app}}"
-        schedule="[[schedule]]"
-        selected-day="[[app.selectedDay]]"
-        filters="{{filters}}"
-      ></schedule-subnav>
+    <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
-      <neon-animated-pages selected="[[app.selectedDay]]" attr-for-selected="name">
-        <template is="dom-repeat" items="[[schedule]]" as="day" on-dom-change="updateCascadedNodes">
+    <filter-menu
+      filters="[[_filters]]"
+      selected="[[_selectedFilters]]"
+    ></filter-menu>
+
+    <div class="container">
+      <content-loader
+        card-padding="15px"
+        card-margin="16px 0"
+        card-height="140px"
+        avatar-size="0"
+        avatar-circle="0"
+        title-top-position="20px"
+        title-height="42px"
+        title-width="70%"
+        load-from="-20%"
+        load-to="80%"
+        blur-width="300px"
+        items-count="{$ contentLoaders.schedule.itemsCount $}"
+        hidden$="[[contentLoaderVisibility]]" layout>
+      </content-loader>
+
+      <iron-pages
+        attr-for-selected="name"
+        selected="[[subRoute]]"
+        selected-attribute="active"
+      >
+        <template is="dom-repeat" items="[[schedule]]" as="day">
           <schedule-day
-            name$="day[[_addToValue(index, 1)]]"
-            app="{{app}}"
+            name$="[[day.date]]"
             day="[[day]]"
-            filters="[[filters]]"
+            user="[[user]]"
+            featured-sessions="[[featuredSessions]]"
+            selected-filters="[[_selectedFilters]]"
+            viewport="[[viewport]]"
+            query-params="[[queryParams]]"
           ></schedule-day>
         </template>
-        <template is="dom-if" if="{{app.user}}">
-          <my-schedule
-            name="myschedule"
-            app="{{app}}"
-            schedule="[[schedule]]"
-          ></my-schedule>
-        </template>
-      </neon-animated-pages>
+        <my-schedule
+          name="my-schedule"
+          schedule="[[schedule]]"
+          user="[[user]]"
+          featured-sessions="[[featuredSessions]]"
+          selected-filters="[[_selectedFilters]]"
+          viewport="[[viewport]]"
+          query-params="[[queryParams]]"
+        ></my-schedule>
+      </iron-pages>
     </div>
 
-    <session-details
-      id="sessionDetails"
-      app="{{app}}"
-      session="[[_selectedSession]]"
-      entry-animation="scale-up-animation"
-      exit-animation="fade-out-animation"
-      with-backdrop
-    ></session-details>
-
+    <footer-block></footer-block>
   </template>
 
   <script>
-    (function () {
-      'use strict';
 
-      Polymer({
+    // eslint-disable-next-line no-undef
+    class SchedulePage extends UtilsFunctions(ReduxMixin(SessionsHoC(SpeakersHoC(Polymer.Element)))) {
+      static get is() {
+        return 'schedule-page';
+      }
 
-        is: 'schedule-page',
-
-        behaviors: [
-          HOVERBOARD.PageBehavior,
-          HOVERBOARD.CascadedBehavior,
-          HOVERBOARD.UtilsBehavior
-        ],
-
-        properties: {
-          route: {
-            type: Object,
-            notify: true
-          },
-
-          routeData: {
-            type: Object
-          },
-
+      static get properties() {
+        return {
+          route: Object,
+          queryParams: Object,
+          active: Boolean,
           schedule: {
-            type: Array
+            type: Array,
+            statePath: 'schedule',
           },
-
-          sessions: {
-            type: Object
+          featuredSessions: {
+            type: Object,
+            statePath: 'sessions.featured',
           },
-
+          user: {
+            type: Object,
+            statePath: 'user',
+          },
+          subRoute: {
+            type: Object,
+            statePath: 'routing.subRoute',
+          },
+          isSpeakerDialogOpened: {
+            type: Object,
+            statePath: 'dialogs.speaker.isOpened',
+          },
+          isSessionDialogOpened: {
+            type: Object,
+            statePath: 'dialogs.session.isOpened',
+          },
+          contentLoaderVisibility: String,
+          viewport: {
+            type: Object,
+            statePath: 'ui.viewport',
+          },
           filters: {
-            type: Array
-          }
-        },
+            type: Object,
+            statePath: 'filters',
+            observer: '_onFiltersLoad',
+          },
+          _selectedFilters: Object,
+        };
+      }
 
-        observers: [
-          '_routePageChanged(routeData.day)',
-          '_userChanged(app.user)',
-          '_queryParamsChanged(queryParams, sessions)',
-          '_filtersChanged(filters.splices)'
-        ],
+      static get observers() {
+        return [
+          '_setDay(active, routeData.day, schedule)',
+          '_openSessionDetails(active, sessions, _selectedFilters.sessionId)',
+          '_fetchFeaturedSessions(active, sessions, user.uid)',
+          '_scheduleChanged(schedule, _selectedFilters)',
+          '_sessionsAndSpeakersChanged(sessions, speakers)',
+          '_paramsUpdated(queryParams)',
+        ];
+      }
 
-        listeners: {
-          'iron-overlay-closed': '_resetSessionIdParam'
-        },
-
-        _routePageChanged: function (day) {
-          if (this.selected) {
-            if (!day) {
-              var dayToSelect = null;
-              var today = new Date().toISOString().substring(0, 10);
-              if (this.schedule) {
-                for (var i = 0, length = this.schedule.length; i < length; i++) {
-                  if (today === this.schedule[i].date) {
-                    dayToSelect = 'day' + (i + 1);
-                  }
-                }
-              }
-              this.set('routeData.day', (dayToSelect || 'day1'));
-            } else if (day === 'myschedule' && !this.app.user) {
-              this.set('routeData.day', 'day1');
-            } else if (this.app.selectedDay !== day) {
-              this.set('app.selectedDay', day);
-            }
-          }
-        },
-
-        _queryParamsChanged: function (params, sessions) {
-          if (this.selected) {
-            if (params.sessionId) {
-              var session = this.sessions[params.sessionId];
-              if (!session) {
-                this._resetSessionIdParam();
-                return;
-              }
-
-              window.requestAnimationFrame(function () {
-                this._selectedSession = session;
-                this.$.sessionDetails.open();
-              }.bind(this));
-            } else {
-              window.requestAnimationFrame(function () {
-                this.$.sessionDetails.cancel();
-              }.bind(this));
-            }
-            if (params.filters) {
-              this.set('filters', params.filters.split(','));
-            } else {
-              this.set('queryParams.filters', null);
-            }
-          }
-        },
-
-        _filtersChanged: function () {
-          if (this.filters.length) {
-            this.set('queryParams.filters', this.filters.join(','));
-          }
-          else {
-            this.set('queryParams.filters', null);
-          }
-        },
-
-        _resetSessionIdParam: function () {
-          !this.$.sessionDetails.opened && this.set('queryParams.sessionId', null);
-        },
-
-        _userChanged: function (user) {
-          if (!user && this.app.selectedDay === 'myschedule') {
-            this.set('routeData.day', 'day1');
-          }
+      _sessionsAndSpeakersChanged(sessions, speakers) {
+        if (!this.schedule.length
+          && sessions && sessions.length && speakers && speakers.length) {
+          this.dispatch(scheduleActions.fetchSchedule());
         }
+      }
 
-      });
+      _scheduleChanged(schedule) {
+        if (schedule.length) {
+          this.contentLoaderVisibility = 'hidden';
+        }
+      }
 
-    }());
+      _fetchFeaturedSessions(active, sessions, userUid) {
+        if (active && userUid && sessions && sessions.length &&
+          (!this.featuredSessions || !Object.keys(this.featuredSessions).length)) {
+          this.dispatch(sessionsActions.fetchUserFeaturedSessions(userUid));
+        }
+      }
+
+      _setDay(active, day, schedule) {
+        if (active && schedule.length) {
+          const selectedDay = day || schedule[0].date;
+          routingActions.setSubRoute(selectedDay);
+        }
+      }
+
+      _openSessionDetails(active, sessions, id) {
+        if (sessions && sessions.length) {
+          requestAnimationFrame(() => {
+            if (active && id) {
+              dialogsActions.openDialog(DIALOGS.SESSION, this.sessionsMap[id[0]]);
+            } else {
+              this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
+              this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
+            }
+          });
+        }
+      }
+
+      _setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened) {
+        return active && !isSpeakerDialogOpened && !isSessionDialogOpened;
+      }
+
+      _onFiltersLoad(filters) {
+        this.set('_filters', [{
+          title: '{$ filters.tags $}',
+          key: 'tag',
+          items: filters.tags,
+        }, {
+          title: '{$ filters.complexity $}',
+          key: 'complexity',
+          items: filters.complexity,
+        }]);
+      }
+
+      _paramsUpdated(queryParams) {
+        this.set('_selectedFilters', this.parseQueryParamsFilters(queryParams));
+      }
+    }
+
+    window.customElements.define(SchedulePage.is, SchedulePage);
+
   </script>
-
 </dom-module>
+
