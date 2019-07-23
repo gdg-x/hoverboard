@@ -76,31 +76,31 @@
   "subscribeNote": "No spam, only the latest news and updates!",
   "codeOfConduct": "Code of Conduct",
   "aboutBlock": {
-    "title": "What you need to know, before you ask.",
+    "title": "Touchdown Auburn. 🏈",
     "callToAction": {
       "featuredSessions": {
-        "description": "GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases.",
+        "description": "DevFest 2019 includes 4 tracks - Web, mobile, Cloud, and AI/ML. Have fun with listening tech-sessions, codelabs & live-demos!",
         "label": "Explore featured session",
-        "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "link": ""
       },
       "howItWas": {
         "description": "Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
         "label": "See how it was in 2016",
-        "youtubeId": "TdpbgRgz6eE"
+        "youtubeId": ""
       }
     },
     "statisticsBlock": {
       "attendees": {
         "label": "Attendees",
-        "number": "900"
+        "number": "100+"
       },
       "days": {
-        "label": "Days",
-        "number": "2"
+        "label": "Day",
+        "number": "1"
       },
       "sessions": {
         "label": "Sessions",
-        "number": "50"
+        "number": "10+"
       },
       "tracks": {
         "label": "Tracks",
@@ -221,11 +221,11 @@
     }
   },
   "aboutOrganizerBlock": {
-    "image": "/images/team.jpg",
+    "image": "/images/gdg_cloud_auburn.png",
     "blocks": [
       {
         "title": "Organizer",
-        "description": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
+        "description": "<a href='https://www.meetup.com/GDG-Cloud-Auburn/'>GDG Cloud Auburn</a> is a community full with dazzling CS students from Auburn University and nearby universities. We build, talk and put in practice all techs Google has to offer for academic and research projects.",
         "callToAction": {
           "label": "Open team page",
           "link": "/team"
