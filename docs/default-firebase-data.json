@@ -506,7 +506,7 @@
       "featured" : false,
       "name" : "Brian Bolton",
       "photo" : "",
-      "photoUrl" : "",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/people-devfestauburn/o/brian.jpg?alt=media&token=a6435f94-bca7-4a2f-a99f-3d807a2108e1",
       "shortBio" : "",
       "socials" : [ {
         "icon" : "linkedin",
@@ -525,7 +525,7 @@
       "featured" : false,
       "name" : "Victor Trac",
       "photo" : "",
-      "photoUrl" : "",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/people-devfestauburn/o/victor.png?alt=media&token=d4c8c5fc-0f9e-415c-815e-7def6b568fa1",
       "shortBio" : "",
       "socials" : [ {
         "icon" : "linkedin",
@@ -543,8 +543,8 @@
   "team" : [ {
       "members" : [ {
       "name" : "Jay Patel",
-      "photo" : "/images/people/oleh_zasadnyy.jpg",
-      "photoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/oleh_zasadnyy.jpg",
+      "photo" : "/images/people/jay.jpg",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/people-devfestauburn/o/jay.jpeg?alt=media&token=e45a0383-c264-46ff-a45f-18709301b11b",
       "socials" : [ {
         "icon" : "linkedin",
         "link" : "http://linkedin.com/in/jay2712/",

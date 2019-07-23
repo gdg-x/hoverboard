@@ -2,7 +2,7 @@
   "organizer": {
     "name": "GDG Cloud Auburn",
     "twitter": "GDGCloudAuburn",
-    "blog": "",
+    "blog": "/blog/",
     "url": "https://www.meetup.com/GDG-Cloud-Auburn/"
   },
   "startDate": "2019-09-15T09:00:00+03:00",
@@ -158,7 +158,7 @@
       }
     ]
   },
-  "mailto": "jsp0053@auburn.edu",
+  "mailto": "patel.ravi2712@gmail.com",
   "mailchimp": {
     "url": "",
     "name": ""
