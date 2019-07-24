@@ -12,10 +12,7 @@ admin.initializeApp();
 
 export {
   saveUserData,
-  sendGeneralNotification,
-  scheduleNotifications,
   optimizeImages,
-  mailchimpSubscribe,
   prerender,
   scheduleWrite,
   sessionsWrite,
