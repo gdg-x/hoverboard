@@ -78,7 +78,7 @@
 
       <div class="dialog-container content">
         <h3 class="meta-info">[[speaker.country]]</h3>
-        <h3 class="meta-info">[[speaker.title]], [[speaker.company]]</h3>
+        <h3 class="meta-info">[[companyInfo]]</h3>
         <h3 class="meta-info" hidden$="[[isEmpty(speaker.badges)]]">
           <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
             <a
@@ -157,6 +157,10 @@
             type: Boolean,
             value: () => JSON.parse('{$ disabledSchedule $}'),
           },
+          companyInfo: {
+            type: String,
+            computed: '_computeCompanyInfo(speaker.title, speaker.company)',
+          },
         };
       }
 
@@ -181,6 +185,10 @@
 
       _getCloseBtnIcon(isLaptopViewport) {
         return isLaptopViewport ? 'close' : 'arrow-left';
+      }
+
+      _computeCompanyInfo(title, company) {
+        return [title, company].filter(Boolean).join(', ');
       }
     }
 
