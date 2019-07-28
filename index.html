@@ -93,13 +93,6 @@
           })));
     }
 
-    function loadHoverboardApp() {
-      requestAnimationFrame(() => {
-        const app = document.createElement('hoverboard-app');
-        document.body.appendChild(app);
-      });
-    }
-
     loadFirebaseModules([
       'firebase-app',
       'firebase-firestore',
@@ -126,9 +119,7 @@
               });
           // eslint-disable-next-line no-console
           console.log('Firebase App is ready!');
-        })
-        .then(() => loadHoverboardApp());
-
+        });
   </script>
 
   <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
@@ -174,7 +165,7 @@
 
 <body>
 
-<!--<hoverboard-app unresolved>{$ title $}</hoverboard-app>-->
+  <hoverboard-app unresolved>{$ title $}</hoverboard-app>
 
 <noscript>
   Please enable JavaScript to view this website.
