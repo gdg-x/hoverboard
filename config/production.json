@@ -4,6 +4,7 @@
   "analytics": "UA-43643469-9",
   "prefix": "/",
   "firebase": {
+    "appId": "",
     "apiKey": "AIzaSyCaSkhtHekxAqXXzzbuNs2s6CpGdhZdta8",
     "authDomain": "hoverboard-master.firebaseapp.com",
     "databaseURL": "https://hoverboard-master.firebaseio.com",
