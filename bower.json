@@ -3,7 +3,8 @@
   "version": "2.1.0",
   "authors": [
     "Oleh Zasadnyy, GDG Lviv",
-    "Sophie Huts, GDG Lviv"
+    "Sophie Huts, GDG Lviv",
+    "Abraham Williams, GDG Madison"
   ],
   "private": true,
   "dependencies": {
