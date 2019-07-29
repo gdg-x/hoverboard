@@ -1,0 +1,916 @@
+{
+  "E. Glen Weyl": {
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FE.%20Glen%20Weyl.jpg?alt=media",
+    "name": "E. Glen Weyl",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/e-glen-weyl",
+        "name": "LinkedIn"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/glenweyl",
+        "name": "Twitter"
+      },
+      {
+        "icon": "website",
+        "link": "http://www.glenweyl.com",
+        "name": "Website"
+      },
+      {
+        "icon": "facebook",
+        "link": "https://www.facebook.com/glenweyl",
+        "name": "Facebook"
+      }
+    ],
+    "title": "Chair",
+    "photo": "",
+    "order": 0
+  },
+  "Jeff Lee-Yaw": {
+    "order": 15,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FJeff%20Lee-Yaw.jpg?alt=media",
+    "name": "Jeff Lee-Yaw",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/jeff-lee-yaw-8b607222",
+        "name": "LinkedIn"
+      }
+    ],
+    "title": "Ideas & Research, Executive Director Emeritus",
+    "photo": ""
+  },
+  "Matt Prewitt": {
+    "order": 2,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FMatt%20Prewitt.jpg?alt=media",
+    "name": "Matt Prewitt",
+    "socials": [
+      {
+        "name": "LinkedIn",
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/matt-prewitt-7616738b"
+      },
+      {
+        "name": "Twitter",
+        "icon": "twitter",
+        "link": "https://twitter.com/m_t_prewitt"
+      }
+    ],
+    "title": "President",
+    "photo": ""
+  },
+  "Isaac LaGrand": {
+    "order": 1000,
+    "photoUrl": "",
+    "name": "Isaac LaGrand",
+    "socials": [
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/anisaaclagrand",
+        "name": "Twitter"
+      }
+    ],
+    "title": "Venue Lead",
+    "photo": ""
+  },
+  "Mwiya Musokotwane": {
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FMwiya%20Musokotwane.jpg?alt=media",
+    "name": "Mwiya Musokotwane",
+    "socials": [
+      {
+        "name": "LinkedIn",
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/mwiyam"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/mwiyas",
+        "name": "Twitter"
+      }
+    ],
+    "title": "Activism & Governance",
+    "photo": "",
+    "order": 1000
+  },
+  "Andrea Butelmann": {
+    "title": "Activism & Governance",
+    "photo": "",
+    "order": 1000,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FAndrea%20Butelmann.jpg?alt=media",
+    "name": "Andrea Butelmann",
+    "socials": [
+      {
+        "name": "LinkedIn",
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/andrea-butelmann-58285aa2"
+      },
+      {
+        "icon": "website",
+        "link": "http://fen.uahurtado.cl/2014/academicos/andrea-butelmann/",
+        "name": "Website"
+      }
+    ]
+  },
+  "Brett Scott": {
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FBrett%20Scott.jpg?alt=media",
+    "name": "Brett Scott",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/brettreginaldscott",
+        "name": "LinkedIn"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/suitpossum",
+        "name": "Twitter"
+      }
+    ],
+    "title": "Arts & Communication",
+    "photo": "",
+    "order": 1000
+  },
+  "Riva-Melissa Tez": {
+    "order": 1000,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FRiva-Melissa%20Tez.jpg?alt=media",
+    "name": "Riva-Melissa Tez",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/riva-melissa-tez-661a0aab",
+        "name": "LinkedIn"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/rivatez",
+        "name": "Twitter"
+      }
+    ],
+    "title": "Entrepreneurship & Technology",
+    "photo": ""
+  },
+  "Chris Hughes": {
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FChris%20Hughes.jpg?alt=media",
+    "name": "Chris Hughes",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/chrisrhughes",
+        "name": "LinkedIn"
+      },
+      {
+        "name": "Twitter",
+        "icon": "twitter",
+        "link": "https://twitter.com/chrishughes"
+      },
+      {
+        "icon": "website",
+        "link": "https://economicsecurityproject.org/",
+        "name": "Website"
+      },
+      {
+        "icon": "facebook",
+        "link": "https://www.facebook.com/https://www.facebook.com/ChrisHughes",
+        "name": "Facebook"
+      }
+    ],
+    "title": "Activism & Governance",
+    "photo": "",
+    "order": 1000
+  },
+  "Kris Jones": {
+    "title": "Ticketing, Marketing",
+    "photo": "",
+    "order": 1000,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FKris%20Jones.jpg?alt=media",
+    "name": "Kris Jones",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/krisajones",
+        "name": "LinkedIn"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/krisj_official",
+        "name": "Twitter"
+      }
+    ]
+  },
+  "Mary Ellen Carroll": {
+    "order": 8,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FMary%20Ellen%20Carroll.jpg?alt=media",
+    "name": "Mary Ellen Carroll",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/mary-ellen-carroll-0863354",
+        "name": "LinkedIn"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/https://twitter.com/prototype180",
+        "name": "Twitter"
+      },
+      {
+        "icon": "website",
+        "link": "http://www.mecarroll.com/",
+        "name": "Website"
+      }
+    ],
+    "title": "Environment and Arts Lead",
+    "photo": ""
+  },
+  "Kei Kreutler": {
+    "title": "Arts & Communications",
+    "photo": "",
+    "order": 1000,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FKei%20Kreutler.jpg?alt=media",
+    "name": "Kei Kreutler",
+    "socials": [
+      {
+        "name": "Twitter",
+        "icon": "twitter",
+        "link": "https://twitter.com/keikreutler"
+      }
+    ]
+  },
+  "Ryan Khurana": {
+    "order": 14,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FRyan%20Khurana.jpg?alt=media",
+    "name": "Ryan Khurana",
+    "socials": [
+      {
+        "name": "LinkedIn",
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/ryan-khurana-934993b7"
+      },
+      {
+        "name": "Twitter",
+        "icon": "twitter",
+        "link": "https://twitter.com/RyanKhurana"
+      }
+    ],
+    "title": "Marketing, Sponsorships",
+    "photo": ""
+  },
+  "Avital Balwit": {
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FAvital%20Balwit.jpg?alt=media",
+    "name": "Avital Balwit",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/avital-balwit-2b192063",
+        "name": "LinkedIn"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/avitalbalwit",
+        "name": "Twitter"
+      }
+    ],
+    "title": "Ticketing",
+    "photo": "",
+    "order": 1000
+  },
+  "Primavera De Filippi": {
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FPrimavera%20De%20Filippi.jpg?alt=media",
+    "name": "Primavera De Filippi",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/primavera-de-filippi-07558536",
+        "name": "LinkedIn"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/https://twitter.com/yaoeo",
+        "name": "Twitter"
+      }
+    ],
+    "title": "Arts & Communications",
+    "photo": "",
+    "order": 1000
+  },
+  "Charlotte Cavaille": {
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FCharlotte%20Cavaille.jpg?alt=media",
+    "name": "Charlotte Cavaille",
+    "socials": [
+      {
+        "name": "LinkedIn",
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/www.charlotte.cavaille.com"
+      },
+      {
+        "name": "Twitter",
+        "icon": "twitter",
+        "link": "https://twitter.com/charlie_cav"
+      },
+      {
+        "icon": "website",
+        "link": "https://www.charlottecavaille.com",
+        "name": "Website"
+      }
+    ],
+    "title": "Ideas & Research",
+    "photo": "",
+    "order": 1000
+  },
+  "Joss Clifford-Frith": {
+    "photo": "",
+    "order": 99,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FJoss%20Clifford-Frith.jpg?alt=media",
+    "name": "Joss Clifford-Frith",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/jocelyn-clifford-frith-48996727",
+        "name": "LinkedIn"
+      }
+    ],
+    "title": "Tech"
+  },
+  "Will Middleton": {
+    "title": "Finance Lead",
+    "photo": "",
+    "order": 7,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FWill%20Middleton.jpg?alt=media",
+    "name": "Will Middleton",
+    "socials": [
+      {
+        "name": "LinkedIn",
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/william-middleton-61935125"
+      }
+    ]
+  },
+  "B Cavello": {
+    "photo": "",
+    "order": 1000,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FB%20Cavello.jpg?alt=media",
+    "name": "B Cavello",
+    "socials": [
+      {
+        "name": "LinkedIn",
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/bcavello"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/b_cavello",
+        "name": "Twitter"
+      },
+      {
+        "icon": "website",
+        "link": "https://www.bcavello.com/",
+        "name": "Website"
+      }
+    ],
+    "title": "Arts & Communications, Entrepreneurship & Technology"
+  },
+  "Charlie Thompson": {
+    "title": "Tech, Graphics",
+    "photo": "",
+    "order": 13,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FCharlie%20Thompson.jpg?alt=media",
+    "name": "Charlie Thompson",
+    "socials": [
+      {
+        "name": "LinkedIn",
+        "link": "https://www.linkedin.com/in/charlie-thompson-2a8293aa",
+        "icon": "linkedin"
+      },
+      {
+        "link": "https://twitter.com/charliethomps0n",
+        "icon": "twitter",
+        "name": "Twitter"
+      },
+      {
+        "link": "http://www.charliethompson.xyz",
+        "icon": "website",
+        "name": "Website"
+      }
+    ]
+  },
+  "Eric Posner": {
+    "photoUrl": "",
+    "name": "Eric Posner",
+    "socials": [
+      {
+        "name": "LinkedIn",
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/eric-posner-1941ab8b"
+      },
+      { "icon": "website", "link": "http://ericposner.com", "name": "Website" }
+    ],
+    "title": "Ideas & Research",
+    "photo": "",
+    "order": 1000
+  },
+  "Mamie Rheingold": {
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FMamie%20Rheingold.jpg?alt=media",
+    "name": "Mamie Rheingold",
+    "socials": [
+      {
+        "name": "LinkedIn",
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/mamie-rheingold-257237121"
+      },
+      {
+        "name": "Twitter",
+        "icon": "twitter",
+        "link": "https://twitter.com/mames"
+      },
+      {
+        "icon": "website",
+        "link": "http://mamierheingold.com/",
+        "name": "Website"
+      },
+      {
+        "icon": "facebook",
+        "link": "https://www.facebook.com/mames",
+        "name": "Facebook"
+      }
+    ],
+    "title": "Entrepreneurship & Technology",
+    "photo": "",
+    "order": 12
+  },
+  "Kanyi Maqubela": {
+    "title": "Entrepreneurship & Technology",
+    "photo": "",
+    "order": 1000,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FKanyi%20Maqubela.jpg?alt=media",
+    "name": "Kanyi Maqubela",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/kanyi",
+        "name": "LinkedIn"
+      },
+      {
+        "name": "Twitter",
+        "icon": "twitter",
+        "link": "https://twitter.com/km"
+      },
+      { "icon": "website", "link": "http://kanyi.me/", "name": "Website" }
+    ]
+  },
+  "Kim-Mai Cutler": {
+    "order": 1000,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FKim-Mai%20Cutler.jpg?alt=media",
+    "name": "Kim-Mai Cutler",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/kimmaicutler",
+        "name": "LinkedIn"
+      },
+      {
+        "name": "Twitter",
+        "icon": "twitter",
+        "link": "https://twitter.com/kimmaicutler"
+      }
+    ],
+    "title": "Entrepreneurship & Technology",
+    "photo": ""
+  },
+  "Paul Tang": {
+    "order": 1000,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FPaul%20Tang.jpg?alt=media",
+    "name": "Paul Tang",
+    "socials": [
+      {
+        "name": "LinkedIn",
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/paul-tang-36a50329"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/paultang",
+        "name": "Twitter"
+      },
+      {
+        "name": "Website",
+        "icon": "website",
+        "link": "https://paultang.pvda.nl/"
+      }
+    ],
+    "title": "Activism & Governance",
+    "photo": ""
+  },
+  "Ananya Chakravarti": {
+    "title": "Ideas and Research",
+    "photo": "",
+    "order": 11,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FAnanya%20Chakravarti.jpg?alt=media",
+    "name": "Ananya Chakravarti",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/ananya-chakravarti-0b7b76a2",
+        "name": "LinkedIn"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/achakrava",
+        "name": "Twitter"
+      }
+    ]
+  },
+  "Mark Lutter": {
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FMark%20Lutter.jpg?alt=media",
+    "name": "Mark Lutter",
+    "socials": [
+      {
+        "name": "LinkedIn",
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/mark-lutter-a23a7669"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/MarkLutter",
+        "name": "Twitter"
+      }
+    ],
+    "title": "Activism & Governance",
+    "photo": "",
+    "order": 10
+  },
+  "Amar Singh": {
+    "order": 1000,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FAmar%20Singh.jpg?alt=media",
+    "name": "Amar Singh",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/amar-singh-148043ba",
+        "name": "LinkedIn"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/asinghchrony",
+        "name": "Twitter"
+      }
+    ],
+    "title": "Sponsorships ",
+    "photo": ""
+  },
+  "Mickey Muldoon": {
+    "title": "Tech",
+    "photo": "",
+    "order": 1000,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FMickey%20Muldoon.jpg?alt=media",
+    "name": "Mickey Muldoon",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/mickeymuldoon",
+        "name": "LinkedIn"
+      },
+      {
+        "name": "Twitter",
+        "icon": "twitter",
+        "link": "https://twitter.com/mickeymuldoon"
+      }
+    ]
+  },
+  "Sachin Devalia": {
+    "title": "Sponsorships, Finance, Events",
+    "photo": "",
+    "order": 1000,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FSachin%20Devalia.jpg?alt=media",
+    "name": "Sachin Devalia",
+    "socials": [
+      {
+        "name": "LinkedIn",
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/sachin-devalia"
+      }
+    ]
+  },
+  "Matthew Masurka": {
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FMatthew%20Masurka.jpg?alt=media",
+    "name": "Matthew Masurka",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/matthewmasurka",
+        "name": "LinkedIn"
+      },
+      {
+        "name": "Twitter",
+        "icon": "twitter",
+        "link": "https://twitter.com/gigamesh"
+      },
+      {
+        "name": "Website",
+        "icon": "website",
+        "link": "http://matthewmasurka.com/"
+      }
+    ],
+    "title": "Tech Lead",
+    "photo": "",
+    "order": 6
+  },
+  "Zooko Wilcox": {
+    "title": "Entrepreneurship & Technology",
+    "photo": "",
+    "order": 1000,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FZooko%20Wilcox.jpg?alt=media",
+    "name": "Zooko Wilcox",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/zookow",
+        "name": "LinkedIn"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/zooko",
+        "name": "Twitter"
+      },
+      {
+        "icon": "website",
+        "link": "https://leastauthority.com/",
+        "name": "Website"
+      }
+    ]
+  },
+  "Ruth Catlow": {
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FRuth%20Catlow.jpg?alt=media",
+    "name": "Ruth Catlow",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/ruth-catlow-5880083",
+        "name": "LinkedIn"
+      },
+      {
+        "name": "Twitter",
+        "icon": "twitter",
+        "link": "https://twitter.com/furtherfield"
+      },
+      {
+        "name": "Website",
+        "icon": "website",
+        "link": "https://www.furtherfield.org/"
+      }
+    ],
+    "title": "Arts & Communications",
+    "photo": "",
+    "order": 1000
+  },
+  "Nick Pai": {
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FNickPai.jpg?alt=media",
+    "name": "Nick Pai",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/nicholas-pai-10034170",
+        "name": "LinkedIn"
+      },
+      {
+        "name": "Twitter",
+        "icon": "twitter",
+        "link": "https://twitter.com/mountainwaterpi"
+      }
+    ],
+    "title": "Tech, Entrepreneurship, Ticketing",
+    "photo": "",
+    "order": 1000
+  },
+  "Rahilla Zafar": {
+    "photo": "",
+    "order": 1000,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FRahilla%20Zafar.jpg?alt=media",
+    "name": "Rahilla Zafar",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/rahilla",
+        "name": "LinkedIn"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/rahilla",
+        "name": "Twitter"
+      },
+      {
+        "icon": "website",
+        "link": "https://www.amazon.com/Internet-Women-Accelerating-Innovation-Education/dp/8793379684/ref=sr_1_1?ie=",
+        "name": "Website"
+      }
+    ],
+    "title": "Activism & Governance"
+  },
+  "Jennifer Lyn Morone": {
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FJennifer%20Lyn%20Morone.jpg?alt=media",
+    "name": "Jennifer Lyn Morone",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/jennifermorone",
+        "name": "LinkedIn"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/jlmorone",
+        "name": "Twitter"
+      },
+      {
+        "icon": "website",
+        "link": "http://jennifermorone.com",
+        "name": "Website"
+      }
+    ],
+    "title": "CEO",
+    "photo": "",
+    "order": 1
+  },
+  "Namrata Narain": {
+    "order": 1000,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FNamrata%20Narain.jpg?alt=media",
+    "name": "Namrata Narain",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/namrata-narain-99412262",
+        "name": "LinkedIn"
+      },
+      {
+        "name": "Twitter",
+        "icon": "twitter",
+        "link": "https://twitter.com/numoose"
+      },
+      {
+        "name": "Website",
+        "icon": "website",
+        "link": "https://namratanarain.com"
+      },
+      {
+        "name": "Facebook",
+        "icon": "facebook",
+        "link": "https://www.facebook.com/."
+      }
+    ],
+    "title": "Activism & Governance",
+    "photo": ""
+  },
+  "Devon Zuegel": {
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FDevon%20Zuegel.jpg?alt=media",
+    "name": "Devon Zuegel",
+    "socials": [
+      {
+        "name": "LinkedIn",
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/devonzuegel"
+      },
+      {
+        "name": "Twitter",
+        "icon": "twitter",
+        "link": "https://twitter.com/devonzuegel"
+      },
+      {
+        "icon": "website",
+        "link": "https://devonzuegel.com",
+        "name": "Website"
+      }
+    ],
+    "title": "Ideas & Research, Entrepreneurship & Technology",
+    "photo": "",
+    "order": 1000
+  },
+  "Michael Albergo": {
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FMichael%20Albergo.jpg?alt=media",
+    "name": "Michael Albergo",
+    "socials": [
+      {
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/michael-albergo",
+        "name": "LinkedIn"
+      },
+      {
+        "name": "Twitter",
+        "icon": "twitter",
+        "link": "https://twitter.com/msalbergo"
+      },
+      { "icon": "website", "link": "http://malbergo.me/", "name": "Website" }
+    ],
+    "title": "Ideas and Research",
+    "photo": "",
+    "order": 1000
+  },
+  "Nathan Chen": {
+    "order": 9,
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/speakers%2Fnathan-chen.jpg?alt=media&token=30f5e113-9eb0-4383-bb84-cc9684a8e0ef",
+    "name": "Nathan Chen",
+    "socials": [
+      {
+        "name": "Twitter",
+        "link": "https://twitter.com/iam_nChen",
+        "icon": "twitter"
+      }
+    ],
+    "title": "Entrepreneurship & Tech",
+    "photo": ""
+  },
+  "Emmanuel Midy": {
+    "title": "Community Lead",
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2Femmanuel-midy.jpeg?alt=media&token=cca3c285-8f45-4b88-b032-0ece96155d47",
+    "socials": [
+      {
+        "link": "https://www.linkedin.com/in/emmanuelmidy/",
+        "icon": "linkedin",
+        "name": "LinkedIn"
+      },
+      {
+        "name": "Website",
+        "link": "http://emmanuelmidy.carrd.co",
+        "icon": "website"
+      }
+    ],
+    "name": "Emmanuel Midy",
+    "order": 5
+  },
+  "Fanny Lakoubay": {
+    "title": "Public Relations",
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2Ffanny-lakoubay.jpg?alt=media&token=68b82143-1386-4755-b27e-e66d1dc06f58",
+    "socials": [
+      {
+        "link": "https://www.linkedin.com/in/fannylakoubay/",
+        "icon": "linkedin",
+        "name": "LinkedIn"
+      },
+      {
+        "name": "Twitter",
+        "link": "https://twitter.com/flakoubay",
+        "icon": "twitter"
+      }
+    ],
+    "name": "Fanny Lakoubay",
+    "order": 4
+  },
+  "James Glasscock": {
+    "order": 1000,
+    "title": "Sponsorships",
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/team%2FJames%20Glasscock.JPG?alt=media&token=fd05b2af-5a07-469f-a479-4053a9a8aea6",
+    "socials": [
+      {
+        "link": "https://twitter.com/ElephasVe",
+        "icon": "twitter",
+        "name": "Twitter"
+      },
+      {
+        "link": "https://www.elephasventures.com/",
+        "icon": "website",
+        "name": "Website"
+      },
+      {
+        "name": "LinkedIn",
+        "icon": "linkedin",
+        "link": "https://www.linkedin.com/in/glasscock/"
+      }
+    ],
+    "name": "James Glasscock"
+  },
+  "Natalia Olsen-Urtecho": {
+    "order": "3",
+    "title": "Activism and Government Lead",
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/speakers%2FNatalia%20Olson.jpg?alt=media&token=f074e03c-f7e6-4b84-a5fc-64ab250234b6",
+    "socials": [
+      {
+        "name": "Twitter",
+        "link": "https://twitter.com/olsonurtecho",
+        "icon": "twitter"
+      },
+      {
+        "link": "http://thedisruptivefactory.com",
+        "icon": "website",
+        "name": "Website"
+      },
+      {
+        "name": "LinkedIn",
+        "link": "https://www.linkedin.com/in/nataliaolsonurtecho",
+        "icon": "linkedin"
+      }
+    ],
+    "name": "Natalia Olsen-Urtecho"
+  },
+  "Sam Hart": {
+    "order": 1000,
+    "title": "Arts & Communication, Entrepreneurship & Technology",
+    "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-site-prod.appspot.com/o/speakers%2Fsam-hart.jpg?alt=media&token=f62fcb16-3a33-4f29-a2dc-17852fee872b",
+    "socials": [
+      {
+        "link": "https://twitter.com/hxrts",
+        "icon": "twitter",
+        "name": "Twitter"
+      },
+      { "link": "http://hxrts.com/", "icon": "website", "name": "Website" }
+    ],
+    "name": "Sam Hart"
+  }
+}
