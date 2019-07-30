@@ -1,5 +1,5 @@
-importScripts('bower_components/firebase/firebase-app.js');
-importScripts('bower_components/firebase/firebase-messaging.js');
+importScripts('node_modules/firebase/firebase-app.js');
+importScripts('node_modules/firebase/firebase-messaging.js');
 
 firebase.initializeApp({
   messagingSenderId: '{$ firebase.messagingSenderId $}',
