@@ -25,6 +25,7 @@
   "faq": "/data/faq.md",
   "timezoneOffset": "-180",
   "coc": "/data/coc.md",
+  "timezoneOffset": "-180",
   "footer": {
     "blog": "Blog"
   },

@@ -142,6 +142,10 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    match /speakers/{session}/feedback/{userId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+
     match /generatedSpeakers/{speaker} {
       // Applies to single document read requests
       allow get;
@@ -151,6 +155,10 @@ service cloud.firestore {
 
       // Disallow writes
       allow write: if false;
+    }
+
+    match /speakers/{session}/feedback/{userId} {
+      allow read, write: if request.auth.uid == userId;
     }
 
     match /subscribers/{subscriberId} {
