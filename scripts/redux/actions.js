@@ -203,6 +203,85 @@ const partnersActions = {
   },
 };
 
+const feedbackActions = {
+  addComment: (data) => (dispatch) => {
+    dispatch({
+      type: SEND_FEEDBACK,
+      payload: data,
+    });
+
+    firebase.firestore().collection(`${data.collection}/${data.dbItem}/feedback`)
+        .doc(data.userId)
+        .set({
+          rating: data.rating,
+          comment: data.comment,
+        })
+        .then(() => {
+          dispatch({
+            type: SEND_FEEDBACK_SUCCESS,
+            payload: data,
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: SEND_FEEDBACK_FAILURE,
+            payload: { error },
+          });
+        });
+  },
+  checkPreviousFeedback: (data) => (dispatch) => {
+    dispatch({
+      type: FETCH_PREVIOUS_FEEDBACK,
+      payload: data,
+    });
+
+    firebase.firestore().collection(`${data.collection}/${data.dbItem}/feedback`)
+        .doc(data.userId)
+        .get()
+        .then((snapshot) => {
+          dispatch({
+            type: FETCH_PREVIOUS_FEEDBACK_SUCCESS,
+            payload: {
+              collection: data.collection,
+              dbItem: data.dbItem,
+              previousFeedback: snapshot.exists ? snapshot.data() : null,
+            },
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: FETCH_PREVIOUS_FEEDBACK_FAILURE,
+            payload: { error },
+          });
+        });
+  },
+  deleteFeedback: (data) => (dispatch) => {
+    dispatch({
+      type: DELETE_FEEDBACK,
+      payload: data,
+    });
+
+    firebase.firestore().collection(`${data.collection}/${data.dbItem}/feedback`)
+        .doc(data.userId)
+        .delete()
+        .then(() => {
+          dispatch({
+            type: DELETE_FEEDBACK_SUCCESS,
+            payload: {
+              collection: data.collection,
+              dbItem: data.dbItem,
+            },
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: DELETE_FEEDBACK_FAILURE,
+            payload: { error },
+          });
+        });
+  },
+};
+
 const videosActions = {
   fetchVideos: () => (dispatch) => {
     dispatch({
@@ -806,6 +885,8 @@ const helperActions = {
       type: SIGN_IN,
       user: userToStore,
     });
+
+    if (!userToStore.signedIn) store.dispatch({ type: WIPE_PREVIOUS_FEEDBACK });
   },
 
   getFederatedProvider: (provider) => {

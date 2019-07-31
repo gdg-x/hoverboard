@@ -232,6 +232,14 @@
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"
   },
+  "feedback": {
+    "headline": "Feedback",
+    "sendFeedbackSignedOut": "Sign in to send feedback!",
+    "feedbackRecorded": "Your feedback was recorded!",
+    "feedbackDeleted": "Feedback successfully deleted!",
+    "somethingWentWrong": "Something went wrong!",
+    "voteCaption": "Vote to leave a comment"
+  },
   "sessionDetails": {
     "contentLevel": "Content level",
     "viewPresentation": "View presentation",

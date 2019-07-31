@@ -16,6 +16,7 @@
 <link rel="import" href="../../mixins/speakers-hoc.html">
 <link rel="import" href="../text-truncate.html">
 <link rel="import" href="../shared-styles.html">
+<link rel="import" href="../feedback.html">
 <link rel="import" href="dialog-styles.html">
 
 <dom-module id="session-details">
@@ -23,6 +24,10 @@
     <style include="shared-styles dialog-styles flex flex-alignment positioning">
       .section {
         cursor: pointer;
+      }
+      .star-rating {
+        display: inline-block;
+        vertical-align: middle;
       }
     </style>
 
@@ -128,6 +133,11 @@
               </div>
             </div>
           </template>
+        </div>
+
+        <div class="additional-sections">
+          <h3>{$ feedback.headline $}</h3>
+          <feedback-block collection="sessions" db-item="[[session.id]]"></feedback-block>
         </div>
       </div>
     </app-header-layout>
