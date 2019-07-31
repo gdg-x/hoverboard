@@ -23,6 +23,7 @@ function compile(config, polymerJson) {
       },
     })))
     .pipe(gulpif(/\.(html|js)$/, replace('bower_components', '../bower_components')))
+    .pipe(gulpif(/\.(html|js)$/, replace('node_modules', '../node_modules')))
     .pipe(gulp.dest(config.tempDirectory));
 }
 

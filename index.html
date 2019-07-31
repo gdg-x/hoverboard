@@ -85,7 +85,7 @@
       return Promise.all(
           modules.map((module) => new Promise((resolve, reject) => {
             const script = document.createElement('script');
-            script.src = `bower_components/firebase/${module}.js`;
+            script.src = `node_modules/firebase/${module}.js`;
             script.async = false;
             script.onload = () => resolve();
             script.onerror = (error) => reject(error);
@@ -93,21 +93,16 @@
           })));
     }
 
-    function loadHoverboardApp() {
-      requestAnimationFrame(() => {
-        const app = document.createElement('hoverboard-app');
-        document.body.appendChild(app);
-      });
-    }
-
     loadFirebaseModules([
       'firebase-app',
       'firebase-firestore',
       'firebase-auth',
       'firebase-messaging',
+      'firebase-performance',
     ])
         .then(() => {
           firebase.initializeApp({
+            appId: '{$ firebase.appId $}',
             apiKey: '{$ firebase.apiKey $}',
             authDomain: '{$ firebase.authDomain $}',
             databaseURL: '{$ firebase.databaseURL $}',
@@ -116,6 +111,7 @@
             messagingSenderId: '{$ firebase.messagingSenderId $}',
           });
 
+          firebase.performance();
           firebase.firestore()
               .enablePersistence({ tabSynchronization: true })
               .catch(() => {
@@ -123,12 +119,16 @@
               });
           // eslint-disable-next-line no-console
           console.log('Firebase App is ready!');
-        })
-        .then(() => loadHoverboardApp());
+        });
 
+    </script>
+    <script>
+      // First Input Delay polyfill https://github.com/GoogleChromeLabs/first-input-delay
+      // eslint-disable-next-line
+      !function(n,e){var t,o,i,c=[],f={passive:!0,capture:!0},r=new Date,a="pointerup",u="pointercancel";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=[])}function l(t){if(t.cancelable){var o=(t.timeStamp>1e12?new Date:performance.now())-t.timeStamp;"pointerdown"==t.type?function(t,o){function i(){p(t,o),r()}function c(){r()}function r(){e(a,i,f),e(u,c,f)}n(a,i,f),n(u,c,f)}(o,t):p(o,t)}}function w(n){["click","mousedown","keydown","touchstart","pointerdown"].forEach(function(e){n(e,l,f)})}w(n),self.perfMetrics=self.perfMetrics||{},self.perfMetrics.onFirstInputDelay=function(n){c.push(n),s()}}(addEventListener,removeEventListener);
   </script>
 
-  <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
   <link href="src/hoverboard-app.html" rel="import">
   <script async defer src="scripts/service-worker-registration.js"></script>
 
@@ -171,7 +171,7 @@
 
 <body>
 
-<!--<hoverboard-app unresolved>{$ title $}</hoverboard-app>-->
+  <hoverboard-app unresolved>{$ title $}</hoverboard-app>
 
 <noscript>
   Please enable JavaScript to view this website.

@@ -12,6 +12,7 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 
 ```json
 "firebase": {
+  "appId": "<REPLACE_ME>",
   "apiKey": "<REPLACE_ME>",
   "authDomain": "<REPLACE_ME>",
   "databaseURL": "<REPLACE_ME>",
