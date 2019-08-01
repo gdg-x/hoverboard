@@ -270,16 +270,26 @@ const speakersActions = {
       type: FETCH_SPEAKERS,
     });
 
-    const speakersPromise = new Promise((resolve, reject) => {
-      firebase.firestore()
-        .collection('generatedSpeakers')
-        .orderBy('order', 'asc')
-        .get()
-        .then((snaps) => {
-          resolve(snaps.docs.map((snap) => Object.assign({}, snap.data())));
-        })
-        .catch(reject);
+    const speakersPromise = new Promise(function (resolve) {
+      fetch('data/posts/speakers.json')
+          .then(function (response) {
+          return response.json();
+          })
+          .then(function (res) {
+            resolve(res.speakers);
+          });
     });
+
+    // const speakersPromise = new Promise((resolve, reject) => {
+    //   firebase.firestore()
+    //     .collection('generatedSpeakers')
+    //     .orderBy('order', 'asc')
+    //     .get()
+    //     .then((snaps) => {
+    //       resolve(snaps.docs.map((snap) => Object.assign({}, snap.data())));
+    //     })
+    //     .catch(reject);
+    // });
 
     return Promise.all([speakersPromise])
       .then(([speakers]) => {

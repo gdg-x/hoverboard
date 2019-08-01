@@ -41,18 +41,6 @@
         background: var(--primary-background-color);
         text-align: center;
         transition: box-shadow var(--animation);
-        display: block;
-      }
-      .shadowBlocker{
-        position: relative;
-      }
-      .shadowBlocker::after{
-        content: "";
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        left:0;
-        top:0;
       }
 
       .speaker:hover {
@@ -220,14 +208,15 @@
     </hero-block>
 
     <div>
-    <!-- <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress> -->
-    <!-- <filter-menu
+    <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
+
+    <filter-menu
       filters="[[_filters]]"
       selected="[[_selectedFilters]]"
       results-count="[[speakersToRender.length]]"
-    ></filter-menu> -->
+    ></filter-menu>
 
-    <!-- <content-loader
+    <content-loader
       class="container"
       card-padding="32px"
       card-height="400px"
@@ -237,7 +226,7 @@
       box-shadow="var(--box-shadow)"
       items-count="{$ contentLoaders.speakers.itemsCount $}"
       hidden$="[[contentLoaderVisibility]]"
-    ></content-loader> -->
+    ></content-loader>
 
     <div class="container">
       <template
@@ -246,20 +235,34 @@
         as="speaker"
       >
         <a class="speaker card"
-           on-tap="_openSpeakerDetails"
+           href$="[[speaker.link]]"
            ga-on="click"
            ga-event-category="speaker"
            ga-event-action="open details"
-           ga-event-label$="[[speaker.name]]"
-           id="[[speaker.id]]">
-          <div class="shadowBlocker">
+           ga-event-label$="[[speaker.name]]">
+          <div relative>
             <plastic-image
               class="photo"
               srcset="[[speaker.photoUrl]]"
               sizing="cover"
               lazy-load preload fade
             ></plastic-image>
+            <div class="badges" layout horizontal>
+              <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
+                <a
+                  class$="badge [[badge.name]]-b"
+                  href$="[[badge.link]]"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title$="[[badge.description]]"
+                  layout horizontal center-center
+                >
+                  <iron-icon class="badge-icon" icon="hoverboard:[[badge.name]]"></iron-icon>
+                </a>
+              </template>
+            </div>
           </div>
+        </div>
 
           <plastic-image
             class="company-logo"
@@ -292,7 +295,7 @@
       </template>
     </div>
 
-    <!-- <previous-speakers-block></previous-speakers-block> -->
+    <previous-speakers-block></previous-speakers-block>
 
     <footer-block></footer-block>
 
@@ -300,19 +303,14 @@
 
   <script>
 
-    Polymer({
-      is: 'speakers-page',
-      ready: function () {
-        var _this = this;
-        fetch('data/posts/speakers.json')
-        .then(function (response) {
-        return response.json();
-        })
-        .then(function (res) {
-          _this.speakersToRender = res.speakers;
-        });
-      },
-      properties: {
+    // eslint-disable-next-line no-undef
+    class SpeakersPage extends UtilsFunctions(ReduxMixin(SpeakersHoC(Polymer.Element))) {
+      static get is() {
+        return 'speakers-page';
+      }
+
+      static get properties() {
+        return {
           route: Object,
           routeData: Object,
           active: Boolean,
@@ -339,15 +337,40 @@
           },
           _selectedFilters: Object,
           speakersToRender: Array,
+        };
+      }
 
-      },
-      observers: function () {
+      // ready: function () {
+      //   var _this = this;
+      //   fetch('data/posts/speakers.json')
+      //   .then(function (response) {
+      //   return response.json();
+      //   })
+      //   .then(function (res) {
+      //     _this.speakersToRender = res.speakers;
+      //   });
+      // }
+
+      static get observers() {
         return [
-          '_routeOpenSpeakers(active, speakers, speakersMap, routeData.speakerId)',
+          '_openSpeakerDetails(active, speakers, speakersMap, routeData.speakerId)',
           '_speakersChanged(speakers, _selectedFilters)',
         ];
-      },
-      _routeOpenSpeakers(active, speakers, speakersMap, id) {
+      }
+
+      _speakersChanged(speakers, selectedFilters) {
+        if (this.speakers && this.speakers.length) {
+          this.contentLoaderVisibility = 'hidden';
+          const filters = selectedFilters && selectedFilters.tag ? selectedFilters.tag : [];
+          const updatedSpeakers = this._filterItems(speakers, filters)
+            .map((speaker) => Object.assign({}, speaker, {
+              link: `/speakers/${speaker.id}${this.queryParams ? `?${this.queryParams}` : ''}`,
+            }));
+          this.set('speakersToRender', updatedSpeakers);
+        }
+      }
+
+      _openSpeakerDetails(active, speakers, speakersMap, id) {
         if (speakers && speakers.length) {
           requestAnimationFrame(() => {
             if (active && id) {
@@ -359,73 +382,35 @@
             }
           });
         }
-      },
+      }
 
-      _openSpeakerDetails: function (e) {
-        var a = e.target.closest('a');
-        var id = a.id;
-        if (this.speakersToRender && this.speakersToRender.length) {
-          requestAnimationFrame(() => {
-            if (this.active && id) {
-              const speakerData = this.speakersToRender.find( (speaker) => speaker.id === id);
-              speakerData && dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
-            } else {
-               this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
-               this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
-            }
-          });
-        }
-      },
-      _speakersChanged: function (speakers, selectedFilters) {
-        if (this.speakers && this.speakers.length) {
-          this.contentLoaderVisibility = 'hidden';
-          const filters = selectedFilters && selectedFilters.tag ? selectedFilters.tag : [];
-          const updatedSpeakers = this._filterItems(speakers, filters)
-            .map((speaker) => Object.assign({}, speaker, {
-              link: `/speakers/${speaker.id}${this.queryParams ? `?${this.queryParams}` : ''}`,
-            }));
-          this.set('speakersToRender', updatedSpeakers);
-        }
-      },
-      _setHelmetData: function (active, isSpeakerDialogOpened, isSessionDialogOpened) {
+      _setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened) {
         return active && !isSpeakerDialogOpened && !isSessionDialogOpened;
-      },
+      }
 
-      _onFiltersLoad: function (filters) {
+      _onFiltersLoad(filters) {
         this.set('_filters', [{
           title: '{$ filters.tags $}',
           key: 'tag',
           items: filters.tags,
         }]);
-      },
+      }
 
-      _paramsUpdated: function (queryParams) {
+      _paramsUpdated(queryParams) {
         this.set('_selectedFilters', this.parseQueryParamsFilters(queryParams));
-      },
+      }
 
-      _filterItems: function (speakers, selectedFilters) {
+      _filterItems(speakers, selectedFilters) {
         return speakers.filter((speaker) => {
           if (!selectedFilters || !selectedFilters.length) return true;
           return speaker.tags
             && !!speaker.tags.filter((tag) =>
               selectedFilters.includes(this.generateClassName(tag))).length;
         });
-      },
-      parseQueryParamsFilters(queryParams) {
-      return queryParams.split('&')
-        .map((query) => query.split('='))
-        .filter((filter) => filter[0] && filter[1])
-        .reduce((aggr, filter) => Object.assign({}, aggr, {
-          [filter[0]]: aggr[filter[0]]
-            ? aggr[filter[0]].concat(filter[1])
-            : [filter[1]],
-        }), {});
-    },
+      }
+    }
 
-    });
-
-
-    // window.customElements.define(SpeakersPage.is, SpeakersPage);
+    window.customElements.define(SpeakersPage.is, SpeakersPage);
 
   </script>
 </dom-module>
