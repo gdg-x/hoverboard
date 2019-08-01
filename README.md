@@ -122,7 +122,8 @@ Any other issue labeled [`help wanted`](https://github.com/gdg-x/hoverboard/labe
 Read the full version [Code of Conduct](/CODE_OF_CONDUCT.md).
 
 ## Contributors
-__Maintainer:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
+__Maintainer:__ [Abraham Williams](https://github.com/abraham)
+__Authors:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
 
 This project exists thanks to all the [people who contribute](https://github.com/gdg-x/hoverboard/graphs/contributors). [[Contribute](CONTRIBUTING.md)].
 
