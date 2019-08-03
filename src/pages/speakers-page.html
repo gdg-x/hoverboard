@@ -119,12 +119,19 @@
       }
 
       .social-icon {
+
         --paper-icon-button: {
           padding: 6px;
           width: 32px;
           height: 32px;
         };
-        color: var(--secondary-text-color);
+        color: var(--dark-primary-color);
+        transition: transform var(--animation);
+      }
+
+      .social-icon:hover {
+        transform: scale(1.2);
+        color: var(--primary-text-color);
       }
 
       .action-buttons {
@@ -339,17 +346,6 @@
           speakersToRender: Array,
         };
       }
-
-      // ready: function () {
-      //   var _this = this;
-      //   fetch('data/posts/speakers.json')
-      //   .then(function (response) {
-      //   return response.json();
-      //   })
-      //   .then(function (res) {
-      //     _this.speakersToRender = res.speakers;
-      //   });
-      // }
 
       static get observers() {
         return [
