@@ -22,6 +22,23 @@
     ],
       "order" : 0,
       "title" : "Programmer / Author / Teacher"
+    },
+    {
+      "id":"guillaume_marty",
+      "featured": true,
+      "bio" : "Guillaume Marty has been working on the web for 77% of its lifespan. In the last few years he shifted his focus from code to humans. He's passionate about contributing to a healthy, inclusive industry, and the intersection between communities and technology. He was formerly working at Mozilla, and currently at Twitter.",
+      "name" : "Guillaume Marty",
+      "photo" : "/images/speakers/guillaume-marty.jpg",
+      "photoUrl" : "/images/speakers/guillaume-marty.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "https://twitter.com/g_marty",
+          "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Web lover / JavaScript activist / HTML5 enthusiast"
     }
   ],
   "sessions":
