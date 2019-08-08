@@ -60,7 +60,7 @@ If you would like to sign up to start a chapter, please start by looking at our 
 Activism and Government is a collection of community-builders and change agents. Action oriented, pragmatic, and experimental individuals who build bridges from ideas to institutions and communities. Included in this track are politicians, policymakers, government bureaucrats, non-profit sector, labor unions, political campaigns and parties, lobbyists, “social media stars”, athletes, and short-form journalists.
 
 
-### Environment and Arts
+### Environments and the Arts
 
 #### Track Lead
 
@@ -68,7 +68,7 @@ Activism and Government is a collection of community-builders and change agents.
 
 #### Participation
 
-Environment and Arts is a collection of creative, abstract, expressive, critical, out-of-the-box thinkers who create powerful, thought-provoking experiences that draw attention to our wider cultural and environmental context.  Participants in this track include artists, environmentalists, filmmakers, creative writers, long-form journalists, educators, musicians, entertainers, web designers, game-makers and virtual reality builders.
+Environments and the Arts is a collection of creative, abstract, expressive, critical, out-of-the-box thinkers who create powerful, thought-provoking experiences that draw attention to our wider cultural and environmental context.  Participants in this track include artists, environmentalists, filmmakers, creative writers, long-form journalists, educators, musicians, entertainers, web designers, game-makers and virtual reality builders.
 
 ### Entrepreneurship and Technology
 
