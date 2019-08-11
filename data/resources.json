@@ -62,11 +62,6 @@
       "title": "Event Resources",
       "links": [
         {
-          "name": "Call for Speakers",
-          "url": "speakers/",
-          "newTab": true
-        },
-        {
           "name": "FAQs",
           "url": "/faq/",
           "newTab": false
