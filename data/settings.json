@@ -1,53 +1,53 @@
 {
   "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv",
-    "blog": "https://medium.com/gdg-lviv",
-    "url": "http://lviv.gdg.org.ua/"
+    "name": "Taipei Ethereum Meetup",
+    "twitter": "eth_taipei",
+    "blog": "https://medium.com/taipei-ethereum-meetup",
+    "url": "https://ethertw.github.io/eth.taipei/"
   },
-  "startDate": "2017-10-013T09:00:00+03:00",
-  "endDate": "2017-10-14T19:00:00+03:00",
+  "startDate": "2019-10-19T09:00:00+08:00",
+  "endDate": "2019-10-20T18:00:00+08:00",
   "webapp": {
-    "shortName": "DevFest",
+    "shortName": "Crosslink19",
     "themeColor": "#673AB7",
     "backgroundColor": "#673AB7"
   },
   "dateFormat": {
-    "locale": "en-US"
+    "locale": "zh-TW"
   },
-  "hashtag": "DevFest17",
+  "hashtag": "crosslink19",
   "disabledSchedule": false,
   "showSessionShortAbstract": true,
   "navigation": [
     {
       "route": "home",
       "permalink": "/",
-      "label": "Home"
+      "label": "首頁"
     },
     {
       "route": "speakers",
       "permalink": "/speakers/",
-      "label": "Speakers"
+      "label": "講者"
     },
     {
       "route": "schedule",
       "permalink": "/schedule/",
-      "label": "Schedule"
+      "label": "議程"
     },
     {
       "route": "team",
       "permalink": "/team/",
-      "label": "Team"
+      "label": "團隊"
     },
     {
       "route": "blog",
       "permalink": "/blog/",
-      "label": "Blog"
+      "label": "部落格"
     }
   ],
   "heroSettings": {
     "home": {
-      "description": "Be a hero. Be a GDG!",
+      "description": "以太坊交叉連線",
       "background": {
         "color": "#673ab7",
         "image": "/images/backgrounds/home.jpg"
@@ -55,7 +55,7 @@
       "fontColor": "#FFF"
     },
     "blog": {
-      "title": "Blog",
+      "title": "部落格",
       "metaDescription": "Read stories from our team",
       "background": {
         "color": "#FFF"
@@ -63,7 +63,7 @@
       "fontColor": "#424242"
     },
     "speakers": {
-      "title": "Speakers",
+      "title": "講者",
       "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
       "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
       "background": {
@@ -72,7 +72,7 @@
       "fontColor": "#424242"
     },
     "previousSpeakers": {
-      "title": "Previous Speakers",
+      "title": "過去講者",
       "metaDescription": "Check who was with us last years",
       "background": {
         "color": "#FFF"
@@ -80,7 +80,7 @@
       "fontColor": "#424242"
     },
     "schedule": {
-      "title": "Schedule",
+      "title": "議程",
       "metaDescription": "Choose your sessions to visit",
       "background": {
         "color": "#fff"
@@ -88,7 +88,7 @@
       "fontColor": "#424242"
     },
     "team": {
-      "title": "Team",
+      "title": "團隊",
       "metaDescription": "Get more info about organizers",
       "background": {
         "color": "#fff"
@@ -114,10 +114,10 @@
   },
   "location": {
     "label": "Location",
-    "name": "Planeta kino",
-    "city": "Lviv",
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "name": "地點待定",
+    "city": "台北",
+    "short": "台北, 台灣",
+    "address": "地點待定, 台北, 台灣",
     "pointer": {
       "latitude": 49.809841,
       "longitude": 23.972805,
@@ -149,23 +149,15 @@
     "follow": [
       {
         "name": "meetup",
-        "url": "https://www.meetup.com/GDG-Lviv/events/244342635/"
+        "url": "https://www.meetup.com/Taipei-Ethereum-Meetup/"
       },
       {
         "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
+        "url": "https://www.facebook.com/groups/taipei.ethereum.meetup/"
       },
       {
         "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
-      },
-      {
-        "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
-      },
-      {
-        "name": "youtube",
-        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "url": "https://twitter.com/eth_taipei"
       }
     ],
     "share": [
