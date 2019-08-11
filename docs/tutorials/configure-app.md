@@ -39,15 +39,6 @@ The top block (aka 'hero') view of the page can be adjusted via `heroSettings` i
     },
     "fontColor": "#424242"
   },
-  "speakers": {
-    "title": "Speakers",
-    "metaDescription": "The Call for Speakers is OPEN for all 2019 LibertyJS Speaking Opportunities!",
-    "description": "The Call for Speakers is OPEN for all 2019 LibertyJS Speaking Opportunities!",
-    "background": {
-      "color": "#FFF"
-    },
-    "fontColor": "#424242"
-  }
   ...
  }
 ```

@@ -53,15 +53,6 @@
       },
       "fontColor": "#FFF"
     },
-    "speakers": {
-      "title": "Speakers",
-      "metaDescription": "The Call for Speakers is OPEN for all 2019 LibertyJS Speaking Opportunities!",
-      "description": "The Call for Speakers is OPEN for all 2019 LibertyJS Speaking Opportunities!",
-      "background": {
-        "color": "#FFF"
-      },
-      "fontColor": "#424242"
-    },
     "previousSpeakers": {
       "title": "Previous Speakers",
       "metaDescription": "Check who was with us last years",
