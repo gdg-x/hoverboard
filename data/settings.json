@@ -23,21 +23,6 @@
       "route": "home",
       "permalink": "/",
       "label": "首頁"
-    },
-    {
-      "route": "speakers",
-      "permalink": "/speakers/",
-      "label": "講者"
-    },
-    {
-      "route": "schedule",
-      "permalink": "/schedule/",
-      "label": "議程"
-    },
-    {
-      "route": "team",
-      "permalink": "/team/",
-      "label": "活動團隊"
     }
   ],
   "heroSettings": {
