@@ -16,7 +16,7 @@
     "locale": "zh-TW"
   },
   "hashtag": "crosslink19",
-  "disabledSchedule": false,
+  "disabledSchedule": true,
   "showSessionShortAbstract": true,
   "navigation": [
     {
@@ -38,16 +38,11 @@
       "route": "team",
       "permalink": "/team/",
       "label": "活動團隊"
-    },
-    {
-      "route": "blog",
-      "permalink": "/blog/",
-      "label": "部落格"
     }
   ],
   "heroSettings": {
     "home": {
-      "description": "以太坊.連線你和我",
+      "description": "One More Round of Cross Asia-rd Communication",
       "background": {
         "color": "#673ab7",
         "image": "/images/backgrounds/home.jpg"
@@ -64,16 +59,7 @@
     },
     "speakers": {
       "title": "講者",
-      "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "background": {
-        "color": "#FFF"
-      },
-      "fontColor": "#424242"
-    },
-    "previousSpeakers": {
-      "title": "過去講者",
-      "metaDescription": "Check who was with us last years",
+      "description": "",
       "background": {
         "color": "#FFF"
       },
@@ -114,10 +100,10 @@
   },
   "location": {
     "label": "Location",
-    "name": "地點待定",
-    "city": "台北",
-    "short": "台北, 台灣",
-    "address": "地點待定, 台北, 台灣",
+    "name": "TBD",
+    "city": "Taipei",
+    "short": "Taipei, Taiwan",
+    "address": "Taipei, Taiwan",
     "pointer": {
       "latitude": 49.809841,
       "longitude": 23.972805,
@@ -127,7 +113,7 @@
       "latitude": 48,
       "longitude": 8
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": ""
   },
   "mediaQueries": {
     "xs": {
@@ -171,34 +157,7 @@
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
-  "signInProviders": {
-    "providersData": [
-      {
-        "name": "google",
-        "label": "Sign in with Google",
-        "url": "https://accounts.google.com"
-      }
-    ],
-    "allowedProvidersUrl": [
-      "https://accounts.google.com"
-    ]
-  },
+  "mailto": "crosslink-tw@googlegroups.com",
   "contentLoaders": {
-    "schedule": {
-      "itemsCount": 2
-    },
-    "blog": {
-      "itemsCount": 3
-    },
-    "speakers": {
-      "itemsCount": 4
-    },
-    "previousSpeakers": {
-      "itemsCount": 6
-    },
-    "tickets": {
-      "itemsCount": 5
-    }
   }
 }

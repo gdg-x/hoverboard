@@ -54,14 +54,14 @@
     "title": "What you need to know, before you ask.",
     "callToAction": {
       "featuredSessions": {
-        "description": "GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases.",
+        "description": "Crosslink 2019 is a two-day conference in Taipei with domestic and overseas leading blockchain researchers and developers.",
         "label": "Explore featured session",
-        "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "link": "https://youtu.be/9RtSod8EXn4?t=11388"
       },
       "howItWas": {
-        "description": "Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
-        "label": "See how it was in 2016",
-        "youtubeId": "TdpbgRgz6eE"
+        "description": "BeyondBlock Taipei 2017 was the event with similar nature hosted by co-organizers of Taipei Ethereum Meetup.",
+        "label": "See how it was in 2017",
+        "youtubeId": "9RtSod8EXn4"
       }
     },
     "statisticsBlock": {
@@ -200,19 +200,10 @@
     "blocks": [
       {
         "title": "Organizer",
-        "description": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
+        "description": "<a href='https://twitter.com/eth_taipei' target='_blank'>Taipei Ethereum Meetup</a> is a Taiwan-based local meetup to support blockchain technical research, development, and community. We wish to crosslink the Taiwanese community to the global ecosystem.",
         "callToAction": {
-          "label": "Open team page",
-          "link": "/team"
-        }
-      },
-      {
-        "title": "What is GDG?",
-        "description": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion",
-        "callToAction": {
-          "label": "Read more",
-          "link": "https://developers.google.com/groups/",
-          "newTab": true
+          "label": "Our past events",
+          "link": "https://www.youtube.com/channel/UCVmRAQeesq4TA3rdvbz-IkQ/videos"
         }
       }
     ]
