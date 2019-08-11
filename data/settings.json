@@ -37,7 +37,7 @@
     {
       "route": "team",
       "permalink": "/team/",
-      "label": "團隊"
+      "label": "活動團隊"
     },
     {
       "route": "blog",
@@ -47,7 +47,7 @@
   ],
   "heroSettings": {
     "home": {
-      "description": "以太坊交叉連線",
+      "description": "以太坊.連線你和我",
       "background": {
         "color": "#673ab7",
         "image": "/images/backgrounds/home.jpg"
@@ -88,7 +88,7 @@
       "fontColor": "#424242"
     },
     "team": {
-      "title": "團隊",
+      "title": "活動團隊",
       "metaDescription": "Get more info about organizers",
       "background": {
         "color": "#fff"
