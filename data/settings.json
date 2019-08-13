@@ -17,12 +17,12 @@
   },
   "hashtag": "crosslink19",
   "disabledSchedule": true,
-  "showSessionShortAbstract": true,
+  "showSessionShortAbstract": false,
   "navigation": [
     {
       "route": "home",
       "permalink": "/",
-      "label": "首頁"
+      "label": "Home"
     }
   ],
   "heroSettings": {
@@ -35,7 +35,7 @@
       "fontColor": "#FFF"
     },
     "blog": {
-      "title": "部落格",
+      "title": "Blog",
       "metaDescription": "Read stories from our team",
       "background": {
         "color": "#FFF"
@@ -43,7 +43,7 @@
       "fontColor": "#424242"
     },
     "speakers": {
-      "title": "講者",
+      "title": "Speakers",
       "description": "",
       "background": {
         "color": "#FFF"
@@ -51,7 +51,7 @@
       "fontColor": "#424242"
     },
     "schedule": {
-      "title": "議程",
+      "title": "Schedule",
       "metaDescription": "Choose your sessions to visit",
       "background": {
         "color": "#fff"
@@ -59,7 +59,7 @@
       "fontColor": "#424242"
     },
     "team": {
-      "title": "活動團隊",
+      "title": "Team",
       "metaDescription": "Get more info about organizers",
       "background": {
         "color": "#fff"
