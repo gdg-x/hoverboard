@@ -67,7 +67,7 @@
     "statisticsBlock": {
       "attendees": {
         "label": "Attendees",
-        "number": "900"
+        "number": "200"
       },
       "days": {
         "label": "Days",
@@ -75,11 +75,11 @@
       },
       "sessions": {
         "label": "Sessions",
-        "number": "50"
+        "number": "19"
       },
       "tracks": {
         "label": "Tracks",
-        "number": "4"
+        "number": "1"
       }
     }
   },
