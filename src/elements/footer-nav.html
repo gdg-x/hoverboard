@@ -14,7 +14,6 @@
 
       .copyright {
         padding: 15px 0 0;
-        float: left;
       }
 
       .cod {
@@ -25,13 +24,23 @@
         list-style: none;
         margin: 0;
         padding: 0;
+        display: flex;
+        flex-wrap: wrap;
       }
 
       .footer-logo {
         margin: 10px 30px 0 0;
         height: 24px;
         width: 120px;
-        float: left;
+      }
+
+      .logo-link {
+        flex-basis: 50%;
+      }
+
+      .footer-text {
+        max-width: none;
+        flex-basis: 100%;
       }
 
       a {
@@ -48,6 +57,10 @@
         :host {
           margin: 15px 0;
         }
+
+        .footer-text {
+          max-width: 50%;
+        }
       }
 
       @media (min-width: 505px) {
@@ -55,7 +68,6 @@
         .copyright {
           margin: 0;
           padding: 15px 0 0 0;
-          float: right;
           text-align: right;
         }
 
@@ -67,7 +79,7 @@
 
     <div class="nav-inline" layout flex>
 
-      <a href="{$ organizer.url $}" target="_blank" rel="noopener noreferrer">
+      <a class="logo-link" href="{$ organizer.url $}" target="_blank" rel="noopener noreferrer">
         <plastic-image
           class="footer-logo"
           srcset="../../images/organizer-logo.svg"
@@ -77,11 +89,12 @@
           lazy-load
         ></plastic-image>
       </a>
-
-      <div class="copyright">
-        &copy; [[_getYear()]] RadicalxChange Foundation Ltd. <br><br>Based on <a href="https://github.com/gdg-x/hoverboard" target="_blank" rel="noopener noreferrer">Project Hoverboard</a> &middot; 
-<!--         <a class="cod" href="/cod">{$ codeOfConduct $}</a>
- -->
+      <div class="footer-text">
+        <div class="copyright">
+          &copy; [[_getYear()]] RadicalxChange Foundation Ltd.
+          <br><br>
+          RadicalxChange Foundation Ltd., a 501(c)(3) nonprofit organization, does not support or oppose candidates for public office or political parties.
+        </div>
       </div>
     </div>
 
