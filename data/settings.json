@@ -116,6 +116,14 @@
         "color": "#fff"
       },
       "fontColor": "#424242"
+    },
+    "privacyPolicy": {
+      "title": "Privacy Policy",
+      "metaDescription": "Privacy Policy",
+      "background": {
+        "color": "#fff"
+      },
+      "fontColor": "#424242"
     }
   },
   "location": {
