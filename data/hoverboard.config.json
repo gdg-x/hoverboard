@@ -68,25 +68,25 @@
   ],
   "location": {
     "apiKey": "AIzaSyDNFE5RChWZGz2uq6CTtLEOtzD4fTSjPoI",
-    "name": "Tangeman University Center",
-    "address": "2766 UC Main Street, Cincinnati, OH 45221",
-    "streetAddress": "2766 UC Main Street",
-    "city": "Cincinnati",
+    "name": "Root Insurance",
+    "address": "80 E Rich St Suite 500, Columbus, Oh 43215",
+    "streetAddress": "80 E Rich St",
+    "city": "Columbus",
     "state": "OH",
-    "zipcode": "45221",
+    "zipcode": "43215",
     "country": "US",
     "link": "https://www.uc.edu/eventservices/venues/tangeman.html",
     "pointer": {
-      "latitude": 39.1317988,
-      "longitude": -84.5177259,
+      "latitude": 39.9580889,
+      "longitude": -82.9977805,
       "zoom": 15
     },
     "mapCenter": {
-      "latitude": 39.1317988,
-      "longitude": -84.513
+      "latitude": 39.9580889,
+      "longitude": -82.997
     },
     "images": [
-      "/images/tangeman.jpg"
+      "/images/root_insurance.jpeg"
     ]
   },
   "gallery": {
