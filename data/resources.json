@@ -21,6 +21,7 @@
   "country": "Country",
   "time": "Time",
   "about": "/data/about.md",
+  "privacyPolicy": "/data/privacy-policy.md",
   "travel": "/data/travel.md",
   "footer": {
     "blog": "Blog"
@@ -61,6 +62,11 @@
           "name": "Contact our web team",
           "url": "mailto:webdev.radicalxchange@gmail.com",
           "newTab": true
+        },
+        {
+          "name": "Privacy Policy",
+          "url": "privacy-policy/",
+          "newTab": false
         }
       ]
     }

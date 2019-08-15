@@ -1,0 +1,57 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../elements/polymer-helmet.html">
+<link rel="import" href="../elements/hero-block.html">
+<link rel="import" href="../elements/footer-block.html">
+<link rel="import" href="../elements/md-content.html">
+
+<dom-module id="privacy-policy-page">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <polymer-helmet
+      title="{$ heroSettings.privacyPolicy.title $} | {$ title $}"
+      description="{$ heroSettings.privacyPolicy.metaDescription $}"
+      active="[[active]]"
+    ></polymer-helmet>
+
+    <hero-block
+      background-image="{$ heroSettings.privacyPolicy.background.image $}"
+      background-color="{$ heroSettings.privacyPolicy.background.color $}"
+      font-color="{$ heroSettings.privacyPolicy.fontColor $}"
+      active="[[active]]"
+    >
+      <div class="hero-title highlight-font">{$ heroSettings.privacyPolicy.title $}</div>
+      <p class="hero-description">{$ heroSettings.privacyPolicy.description $}</p>
+    </hero-block>
+
+    <md-content md-source="[[source]]"></md-content>
+
+    <footer-block></footer-block>
+  </template>
+
+  <script>
+
+    // eslint-disable-next-line no-undef
+    class PrivacyPolicyPage extends Polymer.Element {
+      static get is() {
+        return 'privacy-policy-page';
+      }
+
+      static get properties() {
+        return {
+          active: Boolean,
+          source: {
+            type: String,
+            value: '{$ privacyPolicy $}',
+          },
+        };
+      }
+    }
+
+    window.customElements.define(PrivacyPolicyPage.is, PrivacyPolicyPage);
+  </script>
+</dom-module>
