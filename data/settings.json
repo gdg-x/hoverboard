@@ -23,6 +23,11 @@
       "route": "home",
       "permalink": "/",
       "label": "Home"
+    },
+    {
+      "route": "speakers",
+      "permalink": "/speakers/",
+      "label": "Speakers"
     }
   ],
   "heroSettings": {
