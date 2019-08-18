@@ -6,6 +6,7 @@
 
 <link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="./text-truncate.html">
 <link rel="import" href="./shared-styles.html">
 
 <dom-module id="session-element">
@@ -150,7 +151,9 @@
       <div class="session-header" layout horizontal justified>
         <div flex>
           <h3 class="session-title">[[session.title]]</h3>
-          <div class="session-description" hidden$="[[_hideSessionAbstract(session.shortDescription)]]">[[session.shortDescription]]</div>
+          <text-truncate lines="3">
+            <div class="session-description">[[session.description]]</div>
+          </text-truncate>
         </div>
         <span class="language">[[slice(session.language, 2)]]</span>
       </div>
@@ -229,10 +232,6 @@
             type: String,
             computed: '_isFeatured(featuredSessions, session.id)',
           },
-          showSessionShortAbstract: {
-            type: Boolean,
-            value: () => JSON.parse('{$ showSessionShortAbstract $}'),
-          },
         };
       }
 
@@ -243,10 +242,6 @@
 
       _getEnding(number) {
         return number > 1 ? 's' : '';
-      }
-
-      _hideSessionAbstract(sesionAbstract) {
-        return !this.showSessionShortAbstract || !sesionAbstract;
       }
 
       _getFeaturedSessionIcon(featuredSessions, sessionId) {

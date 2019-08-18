@@ -17,7 +17,6 @@
   },
   "hashtag": "DevFest17",
   "disabledSchedule": false,
-  "showSessionShortAbstract": true,
   "navigation": [
     {
       "route": "home",
