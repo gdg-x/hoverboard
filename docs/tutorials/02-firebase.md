@@ -12,13 +12,13 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 
 ```json
 "firebase": {
-  "appId": "<REPLACE_ME>",
   "apiKey": "<REPLACE_ME>",
+  "appId": "<REPLACE_ME>",
   "authDomain": "<REPLACE_ME>",
   "databaseURL": "<REPLACE_ME>",
+  "messagingSenderId": "<REPLACE_ME>",
   "projectId": "<REPLACE_ME>",
-  "storageBucket": "<REPLACE_ME>",
-  "messagingSenderId": "<REPLACE_ME>"
+  "storageBucket": "<REPLACE_ME>"
 }
 ```
 
@@ -30,7 +30,7 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
     - Save the file as `serviceAccount.json` and to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
     - Enable Firestore in web console at [console.firebase.google.com](https://console.firebase.google.com) -> Database -> Cloud Firestore -> Create database. Select **locked mode** and press **Enable**
   - [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
-  - Select your Firebase project `npx firebase use <YOUR_PROJECT_ID>`
+  - Select your Firebase project `npx firebase use <projectId>`
     * Run `npm run firestore:init`
 
 1. Whoa! You've set up Firebase into your app.

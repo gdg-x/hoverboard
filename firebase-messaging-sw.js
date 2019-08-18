@@ -1,9 +1,14 @@
-importScripts('node_modules/firebase/firebase-app.js');
-importScripts('node_modules/firebase/firebase-messaging.js');
+importScripts('./node_modules/firebase/firebase-app.js');
+importScripts('./node_modules/firebase/firebase-messaging.js');
 
 firebase.initializeApp({
-  projectId: '{$ firebase.projectId $}',
+  apiKey: '{$ firebase.apiKey $}',
+  appId: '{$ firebase.appId $}',
+  authDomain: '{$ firebase.authDomain $}',
+  databaseURL: '{$ firebase.databaseURL $}',
   messagingSenderId: '{$ firebase.messagingSenderId $}',
+  projectId: '{$ firebase.projectId $}',
+  storageBucket: '{$ firebase.storageBucket $}',
 });
 const messaging = firebase.messaging();
 

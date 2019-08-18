@@ -2,10 +2,11 @@
   "extends": [
     "eslint:recommended",
     "google",
-    "plugin:polymer/polymer-2"
+    "plugin:polymer/polymer-3"
   ],
   "parserOptions": {
-    "ecmaVersion": 6
+    "sourceType": "module",
+    "ecmaVersion": 2018
   },
   "env": {
     "browser": true,
@@ -15,10 +16,13 @@
     "html",
     "polymer"
   ],
+  "ignorePatterns": [
+    "node_modules/"
+  ],
   "rules": {
     "brace-style": "off",
     "new-cap": "off",
-    "no-var": "off",
+    "no-var": "error",
     "require-jsdoc": "off",
     "max-len": ["error", { "code": 120 }],
     "object-curly-spacing": ["error", "always"],
@@ -26,32 +30,9 @@
     "linebreak-style": 0
   },
   "globals": {
-    "Polymer": true,
     "firebase": true,
-    "google": true,
     "ga": true,
     "ShadyCSS": true,
-    "ReduxMixin": true,
-    "uiActions": true,
-    "routingActions": true,
-    "dialogsActions": true,
-    "toastActions": true,
-    "ticketsActions": true,
-    "partnersActions": true,
-    "feedbackActions": true,
-    "videosActions": true,
-    "blogActions": true,
-    "speakersActions": true,
-    "previousSpeakersActions": true,
-    "sessionsActions": true,
-    "scheduleActions": true,
-    "galleryActions": true,
-    "teamActions": true,
-    "userActions": true,
-    "subscribeActions": true,
-    "notificationsActions": true,
-    "helperActions": true,
-    "DIALOGS": true,
-    "NOTIFICATIONS_STATUS": true
+    "HOVERBOARD": true
   }
 }

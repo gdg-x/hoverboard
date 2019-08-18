@@ -10,7 +10,7 @@ jobs:
     - name: Test
       script: npm test
     - name: Build & Deploy
-      script: if [ "$TRAVIS_BRANCH" == "master" ]; then npm run build:prod; else npm run build; fi
+      script: if [ "$TRAVIS_BRANCH" == "master" ]; then npm run build; else BUILD_ENV=development npm run build; fi
       before_deploy:
         - echo "Deploying!"
       deploy:
