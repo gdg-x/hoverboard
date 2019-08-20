@@ -1,9 +1,9 @@
 {
   "title": "GDG DevFest Season 2018",
-  "description": "Be a hero. Be a GDG!",
+  "description": "Te vejo na Ilha do Silício!",
   "image": "images/social-share.jpg",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "October 12-13, 2018",
+  "dates": "19 de Outubro",
   "partnershipProposition": "https://bit.ly/dfua17-partners",
   "share": "Share",
   "followOur": "Follow our",
@@ -14,7 +14,7 @@
   "buyTicket": "Buy ticket",
   "signIn": "Sign in",
   "signOut": "Sign out",
-  "viewHighlights": "View Highlights",
+  "viewHighlights": "DevFest Floripa 2018",
   "offlineMessage": "You can still work offline.",
   "cachingComplete": "Caching complete! Future visits will work offline.",
   "newVersionAvailable": "A new version of this app is available.",
@@ -121,7 +121,7 @@
       "howItWas": {
         "description": "Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
         "label": "See how it was in 2016",
-        "youtubeId": "TdpbgRgz6eE"
+        "youtubeId": "x-VnkRwSJOI"
       }
     },
     "statisticsBlock": {
@@ -259,8 +259,8 @@
     "image": "/images/team.jpg",
     "blocks": [
       {
-        "title": "Organizer",
-        "description": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
+        "title": "Organização",
+        "description": "GDG DevFest Sul 2019 é organizado por quatro capítulos do programa Google Developers Community na região Sul do Brasil: GDG Floripa, GDG Porto Alegre, GDG Pelotas e GDG Cascavel.",
         "callToAction": {
           "label": "Open team page",
           "link": "/team"

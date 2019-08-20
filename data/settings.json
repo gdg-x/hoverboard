@@ -47,7 +47,7 @@
   ],
   "heroSettings": {
     "home": {
-      "description": "Be a hero. Be a GDG!",
+      "description": "Te vejo na Ilha do Silício!",
       "background": {
         "color": "#673ab7",
         "image": "/images/backgrounds/home.jpg"
@@ -115,7 +115,7 @@
   "location": {
     "label": "Location",
     "name": "Planeta kino",
-    "city": "Lviv",
+    "city": "Florianópolis",
     "short": "Lviv, Ukraine",
     "address": "36 Shchyretska St, Lviv, Ukraine",
     "pointer": {
