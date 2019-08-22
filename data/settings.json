@@ -49,7 +49,7 @@
     },
     "speakers": {
       "title": "Speakers",
-      "description": "",
+      "description": "Taipei Ethereum Meetup invited the prominent experts in Ethereum, including the inventor of Ethereum Vitalik Buterin (Ethereum Foundation), Danny Ryan (Ethereum Foundation, Researcher), and Liam Horne (L4 Ventures & ETHGlobal, Co-founder) to share the lasted scalability research progress.\nlibp2p is a modular peer-to-peer networking stack used by IPFS and other services. It's also the fundamental networking layer in Ethereum 2.0. We’re an honor to have libp2p tech lead Raúl Kripalani to introduce the architecture of libp2p and related applications.\neWASM (Ethereum Flavored WebAssembly) is the next-generation Ethereum virtual machine. The VP of engineering of Second State Hydai, is bringing us an anatomy of eWASM design.\nExcept for the technical presentations, Alexander Praetorius and Nina Breznik (Wizard Amigos & Play Project) are organizing the smart contract hands-on workshops with different difficulty levels for the developers.",
       "background": {
         "color": "#FFF"
       },
