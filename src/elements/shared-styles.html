@@ -1,0 +1,267 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="./flex-layout-attr.html">
+
+<!-- shared styles for all views -->
+<dom-module id="shared-styles">
+  <template>
+    <style>
+      :host {
+        --dark-gradient-color: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(13,3,17,1) 55%, rgba(8,54,45,1) 100%, rgba(15,232,192,1) 100%);
+        --gradient-color: linear-gradient(310deg, rgba(123,31,162,1) 2%, rgba(12,119,224,1) 37%, rgba(34,220,244,0.9401709401709402) 100%);
+        --dark-primary-color: #FFFFFF;
+        --default-primary-color: #673AB7;
+        --focused-color: #311B92;
+        --light-primary-color: #01040a;
+        --text-primary-color: #FFFFFF;
+        --accent-color: #00e6ff;
+        --primary-background-color: #01040a;
+        --primary-text-color: #FFFFFF;
+        --secondary-text-color: #FFFFFF;
+        --disabled-text-color: #BDBDBD;
+        --divider-color: #01040a;
+        --footer-background-color: #01040a;
+        --footer-text-color: #FFFFFF;
+        --twitter-color: #4099FF;
+        --facebook-color: #3B5998;
+        --border-light-color: #01040a;
+        --error-color: #e64a19;
+        --progressBar-color: linear-gradient(to left, #7b1fa2, #6e38b0, #5e4abc, #4d59c5, #3966cc, #2773d2, #127fd7, #008ada, #0098dd, #00a5dc, #00b1d9, #00bcd4);
+        
+
+        /* Custom */
+        --default-background-color: #212121;
+        --secondary-background-color: #00e6ff;
+        --additional-background-color: #FFFFFF;
+        --contrast-additional-background-color: #e8e8e8;
+        --animation: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        --slideAnimation: 0.4s cubic-bezier(0, 0, 0.2, 1);
+        --border-radius: 5px;
+        --box-shadow: 0 0 8px 0 rgb(8,199,203), 0 8px 8px 0 rgba(168,6,179,1);
+        --box-shadow-primary-color: 0 0 8px 0 rgb(8,199,203), 0 8px 8px 0 rgba(168,6,179,1);
+        --box-shadow-primary-color-hover: 0 0 8px 0 rgb(8,199,203), 0 8px 8px 0 rgba(168,6,179,1);
+        --font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif; /*TODO Change to Open Sans*/
+        --max-container-width: 1280px;
+
+        --primary-color-transparent: rgba(103, 58, 183, 0.1);
+        --primary-color-light: rgba(103, 58, 183, 0.8);
+        --primary-color-white: #EDE7F6;
+
+        /* Labels */
+        --gde: #3d5afe;
+        --wtm: #1de9b6;
+        --gdg: #00B0ff;
+
+        /* Tags */
+        --general: #9E9E9E;
+        --android: #78c257;
+        --web: #2196f3;
+        --cloud: #3f51b5;
+        --community: #e91e63;
+        --design: #E91E63;
+      }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body {
+        font-family: var(--font-family);
+        text-rendering: optimizeLegibility;
+        color: var(--primary-text-color);
+      }
+
+      .highlight-font {
+        font-family: "Product Sans", arial, sans-serif;
+      }
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 0;
+        font-family: "Product Sans", arial, sans-serif;
+        font-weight: normal;
+        color: var(--text-primary-color);
+      }
+
+      p{
+        margin-bottom: 10px;
+      }
+
+      h1 {
+        padding: 8px 8px 24px 14px;
+        font-size: 24px;
+        line-height: 30px;
+        font-weight: 500;
+      }
+
+      a {
+        color: var(--default-primary-color);
+        text-decoration: none;
+        transition: border-color var(--animation);
+      }
+
+      p{
+        font-size: 18px;
+        padding-top: 15px;
+      }
+
+      .numbers, .label{
+        color: var(--text-primary-color);
+      }
+
+      paper-button {
+        padding: 0.7em;
+        border-radius: 2px;
+        font-size: 14px;
+        color: #ffffff;
+        border: solid;
+        border-color: var(--secondary-text-color);
+        border-width: 0.5px;
+        border-radius: 25px;
+        padding: 5px 20px 5px 20px;
+        transition: background-color var(--animation);
+        margin-top: 30px;
+        
+      }
+
+      paper-button:hover {
+        background-color: var(--primary-color-transparent);
+      }
+
+      paper-button[disabled] {
+        cursor: default;
+        background-color: var(--primary-color-transparent);
+        opacity: 0.8;
+      }
+
+      paper-button[primary] {
+        background-color: var(--default-primary-color);
+        color: var(--text-primary-color);
+      }
+
+      paper-button[primary]:hover {
+        background: linear-gradient(310deg, rgba(123,31,162,1) 2%, rgba(12,119,224,1) 37%, rgba(34,220,244,0.9401709401709402) 100%);
+      }
+
+      paper-button[primary][invert] {
+        color: var(--default-primary-color);
+        background-color: var(--text-primary-color);
+        margin-bottom: 40px;
+      }
+
+      paper-button[primary][invert]:hover {
+        background-color: var(--primary-color-white);
+        color: #FFFFFF;
+      }
+
+      paper-button[primary-text] {
+        color: var(--default-primary-color);
+      }
+
+      paper-button iron-icon {
+        --iron-icon-height: 20px;
+        --iron-icon-width: 20px;
+      }
+
+      paper-button.icon-right iron-icon {
+        margin-left: 8px;
+      }
+
+      paper-button.icon-left iron-icon {
+        margin-right: 8px;
+      }
+
+      paper-button.animated iron-icon {
+        transition: transform var(--animation);
+      }
+
+      paper-button.animated.icon-right:hover iron-icon {
+        transform: translateX(4px);
+      }
+
+      paper-button.animated.icon-left:hover iron-icon {
+        transform: translateX(-4px);
+      }
+
+      .container,
+      .container-narrow {
+        margin: 0 auto;
+        padding: 24px 16px;
+        max-width: var(--max-container-width);
+      }
+
+      .container-narrow {
+        max-width: 800px;
+      }
+
+      .container-title {
+        margin-bottom: 24px;
+        padding: 0;
+        font-size: 32px;
+        line-height: 30px;
+        color: var(--text-primary-color);
+      }
+
+      .big-icon {
+        --iron-icon-height: 48px;
+        --iron-icon-width: 48px;
+      }
+
+      .gde-b {
+        background-color: var(--gde);
+      }
+
+      .wtm-b {
+        background-color: var(--wtm);
+      }
+
+      .gdg-b {
+        background-color: var(--gdg);
+      }
+
+      .google-b {
+        background-color: var(--secondary-background-color);
+      }
+
+      .google-b .badge-icon {
+        --iron-icon-width: 18px;
+        --iron-icon-height: 18px;
+        color: #fff;
+      }
+
+      .card {
+        background-color: var(--default-background-color);
+        box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.07), 0 2px 2px 0 rgba(0, 0, 0, 0.15);
+        transition: box-shadow var(--animation);
+        cursor: pointer;
+      }
+
+      .tag {
+        margin-right: 2px;
+        padding: 2px 4px;
+        font-size: 12px;
+        border: 1px solid currentColor;
+      }
+
+      @media (min-width: 640px) {
+        .container,
+        .container-narrow {
+          padding: 32px;
+        }
+
+        .card:hover {
+          box-shadow: var(--box-shadow);
+        }
+      }
+
+    </style>
+  </template>
+</dom-module>

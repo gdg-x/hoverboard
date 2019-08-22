@@ -1,0 +1,73 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/iron-lazy-pages/iron-lazy-pages.html">
+
+<link rel="import" href="../mixins/scroll-functions.html">
+
+<dom-module id="blog-page">
+  <template>
+    <style>
+
+      :host {
+        display: block;
+        height: 100%;
+      }
+
+      iron-lazy-pages {
+        min-height: 100%;
+      }
+
+    </style>
+    <app-route
+      route="[[_route]]"
+      pattern="/:page"
+      data="{{routeData}}"
+      tail="{{subRoute}}"
+    ></app-route>
+
+    <iron-lazy-pages
+      attr-for-selected="data-route"
+      selected="[[routeData.page]]"
+      selected-attribute="active"
+    >
+      <blog-list-page data-route="" data-path="./blog-list-page.html"></blog-list-page>
+      <post-page data-route="posts" data-path="./post-page.html" route="[[subRoute]]"></post-page>
+    </iron-lazy-pages>
+    <footer-block></footer-block>
+  </template>
+
+  <script>
+
+    // eslint-disable-next-line no-undef
+    class BlogPage extends ScrollFunctions(Polymer.Element) {
+      static get is() {
+        return 'blog-page';
+      }
+
+      static get properties() {
+        return {
+          route: Object,
+          active: Boolean,
+        };
+      }
+
+      static get observers() {
+        return [
+          '_routeChanged(active, route)',
+        ];
+      }
+
+      _routeChanged(active, route) {
+        if (active && route) {
+          this.scrollToY(0, 200);
+          this.set('subRoute', {});
+          this.set('_route', route);
+          routingActions.setSubRoute(this.routeData.page);
+        }
+      }
+    }
+
+    window.customElements.define(BlogPage.is, BlogPage);
+  </script>
+</dom-module>

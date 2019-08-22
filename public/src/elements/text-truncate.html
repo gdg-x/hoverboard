@@ -1,0 +1,48 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="/bower_components/polymer/lib/utils/flattened-nodes-observer.html">
+
+<script src="../../bower_components/clamp-js/clamp.min.js"></script>
+
+<dom-module id="text-truncate">
+  <template>
+    <slot id="text"></slot>
+  </template>
+
+  <script>
+
+    class TextTruncate extends Polymer.Element {
+      static get is() {
+        return 'text-truncate';
+      }
+
+      static get properties() {
+        return {
+          lines: {
+            type: String,
+            value: '2',
+          },
+        };
+      }
+
+      ready() {
+        super.ready();
+        this._observer = new Polymer.FlattenedNodesObserver(this.$.text, (info) => {
+          const target = info.addedNodes.filter(function (node) {
+            return (node.nodeType === Node.ELEMENT_NODE);
+          })[0];
+          // eslint-disable-next-line no-undef
+          $clamp(target, { clamp: this._getClampValue() });
+        });
+      }
+
+      _getClampValue() {
+        if (!isNaN(this.lines)) {
+          return parseInt(this.lines);
+        }
+        return this.lines;
+      }
+    }
+
+    window.customElements.define(TextTruncate.is, TextTruncate);
+  </script>
+</dom-module>

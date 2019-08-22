@@ -1,0 +1,212 @@
+{
+  "organizer": {
+    "name": "GDG Bonny",
+    "twitter": "gdg_bonny",
+    "blog": "https://meetup.com/gdg-bonny-island/",
+    "url": "https://meetup.com/gdg-bonny-island/"
+  },
+  "startDate": "2019-10-012T09:00:00+03:00",
+  "endDate": "2019-10-12T19:00:00+03:00",
+  "webapp": {
+    "shortName": "DevFest",
+    "themeColor": "#01040a",
+    "backgroundColor": "#01040a"
+  },
+  "dateFormat": {
+    "locale": "en-US"
+  },
+  "hashtag": "'DevFest19','DevFestbonny'",
+  "disabledSchedule": false,
+  "showSessionShortAbstract": true,
+  "navigation": [
+    {
+      "route": "home",
+      "permalink": "/",
+      "label": "Home"
+    },
+    {
+      "route": "speakers",
+      "permalink": "/speakers/",
+      "label": "Speakers"
+    },
+    {
+      "route": "schedule",
+      "permalink": "/schedule/",
+      "label": "Schedule"
+    },
+    {
+      "route": "team",
+      "permalink": "/team/",
+      "label": "Team"
+    }
+  ],
+  "heroSettings": {
+    "home": {
+      "description": "Be a hero. Be a GDG!",
+      "background": {
+        "color": "linear-gradient(0deg, rgba(1,0,1,1) 0%, rgba(168,6,179,1) 100%)",
+        "image": "/images/backgrounds/home.jpg"
+      },
+      "fontColor": "#FFFFFF"
+    },
+    "blog": {
+      "title": "Blog",
+      "metaDescription": "Read stories from our team",
+      "background": {
+        "color": "#FFF"
+      },
+      "fontColor": "#FFFFFF"
+    },
+    "speakers": {
+      "title": "Coming soon",
+      "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
+      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
+      "background": {
+        "color": "#01040a"
+      },
+      "fontColor": "#FFFFFF"
+    },
+    "previousSpeakers": {
+      "title": "Previous Speakers",
+      "metaDescription": "Check who was with us last years",
+      "background": {
+        "color": "#01040a"
+      },
+      "fontColor": "#FFFFFF"
+    },
+    "schedule": {
+      "title": "Coming soon",
+      "metaDescription": "Choose your sessions to visit",
+      "background": {
+        "color": "#01040a"
+      },
+      "fontColor": "#FFFFFF"
+    },
+    "team": {
+      "title": "Team",
+      "metaDescription": "Get more info about organizers",
+      "background": {
+        "color": "#01040a"
+      },
+      "fontColor": "#FFFFFF"
+    },
+    "faq": {
+      "title": "FAQs",
+      "metaDescription": "Find you answer right here!",
+      "background": {
+        "color": "#01040a"
+      },
+      "fontColor": "#FFFFFF"
+    },
+    "cod": {
+      "title": "Code Of Conduct",
+      "metaDescription": "Lear more about our expectations for all those who participate in our community",
+      "background": {
+        "color": "#01040a"
+      },
+      "fontColor": "#FFFFFF"
+    }
+  },
+  "location": {
+    "label": "Location",
+    "name": "Ibanise Hall",
+    "city": "Bonny Island",
+    "short": "Bonny Island, Rivers State, Nigeria",
+    "address": "Ibanise Hall, Bonny Island, Rivers",
+    "pointer": {
+      "latitude": 49.809841,
+      "longitude": 23.972805,
+      "zoom": 5
+    },
+    "mapCenter": {
+      "latitude": 48,
+      "longitude": 8
+    },
+    "description": "Ibanise Hall is located along Naval Base area beside BVC"
+  },
+  "mediaQueries": {
+    "xs": {
+      "max": "639px"
+    },
+    "sm": {
+      "min": "640px",
+      "max": "811px"
+    },
+    "md": {
+      "min": "812px",
+      "max": "1023px"
+    },
+    "lg": {
+      "min": "1024px"
+    }
+  },
+  "socialNetwork": {
+    "follow": [
+      {
+        "name": "meetup",
+        "url": "https://www.meetup.com/GDG-Bonny-island/events/263134780/"
+      },
+      {
+        "name": "facebook",
+        "url": "https://www.facebook.com/gdgbonny/"
+      },
+      {
+        "name": "twitter",
+        "url": "https://twitter.com/gdg_bonny"
+      }
+     
+    ],
+    "share": [
+      {
+        "name": "facebook",
+        "url": "https://www.facebook.com/sharer.php?u="
+      },
+      {
+        "name": "twitter",
+        "url": "https://twitter.com/intent/tweet?text="
+      }
+    ]
+  },
+  "mailto": "devfest@gdg.org.ua",
+  "signInProviders": {
+    "providersData": [
+      {
+        "name": "google",
+        "label": "Sign in with Google",
+        "url": "https://accounts.google.com"
+      },
+      {
+        "name": "facebook",
+        "label": "Sign in with Facebook",
+        "url": "https://www.facebook.com"
+      },
+      {
+        "name": "twitter",
+        "label": "Sign in with Twitter",
+        "url": "https://twitter.com"
+      }
+    ],
+    "allowedProvidersUrl": [
+      "https://accounts.google.com",
+      "https://www.facebook.com",
+      "https://twitter.com"
+    ]
+  },
+  "contentLoaders": {
+    "schedule": {
+      "itemsCount": 2
+    },
+    "blog": {
+      "itemsCount": 3
+    },
+    "speakers": {
+      "itemsCount": 4
+    },
+    "previousSpeakers": {
+      "itemsCount": 6
+    },
+    "tickets": {
+      "itemsCount": 5
+    }
+  }
+}

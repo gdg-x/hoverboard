@@ -1,0 +1,16 @@
+{
+  "basepath": "/",
+  "url": "https://hoverboard-master.firebaseapp.com/",
+  "analytics": "UA-43643469-9",
+  "prefix": "/",
+  "firebase": {
+    "appId": "",
+    "apiKey": "AIzaSyCph8DTsGXUhyfzKhDzZV2CbEPp_fwMK2E",
+    "authDomain": "hoverboard-testing.firebaseapp.com",
+    "databaseURL": "https://hoverboard-testing.firebaseio.com",
+    "projectId": "hoverboard-testing",
+    "storageBucket": "hoverboard-testing.appspot.com",
+    "messagingSenderId": "250391665297"
+  },
+  "googleMapApiKey": ""
+}
