@@ -59,7 +59,7 @@ To serve locally or deploy the production app use `yarn start:prod` and `yarn de
 
 If you don't want to bother with the dependencies, you can use the docker container for development.
 
-:book: Read more in [docker docs](/docs/tutorials/docker.md).
+:book: Read more in [docker docs](/docs/tutorials/05-docker.md).
 
 ## Updating
 Here is a git workflow for updating your fork (or downloaded copy) to the latest version:
