@@ -90,18 +90,18 @@
   },
   "location": {
     "label": "Location",
-    "name": "TBD",
-    "city": "Taipei",
-    "short": "Taipei, Taiwan",
-    "address": "Taipei, Taiwan",
+    "name": "Taipei Innovation City Convention Center",
+    "city": "New Taipei",
+    "short": "New Taipei, Taiwan",
+    "address": "2F., No. 223, Sec. 3, Beixin Rd., Xindian Dist., New Taipei City 231, Taiwan",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 5
+      "latitude": 24.59090,
+      "longitude": 121.32242,
+      "zoom": 15
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": 24.59,
+      "longitude": 121.32
     },
     "description": ""
   },
