@@ -135,7 +135,7 @@
           </template>
         </div>
 
-        <div class="additional-sections">
+        <div id="feedback" class="additional-sections" hidden="[[!sessionBegun]]">
           <h3>{$ feedback.headline $}</h3>
           <feedback-block collection="sessions" db-item="[[session.id]]"></feedback-block>
         </div>
@@ -162,6 +162,11 @@
           },
           session: {
             type: Object,
+            observer: '_sessionUpdate',
+          },
+          sessionBegun: {
+            value: false,
+            type: Boolean,
           },
           viewport: {
             type: Object,
@@ -238,6 +243,21 @@
 
       _getFeaturedSessionIcon(featuredSessions, sessionId) {
         return featuredSessions && featuredSessions[sessionId] ? 'bookmark-check' : 'bookmark-plus';
+      }
+
+      _sessionUpdate() {
+        const { day, startTime } = this.session;
+        if (day && startTime) {
+          const now = new Date();
+          const convertedTimezoneDate = new Date(
+              new Date(`${day} ${startTime}`).getTime() +
+              (parseInt('{$ timezoneOffset $}') - now.getTimezoneOffset()) * 60000
+          );
+
+          this.sessionBegun = now - convertedTimezoneDate > 0;
+        } else {
+          this.sessionBegun = false;
+        }
       }
     }
 
