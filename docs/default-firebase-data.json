@@ -688,6 +688,7 @@
       "name" : "Adrian Kajda",
       "photo" : "/images/people/adrian_kajda.jpg",
       "photoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/adrian_kajda.jpg",
+      "pronouns": "he/him",
       "shortBio" : "Creator of Fuelio app. Fuelio was his hooby project started in 2012. Three years later the app wa...",
       "socials" : [ {
         "icon" : "gplus",
@@ -707,6 +708,7 @@
       "name" : "Aleksander Piotrowski",
       "photo" : "/images/people/aleksander_piotrowski.jpg",
       "photoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/aleksander_piotrowski.jpg",
+      "pronouns": "he/him",
       "shortBio" : "Became a mobile developer after long run as a backend developer. Because of age, holding senior p...",
       "socials" : [ {
         "icon" : "twitter",
