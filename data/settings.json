@@ -24,9 +24,19 @@
       "label": "Home"
     },
     {
+      "route": "schedule",
+      "permalink": "/schedule/",
+      "label": "Scheduled"
+    },
+    {
+      "route": "speakers",
+      "permalink": "/speakers/",
+      "label": "Speakers"
+    },
+    {
       "route": "team",
       "permalink": "/team",
-      "label": "Equipe"
+      "label": "Team"
     },
     {
       "route": "code-of-conduct",
