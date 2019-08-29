@@ -719,7 +719,7 @@
         "link" : "https://www.linkedin.com/in/pelotasplus",
         "name" : "LinkedIn"
       }, {
-        "icon" : "gplus",
+        "icon" : "instagram",
         "link" : "https://www.instagram.com/pelotasplus/",
         "name" : "Google+"
       } ],
@@ -1379,10 +1379,6 @@
       "photoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/valentyn_shybanov.jpg",
       "shortBio" : "Google Developer Expert on Cloud. Co-organizer of GDG Kyiv-Center.",
       "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://google.com/+ValentynShybanov",
-        "name" : "Google+"
-      }, {
         "icon" : "website",
         "link" : "http://olostan.name/",
         "name" : "Website"
@@ -1485,10 +1481,6 @@
       "photo" : "/images/people/ostap_andrusiv.jpg",
       "photoUrl" : "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/ostap_andrusiv.jpg",
       "socials" : [ {
-        "icon" : "gplus",
-        "link" : "https://google.com/+OstapAndrusiv",
-        "name" : "Google+"
-      }, {
         "icon" : "facebook",
         "link" : "https://www.facebook.com/ostap.andrusiv",
         "name" : "Facebook"
