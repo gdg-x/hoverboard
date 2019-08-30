@@ -16,6 +16,7 @@ const DIALOGS = {
   SPEAKER: 'speaker',
   PREVIOUS_SPEAKER: 'previousSpeaker',
   SESSION: 'session',
+  FEEDBACK: 'feedback',
   SUBSCRIBE: 'subscribe',
   SIGNIN: 'signin',
 };

@@ -288,6 +288,7 @@
       _toggleFeedback(event) {
         event.preventDefault();
         event.stopPropagation();
+        dialogsActions.openDialog(DIALOGS.FEEDBACK, this.session);
       }
 
       _sessionBegun() {

@@ -280,6 +280,12 @@
       no-cancel-on-outside-click="[[viewport.isPhone]]"
     ></session-details>
 
+    <feedback-dialog
+      opened="[[dialogs.feedback.isOpened]]"
+      session="[[dialogs.feedback.data]]"
+      with-backdrop
+    ></feedback-dialog>
+
     <subscribe-dialog
       opened="[[dialogs.subscribe.isOpened]]"
       data="[[dialogs.subscribe.data]]"
