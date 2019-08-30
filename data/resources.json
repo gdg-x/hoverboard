@@ -239,7 +239,8 @@
     "feedbackRecorded": "Your feedback was recorded!",
     "feedbackDeleted": "Feedback successfully deleted!",
     "somethingWentWrong": "Something went wrong!",
-    "voteCaption": "Vote to leave a comment"
+    "voteCaption": "Vote to leave a comment",
+    "deleteFeedback": "Delete feedback"
   },
   "sessionDetails": {
     "contentLevel": "Content level",

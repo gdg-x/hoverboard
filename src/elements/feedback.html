@@ -10,21 +10,26 @@
         #feedback-comment {
           width: 100%;
         }
+
         .star-rating, .caption {
           display: inline-block;
           vertical-align: bottom;
         }
+
         paper-button {
           margin: 0;
-          line-height: 1.5;
+          line-height: 1.4;
+          border: 1.5px solid var(--default-primary-color);
         }
+
         paper-button[primary] {
           background-color: var(--default-primary-color);
           color: var(--text-primary-color);
         }
-        paper-button[danger] {
-          background-color: var(--accent-color);
-          color: var(--text-primary-color);
+
+        paper-button.delete-button {
+          color: var(--text-accent-color);
+          padding: -2px;
         }
       </style>
 
@@ -51,7 +56,7 @@
           [[buttonLabel]]
         </paper-button>
         <paper-button
-          danger
+          class="delete-button"
           hidden$="[[!showDeleteButton]]"
           on-tap="_dispatchDeleteFeedback"
           ga-on="click"
@@ -59,7 +64,7 @@
           ga-event-action="delete feedback"
           ga-event-label$="delete the feedback record"
         >
-          Delete previous feedback
+          {$ feedback.deleteFeedback $}
         </paper-button>
       </div>
     </template>
