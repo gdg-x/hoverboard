@@ -103,12 +103,13 @@ const ticketsActions = {
       type: FETCH_TICKETS,
     });
 
-    return firebase.firestore().collection('tickets')
+    return firebase
+      .firestore()
+      .collection('tickets')
       .orderBy('order', 'asc')
       .get()
       .then((snaps) => {
-        const list = snaps.docs
-          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+        const list = snaps.docs.map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
 
         dispatch({
           type: FETCH_TICKETS_SUCCESS,
@@ -124,12 +125,15 @@ const ticketsActions = {
   },
 };
 
-const _getPartnerItems = (groupId) => firebase.firestore()
-  .collection('partners').doc(groupId).collection('items').orderBy('order', 'asc')
-  .get()
-  .then((snaps) => snaps.docs
-    .map((snap) => Object.assign({}, snap.data(), { id: snap.id }))
-  );
+const _getPartnerItems = (groupId) =>
+  firebase
+    .firestore()
+    .collection('partners')
+    .doc(groupId)
+    .collection('items')
+    .orderBy('order', 'asc')
+    .get()
+    .then((snaps) => snaps.docs.map((snap) => Object.assign({}, snap.data(), { id: snap.id })));
 
 const partnersActions = {
   addPartner: (data) => (dispatch) => {
@@ -145,7 +149,9 @@ const partnersActions = {
       companyName: data.secondFieldValue || '',
     };
 
-    firebase.firestore().collection('potentialPartners')
+    firebase
+      .firestore()
+      .collection('potentialPartners')
       .doc(id)
       .set(partner)
       .then(() => {
@@ -166,17 +172,16 @@ const partnersActions = {
       type: FETCH_PARTNERS,
     });
 
-    firebase.firestore()
+    firebase
+      .firestore()
       .collection('partners')
       .orderBy('order', 'asc')
       .get()
-      .then((snaps) => Promise.all(
-        snaps.docs.map((snap) => Promise.all([
-          snap.data(),
-          snap.id,
-          _getPartnerItems(snap.id),
-        ]))
-      ))
+      .then((snaps) =>
+        Promise.all(snaps.docs.map((snap) =>
+          Promise.all([snap.data(), snap.id, _getPartnerItems(snap.id)]))
+          )
+      )
       .then((groups) => groups.map(([group, id, items]) => Object.assign({}, group, { id, items })))
       .then((list) => {
         dispatch({
@@ -201,12 +206,13 @@ const videosActions = {
       type: FETCH_VIDEOS,
     });
 
-    return firebase.firestore().collection('videos')
+    return firebase
+      .firestore()
+      .collection('videos')
       .orderBy('order', 'asc')
       .get()
       .then((snaps) => {
-        const list = snaps.docs
-          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+        const list = snaps.docs.map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
 
         dispatch({
           type: FETCH_VIDEOS_SUCCESS,
@@ -228,18 +234,15 @@ const blogActions = {
       type: FETCH_BLOG_LIST,
     });
 
-    firebase.firestore()
+    firebase
+      .firestore()
       .collection('blog')
       .orderBy('published', 'desc')
       .get()
       .then((snaps) => {
-        const list = snaps.docs
-          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+        const list = snaps.docs.map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
 
-        const obj = list.reduce(
-          (acc, curr) => Object.assign({}, acc, { [curr.id]: curr }),
-          {}
-        );
+        const obj = list.reduce((acc, curr) => Object.assign({}, acc, { [curr.id]: curr }), {});
 
         dispatch({
           type: FETCH_BLOG_LIST_SUCCESS,
@@ -264,18 +267,15 @@ const speakersActions = {
       type: FETCH_SPEAKERS,
     });
 
-    firebase.firestore()
+    firebase
+      .firestore()
       .collection('speakers')
       .orderBy('order', 'asc')
       .get()
       .then((snaps) => {
-        const list = snaps.docs
-          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+        const list = snaps.docs.map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
 
-        const obj = list.reduce(
-          (acc, curr) => Object.assign({}, acc, { [curr.id]: curr }),
-          {}
-        );
+        const obj = list.reduce((acc, curr) => Object.assign({}, acc, { [curr.id]: curr }), {});
 
         dispatch({
           type: FETCH_SPEAKERS_SUCCESS,
@@ -300,18 +300,15 @@ const previousSpeakersActions = {
       type: FETCH_PREVIOUS_SPEAKERS,
     });
 
-    firebase.firestore()
+    firebase
+      .firestore()
       .collection('previousSpeakers')
       .orderBy('order', 'asc')
       .get()
       .then((snaps) => {
-        const list = snaps.docs
-          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+        const list = snaps.docs.map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
 
-        const obj = list.reduce(
-          (acc, curr) => Object.assign({}, acc, { [curr.id]: curr }),
-          {}
-        );
+        const obj = list.reduce((acc, curr) => Object.assign({}, acc, { [curr.id]: curr }), {});
 
         dispatch({
           type: FETCH_PREVIOUS_SPEAKERS_SUCCESS,
@@ -336,7 +333,8 @@ const sessionsActions = {
       type: FETCH_SESSIONS,
     });
 
-    firebase.firestore()
+    firebase
+      .firestore()
       .collection('sessions')
       .get()
       .then((snaps) => {
@@ -384,7 +382,8 @@ const sessionsActions = {
       payload: { userId },
     });
 
-    firebase.firestore()
+    firebase
+      .firestore()
       .collection('featuredSessions')
       .doc(userId)
       .get()
@@ -410,7 +409,8 @@ const sessionsActions = {
       payload: { userId, featuredSessions },
     });
 
-    firebase.firestore()
+    firebase
+      .firestore()
       .collection('featuredSessions')
       .doc(userId)
       .set(featuredSessions)
@@ -441,7 +441,8 @@ const scheduleActions = {
       : speakersActions.fetchList()(dispatch, getState);
 
     const schedulePromise = new Promise((resolve, reject) => {
-      firebase.firestore()
+      firebase
+        .firestore()
         .collection('schedule')
         .orderBy('date', 'desc')
         .get()
@@ -461,37 +462,41 @@ const scheduleActions = {
           schedule,
         });
 
-        scheduleWorker.addEventListener('message', ({ data }) => {
-          dispatch({
-            type: FETCH_SCHEDULE_SUCCESS,
-            data: Object.values(data.schedule.days).sort((a, b) => a.date.localeCompare(b.date)),
-          });
+        scheduleWorker.addEventListener(
+          'message',
+          ({ data }) => {
+            dispatch({
+              type: FETCH_SCHEDULE_SUCCESS,
+              data: Object.values(data.schedule.days).sort((a, b) => a.date.localeCompare(b.date)),
+            });
 
-          const sessionsObjBySpeaker = {};
-          const sessionsList = Object.values(data.sessions);
+            const sessionsObjBySpeaker = {};
+            const sessionsList = Object.values(data.sessions);
 
-          sessionsList.forEach((session) => {
-            if (Array.isArray(session.speakers)) {
-              session.speakers.forEach((speaker) => {
-                if (Array.isArray(sessionsObjBySpeaker[speaker.id])) {
-                  sessionsObjBySpeaker[speaker.id].push(session);
-                } else {
-                  sessionsObjBySpeaker[speaker.id] = [session];
-                }
-              });
-            }
-          });
-          store.dispatch({
-            type: UPDATE_SESSIONS,
-            payload: {
-              obj: data.sessions,
-              list: sessionsList,
-              objBySpeaker: sessionsObjBySpeaker,
-            },
-          });
+            sessionsList.forEach((session) => {
+              if (Array.isArray(session.speakers)) {
+                session.speakers.forEach((speaker) => {
+                  if (Array.isArray(sessionsObjBySpeaker[speaker.id])) {
+                    sessionsObjBySpeaker[speaker.id].push(session);
+                  } else {
+                    sessionsObjBySpeaker[speaker.id] = [session];
+                  }
+                });
+              }
+            });
+            store.dispatch({
+              type: UPDATE_SESSIONS,
+              payload: {
+                obj: data.sessions,
+                list: sessionsList,
+                objBySpeaker: sessionsObjBySpeaker,
+              },
+            });
 
-          scheduleWorker.terminate();
-        }, false);
+            scheduleWorker.terminate();
+          },
+          false
+        );
       })
       .catch((error) => {
         dispatch({
@@ -508,11 +513,12 @@ const galleryActions = {
       type: FETCH_GALLERY,
     });
 
-    return firebase.firestore().collection('gallery')
+    return firebase
+      .firestore()
+      .collection('gallery')
       .get()
       .then((snaps) => {
-        const list = snaps.docs
-          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+        const list = snaps.docs.map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
 
         dispatch({
           type: FETCH_GALLERY_SUCCESS,
@@ -528,12 +534,15 @@ const galleryActions = {
   },
 };
 
-const _getTeamMembers = (teamId) => firebase.firestore()
-  .collection('team').doc(teamId).collection('members').orderBy('order', 'asc')
-  .get()
-  .then((snaps) => snaps.docs
-    .map((snap) => Object.assign({}, snap.data(), { id: snap.id }))
-  );
+const _getTeamMembers = (teamId) =>
+  firebase
+    .firestore()
+    .collection('team')
+    .doc(teamId)
+    .collection('members')
+    .orderBy('order', 'asc')
+    .get()
+    .then((snaps) => snaps.docs.map((snap) => Object.assign({}, snap.data(), { id: snap.id })));
 
 const teamActions = {
   fetchTeam: () => (dispatch) => {
@@ -541,15 +550,12 @@ const teamActions = {
       type: FETCH_TEAM,
     });
 
-    firebase.firestore()
+    firebase
+      .firestore()
       .collection('team')
       .get()
-      .then((snaps) => Promise.all(
-        snaps.docs.map((snap) => Promise.all([
-          snap.data(),
-          snap.id,
-          _getTeamMembers(snap.id),
-        ]))
+      .then((snaps) => Promise.all(snaps.docs.map((snap) =>
+        Promise.all([snap.data(), snap.id, _getTeamMembers(snap.id)]))
       ))
       .then((teams) => teams.map(([team, id, members]) => Object.assign({}, team, { id, members })))
       .then((list) => {
@@ -569,20 +575,53 @@ const teamActions = {
   },
 };
 
+const jobOffersActions = {
+  fetchJobOffers: () => (dispatch) => {
+    dispatch({
+      type: FETCH_JOB_OFFERS,
+    });
+
+    firebase
+      .firestore()
+      .collection('jobOffers')
+      .get()
+      .then((list) => {
+        list = list.docs.map((tmp) => tmp.data());
+        dispatch({
+          type: FETCH_JOB_OFFERS_SUCCESS,
+          payload: {
+            list,
+          },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: FETCH_JOB_OFFERS_FAILURE,
+          payload: { error },
+        });
+      });
+  },
+};
+
 const userActions = {
   signIn: (providerName) => {
     const firebaseProvider = helperActions.getFederatedProvider(providerName);
 
-    return firebase.auth()
+    return firebase
+      .auth()
       .signInWithPopup(firebaseProvider)
       .then((signInObject) => {
         helperActions.storeUser(signInObject.user);
         notificationsActions.getToken(true);
       })
       .catch((error) => {
-        if (error.code === 'auth/account-exists-with-different-credential' ||
-          error.code === 'auth/email-already-in-use') {
-          firebase.auth().fetchProvidersForEmail(error.email)
+        if (
+          error.code === 'auth/account-exists-with-different-credential' ||
+          error.code === 'auth/email-already-in-use'
+        ) {
+          firebase
+            .auth()
+            .fetchProvidersForEmail(error.email)
             .then((providers) => {
               helperActions.storeUser({
                 signedIn: false,
@@ -599,7 +638,8 @@ const userActions = {
   mergeAccounts: (initialProviderId, pendingCredential) => {
     const firebaseProvider = helperActions.getFederatedProvider(initialProviderId);
 
-    return firebase.auth()
+    return firebase
+      .auth()
       .signInWithPopup(firebaseProvider)
       .then((result) => {
         result.user.linkWithCredential(pendingCredential);
@@ -616,7 +656,8 @@ const userActions = {
   },
 
   signOut: () => {
-    return firebase.auth()
+    return firebase
+      .auth()
       .signOut()
       .then(() => {
         helperActions.storeUser();
@@ -629,7 +670,9 @@ const subscribeActions = {
   subscribe: (data) => (dispatch) => {
     const id = data.email.replace(/[^\w\s]/gi, '');
 
-    firebase.firestore().collection('subscribers')
+    firebase
+      .firestore()
+      .collection('subscribers')
       .doc(id)
       .set({
         email: data.email,
@@ -693,7 +736,8 @@ const notificationsActions = {
     });
   },
   requestPermission: () => (dispatch) => {
-    return messaging.requestPermission()
+    return messaging
+      .requestPermission()
       .then(() => {
         dispatch(notificationsActions.getToken(true));
       })
@@ -708,12 +752,14 @@ const notificationsActions = {
   },
 
   getToken: (subscribe) => (dispatch, getState) => {
-    return messaging.getToken()
+    return messaging
+      .getToken()
       .then((currentToken) => {
         if (currentToken) {
           const state = getState();
 
-          const subscribersRef = firebase.firestore()
+          const subscribersRef = firebase
+            .firestore()
             .collection('notificationsSubscribers')
             .doc(currentToken);
           const subscribersPromise = subscribersRef.get();
@@ -723,25 +769,23 @@ const notificationsActions = {
           let userSubscriptionsPromise = Promise.resolve(null);
           let userSubscriptionsRef;
           if (userUid) {
-            userSubscriptionsRef = firebase.firestore()
+            userSubscriptionsRef = firebase
+              .firestore()
               .collection('notificationsUsers')
               .doc(userUid);
             userSubscriptionsPromise = userSubscriptionsRef.get();
           }
 
-          Promise.all([subscribersPromise, userSubscriptionsPromise])
-            .then(([subscribersSnapshot, userSubscriptionsSnapshot]) => {
-              const isDeviceSubscribed = subscribersSnapshot.exists
-                ? subscribersSnapshot.data()
-                : false;
+          Promise.all([subscribersPromise, userSubscriptionsPromise]).then(
+            ([subscribersSnapshot, userSubscriptionsSnapshot]) => {
+              const isDeviceSubscribed = subscribersSnapshot.exists ?
+                subscribersSnapshot.data() : false;
               const userSubscriptions =
-                (userSubscriptionsSnapshot && userSubscriptionsSnapshot.exists)
-                  ? userSubscriptionsSnapshot.data()
-                  : {};
+                userSubscriptionsSnapshot &&
+                userSubscriptionsSnapshot.exists ? userSubscriptionsSnapshot.data() : {};
 
-              const isUserSubscribed = !!(
-                userSubscriptions.tokens && userSubscriptions.tokens[currentToken]
-              );
+              const isUserSubscribed = !!(userSubscriptions.tokens &&
+                userSubscriptions.tokens[currentToken]);
 
               if (isDeviceSubscribed) {
                 dispatch({
@@ -750,16 +794,22 @@ const notificationsActions = {
                   token: currentToken,
                 });
                 if (userUid && !isUserSubscribed) {
-                  userSubscriptionsRef.set({
-                    tokens: { [currentToken]: true },
-                  }, { merge: true });
+                  userSubscriptionsRef.set(
+                    {
+                      tokens: { [currentToken]: true },
+                    },
+                    { merge: true }
+                  );
                 }
               } else if (!isDeviceSubscribed && subscribe) {
                 subscribersRef.set({ value: true });
                 if (userUid) {
-                  userSubscriptionsRef.set({
-                    tokens: { [currentToken]: true },
-                  }, { merge: true });
+                  userSubscriptionsRef.set(
+                    {
+                      tokens: { [currentToken]: true },
+                    },
+                    { merge: true }
+                  );
                 }
                 dispatch({
                   type: UPDATE_NOTIFICATIONS_STATUS,
@@ -767,7 +817,8 @@ const notificationsActions = {
                   token: currentToken,
                 });
               }
-            });
+            }
+          );
         } else {
           dispatch({
             type: UPDATE_NOTIFICATIONS_STATUS,
@@ -788,14 +839,13 @@ const notificationsActions = {
   },
 
   unsubscribe: (token) => (dispatch) => {
-    return messaging.deleteToken(token)
-      .then(() => {
-        dispatch({
-          type: UPDATE_NOTIFICATIONS_STATUS,
-          status: NOTIFICATIONS_STATUS.DEFAULT,
-          token: null,
-        });
+    return messaging.deleteToken(token).then(() => {
+      dispatch({
+        type: UPDATE_NOTIFICATIONS_STATUS,
+        status: NOTIFICATIONS_STATUS.DEFAULT,
+        token: null,
       });
+    });
   },
 };
 
@@ -804,18 +854,11 @@ const helperActions = {
     let userToStore = { signedIn: false };
 
     if (user) {
-      const {
-        uid,
-        displayName,
-        photoURL,
-        refreshToken,
-        actualProvider,
-        pendingCredential,
-      } = user;
+      const { uid, displayName, photoURL, refreshToken, actualProvider, pendingCredential } = user;
 
       const email = user.email || (user.providerData && user.providerData[0].email);
-      const initialProviderId =
-        (user.providerData && user.providerData[0].providerId) || user.initialProviderId;
+      const initialProviderId = (user.providerData && user.providerData[0].providerId) ||
+        user.initialProviderId;
       const signedIn = (user.uid && true) || user.signedIn;
 
       userToStore = {
@@ -881,4 +924,3 @@ const helperActions = {
     }
   },
 };
-

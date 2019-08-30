@@ -215,7 +215,10 @@ const speakersReducer = (state = initialState.speakers, action) => {
   }
 };
 
-const previousSpeakersReducer = (state = initialState.previousSpeakers, action) => {
+const previousSpeakersReducer = (
+  state = initialState.previousSpeakers,
+  action
+) => {
   switch (action.type) {
     case FETCH_PREVIOUS_SPEAKERS:
       return Object.assign({}, state, {
@@ -360,6 +363,32 @@ const teamReducer = (state = initialState.team, action) => {
       });
 
     case FETCH_TEAM_SUCCESS:
+      return Object.assign({}, state, {
+        fetching: false,
+        list: action.payload.list,
+      });
+
+    default:
+      return state;
+  }
+};
+
+const jobOffersReducer = (state = initialState.jobOffers, action) => {
+  switch (action.type) {
+    case FETCH_JOB_OFFERS:
+      return Object.assign({}, state, {
+        fetching: true,
+        fetchingError: null,
+        list: [],
+      });
+
+    case FETCH_JOB_OFFERS_FAILURE:
+      return Object.assign({}, state, {
+        fetching: false,
+        fetchingError: action.payload.error,
+      });
+
+    case FETCH_JOB_OFFERS_SUCCESS:
       return Object.assign({}, state, {
         fetching: false,
         list: action.payload.list,

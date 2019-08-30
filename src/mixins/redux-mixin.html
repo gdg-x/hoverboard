@@ -1,4 +1,4 @@
-<link rel="import" href="../../bower_components/polymer-redux/polymer-redux.html">
+<link rel="import" href="../../bower_components/polymer-redux/polymer-redux.html" />
 <script src="/node_modules/redux/dist/redux.min.js"></script>
 <script src="/node_modules/redux-thunk/dist/redux-thunk.min.js"></script>
 
@@ -107,6 +107,11 @@
       fetchingError: null,
       list: [],
     },
+    jobOffers: {
+      fetching: false,
+      fetchingError: null,
+      list: [],
+    },
     user: {
       signedIn: false,
     },
@@ -132,6 +137,7 @@
       schedule: scheduleReducer(state.schedule, action),
       gallery: galleryReducer(state.gallery, action),
       team: teamReducer(state.team, action),
+      jobOffers: jobOffersReducer(state.jobOffers, action),
       user: userReducer(state.user, action),
       subscribed: subscribeReducer(state.subscribed, action),
       toast: toastReducer(state.toast, action),
