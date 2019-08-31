@@ -218,15 +218,15 @@
     "blocks": [
       {
         "title": "Organisateur",
-        "description": "<a href='http://gdgstrasbourg.fr' target='_blank'>GDG Strasbourg</a>, avec le support d'autres GDG en France, est fier d'organiser la DevFest Strasbourg",
+        "description": "L'équipe du <a href='http://gdgstrasbourg.fr' target='_blank'>GDG Strasbourg</a>, est fier d'organiser la DevFest Strasbourg",
         "callToAction": {
-          "label": "Ouvrir la page de l'équipe",
+          "label": "Découvrir l'équipe",
           "link": "/team"
         }
       },
       {
-        "title": "Qu'est ce que le GDG?",
-        "description": "Google Developers Group (GDG) - est une communauté de geeks ouverts et bénévoles qui créent des projets passionnants et partagent leur expérience avec des technologies passionnantes.",
+        "title": "Qu'est ce que le GDG ?",
+        "description": "Le GDG Strasbourg est un groupe d'échange et de partage autour du développement logiciel à Strasbourg. GDG Strasbourg est une association de droit local créée en 2019. Notre ambition est de faire croître l'attractivité numérique de la ville de Strasbourg.",
         "callToAction": {
           "label": "En savoir plus",
           "link": "https://developers.google.com/groups/",

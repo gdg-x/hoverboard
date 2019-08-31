@@ -91,7 +91,7 @@
     },
     "jobOffers": {
       "title": "Offres d'emploi",
-      "metaDescription": "Les propositions d'offres d'emploi",
+      "metaDescription": "Les propositions d'offres d'emploi de nos partenaires",
       "background": {
         "color": "#fff"
       },
