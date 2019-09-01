@@ -1,0 +1,160 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" />
+<link
+  rel="import"
+  href="../../bower_components/marked-element/marked-element.html"
+/>
+<link
+  rel="import"
+  href="../../bower_components/plastic-image/plastic-image.html"
+/>
+<link
+  rel="import"
+  href="../../bower_components/paper-icon-button/paper-icon-button.html"
+/>
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html" />
+
+<link rel="import" href="../mixins/redux-mixin.html" />
+<link rel="import" href="../elements/shared-styles.html" />
+
+<dom-module id="job-offers-page">
+  <template>
+    <style
+      is="custom-style"
+      include="shared-styles flex flex-alignment"
+    ></style>
+
+    <style>
+      :host {
+        display: block;
+      }
+
+      .description-wrapper {
+        background-color: var(--secondary-background-color);
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .job-offers-block {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 24px;
+        margin-bottom: 32px;
+      }
+
+      .job-offer-details {
+        background: white;
+        padding: 1em;
+        box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+        min-height: 260px;
+      }
+
+      .job-offer-title {
+        padding: 0 0 0.5em 0;
+      }
+
+      .job-offer-enterprise {
+        display: flex;
+        align-items: center;
+      }
+
+      .job-offer-link {
+        align-self: flex-end;
+        margin-top: auto;
+      }
+
+      @media (min-width: 640px) {
+        .job-offers-block {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .job-offers-block {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+    </style>
+
+    <polymer-helmet
+      title="{$ title $}"
+      description="{$ heroSettings.jobOffers.metaDescription $}"
+      active="[[active]]"
+    ></polymer-helmet>
+
+    <hero-block
+      background-image="{$ heroSettings.jobOffers.background.image $}"
+      background-color="{$ heroSettings.jobOffers.background.color $}"
+      font-color="{$ heroSettings.jobOffers.fontColor $}"
+      active="[[active]]"
+    >
+      <div class="hero-title highlight-font">
+        {$ heroSettings.jobOffers.title $}
+      </div>
+    </hero-block>
+
+    <div class="description-wrapper">
+      <div class="container" layout horizontal justified>
+        <marked-element
+          class="description"
+          markdown="{$ heroSettings.jobOffers.metaDescription  $}"
+        >
+          <div slot="markdown-html"></div>
+        </marked-element>
+      </div>
+    </div>
+
+    <div class="container job-offers-block">
+      <template is="dom-repeat" items="[[jobOffers]]" as="jobOffer">
+        <div class="job-offer-details" layout vertical start-justified start>
+          <h1 class="job-offer-title">{{ jobOffer.title }}</h1>
+          <span class="job-offer-enterprise">
+            <img src="{{ jobOffer.logo }}" height="42" class="job-offer-logo" />
+            {{ jobOffer.enterprise }}
+          </span>
+          <p class="job-offer-description">{{ jobOffer.description }}</p>
+          <a href="{{ jobOffer.link }}" class="job-offer-link">Voir plus</a>
+        </div>
+      </template>
+    </div>
+
+    <footer-block></footer-block>
+  </template>
+
+  <script>
+    class JobOffersPage extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'job-offers-page';
+      }
+
+      static get properties() {
+        return {
+          active: Boolean,
+          jobOffers: {
+            type: Array,
+            statePath: 'jobOffers.list',
+          },
+          jobOffersFetching: {
+            type: Boolean,
+            statePath: 'jobOffers.fetching',
+          },
+          jobOffersFetchingError: {
+            type: Object,
+            statePath: 'jobOffers.fetchingError',
+          },
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        if (
+          !this.jobOffersFetching &&
+          (!this.jobOffers || !this.jobOffers.length)
+        ) {
+          this.dispatch(jobOffersActions.fetchJobOffers());
+        }
+      }
+    }
+
+    window.customElements.define(JobOffersPage.is, JobOffersPage);
+  </script>
+</dom-module>

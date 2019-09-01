@@ -10,6 +10,7 @@
     "src/pages/speakers-page.html",
     "src/pages/previous-speakers-page.html",
     "src/pages/team-page.html",
+    "src/pages/job-offers-page.html",
     "src/pages/faq-page.html",
     "src/pages/cod-page.html",
     "src/lazy-resources.html"
@@ -33,12 +34,14 @@
   "lint": {
     "rules": ["polymer-2"]
   },
-  "builds": [{
-    "bundle": true,
-    "insertPrefetchLinks": true,
-    "addServiceWorker": true,
-    "js": {"minify": true},
-    "css": {"minify": true},
-    "html": {"minify": true}
-  }]
+  "builds": [
+    {
+      "bundle": true,
+      "insertPrefetchLinks": true,
+      "addServiceWorker": true,
+      "js": { "minify": true },
+      "css": { "minify": true },
+      "html": { "minify": true }
+    }
+  ]
 }

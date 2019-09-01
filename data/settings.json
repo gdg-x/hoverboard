@@ -26,7 +26,7 @@
     {
       "route": "schedule",
       "permalink": "/schedule/",
-      "label": "Scheduled"
+      "label": "Schedule"
     },
     {
       "route": "speakers",
@@ -34,9 +34,9 @@
       "label": "Speakers"
     },
     {
-      "route": "team",
-      "permalink": "/team",
-      "label": "Team"
+      "route": "job-offers",
+      "permalink": "/job-offers",
+      "label": "Jobs"
     },
     {
       "route": "code-of-conduct",
@@ -49,7 +49,7 @@
       "description": "Campus CCI Strasbourg",
       "background": {
         "color": "#673ab7",
-        "image": "/images/backgrounds/home.jpg"
+        "image": "/images/backgrounds/home.png"
       },
       "fontColor": "#FFF"
     },
@@ -89,6 +89,14 @@
     "team": {
       "title": "Equipe",
       "metaDescription": "Plus d'information sur les organisateurs",
+      "background": {
+        "color": "#fff"
+      },
+      "fontColor": "#424242"
+    },
+    "jobOffers": {
+      "title": "Offres d'emploi",
+      "metaDescription": "Les propositions d'offres d'emploi de nos partenaires",
       "background": {
         "color": "#fff"
       },

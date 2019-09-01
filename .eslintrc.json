@@ -1,9 +1,5 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "google",
-    "plugin:polymer/polymer-2"
-  ],
+  "extends": ["eslint:recommended", "google", "plugin:polymer/polymer-2"],
   "parserOptions": {
     "ecmaVersion": 6
   },
@@ -11,10 +7,7 @@
     "browser": true,
     "es6": true
   },
-  "plugins": [
-    "html",
-    "polymer"
-  ],
+  "plugins": ["html", "polymer"],
   "rules": {
     "brace-style": "off",
     "new-cap": "off",
@@ -22,7 +15,10 @@
     "require-jsdoc": "off",
     "max-len": ["error", { "code": 100 }],
     "object-curly-spacing": ["error", "always"],
-    "space-before-function-paren": ["error", {"anonymous": "always", "named": "never", "asyncArrow": "always"}],
+    "space-before-function-paren": [
+      "error",
+      { "anonymous": "always", "named": "never", "asyncArrow": "always" }
+    ],
     "linebreak-style": 0
   },
   "globals": {
@@ -46,6 +42,7 @@
     "scheduleActions": true,
     "galleryActions": true,
     "teamActions": true,
+    "jobOffersActions": true,
     "userActions": true,
     "subscribeActions": true,
     "notificationsActions": true,
