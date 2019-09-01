@@ -153,6 +153,17 @@ service cloud.firestore {
       }
     }
 
+    match /jobOffers/{jobOfferId} {
+      // Applies to single document read requests
+      allow get;
+
+      // Applies to queries and collection read requests
+      allow list;
+
+      // Disallow writes
+      allow write: if false;
+    }
+
     match /tickets/{ticket} {
       // Applies to single document read requests
       allow get;
