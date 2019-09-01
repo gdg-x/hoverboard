@@ -152,7 +152,7 @@
         <div flex>
           <h3 class="session-title">[[session.title]]</h3>
           <text-truncate lines="3">
-            <div class="session-description">[[session.description]]</div>
+            <div class="session-description">[[summary]]</div>
           </text-truncate>
         </div>
         <span class="language">[[slice(session.language, 2)]]</span>
@@ -232,6 +232,10 @@
             type: String,
             computed: '_isFeatured(featuredSessions, session.id)',
           },
+          summary: {
+            type: String,
+            computed: '_summary(session.description)',
+          },
         };
       }
 
@@ -242,6 +246,15 @@
 
       _getEnding(number) {
         return number > 1 ? 's' : '';
+      }
+
+      _summary(description = '') {
+        const indexes = [
+          description.indexOf('\n'),
+          description.indexOf('<br'),
+          description.length,
+        ].filter((index) => index > 0);
+        return description.slice(0, Math.min(...indexes));
       }
 
       _getFeaturedSessionIcon(featuredSessions, sessionId) {
