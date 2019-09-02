@@ -4,6 +4,7 @@
 <link rel="import" href="../../bower_components/marked-element/marked-element.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/plastic-image/plastic-image.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
 <link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="../mixins/redux-mixin.html">
@@ -96,7 +97,7 @@
     </hero-block>
 
     <div class="container-narrow">
-      <marked-element class="post" markdown="[[post.content]]">
+      <marked-element class="post" markdown="[[postContent]]">
         <div slot="markdown-html"></div>
       </marked-element>
       <div class="date">{$ blog.published $}: [[getDate(post.published)]]</div>
@@ -109,6 +110,7 @@
       </div>
     </div>
 
+    <iron-ajax auto url="[[post.source]]" handle-as="text" on-response="handleMarkdownFileFetch"></iron-ajax>
   </template>
 
   <script>
@@ -160,6 +162,12 @@
         }
       }
 
+      handleMarkdownFileFetch(event) {
+        if (event.detail.response) {
+          this.set('postContent', event.detail.response);
+        }
+      }
+
       _postDataObserver(postId, postsList) {
         if (!this.postsList || !this.postsList.length || !this.postsMap[this.postData.id]) {
           return;
@@ -167,6 +175,7 @@
 
         const post = this.postsMap[this.postData.id];
         this.set('post', post);
+        this.set('postContent', post.content);
         this.set('suggestedPosts', this.postsList
             .filter((post) => post.id !== this.postData.id)
             .slice(0, 3)
