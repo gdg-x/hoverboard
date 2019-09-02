@@ -276,9 +276,25 @@ const speakersActions = {
           return response.json();
           })
           .then(function (res) {
-            resolve(res.speakers);
+            let sessions = res.sessions;
+            let speakers = res.speakers;
+            // map session to speaker
+            // will need to do this for schedule
+            speakers.forEach((speaker) =>{
+              if (speaker.sessions) {
+                speaker.sessions.forEach((speakerSession, index) =>{
+                  sessions.forEach((session) =>{
+                    if (speakerSession.id === session.id) {
+                      speaker.sessions[index] = session;
+                    }
+                  });
+                });
+              }
+            });
+            resolve(speakers);
           });
     });
+
 
     // const speakersPromise = new Promise((resolve, reject) => {
     //   firebase.firestore()
@@ -353,54 +369,106 @@ const sessionsActions = {
       type: FETCH_SESSIONS,
     });
 
-    return new Promise((resolve, reject) => {
-      firebase.firestore()
-        .collection('generatedSessions')
-        .get()
-        .then((snaps) => {
-          const list = [];
-          const obj = {};
-          const objBySpeaker = {};
-          const tagFilters = new Set();
-          const complexityFilters = new Set();
+    return new Promise(function (resolve) {
+      fetch('data/posts/speakers.json')
+          .then(function (response) {
+          return response.json();
+          })
+          .then(function (res) {
+            const list = [];
+            const obj = {};
+            const objBySpeaker = {};
+            const tagFilters = new Set();
+            const complexityFilters = new Set();
+            const doc = res.sessions;
+            doc.forEach((session) => {
+              // const session = Object.assign({}, doc.data());
+              list.push(session);
+              session.tags && session.tags.map((tag) => tagFilters.add(tag.trim()));
+              session.complexity && complexityFilters.add(session.complexity.trim());
+              obj[session.id] = session;
+            });
 
-          snaps.docs.forEach((doc) => {
-            const session = Object.assign({}, doc.data());
-            list.push(session);
-            session.tags && session.tags.map((tag) => tagFilters.add(tag.trim()));
-            session.complexity && complexityFilters.add(session.complexity.trim());
-            obj[doc.id] = session;
+            const payload = {
+              obj,
+              list,
+              objBySpeaker,
+            };
+
+            dispatch({
+              type: FETCH_SESSIONS_SUCCESS,
+              payload,
+            });
+
+            dispatch({
+              type: SET_FILTERS,
+              payload: {
+                tags: [...tagFilters],
+                complexity: [...complexityFilters],
+              },
+            });
+
+            resolve(payload);
+          })
+          .catch((error) => {
+            dispatch({
+              type: FETCH_SESSIONS_FAILURE,
+              payload: { error },
+            });
+            reject(error);
           });
+      });
 
-          const payload = {
-            obj,
-            list,
-            objBySpeaker,
-          };
 
-          dispatch({
-            type: FETCH_SESSIONS_SUCCESS,
-            payload,
-          });
+    // return new Promise((resolve, reject) => {
+    //   firebase.firestore()
+    //     .collection('generatedSessions')
+    //     .get()
+    //     .then((snaps) => {
+    //       const list = [];
+    //       const obj = {};
+    //       const objBySpeaker = {};
+    //       const tagFilters = new Set();
+    //       const complexityFilters = new Set();
+    //       snaps.docs.forEach((doc) => {
+    //         const session = Object.assign({}, doc.data());
+    //         list.push(session);
+    //         session.tags && session.tags.map((tag) => tagFilters.add(tag.trim()));
+    //         session.complexity && complexityFilters.add(session.complexity.trim());
+    //         obj[doc.id] = session;
+    //       });
 
-          dispatch({
-            type: SET_FILTERS,
-            payload: {
-              tags: [...tagFilters],
-              complexity: [...complexityFilters],
-            },
-          });
+    //       const payload = {
+    //         obj,
+    //         list,
+    //         objBySpeaker,
+    //       };
 
-          resolve(payload);
-        })
-        .catch((error) => {
-          dispatch({
-            type: FETCH_SESSIONS_FAILURE,
-            payload: { error },
-          });
-          reject(error);
-        });
-    });
+    //       console.log(payload);
+
+    //       dispatch({
+    //         type: FETCH_SESSIONS_SUCCESS,
+    //         payload,
+    //       });
+
+    //       dispatch({
+    //         type: SET_FILTERS,
+    //         payload: {
+    //           tags: [...tagFilters],
+    //           complexity: [...complexityFilters],
+    //         },
+    //       });
+
+    //       resolve(payload);
+    //     })
+    //     .catch((error) => {
+    //       dispatch({
+    //         type: FETCH_SESSIONS_FAILURE,
+    //         payload: { error },
+    //       });
+    //       reject(error);
+    //     });
+    // });
   },
 
   fetchUserFeaturedSessions: (userId) => (dispatch) => {
@@ -408,6 +476,7 @@ const sessionsActions = {
       type: FETCH_USER_FEATURED_SESSIONS,
       payload: { userId },
     });
+
 
     firebase.firestore()
       .collection('featuredSessions')

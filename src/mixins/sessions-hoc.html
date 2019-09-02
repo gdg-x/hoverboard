@@ -31,7 +31,6 @@
 
     connectedCallback() {
       super.connectedCallback();
-
       if (!this.sessionsFetching && (!this.sessions || !this.sessions.length)) {
         this.dispatch(sessionsActions.fetchList());
       }

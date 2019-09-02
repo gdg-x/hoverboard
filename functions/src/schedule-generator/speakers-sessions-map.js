@@ -25,7 +25,7 @@ function sessionsSpeakersMap(sessionsRaw, speakersRaw) {
                     [...generatedSpeaker.sessions, sessionBySpeaker] :
                     [sessionBySpeaker];
 
-                    speakers[speakerId] = { 
+                    speakers[speakerId] = {
                         ...generatedSpeaker,
                         tags: [...speakerTags],
                         sessions: speakerSessions,
