@@ -50,7 +50,7 @@
       "description": "Te vejo na Ilha do Silício!",
       "background": {
         "color": "#673ab7",
-        "image": "/images/backgrounds/home.jpg"
+        "image": "/images/backgrounds/home-devfestsul2019.jpg"
       },
       "fontColor": "#FFF"
     },
@@ -113,21 +113,21 @@
     }
   },
   "location": {
-    "label": "Location",
+    "label": "Localização",
     "name": "ACATE - Associação Catarinense de Tecnologia",
     "city": "Florianópolis",
     "short": "Florianópolis, SC",
     "address": "Rodovia SC 401, 4100 - Km4 - Saco Grande, Florianópolis - SC, 88032-005",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 5
+      "latitude": -27.544706,
+      "longitude": -48.500181,
+      "zoom": 11
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": -27.544706,
+      "longitude": -48.500181
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": "ACATE - Associação Catarinense de Tecnologia"
   },
   "mediaQueries": {
     "xs": {
