@@ -126,19 +126,19 @@
     },
     "statisticsBlock": {
       "attendees": {
-        "label": "Attendees",
-        "number": "900"
+        "label": "Participantes",
+        "number": "500"
       },
       "days": {
-        "label": "Days",
-        "number": "2"
+        "label": "Horas",
+        "number": "8"
       },
       "sessions": {
-        "label": "Sessions",
-        "number": "50"
+        "label": "Sessões",
+        "number": "40"
       },
       "tracks": {
-        "label": "Tracks",
+        "label": "Trilhas",
         "number": "4"
       }
     }
@@ -262,7 +262,7 @@
         "title": "Organização",
         "description": "GDG DevFest Sul 2019 é organizado por quatro capítulos do programa Google Developers Community na região Sul do Brasil: GDG Floripa, GDG Porto Alegre, GDG Pelotas e GDG Cascavel.",
         "callToAction": {
-          "label": "Open team page",
+          "label": "Quem somos nós?",
           "link": "/team"
         }
       },

@@ -114,10 +114,10 @@
   },
   "location": {
     "label": "Location",
-    "name": "Planeta kino",
+    "name": "ACATE - Associação Catarinense de Tecnologia",
     "city": "Florianópolis",
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "short": "Florianópolis, SC",
+    "address": "Rodovia SC 401, 4100 - Km4 - Saco Grande, Florianópolis - SC, 88032-005",
     "pointer": {
       "latitude": 49.809841,
       "longitude": 23.972805,
