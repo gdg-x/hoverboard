@@ -381,8 +381,21 @@ const sessionsActions = {
             const tagFilters = new Set();
             const complexityFilters = new Set();
             const doc = res.sessions;
+            let speakers = res.speakers;
             doc.forEach((session) => {
               // const session = Object.assign({}, doc.data());
+
+              // map speaker to session
+            // will need to do this for schedule
+            if (session.speakers) {
+              session.speakers.forEach((sessionSpeaker, index) =>{
+                speakers.forEach((speaker) =>{
+                  if (sessionSpeaker === speaker.id) {
+                    session.speakers[index] = speaker;
+                  }
+                });
+              });
+            }
               list.push(session);
               session.tags && session.tags.map((tag) => tagFilters.add(tag.trim()));
               session.complexity && complexityFilters.add(session.complexity.trim());
