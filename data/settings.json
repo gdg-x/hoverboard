@@ -28,6 +28,11 @@
       "route": "speakers",
       "permalink": "/speakers/",
       "label": "Speakers"
+    },
+    {	
+      "route": "team",
+      "permalink": "/team/",
+      "label": "Team"
     }
   ],
   "heroSettings": {
