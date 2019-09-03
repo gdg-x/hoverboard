@@ -284,50 +284,50 @@
   <script>
     class HeaderToolbar extends ReduxMixin(Polymer.Element) {
       static get is() {
-        return "header-toolbar";
+        return 'header-toolbar';
       }
 
       static get properties() {
         return {
           route: {
             type: String,
-            statePath: "routing"
+            statePath: 'routing',
           },
           viewport: {
             type: Object,
-            statePath: "ui.viewport"
+            statePath: 'ui.viewport',
           },
           addToHomescreen: {
             type: Object,
-            statePath: "ui.addToHomescreen"
+            statePath: 'ui.addToHomescreen',
           },
           heroSettings: {
             type: Object,
-            statePath: "ui.heroSettings",
-            observer: "_setToolbarSettings"
+            statePath: 'ui.heroSettings',
+            observer: '_setToolbarSettings',
           },
           dialogs: {
             type: Object,
-            statePath: "dialogs"
+            statePath: 'dialogs',
           },
           notifications: {
             type: Boolean,
-            statePath: "notifications"
+            statePath: 'notifications',
           },
           user: {
             type: Object,
-            statePath: "user"
+            statePath: 'user',
           },
           tickets: {
             type: Object,
-            statePath: "tickets"
+            statePath: 'tickets',
           },
-          transparent: Boolean
+          transparent: Boolean,
         };
       }
 
       static get observers() {
-        return ["_authStatusChanged(user.signedIn)"];
+        return ['_authStatusChanged(user.signedIn)'];
       }
 
       connectedCallback() {
@@ -371,10 +371,10 @@
 
       _getNotificationsIcon(status) {
         return status === NOTIFICATIONS_STATUS.DEFAULT
-          ? "bell-outline"
+          ? 'bell-outline'
           : status === NOTIFICATIONS_STATUS.GRANTED
-          ? "bell"
-          : "bell-off";
+          ? 'bell'
+          : 'bell-off';
       }
 
       _hideNotificationBlock(status, blockStatus) {
@@ -390,9 +390,9 @@
       }
 
       _getTicketUrl(tickets) {
-        if (!tickets.list.length) return "";
+        if (!tickets.list.length) return '';
         const availableTicket = tickets.list.filter(
-          ticket => ticket.available
+          (ticket) => ticket.available
         )[0];
         return availableTicket ? availableTicket.url : tickets.list[0].url;
       }
@@ -400,11 +400,11 @@
       _setToolbarSettings(settings) {
         if (!settings) return;
         this.updateStyles({
-          "--hero-font-color": settings.fontColor || "",
-          "--hero-logo-opacity": settings.hideLogo ? 0 : 1,
-          "--hero-logo-color": settings.backgroundImage
-            ? "#fff"
-            : "var(--default-primary-color)"
+          '--hero-font-color': settings.fontColor || '',
+          '--hero-logo-opacity': settings.hideLogo ? 0 : 1,
+          '--hero-logo-color': settings.backgroundImage
+            ? '#fff'
+            : 'var(--default-primary-color)',
         });
       }
     }
