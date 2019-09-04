@@ -97,7 +97,7 @@
 
       <div class="dialog-container content">
         <h3 class="meta-info">[[speaker.country]]</h3>
-        <h3 class="meta-info">[[speaker.title]], [[speaker.company]]</h3>
+        <h3 class="meta-info">[[speaker.title]]<span hidden$="[[!speaker.company]]">, [[speaker.company]]</span></h3>
         <h3 class="meta-info" hidden$="[[isEmpty(speaker.badges)]]">
           <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
             <a
@@ -129,6 +129,7 @@
 
         <div class="additional-sections" hidden$="[[!speaker.sessions.length]]">
           <h3>{$ speakerDetails.sessions $}</h3>
+
 
           <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
             <div on-tap="_openSession" session-id$="[[session.id]]" class="section">
@@ -189,7 +190,7 @@
 
       _close() {
         dialogsActions.closeDialog(DIALOGS.SPEAKER);
-        // history.back();
+        history.back();
       }
 
       _openSession(e) {

@@ -6,6 +6,7 @@
       "featured": true,
       "bio" : "Sandi Metz, author of Practical Object-Oriented Design in Ruby and 99 Bottles of OOP, believes in simple code and straightforward explanations. She prefers working software, practical solutions and lengthy bicycle trips (not necessarily in that order) and writes, consults, and teaches about object-oriented design.",
       "name" : "Sandi Metz",
+      "country": "USA",
       "photo" : "/images/speakers/sandimetz_2016.jpg",
       "photoUrl" : "/images/speakers/sandimetz_2016.jpg",
       "socials" : [
@@ -21,13 +22,20 @@
       }
     ],
       "order" : 0,
-      "title" : "Programmer / Author / Teacher"
+      "title" : "Programmer / Author / Teacher",
+      "sessions":[
+        {
+          "id": 101
+        }
+      ]
     },
     {
       "id":"guillaume_marty",
       "featured": true,
       "bio" : "Guillaume Marty has been working on the web for 77% of its lifespan. In the last few years he shifted his focus from code to humans. He's passionate about contributing to a healthy, inclusive industry, and the intersection between communities and technology. He was formerly working at Mozilla, and currently at Twitter.",
       "name" : "Guillaume Marty",
+      "company": "Twitter",
+      "country": "United Kingdom",
       "photo" : "/images/speakers/guillaume-marty.jpg",
       "photoUrl" : "/images/speakers/guillaume-marty.jpg",
       "socials" : [
@@ -41,9 +49,9 @@
       "title" : "Web lover / JavaScript activist / HTML5 enthusiast"
     }
   ],
-  "sessions":
-  [
+  "sessions" : [
     {
+      "id":101,
       "complexity" : "Intermediate",
       "description" : "Research indicates that programmers are not entirely happy, and that much of this unhappiness arises from interactions with other people.  Research also tells us that teams are capable of producing solutions that are more creative and of higher quality than those of single individuals.  However, teams, by definition, consist of people--possibly the very ones who are causing our unhappiness.<br><br>This talk explores the science behind human persuasion, examines the roots of motivation, and reveals the single quality that all high-performing teams share.  You’ll leave armed to persuade, primed to understand, and motivated to create teams that inspire everyone to do their best work.",
       "speakers" : [ "sandi_metz" ],
@@ -51,4 +59,5 @@
       "title" : "You Are Insufficiently Persuasive"
     }
   ]
+
 }
