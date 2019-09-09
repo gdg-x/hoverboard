@@ -6,6 +6,7 @@
       "featured": true,
       "bio" : "Sandi Metz, author of Practical Object-Oriented Design in Ruby and 99 Bottles of OOP, believes in simple code and straightforward explanations. She prefers working software, practical solutions and lengthy bicycle trips (not necessarily in that order) and writes, consults, and teaches about object-oriented design.",
       "name" : "Sandi Metz",
+      "company":"",
       "country": "USA",
       "photo" : "/images/speakers/sandimetz_2016.jpg",
       "photoUrl" : "/images/speakers/sandimetz_2016.jpg",
