@@ -1,0 +1,21 @@
+image: node:10.15
+
+stages:
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+  key: "$CI_BUILD_REPO"
+
+deployproduction:
+  stage: deploy
+  environment: Production
+  only: 
+    - DevFest-Hamburg
+  script:
+    - yarn
+    - cd functions && yarn && cd ..
+    - yarn build:prod
+    - firebase use $FIREBASE_PROJECT --token $FIREBASE_TOKEN
+    - firebase deploy -m "Pipe $CI_PIPELINE_ID Build $CI_BUILD_ID" --token $FIREBASE_TOKEN
