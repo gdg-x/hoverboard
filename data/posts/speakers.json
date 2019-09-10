@@ -102,7 +102,7 @@
       "featured": false,
       "bio" : "Chris has worked at Comcast since 2007 – currently as a Distinguished Engineer. He enjoys building/motivating teams and ramping up new projects using the latest patterns and web primitives. Besides coding in Javascript, he loves spending time with his family and helping out in the community.",
       "name" : "Chris Lorenzo",
-      "company":"",
+      "company":"Comcast",
       "country": "Philadelphia, PA USA",
       "photo" : "/images/speakers/Chris_Lorenzo.jpg",
       "photoUrl" : "/images/speakers/Chris_Lorenzo.jpg",
@@ -119,7 +119,7 @@
       }
     ],
       "order" : 0,
-      "title" : "Distinguished Engineer at Comcast",
+      "title" : "Distinguished Engineer",
       "sessions":[
         {
           "id": "sharingComponents"
@@ -131,7 +131,7 @@
       "featured": false,
       "bio" : "Peter is an adventurous and passionate CodeSmith at Ordina Netherlands. He likes to travel around the world with his bike. Always seeking for the unexpected and unknown. For his job he tries out the latest techniques and frameworks. He loves to share his experience by speaking at conferences over the World and writing for the Dutch Java magazine and DZone. He believes that you as the front-end developer are the spider in the web to bring the user, the team and the product together.",
       "name" : "Peter Eijgermans",
-      "company":"",
+      "company":"Ordina Netherlands",
       "country": "Utrecht, Netherlands",
       "photo" : "/images/speakers/peter_eijgermans.jpg",
       "photoUrl" : "/images/speakers/peter_eijgermans.jpg",
@@ -218,7 +218,7 @@
       "featured": false,
       "bio" : "Chris is a Staff Software Engineer at LinkedIn, based in New York City working on native video. He is an editor and contributor for both The Ember Times and the LinkedIn Engineering Blog.",
       "name" : "Chris Ng",
-      "company":"",
+      "company":"Linkedin",
       "country": "New York, NY, USA",
       "photo" : "/images/speakers/Chris_Ng.jpg",
       "photoUrl" : "/images/speakers/Chris_Ng.jpg",
@@ -235,7 +235,7 @@
       }
     ],
       "order" : 0,
-      "title" : "Staff Software Engineer at LinkedIn",
+      "title" : "Staff Software Engineer",
       "sessions":[
         {
           "id": "deploymentStrategy"
@@ -247,7 +247,7 @@
       "featured": false,
       "bio" : "Co-Founder of Techqueria untermensch Award-losing web developer all opinions expressed are plagiarized Too old for 30 under 30 been to UC Berkeley",
       "name" : "David Silva",
-      "company":"",
+      "company":"Techqueria",
       "country": "Jersey City, NJ, USA",
       "photo" : "/images/speakers/David_Silva.jpg",
       "photoUrl" : "/images/speakers/David_Silva.jpg",
@@ -259,10 +259,39 @@
         }
     ],
       "order" : 0,
-      "title" : "Co-Founder of Techqueria ",
+      "title" : "Co-Founder of Techqueria",
       "sessions":[
         {
           "id": "lerna"
+        }
+      ]
+    },
+    {
+      "id":"senigbolo_stephen",
+      "featured": false,
+      "bio" : "I’m Kenigbolo Meya Stephen, Full Stack Software Engineer working as the Frontend Engineering Team Lead at BCaster OY. Formerly Arch Conveyer/Community Manage of CodeAfrique(now Reload), a not-for-profit weekend intensive software engineering bootcamp for underrepresented groups in IT based out of Estonia. During my free time I sometimes volunteer as an open source developer for ADSBx, play golf and coach football (soccer as Americans call it). I also have a nick for writing tiny javascript modules on npm to help a few developers out there so they need not rewrite same utilities that we all might need (usually it’s the case that we’re only a handful needing those so there’s really nothing too worry much about).",
+      "name" : "Kenigbolo Meya Stephen",
+      "company":"BCaster OY",
+      "country": "Helsinki, Finland",
+      "photo" : "/images/speakers/MeyaStephen_Kenigbolo.jpg",
+      "photoUrl" : "/images/speakers/MeyaStephen_Kenigbolo.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/expensivestevie",
+          "name" : "Twitter"
+        },
+        {
+          "icon" : "website",
+            "link" : "https://fi.linkedin.com/in/kenigbolo",
+            "name" : "Website"
+        }
+    ],
+      "order" : 0,
+      "title" : "Frontend Engineering Team Lead",
+      "sessions":[
+        {
+          "id": "rocketScience"
         }
       ]
     }
@@ -326,19 +355,19 @@
     },
     {
       "id":"deploymentStrategy",
-      "complexity" : "All",
+      "complexity" : "Intermediate",
       "description" : "Everyone deploys code. For websites in particular, deploying code is often done behind the scenes without a user having to install an update since each new connection can be fulfilled with the latest version of the site. Having complete control of this process allows us to be creative in how fast or slow we deploy code in order to optimize for either maintainability of the code base, getting features out fast, or even both. While deployments seemingly look like a trivial final step, how we deploy code has far flung effects on how we write code. We will examine how each deployment strategy affects how developers produce code so that we can make an informed decision on the tradeoffs.",
       "speakers" : [ "chris_ng" ],
       "tags" : ["javascript", "deployment"],
       "title" : "How Your Deployment Strategy Influences How People Codeital"
     },
     {
-      "id":"lerna",
+      "id":"rocketScience",
       "complexity" : "All",
-      "description" : "Lerna is a tool for managing JavaScript projects with multiple packages. It allows you to create any number of packages inside the same repo and publish them to public or private package managers. You can use to manage component libraries, validators for your forms, and basically everything that needs to be shared across projects, including the projects themselves in a way that is easier for everyone to contribute, and keep all your dependencies in a single spot. CI and automation can take care of publishing all the projects, deploying them to the correct buckets, and coordinate the dependencies between them. On this talk I’ll share our journey towards mono-repo with advice to get there incrementally and the opportunity to see the endgoal with a project that is fully managed with lerna, with everything the devs need in a single folder.",
-      "speakers" : [ "david_silva" ],
-      "tags" : ["javascript", "lerna", "mono-repo", "frontend", "babel"],
-      "title" : "Micro front-ends, mono-repo and component libraries with lerna"
+      "description" : "Recently after becoming Frontend Engineering Team lead at BCaster I introduced an incremental migration shift from JQuery to VueJs. It sure did seem to be straightforward at first especially with proper test coverage, however 20% -25% into this migration we encountered a certain issues which meant re-evaluation of several architectural decisions that had been made in this regard. The goal of this talk is to give an in-depth analysis of the following - Highlight what we tried - Highlight where we failed and the lessons learned - Changes made related to the architecture - How we finally achieved 100% full migration of one of our most important projects into Vue JS",
+      "speakers" : [ "senigbolo_stephen" ],
+      "tags" : ["Javascript", "Vue", "VueJs", "jquery", "web development", "DOM", "VIRTUAL DOM"],
+      "title" : "From Jquery to VueJS - Not Rocket Science"
     }
   ]
 
