@@ -78,6 +78,14 @@
         transform: translate3d(25%, 75%, 20px) scale(1.1);
       }
 
+      .badge:nth-of-type(3) {
+        transform: translate(10%, 180%);
+      }
+
+      .badge:nth-of-type(3):hover {
+        transform: translate3d(10%, 180%, 20px) scale(1.1);
+      }
+
       .badge-icon {
         --iron-icon-width: 12px;
         --iron-icon-height: 12px;
@@ -187,6 +195,7 @@
       avatar-size="128px"
       avatar-circle="64px"
       horizontal-position="50%"
+      border-radius="4px"
       box-shadow="var(--box-shadow)"
       items-count="{$ contentLoaders.speakers.itemsCount $}"
       hidden$="[[contentLoaderVisibility]]"
@@ -239,7 +248,7 @@
             <div class="origin">[[speaker.country]]</div>
 
             <text-truncate lines="5">
-              <div class="bio">[[speaker.shortBio]]</div>
+              <div class="bio">[[speaker.bio]]</div>
             </text-truncate>
           </div>
 
