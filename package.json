@@ -4,7 +4,7 @@
   "description": "Conference website template",
   "scripts": {
     "gulp": "gulp",
-    "bower": "bower",
+    "bower": "bower --allow-root",
     "build": "gulp",
     "build:prod": "cross-env BUILD_ENV=production gulp",
     "predeploy": "cd ./functions && npm i",
