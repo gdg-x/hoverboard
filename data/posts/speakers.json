@@ -241,6 +241,30 @@
           "id": "deploymentStrategy"
         }
       ]
+    },
+    {
+      "id":"david_silva",
+      "featured": false,
+      "bio" : "Co-Founder of Techqueria untermensch Award-losing web developer all opinions expressed are plagiarized Too old for 30 under 30 been to UC Berkeley",
+      "name" : "David Silva",
+      "company":"",
+      "country": "Jersey City, NJ, USA",
+      "photo" : "/images/speakers/David_Silva.jpg",
+      "photoUrl" : "/images/speakers/David_Silva.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/dvidsilva",
+          "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Co-Founder of Techqueria ",
+      "sessions":[
+        {
+          "id": "lerna"
+        }
+      ]
     }
   ],
   "sessions" : [
@@ -306,7 +330,15 @@
       "description" : "Everyone deploys code. For websites in particular, deploying code is often done behind the scenes without a user having to install an update since each new connection can be fulfilled with the latest version of the site. Having complete control of this process allows us to be creative in how fast or slow we deploy code in order to optimize for either maintainability of the code base, getting features out fast, or even both. While deployments seemingly look like a trivial final step, how we deploy code has far flung effects on how we write code. We will examine how each deployment strategy affects how developers produce code so that we can make an informed decision on the tradeoffs.",
       "speakers" : [ "chris_ng" ],
       "tags" : ["javascript", "deployment"],
-      "title" : "How Your Deployment Strategy Influences How People Code it al"
+      "title" : "How Your Deployment Strategy Influences How People Codeital"
+    },
+    {
+      "id":"lerna",
+      "complexity" : "All",
+      "description" : "Lerna is a tool for managing JavaScript projects with multiple packages. It allows you to create any number of packages inside the same repo and publish them to public or private package managers. You can use to manage component libraries, validators for your forms, and basically everything that needs to be shared across projects, including the projects themselves in a way that is easier for everyone to contribute, and keep all your dependencies in a single spot. CI and automation can take care of publishing all the projects, deploying them to the correct buckets, and coordinate the dependencies between them. On this talk I’ll share our journey towards mono-repo with advice to get there incrementally and the opportunity to see the endgoal with a project that is fully managed with lerna, with everything the devs need in a single folder.",
+      "speakers" : [ "david_silva" ],
+      "tags" : ["javascript", "lerna", "mono-repo", "frontend", "babel"],
+      "title" : "Micro front-ends, mono-repo and component libraries with lerna"
     }
   ]
 
