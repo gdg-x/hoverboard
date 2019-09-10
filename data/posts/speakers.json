@@ -48,7 +48,311 @@
     ],
       "order" : 0,
       "title" : "Web lover / JavaScript activist / HTML5 enthusiast"
+    },
+    {
+      "id":"andrew_murphy",
+      "featured": false,
+      "bio" : "I combine my 13 years of professional software engineering experience with a passion for leadership and communication skills. My main focus is on how we can be better technical leaders and developers by focusing on learning the skills most of us ignore - communication and leadership skills. Originally from the UK but now based in Australia, I have consulted, performed workshops and developed software for clients across the UK, Australia, New Zealand and the United States. Technology in all its forms is part of my makeup and so I code, speak, write, teach, make, game and listen to all things geek",
+      "name" : "Andrew Murphy",
+      "company":"",
+      "country": "Melbourne, Australia",
+      "photo" : "/images/speakers/Andrew_Murphy.jpg",
+      "photoUrl" : "/images/speakers/Andrew_Murphy.jpg",
+      "socials" : [
+    ],
+      "order" : 0,
+      "title" : "",
+      "sessions":[
+        {
+          "id": "iDontKnow"
+        }
+      ]
+    },
+    {
+      "id":"ryan_heupler",
+      "featured": false,
+      "bio" : "Hi there! I’m currently an engineer at Guru, as well as mentor/instructor for an online code school called Thinkful. I run my own YouTube channel focused on helping break down programming concepts into simple terms (or at least I try to!). When I’m not working on any of that, I’ll sometime stream on Twitch where I do portfolio reviews for people looking for jobs. I’ll sometime mess around making music, or hangout at a local coffee shop (trying to find the best coffee in Philadelphia).",
+      "name" : "Ryan Heupler",
+      "company":"",
+      "country": "Philadelphia, PA USA",
+      "photo" : "/images/speakers/Ryan_Heupler.jpg",
+      "photoUrl" : "/images/speakers/Ryan_Heupler.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/codingcardio",
+          "name" : "Twitter"
+        },
+      {
+        "icon" : "website",
+          "link" : "https://youtube.com/c/codingcardio",
+          "name" : "Website"
+      }
+    ],
+      "order" : 0,
+      "title" : "Mentor & Instructor",
+      "sessions":[
+        {
+          "id": "refactorClassComponent"
+        }
+      ]
+    },
+    {
+      "id":"milecia_mcgregor",
+      "featured": false,
+      "bio" : "Milecia McGregor is a software engineer lost somewhere in the Midwest. She has mostly worked with .NET, Angular, and Azure to build web apps, but she also has a master’s degree in mechanical and aerospace engineering and has published research in machine learning and robotics. In her free time, she spends time with her husband and dogs while learning to play the ukulele and learning Japanese.",
+      "name" : "Milecia McGregor",
+      "country": "Tulsa, Oklahoma, USA",
+      "photo" : "/images/speakers/Milecia_McGregor.jpg",
+      "photoUrl" : "/images/speakers/Milecia_McGregor.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/FlippedCoding",
+          "name" : "Twitter"
+        },
+        {
+          "icon" : "website",
+            "link" : "https://flippedcoding.com/",
+            "name" : "Website"
+        }
+    ],
+      "order" : 0,
+      "title" : "Software Engineer",
+      "sessions":[
+        {
+          "id": "machineLearning"
+        }
+      ]
+    },
+    {
+      "id":"chris_lorenzo",
+      "featured": false,
+      "bio" : "Chris has worked at Comcast since 2007 – currently as a Distinguished Engineer. He enjoys building/motivating teams and ramping up new projects using the latest patterns and web primitives. Besides coding in Javascript, he loves spending time with his family and helping out in the community.",
+      "name" : "Chris Lorenzo",
+      "company":"Comcast",
+      "country": "Philadelphia, PA USA",
+      "photo" : "/images/speakers/Chris_Lorenzo.jpg",
+      "photoUrl" : "/images/speakers/Chris_Lorenzo.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/chiefcll",
+          "name" : "Twitter"
+        },
+      {
+        "icon" : "website",
+          "link" : "https://www.linkedin.com/in/chris-lorenzo-3323667",
+          "name" : "Website"
+      }
+    ],
+      "order" : 0,
+      "title" : "Distinguished Engineer",
+      "sessions":[
+        {
+          "id": "sharingComponents"
+        }
+      ]
+    },
+    {
+      "id":"peter_eijgermans",
+      "featured": false,
+      "bio" : "Peter is an adventurous and passionate CodeSmith at Ordina Netherlands. He likes to travel around the world with his bike. Always seeking for the unexpected and unknown. For his job he tries out the latest techniques and frameworks. He loves to share his experience by speaking at conferences over the World and writing for the Dutch Java magazine and DZone. He believes that you as the front-end developer are the spider in the web to bring the user, the team and the product together.",
+      "name" : "Peter Eijgermans",
+      "company":"Ordina Netherlands",
+      "country": "Utrecht, Netherlands",
+      "photo" : "/images/speakers/peter_eijgermans.jpg",
+      "photoUrl" : "/images/speakers/peter_eijgermans.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/EijgermansPeter",
+          "name" : "Twitter"
+        },
+      {
+        "icon" : "website",
+          "link" : "https://petereijgermans11.github.io/petereijgermans.github.io/",
+          "name" : "Website"
+      }
+    ],
+      "order" : 0,
+      "title" : "CodeSmith",
+      "sessions":[
+        {
+          "id": "teslaBattery"
+        }
+      ]
+    },
+    {
+      "id":"gabi_dombrowski",
+      "featured": false,
+      "bio" : "A third-generation Brazilian raised in the US, Gabi spent her youth immersed in MS-DOS, server rooms, and Geocities Mariah Carey fan page HTML. She transitioned to a development career in 2016 after spending 7 years as a systems administrator and is active in her local tech community. Namely, she’s the Mentor Director for Coding & Cocktails, a Kansas City Women in Technology program, which teaches monthly coding sessions to help women break into the industry. Amongst her other interests are included ashtanga yoga, learning languages, and curating stellar playlists.",
+      "name" : "Gabi Dombrowski",
+      "company":"",
+      "country": "Kansas City, MO, USA",
+      "photo" : "/images/speakers/Gabi_Dombrowski.jpg",
+      "photoUrl" : "/images/speakers/Gabi_Dombrowski.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/gabdom",
+          "name" : "Twitter"
+        },
+      {
+        "icon" : "website",
+          "link" : "https://gabidombrowski.com",
+          "name" : "Website"
+      }
+    ],
+      "order" : 0,
+      "title" : "freelance web developer and no-ego doer",
+      "sessions":[
+        {
+          "id": "mentorPlaybook"
+        }
+      ]
+    },
+    {
+      "id":"stacey_jenkins",
+      "featured": false,
+      "bio" : "Stacey resides in Fort Wayne, Indiana, and has over 20 years of Law Enforcement (LEO) and teaching experience. Law Enforcement experience: Homicide Detective • Gang Unit Specialist Detective • Hostage Negotiator • Crisis Intervention Team (CIT) Officer •S chool Resources Officer (SRO) • Five years as a Special Agent with the DEPARTMENT OF HOMELAND (DHS). Stacey is currently working as a Detective with the Fort Wayne (Indiana) Police Dept., Gang, and Violent Crimes Unit. Teaching experience: Stacey is an Adjunct Professor: • Business Psychology • Psychology •Criminal Profiling •Criminal Behavior •Computer Psychology •Social Media Psychology •Sociology (Group Dynamics). Education: • Bachelor of Science degree; Criminology (Ball State University, 1994). • Master’s degree; Forensic Psychology (Walden University, 2012). • Currently, a Ph.D. Candidate (Forensic Psychology), at Walden University Affiliations/Memberships: • American Psychology Association (APA) •CIT International member #3036 •Golden Key International Honor Society • National Alliance on Mental Illness (NAMI) • Omega Psi Phi Fraternity Inc. • Psi Chi International Honor Society (Psychology) • Society for Police and Criminal Psychology",
+      "name" : "Stacey Jenkins, M. Psych",
+      "company":"",
+      "country": "Indiana, USA",
+      "photo" : "/images/speakers/Stacey_Jenkins.jpg",
+      "photoUrl" : "/images/speakers/Stacey_Jenkins.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/ConceptionCrux",
+          "name" : "Twitter"
+        },
+      {
+        "icon" : "website",
+          "link" : "https://www.speakermatch.com/profile/cruxconception/",
+          "name" : "Website"
+      }
+    ],
+      "order" : 0,
+      "title" : "Ph.D. candidate, International KeynoteSpeaker, BehavioralProfiler, MotivationalSpeaker, TeamBuilder, GroupDynamics.",
+      "sessions":[
+        {
+          "id": "minorityRole"
+        }
+      ]
+    },
+    {
+      "id":"chris_ng",
+      "featured": false,
+      "bio" : "Chris is a Staff Software Engineer at LinkedIn, based in New York City working on native video. He is an editor and contributor for both The Ember Times and the LinkedIn Engineering Blog.",
+      "name" : "Chris Ng",
+      "company":"Linkedin",
+      "country": "New York, NY, USA",
+      "photo" : "/images/speakers/Chris_Ng.jpg",
+      "photoUrl" : "/images/speakers/Chris_Ng.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/chrisrng",
+          "name" : "Twitter"
+        },
+      {
+        "icon" : "website",
+          "link" : "https://www.linkedin.com/in/chrisrng",
+          "name" : "Website"
+      }
+    ],
+      "order" : 0,
+      "title" : "Staff Software Engineer",
+      "sessions":[
+        {
+          "id": "deploymentStrategy"
+        }
+      ]
+    },
+    {
+      "id":"david_silva",
+      "featured": false,
+      "bio" : "Co-Founder of Techqueria untermensch Award-losing web developer all opinions expressed are plagiarized Too old for 30 under 30 been to UC Berkeley",
+      "name" : "David Silva",
+      "company":"Techqueria",
+      "country": "Jersey City, NJ, USA",
+      "photo" : "/images/speakers/David_Silva.jpg",
+      "photoUrl" : "/images/speakers/David_Silva.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/dvidsilva",
+          "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Co-Founder of Techqueria",
+      "sessions":[
+        {
+          "id": "lerna"
+        }
+      ]
+    },
+    {
+      "id":"senigbolo_stephen",
+      "featured": false,
+      "bio" : "I’m Kenigbolo Meya Stephen, Full Stack Software Engineer working as the Frontend Engineering Team Lead at BCaster OY. Formerly Arch Conveyer/Community Manage of CodeAfrique(now Reload), a not-for-profit weekend intensive software engineering bootcamp for underrepresented groups in IT based out of Estonia. During my free time I sometimes volunteer as an open source developer for ADSBx, play golf and coach football (soccer as Americans call it). I also have a nick for writing tiny javascript modules on npm to help a few developers out there so they need not rewrite same utilities that we all might need (usually it’s the case that we’re only a handful needing those so there’s really nothing too worry much about).",
+      "name" : "Kenigbolo Meya Stephen",
+      "company":"BCaster OY",
+      "country": "Helsinki, Finland",
+      "photo" : "/images/speakers/MeyaStephen_Kenigbolo.jpg",
+      "photoUrl" : "/images/speakers/MeyaStephen_Kenigbolo.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/expensivestevie",
+          "name" : "Twitter"
+        },
+        {
+          "icon" : "website",
+            "link" : "https://fi.linkedin.com/in/kenigbolo",
+            "name" : "Website"
+        }
+    ],
+      "order" : 0,
+      "title" : "Frontend Engineering Team Lead",
+      "sessions":[
+        {
+          "id": "rocketScience"
+        }
+      ]
+    },
+    {
+      "id":"james_simpson",
+      "featured": false,
+      "bio" : "James Simpson has spent the greater part of his life pushing the web forward by challenging what is possible in a browser. As founder of GoldFire Studios, he has focussed on real-time gaming, high scalability/performance and some of the largest HTML5 canvas games ever built. He is also passionate about open-source as the author of many projects, including the popular howler.js audio library.",
+      "name" : "James Simpson",
+      "company":"GoldFire Studios",
+      "country": "Oklahoma, USA",
+      "photo" : "/images/speakers/James_Simpson.jpg",
+      "photoUrl" : "/images/speakers/James_Simpson.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/GoldFireStudios",
+          "name" : "Twitter"
+        },
+        {
+          "icon" : "website",
+            "link" : "https://goldfirestudios.com/",
+            "name" : "Website"
+        }
+    ],
+      "order" : 0,
+      "title" : "Founder",
+      "sessions":[
+        {
+          "id": "webAudio"
+        }
+      ]
     }
+
   ],
   "sessions" : [
     {
@@ -58,7 +362,88 @@
       "speakers" : [ "sandi_metz" ],
       "tags" : [ "Keynote" ],
       "title" : "You Are Insufficiently Persuasive"
+    },
+    {
+      "id":"iDontKnow",
+      "complexity" : "All",
+      "description" : "It’s something we all struggle with, admitting we don’t know something. But I’m here to show you the power of saying \"I don’t know\" to people. Saying \"I don’t know\" doesn’t have to be the end of a conversation, in fact it can be the start of an entirely new, exciting conversation with learning opportunities for all parties. We will talk through scenarios where we don’t feel comfortable saying it, ways we can feel comfortable saying it, and the good things that come from it. Outline/structure of the Session Why we don’t say I don’t know Why we should say it How to say I don’t know to clients How to say I don’t know as an expert How to say I don’t know as a leader A deep (and revealing) discussion on the underlying reasons why we feel afraid to say \"I don’t know\" to people.",
+      "speakers" : [ "andrew_murphy" ],
+      "tags" : [ "soft skills", "talk", "communication", "ledership" ],
+      "title" : "The power of saying \"I don't know\""
+    },
+    {
+      "id":"refactorClassComponent",
+      "complexity" : "All",
+      "description" : "Ever since Hooks was announced for React, they’ve become a very popular buzz word when discussing React. Some common questions I hear when talking to others are: What are they? How do you use them? Why should I use them? Do they replace life-cycle methods. We will go over all of these together. I will start with a basic React app using a few stateful, class components using life-cycle, custom methods, and API interaction. I will convert the components over to functional components and integrating several different hooks, while not losing any functionality.You’ll come away from this talk with a good foundation for most of the primitive hooks in React, and you’ll understand how to use them & write your own custom hooks.",
+      "speakers" : [ "ryan_heupler" ],
+      "tags" : [ "talk", "react", "front-end", "optimization", "framework", "functional programming"],
+      "title" : "Refactoring a Class Component: A Gentle Introduction into React Hooks"
+    },
+    {
+      "id":"machineLearning",
+      "complexity" : "All",
+      "description" : "The world of UI/UX is changing every month. It can be hard for developers to keep up with the newest trends and frameworks because of all the responsibilities they have. What if you could use machine learning to help you keep up with all of the changes? While it’s far from taking all of the programming jobs, machine learning can help developers make more user-friendly web applications. With the use of Brain.js, you can do text prediction, make small layout changes, check for malicious users, and more. In this talk, attendees will learn some background on machine learning and algorithms and see examples of where Brain.js can be used in real applications. We’ll cover business cases in web development where machine learning can help, how neural networks work, and how JavaScript can be used to train a model and make real-time updates for users. By the end of the talk, attendees should have a good understanding of basic machine learning concepts and an idea of how they could get started with Brain.js.",
+      "speakers" : [ "milecia_mcgregor" ],
+      "tags" : [],
+      "title" : "Using Machine Learning To Improve UI/UX"
+    },
+    {
+      "id":"sharingComponents",
+      "complexity" : "All",
+      "description" : "Faster, Better, Cheaper - the beating drum for software developers. Do you work in a large shop where teams are using Angular, Vue and React? With the multitude of frontend frameworks today, how do you share components between them? How do you build things once? Is it worth it? This talk will cover how Comcast front end teams are tackling these challenges. We’ll look at how we’re using Web Components to share code between sites and if they can be used to share components between frameworks. I’ll go over how we’re sharing data between codebases with Redux. Lastly we’ll talk about Shared Flows; pulling out complicated reusable logic into its own microsite. You’ll walk away learning from our experiences and being able to revisit how you build software to reuse code.",
+      "speakers" : [ "chris_lorenzo" ],
+      "tags" : ["Javascript", "components", "frontend"],
+      "title" : "Strategies for Sharing Components ⚙"
+    },
+    {
+      "id":"teslaBattery",
+      "complexity" : "All",
+      "description" : "Which one is your favourite: ReactJS or Vue.js? Both ReactJS & Vue.js developers will get the same requirements for an application (Building Tesla’s Battery Range Calculator). Are you a Vue.js developer who wants to learn how to use ReactJS, or the other way around? Trust us, you can learn from each other, and that’s exactly what you will do on this session. We will give you a buggy application that you’ll have to fix before adding new features to it using either Vue.js or React. How fast will you go? Will you share your findings with other developers? You’re welcome to test this during our workshop. We have built the same application with ReactJS and Vue.js. We invite you to spend the session learning how to build such an app yourself with the help of our mentors. By the end of the session, you should be able to answer these questions: • What is Functional Reactive Programming? • How to use React and Vue.js? What are the main differences between Vue.js and React?",
+      "speakers" : [ "peter_eijgermans" ],
+      "tags" : ["Workshop","Vue.js", "ReactJS", "UserInterfaces", "front-end", "tools", "redux", "veux", "framework"],
+      "title" : "Building Tesla’s Battery Range Calculator with Vue.js or ReactJS"
+    },
+    {
+      "id":"mentorPlaybook",
+      "complexity" : "All",
+      "description" : "We often find ourselves in situations where we have to knowledge share and mentor others, but we often don’t take the time to learn how to be better mentors. How do we know if we’re doing ‘mentoring’ right, and what small things do we not know about that could be doing more harm than good? Through my work as over the past 3 years directing mentors at a monthly coding class, I’ve been able to compile effective methods through research and experience that will help all developers be better mentors, whether within an established mentor/mentee relationship or just in quick day-to-day teaching opportunities. By setting expectations, learning how to be more friendly and accessible, removing roadblocks, practicing self-care, developing empathy for mentees, and constantly iterating based on actionable feedback, we can all contribute to creating richer tech communities that thrive on constant improvement and collective growth.",
+      "speakers" : [ "gabi_dombrowski" ],
+      "tags" : ["soft skills", "mentoring", "community"],
+      "title" : "The Mentor Playbook"
+    },
+    {
+      "id":"minorityRole",
+      "complexity" : "Intermediate",
+      "description" : "This presentation will discuss how to cope with conversing with those who are from diverse backgrounds with ease and accomplish your daily connections with co-workers, who come from different backgrounds, with a common goal of comprehension. Necessities that makes you distinct, skills that make you stand out. The diversities that make us rare and unique if it’s your ethnic background, race, ethnic customs, religious beliefs, sex, sexuality, or form of individuality may also be a cause of contention. Discover how to bring out that, which is already within you and communicate, work with individuals who are diverse as well as, striking-up great conversation between one another. Also, this presentation will contribute to you your attendees with fostering a positive change and cultivate a more inviting place of work. This presentation will discuss the impacts of diversity collectively using identifying what variety can be combined with how it affects a business. The presentation will assist with explaining what it signifies being an inclusive place of work, offer comprehensive measures to assess best what degree one’s place of work fosters inclusion a and diversity. The workshop, through means of role-playing scenarios, present ways you can take to impact positive philosophies at your place of work. Individuals will take with them an increased perception of the implications of a tolerant, inclusive and diverse place of work. Individuals will take with them, along with personal skills, which one will utilize to develop into promoters of social change, that will build a more diverse workplace.",
+      "speakers" : [ "stacey_jenkins" ],
+      "tags" : ["Business", "Care", "Color", "Conference", "Country", "Culture", "Diversity", "Equity", "Future", "Gender", "Governance", "Hiring", "Inclusion", "LGBTQ", "Manager", "Marketing", "People", "Race", "Student", "Work", "World"],
+      "title" : "The Role of The Minority in The World of Technology"
+    },
+    {
+      "id":"deploymentStrategy",
+      "complexity" : "Intermediate",
+      "description" : "Everyone deploys code. For websites in particular, deploying code is often done behind the scenes without a user having to install an update since each new connection can be fulfilled with the latest version of the site. Having complete control of this process allows us to be creative in how fast or slow we deploy code in order to optimize for either maintainability of the code base, getting features out fast, or even both. While deployments seemingly look like a trivial final step, how we deploy code has far flung effects on how we write code. We will examine how each deployment strategy affects how developers produce code so that we can make an informed decision on the tradeoffs.",
+      "speakers" : [ "chris_ng" ],
+      "tags" : ["javascript", "deployment"],
+      "title" : "How Your Deployment Strategy Influences How People Codeital"
+    },
+    {
+      "id":"rocketScience",
+      "complexity" : "All",
+      "description" : "Recently after becoming Frontend Engineering Team lead at BCaster I introduced an incremental migration shift from JQuery to VueJs. It sure did seem to be straightforward at first especially with proper test coverage, however 20% -25% into this migration we encountered a certain issues which meant re-evaluation of several architectural decisions that had been made in this regard. The goal of this talk is to give an in-depth analysis of the following - Highlight what we tried - Highlight where we failed and the lessons learned - Changes made related to the architecture - How we finally achieved 100% full migration of one of our most important projects into Vue JS",
+      "speakers" : [ "senigbolo_stephen" ],
+      "tags" : ["Javascript", "Vue", "VueJs", "jquery", "web development", "DOM", "VIRTUAL DOM"],
+      "title" : "From Jquery to VueJS - Not Rocket Science"
+    },
+    {
+      "id":"webAudio",
+      "complexity" : "All",
+      "description" : "As web and native apps continue to converge, audio plays an ever-increasing role in elevating the user experience beyond simple static documents. However, even simple audio playback can get complicated when dealing with different browsers, devices and environments. In this talk, we’ll take a deep dive into using the howler.js audio library to enhance your web, desktop and mobile applications. Through a live coding demo, we’ll start with basic playback and work our way through audio sprites, live streaming, 3D spatial audio and more. Walk away with a better understanding of various use-cases for audio on the web and the simple tools you can use to enable them in your own projects.",
+      "speakers" : [ "james_simpson" ],
+      "tags" : ["front-end", "tools", "technical"],
+      "title" : "Web Audio Made Easy with Howler.js"
     }
+
   ]
 
 }
