@@ -48,6 +48,35 @@
     ],
       "order" : 0,
       "title" : "Web lover / JavaScript activist / HTML5 enthusiast"
+    },
+    {
+      "id":"andrew_murphy",
+      "featured": false,
+      "bio" : "I combine my 13 years of professional software engineering experience with a passion for leadership and communication skills. My main focus is on how we can be better technical leaders and developers by focusing on learning the skills most of us ignore - communication and leadership skills. Originally from the UK but now based in Australia, I have consulted, performed workshops and developed software for clients across the UK, Australia, New Zealand and the United States. Technology in all its forms is part of my makeup and so I code, speak, write, teach, make, game and listen to all things geek",
+      "name" : "Andrew Murphy",
+      "company":"",
+      "country": "Australia",
+      "photo" : "/images/speakers/Andrew_Murphy.jpg",
+      "photoUrl" : "/images/speakers/Andrew_Murphy.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "https://twitter.com/sandimetz",
+          "name" : "Twitter"
+        },
+      {
+        "icon" : "website",
+          "link" : "https://www.sandimetz.com/",
+          "name" : "Website"
+      }
+    ],
+      "order" : 0,
+      "title" : "Programmer / Author / Teacher",
+      "sessions":[
+        {
+          "id": "iDontKnow"
+        }
+      ]
     }
   ],
   "sessions" : [
@@ -58,6 +87,14 @@
       "speakers" : [ "sandi_metz" ],
       "tags" : [ "Keynote" ],
       "title" : "You Are Insufficiently Persuasive"
+    },
+    {
+      "id":"iDontKnow",
+      "complexity" : "All",
+      "description" : "It’s something we all struggle with, admitting we don’t know something. But I’m here to show you the power of saying \"I don’t know\" to people. Saying \"I don’t know\" doesn’t have to be the end of a conversation, in fact it can be the start of an entirely new, exciting conversation with learning opportunities for all parties. We will talk through scenarios where we don’t feel comfortable saying it, ways we can feel comfortable saying it, and the good things that come from it. Outline/structure of the Session Why we don’t say I don’t know Why we should say it How to say I don’t know to clients How to say I don’t know as an expert How to say I don’t know as a leader A deep (and revealing) discussion on the underlying reasons why we feel afraid to say \"I don’t know\" to people.",
+      "speakers" : [ "sandrew_murphy" ],
+      "tags" : [ "talk" ],
+      "title" : "The power of saying \"I don't know\""
     }
   ]
 
