@@ -351,6 +351,30 @@
           "id": "webAudio"
         }
       ]
+    },
+    {
+      "id":"jeffrey_smith",
+      "featured": false,
+      "bio" : "I’m 28 years old from rural VA. I earned a BS in Economics in 2012, and after working at an education analytics startup after college, taught myself development. I started with frontend development but now happily work up and down the stack. I moved to Philadelphia three years ago to pursue a career in technology. I’ve worked at Comcast the past two years. I currently live in South Philly with my friendly cat, Rupert.",
+      "name" : "Jeffrey Smith",
+      "company":"Comcast",
+      "country": "Philadelphia, PA",
+      "photo" : "/images/speakers/jeffrey_smith.jpg",
+      "photoUrl" : "/images/speakers/jeffrey_smith.jpg",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "http://jeffreysmith.ninha",
+            "name" : "Website"
+        }
+    ],
+      "order" : 0,
+      "title" : "Design Technologist",
+      "sessions":[
+        {
+          "id": "jovo"
+        }
+      ]
     }
 
   ],
@@ -442,6 +466,14 @@
       "speakers" : [ "james_simpson" ],
       "tags" : ["front-end", "tools", "technical"],
       "title" : "Web Audio Made Easy with Howler.js"
+    },
+    {
+      "id":"jovo",
+      "complexity" : "Intermediate",
+      "description" : "Using Jovo Framework and Jovo CLI, developers can quickly develop voice-first applications for Alexa and Google Home within a single nodejs application. In this workshop, I show you how to quickly build, test, and deploy a voice app using Jovo, and leave with areas for further exploration.<br><br>Topics covered include: how to build a language model, how to use the Alexa and Actions on Google Simulator, how to create unit tests for voice applications, how to route through conversations, how to request user data, and how to extend the bot to other conversational platforms such as Facebook Messenger or Twilio SMS.",
+      "speakers" : [ "jeffrey_smith" ],
+      "tags" : ["javascript", "jovo", "VUI", "Node", "Alexa", "Dialogflow", "Typescript"],
+      "title" : "How to Build Cross Platform Voice Apps with the Jovo Framework"
     }
 
   ]
