@@ -98,6 +98,34 @@
       ]
     },
     {
+      "id":"milecia_mcgregor",
+      "featured": false,
+      "bio" : "Milecia McGregor is a software engineer lost somewhere in the Midwest. She has mostly worked with .NET, Angular, and Azure to build web apps, but she also has a master’s degree in mechanical and aerospace engineering and has published research in machine learning and robotics. In her free time, she spends time with her husband and dogs while learning to play the ukulele and learning Japanese.",
+      "name" : "Milecia McGregor",
+      "country": "Tulsa, Oklahoma, USA",
+      "photo" : "/images/speakers/Milecia_McGregor.jpg",
+      "photoUrl" : "/images/speakers/Milecia_McGregor.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/FlippedCoding",
+          "name" : "Twitter"
+        },
+        {
+          "icon" : "website",
+            "link" : "https://flippedcoding.com/",
+            "name" : "Website"
+        }
+    ],
+      "order" : 0,
+      "title" : "Software Engineer",
+      "sessions":[
+        {
+          "id": "machineLearning"
+        }
+      ]
+    },
+    {
       "id":"chris_lorenzo",
       "featured": false,
       "bio" : "Chris has worked at Comcast since 2007 – currently as a Distinguished Engineer. He enjoys building/motivating teams and ramping up new projects using the latest patterns and web primitives. Besides coding in Javascript, he loves spending time with his family and helping out in the community.",
@@ -148,7 +176,7 @@
       }
     ],
       "order" : 0,
-      "title" : "CodeSmith at Ordina Netherlands",
+      "title" : "CodeSmith",
       "sessions":[
         {
           "id": "teslaBattery"
@@ -324,6 +352,7 @@
         }
       ]
     }
+
   ],
   "sessions" : [
     {
@@ -349,6 +378,14 @@
       "speakers" : [ "ryan_heupler" ],
       "tags" : [ "talk", "react", "front-end", "optimization", "framework", "functional programming"],
       "title" : "Refactoring a Class Component: A Gentle Introduction into React Hooks"
+    },
+    {
+      "id":"machineLearning",
+      "complexity" : "All",
+      "description" : "The world of UI/UX is changing every month. It can be hard for developers to keep up with the newest trends and frameworks because of all the responsibilities they have. What if you could use machine learning to help you keep up with all of the changes? While it’s far from taking all of the programming jobs, machine learning can help developers make more user-friendly web applications. With the use of Brain.js, you can do text prediction, make small layout changes, check for malicious users, and more. In this talk, attendees will learn some background on machine learning and algorithms and see examples of where Brain.js can be used in real applications. We’ll cover business cases in web development where machine learning can help, how neural networks work, and how JavaScript can be used to train a model and make real-time updates for users. By the end of the talk, attendees should have a good understanding of basic machine learning concepts and an idea of how they could get started with Brain.js.",
+      "speakers" : [ "milecia_mcgregor" ],
+      "tags" : [],
+      "title" : "Using Machine Learning To Improve UI/UX"
     },
     {
       "id":"sharingComponents",
@@ -406,6 +443,7 @@
       "tags" : ["front-end", "tools", "technical"],
       "title" : "Web Audio Made Easy with Howler.js"
     }
+
   ]
 
 }
