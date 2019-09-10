@@ -14,7 +14,6 @@ deployproduction:
   only: 
     - DevFest-Hamburg
   script:
-    - echo "{ 'allow_root': true }" > /root/.bowerrc
     - yarn
     - cd functions && yarn && cd ..
     - yarn build:prod
