@@ -61,7 +61,7 @@
       "socials" : [
     ],
       "order" : 0,
-      "title" : "Programmer / Author / Teacher",
+      "title" : "",
       "sessions":[
         {
           "id": "iDontKnow"
@@ -90,10 +90,39 @@
       }
     ],
       "order" : 0,
-      "title" : "Programmer / Author / Teacher",
+      "title" : "Mentor & Instructor",
       "sessions":[
         {
           "id": "refactorClassComponent"
+        }
+      ]
+    },
+    {
+      "id":"chris_lorenzo",
+      "featured": false,
+      "bio" : "Chris has worked at Comcast since 2007 – currently as a Distinguished Engineer. He enjoys building/motivating teams and ramping up new projects using the latest patterns and web primitives. Besides coding in Javascript, he loves spending time with his family and helping out in the community.",
+      "name" : "Chris Lorenzo",
+      "company":"",
+      "country": "Philadelphia, PA USA",
+      "photo" : "/images/speakers/Chris_Lorenzo.jpg",
+      "photoUrl" : "/images/speakers/Chris_Lorenzo.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/chiefcll",
+          "name" : "Twitter"
+        },
+      {
+        "icon" : "website",
+          "link" : "https://www.linkedin.com/in/chris-lorenzo-3323667",
+          "name" : "Website"
+      }
+    ],
+      "order" : 0,
+      "title" : "Distinguished Engineer at Comcast",
+      "sessions":[
+        {
+          "id": "sharingComponents"
         }
       ]
     }
@@ -112,7 +141,7 @@
       "complexity" : "All",
       "description" : "It’s something we all struggle with, admitting we don’t know something. But I’m here to show you the power of saying \"I don’t know\" to people. Saying \"I don’t know\" doesn’t have to be the end of a conversation, in fact it can be the start of an entirely new, exciting conversation with learning opportunities for all parties. We will talk through scenarios where we don’t feel comfortable saying it, ways we can feel comfortable saying it, and the good things that come from it. Outline/structure of the Session Why we don’t say I don’t know Why we should say it How to say I don’t know to clients How to say I don’t know as an expert How to say I don’t know as a leader A deep (and revealing) discussion on the underlying reasons why we feel afraid to say \"I don’t know\" to people.",
       "speakers" : [ "andrew_murphy" ],
-      "tags" : [ "talk" ],
+      "tags" : [ "talk", "communication", "ledership" ],
       "title" : "The power of saying \"I don't know\""
     },
     {
@@ -122,6 +151,14 @@
       "speakers" : [ "ryan_heupler" ],
       "tags" : [ "talk", "react", "front-end", "optimization", "framework", "functional programming"],
       "title" : "Refactoring a Class Component: A Gentle Introduction into React Hooks"
+    },
+    {
+      "id":"sharingComponents",
+      "complexity" : "All",
+      "description" : "Faster, Better, Cheaper - the beating drum for software developers. Do you work in a large shop where teams are using Angular, Vue and React? With the multitude of frontend frameworks today, how do you share components between them? How do you build things once? Is it worth it? This talk will cover how Comcast front end teams are tackling these challenges. We’ll look at how we’re using Web Components to share code between sites and if they can be used to share components between frameworks. I’ll go over how we’re sharing data between codebases with Redux. Lastly we’ll talk about Shared Flows; pulling out complicated reusable logic into its own microsite. You’ll walk away learning from our experiences and being able to revisit how you build software to reuse code.",
+      "speakers" : [ "chris_lorenzo" ],
+      "tags" : ["Javascript", "components", "frontend"],
+      "title" : "Strategies for Sharing Components ⚙"
     }
   ]
 
