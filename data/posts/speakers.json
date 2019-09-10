@@ -294,6 +294,35 @@
           "id": "rocketScience"
         }
       ]
+    },
+    {
+      "id":"james_simpson",
+      "featured": false,
+      "bio" : "James Simpson has spent the greater part of his life pushing the web forward by challenging what is possible in a browser. As founder of GoldFire Studios, he has focussed on real-time gaming, high scalability/performance and some of the largest HTML5 canvas games ever built. He is also passionate about open-source as the author of many projects, including the popular howler.js audio library.",
+      "name" : "James Simpson",
+      "company":"GoldFire Studios",
+      "country": "Oklahoma, USA",
+      "photo" : "/images/speakers/James_Simpson.jpg",
+      "photoUrl" : "/images/speakers/James_Simpson.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/GoldFireStudios",
+          "name" : "Twitter"
+        },
+        {
+          "icon" : "website",
+            "link" : "https://goldfirestudios.com/",
+            "name" : "Website"
+        }
+    ],
+      "order" : 0,
+      "title" : "Founder",
+      "sessions":[
+        {
+          "id": "webAudio"
+        }
+      ]
     }
   ],
   "sessions" : [
@@ -368,6 +397,14 @@
       "speakers" : [ "senigbolo_stephen" ],
       "tags" : ["Javascript", "Vue", "VueJs", "jquery", "web development", "DOM", "VIRTUAL DOM"],
       "title" : "From Jquery to VueJS - Not Rocket Science"
+    },
+    {
+      "id":"webAudio",
+      "complexity" : "All",
+      "description" : "As web and native apps continue to converge, audio plays an ever-increasing role in elevating the user experience beyond simple static documents. However, even simple audio playback can get complicated when dealing with different browsers, devices and environments. In this talk, we’ll take a deep dive into using the howler.js audio library to enhance your web, desktop and mobile applications. Through a live coding demo, we’ll start with basic playback and work our way through audio sprites, live streaming, 3D spatial audio and more. Walk away with a better understanding of various use-cases for audio on the web and the simple tools you can use to enable them in your own projects.",
+      "speakers" : [ "james_simpson" ],
+      "tags" : ["front-end", "tools", "technical"],
+      "title" : "Web Audio Made Easy with Howler.js"
     }
   ]
 
