@@ -14,7 +14,7 @@ deployproduction:
   only: 
     - DevFest-Hamburg
   script:
-    - yarn install -g firebase-tools
+    - npm install -g firebase-tools
     - yarn
     - cd functions && yarn && cd ..
     - yarn build:prod
