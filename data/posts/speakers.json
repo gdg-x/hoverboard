@@ -154,6 +154,35 @@
           "id": "teslaBattery"
         }
       ]
+    },
+    {
+      "id":"gabi_dombrowski",
+      "featured": false,
+      "bio" : "A third-generation Brazilian raised in the US, Gabi spent her youth immersed in MS-DOS, server rooms, and Geocities Mariah Carey fan page HTML. She transitioned to a development career in 2016 after spending 7 years as a systems administrator and is active in her local tech community. Namely, she’s the Mentor Director for Coding & Cocktails, a Kansas City Women in Technology program, which teaches monthly coding sessions to help women break into the industry. Amongst her other interests are included ashtanga yoga, learning languages, and curating stellar playlists.",
+      "name" : "Gabi Dombrowski",
+      "company":"",
+      "country": "Kansas City, MO, USA",
+      "photo" : "/images/speakers/Gabi_Dombrowski.jpg",
+      "photoUrl" : "/images/speakers/Gabi_Dombrowski.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/gabdom",
+          "name" : "Twitter"
+        },
+      {
+        "icon" : "website",
+          "link" : "https://gabrieladombrowski.com/",
+          "name" : "Website"
+      }
+    ],
+      "order" : 0,
+      "title" : "CodeSmith at Ordina Netherlands",
+      "sessions":[
+        {
+          "id": "mentorPlaybook"
+        }
+      ]
     }
   ],
   "sessions" : [
@@ -170,7 +199,7 @@
       "complexity" : "All",
       "description" : "It’s something we all struggle with, admitting we don’t know something. But I’m here to show you the power of saying \"I don’t know\" to people. Saying \"I don’t know\" doesn’t have to be the end of a conversation, in fact it can be the start of an entirely new, exciting conversation with learning opportunities for all parties. We will talk through scenarios where we don’t feel comfortable saying it, ways we can feel comfortable saying it, and the good things that come from it. Outline/structure of the Session Why we don’t say I don’t know Why we should say it How to say I don’t know to clients How to say I don’t know as an expert How to say I don’t know as a leader A deep (and revealing) discussion on the underlying reasons why we feel afraid to say \"I don’t know\" to people.",
       "speakers" : [ "andrew_murphy" ],
-      "tags" : [ "talk", "communication", "ledership" ],
+      "tags" : [ "soft skills", "talk", "communication", "ledership" ],
       "title" : "The power of saying \"I don't know\""
     },
     {
@@ -196,6 +225,14 @@
       "speakers" : [ "peter_eijgermans" ],
       "tags" : ["Workshop","Vue.js", "ReactJS", "UserInterfaces", "front-end", "tools", "redux", "veux", "framework"],
       "title" : "Building Tesla’s Battery Range Calculator with Vue.js or ReactJS"
+    },
+    {
+      "id":"mentorPlaybook",
+      "complexity" : "All",
+      "description" : "We often find ourselves in situations where we have to knowledge share and mentor others, but we often don’t take the time to learn how to be better mentors. How do we know if we’re doing ‘mentoring’ right, and what small things do we not know about that could be doing more harm than good? Through my work as over the past 3 years directing mentors at a monthly coding class, I’ve been able to compile effective methods through research and experience that will help all developers be better mentors, whether within an established mentor/mentee relationship or just in quick day-to-day teaching opportunities. By setting expectations, learning how to be more friendly and accessible, removing roadblocks, practicing self-care, developing empathy for mentees, and constantly iterating based on actionable feedback, we can all contribute to creating richer tech communities that thrive on constant improvement and collective growth.",
+      "speakers" : [ "gabi_dombrowski" ],
+      "tags" : ["soft skills", "mentoring", "community"],
+      "title" : "The Mentor Playbook"
     }
   ]
 
