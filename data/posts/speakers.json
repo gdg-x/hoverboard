@@ -55,18 +55,37 @@
       "bio" : "I combine my 13 years of professional software engineering experience with a passion for leadership and communication skills. My main focus is on how we can be better technical leaders and developers by focusing on learning the skills most of us ignore - communication and leadership skills. Originally from the UK but now based in Australia, I have consulted, performed workshops and developed software for clients across the UK, Australia, New Zealand and the United States. Technology in all its forms is part of my makeup and so I code, speak, write, teach, make, game and listen to all things geek",
       "name" : "Andrew Murphy",
       "company":"",
-      "country": "Australia",
+      "country": "Melbourne, Australia",
       "photo" : "/images/speakers/Andrew_Murphy.jpg",
       "photoUrl" : "/images/speakers/Andrew_Murphy.jpg",
       "socials" : [
+    ],
+      "order" : 0,
+      "title" : "Programmer / Author / Teacher",
+      "sessions":[
+        {
+          "id": "iDontKnow"
+        }
+      ]
+    },
+    {
+      "id":"ryan_heupler",
+      "featured": false,
+      "bio" : "Hi there! I’m currently an engineer at Guru, as well as mentor/instructor for an online code school called Thinkful. I run my own YouTube channel focused on helping break down programming concepts into simple terms (or at least I try to!). When I’m not working on any of that, I’ll sometime stream on Twitch where I do portfolio reviews for people looking for jobs. I’ll sometime mess around making music, or hangout at a local coffee shop (trying to find the best coffee in Philadelphia).",
+      "name" : "Ryan Heupler",
+      "company":"",
+      "country": "Philadelphia, PA USA",
+      "photo" : "/images/speakers/Ryan_Heupler.jpg",
+      "photoUrl" : "/images/speakers/Ryan_Heupler.jpg",
+      "socials" : [
         {
           "icon" : "twitter",
-          "link" : "https://twitter.com/sandimetz",
+          "link" : "http://twitter.com/codingcardio",
           "name" : "Twitter"
         },
       {
         "icon" : "website",
-          "link" : "https://www.sandimetz.com/",
+          "link" : "https://youtube.com/c/codingcardio",
           "name" : "Website"
       }
     ],
@@ -74,7 +93,7 @@
       "title" : "Programmer / Author / Teacher",
       "sessions":[
         {
-          "id": "iDontKnow"
+          "id": "refactorClassComponent"
         }
       ]
     }
@@ -92,9 +111,17 @@
       "id":"iDontKnow",
       "complexity" : "All",
       "description" : "It’s something we all struggle with, admitting we don’t know something. But I’m here to show you the power of saying \"I don’t know\" to people. Saying \"I don’t know\" doesn’t have to be the end of a conversation, in fact it can be the start of an entirely new, exciting conversation with learning opportunities for all parties. We will talk through scenarios where we don’t feel comfortable saying it, ways we can feel comfortable saying it, and the good things that come from it. Outline/structure of the Session Why we don’t say I don’t know Why we should say it How to say I don’t know to clients How to say I don’t know as an expert How to say I don’t know as a leader A deep (and revealing) discussion on the underlying reasons why we feel afraid to say \"I don’t know\" to people.",
-      "speakers" : [ "sandrew_murphy" ],
+      "speakers" : [ "andrew_murphy" ],
       "tags" : [ "talk" ],
       "title" : "The power of saying \"I don't know\""
+    },
+    {
+      "id":"refactorClassComponent",
+      "complexity" : "All",
+      "description" : "Ever since Hooks was announced for React, they’ve become a very popular buzz word when discussing React. Some common questions I hear when talking to others are: What are they? How do you use them? Why should I use them? Do they replace life-cycle methods. We will go over all of these together. I will start with a basic React app using a few stateful, class components using life-cycle, custom methods, and API interaction. I will convert the components over to functional components and integrating several different hooks, while not losing any functionality.You’ll come away from this talk with a good foundation for most of the primitive hooks in React, and you’ll understand how to use them & write your own custom hooks.",
+      "speakers" : [ "ryan_heupler" ],
+      "tags" : [ "talk", "react", "front-end", "optimization", "framework", "functional programming"],
+      "title" : "Refactoring a Class Component: A Gentle Introduction into React Hooks"
     }
   ]
 
