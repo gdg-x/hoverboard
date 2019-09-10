@@ -41,8 +41,13 @@
           "newTab": true
         },
         {
-          "name": "Google Developers Group",
-          "url": "https://developers.google.com/",
+          "name": "GDG",
+          "url": "https://developers.google.com/groups/",
+          "newTab": true
+        },
+        {
+          "name": "DevFest",
+          "url": "https://devfest.withgoogle.com/",
           "newTab": true
         },
         {
@@ -208,7 +213,7 @@
     "subscribe": "Subscribe",
     "subscribed": "Subscribed",
     "close": "Close",
-    "generalError": "Some error has occured. Please, try again later.",
+    "generalError": "An error has occurred. Please, try again later.",
     "toast": "Successfully subscribed!"
   },
   "team": {
@@ -253,10 +258,19 @@
       },
       {
         "title": "What is GDG?",
-        "description": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion",
+        "description": "Google Developers Groups (GDGs) are communities of volunteers who create exciting projects and share experiences about Google technologies.",
         "callToAction": {
           "label": "Read more",
           "link": "https://developers.google.com/groups/",
+          "newTab": true
+        }
+      },
+      {
+        "title": "What is DevFest?",
+        "description": "DevFests are community-led developer events hosted by Google Developer Groups around the globe.",
+        "callToAction": {
+          "label": "Read more",
+          "link": "https://devfest.withgoogle.com/",
           "newTab": true
         }
       }

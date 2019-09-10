@@ -7,6 +7,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
+    "target": "devfesthh2019",
     "public": "./build",
     "redirects": [{
       "source": "/index.html",

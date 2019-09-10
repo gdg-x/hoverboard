@@ -48,10 +48,6 @@
         margin: 0;
       }
 
-      .share-gplus  {
-        color: var(--gplus-color);
-      }
-
       .share-twitter {
         color: var(--twitter-color);
       }
@@ -147,18 +143,6 @@
       <div class="nav-inline">
         <div class="share">
           <paper-icon-button
-            class="share-gplus"
-            icon="hoverboard:gplus"
-            share="gplus"
-            on-tap="share"
-            ga-on="click"
-            ga-event-category="social"
-            ga-event-action="share"
-            ga-event-label="gplus">
-          </paper-icon-button>
-        </div>
-        <div class="share">
-          <paper-icon-button
             class="share-facebook"
             icon="hoverboard:facebook"
             share="facebook"
@@ -187,7 +171,7 @@
     <div class="social-group blog">
       <div class="title">
         {$ followOur $}
-        <a href="{$ organizer.blog $}" target="_blank" rel="noopener noreferrer">{$ footer.blog $}</a>
+        <a href="{$ organizer.blog $}" {% if organizer.blog.startsWith('http') %} target="_blank" rel="noopener noreferrer" {% endif %}>{$ footer.blog $}</a>
       </div>
     </div>
 

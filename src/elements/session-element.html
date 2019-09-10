@@ -6,6 +6,7 @@
 
 <link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="./text-truncate.html">
 <link rel="import" href="./shared-styles.html">
 
 <dom-module id="session-element">
@@ -16,6 +17,7 @@
         background-color: var(--primary-background-color);
         border-bottom: 1px solid var(--border-light-color);
         height: 100%;
+        border-radius: var(--border-radius);
       }
 
       .session {
@@ -150,7 +152,9 @@
       <div class="session-header" layout horizontal justified>
         <div flex>
           <h3 class="session-title">[[session.title]]</h3>
-          <div class="session-description" hidden$="[[_hideSessionAbstract(session.shortDescription)]]">[[session.shortDescription]]</div>
+          <text-truncate lines="3">
+            <div class="session-description">[[summary]]</div>
+          </text-truncate>
         </div>
         <span class="language">[[slice(session.language, 2)]]</span>
       </div>
@@ -229,9 +233,9 @@
             type: String,
             computed: '_isFeatured(featuredSessions, session.id)',
           },
-          showSessionShortAbstract: {
-            type: Boolean,
-            value: () => JSON.parse('{$ showSessionShortAbstract $}'),
+          summary: {
+            type: String,
+            computed: '_summary(session.description)',
           },
         };
       }
@@ -245,8 +249,13 @@
         return number > 1 ? 's' : '';
       }
 
-      _hideSessionAbstract(sesionAbstract) {
-        return !this.showSessionShortAbstract || !sesionAbstract;
+      _summary(description = '') {
+        const indexes = [
+          description.indexOf('\n'),
+          description.indexOf('<br'),
+          description.length,
+        ].filter((index) => index > 0);
+        return description.slice(0, Math.min(...indexes));
       }
 
       _getFeaturedSessionIcon(featuredSessions, sessionId) {
