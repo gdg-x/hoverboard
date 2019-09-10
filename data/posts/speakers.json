@@ -125,6 +125,35 @@
           "id": "sharingComponents"
         }
       ]
+    },
+    {
+      "id":"peter_eijgermans",
+      "featured": false,
+      "bio" : "Peter is an adventurous and passionate CodeSmith at Ordina Netherlands. He likes to travel around the world with his bike. Always seeking for the unexpected and unknown. For his job he tries out the latest techniques and frameworks. He loves to share his experience by speaking at conferences over the World and writing for the Dutch Java magazine and DZone. He believes that you as the front-end developer are the spider in the web to bring the user, the team and the product together.",
+      "name" : "Peter Eijgermans",
+      "company":"",
+      "country": "Utrecht, Netherlands",
+      "photo" : "/images/speakers/peter_eijgermans.jpg",
+      "photoUrl" : "/images/speakers/peter_eijgermans.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/EijgermansPeter",
+          "name" : "Twitter"
+        },
+      {
+        "icon" : "website",
+          "link" : "https://petereijgermans11.github.io/petereijgermans.github.io/",
+          "name" : "Website"
+      }
+    ],
+      "order" : 0,
+      "title" : "CodeSmith at Ordina Netherlands",
+      "sessions":[
+        {
+          "id": "teslaBattery"
+        }
+      ]
     }
   ],
   "sessions" : [
@@ -159,6 +188,14 @@
       "speakers" : [ "chris_lorenzo" ],
       "tags" : ["Javascript", "components", "frontend"],
       "title" : "Strategies for Sharing Components ⚙"
+    },
+    {
+      "id":"teslaBattery",
+      "complexity" : "All",
+      "description" : "Which one is your favourite: ReactJS or Vue.js? Both ReactJS & Vue.js developers will get the same requirements for an application (Building Tesla’s Battery Range Calculator). Are you a Vue.js developer who wants to learn how to use ReactJS, or the other way around? Trust us, you can learn from each other, and that’s exactly what you will do on this session. We will give you a buggy application that you’ll have to fix before adding new features to it using either Vue.js or React. How fast will you go? Will you share your findings with other developers? You’re welcome to test this during our workshop. We have built the same application with ReactJS and Vue.js. We invite you to spend the session learning how to build such an app yourself with the help of our mentors. By the end of the session, you should be able to answer these questions: • What is Functional Reactive Programming? • How to use React and Vue.js? What are the main differences between Vue.js and React?",
+      "speakers" : [ "peter_eijgermans" ],
+      "tags" : ["Workshop","Vue.js", "ReactJS", "UserInterfaces", "front-end", "tools", "redux", "veux", "framework"],
+      "title" : "Building Tesla’s Battery Range Calculator with Vue.js or ReactJS"
     }
   ]
 
