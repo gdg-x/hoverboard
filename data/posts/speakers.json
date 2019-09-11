@@ -464,7 +464,7 @@
       "photoUrl" : "/images/speakers/Colleen_Dunlap.jpg",
       "socials" : [
         {
-          "icon" : "website",
+          "icon" : "github",
             "link" : "https://github.com/colleenDunlap",
             "name" : "Github"
         }
