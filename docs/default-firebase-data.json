@@ -40,20 +40,40 @@
   "partners" : [ {
     "logos" : [ {
       "order" : 0,
+      "logoUrl" : "../images/logos/ljs-vistar-logo.png",
+      "name" : "Vistar",
+      "url" : "https://www.vistarmedia.com/"
+    },{
+      "order" : 1,
+      "logoUrl" : "../images/logos/ljs-chariot-logo.jpg",
+      "name" : "Chariot Solutions",
+      "url" : "https://chariotsolutions.com/"
+    },{
+      "order" : 2,
       "logoUrl" : "../images/logos/ljs-comcast-logo.png",
       "name" : "Comcast",
       "url" : "https://corporate.comcast.com/"
     },{
-      "order" : 1,
-      "logoUrl" : "../images/logos/ljs-vistar-logo.png",
-      "name" : "Vistar",
-      "url" : "https://www.vistarmedia.com/"
-    }, {
-      "order" : 2,
-      "logoUrl" : "../images/logos/ljs-chariot-logo.jpg",
-      "name" : "Chariot Solutions",
-      "url" : "https://chariotsolutions.com/"
-    } ],
+      "order" : 3,
+      "logoUrl" : "../images/logos/ljs-linode-logo.jpg",
+      "name" : "Linode",
+      "url" : "https://www.linode.com/"
+    },{
+    "order" : 4,
+    "logoUrl" : "../images/logos/ljs-twitter-logo.png",
+    "name" : "Twitter",
+    "url" : "https://twitter.com/"
+  },{
+    "order" : 5,
+    "logoUrl" : "../images/logos/ljs-gopuff-logo.png",
+    "name" : "goPuff",
+    "url" : "https://gopuff.com/home"
+  },{
+    "order" : 6,
+    "logoUrl" : "../images/logos/ljs-vistar-logo.png",
+    "name" : "BLUECADET",
+    "url" : "https://www.bluecadet.com/"
+  } ],
     "order" : 1,
     "title" : "General Partners"
   } ],
