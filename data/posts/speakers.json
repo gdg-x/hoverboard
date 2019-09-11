@@ -353,6 +353,26 @@
       ]
     },
     {
+      "id":"anusha_bhat",
+      "featured": false,
+      "bio" : "A software engineer at Josh Software, Works in JavaScript, Ruby, Golang.",
+      "name" : "Anusha Bhat",
+      "company":"Josh Software",
+      "country": "Pune Area, India",
+      "photo" : "/images/speakers/anusha_bhat.jpg",
+      "photoUrl" : "/images/speakers/anusha_bhat.jpg",
+      "socials" : [
+
+    ],
+      "order" : 0,
+      "title" : "Software Engineer",
+      "sessions":[
+        {
+          "id": "multithreadingJavascript"
+        }
+      ]
+    },
+    {
       "id":"jeffrey_smith",
       "featured": false,
       "bio" : "I’m 28 years old from rural VA. I earned a BS in Economics in 2012, and after working at an education analytics startup after college, taught myself development. I started with frontend development but now happily work up and down the stack. I moved to Philadelphia three years ago to pursue a career in technology. I’ve worked at Comcast the past two years. I currently live in South Philly with my friendly cat, Rupert.",
@@ -495,6 +515,14 @@
       "speakers" : [ "james_simpson" ],
       "tags" : ["front-end", "tools", "technical"],
       "title" : "Web Audio Made Easy with Howler.js"
+    },
+    {
+      "id":"multithreadingJavascript",
+      "complexity" : "All",
+      "description" : "We all know JavaScript is single threaded. We have written code till now based on that assumption. What if I tell you that Multi-threading is possible in JavaScript. You must be thinking I have gone nuts. “I am not crazy, my mother had me tested” :P<br><br>With the advent of PWAs, we are delegating a lot of processing to the client side. With JS being single-threaded, at times this results in jitter. Consider an example of client-side filtering on a very big list or image processing. Here, the main thread is blocked resulting in the end user being blocked.<br><br>What should we do now? Is it necessary to do all the computations in the main thread? Won’t it be great if we can perform computations in a worker thread and then notify the main thread about it?<br><br>Here comes background thread to the rescue. We can perform a heavy computation task in the background thread. Due to this, the main thread is unblocked and so is the user. Background and main thread can communicate asynchronously. I will be sharing my experience with background threads in JS.",
+      "speakers" : [ "anusha_bhat" ],
+      "tags" : ["front-end", "pwa", "technical", "performance", "javascript", "web"],
+      "title" : "Multi-threading in Javascript - Myth or Reality?"
     },
     {
       "id":"jovo",
