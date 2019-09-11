@@ -375,6 +375,35 @@
           "id": "jovo"
         }
       ]
+    },
+    {
+      "id":"alfredo_lopez",
+      "featured": false,
+      "bio" : "Alfredo is a Director of Engineering at Hearst working with technical and non-technical teams to develop tools that abstract best practices and performance enhancements into measurable business goals.<br><br>His current interests include creating highly performant and flexible web applications that enable developers to be productive.<br><br>Prior to Hearst, Alfredo worked for an ad platform writing low-level JavaScript that catered to strict browser support requirements. Outside of the web, Alfredo is a musician, film enthusiast, and comedy fan.",
+      "name" : "Alfredo Lopez",
+      "company":"Hearst",
+      "country": "New York, NY",
+      "photo" : "/images/speakers/Alfredo_Lopez.jpg",
+      "photoUrl" : "/images/speakers/Alfredo_Lopez.jpg",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "https://alfre.do",
+            "name" : "Website"
+        },
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/lfredolo",
+          "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Director of Engineering",
+      "sessions":[
+        {
+          "id": "thinkfast"
+        }
+      ]
     }
 
   ],
@@ -474,6 +503,14 @@
       "speakers" : [ "jeffrey_smith" ],
       "tags" : ["javascript", "jovo", "VUI", "Node", "Alexa", "Dialogflow", "Typescript"],
       "title" : "How to Build Cross Platform Voice Apps with the Jovo Framework"
+    },
+    {
+      "id":"thinkfast",
+      "complexity" : "Intermediate",
+      "description" : "Making room for performance optimizations is hard. It means different things to different people and is considered a goal to achieve and maintain. But a performance culture is not about being slow or fast, but the ability to make tradeoffs and tackle competing priorities, with a clear path back.<br><br>This is the story of establishing a performance culture by empowering non-technical team members to understand, own and act on their performance impact by following a path and checklist for each project.<br><br>By connecting the intention to goals and vision for a specific project, a performance path with best practices is created to guide the team through development, but more importantly, to understand the tradeoffs each decision has.<br><br>In this talk, we’ll cover the different paths to improve performance along with some JavaScript tips and tricks.",
+      "speakers" : [ "alfredo_lopez" ],
+      "tags" : ["javascript", "performance", "culture"],
+      "title" : "Think Fast, First: Empowering a Performance Culture"
     }
 
   ]
