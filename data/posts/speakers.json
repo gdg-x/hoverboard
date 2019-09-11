@@ -69,35 +69,6 @@
       ]
     },
     {
-      "id":"ryan_heupler",
-      "featured": false,
-      "bio" : "Hi there! I’m currently an engineer at Guru, as well as mentor/instructor for an online code school called Thinkful. I run my own YouTube channel focused on helping break down programming concepts into simple terms (or at least I try to!). When I’m not working on any of that, I’ll sometime stream on Twitch where I do portfolio reviews for people looking for jobs. I’ll sometime mess around making music, or hangout at a local coffee shop (trying to find the best coffee in Philadelphia).",
-      "name" : "Ryan Heupler",
-      "company":"",
-      "country": "Philadelphia, PA USA",
-      "photo" : "/images/speakers/Ryan_Heupler.jpg",
-      "photoUrl" : "/images/speakers/Ryan_Heupler.jpg",
-      "socials" : [
-        {
-          "icon" : "twitter",
-          "link" : "http://twitter.com/codingcardio",
-          "name" : "Twitter"
-        },
-      {
-        "icon" : "website",
-          "link" : "https://youtube.com/c/codingcardio",
-          "name" : "Website"
-      }
-    ],
-      "order" : 0,
-      "title" : "Mentor & Instructor",
-      "sessions":[
-        {
-          "id": "refactorClassComponent"
-        }
-      ]
-    },
-    {
       "id":"milecia_mcgregor",
       "featured": false,
       "bio" : "Milecia McGregor is a software engineer lost somewhere in the Midwest. She has mostly worked with .NET, Angular, and Azure to build web apps, but she also has a master’s degree in mechanical and aerospace engineering and has published research in machine learning and robotics. In her free time, she spends time with her husband and dogs while learning to play the ukulele and learning Japanese.",
@@ -126,6 +97,36 @@
       ]
     },
     {
+      "id":"ryan_heupler",
+      "featured": false,
+      "bio" : "Hi there! I’m currently an engineer at Guru, as well as mentor/instructor for an online code school called Thinkful. I run my own YouTube channel focused on helping break down programming concepts into simple terms (or at least I try to!). When I’m not working on any of that, I’ll sometime stream on Twitch where I do portfolio reviews for people looking for jobs. I’ll sometime mess around making music, or hangout at a local coffee shop (trying to find the best coffee in Philadelphia).",
+      "name" : "Ryan Heupler",
+      "company":"",
+      "country": "Philadelphia, PA USA",
+      "photo" : "/images/speakers/Ryan_Heupler.jpg",
+      "photoUrl" : "/images/speakers/Ryan_Heupler.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/codingcardio",
+          "name" : "Twitter"
+        },
+      {
+        "icon" : "website",
+          "link" : "https://youtube.com/c/codingcardio",
+          "name" : "Website"
+      }
+    ],
+      "order" : 0,
+      "title" : "Mentor & Instructor",
+      "sessions":[
+        {
+          "id": "refactorClassComponent"
+        }
+      ]
+    },
+
+    {
       "id":"chris_lorenzo",
       "featured": false,
       "bio" : "Chris has worked at Comcast since 2007 – currently as a Distinguished Engineer. He enjoys building/motivating teams and ramping up new projects using the latest patterns and web primitives. Besides coding in Javascript, he loves spending time with his family and helping out in the community.",
@@ -151,64 +152,6 @@
       "sessions":[
         {
           "id": "sharingComponents"
-        }
-      ]
-    },
-    {
-      "id":"peter_eijgermans",
-      "featured": false,
-      "bio" : "Peter is an adventurous and passionate CodeSmith at Ordina Netherlands. He likes to travel around the world with his bike. Always seeking for the unexpected and unknown. For his job he tries out the latest techniques and frameworks. He loves to share his experience by speaking at conferences over the World and writing for the Dutch Java magazine and DZone. He believes that you as the front-end developer are the spider in the web to bring the user, the team and the product together.",
-      "name" : "Peter Eijgermans",
-      "company":"Ordina Netherlands",
-      "country": "Utrecht, Netherlands",
-      "photo" : "/images/speakers/peter_eijgermans.jpg",
-      "photoUrl" : "/images/speakers/peter_eijgermans.jpg",
-      "socials" : [
-        {
-          "icon" : "twitter",
-          "link" : "http://twitter.com/EijgermansPeter",
-          "name" : "Twitter"
-        },
-      {
-        "icon" : "website",
-          "link" : "https://petereijgermans11.github.io/petereijgermans.github.io/",
-          "name" : "Website"
-      }
-    ],
-      "order" : 0,
-      "title" : "CodeSmith",
-      "sessions":[
-        {
-          "id": "teslaBattery"
-        }
-      ]
-    },
-    {
-      "id":"gabi_dombrowski",
-      "featured": false,
-      "bio" : "A third-generation Brazilian raised in the US, Gabi spent her youth immersed in MS-DOS, server rooms, and Geocities Mariah Carey fan page HTML. She transitioned to a development career in 2016 after spending 7 years as a systems administrator and is active in her local tech community. Namely, she’s the Mentor Director for Coding & Cocktails, a Kansas City Women in Technology program, which teaches monthly coding sessions to help women break into the industry. Amongst her other interests are included ashtanga yoga, learning languages, and curating stellar playlists.",
-      "name" : "Gabi Dombrowski",
-      "company":"",
-      "country": "Kansas City, MO, USA",
-      "photo" : "/images/speakers/Gabi_Dombrowski.jpg",
-      "photoUrl" : "/images/speakers/Gabi_Dombrowski.jpg",
-      "socials" : [
-        {
-          "icon" : "twitter",
-          "link" : "http://twitter.com/gabdom",
-          "name" : "Twitter"
-        },
-      {
-        "icon" : "website",
-          "link" : "https://gabidombrowski.com",
-          "name" : "Website"
-      }
-    ],
-      "order" : 0,
-      "title" : "freelance web developer and no-ego doer",
-      "sessions":[
-        {
-          "id": "mentorPlaybook"
         }
       ]
     },
@@ -241,6 +184,66 @@
         }
       ]
     },
+
+    {
+      "id":"gabi_dombrowski",
+      "featured": false,
+      "bio" : "A third-generation Brazilian raised in the US, Gabi spent her youth immersed in MS-DOS, server rooms, and Geocities Mariah Carey fan page HTML. She transitioned to a development career in 2016 after spending 7 years as a systems administrator and is active in her local tech community. Namely, she’s the Mentor Director for Coding & Cocktails, a Kansas City Women in Technology program, which teaches monthly coding sessions to help women break into the industry. Amongst her other interests are included ashtanga yoga, learning languages, and curating stellar playlists.",
+      "name" : "Gabi Dombrowski",
+      "company":"",
+      "country": "Kansas City, MO, USA",
+      "photo" : "/images/speakers/Gabi_Dombrowski.jpg",
+      "photoUrl" : "/images/speakers/Gabi_Dombrowski.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/gabdom",
+          "name" : "Twitter"
+        },
+      {
+        "icon" : "website",
+          "link" : "https://gabidombrowski.com",
+          "name" : "Website"
+      }
+    ],
+      "order" : 0,
+      "title" : "freelance web developer and no-ego doer",
+      "sessions":[
+        {
+          "id": "mentorPlaybook"
+        }
+      ]
+    },
+    {
+      "id":"peter_eijgermans",
+      "featured": false,
+      "bio" : "Peter is an adventurous and passionate CodeSmith at Ordina Netherlands. He likes to travel around the world with his bike. Always seeking for the unexpected and unknown. For his job he tries out the latest techniques and frameworks. He loves to share his experience by speaking at conferences over the World and writing for the Dutch Java magazine and DZone. He believes that you as the front-end developer are the spider in the web to bring the user, the team and the product together.",
+      "name" : "Peter Eijgermans",
+      "company":"Ordina Netherlands",
+      "country": "Utrecht, Netherlands",
+      "photo" : "/images/speakers/peter_eijgermans.jpg",
+      "photoUrl" : "/images/speakers/peter_eijgermans.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/EijgermansPeter",
+          "name" : "Twitter"
+        },
+      {
+        "icon" : "website",
+          "link" : "https://petereijgermans11.github.io/petereijgermans.github.io/",
+          "name" : "Website"
+      }
+    ],
+      "order" : 0,
+      "title" : "CodeSmith",
+      "sessions":[
+        {
+          "id": "teslaBattery"
+        }
+      ]
+    },
+
     {
       "id":"chris_ng",
       "featured": false,
@@ -351,6 +354,128 @@
           "id": "webAudio"
         }
       ]
+    },
+    {
+      "id":"anusha_bhat",
+      "featured": false,
+      "bio" : "A software engineer at Josh Software, Works in JavaScript, Ruby, Golang.",
+      "name" : "Anusha Bhat",
+      "company":"Josh Software",
+      "country": "Pune Area, India",
+      "photo" : "/images/speakers/anusha_bhat.jpg",
+      "photoUrl" : "/images/speakers/anusha_bhat.jpg",
+      "socials" : [
+
+    ],
+      "order" : 0,
+      "title" : "Software Engineer",
+      "sessions":[
+        {
+          "id": "multithreadingJavascript"
+        }
+      ]
+    },
+
+    {
+      "id":"alfredo_lopez",
+      "featured": false,
+      "bio" : "Alfredo is a Director of Engineering at Hearst working with technical and non-technical teams to develop tools that abstract best practices and performance enhancements into measurable business goals.<br><br>His current interests include creating highly performant and flexible web applications that enable developers to be productive.<br><br>Prior to Hearst, Alfredo worked for an ad platform writing low-level JavaScript that catered to strict browser support requirements. Outside of the web, Alfredo is a musician, film enthusiast, and comedy fan.",
+      "name" : "Alfredo Lopez",
+      "company":"Hearst",
+      "country": "New York, NY",
+      "photo" : "/images/speakers/Alfredo_Lopez.jpg",
+      "photoUrl" : "/images/speakers/Alfredo_Lopez.jpg",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "https://alfre.do",
+            "name" : "Website"
+        },
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/lfredolo",
+          "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Director of Engineering",
+      "sessions":[
+        {
+          "id": "thinkfast"
+        }
+      ]
+    },
+    {
+      "id":"robin_dykema",
+      "featured": false,
+      "bio" : "Robin is a UI engineer at Taulia, where she focuses on front end development in React. She is passionate about building stunning user interfaces and intuitive user experiences. She successfully transitioned from teaching ESL to kindergarteners in Shanghai to wrangling code and hasn’t looked back since.",
+      "name" : "Robin Dykema",
+      "company":"Taulia",
+      "country": "Austin, TX",
+      "photo" : "/images/speakers/Robin_Dykema.jpg",
+      "photoUrl" : "/images/speakers/Robin_Dykema.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/robindykema",
+          "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "UI Engineer",
+      "sessions":[
+        {
+          "id": "sacre_bleu"
+        }
+      ]
+    },
+    {
+      "id":"jeffrey_smith",
+      "featured": false,
+      "bio" : "I’m 28 years old from rural VA. I earned a BS in Economics in 2012, and after working at an education analytics startup after college, taught myself development. I started with frontend development but now happily work up and down the stack. I moved to Philadelphia three years ago to pursue a career in technology. I’ve worked at Comcast the past two years. I currently live in South Philly with my friendly cat, Rupert.",
+      "name" : "Jeffrey Smith",
+      "company":"Comcast",
+      "country": "Philadelphia, PA",
+      "photo" : "/images/speakers/jeffrey_smith.jpg",
+      "photoUrl" : "/images/speakers/jeffrey_smith.jpg",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "http://jeffreysmith.ninha",
+            "name" : "Website"
+        }
+    ],
+      "order" : 0,
+      "title" : "Design Technologist",
+      "sessions":[
+        {
+          "id": "jovo"
+        }
+      ]
+    },
+    {
+      "id":"colleen_dunlap",
+      "featured": false,
+      "bio" : "Colleen is a free-spirited techie with a passion for Global Engineering. She’s a life-long learner with a passion for connecting with others. She loves Hackathons, Dogs, Coffee, and the Circus. Her passion projects include an online resource platform for LGBT+ individuals living in countries where Homosexuality is illegal, and a Solar Electric Stove startup called Sol Flame. She currently works at the Ifakara Health Institute in Bagamoyo, Tanzania, building technology tools for Malaria Researchers.",
+      "name" : "Colleen Dunlap",
+      "company":"Marquette Energy Analytics",
+      "country": "Milwaukee, Wisconsin",
+      "photo" : "/images/speakers/Colleen_Dunlap.jpg",
+      "photoUrl" : "/images/speakers/Colleen_Dunlap.jpg",
+      "socials" : [
+        {
+          "icon" : "github",
+            "link" : "https://github.com/colleenDunlap",
+            "name" : "Github"
+        }
+    ],
+      "order" : 0,
+      "title" : "Software Developer",
+      "sessions":[
+        {
+          "id": "uniqueHowsWhys"
+        }
+      ]
     }
 
   ],
@@ -425,7 +550,7 @@
       "description" : "Everyone deploys code. For websites in particular, deploying code is often done behind the scenes without a user having to install an update since each new connection can be fulfilled with the latest version of the site. Having complete control of this process allows us to be creative in how fast or slow we deploy code in order to optimize for either maintainability of the code base, getting features out fast, or even both. While deployments seemingly look like a trivial final step, how we deploy code has far flung effects on how we write code. We will examine how each deployment strategy affects how developers produce code so that we can make an informed decision on the tradeoffs.",
       "speakers" : [ "chris_ng" ],
       "tags" : ["javascript", "deployment"],
-      "title" : "How Your Deployment Strategy Influences How People Codeital"
+      "title" : "How Your Deployment Strategy Influences How People Code"
     },
     {
       "id":"rocketScience",
@@ -442,7 +567,50 @@
       "speakers" : [ "james_simpson" ],
       "tags" : ["front-end", "tools", "technical"],
       "title" : "Web Audio Made Easy with Howler.js"
+    },
+    {
+      "id":"multithreadingJavascript",
+      "complexity" : "All",
+      "description" : "We all know JavaScript is single threaded. We have written code till now based on that assumption. What if I tell you that Multi-threading is possible in JavaScript. You must be thinking I have gone nuts. “I am not crazy, my mother had me tested” :P<br><br>With the advent of PWAs, we are delegating a lot of processing to the client side. With JS being single-threaded, at times this results in jitter. Consider an example of client-side filtering on a very big list or image processing. Here, the main thread is blocked resulting in the end user being blocked.<br><br>What should we do now? Is it necessary to do all the computations in the main thread? Won’t it be great if we can perform computations in a worker thread and then notify the main thread about it?<br><br>Here comes background thread to the rescue. We can perform a heavy computation task in the background thread. Due to this, the main thread is unblocked and so is the user. Background and main thread can communicate asynchronously. I will be sharing my experience with background threads in JS.",
+      "speakers" : [ "anusha_bhat" ],
+      "tags" : ["front-end", "pwa", "technical", "performance", "javascript", "web"],
+      "title" : "Multi-threading in Javascript - Myth or Reality?"
+    },
+    {
+      "id":"jovo",
+      "complexity" : "Intermediate",
+      "description" : "Using Jovo Framework and Jovo CLI, developers can quickly develop voice-first applications for Alexa and Google Home within a single nodejs application. In this workshop, I show you how to quickly build, test, and deploy a voice app using Jovo, and leave with areas for further exploration.<br><br>Topics covered include: how to build a language model, how to use the Alexa and Actions on Google Simulator, how to create unit tests for voice applications, how to route through conversations, how to request user data, and how to extend the bot to other conversational platforms such as Facebook Messenger or Twilio SMS.",
+      "speakers" : [ "jeffrey_smith" ],
+      "tags" : ["javascript", "jovo", "VUI", "Node", "Alexa", "Dialogflow", "Typescript"],
+      "title" : "How to Build Cross Platform Voice Apps with the Jovo Framework"
+    },
+    {
+      "id":"thinkfast",
+      "complexity" : "Intermediate",
+      "description" : "Making room for performance optimizations is hard. It means different things to different people and is considered a goal to achieve and maintain. But a performance culture is not about being slow or fast, but the ability to make tradeoffs and tackle competing priorities, with a clear path back.<br><br>This is the story of establishing a performance culture by empowering non-technical team members to understand, own and act on their performance impact by following a path and checklist for each project.<br><br>By connecting the intention to goals and vision for a specific project, a performance path with best practices is created to guide the team through development, but more importantly, to understand the tradeoffs each decision has.<br><br>In this talk, we’ll cover the different paths to improve performance along with some JavaScript tips and tricks.",
+      "speakers" : [ "alfredo_lopez" ],
+      "tags" : ["javascript", "performance", "culture"],
+      "title" : "Think Fast, First: Empowering a Performance Culture"
+    },
+    {
+      "id":"sacre_bleu",
+      "complexity" : "Intermediate",
+      "description" : "What’s the difference between localization and internationalization? Should I store my translations statically, use my own API, or just use a third-party translation service? What sort of UX problems might I run into when translating my application? Do I have to revamp everything for RTL languages?<br><br>When I started working at my company, all our translations sat in static JSON files. Manually adding new translations was tedious and error-prone, every language loaded on every page, and new translations rarely made it in the same release as their accompanying feature work. This talk will discuss how we transitioned to using i18next to localize our app, the problems we had along the way and how we solved them, and tips for designing applications to minimize future localization issues.",
+      "speakers" : [ "robin_dykema" ],
+      "tags" : ["javascript", "localization", "react"],
+      "title" : "Sacré bleu! The trials and tribulaciónes in localizing your application"
+    },
+    {
+      "id":"uniqueHowsWhys",
+      "complexity" : "All",
+      "description" : "Have you ever wanted to build a web application but couldn’t due to poor internet connection? Have you ever wondered how applications are built for use in situations like Disaster Relief? If yes, then come learn about the extraordinary potential of PWAs and how you can build your own!<br><br>Progressive Web Apps (PWAs) are an up-and-coming technology that has piqued the interest of tech companies big and small. The talk will inform the audience about this new field, its potential, and how one can get started developing PWAs. This talk is both educational and imaginative, and will provide a launchpad for exploring a new way to use JavaScript.<br><br>First, this talk will be an introduction to Progressive Web Apps–what they are, their benefits (such as offering offline functionality, can be run as web page or native app, and increased performance speed), and tools to create them (my go-to tools are AngularJS and Firebase). I’ll also discuss how you can turn your existing Web App into a PWA in a matter of minutes. Secondly, this talk will cover how PWAs can be applied to fields such as Tropical Medicine, Poverty Alleviation, and Disaster Relief (this will include anecdotes from my experience building PWAs for researchers in Tanzania). Learn how you can apply your JS chops to create better web and mobile experiences in both ordinary and extraordinary circumstances!",
+      "speakers" : [ "colleen_dunlap" ],
+      "tags" : ["javascript", "angular", "global engineering", "html", "typescript"],
+      "title" : "The Unique Hows and Whys of Global Progressive Web Apps"
     }
+
+
+
 
   ]
 
