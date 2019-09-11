@@ -73,6 +73,11 @@
     "logoUrl" : "../images/logos/ljs-vistar-logo.png",
     "name" : "BLUECADET",
     "url" : "https://www.bluecadet.com/"
+  },{
+    "order" : 7,
+    "logoUrl" : "../images/logos/ljs-hearst-logo.png",
+    "name" : "HEARST",
+    "url" : "https://www.hearst.com/"
   } ],
     "order" : 1,
     "title" : "General Partners"
