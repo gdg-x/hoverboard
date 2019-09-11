@@ -69,35 +69,6 @@
       ]
     },
     {
-      "id":"ryan_heupler",
-      "featured": false,
-      "bio" : "Hi there! I’m currently an engineer at Guru, as well as mentor/instructor for an online code school called Thinkful. I run my own YouTube channel focused on helping break down programming concepts into simple terms (or at least I try to!). When I’m not working on any of that, I’ll sometime stream on Twitch where I do portfolio reviews for people looking for jobs. I’ll sometime mess around making music, or hangout at a local coffee shop (trying to find the best coffee in Philadelphia).",
-      "name" : "Ryan Heupler",
-      "company":"",
-      "country": "Philadelphia, PA USA",
-      "photo" : "/images/speakers/Ryan_Heupler.jpg",
-      "photoUrl" : "/images/speakers/Ryan_Heupler.jpg",
-      "socials" : [
-        {
-          "icon" : "twitter",
-          "link" : "http://twitter.com/codingcardio",
-          "name" : "Twitter"
-        },
-      {
-        "icon" : "website",
-          "link" : "https://youtube.com/c/codingcardio",
-          "name" : "Website"
-      }
-    ],
-      "order" : 0,
-      "title" : "Mentor & Instructor",
-      "sessions":[
-        {
-          "id": "refactorClassComponent"
-        }
-      ]
-    },
-    {
       "id":"milecia_mcgregor",
       "featured": false,
       "bio" : "Milecia McGregor is a software engineer lost somewhere in the Midwest. She has mostly worked with .NET, Angular, and Azure to build web apps, but she also has a master’s degree in mechanical and aerospace engineering and has published research in machine learning and robotics. In her free time, she spends time with her husband and dogs while learning to play the ukulele and learning Japanese.",
@@ -126,6 +97,36 @@
       ]
     },
     {
+      "id":"ryan_heupler",
+      "featured": false,
+      "bio" : "Hi there! I’m currently an engineer at Guru, as well as mentor/instructor for an online code school called Thinkful. I run my own YouTube channel focused on helping break down programming concepts into simple terms (or at least I try to!). When I’m not working on any of that, I’ll sometime stream on Twitch where I do portfolio reviews for people looking for jobs. I’ll sometime mess around making music, or hangout at a local coffee shop (trying to find the best coffee in Philadelphia).",
+      "name" : "Ryan Heupler",
+      "company":"",
+      "country": "Philadelphia, PA USA",
+      "photo" : "/images/speakers/Ryan_Heupler.jpg",
+      "photoUrl" : "/images/speakers/Ryan_Heupler.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/codingcardio",
+          "name" : "Twitter"
+        },
+      {
+        "icon" : "website",
+          "link" : "https://youtube.com/c/codingcardio",
+          "name" : "Website"
+      }
+    ],
+      "order" : 0,
+      "title" : "Mentor & Instructor",
+      "sessions":[
+        {
+          "id": "refactorClassComponent"
+        }
+      ]
+    },
+
+    {
       "id":"chris_lorenzo",
       "featured": false,
       "bio" : "Chris has worked at Comcast since 2007 – currently as a Distinguished Engineer. He enjoys building/motivating teams and ramping up new projects using the latest patterns and web primitives. Besides coding in Javascript, he loves spending time with his family and helping out in the community.",
@@ -151,64 +152,6 @@
       "sessions":[
         {
           "id": "sharingComponents"
-        }
-      ]
-    },
-    {
-      "id":"peter_eijgermans",
-      "featured": false,
-      "bio" : "Peter is an adventurous and passionate CodeSmith at Ordina Netherlands. He likes to travel around the world with his bike. Always seeking for the unexpected and unknown. For his job he tries out the latest techniques and frameworks. He loves to share his experience by speaking at conferences over the World and writing for the Dutch Java magazine and DZone. He believes that you as the front-end developer are the spider in the web to bring the user, the team and the product together.",
-      "name" : "Peter Eijgermans",
-      "company":"Ordina Netherlands",
-      "country": "Utrecht, Netherlands",
-      "photo" : "/images/speakers/peter_eijgermans.jpg",
-      "photoUrl" : "/images/speakers/peter_eijgermans.jpg",
-      "socials" : [
-        {
-          "icon" : "twitter",
-          "link" : "http://twitter.com/EijgermansPeter",
-          "name" : "Twitter"
-        },
-      {
-        "icon" : "website",
-          "link" : "https://petereijgermans11.github.io/petereijgermans.github.io/",
-          "name" : "Website"
-      }
-    ],
-      "order" : 0,
-      "title" : "CodeSmith",
-      "sessions":[
-        {
-          "id": "teslaBattery"
-        }
-      ]
-    },
-    {
-      "id":"gabi_dombrowski",
-      "featured": false,
-      "bio" : "A third-generation Brazilian raised in the US, Gabi spent her youth immersed in MS-DOS, server rooms, and Geocities Mariah Carey fan page HTML. She transitioned to a development career in 2016 after spending 7 years as a systems administrator and is active in her local tech community. Namely, she’s the Mentor Director for Coding & Cocktails, a Kansas City Women in Technology program, which teaches monthly coding sessions to help women break into the industry. Amongst her other interests are included ashtanga yoga, learning languages, and curating stellar playlists.",
-      "name" : "Gabi Dombrowski",
-      "company":"",
-      "country": "Kansas City, MO, USA",
-      "photo" : "/images/speakers/Gabi_Dombrowski.jpg",
-      "photoUrl" : "/images/speakers/Gabi_Dombrowski.jpg",
-      "socials" : [
-        {
-          "icon" : "twitter",
-          "link" : "http://twitter.com/gabdom",
-          "name" : "Twitter"
-        },
-      {
-        "icon" : "website",
-          "link" : "https://gabidombrowski.com",
-          "name" : "Website"
-      }
-    ],
-      "order" : 0,
-      "title" : "freelance web developer and no-ego doer",
-      "sessions":[
-        {
-          "id": "mentorPlaybook"
         }
       ]
     },
@@ -241,6 +184,66 @@
         }
       ]
     },
+
+    {
+      "id":"gabi_dombrowski",
+      "featured": false,
+      "bio" : "A third-generation Brazilian raised in the US, Gabi spent her youth immersed in MS-DOS, server rooms, and Geocities Mariah Carey fan page HTML. She transitioned to a development career in 2016 after spending 7 years as a systems administrator and is active in her local tech community. Namely, she’s the Mentor Director for Coding & Cocktails, a Kansas City Women in Technology program, which teaches monthly coding sessions to help women break into the industry. Amongst her other interests are included ashtanga yoga, learning languages, and curating stellar playlists.",
+      "name" : "Gabi Dombrowski",
+      "company":"",
+      "country": "Kansas City, MO, USA",
+      "photo" : "/images/speakers/Gabi_Dombrowski.jpg",
+      "photoUrl" : "/images/speakers/Gabi_Dombrowski.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/gabdom",
+          "name" : "Twitter"
+        },
+      {
+        "icon" : "website",
+          "link" : "https://gabidombrowski.com",
+          "name" : "Website"
+      }
+    ],
+      "order" : 0,
+      "title" : "freelance web developer and no-ego doer",
+      "sessions":[
+        {
+          "id": "mentorPlaybook"
+        }
+      ]
+    },
+    {
+      "id":"peter_eijgermans",
+      "featured": false,
+      "bio" : "Peter is an adventurous and passionate CodeSmith at Ordina Netherlands. He likes to travel around the world with his bike. Always seeking for the unexpected and unknown. For his job he tries out the latest techniques and frameworks. He loves to share his experience by speaking at conferences over the World and writing for the Dutch Java magazine and DZone. He believes that you as the front-end developer are the spider in the web to bring the user, the team and the product together.",
+      "name" : "Peter Eijgermans",
+      "company":"Ordina Netherlands",
+      "country": "Utrecht, Netherlands",
+      "photo" : "/images/speakers/peter_eijgermans.jpg",
+      "photoUrl" : "/images/speakers/peter_eijgermans.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/EijgermansPeter",
+          "name" : "Twitter"
+        },
+      {
+        "icon" : "website",
+          "link" : "https://petereijgermans11.github.io/petereijgermans.github.io/",
+          "name" : "Website"
+      }
+    ],
+      "order" : 0,
+      "title" : "CodeSmith",
+      "sessions":[
+        {
+          "id": "teslaBattery"
+        }
+      ]
+    },
+
     {
       "id":"chris_ng",
       "featured": false,
@@ -424,6 +427,30 @@
           "id": "thinkfast"
         }
       ]
+    },
+    {
+      "id":"robin_dykema",
+      "featured": false,
+      "bio" : "Robin is a UI engineer at Taulia, where she focuses on front end development in React. She is passionate about building stunning user interfaces and intuitive user experiences. She successfully transitioned from teaching ESL to kindergarteners in Shanghai to wrangling code and hasn’t looked back since.",
+      "name" : "Robin Dykema",
+      "company":"Taulia",
+      "country": "Austin, TX",
+      "photo" : "/images/speakers/Robin_Dykema.jpg",
+      "photoUrl" : "/images/speakers/Robin_Dykema.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "http://twitter.com/robindykema",
+          "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "UI Engineer",
+      "sessions":[
+        {
+          "id": "sacre_bleu"
+        }
+      ]
     }
 
   ],
@@ -539,7 +566,17 @@
       "speakers" : [ "alfredo_lopez" ],
       "tags" : ["javascript", "performance", "culture"],
       "title" : "Think Fast, First: Empowering a Performance Culture"
+    },
+    {
+      "id":"sacre_bleu",
+      "complexity" : "Intermediate",
+      "description" : "What’s the difference between localization and internationalization? Should I store my translations statically, use my own API, or just use a third-party translation service? What sort of UX problems might I run into when translating my application? Do I have to revamp everything for RTL languages?<br><br>When I started working at my company, all our translations sat in static JSON files. Manually adding new translations was tedious and error-prone, every language loaded on every page, and new translations rarely made it in the same release as their accompanying feature work. This talk will discuss how we transitioned to using i18next to localize our app, the problems we had along the way and how we solved them, and tips for designing applications to minimize future localization issues.",
+      "speakers" : [ "robin_dykema" ],
+      "tags" : ["javascript", "localization", "react"],
+      "title" : "Sacré bleu! The trials and tribulaciónes in localizing your application"
     }
+
+
 
   ]
 
