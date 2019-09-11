@@ -449,7 +449,7 @@
       "description" : "Everyone deploys code. For websites in particular, deploying code is often done behind the scenes without a user having to install an update since each new connection can be fulfilled with the latest version of the site. Having complete control of this process allows us to be creative in how fast or slow we deploy code in order to optimize for either maintainability of the code base, getting features out fast, or even both. While deployments seemingly look like a trivial final step, how we deploy code has far flung effects on how we write code. We will examine how each deployment strategy affects how developers produce code so that we can make an informed decision on the tradeoffs.",
       "speakers" : [ "chris_ng" ],
       "tags" : ["javascript", "deployment"],
-      "title" : "How Your Deployment Strategy Influences How People Codeital"
+      "title" : "How Your Deployment Strategy Influences How People Code"
     },
     {
       "id":"rocketScience",
