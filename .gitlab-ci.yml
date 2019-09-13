@@ -18,6 +18,7 @@ deployproduction:
     - yarn
     - cd functions && yarn && cd ..
     - yarn build:prod
+    - echo "$SERVICEACCOUNT" > "$(pwd)/serviceAccount.json"
     - firebase use $FIREBASE_PROJECT --token $FIREBASE_TOKEN
     - firebase target:apply hosting devfesthh2019 devfesthh2019
     - firebase deploy -m "Pipe $CI_PIPELINE_ID Build $CI_BUILD_ID" --token $FIREBASE_TOKEN
