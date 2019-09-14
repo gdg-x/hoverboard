@@ -75,7 +75,9 @@
           "name": "Google",
           "url": "https://www.google.com.ua/intl/en/about/"
         }
-      ]
+      ],
+      "order" : 0,
+      "title" : "Google"
     }
   ],
   "schedule" : {
