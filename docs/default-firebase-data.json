@@ -66,12 +66,16 @@
     "test" : { },
     "users" : { }
   },
-  "partners" : [ {
-    "logos" : [ {
-      "order" : 0,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
+  "partners" : [
+    {
+      "logos": [
+        {
+          "order": 0,
+          "logoUrl": "../images/logos/google.svg",
+          "name": "Google",
+          "url": "https://www.google.com.ua/intl/en/about/"
+        }
+      ]
     }
   ],
   "schedule" : {
