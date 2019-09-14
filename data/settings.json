@@ -25,24 +25,9 @@
       "label": "Home"
     },
     {
-      "route": "speakers",
-      "permalink": "/speakers/",
-      "label": "Speakers"
-    },
-    {
-      "route": "schedule",
-      "permalink": "/schedule/",
-      "label": "Schedule"
-    },
-    {
       "route": "team",
       "permalink": "/team/",
       "label": "Team"
-    },
-    {
-      "route": "blog",
-      "permalink": "/blog/",
-      "label": "Blog"
     }
   ],
   "heroSettings": {
@@ -53,39 +38,6 @@
         "image": "/images/dfhh_header.jpg"
       },
       "fontColor": "#FFF"
-    },
-    "blog": {
-      "title": "Blog",
-      "metaDescription": "Read stories from our team",
-      "background": {
-        "color": "#FFF"
-      },
-      "fontColor": "#424242"
-    },
-    "speakers": {
-      "title": "Speakers",
-      "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "background": {
-        "color": "#FFF"
-      },
-      "fontColor": "#424242"
-    },
-    "previousSpeakers": {
-      "title": "Previous Speakers",
-      "metaDescription": "Check who was with us last years",
-      "background": {
-        "color": "#FFF"
-      },
-      "fontColor": "#424242"
-    },
-    "schedule": {
-      "title": "Schedule",
-      "metaDescription": "Choose your sessions to visit",
-      "background": {
-        "color": "#fff"
-      },
-      "fontColor": "#424242"
     },
     "team": {
       "title": "Team",
@@ -119,13 +71,13 @@
     "short": "Hamburg, Germany",
     "address": "Eifflerstraße 43, 22769 Hamburg",
     "pointer": {
-      "latitude": 53.562590,
-      "longitude": 9.960060,
+      "latitude": 53.56259,
+      "longitude": 9.96006,
       "zoom": 12
     },
     "mapCenter": {
-      "latitude": 53.562590,
-      "longitude": 9.960060
+      "latitude": 53.56259,
+      "longitude": 9.96006
     },
     "description": "We are in the Betahaus again this year!"
   },
@@ -160,10 +112,6 @@
         "url": "https://twitter.com/devfesthh/"
       },
       {
-        "name": "instagram",
-        "url": ""
-      },
-      {
         "name": "youtube",
         "url": "https://www.youtube.com/channel/UCVjKvikisKAnJ2zKqi_4pxg"
       }
@@ -180,10 +128,6 @@
     ]
   },
   "mailto": "team@devfest.de",
-  "mailchimp": {
-    "url": "",
-    "name": ""
-  },
   "signInProviders": {
     "providersData": [
       {
