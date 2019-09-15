@@ -57,13 +57,13 @@
       "title": "Ressources",
       "links": [
         {
-          "name": "Pack Partenaire",
+          "name": "Devenir Partenaire",
           "url": "https://drive.google.com/drive/folders/1FaDFCZhvcaoD_tE6zKpV-afadBi8JXJ1?usp=sharing",
           "newTab": true
         },
         {
-          "name": "Kit Media",
-          "url": "",
+          "name": "Media Kit",
+          "url": "https://drive.google.com/drive/folders/1pzBql8ox-ns-OCV_lZMQEoI9JO-BOpL8?usp=sharing",
           "newTab": true
         },
         {
@@ -218,7 +218,7 @@
     "blocks": [
       {
         "title": "Organisateur",
-        "description": "L'équipe du <a href='http://gdgstrasbourg.fr' target='_blank'>GDG Strasbourg</a>, est fier d'organiser la DevFest Strasbourg",
+        "description": "L'équipe du <a href='http://gdgstrasbourg.fr' target='_blank'>GDG Strasbourg</a>, est fier d'organiser le premier DevFest Strasbourgeois !",
         "callToAction": {
           "label": "Découvrir l'équipe",
           "link": "/team"
