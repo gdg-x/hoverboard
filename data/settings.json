@@ -24,14 +24,14 @@
       "label": "Home"
     },
     {
-      "route": "job-offers",
-      "permalink": "/job-offers",
-      "label": "Offres d'emploi"
+      "route": "speakers",
+      "permalink": "/speakers/",
+      "label": "Speakers"
     },
     {
-      "route": "team",
-      "permalink": "/team",
-      "label": "Equipe"
+      "route": "job-offers",
+      "permalink": "/job-offers",
+      "label": "Jobs"
     },
     {
       "route": "code-of-conduct",
@@ -44,7 +44,7 @@
       "description": "Campus CCI Strasbourg",
       "background": {
         "color": "#673ab7",
-        "image": "/images/backgrounds/home.jpg"
+        "image": "/images/backgrounds/home.png"
       },
       "fontColor": "#FFF"
     },
