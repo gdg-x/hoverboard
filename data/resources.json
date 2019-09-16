@@ -2,8 +2,8 @@
   "title": "GDG DevFest Hamburg 2019",
   "description": "Be a hero. Be a GDG!",
   "image": "images/social-share.jpg",
-  "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "November 2-3, 2019",
+  "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev, hamburg",
+  "dates": "November 2nd, 2019",
   "partnershipProposition": "",
   "share": "Share",
   "followOur": "Follow our",
@@ -24,6 +24,8 @@
   "time": "Time",
   "faq": "/data/faq.md",
   "cod": "/data/cod.md",
+  "staffIncidentHandling": "/data/staff-incident-handling.md",
+  "attendeeIncidentHandling": "/data/attendee-incident-handling.md",
   "footer": {
     "blog": "Blog"
   },
@@ -93,6 +95,11 @@
         {
           "name": "FAQs",
           "url": "/faq/",
+          "newTab": false
+        },
+        {
+          "name": "Code of Conduct",
+          "url": "/cod/",
           "newTab": false
         }
       ]
@@ -179,7 +186,13 @@
     "callToAction": {
       "label": "View all speakers",
       "link": "/speakers/"
-    }
+    },
+    "noSpeakersYet": "Speakers will be announced soon."
+  },
+  "cfp": {
+    "dateStart": "2019-13-09",
+    "dateEnd": "2019-05-10",
+    "link": ""
   },
   "previousSpeakersBlock": {
     "title": "Previous speakers",

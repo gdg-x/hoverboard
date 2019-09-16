@@ -1,8 +1,8 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../elements/polymer-helmet.html">
-<link rel="import" href="../elements/hero-block.html">
-<link rel="import" href="../elements/footer-block.html">
-<link rel="import" href="../elements/md-content.html">
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../elements/polymer-helmet.html">
+<link rel="import" href="../../elements/hero-block.html">
+<link rel="import" href="../../elements/footer-block.html">
+<link rel="import" href="../../elements/md-content.html">
 
 <dom-module id="cod-page">
   <template>
@@ -10,13 +10,10 @@
       :host {
         display: block;
       }
+      .hero-content {
+        padding-bottom: 0;
+      }
     </style>
-
-    <polymer-helmet
-      title="{$ heroSettings.cod.title $} | {$ title $}"
-      description="{$ heroSettings.cod.metaDescription $}"
-      active="[[active]]"
-    ></polymer-helmet>
 
     <hero-block
       background-image="{$ heroSettings.cod.background.image $}"
@@ -25,7 +22,6 @@
       active="[[active]]"
     >
       <div class="hero-title highlight-font">{$ heroSettings.cod.title $}</div>
-      <p class="hero-description">{$ heroSettings.cod.description $}</p>
     </hero-block>
 
     <md-content md-source="[[source]]"></md-content>
