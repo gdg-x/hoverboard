@@ -15,7 +15,7 @@
   "dateFormat": {
     "locale": "en-US"
   },
-  "hashtag": "DevFest19",
+  "hashtag": "DevFestHH19",
   "disabledSchedule": true,
   "showSessionShortAbstract": true,
   "navigation": [
@@ -32,7 +32,7 @@
   ],
   "heroSettings": {
     "home": {
-      "description": "Be a hero. Be a GDG!",
+      "description": "Driven by and for the community!",
       "background": {
         "color": "#673ab7",
         "image": "/images/dfhh_header.jpg"
