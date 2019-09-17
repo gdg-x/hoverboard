@@ -168,5 +168,9 @@
     "tickets": {
       "itemsCount": 5
     }
+  },
+  "callForPapers": {
+    "link": "https://sessionize.com/devfest-hamburg-2019",
+    "title": "Call for Presentations"
   }
 }
