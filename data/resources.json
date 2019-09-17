@@ -1,10 +1,10 @@
 {
   "title": "GDG DevFest Hamburg 2019",
-  "description": "Be a hero. Be a GDG!",
+  "description": "Driven by and for the community!",
   "image": "images/social-share.jpg",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev, hamburg",
   "dates": "November 2nd, 2019",
-  "partnershipProposition": "",
+  "partnershipProposition": "https://drive.google.com/file/d/1Z2xi-fNIH0Fsqdvxgg8LZZGk59dhS7jP/view?usp=sharing",
   "share": "Share",
   "followOur": "Follow our",
   "followUs": "Follow us",
@@ -74,17 +74,7 @@
       "links": [
         {
           "name": "Partnership Proposition",
-          "url": "",
-          "newTab": true
-        },
-        {
-          "name": "Info Partnership Proposition",
-          "url": "",
-          "newTab": true
-        },
-        {
-          "name": "Media Kit",
-          "url": "",
+          "url": "https://drive.google.com/file/d/1Z2xi-fNIH0Fsqdvxgg8LZZGk59dhS7jP/view?usp=sharing",
           "newTab": true
         },
         {
@@ -111,7 +101,7 @@
     "title": "What you need to know, before you ask.",
     "callToAction": {
       "featuredSessions": {
-        "description": "GDG DevFest Hamburg brings together the world class experts in Android, Web and Cloud technologies to Hamburg for 2 days of sessions, workshops and showcases.",
+        "description": "DevFest Hamburg brings together the world class experts in Android, Web and Cloud technologies to Hamburg for 2 days of sessions, workshops and showcases.",
         "label": "Explore featured session",
         "link": ""
       },
@@ -128,11 +118,11 @@
       },
       "days": {
         "label": "Days",
-        "number": "2"
+        "number": "1"
       },
       "sessions": {
         "label": "Sessions",
-        "number": "50"
+        "number": "15+"
       },
       "tracks": {
         "label": "Tracks",
@@ -194,7 +184,7 @@
     "noSpeakersYet": "Speakers will be announced soon."
   },
   "cfp": {
-    "dateStart": "2019-13-09",
+    "dateStart": "2019-18-09",
     "dateEnd": "2019-05-10",
     "link": ""
   },
