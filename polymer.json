@@ -11,7 +11,9 @@
     "src/pages/previous-speakers-page.html",
     "src/pages/team-page.html",
     "src/pages/faq-page.html",
-    "src/pages/cod-page.html",
+    "src/pages/codeOfConduct/cod-page.html",
+    "src/pages/codeOfConduct/staff-incident-handling-page.html",
+    "src/pages/codeOfConduct/attendee-incident-handling-page.html",
     "src/lazy-resources.html"
   ],
   "sources": [

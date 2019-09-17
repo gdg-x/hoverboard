@@ -68,6 +68,21 @@
 
         <div>
           <h1 class="container-title">{$ aboutBlock.title $}</h1>
+
+          <h1 class="container-title container-subtitle">{$ aboutBlock.callForPapersBlock.title $}</h1>
+          <p>{$ aboutBlock.callForPapersBlock.description $}</p>
+
+          <a
+            href="{$ callForPapers.link $}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <paper-button class="animated icon-right">
+              <span class="cta-label">{$ callForPapers.title $}</span>
+              <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+            </paper-button>
+          </a>
+
           <p>{$ aboutBlock.callToAction.featuredSessions.description $}</p>
           <a
             href="{$ aboutBlock.callToAction.featuredSessions.link $}"
