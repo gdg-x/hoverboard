@@ -219,7 +219,7 @@
     "toast": "Successfully subscribed!"
   },
   "team": {
-    "description": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Hamburg](https://www.meetup.com/Google-Developer-Group-Hamburg/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Hamburg audience to boost development of IT."
+    "description": "The GDGs of Hamburg are open, volunteer-based developer communities creating events to exchange and share knowledge about Google technologies. <br><br> [Google Developers Group (GDG) Hamburg](https://www.meetup.com/Google-Developer-Group-Hamburg/)"
   },
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"
