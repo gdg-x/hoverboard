@@ -51,7 +51,7 @@
         margin: 8px;
       }
 
-      .action-buttons .watch-video {
+      .action-buttons .watch-video, .call-for-papers > * {
         color: #fff;
       }
 
@@ -148,17 +148,13 @@
 
 
         <div class="action-buttons" layout horizontal center-justified wrap>
+
           <paper-button
-            class="watch-video"
-            on-tap="_playVideo"
-            ga-on="click"
-            ga-event-category="video"
-            ga-event-action="watch"
-            ga-event-label="hero block - view highlights"
-          >
-            <iron-icon icon="hoverboard:movie"></iron-icon>
-            {$ viewHighlights $}
+            class="call-for-papers">
+            <iron-icon icon="hoverboard:presentation"></iron-icon>
+            <a href="{$ callForPapers.link $}">{$ callForPapers.title $}</a>
           </paper-button>
+
           <paper-button
             on-tap="_scrollToTickets"
             ga-on="click"

@@ -86,8 +86,8 @@
           "newTab": true
         },
         {
-          "name": "Call for Papers",
-          "url": "",
+          "name": "Call for Presentations",
+          "url": "https://sessionize.com/devfest-hamburg-2019",
           "newTab": true
         },
         {
@@ -131,6 +131,10 @@
         "label": "Tracks",
         "number": "3"
       }
+    },
+    "callForPapersBlock": {
+      "title": "Submit your presentation!",
+      "description": "Call for Presentations is open."
     }
   },
   "ticketsBlock": {
