@@ -79,7 +79,7 @@
       "latitude": 53.56259,
       "longitude": 9.96006
     },
-    "description": "We are in the Betahaus again this year!"
+    "description": "We are at Betahaus again this year!"
   },
   "mediaQueries": {
     "xs": {
@@ -166,7 +166,7 @@
       "itemsCount": 6
     },
     "tickets": {
-      "itemsCount": 3
+      "itemsCount": 1
     }
   },
   "callForPapers": {
