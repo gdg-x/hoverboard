@@ -7,7 +7,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "target": "gdg-hamburg-29729",
+    "target": "devfesthh2019",
     "public": "./build",
     "redirects": [{
       "source": "/index.html",
