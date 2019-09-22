@@ -3,20 +3,20 @@
   "description": "Noviembre, 2019",
   "image": "images/social-share.jpg",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "Noviembre, 2019",
+  "dates": "9 y 10 de Noviembre, 2019",
   "partnershipProposition": "https://bit.ly/dfua17-partners",
-  "share": "Share",
+  "share": "COMPARTIR",
   "followOur": "Follow our",
-  "followUs": "Follow us",
-  "emailUs": "Email us",
+  "followUs": "SÍGUENOS",
+  "emailUs": "ESCRÍBENOS",
   "partnershipResources": "Partnership Resources",
   "eventResources": "Event Resources",
   "buyTicket": "ENTRADAS",
   "signIn": "Sign in",
   "signOut": "Sign out",
-  "offlineMessage": "You can still work offline.",
-  "cachingComplete": "Caching complete! Future visits will work offline.",
-  "newVersionAvailable": "A new version of this app is available.",
+  "offlineMessage": "Aún puedes trabajar sin conexión.",
+  "cachingComplete": "Caché completo! Las visitas futuras funcionarán sin conexión.",
+  "newVersionAvailable": "Una nueva versión de esta aplicación está disponible.",
   "refresh": "Refresh",
   "position": "Position",
   "country": "Country",
@@ -32,81 +32,55 @@
   },
   "footerRelBlock": [
     {
-      "title": "About",
+      "title": "Info",
       "links": [
         {
-          "name": "GDG Lviv",
-          "url": "http://lviv.gdg.org.ua/",
+          "name": "GDG Open",
+          "url": "https://www.meetup.com/es-ES/GDG-Open/",
           "newTab": true
         },
         {
-          "name": "GDG",
-          "url": "https://developers.google.com/groups/",
+          "name": "Google Developers Group",
+          "url": "https://developers.google.com/",
           "newTab": true
         },
         {
-          "name": "DevFest",
-          "url": "https://devfest.withgoogle.com/",
+          "name": "Equipo de este año",
+          "url": "./team/",
+          "newTab": false
+        }
+      ]
+    },
+    {
+      "title": "DevFests anteriores",
+      "links": [
+        {
+          "name": "DevFest Lima 2018",
+          "url": "https://2018.devfest.pe/",
+          "newTab": true
+        },{
+          "name": "DevFest Lima 2017",
+          "url": "https://2017.devfest.pe/",
           "newTab": true
         },
         {
-          "name": "Meet the Team",
-          "url": "https://devfest.gdg.org.ua/team/",
+          "name": "DevFest Lima 2016",
+          "url": "https://2016.devfest.pe/",
           "newTab": true
         }
       ]
     },
     {
-      "title": "Explore Past DevFests",
+      "title": "Otros",
       "links": [
-        {
-          "name": "DFUA 2013",
-          "url": "http://gdg-devfest-ua.appspot.com/",
-          "newTab": true
-        },
-        {
-          "name": "DFUA 2014",
-          "url": "https://dfua14.firebaseapp.com//",
-          "newTab": true
-        },
-        {
-          "name": "DFUA 2015",
-          "url": "https://dfua15.firebaseapp.com/",
-          "newTab": true
-        },
-        {
-          "name": "DFUA 2016",
-          "url": "https://dfua16.firebaseapp.com/",
-          "newTab": true
-        }
-      ]
-    },
-    {
-      "title": "Event Resources",
-      "links": [
-        {
-          "name": "Partnership Proposition",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
-          "newTab": true
-        },
-        {
-          "name": "Info Partnership Proposition",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
-          "newTab": true
-        },
-        {
-          "name": "Media Kit",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
-          "newTab": true
-        },
         {
           "name": "Call for Papers",
-          "url": "https://drive.google.com/open?id=10tPuu_7ASM8C70SotqRqIW5Uzos9BzALilMMQPg_JvA",
+          "url": "https://docs.google.com/forms/d/e/1FAIpQLSfQbwj-iPJJBYoc2t6xfQJ0zMrfH6L6Tg0Y1fK97NFPBo8C-A/viewform?fbclid=IwAR2YUmjUU746eK93lLW7JILaFHr2YX2LHP6W4FfzNCrcg1T3SuCZtq3z9s4",
           "newTab": true
         },
         {
-          "name": "FAQs",
-          "url": "/faq/",
+          "name": "Políticas de privacidad",
+          "url": "./policies/",
           "newTab": false
         }
       ]
@@ -115,35 +89,35 @@
   "subscribeNote": "No spam, only the latest news and updates!",
   "codeOfConduct": "Code of Conduct",
   "aboutBlock": {
-    "title": "What you need to know, before you ask.",
+    "title": "Qué es el DevFest Lima, y qué haremos este año",
     "callToAction": {
       "featuredSessions": {
-        "description": "GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases.",
+        "description": "GDG DevFest Lima es un evento organizado por el GDG Open. Este 2018 reuniremos a los mejores en Internet Of Things (IOT), Artificial Intelligence (AI) y Cyber Security; en dos días llenos de sesiones, talleres y exhibiciones.",
         "label": "Explore featured session",
         "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
       },
       "howItWas": {
-        "description": "Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
-        "label": "See how it was in 2016",
-        "youtubeId": "TdpbgRgz6eE"
+        "description": "Como siempre tendremos nuestros tracks de Android, Cloud, Firebase y más.",
+        "label": "¿Qué es un DevFest?",
+        "youtubeId": "-ccY4i0J5S4"
       }
     },
     "statisticsBlock": {
       "attendees": {
-        "label": "Attendees",
-        "number": "900"
+        "label": "Asistentes",
+        "number": "500"
       },
       "days": {
-        "label": "Days",
+        "label": "Días",
         "number": "2"
       },
       "sessions": {
-        "label": "Sessions",
-        "number": "50"
+        "label": "Sesiones + Workshops",
+        "number": "70"
       },
       "tracks": {
         "label": "Tracks",
-        "number": "4"
+        "number": "7"
       }
     }
   },
@@ -155,15 +129,15 @@
     "save": "Save ${discount}% today"
   },
   "partnersBlock": {
-    "title": "Partners",
-    "button": "Become a partner",
+    "title": "Sponsors",
+    "button": "Se un Sponsor",
     "form": {
-      "title": "Become a partner!",
-      "submitLabel": "Submit",
-      "fullName": "Full Name",
-      "companyName": "Company Name"
+      "title": "Se un Sponsor!",
+      "submitLabel": "Enviar",
+      "fullName": "Nombre Completo",
+      "companyName": "Empresa"
     },
-    "toast": "We will contact you soon!"
+    "toast": "Nos comunicaremos contigo pronto"
   },
   "featuredVideos": {
     "title": "DFUA'16 featured videos",
@@ -203,11 +177,11 @@
     }
   },
   "galleryBlock": {
-    "title": "#dfua16 highlights",
-    "description": "This year's festival built lots of excitement. Check out photos from featured talks, hands-on learning sessions, and after-hours fun.",
+    "title": "#devfest18 highlights",
+    "description": "El DevFest Lima 2018 generó mucha emoción! Mira algunas de las fotos del evento.",
     "callToAction": {
-      "label": "See all photos",
-      "link": "https://goo.gl/photos/H8s3CtPexCzkLqSt9"
+      "label": "MIRA TODAS LAS FOTOS",
+      "link": "https://photos.google.com/share/AF1QipMANyo-L0KwyYffbJxz3_YHxxoUWfp2LmTTl4N5UzeWRQhIcr6bi12-PMRFPMu5pw?key=ZGZ4R05BM2xQVXFBeEtOcnpyZjdlMTFJd2s3a2NB"
     }
   },
   "mapBlock": {
@@ -215,23 +189,23 @@
   },
   "subscribeBlock": {
     "callToAction": {
-      "description": "Get notified about the important conference updates",
-      "label": "Subscribe"
+      "description": "Reciba notificaciones sobre las actualizaciones importantes del evento",
+      "label": "Suscribir"
     },
-    "yourEmail": "Your email",
-    "emailAddress": "Email Address",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "formTitle": "Get the latest updates, insights and news about GDG DevFest Ukraine sent to your inbox.",
-    "emailRequired": "Please enter a valid email address.",
-    "subscribe": "Subscribe",
-    "subscribed": "Subscribed",
-    "close": "Close",
+    "yourEmail": "Tu correo electrónico",
+    "emailAddress": "Correo eléctronico",
+    "firstName": "Primer nombre",
+    "lastName": "Apellido",
+    "formTitle": "Obtenga las últimas actualizaciones, ideas y noticias sobre DevFest Lima enviadas a su bandeja de entrada.",
+    "emailRequired": "Por favor, introduce una dirección de correo electrónico válida.",
+    "subscribe": "Suscribir",
+    "subscribed": "Suscrito",
+    "close": "Cerrar",
     "generalError": "An error has occurred. Please, try again later.",
     "toast": "Successfully subscribed!"
   },
   "team": {
-    "description": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT."
+    "description": "Google es conocido en todo el mundo. Todos están 'googleando', revisando en 'maps' y comunicandose por 'gmail'. Para los usuarios, ellos son servicios que solamente funcionan, pero no para nosotros. Los Desarrolladores vemos mucho más: APIs, escalabilidad, conjunto de tecnologías complejas. Y eso es lo que vemos en un GDG.<br><br> <a href='https://www.meetup.com/es-ES/GDG-Open/'>Google Developers Group (GDG) Open</a> - es una comunidad de personas apasionadas por la tecnología, emprendimiento y desarrollo de software. Tenemos como objetivo compartir, practicar y enseñar acerca del desarrollo de software con tecnologías de Google y open source, para que con ello aporten a la región y país innovando en las empresas o creando startups."
   },
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"
@@ -263,28 +237,19 @@
     "image": "/images/team.jpg",
     "blocks": [
       {
-        "title": "Organizer",
-        "description": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
+        "title": "Organizador",
+        "description": "<a href='https://www.meetup.com/es-ES/GDG-Open/' target='_blank'>GDG Open</a> - somoS una comunidad de personas apasionadas por la tecnología, emprendimiento y desarrollo de software.",
         "callToAction": {
-          "label": "Open team page",
+          "label": "MIRA AL EQUIPO DE ESTE AÑO",
           "link": "/team"
         }
       },
       {
-        "title": "What is GDG?",
-        "description": "Google Developers Groups (GDGs) are communities of volunteers who create exciting projects and share experiences about Google technologies.",
+        "title": "¿Qué es un GDG?",
+        "description": "Google Developers Group (GDG) - es una comunidad abierta y voluntaria que siempre está compartiendo experiencias sobre tecnologías de Google.",
         "callToAction": {
-          "label": "Read more",
-          "link": "https://developers.google.com/groups/",
-          "newTab": true
-        }
-      },
-      {
-        "title": "What is DevFest?",
-        "description": "DevFests are community-led developer events hosted by Google Developer Groups around the globe.",
-        "callToAction": {
-          "label": "Read more",
-          "link": "https://devfest.withgoogle.com/",
+          "label": "LEER MÁS",
+          "link": "https://developers.google.com/community/gdg/",
           "newTab": true
         }
       }

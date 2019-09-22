@@ -1,9 +1,9 @@
 {
   "organizer": {
-    "name": "GDG Lviv",
+    "name": "GDG Open Lima",
     "twitter": "gdglviv",
-    "blog": "https://medium.com/gdg-lviv",
-    "url": "http://lviv.gdg.org.ua/"
+    "blog": "",
+    "url": "https://www.meetup.com/es-ES/GDG-Open/"
   },
   "startDate": "2017-10-013T09:00:00+03:00",
   "endDate": "2017-10-14T19:00:00+03:00",
@@ -15,13 +15,18 @@
   "dateFormat": {
     "locale": "en-US"
   },
-  "hashtag": "DevFest17",
+  "hashtag": "DevFest19",
   "disabledSchedule": false,
   "navigation": [
     {
       "route": "home",
       "permalink": "/",
-      "label": "Home"
+      "label": "INICIO"
+    },
+    {
+      "route": "schedule",
+      "permalink": "/schedule/",
+      "label": "Agenda"
     },
     {
       "route": "speakers",
@@ -29,24 +34,19 @@
       "label": "Speakers"
     },
     {
-      "route": "schedule",
-      "permalink": "/schedule/",
-      "label": "Schedule"
+      "route": "previous-speakers",
+      "permalink": "/previous-speakers/",
+      "label": "Speakers Anteriores"
     },
     {
       "route": "team",
       "permalink": "/team/",
-      "label": "Team"
-    },
-    {
-      "route": "blog",
-      "permalink": "/blog/",
-      "label": "Blog"
+      "label": "Equipo"
     }
   ],
   "heroSettings": {
     "home": {
-      "description": "Vas a caer Chupetin GAAAAA!",
+      "description": "Universidad Ricardo Palma",
       "background": {
         "color": "#673ab7",
         "image": "/images/backgrounds/home.jpg"
@@ -63,15 +63,15 @@
     },
     "speakers": {
       "title": "Speakers",
-      "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
+      "metaDescription": "Escuche a los Googlers, socios y oradores invitados que están construyendo el futuro de la nube. Vuelva a consultar a menudo a medida que agreguemos más oradores, incluidos nuestros clientes y socios.",
+      "description": "",
       "background": {
         "color": "#FFF"
       },
       "fontColor": "#424242"
     },
     "previousSpeakers": {
-      "title": "Previous Speakers",
+      "title": "Speakers Anteriores",
       "metaDescription": "Check who was with us last years",
       "background": {
         "color": "#FFF"
@@ -79,15 +79,15 @@
       "fontColor": "#424242"
     },
     "schedule": {
-      "title": "Schedule",
-      "metaDescription": "Choose your sessions to visit",
+      "title": "Agenda",
+      "metaDescription": "Elige tus sesiones para visitar",
       "background": {
         "color": "#fff"
       },
       "fontColor": "#424242"
     },
     "team": {
-      "title": "Team",
+      "title": "Equipo",
       "metaDescription": "Get more info about organizers",
       "background": {
         "color": "#fff"
@@ -112,21 +112,21 @@
     }
   },
   "location": {
-    "label": "Location",
-    "name": "Planeta kino",
-    "city": "Lviv",
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "label": "Lugar",
+    "name": "Universidad Ricardo Palma",
+    "city": "Lima",
+    "short": "Universidad Ricardo Palma",
+    "address": "Universidad Ricardo Palma, Avenida Alfredo Benavides, Santiago de Surco",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 5
+      "latitude": -12.130169,
+      "longitude": -76.9784023,
+      "zoom": 12
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": -12.130169,
+      "longitude": -76.9784023
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": "Ubicado en la avenida Alfredo Benavides, Santiago de Surco, el campus tiene modernas instalaciones"
   },
   "mediaQueries": {
     "xs": {
@@ -148,29 +148,29 @@
     "follow": [
       {
         "name": "meetup",
-        "url": "https://www.meetup.com/GDG-Lviv/events/244342635/"
+        "url": "meetup.com/es-ES/GDG-Open/"
       },
       {
         "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
+        "url": "https://www.facebook.com/DevFestLima/"
       },
       {
         "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
+        "url": "https://twitter.com/DevFestLima"
       },
       {
         "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
+        "url": "https://www.instagram.com/devfestlima_/"
       },
       {
         "name": "youtube",
-        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "url": "https://www.youtube.com/channel/UCI3BB9Yl9GCZzOZnSEB764w?sub_confirmation=1"
       }
     ],
     "share": [
       {
         "name": "facebook",
-        "url": "https://www.facebook.com/sharer.php?u="
+        "url": "https://www.facebook.com/sharer.php?u=DevFestLima"
       },
       {
         "name": "twitter",
@@ -178,7 +178,7 @@
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
+  "mailto": "hola@devfestlima.com",
   "signInProviders": {
     "providersData": [
       {
