@@ -14,7 +14,7 @@
 <link rel="import" href="../../mixins/sessions-hoc.html">
 <link rel="import" href="../text-truncate.html">
 <link rel="import" href="../shared-styles.html">
-<link rel="import" href="../feedback.html">
+<link rel="import" href="../feedback-block.html">
 <link rel="import" href="dialog-styles.html">
 
 <dom-module id="speaker-details">
@@ -135,7 +135,7 @@
 
         <div class="additional-sections">
           <h3>{$ feedback.headline $}</h3>
-          <feedback-block collection="generatedSpeakers" db-item="[[speaker.id]]"></feedback-block>
+          <feedback-block collection="speakers" db-item="[[speaker.id]]"></feedback-block>
         </div>
 
       </div>

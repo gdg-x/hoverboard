@@ -157,7 +157,7 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    match /generatedSpeakers/{session}/feedback/{userId} {
+    match /speakers/{session}/feedback/{userId} {
       allow read, write: if request.auth.uid == userId;
     }
 
