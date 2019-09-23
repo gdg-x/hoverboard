@@ -99,7 +99,7 @@
     {
       "id":"ryan_heupler",
       "featured": false,
-      "bio" : "Hi there! I’m currently an engineer at Guru, as well as mentor/instructor for an online code school called Thinkful. I run my own YouTube channel focused on helping break down programming concepts into simple terms (or at least I try to!). When I’m not working on any of that, I’ll sometime stream on Twitch where I do portfolio reviews for people looking for jobs. I’ll sometime mess around making music, or hangout at a local coffee shop (trying to find the best coffee in Philadelphia).",
+      "bio" : "I’m currently an engineer at Guru, as well as a mentor/instructor for an online code school called Thinkful. I’m also a co-organizer for the VueJS Philly and GitLab Philly meetup groups. I run my own YouTube channel focused on helping break down programming/web dev concepts into simple terms (or at least I try to). I’ll sometimes mess around making music, or exploring new coffee shops (trying to find the best coffee in Philadelphia).",
       "name" : "Ryan Heupler",
       "company":"",
       "country": "Philadelphia, PA USA",
@@ -499,7 +499,7 @@
     {
       "id":"refactorClassComponent",
       "complexity" : "All",
-      "description" : "Ever since Hooks was announced for React, they’ve become a very popular buzz word when discussing React. Some common questions I hear when talking to others are: What are they? How do you use them? Why should I use them? Do they replace life-cycle methods. We will go over all of these together. I will start with a basic React app using a few stateful, class components using life-cycle, custom methods, and API interaction. I will convert the components over to functional components and integrating several different hooks, while not losing any functionality.You’ll come away from this talk with a good foundation for most of the primitive hooks in React, and you’ll understand how to use them & write your own custom hooks.",
+      "description" : "The introduction of Hooks in React has become a very \"buzz word\" topic in the community, which, ultimately, has lead to some confusion. Some common questions I hear when talking to others are: What are they? How do you use them? Do they replace life-cycle methods and/or class components completely? We will go over all of these together. I'll start with a basic React app using a few stateful, class components using life-cycle methods, custom methods and API interaction. I will then convert the components over to functional ones while integrating several different hooks, without losing any functionality. Finally, we will look into some common \"gotchas\" that may be confusing for people starting out with hooks. You will come away from this talk with a good foundation for various primitive hooks in React, and you'll understand how they're used and how you can start to write your own custom hooks.",
       "speakers" : [ "ryan_heupler" ],
       "tags" : [ "talk", "react", "front-end", "optimization", "framework", "functional programming"],
       "title" : "Refactoring a Class Component: A Gentle Introduction into React Hooks"
