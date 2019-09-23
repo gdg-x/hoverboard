@@ -47,7 +47,12 @@
         }
     ],
       "order" : 0,
-      "title" : "Web lover / JavaScript activist / HTML5 enthusiast"
+      "title" : "Web lover / JavaScript activist / HTML5 enthusiast",
+      "sessions":[
+        {
+          "id": "safeSpace"
+        }
+      ]
     },
     {
       "id":"andrew_murphy",
@@ -607,6 +612,14 @@
       "speakers" : [ "colleen_dunlap" ],
       "tags" : ["javascript", "angular", "global engineering", "html", "typescript"],
       "title" : "The Unique Hows and Whys of Global Progressive Web Apps"
+    },
+    {
+      "id":"safeSpace",
+      "complexity" : "All",
+      "description" : "The culture in tech is great: future-forward, evidence-based, data-driven. It's also not so great: it can feel exclusive and a little elitist. By the end of this talk, you will have applicable tools to make your team, your company and the whole industry healthier. How? By creating diverse and inclusive safe spaces.",
+      "speakers" : [ "guillaume_marty" ],
+      "tags" : ["javascript", "keynote", "soft skills", "communication", "career"],
+      "title" : "Watch this (safe) space"
     }
 
 
