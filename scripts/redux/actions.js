@@ -244,7 +244,7 @@ const feedbackActions = {
             payload: {
               collection: data.collection,
               dbItem: data.dbItem,
-              previousFeedback: snapshot.exists ? snapshot.data() : null,
+              previousFeedback: snapshot.data(),
             },
           });
         })
