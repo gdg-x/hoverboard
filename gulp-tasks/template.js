@@ -16,7 +16,7 @@ function compile(config, polymerJson) {
     ...polymerJson.sources,
     polymerJson.entrypoint,
   ], { base: '.' })
-    .pipe(gulpif(/\.(html|js|json)$/, nunjucks.compile(metadata, {
+    .pipe(gulpif(/\.(html|js|json|md)$/, nunjucks.compile(metadata, {
       tags: {
         variableStart: '{$',
         variableEnd: '$}',
