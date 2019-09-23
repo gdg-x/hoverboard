@@ -25,6 +25,7 @@
   "faq": "/data/faq.md",
   "cod": "/data/cod.md",
   "timezoneOffset": "-180",
+  "coc": "/data/coc.md",
   "footer": {
     "blog": "Blog"
   },
@@ -42,8 +43,13 @@
           "newTab": true
         },
         {
-          "name": "Google Developers Group",
+          "name": "GDG",
           "url": "https://developers.google.com/groups/",
+          "newTab": true
+        },
+        {
+          "name": "DevFest",
+          "url": "https://devfest.withgoogle.com/",
           "newTab": true
         },
         {
@@ -111,6 +117,14 @@
   ],
   "subscribeNote": "No spam, only the latest news and updates!",
   "codeOfConduct": "Code of Conduct",
+  "codeOfConductBlock": {
+    "organization": "DevFest",
+    "form": "https://bit.ly/2RstTJ8",
+    "contacts": [
+      "Organizer Oleh Zasadnyy, [+38 093 486 6460](tel:+380934866460), o.zasadnyy@gdg.org.ua",
+      "Organizer Sofiya Huts, [+38 093 486 1425](tel:+380934861425), s.huts@gdg.org.ua"
+    ]
+  },
   "aboutBlock": {
     "title": "What you need to know, before you ask.",
     "callToAction": {
@@ -186,7 +200,7 @@
     "previousYear": "Year"
   },
   "speakersBlock": {
-    "title": "Rockstar speakers",
+    "title": "Speakers",
     "callToAction": {
       "label": "View all speakers",
       "link": "/speakers/"
@@ -278,10 +292,19 @@
       },
       {
         "title": "What is GDG?",
-        "description": "Google Developers Group (GDG) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion",
+        "description": "Google Developers Groups (GDGs) are communities of volunteers who create exciting projects and share experiences about Google technologies.",
         "callToAction": {
           "label": "Read more",
           "link": "https://developers.google.com/groups/",
+          "newTab": true
+        }
+      },
+      {
+        "title": "What is DevFest?",
+        "description": "DevFests are community-led developer events hosted by Google Developer Groups around the globe.",
+        "callToAction": {
+          "label": "Read more",
+          "link": "https://devfest.withgoogle.com/",
           "newTab": true
         }
       }

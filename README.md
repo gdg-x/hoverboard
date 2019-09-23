@@ -59,7 +59,7 @@ To serve locally or deploy the production app use `yarn start:prod` and `yarn de
 
 If you don't want to bother with the dependencies, you can use the docker container for development.
 
-:book: Read more in [docker docs](/docs/tutorials/docker.md).
+:book: Read more in [docker docs](/docs/tutorials/05-docker.md).
 
 ## Updating
 Here is a git workflow for updating your fork (or downloaded copy) to the latest version:
@@ -122,11 +122,12 @@ Any other issue labeled [`help wanted`](https://github.com/gdg-x/hoverboard/labe
 Read the full version [Code of Conduct](/CODE_OF_CONDUCT.md).
 
 ## Contributors
-__Maintainer:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
+__Maintainer:__ [Abraham Williams](https://github.com/abraham)  
+__Authors:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
 
 This project exists thanks to all the [people who contribute](https://github.com/gdg-x/hoverboard/graphs/contributors). [[Contribute](CONTRIBUTING.md)].
 
-<a href="graphs/contributors"><img src="https://opencollective.com/hoverboard/contributors.svg?width=890" /></a>
+<a href="https://github.com/gdg-x/hoverboard/graphs/contributors"><img src="https://opencollective.com/hoverboard/contributors.svg?width=890" /></a>
 
 ## Sponsoring
 Most of the core team members, hoverboard contributors and contributors in the ecosystem do this open source work in their free time. If you like this project and it makes your life easier, please donate.
