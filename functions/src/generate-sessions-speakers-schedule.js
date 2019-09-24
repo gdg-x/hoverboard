@@ -77,9 +77,13 @@ function saveGeneratedData(data, collectionName) {
   if (!data || !Object.keys(data).length) return;
 
   for (let index = 0; index < Object.keys(data).length; index++) {
-    const key = Object.keys(data)[index];
-    firestore().collection(collectionName)
-      .doc(key)
-      .set(data[key]);
+     try {
+      const key = Object.keys(data)[index];
+      firestore().collection(collectionName)
+        .doc(key)
+        .set(data[key]);
+     } catch (error) {
+       console.error('Save failed', error, JSON.stringify(data))
+     }
   }
 }

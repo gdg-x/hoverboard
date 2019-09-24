@@ -9,7 +9,7 @@
     "build:prod": "cross-env BUILD_ENV=production gulp",
     "predeploy": "cd ./functions && npm i",
     "deploy": "yarn build:prod && firebase use sunnytechwebsite && firebase deploy",
-    "firestore:init": "firebase firestore:delete -r --all-collections && firebase functions:config:set schedule.enabled=true && firebase deploy --except hosting && babel-node ./internals/import-default-data",
+    "firestore:init": "firebase firestore:delete -r --all-collections && firebase functions:config:set schedule.enabled=true && babel-node ./internals/import-default-data",
     "firestore:copy": "babel-node ./internals/firestore-copy-data",
     "firestore:update": "firebase firestore:delete -r becomeSponsorGallery && firebase firestore:delete -r -y config && firebase firestore:delete -r -y gallery && firebase firestore:delete -r -y partners && firebase firestore:delete -r -y schedule && firebase firestore:delete -r -y sessions && firebase firestore:delete -r -y speakers && firebase firestore:delete -r -y team && firebase firestore:delete -r -y tickets && babel-node ./internals/import-default-data",
     "postinstall": "bower install",
