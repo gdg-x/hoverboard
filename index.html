@@ -110,9 +110,6 @@
             messagingSenderId: '{$ firebase.messagingSenderId $}',
           });
           firebase.performance();
-
-          const firestore = firebase.firestore();
-          firestore.settings({ timestampsInSnapshots: true });
         });
     </script>
     <script>
