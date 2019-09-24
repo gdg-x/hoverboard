@@ -54,24 +54,9 @@
           "newTab": false
         },
         {
-          "name": "Schedule",
-          "url": "/schedule",
-          "newTab": false
-        },
-        {
-          "name": "Lieu",
-          "url": "/location",
-          "newTab": false
-        },
-        {
           "name": "Code de conduite",
           "url": "/cod",
           "newTab": false
-        },
-        {
-          "name": "Billetterie",
-          "url": "https://www.billetweb.fr/sunny-tech-2019",
-          "newTab": true
         }
       ]
     },
