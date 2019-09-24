@@ -7,10 +7,7 @@
 
 <dom-module id="my-schedule">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
-
-    <style>
-
+    <style include="shared-styles flex flex-alignment">
       :host {
         display: block;
       }
@@ -33,7 +30,7 @@
 
     </style>
 
-    <template is="dom-repeat" items="[[filteredSchedule]]" as="day">
+    <template is="dom-repeat" items="[[featuredSchedule]]" as="day">
       <div class="date">[[day.dateReadable]]</div>
 
       <schedule-day
@@ -41,6 +38,9 @@
         day="[[day]]"
         user="[[user]]"
         featured-sessions="[[featuredSessions]]"
+        selected-filters="[[selectedFilters]]"
+        viewport="[[viewport]]"
+        query-params="[[queryParams]]"
         only-featured
       ></schedule-day>
 
@@ -57,8 +57,11 @@
       static get properties() {
         return {
           schedule: Array,
-          filteredSchedule: Array,
+          featuredSchedule: Array,
           featuredSessions: Object,
+          selectedFilters: Object,
+          queryParams: String,
+          viewport: Object,
           user: Object,
         };
       }
@@ -71,7 +74,7 @@
 
       _filterSchedule(schedule, featuredSessions) {
         if (schedule.length) {
-          this.filteredSchedule = schedule.map((day) => Object.assign({}, day, {
+          this.featuredSchedule = schedule.map((day) => Object.assign({}, day, {
             timeslots: day.timeslots.map((timeslot) => Object.assign({}, timeslot, {
               sessions: timeslot.sessions.map((sessionBlock) => Object.assign({}, sessionBlock, {
                 items: sessionBlock.items.filter((session) => featuredSessions[session.id]),

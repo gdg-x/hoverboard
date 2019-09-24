@@ -12,10 +12,7 @@
 
 <dom-module id="post-page">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
-
-    <style>
-
+    <style include="shared-styles flex flex-alignment">
       :host {
         display: block;
       }
@@ -171,8 +168,8 @@
         const post = this.postsMap[this.postData.id];
         this.set('post', post);
         this.set('suggestedPosts', this.postsList
-          .filter((post) => post.id !== this.postData.id)
-          .slice(0, 3)
+            .filter((post) => post.id !== this.postData.id)
+            .slice(0, 3)
         );
       }
     }

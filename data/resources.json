@@ -82,6 +82,11 @@
           "name": "Sunny Tech 2018",
           "url": "https://2018.sunny-tech.io",
           "newTab": true
+        },
+        {
+          "name": "Sunny Tech 2019",
+          "url": "https://2019.sunny-tech.io",
+          "newTab": true
         }
       ]
     }
@@ -131,7 +136,38 @@
     "save": "Économisez ${discount}%"
   },
   "partnersBlock": {
-    "title": "Sponsors de l'année 2019"
+    "title": "Sponsors de l'année 2019",
+    "button": "Become a partner",
+    "form": {
+      "title": "Become a partner!",
+      "submitLabel": "Submit",
+      "fullName": "Full Name",
+      "companyName": "Company Name"
+    },
+    "toast": "We will contact you soon!"
+  },
+  "featuredVideos": {
+    "title": "DFUA'16 featured videos",
+    "callToAction": {
+      "label": "See all videos",
+      "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+    }
+  },
+  "blog": {
+    "published": "Published",
+    "suggested": "Up next"
+  },
+  "latestPostsBlock": {
+    "title": "The latest news",
+    "callToAction": {
+      "label": "View all stories",
+      "link": "/blog/"
+    }
+  },
+  "speakers": {
+    "skills": "Skills",
+    "previousYears": "Years",
+    "previousYear": "Year"
   },
   "previousSpeakersBlock": {
     "title": "Previous speakers",
@@ -278,5 +314,16 @@
       "title": "Random",
       "icon":"/images/icons/bubble6.svg"
       }
-]}
+    ]
+  },
+  "filters": {
+    "title": "Filtres",
+    "results": "Résultats",
+    "tags": "Tags",
+    "complexity": "Complexity",
+    "clear": "Clear all"
+  },
+  "addToHomeScreen": {
+    "cta": "Add to Home Screen"
+  }
 }

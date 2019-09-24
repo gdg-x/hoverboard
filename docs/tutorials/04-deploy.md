@@ -1,15 +1,15 @@
 # Deploy to Firebase
 
-1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): 
+1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/):
     ```console
-      firebase login
+      npx firebase login
     ```
 
 1.  Build with `/config/development.json`
     ```console
       yarn build
     ```
-    
+
     or with `/config/production.json`
     ```console
       yarn build:prod
@@ -21,13 +21,15 @@
     ```
 
 The URL to your live site is listed in the output.
-    
+
 
 ### Continuous integration with Travis CI
+
 In the root folder you can find [.travis.yml](/.travis.yml) which configures
 [Travis CI][Travis CI] build and deployment on Firebase hosting:
+
 ```yaml
-... 
+...
  - provider: firebase
    skip_cleanup: true
    on:
@@ -37,11 +39,11 @@ In the root folder you can find [.travis.yml](/.travis.yml) which configures
      secure: Quq/Ys1GKDYFjqMCD107saKj005L0RaM7Ian9yLIW/er4KdMzwjYw7TVXmtMeJPIfEy/e2/4WJ63K1SaXieBoFndoUcpGWqPOoTrnkkj5K7tzeZKM32XqIarF+BNmOoqW5M7+kuN8L7N3RLp00ywFDOgKgiZJeoaDV6sIRRAIFVh+xHWabVWpFCwCUSeBZpufOsZhMXkicyRe0XhMmkUvS1P5CI3AyZZdIfWG+sguFsPOWRjMFKWrbnsilDFDjf7N0Wd8Z1H2Z0LBn/V00bNb95MSIuOhkdk3a1wP0P5Eollet+Y8g+NpdWyFq0/C+6+ECvFLBjtvbtMY1BVfdxkCo5XlogZx31OmkMWVX6PXOD5Va8aFoJnwvjovUT8oZbSCWEuyMxI91jDsLxXZt542MNfUfQ1Q2+SpUShdcRlwoV2c/XOYvme95HnI1LSqzLubooKWxz8wpa/aovkdZbum54t/z5nA54AXN1lYKsi+hcAFHOeucqd/kHOLG0bx05Ev86wcvNH8qGx+v7S644YH37No7PGnKU3g3Jq/m6quo1B/bMEIaatVnR40D301wAi8tsNWnqEdWFKnAlGrTIDd1qek9OHnApmgBQI8o0FOy6WbzLMwl9PnMl+t+wew/ggSY0IdWhjFWR/S1d6xML8cYHXHVpE0wxkat5ETbIYXlg=
 ```
 
-To generate secure do next steps:
+To generate the `secure` value do the following steps:
 
 1. Login into Firebase console
     ```console
-      firebase login:ci
+      npx firebase login:ci --interactive
     ```
 
     You will get your token:
@@ -50,16 +52,17 @@ To generate secure do next steps:
 
         1/9YmsNEh87G3cRyt_FXQbsYI_uV4FUMmUBXkbl_CHANGED
     ```
+
 1. Install travis tool to encrypt token
     ```console
       gem install travis
     ```
-        
+
 1. Login into your account
     ```console
       travis login --auto
     ```
-        
+
 1. Encrypt your token
     ```console
       travis encrypt "1/9YmsNEh87G3cRyt_FXQbsYI_uV4FUMmUBXkbl_CHANGED"

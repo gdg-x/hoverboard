@@ -6,10 +6,7 @@
 
 <dom-module id="hero-block">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
-
-    <style>
-
+    <style include="shared-styles flex flex-alignment positioning">
       :host {
         margin-top: -56px;
         display: block;
@@ -54,7 +51,6 @@
       div ::slotted(.hero-title) {
         margin: 30px 0;
         font-size: 40px;
-        text-transform: capitalize;
       }
 
       div ::slotted(.hero-description) {

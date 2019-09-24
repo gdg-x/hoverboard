@@ -18,10 +18,7 @@ tr<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <dom-module id="home-page">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
-
-    <style>
-
+    <style include="shared-styles flex flex-alignment">
       :host {
         display: block;
         height: 100%;
@@ -102,7 +99,7 @@ tr<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
       @media (min-height: 500px) {
         hero-block {
-          height: calc(100% + 57px);
+          height: calc(100vh + 57px);
           max-height: calc(100vh + 1px);
         }
 
@@ -121,7 +118,7 @@ tr<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
       @media (min-width: 812px) {
         hero-block {
-          height: calc(100% + 65px);
+          height: calc(100vh + 65px);
         }
 
         .hero-logo {

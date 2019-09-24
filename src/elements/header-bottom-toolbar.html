@@ -1,5 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
+<link rel="import" href="../../bower_components/iron-location/iron-location.html">
+
 <link rel="import" href="../mixins/utils-functions.html">
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="./shared-styles.html">
@@ -8,10 +10,7 @@
 
 <dom-module id="header-bottom-toolbar">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
-
-    <style>
-
+    <style include="shared-styles flex flex-alignment positioning">
       :host {
         display: block;
         background-color: var(--primary-background-color);
@@ -43,6 +42,8 @@
 
     </style>
 
+
+    <iron-location query="{{queryParams}}"></iron-location>
 
     <app-toolbar class="bottom-toolbar">
 
@@ -76,11 +77,11 @@
       >
         <template is="dom-repeat" items="[[schedule]]" as="day">
           <paper-tab class="nav-item" day="[[day.date]]" link>
-            <a href$="/schedule/[[day.date]]" layout vertical center-center>[[day.dateReadable]]</a>
+            <a href$="[[_addQueryParams(day.date, queryParams)]]" layout vertical center-center>[[day.dateReadable]]</a>
           </paper-tab>
         </template>
         <paper-tab class="nav-item" day="my-schedule" hidden$="[[!user.signedIn]]" link>
-          <a href="/schedule/my-schedule" layout vertical center-center>{$ mySchedule.title $}</a>
+          <a href$="[[_addQueryParams('my-schedule', queryParams)]]" layout vertical center-center>{$ mySchedule.title $}</a>
         </paper-tab>
       </paper-tabs>
     </app-toolbar>
@@ -132,6 +133,10 @@
         if (schedule.length) {
           this.contentLoaderVisibility = true;
         }
+      }
+
+      _addQueryParams(tab, queryParams) {
+        return `/schedule/${tab}${queryParams ? `?${queryParams}` : ''}`;
       }
     }
 

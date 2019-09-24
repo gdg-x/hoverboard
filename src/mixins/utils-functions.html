@@ -5,7 +5,7 @@
   const UtilsFunctions = (subclass) => class extends subclass {
     transformToArray(source, attribute) {
       return source && Object.keys(source)
-        .map((key) => Object.assign(attribute ? { [attribute]: key } : {}, source[key]));
+          .map((key) => Object.assign(attribute ? { [attribute]: key } : {}, source[key]));
     }
 
     getDate(date) {
@@ -38,11 +38,31 @@
       return string1 === string2;
     }
 
-    getVariableColor(value) {
-      if (ShadyCSS) {
-        return ShadyCSS.getComputedStyleValue(this, `--${this.generateClassName(value)}`);
-      }
-      return getComputedStyle(this, `--${this.generateClassName(value)}`);
+    getVariableColor(value, fallback) {
+      const calculated = ShadyCSS
+        ? ShadyCSS.getComputedStyleValue(this, `--${this.generateClassName(value)}`)
+        : getComputedStyle(this, `--${this.generateClassName(value)}`);
+      return calculated || (fallback && this.getVariableColor(fallback));
+    }
+
+    parseQueryParamsFilters(queryParams) {
+      return queryParams.split('&')
+          .map((query) => query.split('='))
+          .filter((filter) => filter[0] && filter[1])
+          .reduce((aggr, filter) => Object.assign({}, aggr, {
+            [filter[0]]: aggr[filter[0]]
+            ? aggr[filter[0]].concat(filter[1])
+            : [filter[1]],
+          }), {});
+    }
+
+    toggleQueryParam(currentQueryParams, key, value) {
+      const keyValue = `${key}=${value}`;
+      const currentKeyValuePairs = currentQueryParams ? currentQueryParams.split('&') : [];
+      const resultArray = currentKeyValuePairs.includes(keyValue)
+        ? currentKeyValuePairs.filter((pair) => pair !== keyValue)
+        : currentKeyValuePairs.concat(keyValue);
+      return resultArray.join('&');
     }
   };
 </script>

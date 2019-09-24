@@ -3,25 +3,24 @@
 Follow the instructions below to install, build, and run the
 Project Hoverboard locally in less than 15 minutes.
 
-Or you may use [Docker container for development](docker.md)
+Or you may use [Docker container for development](05-docker.md)
 
 ## Install the Hoverboard and dependencies
 
-1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone it locally
-1. Setup Environment
-   * Install [Node.js (v8.9.4 or above)](https://nodejs.org/en/download/)
-   * Install Firebase CLI: `npm i -g firebase-tools` or `yarn global add firebase-tools`
-1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `firebase login`
-1. Update [Hoverboard config](/config) and [Resources](/data). More info can be found [here](./configure-app.md)
+1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone your fork locally
+1. Install [Node.js (v10+)](https://nodejs.org/en/download/)
+1. Install project dependencies: `npm install` or `yarn`
+1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `npx firebase login`
+1. Update [Hoverboard config](/config) and [Resources](/data). More info can be found [here](01-configure-app.md)
 1. Import initial data to the Firebase Database
-    * Generate `serviceAccount.json` file (go to https://console.firebase.google.com/project/%YOUR_PROJECT_ID%/settings/serviceaccounts/adminsdk)
-      - Go to https://console.firebase.google.com/project/%YOUR_PROJECT_ID%/settings/serviceaccounts/adminsdk
-      - Ensure that **Node.js** is selected and press **GENERATE NEW PRIVATE KEY**
+    * Generate `serviceAccount.json` file
+      - Go to [console.firebase.google.com](https://console.firebase.google.com) -> Project settings -> Service accounts
+      - Ensure that **Node.js** is selected and press **Generate new private key**
+      - Read the warning and press **Generate key**
       - Save the file as `serviceAccount.json` and to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
+    * Enable Firestore in web console at [console.firebase.google.com](https://console.firebase.google.com) -> Database -> Cloud Firestore -> Create database. Select **locked mode** and press **Enable**
     * [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
-    * Run `npm install` or `yarn`
     * Run `npm run firestore:init` or `yarn firestore:init`
-
 
 ## Directory structure
 
@@ -70,16 +69,14 @@ The diagram below is a brief summary of the directories within the project.
 ## Build and serve
 
 1. Run locally
-   * `cd` into the base directory
-   * `npm install` or `yarn`
-   * `npm run serve` or `yarn serve`
+   * `npm start` or `yarn start`
 1. Deploy
    * `npm run deploy` or `yarn deploy`
 
 *NOTE:* By default command using configurations from `/configs/development.json`.
-To serve locally or deploy the production app use `yarn serve:prod` and `yarn deploy:prod` respectively.
+To serve locally or deploy the production app use `yarn start:prod` and `yarn deploy:prod` respectively.
 
 ## Next steps
 
 Now that your Hoverboard is up and running, learn how to
-[configure app](configure-app.md) for your needs, or how to [deploy the app to the web](deploy.md).
+[configure the app](01-configure-app.md) for your needs, or how to [deploy the app to the web](04-deploy.md).

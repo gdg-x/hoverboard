@@ -8,9 +8,13 @@
   },
   "hosting": {
     "public": "./build",
-    "cleanUrls": true,
+    "redirects": [{
+      "source": "/index.html",
+      "destination": "/",
+      "type" : 301
+    }],
     "rewrites": [{
-      "source": "/**",
+      "source": "**",
       "function": "prerender"
     }],
     "ignore": [

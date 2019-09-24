@@ -16,13 +16,14 @@ function compile(config, polymerJson) {
     ...polymerJson.sources,
     polymerJson.entrypoint,
   ], { base: '.' })
-    .pipe(gulpif(/\.(html|js|json)$/, nunjucks.compile(metadata, {
+    .pipe(gulpif(/\.(html|js|json|md)$/, nunjucks.compile(metadata, {
       tags: {
         variableStart: '{$',
         variableEnd: '$}',
       },
     })))
     .pipe(gulpif(/\.(html|js)$/, replace('bower_components', '../bower_components')))
+    .pipe(gulpif(/\.(html|js)$/, replace('node_modules', '../node_modules')))
     .pipe(gulp.dest(config.tempDirectory));
 }
 

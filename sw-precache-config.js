@@ -2,9 +2,9 @@ module.exports = {
   staticFileGlobs: [
     '/index.html',
     '/manifest.json',
-    '/bower_components/webcomponentsjs/*.js',
-    '/bower_components/firebase/firebase.js',
-    '/bower_components/firebase/firebase-firestore.js',
+    '/node_modules/@webcomponents/webcomponentsjs/*.js',
+    '/node_modules/firebase/firebase.js',
+    '/node_modules/firebase/firebase-firestore.js',
     '/images/**/*',
     '/scripts/**/*',
     '/data/**/*',
@@ -39,6 +39,15 @@ module.exports = {
       options: {
         cache: {
           name: 'node-modules-cache',
+        },
+      },
+    },
+    {
+      urlPattern: /https:\/\/maps\.googleapis\.com\/maps.*/,
+      handler: 'cacheFirst',
+      options: {
+        cache: {
+          name: 'google-maps-cache',
         },
       },
     },

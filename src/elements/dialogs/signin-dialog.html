@@ -6,15 +6,14 @@
 
 <dom-module id="signin-dialog">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
-
-    <style>
+    <style include="shared-styles flex flex-alignment">
       :host {
         margin: 0 auto;
         display: block;
         padding: 24px 32px;
         background: var(--primary-background-color);
         box-shadow: var(--box-shadow);
+        border-radius: var(--border-radius);
       }
 
       .dialog-content {
@@ -66,7 +65,7 @@
           <div class="row-2">{$ signInDialog.signInToContinue.part1 $} [[providerCompanyName]] {$ signInDialog.signInToContinue.part2 $}</div>
         </div>
 
-        <div class="action-button" layout horizontal end-justified>        
+        <div class="action-button" layout horizontal end-justified>
           <paper-button
             class="merge-button"
             on-tap="_mergeAccounts"

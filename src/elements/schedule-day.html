@@ -1,15 +1,13 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
+<link rel="import" href="./shared-styles.html">
 <link rel="import" href="./session-element.html">
 <link rel="import" href="../mixins/scroll-functions.html">
-<link rel="import" href="./shared-styles.html">
+<link rel="import" href="../mixins/utils-functions.html">
 
 <dom-module id="schedule-day">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
-
-    <style>
-
+    <style include="shared-styles flex flex-alignment positioning">
       :host {
         display: block;
         --tracks-number: 3;
@@ -152,14 +150,20 @@
           <div
             class="session"
             style$="grid-area: [[session.gridArea]]"
-            layout vertical>
-            <template is="dom-repeat" items="[[session.items]]" as="subSession">
+            layout vertical
+          >
+            <template
+              is="dom-repeat"
+              items="[[_filterSessions(session.items, selectedFilters)]]"
+              as="subSession"
+            >
               <session-element
                 class="subsession"
                 day-name="[[name]]"
                 session="[[subSession]]"
                 user="[[user]]"
                 featured-sessions="[[featuredSessions]]"
+                query-params="[[queryParams]]"
               ></session-element>
             </template>
           </div>
@@ -174,7 +178,7 @@
   <script>
 
     // eslint-disable-next-line no-undef
-    class ScheduleDay extends ScrollFunctions(Polymer.Element) {
+    class ScheduleDay extends UtilsFunctions(ScrollFunctions(Polymer.Element)) {
       static get is() {
         return 'schedule-day';
       }
@@ -191,6 +195,8 @@
           featuredSessions: Object,
           onlyFeatured: Boolean,
           viewport: Object,
+          selectedFilters: Object,
+          queryParams: String,
         };
       }
 
@@ -203,10 +209,10 @@
               const offset = this.offsetTop(targetElement);
               // eslint-disable-next-line no-undef
               const toolbarHeight = HOVERBOARD.Elements.HeaderToolbar
-                .getBoundingClientRect().height - 1;
+                  .getBoundingClientRect().height - 1;
               // eslint-disable-next-line no-undef
               const stickyToolbarHeight = HOVERBOARD.Elements.StickyHeaderToolbar
-                .getBoundingClientRect().height;
+                  .getBoundingClientRect().height;
               const additionalMargin = this.viewport.isTabletPlus ? 8 : 0;
               const scrollTargetY = offset - toolbarHeight - stickyToolbarHeight - additionalMargin;
               this.scrollToY(scrollTargetY, 1500, 'easeInOutSine');
@@ -226,11 +232,29 @@
       _showAddSession(timeslot, onlyFeatured) {
         return onlyFeatured && !timeslot.sessions.reduce((aggregator, sessionBlock) =>
           aggregator + sessionBlock.items.length
-          , 0);
+            , 0);
       }
 
       _isNotEmpty(sessionBlock) {
         return !!sessionBlock.items.length;
+      }
+
+      _filterSessions(sessions, selectedFilters) {
+        if (!selectedFilters) return sessions;
+        return sessions.filter((session) => {
+          return (
+            !selectedFilters.tag
+            || !selectedFilters.tag.length
+            || session.tags
+            && !!session.tags.filter((tag) =>
+              selectedFilters.tag.includes(this.generateClassName(tag))).length
+          ) && (
+            !selectedFilters.complexity
+            || !selectedFilters.complexity.length
+            || session.complexity
+            && selectedFilters.complexity.includes(this.generateClassName(session.complexity))
+          );
+        });
       }
     }
 

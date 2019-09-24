@@ -18,10 +18,7 @@
 
 <dom-module id="speaker-details">
   <template>
-    <style is="custom-style" include="shared-styles dialog-styles flex flex-alignment positioning"></style>
-
-    <style>
-
+    <style include="shared-styles dialog-styles flex flex-alignment positioning">
       .photo {
         margin-right: 16px;
         width: 96px;
@@ -32,6 +29,11 @@
         flex-shrink: 0;
       }
 
+      .subtitle {
+        font-size: 16px;
+        color: var(--secondary-text-color);
+      }
+
       .badge:not(:last-of-type)::after {
         margin-left: -4px;
         content: ',';
@@ -39,6 +41,10 @@
 
       .action {
         color: var(--secondary-text-color);
+      }
+
+      .section {
+        cursor: pointer;
       }
 
     </style>
@@ -70,14 +76,16 @@
               sizing="cover"
               lazy-load preload fade
             ></plastic-image>
-            <h2 class="name" flex>[[speaker.name]]</h2>
+            <div>
+              <h2 class="name" flex>[[speaker.name]]</h2>
+              <div class="subtitle">[[subtitle]]</div>
+            </div>
           </div>
         </app-toolbar>
       </app-header>
 
       <div class="dialog-container content">
-        <h3 class="meta-info">[[speaker.country]]</h3>
-        <h3 class="meta-info">[[speaker.title]], [[speaker.company]]</h3>
+        <h3 class="meta-info">[[companyInfo]]</h3>
         <h3 class="meta-info" hidden$="[[isEmpty(speaker.badges)]]">
           <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
             <a
@@ -103,12 +111,11 @@
             </a>
           </template>
         </div>
-<!-- 
-        <div class="additional-sections" hidden$="[[!getSessionsBySpeaker(speaker.id).length]]">
+        <div class="additional-sections" hidden$="[[!speaker.sessions.length]]">
           <h3>{$ speakerDetails.sessions $}</h3>
 
-          <template is="dom-repeat" items="[[getSessionsBySpeaker(speaker.id, sessions)]]" as="session">
-            <a href$="/schedule?sessionId=[[session.id]]" on-tap="_openSession" session-id$="[[session.id]]" class="section">
+          <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
+            <div on-tap="_openSession" session-id$="[[session.id]]" class="section">
               <div layout horizontal center>
                 <div class="section-details" flex>
                   <div class="section-primary-text">[[session.title]]</div>
@@ -123,9 +130,9 @@
                   </div>
                 </div>
               </div>
-            </a>
+            </div>
           </template>
-        </div> -->
+        </div>
 
       </div>
     </app-header-layout>
@@ -136,8 +143,8 @@
 
     // eslint-disable-next-line no-undef
     class SpeakerDetails extends UtilsFunctions(
-      // eslint-disable-next-line no-undef
-      ReduxMixin(SessionsHoC(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element)))
+        // eslint-disable-next-line no-undef
+        ReduxMixin(SessionsHoC(Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element)))
     ) {
       static get is() {
         return 'speaker-details';
@@ -156,6 +163,14 @@
             type: Boolean,
             value: () => JSON.parse('{$ disabledSchedule $}'),
           },
+          companyInfo: {
+            type: String,
+            computed: '_computeJoin(speaker.title, speaker.company)',
+          },
+          subtitle: {
+            type: String,
+            computed: '_computeJoin(speaker.country, speaker.pronouns)',
+          },
         };
       }
 
@@ -166,18 +181,24 @@
 
       _close() {
         dialogsActions.closeDialog(DIALOGS.SPEAKER);
+        history.back();
       }
 
       _openSession(e) {
-        if (this.disabledSchedule) {
-          e.preventDefault();
-          const sessionId = e.currentTarget.getAttribute('session-id');
-          dialogsActions.openDialog(DIALOGS.SESSION, this.sessionsMap[sessionId]);
-        }
+        const sessionId = e.currentTarget.getAttribute('session-id');
+        const sessionData = this.sessionsMap[sessionId];
+
+        if (!sessionData) return;
+        dialogsActions.openDialog(DIALOGS.SESSION, sessionData);
+        dialogsActions.closeDialog(DIALOGS.SPEAKER);
       }
 
       _getCloseBtnIcon(isLaptopViewport) {
         return isLaptopViewport ? 'close' : 'arrow-left';
+      }
+
+      _computeJoin(...values) {
+        return values.filter(Boolean).join(' • ');
       }
     }
 

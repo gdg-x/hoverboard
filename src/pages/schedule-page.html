@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/app-route/app-route-converter.html">
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/iron-location/iron-location.html">
 <link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
 
 <link rel="import" href="../mixins/utils-functions.html">
@@ -15,13 +16,12 @@
 <link rel="import" href="../elements/schedule-day.html">
 <link rel="import" href="../elements/content-loader.html">
 <link rel="import" href="../elements/my-schedule.html">
+<link rel="import" href="../elements/filter-menu.html">
+
 
 <dom-module id="schedule-page">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
-
-    <style>
-
+    <style include="shared-styles flex flex-alignment">
       :host {
         display: block;
         height: 100%;
@@ -54,8 +54,18 @@
     <polymer-helmet
       title="{$ heroSettings.schedule.title $} | {$ title $}"
       description="{$ heroSettings.schedule.metaDescription $}"
-      active="[[_setHelmetData(active, isDialogOpened)]]"
+      active="[[_setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened)]]"
     ></polymer-helmet>
+
+    <iron-location query="{{queryParams}}"></iron-location>
+
+    <app-route
+      route="{{appRoute}}"
+      pattern="/:page"
+      data="{{routeData}}"
+      tail="{{subroute}}"
+      query-params="{{nQueryParams}}"
+    ></app-route>
 
     <app-route
       route="[[route]]"
@@ -77,6 +87,11 @@
     </hero-block>
 
     <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
+
+    <filter-menu
+      filters="[[_filters]]"
+      selected="[[_selectedFilters]]"
+    ></filter-menu>
 
     <div class="container">
       <content-loader
@@ -106,7 +121,9 @@
             day="[[day]]"
             user="[[user]]"
             featured-sessions="[[featuredSessions]]"
+            selected-filters="[[_selectedFilters]]"
             viewport="[[viewport]]"
+            query-params="[[queryParams]]"
           ></schedule-day>
         </template>
         <my-schedule
@@ -114,6 +131,9 @@
           schedule="[[schedule]]"
           user="[[user]]"
           featured-sessions="[[featuredSessions]]"
+          selected-filters="[[_selectedFilters]]"
+          viewport="[[viewport]]"
+          query-params="[[queryParams]]"
         ></my-schedule>
       </iron-pages>
     </div>
@@ -150,26 +170,36 @@
             type: Object,
             statePath: 'routing.subRoute',
           },
-          isDialogOpened: {
+          isSpeakerDialogOpened: {
+            type: Object,
+            statePath: 'dialogs.speaker.isOpened',
+          },
+          isSessionDialogOpened: {
             type: Object,
             statePath: 'dialogs.session.isOpened',
-            observer: '_dialogStatusChanged',
           },
           contentLoaderVisibility: String,
           viewport: {
             type: Object,
             statePath: 'ui.viewport',
           },
+          filters: {
+            type: Object,
+            statePath: 'filters',
+            observer: '_onFiltersLoad',
+          },
+          _selectedFilters: Object,
         };
       }
 
       static get observers() {
         return [
           '_setDay(active, routeData.day, schedule)',
-          '_openSessionDetails(active, sessions, queryParams.sessionId)',
+          '_openSessionDetails(active, sessions, _selectedFilters.sessionId)',
           '_fetchFeaturedSessions(active, sessions, user.uid)',
-          '_scheduleChanged(schedule)',
+          '_scheduleChanged(schedule, _selectedFilters)',
           '_sessionsAndSpeakersChanged(sessions, speakers)',
+          '_paramsUpdated(queryParams)',
         ];
       }
 
@@ -200,26 +230,37 @@
         }
       }
 
-      _dialogStatusChanged(nextState, prevState) {
-        if (!nextState && prevState && this.active && this.queryParams.sessionId) {
-          history.back();
-        }
-      }
-
       _openSessionDetails(active, sessions, id) {
         if (sessions && sessions.length) {
           requestAnimationFrame(() => {
             if (active && id) {
-              dialogsActions.openDialog(DIALOGS.SESSION, this.sessionsMap[id]);
-            } else if (this.isDialogOpened) {
-              dialogsActions.closeDialog(DIALOGS.SESSION);
+              dialogsActions.openDialog(DIALOGS.SESSION, this.sessionsMap[id[0]]);
+            } else {
+              this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
+              this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
             }
           });
         }
       }
 
-      _setHelmetData(active, isDialogOpened) {
-        return active && !isDialogOpened;
+      _setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened) {
+        return active && !isSpeakerDialogOpened && !isSessionDialogOpened;
+      }
+
+      _onFiltersLoad(filters) {
+        this.set('_filters', [{
+          title: '{$ filters.tags $}',
+          key: 'tag',
+          items: filters.tags,
+        }, {
+          title: '{$ filters.complexity $}',
+          key: 'complexity',
+          items: filters.complexity,
+        }]);
+      }
+
+      _paramsUpdated(queryParams) {
+        this.set('_selectedFilters', this.parseQueryParamsFilters(queryParams));
       }
     }
 

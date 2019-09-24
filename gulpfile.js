@@ -205,11 +205,11 @@ gulp.task('serve', gulp.series(compileTemplate, () => {
   });
 
   gulp.watch([
-    'data/**/*.{markdown,md}',
     'images/**/*.{png,gif,jpg,svg}',
   ], gulp.series(copyStatic, reload));
 
   gulp.watch([
+    'data/**/*.md',
     'data/**/*.json',
     'scripts/**/*.js',
     'src/**/*.html',

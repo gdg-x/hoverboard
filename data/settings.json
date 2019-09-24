@@ -4,8 +4,8 @@
     "twitter": "sunnytech_mtp",
     "url": "https://sunny-tech.io"
   },
-  "startDate": "2019-06-27T09:00:00+01:00",
-  "endDate": "2019-06-28T19:00:00+01:00",
+  "startDate": "2020-06",
+  "endDate": "2020-06",
   "webapp": {
     "shortName": "Sunny Tech",
     "themeColor": "#e83002",
@@ -168,6 +168,10 @@
     ],
     "share": [
       {
+        "name": "facebook",
+        "url": "https://www.facebook.com/sharer.php?u="
+      },
+      {
         "name": "twitter",
         "url": "https://twitter.com/intent/tweet?text="
       }
@@ -178,6 +182,7 @@
     "url": "https://sunny-tech.us16.list-manage.com/subscribe/post?u=bc52bec3c758ad9f9e5b5bce7&amp;id=d9ed0e9aab",
     "name": "b_bc52bec3c758ad9f9e5b5bce7_d9ed0e9aab"
   },
+  "mailto": "devfest@gdg.org.ua",
   "signInProviders": {
     "providersData": [
       {

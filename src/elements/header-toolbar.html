@@ -6,10 +6,7 @@
 
 <dom-module id="header-toolbar">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
-
-    <style>
-
+    <style include="shared-styles flex flex-alignment positioning">
       :host {
         --iron-icon-fill-color: currentColor;
         display: block;
@@ -208,6 +205,10 @@
             type: Object,
             statePath: 'ui.viewport',
           },
+          addToHomescreen: {
+            type: Object,
+            statePath: 'ui.addToHomescreen',
+          },
           heroSettings: {
             type: Object,
             statePath: 'ui.heroSettings',
@@ -229,6 +230,7 @@
             type: Object,
             statePath: 'tickets',
           },
+          transparent: Boolean,
         };
       }
 
@@ -314,7 +316,7 @@
         if (!settings) return;
         this.updateStyles({
           '--hero-font-color': settings.fontColor || '',
-          '--hero-logo-opacity': settings.hideLogo ? 0 : 1,
+          '--hero-logo-opacity': settings.hideLogo ? '0' : '1',
           '--hero-logo-color': settings.backgroundImage ? '#fff' : 'var(--default-primary-color)',
         });
       }

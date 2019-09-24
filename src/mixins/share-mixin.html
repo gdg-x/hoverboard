@@ -4,13 +4,13 @@
   /* @polymerMixin */
   const ShareMixin = (subclass) => class extends subclass {
     share(e) {
-      let type = e.currentTarget.getAttribute('share');
-      let shareUrl = location.href;
-      let width = 600;
+      const type = e.currentTarget.getAttribute('share');
+      const shareUrl = location.href;
+      const width = 600;
       let height = 600;
-      let winOptions = `menubar=no,toolbar=no,resizable=yes,scrollbars=yes,` +
+      const winOptions = `menubar=no,toolbar=no,resizable=yes,scrollbars=yes,` +
         `height=${height},width=${width}`;
-      let title = document.title;
+      const title = document.title;
       let url;
 
       switch (type) {
@@ -20,17 +20,9 @@
             `u=${encodeURIComponent(shareUrl)}&t=${encodeURIComponent(title)}`;
           break;
         }
-        case 'gplus': {
-          height = 348;
-          width = 512;
-          url = `https://plus.google.com/share?` +
-            `url=${encodeURIComponent(shareUrl)}` +
-            `&hl=${encodeURIComponent(document.documentElement.lang)}`;
-          break;
-        }
         case 'twitter': {
           height = 253;
-          let text = `Jeter un oeil à ${title} - #{$ hashtag $}: ${shareUrl}`;
+          const text = `Jeter un oeil à ${title} - #{$ hashtag $}: ${shareUrl}`;
           url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
           break;
         }

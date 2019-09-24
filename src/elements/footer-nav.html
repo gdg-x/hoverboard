@@ -4,10 +4,7 @@
 
 <dom-module id="footer-nav">
   <template>
-    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
-
-    <style>
-
+    <style include="shared-styles flex flex-alignment">
       :host {
         margin: 0 20px;
       }
@@ -17,7 +14,7 @@
         float: left;
       }
 
-      .cod {
+      .coc {
         display: block;
       }
 
@@ -59,7 +56,7 @@
           text-align: right;
         }
 
-        .cod {
+        .coc {
           display: inline-flex;
         }
       }
@@ -79,8 +76,7 @@
 
       <div class="copyright">
         &copy; [[_getYear()]] Based on <a href="https://github.com/gdg-x/hoverboard" target="_blank" rel="noopener noreferrer">Project
-        Hoverboard</a> - &copy; [[_getYear()]] Sunny Tech &middot; <a class="cod" href="/cod">{$ codeOfConduct
-        $}</a>
+        Hoverboard</a> - &copy; [[_getYear()]] Sunny Tech &middot; <a class="cod" href="/cod">{$ codeOfConduct $}</a>
 
       </div>
     </div>

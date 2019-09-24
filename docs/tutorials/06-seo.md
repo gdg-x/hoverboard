@@ -1,6 +1,7 @@
 ⚠️ Works only on Blaze plan! (costs around $60/month)
 
 ## Setup
+
 1.  Deploy [rendertron](https://github.com/GoogleChrome/rendertron) on your AppEngine
 1.  Set the firebase config variables
     ```console
@@ -11,4 +12,3 @@
     ```console
       firebase deploy --only functions
     ```
-1.  Done 
