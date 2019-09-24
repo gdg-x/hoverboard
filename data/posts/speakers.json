@@ -305,7 +305,7 @@
     {
       "id":"senigbolo_stephen",
       "featured": false,
-      "bio" : "I’m Kenigbolo Meya Stephen, Full Stack Software Engineer working as the Frontend Engineering Team Lead at BCaster OY. Formerly Arch Conveyer/Community Manage of CodeAfrique(now Reload), a not-for-profit weekend intensive software engineering bootcamp for underrepresented groups in IT based out of Estonia. During my free time I sometimes volunteer as an open source developer for ADSBx, play golf and coach football (soccer as Americans call it). I also have a nick for writing tiny javascript modules on npm to help a few developers out there so they need not rewrite same utilities that we all might need (usually it’s the case that we’re only a handful needing those so there’s really nothing too worry much about).",
+      "bio" : "I’m Kenigbolo Meya Stephen, Full Stack Software Engineer working as the Frontend Engineering Team Lead at BCaster OY. Formerly Arch Conveyer/Community Manage of CodeAfrique(now Reload), a not-for-profit weekend intensive software engineering bootcamp for underrepresented groups in IT based out of Estonia.'\n'During my free time I sometimes volunteer as an open source developer for ADSBx, play golf and coach football (soccer as Americans call it). I also have a nick for writing tiny javascript modules on npm to help a few developers out there so they need not rewrite same utilities that we all might need (usually it’s the case that we’re only a handful needing those so there’s really nothing too worry much about).",
       "name" : "Kenigbolo Meya Stephen",
       "company":"BCaster OY",
       "country": "Helsinki, Finland",
@@ -459,6 +459,59 @@
       ]
     },
     {
+      "id":"liz_krane",
+      "featured": false,
+      "bio" : "Liz Krane is a developer advocate at Sentry and founder of Learn Teach Code, an organization that empowers aspiring developers to lead their own local events to create stronger, more diverse tech communities. She loves finding new ways to combine code with other disciplines like art and music, sharing everything she learns while she tries to learn everything!",
+      "name" : "Liz Krane",
+      "company":"Sentry",
+      "country": "Los Angeles, California",
+      "photo" : "/images/speakers/liz_krane.jpg",
+      "photoUrl" : "/images/speakers/liz_krane.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+            "link" : "@LearningNerd",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Software Developer",
+      "sessions":[
+        {
+          "id": "kickingBugs"
+        }
+      ]
+    },
+    {
+      "id":"ron_dagdag",
+      "featured": false,
+      "bio" : "Ron Dagdag is a Senior Software Engineer with 20 years of experience working on a number of business applications using a diverse set of frameworks and languages. He currently support developers at Crestron Electronics with their IoT, Cloud and Voice AI Assistant development. On the side, Ron Dagdag is an active participant in the community as a Microsoft MVP, speaker, maker and blogger. Ron enjoys building projects with his 2 kids and he is passionate about Augmented Intelligence, studying the convergence of Augmented Reality, Machine Learning and Internet of Things.",
+      "name" : "Ron Lyle Dagdag",
+      "company":"Crestron Electronics",
+      "country": "Dallas, Fort Worth Area",
+      "photo" : "/images/speakers/Ron_Dagdag.jpg",
+      "photoUrl" : "/images/speakers/Ron_Dagdag.jpg",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "http://ron.dagdag.net",
+            "name" : "Website"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "@rondagdag",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Senior Software Engineer",
+      "sessions":[
+        {
+          "id": "ohMyWeb"
+        }
+      ]
+    },
+    {
       "id":"colleen_dunlap",
       "featured": false,
       "bio" : "Colleen is a free-spirited techie with a passion for Global Engineering. She’s a life-long learner with a passion for connecting with others. She loves Hackathons, Dogs, Coffee, and the Circus. Her passion projects include an online resource platform for LGBT+ individuals living in countries where Homosexuality is illegal, and a Solar Electric Stove startup called Sol Flame. She currently works at the Ifakara Health Institute in Bagamoyo, Tanzania, building technology tools for Malaria Researchers.",
@@ -481,8 +534,147 @@
           "id": "uniqueHowsWhys"
         }
       ]
+    },
+    {
+      "id":"fen_slattery",
+      "featured": false,
+      "bio" : "Fen Slattery is the Accessibility Lead at Clique Studios, where they build beautiful things and work towards a more inclusive digital world. As a web engineer, Fen seamlessly translates the needs of users into digital experiences that minimize barriers to access. As part of their advocacy work, they have spoken across the US to audiences of all skill levels, been featured on many panels about inclusion in the tech industry, and have spread their passion for accessibility in mentorship of web professionals.",
+      "name" : "Fen Slattery",
+      "company":"Clique Studios",
+      "country": "Chicago, Illinois",
+      "photo" : "/images/speakers/fen_slattery.jpg",
+      "photoUrl" : "/images/speakers/fen_slattery.jpg",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "http://www.fenslattery.com",
+            "name" : "Website"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "@sublimemarch",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Lead Accessibility Engineer",
+      "sessions":[
+        {
+          "id": "digitalAccessibility"
+        }
+      ]
+    },
+    {
+      "id":"domitrius_clark",
+      "featured": false,
+      "bio" : "Front-end software engineer for Guru. Esports addict with an affliction for playing competitive games with 0 skills. Bootcamp graduate and organizer of Reactadelphia.",
+      "name" : "Domitrius Clark",
+      "company":"Guru",
+      "country": "Philadelphia, Pennsylvania",
+      "photo" : "/images/speakers/Domitrius_Clark.jpg",
+      "photoUrl" : "/images/speakers/Domitrius_Clark.jpg",
+      "socials" : [
+        {
+          "icon" : "github",
+            "link" : "https://github.com/domitriusanthony",
+            "name" : "Github"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "@domitriusclark",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Front-end Software Engineer",
+      "sessions":[
+        {
+          "id": "apolloGraphQl"
+        }
+      ]
+    },
+    {
+      "id":"christina_deemer",
+      "featured": false,
+      "bio" : "I am a UX Developer at Alley, where I help build headless digital experiences for publishers and nonprofit institutions, including Fortune and Colorado Public Radio. I was a Code for Philly Open Source Mentorship Program fellow and co-created the Interactive Mechanics Mentorship Program for Diversity and Inclusion in Tech.'\n'I came to tech later in life, after a 12-year career as a fundraiser for some of Philadelphia’s most prestigious arts organizations. I wrote my first line of code at age 35 and built my first WordPress theme at 37. Outside of tech, I enjoy reading, cooking, and watching classic films.",
+      "name" : "Christina Deemer",
+      "company":"Alley",
+      "country": "Philadelphia, Pennsylvania",
+      "photo" : "/images/speakers/Christina_Deemer.jpg",
+      "photoUrl" : "/images/speakers/Christina_Deemer.jpg",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "https://alley.co/",
+            "name" : "Website"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "@cahdeemer",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "UX Developer",
+      "sessions":[
+        {
+          "id": "headlessArchitecture"
+        }
+      ]
+    },
+    {
+      "id":"Viral_Parmar",
+      "featured": false,
+      "bio" : "Viral Parmar is a Serial entrepreneur who runs ComExpo Cyber security company as well as Infinite Defense Foundation a non-profit organization in India. He is a Developer Advocate, Productivity Hacker, Open Source Strategist, Technical Evangelist, Community Liaison, International TechSpeaker, he is a Cyber Security researcher by profession and open source enthusiast working in a field of information security from last three years with the expertise in Cyber Crime Investigation, Public Key Infrastructure, Social Engineering, Web App Penetration Testing, Digital Forensics and Mobile Security. He found sever vulnerability in 150+ well known websites like Intel, your story and solved more than 100 cases of cyber-crime & online frauds. He is famous for his research Cyber Disorder and Who is spying on you. Trained 150,000+ people till now and aware them about privacy and security. Given Seminars and workshops in 150+ Organizations. He is Working with Mozilla foundation from last 2 years as Reps, Mentor in Mozilla Open Leadership Project, Coach(Privacy and Security) in MozSprint 2018, also working with L10N project on Pontoon, Rust and WebVR projects.",
+      "name" : "Viral Parmar",
+      "company":"ComExpo",
+      "country": "Ahmedabad, Gujarat, India",
+      "photo" : "/images/speakers/Viral_Parmar.jpg",
+      "photoUrl" : "/images/speakers/Viral_Parmar.jpg",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "http://viralparmarhacker.com/",
+            "name" : "Website"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "@viralparmarhack",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Cyber Security Researcher",
+      "sessions":[
+        {
+          "id": "webVR"
+        }
+      ]
+    },
+    {
+      "id":"emily_rautenberg",
+      "featured": false,
+      "bio" : "Emily graduated from Stevens Institute of Technology in 2015 with her Bachelor’s and Master’s of Science in Computer Science, as well as a Bachelor’s of Arts in Visual Arts and Technology. After graduating, she entered the CORE Technology rotational program at Comcast NBCUniversal, where she worked on three different teams across the organization over the course of two years.'\n'After completing the program, she joined Comcast’s Experience Design department as a UX Engineer, where she has been for the last two years. The prototypes Emily and her team develop help to guide production teams on building out final products, allow senior leaders to demo new ideas to executives, and for researchers to conduct user testing sessions will real life customers.'\n'While her team specializing in build JavaScript web applications, Emily also has a passion for animation, is a Captain in the Air Force Reserve, and is an amateur aerial circus artist. One day, she might just run away and join the circus.",
+      "name" : "Emily Rautenberg",
+      "company":"Comcast",
+      "country": "Philadelphia, PA",
+      "photo" : "/images/speakers/Emily_Rautenberg.jpg",
+      "photoUrl" : "/images/speakers/Emily_Rautenberg.jpg",
+      "socials" : [
+        {
+          "icon" : "email",
+            "link" : "erautenb@gmail.com",
+            "name" : "Email"
+        }
+    ],
+      "order" : 0,
+      "title" : "UX Engineer",
+      "sessions":[
+        {
+          "id": "demystifyingRegularExpressions"
+        }
+      ]
     }
-
   ],
   "sessions" : [
     {
@@ -620,8 +812,63 @@
       "speakers" : [ "guillaume_marty" ],
       "tags" : ["javascript", "keynote", "soft skills", "communication", "career"],
       "title" : "Watch this (safe) space"
+    },
+    {
+      "id":"kickingBugs",
+      "complexity" : "All",
+      "description" : "How can we extract the most value from our front-end JavaScript errors, especially when users often don’t report them? We’ll learn about the evolution of the browser’s global error event handler, how to work around its limitations, and tools to make our JavaScript bugs a little less buggy.",
+      "speakers" : [ "liz_krane" ],
+      "tags" : ["javascript", "js", "front-end", "errors", "browsers", "reporting", "technical", "testing"],
+      "title" : "Kicking Bugs and Logging Names: The Challenges of JavaScript Error Reporting"
+    },
+    {
+      "id":"ohMyWeb",
+      "complexity" : "All",
+      "description" : "webUSB, webMIDI, webBluetooth, oh my web! In this session, we will explore what webUSB, webMIDI and webBluetooth API and how it safely expose device services to the web using JavaScript. This session is designed for web developers, makers who want to innovate and take their web apps to the next level.",
+      "speakers" : [ "Ron_Dagdag" ],
+      "tags" : ["webUSB", "webMIDI", "webBluetooth", "javascript"],
+      "title" : "Oh my web! Connecting to devices with your browser"
+    },
+    {
+      "id":"digitalAccessibility",
+      "complexity" : "All",
+      "description" : "Roughly 10% of people have a disability that impacts their use of the web, and lawsuits against inaccessible websites are becoming more common. How can we move beyond seeing accessibility as a legal requirement, and to championing inclusion for people with disabilities?",
+      "speakers" : [ "fen_slattery" ],
+      "tags" : ["front-end", "accessibility", "motivational"],
+      "title" : "Digital Accessibility Beyond Legal Compliance"
+    },
+    {
+      "id":"headlessArchitecture",
+      "complexity" : "Intermediate",
+      "description" : "Headless architecture is a popular solution for projects that require cutting-edge user experiences and next-level performance, but the learning curve can be discouraging. In this talk, we’ll give participants tactics, tools, strategies, and confidence to make their first headless project a success.",
+      "speakers" : [ "Christina_Deemer" ],
+      "tags" : ["front-end", "react", "tools", "motivational", "performance", "technical"],
+      "title" : "Going Headless without Losing Your Head: Strategies for Making Your First Decoupled Web App a Success"
+    },
+    {
+      "id":"apolloGraphQl",
+      "complexity" : "Intermediate",
+      "description" : "ApolloClient and ApolloServer empower developers with control over the data they work with. This workshop will dig into using both along with Prisma to build a full stack application. We’ll tackle REST, Database setup, and authentication with ease using this amazing ecosystem!",
+      "speakers" : [ "Domitrius_Clark" ],
+      "tags" : ["react", "apollo", "prisma", "mongodb"],
+      "title" : "Apollo: One Giant leap for Full Stack"
+    },
+    {
+      "id":"webVR",
+      "complexity" : "All",
+      "description" : "By the end of the session the attendees will be able to Make a simple Demo of basic WebVR application and get into WebVR experiences, they Will also learn about WebVR concepts, A-Frame Framework, A-Frame scenes & apps in depth.",
+      "speakers" : [ "Viral_Parmar" ],
+      "tags" : ["A-Frame", "WebVR", "Web Development", "mobile app"],
+      "title" : "WebVR : Beyond Imagination"
+    },
+    {
+      "id":"demystifyingRegularExpressions",
+      "complexity" : "All",
+      "description" : "A Regular Expression is a sequence of characters used as a search pattern on a set of a text—but trying to read that sequence might look like something out of Stranger Things. This workshop will break down how regular expressions can be used in everyday programming to make manipulating data easier.",
+      "speakers" : [ "Emily_Rautenberg" ],
+      "tags" : ["javascript", "regular expressions", "regex", "regexp", "data"],
+      "title" : "Demystifying Regular Expressions"
     }
-
 
 
 
