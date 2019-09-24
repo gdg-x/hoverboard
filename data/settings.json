@@ -23,16 +23,6 @@
       "label": "Home"
     },
     {
-      "route": "speakers",
-      "permalink": "/speakers/",
-      "label": "Speakers"
-    },
-    {
-      "route": "schedule",
-      "permalink": "/schedule/",
-      "label": "Schedule"
-    },
-    {
       "route": "team",
       "permalink": "/team/",
       "label": "Équipe"
@@ -41,11 +31,6 @@
       "route": "cod",
       "permalink": "/cod/",
       "label": "Code de conduite"
-    },
-    {
-      "route": "location",
-      "permalink": "/location/",
-      "label": "Lieu"
     }
   ],
   "heroSettings": {
