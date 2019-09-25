@@ -627,7 +627,7 @@
       ]
     },
     {
-      "id":"Viral_Parmar",
+      "id":"viral_parmar",
       "featured": false,
       "bio" : "Viral Parmar is a Serial entrepreneur who runs ComExpo Cyber security company as well as Infinite Defense Foundation a non-profit organization in India. He is a Developer Advocate, Productivity Hacker, Open Source Strategist, Technical Evangelist, Community Liaison, International TechSpeaker, he is a Cyber Security researcher by profession and open source enthusiast working in a field of information security from last three years with the expertise in Cyber Crime Investigation, Public Key Infrastructure, Social Engineering, Web App Penetration Testing, Digital Forensics and Mobile Security. He found sever vulnerability in 150+ well known websites like Intel, your story and solved more than 100 cases of cyber-crime & online frauds. He is famous for his research Cyber Disorder and Who is spying on you. Trained 150,000+ people till now and aware them about privacy and security. Given Seminars and workshops in 150+ Organizations. He is Working with Mozilla foundation from last 2 years as Reps, Mentor in Mozilla Open Leadership Project, Coach(Privacy and Security) in MozSprint 2018, also working with L10N project on Pontoon, Rust and WebVR projects.",
       "name" : "Viral Parmar",
@@ -676,6 +676,64 @@
       "sessions":[
         {
           "id": "demystifyingRegularExpressions"
+        }
+      ]
+    },
+    {
+      "id":"diego_hernandez",
+      "featured": false,
+      "bio" : "Diego Hernandez is a front-end developer at IBM and Software Engineering graduate student at DePaul University in Chicago. He is a trained filmmaker, turned self-taught developer and designer. As a creative person, Diego is always looking for ways to stretch his canvas—in this case, web browsers—to create unique web experiences that tell a story. When he’s not coding, you’ll probably find him attempting to rock climb or in the kitchen trying out a new recipe.",
+      "name" : "Diego Hernandez",
+      "company":"IBM",
+      "country": "Chicago, Illinois",
+      "photo" : "/images/speakers/Diego_Hernandez.jpg",
+      "photoUrl" : "/images/speakers/Diego_Hernandez.jpg",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "https://medium.com/@diego.hernandez",
+            "name" : "Website"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "@diego_codes",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Front-end developer",
+      "sessions":[
+        {
+          "id": "uiComponentTesting"
+        }
+      ]
+    },
+    {
+      "id":"nathan_lilly",
+      "featured": false,
+      "bio" : "Nathan Lilly is a UI Engineer at Comcast where he works on the Help and Support website. He has been developing websites since 1998 and recently received his Certified Web Professional in Accessibility certificate from the IAAP. He is an amateur dilettante who is constantly finding new various topics to love: in programming, creativity, the arts, history, philosophy, machine learning, cognitive science, superhero movies, and space westerns.",
+      "name" : "Nathan Lilly",
+      "company":"Comcast",
+      "country": "Philadelphia, PA",
+      "photo" : "/images/speakers/Nathan_Lilly.jpg",
+      "photoUrl" : "/images/speakers/Nathan_Lilly.jpg",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "http://nelilly.greententacles.com",
+            "name" : "Website"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "@nelilly",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "UI Engineer",
+      "sessions":[
+        {
+          "id": "buildingAccessibility"
         }
       ]
     }
@@ -872,10 +930,22 @@
       "speakers" : [ "Emily_Rautenberg" ],
       "tags" : ["javascript", "regular expressions", "regex", "regexp", "data"],
       "title" : "Demystifying Regular Expressions"
+    },
+    {
+      "id":"buildingAccessibility",
+      "complexity" : "Intermediate",
+      "description" : "Before you manually review your pages in an assistive technology device the International Association of Accessibility Professionals (IAAP) recommends that you use an automated testing tools to check your page. So you stop everything and review your page with a third-party website or browser extension… if you remember to. Why wait until you’re that far into development? Let’s build accessibility testing into your workflow, and prevent common errors from even being committed in the first place. I’ll give an overview of tools that exist, and share some code to help customize your own workflow. Familiarity with accessible development is not needed, but you should be familiar with HTML, JavaScript, Git, and NPM.",
+      "speakers" : [ "Nathan_Lilly" ],
+      "tags" : ["javascript", "workflow", "accessibility", "a11y", "axe", "axe-core", "testing", "linting", "react", "npm", "front-end", "back-end", "tools", "automation"],
+      "title" : "Building Accessibility Testing Into Your Workflow"
+    },
+    {
+      "id":"uiComponentTesting",
+      "complexity" : "Intermediate",
+      "description" : "As web applications continue to evolve into complex systems, developers today are building more and more UIs with component-based frameworks like React and Vue. As a result, UI testing today is easier than it has ever been before. But where do you start? If you feel like it’s a guessing game, this is the talk for you!'\n'In this talk, I will guide you with a practical approach to testing UI components with Jest and Storybook to improve your UI’s quality and solve your users’ needs.",
+      "speakers" : [ "Diego_Hernandez" ],
+      "tags" : ["javascript", "react", "vue", "testing", "jest", "storybook"],
+      "title" : "Strengthening your blocks: A practical guide to UI component testing"
     }
-
-
-
   ]
-
 }
