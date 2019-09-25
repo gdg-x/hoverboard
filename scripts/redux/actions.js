@@ -379,7 +379,7 @@ const sessionsActions = {
             dispatch({
               type: SET_FILTERS,
               payload: {
-                tags: [...tagFilters],
+                tags: [...tagFilters].sort(),
                 complexity: [...complexityFilters],
               },
             });
