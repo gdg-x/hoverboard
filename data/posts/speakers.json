@@ -736,6 +736,35 @@
           "id": "buildingAccessibility"
         }
       ]
+    },
+    {
+      "id":"george_mandis",
+      "featured": false,
+      "bio" : "George Mandis has been a freelance, full-stack web developer and consultant at SnapTortoise serving startups, small businesses, professional sports teams and entrepreneurs for over a decade. Recently he spent a year living as a digital nomad, inadvertently cheated while running a marathon in North Korea and ran a coding bootcamp out of Portland, Oregon. He writes frequently on technology, travel and other things at his website.",
+      "name" : "George Mandis",
+      "company":"SnapTortoise",
+      "country": "Portland, Oregon",
+      "photo" : "/images/speakers/George_Mandis.JPG",
+      "photoUrl" : "/images/speakers/George_Mandis.JPG",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "https://george.mand.is/",
+            "name" : "Website"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "@georgemandis",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Full-stack web developer",
+      "sessions":[
+        {
+          "id": "javaScriptMidi"
+        }
+      ]
     }
   ],
   "sessions" : [
@@ -946,6 +975,14 @@
       "speakers" : [ "Diego_Hernandez" ],
       "tags" : ["javascript", "react", "vue", "testing", "jest", "storybook"],
       "title" : "Strengthening your blocks: A practical guide to UI component testing"
+    },
+    {
+      "id":"javaScriptMidi",
+      "complexity" : "Intermediate",
+      "description" : "Did you know there’s a widely-supported browser API that allows you to interface with lots of hardware, including custom controllers you can build yourself? Meet the WebMIDI API! Natively supported by Chrome (and soon Firefox!) we’ll experiment with talking to custom hardware through the browser.",
+      "speakers" : [ "George_Mandis" ],
+      "tags" : ["javascript", "node.js", "apis"],
+      "title" : "JavaScript + MIDI + Microcontrollers Workshop"
     }
   ]
 }
