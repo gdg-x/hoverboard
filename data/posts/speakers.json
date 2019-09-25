@@ -370,7 +370,11 @@
       "photo" : "/images/speakers/anusha_bhat.jpg",
       "photoUrl" : "/images/speakers/anusha_bhat.jpg",
       "socials" : [
-
+        {
+          "icon" : "twitter",
+          "link" : "https://twitter.com/_anusha_bhat",
+          "name" : "Twitter"
+        }
     ],
       "order" : 0,
       "title" : "Software Engineer",
