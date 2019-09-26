@@ -1,6 +1,6 @@
 {
   "title": "GDG DevFest Season 2018",
-  "description": "Be a hero. Be a GDG!",
+  "description": "Join the commuity, learn new things!",
   "image": "images/social-share.jpg",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
   "dates": "October 12-13, 2018",
@@ -124,7 +124,7 @@
     ]
   },
   "aboutBlock": {
-    "title": "What you need to know, before you ask.",
+    "title": "About",
     "callToAction": {
       "featuredSessions": {
         "description": "GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases.",
@@ -280,8 +280,8 @@
         }
       },
       {
-        "title": "What is GDG?",
-        "description": "Google Developers Groups (GDGs) are communities of volunteers who create exciting projects and share experiences about Google technologies.",
+        "title": "What is a GDG?",
+        "description": "A Google Developer Group is a community of volunteers who create exciting projects and share experiences about Google technologies.",
         "callToAction": {
           "label": "Read more",
           "link": "https://developers.google.com/groups/",

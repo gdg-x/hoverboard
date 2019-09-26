@@ -133,9 +133,11 @@ const ticketsActions = {
 const _getPartnerItems = (groupId) => firebase.firestore()
     .collection('partners').doc(groupId).collection('items')
     .get()
-    .then((snaps) => snaps.docs
-        .map((snap) => Object.assign({}, snap.data(), { id: snap.id }))
-    );
+    .then((snaps) => {
+      return snaps.docs
+          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }))
+          .sort((a, b) => a.order - b.order);
+    });
 
 const partnersActions = {
   addPartner: (data) => (dispatch) => {
@@ -377,7 +379,7 @@ const sessionsActions = {
             dispatch({
               type: SET_FILTERS,
               payload: {
-                tags: [...tagFilters],
+                tags: [...tagFilters].sort(),
                 complexity: [...complexityFilters],
               },
             });
