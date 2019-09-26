@@ -25,6 +25,11 @@
       "label": "Home"
     },
     {
+      "route": "speakers",
+      "permalink": "/speakers/",
+      "label": "Speakers"
+    }
+    {
       "route": "team",
       "permalink": "/team/",
       "label": "Team"
@@ -39,6 +44,14 @@
       },
       "fontColor": "#FFF"
     },
+    "speakers": {
+      "title": "Speakers",
+      "description": "",
+      "background": {
+        "color": "#FFF"
+      },
+      "fontColor": "#424242"
+    },	
     "team": {
       "title": "Team",
       "metaDescription": "Get more info about organizers",
