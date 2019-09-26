@@ -23,7 +23,6 @@
   "country": "Country",
   "time": "Time",
   "faq": "/data/faq.md",
-  "cod": "/data/cod.md",
   "timezoneOffset": "-180",
   "coc": "/data/coc.md",
   "footer": {
