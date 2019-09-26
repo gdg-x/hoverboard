@@ -11,15 +11,16 @@
           width: 100%;
         }
 
-        .star-rating, .caption {
+        star-rating, .caption {
           display: inline-block;
           vertical-align: bottom;
+          --star-color: var(--default-primary-color);
         }
 
         paper-button {
           margin: 0;
           line-height: 1.4;
-          border: 1.5px solid var(--default-primary-color);
+          border: 1px solid var(--default-primary-color);
         }
 
         paper-button[primary] {
@@ -31,19 +32,43 @@
           color: var(--text-accent-color);
           padding: -2px;
         }
+
+        .helper {
+          font-size: 12px;
+          line-height: 1;
+        }
+
+        @media (min-width: 640px) {
+          .caption {
+            width: 25%;
+          }
+        }
+
+        @media (max-width: 640px) {
+          star-rating, .caption {
+            display: block;
+          }
+        }
       </style>
 
       <div class="container">
-        <div class="caption">{$ feedback.voteCaption $}:</div>
-        <star-rating class="star-rating" rating="{{rating}}"></star-rating>
+        <div>
+          <div class="caption">{$ feedback.contentCaption $}:</div>
+          <star-rating rating="{{contentRating}}"></star-rating>
+        </div>
+        <div>
+          <div class="caption">{$ feedback.styleCaption $}:</div>
+          <star-rating rating="{{styleRating}}"></star-rating>
+        </div>
 
         <paper-textarea
           id="commentInput"
           hidden$="[[!rating]]"
-          label="Leave a comment here (optional)"
-          no-label-float
+          label="Comment"
           value="{{comment}}"
+          maxlength="256"
         ></paper-textarea>
+        <p hidden$="[[!rating]]" class="helper">{$ feedback.helperText $}</p>
         <paper-button
           primary
           hidden$="[[!rating]]"
@@ -53,7 +78,7 @@
           ga-event-action="send feedback"
           ga-event-label$="submit the [[rating]] stars feedback"
         >
-          [[buttonLabel]]
+          {$ feedback.save $}
         </paper-button>
         <paper-button
           class="delete-button"
@@ -74,6 +99,15 @@
         static get properties() {
           return {
             rating: {
+              type: Boolean,
+              value: false,
+              computed: '_hasRating(contentRating, styleRating)',
+            },
+            contentRating: {
+              type: Number,
+              value: 0,
+            },
+            styleRating: {
               type: Number,
               value: 0,
             },
@@ -120,10 +154,6 @@
               type: Object,
               statePath: 'feedback.deletingError',
             },
-            buttonLabel: {
-              type: String,
-              value: 'Post',
-            },
             showDeleteButton: {
               type: Boolean,
               value: false,
@@ -161,9 +191,9 @@
         }
 
         _clear() {
-          this.rating = 0;
+          this.contentRating = 0;
+          this.styleRating = 0;
           this.comment = '';
-          this.buttonLabel = 'Post';
           this.showDeleteButton = false;
         }
 
@@ -188,29 +218,14 @@
         _previousFeedbackChanged() {
           if (this.previousFeedback) {
             this.showDeleteButton = true;
-            this.buttonLabel = 'Update';
-            this.rating = this.previousFeedback.rating;
-            if (this.previousFeedback.comment) {
-              this.comment = this.previousFeedback.comment;
-            }
+            this.contentRating = this.previousFeedback.contentRating;
+            this.styleRating = this.previousFeedback.styleRating;
+            this.comment = this.previousFeedback.comment;
           }
         }
 
         _sendFeedback() {
-          if (!this.user.signedIn) {
-            toastActions.showToast({
-              message: '{$ feedback.sendFeedbackSignedOut $}',
-              action: {
-                title: 'Sign in',
-                callback: () => {
-                  dialogsActions.openDialog(DIALOGS.SIGNIN);
-                },
-              },
-            });
-            return;
-          }
-
-          if (this.rating <= 0 || this.rating > 5) return;
+          if (!this.rating) return;
           this._dispatchSendFeedback();
         }
 
@@ -220,7 +235,8 @@
                 userId: this.user.uid,
                 collection: this.collection,
                 dbItem: this.dbItem,
-                rating: this.rating,
+                contentRating: this.contentRating,
+                styleRating: this.styleRating,
                 comment: this.comment,
               })
           );
@@ -281,6 +297,11 @@
               toastActions.showToast({ message: '{$ feedback.feedbackDeleted $}' });
             }
           }
+        }
+
+        _hasRating(contentRating, styleRating) {
+          return (contentRating > 0 && contentRating <= 5) ||
+            (styleRating > 0 && styleRating <= 5);
         }
       }
 

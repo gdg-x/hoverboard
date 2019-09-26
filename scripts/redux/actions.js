@@ -214,7 +214,8 @@ const feedbackActions = {
     firebase.firestore().collection(`${data.collection}/${data.dbItem}/feedback`)
         .doc(data.userId)
         .set({
-          rating: data.rating,
+          contentRating: data.contentRating,
+          styleRating: data.styleRating,
           comment: data.comment,
         })
         .then(() => {

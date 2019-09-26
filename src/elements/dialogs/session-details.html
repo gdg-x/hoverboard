@@ -18,6 +18,7 @@
 <link rel="import" href="../shared-styles.html">
 <link rel="import" href="../feedback-block.html">
 <link rel="import" href="dialog-styles.html">
+<link rel="import" href="../auth-required.html">
 
 <dom-module id="session-details">
   <template>
@@ -135,9 +136,17 @@
           </template>
         </div>
 
-        <div id="feedback" class="additional-sections" hidden="[[!acceptingFeedback]]">
+        <div id="feedback" class="additional-sections">
           <h3>{$ feedback.headline $}</h3>
-          <feedback-block collection="sessions" db-item="[[session.id]]"></feedback-block>
+
+          <auth-required hidden="[[!acceptingFeedback]]">
+            <slot slot="prompt">{$ feedback.leaveFeedback $}</slot>
+            <feedback-block collection="sessions" db-item="[[session.id]]"></feedback-block>
+          </auth-required>
+
+          <p hidden="[[acceptingFeedback]]">
+            {$ feedback.sessionClosed $}
+          </p>
         </div>
       </div>
     </app-header-layout>

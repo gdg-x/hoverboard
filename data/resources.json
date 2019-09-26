@@ -248,13 +248,18 @@
     "saveSessionsSignedOut": "Sign in to save sessions"
   },
   "feedback": {
-    "headline": "Feedback",
+    "save": "Save",
+    "headline": "Review session",
+    "leaveFeedback": "to leave feedback",
     "sendFeedbackSignedOut": "Sign in to send feedback",
     "feedbackRecorded": "Your feedback was recorded",
     "feedbackDeleted": "Feedback successfully deleted",
+    "helperText": "Comments will be anonymously provided to speakers",
     "somethingWentWrong": "Something went wrong",
-    "voteCaption": "Vote to leave a comment",
-    "deleteFeedback": "Delete feedback"
+    "contentCaption": "Content quality",
+    "styleCaption": "Presentation style",
+    "deleteFeedback": "Delete",
+    "sessionClosed": "Session reviews are not open"
   },
   "sessionDetails": {
     "contentLevel": "Content level",

@@ -179,7 +179,8 @@ const feedbackReducer = (state = initialState.feedback, action) => {
         [action.payload.collection]:
           Object.assign({}, state[action.payload.collection], {
             [action.payload.dbItem]: {
-              rating: action.payload.rating,
+              contentRating: action.payload.contentRating,
+              styleRating: action.payload.styleRating,
               comment: action.payload.comment,
             },
           }),
