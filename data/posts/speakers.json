@@ -474,7 +474,7 @@
       "socials" : [
         {
           "icon" : "twitter",
-            "link" : "@LearningNerd",
+            "link" : "http://twitter.com/LearningNerd",
             "name" : "Twitter"
         }
     ],
@@ -503,7 +503,7 @@
         },
         {
           "icon" : "twitter",
-            "link" : "@rondagdag",
+            "link" : "http://twitter.com/rondagdag",
             "name" : "Twitter"
         }
     ],
@@ -556,7 +556,7 @@
         },
         {
           "icon" : "twitter",
-            "link" : "@sublimemarch",
+            "link" : "http://twitter.com/sublimemarch",
             "name" : "Twitter"
         }
     ],
@@ -585,7 +585,7 @@
         },
         {
           "icon" : "twitter",
-            "link" : "@domitriusclark",
+            "link" : "http://twitter.com/domitriusclark",
             "name" : "Twitter"
         }
     ],
@@ -614,7 +614,7 @@
         },
         {
           "icon" : "twitter",
-            "link" : "@cahdeemer",
+            "link" : "http://twitter.com/cahdeemer",
             "name" : "Twitter"
         }
     ],
@@ -643,7 +643,7 @@
         },
         {
           "icon" : "twitter",
-            "link" : "@viralparmarhack",
+            "link" : "http://twitter.com/viralparmarhack",
             "name" : "Twitter"
         }
     ],
@@ -696,7 +696,7 @@
         },
         {
           "icon" : "twitter",
-            "link" : "@diego_codes",
+            "link" : "http://twitter.com/diego_codes",
             "name" : "Twitter"
         }
     ],
@@ -725,7 +725,7 @@
         },
         {
           "icon" : "twitter",
-            "link" : "@nelilly",
+            "link" : "http://twitter.com/nelilly",
             "name" : "Twitter"
         }
     ],
@@ -754,7 +754,7 @@
         },
         {
           "icon" : "twitter",
-            "link" : "@georgemandis",
+            "link" : "http://twitter.com/georgemandis",
             "name" : "Twitter"
         }
     ],
@@ -763,6 +763,35 @@
       "sessions":[
         {
           "id": "javaScriptMidi"
+        }
+      ]
+    },
+    {
+      "id":"kassian_wren",
+      "featured": false,
+      "bio" : "Kas (they/them/their) is a developer 🥑 for CloudFlare. They’re also an author of two books about JS Robotics and a Twitch Affiliate streamer for code and hardware. They like serverless and all the discussions it brings, and playing with their 2 cats.",
+      "name" : "Mx. Kas Perch",
+      "company":"CloudFlare",
+      "country": "Austin, Texas",
+      "photo" : "/images/speakers/kassian_wren.jpeg",
+      "photoUrl" : "/images/speakers/kassian_wren.jpeg",
+      "socials" : [
+        {
+          "icon" : "github",
+            "link" : "https://github.com/nodebotanist",
+            "name" : "Github"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "http://twitter.com/nodebotanist",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Software developer",
+      "sessions":[
+        {
+          "id": "webAssembly"
         }
       ]
     }
@@ -983,6 +1012,14 @@
       "speakers" : [ "George_Mandis" ],
       "tags" : ["javascript", "node.js", "apis"],
       "title" : "JavaScript + MIDI + Microcontrollers Workshop"
+    },
+    {
+      "id":"webAssembly",
+      "complexity" : "Intermediate",
+      "description" : "80% of users are running browsers capable of running languages other than JS in their browser. It’s a new change, but an important one; we’re looking at a future where the web will be built not just on JS, but on C, Rust, GoLang and many more. Let’s talk about WebAssembly; why it came about, what it’s good at, and why it really doesn’t spell doom for JS but instead allows you to truly enhance web experiences by augmenting JS with the ability to use modules written in other languages that can perform tasks faster or more efficiently. We’ll go over what WebAssembly is, how to build a WebAssembly module, and why this may be a force that will shape not only how we think about JS, but the entire web experience.",
+      "speakers" : [ "kassian_wren" ],
+      "tags" : ["front-end", "back-end", "performance", "tools", "technical"],
+      "title" : "Web Assembly, the Future of JS, and a multi-language web"
     }
   ]
 }
