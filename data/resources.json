@@ -22,7 +22,7 @@
   "country": "Country",
   "time": "Time",
   "faq": "/data/faq.md",
-  "cod": "/data/cod.md",
+  "coc": "/data/coc.md",
   "footer": {
     "blog": "Blog"
   },
@@ -88,6 +88,14 @@
   ],
   "subscribeNote": "No spam, only the latest news and updates!",
   "codeOfConduct": "Code of Conduct",
+  "codeOfConductBlock": {
+    "organization": "DevFest",
+    "form": "https://bit.ly/2RstTJ8",
+    "contacts": [
+      "Organizer Oleh Zasadnyy, [+38 093 486 6460](tel:+380934866460), o.zasadnyy@gdg.org.ua",
+      "Organizer Sofiya Huts, [+38 093 486 1425](tel:+380934861425), s.huts@gdg.org.ua"
+    ]
+  },
   "aboutBlock": {
     "title": "Qué es el DevFest Lima, y qué haremos este año",
     "callToAction": {
@@ -163,7 +171,7 @@
     "previousYear": "Year"
   },
   "speakersBlock": {
-    "title": "Rockstar speakers",
+    "title": "Speakers",
     "callToAction": {
       "label": "View all speakers",
       "link": "/speakers/"

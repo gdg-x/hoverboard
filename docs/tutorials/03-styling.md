@@ -41,7 +41,7 @@ Color and images for header can be configured via `data/settings.json` in `heroS
 ```json
 "heroSettings": {
   "home": {
-    "description": "Be a hero. Be a GDG!",
+    "description": "Join the commuity, learn new things!",
     "background": {
       "color": "#673ab7",
       "image": "/images/backgrounds/home.jpg"

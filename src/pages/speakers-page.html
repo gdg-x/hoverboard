@@ -195,6 +195,7 @@
       avatar-size="128px"
       avatar-circle="64px"
       horizontal-position="50%"
+      border-radius="4px"
       box-shadow="var(--box-shadow)"
       items-count="{$ contentLoaders.speakers.itemsCount $}"
       hidden$="[[contentLoaderVisibility]]"
@@ -247,7 +248,7 @@
             <div class="origin">[[speaker.country]]</div>
 
             <text-truncate lines="5">
-              <div class="bio">[[speaker.shortBio]]</div>
+              <div class="bio">[[speaker.bio]]</div>
             </text-truncate>
           </div>
 

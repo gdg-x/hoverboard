@@ -131,11 +131,13 @@ const ticketsActions = {
 };
 
 const _getPartnerItems = (groupId) => firebase.firestore()
-    .collection('partners').doc(groupId).collection('items').orderBy('order', 'asc')
+    .collection('partners').doc(groupId).collection('items')
     .get()
-    .then((snaps) => snaps.docs
-        .map((snap) => Object.assign({}, snap.data(), { id: snap.id }))
-    );
+    .then((snaps) => {
+      return snaps.docs
+          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }))
+          .sort((a, b) => a.order - b.order);
+    });
 
 const partnersActions = {
   addPartner: (data) => (dispatch) => {
@@ -174,7 +176,6 @@ const partnersActions = {
 
     firebase.firestore()
         .collection('partners')
-        .orderBy('order', 'asc')
         .get()
         .then((snaps) => Promise.all(
             snaps.docs.map((snap) => Promise.all([
@@ -378,7 +379,7 @@ const sessionsActions = {
             dispatch({
               type: SET_FILTERS,
               payload: {
-                tags: [...tagFilters],
+                tags: [...tagFilters].sort(),
                 complexity: [...complexityFilters],
               },
             });
@@ -498,7 +499,7 @@ const galleryActions = {
 };
 
 const _getTeamMembers = (teamId) => firebase.firestore()
-    .collection('team').doc(teamId).collection('members').orderBy('order', 'asc')
+    .collection('team').doc(teamId).collection('members')
     .get()
     .then((snaps) => snaps.docs
         .map((snap) => Object.assign({}, snap.data(), { id: snap.id }))
