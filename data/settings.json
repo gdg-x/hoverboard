@@ -28,7 +28,7 @@
       "route": "speakers",
       "permalink": "/speakers/",
       "label": "Speakers"
-    }
+    },
     {
       "route": "team",
       "permalink": "/team/",
