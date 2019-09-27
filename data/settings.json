@@ -1,7 +1,7 @@
 {
   "organizer": {
     "name": "GDG Open Lima",
-    "twitter": "gdglviv",
+    "twitter": "gdgopen",
     "blog": "",
     "url": "https://www.meetup.com/es-ES/GDG-Open/"
   },
@@ -57,58 +57,58 @@
       "title": "Blog",
       "metaDescription": "Read stories from our team",
       "background": {
-        "color": "#FFF"
+        "color": "#131a20"
       },
-      "fontColor": "#424242"
+      "fontColor": "#FFFFFF"
     },
     "speakers": {
       "title": "Speakers",
       "metaDescription": "Escuche a los Googlers, socios y oradores invitados que están construyendo el futuro de la nube. Vuelva a consultar a menudo a medida que agreguemos más oradores, incluidos nuestros clientes y socios.",
       "description": "",
       "background": {
-        "color": "#FFF"
+        "color": "#131a20"
       },
-      "fontColor": "#424242"
+      "fontColor": "#FFFFFF"
     },
     "previousSpeakers": {
       "title": "Speakers Anteriores",
       "metaDescription": "Check who was with us last years",
       "background": {
-        "color": "#FFF"
+        "color": "#131a20"
       },
-      "fontColor": "#424242"
+      "fontColor": "#FFFFFF"
     },
     "schedule": {
       "title": "Agenda",
       "metaDescription": "Elige tus sesiones para visitar",
       "background": {
-        "color": "#fff"
+        "color": "#131a20"
       },
-      "fontColor": "#424242"
+      "fontColor": "#FFFFFF"
     },
     "team": {
       "title": "Equipo",
       "metaDescription": "Get more info about organizers",
       "background": {
-        "color": "#fff"
+        "color": "#131a20"
       },
-      "fontColor": "#424242"
+      "fontColor": "#FFFFFF"
     },
     "faq": {
       "title": "FAQs",
       "metaDescription": "Find you answer right here!",
       "background": {
-        "color": "#fff"
+        "color": "#131a20"
       },
-      "fontColor": "#424242"
+      "fontColor": "#FFFFFF"
     },
     "cod": {
       "title": "Code Of Conduct",
       "metaDescription": "Lear more about our expectations for all those who participate in our community",
       "background": {
-        "color": "#fff"
+        "color": "#131a20"
       },
-      "fontColor": "#424242"
+      "fontColor": "#FFFFFF"
     }
   },
   "location": {

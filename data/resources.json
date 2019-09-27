@@ -67,6 +67,16 @@
           "name": "DevFest Lima 2016",
           "url": "https://2016.devfest.pe/",
           "newTab": true
+        },
+        {
+          "name": "DevFest Lima 2014",
+          "url": "https://2014.devfest.pe/",
+          "newTab": true
+        },
+        {
+          "name": "DevFest Lima 2013",
+          "url": "https://2013.devfest.pe/",
+          "newTab": true
         }
       ]
     },
@@ -89,7 +99,7 @@
   "subscribeNote": "No spam, only the latest news and updates!",
   "codeOfConduct": "Code of Conduct",
   "aboutBlock": {
-    "title": "Qué es el DevFest Lima, y qué haremos este año",
+    "title": "¿Qué es el DevFest Lima y qué haremos este año?",
     "callToAction": {
       "featuredSessions": {
         "description": "GDG DevFest Lima es un evento organizado por el GDG Open. Este 2018 reuniremos a los mejores en Internet Of Things (IOT), Artificial Intelligence (AI) y Cyber Security; en dos días llenos de sesiones, talleres y exhibiciones.",
@@ -185,7 +195,7 @@
     }
   },
   "mapBlock": {
-    "title": "Location"
+    "title": "Ubicación"
   },
   "subscribeBlock": {
     "callToAction": {

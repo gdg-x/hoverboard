@@ -7,18 +7,19 @@
     <style>
       :host {
         --dark-primary-color: #512DA8;
-        --default-primary-color: #673AB7;
+        --default-primary-color: #ffffff;
         --focused-color: #311B92;
         --light-primary-color: #D1C4E9;
         --text-primary-color: #FFFFFF;
-        --accent-color: #FF5252;
-        --primary-background-color: #FFFFFF;
-        --primary-text-color: #424242;
-        --secondary-text-color: #757575;
+        --inverted-text-primary-color: #131a20;
+        --accent-color: rgba(40, 228, 253, 1);
+        --primary-background-color: #131a20;
+        --primary-text-color: #FFFFFF;
+        --secondary-text-color: #f7f7f7;
         --disabled-text-color: #BDBDBD;
-        --divider-color: #EDEDED;
-        --footer-background-color: #F5F5F5;
-        --footer-text-color: #616161;
+        --divider-color: rgba(40, 228, 253, 0.1);
+        --footer-background-color: #131a20;
+        --footer-text-color: var(--secondary-text-color);
         --twitter-color: #4099FF;
         --facebook-color: #3B5998;
         --border-light-color: #E2E2E2;
@@ -69,6 +70,11 @@
         font-family: var(--font-family);
         text-rendering: optimizeLegibility;
         color: var(--primary-text-color);
+        background-color: var(--primary-background-color);
+      }
+
+      p {
+        color: var(--text-primary-color);
       }
 
       .highlight-font {
@@ -84,6 +90,7 @@
         margin: 0;
         font-family: "Product Sans", arial, sans-serif;
         font-weight: normal;
+        color: var(--primary-text-color);
       }
 
       h1 {
@@ -108,30 +115,32 @@
       }
 
       paper-button:hover {
-        background-color: var(--primary-color-transparent);
+        background-color: var(--dark-primary-color);
       }
 
       paper-button[disabled] {
         cursor: default;
-        background-color: var(--primary-color-transparent);
+        background-color: var(--dark-primary-color);
         opacity: 0.8;
       }
 
       paper-button[primary] {
-        background-color: var(--default-primary-color);
+        background-color: var(--dark-primary-color);
         color: var(--text-primary-color);
       }
 
       paper-button[primary]:hover {
+        color: var(--inverted-text-primary-color);
         background-color: var(--primary-color-light);
       }
 
       paper-button[primary][invert] {
-        color: var(--default-primary-color);
+        color: var(--inverted-text-primary-color);
         background-color: var(--text-primary-color);
       }
 
       paper-button[primary][invert]:hover {
+        color: var(--inverted-text-primary-color);
         background-color: var(--primary-color-white);
       }
 
