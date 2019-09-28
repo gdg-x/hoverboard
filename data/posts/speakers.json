@@ -845,6 +845,33 @@
           "id": "rsjxFutureAsyncProgramming"
         }
       ]
+    },
+    {
+      "id":"fernando_medina_corey",
+      "featured": false,
+      "bio" : "Fernando Medina Corey currently spends his days making courses to help software engineers, architects, and technology professionals learn the technologies they need to succeed. He has worked with a variety of different technologies in order to develop web applications, manage data pipelines, and architect cloud infrastructure. In addition to his work, he founded and runs the Redmond Python meetup to help folks learn Python. Fernando has also taught and TAed classes on Python, the Command Line, and big data technologies for Python User Groups and Girl Develop It.",
+      "name" : "Fernando Medina Corey",
+      "country": "Seattle, WA",
+      "photo" : "/images/speakers/Fernando_Medina_Corey.jpg",
+      "photoUrl" : "/images/speakers/Fernando_Medina_Corey.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+            "link" : "http://twitter.com/fmc_sea",
+            "name" : "Twitter"
+        },
+        {
+          "icon" : "website",
+            "link" : "https://www.fernandomc.com/",
+            "name" : "Website"
+        }
+    ],
+      "order" : 0,
+      "sessions":[
+        {
+          "id": "serverlessDevelopmentPortfolioSevenDays"
+        }
+      ]
     }
   ],
 
@@ -1084,10 +1111,18 @@
     {
       "id":"rsjxFutureAsyncProgramming",
       "complexity" : "Intermediate",
-      "description" : "TAsynchronous programming is a headache for new developers. From callback hell to promise prison. Its easy to get discouraged.<br><br>However, all hope is not lost. RxJS is here to give us a lean and functional way to develop. From observables to pipes, this talk guides the way to async nirvana.<br><br><strong>Web Development is evolving.</strong><br><br>The demand for reactive features in applications is growing rapidly. The issue is, many are stuck in the traditional paradigms of development, and web technologies are playing catch up.<br><br>Vanilla Javascript is not equipped to provide graceful solutions to asynchronous programming. Callbacks are a potential solution, but as many know, this leads developers down the dark road to callback hell.<br><br>Promises are another component provided by Vanilla Javascript for async solutions. But promises are clunky and operating on the data requires dozens of lines of unnecessary and unreadable code.<br><br><strong>ReactiveX provides a way out.</strong><br><br>The ReactiveX is a multi-language project, that provides a functional approach to reactive programming. The JavaScript version, RxJS, is quickly becoming the defacto way to handle asynchronous events and streams in the web.<br><br>From Observables to Subjects, Multicasting to Error handling, it can be tricky to navigate. I’m aiming to introduce RxJS and reactive programming while helping the audience decide if it’s the best approach to their challenges.",
+      "description" : "Asynchronous programming is a headache for new developers. From callback hell to promise prison. Its easy to get discouraged.<br><br>However, all hope is not lost. RxJS is here to give us a lean and functional way to develop. From observables to pipes, this talk guides the way to async nirvana.<br><br><strong>Web Development is evolving.</strong><br><br>The demand for reactive features in applications is growing rapidly. The issue is, many are stuck in the traditional paradigms of development, and web technologies are playing catch up.<br><br>Vanilla Javascript is not equipped to provide graceful solutions to asynchronous programming. Callbacks are a potential solution, but as many know, this leads developers down the dark road to callback hell.<br><br>Promises are another component provided by Vanilla Javascript for async solutions. But promises are clunky and operating on the data requires dozens of lines of unnecessary and unreadable code.<br><br><strong>ReactiveX provides a way out.</strong><br><br>The ReactiveX is a multi-language project, that provides a functional approach to reactive programming. The JavaScript version, RxJS, is quickly becoming the defacto way to handle asynchronous events and streams in the web.<br><br>From Observables to Subjects, Multicasting to Error handling, it can be tricky to navigate. I’m aiming to introduce RxJS and reactive programming while helping the audience decide if it’s the best approach to their challenges.",
       "speakers" : [ "ali_abiba" ],
       "tags" : ["javascript", "rsjx", "web development", "asynchronous"],
       "title" : "RxJS, the Future of Async Programming"
+    },
+    {
+      "id":"serverlessDevelopmentPortfolioSevenDays",
+      "complexity" : "All",
+      "description" : "You know that just having a resume or putting in good work during work hours isn’t enough to get ahead these days. You also know you need to work on your own development projects to showcase your skills, but maybe you’re not sure where to start. This talk will give you bite-size steps that you can take to start and finish your own development portfolio projects within a week with completely serverless technologies. Specifically, you’ll learn:<ul><li>How to set up your development environment to use the Serverless Framework and AWS</li><li>How to find starter templates, example projects, and free tutorials for serverless projects</li><li>How to come up with an idea for a personal development project</li><li>How to actually build your project</li><li>How and where to show off your new project<li></ul>By the end of this talk, you should feel capable of creating a serverless development portfolio that showcases your abilities as a developer and allows you to continue to grow your portfolio and your skillset.",
+      "speakers" : [ "fernando_medina_corey" ],
+      "tags" : ["serverless", "aws", "portfolio", "javascript", "back-end", "tools"],
+      "title" : "Making a Serverless Development Portfolio - In Seven Days or Less"
     }
   ]
 }
