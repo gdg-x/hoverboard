@@ -794,8 +794,60 @@
           "id": "webAssembly"
         }
       ]
+    },
+    {
+      "id":"angel_rivera",
+      "featured": false,
+      "bio" : "Angel started his career as an US Air Force Space Systems Operations specialist in Cape Canaveral AF Station where he realized his passion for technology and software development. He has extensive experience in the private, public and military sectors and his technical experience includes military/space lift operations, technical writing, software development, SRE/DevOPs engineering. He also has a wealth of experience in defense and federal sectors such as contracting, information systems security and management.<br><br>You can usually find him speaking at or organizing local tech meetups and hackathons where he enjoys engaging with developers.<br><br>Angel’s passions are positive disruption, learning, teaching, mentoring but most of all inspiring all forms of technologists & building awesome tech communities.",
+      "name" : "Angel Rivera",
+      "country": "Philadelphia, PA",
+      "photo" : "/images/speakers/angel_rivera.png",
+      "photoUrl" : "/images/speakers/angel_rivera.png",
+      "socials" : [
+        {
+          "icon" : "twitter",
+            "link" : "http://twitter.com/punkdata",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "sessions":[
+        {
+          "id": "shinyObjectSyndrome"
+        }
+      ]
+    },
+    {
+      "id":"ali_abiba",
+      "featured": false,
+      "bio" : "Born in Chicago, raised in Dayton, I am a midwest boy. With both parents in education, learning was something I was raised to love. Moving to Dayton, I was fortunate enough to come across opportunities I may not have had. One of these opportunities was a position at the University of Dayton Research Institute (UDRI) as a junior developer. I was working at UDRI through college, which ended with my Associates in Applied Sciences at Sinclair College. I currently work as a Web Developer at Crown Equipment.<br><br>I am a problem solver. Developing software is one of my outlets for problem-solving. Mainly developing web applications, my preferred language is JavaScript (mainly Angular and Node). I am currently developing an app to help solve the reading problem. The other outlet is entrepreneurship, in which I have launched BluPrint (discoverbluprint.com (shameless plug)), to help solve the issues that young artists are facing today.<br><br>Technology is amazing. The capabilities it can bring are immense, and I want to be a part of bringing it to everyone. There are others like myself, who come from marginalized communities, that have a locked door, preventing them from raising themselves up. Tech is the key to that lock.",
+      "name" : "Ali Abiba",
+      "country": "Dayton, OH",
+      "company": "Crown Equipment",
+      "title":"Web Developer",
+      "photo" : "/images/speakers/ali_abiba.jpg",
+      "photoUrl" : "/images/speakers/ali_abiba.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+            "link" : "http://twitter.com/coffee_n_code",
+            "name" : "Twitter"
+        },
+        {
+          "icon" : "website",
+            "link" : "http://aliabiba.me/",
+            "name" : "Website"
+        }
+    ],
+      "order" : 0,
+      "sessions":[
+        {
+          "id": "rsjxFutureAsyncProgramming"
+        }
+      ]
     }
   ],
+
   "sessions" : [
     {
       "id":"insufficientlyPersuasive",
@@ -1020,6 +1072,22 @@
       "speakers" : [ "kassian_wren" ],
       "tags" : ["front-end", "back-end", "performance", "tools", "technical"],
       "title" : "Web Assembly, the Future of JS, and a multi-language web"
+    },
+    {
+      "id":"shinyObjectSyndrome",
+      "complexity" : "All",
+      "description" : "Technology is fast moving, and devops tools pop up like wildfire. Teams are desperate to solve their problems & often make implementation decisions based on word of mouth, “kick the tires” syndrome or superficial evaluations. In some cases we justify our stack decisions based on project/sprint deadlines, the product’s marketing materials, occasionally, the README files. Really scary stuff!<br><br>In this talk Angel will explore how & why teams are easily lulled into believing that shiny objects will independently solve their stack deficiencies. He will discuss his experiences with “Shiny Object” frameworks/tools and the true impact they had in actually solving problems. He will also discuss some strategies that can help teams make better choices when properly vetting potential solutions based on his experience in the federal government evaluating vendor proposals and homegrown solutions.",
+      "speakers" : [ "angel_rivera" ],
+      "tags" : ["devOps", "work life balance", "frameworks", "stacks", "apps", "decision making", "life choices"],
+      "title" : "Apps, Stacks, and Frameworks: Avoiding “Shiny Object” Syndrome"
+    },
+    {
+      "id":"rsjxFutureAsyncProgramming",
+      "complexity" : "Intermediate",
+      "description" : "TAsynchronous programming is a headache for new developers. From callback hell to promise prison. Its easy to get discouraged.<br><br>However, all hope is not lost. RxJS is here to give us a lean and functional way to develop. From observables to pipes, this talk guides the way to async nirvana.<br><br><strong>Web Development is evolving.</strong><br><br>The demand for reactive features in applications is growing rapidly. The issue is, many are stuck in the traditional paradigms of development, and web technologies are playing catch up.<br><br>Vanilla Javascript is not equipped to provide graceful solutions to asynchronous programming. Callbacks are a potential solution, but as many know, this leads developers down the dark road to callback hell.<br><br>Promises are another component provided by Vanilla Javascript for async solutions. But promises are clunky and operating on the data requires dozens of lines of unnecessary and unreadable code.<br><br><strong>ReactiveX provides a way out.</strong><br><br>The ReactiveX is a multi-language project, that provides a functional approach to reactive programming. The JavaScript version, RxJS, is quickly becoming the defacto way to handle asynchronous events and streams in the web.<br><br>From Observables to Subjects, Multicasting to Error handling, it can be tricky to navigate. I’m aiming to introduce RxJS and reactive programming while helping the audience decide if it’s the best approach to their challenges.",
+      "speakers" : [ "ali_abiba" ],
+      "tags" : ["javascript", "rsjx", "web development", "asynchronous"],
+      "title" : "RxJS, the Future of Async Programming"
     }
   ]
 }
