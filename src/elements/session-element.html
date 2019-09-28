@@ -166,13 +166,13 @@
         <div class="session-actions">
           <iron-icon
             class="feedback-action"
-            hidden="[[!_sessionBegun()]]"
+            hidden="[[!_acceptingFeedback()]]"
             icon="hoverboard:insert-comment"
             on-tap="_toggleFeedback"
           ></iron-icon>
           <iron-icon
             class="bookmark-session"
-            hidden="[[_sessionBegun()]]"
+            hidden="[[_acceptingFeedback()]]"
             icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
             on-tap="_toggleFeaturedSession"
           ></iron-icon>
@@ -300,13 +300,15 @@
         dialogsActions.openDialog(DIALOGS.FEEDBACK, this.session);
       }
 
-      _sessionBegun() {
+      _acceptingFeedback() {
         const now = new Date();
         const convertedTimezoneDate = new Date(
             new Date(`${this.session.day} ${this.session.startTime}`).getTime() +
           (parseInt('{$ timezoneOffset $}') - now.getTimezoneOffset()) * 60000
         );
-        return now - convertedTimezoneDate > 0;
+
+        const diff = now - convertedTimezoneDate;
+        return diff > 0 && diff < 172800000; // 48 hours time window.
       }
     }
 

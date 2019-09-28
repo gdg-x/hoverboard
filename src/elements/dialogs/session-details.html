@@ -135,7 +135,7 @@
           </template>
         </div>
 
-        <div id="feedback" class="additional-sections" hidden="[[!sessionBegun]]">
+        <div id="feedback" class="additional-sections" hidden="[[!acceptingFeedback]]">
           <h3>{$ feedback.headline $}</h3>
           <feedback-block collection="sessions" db-item="[[session.id]]"></feedback-block>
         </div>
@@ -164,7 +164,7 @@
             type: Object,
             observer: '_sessionUpdate',
           },
-          sessionBegun: {
+          acceptingFeedback: {
             value: false,
             type: Boolean,
           },
@@ -254,9 +254,10 @@
               (parseInt('{$ timezoneOffset $}') - now.getTimezoneOffset()) * 60000
           );
 
-          this.sessionBegun = now - convertedTimezoneDate > 0;
+          const diff = now - convertedTimezoneDate;
+          this.acceptingFeedback = diff > 0 && diff < 172800000; // 48 hours time window.
         } else {
-          this.sessionBegun = false;
+          this.acceptingFeedback = false;
         }
       }
     }
