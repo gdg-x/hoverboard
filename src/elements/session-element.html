@@ -310,7 +310,7 @@
         const diff = now - convertedTimezoneDate;
         return diff > 0 && diff < 172800000; // 48 hours time window.
       }
-  
+
       _join(company, country) {
         return [company, country].filter(Boolean).join(' / ');
       }
