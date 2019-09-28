@@ -60,6 +60,13 @@
         transform: scale(1.2);
         color: var(--primary-text-color);
         }
+      .track-title{
+        color: var(--dark-primary-color);
+        transition: color var(--animation);
+      }
+      .track-title:hover{
+        color: var(--primary-text-color);
+      }
 
     </style>
 
@@ -135,7 +142,7 @@
             <div on-tap="_openSession" session-id$="[[session.id]]" class="section">
               <div layout horizontal center>
                 <div class="section-details" flex>
-                  <div class="section-primary-text">[[session.title]]</div>
+                  <div class="section-primary-text  track-title">[[session.title]]</div>
                   <div class="section-secondary-text" hidden$="[[!session.dateReadable]]">[[session.dateReadable]],
                     [[session.startTime]] - [[session.endTime]]
                   </div>
