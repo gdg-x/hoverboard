@@ -4,7 +4,7 @@
   "analytics": "UA-43643469-8",
   "prefix": "/",
   "firebase": {
-    "appId": "",
+    "appId": "1:1083195713896:web:9aed8296d8d642cb",
     "apiKey": "AIzaSyBu9LI-hY4NfUOPJJKuV3BfQm7edLr2-aE",
     "authDomain": "hoverboard-dev.firebaseapp.com",
     "databaseURL": "https://hoverboard-dev.firebaseio.com",
@@ -12,5 +12,5 @@
     "storageBucket": "hoverboard-dev.appspot.com",
     "messagingSenderId": "1083195713896"
   },
-  "googleMapApiKey": ""
+  "googleMapApiKey": "AIzaSyBu9LI-hY4NfUOPJJKuV3BfQm7edLr2-aE"
 }
