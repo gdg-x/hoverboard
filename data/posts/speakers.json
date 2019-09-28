@@ -305,7 +305,7 @@
     {
       "id":"senigbolo_stephen",
       "featured": false,
-      "bio" : "I’m Kenigbolo Meya Stephen, Full Stack Software Engineer working as the Frontend Engineering Team Lead at BCaster OY. Formerly Arch Conveyer/Community Manage of CodeAfrique(now Reload), a not-for-profit weekend intensive software engineering bootcamp for underrepresented groups in IT based out of Estonia. During my free time I sometimes volunteer as an open source developer for ADSBx, play golf and coach football (soccer as Americans call it). I also have a nick for writing tiny javascript modules on npm to help a few developers out there so they need not rewrite same utilities that we all might need (usually it’s the case that we’re only a handful needing those so there’s really nothing too worry much about).",
+      "bio" : "I’m Kenigbolo Meya Stephen, Full Stack Software Engineer working as the Frontend Engineering Team Lead at BCaster OY. Formerly Arch Conveyer/Community Manage of CodeAfrique(now Reload), a not-for-profit weekend intensive software engineering bootcamp for underrepresented groups in IT based out of Estonia.'\n'During my free time I sometimes volunteer as an open source developer for ADSBx, play golf and coach football (soccer as Americans call it). I also have a nick for writing tiny javascript modules on npm to help a few developers out there so they need not rewrite same utilities that we all might need (usually it’s the case that we’re only a handful needing those so there’s really nothing too worry much about).",
       "name" : "Kenigbolo Meya Stephen",
       "company":"BCaster OY",
       "country": "Helsinki, Finland",
@@ -370,7 +370,11 @@
       "photo" : "/images/speakers/anusha_bhat.jpg",
       "photoUrl" : "/images/speakers/anusha_bhat.jpg",
       "socials" : [
-
+        {
+          "icon" : "twitter",
+          "link" : "https://twitter.com/_anusha_bhat",
+          "name" : "Twitter"
+        }
     ],
       "order" : 0,
       "title" : "Software Engineer",
@@ -459,6 +463,59 @@
       ]
     },
     {
+      "id":"liz_krane",
+      "featured": false,
+      "bio" : "Liz Krane is a developer advocate at Sentry and founder of Learn Teach Code, an organization that empowers aspiring developers to lead their own local events to create stronger, more diverse tech communities. She loves finding new ways to combine code with other disciplines like art and music, sharing everything she learns while she tries to learn everything!",
+      "name" : "Liz Krane",
+      "company":"Sentry",
+      "country": "Los Angeles, California",
+      "photo" : "/images/speakers/liz_krane.jpg",
+      "photoUrl" : "/images/speakers/liz_krane.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+            "link" : "http://twitter.com/LearningNerd",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Software Developer",
+      "sessions":[
+        {
+          "id": "kickingBugs"
+        }
+      ]
+    },
+    {
+      "id":"ron_dagdag",
+      "featured": false,
+      "bio" : "Ron Dagdag is a Senior Software Engineer with 20 years of experience working on a number of business applications using a diverse set of frameworks and languages. He currently support developers at Crestron Electronics with their IoT, Cloud and Voice AI Assistant development. On the side, Ron Dagdag is an active participant in the community as a Microsoft MVP, speaker, maker and blogger. Ron enjoys building projects with his 2 kids and he is passionate about Augmented Intelligence, studying the convergence of Augmented Reality, Machine Learning and Internet of Things.",
+      "name" : "Ron Lyle Dagdag",
+      "company":"Crestron Electronics",
+      "country": "Dallas, Fort Worth Area",
+      "photo" : "/images/speakers/Ron_Dagdag.jpg",
+      "photoUrl" : "/images/speakers/Ron_Dagdag.jpg",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "http://ron.dagdag.net",
+            "name" : "Website"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "http://twitter.com/rondagdag",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Senior Software Engineer",
+      "sessions":[
+        {
+          "id": "ohMyWeb"
+        }
+      ]
+    },
+    {
       "id":"colleen_dunlap",
       "featured": false,
       "bio" : "Colleen is a free-spirited techie with a passion for Global Engineering. She’s a life-long learner with a passion for connecting with others. She loves Hackathons, Dogs, Coffee, and the Circus. Her passion projects include an online resource platform for LGBT+ individuals living in countries where Homosexuality is illegal, and a Solar Electric Stove startup called Sol Flame. She currently works at the Ifakara Health Institute in Bagamoyo, Tanzania, building technology tools for Malaria Researchers.",
@@ -481,9 +538,343 @@
           "id": "uniqueHowsWhys"
         }
       ]
+    },
+    {
+      "id":"fen_slattery",
+      "featured": false,
+      "bio" : "Fen Slattery is the Accessibility Lead at Clique Studios, where they build beautiful things and work towards a more inclusive digital world. As a web engineer, Fen seamlessly translates the needs of users into digital experiences that minimize barriers to access. As part of their advocacy work, they have spoken across the US to audiences of all skill levels, been featured on many panels about inclusion in the tech industry, and have spread their passion for accessibility in mentorship of web professionals.",
+      "name" : "Fen Slattery",
+      "company":"Clique Studios",
+      "country": "Chicago, Illinois",
+      "photo" : "/images/speakers/fen_slattery.jpg",
+      "photoUrl" : "/images/speakers/fen_slattery.jpg",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "http://www.fenslattery.com",
+            "name" : "Website"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "http://twitter.com/sublimemarch",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Lead Accessibility Engineer",
+      "sessions":[
+        {
+          "id": "digitalAccessibility"
+        }
+      ]
+    },
+    {
+      "id":"domitrius_clark",
+      "featured": false,
+      "bio" : "Front-end software engineer for Guru. Esports addict with an affliction for playing competitive games with 0 skills. Bootcamp graduate and organizer of Reactadelphia.",
+      "name" : "Domitrius Clark",
+      "company":"Guru",
+      "country": "Philadelphia, Pennsylvania",
+      "photo" : "/images/speakers/Domitrius_Clark.jpg",
+      "photoUrl" : "/images/speakers/Domitrius_Clark.jpg",
+      "socials" : [
+        {
+          "icon" : "github",
+            "link" : "https://github.com/domitriusanthony",
+            "name" : "Github"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "http://twitter.com/domitriusclark",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Front-end Software Engineer",
+      "sessions":[
+        {
+          "id": "apolloGraphQl"
+        }
+      ]
+    },
+    {
+      "id":"christina_deemer",
+      "featured": false,
+      "bio" : "I am a UX Developer at Alley, where I help build headless digital experiences for publishers and nonprofit institutions, including Fortune and Colorado Public Radio. I was a Code for Philly Open Source Mentorship Program fellow and co-created the Interactive Mechanics Mentorship Program for Diversity and Inclusion in Tech.'\n'I came to tech later in life, after a 12-year career as a fundraiser for some of Philadelphia’s most prestigious arts organizations. I wrote my first line of code at age 35 and built my first WordPress theme at 37. Outside of tech, I enjoy reading, cooking, and watching classic films.",
+      "name" : "Christina Deemer",
+      "company":"Alley",
+      "country": "Philadelphia, Pennsylvania",
+      "photo" : "/images/speakers/Christina_Deemer.jpg",
+      "photoUrl" : "/images/speakers/Christina_Deemer.jpg",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "https://alley.co/",
+            "name" : "Website"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "http://twitter.com/cahdeemer",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "UX Developer",
+      "sessions":[
+        {
+          "id": "headlessArchitecture"
+        }
+      ]
+    },
+    {
+      "id":"viral_parmar",
+      "featured": false,
+      "bio" : "Viral Parmar is a Serial entrepreneur who runs ComExpo Cyber security company as well as Infinite Defense Foundation a non-profit organization in India. He is a Developer Advocate, Productivity Hacker, Open Source Strategist, Technical Evangelist, Community Liaison, International TechSpeaker, he is a Cyber Security researcher by profession and open source enthusiast working in a field of information security from last three years with the expertise in Cyber Crime Investigation, Public Key Infrastructure, Social Engineering, Web App Penetration Testing, Digital Forensics and Mobile Security. He found sever vulnerability in 150+ well known websites like Intel, your story and solved more than 100 cases of cyber-crime & online frauds. He is famous for his research Cyber Disorder and Who is spying on you. Trained 150,000+ people till now and aware them about privacy and security. Given Seminars and workshops in 150+ Organizations. He is Working with Mozilla foundation from last 2 years as Reps, Mentor in Mozilla Open Leadership Project, Coach(Privacy and Security) in MozSprint 2018, also working with L10N project on Pontoon, Rust and WebVR projects.",
+      "name" : "Viral Parmar",
+      "company":"ComExpo",
+      "country": "Ahmedabad, Gujarat, India",
+      "photo" : "/images/speakers/Viral_Parmar.jpg",
+      "photoUrl" : "/images/speakers/Viral_Parmar.jpg",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "http://viralparmarhacker.com/",
+            "name" : "Website"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "http://twitter.com/viralparmarhack",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Cyber Security Researcher",
+      "sessions":[
+        {
+          "id": "webVR"
+        }
+      ]
+    },
+    {
+      "id":"emily_rautenberg",
+      "featured": false,
+      "bio" : "Emily graduated from Stevens Institute of Technology in 2015 with her Bachelor’s and Master’s of Science in Computer Science, as well as a Bachelor’s of Arts in Visual Arts and Technology. After graduating, she entered the CORE Technology rotational program at Comcast NBCUniversal, where she worked on three different teams across the organization over the course of two years.'\n'After completing the program, she joined Comcast’s Experience Design department as a UX Engineer, where she has been for the last two years. The prototypes Emily and her team develop help to guide production teams on building out final products, allow senior leaders to demo new ideas to executives, and for researchers to conduct user testing sessions will real life customers.'\n'While her team specializing in build JavaScript web applications, Emily also has a passion for animation, is a Captain in the Air Force Reserve, and is an amateur aerial circus artist. One day, she might just run away and join the circus.",
+      "name" : "Emily Rautenberg",
+      "company":"Comcast",
+      "country": "Philadelphia, PA",
+      "photo" : "/images/speakers/Emily_Rautenberg.jpg",
+      "photoUrl" : "/images/speakers/Emily_Rautenberg.jpg",
+      "socials" : [
+        {
+          "icon" : "email",
+            "link" : "erautenb@gmail.com",
+            "name" : "Email"
+        }
+    ],
+      "order" : 0,
+      "title" : "UX Engineer",
+      "sessions":[
+        {
+          "id": "demystifyingRegularExpressions"
+        }
+      ]
+    },
+    {
+      "id":"diego_hernandez",
+      "featured": false,
+      "bio" : "Diego Hernandez is a front-end developer at IBM and Software Engineering graduate student at DePaul University in Chicago. He is a trained filmmaker, turned self-taught developer and designer. As a creative person, Diego is always looking for ways to stretch his canvas—in this case, web browsers—to create unique web experiences that tell a story. When he’s not coding, you’ll probably find him attempting to rock climb or in the kitchen trying out a new recipe.",
+      "name" : "Diego Hernandez",
+      "company":"IBM",
+      "country": "Chicago, Illinois",
+      "photo" : "/images/speakers/Diego_Hernandez.jpg",
+      "photoUrl" : "/images/speakers/Diego_Hernandez.jpg",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "https://medium.com/@diego.hernandez",
+            "name" : "Website"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "http://twitter.com/diego_codes",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Front-end developer",
+      "sessions":[
+        {
+          "id": "uiComponentTesting"
+        }
+      ]
+    },
+    {
+      "id":"nathan_lilly",
+      "featured": false,
+      "bio" : "Nathan Lilly is a UI Engineer at Comcast where he works on the Help and Support website. He has been developing websites since 1998 and recently received his Certified Web Professional in Accessibility certificate from the IAAP. He is an amateur dilettante who is constantly finding new various topics to love: in programming, creativity, the arts, history, philosophy, machine learning, cognitive science, superhero movies, and space westerns.",
+      "name" : "Nathan Lilly",
+      "company":"Comcast",
+      "country": "Philadelphia, PA",
+      "photo" : "/images/speakers/Nathan_Lilly.jpg",
+      "photoUrl" : "/images/speakers/Nathan_Lilly.jpg",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "http://nelilly.greententacles.com",
+            "name" : "Website"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "http://twitter.com/nelilly",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "UI Engineer",
+      "sessions":[
+        {
+          "id": "buildingAccessibility"
+        }
+      ]
+    },
+    {
+      "id":"george_mandis",
+      "featured": false,
+      "bio" : "George Mandis has been a freelance, full-stack web developer and consultant at SnapTortoise serving startups, small businesses, professional sports teams and entrepreneurs for over a decade. Recently he spent a year living as a digital nomad, inadvertently cheated while running a marathon in North Korea and ran a coding bootcamp out of Portland, Oregon. He writes frequently on technology, travel and other things at his website.",
+      "name" : "George Mandis",
+      "company":"SnapTortoise",
+      "country": "Portland, Oregon",
+      "photo" : "/images/speakers/George_Mandis.JPG",
+      "photoUrl" : "/images/speakers/George_Mandis.JPG",
+      "socials" : [
+        {
+          "icon" : "website",
+            "link" : "https://george.mand.is/",
+            "name" : "Website"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "http://twitter.com/georgemandis",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Full-stack web developer",
+      "sessions":[
+        {
+          "id": "javaScriptMidi"
+        }
+      ]
+    },
+    {
+      "id":"kassian_wren",
+      "featured": false,
+      "bio" : "Kas (they/them/their) is a developer 🥑 for CloudFlare. They’re also an author of two books about JS Robotics and a Twitch Affiliate streamer for code and hardware. They like serverless and all the discussions it brings, and playing with their 2 cats.",
+      "name" : "Mx. Kas Perch",
+      "company":"CloudFlare",
+      "country": "Austin, Texas",
+      "photo" : "/images/speakers/kassian_wren.jpeg",
+      "photoUrl" : "/images/speakers/kassian_wren.jpeg",
+      "socials" : [
+        {
+          "icon" : "github",
+            "link" : "https://github.com/nodebotanist",
+            "name" : "Github"
+        },
+        {
+          "icon" : "twitter",
+            "link" : "http://twitter.com/nodebotanist",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "title" : "Software developer",
+      "sessions":[
+        {
+          "id": "webAssembly"
+        }
+      ]
+    },
+    {
+      "id":"angel_rivera",
+      "featured": false,
+      "bio" : "Angel started his career as an US Air Force Space Systems Operations specialist in Cape Canaveral AF Station where he realized his passion for technology and software development. He has extensive experience in the private, public and military sectors and his technical experience includes military/space lift operations, technical writing, software development, SRE/DevOPs engineering. He also has a wealth of experience in defense and federal sectors such as contracting, information systems security and management.<br><br>You can usually find him speaking at or organizing local tech meetups and hackathons where he enjoys engaging with developers.<br><br>Angel’s passions are positive disruption, learning, teaching, mentoring but most of all inspiring all forms of technologists & building awesome tech communities.",
+      "name" : "Angel Rivera",
+      "country": "Philadelphia, PA",
+      "photo" : "/images/speakers/angel_rivera.png",
+      "photoUrl" : "/images/speakers/angel_rivera.png",
+      "socials" : [
+        {
+          "icon" : "twitter",
+            "link" : "http://twitter.com/punkdata",
+            "name" : "Twitter"
+        }
+    ],
+      "order" : 0,
+      "sessions":[
+        {
+          "id": "shinyObjectSyndrome"
+        }
+      ]
+    },
+    {
+      "id":"ali_abiba",
+      "featured": false,
+      "bio" : "Born in Chicago, raised in Dayton, I am a midwest boy. With both parents in education, learning was something I was raised to love. Moving to Dayton, I was fortunate enough to come across opportunities I may not have had. One of these opportunities was a position at the University of Dayton Research Institute (UDRI) as a junior developer. I was working at UDRI through college, which ended with my Associates in Applied Sciences at Sinclair College. I currently work as a Web Developer at Crown Equipment.<br><br>I am a problem solver. Developing software is one of my outlets for problem-solving. Mainly developing web applications, my preferred language is JavaScript (mainly Angular and Node). I am currently developing an app to help solve the reading problem. The other outlet is entrepreneurship, in which I have launched BluPrint (discoverbluprint.com (shameless plug)), to help solve the issues that young artists are facing today.<br><br>Technology is amazing. The capabilities it can bring are immense, and I want to be a part of bringing it to everyone. There are others like myself, who come from marginalized communities, that have a locked door, preventing them from raising themselves up. Tech is the key to that lock.",
+      "name" : "Ali Abiba",
+      "country": "Dayton, OH",
+      "company": "Crown Equipment",
+      "title":"Web Developer",
+      "photo" : "/images/speakers/ali_abiba.jpg",
+      "photoUrl" : "/images/speakers/ali_abiba.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+            "link" : "http://twitter.com/coffee_n_code",
+            "name" : "Twitter"
+        },
+        {
+          "icon" : "website",
+            "link" : "http://aliabiba.me/",
+            "name" : "Website"
+        }
+    ],
+      "order" : 0,
+      "sessions":[
+        {
+          "id": "rsjxFutureAsyncProgramming"
+        }
+      ]
+    },
+    {
+      "id":"fernando_medina_corey",
+      "featured": false,
+      "bio" : "Fernando Medina Corey currently spends his days making courses to help software engineers, architects, and technology professionals learn the technologies they need to succeed. He has worked with a variety of different technologies in order to develop web applications, manage data pipelines, and architect cloud infrastructure. In addition to his work, he founded and runs the Redmond Python meetup to help folks learn Python. Fernando has also taught and TAed classes on Python, the Command Line, and big data technologies for Python User Groups and Girl Develop It.",
+      "name" : "Fernando Medina Corey",
+      "country": "Seattle, WA",
+      "photo" : "/images/speakers/Fernando_Medina_Corey.jpg",
+      "photoUrl" : "/images/speakers/Fernando_Medina_Corey.jpg",
+      "socials" : [
+        {
+          "icon" : "twitter",
+            "link" : "http://twitter.com/fmc_sea",
+            "name" : "Twitter"
+        },
+        {
+          "icon" : "website",
+            "link" : "https://www.fernandomc.com/",
+            "name" : "Website"
+        }
+    ],
+      "order" : 0,
+      "sessions":[
+        {
+          "id": "serverlessDevelopmentPortfolioSevenDays"
+        }
+      ]
     }
-
   ],
+
   "sessions" : [
     {
       "id":"insufficientlyPersuasive",
@@ -620,6 +1011,126 @@
       "speakers" : [ "guillaume_marty" ],
       "tags" : ["javascript", "keynote", "soft skills", "communication", "career"],
       "title" : "Watch this (safe) space"
+    },
+    {
+      "id":"kickingBugs",
+      "complexity" : "All",
+      "description" : "How can we extract the most value from our front-end JavaScript errors, especially when users often don’t report them? We’ll learn about the evolution of the browser’s global error event handler, how to work around its limitations, and tools to make our JavaScript bugs a little less buggy.",
+      "speakers" : [ "liz_krane" ],
+      "tags" : ["javascript", "js", "front-end", "errors", "browsers", "reporting", "technical", "testing"],
+      "title" : "Kicking Bugs and Logging Names: The Challenges of JavaScript Error Reporting"
+    },
+    {
+      "id":"ohMyWeb",
+      "complexity" : "All",
+      "description" : "webUSB, webMIDI, webBluetooth, oh my web! In this session, we will explore what webUSB, webMIDI and webBluetooth API and how it safely expose device services to the web using JavaScript. This session is designed for web developers, makers who want to innovate and take their web apps to the next level.",
+      "speakers" : [ "Ron_Dagdag" ],
+      "tags" : ["webUSB", "webMIDI", "webBluetooth", "javascript"],
+      "title" : "Oh my web! Connecting to devices with your browser"
+    },
+    {
+      "id":"digitalAccessibility",
+      "complexity" : "All",
+      "description" : "Roughly 10% of people have a disability that impacts their use of the web, and lawsuits against inaccessible websites are becoming more common. How can we move beyond seeing accessibility as a legal requirement, and to championing inclusion for people with disabilities?",
+      "speakers" : [ "fen_slattery" ],
+      "tags" : ["front-end", "accessibility", "motivational"],
+      "title" : "Digital Accessibility Beyond Legal Compliance"
+    },
+    {
+      "id":"headlessArchitecture",
+      "complexity" : "Intermediate",
+      "description" : "Headless architecture is a popular solution for projects that require cutting-edge user experiences and next-level performance, but the learning curve can be discouraging. In this talk, we’ll give participants tactics, tools, strategies, and confidence to make their first headless project a success.",
+      "speakers" : [ "Christina_Deemer" ],
+      "tags" : ["front-end", "react", "tools", "motivational", "performance", "technical"],
+      "title" : "Going Headless without Losing Your Head: Strategies for Making Your First Decoupled Web App a Success"
+    },
+    {
+      "id":"apolloGraphQl",
+      "complexity" : "Intermediate",
+      "description" : "ApolloClient and ApolloServer empower developers with control over the data they work with. This workshop will dig into using both along with Prisma to build a full stack application. We’ll tackle REST, Database setup, and authentication with ease using this amazing ecosystem!",
+      "speakers" : [ "Domitrius_Clark" ],
+      "tags" : ["react", "apollo", "prisma", "mongodb"],
+      "title" : "Apollo: One Giant leap for Full Stack"
+    },
+    {
+      "id":"webVR",
+      "complexity" : "All",
+      "description" : "By the end of the session the attendees will be able to Make a simple Demo of basic WebVR application and get into WebVR experiences, they Will also learn about WebVR concepts, A-Frame Framework, A-Frame scenes & apps in depth.",
+      "speakers" : [ "Viral_Parmar" ],
+      "tags" : ["A-Frame", "WebVR", "Web Development", "mobile app"],
+      "title" : "WebVR : Beyond Imagination"
+    },
+    {
+      "id":"demystifyingRegularExpressions",
+      "complexity" : "All",
+      "description" : "A Regular Expression is a sequence of characters used as a search pattern on a set of a text—but trying to read that sequence might look like something out of Stranger Things. This workshop will break down how regular expressions can be used in everyday programming to make manipulating data easier.",
+      "speakers" : [ "Emily_Rautenberg" ],
+      "tags" : ["javascript", "regular expressions", "regex", "regexp", "data"],
+      "title" : "Demystifying Regular Expressions"
+    },
+    {
+      "id":"buildingAccessibility",
+      "complexity" : "Intermediate",
+      "description" : "Before you manually review your pages in an assistive technology device the International Association of Accessibility Professionals (IAAP) recommends that you use an automated testing tools to check your page. So you stop everything and review your page with a third-party website or browser extension… if you remember to. Why wait until you’re that far into development? Let’s build accessibility testing into your workflow, and prevent common errors from even being committed in the first place. I’ll give an overview of tools that exist, and share some code to help customize your own workflow. Familiarity with accessible development is not needed, but you should be familiar with HTML, JavaScript, Git, and NPM.",
+      "speakers" : [ "Nathan_Lilly" ],
+      "tags" : ["javascript", "workflow", "accessibility", "a11y", "axe", "axe-core", "testing", "linting", "react", "npm", "front-end", "back-end", "tools", "automation"],
+      "title" : "Building Accessibility Testing Into Your Workflow"
+    },
+    {
+      "id":"uiComponentTesting",
+      "complexity" : "Intermediate",
+      "description" : "As web applications continue to evolve into complex systems, developers today are building more and more UIs with component-based frameworks like React and Vue. As a result, UI testing today is easier than it has ever been before. But where do you start? If you feel like it’s a guessing game, this is the talk for you!'\n'In this talk, I will guide you with a practical approach to testing UI components with Jest and Storybook to improve your UI’s quality and solve your users’ needs.",
+      "speakers" : [ "Diego_Hernandez" ],
+      "tags" : ["javascript", "react", "vue", "testing", "jest", "storybook"],
+      "title" : "Strengthening your blocks: A practical guide to UI component testing"
+    },
+    {
+      "id":"javaScriptMidi",
+      "complexity" : "Intermediate",
+      "description" : "Did you know there’s a widely-supported browser API that allows you to interface with lots of hardware, including custom controllers you can build yourself? Meet the WebMIDI API! Natively supported by Chrome (and soon Firefox!) we’ll experiment with talking to custom hardware through the browser.",
+      "speakers" : [ "George_Mandis" ],
+      "tags" : ["javascript", "node.js", "apis"],
+      "title" : "JavaScript + MIDI + Microcontrollers Workshop"
+    },
+    {
+      "id":"webAssembly",
+      "complexity" : "Intermediate",
+      "description" : "80% of users are running browsers capable of running languages other than JS in their browser. It’s a new change, but an important one; we’re looking at a future where the web will be built not just on JS, but on C, Rust, GoLang and many more. Let’s talk about WebAssembly; why it came about, what it’s good at, and why it really doesn’t spell doom for JS but instead allows you to truly enhance web experiences by augmenting JS with the ability to use modules written in other languages that can perform tasks faster or more efficiently. We’ll go over what WebAssembly is, how to build a WebAssembly module, and why this may be a force that will shape not only how we think about JS, but the entire web experience.",
+      "speakers" : [ "kassian_wren" ],
+      "tags" : ["front-end", "back-end", "performance", "tools", "technical"],
+      "title" : "Web Assembly, the Future of JS, and a multi-language web"
+    },
+    {
+      "id":"shinyObjectSyndrome",
+      "complexity" : "All",
+      "description" : "Technology is fast moving, and devops tools pop up like wildfire. Teams are desperate to solve their problems & often make implementation decisions based on word of mouth, “kick the tires” syndrome or superficial evaluations. In some cases we justify our stack decisions based on project/sprint deadlines, the product’s marketing materials, occasionally, the README files. Really scary stuff!<br><br>In this talk Angel will explore how & why teams are easily lulled into believing that shiny objects will independently solve their stack deficiencies. He will discuss his experiences with “Shiny Object” frameworks/tools and the true impact they had in actually solving problems. He will also discuss some strategies that can help teams make better choices when properly vetting potential solutions based on his experience in the federal government evaluating vendor proposals and homegrown solutions.",
+      "speakers" : [ "angel_rivera" ],
+      "tags" : ["devOps", "work life balance", "frameworks", "stacks", "apps", "decision making", "life choices"],
+      "title" : "Apps, Stacks, and Frameworks: Avoiding “Shiny Object” Syndrome"
+    },
+    {
+      "id":"rsjxFutureAsyncProgramming",
+      "complexity" : "Intermediate",
+      "description" : "Asynchronous programming is a headache for new developers. From callback hell to promise prison. Its easy to get discouraged.<br><br>However, all hope is not lost. RxJS is here to give us a lean and functional way to develop. From observables to pipes, this talk guides the way to async nirvana.<br><br><strong>Web Development is evolving.</strong><br><br>The demand for reactive features in applications is growing rapidly. The issue is, many are stuck in the traditional paradigms of development, and web technologies are playing catch up.<br><br>Vanilla Javascript is not equipped to provide graceful solutions to asynchronous programming. Callbacks are a potential solution, but as many know, this leads developers down the dark road to callback hell.<br><br>Promises are another component provided by Vanilla Javascript for async solutions. But promises are clunky and operating on the data requires dozens of lines of unnecessary and unreadable code.<br><br><strong>ReactiveX provides a way out.</strong><br><br>The ReactiveX is a multi-language project, that provides a functional approach to reactive programming. The JavaScript version, RxJS, is quickly becoming the defacto way to handle asynchronous events and streams in the web.<br><br>From Observables to Subjects, Multicasting to Error handling, it can be tricky to navigate. I’m aiming to introduce RxJS and reactive programming while helping the audience decide if it’s the best approach to their challenges.",
+      "speakers" : [ "ali_abiba" ],
+      "tags" : ["javascript", "rsjx", "web development", "asynchronous"],
+      "title" : "RxJS, the Future of Async Programming"
+    },
+    {
+      "id":"serverlessDevelopmentPortfolioSevenDays",
+      "complexity" : "All",
+      "description" : "You know that just having a resume or putting in good work during work hours isn’t enough to get ahead these days. You also know you need to work on your own development projects to showcase your skills, but maybe you’re not sure where to start. This talk will give you bite-size steps that you can take to start and finish your own development portfolio projects within a week with completely serverless technologies. Specifically, you’ll learn:<ul><li>How to set up your development environment to use the Serverless Framework and AWS</li><li>How to find starter templates, example projects, and free tutorials for serverless projects</li><li>How to come up with an idea for a personal development project</li><li>How to actually build your project</li><li>How and where to show off your new project<li></ul>By the end of this talk, you should feel capable of creating a serverless development portfolio that showcases your abilities as a developer and allows you to continue to grow your portfolio and your skillset.",
+      "speakers" : [ "fernando_medina_corey" ],
+      "tags" : ["serverless", "aws", "portfolio", "javascript", "back-end", "tools"],
+      "title" : "Making a Serverless Development Portfolio - In Seven Days or Less"
+    },
+    {
+      "id":"lerna",
+      "complexity" : "All",
+      "description" : "Lerna is a tool for managing JavaScript projects with multiple packages. It allows you to create any number of packages inside the same repo and publish them to public or private package managers. You can use to manage component libraries, validators for your forms, and basically everything that needs to be shared across projects, including the projects themselves in a way that is easier for everyone to contribute, and keep all your dependencies in a single spot. CI and automation can take care of publishing all the projects, deploying them to the correct buckets, and coordinate the dependencies between them. On this talk I’ll share our journey towards mono-repo with advice to get there incrementally and the opportunity to see the endgoal with a project that is fully managed with lerna, with everything the devs need in a single folder.",
+      "speakers" : [ "david_silva" ],
+      "tags" : ["javascript", "lerna", "mono-repo", "frontend", "babel"],
+      "title" : "Micro front-ends, mono-repo and component libraries with lerna"
     }
   ]
 }
