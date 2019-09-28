@@ -247,6 +247,14 @@
       "speakers" : [ "fernando_medina_corey" ],
       "tags" : ["serverless", "aws", "portfolio", "javascript", "back-end", "tools"],
       "title" : "Making a Serverless Development Portfolio - In Seven Days or Less"
+    },
+    {
+      "id":"lerna",
+      "complexity" : "All",
+      "description" : "Lerna is a tool for managing JavaScript projects with multiple packages. It allows you to create any number of packages inside the same repo and publish them to public or private package managers. You can use to manage component libraries, validators for your forms, and basically everything that needs to be shared across projects, including the projects themselves in a way that is easier for everyone to contribute, and keep all your dependencies in a single spot. CI and automation can take care of publishing all the projects, deploying them to the correct buckets, and coordinate the dependencies between them. On this talk I’ll share our journey towards mono-repo with advice to get there incrementally and the opportunity to see the endgoal with a project that is fully managed with lerna, with everything the devs need in a single folder.",
+      "speakers" : [ "david_silva" ],
+      "tags" : ["javascript", "lerna", "mono-repo", "frontend", "babel"],
+      "title" : "Micro front-ends, mono-repo and component libraries with lerna"
     }
   ]
 }
