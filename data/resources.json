@@ -4,7 +4,7 @@
   "image": "images/social-share.jpg",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
   "dates": "19 de Outubro",
-  "partnershipProposition": "https://bit.ly/dfua17-partners",
+  "partnershipProposition": "https://bit.ly/patrocinio-devfest-sul-19",
   "share": "Share",
   "followOur": "Follow our",
   "followUs": "Follow us",
@@ -151,15 +151,15 @@
     "save": "Save ${discount}% today"
   },
   "partnersBlock": {
-    "title": "Partners",
-    "button": "Become a partner",
+    "title": "Parceiros",
+    "button": "Seja um patrocinador",
     "form": {
-      "title": "Become a partner!",
-      "submitLabel": "Submit",
-      "fullName": "Full Name",
-      "companyName": "Company Name"
+      "title": "Se torne um patrocinador e tenha sua marca em um dos maiores eventos de tecnologia do Sul do Brasil.",
+      "submitLabel": "Enviar",
+      "fullName": "Nome Completo",
+      "companyName": "Nome da Empresa"
     },
-    "toast": "We will contact you soon!"
+    "toast": "Iremos te contactar em breve!"
   },
   "featuredVideos": {
     "title": "DFUA'16 featured videos",
