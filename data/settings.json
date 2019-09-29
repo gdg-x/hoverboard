@@ -27,17 +27,17 @@
     {
       "route": "speakers",
       "permalink": "/speakers/",
-      "label": "Speakers"
+      "label": "Palestrantes"
     },
     {
       "route": "schedule",
       "permalink": "/schedule/",
-      "label": "Schedule"
+      "label": "Programação"
     },
     {
       "route": "team",
       "permalink": "/team/",
-      "label": "Team"
+      "label": "Time"
     },
     {
       "route": "blog",
