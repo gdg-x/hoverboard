@@ -111,16 +111,16 @@
   "subscribeNote": "No spam, only the latest news and updates!",
   "codeOfConduct": "Code of Conduct",
   "aboutBlock": {
-    "title": "What you need to know, before you ask.",
+    "title": "Conheça o DevFest Sul 2019",
     "callToAction": {
       "featuredSessions": {
-        "description": "GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases.",
-        "label": "Explore featured session",
-        "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "description": "O DevFest Sul 2019 é o maior evento de tecnologias Google da região Sul do Brasil. Ano passado tivemos o DevFest Floripa 2018 que foi um sucesso. Esse ano o evento cresceu ainda mais, junto com a nossa comunidade! Para isso, o DevFest Sul está sendo organizado por vários capítulos do programa Google Developers Community, que são GDG Floripa, GDG Porto Alegre, GDG Pelotas e GDG Cascavel.",
+        "label": "DevFest Floripa 2018 no Medium",
+        "link": "#"
       },
       "howItWas": {
-        "description": "Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
-        "label": "See how it was in 2016",
+        "description": "O time do DevFest Sul está preparando um evento sensacional com presença de Googler, GDEs e várias referências nacionais da tecnologia!",
+        "label": "DevFest Floripa 2018 no YouTube",
         "youtubeId": "x-VnkRwSJOI"
       }
     },
@@ -135,11 +135,11 @@
       },
       "sessions": {
         "label": "Sessões",
-        "number": "40"
+        "number": "40+"
       },
       "tracks": {
         "label": "Trilhas",
-        "number": "4"
+        "number": "4+"
       }
     }
   },
