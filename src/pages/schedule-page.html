@@ -84,17 +84,18 @@
     >
       <div class="hero-title highlight-font">{$ heroSettings.schedule.title $}</div>
       <p class="hero-description">{$ heroSettings.schedule.description $}</p>
-      <sticky-element slot="bottom" active="[[active]]">
+      <!-- <sticky-element slot="bottom" active="[[active]]">
         <header-bottom-toolbar></header-bottom-toolbar>
-      </sticky-element>
+      </sticky-element> -->
+
     </hero-block>
 
     <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
-    <filter-menu
+    <!-- <filter-menu
       filters="[[_filters]]"
       selected="[[_selectedFilters]]"
-    ></filter-menu>
+    ></filter-menu> -->
 
     <div class="container">
       <content-loader
@@ -112,13 +113,14 @@
         items-count="{$ contentLoaders.schedule.itemsCount $}"
         hidden$="[[contentLoaderVisibility]]" layout>
       </content-loader>
+      <h1>Coming Soon.</h1>
 
       <iron-pages
         attr-for-selected="name"
         selected="[[subRoute]]"
         selected-attribute="active"
       >
-        <template is="dom-repeat" items="[[schedule]]" as="day">
+        <!-- <template is="dom-repeat" items="[[schedule]]" as="day">
           <schedule-day
             name$="[[day.date]]"
             day="[[day]]"
@@ -137,7 +139,7 @@
           selected-filters="[[_selectedFilters]]"
           viewport="[[viewport]]"
           query-params="[[queryParams]]"
-        ></my-schedule>
+        ></my-schedule> -->
       </iron-pages>
     </div>
 
