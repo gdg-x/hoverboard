@@ -47,14 +47,14 @@
     }
   },
   "gallery" : [
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4185.jpg?alt=media&token=ff3fd161-3d68-401a-90cd-74b90bd2a4d8",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4411.jpg?alt=media&token=7fda0d66-a631-4816-bd85-b93ef49ed3a6",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4577.jpg?alt=media&token=f14205b5-be75-447c-8bca-73a15ca2df41",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4525.jpg?alt=media&token=0428f0e3-fda0-4119-8249-69f98e936ce5",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4611.jpg?alt=media&token=b080143c-161c-4d9f-96f3-ebb6bdcdfd95",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4720.jpg?alt=media&token=75de0c2d-8bd9-48bb-9117-1349c9bc381f",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4646.jpg?alt=media&token=eafb0320-6f21-47bc-8ba4-8eec708f2076",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_5294.jpg?alt=media&token=72ab5141-d21b-4e71-a58b-faa2b00d1d02"
+    "https://firebasestorage.googleapis.com/v0/b/devfestsul2019.appspot.com/o/0_x0hKioZmpxYBAydC.jpeg?alt=media&token=72c8cae8-8051-4c4c-96e6-760429caf0b9",
+    "https://firebasestorage.googleapis.com/v0/b/devfestsul2019.appspot.com/o/1_0SFwSHO-ykHUmr2DWVIMcw.jpeg?alt=media&token=3416a664-b66b-4cff-ac93-3c9d20b88f05",
+    "https://firebasestorage.googleapis.com/v0/b/devfestsul2019.appspot.com/o/1_6wy_GP8gd6KhL5YG04HX7Q.jpeg?alt=media&token=4fe5721c-2fc8-4067-8df9-2cd027f54999",
+    "https://firebasestorage.googleapis.com/v0/b/devfestsul2019.appspot.com/o/1_f9aJBtDu0IQ6T7QSWIKbYQ.jpeg?alt=media&token=91858c58-5b66-4452-8392-c2678c7a8fab",
+    "https://firebasestorage.googleapis.com/v0/b/devfestsul2019.appspot.com/o/1_grj-iy27z7S_Hb8YHOXOjQ.jpeg?alt=media&token=63b24631-dbe7-477f-bf86-a933aa69b754",
+    "https://firebasestorage.googleapis.com/v0/b/devfestsul2019.appspot.com/o/1_JDyNPI56d4tVCEaa3h-rtA.jpeg?alt=media&token=841ff4a4-d56f-4eb2-938d-e7c4fa3a1bbf",
+    "https://firebasestorage.googleapis.com/v0/b/devfestsul2019.appspot.com/o/1_JDyNPI56d4tVCEaa3h-rtA.jpeg?alt=media&token=841ff4a4-d56f-4eb2-938d-e7c4fa3a1bbf",
+    "https://firebasestorage.googleapis.com/v0/b/devfestsul2019.appspot.com/o/IMG_20181208_181641413_HDR.jpg?alt=media&token=563c4517-09f5-46c2-a05c-30880ecd9021"
   ],
   "notifications" : {
     "config" : {
@@ -69,72 +69,34 @@
   "partners" : [ {
     "logos" : [ {
       "order" : 0,
-      "logoUrl" : "../images/logos/gdg-lviv.svg",
-      "name" : "GDG Lviv",
-      "url" : "https://plus.google.com/102444623953913144164"
-    } ],
+      "logoUrl" : "../images/logos/adbr.png",
+      "name" : "Android Dev BR",
+      "url" : "https://medium.com/android-dev-br"
+    }, {
+      "order" : 1,
+      "logoUrl" : "../images/logos/technovation.png",
+      "name" : "Technovation Florianópolis",
+      "url" : "https://www.facebook.com/TechnovationFloripa/"
+    }],
     "order" : 0,
-    "title" : "Template Creator"
+    "title" : "Apoio"
   }, {
     "logos" : [ {
       "order" : 0,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
+      "logoUrl" : "../images/logos/involves.png",
+      "name" : "Involves",
+      "url" : "https://www.involves.com.br"
     }, {
       "order" : 1,
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
+      "logoUrl" : "../images/logos/arctouch.png",
+      "name" : "ArcTouch",
+      "url" : "https://www.arctouch.com"
     }, {
       "order" : 2,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "order" : 3,
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "order" : 4,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "order" : 5,
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "order" : 6,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "order" : 7,
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "order" : 8,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "order" : 9,
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "order" : 10,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
+      "logoUrl" : "../images/logos/dextra.png",
+      "name" : "Dextra",
+      "url" : "https://www.dextra.com.br"
     } ],
-    "order" : 1,
-    "title" : "General Partner"
-  } ],
   "schedule" : {
     "2016-09-09" : {
       "dateReadable" : "September 9",

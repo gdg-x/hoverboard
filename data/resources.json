@@ -4,7 +4,7 @@
   "image": "images/social-share.jpg",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
   "dates": "19 de Outubro",
-  "partnershipProposition": "https://bit.ly/dfua17-partners",
+  "partnershipProposition": "https://bit.ly/patrocinio-devfest-sul-19",
   "share": "Share",
   "followOur": "Follow our",
   "followUs": "Follow us",
@@ -144,22 +144,22 @@
     }
   },
   "ticketsBlock": {
-    "title": "Tickets",
-    "ticketsDetails": "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
-    "soldOut": "You missed it!",
-    "notAvailableYet": "Not available yet",
-    "save": "Save ${discount}% today"
+    "title": "Ingressos",
+    "ticketsDetails": "Ingressos dão acesso à todas as sessões do evento, coffee breaks e happy hour.",
+    "soldOut": "Ingressos esgotados!",
+    "notAvailableYet": "Ainda não disponível",
+    "save": "Economize ${discount}% hoje"
   },
   "partnersBlock": {
-    "title": "Partners",
-    "button": "Become a partner",
+    "title": "Parceiros",
+    "button": "Seja um patrocinador",
     "form": {
-      "title": "Become a partner!",
-      "submitLabel": "Submit",
-      "fullName": "Full Name",
-      "companyName": "Company Name"
+      "title": "Se torne um patrocinador e tenha sua marca em um dos maiores eventos de tecnologia do Sul do Brasil.",
+      "submitLabel": "Enviar",
+      "fullName": "Nome Completo",
+      "companyName": "Nome da Empresa"
     },
-    "toast": "We will contact you soon!"
+    "toast": "Iremos te contactar em breve!"
   },
   "featuredVideos": {
     "title": "DFUA'16 featured videos",
@@ -199,11 +199,11 @@
     }
   },
   "galleryBlock": {
-    "title": "#dfua16 highlights",
-    "description": "This year's festival built lots of excitement. Check out photos from featured talks, hands-on learning sessions, and after-hours fun.",
+    "title": "destaques do #DFF18",
+    "description": "O festival deste ano está demais! Confira as fotos das talks, open spaces e happy hour que rolou no ano passado.",
     "callToAction": {
-      "label": "See all photos",
-      "link": "https://goo.gl/photos/H8s3CtPexCzkLqSt9"
+      "label": "Ver todas as fotos",
+      "link": "https://photos.app.goo.gl/nQTJNb5usHSXxeUC8"
     }
   },
   "mapBlock": {
@@ -211,20 +211,20 @@
   },
   "subscribeBlock": {
     "callToAction": {
-      "description": "Get notified about the important conference updates",
-      "label": "Subscribe"
+      "description": "Fique por dentro das novidades do evento",
+      "label": "Inscreva-se"
     },
-    "yourEmail": "Your email",
-    "emailAddress": "Email Address",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "formTitle": "Get the latest updates, insights and news about GDG DevFest Ukraine sent to your inbox.",
-    "emailRequired": "Please enter a valid email address.",
-    "subscribe": "Subscribe",
-    "subscribed": "Subscribed",
-    "close": "Close",
-    "generalError": "Some error has occured. Please, try again later.",
-    "toast": "Successfully subscribed!"
+    "yourEmail": "Seu e-mail",
+    "emailAddress": "E-mail",
+    "firstName": "Nome",
+    "lastName": "Sobrenome",
+    "formTitle": "Tenha as últimas novidades, destaques e notícias sobre o GDG DevFest Sul 2019 direto no seu e-mail.",
+    "emailRequired": "Por favor, informe um e-mail válido.",
+    "subscribe": "Registrar",
+    "subscribed": "Inscrito",
+    "close": "Fechar",
+    "generalError": "Algum erro ocorreu. Por favor, tente novamente mais tarde.",
+    "toast": "Inscrito com sucesso!"
   },
   "team": {
     "description": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT."
