@@ -15,7 +15,7 @@
     "locale": "en-US"
   },
   "hashtag": "LibertyJS19",
-  "disabledSchedule": true,
+  "disabledSchedule": false,
   "showSessionShortAbstract": true,
   "navigation": [
     {
