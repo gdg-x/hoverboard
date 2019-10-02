@@ -69,72 +69,34 @@
   "partners" : [ {
     "logos" : [ {
       "order" : 0,
-      "logoUrl" : "../images/logos/gdg-lviv.svg",
-      "name" : "GDG Lviv",
-      "url" : "https://plus.google.com/102444623953913144164"
-    } ],
+      "logoUrl" : "../images/logos/adbr.png",
+      "name" : "Android Dev BR",
+      "url" : "https://medium.com/android-dev-br"
+    }, {
+      "order" : 1,
+      "logoUrl" : "../images/logos/technovation.png",
+      "name" : "Technovation Florianópolis",
+      "url" : "https://www.facebook.com/TechnovationFloripa/"
+    }],
     "order" : 0,
-    "title" : "Template Creator"
+    "title" : "Apoio"
   }, {
     "logos" : [ {
       "order" : 0,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
+      "logoUrl" : "../images/logos/involves.png",
+      "name" : "Involves",
+      "url" : "https://www.involves.com.br"
     }, {
       "order" : 1,
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
+      "logoUrl" : "../images/logos/arctouch.png",
+      "name" : "ArcTouch",
+      "url" : "https://www.arctouch.com"
     }, {
       "order" : 2,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "order" : 3,
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "order" : 4,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "order" : 5,
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "order" : 6,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "order" : 7,
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "order" : 8,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
-    }, {
-      "order" : 9,
-      "logoUrl" : "../images/logos/gdg-x.svg",
-      "name" : "GDG[x]",
-      "url" : "https://github.com/gdg-x"
-    }, {
-      "order" : 10,
-      "logoUrl" : "../images/logos/google.svg",
-      "name" : "Google",
-      "url" : "https://www.google.com.ua/intl/en/about/"
+      "logoUrl" : "../images/logos/dextra.png",
+      "name" : "Dextra",
+      "url" : "https://www.dextra.com.br"
     } ],
-    "order" : 1,
-    "title" : "General Partner"
-  } ],
   "schedule" : {
     "2016-09-09" : {
       "dateReadable" : "September 9",
