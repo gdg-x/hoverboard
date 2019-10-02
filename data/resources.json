@@ -11,7 +11,7 @@
   "emailUs": "Email us",
   "partnershipResources": "Partnership Resources",
   "eventResources": "Event Resources",
-  "buyTicket": "Buy ticket",
+  "buyTicket": "Comprar",
   "signIn": "Sign in",
   "signOut": "Sign out",
   "viewHighlights": "DevFest Floripa 2018",
@@ -144,11 +144,11 @@
     }
   },
   "ticketsBlock": {
-    "title": "Tickets",
-    "ticketsDetails": "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
-    "soldOut": "You missed it!",
-    "notAvailableYet": "Not available yet",
-    "save": "Save ${discount}% today"
+    "title": "Ingressos",
+    "ticketsDetails": "Ingressos dão acesso à todas as sessões do evento, coffee breaks e happy hour.",
+    "soldOut": "Ingressos esgotados!",
+    "notAvailableYet": "Ainda não disponível",
+    "save": "Economize ${discount}% hoje"
   },
   "partnersBlock": {
     "title": "Parceiros",
