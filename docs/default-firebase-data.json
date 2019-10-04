@@ -81,259 +81,259 @@
     }
   ],
   "schedule" : {
-    "2016-09-09" : {
-      "dateReadable" : "September 9",
-      "timeslots" : [ {
-        "endTime" : "10:00",
-        "sessions" : [ {
-          "items" : [ 132 ]
-        } ],
-        "startTime" : "09:00"
-      }, {
-        "endTime" : "10:15",
-        "sessions" : [ {
-          "items" : [ 136 ]
-        } ],
-        "startTime" : "10:00"
-      }, {
-        "endTime" : "11:00",
-        "sessions" : [ {
-          "items" : [ 139 ]
-        } ],
-        "startTime" : "10:15"
-      }, {
-        "endTime" : "11:40",
-        "sessions" : [ {
-          "items" : [ 103, 112 ]
-        }, {
-          "items" : [ 120 ]
-        }, {
-          "extend" : 3,
-          "items" : [ 109 ]
-        } ],
-        "startTime" : "11:00"
-      }, {
-        "endTime" : "12:30",
-        "sessions" : [ {
-          "items" : [ 129 ]
-        }, {
-          "items" : [ 116 ]
-        } ],
-        "startTime" : "11:50"
-      }, {
-        "endTime" : "14:00",
-        "sessions" : [ {
-          "items" : [ 133 ]
-        } ],
-        "startTime" : "12:30"
-      }, {
-        "endTime" : "14:40",
-        "sessions" : [ {
-          "items" : [ 101 ]
-        }, {
-          "items" : [ 118 ]
-        }, {
-          "extend" : 2,
-          "items" : [ 107 ]
-        } ],
-        "startTime" : "14:00"
-      }, {
-        "endTime" : "15:30",
-        "sessions" : [ {
-          "items" : [ 140 ]
-        }, {
-          "items" : [ 126 ]
-        } ],
-        "startTime" : "14:50"
-      }, {
-        "endTime" : "16:00",
-        "sessions" : [ {
-          "items" : [ 134 ]
-        } ],
-        "startTime" : "15:30"
-      }, {
-        "endTime" : "16:40",
-        "sessions" : [ {
-          "items" : [ 105 ]
-        }, {
-          "items" : [ 127 ]
-        }, {
-          "extend" : 3,
-          "items" : [ 119 ]
-        } ],
-        "startTime" : "16:00"
-      }, {
-        "endTime" : "17:30",
-        "sessions" : [ {
-          "items" : [ 112 ]
-        }, {
-          "items" : [ 111 ]
-        } ],
-        "startTime" : "16:50"
-      }, {
-        "endTime" : "18:20",
-        "sessions" : [ {
-          "items" : [ 106 ]
-        }, {
-          "items" : [ 125 ]
-        } ],
-        "startTime" : "17:40"
-      }, {
-        "endTime" : "22:30",
-        "sessions" : [ {
-          "items" : [ 137 ]
-        } ],
-        "startTime" : "18:30"
-      } ],
-      "tracks" : [ {
-        "title" : "Expo hall"
-      }, {
-        "title" : "Conference hall"
-      }, {
-        "title" : "Workshops hall"
-      } ]
-    },
-    "2016-09-10" : {
-      "dateReadable" : "September 10",
-      "timeslots" : [ {
-        "endTime" : "10:10",
-        "sessions" : [ {
-          "items" : [ 135 ]
-        } ],
-        "startTime" : "09:30"
-      }, {
-        "endTime" : "10:50",
-        "sessions" : [ {
-          "items" : [ 114 ]
-        }, {
-          "items" : [ 117 ]
-        }, {
-          "items" : [ 121 ]
-        } ],
-        "startTime" : "10:10"
-      }, {
-        "endTime" : "11:40",
-        "sessions" : [ {
-          "items" : [ 122 ]
-        }, {
-          "items" : [ 113 ]
-        }, {
-          "extend" : 2,
-          "items" : [ 121 ]
-        } ],
-        "startTime" : "11:00"
-      }, {
-        "endTime" : "12:30",
-        "sessions" : [ {
-          "items" : [ 104 ]
-        }, {
-          "items" : [ 124 ]
-        } ],
-        "startTime" : "11:50"
-      }, {
-        "endTime" : "14:00",
-        "sessions" : [ {
-          "items" : [ 133 ]
-        } ],
-        "startTime" : "12:30"
-      }, {
-        "endTime" : "14:40",
-        "sessions" : [ {
-          "items" : [ 108 ]
-        }, {
-          "items" : [ 128 ]
-        }, {
-          "extend" : 2,
-          "items" : [ 102 ]
-        } ],
-        "startTime" : "14:00"
-      }, {
-        "endTime" : "15:30",
-        "sessions" : [ {
-          "items" : [ 110 ]
-        }, {
-          "items" : [ 123 ]
-        } ],
-        "startTime" : "14:50"
-      }, {
-        "endTime" : "16:00",
-        "sessions" : [ {
-          "items" : [ 134 ]
-        } ],
-        "startTime" : "15:30"
-      }, {
-        "endTime" : "16:40",
-        "sessions" : [ {
-          "items" : [ 131 ]
-        }, {
-          "items" : [ 140 ]
-        }, {
-          "extend" : 2,
-          "items" : [ 130 ]
-        } ],
-        "startTime" : "16:00"
-      }, {
-        "endTime" : "17:30",
-        "sessions" : [ {
-          "items" : [ 115 ]
-        }, {
-          "items" : [ 140 ]
-        } ],
-        "startTime" : "16:50"
-      } ],
-      "tracks" : [ {
-        "title" : "Expo hall"
-      }, {
-        "title" : "Conference hall"
-      }, {
-        "title" : "Workshops hall"
-      } ]
-    }
   },
   "sessions" : {
+    "101" : {
+      "complexity" : "Beginner",
+      "description" : "",
+      "language" : "English",
+      "presentation" : "",
+      "speakers" : [ "thechet" ],
+      "tags" : [ "Android" ],
+      "title" : "Evolution of Android"
+    },
+
+    "102": {
+      "description": "AutoML has been is product that has been helping many people create custom machine learning models without having any code experience. However it was always hard to use these models in mobile apps. At Google I/O 19 the firebase team announced support for AutoML in firebase, making it easier for mobile developers to access these custom models in their apps. This talk will cover what AutoML is and how we can use these custom machine learning model in our android app through firebase.",
+      "language": "English",
+      "speakers": [
+        "jp"
+      ],
+      "tags": [
+        "cloud"
+      ],
+      "title": "Creating Custom models with AutoML and MLKit"
+    },
+
+    "103": {
+      "description": "Knative is a developer friendly project build on top of kubernetes and istio that allows developers to deploy code directly to the cluster, run and revision API’s even with zero replicas scaling on demand. This presentation will discuss and demonstrate the features of Knative and Cloudrun.",
+      "speakers": [
+        "randy"
+      ],
+      "tags": [
+        "cloud"
+      ],
+      "title": "Going Serverless with Knative and Cloudrun"
+    },
+
+    "104": {
+      "description": "Natalie will discuss a broad range of aspects of Go application security by taking on writing secure code, dependency management and Docker images and containers security. ",
+      "language": "English",
+      "speakers": [
+        "nat"
+      ],
+      "tags": [
+        "cloud"
+      ],
+      "title": "Going secure with Go"
+    }
   },
   "speakers" : {
+    "thechet" : {
+      "bio" : "As the longtime manager of the Android UI Toolkit team, Chet Haase made himself quite a name in the Android community. His talks are always highly anticipated and lots of fun to listen to. We are super excited to have Chet join us for keynoting DevFest  Hamburg about the Evolution of Android.",
+      "company" : "Google",
+      "companyLogo" : "/images/logos/google.svg",
+      "companyLogoUrl" : "https://hamburg.devfest.de/images/logos/google.svg",
+      "country" : "USA",
+      "featured" : true,
+      "name" : "Chet Haase",
+      "photoUrl" : "https://miro.medium.com/fit/c/256/256/1*5pR0GFT8Cosn_zGIdRfc0Q.jpeg",
+      "pronouns": "he/him",
+      "shortBio" : "As the longtime manager of the Android UI Toolkit team, Chet Haase made himself quite a name in the Android community. His talks are always highly anticipat...",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "https://twitter.com/chethaase",
+          "name" : "Twitter"
+        }
+      ],
+      "order" : 0,
+      "title" : "Chief Developer Advocate"
+    },
+
+    "nat" : {
+      "bio" : "Natalie Pistunovich is a learner, a Google Developer Expert (GDE) for Go, a public speaker and a sailor. As an Engineering Manager in Fraugster, Berlin, she is leading the observability, and additionally organizing GopherCon Europe. Prior to that she was a Backend Developer at GrayMeta, Los Angeles, a co-founder at Connta, Nairobi, a Backend Developer at adjust, Berlin, and a Silicon Integration Engineer at Intel, Haifa. She graduated with a B.Sc. in Computer and Software Engineering from the Technion in Israel. In her free time, Natalie is co-leading the Berlin chapters of the Go User Group and Women Techmakers.",
+      "country" : "Germany",
+      "featured" : true,
+      "name" : "Natalie Pistunovich",
+      "photoUrl" : "https://firebasestorage.googleapis.com/v0/b/gdg-hamburg-29729.appspot.com/o/natalie_pistunovich_berlin.jpg?alt=media&token=170f122f-bd49-4b10-b269-63013a64be17",
+      "pronouns": "she/her",
+      "shortBio" : "Natalie Pistunovich is a learner, a Google Developer Expert (GDE) for Go, a public speaker and a sailor. As an Engineering Manager in Fraugster, Berlin, she is leadin...",
+      "socials" : [
+        {
+          "icon" : "twitter",
+          "link" : "https://twitter.com/nataliepis",
+          "name" : "Twitter"
+        }
+      ],
+      "order" : 1,
+      "title" : "Google Developer Expert / Engineering Manager"
+    },
+
+    "pj": {
+      "bio": "P-J, who is based in Johannesburg, South Africa, is the Mobile Engineering Lead at DVT where he develops iOS and Android app and teaches these technologies to graduates. Everyone knows that he enjoys trying new and different technologies and being an explorer in the technology world. Last project was he worked on was a banking app for one of South Africa's biggest banks and leads internal projects for DVT. He also maintains some open source projects, apps, is a co-organiser for GDG Johannesburg, speaks at meetups and conferences and blogs about development technologies on Medium.",
+      "country": "South Africa",
+      "featured": true,
+      "id": "pj",
+      "name": "Peter John Welcome",
+      "order": 2,
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/gdg-hamburg-29729.appspot.com/o/Peter_John_Welcome.jpg?alt=media&token=f97a8175-0e54-4f79-bfd4-1cb4f6192db7",
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/pjapplez",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://www.linkedin.com/in/peter-john-welcome-33b74185/",
+          "name": "LinkedIN"
+        },
+        {
+          "icon": "website",
+          "link": "https://medium.com/@pjwelcome",
+          "name": "Blog"
+        },
+        {
+          "icon": "website",
+          "link": "https://www.dvt.co.za/",
+          "name": "website"
+        }
+      ]
+    },
+
+    "randy": {
+      "bio": "Randy is a Google Developer Expert for Cloud and also Organizer of the GDG Düsseldorf. With a professional experience of more 20 years in software development he is focused today on building microservices applications on top of kubernetes.",
+      "country": "Germany",
+      "featured": true,
+      "name": "Randy Gupta",
+      "order": 3,
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/gdg-hamburg-29729.appspot.com/o/randy.jpg?alt=media&token=bc936236-6a13-468f-bbbf-aae9bb3151c2",
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/randygupta",
+          "name": "Twitter"
+        }
+      ],
+      "title": "Google Developer Expert / Certified Cloud Architect"
+    },
+
+    "pascal": {
+      "bio": "Pascal is Google Developer Expert for Flutter with a strong Android background. He recently made the transition becoming a full-time Flutter developer delivering stunning user interfaces to audiences on all platforms. In his spare time, Pascal publishes open-source libraries talks on conferences and shoots photos for his cats Instagram account.",
+      "country": "Germany",
+      "featured": true,
+      "name": "Pascal Welsch",
+      "order": 4,
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/gdg-hamburg-29729.appspot.com/o/Pascal_Welsch.jpg?alt=media&token=cea860bb-64bf-468e-ad33-64187488c69c",
+      "pronouns": "he/him",
+      "shortBio" : "Pascal is Google Developer Expert for Flutter with a strong Android background. He recently made the transition becoming a full-time Flutter developer delivering stun...",
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/passsy",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://pascal.page/",
+          "name": "Website"
+        }
+      ],
+      "title": "Google Developer Expert, Freelancer"
+    }
   },
   "team" : [ {
-    "members" : [ ],
-    "title" : "Core Team"
-  }, {
-    "members" : [  ],
-    "title" : "Program Committee"
-  } ],
+    "members" : [
+      {
+        "name": "André Tietz",
+        "socials": [
+          {
+            "icon": "twitter",
+            "link": "https://twitter.com/antietz",
+            "name": "Twitter"
+          },
+          {
+            "icon": "github",
+            "link": "https://github.com/andretietz",
+            "name": "GitHub"
+          }
+        ]
+      },
+      {
+        "name": "Guus Van Welden",
+        "photoUrl": "https://firebasestorage.googleapis.com/v0/b/gdg-hamburg-29729.appspot.com/o/guus.jpeg?alt=media&token=169b0ac4-5051-4538-a0a4-7c3b628e6806",
+        "socials": [
+          {
+            "icon": "twitter",
+            "link": "https://twitter.com/guusvw91",
+            "name": "Twitter"
+          }
+        ]
+      },
+      {
+        "name": "Inga Breuer",
+        "socials": [
+          {
+            "icon": "twitter",
+            "link": "https://twitter.com/ingabreuer22",
+            "name": "Twitter"
+          }
+        ]
+      },
+      {
+        "name": "Jossi Wolf",
+        "photoUrl": "https://firebasestorage.googleapis.com/v0/b/gdg-hamburg-29729.appspot.com/o/jossi.png?alt=media&token=4848fd93-4986-4327-a806-5047e5753d52",
+        "socials": [
+          {
+            "icon": "twitter",
+            "link": "https://twitter.com/jossiwolf",
+            "name": "Twitter"
+          }
+        ]
+      },
+      {
+        "name": "Marco Pöhler",
+        "photoUrl": "https://firebasestorage.googleapis.com/v0/b/gdg-hamburg-29729.appspot.com/o/marco.jpg?alt=media&token=5c5e2aa9-f3b1-44dd-b353-c4d2c158dae5",
+        "socials": [
+          {
+            "icon": "twitter",
+            "link": "https://twitter.com/marcopoehler",
+            "name": "Twitter"
+          }
+        ]
+      },
+      {
+        "name": "Matthias Friedrich",
+        "photoUrl": "/images/team/matze.jpg",
+        "socials": [
+          {
+            "icon": "twitter",
+            "link": "https://twitter.com/mtthsfrdrch",
+            "name": "Twitter"
+          },
+          {
+            "icon": "github",
+            "link": "https://github.com/mtthsfrdrch",
+            "name": "GitHub"
+          }
+        ],
+        "title": "Program"
+      }
+    ],
+    "title" : "Team members"
+  }],
   "tickets" : [
     {
-      "available" : false,
+      "available" : true,
       "currency" : "€",
-      "name" : "Only Saturday",
-      "price" : 10,
-      "regular" : true,
-      "soldOut" : false,
-      "starts" : "soon",
-      "ends" : "Nov 2",
-      "url" : ""
-    },
-    {
-      "available" : false,
-      "currency" : "€",
-      "name" : "Only Sunday",
-      "price" : 10,
-      "regular" : true,
-      "soldOut" : false,
-      "starts" : "soon",
-      "ends" : "Nov 3",
-      "url" : ""
-    },
-    {
-      "available" : false,
-      "currency" : "€",
-      "name" : "Saturday and Sunday",
+      "name" : "Saturday",
       "price" : 15,
       "regular" : true,
       "soldOut" : false,
-      "starts" : "soon",
+      "starts" : "September 20",
       "ends" : "Nov 2",
-      "url" : ""
+      "url" : "https://ti.to/gdg-hamburg/devfest-2019"
     }
   ],
   "triggers" : {
