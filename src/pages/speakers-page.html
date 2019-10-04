@@ -381,8 +381,8 @@
       _filterItems(speakers, selectedFilters) {
         return speakers.filter((speaker) => {
           if (!selectedFilters || !selectedFilters.length) return true;
-          return speaker.tags
-            && !!speaker.tags.filter((tag) =>
+          const tags = speaker.sessions.map((item) => item.tags).flat();
+          return tags.filter((tag) =>
               selectedFilters.includes(this.generateClassName(tag))).length;
         });
       }
