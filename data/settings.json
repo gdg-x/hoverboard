@@ -30,6 +30,11 @@
       "label": "Speakers"
     },
     {
+      "route": "sessions",
+      "permalink": "/sessions/",
+      "label": "Sessions"
+    },
+    {
       "route": "team",
       "permalink": "/team/",
       "label": "Team"
@@ -51,7 +56,7 @@
         "color": "#FFF"
       },
       "fontColor": "#424242"
-    },	
+    },
     "team": {
       "title": "Team",
       "metaDescription": "Get more info about organizers",

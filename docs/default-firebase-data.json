@@ -319,6 +319,24 @@
           }
         ],
         "title": "Program"
+      },
+
+      {
+        "name": "Kjell Otto",
+        "photoUrl": "",
+        "socials": [
+          {
+            "icon": "twitter",
+            "link": "https://twitter.com/mtthsfrdrch",
+            "name": "Twitter"
+          },
+          {
+            "icon": "github",
+            "link": "https://github.com/mtthsfrdrch",
+            "name": "GitHub"
+          }
+        ],
+        "title": "Program"
       }
     ],
     "title" : "Team members"
