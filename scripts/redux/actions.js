@@ -624,6 +624,7 @@ function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
 
           const subsession = sessionsRaw.find((session) => session.id === sessionId);
 
+
           const mainTag = subsession.tags ? subsession.tags[0] : 'General';
           const endTimeRaw = timeslot.sessions[sessionIndex].extend
               // eslint-disable-next-line max-len
@@ -657,6 +658,9 @@ function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
               duration: getDuration(dayKey, startTime, endTime),
               dateReadable: day.dateReadable,
           });
+
+          Object.assign(subsession, finalSubSession);
+
 
           subSessions.push(finalSubSession);
         }
