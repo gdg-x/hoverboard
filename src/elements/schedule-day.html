@@ -207,8 +207,17 @@
         if (t > 12 && dayPart === 'hours') {
           t = t - 12;
         }
-        if ( t < 10 && dayPart === 'min') {
-          t = '0' + t;
+        if (dayPart === 'min') {
+          if ( t < 10) {
+            t = '0' + t;
+          }
+          let hours = this._splitText(time, ':', 0);
+          if (hours > 11) {
+            t += ' pm';
+          }
+          else {
+            t += ' am';
+          }
         }
         return t;
       }

@@ -178,10 +178,13 @@
       <div class="session-footer">
         <div layout horizontal justified center-aligned>
           <div class="session-meta" flex>
+              <span class="hours">[[_normalizeTime(session.startTime, 'hours' )]]</span><span class="minutes">[[_normalizeTime(session.startTime, 'min')]]</span> -
+              <span class="hours">[[_normalizeTime(session.endTime, 'hours' )]]</span><span class="minutes">[[_normalizeTime(session.endTime, 'min')]]</span><br>
             <span
               hidden$="[[!session.duration.hh]]">[[session.duration.hh]] hour[[_getEnding(session.duration.hh)]]</span>
             <span
               hidden$="[[!session.duration.mm]]">[[session.duration.mm]] min[[_getEnding(session.duration.mm)]]</span>
+
           </div>
           <div hidden$="[[!session.tags.length]]">
             <template is="dom-repeat" items="[[session.tags]]" as="tag">
@@ -252,6 +255,38 @@
 
       _getEnding(number) {
         return number > 1 ? 's' : '';
+      }
+
+      _splitText(text, divider, index) {
+        return text.split(divider)[index];
+      }
+
+      _normalizeTime(time, dayPart) {
+        let index = 0;
+        if (dayPart === 'min') {
+          index = 1;
+        }
+        let t = this._splitText(time, ':', index);
+        t = parseInt(t);
+        if (dayPart === 'hours') {
+          if (t > 12 ) {
+            t = t - 12;
+          }
+          t += ':';
+        }
+        if (dayPart === 'min') {
+          if (t < 10) {
+            t = '0' + t;
+          }
+          let hours = this._splitText(time, ':', 0);
+          if (hours > 11) {
+            t += 'pm';
+          }
+          else {
+            t += 'am';
+          }
+        }
+        return t;
       }
 
       _hideSessionAbstract(sesionAbstract) {
