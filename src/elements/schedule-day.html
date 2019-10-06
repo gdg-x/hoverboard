@@ -197,15 +197,18 @@
         return text.split(divider)[index];
       }
 
-      _normalizeTime(time, timePart) {
+      _normalizeTime(time, dayPart) {
         let index = 0;
-        if (timePart === 'min') {
+        if (dayPart === 'min') {
           index = 1;
         }
         let t = this._splitText(time, ':', index);
         t = parseInt(t);
-        if (t > 12 && timePart === 'hours') {
+        if (t > 12 && dayPart === 'hours') {
           t = t - 12;
+        }
+        if ( t < 10 && dayPart === 'min') {
+          t = '0' + t;
         }
         return t;
       }
