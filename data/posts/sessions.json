@@ -69,7 +69,7 @@
       "complexity" : "All",
       "description" : "Which one is your favourite: ReactJS or Vue.js? Both ReactJS & Vue.js developers will get the same requirements for an application (Building Tesla’s Battery Range Calculator). Are you a Vue.js developer who wants to learn how to use ReactJS, or the other way around? Trust us, you can learn from each other, and that’s exactly what you will do on this session. We will give you a buggy application that you’ll have to fix before adding new features to it using either Vue.js or React. How fast will you go? Will you share your findings with other developers? You’re welcome to test this during our workshop. We have built the same application with ReactJS and Vue.js. We invite you to spend the session learning how to build such an app yourself with the help of our mentors. By the end of the session, you should be able to answer these questions: • What is Functional Reactive Programming? • How to use React and Vue.js? What are the main differences between Vue.js and React?",
       "speakers" : [ "peter_eijgermans" ],
-      "tags" : ["Workshop","Vue.js", "reactJs", "UserInterfaces", "front-end", "tools", "redux", "veux", "framework"],
+      "tags" : ["workshop","vueJs", "reactJs", "UserInterfaces", "front-end", "tools", "redux", "veux", "framework"],
       "title" : "Building Tesla’s Battery Range Calculator with Vue.js or ReactJS"
     },
     {
@@ -101,7 +101,7 @@
       "complexity" : "All",
       "description" : "Recently after becoming Frontend Engineering Team lead at BCaster I introduced an incremental migration shift from JQuery to VueJs. It sure did seem to be straightforward at first especially with proper test coverage, however 20% -25% into this migration we encountered a certain issues which meant re-evaluation of several architectural decisions that had been made in this regard. The goal of this talk is to give an in-depth analysis of the following - Highlight what we tried - Highlight where we failed and the lessons learned - Changes made related to the architecture - How we finally achieved 100% full migration of one of our most important projects into Vue JS",
       "speakers" : [ "senigbolo_stephen" ],
-      "tags" : [ "vueJs", "VueJs", "jquery", "web development", "DOM", "VIRTUAL DOM"],
+      "tags" : [ "vueJs", "jquery", "web development", "DOM", "VIRTUAL DOM"],
       "title" : "From Jquery to VueJS - Not Rocket Science"
     },
     {
@@ -117,7 +117,7 @@
       "complexity" : "All",
       "description" : "We all know JavaScript is single threaded. We have written code till now based on that assumption. What if I tell you that Multi-threading is possible in JavaScript. You must be thinking I have gone nuts. “I am not crazy, my mother had me tested” :P<br><br>With the advent of PWAs, we are delegating a lot of processing to the client side. With JS being single-threaded, at times this results in jitter. Consider an example of client-side filtering on a very big list or image processing. Here, the main thread is blocked resulting in the end user being blocked.<br><br>What should we do now? Is it necessary to do all the computations in the main thread? Won’t it be great if we can perform computations in a worker thread and then notify the main thread about it?<br><br>Here comes background thread to the rescue. We can perform a heavy computation task in the background thread. Due to this, the main thread is unblocked and so is the user. Background and main thread can communicate asynchronously. I will be sharing my experience with background threads in JS.",
       "speakers" : [ "anusha_bhat" ],
-      "tags" : ["front-end", "pwa", "technical", "performance",  "web"],
+      "tags" : ["front-end", "PWA", "technical", "performance",  "web"],
       "title" : "Multi-threading in Javascript - Myth or Reality?"
     },
     {

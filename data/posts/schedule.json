@@ -29,7 +29,7 @@
               "items" : [ "webAssembly" ]
             },
             {
-              "items": ["mentorPlaybook"]
+              "items": ["refactorClassComponent"]
             },
             {
               "items": ["webVR"],
@@ -90,10 +90,10 @@
           "endTime" : "14:30",
           "sessions" : [
             {
-              "items" : [ "rsjxFutureAsyncProgramming" ]
+              "items" : [ "sharingComponents" ]
             },
             {
-              "items": ["thinkfast"]
+              "items": ["uniqueHowsWhys"]
             }
           ]
         },
@@ -118,10 +118,10 @@
           "endTime" : "16:10",
           "sessions" : [
             {
-              "items" : [ "refactorClassComponent" ]
+              "items" : [ "mentorPlaybook" ]
             },
             {
-              "items": ["uniqueHowsWhys"]
+              "items": ["thinkfast"]
             }
           ]
         },
@@ -199,7 +199,7 @@
               "items" : [ "headlessArchitecture" ]
             },
             {
-              "items": ["sharingComponents"]
+              "items": ["rsjxFutureAsyncProgramming"]
             }
           ]
         },
