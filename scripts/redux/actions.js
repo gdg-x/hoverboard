@@ -684,19 +684,38 @@ const scheduleActions = {
 
                 subSessions.push(finalSubSession);
               }
-              const start = `${timeslotsIndex + 1} / ${sessionIndex + 1}`;
-              const end = `${timeslotsIndex +
-                  (timeslot.sessions[sessionIndex].extend || 0) + 1} / ${sessionsLen !== 1
-                      // eslint-disable-next-line max-len
-                      ? sessionIndex + 2 : Object.keys(extensions).length ? Object.keys(extensions)[0]
-                          : tracksNumber + 1}`;
+              let startRow = timeslotsIndex + 1;
+              let startColumn = sessionIndex + 1;
+              let endRow = timeslotsIndex +(timeslot.sessions[sessionIndex].extend || 0) + 1;
+              let endColumn = sessionsLen !== 1
+                // eslint-disable-next-line max-len
+                ? sessionIndex + 2 : Object.keys(extensions).length ? Object.keys(extensions)[0]
+                    : tracksNumber + 1;
+
 
               if (timeslot.sessions[sessionIndex].extend) {
                   extensions[sessionIndex + 1] = timeslot.sessions[sessionIndex].extend;
               }
 
+              if (timeslot.sessions[sessionIndex].rowExtend) {
+                endColumn = startColumn + timeslot.sessions[sessionIndex].rowExtend;
+             }
+
+            if (timeslot.sessions[sessionIndex].startCol) {
+              startColumn = timeslot.sessions[sessionIndex].startCol;
+              endColumn = sessionIndex + timeslot.sessions[sessionIndex].startCol;
+            }
+            /*
+
+            Make "item1" start on row 2 column 1, and span 2 rows and 3 columns:
+
+              .item1 {
+                grid-area: 2 / 1 / span 2 / span 3;
+              }
+              */
+
               innerSessions = [...innerSessions, {
-                  gridArea: `${start} / ${end}`,
+                  gridArea: `${startRow} / ${startColumn} / ${endRow} / ${endColumn}`,
                   items: subSessions,
               }];
             }

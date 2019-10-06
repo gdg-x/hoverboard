@@ -1,12 +1,36 @@
 {
   "sessions" : [
     {
+      "id":"blank",
+      "complexity" : "",
+      "description" : "",
+      "speakers" : [],
+      "tags" : [  ],
+      "title" : ""
+    },
+    {
       "id":"1024Breakfast",
-      "complexity" : "Intermediate",
-      "description" : "Research indicates that programmers are not entirely happy, and that much of this unhappiness arises from interactions with other people.  Research also tells us that teams are capable of producing solutions that are more creative and of higher quality than those of single individuals.  However, teams, by definition, consist of people--possibly the very ones who are causing our unhappiness.<br><br>This talk explores the science behind human persuasion, examines the roots of motivation, and reveals the single quality that all high-performing teams share.  You’ll leave armed to persuade, primed to understand, and motivated to create teams that inspire everyone to do their best work.",
-      "speakers" : [ "sandi_metz" ],
-      "tags" : [ "Keynote" ],
-      "title" : "You Are Insufficiently Persuasive"
+      "complexity" : "All",
+      "description" : "Registration and Breakfast",
+      "speakers" : [],
+      "tags" : [ "Food" ],
+      "title" : "Registration and Breakfast"
+    },
+    {
+      "id":"openingRemarks",
+      "complexity" : "All",
+      "description" : "Opening Remarks",
+      "speakers" : [],
+      "tags" : [ ],
+      "title" : "Opening Remarks"
+    },
+    {
+      "id":"lunch",
+      "complexity" : "All",
+      "description" : "Lunch",
+      "speakers" : [],
+      "tags" : [ ],
+      "title" : "Lunch"
     },
     {
       "id":"insufficientlyPersuasive",
@@ -188,7 +212,7 @@
       "id":"webVR",
       "complexity" : "All",
       "description" : "By the end of the session the attendees will be able to Make a simple Demo of basic WebVR application and get into WebVR experiences, they Will also learn about WebVR concepts, A-Frame Framework, A-Frame scenes & apps in depth.",
-      "speakers" : [ "Viral_Parmar" ],
+      "speakers" : [ "viral_parmar" ],
       "tags" : ["A-Frame", "WebVR", "Web Development", "mobile app"],
       "title" : "WebVR : Beyond Imagination"
     },
@@ -212,7 +236,7 @@
       "id":"uiComponentTesting",
       "complexity" : "Intermediate",
       "description" : "As web applications continue to evolve into complex systems, developers today are building more and more UIs with component-based frameworks like React and Vue. As a result, UI testing today is easier than it has ever been before. But where do you start? If you feel like it’s a guessing game, this is the talk for you!'\n'In this talk, I will guide you with a practical approach to testing UI components with Jest and Storybook to improve your UI’s quality and solve your users’ needs.",
-      "speakers" : [ "Diego_Hernandez" ],
+      "speakers" : [ "diego_hernandez" ],
       "tags" : ["javascript", "react", "vue", "testing", "jest", "storybook"],
       "title" : "Strengthening your blocks: A practical guide to UI component testing"
     },
