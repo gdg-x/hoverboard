@@ -37,7 +37,7 @@
       "complexity" : "All",
       "description" : "It’s something we all struggle with, admitting we don’t know something. But I’m here to show you the power of saying \"I don’t know\" to people. Saying \"I don’t know\" doesn’t have to be the end of a conversation, in fact it can be the start of an entirely new, exciting conversation with learning opportunities for all parties. We will talk through scenarios where we don’t feel comfortable saying it, ways we can feel comfortable saying it, and the good things that come from it. Outline/structure of the Session Why we don’t say I don’t know Why we should say it How to say I don’t know to clients How to say I don’t know as an expert How to say I don’t know as a leader A deep (and revealing) discussion on the underlying reasons why we feel afraid to say \"I don’t know\" to people.",
       "speakers" : [ "andrew_murphy" ],
-      "tags" : [ "soft skills", "talk", "communication", "ledership" ],
+      "tags" : [ "soft skills", "communication", "leadership" ],
       "title" : "The power of saying \"I don't know\""
     },
     {
@@ -45,7 +45,7 @@
       "complexity" : "All",
       "description" : "The introduction of Hooks in React has become a very \"buzz word\" topic in the community, which, ultimately, has lead to some confusion. Some common questions I hear when talking to others are: What are they? How do you use them? Do they replace life-cycle methods and/or class components completely? We will go over all of these together. I'll start with a basic React app using a few stateful, class components using life-cycle methods, custom methods and API interaction. I will then convert the components over to functional ones while integrating several different hooks, without losing any functionality. Finally, we will look into some common \"gotchas\" that may be confusing for people starting out with hooks. You will come away from this talk with a good foundation for various primitive hooks in React, and you'll understand how they're used and how you can start to write your own custom hooks.",
       "speakers" : [ "ryan_heupler" ],
-      "tags" : [ "talk", "reactJs", "front-end", "optimization", "framework", "functional programming"],
+      "tags" : [ "react", "front-end", "optimization", "functional programming"],
       "title" : "Refactoring a Class Component: A Gentle Introduction into React Hooks"
     },
     {
@@ -53,7 +53,7 @@
       "complexity" : "All",
       "description" : "The world of UI/UX is changing every month. It can be hard for developers to keep up with the newest trends and frameworks because of all the responsibilities they have. What if you could use machine learning to help you keep up with all of the changes? While it’s far from taking all of the programming jobs, machine learning can help developers make more user-friendly web applications. With the use of Brain.js, you can do text prediction, make small layout changes, check for malicious users, and more. In this talk, attendees will learn some background on machine learning and algorithms and see examples of where Brain.js can be used in real applications. We’ll cover business cases in web development where machine learning can help, how neural networks work, and how JavaScript can be used to train a model and make real-time updates for users. By the end of the talk, attendees should have a good understanding of basic machine learning concepts and an idea of how they could get started with Brain.js.",
       "speakers" : [ "milecia_mcgregor" ],
-      "tags" : ["front-end", "performance", "automation", "optimization"],
+      "tags" : ["front-end", "performance", "automation", "optimization", "machine learning"],
       "title" : "Using Machine Learning To Improve UI/UX"
     },
     {
@@ -69,7 +69,7 @@
       "complexity" : "All",
       "description" : "Which one is your favourite: ReactJS or Vue.js? Both ReactJS & Vue.js developers will get the same requirements for an application (Building Tesla’s Battery Range Calculator). Are you a Vue.js developer who wants to learn how to use ReactJS, or the other way around? Trust us, you can learn from each other, and that’s exactly what you will do on this session. We will give you a buggy application that you’ll have to fix before adding new features to it using either Vue.js or React. How fast will you go? Will you share your findings with other developers? You’re welcome to test this during our workshop. We have built the same application with ReactJS and Vue.js. We invite you to spend the session learning how to build such an app yourself with the help of our mentors. By the end of the session, you should be able to answer these questions: • What is Functional Reactive Programming? • How to use React and Vue.js? What are the main differences between Vue.js and React?",
       "speakers" : [ "peter_eijgermans" ],
-      "tags" : ["workshop","vueJs", "reactJs", "UserInterfaces", "front-end", "tools", "redux", "veux", "framework"],
+      "tags" : ["workshop", "vue", "react", "front-end", "tools", "redux", "veux"],
       "title" : "Building Tesla’s Battery Range Calculator with Vue.js or ReactJS"
     },
     {
@@ -85,7 +85,7 @@
       "complexity" : "Intermediate",
       "description" : "This presentation will discuss how to cope with conversing with those who are from diverse backgrounds with ease and accomplish your daily connections with co-workers, who come from different backgrounds, with a common goal of comprehension. Necessities that makes you distinct, skills that make you stand out. The diversities that make us rare and unique if it’s your ethnic background, race, ethnic customs, religious beliefs, sex, sexuality, or form of individuality may also be a cause of contention. Discover how to bring out that, which is already within you and communicate, work with individuals who are diverse as well as, striking-up great conversation between one another. Also, this presentation will contribute to you your attendees with fostering a positive change and cultivate a more inviting place of work. This presentation will discuss the impacts of diversity collectively using identifying what variety can be combined with how it affects a business. The presentation will assist with explaining what it signifies being an inclusive place of work, offer comprehensive measures to assess best what degree one’s place of work fosters inclusion a and diversity. The workshop, through means of role-playing scenarios, present ways you can take to impact positive philosophies at your place of work. Individuals will take with them an increased perception of the implications of a tolerant, inclusive and diverse place of work. Individuals will take with them, along with personal skills, which one will utilize to develop into promoters of social change, that will build a more diverse workplace.",
       "speakers" : [ "stacey_jenkins" ],
-      "tags" : ["business", "care", "color", "culture", "diversity", "equity", "future", "gender", "governance", "hiring", "inclusion", "LGBTQ", "manager", "marketing", "people", "race", "student", "work", "world"],
+      "tags" : ["culture", "diversity", "hiring", "inclusion"],
       "title" : "The Role of The Minority in The World of Technology"
     },
     {
@@ -101,7 +101,7 @@
       "complexity" : "All",
       "description" : "Recently after becoming Frontend Engineering Team lead at BCaster I introduced an incremental migration shift from JQuery to VueJs. It sure did seem to be straightforward at first especially with proper test coverage, however 20% -25% into this migration we encountered a certain issues which meant re-evaluation of several architectural decisions that had been made in this regard. The goal of this talk is to give an in-depth analysis of the following - Highlight what we tried - Highlight where we failed and the lessons learned - Changes made related to the architecture - How we finally achieved 100% full migration of one of our most important projects into Vue JS",
       "speakers" : [ "senigbolo_stephen" ],
-      "tags" : [ "vueJs", "jquery", "web development", "DOM", "VIRTUAL DOM"],
+      "tags" : [ "vue", "jquery", "web development"],
       "title" : "From Jquery to VueJS - Not Rocket Science"
     },
     {
@@ -109,7 +109,7 @@
       "complexity" : "All",
       "description" : "As web and native apps continue to converge, audio plays an ever-increasing role in elevating the user experience beyond simple static documents. However, even simple audio playback can get complicated when dealing with different browsers, devices and environments. In this talk, we’ll take a deep dive into using the howler.js audio library to enhance your web, desktop and mobile applications. Through a live coding demo, we’ll start with basic playback and work our way through audio sprites, live streaming, 3D spatial audio and more. Walk away with a better understanding of various use-cases for audio on the web and the simple tools you can use to enable them in your own projects.",
       "speakers" : [ "james_simpson" ],
-      "tags" : ["front-end", "tools", "technical"],
+      "tags" : ["front-end", "tools", "technical", "audio"],
       "title" : "Web Audio Made Easy with Howler.js"
     },
     {
@@ -117,7 +117,7 @@
       "complexity" : "All",
       "description" : "We all know JavaScript is single threaded. We have written code till now based on that assumption. What if I tell you that Multi-threading is possible in JavaScript. You must be thinking I have gone nuts. “I am not crazy, my mother had me tested” :P<br><br>With the advent of PWAs, we are delegating a lot of processing to the client side. With JS being single-threaded, at times this results in jitter. Consider an example of client-side filtering on a very big list or image processing. Here, the main thread is blocked resulting in the end user being blocked.<br><br>What should we do now? Is it necessary to do all the computations in the main thread? Won’t it be great if we can perform computations in a worker thread and then notify the main thread about it?<br><br>Here comes background thread to the rescue. We can perform a heavy computation task in the background thread. Due to this, the main thread is unblocked and so is the user. Background and main thread can communicate asynchronously. I will be sharing my experience with background threads in JS.",
       "speakers" : [ "anusha_bhat" ],
-      "tags" : ["front-end", "PWA", "technical", "performance",  "web"],
+      "tags" : ["front-end", "PWA", "technical", "performance"],
       "title" : "Multi-threading in Javascript - Myth or Reality?"
     },
     {
@@ -125,7 +125,7 @@
       "complexity" : "Intermediate",
       "description" : "Using Jovo Framework and Jovo CLI, developers can quickly develop voice-first applications for Alexa and Google Home within a single nodejs application. In this workshop, I show you how to quickly build, test, and deploy a voice app using Jovo, and leave with areas for further exploration.<br><br>Topics covered include: how to build a language model, how to use the Alexa and Actions on Google Simulator, how to create unit tests for voice applications, how to route through conversations, how to request user data, and how to extend the bot to other conversational platforms such as Facebook Messenger or Twilio SMS.",
       "speakers" : [ "jeffrey_smith" ],
-      "tags" : [ "jovo", "VUI", "nodeJs", "Alexa", "Dialogflow", "Typescript", "workshop"],
+      "tags" : ["jovo", "node", "alexa", "dialogflow", "typescript", "workshop"],
       "title" : "How to Build Cross Platform Voice Apps with the Jovo Framework"
     },
     {
@@ -141,7 +141,7 @@
       "complexity" : "Intermediate",
       "description" : "What’s the difference between localization and internationalization? Should I store my translations statically, use my own API, or just use a third-party translation service? What sort of UX problems might I run into when translating my application? Do I have to revamp everything for RTL languages?<br><br>When I started working at my company, all our translations sat in static JSON files. Manually adding new translations was tedious and error-prone, every language loaded on every page, and new translations rarely made it in the same release as their accompanying feature work. This talk will discuss how we transitioned to using i18next to localize our app, the problems we had along the way and how we solved them, and tips for designing applications to minimize future localization issues.",
       "speakers" : [ "robin_dykema" ],
-      "tags" : [ "localization", "reactJs"],
+      "tags" : [ "localization", "react"],
       "title" : "Sacré bleu! The trials and tribulaciónes in localizing your application"
     },
     {
@@ -149,7 +149,7 @@
       "complexity" : "All",
       "description" : "Have you ever wanted to build a web application but couldn’t due to poor internet connection? Have you ever wondered how applications are built for use in situations like Disaster Relief? If yes, then come learn about the extraordinary potential of PWAs and how you can build your own!<br><br>Progressive Web Apps (PWAs) are an up-and-coming technology that has piqued the interest of tech companies big and small. The talk will inform the audience about this new field, its potential, and how one can get started developing PWAs. This talk is both educational and imaginative, and will provide a launchpad for exploring a new way to use JavaScript.<br><br>First, this talk will be an introduction to Progressive Web Apps–what they are, their benefits (such as offering offline functionality, can be run as web page or native app, and increased performance speed), and tools to create them (my go-to tools are AngularJS and Firebase). I’ll also discuss how you can turn your existing Web App into a PWA in a matter of minutes. Secondly, this talk will cover how PWAs can be applied to fields such as Tropical Medicine, Poverty Alleviation, and Disaster Relief (this will include anecdotes from my experience building PWAs for researchers in Tanzania). Learn how you can apply your JS chops to create better web and mobile experiences in both ordinary and extraordinary circumstances!",
       "speakers" : [ "colleen_dunlap" ],
-      "tags" : [ "angular", "global engineering", "html", "typescript"],
+      "tags" : [ "angular", "html", "typescript", "PWA"],
       "title" : "The Unique Hows and Whys of Global Progressive Web Apps"
     },
     {
@@ -165,7 +165,7 @@
       "complexity" : "All",
       "description" : "How can we extract the most value from our front-end JavaScript errors, especially when users often don’t report them? We’ll learn about the evolution of the browser’s global error event handler, how to work around its limitations, and tools to make our JavaScript bugs a little less buggy.",
       "speakers" : [ "liz_krane" ],
-      "tags" : [ "front-end", "errors", "browsers", "reporting", "technical", "testing"],
+      "tags" : [ "front-end", "browsers", "reporting", "technical", "testing"],
       "title" : "Kicking Bugs and Logging Names: The Challenges of JavaScript Error Reporting"
     },
     {
@@ -189,7 +189,7 @@
       "complexity" : "Intermediate",
       "description" : "Headless architecture is a popular solution for projects that require cutting-edge user experiences and next-level performance, but the learning curve can be discouraging. In this talk, we’ll give participants tactics, tools, strategies, and confidence to make their first headless project a success.",
       "speakers" : [ "christina_deemer" ],
-      "tags" : ["front-end", "reactJs", "tools", "motivational", "performance", "technical"],
+      "tags" : ["front-end", "react", "tools", "motivational", "performance", "technical"],
       "title" : "Going Headless without Losing Your Head: Strategies for Making Your First Decoupled Web App a Success"
     },
     {
@@ -197,7 +197,7 @@
       "complexity" : "Intermediate",
       "description" : "ApolloClient and ApolloServer empower developers with control over the data they work with. This workshop will dig into using both along with Prisma to build a full stack application. We’ll tackle REST, Database setup, and authentication with ease using this amazing ecosystem!",
       "speakers" : [ "domitrius_clark" ],
-      "tags" : ["reactJs", "apollo", "prisma", "mongoDB", "workshop"],
+      "tags" : ["react", "apollo", "prisma", "mongoDB", "workshop"],
       "title" : "Apollo: One Giant leap for Full Stack"
     },
     {
@@ -221,7 +221,7 @@
       "complexity" : "Intermediate",
       "description" : "Before you manually review your pages in an assistive technology device the International Association of Accessibility Professionals (IAAP) recommends that you use an automated testing tools to check your page. So you stop everything and review your page with a third-party website or browser extension… if you remember to. Why wait until you’re that far into development? Let’s build accessibility testing into your workflow, and prevent common errors from even being committed in the first place. I’ll give an overview of tools that exist, and share some code to help customize your own workflow. Familiarity with accessible development is not needed, but you should be familiar with HTML, JavaScript, Git, and NPM.",
       "speakers" : [ "nathan_lilly" ],
-      "tags" : [ "workflow", "accessibility", "a11y", "axe", "axe-core", "testing", "linting", "reactJs", "npm", "front-end", "back-end", "tools", "automation"],
+      "tags" : [ "accessibility", "testing", "react", "front-end", "back-end", "tools", "automation"],
       "title" : "Building Accessibility Testing Into Your Workflow"
     },
     {
@@ -229,7 +229,7 @@
       "complexity" : "Intermediate",
       "description" : "As web applications continue to evolve into complex systems, developers today are building more and more UIs with component-based frameworks like React and Vue. As a result, UI testing today is easier than it has ever been before. But where do you start? If you feel like it’s a guessing game, this is the talk for you!'\n'In this talk, I will guide you with a practical approach to testing UI components with Jest and Storybook to improve your UI’s quality and solve your users’ needs.",
       "speakers" : [ "diego_hernandez" ],
-      "tags" : [ "reactJs", "vueJs", "testing", "jest", "storybook"],
+      "tags" : [ "react", "vue", "testing", "jest", "storybook"],
       "title" : "Strengthening your blocks: A practical guide to UI component testing"
     },
     {
@@ -237,7 +237,7 @@
       "complexity" : "Intermediate",
       "description" : "Did you know there’s a widely-supported browser API that allows you to interface with lots of hardware, including custom controllers you can build yourself? Meet the WebMIDI API! Natively supported by Chrome (and soon Firefox!) we’ll experiment with talking to custom hardware through the browser.",
       "speakers" : [ "george_mandis" ],
-      "tags" : [ "nodeJs", "apis" ,"webMIDI"],
+      "tags" : [ "node", "apis" ,"webMIDI"],
       "title" : "JavaScript + MIDI + Microcontrollers Workshop"
     },
     {
@@ -253,7 +253,7 @@
       "complexity" : "All",
       "description" : "Technology is fast moving, and devops tools pop up like wildfire. Teams are desperate to solve their problems & often make implementation decisions based on word of mouth, “kick the tires” syndrome or superficial evaluations. In some cases we justify our stack decisions based on project/sprint deadlines, the product’s marketing materials, occasionally, the README files. Really scary stuff!<br><br>In this talk Angel will explore how & why teams are easily lulled into believing that shiny objects will independently solve their stack deficiencies. He will discuss his experiences with “Shiny Object” frameworks/tools and the true impact they had in actually solving problems. He will also discuss some strategies that can help teams make better choices when properly vetting potential solutions based on his experience in the federal government evaluating vendor proposals and homegrown solutions.",
       "speakers" : [ "angel_rivera" ],
-      "tags" : ["devOps", "work life balance", "frameworks", "stacks", "apps", "decision making", "life choices"],
+      "tags" : ["devOps", "toos", "decision making", "life choices"],
       "title" : "Apps, Stacks, and Frameworks: Avoiding “Shiny Object” Syndrome"
     },
     {
@@ -269,7 +269,7 @@
       "complexity" : "All",
       "description" : "You know that just having a resume or putting in good work during work hours isn’t enough to get ahead these days. You also know you need to work on your own development projects to showcase your skills, but maybe you’re not sure where to start. This talk will give you bite-size steps that you can take to start and finish your own development portfolio projects within a week with completely serverless technologies. Specifically, you’ll learn:<ul><li>How to set up your development environment to use the Serverless Framework and AWS</li><li>How to find starter templates, example projects, and free tutorials for serverless projects</li><li>How to come up with an idea for a personal development project</li><li>How to actually build your project</li><li>How and where to show off your new project<li></ul>By the end of this talk, you should feel capable of creating a serverless development portfolio that showcases your abilities as a developer and allows you to continue to grow your portfolio and your skillset.",
       "speakers" : [ "fernando_medina_corey" ],
-      "tags" : ["serverless", "AWS", "portfolio",  "back-end", "tools"],
+      "tags" : ["serverless", "AWS",  "back-end", "tools"],
       "title" : "Making a Serverless Development Portfolio - In Seven Days or Less"
     },
     {
