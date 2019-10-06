@@ -63,7 +63,7 @@
         },
         {
           "startTime" : "12:10",
-          "endTime" : "13:30",
+          "endTime" : "13:50",
           "sessions" : [
             {
               "items" : [ "lunch" ],
@@ -74,20 +74,20 @@
         },
         {
           "startTime" : "13:00",
-          "endTime" : "13:30",
+          "endTime" : "13:50",
 
           "sessions" : [
 
             {
-              "items" : [ "javaScriptMidi" ],
+              "items" : [ "jovo" ],
               "extend": 2,
               "startCol": 3
             }
           ]
         },
         {
-          "startTime" : "13:30",
-          "endTime" : "14:10",
+          "startTime" : "13:50",
+          "endTime" : "14:30",
           "sessions" : [
             {
               "items" : [ "rsjxFutureAsyncProgramming" ]
@@ -98,8 +98,8 @@
           ]
         },
         {
-          "startTime" : "14:20",
-          "endTime" : "15:00",
+          "startTime" : "14:40",
+          "endTime" : "15:20",
           "sessions" : [
             {
               "items" : [ "digitalAccessibility" ]
@@ -114,8 +114,8 @@
           ]
         },
         {
-          "startTime" : "15:10",
-          "endTime" : "15:50",
+          "startTime" : "15:30",
+          "endTime" : "16:10",
           "sessions" : [
             {
               "items" : [ "refactorClassComponent" ]
@@ -126,7 +126,7 @@
           ]
         },
         {
-          "startTime" : "16:15",
+          "startTime" : "16:20",
           "endTime" : "17:00",
           "sessions" : [
             {
@@ -171,7 +171,7 @@
               "items" : [ "machineLearning" ]
             },
             {
-              "items": ["headlessArchitecture"]
+              "items": ["webAudio"]
             },
             {
               "items": ["demystifyingRegularExpressions"],
@@ -184,7 +184,7 @@
           "endTime" : "11:20",
           "sessions" : [
             {
-              "items" : [ "refactorClassComponent" ]
+              "items" : [ "kickingBugs" ]
             },
             {
               "items": ["buildingAccessibility"]
@@ -196,16 +196,16 @@
           "endTime" : "12:10",
           "sessions" : [
             {
-              "items" : [ "kickingBugs" ]
+              "items" : [ "headlessArchitecture" ]
             },
             {
-              "items": ["lunch"]
+              "items": ["sharingComponents"]
             }
           ]
         },
         {
           "startTime" : "12:10",
-          "endTime" : "13:30",
+          "endTime" : "12:30",
           "sessions" : [
             {
               "items" : [ "lunch" ],
@@ -216,59 +216,59 @@
         },
         {
           "startTime" : "13:00",
-          "endTime" : "13:30",
+          "endTime" : "13:50",
 
           "sessions" : [
 
             {
-              "items" : [ "apolloGraphQl" ],
+              "items" : [ "javaScriptMidi" ],
               "extend": 2,
               "startCol": 3
             }
           ]
         },
         {
-          "startTime" : "13:30",
-          "endTime" : "14:10",
+          "startTime" : "13:50",
+          "endTime" : "14:30",
           "sessions" : [
             {
-              "items" : [ "multithreadingJavascript" ]
+              "items" : [ "serverlessDevelopmentPortfolioSevenDays" ]
             },
             {
-              "items": ["shinyObjectSyndrome"]
+              "items": ["multithreadingJavascript"]
             }
           ]
         },
         {
-          "startTime" : "14:20",
-          "endTime" : "15:00",
+          "startTime" : "14:40",
+          "endTime" : "15:20",
           "sessions" : [
             {
-              "items" : [ "sharingComponents" ]
+              "items" : [ "sacre_bleu" ]
             },
             {
-              "items": ["lunch"]
+              "items": ["shinyObjectSyndrome"]
             },
             {
-              "items": ["jovo"],
+              "items": ["apolloGraphQl"],
               "extend": 2
             }
           ]
         },
         {
-          "startTime" : "15:10",
-          "endTime" : "15:50",
+          "startTime" : "15:30",
+          "endTime" : "16:10",
           "sessions" : [
             {
-              "items" : [ "lunch" ]
+              "items" : [ "iDontKnow" ]
             },
             {
-              "items": ["lunch"]
+              "items": ["ohMyWeb"]
             }
           ]
         },
         {
-          "startTime" : "16:15",
+          "startTime" : "16:20",
           "endTime" : "17:00",
           "sessions" : [
             {
