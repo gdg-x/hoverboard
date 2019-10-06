@@ -3,7 +3,8 @@
     {
       "id":"1024Breakfast",
       "complexity" : "All",
-      "description" : "Get your badge, breakfast and enjoy talking with the javascript community",
+      "description" : "Get your badge, breakfast and talk with the javascript community",
+      "shortDescription" : "Get your badge, breakfast and talk with the javascript community.",
       "speakers" : [],
       "tags" : [ "food" ],
       "title" : "Registration and Breakfast"
@@ -19,7 +20,8 @@
     {
       "id":"lunch",
       "complexity" : "All",
-      "description" : "Lunch",
+      "description" : "Time to refuel.",
+      "shortDescription" : "Time to refuel.",
       "speakers" : [],
       "tags" : [ "food" ],
       "title" : "Lunch"
