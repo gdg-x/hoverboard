@@ -68,7 +68,7 @@
             {
               "items" : [ "lunch" ],
               "extend" :2,
-              "rowExtend": 2
+              "rowSpan": 2
             }
           ]
         },
@@ -90,17 +90,54 @@
           "endTime" : "14:10",
           "sessions" : [
             {
-              "items" : [ "lunch" ]
+              "items" : [ "rsjxFutureAsyncProgramming" ]
             },
             {
-              "items": ["lunch"]
+              "items": ["deploymentStrategy"]
+            }
+          ]
+        },
+        {
+          "startTime" : "14:20",
+          "endTime" : "15:00",
+          "sessions" : [
+            {
+              "items" : [ "digitalAccessibility" ]
+            },
+            {
+              "items": ["rocketScience"]
+            },
+            {
+              "items": ["teslaBattery"],
+              "extend": 2
+            }
+          ]
+        },
+        {
+          "startTime" : "15:10",
+          "endTime" : "15:50",
+          "sessions" : [
+            {
+              "items" : [ "refactorClassComponent" ]
+            },
+            {
+              "items": ["uniqueHowsWhys"]
+            }
+          ]
+        },
+        {
+          "startTime" : "16:15",
+          "endTime" : "17:00",
+          "sessions" : [
+            {
+              "items" : [ "insufficientlyPersuasive" ]
             }
           ]
         }
 
       ],
       "tracks" : [ {
-        "title" : "Expo hall"
+        "title" : "Ballroom"
       }, {
         "title" : "Conference hall"
       }, {

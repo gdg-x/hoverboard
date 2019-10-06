@@ -697,22 +697,14 @@ const scheduleActions = {
                   extensions[sessionIndex + 1] = timeslot.sessions[sessionIndex].extend;
               }
 
-              if (timeslot.sessions[sessionIndex].rowExtend) {
-                endColumn = startColumn + timeslot.sessions[sessionIndex].rowExtend;
-             }
+              if (timeslot.sessions[sessionIndex].rowSpan) {
+                endColumn = startColumn + timeslot.sessions[sessionIndex].rowSpan;
+              }
 
             if (timeslot.sessions[sessionIndex].startCol) {
               startColumn = timeslot.sessions[sessionIndex].startCol;
               endColumn = sessionIndex + timeslot.sessions[sessionIndex].startCol;
             }
-            /*
-
-            Make "item1" start on row 2 column 1, and span 2 rows and 3 columns:
-
-              .item1 {
-                grid-area: 2 / 1 / span 2 / span 3;
-              }
-              */
 
               innerSessions = [...innerSessions, {
                   gridArea: `${startRow} / ${startColumn} / ${endRow} / ${endColumn}`,
