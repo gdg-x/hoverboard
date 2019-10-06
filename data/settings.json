@@ -15,13 +15,18 @@
     "locale": "en-US"
   },
   "hashtag": "LibertyJS19",
-  "disabledSchedule": true,
+  "disabledSchedule": false,
   "showSessionShortAbstract": true,
   "navigation": [
     {
       "route": "home",
       "permalink": "/",
       "label": "Home"
+    },
+    {
+      "route": "schedule",
+      "permalink": "/schedule/",
+      "label": "Schedule"
     },
     {
       "route": "speakers",

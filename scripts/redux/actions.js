@@ -265,9 +265,21 @@ const blogActions = {
 };
 
 const speakersActions = {
+
   fetchList: () => (dispatch) => {
     dispatch({
       type: FETCH_SPEAKERS,
+    });
+
+    const schedulePromise = new Promise(function (resolve) {
+      fetch('data/posts/schedule.json')
+          .then(function (response) {
+          return response.json();
+          })
+          .then(function (res) {
+            let scheduleRaw = res.schedule;
+            resolve(scheduleRaw);
+          });
     });
 
     const speakersPromise = new Promise(function (resolve) {
@@ -276,39 +288,29 @@ const speakersActions = {
           return response.json();
           })
           .then(function (res) {
-            let sessions = res.sessions;
-            let speakers = res.speakers;
-            // map session to speaker
-            // will need to do this for schedule
-            speakers.forEach((speaker) =>{
-              if (speaker.sessions) {
-                speaker.sessions.forEach((speakerSession, index) =>{
-                  sessions.forEach((session) =>{
-                    if (speakerSession.id === session.id) {
-                      speaker.sessions[index] = session;
-                    }
-                  });
-                });
-              }
-            });
-            resolve(speakers);
+            let speakersRaw = res.speakers;
+            resolve(speakersRaw);
           });
     });
 
 
-    // const speakersPromise = new Promise((resolve, reject) => {
-    //   firebase.firestore()
-    //     .collection('generatedSpeakers')
-    //     .orderBy('order', 'asc')
-    //     .get()
-    //     .then((snaps) => {
-    //       resolve(snaps.docs.map((snap) => Object.assign({}, snap.data())));
-    //     })
-    //     .catch(reject);
-    // });
+    const sessionPromise = new Promise(function (resolve) {
+      fetch('data/posts/sessions.json')
+          .then(function (response) {
+          return response.json();
+          })
+          .then(function (res) {
+            let sessionsRaw = res.sessions;
+            resolve(sessionsRaw);
+          });
+    });
 
-    return Promise.all([speakersPromise])
-      .then(([speakers]) => {
+
+    return Promise.all([schedulePromise, speakersPromise, sessionPromise])
+      .then(([scheduleRaw, speakersRaw, sessionsRaw]) => {
+        let arr = sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw);
+        let speakers = arr.speakers;
+
         dispatch({
           type: FETCH_SPEAKERS_SUCCESS,
           payload: {
@@ -361,124 +363,87 @@ const previousSpeakersActions = {
 };
 
 const sessionsActions = {
+
   fetchList: () => (dispatch) => {
     dispatch({
       type: FETCH_SESSIONS,
     });
 
-    return new Promise(function (resolve) {
+    const schedulePromise = new Promise(function (resolve) {
+      fetch('data/posts/schedule.json')
+          .then(function (response) {
+          return response.json();
+          })
+          .then(function (res) {
+            let scheduleRaw = res.schedule;
+            resolve(scheduleRaw);
+          });
+    });
+
+    const speakersPromise = new Promise(function (resolve) {
       fetch('data/posts/speakers.json')
           .then(function (response) {
           return response.json();
           })
           .then(function (res) {
-            const list = [];
-            const obj = {};
-            const objBySpeaker = {};
-            const tagFilters = new Set();
-            const complexityFilters = new Set();
-            const doc = res.sessions;
-            let speakers = res.speakers;
-            doc.forEach((session) => {
-              // const session = Object.assign({}, doc.data());
-
-              // map speaker to session
-            // will need to do this for schedule
-            if (session.speakers) {
-              session.speakers.forEach((sessionSpeaker, index) =>{
-                speakers.forEach((speaker) =>{
-                  if (sessionSpeaker === speaker.id) {
-                    session.speakers[index] = speaker;
-                  }
-                });
-              });
-            }
-              list.push(session);
-              session.tags && session.tags.map((tag) => tagFilters.add(tag.trim()));
-              session.complexity && complexityFilters.add(session.complexity.trim());
-              obj[session.id] = session;
-            });
-
-            const payload = {
-              obj,
-              list,
-              objBySpeaker,
-            };
-
-            dispatch({
-              type: FETCH_SESSIONS_SUCCESS,
-              payload,
-            });
-
-            dispatch({
-              type: SET_FILTERS,
-              payload: {
-                tags: [...tagFilters],
-                complexity: [...complexityFilters],
-              },
-            });
-
-            resolve(payload);
-          })
-          .catch((error) => {
-            dispatch({
-              type: FETCH_SESSIONS_FAILURE,
-              payload: { error },
-            });
-            reject(error);
+            let speakersRaw = res.speakers;
+            resolve(speakersRaw);
           });
+    });
+
+
+    const sessionPromise = new Promise(function (resolve) {
+      fetch('data/posts/sessions.json')
+          .then(function (response) {
+          return response.json();
+          })
+          .then(function (res) {
+            let sessionsRaw = res.sessions;
+            resolve(sessionsRaw);
+          });
+    });
+
+
+    return Promise.all([schedulePromise, speakersPromise, sessionPromise])
+      .then(([scheduleRaw, speakersRaw, sessionsRaw]) => {
+        let arr = sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw);
+        let sessions = arr.sessions;
+        const list = [];
+        const obj = {};
+        const objBySpeaker = {};
+        const tagFilters = new Set();
+        const complexityFilters = new Set();
+        sessions.forEach((session) => {
+          list.push(session);
+          session.tags && session.tags.map((tag) => tagFilters.add(tag.trim()));
+          session.complexity && complexityFilters.add(session.complexity.trim());
+          obj[session.id] = session;
+        });
+        const payload = {
+          obj,
+          list,
+          objBySpeaker,
+        };
+
+        dispatch({
+          type: FETCH_SESSIONS_SUCCESS,
+          payload,
+        });
+
+        dispatch({
+          type: SET_FILTERS,
+          payload: {
+            tags: [...tagFilters],
+            complexity: [...complexityFilters],
+          },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: FETCH_SESSIONS_FAILURE,
+          payload: { error },
+        });
       });
-
-
-    // return new Promise((resolve, reject) => {
-    //   firebase.firestore()
-    //     .collection('generatedSessions')
-    //     .get()
-    //     .then((snaps) => {
-    //       const list = [];
-    //       const obj = {};
-    //       const objBySpeaker = {};
-    //       const tagFilters = new Set();
-    //       const complexityFilters = new Set();
-    //       snaps.docs.forEach((doc) => {
-    //         const session = Object.assign({}, doc.data());
-    //         list.push(session);
-    //         session.tags && session.tags.map((tag) => tagFilters.add(tag.trim()));
-    //         session.complexity && complexityFilters.add(session.complexity.trim());
-    //         obj[doc.id] = session;
-    //       });
-
-    //       const payload = {
-    //         obj,
-    //         list,
-    //         objBySpeaker,
-    //       };
-
-    //       console.log(payload);
-
-    //       dispatch({
-    //         type: FETCH_SESSIONS_SUCCESS,
-    //         payload,
-    //       });
-
-    //       dispatch({
-    //         type: SET_FILTERS,
-    //         payload: {
-    //           tags: [...tagFilters],
-    //           complexity: [...complexityFilters],
-    //         },
-    //       });
-
-    //       resolve(payload);
-    //     })
-    //     .catch((error) => {
-    //       dispatch({
-    //         type: FETCH_SESSIONS_FAILURE,
-    //         payload: { error },
-    //       });
-    //       reject(error);
-    //     });
-    // });
   },
 
   fetchUserFeaturedSessions: (userId) => (dispatch) => {
@@ -534,19 +499,56 @@ const sessionsActions = {
 };
 
 const scheduleActions = {
+
   fetchSchedule: () => (dispatch) => {
     dispatch({
       type: FETCH_SCHEDULE,
     });
 
-    return firebase.firestore()
-      .collection('generatedSchedule')
-      .get()
-      .then((snaps) => {
-        const scheduleDays = snaps.docs.map((snap) => snap.data());
+    const schedulePromise = new Promise(function (resolve) {
+      fetch('data/posts/schedule.json')
+          .then(function (response) {
+          return response.json();
+          })
+          .then(function (res) {
+            let scheduleRaw = res.schedule;
+            resolve(scheduleRaw);
+          });
+    });
+
+    const speakersPromise = new Promise(function (resolve) {
+      fetch('data/posts/speakers.json')
+          .then(function (response) {
+          return response.json();
+          })
+          .then(function (res) {
+            let speakersRaw = res.speakers;
+            resolve(speakersRaw);
+          });
+    });
+
+
+    const sessionPromise = new Promise(function (resolve) {
+      fetch('data/posts/sessions.json')
+          .then(function (response) {
+          return response.json();
+          })
+          .then(function (res) {
+            let sessionsRaw = res.sessions;
+            resolve(sessionsRaw);
+          });
+    });
+
+
+    return Promise.all([schedulePromise, speakersPromise, sessionPromise])
+      .then(([scheduleRaw, speakersRaw, sessionsRaw]) => {
+        let arr = sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw);
+
+        let schedule = arr.schedule;
+
         dispatch({
           type: FETCH_SCHEDULE_SUCCESS,
-          data: scheduleDays.sort((a, b) => a.date.localeCompare(b.date)),
+          data: schedule.sort((a, b) => a.date.localeCompare(b.date)),
         });
       })
       .catch((error) => {
@@ -557,6 +559,192 @@ const scheduleActions = {
       });
   },
 };
+
+function mapSessions(sessions, speakers) {
+  sessions.forEach((session) => {
+    if (session.speakers) {
+      session.speakers.forEach((sessionSpeaker, index) =>{
+        speakers.forEach((speaker) =>{
+          if (sessionSpeaker === speaker.id) {
+            session.speakers[index] = speaker;
+          }
+        });
+      });
+    }
+  });
+  return sessions;
+}
+
+function mapSpeakers(speakers, sessions) {
+  speakers.forEach((speaker) =>{
+    if (speaker.sessions) {
+      speaker.sessions.forEach((speakerSession, index) =>{
+        sessions.forEach((session) =>{
+          if (speakerSession.id === session.id) {
+            speaker.sessions[index] = session;
+          }
+        });
+      });
+    }
+  });
+  return speakers;
+}
+
+function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
+  let schedule = [];
+  let scheduleTags = [];
+
+  let sessions = mapSessions(sessionsRaw, speakersRaw);
+  let speakers = mapSpeakers(speakersRaw, sessionsRaw);
+
+
+  scheduleRaw.forEach((day) => {
+    const tracksNumber = day.tracks.length;
+    let dayTags = [];
+    let timeslots = [];
+    let extensions = {};
+    let scheduleTags = [];
+    let dayKey = day.date;
+    const timeslotLen = day.timeslots.length;
+    for (let timeslotsIndex = 0; timeslotsIndex < timeslotLen; timeslotsIndex++) {
+      const timeslot = day.timeslots[timeslotsIndex];
+      let innerSessions = [];
+
+      const sessionsLen = timeslot.sessions.length;
+
+      for (let sessionIndex = 0; sessionIndex < sessionsLen; sessionIndex++) {
+        let subSessions = [];
+
+        const subSessionsLen = timeslot.sessions[sessionIndex].items.length;
+        for (let subSessionIndex = 0; subSessionIndex < subSessionsLen; subSessionIndex++) {
+          const sessionId = timeslot.sessions[sessionIndex].items[subSessionIndex];
+
+          const subsession = sessionsRaw.find((session) => session.id === sessionId);
+
+
+          const mainTag = subsession.tags ? subsession.tags[0] : 'General';
+          const endTimeRaw = timeslot.sessions[sessionIndex].extend
+              // eslint-disable-next-line max-len
+              ? day.timeslots[timeslotsIndex + timeslot.sessions[sessionIndex].extend - 1].endTime
+              : timeslot.endTime;
+          const endTime = subSessionsLen > 1
+              ? getEndTime(
+                  dayKey,
+                  timeslot.startTime,
+                  endTimeRaw,
+                  subSessionsLen,
+                  subSessionIndex + 1
+              )
+              : endTimeRaw;
+          const startTime = subSessionsLen > 1 && subSessionIndex > 0
+              ? sessions[timeslot.sessions[sessionIndex].items[subSessionIndex - 1]].endTime
+              : timeslot.startTime;
+
+          if (subsession.tags) {
+            dayTags = [...new Set([...dayTags, ...subsession.tags])];
+          }
+          scheduleTags = addTagTo(scheduleTags || [], mainTag);
+
+          const finalSubSession = Object.assign({}, subsession, {
+              mainTag,
+              id: sessionId.toString(),
+              day: dayKey,
+              // eslint-disable-next-line max-len
+              track: day.tracks[timeslot.sessions[sessionIndex].trackNum - 1] || timeslot.sessions[sessionIndex].track || day.tracks[sessionIndex],
+              startTime,
+              endTime,
+              duration: getDuration(dayKey, startTime, endTime),
+              dateReadable: day.dateReadable,
+          });
+
+          Object.assign(subsession, finalSubSession);
+
+
+          subSessions.push(finalSubSession);
+        }
+        let startRow = timeslotsIndex + 1;
+        let startColumn = sessionIndex + 1;
+        let endRow = timeslotsIndex +(timeslot.sessions[sessionIndex].extend || 0) + 1;
+        let endColumn = sessionsLen !== 1
+          // eslint-disable-next-line max-len
+          ? sessionIndex + 2 : Object.keys(extensions).length ? Object.keys(extensions)[0]
+              : tracksNumber + 1;
+
+
+        if (timeslot.sessions[sessionIndex].extend) {
+            extensions[sessionIndex + 1] = timeslot.sessions[sessionIndex].extend;
+        }
+
+        if (timeslot.sessions[sessionIndex].rowSpan) {
+          endColumn = startColumn + timeslot.sessions[sessionIndex].rowSpan;
+        }
+
+        if (timeslot.sessions[sessionIndex].startCol) {
+          startColumn = timeslot.sessions[sessionIndex].startCol;
+          endColumn = sessionIndex + timeslot.sessions[sessionIndex].startCol;
+        }
+
+        innerSessions = [...innerSessions, {
+            gridArea: `${startRow} / ${startColumn} / ${endRow} / ${endColumn}`,
+            items: subSessions,
+        }];
+      }
+
+      for (const [key, value] of Object.entries(extensions)) {
+          if (value === 1) {
+              delete extensions[key];
+          } else {
+              extensions[key] = value - 1;
+          }
+      }
+
+      timeslots.push(Object.assign({}, timeslot, {
+          sessions: innerSessions,
+      }));
+    }
+    day.timeslots = timeslots;
+    day.tags = dayTags;
+    schedule.push(day);
+  });
+
+
+  return {
+    sessions,
+    schedule,
+    speakers,
+  };
+}
+
+function getTimeDifference(date, startTime, endTime) {
+  const timezone = new Date().toString().match(/([A-Z]+[+-][0-9]+.*)/)[1];
+  const timeStart = new Date(date + ' ' + startTime + ' ' + timezone).getTime();
+  const timeEnd = new Date(date + ' ' + endTime + ' ' + timezone).getTime();
+  return timeEnd - timeStart;
+}
+
+function getEndTime(date, startTime, endTime, totalNumber, number) {
+  const timezone = new Date().toString().match(/([A-Z]+[+-][0-9]+.*)/)[1];
+  const timeStart = new Date(`${date} ${startTime} ${timezone}`).getTime();
+  const difference = Math.floor(getTimeDifference(date, startTime, endTime) / totalNumber);
+  const result = new Date(timeStart + difference * number);
+  return result.getHours() + ':' + result.getMinutes();
+}
+
+function getDuration(date, startTime, endTime) {
+  let difference = getTimeDifference(date, startTime, endTime);
+  const hh = Math.floor(difference / 1000 / 60 / 60);
+  difference -= hh * 1000 * 60 * 60;
+  return {
+      hh,
+      mm: Math.floor(difference / 1000 / 60),
+  };
+}
+
+function addTagTo(array, element) {
+  if (array.indexOf(element) < 0) {
+      return [...array, element];
+  }
+}
 
 const galleryActions = {
   fetchGallery: () => (dispatch) => {
