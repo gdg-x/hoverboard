@@ -65,6 +65,11 @@
           "name": "FAQs",
           "url": "/faq/",
           "newTab": false
+        },
+        {
+          "name": "Transfer your ticket",
+          "url": "https://libertyjs.ticketspice.com/libertyjs-2019/transfer",
+          "newTab": false
         }
       ]
     }
