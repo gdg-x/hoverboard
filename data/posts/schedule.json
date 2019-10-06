@@ -82,7 +82,7 @@
               "items" : [ "jovo" ],
               "extend": 2,
               "startCol": 3,
-              "track": 3
+              "trackNum": 3
             }
           ]
         },
@@ -225,7 +225,7 @@
               "items" : [ "javaScriptMidi" ],
               "extend": 2,
               "startCol": 3,
-              "track": 3
+              "trackNum": 3
             }
           ]
         },
@@ -296,7 +296,10 @@
           "sessions" : [
 
             {
-              "items" : [ "afterparty" ]
+              "items" : [ "afterparty" ],
+              "track": {
+                "title" : "\"Only in America\" Gallery, Main Floor"
+              }
             }
           ]
         }
