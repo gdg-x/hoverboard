@@ -49,7 +49,7 @@
       "complexity" : "All",
       "description" : "Research indicates that programmers are not entirely happy, and that much of this unhappiness arises from interactions with other people.  Research also tells us that teams are capable of producing solutions that are more creative and of higher quality than those of single individuals.  However, teams, by definition, consist of people--possibly the very ones who are causing our unhappiness.<br><br>This talk explores the science behind human persuasion, examines the roots of motivation, and reveals the single quality that all high-performing teams share.  You’ll leave armed to persuade, primed to understand, and motivated to create teams that inspire everyone to do their best work.",
       "speakers" : [ "sandi_metz" ],
-      "tags" : [ "keynote" ],
+      "tags" : [ "keynote", "motivational" ],
       "title" : "You Are Insufficiently Persuasive"
     },
     {
