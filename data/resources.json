@@ -55,7 +55,12 @@
           "name": "LibertyJS 2018",
           "url": "/",
           "newTab": false
-        }
+		},
+		{
+			"name": "Past LibertyJS Speakers",
+			"url": "/previous-speakers",
+			"newTab": false
+		  }
       ]
     },
     {
