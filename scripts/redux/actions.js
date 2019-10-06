@@ -265,9 +265,21 @@ const blogActions = {
 };
 
 const speakersActions = {
+
   fetchList: () => (dispatch) => {
     dispatch({
       type: FETCH_SPEAKERS,
+    });
+
+    const schedulePromise = new Promise(function (resolve) {
+      fetch('data/posts/schedule.json')
+          .then(function (response) {
+          return response.json();
+          })
+          .then(function (res) {
+            let scheduleRaw = res.schedule;
+            resolve(scheduleRaw);
+          });
     });
 
     const speakersPromise = new Promise(function (resolve) {
@@ -276,10 +288,11 @@ const speakersActions = {
           return response.json();
           })
           .then(function (res) {
-            let speakers = res.speakers;
-            resolve(speakers);
+            let speakersRaw = res.speakers;
+            resolve(speakersRaw);
           });
     });
+
 
     const sessionPromise = new Promise(function (resolve) {
       fetch('data/posts/sessions.json')
@@ -287,24 +300,17 @@ const speakersActions = {
           return response.json();
           })
           .then(function (res) {
-            let sessions = res.sessions;
-            resolve(sessions);
+            let sessionsRaw = res.sessions;
+            resolve(sessionsRaw);
           });
     });
 
-    return Promise.all([speakersPromise, sessionPromise])
-      .then(([speakers, sessions]) => {
-        speakers.forEach((speaker) =>{
-          if (speaker.sessions) {
-            speaker.sessions.forEach((speakerSession, index) =>{
-              sessions.forEach((session) =>{
-                if (speakerSession.id === session.id) {
-                  speaker.sessions[index] = session;
-                }
-              });
-            });
-          }
-        });
+
+    return Promise.all([schedulePromise, speakersPromise, sessionPromise])
+      .then(([scheduleRaw, speakersRaw, sessionsRaw]) => {
+        let arr = sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw);
+        let speakers = arr.speakers;
+
         dispatch({
           type: FETCH_SPEAKERS_SUCCESS,
           payload: {
@@ -360,9 +366,21 @@ const previousSpeakersActions = {
 };
 
 const sessionsActions = {
+
   fetchList: () => (dispatch) => {
     dispatch({
       type: FETCH_SESSIONS,
+    });
+
+    const schedulePromise = new Promise(function (resolve) {
+      fetch('data/posts/schedule.json')
+          .then(function (response) {
+          return response.json();
+          })
+          .then(function (res) {
+            let scheduleRaw = res.schedule;
+            resolve(scheduleRaw);
+          });
     });
 
     const speakersPromise = new Promise(function (resolve) {
@@ -371,10 +389,11 @@ const sessionsActions = {
           return response.json();
           })
           .then(function (res) {
-            let speakers = res.speakers;
-            resolve(speakers);
+            let speakersRaw = res.speakers;
+            resolve(speakersRaw);
           });
     });
+
 
     const sessionPromise = new Promise(function (resolve) {
       fetch('data/posts/sessions.json')
@@ -382,57 +401,22 @@ const sessionsActions = {
           return response.json();
           })
           .then(function (res) {
-            let sessions = res.sessions;
-            resolve(sessions);
+            let sessionsRaw = res.sessions;
+            resolve(sessionsRaw);
           });
     });
 
-    // return Promise.all([speakersPromise, sessionPromise])
-    //   .then(([speakers, sessions]) => {
-    //     speakers.forEach((speaker) =>{
-    //       if (speaker.sessions) {
-    //         speaker.sessions.forEach((speakerSession, index) =>{
-    //           sessions.forEach((session) =>{
-    //             if (speakerSession.id === session.id) {
-    //               speaker.sessions[index] = session;
-    //             }
-    //           });
-    //         });
-    //       }
-    //     });
-    //     dispatch({
-    //       type: FETCH_SPEAKERS_SUCCESS,
-    //       payload: {
-    //         obj: speakers.reduce((acc, curr) =>
-    //           Object.assign({}, acc, { [curr.id]: curr }), {}),
-    //         list: speakers,
-    //       },
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     dispatch({
-    //       type: FETCH_SPEAKERS_FAILURE,
-    //       payload: { error },
-    //     });
-    //   });
 
-    return Promise.all([speakersPromise, sessionPromise])
-      .then(([speakers, sessions]) => {
+    return Promise.all([schedulePromise, speakersPromise, sessionPromise])
+      .then(([scheduleRaw, speakersRaw, sessionsRaw]) => {
+        let arr = sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw);
+        let sessions = arr.sessions;
         const list = [];
         const obj = {};
         const objBySpeaker = {};
         const tagFilters = new Set();
         const complexityFilters = new Set();
         sessions.forEach((session) => {
-        if (session.speakers) {
-          session.speakers.forEach((sessionSpeaker, index) =>{
-            speakers.forEach((speaker) =>{
-              if (sessionSpeaker === speaker.id) {
-                session.speakers[index] = speaker;
-              }
-            });
-          });
-        }
           list.push(session);
           session.tags && session.tags.map((tag) => tagFilters.add(tag.trim()));
           session.complexity && complexityFilters.add(session.complexity.trim());
@@ -463,57 +447,6 @@ const sessionsActions = {
           payload: { error },
         });
       });
-
-
-    // return new Promise((resolve, reject) => {
-    //   firebase.firestore()
-    //     .collection('generatedSessions')
-    //     .get()
-    //     .then((snaps) => {
-    //       const list = [];
-    //       const obj = {};
-    //       const objBySpeaker = {};
-    //       const tagFilters = new Set();
-    //       const complexityFilters = new Set();
-    //       snaps.docs.forEach((doc) => {
-    //         const session = Object.assign({}, doc.data());
-    //         list.push(session);
-    //         session.tags && session.tags.map((tag) => tagFilters.add(tag.trim()));
-    //         session.complexity && complexityFilters.add(session.complexity.trim());
-    //         obj[doc.id] = session;
-    //       });
-
-    //       const payload = {
-    //         obj,
-    //         list,
-    //         objBySpeaker,
-    //       };
-
-    //       console.log(payload);
-
-    //       dispatch({
-    //         type: FETCH_SESSIONS_SUCCESS,
-    //         payload,
-    //       });
-
-    //       dispatch({
-    //         type: SET_FILTERS,
-    //         payload: {
-    //           tags: [...tagFilters],
-    //           complexity: [...complexityFilters],
-    //         },
-    //       });
-
-    //       resolve(payload);
-    //     })
-    //     .catch((error) => {
-    //       dispatch({
-    //         type: FETCH_SESSIONS_FAILURE,
-    //         payload: { error },
-    //       });
-    //       reject(error);
-    //     });
-    // });
   },
 
   fetchUserFeaturedSessions: (userId) => (dispatch) => {
@@ -612,122 +545,9 @@ const scheduleActions = {
 
     return Promise.all([schedulePromise, speakersPromise, sessionPromise])
       .then(([scheduleRaw, speakersRaw, sessionsRaw]) => {
-        let schedule = [];
-        let sessions = {};
-        let speakers = {};
-        let scheduleTags = [];
+        let arr = sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw);
 
-        scheduleRaw.forEach((day) => {
-          const tracksNumber = day.tracks.length;
-          let dayTags = [];
-          let timeslots = [];
-          let extensions = {};
-          let scheduleTags = [];
-          let dayKey = day.date;
-          const timeslotLen = day.timeslots.length;
-          for (let timeslotsIndex = 0; timeslotsIndex < timeslotLen; timeslotsIndex++) {
-            const timeslot = day.timeslots[timeslotsIndex];
-            let innerSessions = [];
-
-            const sessionsLen = timeslot.sessions.length;
-
-            for (let sessionIndex = 0; sessionIndex < sessionsLen; sessionIndex++) {
-              let subSessions = [];
-
-              const subSessionsLen = timeslot.sessions[sessionIndex].items.length;
-              for (let subSessionIndex = 0; subSessionIndex < subSessionsLen; subSessionIndex++) {
-                const sessionId = timeslot.sessions[sessionIndex].items[subSessionIndex];
-
-                const subsession = sessionsRaw.find((session) => session.id === sessionId);
-
-                const mainTag = subsession.tags ? subsession.tags[0] : 'General';
-                const endTimeRaw = timeslot.sessions[sessionIndex].extend
-                    // eslint-disable-next-line max-len
-                    ? day.timeslots[timeslotsIndex + timeslot.sessions[sessionIndex].extend - 1].endTime
-                    : timeslot.endTime;
-                const endTime = subSessionsLen > 1
-                    ? getEndTime(
-                        dayKey,
-                        timeslot.startTime,
-                        endTimeRaw,
-                        subSessionsLen,
-                        subSessionIndex + 1
-                    )
-                    : endTimeRaw;
-                const startTime = subSessionsLen > 1 && subSessionIndex > 0
-                    ? sessions[timeslot.sessions[sessionIndex].items[subSessionIndex - 1]].endTime
-                    : timeslot.startTime;
-
-                if (subsession.tags) {
-                  dayTags = [...new Set([...dayTags, ...subsession.tags])];
-                }
-                scheduleTags = addTagTo(scheduleTags || [], mainTag);
-
-                let speakerDataArr = [];
-                subsession.speakers.forEach((speakerId) =>
-                  {
-                    let speakerobj = speakersRaw.find((speaker) => speaker.id === speakerId);
-                    speakerDataArr.push(speakerobj);
-                  });
-
-                const finalSubSession = Object.assign({}, subsession, {
-                    mainTag,
-                    id: sessionId.toString(),
-                    day: dayKey,
-                    track: subsession.track || day.tracks[sessionIndex],
-                    startTime,
-                    endTime,
-                    duration: getDuration(dayKey, startTime, endTime),
-                    dateReadable: day.dateReadable,
-                    speakers: speakerDataArr,
-                });
-
-                subSessions.push(finalSubSession);
-              }
-              let startRow = timeslotsIndex + 1;
-              let startColumn = sessionIndex + 1;
-              let endRow = timeslotsIndex +(timeslot.sessions[sessionIndex].extend || 0) + 1;
-              let endColumn = sessionsLen !== 1
-                // eslint-disable-next-line max-len
-                ? sessionIndex + 2 : Object.keys(extensions).length ? Object.keys(extensions)[0]
-                    : tracksNumber + 1;
-
-
-              if (timeslot.sessions[sessionIndex].extend) {
-                  extensions[sessionIndex + 1] = timeslot.sessions[sessionIndex].extend;
-              }
-
-              if (timeslot.sessions[sessionIndex].rowSpan) {
-                endColumn = startColumn + timeslot.sessions[sessionIndex].rowSpan;
-              }
-
-            if (timeslot.sessions[sessionIndex].startCol) {
-              startColumn = timeslot.sessions[sessionIndex].startCol;
-              endColumn = sessionIndex + timeslot.sessions[sessionIndex].startCol;
-            }
-
-              innerSessions = [...innerSessions, {
-                  gridArea: `${startRow} / ${startColumn} / ${endRow} / ${endColumn}`,
-                  items: subSessions,
-              }];
-            }
-            for (const [key, value] of Object.entries(extensions)) {
-                if (value === 1) {
-                    delete extensions[key];
-                } else {
-                    extensions[key] = value - 1;
-                }
-            }
-
-            timeslots.push(Object.assign({}, timeslot, {
-                sessions: innerSessions,
-            }));
-          }
-
-          day.timeslots = timeslots;
-          day.tags = dayTags;
-          schedule.push(day);
-        });
+        let schedule = arr.schedule;
 
         dispatch({
           type: FETCH_SCHEDULE_SUCCESS,
@@ -740,26 +560,158 @@ const scheduleActions = {
           payload: { error },
         });
       });
-
-    // return firebase.firestore()
-    //   .collection('generatedSchedule')
-    //   .get()
-    //   .then((snaps) => {
-    //     const scheduleDays = snaps.docs.map((snap) => snap.data());
-    //     console.log(scheduleDays);
-    //     dispatch({
-    //       type: FETCH_SCHEDULE_SUCCESS,
-    //       data: scheduleDays.sort((a, b) => a.date.localeCompare(b.date)),
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     dispatch({
-    //       type: FETCH_SCHEDULE_FAILURE,
-    //       payload: { error },
-    //     });
-    //   });
   },
 };
+
+function mapSessions(sessions, speakers) {
+  sessions.forEach((session) => {
+    if (session.speakers) {
+      session.speakers.forEach((sessionSpeaker, index) =>{
+        speakers.forEach((speaker) =>{
+          if (sessionSpeaker === speaker.id) {
+            session.speakers[index] = speaker;
+          }
+        });
+      });
+    }
+  });
+  return sessions;
+}
+
+function mapSpeakers(speakers, sessions) {
+  speakers.forEach((speaker) =>{
+    if (speaker.sessions) {
+      speaker.sessions.forEach((speakerSession, index) =>{
+        sessions.forEach((session) =>{
+          if (speakerSession.id === session.id) {
+            speaker.sessions[index] = session;
+          }
+        });
+      });
+    }
+  });
+  return speakers;
+}
+
+function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
+  let schedule = [];
+  let scheduleTags = [];
+
+  let sessions = mapSessions(sessionsRaw, speakersRaw);
+  let speakers = mapSpeakers(speakersRaw, sessionsRaw);
+
+
+  scheduleRaw.forEach((day) => {
+    const tracksNumber = day.tracks.length;
+    let dayTags = [];
+    let timeslots = [];
+    let extensions = {};
+    let scheduleTags = [];
+    let dayKey = day.date;
+    const timeslotLen = day.timeslots.length;
+    for (let timeslotsIndex = 0; timeslotsIndex < timeslotLen; timeslotsIndex++) {
+      const timeslot = day.timeslots[timeslotsIndex];
+      let innerSessions = [];
+
+      const sessionsLen = timeslot.sessions.length;
+
+      for (let sessionIndex = 0; sessionIndex < sessionsLen; sessionIndex++) {
+        let subSessions = [];
+
+        const subSessionsLen = timeslot.sessions[sessionIndex].items.length;
+        for (let subSessionIndex = 0; subSessionIndex < subSessionsLen; subSessionIndex++) {
+          const sessionId = timeslot.sessions[sessionIndex].items[subSessionIndex];
+
+          const subsession = sessionsRaw.find((session) => session.id === sessionId);
+
+          const mainTag = subsession.tags ? subsession.tags[0] : 'General';
+          const endTimeRaw = timeslot.sessions[sessionIndex].extend
+              // eslint-disable-next-line max-len
+              ? day.timeslots[timeslotsIndex + timeslot.sessions[sessionIndex].extend - 1].endTime
+              : timeslot.endTime;
+          const endTime = subSessionsLen > 1
+              ? getEndTime(
+                  dayKey,
+                  timeslot.startTime,
+                  endTimeRaw,
+                  subSessionsLen,
+                  subSessionIndex + 1
+              )
+              : endTimeRaw;
+          const startTime = subSessionsLen > 1 && subSessionIndex > 0
+              ? sessions[timeslot.sessions[sessionIndex].items[subSessionIndex - 1]].endTime
+              : timeslot.startTime;
+
+          if (subsession.tags) {
+            dayTags = [...new Set([...dayTags, ...subsession.tags])];
+          }
+          scheduleTags = addTagTo(scheduleTags || [], mainTag);
+
+          const finalSubSession = Object.assign({}, subsession, {
+              mainTag,
+              id: sessionId.toString(),
+              day: dayKey,
+              track: subsession.track || day.tracks[sessionIndex],
+              startTime,
+              endTime,
+              duration: getDuration(dayKey, startTime, endTime),
+              dateReadable: day.dateReadable,
+          });
+
+          subSessions.push(finalSubSession);
+        }
+        let startRow = timeslotsIndex + 1;
+        let startColumn = sessionIndex + 1;
+        let endRow = timeslotsIndex +(timeslot.sessions[sessionIndex].extend || 0) + 1;
+        let endColumn = sessionsLen !== 1
+          // eslint-disable-next-line max-len
+          ? sessionIndex + 2 : Object.keys(extensions).length ? Object.keys(extensions)[0]
+              : tracksNumber + 1;
+
+
+        if (timeslot.sessions[sessionIndex].extend) {
+            extensions[sessionIndex + 1] = timeslot.sessions[sessionIndex].extend;
+        }
+
+        if (timeslot.sessions[sessionIndex].rowSpan) {
+          endColumn = startColumn + timeslot.sessions[sessionIndex].rowSpan;
+        }
+
+        if (timeslot.sessions[sessionIndex].startCol) {
+          startColumn = timeslot.sessions[sessionIndex].startCol;
+          endColumn = sessionIndex + timeslot.sessions[sessionIndex].startCol;
+        }
+
+        innerSessions = [...innerSessions, {
+            gridArea: `${startRow} / ${startColumn} / ${endRow} / ${endColumn}`,
+            items: subSessions,
+        }];
+      }
+
+      for (const [key, value] of Object.entries(extensions)) {
+          if (value === 1) {
+              delete extensions[key];
+          } else {
+              extensions[key] = value - 1;
+          }
+      }
+
+      timeslots.push(Object.assign({}, timeslot, {
+          sessions: innerSessions,
+      }));
+    }
+    day.timeslots = timeslots;
+    day.tags = dayTags;
+    schedule.push(day);
+  });
+
+
+  return {
+    sessions,
+    schedule,
+    speakers,
+  };
+}
 
 function getTimeDifference(date, startTime, endTime) {
   const timezone = new Date().toString().match(/([A-Z]+[+-][0-9]+.*)/)[1];
