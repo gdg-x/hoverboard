@@ -106,7 +106,7 @@
               "items" : [ "digitalAccessibility" ]
             },
             {
-              "items": ["rocketScience"]
+              "items": ["thinkfast"]
             },
             {
               "items": ["teslaBattery"],
@@ -122,7 +122,7 @@
               "items" : [ "mentorPlaybook" ]
             },
             {
-              "items": ["thinkfast"]
+              "items": ["rocketScience"]
             }
           ]
         },
@@ -275,6 +275,28 @@
           "sessions" : [
             {
               "items" : [ "safeSpace" ]
+            }
+          ]
+        },
+        {
+          "startTime" : "17:00",
+          "endTime" : "17:10",
+
+          "sessions" : [
+
+            {
+              "items" : [ "closingremarks" ]
+            }
+          ]
+        },
+        {
+          "startTime" : "17:10",
+          "endTime" : "19:00",
+
+          "sessions" : [
+
+            {
+              "items" : [ "afterparty" ]
             }
           ]
         }
