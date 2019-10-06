@@ -133,7 +133,7 @@
       "complexity" : "Intermediate",
       "description" : "Using Jovo Framework and Jovo CLI, developers can quickly develop voice-first applications for Alexa and Google Home within a single nodejs application. In this workshop, I show you how to quickly build, test, and deploy a voice app using Jovo, and leave with areas for further exploration.<br><br>Topics covered include: how to build a language model, how to use the Alexa and Actions on Google Simulator, how to create unit tests for voice applications, how to route through conversations, how to request user data, and how to extend the bot to other conversational platforms such as Facebook Messenger or Twilio SMS.",
       "speakers" : [ "jeffrey_smith" ],
-      "tags" : ["javascript", "jovo", "VUI", "Node", "Alexa", "Dialogflow", "Typescript"],
+      "tags" : ["javascript", "jovo", "VUI", "Node", "Alexa", "Dialogflow", "Typescript", "workshop"],
       "title" : "How to Build Cross Platform Voice Apps with the Jovo Framework"
     },
     {
@@ -196,7 +196,7 @@
       "id":"headlessArchitecture",
       "complexity" : "Intermediate",
       "description" : "Headless architecture is a popular solution for projects that require cutting-edge user experiences and next-level performance, but the learning curve can be discouraging. In this talk, we’ll give participants tactics, tools, strategies, and confidence to make their first headless project a success.",
-      "speakers" : [ "Christina_Deemer" ],
+      "speakers" : [ "christina_deemer" ],
       "tags" : ["front-end", "react", "tools", "motivational", "performance", "technical"],
       "title" : "Going Headless without Losing Your Head: Strategies for Making Your First Decoupled Web App a Success"
     },
@@ -204,8 +204,8 @@
       "id":"apolloGraphQl",
       "complexity" : "Intermediate",
       "description" : "ApolloClient and ApolloServer empower developers with control over the data they work with. This workshop will dig into using both along with Prisma to build a full stack application. We’ll tackle REST, Database setup, and authentication with ease using this amazing ecosystem!",
-      "speakers" : [ "Domitrius_Clark" ],
-      "tags" : ["react", "apollo", "prisma", "mongodb"],
+      "speakers" : [ "domitrius_clark" ],
+      "tags" : ["react", "apollo", "prisma", "mongodb", "workshop"],
       "title" : "Apollo: One Giant leap for Full Stack"
     },
     {
@@ -220,7 +220,7 @@
       "id":"demystifyingRegularExpressions",
       "complexity" : "All",
       "description" : "A Regular Expression is a sequence of characters used as a search pattern on a set of a text—but trying to read that sequence might look like something out of Stranger Things. This workshop will break down how regular expressions can be used in everyday programming to make manipulating data easier.",
-      "speakers" : [ "Emily_Rautenberg" ],
+      "speakers" : [ "emily_rautenberg" ],
       "tags" : ["javascript", "regular expressions", "regex", "regexp", "data"],
       "title" : "Demystifying Regular Expressions"
     },
@@ -228,7 +228,7 @@
       "id":"buildingAccessibility",
       "complexity" : "Intermediate",
       "description" : "Before you manually review your pages in an assistive technology device the International Association of Accessibility Professionals (IAAP) recommends that you use an automated testing tools to check your page. So you stop everything and review your page with a third-party website or browser extension… if you remember to. Why wait until you’re that far into development? Let’s build accessibility testing into your workflow, and prevent common errors from even being committed in the first place. I’ll give an overview of tools that exist, and share some code to help customize your own workflow. Familiarity with accessible development is not needed, but you should be familiar with HTML, JavaScript, Git, and NPM.",
-      "speakers" : [ "Nathan_Lilly" ],
+      "speakers" : [ "nathan_lilly" ],
       "tags" : ["javascript", "workflow", "accessibility", "a11y", "axe", "axe-core", "testing", "linting", "react", "npm", "front-end", "back-end", "tools", "automation"],
       "title" : "Building Accessibility Testing Into Your Workflow"
     },
