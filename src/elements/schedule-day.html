@@ -92,8 +92,8 @@
       <template is="dom-repeat" items="[[day.timeslots]]" as="timeslot" index-as="timeslotIndex">
 
         <div id$="[[timeslot.startTime]]" class="start-time" style$="grid-area: [[_getTimePosition(timeslotIndex)]]">
-          <span class="hours">[[_splitText(timeslot.startTime, ':', 0)]]</span>
-          <span class="minutes">[[_splitText(timeslot.startTime, ':', 1)]]</span>
+          <span class="hours">[[_normalizeTime(timeslot.startTime, 'hours' )]]</span>
+          <span class="minutes">[[_normalizeTime(timeslot.startTime, 'min')]]</span>
         </div>
 
 
@@ -195,6 +195,19 @@
 
       _splitText(text, divider, index) {
         return text.split(divider)[index];
+      }
+
+      _normalizeTime(time, timePart) {
+        let index = 0;
+        if (timePart === 'min') {
+          index = 1;
+        }
+        let t = this._splitText(time, ':', index);
+        t = parseInt(t);
+        if (t > 12 && timePart === 'hours') {
+          t = t - 12;
+        }
+        return t;
       }
 
       _showAddSession(timeslot, onlyFeatured) {
