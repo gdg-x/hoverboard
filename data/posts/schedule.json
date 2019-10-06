@@ -57,7 +57,7 @@
               "items" : [ "minorityRole" ]
             },
             {
-              "items": ["thinkfast"]
+              "items": ["deploymentStrategy"]
             }
           ]
         },
@@ -93,7 +93,7 @@
               "items" : [ "rsjxFutureAsyncProgramming" ]
             },
             {
-              "items": ["deploymentStrategy"]
+              "items": ["thinkfast"]
             }
           ]
         },

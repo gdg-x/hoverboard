@@ -1,19 +1,11 @@
 {
   "sessions" : [
     {
-      "id":"blank",
-      "complexity" : "",
-      "description" : "",
-      "speakers" : [],
-      "tags" : [  ],
-      "title" : ""
-    },
-    {
       "id":"1024Breakfast",
       "complexity" : "All",
       "description" : "Registration and Breakfast",
       "speakers" : [],
-      "tags" : [ "Food" ],
+      "tags" : [ "food" ],
       "title" : "Registration and Breakfast"
     },
     {
@@ -21,7 +13,7 @@
       "complexity" : "All",
       "description" : "Opening Remarks",
       "speakers" : [],
-      "tags" : [ ],
+      "tags" : ["community"],
       "title" : "Opening Remarks"
     },
     {
@@ -29,7 +21,7 @@
       "complexity" : "All",
       "description" : "Lunch",
       "speakers" : [],
-      "tags" : [ "Food" ],
+      "tags" : [ "food" ],
       "title" : "Lunch"
     },
     {
@@ -37,7 +29,7 @@
       "complexity" : "All",
       "description" : "Research indicates that programmers are not entirely happy, and that much of this unhappiness arises from interactions with other people.  Research also tells us that teams are capable of producing solutions that are more creative and of higher quality than those of single individuals.  However, teams, by definition, consist of people--possibly the very ones who are causing our unhappiness.<br><br>This talk explores the science behind human persuasion, examines the roots of motivation, and reveals the single quality that all high-performing teams share.  You’ll leave armed to persuade, primed to understand, and motivated to create teams that inspire everyone to do their best work.",
       "speakers" : [ "sandi_metz" ],
-      "tags" : [ "Keynote" ],
+      "tags" : [ "keynote" ],
       "title" : "You Are Insufficiently Persuasive"
     },
     {
@@ -53,7 +45,7 @@
       "complexity" : "All",
       "description" : "The introduction of Hooks in React has become a very \"buzz word\" topic in the community, which, ultimately, has lead to some confusion. Some common questions I hear when talking to others are: What are they? How do you use them? Do they replace life-cycle methods and/or class components completely? We will go over all of these together. I'll start with a basic React app using a few stateful, class components using life-cycle methods, custom methods and API interaction. I will then convert the components over to functional ones while integrating several different hooks, without losing any functionality. Finally, we will look into some common \"gotchas\" that may be confusing for people starting out with hooks. You will come away from this talk with a good foundation for various primitive hooks in React, and you'll understand how they're used and how you can start to write your own custom hooks.",
       "speakers" : [ "ryan_heupler" ],
-      "tags" : [ "talk", "ReactJs", "front-end", "optimization", "framework", "functional programming"],
+      "tags" : [ "talk", "reactJs", "front-end", "optimization", "framework", "functional programming"],
       "title" : "Refactoring a Class Component: A Gentle Introduction into React Hooks"
     },
     {
@@ -77,7 +69,7 @@
       "complexity" : "All",
       "description" : "Which one is your favourite: ReactJS or Vue.js? Both ReactJS & Vue.js developers will get the same requirements for an application (Building Tesla’s Battery Range Calculator). Are you a Vue.js developer who wants to learn how to use ReactJS, or the other way around? Trust us, you can learn from each other, and that’s exactly what you will do on this session. We will give you a buggy application that you’ll have to fix before adding new features to it using either Vue.js or React. How fast will you go? Will you share your findings with other developers? You’re welcome to test this during our workshop. We have built the same application with ReactJS and Vue.js. We invite you to spend the session learning how to build such an app yourself with the help of our mentors. By the end of the session, you should be able to answer these questions: • What is Functional Reactive Programming? • How to use React and Vue.js? What are the main differences between Vue.js and React?",
       "speakers" : [ "peter_eijgermans" ],
-      "tags" : ["Workshop","Vue.js", "ReactJs", "UserInterfaces", "front-end", "tools", "redux", "veux", "framework"],
+      "tags" : ["Workshop","Vue.js", "reactJs", "UserInterfaces", "front-end", "tools", "redux", "veux", "framework"],
       "title" : "Building Tesla’s Battery Range Calculator with Vue.js or ReactJS"
     },
     {
@@ -93,7 +85,7 @@
       "complexity" : "Intermediate",
       "description" : "This presentation will discuss how to cope with conversing with those who are from diverse backgrounds with ease and accomplish your daily connections with co-workers, who come from different backgrounds, with a common goal of comprehension. Necessities that makes you distinct, skills that make you stand out. The diversities that make us rare and unique if it’s your ethnic background, race, ethnic customs, religious beliefs, sex, sexuality, or form of individuality may also be a cause of contention. Discover how to bring out that, which is already within you and communicate, work with individuals who are diverse as well as, striking-up great conversation between one another. Also, this presentation will contribute to you your attendees with fostering a positive change and cultivate a more inviting place of work. This presentation will discuss the impacts of diversity collectively using identifying what variety can be combined with how it affects a business. The presentation will assist with explaining what it signifies being an inclusive place of work, offer comprehensive measures to assess best what degree one’s place of work fosters inclusion a and diversity. The workshop, through means of role-playing scenarios, present ways you can take to impact positive philosophies at your place of work. Individuals will take with them an increased perception of the implications of a tolerant, inclusive and diverse place of work. Individuals will take with them, along with personal skills, which one will utilize to develop into promoters of social change, that will build a more diverse workplace.",
       "speakers" : [ "stacey_jenkins" ],
-      "tags" : ["Business", "Care", "Color", "Conference", "Country", "Culture", "Diversity", "Equity", "Future", "Gender", "Governance", "Hiring", "Inclusion", "LGBTQ", "Manager", "Marketing", "People", "Race", "Student", "Work", "World"],
+      "tags" : ["business", "care", "color", "culture", "diversity", "equity", "future", "gender", "governance", "hiring", "inclusion", "LGBTQ", "manager", "marketing", "people", "race", "student", "work", "world"],
       "title" : "The Role of The Minority in The World of Technology"
     },
     {
@@ -133,7 +125,7 @@
       "complexity" : "Intermediate",
       "description" : "Using Jovo Framework and Jovo CLI, developers can quickly develop voice-first applications for Alexa and Google Home within a single nodejs application. In this workshop, I show you how to quickly build, test, and deploy a voice app using Jovo, and leave with areas for further exploration.<br><br>Topics covered include: how to build a language model, how to use the Alexa and Actions on Google Simulator, how to create unit tests for voice applications, how to route through conversations, how to request user data, and how to extend the bot to other conversational platforms such as Facebook Messenger or Twilio SMS.",
       "speakers" : [ "jeffrey_smith" ],
-      "tags" : [ "jovo", "VUI", "Node", "Alexa", "Dialogflow", "Typescript", "workshop"],
+      "tags" : [ "jovo", "VUI", "nodeJs", "Alexa", "Dialogflow", "Typescript", "workshop"],
       "title" : "How to Build Cross Platform Voice Apps with the Jovo Framework"
     },
     {
@@ -149,7 +141,7 @@
       "complexity" : "Intermediate",
       "description" : "What’s the difference between localization and internationalization? Should I store my translations statically, use my own API, or just use a third-party translation service? What sort of UX problems might I run into when translating my application? Do I have to revamp everything for RTL languages?<br><br>When I started working at my company, all our translations sat in static JSON files. Manually adding new translations was tedious and error-prone, every language loaded on every page, and new translations rarely made it in the same release as their accompanying feature work. This talk will discuss how we transitioned to using i18next to localize our app, the problems we had along the way and how we solved them, and tips for designing applications to minimize future localization issues.",
       "speakers" : [ "robin_dykema" ],
-      "tags" : [ "localization", "ReactJs"],
+      "tags" : [ "localization", "reactJs"],
       "title" : "Sacré bleu! The trials and tribulaciónes in localizing your application"
     },
     {
@@ -197,7 +189,7 @@
       "complexity" : "Intermediate",
       "description" : "Headless architecture is a popular solution for projects that require cutting-edge user experiences and next-level performance, but the learning curve can be discouraging. In this talk, we’ll give participants tactics, tools, strategies, and confidence to make their first headless project a success.",
       "speakers" : [ "christina_deemer" ],
-      "tags" : ["front-end", "ReactJs", "tools", "motivational", "performance", "technical"],
+      "tags" : ["front-end", "reactJs", "tools", "motivational", "performance", "technical"],
       "title" : "Going Headless without Losing Your Head: Strategies for Making Your First Decoupled Web App a Success"
     },
     {
@@ -205,7 +197,7 @@
       "complexity" : "Intermediate",
       "description" : "ApolloClient and ApolloServer empower developers with control over the data they work with. This workshop will dig into using both along with Prisma to build a full stack application. We’ll tackle REST, Database setup, and authentication with ease using this amazing ecosystem!",
       "speakers" : [ "domitrius_clark" ],
-      "tags" : ["ReactJs", "apollo", "prisma", "mongodb", "workshop"],
+      "tags" : ["reactJs", "apollo", "prisma", "mongoDB", "workshop"],
       "title" : "Apollo: One Giant leap for Full Stack"
     },
     {
@@ -213,7 +205,7 @@
       "complexity" : "All",
       "description" : "By the end of the session the attendees will be able to Make a simple Demo of basic WebVR application and get into WebVR experiences, they Will also learn about WebVR concepts, A-Frame Framework, A-Frame scenes & apps in depth.",
       "speakers" : [ "viral_parmar" ],
-      "tags" : ["A-Frame", "WebVR", "Web Development", "mobile app"],
+      "tags" : ["a-frame", "webVR", "web development", "mobile app"],
       "title" : "WebVR : Beyond Imagination"
     },
     {
@@ -229,7 +221,7 @@
       "complexity" : "Intermediate",
       "description" : "Before you manually review your pages in an assistive technology device the International Association of Accessibility Professionals (IAAP) recommends that you use an automated testing tools to check your page. So you stop everything and review your page with a third-party website or browser extension… if you remember to. Why wait until you’re that far into development? Let’s build accessibility testing into your workflow, and prevent common errors from even being committed in the first place. I’ll give an overview of tools that exist, and share some code to help customize your own workflow. Familiarity with accessible development is not needed, but you should be familiar with HTML, JavaScript, Git, and NPM.",
       "speakers" : [ "nathan_lilly" ],
-      "tags" : [ "workflow", "accessibility", "a11y", "axe", "axe-core", "testing", "linting", "ReactJs", "npm", "front-end", "back-end", "tools", "automation"],
+      "tags" : [ "workflow", "accessibility", "a11y", "axe", "axe-core", "testing", "linting", "reactJs", "npm", "front-end", "back-end", "tools", "automation"],
       "title" : "Building Accessibility Testing Into Your Workflow"
     },
     {
@@ -237,7 +229,7 @@
       "complexity" : "Intermediate",
       "description" : "As web applications continue to evolve into complex systems, developers today are building more and more UIs with component-based frameworks like React and Vue. As a result, UI testing today is easier than it has ever been before. But where do you start? If you feel like it’s a guessing game, this is the talk for you!'\n'In this talk, I will guide you with a practical approach to testing UI components with Jest and Storybook to improve your UI’s quality and solve your users’ needs.",
       "speakers" : [ "diego_hernandez" ],
-      "tags" : [ "ReactJs", "vueJs", "testing", "jest", "storybook"],
+      "tags" : [ "reactJs", "vueJs", "testing", "jest", "storybook"],
       "title" : "Strengthening your blocks: A practical guide to UI component testing"
     },
     {
@@ -245,7 +237,7 @@
       "complexity" : "Intermediate",
       "description" : "Did you know there’s a widely-supported browser API that allows you to interface with lots of hardware, including custom controllers you can build yourself? Meet the WebMIDI API! Natively supported by Chrome (and soon Firefox!) we’ll experiment with talking to custom hardware through the browser.",
       "speakers" : [ "george_mandis" ],
-      "tags" : [ "node.js", "apis" ,"webMIDI"],
+      "tags" : [ "nodeJs", "apis" ,"webMIDI"],
       "title" : "JavaScript + MIDI + Microcontrollers Workshop"
     },
     {
