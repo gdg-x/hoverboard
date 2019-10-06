@@ -652,7 +652,8 @@ function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
               mainTag,
               id: sessionId.toString(),
               day: dayKey,
-              track: subsession.track || day.tracks[sessionIndex],
+              // eslint-disable-next-line max-len
+              track: day.tracks[timeslot.sessions[sessionIndex].track - 1] || day.tracks[sessionIndex],
               startTime,
               endTime,
               duration: getDuration(dayKey, startTime, endTime),

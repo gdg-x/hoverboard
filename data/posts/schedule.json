@@ -81,7 +81,8 @@
             {
               "items" : [ "jovo" ],
               "extend": 2,
-              "startCol": 3
+              "startCol": 3,
+              "track": 3
             }
           ]
         },
@@ -137,11 +138,11 @@
 
       ],
       "tracks" : [ {
-        "title" : "Ballroom"
+        "title" : "Ballroom, 5th Floor"
       }, {
-        "title" : "Conference hall"
+        "title" : "Dell Theatre, Concourse"
       }, {
-        "title" : "Workshops hall"
+        "title" : "Classroom A/B, Concourse"
       } ]
     },
     {
@@ -223,7 +224,8 @@
             {
               "items" : [ "javaScriptMidi" ],
               "extend": 2,
-              "startCol": 3
+              "startCol": 3,
+              "track": 3
             }
           ]
         },
@@ -278,11 +280,11 @@
         }
       ],
       "tracks" : [ {
-        "title" : "Ballroom"
+        "title" : "Ballroom, 5th Floor"
       }, {
-        "title" : "Conference hall"
+        "title" : "Dell Theatre, Concourse"
       }, {
-        "title" : "Workshops hall"
+        "title" : "Classroom A/B, Concourse"
       } ]
     }
 
