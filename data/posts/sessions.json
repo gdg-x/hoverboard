@@ -159,10 +159,10 @@
     {
       "id":"sacre_bleu",
       "complexity" : "Intermediate",
-      "description" : "What’s the difference between localization and internationalization? Should I store my translations statically, use my own API, or just use a third-party translation service? What sort of UX problems might I run into when translating my application? Do I have to revamp everything for RTL languages?<br><br>When I started working at my company, all our translations sat in static JSON files. Manually adding new translations was tedious and error-prone, every language loaded on every page, and new translations rarely made it in the same release as their accompanying feature work. This talk will discuss how we transitioned to using i18next to localize our app, the problems we had along the way and how we solved them, and tips for designing applications to minimize future localization issues.",
+      "description" : "What is internationalization and why is it important, even if your clients are mostly English speakers? This presentation will cover common pitfalls and how to avoid them, such as date formatting, number formatting, translating, encoding for non-Latin characters, etc. We will also briefly discuss all the UX considerations that come to play when using a RTL (right-to-left) language. Finally, we’ll get React specific and talk about a library called react-i18next, which is an open source library you can use to help internationalize your project.",
       "speakers" : [ "robin_dykema" ],
-      "tags" : [ "localization", "react"],
-      "title" : "Sacré bleu! The trials and tribulaciónes in localizing your application"
+      "tags" : ["localization", "react"],
+      "title" : "Sacré bleu! The trials and tribulaciones of internationalising your ẨṔṔŁîÇåŤḯṏÑ���"
     },
     {
       "id":"uniqueHowsWhys",
