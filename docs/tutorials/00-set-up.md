@@ -47,7 +47,7 @@ The diagram below is a brief summary of the directories within the project.
     |   |---pages/
     |
 
-*   `.temp/` temporary folder used save files after populating templates with data, before polymer build takes over them.
+*   `.temp/` temporary folder used to save files after populating templates with data, before polymer build takes over them.
 *   `appengine/` contains App Engine application that runs CRON job to send scheduled push notifications.
 *   `bower_components/` is the place for project dependencies.
 *   `build/` is the directory to deploy to production.
@@ -61,7 +61,7 @@ The diagram below is a brief summary of the directories within the project.
 *   `node_modules/` is the place of Node dependencies.
 *   `scripts/` is the place for JS scripts.
 *   `src/` is where you store all of your source code and do all of your development.
-*   `effects/` is where you keep your effects for instance `transparent-scroll.html` that helps to achieve transparent toolbar before the scroll.
+*   `effects/` is where you keep your effects for instance `transparent-scroll.html` that helps to achieve a transparent toolbar before the scroll.
 *   `elements/` is where you keep your custom elements.
 *   `pages/` is where you keep your pages' description.
 

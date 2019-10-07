@@ -1,4 +1,4 @@
-⚠️ Works only on Blaze plan! (costs around $60/month)
+⚠️ Works only on the Blaze plan! (costs around $60/month)
 
 ## Setup
 

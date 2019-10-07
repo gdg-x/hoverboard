@@ -1,7 +1,7 @@
 
 # Firestore Utils
 At the moment Firestore admin panel doesn't allow to export/import data from their DB.
-These scripts allows you to load data on your machine, edit and bring it back. 
+These scripts allow you to load data on your machine, edit and bring it back. 
 See examples to learn how it works.
 
 #### Save collection/doc to file

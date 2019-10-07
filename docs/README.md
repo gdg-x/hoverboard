@@ -9,4 +9,4 @@
 * [Deploy](tutorials/04-deploy.md)
 * [Docker](tutorials/05-docker.md)
 * [SEO](tutorials/06-seo.md)
-* [Mailchimp autosubscription](tutorials/07-mailchimp-autosubscribe.md)
+* [MailChimp auto subscription](tutorials/07-mailchimp-autosubscribe.md)
