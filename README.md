@@ -42,7 +42,7 @@ Our goal is to allow event organizers to set up a professional conference websit
       - Save the file as `serviceAccount.json` and to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
     * Enable Firestore in web console at [console.firebase.google.com](https://console.firebase.google.com) -> Database -> Cloud Firestore -> Create database. Select **locked mode** and press **Enable**
     * [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
-      * Select your Firebase project `npx firebase use <YOUR_PROJECT_ID>`
+	  * Select your Firebase project `npx firebase use <YOUR_PROJECT_ID>`
     * Run `npm run firestore:init` or `yarn firestore:init`
 1. Run locally
    * `npm start` or `yarn start`
@@ -109,7 +109,7 @@ Any other issue labeled [`help wanted`](https://github.com/gdg-x/hoverboard/labe
 * Use the search feature to check for an existing issue
 * Include as much information as possible and provide any relevant resources (Eg. screenshots)
 * For bug reports ensure you have a reproducible test case
-   * A pull request with a breaking test would be super preferable here but isn't required
+* A pull request with a breaking test would be super preferable here but isn't required
 
 ### Submitting a Pull Request
 
