@@ -9,9 +9,9 @@ For running the website directly from a container you can use Docker
 1. Install dependencies `docker run -v "$PWD":/app hoverboard npm install`
 1. Run the website from Docker container `docker run -it -p 3000:3000 -p 3001:3001 -v "$PWD":/app hoverboard`
 
-## For specific dev commands, you can run those from container :
+## For specific dev commands, you can run these from the container :
 
-Install all dependencies from docker command line :
+Install all dependencies from the docker command line :
 
     docker run -it -v "$PWD":/app hoverboard npm install
 

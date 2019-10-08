@@ -25,7 +25,7 @@ The URL to your live site is listed in the output.
 
 ### Continuous integration with Travis CI
 
-In the root folder you can find [.travis.yml](/.travis.yml) which configures
+In the root folder, you can find [.travis.yml](/.travis.yml) which configures
 [Travis CI][Travis CI] build and deployment on Firebase hosting:
 
 ```yaml
@@ -41,24 +41,24 @@ In the root folder you can find [.travis.yml](/.travis.yml) which configures
 
 To generate the `secure` value do the following steps:
 
-1. Login into Firebase console
+1. Log in to Firebase console
     ```console
       npx firebase login:ci --interactive
     ```
 
     You will get your token:
     ```console
-        ✔  Success! Use this token to login on a CI server:
+        ✔  Success! Use this token to log in on a CI server:
 
         1/9YmsNEh87G3cRyt_FXQbsYI_uV4FUMmUBXkbl_CHANGED
     ```
 
-1. Install travis tool to encrypt token
+1. Install travis tool to encrypt the token
     ```console
       gem install travis
     ```
 
-1. Login into your account
+1. Log in to your account
     ```console
       travis login --auto
     ```

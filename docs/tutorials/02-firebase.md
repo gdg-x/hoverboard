@@ -4,8 +4,8 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 
 1. Create a Firebase project in the [Firebase console](https://console.firebase.google.com/), if you don't already have one.
 
-	- If you already have an existing Google project associated with your app, click *Import Google Project*. Otherwise, click *Create New Project*.
-	- If you already have a Firebase project, click *Add App* from the project overview page.
+  - If you already have an existing Google project associated with your app, click *Import Google Project*. Otherwise, click *Create New Project*.
+  - If you already have a Firebase project, click *Add App* from the project overview page.
 
 1. Click *Add Firebase to your web app*.
 1. *Copy* all needed data, then paste it in `config/development.json` (and `config/production.json` if you use the same project in production). This configuration looks like this:
@@ -29,8 +29,8 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
     - Read the warning and press **Generate key**
     - Save the file as `serviceAccount.json` and to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
     - Enable Firestore in web console at [console.firebase.google.com](https://console.firebase.google.com) -> Database -> Cloud Firestore -> Create database. Select **locked mode** and press **Enable**
-	- [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
-	- Select your Firebase project `npx firebase use <YOUR_PROJECT_ID>`
+  - [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
+  - Select your Firebase project `npx firebase use <YOUR_PROJECT_ID>`
     * Run `npm run firestore:init` or `yarn firestore:init`
 
 1. Whoa! You've set up Firebase into your app.
