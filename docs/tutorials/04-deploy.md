@@ -41,7 +41,7 @@ In the root folder, you can find [.travis.yml](/.travis.yml) which configures
 
 To generate the `secure` value do the following steps:
 
-1. Login into Firebase console
+1. Log in to Firebase console
     ```console
       npx firebase login:ci --interactive
     ```
@@ -58,7 +58,7 @@ To generate the `secure` value do the following steps:
       gem install travis
     ```
 
-1. Login in to your account
+1. Log in to your account
     ```console
       travis login --auto
     ```
