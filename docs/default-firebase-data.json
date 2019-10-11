@@ -572,6 +572,21 @@
       ],
       "title": "",
       "order": 21
+    }, {
+      "name": "Roch Dardié",
+      "photoUrl": "/images/people/roch_dardie.jpg",
+      "socials": [{
+          "icon": "linkedin",
+          "link": "https://www.linkedin.com/in/rdardie/",
+          "name": "LinkedIn"
+        }, {
+          "icon": "twitter",
+          "link": "https://twitter.com/roch_dardie",
+          "name": "Twitter"
+        }
+      ],
+      "title": "",
+      "order": 22
     }],
     "title": "Membres"
   }],
