@@ -1,7 +1,7 @@
 {
   "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv",
+    "name": "GDG Rio de Janeiro",
+    "twitter": "gdgrj",
     "blog": "https://medium.com/gdg-lviv",
     "url": "http://lviv.gdg.org.ua/"
   },
@@ -114,19 +114,19 @@
   "location": {
     "label": "Location",
     "name": "Planeta kino",
-    "city": "Lviv",
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "city": "Rio de Janeiro",
+    "short": "Rio de Janeiro, RJ",
+    "address": "126 Av. Pastor Martin Luther King Junior, Rio de Janeiro, Brazil",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 5
+      "latitude": -22.8792762,
+      "longitude": -43.2719274,
+      "zoom": 15
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": -22.8792762,
+      "longitude": -43.2719274
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": "Universidade Estácio, Shopping Nova América"
   },
   "mediaQueries": {
     "xs": {
