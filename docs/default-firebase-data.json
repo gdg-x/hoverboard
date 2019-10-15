@@ -80,12 +80,12 @@
     "url" : "https://www.hearst.com/"
   }, {
     "order" : 8,
-    "logoUrl" : "../images/logos/think-company-logo.png",
+    "logoUrl" : "../images/logos/ljs-think-company-logo.png",
     "name" : "ThinkCompany",
     "url" : "https://www.thinkcompany.com/"
   },{
     "order" : 9,
-    "logoUrl" : "../images/logos/pinnacle-21-logo.png",
+    "logoUrl" : "../images/logos/ljs-pinnacle-21-logo.png",
     "name" : "Pinnacle21",
     "url" : "https://www.pinnacle21.com/"
   } ],
