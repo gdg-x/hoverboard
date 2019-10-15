@@ -78,6 +78,16 @@
     "logoUrl" : "../images/logos/ljs-hearst-logo.png",
     "name" : "HEARST",
     "url" : "https://www.hearst.com/"
+  }, {
+    "order" : 8,
+    "logoUrl" : "../images/logos/ljs-think-company-logo.png",
+    "name" : "Think Company",
+    "url" : "https://www.thinkcompany.com/"
+  },{
+    "order" : 9,
+    "logoUrl" : "../images/logos/ljs-pinnacle-21-logo.png",
+    "name" : "Pinnacle21",
+    "url" : "https://www.pinnacle21.com/"
   } ],
     "order" : 1,
     "title" : "General Partners"
