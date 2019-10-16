@@ -45,6 +45,11 @@
           "name": "Code of Conduct",
           "url": "/code-of-conduct/",
           "newTab": false
+        },
+        {
+          "name": "Privacy policy",
+          "url": "/privacy/",
+          "newTab": false
         }
       ]
     },
