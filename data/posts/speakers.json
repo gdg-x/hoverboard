@@ -361,31 +361,6 @@
       ]
     },
     {
-      "id":"anusha_bhat",
-      "featured": false,
-      "bio" : "A software engineer at Josh Software, Works in JavaScript, Ruby, Golang.",
-      "name" : "Anusha Bhat",
-      "company":"Josh Software",
-      "country": "Pune Area, India",
-      "photo" : "/images/speakers/anusha_bhat.jpg",
-      "photoUrl" : "/images/speakers/anusha_bhat.jpg",
-      "socials" : [
-        {
-          "icon" : "twitter",
-          "link" : "https://twitter.com/_anusha_bhat",
-          "name" : "Twitter"
-        }
-    ],
-      "order" : 0,
-      "title" : "Software Engineer",
-      "sessions":[
-        {
-          "id": "multithreadingJavascript"
-        }
-      ]
-    },
-
-    {
       "id":"alfredo_lopez",
       "featured": false,
       "bio" : "Alfredo is a Director of Engineering at Hearst working with technical and non-technical teams to develop tools that abstract best practices and performance enhancements into measurable business goals.<br><br>His current interests include creating highly performant and flexible web applications that enable developers to be productive.<br><br>Prior to Hearst, Alfredo worked for an ad platform writing low-level JavaScript that catered to strict browser support requirements. Outside of the web, Alfredo is a musician, film enthusiast, and comedy fan.",
