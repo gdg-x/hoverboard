@@ -12,16 +12,7 @@
       }
     </style>
 
-    <polymer-helmet
-      title="Privacy policy"
-      description=""
-      active="[[active]]"
-    ></polymer-helmet>
-
     <hero-block
-      background-image="{$ heroSettings.cod.background.image $}"
-      background-color="{$ heroSettings.cod.background.color $}"
-      font-color="{$ heroSettings.cod.fontColor $}"
       active="[[active]]"
     >
       <div class="hero-title highlight-font">Privacy policy</div>
@@ -35,7 +26,7 @@
   <script>
 
     // eslint-disable-next-line no-undef
-    class CodPage extends Polymer.Element {
+    class PrivacyPage extends Polymer.Element {
       static get is() {
         return 'privacy-page';
       }
@@ -51,6 +42,6 @@
       }
     }
 
-    window.customElements.define(CodPage.is, CodPage);
+    window.customElements.define(PrivacyPage.is, PrivacyPage);
   </script>
 </dom-module>
