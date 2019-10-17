@@ -840,11 +840,38 @@
             "link" : "https://www.fernandomc.com/",
             "name" : "Website"
         }
-    ],
+      ],
       "order" : 0,
       "sessions":[
         {
           "id": "serverlessDevelopmentPortfolioSevenDays"
+        }
+      ]
+    },
+    {
+      "id": "richard_feldman",
+      "featured": false,
+      "bio": "Richard is the author of “Elm in Action” from Manning Publications, and the instructor for the Frontend Masters Introduction to Elm and Advanced Elm workshops. He is a member of the Elm Core Team and works at NoRedInk, which has over 300,000 lines of Elm code in production, and which has employed Elm creator Evan Czaplicki since 2016. In his free time Richard hosts the Philadelphia Elm Meetup, and maintains open-source Elm libraries such as elm-test and elm-css. Some have said he’s “a fan of Elm,” but he’s not sure where they got that wild idea.",
+      "name": "Richard Feldman",
+      "country": "Philadelphia, PA",
+      "photo": "/images/speakers/richard_feldman.jpg",
+      "photoUrl": "/images/speakers/richard_feldman.jpg",
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/rtfeldman",
+          "name": "Twitter"
+        },
+        {
+          "icon": "website",
+          "link": "https://www.manning.com/books/elm-in-action",
+          "name": "Website"
+        }
+      ],
+      "order": 0,
+      "sessions": [
+        {
+          "id": "predictingtheFuture"
         }
       ]
     }

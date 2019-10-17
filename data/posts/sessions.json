@@ -299,6 +299,14 @@
       "speakers" : [ "david_silva" ],
       "tags" : [ "lerna", "mono-repo", "front-end", "babel"],
       "title" : "Micro front-ends, mono-repo and component libraries with lerna"
+    },
+    {
+      "id": "predictingtheFuture",
+      "complexity" : "All",
+      "description" : "The Web has changed a lot since its creation as a platform for static articles. Early Web apps used servers generating HTML on the fly. PHP was huge, then declined as JS rose. Flash came and went. React has arguably become the new jQuery. Today, the one thing we can be sure of is that more changes are yet to come. What changes can Web developers expect between the Web of 2019 and the Web of 2020? What about 2025? In this talk, an early adopter of React in 2013 and Elm in 2014 draws on 12 years of professional Web development experience to justify several concrete predictions about the Web in 2020 and 2025.",
+      "speakers" : [ "richard_feldman" ],
+      "tags" : ["web development"],
+      "title" : "Predicting the Future of the Web"
     }
   ]
 }
