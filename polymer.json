@@ -13,6 +13,7 @@
 	"src/pages/volunteer-page.html",
     "src/pages/faq-page.html",
     "src/pages/cod-page.html",
+    "src/pages/privacy-page.html",
     "src/lazy-resources.html"
   ],
   "sources": [
