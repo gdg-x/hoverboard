@@ -14,7 +14,7 @@ We collect your personal data to provide you with required services or informati
 
 - Provide you with services that you request from us - receiving our newsletters, event-related e-mails and confirmation for your participation fee;
 - Communicate regularly with you to inform you about event updates, content, and special ticket offers that may be of interest to you;
-- Contact you if this is required to inform you of any event changes;
+- Contact you if it is required to inform you of any event changes;
 - To inform you about changes in the agenda;
 - Send you an invoice for your ticket/participation fee;
 - Resolve any issues that might arise during your event registration;
@@ -25,7 +25,7 @@ We collect your personal data to provide you with required services or informati
 - Share your feedback about our events and conferences;
 - Create external marketing & analytics reports;
 - Prevent illegal activities, suspected fraud and potential threats to our network;
-- Analyse the characteristics of our participants at an aggregated level and participant utilization of our events in order to understand participants and their needs, to improve our events, to design new events and for further event and community development.
+- Analyse the characteristics of our participants at an aggregated, anonymised level in order to understand participants and their needs, to improve our events, to design new events and for further event and community development.
 
 ### Will we share your personal data with other parties?
 
