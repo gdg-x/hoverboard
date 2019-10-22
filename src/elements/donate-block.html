@@ -1,0 +1,88 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+
+<link rel="import" href="./shared-styles.html">
+<link rel="import" href="./hoverboard-icons.html">
+<link rel="import" href="../elements/barcode-header.html" />
+
+<dom-module id="donate-block">
+  <template>
+    <style is="custom-style" include="shared-styles flex flex-alignment"></style>
+
+    <style>
+      :host {
+        width: 100%;
+        padding: 16px 0;
+      }
+      
+      .container {
+        max-width: none;
+        text-align: center;
+      }
+
+      .container-narrow {
+        display: flex;
+        justify-content: center;
+      }
+      
+      .container-title {
+        margin-bottom: 50px;
+        text-align: center;
+      }
+
+      .block-title {
+        margin: 24px 0 8px;
+      }
+
+      .button-container {
+        max-width: 200px;
+        display: flex;
+        margin: 0 auto;
+        justify-content: space-between;
+      }
+
+
+    </style>
+
+    <div class="container">
+      <h3 class="container-title">Donate</h3>
+      <div class="button-container">
+        <a 
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Q66E4MUK6K6KQ"
+          >
+          <paper-button class="cta-button animated" primary raised elevation="1">
+            <span class="cta-label">Paypal</span>
+          </paper-button>
+          <a 
+          rel="noopener noreferrer"
+          target="_blank"
+          href="https://commerce.coinbase.com/checkout/a68957cd-9253-4b60-ac6a-2b0d3f472647"
+        >
+        <paper-button class="cta-button animated" primary raised elevation="1">
+          <span class="cta-label">Ether</span>
+        </paper-button>
+      </a>
+      </div>
+    </div>
+
+  </template>
+
+  <script>
+
+    class DonateBlock extends Polymer.Element {
+      static get is() {
+        return 'donate-block';
+      }
+
+      static get properties() {
+        return {};
+      }
+    }
+
+    window.customElements.define(DonateBlock.is, DonateBlock);
+  </script>
+</dom-module>
