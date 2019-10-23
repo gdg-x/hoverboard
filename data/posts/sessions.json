@@ -143,7 +143,7 @@
     {
       "id":"jovo",
       "complexity" : "Intermediate",
-      "description" : "Using Jovo Framework and Jovo CLI, developers can quickly develop voice-first applications for Alexa and Google Home within a single nodejs application. In this workshop, I show you how to quickly build, test, and deploy a voice app using Jovo, and leave with areas for further exploration.<br><br>Topics covered include: how to build a language model, how to use the Alexa and Actions on Google Simulator, how to create unit tests for voice applications, how to route through conversations, how to request user data, and how to extend the bot to other conversational platforms such as Facebook Messenger or Twilio SMS.",
+      "description" : "Using Jovo Framework and Jovo CLI, developers can quickly develop voice-first applications for Alexa and Google Home within a single nodejs application. In this workshop, I show you how to quickly build, test, and deploy a voice app using Jovo, and leave with areas for further exploration.<br><br>Topics covered include: how to build a language model, how to use the Alexa and Actions on Google Simulator, how to create unit tests for voice applications, how to route through conversations, how to request user data, and how to extend the bot to other conversational platforms such as Facebook Messenger or Twilio SMS.<br><br><strong>Nice to haves, but not required for this workshop:</strong> Amazon Developer, Dialogflow, AWS.",
       "speakers" : [ "jeffrey_smith" ],
       "tags" : ["jovo", "node", "alexa", "dialogflow", "typescript", "workshop"],
       "title" : "How to Build Cross Platform Voice Apps with the Jovo Framework"
