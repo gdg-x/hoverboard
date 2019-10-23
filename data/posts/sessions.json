@@ -231,7 +231,7 @@
     {
       "id":"demystifyingRegularExpressions",
       "complexity" : "All",
-      "description" : "A Regular Expression is a sequence of characters used as a search pattern on a set of a text—but trying to read that sequence might look like something out of Stranger Things. This workshop will break down how regular expressions can be used in everyday programming to make manipulating data easier.",
+      "description" : "A Regular Expression is a sequence of characters used as a search pattern on a set of a text—but trying to read that sequence might look like something out of Stranger Things. This workshop will break down how regular expressions can be used in everyday programming to make manipulating data easier.<br><br>Clone the repo: <a href='https://github.com/erautenberg/libertyJS-regexp' target='_blank'>https://github.com/erautenberg/libertyJS-regexp</a>",
       "speakers" : [ "emily_rautenberg" ],
       "tags" : [ "regular expressions", "regex", "regexp", "data"],
       "title" : "Demystifying Regular Expressions"
