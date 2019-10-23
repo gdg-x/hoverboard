@@ -1580,6 +1580,28 @@
       } ],
       "order" : 2,
       "title" : "Organizer Emeritus"
+    }, {
+      "name": "Rob Samalonis",
+      "photoUrl": "/images/team/teamPhotos_Rob.jpg",
+      "socials": [
+        {
+          "icon": "linkedin",
+          "link": "https://www.linkedin.com/in/robert-samalonis-4a092a137",
+          "name": "LinkedIn"
+        },
+        {
+          "icon": "github",
+          "link": "https://github.com/Rob-Samalonis",
+          "name": "Github"
+        },
+        {
+          "icon": "instagram",
+          "link": "https://www.instagram.com/rob_senpai/",
+          "name": "Instagram"
+        }
+      ],
+      "order": 3,
+      "title": "Node Ninja"
     } ],
     "title": "Contributors"
   } ],
