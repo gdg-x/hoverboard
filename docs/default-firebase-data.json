@@ -1577,7 +1577,7 @@
     "price" : 80,
     "soldOut" : false,
     "starts" : "Feb 7",
-    "url" : "https://2event.com/events/1027108"
+    "url" : "https://www.eventbrite.com/e/gdg-devfest-lima-tickets-76597151141?aff=ebdssbdestsearch"
   }, {
     "available" : false,
     "currency" : "$",
@@ -1589,7 +1589,7 @@
     "regular" : true,
     "soldOut" : true,
     "starts" : "Feb 7",
-    "url" : "https://2event.com/events/1027108"
+    "url" : "https://www.eventbrite.com/e/gdg-devfest-lima-tickets-76597151141?aff=ebdssbdestsearch"
   }, {
     "available" : true,
     "currency" : "$",
@@ -1601,7 +1601,7 @@
     "regular" : true,
     "soldOut" : false,
     "starts" : "Feb 7",
-    "url" : "https://2event.com/events/1027108"
+    "url" : "https://www.eventbrite.com/e/gdg-devfest-lima-tickets-76597151141?aff=ebdssbdestsearch"
   }, {
     "available" : false,
     "currency" : "$",
@@ -1614,7 +1614,7 @@
     "regular" : true,
     "soldOut" : false,
     "starts" : "Jul 1",
-    "url" : "https://2event.com/events/1027108"
+    "url" : "https://www.eventbrite.com/e/gdg-devfest-lima-tickets-76597151141?aff=ebdssbdestsearch"
   }, {
     "available" : true,
     "currency" : "$",
@@ -1622,7 +1622,7 @@
     "name" : "I Love DFUA",
     "price" : 280,
     "soldOut" : false,
-    "url" : "https://2event.com/events/1027108"
+    "url" : "https://www.eventbrite.com/e/gdg-devfest-lima-tickets-76597151141?aff=ebdssbdestsearch"
   } ],
   "triggers" : {
     "images" : false

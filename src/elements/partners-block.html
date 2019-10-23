@@ -57,10 +57,11 @@
       <h1 class="container-title">{$ partnersBlock.title $}</h1>
 
       <template is="dom-repeat" items="[[partners]]" as="block">
-          <h4 class="block-title">[[block.title]]</h4>
+          <h4 class="block-title" style="color:#1a2025">[[block.title]]</h4>
           <div class="logos-wrapper">
             <template is="dom-repeat" items="[[block.items]]" as="logo">
               <a
+                style="box-shadow: var(--box-shadow);"
                 class="logo-item"
                 href$="[[logo.url]]"
                 title$="[[logo.name]]"

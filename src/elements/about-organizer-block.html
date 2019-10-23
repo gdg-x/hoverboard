@@ -43,6 +43,16 @@
       paper-button {
         margin: 0;
       }
+      .description-block h2, .description-block p{
+          color: #1a2025;
+      }
+      .description-block p a{
+          color: #1a2025;
+          text-decoration: underline;
+      }
+      .btn-about{
+          background: var(--dark-primary-color);
+      }
     </style>
 
     <div class="container" layout horizontal>
@@ -79,7 +89,7 @@
             target="_blank" rel="noopener noreferrer"
             {% endif %}
           >
-            <paper-button class="cta-button animated icon-right">
+            <paper-button class="cta-button animated icon-right btn-about">
               <span>{$ block.callToAction.label $}</span>
               <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
             </paper-button>

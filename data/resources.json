@@ -256,7 +256,7 @@
     "blocks": [
       {
         "title": "Organizador",
-        "description": "<a href='https://www.meetup.com/es-ES/GDG-Open/' target='_blank'>GDG Open</a> - somoS una comunidad de personas apasionadas por la tecnología, emprendimiento y desarrollo de software.",
+        "description": "<a href='https://www.meetup.com/es-ES/GDG-Open/' target='_blank'>GDG Open</a> - somos una comunidad de personas apasionadas por la tecnología, emprendimiento y desarrollo de software.",
         "callToAction": {
           "label": "MIRA AL EQUIPO DE ESTE AÑO",
           "link": "/team"
