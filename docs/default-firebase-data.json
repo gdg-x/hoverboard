@@ -591,7 +591,7 @@
     "title": "Membres"
   }],
   "tickets": [{
-    "available": true,
+    "available": false,
     "currency": "€",
     "ends": "",
     "inDemand": false,
@@ -603,7 +603,7 @@
     "starts": "",
     "url": "https://www.billetweb.fr/sunny-tech-2019"
   }, {
-    "available": true,
+    "available": false,
     "currency": "€",
     "ends": "",
     "inDemand": true,
@@ -615,7 +615,7 @@
     "starts": "",
     "url": "https://www.billetweb.fr/sunny-tech-2019"
   }, {
-    "available": true,
+    "available": false,
     "currency": "€",
     "ends": "",
     "info": "Requiert une carte étudiante",
