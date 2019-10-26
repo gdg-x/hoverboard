@@ -70,35 +70,35 @@
           "url": "https://www.apside.com/"
         },
         {
-          "order": 1,
+          "order": 2,
           "height": 100,
           "logoUrl": "../images/logos/ca.png",
           "name": "Crédit Agricole Technologies et Services",
           "url": "https://www.groupecreditagricole.jobs/Notre-groupe/Marques/Credit-Agricole-Technologies-et-Services"
         },
         {
-          "order": 1,
+          "order": 3,
           "height": 100,
           "logoUrl": "../images/logos/klanik.png",
           "name": "Klanik",
           "url": "https://www.klanik.com/"
         },
         {
-          "order": 1,
+          "order": 4,
           "height": 100,
           "logoUrl": "../images/logos/talkspirit.png",
           "name": "talkspirit",
           "url": "https://www.talkspirit.com/fr/"
         },
         {
-          "order": 1,
+          "order": 5,
           "height": 100,
           "logoUrl": "../images/logos/zendesk.png",
           "name": "Zendesk",
           "url": "https://www.zendesk.com/"
         },
         {
-          "order": 1,
+          "order": 6,
           "height": 100,
           "logoUrl": "../images/logos/kaliop.png",
           "name": "Kaliop",
@@ -124,70 +124,70 @@
           "url": "https://www.agysoft.fr/"
         },
         {
-          "order": 1,
+          "order": 2,
           "height": 75,
           "logoUrl": "../images/logos/gitlab.png",
           "name": "Gitlab",
           "url": "https://about.gitlab.com/"
         },
         {
-          "order": 1,
+          "order": 3,
           "height": 75,
           "logoUrl": "../images/logos/sada.png",
           "name": "Sada",
           "url": "http://www.sada.fr/"
         },
         {
-          "order": 1,
+          "order": 4,
           "height": 75,
           "logoUrl": "../images/logos/lunchr.svg",
           "name": "Lunchr",
           "url": "https://www.lunchr.co/"
         },
         {
-          "order": 1,
+          "order": 5,
           "height": 100,
           "logoUrl": "../images/logos/esii.png",
           "name": "ESII",
           "url": "https://www.esii.com/fr"
         },
         {
-          "order": 1,
+          "order": 6,
           "height": 100,
           "logoUrl": "../images/logos/idean.png",
           "name": "Idean",
           "url": "https://www.idean.com/"
         },
         {
-          "order": 1,
+          "order": 7,
           "height": 100,
           "logoUrl": "../images/logos/netheos.png",
           "name": "Netheos",
           "url": "https://www.netheos.com/"
         },
         {
-          "order": 1,
+          "order": 8,
           "height": 100,
           "logoUrl": "../images/logos/laposte.png",
           "name": "La Poste",
           "url": "https://www.laposte.fr/"
         },
         {
-          "order": 1,
+          "order": 9,
           "height": 100,
           "logoUrl": "../images/logos/aquafadas.png",
           "name": "Aquafadas",
           "url": "https://www.aquafadas.com/fr/"
         },
         {
-          "order": 1,
+          "order": 10,
           "height": 100,
           "logoUrl": "../images/logos/logo_believe.png",
           "name": "Believe IT",
           "url": "http://www.believeit.fr/"
         },
         {
-          "order": 1,
+          "order": 11,
           "height": 100,
           "logoUrl": "../images/logos/clever-cloud.png",
           "name": "Clever Cloud",
@@ -205,37 +205,37 @@
         "name": "Saagie",
         "url": "https://www.saagie.com/"
       }, {
-        "order": 0,
+        "order": 1,
         "height": 50,
         "logoUrl": "../images/logos/decisionbrain.png",
         "name": "DecisionBrain",
         "url": "https://decisionbrain.com/"
       }, {
-        "order": 0,
+        "order": 2,
         "height": 50,
         "logoUrl": "../images/logos/devensys.png",
         "name": "Devensys",
         "url": "https://www.devensys.com/"
       }, {
-        "order": 0,
+        "order": 3,
         "height": 50,
         "logoUrl": "../images/logos/smartview.png",
         "name": "Smartview",
         "url": "http://www.smartview.fr/"
       }, {
-        "order": 0,
+        "order": 4,
         "height": 50,
         "logoUrl": "../images/logos/rh.png",
         "name": "Recherches & Horizons",
         "url": "https://reth.fr"
       }, {
-        "order": 0,
+        "order": 5,
         "height": 50,
         "logoUrl": "../images/logos/monkeypatch.png",
         "name": "MonkeyPatch",
         "url": "http://www.monkeypatch.io/"
       }, {
-        "order": 0,
+        "order": 6,
         "height": 50,
         "logoUrl": "../images/logos/aive.png",
         "name": "Aive",
@@ -252,19 +252,19 @@
         "name": "Montpellier Tech Hub",
         "url": "https://www.montpellier-techhub.org/"
       }, {
-        "order": 0,
+        "order": 1,
         "height": 100,
         "logoUrl": "../images/logos/duchess.png",
         "name": "Duchess",
         "url": "https://www.duchess-france.org/"
       }, {
-        "order": 0,
+        "order": 2,
         "height": 100,
         "logoUrl": "../images/logos/ouisnap.png",
         "name": "OuiSnap",
         "url": "https://www.ouisnap.com/fr/"
       }, {
-        "order": 0,
+        "order": 3,
         "height": 100,
         "logoUrl": "../images/logos/compostons.png",
         "name": "Compostons",
