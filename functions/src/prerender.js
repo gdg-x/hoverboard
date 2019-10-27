@@ -15,9 +15,9 @@ const generateUrl = (request) => {
   // the request? Because it'll give you the wrong domain (pointed at the
   // cloudfunctions.net)
   return url.format({
-    protocol: request.protocol,
+    protocol: request.protocol === 'http' ? 'https' : request.protocol,
     host: functions.config().site.domain,
-    pathname: request.originalUrl,
+    pathname: request.originalUrl || request.url || request.path ? request.path.replace('undefined', '')  : '',
   });
 };
 
@@ -31,7 +31,7 @@ const checkForBots = (userAgent) => {
   // If you add Googlebot to this, you will not have a good day.
   // This is a mix of Sam Li's list (https://github.com/webcomponents/webcomponents.org/blob/696eb6d6f1fe955db395e96d97c3d1dfe0a02b26/client/bot-filter.py#L9)
   // and my list (https://github.com/justinribeiro/blog-pwa/blob/a7174657f3e910cacf2f089c012d40bec719293e/appengine/main.py#L28)
-  const botList = 'baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\ link\ preview|showyoubot|outbrain|pinterest|slackbot|vkShare|W3C_Validator|slackbot|facebot|developers\.google\.com\/\+\/web\/snippet\/'.toLowerCase();
+  const botList = 'metainspector|baiduspider|facebookexternalhit|twitterbot|rogerbot|linkedinbot|embedly|quora\ link\ preview|showyoubot|outbrain|pinterest|slackbot|vkShare|W3C_Validator|slackbot|facebot|developers\.google\.com\/\+\/web\/snippet\/'.toLowerCase();
 
   // FIND THE BOT AMONG THE USSSERRRS
   return userAgent.toLowerCase().search(botList) !== -1;
@@ -42,12 +42,17 @@ const checkForBots = (userAgent) => {
 //
 // The trick is on L66, pwaShell(): You must update that file! Open for explainer.
 app.get('*', (req, res) => {
+
+  // Get me the url all nice
+  const targetUrl = generateUrl(req);
+
+  console.log('NEW REQUEST! user-agent:', req.headers['user-agent'])
+
   // What say you bot tester?
   const botResult = checkForBots(req.headers['user-agent']);
   if (botResult) {
-    // Get me the url all nice
-    const targetUrl = generateUrl(req);
 
+    console.log('about to fetch: ', `${functions.config().rendertron.server}/render/${targetUrl}`)
     // Did you read the README? You should have set functions.config().rendertron.server
     // to where ever you deployed https://github.com/GoogleChrome/rendertron on AppEngine
     fetch(`${functions.config().rendertron.server}/render/${targetUrl}`)
@@ -62,6 +67,10 @@ app.get('*', (req, res) => {
         res.set('Vary', 'User-Agent');
 
         res.send(body.toString());
+      }).catch((err)=> {
+        console.error(err)
+        // failed, bailing out by sending landing page
+        res.sendFile(path.join(__dirname + '/index.html'));
       });
   } else {
     // 1. Umm, Justin, why not just point to index.html?
