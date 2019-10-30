@@ -2,10 +2,10 @@
   "organizer": {
     "name": "GDG Rio de Janeiro",
     "twitter": "gdgrj",
-    "blog": "https://medium.com/gdg-lviv",
-    "url": "http://lviv.gdg.org.ua/"
+    "blog": "",
+    "url": "https://www.meetup.com/pt-BR/GDGRioDeJaneiro/"
   },
-  "startDate": "2017-10-013T09:00:00+03:00",
+  "startDate": "2017-10-013T07:00:00+03:00",
   "endDate": "2017-10-14T19:00:00+03:00",
   "webapp": {
     "shortName": "DevFest",
@@ -13,7 +13,7 @@
     "backgroundColor": "#673AB7"
   },
   "dateFormat": {
-    "locale": "en-US"
+    "locale": "pt-BR"
   },
   "hashtag": "DevFest",
   "disabledSchedule": false,
@@ -24,19 +24,19 @@
       "label": "Home"
     },
     {
-      "route": "speakers",
-      "permalink": "/speakers/",
-      "label": "Speakers"
+      "route": "palestrantes",
+      "permalink": "/palestrantes/",
+      "label": "Palestrantes"
     },
     {
-      "route": "schedule",
-      "permalink": "/schedule/",
-      "label": "Schedule"
+      "route": "programacao",
+      "permalink": "/programacao/",
+      "label": "Programação"
     },
     {
-      "route": "team",
-      "permalink": "/team/",
-      "label": "Team"
+      "route": "time",
+      "permalink": "/time/",
+      "label": "Time"
     },
     {
       "route": "blog",
@@ -46,7 +46,7 @@
   ],
   "heroSettings": {
     "home": {
-      "description": "Join the commuity, learn new things!",
+      "description": "Junte-se a comunidade, Aprenda novas coisas!",
       "background": {
         "color": "#673ab7",
         "image": "/images/backgrounds/home.jpg"
@@ -55,40 +55,40 @@
     },
     "blog": {
       "title": "Blog",
-      "metaDescription": "Read stories from our team",
+      "metaDescription": "Leia histórias do nosso time.",
       "background": {
         "color": "#FFF"
       },
       "fontColor": "#424242"
     },
     "speakers": {
-      "title": "Speakers",
-      "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
+      "title": "Palestrantes",
+      "metaDescription": "Aprenda com nossos palestrantes sobre diversas tecnologias que estão mudando o futuro.",
+      "description": "Aprenda com nossos palestrantes sobre diversas tecnologias que estão mudando o futuro.",
       "background": {
         "color": "#FFF"
       },
       "fontColor": "#424242"
     },
     "previousSpeakers": {
-      "title": "Previous Speakers",
-      "metaDescription": "Check who was with us last years",
+      "title": "Palestrantes Anteriores",
+      "metaDescription": "Veja quem estava conosco nos últimos anos",
       "background": {
         "color": "#FFF"
       },
       "fontColor": "#424242"
     },
     "schedule": {
-      "title": "Schedule",
-      "metaDescription": "Choose your sessions to visit",
+      "title": "Programação",
+      "metaDescription": "Escolha sua sessão para visitar.",
       "background": {
         "color": "#fff"
       },
       "fontColor": "#424242"
     },
     "team": {
-      "title": "Team",
-      "metaDescription": "Get more info about organizers",
+      "title": "Time",
+      "metaDescription": "Saiba mais sobre os organizers",
       "background": {
         "color": "#fff"
       },
@@ -96,15 +96,15 @@
     },
     "faq": {
       "title": "FAQs",
-      "metaDescription": "Find you answer right here!",
+      "metaDescription": "Encontre sua resposta aqui!",
       "background": {
         "color": "#fff"
       },
       "fontColor": "#424242"
     },
     "coc": {
-      "title": "Code of Conduct",
-      "metaDescription": "Lear more about our expectations for all those who participate in our community",
+      "title": "Código de Conduta",
+      "metaDescription": "Conheça nosso código de conduta.",
       "background": {
         "color": "#fff"
       },
@@ -112,7 +112,7 @@
     }
   },
   "location": {
-    "label": "Location",
+    "label": "Local",
     "name": "Planeta kino",
     "city": "Rio de Janeiro",
     "short": "Rio de Janeiro, RJ",
@@ -148,23 +148,23 @@
     "follow": [
       {
         "name": "meetup",
-        "url": "https://www.meetup.com/GDG-Lviv/events/244342635/"
+        "url": "https://www.meetup.com/pt-BR/GDGRioDeJaneiro/"
       },
       {
         "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
+        "url": "https://www.facebook.com/GDGRio/"
       },
       {
         "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
+        "url": "https://twitter.com/GDGRio"
       },
       {
         "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
+        "url": "https://www.instagram.com/"
       },
       {
         "name": "youtube",
-        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "url": "https://www.youtube.com/"
       }
     ],
     "share": [
@@ -178,22 +178,22 @@
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
+  "mailto": "rio.gdg@gmail.com",
   "signInProviders": {
     "providersData": [
       {
         "name": "google",
-        "label": "Sign in with Google",
+        "label": "Entre com sua conta Google",
         "url": "https://accounts.google.com"
       },
       {
         "name": "facebook",
-        "label": "Sign in with Facebook",
+        "label": "Entre com seu Facebook",
         "url": "https://www.facebook.com"
       },
       {
         "name": "twitter",
-        "label": "Sign in with Twitter",
+        "label": "Entre com seu Twitter",
         "url": "https://twitter.com"
       }
     ],

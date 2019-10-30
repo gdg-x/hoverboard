@@ -1,26 +1,26 @@
 {
   "title": "GDG DevFest Rio de Janeiro 2019",
-  "description": "Join the commuity, learn new things!",
+  "description": "Junte-se a comunidade, Aprenda novas coisas!",
   "image": "images/social-share.jpg",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
   "dates": "23 de Novembro de 2019",
   "partnershipProposition": "https://bit.ly/dfua17-partners",
-  "share": "Share",
-  "followOur": "Follow our",
-  "followUs": "Follow us",
-  "emailUs": "Email us",
-  "partnershipResources": "Partnership Resources",
-  "eventResources": "Event Resources",
-  "buyTicket": "Buy tickets",
-  "signIn": "Sign in",
-  "signOut": "Sign out",
-  "viewHighlights": "View Highlights",
-  "offlineMessage": "You can still work offline.",
+  "share": "Compartilhar",
+  "followOur": "Siga",
+  "followUs": "Siga-nos",
+  "emailUs": "Email",
+  "partnershipResources": "Parceiros",
+  "eventResources": "Eventos",
+  "buyTicket": "Ingressos",
+  "signIn": "Entre",
+  "signOut": "Sair",
+  "viewHighlights": "Veja fotos",
+  "offlineMessage": "Você ainda pode trabalhar offline.",
   "cachingComplete": "Caching complete! Future visits will work offline.",
-  "newVersionAvailable": "A new version of this app is available.",
-  "refresh": "Refresh",
-  "position": "Position",
-  "country": "Country",
+  "newVersionAvailable": "Uma nova versão desse App está disponível.",
+  "refresh": "Atualizar",
+  "position": "Posição",
+  "country": "País",
   "time": "Time",
   "faq": "/data/faq.md",
   "coc": "/data/coc.md",
@@ -28,16 +28,16 @@
     "blog": "Blog"
   },
   "mySchedule": {
-    "title": "My Schedule",
-    "browseSession": "Browse sessions"
+    "title": "Programação",
+    "browseSession": "Navegue pelas sessões"
   },
   "footerRelBlock": [
     {
-      "title": "About",
+      "title": "Sobre",
       "links": [
         {
-          "name": "GDG Lviv",
-          "url": "http://lviv.gdg.org.ua/",
+          "name": "GDG Rio de Janeiro",
+          "url": "https://www.meetup.com/pt-BR/GDGRioDeJaneiro/",
           "newTab": true
         },
         {
@@ -51,8 +51,8 @@
           "newTab": true
         },
         {
-          "name": "Meet the Team",
-          "url": "https://devfest.gdg.org.ua/team/",
+          "name": "Conheça o Time",
+          "url": "https://www.meetup.com/pt-BR/GDGRioDeJaneiro/members/?op=leaders",
           "newTab": true
         }
       ]
@@ -273,15 +273,15 @@
     "blocks": [
       {
         "title": "Organizer",
-        "description": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
+        "description": "",
         "callToAction": {
           "label": "Open team page",
           "link": "/team"
         }
       },
       {
-        "title": "What is a GDG?",
-        "description": "A Google Developer Group is a community of volunteers who create exciting projects and share experiences about Google technologies.",
+        "title": "O que é um GDG?",
+        "description": "Um GDG é uma comunidade de voluntários que cria projetos e compartilha experiências sobre tecnologias Google.",
         "callToAction": {
           "label": "Read more",
           "link": "https://developers.google.com/groups/",
@@ -289,8 +289,8 @@
         }
       },
       {
-        "title": "What is DevFest?",
-        "description": "DevFests are community-led developer events hosted by Google Developer Groups around the globe.",
+        "title": "O que é um DevFest?",
+        "description": "Devfests são eventos de desenvolvimento promovidos por GDGs ao redor do globo.",
         "callToAction": {
           "label": "Read more",
           "link": "https://devfest.withgoogle.com/",
@@ -308,11 +308,11 @@
     }
   },
   "filters": {
-    "title": "Filters",
-    "results": "Results",
+    "title": "Filtros",
+    "results": "Resultados",
     "tags": "Tags",
-    "complexity": "Complexity",
-    "clear": "Clear all"
+    "complexity": "Complexidade",
+    "clear": "Limpar Tudo"
   },
   "addToHomeScreen": {
     "cta": "Add to Home Screen"
