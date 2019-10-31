@@ -7,7 +7,7 @@
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="../elements/shared-styles.html">
 
-<dom-module id="team-page">
+<dom-module id="sponsor-page">
   <template>
     <style include="shared-styles flex flex-alignment">
       :host {
@@ -42,10 +42,8 @@
         width: 96px;
         height: 96px;
         background-color: var(--contrast-additional-background-color);
-        border-radius: 50%;
         overflow: hidden;
         transform: translateZ(0);
-        border-radius: 50%;
         border: 5px solid var(--contrast-additional-background-color);
       }
 
@@ -121,8 +119,8 @@
       font-color="{$ heroSettings.team.fontColor $}"
       active="[[active]]"
     >
-      <div class="hero-title highlight-font">{$ heroSettings.team.title $}</div>
-      <p class="hero-description">{$ heroSettings.team.description $}</p>
+      <div class="hero-title highlight-font">{$ heroSettings.sponsor.title $}</div>
+      <p class="hero-description">{$ heroSettings.sponsor.description $}</p>
     </hero-block>
 
     <div class="description-wrapper">
@@ -135,7 +133,7 @@
 
     <div class="container">
       <template is="dom-repeat" items="[[team]]" as="team">
-        Here is some other text<div class="team-title">[[team.title]]</div>
+        <div class="team-title">[[team.title]]</div>
 
         <div class="team-block">
           <template is="dom-repeat" items="[[team.members]]" as="member">
@@ -143,21 +141,14 @@
               <plastic-image
                 class="photo"
                 srcset="[[member.photoUrl]]"
-                sizing="cover"
+                sizing="contain"
                 lazy-load preload fade>
               </plastic-image>
 
               <div class="member-details" layout vertical center-justified start>
                 <h2 class="name">[[member.name]]</h2>
-                <div class="activity">[[member.title]]</div>
-                <div class="contacts">
-                  <template is="dom-repeat" items="[[member.socials]]" as="social">
-                    <a href$="[[social.link]]" target="_blank" rel="noopener noreferrer">
-                      <paper-icon-button class="social-icon" icon="hoverboard:{{social.icon}}"></paper-icon-button>
-                    </a>
-                  </template>
-                </div>
               </div>
+
             </div>
           </template>
         </div>
@@ -169,8 +160,8 @@
 
   <script>
 
-    class TeamPage extends ReduxMixin(Polymer.Element) {
-      static get is() {return 'team-page';}
+    class SponsorPage extends ReduxMixin(Polymer.Element) {
+      static get is() {return 'sponsor-page';}
 
       static get properties() {
         return {
@@ -198,7 +189,7 @@
       }
     }
 
-    window.customElements.define(TeamPage.is, TeamPage);
+    window.customElements.define(SponsorPage.is, SponsorPage);
 
   </script>
 </dom-module>

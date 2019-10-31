@@ -144,7 +144,6 @@
 
       <app-drawer id="drawer" slot="drawer" opened="[[ui.isDrawerOpened]]" swipe-open>
         <app-toolbar layout vertical start>
-          <plastic-image class="toolbar-logo" srcset="/images/logo-monochrome.svg" alt="{$ title $}"></plastic-image>
           <h2 class="dates">{$ dates $}</h2>
           <h3 class="location">{$ location.short $}</h3>
         </app-toolbar>
@@ -207,10 +206,10 @@
           selected-attribute="active"
           hide-immediately
         >
-          <home-page
+          <!-- <home-page
             data-route="home"
             data-path="pages/home-page.html"
-          ></home-page>
+          ></home-page> -->
           <blog-page
             data-route="blog"
             data-path="pages/blog-page.html"
@@ -235,6 +234,10 @@
             data-route="team"
             data-path="pages/team-page.html"
           ></team-page>
+          <sponsor-page
+            data-route="sponsor"
+            data-path="pages/sponsor-page.html"
+          ></sponsor-page>
           <faq-page
             data-route="faq"
             data-path="pages/faq-page.html"

@@ -34,6 +34,9 @@ const uiActions = {
 
 const routingActions = {
   setRoute: (routeFromAction) => {
+    if (routeFromAction == '') {
+      routeFromAction = 'schedule';
+    }
     const route = routeFromAction || 'home';
     store.dispatch({
       type: SET_ROUTE,
@@ -455,18 +458,17 @@ const scheduleActions = {
 
     return firebase.firestore()
         .collection('generatedSchedule')
-        .get()
-        .then((snaps) => {
-          const scheduleDays = snaps.docs.map((snap) => snap.data());
+        .onSnapshot(function (querySnapshot) {
+          var snaps = [];
+          querySnapshot.forEach(function (snap) {
+            snaps.push(snap);
+          });
+          const scheduleDays = snaps.map((snap) => snap.data());
+          // console.log('sd:', scheduleDays);
           dispatch({
             type: FETCH_SCHEDULE_SUCCESS,
-            data: scheduleDays.sort((a, b) => a.date.localeCompare(b.date)),
-          });
-        })
-        .catch((error) => {
-          dispatch({
-            type: FETCH_SCHEDULE_FAILURE,
-            payload: { error },
+            // data: scheduleDays.sort((a, b) => a.date.localCompare(b.date))
+            data: scheduleDays,
           });
         });
   },

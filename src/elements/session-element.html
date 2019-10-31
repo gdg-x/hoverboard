@@ -151,12 +151,13 @@
 
       <div class="session-header" layout horizontal justified>
         <div flex>
+          <h4>[[session.track.title]]</h4>
           <h3 class="session-title">[[session.title]]</h3>
           <text-truncate lines="3">
             <div class="session-description">[[summary]]</div>
           </text-truncate>
         </div>
-        <span class="language">[[slice(session.language, 2)]]</span>
+        <!-- <span class="language">[[slice(session.language, 2)]]</span> -->
       </div>
 
       <div class="session-content" flex layout horizontal justified>
@@ -188,16 +189,15 @@
         <div class="speakers" hidden$="[[!session.speakers.length]]">
           <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
             <div class="speaker" layout horizontal center>
-              <plastic-image
+              <!-- <plastic-image
                 class="speaker-photo"
                 srcset="[[speaker.photoUrl]]"
                 sizing="cover"
                 lazy-load preload fade
-              ></plastic-image>
+              ></plastic-image> -->
 
               <div class="speaker-details" flex>
                 <div class="speaker-name">[[speaker.name]]</div>
-                <div class="speaker-title">[[_join(speaker.company, speaker.country)]]</div>
               </div>
             </div>
           </template>

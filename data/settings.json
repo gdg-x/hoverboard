@@ -1,47 +1,32 @@
 {
   "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv",
-    "blog": "https://medium.com/gdg-lviv",
-    "url": "http://lviv.gdg.org.ua/"
+    "name": "Measurecamp Sydney 2019",
+    "twitter": "mcsydney",
+    "blog": "http",
+    "url": ""
   },
-  "startDate": "2017-10-013T09:00:00+03:00",
-  "endDate": "2017-10-14T19:00:00+03:00",
+  "startDate": "2019-10-26T09:00:00+11:00",
+  "endDate": "2019-10-26T19:00:00+11:00",
   "webapp": {
-    "shortName": "DevFest",
+    "shortName": "MC Sydney",
     "themeColor": "#673AB7",
     "backgroundColor": "#673AB7"
   },
   "dateFormat": {
-    "locale": "en-US"
+    "locale": "en-AU"
   },
-  "hashtag": "DevFest",
+  "hashtag": "#measurecampsydney",
   "disabledSchedule": false,
   "navigation": [
-    {
-      "route": "home",
-      "permalink": "/",
-      "label": "Home"
-    },
-    {
-      "route": "speakers",
-      "permalink": "/speakers/",
-      "label": "Speakers"
-    },
     {
       "route": "schedule",
       "permalink": "/schedule/",
       "label": "Schedule"
     },
     {
-      "route": "team",
-      "permalink": "/team/",
-      "label": "Team"
-    },
-    {
-      "route": "blog",
-      "permalink": "/blog/",
-      "label": "Blog"
+      "route": "sponsor",
+      "permalink": "/sponsor/",
+      "label": "Sponsors"
     }
   ],
   "heroSettings": {
@@ -94,6 +79,10 @@
       },
       "fontColor": "#424242"
     },
+    "sponsor": {
+      "title": "Sponsors",
+      "metaDescription": "sponsor metadescription"
+    },
     "faq": {
       "title": "FAQs",
       "metaDescription": "Find you answer right here!",
@@ -113,20 +102,20 @@
   },
   "location": {
     "label": "Location",
-    "name": "Planeta kino",
-    "city": "Lviv",
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "name": "",
+    "city": "Sydney",
+    "short": "Sydney, Australia",
+    "address": "Google Address",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
+      "latitude": -33,
+      "longitude": 151,
       "zoom": 5
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": -33,
+      "longitude": 151
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": "Google offices Sydney"
   },
   "mediaQueries": {
     "xs": {
@@ -148,23 +137,11 @@
     "follow": [
       {
         "name": "meetup",
-        "url": "https://www.meetup.com/GDG-Lviv/events/244342635/"
-      },
-      {
-        "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
+        "url": "https://www.meetup.com/"
       },
       {
         "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
-      },
-      {
-        "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
-      },
-      {
-        "name": "youtube",
-        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "url": "https://twitter.com/measurecampsydney/"
       }
     ],
     "share": [
@@ -178,7 +155,7 @@
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
+  "mailto": "committee@daw.org.au",
   "signInProviders": {
     "providersData": [
       {

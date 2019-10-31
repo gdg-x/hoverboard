@@ -9,7 +9,7 @@
     "postbuild": "cpx ../build/index.html dist/"
   },
   "engines": {
-    "node": "10"
+    "node": "8"
   },
   "dependencies": {
     "@google-cloud/storage": "^1.7.0",

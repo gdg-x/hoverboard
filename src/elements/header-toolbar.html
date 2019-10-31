@@ -24,7 +24,7 @@
       }
 
       :host([transparent]) .toolbar-logo {
-        background-color: var(--hero-logo-color);
+        /* background-color: var(--hero-logo-color); */
         opacity: var(--hero-logo-opacity, 1);
       }
 
@@ -37,11 +37,12 @@
 
       .toolbar-logo {
         display: block;
-        width: 150px;
-        height: 32px;
-        background-color: var(--default-primary-color);
-        transition: background-color var(--animation);
-        -webkit-mask: url('/images/logo-monochrome.svg') no-repeat;
+        width: 200px;
+        height: 48px;
+        /* background-color: var(--default-primary-color); */
+        /* transition: background-color var(--animation); */
+        /* -webkit-mask: url('/images/logos/mc-sydney.png') no-repeat; */
+        background-image: url('/images/logos/mc-sydney.png');
       }
 
       .nav-items {
@@ -132,7 +133,7 @@
         ></paper-icon-button>
       </div>
       <div layout horizontal center flex>
-        <a class="toolbar-logo" href="/" hidden$="[[!viewport.isLaptopPlus]]" layout horizontal title="{$ title $}"></a>
+        <!-- <a class="toolbar-logo" href="/" hidden$="[[!viewport.isLaptopPlus]]" layout horizontal title="{$ title $}"></a> -->
       </div>
 
       <paper-tabs
@@ -150,11 +151,6 @@
         {% endfor %}
 
         <paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]">{$ signIn $}</paper-tab>
-
-        <a href$="[[_getTicketUrl(tickets)]]" target="_blank" rel="noopener noreferrer" ga-on="click"
-           ga-event-category="ticket button" ga-event-action="buy_click">
-          <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>
-        </a>
       </paper-tabs>
 
       <paper-menu-button

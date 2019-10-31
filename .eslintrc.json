@@ -46,6 +46,7 @@
     "scheduleActions": true,
     "galleryActions": true,
     "teamActions": true,
+    "sponsorActions": true,
     "userActions": true,
     "subscribeActions": true,
     "notificationsActions": true,
