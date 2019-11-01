@@ -31,7 +31,7 @@
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.4",
     "bower": "^1.8.8",
-    "browser-sync": "^2.26.5",
+    "browser-sync": "^2.26.7",
     "connect-history-api-fallback": "^1.6.0",
     "cross-env": "^5.2.0",
     "css-slam": "^2.1.2",
