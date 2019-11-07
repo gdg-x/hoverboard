@@ -55,8 +55,8 @@
       }
 
       .hero-logo {
-        --iron-image-width: 100%;
         max-width: 240px;
+        margin: 0 auto;
       }
 
       .title {
@@ -179,12 +179,23 @@
         border: 10px solid var(--default-primary-color);
         text-transform: uppercase;
         transition: all .3s;
+        box-shadow: 0 5px 14px rgba(44,22,71,0.3);
       }
 
       .big-button:hover {
-        color: var(--medium1-primary-color);
-        border: 10px solid var(--medium1-primary-color);
-        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        box-shadow: 0 10px 50px rgba(44,22,71,0.3);
+      }
+
+      .full-height {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 5vh;
+      }
+
+      .title {
+        text-align: center;
       }
 
       @keyframes updown {
@@ -241,14 +252,7 @@
 
     <polymer-helmet active="[[active]]"></polymer-helmet>
 
-    <hero-block
-      id="hero"
-      background-image="{$ heroSettings.home.background.image $}"
-      background-color="{$ heroSettings.home.background.color $}"
-      font-color="{$ heroSettings.home.fontColor $}"
-      active="[[active]]"
-      hide-logo
-    >
+    <div class="full-height">
       <a 
         class="big-button" 
         href="https://radicalxchangeberlin.splashthat.com/"
@@ -259,22 +263,20 @@
         <span>November 22</span>
       </a>
       <div class="home-content">
-        <div class="top">
-          <div class="title">RadicalxChange</div>
-          <plastic-image
-            class="hero-logo"
-            srcset="/images/logo.gif"
-            alt="{$ title $}"
-          ></plastic-image>
-          <div class="info-items highlight-font">
-            <div class="info-items--quote">
-              {$ heroSettings.home.description1 $}
-              <i> {$ heroSettings.home.description2 $}</i>
-            </div>
+        <div class="title">RadicalxChange</div>
+        <img
+          class="hero-logo"
+          srcset="/images/logo.gif"
+          alt="{$ title $}"
+        ></img>
+        <div class="info-items highlight-font">
+          <div class="info-items--quote">
+            {$ heroSettings.home.description1 $}
+            <i> {$ heroSettings.home.description2 $}</i>
           </div>
         </div>
       </div>
-    </hero-block>
+    </div>
     <about-block></about-block>
     <featured-videos></featured-videos>
     <building-momentum-gallery></building-momentum-gallery>
