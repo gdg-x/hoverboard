@@ -163,6 +163,30 @@
         text-transform: none;
       }
 
+      .big-button {
+        color: var(--default-primary-color);
+        font-family: var(--product-sans);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 26px;
+        font-weight: bold;
+        height: 150px;
+        width: 300px;
+        margin: 0 auto 50px;
+        background: #fff;
+        border: 10px solid var(--default-primary-color);
+        text-transform: uppercase;
+        transition: all .3s;
+      }
+
+      .big-button:hover {
+        color: var(--medium1-primary-color);
+        border: 10px solid var(--medium1-primary-color);
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      }
+
       @keyframes updown {
         0% {
           transform: translate(0, 0);
@@ -225,6 +249,15 @@
       active="[[active]]"
       hide-logo
     >
+      <a 
+        class="big-button" 
+        href="https://radicalxchangeberlin.splashthat.com/"
+        rel="noopener noreferrer" 
+        target="_blank"
+        >
+        <span>Berlin Conference</span>
+        <span>November 22</span>
+      </a>
       <div class="home-content">
         <div class="top">
           <div class="title">RadicalxChange</div>
