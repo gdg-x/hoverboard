@@ -13,7 +13,15 @@
       "brief": "LibertyJS relies on the contributions of sponsors for us to put on the best possible conference we can.",
       "image": "https://firebasestorage.googleapis.com/v0/b/libertyjs-staging.appspot.com/o/national-museum-american-jewish-history.jpg?alt=media&token=b0ef3aa6-24c2-47eb-b81b-ee5be00ed35b",
       "published": "2019-08-05",
-      "source": "/data/posts/2019-08-05-kickoff.md",
+      "source": "/data/posts/2019-08-05-sponsors.md",
+      "title": "Sponsoring LibertyJS"
+    },
+    "2019-inclusivity": {
+      "backgroundColor": "#5a7785",
+      "brief": "We welcome all to our community and treat each person with respect.  If you are not capable of doing that in return, this is not the right space for you.",
+      "image": "https://firebasestorage.googleapis.com/v0/b/libertyjs-staging.appspot.com/o/national-museum-american-jewish-history.jpg?alt=media&token=b0ef3aa6-24c2-47eb-b81b-ee5be00ed35b",
+      "published": "2019-10-28",
+      "source": "/data/posts/2019-10-28-inclusivity.md",
       "title": "Sponsoring LibertyJS"
     }
   },
