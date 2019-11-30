@@ -239,12 +239,13 @@ const blogActions = {
           return response.json();
         })
         .then(function (res) {
-          let arr = Object.values(res);
+          let obj = Object.assign({}, res);
+          Object.keys(res).forEach((k) => obj[k].id = k);
           dispatch({
             type: FETCH_BLOG_LIST_SUCCESS,
             payload: {
-              res,
-              list: arr,
+              obj,
+              list: Object.values(obj),
             },
           });
           resolve(posts);
