@@ -34,219 +34,6 @@
   "partners": [{
       "logos": [{
         "order": 0,
-        "height": 150,
-        "logoUrl": "../images/logos/logo-maif.svg",
-        "name": "MAIF Horizon",
-        "url": "https://www.maif.fr/"
-      }, {
-        "order": 1,
-        "height": 150,
-        "logoUrl": "../images/logos/microsoft.png",
-        "name": "Microsoft",
-        "url": "https://microsoft.fr/"
-      },{
-        "order": 2,
-        "height": 150,
-        "logoUrl": "../images/logos/septeo.png",
-        "name": "Septeo",
-        "url": "https://www.septeo.fr/"
-      }],
-      "order": 0,
-      "title": "Platinium"
-    },
-    {
-      "logos": [{
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/teads.png",
-          "name": "Teads",
-          "url": "https://www.teads.tv/"
-        },
-        {
-          "order": 1,
-          "height": 100,
-          "logoUrl": "../images/logos/apside.png",
-          "name": "Apside",
-          "url": "https://www.apside.com/"
-        },
-        {
-          "order": 2,
-          "height": 100,
-          "logoUrl": "../images/logos/ca.png",
-          "name": "Crédit Agricole Technologies et Services",
-          "url": "https://www.groupecreditagricole.jobs/Notre-groupe/Marques/Credit-Agricole-Technologies-et-Services"
-        },
-        {
-          "order": 3,
-          "height": 100,
-          "logoUrl": "../images/logos/klanik.png",
-          "name": "Klanik",
-          "url": "https://www.klanik.com/"
-        },
-        {
-          "order": 4,
-          "height": 100,
-          "logoUrl": "../images/logos/talkspirit.png",
-          "name": "talkspirit",
-          "url": "https://www.talkspirit.com/fr/"
-        },
-        {
-          "order": 5,
-          "height": 100,
-          "logoUrl": "../images/logos/zendesk.png",
-          "name": "Zendesk",
-          "url": "https://www.zendesk.com/"
-        },
-        {
-          "order": 6,
-          "height": 100,
-          "logoUrl": "../images/logos/kaliop.png",
-          "name": "Kaliop",
-          "url": "https://www.kaliop.com/"
-        }
-      ],
-      "order": 1,
-      "title": "Gold"
-    },
-    {
-      "logos": [{
-          "order": 0,
-          "height": 75,
-          "logoUrl": "../images/logos/sequoiasoft.png",
-          "name": "Sequoiasoft",
-          "url": "https://www.sequoiasoft.com/"
-        },
-        {
-          "order": 1,
-          "height": 75,
-          "logoUrl": "../images/logos/agysoft.jpeg",
-          "name": "Agysoft",
-          "url": "https://www.agysoft.fr/"
-        },
-        {
-          "order": 2,
-          "height": 75,
-          "logoUrl": "../images/logos/gitlab.png",
-          "name": "Gitlab",
-          "url": "https://about.gitlab.com/"
-        },
-        {
-          "order": 3,
-          "height": 75,
-          "logoUrl": "../images/logos/sada.png",
-          "name": "Sada",
-          "url": "http://www.sada.fr/"
-        },
-        {
-          "order": 4,
-          "height": 75,
-          "logoUrl": "../images/logos/lunchr.svg",
-          "name": "Lunchr",
-          "url": "https://www.lunchr.co/"
-        },
-        {
-          "order": 5,
-          "height": 100,
-          "logoUrl": "../images/logos/esii.png",
-          "name": "ESII",
-          "url": "https://www.esii.com/fr"
-        },
-        {
-          "order": 6,
-          "height": 100,
-          "logoUrl": "../images/logos/idean.png",
-          "name": "Idean",
-          "url": "https://www.idean.com/"
-        },
-        {
-          "order": 7,
-          "height": 100,
-          "logoUrl": "../images/logos/netheos.png",
-          "name": "Netheos",
-          "url": "https://www.netheos.com/"
-        },
-        {
-          "order": 8,
-          "height": 100,
-          "logoUrl": "../images/logos/laposte.png",
-          "name": "La Poste",
-          "url": "https://www.laposte.fr/"
-        },
-        {
-          "order": 9,
-          "height": 100,
-          "logoUrl": "../images/logos/aquafadas.png",
-          "name": "Aquafadas",
-          "url": "https://www.aquafadas.com/fr/"
-        },
-        {
-          "order": 10,
-          "height": 100,
-          "logoUrl": "../images/logos/logo_believe.png",
-          "name": "Believe IT",
-          "url": "http://www.believeit.fr/"
-        },
-        {
-          "order": 11,
-          "height": 100,
-          "logoUrl": "../images/logos/clever-cloud.png",
-          "name": "Clever Cloud",
-          "url": "https://www.clever-cloud.com/fr/"
-        }
-      ],
-      "order": 2,
-      "title": "Silver"
-    },
-    {
-      "logos": [{
-        "order": 0,
-        "height": 50,
-        "logoUrl": "../images/logos/saagie.png",
-        "name": "Saagie",
-        "url": "https://www.saagie.com/"
-      }, {
-        "order": 1,
-        "height": 50,
-        "logoUrl": "../images/logos/decisionbrain.png",
-        "name": "DecisionBrain",
-        "url": "https://decisionbrain.com/"
-      }, {
-        "order": 2,
-        "height": 50,
-        "logoUrl": "../images/logos/devensys.png",
-        "name": "Devensys",
-        "url": "https://www.devensys.com/"
-      }, {
-        "order": 3,
-        "height": 50,
-        "logoUrl": "../images/logos/smartview.png",
-        "name": "Smartview",
-        "url": "http://www.smartview.fr/"
-      }, {
-        "order": 4,
-        "height": 50,
-        "logoUrl": "../images/logos/rh.png",
-        "name": "Recherches & Horizons",
-        "url": "https://reth.fr"
-      }, {
-        "order": 5,
-        "height": 50,
-        "logoUrl": "../images/logos/monkeypatch.png",
-        "name": "MonkeyPatch",
-        "url": "http://www.monkeypatch.io/"
-      }, {
-        "order": 6,
-        "height": 50,
-        "logoUrl": "../images/logos/aive.png",
-        "name": "Aive",
-        "url": "https://www.aive.com/"
-      }],
-      "order": 3,
-      "title": "Bronze"
-    },
-    {
-      "logos": [{
-        "order": 0,
         "height": 100,
         "logoUrl": "../images/logos/mth.png",
         "name": "Montpellier Tech Hub",
@@ -601,7 +388,7 @@
     "regular": false,
     "soldOut": true,
     "starts": "",
-    "url": "https://www.billetweb.fr/sunny-tech-2019"
+    "url": "https://www.billetweb.fr/sunny-tech-2020"
   }, {
     "available": false,
     "currency": "€",
@@ -613,7 +400,7 @@
     "regular": true,
     "soldOut": true,
     "starts": "",
-    "url": "https://www.billetweb.fr/sunny-tech-2019"
+    "url": "https://www.billetweb.fr/sunny-tech-2020"
   }, {
     "available": false,
     "currency": "€",
@@ -623,7 +410,7 @@
     "price": 40,
     "soldOut": true,
     "starts": "",
-    "url": "https://www.billetweb.fr/sunny-tech-2019"
+    "url": "https://www.billetweb.fr/sunny-tech-2020"
   }],
   "triggers": {
     "images": false
