@@ -80,6 +80,13 @@
             </template>
           </div>
       </template>
+
+      <paper-button class="cta-button animated icon-right"
+        on-tap="_addPotentialPartner">
+        <span>{$ partnersBlock.button $}</span>
+        <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+      </paper-button>
+
     </div>
 
   </template>
@@ -124,6 +131,18 @@
         }
         // eslint-disable-next-line no-undef
         HOVERBOARD.Elements.Partners = this;
+      }
+
+      _addPotentialPartner() {
+        dialogsActions.openDialog(DIALOGS.SUBSCRIBE, {
+          title: '{$ partnersBlock.form.title $}',
+          submitLabel: '{$ partnersBlock.form.submitLabel $}',
+          firstFieldLabel: '{$ partnersBlock.form.fullName $}',
+          secondFieldLabel: '{$ partnersBlock.form.companyName $}',
+          submit: (data) => {
+            this.dispatch(partnersActions.addPartner(data));
+          },
+        });
       }
 
       _partnerAddingChanged(newPartnerAdding, oldPartnerAdding) {

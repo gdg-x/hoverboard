@@ -150,7 +150,21 @@
         </paper-tab>
         {% endfor %}
 
-      </a>
+        <a href$="[[_getTicketUrl(tickets)]]" target="_blank" rel="noopener noreferrer" ga-on="click"
+           ga-event-category="ticket button" ga-event-action="buy_click">
+          <paper-button class="buy-button" secondary>{$ buyTicket $}</paper-button>
+        </a>
+
+        <a href="{$ cfpLink $}" target="_blank" rel="noopener noreferrer" ga-on="click"
+          ga-event-category="cfp button" ga-event-action="cfp_click">
+          <paper-button class="buy-button" primary>{$ cfpHeader $}</paper-button>
+        </a>
+
+        <a target="_scrollToBecomeSponsor" rel="noopener noreferrer" ga-on="click" on-tap="_scrollToBecomeSponsor"
+        ga-event-category="becomSponsorGallery"  ga-event-action="scroll" ga-event-action="become_sponsor_click">
+          <paper-button class="buy-button" primary>{$ becomeSponsorMenu $}</paper-button>
+        </a>
+
       </paper-tabs>
 
       <paper-menu-button
@@ -269,12 +283,15 @@
       }
 
       _scrollToBecomeSponsor() {
-        // eslint-disable-next-line no-undef
-        const toolbarHeight = HOVERBOARD.Elements.HeaderToolbar.getBoundingClientRect().height - 1;
-        // eslint-disable-next-line no-undef
-        const becomeSponsorGalleryBlockPositionY = HOVERBOARD.Elements.BecomeSponsorGallery.getBoundingClientRect().top
-          - toolbarHeight;
-        this.scrollToY(becomeSponsorGalleryBlockPositionY, 600, 'easeInOutSine');
+        dialogsActions.openDialog(DIALOGS.SUBSCRIBE, {
+          title: '{$ partnersBlock.form.title $}',
+          submitLabel: '{$ partnersBlock.form.submitLabel $}',
+          firstFieldLabel: '{$ partnersBlock.form.fullName $}',
+          secondFieldLabel: '{$ partnersBlock.form.companyName $}',
+          submit: (data) => {
+            this.dispatch(partnersActions.addPartner(data));
+          },
+        });
       }
 
       _toggleNotifications() {

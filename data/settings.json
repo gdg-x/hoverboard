@@ -4,8 +4,8 @@
     "twitter": "sunnytech_mtp",
     "url": "https://sunny-tech.io"
   },
-  "startDate": "2020-06",
-  "endDate": "2020-06",
+  "startDate": "2020-07-2T09:00:00+02:00",
+  "endDate": "2020-07-3T18:00:00+02:00",
   "webapp": {
     "shortName": "Sunny Tech",
     "themeColor": "#e83002",
@@ -35,7 +35,8 @@
   ],
   "heroSettings": {
     "home": {
-      "description": "#SeaTechAndSun ☀️",
+      "description": "#SeaTechAndSun️️",
+      "catchingPhrase": "Commence ton été avec SunnyTech️️ ☀",
       "background": {
         "color": "#fb4552",
         "image": "/images/backgrounds/home.jpg"
@@ -108,20 +109,20 @@
   },
   "location": {
     "label": "Localisation",
-    "name": "Faculté d’Education",
+    "name": "Université Sup'Agro",
     "city": "Montpellier",
     "short": "Montpellier",
-    "address": "2 place Marcel Godechot, 34090 Montpellier",
+    "address": "2 Place Pierre Viala, 34060 Montpellier",
     "pointer": {
-      "latitude": 43.6202051,
-      "longitude": 3.8675719,
+      "latitude": 43.617763,
+      "longitude": 3.856011,
       "zoom": 14
     },
     "mapCenter": {
-      "latitude": 43.6202051,
-      "longitude": 3.8675719
+      "latitude": 43.617763,
+      "longitude": 3.856011
     },
-    "description": "I.U.F.M"
+    "description": "Sup'Agro"
   },
   "mediaQueries": {
     "xs": {
@@ -147,7 +148,7 @@
       },
       {
         "name": "linkedin",
-        "nickname":"Sunny Tech Event", 
+        "nickname":"Sunny Tech Event",
         "url":"https://www.linkedin.com/company/sunny-tech-event/"
       }
     ],
@@ -167,7 +168,6 @@
     "url": "https://sunny-tech.us16.list-manage.com/subscribe/post?u=bc52bec3c758ad9f9e5b5bce7&amp;id=d9ed0e9aab",
     "name": "b_bc52bec3c758ad9f9e5b5bce7_d9ed0e9aab"
   },
-  "mailto": "devfest@gdg.org.ua",
   "signInProviders": {
     "providersData": [
       {

@@ -8,8 +8,8 @@
   "locationRegion": "Occitanie",
   "locationCountry": "France",
   "image": "images/social-share.jpg",
-  "keywords": "sunnytech, évènement, event, montpellier, Sunny, Tech, programming, android, chrome, developers, web, cloud, conférence, seatechandsun, docker, devops, ux, design, back, scala, fonctionnel",  
-  "dates": "27 & 28 juin 2019",
+  "keywords": "sunnytech, évènement, event, montpellier, Sunny, Tech, programming, android, chrome, developers, web, cloud, conférence, seatechandsun, docker, devops, ux, design, back, scala, fonctionnel",
+  "dates": "2 & 3 juillet 2020",
   "partnershipProposition": "mailto:contact@sunny-tech.io",
   "share": "Partager",
   "followOur": "Suit notre",
@@ -20,12 +20,12 @@
   "buyTicket": "Achetez un billet",
   "buyTicketTopRight": "Billetterie",
   "cfpHeader": "Call For Paper",
-  "cfpLink": "https://conference-hall.io/public/event/dWsbvnSTdg5v1pxwKhLM",
+  "cfpLink": "https://conference-hall.io/public/event/g1Yq1ZsPoPUy8R7C8SXc",
   "becomeSponsorMenu": "Devenir sponsor",
   "signIn": "Connexion",
   "signOut": "Déconnexion",
   "viewHighlights": "Moments forts 2019",
-  "viewSchedule": "SCHEDULE 2019",
+  "viewSchedule": "SCHEDULE 2020",
   "downloadSchedule": "Télécharger le programme",
   "offlineMessage": "You can still work offline.",
   "cachingComplete": "Caching complete! Future visits will work offline.",
@@ -97,7 +97,7 @@
     "statisticsBlock": {
       "attendees": {
         "label": "Participants",
-        "number": "450"
+        "number": "500"
       },
       "days": {
         "label": "Jours",
@@ -121,15 +121,15 @@
     "save": "Économisez ${discount}%"
   },
   "partnersBlock": {
-    "title": "Sponsors de l'année 2019",
-    "button": "Become a partner",
+    "title": "Sponsors pour l'édition 2020",
+    "button": "Devenez sponsor !",
     "form": {
-      "title": "Become a partner!",
-      "submitLabel": "Submit",
-      "fullName": "Full Name",
-      "companyName": "Company Name"
+      "title": "Devenez sponsor !",
+      "submitLabel": "Envoyer",
+      "fullName": "Nom",
+      "companyName": "Entreprise"
     },
-    "toast": "We will contact you soon!"
+    "toast": "On revient vers vous bientôt !"
   },
   "featuredVideos": {
     "title": "DFUA'16 featured videos",
@@ -268,35 +268,35 @@
   },
   "callToSchedule": {
     "display": true,
-    "title" :"Appel à orateurs", 
+    "title" :"Appel à orateurs",
     "description": "Intéressé(e) pour parler à Sunny Tech?",
     "description2": "Notre CFP est désormais ouvert",
-    "description3": "Nous avons hâtes de recevoir vos propositions !", 
+    "description3": "Nous avons hâtes de recevoir vos propositions !",
     "action": "Accéder au CFP",
-    "url": "https://conference-hall.io/public/event/dWsbvnSTdg5v1pxwKhLM",
+    "url": "https://conference-hall.io/public/event/g1Yq1ZsPoPUy8R7C8SXc",
     "categories": [
       {
-      "title": "Data & Machine Learning",
+      "title": "Cloud & Devops",
       "icon":"/images/icons/bubble1.svg"
-      }, 
+      },
       {
-      "title": "Devops & Cloud",
+      "title": "Data",
       "icon":"/images/icons/bubble2.svg"
-      }, 
+      },
       {
-      "title": "Architecture et paradigmes",
+      "title": "Methodologies",
       "icon":"/images/icons/bubble3.svg"
-      }, 
+      },
       {
-      "title": "Design",
+      "title": "Developpement",
       "icon":"/images/icons/bubble4.svg"
-      }, 
+      },
       {
-      "title": "Langages & frameworks",
+      "title": "Architecture",
       "icon":"/images/icons/bubble5.svg"
-      }, 
+      },
       {
-      "title": "Random",
+      "title": "Atypique",
       "icon":"/images/icons/bubble6.svg"
       }
     ]
