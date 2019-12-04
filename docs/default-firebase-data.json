@@ -386,7 +386,7 @@
     "name": "Early Bird",
     "price": 60,
     "regular": false,
-    "soldOut": true,
+    "soldOut": false,
     "starts": "",
     "url": "https://www.billetweb.fr/sunny-tech-2020"
   }, {
@@ -398,7 +398,7 @@
     "price": 90,
     "primary": true,
     "regular": true,
-    "soldOut": true,
+    "soldOut": false,
     "starts": "",
     "url": "https://www.billetweb.fr/sunny-tech-2020"
   }, {
@@ -408,7 +408,7 @@
     "info": "Requiert une carte étudiante",
     "name": "Étudiant",
     "price": 40,
-    "soldOut": true,
+    "soldOut": false,
     "starts": "",
     "url": "https://www.billetweb.fr/sunny-tech-2020"
   }],
