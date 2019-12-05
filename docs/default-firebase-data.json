@@ -378,7 +378,7 @@
     "title": "Membres"
   }],
   "tickets": [{
-    "available": false,
+    "available": true,
     "currency": "€",
     "ends": "",
     "inDemand": false,
@@ -386,11 +386,11 @@
     "name": "Early Bird",
     "price": 60,
     "regular": false,
-    "soldOut": false,
+    "soldOut": true,
     "starts": "",
     "url": "https://www.billetweb.fr/sunny-tech-2020"
   }, {
-    "available": false,
+    "available": true,
     "currency": "€",
     "ends": "",
     "inDemand": true,
@@ -402,7 +402,7 @@
     "starts": "",
     "url": "https://www.billetweb.fr/sunny-tech-2020"
   }, {
-    "available": false,
+    "available": true,
     "currency": "€",
     "ends": "",
     "info": "Requiert une carte étudiante",
