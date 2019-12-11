@@ -19,7 +19,7 @@
     "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_1721.jpg?alt=media&token=52f977fa-307a-4812-b254-85d04a58f8fb",
     "https://firebasestorage.googleapis.com/v0/b/sunny-tech-test.appspot.com/o/gallery-sponsor%2FIMG_1717.jpg?alt=media&token=d42f8de2-8a7b-4f48-85f0-b38967d3571f"
   ],
-  "blog" : {
+  "blog": {
   },
   "notifications": {
     "config": {
@@ -31,387 +31,480 @@
     "test": {},
     "users": {}
   },
-  "partners": [{
-      "logos": [{
-        "order": 0,
-        "height": 100,
-        "logoUrl": "../images/logos/mth.png",
-        "name": "Montpellier Tech Hub",
-        "url": "https://www.montpellier-techhub.org/"
-      }, {
-        "order": 1,
-        "height": 100,
-        "logoUrl": "../images/logos/duchess.png",
-        "name": "Duchess",
-        "url": "https://www.duchess-france.org/"
-      }, {
-        "order": 2,
-        "height": 100,
-        "logoUrl": "../images/logos/ouisnap.png",
-        "name": "OuiSnap",
-        "url": "https://www.ouisnap.com/fr/"
-      }, {
-        "order": 3,
-        "height": 100,
-        "logoUrl": "../images/logos/compostons.png",
-        "name": "Compostons",
-        "url": "http://www.compostons.org/"
-      }],
+  "partners": [
+    {
+      "logos": [
+        {
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/ca.png",
+          "name": "CATS",
+          "url": "https://www.groupecreditagricole.jobs/Notre-groupe/Marques/Credit-Agricole-Technologies-et-Services"
+        }
+      ],
+      "order": 1,
+      "title": "Gold"
+    },
+    {
+      "logos": [
+        {
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/rh.png",
+          "name": "Recherche & Horizon",
+          "url": "https://www.reth.fr/"
+        }
+      ],
+      "order": 2,
+      "title": "Silver"
+    },
+    {
+      "logos": [
+        {
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/mth.png",
+          "name": "Montpellier Tech Hub",
+          "url": "https://www.montpellier-techhub.org/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/duchess.png",
+          "name": "Duchess",
+          "url": "https://www.duchess-france.org/"
+        },
+        {
+          "order": 2,
+          "height": 100,
+          "logoUrl": "../images/logos/ouisnap.png",
+          "name": "OuiSnap",
+          "url": "https://www.ouisnap.com/fr/"
+        },
+        {
+          "order": 3,
+          "height": 100,
+          "logoUrl": "../images/logos/compostons.png",
+          "name": "Compostons",
+          "url": "http://www.compostons.org/"
+        }
+      ],
       "order": 4,
       "title": "Partenaires"
     }
   ],
-  "schedule" : {
+  "schedule": {
   },
   "sessions": {
   },
   "speakers": {
   },
-  "team": [{
-    "members": [{
-      "name": "Loïc Talon",
-      "photoUrl": "/images/people/loic_talon.jpg",
-      "socials": [{
-          "icon": "twitter",
-          "link": "https://twitter.com/loic_talon/",
-          "name": "Twitter"
+  "team": [
+    {
+      "members": [
+        {
+          "name": "Loïc Talon",
+          "photoUrl": "/images/people/loic_talon.jpg",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/loic_talon/",
+              "name": "Twitter"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://fr.linkedin.com/in/loictalon",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 0
         },
         {
-          "icon": "linkedin",
-          "link": "https://fr.linkedin.com/in/loictalon",
-          "name": "LinkedIn"
-        }
-      ],
-      "title": "",
-      "order": 0
-    }, {
-      "name": "Estelle Landry",
-      "photoUrl": "/images/people/estelle_landry.jpg",
-      "socials": [{
-          "icon": "twitter",
-          "link": "https://twitter.com/estelandry/",
-          "name": "Twitter"
+          "name": "Estelle Landry",
+          "photoUrl": "/images/people/estelle_landry.jpg",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/estelandry/",
+              "name": "Twitter"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://fr.linkedin.com/in/estelle-landry-61866b71",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 1
         },
         {
-          "icon": "linkedin",
-          "link": "https://fr.linkedin.com/in/estelle-landry-61866b71",
-          "name": "LinkedIn"
-        }
-      ],
-      "title": "",
-      "order": 1
-    }, {
-      "name": "Jérémy Barthe",
-      "photoUrl": "/images/people/jeremy_barthe.jpg",
-      "socials": [{
-          "icon": "twitter",
-          "link": "https://twitter.com/jeremyb_/",
-          "name": "Twitter"
+          "name": "Jérémy Barthe",
+          "photoUrl": "/images/people/jeremy_barthe.jpg",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/jeremyb_/",
+              "name": "Twitter"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://fr.linkedin.com/in/jeremybarthe",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 2
         },
         {
-          "icon": "linkedin",
-          "link": "https://fr.linkedin.com/in/jeremybarthe",
-          "name": "LinkedIn"
-        }
-      ],
-      "title": "",
-      "order": 2
-    }, {
-      "name": "Chloé Pellen",
-      "photoUrl": "/images/people/chloe_pellen.jpg",
-      "socials": [{
-          "icon": "twitter",
-          "link": "https://twitter.com/ChloePellen/",
-          "name": "Twitter"
+          "name": "Chloé Pellen",
+          "photoUrl": "/images/people/chloe_pellen.jpg",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/ChloePellen/",
+              "name": "Twitter"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://fr.linkedin.com/in/chloe-pellen-66816162",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 3
         },
         {
-          "icon": "linkedin",
-          "link": "https://fr.linkedin.com/in/chloe-pellen-66816162",
-          "name": "LinkedIn"
-        }
-      ],
-      "title": "",
-      "order": 3
-    }, {
-      "name": "Lauriane Gresse",
-      "photoUrl": "/images/people/lauriane_anthony.jpg",
-      "socials": [{
-          "icon": "twitter",
-          "link": "https://twitter.com/LaurianeAnthony/",
-          "name": "Twitter"
+          "name": "Lauriane Gresse",
+          "photoUrl": "/images/people/lauriane_anthony.jpg",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/LaurianeAnthony/",
+              "name": "Twitter"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://fr.linkedin.com/in/lauriane-gresse-a3696665",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 4
         },
         {
-          "icon": "linkedin",
-          "link": "https://fr.linkedin.com/in/lauriane-gresse-a3696665",
-          "name": "LinkedIn"
-        }
-      ],
-      "title": "",
-      "order": 4
-    }, {
-      "name": "François Teychene",
-      "photoUrl": "/images/people/francois_teychene.jpg",
-      "socials": [{
-          "icon": "twitter",
-          "link": "https://twitter.com/fteychene/",
-          "name": "Twitter"
+          "name": "François Teychene",
+          "photoUrl": "/images/people/francois_teychene.jpg",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/fteychene/",
+              "name": "Twitter"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://fr.linkedin.com/in/fteychene",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 5
         },
         {
-          "icon": "linkedin",
-          "link": "https://fr.linkedin.com/in/fteychene",
-          "name": "LinkedIn"
-        }
-      ],
-      "title": "",
-      "order": 5
-    }, {
-      "name": "Benjamin Davy",
-      "photoUrl": "/images/people/benjamin_davy.jpeg",
-      "socials": [{
-        "icon": "linkedin",
-        "link": "https://www.linkedin.com/in/benjamin-davy-a52a02b/",
-        "name": "LinkedIn"
-      }],
-      "title": "",
-      "order": 6
-    }, {
-      "name": "Emmanuelle Cohet",
-      "photoUrl": "/images/people/emanuel_cohet.jpg",
-      "socials": [{
-        "icon": "linkedin",
-        "link": "https://www.linkedin.com/in/emmanuelle-battata-3897821a/",
-        "name": "LinkedIn"
-      }],
-      "title": "",
-      "order": 7
-    }, {
-      "name": "Hugo Gresse",
-      "photoUrl": "/images/people/hugo_gresse.jpg",
-      "socials": [{
-          "icon": "twitter",
-          "link": "https://twitter.com/HugoGresse",
-          "name": "Twitter"
-        }, {
-          "icon": "website",
-          "link": "https://hugo.gresse.io",
-          "name": "Website"
+          "name": "Benjamin Davy",
+          "photoUrl": "/images/people/benjamin_davy.jpeg",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/benjamin-davy-a52a02b/",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 6
         },
         {
-          "icon": "linkedin",
-          "link": "https://fr.linkedin.com/in/hugogresse",
-          "name": "LinkedIn"
-        }
-      ],
-      "title": "",
-      "order": 8
-    }, {
-      "name": "Baptiste Haudegand",
-      "photoUrl": "/images/people/baptiste_haudegand.jpg",
-      "socials": [{
-          "icon": "twitter",
-          "link": "https://twitter.com/Viewtiful_/",
-          "name": "Twitter"
+          "name": "Emmanuelle Cohet",
+          "photoUrl": "/images/people/emanuel_cohet.jpg",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/emmanuelle-battata-3897821a/",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 7
         },
         {
-          "icon": "linkedin",
-          "link": "https://fr.linkedin.com/in/baptistehaudegand",
-          "name": "LinkedIn"
-        }
-      ],
-      "title": "",
-      "order": 9
-    }, {
-      "name": "Emilien Bajeux",
-      "photoUrl": "/images/people/emilien_bajeux.jpg",
-      "socials": [{
-          "icon": "twitter",
-          "link": "https://twitter.com/miy_1",
-          "name": "Twitter"
+          "name": "Hugo Gresse",
+          "photoUrl": "/images/people/hugo_gresse.jpg",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/HugoGresse",
+              "name": "Twitter"
+            },
+            {
+              "icon": "website",
+              "link": "https://hugo.gresse.io",
+              "name": "Website"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://fr.linkedin.com/in/hugogresse",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 8
         },
         {
-          "icon": "linkedin",
-          "link": "https://fr.linkedin.com/in/emilien-bajeux-b4835366",
-          "name": "LinkedIn"
-        }
-      ],
-      "title": "",
-      "order": 10
-    }, {
-      "name": "Sadri Gora",
-      "photoUrl": "/images/people/sadri_gora.jpg",
-      "socials": [{
-          "icon": "twitter",
-          "link": "https://twitter.com/hellosadri",
-          "name": "Twitter"
+          "name": "Baptiste Haudegand",
+          "photoUrl": "/images/people/baptiste_haudegand.jpg",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/Viewtiful_/",
+              "name": "Twitter"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://fr.linkedin.com/in/baptistehaudegand",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 9
         },
         {
-          "icon": "linkedin",
-          "link": "https://fr.linkedin.com/in/sadri-gora-360b6a83",
-          "name": "LinkedIn"
-        }
-      ],
-      "title": "",
-      "order": 11
-    }, {
-      "name": "Emmanuelle Chauvot",
-      "photoUrl": "/images/people/emmanuelle_chauvot.jpg",
-      "socials": [{
-        "icon": "linkedin",
-        "link": "https://www.linkedin.com/in/emmanuelle-chauvot",
-        "name": "LinkedIn"
-      }],
-      "title": "",
-      "order": 12
-    }, {
-      "name": "Magali Baude",
-      "photoUrl": "/images/people/magali_baude.jpg",
-      "socials": [{
-          "icon": "twitter",
-          "link": "https://twitter.com/magalibaude",
-          "name": "Twitter"
+          "name": "Emilien Bajeux",
+          "photoUrl": "/images/people/emilien_bajeux.jpg",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/miy_1",
+              "name": "Twitter"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://fr.linkedin.com/in/emilien-bajeux-b4835366",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 10
         },
         {
-          "icon": "linkedin",
-          "link": "https://fr.linkedin.com/in/magalibaude",
-          "name": "LinkedIn"
-        }
-      ],
-      "title": "",
-      "order": 13
-    }, {
-      "name": "Julien Champ",
-      "photoUrl": "/images/people/julien-champ.jpg",
-      "socials": [{
-        "icon": "twitter",
-        "link": "https://twitter.com/julien314",
-        "name": "Twitter"
-      }, {
-        "icon": "linkedin",
-        "link": "https://www.linkedin.com/in/julienchamp/",
-        "name": "Linked In"
-      }],
-      "order": 16
-    }, {
-      "name": "Aurélien Tison",
-      "photoUrl": "/images/people/aurelien_tison.jpg",
-      "socials": [{
-        "icon": "twitter",
-        "link": "https://twitter.com/Aurel_Tyson",
-        "name": "Twitter"
-      }, {
-        "icon": "linkedin",
-        "link": "https://www.linkedin.com/in/aurelien-tison/",
-        "name": "Linked In"
-      }],
-      "order": 17
-    }, {
-      "name": "Quentin Boileau",
-      "photoUrl": "/images/people/quentin_boileau.jpeg",
-      "socials": [{
-        "icon": "twitter",
-        "link": "https://twitter.com/01kite",
-        "name": "Twitter"
-      }, {
-        "icon": "linkedin",
-        "link": "https://www.linkedin.com/in/qboileau/",
-        "name": "Linked In"
-      }],
-      "order": 18
-    }, {
-      "name": "Gilles Vieira",
-      "photoUrl": "/images/people/gvieira.jpg",
-      "socials": [{
-          "icon": "twitter",
-          "link": "https://twitter.com/vieira_gilles",
-          "name": "Twitter"
+          "name": "Sadri Gora",
+          "photoUrl": "/images/people/sadri_gora.jpg",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/hellosadri",
+              "name": "Twitter"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://fr.linkedin.com/in/sadri-gora-360b6a83",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 11
         },
         {
-          "icon": "linkedin",
-          "link": "https://fr.linkedin.com/in/gilles-vieira",
-          "name": "LinkedIn"
+          "name": "Emmanuelle Chauvot",
+          "photoUrl": "/images/people/emmanuelle_chauvot.jpg",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/emmanuelle-chauvot",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 12
+        },
+        {
+          "name": "Magali Baude",
+          "photoUrl": "/images/people/magali_baude.jpg",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/magalibaude",
+              "name": "Twitter"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://fr.linkedin.com/in/magalibaude",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 13
+        },
+        {
+          "name": "Julien Champ",
+          "photoUrl": "/images/people/julien-champ.jpg",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/julien314",
+              "name": "Twitter"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/julienchamp/",
+              "name": "Linked In"
+            }
+          ],
+          "order": 16
+        },
+        {
+          "name": "Aurélien Tison",
+          "photoUrl": "/images/people/aurelien_tison.jpg",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/Aurel_Tyson",
+              "name": "Twitter"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/aurelien-tison/",
+              "name": "Linked In"
+            }
+          ],
+          "order": 17
+        },
+        {
+          "name": "Quentin Boileau",
+          "photoUrl": "/images/people/quentin_boileau.jpeg",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/01kite",
+              "name": "Twitter"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/qboileau/",
+              "name": "Linked In"
+            }
+          ],
+          "order": 18
+        },
+        {
+          "name": "Gilles Vieira",
+          "photoUrl": "/images/people/gvieira.jpg",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/vieira_gilles",
+              "name": "Twitter"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://fr.linkedin.com/in/gilles-vieira",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 19
+        },
+        {
+          "name": "Hugo Maitre",
+          "photoUrl": "/images/people/hugo-maitre.png",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/hugo-maitre-290261134/",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 20
+        },
+        {
+          "name": "Aurelle Thierry",
+          "photoUrl": "/images/people/aurelle.png",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/aurelle-thierry-856b3a18a/",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/thierryaurelle",
+              "name": "Twitter"
+            }
+          ],
+          "title": "",
+          "order": 21
+        },
+        {
+          "name": "Roch Dardié",
+          "photoUrl": "/images/people/roch_dardie.jpg",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/rdardie/",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/roch_dardie",
+              "name": "Twitter"
+            }
+          ],
+          "title": "",
+          "order": 22
         }
       ],
-      "title": "",
-      "order": 19
-    }, {
-      "name": "Hugo Maitre",
-      "photoUrl": "/images/people/hugo-maitre.png",
-      "socials": [{
-          "icon": "linkedin",
-          "link": "https://www.linkedin.com/in/hugo-maitre-290261134/",
-          "name": "LinkedIn"
-        }
-      ],
-      "title": "",
-      "order": 20
-    }, {
-      "name": "Aurelle Thierry",
-      "photoUrl": "/images/people/aurelle.png",
-      "socials": [{
-          "icon": "linkedin",
-          "link": "https://www.linkedin.com/in/aurelle-thierry-856b3a18a/",
-          "name": "LinkedIn"
-        }, {
-          "icon": "twitter",
-          "link": "https://twitter.com/thierryaurelle",
-          "name": "Twitter"
-        }
-      ],
-      "title": "",
-      "order": 21
-    }, {
-      "name": "Roch Dardié",
-      "photoUrl": "/images/people/roch_dardie.jpg",
-      "socials": [{
-          "icon": "linkedin",
-          "link": "https://www.linkedin.com/in/rdardie/",
-          "name": "LinkedIn"
-        }, {
-          "icon": "twitter",
-          "link": "https://twitter.com/roch_dardie",
-          "name": "Twitter"
-        }
-      ],
-      "title": "",
-      "order": 22
-    }],
-    "title": "Membres"
-  }],
-  "tickets": [{
-    "available": true,
-    "currency": "€",
-    "ends": "",
-    "inDemand": false,
-    "info": "Quantité limitée",
-    "name": "Early Bird",
-    "price": 60,
-    "regular": false,
-    "soldOut": true,
-    "starts": "",
-    "url": "https://www.billetweb.fr/sunny-tech-2020"
-  }, {
-    "available": true,
-    "currency": "€",
-    "ends": "",
-    "inDemand": true,
-    "name": "Regular",
-    "price": 90,
-    "primary": true,
-    "regular": true,
-    "soldOut": false,
-    "starts": "",
-    "url": "https://www.billetweb.fr/sunny-tech-2020"
-  }, {
-    "available": true,
-    "currency": "€",
-    "ends": "",
-    "info": "Requiert une carte étudiante",
-    "name": "Étudiant",
-    "price": 40,
-    "soldOut": false,
-    "starts": "",
-    "url": "https://www.billetweb.fr/sunny-tech-2020"
-  }],
+      "title": "Membres"
+    }
+  ],
+  "tickets": [
+    {
+      "available": true,
+      "currency": "€",
+      "ends": "",
+      "inDemand": false,
+      "info": "Quantité limitée",
+      "name": "Early Bird",
+      "price": 60,
+      "regular": false,
+      "soldOut": true,
+      "starts": "",
+      "url": "https://www.billetweb.fr/sunny-tech-2020"
+    },
+    {
+      "available": true,
+      "currency": "€",
+      "ends": "",
+      "inDemand": true,
+      "name": "Regular",
+      "price": 90,
+      "primary": true,
+      "regular": true,
+      "soldOut": false,
+      "starts": "",
+      "url": "https://www.billetweb.fr/sunny-tech-2020"
+    },
+    {
+      "available": true,
+      "currency": "€",
+      "ends": "",
+      "info": "Requiert une carte étudiante",
+      "name": "Étudiant",
+      "price": 40,
+      "soldOut": false,
+      "starts": "",
+      "url": "https://www.billetweb.fr/sunny-tech-2020"
+    }
+  ],
   "triggers": {
     "images": false
   },
