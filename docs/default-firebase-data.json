@@ -40,6 +40,13 @@
           "logoUrl": "../images/logos/ca.png",
           "name": "CATS",
           "url": "https://www.groupecreditagricole.jobs/Notre-groupe/Marques/Credit-Agricole-Technologies-et-Services"
+        },
+        {
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/logo_believe.png",
+          "name": "Believe it",
+          "url": "http://www.believeit.fr/"
         }
       ],
       "order": 1,
