@@ -47,6 +47,13 @@
           "logoUrl": "../images/logos/logo_believe.png",
           "name": "Believe it",
           "url": "http://www.believeit.fr/"
+        },
+        {
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/zendesk.png",
+          "name": "Zendesk",
+          "url": "https://www.zendesk.fr"
         }
       ],
       "order": 1,
@@ -64,6 +71,19 @@
       ],
       "order": 2,
       "title": "Silver"
+    },
+    {
+      "logos": [
+        {
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/decisionbrain.png",
+          "name": "DecisionBrain",
+          "url": "https://decisionbrain.com/"
+        }
+      ],
+      "order": 3,
+      "title": "Bronze"
     },
     {
       "logos": [
