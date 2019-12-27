@@ -54,6 +54,13 @@
           "logoUrl": "../images/logos/zendesk.png",
           "name": "Zendesk",
           "url": "https://www.zendesk.fr"
+        },
+        {
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/clever-cloud.png",
+          "name": "Clerver Cloud",
+          "url": "https://www.clever-cloud.com/en/"
         }
       ],
       "order": 1,
