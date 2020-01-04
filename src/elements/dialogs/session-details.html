@@ -257,14 +257,16 @@
       _sessionUpdate() {
         const { day, startTime } = this.session;
         if (day && startTime) {
+          const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+          const ONE_MINUTE_MS = 60 * 1000;
           const now = new Date();
           const convertedTimezoneDate = new Date(
               new Date(`${day} ${startTime}`).getTime() +
-              (parseInt('{$ timezoneOffset $}') - now.getTimezoneOffset()) * 60000
+              (parseInt('{$ timezoneOffset $}') - now.getTimezoneOffset()) * ONE_MINUTE_MS
           );
 
           const diff = now - convertedTimezoneDate;
-          this.acceptingFeedback = diff > 0 && diff < 172800000; // 48 hours time window.
+          this.acceptingFeedback = diff > 0 && diff < ONE_WEEK_MS;
         } else {
           this.acceptingFeedback = false;
         }

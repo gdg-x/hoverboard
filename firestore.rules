@@ -225,7 +225,7 @@ service cloud.firestore {
 
     match /sessions/{session}/feedback/{userId} {
       allow read, delete: if request.auth.uid == userId;
-      allow read, write: if request.auth.uid == userId && validRating();
+      allow write: if request.auth.uid == userId && validRating();
     }
   }
 }
