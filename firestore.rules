@@ -124,6 +124,11 @@ service cloud.firestore {
 
       // Disallow writes
       allow write: if false;
+
+      match /feedback/{userId} {
+        allow read, delete: if request.auth.uid == userId;
+        allow write: if request.auth.uid == userId && validRating();
+      }
     }
 
     match /generatedSessions/{session} {
@@ -221,11 +226,6 @@ service cloud.firestore {
 
       // Disallow writes
       allow write: if false;
-    }
-
-    match /sessions/{session}/feedback/{userId} {
-      allow read, delete: if request.auth.uid == userId;
-      allow write: if request.auth.uid == userId && validRating();
     }
   }
 }

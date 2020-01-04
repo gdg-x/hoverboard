@@ -11,6 +11,7 @@ install:
   - cd functions && yarn && cd ..
 script:
   - yarn lint
+  - yarn test
   - echo "Building..."
   - 'if [ "$TRAVIS_BRANCH" == "develop" ]; then yarn build; fi'
   - 'if [ "$TRAVIS_BRANCH" == "master" ]; then yarn build:prod; fi'
