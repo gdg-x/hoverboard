@@ -68,14 +68,11 @@
   <meta content="{$ image if image.startsWith('http') else (url + image) $}" name="twitter:image">
   <meta name="twitter:label1" value="{$ location.label $}">
   <meta name="twitter:data1" value="{$ location.name $}">
-  <meta name="twitter:label2" value="">
-  <meta name="twitter:data2" value="">
 
   <link href="https://apis.google.com" rel="dns-prefetch">
   <link href="https://www.google-analytics.com" rel="preconnect">
   <link href="https://fcm.googleapis.com" rel="preconnect">
   <link href="https://firestore.googleapis.com" rel="preconnect">
-  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
   <script>
 
     window.Polymer = { rootPath: '{$ basepath $}' };
