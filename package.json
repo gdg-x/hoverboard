@@ -13,7 +13,7 @@
     "firestore:copy": "babel-node ./internals/firestore-copy-data",
     "postinstall": "npm run install:bower && npm run install:functions",
     "install:bower": "bower install",
-    "install:functions": "cd ./functions && npm install && cd ..",
+    "install:functions": "npm --prefix ./functions install",
     "start": "gulp serve",
     "start:prod": "cross-env BUILD_ENV=production gulp serve",
     "lint": "gulp lint",
