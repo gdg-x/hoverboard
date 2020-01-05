@@ -32,7 +32,8 @@
     "good-map": "keanulee/good-map#^0.0.1",
     "paper-menu-button": "PolymerElements/paper-menu-button#^2.1.1",
     "paper-toast": "^2.1.2",
-    "paper-progress": "^2.1.1"
+    "paper-progress": "^2.1.1",
+    "star-rating": "radi-cho/star-rating#1.0.0"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0"

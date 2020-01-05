@@ -1,0 +1,310 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../../bower_components/star-rating/star-rating.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../mixins/redux-mixin.html">
+
+<dom-module id="feedback-block">
+    <template>
+      <style>
+        #feedback-comment {
+          width: 100%;
+        }
+
+        star-rating, .caption {
+          display: inline-block;
+          vertical-align: bottom;
+          --star-color: var(--default-primary-color);
+        }
+
+        paper-button {
+          margin: 0;
+          line-height: 1.4;
+          border: 1px solid var(--default-primary-color);
+        }
+
+        paper-button[primary] {
+          background-color: var(--default-primary-color);
+          color: var(--text-primary-color);
+        }
+
+        paper-button.delete-button {
+          color: var(--text-accent-color);
+          padding: -2px;
+        }
+
+        .helper {
+          font-size: 12px;
+          line-height: 1;
+        }
+
+        @media (min-width: 640px) {
+          .caption {
+            width: 25%;
+          }
+        }
+
+        @media (max-width: 640px) {
+          star-rating, .caption {
+            display: block;
+          }
+        }
+      </style>
+
+      <div class="container">
+        <div>
+          <div class="caption">{$ feedback.contentCaption $}:</div>
+          <star-rating rating="{{contentRating}}"></star-rating>
+        </div>
+        <div>
+          <div class="caption">{$ feedback.styleCaption $}:</div>
+          <star-rating rating="{{styleRating}}"></star-rating>
+        </div>
+
+        <paper-textarea
+          id="commentInput"
+          hidden$="[[!rating]]"
+          label="Comment"
+          value="{{comment}}"
+          maxlength="256"
+        ></paper-textarea>
+        <p hidden$="[[!rating]]" class="helper">{$ feedback.helperText $}</p>
+        <paper-button
+          primary
+          hidden$="[[!rating]]"
+          on-tap="_sendFeedback"
+          ga-on="click"
+          ga-event-category="feedback"
+          ga-event-action="send feedback"
+          ga-event-label$="submit the [[rating]] stars feedback"
+        >
+          {$ feedback.save $}
+        </paper-button>
+        <paper-button
+          class="delete-button"
+          hidden$="[[!showDeleteButton]]"
+          on-tap="_dispatchDeleteFeedback"
+          ga-on="click"
+          ga-event-category="feedback"
+          ga-event-action="delete feedback"
+          ga-event-label$="delete the feedback record"
+        >
+          {$ feedback.deleteFeedback $}
+        </paper-button>
+      </div>
+    </template>
+
+    <script>
+      class Feedback extends ReduxMixin(Polymer.Element) {
+        static get properties() {
+          return {
+            rating: {
+              type: Boolean,
+              value: false,
+              computed: '_hasRating(contentRating, styleRating)',
+            },
+            contentRating: {
+              type: Number,
+              value: 0,
+            },
+            styleRating: {
+              type: Number,
+              value: 0,
+            },
+            comment: {
+              type: String,
+              value: '',
+            },
+            collection: {
+              type: String,
+              value: 'sessions',
+            },
+            dbItem: {
+              type: String,
+              observer: '_dbItemChanged',
+            },
+            user: {
+              type: Object,
+              statePath: 'user',
+              observer: '_userChanged',
+            },
+            previousFeedback: {
+              type: Object,
+              observer: '_previousFeedbackChanged',
+            },
+            feedbackFetching: {
+              type: Boolean,
+              statePath: 'feedback.fetching',
+            },
+            feedbackAdding: {
+              type: Boolean,
+              statePath: 'feedback.adding',
+              observer: '_feedbackAddingChanged',
+            },
+            feedbackAddingError: {
+              type: Object,
+              statePath: 'feedback.addingError',
+            },
+            feedbackDeleting: {
+              type: Boolean,
+              statePath: 'feedback.deleting',
+              observer: '_feedbackDeletingChanged',
+            },
+            feedbackDeletingError: {
+              type: Object,
+              statePath: 'feedback.deletingError',
+            },
+            showDeleteButton: {
+              type: Boolean,
+              value: false,
+            },
+          };
+        }
+
+        static get is() {
+          return 'feedback-block';
+        }
+
+        connectedCallback() {
+          super.connectedCallback();
+          // Listen for previousFeedback state changes
+          // eslint-disable-next-line no-undef
+          store.subscribe(() => this._updateFeedbackState());
+        }
+
+        _updateFeedbackState() {
+          // eslint-disable-next-line no-undef
+          const feedbackState = store.getState().feedback;
+          if (feedbackState[this.collection]) {
+            if (this.dbItem) this.previousFeedback = feedbackState[this.collection][this.dbItem];
+          } else {
+            this.previousFeedback = undefined;
+          }
+        }
+
+        _userChanged(newUser) {
+          if (newUser.signedIn) {
+            if (this.dbItem && !this.feedbackFetching) this._dispatchPreviousFeedback();
+          } else {
+            this._clear();
+          }
+        }
+
+        _clear() {
+          this.contentRating = 0;
+          this.styleRating = 0;
+          this.comment = '';
+          this.showDeleteButton = false;
+        }
+
+        _dbItemChanged(newdbItem, olddbItem) {
+          this._clear();
+
+          if (newdbItem) {
+            // Check for previous feedback once the session/speaker id is available
+            this._updateFeedbackState();
+            this._previousFeedbackChanged();
+
+            if (
+              this.user.signedIn &&
+              !this.feedbackFetching &&
+              this.previousFeedback === undefined
+            ) {
+              this._dispatchPreviousFeedback();
+            }
+          }
+        }
+
+        _previousFeedbackChanged() {
+          if (this.previousFeedback) {
+            this.showDeleteButton = true;
+            this.contentRating = this.previousFeedback.contentRating;
+            this.styleRating = this.previousFeedback.styleRating;
+            this.comment = this.previousFeedback.comment;
+          }
+        }
+
+        _sendFeedback() {
+          if (!this.rating) return;
+          this._dispatchSendFeedback();
+        }
+
+        _dispatchSendFeedback() {
+          this.dispatch(
+              feedbackActions.addComment({
+                userId: this.user.uid,
+                collection: this.collection,
+                dbItem: this.dbItem,
+                contentRating: this.contentRating,
+                styleRating: this.styleRating,
+                comment: this.comment,
+              })
+          );
+        }
+
+        _dispatchPreviousFeedback() {
+          this.dispatch(
+              feedbackActions.checkPreviousFeedback({
+                collection: this.collection,
+                dbItem: this.dbItem,
+                userId: this.user.uid,
+              })
+          );
+        }
+
+        _dispatchDeleteFeedback() {
+          this.dispatch(
+              feedbackActions.deleteFeedback({
+                collection: this.collection,
+                dbItem: this.dbItem,
+                userId: this.user.uid,
+              })
+          );
+        }
+
+        _feedbackAddingChanged(newFeedbackAdding, oldFeedbackAdding) {
+          if (oldFeedbackAdding && !newFeedbackAdding) {
+            if (this.feedbackAddingError) {
+              toastActions.showToast({
+                message: '{$ feedback.somethingWentWrong $}',
+                action: {
+                  title: 'Retry',
+                  callback: () => {
+                    this._dispatchSendFeedback();
+                  },
+                },
+              });
+            } else {
+              toastActions.showToast({ message: '{$ feedback.feedbackRecorded $}' });
+            }
+          }
+        }
+
+        _feedbackDeletingChanged(newFeedbackDeleting, oldFeedbackDeleting) {
+          if (oldFeedbackDeleting && !newFeedbackDeleting) {
+            if (this.feedbackDeletingError) {
+              toastActions.showToast({
+                message: '{$ feedback.somethingWentWrong $}',
+                action: {
+                  title: 'Retry',
+                  callback: () => {
+                    this._dispatchDeleteFeedback();
+                  },
+                },
+              });
+            } else {
+              this._clear();
+              toastActions.showToast({ message: '{$ feedback.feedbackDeleted $}' });
+            }
+          }
+        }
+
+        _hasRating(contentRating, styleRating) {
+          return (contentRating > 0 && contentRating <= 5) ||
+            (styleRating > 0 && styleRating <= 5);
+        }
+      }
+
+      window.customElements.define(Feedback.is, Feedback);
+    </script>
+</dom-module>

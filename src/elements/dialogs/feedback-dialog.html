@@ -1,0 +1,72 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
+<link rel="import" href="../../mixins/redux-mixin.html">
+<link rel="import" href="../shared-styles.html">
+
+<dom-module id="feedback-dialog">
+  <template>
+    <style include="shared-styles flex flex-alignment">
+      :host {
+        margin: 0;
+        display: block;
+        width: 85%;
+        max-width: 420px;
+        background: var(--primary-background-color);
+        box-shadow: var(--box-shadow);
+
+        --paper-input-container-focus-color: var(--default-primary-color);
+        --paper-input-container-color: var(--secondary-text-color);
+      }
+
+      .dialog-header {
+        margin-bottom: 24px;
+        padding: 32px 32px 16px;
+        background: var(--default-primary-color);
+        color: #fff;
+        font-size: 20px;
+        line-height: 1.5;
+      }
+
+      .feedback-content {
+        padding: 0px 32px 24px;
+      }
+    </style>
+
+    <div class="dialog-content" layout vertical>
+      <div class="dialog-header">{$ feedback.headline $}</div>
+      <div class="feedback-content">
+        <feedback-block collection="sessions" db-item="[[session.id]]"></feedback-block>
+      </div>
+    </div>
+  </template>
+
+  <script>
+
+    class FeedbackDialog extends ReduxMixin(
+        Polymer.mixinBehaviors([Polymer.IronOverlayBehavior], Polymer.Element)
+    ) {
+      static get is() {
+        return 'feedback-dialog';
+      }
+
+      static get properties() {
+        return {
+          session: {
+            type: Object,
+          },
+        };
+      }
+
+      constructor() {
+        super();
+        this.addEventListener('iron-overlay-canceled', this._close);
+      }
+
+      _close() {
+        dialogsActions.closeDialog(DIALOGS.FEEDBACK);
+      }
+    }
+
+    window.customElements.define(FeedbackDialog.is, FeedbackDialog);
+  </script>
+</dom-module>

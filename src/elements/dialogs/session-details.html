@@ -16,13 +16,19 @@
 <link rel="import" href="../../mixins/speakers-hoc.html">
 <link rel="import" href="../text-truncate.html">
 <link rel="import" href="../shared-styles.html">
+<link rel="import" href="../feedback-block.html">
 <link rel="import" href="dialog-styles.html">
+<link rel="import" href="../auth-required.html">
 
 <dom-module id="session-details">
   <template>
     <style include="shared-styles dialog-styles flex flex-alignment positioning">
       .section {
         cursor: pointer;
+      }
+      .star-rating {
+        display: inline-block;
+        vertical-align: middle;
       }
     </style>
 
@@ -129,6 +135,19 @@
             </div>
           </template>
         </div>
+
+        <div id="feedback" class="additional-sections">
+          <h3>{$ feedback.headline $}</h3>
+
+          <auth-required hidden="[[!acceptingFeedback]]">
+            <slot slot="prompt">{$ feedback.leaveFeedback $}</slot>
+            <feedback-block collection="sessions" db-item="[[session.id]]"></feedback-block>
+          </auth-required>
+
+          <p hidden="[[acceptingFeedback]]">
+            {$ feedback.sessionClosed $}
+          </p>
+        </div>
       </div>
     </app-header-layout>
 
@@ -152,6 +171,11 @@
           },
           session: {
             type: Object,
+            observer: '_sessionUpdate',
+          },
+          acceptingFeedback: {
+            value: false,
+            type: Boolean,
           },
           viewport: {
             type: Object,
@@ -228,6 +252,24 @@
 
       _getFeaturedSessionIcon(featuredSessions, sessionId) {
         return featuredSessions && featuredSessions[sessionId] ? 'bookmark-check' : 'bookmark-plus';
+      }
+
+      _sessionUpdate() {
+        const { day, startTime } = this.session;
+        if (day && startTime) {
+          const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+          const ONE_MINUTE_MS = 60 * 1000;
+          const now = new Date();
+          const convertedTimezoneDate = new Date(
+              new Date(`${day} ${startTime}`).getTime() +
+              (parseInt('{$ timezoneOffset $}') - now.getTimezoneOffset()) * ONE_MINUTE_MS
+          );
+
+          const diff = now - convertedTimezoneDate;
+          this.acceptingFeedback = diff > 0 && diff < ONE_WEEK_MS;
+        } else {
+          this.acceptingFeedback = false;
+        }
       }
     }
 

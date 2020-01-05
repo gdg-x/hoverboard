@@ -1,5 +1,11 @@
 service cloud.firestore {
   match /databases/{database}/documents {
+    function validRating() {
+      return request.resource.data.contentRating >= 0 && request.resource.data.contentRating <= 5 &&
+        request.resource.data.styleRating >= 0 && request.resource.data.styleRating <= 5
+        && request.resource.data.comment.size() <= 256;
+    }
+
     match /blog/{post} {
       // Applies to single document read requests
       allow get;
@@ -97,7 +103,7 @@ service cloud.firestore {
       // Disallow writes
       allow write: if false;
     }
-    
+
     match /generatedSchedule/{day} {
       // Applies to single document read requests
       allow get;
@@ -118,6 +124,11 @@ service cloud.firestore {
 
       // Disallow writes
       allow write: if false;
+
+      match /feedback/{userId} {
+        allow read, delete: if request.auth.uid == userId;
+        allow write: if request.auth.uid == userId && validRating();
+      }
     }
 
     match /generatedSessions/{session} {

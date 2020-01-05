@@ -42,6 +42,10 @@
         isOpened: false,
         data: {},
       },
+      [DIALOGS.FEEDBACK]: {
+        isOpened: false,
+        data: {},
+      },
       [DIALOGS.SUBSCRIBE]: {
         isOpened: false,
         data: {},
@@ -60,6 +64,14 @@
       fetching: false,
       fetchingError: null,
       list: [],
+    },
+    feedback: {
+      adding: false,
+      addingError: null,
+      fetching: false,
+      fetchingError: null,
+      deleting: false,
+      deletingError: null,
     },
     blog: {
       fetching: false,
@@ -127,6 +139,7 @@
       dialogs: dialogsReducer(state.dialogs, action),
       tickets: ticketsReducer(state.tickets, action),
       partners: partnersReducer(state.partners, action),
+      feedback: feedbackReducer(state.feedback, action),
       videos: videosReducer(state.videos, action),
       blog: blogReducer(state.blog, action),
       speakers: speakersReducer(state.speakers, action),

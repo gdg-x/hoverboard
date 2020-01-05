@@ -34,7 +34,6 @@
 <link rel="import" href="elements/hoverboard-analytics.html">
 <link rel="import" href="effects/transparent-scroll.html">
 
-
 <dom-module id="hoverboard-app">
 
   <template>
@@ -279,6 +278,12 @@
       with-backdrop="[[viewport.isTabletPlus]]"
       no-cancel-on-outside-click="[[viewport.isPhone]]"
     ></session-details>
+
+    <feedback-dialog
+      opened="[[dialogs.feedback.isOpened]]"
+      session="[[dialogs.feedback.data]]"
+      with-backdrop
+    ></feedback-dialog>
 
     <subscribe-dialog
       opened="[[dialogs.subscribe.isOpened]]"

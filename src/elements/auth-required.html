@@ -1,0 +1,58 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../mixins/redux-mixin.html">
+<link rel="import" href="./shared-styles.html">
+
+<dom-module id="auth-required">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+      }
+    </style>
+
+    <paper-button on-tap="signIn" hidden$="[[user.signedIn]]">{$ signIn $}</paper-button>
+    <slot name="prompt" hidden$="[[user.signedIn]]"></slot>
+    <slot hidden$="[[!user.signedIn]]"></slot>
+  </template>
+
+  <script>
+
+    class AuthRequired extends ReduxMixin(Polymer.Element) {
+      static get is() {
+        return 'auth-required';
+      }
+
+      static get properties() {
+        return {
+          user: {
+            type: Object,
+            statePath: 'user',
+          },
+          dialogs: {
+            type: Object,
+            statePath: 'dialogs',
+          },
+        };
+      }
+
+      static get observers() {
+        return [
+          '_authStatusChanged(user.signedIn)',
+        ];
+      }
+
+      signIn() {
+        dialogsActions.openDialog(DIALOGS.SIGNIN);
+      }
+
+      _authStatusChanged(signedIn) {
+        if (this.dialogs.signin.isOpened) {
+          dialogsActions.closeDialog(DIALOGS.SIGNIN);
+        }
+      }
+    }
+
+    customElements.define(AuthRequired.is, AuthRequired);
+  </script>
+</dom-module>

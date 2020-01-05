@@ -24,6 +24,7 @@
   "time": "Time",
   "faq": "/data/faq.md",
   "coc": "/data/coc.md",
+  "timezoneOffset": "-180",
   "footer": {
     "blog": "Blog"
   },
@@ -244,6 +245,20 @@
   },
   "schedule": {
     "saveSessionsSignedOut": "Sign in to save sessions"
+  },
+  "feedback": {
+    "save": "Save",
+    "headline": "Review session",
+    "leaveFeedback": "to leave feedback",
+    "sendFeedbackSignedOut": "Sign in to leave feedback",
+    "feedbackRecorded": "Your saved",
+    "feedbackDeleted": "Feedback deleted",
+    "helperText": "Comments will be anonymously provided to speakers",
+    "somethingWentWrong": "Something went wrong",
+    "contentCaption": "Content quality",
+    "styleCaption": "Presentation style",
+    "deleteFeedback": "Delete",
+    "sessionClosed": "Session reviews are not open"
   },
   "sessionDetails": {
     "contentLevel": "Content level",
