@@ -31,7 +31,7 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
     - Enable Firestore in web console at [console.firebase.google.com](https://console.firebase.google.com) -> Database -> Cloud Firestore -> Create database. Select **locked mode** and press **Enable**
   - [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
   - Select your Firebase project `npx firebase use <YOUR_PROJECT_ID>`
-    * Run `npm run firestore:init` or `yarn firestore:init`
+    * Run `npm run firestore:init`
 
 1. Whoa! You've set up Firebase into your app.
 

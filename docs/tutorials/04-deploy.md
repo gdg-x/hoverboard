@@ -7,21 +7,20 @@
 
 1.  Build with `/config/development.json`
     ```console
-      yarn build
+      npm run build
     ```
 
     or with `/config/production.json`
     ```console
-      yarn build:prod
+      npm run build:prod
     ```
 
 1.  Deploy
     ```console
-      firebase deploy
+      npx firebase deploy
     ```
 
 The URL to your live site is listed in the output.
-
 
 ### Continuous integration with Travis CI
 
@@ -78,10 +77,9 @@ To generate the `secure` value do the following steps:
 1. **Tip:** deploy different builds depending on the branch:
     ```yaml
       script:
-       - yarn lint
        - echo "Building..."
-       - if [ "$TRAVIS_BRANCH" == "develop" ]; then yarn build; fi
-       - if [ "$TRAVIS_BRANCH" == "master" ]; then yarn build:prod; fi
+       - if [ "$TRAVIS_BRANCH" == "develop" ]; then npm run build; fi
+       - if [ "$TRAVIS_BRANCH" == "master" ]; then npm run build:prod; fi
     ```
 1. Push to a repository
 
