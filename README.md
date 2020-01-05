@@ -31,7 +31,7 @@ Our goal is to allow event organizers to set up a professional conference websit
 ## Getting Started
 1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone your fork locally
 1. Install [Node.js (v10+)](https://nodejs.org/en/download/)
-1. Install project dependencies: `npm install` or `yarn`
+1. Install project dependencies: `npm install`
 1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `npx firebase login`
 1. Update [Hoverboard config](/config) and [Resources](/data)
 1. Import initial data to the Firebase Database
@@ -43,15 +43,15 @@ Our goal is to allow event organizers to set up a professional conference websit
     * Enable Firestore in web console at [console.firebase.google.com](https://console.firebase.google.com) -> Database -> Cloud Firestore -> Create database. Select **locked mode** and press **Enable**
     * [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
 	  * Select your Firebase project `npx firebase use <YOUR_PROJECT_ID>`
-    * Run `npm run firestore:init` or `yarn firestore:init`
+    * Run `npm run firestore:init`
 1. Run locally
-   * `npm start` or `yarn start`
+   * `npm start`
 1. Build and deploy
-   * `npm run build` or `yarn build`
-   * `npm run deploy` or `yarn deploy`
+   * `npm run build`
+   * `npm run deploy`
 
 *NOTE:* By default command using configurations from `/configs/development.json`.
-To serve locally or deploy the production app use `yarn start:prod` and `yarn deploy:prod` respectively.
+To serve locally or deploy the production app use `npm run start:prod` and `npm run deploy:prod` respectively.
 
 :book: Read the [Full Setup Guide](/docs/).
 
@@ -122,7 +122,7 @@ Any other issue labeled [`help wanted`](https://github.com/gdg-x/hoverboard/labe
 Read the full version [Code of Conduct](/CODE_OF_CONDUCT.md).
 
 ## Contributors
-__Maintainer:__ [Abraham Williams](https://github.com/abraham)  
+__Maintainer:__ [Abraham Williams](https://github.com/abraham)
 __Authors:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
 
 This project exists thanks to all the [people who contribute](https://github.com/gdg-x/hoverboard/graphs/contributors). [[Contribute](CONTRIBUTING.md)].
