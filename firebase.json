@@ -50,7 +50,6 @@
   },
   "functions": {
     "predeploy": [
-      "npm run predeploy",
       "npm --prefix ./functions run build"
     ]
   }
