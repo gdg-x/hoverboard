@@ -7,14 +7,14 @@
     "bower": "bower",
     "build": "gulp",
     "build:prod": "cross-env BUILD_ENV=production gulp",
-    "predeploy": "npm run install:functions",
     "deploy": "gulp deploy",
     "deploy:prod": "cross-env BUILD_ENV=production gulp deploy",
     "firestore:init": "firebase firestore:delete -r --all-collections -y && firebase functions:config:set schedule.enabled=true && firebase deploy --except hosting && babel-node ./internals/import-default-data",
     "firestore:copy": "babel-node ./internals/firestore-copy-data",
-    "postinstall": "bower install && npm run install:functions && npm run install:emulator",
-    "install:functions": "cd ./functions && npm install && cd ..",
+    "postinstall": "npm run install:bower && npm run install:functions && npm run install:emulator",
+    "install:bower": "bower install",
     "install:emulator": "firebase setup:emulators:firestore",
+    "install:functions": "npm --prefix ./functions install",
     "start": "gulp serve",
     "start:prod": "cross-env BUILD_ENV=production gulp serve",
     "lint": "gulp lint",
@@ -35,7 +35,7 @@
     "@babel/preset-env": "^7.4.4",
     "@firebase/testing": "^0.16.4",
     "bower": "^1.8.8",
-    "browser-sync": "^2.26.5",
+    "browser-sync": "^2.26.7",
     "connect-history-api-fallback": "^1.6.0",
     "cross-env": "^5.2.0",
     "css-slam": "^2.1.2",
@@ -60,7 +60,6 @@
     "jest": "^24.9.0",
     "merge-stream": "^1.0.1",
     "polymer-build": "^2.5.0",
-    "pre-commit": "^1.2.2",
     "require-uncached": "^1.0.3",
     "sw-precache": "^5.2.1",
     "uglify-es": "^3.3.9"
@@ -68,6 +67,5 @@
   "engines": {
     "node": "10"
   },
-  "private": true,
-  "pre-commit": "lint"
+  "private": true
 }

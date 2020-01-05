@@ -7,25 +7,24 @@
 
 1.  Build with `/config/development.json`
     ```console
-      yarn build
+      npm run build
     ```
 
     or with `/config/production.json`
     ```console
-      yarn build:prod
+      npm run build:prod
     ```
 
 1.  Deploy
     ```console
-      firebase deploy
+      npx firebase deploy
     ```
 
 The URL to your live site is listed in the output.
 
-
 ### Continuous integration with Travis CI
 
-In the root folder you can find [.travis.yml](/.travis.yml) which configures
+In the root folder, you can find [.travis.yml](/.travis.yml) which configures
 [Travis CI][Travis CI] build and deployment on Firebase hosting:
 
 ```yaml
@@ -41,24 +40,24 @@ In the root folder you can find [.travis.yml](/.travis.yml) which configures
 
 To generate the `secure` value do the following steps:
 
-1. Login into Firebase console
+1. Log in to Firebase console
     ```console
       npx firebase login:ci --interactive
     ```
 
     You will get your token:
     ```console
-        ✔  Success! Use this token to login on a CI server:
+        ✔  Success! Use this token to log in on a CI server:
 
         1/9YmsNEh87G3cRyt_FXQbsYI_uV4FUMmUBXkbl_CHANGED
     ```
 
-1. Install travis tool to encrypt token
+1. Install travis tool to encrypt the token
     ```console
       gem install travis
     ```
 
-1. Login into your account
+1. Log in to your account
     ```console
       travis login --auto
     ```
@@ -78,10 +77,9 @@ To generate the `secure` value do the following steps:
 1. **Tip:** deploy different builds depending on the branch:
     ```yaml
       script:
-       - yarn lint
        - echo "Building..."
-       - if [ "$TRAVIS_BRANCH" == "develop" ]; then yarn build; fi
-       - if [ "$TRAVIS_BRANCH" == "master" ]; then yarn build:prod; fi
+       - if [ "$TRAVIS_BRANCH" == "develop" ]; then npm run build; fi
+       - if [ "$TRAVIS_BRANCH" == "master" ]; then npm run build:prod; fi
     ```
 1. Push to a repository
 

@@ -9,7 +9,7 @@ Or you may use [Docker container for development](05-docker.md)
 
 1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone your fork locally
 1. Install [Node.js (v10+)](https://nodejs.org/en/download/)
-1. Install project dependencies: `npm install` or `yarn`
+1. Install project dependencies: `npm install` (`yarn` should work but it's not officially supported)
 1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `npx firebase login`
 1. Update [Hoverboard config](/config) and [Resources](/data). More info can be found [here](01-configure-app.md)
 1. Import initial data to the Firebase Database
@@ -20,7 +20,7 @@ Or you may use [Docker container for development](05-docker.md)
       - Save the file as `serviceAccount.json` and to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
     * Enable Firestore in web console at [console.firebase.google.com](https://console.firebase.google.com) -> Database -> Cloud Firestore -> Create database. Select **locked mode** and press **Enable**
     * [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
-    * Run `npm run firestore:init` or `yarn firestore:init`
+    * Run `npm run firestore:init`
 
 ## Directory structure
 
@@ -47,7 +47,7 @@ The diagram below is a brief summary of the directories within the project.
     |   |---pages/
     |
 
-*   `.temp/` temporary folder used save files after populating templates with data, before polymer build takes over them.
+*   `.temp/` temporary folder used to save files after populating templates with data, before polymer build takes over them.
 *   `appengine/` contains App Engine application that runs CRON job to send scheduled push notifications.
 *   `bower_components/` is the place for project dependencies.
 *   `build/` is the directory to deploy to production.
@@ -61,7 +61,7 @@ The diagram below is a brief summary of the directories within the project.
 *   `node_modules/` is the place of Node dependencies.
 *   `scripts/` is the place for JS scripts.
 *   `src/` is where you store all of your source code and do all of your development.
-*   `effects/` is where you keep your effects for instance `transparent-scroll.html` that helps to achieve transparent toolbar before the scroll.
+*   `effects/` is where you keep your effects for instance `transparent-scroll.html` that helps to achieve a transparent toolbar before the scroll.
 *   `elements/` is where you keep your custom elements.
 *   `pages/` is where you keep your pages' description.
 
@@ -69,12 +69,12 @@ The diagram below is a brief summary of the directories within the project.
 ## Build and serve
 
 1. Run locally
-   * `npm start` or `yarn start`
+   * `npm start`
 1. Deploy
-   * `npm run deploy` or `yarn deploy`
+   * `npm run deploy`
 
 *NOTE:* By default command using configurations from `/configs/development.json`.
-To serve locally or deploy the production app use `yarn start:prod` and `yarn deploy:prod` respectively.
+To serve locally or deploy the production app use `npm run start:prod` and `npm run deploy:prod` respectively.
 
 ## Next steps
 
