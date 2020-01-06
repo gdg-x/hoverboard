@@ -93,6 +93,12 @@
           "logoUrl": "../images/logos/apside.png",
           "name": "Apside",
           "url": "https://www.apside.com/"
+        },{
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/smag.png",
+          "name": "Smag",
+          "url": "https://smag.tech/"
         }
       ],
       "order": 2,
