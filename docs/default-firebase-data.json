@@ -37,6 +37,19 @@
         {
           "order": 0,
           "height": 100,
+          "logoUrl": "../images/logos/septeo.png",
+          "name": "Septeo",
+          "url": "https://www.septeo.fr/"
+        }
+      ],
+      "order": 0,
+      "title": "Platinium"
+    },
+    {
+      "logos": [
+        {
+          "order": 0,
+          "height": 100,
           "logoUrl": "../images/logos/ca.png",
           "name": "CATS",
           "url": "https://www.groupecreditagricole.jobs/Notre-groupe/Marques/Credit-Agricole-Technologies-et-Services"
@@ -74,6 +87,12 @@
           "logoUrl": "../images/logos/rh.png",
           "name": "Recherche & Horizon",
           "url": "https://www.reth.fr/"
+        },{
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/apside.png",
+          "name": "Apside",
+          "url": "https://www.apside.com/"
         }
       ],
       "order": 2,
