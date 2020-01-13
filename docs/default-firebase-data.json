@@ -74,6 +74,13 @@
           "logoUrl": "../images/logos/clever-cloud.png",
           "name": "Clerver Cloud",
           "url": "https://www.clever-cloud.com/en/"
+        },
+        {
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/aquafadas.png",
+          "name": "Aquafadas",
+          "url": "https://www.aquafadas.com/"
         }
       ],
       "order": 1,
@@ -99,6 +106,12 @@
           "logoUrl": "../images/logos/smag.png",
           "name": "Smag",
           "url": "https://smag.tech/"
+        },{
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/netheos.png",
+          "name": "Netheos",
+          "url": "https://www.netheos.com/"
         }
       ],
       "order": 2,
