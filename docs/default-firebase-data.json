@@ -125,6 +125,13 @@
           "logoUrl": "../images/logos/decisionbrain.png",
           "name": "DecisionBrain",
           "url": "https://decisionbrain.com/"
+        },
+        {
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/sequoiasoft.png",
+          "name": "Sequoiasoft",
+          "url": "https://www.sequoiasoft.com/"
         }
       ],
       "order": 3,
