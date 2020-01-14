@@ -81,6 +81,13 @@
           "logoUrl": "../images/logos/aquafadas.png",
           "name": "Aquafadas",
           "url": "https://www.aquafadas.com/"
+        },
+        {
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/kaliop.png",
+          "name": "Kaliop",
+          "url": "https://www.kaliop.com/"
         }
       ],
       "order": 1,
