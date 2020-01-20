@@ -119,6 +119,12 @@
           "logoUrl": "../images/logos/netheos.png",
           "name": "Netheos",
           "url": "https://www.netheos.com/"
+        },{
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/esii.png",
+          "name": "ESII",
+          "url": "https://www.esii.com/fr"
         }
       ],
       "order": 2,
