@@ -233,34 +233,30 @@ const blogActions = {
     dispatch({
       type: FETCH_BLOG_LIST,
     });
-
-    firebase.firestore()
-      .collection('blog')
-      .orderBy('published', 'desc')
-      .get()
-      .then((snaps) => {
-        const list = snaps.docs
-          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
-
-        const obj = list.reduce(
-          (acc, curr) => Object.assign({}, acc, { [curr.id]: curr }),
-          {}
-        );
-
-        dispatch({
-          type: FETCH_BLOG_LIST_SUCCESS,
-          payload: {
-            obj,
-            list,
-          },
+    return new Promise(function (resolve) {
+      fetch('data/posts/blog-list.json')
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (res) {
+          let obj = Object.assign({}, res);
+          Object.keys(res).forEach((k) => obj[k].id = k);
+          dispatch({
+            type: FETCH_BLOG_LIST_SUCCESS,
+            payload: {
+              obj,
+              list: Object.values(obj),
+            },
+          });
+          resolve(posts);
+        })
+        .catch((error) => {
+          dispatch({
+            type: FETCH_BLOG_LIST_FAILURE,
+            payload: { error },
+          });
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: FETCH_BLOG_LIST_FAILURE,
-          payload: { error },
-        });
-      });
+    });
   },
 };
 
