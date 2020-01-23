@@ -3,7 +3,7 @@
   "description": "Best Javascript conference in Philadelphia",
   "image": "images/social-share.jpg",
   "keywords": "event, javascript, philadelphia, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "October 24-25, 2019",
+  "dates": "October 8 - 9, 2020",
   "partnershipProposition": "https://docs.google.com/presentation/d/1YQH1ij3GsxpupgS6WPzJeg0DJKAMBHUZgnJAJNgDpnc/edit#slide=id.g543f1010fb_0_153",
   "share": "Share",
   "followOur": "Follow our",
@@ -78,7 +78,7 @@
         },
         {
           "name": "Transfer your ticket",
-          "url": "https://libertyjs.ticketspice.com/libertyjs-2019/transfer",
+          "url": "https://libertyjs.ticketspice.com/libertyjs-2020-attendee/transfer",
           "newTab": false
         },
         {

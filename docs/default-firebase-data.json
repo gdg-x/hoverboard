@@ -1614,7 +1614,7 @@
     "price" : 80,
     "soldOut" : false,
     "starts" : "Feb 7",
-    "url" : "https://libertyjs.ticketspice.com/libertyjs-2019"
+    "url" : "https://libertyjs.ticketspice.com/libertyjs-2020-attendee"
   }, {
     "available" : false,
     "currency" : "$",
@@ -1626,7 +1626,7 @@
     "regular" : true,
     "soldOut" : true,
     "starts" : "Feb 7",
-    "url" : "https://libertyjs.ticketspice.com/libertyjs-2019"
+    "url" : "https://libertyjs.ticketspice.com/libertyjs-2020-attendee"
   }, {
     "available" : true,
     "currency" : "$",
@@ -1638,7 +1638,7 @@
     "regular" : true,
     "soldOut" : false,
     "starts" : "Feb 7",
-    "url" : "https://libertyjs.ticketspice.com/libertyjs-2019"
+    "url" : "https://libertyjs.ticketspice.com/libertyjs-2020-attendee"
   }, {
     "available" : false,
     "currency" : "$",
@@ -1651,7 +1651,7 @@
     "regular" : true,
     "soldOut" : false,
     "starts" : "Jul 1",
-    "url" : "https://libertyjs.ticketspice.com/libertyjs-2019"
+    "url" : "https://libertyjs.ticketspice.com/libertyjs-2020-attendee"
   }, {
     "available" : true,
     "currency" : "$",
@@ -1659,7 +1659,7 @@
     "name" : "I Love DFUA",
     "price" : 280,
     "soldOut" : false,
-    "url" : "https://libertyjs.ticketspice.com/libertyjs-2019"
+    "url" : "https://libertyjs.ticketspice.com/libertyjs-2020-attendee"
   } ],
   "triggers" : {
     "images" : false
