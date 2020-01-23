@@ -150,7 +150,22 @@
         </div>
 
         <div class="action-buttons" layout horizontal center-justified wrap>
-          <a href="https://libertyjs.ticketspice.com/libertyjs-2019" target="_blank">
+          <a href="https://www.papercall.io/libertyjs-2020" target="_blank">
+            <paper-button
+              ga-on="click"
+              ga-event-category="cfp"
+              ga-event-action="scroll"
+              ga-event-label="hero block - scroll to cfp"
+              primary
+            >
+              <iron-icon icon="hoverboard:microphone"></iron-icon>
+              {$ callForSpeakers $}
+            </paper-button>
+          </a>
+        </div>
+
+        <div class="action-buttons" layout horizontal center-justified wrap>
+          <a href="https://libertyjs.ticketspice.com/libertyjs-2020-attendee" target="_blank">
             <paper-button
               ga-on="click"
               ga-event-category="ticket button"
@@ -174,7 +189,7 @@
       </div>
     </hero-block>
     <about-block></about-block>
-    <speakers-block></speakers-block>
+    <!-- <speakers-block></speakers-block> -->
     <subscribe-block></subscribe-block>
     <!-- <-block></tickets-block> -->
     <gallery-block></gallery-block>
@@ -182,7 +197,7 @@
     <!-- <featured-videos></featured-videos> -->
     <!-- <latest-posts-block></latest-posts-block> -->
     <map-block></map-block>
-    <partners-block></partners-block>
+    <!-- <!-- <partners-block></partners-block> --> -->
     <footer-block></footer-block>
   </template>
 

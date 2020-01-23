@@ -23,16 +23,7 @@
       "permalink": "/",
       "label": "Home"
     },
-    {
-      "route": "schedule",
-      "permalink": "/schedule/2019-10-25",
-      "label": "Schedule"
-    },
-    {
-      "route": "speakers",
-      "permalink": "/speakers/",
-      "label": "Speakers"
-    },
+
     {
       "route": "team",
       "permalink": "/team/",
