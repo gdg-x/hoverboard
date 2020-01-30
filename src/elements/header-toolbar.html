@@ -150,11 +150,6 @@
         </paper-tab>
         {% endfor %}
 
-        <a href$="[[_getTicketUrl(tickets)]]" target="_blank" rel="noopener noreferrer" ga-on="click"
-           ga-event-category="ticket button" ga-event-action="buy_click">
-          <paper-button class="buy-button" secondary>{$ buyTicket $}</paper-button>
-        </a>
-
         <a href="{$ cfpLink $}" target="_blank" rel="noopener noreferrer" ga-on="click"
           ga-event-category="cfp button" ga-event-action="cfp_click">
           <paper-button class="buy-button" primary>{$ cfpHeader $}</paper-button>
