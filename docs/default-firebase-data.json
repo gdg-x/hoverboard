@@ -179,6 +179,13 @@
           "logoUrl": "../images/logos/compostons.png",
           "name": "Compostons",
           "url": "http://www.compostons.org/"
+        },
+        {
+          "order": 3,
+          "height": 100,
+          "logoUrl": "../images/logos/montpellier3m.png",
+          "name": "Montpellier Méditerranée Métropole",
+          "url": "https://www.montpellier3m.fr/"
         }
       ],
       "order": 4,
@@ -581,7 +588,7 @@
       "price": 90,
       "primary": true,
       "regular": true,
-      "soldOut": false,
+      "soldOut": true,
       "starts": "",
       "url": "https://www.billetweb.fr/sunny-tech-2020"
     },
@@ -592,7 +599,7 @@
       "info": "Requiert une carte étudiante",
       "name": "Étudiant",
       "price": 40,
-      "soldOut": false,
+      "soldOut": true,
       "starts": "",
       "url": "https://www.billetweb.fr/sunny-tech-2020"
     }
