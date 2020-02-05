@@ -40,6 +40,13 @@
           "logoUrl": "../images/logos/septeo.png",
           "name": "Septeo",
           "url": "https://www.septeo.fr/"
+        },
+        {
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/appvizer.png",
+          "name": "Appvizer",
+          "url": "https://www.appvizer.fr/"
         }
       ],
       "order": 0,
@@ -88,6 +95,13 @@
           "logoUrl": "../images/logos/kaliop.png",
           "name": "Kaliop",
           "url": "https://www.kaliop.com/"
+        },
+        {
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/3.svg",
+          "name": "Teads",
+          "url": "https://www.teads.com/"
         }
       ],
       "order": 1,
