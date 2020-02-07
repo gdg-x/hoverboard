@@ -45,8 +45,15 @@
           "order": 0,
           "height": 100,
           "logoUrl": "../images/logos/appvizer.png",
-          "name": "Appvizer",
+          "name": "Isia",
           "url": "https://www.appvizer.fr/"
+        },
+        {
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/isia.png",
+          "name": "Appvizer",
+          "url": "https://groupe-isia.com/"
         }
       ],
       "order": 0,
@@ -200,6 +207,13 @@
           "logoUrl": "../images/logos/montpellier3m.png",
           "name": "Montpellier Méditerranée Métropole",
           "url": "https://www.montpellier3m.fr/"
+        },
+        {
+          "order": 3,
+          "height": 100,
+          "logoUrl": "../images/logos/welovedevs.svg",
+          "name": "WeLoveDevs",
+          "url": "https://welovedevs.com/fr/"
         }
       ],
       "order": 4,
