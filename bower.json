@@ -35,9 +35,6 @@
     "paper-progress": "^2.1.1",
     "star-rating": "radi-cho/star-rating#1.0.0"
   },
-  "devDependencies": {
-    "web-component-tester": "Polymer/web-component-tester#^6.0.0"
-  },
   "resolutions": {
     "polymer": "^2.7.2"
   }
