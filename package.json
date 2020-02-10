@@ -1,6 +1,6 @@
 {
   "name": "hoverboard",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Conference website template",
   "scripts": {
     "gulp": "gulp",
