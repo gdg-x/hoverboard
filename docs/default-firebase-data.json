@@ -146,6 +146,12 @@
           "logoUrl": "../images/logos/esii.png",
           "name": "ESII",
           "url": "https://www.esii.com/fr"
+        },{
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/agysoft.jpeg",
+          "name": "Agysoft",
+          "url": "https://www.agysoft.fr/"
         }
       ],
       "order": 2,
