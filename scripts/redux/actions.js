@@ -238,12 +238,12 @@ const galleryActions = {
           return response.json();
         })
         .then(function(resp){
-          let obj = Object.assign({}, resp);
-          console.log(obj)
+          const list = resp;
           dispatch({
             type: FETCH_GALLERY_SUCCESS,
-            payload: { obj },
+            payload: { list },
           });
+          resolve(obj);
         })
         .catch((error) => {
           dispatch({
