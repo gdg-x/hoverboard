@@ -227,7 +227,30 @@ const videosActions = {
       });
   },
 };
+const galleryActions = {
+  fetchGallery: () => (dispatch) => {
+    dispatch({
+      type: FETCH_GALLERY,
+    });
 
+    return firebase.firestore().collection('gallery')
+      .get()
+      .then((snaps) => {
+        const list = snaps.docs
+          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
+        dispatch({
+          type: FETCH_GALLERY_SUCCESS,
+          payload: { list },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: FETCH_GALLERY_FAILURE,
+          payload: { error },
+        });
+      });
+  },
+};
 const blogActions = {
   fetchList: () => (dispatch) => {
     dispatch({
@@ -742,31 +765,7 @@ function addTagTo(array, element) {
   }
 }
 
-const galleryActions = {
-  fetchGallery: () => (dispatch) => {
-    dispatch({
-      type: FETCH_GALLERY,
-    });
 
-    return firebase.firestore().collection('gallery')
-      .get()
-      .then((snaps) => {
-        const list = snaps.docs
-          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
-
-        dispatch({
-          type: FETCH_GALLERY_SUCCESS,
-          payload: { list },
-        });
-      })
-      .catch((error) => {
-        dispatch({
-          type: FETCH_GALLERY_FAILURE,
-          payload: { error },
-        });
-      });
-  },
-};
 
 const _getTeamMembers = (teamId) => firebase.firestore()
   .collection('team').doc(teamId).collection('members').orderBy('order', 'asc')
