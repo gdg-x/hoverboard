@@ -232,24 +232,27 @@ const galleryActions = {
     dispatch({
       type: FETCH_GALLERY,
     });
-
-    return firebase.firestore().collection('gallery')
-      .get()
-      .then((snaps) => {
-        const list = snaps.docs
-          .map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
-        dispatch({
-          type: FETCH_GALLERY_SUCCESS,
-          payload: { list },
-        });
-      })
-      .catch((error) => {
-        dispatch({
-          type: FETCH_GALLERY_FAILURE,
-          payload: { error },
+    return new Promise(function(resolve){
+      fetch('data/gallery.json')
+        .then(function(response){
+          return response.json();
+        })
+        .then(function(resp){
+          let obj = Object.assign({}, resp);
+          console.log(obj)
+          dispatch({
+            type: FETCH_GALLERY_SUCCESS,
+            payload: { obj },
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: FETCH_GALLERY_FAILURE,
+            payload: { error },
+          });
         });
       });
-  },
+    }
 };
 const blogActions = {
   fetchList: () => (dispatch) => {
