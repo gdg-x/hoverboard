@@ -5,21 +5,20 @@
       npx firebase login
     ```
 
-1.  Build with `/config/development.json`
+1. Select the Firebase project to deploy to
     ```console
-      npm run build
+      npx firebase use <projectId>
     ```
 
-    or with `/config/production.json`
+1. Build and deploy with `/config/production.json`
     ```console
-      npm run build:prod
+      npm run deploy
     ```
 
-1.  Deploy
+    or to deploy with a custom config pass the name of the config file. For example with `/config/custom.json`
     ```console
-      npx firebase deploy
+      BUILD_ENV=custom npm run deploy
     ```
-
 The URL to your live site is listed in the output.
 
 ### Continuous integration with Travis CI
@@ -78,8 +77,7 @@ To generate the `secure` value do the following steps:
     ```yaml
       script:
        - echo "Building..."
-       - if [ "$TRAVIS_BRANCH" == "develop" ]; then npm run build; fi
-       - if [ "$TRAVIS_BRANCH" == "master" ]; then npm run build:prod; fi
+       - if [ "$TRAVIS_BRANCH" == "master" ]; then npm run build; else BUILD_ENV=development npm run build; fi
     ```
 1. Push to a repository
 

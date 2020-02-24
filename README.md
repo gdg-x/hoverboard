@@ -29,31 +29,8 @@ Our goal is to allow event organizers to set up a professional conference websit
 | **Blog** | post announcements, updates and useful information |
 
 ## Getting Started
-1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone your fork locally
-1. Install [Node.js (v10+)](https://nodejs.org/en/download/)
-1. Install project dependencies: `npm install`
-1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `npx firebase login`
-1. Update [Hoverboard config](/config) and [Resources](/data)
-1. Import initial data to the Firebase Database
-    * Generate `serviceAccount.json` file
-      - Go to [console.firebase.google.com](https://console.firebase.google.com) -> Project settings -> Service accounts
-      - Ensure that **Node.js** is selected and press **Generate new private key**
-      - Read the warning and press **Generate key**
-      - Save the file as `serviceAccount.json` and to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
-    * Enable Firestore in web console at [console.firebase.google.com](https://console.firebase.google.com) -> Database -> Cloud Firestore -> Create database. Select **locked mode** and press **Enable**
-    * [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
-	  * Select your Firebase project `npx firebase use <YOUR_PROJECT_ID>`
-    * Run `npm run firestore:init`
-1. Run locally
-   * `npm start`
-1. Build and deploy
-   * `npm run build`
-   * `npm run deploy`
 
-*NOTE:* By default command using configurations from `/configs/development.json`.
-To serve locally or deploy the production app use `npm run start:prod` and `npm run deploy:prod` respectively.
-
-:book: Read the [Full Setup Guide](/docs/).
+:first_quarter_moon_with_face: Read the [set up guide](/docs/tutorials/00-set-up.md) or checkout the [full documentation](/docs/).
 
 ### Docker-based development environment
 
@@ -80,12 +57,11 @@ The [Getting Started guide](#getting-started) is probably a good first point of 
 
 ## Compatibility
 
-:white_check_mark: Compatible with **latest two** version of Chrome, Chrome for Android, Firefox, Opera, Safari, Edge.<br>
-:x: IE and Opera Mini aren't supported.
+:white_check_mark: Compatible with **latest two** major versions of of browsers that support [ES Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules).
 
 ## Technology Stack
 
-* Polymer 2
+* Polymer 3
 * Redux
 * Firebase
 * Service Worker

@@ -58,7 +58,7 @@ If you don't need some pages, don't forget to remove them (or comment out)
 in `hoverboard-app.html`
 
 ```html
-<iron-lazy-pages>
+<iron-pages>
   <home-page
     data-route="home"
     data-path="pages/home-page.html"
@@ -73,7 +73,7 @@ in `hoverboard-app.html`
     data-path="pages/speakers-page.html"
     route="[[subroute]]"
   ></speakers-page>
-</iron-lazy-pages>
+</iron-pages>
 ```
 
 ### Toolbar Navigation

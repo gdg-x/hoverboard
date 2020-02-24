@@ -7,19 +7,13 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "./build",
-    "redirects": [{
-      "source": "/index.html",
-      "destination": "/",
-      "type" : 301
-    }],
+    "public": "dist",
     "rewrites": [{
       "source": "**",
       "function": "prerender"
     }],
     "ignore": [
       "/test/**",
-      "bower.json",
       "database.rules.json",
       "firebase.json",
       "README.md"
@@ -34,7 +28,7 @@
           },
           {
             "key": "X-Frame-Options",
-            "value": "DENY"
+            "value": "sameorigin"
           },
           {
             "key": "X-XSS-Protection",

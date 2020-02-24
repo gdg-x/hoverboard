@@ -75,61 +75,50 @@
   <link href="https://www.google-analytics.com" rel="preconnect">
   <link href="https://fcm.googleapis.com" rel="preconnect">
   <link href="https://firestore.googleapis.com" rel="preconnect">
-  <script>
 
+  <script>
+    // First Input Delay polyfill https://github.com/GoogleChromeLabs/first-input-delay
+    // eslint-disable-next-line
+    !function(n,e){var t,o,i,c=[],f={passive:!0,capture:!0},r=new Date,a="pointerup",u="pointercancel";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=[])}function l(t){if(t.cancelable){var o=(t.timeStamp>1e12?new Date:performance.now())-t.timeStamp;"pointerdown"==t.type?function(t,o){function i(){p(t,o),r()}function c(){r()}function r(){e(a,i,f),e(u,c,f)}n(a,i,f),n(u,c,f)}(o,t):p(o,t)}}function w(n){["click","mousedown","keydown","touchstart","pointerdown"].forEach(function(e){n(e,l,f)})}w(n),self.perfMetrics=self.perfMetrics||{},self.perfMetrics.onFirstInputDelay=function(n){c.push(n),s()}}(addEventListener,removeEventListener);
+  </script>
+
+  <script src="./node_modules/firebase/firebase-app.js"></script>
+  <script src="./node_modules/firebase/firebase-auth.js"></script>
+  <script src="./node_modules/firebase/firebase-firestore.js"></script>
+  <script src="./node_modules/firebase/firebase-messaging.js"></script>
+  <script src="./node_modules/firebase/firebase-performance.js"></script>
+
+  <script>
     window.Polymer = { rootPath: '{$ basepath $}' };
     window.HOVERBOARD = { Elements: {} };
 
-    function loadFirebaseModules(modules) {
-      return Promise.all(
-          modules.map((module) => new Promise((resolve, reject) => {
-            const script = document.createElement('script');
-            script.src = `node_modules/firebase/${module}.js`;
-            script.async = false;
-            script.onload = () => resolve();
-            script.onerror = (error) => reject(error);
-            document.head.appendChild(script);
-          })));
-    }
+    firebase.initializeApp({
+      apiKey: '{$ firebase.apiKey $}',
+      appId: '{$ firebase.appId $}',
+      authDomain: '{$ firebase.authDomain $}',
+      databaseURL: '{$ firebase.databaseURL $}',
+      messagingSenderId: '{$ firebase.messagingSenderId $}',
+      projectId: '{$ firebase.projectId $}',
+      storageBucket: '{$ firebase.storageBucket $}',
+    });
 
-    loadFirebaseModules([
-      'firebase-app',
-      'firebase-firestore',
-      'firebase-auth',
-      'firebase-messaging',
-      'firebase-performance',
-    ])
-        .then(() => {
-          firebase.initializeApp({
-            appId: '{$ firebase.appId $}',
-            apiKey: '{$ firebase.apiKey $}',
-            authDomain: '{$ firebase.authDomain $}',
-            databaseURL: '{$ firebase.databaseURL $}',
-            projectId: '{$ firebase.projectId $}',
-            storageBucket: '{$ firebase.storageBucket $}',
-            messagingSenderId: '{$ firebase.messagingSenderId $}',
-          });
-
-          firebase.performance();
-          firebase.firestore()
-              .enablePersistence({ tabSynchronization: true })
-              .catch(() => {
-                console.warn('DB offline support not available'); // eslint-disable-line no-console
-              });
+    firebase.performance();
+    firebase.firestore()
+        .enablePersistence({ synchronizeTabs: true })
+        .catch(() => {
           // eslint-disable-next-line no-console
-          console.log('Firebase App is ready!');
+          console.warn('DB offline support not available');
         });
 
-    </script>
-    <script>
-      // First Input Delay polyfill https://github.com/GoogleChromeLabs/first-input-delay
-      // eslint-disable-next-line
-      !function(n,e){var t,o,i,c=[],f={passive:!0,capture:!0},r=new Date,a="pointerup",u="pointercancel";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=[])}function l(t){if(t.cancelable){var o=(t.timeStamp>1e12?new Date:performance.now())-t.timeStamp;"pointerdown"==t.type?function(t,o){function i(){p(t,o),r()}function c(){r()}function r(){e(a,i,f),e(u,c,f)}n(a,i,f),n(u,c,f)}(o,t):p(o,t)}}function w(n){["click","mousedown","keydown","touchstart","pointerdown"].forEach(function(e){n(e,l,f)})}w(n),self.perfMetrics=self.perfMetrics||{},self.perfMetrics.onFirstInputDelay=function(n){c.push(n),s()}}(addEventListener,removeEventListener);
+    // eslint-disable-next-line no-console
+    console.log('Firebase is ready!');
   </script>
 
-  <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-  <link href="src/hoverboard-app.html" rel="import">
-  <script async defer src="scripts/service-worker-registration.js"></script>
+  <script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  {% if loadDevelopmentScripts %}
+  <!-- TODO: Consolidate development and production builds so they are more similar -->
+  <script src="./src/hoverboard-app.js" type="module"></script>
+  {% endif %}
 
   <style>
 
@@ -185,11 +174,6 @@
       ga('send', 'timing', 'index.html', 'render', indexRenderTime);
     }
   };
-
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    uiActions.setAddToHomeScreen(e);
-  });
 </script>
 
 </body>
