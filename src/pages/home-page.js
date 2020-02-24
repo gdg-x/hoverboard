@@ -9,6 +9,7 @@ import '../elements/map-block.js';
 import '../elements/partners-block.js';
 import '../elements/speakers-block.js';
 import '../elements/subscribe-block.js';
+import '../elements/fork-me-block.js';
 import '../elements/tickets-block.js';
 import { ReduxMixin } from '../mixins/redux-mixin.js';
 import { ScrollFunctions } from '../mixins/scroll-functions.js';
@@ -196,6 +197,7 @@ class HomePage extends ScrollFunctions(ReduxMixin(PolymerElement)) {
         </div>
       </div>
     </hero-block>
+    <fork-me-block></fork-me-block>
     <about-block></about-block>
     <speakers-block></speakers-block>
     <subscribe-block></subscribe-block>
