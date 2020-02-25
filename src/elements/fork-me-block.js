@@ -16,12 +16,12 @@ class ForkMeBlock extends ReduxMixin(PolymerElement) {
         display: flex;
         width: 100%;
         background: var(--accent-color);
-        color: var(--text-primary-color);
+        color: var(--text-secondary-color);
         padding: 16px 0;
       }
 
       paper-button {
-        color: #fff;
+        color: #000;
       }
 
     </style>
