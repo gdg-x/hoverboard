@@ -9,9 +9,7 @@ import '../elements/map-block.js';
 import '../elements/partners-block.js';
 import '../elements/speakers-block.js';
 import '../elements/subscribe-block.js';
-{% if showForkMeBlockForProjectIds.includes(firebase.projectId) %}
 import '../elements/fork-me-block.js';
-{% endif %}
 import '../elements/tickets-block.js';
 import { ReduxMixin } from '../mixins/redux-mixin.js';
 import { ScrollFunctions } from '../mixins/scroll-functions.js';
