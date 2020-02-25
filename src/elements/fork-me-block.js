@@ -2,8 +2,6 @@ import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { dialogsActions, subscribeActions } from '../redux/actions.js';
-import { DIALOGS } from '../redux/constants.js';
 import './hoverboard-icons.js';
 import './shared-styles.js';
 
