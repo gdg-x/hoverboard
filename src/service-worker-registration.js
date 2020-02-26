@@ -1,3 +1,4 @@
+import { error } from './console.js';
 import { toastActions } from './redux/actions.js';
 
 const SW_URL = 'service-worker.js';
@@ -27,10 +28,7 @@ export const registerServiceWorker = () => {
             };
           };
         })
-        .catch((e) => {
-          // eslint-disable-next-line no-console
-          console.error('Service worker registration failed:', e);
-        });
+        .catch((e) => error('Service worker registration failed:', e));
   }
 };
 

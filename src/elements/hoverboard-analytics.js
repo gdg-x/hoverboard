@@ -1,14 +1,11 @@
-/* eslint-disable */
 
 class HoverboardAnalytics extends HTMLElement {
   connectedCallback() {
     // GOOGLE ANALYTICS TRACKING
 
     // Load google analytics script
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    /* eslint-disable-next-line */
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', {
       trackingId: '{$ analytics $}',
@@ -25,19 +22,19 @@ class HoverboardAnalytics extends HTMLElement {
     ga('set', 'anonymizeIp', true);
     ga('send', 'pageview');
 
-    let updateOnlineStatus = (event) => {
+    const updateOnlineStatus = (event) => {
       ga('send', 'event', 'network', 'change', event.type);
     };
 
     window.addEventListener('online', updateOnlineStatus);
     window.addEventListener('offline', updateOnlineStatus);
-    window.addEventListener('WebComponentsReady', function(e) {
+    window.addEventListener('WebComponentsReady', (_error) => {
       if (window.performance) {
         ga('send', 'timing', 'JS Dependencies', 'WebComponentsReady', Math.round(performance.now()));
       }
     });
 
-    window.onerror = function (message, file, lineNumber, columnNumber, error) {
+    window.onerror = function (message, file, lineNumber, _columnNumber, error) {
       // We don't want to trigger any errors inside window.onerror, so wrap in a try/catch.
       try {
         // Some browsers don't support error param yet.
@@ -50,9 +47,9 @@ class HoverboardAnalytics extends HTMLElement {
       }
     };
 
-    window.measureDuration = function(mark, opt_reference) {
-      let reference = opt_reference || 'responseEnd';
-      let name = `${reference}:${mark}`;
+    window.measureDuration = (mark, optReference) => {
+      const reference = optReference || 'responseEnd';
+      const name = `${reference}:${mark}`;
 
       // Clears any existing measurements with the same name.
       performance.clearMeasures(name);
@@ -66,7 +63,7 @@ class HoverboardAnalytics extends HTMLElement {
 
       // Returns the measure duration.
       return measure.duration;
-    }
+    };
   }
 }
 

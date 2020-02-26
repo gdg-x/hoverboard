@@ -18,6 +18,7 @@ import '@polymer/paper-tabs';
 import { html, PolymerElement } from '@polymer/polymer';
 import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings.js';
 import 'plastic-image';
+import { log } from './console.js';
 import './effects/transparent-scroll.js';
 import './elements/dialogs/feedback-dialog.js';
 import './elements/dialogs/previous-speaker-details.js';
@@ -372,8 +373,7 @@ class HoverboardApp extends UtilsFunctions(ScrollFunctions(ReduxMixin(PolymerEle
 
   ready() {
     super.ready();
-    // eslint-disable-next-line no-console
-    console.log('Hoverboard is ready!');
+    log('Hoverboard is ready!');
     this.removeAttribute('unresolved');
     userActions.updateUser();
     notificationsActions.initializeMessaging()

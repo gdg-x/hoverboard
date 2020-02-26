@@ -203,8 +203,8 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
   }
 
   _validateEmail(email) {
-    /* eslint-disable-next-line */
-    const emailRegularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // https://stackoverflow.com/a/742588/26406
+    const emailRegularExpression = /^[^@\s]+@[^@\s.]+\.[^@.\s]+$/;
     return emailRegularExpression.test(email);
   }
 
