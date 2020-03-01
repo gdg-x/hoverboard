@@ -46,7 +46,7 @@
         .categories-container {
           grid-gap: 32px;
         }
-        
+
       }
 
        .icons{
@@ -61,8 +61,10 @@
       <div class="content">
         <div style="text-align:center">
           <h4 class="container-title">{$ callToSchedule.title $}</h4>
-          <p>{$ callToSchedule.description $} <b>{$ callToSchedule.description2 $}</b></p>
-          <p>{$ callToSchedule.description3 $}</p>
+          <p>
+<!--            {$ callToSchedule.description $} -->
+            <b>{$ callToSchedule.description2 $}</b></p>
+<!--          <p>{$ callToSchedule.description3 $}</p>-->
           <a href="{$ callToSchedule.url $}" target="_blank">
             <paper-button class="cta-button animated icon-right">
               <span>{$ callToSchedule.action $}</span>
