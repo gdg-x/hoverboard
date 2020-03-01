@@ -152,6 +152,12 @@
           "logoUrl": "../images/logos/agysoft.jpeg",
           "name": "Agysoft",
           "url": "https://www.agysoft.fr/"
+        },{
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/lunchr.svg",
+          "name": "Lunchr",
+          "url": "https://www.lunchr.co/"
         }
       ],
       "order": 2,
@@ -172,6 +178,20 @@
           "logoUrl": "../images/logos/sequoiasoft.png",
           "name": "Sequoiasoft",
           "url": "https://www.sequoiasoft.com/"
+        },
+        {
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/saagie.png",
+          "name": "Saagie",
+          "url": "hhttps://www.saagie.com/fr/"
+        },
+        {
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/laposte.png",
+          "name": "La Poste",
+          "url": "https://www.groupelaposte.com/fr/numerique"
         }
       ],
       "order": 3,
