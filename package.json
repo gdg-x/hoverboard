@@ -68,7 +68,7 @@
     "jest": "^25.1.0",
     "nunjucks": "^3.2.0",
     "rimraf": "^3.0.2",
-    "rollup": "^1.31.1",
+    "rollup": "^1.32.0",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-index-html": "^1.9.3",
     "rollup-plugin-re": "^1.0.7",
