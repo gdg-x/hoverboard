@@ -8,7 +8,7 @@ export const SessionsHoC = (subclass) => class extends ReduxMixin(subclass) {
     try {
       parentProps = super.properties;
     } catch (_error) {
-      /* eslint-disable-next-line no-empty */
+      // ignore parents that don't have `properties
     }
 
     return {
@@ -36,7 +36,7 @@ export const SessionsHoC = (subclass) => class extends ReduxMixin(subclass) {
     try {
       parentMap = super.mapStateToProps(state, _element);
     } catch (_error) {
-      /* eslint-disable-next-line no-empty */
+      // ignore parents that don't have `mapStateToProps
     }
 
 
