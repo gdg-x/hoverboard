@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
-    "@babel/node": "^7.8.4",
+    "@babel/node": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
     "@firebase/testing": "^0.16.13",
     "@open-wc/building-rollup": "^0.22.1",
