@@ -55,7 +55,7 @@
     "@firebase/testing": "^0.16.13",
     "@open-wc/building-rollup": "^0.22.2",
     "concurrently": "^5.1.0",
-    "cross-env": "^7.0.1",
+    "cross-env": "^7.0.2",
     "deepmerge": "^4.2.2",
     "es-dev-server": "^1.42.0",
     "eslint": "^6.8.0",
