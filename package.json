@@ -42,7 +42,7 @@
     "@radi-cho/star-rating": "github:abraham/star-rating#polymer-3",
     "@webcomponents/webcomponentsjs": "^2.4.2",
     "clamp-js-main": "github:abraham/clamp-js-main#export",
-    "firebase": "^7.9.3",
+    "firebase": "^7.10.0",
     "plastic-image": "^3.0.2",
     "polymer-redux": "^2.0.0-beta.2",
     "redux": "^4.0.5",
