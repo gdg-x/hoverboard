@@ -232,12 +232,12 @@ const galleryActions = {
     dispatch({
       type: FETCH_GALLERY,
     });
-    return new Promise(function(resolve){
+    return new Promise(function (resolve) {
       fetch('data/gallery.json')
-        .then(function(response){
+        .then(function (response) {
           return response.json();
         })
-        .then(function(resp){
+        .then(function (resp) {
           const list = resp;
           dispatch({
             type: FETCH_GALLERY_SUCCESS,
@@ -251,8 +251,8 @@ const galleryActions = {
             payload: { error },
           });
         });
-      });
-    }
+    });
+  },
 };
 const blogActions = {
   fetchList: () => (dispatch) => {
@@ -295,36 +295,36 @@ const speakersActions = {
 
     const schedulePromise = new Promise(function (resolve) {
       fetch('data/posts/schedule.json')
-          .then(function (response) {
+        .then(function (response) {
           return response.json();
-          })
-          .then(function (res) {
-            let scheduleRaw = res.schedule;
-            resolve(scheduleRaw);
-          });
+        })
+        .then(function (res) {
+          let scheduleRaw = res.schedule;
+          resolve(scheduleRaw);
+        });
     });
 
     const speakersPromise = new Promise(function (resolve) {
       fetch('data/posts/speakers.json')
-          .then(function (response) {
+        .then(function (response) {
           return response.json();
-          })
-          .then(function (res) {
-            let speakersRaw = res.speakers;
-            resolve(speakersRaw);
-          });
+        })
+        .then(function (res) {
+          let speakersRaw = res.speakers;
+          resolve(speakersRaw);
+        });
     });
 
 
     const sessionPromise = new Promise(function (resolve) {
       fetch('data/posts/sessions.json')
-          .then(function (response) {
+        .then(function (response) {
           return response.json();
-          })
-          .then(function (res) {
-            let sessionsRaw = res.sessions;
-            resolve(sessionsRaw);
-          });
+        })
+        .then(function (res) {
+          let sessionsRaw = res.sessions;
+          resolve(sessionsRaw);
+        });
     });
 
 
@@ -357,29 +357,29 @@ const previousSpeakersActions = {
       type: FETCH_PREVIOUS_SPEAKERS,
     });
     return new Promise(function (resolve) {
-        fetch('data/posts/speakers-past.json')
-            .then(function (response) {
-            return response.json();
-            })
-            .then(function (res) {
-              let speakers = res.previousSpeakers;
-              const obj = speakers.reduce((acc, curr) =>
-              Object.assign({}, acc, { [curr.id]: curr }), {});
-              dispatch({
-                  type: FETCH_PREVIOUS_SPEAKERS_SUCCESS,
-                  payload: {
-                      obj,
-                      list: speakers,
-                  },
-              });
-              resolve(speakers);
-            })
-            .catch((error) => {
-              dispatch({
-                type: FETCH_PREVIOUS_SPEAKERS_FAILURE,
-                payload: { error },
-              });
-            });
+      fetch('data/posts/speakers-past.json')
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (res) {
+          let speakers = res.previousSpeakers;
+          const obj = speakers.reduce((acc, curr) =>
+            Object.assign({}, acc, { [curr.id]: curr }), {});
+          dispatch({
+            type: FETCH_PREVIOUS_SPEAKERS_SUCCESS,
+            payload: {
+              obj,
+              list: speakers,
+            },
+          });
+          resolve(speakers);
+        })
+        .catch((error) => {
+          dispatch({
+            type: FETCH_PREVIOUS_SPEAKERS_FAILURE,
+            payload: { error },
+          });
+        });
     });
   },
 };
@@ -393,36 +393,36 @@ const sessionsActions = {
 
     const schedulePromise = new Promise(function (resolve) {
       fetch('data/posts/schedule.json')
-          .then(function (response) {
+        .then(function (response) {
           return response.json();
-          })
-          .then(function (res) {
-            let scheduleRaw = res.schedule;
-            resolve(scheduleRaw);
-          });
+        })
+        .then(function (res) {
+          let scheduleRaw = res.schedule;
+          resolve(scheduleRaw);
+        });
     });
 
     const speakersPromise = new Promise(function (resolve) {
       fetch('data/posts/speakers.json')
-          .then(function (response) {
+        .then(function (response) {
           return response.json();
-          })
-          .then(function (res) {
-            let speakersRaw = res.speakers;
-            resolve(speakersRaw);
-          });
+        })
+        .then(function (res) {
+          let speakersRaw = res.speakers;
+          resolve(speakersRaw);
+        });
     });
 
 
     const sessionPromise = new Promise(function (resolve) {
       fetch('data/posts/sessions.json')
-          .then(function (response) {
+        .then(function (response) {
           return response.json();
-          })
-          .then(function (res) {
-            let sessionsRaw = res.sessions;
-            resolve(sessionsRaw);
-          });
+        })
+        .then(function (res) {
+          let sessionsRaw = res.sessions;
+          resolve(sessionsRaw);
+        });
     });
 
 
@@ -529,36 +529,36 @@ const scheduleActions = {
 
     const schedulePromise = new Promise(function (resolve) {
       fetch('data/posts/schedule.json')
-          .then(function (response) {
+        .then(function (response) {
           return response.json();
-          })
-          .then(function (res) {
-            let scheduleRaw = res.schedule;
-            resolve(scheduleRaw);
-          });
+        })
+        .then(function (res) {
+          let scheduleRaw = res.schedule;
+          resolve(scheduleRaw);
+        });
     });
 
     const speakersPromise = new Promise(function (resolve) {
       fetch('data/posts/speakers.json')
-          .then(function (response) {
+        .then(function (response) {
           return response.json();
-          })
-          .then(function (res) {
-            let speakersRaw = res.speakers;
-            resolve(speakersRaw);
-          });
+        })
+        .then(function (res) {
+          let speakersRaw = res.speakers;
+          resolve(speakersRaw);
+        });
     });
 
 
     const sessionPromise = new Promise(function (resolve) {
       fetch('data/posts/sessions.json')
-          .then(function (response) {
+        .then(function (response) {
           return response.json();
-          })
-          .then(function (res) {
-            let sessionsRaw = res.sessions;
-            resolve(sessionsRaw);
-          });
+        })
+        .then(function (res) {
+          let sessionsRaw = res.sessions;
+          resolve(sessionsRaw);
+        });
     });
 
 
@@ -585,8 +585,8 @@ const scheduleActions = {
 function mapSessions(sessions, speakers) {
   sessions.forEach((session) => {
     if (session.speakers) {
-      session.speakers.forEach((sessionSpeaker, index) =>{
-        speakers.forEach((speaker) =>{
+      session.speakers.forEach((sessionSpeaker, index) => {
+        speakers.forEach((speaker) => {
           if (sessionSpeaker === speaker.id) {
             session.speakers[index] = speaker;
           }
@@ -598,10 +598,10 @@ function mapSessions(sessions, speakers) {
 }
 
 function mapSpeakers(speakers, sessions) {
-  speakers.forEach((speaker) =>{
+  speakers.forEach((speaker) => {
     if (speaker.sessions) {
-      speaker.sessions.forEach((speakerSession, index) =>{
-        sessions.forEach((session) =>{
+      speaker.sessions.forEach((speakerSession, index) => {
+        sessions.forEach((session) => {
           if (speakerSession.id === session.id) {
             speaker.sessions[index] = session;
           }
@@ -646,21 +646,21 @@ function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
 
           const mainTag = subsession.tags ? subsession.tags[0] : 'General';
           const endTimeRaw = timeslot.sessions[sessionIndex].extend
-              // eslint-disable-next-line max-len
-              ? day.timeslots[timeslotsIndex + timeslot.sessions[sessionIndex].extend - 1].endTime
-              : timeslot.endTime;
+            // eslint-disable-next-line max-len
+            ? day.timeslots[timeslotsIndex + timeslot.sessions[sessionIndex].extend - 1].endTime
+            : timeslot.endTime;
           const endTime = subSessionsLen > 1
-              ? getEndTime(
-                  dayKey,
-                  timeslot.startTime,
-                  endTimeRaw,
-                  subSessionsLen,
-                  subSessionIndex + 1
-              )
-              : endTimeRaw;
+            ? getEndTime(
+              dayKey,
+              timeslot.startTime,
+              endTimeRaw,
+              subSessionsLen,
+              subSessionIndex + 1
+            )
+            : endTimeRaw;
           const startTime = subSessionsLen > 1 && subSessionIndex > 0
-              ? sessions[timeslot.sessions[sessionIndex].items[subSessionIndex - 1]].endTime
-              : timeslot.startTime;
+            ? sessions[timeslot.sessions[sessionIndex].items[subSessionIndex - 1]].endTime
+            : timeslot.startTime;
 
           if (subsession.tags) {
             dayTags = [...new Set([...dayTags, ...subsession.tags])];
@@ -668,15 +668,15 @@ function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
           scheduleTags = addTagTo(scheduleTags || [], mainTag);
 
           const finalSubSession = Object.assign({}, subsession, {
-              mainTag,
-              id: sessionId.toString(),
-              day: dayKey,
-              // eslint-disable-next-line max-len
-              track: day.tracks[timeslot.sessions[sessionIndex].trackNum - 1] || timeslot.sessions[sessionIndex].track || day.tracks[sessionIndex],
-              startTime,
-              endTime,
-              duration: getDuration(dayKey, startTime, endTime),
-              dateReadable: day.dateReadable,
+            mainTag,
+            id: sessionId.toString(),
+            day: dayKey,
+            // eslint-disable-next-line max-len
+            track: day.tracks[timeslot.sessions[sessionIndex].trackNum - 1] || timeslot.sessions[sessionIndex].track || day.tracks[sessionIndex],
+            startTime,
+            endTime,
+            duration: getDuration(dayKey, startTime, endTime),
+            dateReadable: day.dateReadable,
           });
 
           Object.assign(subsession, finalSubSession);
@@ -686,15 +686,15 @@ function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
         }
         let startRow = timeslotsIndex + 1;
         let startColumn = sessionIndex + 1;
-        let endRow = timeslotsIndex +(timeslot.sessions[sessionIndex].extend || 0) + 1;
+        let endRow = timeslotsIndex + (timeslot.sessions[sessionIndex].extend || 0) + 1;
         let endColumn = sessionsLen !== 1
           // eslint-disable-next-line max-len
           ? sessionIndex + 2 : Object.keys(extensions).length ? Object.keys(extensions)[0]
-              : tracksNumber + 1;
+            : tracksNumber + 1;
 
 
         if (timeslot.sessions[sessionIndex].extend) {
-            extensions[sessionIndex + 1] = timeslot.sessions[sessionIndex].extend;
+          extensions[sessionIndex + 1] = timeslot.sessions[sessionIndex].extend;
         }
 
         if (timeslot.sessions[sessionIndex].rowSpan) {
@@ -707,21 +707,21 @@ function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
         }
 
         innerSessions = [...innerSessions, {
-            gridArea: `${startRow} / ${startColumn} / ${endRow} / ${endColumn}`,
-            items: subSessions,
+          gridArea: `${startRow} / ${startColumn} / ${endRow} / ${endColumn}`,
+          items: subSessions,
         }];
       }
 
       for (const [key, value] of Object.entries(extensions)) {
-          if (value === 1) {
-              delete extensions[key];
-          } else {
-              extensions[key] = value - 1;
-          }
+        if (value === 1) {
+          delete extensions[key];
+        } else {
+          extensions[key] = value - 1;
+        }
       }
 
       timeslots.push(Object.assign({}, timeslot, {
-          sessions: innerSessions,
+        sessions: innerSessions,
       }));
     }
     day.timeslots = timeslots;
@@ -757,17 +757,16 @@ function getDuration(date, startTime, endTime) {
   const hh = Math.floor(difference / 1000 / 60 / 60);
   difference -= hh * 1000 * 60 * 60;
   return {
-      hh,
-      mm: Math.floor(difference / 1000 / 60),
+    hh,
+    mm: Math.floor(difference / 1000 / 60),
   };
 }
 
 function addTagTo(array, element) {
   if (array.indexOf(element) < 0) {
-      return [...array, element];
+    return [...array, element];
   }
 }
-
 
 
 const _getTeamMembers = (teamId) => firebase.firestore()
