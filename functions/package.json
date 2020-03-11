@@ -6,7 +6,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "babel src --out-dir dist --source-maps",
-    "postbuild": "cpx ../build/index.html dist/"
+    "postbuild": "cpx ../dist/index.html dist/"
   },
   "engines": {
     "node": "10"
