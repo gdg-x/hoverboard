@@ -65,12 +65,12 @@
           "name": "LibertyJS 2018",
           "url": "/",
           "newTab": false
-		},
-		{
-			"name": "Past LibertyJS Speakers",
-			"url": "/previous-speakers",
-			"newTab": false
-		  }
+        },
+        {
+          "name": "Past LibertyJS Speakers",
+          "url": "/previous-speakers",
+          "newTab": false
+        }
       ]
     },
     {
@@ -189,7 +189,7 @@
     "description": "Last year's event built lots of excitement. Check out photos from featured talks, hands-on learning sessions, and after-hours fun.",
     "callToAction": {
       "label": "See all photos",
-      "link": "https://photos.app.goo.gl/tMnH9ZA17YSrkEBUA"
+      "link": "https://photos.app.goo.gl/FTGocozgNWzkgrf19"
     }
   },
   "mapBlock": {
@@ -216,7 +216,7 @@
     "description": "Brought to you by some awesome developers who are proud to call Philadelphia their home."
   },
   "team-contributors": {
-	"title": "Team Contributors"
+    "title": "Team Contributors"
   },
   "volunteer": {
     "description": ""
@@ -248,7 +248,7 @@
     }
   },
   "aboutOrganizerBlock": {
-	"image": "/images/ljs-2018-org.jpg",
+    "image": "/images/ljs-2018-org.jpg",
     "blocks": [
       {
         "title": "Organizers",
