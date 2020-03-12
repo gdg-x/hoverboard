@@ -12,7 +12,7 @@
     "install:functions": "npm --prefix ./functions install",
     "lint": "eslint src",
     "postinstall": "npm run install:functions && npm run install:emulator",
-    "serve": "npm run build && serve dist",
+    "serve": "npm run build && firebase serve",
     "start": "cross-env NODE_ENV=development es-dev-server",
     "test:rules": "firebase emulators:exec --only firestore 'npx jest __tests__/*.rules.test.js'",
     "test": "npm run test:rules"
@@ -72,8 +72,7 @@
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-index-html": "^1.10.3",
     "rollup-plugin-re": "^1.0.7",
-    "rollup-plugin-workbox": "^5.0.1",
-    "serve": "^11.3.0"
+    "rollup-plugin-workbox": "^5.0.1"
   },
   "engines": {
     "node": "10"
