@@ -7,6 +7,7 @@ if (!development) {
 }
 
 module.exports = {
+  port: 5000,
   watch: true,
   nodeResolve: true,
   appIndex: 'index.html',
