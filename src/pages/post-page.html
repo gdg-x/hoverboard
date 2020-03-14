@@ -9,6 +9,7 @@
 <link rel="import" href="../mixins/redux-mixin.html">
 <link rel="import" href="../elements/shared-styles.html">
 <link rel="import" href="../elements/posts-list.html">
+<link rel="import" href="../elements/md-content.html">
 
 <dom-module id="post-page">
   <template>
@@ -96,18 +97,16 @@
     </hero-block>
 
     <div class="container-narrow">
-      <marked-element class="post" markdown="[[post.content]]">
-        <div slot="markdown-html"></div>
-      </marked-element>
+      <md-content md-source="[[post.source]]"></md-content>
       <div class="date">{$ blog.published $}: [[getDate(post.published)]]</div>
     </div>
 
-    <div class="suggested-posts">
-      <div class="container-narrow">
-        <h3 class="container-title">{$ blog.suggested $}</h3>
-        <posts-list posts="[[suggestedPosts]]"></posts-list>
-      </div>
-    </div>
+<!--    <div class="suggested-posts">-->
+<!--      <div class="container-narrow">-->
+<!--        <h3 class="container-title">{$ blog.suggested $}</h3>-->
+<!--        <posts-list posts="[[suggestedPosts]]"></posts-list>-->
+<!--      </div>-->
+<!--    </div>-->
 
   </template>
 
