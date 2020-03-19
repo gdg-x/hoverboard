@@ -57,7 +57,7 @@
     "concurrently": "^5.1.0",
     "cross-env": "^7.0.2",
     "deepmerge": "^4.2.2",
-    "es-dev-server": "^1.45.1",
+    "es-dev-server": "^1.45.2",
     "eslint": "^6.8.0",
     "eslint-config-google": "^0.14.0",
     "eslint-friendly-formatter": "^4.0.1",
