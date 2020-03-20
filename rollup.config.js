@@ -19,6 +19,7 @@ const config = createDefaultConfig({
   input: './src/hoverboard-app.js',
   plugins: {
     workbox: false,
+    indexHTML: false,
   },
 });
 
@@ -26,8 +27,7 @@ export default deepmerge(config, {
   plugins: [
     ...config.plugins,
     indexHTMLPlugin({
-      template: () => compileTemplate(fs.readFileSync('index.html', 'utf-8')),
-      indexHTML: 'HACK: https://github.com/open-wc/open-wc/issues/1282',
+      indexHTML: compileTemplate(fs.readFileSync('index.html', 'utf-8')),
     }),
     replace({
       exclude: 'node_modules/**',
