@@ -201,6 +201,13 @@
           "logoUrl": "../images/logos/laposte.png",
           "name": "La Poste",
           "url": "https://www.groupelaposte.com/fr/numerique"
+        },
+        {
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/sopra-steria.png",
+          "name": "Sopra Steria",
+          "url": "https://www.soprasteria.com/fr"
         }
       ],
       "order": 3,
