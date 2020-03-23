@@ -59,7 +59,8 @@
     <app-route route="{{appRoute}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"
       query-params="{{nQueryParams}}"></app-route>
 
-    <app-route route="[[route]]" pattern="/:day" data="{{routeData}}"></app-route>
+    <app-route route="[[route]]" pattern="/:year/:day" data="{{routeData}}"></app-route>
+
 
     <hero-block background-image="{$ heroSettings.schedule.background.image $}"
       background-color="{$ heroSettings.schedule.background.color $}" font-color="{$ heroSettings.schedule.fontColor $}"
@@ -74,6 +75,23 @@
 
     <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
+    ---
+    <template is="dom-repeat" items="[[schedule]]" as="obj">
+      [[obj.year]]
+    </template>
+    ---
+    ---
+    <template is="dom-repeat" items="[[schedule]]" as="obj">
+      <template is="dom-repeat" items="[[obj.schedule]]" as="t">
+        test
+      </template>
+    </template>
+    ---
+
+    <template is="dom-repeat" items="[[schedule[0].schedule]]" as="obj">
+      ope
+    </template>
+
     <filter-menu filters="[[_filters]]" selected="[[_selectedFilters]]"></filter-menu>
 
     <div class="container">
@@ -84,7 +102,7 @@
       </content-loader>
 
       <iron-pages attr-for-selected="name" selected="[[subRoute]]" selected-attribute="active">
-        <template is="dom-repeat" items="[[schedule]]" as="day">
+        <template is="dom-repeat" items="[[schedule[0].schedule]]" as="day">
           <schedule-day name$="[[day.date]]" day="[[day]]" user="[[user]]" featured-sessions="[[featuredSessions]]"
             selected-filters="[[_selectedFilters]]" viewport="[[viewport]]" query-params="[[queryParams]]">
           </schedule-day>
@@ -113,6 +131,7 @@
           schedule: {
             type: Array,
             statePath: 'schedule',
+            observer: '_scheduleLoaded',
           },
           featuredSessions: {
             type: Object,
@@ -148,15 +167,20 @@
         };
       }
 
+
       static get observers() {
         return [
-          '_setDay(active, routeData.day, schedule)',
+          '_setDay(active, routeData.year, routeData.day, schedule)',
           '_openSessionDetails(active, sessions, _selectedFilters.sessionId)',
           '_fetchFeaturedSessions(active, sessions, user.uid)',
           '_scheduleChanged(schedule, _selectedFilters)',
           '_sessionsAndSpeakersChanged(sessions, speakers)',
           '_paramsUpdated(queryParams)',
         ];
+      }
+
+      _scheduleLoaded(schedule) {
+        console.log("loaded s", schedule)
       }
 
       _sessionsAndSpeakersChanged(sessions, speakers) {
@@ -179,9 +203,12 @@
         }
       }
 
-      _setDay(active, day, schedule) {
+      _setDay(active, year, day, schedule) {
+        console.log("setday", active, year, day, schedule)
         if (active && schedule.length) {
-          const selectedDay = day || schedule[0].date;
+          const selectedYear = year || schedule[0];
+          const selectedDay = day || selectedYear[0].date;
+          console.log(selectedYear, selectedDay)
           routingActions.setSubRoute(selectedDay);
         }
       }

@@ -41,6 +41,7 @@ const routingActions = {
     });
   },
   setSubRoute: (subRoute) => {
+    console.log('subroute', subRoute)
     store.dispatch({
       type: SET_SUB_ROUTE,
       subRoute,
@@ -555,10 +556,12 @@ const scheduleActions = {
         let arr = sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw);
 
         let schedule = arr.schedule;
+        console.log("tet", schedule);
 
         dispatch({
           type: FETCH_SCHEDULE_SUCCESS,
-          data: schedule.sort((a, b) => a.date.localeCompare(b.date)),
+          // data: schedule.sort((a, b) => a.date.localeCompare(b.date)),
+          data: schedule,
         });
       })
       .catch((error) => {
@@ -607,11 +610,12 @@ function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
   let sessions = mapSessions(sessionsRaw, speakersRaw);
   let speakers = mapSpeakers(speakersRaw, sessionsRaw);
 
-  console.log(scheduleRaw)
   scheduleRaw.forEach((year) => {
-    console.log(year.schedule)
+    let yearObj = {};
+    yearObj.year = year.year;
+    yearObj.schedule = [];
+
     year.schedule.forEach((day) => {
-      console.log(day)
       const tracksNumber = day.tracks.length;
       let dayTags = [];
       let timeslots = [];
@@ -717,9 +721,12 @@ function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
       }
       day.timeslots = timeslots;
       day.tags = dayTags;
-      schedule.push(day);
+      yearObj.schedule.push(day);
     });
+    schedule.push(yearObj);
   });
+
+  console.log(schedule);
 
 
   return {
