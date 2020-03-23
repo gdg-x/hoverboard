@@ -1,4 +1,5 @@
 {
+  "root": true,
   "extends": ["eslint:recommended", "google", "plugin:polymer/polymer-3", "prettier"],
   "parserOptions": {
     "sourceType": "module",
@@ -9,7 +10,7 @@
     "es6": true
   },
   "plugins": ["html", "polymer"],
-  "ignorePatterns": ["node_modules/"],
+  "ignorePatterns": ["node_modules/", "dist/"],
   "rules": {
     "brace-style": "off",
     "new-cap": "off",
@@ -24,9 +25,11 @@
     "linebreak-style": 0
   },
   "globals": {
+    "clients": true,
     "firebase": true,
     "ga": true,
-    "ShadyCSS": true,
-    "HOVERBOARD": true
+    "HOVERBOARD": true,
+    "importScripts": true,
+    "ShadyCSS": true
   }
 }

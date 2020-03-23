@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import * as functions from 'firebase-functions';
 import express from 'express';
 import fetch from 'node-fetch';

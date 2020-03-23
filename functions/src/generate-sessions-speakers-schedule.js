@@ -15,6 +15,7 @@ export const scheduleWrite = functions.firestore
     const scheduleConfig = functions.config().schedule;
     if (!scheduleConfig || typeof scheduleConfig.enabled === 'undefined') {
       console.error(
+        // eslint-disable-next-line
         'Schedule config is NOT set! Run `firebase functions:config:set schedule.enabled=true`, redeploy functions and try again.'
       );
       return null;
@@ -65,6 +66,7 @@ async function generateAndSaveData(changedSpeaker) {
   const scheduleConfig = functions.config().schedule;
   if (!scheduleConfig || typeof scheduleConfig.enabled === 'undefined') {
     console.error(
+      // eslint-disable-next-line
       'Schedule config is NOT set! Run `firebase functions:config:set schedule.enabled=true`, redeploy functions and try again.'
     );
     return null;

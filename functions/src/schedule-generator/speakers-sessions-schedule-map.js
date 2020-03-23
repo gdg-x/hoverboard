@@ -1,6 +1,6 @@
 function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
   let schedule = {};
-  let sessions = {};
+  const sessions = {};
   let speakers = {};
   let scheduleTags = [];
 
@@ -8,8 +8,8 @@ function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
     const day = scheduleRaw[dayKey];
     const tracksNumber = day.tracks.length;
     let dayTags = [];
-    let timeslots = [];
-    let extensions = {};
+    const timeslots = [];
+    const extensions = {};
 
     const timeslotLen = day.timeslots.length;
     for (let timeslotsIndex = 0; timeslotsIndex < timeslotLen; timeslotsIndex++) {
@@ -18,7 +18,7 @@ function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
 
       const sessionsLen = timeslot.sessions.length;
       for (let sessionIndex = 0; sessionIndex < sessionsLen; sessionIndex++) {
-        let subSessions = [];
+        const subSessions = [];
 
         const subSessionsLen = timeslot.sessions[sessionIndex].items.length;
         for (let subSessionIndex = 0; subSessionIndex < subSessionsLen; subSessionIndex++) {
@@ -167,7 +167,7 @@ function addTagTo(array, element) {
 }
 
 function updateSpeakersSessions(speakersRaw, speakerIds, session, generatedSpeakers) {
-  let result = {};
+  const result = {};
   for (let i = 0; i < speakerIds.length; i++) {
     const speaker = speakersRaw[speakerIds[i]];
     const generatedSpeaker = generatedSpeakers[speakerIds[i]];
