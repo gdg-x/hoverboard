@@ -12,6 +12,8 @@ jobs:
       script: npm run build
     - name: Lint
       script: npm run lint
+    - name: Prettier
+      script: npm run prettier
     - name: Security
       script: npm audit && npm audit --prefix functions
     - stage: Test
