@@ -208,7 +208,9 @@ class FooterSocial extends ShareMixin(PolymerElement) {
 `;
   }
 
-  static get is() {return 'footer-social';}
+  static get is() {
+    return 'footer-social';
+  }
 }
 
 window.customElements.define(FooterSocial.is, FooterSocial);

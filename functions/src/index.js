@@ -20,4 +20,4 @@ export {
   scheduleWrite,
   sessionsWrite,
   speakersWrite,
-}
+};

@@ -13,10 +13,7 @@ export const workboxConfig = {
   skipWaiting: true,
   offlineGoogleAnalytics: true,
   globDirectory: path.join(__dirname, 'dist'),
-  globPatterns: [
-    '**/*.{html,js,css,json,svg,md}',
-    'node_modules/**/*.js',
-  ],
+  globPatterns: ['**/*.{html,js,css,json,svg,md}', 'node_modules/**/*.js'],
   globIgnores: [], // Enable precaching `node_modules`
   runtimeCaching: [
     {

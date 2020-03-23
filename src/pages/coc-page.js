@@ -7,29 +7,32 @@ import '../elements/polymer-helmet.js';
 class CocPage extends PolymerElement {
   static get template() {
     return html`
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
+      <style>
+        :host {
+          display: block;
+        }
+      </style>
 
-    <polymer-helmet
-      title="{$ heroSettings.coc.title $} | {$ title $}"
-      description="{$ heroSettings.coc.metaDescription $}"
-      active="[[active]]"></polymer-helmet>
+      <polymer-helmet
+        title="{$ heroSettings.coc.title $} | {$ title $}"
+        description="{$ heroSettings.coc.metaDescription $}"
+        active="[[active]]"
+      ></polymer-helmet>
 
-    <hero-block
-      background-image="{$ heroSettings.coc.background.image $}"
-      background-color="{$ heroSettings.coc.background.color $}"
-      font-color="{$ heroSettings.coc.fontColor $}" active="[[active]]">
-      <div class="hero-title">{$ heroSettings.coc.title $}</div>
-      <p class="hero-description">{$ heroSettings.coc.description $}</p>
-    </hero-block>
+      <hero-block
+        background-image="{$ heroSettings.coc.background.image $}"
+        background-color="{$ heroSettings.coc.background.color $}"
+        font-color="{$ heroSettings.coc.fontColor $}"
+        active="[[active]]"
+      >
+        <div class="hero-title">{$ heroSettings.coc.title $}</div>
+        <p class="hero-description">{$ heroSettings.coc.description $}</p>
+      </hero-block>
 
-    <md-content md-source="[[source]]"></md-content>
+      <md-content md-source="[[source]]"></md-content>
 
-    <footer-block></footer-block>
-`;
+      <footer-block></footer-block>
+    `;
   }
 
   static get is() {

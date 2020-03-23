@@ -59,222 +59,255 @@ import { registerServiceWorker } from './service-worker-registration.js';
 class HoverboardApp extends UtilsFunctions(ScrollFunctions(ReduxMixin(PolymerElement))) {
   static get template() {
     return html`
-    <style include="shared-styles flex flex-reverse flex-alignment positioning">
-      :host {
-        display: block;
-        position: relative;
-        min-height: 100%;
-        height: 100%;
-        --paper-menu-button-dropdown-background: var(--primary-background-color);;
-        --app-drawer-content-container: {
-          display: flex;
-          flex-direction: column;
-        };
-      }
-
-      app-drawer app-toolbar {
-        padding: 36px 24px 24px;
-        border-bottom: 1px solid var(--divider-color);
-      }
-
-      app-drawer .dates {
-        margin-top: 42px;
-        font-size: 22px;
-        line-height: 0.95;
-      }
-
-      app-drawer .location {
-        margin-top: 4px;
-        font-size: 15px;
-        color: var(--secondary-text-color);
-      }
-
-      .drawer-list {
-        padding: 16px 0;
-        display: block;
-      }
-
-      .drawer-list a {
-        display: block;
-        color: var(--primary-text-color);
-        outline: 0;
-      }
-
-      app-drawer a {
-        padding: 8px 24px;
-      }
-
-      .drawer-list a.selected {
-        font-weight: 500;
-      }
-
-      app-toolbar {
-        height: auto;
-      }
-
-      .toolbar-logo {
-        --iron-image-height: 32px;
-      }
-
-      app-header-layout {
-        margin-top: -1px;
-      }
-
-      app-header.remove-shadow::before {
-        opacity: 0;
-      }
-
-      iron-pages {
-        background-color: var(--primary-background-color);;
-        min-height: 100%;
-        height: 100%;
-      }
-
-      .drawer-content iron-icon {
-        --iron-icon-width: 14px;
-        margin-left: 6px;
-      }
-
-      .bottom-drawer-link {
-        padding: 16px 24px;
-        cursor: pointer;
-      }
-
-      @media (min-width: 640px) {
-        app-toolbar {
-          padding: 0 36px;
-          height: initial;
+      <style include="shared-styles flex flex-reverse flex-alignment positioning">
+        :host {
+          display: block;
+          position: relative;
+          min-height: 100%;
+          height: 100%;
+          --paper-menu-button-dropdown-background: var(--primary-background-color);
+          --app-drawer-content-container: {
+            display: flex;
+            flex-direction: column;
+          }
         }
-      }
-    </style>
 
-    <iron-media-query
-      id="mq-phone"
-      full
-      query="(max-width: {$ mediaQueries.xs.max $})"
-      query-matches="{{isPhoneSize}}"></iron-media-query>
-    <iron-media-query
-      id="mq-laptop"
-      full
-      query="(min-width: {$ mediaQueries.md.min $})"
-      query-matches="{{isLaptopSize}}"></iron-media-query>
+        app-drawer app-toolbar {
+          padding: 36px 24px 24px;
+          border-bottom: 1px solid var(--divider-color);
+        }
 
-    <app-location route="{{appRoute}}"></app-location>
-    <app-route route="{{appRoute}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
+        app-drawer .dates {
+          margin-top: 42px;
+          font-size: 22px;
+          line-height: 0.95;
+        }
 
-    <app-drawer-layout drawer-width="300px" force-narrow fullbleed>
+        app-drawer .location {
+          margin-top: 4px;
+          font-size: 15px;
+          color: var(--secondary-text-color);
+        }
 
-      <app-drawer id="drawer" slot="drawer" opened="[[ui.isDrawerOpened]]" swipe-open>
-        <app-toolbar layout vertical start>
-          <plastic-image class="toolbar-logo" srcset="/images/logo-monochrome.svg" alt="{$ title $}"></plastic-image>
-          <h2 class="dates">{$ dates $}</h2>
-          <h3 class="location">{$ location.short $}</h3>
-        </app-toolbar>
+        .drawer-list {
+          padding: 16px 0;
+          display: block;
+        }
 
-        <div class="drawer-content" layout vertical justified flex>
-          <iron-selector
-            class="drawer-list"
-            selected="[[route.route]]"
-            attr-for-selected="path"
-            selected-class="selected"
-            role="navigation">
-            {% for nav in navigation %}
-            <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer">{$ nav.label $}</a>
-            {% endfor %}
-          </iron-selector>
+        .drawer-list a {
+          display: block;
+          color: var(--primary-text-color);
+          outline: 0;
+        }
 
-          <div>
-            <a
-              class="bottom-drawer-link"
-              on-tap="_onAddToHomescreen"
-              hidden$="[[_isAddToHomeScreenHidden(ui.addToHomescreen, viewport.isLaptopPlus)]]">
-              {$ addToHomeScreen.cta $}
-            </a>
+        app-drawer a {
+          padding: 8px 24px;
+        }
 
-            <a
-              class="bottom-drawer-link"
-              href$="[[_getTicketUrl(tickets)]]"
-              target="_blank"
-              rel="noopener noreferrer"
-              on-tap="closeDrawer"
-              ga-on="click"
-              ga-event-category="ticket button"
-              ga-event-action="buy_click"
-              layout
-              horizontal
-              center>
-              <span>{$ buyTicket $}</span>
-              <iron-icon icon="hoverboard:open-in-new"></iron-icon>
-            </a>
+        .drawer-list a.selected {
+          font-weight: 500;
+        }
+
+        app-toolbar {
+          height: auto;
+        }
+
+        .toolbar-logo {
+          --iron-image-height: 32px;
+        }
+
+        app-header-layout {
+          margin-top: -1px;
+        }
+
+        app-header.remove-shadow::before {
+          opacity: 0;
+        }
+
+        iron-pages {
+          background-color: var(--primary-background-color);
+          min-height: 100%;
+          height: 100%;
+        }
+
+        .drawer-content iron-icon {
+          --iron-icon-width: 14px;
+          margin-left: 6px;
+        }
+
+        .bottom-drawer-link {
+          padding: 16px 24px;
+          cursor: pointer;
+        }
+
+        @media (min-width: 640px) {
+          app-toolbar {
+            padding: 0 36px;
+            height: initial;
+          }
+        }
+      </style>
+
+      <iron-media-query
+        id="mq-phone"
+        full
+        query="(max-width: {$ mediaQueries.xs.max $})"
+        query-matches="{{isPhoneSize}}"
+      ></iron-media-query>
+      <iron-media-query
+        id="mq-laptop"
+        full
+        query="(min-width: {$ mediaQueries.md.min $})"
+        query-matches="{{isLaptopSize}}"
+      ></iron-media-query>
+
+      <app-location route="{{appRoute}}"></app-location>
+      <app-route
+        route="{{appRoute}}"
+        pattern="/:page"
+        data="{{routeData}}"
+        tail="{{subroute}}"
+      ></app-route>
+
+      <app-drawer-layout drawer-width="300px" force-narrow fullbleed>
+        <app-drawer id="drawer" slot="drawer" opened="[[ui.isDrawerOpened]]" swipe-open>
+          <app-toolbar layout vertical start>
+            <plastic-image
+              class="toolbar-logo"
+              srcset="/images/logo-monochrome.svg"
+              alt="{$ title $}"
+            ></plastic-image>
+            <h2 class="dates">{$ dates $}</h2>
+            <h3 class="location">{$ location.short $}</h3>
+          </app-toolbar>
+
+          <div class="drawer-content" layout vertical justified flex>
+            <iron-selector
+              class="drawer-list"
+              selected="[[route.route]]"
+              attr-for-selected="path"
+              selected-class="selected"
+              role="navigation"
+            >
+              {% for nav in navigation %}
+              <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer"
+                >{$ nav.label $}</a
+              >
+              {% endfor %}
+            </iron-selector>
+
+            <div>
+              <a
+                class="bottom-drawer-link"
+                on-tap="_onAddToHomescreen"
+                hidden$="[[_isAddToHomeScreenHidden(ui.addToHomescreen, viewport.isLaptopPlus)]]"
+              >
+                {$ addToHomeScreen.cta $}
+              </a>
+
+              <a
+                class="bottom-drawer-link"
+                href$="[[_getTicketUrl(tickets)]]"
+                target="_blank"
+                rel="noopener noreferrer"
+                on-tap="closeDrawer"
+                ga-on="click"
+                ga-event-category="ticket button"
+                ga-event-action="buy_click"
+                layout
+                horizontal
+                center
+              >
+                <span>{$ buyTicket $}</span>
+                <iron-icon icon="hoverboard:open-in-new"></iron-icon>
+              </a>
+            </div>
           </div>
-        </div>
+        </app-drawer>
 
-      </app-drawer>
+        <app-header-layout id="headerLayout" fullbleed>
+          <app-header
+            id="header"
+            slot="header"
+            effects="waterfall transparent-scroll"
+            condenses
+            fixed
+          >
+            <header-toolbar></header-toolbar>
+          </app-header>
 
-      <app-header-layout id="headerLayout" fullbleed>
+          <iron-pages
+            attr-for-selected="name"
+            selected="[[route.route]]"
+            selected-attribute="active"
+            hide-immediately
+          >
+            <home-page name="home"></home-page>
+            <blog-page name="blog" route="[[subroute]]"></blog-page>
+            <schedule-page name="schedule" route="[[subroute]]"></schedule-page>
+            <speakers-page name="speakers" route="[[subroute]]"></speakers-page>
+            <previous-speakers-page
+              name="previous-speakers"
+              route="[[subroute]]"
+            ></previous-speakers-page>
+            <team-page name="team"></team-page>
+            <faq-page name="faq"></faq-page>
+            <coc-page name="coc"></coc-page>
+          </iron-pages>
+        </app-header-layout>
+      </app-drawer-layout>
 
-        <app-header id="header" slot="header" effects="waterfall transparent-scroll" condenses fixed>
-          <header-toolbar></header-toolbar>
-        </app-header>
+      <video-dialog
+        opened="[[ui.videoDialog.opened]]"
+        video-title="[[ui.videoDialog.title]]"
+        youtube-id="[[ui.videoDialog.youtubeId]]"
+        entry-animation="scale-up-animation"
+        exit-animation="fade-out-animation"
+        disable-controls="[[!ui.videoDialog.disableControls]]"
+        fit
+        fixed-top
+      ></video-dialog>
 
-        <iron-pages attr-for-selected="name" selected="[[route.route]]" selected-attribute="active" hide-immediately>
-          <home-page name="home"></home-page>
-          <blog-page name="blog" route="[[subroute]]"></blog-page>
-          <schedule-page name="schedule" route="[[subroute]]"></schedule-page>
-          <speakers-page name="speakers" route="[[subroute]]"></speakers-page>
-          <previous-speakers-page name="previous-speakers" route="[[subroute]]"></previous-speakers-page>
-          <team-page name="team"></team-page>
-          <faq-page name="faq"></faq-page>
-          <coc-page name="coc"></coc-page>
-        </iron-pages>
+      <speaker-details
+        opened="[[dialogs.speaker.isOpened]]"
+        speaker="[[dialogs.speaker.data]]"
+        with-backdrop="[[viewport.isTabletPlus]]"
+        no-cancel-on-outside-click="[[viewport.isPhone]]"
+      ></speaker-details>
 
-      </app-header-layout>
-    </app-drawer-layout>
+      <previous-speaker-details
+        opened="[[dialogs.previousSpeaker.isOpened]]"
+        speaker="[[dialogs.previousSpeaker.data]]"
+        with-backdrop="[[viewport.isTabletPlus]]"
+        no-cancel-on-outside-click="[[viewport.isPhone]]"
+      ></previous-speaker-details>
 
-    <video-dialog
-      opened="[[ui.videoDialog.opened]]"
-      video-title="[[ui.videoDialog.title]]"
-      youtube-id="[[ui.videoDialog.youtubeId]]"
-      entry-animation="scale-up-animation"
-      exit-animation="fade-out-animation"
-      disable-controls="[[!ui.videoDialog.disableControls]]"
-      fit
-      fixed-top></video-dialog>
+      <session-details
+        opened="[[dialogs.session.isOpened]]"
+        session="[[dialogs.session.data]]"
+        with-backdrop="[[viewport.isTabletPlus]]"
+        no-cancel-on-outside-click="[[viewport.isPhone]]"
+      ></session-details>
 
-    <speaker-details
-      opened="[[dialogs.speaker.isOpened]]"
-      speaker="[[dialogs.speaker.data]]"
-      with-backdrop="[[viewport.isTabletPlus]]"
-      no-cancel-on-outside-click="[[viewport.isPhone]]"></speaker-details>
+      <feedback-dialog
+        opened="[[dialogs.feedback.isOpened]]"
+        session="[[dialogs.feedback.data]]"
+        with-backdrop
+      ></feedback-dialog>
 
-    <previous-speaker-details
-      opened="[[dialogs.previousSpeaker.isOpened]]"
-      speaker="[[dialogs.previousSpeaker.data]]"
-      with-backdrop="[[viewport.isTabletPlus]]"
-      no-cancel-on-outside-click="[[viewport.isPhone]]"></previous-speaker-details>
+      <subscribe-dialog
+        opened="[[dialogs.subscribe.isOpened]]"
+        data="[[dialogs.subscribe.data]]"
+        with-backdrop
+        no-cancel-on-outside-click="[[viewport.isPhone]]"
+      >
+      </subscribe-dialog>
 
-    <session-details
-      opened="[[dialogs.session.isOpened]]"
-      session="[[dialogs.session.data]]"
-      with-backdrop="[[viewport.isTabletPlus]]"
-      no-cancel-on-outside-click="[[viewport.isPhone]]"></session-details>
+      <signin-dialog opened="[[dialogs.signin.isOpened]]" with-backdrop></signin-dialog>
 
-    <feedback-dialog
-      opened="[[dialogs.feedback.isOpened]]"
-      session="[[dialogs.feedback.data]]"
-      with-backdrop></feedback-dialog>
-
-    <subscribe-dialog
-      opened="[[dialogs.subscribe.isOpened]]"
-      data="[[dialogs.subscribe.data]]"
-      with-backdrop no-cancel-on-outside-click="[[viewport.isPhone]]">
-    </subscribe-dialog>
-
-    <signin-dialog opened="[[dialogs.signin.isOpened]]" with-backdrop></signin-dialog>
-
-    <hoverboard-analytics></hoverboard-analytics>
-    <toast-element></toast-element>
-`;
+      <hoverboard-analytics></hoverboard-analytics>
+      <toast-element></toast-element>
+    `;
   }
 
   static get is() {
@@ -376,8 +409,9 @@ class HoverboardApp extends UtilsFunctions(ScrollFunctions(ReduxMixin(PolymerEle
     log('Hoverboard is ready!');
     this.removeAttribute('unresolved');
     userActions.updateUser();
-    notificationsActions.initializeMessaging()
-        .then(() => this.dispatchAction(notificationsActions.getToken()));
+    notificationsActions
+      .initializeMessaging()
+      .then(() => this.dispatchAction(notificationsActions.getToken()));
   }
 
   closeDrawer() {
@@ -390,7 +424,7 @@ class HoverboardApp extends UtilsFunctions(ScrollFunctions(ReduxMixin(PolymerEle
     }
     const hasSubroute = subroutePath !== '' && subroutePath !== '/';
 
-    if (!this.route || (page !== this.route.route)) {
+    if (!this.route || page !== this.route.route) {
       !hasSubroute && this.scrollToY(0, 100);
       routingActions.setRoute(page);
       this.$.header.classList.remove('remove-shadow');
@@ -440,16 +474,15 @@ class HoverboardApp extends UtilsFunctions(ScrollFunctions(ReduxMixin(PolymerEle
   _onAddToHomescreen() {
     if (!this.ui.addToHomescreen) this.closeDrawer();
     this.ui.addToHomescreen.prompt();
-    this.ui.addToHomescreen.userChoice
-        .then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            ga('send', 'event', 'add_to_home_screen_prompt', 'accepted');
-          } else {
-            ga('send', 'event', 'add_to_home_screen_prompt', 'dismissed');
-          }
-          uiActions.setAddToHomeScreen(null);
-          this.closeDrawer();
-        });
+    this.ui.addToHomescreen.userChoice.then((choiceResult) => {
+      if (choiceResult.outcome === 'accepted') {
+        ga('send', 'event', 'add_to_home_screen_prompt', 'accepted');
+      } else {
+        ga('send', 'event', 'add_to_home_screen_prompt', 'dismissed');
+      }
+      uiActions.setAddToHomeScreen(null);
+      this.closeDrawer();
+    });
   }
 }
 

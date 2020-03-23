@@ -4,7 +4,6 @@ import serviceAccount from '../serviceAccount';
 let firestore = null;
 export function initializeFirebase() {
   return new Promise((resolve) => {
-
     const firebaseApp = admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
     });
@@ -13,6 +12,4 @@ export function initializeFirebase() {
   });
 }
 
-export {
-  firestore,
-}
+export { firestore };

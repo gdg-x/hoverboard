@@ -10,61 +10,63 @@ import './shared-styles.js';
 class SubscribeBlock extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
-    <style include="shared-styles flex flex-alignment">      :host {
-        display: flex;
-        width: 100%;
-        background: var(--default-primary-color);
-        color: #fff;
-        padding: 16px 0;
-      }
-
-      .description {
-        font-size: 24px;
-        line-height: 1.5;
-        margin: 0 0 16px;
-      }
-
-      paper-button {
-        color: #fff;
-      }
-
-      paper-button[disabled] {
-        background: var(--default-primary-color);
-        color: #fff;
-      }
-
-      @media (min-width: 640px) {
+      <style include="shared-styles flex flex-alignment">
         :host {
-          padding: 32px 0;
+          display: flex;
+          width: 100%;
+          background: var(--default-primary-color);
+          color: #fff;
+          padding: 16px 0;
         }
 
         .description {
-          font-size: 32px;
-          margin: 0 0 24px;
-          text-align: center;
+          font-size: 24px;
+          line-height: 1.5;
+          margin: 0 0 16px;
         }
-      }
 
+        paper-button {
+          color: #fff;
+        }
 
-    </style>
+        paper-button[disabled] {
+          background: var(--default-primary-color);
+          color: #fff;
+        }
 
-    <div class="container" layout vertical center$="[[viewport.isTabletPlus]]">
-      <div class="description"> {$ subscribeBlock.callToAction.description $}</div>
-      <div class="cta-button">
-        <paper-button
-          class="animated icon-right"
-          disabled$="[[subscribed]]"
-          on-tap="_subscribe"
-          ga-on="click"
-          ga-event-category="attendees"
-          ga-event-action="subscribe"
-          ga-event-label="subscribe block">
-          <span class="cta-label">[[ctaLabel]]</span>
-          <iron-icon icon$="hoverboard:[[ctaIcon]]"></iron-icon>
-        </paper-button>
+        @media (min-width: 640px) {
+          :host {
+            padding: 32px 0;
+          }
+
+          .description {
+            font-size: 32px;
+            margin: 0 0 24px;
+            text-align: center;
+          }
+        }
+      </style>
+
+      <div class="container" layout vertical center$="[[viewport.isTabletPlus]]">
+        <div class="description">
+          {$ subscribeBlock.callToAction.description $}
+        </div>
+        <div class="cta-button">
+          <paper-button
+            class="animated icon-right"
+            disabled$="[[subscribed]]"
+            on-tap="_subscribe"
+            ga-on="click"
+            ga-event-category="attendees"
+            ga-event-action="subscribe"
+            ga-event-label="subscribe block"
+          >
+            <span class="cta-label">[[ctaLabel]]</span>
+            <iron-icon icon$="hoverboard:[[ctaIcon]]"></iron-icon>
+          </paper-button>
+        </div>
       </div>
-    </div>
-`;
+    `;
   }
 
   static get is() {
@@ -106,8 +108,7 @@ class SubscribeBlock extends ReduxMixin(PolymerElement) {
     if (subscribed) {
       this.ctaIcon = 'checked';
       this.ctaLabel = '{$  subscribeBlock.subscribed $}';
-    }
-    else {
+    } else {
       this.ctaIcon = 'arrow-right-circle';
       this.ctaLabel = '{$  subscribeBlock.callToAction.label $}';
     }

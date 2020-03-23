@@ -1,4 +1,3 @@
-
 /* Bouncing animations*/
 
 import '@polymer/polymer';
@@ -76,5 +75,3 @@ documentContainer.innerHTML = `<dom-module id="fade-animations">
 </dom-module>`;
 
 document.head.appendChild(documentContainer.content);
-
-

@@ -1,4 +1,3 @@
-
 /*
 A set of layout attributes that let you specify layout properties directly in markup.
 You must include this file in every element that needs to use them.

@@ -12,95 +12,100 @@ import '../shared-styles.js';
 class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], PolymerElement)) {
   static get template() {
     return html`
-    <style include="shared-styles flex flex-alignment">
-      :host {
-        margin: 0;
-        display: block;
-        width: 85%;
-        max-width: 420px;
-        background: var(--primary-background-color);
-        box-shadow: var(--box-shadow);
+      <style include="shared-styles flex flex-alignment">
+        :host {
+          margin: 0;
+          display: block;
+          width: 85%;
+          max-width: 420px;
+          background: var(--primary-background-color);
+          box-shadow: var(--box-shadow);
 
-        --paper-input-container-focus-color: var(--default-primary-color);
-        --paper-input-container-color: var(--secondary-text-color);
-      }
+          --paper-input-container-focus-color: var(--default-primary-color);
+          --paper-input-container-color: var(--secondary-text-color);
+        }
 
-      .dialog-header {
-        margin-bottom: 24px;
-        padding: 32px 32px 16px;
-        background: var(--default-primary-color);
-        color: #fff;
-        font-size: 20px;
-        line-height: 1.5;
-      }
+        .dialog-header {
+          margin-bottom: 24px;
+          padding: 32px 32px 16px;
+          background: var(--default-primary-color);
+          color: #fff;
+          font-size: 20px;
+          line-height: 1.5;
+        }
 
-      paper-input {
-        margin: 16px 32px 0;
-      }
+        paper-input {
+          margin: 16px 32px 0;
+        }
 
-      paper-input:first-of-type {
-        margin-top: 0;
-      }
+        paper-input:first-of-type {
+          margin-top: 0;
+        }
 
-      .action-buttons {
-        margin: 32px 24px 24px;
-      }
+        .action-buttons {
+          margin: 32px 24px 24px;
+        }
 
-      .close-button {
-        color: var(--secondary-text-color);
-      }
+        .close-button {
+          color: var(--secondary-text-color);
+        }
 
-      .general-error {
-        margin: 0 32px;
-        color: var(--error-color);
-      }
+        .general-error {
+          margin: 0 32px;
+          color: var(--error-color);
+        }
+      </style>
 
-    </style>
+      <div class="dialog-content" layout vertical>
+        <div class="dialog-header">[[title]]</div>
+        <div hidden$="[[!errorOccurred]]" class="general-error">
+          {$ subscribeBlock.generalError $}
+        </div>
+        <paper-input
+          id="firstFieldInput"
+          on-touchend="_focus"
+          label="[[firstFieldLabel]]"
+          value="{{firstFieldValue}}"
+          autocomplete="off"
+        >
+        </paper-input>
+        <paper-input
+          id="secondFieldInput"
+          on-touchend="_focus"
+          label="[[secondFieldLabel]]"
+          value="{{secondFieldValue}}"
+          autocomplete="off"
+        >
+        </paper-input>
+        <paper-input
+          id="emailInput"
+          on-touchend="_focus"
+          label="{$ subscribeBlock.emailAddress $} *"
+          value="{{email}}"
+          required
+          auto-validate$="[[validate]]"
+          error-message="{$ subscribeBlock.emailRequired $}"
+          autocomplete="off"
+        >
+        </paper-input>
+        <div class="action-buttons" layout horizontal justified>
+          <paper-button class="close-button" on-tap="_closeDialog"
+            >{$ subscribeBlock.close $}
+          </paper-button>
 
-    <div class="dialog-content" layout vertical>
-      <div class="dialog-header">[[title]]</div>
-      <div hidden$="[[!errorOccurred]]" class="general-error">{$ subscribeBlock.generalError $}</div>
-      <paper-input
-        id="firstFieldInput"
-        on-touchend="_focus"
-        label="[[firstFieldLabel]]"
-        value="{{firstFieldValue}}"
-        autocomplete="off">
-      </paper-input>
-      <paper-input
-        id="secondFieldInput"
-        on-touchend="_focus"
-        label="[[secondFieldLabel]]"
-        value="{{secondFieldValue}}"
-        autocomplete="off">
-      </paper-input>
-      <paper-input
-        id="emailInput"
-        on-touchend="_focus"
-        label="{$ subscribeBlock.emailAddress $} *"
-        value="{{email}}"
-        required
-        auto-validate$="[[validate]]"
-        error-message="{$ subscribeBlock.emailRequired $}"
-        autocomplete="off">
-      </paper-input>
-      <div class="action-buttons" layout horizontal justified>
-        <paper-button class="close-button" on-tap="_closeDialog">{$ subscribeBlock.close $}
-        </paper-button>
-
-        <paper-button
-          on-tap="_subscribe"
-          ga-on="click"
-          ga-event-category="attendees"
-          ga-event-action="subscribe"
-          ga-event-label="subscribe block"
-          primary>
-         [[submitLabel]]
-        </paper-button>
+          <paper-button
+            on-tap="_subscribe"
+            ga-on="click"
+            ga-event-category="attendees"
+            ga-event-action="subscribe"
+            ga-event-label="subscribe block"
+            primary
+          >
+            [[submitLabel]]
+          </paper-button>
+        </div>
       </div>
-
-    </div>
-`;
+    `;
   }
 
   static get is() {
@@ -145,10 +150,7 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
   }
 
   static get observers() {
-    return [
-      '_handleDialogToggled(opened, data)',
-      '_handleSubscribed(subscribed)',
-    ];
+    return ['_handleDialogToggled(opened, data)', '_handleSubscribed(subscribed)'];
   }
 
   ready() {
@@ -234,8 +236,7 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
   }
 
   _windowResize() {
-    this.keyboardOpened = this.ui.viewport.isPhone &&
-      window.innerHeight < this.initialHeight - 100;
+    this.keyboardOpened = this.ui.viewport.isPhone && window.innerHeight < this.initialHeight - 100;
   }
 
   _resize(e) {

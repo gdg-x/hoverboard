@@ -9,30 +9,29 @@ Adjust the color scheme to your conference style.
 ```css
 :host {
   /* Primary colors */
-  --dark-primary-color:       #F57C00;
-  --default-primary-color:    #FF9800;
-  --light-primary-color:      #FFE0B2;
-  --text-primary-color:       #212121; /* text / icons */
+  --dark-primary-color: #f57c00;
+  --default-primary-color: #ff9800;
+  --light-primary-color: #ffe0b2;
+  --text-primary-color: #212121; /* text / icons */
 
   /* Accent colors */
-  --accent-color:             #03A9F4;
+  --accent-color: #03a9f4;
 
   /* Background colors */
-  --primary-background-color:   #FFE0B2;
+  --primary-background-color: #ffe0b2;
 
   /* Text colors */
-  --primary-text-color:       #212121;
-  --secondary-text-color:     #727272;
-  --disabled-text-color:      #BDBDBD;
+  --primary-text-color: #212121;
+  --secondary-text-color: #727272;
+  --disabled-text-color: #bdbdbd;
 
   /* Other colors */
-  --divider-color:            #B6B6B6;
+  --divider-color: #b6b6b6;
 }
 ```
 
-**Tip:** Choose base colors with [Material Palette][Material Palette]
+**Tip:** Choose base colors with [Material Palette][material palette]
 ![material_design_palette_generator](https://cloud.githubusercontent.com/assets/2954281/17750340/a02f8e76-64ca-11e6-80f0-53392b30f89a.png)
-
 
 ### Hero
 
@@ -76,4 +75,4 @@ Edit Web app colors via `webapp` in `data/settings.json`
 
 Learn how to [deploy the app to the web](04-deploy.md).
 
-[Material Palette]: https://www.materialpalette.com/
+[material palette]: https://www.materialpalette.com/

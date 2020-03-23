@@ -6,90 +6,90 @@ import './shared-styles.js';
 class HeroBlock extends PolymerElement {
   static get template() {
     return html`
-    <style include="shared-styles flex flex-alignment positioning">
-      :host {
-        margin-top: -56px;
-        display: block;
-        border-bottom: 1px solid var(--divider-color);
-      }
-
-      .hero-block {
-        height: 100%;
-        position: relative;
-        color: inherit;
-      }
-
-      .hero-overlay {
-        background-color: rgba(0, 0, 0, 0.6);
-        opacity: 0;
-        transition: opacity 0.3s;
-        position: absolute;
-      }
-
-      .hero-overlay[show] {
-        opacity: 1;
-      }
-
-      .hero-image {
-        transition: background-color 0.3s;
-        position: absolute;
-      }
-
-      .container {
-        padding: 0;
-        width: 100%;
-        height: unset;
-        z-index: 0;
-        position: unset;
-      }
-
-      .hero-content {
-        padding: 80px 32px 32px;
-        position: unset;
-      }
-
-      div ::slotted(.hero-title) {
-        margin: 30px 0;
-        font-size: 40px;
-      }
-
-      div ::slotted(.hero-description) {
-        margin-bottom: 30px;
-        max-width: 600px;
-      }
-
-      @media (min-width: 812px) {
+      <style include="shared-styles flex flex-alignment positioning">
         :host {
-          margin-top: -64px;
+          margin-top: -56px;
+          display: block;
+          border-bottom: 1px solid var(--divider-color);
+        }
+
+        .hero-block {
+          height: 100%;
+          position: relative;
+          color: inherit;
+        }
+
+        .hero-overlay {
+          background-color: rgba(0, 0, 0, 0.6);
+          opacity: 0;
+          transition: opacity 0.3s;
+          position: absolute;
+        }
+
+        .hero-overlay[show] {
+          opacity: 1;
+        }
+
+        .hero-image {
+          transition: background-color 0.3s;
+          position: absolute;
+        }
+
+        .container {
+          padding: 0;
+          width: 100%;
+          height: unset;
+          z-index: 0;
+          position: unset;
         }
 
         .hero-content {
-          padding-top: 120px;
-          padding-bottom: 60px;
+          padding: 80px 32px 32px;
+          position: unset;
         }
-      }
 
-    </style>
+        div ::slotted(.hero-title) {
+          margin: 30px 0;
+          font-size: 40px;
+        }
 
-    <div class="hero-block" style$="color: [[fontColor]]" layout start vertical center-justified>
-      <plastic-image
-        class="hero-image"
-        srcset="[[backgroundImage]]"
-        style$="background-color: [[backgroundColor]]"
-        sizing="cover"
-        lazy-load
-        preload
-        fade
-        fit></plastic-image>
-      <div class="hero-overlay" show$="[[_showOverlay(backgroundImage)]]" fit></div>
-      <div class="container">
-        <div class="hero-content">
-          <slot></slot>
+        div ::slotted(.hero-description) {
+          margin-bottom: 30px;
+          max-width: 600px;
+        }
+
+        @media (min-width: 812px) {
+          :host {
+            margin-top: -64px;
+          }
+
+          .hero-content {
+            padding-top: 120px;
+            padding-bottom: 60px;
+          }
+        }
+      </style>
+
+      <div class="hero-block" style$="color: [[fontColor]]" layout start vertical center-justified>
+        <plastic-image
+          class="hero-image"
+          srcset="[[backgroundImage]]"
+          style$="background-color: [[backgroundColor]]"
+          sizing="cover"
+          lazy-load
+          preload
+          fade
+          fit
+        ></plastic-image>
+        <div class="hero-overlay" show$="[[_showOverlay(backgroundImage)]]" fit></div>
+        <div class="container">
+          <div class="hero-content">
+            <slot></slot>
+          </div>
         </div>
       </div>
-    </div>
-    <slot name="bottom"></slot>
-`;
+      <slot name="bottom"></slot>
+    `;
   }
 
   static get is() {
@@ -107,9 +107,7 @@ class HeroBlock extends PolymerElement {
   }
 
   static get observers() {
-    return [
-      '_setState(active, backgroundImage, backgroundColor, fontColor, hideLogo)',
-    ];
+    return ['_setState(active, backgroundImage, backgroundColor, fontColor, hideLogo)'];
   }
 
   _showOverlay(backgroundImage) {

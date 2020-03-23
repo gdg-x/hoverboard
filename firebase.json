@@ -8,16 +8,13 @@
   },
   "hosting": {
     "public": "dist",
-    "rewrites": [{
-      "source": "**",
-      "function": "prerender"
-    }],
-    "ignore": [
-      "/test/**",
-      "database.rules.json",
-      "firebase.json",
-      "README.md"
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "prerender"
+      }
     ],
+    "ignore": ["/test/**", "database.rules.json", "firebase.json", "README.md"],
     "headers": [
       {
         "source": "**",
@@ -43,8 +40,6 @@
     ]
   },
   "functions": {
-    "predeploy": [
-      "npm --prefix ./functions run build"
-    ]
+    "predeploy": ["npm --prefix ./functions run build"]
   }
 }

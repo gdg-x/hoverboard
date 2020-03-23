@@ -13,14 +13,14 @@ Or you may use [Docker container for development](05-docker.md)
 1. Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/): `npx firebase login`
 1. Update [Hoverboard config](/config) and [Resources](/data). More info can be found [here](01-configure-app.md)
 1. Import initial data to the Firebase Database
-    * Generate `serviceAccount.json` file
-      - Go to [console.firebase.google.com](https://console.firebase.google.com) -> Project settings -> Service accounts
-      - Ensure that **Node.js** is selected and press **Generate new private key**
-      - Read the warning and press **Generate key**
-      - Save the file as `serviceAccount.json` and to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
-    * Enable Firestore in web console at [console.firebase.google.com](https://console.firebase.google.com) -> Database -> Cloud Firestore -> Create database. Select **locked mode** and press **Enable**
-    * [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
-    * Run `npm run firestore:init`
+   - Generate `serviceAccount.json` file
+     - Go to [console.firebase.google.com](https://console.firebase.google.com) -> Project settings -> Service accounts
+     - Ensure that **Node.js** is selected and press **Generate new private key**
+     - Read the warning and press **Generate key**
+     - Save the file as `serviceAccount.json` and to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
+   - Enable Firestore in web console at [console.firebase.google.com](https://console.firebase.google.com) -> Database -> Cloud Firestore -> Create database. Select **locked mode** and press **Enable**
+   - [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
+   - Run `npm run firestore:init`
 
 ## Directory structure
 
@@ -44,27 +44,26 @@ The diagram below is a brief summary of the directories within the project.
     |   |---pages/
     |
 
-*   `appengine/` contains App Engine application that runs CRON job to send scheduled push notifications.
-*   `dist/` is the directory to deploy to production.
-*   `config/` folder for core project setup.
-*   `data/` folder with all data for the template including rest of config and resources for pages.
-*   `docs/` documentation.
-*   `functions/` directory with Firebase [cloud functions](https://firebase.google.com/docs/functions/) used for notifications, optimizations, saving data, etc.
-*   `images/` is for static images.
-*   `internals/` contains scripts that helps user to work with the project and it's data ([docs](./firebase-utils.md)).
-*   `node_modules/` is the place of Node dependencies.
-*   `src/` is where you store all of your source code and do all of your development.
-*   `effects/` is where you keep your effects for instance `transparent-scroll.html` that helps to achieve a transparent toolbar before the scroll.
-*   `elements/` is where you keep your custom elements.
-*   `pages/` is where you keep your pages' description.
-
+- `appengine/` contains App Engine application that runs CRON job to send scheduled push notifications.
+- `dist/` is the directory to deploy to production.
+- `config/` folder for core project setup.
+- `data/` folder with all data for the template including rest of config and resources for pages.
+- `docs/` documentation.
+- `functions/` directory with Firebase [cloud functions](https://firebase.google.com/docs/functions/) used for notifications, optimizations, saving data, etc.
+- `images/` is for static images.
+- `internals/` contains scripts that helps user to work with the project and it's data ([docs](./firebase-utils.md)).
+- `node_modules/` is the place of Node dependencies.
+- `src/` is where you store all of your source code and do all of your development.
+- `effects/` is where you keep your effects for instance `transparent-scroll.html` that helps to achieve a transparent toolbar before the scroll.
+- `elements/` is where you keep your custom elements.
+- `pages/` is where you keep your pages' description.
 
 ## Build and serve
 
 1. Run locally
-   * `npm start`
+   - `npm start`
 1. Deploy
-   * `npm run deploy`
+   - `npm run deploy`
 
 There are two CLI flags you can set when running npm scripts:
 
@@ -81,7 +80,7 @@ The common npm scripts are:
 Below is the grid of the common npm script commands and thier supported CLI flags.
 
 |             | `start`                               | `build`                               | `serve`                               | `deploy`                              |
-|-------------|---------------------------------------|---------------------------------------|---------------------------------------|---------------------------------------|
+| ----------- | ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
 | `NODE_ENV`  | `development`                         | `production`\|`development`           | `production`\|`development`           | `production`                          |
 | `BUILD_ENV` | `development`\|`production`\|`custom` | `production`\|`development`\|`custom` | `production`\|`development`\|`custom` | `production`\|`development`\|`custom` |
 

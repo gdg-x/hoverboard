@@ -12,173 +12,177 @@ import { DIALOGS } from '../redux/constants.js';
 class PreviousSpeakersPage extends UtilsFunctions(ReduxMixin(PolymerElement)) {
   static get template() {
     return html`
-    <style include="shared-styles flex flex-alignment positioning">
-      :host {
-        display: block;
-        height: 100%;
-      }
-
-      .container {
-        margin: 32px auto;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-gap: 32px;
-        min-height: 80%;
-      }
-
-      .speaker:hover .photo {
-        transform: scale(0.95);
-      }
-
-      .photo {
-        width: 96px;
-        height: 96px;
-        background-color: var(--contrast-additional-background-color);
-        border: 3px solid var(--contrast-additional-background-color);
-        border-radius: 50%;
-        overflow: hidden;
-        transform: translateZ(0);
-        transition: transform var(--animation);
-        flex-shrink: 0;
-      }
-
-      .company-logo {
-        max-width: 88px;
-        height: 16px;
-        margin: 8px 0;
-      }
-
-      .details {
-        margin-left: 16px;
-        color: var(--primary-text-color);
-      }
-
-      .name {
-        font-size: 20px;
-        line-height: 1;
-      }
-
-      .origin {
-        margin-top: 4px;
-        font-size: 14px;
-        line-height: 1.1;
-      }
-
-      .sessions {
-        font-size: 13px;
-        line-height: 1.1;
-        font-weight: bold;
-      }
-
-      .sessions h5 {
-        margin-right: 4px;
-        font-weight: normal;
-      }
-
-      paper-progress {
-        width: 100%;
-        --paper-progress-active-color: var(--default-primary-color);
-        --paper-progress-secondary-color: var(--default-primary-color);
-      }
-
-      @media (min-width: 640px) {
-        .container {
-          grid-template-columns: repeat(2, 1fr);
+      <style include="shared-styles flex flex-alignment positioning">
+        :host {
+          display: block;
+          height: 100%;
         }
-      }
 
-      @media (min-width: 812px) {
         .container {
-          grid-gap: 64px 32px;
+          margin: 32px auto;
+          display: grid;
+          grid-template-columns: 1fr;
+          grid-gap: 32px;
+          min-height: 80%;
+        }
+
+        .speaker:hover .photo {
+          transform: scale(0.95);
         }
 
         .photo {
-          width: 115px;
-          height: 115px;
-          border-width: 5px;
+          width: 96px;
+          height: 96px;
+          background-color: var(--contrast-additional-background-color);
+          border: 3px solid var(--contrast-additional-background-color);
+          border-radius: 50%;
+          overflow: hidden;
+          transform: translateZ(0);
+          transition: transform var(--animation);
+          flex-shrink: 0;
+        }
+
+        .company-logo {
+          max-width: 88px;
+          height: 16px;
+          margin: 8px 0;
+        }
+
+        .details {
+          margin-left: 16px;
+          color: var(--primary-text-color);
         }
 
         .name {
-          font-size: 24px;
-        }
-      }
-
-      @media (min-width: 1024px) {
-        .container {
-          grid-template-columns: repeat(3, 1fr);
-          grid-gap: 64px 32px;
+          font-size: 20px;
+          line-height: 1;
         }
 
-        .photo {
-          width: 128px;
-          height: 128px;
+        .origin {
+          margin-top: 4px;
+          font-size: 14px;
+          line-height: 1.1;
         }
-      }
 
-    </style>
+        .sessions {
+          font-size: 13px;
+          line-height: 1.1;
+          font-weight: bold;
+        }
 
-    <polymer-helmet
-      title="{$ heroSettings.previousSpeakers.title $} | {$ title $}"
-      details="{$ heroSettings.previousSpeakers.metaDescription $}"
-      active="[[_setHelmetData(active, isDialogOpened)]]"></polymer-helmet>
+        .sessions h5 {
+          margin-right: 4px;
+          font-weight: normal;
+        }
 
-    <app-route route="[[route]]" pattern="/:speakerId" data="{{routeData}}"></app-route>
+        paper-progress {
+          width: 100%;
+          --paper-progress-active-color: var(--default-primary-color);
+          --paper-progress-secondary-color: var(--default-primary-color);
+        }
 
-    <hero-block
-      background-image="{$ heroSettings.previousSpeakers.background.image $}"
-      background-color="{$ heroSettings.previousSpeakers.background.color $}"
-      font-color="{$ heroSettings.previousSpeakers.fontColor $}"
-      active="[[active]]">
-      <div class="hero-title">{$ heroSettings.previousSpeakers.title $}</div>
-      <p class="hero-details">{$ heroSettings.previousSpeakers.details $}</p>
-    </hero-block>
+        @media (min-width: 640px) {
+          .container {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
 
-    <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
+        @media (min-width: 812px) {
+          .container {
+            grid-gap: 64px 32px;
+          }
 
-    <content-loader
-      class="container"
-      card-padding="0"
-      card-height="128px"
-      avatar-size="128px"
-      avatar-circle="64px"
-      items-count="{$ contentLoaders.previousSpeakers.itemsCount $}"
-      hidden$="[[contentLoaderVisibility]]"></content-loader>
-    <div class="container">
-      <template is="dom-repeat" items="[[speakers]]" as="speaker">
-        <a
-          class="speaker"
-          href$="/previous-speakers/[[speaker.id]]/"
-          ga-on="click"
-          ga-event-category="previous speaker"
-          ga-event-action="open details"
-          ga-event-label$="[[speaker.name]]"
-          layout
-          horizontal>
-          <plastic-image
-            class="photo"
-            srcset="[[speaker.photoUrl]]"
-            sizing="cover"
-            lazy-load
-            preload
-            fade></plastic-image>
+          .photo {
+            width: 115px;
+            height: 115px;
+            border-width: 5px;
+          }
 
-          <div class="details" layout vertical center-justified start>
-            <h2 class="name">[[speaker.name]]</h2>
-            <div class="origin">[[speaker.country]]</div>
+          .name {
+            font-size: 24px;
+          }
+        }
 
-            <img class="company-logo" src$="[[speaker.companyLogo]]">
+        @media (min-width: 1024px) {
+          .container {
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 64px 32px;
+          }
 
-            <div class="sessions">
-              <h5>{$ speakers.previousYears $}:</h5>
-              [[_getYears(speaker.sessions)]]
+          .photo {
+            width: 128px;
+            height: 128px;
+          }
+        }
+      </style>
+
+      <polymer-helmet
+        title="{$ heroSettings.previousSpeakers.title $} | {$ title $}"
+        details="{$ heroSettings.previousSpeakers.metaDescription $}"
+        active="[[_setHelmetData(active, isDialogOpened)]]"
+      ></polymer-helmet>
+
+      <app-route route="[[route]]" pattern="/:speakerId" data="{{routeData}}"></app-route>
+
+      <hero-block
+        background-image="{$ heroSettings.previousSpeakers.background.image $}"
+        background-color="{$ heroSettings.previousSpeakers.background.color $}"
+        font-color="{$ heroSettings.previousSpeakers.fontColor $}"
+        active="[[active]]"
+      >
+        <div class="hero-title">{$ heroSettings.previousSpeakers.title $}</div>
+        <p class="hero-details">{$ heroSettings.previousSpeakers.details $}</p>
+      </hero-block>
+
+      <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
+
+      <content-loader
+        class="container"
+        card-padding="0"
+        card-height="128px"
+        avatar-size="128px"
+        avatar-circle="64px"
+        items-count="{$ contentLoaders.previousSpeakers.itemsCount $}"
+        hidden$="[[contentLoaderVisibility]]"
+      ></content-loader>
+      <div class="container">
+        <template is="dom-repeat" items="[[speakers]]" as="speaker">
+          <a
+            class="speaker"
+            href$="/previous-speakers/[[speaker.id]]/"
+            ga-on="click"
+            ga-event-category="previous speaker"
+            ga-event-action="open details"
+            ga-event-label$="[[speaker.name]]"
+            layout
+            horizontal
+          >
+            <plastic-image
+              class="photo"
+              srcset="[[speaker.photoUrl]]"
+              sizing="cover"
+              lazy-load
+              preload
+              fade
+            ></plastic-image>
+
+            <div class="details" layout vertical center-justified start>
+              <h2 class="name">[[speaker.name]]</h2>
+              <div class="origin">[[speaker.country]]</div>
+
+              <img class="company-logo" src$="[[speaker.companyLogo]]" />
+
+              <div class="sessions">
+                <h5>{$ speakers.previousYears $}:</h5>
+                [[_getYears(speaker.sessions)]]
+              </div>
             </div>
-          </div>
-        </a>
-      </template>
-    </div>
+          </a>
+        </template>
+      </div>
 
-    <footer-block></footer-block>
-`;
+      <footer-block></footer-block>
+    `;
   }
 
   static get is() {
@@ -267,7 +271,12 @@ class PreviousSpeakersPage extends UtilsFunctions(ReduxMixin(PolymerElement)) {
   }
 
   _getYears(sessions) {
-    return sessions && Object.keys(sessions).sort((a, b) => b - a).join(', ');
+    return (
+      sessions &&
+      Object.keys(sessions)
+        .sort((a, b) => b - a)
+        .join(', ')
+    );
   }
 }
 

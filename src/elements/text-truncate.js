@@ -4,9 +4,7 @@ import { clamp } from 'clamp-js-main';
 
 class TextTruncate extends PolymerElement {
   static get template() {
-    return html`
-    <slot id="text"></slot>
-`;
+    return html` <slot id="text"></slot> `;
   }
 
   static get is() {
@@ -26,7 +24,7 @@ class TextTruncate extends PolymerElement {
     super.ready();
     this._observer = new FlattenedNodesObserver(this.$.text, (info) => {
       const target = info.addedNodes.filter(function (node) {
-        return (node.nodeType === Node.ELEMENT_NODE);
+        return node.nodeType === Node.ELEMENT_NODE;
       })[0];
       clamp(target, { clamp: this._getClampValue() });
     });

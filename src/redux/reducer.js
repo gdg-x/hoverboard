@@ -223,11 +223,9 @@ export const feedbackReducer = (state = initialState.feedback, action) => {
     case FETCH_PREVIOUS_FEEDBACK_SUCCESS:
       return Object.assign({}, state, {
         fetching: false,
-        [action.payload.collection]: Object.assign(
-            {},
-            state[action.payload.collection],
-            { [action.payload.dbItem]: action.payload.previousFeedback },
-        ),
+        [action.payload.collection]: Object.assign({}, state[action.payload.collection], {
+          [action.payload.dbItem]: action.payload.previousFeedback,
+        }),
       });
 
     case SEND_FEEDBACK:
@@ -245,14 +243,13 @@ export const feedbackReducer = (state = initialState.feedback, action) => {
     case SEND_FEEDBACK_SUCCESS:
       return Object.assign({}, state, {
         adding: false,
-        [action.payload.collection]:
-          Object.assign({}, state[action.payload.collection], {
-            [action.payload.dbItem]: {
-              contentRating: action.payload.contentRating,
-              styleRating: action.payload.styleRating,
-              comment: action.payload.comment,
-            },
-          }),
+        [action.payload.collection]: Object.assign({}, state[action.payload.collection], {
+          [action.payload.dbItem]: {
+            contentRating: action.payload.contentRating,
+            styleRating: action.payload.styleRating,
+            comment: action.payload.comment,
+          },
+        }),
       });
 
     case DELETE_FEEDBACK:

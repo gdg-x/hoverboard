@@ -1,7 +1,8 @@
 import * as functions from 'firebase-functions';
 import { firestore, messaging } from 'firebase-admin';
 
-const sendGeneralNotification = functions.firestore.document('/notifications/{timestamp}')
+const sendGeneralNotification = functions.firestore
+  .document('/notifications/{timestamp}')
   .onCreate(async (snapshot, context) => {
     const timestamp = context.params.timestamp;
     const message = snapshot.data();
@@ -11,10 +12,15 @@ const sendGeneralNotification = functions.firestore.document('/notifications/{ti
     const deviceTokensPromise = firestore().collection('notificationsSubscribers').get();
     const notificationsConfigPromise = firestore().collection('config').doc('notifications').get();
 
-    const [tokensSnapshot, notificationsConfigSnapshot] = await Promise.all([deviceTokensPromise, notificationsConfigPromise]);
-    const notificationsConfig = notificationsConfigSnapshot.exists ? notificationsConfigSnapshot.data() : {};
+    const [tokensSnapshot, notificationsConfigSnapshot] = await Promise.all([
+      deviceTokensPromise,
+      notificationsConfigPromise,
+    ]);
+    const notificationsConfig = notificationsConfigSnapshot.exists
+      ? notificationsConfigSnapshot.data()
+      : {};
 
-    const tokens = tokensSnapshot.docs.map(doc => doc.id);
+    const tokens = tokensSnapshot.docs.map((doc) => doc.id);
 
     if (!tokens.length) {
       console.log('There are no notification tokens to send to.');
@@ -24,8 +30,8 @@ const sendGeneralNotification = functions.firestore.document('/notifications/{ti
 
     const payload = {
       data: Object.assign({}, message, {
-        icon: message.icon || notificationsConfig.icon
-      })
+        icon: message.icon || notificationsConfig.icon,
+      }),
     };
 
     const tokensToRemove = [];
@@ -34,8 +40,10 @@ const sendGeneralNotification = functions.firestore.document('/notifications/{ti
       const error = result.error;
       if (error) {
         console.error('Failure sending notification to', tokens[index], error);
-        if (error.code === 'messaging/invalid-registration-token' ||
-          error.code === 'messaging/registration-token-not-registered') {
+        if (
+          error.code === 'messaging/invalid-registration-token' ||
+          error.code === 'messaging/registration-token-not-registered'
+        ) {
           tokensToRemove.push(tokensSnapshot.ref.child(tokens[index]).remove());
         }
       }

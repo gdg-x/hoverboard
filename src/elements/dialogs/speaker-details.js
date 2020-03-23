@@ -15,134 +15,142 @@ import '../shared-styles.js';
 import '../text-truncate.js';
 import './dialog-styles.js';
 
-class SpeakerDetails extends UtilsFunctions(SessionsHoC(mixinBehaviors([IronOverlayBehavior], PolymerElement))) {
+class SpeakerDetails extends UtilsFunctions(
+  SessionsHoC(mixinBehaviors([IronOverlayBehavior], PolymerElement))
+) {
   static get template() {
     return html`
-    <style include="shared-styles dialog-styles flex flex-alignment positioning">
-      .photo {
-        margin-right: 16px;
-        width: 96px;
-        height: 96px;
-        border-radius: 50%;
-        background-color: var(--contrast-additional-background-color);
-        transform: translateZ(0);
-        flex-shrink: 0;
-      }
+      <style include="shared-styles dialog-styles flex flex-alignment positioning">
+        .photo {
+          margin-right: 16px;
+          width: 96px;
+          height: 96px;
+          border-radius: 50%;
+          background-color: var(--contrast-additional-background-color);
+          transform: translateZ(0);
+          flex-shrink: 0;
+        }
 
-      .subtitle {
-        font-size: 16px;
-        color: var(--secondary-text-color);
-      }
+        .subtitle {
+          font-size: 16px;
+          color: var(--secondary-text-color);
+        }
 
-      .badge:not(:last-of-type)::after {
-        margin-left: -4px;
-        content: ',';
-      }
+        .badge:not(:last-of-type)::after {
+          margin-left: -4px;
+          content: ',';
+        }
 
-      .action {
-        color: var(--secondary-text-color);
-      }
+        .action {
+          color: var(--secondary-text-color);
+        }
 
-      .section {
-        cursor: pointer;
-      }
+        .section {
+          cursor: pointer;
+        }
 
-      .tags {
-        margin-top: 8px;
-      }
+        .tags {
+          margin-top: 8px;
+        }
 
-      .star-rating {
-        display: inline-block;
-        vertical-align: middle;
-      }
-    </style>
+        .star-rating {
+          display: inline-block;
+          vertical-align: middle;
+        }
+      </style>
 
-    <polymer-helmet
-      title="[[speaker.name]] | {$ title $}"
-      description="[[speaker.bio]]"
-      image="[[speaker.photoUrl]]"
-      active="[[opened]]"
-      label1="{$ position $}"
-      data1="[[speaker.title]], [[speaker.company]]"
-      label2="{$ country $}"
-      data2="[[speaker.country]]"></polymer-helmet>
+      <polymer-helmet
+        title="[[speaker.name]] | {$ title $}"
+        description="[[speaker.bio]]"
+        image="[[speaker.photoUrl]]"
+        active="[[opened]]"
+        label1="{$ position $}"
+        data1="[[speaker.title]], [[speaker.company]]"
+        label2="{$ country $}"
+        data2="[[speaker.country]]"
+      ></polymer-helmet>
 
-    <app-header-layout has-scrolling-region>
-      <app-header slot="header" class="header" fixed="[[viewport.isTabletPlus]]">
-        <iron-icon
-          class="close-icon"
-          icon="hoverboard:[[_getCloseBtnIcon(viewport.isLaptopPlus)]]"
-          on-tap="_close"></iron-icon>
+      <app-header-layout has-scrolling-region>
+        <app-header slot="header" class="header" fixed="[[viewport.isTabletPlus]]">
+          <iron-icon
+            class="close-icon"
+            icon="hoverboard:[[_getCloseBtnIcon(viewport.isLaptopPlus)]]"
+            on-tap="_close"
+          ></iron-icon>
 
-        <app-toolbar>
-          <div class="dialog-container header-content" layout horizontal center>
-            <plastic-image
-              class="photo"
-              srcset="[[speaker.photoUrl]]"
-              sizing="cover"
-              lazy-load
-              preload
-              fade></plastic-image>
-            <div>
-              <h2 class="name" flex>[[speaker.name]]</h2>
-              <div class="subtitle">[[subtitle]]</div>
+          <app-toolbar>
+            <div class="dialog-container header-content" layout horizontal center>
+              <plastic-image
+                class="photo"
+                srcset="[[speaker.photoUrl]]"
+                sizing="cover"
+                lazy-load
+                preload
+                fade
+              ></plastic-image>
+              <div>
+                <h2 class="name" flex>[[speaker.name]]</h2>
+                <div class="subtitle">[[subtitle]]</div>
+              </div>
             </div>
+          </app-toolbar>
+        </app-header>
+
+        <div class="dialog-container content">
+          <h3 class="meta-info">[[companyInfo]]</h3>
+          <h3 class="meta-info" hidden$="[[isEmpty(speaker.badges)]]">
+            <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
+              <a
+                class="badge"
+                href$="[[badge.link]]"
+                target="_blank"
+                rel="noopener noreferrer"
+                title$="[[badge.description]]"
+              >
+                [[badge.description]]
+              </a>
+            </template>
+          </h3>
+
+          <marked-element class="description" markdown="[[speaker.bio]]">
+            <div slot="markdown-html"></div>
+          </marked-element>
+
+          <div class="actions" layout horizontal>
+            <template is="dom-repeat" items="[[speaker.socials]]" as="social">
+              <a class="action" href$="[[social.link]]" target="_blank" rel="noopener noreferrer">
+                <iron-icon icon="hoverboard:[[social.icon]]"></iron-icon>
+              </a>
+            </template>
           </div>
-        </app-toolbar>
-      </app-header>
 
-      <div class="dialog-container content">
-        <h3 class="meta-info">[[companyInfo]]</h3>
-        <h3 class="meta-info" hidden$="[[isEmpty(speaker.badges)]]">
-          <template is="dom-repeat" items="[[speaker.badges]]" as="badge">
-            <a
-              class="badge"
-              href$="[[badge.link]]"
-              target="_blank"
-              rel="noopener noreferrer"
-              title$="[[badge.description]]">
-              [[badge.description]]
-            </a>
-          </template>
-        </h3>
+          <div class="additional-sections" hidden$="[[!speaker.sessions.length]]">
+            <h3>{$ speakerDetails.sessions $}</h3>
 
-        <marked-element class="description" markdown="[[speaker.bio]]">
-          <div slot="markdown-html"></div>
-        </marked-element>
-
-        <div class="actions" layout horizontal>
-          <template is="dom-repeat" items="[[speaker.socials]]" as="social">
-            <a class="action" href$="[[social.link]]" target="_blank" rel="noopener noreferrer">
-              <iron-icon icon="hoverboard:[[social.icon]]"></iron-icon>
-            </a>
-          </template>
-        </div>
-
-        <div class="additional-sections" hidden$="[[!speaker.sessions.length]]">
-          <h3>{$ speakerDetails.sessions $}</h3>
-
-          <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
-            <div on-tap="_openSession" session-id$="[[session.id]]" class="section">
-              <div layout horizontal center>
-                <div class="section-details" flex>
-                  <div class="section-primary-text">[[session.title]]</div>
-                  <div class="section-secondary-text" hidden$="[[!session.dateReadable]]">[[session.dateReadable]],
-                    [[session.startTime]] - [[session.endTime]]
-                  </div>
-                  <div class="section-secondary-text" hidden$="[[!session.track.title]]">[[session.track.title]]</div>
-                  <div class="tags" hidden$="[[!session.tags.length]]">
-                    <template is="dom-repeat" items="[[session.tags]]" as="tag">
-                      <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
-                    </template>
+            <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
+              <div on-tap="_openSession" session-id$="[[session.id]]" class="section">
+                <div layout horizontal center>
+                  <div class="section-details" flex>
+                    <div class="section-primary-text">[[session.title]]</div>
+                    <div class="section-secondary-text" hidden$="[[!session.dateReadable]]">
+                      [[session.dateReadable]], [[session.startTime]] - [[session.endTime]]
+                    </div>
+                    <div class="section-secondary-text" hidden$="[[!session.track.title]]">
+                      [[session.track.title]]
+                    </div>
+                    <div class="tags" hidden$="[[!session.tags.length]]">
+                      <template is="dom-repeat" items="[[session.tags]]" as="tag">
+                        <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
+                      </template>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </template>
+            </template>
+          </div>
         </div>
-      </div>
-    </app-header-layout>
-`;
+      </app-header-layout>
+    `;
   }
 
   static get is() {

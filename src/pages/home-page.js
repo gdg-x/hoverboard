@@ -18,175 +18,183 @@ import { uiActions } from '../redux/actions.js';
 class HomePage extends ScrollFunctions(ReduxMixin(PolymerElement)) {
   static get template() {
     return html`
-    <style include="shared-styles flex flex-alignment">
-      :host {
-        display: block;
-        height: 100%;
-      }
-
-      hero-block {
-        font-size: 24px;
-        text-align: center;
-      }
-
-      .hero-logo {
-        --iron-image-width: 100%;
-        max-width: 240px;
-      }
-
-      .info-items {
-        margin: 24px auto;
-        font-size: 22px;
-      }
-
-      .info-items > *:not(:first-of-type) {
-        margin-top: 4px;
-      }
-
-      .action-buttons {
-        margin: 0 -8px;
-        font-size: 14px;
-      }
-
-      .action-buttons paper-button {
-        margin: 8px;
-      }
-
-      .action-buttons .watch-video {
-        color: #fff;
-      }
-
-      .action-buttons iron-icon {
-        --iron-icon-fill-color: currentColor;
-        margin-right: 8px;
-      }
-
-      .scroll-down {
-        margin-top: 24px;
-        color: currentColor;
-        user-select: none;
-        cursor: pointer;
-      }
-
-      .scroll-down svg {
-        width: 24px;
-        opacity: 0.6;
-      }
-
-      .scroll-down .stroke {
-        stroke: currentColor;
-      }
-
-      .scroll-down .scroller {
-        fill: currentColor;
-        animation: updown 2s infinite;
-      }
-
-      @keyframes updown {
-        0% {
-          transform: translate(0, 0)
+      <style include="shared-styles flex flex-alignment">
+        :host {
+          display: block;
+          height: 100%;
         }
-        50% {
-          transform: translate(0, 5px)
-        }
-        100% {
-          transform: translate(0, 0)
-        }
-      }
 
-      @media (min-height: 500px) {
         hero-block {
-          height: calc(100vh + 57px);
-          max-height: calc(100vh + 1px);
-        }
-
-        .home-content {
-          margin-top: -48px;
-        }
-
-        .scroll-down {
-          position: absolute;
-          bottom: 24px;
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 2;
-        }
-      }
-
-      @media (min-width: 812px) {
-        hero-block {
-          height: calc(100vh + 65px);
+          font-size: 24px;
+          text-align: center;
         }
 
         .hero-logo {
-          max-width: 320px;
+          --iron-image-width: 100%;
+          max-width: 240px;
         }
 
         .info-items {
-          margin: 48px auto;
-          font-size: 28px;
-          line-height: 1.1;
+          margin: 24px auto;
+          font-size: 22px;
         }
-      }
-    </style>
 
-    <polymer-helmet active="[[active]]"></polymer-helmet>
+        .info-items > *:not(:first-of-type) {
+          margin-top: 4px;
+        }
 
-    <hero-block
-      id="hero"
-      background-image="{$ heroSettings.home.background.image $}"
-      background-color="{$ heroSettings.home.background.color $}"
-      font-color="{$ heroSettings.home.fontColor $}"
-      active="[[active]]"
-      hide-logo>
-      <div class="home-content" layout vertical center>
-        <plastic-image class="hero-logo" srcset="/images/logo.svg" alt="{$ title $}"></plastic-image>
-        <div class="info-items">
-          <div class="info-item">{$ location.city $}. {$ dates $}</div>
-          <div class="info-item">{$ heroSettings.home.description $}</div>
-        </div>
+        .action-buttons {
+          margin: 0 -8px;
+          font-size: 14px;
+        }
 
+        .action-buttons paper-button {
+          margin: 8px;
+        }
 
-        <div class="action-buttons" layout horizontal center-justified wrap>
-          <paper-button
-            class="watch-video"
-            on-tap="_playVideo"
-            ga-on="click"
-            ga-event-category="video"
-            ga-event-action="watch"
-            ga-event-label="hero block - view highlights">
-            <iron-icon icon="hoverboard:movie"></iron-icon>
-            {$ viewHighlights $}
-          </paper-button>
-          <paper-button
-            on-tap="_scrollToTickets" ga-on="click"
-            ga-event-category="tickets"
-            ga-event-action="scroll"
-            ga-event-label="hero block - scroll to tickets"
-            primary
-            invert>
-            <iron-icon icon="hoverboard:ticket"></iron-icon>
-            {$ buyTicket $}
-          </paper-button>
-        </div>
+        .action-buttons .watch-video {
+          color: #fff;
+        }
 
-        <div class="scroll-down" on-tap="_scrollNextBlock">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            version="1.1"
-            id="Layer_2"
-            x="0px"
-            y="0px"
-            viewBox="0 0 25.166666 37.8704414"
-            enable-background="new 0 0 25.166666 37.8704414"
-            xml:space="preserve">
-            <path
-              class="stroke"
-              fill="none"
-              stroke="#c7c4b8"
-              stroke-width="2.5"
-              stroke-miterlimit="10"
-              d="M12.5833445
+        .action-buttons iron-icon {
+          --iron-icon-fill-color: currentColor;
+          margin-right: 8px;
+        }
+
+        .scroll-down {
+          margin-top: 24px;
+          color: currentColor;
+          user-select: none;
+          cursor: pointer;
+        }
+
+        .scroll-down svg {
+          width: 24px;
+          opacity: 0.6;
+        }
+
+        .scroll-down .stroke {
+          stroke: currentColor;
+        }
+
+        .scroll-down .scroller {
+          fill: currentColor;
+          animation: updown 2s infinite;
+        }
+
+        @keyframes updown {
+          0% {
+            transform: translate(0, 0);
+          }
+          50% {
+            transform: translate(0, 5px);
+          }
+          100% {
+            transform: translate(0, 0);
+          }
+        }
+
+        @media (min-height: 500px) {
+          hero-block {
+            height: calc(100vh + 57px);
+            max-height: calc(100vh + 1px);
+          }
+
+          .home-content {
+            margin-top: -48px;
+          }
+
+          .scroll-down {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+          }
+        }
+
+        @media (min-width: 812px) {
+          hero-block {
+            height: calc(100vh + 65px);
+          }
+
+          .hero-logo {
+            max-width: 320px;
+          }
+
+          .info-items {
+            margin: 48px auto;
+            font-size: 28px;
+            line-height: 1.1;
+          }
+        }
+      </style>
+
+      <polymer-helmet active="[[active]]"></polymer-helmet>
+
+      <hero-block
+        id="hero"
+        background-image="{$ heroSettings.home.background.image $}"
+        background-color="{$ heroSettings.home.background.color $}"
+        font-color="{$ heroSettings.home.fontColor $}"
+        active="[[active]]"
+        hide-logo
+      >
+        <div class="home-content" layout vertical center>
+          <plastic-image
+            class="hero-logo"
+            srcset="/images/logo.svg"
+            alt="{$ title $}"
+          ></plastic-image>
+          <div class="info-items">
+            <div class="info-item">{$ location.city $}. {$ dates $}</div>
+            <div class="info-item">{$ heroSettings.home.description $}</div>
+          </div>
+
+          <div class="action-buttons" layout horizontal center-justified wrap>
+            <paper-button
+              class="watch-video"
+              on-tap="_playVideo"
+              ga-on="click"
+              ga-event-category="video"
+              ga-event-action="watch"
+              ga-event-label="hero block - view highlights"
+            >
+              <iron-icon icon="hoverboard:movie"></iron-icon>
+              {$ viewHighlights $}
+            </paper-button>
+            <paper-button
+              on-tap="_scrollToTickets"
+              ga-on="click"
+              ga-event-category="tickets"
+              ga-event-action="scroll"
+              ga-event-label="hero block - scroll to tickets"
+              primary
+              invert
+            >
+              <iron-icon icon="hoverboard:ticket"></iron-icon>
+              {$ buyTicket $}
+            </paper-button>
+          </div>
+
+          <div class="scroll-down" on-tap="_scrollNextBlock">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              version="1.1"
+              id="Layer_2"
+              x="0px"
+              y="0px"
+              viewBox="0 0 25.166666 37.8704414"
+              enable-background="new 0 0 25.166666 37.8704414"
+              xml:space="preserve"
+            >
+              <path
+                class="stroke"
+                fill="none"
+                stroke="#c7c4b8"
+                stroke-width="2.5"
+                stroke-miterlimit="10"
+                d="M12.5833445
                 36.6204414h-0.0000229C6.3499947
                 36.6204414
                 1.25
@@ -207,11 +215,12 @@ class HomePage extends ScrollFunctions(ReduxMixin(PolymerElement)) {
                 18.8166714
                 36.6204414
                 12.5833445
-                36.6204414z"></path>
-            <path
-              class="scroller"
-              fill="#c7c4b8"
-              d="M13.0833359
+                36.6204414z"
+              ></path>
+              <path
+                class="scroller"
+                fill="#c7c4b8"
+                d="M13.0833359
                 19.2157116h-0.9192753c-1.0999985
                 0-1.9999971-0.8999996-1.9999971-1.9999981v-5.428606c0-1.0999994
                 0.8999987-1.9999981
@@ -225,27 +234,28 @@ class HomePage extends ScrollFunctions(ReduxMixin(PolymerElement)) {
                 14.1833344
                 19.2157116
                 13.0833359
-                19.2157116z"></path>
-          </svg>
-          <i class="icon icon-arrow-down"></i>
+                19.2157116z"
+              ></path>
+            </svg>
+            <i class="icon icon-arrow-down"></i>
+          </div>
         </div>
-      </div>
-    </hero-block>
-    {% if showForkMeBlockForProjectIds.includes(firebase.projectId) %}
-    <fork-me-block></fork-me-block>
-    {% endif %}
-    <about-block></about-block>
-    <speakers-block></speakers-block>
-    <subscribe-block></subscribe-block>
-    <tickets-block></tickets-block>
-    <gallery-block></gallery-block>
-    <about-organizer-block></about-organizer-block>
-    <featured-videos></featured-videos>
-    <latest-posts-block></latest-posts-block>
-    <map-block></map-block>
-    <partners-block></partners-block>
-    <footer-block></footer-block>
-`;
+      </hero-block>
+      {% if showForkMeBlockForProjectIds.includes(firebase.projectId) %}
+      <fork-me-block></fork-me-block>
+      {% endif %}
+      <about-block></about-block>
+      <speakers-block></speakers-block>
+      <subscribe-block></subscribe-block>
+      <tickets-block></tickets-block>
+      <gallery-block></gallery-block>
+      <about-organizer-block></about-organizer-block>
+      <featured-videos></featured-videos>
+      <latest-posts-block></latest-posts-block>
+      <map-block></map-block>
+      <partners-block></partners-block>
+      <footer-block></footer-block>
+    `;
   }
 
   static get is() {
@@ -278,7 +288,8 @@ class HomePage extends ScrollFunctions(ReduxMixin(PolymerElement)) {
 
   _scrollToTickets() {
     const toolbarHeight = HOVERBOARD.Elements.HeaderToolbar.getBoundingClientRect().height - 1;
-    const ticketsBlockPositionY = HOVERBOARD.Elements.Tickets.getBoundingClientRect().top - toolbarHeight;
+    const ticketsBlockPositionY =
+      HOVERBOARD.Elements.Tickets.getBoundingClientRect().top - toolbarHeight;
     this.scrollToY(ticketsBlockPositionY, 600, 'easeInOutSine');
   }
 

@@ -6,13 +6,13 @@ const loadRules = (projectId, path) => {
     projectId,
     rules: fs.readFileSync(path, 'utf8'),
   });
-}
+};
 
 module.exports.setup = async (auth, data) => {
   const projectId = `rules-spec-${Date.now()}`;
   const app = await firebase.initializeTestApp({
     projectId,
-    auth
+    auth,
   });
   const db = app.firestore();
 
@@ -30,7 +30,7 @@ module.exports.setup = async (auth, data) => {
 };
 
 module.exports.teardown = async () => {
-  return Promise.all(firebase.apps().map(app => app.delete()));
+  return Promise.all(firebase.apps().map((app) => app.delete()));
 };
 
 expect.extend({
@@ -43,9 +43,9 @@ expect.extend({
 
     return {
       pass,
-      message: () => 'Expected Firebase operation to be allowed, but it was denied'
+      message: () => 'Expected Firebase operation to be allowed, but it was denied',
     };
-  }
+  },
 });
 
 expect.extend({
@@ -57,8 +57,7 @@ expect.extend({
     } catch (err) {}
     return {
       pass,
-      message: () =>
-        'Expected Firebase operation to be denied, but it was allowed'
+      message: () => 'Expected Firebase operation to be denied, but it was allowed',
     };
-  }
+  },
 });

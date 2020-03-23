@@ -220,8 +220,5 @@
       "itemsCount": 5
     }
   },
-  "showForkMeBlockForProjectIds": [
-    "hoverboard-master",
-    "hoverboard-dev"
-  ]
+  "showForkMeBlockForProjectIds": ["hoverboard-master", "hoverboard-dev"]
 }
