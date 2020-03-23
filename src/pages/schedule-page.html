@@ -1,5 +1,3 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
-
 <link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/app-route/app-route-converter.html">
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
@@ -24,7 +22,6 @@
     <style is="custom-style" include="shared-styles flex flex-alignment"></style>
 
     <style>
-
       :host {
         display: block;
         height: 100%;
@@ -51,37 +48,22 @@
           background-color: #fff;
         }
       }
-
     </style>
 
-    <polymer-helmet
-      title="{$ heroSettings.schedule.title $} | {$ title $}"
+    <polymer-helmet title="{$ heroSettings.schedule.title $} | {$ title $}"
       description="{$ heroSettings.schedule.metaDescription $}"
-      active="[[_setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened)]]"
-    ></polymer-helmet>
+      active="[[_setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened)]]"></polymer-helmet>
 
     <iron-location query="{{queryParams}}"></iron-location>
 
-    <app-route
-      route="{{appRoute}}"
-      pattern="/:page"
-      data="{{routeData}}"
-      tail="{{subroute}}"
-      query-params="{{nQueryParams}}"
-    ></app-route>
+    <app-route route="{{appRoute}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"
+      query-params="{{nQueryParams}}"></app-route>
 
-    <app-route
-      route="[[route]]"
-      pattern="/:day"
-      data="{{routeData}}"
-    ></app-route>
+    <app-route route="[[route]]" pattern="/:day" data="{{routeData}}"></app-route>
 
-    <hero-block
-      background-image="{$ heroSettings.schedule.background.image $}"
-      background-color="{$ heroSettings.schedule.background.color $}"
-      font-color="{$ heroSettings.schedule.fontColor $}"
-      active="[[active]]"
-    >
+    <hero-block background-image="{$ heroSettings.schedule.background.image $}"
+      background-color="{$ heroSettings.schedule.background.color $}" font-color="{$ heroSettings.schedule.fontColor $}"
+      active="[[active]]">
       <div class="hero-title highlight-font">{$ heroSettings.schedule.title $}</div>
       <p class="hero-description">{$ heroSettings.schedule.description $}</p>
       <sticky-element slot="bottom" active="[[active]]">
@@ -92,53 +74,23 @@
 
     <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
-    <filter-menu
-      filters="[[_filters]]"
-      selected="[[_selectedFilters]]"
-    ></filter-menu>
+    <filter-menu filters="[[_filters]]" selected="[[_selectedFilters]]"></filter-menu>
 
     <div class="container">
-      <content-loader
-        card-padding="15px"
-        card-margin="16px 0"
-        card-height="140px"
-        avatar-size="0"
-        avatar-circle="0"
-        title-top-position="20px"
-        title-height="42px"
-        title-width="70%"
-        load-from="-20%"
-        load-to="80%"
-        blur-width="300px"
-        items-count="{$ contentLoaders.schedule.itemsCount $}"
-        hidden$="[[contentLoaderVisibility]]" layout>
+      <content-loader card-padding="15px" card-margin="16px 0" card-height="140px" avatar-size="0" avatar-circle="0"
+        title-top-position="20px" title-height="42px" title-width="70%" load-from="-20%" load-to="80%"
+        blur-width="300px" items-count="{$ contentLoaders.schedule.itemsCount $}" hidden$="[[contentLoaderVisibility]]"
+        layout>
       </content-loader>
 
-      <iron-pages
-        attr-for-selected="name"
-        selected="[[subRoute]]"
-        selected-attribute="active"
-      >
-      <template is="dom-repeat" items="[[schedule]]" as="day">
-          <schedule-day
-            name$="[[day.date]]"
-            day="[[day]]"
-            user="[[user]]"
-            featured-sessions="[[featuredSessions]]"
-            selected-filters="[[_selectedFilters]]"
-            viewport="[[viewport]]"
-            query-params="[[queryParams]]"
-          ></schedule-day>
+      <iron-pages attr-for-selected="name" selected="[[subRoute]]" selected-attribute="active">
+        <template is="dom-repeat" items="[[schedule]]" as="day">
+          <schedule-day name$="[[day.date]]" day="[[day]]" user="[[user]]" featured-sessions="[[featuredSessions]]"
+            selected-filters="[[_selectedFilters]]" viewport="[[viewport]]" query-params="[[queryParams]]">
+          </schedule-day>
         </template>
-        <my-schedule
-          name="my-schedule"
-          schedule="[[schedule]]"
-          user="[[user]]"
-          featured-sessions="[[featuredSessions]]"
-          selected-filters="[[_selectedFilters]]"
-          viewport="[[viewport]]"
-          query-params="[[queryParams]]"
-        ></my-schedule>
+        <my-schedule name="my-schedule" schedule="[[schedule]]" user="[[user]]" featured-sessions="[[featuredSessions]]"
+          selected-filters="[[_selectedFilters]]" viewport="[[viewport]]" query-params="[[queryParams]]"></my-schedule>
       </iron-pages>
     </div>
 
@@ -240,8 +192,8 @@
             if (active && id) {
               dialogsActions.openDialog(DIALOGS.SESSION, this.sessionsMap[id[0]]);
             } else {
-               this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
-               this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
+              this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
+              this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
             }
           });
         }
@@ -272,4 +224,3 @@
 
   </script>
 </dom-module>
-

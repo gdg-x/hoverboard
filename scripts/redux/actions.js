@@ -286,6 +286,21 @@ const blogActions = {
   },
 };
 
+function getScheduleJSON() {
+  const schedulePromise = new Promise(function (resolve) {
+    fetch('data/posts/schedule.json')
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (res) {
+        let scheduleRaw = res.years;
+        resolve(scheduleRaw);
+      });
+  });
+
+  return schedulePromise;
+}
+
 const speakersActions = {
 
   fetchList: () => (dispatch) => {
@@ -293,16 +308,7 @@ const speakersActions = {
       type: FETCH_SPEAKERS,
     });
 
-    const schedulePromise = new Promise(function (resolve) {
-      fetch('data/posts/schedule.json')
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (res) {
-          let scheduleRaw = res.schedule;
-          resolve(scheduleRaw);
-        });
-    });
+    const schedulePromise = getScheduleJSON();
 
     const speakersPromise = new Promise(function (resolve) {
       fetch('data/posts/speakers.json')
@@ -391,16 +397,7 @@ const sessionsActions = {
       type: FETCH_SESSIONS,
     });
 
-    const schedulePromise = new Promise(function (resolve) {
-      fetch('data/posts/schedule.json')
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (res) {
-          let scheduleRaw = res.schedule;
-          resolve(scheduleRaw);
-        });
-    });
+    const schedulePromise = getScheduleJSON();
 
     const speakersPromise = new Promise(function (resolve) {
       fetch('data/posts/speakers.json')
@@ -527,16 +524,7 @@ const scheduleActions = {
       type: FETCH_SCHEDULE,
     });
 
-    const schedulePromise = new Promise(function (resolve) {
-      fetch('data/posts/schedule.json')
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (res) {
-          let scheduleRaw = res.schedule;
-          resolve(scheduleRaw);
-        });
-    });
+    const schedulePromise = getScheduleJSON();
 
     const speakersPromise = new Promise(function (resolve) {
       fetch('data/posts/speakers.json')
@@ -619,114 +607,118 @@ function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
   let sessions = mapSessions(sessionsRaw, speakersRaw);
   let speakers = mapSpeakers(speakersRaw, sessionsRaw);
 
+  console.log(scheduleRaw)
+  scheduleRaw.forEach((year) => {
+    console.log(year.schedule)
+    year.schedule.forEach((day) => {
+      console.log(day)
+      const tracksNumber = day.tracks.length;
+      let dayTags = [];
+      let timeslots = [];
+      let extensions = {};
+      let scheduleTags = [];
+      let dayKey = day.date;
+      const timeslotLen = day.timeslots.length;
+      for (let timeslotsIndex = 0; timeslotsIndex < timeslotLen; timeslotsIndex++) {
+        const timeslot = day.timeslots[timeslotsIndex];
+        let innerSessions = [];
 
-  scheduleRaw.forEach((day) => {
-    const tracksNumber = day.tracks.length;
-    let dayTags = [];
-    let timeslots = [];
-    let extensions = {};
-    let scheduleTags = [];
-    let dayKey = day.date;
-    const timeslotLen = day.timeslots.length;
-    for (let timeslotsIndex = 0; timeslotsIndex < timeslotLen; timeslotsIndex++) {
-      const timeslot = day.timeslots[timeslotsIndex];
-      let innerSessions = [];
+        const sessionsLen = timeslot.sessions.length;
 
-      const sessionsLen = timeslot.sessions.length;
+        for (let sessionIndex = 0; sessionIndex < sessionsLen; sessionIndex++) {
+          let subSessions = [];
 
-      for (let sessionIndex = 0; sessionIndex < sessionsLen; sessionIndex++) {
-        let subSessions = [];
+          const subSessionsLen = timeslot.sessions[sessionIndex].items.length;
+          for (let subSessionIndex = 0; subSessionIndex < subSessionsLen; subSessionIndex++) {
+            const sessionId = timeslot.sessions[sessionIndex].items[subSessionIndex];
 
-        const subSessionsLen = timeslot.sessions[sessionIndex].items.length;
-        for (let subSessionIndex = 0; subSessionIndex < subSessionsLen; subSessionIndex++) {
-          const sessionId = timeslot.sessions[sessionIndex].items[subSessionIndex];
-
-          const subsession = sessionsRaw.find((session) => session.id === sessionId);
+            const subsession = sessionsRaw.find((session) => session.id === sessionId);
 
 
-          const mainTag = subsession.tags ? subsession.tags[0] : 'General';
-          const endTimeRaw = timeslot.sessions[sessionIndex].extend
-            // eslint-disable-next-line max-len
-            ? day.timeslots[timeslotsIndex + timeslot.sessions[sessionIndex].extend - 1].endTime
-            : timeslot.endTime;
-          const endTime = subSessionsLen > 1
-            ? getEndTime(
-              dayKey,
-              timeslot.startTime,
-              endTimeRaw,
-              subSessionsLen,
-              subSessionIndex + 1
-            )
-            : endTimeRaw;
-          const startTime = subSessionsLen > 1 && subSessionIndex > 0
-            ? sessions[timeslot.sessions[sessionIndex].items[subSessionIndex - 1]].endTime
-            : timeslot.startTime;
+            const mainTag = subsession.tags ? subsession.tags[0] : 'General';
+            const endTimeRaw = timeslot.sessions[sessionIndex].extend
+              // eslint-disable-next-line max-len
+              ? day.timeslots[timeslotsIndex + timeslot.sessions[sessionIndex].extend - 1].endTime
+              : timeslot.endTime;
+            const endTime = subSessionsLen > 1
+              ? getEndTime(
+                dayKey,
+                timeslot.startTime,
+                endTimeRaw,
+                subSessionsLen,
+                subSessionIndex + 1
+              )
+              : endTimeRaw;
+            const startTime = subSessionsLen > 1 && subSessionIndex > 0
+              ? sessions[timeslot.sessions[sessionIndex].items[subSessionIndex - 1]].endTime
+              : timeslot.startTime;
 
-          if (subsession.tags) {
-            dayTags = [...new Set([...dayTags, ...subsession.tags])];
+            if (subsession.tags) {
+              dayTags = [...new Set([...dayTags, ...subsession.tags])];
+            }
+            scheduleTags = addTagTo(scheduleTags || [], mainTag);
+
+            const finalSubSession = Object.assign({}, subsession, {
+              mainTag,
+              id: sessionId.toString(),
+              day: dayKey,
+              // eslint-disable-next-line max-len
+              track: day.tracks[timeslot.sessions[sessionIndex].trackNum - 1] || timeslot.sessions[sessionIndex].track || day.tracks[sessionIndex],
+              startTime,
+              endTime,
+              duration: getDuration(dayKey, startTime, endTime),
+              dateReadable: day.dateReadable,
+            });
+
+            Object.assign(subsession, finalSubSession);
+
+
+            subSessions.push(finalSubSession);
           }
-          scheduleTags = addTagTo(scheduleTags || [], mainTag);
-
-          const finalSubSession = Object.assign({}, subsession, {
-            mainTag,
-            id: sessionId.toString(),
-            day: dayKey,
+          let startRow = timeslotsIndex + 1;
+          let startColumn = sessionIndex + 1;
+          let endRow = timeslotsIndex + (timeslot.sessions[sessionIndex].extend || 0) + 1;
+          let endColumn = sessionsLen !== 1
             // eslint-disable-next-line max-len
-            track: day.tracks[timeslot.sessions[sessionIndex].trackNum - 1] || timeslot.sessions[sessionIndex].track || day.tracks[sessionIndex],
-            startTime,
-            endTime,
-            duration: getDuration(dayKey, startTime, endTime),
-            dateReadable: day.dateReadable,
-          });
-
-          Object.assign(subsession, finalSubSession);
+            ? sessionIndex + 2 : Object.keys(extensions).length ? Object.keys(extensions)[0]
+              : tracksNumber + 1;
 
 
-          subSessions.push(finalSubSession);
-        }
-        let startRow = timeslotsIndex + 1;
-        let startColumn = sessionIndex + 1;
-        let endRow = timeslotsIndex + (timeslot.sessions[sessionIndex].extend || 0) + 1;
-        let endColumn = sessionsLen !== 1
-          // eslint-disable-next-line max-len
-          ? sessionIndex + 2 : Object.keys(extensions).length ? Object.keys(extensions)[0]
-            : tracksNumber + 1;
+          if (timeslot.sessions[sessionIndex].extend) {
+            extensions[sessionIndex + 1] = timeslot.sessions[sessionIndex].extend;
+          }
 
+          if (timeslot.sessions[sessionIndex].rowSpan) {
+            endColumn = startColumn + timeslot.sessions[sessionIndex].rowSpan;
+          }
 
-        if (timeslot.sessions[sessionIndex].extend) {
-          extensions[sessionIndex + 1] = timeslot.sessions[sessionIndex].extend;
+          if (timeslot.sessions[sessionIndex].startCol) {
+            startColumn = timeslot.sessions[sessionIndex].startCol;
+            endColumn = sessionIndex + timeslot.sessions[sessionIndex].startCol;
+          }
+
+          innerSessions = [...innerSessions, {
+            gridArea: `${startRow} / ${startColumn} / ${endRow} / ${endColumn}`,
+            items: subSessions,
+          }];
         }
 
-        if (timeslot.sessions[sessionIndex].rowSpan) {
-          endColumn = startColumn + timeslot.sessions[sessionIndex].rowSpan;
+        for (const [key, value] of Object.entries(extensions)) {
+          if (value === 1) {
+            delete extensions[key];
+          } else {
+            extensions[key] = value - 1;
+          }
         }
 
-        if (timeslot.sessions[sessionIndex].startCol) {
-          startColumn = timeslot.sessions[sessionIndex].startCol;
-          endColumn = sessionIndex + timeslot.sessions[sessionIndex].startCol;
-        }
-
-        innerSessions = [...innerSessions, {
-          gridArea: `${startRow} / ${startColumn} / ${endRow} / ${endColumn}`,
-          items: subSessions,
-        }];
+        timeslots.push(Object.assign({}, timeslot, {
+          sessions: innerSessions,
+        }));
       }
-
-      for (const [key, value] of Object.entries(extensions)) {
-        if (value === 1) {
-          delete extensions[key];
-        } else {
-          extensions[key] = value - 1;
-        }
-      }
-
-      timeslots.push(Object.assign({}, timeslot, {
-        sessions: innerSessions,
-      }));
-    }
-    day.timeslots = timeslots;
-    day.tags = dayTags;
-    schedule.push(day);
+      day.timeslots = timeslots;
+      day.tags = dayTags;
+      schedule.push(day);
+    });
   });
 
 

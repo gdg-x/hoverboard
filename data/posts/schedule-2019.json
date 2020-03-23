@@ -1,0 +1,427 @@
+{
+    "schedule": [
+        {
+            "date": "2020-10-24",
+            "dateReadable": "202",
+            "timeslots": [
+                {
+                    "startTime": "08:30",
+                    "endTime": "09:30",
+                    "sessions": [
+                        {
+                            "items": [
+                                "1024Breakfast"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "tracks": [
+                {
+                    "title": "Ballroom, 5th Floor"
+                },
+                {
+                    "title": "Dell Theatre, Concourse"
+                },
+                {
+                    "title": "Classroom A/B, Concourse"
+                }
+            ]
+        },
+        {
+            "date": "2019-10-24",
+            "dateReadable": "Thursday, October 24th",
+            "timeslots": [
+                {
+                    "startTime": "08:30",
+                    "endTime": "09:30",
+                    "sessions": [
+                        {
+                            "items": [
+                                "1024Breakfast"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "startTime": "09:30",
+                    "endTime": "09:40",
+                    "sessions": [
+                        {
+                            "items": [
+                                "openingRemarks"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "startTime": "09:50",
+                    "endTime": "10:30",
+                    "sessions": [
+                        {
+                            "items": [
+                                "webAssembly"
+                            ]
+                        },
+                        {
+                            "items": [
+                                "refactorClassComponent"
+                            ]
+                        },
+                        {
+                            "items": [
+                                "webVR"
+                            ],
+                            "extend": 2
+                        }
+                    ]
+                },
+                {
+                    "startTime": "10:40",
+                    "endTime": "11:20",
+                    "sessions": [
+                        {
+                            "items": [
+                                "lerna"
+                            ]
+                        },
+                        {
+                            "items": [
+                                "uiComponentTesting"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "startTime": "11:30",
+                    "endTime": "12:10",
+                    "sessions": [
+                        {
+                            "items": [
+                                "minorityRole"
+                            ]
+                        },
+                        {
+                            "items": [
+                                "deploymentStrategy"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "startTime": "12:10",
+                    "endTime": "13:50",
+                    "sessions": [
+                        {
+                            "items": [
+                                "lunch"
+                            ],
+                            "extend": 2,
+                            "rowSpan": 2
+                        }
+                    ]
+                },
+                {
+                    "startTime": "13:00",
+                    "endTime": "13:50",
+                    "sessions": [
+                        {
+                            "items": [
+                                "jovo"
+                            ],
+                            "extend": 2,
+                            "startCol": 3,
+                            "trackNum": 3
+                        }
+                    ]
+                },
+                {
+                    "startTime": "13:50",
+                    "endTime": "14:30",
+                    "sessions": [
+                        {
+                            "items": [
+                                "sharingComponents"
+                            ]
+                        },
+                        {
+                            "items": [
+                                "uniqueHowsWhys"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "startTime": "14:40",
+                    "endTime": "15:20",
+                    "sessions": [
+                        {
+                            "items": [
+                                "digitalAccessibility"
+                            ]
+                        },
+                        {
+                            "items": [
+                                "thinkfast"
+                            ]
+                        },
+                        {
+                            "items": [
+                                "teslaBattery"
+                            ],
+                            "extend": 2
+                        }
+                    ]
+                },
+                {
+                    "startTime": "15:30",
+                    "endTime": "16:10",
+                    "sessions": [
+                        {
+                            "items": [
+                                "mentorPlaybook"
+                            ]
+                        },
+                        {
+                            "items": [
+                                "rocketScience"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "startTime": "16:20",
+                    "endTime": "17:00",
+                    "sessions": [
+                        {
+                            "items": [
+                                "insufficientlyPersuasive"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "tracks": [
+                {
+                    "title": "Ballroom, 5th Floor"
+                },
+                {
+                    "title": "Dell Theatre, Concourse"
+                },
+                {
+                    "title": "Classroom A/B, Concourse"
+                }
+            ]
+        },
+        {
+            "date": "2019-10-25",
+            "dateReadable": "Friday, October 25th",
+            "timeslots": [
+                {
+                    "endTime": "09:30",
+                    "sessions": [
+                        {
+                            "items": [
+                                "1024Breakfast"
+                            ]
+                        }
+                    ],
+                    "startTime": "08:30"
+                },
+                {
+                    "startTime": "09:30",
+                    "endTime": "09:40",
+                    "sessions": [
+                        {
+                            "items": [
+                                "openingRemarks"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "startTime": "09:50",
+                    "endTime": "10:30",
+                    "sessions": [
+                        {
+                            "items": [
+                                "machineLearning"
+                            ]
+                        },
+                        {
+                            "items": [
+                                "webAudio"
+                            ]
+                        },
+                        {
+                            "items": [
+                                "demystifyingRegularExpressions"
+                            ],
+                            "extend": 2
+                        }
+                    ]
+                },
+                {
+                    "startTime": "10:40",
+                    "endTime": "11:20",
+                    "sessions": [
+                        {
+                            "items": [
+                                "kickingBugs"
+                            ]
+                        },
+                        {
+                            "items": [
+                                "buildingAccessibility"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "startTime": "11:30",
+                    "endTime": "12:10",
+                    "sessions": [
+                        {
+                            "items": [
+                                "headlessArchitecture"
+                            ]
+                        },
+                        {
+                            "items": [
+                                "rsjxFutureAsyncProgramming"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "startTime": "12:10",
+                    "endTime": "12:30",
+                    "sessions": [
+                        {
+                            "items": [
+                                "lunch"
+                            ],
+                            "extend": 2,
+                            "rowSpan": 2
+                        }
+                    ]
+                },
+                {
+                    "startTime": "13:00",
+                    "endTime": "13:50",
+                    "sessions": [
+                        {
+                            "items": [
+                                "javaScriptMidi"
+                            ],
+                            "extend": 2,
+                            "startCol": 3,
+                            "trackNum": 3
+                        }
+                    ]
+                },
+                {
+                    "startTime": "13:50",
+                    "endTime": "14:30",
+                    "sessions": [
+                        {
+                            "items": [
+                                "serverlessDevelopmentPortfolioSevenDays"
+                            ]
+                        },
+                        {
+                            "items": [
+                                "predictingtheFuture"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "startTime": "14:40",
+                    "endTime": "15:20",
+                    "sessions": [
+                        {
+                            "items": [
+                                "sacre_bleu"
+                            ]
+                        },
+                        {
+                            "items": [
+                                "shinyObjectSyndrome"
+                            ]
+                        },
+                        {
+                            "items": [
+                                "apolloGraphQl"
+                            ],
+                            "extend": 2
+                        }
+                    ]
+                },
+                {
+                    "startTime": "15:30",
+                    "endTime": "16:10",
+                    "sessions": [
+                        {
+                            "items": [
+                                "iDontKnow"
+                            ]
+                        },
+                        {
+                            "items": [
+                                "ohMyWeb"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "startTime": "16:20",
+                    "endTime": "17:00",
+                    "sessions": [
+                        {
+                            "items": [
+                                "safeSpace"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "startTime": "17:00",
+                    "endTime": "17:10",
+                    "sessions": [
+                        {
+                            "items": [
+                                "closingremarks"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "startTime": "17:10",
+                    "endTime": "19:00",
+                    "sessions": [
+                        {
+                            "items": [
+                                "afterparty"
+                            ],
+                            "track": {
+                                "title": "\"Only in America\" Gallery, Main Floor"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "tracks": [
+                {
+                    "title": "Ballroom, 5th Floor"
+                },
+                {
+                    "title": "Dell Theatre, Concourse"
+                },
+                {
+                    "title": "Classroom A/B, Concourse"
+                }
+            ]
+        }
+    ]
+}
