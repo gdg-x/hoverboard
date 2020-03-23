@@ -1,6 +1,6 @@
 const { setup, teardown } = require('./helpers');
 
-describe('Default rules', () => {
+describe('default rules', () => {
   let db;
   let ref;
 
@@ -14,13 +14,13 @@ describe('Default rules', () => {
     await teardown();
   });
 
-  test('fail when reading/writing an unauthorized collection', async () => {
+  it('fail when reading/writing an unauthorized collection', async () => {
     await expect(ref.get()).toDeny();
     await expect(ref.add({})).toDeny();
   });
 });
 
-describe('Feedback rules', () => {
+describe('feedback rules', () => {
   let db;
   let colRef;
   let docRef;
@@ -49,7 +49,7 @@ describe('Feedback rules', () => {
       docRef = colRef.doc('1');
     });
 
-    test('fail when reading/writing an unauthorized collection', async () => {
+    it('fail when reading/writing an unauthorized collection', async () => {
       await expect(colRef.get()).toDeny();
       await expect(colRef.add({})).toDeny();
 
@@ -70,7 +70,7 @@ describe('Feedback rules', () => {
       ownDocRef = colRef.doc('2');
     });
 
-    test('fail on other documents', async () => {
+    it('fail on other documents', async () => {
       await expect(colRef.get()).toDeny();
       await expect(colRef.add(mockFeedback)).toDeny();
       await expect(docRef.get()).toDeny();
@@ -78,13 +78,13 @@ describe('Feedback rules', () => {
       await expect(docRef.delete()).toDeny();
     });
 
-    test('can interact with own documents', async () => {
+    it('can interact with own documents', async () => {
       await expect(ownDocRef.get()).toAllow();
       await expect(ownDocRef.update({})).toAllow();
       await expect(ownDocRef.delete()).toAllow();
     });
 
-    test('data validation', async () => {
+    it('data validation', async () => {
       await expect(ownDocRef.update({})).toAllow();
       [
         { contentRating: -1 },

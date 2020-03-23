@@ -20,7 +20,9 @@ module.exports.setup = async (auth, data) => {
     await loadRules(projectId, '__tests__/firestore.rules', 'utf8');
 
     for (const key in data) {
-      await db.doc(key).set(data[key]);
+      if ({}.hasOwnProperty.call(data, key)) {
+        await db.doc(key).set(data[key]);
+      }
     }
   }
 
@@ -39,7 +41,9 @@ expect.extend({
     try {
       await firebase.assertSucceeds(x);
       pass = true;
-    } catch (err) {}
+    } catch (err) {
+      // no-op
+    }
 
     return {
       pass,
@@ -54,7 +58,9 @@ expect.extend({
     try {
       await firebase.assertFails(x);
       pass = true;
-    } catch (err) {}
+    } catch (err) {
+      // no-op
+    }
     return {
       pass,
       message: () => 'Expected Firebase operation to be denied, but it was allowed',
