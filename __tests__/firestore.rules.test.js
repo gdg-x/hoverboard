@@ -93,7 +93,7 @@ describe('Feedback rules', () => {
         { styleRating: 11 },
         { comment: null },
         { comment: 'c'.repeat(257) },
-      ].forEach(async data => {
+      ].forEach(async (data) => {
         await expect(ownDocRef.update(data)).toDeny();
       });
     });

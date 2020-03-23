@@ -6,29 +6,30 @@ const SCOPE = Polymer.rootPath;
 
 export const registerServiceWorker = () => {
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register(SW_URL, {
-      scope: SCOPE,
-    })
-        .then((registration) => {
-          registration.onupdatefound = () => {
-            const installingWorker = registration.installing;
+    navigator.serviceWorker
+      .register(SW_URL, {
+        scope: SCOPE,
+      })
+      .then((registration) => {
+        registration.onupdatefound = () => {
+          const installingWorker = registration.installing;
 
-            installingWorker.onstatechange = () => {
-              switch (installingWorker.state) {
-                case 'installed':
-                  if (!navigator.serviceWorker.controller && toastActions) {
-                    toastActions.showToast({
-                      message: '{$ cachingComplete $}',
-                    });
-                  }
-                  break;
-                case 'redundant':
-                  throw Error('The installing service worker became redundant.');
-              }
-            };
+          installingWorker.onstatechange = () => {
+            switch (installingWorker.state) {
+              case 'installed':
+                if (!navigator.serviceWorker.controller && toastActions) {
+                  toastActions.showToast({
+                    message: '{$ cachingComplete $}',
+                  });
+                }
+                break;
+              case 'redundant':
+                throw Error('The installing service worker became redundant.');
+            }
           };
-        })
-        .catch((e) => error('Service worker registration failed:', e));
+        };
+      })
+      .catch((e) => error('Service worker registration failed:', e));
   }
 };
 

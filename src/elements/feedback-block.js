@@ -13,7 +13,8 @@ class Feedback extends ReduxMixin(PolymerElement) {
           width: 100%;
         }
 
-        star-rating, .caption {
+        star-rating,
+        .caption {
           display: inline-block;
           vertical-align: bottom;
           --star-color: var(--default-primary-color);
@@ -47,7 +48,8 @@ class Feedback extends ReduxMixin(PolymerElement) {
         }
 
         @media (max-width: 640px) {
-          star-rating, .caption {
+          star-rating,
+          .caption {
             display: block;
           }
         }
@@ -207,11 +209,7 @@ class Feedback extends ReduxMixin(PolymerElement) {
       this._updateFeedbackState();
       this._previousFeedbackChanged();
 
-      if (
-        this.user.signedIn &&
-        !this.feedbackFetching &&
-        this.previousFeedback === undefined
-      ) {
+      if (this.user.signedIn && !this.feedbackFetching && this.previousFeedback === undefined) {
         this._dispatchPreviousFeedback();
       }
     }
@@ -233,34 +231,34 @@ class Feedback extends ReduxMixin(PolymerElement) {
 
   _dispatchSendFeedback() {
     this.dispatchAction(
-        feedbackActions.addComment({
-          userId: this.user.uid,
-          collection: this.collection,
-          dbItem: this.dbItem,
-          contentRating: this.contentRating,
-          styleRating: this.styleRating,
-          comment: this.comment,
-        }),
+      feedbackActions.addComment({
+        userId: this.user.uid,
+        collection: this.collection,
+        dbItem: this.dbItem,
+        contentRating: this.contentRating,
+        styleRating: this.styleRating,
+        comment: this.comment,
+      })
     );
   }
 
   _dispatchPreviousFeedback() {
     this.dispatchAction(
-        feedbackActions.checkPreviousFeedback({
-          collection: this.collection,
-          dbItem: this.dbItem,
-          userId: this.user.uid,
-        }),
+      feedbackActions.checkPreviousFeedback({
+        collection: this.collection,
+        dbItem: this.dbItem,
+        userId: this.user.uid,
+      })
     );
   }
 
   _dispatchDeleteFeedback() {
     this.dispatchAction(
-        feedbackActions.deleteFeedback({
-          collection: this.collection,
-          dbItem: this.dbItem,
-          userId: this.user.uid,
-        }),
+      feedbackActions.deleteFeedback({
+        collection: this.collection,
+        dbItem: this.dbItem,
+        userId: this.user.uid,
+      })
     );
   }
 
@@ -302,8 +300,7 @@ class Feedback extends ReduxMixin(PolymerElement) {
   }
 
   _hasRating(contentRating, styleRating) {
-    return (contentRating > 0 && contentRating <= 5) ||
-      (styleRating > 0 && styleRating <= 5);
+    return (contentRating > 0 && contentRating <= 5) || (styleRating > 0 && styleRating <= 5);
   }
 }
 

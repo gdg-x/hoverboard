@@ -40,7 +40,15 @@ async function optimizeImage(object) {
   console.log('The file has been downloaded to', tempLocalFile);
 
   // Generate a thumbnail using ImageMagick.
-  await spawn('convert', [tempLocalFile, '-strip', '-interlace', 'Plane', '-quality', '82', tempLocalFile]);
+  await spawn('convert', [
+    tempLocalFile,
+    '-strip',
+    '-interlace',
+    'Plane',
+    '-quality',
+    '82',
+    tempLocalFile,
+  ]);
   console.log('Optimized image created at', tempLocalFile);
 
   // Uploading the Optimized image.

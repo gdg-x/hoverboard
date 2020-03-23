@@ -2,7 +2,7 @@ os: linux
 dist: bionic
 language: node_js
 node_js:
-  - "10"
+  - '10'
 jobs:
   include:
     - stage: Build
@@ -12,6 +12,8 @@ jobs:
       script: npm run build
     - name: Lint
       script: npm run lint
+    - name: Format
+      script: npm run prettier
     - name: Security
       script: npm audit && npm audit --prefix functions
     - stage: Test
@@ -29,13 +31,13 @@ jobs:
             branch: master
           project: hoverboard-master
           token:
-            secure: "J7nrIZcUndOsZLPG8U/6qPXfYo3XDu5brEoTM3pJOpy5NLVYVrCO4ewn/hcldyJWR7TmJ4SLGti+gxOSt3kRRqgSLLNB2Xsd2t+jL6l2PhHobad+T0oGuHyhYFtidISWh4C5lJp1NGxBJGeeVos2vEU6qNADseKCdvvx7CVcMa0oSgLE21sNyMeggvoHKuWnFYzI+1Glwau5zaVLCwj9mObEFkuYwxF8YIoTigkdemQg+b2k4fO/L8ohgs/a+WCVKxeg5VfagO9rwg+XKGiF9IjTBFuaJSghSoSQTGiqol6FY7czN/64xbXOFFPAvL6dS3RbaA6l1bxRbD7h/oC3/No4T3wKwVI68dnNstbNcHMtGdgoFJTaJMVn8Wg2gnWGeTxukDlfLyoEKmsMMWVN5GP2KvWaVF51vZBQfJaMSJ9YaFFs4yjYPydZmKgYMrH8a7eoR5aGEfntPZCULIJneTwj0NtwfCirLYsLQXCbkxRJNBOVNoEEdyASazVgQ08qC+pA9XO5pJuT0ozqeq5KlxznGYcxmrP54QQj58tYSCU72Ic5VVRBlZhfl+wm5254SMOHXJ63N74HZmpXJfN9nj1I2b0bHWDZ8AFakzn9XF5Kb7UDJJQ+tYJWZ6ijpTDn+L8EAlklcUnTHFOaVaQgf5TTLUWgs8C37joOd2XqX74="
+            secure: 'J7nrIZcUndOsZLPG8U/6qPXfYo3XDu5brEoTM3pJOpy5NLVYVrCO4ewn/hcldyJWR7TmJ4SLGti+gxOSt3kRRqgSLLNB2Xsd2t+jL6l2PhHobad+T0oGuHyhYFtidISWh4C5lJp1NGxBJGeeVos2vEU6qNADseKCdvvx7CVcMa0oSgLE21sNyMeggvoHKuWnFYzI+1Glwau5zaVLCwj9mObEFkuYwxF8YIoTigkdemQg+b2k4fO/L8ohgs/a+WCVKxeg5VfagO9rwg+XKGiF9IjTBFuaJSghSoSQTGiqol6FY7czN/64xbXOFFPAvL6dS3RbaA6l1bxRbD7h/oC3/No4T3wKwVI68dnNstbNcHMtGdgoFJTaJMVn8Wg2gnWGeTxukDlfLyoEKmsMMWVN5GP2KvWaVF51vZBQfJaMSJ9YaFFs4yjYPydZmKgYMrH8a7eoR5aGEfntPZCULIJneTwj0NtwfCirLYsLQXCbkxRJNBOVNoEEdyASazVgQ08qC+pA9XO5pJuT0ozqeq5KlxznGYcxmrP54QQj58tYSCU72Ic5VVRBlZhfl+wm5254SMOHXJ63N74HZmpXJfN9nj1I2b0bHWDZ8AFakzn9XF5Kb7UDJJQ+tYJWZ6ijpTDn+L8EAlklcUnTHFOaVaQgf5TTLUWgs8C37joOd2XqX74='
         - provider: firebase
           skip_cleanup: true
           on:
             branch: develop
           project: hoverboard-dev
           token:
-            secure: "J7nrIZcUndOsZLPG8U/6qPXfYo3XDu5brEoTM3pJOpy5NLVYVrCO4ewn/hcldyJWR7TmJ4SLGti+gxOSt3kRRqgSLLNB2Xsd2t+jL6l2PhHobad+T0oGuHyhYFtidISWh4C5lJp1NGxBJGeeVos2vEU6qNADseKCdvvx7CVcMa0oSgLE21sNyMeggvoHKuWnFYzI+1Glwau5zaVLCwj9mObEFkuYwxF8YIoTigkdemQg+b2k4fO/L8ohgs/a+WCVKxeg5VfagO9rwg+XKGiF9IjTBFuaJSghSoSQTGiqol6FY7czN/64xbXOFFPAvL6dS3RbaA6l1bxRbD7h/oC3/No4T3wKwVI68dnNstbNcHMtGdgoFJTaJMVn8Wg2gnWGeTxukDlfLyoEKmsMMWVN5GP2KvWaVF51vZBQfJaMSJ9YaFFs4yjYPydZmKgYMrH8a7eoR5aGEfntPZCULIJneTwj0NtwfCirLYsLQXCbkxRJNBOVNoEEdyASazVgQ08qC+pA9XO5pJuT0ozqeq5KlxznGYcxmrP54QQj58tYSCU72Ic5VVRBlZhfl+wm5254SMOHXJ63N74HZmpXJfN9nj1I2b0bHWDZ8AFakzn9XF5Kb7UDJJQ+tYJWZ6ijpTDn+L8EAlklcUnTHFOaVaQgf5TTLUWgs8C37joOd2XqX74="
+            secure: 'J7nrIZcUndOsZLPG8U/6qPXfYo3XDu5brEoTM3pJOpy5NLVYVrCO4ewn/hcldyJWR7TmJ4SLGti+gxOSt3kRRqgSLLNB2Xsd2t+jL6l2PhHobad+T0oGuHyhYFtidISWh4C5lJp1NGxBJGeeVos2vEU6qNADseKCdvvx7CVcMa0oSgLE21sNyMeggvoHKuWnFYzI+1Glwau5zaVLCwj9mObEFkuYwxF8YIoTigkdemQg+b2k4fO/L8ohgs/a+WCVKxeg5VfagO9rwg+XKGiF9IjTBFuaJSghSoSQTGiqol6FY7czN/64xbXOFFPAvL6dS3RbaA6l1bxRbD7h/oC3/No4T3wKwVI68dnNstbNcHMtGdgoFJTaJMVn8Wg2gnWGeTxukDlfLyoEKmsMMWVN5GP2KvWaVF51vZBQfJaMSJ9YaFFs4yjYPydZmKgYMrH8a7eoR5aGEfntPZCULIJneTwj0NtwfCirLYsLQXCbkxRJNBOVNoEEdyASazVgQ08qC+pA9XO5pJuT0ozqeq5KlxznGYcxmrP54QQj58tYSCU72Ic5VVRBlZhfl+wm5254SMOHXJ63N74HZmpXJfN9nj1I2b0bHWDZ8AFakzn9XF5Kb7UDJJQ+tYJWZ6ijpTDn+L8EAlklcUnTHFOaVaQgf5TTLUWgs8C37joOd2XqX74='
   allow_failures:
     - name: Security

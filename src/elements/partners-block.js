@@ -11,53 +11,52 @@ import './shared-styles.js';
 class PartnersBlock extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
-    <style include="shared-styles flex flex-alignment">
-      :host {
-        display: block;
-      }
-
-      .block-title {
-        margin: 24px 0 8px;
-      }
-
-      .logos-wrapper {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        grid-gap: 8px;
-      }
-
-      .logo-item {
-        padding: 12px;
-      }
-
-      .logo-img {
-        height: 84px;
-        width: 100%;
-      }
-
-      .cta-button {
-        margin-top: 24px;
-        color: var(--default-primary-color);
-      }
-
-      @media (min-width: 640px) {
-        .logos-wrapper {
-          grid-template-columns: repeat(4, 1fr);
+      <style include="shared-styles flex flex-alignment">
+        :host {
+          display: block;
         }
-      }
 
-      @media (min-width: 812px) {
-        .logos-wrapper {
-          grid-template-columns: repeat(5, 1fr);
+        .block-title {
+          margin: 24px 0 8px;
         }
-      }
 
-    </style>
+        .logos-wrapper {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+          grid-gap: 8px;
+        }
 
-    <div class="container">
-      <h1 class="container-title">{$ partnersBlock.title $}</h1>
+        .logo-item {
+          padding: 12px;
+        }
 
-      <template is="dom-repeat" items="[[partners]]" as="block">
+        .logo-img {
+          height: 84px;
+          width: 100%;
+        }
+
+        .cta-button {
+          margin-top: 24px;
+          color: var(--default-primary-color);
+        }
+
+        @media (min-width: 640px) {
+          .logos-wrapper {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
+
+        @media (min-width: 812px) {
+          .logos-wrapper {
+            grid-template-columns: repeat(5, 1fr);
+          }
+        }
+      </style>
+
+      <div class="container">
+        <h1 class="container-title">{$ partnersBlock.title $}</h1>
+
+        <template is="dom-repeat" items="[[partners]]" as="block">
           <h4 class="block-title">[[block.title]]</h4>
           <div class="logos-wrapper">
             <template is="dom-repeat" items="[[block.items]]" as="logo">
@@ -67,26 +66,29 @@ class PartnersBlock extends ReduxMixin(PolymerElement) {
                 title$="[[logo.name]]"
                 target="_blank"
                 rel="noopener noreferrer"
-                layout horizontal
-                center-center>
+                layout
+                horizontal
+                center-center
+              >
                 <plastic-image
                   class="logo-img"
                   srcset="[[logo.logoUrl]]"
                   sizing="contain"
                   lazy-load
                   preload
-                  fade></plastic-image>
+                  fade
+                ></plastic-image>
               </a>
             </template>
           </div>
-      </template>
+        </template>
 
-      <paper-button class="cta-button animated icon-right" on-tap="_addPotentialPartner">
-        <span>{$ partnersBlock.button $}</span>
-        <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-      </paper-button>
-    </div>
-`;
+        <paper-button class="cta-button animated icon-right" on-tap="_addPotentialPartner">
+          <span>{$ partnersBlock.button $}</span>
+          <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+        </paper-button>
+      </div>
+    `;
   }
 
   static get is() {

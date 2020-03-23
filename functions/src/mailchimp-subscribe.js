@@ -2,12 +2,12 @@ import * as functions from 'firebase-functions';
 import md5 from 'md5';
 import fetch from 'node-fetch';
 
-const mailchimpSubscribe = functions.firestore.document('/subscribers/{id}')
+const mailchimpSubscribe = functions.firestore
+  .document('/subscribers/{id}')
   .onCreate((snapshot) => {
-
     const mailchimpConfig = functions.config().mailchimp;
     if (!mailchimpConfig) {
-      console.log('Can\'t subscribe user, Mailchimp config is empty.');
+      console.log("Can't subscribe user, Mailchimp config is empty.");
     }
 
     const subscriber = snapshot.data();
@@ -33,7 +33,7 @@ function subscribeToMailchimp(mailchimpConfig, subscriberData, emailHash) {
     method,
     body: JSON.stringify(subscriberData),
     headers: {
-      'Authorization': `apiKey ${mailchimpConfig.apikey}`,
+      Authorization: `apiKey ${mailchimpConfig.apikey}`,
       'Content-Type': 'application/json',
     },
   });
@@ -45,9 +45,9 @@ function subscribeToMailchimp(mailchimpConfig, subscriberData, emailHash) {
         subscriberData.status = 'pending';
         const hash = md5(subscriberData.email_address);
         return subscribeToMailchimp(mailchimpConfig, subscriberData, hash);
-      } else if(method === 'POST') {
+      } else if (method === 'POST') {
         console.log(`${subscriberData.email_address} was added to subscribe list.`);
-      } else if(method === 'PATCH') {
+      } else if (method === 'PATCH') {
         console.log(`${subscriberData.email_address} was updated in subscribe list.`);
       }
     })

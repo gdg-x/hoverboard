@@ -7,16 +7,16 @@ import './shared-styles.js';
 class AuthRequired extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
-    <style include="shared-styles">
-      :host {
-        display: block;
-      }
-    </style>
+      <style include="shared-styles">
+        :host {
+          display: block;
+        }
+      </style>
 
-    <paper-button on-tap="signIn" hidden$="[[user.signedIn]]">{$ signIn $}</paper-button>
-    <slot name="prompt" hidden$="[[user.signedIn]]"></slot>
-    <slot hidden$="[[!user.signedIn]]"></slot>
-  `;
+      <paper-button on-tap="signIn" hidden$="[[user.signedIn]]">{$ signIn $}</paper-button>
+      <slot name="prompt" hidden$="[[user.signedIn]]"></slot>
+      <slot hidden$="[[!user.signedIn]]"></slot>
+    `;
   }
 
   static get is() {
@@ -37,9 +37,7 @@ class AuthRequired extends ReduxMixin(PolymerElement) {
   }
 
   static get observers() {
-    return [
-      '_authStatusChanged(user.signedIn)',
-    ];
+    return ['_authStatusChanged(user.signedIn)'];
   }
 
   signIn() {

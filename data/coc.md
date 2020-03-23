@@ -35,6 +35,7 @@ This policy is based on and influenced by several other community policies inclu
 
 To report an incident look for a staff member by badge/attire or contact our incident response team below:
 {% for contact in codeOfConductBlock.contacts %}
+
 - {$ contact $}{% endfor %}
 
 #### Anonymous report

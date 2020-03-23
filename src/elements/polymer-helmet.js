@@ -2,9 +2,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 
 class PolymerHelmet extends PolymerElement {
   static get template() {
-    return html`
-
-`;
+    return html``;
   }
 
   static get is() {
@@ -53,9 +51,7 @@ class PolymerHelmet extends PolymerElement {
   }
 
   static get observers() {
-    return [
-      '_setMetaInfo(active, title, description, image, label1, data1, label2, data2)',
-    ];
+    return ['_setMetaInfo(active, title, description, image, label1, data1, label2, data2)'];
   }
 
   _setMetaInfo(active, title, description, image, label1, data1, label2, data2) {
@@ -71,19 +67,27 @@ class PolymerHelmet extends PolymerElement {
         updatedImage = image.startsWith('http') ? image : `{$ url $}${image}`;
       }
       document.title = updatedTitle;
-      document.querySelector('meta[name="description"]').setAttribute('content', updatedDescription);
+      document
+        .querySelector('meta[name="description"]')
+        .setAttribute('content', updatedDescription);
       // G+
       document.querySelector('meta[itemprop="name"]').setAttribute('content', updatedTitle);
-      document.querySelector('meta[itemprop="description"]').setAttribute('content', updatedDescription);
+      document
+        .querySelector('meta[itemprop="description"]')
+        .setAttribute('content', updatedDescription);
       document.querySelector('meta[itemprop="image"]').setAttribute('content', updatedImage);
       // Facebook
       document.querySelector('meta[property="og:title"]').setAttribute('content', updatedTitle);
-      document.querySelector('meta[property="og:description"]').setAttribute('content', updatedDescription);
+      document
+        .querySelector('meta[property="og:description"]')
+        .setAttribute('content', updatedDescription);
       document.querySelector('meta[property="og:image"]').setAttribute('content', updatedImage);
       document.querySelector('meta[property="og:url"]').setAttribute('content', this._getUrl());
       // Twitter
       document.querySelector('meta[name="twitter:title"]').setAttribute('content', updatedTitle);
-      document.querySelector('meta[name="twitter:description"]').setAttribute('content', updatedDescription);
+      document
+        .querySelector('meta[name="twitter:description"]')
+        .setAttribute('content', updatedDescription);
       document.querySelector('meta[name="twitter:image"]').setAttribute('content', updatedImage);
       document.querySelector('meta[name="twitter:label1"]').setAttribute('value', updatedLabel1);
       document.querySelector('meta[name="twitter:data1"]').setAttribute('value', updatedData1);

@@ -6,117 +6,117 @@ import './shared-styles.js';
 class MdContent extends ScrollFunctions(PolymerElement) {
   static get template() {
     return html`
-    <style include="shared-styles flex flex-alignment">
-      :host {
-        display: block;
-      }
+      <style include="shared-styles flex flex-alignment">
+        :host {
+          display: block;
+        }
 
-      .content-wrapper {
-        background-color: var(--secondary-background-color);
-        width: 100%;
-        overflow: hidden;
-        transition: opacity var(--animation), opacity var(--animation);
-        opacity: 0;
-      }
+        .content-wrapper {
+          background-color: var(--secondary-background-color);
+          width: 100%;
+          overflow: hidden;
+          transition: opacity var(--animation), opacity var(--animation);
+          opacity: 0;
+        }
 
-      .content-wrapper.visible {
-        opacity: 1;
-      }
-
-      .col {
-        font-size: 32px;
-        line-height: 48px;
-        margin-bottom: 24px;
-        z-index: 2;
-      }
-
-      .col-content {
-        line-height: 32px;
-        display: block;
-        font-size: 16px;
-      }
-
-      [slot="markdown-html"] h2 {
-        line-height: 2;
-      }
-
-      [slot="markdown-html"] h3::after {
-        margin-left: 8px;
-        content: '';
-        display: inline-block;
-        width: 1.1em;
-        height: 1em;
-        background: url('../../images/link-icon.svg') no-repeat;
-        background-size: contain;
-        cursor: pointer;
-        vertical-align: middle;
-      }
-
-      @media (min-width: 640px) {
-        .content,
-        .markdown-text {
-          padding: 0 18px;
+        .content-wrapper.visible {
+          opacity: 1;
         }
 
         .col {
-          margin-right: 24px;
+          font-size: 32px;
+          line-height: 48px;
+          margin-bottom: 24px;
+          z-index: 2;
         }
 
-        .col:last-of-type {
-          margin-right: 0;
+        .col-content {
+          line-height: 32px;
+          display: block;
+          font-size: 16px;
         }
 
-        [slot="markdown-html"] h2 {
-          font-size: 40px;
-          width: 40%;
-          margin-bottom: 0;
+        [slot='markdown-html'] h2 {
+          line-height: 2;
+        }
+
+        [slot='markdown-html'] h3::after {
+          margin-left: 8px;
+          content: '';
           display: inline-block;
-          transform: translateY(85%);
-          vertical-align: bottom;
-          line-height: 1;
+          width: 1.1em;
+          height: 1em;
+          background: url('../../images/link-icon.svg') no-repeat;
+          background-size: contain;
+          cursor: pointer;
+          vertical-align: middle;
         }
 
-        [slot="markdown-html"] h3 {
-          line-height: 1.5;
+        @media (min-width: 640px) {
+          .content,
+          .markdown-text {
+            padding: 0 18px;
+          }
+
+          .col {
+            margin-right: 24px;
+          }
+
+          .col:last-of-type {
+            margin-right: 0;
+          }
+
+          [slot='markdown-html'] h2 {
+            font-size: 40px;
+            width: 40%;
+            margin-bottom: 0;
+            display: inline-block;
+            transform: translateY(85%);
+            vertical-align: bottom;
+            line-height: 1;
+          }
+
+          [slot='markdown-html'] h3 {
+            line-height: 1.5;
+          }
+
+          [slot='markdown-html'] h3,
+          [slot='markdown-html'] h4,
+          [slot='markdown-html'] p,
+          [slot='markdown-html'] ol,
+          [slot='markdown-html'] ul {
+            margin-left: 40%;
+          }
+
+          [slot='markdown-html'] h3::after {
+            display: none;
+          }
+
+          [slot='markdown-html'] h3:hover::after {
+            display: inline-block;
+          }
         }
 
-        [slot="markdown-html"] h3,
-        [slot="markdown-html"] h4,
-        [slot="markdown-html"] p,
-        [slot="markdown-html"] ol,
-        [slot="markdown-html"] ul {
-          margin-left: 40%;
+        @media (min-width: 812px) {
+          .content,
+          .markdown-text {
+            padding: 0 40px;
+          }
         }
+      </style>
 
-        [slot="markdown-html"] h3::after {
-          display: none;
-        }
-
-        [slot="markdown-html"] h3:hover::after {
-          display: inline-block;
-        }
-      }
-
-      @media (min-width: 812px) {
-        .content,
-        .markdown-text {
-          padding: 0 40px;
-        }
-      }
-    </style>
-
-    <div class="content-wrapper">
-      <div class="container">
-        <div class="content" layout justified horizontal wrap></div>
+      <div class="content-wrapper">
+        <div class="container">
+          <div class="content" layout justified horizontal wrap></div>
+        </div>
       </div>
-    </div>
-    <div class="container">
-      <marked-element class="markdown-text">
-        <div slot="markdown-html"></div>
-        <script type="text/markdown" src$="[[mdSource]]"></script>
-      </marked-element>
-    </div>
-`;
+      <div class="container">
+        <marked-element class="markdown-text">
+          <div slot="markdown-html"></div>
+          <script type="text/markdown" src$="[[mdSource]]"></script>
+        </marked-element>
+      </div>
+    `;
   }
 
   static get is() {
@@ -206,8 +206,8 @@ class MdContent extends ScrollFunctions(PolymerElement) {
   _changeUrl(e) {
     const targetElement = e.path && e.path[0];
     const offset = this.offsetTop(targetElement);
-    const canBeScrolled = Math.abs(document.documentElement.scrollTop +
-      this.toolbarOffset - offset) >= 50;
+    const canBeScrolled =
+      Math.abs(document.documentElement.scrollTop + this.toolbarOffset - offset) >= 50;
     if (canBeScrolled) {
       this.scrollToY(offset - this.toolbarOffset, 100);
     }

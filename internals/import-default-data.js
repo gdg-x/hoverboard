@@ -11,20 +11,16 @@ const importSpeakers = () => {
   const batch = firestore.batch();
 
   Object.keys(speakers).forEach((speakerId, order) => {
-    batch.set(
-      firestore.collection('speakers').doc(speakerId),
-      {
-        ...speakers[speakerId],
-        order,
-      },
-    );
+    batch.set(firestore.collection('speakers').doc(speakerId), {
+      ...speakers[speakerId],
+      order,
+    });
   });
 
-  return batch.commit()
-    .then((results) => {
-      console.log('\tImported data for', results.length, 'speakers');
-      return results;
-    });
+  return batch.commit().then((results) => {
+    console.log('\tImported data for', results.length, 'speakers');
+    return results;
+  });
 };
 
 const importPreviousSpeakers = () => {
@@ -37,20 +33,16 @@ const importPreviousSpeakers = () => {
   const batch = firestore.batch();
 
   Object.keys(previousSpeakers).forEach((speakerId, order) => {
-    batch.set(
-      firestore.collection('previousSpeakers').doc(speakerId),
-      {
-        ...previousSpeakers[speakerId],
-        order,
-      },
-    );
+    batch.set(firestore.collection('previousSpeakers').doc(speakerId), {
+      ...previousSpeakers[speakerId],
+      order,
+    });
   });
 
-  return batch.commit()
-    .then(results => {
-      console.log('\tImported data for', results.length, 'previous speakers');
-      return results;
-    });
+  return batch.commit().then((results) => {
+    console.log('\tImported data for', results.length, 'previous speakers');
+    return results;
+  });
 };
 
 const importTeam = () => {
@@ -63,24 +55,22 @@ const importTeam = () => {
   const batch = firestore.batch();
 
   Object.keys(teams).forEach((teamId) => {
-    batch.set(
-      firestore.collection('team').doc(teamId),
-      { title: teams[teamId].title },
-    );
+    batch.set(firestore.collection('team').doc(teamId), {
+      title: teams[teamId].title,
+    });
 
     teams[teamId].members.forEach((member, id) => {
       batch.set(
         firestore.collection('team').doc(`${teamId}`).collection('members').doc(`${id}`),
-        member,
+        member
       );
-    })
+    });
   });
 
-  return batch.commit()
-    .then(results => {
-      console.log('\tImported data for', results.length, 'documents');
-      return results;
-    });
+  return batch.commit().then((results) => {
+    console.log('\tImported data for', results.length, 'documents');
+    return results;
+  });
 };
 
 const importPartners = () => {
@@ -93,25 +83,27 @@ const importPartners = () => {
   const batch = firestore.batch();
 
   Object.keys(partners).forEach((docId) => {
-    batch.set(
-        firestore.collection('partners').doc(docId),
-        { title: partners[docId].title,
-          order: partners[docId].order },
-    );
+    batch.set(firestore.collection('partners').doc(docId), {
+      title: partners[docId].title,
+      order: partners[docId].order,
+    });
 
     partners[docId].logos.forEach((item, id) => {
       batch.set(
-        firestore.collection('partners').doc(`${docId}`).collection('items').doc(`${id}`.padStart(3, 0)),
-        item,
+        firestore
+          .collection('partners')
+          .doc(`${docId}`)
+          .collection('items')
+          .doc(`${id}`.padStart(3, 0)),
+        item
       );
-    })
+    });
   });
 
-  return batch.commit()
-    .then(results => {
-      console.log('\tImported data for', results.length, 'documents');
-      return results;
-    });
+  return batch.commit().then((results) => {
+    console.log('\tImported data for', results.length, 'documents');
+    return results;
+  });
 };
 
 const importGallery = () => {
@@ -124,20 +116,16 @@ const importGallery = () => {
   const batch = firestore.batch();
 
   Object.keys(gallery).forEach((docId) => {
-    batch.set(
-      firestore.collection('gallery').doc(`${docId}`.padStart(3, 0)),
-      {
-        url: gallery[docId],
-        order: docId,
-      },
-    );
+    batch.set(firestore.collection('gallery').doc(`${docId}`.padStart(3, 0)), {
+      url: gallery[docId],
+      order: docId,
+    });
   });
 
-  return batch.commit()
-    .then(results => {
-      console.log('\tImported data for', results.length, 'images');
-      return results;
-    });
+  return batch.commit().then((results) => {
+    console.log('\tImported data for', results.length, 'images');
+    return results;
+  });
 };
 
 const importBlog = () => {
@@ -150,17 +138,13 @@ const importBlog = () => {
   const batch = firestore.batch();
 
   Object.keys(blog).forEach((docId) => {
-    batch.set(
-      firestore.collection('blog').doc(docId),
-      blog[docId],
-    );
+    batch.set(firestore.collection('blog').doc(docId), blog[docId]);
   });
 
-  return batch.commit()
-    .then(results => {
-      console.log('\tImported data for', results.length, 'blog posts');
-      return results;
-    });
+  return batch.commit().then((results) => {
+    console.log('\tImported data for', results.length, 'blog posts');
+    return results;
+  });
 };
 
 const importVideos = () => {
@@ -173,20 +157,16 @@ const importVideos = () => {
   const batch = firestore.batch();
 
   Object.keys(docs).forEach((docId) => {
-    batch.set(
-      firestore.collection('videos').doc(`${docId}`.padStart(3, 0)),
-      {
-        ...docs[docId],
-        order: docId,
-      },
-    );
+    batch.set(firestore.collection('videos').doc(`${docId}`.padStart(3, 0)), {
+      ...docs[docId],
+      order: docId,
+    });
   });
 
-  return batch.commit()
-    .then(results => {
-      console.log('\tImported data for', results.length, 'videos');
-      return results;
-    });
+  return batch.commit().then((results) => {
+    console.log('\tImported data for', results.length, 'videos');
+    return results;
+  });
 };
 
 const importTickets = () => {
@@ -199,20 +179,16 @@ const importTickets = () => {
   const batch = firestore.batch();
 
   Object.keys(docs).forEach((docId) => {
-    batch.set(
-      firestore.collection('tickets').doc(`${docId}`.padStart(3, 0)),
-      {
-        ...docs[docId],
-        order: docId,
-      },
-    );
+    batch.set(firestore.collection('tickets').doc(`${docId}`.padStart(3, 0)), {
+      ...docs[docId],
+      order: docId,
+    });
   });
 
-  return batch.commit()
-    .then(results => {
-      console.log('\tImported data for', results.length, 'tickets');
-      return results;
-    });
+  return batch.commit().then((results) => {
+    console.log('\tImported data for', results.length, 'tickets');
+    return results;
+  });
 };
 
 const importSessions = () => {
@@ -225,17 +201,13 @@ const importSessions = () => {
   const batch = firestore.batch();
 
   Object.keys(docs).forEach((docId) => {
-    batch.set(
-      firestore.collection('sessions').doc(docId),
-      docs[docId],
-    );
+    batch.set(firestore.collection('sessions').doc(docId), docs[docId]);
   });
 
-  return batch.commit()
-    .then(results => {
-      console.log('\tImported data for', results.length, 'sessions');
-      return results;
-    });
+  return batch.commit().then((results) => {
+    console.log('\tImported data for', results.length, 'sessions');
+    return results;
+  });
 };
 
 const importSchedule = () => {
@@ -248,20 +220,16 @@ const importSchedule = () => {
   const batch = firestore.batch();
 
   Object.keys(docs).forEach((docId) => {
-    batch.set(
-      firestore.collection('schedule').doc(docId),
-      {
-          ...docs[docId],
-          date: docId,
-      },
-    );
+    batch.set(firestore.collection('schedule').doc(docId), {
+      ...docs[docId],
+      date: docId,
+    });
   });
 
-  return batch.commit()
-    .then(results => {
-      console.log('\tImported data for', Object.keys(docs).length, 'days');
-      return results;
-    });
+  return batch.commit().then((results) => {
+    console.log('\tImported data for', Object.keys(docs).length, 'days');
+    return results;
+  });
 };
 
 const importNotificationsConfig = async () => {
@@ -269,17 +237,12 @@ const importNotificationsConfig = async () => {
   console.log('Migrating notifications config...');
   const batch = firestore.batch();
 
-  batch.set(
-    firestore.collection('config').doc('notifications'),
-    notificationsConfig,
-  );
+  batch.set(firestore.collection('config').doc('notifications'), notificationsConfig);
 
-  return batch.commit()
-    .then(results => {
-      console.log('\tImported data for notifications config');
-      return results;
-    });
-
+  return batch.commit().then((results) => {
+    console.log('\tImported data for notifications config');
+    return results;
+  });
 };
 
 initializeFirebase()
@@ -299,7 +262,7 @@ initializeFirebase()
     console.log('Finished');
     process.exit();
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(err);
     process.exit();
   });

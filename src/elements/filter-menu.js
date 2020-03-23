@@ -6,144 +6,150 @@ import './shared-styles.js';
 class FilterMenu extends UtilsFunctions(PolymerElement) {
   static get template() {
     return html`
-    <style include="shared-styles flex flex-alignment positioning">
-      :host {
-        display: block;
-        width: 100%;
-        border-bottom: 1px solid var(--divider-color);
-        position: relative;
-      }
-
-      .filters-board {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 2;
-        background-color: var(--primary-background-color);
-        box-shadow: var(--box-shadow);
-        transform: translateY(100%);
-        display: none;
-      }
-
-      .filters-toolbar {
-        padding: 16px;
-      }
-
-      .filter-group {
-        margin-bottom: 24px;
-      }
-
-      .filter-title {
-        margin-bottom: 8px;
-      }
-
-      .tag {
-        margin-right: 8px;
-        margin-bottom: 8px;
-        display: inline-flex;
-        font-size: 15px;
-        cursor: pointer;
-        color: var(--color);
-        text-transform: capitalize;
-      }
-
-      .tag iron-icon {
-        --iron-icon-width: 12px;
-        --iron-icon-height: 12px;
-      }
-
-      [selected] {
-        background-color: var(--color);
-        border-color: var(--color);
-        color: white;
-      }
-
-      .selected-filters {
-        margin-bottom: 8px;
-      }
-
-      .reset-filters {
-        margin-right: 8px;
-        font-size: 14px;
-        cursor: pointer;
-        color: var(--default-primary-color);
-      }
-
-      @media (min-width: 640px) {
-        .filters-toolbar {
-          padding: 16px 32px;
+      <style include="shared-styles flex flex-alignment positioning">
+        :host {
+          display: block;
+          width: 100%;
+          border-bottom: 1px solid var(--divider-color);
+          position: relative;
         }
-      }
 
-    </style>
+        .filters-board {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          z-index: 2;
+          background-color: var(--primary-background-color);
+          box-shadow: var(--box-shadow);
+          transform: translateY(100%);
+          display: none;
+        }
 
-    <iron-location query="{{queryParams}}"></iron-location>
+        .filters-toolbar {
+          padding: 16px;
+        }
 
-    <div class="filters-toolbar container">
-      <div layout horizontal center>
-        <div layout horizontal center flex>
-          <div class="results" hidden$="[[_hideResultText(resultsCount, _selectedArray)]]">
-            [[resultsCount]] {$ filters.results $}
+        .filter-group {
+          margin-bottom: 24px;
+        }
+
+        .filter-title {
+          margin-bottom: 8px;
+        }
+
+        .tag {
+          margin-right: 8px;
+          margin-bottom: 8px;
+          display: inline-flex;
+          font-size: 15px;
+          cursor: pointer;
+          color: var(--color);
+          text-transform: capitalize;
+        }
+
+        .tag iron-icon {
+          --iron-icon-width: 12px;
+          --iron-icon-height: 12px;
+        }
+
+        [selected] {
+          background-color: var(--color);
+          border-color: var(--color);
+          color: white;
+        }
+
+        .selected-filters {
+          margin-bottom: 8px;
+        }
+
+        .reset-filters {
+          margin-right: 8px;
+          font-size: 14px;
+          cursor: pointer;
+          color: var(--default-primary-color);
+        }
+
+        @media (min-width: 640px) {
+          .filters-toolbar {
+            padding: 16px 32px;
+          }
+        }
+      </style>
+
+      <iron-location query="{{queryParams}}"></iron-location>
+
+      <div class="filters-toolbar container">
+        <div layout horizontal center>
+          <div layout horizontal center flex>
+            <div class="results" hidden$="[[_hideResultText(resultsCount, _selectedArray)]]">
+              [[resultsCount]] {$ filters.results $}
+            </div>
+          </div>
+
+          <div class="actions" layout horizontal center>
+            <span
+              class="reset-filters"
+              role="button"
+              on-tap="_resetFilters"
+              hidden$="[[!_selectedArray.length]]"
+            >
+              {$ filters.clear $}
+            </span>
+            <paper-button class="icon-right" on-tap="_toggleBoard">
+              {$ filters.title $}
+              <iron-icon icon="hoverboard:[[_getFilterIcon(_openedBoard)]]"></iron-icon>
+            </paper-button>
           </div>
         </div>
 
-        <div class="actions" layout horizontal center>
-        <span class="reset-filters" role="button" on-tap="_resetFilters" hidden$="[[!_selectedArray.length]]">
-          {$ filters.clear $}
-        </span>
-          <paper-button class="icon-right" on-tap="_toggleBoard">
-            {$ filters.title $}
-            <iron-icon icon="hoverboard:[[_getFilterIcon(_openedBoard)]]"></iron-icon>
-          </paper-button>
+        <div class="selected-filters" hidden$="[[!_selectedArray.length]]">
+          <template is="dom-repeat" items="[[_selectedArray]]" as="selectedFilter">
+            <div
+              class="tag"
+              style$="--color: [[getVariableColor(selectedFilter.value, 'primary-text-color')]]"
+              filter-key$="[[selectedFilter.key]]"
+              filter-value$="[[selectedFilter.value]]"
+              on-tap="_toggleFilter"
+              selected
+              layout
+              horizontal
+              inline
+              center
+            >
+              <span>[[selectedFilter.value]]</span>
+              <iron-icon icon="hoverboard:close"></iron-icon>
+            </div>
+          </template>
         </div>
       </div>
 
-      <div class="selected-filters" hidden$="[[!_selectedArray.length]]">
-        <template is="dom-repeat" items="[[_selectedArray]]" as="selectedFilter">
-          <div
-            class="tag"
-            style$="--color: [[getVariableColor(selectedFilter.value, 'primary-text-color')]]"
-            filter-key$="[[selectedFilter.key]]"
-            filter-value$="[[selectedFilter.value]]"
-            on-tap="_toggleFilter"
-            selected
-            layout
-            horizontal
-            inline
-            center>
-            <span>[[selectedFilter.value]]</span>
-            <iron-icon icon="hoverboard:close"></iron-icon>
-          </div>
-        </template>
+      <div class="filters-board" block$="[[_openedBoard]]">
+        <div class="container">
+          <template is="dom-repeat" items="[[filters]]" as="filter">
+            <div class="filter-group">
+              <h3 class="filter-title">[[filter.title]]</h3>
+              <template is="dom-repeat" items="[[filter.items]]" as="item">
+                <div
+                  layout
+                  horizontal
+                  inline
+                  center
+                  class="tag"
+                  style$="--color: [[getVariableColor(item, 'primary-text-color')]]"
+                  filter-key$="[[filter.key]]"
+                  filter-value$="[[item]]"
+                  selected$="[[_isSelected(selected, filter.key, item)]]"
+                  on-tap="_toggleFilter"
+                >
+                  [[item]]
+                </div>
+              </template>
+            </div>
+          </template>
+        </div>
       </div>
-    </div>
-
-    <div class="filters-board" block$="[[_openedBoard]]">
-      <div class="container">
-        <template is="dom-repeat" items="[[filters]]" as="filter">
-          <div class="filter-group">
-            <h3 class="filter-title">[[filter.title]]</h3>
-            <template is="dom-repeat" items="[[filter.items]]" as="item">
-              <div
-                layout
-                horizontal
-                inline
-                center
-                class="tag"
-                style$="--color: [[getVariableColor(item, 'primary-text-color')]]"
-                filter-key$="[[filter.key]]"
-                filter-value$="[[item]]"
-                selected$="[[_isSelected(selected, filter.key, item)]]"
-                on-tap="_toggleFilter">
-                [[item]]
-              </div>
-            </template>
-          </div>
-        </template>
-      </div>
-    </div>
-`;
+    `;
   }
 
   static get is() {
@@ -175,7 +181,9 @@ class FilterMenu extends UtilsFunctions(PolymerElement) {
   }
 
   _isSelected(selectedFilters, key, value) {
-    return selectedFilters[key] && selectedFilters[key].includes(this.generateClassName(value.trim()));
+    return (
+      selectedFilters[key] && selectedFilters[key].includes(this.generateClassName(value.trim()))
+    );
   }
 
   _toggleFilter(e) {
@@ -188,8 +196,8 @@ class FilterMenu extends UtilsFunctions(PolymerElement) {
     if (!selected || !filters) return;
     const targetFilters = filters.map((filter) => filter.key);
     return Object.keys(selected)
-        .filter((key) => targetFilters.includes(key))
-        .reduce((aggr, key) => aggr.concat(selected[key].map((value) => ({ key, value }))), []);
+      .filter((key) => targetFilters.includes(key))
+      .reduce((aggr, key) => aggr.concat(selected[key].map((value) => ({ key, value }))), []);
   }
 
   _toggleBoard() {

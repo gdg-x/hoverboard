@@ -10,60 +10,61 @@ import './shared-styles.js';
 class VideoDialog extends ReduxMixin(mixinBehaviors([PaperDialogBehavior], PolymerElement)) {
   static get template() {
     return html`
-    <style include="positioning">
-      :host {
-        margin: 0;
-        padding: 0;
-      }
+      <style include="positioning">
+        :host {
+          margin: 0;
+          padding: 0;
+        }
 
-      .video-wrapper {
-        z-index: 6;
-        overflow: hidden;
-      }
+        .video-wrapper {
+          z-index: 6;
+          overflow: hidden;
+        }
 
-      .go-back-icon {
-        margin: 16px;
-        z-index: 7;
-        width: 40px;
-        height: 40px;
-        color: #fff;
-        opacity: 0.6;
-        background-color: #000;
-        border-radius: 50%;
-        display: block;
-        transition: opacity var(--animation);
-      }
+        .go-back-icon {
+          margin: 16px;
+          z-index: 7;
+          width: 40px;
+          height: 40px;
+          color: #fff;
+          opacity: 0.6;
+          background-color: #000;
+          border-radius: 50%;
+          display: block;
+          transition: opacity var(--animation);
+        }
 
-      .go-back-icon:hover {
-        opacity: 0.9;
-      }
+        .go-back-icon:hover {
+          opacity: 0.9;
+        }
 
-      .video {
-        padding: 0;
-      }
+        .video {
+          padding: 0;
+        }
+      </style>
 
-    </style>
-
-    <div class="toolbar">
-      <paper-icon-button
-        class="go-back-icon"
-        icon="hoverboard:close"
-        on-tap="_closeSelf"
-        dialog-dismiss></paper-icon-button>
-    </div>
-    <div class="video-wrapper">
-      <google-youtube
-        id="video"
-        class="video"
-        video-id="[[youtubeId]]"
-        width="100%"
-        height="100%"
-        autohide="1"
-        chromeless="[[disableControls]]"
-        fit>
-      </google-youtube>
-    </div>
-`;
+      <div class="toolbar">
+        <paper-icon-button
+          class="go-back-icon"
+          icon="hoverboard:close"
+          on-tap="_closeSelf"
+          dialog-dismiss
+        ></paper-icon-button>
+      </div>
+      <div class="video-wrapper">
+        <google-youtube
+          id="video"
+          class="video"
+          video-id="[[youtubeId]]"
+          width="100%"
+          height="100%"
+          autohide="1"
+          chromeless="[[disableControls]]"
+          fit
+        >
+        </google-youtube>
+      </div>
+    `;
   }
 
   static get is() {
@@ -91,8 +92,7 @@ class VideoDialog extends ReduxMixin(mixinBehaviors([PaperDialogBehavior], Polym
         this.backdropElement.open();
       }
       this.$.video.play();
-    }
-    else {
+    } else {
       this.$.video.seekTo(0);
       this.$.video.pause();
       this.backdropElement.close();

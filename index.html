@@ -1,181 +1,187 @@
-<!doctype html>
+<!DOCTYPE html>
 <html itemscope itemtype="http://schema.org/Event" lang="en">
+  <head>
+    <base href="{$ basepath $}" />
+    <meta charset="utf-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta
+      content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes"
+      name="viewport"
+    />
+    <meta content="{$ description $}" name="description" />
+    <meta content="{$ keywords $}" name="keywords" />
+    <meta content="{$ organizer.name $}" name="author" />
+    <meta content="Project Hoverboard" name="generator" />
 
-<head>
-  <base href="{$ basepath $}">
-  <meta charset="utf-8">
-  <meta content="IE=edge" http-equiv="X-UA-Compatible">
-  <meta content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes" name="viewport">
-  <meta content="{$ description $}" name="description">
-  <meta content="{$ keywords $}" name="keywords">
-  <meta content="{$ organizer.name $}" name="author">
-  <meta content="Project Hoverboard" name="generator">
+    <title>{$ title $}</title>
 
-  <title>{$ title $}</title>
+    <link href="{$ url $}" rel="canonical" />
 
-  <link href="{$ url $}" rel="canonical">
+    <link href="images/favicon.ico" rel="icon" />
 
-  <link href="images/favicon.ico" rel="icon">
+    <meta content="{$ webapp.themeColor $}" name="theme-color" />
+    <link href="manifest.json" rel="manifest" />
 
-  <meta content="{$ webapp.themeColor $}" name="theme-color">
-  <link href="manifest.json" rel="manifest">
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta content="yes" name="mobile-web-app-capable" />
+    <!-- fallback for manifest.json -->
+    <meta content="{$ title $}" name="application-name" />
+    <!-- fallback for manifest.json -->
 
-  <!-- Add to homescreen for Chrome on Android -->
-  <meta content="yes" name="mobile-web-app-capable">
-  <!-- fallback for manifest.json -->
-  <meta content="{$ title $}" name="application-name">
-  <!-- fallback for manifest.json -->
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="{$ title $}" name="apple-mobile-web-app-title" />
 
-  <!-- Add to homescreen for Safari on iOS -->
-  <meta content="yes" name="apple-mobile-web-app-capable">
-  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
-  <meta content="{$ title $}" name="apple-mobile-web-app-title">
+    <!-- Homescreen icons. -->
+    <link href="images/manifest/icon-48.png" rel="apple-touch-icon" />
+    <link href="images/manifest/icon-72.png" rel="apple-touch-icon" sizes="72x72" />
+    <link href="images/manifest/icon-96.png" rel="apple-touch-icon" sizes="96x96" />
+    <link href="images/manifest/icon-144.png" rel="apple-touch-icon" sizes="144x144" />
+    <link href="images/manifest/icon-192.png" rel="apple-touch-icon" sizes="192x192" />
 
-  <!-- Homescreen icons. -->
-  <link href="images/manifest/icon-48.png" rel="apple-touch-icon">
-  <link href="images/manifest/icon-72.png" rel="apple-touch-icon" sizes="72x72">
-  <link href="images/manifest/icon-96.png" rel="apple-touch-icon" sizes="96x96">
-  <link href="images/manifest/icon-144.png" rel="apple-touch-icon" sizes="144x144">
-  <link href="images/manifest/icon-192.png" rel="apple-touch-icon" sizes="192x192">
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta content="images/manifest/icon-144.png" name="msapplication-TileImage" />
+    <meta content="#00aba9" name="msapplication-TileColor" />
+    <meta content="no" name="msapplication-tap-highlight" />
 
-  <!-- Tile icon for Win8 (144x144 + tile color) -->
-  <meta content="images/manifest/icon-144.png" name="msapplication-TileImage">
-  <meta content="#00aba9" name="msapplication-TileColor">
-  <meta content="no" name="msapplication-tap-highlight">
+    <!-- G+ sharing meta data -->
+    <meta content="{$ title $}" itemprop="name" />
+    <meta content="{$ description $}" itemprop="description" />
+    <meta content="{$ image if image.startsWith('http') else (url + image) $}" itemprop="image" />
+    <meta content="{$ startDate $}" itemprop="startDate" />
+    <meta content="{$ endDate $}" itemprop="endDate" />
 
-  <!-- G+ sharing meta data -->
-  <meta content="{$ title $}" itemprop="name">
-  <meta content="{$ description $}" itemprop="description">
-  <meta content="{$ image if image.startsWith('http') else (url + image) $}" itemprop="image">
-  <meta content="{$ startDate $}" itemprop="startDate">
-  <meta content="{$ endDate $}" itemprop="endDate">
+    <!-- Facebook sharing meta data -->
+    <meta content="{$ title $}" property="og:title" />
+    <meta content="{$ title $}" property="og:site_name" />
+    <meta content="website" property="og:type" />
+    <meta content="{$ url $}" property="og:url" />
+    <meta content="{$ description $}" property="og:description" />
+    <meta content="Event" property="og:type" />
+    <meta
+      content="{$ image if image.startsWith('http') else (url + image) $}"
+      property="og:image"
+    />
+    <meta content="image/jpeg" property="og:image:type" />
 
-  <!-- Facebook sharing meta data -->
-  <meta content="{$ title $}" property="og:title">
-  <meta content="{$ title $}" property="og:site_name">
-  <meta content="website" property="og:type">
-  <meta content="{$ url $}" property="og:url">
-  <meta content="{$ description $}" property="og:description">
-  <meta content="Event" property="og:type">
-  <meta content="{$ image if image.startsWith('http') else (url + image) $}" property="og:image">
-  <meta content="image/jpeg" property="og:image:type" />
+    <!-- Twitter meta data -->
+    <meta content="summary_large_image" name="twitter:card" />
+    <meta content="@{$ organizer.twitter $}" name="twitter:creator" />
+    <meta content="{$ title $}" name="twitter:title" />
+    <meta content="{$ description $}" name="twitter:description" />
+    <meta
+      content="{$ image if image.startsWith('http') else (url + image) $}"
+      name="twitter:image"
+    />
+    <meta name="twitter:label1" value="{$ location.label $}" />
+    <meta name="twitter:data1" value="{$ location.name $}" />
+    <meta name="twitter:label2" />
+    <meta name="twitter:data2" />
 
-  <!-- Twitter meta data -->
-  <meta content="summary_large_image" name="twitter:card">
-  <meta content="@{$ organizer.twitter $}" name="twitter:creator">
-  <meta content="{$ title $}" name="twitter:title">
-  <meta content="{$ description $}" name="twitter:description">
-  <meta content="{$ image if image.startsWith('http') else (url + image) $}" name="twitter:image">
-  <meta name="twitter:label1" value="{$ location.label $}">
-  <meta name="twitter:data1" value="{$ location.name $}">
-  <meta name="twitter:label2">
-  <meta name="twitter:data2">
+    <link href="https://apis.google.com" rel="dns-prefetch" />
+    <link href="https://www.google-analytics.com" rel="preconnect" />
+    <link href="https://fcm.googleapis.com" rel="preconnect" />
+    <link href="https://firestore.googleapis.com" rel="preconnect" />
 
-  <link href="https://apis.google.com" rel="dns-prefetch">
-  <link href="https://www.google-analytics.com" rel="preconnect">
-  <link href="https://fcm.googleapis.com" rel="preconnect">
-  <link href="https://firestore.googleapis.com" rel="preconnect">
+    <script>
+      // First Input Delay polyfill https://github.com/GoogleChromeLabs/first-input-delay
+      // prettier-ignore
+      // eslint-disable-next-line
+      !function(n,e){var t,o,i,c=[],f={passive:!0,capture:!0},r=new Date,a="pointerup",u="pointercancel";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=[])}function l(t){if(t.cancelable){var o=(t.timeStamp>1e12?new Date:performance.now())-t.timeStamp;"pointerdown"==t.type?function(t,o){function i(){p(t,o),r()}function c(){r()}function r(){e(a,i,f),e(u,c,f)}n(a,i,f),n(u,c,f)}(o,t):p(o,t)}}function w(n){["click","mousedown","keydown","touchstart","pointerdown"].forEach(function(e){n(e,l,f)})}w(n),self.perfMetrics=self.perfMetrics||{},self.perfMetrics.onFirstInputDelay=function(n){c.push(n),s()}}(addEventListener,removeEventListener);
+    </script>
 
-  <script>
-    // First Input Delay polyfill https://github.com/GoogleChromeLabs/first-input-delay
-    // eslint-disable-next-line
-    !function(n,e){var t,o,i,c=[],f={passive:!0,capture:!0},r=new Date,a="pointerup",u="pointercancel";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=[])}function l(t){if(t.cancelable){var o=(t.timeStamp>1e12?new Date:performance.now())-t.timeStamp;"pointerdown"==t.type?function(t,o){function i(){p(t,o),r()}function c(){r()}function r(){e(a,i,f),e(u,c,f)}n(a,i,f),n(u,c,f)}(o,t):p(o,t)}}function w(n){["click","mousedown","keydown","touchstart","pointerdown"].forEach(function(e){n(e,l,f)})}w(n),self.perfMetrics=self.perfMetrics||{},self.perfMetrics.onFirstInputDelay=function(n){c.push(n),s()}}(addEventListener,removeEventListener);
-  </script>
+    <script src="./node_modules/firebase/firebase-app.js"></script>
+    <script src="./node_modules/firebase/firebase-auth.js"></script>
+    <script src="./node_modules/firebase/firebase-firestore.js"></script>
+    <script src="./node_modules/firebase/firebase-messaging.js"></script>
+    <script src="./node_modules/firebase/firebase-performance.js"></script>
 
-  <script src="./node_modules/firebase/firebase-app.js"></script>
-  <script src="./node_modules/firebase/firebase-auth.js"></script>
-  <script src="./node_modules/firebase/firebase-firestore.js"></script>
-  <script src="./node_modules/firebase/firebase-messaging.js"></script>
-  <script src="./node_modules/firebase/firebase-performance.js"></script>
+    <script>
+      window.Polymer = { rootPath: '{$ basepath $}' };
+      window.HOVERBOARD = { Elements: {} };
 
-  <script>
-    window.Polymer = { rootPath: '{$ basepath $}' };
-    window.HOVERBOARD = { Elements: {} };
+      firebase.initializeApp({
+        apiKey: '{$ firebase.apiKey $}',
+        appId: '{$ firebase.appId $}',
+        authDomain: '{$ firebase.authDomain $}',
+        databaseURL: '{$ firebase.databaseURL $}',
+        messagingSenderId: '{$ firebase.messagingSenderId $}',
+        projectId: '{$ firebase.projectId $}',
+        storageBucket: '{$ firebase.storageBucket $}',
+      });
 
-    firebase.initializeApp({
-      apiKey: '{$ firebase.apiKey $}',
-      appId: '{$ firebase.appId $}',
-      authDomain: '{$ firebase.authDomain $}',
-      databaseURL: '{$ firebase.databaseURL $}',
-      messagingSenderId: '{$ firebase.messagingSenderId $}',
-      projectId: '{$ firebase.projectId $}',
-      storageBucket: '{$ firebase.storageBucket $}',
-    });
-
-    firebase.performance();
-    firebase.firestore()
+      firebase.performance();
+      firebase
+        .firestore()
         .enablePersistence({ synchronizeTabs: true })
         .catch(() => {
           // eslint-disable-next-line no-console
           console.warn('DB offline support not available');
         });
 
-    // eslint-disable-next-line no-console
-    console.log('Firebase is ready!');
-  </script>
+      // eslint-disable-next-line no-console
+      console.log('Firebase is ready!');
+    </script>
 
-  <script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-  {% if loadDevelopmentScripts %}
-  <!-- TODO: Consolidate development and production builds so they are more similar -->
-  <script src="./src/hoverboard-app.js" type="module"></script>
-  {% endif %}
+    <script src="./node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    {% if loadDevelopmentScripts %}
+    <!-- TODO: Consolidate development and production builds so they are more similar -->
+    <script src="./src/hoverboard-app.js" type="module"></script>
+    {% endif %}
 
-  <style>
+    <style>
+      html,
+      body {
+        min-height: 100%;
+        height: 100%;
+      }
 
-    html, body {
-      min-height: 100%;
-      height: 100%;
-    }
+      body {
+        margin: 0;
+        font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+      }
 
-    body {
-      margin: 0;
-      font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.5;
-    }
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+      }
 
-    *,
-    *:before,
-    *:after {
-      box-sizing: border-box;
-      -moz-osx-font-smoothing: grayscale;
-      -webkit-font-smoothing: antialiased;
-    }
+      /* styling for render while resources are loading */
+      hoverboard-app[unresolved] {
+        padding: 0 16px;
+        display: block;
+        line-height: 68px;
+        text-align: center;
+        font-weight: 600;
+        letter-spacing: 0.3em;
+        color: #202020;
+        overflow: visible;
+      }
+    </style>
+  </head>
 
-    /* styling for render while resources are loading */
-    hoverboard-app[unresolved] {
-      padding: 0 16px;
-      display: block;
-      line-height: 68px;
-      text-align: center;
-      font-weight: 600;
-      letter-spacing: 0.3em;
-      color: #202020;
-      overflow: visible;
-    }
-  </style>
+  <body>
+    <hoverboard-app unresolved>{$ title $}</hoverboard-app>
 
-</head>
+    <noscript>
+      Please enable JavaScript to view this website.
+    </noscript>
 
-<body>
+    <script>
+      window.performance && performance.mark && performance.mark('index.html');
 
-  <hoverboard-app unresolved>{$ title $}</hoverboard-app>
-
-<noscript>
-  Please enable JavaScript to view this website.
-</noscript>
-
-<script>
-  window.performance && performance.mark && performance.mark('index.html');
-
-  window.onload = function () {
-    const indexRenderTime = window.measureDuration && window.measureDuration('index.html');
-    if (indexRenderTime) {
-      ga('send', 'timing', 'index.html', 'render', indexRenderTime);
-    }
-  };
-</script>
-
-</body>
-
+      window.onload = function () {
+        const indexRenderTime = window.measureDuration && window.measureDuration('index.html');
+        if (indexRenderTime) {
+          ga('send', 'timing', 'index.html', 'render', indexRenderTime);
+        }
+      };
+    </script>
+  </body>
 </html>

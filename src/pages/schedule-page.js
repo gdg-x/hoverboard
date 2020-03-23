@@ -14,116 +14,126 @@ import { ReduxMixin } from '../mixins/redux-mixin.js';
 import { SessionsHoC } from '../mixins/sessions-hoc.js';
 import { SpeakersHoC } from '../mixins/speakers-hoc.js';
 import { UtilsFunctions } from '../mixins/utils-functions.js';
-import { dialogsActions, routingActions, scheduleActions, sessionsActions } from '../redux/actions.js';
+import {
+  dialogsActions,
+  routingActions,
+  scheduleActions,
+  sessionsActions,
+} from '../redux/actions.js';
 import { DIALOGS } from '../redux/constants.js';
 
 class SchedulePage extends UtilsFunctions(ReduxMixin(SessionsHoC(SpeakersHoC(PolymerElement)))) {
   static get template() {
     return html`
-    <style include="shared-styles flex flex-alignment">
-      :host {
-        display: block;
-        height: 100%;
-      }
-
-      .container {
-        min-height: 80%;
-      }
-
-      paper-progress {
-        width: 100%;
-        --paper-progress-active-color: var(--default-primary-color);
-        --paper-progress-secondary-color: var(--default-primary-color);
-      }
-
-      @media (max-width: 640px) {
-        .container {
-          padding: 0 0 32px;
-        }
-      }
-
-      @media (min-width: 640px) {
+      <style include="shared-styles flex flex-alignment">
         :host {
-          background-color: #fff;
+          display: block;
+          height: 100%;
         }
-      }
 
-    </style>
+        .container {
+          min-height: 80%;
+        }
 
-    <polymer-helmet
-      title="{$ heroSettings.schedule.title $} | {$ title $}"
-      description="{$ heroSettings.schedule.metaDescription $}"
-      active="[[_setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened)]]"></polymer-helmet>
+        paper-progress {
+          width: 100%;
+          --paper-progress-active-color: var(--default-primary-color);
+          --paper-progress-secondary-color: var(--default-primary-color);
+        }
 
-    <iron-location query="{{queryParams}}"></iron-location>
+        @media (max-width: 640px) {
+          .container {
+            padding: 0 0 32px;
+          }
+        }
 
-    <app-route
-      route="{{appRoute}}"
-      pattern="/:page"
-      data="{{routeData}}"
-      tail="{{subroute}}"
-      query-params="{{nQueryParams}}"></app-route>
+        @media (min-width: 640px) {
+          :host {
+            background-color: #fff;
+          }
+        }
+      </style>
 
-    <app-route route="[[route]]" pattern="/:day" data="{{routeData}}"></app-route>
+      <polymer-helmet
+        title="{$ heroSettings.schedule.title $} | {$ title $}"
+        description="{$ heroSettings.schedule.metaDescription $}"
+        active="[[_setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened)]]"
+      ></polymer-helmet>
 
-    <hero-block
-      background-image="{$ heroSettings.schedule.background.image $}"
-      background-color="{$ heroSettings.schedule.background.color $}"
-      font-color="{$ heroSettings.schedule.fontColor $}"
-      active="[[active]]">
-      <div class="hero-title">{$ heroSettings.schedule.title $}</div>
-      <p class="hero-description">{$ heroSettings.schedule.description $}</p>
-      <sticky-element slot="bottom" active="[[active]]">
-        <header-bottom-toolbar></header-bottom-toolbar>
-      </sticky-element>
-    </hero-block>
+      <iron-location query="{{queryParams}}"></iron-location>
 
-    <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
+      <app-route
+        route="{{appRoute}}"
+        pattern="/:page"
+        data="{{routeData}}"
+        tail="{{subroute}}"
+        query-params="{{nQueryParams}}"
+      ></app-route>
 
-    <filter-menu filters="[[_filters]]" selected="[[_selectedFilters]]"></filter-menu>
+      <app-route route="[[route]]" pattern="/:day" data="{{routeData}}"></app-route>
 
-    <div class="container">
-      <content-loader
-        card-padding="15px"
-        card-margin="16px 0"
-        card-height="140px"
-        avatar-size="0"
-        avatar-circle="0"
-        title-top-position="20px"
-        title-height="42px"
-        title-width="70%"
-        load-from="-20%"
-        load-to="80%"
-        blur-width="300px"
-        items-count="{$ contentLoaders.schedule.itemsCount $}"
-        hidden$="[[contentLoaderVisibility]]"
-        layout>
-      </content-loader>
+      <hero-block
+        background-image="{$ heroSettings.schedule.background.image $}"
+        background-color="{$ heroSettings.schedule.background.color $}"
+        font-color="{$ heroSettings.schedule.fontColor $}"
+        active="[[active]]"
+      >
+        <div class="hero-title">{$ heroSettings.schedule.title $}</div>
+        <p class="hero-description">{$ heroSettings.schedule.description $}</p>
+        <sticky-element slot="bottom" active="[[active]]">
+          <header-bottom-toolbar></header-bottom-toolbar>
+        </sticky-element>
+      </hero-block>
 
-      <iron-pages attr-for-selected="name" selected="[[subRoute]]" selected-attribute="active">
-        <template is="dom-repeat" items="[[schedule]]" as="day">
-          <schedule-day
-            name$="[[day.date]]"
-            day="[[day]]"
+      <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
+
+      <filter-menu filters="[[_filters]]" selected="[[_selectedFilters]]"></filter-menu>
+
+      <div class="container">
+        <content-loader
+          card-padding="15px"
+          card-margin="16px 0"
+          card-height="140px"
+          avatar-size="0"
+          avatar-circle="0"
+          title-top-position="20px"
+          title-height="42px"
+          title-width="70%"
+          load-from="-20%"
+          load-to="80%"
+          blur-width="300px"
+          items-count="{$ contentLoaders.schedule.itemsCount $}"
+          hidden$="[[contentLoaderVisibility]]"
+          layout
+        >
+        </content-loader>
+
+        <iron-pages attr-for-selected="name" selected="[[subRoute]]" selected-attribute="active">
+          <template is="dom-repeat" items="[[schedule]]" as="day">
+            <schedule-day
+              name$="[[day.date]]"
+              day="[[day]]"
+              user="[[user]]"
+              featured-sessions="[[featuredSessions]]"
+              selected-filters="[[_selectedFilters]]"
+              viewport="[[viewport]]"
+              query-params="[[queryParams]]"
+            ></schedule-day>
+          </template>
+          <my-schedule
+            name="my-schedule"
+            schedule="[[schedule]]"
             user="[[user]]"
             featured-sessions="[[featuredSessions]]"
             selected-filters="[[_selectedFilters]]"
             viewport="[[viewport]]"
-            query-params="[[queryParams]]"></schedule-day>
-        </template>
-        <my-schedule
-          name="my-schedule"
-          schedule="[[schedule]]"
-          user="[[user]]"
-          featured-sessions="[[featuredSessions]]"
-          selected-filters="[[_selectedFilters]]"
-          viewport="[[viewport]]"
-          query-params="[[queryParams]]"></my-schedule>
-      </iron-pages>
-    </div>
+            query-params="[[queryParams]]"
+          ></my-schedule>
+        </iron-pages>
+      </div>
 
-    <footer-block></footer-block>
-`;
+      <footer-block></footer-block>
+    `;
   }
 
   static get is() {
@@ -204,8 +214,13 @@ class SchedulePage extends UtilsFunctions(ReduxMixin(SessionsHoC(SpeakersHoC(Pol
   }
 
   _fetchFeaturedSessions(active, sessions, userUid) {
-    if (active && userUid && sessions && sessions.length &&
-      (!this.featuredSessions || !Object.keys(this.featuredSessions).length)) {
+    if (
+      active &&
+      userUid &&
+      sessions &&
+      sessions.length &&
+      (!this.featuredSessions || !Object.keys(this.featuredSessions).length)
+    ) {
       this.dispatchAction(sessionsActions.fetchUserFeaturedSessions(userUid));
     }
   }
@@ -234,15 +249,18 @@ class SchedulePage extends UtilsFunctions(ReduxMixin(SessionsHoC(SpeakersHoC(Pol
   }
 
   _onFiltersLoad(filters) {
-    this.set('_filters', [{
-      title: '{$ filters.tags $}',
-      key: 'tag',
-      items: filters.tags,
-    }, {
-      title: '{$ filters.complexity $}',
-      key: 'complexity',
-      items: filters.complexity,
-    }]);
+    this.set('_filters', [
+      {
+        title: '{$ filters.tags $}',
+        key: 'tag',
+        items: filters.tags,
+      },
+      {
+        title: '{$ filters.complexity $}',
+        key: 'complexity',
+        items: filters.complexity,
+      },
+    ]);
   }
 
   _paramsUpdated(queryParams) {

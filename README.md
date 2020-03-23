@@ -6,9 +6,10 @@
 <a href="#getting-started">:rocket: Get Started</a>
 </p>
 
-[![Build Status](https://travis-ci.org/gdg-x/hoverboard.svg?branch=master)](https://travis-ci.org/gdg-x/hoverboard) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard?ref=badge_shield)[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7973ac656dc94e42858ce640bb02de58)](https://www.codacy.com/app/pamuditha/hoverboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pamuditha/hoverboard&amp;utm_campaign=Badge_Grade)
+[![Build Status](https://travis-ci.org/gdg-x/hoverboard.svg?branch=master)](https://travis-ci.org/gdg-x/hoverboard) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard?ref=badge_shield)[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7973ac656dc94e42858ce640bb02de58)](https://www.codacy.com/app/pamuditha/hoverboard?utm_source=github.com&utm_medium=referral&utm_content=pamuditha/hoverboard&utm_campaign=Badge_Grade)
 
 ## Overview
+
 Project Hoverboard is the conference website template that helps you to set up a mobile-first conference website with blog, speaker and schedule management in a few minutes.
 
 The template is created based on 7 years of [GDG Lviv](https://www.meetup.com/GDG-Lviv/) team experience of running conferences and feedback from more than 500 event organizers from all around the world who were using previous Hoverboard versions.
@@ -16,17 +17,18 @@ The template is created based on 7 years of [GDG Lviv](https://www.meetup.com/GD
 Our goal is to allow event organizers to set up a professional conference website with minimum resources. To get started you need only basic knowledge of web technologies and a free Firebase account.
 
 ## Features
-| Feature | Description |
-|---|---|
-| **Fast and optimized** | 91/100 PWA on [Lighthouse](https://www.webpagetest.org/lighthouse.php?test=180111_1P_027a041bc5102982f074014807320a86&run=3) |
-| **Works offline** | shitty WiFi on the venue is not a problem anymore |
-| **Mobile-first** | layouts optimized for small screens, Hoverboard can be installed as a native app on your phone |
-| **Push notifications** | remind about sessions in My schedule, session feedback or target users with a custom message |
-| **SEO optimized** | index all content and get to the top in search results |
-| **Speakers and schedule management** | keep and update all information in the  Firebase |
-| **My schedule** | let attendees save sessions they want to visit |
-| **Customizable theme** | change colors to match your style |
-| **Blog** | post announcements, updates and useful information |
+
+| Feature                              | Description                                                                                                                  |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| **Fast and optimized**               | 91/100 PWA on [Lighthouse](https://www.webpagetest.org/lighthouse.php?test=180111_1P_027a041bc5102982f074014807320a86&run=3) |
+| **Works offline**                    | shitty WiFi on the venue is not a problem anymore                                                                            |
+| **Mobile-first**                     | layouts optimized for small screens, Hoverboard can be installed as a native app on your phone                               |
+| **Push notifications**               | remind about sessions in My schedule, session feedback or target users with a custom message                                 |
+| **SEO optimized**                    | index all content and get to the top in search results                                                                       |
+| **Speakers and schedule management** | keep and update all information in the Firebase                                                                              |
+| **My schedule**                      | let attendees save sessions they want to visit                                                                               |
+| **Customizable theme**               | change colors to match your style                                                                                            |
+| **Blog**                             | post announcements, updates and useful information                                                                           |
 
 ## Getting Started
 
@@ -39,6 +41,7 @@ If you don't want to bother with the dependencies, you can use the docker contai
 :book: Read more in [docker docs](/docs/tutorials/05-docker.md).
 
 ## Updating
+
 Here is a git workflow for updating your fork (or downloaded copy) to the latest version:
 
 ```console
@@ -61,11 +64,11 @@ The [Getting Started guide](#getting-started) is probably a good first point of 
 
 ## Technology Stack
 
-* Polymer 3
-* Redux
-* Firebase
-* Service Worker
-* CSS Grid
+- Polymer 3
+- Redux
+- Firebase
+- Service Worker
+- CSS Grid
 
 ## Contributing
 
@@ -81,35 +84,38 @@ Any other issue labeled [`help wanted`](https://github.com/gdg-x/hoverboard/labe
 
 ### Using GitHub Issues
 
-* Feel free to use GitHub issues for questions, bug reports, and feature requests
-* Use the search feature to check for an existing issue
-* Include as much information as possible and provide any relevant resources (Eg. screenshots)
-* For bug reports ensure you have a reproducible test case
-* A pull request with a breaking test would be super preferable here but isn't required
+- Feel free to use GitHub issues for questions, bug reports, and feature requests
+- Use the search feature to check for an existing issue
+- Include as much information as possible and provide any relevant resources (Eg. screenshots)
+- For bug reports ensure you have a reproducible test case
+- A pull request with a breaking test would be super preferable here but isn't required
 
 ### Submitting a Pull Request
 
-* Squash commits
-* Lint your code with eslint (config provided)
-* Include relevant test updates/additions
+- Squash commits
+- Lint your code with eslint (config provided)
+- Include relevant test updates/additions
 
 ## Code of Conduct
 
 Read the full version [Code of Conduct](/CODE_OF_CONDUCT.md).
 
 ## Contributors
-__Maintainer:__ [Abraham Williams](https://github.com/abraham)
-__Authors:__ [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
+
+**Maintainer:** [Abraham Williams](https://github.com/abraham)
+**Authors:** [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
 
 This project exists thanks to all the [people who contribute](https://github.com/gdg-x/hoverboard/graphs/contributors). [[Contribute](CONTRIBUTING.md)].
 
 <a href="https://github.com/gdg-x/hoverboard/graphs/contributors"><img src="https://opencollective.com/hoverboard/contributors.svg?width=890" /></a>
 
 ## Sponsoring
+
 Most of the core team members, hoverboard contributors and contributors in the ecosystem do this open-source work in their free time. If you like this project and it makes your life easier, please donate.
 <a href="https://opencollective.com/hoverboard#backers" target="_blank"><img src="https://opencollective.com/hoverboard/backers.svg?width=890"></a>
 
 ## License
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgdg-x%2Fhoverboard?ref=badge_large)
 
 The project is published under the [MIT license](/LICENSE.md).

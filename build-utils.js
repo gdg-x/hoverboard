@@ -22,18 +22,17 @@ const getConfigPath = () => {
 };
 
 const getData = () => {
-  const settingsFiles = [
-    './data/resources.json',
-    './data/settings.json',
-    getConfigPath(),
-  ];
+  const settingsFiles = ['./data/resources.json', './data/settings.json', getConfigPath()];
 
-  return settingsFiles.reduce((currentData, path) => {
-    return {
-      ...currentData,
-      ...require(path),
-    };
-  }, { loadDevelopmentScripts: development });
+  return settingsFiles.reduce(
+    (currentData, path) => {
+      return {
+        ...currentData,
+        ...require(path),
+      };
+    },
+    { loadDevelopmentScripts: development }
+  );
 };
 
 const data = getData();

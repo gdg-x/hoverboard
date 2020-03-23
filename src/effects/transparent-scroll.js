@@ -3,8 +3,12 @@ import { registerEffect } from '@polymer/app-layout/helpers/helpers.js';
 
 registerEffect('transparent-scroll', {
   setUp: function () {
-    this._headerToolbar = this.shadowRoot.querySelector('slot').assignedNodes({ flatten: true })
-        .filter((node) => node.nodeType === Node.ELEMENT_NODE && node.localName === 'header-toolbar')[0];
+    this._headerToolbar = this.shadowRoot
+      .querySelector('slot')
+      .assignedNodes({ flatten: true })
+      .filter(
+        (node) => node.nodeType === Node.ELEMENT_NODE && node.localName === 'header-toolbar'
+      )[0];
   },
 
   run: function run(position) {

@@ -8,74 +8,74 @@ import './shared-styles.js';
 class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
-    <style include="shared-styles flex flex-alignment positioning">
-      :host {
-        --paper-input-container-color: var(--footer-text-color);
-        --paper-input-container-focus-color: var(--default-primary-color);
-        --paper-input-container-input-color: var(--footer-text-color);
-      }
+      <style include="shared-styles flex flex-alignment positioning">
+        :host {
+          --paper-input-container-color: var(--footer-text-color);
+          --paper-input-container-focus-color: var(--default-primary-color);
+          --paper-input-container-input-color: var(--footer-text-color);
+        }
 
-      paper-input {
-        padding-bottom: 0;
-      }
+        paper-input {
+          padding-bottom: 0;
+        }
 
-      paper-input,
-      .form-content {
-        width: 100%;
-      }
+        paper-input,
+        .form-content {
+          width: 100%;
+        }
 
-      paper-input-container input,
-      paper-input-container label {
-        font-size: 14px;
-      }
+        paper-input-container input,
+        paper-input-container label {
+          font-size: 14px;
+        }
 
-      iron-icon {
-        margin-bottom: 5px;
-      }
+        iron-icon {
+          margin-bottom: 5px;
+        }
 
-      paper-button {
-        margin-top: 8px;
-        color: var(--secondary-text-color);
-      }
+        paper-button {
+          margin-top: 8px;
+          color: var(--secondary-text-color);
+        }
 
-      paper-button:hover {
-        cursor: pointer;
-      }
+        paper-button:hover {
+          cursor: pointer;
+        }
 
-      paper-button[disabled] {
-        background: none;
-        padding-right: 0;
-      }
+        paper-button[disabled] {
+          background: none;
+          padding-right: 0;
+        }
+      </style>
 
-    </style>
-
-    <div class="form-content" layout vertical center>
-      <paper-input
-        id="emailInput"
-        on-touchend="_focus"
-        label="{$ subscribeBlock.yourEmail $}"
-        value="{{email}}"
-        required
-        auto-validate$="[[validate]]"
-        error-message="{$ subscribeBlock.emailRequired $}"
-        autocomplete="off"
-        disabled="[[subscribed]]">
-
-        <iron-icon icon="hoverboard:checked" slot="suffix" hidden$="[[!subscribed]]"></iron-icon>
-      </paper-input>
-      <paper-button
-        on-tap="_subscribe"
-        ga-on="click"
-        disabled="[[subscribed]]"
-        ga-event-category="attendees"
-        ga-event-action="subscribe"
+      <div class="form-content" layout vertical center>
+        <paper-input
+          id="emailInput"
+          on-touchend="_focus"
+          label="{$ subscribeBlock.yourEmail $}"
+          value="{{email}}"
+          required
+          auto-validate$="[[validate]]"
+          error-message="{$ subscribeBlock.emailRequired $}"
+          autocomplete="off"
+          disabled="[[subscribed]]"
+        >
+          <iron-icon icon="hoverboard:checked" slot="suffix" hidden$="[[!subscribed]]"></iron-icon>
+        </paper-input>
+        <paper-button
+          on-tap="_subscribe"
+          ga-on="click"
+          disabled="[[subscribed]]"
+          ga-event-category="attendees"
+          ga-event-action="subscribe"
           ga-event-label="subscribe footer"
           layout
-          self-end>
-        [[ctaLabel]]
-      </paper-button>
-    </div>
-`;
+          self-end
+        >
+          [[ctaLabel]]
+        </paper-button>
+      </div>
+    `;
   }
 
   static get is() {
@@ -114,9 +114,7 @@ class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
   }
 
   _computeButtonLabel(subscribed) {
-    return subscribed ?
-      '{$  subscribeBlock.subscribed $}' :
-      '{$  subscribeBlock.subscribe $}';
+    return subscribed ? '{$  subscribeBlock.subscribed $}' : '{$  subscribeBlock.subscribe $}';
   }
 }
 

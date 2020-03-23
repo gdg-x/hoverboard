@@ -9,26 +9,33 @@ import './post-page.js';
 class BlogPage extends ScrollFunctions(PolymerElement) {
   static get template() {
     return html`
-    <style>
+      <style>
+        :host {
+          display: block;
+          height: 100%;
+        }
 
-      :host {
-        display: block;
-        height: 100%;
-      }
+        iron-pages {
+          min-height: 100%;
+        }
+      </style>
+      <app-route
+        route="[[_route]]"
+        pattern="/:page"
+        data="{{routeData}}"
+        tail="{{subRoute}}"
+      ></app-route>
 
-      iron-pages {
-        min-height: 100%;
-      }
-
-    </style>
-    <app-route route="[[_route]]" pattern="/:page" data="{{routeData}}" tail="{{subRoute}}"></app-route>
-
-    <iron-pages attr-for-selected="data-route" selected="[[routeData.page]]" selected-attribute="active">
-      <blog-list-page data-route data-path="./blog-list-page.html"></blog-list-page>
-      <post-page data-route="posts" data-path="./post-page.html" route="[[subRoute]]"></post-page>
-    </iron-pages>
-    <footer-block></footer-block>
-`;
+      <iron-pages
+        attr-for-selected="data-route"
+        selected="[[routeData.page]]"
+        selected-attribute="active"
+      >
+        <blog-list-page data-route data-path="./blog-list-page.html"></blog-list-page>
+        <post-page data-route="posts" data-path="./post-page.html" route="[[subRoute]]"></post-page>
+      </iron-pages>
+      <footer-block></footer-block>
+    `;
   }
 
   static get is() {
@@ -43,9 +50,7 @@ class BlogPage extends ScrollFunctions(PolymerElement) {
   }
 
   static get observers() {
-    return [
-      '_routeChanged(active, route)',
-    ];
+    return ['_routeChanged(active, route)'];
   }
 
   _routeChanged(active, route) {

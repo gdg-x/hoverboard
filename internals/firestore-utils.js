@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { firestore } from './firebase-config';
 
-const FILE_EXTENSION_PATTERN = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/gmi;
+const FILE_EXTENSION_PATTERN = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/gim;
 
 export function getData(path) {
   const source = getPathObject(path);
@@ -40,7 +40,9 @@ export function saveDataToFile(data, file) {
 
 export function fetchDataFromFirestore(collection, doc) {
   if (!doc) {
-    return firestore.collection(collection).get()
+    return firestore
+      .collection(collection)
+      .get()
       .then((snapshot) => {
         const collectionData = {};
         snapshot.forEach((doc) => {
@@ -49,7 +51,10 @@ export function fetchDataFromFirestore(collection, doc) {
         return Promise.resolve(collectionData);
       });
   }
-  return firestore.collection(collection).doc(doc).get()
+  return firestore
+    .collection(collection)
+    .doc(doc)
+    .get()
     .then((document) => {
       return Promise.resolve(document.data());
     });
@@ -66,7 +71,6 @@ export function saveDataToFirestore(data, collection, doc) {
   }
   return firestore.collection(collection).doc(doc).set(data);
 }
-
 
 export function getPathObject(params) {
   const normalizedParams = params.replace(/\/$/, '');
