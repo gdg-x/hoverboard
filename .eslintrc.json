@@ -1,5 +1,5 @@
 {
-  "extends": ["eslint:recommended", "google", "plugin:polymer/polymer-3"],
+  "extends": ["eslint:recommended", "google", "plugin:polymer/polymer-3", "prettier"],
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2018

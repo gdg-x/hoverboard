@@ -62,6 +62,7 @@
     "es-dev-server": "^1.45.2",
     "eslint": "^6.8.0",
     "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^6.10.1",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-polymer": "^0.4.0",
