@@ -50,6 +50,7 @@ const isTemplate = ({ url, contentType }) => {
     'application/json',
     'text/html',
     'text/markdown',
+    'video/mp2t', // TypeScript
   ];
 
   if (isNodeModule({ url })) {

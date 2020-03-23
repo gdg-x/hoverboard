@@ -1,4 +1,5 @@
 dist/
+out-tsc/
 node_modules/
 .idea/
 .vscode/
