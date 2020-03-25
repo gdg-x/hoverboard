@@ -527,6 +527,8 @@ const scheduleActions = {
 
     const schedulePromise = getScheduleJSON();
 
+    console.log(this)
+
     const speakersPromise = new Promise(function (resolve) {
       fetch('data/posts/speakers.json')
         .then(function (response) {

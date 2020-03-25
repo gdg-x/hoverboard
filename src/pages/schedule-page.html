@@ -75,22 +75,12 @@
 
     <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
-    ---
+
     <template is="dom-repeat" items="[[schedule]]" as="obj">
       [[obj.year]]
     </template>
-    ---
-    ---
-    <template is="dom-repeat" items="[[schedule]]" as="obj">
-      <template is="dom-repeat" items="[[obj.schedule]]" as="t">
-        test
-      </template>
-    </template>
-    ---
 
-    <template is="dom-repeat" items="[[schedule[0].schedule]]" as="obj">
-      ope
-    </template>
+
 
     <filter-menu filters="[[_filters]]" selected="[[_selectedFilters]]"></filter-menu>
 
@@ -102,13 +92,14 @@
       </content-loader>
 
       <iron-pages attr-for-selected="name" selected="[[subRoute]]" selected-attribute="active">
-        <template is="dom-repeat" items="[[schedule[0].schedule]]" as="day">
+        <template is="dom-repeat" items="[[schedule.1.schedule]]" as="day">
           <schedule-day name$="[[day.date]]" day="[[day]]" user="[[user]]" featured-sessions="[[featuredSessions]]"
             selected-filters="[[_selectedFilters]]" viewport="[[viewport]]" query-params="[[queryParams]]">
           </schedule-day>
         </template>
-        <my-schedule name="my-schedule" schedule="[[schedule]]" user="[[user]]" featured-sessions="[[featuredSessions]]"
-          selected-filters="[[_selectedFilters]]" viewport="[[viewport]]" query-params="[[queryParams]]"></my-schedule>
+        <my-schedule name="my-schedule" schedule="[[schedule.1.schedule]]" user="[[user]]"
+          featured-sessions="[[featuredSessions]]" selected-filters="[[_selectedFilters]]" viewport="[[viewport]]"
+          query-params="[[queryParams]]"></my-schedule>
       </iron-pages>
     </div>
 
@@ -132,6 +123,10 @@
             type: Array,
             statePath: 'schedule',
             observer: '_scheduleLoaded',
+          },
+          year: {
+            type: Number,
+            value: 0,
           },
           featuredSessions: {
             type: Object,
@@ -176,11 +171,12 @@
           '_scheduleChanged(schedule, _selectedFilters)',
           '_sessionsAndSpeakersChanged(sessions, speakers)',
           '_paramsUpdated(queryParams)',
+          '_scheduleLoaded(schedule)',
         ];
       }
 
       _scheduleLoaded(schedule) {
-        console.log("loaded s", schedule)
+        console.log("loaded s", schedule);
       }
 
       _sessionsAndSpeakersChanged(sessions, speakers) {
@@ -191,6 +187,7 @@
       }
 
       _scheduleChanged(schedule) {
+        console.log(schedule)
         if (schedule.length) {
           this.contentLoaderVisibility = 'hidden';
         }
@@ -204,7 +201,8 @@
       }
 
       _setDay(active, year, day, schedule) {
-        console.log("setday", active, year, day, schedule)
+        console.log("setday", active, year, day, schedule);
+
         if (active && schedule.length) {
           const selectedYear = year || schedule[0];
           const selectedDay = day || selectedYear[0].date;
@@ -231,6 +229,7 @@
       }
 
       _onFiltersLoad(filters) {
+        this.set('_yearNum', 0);
         this.set('_filters', [{
           title: '{$ filters.tags $}',
           key: 'tag',
