@@ -55,7 +55,7 @@
     "@babel/core": "^7.9.0",
     "@babel/node": "^7.8.7",
     "@babel/preset-env": "^7.9.0",
-    "@firebase/testing": "^0.17.1",
+    "@firebase/testing": "^0.18.0",
     "@open-wc/building-rollup": "^0.22.10",
     "concurrently": "^5.1.0",
     "cross-env": "^7.0.2",
