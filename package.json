@@ -70,7 +70,7 @@
     "eslint-plugin-polymer": "^0.4.0",
     "firebase-admin": "^8.10.0",
     "firebase-tools": "^7.16.1",
-    "jest": "^25.2.1",
+    "jest": "^25.2.3",
     "nunjucks": "^3.2.1",
     "prettier": "2.0.2",
     "rimraf": "^3.0.2",
