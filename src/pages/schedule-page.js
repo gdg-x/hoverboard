@@ -1,26 +1,21 @@
-import '@polymer/app-route/app-route.js';
-import '@polymer/iron-location/iron-location.js';
+import '@polymer/app-route/app-route';
+import '@polymer/iron-location/iron-location';
 import '@polymer/iron-pages';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
-import '../elements/content-loader.js';
-import '../elements/filter-menu.js';
-import '../elements/header-bottom-toolbar.js';
-import '../elements/my-schedule.js';
-import '../elements/schedule-day.js';
-import '../elements/shared-styles.js';
-import '../elements/sticky-element.js';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { SessionsHoC } from '../mixins/sessions-hoc.js';
-import { SpeakersHoC } from '../mixins/speakers-hoc.js';
-import { UtilsFunctions } from '../mixins/utils-functions.js';
-import {
-  dialogsActions,
-  routingActions,
-  scheduleActions,
-  sessionsActions,
-} from '../redux/actions.js';
-import { DIALOGS } from '../redux/constants.js';
+import '../elements/content-loader';
+import '../elements/filter-menu';
+import '../elements/header-bottom-toolbar';
+import '../elements/my-schedule';
+import '../elements/schedule-day';
+import '../elements/shared-styles';
+import '../elements/sticky-element';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { SessionsHoC } from '../mixins/sessions-hoc';
+import { SpeakersHoC } from '../mixins/speakers-hoc';
+import { UtilsFunctions } from '../mixins/utils-functions';
+import { dialogsActions, routingActions, scheduleActions, sessionsActions } from '../redux/actions';
+import { DIALOGS } from '../redux/constants';
 
 class SchedulePage extends UtilsFunctions(ReduxMixin(SessionsHoC(SpeakersHoC(PolymerElement)))) {
   static get template() {

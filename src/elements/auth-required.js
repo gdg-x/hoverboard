@@ -1,8 +1,8 @@
 import { html, PolymerElement } from '@polymer/polymer';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { dialogsActions } from '../redux/actions.js';
-import { DIALOGS } from '../redux/constants.js';
-import './shared-styles.js';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { dialogsActions } from '../redux/actions';
+import { DIALOGS } from '../redux/constants';
+import './shared-styles';
 
 class AuthRequired extends ReduxMixin(PolymerElement) {
   static get template() {

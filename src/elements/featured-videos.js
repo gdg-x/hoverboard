@@ -2,12 +2,12 @@ import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
+import '@polymer/polymer/lib/mixins/gesture-event-listeners';
 import 'plastic-image';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { uiActions, videosActions } from '../redux/actions.js';
-import './shared-animations.js';
-import './shared-styles.js';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { uiActions, videosActions } from '../redux/actions';
+import './shared-animations';
+import './shared-styles';
 
 class FeaturedVideos extends ReduxMixin(PolymerElement) {
   static get template() {

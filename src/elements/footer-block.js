@@ -1,10 +1,10 @@
 import '@polymer/paper-fab';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ScrollFunctions } from '../mixins/scroll-functions.js';
-import './footer-nav.js';
-import './footer-rel.js';
-import './footer-social.js';
-import './hoverboard-icons.js';
+import { ScrollFunctions } from '../mixins/scroll-functions';
+import './footer-nav';
+import './footer-rel';
+import './footer-social';
+import './hoverboard-icons';
 
 class FooterBlock extends ScrollFunctions(PolymerElement) {
   static get template() {

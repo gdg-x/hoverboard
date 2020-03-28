@@ -1,5 +1,5 @@
 import { html, PolymerElement } from '@polymer/polymer';
-import './subscribe-form-footer.js';
+import './subscribe-form-footer';
 
 class FooterRel extends PolymerElement {
   static get template() {

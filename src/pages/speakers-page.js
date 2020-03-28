@@ -1,20 +1,20 @@
-import '@polymer/app-route/app-route.js';
+import '@polymer/app-route/app-route';
 import '@polymer/iron-icon';
-import '@polymer/iron-location/iron-location.js';
+import '@polymer/iron-location/iron-location';
 import '@polymer/paper-icon-button';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
-import '../elements/content-loader.js';
-import '../elements/filter-menu.js';
-import '../elements/previous-speakers-block.js';
-import '../elements/shared-styles.js';
-import '../elements/text-truncate.js';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { SpeakersHoC } from '../mixins/speakers-hoc.js';
-import { UtilsFunctions } from '../mixins/utils-functions.js';
-import { dialogsActions } from '../redux/actions.js';
-import { DIALOGS } from '../redux/constants.js';
+import '../elements/content-loader';
+import '../elements/filter-menu';
+import '../elements/previous-speakers-block';
+import '../elements/shared-styles';
+import '../elements/text-truncate';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { SpeakersHoC } from '../mixins/speakers-hoc';
+import { UtilsFunctions } from '../mixins/utils-functions';
+import { dialogsActions } from '../redux/actions';
+import { DIALOGS } from '../redux/constants';
 
 class SpeakersPage extends UtilsFunctions(ReduxMixin(SpeakersHoC(PolymerElement))) {
   static get template() {

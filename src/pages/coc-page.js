@@ -1,8 +1,8 @@
 import { html, PolymerElement } from '@polymer/polymer';
-import '../elements/footer-block.js';
-import '../elements/hero-block.js';
-import '../elements/md-content.js';
-import '../elements/polymer-helmet.js';
+import '../elements/footer-block';
+import '../elements/hero-block';
+import '../elements/md-content';
+import '../elements/polymer-helmet';
 
 class CocPage extends PolymerElement {
   static get template() {

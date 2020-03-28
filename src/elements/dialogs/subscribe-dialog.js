@@ -1,13 +1,13 @@
 import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
 import '@polymer/paper-button';
-import '@polymer/paper-input/paper-input.js';
+import '@polymer/paper-input/paper-input';
 import { html, PolymerElement } from '@polymer/polymer';
-import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
-import { ReduxMixin } from '../../mixins/redux-mixin.js';
-import { dialogsActions } from '../../redux/actions.js';
-import { DIALOGS } from '../../redux/constants.js';
-import '../hoverboard-icons.js';
-import '../shared-styles.js';
+import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
+import { ReduxMixin } from '../../mixins/redux-mixin';
+import { dialogsActions } from '../../redux/actions';
+import { DIALOGS } from '../../redux/constants';
+import '../hoverboard-icons';
+import '../shared-styles';
 
 class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], PolymerElement)) {
   static get template() {

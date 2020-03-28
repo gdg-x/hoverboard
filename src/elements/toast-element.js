@@ -1,9 +1,9 @@
-import '@polymer/paper-toast/paper-toast.js';
-import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
+import '@polymer/paper-toast/paper-toast';
+import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { toastActions } from '../redux/actions.js';
-import './shared-styles.js';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { toastActions } from '../redux/actions';
+import './shared-styles';
 
 class ToastElement extends ReduxMixin(GestureEventListeners(PolymerElement)) {
   static get template() {

@@ -1,7 +1,7 @@
 import { html, PolymerElement } from '@polymer/polymer';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import './schedule-day.js';
-import './shared-styles.js';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import './schedule-day';
+import './shared-styles';
 
 class MySchedule extends ReduxMixin(PolymerElement) {
   static get template() {

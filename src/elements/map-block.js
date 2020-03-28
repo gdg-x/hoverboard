@@ -1,9 +1,9 @@
 import '@polymer/google-map';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import './hoverboard-icons.js';
-import './shared-styles.js';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import './hoverboard-icons';
+import './shared-styles';
 
 class MapBlock extends ReduxMixin(PolymerElement) {
   static get template() {

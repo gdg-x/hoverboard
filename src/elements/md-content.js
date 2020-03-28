@@ -1,7 +1,7 @@
 import '@polymer/marked-element';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ScrollFunctions } from '../mixins/scroll-functions.js';
-import './shared-styles.js';
+import { ScrollFunctions } from '../mixins/scroll-functions';
+import './shared-styles';
 
 class MdContent extends ScrollFunctions(PolymerElement) {
   static get template() {

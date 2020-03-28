@@ -1,19 +1,19 @@
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
-import '../elements/about-block.js';
-import '../elements/about-organizer-block.js';
-import '../elements/featured-videos.js';
-import '../elements/gallery-block.js';
-import '../elements/latest-posts-block.js';
-import '../elements/map-block.js';
-import '../elements/partners-block.js';
-import '../elements/speakers-block.js';
-import '../elements/subscribe-block.js';
-import '../elements/fork-me-block.js';
-import '../elements/tickets-block.js';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { ScrollFunctions } from '../mixins/scroll-functions.js';
-import { uiActions } from '../redux/actions.js';
+import '../elements/about-block';
+import '../elements/about-organizer-block';
+import '../elements/featured-videos';
+import '../elements/gallery-block';
+import '../elements/latest-posts-block';
+import '../elements/map-block';
+import '../elements/partners-block';
+import '../elements/speakers-block';
+import '../elements/subscribe-block';
+import '../elements/fork-me-block';
+import '../elements/tickets-block';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { ScrollFunctions } from '../mixins/scroll-functions';
+import { uiActions } from '../redux/actions';
 
 class HomePage extends ScrollFunctions(ReduxMixin(PolymerElement)) {
   static get template() {

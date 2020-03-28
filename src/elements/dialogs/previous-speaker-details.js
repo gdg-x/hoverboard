@@ -1,19 +1,19 @@
-import '@polymer/app-layout/app-header-layout/app-header-layout.js';
-import '@polymer/app-layout/app-scroll-effects/effects/waterfall.js';
-import '@polymer/app-layout/app-toolbar/app-toolbar.js';
+import '@polymer/app-layout/app-header-layout/app-header-layout';
+import '@polymer/app-layout/app-scroll-effects/effects/waterfall';
+import '@polymer/app-layout/app-toolbar/app-toolbar';
 import '@polymer/iron-icon';
 import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
 import '@polymer/marked-element';
 import { html, PolymerElement } from '@polymer/polymer';
-import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
+import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import 'plastic-image';
-import { ReduxMixin } from '../../mixins/redux-mixin.js';
-import { UtilsFunctions } from '../../mixins/utils-functions.js';
-import { dialogsActions, uiActions } from '../../redux/actions.js';
-import { DIALOGS } from '../../redux/constants.js';
-import '../shared-styles.js';
-import '../text-truncate.js';
-import './dialog-styles.js';
+import { ReduxMixin } from '../../mixins/redux-mixin';
+import { UtilsFunctions } from '../../mixins/utils-functions';
+import { dialogsActions, uiActions } from '../../redux/actions';
+import { DIALOGS } from '../../redux/constants';
+import '../shared-styles';
+import '../text-truncate';
+import './dialog-styles';
 
 class PreviousSpeakerDetails extends UtilsFunctions(
   ReduxMixin(mixinBehaviors([IronOverlayBehavior], PolymerElement))

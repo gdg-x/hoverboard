@@ -1,7 +1,7 @@
-import '@polymer/iron-location/iron-location.js';
+import '@polymer/iron-location/iron-location';
 import { html, PolymerElement } from '@polymer/polymer';
-import { UtilsFunctions } from '../mixins/utils-functions.js';
-import './shared-styles.js';
+import { UtilsFunctions } from '../mixins/utils-functions';
+import './shared-styles';
 
 class FilterMenu extends UtilsFunctions(PolymerElement) {
   static get template() {

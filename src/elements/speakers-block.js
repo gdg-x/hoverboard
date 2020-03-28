@@ -1,12 +1,12 @@
 import '@polymer/iron-icon';
-import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
+import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { SpeakersHoC } from '../mixins/speakers-hoc.js';
-import { UtilsFunctions } from '../mixins/utils-functions.js';
-import './shared-styles.js';
-import './text-truncate.js';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { SpeakersHoC } from '../mixins/speakers-hoc';
+import { UtilsFunctions } from '../mixins/utils-functions';
+import './shared-styles';
+import './text-truncate';
 
 class SpeakersBlock extends UtilsFunctions(
   SpeakersHoC(ReduxMixin(GestureEventListeners(PolymerElement)))

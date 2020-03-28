@@ -1,11 +1,11 @@
 import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
 import { html, PolymerElement } from '@polymer/polymer';
-import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
-import { ReduxMixin } from '../../mixins/redux-mixin.js';
-import { dialogsActions, helperActions, userActions } from '../../redux/actions.js';
-import { DIALOGS } from '../../redux/constants.js';
-import '../hoverboard-icons.js';
-import '../shared-styles.js';
+import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
+import { ReduxMixin } from '../../mixins/redux-mixin';
+import { dialogsActions, helperActions, userActions } from '../../redux/actions';
+import { DIALOGS } from '../../redux/constants';
+import '../hoverboard-icons';
+import '../shared-styles';
 
 class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], PolymerElement)) {
   static get template() {

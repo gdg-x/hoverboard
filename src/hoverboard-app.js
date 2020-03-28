@@ -1,51 +1,51 @@
-import '@polymer/app-layout/app-drawer-layout/app-drawer-layout.js';
-import '@polymer/app-layout/app-drawer/app-drawer.js';
-import '@polymer/app-layout/app-header-layout/app-header-layout.js';
-import '@polymer/app-layout/app-header/app-header.js';
-import '@polymer/app-layout/app-scroll-effects/effects/waterfall.js';
-import '@polymer/app-layout/app-toolbar/app-toolbar.js';
-import '@polymer/app-route/app-location.js';
-import '@polymer/app-route/app-route.js';
-import '@polymer/iron-dropdown/iron-dropdown-scroll-manager.js';
+import '@polymer/app-layout/app-drawer-layout/app-drawer-layout';
+import '@polymer/app-layout/app-drawer/app-drawer';
+import '@polymer/app-layout/app-header-layout/app-header-layout';
+import '@polymer/app-layout/app-header/app-header';
+import '@polymer/app-layout/app-scroll-effects/effects/waterfall';
+import '@polymer/app-layout/app-toolbar/app-toolbar';
+import '@polymer/app-route/app-location';
+import '@polymer/app-route/app-route';
+import '@polymer/iron-dropdown/iron-dropdown-scroll-manager';
 import '@polymer/iron-icon';
 import '@polymer/iron-media-query';
 import '@polymer/iron-pages';
-import '@polymer/iron-selector/iron-selector.js';
+import '@polymer/iron-selector/iron-selector';
 import '@polymer/paper-button';
 import '@polymer/paper-icon-button';
 import '@polymer/paper-menu-button';
 import '@polymer/paper-tabs';
 import { html, PolymerElement } from '@polymer/polymer';
-import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings.js';
+import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings';
 import 'plastic-image';
-import { log } from './console.js';
-import './effects/transparent-scroll.js';
-import './elements/dialogs/feedback-dialog.js';
-import './elements/dialogs/previous-speaker-details.js';
-import './elements/dialogs/session-details.js';
-import './elements/dialogs/signin-dialog.js';
-import './elements/dialogs/speaker-details.js';
-import './elements/dialogs/subscribe-dialog.js';
-import './elements/footer-block.js';
-import './elements/header-toolbar.js';
-import './elements/hero-block.js';
-import './elements/hoverboard-analytics.js';
-import './elements/hoverboard-icons.js';
-import './elements/polymer-helmet.js';
-import './elements/shared-styles.js';
-import './elements/toast-element.js';
-import './elements/video-dialog.js';
-import { ReduxMixin } from './mixins/redux-mixin.js';
-import { ScrollFunctions } from './mixins/scroll-functions.js';
-import { UtilsFunctions } from './mixins/utils-functions.js';
-import './pages/blog-page.js';
-import './pages/coc-page.js';
-import './pages/faq-page.js';
-import './pages/home-page.js';
-import './pages/previous-speakers-page.js';
-import './pages/schedule-page.js';
-import './pages/speakers-page.js';
-import './pages/team-page.js';
+import { log } from './console';
+import './effects/transparent-scroll';
+import './elements/dialogs/feedback-dialog';
+import './elements/dialogs/previous-speaker-details';
+import './elements/dialogs/session-details';
+import './elements/dialogs/signin-dialog';
+import './elements/dialogs/speaker-details';
+import './elements/dialogs/subscribe-dialog';
+import './elements/footer-block';
+import './elements/header-toolbar';
+import './elements/hero-block';
+import './elements/hoverboard-analytics';
+import './elements/hoverboard-icons';
+import './elements/polymer-helmet';
+import './elements/shared-styles';
+import './elements/toast-element';
+import './elements/video-dialog';
+import { ReduxMixin } from './mixins/redux-mixin';
+import { ScrollFunctions } from './mixins/scroll-functions';
+import { UtilsFunctions } from './mixins/utils-functions';
+import './pages/blog-page';
+import './pages/coc-page';
+import './pages/faq-page';
+import './pages/home-page';
+import './pages/previous-speakers-page';
+import './pages/schedule-page';
+import './pages/speakers-page';
+import './pages/team-page';
 import {
   notificationsActions,
   routingActions,
@@ -53,8 +53,8 @@ import {
   toastActions,
   uiActions,
   userActions,
-} from './redux/actions.js';
-import { registerServiceWorker } from './service-worker-registration.js';
+} from './redux/actions';
+import { registerServiceWorker } from './service-worker-registration';
 
 class HoverboardApp extends UtilsFunctions(ScrollFunctions(ReduxMixin(PolymerElement))) {
   static get template() {

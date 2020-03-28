@@ -1,8 +1,8 @@
 import { html, PolymerElement } from '@polymer/polymer';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { dialogsActions, notificationsActions, uiActions, userActions } from '../redux/actions.js';
-import { DIALOGS, NOTIFICATIONS_STATUS } from '../redux/constants.js';
-import './shared-styles.js';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { dialogsActions, notificationsActions, uiActions, userActions } from '../redux/actions';
+import { DIALOGS, NOTIFICATIONS_STATUS } from '../redux/constants';
+import './shared-styles';
 
 class HeaderToolbar extends ReduxMixin(PolymerElement) {
   static get template() {

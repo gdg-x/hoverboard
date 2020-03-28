@@ -2,12 +2,12 @@ import '@polymer/paper-button';
 import '@polymer/paper-input/paper-textarea';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@radi-cho/star-rating';
-import { ReduxMixin } from '../../mixins/redux-mixin.js';
-import { dialogsActions } from '../../redux/actions.js';
+import { ReduxMixin } from '../../mixins/redux-mixin';
+import { dialogsActions } from '../../redux/actions';
 import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
-import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
-import { DIALOGS } from '../../redux/constants.js';
-import '../shared-styles.js';
+import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
+import { DIALOGS } from '../../redux/constants';
+import '../shared-styles';
 
 class FeedbackDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], PolymerElement)) {
   static get template() {

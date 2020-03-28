@@ -65,8 +65,8 @@ import {
   UPDATE_NOTIFICATIONS_STATUS,
   UPDATE_SESSIONS,
   WIPE_PREVIOUS_FEEDBACK,
-} from './constants.js';
-import { initialState } from './initial-state.js';
+} from './constants';
+import { initialState } from './initial-state';
 
 export const uiReducer = (state = initialState.ui, action) => {
   switch (action.type) {

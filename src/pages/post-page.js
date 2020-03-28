@@ -1,14 +1,14 @@
-import '@polymer/app-route/app-route.js';
-import '@polymer/iron-ajax/iron-ajax.js';
+import '@polymer/app-route/app-route';
+import '@polymer/iron-ajax/iron-ajax';
 import '@polymer/marked-element';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
-import '../elements/posts-list.js';
-import '../elements/shared-styles.js';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { UtilsFunctions } from '../mixins/utils-functions.js';
-import { blogActions } from '../redux/actions.js';
+import '../elements/posts-list';
+import '../elements/shared-styles';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { UtilsFunctions } from '../mixins/utils-functions';
+import { blogActions } from '../redux/actions';
 
 class PostPage extends UtilsFunctions(ReduxMixin(PolymerElement)) {
   static get template() {

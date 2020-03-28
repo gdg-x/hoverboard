@@ -1,5 +1,5 @@
-import '@polymer/app-layout/app-scroll-effects/app-scroll-effects-behavior.js';
-import { registerEffect } from '@polymer/app-layout/helpers/helpers.js';
+import '@polymer/app-layout/app-scroll-effects/app-scroll-effects-behavior';
+import { registerEffect } from '@polymer/app-layout/helpers/helpers';
 
 registerEffect('transparent-scroll', {
   setUp: function () {

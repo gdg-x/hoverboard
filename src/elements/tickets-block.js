@@ -1,10 +1,10 @@
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import './content-loader.js';
-import './hoverboard-icons.js';
-import './shared-styles.js';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import './content-loader';
+import './hoverboard-icons';
+import './shared-styles';
 
 class TicketsBlock extends ReduxMixin(PolymerElement) {
   static get template() {

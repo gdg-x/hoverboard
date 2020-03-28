@@ -1,9 +1,9 @@
-import '@polymer/iron-location/iron-location.js';
+import '@polymer/iron-location/iron-location';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { UtilsFunctions } from '../mixins/utils-functions.js';
-import './content-loader.js';
-import './shared-styles.js';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { UtilsFunctions } from '../mixins/utils-functions';
+import './content-loader';
+import './shared-styles';
 
 class HeaderBottomToolbar extends UtilsFunctions(ReduxMixin(PolymerElement)) {
   static get template() {

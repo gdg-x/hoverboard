@@ -1,13 +1,13 @@
-import '@polymer/app-route/app-route.js';
+import '@polymer/app-route/app-route';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
-import '../elements/content-loader.js';
-import '../elements/shared-styles.js';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { UtilsFunctions } from '../mixins/utils-functions.js';
-import { dialogsActions, previousSpeakersActions } from '../redux/actions.js';
-import { DIALOGS } from '../redux/constants.js';
+import '../elements/content-loader';
+import '../elements/shared-styles';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { UtilsFunctions } from '../mixins/utils-functions';
+import { dialogsActions, previousSpeakersActions } from '../redux/actions';
+import { DIALOGS } from '../redux/constants';
 
 class PreviousSpeakersPage extends UtilsFunctions(ReduxMixin(PolymerElement)) {
   static get template() {

@@ -1,12 +1,12 @@
 import '@google-web-components/google-youtube';
 import '@polymer/paper-button';
-import { PaperDialogBehavior } from '@polymer/paper-dialog-behavior/paper-dialog-behavior.js';
+import { PaperDialogBehavior } from '@polymer/paper-dialog-behavior/paper-dialog-behavior';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { uiActions } from '../redux/actions.js';
-import './shared-styles.js';
+import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { uiActions } from '../redux/actions';
+import './shared-styles';
 class VideoDialog extends ReduxMixin(mixinBehaviors([PaperDialogBehavior], PolymerElement)) {
   static get template() {
     return html`

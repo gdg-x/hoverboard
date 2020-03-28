@@ -1,5 +1,5 @@
 import { html, PolymerElement } from '@polymer/polymer';
-import './shared-styles.js';
+import './shared-styles';
 
 class ContentLoader extends PolymerElement {
   static get template() {

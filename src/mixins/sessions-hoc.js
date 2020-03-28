@@ -1,5 +1,5 @@
-import { sessionsActions } from '../redux/actions.js';
-import { ReduxMixin } from './redux-mixin.js';
+import { sessionsActions } from '../redux/actions';
+import { ReduxMixin } from './redux-mixin';
 
 /* @polymerMixin */
 export const SessionsHoC = (subclass) =>
