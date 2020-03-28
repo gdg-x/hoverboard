@@ -1,9 +1,9 @@
 import '@polymer/marked-element';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ScrollFunctions } from '../mixins/scroll-functions';
+import { offsetTop, scrollToY } from '../utils/scrolling';
 import './shared-styles';
 
-class MdContent extends ScrollFunctions(PolymerElement) {
+class MdContent extends PolymerElement {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -152,8 +152,8 @@ class MdContent extends ScrollFunctions(PolymerElement) {
         const id = window.location.hash.slice(1).split('#')[0];
         const element = this.shadowRoot.querySelector(`[id="${id}"]`);
         if (!element) return;
-        const offset = this.offsetTop(element);
-        this.scrollToY(offset - this.toolbarOffset, 100);
+        const offset = offsetTop(element);
+        scrollToY(offset - this.toolbarOffset, 100);
       }, 500);
     }
   }
@@ -198,18 +198,18 @@ class MdContent extends ScrollFunctions(PolymerElement) {
     e.preventDefault();
     const elementIdToScroll = e.target.getAttribute('href');
     const element = this.shadowRoot.querySelector(`[id="${elementIdToScroll.slice(1)}"]`);
-    const offset = this.offsetTop(element);
-    this.scrollToY(offset - this.toolbarOffset, 1500, 'easeInOutSine');
+    const offset = offsetTop(element);
+    scrollToY(offset - this.toolbarOffset, 1500, 'easeInOutSine');
     window.location.hash = elementIdToScroll;
   }
 
   _changeUrl(e) {
     const targetElement = e.path && e.path[0];
-    const offset = this.offsetTop(targetElement);
+    const offset = offsetTop(targetElement);
     const canBeScrolled =
       Math.abs(document.documentElement.scrollTop + this.toolbarOffset - offset) >= 50;
     if (canBeScrolled) {
-      this.scrollToY(offset - this.toolbarOffset, 100);
+      scrollToY(offset - this.toolbarOffset, 100);
     }
 
     window.location.hash = targetElement.id;

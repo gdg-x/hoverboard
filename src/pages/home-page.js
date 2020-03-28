@@ -3,19 +3,19 @@ import { html, PolymerElement } from '@polymer/polymer';
 import '../elements/about-block';
 import '../elements/about-organizer-block';
 import '../elements/featured-videos';
+import '../elements/fork-me-block';
 import '../elements/gallery-block';
 import '../elements/latest-posts-block';
 import '../elements/map-block';
 import '../elements/partners-block';
 import '../elements/speakers-block';
 import '../elements/subscribe-block';
-import '../elements/fork-me-block';
 import '../elements/tickets-block';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { ScrollFunctions } from '../mixins/scroll-functions';
 import { uiActions } from '../redux/actions';
+import { scrollToY } from '../utils/scrolling';
 
-class HomePage extends ScrollFunctions(ReduxMixin(PolymerElement)) {
+class HomePage extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -290,12 +290,12 @@ class HomePage extends ScrollFunctions(ReduxMixin(PolymerElement)) {
     const toolbarHeight = HOVERBOARD.Elements.HeaderToolbar.getBoundingClientRect().height - 1;
     const ticketsBlockPositionY =
       HOVERBOARD.Elements.Tickets.getBoundingClientRect().top - toolbarHeight;
-    this.scrollToY(ticketsBlockPositionY, 600, 'easeInOutSine');
+    scrollToY(ticketsBlockPositionY, 600, 'easeInOutSine');
   }
 
   _scrollNextBlock() {
     const heroHeight = this.$.hero.getBoundingClientRect().height - 64;
-    this.scrollToY(heroHeight, 600, 'easeInOutSine');
+    scrollToY(heroHeight, 600, 'easeInOutSine');
   }
 }
 

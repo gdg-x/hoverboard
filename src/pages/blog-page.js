@@ -1,12 +1,12 @@
 import '@polymer/app-route/app-route';
 import '@polymer/iron-pages';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ScrollFunctions } from '../mixins/scroll-functions';
 import { routingActions } from '../redux/actions';
+import { scrollToY } from '../utils/scrolling';
 import './blog-list-page';
 import './post-page';
 
-class BlogPage extends ScrollFunctions(PolymerElement) {
+class BlogPage extends PolymerElement {
   static get template() {
     return html`
       <style>
@@ -55,7 +55,7 @@ class BlogPage extends ScrollFunctions(PolymerElement) {
 
   _routeChanged(active, route) {
     if (active && route) {
-      this.scrollToY(0, 200);
+      scrollToY(0, 200);
       this.set('subRoute', {});
       this.set('_route', route);
       routingActions.setSubRoute(this.routeData.page);
