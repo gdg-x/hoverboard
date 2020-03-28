@@ -1,7 +1,7 @@
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
-import { uiActions } from '../redux/actions.js';
-import './shared-styles.js';
+import { uiActions } from '../redux/actions';
+import './shared-styles';
 
 class HeroBlock extends PolymerElement {
   static get template() {

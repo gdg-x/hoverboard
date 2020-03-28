@@ -1,8 +1,8 @@
 import { html, PolymerElement } from '@polymer/polymer';
-import { ScrollFunctions } from '../mixins/scroll-functions.js';
-import { UtilsFunctions } from '../mixins/utils-functions.js';
-import './session-element.js';
-import './shared-styles.js';
+import { ScrollFunctions } from '../mixins/scroll-functions';
+import { UtilsFunctions } from '../mixins/utils-functions';
+import './session-element';
+import './shared-styles';
 
 class ScheduleDay extends UtilsFunctions(ScrollFunctions(PolymerElement)) {
   static get template() {

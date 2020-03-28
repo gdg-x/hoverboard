@@ -3,9 +3,9 @@ import '@polymer/marked-element';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
-import '../elements/shared-styles.js';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { teamActions } from '../redux/actions.js';
+import '../elements/shared-styles';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { teamActions } from '../redux/actions';
 
 class TeamPage extends ReduxMixin(PolymerElement) {
   static get template() {

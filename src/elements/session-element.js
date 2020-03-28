@@ -1,13 +1,13 @@
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
-import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
+import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners';
 import 'plastic-image';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { UtilsFunctions } from '../mixins/utils-functions.js';
-import { dialogsActions, sessionsActions, toastActions } from '../redux/actions.js';
-import { DIALOGS } from '../redux/constants.js';
-import './shared-styles.js';
-import './text-truncate.js';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { UtilsFunctions } from '../mixins/utils-functions';
+import { dialogsActions, sessionsActions, toastActions } from '../redux/actions';
+import { DIALOGS } from '../redux/constants';
+import './shared-styles';
+import './text-truncate';
 
 class SessionElement extends UtilsFunctions(ReduxMixin(GestureEventListeners(PolymerElement))) {
   static get template() {

@@ -1,10 +1,10 @@
-import '@polymer/app-route/app-route.js';
+import '@polymer/app-route/app-route';
 import '@polymer/iron-pages';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ScrollFunctions } from '../mixins/scroll-functions.js';
-import { routingActions } from '../redux/actions.js';
-import './blog-list-page.js';
-import './post-page.js';
+import { ScrollFunctions } from '../mixins/scroll-functions';
+import { routingActions } from '../redux/actions';
+import './blog-list-page';
+import './post-page';
 
 class BlogPage extends ScrollFunctions(PolymerElement) {
   static get template() {

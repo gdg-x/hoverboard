@@ -1,9 +1,9 @@
-import '@polymer/paper-input/paper-input.js';
+import '@polymer/paper-input/paper-input';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { subscribeActions } from '../redux/actions.js';
-import './hoverboard-icons.js';
-import './shared-styles.js';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { subscribeActions } from '../redux/actions';
+import './hoverboard-icons';
+import './shared-styles';
 
 class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
   static get template() {

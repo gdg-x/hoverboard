@@ -1,4 +1,4 @@
-import { DIALOGS, NOTIFICATIONS_STATUS } from './constants.js';
+import { DIALOGS, NOTIFICATIONS_STATUS } from './constants';
 
 export const initialState = {
   ui: {

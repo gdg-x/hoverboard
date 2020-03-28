@@ -1,9 +1,9 @@
 import '@polymer/marked-element';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
-import { UtilsFunctions } from '../mixins/utils-functions.js';
-import './shared-styles.js';
-import './text-truncate.js';
+import { UtilsFunctions } from '../mixins/utils-functions';
+import './shared-styles';
+import './text-truncate';
 
 class PostsList extends UtilsFunctions(PolymerElement) {
   static get template() {

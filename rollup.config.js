@@ -7,7 +7,7 @@ import copy from 'rollup-plugin-copy';
 import indexHTMLPlugin from 'rollup-plugin-index-html';
 import replace from 'rollup-plugin-re';
 import { generateSW } from 'rollup-plugin-workbox';
-import { workboxConfig } from './workbox-config.js';
+import { workboxConfig } from './workbox-config';
 
 const { production, compileTemplate, compileBufferTemplate } = require('./build-utils.js');
 

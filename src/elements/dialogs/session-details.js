@@ -1,21 +1,21 @@
-import '@polymer/app-layout/app-header-layout/app-header-layout.js';
-import '@polymer/app-layout/app-toolbar/app-toolbar.js';
+import '@polymer/app-layout/app-header-layout/app-header-layout';
+import '@polymer/app-layout/app-toolbar/app-toolbar';
 import '@polymer/iron-icon';
 import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
 import '@polymer/marked-element';
 import '@polymer/paper-fab';
 import { html, PolymerElement } from '@polymer/polymer';
-import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
+import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import 'plastic-image';
-import { SpeakersHoC } from '../../mixins/speakers-hoc.js';
-import { UtilsFunctions } from '../../mixins/utils-functions.js';
-import { dialogsActions, sessionsActions, toastActions, uiActions } from '../../redux/actions.js';
-import { DIALOGS } from '../../redux/constants.js';
-import '../shared-styles.js';
-import '../text-truncate.js';
-import './dialog-styles.js';
-import '../feedback-block.js';
-import '../auth-required.js';
+import { SpeakersHoC } from '../../mixins/speakers-hoc';
+import { UtilsFunctions } from '../../mixins/utils-functions';
+import { dialogsActions, sessionsActions, toastActions, uiActions } from '../../redux/actions';
+import { DIALOGS } from '../../redux/constants';
+import '../shared-styles';
+import '../text-truncate';
+import './dialog-styles';
+import '../feedback-block';
+import '../auth-required';
 
 class SessionDetails extends UtilsFunctions(
   SpeakersHoC(mixinBehaviors([IronOverlayBehavior], PolymerElement))

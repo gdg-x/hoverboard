@@ -1,10 +1,10 @@
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { UtilsFunctions } from '../mixins/utils-functions.js';
-import { previousSpeakersActions } from '../redux/actions.js';
-import './shared-styles.js';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { UtilsFunctions } from '../mixins/utils-functions';
+import { previousSpeakersActions } from '../redux/actions';
+import './shared-styles';
 
 class PreviousSpeakersBlock extends UtilsFunctions(ReduxMixin(PolymerElement)) {
   static get template() {

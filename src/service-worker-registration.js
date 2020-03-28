@@ -1,5 +1,5 @@
-import { error } from './console.js';
-import { toastActions } from './redux/actions.js';
+import { error } from './console';
+import { toastActions } from './redux/actions';
 
 const SW_URL = 'service-worker.js';
 const SCOPE = Polymer.rootPath;

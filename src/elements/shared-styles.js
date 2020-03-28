@@ -2,7 +2,7 @@
 /* shared styles for all views */
 
 import '@polymer/polymer';
-import './flex-layout-attr.js';
+import './flex-layout-attr';
 
 const documentContainer = document.createElement('template');
 

@@ -3,11 +3,11 @@ import '@polymer/marked-element';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { UtilsFunctions } from '../mixins/utils-functions.js';
-import { blogActions } from '../redux/actions.js';
-import './shared-styles.js';
-import './text-truncate.js';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { UtilsFunctions } from '../mixins/utils-functions';
+import { blogActions } from '../redux/actions';
+import './shared-styles';
+import './text-truncate';
 
 class LatestPostsBlock extends UtilsFunctions(ReduxMixin(PolymerElement)) {
   static get template() {

@@ -1,8 +1,8 @@
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import './hoverboard-icons.js';
-import './shared-styles.js';
+import './hoverboard-icons';
+import './shared-styles';
 
 class ForkMeBlock extends PolymerElement {
   static get template() {

@@ -66,8 +66,8 @@ import {
   TOGGLE_VIDEO_DIALOG,
   UPDATE_NOTIFICATIONS_STATUS,
   WIPE_PREVIOUS_FEEDBACK,
-} from './constants.js';
-import { store } from './store.js';
+} from './constants';
+import { store } from './store';
 
 export const uiActions = {
   toggleDrawer: (value = null) => {

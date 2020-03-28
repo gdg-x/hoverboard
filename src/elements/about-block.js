@@ -1,10 +1,10 @@
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { uiActions } from '../redux/actions.js';
-import './hoverboard-icons.js';
-import './shared-animations.js';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { uiActions } from '../redux/actions';
+import './hoverboard-icons';
+import './shared-animations';
 
 class AboutBlock extends ReduxMixin(PolymerElement) {
   static get template() {

@@ -1,9 +1,9 @@
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { galleryActions } from '../redux/actions.js';
-import './shared-styles.js';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { galleryActions } from '../redux/actions';
+import './shared-styles';
 
 class GalleryBlock extends ReduxMixin(PolymerElement) {
   static get template() {

@@ -1,6 +1,6 @@
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ShareMixin } from '../mixins/share-mixin.js';
+import { ShareMixin } from '../mixins/share-mixin';
 
 class FooterSocial extends ShareMixin(PolymerElement) {
   static get template() {

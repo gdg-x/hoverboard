@@ -2,11 +2,11 @@ import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
-import { ReduxMixin } from '../mixins/redux-mixin.js';
-import { dialogsActions, partnersActions, toastActions } from '../redux/actions.js';
-import { DIALOGS } from '../redux/constants.js';
-import './hoverboard-icons.js';
-import './shared-styles.js';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { dialogsActions, partnersActions, toastActions } from '../redux/actions';
+import { DIALOGS } from '../redux/constants';
+import './hoverboard-icons';
+import './shared-styles';
 
 class PartnersBlock extends ReduxMixin(PolymerElement) {
   static get template() {

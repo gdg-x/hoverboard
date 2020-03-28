@@ -1,5 +1,5 @@
 import { html, PolymerElement } from '@polymer/polymer';
-import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
+import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer';
 import { clamp } from 'clamp-js-main';
 
 class TextTruncate extends PolymerElement {
