@@ -8,15 +8,15 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import 'plastic-image';
 import { ReduxMixin } from '../../mixins/redux-mixin';
-import { UtilsFunctions } from '../../mixins/utils-functions';
 import { dialogsActions, uiActions } from '../../redux/actions';
 import { DIALOGS } from '../../redux/constants';
+import { getVariableColor } from '../../utils/functions';
 import '../shared-styles';
 import '../text-truncate';
 import './dialog-styles';
 
-class PreviousSpeakerDetails extends UtilsFunctions(
-  ReduxMixin(mixinBehaviors([IronOverlayBehavior], PolymerElement))
+class PreviousSpeakerDetails extends ReduxMixin(
+  mixinBehaviors([IronOverlayBehavior], PolymerElement)
 ) {
   static get template() {
     return html`
@@ -195,6 +195,10 @@ class PreviousSpeakerDetails extends UtilsFunctions(
         disableControls: true,
         opened: true,
       });
+  }
+
+  getVariableColor(...args) {
+    return getVariableColor(this, ...args);
   }
 }
 

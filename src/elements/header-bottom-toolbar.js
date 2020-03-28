@@ -1,11 +1,10 @@
 import '@polymer/iron-location/iron-location';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { UtilsFunctions } from '../mixins/utils-functions';
 import './content-loader';
 import './shared-styles';
 
-class HeaderBottomToolbar extends UtilsFunctions(ReduxMixin(PolymerElement)) {
+class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">

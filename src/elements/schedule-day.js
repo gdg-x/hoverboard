@@ -1,10 +1,10 @@
 import { html, PolymerElement } from '@polymer/polymer';
-import { UtilsFunctions } from '../mixins/utils-functions';
+import { generateClassName } from '../utils/functions';
 import { offsetTop, scrollToY } from '../utils/scrolling';
 import './session-element';
 import './shared-styles';
 
-class ScheduleDay extends UtilsFunctions(PolymerElement) {
+class ScheduleDay extends PolymerElement {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -206,13 +206,12 @@ class ScheduleDay extends UtilsFunctions(PolymerElement) {
         (!selectedFilters.tag ||
           !selectedFilters.tag.length ||
           (session.tags &&
-            !!session.tags.filter((tag) =>
-              selectedFilters.tag.includes(this.generateClassName(tag))
-            ).length)) &&
+            !!session.tags.filter((tag) => selectedFilters.tag.includes(generateClassName(tag)))
+              .length)) &&
         (!selectedFilters.complexity ||
           !selectedFilters.complexity.length ||
           (session.complexity &&
-            selectedFilters.complexity.includes(this.generateClassName(session.complexity))))
+            selectedFilters.complexity.includes(generateClassName(session.complexity))))
       );
     });
   }

@@ -4,12 +4,12 @@ import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { UtilsFunctions } from '../mixins/utils-functions';
 import { blogActions } from '../redux/actions';
+import { getDate } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
 
-class LatestPostsBlock extends UtilsFunctions(ReduxMixin(PolymerElement)) {
+class LatestPostsBlock extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -169,6 +169,10 @@ class LatestPostsBlock extends UtilsFunctions(ReduxMixin(PolymerElement)) {
 
   _transformPosts(postsList) {
     this.set('posts', postsList.slice(0, 4));
+  }
+
+  getDate(date) {
+    return getDate(date);
   }
 }
 

@@ -1,9 +1,9 @@
 import '@polymer/iron-location/iron-location';
 import { html, PolymerElement } from '@polymer/polymer';
-import { UtilsFunctions } from '../mixins/utils-functions';
+import { generateClassName, getVariableColor, toggleQueryParam } from '../utils/functions';
 import './shared-styles';
 
-class FilterMenu extends UtilsFunctions(PolymerElement) {
+class FilterMenu extends PolymerElement {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -181,15 +181,13 @@ class FilterMenu extends UtilsFunctions(PolymerElement) {
   }
 
   _isSelected(selectedFilters, key, value) {
-    return (
-      selectedFilters[key] && selectedFilters[key].includes(this.generateClassName(value.trim()))
-    );
+    return selectedFilters[key] && selectedFilters[key].includes(generateClassName(value.trim()));
   }
 
   _toggleFilter(e) {
     const filterKey = e.currentTarget.getAttribute('filter-key');
-    const filter = this.generateClassName(e.currentTarget.getAttribute('filter-value').trim());
-    this.set('queryParams', this.toggleQueryParam(this.queryParams, filterKey, filter));
+    const filter = generateClassName(e.currentTarget.getAttribute('filter-value').trim());
+    this.set('queryParams', toggleQueryParam(this.queryParams, filterKey, filter));
   }
 
   _generateSelectedArray(selected, filters) {
@@ -237,6 +235,10 @@ class FilterMenu extends UtilsFunctions(PolymerElement) {
       this._toggleBoard();
       this._clickOutsideUnlisten();
     }
+  }
+
+  getVariableColor(...args) {
+    return getVariableColor(this, ...args);
   }
 }
 

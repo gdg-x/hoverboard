@@ -8,18 +8,16 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import 'plastic-image';
 import { SpeakersHoC } from '../../mixins/speakers-hoc';
-import { UtilsFunctions } from '../../mixins/utils-functions';
 import { dialogsActions, sessionsActions, toastActions, uiActions } from '../../redux/actions';
 import { DIALOGS } from '../../redux/constants';
+import { getVariableColor } from '../../utils/functions';
+import '../auth-required';
+import '../feedback-block';
 import '../shared-styles';
 import '../text-truncate';
 import './dialog-styles';
-import '../feedback-block';
-import '../auth-required';
 
-class SessionDetails extends UtilsFunctions(
-  SpeakersHoC(mixinBehaviors([IronOverlayBehavior], PolymerElement))
-) {
+class SessionDetails extends SpeakersHoC(mixinBehaviors([IronOverlayBehavior], PolymerElement)) {
   static get template() {
     return html`
       <style include="shared-styles dialog-styles flex flex-alignment positioning">
@@ -281,6 +279,10 @@ class SessionDetails extends UtilsFunctions(
     } else {
       this.acceptingFeedback = false;
     }
+  }
+
+  getVariableColor(...args) {
+    return getVariableColor(this, ...args);
   }
 }
 

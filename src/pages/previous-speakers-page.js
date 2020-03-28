@@ -5,11 +5,10 @@ import 'plastic-image';
 import '../elements/content-loader';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { UtilsFunctions } from '../mixins/utils-functions';
 import { dialogsActions, previousSpeakersActions } from '../redux/actions';
 import { DIALOGS } from '../redux/constants';
 
-class PreviousSpeakersPage extends UtilsFunctions(ReduxMixin(PolymerElement)) {
+class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">

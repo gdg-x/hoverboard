@@ -12,11 +12,11 @@ import '../elements/shared-styles';
 import '../elements/text-truncate';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
-import { UtilsFunctions } from '../mixins/utils-functions';
 import { dialogsActions } from '../redux/actions';
 import { DIALOGS } from '../redux/constants';
+import { generateClassName, parseQueryParamsFilters } from '../utils/functions';
 
-class SpeakersPage extends UtilsFunctions(ReduxMixin(SpeakersHoC(PolymerElement))) {
+class SpeakersPage extends ReduxMixin(SpeakersHoC(PolymerElement)) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -363,7 +363,7 @@ class SpeakersPage extends UtilsFunctions(ReduxMixin(SpeakersHoC(PolymerElement)
   }
 
   _paramsUpdated(queryParams) {
-    this.set('_selectedFilters', this.parseQueryParamsFilters(queryParams));
+    this.set('_selectedFilters', parseQueryParamsFilters(queryParams));
   }
 
   _filterItems(speakers, selectedFilters) {
@@ -371,7 +371,7 @@ class SpeakersPage extends UtilsFunctions(ReduxMixin(SpeakersHoC(PolymerElement)
       if (!selectedFilters || !selectedFilters.length) return true;
       return (
         speaker.tags &&
-        !!speaker.tags.filter((tag) => selectedFilters.includes(this.generateClassName(tag))).length
+        !!speaker.tags.filter((tag) => selectedFilters.includes(generateClassName(tag))).length
       );
     });
   }

@@ -1,16 +1,14 @@
 import '@polymer/iron-icon';
-import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners';
 import { html, PolymerElement } from '@polymer/polymer';
+import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
-import { UtilsFunctions } from '../mixins/utils-functions';
+import { randomOrder } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
 
-class SpeakersBlock extends UtilsFunctions(
-  SpeakersHoC(ReduxMixin(GestureEventListeners(PolymerElement)))
-) {
+class SpeakersBlock extends SpeakersHoC(ReduxMixin(GestureEventListeners(PolymerElement))) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -249,7 +247,7 @@ class SpeakersBlock extends UtilsFunctions(
 
   _generateSpeakers(speakers) {
     const filteredSpeakers = this.speakers.filter((speaker) => speaker.featured);
-    const randomSpeakers = this.randomOrder(filteredSpeakers.length ? filteredSpeakers : speakers);
+    const randomSpeakers = randomOrder(filteredSpeakers.length ? filteredSpeakers : speakers);
     this.set('featuredSpeakers', randomSpeakers.slice(0, 4));
   }
 }

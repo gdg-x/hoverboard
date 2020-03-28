@@ -13,11 +13,11 @@ import '../elements/sticky-element';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SessionsHoC } from '../mixins/sessions-hoc';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
-import { UtilsFunctions } from '../mixins/utils-functions';
 import { dialogsActions, routingActions, scheduleActions, sessionsActions } from '../redux/actions';
 import { DIALOGS } from '../redux/constants';
+import { parseQueryParamsFilters } from '../utils/functions';
 
-class SchedulePage extends UtilsFunctions(ReduxMixin(SessionsHoC(SpeakersHoC(PolymerElement)))) {
+class SchedulePage extends ReduxMixin(SessionsHoC(SpeakersHoC(PolymerElement))) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -259,7 +259,7 @@ class SchedulePage extends UtilsFunctions(ReduxMixin(SessionsHoC(SpeakersHoC(Pol
   }
 
   _paramsUpdated(queryParams) {
-    this.set('_selectedFilters', this.parseQueryParamsFilters(queryParams));
+    this.set('_selectedFilters', parseQueryParamsFilters(queryParams));
   }
 }
 
