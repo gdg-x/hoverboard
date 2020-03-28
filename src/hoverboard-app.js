@@ -36,7 +36,6 @@ import './elements/shared-styles';
 import './elements/toast-element';
 import './elements/video-dialog';
 import { ReduxMixin } from './mixins/redux-mixin';
-import { ScrollFunctions } from './mixins/scroll-functions';
 import { UtilsFunctions } from './mixins/utils-functions';
 import './pages/blog-page';
 import './pages/coc-page';
@@ -55,8 +54,9 @@ import {
   userActions,
 } from './redux/actions';
 import { registerServiceWorker } from './service-worker-registration';
+import { scrollToY } from './utils/scrolling';
 
-class HoverboardApp extends UtilsFunctions(ScrollFunctions(ReduxMixin(PolymerElement))) {
+class HoverboardApp extends UtilsFunctions(ReduxMixin(PolymerElement)) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-reverse flex-alignment positioning">
@@ -425,7 +425,7 @@ class HoverboardApp extends UtilsFunctions(ScrollFunctions(ReduxMixin(PolymerEle
     const hasSubroute = subroutePath !== '' && subroutePath !== '/';
 
     if (!this.route || page !== this.route.route) {
-      !hasSubroute && this.scrollToY(0, 100);
+      !hasSubroute && scrollToY(0, 100);
       routingActions.setRoute(page);
       this.$.header.classList.remove('remove-shadow');
     }

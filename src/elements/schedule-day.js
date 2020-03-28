@@ -1,10 +1,10 @@
 import { html, PolymerElement } from '@polymer/polymer';
-import { ScrollFunctions } from '../mixins/scroll-functions';
 import { UtilsFunctions } from '../mixins/utils-functions';
+import { offsetTop, scrollToY } from '../utils/scrolling';
 import './session-element';
 import './shared-styles';
 
-class ScheduleDay extends UtilsFunctions(ScrollFunctions(PolymerElement)) {
+class ScheduleDay extends UtilsFunctions(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -164,14 +164,14 @@ class ScheduleDay extends UtilsFunctions(ScrollFunctions(PolymerElement)) {
       if (selectedTime) {
         requestAnimationFrame(() => {
           const targetElement = this.shadowRoot.querySelector(`[id="${selectedTime}"]`);
-          const offset = this.offsetTop(targetElement);
+          const offset = offsetTop(targetElement);
           const toolbarHeight =
             HOVERBOARD.Elements.HeaderToolbar.getBoundingClientRect().height - 1;
           const stickyToolbarHeight = HOVERBOARD.Elements.StickyHeaderToolbar.getBoundingClientRect()
             .height;
           const additionalMargin = this.viewport.isTabletPlus ? 8 : 0;
           const scrollTargetY = offset - toolbarHeight - stickyToolbarHeight - additionalMargin;
-          this.scrollToY(scrollTargetY, 1500, 'easeInOutSine');
+          scrollToY(scrollTargetY, 1500, 'easeInOutSine');
         });
       }
     }

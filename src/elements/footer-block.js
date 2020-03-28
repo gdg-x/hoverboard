@@ -1,12 +1,12 @@
 import '@polymer/paper-fab';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ScrollFunctions } from '../mixins/scroll-functions';
+import { scrollToY } from '../utils/scrolling';
 import './footer-nav';
 import './footer-rel';
 import './footer-social';
 import './hoverboard-icons';
 
-class FooterBlock extends ScrollFunctions(PolymerElement) {
+class FooterBlock extends PolymerElement {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -64,7 +64,7 @@ class FooterBlock extends ScrollFunctions(PolymerElement) {
   }
 
   backToTop(e) {
-    this.scrollToY(0, 600, 'easeInOutSine');
+    scrollToY(0, 600, 'easeInOutSine');
   }
 }
 
