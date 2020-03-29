@@ -74,7 +74,7 @@
     "nunjucks": "^3.2.1",
     "prettier": "2.0.2",
     "rimraf": "^3.0.2",
-    "rollup": "^1.32.1",
+    "rollup": "^2.2.0",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-index-html": "^1.10.4",
     "rollup-plugin-re": "^1.0.7",
