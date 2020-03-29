@@ -1,8 +1,8 @@
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ShareMixin } from '../mixins/share-mixin';
+import { share } from '../utils/share';
 
-class FooterSocial extends ShareMixin(PolymerElement) {
+class FooterSocial extends PolymerElement {
   static get template() {
     return html`
     <style include="shared-styles flex flex-alignment">
@@ -210,6 +210,10 @@ class FooterSocial extends ShareMixin(PolymerElement) {
 
   static get is() {
     return 'footer-social';
+  }
+
+  share(e) {
+    return share(e);
   }
 }
 
