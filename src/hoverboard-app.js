@@ -36,7 +36,6 @@ import './elements/shared-styles';
 import './elements/toast-element';
 import './elements/video-dialog';
 import { ReduxMixin } from './mixins/redux-mixin';
-import { UtilsFunctions } from './mixins/utils-functions';
 import './pages/blog-page';
 import './pages/coc-page';
 import './pages/faq-page';
@@ -56,7 +55,7 @@ import {
 import { registerServiceWorker } from './service-worker-registration';
 import { scrollToY } from './utils/scrolling';
 
-class HoverboardApp extends UtilsFunctions(ReduxMixin(PolymerElement)) {
+class HoverboardApp extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-reverse flex-alignment positioning">

@@ -1,11 +1,11 @@
 import '@polymer/marked-element';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
-import { UtilsFunctions } from '../mixins/utils-functions';
+import { getDate } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
 
-class PostsList extends UtilsFunctions(PolymerElement) {
+class PostsList extends PolymerElement {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -97,6 +97,10 @@ class PostsList extends UtilsFunctions(PolymerElement) {
     return {
       posts: Array,
     };
+  }
+
+  getDate(date) {
+    return getDate(date);
   }
 }
 

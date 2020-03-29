@@ -8,16 +8,14 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import 'plastic-image';
 import { SessionsHoC } from '../../mixins/sessions-hoc';
-import { UtilsFunctions } from '../../mixins/utils-functions';
 import { dialogsActions } from '../../redux/actions';
 import { DIALOGS } from '../../redux/constants';
+import { getVariableColor, isEmpty } from '../../utils/functions';
 import '../shared-styles';
 import '../text-truncate';
 import './dialog-styles';
 
-class SpeakerDetails extends UtilsFunctions(
-  SessionsHoC(mixinBehaviors([IronOverlayBehavior], PolymerElement))
-) {
+class SpeakerDetails extends SessionsHoC(mixinBehaviors([IronOverlayBehavior], PolymerElement)) {
   static get template() {
     return html`
       <style include="shared-styles dialog-styles flex flex-alignment positioning">
@@ -217,6 +215,14 @@ class SpeakerDetails extends UtilsFunctions(
 
   _computeJoin(...values) {
     return values.filter(Boolean).join(' • ');
+  }
+
+  isEmpty(array) {
+    return isEmpty(array);
+  }
+
+  getVariableColor(...args) {
+    return getVariableColor(this, ...args);
   }
 }
 

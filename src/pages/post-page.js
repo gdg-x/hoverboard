@@ -7,10 +7,10 @@ import 'plastic-image';
 import '../elements/posts-list';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { UtilsFunctions } from '../mixins/utils-functions';
 import { blogActions } from '../redux/actions';
+import { getDate } from '../utils/functions';
 
-class PostPage extends UtilsFunctions(ReduxMixin(PolymerElement)) {
+class PostPage extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -186,6 +186,10 @@ class PostPage extends UtilsFunctions(ReduxMixin(PolymerElement)) {
       'suggestedPosts',
       this.postsList.filter((post) => post.id !== this.postData.id).slice(0, 3)
     );
+  }
+
+  getDate(date) {
+    return getDate(date);
   }
 }
 

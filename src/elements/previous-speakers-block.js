@@ -2,11 +2,11 @@ import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { UtilsFunctions } from '../mixins/utils-functions';
 import { previousSpeakersActions } from '../redux/actions';
+import { randomOrder } from '../utils/functions';
 import './shared-styles';
 
-class PreviousSpeakersBlock extends UtilsFunctions(ReduxMixin(PolymerElement)) {
+class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -129,7 +129,7 @@ class PreviousSpeakersBlock extends UtilsFunctions(ReduxMixin(PolymerElement)) {
   }
 
   _generateSpeakers(speakersRaw) {
-    this.set('speakers', this.randomOrder(speakersRaw).slice(0, this.viewport.isPhone ? 8 : 14));
+    this.set('speakers', randomOrder(speakersRaw).slice(0, this.viewport.isPhone ? 8 : 14));
   }
 }
 

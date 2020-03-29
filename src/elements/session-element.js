@@ -3,13 +3,13 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { UtilsFunctions } from '../mixins/utils-functions';
 import { dialogsActions, sessionsActions, toastActions } from '../redux/actions';
 import { DIALOGS } from '../redux/constants';
+import { getVariableColor, toggleQueryParam } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
 
-class SessionElement extends UtilsFunctions(ReduxMixin(GestureEventListeners(PolymerElement))) {
+class SessionElement extends ReduxMixin(GestureEventListeners(PolymerElement)) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -313,6 +313,18 @@ class SessionElement extends UtilsFunctions(ReduxMixin(GestureEventListeners(Pol
 
   _join(company, country) {
     return [company, country].filter(Boolean).join(' / ');
+  }
+
+  toggleQueryParam(...args) {
+    return toggleQueryParam(...args);
+  }
+
+  getVariableColor(...args) {
+    return getVariableColor(this, ...args);
+  }
+
+  slice(text, number) {
+    return text && text.slice(0, number);
   }
 }
 

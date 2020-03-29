@@ -7,10 +7,10 @@ import '../elements/posts-list';
 import '../elements/shared-styles';
 import '../elements/text-truncate';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { UtilsFunctions } from '../mixins/utils-functions';
 import { blogActions } from '../redux/actions';
+import { getDate } from '../utils/functions';
 
-class BlogListPage extends UtilsFunctions(ReduxMixin(PolymerElement)) {
+class BlogListPage extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -228,6 +228,10 @@ class BlogListPage extends UtilsFunctions(ReduxMixin(PolymerElement)) {
       return base + additional;
     }
     return base;
+  }
+
+  getDate(date) {
+    return getDate(date);
   }
 }
 
