@@ -1,16 +1,8 @@
+import { setupApp, teardownApp } from './firestore.setup';
 import './helpers';
-import { setupApp, setupFirestore, teardownApp, teardownFirestore } from './setup';
 
 describe('firestore', () => {
   let db: firebase.firestore.Firestore;
-
-  beforeAll(async () => {
-    await setupFirestore();
-  }, 30000);
-
-  afterAll(async () => {
-    await teardownFirestore();
-  });
 
   afterEach(async () => {
     await teardownApp();

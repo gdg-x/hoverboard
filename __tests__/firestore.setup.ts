@@ -2,18 +2,20 @@ import * as firebase from '@firebase/testing';
 import * as fs from 'fs';
 import { setup, teardown } from 'jest-dev-server';
 
-export const setupFirestore = async () => {
+// eslint-disable-next-line jest/require-top-level-describe
+beforeAll(async () => {
   await setup({
     command: 'npx firebase emulators:start --only firestore',
     launchTimeout: 30000,
     port: 8080,
     usedPortAction: 'error',
   });
-};
+}, 30000);
 
-export const teardownFirestore = async () => {
+// eslint-disable-next-line jest/require-top-level-describe
+afterAll(async () => {
   await teardown();
-};
+});
 
 const loadRules = async (projectId: string, path: string) => {
   await firebase.loadFirestoreRules({
@@ -22,7 +24,7 @@ const loadRules = async (projectId: string, path: string) => {
   });
 };
 
-export const setupApp = async (auth?: object, data?: object) => {
+export const setupApp = async (auth?: object, data?: { [key: string]: object }) => {
   const projectId = `rules-spec-${Date.now()}`;
   const app = firebase.initializeTestApp({
     projectId,
