@@ -10,7 +10,6 @@
     <style is="custom-style" include="shared-styles flex flex-alignment"></style>
 
     <style>
-
       :host {
         display: block;
       }
@@ -30,22 +29,14 @@
           font-size: 32px;
         }
       }
-
     </style>
 
     <template is="dom-repeat" items="[[featuredSchedule]]" as="day">
       <div class="date">[[day.dateReadable]]</div>
 
-      <schedule-day
-        name$="[[day.date]]"
-        day="[[day]]"
-        user="[[user]]"
-        featured-sessions="[[featuredSessions]]"
-        selected-filters="[[selectedFilters]]"
-        viewport="[[viewport]]"
-        query-params="[[queryParams]]"
-        only-featured
-      ></schedule-day>
+      <schedule-day name$="[[day.date]]" day="[[day]]" user="[[user]]" featured-sessions="[[featuredSessions]]"
+        selected-filters="[[selectedFilters]]" viewport="[[viewport]]" query-params="[[queryParams]]" only-featured>
+      </schedule-day>
 
     </template>
   </template>
@@ -76,7 +67,7 @@
       }
 
       _filterSchedule(schedule, featuredSessions) {
-        if (schedule.length) {
+        if (schedule && schedule.length) {
           this.featuredSchedule = schedule.map((day) => Object.assign({}, day, {
             timeslots: day.timeslots.map((timeslot) => Object.assign({}, timeslot, {
               sessions: timeslot.sessions.map((sessionBlock) => Object.assign({}, sessionBlock, {
