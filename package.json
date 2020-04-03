@@ -91,7 +91,7 @@
     "rollup-plugin-index-html": "^1.10.4",
     "rollup-plugin-re": "^1.0.7",
     "rollup-plugin-workbox": "^5.0.1",
-    "stylelint": "^13.2.1",
+    "stylelint": "^13.3.0",
     "stylelint-config-prettier": "^8.0.1",
     "stylelint-config-recommended": "^3.0.0",
     "typescript": "^3.8.3"
