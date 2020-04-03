@@ -34,12 +34,6 @@ Our goal is to allow event organizers to set up a professional conference websit
 
 :first_quarter_moon_with_face: Read the [set up guide](/docs/tutorials/00-set-up.md) or checkout the [full documentation](/docs/).
 
-### Docker-based development environment
-
-If you don't want to bother with the dependencies, you can use the docker container for development.
-
-:book: Read more in [docker docs](/docs/tutorials/05-docker.md).
-
 ## Updating
 
 Here is a git workflow for updating your fork (or downloaded copy) to the latest version:

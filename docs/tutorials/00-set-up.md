@@ -3,8 +3,6 @@
 Follow the instructions below to install, build, and run the
 Project Hoverboard locally in less than 15 minutes.
 
-Or you may use [Docker container for development](05-docker.md)
-
 ## Install the Hoverboard and dependencies
 
 1. [Fork repository](https://github.com/gdg-x/hoverboard/fork) and clone your fork locally
