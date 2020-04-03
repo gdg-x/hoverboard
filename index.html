@@ -160,23 +160,11 @@
         -moz-osx-font-smoothing: grayscale;
         -webkit-font-smoothing: antialiased;
       }
-
-      /* styling for render while resources are loading */
-      hoverboard-app[unresolved] {
-        padding: 0 16px;
-        display: block;
-        line-height: 68px;
-        text-align: center;
-        font-weight: 600;
-        letter-spacing: 0.3em;
-        color: #202020;
-        overflow: visible;
-      }
     </style>
   </head>
 
   <body>
-    <hoverboard-app unresolved>{$ title $}</hoverboard-app>
+    <hoverboard-app>{$ title $}</hoverboard-app>
 
     <noscript>
       Please enable JavaScript to view this website.

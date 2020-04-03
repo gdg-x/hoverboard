@@ -417,7 +417,6 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
   ready() {
     super.ready();
     log('Hoverboard is ready!');
-    this.removeAttribute('unresolved');
     userActions.updateUser();
     notificationsActions
       .initializeMessaging()
