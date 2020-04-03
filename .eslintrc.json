@@ -1,6 +1,7 @@
 {
   "root": true,
   "extends": ["eslint:recommended", "google", "plugin:polymer/polymer-3", "prettier"],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2018
@@ -9,8 +10,8 @@
     "browser": true,
     "es6": true
   },
-  "plugins": ["html", "polymer"],
-  "ignorePatterns": ["node_modules/", "dist/"],
+  "plugins": ["@typescript-eslint", "html", "polymer"],
+  "ignorePatterns": ["node_modules/", "dist/", "out-tsc"],
   "rules": {
     "brace-style": "off",
     "new-cap": "off",

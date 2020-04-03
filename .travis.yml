@@ -10,6 +10,8 @@ jobs:
       script: NODE_ENV=development npm run build
     - name: Production
       script: npm run build
+    - name: Compile
+      script: npm run compile
     - name: Lint
       script: npm run lint
     - name: Security

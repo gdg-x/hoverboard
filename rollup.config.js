@@ -16,7 +16,8 @@ if (!production) {
 }
 
 const config = createDefaultConfig({
-  input: './src/hoverboard-app.js',
+  input: './src/hoverboard-app.ts',
+  extensions: ['.js', '.mjs', '.ts'],
   plugins: {
     workbox: false,
   },
