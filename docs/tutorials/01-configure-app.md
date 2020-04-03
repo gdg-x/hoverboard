@@ -60,13 +60,9 @@ in `hoverboard-app.html`
 
 ```html
 <iron-pages>
-  <home-page data-route="home" data-path="pages/home-page.html"></home-page>
-  <blog-page data-route="blog" data-path="pages/blog-page.html" route="[[subRoute]]"></blog-page>
-  <speakers-page
-    data-route="speakers"
-    data-path="pages/speakers-page.html"
-    route="[[subRoute]]"
-  ></speakers-page>
+  <home-page data-route="home"></home-page>
+  <blog-page data-route="blog" route="[[subRoute]]"></blog-page>
+  <speakers-page data-route="speakers" route="[[subRoute]]"></speakers-page>
 </iron-pages>
 ```
 

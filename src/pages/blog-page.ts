@@ -31,8 +31,8 @@ class BlogPage extends PolymerElement {
         selected="[[routeData.page]]"
         selected-attribute="active"
       >
-        <blog-list-page data-route data-path="./blog-list-page.html"></blog-list-page>
-        <post-page data-route="posts" data-path="./post-page.html" route="[[subRoute]]"></post-page>
+        <blog-list-page data-route></blog-list-page>
+        <post-page data-route="posts" route="[[subRoute]]"></post-page>
       </iron-pages>
       <footer-block></footer-block>
     `;
