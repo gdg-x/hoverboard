@@ -1,20 +1,20 @@
 {
-  "database": {
-    "rules": "database.rules.json"
-  },
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
+  "functions": {
+    "predeploy": ["npm --prefix \"$RESOURCE_DIR\" run build"]
+  },
   "hosting": {
     "public": "dist",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
         "function": "prerender"
       }
     ],
-    "ignore": ["/test/**", "database.rules.json", "firebase.json", "README.md"],
     "headers": [
       {
         "source": "**",
@@ -39,7 +39,18 @@
       }
     ]
   },
-  "functions": {
-    "predeploy": ["npm --prefix ./functions run build"]
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "emulators": {
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "hosting": {
+      "port": 5000
+    }
   }
 }
