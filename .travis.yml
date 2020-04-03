@@ -12,8 +12,6 @@ jobs:
       script: npm run build
     - name: Lint
       script: npm run lint
-    - name: Format
-      script: npm run format
     - name: Security
       script: npm audit && npm audit --prefix functions
     - stage: Test
