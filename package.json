@@ -8,17 +8,21 @@
     "deploy": "npm run build && cross-env NODE_ENV=production firebase deploy",
     "firestore:copy": "babel-node ./internals/firestore-copy-data",
     "firestore:init": "firebase firestore:delete -r --all-collections -y && firebase functions:config:set schedule.enabled=true && firebase deploy --except hosting && babel-node ./internals/import-default-data",
+    "fix:eslint": "eslint . --ext .js --fix",
+    "fix:prettier": "prettier . --write",
+    "fix:stylelint": "stylelint \"**/*.js\" --fix",
+    "fix": "concurrently npm:fix:*",
     "install:emulator": "firebase setup:emulators:firestore",
     "install:functions": "npm --prefix ./functions install",
-    "lint:fix": "eslint . --fix",
-    "lint": "eslint .",
+    "lint:eslint": "eslint . --ext .js",
+    "lint:prettier": "prettier . --check",
+    "lint:stylelint": "stylelint \"**/*.js\"",
+    "lint": "concurrently npm:lint:*",
     "postinstall": "npm run install:functions && npm run install:emulator",
-    "format:fix": "prettier . --write",
-    "format": "prettier . --check",
     "serve": "npm run build && firebase serve",
     "start": "cross-env NODE_ENV=development es-dev-server",
     "test:rules": "firebase emulators:exec --only firestore 'npx jest __tests__/*.rules.test.js'",
-    "test": "npm run test:rules"
+    "test": "concurrently npm:test:*"
   },
   "dependencies": {
     "@google-web-components/google-youtube": "^3.0.1",
@@ -78,7 +82,10 @@
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-index-html": "^1.10.4",
     "rollup-plugin-re": "^1.0.7",
-    "rollup-plugin-workbox": "^5.0.1"
+    "rollup-plugin-workbox": "^5.0.1",
+    "stylelint": "^13.2.1",
+    "stylelint-config-prettier": "^8.0.1",
+    "stylelint-config-recommended": "^3.0.0"
   },
   "engines": {
     "node": "10"
