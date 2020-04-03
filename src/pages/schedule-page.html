@@ -94,7 +94,7 @@
         </template>
         <template is="dom-repeat" items="[[schedule]]" as="obj">
           <template is="dom-repeat" items="[[obj.schedule]]" as="day">
-            <template is="dom-if" if="[[_isNotEqualTo(subRoute, '2020-10-08')]]">
+            <template is="dom-if" if="[[!_isEqualTo(subRoute, '2020-10-08')]]">
               <schedule-day name$="[[day.date]]" day="[[day]]" user="[[user]]" featured-sessions="[[featuredSessions]]"
                 selected-filters="[[_selectedFilters]]" viewport="[[viewport]]" query-params="[[queryParams]]">
               </schedule-day>
@@ -249,12 +249,7 @@
       }
 
       _isEqualTo(val, arr) {
-        console.log("equal to", val, arr)
         return val == arr;
-      }
-
-      _isNotEqualTo(val, string) {
-        return val != string;
       }
     }
 
