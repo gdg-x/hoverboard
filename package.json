@@ -22,7 +22,7 @@
     "postinstall": "npm run install:functions && npm run install:emulator",
     "serve": "npm run build && firebase serve",
     "start": "cross-env NODE_ENV=development es-dev-server --file-extensions .ts --node-resolve --babel",
-    "test:rules": "firebase emulators:exec --only firestore 'npx jest __tests__/*.rules.test.ts'",
+    "test:rules": "jest __tests__/*.rules.test.ts",
     "test": "concurrently npm:test:*"
   },
   "dependencies": {
@@ -67,6 +67,7 @@
     "@open-wc/building-rollup": "^0.22.11",
     "@types/google.analytics": "0.0.40",
     "@types/jest": "^25.2.1",
+    "@types/jest-dev-server": "^4.2.0",
     "@types/polymer": "^1.2.9",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
@@ -84,6 +85,7 @@
     "firebase-admin": "^8.10.0",
     "firebase-tools": "^8.0.1",
     "jest": "^25.2.7",
+    "jest-dev-server": "^4.4.0",
     "nunjucks": "^3.2.1",
     "prettier": "2.0.2",
     "rimraf": "^3.0.2",
