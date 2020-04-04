@@ -1,23 +1,23 @@
-const firebase = require('@firebase/testing');
-const fs = require('fs');
+import * as firebase from '@firebase/testing';
+import * as fs from 'fs';
 
-const loadRules = (projectId, path) => {
-  return firebase.loadFirestoreRules({
+const loadRules = async (projectId: string, path: string) => {
+  await firebase.loadFirestoreRules({
     projectId,
     rules: fs.readFileSync(path, 'utf8'),
   });
 };
 
-module.exports.setup = async (auth, data) => {
+export const setup = async (auth?: object, data?: object) => {
   const projectId = `rules-spec-${Date.now()}`;
-  const app = await firebase.initializeTestApp({
+  const app = firebase.initializeTestApp({
     projectId,
     auth,
   });
   const db = app.firestore();
 
   if (data) {
-    await loadRules(projectId, '__tests__/firestore.rules', 'utf8');
+    await loadRules(projectId, '__tests__/firestore.rules');
 
     for (const key in data) {
       if ({}.hasOwnProperty.call(data, key)) {
@@ -26,20 +26,20 @@ module.exports.setup = async (auth, data) => {
     }
   }
 
-  await loadRules(projectId, 'firestore.rules', 'utf8');
+  await loadRules(projectId, 'firestore.rules');
 
   return db;
 };
 
-module.exports.teardown = async () => {
+export const teardown = async () => {
   return Promise.all(firebase.apps().map((app) => app.delete()));
 };
 
 expect.extend({
-  async toAllow(x) {
+  async toAllow(pr: Promise<any>) {
     let pass = false;
     try {
-      await firebase.assertSucceeds(x);
+      await firebase.assertSucceeds(pr);
       pass = true;
     } catch (err) {
       // no-op
@@ -53,10 +53,10 @@ expect.extend({
 });
 
 expect.extend({
-  async toDeny(x) {
+  async toDeny(pr: Promise<any>) {
     let pass = false;
     try {
-      await firebase.assertFails(x);
+      await firebase.assertFails(pr);
       pass = true;
     } catch (err) {
       // no-op
@@ -67,3 +67,13 @@ expect.extend({
     };
   },
 });
+
+declare global {
+  // eslint-disable-next-line
+  namespace jest {
+    interface Matchers<R> {
+      toDeny: () => {};
+      toAllow: () => {};
+    }
+  }
+}
