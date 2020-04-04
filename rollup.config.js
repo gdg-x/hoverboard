@@ -51,11 +51,11 @@ export default deepmerge(config, {
         },
         {
           src: 'node_modules/@webcomponents/webcomponentsjs/*.{js,map}',
-          dest: 'dist/node_modules/@webcomponents/webcomponentsjs',
+          dest: 'dist/node_assets/@webcomponents/webcomponentsjs',
         },
         {
           src: 'node_modules/firebase/*.{js,map}',
-          dest: 'dist/node_modules/firebase/',
+          dest: 'dist/node_assets/firebase/',
         },
         {
           src: 'src/service-worker-registration.js',
