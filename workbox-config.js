@@ -13,8 +13,7 @@ export const workboxConfig = {
   skipWaiting: true,
   offlineGoogleAnalytics: true,
   globDirectory: path.join(__dirname, 'dist'),
-  globPatterns: ['**/*.{html,js,css,json,svg,md}', 'node_modules/**/*.js'],
-  globIgnores: [], // Enable precaching `node_modules`
+  globPatterns: ['**/*.{html,js,css,json,svg,md}', 'node_assets/**/*.js'],
   runtimeCaching: [
     {
       urlPattern: /\/images\/.*/,
@@ -28,7 +27,7 @@ export const workboxConfig = {
       },
     },
     {
-      urlPattern: /\/node_modules\/.*/,
+      urlPattern: /\/node_assets\/.*/,
       handler: 'NetworkFirst',
       options: {
         cacheName: 'node-modules-cache',

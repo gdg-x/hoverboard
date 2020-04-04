@@ -26,10 +26,9 @@ The diagram below is a brief summary of the directories within the project.
 
     /
     |---appengine/
-    |---node_modules/
-    |---dist/
     |---config/
     |---data/
+    |---dist/
     |---docs/
     |---functions/
     |---images/
