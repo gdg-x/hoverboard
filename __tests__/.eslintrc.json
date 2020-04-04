@@ -1,11 +1,5 @@
 {
-  "plugins": ["jest"],
-  "extends": ["plugin:jest/all"],
   "env": {
     "node": true
-  },
-  "rules": {
-    "jest/no-hooks": "off",
-    "jest/prefer-expect-assertions": "off"
   }
 }

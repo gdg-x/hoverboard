@@ -1,29 +1,43 @@
 export const share = (e) => {
-  const type = e.currentTarget.getAttribute('share');
   const shareUrl = location.href;
-  const width = 600;
-  let height = 600;
-  const winOptions =
-    `menubar=no,toolbar=no,resizable=yes,scrollbars=yes,` + `height=${height},width=${width}`;
   const title = document.title;
-  let url;
 
-  switch (type) {
+  switch (e.currentTarget.getAttribute('share')) {
     case 'facebook': {
-      height = 229;
-      url =
-        `https://www.facebook.com/sharer.php?` +
-        `u=${encodeURIComponent(shareUrl)}&t=${encodeURIComponent(title)}`;
+      openFacebook({ title, shareUrl });
       break;
     }
     case 'twitter': {
-      height = 253;
-      const text = `Check out ${title} at #{$ hashtag $}: ${shareUrl}`;
-      url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+      openTwitter({ title, shareUrl });
       break;
     }
     default:
-      return;
+      throw new Error('Unknown share target');
   }
-  window.open(url, 'share', winOptions);
+};
+
+const features = ({ height }: { height: number }): string => {
+  return [
+    ['menubar', 'no'],
+    ['toolbar', 'no'],
+    ['resizable', 'yes'],
+    ['scrollbars', 'yes'],
+    ['width', 600],
+    ['height', height],
+  ]
+    .map((feature) => feature.join('='))
+    .join(',');
+};
+
+const openTwitter = ({ title, shareUrl }: { title: string; shareUrl: string }) => {
+  const text = `Check out ${title} at #{$ hashtag $}: ${shareUrl}`;
+  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+  window.open(url, 'share', features({ height: 275 }));
+};
+
+const openFacebook = ({ title, shareUrl }: { title: string; shareUrl: string }) => {
+  const url = `https://www.facebook.com/sharer.php?u=${encodeURIComponent(
+    shareUrl
+  )}&t=${encodeURIComponent(title)}`;
+  window.open(url, 'share', features({ height: 775 }));
 };
