@@ -22,8 +22,7 @@
     "postinstall": "npm run install:functions && npm run install:emulator",
     "serve": "npm run build && firebase serve",
     "start": "cross-env NODE_ENV=development es-dev-server --file-extensions .ts --node-resolve --babel",
-    "test:rules": "jest __tests__/*.rules.test.ts",
-    "test": "concurrently npm:test:*"
+    "test": "jest"
   },
   "dependencies": {
     "@google-web-components/google-youtube": "^3.0.1",

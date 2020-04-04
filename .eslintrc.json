@@ -1,6 +1,12 @@
 {
   "root": true,
-  "extends": ["eslint:recommended", "google", "plugin:polymer/polymer-3", "prettier"],
+  "extends": [
+    "plugin:jest/all",
+    "eslint:recommended",
+    "google",
+    "plugin:polymer/polymer-3",
+    "prettier"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
@@ -10,7 +16,7 @@
     "browser": true,
     "es6": true
   },
-  "plugins": ["@typescript-eslint", "html", "polymer"],
+  "plugins": ["jest", "@typescript-eslint", "html", "polymer"],
   "ignorePatterns": ["node_modules/", "dist/", "out-tsc"],
   "rules": {
     "brace-style": "off",
@@ -23,7 +29,9 @@
       "error",
       { "anonymous": "always", "named": "never", "asyncArrow": "always" }
     ],
-    "linebreak-style": 0
+    "linebreak-style": 0,
+    "jest/no-hooks": "off",
+    "jest/prefer-expect-assertions": "off"
   },
   "globals": {
     "clients": true,
