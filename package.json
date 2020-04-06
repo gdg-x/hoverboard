@@ -67,7 +67,7 @@
     "@babel/preset-typescript": "^7.9.0",
     "@babel/types": "^7.9.0",
     "@firebase/testing": "^0.18.2",
-    "@open-wc/building-rollup": "^0.22.11",
+    "@open-wc/building-rollup": "^0.22.12",
     "@testing-library/dom": "^7.2.0",
     "@testing-library/jest-dom": "^5.3.0",
     "@types/google.analytics": "0.0.40",
