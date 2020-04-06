@@ -5,6 +5,8 @@
     "eslint:recommended",
     "google",
     "plugin:polymer/polymer-3",
+    "plugin:import/errors",
+    "plugin:import/typescript",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",

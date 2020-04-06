@@ -5,7 +5,6 @@
   "scripts": {
     "build": "npm run clean && cross-env NODE_ENV=production rollup -c rollup.config.js",
     "clean": "rimraf dist",
-    "compile": "tsc",
     "deploy": "npm run build && cross-env NODE_ENV=production firebase deploy",
     "firestore:copy": "babel-node ./internals/firestore-copy-data",
     "firestore:init": "firebase firestore:delete -r --all-collections -y && firebase functions:config:set schedule.enabled=true && firebase deploy --except hosting && babel-node ./internals/import-default-data",
@@ -18,6 +17,7 @@
     "lint:eslint": "eslint . --ext .ts --ext .js",
     "lint:prettier": "prettier . --check",
     "lint:stylelint": "stylelint \"**/*.ts\"",
+    "lint:typescript": "tsc",
     "lint": "concurrently npm:lint:*",
     "postinstall": "npm run install:functions && npm run install:emulator",
     "serve": "npm run build && firebase serve",
@@ -81,6 +81,7 @@
     "eslint-config-prettier": "^6.10.1",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jest": "^23.8.2",
     "eslint-plugin-polymer": "^0.4.0",
     "firebase-admin": "^8.10.0",
