@@ -1,8 +1,10 @@
 {
   "root": true,
   "extends": [
-    "plugin:jest/all",
     "eslint:recommended",
+    "plugin:jest/all",
+    "plugin:testing-library/recommended",
+    "plugin:jest-dom/recommended",
     "google",
     "plugin:polymer/polymer-3",
     "plugin:import/errors",
