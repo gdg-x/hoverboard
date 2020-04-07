@@ -7,10 +7,12 @@ if (!development) {
 }
 
 module.exports = {
+  appIndex: 'index.html',
+  babel: true,
+  fileExtensions: ['.ts'],
+  nodeResolve: true,
   port: 5000,
   watch: true,
-  nodeResolve: true,
-  appIndex: 'index.html',
   responseTransformers: [
     ({ url, status: _, contentType, body }) => {
       if (isTemplate({ url, contentType })) {
