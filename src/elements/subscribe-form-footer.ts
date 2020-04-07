@@ -64,7 +64,7 @@ class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
           <iron-icon icon="hoverboard:checked" slot="suffix" hidden$="[[!subscribed]]"></iron-icon>
         </paper-input>
         <paper-button
-          on-tap="_subscribe"
+          on-click="_subscribe"
           ga-on="click"
           disabled="[[subscribed]]"
           ga-event-category="attendees"

@@ -190,7 +190,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
               role="navigation"
             >
               {% for nav in navigation %}
-              <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-tap="closeDrawer"
+              <a href="{$ nav.permalink $}" path="{$ nav.route $}" on-click="closeDrawer"
                 >{$ nav.label $}</a
               >
               {% endfor %}
@@ -199,7 +199,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
             <div>
               <a
                 class="bottom-drawer-link"
-                on-tap="_onAddToHomescreen"
+                on-click="_onAddToHomescreen"
                 hidden$="[[_isAddToHomeScreenHidden(ui.addToHomescreen, viewport.isLaptopPlus)]]"
               >
                 {$ addToHomeScreen.cta $}
@@ -210,7 +210,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
                 href$="[[_getTicketUrl(tickets)]]"
                 target="_blank"
                 rel="noopener noreferrer"
-                on-tap="closeDrawer"
+                on-click="closeDrawer"
                 ga-on="click"
                 ga-event-category="ticket button"
                 ga-event-action="buy_click"

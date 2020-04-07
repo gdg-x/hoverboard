@@ -77,7 +77,7 @@ class Feedback extends ReduxMixin(PolymerElement) {
         <paper-button
           primary
           hidden$="[[!rating]]"
-          on-tap="_sendFeedback"
+          on-click="_sendFeedback"
           ga-on="click"
           ga-event-category="feedback"
           ga-event-action="send feedback"
@@ -88,7 +88,7 @@ class Feedback extends ReduxMixin(PolymerElement) {
         <paper-button
           class="delete-button"
           hidden$="[[!showDeleteButton]]"
-          on-tap="_dispatchDeleteFeedback"
+          on-click="_dispatchDeleteFeedback"
           ga-on="click"
           ga-event-category="feedback"
           ga-event-action="delete feedback"

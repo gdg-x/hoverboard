@@ -131,7 +131,7 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
             icon="hoverboard:menu"
             hidden$="[[viewport.isLaptopPlus]]"
             aria-label="menu"
-            on-tap="openDrawer"
+            on-click="openDrawer"
           ></paper-icon-button>
         </div>
         <div layout horizontal center flex>
@@ -159,7 +159,7 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
           </paper-tab>
           {% endfor %}
 
-          <paper-tab class="signin-tab" on-tap="signIn" link hidden$="[[user.signedIn]]"
+          <paper-tab class="signin-tab" on-click="signIn" link hidden$="[[user.signedIn]]"
             >{$ signIn $}</paper-tab
           >
 
@@ -190,7 +190,7 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
             <div hidden$="[[_hideNotificationBlock(notifications.status, 'DEFAULT')]]">
               <p>{$ notifications.default $}</p>
               <div class="panel-actions" layout horizontal end-justified>
-                <paper-button primary-text on-tap="_toggleNotifications"
+                <paper-button primary-text on-click="_toggleNotifications"
                   >{$ notifications.subscribe $}</paper-button
                 >
               </div>
@@ -198,7 +198,7 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
             <div hidden$="[[_hideNotificationBlock(notifications.status, 'GRANTED')]]">
               <p>{$ notifications.enabled $}</p>
               <div class="panel-actions" layout horizontal end-justified>
-                <paper-button primary-text on-tap="_toggleNotifications"
+                <paper-button primary-text on-click="_toggleNotifications"
                   >{$ notifications.unsubscribe $}</paper-button
                 >
               </div>
@@ -207,7 +207,7 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
               <p>{$ notifications.blocked $}</p>
               <div class="panel-actions" layout horizontal end-justified>
                 <a href="{$ notifications.enable.link $}" target="_blank" rel="noopener noreferrer">
-                  <paper-button primary-text on-tap="_closeNotificationMenu"
+                  <paper-button primary-text on-click="_closeNotificationMenu"
                     >{$ notifications.enable.label $}
                   </paper-button>
                 </a>
@@ -241,14 +241,14 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
             <div layout vertical center-justified>
               <span class="profile-name">[[user.displayName]]</span>
               <span class="profile-email">[[user.email]]</span>
-              <span class="profile-action" role="button" on-tap="signOut">{$ signOut $}</span>
+              <span class="profile-action" role="button" on-click="signOut">{$ signOut $}</span>
             </div>
           </div>
         </paper-menu-button>
 
         <paper-icon-button
           icon="hoverboard:account"
-          on-tap="signIn"
+          on-click="signIn"
           hidden$="[[_isAccountIconHidden(user.signedIn, viewport.isLaptopPlus)]]"
         ></paper-icon-button>
       </app-toolbar>

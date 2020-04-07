@@ -76,7 +76,7 @@ class SpeakerDetails extends SessionsHoC(
           <iron-icon
             class="close-icon"
             icon="hoverboard:[[_getCloseBtnIcon(viewport.isLaptopPlus)]]"
-            on-tap="_close"
+            on-click="_close"
           ></iron-icon>
 
           <app-toolbar>
@@ -129,7 +129,7 @@ class SpeakerDetails extends SessionsHoC(
             <h3>{$ speakerDetails.sessions $}</h3>
 
             <template is="dom-repeat" items="[[speaker.sessions]]" as="session">
-              <div on-tap="_openSession" session-id$="[[session.id]]" class="section">
+              <div on-click="_openSession" session-id$="[[session.id]]" class="section">
                 <div layout horizontal center>
                   <div class="section-details" flex>
                     <div class="section-primary-text">[[session.title]]</div>
