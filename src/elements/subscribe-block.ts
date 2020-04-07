@@ -56,7 +56,7 @@ class SubscribeBlock extends ReduxMixin(PolymerElement) {
           <paper-button
             class="animated icon-right"
             disabled$="[[subscribed]]"
-            on-tap="_subscribe"
+            on-click="_subscribe"
             ga-on="click"
             ga-event-category="attendees"
             ga-event-action="subscribe"

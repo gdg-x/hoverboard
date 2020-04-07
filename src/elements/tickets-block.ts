@@ -152,7 +152,7 @@ class TicketsBlock extends ReduxMixin(PolymerElement) {
               rel="noopener noreferrer"
               sold-out$="[[ticket.soldOut]]"
               in-demand$="[[ticket.inDemand]]"
-              on-tap="_onTicketTap"
+              on-click="_onTicketTap"
               ga-on="click"
               ga-event-category="ticket"
               ga-event-action="buy_click"

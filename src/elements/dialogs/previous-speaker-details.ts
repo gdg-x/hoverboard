@@ -52,7 +52,7 @@ class PreviousSpeakerDetails extends ReduxMixin(
           <iron-icon
             class="close-icon"
             icon="hoverboard:[[_getCloseBtnIcon(viewport.isLaptopPlus)]]"
-            on-tap="_close"
+            on-click="_close"
           ></iron-icon>
 
           <app-toolbar>
@@ -105,7 +105,7 @@ class PreviousSpeakerDetails extends ReduxMixin(
                     <div
                       class="action"
                       hidden$="[[!session.videoId]]"
-                      on-tap="_openVideo"
+                      on-click="_openVideo"
                       layout
                       horizontal
                       center

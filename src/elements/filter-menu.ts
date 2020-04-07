@@ -91,12 +91,12 @@ class FilterMenu extends PolymerElement {
             <span
               class="reset-filters"
               role="button"
-              on-tap="_resetFilters"
+              on-click="_resetFilters"
               hidden$="[[!_selectedArray.length]]"
             >
               {$ filters.clear $}
             </span>
-            <paper-button class="icon-right" on-tap="_toggleBoard">
+            <paper-button class="icon-right" on-click="_toggleBoard">
               {$ filters.title $}
               <iron-icon icon="hoverboard:[[_getFilterIcon(_openedBoard)]]"></iron-icon>
             </paper-button>
@@ -110,7 +110,7 @@ class FilterMenu extends PolymerElement {
               style$="--color: [[getVariableColor(selectedFilter.value, 'primary-text-color')]]"
               filter-key$="[[selectedFilter.key]]"
               filter-value$="[[selectedFilter.value]]"
-              on-tap="_toggleFilter"
+              on-click="_toggleFilter"
               selected
               layout
               horizontal
@@ -140,7 +140,7 @@ class FilterMenu extends PolymerElement {
                   filter-key$="[[filter.key]]"
                   filter-value$="[[item]]"
                   selected$="[[_isSelected(selected, filter.key, item)]]"
-                  on-tap="_toggleFilter"
+                  on-click="_toggleFilter"
                 >
                   [[item]]
                 </div>

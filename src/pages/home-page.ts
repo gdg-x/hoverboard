@@ -154,7 +154,7 @@ class HomePage extends ReduxMixin(PolymerElement) {
           <div class="action-buttons" layout horizontal center-justified wrap>
             <paper-button
               class="watch-video"
-              on-tap="_playVideo"
+              on-click="_playVideo"
               ga-on="click"
               ga-event-category="video"
               ga-event-action="watch"
@@ -164,7 +164,7 @@ class HomePage extends ReduxMixin(PolymerElement) {
               {$ viewHighlights $}
             </paper-button>
             <paper-button
-              on-tap="_scrollToTickets"
+              on-click="_scrollToTickets"
               ga-on="click"
               ga-event-category="tickets"
               ga-event-action="scroll"
@@ -177,7 +177,7 @@ class HomePage extends ReduxMixin(PolymerElement) {
             </paper-button>
           </div>
 
-          <div class="scroll-down" on-tap="_scrollNextBlock">
+          <div class="scroll-down" on-click="_scrollNextBlock">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               version="1.1"

@@ -1,6 +1,5 @@
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
-import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { dialogsActions, sessionsActions, toastActions } from '../redux/actions';
@@ -10,7 +9,7 @@ import { getVariableColor, toggleQueryParam } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
 
-class SessionElement extends ReduxMixin(GestureEventListeners(PolymerElement)) {
+class SessionElement extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -169,13 +168,13 @@ class SessionElement extends ReduxMixin(GestureEventListeners(PolymerElement)) {
               class="feedback-action"
               hidden="[[!_acceptingFeedback()]]"
               icon="hoverboard:insert-comment"
-              on-tap="_toggleFeedback"
+              on-click="_toggleFeedback"
             ></iron-icon>
             <iron-icon
               class="bookmark-session"
               hidden="[[_acceptingFeedback()]]"
               icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
-              on-tap="_toggleFeaturedSession"
+              on-click="_toggleFeaturedSession"
             ></iron-icon>
           </div>
         </div>

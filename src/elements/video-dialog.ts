@@ -47,7 +47,7 @@ class VideoDialog extends ReduxMixin(mixinBehaviors([PaperDialogBehavior], Polym
         <paper-icon-button
           class="go-back-icon"
           icon="hoverboard:close"
-          on-tap="_closeSelf"
+          on-click="_closeSelf"
           dialog-dismiss
         ></paper-icon-button>
       </div>

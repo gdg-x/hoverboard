@@ -1,6 +1,5 @@
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
-import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
@@ -8,7 +7,7 @@ import { randomOrder } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
 
-class SpeakersBlock extends SpeakersHoC(ReduxMixin(GestureEventListeners(PolymerElement))) {
+class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -154,7 +153,7 @@ class SpeakersBlock extends SpeakersHoC(ReduxMixin(GestureEventListeners(Polymer
           <template is="dom-repeat" items="[[featuredSpeakers]]" as="speaker">
             <div
               class="speaker"
-              on-tap="_openSpeaker"
+              on-click="_openSpeaker"
               ga-on="click"
               ga-event-category="speaker"
               ga-event-action="open details"

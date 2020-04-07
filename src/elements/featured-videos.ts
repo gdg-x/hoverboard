@@ -2,7 +2,6 @@ import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import '@polymer/polymer/lib/mixins/gesture-event-listeners';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { uiActions, videosActions } from '../redux/actions';
@@ -131,7 +130,7 @@ class FeaturedVideos extends ReduxMixin(PolymerElement) {
           <paper-icon-button
             class="last-video slide-icon"
             icon="hoverboard:chevron-left"
-            on-tap="shiftContentLeft"
+            on-click="shiftContentLeft"
             ga-on="click"
             ga-event-category="video-list-arrow"
             ga-event-action="click"
@@ -143,7 +142,7 @@ class FeaturedVideos extends ReduxMixin(PolymerElement) {
               <template is="dom-repeat" items="[[videos]]" as="block" index-as="index">
                 <div
                   class="video-item"
-                  on-tap="playVideo"
+                  on-click="playVideo"
                   ga-on="click"
                   ga-event-category="video"
                   ga-event-action="watch"
@@ -174,7 +173,7 @@ class FeaturedVideos extends ReduxMixin(PolymerElement) {
           <paper-icon-button
             class="next-video slide-icon"
             icon="hoverboard:chevron-right"
-            on-tap="shiftContentRight"
+            on-click="shiftContentRight"
             ga-on="click"
             ga-event-category="video-list-arrow"
             ga-event-action="click"

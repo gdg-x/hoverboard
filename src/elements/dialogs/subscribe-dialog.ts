@@ -89,12 +89,12 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
         >
         </paper-input>
         <div class="action-buttons" layout horizontal justified>
-          <paper-button class="close-button" on-tap="_closeDialog"
+          <paper-button class="close-button" on-click="_closeDialog"
             >{$ subscribeBlock.close $}
           </paper-button>
 
           <paper-button
-            on-tap="_subscribe"
+            on-click="_subscribe"
             ga-on="click"
             ga-event-category="attendees"
             ga-event-action="subscribe"

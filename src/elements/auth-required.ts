@@ -13,7 +13,7 @@ class AuthRequired extends ReduxMixin(PolymerElement) {
         }
       </style>
 
-      <paper-button on-tap="signIn" hidden$="[[user.signedIn]]">{$ signIn $}</paper-button>
+      <paper-button on-click="signIn" hidden$="[[user.signedIn]]">{$ signIn $}</paper-button>
       <slot name="prompt" hidden$="[[user.signedIn]]"></slot>
       <slot hidden$="[[!user.signedIn]]"></slot>
     `;

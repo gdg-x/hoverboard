@@ -86,7 +86,7 @@ class AboutBlock extends ReduxMixin(PolymerElement) {
             <p>{$ aboutBlock.callToAction.howItWas.description $}</p>
             <paper-button
               class="animated icon-right"
-              on-tap="_playVideo"
+              on-click="_playVideo"
               ga-on="click"
               ga-event-category="video"
               ga-event-action="watch"

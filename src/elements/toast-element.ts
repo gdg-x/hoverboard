@@ -1,11 +1,10 @@
 import '@polymer/paper-toast/paper-toast';
 import { html, PolymerElement } from '@polymer/polymer';
-import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { toastActions } from '../redux/actions';
 import './shared-styles';
 
-class ToastElement extends ReduxMixin(GestureEventListeners(PolymerElement)) {
+class ToastElement extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -40,14 +39,14 @@ class ToastElement extends ReduxMixin(GestureEventListeners(PolymerElement)) {
         duration="[[toast.duration]]"
         text="[[toast.message]]"
         opened="[[toast.visible]]"
-        on-tap="_handleTap"
+        on-click="_handleTap"
         fit-bottom$="[[viewport.isPhone]]"
         layout
         horizontal
         justified
         center
       >
-        <span class="toast-action" hidden$="[[!toast.action]]" on-tap="_handleAction">
+        <span class="toast-action" hidden$="[[!toast.action]]" on-click="_handleAction">
           [[toast.action.title]]
         </span>
       </paper-toast>

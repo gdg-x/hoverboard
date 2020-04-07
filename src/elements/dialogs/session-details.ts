@@ -51,7 +51,7 @@ class SessionDetails extends SpeakersHoC(
           <iron-icon
             class="close-icon"
             icon="hoverboard:[[_getCloseBtnIcon(viewport.isLaptopPlus)]]"
-            on-tap="_close"
+            on-click="_close"
           ></iron-icon>
           <app-toolbar>
             <div class="dialog-container header-content" layout vertical end-justified>
@@ -66,7 +66,7 @@ class SessionDetails extends SpeakersHoC(
                 <paper-fab
                   icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
                   hidden$="[[!viewport.isLaptopPlus]]"
-                  on-tap="_toggleFeaturedSession"
+                  on-click="_toggleFeaturedSession"
                 ></paper-fab>
               </div>
             </div>
@@ -78,7 +78,7 @@ class SessionDetails extends SpeakersHoC(
             <paper-fab
               icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
               hidden$="[[viewport.isLaptopPlus]]"
-              on-tap="_toggleFeaturedSession"
+              on-click="_toggleFeaturedSession"
             ></paper-fab>
           </div>
           <h3 class="meta-info" hidden$="[[disabledSchedule]]">
@@ -112,7 +112,7 @@ class SessionDetails extends SpeakersHoC(
             <div
               class="action"
               hidden$="[[!session.videoId]]"
-              on-tap="_openVideo"
+              on-click="_openVideo"
               layout
               horizontal
               center
@@ -126,7 +126,7 @@ class SessionDetails extends SpeakersHoC(
             <h3>{$ sessionDetails.speakers $}</h3>
 
             <template is="dom-repeat" items="[[session.speakers]]" as="speaker">
-              <div class="section" on-tap="_openSpeaker" speaker-id$="[[speaker.id]]">
+              <div class="section" on-click="_openSpeaker" speaker-id$="[[speaker.id]]">
                 <div layout horizontal center>
                   <plastic-image
                     class="section-photo"
