@@ -3,7 +3,7 @@
   "version": "3.0.0",
   "description": "Conference website template",
   "scripts": {
-    "build": "npm run clean && cross-env NODE_ENV=production rollup -c rollup.config.js",
+    "build": "npm run clean && cross-env NODE_ENV=production rollup --config rollup.config.js",
     "clean": "rimraf dist",
     "deploy": "npm run build && cross-env NODE_ENV=production firebase deploy",
     "firestore:copy": "babel-node ./internals/firestore-copy-data",
@@ -22,7 +22,7 @@
     "postinstall": "npm run install:functions && npm run install:emulator",
     "serve": "npm run build && firebase serve",
     "start:emulators": "firebase emulators:start",
-    "start": "cross-env NODE_ENV=development es-dev-server --file-extensions .ts --node-resolve --babel",
+    "start": "cross-env NODE_ENV=development es-dev-server",
     "test": "jest"
   },
   "dependencies": {
