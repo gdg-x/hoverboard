@@ -1,5 +1,4 @@
 import '@polymer/app-layout/app-header-layout/app-header-layout';
-import '@polymer/app-layout/app-scroll-effects/effects/waterfall';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
 import '@polymer/iron-icon';
 import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';

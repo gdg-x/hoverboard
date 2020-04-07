@@ -282,7 +282,10 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
       notifications: Object,
       user: Object,
       tickets: Object,
-      transparent: Boolean,
+      transparent: {
+        type: Boolean,
+        reflectToAttribute: true,
+      },
     };
   }
 
@@ -307,6 +310,13 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
     super.connectedCallback();
     // TODO: Remove any
     (window as any).HOVERBOARD.Elements.HeaderToolbar = this;
+    this._onScroll = this._onScroll.bind(this);
+    window.addEventListener('scroll', this._onScroll);
+    this._onScroll();
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener('scroll', this._onScroll);
   }
 
   openDrawer() {
@@ -323,6 +333,10 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
 
   signOut() {
     userActions.signOut();
+  }
+
+  _onScroll() {
+    this.transparent = document.documentElement.scrollTop === 0;
   }
 
   _authStatusChanged(signedIn) {

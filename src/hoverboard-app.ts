@@ -2,7 +2,6 @@ import '@polymer/app-layout/app-drawer-layout/app-drawer-layout';
 import '@polymer/app-layout/app-drawer/app-drawer';
 import '@polymer/app-layout/app-header-layout/app-header-layout';
 import '@polymer/app-layout/app-header/app-header';
-import '@polymer/app-layout/app-scroll-effects/effects/waterfall';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
 import '@polymer/app-route/app-location';
 import '@polymer/app-route/app-route';
@@ -19,7 +18,6 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings';
 import 'plastic-image';
 import { log } from './console';
-import './effects/transparent-scroll';
 import './elements/dialogs/feedback-dialog';
 import './elements/dialogs/previous-speaker-details';
 import './elements/dialogs/session-details';
@@ -226,13 +224,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
         </app-drawer>
 
         <app-header-layout id="headerLayout" fullbleed>
-          <app-header
-            id="header"
-            slot="header"
-            effects="waterfall transparent-scroll"
-            condenses
-            fixed
-          >
+          <app-header id="header" slot="header" condenses fixed>
             <header-toolbar></header-toolbar>
           </app-header>
 

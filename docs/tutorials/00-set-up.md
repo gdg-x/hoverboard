@@ -35,7 +35,6 @@ The diagram below is a brief summary of the directories within the project.
     |---internals/
     |---node_modules/
     |---src/
-    |   |---effects/
     |   |---elements/
     |   |---mixins/
     |   |---pages/
@@ -51,7 +50,6 @@ The diagram below is a brief summary of the directories within the project.
 - `internals/` contains scripts that helps user to work with the project and it's data ([docs](./firebase-utils.md)).
 - `node_modules/` is the place of Node dependencies.
 - `src/` is where you store all of your source code and do all of your development.
-- `effects/` is where you keep your effects for instance `transparent-scroll.html` that helps to achieve a transparent toolbar before the scroll.
 - `elements/` is where you keep your custom elements.
 - `pages/` is where you keep your pages' description.
 
