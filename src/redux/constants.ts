@@ -1,5 +1,4 @@
 // ui
-export const TOGGLE_DRAWER = 'app/Drawer/TOGGLE_DRAWER';
 export const SET_VIEWPORT_SIZE = 'app/Viewport/SET_VIEWPORT_SIZE';
 export const SET_HERO_SETTINGS = 'app/Hero/SET_HERO_SETTINGS';
 export const SET_ADD_TO_HOMESCREEN = 'app/APP/SET_ADD_TO_HOMESCREEN';

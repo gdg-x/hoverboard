@@ -62,7 +62,6 @@ import {
   SHOW_TOAST,
   SIGN_IN,
   SUBSCRIBE,
-  TOGGLE_DRAWER,
   TOGGLE_VIDEO_DIALOG,
   UPDATE_NOTIFICATIONS_STATUS,
   WIPE_PREVIOUS_FEEDBACK,
@@ -77,12 +76,6 @@ declare global {
 }
 
 export const uiActions = {
-  toggleDrawer: (value = null) => {
-    store.dispatch({
-      type: TOGGLE_DRAWER,
-      value,
-    });
-  },
   setViewportSize: (value) => {
     store.dispatch({
       type: SET_VIEWPORT_SIZE,
