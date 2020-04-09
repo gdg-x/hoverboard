@@ -2,7 +2,6 @@ import { DIALOGS, NOTIFICATIONS_STATUS } from './constants';
 
 export const initialState = {
   ui: {
-    isDrawerOpened: false,
     viewport: {
       isPhone: true,
       isTabletPlus: false,

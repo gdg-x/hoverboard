@@ -168,7 +168,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
       ></app-route>
 
       <app-drawer-layout drawer-width="300px" force-narrow fullbleed>
-        <app-drawer id="drawer" slot="drawer" opened="[[ui.isDrawerOpened]]" swipe-open>
+        <app-drawer id="drawer" slot="drawer" opened="{{drawerOpened}}" swipe-open>
           <app-toolbar layout vertical start>
             <plastic-image
               class="toolbar-logo"
@@ -225,7 +225,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
 
         <app-header-layout id="headerLayout" fullbleed>
           <app-header id="header" slot="header" condenses fixed>
-            <header-toolbar></header-toolbar>
+            <header-toolbar drawer-opened="{{drawerOpened}}"></header-toolbar>
           </app-header>
 
           <iron-pages
@@ -307,6 +307,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
   }
 
   private ui: { addToHomescreen?: any } = {};
+  private drawerOpened = false;
   private route: { route?: string } = {};
   private dialogs = {};
   private viewport = {};
@@ -417,7 +418,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
   }
 
   closeDrawer() {
-    uiActions.toggleDrawer(false);
+    this.drawerOpened = false;
   }
 
   _routeDataChanged(page, subroutePath) {
@@ -460,7 +461,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
   }
 
   _toggleDrawer(e) {
-    uiActions.toggleDrawer(e.detail.value);
+    this.drawerOpened = e.detail.value;
   }
 
   _getTicketUrl(tickets) {

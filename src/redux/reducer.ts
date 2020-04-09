@@ -60,7 +60,6 @@ import {
   SIGN_IN,
   SIGN_OUT,
   SUBSCRIBE,
-  TOGGLE_DRAWER,
   TOGGLE_VIDEO_DIALOG,
   UPDATE_NOTIFICATIONS_STATUS,
   UPDATE_SESSIONS,
@@ -70,10 +69,6 @@ import { initialState } from './initial-state';
 
 export const uiReducer = (state = initialState.ui, action) => {
   switch (action.type) {
-    case TOGGLE_DRAWER:
-      return Object.assign({}, state, {
-        isDrawerOpened: action.value || !state.isDrawerOpened,
-      });
     case TOGGLE_VIDEO_DIALOG:
       return Object.assign({}, state, {
         videoDialog: Object.assign({}, state.videoDialog, action.value),

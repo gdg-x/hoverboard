@@ -1,6 +1,6 @@
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { dialogsActions, notificationsActions, uiActions, userActions } from '../redux/actions';
+import { dialogsActions, notificationsActions, userActions } from '../redux/actions';
 import { DIALOGS, NOTIFICATIONS_STATUS } from '../redux/constants';
 import { store } from '../redux/store';
 import './shared-styles';
@@ -260,6 +260,8 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
   }
 
   route: string;
+  drawerOpened: boolean;
+
   private viewport = {};
   private addToHomescreen = {};
   private heroSettings = {};
@@ -272,6 +274,10 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
   static get properties() {
     return {
       route: String,
+      drawerOpened: {
+        type: Boolean,
+        notify: true,
+      },
       viewport: Object,
       addToHomescreen: Object,
       heroSettings: {
@@ -320,11 +326,7 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
   }
 
   openDrawer() {
-    uiActions.toggleDrawer(true);
-  }
-
-  closeDrawer() {
-    uiActions.toggleDrawer(false);
+    this.drawerOpened = true;
   }
 
   signIn() {
