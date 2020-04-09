@@ -263,7 +263,6 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
   drawerOpened: boolean;
 
   private viewport = {};
-  private addToHomescreen = {};
   private heroSettings = {};
   private dialogs = { signin: { isOpened: false } };
   private notifications: { token?: string; status?: string } = {};
@@ -279,7 +278,6 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
         notify: true,
       },
       viewport: Object,
-      addToHomescreen: Object,
       heroSettings: {
         type: Object,
         observer: '_setToolbarSettings',
@@ -302,7 +300,6 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
       route: state.routing,
       schedule: state.schedule,
       user: state.user,
-      addToHomescreen: state.ui.addToHomescreen,
       heroSettings: state.ui.heroSettings,
       viewport: state.ui.viewport,
     });

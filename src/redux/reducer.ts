@@ -45,7 +45,6 @@ import {
   SEND_FEEDBACK_FAILURE,
   SEND_FEEDBACK_SUCCESS,
   SEND_FEEDBACK,
-  SET_ADD_TO_HOMESCREEN,
   SET_DIALOG_DATA,
   SET_DIALOG_ERROR,
   SET_FILTERS,
@@ -80,10 +79,6 @@ export const uiReducer = (state = initialState.ui, action) => {
     case SET_HERO_SETTINGS:
       return Object.assign({}, state, {
         heroSettings: Object.assign({}, state.heroSettings, action.value),
-      });
-    case SET_ADD_TO_HOMESCREEN:
-      return Object.assign({}, state, {
-        addToHomescreen: action.value,
       });
     default:
       return state;

@@ -13,7 +13,6 @@ export const initialState = {
       title: '',
     },
     heroSettings: {},
-    addToHomescreen: null,
   },
   routing: {
     route: 'home',

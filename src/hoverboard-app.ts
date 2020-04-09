@@ -197,8 +197,8 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
             <div>
               <a
                 class="bottom-drawer-link"
-                on-click="_onAddToHomescreen"
-                hidden$="[[_isAddToHomeScreenHidden(ui.addToHomescreen, viewport.isLaptopPlus)]]"
+                on-click="_onaddToHomeScreen"
+                hidden$="[[_isaddToHomeScreenHidden(addToHomeScreen, viewport.isLaptopPlus)]]"
               >
                 {$ addToHomeScreen.cta $}
               </a>
@@ -306,7 +306,8 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
     return 'hoverboard-app';
   }
 
-  private ui: { addToHomescreen?: any } = {};
+  private ui = {};
+  private addToHomeScreen: any;
   private drawerOpened = false;
   private route: { route?: string } = {};
   private dialogs = {};
@@ -383,7 +384,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
 
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
-      uiActions.setAddToHomeScreen(e);
+      this.addToHomeScreen = e;
     });
 
     window.addEventListener('load', () => registerServiceWorker());
@@ -470,20 +471,20 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
     return availableTicket ? availableTicket.url : tickets.list[0].url;
   }
 
-  _isAddToHomeScreenHidden(addToHomescreen, isTabletPlus) {
-    return isTabletPlus || !addToHomescreen;
+  _isaddToHomeScreenHidden(addToHomeScreen, isTabletPlus) {
+    return isTabletPlus || !addToHomeScreen;
   }
 
-  _onAddToHomescreen() {
-    if (!this.ui.addToHomescreen) this.closeDrawer();
-    this.ui.addToHomescreen.prompt();
-    this.ui.addToHomescreen.userChoice.then((choiceResult) => {
+  _onaddToHomeScreen() {
+    if (!this.addToHomeScreen) this.closeDrawer();
+    this.addToHomeScreen.prompt();
+    this.addToHomeScreen.userChoice.then((choiceResult) => {
       if (choiceResult.outcome === 'accepted') {
         ga('send', 'event', 'add_to_home_screen_prompt', 'accepted');
       } else {
         ga('send', 'event', 'add_to_home_screen_prompt', 'dismissed');
       }
-      uiActions.setAddToHomeScreen(null);
+      this.addToHomeScreen = null;
       this.closeDrawer();
     });
   }
