@@ -1,7 +1,6 @@
 // ui
 export const SET_VIEWPORT_SIZE = 'app/Viewport/SET_VIEWPORT_SIZE';
 export const SET_HERO_SETTINGS = 'app/Hero/SET_HERO_SETTINGS';
-export const SET_ADD_TO_HOMESCREEN = 'app/APP/SET_ADD_TO_HOMESCREEN';
 // router
 export const SET_ROUTE = 'app/Routing/SET_ROUTE';
 export const SET_SUB_ROUTE = 'app/Routing/SET_SUB_ROUTE';

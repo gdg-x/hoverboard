@@ -48,7 +48,6 @@ import {
   SEND_FEEDBACK_FAILURE,
   SEND_FEEDBACK_SUCCESS,
   SEND_FEEDBACK,
-  SET_ADD_TO_HOMESCREEN,
   SET_DIALOG_DATA,
   SET_DIALOG_ERROR,
   SET_FILTERS,
@@ -91,12 +90,6 @@ export const uiActions = {
   setHeroSettings: (value) => {
     store.dispatch({
       type: SET_HERO_SETTINGS,
-      value,
-    });
-  },
-  setAddToHomeScreen: (value) => {
-    store.dispatch({
-      type: SET_ADD_TO_HOMESCREEN,
       value,
     });
   },
