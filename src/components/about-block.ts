@@ -1,19 +1,13 @@
-import '@polymer/iron-icon';
-import '@polymer/paper-button';
-import { html, PolymerElement } from '@polymer/polymer';
-import { ReduxMixin } from '../mixins/redux-mixin';
+import { customElement, html, css } from 'lit-element';
 import { uiActions } from '../redux/actions';
-import './hoverboard-icons';
-import './shared-animations';
+import { ThemedElement } from './themed-element';
 
-class AboutBlock extends ReduxMixin(PolymerElement) {
-  static get template() {
-    return html`
-      <style include="shared-styles flex flex-alignment flex-reverse">
-        :host {
-          display: block;
-        }
-
+@customElement('about-block')
+export class AboutBlock extends ThemedElement {
+  static get styles() {
+    return [
+      ...super.styles,
+      css`
         .container {
           padding-top: 64px;
         }
@@ -61,8 +55,12 @@ class AboutBlock extends ReduxMixin(PolymerElement) {
             font-size: 56px;
           }
         }
-      </style>
+      `,
+    ];
+  }
 
+  render() {
+    return html`
       <div class="container">
         <div class="content">
           <div>
@@ -86,7 +84,7 @@ class AboutBlock extends ReduxMixin(PolymerElement) {
             <p>{$ aboutBlock.callToAction.howItWas.description $}</p>
             <paper-button
               class="animated icon-right"
-              on-click="_playVideo"
+              @click="${this.playVideo}"
               ga-on="click"
               ga-event-category="video"
               ga-event-action="watch"
@@ -139,11 +137,7 @@ class AboutBlock extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'about-block';
-  }
-
-  _playVideo() {
+  private playVideo() {
     uiActions.toggleVideoDialog({
       title: '{$  aboutBlock.callToAction.howItWas.title $}',
       youtubeId: '{$  aboutBlock.callToAction.howItWas.youtubeId $}',
@@ -152,5 +146,3 @@ class AboutBlock extends ReduxMixin(PolymerElement) {
     });
   }
 }
-
-window.customElements.define(AboutBlock.is, AboutBlock);

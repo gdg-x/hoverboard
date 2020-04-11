@@ -1,6 +1,6 @@
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
-import '../elements/about-block';
+import '../components/about-block';
 import '../elements/about-organizer-block';
 import '../elements/featured-videos';
 import '../elements/fork-me-block';
