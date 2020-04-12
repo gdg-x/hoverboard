@@ -1,4 +1,12 @@
 {
+  "2020-our-covid-19-promise": {
+    "backgroundColor": "#5a7785",
+    "brief": "As conference organizers, we want to express that the health of our attendees, volunteers, speakers, and sponsors are of the utmost importance.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/libertyjs-staging.appspot.com/o/national-museum-american-jewish-history.jpg?alt=media&token=b0ef3aa6-24c2-47eb-b81b-ee5be00ed35b",
+    "published": "2020-04-12",
+    "source": "/data/posts/2020-our-covid-19-promise.md",
+    "title": "Our COVID-19 Promise"
+  },
   "2019-post-conf": {
     "backgroundColor": "#5a7785",
     "brief": "The LibertyJS organizers want to thank everyone for making the 2019 event an incredible experience!",
