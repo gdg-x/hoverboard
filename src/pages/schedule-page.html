@@ -206,10 +206,8 @@
       }
 
       _setDay(active, day, schedule) {
-        console.log("setday", active, day, schedule);
-
         if (active && schedule.length) {
-          const selectedDay = day || schedule[0].schedule.date;
+          const selectedDay = day === '' ? schedule[0].schedule[0].date : day;
           routingActions.setSubRoute(selectedDay);
         }
       }
