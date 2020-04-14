@@ -288,7 +288,7 @@ const blogActions = {
 
 function getScheduleJSON() {
   const schedulePromise = new Promise(function (resolve) {
-    fetch('data/posts/schedule.json')
+    fetch('data/schedule.json')
       .then(function (response) {
         return response.json();
       })
@@ -311,7 +311,7 @@ const speakersActions = {
     const schedulePromise = getScheduleJSON();
 
     const speakersPromise = new Promise(function (resolve) {
-      fetch('data/posts/speakers.json')
+      fetch('data/speakers.json')
         .then(function (response) {
           return response.json();
         })
@@ -323,7 +323,7 @@ const speakersActions = {
 
 
     const sessionPromise = new Promise(function (resolve) {
-      fetch('data/posts/sessions.json')
+      fetch('data/sessions.json')
         .then(function (response) {
           return response.json();
         })
@@ -363,7 +363,7 @@ const previousSpeakersActions = {
       type: FETCH_PREVIOUS_SPEAKERS,
     });
     return new Promise(function (resolve) {
-      fetch('data/posts/speakers-past.json')
+      fetch('data/speakers-past.json')
         .then(function (response) {
           return response.json();
         })
@@ -400,7 +400,7 @@ const sessionsActions = {
     const schedulePromise = getScheduleJSON();
 
     const speakersPromise = new Promise(function (resolve) {
-      fetch('data/posts/speakers.json')
+      fetch('data/speakers.json')
         .then(function (response) {
           return response.json();
         })
@@ -412,7 +412,7 @@ const sessionsActions = {
 
 
     const sessionPromise = new Promise(function (resolve) {
-      fetch('data/posts/sessions.json')
+      fetch('data/sessions.json')
         .then(function (response) {
           return response.json();
         })
@@ -527,7 +527,7 @@ const scheduleActions = {
     const schedulePromise = getScheduleJSON();
 
     const speakersPromise = new Promise(function (resolve) {
-      fetch('data/posts/speakers.json')
+      fetch('data/speakers.json')
         .then(function (response) {
           return response.json();
         })
@@ -539,7 +539,7 @@ const scheduleActions = {
 
 
     const sessionPromise = new Promise(function (resolve) {
-      fetch('data/posts/sessions.json')
+      fetch('data/sessions.json')
         .then(function (response) {
           return response.json();
         })

@@ -1,0 +1,2666 @@
+{
+	"previousSpeakers": [
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "vivian_guillen",
+			"name": "Vivian Guillen",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "CSS for Backend Developers: How to Stop Fearing Your Stylesheets",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "will_mitchell",
+			"name": "Will Mitchell",
+			"order": 6,
+			"photoUrl": "https://secure.gravatar.com/avatar/8c7c991b22b546a5e824cbe99be6d6a9?s=500",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Front End Testing that You Won't Hate",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "juan_lopez",
+			"name": "Juan Lopez",
+			"order": 6,
+			"photoUrl": "https://secure.gravatar.com/avatar/25a100d1b3fcd93adb853e87fb7e2e36?s=500",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "War Stories of Code Standards and Other Monsters",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "taylor_krusen",
+			"name": "Taylor Krusen",
+			"order": 6,
+			"photoUrl": "https://papercallio-production.s3.amazonaws.com/uploads/user/avatar/25225/TkSmall.jpg",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "What's All the Fuss About Serverless",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "dave_ramirez",
+			"name": "Dave Ramirez",
+			"order": 6,
+			"photoUrl": "https://secure.gravatar.com/avatar/7b8b6034be79dded263e6ab168111524?s=500",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Embracing the \"Native\" of React Native",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "adam_giese",
+			"name": "Adam Giese",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Composing Music with Composed Functions",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "karl_groves",
+			"name": "Karl Groves",
+			"order": 6,
+			"photoUrl": "https://secure.gravatar.com/avatar/ae10afa5eac51db3a4c86ccbfa3082a9?s=500",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Everything You Need to Know About JS Accessibility",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "julka_grodel",
+			"name": "Julka Grodel",
+			"order": 6,
+			"photoUrl": "https://secure.gravatar.com/avatar/5b5930ec9d867bfe2f6c20d959dfed34?s=500",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "The Variable Crimes We Commit Against JavaScript",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "anton_caceres",
+			"name": "Anton Caceres",
+			"order": 6,
+			"photoUrl": "https://secure.gravatar.com/avatar/147777e202f6b05ef01f68fdc78902ac?s=500",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Mastering Web Performance Beyond Milliseconds",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "sam_jones",
+			"name": "Sam Jones",
+			"order": 6,
+			"photoUrl": "https://secure.gravatar.com/avatar/68fce2d0bde84a4ea2b63dd5647d6526?s=500",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "JavaScript Is Too Convenient",
+						"videoId": ""
+					}
+				],
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Trust Driven Development",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "connor_skiro",
+			"name": "Connor Skiro",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Lean Coffee",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "kevin_scott",
+			"name": "Kevin Scott",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Ask What AI Can Do for You",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "suby_raman",
+			"name": "Suby Raman",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "The Web Authentication API - Imagine a World Without Passwords",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "jan_jorgensen",
+			"name": "Jan Jorgensen",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "chris_demars",
+			"name": "Chris DeMars",
+			"order": 6,
+			"photoUrl": "https://papercallio-production.s3.amazonaws.com/uploads/user/avatar/4238/Headshot-4.jpeg",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Rea11y Simple A11y: A Focused Accessibility Workshop",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "yonatan_kra",
+			"name": "Yonatan Kra",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Webpacker's Guide to the Galaxy",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "brian_gantick",
+			"name": "Brian Gantick",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Creating Meaningful Application State: Animating with Vue.js",
+						"videoId": ""
+					}
+				],
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "A Vue (app) from the top - Introduction to Vue.js Workshop",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "victoria_adams",
+			"name": "Victoria Adams",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Creating Meaningful Application State: Animating with Vue.js",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "tim_ellison",
+			"name": "Tim Ellison",
+			"order": 6,
+			"photoUrl": "https://secure.gravatar.com/avatar/42bf13a66826489c4590b44e9a1f1e95?s=500",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Asynchronous JavaScript: From Callbacks to Async/Await",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "angel_rivera",
+			"name": "Angel Rivera",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "CI\\CD 101 with CircleCI Workshop",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "ivana_veliskova",
+			"name": "Ivana Veliskova",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Build a Blog with the Great (JayS) Gatsby!",
+						"videoId": ""
+					}
+				],
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Entering the World of Javascript",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "ryan_harris",
+			"name": "Ryan Harris",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2018": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Build a Blog with the Great (JayS) Gatsby!",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "Ernie has over ten years of experience building Enterprise web applications and developer platforms going back to the dark, soul crushing days of IE6. Ernie now works at IronCore Labs building turnkey data security for developers so they can focus on their core features and still get strong security. When not making the digital world a better place, he enjoys spending time in the great outdoors with his family in beautiful Montana.",
+			"company": "IronCore Labs",
+			"companyLogo": "",
+			"country": "USA",
+			"id": "ernie_turner",
+			"name": "Ernie Turner",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [
+							"promises",
+							"web workers",
+							"cryptography",
+							"javascript"
+						],
+						"title": "Dodging Web Crypto API Landmines",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/erniewturner",
+					"name": "Twitter"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "I am an artist turned web engineer interested in applying design thinking, aesthetics, motion graphics, and 'gamification' to UI/UX (and DX) challenges. I write JavaScript at Tumblr in New York.",
+			"company": "Tumblr",
+			"companyLogo": "",
+			"country": "USA",
+			"id": "matt_hayes",
+			"name": "Matt Hayes",
+			"order": 17,
+			"photoUrl": "https://secure.gravatar.com/avatar/a40e083fa00082a482a9cd4588ee350c?s=500",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [
+							"es2017",
+							"esnext",
+							"babel",
+							"webpack",
+							"ui/ux",
+							"dom",
+							"svg",
+							"canvas",
+							"functional reactive programming",
+							"reactive programming",
+							"particle systems",
+							"game programming patterns",
+							"javascript"
+						],
+						"title": "Particle Systems for Fun and Profit"
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/mysterycommand",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/mysterycommand",
+					"name": "GitHub"
+				}
+			],
+			"title": "Web Engineer"
+		},
+		{
+			"bio": "William Lyon is an engineer on the Developer Relations team at Neo4j, the open source graph database, where he builds tools for integrating Neo4j with other technologies and helps users be successful with graphs. He also leads Neo4j's Data Journalism Accelerator Program. Prior to Neo4j, he worked as a software engineer for a variety of startups. William holds a masters degree in Computer Science from the University of Montana. You can find him online at lyonwj.com or @lyonwj",
+			"company": "Neo4j",
+			"companyLogo": "",
+			"country": "USA",
+			"id": "william_lyon",
+			"name": "William Lyon",
+			"order": 16,
+			"photoUrl": "https://secure.gravatar.com/avatar/98eb7858bb6265f6f15308c89862104d?s=500",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [
+							"javascript",
+							"apollo",
+							"react",
+							"graphql",
+							"graph database",
+							"neo4j"
+						],
+						"title": "Full Stack Graph Application Development Using the GRAND Stack: GraphQL, React, Apollo, and Neo4j Database"
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/lyonwj",
+					"name": "Twitter"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "john_riviello",
+			"name": "John Riviello",
+			"order": 6,
+			"photoUrl": "https://secure.gravatar.com/avatar/203c84691c03c467b5d4bbf3e3b7313f?s=500",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Introduction to Web Components & Polymer Workshop",
+						"videoId": ""
+					}
+				],
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Hands-on with Polymer",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "chris_lorenzo",
+			"name": "Chris Lorenzo",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "",
+						"videoId": ""
+					}
+				],
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Polymer in Practice",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "emily_freeman",
+			"name": "Emily Freeman",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "The Dr. Seuss Guide to Code Craftsmanship",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "hassan_bazzi",
+			"name": "Hassan Bazzi",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Building Light-weight PWAs with Speeeeed",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "tierney_cyren",
+			"name": "Tierney Cyren",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Building the Foundations of the Node.js Community",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "michael_schoonmaker",
+			"name": "Michael Schoonmaker",
+			"order": 6,
+			"photoUrl": "https://secure.gravatar.com/avatar/610ca70701500da38bdd2d136de57f42?s=500",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "JavaScriptural Exegesis",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "kathryn_stracquatanio",
+			"name": "Kathryn Stracquatanio",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Touch Me: Creating Applications for Museums",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "sarah_polansky",
+			"name": "Sarah Polansky",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "len_smith",
+			"name": "Len Smith",
+			"order": 6,
+			"photoUrl": "https://secure.gravatar.com/avatar/f161797a5883ae103383193b00a9ca9b?s=500",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "An Introduction to Functional Programming in JavaScript",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "hao_luo",
+			"name": "Hao Luo",
+			"order": 6,
+			"photoUrl": "https://secure.gravatar.com/avatar/28e700c0f6181a8bba8952eb1a7d2920?s=500",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Understanding Async Await in Javascript",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "pam_selle",
+			"name": "Pam Selle",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "nate_abele",
+			"name": "Nate Abele",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Un-dux Your Front-End",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "matt_morgis",
+			"name": "Matt Morgis",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Pair Programming with TDD and Jest",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "tamera_lanham",
+			"name": "Tamera Lanham",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Pair Programming with TDD and Jest",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "austin_starin",
+			"name": "Austin Starin",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "A Vue (app) from the top - Introduction to Vue.js Workshop",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "brian_douglas",
+			"name": "Brian Douglas",
+			"order": 6,
+			"photoUrl": "https://secure.gravatar.com/avatar/896b3c585bebf313ad2b9f6bb45ac779?s=500",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Zero to Webpack",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "martin_snyder",
+			"name": "Martin Snyder",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Functional Programming in JavaScript Workshop",
+						"videoId": ""
+					}
+				],
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Stop Goofing Around During Build Cycles with Webpack HMR",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "eric_lewis",
+			"name": "Eric Lewis",
+			"order": 6,
+			"photoUrl": "https://secure.gravatar.com/avatar/7e524cf1c5e8d108658899a497dc4bd4?s=500",
+			"sessions": {
+				"2017": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Introduction to React",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "cf_grugan",
+			"name": "CF Grugan",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Building an Alexa Clone in Node JS",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "ken_dale",
+			"name": "Ken Dale",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Modern jQuery: Refactoring and Testing the Way Forward",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "robert_smith",
+			"name": "Robert Smith",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Fahrenheit 735 for the JS Foodie Meathead",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "dustin_getz",
+			"name": "Dustin Getz",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "What Would Happen if REST Were Immutable?",
+						"videoId": ""
+					},
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Intro to ClojureScript",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "joe_sepi",
+			"name": "Joe Sepi",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "ken_rimple",
+			"name": "Ken Rimple",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "React, Redux and React-Router.",
+						"videoId": ""
+					},
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Angular 2",
+						"videoId": ""
+					}
+				],
+				"2015": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Getting started with AngularJS",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "fm_bonnevier",
+			"name": "F.M. Bonnevier",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Javascript: The Darkside",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "jason_cox",
+			"name": "Jason Cox",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "One Codebase to Rule Them All",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "james_nylen",
+			"name": "James Nylen",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Building a web-connected kiln controller using Node.js",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "logan_crossan",
+			"name": "Logan Crossan",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "TDD, Node, and Rapid Prototyping",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "james_sacra",
+			"name": "James Sacra",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Practical Implementation of Machine Learning",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "dan_gautsch",
+			"name": "Dan Gautsch",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Everyone Needs Standards",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "lucas_hrabovsky",
+			"name": "Lucas Hrabovsky",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Using electron to bring web apps to the desktop at MongoDB",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "thomas_boutell",
+			"name": "Thomas Boutell",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Object-oriented functional programming in JavaScript",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "molly_everett",
+			"name": "Molly Everett",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Understanding, Finding, and Fixing JavaScript performance 101",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "ne_lilly",
+			"name": "N.E. Lilly",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Accessibility and JavaScript",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "tim_fluehr",
+			"name": "Tim Fluehr",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Surfacing Customer Experience Data using JavaScript and the DOM",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "fawad_rafi",
+			"name": "Fawad Rafi",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "End-To-End Testing of Single Page Applications",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "matt_claypotch",
+			"name": "Matt Claypotch",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Call My User Agent",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "jonathan_belcher",
+			"name": "Jonathan Belcher",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Workshop: es-next future features of JavaScript, a hands on tutorial",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "mauricio_linhares",
+			"name": "Maurício Linhares",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "React Workshop",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "kevin_hoyt",
+			"name": "Kevin Hoyt",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2016": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Machine Learning for JavaScript Developers",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "ken_dale",
+			"name": "Ken Dale",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2015": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Bring the Rain: Cloud Powered Continuous Delivery",
+						"videoId": ""
+					},
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Writing Better jQuery Infused JavaScript",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "tommy_everett",
+			"name": "Tommy Everett",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2015": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "JS Code Evaluation: Soup to Nuts",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "douglas_grogg",
+			"name": "Douglas Grogg",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2015": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Ditch Your Framework, or How we learned to stop worrying and love ES6",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "william_jeffries",
+			"name": "William Jeffries",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2015": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Cognitive Bias and Code",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "kelly_campbell",
+			"name": "Kelly Campbell",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2015": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Digging into Cordova Plugins",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "ben_spoon",
+			"name": "Ben Spoon",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2015": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Protect yourself from Zombies with Javascript",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "warren_longmire",
+			"name": "Warren Longmire",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2015": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Intro to HTML5 Game Development",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "kevin_clough",
+			"name": "Kevin Clough",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2015": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Who Won Philly",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "denine_guy",
+			"name": "Denine Guy",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2015": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Future of Web App Development - Building with Polymer.js",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "chad_ostrowski",
+			"name": "Chad Ostrowski",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2015": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Starting to React",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "dustin_hayes",
+			"name": "Dustin Hayes",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2015": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Learn React in 10 examples",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "max_minkoff",
+			"name": "Max Minkoff",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2015": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "Getting Started and Going Further with EmberJS",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		},
+		{
+			"bio": "",
+			"company": "",
+			"companyLogo": "",
+			"country": "",
+			"id": "miguel_perez",
+			"name": "Miguel Perez",
+			"order": 6,
+			"photoUrl": "images/2018-partners/ljs-primary-logo.svg",
+			"sessions": {
+				"2015": [
+					{
+						"presentation": "",
+						"tags": [],
+						"title": "How To Add Page Transitions with CSS and smoothState.js",
+						"videoId": ""
+					}
+				]
+			},
+			"socials": [
+				{
+					"icon": "twitter",
+					"link": "https://twitter.com/",
+					"name": "Twitter"
+				},
+				{
+					"icon": "github",
+					"link": "https://github.com/",
+					"name": "GitHub"
+				}
+			],
+			"title": ""
+		}
+	]
+}

@@ -33,6 +33,14 @@
         min-height: 80%;
       }
 
+      .action-buttons {
+        margin: 20px 0px;
+      }
+
+      paper-button {
+        margin-left: 0;
+      }
+
       paper-progress {
         width: 100%;
         --paper-progress-active-color: var(--default-primary-color);
@@ -90,7 +98,14 @@
 
       <iron-pages attr-for-selected="name" selected="[[subRoute]]" selected-attribute="active">
         <template is="dom-if" if="[[_isEqualTo(subRoute, '2020-10-08')]]">
-          place 2020 messaging here. Something like, help make our schedule complete and submit your talk or workshop
+          <h2 class="iron-selected">Be part of our 2020 schedule!</h2>
+          <div class="action-buttons iron-selected" layout horizontal left-justified wrap>
+            <a href="https://www.papercall.io/libertyjs-2020" target="_blank">
+              <paper-button primary>
+                Call For Speakers
+              </paper-button>
+            </a>
+          </div>
         </template>
         <template is="dom-repeat" items="[[schedule]]" as="obj">
           <template is="dom-repeat" items="[[obj.schedule]]" as="day">
