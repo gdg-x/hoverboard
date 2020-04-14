@@ -181,7 +181,6 @@
       }
 
       _scheduleLoaded(schedule) {
-        console.log("loaded s", schedule);
       }
 
       _sessionsAndSpeakersChanged(sessions, speakers) {
@@ -192,7 +191,6 @@
       }
 
       _scheduleChanged(schedule) {
-        console.log(schedule)
         if (schedule.length) {
           this.contentLoaderVisibility = 'hidden';
         }
@@ -206,7 +204,6 @@
       }
 
       _setDay(active, day, schedule) {
-        console.log(active, day, schedule)
         if (active && schedule.length) {
           const selectedDay = day === '' || day === undefined ? schedule[0].schedule[0].date : day;
           routingActions.setSubRoute(selectedDay);

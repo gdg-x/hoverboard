@@ -41,7 +41,6 @@ const routingActions = {
     });
   },
   setSubRoute: (subRoute) => {
-    console.log('subroute', subRoute)
     store.dispatch({
       type: SET_SUB_ROUTE,
       subRoute,
@@ -527,8 +526,6 @@ const scheduleActions = {
 
     const schedulePromise = getScheduleJSON();
 
-    console.log(this)
-
     const speakersPromise = new Promise(function (resolve) {
       fetch('data/posts/speakers.json')
         .then(function (response) {
@@ -558,7 +555,6 @@ const scheduleActions = {
         let arr = sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw);
 
         let schedule = arr.schedule;
-        console.log("tet", schedule);
 
         dispatch({
           type: FETCH_SCHEDULE_SUCCESS,
@@ -727,9 +723,6 @@ function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
     });
     schedule.push(yearObj);
   });
-
-  console.log(schedule);
-
 
   return {
     sessions,
