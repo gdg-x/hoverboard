@@ -50,7 +50,7 @@
     "@radi-cho/star-rating": "github:abraham/star-rating#polymer-3",
     "@webcomponents/webcomponentsjs": "^2.4.3",
     "clamp-js-main": "github:abraham/clamp-js-main#export",
-    "firebase": "^7.14.0",
+    "firebase": "^7.14.1",
     "lit-element": "^2.3.1",
     "lit-html": "^1.2.1",
     "plastic-image": "^3.0.2",
