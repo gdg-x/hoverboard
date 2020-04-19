@@ -14,7 +14,7 @@
       :host {
         display: block;
       }
-      
+
       .plan {
         width: 100%;
         height: 750px;
@@ -36,15 +36,17 @@
       <div class="hero-title highlight-font">{$ heroSettings.location.title $}</div>
       <p class="hero-description">{$ heroSettings.location.description $}</p>
     </hero-block>
-    
-    <iron-image class="plan" src="../../images/plan.jpg"sizing="contain" alt="Plan"></iron-image>
+
+    <iron-image class="plan" src="../../images/plan.png"sizing="contain" alt="Plan"></iron-image>
+
+    <iron-image class="plan" src="../../images/plan-inside.png"sizing="contain" alt="Plan"></iron-image>
 
     <iframe
       width="100%"
       height="400"
       frameborder="0" style="border:0"
       src="https://www.google.com/maps/embed/v1/place?key={$ googleMapApiKeyLocationPage $}
-        &q=Institut Universitaire de Formation des Maitres (I.U.F.M),Montpellier,France&zoom=15" allowfullscreen>
+        &q=SupagroMontpellier,France&zoom=15" allowfullscreen>
     </iframe>
 
     <md-content md-source="[[source]]"></md-content>

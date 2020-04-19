@@ -51,6 +51,13 @@
         vertical-align: middle;
       }
 
+
+      @media (max-width: 640px) {
+        [slot="markdown-html"] h4 {
+          font-weight: 700;
+        }
+      }
+
       @media (min-width: 640px) {
         .content,
         .markdown-text {
@@ -79,15 +86,19 @@
           line-height: 1.5;
         }
 
-        [slot="markdown-html"] p {
+        [slot="markdown-html"] p,
+        [slot="markdown-html"] ol,
+        [slot="markdown-html"] ul {
           margin-left: 5%;
         }
 
-        [slot="markdown-html"] h3,
-        [slot="markdown-html"] h4,
-        [slot="markdown-html"] ol,
-        [slot="markdown-html"] ul {
+        [slot="markdown-html"] h3 {
           font-size: 25px;
+        }
+
+        [slot="markdown-html"] h4 {
+          margin-left: 2%;
+          font-size: 20px;
         }
 
         [slot="markdown-html"] h3::after {

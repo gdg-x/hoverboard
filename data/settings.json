@@ -33,6 +33,11 @@
       "label": "Code de conduite"
     },
     {
+      "route": "location",
+      "permalink": "/location/",
+      "label": "Lieu"
+    },
+    {
       "route": "blog",
       "permalink": "/blog/",
       "label": "Blog"
