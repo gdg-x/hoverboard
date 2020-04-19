@@ -4,7 +4,7 @@ tr<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
 <link rel="import" href="../elements/about-block.html">
 <link rel="import" href="../elements/latest-posts-block.html">
-<link rel="import" href="../elements/tickets-block.html">
+<!--<link rel="import" href="../elements/tickets-block.html">-->
 <link rel="import" href="../elements/partners-block.html">
 <link rel="import" href="../elements/featured-videos.html">
 <link rel="import" href="../elements/subscribe-block.html">
@@ -151,10 +151,10 @@ tr<link rel="import" href="../../bower_components/polymer/polymer-element.html">
       <div class="home-content" layout vertical center>
         <plastic-image class="hero-logo" srcset="/images/logo.svg" alt="{$ title $}"></plastic-image>
         <div class="info-items highlight-font">
-          <div class="info-item">{$ location.city $}. <span class="date-bold">{$ dates $}</span></div>
-          <div class="info-item">{$ heroSettings.home.description $}</div>
-          <br>
+          <div class="info-item"><span class="date-bold">{$ heroSettings.home.cancelledSunnyTech $}</span></div>
           <div class="info-item date-bold">{$ heroSettings.home.catchingPhrase $}</div>
+          <br>
+          <div class="info-item">{$ heroSettings.home.description $}</div>
         </div>
 
 
@@ -183,7 +183,7 @@ tr<link rel="import" href="../../bower_components/polymer/polymer-element.html">
     </hero-block>
     <about-block></about-block>
     <about-conference-block></about-conference-block>
-    <tickets-block></tickets-block>
+<!--    <tickets-block></tickets-block>-->
     <gallery-block></gallery-block>
     <about-organizer-block></about-organizer-block>
     <partners-block></partners-block>
