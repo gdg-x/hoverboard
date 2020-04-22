@@ -16,7 +16,7 @@
     "child-process-promise": "^2.2.1",
     "cpx": "^1.5.0",
     "express": "^4.17.1",
-    "firebase-admin": "^8.10.0",
+    "firebase-admin": "^8.11.0",
     "firebase-functions": "^3.6.0",
     "md5": "^2.2.1",
     "mkdirp-promise": "^5.0.1",
