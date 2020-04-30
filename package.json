@@ -46,7 +46,7 @@
     "@polymer/paper-progress": "^3.0.1",
     "@polymer/paper-tabs": "^3.1.0",
     "@polymer/paper-toast": "^3.0.1",
-    "@polymer/polymer": "^3.3.1",
+    "@polymer/polymer": "^3.4.0",
     "@radi-cho/star-rating": "github:abraham/star-rating#polymer-3",
     "@webcomponents/webcomponentsjs": "^2.4.3",
     "clamp-js-main": "github:abraham/clamp-js-main#export",
