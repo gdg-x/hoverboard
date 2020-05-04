@@ -74,7 +74,7 @@
     "@types/jest": "^25.2.1",
     "@types/jest-dev-server": "^4.2.0",
     "@types/polymer": "^1.2.9",
-    "@typescript-eslint/eslint-plugin": "^2.30.0",
+    "@typescript-eslint/eslint-plugin": "^2.31.0",
     "@typescript-eslint/parser": "^2.30.0",
     "concurrently": "^5.2.0",
     "cross-env": "^7.0.2",
