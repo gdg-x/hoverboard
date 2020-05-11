@@ -1,0 +1,41 @@
+name: Pre Merge Checks
+on: 
+  push:
+    branches: 
+      - '*'
+  pull_request:
+    branches: 
+      - '*'
+
+jobs:
+  npm:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [ '10', '12' ]
+    name: Node ${{ matrix.node-version }}
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Npm install
+        run: npm install
+
+      - name: Building the project
+        run: npm run build
+
+      - name: Running the linter
+        run: npm run lint
+
+      - name: Running the security audit
+        run: npm audit && npm audit --prefix functions
+        continue-on-error: true
+
+      - name: Running the tests
+        run: npm run test
