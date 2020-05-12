@@ -1,8 +1,5 @@
 name: Pre Merge Checks
 on:
-  push:
-    branches:
-      - '*'
   pull_request:
     branches:
       - '*'
