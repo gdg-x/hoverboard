@@ -8,7 +8,6 @@ if (!development) {
 
 module.exports = {
   appIndex: 'index.html',
-  babel: true,
   fileExtensions: ['.ts'],
   nodeResolve: true,
   port: 5000,

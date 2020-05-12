@@ -134,10 +134,7 @@
     </script>
 
     <script src="./node_assets/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    {% if loadDevelopmentScripts %}
-    <!-- TODO: Consolidate development and production builds so they are more similar -->
-    <script src="./src/hoverboard-app.ts" type="module"></script>
-    {% endif %}
+    <script src="./out-tsc/src/hoverboard-app.js" type="module"></script>
 
     <style>
       html,
