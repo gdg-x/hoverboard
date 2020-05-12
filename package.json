@@ -94,7 +94,6 @@
     "firebase-tools": "^8.2.0",
     "jest": "^26.0.1",
     "jest-dev-server": "^4.4.0",
-    "jest-environment-jsdom-sixteen": "^1.0.3",
     "nunjucks": "^3.2.1",
     "prettier": "2.0.5",
     "rimraf": "^3.0.2",
