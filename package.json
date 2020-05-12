@@ -68,7 +68,7 @@
     "@babel/types": "^7.9.6",
     "@firebase/testing": "^0.19.3",
     "@open-wc/building-rollup": "^0.22.12",
-    "@testing-library/dom": "^7.5.1",
+    "@testing-library/dom": "^7.5.2",
     "@testing-library/jest-dom": "^5.7.0",
     "@types/google.analytics": "0.0.40",
     "@types/jest": "^25.2.1",
