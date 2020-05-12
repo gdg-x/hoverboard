@@ -8,7 +8,6 @@ module.exports = {
     {
       displayName: 'Web',
       setupFilesAfterEnv: ['<rootDir>/__tests__/web.setup.ts'],
-      testEnvironment: 'jest-environment-jsdom-sixteen',
       testMatch: ['<rootDir>/src/**/*.test.ts'],
       transformIgnorePatterns: [`node_modules/(?!${esModuleDependencies})`],
     },
