@@ -32,7 +32,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Building the project
+      - name: Building the development environment
+        run: npm run build
+        env:
+          NODE_ENV: development
+
+      - name: Building the production environment
         run: npm run build
 
       - name: Running the linter
