@@ -16,6 +16,14 @@ jobs:
       - name: Checkout the repo
         uses: actions/checkout@v2
 
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Setup node
         uses: actions/setup-node@v1
         with:
