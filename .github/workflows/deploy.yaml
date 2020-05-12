@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'master'
-      - 'develop'
 
 jobs:
   deploy:
@@ -33,18 +32,7 @@ jobs:
       - name: Building the project
         run: npm run build
 
-      - name: Deploy to Development Environment
-        if: github.ref == 'refs/heads/develop'
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy
-        env:
-          # Change your project ID here according to your configuration
-          PROJECT_ID: hoverboard-dev
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-
-      - name: Deploy to Master Environment
-        if: github.ref == 'refs/heads/master'
+      - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
           args: deploy
