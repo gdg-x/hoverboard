@@ -54,8 +54,7 @@ export const parseQueryParamsFilters = (queryParams: string) => {
 export const toggleQueryParam = (currentQueryParams: string | null, key: string, value: string) => {
   const keyValue = `${key}=${value}`;
   const currentKeyValuePairs = currentQueryParams ? currentQueryParams.split('&') : [];
-  const resultArray = currentKeyValuePairs.includes(keyValue)
-    ? currentKeyValuePairs.filter((pair) => pair !== keyValue)
-    : currentKeyValuePairs.concat(keyValue);
+  let resultArray = currentKeyValuePairs.filter((pair) => !pair.startsWith(`${key}=`));
+  resultArray = resultArray.concat(keyValue);
   return resultArray.join('&');
 };

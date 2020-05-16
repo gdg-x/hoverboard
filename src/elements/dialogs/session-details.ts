@@ -216,7 +216,14 @@ class SessionDetails extends SpeakersHoC(
 
   _close() {
     dialogsActions.closeDialog(DIALOGS.SESSION);
-    history.back();
+    let newURL = window.location.protocol + '//' + window.location.host + window.location.pathname;
+    for (let speaker in this.speakersMap) {
+      if (newURL.endsWith(speaker)) {
+        newURL = newURL.split('/').slice(0,-1).join('/');
+      }
+    }
+    window.history.pushState({}, null, newURL);
+    window.dispatchEvent(new CustomEvent('location-changed'));
   }
 
   _openSpeaker(e) {
