@@ -55,7 +55,7 @@
   "notifications": {
     "config": {
       "icon": "",
-      "timezone": "+03:00"
+      "timezone": "+01:00"
     },
     "messages": {},
     "subscribers": {},
@@ -68,8 +68,8 @@
         {
           "order": 0,
           "logoUrl": "../images/logos/gdg-lviv.svg",
-          "name": "GDG Lviv",
-          "url": "https://www.meetup.com/GDG-Lviv/"
+          "name": "TheNeXtConf",
+          "url": "https://www.ecx.website"
         }
       ],
       "order": 0,
@@ -150,7 +150,7 @@
   ],
   "schedule": {
     "2016-09-09": {
-      "dateReadable": "September 9",
+      "dateReadable": "May 20",
       "timeslots": [
         {
           "endTime": "10:00",
@@ -1651,7 +1651,7 @@
     {
       "members": [
         {
-          "name": "Oleh Zasadnyy",
+          "name": "Sodiq Akinjobi",
           "photo": "/images/people/oleh_zasadnyy.jpg",
           "photoUrl": "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/oleh_zasadnyy.jpg",
           "socials": [
