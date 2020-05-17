@@ -94,54 +94,6 @@
           "logoUrl": "../images/logos/google.svg",
           "name": "Google",
           "url": "https://www.google.com.ua/intl/en/about/"
-        },
-        {
-          "order": 3,
-          "logoUrl": "../images/logos/gdg-x.svg",
-          "name": "GDG[x]",
-          "url": "https://github.com/gdg-x"
-        },
-        {
-          "order": 4,
-          "logoUrl": "../images/logos/google.svg",
-          "name": "Google",
-          "url": "https://www.google.com.ua/intl/en/about/"
-        },
-        {
-          "order": 5,
-          "logoUrl": "../images/logos/gdg-x.svg",
-          "name": "GDG[x]",
-          "url": "https://github.com/gdg-x"
-        },
-        {
-          "order": 6,
-          "logoUrl": "../images/logos/google.svg",
-          "name": "Google",
-          "url": "https://www.google.com.ua/intl/en/about/"
-        },
-        {
-          "order": 7,
-          "logoUrl": "../images/logos/gdg-x.svg",
-          "name": "GDG[x]",
-          "url": "https://github.com/gdg-x"
-        },
-        {
-          "order": 8,
-          "logoUrl": "../images/logos/google.svg",
-          "name": "Google",
-          "url": "https://www.google.com.ua/intl/en/about/"
-        },
-        {
-          "order": 9,
-          "logoUrl": "../images/logos/gdg-x.svg",
-          "name": "GDG[x]",
-          "url": "https://github.com/gdg-x"
-        },
-        {
-          "order": 10,
-          "logoUrl": "../images/logos/google.svg",
-          "name": "Google",
-          "url": "https://www.google.com.ua/intl/en/about/"
         }
       ],
       "order": 1,
@@ -149,85 +101,133 @@
     }
   ],
   "schedule": {
-    "2016-09-09": {
+    "2020-05-20": {
       "dateReadable": "May 20",
       "timeslots": [
         {
-          "endTime": "10:00",
+          "endTime": "14:00",
           "sessions": [
             {
               "items": [132]
             }
           ],
-          "startTime": "09:00"
+          "startTime": "13:30"
         },
         {
-          "endTime": "10:15",
+          "endTime": "15:00",
+          "sessions": [
+            {
+              "items": [101]
+            }
+          ],
+          "startTime": "14:00"
+        },
+        {
+          "endTime": "15:30",
+          "sessions": [
+            {
+              "items": [134]
+            }
+          ],
+          "startTime": "15:00"
+        },
+        {
+          "endTime": "16:30",
+          "sessions": [
+            {
+              "items": [102]
+            }
+          ],
+          "startTime": "15:30"
+        },
+        {
+          "endTime": "15:00",
+          "sessions": [
+            {
+              "items": [103]
+            }
+          ],
+          "startTime": "14:00"
+        },
+        {
+          "endTime": "15:30",
+          "sessions": [
+            {
+              "items": [134]
+            }
+          ],
+          "startTime": "15:00"
+        },
+        {
+          "endTime": "16:30",
+          "sessions": [
+            {
+              "items": [104]
+            }
+          ],
+          "startTime": "15:30"
+        }
+      ],
+      "tracks": [
+        {
+          "title": "Day 1"
+        }
+      ]
+    },
+    "2020-05-21": {
+      "dateReadable": "May 21",
+      "timeslots": [
+        {
+          "endTime": "15:00",
+          "sessions": [
+            {
+              "items": [103]
+            }
+          ],
+          "startTime": "14:00"
+        },
+        {
+          "endTime": "15:30",
+          "sessions": [
+            {
+              "items": [134]
+            }
+          ],
+          "startTime": "15:00"
+        },
+        {
+          "endTime": "16:30",
+          "sessions": [
+            {
+              "items": [104]
+            }
+          ],
+          "startTime": "15:30"
+        }
+      ],
+      "tracks": [
+        {
+          "title": "Day 2"
+        }
+      ]
+    },
+    "2020-05-22": {
+      "dateReadable": "May 22",
+      "timeslots": [
+        {
+          "endTime": "14:00",
           "sessions": [
             {
               "items": [136]
             }
           ],
-          "startTime": "10:00"
+          "startTime": "13:30"
         },
         {
-          "endTime": "11:00",
+          "endTime": "15:00",
           "sessions": [
             {
-              "items": [139]
-            }
-          ],
-          "startTime": "10:15"
-        },
-        {
-          "endTime": "11:40",
-          "sessions": [
-            {
-              "items": [103, 112]
-            },
-            {
-              "items": [120]
-            },
-            {
-              "extend": 3,
-              "items": [109]
-            }
-          ],
-          "startTime": "11:00"
-        },
-        {
-          "endTime": "12:30",
-          "sessions": [
-            {
-              "items": [129]
-            },
-            {
-              "items": [116]
-            }
-          ],
-          "startTime": "11:50"
-        },
-        {
-          "endTime": "14:00",
-          "sessions": [
-            {
-              "items": [133]
-            }
-          ],
-          "startTime": "12:30"
-        },
-        {
-          "endTime": "14:40",
-          "sessions": [
-            {
-              "items": [101]
-            },
-            {
-              "items": [118]
-            },
-            {
-              "extend": 2,
-              "items": [107]
+              "items": [105]
             }
           ],
           "startTime": "14:00"
@@ -236,224 +236,62 @@
           "endTime": "15:30",
           "sessions": [
             {
-              "items": [140]
-            },
-            {
-              "items": [126]
-            }
-          ],
-          "startTime": "14:50"
-        },
-        {
-          "endTime": "16:00",
-          "sessions": [
-            {
               "items": [134]
             }
           ],
-          "startTime": "15:30"
+          "startTime": "15:00"
         },
         {
-          "endTime": "16:40",
-          "sessions": [
-            {
-              "items": [105]
-            },
-            {
-              "items": [127]
-            },
-            {
-              "extend": 3,
-              "items": [119]
-            }
-          ],
-          "startTime": "16:00"
-        },
-        {
-          "endTime": "17:30",
-          "sessions": [
-            {
-              "items": [112]
-            },
-            {
-              "items": [111]
-            }
-          ],
-          "startTime": "16:50"
-        },
-        {
-          "endTime": "18:20",
+          "endTime": "16:30",
           "sessions": [
             {
               "items": [106]
-            },
-            {
-              "items": [125]
             }
           ],
-          "startTime": "17:40"
+          "startTime": "15:30"
+        }
+      ],
+      "tracks": [
+        {
+          "title": "Day 3"
+        }
+      ]
+    },
+    "2020-05-23": {
+      "dateReadable": "May 23",
+      "timeslots": [
+        {
+          "endTime": "15:00",
+          "sessions": [
+            {
+              "items": [108]
+            }
+          ],
+          "startTime": "14:00"
         },
         {
-          "endTime": "22:30",
+          "endTime": "15:30",
+          "sessions": [
+            {
+              "items": [107]
+            }
+          ],
+          "startTime": "15:00"
+        },
+        {
+          "endTime": "17:00",
           "sessions": [
             {
               "items": [137]
             }
           ],
-          "startTime": "18:30"
+          "startTime": "16:30"
         }
       ],
       "tracks": [
+        
         {
-          "title": "Expo hall"
-        },
-        {
-          "title": "Conference hall"
-        },
-        {
-          "title": "Workshops hall"
-        }
-      ]
-    },
-    "2016-09-10": {
-      "dateReadable": "September 10",
-      "timeslots": [
-        {
-          "endTime": "10:10",
-          "sessions": [
-            {
-              "items": [135]
-            }
-          ],
-          "startTime": "09:30"
-        },
-        {
-          "endTime": "10:50",
-          "sessions": [
-            {
-              "items": [114]
-            },
-            {
-              "items": [117]
-            },
-            {
-              "items": [121]
-            }
-          ],
-          "startTime": "10:10"
-        },
-        {
-          "endTime": "11:40",
-          "sessions": [
-            {
-              "items": [122]
-            },
-            {
-              "items": [113]
-            },
-            {
-              "extend": 2,
-              "items": [121]
-            }
-          ],
-          "startTime": "11:00"
-        },
-        {
-          "endTime": "12:30",
-          "sessions": [
-            {
-              "items": [104]
-            },
-            {
-              "items": [124]
-            }
-          ],
-          "startTime": "11:50"
-        },
-        {
-          "endTime": "14:00",
-          "sessions": [
-            {
-              "items": [133]
-            }
-          ],
-          "startTime": "12:30"
-        },
-        {
-          "endTime": "14:40",
-          "sessions": [
-            {
-              "items": [108]
-            },
-            {
-              "items": [128]
-            },
-            {
-              "extend": 2,
-              "items": [102]
-            }
-          ],
-          "startTime": "14:00"
-        },
-        {
-          "endTime": "15:30",
-          "sessions": [
-            {
-              "items": [110]
-            },
-            {
-              "items": [123]
-            }
-          ],
-          "startTime": "14:50"
-        },
-        {
-          "endTime": "16:00",
-          "sessions": [
-            {
-              "items": [134]
-            }
-          ],
-          "startTime": "15:30"
-        },
-        {
-          "endTime": "16:40",
-          "sessions": [
-            {
-              "items": [131]
-            },
-            {
-              "items": [140]
-            },
-            {
-              "extend": 2,
-              "items": [130]
-            }
-          ],
-          "startTime": "16:00"
-        },
-        {
-          "endTime": "17:30",
-          "sessions": [
-            {
-              "items": [115]
-            },
-            {
-              "items": [140]
-            }
-          ],
-          "startTime": "16:50"
-        }
-      ],
-      "tracks": [
-        {
-          "title": "Expo hall"
-        },
-        {
-          "title": "Conference hall"
-        },
-        {
-          "title": "Workshops hall"
+          "title": "Day 4"
         }
       ]
     }
@@ -461,293 +299,83 @@
   "sessions": {
     "101": {
       "complexity": "Beginner",
-      "description": "In this session, we will take a look at Windows and .NET support on Google Cloud Platform. We will build a simple ASP.NET app, deploy to Google Compute Engine and take a look at some of the tools and APIs available to .NET developers on Google Cloud Platform. ",
+      "description": "A very important session aimed at highlighting top essential skills that will be required in the post covid era's workspace.",
       "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/mete-atamel-windows-and-net-on-google-cloud-platform",
-      "speakers": ["mete_atamel", "adrian_kajda"],
-      "tags": ["Cloud"],
-      "title": "Windows and .NET on Google Cloud Platform "
+      "presentation": "#",
+      "speakers": ["Daniel"],
+      "tags": ["Soft Skill"],
+      "title": "Skills to learn during this pandemic"
     },
     "102": {
       "complexity": "Beginner",
-      "description": "Do you remember the game Simon says from the 80s? I don’t know about you, but I know many that spent hours trying to press those specific sequences of red, green, blue and yellow buttons in the correct order. But why play on your own? We’ve implemented a gRPC server that allows you to play Simon with other players over the internet!\n\nIn this workshop we will dive into the toolset and libraries to build your very own Simon Says client for this server. We will have a message description in Protocol Buffers format and some stub code in several languages ready for you to play with. The goal for this workshop is for you to have a working client that you can use to play (and beat!) other attendees of the workshop.",
+      "description": ["In this session, you'll be taught;", "Various CV writing techniques.", "Importance of a LinkedIn profile.", "Highlighting your language skills.", "Describing your experiance with action verbs.", "Keywords to be used when writing a CV.", "Difference between CV and resume.", "Common pitfalls when writing a CV."],
       "language": "English",
-      "speakers": ["mete_atamel"],
-      "tags": ["Cloud"],
-      "title": "Hands-on gRPC experience building your own multiplayer game client"
+      "speakers": ["Striking CV Geek"],
+      "tags": ["Soft Skill"],
+      "title": "How to craft your CV like a pro"
     },
     "103": {
       "complexity": "Intermediate",
-      "description": "Doze mode is just around the corner. \nIntroduced in Marshmallow, as the shy guy that was allowed to step in only when your device went to sleep. ZzzZzzzz\nWith the new N release, Doze mode becomes the rockstar. He rushes into the room with a big shabang by shooting all background services and network requests that forgot to get away. \nHe should no longer be shy. He just shoots and dances on bones of your scheduled alarms, while you wonder why this particular task is no longer running.\nWith the new Doze mode, you require to adapt your app architecture to the new reality.\nOn this talk, we will learn how to survive Doze mode using Job Scheduler, Content Provider and stay in one piece.",
+      "description": "Explaining imposter syndrome and how to overcome it and be on top of your game.",
       "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/yonatan-levin-knock-knock-whos-there-doze",
-      "speakers": ["yonatan_levin"],
-      "tags": ["Android"],
-      "title": "Knock knock! Who's there? Doze."
+      "presentation": "#",
+      "speakers": ["Chris Marcel"],
+      "tags": ["Soft Skill"],
+      "title": "Imposter syndrome and ways to overcome it"
     },
     "104": {
       "complexity": "Beginner",
-      "description": "It's no longer just about digitizing our environment. It’s rather about pervasive and ubiquitous computing. Almost all everyday things will turn into connected devices soon. This “Internet of Things” will allow the Web to be physically tangible. But what is the value, and how can one prevent IoT applications which just seem to be only more expensive and complicated than conventional solutions. Sascha will discuss the purpose and guide you through this complex topic showing inspiring solutions, tips from practice, and code samples in a variety of technologies from simple Bluetooth Eddystone Beacons to more sophisticated IoT platforms like Eclipse SmartHome.",
+      "description": "A detailed session on the effects of depression and how to be free from depression.",
       "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/sascha-wolter-the-physical-web-context-is-king",
-      "speakers": ["sascha_wolter"],
-      "tags": ["Web"],
-      "title": "The Physical Web: Context is King!",
+      "presentation": "#",
+      "speakers": ["Ms. Ngozi John-Uyah"],
+      "tags": ["Soft Skill"],
+      "title": "How to overcome depression",
       "videoId": "fLfQNp75kbc"
     },
     "105": {
       "complexity": "Intermediate",
-      "description": "TBD",
+      "description": ["How to excel at public speaking while getting rid of your fear of speaking in public and learning how to speak with confidence on occasion.", "How to organize your public speaking presentation so that it is easy to remember when you are making your speech.", "The blue print for creating excellent powerpoint/keynote slides which also tell you what to write in your speech.", "How to answer any questions during your speech's Q&A session."],
       "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/rustem-arzymbetov-intro-to-tensorflow",
-      "speakers": ["rustem_arzymbetov"],
-      "tags": ["Cloud"],
-      "title": "Intro to TensorFlow",
+      "presentation": "#",
+      "speakers": ["Damola"],
+      "tags": ["Soft Skill"],
+      "title": "Excelling at public speaking and presentation",
       "videoId": "e3cuSz1hEPs"
     },
     "106": {
       "complexity": "Beginner",
-      "description": "Fuelio. Success story (I'll write more info later)",
+      "description": "Legit strategies to make money online",
       "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/adrian-kajda-fuelio-success-story",
-      "speakers": ["adrian_kajda"],
-      "tags": ["Android"],
-      "title": "Fuelio. Success story",
+      "presentation": "#",
+      "speakers": ["Adebayo Adegbiji"],
+      "tags": ["Soft Skill"],
+      "title": "Leveraging tech to build wealth",
       "videoId": "qK7ysoohsaM"
     },
     "107": {
       "complexity": "Beginner",
-      "description": "There's been much discussion about Progressive Web Apps. They're still a relatively new model. In this talk, I'll summarise few options and techniques for getting started with your own Progressive Web App",
+      "description": "Developer Relations Regional Lead",
       "extend": 2,
       "language": "English",
-      "speakers": ["gerard_sans"],
-      "tags": ["Web"],
-      "title": "Introduction to Progressive Web Apps in Angular 2"
+      "speaker": ["TBD"],
+      "tags": ["Soft Skill"],
+      "title": "Founder"
     },
     "108": {
-      "complexity": "Intermediate",
-      "description": "Angular 2 introduces a new Data Architecture based on Reactive Programming using RxJS 5. We are really excited to see the new approach using Observable sequences aka Observables. We will cover a basic introduction of Angular 2 followed by RxJS 5 and the new HTTP API covering some basic use cases.",
-      "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/gerard-sans-new-data-architecture-in-angular-2",
-      "speakers": ["gerard_sans"],
-      "tags": ["Web"],
-      "title": "New Data Architecture in Angular 2",
-      "videoId": "pgmLkwD-mqM"
-    },
-    "109": {
       "complexity": "Beginner",
-      "description": "TBD",
+      "description": "Developer Relations Regional Lead",
+      "extend": 2,
       "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/jozef-vodicka-how-much-money-firebase-can-save-you",
-      "speakers": ["jozef_vodicka"],
-      "tags": ["Cloud"],
-      "title": "How much money Firebase can save you"
-    },
-    "110": {
-      "complexity": "Intermediate",
-      "description": "There's a lot of hype around MVP pattern in the Android world. Now it's time for concretes. During his presentation Mateusz will tell you how IG divided responsibilities between pattern's different components, how they tied Presenters' and Views' lifecycles and what they did to make it all testable. If you'd love to make your Fragments' and Activities' code simpler and increase your coverage, but you're confused how to glue it all together - don't miss Mateusz's talk.",
-      "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/mateusz-herych-the-ultimate-guide-to-mvp-pattern-on-android",
-      "speakers": ["mateusz_herych"],
-      "tags": ["Android"],
-      "title": "The ultimate guide to MVP pattern on Android"
-    },
-    "111": {
-      "complexity": "Intermediate",
-      "description": "It's beauty, it's handy, it's fast, it's easy - all about Dagger 2",
-      "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/kseniia-shumelchyk-building-modular-architecture-apps-with-dagger-2",
-      "speakers": ["david_mayboroda"],
-      "tags": ["Android"],
-      "title": "Building modular architecture apps with Dagger 2"
-    },
-    "112": {
-      "complexity": "Intermediate",
-      "description": "Last year brought a lot of new capabilities to browsers, fundamentally changing the way we will build web apps in 2016. 60FPS, push messages, offline support and background sync became a reality marking the birth of Progressive Web Apps.",
-      "language": "English",
-      "speakers": ["konrad_dzwinel"],
-      "tags": ["Web"],
-      "title": "Building web apps in 2016"
-    },
-    "113": {
-      "complexity": "Intermediate",
-      "description": "Microservices is coming with a certain workload and constraints. Let's try to see how Google Cloud Platform and App Engine can help the overall microservices implementation.",
-      "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/jean-baptiste-clion-microservices-in-google-app-engine",
-      "speakers": ["jean-baptiste_clion"],
-      "tags": ["Cloud"],
-      "title": "Microservices in Google App Engine"
-    },
-    "114": {
-      "complexity": "Intermediate",
-      "description": "Storing account information is a common challenge many app developers face, and is often tackled in tailored solutions. Isn't there some strategy to store account credentials in a centralized place?\n\nWhat about considerations for multiple accounts? Security concerns? And when should or could I synchronize data?\n\nAndroid offers a powerful—and underrated—account manager. Let's explore the possibilities together and lay out an architecture for engineering an Android app based on accounts.",
-      "language": "English",
-      "speakers": [12],
-      "tags": ["Android"],
-      "title": "I’ve been doing some syncing…"
-    },
-    "115": {
-      "complexity": "Beginner",
-      "description": "Upcoming Android N release will bring some interesting changes to both Android run-time and toolchain. Let's talk about JIT, AOT, hybrid JIT/AOT, Jack, Jill and other acronyms and codenames ;-) In this presentation we'll see how many awesome tricks are needed to make our apps start fast and run smoothly on modern Android devices. Hopefully we'll also answer the most important question -- what's next for Android after Java.",
-      "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/aleksander-piotrowski-android-tool-chain-and-run-time-improvements-in-n",
-      "speakers": ["paul_lammertsma"],
-      "tags": ["Android"],
-      "title": "Android tool-chain and run-time improvements in N",
-      "videoId": "WqULb6bdwwg"
-    },
-    "116": {
-      "complexity": "Beginner",
-      "description": "One of my favourite things about the web are ASCII smileys. They're sweet, fun and simply make the web a better place. How could anyone not like them ¯(ツ)/¯?\n\nThis talk is an overdose of smileys, because they're the perfect excuse to get started with Polymer. Polymer is a library built on top of the Web Components standards that helps developers create reusable components for the modern web. And since I know that everybody has been wondering how one could take over the world by creating a suite of Polymer animated emoticon components, we're going to do exactly that.",
-      "language": "English",
-      "presentation": "http://carmenpopoviciu.github.io/on-polymer-and-smileys/",
-      "speakers": ["aleksander_piotrowski"],
-      "tags": ["Web"],
-      "title": "On Polymer and smileys... or Polysmileys"
-    },
-    "117": {
-      "complexity": "Beginner",
-      "description": "Data is becoming one of the main decision-makers in an organisation. The more data we have the more challenges we face every day. Every decision we make will have long-term implications. In the talk we will go through different approaches to the data pipelines: from a simple in-house built, with comparison to open source solutions based on Apache stack(Apache Kafka, Apache Samza, Spark) and finally hosted auto-scaling solutions based Amazon(S3, Kinesis, Lambda, EMR) or Google(Pub/Sub, Dataflow, BigQuery). The talk covers the main aspects of data collecting processes altogether with further implications for data processing, highlighting appropriate solutions and architectures for the particular use-cases. ",
-      "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/sergii-khomenko-building-data-pipelines-from-simple-to-more-advanced-hands-on-experience",
-      "speakers": ["carmen_popovicu"],
-      "tags": ["Cloud"],
-      "title": "Building data pipelines: from simple to more advanced - hands-on experience"
-    },
-    "118": {
-      "complexity": "Intermediate",
-      "description": "TBD",
-      "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/dmytro-danylyk-kotlin-plus-android",
-      "speakers": ["sergii_khomenko"],
-      "tags": ["Android"],
-      "title": "Kotlin + Android"
-    },
-    "119": {
-      "complexity": "Beginner",
-      "description": "Writing Android apps is usually fun because you are actually building something. But what about writing tests? Boring stuff. Errr, UI tests? I am a developer!\n\nIn this talk we will take a look at options for UI tests on Android, why you should write them and how they help you with your app development workflow. No more untested apps!",
-      "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/jana-moudra-hands-on-with-ui-testing-for-android-developers",
-      "speakers": ["dmytro_danylyk"],
-      "tags": ["Android"],
-      "title": "Hands-on with UI testing for Android developers"
-    },
-    "120": {
-      "complexity": "Beginner",
-      "description": "\"Remember back when AJAX completely changed what was possible in the desktop web? Progressive web apps are that same fundamental shift for the mobile web.\" said Rahul Row-Chowdhury (Google’s product lead for chrome and the web platform) on stage at Google I/O 2016. - Progressive web apps use service workers, app shell, push notifications, RAIL and other capabilities to deliver an app-like user experience.",
-      "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/jakub-skvara-progressive-web-apps-prepare-your-web-for-2017",
-      "speakers": ["jana_moudra"],
-      "tags": ["Web"],
-      "title": "Progressive web apps - prepare your web for 2017"
-    },
-    "121": {
-      "complexity": "Intermediate",
-      "description": "Using service workers and other modern progressive web apps capabilities we can update our web applications to be offline-fires. In this session we'll show how to easily convert your applications be usable without the internet connection.",
-      "language": "English",
-      "speakers": ["jana_moudra"],
-      "tags": ["Web"],
-      "title": "Offline-first progressive web apps"
-    },
-    "122": {
-      "complexity": "Intermediate",
-      "description": "I would like to talk about architecture of our Settle Up app. It's all based on new Firebase announced on I/O with the help of modern frameworks like Rx, Kotlin and MVP.",
-      "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/david-vavra-firebase-plus-kotlin-plus-rxjava-plus-mvp-practical-tips",
-      "speakers": ["jakub_škvára"],
-      "tags": ["Android"],
-      "title": "Firebase + Kotlin + RxJava + MVP: Practical Tips",
-      "videoId": "b9NgjqM6dvk"
-    },
-    "123": {
-      "complexity": "Beginner",
-      "description": "TBD",
-      "language": "English",
-      "speakers": ["david_vávra"],
-      "tags": ["Web"],
-      "title": "TBD"
-    },
-    "124": {
-      "complexity": "Intermediate",
-      "description": "You are tired of building every patch for your QA ? Still deploying to google play manually ? You still think that build server is something that you don't need ? Than I will try to show you how you can make life of your team easier with CI.",
-      "language": "English",
-      "speakers": ["valentyn_shybanov"],
-      "tags": ["Android"],
-      "title": "Continues Integration in Android",
-      "videoId": "MmGDQkgknfY"
-    },
-    "125": {
-      "complexity": "Intermediate",
-      "description": "TBD",
-      "language": "English",
-      "speakers": ["sergiy_mokienko"],
-      "tags": ["Cloud"],
-      "title": "Kubernetes in a real world"
-    },
-    "126": {
-      "complexity": "Intermediate",
-      "description": "Imagine the world where you can get any application, look into its code (even if it is not open sourced) and modify any conditional operator in any way you like. Welcome, you are in the Android applications world! Let's discover how anyone can decompile your app and, for example, hack your 'if' operators. For the beginning, we will play a role of a script kiddie and try to hack some simple app. After this, we will pretend security-conscious Android developers and try to think how we can protect ourselves.",
-      "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/michael-pustovit-android-hacking-for-dummies-if-operator-demolytion",
-      "speakers": ["ihor_dvoretskyi"],
-      "tags": ["Android"],
-      "title": "Android hacking for dummies: ‘if’ operator demolytion",
-      "videoId": "We04nyIIsA0"
-    },
-    "127": {
-      "complexity": "Intermediate",
-      "description": "If you have any experience with Android Media Player, you definitely know how hard it is to prepare it and do not lose your mind. ExoPlayer - is an alternative, which can help you deal with media with much less pain. So lets discuss if it really a \"silver bullet\" or yet another State Machine hell.",
-      "language": "Ukrainian",
-      "presentation": "https://speakerdeck.com/gdglviv/anton-minashkin-exoplayer-media-playback-without-pain-almost-dot-dot-dot",
-      "speakers": ["michael_pustovit"],
-      "tags": ["Android"],
-      "title": "ExoPlayer: Media playback without pain (almost...)"
-    },
-    "128": {
-      "complexity": "Beginner",
-      "description": "Google announced Android Wear 2.0 become available this Fall. This major update brings some revolutionary changes in platform, that should change our approaches in developing wearable apps, including freedom of BLE tethering, system support for complications and activity recognition by GoogleFit, developed mainly for Android Wear 2.0. We will talk deeper about these new features and look at some ways to implement them in the code.",
-      "language": "English",
-      "speakers": ["anton__minashkin"],
-      "tags": ["Android"],
-      "title": "Android Wear 2.0: Great Changes Upcoming this Fall"
-    },
-    "129": {
-      "complexity": "Intermediate",
-      "description": "Accessibility is a very important step to make sure that your app reaches everyone in an easy and fun way to use. \nGood accessibility support means much more than just making sure the app supports screen readers, different fonts sizes and good contrast ratios. It is a learning process, and one in which we ourselves still have much to learn and explore. ",
-      "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/resul-caner-yildirim-accessibility-on-android",
-      "speakers": ["constantine_mars"],
-      "tags": ["Android"],
-      "title": "Accessibility on Android"
-    },
-    "130": {
-      "complexity": "Intermediate",
-      "description": "Wearable devices are one of the most popular things nowadays. Specially, after the Apple Watch, we finally get the whole picture of the entire list of products and their features. Now, we can talk about how we can design a user experience for this type of devices.\nEvery platform has it's own design principles and approaches. But, in the core, they all need to follow same core rules. So, how we combine this core requirements with Google's Material Design and use them on an Android Wear device? Let's learn!",
-      "language": "English",
-      "speakers": ["constantine_mars"],
-      "tags": ["Android"],
-      "title": "Designing an Android Wear Application"
-    },
-    "131": {
-      "complexity": "Intermediate",
-      "description": "In this talk, I will reveal you all the deepest secrets of using MVVM architecture in Android. \nWe will discuss on how to organise your application, views, models, how to retrieve data from the model requested from the view via data binding. \nLightweight Activities and Fragments, is it even possible? \n\nYes, and I will show you how to achieve this with MVVM and DataBinding!",
-      "language": "English",
-      "presentation": "https://speakerdeck.com/gdglviv/roman-herasymenko-deal-with-it-android-databinding-explained",
-      "speakers": ["resul_caner__yildirim"],
-      "tags": ["Android"],
-      "title": "Deal with it: Android DataBinding explained"
+      "speaker": ["TBD"],
+      "tags": ["Soft Skill"],
+      "title": "Founder"
     },
     "132": {
-      "description": "Get your badge, coffee, enjoy talking with tech edicts around",
+      "description": "Grab a seat, get ready and be set to go",
       "icon": "registration",
       "image": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fbackgrounds%2Fregistration.jpg?alt=media&token=27328646-d323-4cca-904c-75f021bc3ffe",
-      "title": "Registration & morning Coffee"
-    },
-    "133": {
-      "description": "Foooooooood!",
-      "icon": "lunch",
-      "image": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fbackgrounds%2Flunch.jpg?alt=media&token=bc82aaff-92cc-4dcc-a00e-2b6f30a40225",
-      "title": "Lunch"
+      "title": "Opening Keynote from the President"
     },
     "134": {
       "description": "Coffeeeeeee!",
@@ -755,18 +383,12 @@
       "image": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fbackgrounds%2Fcoffee-break.jpg?alt=media&token=7c2c929b-cb94-4be8-a05a-b3f678136cb7",
       "title": "Coffee break"
     },
-    "135": {
-      "description": "Coffeeeeeee!",
-      "icon": "coffee-break",
-      "image": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fbackgrounds%2Fmorning.jpg?alt=media&token=d0da3d64-fc63-48c6-9d41-1460451dca64",
-      "title": "Morning coffee"
-    },
     "136": {
       "description": "Official start of the conference. Greetings from the organizers, sponsors and partners.",
       "icon": "opening",
       "image": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fbackgrounds%2Fopening.jpg?alt=media&token=aa52dd45-50c9-4e36-9485-c1f9138ecd6b",
       "language": "English",
-      "title": "GDG DevFest Ukraine 2016 Opening"
+      "title": "The Next Conference Opening Keynote"
     },
     "137": {
       "description": "Afterparty is a great time to have some fun and meet new people",
@@ -778,16 +400,6 @@
       "description": "Make sure you won't miss closing ceremony, all gifts from out sponsors and partners will find their owners during this session.",
       "image": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fbackgrounds%2Fclosing.jpg?alt=media&token=f02d014a-09ee-407e-88c7-b74093e00fed",
       "title": "Conference closing and contest winners announcements"
-    },
-    "139": {
-      "description": "",
-      "language": "English",
-      "title": "Keynote"
-    },
-    "140": {
-      "description": "TBD",
-      "language": "English",
-      "title": "TBD"
     }
   },
   "speakers": {
@@ -1652,30 +1264,30 @@
       "members": [
         {
           "name": "Sodiq Akinjobi",
-          "photo": "/images/people/oleh_zasadnyy.jpg",
+          "photo": "/images/people/sodiq.jpg",
           "photoUrl": "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/oleh_zasadnyy.jpg",
           "socials": [
             {
               "icon": "facebook",
-              "link": "https://www.facebook.com/oleh.zasadnyy",
+              "link": "https://www.facebook.com/sodson11",
               "name": "Facebook"
             },
             {
               "icon": "twitter",
-              "link": "https://twitter.com/ozasadnyy",
+              "link": "https://twitter.com/geektutor",
               "name": "Twitter"
             },
             {
               "icon": "website",
-              "link": "http://o.zasadnyy.com/",
+              "link": "http://geektutor.com",
               "name": "Blog"
             }
           ],
           "order": 0,
-          "title": "Website and sponsors"
+          "title": "Chairman"
         },
         {
-          "name": "Sofiya Huts",
+          "name": "Angel Umeh",
           "photo": "/images/people/sofiya_huts.jpg",
           "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fsofiya_huts.jpg?alt=media&token=a911eafb-f709-4af7-b1cb-58a6604b70d1",
           "socials": [
@@ -1713,7 +1325,7 @@
           "title": "Speakers"
         },
         {
-          "name": "Marta Maxymiak",
+          "name": "Olawale Goodluck",
           "photo": "/images/people/marta_maxymiak.jpg",
           "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fmarta_maxymiak.jpg?alt=media&token=6532f039-7f86-4304-8558-dbfbb3ae8d68",
           "socials": [
@@ -1727,7 +1339,7 @@
           "title": "Party and happiness"
         },
         {
-          "name": "Ostap Andrusiv",
+          "name": "Munira Adamu-Ibrahim",
           "photo": "/images/people/ostap_andrusiv.jpg",
           "photoUrl": "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/ostap_andrusiv.jpg",
           "socials": [
@@ -1751,7 +1363,7 @@
           "title": "Sponsors"
         },
         {
-          "name": "Vasylyna Mytsak",
+          "name": "Abubakar Yusuf",
           "photo": "/images/people/vasylyna_mytsak.jpg",
           "photoUrl": "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/vasylyna_mytsak.jpg",
           "socials": [
@@ -1765,7 +1377,7 @@
           "title": "Party and happiness"
         },
         {
-          "name": "Volodya Karpliuk",
+          "name": "Michelle Yakubu",
           "photo": "/images/people/volodya_karpliuk.jpg",
           "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fvolodya_karpliuk.jpg?alt=media&token=aa08d9c9-c42a-435f-8672-c3a004e3aa08",
           "socials": [
@@ -1784,7 +1396,7 @@
           "title": "Speakers"
         },
         {
-          "name": "Diana Pinchuk",
+          "name": "Daniel Ejalonibu",
           "photo": "/images/people/diana_pinchuk.jpg",
           "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fdiana_pinchuk.jpg?alt=media&token=189d67d1-004f-4a3c-9e0c-13bc992bbaf7",
           "socials": [
@@ -1798,7 +1410,7 @@
           "title": "Social and media"
         }
       ],
-      "title": "Core Team"
+      "title": "Planning Committee"
     },
     {
       "members": [

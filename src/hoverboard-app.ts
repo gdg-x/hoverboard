@@ -202,23 +202,6 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
               >
                 {$ addToHomeScreen.cta $}
               </a>
-
-              <a
-                class="bottom-drawer-link"
-                href$="[[_getTicketUrl(tickets)]]"
-                target="_blank"
-                rel="noopener noreferrer"
-                on-click="closeDrawer"
-                ga-on="click"
-                ga-event-category="ticket button"
-                ga-event-action="buy_click"
-                layout
-                horizontal
-                center
-              >
-                <span>{$ buyTicket $}</span>
-                <iron-icon icon="hoverboard:open-in-new"></iron-icon>
-              </a>
             </div>
           </div>
         </app-drawer>
@@ -235,13 +218,8 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
             hide-immediately
           >
             <home-page name="home"></home-page>
-            <blog-page name="blog" route="[[subRoute]]"></blog-page>
             <schedule-page name="schedule" route="[[subRoute]]"></schedule-page>
             <speakers-page name="speakers" route="[[subRoute]]"></speakers-page>
-            <previous-speakers-page
-              name="previous-speakers"
-              route="[[subRoute]]"
-            ></previous-speakers-page>
             <team-page name="team"></team-page>
             <faq-page name="faq"></faq-page>
             <coc-page name="coc"></coc-page>
@@ -266,13 +244,6 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
         with-backdrop="[[viewport.isTabletPlus]]"
         no-cancel-on-outside-click="[[viewport.isPhone]]"
       ></speaker-details>
-
-      <previous-speaker-details
-        opened="[[dialogs.previousSpeaker.isOpened]]"
-        speaker="[[dialogs.previousSpeaker.data]]"
-        with-backdrop="[[viewport.isTabletPlus]]"
-        no-cancel-on-outside-click="[[viewport.isPhone]]"
-      ></previous-speaker-details>
 
       <session-details
         opened="[[dialogs.session.isOpened]]"
