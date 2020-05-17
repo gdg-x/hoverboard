@@ -86,7 +86,7 @@
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-plugin-html": "^6.0.2",
     "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jest": "^23.13.0",
+    "eslint-plugin-jest": "^23.13.1",
     "eslint-plugin-jest-dom": "^2.1.0",
     "eslint-plugin-polymer": "^0.4.0",
     "eslint-plugin-testing-library": "^3.1.3",
