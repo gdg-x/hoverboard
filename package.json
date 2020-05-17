@@ -79,7 +79,7 @@
     "concurrently": "^5.2.0",
     "cross-env": "^7.0.2",
     "deepmerge": "^4.2.2",
-    "es-dev-server": "^1.50.4",
+    "es-dev-server": "^1.50.5",
     "eslint": "^7.0.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^6.11.0",
