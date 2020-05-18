@@ -38,5 +38,5 @@ jobs:
           args: deploy
         env:
           # Change your project ID here according to your configuration
-          PROJECT_ID: hoverboard-master
+          PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
