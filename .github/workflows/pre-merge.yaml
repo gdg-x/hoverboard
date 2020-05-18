@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: ['10', '12']
+        node-version: [10, 12]
     name: Build & Test on Node ${{ matrix.node-version }}
     steps:
       - name: Checkout the repo
