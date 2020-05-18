@@ -27,7 +27,7 @@ jobs:
           node-version: 10
 
       - name: Installing Dependencencies
-        run: npm install
+        run: npm ci
 
       - name: Building the project
         run: npm run build
