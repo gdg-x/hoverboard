@@ -2,27 +2,27 @@
 
 1.  Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/):
 
-    ```console
-      npx firebase login
-    ```
+```bash
+npx firebase login
+```
 
 1.  Select the Firebase project to deploy to
 
-    ```console
-      npx firebase use <projectId>
-    ```
+```bash
+npx firebase use <projectId>
+```
 
 1.  Build and deploy with `/config/production.json`
 
-    ```console
-      npm run deploy
-    ```
+```bash
+npm run deploy
+```
 
     or to deploy with a custom config pass the name of the config file. For example with `/config/custom.json`
 
-    ```console
-      BUILD_ENV=custom npm run deploy
-    ```
+```bash
+BUILD_ENV=custom npm run deploy
+```
 
     The URL to your live site is listed in the output.
 
@@ -40,16 +40,16 @@ To run the `deploy` on your instance instead, you need to do a small setup:
 
 First, make sure that you're able to deploy locally correctly with the command:
 
-    ```console
-      npm run deploy
-    ```
+```bash
+npm run deploy
+```
 
 If the deploy is successful, you can then configure Github Actions to do it for you.
 You need to generate a login token for the CI with the following command:
 
-    ```console
-      npx firebase login:ci
-    ```
+```bash
+npx firebase login:ci
+```
 
 Once you obtained the token, you need to store it as a **secret** called `FIREBASE_TOKEN` in the settings of your repository.
 More details on this process can be found here: [Creating and storing encrypted secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets).
