@@ -37,6 +37,6 @@ jobs:
         with:
           args: deploy
         env:
-          # Change your project ID here according to your configuration
+          # Update your project ID and Token in the secrets of your repo settings
           PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
