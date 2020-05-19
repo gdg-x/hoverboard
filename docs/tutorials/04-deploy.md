@@ -2,27 +2,27 @@
 
 1.  Create [Firebase account](https://console.firebase.google.com) and login into [Firebase CLI](https://firebase.google.com/docs/cli/):
 
-```bash
-npx firebase login
-```
+    ```console
+      npx firebase login
+    ```
 
 1.  Select the Firebase project to deploy to
 
-```bash
-npx firebase use <projectId>
-```
+    ```console
+      npx firebase use <projectId>
+    ```
 
 1.  Build and deploy with `/config/production.json`
 
-```bash
-npm run deploy
-```
+    ```console
+      npm run deploy
+    ```
 
     or to deploy with a custom config pass the name of the config file. For example with `/config/custom.json`
 
-```bash
-BUILD_ENV=custom npm run deploy
-```
+    ```console
+      BUILD_ENV=custom npm run deploy
+    ```
 
     The URL to your live site is listed in the output.
 
@@ -51,23 +51,8 @@ You need to generate a login token for the CI with the following command:
 npx firebase login:ci
 ```
 
-Once you obtained the token, you need to store it as a **secret** called `FIREBASE_TOKEN` in the settings of your repository.
+Once you obtained the token, you need to store it as a **secret** called `FIREBASE_TOKEN` in the settings of your repository. Additionally you need to set your Firebase `project-id` as a secret called `FIREBASE_PROJECT_ID`.
 More details on this process can be found here: [Creating and storing encrypted secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets).
-
-Finally, you need to update your `project-id` inside the `deploy.yaml` file to match your project ID where you want to publish:
-
-    ```yaml
-      - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy
-        env:
-          # Change your project ID here according to your configuration
-          PROJECT_ID: hoverboard-master
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-    ```
-
-So you can replace `hoverboard-master` with your specific project ID.
 
 Push this change to `master`, and Github Actions will deploy your project to Firebase after every commit.
 
