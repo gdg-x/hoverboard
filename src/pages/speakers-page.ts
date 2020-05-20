@@ -266,7 +266,6 @@ class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
         </template>
       </div>
 
-      <previous-speakers-block></previous-speakers-block>
 
       <footer-block></footer-block>
     `;
