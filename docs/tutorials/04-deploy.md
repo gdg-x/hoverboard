@@ -26,71 +26,34 @@
 
     The URL to your live site is listed in the output.
 
-### Continuous integration with Travis CI
+### Continuous integration with Github Actions
 
-In the root folder, you can find [.travis.yml](/.travis.yml) which configures
-[Travis CI][travis ci] build and deployment on Firebase hosting:
+In the [`.github/workflows`](.github/workflows) folder, you can find two workflows to help you develop and deploy Hoverboard to Firebase:
 
-```yaml
-- provider: firebase
-  skip_cleanup: true
-  on:
-    branch: master # on which branch trigger build
-  project: hoverboard # Firebase project name
-  token:
-    secure: Quq/Ys1GKDYFjqMCD107saKj005L0RaM7Ian9yLIW/er4KdMzwjYw7TVXmtMeJPIfEy/e2/4WJ63K1SaXieBoFndoUcpGWqPOoTrnkkj5K7tzeZKM32XqIarF+BNmOoqW5M7+kuN8L7N3RLp00ywFDOgKgiZJeoaDV6sIRRAIFVh+xHWabVWpFCwCUSeBZpufOsZhMXkicyRe0XhMmkUvS1P5CI3AyZZdIfWG+sguFsPOWRjMFKWrbnsilDFDjf7N0Wd8Z1H2Z0LBn/V00bNb95MSIuOhkdk3a1wP0P5Eollet+Y8g+NpdWyFq0/C+6+ECvFLBjtvbtMY1BVfdxkCo5XlogZx31OmkMWVX6PXOD5Va8aFoJnwvjovUT8oZbSCWEuyMxI91jDsLxXZt542MNfUfQ1Q2+SpUShdcRlwoV2c/XOYvme95HnI1LSqzLubooKWxz8wpa/aovkdZbum54t/z5nA54AXN1lYKsi+hcAFHOeucqd/kHOLG0bx05Ev86wcvNH8qGx+v7S644YH37No7PGnKU3g3Jq/m6quo1B/bMEIaatVnR40D301wAi8tsNWnqEdWFKnAlGrTIDd1qek9OHnApmgBQI8o0FOy6WbzLMwl9PnMl+t+wew/ggSY0IdWhjFWR/S1d6xML8cYHXHVpE0wxkat5ETbIYXlg=
+- [`pre-merge.yaml`](.github/workflows/pre-merge.yaml) Builds the project, runs the linter and the tests on every Pull Request
+- [`deploy.yaml`](.github/workflows/deploy.yaml) Deploys the project to Firebase after every merge to `master`.
+
+The `pre-merge` workflow is already configured and will work out of the box, once you fork the hoverboard repo.
+To run the `deploy` on your instance instead, you need to do a small setup:
+
+#### Deploying to Firebase wiht Github Actions
+
+First, make sure that you're able to deploy locally correctly with the command:
+
+```bash
+npm run deploy
 ```
 
-To generate the `secure` value do the following steps:
+If the deploy is successful, you can then configure Github Actions to do it for you.
+You need to generate a login token for the CI with the following command:
 
-1. Log in to Firebase console
+```bash
+npx firebase login:ci
+```
 
-   ```console
-     npx firebase login:ci --interactive
-   ```
+Once you obtained the token, you need to store it as a **secret** called `FIREBASE_TOKEN` in the settings of your repository. Additionally you need to set your Firebase `project-id` as a secret called `FIREBASE_PROJECT_ID`.
+More details on this process can be found here: [Creating and storing encrypted secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets).
 
-   You will get your token:
+Push this change to `master`, and Github Actions will deploy your project to Firebase after every commit.
 
-   ```console
-       ✔  Success! Use this token to log in on a CI server:
-
-       1/9YmsNEh87G3cRyt_FXQbsYI_uV4FUMmUBXkbl_CHANGED
-   ```
-
-1. Install travis tool to encrypt the token
-
-   ```console
-     gem install travis
-   ```
-
-1. Log in to your account
-
-   ```console
-     travis login --auto
-   ```
-
-1. Encrypt your token
-
-   ```console
-     travis encrypt "1/9YmsNEh87G3cRyt_FXQbsYI_uV4FUMmUBXkbl_CHANGED"
-   ```
-
-   Approximate output:
-
-   ```console
-     secure: "cioDQ571EZpnuGiDn7ofvEghNFP82vz7N+SqIL5ZjOK0CBgaWO3OoePoh1eO1dvIsdLDr7yNs5kBIx8NIuOqUA9YLyIIasC7ah1QLtiK5zRVaCcgwt4aBqRLKJVbXPl08MIyk9GFYl2+J+oLOzoEOnVUuCpUcGYWdmDRTKis5KP6naK1msRmTu5ymQn55cyxpmSZS2F+iEsAgV7d0/h+HGgPPd77M26j8wV9JEFJp3iMhudaCkWdoBf9z9WP0cpPzTHgSHEU/Mski4oMfU1BqCFRiaKfcw/uLzMcTpjcf+YG2dc3qTMcuBNKNvhANnaYrxePtuW1VWb+xl19qVQWrsGpQgyWIbp+icSXF3KGR1wfNrC9zNQWKm112BckYn6id8w4M3JeRdWRaCwWitG9C5CWQ3ZepPpgBu2SYSfZQg5heIbVSYOgbXUfeR8ByJqyAGCrYrB3lyyR49cr+GAnILbOgxE7FRYuHmagLD+xa8cHUFcZUu6CxgrhOFa+28Lvrtvod1WqbIioZfhWRcdIZNdJxR4gxXaGycp5n0qjJ0o1VDFAUcy93ImYyVZFY+OmqfVLFQChAD9NnPT1a0v3gHYR3IMd5aXXtbOo9e6cAjuXU/NQCry10Y0bNiMKkHbvnj3aGfAWlA34CRj3iOK2Nz1udDwBMdUKsgt1xiVh3h8="
-   ```
-
-1. Replace generated encrypted token with existing one
-
-1. **Tip:** deploy different builds depending on the branch:
-   ```yaml
-   script:
-     - echo "Building..."
-     - if [ "$TRAVIS_BRANCH" == "master" ]; then npm run build; else BUILD_ENV=development npm run build; fi
-   ```
-1. Push to a repository
-
-1. Enjoy
-
-[travis ci]: https://travis-ci.com/
+Enjoy
