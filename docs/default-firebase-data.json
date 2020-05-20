@@ -394,55 +394,35 @@
     "erioluwa_adeyinka": {
       "bio": "African Coordinator for SDGs ACTs- Entrepreneurship skills",
       "company": "SDGs ACTs-Entrepreneurship",
-      "companyLogo": "/images/logos/gdg-lviv.svg",
-      "companyLogoUrl": "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/logos/logo.svg",
+      "companyLogo": "s",
+      "companyLogoUrl": "",
       "country": "Lagos, Nigeria",
       "featured": true,
       "name": "Erioluwa Adeyinka",
       "photo": "/images/people/erioluwa.jpg",
-      "photoUrl": "https://thenextconf-dev.web.app/images/speaker/eri.jpg",
+      "photoUrl": "https://github.com/geektutor/hoverboard/raw/master/images/people/eri.jpg",
       "pronouns": "he/him",
       "shortBio": "African Coordinator for SDGs ACTs- Entrepreneurship skills",
       "socials": [],
       "order": 0,
       "title": "Educator"
     },
-    "aleksander_piotrowski": {
-      "bio": "Became a mobile developer after long run as a backend developer. Because of age, holding senior positions from the day one as an Android programmer. Serial hackathon winner, or at least contender ;-)",
-      "company": "Applause",
-      "companyLogo": "/images/logos/gdg-lviv.svg",
-      "companyLogoUrl": "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/logos/gdg-lviv.svg",
-      "country": "Warsaw, Poland",
-      "featured": false,
-      "name": "Testing Testing",
-      "photo": "/images/people/aleksander_piotrowski.jpg",
-      "photoUrl": "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/aleksander_piotrowski.jpg",
+    "nnamdi_orji": {
+      "bio": "",
+      "company": "",
+      "companyLogo": "",
+      "companyLogoUrl": "",
+      "country": "Lagos, Nigeria",
+      "featured": true,
+      "name": "Nnamdi Orji",
+      "photo": "/images/people/orji.jpeg",
+      "photoUrl": "https://github.com/geektutor/hoverboard/raw/master/images/people/orji.jpeg",
       "pronouns": "he/him",
-      "shortBio": "Became a mobile developer after long run as a backend developer. Because of age, holding senior p...",
+      "shortBio": "",
       "socials": [
-        {
-          "icon": "twitter",
-          "link": "https://twitter.com/pelotasplus",
-          "name": "Twitter"
-        },
-        {
-          "icon": "facebook",
-          "link": "http://facebook.com/pelotasplus",
-          "name": "Facebook"
-        },
-        {
-          "icon": "linkedin",
-          "link": "https://www.linkedin.com/in/pelotasplus",
-          "name": "LinkedIn"
-        },
-        {
-          "icon": "instagram",
-          "link": "https://www.instagram.com/pelotasplus/",
-          "name": "Google+"
-        }
       ],
       "order": 1,
-      "title": "Code Monkey"
+      "title": ""
     }
   },
   "team": [
@@ -450,8 +430,8 @@
       "members": [
         {
           "name": "Sodiq Akinjobi",
-          "photo": "/images/people/geek.jpg",
-          "photoUrl": "https://thenextconf-dev/images/people/geek.jpg",
+          "photo": "https://github.com/geektutor/hoverboard/raw/master/images/people/geek.jpg",
+          "photoUrl": "https://github.com/geektutor/hoverboard/raw/master/images/people/geek.jpg",
           "socials": [
             {
               "icon": "facebook",
@@ -470,165 +450,99 @@
             }
           ],
           "order": 0,
-          "title": "Chairman"
+          "title": "Chair"
         },
         {
           "name": "Angel Umeh",
-          "photo": "/images/people/sofiya_huts.jpg",
-          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fsofiya_huts.jpg?alt=media&token=a911eafb-f709-4af7-b1cb-58a6604b70d1",
+          "photo": "",
+          "photoUrl": "",
           "socials": [
-            {
-              "icon": "facebook",
-              "link": "https://www.facebook.com/sophie.huts.7",
-              "name": "Facebook"
-            }
+
           ],
           "order": 1,
-          "title": "Social and media"
-        },
-        {
-          "name": "Vitaliy Zasadnyy",
-          "photo": "/images/people/vitaliy_zasadnyy.jpg",
-          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fvitaliy_zasadnyy.jpg?alt=media&token=930e05c8-ae43-4628-8d4c-3e8f5193cda3",
-          "socials": [
-            {
-              "icon": "linkedin",
-              "link": "https://www.linkedin.com/in/zasadnyy",
-              "name": "Linkedin"
-            },
-            {
-              "icon": "twitter",
-              "link": "https://twitter.com/zasadnyy",
-              "name": "Twitter"
-            },
-            {
-              "icon": "website",
-              "link": "http://v.zasadnyy.com/",
-              "name": "Blog"
-            }
-          ],
-          "order": 2,
-          "title": "Speakers"
+          "title": "Deputy Chair"
         },
         {
           "name": "Olawale Goodluck",
-          "photo": "/images/people/marta_maxymiak.jpg",
-          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fmarta_maxymiak.jpg?alt=media&token=6532f039-7f86-4304-8558-dbfbb3ae8d68",
+          "photo": "",
+          "photoUrl": "",
           "socials": [
-            {
-              "icon": "facebook",
-              "link": "https://www.facebook.com/marta.maxymiak",
-              "name": "Facebook"
-            }
+            
           ],
-          "order": 3,
-          "title": "Party and happiness"
+          "order": 2,
+          "title": "Sponsorships"
         },
         {
           "name": "Munira Adamu-Ibrahim",
-          "photo": "/images/people/ostap_andrusiv.jpg",
-          "photoUrl": "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/ostap_andrusiv.jpg",
+          "photo": "",
+          "photoUrl": "",
           "socials": [
-            {
-              "icon": "facebook",
-              "link": "https://www.facebook.com/ostap.andrusiv",
-              "name": "Facebook"
-            },
             {
               "icon": "twitter",
               "link": "https://http://twitter.com/vaniilllaaa",
               "name": "Twitter"
-            },
-            {
-              "icon": "website",
-              "link": "http://andrusiv.com/",
-              "name": "Blog"
             }
           ],
-          "order": 4,
-          "title": "Sponsors"
+          "order": 3,
+          "title": "Logistics"
         },
         {
           "name": "Abubakar Yusuf",
-          "photo": "/images/people/vasylyna_mytsak.jpg",
-          "photoUrl": "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/people/optim/vasylyna_mytsak.jpg",
+          "photo": "/images/people/abu.jpeg",
+          "photoUrl": "https://github.com/geektutor/hoverboard/raw/master/images/people/abu.jpeg",
           "socials": [
-            {
-              "icon": "facebook",
-              "link": "https://www.facebook.com/vasylyna.mytsak",
-              "name": "Facebook"
-            }
+            
           ],
-          "order": 5,
-          "title": "Party and happiness"
+          "order": 4,
+          "title": "Training"
         },
         {
           "name": "Michelle Yakubu",
-          "photo": "/images/people/volodya_karpliuk.jpg",
-          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fvolodya_karpliuk.jpg?alt=media&token=aa08d9c9-c42a-435f-8672-c3a004e3aa08",
+          "photo": "/images/people/michelle.jpeg",
+          "photoUrl": "https://github.com/geektutor/hoverboard/raw/master/images/people/michelle.jpeg",
           "socials": [
-            {
-              "icon": "facebook",
-              "link": "https://www.facebook.com/volodya.karpluk",
-              "name": "Facebook"
-            },
-            {
-              "icon": "twitter",
-              "link": "https://twitter.com/keyv23",
-              "name": "Twitter"
-            }
+            
           ],
-          "order": 6,
-          "title": "Speakers"
+          "order": 5,
+          "title": "Partnerships"
         },
           {
           "name": "Chris Tega",
-          "photo": "/images/people/volodya_karpliuk.jpg",
-          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fvolodya_karpliuk.jpg?alt=media&token=aa08d9c9-c42a-435f-8672-c3a004e3aa08",
+          "photo": "/images/people/chris.jpg",
+          "photoUrl": "https://github.com/geektutor/hoverboard/raw/master/images/people/chris.jpg",
+          "socials": [
+          ],
+          "order": 6,
+          "title": "Design"
+        }, 
+        {
+          "name": "Olusheye Ifihanagbara Victoria",
+          "photo": "/images/people/ifihan.jpeg",
+          "photoUrl": "https://github.com/geektutor/hoverboard/raw/master/images/people/ifihan.jpeg",
           "socials": [
             {
-              "icon": "facebook",
-              "link": "https://www.facebook.com/volodya.karpluk",
-              "name": "Facebook"
-            },
-            {
               "icon": "twitter",
-              "link": "https://twitter.com/Tega_kris",
+              "link": "https://twitter.com/ifihan_",
               "name": "Twitter"
             }
           ],
           "order": 7,
-          "title": "Speakers"
+          "title": "Training"
         },
           {
           "name": "Oni Daniel",
-          "photo": "/images/people/volodya_karpliuk.jpg",
-          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fvolodya_karpliuk.jpg?alt=media&token=aa08d9c9-c42a-435f-8672-c3a004e3aa08",
+          "photo": "/images/people/oni.jpeg",
+          "photoUrl": "https://github.com/geektutor/hoverboard/raw/master/images/people/oni.jpeg",
           "socials": [
-            {
-              "icon": "facebook",
-              "link": "https://www.facebook.com/volodya.karpluk",
-              "name": "Facebook"
-            },
-            {
-              "icon": "twitter",
-              "link": "https://twitter.com/danieloni_",
-              "name": "Twitter"
-            }
           ],
           "order": 8,
-          "title": "Speakers"
+          "title": "Media"
         },
           {
           "name": "Raji Mustapha",
-          "photo": "/images/people/volodya_karpliuk.jpg",
-          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fvolodya_karpliuk.jpg?alt=media&token=aa08d9c9-c42a-435f-8672-c3a004e3aa08",
+          "photo": "/images/people/Raji.jpg",
+          "photoUrl": "https://github.com/geektutor/hoverboard/raw/master/images/people/Raji.jpg",
           "socials": [
-            {
-              "icon": "facebook",
-              "link": "https://www.facebook.com/volodya.karpluk",
-              "name": "Facebook"
-            },
             {
               "icon": "twitter",
               "link": "https://twitter.com/musty_khot",
@@ -636,31 +550,12 @@
             }
           ],
           "order": 9,
-          "title": "Speakers"
-        },
-        {
-          "name": "Olusheye Ifihanagbara Victoria",
-          "photo": "/images/people/volodya_karpliuk.jpg",
-          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fvolodya_karpliuk.jpg?alt=media&token=aa08d9c9-c42a-435f-8672-c3a004e3aa08",
-          "socials": [
-            {
-              "icon": "facebook",
-              "link": "https://www.facebook.com/volodya.karpluk",
-              "name": "Facebook"
-            },
-            {
-              "icon": "twitter",
-              "link": "https://twitter.com/ifihan_",
-              "name": "Twitter"
-            }
-          ],
-          "order": 10,
-          "title": "Speakers"
+          "title": "Logistics"
         },
         {
           "name": "Daniel Ejalonibu",
-          "photo": "/images/people/diana_pinchuk.jpg",
-          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fdiana_pinchuk.jpg?alt=media&token=189d67d1-004f-4a3c-9e0c-13bc992bbaf7",
+          "photo": "/images/people/Ejalonibu.jpeg",
+          "photoUrl": "https://github.com/geektutor/hoverboard/raw/master/images/people/Ejalonibu.jpeg",
           "socials": [
             {
               "icon": "facebook",
@@ -674,8 +569,8 @@
             }
             
           ],
-          "order": 11,
-          "title": "Social and media"
+          "order": 10,
+          "title": "Content and Publicity"
         }
       ],
       "title": "Planning Committee"
