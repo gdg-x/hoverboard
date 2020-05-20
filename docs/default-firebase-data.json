@@ -536,7 +536,7 @@
             },
             {
               "icon": "twitter",
-              "link": "https://twitter.com/p1f",
+              "link": "https://http://twitter.com/vaniilllaaa",
               "name": "Twitter"
             },
             {
@@ -581,6 +581,82 @@
           "order": 6,
           "title": "Speakers"
         },
+          {
+          "name": "Chris Tega",
+          "photo": "/images/people/volodya_karpliuk.jpg",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fvolodya_karpliuk.jpg?alt=media&token=aa08d9c9-c42a-435f-8672-c3a004e3aa08",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/volodya.karpluk",
+              "name": "Facebook"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/Tega_kris",
+              "name": "Twitter"
+            }
+          ],
+          "order": 7,
+          "title": "Speakers"
+        },
+          {
+          "name": "Oni Daniel",
+          "photo": "/images/people/volodya_karpliuk.jpg",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fvolodya_karpliuk.jpg?alt=media&token=aa08d9c9-c42a-435f-8672-c3a004e3aa08",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/volodya.karpluk",
+              "name": "Facebook"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/danieloni_",
+              "name": "Twitter"
+            }
+          ],
+          "order": 8,
+          "title": "Speakers"
+        },
+          {
+          "name": "Raji Mustapha",
+          "photo": "/images/people/volodya_karpliuk.jpg",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fvolodya_karpliuk.jpg?alt=media&token=aa08d9c9-c42a-435f-8672-c3a004e3aa08",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/volodya.karpluk",
+              "name": "Facebook"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/musty_khot",
+              "name": "Twitter"
+            }
+          ],
+          "order": 9,
+          "title": "Speakers"
+        },
+        {
+          "name": "Olusheye Ifihanagbara Victoria",
+          "photo": "/images/people/volodya_karpliuk.jpg",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fpeople%2Fvolodya_karpliuk.jpg?alt=media&token=aa08d9c9-c42a-435f-8672-c3a004e3aa08",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/volodya.karpluk",
+              "name": "Facebook"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/ifihan_",
+              "name": "Twitter"
+            }
+          ],
+          "order": 10,
+          "title": "Speakers"
+        },
         {
           "name": "Daniel Ejalonibu",
           "photo": "/images/people/diana_pinchuk.jpg",
@@ -588,11 +664,17 @@
           "socials": [
             {
               "icon": "facebook",
-              "link": "https://www.facebook.com/diana.pinchuk.9",
+              "link": "https://www.facebook.com/daniel.ejalonibu",
               "name": "Facebook"
+            },
+             {
+              "icon": "twitter",
+              "link": "https://twitter.com/positivemoment_",
+              "name": "Twitter"
             }
+            
           ],
-          "order": 7,
+          "order": 11,
           "title": "Social and media"
         }
       ],
