@@ -40,8 +40,8 @@
     },
     {
       "route": "blog",
-      "permalink": "/blog/",
-      "label": "Blog"
+      "permalink": "https://t.me/thenextconf",
+      "label": "Get Notified"
     }
   ],
   "heroSettings": {

@@ -3,7 +3,7 @@
   "description": "An Opportunity to be Enlightened!",
   "image": "images/social-share.jpg",
   "keywords": "event, TheNeXtConf, ECX, ECX Conference, The NeXt Conference , programming, UNILAG, ULES",
-  "dates": "May 20-23, 2020",
+  "dates": "May 27-30, 2020",
   "partnershipProposition": "mailto:ecxunilag@gmail.com",
   "share": "Share",
   "followOur": "Follow our",
@@ -83,7 +83,7 @@
       ]
     }
   ],
-  "subscribeNote": "No spam, only the latest news and updates!",
+  "subscribeNote": "No spam, only the latest news, updates and certificate information!",
   "codeOfConduct": "Code of Conduct",
   "codeOfConductBlock": {
     "organization": "ECX Unilag",
