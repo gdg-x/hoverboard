@@ -233,6 +233,7 @@ class SessionElement extends ReduxMixin(PolymerElement) {
   private sessionColor: string;
   private isFeatured: string;
   private summary: string;
+  private dayName: string;
 
   static get properties() {
     return {
@@ -240,6 +241,7 @@ class SessionElement extends ReduxMixin(PolymerElement) {
       session: Object,
       featuredSessions: Object,
       queryParams: String,
+      dayName: String,
       sessionColor: {
         type: String,
         computed: 'getVariableColor(session.mainTag)',

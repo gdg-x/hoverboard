@@ -167,6 +167,7 @@ class FilterMenu extends PolymerElement {
     return {
       filters: Array,
       resultsCount: Number,
+      queryParams: String,
       selected: {
         type: Object,
         value: {},

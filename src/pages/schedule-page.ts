@@ -151,6 +151,7 @@ class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) 
   private _selectedFilters = {};
   private routeData = {};
   private appRoute = {};
+  private nQueryParams = {};
 
   static get properties() {
     return {
@@ -166,11 +167,15 @@ class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) 
       isSessionDialogOpened: Object,
       contentLoaderVisibility: Boolean,
       viewport: Object,
+      nQueryParams: Object,
+      routeData: Object,
+      appRoute: Object,
       filters: {
         type: Object,
         observer: '_onFiltersLoad',
       },
       _selectedFilters: Object,
+      _filters: Array,
     };
   }
 

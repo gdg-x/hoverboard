@@ -103,6 +103,7 @@ class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
     return {
       route: String,
       schedule: Array,
+      queryParams: String,
       contentLoaderVisibility: {
         type: Boolean,
         value: false,

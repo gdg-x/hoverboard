@@ -141,6 +141,10 @@ class PostPage extends ReduxMixin(PolymerElement) {
       active: Boolean,
       route: Object,
       post: Object,
+      published: String,
+      postData: Object,
+      postContent: String,
+      suggestedPosts: Array,
       postsList: {
         type: Array,
       },
