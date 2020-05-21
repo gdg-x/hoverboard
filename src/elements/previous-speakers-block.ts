@@ -108,6 +108,7 @@ class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
         type: Array,
         observer: '_generateSpeakers',
       },
+      speakers: Array,
       speakersFetching: {
         type: Boolean,
       },

@@ -46,11 +46,16 @@ class BlogPage extends PolymerElement {
   route = {};
 
   private routeData: { page?: string } = {};
+  private subRoute: Object;
+  private _route: Object;
 
   static get properties() {
     return {
       route: Object,
       active: Boolean,
+      routeData: Object,
+      subRoute: Object,
+      _route: Object,
     };
   }
 

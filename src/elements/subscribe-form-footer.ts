@@ -90,6 +90,7 @@ class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
 
   static get properties() {
     return {
+      email: String,
       subscribed: {
         type: Boolean,
       },

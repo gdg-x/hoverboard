@@ -301,6 +301,7 @@ class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
         observer: '_onFiltersLoad',
       },
       _selectedFilters: Object,
+      _filters: Array,
       speakersToRender: Array,
     };
   }

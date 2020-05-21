@@ -139,6 +139,7 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
       submitLabel: String,
       firstFieldLabel: String,
       secondFieldLabel: String,
+      email: String,
     };
   }
 

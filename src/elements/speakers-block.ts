@@ -225,6 +225,12 @@ class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     return ['_generateSpeakers(speakers)'];
   }
 
+  static get properties() {
+    return {
+      featuredSpeakers: Array,
+    };
+  }
+
   stateChanged(state: import('../redux/store').State) {
     super.stateChanged(state);
     return this.setProperties({

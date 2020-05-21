@@ -15,7 +15,13 @@ import '@polymer/paper-icon-button';
 import '@polymer/paper-menu-button';
 import '@polymer/paper-tabs';
 import { html, PolymerElement } from '@polymer/polymer';
-import { setPassiveTouchGestures } from '@polymer/polymer/lib/utils/settings';
+import {
+  setFastDomIf,
+  setLegacyWarnings,
+  setPassiveTouchGestures,
+  setRemoveNestedTemplates,
+  setSuppressTemplateNotifications,
+} from '@polymer/polymer/lib/utils/settings';
 import 'plastic-image';
 import { log } from './console';
 import './elements/dialogs/feedback-dialog';
@@ -53,6 +59,14 @@ import {
 import { store } from './redux/store';
 import { registerServiceWorker } from './service-worker-registration';
 import { scrollToY } from './utils/scrolling';
+
+setFastDomIf(true);
+setPassiveTouchGestures(true);
+setRemoveNestedTemplates(true);
+setSuppressTemplateNotifications(true);
+if (location.hostname === 'localhost') {
+  setLegacyWarnings(true);
+}
 
 class HoverboardApp extends ReduxMixin(PolymerElement) {
   static get template() {
@@ -318,6 +332,11 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
   private user = {};
   private providerUrls = '{$ signInProviders.allowedProvidersUrl $}'.split(',');
   private tickets = { list: [] };
+  private isPhoneSize = false;
+  private isLaptopSize = false;
+  private appRoute = {};
+  private subRoute = {};
+  private routeData = {};
 
   static get properties() {
     return {
@@ -352,6 +371,13 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
       tickets: {
         type: Object,
       },
+      isPhoneSize: Boolean,
+      isLaptopSize: Boolean,
+      appRoute: Object,
+      subRoute: Object,
+      routeData: Object,
+      addToHomeScreen: Object,
+      drawerOpened: Boolean,
     };
   }
 
@@ -377,7 +403,6 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
 
   constructor() {
     super();
-    setPassiveTouchGestures(true);
     window.performance && performance.mark && performance.mark('hoverboard-app.created');
     this._toggleHeaderShadow = this._toggleHeaderShadow.bind(this);
     this._toggleDrawer = this._toggleDrawer.bind(this);
