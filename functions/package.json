@@ -24,9 +24,9 @@
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.0",
-    "@babel/core": "^7.10.0",
-    "@babel/preset-env": "^7.10.0",
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
     "rimraf": "^3.0.2"
   }
 }
