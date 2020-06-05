@@ -52,7 +52,7 @@ DEVS!!!! LOOK HERE!!!!
 
 START HERE:
 
-- [In this \&lt;10 min video, Emmanuel Acho does an excellent job speaking to white people on how to help](https://twitter.com/themanacho/status/1267609472589090816?s=21)
+- [In this &lt;10 min video, Emmanuel Acho does an excellent job speaking to white people on how to help](https://twitter.com/themanacho/status/1267609472589090816?s=21)
 
 DOCS TO MORE RESOURCES:
 
