@@ -1,5 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-if.html">
 <link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/app-route/app-route-converter.html">
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
@@ -24,7 +24,6 @@
     <style is="custom-style" include="shared-styles flex flex-alignment"></style>
 
     <style>
-
       :host {
         display: block;
         height: 100%;
@@ -32,6 +31,14 @@
 
       .container {
         min-height: 80%;
+      }
+
+      .action-buttons {
+        margin: 20px 0px;
+      }
+
+      paper-button {
+        margin-left: 0;
       }
 
       paper-progress {
@@ -51,37 +58,23 @@
           background-color: #fff;
         }
       }
-
     </style>
 
-    <polymer-helmet
-      title="{$ heroSettings.schedule.title $} | {$ title $}"
+    <polymer-helmet title="{$ heroSettings.schedule.title $} | {$ title $}"
       description="{$ heroSettings.schedule.metaDescription $}"
-      active="[[_setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened)]]"
-    ></polymer-helmet>
+      active="[[_setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened)]]"></polymer-helmet>
 
     <iron-location query="{{queryParams}}"></iron-location>
 
-    <app-route
-      route="{{appRoute}}"
-      pattern="/:page"
-      data="{{routeData}}"
-      tail="{{subroute}}"
-      query-params="{{nQueryParams}}"
-    ></app-route>
+    <app-route route="{{appRoute}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"
+      query-params="{{nQueryParams}}"></app-route>
 
-    <app-route
-      route="[[route]]"
-      pattern="/:day"
-      data="{{routeData}}"
-    ></app-route>
+    <app-route route="[[route]]" pattern="/:day" data="{{routeData}}"></app-route>
 
-    <hero-block
-      background-image="{$ heroSettings.schedule.background.image $}"
-      background-color="{$ heroSettings.schedule.background.color $}"
-      font-color="{$ heroSettings.schedule.fontColor $}"
-      active="[[active]]"
-    >
+
+    <hero-block background-image="{$ heroSettings.schedule.background.image $}"
+      background-color="{$ heroSettings.schedule.background.color $}" font-color="{$ heroSettings.schedule.fontColor $}"
+      active="[[active]]">
       <div class="hero-title highlight-font">{$ heroSettings.schedule.title $}</div>
       <p class="hero-description">{$ heroSettings.schedule.description $}</p>
       <sticky-element slot="bottom" active="[[active]]">
@@ -92,53 +85,42 @@
 
     <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
-    <filter-menu
-      filters="[[_filters]]"
-      selected="[[_selectedFilters]]"
-    ></filter-menu>
+
+
+    <filter-menu filters="[[_filters]]" selected="[[_selectedFilters]]"></filter-menu>
 
     <div class="container">
-      <content-loader
-        card-padding="15px"
-        card-margin="16px 0"
-        card-height="140px"
-        avatar-size="0"
-        avatar-circle="0"
-        title-top-position="20px"
-        title-height="42px"
-        title-width="70%"
-        load-from="-20%"
-        load-to="80%"
-        blur-width="300px"
-        items-count="{$ contentLoaders.schedule.itemsCount $}"
-        hidden$="[[contentLoaderVisibility]]" layout>
+      <content-loader card-padding="15px" card-margin="16px 0" card-height="140px" avatar-size="0" avatar-circle="0"
+        title-top-position="20px" title-height="42px" title-width="70%" load-from="-20%" load-to="80%"
+        blur-width="300px" items-count="{$ contentLoaders.schedule.itemsCount $}" hidden$="[[contentLoaderVisibility]]"
+        layout>
       </content-loader>
 
-      <iron-pages
-        attr-for-selected="name"
-        selected="[[subRoute]]"
-        selected-attribute="active"
-      >
-      <template is="dom-repeat" items="[[schedule]]" as="day">
-          <schedule-day
-            name$="[[day.date]]"
-            day="[[day]]"
-            user="[[user]]"
-            featured-sessions="[[featuredSessions]]"
-            selected-filters="[[_selectedFilters]]"
-            viewport="[[viewport]]"
-            query-params="[[queryParams]]"
-          ></schedule-day>
+      <iron-pages attr-for-selected="name" selected="[[subRoute]]" selected-attribute="active">
+        <template is="dom-if" if="[[_isEqualTo(subRoute, '2020-10-08')]]">
+          <h2 class="iron-selected">Be part of our 2020 schedule!</h2>
+          <div class="action-buttons iron-selected" layout horizontal left-justified wrap>
+            <a href="https://www.papercall.io/libertyjs-2020" target="_blank">
+              <paper-button primary>
+                Call For Speakers
+              </paper-button>
+            </a>
+          </div>
+          Check out 2019's rockstar filled schedule <a class="iron-selected" href="/schedule/2019-10-24/">here</a>
         </template>
-        <my-schedule
-          name="my-schedule"
-          schedule="[[schedule]]"
-          user="[[user]]"
-          featured-sessions="[[featuredSessions]]"
-          selected-filters="[[_selectedFilters]]"
-          viewport="[[viewport]]"
-          query-params="[[queryParams]]"
-        ></my-schedule>
+        <template is="dom-repeat" items="[[schedule]]" as="obj">
+          <template is="dom-repeat" items="[[obj.schedule]]" as="day">
+            <template is="dom-if" if="[[!_isEqualTo(subRoute, '2020-10-08')]]">
+              <schedule-day name$="[[day.date]]" day="[[day]]" user="[[user]]" featured-sessions="[[featuredSessions]]"
+                selected-filters="[[_selectedFilters]]" viewport="[[viewport]]" query-params="[[queryParams]]">
+              </schedule-day>
+            </template>
+          </template>
+
+        </template>
+        <my-schedule name="my-schedule" schedule="[[schedule.1.schedule]]" user="[[user]]"
+          featured-sessions="[[featuredSessions]]" selected-filters="[[_selectedFilters]]" viewport="[[viewport]]"
+          query-params="[[queryParams]]"></my-schedule>
       </iron-pages>
     </div>
 
@@ -161,6 +143,11 @@
           schedule: {
             type: Array,
             statePath: 'schedule',
+            observer: '_scheduleLoaded',
+          },
+          year: {
+            type: Number,
+            value: 0,
           },
           featuredSessions: {
             type: Object,
@@ -196,6 +183,7 @@
         };
       }
 
+
       static get observers() {
         return [
           '_setDay(active, routeData.day, schedule)',
@@ -204,7 +192,11 @@
           '_scheduleChanged(schedule, _selectedFilters)',
           '_sessionsAndSpeakersChanged(sessions, speakers)',
           '_paramsUpdated(queryParams)',
+          '_scheduleLoaded(schedule)',
         ];
+      }
+
+      _scheduleLoaded(schedule) {
       }
 
       _sessionsAndSpeakersChanged(sessions, speakers) {
@@ -229,7 +221,7 @@
 
       _setDay(active, day, schedule) {
         if (active && schedule.length) {
-          const selectedDay = day || schedule[0].date;
+          const selectedDay = day === '' || day === undefined ? schedule[0].schedule[0].date : day;
           routingActions.setSubRoute(selectedDay);
         }
       }
@@ -240,8 +232,8 @@
             if (active && id) {
               dialogsActions.openDialog(DIALOGS.SESSION, this.sessionsMap[id[0]]);
             } else {
-               this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
-               this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
+              this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
+              this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
             }
           });
         }
@@ -252,6 +244,7 @@
       }
 
       _onFiltersLoad(filters) {
+        this.set('_yearNum', 0);
         this.set('_filters', [{
           title: '{$ filters.tags $}',
           key: 'tag',
@@ -266,10 +259,14 @@
       _paramsUpdated(queryParams) {
         this.set('_selectedFilters', this.parseQueryParamsFilters(queryParams));
       }
+
+      _isEqualTo(val, arr) {
+        return val == arr;
+      }
     }
+
 
     window.customElements.define(SchedulePage.is, SchedulePage);
 
   </script>
 </dom-module>
-

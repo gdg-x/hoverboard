@@ -10,7 +10,6 @@
     <style is="custom-style" include="shared-styles flex flex-alignment positioning"></style>
 
     <style>
-
       :host {
         display: block;
         --tracks-number: 3;
@@ -85,7 +84,6 @@
           border: 1px solid var(--border-light-color);
         }
       }
-
     </style>
 
     <div class="grid" style$="--tracks-number: [[day.tracks.length]];">
@@ -97,42 +95,19 @@
         </div>
 
 
-        <a
-          class="add-session"
-          href$="/schedule/[[day.date]]#[[timeslot.startTime]]"
-          hidden$="[[!_showAddSession(timeslot, onlyFeatured)]]"
-          style$="grid-area: [[timeslot.sessions.0.gridArea]]"
-          layout horizontal center-center
-        >
+        <a class="add-session" href$="/schedule/[[day.date]]#[[timeslot.startTime]]"
+          hidden$="[[!_showAddSession(timeslot, onlyFeatured)]]" style$="grid-area: [[timeslot.sessions.0.gridArea]]"
+          layout horizontal center-center>
           <iron-icon class="add-session-icon" icon="hoverboard:add-circle-outline"></iron-icon>
           <span>{$ mySchedule.browseSession $}</span>
         </a>
 
-        <template
-          is="dom-repeat"
-          items="[[timeslot.sessions]]"
-          as="session"
-          index-as="sessionIndex"
-          filter="_isNotEmpty"
-        >
-          <div
-            class="session"
-            style$="grid-area: [[session.gridArea]]"
-            layout vertical
-          >
-            <template
-              is="dom-repeat"
-              items="[[_filterSessions(session.items, selectedFilters)]]"
-              as="subSession"
-            >
-              <session-element
-                class="subsession"
-                day-name="[[name]]"
-                session="[[subSession]]"
-                user="[[user]]"
-                featured-sessions="[[featuredSessions]]"
-                query-params="[[queryParams]]"
-              ></session-element>
+        <template is="dom-repeat" items="[[timeslot.sessions]]" as="session" index-as="sessionIndex"
+          filter="_isNotEmpty">
+          <div class="session" style$="grid-area: [[session.gridArea]]" layout vertical>
+            <template is="dom-repeat" items="[[_filterSessions(session.items, selectedFilters)]]" as="subSession">
+              <session-element class="subsession" day-name="[[name]]" session="[[subSession]]" user="[[user]]"
+                featured-sessions="[[featuredSessions]]" query-params="[[queryParams]]"></session-element>
             </template>
           </div>
 
@@ -208,7 +183,7 @@
           t = t - 12;
         }
         if (dayPart === 'min') {
-          if ( t < 10) {
+          if (t < 10) {
             t = '0' + t;
           }
           let hours = this._splitText(time, ':', 0);
@@ -242,11 +217,11 @@
             && !!session.tags.filter((tag) =>
               selectedFilters.tag.includes(this.generateClassName(tag))).length
           ) && (
-            !selectedFilters.complexity
-            || !selectedFilters.complexity.length
-            || session.complexity
-            && selectedFilters.complexity.includes(this.generateClassName(session.complexity))
-          );
+              !selectedFilters.complexity
+              || !selectedFilters.complexity.length
+              || session.complexity
+              && selectedFilters.complexity.includes(this.generateClassName(session.complexity))
+            );
         });
       }
     }
