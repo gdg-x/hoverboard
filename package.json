@@ -26,6 +26,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "@firebase/app": "^0.6.5",
+    "@firebase/firestore": "^1.15.0",
     "@google-web-components/google-youtube": "^3.0.1",
     "@polymer/app-layout": "^3.1.0",
     "@polymer/app-route": "^3.0.2",
@@ -66,7 +68,7 @@
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-typescript": "^7.10.1",
     "@babel/types": "^7.10.2",
-    "@firebase/testing": "^0.19.6",
+    "@firebase/testing": "^0.20.0",
     "@open-wc/building-rollup": "^0.22.12",
     "@testing-library/dom": "^7.10.0",
     "@testing-library/jest-dom": "^5.9.0",
