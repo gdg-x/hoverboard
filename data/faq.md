@@ -1,9 +1,5 @@
 ## General
 
-### Dates and location
-
-LibertyJS will take place on the 24-25th of October in [Philadelphia,]( https://goo.gl/maps/qJNXtv3jUaw) PA.
-
 ### Stay Informed
 
 To stay up to date on the latest information on sessions, speakers, and activities, be sure to follow us on [Twitter](https://twitter.com/liberty_js/)

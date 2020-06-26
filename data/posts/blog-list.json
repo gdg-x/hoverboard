@@ -1,4 +1,12 @@
 {
+  "2020-announcement": {
+    "backgroundColor": "#5a7785",
+    "brief": "Given the events in the world over the past few months and the uncertainty that will follow, we have decided to postpone our 2020 event to 2021.",
+    "image": "https://firebasestorage.googleapis.com/v0/b/libertyjs-staging.appspot.com/o/national-museum-american-jewish-history.jpg?alt=media&token=b0ef3aa6-24c2-47eb-b81b-ee5be00ed35b",
+    "published": "2020-06-05",
+    "source": "/data/posts/2020-announcement.md",
+    "title": "Due to Covid-19: LibertyJS will be postponed to 2021"
+  },
   "black-lives-matter": {
     "backgroundColor": "#5a7785",
     "brief": "LibertyJS and the Philadelphia JavaScript Developers Meetup stand opposed to racism, systemic oppression and the institutions that undergird it.",
