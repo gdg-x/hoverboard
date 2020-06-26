@@ -46,7 +46,7 @@
   ],
   "heroSettings": {
     "home": {
-      "description": "The largest JavaScript conference in town",
+      "description": "Philadelphia's premier JavaScript conference",
       "background": {
         "color": "#173472",
         "image": "/images/backgrounds/ljs-hero2.jpg"
