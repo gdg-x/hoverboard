@@ -102,7 +102,7 @@
     "rollup-plugin-index-html": "^1.12.4",
     "rollup-plugin-re": "^1.0.7",
     "rollup-plugin-workbox": "^5.0.1",
-    "stylelint": "^13.6.0",
+    "stylelint": "^13.6.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-recommended": "^3.0.0",
     "ts-jest": "^26.1.1",
