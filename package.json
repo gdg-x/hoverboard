@@ -66,7 +66,7 @@
     "@babel/preset-env": "^7.10.3",
     "@babel/preset-typescript": "^7.10.1",
     "@babel/types": "^7.10.2",
-    "@firebase/testing": "^0.20.3",
+    "@firebase/testing": "^0.20.5",
     "@open-wc/building-rollup": "^0.22.12",
     "@testing-library/dom": "^7.15.0",
     "@testing-library/jest-dom": "^5.10.1",
