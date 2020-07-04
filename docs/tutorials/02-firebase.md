@@ -8,19 +8,6 @@ In case to have Authentication and My Schedule features, you'll need a Firebase 
 - If you already have a Firebase project, click _Add App_ from the project overview page.
 
 1. Click _Add Firebase to your web app_.
-1. _Copy_ all needed data, then paste it in `config/development.json` (and `config/production.json` if you use the same project in production). This configuration looks like this:
-
-```json
-"firebase": {
-  "apiKey": "<REPLACE_ME>",
-  "appId": "<REPLACE_ME>",
-  "authDomain": "<REPLACE_ME>",
-  "databaseURL": "<REPLACE_ME>",
-  "messagingSenderId": "<REPLACE_ME>",
-  "projectId": "<REPLACE_ME>",
-  "storageBucket": "<REPLACE_ME>"
-}
-```
 
 1. Import initial data to the Firebase Database
 

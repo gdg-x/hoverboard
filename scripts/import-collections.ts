@@ -1,7 +1,4 @@
-import { initializeFirebase, firestore } from './firebase-config';
-import data from '../docs/default-firebase-data.json';
-
-const importSpeakers = () => {
+export const importSpeakers = (firestore, data) => {
   const speakers = data.speakers;
   if (!Object.keys(speakers).length) {
     return false;
@@ -23,7 +20,7 @@ const importSpeakers = () => {
   });
 };
 
-const importPreviousSpeakers = () => {
+export const importPreviousSpeakers = (firestore, data) => {
   const previousSpeakers = data.previousSpeakers;
   if (!Object.keys(previousSpeakers).length) {
     return false;
@@ -45,7 +42,7 @@ const importPreviousSpeakers = () => {
   });
 };
 
-const importTeam = () => {
+export const importTeam = (firestore, data) => {
   const teams = data.team;
   if (!Object.keys(teams).length) {
     return false;
@@ -73,7 +70,7 @@ const importTeam = () => {
   });
 };
 
-const importPartners = () => {
+export const importPartners = (firestore, data) => {
   const partners = data.partners;
   if (!Object.keys(partners).length) {
     return false;
@@ -94,7 +91,7 @@ const importPartners = () => {
           .collection('partners')
           .doc(`${docId}`)
           .collection('items')
-          .doc(`${id}`.padStart(3, 0)),
+          .doc(`${id}`.padStart(3, '0')),
         item
       );
     });
@@ -106,7 +103,7 @@ const importPartners = () => {
   });
 };
 
-const importGallery = () => {
+export const importGallery = (firestore, data) => {
   const gallery = data.gallery;
   if (!Object.keys(gallery).length) {
     return false;
@@ -116,7 +113,7 @@ const importGallery = () => {
   const batch = firestore.batch();
 
   Object.keys(gallery).forEach((docId) => {
-    batch.set(firestore.collection('gallery').doc(`${docId}`.padStart(3, 0)), {
+    batch.set(firestore.collection('gallery').doc(`${docId}`.padStart(3, '0')), {
       url: gallery[docId],
       order: docId,
     });
@@ -128,7 +125,7 @@ const importGallery = () => {
   });
 };
 
-const importBlog = () => {
+export const importBlog = (firestore, data) => {
   const blog = data.blog;
   if (!Object.keys(blog).length) {
     return false;
@@ -147,7 +144,7 @@ const importBlog = () => {
   });
 };
 
-const importVideos = () => {
+export const importVideos = (firestore, data) => {
   const docs = data.videos;
   if (!Object.keys(docs).length) {
     return false;
@@ -157,7 +154,7 @@ const importVideos = () => {
   const batch = firestore.batch();
 
   Object.keys(docs).forEach((docId) => {
-    batch.set(firestore.collection('videos').doc(`${docId}`.padStart(3, 0)), {
+    batch.set(firestore.collection('videos').doc(`${docId}`.padStart(3, '0')), {
       ...docs[docId],
       order: docId,
     });
@@ -169,7 +166,7 @@ const importVideos = () => {
   });
 };
 
-const importTickets = () => {
+export const importTickets = (firestore, data) => {
   const docs = data.tickets;
   if (!Object.keys(docs).length) {
     return false;
@@ -179,7 +176,7 @@ const importTickets = () => {
   const batch = firestore.batch();
 
   Object.keys(docs).forEach((docId) => {
-    batch.set(firestore.collection('tickets').doc(`${docId}`.padStart(3, 0)), {
+    batch.set(firestore.collection('tickets').doc(`${docId}`.padStart(3, '0')), {
       ...docs[docId],
       order: docId,
     });
@@ -191,7 +188,7 @@ const importTickets = () => {
   });
 };
 
-const importSessions = () => {
+export const importSessions = (firestore, data) => {
   const docs = data.sessions;
   if (!Object.keys(docs).length) {
     return false;
@@ -210,7 +207,7 @@ const importSessions = () => {
   });
 };
 
-const importSchedule = () => {
+export const importSchedule = (firestore, data) => {
   const docs = data.schedule;
   if (!Object.keys(docs).length) {
     return false;
@@ -232,7 +229,7 @@ const importSchedule = () => {
   });
 };
 
-const importNotificationsConfig = async () => {
+export const importNotificationsConfig = async (firestore, data) => {
   const notificationsConfig = data.notifications.config;
   console.log('Migrating notifications config...');
   const batch = firestore.batch();
@@ -244,25 +241,3 @@ const importNotificationsConfig = async () => {
     return results;
   });
 };
-
-initializeFirebase()
-  .then(() => importBlog())
-  .then(() => importGallery())
-  .then(() => importNotificationsConfig())
-  .then(() => importPartners())
-  .then(() => importPreviousSpeakers())
-  .then(() => importSchedule())
-  .then(() => importSessions())
-  .then(() => importSpeakers())
-  .then(() => importTeam())
-  .then(() => importTickets())
-  .then(() => importVideos())
-
-  .then(() => {
-    console.log('Finished');
-    process.exit();
-  })
-  .catch((err) => {
-    console.log(err);
-    process.exit();
-  });
