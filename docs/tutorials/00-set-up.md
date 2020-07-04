@@ -41,22 +41,26 @@ The diagram below is a brief summary of the directories within the project.
     |
 
 - `appengine/` contains App Engine application that runs CRON job to send scheduled push notifications.
-- `dist/` is the directory to deploy to production.
+- `components/` is where you keep your new LitElement custom elements.
 - `config/` folder for core project setup.
 - `data/` folder with all data for the template including rest of config and resources for pages.
+- `dist/` is the directory to deploy to production.
 - `docs/` documentation.
+- `elements/` is where you keep your old Polymer custom elements.
 - `functions/` directory with Firebase [cloud functions](https://firebase.google.com/docs/functions/) used for notifications, optimizations, saving data, etc.
 - `images/` is for static images.
 - `internals/` contains scripts that helps user to work with the project and it's data ([docs](./firebase-utils.md)).
 - `node_modules/` is the place of Node dependencies.
-- `src/` is where you store all of your source code and do all of your development.
-- `elements/` is where you keep your custom elements.
+- `out-tsc` is the compiled TypeScript before Rollup bundles it.
 - `pages/` is where you keep your pages' description.
+- `src/` is where you store all of your source code and do all of your development.
 
 ## Build and serve
 
 1. Run locally
    - `npm start`
+   - You can then view the site at http://localhost:5000
+   - You can edit the local data at http://localhost:4000
 1. Deploy
    - `npm run deploy`
 
@@ -67,19 +71,19 @@ There are two CLI flags you can set when running npm scripts:
 
 The common npm scripts are:
 
-- `npm start`: Start a local development server.
+- `npm start`: Start a local development server using Firebase Emulator suite.
+- `NODE_ENV=production npm start`: Start a local development server in production mode with a service worker.
 - `npm run build`: Build a production version of the site to the `dist` directory.
-- `npm run serve`: Build a production version of the site and serve it locally.
 - `npm run deploy`: Build a production version of the site and deploy it to Firebase.
 
 Below is the grid of the common npm script commands and thier supported CLI flags.
 
-|             | `start`                               | `build`                               | `serve`                               | `deploy`                              |
-| ----------- | ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
-| `NODE_ENV`  | `development`                         | `production`\|`development`           | `production`\|`development`           | `production`                          |
-| `BUILD_ENV` | `development`\|`production`\|`custom` | `production`\|`development`\|`custom` | `production`\|`development`\|`custom` | `production`\|`development`\|`custom` |
+|             | `start`                               | `build`                               | `deploy`                              |
+| ----------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| `NODE_ENV`  | `development`\|`production`           | `production`                          | `production`                          |
+| `BUILD_ENV` | `development`\|`production`\|`custom` | `production`\|`development`\|`custom` | `production`\|`development`\|`custom` |
 
-For example `npm start` only supports `NODE_ENV=development` and defaults to `BUILD_ENV=development` while `npm run build` defaults to `NODE_ENV=production` and `BUILD_ENV=production` but supports `NODE_ENV=development` and `BUILD_ENV=development`.
+For example `npm start` defaults to `NODE_ENV=development` and `BUILD_ENV=development` while `npm run build` defaults to `NODE_ENV=production` and `BUILD_ENV=production`.
 
 ## Next steps
 

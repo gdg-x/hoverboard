@@ -4,9 +4,13 @@
   "private": true,
   "main": "dist/index.js",
   "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "babel src --out-dir dist --source-maps",
-    "postbuild": "cpx ../dist/index.html dist/"
+    "build:index": "cpx ../dist/index.html dist/",
+    "build:src": "babel src --out-dir dist --source-maps",
+    "build": "npm run clean && concurrently npm:build:*",
+    "clean": "rimraf dist",
+    "start:index": "npm run build:index -- --watch",
+    "start:src": "npm run build:src -- --watch",
+    "start": "npm run clean && concurrently --kill-others npm:start:*"
   },
   "engines": {
     "node": "12"
@@ -27,6 +31,7 @@
     "@babel/cli": "^7.10.4",
     "@babel/core": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
+    "concurrently": "^5.2.0",
     "rimraf": "^3.0.2"
   }
 }

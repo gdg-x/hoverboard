@@ -1,62 +1,62 @@
 import {
+  ADD_POTENTIAL_PARTNER,
   ADD_POTENTIAL_PARTNER_FAILURE,
   ADD_POTENTIAL_PARTNER_SUCCESS,
-  ADD_POTENTIAL_PARTNER,
   CLOSE_DIALOG,
+  DELETE_FEEDBACK,
   DELETE_FEEDBACK_FAILURE,
   DELETE_FEEDBACK_SUCCESS,
-  DELETE_FEEDBACK,
+  FETCH_BLOG_LIST,
   FETCH_BLOG_LIST_FAILURE,
   FETCH_BLOG_LIST_SUCCESS,
-  FETCH_BLOG_LIST,
+  FETCH_GALLERY,
   FETCH_GALLERY_FAILURE,
   FETCH_GALLERY_SUCCESS,
-  FETCH_GALLERY,
+  FETCH_PARTNERS,
   FETCH_PARTNERS_FAILURE,
   FETCH_PARTNERS_SUCCESS,
-  FETCH_PARTNERS,
+  FETCH_PREVIOUS_FEEDBACK,
   FETCH_PREVIOUS_FEEDBACK_FAILURE,
   FETCH_PREVIOUS_FEEDBACK_SUCCESS,
-  FETCH_PREVIOUS_FEEDBACK,
+  FETCH_PREVIOUS_SPEAKERS,
   FETCH_PREVIOUS_SPEAKERS_FAILURE,
   FETCH_PREVIOUS_SPEAKERS_SUCCESS,
-  FETCH_PREVIOUS_SPEAKERS,
+  FETCH_SCHEDULE,
   FETCH_SCHEDULE_FAILURE,
   FETCH_SCHEDULE_SUCCESS,
-  FETCH_SCHEDULE,
+  FETCH_SESSIONS,
   FETCH_SESSIONS_FAILURE,
   FETCH_SESSIONS_SUCCESS,
-  FETCH_SESSIONS,
+  FETCH_SPEAKERS,
   FETCH_SPEAKERS_FAILURE,
   FETCH_SPEAKERS_SUCCESS,
-  FETCH_SPEAKERS,
+  FETCH_TEAM,
   FETCH_TEAM_FAILURE,
   FETCH_TEAM_SUCCESS,
-  FETCH_TEAM,
+  FETCH_TICKETS,
   FETCH_TICKETS_FAILURE,
   FETCH_TICKETS_SUCCESS,
-  FETCH_TICKETS,
+  FETCH_USER_FEATURED_SESSIONS,
   FETCH_USER_FEATURED_SESSIONS_FAILURE,
   FETCH_USER_FEATURED_SESSIONS_SUCCESS,
-  FETCH_USER_FEATURED_SESSIONS,
+  FETCH_VIDEOS,
   FETCH_VIDEOS_FAILURE,
   FETCH_VIDEOS_SUCCESS,
-  FETCH_VIDEOS,
   HIDE_TOAST,
   NOTIFICATIONS_STATUS,
   OPEN_DIALOG,
+  SEND_FEEDBACK,
   SEND_FEEDBACK_FAILURE,
   SEND_FEEDBACK_SUCCESS,
-  SEND_FEEDBACK,
   SET_DIALOG_DATA,
   SET_DIALOG_ERROR,
   SET_FILTERS,
   SET_HERO_SETTINGS,
   SET_ROUTE,
   SET_SUB_ROUTE,
+  SET_USER_FEATURED_SESSIONS,
   SET_USER_FEATURED_SESSIONS_FAILURE,
   SET_USER_FEATURED_SESSIONS_SUCCESS,
-  SET_USER_FEATURED_SESSIONS,
   SET_VIEWPORT_SIZE,
   SHOW_TOAST,
   SIGN_IN,
@@ -65,14 +65,8 @@ import {
   UPDATE_NOTIFICATIONS_STATUS,
   WIPE_PREVIOUS_FEEDBACK,
 } from './constants';
+import { db } from './db';
 import { store } from './store';
-
-// TODO: Remove type
-declare global {
-  interface Window {
-    firebase: typeof import('firebase');
-  }
-}
 
 export interface VideoDialog {
   title: string;
@@ -179,8 +173,7 @@ export const ticketsActions = {
       type: FETCH_TICKETS,
     });
 
-    return window.firebase
-      .firestore()
+    return db()
       .collection('tickets')
       .orderBy('order', 'asc')
       .get()
@@ -202,8 +195,7 @@ export const ticketsActions = {
 };
 
 const _getPartnerItems = (groupId) =>
-  window.firebase
-    .firestore()
+  db()
     .collection('partners')
     .doc(groupId)
     .collection('items')
@@ -228,8 +220,7 @@ export const partnersActions = {
       companyName: data.secondFieldValue || '',
     };
 
-    window.firebase
-      .firestore()
+    db()
       .collection('potentialPartners')
       .doc(id)
       .set(partner)
@@ -251,8 +242,7 @@ export const partnersActions = {
       type: FETCH_PARTNERS,
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection('partners')
       .get()
       .then((snaps) =>
@@ -289,8 +279,7 @@ export const feedbackActions = {
       payload: data,
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection(`${data.collection}/${data.dbItem}/feedback`)
       .doc(data.userId)
       .set({
@@ -317,8 +306,7 @@ export const feedbackActions = {
       payload: data,
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection(`${data.collection}/${data.dbItem}/feedback`)
       .doc(data.userId)
       .get()
@@ -345,8 +333,7 @@ export const feedbackActions = {
       payload: data,
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection(`${data.collection}/${data.dbItem}/feedback`)
       .doc(data.userId)
       .delete()
@@ -374,8 +361,7 @@ export const videosActions = {
       type: FETCH_VIDEOS,
     });
 
-    return window.firebase
-      .firestore()
+    return db()
       .collection('videos')
       .orderBy('order', 'asc')
       .get()
@@ -402,8 +388,7 @@ export const blogActions = {
       type: FETCH_BLOG_LIST,
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection('blog')
       .orderBy('published', 'desc')
       .get()
@@ -436,8 +421,7 @@ export const speakersActions = {
     });
 
     const speakersPromise = new Promise((resolve, reject) => {
-      window.firebase
-        .firestore()
+      db()
         .collection('generatedSpeakers')
         .orderBy('order', 'asc')
         .get()
@@ -473,8 +457,7 @@ export const previousSpeakersActions = {
       type: FETCH_PREVIOUS_SPEAKERS,
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection('previousSpeakers')
       .orderBy('order', 'asc')
       .get()
@@ -507,8 +490,7 @@ export const sessionsActions = {
     });
 
     return new Promise((resolve, reject) => {
-      window.firebase
-        .firestore()
+      db()
         .collection('generatedSessions')
         .get()
         .then((snaps) => {
@@ -563,8 +545,7 @@ export const sessionsActions = {
       payload: { userId },
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection('featuredSessions')
       .doc(userId)
       .get()
@@ -590,8 +571,7 @@ export const sessionsActions = {
       payload: { userId, featuredSessions },
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection('featuredSessions')
       .doc(userId)
       .set(featuredSessions)
@@ -616,8 +596,7 @@ export const scheduleActions = {
       type: FETCH_SCHEDULE,
     });
 
-    return window.firebase
-      .firestore()
+    return db()
       .collection('generatedSchedule')
       .get()
       .then((snaps) => {
@@ -642,8 +621,7 @@ export const galleryActions = {
       type: FETCH_GALLERY,
     });
 
-    return window.firebase
-      .firestore()
+    return db()
       .collection('gallery')
       .get()
       .then((snaps) => {
@@ -664,8 +642,7 @@ export const galleryActions = {
 };
 
 const _getTeamMembers = (teamId) =>
-  window.firebase
-    .firestore()
+  db()
     .collection('team')
     .doc(teamId)
     .collection('members')
@@ -678,8 +655,7 @@ export const teamActions = {
       type: FETCH_TEAM,
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection('team')
       .get()
       .then((snaps) =>
@@ -776,8 +752,7 @@ export const subscribeActions = {
   subscribe: (data) => (dispatch) => {
     const id = data.email.replace(/[^\w\s]/gi, '');
 
-    window.firebase
-      .firestore()
+    db()
       .collection('subscribers')
       .doc(id)
       .set({
@@ -867,10 +842,7 @@ export const notificationsActions = {
         if (currentToken) {
           const state = getState();
 
-          const subscribersRef = window.firebase
-            .firestore()
-            .collection('notificationsSubscribers')
-            .doc(currentToken);
+          const subscribersRef = db().collection('notificationsSubscribers').doc(currentToken);
           const subscribersPromise = subscribersRef.get();
 
           const userUid = state.user && (state.user.uid || null);
@@ -878,10 +850,7 @@ export const notificationsActions = {
           let userSubscriptionsPromise = Promise.resolve(null);
           let userSubscriptionsRef;
           if (userUid) {
-            userSubscriptionsRef = window.firebase
-              .firestore()
-              .collection('notificationsUsers')
-              .doc(userUid);
+            userSubscriptionsRef = db().collection('notificationsUsers').doc(userUid);
             userSubscriptionsPromise = userSubscriptionsRef.get();
           }
 

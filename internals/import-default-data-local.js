@@ -1,5 +1,9 @@
+/**
+ * Execute this script to import the `default-firebase-data.json` data
+ *   into the local emulator suite db for `hoverboad-dev`.
+ */
+
 import data from '../docs/default-firebase-data.json';
-import { firestore, initializeFirebase } from './firebase-config';
 import {
   importBlog,
   importGallery,
@@ -13,6 +17,7 @@ import {
   importTickets,
   importVideos,
 } from './import-collections';
+import { firestore, initializeFirebase } from './firebase-config-local';
 
 initializeFirebase()
   .then(() => importBlog(firestore, data))

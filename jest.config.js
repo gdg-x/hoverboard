@@ -35,7 +35,13 @@ module.exports = {
     {
       displayName: 'Prettier',
       preset: 'jest-runner-prettier',
-      testPathIgnorePatterns: ['/node_modules/', '/out-tsc/', '/dist/', '/package-lock.json/'],
+      testPathIgnorePatterns: [
+        '/node_modules/',
+        '/out-tsc/',
+        '/dist/',
+        '/seed-data/',
+        '/package-lock.json/',
+      ],
     },
     {
       displayName: 'TypeScript',

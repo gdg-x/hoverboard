@@ -1,4 +1,5 @@
 node_modules/
 dist/
 out-tsc/
+seed-data/
 package-lock.json
