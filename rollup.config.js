@@ -1,12 +1,9 @@
 /* eslint-env node */
 
-import { createDefaultConfig } from '@open-wc/building-rollup';
-import deepmerge from 'deepmerge';
-import * as fs from 'fs';
+import { createSpaConfig } from '@open-wc/building-rollup';
+import merge from 'deepmerge';
 import copy from 'rollup-plugin-copy';
-import indexHTMLPlugin from 'rollup-plugin-index-html';
 import replace from 'rollup-plugin-re';
-import { generateSW } from 'rollup-plugin-workbox';
 import { workboxConfig } from './workbox-config';
 
 const { production, compileTemplate, compileBufferTemplate } = require('./build-utils.js');
@@ -15,21 +12,16 @@ if (!production) {
   throw new Error('build only supports NODE_ENV=production');
 }
 
-const config = createDefaultConfig({
-  input: './src/hoverboard-app.ts',
-  extensions: ['.js', '.mjs', '.ts'],
-  plugins: {
-    workbox: false,
+const baseConfig = createSpaConfig({
+  html: {
+    transform: (html) => compileTemplate(html),
   },
+  workbox: workboxConfig,
 });
 
-export default deepmerge(config, {
+export default merge(baseConfig, {
+  input: './index.html',
   plugins: [
-    ...config.plugins,
-    indexHTMLPlugin({
-      template: () => compileTemplate(fs.readFileSync('index.html', 'utf-8')),
-      indexHTML: 'HACK: https://github.com/open-wc/open-wc/issues/1282',
-    }),
     replace({
       exclude: 'node_modules/**',
       patterns: [
@@ -58,7 +50,7 @@ export default deepmerge(config, {
           dest: 'dist/node_assets/firebase/',
         },
         {
-          src: 'src/service-worker-registration.js',
+          src: 'out-tsc/src/service-worker-registration.js',
           dest: 'dist/src',
           transform: compileBufferTemplate,
         },
@@ -79,6 +71,5 @@ export default deepmerge(config, {
         },
       ],
     }),
-    generateSW(workboxConfig),
   ],
 });

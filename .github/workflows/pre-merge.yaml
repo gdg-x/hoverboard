@@ -10,7 +10,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [10, 12]
+        # TODO: run on node 10 when https://github.com/jsdom/jsdom/issues/2961 is resolved
+        node-version: [12]
     name: Build & Test on Node ${{ matrix.node-version }}
     steps:
       - name: Checkout the repo
