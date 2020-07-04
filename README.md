@@ -92,14 +92,14 @@ Any other issue labeled [`help wanted`](https://github.com/gdg-x/hoverboard/labe
 
 ## Code of Conduct
 
-Read the full version [Code of Conduct](/CODE_OF_CONDUCT.md).
+Read the full version [Code of Conduct](/.github/CODE_OF_CONDUCT.md).
 
 ## Contributors
 
 **Maintainer:** [Abraham Williams](https://github.com/abraham)
 **Authors:** [Oleh Zasadnyy](https://github.com/ozasadnyy) and [Sophie Huts](https://github.com/sophieH29).
 
-This project exists thanks to all the [people who contribute](https://github.com/gdg-x/hoverboard/graphs/contributors). [[Contribute](CONTRIBUTING.md)].
+This project exists thanks to all the [people who contribute](https://github.com/gdg-x/hoverboard/graphs/contributors). [[Contribute](/.github/CONTRIBUTING.md)].
 
 <a href="https://github.com/gdg-x/hoverboard/graphs/contributors"><img src="https://opencollective.com/hoverboard/contributors.svg?width=890" /></a>
 
