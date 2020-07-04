@@ -33,9 +33,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Running the linter
-        run: npm run lint
-
       - name: Building the development environment
         run: npm run build
         env:

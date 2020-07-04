@@ -27,5 +27,24 @@ module.exports = {
       testEnvironment: 'node',
       testMatch: ['<rootDir>/**/*.rules.test.ts'],
     },
+    {
+      displayName: 'ESLint',
+      runner: 'eslint',
+      testMatch: ['<rootDir>/**/*.ts', '<rootDir>/**/*.js'],
+    },
+    {
+      displayName: 'Prettier',
+      preset: 'jest-runner-prettier',
+      testPathIgnorePatterns: ['/node_modules/', '/out-tsc/', '/dist/', '/package-lock.json/'],
+    },
+    {
+      displayName: 'TypeScript',
+      runner: 'tsc',
+    },
+    {
+      displayName: 'stylelint',
+      runner: 'stylelint',
+      testMatch: ['<rootDir>/src/components/**/*.ts', '<rootDir>/src/styles/**/*.ts'],
+    },
   ],
 };
