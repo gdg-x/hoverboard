@@ -1,6 +1,5 @@
 import { html, PolymerElement } from '@polymer/polymer';
 import '../elements/footer-block';
-import '../elements/hero-block';
 import '../elements/md-content';
 import '../elements/polymer-helmet';
 

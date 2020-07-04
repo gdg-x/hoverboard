@@ -23,6 +23,7 @@ import {
   setSuppressTemplateNotifications,
 } from '@polymer/polymer/lib/utils/settings';
 import 'plastic-image';
+import './components/hero-block';
 import { log } from './console';
 import './elements/dialogs/feedback-dialog';
 import './elements/dialogs/previous-speaker-details';
@@ -32,7 +33,6 @@ import './elements/dialogs/speaker-details';
 import './elements/dialogs/subscribe-dialog';
 import './elements/footer-block';
 import './elements/header-toolbar';
-import './elements/hero-block';
 import './elements/hoverboard-analytics';
 import './elements/hoverboard-icons';
 import './elements/polymer-helmet';
