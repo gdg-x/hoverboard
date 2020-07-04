@@ -74,6 +74,13 @@ declare global {
   }
 }
 
+export interface VideoDialog {
+  title: string;
+  youtubeId: string;
+  disableControls: boolean;
+  opened: boolean;
+}
+
 export const uiActions = {
   setViewportSize: (value) => {
     store.dispatch({
@@ -81,7 +88,7 @@ export const uiActions = {
       value,
     });
   },
-  toggleVideoDialog: (value = null) => {
+  toggleVideoDialog: (value: VideoDialog) => {
     store.dispatch({
       type: TOGGLE_VIDEO_DIALOG,
       value,
