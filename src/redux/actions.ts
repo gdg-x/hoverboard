@@ -94,7 +94,7 @@ export const uiActions = {
       value,
     });
   },
-  setHeroSettings: (value) => {
+  setHeroSettings: (value: import('../models/hero').Hero) => {
     store.dispatch({
       type: SET_HERO_SETTINGS,
       value,
