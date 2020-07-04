@@ -146,3 +146,9 @@ export class AboutBlock extends ThemedElement {
     });
   }
 }
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'about-block': AboutBlock;
+  }
+}
