@@ -32,6 +32,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Running the linter
+        run: npm run lint
+
       - name: Building the development environment
         run: npm run build
         env:
@@ -39,13 +42,6 @@ jobs:
 
       - name: Building the production environment
         run: npm run build
-
-      - name: Running the linter
-        run: npm run lint
-
-      - name: Running the security audit
-        run: npm audit && npm audit --prefix functions
-        continue-on-error: true
 
       - name: Running the tests
         run: npm run test
