@@ -94,6 +94,11 @@ export const theme = css`
     transition: border-color var(--animation);
   }
 
+  mwc-button {
+    --mdc-theme-primary: var(--default-primary-color);
+    --mdc-theme-on-primary: var(--default-background-color);
+  }
+
   paper-button {
     padding: 0.7em;
     border-radius: 2px;
