@@ -59,7 +59,7 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "@firebase/testing": "^0.20.5",
+    "@firebase/testing": "^0.20.6",
     "@open-wc/building-rollup": "^1.4.2",
     "@testing-library/dom": "^7.20.1",
     "@testing-library/jest-dom": "^5.10.1",
