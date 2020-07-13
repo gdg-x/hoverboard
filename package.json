@@ -81,7 +81,7 @@
     "eslint-plugin-html": "^6.0.2",
     "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-jest": "^23.18.0",
-    "eslint-plugin-jest-dom": "^3.0.1",
+    "eslint-plugin-jest-dom": "^3.1.4",
     "eslint-plugin-polymer": "^0.4.0",
     "eslint-plugin-testing-library": "^3.3.0",
     "firebase-admin": "^8.12.1",
