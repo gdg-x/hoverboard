@@ -73,7 +73,7 @@
     "core-js": "^3.6.5",
     "cross-env": "^7.0.2",
     "deepmerge": "^4.2.2",
-    "es-dev-server": "^1.56.0",
+    "es-dev-server": "^1.56.1",
     "eslint": "^7.3.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^6.11.0",
