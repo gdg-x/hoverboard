@@ -50,7 +50,7 @@
     "@radi-cho/star-rating": "github:abraham/star-rating#polymer-3",
     "@webcomponents/webcomponentsjs": "^2.4.3",
     "clamp-js-main": "github:abraham/clamp-js-main#export",
-    "firebase": "^7.16.0",
+    "firebase": "^7.17.1",
     "lit-element": "^2.3.1",
     "lit-html": "^1.2.1",
     "plastic-image": "^3.0.2",
@@ -59,7 +59,7 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "@firebase/testing": "^0.20.6",
+    "@firebase/testing": "^0.20.9",
     "@open-wc/building-rollup": "^1.4.2",
     "@testing-library/dom": "^7.20.1",
     "@testing-library/jest-dom": "^5.10.1",
@@ -84,8 +84,8 @@
     "eslint-plugin-jest-dom": "^3.1.4",
     "eslint-plugin-polymer": "^0.4.0",
     "eslint-plugin-testing-library": "^3.3.0",
-    "firebase-admin": "^8.12.1",
-    "firebase-tools": "^8.5.0",
+    "firebase-admin": "^9.0.0",
+    "firebase-tools": "^8.6.0",
     "jest": "^26.1.0",
     "jest-dev-server": "^4.4.0",
     "jest-runner-eslint": "^0.10.0",
@@ -105,7 +105,7 @@
     "typescript": "^3.9.5"
   },
   "engines": {
-    "node": "10"
+    "node": "12"
   },
   "contributors": [
     "Oleh Zasadnyy, GDG Lviv",
