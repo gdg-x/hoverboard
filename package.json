@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@google-web-components/google-youtube": "^3.0.1",
-    "@material/mwc-button": "^0.17.2",
+    "@material/mwc-button": "^0.18.0",
     "@polymer/app-layout": "^3.1.0",
     "@polymer/app-route": "^3.0.2",
     "@polymer/google-map": "github:pranavpandey/google-map#3.0",
