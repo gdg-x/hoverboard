@@ -84,9 +84,7 @@ class SessionDetails extends SpeakersHoC(
           <h3 class="meta-info" hidden$="[[disabledSchedule]]">
             [[session.dateReadable]], [[session.startTime]] - [[session.endTime]]
           </h3>
-          <h3 class="meta-info" hidden$="[[disabledSchedule]]">
-            [[session.track.title]]
-          </h3>
+          <h3 class="meta-info" hidden$="[[disabledSchedule]]">[[session.track.title]]</h3>
           <h3 class="meta-info" hidden$="[[!session.complexity]]">
             {$ sessionDetails.contentLevel $}: [[session.complexity]]
           </h3>
@@ -156,9 +154,7 @@ class SessionDetails extends SpeakersHoC(
               <feedback-block collection="sessions" db-item="[[session.id]]"></feedback-block>
             </auth-required>
 
-            <p hidden="[[acceptingFeedback]]">
-              {$ feedback.sessionClosed $}
-            </p>
+            <p hidden="[[acceptingFeedback]]">{$ feedback.sessionClosed $}</p>
           </div>
         </div>
       </app-header-layout>

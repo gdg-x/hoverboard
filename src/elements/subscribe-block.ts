@@ -49,9 +49,7 @@ class SubscribeBlock extends ReduxMixin(PolymerElement) {
       </style>
 
       <div class="container" layout vertical center$="[[viewport.isTabletPlus]]">
-        <div class="description">
-          {$ subscribeBlock.callToAction.description $}
-        </div>
+        <div class="description">{$ subscribeBlock.callToAction.description $}</div>
         <div class="cta-button">
           <paper-button
             class="animated icon-right"

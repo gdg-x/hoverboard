@@ -111,9 +111,7 @@ class PostPage extends ReduxMixin(PolymerElement) {
         <marked-element class="post" markdown="[[postContent]]">
           <div slot="markdown-html"></div>
         </marked-element>
-        <div class="date">
-          {$ blog.published $}: [[getDate(post.published)]]
-        </div>
+        <div class="date">{$ blog.published $}: [[getDate(post.published)]]</div>
       </div>
 
       <div class="suggested-posts">

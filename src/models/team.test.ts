@@ -11,4 +11,3 @@ describe('partner', () => {
     expect(allKeys(teams)).toStrictEqual(keys);
   });
 });
-'';
