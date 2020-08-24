@@ -89,7 +89,7 @@
     "jest-dev-server": "^4.4.0",
     "jest-runner-eslint": "^0.10.0",
     "jest-runner-prettier": "^0.3.6",
-    "jest-runner-stylelint": "^2.3.6",
+    "jest-runner-stylelint": "^2.3.7",
     "jest-runner-tsc": "^1.6.0",
     "nunjucks": "^3.2.2",
     "prettier": "^2.1.0",
