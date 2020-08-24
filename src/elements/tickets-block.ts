@@ -176,9 +176,7 @@ class TicketsBlock extends ReduxMixin(PolymerElement) {
                 </div>
               </div>
               <div class="actions">
-                <div class="sold-out" block$="[[ticket.soldOut]]">
-                  {$ ticketsBlock.soldOut $}
-                </div>
+                <div class="sold-out" block$="[[ticket.soldOut]]">{$ ticketsBlock.soldOut $}</div>
                 <paper-button
                   primary
                   hidden$="[[ticket.soldOut]]"

@@ -210,9 +210,7 @@ class SessionElement extends ReduxMixin(PolymerElement) {
 
                 <div class="speaker-details" flex>
                   <div class="speaker-name">[[speaker.name]]</div>
-                  <div class="speaker-title">
-                    [[_join(speaker.company, speaker.country)]]
-                  </div>
+                  <div class="speaker-title">[[_join(speaker.company, speaker.country)]]</div>
                 </div>
               </div>
             </template>
