@@ -100,7 +100,7 @@
     "stylelint": "^13.6.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-recommended": "^3.0.0",
-    "ts-jest": "^26.2.0",
+    "ts-jest": "^26.3.0",
     "typescript": "^3.9.7"
   },
   "engines": {
