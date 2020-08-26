@@ -92,7 +92,7 @@
     "jest-runner-stylelint": "^2.3.7",
     "jest-runner-tsc": "^1.6.0",
     "nunjucks": "^3.2.2",
-    "prettier": "^2.1.0",
+    "prettier": "^2.1.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.26.5",
     "rollup-plugin-copy": "^3.3.0",
