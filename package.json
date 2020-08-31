@@ -94,7 +94,7 @@
     "nunjucks": "^3.2.2",
     "prettier": "^2.1.1",
     "rimraf": "^3.0.2",
-    "rollup": "^2.26.6",
+    "rollup": "^2.26.8",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-re": "^1.0.7",
     "stylelint": "^13.6.1",
