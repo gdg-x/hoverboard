@@ -13,13 +13,17 @@ export const fixture = async <T extends import('lit-element').LitElement>(
   if (!element.shadowRoot) {
     throw new Error('ShadowDOM not rendered');
   }
-  if (!element.shadowRoot.firstElementChild?.classList.contains('container')) {
-    throw new Error('Container not rendered');
+  const { shadowRoot } = element;
+  if (shadowRoot.children.length !== 1) {
+    if (shadowRoot.children.length === 0) {
+      throw new Error('Component templates must render a child');
+    }
+    console.warn('Component templates should render a single child');
   }
 
   return {
     element,
-    shadowRoot: element.shadowRoot,
-    container: element.shadowRoot.firstElementChild as HTMLDivElement,
+    shadowRoot: shadowRoot,
+    container: shadowRoot.firstElementChild as HTMLDivElement,
   };
 };
