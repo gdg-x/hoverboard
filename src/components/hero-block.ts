@@ -89,7 +89,7 @@ export class HeroBlock extends ThemedElement {
   render() {
     return html`
       <div
-        class="hero-block container"
+        class="hero-block"
         style="${styleMap({ color: this.fontColor })}"
         layout
         start
