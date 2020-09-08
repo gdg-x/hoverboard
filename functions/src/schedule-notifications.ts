@@ -72,88 +72,90 @@ const sendPushNotificationToUsers = async (userIds, payload) => {
   return removeUserTokens(tokensToRemove);
 };
 
-export const scheduleNotifications = functions.pubsub.topic('schedule-tick').onPublish(async () => {
-  const notificationsConfigPromise = firestore().collection('config').doc('notifications').get();
-  const schedulePromise = firestore().collection('schedule').get();
+export const scheduleNotifications = functions.pubsub
+  .schedule('every 5 minutes')
+  .onRun(async () => {
+    const notificationsConfigPromise = firestore().collection('config').doc('notifications').get();
+    const schedulePromise = firestore().collection('schedule').get();
 
-  const [notificationsConfigSnapshot, scheduleSnapshot] = await Promise.all([
-    notificationsConfigPromise,
-    schedulePromise,
-  ]);
-  const notificationsConfig = notificationsConfigSnapshot.exists
-    ? notificationsConfigSnapshot.data()
-    : {};
+    const [notificationsConfigSnapshot, scheduleSnapshot] = await Promise.all([
+      notificationsConfigPromise,
+      schedulePromise,
+    ]);
+    const notificationsConfig = notificationsConfigSnapshot.exists
+      ? notificationsConfigSnapshot.data()
+      : {};
 
-  const schedule = scheduleSnapshot.docs.reduce(
-    (acc, doc) => ({ ...acc, [doc.id]: doc.data() }),
-    {}
-  );
-  const todayDay = moment().utcOffset(notificationsConfig.timezone).format('YYYY-MM-DD');
-
-  if (schedule[todayDay]) {
-    const beforeTime = moment().subtract(3, 'minutes');
-    const afterTime = moment().add(3, 'minutes');
-
-    const upcomingTimeslot = schedule[todayDay].timeslots.filter((timeslot) => {
-      const timeslotTime = moment(
-        `${timeslot.startTime}${notificationsConfig.timezone}`,
-        `${FORMAT}Z`
-      ).subtract(10, 'minutes');
-      return timeslotTime.isBetween(beforeTime, afterTime);
-    });
-
-    const upcomingSessions = upcomingTimeslot.reduce((result, timeslot) =>
-      timeslot.sessions.reduce(
-        (aggregatedSessions, current) => [...aggregatedSessions, ...current.items],
-        []
-      )
+    const schedule = scheduleSnapshot.docs.reduce(
+      (acc, doc) => ({ ...acc, [doc.id]: doc.data() }),
+      {}
     );
-    const usersIdsSnapshot = await firestore().collection('featuredSessions').get();
+    const todayDay = moment().utcOffset(notificationsConfig.timezone).format('YYYY-MM-DD');
 
-    upcomingSessions.forEach(async (upcomingSession, sessionIndex) => {
-      const sessionInfoSnapshot = await firestore()
-        .collection('sessions')
-        .doc(upcomingSession)
-        .get();
-      if (!sessionInfoSnapshot.exists) return;
+    if (schedule[todayDay]) {
+      const beforeTime = moment().subtract(3, 'minutes');
+      const afterTime = moment().add(3, 'minutes');
 
-      const usersIds = usersIdsSnapshot.docs.reduce(
-        (acc, doc) => ({ ...acc, [doc.id]: doc.data() }),
-        {}
+      const upcomingTimeslot = schedule[todayDay].timeslots.filter((timeslot) => {
+        const timeslotTime = moment(
+          `${timeslot.startTime}${notificationsConfig.timezone}`,
+          `${FORMAT}Z`
+        ).subtract(10, 'minutes');
+        return timeslotTime.isBetween(beforeTime, afterTime);
+      });
+
+      const upcomingSessions = upcomingTimeslot.reduce((result, timeslot) =>
+        timeslot.sessions.reduce(
+          (aggregatedSessions, current) => [...aggregatedSessions, ...current.items],
+          []
+        )
       );
+      const usersIdsSnapshot = await firestore().collection('featuredSessions').get();
 
-      const userIdsFeaturedSession = Object.keys(usersIds).filter(
-        (userId) =>
-          !!Object.keys(usersIds[userId]).filter(
-            (sessionId) => sessionId.toString() === upcomingSession.toString()
-          ).length
-      );
+      upcomingSessions.forEach(async (upcomingSession, sessionIndex) => {
+        const sessionInfoSnapshot = await firestore()
+          .collection('sessions')
+          .doc(upcomingSession)
+          .get();
+        if (!sessionInfoSnapshot.exists) return;
 
-      const session = sessionInfoSnapshot.data();
-      const end = moment(
-        `${upcomingTimeslot[0].startTime}${notificationsConfig.timezone}`,
-        `${FORMAT}Z`
-      );
-      const fromNow = end.fromNow();
+        const usersIds = usersIdsSnapshot.docs.reduce(
+          (acc, doc) => ({ ...acc, [doc.id]: doc.data() }),
+          {}
+        );
 
-      if (userIdsFeaturedSession.length) {
-        return sendPushNotificationToUsers(userIdsFeaturedSession, {
-          data: {
-            title: session.title,
-            body: `Starts ${fromNow}`,
-            click_action: `/schedule/${todayDay}?sessionId=${upcomingSessions[sessionIndex]}`,
-            icon: notificationsConfig.icon,
-          },
-        });
-      }
+        const userIdsFeaturedSession = Object.keys(usersIds).filter(
+          (userId) =>
+            !!Object.keys(usersIds[userId]).filter(
+              (sessionId) => sessionId.toString() === upcomingSession.toString()
+            ).length
+        );
 
-      if (upcomingSessions.length) {
-        console.log('Upcoming sessions', upcomingSessions);
-      } else {
-        console.log('There is no sessions right now');
-      }
-    });
-  } else {
-    console.log(todayDay, 'was not found in the schedule');
-  }
-});
+        const session = sessionInfoSnapshot.data();
+        const end = moment(
+          `${upcomingTimeslot[0].startTime}${notificationsConfig.timezone}`,
+          `${FORMAT}Z`
+        );
+        const fromNow = end.fromNow();
+
+        if (userIdsFeaturedSession.length) {
+          return sendPushNotificationToUsers(userIdsFeaturedSession, {
+            data: {
+              title: session.title,
+              body: `Starts ${fromNow}`,
+              click_action: `/schedule/${todayDay}?sessionId=${upcomingSessions[sessionIndex]}`,
+              icon: notificationsConfig.icon,
+            },
+          });
+        }
+
+        if (upcomingSessions.length) {
+          console.log('Upcoming sessions', upcomingSessions);
+        } else {
+          console.log('There is no sessions right now');
+        }
+      });
+    } else {
+      console.log(todayDay, 'was not found in the schedule');
+    }
+  });
