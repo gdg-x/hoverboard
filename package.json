@@ -13,7 +13,7 @@
     "fix:stylelint": "stylelint \"src/components/**/*.ts\" \"src/styles/**/*.ts\" --fix",
     "fix": "concurrently npm:fix:*",
     "install:emulator": "firebase setup:emulators:firestore",
-    "install:functions": "npm --prefix ./functions install",
+    "install:functions": "npm --prefix ./functions ci",
     "postinstall": "npm run install:functions && npm run install:emulator",
     "serve": "npm run build && firebase serve",
     "start:emulators": "firebase emulators:start",
