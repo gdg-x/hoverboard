@@ -8,7 +8,7 @@ import fs from 'fs';
 
 const gcs = new Storage();
 
-const optimizeImages = storage.object().onFinalize((object) => {
+export const optimizeImages = storage.object().onFinalize((object) => {
   const { contentType } = object;
   // Exit if this is triggered on a file that is not an image.
   if (!contentType.startsWith('image/')) {
@@ -66,5 +66,3 @@ async function optimizeImage(object) {
   // Once the image has been uploaded delete the local files to free up disk space.
   return Promise.all([fs.unlinkSync(tempLocalFile)]);
 }
-
-export default optimizeImages;

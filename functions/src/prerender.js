@@ -77,6 +77,4 @@ app.get('*', (req, res) => {
   }
 });
 
-const prerender = functions.https.onRequest(app);
-
-export default prerender;
+export const prerender = functions.https.onRequest(app);
