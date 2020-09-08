@@ -60,4 +60,4 @@ This fixes #20 by removing styles that leaked which would cause the page to turn
 
 If a proposed change contains multiple commits, please [squash commits](https://www.google.com/url?q=http://blog.steveklabnik.com/posts/2012-11-08-how-to-squash-commits-in-a-github-pull-request) to as few as is necessary to succinctly express the change. A Polymer author can help you squash commits, so don’t be afraid to ask us if you need help with that!
 
-_Copied from [Polymer Elements contributing guide](https://github.com/PolymerElements/ContributionGuide/blob/master/CONTRIBUTING.md)_
+_Copied from [Polymer Elements contributing guide](https://github.com/PolymerElements/ContributionGuide)_
