@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import { firestore, messaging } from 'firebase-admin';
 
-const sendGeneralNotification = functions.firestore
+export const sendGeneralNotification = functions.firestore
   .document('/notifications/{timestamp}')
   .onCreate(async (snapshot, context) => {
     const timestamp = context.params.timestamp;
@@ -50,5 +50,3 @@ const sendGeneralNotification = functions.firestore
     });
     return Promise.all(tokensToRemove);
   });
-
-export default sendGeneralNotification;

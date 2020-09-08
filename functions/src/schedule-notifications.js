@@ -70,7 +70,7 @@ const sendPushNotificationToUsers = async (userIds, payload) => {
   return removeUserTokens(tokensToRemove);
 };
 
-const scheduleNotifications = functions.pubsub.topic('schedule-tick').onPublish(async () => {
+export const scheduleNotifications = functions.pubsub.topic('schedule-tick').onPublish(async () => {
   const notificationsConfigPromise = firestore().collection('config').doc('notifications').get();
   const schedulePromise = firestore().collection('schedule').get();
 
@@ -155,5 +155,3 @@ const scheduleNotifications = functions.pubsub.topic('schedule-tick').onPublish(
     console.log(todayDay, 'was not found in the schedule');
   }
 });
-
-export default scheduleNotifications;

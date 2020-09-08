@@ -2,7 +2,7 @@ import * as functions from 'firebase-functions';
 import md5 from 'md5';
 import fetch from 'node-fetch';
 
-const mailchimpSubscribe = functions.firestore
+export const mailchimpSubscribe = functions.firestore
   .document('/subscribers/{id}')
   .onCreate((snapshot) => {
     const mailchimpConfig = functions.config().mailchimp;
@@ -53,5 +53,3 @@ function subscribeToMailchimp(mailchimpConfig, subscriberData, emailHash) {
     })
     .catch((error) => console.error(`Error occured during Mailchimp subscription: ${error}`));
 }
-
-export default mailchimpSubscribe;
