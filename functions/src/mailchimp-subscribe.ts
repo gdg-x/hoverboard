@@ -24,7 +24,7 @@ export const mailchimpSubscribe = functions.firestore
     return subscribeToMailchimp(mailchimpConfig, subscriberData);
   });
 
-function subscribeToMailchimp(mailchimpConfig, subscriberData, emailHash) {
+function subscribeToMailchimp(mailchimpConfig, subscriberData, emailHash?: string) {
   const uri = `https://${mailchimpConfig.dc}.api.mailchimp.com/3.0/lists/${mailchimpConfig.listid}/members`;
   const url = emailHash ? `${uri}/${emailHash}` : uri;
   const method = emailHash ? 'PATCH' : 'POST';

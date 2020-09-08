@@ -9,7 +9,7 @@ function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
     const tracksNumber = day.tracks.length;
     let dayTags = [];
     const timeslots = [];
-    const extensions = {};
+    const extensions: { [key: string]: number } = {};
 
     const timeslotLen = day.timeslots.length;
     for (let timeslotsIndex = 0; timeslotsIndex < timeslotLen; timeslotsIndex++) {

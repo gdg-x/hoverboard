@@ -15,7 +15,7 @@ const removeUserTokens = (tokensToUsers) => {
   const promises = Object.keys(userTokens).map((userId) => {
     const ref = firestore().collection('notificationsUsers').doc(userId);
 
-    return firestore.runTransaction((transaction) =>
+    return firestore().runTransaction((transaction) =>
       transaction.get(ref).then((doc) => {
         if (!doc.exists) {
           return;
@@ -28,7 +28,7 @@ const removeUserTokens = (tokensToUsers) => {
           return { ...acc, [token]: true };
         }, {});
 
-        transaction.set(newVal);
+        transaction.set(ref, newVal);
       })
     );
   });
@@ -39,11 +39,13 @@ const removeUserTokens = (tokensToUsers) => {
 const sendPushNotificationToUsers = async (userIds, payload) => {
   console.log('sendPushNotificationToUsers user ids', userIds, 'with notification', payload);
 
-  const tokensPromise = userIds.map((id) =>
-    firestore().collection('notificationsUsers').doc(id).get()
-  );
+  const tokensPromise = userIds.map((id) => {
+    return firestore().collection('notificationsUsers').doc(id).get();
+  });
 
-  const usersTokens = await Promise.all(tokensPromise);
+  const usersTokens: firestore.DocumentSnapshot<firestore.DocumentData>[] = await Promise.all(
+    tokensPromise
+  );
   const tokensToUsers = usersTokens.reduce((aggregator, userTokens) => {
     if (!userTokens.exists) return aggregator;
     const { tokens } = userTokens.data();

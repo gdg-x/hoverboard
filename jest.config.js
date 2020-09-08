@@ -38,8 +38,13 @@ module.exports = {
       testPathIgnorePatterns: ['/node_modules/', '/out-tsc/', '/dist/', '/package-lock.json/'],
     },
     {
-      displayName: 'TypeScript',
+      displayName: 'TypeScript Web',
       runner: 'tsc',
+    },
+    {
+      displayName: 'TypeScript Functions',
+      runner: 'tsc',
+      testMatch: ['<rootDir>/functions/**/*.ts'],
     },
     {
       displayName: 'stylelint',

@@ -35,7 +35,7 @@ export const speakersWrite = functions.firestore
     return generateAndSaveData(changedSpeaker);
   });
 
-async function generateAndSaveData(changedSpeaker) {
+async function generateAndSaveData(changedSpeaker?) {
   const sessionsPromise = firestore().collection('sessions').get();
   const schedulePromise = firestore().collection('schedule').orderBy('date', 'desc').get();
   const speakersPromise = firestore().collection('speakers').get();
@@ -62,7 +62,11 @@ async function generateAndSaveData(changedSpeaker) {
     speakers[doc.id] = doc.data();
   });
 
-  let generatedData = {};
+  let generatedData: {
+    sessions?: {};
+    speakers?: {};
+    schedule?: {};
+  } = {};
   const scheduleConfig = functions.config().schedule;
   if (!scheduleConfig || typeof scheduleConfig.enabled === 'undefined') {
     console.error(
