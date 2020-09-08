@@ -25,7 +25,6 @@ Project Hoverboard locally in less than 15 minutes.
 The diagram below is a brief summary of the directories within the project.
 
     /
-    |---appengine/
     |---config/
     |---data/
     |---dist/
@@ -40,7 +39,6 @@ The diagram below is a brief summary of the directories within the project.
     |   |---pages/
     |
 
-- `appengine/` contains App Engine application that runs CRON job to send scheduled push notifications.
 - `dist/` is the directory to deploy to production.
 - `config/` folder for core project setup.
 - `data/` folder with all data for the template including rest of config and resources for pages.
