@@ -6,7 +6,8 @@ import path from 'path';
 import os from 'os';
 import fs from 'fs';
 
-const gcs = new Storage();
+// TODO: Update @google-cloud/storage and remove `any`
+const gcs = new (Storage as any)();
 
 export const optimizeImages = storage.object().onFinalize((object) => {
   const { contentType } = object;
