@@ -41,7 +41,7 @@ Here is a git workflow for updating your fork (or downloaded copy) to the latest
 ```console
 git remote add upstream https://github.com/gdg-x/hoverboard.git
 git fetch upstream
-git merge upstream/master
+git merge upstream/main
 # resolve the merge conflicts in your editor
 git add . -u
 git commit -m 'Updated to the latest version'

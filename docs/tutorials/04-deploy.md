@@ -31,7 +31,7 @@
 In the [`.github/workflows`](.github/workflows) folder, you can find two workflows to help you develop and deploy Hoverboard to Firebase:
 
 - [`pre-merge.yaml`](.github/workflows/pre-merge.yaml) Builds the project, runs the linter and the tests on every Pull Request
-- [`deploy.yaml`](.github/workflows/deploy.yaml) Deploys the project to Firebase after every merge to `master`.
+- [`deploy.yaml`](.github/workflows/deploy.yaml) Deploys the project to Firebase after every merge to `main`.
 
 The `pre-merge` workflow is already configured and will work out of the box, once you fork the hoverboard repo.
 To run the `deploy` on your instance instead, you need to do a small setup:
@@ -54,6 +54,6 @@ npx firebase login:ci
 Once you obtained the token, you need to store it as a **secret** called `FIREBASE_TOKEN` in the settings of your repository. Additionally you need to set your Firebase `project-id` as a secret called `FIREBASE_PROJECT_ID`.
 More details on this process can be found here: [Creating and storing encrypted secrets](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets).
 
-Push this change to `master`, and Github Actions will deploy your project to Firebase after every commit.
+Push this change to `main`, and Github Actions will deploy your project to Firebase after every commit.
 
 Enjoy

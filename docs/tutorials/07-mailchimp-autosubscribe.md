@@ -8,7 +8,7 @@ This tutorial describes how to enable the MailChimp auto subscription feature. S
                                         mailchimp.listid="<LIST_ID_YOU_WANT_SUBSCRIBE_TO>" \
                                         mailchimp.apikey="<YOUR_API_KEY>"
     ```
-1.  Deploy Firebase functions. You can find specific Mailchimp autosubscibe function [here](https://github.com/gdg-x/hoverboard/blob/master/functions/src/mailchimp-subscribe.js)
+1.  Deploy Firebase functions. You can find specific Mailchimp autosubscibe function [here](https://github.com/gdg-x/hoverboard/blob/main/functions/src/mailchimp-subscribe.js)
     ```console
       npx firebase deploy --only functions
     ```
