@@ -1,13 +1,12 @@
-import { storage } from 'firebase-functions';
-import Storage from '@google-cloud/storage';
+import { Storage } from '@google-cloud/storage';
 import { spawn } from 'child-process-promise';
-import mkdirp from 'mkdirp-promise';
-import path from 'path';
-import os from 'os';
+import { storage } from 'firebase-functions';
 import fs from 'fs';
+import mkdirp from 'mkdirp-promise';
+import os from 'os';
+import path from 'path';
 
-// TODO: Update @google-cloud/storage and remove `any`
-const gcs = new (Storage as any)();
+const gcs = new Storage();
 
 export const optimizeImages = storage.object().onFinalize((object) => {
   const { contentType } = object;
