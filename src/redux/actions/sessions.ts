@@ -10,6 +10,7 @@ import {
   SET_USER_FEATURED_SESSIONS_FAILURE,
   SET_USER_FEATURED_SESSIONS_SUCCESS,
 } from '../constants';
+import { db } from '../db';
 
 export const sessionsActions = {
   fetchList: () => (dispatch) => {
@@ -18,8 +19,7 @@ export const sessionsActions = {
     });
 
     return new Promise((resolve, reject) => {
-      window.firebase
-        .firestore()
+      db()
         .collection('generatedSessions')
         .get()
         .then((snaps) => {
@@ -74,8 +74,7 @@ export const sessionsActions = {
       payload: { userId },
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection('featuredSessions')
       .doc(userId)
       .get()
@@ -101,8 +100,7 @@ export const sessionsActions = {
       payload: { userId, featuredSessions },
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection('featuredSessions')
       .doc(userId)
       .set(featuredSessions)

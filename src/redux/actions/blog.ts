@@ -1,4 +1,5 @@
 import { FETCH_BLOG_LIST, FETCH_BLOG_LIST_FAILURE, FETCH_BLOG_LIST_SUCCESS } from '../constants';
+import { db } from '../db';
 
 export const blogActions = {
   fetchList: () => (dispatch) => {
@@ -6,8 +7,7 @@ export const blogActions = {
       type: FETCH_BLOG_LIST,
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection('blog')
       .orderBy('published', 'desc')
       .get()

@@ -1,4 +1,5 @@
 import { SET_DIALOG_DATA, SUBSCRIBE } from '../constants';
+import { db } from '../db';
 import { store } from '../store';
 import { helperActions } from './helper';
 import { toastActions } from './toast';
@@ -7,8 +8,7 @@ export const subscribeActions = {
   subscribe: (data) => (dispatch) => {
     const id = data.email.replace(/[^\w\s]/gi, '');
 
-    window.firebase
-      .firestore()
+    db()
       .collection('subscribers')
       .doc(id)
       .set({

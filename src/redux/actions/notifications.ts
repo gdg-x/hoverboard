@@ -1,4 +1,5 @@
 import { NOTIFICATIONS_STATUS, UPDATE_NOTIFICATIONS_STATUS } from '../constants';
+import { db } from '../db';
 import { store } from '../store';
 import { helperActions } from './helper';
 import { routingActions } from './routing';
@@ -52,10 +53,7 @@ export const notificationsActions = {
         if (currentToken) {
           const state = getState();
 
-          const subscribersRef = window.firebase
-            .firestore()
-            .collection('notificationsSubscribers')
-            .doc(currentToken);
+          const subscribersRef = db().collection('notificationsSubscribers').doc(currentToken);
           const subscribersPromise = subscribersRef.get();
 
           const userUid = state.user && (state.user.uid || null);
@@ -63,10 +61,7 @@ export const notificationsActions = {
           let userSubscriptionsPromise = Promise.resolve(null);
           let userSubscriptionsRef;
           if (userUid) {
-            userSubscriptionsRef = window.firebase
-              .firestore()
-              .collection('notificationsUsers')
-              .doc(userUid);
+            userSubscriptionsRef = db().collection('notificationsUsers').doc(userUid);
             userSubscriptionsPromise = userSubscriptionsRef.get();
           }
 

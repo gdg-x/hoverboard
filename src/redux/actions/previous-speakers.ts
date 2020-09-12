@@ -3,6 +3,7 @@ import {
   FETCH_PREVIOUS_SPEAKERS_FAILURE,
   FETCH_PREVIOUS_SPEAKERS_SUCCESS,
 } from '../constants';
+import { db } from '../db';
 
 export const previousSpeakersActions = {
   fetchList: () => (dispatch) => {
@@ -10,8 +11,7 @@ export const previousSpeakersActions = {
       type: FETCH_PREVIOUS_SPEAKERS,
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection('previousSpeakers')
       .orderBy('order', 'asc')
       .get()

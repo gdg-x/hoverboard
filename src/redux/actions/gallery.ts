@@ -1,4 +1,5 @@
 import { FETCH_GALLERY, FETCH_GALLERY_FAILURE, FETCH_GALLERY_SUCCESS } from '../constants';
+import { db } from '../db';
 
 export const galleryActions = {
   fetchGallery: () => (dispatch) => {
@@ -6,8 +7,7 @@ export const galleryActions = {
       type: FETCH_GALLERY,
     });
 
-    return window.firebase
-      .firestore()
+    return db()
       .collection('gallery')
       .get()
       .then((snaps) => {
