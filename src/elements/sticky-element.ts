@@ -56,7 +56,7 @@ class StickyElement extends PolymerElement {
 
   public active = false;
   private waiting = false;
-  private endScrollHandle: any;
+  private endScrollHandle: import('../temp-any').TempAny;
 
   static get properties() {
     return {

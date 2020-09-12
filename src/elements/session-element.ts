@@ -225,7 +225,11 @@ class SessionElement extends ReduxMixin(PolymerElement) {
   }
 
   private user: { uid?: string; signedIn?: boolean } = {};
-  private session: { id?: string; day?: any; startTime?: any } = {};
+  private session: {
+    id?: string;
+    day?: import('../temp-any').TempAny;
+    startTime?: import('../temp-any').TempAny;
+  } = {};
   private featuredSessions = {};
   private queryParams: string;
   private sessionColor: string;

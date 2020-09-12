@@ -311,8 +311,7 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
 
   connectedCallback() {
     super.connectedCallback();
-    // TODO: Remove any
-    (window as any).HOVERBOARD.Elements.HeaderToolbar = this;
+    (window as import('../temp-any').TempAny).HOVERBOARD.Elements.HeaderToolbar = this;
     this._onScroll = this._onScroll.bind(this);
     window.addEventListener('scroll', this._onScroll);
     this._onScroll();

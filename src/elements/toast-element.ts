@@ -57,7 +57,7 @@ class ToastElement extends ReduxMixin(PolymerElement) {
     return 'toast-element';
   }
 
-  private toast: { action?: { callback?: any } } = {};
+  private toast: { action?: { callback?: import('../temp-any').TempAny } } = {};
   private viewport = {};
 
   static get properties() {

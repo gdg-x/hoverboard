@@ -173,13 +173,11 @@ class ScheduleDay extends PolymerElement {
       const selectedTime = window.location.hash.slice(1);
       if (selectedTime) {
         requestAnimationFrame(() => {
-          // TODO: Remove anys
+          const Elements = (window as import('../temp-any').TempAny).HOVERBOARD.Elements;
           const targetElement = this.shadowRoot.querySelector(`[id="${selectedTime}"]`);
           const offset = offsetTop(targetElement);
-          const toolbarHeight =
-            (window as any).HOVERBOARD.Elements.HeaderToolbar.getBoundingClientRect().height - 1;
-          const stickyToolbarHeight = (window as any).HOVERBOARD.Elements.StickyHeaderToolbar.getBoundingClientRect()
-            .height;
+          const toolbarHeight = Elements.HeaderToolbar.getBoundingClientRect().height - 1;
+          const stickyToolbarHeight = Elements.StickyHeaderToolbar.getBoundingClientRect().height;
           const additionalMargin = this.viewport.isTabletPlus ? 8 : 0;
           const scrollTargetY = offset - toolbarHeight - stickyToolbarHeight - additionalMargin;
           scrollToY(scrollTargetY, 1500, 'easeInOutSine');

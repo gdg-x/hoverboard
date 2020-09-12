@@ -1,6 +1,6 @@
 declare global {
   interface Window {
-    ShadyCSS: any;
+    ShadyCSS: import('../temp-any').TempAny;
   }
 }
 
@@ -29,8 +29,11 @@ export const generateClassName = (value) => {
     : '';
 };
 
-// TODO: Remove any
-export const getVariableColor = (element: any, value: string, fallback?: string) => {
+export const getVariableColor = (
+  element: import('../temp-any').TempAny,
+  value: string,
+  fallback?: string
+) => {
   const calculated = window.ShadyCSS
     ? window.ShadyCSS.getComputedStyleValue(element, `--${generateClassName(value)}`)
     : getComputedStyle(element, `--${generateClassName(value)}`);

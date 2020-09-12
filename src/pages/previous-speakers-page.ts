@@ -281,7 +281,7 @@ class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
     return active && !isDialogOpened;
   }
 
-  _getYears(sessions: { [key: number]: any }) {
+  _getYears(sessions: { [key: number]: import('../temp-any').TempAny }) {
     return Object.keys(sessions || {})
       .map(Number)
       .sort((a, b) => b - a)
