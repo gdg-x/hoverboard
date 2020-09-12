@@ -3,24 +3,24 @@
 import { createSpaConfig } from '@open-wc/building-rollup';
 import merge from 'deepmerge';
 import copy from 'rollup-plugin-copy';
+import livereload from 'rollup-plugin-livereload';
 import replace from 'rollup-plugin-re';
 import { workboxConfig } from './workbox-config';
+import fs from 'fs';
 
 const { production, compileTemplate, compileBufferTemplate } = require('./build-utils.js');
 
-if (!production) {
-  throw new Error('build only supports NODE_ENV=production');
-}
-
 const baseConfig = createSpaConfig({
-  html: {
-    transform: (html) => compileTemplate(html),
-  },
+  developmentMode: !production,
+  injectServiceWorker: production,
   workbox: workboxConfig,
+  html: {
+    template: compileTemplate(fs.readFileSync(__dirname + '/index.html', 'utf8')),
+  },
 });
 
 export default merge(baseConfig, {
-  input: './index.html',
+  input: './out-tsc/src/hoverboard-app.js',
   plugins: [
     replace({
       exclude: 'node_modules/**',
@@ -46,15 +46,6 @@ export default merge(baseConfig, {
           dest: 'dist/node_assets/@webcomponents/webcomponentsjs',
         },
         {
-          src: 'node_modules/firebase/*.{js,map}',
-          dest: 'dist/node_assets/firebase/',
-        },
-        {
-          src: 'out-tsc/src/service-worker-registration.js',
-          dest: 'dist/src',
-          transform: compileBufferTemplate,
-        },
-        {
           src: 'firebase-messaging-sw.js',
           dest: 'dist',
           transform: compileBufferTemplate,
@@ -71,5 +62,9 @@ export default merge(baseConfig, {
         },
       ],
     }),
+    process.env.ROLLUP_WATCH &&
+      livereload({
+        watch: 'dist',
+      }),
   ],
 });

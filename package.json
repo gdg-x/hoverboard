@@ -5,23 +5,21 @@
   "scripts": {
     "build": "npm run clean && tsc && NODE_ENV=production rollup --config rollup.config.js",
     "clean": "rimraf dist out-tsc",
+    "db:emulator:import": "ts-node ./scripts/import-default-data-local",
     "deploy": "npm run build && NODE_ENV=production firebase deploy",
-    "firestore:copy": "babel-node ./internals/firestore-copy-data",
-    "firestore:init": "firebase firestore:delete -r --all-collections -y && firebase functions:config:set schedule.enabled=true && firebase deploy --except hosting && babel-node ./internals/import-default-data",
+    "firestore:copy": "ts-node ./scripts/firestore-copy-data",
+    "firestore:init": "firebase firestore:delete -r --all-collections -y && firebase functions:config:set schedule.enabled=true && firebase deploy --except hosting && ts-node ./scripts/import-default-data",
     "fix:eslint": "eslint . --ext .ts --ext .js --fix",
     "fix:prettier": "prettier . --write",
     "fix:stylelint": "stylelint \"src/components/**/*.ts\" \"src/styles/**/*.ts\" --fix",
     "fix": "concurrently npm:fix:*",
-    "install:emulator": "firebase setup:emulators:firestore",
-    "install:functions": "npm --prefix ./functions ci",
-    "postinstall": "npm run install:functions && npm run install:emulator",
-    "serve": "npm run build && firebase serve",
-    "start:emulators": "firebase emulators:start",
-    "start": "NODE_ENV=development npm run watch",
-    "test": "jest",
-    "watch:es-dev-server": "es-dev-server --open --watch",
-    "watch:tsc": "tsc --watch",
-    "watch": "concurrently --kill-others npm:watch:*"
+    "postinstall": "npm --prefix ./functions ci",
+    "start:firebase": "firebase emulators:start --import seed-data",
+    "start:functions": "npm --prefix functions start",
+    "start:rollup": "rollup --config rollup.config.js --watch",
+    "start:tsc": "tsc --watch",
+    "start": "npm run clean && tsc && concurrently --kill-others npm:start:*",
+    "test": "jest"
   },
   "dependencies": {
     "@google-web-components/google-youtube": "^3.0.1",
@@ -56,7 +54,8 @@
     "plastic-image": "^3.0.2",
     "pwa-helpers": "^0.9.1",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "workbox-window": "^5.1.3"
   },
   "devDependencies": {
     "@firebase/testing": "^0.20.11",
@@ -96,11 +95,13 @@
     "rimraf": "^3.0.2",
     "rollup": "^2.26.11",
     "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-livereload": "^1.3.0",
     "rollup-plugin-re": "^1.0.7",
     "stylelint": "^13.7.0",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-recommended": "^3.0.0",
     "ts-jest": "^26.3.0",
+    "ts-node": "^9.0.0",
     "typescript": "^4.0.2"
   },
   "engines": {

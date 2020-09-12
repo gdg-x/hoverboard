@@ -1,11 +1,13 @@
 /* eslint-env node */
 
-const n = require('nunjucks');
 const fs = require('fs');
+const n = require('nunjucks');
+const pkg = require('./package.json');
 
-const production = process.env.NODE_ENV && process.env.NODE_ENV === 'production';
+const production = !!process.env.NODE_ENV && process.env.NODE_ENV === 'production';
 const development = !production;
 const buildTarget = process.env.BUILD_ENV ? process.env.BUILD_ENV : 'development';
+const firebaseVersion = pkg.dependencies.firebase.replace(/[^0-9.]/g, '');
 
 const getConfigPath = () => {
   const path = `./config/${buildTarget}.json`;
@@ -24,12 +26,15 @@ const getConfigPath = () => {
 const getData = () => {
   const settingsFiles = ['./data/resources.json', './data/settings.json', getConfigPath()];
 
-  return settingsFiles.reduce((currentData, path) => {
-    return {
-      ...currentData,
-      ...require(path),
-    };
-  }, {});
+  return settingsFiles.reduce(
+    (currentData, path) => {
+      return {
+        ...currentData,
+        ...require(path),
+      };
+    },
+    { firebaseVersion, production }
+  );
 };
 
 const data = getData();

@@ -3,7 +3,6 @@ import { html, PolymerElement } from '@polymer/polymer';
 import '../components/about-block';
 import '../elements/about-organizer-block';
 import '../elements/featured-videos';
-import '../elements/fork-me-block';
 import '../elements/gallery-block';
 import '../elements/latest-posts-block';
 import '../elements/map-block';
@@ -241,9 +240,9 @@ class HomePage extends ReduxMixin(PolymerElement) {
           </div>
         </div>
       </hero-block>
-      {% if showForkMeBlockForProjectIds.includes(firebase.projectId) %}
-      <fork-me-block></fork-me-block>
-      {% endif %}
+      <template is="dom-if" if="{{showForkMeBlock}}">
+        <fork-me-block></fork-me-block>
+      </template>
       <about-block></about-block>
       <speakers-block></speakers-block>
       <subscribe-block></subscribe-block>
@@ -265,11 +264,17 @@ class HomePage extends ReduxMixin(PolymerElement) {
   static get properties() {
     return {
       active: Boolean,
+      showForkMeBlock: {
+        type: Boolean,
+        value: false,
+      },
       viewport: {
         type: Object,
       },
     };
   }
+
+  showForkMeBlock = false;
 
   stateChanged(state: import('../redux/store').State) {
     this.setProperties({
@@ -296,6 +301,19 @@ class HomePage extends ReduxMixin(PolymerElement) {
   _scrollNextBlock() {
     const heroHeight = this.$.hero.getBoundingClientRect().height - 64;
     scrollToY(heroHeight, 600, 'easeInOutSine');
+  }
+
+  private shouldShowForkMeBlock() {
+    // TODO: Remove the need for this type caste
+    const { projectId } = window.firebase.app().options as { projectId: string; };
+    const showForkMeBlockForProjectIds = '{$  showForkMeBlockForProjectIds $}'.split(',');
+    import('../elements/fork-me-block');
+    return showForkMeBlockForProjectIds.includes(projectId);
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.showForkMeBlock = this.shouldShowForkMeBlock();
   }
 }
 

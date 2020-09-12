@@ -5,7 +5,7 @@ import * as path from 'path';
 const ONE_WEEK = 60 * 60 * 24 * 7;
 
 export const workboxConfig = {
-  swDest: path.join(__dirname, 'dist', 'service-worker.js'),
+  swDest: 'dist/service-worker.js',
   navigateFallback: '/index.html',
   navigateFallbackDenylist: [
     /\/__\/.*/, // Private Firebase URLs
@@ -31,6 +31,13 @@ export const workboxConfig = {
       handler: 'NetworkFirst',
       options: {
         cacheName: 'node-modules-cache',
+      },
+    },
+    {
+      urlPattern: /\/__\/.*/,
+      handler: 'CacheFirst',
+      options: {
+        cacheName: 'firebase-cache',
       },
     },
     {

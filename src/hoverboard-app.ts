@@ -57,8 +57,8 @@ import {
   userActions,
 } from './redux/actions';
 import { store } from './redux/store';
-import { registerServiceWorker } from './service-worker-registration';
 import { scrollToY } from './utils/scrolling';
+import './service-worker-notifications';
 
 setFastDomIf(true);
 setPassiveTouchGestures(true);
@@ -411,8 +411,6 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
       e.preventDefault();
       this.addToHomeScreen = e;
     });
-
-    window.addEventListener('load', () => registerServiceWorker());
   }
 
   connectedCallback() {
