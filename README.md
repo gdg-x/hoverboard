@@ -2,7 +2,7 @@
 <img width="800px" src="https://user-images.githubusercontent.com/2954281/42683571-55ba6be6-8696-11e8-8ff7-e9acd0db63e8.png">
 </p>
 <p align="center">
-<a href="https://hoverboard-master.firebaseapp.com" align="center">:zap: Live demo</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="https://hoverboard-master.web.app" align="center">:zap: Live demo</a>&nbsp;&nbsp;|&nbsp;&nbsp;
 <a href="#getting-started">:rocket: Get Started</a>
 </p>
 
