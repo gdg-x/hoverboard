@@ -19,8 +19,7 @@ export const speakersActions = {
     });
 
     return Promise.all([speakersPromise])
-      .then(([speakers]: any[][]) => {
-        // TODO: Remove any
+      .then(([speakers]: import('../../temp-any').TempAny[][]) => {
         dispatch({
           type: FETCH_SPEAKERS_SUCCESS,
           payload: {

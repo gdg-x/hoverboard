@@ -3,8 +3,7 @@ import { toastActions } from './redux/actions';
 import * as settings from '@polymer/polymer/lib/utils/settings';
 
 const SW_URL = 'service-worker.js';
-// TODO: Remove any
-const SCOPE = (settings as any).rootPath;
+const SCOPE = (settings as import('./temp-any').TempAny).rootPath;
 
 export const registerServiceWorker = () => {
   if ('serviceWorker' in navigator) {

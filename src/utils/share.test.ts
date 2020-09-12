@@ -10,7 +10,7 @@ describe('share', () => {
   ].join('');
 
   beforeAll(() => {
-    (window as any).href = 'https://example.com/schedule';
+    (window as import('../temp-any').TempAny).href = 'https://example.com/schedule';
     document.title = 'Awesome Schedule';
     open = jest.spyOn(window, 'open').mockImplementation();
   });

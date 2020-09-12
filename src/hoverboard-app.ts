@@ -321,7 +321,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
   }
 
   private ui = {};
-  private addToHomeScreen: any;
+  private addToHomeScreen: import('./temp-any').TempAny;
   private drawerOpened = false;
   private route: { route?: string } = {};
   private dialogs = {};

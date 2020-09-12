@@ -44,8 +44,10 @@ export const sendGeneralNotification = functions.firestore
           error.code === 'messaging/invalid-registration-token' ||
           error.code === 'messaging/registration-token-not-registered'
         ) {
-          // TODO: Remove `any`
-          tokensToRemove.push((tokensSnapshot as any).ref.child(tokens[index]).remove());
+          const tokenRef = (tokensSnapshot as import('./temp-any').TempAny).ref.child(
+            tokens[index]
+          );
+          tokensToRemove.push(tokenRef.remove());
         }
       }
     });

@@ -287,11 +287,9 @@ class HomePage extends ReduxMixin(PolymerElement) {
   }
 
   _scrollToTickets() {
-    // TODO: Remove anys
-    const toolbarHeight =
-      (window as any).HOVERBOARD.Elements.HeaderToolbar.getBoundingClientRect().height - 1;
-    const ticketsBlockPositionY =
-      (window as any).HOVERBOARD.Elements.Tickets.getBoundingClientRect().top - toolbarHeight;
+    const Elements = (window as import('../temp-any').TempAny).HOVERBOARD.Elements;
+    const toolbarHeight = Elements.HeaderToolbar.getBoundingClientRect().height - 1;
+    const ticketsBlockPositionY = Elements.Tickets.getBoundingClientRect().top - toolbarHeight;
     scrollToY(ticketsBlockPositionY, 600, 'easeInOutSine');
   }
 

@@ -3,8 +3,7 @@ import { store } from '../store';
 
 export const helperActions = {
   storeUser: (user?) => {
-    // TODO: Remove any
-    let userToStore: any = { signedIn: false };
+    let userToStore: import('../../temp-any').TempAny = { signedIn: false };
 
     if (user) {
       const { uid, displayName, photoURL, refreshToken, actualProvider, pendingCredential } = user;
