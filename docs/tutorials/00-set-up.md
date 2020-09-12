@@ -33,23 +33,28 @@ The diagram below is a brief summary of the directories within the project.
     |---images/
     |---internals/
     |---node_modules/
+    |---out-tsc/
     |---src/
+    |   |---components/
     |   |---elements/
     |   |---mixins/
     |   |---pages/
     |
 
-- `dist/` is the directory to deploy to production.
 - `config/` folder for core project setup.
 - `data/` folder with all data for the template including rest of config and resources for pages.
+- `dist/` is the directory to deploy to production.
 - `docs/` documentation.
 - `functions/` directory with Firebase [cloud functions](https://firebase.google.com/docs/functions/) used for notifications, optimizations, saving data, etc.
 - `images/` is for static images.
 - `internals/` contains scripts that helps user to work with the project and it's data ([docs](./firebase-utils.md)).
 - `node_modules/` is the place of Node dependencies.
+- `out-tsc` is the compiled TypeScript before Rollup bundles it.
 - `src/` is where you store all of your source code and do all of your development.
-- `elements/` is where you keep your custom elements.
-- `pages/` is where you keep your pages' description.
+  - `components/` is where you keep your new LitElement custom elements.
+  - `elements/` is where you keep your old Polymer custom elements.
+  - `mixins/` is where you keep your shared component mixins.
+  - `pages/` is where you keep your pages' description.
 
 ## Build and serve
 
