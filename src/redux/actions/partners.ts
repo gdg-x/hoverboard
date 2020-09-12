@@ -6,10 +6,10 @@ import {
   FETCH_PARTNERS_FAILURE,
   FETCH_PARTNERS_SUCCESS,
 } from '../constants';
+import { db } from '../db';
 
 const _getPartnerItems = (groupId) =>
-  window.firebase
-    .firestore()
+  db()
     .collection('partners')
     .doc(groupId)
     .collection('items')
@@ -34,8 +34,7 @@ export const partnersActions = {
       companyName: data.secondFieldValue || '',
     };
 
-    window.firebase
-      .firestore()
+    db()
       .collection('potentialPartners')
       .doc(id)
       .set(partner)
@@ -57,8 +56,7 @@ export const partnersActions = {
       type: FETCH_PARTNERS,
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection('partners')
       .get()
       .then((snaps) =>

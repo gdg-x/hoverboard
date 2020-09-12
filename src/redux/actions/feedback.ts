@@ -9,6 +9,7 @@ import {
   SEND_FEEDBACK_FAILURE,
   SEND_FEEDBACK_SUCCESS,
 } from '../constants';
+import { db } from '../db';
 
 export const feedbackActions = {
   addComment: (data) => (dispatch) => {
@@ -17,8 +18,7 @@ export const feedbackActions = {
       payload: data,
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection(`${data.collection}/${data.dbItem}/feedback`)
       .doc(data.userId)
       .set({
@@ -45,8 +45,7 @@ export const feedbackActions = {
       payload: data,
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection(`${data.collection}/${data.dbItem}/feedback`)
       .doc(data.userId)
       .get()
@@ -73,8 +72,7 @@ export const feedbackActions = {
       payload: data,
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection(`${data.collection}/${data.dbItem}/feedback`)
       .doc(data.userId)
       .delete()

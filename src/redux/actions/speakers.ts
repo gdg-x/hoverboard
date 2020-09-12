@@ -1,4 +1,5 @@
 import { FETCH_SPEAKERS, FETCH_SPEAKERS_FAILURE, FETCH_SPEAKERS_SUCCESS } from '../constants';
+import { db } from '../db';
 
 export const speakersActions = {
   fetchList: () => (dispatch) => {
@@ -7,8 +8,7 @@ export const speakersActions = {
     });
 
     const speakersPromise = new Promise((resolve, reject) => {
-      window.firebase
-        .firestore()
+      db()
         .collection('generatedSpeakers')
         .orderBy('order', 'asc')
         .get()

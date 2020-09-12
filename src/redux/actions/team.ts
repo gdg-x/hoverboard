@@ -1,8 +1,8 @@
 import { FETCH_TEAM, FETCH_TEAM_FAILURE, FETCH_TEAM_SUCCESS } from '../constants';
+import { db } from '../db';
 
 const _getTeamMembers = (teamId) =>
-  window.firebase
-    .firestore()
+  db()
     .collection('team')
     .doc(teamId)
     .collection('members')
@@ -15,8 +15,7 @@ export const teamActions = {
       type: FETCH_TEAM,
     });
 
-    window.firebase
-      .firestore()
+    db()
       .collection('team')
       .get()
       .then((snaps) =>

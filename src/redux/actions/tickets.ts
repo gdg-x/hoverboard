@@ -1,4 +1,5 @@
 import { FETCH_TICKETS, FETCH_TICKETS_FAILURE, FETCH_TICKETS_SUCCESS } from '../constants';
+import { db } from '../db';
 
 export const ticketsActions = {
   fetchTickets: () => (dispatch) => {
@@ -6,8 +7,7 @@ export const ticketsActions = {
       type: FETCH_TICKETS,
     });
 
-    return window.firebase
-      .firestore()
+    return db()
       .collection('tickets')
       .orderBy('order', 'asc')
       .get()

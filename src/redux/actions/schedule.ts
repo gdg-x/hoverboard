@@ -1,4 +1,5 @@
 import { FETCH_SCHEDULE, FETCH_SCHEDULE_FAILURE, FETCH_SCHEDULE_SUCCESS } from '../constants';
+import { db } from '../db';
 
 export const scheduleActions = {
   fetchSchedule: () => (dispatch) => {
@@ -6,8 +7,7 @@ export const scheduleActions = {
       type: FETCH_SCHEDULE,
     });
 
-    return window.firebase
-      .firestore()
+    return db()
       .collection('generatedSchedule')
       .get()
       .then((snaps) => {
