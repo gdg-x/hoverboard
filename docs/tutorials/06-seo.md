@@ -3,7 +3,7 @@
 1.  Set the firebase config variables
     ```console
       npx firebase functions:config:set rendertron.server="https://render-tron.appspot.com"
-      npx firebase functions:config:set site.domain="YOUR_SUB_DOMAIN_HERE.firebaseapp.com"
+      npx firebase functions:config:set site.domain="YOUR_SUB_DOMAIN_HERE.web.app"
     ```
 1.  Deploy Firebase functions
     ```console

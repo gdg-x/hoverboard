@@ -1,12 +1,12 @@
 {
   "basepath": "/",
-  "url": "https://hoverboard-master.firebaseapp.com/",
+  "url": "https://hoverboard-master.web.app/",
   "analytics": "UA-43643469-9",
   "prefix": "/",
   "firebase": {
     "apiKey": "AIzaSyCaSkhtHekxAqXXzzbuNs2s6CpGdhZdta8",
     "appId": "1:516409946568:web:ad5a56d452fc421c",
-    "authDomain": "hoverboard-master.firebaseapp.com",
+    "authDomain": "hoverboard-master.web.app",
     "databaseURL": "https://hoverboard-master.firebaseio.com",
     "messagingSenderId": "516409946568",
     "projectId": "hoverboard-master",
