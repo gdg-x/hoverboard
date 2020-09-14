@@ -1,4 +1,4 @@
-function sessionsSpeakersMap(sessionsRaw, speakersRaw) {
+export function sessionsSpeakersMap(sessionsRaw, speakersRaw) {
   const sessions = {};
   const speakers = {};
 
@@ -55,5 +55,3 @@ function sessionsSpeakersMap(sessionsRaw, speakersRaw) {
 
   return { sessions, speakers };
 }
-
-export default sessionsSpeakersMap;
