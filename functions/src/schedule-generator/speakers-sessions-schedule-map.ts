@@ -1,4 +1,4 @@
-function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
+export function sessionsSpeakersScheduleMap(sessionsRaw, speakersRaw, scheduleRaw) {
   let schedule = {};
   const sessions = {};
   let speakers = {};
@@ -198,5 +198,3 @@ function updateSpeakersSessions(speakersRaw, speakerIds, session, generatedSpeak
   }
   return result;
 }
-
-export default sessionsSpeakersScheduleMap;

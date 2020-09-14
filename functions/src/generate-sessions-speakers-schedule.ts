@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import { firestore } from 'firebase-admin';
-import mapSessionsSpeakersSchedule from './schedule-generator/speakers-sessions-schedule-map';
-import mapSessionsSpeakers from './schedule-generator/speakers-sessions-map';
+import { sessionsSpeakersScheduleMap } from './schedule-generator/speakers-sessions-schedule-map';
+import { sessionsSpeakersMap } from './schedule-generator/speakers-sessions-map';
 
 export const sessionsWrite = functions.firestore
   .document('sessions/{sessionId}')
@@ -80,9 +80,9 @@ async function generateAndSaveData(changedSpeaker?) {
   if (!Object.keys(sessions).length) {
     generatedData = { ...speakers };
   } else if (!scheduleEnabled || !Object.keys(schedule).length) {
-    generatedData = mapSessionsSpeakers(sessions, speakers);
+    generatedData = sessionsSpeakersMap(sessions, speakers);
   } else {
-    generatedData = mapSessionsSpeakersSchedule(sessions, speakers, schedule);
+    generatedData = sessionsSpeakersScheduleMap(sessions, speakers, schedule);
   }
 
   // If changed speaker does not have assigned session(s) yet
