@@ -2,8 +2,9 @@ import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { dialogsActions, subscribeActions } from '../redux/actions';
-import { DIALOGS } from '../redux/constants';
+import { subscribeActions } from '../redux/actions';
+import { openDialog } from '../redux/dialogs/actions';
+import { DIALOGS } from '../redux/dialogs/types';
 import { State, store } from '../redux/store';
 import './hoverboard-icons';
 import './shared-styles';
@@ -136,7 +137,7 @@ class SubscribeBlock extends ReduxMixin(PolymerElement) {
     if (this.user.email) {
       this._subscribeAction(Object.assign({}, { email: this.user.email }, userData));
     } else {
-      dialogsActions.openDialog(DIALOGS.SUBSCRIBE, {
+      openDialog(DIALOGS.SUBSCRIBE, {
         title: '{$ subscribeBlock.formTitle $}',
         submitLabel: ' {$ subscribeBlock.subscribe $}',
         firstFieldLabel: '{$ subscribeBlock.firstName $}',

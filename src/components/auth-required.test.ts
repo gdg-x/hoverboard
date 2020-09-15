@@ -2,15 +2,15 @@ import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit-html';
 import { mocked } from 'ts-jest/utils';
 import { fixture } from '../../__tests__/helpers/fixtures';
-import { dialogsActions } from '../redux/actions';
 import { SIGN_IN } from '../redux/constants';
+import { openDialog } from '../redux/dialogs/actions';
 import { store } from '../redux/store';
 import './auth-required';
 import { AuthRequired } from './auth-required';
 
-jest.mock('../redux/actions');
+jest.mock('../redux/dialogs/actions');
 
-const openDialog = mocked(dialogsActions.openDialog);
+const mockOpenDialog = mocked(openDialog);
 
 describe('auth-required', () => {
   let element!: AuthRequired;
@@ -31,7 +31,7 @@ describe('auth-required', () => {
   });
 
   beforeEach(() => {
-    openDialog.mockClear();
+    mockOpenDialog.mockClear();
   });
 
   it('should be registered', () => {
@@ -52,8 +52,8 @@ describe('auth-required', () => {
 
   it('opens dialog on tap', () => {
     fireEvent.click(shadowRoot.querySelector('mwc-button')!);
-    expect(openDialog).toHaveBeenCalledTimes(1);
-    expect(openDialog).toHaveBeenCalledWith('signin');
+    expect(mockOpenDialog).toHaveBeenCalledTimes(1);
+    expect(mockOpenDialog).toHaveBeenCalledWith('signin');
   });
 
   it('shows authenticated content', async () => {

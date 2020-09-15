@@ -1,6 +1,6 @@
 import { blogReducer } from './blog/reducers';
+import { dialogsReducer } from './dialogs/reducers';
 import { initialState } from './initial-state';
-import { dialogsReducer } from './reducers/dialogs';
 import { feedbackReducer } from './reducers/feedback';
 import { filtersReducer } from './reducers/filters';
 import { galleryReducer } from './reducers/gallery';

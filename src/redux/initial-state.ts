@@ -1,5 +1,6 @@
 import { initialBlogState } from './blog/state';
-import { DIALOGS, NOTIFICATIONS_STATUS } from './constants';
+import { NOTIFICATIONS_STATUS } from './constants';
+import { initialDialogState } from './dialogs/state';
 import { initialUiState } from './ui/state';
 
 export const initialState = {
@@ -8,32 +9,7 @@ export const initialState = {
     route: 'home',
     subRoute: '',
   },
-  dialogs: {
-    [DIALOGS.SPEAKER]: {
-      isOpened: false,
-      data: {},
-    },
-    [DIALOGS.PREVIOUS_SPEAKER]: {
-      isOpened: false,
-      data: {},
-    },
-    [DIALOGS.SESSION]: {
-      isOpened: false,
-      data: {},
-    },
-    [DIALOGS.FEEDBACK]: {
-      isOpened: false,
-      data: {},
-    },
-    [DIALOGS.SUBSCRIBE]: {
-      isOpened: false,
-      data: {},
-    },
-    [DIALOGS.SIGNIN]: {
-      isOpened: false,
-      data: {},
-    },
-  },
+  dialogs: initialDialogState,
   tickets: {
     fetching: false,
     fetchingError: null,

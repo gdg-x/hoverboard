@@ -5,8 +5,9 @@ import 'plastic-image';
 import '../elements/content-loader';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { dialogsActions, previousSpeakersActions } from '../redux/actions';
-import { DIALOGS } from '../redux/constants';
+import { previousSpeakersActions } from '../redux/actions';
+import { closeDialog, openDialog } from '../redux/dialogs/actions';
+import { DIALOGS } from '../redux/dialogs/types';
 import { State, store } from '../redux/store';
 import { TempAny } from '../temp-any';
 
@@ -270,9 +271,9 @@ class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
       requestAnimationFrame(() => {
         if (active && id) {
           const speakerData = speakersMap[id];
-          speakerData && dialogsActions.openDialog(DIALOGS.PREVIOUS_SPEAKER, speakerData);
+          speakerData && openDialog(DIALOGS.PREVIOUS_SPEAKER, speakerData);
         } else if (this.isDialogOpened) {
-          dialogsActions.closeDialog(DIALOGS.PREVIOUS_SPEAKER);
+          closeDialog(DIALOGS.PREVIOUS_SPEAKER);
         }
       });
     }

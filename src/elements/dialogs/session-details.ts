@@ -10,8 +10,9 @@ import 'plastic-image';
 import '../../components/auth-required';
 import { ReduxMixin } from '../../mixins/redux-mixin';
 import { SpeakersHoC } from '../../mixins/speakers-hoc';
-import { dialogsActions, sessionsActions, toastActions } from '../../redux/actions';
-import { DIALOGS } from '../../redux/constants';
+import { sessionsActions, toastActions } from '../../redux/actions';
+import { closeDialog, openDialog } from '../../redux/dialogs/actions';
+import { DIALOGS } from '../../redux/dialogs/types';
 import { State, store } from '../../redux/store';
 import { toggleVideoDialog } from '../../redux/ui/actions';
 import { getVariableColor } from '../../utils/functions';
@@ -212,7 +213,7 @@ class SessionDetails extends SpeakersHoC(
   }
 
   _close() {
-    dialogsActions.closeDialog(DIALOGS.SESSION);
+    closeDialog(DIALOGS.SESSION);
     history.back();
   }
 
@@ -221,8 +222,8 @@ class SessionDetails extends SpeakersHoC(
     const speakerData = this.speakersMap[speakerId];
 
     if (!speakerData) return;
-    dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
-    dialogsActions.closeDialog(DIALOGS.SESSION);
+    openDialog(DIALOGS.SPEAKER, speakerData);
+    closeDialog(DIALOGS.SESSION);
   }
 
   _getCloseBtnIcon(isLaptopViewport) {
@@ -247,7 +248,7 @@ class SessionDetails extends SpeakersHoC(
         action: {
           title: 'Sign in',
           callback: () => {
-            dialogsActions.openDialog(DIALOGS.SIGNIN);
+            openDialog(DIALOGS.SIGNIN);
           },
         },
       });

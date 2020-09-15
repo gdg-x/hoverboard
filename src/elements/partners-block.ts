@@ -3,8 +3,9 @@ import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { dialogsActions, partnersActions, toastActions } from '../redux/actions';
-import { DIALOGS } from '../redux/constants';
+import { partnersActions, toastActions } from '../redux/actions';
+import { closeDialog, openDialog, setDialogError } from '../redux/dialogs/actions';
+import { DIALOGS } from '../redux/dialogs/types';
 import { State, store } from '../redux/store';
 import './hoverboard-icons';
 import './shared-styles';
@@ -135,7 +136,7 @@ class PartnersBlock extends ReduxMixin(PolymerElement) {
   }
 
   _addPotentialPartner() {
-    dialogsActions.openDialog(DIALOGS.SUBSCRIBE, {
+    openDialog(DIALOGS.SUBSCRIBE, {
       title: '{$ partnersBlock.form.title $}',
       submitLabel: '{$ partnersBlock.form.submitLabel $}',
       firstFieldLabel: '{$ partnersBlock.form.fullName $}',
@@ -149,9 +150,9 @@ class PartnersBlock extends ReduxMixin(PolymerElement) {
   _partnerAddingChanged(newPartnerAdding, oldPartnerAdding) {
     if (oldPartnerAdding && !newPartnerAdding) {
       if (this.partnerAddingError) {
-        store.dispatch(dialogsActions.setDialogError(DIALOGS.SUBSCRIBE));
+        setDialogError(DIALOGS.SUBSCRIBE);
       } else {
-        dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
+        closeDialog(DIALOGS.SUBSCRIBE);
         toastActions.showToast({ message: '{$ partnersBlock.toast $}' });
       }
     }

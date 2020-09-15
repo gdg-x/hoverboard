@@ -1,11 +1,19 @@
-import { SET_DIALOG_DATA, SUBSCRIBE } from '../constants';
+import { Dispatch } from 'redux';
+import { SUBSCRIBE } from '../constants';
 import { db } from '../db';
+import { DIALOGS, SET_DIALOG_DATA } from '../dialogs/types';
 import { store } from '../store';
 import { helperActions } from './helper';
 import { toastActions } from './toast';
 
+interface User {
+  email: string;
+  firstFieldValue?: string;
+  secondFieldValue?: string;
+}
+
 export const subscribeActions = {
-  subscribe: (data) => (dispatch) => {
+  subscribe: (data: User) => (dispatch: Dispatch) => {
     const id = data.email.replace(/[^\w\s]/gi, '');
 
     db()
@@ -27,7 +35,7 @@ export const subscribeActions = {
         dispatch({
           type: SET_DIALOG_DATA,
           dialog: {
-            ['subscribe']: {
+            [DIALOGS.SUBSCRIBE]: {
               isOpened: true,
               data: Object.assign(data, { errorOccurred: true }),
             },

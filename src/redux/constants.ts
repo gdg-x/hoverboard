@@ -1,19 +1,6 @@
 // router
 export const SET_ROUTE = 'app/Routing/SET_ROUTE';
 export const SET_SUB_ROUTE = 'app/Routing/SET_SUB_ROUTE';
-// dialogs
-export const OPEN_DIALOG = 'app/Dialogs/OPEN_DIALOG';
-export const CLOSE_DIALOG = 'app/Dialogs/CLOSE_DIALOG';
-export const SET_DIALOG_DATA = 'app/Dialogs/SET_DIALOG_DATA';
-export const SET_DIALOG_ERROR = 'app/Dialogs/SET_DIALOG_ERROR';
-export const DIALOGS = {
-  SPEAKER: 'speaker',
-  PREVIOUS_SPEAKER: 'previousSpeaker',
-  SESSION: 'session',
-  FEEDBACK: 'feedback',
-  SUBSCRIBE: 'subscribe',
-  SIGNIN: 'signin',
-};
 // toast
 export const SHOW_TOAST = 'app/Toast/SHOW_TOAST';
 export const HIDE_TOAST = 'app/Toast/HIDE_TOAST';

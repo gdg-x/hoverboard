@@ -2,8 +2,9 @@ import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { dialogsActions, sessionsActions, toastActions } from '../redux/actions';
-import { DIALOGS } from '../redux/constants';
+import { sessionsActions, toastActions } from '../redux/actions';
+import { openDialog } from '../redux/dialogs/actions';
+import { DIALOGS } from '../redux/dialogs/types';
 import { store } from '../redux/store';
 import { TempAny } from '../temp-any';
 import { getVariableColor, toggleQueryParam } from '../utils/functions';
@@ -291,7 +292,7 @@ class SessionElement extends ReduxMixin(PolymerElement) {
         action: {
           title: 'Sign in',
           callback: () => {
-            dialogsActions.openDialog(DIALOGS.SIGNIN);
+            openDialog(DIALOGS.SIGNIN);
           },
         },
       });
@@ -308,7 +309,7 @@ class SessionElement extends ReduxMixin(PolymerElement) {
   _toggleFeedback(event) {
     event.preventDefault();
     event.stopPropagation();
-    dialogsActions.openDialog(DIALOGS.FEEDBACK, this.session);
+    openDialog(DIALOGS.FEEDBACK, this.session);
   }
 
   _acceptingFeedback() {

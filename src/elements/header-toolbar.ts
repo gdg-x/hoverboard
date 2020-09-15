@@ -1,8 +1,10 @@
 import { PaperMenuButton } from '@polymer/paper-menu-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { dialogsActions, notificationsActions, userActions } from '../redux/actions';
-import { DIALOGS, NOTIFICATIONS_STATUS } from '../redux/constants';
+import { notificationsActions, userActions } from '../redux/actions';
+import { NOTIFICATIONS_STATUS } from '../redux/constants';
+import { closeDialog, openDialog } from '../redux/dialogs/actions';
+import { DIALOGS } from '../redux/dialogs/types';
 import { State, store } from '../redux/store';
 import { TempAny } from '../temp-any';
 import './shared-styles';
@@ -328,7 +330,7 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
   }
 
   signIn() {
-    dialogsActions.openDialog(DIALOGS.SIGNIN);
+    openDialog(DIALOGS.SIGNIN);
   }
 
   signOut() {
@@ -341,7 +343,7 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
 
   _authStatusChanged(signedIn) {
     if (this.dialogs.signin.isOpened) {
-      dialogsActions.closeDialog(DIALOGS.SIGNIN);
+      closeDialog(DIALOGS.SIGNIN);
     }
   }
 

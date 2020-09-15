@@ -7,8 +7,8 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import 'plastic-image';
 import { ReduxMixin } from '../../mixins/redux-mixin';
-import { dialogsActions } from '../../redux/actions';
-import { DIALOGS } from '../../redux/constants';
+import { closeDialog } from '../../redux/dialogs/actions';
+import { DIALOGS } from '../../redux/dialogs/types';
 import { State } from '../../redux/store';
 import { toggleVideoDialog } from '../../redux/ui/actions';
 import { getVariableColor } from '../../utils/functions';
@@ -168,7 +168,7 @@ class PreviousSpeakerDetails extends ReduxMixin(
   }
 
   _close() {
-    dialogsActions.closeDialog(DIALOGS.PREVIOUS_SPEAKER);
+    closeDialog(DIALOGS.PREVIOUS_SPEAKER);
   }
 
   _getCloseBtnIcon(isLaptopViewport) {

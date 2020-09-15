@@ -1,12 +1,12 @@
+import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
 import '@polymer/paper-button';
 import '@polymer/paper-input/paper-textarea';
 import { html, PolymerElement } from '@polymer/polymer';
+import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import '@radi-cho/star-rating';
 import { ReduxMixin } from '../../mixins/redux-mixin';
-import { dialogsActions } from '../../redux/actions';
-import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
-import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
-import { DIALOGS } from '../../redux/constants';
+import { closeDialog } from '../../redux/dialogs/actions';
+import { DIALOGS } from '../../redux/dialogs/types';
 import '../shared-styles';
 
 class FeedbackDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], PolymerElement)) {
@@ -65,7 +65,7 @@ class FeedbackDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
   }
 
   _close() {
-    dialogsActions.closeDialog(DIALOGS.FEEDBACK);
+    closeDialog(DIALOGS.FEEDBACK);
   }
 }
 

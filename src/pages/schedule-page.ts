@@ -13,8 +13,9 @@ import '../elements/sticky-element';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SessionsHoC } from '../mixins/sessions-hoc';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
-import { dialogsActions, routingActions, scheduleActions, sessionsActions } from '../redux/actions';
-import { DIALOGS } from '../redux/constants';
+import { routingActions, scheduleActions, sessionsActions } from '../redux/actions';
+import { closeDialog, openDialog } from '../redux/dialogs/actions';
+import { DIALOGS } from '../redux/dialogs/types';
 import { State, store } from '../redux/store';
 import { parseQueryParamsFilters } from '../utils/functions';
 
@@ -239,9 +240,9 @@ class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) 
     if (sessions && sessions.length) {
       requestAnimationFrame(() => {
         if (active && id) {
-          dialogsActions.openDialog(DIALOGS.SESSION, this.sessionsMap[id[0]]);
+          openDialog(DIALOGS.SESSION, this.sessionsMap[id[0]]);
         } else {
-          this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
+          this.isSessionDialogOpened && closeDialog(DIALOGS.SESSION);
         }
       });
     }

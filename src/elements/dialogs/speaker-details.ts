@@ -8,8 +8,8 @@ import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import 'plastic-image';
 import { ReduxMixin } from '../../mixins/redux-mixin';
 import { SessionsHoC } from '../../mixins/sessions-hoc';
-import { dialogsActions } from '../../redux/actions';
-import { DIALOGS } from '../../redux/constants';
+import { closeDialog, openDialog } from '../../redux/dialogs/actions';
+import { DIALOGS } from '../../redux/dialogs/types';
 import { State } from '../../redux/store';
 import { getVariableColor, isEmpty } from '../../utils/functions';
 import '../shared-styles';
@@ -195,7 +195,7 @@ class SpeakerDetails extends SessionsHoC(
   }
 
   _close() {
-    dialogsActions.closeDialog(DIALOGS.SPEAKER);
+    closeDialog(DIALOGS.SPEAKER);
     history.back();
   }
 
@@ -204,8 +204,8 @@ class SpeakerDetails extends SessionsHoC(
     const sessionData = this.sessionsMap[sessionId];
 
     if (!sessionData) return;
-    dialogsActions.openDialog(DIALOGS.SESSION, sessionData);
-    dialogsActions.closeDialog(DIALOGS.SPEAKER);
+    openDialog(DIALOGS.SESSION, sessionData);
+    closeDialog(DIALOGS.SPEAKER);
   }
 
   _getCloseBtnIcon(isLaptopViewport) {

@@ -12,8 +12,8 @@ import '../elements/shared-styles';
 import '../elements/text-truncate';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
-import { dialogsActions } from '../redux/actions';
-import { DIALOGS } from '../redux/constants';
+import { closeDialog, openDialog } from '../redux/dialogs/actions';
+import { DIALOGS } from '../redux/dialogs/types';
 import { State } from '../redux/store';
 import { generateClassName, parseQueryParamsFilters } from '../utils/functions';
 
@@ -341,10 +341,10 @@ class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
       requestAnimationFrame(() => {
         if (active && id) {
           const speakerData = speakersMap[id];
-          speakerData && dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
+          speakerData && openDialog(DIALOGS.SPEAKER, speakerData);
         } else {
-          this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
-          this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
+          this.isSpeakerDialogOpened && closeDialog(DIALOGS.SPEAKER);
+          this.isSessionDialogOpened && closeDialog(DIALOGS.SESSION);
         }
       });
     }
