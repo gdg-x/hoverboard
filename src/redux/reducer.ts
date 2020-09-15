@@ -1,4 +1,4 @@
-import { initialState } from './initial-state';
+import { combineReducers } from 'redux';
 import { blogReducer } from './reducers/blog';
 import { dialogsReducer } from './reducers/dialogs';
 import { feedbackReducer } from './reducers/feedback';
@@ -19,26 +19,24 @@ import { uiReducer } from './reducers/ui';
 import { userReducer } from './reducers/user';
 import { videosReducer } from './reducers/videos';
 
-export const appReducer = (state = initialState, action) => {
-  return {
-    ui: uiReducer(state.ui, action),
-    routing: routingReducer(state.routing, action),
-    dialogs: dialogsReducer(state.dialogs, action),
-    tickets: ticketsReducer(state.tickets, action),
-    partners: partnersReducer(state.partners, action),
-    feedback: feedbackReducer(state.feedback, action),
-    videos: videosReducer(state.videos, action),
-    blog: blogReducer(state.blog, action),
-    speakers: speakersReducer(state.speakers, action),
-    previousSpeakers: previousSpeakersReducer(state.previousSpeakers, action),
-    sessions: sessionsReducer(state.sessions, action),
-    schedule: scheduleReducer(state.schedule, action),
-    gallery: galleryReducer(state.gallery, action),
-    team: teamReducer(state.team, action),
-    user: userReducer(state.user, action),
-    subscribed: subscribeReducer(state.subscribed, action),
-    toast: toastReducer(state.toast, action),
-    notifications: notificationsReducer(state.notifications, action),
-    filters: filtersReducer(state.filters, action),
-  };
-};
+export const appReducer = combineReducers({
+  blog: blogReducer,
+  dialogs: dialogsReducer,
+  feedback: feedbackReducer,
+  filters: filtersReducer,
+  gallery: galleryReducer,
+  notifications: notificationsReducer,
+  partners: partnersReducer,
+  previousSpeakers: previousSpeakersReducer,
+  routing: routingReducer,
+  schedule: scheduleReducer,
+  sessions: sessionsReducer,
+  speakers: speakersReducer,
+  subscribed: subscribeReducer,
+  team: teamReducer,
+  tickets: ticketsReducer,
+  toast: toastReducer,
+  ui: uiReducer,
+  user: userReducer,
+  videos: videosReducer,
+});
