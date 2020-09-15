@@ -1,6 +1,5 @@
+import { Feedback } from './feedback';
 import { allKeys } from './utils';
-
-type Feedback = import('./feedback').Feedback;
 
 describe('feedback', () => {
   it('matches the shape of the default data', () => {

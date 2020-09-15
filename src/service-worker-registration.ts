@@ -1,9 +1,10 @@
 import { error } from './console';
 import { toastActions } from './redux/actions';
 import * as settings from '@polymer/polymer/lib/utils/settings';
+import { TempAny } from './temp-any';
 
 const SW_URL = 'service-worker.js';
-const SCOPE = (settings as import('./temp-any').TempAny).rootPath;
+const SCOPE = (settings as TempAny).rootPath;
 
 export const registerServiceWorker = () => {
   if ('serviceWorker' in navigator) {

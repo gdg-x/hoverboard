@@ -1,4 +1,4 @@
-type Logo = import('./logo').Logo;
+import { Logo } from './logo';
 
 export interface Partner {
   logos: Logo[];

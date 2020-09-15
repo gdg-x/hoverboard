@@ -1,9 +1,10 @@
+import { TempAny } from '../../temp-any';
 import { SIGN_IN, WIPE_PREVIOUS_FEEDBACK } from '../constants';
 import { store } from '../store';
 
 export const helperActions = {
   storeUser: (user?) => {
-    let userToStore: import('../../temp-any').TempAny = { signedIn: false };
+    let userToStore: TempAny = { signedIn: false };
 
     if (user) {
       const { uid, displayName, photoURL, refreshToken, actualProvider, pendingCredential } = user;

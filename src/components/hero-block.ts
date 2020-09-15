@@ -1,5 +1,5 @@
 import '@power-elements/lazy-image';
-import { css, customElement, html, property } from 'lit-element';
+import { css, customElement, html, property, PropertyValues } from 'lit-element';
 import { styleMap } from 'lit-html/directives/style-map';
 import { uiActions } from '../redux/actions';
 import { ThemedElement } from './themed-element';
@@ -119,7 +119,7 @@ export class HeroBlock extends ThemedElement {
     `;
   }
 
-  updated(changedProperties: import('lit-element').PropertyValues) {
+  updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
     if (this.active) {
       uiActions.setHeroSettings({

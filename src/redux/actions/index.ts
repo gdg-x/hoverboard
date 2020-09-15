@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 import { blogActions } from './blog';
 import { dialogsActions } from './dialogs';
 import { feedbackActions } from './feedback';
@@ -43,6 +44,6 @@ export {
 // TODO: Remove type
 declare global {
   interface Window {
-    firebase: typeof import('firebase');
+    firebase: typeof firebase;
   }
 }

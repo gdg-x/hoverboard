@@ -7,7 +7,8 @@ import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { dialogsActions, previousSpeakersActions } from '../redux/actions';
 import { DIALOGS } from '../redux/constants';
-import { store } from '../redux/store';
+import { State, store } from '../redux/store';
+import { TempAny } from '../temp-any';
 
 class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
   active = false;
@@ -228,7 +229,7 @@ class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: import('../redux/store').State) {
+  stateChanged(state: State) {
     this.setProperties({
       isDialogOpened: state.dialogs.previousSpeaker.isOpened,
       speakers: state.previousSpeakers.list,
@@ -281,7 +282,7 @@ class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
     return active && !isDialogOpened;
   }
 
-  _getYears(sessions: { [key: number]: import('../temp-any').TempAny }) {
+  _getYears(sessions: { [key: number]: TempAny }) {
     return Object.keys(sessions || {})
       .map(Number)
       .sort((a, b) => b - a)

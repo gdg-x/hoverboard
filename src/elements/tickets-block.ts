@@ -1,7 +1,9 @@
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
+import { TempAny } from '../../functions/src/temp-any';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { State } from '../redux/store';
 import './content-loader';
 import './hoverboard-icons';
 import './shared-styles';
@@ -223,7 +225,7 @@ class TicketsBlock extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: import('../redux/store').State) {
+  stateChanged(state: State) {
     this.setProperties({
       viewport: state.ui.viewport,
       tickets: state.tickets.list,
@@ -234,7 +236,7 @@ class TicketsBlock extends ReduxMixin(PolymerElement) {
 
   connectedCallback() {
     super.connectedCallback();
-    (window as import('../temp-any').TempAny).HOVERBOARD.Elements.Tickets = this;
+    (window as TempAny).HOVERBOARD.Elements.Tickets = this;
   }
 
   _ticketsChanged(tickets) {

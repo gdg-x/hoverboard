@@ -1,4 +1,4 @@
-type Day = import('./day').Day;
+import { Day } from './day';
 
 export interface Schedule {
   [key: string]: Day;

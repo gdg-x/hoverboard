@@ -13,6 +13,8 @@ import '../elements/subscribe-block';
 import '../elements/tickets-block';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { uiActions } from '../redux/actions';
+import { State } from '../redux/store';
+import { TempAny } from '../temp-any';
 import { scrollToY } from '../utils/scrolling';
 
 class HomePage extends ReduxMixin(PolymerElement) {
@@ -271,7 +273,7 @@ class HomePage extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: import('../redux/store').State) {
+  stateChanged(state: State) {
     this.setProperties({
       viewport: state.ui.viewport,
     });
@@ -287,7 +289,7 @@ class HomePage extends ReduxMixin(PolymerElement) {
   }
 
   _scrollToTickets() {
-    const Elements = (window as import('../temp-any').TempAny).HOVERBOARD.Elements;
+    const Elements = (window as TempAny).HOVERBOARD.Elements;
     const toolbarHeight = Elements.HeaderToolbar.getBoundingClientRect().height - 1;
     const ticketsBlockPositionY = Elements.Tickets.getBoundingClientRect().top - toolbarHeight;
     scrollToY(ticketsBlockPositionY, 600, 'easeInOutSine');

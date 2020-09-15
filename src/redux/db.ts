@@ -1,7 +1,8 @@
+import firebase from 'firebase';
 // TODO: Remove type
 declare global {
   interface Window {
-    firebase: typeof import('firebase');
+    firebase: typeof firebase;
   }
 }
 

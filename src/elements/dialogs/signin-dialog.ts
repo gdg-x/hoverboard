@@ -4,6 +4,7 @@ import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import { ReduxMixin } from '../../mixins/redux-mixin';
 import { dialogsActions, helperActions, userActions } from '../../redux/actions';
 import { DIALOGS } from '../../redux/constants';
+import { State } from '../../redux/store';
 import '../hoverboard-icons';
 import '../shared-styles';
 
@@ -110,7 +111,7 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
     };
   }
 
-  stateChanged(state: import('../../redux/store').State) {
+  stateChanged(state: State) {
     this.setProperties({
       user: state.user,
     });

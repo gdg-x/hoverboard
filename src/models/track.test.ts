@@ -1,7 +1,6 @@
 import data from '../../docs/default-firebase-data.json';
+import { Track } from './track';
 import { allKeys } from './utils';
-
-type Track = import('./track').Track;
 
 describe('track', () => {
   it('matches the shape of the default data', () => {

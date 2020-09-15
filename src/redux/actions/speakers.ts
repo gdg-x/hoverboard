@@ -1,3 +1,4 @@
+import { TempAny } from '../../temp-any';
 import { FETCH_SPEAKERS, FETCH_SPEAKERS_FAILURE, FETCH_SPEAKERS_SUCCESS } from '../constants';
 import { db } from '../db';
 
@@ -19,7 +20,7 @@ export const speakersActions = {
     });
 
     return Promise.all([speakersPromise])
-      .then(([speakers]: import('../../temp-any').TempAny[][]) => {
+      .then(([speakers]: TempAny[][]) => {
         dispatch({
           type: FETCH_SPEAKERS_SUCCESS,
           payload: {

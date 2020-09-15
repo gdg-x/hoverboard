@@ -12,7 +12,7 @@ import { ReduxMixin } from '../../mixins/redux-mixin';
 import { SpeakersHoC } from '../../mixins/speakers-hoc';
 import { dialogsActions, sessionsActions, toastActions, uiActions } from '../../redux/actions';
 import { DIALOGS } from '../../redux/constants';
-import { store } from '../../redux/store';
+import { State, store } from '../../redux/store';
 import { getVariableColor } from '../../utils/functions';
 import '../feedback-block';
 import '../shared-styles';
@@ -195,7 +195,7 @@ class SessionDetails extends SpeakersHoC(
     };
   }
 
-  stateChanged(state: import('../../redux/store').State) {
+  stateChanged(state: State) {
     super.stateChanged(state);
     this.setProperties({
       featuredSessions: state.sessions.featured,

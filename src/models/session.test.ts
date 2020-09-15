@@ -1,7 +1,6 @@
 import data from '../../docs/default-firebase-data.json';
+import { Session } from './session';
 import { allKeys } from './utils';
-
-type Session = import('./session').Session;
 
 describe('session', () => {
   it('matches the shape of the default data', () => {

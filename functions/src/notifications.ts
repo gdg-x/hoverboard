@@ -1,5 +1,6 @@
-import * as functions from 'firebase-functions';
 import { firestore, messaging } from 'firebase-admin';
+import * as functions from 'firebase-functions';
+import { TempAny } from './temp-any';
 
 export const sendGeneralNotification = functions.firestore
   .document('/notifications/{timestamp}')
@@ -44,9 +45,7 @@ export const sendGeneralNotification = functions.firestore
           error.code === 'messaging/invalid-registration-token' ||
           error.code === 'messaging/registration-token-not-registered'
         ) {
-          const tokenRef = (tokensSnapshot as import('./temp-any').TempAny).ref.child(
-            tokens[index]
-          );
+          const tokenRef = (tokensSnapshot as TempAny).ref.child(tokens[index]);
           tokensToRemove.push(tokenRef.remove());
         }
       }

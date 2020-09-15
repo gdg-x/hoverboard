@@ -14,6 +14,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
 import { dialogsActions } from '../redux/actions';
 import { DIALOGS } from '../redux/constants';
+import { State } from '../redux/store';
 import { generateClassName, parseQueryParamsFilters } from '../utils/functions';
 
 class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
@@ -306,7 +307,7 @@ class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     };
   }
 
-  stateChanged(state: import('../redux/store').State) {
+  stateChanged(state: State) {
     super.stateChanged(state);
     this.setProperties({
       isSpeakerDialogOpened: state.dialogs.speaker.isOpened,

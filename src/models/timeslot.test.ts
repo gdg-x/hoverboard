@@ -1,7 +1,6 @@
 import data from '../../docs/default-firebase-data.json';
+import { Timeslot } from './timeslot';
 import { allKeys } from './utils';
-
-type Timeslot = import('./timeslot').Timeslot;
 
 describe('timeslot', () => {
   it('matches the shape of the default data', () => {

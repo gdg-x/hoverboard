@@ -5,7 +5,7 @@ import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { dialogsActions, partnersActions, toastActions } from '../redux/actions';
 import { DIALOGS } from '../redux/constants';
-import { store } from '../redux/store';
+import { State, store } from '../redux/store';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -116,7 +116,7 @@ class PartnersBlock extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: import('../redux/store').State) {
+  stateChanged(state: State) {
     return this.setProperties({
       viewport: state.ui.viewport,
       partners: state.partners.list,

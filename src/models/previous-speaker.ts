@@ -1,5 +1,5 @@
-type Social = import('./social').Social;
-type PreviousSession = import('./previous-session').PreviousSession;
+import { PreviousSession } from './previous-session';
+import { Social } from './social';
 
 export interface PreviousSpeaker {
   bio: string;

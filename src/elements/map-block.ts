@@ -2,6 +2,7 @@ import '@polymer/google-map';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { State } from '../redux/store';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -140,7 +141,7 @@ class MapBlock extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: import('../redux/store').State) {
+  stateChanged(state: State) {
     return this.setProperties({
       viewport: state.ui.viewport,
     });

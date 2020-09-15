@@ -4,7 +4,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { dialogsActions, subscribeActions } from '../redux/actions';
 import { DIALOGS } from '../redux/constants';
-import { store } from '../redux/store';
+import { State, store } from '../redux/store';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -101,7 +101,7 @@ class SubscribeBlock extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: import('../redux/store').State) {
+  stateChanged(state: State) {
     this.setProperties({
       subscribed: state.subscribed,
       user: state.user,

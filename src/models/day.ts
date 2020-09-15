@@ -1,5 +1,5 @@
-type Timeslot = import('./timeslot').Timeslot;
-type Track = import('./track').Track;
+import { Timeslot } from './timeslot';
+import { Track } from './track';
 
 export interface Day {
   dateReadable: string;

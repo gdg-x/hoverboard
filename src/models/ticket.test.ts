@@ -1,7 +1,6 @@
 import data from '../../docs/default-firebase-data.json';
+import { Ticket } from './ticket';
 import { allKeys } from './utils';
-
-type Ticket = import('./ticket').Ticket;
 
 describe('ticket', () => {
   it('matches the shape of the default data', () => {

@@ -1,5 +1,5 @@
 import { sessionsActions } from '../redux/actions';
-import { store } from '../redux/store';
+import { State, store } from '../redux/store';
 
 /* @polymerMixin */
 export const SessionsHoC = (subclass) =>
@@ -21,7 +21,7 @@ export const SessionsHoC = (subclass) =>
       };
     }
 
-    stateChanged(state: import('../redux/store').State) {
+    stateChanged(state: State) {
       super.stateChanged(state);
       this.setProperties({
         sessions: state.sessions.list,

@@ -1,7 +1,6 @@
 import data from '../../docs/default-firebase-data.json';
+import { Social } from './social';
 import { allKeys } from './utils';
-
-type Social = import('./social').Social;
 
 describe('speaker', () => {
   it('matches the shape of the default data', () => {

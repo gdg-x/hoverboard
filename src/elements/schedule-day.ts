@@ -1,4 +1,5 @@
 import { html, PolymerElement } from '@polymer/polymer';
+import { TempAny } from '../temp-any';
 import { generateClassName } from '../utils/functions';
 import { offsetTop, scrollToY } from '../utils/scrolling';
 import './session-element';
@@ -173,7 +174,7 @@ class ScheduleDay extends PolymerElement {
       const selectedTime = window.location.hash.slice(1);
       if (selectedTime) {
         requestAnimationFrame(() => {
-          const Elements = (window as import('../temp-any').TempAny).HOVERBOARD.Elements;
+          const Elements = (window as TempAny).HOVERBOARD.Elements;
           const targetElement = this.shadowRoot.querySelector(`[id="${selectedTime}"]`);
           const offset = offsetTop(targetElement);
           const toolbarHeight = Elements.HeaderToolbar.getBoundingClientRect().height - 1;

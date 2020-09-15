@@ -5,7 +5,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { uiActions, videosActions } from '../redux/actions';
-import { store } from '../redux/store';
+import { State, store } from '../redux/store';
 import './shared-animations';
 import './shared-styles';
 
@@ -221,7 +221,7 @@ class FeaturedVideos extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: import('../redux/store').State) {
+  stateChanged(state: State) {
     return this.setProperties({
       videos: state.videos.list,
       videosFetching: state.videos.fetching,

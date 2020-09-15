@@ -9,6 +9,7 @@ import 'plastic-image';
 import { ReduxMixin } from '../../mixins/redux-mixin';
 import { dialogsActions, uiActions } from '../../redux/actions';
 import { DIALOGS } from '../../redux/constants';
+import { State } from '../../redux/store';
 import { getVariableColor } from '../../utils/functions';
 import '../shared-styles';
 import '../text-truncate';
@@ -154,7 +155,7 @@ class PreviousSpeakerDetails extends ReduxMixin(
     };
   }
 
-  stateChanged(state: import('../../redux/store').State) {
+  stateChanged(state: State) {
     this.setProperties({
       viewport: state.ui.viewport,
     });

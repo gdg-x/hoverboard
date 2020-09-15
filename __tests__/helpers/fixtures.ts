@@ -1,7 +1,8 @@
-import { render } from 'lit-html';
+import { LitElement } from 'lit-element';
+import { render, TemplateResult } from 'lit-html';
 
-export const fixture = async <T extends import('lit-element').LitElement>(
-  html: import('lit-html').TemplateResult
+export const fixture = async <T extends LitElement>(
+  html: TemplateResult
 ): Promise<{ element: T; shadowRoot: ShadowRoot; container: HTMLDivElement }> => {
   render(html, document.body);
   const element = document.body.firstElementChild as T;

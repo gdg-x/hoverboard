@@ -1,7 +1,6 @@
 import data from '../../docs/default-firebase-data.json';
+import { Speaker } from './speaker';
 import { allKeys } from './utils';
-
-type Speaker = import('./speaker').Speaker;
 
 describe('speaker', () => {
   it('matches the shape of the default data', () => {

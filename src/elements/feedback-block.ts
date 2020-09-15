@@ -4,7 +4,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import '@radi-cho/star-rating';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { feedbackActions, toastActions } from '../redux/actions';
-import { store } from '../redux/store';
+import { State, store } from '../redux/store';
 
 class Feedback extends ReduxMixin(PolymerElement) {
   static get template() {
@@ -183,7 +183,7 @@ class Feedback extends ReduxMixin(PolymerElement) {
     return 'feedback-block';
   }
 
-  stateChanged(state: import('../redux/store').State) {
+  stateChanged(state: State) {
     return this.setProperties({
       feedbackState: state.feedback,
       feedbackDeleting: state.feedback.deleting,

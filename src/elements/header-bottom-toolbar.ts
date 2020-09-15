@@ -1,6 +1,8 @@
 import '@polymer/iron-location/iron-location';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { State } from '../redux/store';
+import { TempAny } from '../temp-any';
 import './content-loader';
 import './shared-styles';
 
@@ -112,7 +114,7 @@ class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: import('../redux/store').State) {
+  stateChanged(state: State) {
     return this.setProperties({
       route: state.routing,
       schedule: state.schedule,
@@ -126,7 +128,7 @@ class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
 
   connectedCallback() {
     super.connectedCallback();
-    (window as import('../temp-any').TempAny).HOVERBOARD.Elements.StickyHeaderToolbar = this;
+    (window as TempAny).HOVERBOARD.Elements.StickyHeaderToolbar = this;
   }
 
   _scheduleChanged(schedule) {

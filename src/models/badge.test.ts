@@ -1,7 +1,6 @@
 import data from '../../docs/default-firebase-data.json';
+import { Badge } from './badge';
 import { allKeys } from './utils';
-
-type Badge = import('./badge').Badge;
 
 describe('badge', () => {
   it('matches the shape of the default data', () => {
