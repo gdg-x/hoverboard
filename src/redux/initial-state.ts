@@ -1,3 +1,4 @@
+import { initialBlogState } from './blog/state';
 import { DIALOGS, NOTIFICATIONS_STATUS } from './constants';
 import { initialUiState } from './ui/state';
 
@@ -51,12 +52,7 @@ export const initialState = {
     deleting: false,
     deletingError: null,
   },
-  blog: {
-    fetching: false,
-    fetchingError: null,
-    list: [],
-    obj: {},
-  },
+  blog: initialBlogState,
   partners: {
     fetching: false,
     fetchingError: null,

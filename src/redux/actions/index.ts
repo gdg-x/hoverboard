@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import { blogActions } from './blog';
 import { dialogsActions } from './dialogs';
 import { feedbackActions } from './feedback';
 import { galleryActions } from './gallery';
@@ -19,7 +18,6 @@ import { userActions } from './user';
 import { videosActions } from './videos';
 
 export {
-  blogActions,
   dialogsActions,
   feedbackActions,
   galleryActions,

@@ -7,7 +7,7 @@ import 'plastic-image';
 import '../elements/posts-list';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { blogActions } from '../redux/actions';
+import { fetchBlogList } from '../redux/blog/actions';
 import { State, store } from '../redux/store';
 import { getDate } from '../utils/functions';
 
@@ -178,7 +178,7 @@ class PostPage extends ReduxMixin(PolymerElement) {
   connectedCallback() {
     super.connectedCallback();
     if (!this.postsFetching && (!this.postsList || !this.postsList.length)) {
-      store.dispatch(blogActions.fetchList());
+      store.dispatch(fetchBlogList());
     }
   }
 

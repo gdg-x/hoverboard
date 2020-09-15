@@ -1,5 +1,5 @@
+import { blogReducer } from './blog/reducers';
 import { initialState } from './initial-state';
-import { blogReducer } from './reducers/blog';
 import { dialogsReducer } from './reducers/dialogs';
 import { feedbackReducer } from './reducers/feedback';
 import { filtersReducer } from './reducers/filters';

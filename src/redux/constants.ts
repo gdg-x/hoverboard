@@ -52,11 +52,6 @@ export const FETCH_VIDEOS = 'app/Videos/FETCH_VIDEOS';
 export const FETCH_VIDEOS_FAILURE = 'app/Videos/FETCH_VIDEOS_FAILURE';
 export const FETCH_VIDEOS_SUCCESS = 'app/Videos/FETCH_VIDEOS_SUCCESS';
 
-// blog
-export const FETCH_BLOG_LIST = 'app/Blog/FETCH_BLOG_LIST';
-export const FETCH_BLOG_LIST_FAILURE = 'app/Blog/FETCH_BLOG_LIST_FAILURE';
-export const FETCH_BLOG_LIST_SUCCESS = 'app/Blog/FETCH_BLOG_LIST_SUCCESS';
-
 // speakers
 export const FETCH_SPEAKERS = 'app/Speakers/FETCH_SPEAKERS';
 export const FETCH_SPEAKERS_FAILURE = 'app/Speakers/FETCH_SPEAKERS_FAILURE';
