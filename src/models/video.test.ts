@@ -1,7 +1,6 @@
 import data from '../../docs/default-firebase-data.json';
 import { allKeys } from './utils';
-
-type Video = import('./video').Video;
+import { Video } from './video';
 
 describe('video', () => {
   it('matches the shape of the default data', () => {

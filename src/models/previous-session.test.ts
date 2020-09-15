@@ -1,7 +1,6 @@
 import data from '../../docs/default-firebase-data.json';
+import { PreviousSession } from './previous-session';
 import { allKeys } from './utils';
-
-type PreviousSession = import('./previous-session').PreviousSession;
 
 describe('speaker', () => {
   it('matches the shape of the default data', () => {

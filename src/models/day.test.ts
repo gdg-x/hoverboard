@@ -1,7 +1,6 @@
 import data from '../../docs/default-firebase-data.json';
+import { Day } from './day';
 import { allKeys } from './utils';
-
-type Day = import('./day').Day;
 
 describe('day', () => {
   it('matches the shape of the default data', () => {

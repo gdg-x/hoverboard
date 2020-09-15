@@ -1,6 +1,5 @@
+import { Toast } from './toast';
 import { allKeys } from './utils';
-
-type Toast = import('./toast').Toast;
 
 describe('toast', () => {
   it('matches the shape of the default data', () => {

@@ -1,3 +1,4 @@
+import { Hero } from '../../models/hero';
 import { SET_HERO_SETTINGS, SET_VIEWPORT_SIZE, TOGGLE_VIDEO_DIALOG } from '../constants';
 import { store } from '../store';
 
@@ -21,7 +22,7 @@ export const uiActions = {
       value,
     });
   },
-  setHeroSettings: (value: import('../../models/hero').Hero) => {
+  setHeroSettings: (value: Hero) => {
     store.dispatch({
       type: SET_HERO_SETTINGS,
       value,

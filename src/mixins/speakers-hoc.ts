@@ -1,5 +1,5 @@
 import { speakersActions } from '../redux/actions';
-import { store } from '../redux/store';
+import { State, store } from '../redux/store';
 
 /* @polymerMixin */
 export const SpeakersHoC = (subclass) =>
@@ -19,7 +19,7 @@ export const SpeakersHoC = (subclass) =>
       };
     }
 
-    stateChanged(state: import('../redux/store').State) {
+    stateChanged(state: State) {
       super.stateChanged(state);
       this.setProperties({
         speakers: state.speakers.list,

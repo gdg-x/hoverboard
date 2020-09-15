@@ -1,8 +1,10 @@
+import { PaperMenuButton } from '@polymer/paper-menu-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { dialogsActions, notificationsActions, userActions } from '../redux/actions';
 import { DIALOGS, NOTIFICATIONS_STATUS } from '../redux/constants';
-import { store } from '../redux/store';
+import { State, store } from '../redux/store';
+import { TempAny } from '../temp-any';
 import './shared-styles';
 
 class HeaderToolbar extends ReduxMixin(PolymerElement) {
@@ -293,7 +295,7 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: import('../redux/store').State) {
+  stateChanged(state: State) {
     return this.setProperties({
       dialogs: state.dialogs,
       notifications: state.notifications,
@@ -311,7 +313,7 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
 
   connectedCallback() {
     super.connectedCallback();
-    (window as import('../temp-any').TempAny).HOVERBOARD.Elements.HeaderToolbar = this;
+    (window as TempAny).HOVERBOARD.Elements.HeaderToolbar = this;
     this._onScroll = this._onScroll.bind(this);
     window.addEventListener('scroll', this._onScroll);
     this._onScroll();
@@ -366,7 +368,7 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
 
   _closeNotificationMenu() {
     // TODO: Remove type cast
-    (this.$.notificationsMenu as import('@polymer/paper-menu-button').PaperMenuButton).close();
+    (this.$.notificationsMenu as PaperMenuButton).close();
   }
 
   _isAccountIconHidden(userSignedIn, isTabletPlus) {

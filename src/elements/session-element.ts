@@ -5,6 +5,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { dialogsActions, sessionsActions, toastActions } from '../redux/actions';
 import { DIALOGS } from '../redux/constants';
 import { store } from '../redux/store';
+import { TempAny } from '../temp-any';
 import { getVariableColor, toggleQueryParam } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
@@ -227,8 +228,8 @@ class SessionElement extends ReduxMixin(PolymerElement) {
   private user: { uid?: string; signedIn?: boolean } = {};
   private session: {
     id?: string;
-    day?: import('../temp-any').TempAny;
-    startTime?: import('../temp-any').TempAny;
+    day?: TempAny;
+    startTime?: TempAny;
   } = {};
   private featuredSessions = {};
   private queryParams: string;

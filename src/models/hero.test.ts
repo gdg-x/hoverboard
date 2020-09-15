@@ -1,6 +1,5 @@
+import { Hero } from './hero';
 import { allKeys } from './utils';
-
-type Hero = import('./hero').Hero;
 
 describe('hero', () => {
   it('matches the shape of the default data', () => {

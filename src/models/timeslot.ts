@@ -1,4 +1,4 @@
-type Time = import('./time').Time;
+import { Time } from './time';
 
 export interface Timeslot {
   endTime: string;

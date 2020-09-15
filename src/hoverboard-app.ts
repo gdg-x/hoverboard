@@ -56,8 +56,9 @@ import {
   uiActions,
   userActions,
 } from './redux/actions';
-import { store } from './redux/store';
+import { State, store } from './redux/store';
 import { registerServiceWorker } from './service-worker-registration';
+import { TempAny } from './temp-any';
 import { scrollToY } from './utils/scrolling';
 
 setFastDomIf(true);
@@ -321,7 +322,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
   }
 
   private ui = {};
-  private addToHomeScreen: import('./temp-any').TempAny;
+  private addToHomeScreen: TempAny;
   private drawerOpened = false;
   private route: { route?: string } = {};
   private dialogs = {};
@@ -388,7 +389,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
     ];
   }
 
-  stateChanged(state: import('./redux/store').State) {
+  stateChanged(state: State) {
     this.setProperties({
       dialogs: state.dialogs,
       notifications: state.notifications,

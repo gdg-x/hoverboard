@@ -1,5 +1,5 @@
-type Badge = import('./badge').Badge;
-type Social = import('./social').Social;
+import { Badge } from './badge';
+import { Social } from './social';
 
 export interface Speaker {
   badges?: Badge[];

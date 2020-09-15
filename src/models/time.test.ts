@@ -1,7 +1,6 @@
 import data from '../../docs/default-firebase-data.json';
+import { Time } from './time';
 import { allKeys } from './utils';
-
-type Time = import('./time').Time;
 
 describe('time', () => {
   it('matches the shape of the default data', () => {

@@ -6,7 +6,7 @@ import 'plastic-image';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { teamActions } from '../redux/actions';
-import { store } from '../redux/store';
+import { State, store } from '../redux/store';
 
 class TeamPage extends ReduxMixin(PolymerElement) {
   active = false;
@@ -200,7 +200,7 @@ class TeamPage extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: import('../redux/store').State) {
+  stateChanged(state: State) {
     this.setProperties({
       team: state.team.list,
       teamFetching: state.team.fetching,

@@ -1,4 +1,4 @@
-type Social = import('./social').Social;
+import { Social } from './social';
 
 export interface Member {
   name: string;

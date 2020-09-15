@@ -1,7 +1,6 @@
 import data from '../../docs/default-firebase-data.json';
+import { Logo } from './logo';
 import { allKeys } from './utils';
-
-type Logo = import('./logo').Logo;
 
 describe('logo', () => {
   it('matches the shape of the default data', () => {

@@ -15,7 +15,7 @@ import { SessionsHoC } from '../mixins/sessions-hoc';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
 import { dialogsActions, routingActions, scheduleActions, sessionsActions } from '../redux/actions';
 import { DIALOGS } from '../redux/constants';
-import { store } from '../redux/store';
+import { State, store } from '../redux/store';
 import { parseQueryParamsFilters } from '../utils/functions';
 
 class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) {
@@ -179,7 +179,7 @@ class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) 
     };
   }
 
-  stateChanged(state: import('../redux/store').State) {
+  stateChanged(state: State) {
     super.stateChanged(state);
     this.setProperties({
       featuredSessions: state.sessions.featured,

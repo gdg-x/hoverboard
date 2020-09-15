@@ -1,4 +1,5 @@
 import { html, PolymerElement } from '@polymer/polymer';
+import { TempAny } from '../temp-any';
 
 class StickyElement extends PolymerElement {
   static get template() {
@@ -56,7 +57,7 @@ class StickyElement extends PolymerElement {
 
   public active = false;
   private waiting = false;
-  private endScrollHandle: import('../temp-any').TempAny;
+  private endScrollHandle: TempAny;
 
   static get properties() {
     return {

@@ -2,6 +2,8 @@ import '@polymer/paper-toast/paper-toast';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { toastActions } from '../redux/actions';
+import { State } from '../redux/store';
+import { TempAny } from '../temp-any';
 import './shared-styles';
 
 class ToastElement extends ReduxMixin(PolymerElement) {
@@ -57,7 +59,7 @@ class ToastElement extends ReduxMixin(PolymerElement) {
     return 'toast-element';
   }
 
-  private toast: { action?: { callback?: import('../temp-any').TempAny } } = {};
+  private toast: { action?: { callback?: TempAny } } = {};
   private viewport = {};
 
   static get properties() {
@@ -71,7 +73,7 @@ class ToastElement extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: import('../redux/store').State) {
+  stateChanged(state: State) {
     this.setProperties({
       toast: state.toast,
       viewport: state.ui.viewport,

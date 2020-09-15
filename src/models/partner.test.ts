@@ -1,7 +1,6 @@
 import data from '../../docs/default-firebase-data.json';
+import { Partner } from './partner';
 import { allKeys } from './utils';
-
-type Partner = import('./partner').Partner;
 
 describe('partner', () => {
   it('matches the shape of the default data', () => {

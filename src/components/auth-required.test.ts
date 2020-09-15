@@ -6,10 +6,10 @@ import { dialogsActions } from '../redux/actions';
 import { SIGN_IN } from '../redux/constants';
 import { store } from '../redux/store';
 import './auth-required';
+import { AuthRequired } from './auth-required';
 
 jest.mock('../redux/actions');
 
-type AuthRequired = import('./auth-required').AuthRequired;
 const openDialog = mocked(dialogsActions.openDialog);
 
 describe('auth-required', () => {

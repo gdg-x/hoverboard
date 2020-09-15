@@ -1,9 +1,11 @@
-import { isAuthenticated, isUnauthenticated } from './user';
+import {
+  AuthenticatedUser,
+  isAuthenticated,
+  isUnauthenticated,
+  UnauthenticatedUser,
+  User,
+} from './user';
 import { allKeys } from './utils';
-
-type User = import('./user').User;
-type AuthenticatedUser = import('./user').AuthenticatedUser;
-type UnauthenticatedUser = import('./user').UnauthenticatedUser;
 
 const users: User[] = [
   {

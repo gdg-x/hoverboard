@@ -1,7 +1,6 @@
 import data from '../../docs/default-firebase-data.json';
+import { Post } from './post';
 import { allKeys } from './utils';
-
-type Post = import('./post').Post;
 
 describe('post', () => {
   it('matches the shape of the default data', () => {

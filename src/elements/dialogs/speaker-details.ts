@@ -10,6 +10,7 @@ import { ReduxMixin } from '../../mixins/redux-mixin';
 import { SessionsHoC } from '../../mixins/sessions-hoc';
 import { dialogsActions } from '../../redux/actions';
 import { DIALOGS } from '../../redux/constants';
+import { State } from '../../redux/store';
 import { getVariableColor, isEmpty } from '../../utils/functions';
 import '../shared-styles';
 import '../text-truncate';
@@ -181,7 +182,7 @@ class SpeakerDetails extends SessionsHoC(
     };
   }
 
-  stateChanged(state: import('../../redux/store').State) {
+  stateChanged(state: State) {
     super.stateChanged(state);
     this.setProperties({
       viewport: state.ui.viewport,

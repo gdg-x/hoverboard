@@ -4,10 +4,10 @@ import { mocked } from 'ts-jest/utils';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { uiActions } from '../redux/actions';
 import './hero-block';
+import { HeroBlock } from './hero-block';
 
 jest.mock('../redux/actions');
 
-type HeroBlock = import('./hero-block').HeroBlock;
 const setHeroSettings = mocked(uiActions.setHeroSettings);
 
 describe('hero-block', () => {

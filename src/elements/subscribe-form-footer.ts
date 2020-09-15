@@ -1,8 +1,9 @@
 import '@polymer/paper-input/paper-input';
+import { PaperInputElement } from '@polymer/paper-input/paper-input';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { subscribeActions } from '../redux/actions';
-import { store } from '../redux/store';
+import { State, store } from '../redux/store';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -105,7 +106,7 @@ class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: import('../redux/store').State) {
+  stateChanged(state: State) {
     this.setProperties({
       subscribed: state.subscribed,
     });
@@ -113,9 +114,7 @@ class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
 
   _subscribe() {
     this.validate = true;
-    const emailInput = this.shadowRoot.querySelector<
-      import('@polymer/paper-input/paper-input').PaperInputElement
-    >('#emailInput');
+    const emailInput = this.shadowRoot.querySelector<PaperInputElement>('#emailInput');
 
     if (!this.subscribed && emailInput.validate()) {
       store.dispatch(subscribeActions.subscribe({ email: this.email }));

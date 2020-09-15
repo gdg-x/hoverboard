@@ -37,6 +37,14 @@
     "jest/no-hooks": "off",
     "jest/prefer-expect-assertions": "off"
   },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": ["error", { "args": "none" }]
+      }
+    }
+  ],
   "globals": {
     "clients": true,
     "firebase": true,

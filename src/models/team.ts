@@ -1,4 +1,4 @@
-type Member = import('./member').Member;
+import { Member } from './member';
 
 export interface Team {
   members: Member[];
