@@ -1,6 +1,3 @@
-// ui
-export const SET_VIEWPORT_SIZE = 'app/Viewport/SET_VIEWPORT_SIZE';
-export const SET_HERO_SETTINGS = 'app/Hero/SET_HERO_SETTINGS';
 // router
 export const SET_ROUTE = 'app/Routing/SET_ROUTE';
 export const SET_SUB_ROUTE = 'app/Routing/SET_SUB_ROUTE';
@@ -54,9 +51,6 @@ export const ADD_POTENTIAL_PARTNER_SUCCESS = 'app/Partners/ADD_POTENTIAL_PARTNER
 export const FETCH_VIDEOS = 'app/Videos/FETCH_VIDEOS';
 export const FETCH_VIDEOS_FAILURE = 'app/Videos/FETCH_VIDEOS_FAILURE';
 export const FETCH_VIDEOS_SUCCESS = 'app/Videos/FETCH_VIDEOS_SUCCESS';
-
-// video dialog
-export const TOGGLE_VIDEO_DIALOG = 'app/Dialogs/TOGGLE_VIDEO_DIALOG';
 
 // blog
 export const FETCH_BLOG_LIST = 'app/Blog/FETCH_BLOG_LIST';

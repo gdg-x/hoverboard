@@ -4,8 +4,9 @@ import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { uiActions, videosActions } from '../redux/actions';
+import { videosActions } from '../redux/actions';
 import { State, store } from '../redux/store';
+import { toggleVideoDialog } from '../redux/ui/actions';
 import './shared-animations';
 import './shared-styles';
 
@@ -315,7 +316,7 @@ class FeaturedVideos extends ReduxMixin(PolymerElement) {
     const title = e.model.__data.block.title + presenters;
     const youtubeId = e.model.__data.block.youtubeId;
 
-    uiActions.toggleVideoDialog({
+    toggleVideoDialog({
       title: title,
       youtubeId: youtubeId,
       disableControls: true,

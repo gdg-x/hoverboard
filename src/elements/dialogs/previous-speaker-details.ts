@@ -7,9 +7,10 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import 'plastic-image';
 import { ReduxMixin } from '../../mixins/redux-mixin';
-import { dialogsActions, uiActions } from '../../redux/actions';
+import { dialogsActions } from '../../redux/actions';
 import { DIALOGS } from '../../redux/constants';
 import { State } from '../../redux/store';
+import { toggleVideoDialog } from '../../redux/ui/actions';
 import { getVariableColor } from '../../utils/functions';
 import '../shared-styles';
 import '../text-truncate';
@@ -189,7 +190,7 @@ class PreviousSpeakerDetails extends ReduxMixin(
 
   _openVideo(event) {
     event.model.session &&
-      uiActions.toggleVideoDialog({
+      toggleVideoDialog({
         title: event.model.session.title,
         youtubeId: event.model.session.videoId,
         disableControls: true,

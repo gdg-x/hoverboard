@@ -1,19 +1,8 @@
 import { DIALOGS, NOTIFICATIONS_STATUS } from './constants';
+import { initialUiState } from './ui/state';
 
 export const initialState = {
-  ui: {
-    viewport: {
-      isPhone: true,
-      isTabletPlus: false,
-    },
-    videoDialog: {
-      opened: false,
-      disableControls: false,
-      youtubeId: '',
-      title: '',
-    },
-    heroSettings: {},
-  },
+  ui: initialUiState,
   routing: {
     route: 'home',
     subRoute: '',

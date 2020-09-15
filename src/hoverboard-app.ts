@@ -53,10 +53,10 @@ import {
   routingActions,
   ticketsActions,
   toastActions,
-  uiActions,
   userActions,
 } from './redux/actions';
 import { State, store } from './redux/store';
+import { setViewportSize } from './redux/ui/actions';
 import { registerServiceWorker } from './service-worker-registration';
 import { TempAny } from './temp-any';
 import { scrollToY } from './utils/scrolling';
@@ -465,7 +465,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
   }
 
   _viewportChanged(isPhoneSize, isLaptopSize) {
-    uiActions.setViewportSize({
+    setViewportSize({
       isPhone: isPhoneSize,
       isTabletPlus: !isPhoneSize,
       isLaptopPlus: isLaptopSize,

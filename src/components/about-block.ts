@@ -1,5 +1,5 @@
-import { customElement, html, css } from 'lit-element';
-import { uiActions } from '../redux/actions';
+import { css, customElement, html } from 'lit-element';
+import { toggleVideoDialog } from '../redux/ui/actions';
 import { ThemedElement } from './themed-element';
 
 @customElement('about-block')
@@ -122,7 +122,7 @@ export class AboutBlock extends ThemedElement {
   }
 
   private playVideo() {
-    uiActions.toggleVideoDialog({
+    toggleVideoDialog({
       title: '{$  aboutBlock.callToAction.howItWas.title $}',
       youtubeId: '{$  aboutBlock.callToAction.howItWas.youtubeId $}',
       disableControls: true,

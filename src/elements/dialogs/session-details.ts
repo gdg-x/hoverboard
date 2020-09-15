@@ -10,9 +10,10 @@ import 'plastic-image';
 import '../../components/auth-required';
 import { ReduxMixin } from '../../mixins/redux-mixin';
 import { SpeakersHoC } from '../../mixins/speakers-hoc';
-import { dialogsActions, sessionsActions, toastActions, uiActions } from '../../redux/actions';
+import { dialogsActions, sessionsActions, toastActions } from '../../redux/actions';
 import { DIALOGS } from '../../redux/constants';
 import { State, store } from '../../redux/store';
+import { toggleVideoDialog } from '../../redux/ui/actions';
 import { getVariableColor } from '../../utils/functions';
 import '../feedback-block';
 import '../shared-styles';
@@ -229,7 +230,7 @@ class SessionDetails extends SpeakersHoC(
   }
 
   _openVideo() {
-    uiActions.toggleVideoDialog({
+    toggleVideoDialog({
       title: this.session.title,
       youtubeId: this.session.videoId,
       disableControls: true,

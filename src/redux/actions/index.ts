@@ -15,7 +15,6 @@ import { subscribeActions } from './subscribe';
 import { teamActions } from './team';
 import { ticketsActions } from './tickets';
 import { toastActions } from './toast';
-import { uiActions } from './ui';
 import { userActions } from './user';
 import { videosActions } from './videos';
 
@@ -36,7 +35,6 @@ export {
   teamActions,
   ticketsActions,
   toastActions,
-  uiActions,
   userActions,
   videosActions,
 };

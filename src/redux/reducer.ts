@@ -15,9 +15,9 @@ import { subscribeReducer } from './reducers/subscribe';
 import { teamReducer } from './reducers/team';
 import { ticketsReducer } from './reducers/tickets';
 import { toastReducer } from './reducers/toast';
-import { uiReducer } from './reducers/ui';
 import { userReducer } from './reducers/user';
 import { videosReducer } from './reducers/videos';
+import { uiReducer } from './ui/reducers';
 
 export const appReducer = (state = initialState, action) => {
   return {

@@ -2,17 +2,17 @@ import { getByText } from '@testing-library/dom';
 import { html } from 'lit-html';
 import { mocked } from 'ts-jest/utils';
 import { fixture } from '../../__tests__/helpers/fixtures';
-import { uiActions } from '../redux/actions';
+import { setHeroSettings } from '../redux/ui/actions';
 import './hero-block';
 import { HeroBlock } from './hero-block';
 
-jest.mock('../redux/actions');
+jest.mock('../redux/ui/actions');
 
-const setHeroSettings = mocked(uiActions.setHeroSettings);
+const mockSetHeroSettings = mocked(setHeroSettings);
 
 describe('hero-block', () => {
   beforeEach(() => {
-    setHeroSettings.mockClear();
+    mockSetHeroSettings.mockClear();
   });
 
   it('should be registered', () => {
@@ -82,8 +82,8 @@ describe('hero-block', () => {
       await fixture<HeroBlock>(
         html`<hero-block active background-image="/example.jpg"></hero-block>`
       );
-      expect(setHeroSettings).toHaveBeenCalledTimes(1);
-      expect(setHeroSettings).toHaveBeenCalledWith({
+      expect(mockSetHeroSettings).toHaveBeenCalledTimes(1);
+      expect(mockSetHeroSettings).toHaveBeenCalledWith({
         backgroundColor: '#fff',
         backgroundImage: '/example.jpg',
         fontColor: '#000',
@@ -93,7 +93,7 @@ describe('hero-block', () => {
 
     it('does not notify when inactive', async () => {
       await fixture<HeroBlock>(html`<hero-block background-image="/example.jpg"></hero-block>`);
-      expect(setHeroSettings).not.toHaveBeenCalled();
+      expect(mockSetHeroSettings).not.toHaveBeenCalled();
     });
   });
 });
