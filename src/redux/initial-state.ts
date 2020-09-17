@@ -1,6 +1,7 @@
 import { initialBlogState } from './blog/state';
 import { NOTIFICATIONS_STATUS } from './constants';
 import { initialDialogState } from './dialogs/state';
+import { initialFeedbackState } from './feedback/state';
 import { initialUiState } from './ui/state';
 
 export const initialState = {
@@ -20,14 +21,7 @@ export const initialState = {
     fetchingError: null,
     list: [],
   },
-  feedback: {
-    adding: false,
-    addingError: null,
-    fetching: false,
-    fetchingError: null,
-    deleting: false,
-    deletingError: null,
-  },
+  feedback: initialFeedbackState,
   blog: initialBlogState,
   partners: {
     fetching: false,

@@ -10,21 +10,6 @@ export const FETCH_TICKETS = 'app/Tickets/FETCH_TICKETS';
 export const FETCH_TICKETS_FAILURE = 'app/Tickets/FETCH_TICKETS_FAILURE';
 export const FETCH_TICKETS_SUCCESS = 'app/Tickets/FETCH_TICKETS_SUCCESS';
 
-// feedback
-export const FETCH_PREVIOUS_FEEDBACK = 'app/Feedback/FETCH_PREVIOUS_FEEDBACK';
-export const FETCH_PREVIOUS_FEEDBACK_FAILURE = 'app/Feedback/FETCH_PREVIOUS_FEEDBACK_FAILURE';
-export const FETCH_PREVIOUS_FEEDBACK_SUCCESS = 'app/Feedback/FETCH_PREVIOUS_FEEDBACK_SUCCESS';
-
-export const SEND_FEEDBACK = 'app/Feedback/SEND_FEEDBACK';
-export const SEND_FEEDBACK_FAILURE = 'app/Feedback/SEND_FEEDBACK_FAILURE';
-export const SEND_FEEDBACK_SUCCESS = 'app/Feedback/SEND_FEEDBACK_SUCCESS';
-
-export const DELETE_FEEDBACK = 'app/Feedback/DELETE_FEEDBACK';
-export const DELETE_FEEDBACK_FAILURE = 'app/Feedback/DELETE_FEEDBACK_FAILURE';
-export const DELETE_FEEDBACK_SUCCESS = 'app/Feedback/DELETE_FEEDBACK_SUCCESS';
-
-export const WIPE_PREVIOUS_FEEDBACK = 'app/Feedback/WIPE_PREVIOUS_FEEDBACK';
-
 // partners
 export const FETCH_PARTNERS = 'app/Partners/FETCH_PARTNERS';
 export const FETCH_PARTNERS_FAILURE = 'app/Partners/FETCH_PARTNERS_FAILURE';

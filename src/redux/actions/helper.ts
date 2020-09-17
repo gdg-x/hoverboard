@@ -1,5 +1,6 @@
 import { TempAny } from '../../temp-any';
-import { SIGN_IN, WIPE_PREVIOUS_FEEDBACK } from '../constants';
+import { SIGN_IN } from '../constants';
+import { WIPE_PREVIOUS_FEEDBACK } from '../feedback/types';
 import { store } from '../store';
 
 export const helperActions = {

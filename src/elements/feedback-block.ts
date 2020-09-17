@@ -3,7 +3,8 @@ import '@polymer/paper-input/paper-textarea';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@radi-cho/star-rating';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { feedbackActions, toastActions } from '../redux/actions';
+import { toastActions } from '../redux/actions';
+import { addComment, checkPreviousFeedback, deleteFeedback } from '../redux/feedback/actions';
 import { State, store } from '../redux/store';
 
 class Feedback extends ReduxMixin(PolymerElement) {
@@ -248,7 +249,7 @@ class Feedback extends ReduxMixin(PolymerElement) {
 
   _dispatchSendFeedback() {
     store.dispatch(
-      feedbackActions.addComment({
+      addComment({
         userId: this.user.uid,
         collection: this.collection,
         dbItem: this.dbItem,
@@ -261,7 +262,7 @@ class Feedback extends ReduxMixin(PolymerElement) {
 
   _dispatchPreviousFeedback() {
     store.dispatch(
-      feedbackActions.checkPreviousFeedback({
+      checkPreviousFeedback({
         collection: this.collection,
         dbItem: this.dbItem,
         userId: this.user.uid,
@@ -271,7 +272,7 @@ class Feedback extends ReduxMixin(PolymerElement) {
 
   _dispatchDeleteFeedback() {
     store.dispatch(
-      feedbackActions.deleteFeedback({
+      deleteFeedback({
         collection: this.collection,
         dbItem: this.dbItem,
         userId: this.user.uid,
