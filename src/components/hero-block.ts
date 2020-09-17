@@ -23,6 +23,7 @@ export class HeroBlock extends ThemedElement {
       css`
         :host {
           margin-top: -56px;
+          display: block;
           border-bottom: 1px solid var(--divider-color);
         }
 
@@ -49,7 +50,7 @@ export class HeroBlock extends ThemedElement {
           --lazy-image-fit: cover;
         }
 
-        .content {
+        .container {
           padding: 0;
           width: 100%;
           height: unset;
@@ -98,7 +99,7 @@ export class HeroBlock extends ThemedElement {
       >
         ${this.backgroundImage && this.image}
         <div class="hero-overlay" ?show="${!!this.backgroundImage}" fit></div>
-        <div class="content">
+        <div class="container">
           <div class="hero-content">
             <slot></slot>
           </div>
