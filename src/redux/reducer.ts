@@ -6,7 +6,7 @@ import { galleryReducer } from './gallery/reducers';
 import { initialState } from './initial-state';
 import { notificationsReducer } from './notifications/reducers';
 import { partnersReducer } from './partners/reducers';
-import { previousSpeakersReducer } from './reducers/previous-speakers';
+import { previousSpeakersReducer } from './previous-speakers/reducers';
 import { routingReducer } from './routing/reducers';
 import { scheduleReducer } from './reducers/schedule';
 import { sessionsReducer } from './reducers/sessions';

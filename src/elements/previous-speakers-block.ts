@@ -2,7 +2,7 @@ import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { previousSpeakersActions } from '../redux/actions';
+import { fetchPreviousSpeakersList } from '../redux/previous-speakers/actions';
 import { State, store } from '../redux/store';
 import { randomOrder } from '../utils/functions';
 import './shared-styles';
@@ -133,7 +133,7 @@ class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
   connectedCallback() {
     super.connectedCallback();
     if (!this.speakersFetching && (!this.speakers || !this.speakers.length)) {
-      store.dispatch(previousSpeakersActions.fetchList());
+      store.dispatch(fetchPreviousSpeakersList());
     }
   }
 
