@@ -2,10 +2,11 @@ import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { sessionsActions, toastActions } from '../redux/actions';
+import { sessionsActions } from '../redux/actions';
 import { openDialog } from '../redux/dialogs/actions';
 import { DIALOGS } from '../redux/dialogs/types';
 import { store } from '../redux/store';
+import { showToast } from '../redux/toast/actions';
 import { TempAny } from '../temp-any';
 import { getVariableColor, toggleQueryParam } from '../utils/functions';
 import './shared-styles';
@@ -287,7 +288,7 @@ class SessionElement extends ReduxMixin(PolymerElement) {
     event.preventDefault();
     event.stopPropagation();
     if (!this.user.signedIn) {
-      toastActions.showToast({
+      showToast({
         message: '{$ schedule.saveSessionsSignedOut $}',
         action: {
           title: 'Sign in',

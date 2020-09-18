@@ -3,8 +3,8 @@ import { SUBSCRIBE } from '../constants';
 import { db } from '../db';
 import { DIALOGS, SET_DIALOG_DATA } from '../dialogs/types';
 import { store } from '../store';
+import { showToast } from '../toast/actions';
 import { helperActions } from './helper';
-import { toastActions } from './toast';
 
 interface User {
   email: string;
@@ -29,7 +29,7 @@ export const subscribeActions = {
           type: SUBSCRIBE,
           subscribed: true,
         });
-        toastActions.showToast({ message: '{$ subscribeBlock.toast $}' });
+        showToast({ message: '{$ subscribeBlock.toast $}' });
       })
       .catch((error) => {
         dispatch({

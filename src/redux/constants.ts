@@ -1,9 +1,6 @@
 // router
 export const SET_ROUTE = 'app/Routing/SET_ROUTE';
 export const SET_SUB_ROUTE = 'app/Routing/SET_SUB_ROUTE';
-// toast
-export const SHOW_TOAST = 'app/Toast/SHOW_TOAST';
-export const HIDE_TOAST = 'app/Toast/HIDE_TOAST';
 
 // tickets
 export const FETCH_TICKETS = 'app/Tickets/FETCH_TICKETS';

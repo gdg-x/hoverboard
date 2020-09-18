@@ -3,10 +3,11 @@ import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { partnersActions, toastActions } from '../redux/actions';
+import { partnersActions } from '../redux/actions';
 import { closeDialog, openDialog, setDialogError } from '../redux/dialogs/actions';
 import { DIALOGS } from '../redux/dialogs/types';
 import { State, store } from '../redux/store';
+import { showToast } from '../redux/toast/actions';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -153,7 +154,7 @@ class PartnersBlock extends ReduxMixin(PolymerElement) {
         setDialogError(DIALOGS.SUBSCRIBE);
       } else {
         closeDialog(DIALOGS.SUBSCRIBE);
-        toastActions.showToast({ message: '{$ partnersBlock.toast $}' });
+        showToast({ message: '{$ partnersBlock.toast $}' });
       }
     }
   }

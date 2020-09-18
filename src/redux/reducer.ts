@@ -14,10 +14,10 @@ import { speakersReducer } from './reducers/speakers';
 import { subscribeReducer } from './reducers/subscribe';
 import { teamReducer } from './reducers/team';
 import { ticketsReducer } from './reducers/tickets';
-import { toastReducer } from './reducers/toast';
 import { userReducer } from './reducers/user';
-import { videosReducer } from './videos/reducers';
+import { toastReducer } from './toast/reducers';
 import { uiReducer } from './ui/reducers';
+import { videosReducer } from './videos/reducers';
 
 export const appReducer = (state = initialState, action) => {
   return {

@@ -10,10 +10,11 @@ import 'plastic-image';
 import '../../components/auth-required';
 import { ReduxMixin } from '../../mixins/redux-mixin';
 import { SpeakersHoC } from '../../mixins/speakers-hoc';
-import { sessionsActions, toastActions } from '../../redux/actions';
+import { sessionsActions } from '../../redux/actions';
 import { closeDialog, openDialog } from '../../redux/dialogs/actions';
 import { DIALOGS } from '../../redux/dialogs/types';
 import { State, store } from '../../redux/store';
+import { showToast } from '../../redux/toast/actions';
 import { toggleVideoDialog } from '../../redux/ui/actions';
 import { getVariableColor } from '../../utils/functions';
 import '../feedback-block';
@@ -243,7 +244,7 @@ class SessionDetails extends SpeakersHoC(
     event.preventDefault();
     event.stopPropagation();
     if (!this.user.signedIn) {
-      toastActions.showToast({
+      showToast({
         message: '{$ schedule.saveSessionsSignedOut $}',
         action: {
           title: 'Sign in',

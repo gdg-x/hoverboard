@@ -1,8 +1,8 @@
 import '@polymer/paper-toast/paper-toast';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { toastActions } from '../redux/actions';
 import { State } from '../redux/store';
+import { hideToast } from '../redux/toast/actions';
 import { TempAny } from '../temp-any';
 import './shared-styles';
 
@@ -82,13 +82,13 @@ class ToastElement extends ReduxMixin(PolymerElement) {
 
   _handleTap() {
     this.toast.action && this.toast.action.callback();
-    toastActions.hideToast();
+    hideToast();
   }
 
   _handleAction() {
     if (this.toast.action) {
       this.toast.action.callback();
-      toastActions.hideToast();
+      hideToast();
     }
   }
 }

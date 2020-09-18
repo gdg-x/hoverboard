@@ -48,14 +48,9 @@ import './pages/previous-speakers-page';
 import './pages/schedule-page';
 import './pages/speakers-page';
 import './pages/team-page';
-import {
-  notificationsActions,
-  routingActions,
-  ticketsActions,
-  toastActions,
-  userActions,
-} from './redux/actions';
+import { notificationsActions, routingActions, ticketsActions, userActions } from './redux/actions';
 import { State, store } from './redux/store';
+import { showToast } from './redux/toast/actions';
 import { setViewportSize } from './redux/ui/actions';
 import { registerServiceWorker } from './service-worker-registration';
 import { TempAny } from './temp-any';
@@ -421,7 +416,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
     window.addEventListener('element-sticked', this._toggleHeaderShadow);
     this.$.drawer.addEventListener('opened-changed', this._toggleDrawer);
     window.addEventListener('offline', () => {
-      toastActions.showToast({
+      showToast({
         message: '{$ offlineMessage $}',
       });
     });

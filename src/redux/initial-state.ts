@@ -4,6 +4,7 @@ import { initialDialogState } from './dialogs/state';
 import { initialFeedbackState } from './feedback/state';
 import { initialFiltersState } from './filters/state';
 import { initialGalleryState } from './gallery/store';
+import { initialToastState } from './toast/state';
 import { initialUiState } from './ui/state';
 import { initialVideosState } from './videos/state';
 
@@ -62,7 +63,7 @@ export const initialState = {
     signedIn: false,
   },
   subscribed: false,
-  toast: {},
+  toast: initialToastState,
   notifications: {
     status: NOTIFICATIONS_STATUS.DEFAULT,
   },

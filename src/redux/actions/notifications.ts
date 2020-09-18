@@ -1,9 +1,9 @@
 import { NOTIFICATIONS_STATUS, UPDATE_NOTIFICATIONS_STATUS } from '../constants';
 import { db } from '../db';
 import { store } from '../store';
+import { showToast } from '../toast/actions';
 import { helperActions } from './helper';
 import { routingActions } from './routing';
-import { toastActions } from './toast';
 
 let messaging;
 export const notificationsActions = {
@@ -11,7 +11,7 @@ export const notificationsActions = {
     return new Promise((resolve) => {
       messaging = window.firebase.messaging();
       messaging.onMessage(({ notification }) => {
-        toastActions.showToast({
+        showToast({
           message: `${notification.title} ${notification.body}`,
           action: {
             title: '{$ notifications.toast.title $}',

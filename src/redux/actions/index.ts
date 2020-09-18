@@ -10,7 +10,6 @@ import { speakersActions } from './speakers';
 import { subscribeActions } from './subscribe';
 import { teamActions } from './team';
 import { ticketsActions } from './tickets';
-import { toastActions } from './toast';
 import { userActions } from './user';
 
 export {
@@ -25,7 +24,6 @@ export {
   subscribeActions,
   teamActions,
   ticketsActions,
-  toastActions,
   userActions,
 };
 
