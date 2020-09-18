@@ -7,6 +7,7 @@ import { initialNotificationState } from './notifications/state';
 import { initialPartnersState } from './partners/state';
 import { initialPreviousSpeakersState } from './previous-speakers/state';
 import { initialRoutingState } from './routing/state';
+import { initialScheduleState } from './schedule/state';
 import { initialSubscribeState } from './subscribe/state';
 import { initialTeamState } from './team/state';
 import { initialTicketsState } from './tickets/state';
@@ -40,7 +41,7 @@ export const initialState = {
     featuredFetching: false,
     featuredError: null,
   },
-  schedule: [],
+  schedule: initialScheduleState,
   gallery: initialGalleryState,
   team: initialTeamState,
   user: {

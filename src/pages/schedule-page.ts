@@ -13,10 +13,11 @@ import '../elements/sticky-element';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SessionsHoC } from '../mixins/sessions-hoc';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
-import { scheduleActions, sessionsActions } from '../redux/actions';
+import { sessionsActions } from '../redux/actions';
 import { closeDialog, openDialog } from '../redux/dialogs/actions';
 import { DIALOGS } from '../redux/dialogs/types';
 import { setSubRoute } from '../redux/routing/actions';
+import { fetchSchedule } from '../redux/schedule/actions';
 import { State, store } from '../redux/store';
 import { parseQueryParamsFilters } from '../utils/functions';
 
@@ -208,7 +209,7 @@ class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) 
 
   _sessionsAndSpeakersChanged(sessions, speakers) {
     if (!this.schedule.length && sessions && sessions.length && speakers && speakers.length) {
-      store.dispatch(scheduleActions.fetchSchedule());
+      store.dispatch(fetchSchedule());
     }
   }
 

@@ -8,7 +8,7 @@ import { notificationsReducer } from './notifications/reducers';
 import { partnersReducer } from './partners/reducers';
 import { previousSpeakersReducer } from './previous-speakers/reducers';
 import { routingReducer } from './routing/reducers';
-import { scheduleReducer } from './reducers/schedule';
+import { scheduleReducer } from './schedule/reducers';
 import { sessionsReducer } from './reducers/sessions';
 import { speakersReducer } from './reducers/speakers';
 import { subscribeReducer } from './subscribe/reducers';
