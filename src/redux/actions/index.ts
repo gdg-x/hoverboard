@@ -9,7 +9,6 @@ import { sessionsActions } from './sessions';
 import { speakersActions } from './speakers';
 import { subscribeActions } from './subscribe';
 import { teamActions } from './team';
-import { ticketsActions } from './tickets';
 import { userActions } from './user';
 
 export {
@@ -23,7 +22,6 @@ export {
   speakersActions,
   subscribeActions,
   teamActions,
-  ticketsActions,
   userActions,
 };
 

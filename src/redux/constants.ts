@@ -2,11 +2,6 @@
 export const SET_ROUTE = 'app/Routing/SET_ROUTE';
 export const SET_SUB_ROUTE = 'app/Routing/SET_SUB_ROUTE';
 
-// tickets
-export const FETCH_TICKETS = 'app/Tickets/FETCH_TICKETS';
-export const FETCH_TICKETS_FAILURE = 'app/Tickets/FETCH_TICKETS_FAILURE';
-export const FETCH_TICKETS_SUCCESS = 'app/Tickets/FETCH_TICKETS_SUCCESS';
-
 // partners
 export const FETCH_PARTNERS = 'app/Partners/FETCH_PARTNERS';
 export const FETCH_PARTNERS_FAILURE = 'app/Partners/FETCH_PARTNERS_FAILURE';

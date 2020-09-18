@@ -48,8 +48,9 @@ import './pages/previous-speakers-page';
 import './pages/schedule-page';
 import './pages/speakers-page';
 import './pages/team-page';
-import { notificationsActions, routingActions, ticketsActions, userActions } from './redux/actions';
+import { notificationsActions, routingActions, userActions } from './redux/actions';
 import { State, store } from './redux/store';
+import { fetchTickets } from './redux/tickets/actions';
 import { showToast } from './redux/toast/actions';
 import { setViewportSize } from './redux/ui/actions';
 import { registerServiceWorker } from './service-worker-registration';
@@ -420,7 +421,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
         message: '{$ offlineMessage $}',
       });
     });
-    store.dispatch(ticketsActions.fetchTickets());
+    store.dispatch(fetchTickets());
   }
 
   disconnectedCallback() {

@@ -4,6 +4,7 @@ import { initialDialogState } from './dialogs/state';
 import { initialFeedbackState } from './feedback/state';
 import { initialFiltersState } from './filters/state';
 import { initialGalleryState } from './gallery/store';
+import { initialTicketsState } from './tickets/state';
 import { initialToastState } from './toast/state';
 import { initialUiState } from './ui/state';
 import { initialVideosState } from './videos/state';
@@ -15,11 +16,7 @@ export const initialState = {
     subRoute: '',
   },
   dialogs: initialDialogState,
-  tickets: {
-    fetching: false,
-    fetchingError: null,
-    list: [],
-  },
+  tickets: initialTicketsState,
   videos: initialVideosState,
   feedback: initialFeedbackState,
   blog: initialBlogState,
