@@ -1,9 +1,11 @@
+import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import '../elements/footer-block';
 import '../elements/md-content';
 import '../elements/polymer-helmet';
 
-class CocPage extends PolymerElement {
+@customElement('coc-page')
+export class CocPage extends PolymerElement {
   static get template() {
     return html`
       <style>
@@ -34,19 +36,8 @@ class CocPage extends PolymerElement {
     `;
   }
 
-  static get is() {
-    return 'coc-page';
-  }
-
-  static get properties() {
-    return {
-      active: Boolean,
-      source: {
-        type: String,
-        value: '{$ coc $}',
-      },
-    };
-  }
+  @property({ type: Boolean })
+  active = false;
+  @property({ type: String })
+  source = '{$ coc $}';
 }
-
-window.customElements.define(CocPage.is, CocPage);

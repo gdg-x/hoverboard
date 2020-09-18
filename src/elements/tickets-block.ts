@@ -1,3 +1,4 @@
+import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -8,7 +9,8 @@ import './content-loader';
 import './hoverboard-icons';
 import './shared-styles';
 
-class TicketsBlock extends ReduxMixin(PolymerElement) {
+@customElement('tickets-block')
+export class TicketsBlock extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -196,42 +198,22 @@ class TicketsBlock extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'tickets-block';
-  }
-
+  @property({ type: Array })
   private tickets = [];
+  @property({ type: Boolean })
   private ticketsFetching = false;
+  @property({ type: Object })
   private ticketsFetchingError = {};
+  @property({ type: Object })
   private viewport = {};
+  @property({ type: Boolean })
   private contentLoaderVisibility = false;
 
-  static get properties() {
-    return {
-      tickets: {
-        type: Array,
-        observer: '_ticketsChanged',
-      },
-      ticketsFetching: {
-        type: Boolean,
-      },
-      ticketsFetchingError: {
-        type: Object,
-      },
-      viewport: {
-        type: Object,
-      },
-      contentLoaderVisibility: Boolean,
-    };
-  }
-
   stateChanged(state: RootState) {
-    this.setProperties({
-      viewport: state.ui.viewport,
-      tickets: state.tickets.list,
-      ticketsFetching: state.tickets.fetching,
-      ticketsFetchingError: state.tickets.fetchingError,
-    });
+    this.viewport = state.ui.viewport;
+    this.tickets = state.tickets.list;
+    this.ticketsFetching = state.tickets.fetching;
+    this.ticketsFetchingError = state.tickets.fetchingError;
   }
 
   connectedCallback() {
@@ -239,9 +221,10 @@ class TicketsBlock extends ReduxMixin(PolymerElement) {
     (window as TempAny).HOVERBOARD.Elements.Tickets = this;
   }
 
+  @observe('tickets')
   _ticketsChanged(tickets) {
     if (tickets && tickets.length) {
-      this.set('contentLoaderVisibility', true);
+      this.contentLoaderVisibility = true;
     }
   }
 
@@ -264,5 +247,3 @@ class TicketsBlock extends ReduxMixin(PolymerElement) {
     return available ? '{$ buyTicket $}' : '{$ ticketsBlock.notAvailableYet $}';
   }
 }
-
-window.customElements.define(TicketsBlock.is, TicketsBlock);

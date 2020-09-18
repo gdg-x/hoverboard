@@ -1,32 +1,31 @@
-import { fetchSpeakersList } from '../store/speakers/actions';
+import { property } from '@polymer/decorators';
+import { PolymerElement } from '@polymer/polymer';
+import { Constructor } from 'lit-element';
 import { RootState, store } from '../store';
+import { fetchSpeakersList } from '../store/speakers/actions';
 
 /* @polymerMixin */
-export const SpeakersHoC = (subclass) =>
-  class extends subclass {
+export const SpeakersHoC = <
+  T extends Constructor<PolymerElement & { stateChanged(_state: RootState): void }>
+>(
+  subclass: T
+) => {
+  class SpeakersClass extends subclass {
+    @property({ type: Array })
     protected speakers = [];
+    @property({ type: Object })
     protected speakersMap = {};
+    @property({ type: Boolean })
     protected speakersFetching = false;
+    @property({ type: Object })
     protected speakersFetchingError = {};
-
-    static get properties() {
-      return {
-        ...super.properties,
-        speakers: Array,
-        speakersMap: Object,
-        speakersFetching: Boolean,
-        speakersFetchingError: Object,
-      };
-    }
 
     stateChanged(state: RootState) {
       super.stateChanged(state);
-      this.setProperties({
-        speakers: state.speakers.list,
-        speakersMap: state.speakers.obj,
-        speakersFetching: state.speakers.fetching,
-        speakersFetchingError: state.speakers.fetchingError,
-      });
+      this.speakers = state.speakers.list;
+      this.speakersMap = state.speakers.obj;
+      this.speakersFetching = state.speakers.fetching;
+      this.speakersFetchingError = state.speakers.fetchingError;
     }
 
     connectedCallback() {
@@ -36,4 +35,7 @@ export const SpeakersHoC = (subclass) =>
         store.dispatch(fetchSpeakersList());
       }
     }
-  };
+  }
+
+  return SpeakersClass;
+};

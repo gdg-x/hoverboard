@@ -1,3 +1,4 @@
+import { customElement, property } from '@polymer/decorators';
 import '@polymer/google-map';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -6,7 +7,8 @@ import { RootState } from '../store';
 import './hoverboard-icons';
 import './shared-styles';
 
-class MapBlock extends ReduxMixin(PolymerElement) {
+@customElement('map-block')
+export class MapBlock extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -103,49 +105,34 @@ class MapBlock extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'map-block';
-  }
-
-  static get properties() {
-    return {
-      viewport: {
-        type: Object,
+  @property({ type: Object })
+  private viewport;
+  @property({ type: Object })
+  private option = {
+    disableDefaultUI: true,
+    disableDoubleClickZoom: true,
+    scrollwheel: false,
+    draggable: false,
+    styles: [
+      {
+        stylers: [{ lightness: 40 }, { visibility: 'on' }, { gamma: 0.9 }, { weight: 0.4 }],
       },
-      options: {
-        type: Object,
-        value: {
-          disableDefaultUI: true,
-          disableDoubleClickZoom: true,
-          scrollwheel: false,
-          draggable: false,
-          styles: [
-            {
-              stylers: [{ lightness: 40 }, { visibility: 'on' }, { gamma: 0.9 }, { weight: 0.4 }],
-            },
-            {
-              elementType: 'labels',
-              stylers: [{ visibility: 'on' }],
-            },
-            {
-              featureType: 'water',
-              stylers: [{ color: '#5dc7ff' }],
-            },
-            {
-              featureType: 'road',
-              stylers: [{ visibility: 'off' }],
-            },
-          ],
-        },
+      {
+        elementType: 'labels',
+        stylers: [{ visibility: 'on' }],
       },
-    };
-  }
+      {
+        featureType: 'water',
+        stylers: [{ color: '#5dc7ff' }],
+      },
+      {
+        featureType: 'road',
+        stylers: [{ visibility: 'off' }],
+      },
+    ],
+  };
 
   stateChanged(state: RootState) {
-    return this.setProperties({
-      viewport: state.ui.viewport,
-    });
+    this.viewport = state.ui.viewport;
   }
 }
-
-window.customElements.define(MapBlock.is, MapBlock);

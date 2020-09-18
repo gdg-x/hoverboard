@@ -1,12 +1,14 @@
+import { customElement, property } from '@polymer/decorators';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { fetchGallery } from '../store/gallery/actions';
 import { RootState, store } from '../store';
+import { fetchGallery } from '../store/gallery/actions';
 import './shared-styles';
 
-class GalleryBlock extends ReduxMixin(PolymerElement) {
+@customElement('gallery-block')
+export class GalleryBlock extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -148,28 +150,17 @@ class GalleryBlock extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'gallery-block';
-  }
-
+  @property({ type: Array })
   private gallery = [];
+  @property({ type: Boolean })
   private galleryFetching = false;
+  @property({ type: Object })
   private galleryFetchingError = {};
 
-  static get properties() {
-    return {
-      gallery: Array,
-      galleryFetching: Boolean,
-      galleryFetchingError: Object,
-    };
-  }
-
   stateChanged(state: RootState) {
-    return this.setProperties({
-      gallery: state.gallery.list,
-      galleryFetching: state.gallery.fetching,
-      galleryFetchingError: state.gallery.fetchingError,
-    });
+    this.gallery = state.gallery.list;
+    this.galleryFetching = state.gallery.fetching;
+    this.galleryFetchingError = state.gallery.fetchingError;
   }
 
   connectedCallback() {
@@ -180,5 +171,3 @@ class GalleryBlock extends ReduxMixin(PolymerElement) {
     }
   }
 }
-
-window.customElements.define(GalleryBlock.is, GalleryBlock);

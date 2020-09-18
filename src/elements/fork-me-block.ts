@@ -1,10 +1,12 @@
+import { customElement } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import './hoverboard-icons';
 import './shared-styles';
 
-class ForkMeBlock extends PolymerElement {
+@customElement('fork-me-block')
+export class ForkMeBlock extends PolymerElement {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -39,10 +41,4 @@ class ForkMeBlock extends PolymerElement {
       </div>
     `;
   }
-
-  static get is() {
-    return 'fork-me-block';
-  }
 }
-
-window.customElements.define(ForkMeBlock.is, ForkMeBlock);

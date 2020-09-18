@@ -1,13 +1,15 @@
+import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { fetchPreviousSpeakersList } from '../store/previous-speakers/actions';
 import { RootState, store } from '../store';
+import { fetchPreviousSpeakersList } from '../store/previous-speakers/actions';
 import { randomOrder } from '../utils/functions';
 import './shared-styles';
 
-class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
+@customElement('previous-speakers-block')
+export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -91,43 +93,24 @@ class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'previous-speakers-block';
-  }
-
+  @property({ type: Array })
   private speakerRow = [];
+  @property({ type: Array })
   private speakers = [];
+  @property({ type: Array })
   private speakersRaw = [];
+  @property({ type: Boolean })
   private speakersFetching = false;
+  @property({ type: Object })
   private speakersFetchingError = {};
+  @property({ type: Object })
   private viewport: { isPhone?: boolean } = {};
 
-  static get properties() {
-    return {
-      speakersRaw: {
-        type: Array,
-        observer: '_generateSpeakers',
-      },
-      speakers: Array,
-      speakersFetching: {
-        type: Boolean,
-      },
-      speakersFetchingError: {
-        type: Object,
-      },
-      viewport: {
-        type: Object,
-      },
-    };
-  }
-
   stateChanged(state: RootState) {
-    return this.setProperties({
-      viewport: state.ui.viewport,
-      speakersRaw: state.previousSpeakers.list,
-      speakersFetching: state.previousSpeakers.fetching,
-      speakersFetchingError: state.previousSpeakers.fetchingError,
-    });
+    this.viewport = state.ui.viewport;
+    this.speakersRaw = state.previousSpeakers.list;
+    this.speakersFetching = state.previousSpeakers.fetching;
+    this.speakersFetchingError = state.previousSpeakers.fetchingError;
   }
 
   connectedCallback() {
@@ -137,9 +120,8 @@ class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
     }
   }
 
+  @observe('speakersRaw')
   _generateSpeakers(speakersRaw) {
-    this.set('speakers', randomOrder(speakersRaw).slice(0, this.viewport.isPhone ? 8 : 14));
+    this.speakers = randomOrder(speakersRaw).slice(0, this.viewport.isPhone ? 8 : 14);
   }
 }
-
-window.customElements.define(PreviousSpeakersBlock.is, PreviousSpeakersBlock);

@@ -1,16 +1,18 @@
+import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/marked-element';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { fetchBlogList } from '../store/blog/actions';
 import { RootState, store } from '../store';
+import { fetchBlogList } from '../store/blog/actions';
 import { getDate } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
 
-class LatestPostsBlock extends ReduxMixin(PolymerElement) {
+@customElement('latest-posts-block')
+export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -129,36 +131,22 @@ class LatestPostsBlock extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'latest-posts-block';
-  }
-
+  @property({ type: Object })
   private viewport = {};
+  @property({ type: Array })
   private posts = [];
+  @property({ type: Array })
   private postsList = [];
+  @property({ type: Boolean })
   private postsFetching = false;
+  @property({ type: Object })
   private postsFetchingError = {};
 
-  static get properties() {
-    return {
-      viewport: Object,
-      posts: Array,
-      postsList: {
-        type: Array,
-        observer: '_transformPosts',
-      },
-      postsFetching: Boolean,
-      postsFetchingError: Object,
-    };
-  }
-
   stateChanged(state: RootState) {
-    return this.setProperties({
-      viewport: state.ui.viewport,
-      postsList: state.blog.list,
-      postsFetching: state.blog.fetching,
-      postsFetchingError: state.blog.fetchingError,
-    });
+    this.viewport = state.ui.viewport;
+    this.postsList = state.blog.list;
+    this.postsFetching = state.blog.fetching;
+    this.postsFetchingError = state.blog.fetchingError;
   }
 
   connectedCallback() {
@@ -168,13 +156,12 @@ class LatestPostsBlock extends ReduxMixin(PolymerElement) {
     }
   }
 
+  @observe('postsList')
   _transformPosts(postsList) {
-    this.set('posts', postsList.slice(0, 4));
+    this.posts = postsList.slice(0, 4);
   }
 
   getDate(date) {
     return getDate(date);
   }
 }
-
-window.customElements.define(LatestPostsBlock.is, LatestPostsBlock);

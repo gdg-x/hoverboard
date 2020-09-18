@@ -1,3 +1,4 @@
+import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-location/iron-location';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
@@ -6,7 +7,8 @@ import { TempAny } from '../temp-any';
 import './content-loader';
 import './shared-styles';
 
-class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
+@customElement('header-bottom-toolbar')
+export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -92,38 +94,19 @@ class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'header-bottom-toolbar';
-  }
-
-  private route: string;
+  @property({ type: Object })
+  private route: object;
+  @property({ type: Array })
   private schedule = [];
+  @property({ type: Boolean })
   private contentLoaderVisibility = false;
+  @property({ type: Object })
   private user = {};
 
-  static get properties() {
-    return {
-      route: String,
-      schedule: Array,
-      queryParams: String,
-      contentLoaderVisibility: {
-        type: Boolean,
-        value: false,
-      },
-      user: Object,
-    };
-  }
-
   stateChanged(state: RootState) {
-    return this.setProperties({
-      route: state.routing,
-      schedule: state.schedule,
-      user: state.user,
-    });
-  }
-
-  static get observers() {
-    return ['_scheduleChanged(schedule)'];
+    this.route = state.routing;
+    this.schedule = state.schedule;
+    this.user = state.user;
   }
 
   connectedCallback() {
@@ -131,6 +114,7 @@ class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
     (window as TempAny).HOVERBOARD.Elements.StickyHeaderToolbar = this;
   }
 
+  @observe('schedule')
   _scheduleChanged(schedule) {
     if (schedule.length) {
       this.contentLoaderVisibility = true;
@@ -141,5 +125,3 @@ class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
     return `/schedule/${tab}${queryParams ? `?${queryParams}` : ''}`;
   }
 }
-
-customElements.define(HeaderBottomToolbar.is, HeaderBottomToolbar);

@@ -1,4 +1,5 @@
 import '@polymer/app-route/app-route';
+import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/iron-location/iron-location';
 import '@polymer/paper-icon-button';
@@ -12,12 +13,13 @@ import '../elements/shared-styles';
 import '../elements/text-truncate';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
+import { RootState } from '../store';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
-import { RootState } from '../store';
 import { generateClassName, parseQueryParamsFilters } from '../utils/functions';
 
-class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
+@customElement('speakers-page')
+export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -273,56 +275,37 @@ class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     `;
   }
 
-  static get is() {
-    return 'speakers-page';
-  }
-
-  static get properties() {
-    return {
-      ...super.properties,
-      route: Object,
-      routeData: Object,
-      active: Boolean,
-      queryParams: {
-        type: Object,
-        observer: '_paramsUpdated',
-      },
-      isSpeakerDialogOpened: {
-        type: Object,
-      },
-      isSessionDialogOpened: {
-        type: Object,
-      },
-      contentLoaderVisibility: {
-        type: String,
-        value: null,
-      },
-      filters: {
-        type: Object,
-        observer: '_onFiltersLoad',
-      },
-      _selectedFilters: Object,
-      _filters: Array,
-      speakersToRender: Array,
-    };
-  }
+  @property({ type: Object })
+  private route = {};
+  @property({ type: Object })
+  private routeData = {};
+  @property({ type: Boolean })
+  private active = false;
+  @property({ type: Object })
+  private queryParams = {};
+  @property({ type: Object })
+  private isSpeakerDialogOpened = {};
+  @property({ type: Boolean })
+  private isSessionDialogOpened = {};
+  @property({ type: String })
+  private contentLoaderVisibility;
+  @property({ type: Object })
+  private filters = {};
+  @property({ type: Object })
+  private _selectedFilters = {};
+  @property({ type: Array })
+  private _filters = [];
+  @property({ type: Array })
+  private speakersToRender = [];
 
   stateChanged(state: RootState) {
     super.stateChanged(state);
-    this.setProperties({
-      isSpeakerDialogOpened: state.dialogs.speaker.isOpened,
-      isSessionDialogOpened: state.dialogs.session.isOpened,
-      filters: state.filters,
-    });
+    this.isSpeakerDialogOpened = state.dialogs.speaker.isOpened;
+    this.isSessionDialogOpened = state.dialogs.session.isOpened;
+    this.filters = state.filters;
   }
 
-  static get observers() {
-    return [
-      '_openSpeakerDetails(active, speakers, speakersMap, routeData.speakerId)',
-      '_speakersChanged(speakers, _selectedFilters)',
-    ];
-  }
-
+  @observe('speakers', '_selectedFilters')
   _speakersChanged(speakers, selectedFilters) {
     if (this.speakers && this.speakers.length) {
       this.contentLoaderVisibility = 'hidden';
@@ -332,10 +315,11 @@ class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
           link: `/speakers/${speaker.id}${this.queryParams ? `?${this.queryParams}` : ''}`,
         })
       );
-      this.set('speakersToRender', updatedSpeakers);
+      this.speakersToRender = updatedSpeakers;
     }
   }
 
+  @observe('active', 'speakers', 'speakersMap', 'routeData.speakerId')
   _openSpeakerDetails(active, speakers, speakersMap, id) {
     if (speakers && speakers.length) {
       requestAnimationFrame(() => {
@@ -354,18 +338,20 @@ class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     return active && !isSpeakerDialogOpened && !isSessionDialogOpened;
   }
 
+  @observe('filters')
   _onFiltersLoad(filters) {
-    this.set('_filters', [
+    this._filters = [
       {
         title: '{$ filters.tags $}',
         key: 'tag',
         items: filters.tags,
       },
-    ]);
+    ];
   }
 
+  @observe('queryParams')
   _paramsUpdated(queryParams) {
-    this.set('_selectedFilters', parseQueryParamsFilters(queryParams));
+    this._selectedFilters = parseQueryParamsFilters(queryParams);
   }
 
   _filterItems(speakers, selectedFilters) {
@@ -378,5 +364,3 @@ class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     });
   }
 }
-
-window.customElements.define(SpeakersPage.is, SpeakersPage);

@@ -1,16 +1,18 @@
+import { customElement, observe, property } from '@polymer/decorators';
 import { PaperMenuButton } from '@polymer/paper-menu-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { RootState, store } from '../store';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
 import { requestPermission, unsubscribe } from '../store/notifications/actions';
 import { NOTIFICATIONS_STATUS } from '../store/notifications/types';
-import { RootState, store } from '../store';
 import { signOut } from '../store/user/actions';
 import { TempAny } from '../temp-any';
 import './shared-styles';
 
-class HeaderToolbar extends ReduxMixin(PolymerElement) {
+@customElement('header-toolbar')
+export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -266,58 +268,36 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'header-toolbar';
-  }
-
-  route: string;
+  @property({ type: Object })
+  route: object;
+  @property({ type: Boolean, notify: true })
   drawerOpened: boolean;
 
+  @property({ type: Object })
   private viewport = {};
+  @property({ type: Object })
+  private schedule = {};
+  @property({ type: Object })
   private heroSettings = {};
+  @property({ type: Object })
   private dialogs = { signin: { isOpened: false } };
+  @property({ type: Object })
   private notifications: { token?: string; status?: string } = {};
+  @property({ type: Object })
   private user = {};
+  @property({ type: Object })
   private tickets = { list: [] };
+  @property({ type: Boolean, reflectToAttribute: true })
   private transparent = false;
 
-  static get properties() {
-    return {
-      route: String,
-      drawerOpened: {
-        type: Boolean,
-        notify: true,
-      },
-      viewport: Object,
-      heroSettings: {
-        type: Object,
-        observer: '_setToolbarSettings',
-      },
-      dialogs: Object,
-      notifications: Object,
-      user: Object,
-      tickets: Object,
-      transparent: {
-        type: Boolean,
-        reflectToAttribute: true,
-      },
-    };
-  }
-
   stateChanged(state: RootState) {
-    return this.setProperties({
-      dialogs: state.dialogs,
-      notifications: state.notifications,
-      route: state.routing,
-      schedule: state.schedule,
-      user: state.user,
-      heroSettings: state.ui.heroSettings,
-      viewport: state.ui.viewport,
-    });
-  }
-
-  static get observers() {
-    return ['_authStatusChanged(user.signedIn)'];
+    this.dialogs = state.dialogs;
+    this.notifications = state.notifications;
+    this.route = state.routing;
+    this.schedule = state.schedule;
+    this.user = state.user;
+    this.heroSettings = state.ui.heroSettings;
+    this.viewport = state.ui.viewport;
   }
 
   connectedCallback() {
@@ -348,6 +328,7 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
     this.transparent = document.documentElement.scrollTop === 0;
   }
 
+  @observe('user.signedIn')
   _authStatusChanged(signedIn) {
     if (this.dialogs.signin.isOpened) {
       closeDialog(DIALOGS.SIGNIN);
@@ -390,6 +371,7 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
     return availableTicket ? availableTicket.url : tickets.list[0].url;
   }
 
+  @observe('heroSettings')
   _setToolbarSettings(settings) {
     if (!settings) return;
     this.updateStyles({
@@ -399,5 +381,3 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
     });
   }
 }
-
-customElements.define(HeaderToolbar.is, HeaderToolbar);

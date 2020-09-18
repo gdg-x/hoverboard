@@ -1,9 +1,11 @@
+import { customElement, property } from '@polymer/decorators';
 import '@polymer/marked-element';
 import { html, PolymerElement } from '@polymer/polymer';
 import { offsetTop, scrollToY } from '../utils/scrolling';
 import './shared-styles';
 
-class MdContent extends PolymerElement {
+@customElement('md-content')
+export class MdContent extends PolymerElement {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -119,22 +121,10 @@ class MdContent extends PolymerElement {
     `;
   }
 
-  static get is() {
-    return 'md-content';
-  }
-
+  @property({ type: String })
   mdSource: string;
+  @property({ type: Number })
   private toolbarOffset = 70;
-
-  static get properties() {
-    return {
-      mdSource: String,
-      toolbarOffset: {
-        type: Number,
-        value: 70,
-      },
-    };
-  }
 
   constructor() {
     super();
@@ -246,5 +236,3 @@ class MdContent extends PolymerElement {
     document.body.removeChild(textArea);
   }
 }
-
-window.customElements.define(MdContent.is, MdContent);

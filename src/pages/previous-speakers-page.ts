@@ -1,26 +1,38 @@
 import '@polymer/app-route/app-route';
+import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
+import { FirebaseError } from 'firebase';
 import 'plastic-image';
 import '../elements/content-loader';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { RootState, store } from '../store';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
 import { fetchPreviousSpeakersList } from '../store/previous-speakers/actions';
-import { RootState, store } from '../store';
 import { TempAny } from '../temp-any';
 
-class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
+@customElement('previous-speakers-page')
+export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
+  @property({ type: Boolean })
   active = false;
+  @property({ type: Object })
   route = {};
 
+  @property({ type: Object })
   private routeData: { speakerId?: string } = {};
+  @property({ type: Array })
   private speakers = [];
+  @property({ type: Object })
   private speakersMap = {};
+  @property({ type: Boolean })
   private speakersFetching = false;
-  private speakersFetchingError = {};
+  @property({ type: Object })
+  private speakersFetchingError: FirebaseError;
+  @property({ type: Boolean })
   private isDialogOpened = false;
+  @property({ type: Boolean })
   private contentLoaderVisibility = false;
 
   static get template() {
@@ -198,53 +210,12 @@ class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'previous-speakers-page';
-  }
-
-  static get properties() {
-    return {
-      route: Object,
-      routeData: Object,
-      active: Boolean,
-      speakers: {
-        type: Array,
-      },
-      speakersMap: {
-        type: Object,
-      },
-      speakersFetching: {
-        type: Boolean,
-      },
-      speakersFetchingError: {
-        type: Object,
-      },
-      isDialogOpened: {
-        type: Object,
-        observer: '_dialogStatusChanged',
-      },
-      contentLoaderVisibility: {
-        type: String,
-        value: null,
-      },
-    };
-  }
-
   stateChanged(state: RootState) {
-    this.setProperties({
-      isDialogOpened: state.dialogs.previousSpeaker.isOpened,
-      speakers: state.previousSpeakers.list,
-      speakersMap: state.previousSpeakers.obj,
-      speakersFetching: state.previousSpeakers.fetching,
-      speakersFetchingError: state.previousSpeakers.fetchingError,
-    });
-  }
-
-  static get observers() {
-    return [
-      '_openSpeakerDetails(active, speakers, speakersMap, routeData.speakerId)',
-      '_previousSpeakersChanged(speakers)',
-    ];
+    this.isDialogOpened = state.dialogs.previousSpeaker.isOpened;
+    this.speakers = state.previousSpeakers.list;
+    this.speakersMap = state.previousSpeakers.obj;
+    this.speakersFetching = state.previousSpeakers.fetching;
+    this.speakersFetchingError = state.previousSpeakers.fetchingError;
   }
 
   connectedCallback() {
@@ -254,18 +225,21 @@ class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
     }
   }
 
+  @observe('speakers')
   _previousSpeakersChanged() {
     if (this.speakers && this.speakers.length) {
       this.contentLoaderVisibility = true;
     }
   }
 
+  @observe('isDialogOpened')
   _dialogStatusChanged(nextState, prevState) {
     if (!nextState && prevState && this.active && this.routeData.speakerId) {
       history.back();
     }
   }
 
+  @observe('active', 'speakers', 'speakersMap', 'routeData.speakerId')
   _openSpeakerDetails(active, speakers, speakersMap, id) {
     if (speakers && speakers.length) {
       requestAnimationFrame(() => {
@@ -290,5 +264,3 @@ class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
       .join(', ');
   }
 }
-
-window.customElements.define(PreviousSpeakersPage.is, PreviousSpeakersPage);

@@ -1,17 +1,23 @@
+import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/marked-element';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
+import { FirebaseError } from 'firebase';
 import 'plastic-image';
 import '../elements/content-loader';
 import '../elements/posts-list';
 import '../elements/shared-styles';
 import '../elements/text-truncate';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { fetchBlogList } from '../store/blog/actions';
+import { Post } from '../models/post';
 import { RootState, store } from '../store';
+import { fetchBlogList } from '../store/blog/actions';
+import { BlogPostData } from '../store/blog/types';
+import { Viewport } from '../store/ui/types';
 import { getDate } from '../utils/functions';
 
-class BlogListPage extends ReduxMixin(PolymerElement) {
+@customElement('blog-list-page')
+export class BlogListPage extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -168,51 +174,29 @@ class BlogListPage extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'blog-list-page';
-  }
-
-  static get properties() {
-    return {
-      active: Boolean,
-      postsList: {
-        type: Array,
-      },
-      postsFetching: {
-        type: Boolean,
-      },
-      postsFetchingError: {
-        type: Object,
-      },
-      viewport: {
-        type: Object,
-      },
-      posts: Array,
-      featuredPosts: Array,
-      contentLoaderVisibility: {
-        type: String,
-        value: null,
-      },
-    };
-  }
-
+  @property({ type: Boolean })
   active = false;
 
-  private postsList = [];
+  @property({ type: Array })
+  private postsList: BlogPostData[] = [];
+  @property({ type: Boolean })
   private postsFetching = false;
-  private postsFetchingError = {};
-  private viewport: { isTabletPlus?: boolean } = {};
-  private posts = [];
-  private featuredPosts = [];
+  @property({ type: Object })
+  private postsFetchingError: FirebaseError;
+  @property({ type: Object })
+  private viewport: Viewport;
+  @property({ type: Array })
+  private posts: Post[] = [];
+  @property({ type: Array })
+  private featuredPosts: Post[] = [];
+  @property({ type: Boolean })
   private contentLoaderVisibility = false;
 
   stateChanged(state: RootState) {
-    this.setProperties({
-      viewport: state.ui.viewport,
-      postsList: state.blog.list,
-      postsFetching: state.blog.fetching,
-      postsFetchingError: state.blog.fetchingError,
-    });
+    this.viewport = state.ui.viewport;
+    this.postsList = state.blog.list;
+    this.postsFetching = state.blog.fetching;
+    this.postsFetchingError = state.blog.fetchingError;
   }
 
   connectedCallback() {
@@ -222,15 +206,12 @@ class BlogListPage extends ReduxMixin(PolymerElement) {
     }
   }
 
-  static get observers() {
-    return ['_postsChanged(postsList)'];
-  }
-
-  _postsChanged() {
-    if (this.postsList && this.postsList.length) {
+  @observe('postsList')
+  _postsChanged(postsList) {
+    if (postsList && postsList.length) {
       this.contentLoaderVisibility = true;
-      this.set('featuredPosts', this.postsList.slice(0, 3));
-      this.set('posts', this.postsList.slice(3));
+      this.featuredPosts = postsList.slice(0, 3);
+      this.posts = postsList.slice(3);
     }
   }
 
@@ -245,5 +226,3 @@ class BlogListPage extends ReduxMixin(PolymerElement) {
     return getDate(date);
   }
 }
-
-window.customElements.define(BlogListPage.is, BlogListPage);

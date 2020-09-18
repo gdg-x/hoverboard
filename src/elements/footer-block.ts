@@ -1,3 +1,4 @@
+import { customElement } from '@polymer/decorators';
 import '@polymer/paper-fab';
 import { html, PolymerElement } from '@polymer/polymer';
 import { scrollToY } from '../utils/scrolling';
@@ -6,7 +7,8 @@ import './footer-rel';
 import './footer-social';
 import './hoverboard-icons';
 
-class FooterBlock extends PolymerElement {
+@customElement('footer-block')
+export class FooterBlock extends PolymerElement {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -59,13 +61,7 @@ class FooterBlock extends PolymerElement {
     `;
   }
 
-  static get is() {
-    return 'footer-block';
-  }
-
   backToTop(e) {
     scrollToY(0, 600, 'easeInOutSine');
   }
 }
-
-window.customElements.define(FooterBlock.is, FooterBlock);

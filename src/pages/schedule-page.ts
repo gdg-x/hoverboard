@@ -20,8 +20,10 @@ import { fetchSchedule } from '../store/schedule/actions';
 import { fetchUserFeaturedSessions } from '../store/sessions/actions';
 import { RootState, store } from '../store';
 import { parseQueryParamsFilters } from '../utils/functions';
+import { customElement, observe, property } from '@polymer/decorators';
 
-class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) {
+@customElement('schedule-page')
+export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -135,90 +137,68 @@ class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) 
     `;
   }
 
-  static get is() {
-    return 'schedule-page';
-  }
-
+  @property({ type: Object })
   private route = {};
+  @property({ type: Object })
   private queryParams = {};
+  @property({ type: Boolean })
   private active = false;
+  @property({ type: Array })
   private schedule = [];
+  @property({ type: Object })
   private featuredSessions = {};
+  @property({ type: Object })
   private user = {};
+  @property({ type: Object })
   private subRoute = {};
+  @property({ type: Object })
   private isSpeakerDialogOpened = {};
+  @property({ type: Object })
   private isSessionDialogOpened = {};
+  @property({ type: Boolean })
   private contentLoaderVisibility = false;
+  @property({ type: Object })
   private viewport = {};
+  @property({ type: Object })
   private filters = {};
+  @property({ type: Array })
+  private _filters = [];
+  @property({ type: Object })
   private _selectedFilters = {};
+  @property({ type: Object })
   private routeData = {};
+  @property({ type: Object })
   private appRoute = {};
+  @property({ type: Object })
   private nQueryParams = {};
-
-  static get properties() {
-    return {
-      ...super.properties,
-      route: Object,
-      queryParams: Object,
-      active: Boolean,
-      schedule: Array,
-      featuredSessions: Object,
-      user: Object,
-      subRoute: Object,
-      isSpeakerDialogOpened: Object,
-      isSessionDialogOpened: Object,
-      contentLoaderVisibility: Boolean,
-      viewport: Object,
-      nQueryParams: Object,
-      routeData: Object,
-      appRoute: Object,
-      filters: {
-        type: Object,
-        observer: '_onFiltersLoad',
-      },
-      _selectedFilters: Object,
-      _filters: Array,
-    };
-  }
 
   stateChanged(state: RootState) {
     super.stateChanged(state);
-    this.setProperties({
-      featuredSessions: state.sessions.featured,
-      filters: state.filters,
-      isSessionDialogOpened: state.dialogs.session.isOpened,
-      isSpeakerDialogOpened: state.dialogs.speaker.isOpened,
-      schedule: state.schedule,
-      subRoute: state.routing.subRoute,
-      user: state.user,
-      viewport: state.ui.viewport,
-    });
+    this.featuredSessions = state.sessions.featured;
+    this.filters = state.filters;
+    this.isSessionDialogOpened = state.dialogs.session.isOpened;
+    this.isSpeakerDialogOpened = state.dialogs.speaker.isOpened;
+    this.schedule = state.schedule;
+    this.subRoute = state.routing.subRoute;
+    this.user = state.user;
+    this.viewport = state.ui.viewport;
   }
 
-  static get observers() {
-    return [
-      '_setDay(active, routeData.day, schedule)',
-      '_openSessionDetails(active, sessions, _selectedFilters.sessionId)',
-      '_fetchFeaturedSessions(active, sessions, user.uid)',
-      '_scheduleChanged(schedule, _selectedFilters)',
-      '_sessionsAndSpeakersChanged(sessions, speakers)',
-      '_paramsUpdated(queryParams)',
-    ];
-  }
-
+  @observe('sessions', 'speakers')
   _sessionsAndSpeakersChanged(sessions, speakers) {
     if (!this.schedule.length && sessions && sessions.length && speakers && speakers.length) {
       store.dispatch(fetchSchedule());
     }
   }
 
+  @observe('schedule', '_selectedFilters')
   _scheduleChanged(schedule) {
     if (schedule && schedule.length) {
       this.contentLoaderVisibility = true;
     }
   }
 
+  @observe('active', 'sessions', 'user.uid')
   _fetchFeaturedSessions(active, sessions, userUid) {
     if (
       active &&
@@ -231,6 +211,7 @@ class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) 
     }
   }
 
+  @observe('active', 'routeData.day', 'schedule')
   _setDay(active, day, schedule) {
     if (active && schedule.length) {
       const selectedDay = day || schedule[0].date;
@@ -238,6 +219,7 @@ class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) 
     }
   }
 
+  @observe('active', 'sessions', '_selectedFilters.sessionId')
   _openSessionDetails(active, sessions, id) {
     if (sessions && sessions.length) {
       requestAnimationFrame(() => {
@@ -254,8 +236,9 @@ class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) 
     return active && !isSpeakerDialogOpened && !isSessionDialogOpened;
   }
 
+  @observe('filters')
   _onFiltersLoad(filters) {
-    this.set('_filters', [
+    this._filters = [
       {
         title: '{$ filters.tags $}',
         key: 'tag',
@@ -266,12 +249,11 @@ class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) 
         key: 'complexity',
         items: filters.complexity,
       },
-    ]);
+    ];
   }
 
-  _paramsUpdated(queryParams) {
-    this.set('_selectedFilters', parseQueryParamsFilters(queryParams));
+  @observe('queryParams')
+  _paramsUpdated(queryParams: string) {
+    this._selectedFilters = parseQueryParamsFilters(queryParams);
   }
 }
-
-window.customElements.define(SchedulePage.is, SchedulePage);

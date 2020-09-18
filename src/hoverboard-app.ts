@@ -58,6 +58,7 @@ import { updateUser } from './store/user/actions';
 import { registerServiceWorker } from './service-worker-registration';
 import { TempAny } from './temp-any';
 import { scrollToY } from './utils/scrolling';
+import { customElement, observe, property } from '@polymer/decorators';
 
 setFastDomIf(true);
 setPassiveTouchGestures(true);
@@ -67,7 +68,8 @@ if (location.hostname === 'localhost') {
   setLegacyWarnings(true);
 }
 
-class HoverboardApp extends ReduxMixin(PolymerElement) {
+@customElement('hoverboard-app')
+export class HoverboardApp extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-reverse flex-alignment positioning">
@@ -315,89 +317,50 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'hoverboard-app';
-  }
-
+  @property({ type: Object })
   private ui = {};
+  @property({ type: Object })
   private addToHomeScreen: TempAny;
+  @property({ type: Boolean })
   private drawerOpened = false;
+  @property({ type: Object })
   private route: { route?: string } = {};
+  @property({ type: Object })
   private dialogs = {};
+  @property({ type: Object })
   private viewport = {};
+  @property({ type: Object })
   private schedule = {};
-  private notifications = false;
+  @property({ type: Object })
+  private notifications;
+  @property({ type: String })
   private _openedDialog: string;
+  @property({ type: Object })
   private user = {};
+  @property({ type: Array })
   private providerUrls = '{$ signInProviders.allowedProvidersUrl $}'.split(',');
+  @property({ type: Object })
   private tickets = { list: [] };
+  @property({ type: Boolean })
   private isPhoneSize = false;
+  @property({ type: Boolean })
   private isLaptopSize = false;
+  @property({ type: Object })
   private appRoute = {};
+  @property({ type: Object })
   private subRoute = {};
+  @property({ type: Object })
   private routeData = {};
 
-  static get properties() {
-    return {
-      ui: {
-        type: Object,
-      },
-      route: {
-        type: Object,
-      },
-      dialogs: {
-        type: Object,
-        observer: '_dialogToggled',
-      },
-      viewport: {
-        type: Object,
-      },
-      schedule: {
-        type: Object,
-      },
-      notifications: {
-        type: Boolean,
-      },
-      _openedDialog: {
-        type: String,
-      },
-      user: {
-        type: Object,
-      },
-      providerUrls: {
-        type: Object,
-      },
-      tickets: {
-        type: Object,
-      },
-      isPhoneSize: Boolean,
-      isLaptopSize: Boolean,
-      appRoute: Object,
-      subRoute: Object,
-      routeData: Object,
-      addToHomeScreen: Object,
-      drawerOpened: Boolean,
-    };
-  }
-
-  static get observers() {
-    return [
-      '_routeDataChanged(routeData.page, subRoute.path)',
-      '_viewportChanged(isPhoneSize, isLaptopSize)',
-    ];
-  }
-
   stateChanged(state: RootState) {
-    this.setProperties({
-      dialogs: state.dialogs,
-      notifications: state.notifications,
-      route: state.routing,
-      schedule: state.schedule,
-      tickets: state.tickets,
-      ui: state.ui,
-      user: state.user,
-      viewport: state.ui.viewport,
-    });
+    this.dialogs = state.dialogs;
+    this.notifications = state.notifications;
+    this.route = state.routing;
+    this.schedule = state.schedule;
+    this.tickets = state.tickets;
+    this.ui = state.ui;
+    this.user = state.user;
+    this.viewport = state.ui.viewport;
   }
 
   constructor() {
@@ -444,6 +407,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
     this.drawerOpened = false;
   }
 
+  @observe('routeData.page', 'subRoute.path')
   _routeDataChanged(page, subroutePath) {
     if (!page && page !== '') {
       return;
@@ -460,6 +424,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
     document.querySelector('link[rel="canonical"]').setAttribute('href', canonicalLink);
   }
 
+  @observe('isPhoneSize', 'isLaptopSize')
   _viewportChanged(isPhoneSize, isLaptopSize) {
     setViewportSize({
       isPhone: isPhoneSize,
@@ -468,6 +433,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
     });
   }
 
+  @observe('dialogs')
   _dialogToggled(dialogs) {
     if (this._openedDialog) {
       document.body.style.overflow = '';
@@ -511,5 +477,3 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
     });
   }
 }
-
-window.customElements.define(HoverboardApp.is, HoverboardApp);

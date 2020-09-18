@@ -1,17 +1,19 @@
+import { customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { RootState, store } from '../store';
 import { closeDialog, openDialog, setDialogError } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
 import { addPartner, fetchPartners } from '../store/partners/actions';
-import { RootState, store } from '../store';
 import { showToast } from '../store/toast/actions';
 import './hoverboard-icons';
 import './shared-styles';
 
-class PartnersBlock extends ReduxMixin(PolymerElement) {
+@customElement('partners-block')
+export class PartnersBlock extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -94,39 +96,26 @@ class PartnersBlock extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'partners-block';
-  }
-
+  @property({ type: Object })
   private viewport = {};
+  @property({ type: Array })
   private partners = [];
+  @property({ type: Boolean })
   private partnersFetching = false;
+  @property({ type: Object })
   private partnersFetchingError = {};
+  @property({ type: Boolean, observer: PartnersBlock.prototype._partnerAddingChanged })
   private partnerAdding = false;
+  @property({ type: Object })
   private partnerAddingError = {};
 
-  static get properties() {
-    return {
-      partners: Array,
-      partnersFetching: Boolean,
-      partnersFetchingError: Object,
-      partnerAdding: {
-        type: Boolean,
-        observer: '_partnerAddingChanged',
-      },
-      partnerAddingError: Object,
-    };
-  }
-
   stateChanged(state: RootState) {
-    return this.setProperties({
-      viewport: state.ui.viewport,
-      partners: state.partners.list,
-      partnersFetching: state.partners.fetching,
-      partnersFetchingError: state.partners.fetchingError,
-      partnerAdding: state.partners.adding,
-      partnerAddingError: state.partners.addingError,
-    });
+    this.viewport = state.ui.viewport;
+    this.partners = state.partners.list;
+    this.partnersFetching = state.partners.fetching;
+    this.partnersFetchingError = state.partners.fetchingError;
+    this.partnerAdding = state.partners.adding;
+    this.partnerAddingError = state.partners.addingError;
   }
 
   connectedCallback() {
@@ -159,5 +148,3 @@ class PartnersBlock extends ReduxMixin(PolymerElement) {
     }
   }
 }
-
-window.customElements.define(PartnersBlock.is, PartnersBlock);

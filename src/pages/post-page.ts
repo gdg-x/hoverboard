@@ -1,4 +1,5 @@
 import '@polymer/app-route/app-route';
+import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-ajax/iron-ajax';
 import '@polymer/marked-element';
 import '@polymer/paper-button';
@@ -7,21 +8,35 @@ import 'plastic-image';
 import '../elements/posts-list';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { fetchBlogList } from '../store/blog/actions';
 import { RootState, store } from '../store';
+import { fetchBlogList } from '../store/blog/actions';
 import { getDate } from '../utils/functions';
 
-class PostPage extends ReduxMixin(PolymerElement) {
+@customElement('post-page')
+export class PostPage extends ReduxMixin(PolymerElement) {
+  @property({ type: Boolean })
   active = false;
+  @property({ type: Object })
   route: object;
 
+  @property({ type: Array })
   private post = {};
+  @property({ type: Array })
   private postsList = [];
+  @property({ type: Array })
+  private suggestedPosts = [];
+  @property({ type: Array })
   private postsMap = {};
+  @property({ type: Boolean })
   private postsFetching = false;
+  @property({ type: Array })
   private postsFetchingError = {};
+  @property({ type: Array })
   private viewport = {};
+  @property({ type: Object })
   private postData: { id?: string } = {};
+  @property({ type: Object })
+  private postContent: object;
 
   static get template() {
     return html`
@@ -130,49 +145,12 @@ class PostPage extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'post-page';
-  }
-
-  static get properties() {
-    return {
-      active: Boolean,
-      route: Object,
-      post: Object,
-      published: String,
-      postData: Object,
-      postContent: String,
-      suggestedPosts: Array,
-      postsList: {
-        type: Array,
-      },
-      postsMap: {
-        type: Object,
-      },
-      postsFetching: {
-        type: Boolean,
-      },
-      postsFetchingError: {
-        type: Object,
-      },
-      viewport: {
-        type: Object,
-      },
-    };
-  }
-
   stateChanged(state: RootState) {
-    this.setProperties({
-      viewport: state.ui.viewport,
-      postsList: state.blog.list,
-      postsMap: state.blog.obj,
-      postsFetching: state.blog.fetching,
-      postsFetchingError: state.blog.fetchingError,
-    });
-  }
-
-  static get observers() {
-    return ['_postDataObserver(postData.id, postsList)'];
+    this.viewport = state.ui.viewport;
+    this.postsList = state.blog.list;
+    this.postsMap = state.blog.obj;
+    this.postsFetching = state.blog.fetching;
+    this.postsFetchingError = state.blog.fetchingError;
   }
 
   connectedCallback() {
@@ -184,27 +162,23 @@ class PostPage extends ReduxMixin(PolymerElement) {
 
   handleMarkdownFileFetch(event) {
     if (event.detail.response) {
-      this.set('postContent', event.detail.response);
+      this.postContent = event.detail.response;
     }
   }
 
-  _postDataObserver(postId, postsList) {
-    if (!this.postsList || !this.postsList.length || !this.postsMap[this.postData.id]) {
+  @observe('postData.id', 'postsList', 'postsMap')
+  _postDataObserver(postId: string, postsList, postsMap) {
+    if (!postsList || !postsList.length || !postsMap[postId]) {
       return;
     }
 
     const post = this.postsMap[this.postData.id];
-    this.set('post', post);
-    this.set('postContent', post.content);
-    this.set(
-      'suggestedPosts',
-      this.postsList.filter((post) => post.id !== this.postData.id).slice(0, 3)
-    );
+    this.post = post;
+    this.postContent = post.content;
+    this.suggestedPosts = postsList.filter((post) => post.id !== this.postData.id).slice(0, 3);
   }
 
   getDate(date) {
     return getDate(date);
   }
 }
-
-window.customElements.define(PostPage.is, PostPage);

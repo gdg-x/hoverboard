@@ -1,3 +1,4 @@
+import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
@@ -8,7 +9,8 @@ import { randomOrder } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
 
-class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
+@customElement('speakers-block')
+export class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -218,25 +220,12 @@ class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     `;
   }
 
-  static get is() {
-    return 'speakers-block';
-  }
-
-  static get observers() {
-    return ['_generateSpeakers(speakers)'];
-  }
-
-  static get properties() {
-    return {
-      featuredSpeakers: Array,
-    };
-  }
+  @property({ type: Array })
+  private featuredSpeakers = [];
 
   stateChanged(state: RootState) {
     super.stateChanged(state);
-    return this.setProperties({
-      speakers: state.speakers.list,
-    });
+    this.speakers = state.speakers.list;
   }
 
   _openSpeaker(e) {
@@ -245,11 +234,10 @@ class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     window.dispatchEvent(new CustomEvent('location-changed'));
   }
 
+  @observe('speakers')
   _generateSpeakers(speakers) {
     const filteredSpeakers = this.speakers.filter((speaker) => speaker.featured);
     const randomSpeakers = randomOrder(filteredSpeakers.length ? filteredSpeakers : speakers);
-    this.set('featuredSpeakers', randomSpeakers.slice(0, 4));
+    this.featuredSpeakers = randomSpeakers.slice(0, 4);
   }
 }
-
-window.customElements.define(SpeakersBlock.is, SpeakersBlock);
