@@ -5,6 +5,7 @@ import { initialFeedbackState } from './feedback/state';
 import { initialFiltersState } from './filters/state';
 import { initialGalleryState } from './gallery/store';
 import { initialPartnersState } from './partners/state';
+import { initialRoutingState } from './routing/state';
 import { initialSubscribeState } from './subscribe/state';
 import { initialTeamState } from './team/state';
 import { initialTicketsState } from './tickets/state';
@@ -14,10 +15,7 @@ import { initialVideosState } from './videos/state';
 
 export const initialState = {
   ui: initialUiState,
-  routing: {
-    route: 'home',
-    subRoute: '',
-  },
+  routing: initialRoutingState,
   dialogs: initialDialogState,
   tickets: initialTicketsState,
   videos: initialVideosState,

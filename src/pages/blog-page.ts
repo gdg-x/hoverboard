@@ -1,7 +1,7 @@
 import '@polymer/app-route/app-route';
 import '@polymer/iron-pages';
 import { html, PolymerElement } from '@polymer/polymer';
-import { routingActions } from '../redux/actions';
+import { setSubRoute } from '../redux/routing/actions';
 import { scrollToY } from '../utils/scrolling';
 import './blog-list-page';
 import './post-page';
@@ -68,7 +68,7 @@ class BlogPage extends PolymerElement {
       scrollToY(0, 200);
       this.set('subRoute', {});
       this.set('_route', route);
-      routingActions.setSubRoute(this.routeData.page);
+      setSubRoute(this.routeData.page);
     }
   }
 }

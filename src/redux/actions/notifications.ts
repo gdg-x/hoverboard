@@ -1,9 +1,9 @@
 import { NOTIFICATIONS_STATUS, UPDATE_NOTIFICATIONS_STATUS } from '../constants';
 import { db } from '../db';
+import { setLocation } from '../routing/actions';
 import { store } from '../store';
 import { showToast } from '../toast/actions';
 import { helperActions } from './helper';
-import { routingActions } from './routing';
 
 let messaging;
 export const notificationsActions = {
@@ -16,7 +16,7 @@ export const notificationsActions = {
           action: {
             title: '{$ notifications.toast.title $}',
             callback: () => {
-              routingActions.setLocation(notification.click_action);
+              setLocation(notification.click_action);
             },
           },
         });

@@ -2,7 +2,6 @@ import firebase from 'firebase';
 import { helperActions } from './helper';
 import { notificationsActions } from './notifications';
 import { previousSpeakersActions } from './previous-speakers';
-import { routingActions } from './routing';
 import { scheduleActions } from './schedule';
 import { sessionsActions } from './sessions';
 import { speakersActions } from './speakers';
@@ -12,7 +11,6 @@ export {
   helperActions,
   notificationsActions,
   previousSpeakersActions,
-  routingActions,
   scheduleActions,
   sessionsActions,
   speakersActions,

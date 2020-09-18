@@ -7,7 +7,7 @@ import { initialState } from './initial-state';
 import { notificationsReducer } from './reducers/notifications';
 import { partnersReducer } from './partners/reducers';
 import { previousSpeakersReducer } from './reducers/previous-speakers';
-import { routingReducer } from './reducers/routing';
+import { routingReducer } from './routing/reducers';
 import { scheduleReducer } from './reducers/schedule';
 import { sessionsReducer } from './reducers/sessions';
 import { speakersReducer } from './reducers/speakers';

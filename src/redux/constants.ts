@@ -1,7 +1,3 @@
-// router
-export const SET_ROUTE = 'app/Routing/SET_ROUTE';
-export const SET_SUB_ROUTE = 'app/Routing/SET_SUB_ROUTE';
-
 // speakers
 export const FETCH_SPEAKERS = 'app/Speakers/FETCH_SPEAKERS';
 export const FETCH_SPEAKERS_FAILURE = 'app/Speakers/FETCH_SPEAKERS_FAILURE';

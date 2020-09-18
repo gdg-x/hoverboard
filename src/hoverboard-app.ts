@@ -48,7 +48,8 @@ import './pages/previous-speakers-page';
 import './pages/schedule-page';
 import './pages/speakers-page';
 import './pages/team-page';
-import { notificationsActions, routingActions, userActions } from './redux/actions';
+import { notificationsActions, userActions } from './redux/actions';
+import { setRoute } from './redux/routing/actions';
 import { State, store } from './redux/store';
 import { fetchTickets } from './redux/tickets/actions';
 import { showToast } from './redux/toast/actions';
@@ -452,7 +453,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
 
     if (!this.route || page !== this.route.route) {
       !hasSubroute && scrollToY(0, 100);
-      routingActions.setRoute(page);
+      setRoute(page);
       this.$.header.classList.remove('remove-shadow');
     }
 
