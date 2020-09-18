@@ -1,17 +1,44 @@
 name: Pre Merge Checks
-on:
-  pull_request:
-    branches:
-      - '*'
+on: pull_request
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [12, 14]
+    name: Test on Node ${{ matrix.node-version }}
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Running the tests
+        run: npm run test
+
   build:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         node-version: [12, 14]
-    name: Build & Test on Node ${{ matrix.node-version }}
+    name: Build on Node ${{ matrix.node-version }}
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v2
@@ -39,6 +66,3 @@ jobs:
 
       - name: Building the production environment
         run: npm run build
-
-      - name: Running the tests
-        run: npm run test
