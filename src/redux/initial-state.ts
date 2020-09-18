@@ -3,6 +3,7 @@ import { NOTIFICATIONS_STATUS } from './constants';
 import { initialDialogState } from './dialogs/state';
 import { initialFeedbackState } from './feedback/state';
 import { initialFiltersState } from './filters/state';
+import { initialGalleryState } from './gallery/store';
 import { initialUiState } from './ui/state';
 
 export const initialState = {
@@ -54,11 +55,7 @@ export const initialState = {
     featuredError: null,
   },
   schedule: [],
-  gallery: {
-    fetching: false,
-    fetchingError: null,
-    list: [],
-  },
+  gallery: initialGalleryState,
   team: {
     fetching: false,
     fetchingError: null,

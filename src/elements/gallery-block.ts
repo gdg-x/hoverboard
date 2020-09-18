@@ -2,7 +2,7 @@ import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { galleryActions } from '../redux/actions';
+import { fetchGallery } from '../redux/gallery/actions';
 import { State, store } from '../redux/store';
 import './shared-styles';
 
@@ -176,7 +176,7 @@ class GalleryBlock extends ReduxMixin(PolymerElement) {
     super.connectedCallback();
 
     if (!this.gallery || !this.gallery.length) {
-      store.dispatch(galleryActions.fetchGallery());
+      store.dispatch(fetchGallery());
     }
   }
 }

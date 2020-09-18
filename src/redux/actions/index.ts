@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import { galleryActions } from './gallery';
 import { helperActions } from './helper';
 import { notificationsActions } from './notifications';
 import { partnersActions } from './partners';
@@ -16,7 +15,6 @@ import { userActions } from './user';
 import { videosActions } from './videos';
 
 export {
-  galleryActions,
   helperActions,
   notificationsActions,
   partnersActions,

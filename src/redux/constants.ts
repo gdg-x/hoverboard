@@ -54,11 +54,6 @@ export const FETCH_SCHEDULE = 'app/Schedule/FETCH_SCHEDULE';
 export const FETCH_SCHEDULE_FAILURE = 'app/Schedule/FETCH_SCHEDULE_FAILURE';
 export const FETCH_SCHEDULE_SUCCESS = 'app/Schedule/FETCH_SCHEDULE_SUCCESS';
 
-// gallery
-export const FETCH_GALLERY = 'app/Gallery/FETCH_GALLERY';
-export const FETCH_GALLERY_FAILURE = 'app/Gallery/FETCH_GALLERY_FAILURE';
-export const FETCH_GALLERY_SUCCESS = 'app/Gallery/FETCH_GALLERY_SUCCESS';
-
 // team
 export const FETCH_TEAM = 'app/Team/FETCH_TEAM';
 export const FETCH_TEAM_FAILURE = 'app/Team/FETCH_TEAM_FAILURE';
