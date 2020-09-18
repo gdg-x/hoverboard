@@ -10,7 +10,7 @@ import { previousSpeakersReducer } from './previous-speakers/reducers';
 import { routingReducer } from './routing/reducers';
 import { scheduleReducer } from './schedule/reducers';
 import { sessionsReducer } from './reducers/sessions';
-import { speakersReducer } from './reducers/speakers';
+import { speakersReducer } from './speakers/reducers';
 import { subscribeReducer } from './subscribe/reducers';
 import { teamReducer } from './team/reducers';
 import { userReducer } from './user/reducers';

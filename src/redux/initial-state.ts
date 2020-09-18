@@ -8,6 +8,7 @@ import { initialPartnersState } from './partners/state';
 import { initialPreviousSpeakersState } from './previous-speakers/state';
 import { initialRoutingState } from './routing/state';
 import { initialScheduleState } from './schedule/state';
+import { initialSpeakersState } from './speakers/state';
 import { initialSubscribeState } from './subscribe/state';
 import { initialTeamState } from './team/state';
 import { initialTicketsState } from './tickets/state';
@@ -26,12 +27,7 @@ export const initialState = {
   blog: initialBlogState,
   partners: initialPartnersState,
   previousSpeakers: initialPreviousSpeakersState,
-  speakers: {
-    fetching: false,
-    fetchingError: null,
-    list: [],
-    obj: {},
-  },
+  speakers: initialSpeakersState,
   sessions: {
     fetching: false,
     fetchingError: null,
