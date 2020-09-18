@@ -19,11 +19,6 @@ export const ADD_POTENTIAL_PARTNER = 'app/Partners/ADD_POTENTIAL_PARTNER';
 export const ADD_POTENTIAL_PARTNER_FAILURE = 'app/Partners/ADD_POTENTIAL_PARTNER_FAILURE';
 export const ADD_POTENTIAL_PARTNER_SUCCESS = 'app/Partners/ADD_POTENTIAL_PARTNER_SUCCESS';
 
-// featured videos
-export const FETCH_VIDEOS = 'app/Videos/FETCH_VIDEOS';
-export const FETCH_VIDEOS_FAILURE = 'app/Videos/FETCH_VIDEOS_FAILURE';
-export const FETCH_VIDEOS_SUCCESS = 'app/Videos/FETCH_VIDEOS_SUCCESS';
-
 // speakers
 export const FETCH_SPEAKERS = 'app/Speakers/FETCH_SPEAKERS';
 export const FETCH_SPEAKERS_FAILURE = 'app/Speakers/FETCH_SPEAKERS_FAILURE';

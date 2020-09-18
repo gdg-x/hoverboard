@@ -4,9 +4,9 @@ import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { videosActions } from '../redux/actions';
 import { State, store } from '../redux/store';
 import { toggleVideoDialog } from '../redux/ui/actions';
+import { fetchVideos } from '../redux/videos/actions';
 import './shared-animations';
 import './shared-styles';
 
@@ -233,7 +233,7 @@ class FeaturedVideos extends ReduxMixin(PolymerElement) {
 
   connectedCallback() {
     super.connectedCallback();
-    store.dispatch(videosActions.fetchVideos());
+    store.dispatch(fetchVideos());
   }
 
   shiftContentLeft() {

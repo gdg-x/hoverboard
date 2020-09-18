@@ -5,6 +5,7 @@ import { initialFeedbackState } from './feedback/state';
 import { initialFiltersState } from './filters/state';
 import { initialGalleryState } from './gallery/store';
 import { initialUiState } from './ui/state';
+import { initialVideosState } from './videos/state';
 
 export const initialState = {
   ui: initialUiState,
@@ -18,11 +19,7 @@ export const initialState = {
     fetchingError: null,
     list: [],
   },
-  videos: {
-    fetching: false,
-    fetchingError: null,
-    list: [],
-  },
+  videos: initialVideosState,
   feedback: initialFeedbackState,
   blog: initialBlogState,
   partners: {

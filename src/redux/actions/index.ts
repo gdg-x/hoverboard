@@ -12,7 +12,6 @@ import { teamActions } from './team';
 import { ticketsActions } from './tickets';
 import { toastActions } from './toast';
 import { userActions } from './user';
-import { videosActions } from './videos';
 
 export {
   helperActions,
@@ -28,7 +27,6 @@ export {
   ticketsActions,
   toastActions,
   userActions,
-  videosActions,
 };
 
 // TODO: Remove type
