@@ -3,6 +3,12 @@ export const CLOSE_DIALOG = 'CLOSE_DIALOG';
 export const SET_DIALOG_DATA = 'SET_DIALOG_DATA';
 export const SET_DIALOG_ERROR = 'SET_DIALOG_ERROR';
 
+export interface DialogForm {
+  email: string;
+  firstFieldValue?: string;
+  secondFieldValue?: string;
+}
+
 export enum DIALOGS {
   SPEAKER = 'speaker',
   PREVIOUS_SPEAKER = 'previousSpeaker',

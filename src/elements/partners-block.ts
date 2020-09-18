@@ -3,9 +3,9 @@ import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { partnersActions } from '../redux/actions';
 import { closeDialog, openDialog, setDialogError } from '../redux/dialogs/actions';
 import { DIALOGS } from '../redux/dialogs/types';
+import { addPartner, fetchPartners } from '../redux/partners/actions';
 import { State, store } from '../redux/store';
 import { showToast } from '../redux/toast/actions';
 import './hoverboard-icons';
@@ -132,7 +132,7 @@ class PartnersBlock extends ReduxMixin(PolymerElement) {
   connectedCallback() {
     super.connectedCallback();
     if (!this.partnersFetching && (!this.partners || !this.partners.length)) {
-      store.dispatch(partnersActions.fetchPartners());
+      store.dispatch(fetchPartners());
     }
   }
 
@@ -143,7 +143,7 @@ class PartnersBlock extends ReduxMixin(PolymerElement) {
       firstFieldLabel: '{$ partnersBlock.form.fullName $}',
       secondFieldLabel: '{$ partnersBlock.form.companyName $}',
       submit: (data) => {
-        store.dispatch(partnersActions.addPartner(data));
+        store.dispatch(addPartner(data));
       },
     });
   }

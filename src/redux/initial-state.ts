@@ -4,6 +4,7 @@ import { initialDialogState } from './dialogs/state';
 import { initialFeedbackState } from './feedback/state';
 import { initialFiltersState } from './filters/state';
 import { initialGalleryState } from './gallery/store';
+import { initialPartnersState } from './partners/state';
 import { initialSubscribeState } from './subscribe/state';
 import { initialTeamState } from './team/state';
 import { initialTicketsState } from './tickets/state';
@@ -22,13 +23,7 @@ export const initialState = {
   videos: initialVideosState,
   feedback: initialFeedbackState,
   blog: initialBlogState,
-  partners: {
-    fetching: false,
-    fetchingError: null,
-    list: [],
-    adding: false,
-    addingError: false,
-  },
+  partners: initialPartnersState,
   previousSpeakers: {
     fetching: false,
     fetchingError: null,

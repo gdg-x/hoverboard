@@ -1,18 +1,12 @@
 import { Dispatch } from 'redux';
 import { SUBSCRIBE } from './types';
 import { db } from '../db';
-import { DIALOGS, SET_DIALOG_DATA } from '../dialogs/types';
+import { DialogForm, DIALOGS, SET_DIALOG_DATA } from '../dialogs/types';
 import { store } from '../store';
 import { showToast } from '../toast/actions';
 import { helperActions } from '../actions/helper';
 
-interface User {
-  email: string;
-  firstFieldValue?: string;
-  secondFieldValue?: string;
-}
-
-export const subscribe = (data: User) => (dispatch: Dispatch) => {
+export const subscribe = (data: DialogForm) => (dispatch: Dispatch) => {
   const id = data.email.replace(/[^\w\s]/gi, '');
 
   db()
