@@ -78,6 +78,3 @@ export const NOTIFICATIONS_STATUS = {
   DENIED: 'denied',
   DEFAULT: 'default',
 };
-
-// filters
-export const SET_FILTERS = 'app/Filters/SET_FILTERS';

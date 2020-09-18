@@ -1,8 +1,8 @@
 import { blogReducer } from './blog/reducers';
 import { dialogsReducer } from './dialogs/reducers';
 import { feedbackReducer } from './feedback/reducers';
+import { filtersReducer } from './filters/reducers';
 import { initialState } from './initial-state';
-import { filtersReducer } from './reducers/filters';
 import { galleryReducer } from './reducers/gallery';
 import { notificationsReducer } from './reducers/notifications';
 import { partnersReducer } from './reducers/partners';

@@ -5,12 +5,12 @@ import {
   FETCH_USER_FEATURED_SESSIONS,
   FETCH_USER_FEATURED_SESSIONS_FAILURE,
   FETCH_USER_FEATURED_SESSIONS_SUCCESS,
-  SET_FILTERS,
   SET_USER_FEATURED_SESSIONS,
   SET_USER_FEATURED_SESSIONS_FAILURE,
   SET_USER_FEATURED_SESSIONS_SUCCESS,
 } from '../constants';
 import { db } from '../db';
+import { SET_FILTERS } from '../filters/types';
 
 export const sessionsActions = {
   fetchList: () => (dispatch) => {

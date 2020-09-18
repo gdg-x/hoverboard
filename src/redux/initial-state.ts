@@ -2,6 +2,7 @@ import { initialBlogState } from './blog/state';
 import { NOTIFICATIONS_STATUS } from './constants';
 import { initialDialogState } from './dialogs/state';
 import { initialFeedbackState } from './feedback/state';
+import { initialFiltersState } from './filters/state';
 import { initialUiState } from './ui/state';
 
 export const initialState = {
@@ -71,8 +72,5 @@ export const initialState = {
   notifications: {
     status: NOTIFICATIONS_STATUS.DEFAULT,
   },
-  filters: {
-    tags: [],
-    complexity: [],
-  },
+  filters: initialFiltersState,
 };
