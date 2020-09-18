@@ -11,7 +11,7 @@ import { routingReducer } from './reducers/routing';
 import { scheduleReducer } from './reducers/schedule';
 import { sessionsReducer } from './reducers/sessions';
 import { speakersReducer } from './reducers/speakers';
-import { subscribeReducer } from './reducers/subscribe';
+import { subscribeReducer } from './subscribe/reducers';
 import { teamReducer } from './reducers/team';
 import { userReducer } from './reducers/user';
 import { ticketsReducer } from './tickets/reducers';

@@ -2,10 +2,10 @@ import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { subscribeActions } from '../redux/actions';
 import { openDialog } from '../redux/dialogs/actions';
 import { DIALOGS } from '../redux/dialogs/types';
 import { State, store } from '../redux/store';
+import { subscribe } from '../redux/subscribe/actions';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -150,7 +150,7 @@ class SubscribeBlock extends ReduxMixin(PolymerElement) {
   }
 
   _subscribeAction(data) {
-    store.dispatch(subscribeActions.subscribe(data));
+    store.dispatch(subscribe(data));
   }
 }
 

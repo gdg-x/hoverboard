@@ -4,6 +4,7 @@ import { initialDialogState } from './dialogs/state';
 import { initialFeedbackState } from './feedback/state';
 import { initialFiltersState } from './filters/state';
 import { initialGalleryState } from './gallery/store';
+import { initialSubscribeState } from './subscribe/state';
 import { initialTicketsState } from './tickets/state';
 import { initialToastState } from './toast/state';
 import { initialUiState } from './ui/state';
@@ -59,7 +60,7 @@ export const initialState = {
   user: {
     signedIn: false,
   },
-  subscribed: false,
+  subscribed: initialSubscribeState,
   toast: initialToastState,
   notifications: {
     status: NOTIFICATIONS_STATUS.DEFAULT,

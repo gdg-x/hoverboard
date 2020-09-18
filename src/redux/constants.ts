@@ -50,9 +50,6 @@ export const FETCH_TEAM_SUCCESS = 'app/Team/FETCH_TEAM_SUCCESS';
 export const SIGN_IN = 'app/Auth/SIGN_IN';
 export const SIGN_OUT = 'app/Auth/SIGN_OUT';
 
-// subscribe
-export const SUBSCRIBE = 'app/Subscribe/SUBSCRIBE';
-
 // notifications
 export const UPDATE_NOTIFICATIONS_STATUS = 'app/Notifications/UPDATE_NOTIFICATIONS_STATUS';
 export const NOTIFICATIONS_STATUS = {

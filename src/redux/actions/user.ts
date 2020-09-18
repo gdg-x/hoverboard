@@ -1,4 +1,5 @@
-import { helperActions, notificationsActions, subscribeActions } from '.';
+import { helperActions, notificationsActions } from '.';
+import { resetSubscribed } from '../subscribe/actions';
 
 export const userActions = {
   signIn: (providerName) => {
@@ -58,7 +59,7 @@ export const userActions = {
       .signOut()
       .then(() => {
         helperActions.storeUser();
-        subscribeActions.resetSubscribed();
+        resetSubscribed();
       });
   },
 };
