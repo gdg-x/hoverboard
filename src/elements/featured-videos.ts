@@ -4,8 +4,9 @@ import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { uiActions, videosActions } from '../redux/actions';
-import { State, store } from '../redux/store';
+import { RootState, store } from '../store';
+import { toggleVideoDialog } from '../store/ui/actions';
+import { fetchVideos } from '../store/videos/actions';
 import './shared-animations';
 import './shared-styles';
 
@@ -221,7 +222,7 @@ class FeaturedVideos extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     return this.setProperties({
       videos: state.videos.list,
       videosFetching: state.videos.fetching,
@@ -232,7 +233,7 @@ class FeaturedVideos extends ReduxMixin(PolymerElement) {
 
   connectedCallback() {
     super.connectedCallback();
-    store.dispatch(videosActions.fetchVideos());
+    store.dispatch(fetchVideos());
   }
 
   shiftContentLeft() {
@@ -315,7 +316,7 @@ class FeaturedVideos extends ReduxMixin(PolymerElement) {
     const title = e.model.__data.block.title + presenters;
     const youtubeId = e.model.__data.block.youtubeId;
 
-    uiActions.toggleVideoDialog({
+    toggleVideoDialog({
       title: title,
       youtubeId: youtubeId,
       disableControls: true,

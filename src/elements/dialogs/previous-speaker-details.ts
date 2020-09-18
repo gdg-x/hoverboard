@@ -7,9 +7,10 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import 'plastic-image';
 import { ReduxMixin } from '../../mixins/redux-mixin';
-import { dialogsActions, uiActions } from '../../redux/actions';
-import { DIALOGS } from '../../redux/constants';
-import { State } from '../../redux/store';
+import { closeDialog } from '../../store/dialogs/actions';
+import { DIALOGS } from '../../store/dialogs/types';
+import { RootState } from '../../store';
+import { toggleVideoDialog } from '../../store/ui/actions';
 import { getVariableColor } from '../../utils/functions';
 import '../shared-styles';
 import '../text-truncate';
@@ -155,7 +156,7 @@ class PreviousSpeakerDetails extends ReduxMixin(
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.setProperties({
       viewport: state.ui.viewport,
     });
@@ -167,7 +168,7 @@ class PreviousSpeakerDetails extends ReduxMixin(
   }
 
   _close() {
-    dialogsActions.closeDialog(DIALOGS.PREVIOUS_SPEAKER);
+    closeDialog(DIALOGS.PREVIOUS_SPEAKER);
   }
 
   _getCloseBtnIcon(isLaptopViewport) {
@@ -189,7 +190,7 @@ class PreviousSpeakerDetails extends ReduxMixin(
 
   _openVideo(event) {
     event.model.session &&
-      uiActions.toggleVideoDialog({
+      toggleVideoDialog({
         title: event.model.session.title,
         youtubeId: event.model.session.videoId,
         disableControls: true,

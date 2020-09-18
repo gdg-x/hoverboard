@@ -5,8 +5,8 @@ import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { teamActions } from '../redux/actions';
-import { State, store } from '../redux/store';
+import { RootState, store } from '../store';
+import { fetchTeam } from '../store/team/actions';
 
 class TeamPage extends ReduxMixin(PolymerElement) {
   active = false;
@@ -200,7 +200,7 @@ class TeamPage extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.setProperties({
       team: state.team.list,
       teamFetching: state.team.fetching,
@@ -211,7 +211,7 @@ class TeamPage extends ReduxMixin(PolymerElement) {
   connectedCallback() {
     super.connectedCallback();
     if (!this.teamFetching && !this.team.length) {
-      store.dispatch(teamActions.fetchTeam());
+      store.dispatch(fetchTeam());
     }
   }
 }

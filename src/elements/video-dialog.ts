@@ -5,7 +5,7 @@ import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { uiActions } from '../redux/actions';
+import { toggleVideoDialog } from '../store/ui/actions';
 import './shared-styles';
 class VideoDialog extends ReduxMixin(mixinBehaviors([PaperDialogBehavior], PolymerElement)) {
   static get template() {
@@ -101,7 +101,7 @@ class VideoDialog extends ReduxMixin(mixinBehaviors([PaperDialogBehavior], Polym
   }
 
   _closeSelf() {
-    uiActions.toggleVideoDialog({
+    toggleVideoDialog({
       opened: false,
       disableControls: false,
       youtubeId: '',

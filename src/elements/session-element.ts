@@ -2,9 +2,11 @@ import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { dialogsActions, sessionsActions, toastActions } from '../redux/actions';
-import { DIALOGS } from '../redux/constants';
-import { store } from '../redux/store';
+import { openDialog } from '../store/dialogs/actions';
+import { DIALOGS } from '../store/dialogs/types';
+import { setUserFeaturedSessions } from '../store/sessions/actions';
+import { store } from '../store';
+import { showToast } from '../store/toast/actions';
 import { TempAny } from '../temp-any';
 import { getVariableColor, toggleQueryParam } from '../utils/functions';
 import './shared-styles';
@@ -286,12 +288,12 @@ class SessionElement extends ReduxMixin(PolymerElement) {
     event.preventDefault();
     event.stopPropagation();
     if (!this.user.signedIn) {
-      toastActions.showToast({
+      showToast({
         message: '{$ schedule.saveSessionsSignedOut $}',
         action: {
           title: 'Sign in',
           callback: () => {
-            dialogsActions.openDialog(DIALOGS.SIGNIN);
+            openDialog(DIALOGS.SIGNIN);
           },
         },
       });
@@ -302,13 +304,13 @@ class SessionElement extends ReduxMixin(PolymerElement) {
       [this.session.id]: !this.featuredSessions[this.session.id] ? true : null,
     });
 
-    store.dispatch(sessionsActions.setUserFeaturedSessions(this.user.uid, sessions));
+    store.dispatch(setUserFeaturedSessions(this.user.uid, sessions));
   }
 
   _toggleFeedback(event) {
     event.preventDefault();
     event.stopPropagation();
-    dialogsActions.openDialog(DIALOGS.FEEDBACK, this.session);
+    openDialog(DIALOGS.FEEDBACK, this.session);
   }
 
   _acceptingFeedback() {

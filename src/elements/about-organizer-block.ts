@@ -4,7 +4,7 @@ import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { State } from '../redux/store';
+import { RootState } from '../store';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -111,7 +111,7 @@ class AboutOrganizerBlock extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.setProperties({
       viewport: state.ui.viewport,
     });

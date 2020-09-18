@@ -48,15 +48,13 @@ import './pages/previous-speakers-page';
 import './pages/schedule-page';
 import './pages/speakers-page';
 import './pages/team-page';
-import {
-  notificationsActions,
-  routingActions,
-  ticketsActions,
-  toastActions,
-  uiActions,
-  userActions,
-} from './redux/actions';
-import { State, store } from './redux/store';
+import { getToken, initializeMessaging } from './store/notifications/actions';
+import { setRoute } from './store/routing/actions';
+import { RootState, store } from './store';
+import { fetchTickets } from './store/tickets/actions';
+import { showToast } from './store/toast/actions';
+import { setViewportSize } from './store/ui/actions';
+import { updateUser } from './store/user/actions';
 import { registerServiceWorker } from './service-worker-registration';
 import { TempAny } from './temp-any';
 import { scrollToY } from './utils/scrolling';
@@ -389,7 +387,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
     ];
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.setProperties({
       dialogs: state.dialogs,
       notifications: state.notifications,
@@ -421,11 +419,11 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
     window.addEventListener('element-sticked', this._toggleHeaderShadow);
     this.$.drawer.addEventListener('opened-changed', this._toggleDrawer);
     window.addEventListener('offline', () => {
-      toastActions.showToast({
+      showToast({
         message: '{$ offlineMessage $}',
       });
     });
-    store.dispatch(ticketsActions.fetchTickets());
+    store.dispatch(fetchTickets());
   }
 
   disconnectedCallback() {
@@ -438,10 +436,8 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
     super.ready();
     log('Hoverboard is ready!');
     this.removeAttribute('unresolved');
-    userActions.updateUser();
-    notificationsActions
-      .initializeMessaging()
-      .then(() => store.dispatch(notificationsActions.getToken()));
+    updateUser();
+    initializeMessaging().then(() => store.dispatch(getToken()));
   }
 
   closeDrawer() {
@@ -456,7 +452,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
 
     if (!this.route || page !== this.route.route) {
       !hasSubroute && scrollToY(0, 100);
-      routingActions.setRoute(page);
+      setRoute(page);
       this.$.header.classList.remove('remove-shadow');
     }
 
@@ -465,7 +461,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
   }
 
   _viewportChanged(isPhoneSize, isLaptopSize) {
-    uiActions.setViewportSize({
+    setViewportSize({
       isPhone: isPhoneSize,
       isTabletPlus: !isPhoneSize,
       isLaptopPlus: isLaptopSize,

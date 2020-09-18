@@ -12,8 +12,8 @@ import '../elements/speakers-block';
 import '../elements/subscribe-block';
 import '../elements/tickets-block';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { uiActions } from '../redux/actions';
-import { State } from '../redux/store';
+import { RootState } from '../store';
+import { toggleVideoDialog } from '../store/ui/actions';
 import { TempAny } from '../temp-any';
 import { scrollToY } from '../utils/scrolling';
 
@@ -273,14 +273,14 @@ class HomePage extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.setProperties({
       viewport: state.ui.viewport,
     });
   }
 
   _playVideo() {
-    uiActions.toggleVideoDialog({
+    toggleVideoDialog({
       title: '{$  aboutBlock.callToAction.howItWas.title $}',
       youtubeId: '{$  aboutBlock.callToAction.howItWas.youtubeId $}',
       disableControls: true,

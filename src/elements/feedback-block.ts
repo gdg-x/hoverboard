@@ -3,8 +3,9 @@ import '@polymer/paper-input/paper-textarea';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@radi-cho/star-rating';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { feedbackActions, toastActions } from '../redux/actions';
-import { State, store } from '../redux/store';
+import { addComment, checkPreviousFeedback, deleteFeedback } from '../store/feedback/actions';
+import { RootState, store } from '../store';
+import { showToast } from '../store/toast/actions';
 
 class Feedback extends ReduxMixin(PolymerElement) {
   static get template() {
@@ -183,7 +184,7 @@ class Feedback extends ReduxMixin(PolymerElement) {
     return 'feedback-block';
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     return this.setProperties({
       feedbackState: state.feedback,
       feedbackDeleting: state.feedback.deleting,
@@ -248,7 +249,7 @@ class Feedback extends ReduxMixin(PolymerElement) {
 
   _dispatchSendFeedback() {
     store.dispatch(
-      feedbackActions.addComment({
+      addComment({
         userId: this.user.uid,
         collection: this.collection,
         dbItem: this.dbItem,
@@ -261,7 +262,7 @@ class Feedback extends ReduxMixin(PolymerElement) {
 
   _dispatchPreviousFeedback() {
     store.dispatch(
-      feedbackActions.checkPreviousFeedback({
+      checkPreviousFeedback({
         collection: this.collection,
         dbItem: this.dbItem,
         userId: this.user.uid,
@@ -271,7 +272,7 @@ class Feedback extends ReduxMixin(PolymerElement) {
 
   _dispatchDeleteFeedback() {
     store.dispatch(
-      feedbackActions.deleteFeedback({
+      deleteFeedback({
         collection: this.collection,
         dbItem: this.dbItem,
         userId: this.user.uid,
@@ -282,7 +283,7 @@ class Feedback extends ReduxMixin(PolymerElement) {
   _feedbackAddingChanged(newFeedbackAdding, oldFeedbackAdding) {
     if (oldFeedbackAdding && !newFeedbackAdding) {
       if (this.feedbackAddingError) {
-        toastActions.showToast({
+        showToast({
           message: '{$ feedback.somethingWentWrong $}',
           action: {
             title: 'Retry',
@@ -292,7 +293,7 @@ class Feedback extends ReduxMixin(PolymerElement) {
           },
         });
       } else {
-        toastActions.showToast({ message: '{$ feedback.feedbackRecorded $}' });
+        showToast({ message: '{$ feedback.feedbackRecorded $}' });
       }
     }
   }
@@ -300,7 +301,7 @@ class Feedback extends ReduxMixin(PolymerElement) {
   _feedbackDeletingChanged(newFeedbackDeleting, oldFeedbackDeleting) {
     if (oldFeedbackDeleting && !newFeedbackDeleting) {
       if (this.feedbackDeletingError) {
-        toastActions.showToast({
+        showToast({
           message: '{$ feedback.somethingWentWrong $}',
           action: {
             title: 'Retry',
@@ -311,7 +312,7 @@ class Feedback extends ReduxMixin(PolymerElement) {
         });
       } else {
         this._clear();
-        toastActions.showToast({ message: '{$ feedback.feedbackDeleted $}' });
+        showToast({ message: '{$ feedback.feedbackDeleted $}' });
       }
     }
   }

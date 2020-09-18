@@ -1,9 +1,12 @@
 import { PaperMenuButton } from '@polymer/paper-menu-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { dialogsActions, notificationsActions, userActions } from '../redux/actions';
-import { DIALOGS, NOTIFICATIONS_STATUS } from '../redux/constants';
-import { State, store } from '../redux/store';
+import { closeDialog, openDialog } from '../store/dialogs/actions';
+import { DIALOGS } from '../store/dialogs/types';
+import { requestPermission, unsubscribe } from '../store/notifications/actions';
+import { NOTIFICATIONS_STATUS } from '../store/notifications/types';
+import { RootState, store } from '../store';
+import { signOut } from '../store/user/actions';
 import { TempAny } from '../temp-any';
 import './shared-styles';
 
@@ -243,7 +246,13 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
             <div layout vertical center-justified>
               <span class="profile-name">[[user.displayName]]</span>
               <span class="profile-email">[[user.email]]</span>
-              <span class="profile-action" role="button" on-click="signOut">{$ signOut $}</span>
+              <span
+                class="profile-action"
+                role="button"
+                on-click="_
+              signOut"
+                >{$ signOut $}</span
+              >
             </div>
           </div>
         </paper-menu-button>
@@ -295,7 +304,7 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     return this.setProperties({
       dialogs: state.dialogs,
       notifications: state.notifications,
@@ -328,11 +337,11 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
   }
 
   signIn() {
-    dialogsActions.openDialog(DIALOGS.SIGNIN);
+    openDialog(DIALOGS.SIGNIN);
   }
 
-  signOut() {
-    userActions.signOut();
+  _signOut() {
+    signOut();
   }
 
   _onScroll() {
@@ -341,17 +350,17 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
 
   _authStatusChanged(signedIn) {
     if (this.dialogs.signin.isOpened) {
-      dialogsActions.closeDialog(DIALOGS.SIGNIN);
+      closeDialog(DIALOGS.SIGNIN);
     }
   }
 
   _toggleNotifications() {
     this._closeNotificationMenu();
     if (this.notifications.status === NOTIFICATIONS_STATUS.GRANTED) {
-      store.dispatch(notificationsActions.unsubscribe(this.notifications.token));
+      store.dispatch(unsubscribe(this.notifications.token));
       return;
     }
-    store.dispatch(notificationsActions.requestPermission());
+    store.dispatch(requestPermission());
   }
 
   _getNotificationsIcon(status) {

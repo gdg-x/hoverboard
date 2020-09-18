@@ -3,9 +3,11 @@ import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { dialogsActions, partnersActions, toastActions } from '../redux/actions';
-import { DIALOGS } from '../redux/constants';
-import { State, store } from '../redux/store';
+import { closeDialog, openDialog, setDialogError } from '../store/dialogs/actions';
+import { DIALOGS } from '../store/dialogs/types';
+import { addPartner, fetchPartners } from '../store/partners/actions';
+import { RootState, store } from '../store';
+import { showToast } from '../store/toast/actions';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -116,7 +118,7 @@ class PartnersBlock extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     return this.setProperties({
       viewport: state.ui.viewport,
       partners: state.partners.list,
@@ -130,18 +132,18 @@ class PartnersBlock extends ReduxMixin(PolymerElement) {
   connectedCallback() {
     super.connectedCallback();
     if (!this.partnersFetching && (!this.partners || !this.partners.length)) {
-      store.dispatch(partnersActions.fetchPartners());
+      store.dispatch(fetchPartners());
     }
   }
 
   _addPotentialPartner() {
-    dialogsActions.openDialog(DIALOGS.SUBSCRIBE, {
+    openDialog(DIALOGS.SUBSCRIBE, {
       title: '{$ partnersBlock.form.title $}',
       submitLabel: '{$ partnersBlock.form.submitLabel $}',
       firstFieldLabel: '{$ partnersBlock.form.fullName $}',
       secondFieldLabel: '{$ partnersBlock.form.companyName $}',
       submit: (data) => {
-        store.dispatch(partnersActions.addPartner(data));
+        store.dispatch(addPartner(data));
       },
     });
   }
@@ -149,10 +151,10 @@ class PartnersBlock extends ReduxMixin(PolymerElement) {
   _partnerAddingChanged(newPartnerAdding, oldPartnerAdding) {
     if (oldPartnerAdding && !newPartnerAdding) {
       if (this.partnerAddingError) {
-        store.dispatch(dialogsActions.setDialogError(DIALOGS.SUBSCRIBE));
+        setDialogError(DIALOGS.SUBSCRIBE);
       } else {
-        dialogsActions.closeDialog(DIALOGS.SUBSCRIBE);
-        toastActions.showToast({ message: '{$ partnersBlock.toast $}' });
+        closeDialog(DIALOGS.SUBSCRIBE);
+        showToast({ message: '{$ partnersBlock.toast $}' });
       }
     }
   }

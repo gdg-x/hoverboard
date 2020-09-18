@@ -2,9 +2,10 @@ import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { dialogsActions, subscribeActions } from '../redux/actions';
-import { DIALOGS } from '../redux/constants';
-import { State, store } from '../redux/store';
+import { openDialog } from '../store/dialogs/actions';
+import { DIALOGS } from '../store/dialogs/types';
+import { RootState, store } from '../store';
+import { subscribe } from '../store/subscribe/actions';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -101,7 +102,7 @@ class SubscribeBlock extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.setProperties({
       subscribed: state.subscribed,
       user: state.user,
@@ -136,7 +137,7 @@ class SubscribeBlock extends ReduxMixin(PolymerElement) {
     if (this.user.email) {
       this._subscribeAction(Object.assign({}, { email: this.user.email }, userData));
     } else {
-      dialogsActions.openDialog(DIALOGS.SUBSCRIBE, {
+      openDialog(DIALOGS.SUBSCRIBE, {
         title: '{$ subscribeBlock.formTitle $}',
         submitLabel: ' {$ subscribeBlock.subscribe $}',
         firstFieldLabel: '{$ subscribeBlock.firstName $}',
@@ -149,7 +150,7 @@ class SubscribeBlock extends ReduxMixin(PolymerElement) {
   }
 
   _subscribeAction(data) {
-    store.dispatch(subscribeActions.subscribe(data));
+    store.dispatch(subscribe(data));
   }
 }
 

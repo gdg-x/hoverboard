@@ -5,9 +5,10 @@ import 'plastic-image';
 import '../elements/content-loader';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { dialogsActions, previousSpeakersActions } from '../redux/actions';
-import { DIALOGS } from '../redux/constants';
-import { State, store } from '../redux/store';
+import { closeDialog, openDialog } from '../store/dialogs/actions';
+import { DIALOGS } from '../store/dialogs/types';
+import { fetchPreviousSpeakersList } from '../store/previous-speakers/actions';
+import { RootState, store } from '../store';
 import { TempAny } from '../temp-any';
 
 class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
@@ -229,7 +230,7 @@ class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.setProperties({
       isDialogOpened: state.dialogs.previousSpeaker.isOpened,
       speakers: state.previousSpeakers.list,
@@ -249,7 +250,7 @@ class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
   connectedCallback() {
     super.connectedCallback();
     if (!this.speakersFetching && (!this.speakers || !this.speakers.length)) {
-      store.dispatch(previousSpeakersActions.fetchList());
+      store.dispatch(fetchPreviousSpeakersList());
     }
   }
 
@@ -270,9 +271,9 @@ class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
       requestAnimationFrame(() => {
         if (active && id) {
           const speakerData = speakersMap[id];
-          speakerData && dialogsActions.openDialog(DIALOGS.PREVIOUS_SPEAKER, speakerData);
+          speakerData && openDialog(DIALOGS.PREVIOUS_SPEAKER, speakerData);
         } else if (this.isDialogOpened) {
-          dialogsActions.closeDialog(DIALOGS.PREVIOUS_SPEAKER);
+          closeDialog(DIALOGS.PREVIOUS_SPEAKER);
         }
       });
     }

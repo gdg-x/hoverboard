@@ -4,8 +4,8 @@ import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { blogActions } from '../redux/actions';
-import { State, store } from '../redux/store';
+import { fetchBlogList } from '../store/blog/actions';
+import { RootState, store } from '../store';
 import { getDate } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
@@ -152,7 +152,7 @@ class LatestPostsBlock extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     return this.setProperties({
       viewport: state.ui.viewport,
       postsList: state.blog.list,
@@ -164,7 +164,7 @@ class LatestPostsBlock extends ReduxMixin(PolymerElement) {
   connectedCallback() {
     super.connectedCallback();
     if (!this.postsFetching && (!this.postsList || !this.postsList.length)) {
-      store.dispatch(blogActions.fetchList());
+      store.dispatch(fetchBlogList());
     }
   }
 

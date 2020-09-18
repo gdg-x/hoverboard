@@ -1,17 +1,17 @@
-import './about-block';
+import { fireEvent, getByText } from '@testing-library/dom';
 import { html } from 'lit-html';
-import { fixture } from '../../__tests__/helpers/fixtures';
-import { getByText, fireEvent } from '@testing-library/dom';
-import { uiActions } from '../redux/actions';
 import { mocked } from 'ts-jest/utils';
+import { fixture } from '../../__tests__/helpers/fixtures';
+import { toggleVideoDialog } from '../store/ui/actions';
+import './about-block';
 
-jest.mock('../redux/actions');
+jest.mock('../store/ui/actions');
 
-const toggleVideoDialogs = mocked(uiActions.toggleVideoDialog);
+const mockToggleVideoDialogs = mocked(toggleVideoDialog);
 
 describe('about-block', () => {
   beforeEach(() => {
-    toggleVideoDialogs.mockClear();
+    mockToggleVideoDialogs.mockClear();
   });
 
   it('defines a component', () => {
@@ -31,8 +31,8 @@ describe('about-block', () => {
   it('plays the video', async () => {
     const { container } = await fixture(html`<about-block></about-block>`);
     fireEvent.click(getByText(container, '{$ aboutBlock.callToAction.howItWas.label $}'));
-    expect(toggleVideoDialogs).toHaveBeenCalledTimes(1);
-    expect(toggleVideoDialogs).toHaveBeenCalledWith({
+    expect(mockToggleVideoDialogs).toHaveBeenCalledTimes(1);
+    expect(mockToggleVideoDialogs).toHaveBeenCalledWith({
       title: '{$  aboutBlock.callToAction.howItWas.title $}',
       youtubeId: '{$  aboutBlock.callToAction.howItWas.youtubeId $}',
       disableControls: true,

@@ -10,9 +10,12 @@ import 'plastic-image';
 import '../../components/auth-required';
 import { ReduxMixin } from '../../mixins/redux-mixin';
 import { SpeakersHoC } from '../../mixins/speakers-hoc';
-import { dialogsActions, sessionsActions, toastActions, uiActions } from '../../redux/actions';
-import { DIALOGS } from '../../redux/constants';
-import { State, store } from '../../redux/store';
+import { closeDialog, openDialog } from '../../store/dialogs/actions';
+import { DIALOGS } from '../../store/dialogs/types';
+import { setUserFeaturedSessions } from '../../store/sessions/actions';
+import { RootState, store } from '../../store';
+import { showToast } from '../../store/toast/actions';
+import { toggleVideoDialog } from '../../store/ui/actions';
 import { getVariableColor } from '../../utils/functions';
 import '../feedback-block';
 import '../shared-styles';
@@ -195,7 +198,7 @@ class SessionDetails extends SpeakersHoC(
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     super.stateChanged(state);
     this.setProperties({
       featuredSessions: state.sessions.featured,
@@ -211,7 +214,7 @@ class SessionDetails extends SpeakersHoC(
   }
 
   _close() {
-    dialogsActions.closeDialog(DIALOGS.SESSION);
+    closeDialog(DIALOGS.SESSION);
     history.back();
   }
 
@@ -220,8 +223,8 @@ class SessionDetails extends SpeakersHoC(
     const speakerData = this.speakersMap[speakerId];
 
     if (!speakerData) return;
-    dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
-    dialogsActions.closeDialog(DIALOGS.SESSION);
+    openDialog(DIALOGS.SPEAKER, speakerData);
+    closeDialog(DIALOGS.SESSION);
   }
 
   _getCloseBtnIcon(isLaptopViewport) {
@@ -229,7 +232,7 @@ class SessionDetails extends SpeakersHoC(
   }
 
   _openVideo() {
-    uiActions.toggleVideoDialog({
+    toggleVideoDialog({
       title: this.session.title,
       youtubeId: this.session.videoId,
       disableControls: true,
@@ -241,12 +244,12 @@ class SessionDetails extends SpeakersHoC(
     event.preventDefault();
     event.stopPropagation();
     if (!this.user.signedIn) {
-      toastActions.showToast({
+      showToast({
         message: '{$ schedule.saveSessionsSignedOut $}',
         action: {
           title: 'Sign in',
           callback: () => {
-            dialogsActions.openDialog(DIALOGS.SIGNIN);
+            openDialog(DIALOGS.SIGNIN);
           },
         },
       });
@@ -256,7 +259,7 @@ class SessionDetails extends SpeakersHoC(
       [this.session.id]: !this.featuredSessions[this.session.id] ? true : null,
     });
 
-    store.dispatch(sessionsActions.setUserFeaturedSessions(this.user.uid, sessions));
+    store.dispatch(setUserFeaturedSessions(this.user.uid, sessions));
   }
 
   _getFeaturedSessionIcon(featuredSessions, sessionId) {

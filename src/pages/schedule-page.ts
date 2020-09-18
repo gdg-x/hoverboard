@@ -13,9 +13,12 @@ import '../elements/sticky-element';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SessionsHoC } from '../mixins/sessions-hoc';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
-import { dialogsActions, routingActions, scheduleActions, sessionsActions } from '../redux/actions';
-import { DIALOGS } from '../redux/constants';
-import { State, store } from '../redux/store';
+import { closeDialog, openDialog } from '../store/dialogs/actions';
+import { DIALOGS } from '../store/dialogs/types';
+import { setSubRoute } from '../store/routing/actions';
+import { fetchSchedule } from '../store/schedule/actions';
+import { fetchUserFeaturedSessions } from '../store/sessions/actions';
+import { RootState, store } from '../store';
 import { parseQueryParamsFilters } from '../utils/functions';
 
 class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) {
@@ -179,7 +182,7 @@ class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) 
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     super.stateChanged(state);
     this.setProperties({
       featuredSessions: state.sessions.featured,
@@ -206,7 +209,7 @@ class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) 
 
   _sessionsAndSpeakersChanged(sessions, speakers) {
     if (!this.schedule.length && sessions && sessions.length && speakers && speakers.length) {
-      store.dispatch(scheduleActions.fetchSchedule());
+      store.dispatch(fetchSchedule());
     }
   }
 
@@ -224,14 +227,14 @@ class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) 
       sessions.length &&
       (!this.featuredSessions || !Object.keys(this.featuredSessions).length)
     ) {
-      store.dispatch(sessionsActions.fetchUserFeaturedSessions(userUid));
+      store.dispatch(fetchUserFeaturedSessions(userUid));
     }
   }
 
   _setDay(active, day, schedule) {
     if (active && schedule.length) {
       const selectedDay = day || schedule[0].date;
-      routingActions.setSubRoute(selectedDay);
+      setSubRoute(selectedDay);
     }
   }
 
@@ -239,9 +242,9 @@ class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) 
     if (sessions && sessions.length) {
       requestAnimationFrame(() => {
         if (active && id) {
-          dialogsActions.openDialog(DIALOGS.SESSION, this.sessionsMap[id[0]]);
+          openDialog(DIALOGS.SESSION, this.sessionsMap[id[0]]);
         } else {
-          this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
+          this.isSessionDialogOpened && closeDialog(DIALOGS.SESSION);
         }
       });
     }

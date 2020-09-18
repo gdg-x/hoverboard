@@ -1,5 +1,5 @@
-import { speakersActions } from '../redux/actions';
-import { State, store } from '../redux/store';
+import { fetchSpeakersList } from '../store/speakers/actions';
+import { RootState, store } from '../store';
 
 /* @polymerMixin */
 export const SpeakersHoC = (subclass) =>
@@ -19,7 +19,7 @@ export const SpeakersHoC = (subclass) =>
       };
     }
 
-    stateChanged(state: State) {
+    stateChanged(state: RootState) {
       super.stateChanged(state);
       this.setProperties({
         speakers: state.speakers.list,
@@ -33,7 +33,7 @@ export const SpeakersHoC = (subclass) =>
       super.connectedCallback();
 
       if (!this.speakersFetching && (!this.speakers || !this.speakers.length)) {
-        store.dispatch(speakersActions.fetchList());
+        store.dispatch(fetchSpeakersList());
       }
     }
   };

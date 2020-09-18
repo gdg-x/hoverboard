@@ -12,9 +12,9 @@ import '../elements/shared-styles';
 import '../elements/text-truncate';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
-import { dialogsActions } from '../redux/actions';
-import { DIALOGS } from '../redux/constants';
-import { State } from '../redux/store';
+import { closeDialog, openDialog } from '../store/dialogs/actions';
+import { DIALOGS } from '../store/dialogs/types';
+import { RootState } from '../store';
 import { generateClassName, parseQueryParamsFilters } from '../utils/functions';
 
 class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
@@ -307,7 +307,7 @@ class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     super.stateChanged(state);
     this.setProperties({
       isSpeakerDialogOpened: state.dialogs.speaker.isOpened,
@@ -341,10 +341,10 @@ class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
       requestAnimationFrame(() => {
         if (active && id) {
           const speakerData = speakersMap[id];
-          speakerData && dialogsActions.openDialog(DIALOGS.SPEAKER, speakerData);
+          speakerData && openDialog(DIALOGS.SPEAKER, speakerData);
         } else {
-          this.isSpeakerDialogOpened && dialogsActions.closeDialog(DIALOGS.SPEAKER);
-          this.isSessionDialogOpened && dialogsActions.closeDialog(DIALOGS.SESSION);
+          this.isSpeakerDialogOpened && closeDialog(DIALOGS.SPEAKER);
+          this.isSessionDialogOpened && closeDialog(DIALOGS.SESSION);
         }
       });
     }
