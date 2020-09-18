@@ -2,10 +2,10 @@ import { fireEvent, getByText } from '@testing-library/dom';
 import { html } from 'lit-html';
 import { mocked } from 'ts-jest/utils';
 import { fixture } from '../../__tests__/helpers/fixtures';
-import { toggleVideoDialog } from '../redux/ui/actions';
+import { toggleVideoDialog } from '../store/ui/actions';
 import './about-block';
 
-jest.mock('../redux/ui/actions');
+jest.mock('../store/ui/actions');
 
 const mockToggleVideoDialogs = mocked(toggleVideoDialog);
 

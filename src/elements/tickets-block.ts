@@ -3,7 +3,7 @@ import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { TempAny } from '../../functions/src/temp-any';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { State } from '../redux/store';
+import { State } from '../store/store';
 import './content-loader';
 import './hoverboard-icons';
 import './shared-styles';

@@ -2,10 +2,10 @@ import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { openDialog } from '../redux/dialogs/actions';
-import { DIALOGS } from '../redux/dialogs/types';
-import { State, store } from '../redux/store';
-import { subscribe } from '../redux/subscribe/actions';
+import { openDialog } from '../store/dialogs/actions';
+import { DIALOGS } from '../store/dialogs/types';
+import { State, store } from '../store/store';
+import { subscribe } from '../store/subscribe/actions';
 import './hoverboard-icons';
 import './shared-styles';
 

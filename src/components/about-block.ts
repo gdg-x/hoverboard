@@ -1,5 +1,5 @@
 import { css, customElement, html } from 'lit-element';
-import { toggleVideoDialog } from '../redux/ui/actions';
+import { toggleVideoDialog } from '../store/ui/actions';
 import { ThemedElement } from './themed-element';
 
 @customElement('about-block')

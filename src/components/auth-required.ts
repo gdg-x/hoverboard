@@ -1,9 +1,9 @@
 import '@material/mwc-button';
 import { customElement, html, internalProperty } from 'lit-element';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { openDialog } from '../redux/dialogs/actions';
-import { DIALOGS } from '../redux/dialogs/types';
-import { State } from '../redux/store';
+import { openDialog } from '../store/dialogs/actions';
+import { DIALOGS } from '../store/dialogs/types';
+import { State } from '../store/store';
 import { ThemedElement } from './themed-element';
 
 @customElement('auth-required')

@@ -1,12 +1,12 @@
 import { PaperMenuButton } from '@polymer/paper-menu-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { closeDialog, openDialog } from '../redux/dialogs/actions';
-import { DIALOGS } from '../redux/dialogs/types';
-import { requestPermission, unsubscribe } from '../redux/notifications/actions';
-import { NOTIFICATIONS_STATUS } from '../redux/notifications/types';
-import { State, store } from '../redux/store';
-import { signOut } from '../redux/user/actions';
+import { closeDialog, openDialog } from '../store/dialogs/actions';
+import { DIALOGS } from '../store/dialogs/types';
+import { requestPermission, unsubscribe } from '../store/notifications/actions';
+import { NOTIFICATIONS_STATUS } from '../store/notifications/types';
+import { State, store } from '../store/store';
+import { signOut } from '../store/user/actions';
 import { TempAny } from '../temp-any';
 import './shared-styles';
 

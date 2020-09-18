@@ -2,8 +2,8 @@ import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { fetchPreviousSpeakersList } from '../redux/previous-speakers/actions';
-import { State, store } from '../redux/store';
+import { fetchPreviousSpeakersList } from '../store/previous-speakers/actions';
+import { State, store } from '../store/store';
 import { randomOrder } from '../utils/functions';
 import './shared-styles';
 

@@ -1,7 +1,7 @@
 import '@polymer/app-route/app-route';
 import '@polymer/iron-pages';
 import { html, PolymerElement } from '@polymer/polymer';
-import { setSubRoute } from '../redux/routing/actions';
+import { setSubRoute } from '../store/routing/actions';
 import { scrollToY } from '../utils/scrolling';
 import './blog-list-page';
 import './post-page';

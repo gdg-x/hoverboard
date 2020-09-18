@@ -4,7 +4,7 @@ import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { State } from '../redux/store';
+import { State } from '../store/store';
 import './hoverboard-icons';
 import './shared-styles';
 

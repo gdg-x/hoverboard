@@ -2,8 +2,8 @@ import '@polymer/paper-input/paper-input';
 import { PaperInputElement } from '@polymer/paper-input/paper-input';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { State, store } from '../redux/store';
-import { subscribe } from '../redux/subscribe/actions';
+import { State, store } from '../store/store';
+import { subscribe } from '../store/subscribe/actions';
 import './hoverboard-icons';
 import './shared-styles';
 

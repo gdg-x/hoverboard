@@ -3,9 +3,9 @@ import '@polymer/paper-input/paper-textarea';
 import { html, PolymerElement } from '@polymer/polymer';
 import '@radi-cho/star-rating';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { addComment, checkPreviousFeedback, deleteFeedback } from '../redux/feedback/actions';
-import { State, store } from '../redux/store';
-import { showToast } from '../redux/toast/actions';
+import { addComment, checkPreviousFeedback, deleteFeedback } from '../store/feedback/actions';
+import { State, store } from '../store/store';
+import { showToast } from '../store/toast/actions';
 
 class Feedback extends ReduxMixin(PolymerElement) {
   static get template() {

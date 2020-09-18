@@ -4,9 +4,9 @@ import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { State, store } from '../redux/store';
-import { toggleVideoDialog } from '../redux/ui/actions';
-import { fetchVideos } from '../redux/videos/actions';
+import { State, store } from '../store/store';
+import { toggleVideoDialog } from '../store/ui/actions';
+import { fetchVideos } from '../store/videos/actions';
 import './shared-animations';
 import './shared-styles';
 

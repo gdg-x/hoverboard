@@ -1,8 +1,8 @@
 import '@polymer/paper-toast/paper-toast';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { State } from '../redux/store';
-import { hideToast } from '../redux/toast/actions';
+import { State } from '../store/store';
+import { hideToast } from '../store/toast/actions';
 import { TempAny } from '../temp-any';
 import './shared-styles';
 

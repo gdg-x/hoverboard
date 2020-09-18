@@ -5,8 +5,8 @@ import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { State, store } from '../redux/store';
-import { fetchTeam } from '../redux/team/actions';
+import { State, store } from '../store/store';
+import { fetchTeam } from '../store/team/actions';
 
 class TeamPage extends ReduxMixin(PolymerElement) {
   active = false;

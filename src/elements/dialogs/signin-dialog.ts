@@ -2,11 +2,11 @@ import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
 import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import { ReduxMixin } from '../../mixins/redux-mixin';
-import { closeDialog, openDialog } from '../../redux/dialogs/actions';
-import { DIALOGS } from '../../redux/dialogs/types';
-import { getProviderCompanyName } from '../../redux/helpers/actions';
-import { State } from '../../redux/store';
-import { mergeAccounts, signIn } from '../../redux/user/actions';
+import { closeDialog, openDialog } from '../../store/dialogs/actions';
+import { DIALOGS } from '../../store/dialogs/types';
+import { getProviderCompanyName } from '../../store/helpers/actions';
+import { State } from '../../store/store';
+import { mergeAccounts, signIn } from '../../store/user/actions';
 import '../hoverboard-icons';
 import '../shared-styles';
 

@@ -1,7 +1,7 @@
 import '@polymer/iron-location/iron-location';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { State } from '../redux/store';
+import { State } from '../store/store';
 import { TempAny } from '../temp-any';
 import './content-loader';
 import './shared-styles';

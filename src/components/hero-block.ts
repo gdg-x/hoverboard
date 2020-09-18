@@ -1,7 +1,7 @@
 import '@power-elements/lazy-image';
 import { css, customElement, html, property, PropertyValues } from 'lit-element';
 import { styleMap } from 'lit-html/directives/style-map';
-import { setHeroSettings } from '../redux/ui/actions';
+import { setHeroSettings } from '../store/ui/actions';
 import { ThemedElement } from './themed-element';
 
 @customElement('hero-block')

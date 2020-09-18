@@ -3,7 +3,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
-import { State } from '../redux/store';
+import { State } from '../store/store';
 import { randomOrder } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';

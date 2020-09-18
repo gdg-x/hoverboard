@@ -1,5 +1,5 @@
-import { fetchSessionsList } from '../redux/sessions/actions';
-import { State, store } from '../redux/store';
+import { fetchSessionsList } from '../store/sessions/actions';
+import { State, store } from '../store/store';
 
 /* @polymerMixin */
 export const SessionsHoC = (subclass) =>

@@ -12,8 +12,8 @@ import '../elements/speakers-block';
 import '../elements/subscribe-block';
 import '../elements/tickets-block';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { State } from '../redux/store';
-import { toggleVideoDialog } from '../redux/ui/actions';
+import { State } from '../store/store';
+import { toggleVideoDialog } from '../store/ui/actions';
 import { TempAny } from '../temp-any';
 import { scrollToY } from '../utils/scrolling';
 

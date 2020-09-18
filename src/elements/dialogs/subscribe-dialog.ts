@@ -4,9 +4,9 @@ import '@polymer/paper-input/paper-input';
 import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import { ReduxMixin } from '../../mixins/redux-mixin';
-import { closeDialog } from '../../redux/dialogs/actions';
-import { DIALOGS } from '../../redux/dialogs/types';
-import { State } from '../../redux/store';
+import { closeDialog } from '../../store/dialogs/actions';
+import { DIALOGS } from '../../store/dialogs/types';
+import { State } from '../../store/store';
 import '../hoverboard-icons';
 import '../shared-styles';
 

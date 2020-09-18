@@ -1,5 +1,5 @@
-import { fetchSpeakersList } from '../redux/speakers/actions';
-import { State, store } from '../redux/store';
+import { fetchSpeakersList } from '../store/speakers/actions';
+import { State, store } from '../store/store';
 
 /* @polymerMixin */
 export const SpeakersHoC = (subclass) =>

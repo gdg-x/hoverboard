@@ -1,6 +1,6 @@
 import * as settings from '@polymer/polymer/lib/utils/settings';
 import { error } from './console';
-import { showToast } from './redux/toast/actions';
+import { showToast } from './store/toast/actions';
 import { TempAny } from './temp-any';
 
 const SW_URL = 'service-worker.js';

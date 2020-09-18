@@ -3,11 +3,11 @@ import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { closeDialog, openDialog, setDialogError } from '../redux/dialogs/actions';
-import { DIALOGS } from '../redux/dialogs/types';
-import { addPartner, fetchPartners } from '../redux/partners/actions';
-import { State, store } from '../redux/store';
-import { showToast } from '../redux/toast/actions';
+import { closeDialog, openDialog, setDialogError } from '../store/dialogs/actions';
+import { DIALOGS } from '../store/dialogs/types';
+import { addPartner, fetchPartners } from '../store/partners/actions';
+import { State, store } from '../store/store';
+import { showToast } from '../store/toast/actions';
 import './hoverboard-icons';
 import './shared-styles';
 

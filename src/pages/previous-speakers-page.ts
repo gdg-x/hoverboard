@@ -5,10 +5,10 @@ import 'plastic-image';
 import '../elements/content-loader';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { closeDialog, openDialog } from '../redux/dialogs/actions';
-import { DIALOGS } from '../redux/dialogs/types';
-import { fetchPreviousSpeakersList } from '../redux/previous-speakers/actions';
-import { State, store } from '../redux/store';
+import { closeDialog, openDialog } from '../store/dialogs/actions';
+import { DIALOGS } from '../store/dialogs/types';
+import { fetchPreviousSpeakersList } from '../store/previous-speakers/actions';
+import { State, store } from '../store/store';
 import { TempAny } from '../temp-any';
 
 class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {

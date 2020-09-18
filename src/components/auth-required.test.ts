@@ -2,13 +2,13 @@ import { fireEvent } from '@testing-library/dom';
 import { html } from 'lit-html';
 import { mocked } from 'ts-jest/utils';
 import { fixture } from '../../__tests__/helpers/fixtures';
-import { openDialog } from '../redux/dialogs/actions';
-import { store } from '../redux/store';
-import { SIGN_IN } from '../redux/user/types';
+import { openDialog } from '../store/dialogs/actions';
+import { store } from '../store/store';
+import { SIGN_IN } from '../store/user/types';
 import './auth-required';
 import { AuthRequired } from './auth-required';
 
-jest.mock('../redux/dialogs/actions');
+jest.mock('../store/dialogs/actions');
 
 const mockOpenDialog = mocked(openDialog);
 

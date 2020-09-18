@@ -5,8 +5,8 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import '@radi-cho/star-rating';
 import { ReduxMixin } from '../../mixins/redux-mixin';
-import { closeDialog } from '../../redux/dialogs/actions';
-import { DIALOGS } from '../../redux/dialogs/types';
+import { closeDialog } from '../../store/dialogs/actions';
+import { DIALOGS } from '../../store/dialogs/types';
 import '../shared-styles';
 
 class FeedbackDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], PolymerElement)) {

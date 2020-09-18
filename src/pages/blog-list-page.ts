@@ -7,8 +7,8 @@ import '../elements/posts-list';
 import '../elements/shared-styles';
 import '../elements/text-truncate';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { fetchBlogList } from '../redux/blog/actions';
-import { State, store } from '../redux/store';
+import { fetchBlogList } from '../store/blog/actions';
+import { State, store } from '../store/store';
 import { getDate } from '../utils/functions';
 
 class BlogListPage extends ReduxMixin(PolymerElement) {
