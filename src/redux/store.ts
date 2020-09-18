@@ -1,12 +1,13 @@
-import { applyMiddleware, compose, createStore } from 'redux';
-import ReduxThunk from 'redux-thunk';
+import { AnyAction, applyMiddleware, compose, createStore } from 'redux';
+import thunk, { ThunkDispatch } from 'redux-thunk';
 import { TempAny } from '../temp-any';
 import { appReducer } from './reducer';
 
 const devTools = (window as TempAny).__REDUX_DEVTOOLS_EXTENSION__
   ? (window as TempAny).__REDUX_DEVTOOLS_EXTENSION__()
-  : (f) => f;
-const enhancers = compose(applyMiddleware(ReduxThunk), devTools);
+  : <F>(f: F) => f;
 
+export type State = ReturnType<typeof appReducer>;
+type DispatchFunctionType = ThunkDispatch<State, undefined, AnyAction>;
+const enhancers = compose(applyMiddleware<DispatchFunctionType, State>(thunk), devTools);
 export const store = createStore(appReducer, enhancers);
-export type State = ReturnType<typeof appReducer>
