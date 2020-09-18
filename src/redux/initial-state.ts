@@ -13,6 +13,7 @@ import { initialTeamState } from './team/state';
 import { initialTicketsState } from './tickets/state';
 import { initialToastState } from './toast/state';
 import { initialUiState } from './ui/state';
+import { initialUserState } from './user/state';
 import { initialVideosState } from './videos/state';
 
 export const initialState = {
@@ -44,9 +45,7 @@ export const initialState = {
   schedule: initialScheduleState,
   gallery: initialGalleryState,
   team: initialTeamState,
-  user: {
-    signedIn: false,
-  },
+  user: initialUserState,
   subscribed: initialSubscribeState,
   toast: initialToastState,
   notifications: initialNotificationState,

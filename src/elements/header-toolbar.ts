@@ -1,12 +1,12 @@
 import { PaperMenuButton } from '@polymer/paper-menu-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { userActions } from '../redux/actions';
 import { closeDialog, openDialog } from '../redux/dialogs/actions';
 import { DIALOGS } from '../redux/dialogs/types';
 import { requestPermission, unsubscribe } from '../redux/notifications/actions';
 import { NOTIFICATIONS_STATUS } from '../redux/notifications/types';
 import { State, store } from '../redux/store';
+import { signOut } from '../redux/user/actions';
 import { TempAny } from '../temp-any';
 import './shared-styles';
 
@@ -246,7 +246,13 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
             <div layout vertical center-justified>
               <span class="profile-name">[[user.displayName]]</span>
               <span class="profile-email">[[user.email]]</span>
-              <span class="profile-action" role="button" on-click="signOut">{$ signOut $}</span>
+              <span
+                class="profile-action"
+                role="button"
+                on-click="_
+              signOut"
+                >{$ signOut $}</span
+              >
             </div>
           </div>
         </paper-menu-button>
@@ -334,8 +340,8 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
     openDialog(DIALOGS.SIGNIN);
   }
 
-  signOut() {
-    userActions.signOut();
+  _signOut() {
+    signOut();
   }
 
   _onScroll() {

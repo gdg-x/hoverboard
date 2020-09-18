@@ -13,7 +13,7 @@ import { sessionsReducer } from './reducers/sessions';
 import { speakersReducer } from './reducers/speakers';
 import { subscribeReducer } from './subscribe/reducers';
 import { teamReducer } from './team/reducers';
-import { userReducer } from './reducers/user';
+import { userReducer } from './user/reducers';
 import { ticketsReducer } from './tickets/reducers';
 import { toastReducer } from './toast/reducers';
 import { uiReducer } from './ui/reducers';

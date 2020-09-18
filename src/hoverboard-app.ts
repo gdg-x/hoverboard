@@ -48,13 +48,13 @@ import './pages/previous-speakers-page';
 import './pages/schedule-page';
 import './pages/speakers-page';
 import './pages/team-page';
-import { userActions } from './redux/actions';
 import { getToken, initializeMessaging } from './redux/notifications/actions';
 import { setRoute } from './redux/routing/actions';
 import { State, store } from './redux/store';
 import { fetchTickets } from './redux/tickets/actions';
 import { showToast } from './redux/toast/actions';
 import { setViewportSize } from './redux/ui/actions';
+import { updateUser } from './redux/user/actions';
 import { registerServiceWorker } from './service-worker-registration';
 import { TempAny } from './temp-any';
 import { scrollToY } from './utils/scrolling';
@@ -436,7 +436,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
     super.ready();
     log('Hoverboard is ready!');
     this.removeAttribute('unresolved');
-    userActions.updateUser();
+    updateUser();
     initializeMessaging().then(() => store.dispatch(getToken()));
   }
 

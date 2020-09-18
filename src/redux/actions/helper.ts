@@ -1,7 +1,7 @@
 import { TempAny } from '../../temp-any';
-import { SIGN_IN } from '../constants';
 import { WIPE_PREVIOUS_FEEDBACK } from '../feedback/types';
 import { store } from '../store';
+import { SIGN_IN } from '../user/types';
 
 export const helperActions = {
   storeUser: (user?) => {
@@ -36,7 +36,7 @@ export const helperActions = {
     if (!userToStore.signedIn) store.dispatch({ type: WIPE_PREVIOUS_FEEDBACK });
   },
 
-  getFederatedProvider: (provider) => {
+  getFederatedProvider: (provider: string) => {
     switch (provider) {
       case 'https://accounts.google.com':
       case 'google.com': {
