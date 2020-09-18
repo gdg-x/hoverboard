@@ -1,6 +1,4 @@
-import { AnyAction, applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import thunk, { ThunkDispatch } from 'redux-thunk';
-import { TempAny } from '../temp-any';
+import { configureStore } from '@reduxjs/toolkit';
 import { blogReducer } from './blog/reducers';
 import { dialogsReducer } from './dialogs/reducers';
 import { feedbackReducer } from './feedback/reducers';
@@ -21,11 +19,7 @@ import { uiReducer } from './ui/reducers';
 import { userReducer } from './user/reducers';
 import { videosReducer } from './videos/reducers';
 
-const devTools = (window as TempAny).__REDUX_DEVTOOLS_EXTENSION__
-  ? (window as TempAny).__REDUX_DEVTOOLS_EXTENSION__()
-  : <F>(f: F) => f;
-
-const rootReducer = combineReducers({
+const rootReducer = {
   blog: blogReducer,
   dialogs: dialogsReducer,
   feedback: feedbackReducer,
@@ -45,9 +39,10 @@ const rootReducer = combineReducers({
   ui: uiReducer,
   user: userReducer,
   videos: videosReducer,
-});
-type DispatchFunctionType = ThunkDispatch<RootState, undefined, AnyAction>;
-const enhancers = compose(applyMiddleware<DispatchFunctionType, RootState>(thunk), devTools);
+};
 
-export const store = createStore(rootReducer, enhancers);
-export type RootState = ReturnType<typeof rootReducer>;
+export const store = configureStore({
+  reducer: rootReducer,
+});
+
+export type RootState = ReturnType<typeof store.getState>;
