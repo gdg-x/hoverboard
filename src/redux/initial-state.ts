@@ -5,6 +5,7 @@ import { initialFeedbackState } from './feedback/state';
 import { initialFiltersState } from './filters/state';
 import { initialGalleryState } from './gallery/store';
 import { initialSubscribeState } from './subscribe/state';
+import { initialTeamState } from './team/state';
 import { initialTicketsState } from './tickets/state';
 import { initialToastState } from './toast/state';
 import { initialUiState } from './ui/state';
@@ -52,11 +53,7 @@ export const initialState = {
   },
   schedule: [],
   gallery: initialGalleryState,
-  team: {
-    fetching: false,
-    fetchingError: null,
-    list: [],
-  },
+  team: initialTeamState,
   user: {
     signedIn: false,
   },

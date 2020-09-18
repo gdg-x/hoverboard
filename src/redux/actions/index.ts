@@ -7,7 +7,6 @@ import { routingActions } from './routing';
 import { scheduleActions } from './schedule';
 import { sessionsActions } from './sessions';
 import { speakersActions } from './speakers';
-import { teamActions } from './team';
 import { userActions } from './user';
 
 export {
@@ -19,7 +18,6 @@ export {
   scheduleActions,
   sessionsActions,
   speakersActions,
-  teamActions,
   userActions,
 };
 

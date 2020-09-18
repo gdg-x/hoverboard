@@ -12,7 +12,7 @@ import { scheduleReducer } from './reducers/schedule';
 import { sessionsReducer } from './reducers/sessions';
 import { speakersReducer } from './reducers/speakers';
 import { subscribeReducer } from './subscribe/reducers';
-import { teamReducer } from './reducers/team';
+import { teamReducer } from './team/reducers';
 import { userReducer } from './reducers/user';
 import { ticketsReducer } from './tickets/reducers';
 import { toastReducer } from './toast/reducers';

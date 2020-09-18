@@ -41,11 +41,6 @@ export const FETCH_SCHEDULE = 'app/Schedule/FETCH_SCHEDULE';
 export const FETCH_SCHEDULE_FAILURE = 'app/Schedule/FETCH_SCHEDULE_FAILURE';
 export const FETCH_SCHEDULE_SUCCESS = 'app/Schedule/FETCH_SCHEDULE_SUCCESS';
 
-// team
-export const FETCH_TEAM = 'app/Team/FETCH_TEAM';
-export const FETCH_TEAM_FAILURE = 'app/Team/FETCH_TEAM_FAILURE';
-export const FETCH_TEAM_SUCCESS = 'app/Team/FETCH_TEAM_SUCCESS';
-
 // user
 export const SIGN_IN = 'app/Auth/SIGN_IN';
 export const SIGN_OUT = 'app/Auth/SIGN_OUT';
