@@ -31,11 +31,3 @@ export const FETCH_SCHEDULE_SUCCESS = 'app/Schedule/FETCH_SCHEDULE_SUCCESS';
 // user
 export const SIGN_IN = 'app/Auth/SIGN_IN';
 export const SIGN_OUT = 'app/Auth/SIGN_OUT';
-
-// notifications
-export const UPDATE_NOTIFICATIONS_STATUS = 'app/Notifications/UPDATE_NOTIFICATIONS_STATUS';
-export const NOTIFICATIONS_STATUS = {
-  GRANTED: 'granted',
-  DENIED: 'denied',
-  DEFAULT: 'default',
-};

@@ -1,9 +1,9 @@
 import { initialBlogState } from './blog/state';
-import { NOTIFICATIONS_STATUS } from './constants';
 import { initialDialogState } from './dialogs/state';
 import { initialFeedbackState } from './feedback/state';
 import { initialFiltersState } from './filters/state';
 import { initialGalleryState } from './gallery/store';
+import { initialNotificationState } from './notifications/state';
 import { initialPartnersState } from './partners/state';
 import { initialRoutingState } from './routing/state';
 import { initialSubscribeState } from './subscribe/state';
@@ -52,8 +52,6 @@ export const initialState = {
   },
   subscribed: initialSubscribeState,
   toast: initialToastState,
-  notifications: {
-    status: NOTIFICATIONS_STATUS.DEFAULT,
-  },
+  notifications: initialNotificationState,
   filters: initialFiltersState,
 };

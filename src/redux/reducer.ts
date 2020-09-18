@@ -4,7 +4,7 @@ import { feedbackReducer } from './feedback/reducers';
 import { filtersReducer } from './filters/reducers';
 import { galleryReducer } from './gallery/reducers';
 import { initialState } from './initial-state';
-import { notificationsReducer } from './reducers/notifications';
+import { notificationsReducer } from './notifications/reducers';
 import { partnersReducer } from './partners/reducers';
 import { previousSpeakersReducer } from './reducers/previous-speakers';
 import { routingReducer } from './routing/reducers';

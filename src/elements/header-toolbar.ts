@@ -1,10 +1,11 @@
 import { PaperMenuButton } from '@polymer/paper-menu-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { notificationsActions, userActions } from '../redux/actions';
-import { NOTIFICATIONS_STATUS } from '../redux/constants';
+import { userActions } from '../redux/actions';
 import { closeDialog, openDialog } from '../redux/dialogs/actions';
 import { DIALOGS } from '../redux/dialogs/types';
+import { requestPermission, unsubscribe } from '../redux/notifications/actions';
+import { NOTIFICATIONS_STATUS } from '../redux/notifications/types';
 import { State, store } from '../redux/store';
 import { TempAny } from '../temp-any';
 import './shared-styles';
@@ -350,10 +351,10 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
   _toggleNotifications() {
     this._closeNotificationMenu();
     if (this.notifications.status === NOTIFICATIONS_STATUS.GRANTED) {
-      store.dispatch(notificationsActions.unsubscribe(this.notifications.token));
+      store.dispatch(unsubscribe(this.notifications.token));
       return;
     }
-    store.dispatch(notificationsActions.requestPermission());
+    store.dispatch(requestPermission());
   }
 
   _getNotificationsIcon(status) {

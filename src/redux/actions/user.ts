@@ -1,4 +1,5 @@
-import { helperActions, notificationsActions } from '.';
+import { helperActions } from '.';
+import { getToken } from '../notifications/actions';
 import { resetSubscribed } from '../subscribe/actions';
 
 export const userActions = {
@@ -10,7 +11,7 @@ export const userActions = {
       .signInWithPopup(firebaseProvider)
       .then((signInObject) => {
         helperActions.storeUser(signInObject.user);
-        notificationsActions.getToken(true);
+        getToken(true);
       })
       .catch((error) => {
         if (
