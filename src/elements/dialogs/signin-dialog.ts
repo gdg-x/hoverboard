@@ -2,9 +2,9 @@ import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
 import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import { ReduxMixin } from '../../mixins/redux-mixin';
-import { helperActions } from '../../redux/actions';
 import { closeDialog, openDialog } from '../../redux/dialogs/actions';
 import { DIALOGS } from '../../redux/dialogs/types';
+import { getProviderCompanyName } from '../../redux/helpers/actions';
 import { State } from '../../redux/store';
 import { mergeAccounts, signIn } from '../../redux/user/actions';
 import '../hoverboard-icons';
@@ -134,7 +134,7 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
       if (user.initialProviderId && user.pendingCredential) {
         this.isMergeState = true;
         this.email = user.email;
-        this.providerCompanyName = helperActions.getProviderCompanyName(user.initialProviderId);
+        this.providerCompanyName = getProviderCompanyName(user.initialProviderId);
         openDialog(DIALOGS.SIGNIN);
       }
     }

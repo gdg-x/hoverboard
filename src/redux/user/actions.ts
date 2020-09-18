@@ -1,15 +1,16 @@
-import { helperActions } from '../actions';
+import { getFederatedProvider, storeUser, trackError } from '../helpers/actions';
+import { Providers } from '../helpers/types';
 import { getToken } from '../notifications/actions';
 import { resetSubscribed } from '../subscribe/actions';
 
-export const signIn = (providerName: string) => {
-  const firebaseProvider = helperActions.getFederatedProvider(providerName);
+export const signIn = (providerName: Providers) => {
+  const firebaseProvider = getFederatedProvider(providerName);
 
   return window.firebase
     .auth()
     .signInWithPopup(firebaseProvider)
     .then((signInObject) => {
-      helperActions.storeUser(signInObject.user);
+      storeUser(signInObject.user);
       getToken(true);
     })
     .catch((error) => {
@@ -20,8 +21,8 @@ export const signIn = (providerName: string) => {
         window.firebase
           .auth()
           .fetchSignInMethodsForEmail(error.email)
-          .then((providers) => {
-            helperActions.storeUser({
+          .then((providers: Providers[]) => {
+            storeUser({
               signedIn: false,
               initialProviderId: providers[0],
               email: error.email,
@@ -29,15 +30,15 @@ export const signIn = (providerName: string) => {
             });
           });
       }
-      helperActions.trackError('userActions', 'signIn', error);
+      trackError('userActions', 'signIn', error);
     });
 };
 
 export const mergeAccounts = (
-  initialProviderId: string,
+  initialProviderId: Providers,
   pendingCredential: firebase.auth.AuthCredential
 ) => {
-  const firebaseProvider = helperActions.getFederatedProvider(initialProviderId);
+  const firebaseProvider = getFederatedProvider(initialProviderId);
 
   return window.firebase
     .auth()
@@ -46,13 +47,13 @@ export const mergeAccounts = (
       result.user.linkWithCredential(pendingCredential);
     })
     .catch((error) => {
-      helperActions.trackError('userActions', 'mergeAccounts', error);
+      trackError('userActions', 'mergeAccounts', error);
     });
 };
 
 export const updateUser = () => {
   window.firebase.auth().onAuthStateChanged((user) => {
-    helperActions.storeUser(user);
+    storeUser(user);
   });
 };
 
@@ -61,7 +62,7 @@ export const signOut = () => {
     .auth()
     .signOut()
     .then(() => {
-      helperActions.storeUser();
+      storeUser();
       resetSubscribed();
     });
 };

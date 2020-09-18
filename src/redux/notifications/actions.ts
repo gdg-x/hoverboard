@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
-import { helperActions } from '../actions/helper';
 import { db } from '../db';
+import { trackError } from '../helpers/actions';
 import { setLocation } from '../routing/actions';
 import { showToast } from '../toast/actions';
 import { NOTIFICATIONS_STATUS, UPDATE_NOTIFICATIONS_STATUS } from './types';
@@ -42,7 +42,7 @@ export const requestPermission = () => (dispatch: Dispatch) => {
         status: NOTIFICATIONS_STATUS.DENIED,
       });
 
-      helperActions.trackError('notificationActions', 'requestPermission', error);
+      trackError('notificationActions', 'requestPermission', error);
     });
 };
 
@@ -129,7 +129,7 @@ export const getToken = (subscribe = false) => (dispatch: Dispatch, getState) =>
         token: null,
       });
 
-      helperActions.trackError('notificationActions', 'getToken', error);
+      trackError('notificationActions', 'getToken', error);
     });
 };
 

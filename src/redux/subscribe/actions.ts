@@ -1,10 +1,10 @@
 import { Dispatch } from 'redux';
-import { SUBSCRIBE } from './types';
 import { db } from '../db';
 import { DialogForm, DIALOGS, SET_DIALOG_DATA } from '../dialogs/types';
+import { trackError } from '../helpers/actions';
 import { store } from '../store';
 import { showToast } from '../toast/actions';
-import { helperActions } from '../actions/helper';
+import { SUBSCRIBE } from './types';
 
 export const subscribe = (data: DialogForm) => (dispatch: Dispatch) => {
   const id = data.email.replace(/[^\w\s]/gi, '');
@@ -40,7 +40,7 @@ export const subscribe = (data: DialogForm) => (dispatch: Dispatch) => {
         subscribed: false,
       });
 
-      helperActions.trackError('subscribeActions', 'subscribe', error);
+      trackError('subscribeActions', 'subscribe', error);
     });
 };
 

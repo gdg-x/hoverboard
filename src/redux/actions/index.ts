@@ -1,8 +1,7 @@
 import firebase from 'firebase';
-import { helperActions } from './helper';
 import { sessionsActions } from './sessions';
 
-export { helperActions, sessionsActions };
+export { sessionsActions };
 
 // TODO: Remove type
 declare global {
