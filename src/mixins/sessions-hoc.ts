@@ -1,4 +1,4 @@
-import { sessionsActions } from '../redux/actions';
+import { fetchSessionsList } from '../redux/sessions/actions';
 import { State, store } from '../redux/store';
 
 /* @polymerMixin */
@@ -6,7 +6,6 @@ export const SessionsHoC = (subclass) =>
   class extends subclass {
     protected sessions = [];
     protected sessionsMap = {};
-    protected sessionsBySpeaker = {};
     protected sessionsFetching = false;
     protected sessionsFetchingError = {};
 
@@ -15,7 +14,6 @@ export const SessionsHoC = (subclass) =>
         ...super.properties,
         sessions: Array,
         sessionsMap: Object,
-        sessionsBySpeaker: Object,
         sessionsFetching: Boolean,
         sessionsFetchingError: Object,
       };
@@ -26,7 +24,6 @@ export const SessionsHoC = (subclass) =>
       this.setProperties({
         sessions: state.sessions.list,
         sessionsMap: state.sessions.obj,
-        sessionsBySpeaker: state.sessions.objBySpeaker,
         sessionsFetching: state.sessions.fetching,
         sessionsFetchingError: state.sessions.fetchingError,
       });
@@ -36,7 +33,7 @@ export const SessionsHoC = (subclass) =>
       super.connectedCallback();
 
       if (!this.sessionsFetching && (!this.sessions || !this.sessions.length)) {
-        store.dispatch(sessionsActions.fetchList());
+        store.dispatch(fetchSessionsList());
       }
     }
   };

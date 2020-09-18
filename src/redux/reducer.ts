@@ -9,14 +9,14 @@ import { partnersReducer } from './partners/reducers';
 import { previousSpeakersReducer } from './previous-speakers/reducers';
 import { routingReducer } from './routing/reducers';
 import { scheduleReducer } from './schedule/reducers';
-import { sessionsReducer } from './reducers/sessions';
+import { sessionsReducer } from './sessions/reducers';
 import { speakersReducer } from './speakers/reducers';
 import { subscribeReducer } from './subscribe/reducers';
 import { teamReducer } from './team/reducers';
-import { userReducer } from './user/reducers';
 import { ticketsReducer } from './tickets/reducers';
 import { toastReducer } from './toast/reducers';
 import { uiReducer } from './ui/reducers';
+import { userReducer } from './user/reducers';
 import { videosReducer } from './videos/reducers';
 
 export const appReducer = (state = initialState, action) => {

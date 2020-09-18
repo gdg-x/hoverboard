@@ -10,9 +10,9 @@ import 'plastic-image';
 import '../../components/auth-required';
 import { ReduxMixin } from '../../mixins/redux-mixin';
 import { SpeakersHoC } from '../../mixins/speakers-hoc';
-import { sessionsActions } from '../../redux/actions';
 import { closeDialog, openDialog } from '../../redux/dialogs/actions';
 import { DIALOGS } from '../../redux/dialogs/types';
+import { setUserFeaturedSessions } from '../../redux/sessions/actions';
 import { State, store } from '../../redux/store';
 import { showToast } from '../../redux/toast/actions';
 import { toggleVideoDialog } from '../../redux/ui/actions';
@@ -259,7 +259,7 @@ class SessionDetails extends SpeakersHoC(
       [this.session.id]: !this.featuredSessions[this.session.id] ? true : null,
     });
 
-    store.dispatch(sessionsActions.setUserFeaturedSessions(this.user.uid, sessions));
+    store.dispatch(setUserFeaturedSessions(this.user.uid, sessions));
   }
 
   _getFeaturedSessionIcon(featuredSessions, sessionId) {

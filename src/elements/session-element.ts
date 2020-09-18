@@ -2,9 +2,9 @@ import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { sessionsActions } from '../redux/actions';
 import { openDialog } from '../redux/dialogs/actions';
 import { DIALOGS } from '../redux/dialogs/types';
+import { setUserFeaturedSessions } from '../redux/sessions/actions';
 import { store } from '../redux/store';
 import { showToast } from '../redux/toast/actions';
 import { TempAny } from '../temp-any';
@@ -304,7 +304,7 @@ class SessionElement extends ReduxMixin(PolymerElement) {
       [this.session.id]: !this.featuredSessions[this.session.id] ? true : null,
     });
 
-    store.dispatch(sessionsActions.setUserFeaturedSessions(this.user.uid, sessions));
+    store.dispatch(setUserFeaturedSessions(this.user.uid, sessions));
   }
 
   _toggleFeedback(event) {
