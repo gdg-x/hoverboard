@@ -5,7 +5,11 @@ const fs = require('fs');
 
 const production = process.env.NODE_ENV && process.env.NODE_ENV === 'production';
 const development = !production;
-const buildTarget = process.env.BUILD_ENV ? process.env.BUILD_ENV : 'development';
+const buildTarget = process.env.BUILD_ENV
+  ? process.env.BUILD_ENV
+  : production
+  ? 'production'
+  : 'development';
 
 const getConfigPath = () => {
   const path = `./config/${buildTarget}.json`;
