@@ -6,7 +6,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { closeDialog, openDialog, setDialogError } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
 import { addPartner, fetchPartners } from '../store/partners/actions';
-import { State, store } from '../store/store';
+import { RootState, store } from '../store';
 import { showToast } from '../store/toast/actions';
 import './hoverboard-icons';
 import './shared-styles';
@@ -118,7 +118,7 @@ class PartnersBlock extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     return this.setProperties({
       viewport: state.ui.viewport,
       partners: state.partners.list,

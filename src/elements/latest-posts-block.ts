@@ -5,7 +5,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { fetchBlogList } from '../store/blog/actions';
-import { State, store } from '../store/store';
+import { RootState, store } from '../store';
 import { getDate } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
@@ -152,7 +152,7 @@ class LatestPostsBlock extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     return this.setProperties({
       viewport: state.ui.viewport,
       postsList: state.blog.list,

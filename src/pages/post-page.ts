@@ -8,7 +8,7 @@ import '../elements/posts-list';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { fetchBlogList } from '../store/blog/actions';
-import { State, store } from '../store/store';
+import { RootState, store } from '../store';
 import { getDate } from '../utils/functions';
 
 class PostPage extends ReduxMixin(PolymerElement) {
@@ -161,7 +161,7 @@ class PostPage extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.setProperties({
       viewport: state.ui.viewport,
       postsList: state.blog.list,

@@ -5,7 +5,7 @@ import { ReduxMixin } from '../../mixins/redux-mixin';
 import { closeDialog, openDialog } from '../../store/dialogs/actions';
 import { DIALOGS } from '../../store/dialogs/types';
 import { getProviderCompanyName } from '../../store/helpers/actions';
-import { State } from '../../store/store';
+import { RootState } from '../../store';
 import { mergeAccounts, signIn } from '../../store/user/actions';
 import '../hoverboard-icons';
 import '../shared-styles';
@@ -113,7 +113,7 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.setProperties({
       user: state.user,
     });

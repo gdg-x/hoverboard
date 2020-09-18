@@ -8,7 +8,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
 import { fetchPreviousSpeakersList } from '../store/previous-speakers/actions';
-import { State, store } from '../store/store';
+import { RootState, store } from '../store';
 import { TempAny } from '../temp-any';
 
 class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
@@ -230,7 +230,7 @@ class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.setProperties({
       isDialogOpened: state.dialogs.previousSpeaker.isOpened,
       speakers: state.previousSpeakers.list,

@@ -3,7 +3,7 @@ import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { TempAny } from '../../functions/src/temp-any';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { State } from '../store/store';
+import { RootState } from '../store';
 import './content-loader';
 import './hoverboard-icons';
 import './shared-styles';
@@ -225,7 +225,7 @@ class TicketsBlock extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.setProperties({
       viewport: state.ui.viewport,
       tickets: state.tickets.list,

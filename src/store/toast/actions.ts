@@ -1,5 +1,5 @@
 import { HIDE_TOAST, SHOW_TOAST } from './types';
-import { store } from '../store';
+import { store } from '../';
 import { Toast } from '../../models/toast';
 
 let toastHideTimeOut: number;

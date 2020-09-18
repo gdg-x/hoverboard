@@ -5,7 +5,7 @@ import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
 import { requestPermission, unsubscribe } from '../store/notifications/actions';
 import { NOTIFICATIONS_STATUS } from '../store/notifications/types';
-import { State, store } from '../store/store';
+import { RootState, store } from '../store';
 import { signOut } from '../store/user/actions';
 import { TempAny } from '../temp-any';
 import './shared-styles';
@@ -304,7 +304,7 @@ class HeaderToolbar extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     return this.setProperties({
       dialogs: state.dialogs,
       notifications: state.notifications,

@@ -9,7 +9,7 @@ import 'plastic-image';
 import { ReduxMixin } from '../../mixins/redux-mixin';
 import { closeDialog } from '../../store/dialogs/actions';
 import { DIALOGS } from '../../store/dialogs/types';
-import { State } from '../../store/store';
+import { RootState } from '../../store';
 import { toggleVideoDialog } from '../../store/ui/actions';
 import { getVariableColor } from '../../utils/functions';
 import '../shared-styles';
@@ -156,7 +156,7 @@ class PreviousSpeakerDetails extends ReduxMixin(
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.setProperties({
       viewport: state.ui.viewport,
     });

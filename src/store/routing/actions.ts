@@ -1,5 +1,5 @@
 import { SET_ROUTE, SET_SUB_ROUTE } from './types';
-import { store } from '../store';
+import { store } from '../';
 
 export const setRoute = (routeFromAction: string) => {
   const route = routeFromAction || 'home';

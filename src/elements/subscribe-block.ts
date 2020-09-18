@@ -4,7 +4,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
-import { State, store } from '../store/store';
+import { RootState, store } from '../store';
 import { subscribe } from '../store/subscribe/actions';
 import './hoverboard-icons';
 import './shared-styles';
@@ -102,7 +102,7 @@ class SubscribeBlock extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.setProperties({
       subscribed: state.subscribed,
       user: state.user,

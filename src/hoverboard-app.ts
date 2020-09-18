@@ -50,7 +50,7 @@ import './pages/speakers-page';
 import './pages/team-page';
 import { getToken, initializeMessaging } from './store/notifications/actions';
 import { setRoute } from './store/routing/actions';
-import { State, store } from './store/store';
+import { RootState, store } from './store';
 import { fetchTickets } from './store/tickets/actions';
 import { showToast } from './store/toast/actions';
 import { setViewportSize } from './store/ui/actions';
@@ -387,7 +387,7 @@ class HoverboardApp extends ReduxMixin(PolymerElement) {
     ];
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.setProperties({
       dialogs: state.dialogs,
       notifications: state.notifications,

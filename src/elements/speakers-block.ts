@@ -3,7 +3,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
-import { State } from '../store/store';
+import { RootState } from '../store';
 import { randomOrder } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
@@ -232,7 +232,7 @@ class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     super.stateChanged(state);
     return this.setProperties({
       speakers: state.speakers.list,

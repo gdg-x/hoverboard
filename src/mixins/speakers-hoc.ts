@@ -1,5 +1,5 @@
 import { fetchSpeakersList } from '../store/speakers/actions';
-import { State, store } from '../store/store';
+import { RootState, store } from '../store';
 
 /* @polymerMixin */
 export const SpeakersHoC = (subclass) =>
@@ -19,7 +19,7 @@ export const SpeakersHoC = (subclass) =>
       };
     }
 
-    stateChanged(state: State) {
+    stateChanged(state: RootState) {
       super.stateChanged(state);
       this.setProperties({
         speakers: state.speakers.list,

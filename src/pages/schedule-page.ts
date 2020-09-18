@@ -18,7 +18,7 @@ import { DIALOGS } from '../store/dialogs/types';
 import { setSubRoute } from '../store/routing/actions';
 import { fetchSchedule } from '../store/schedule/actions';
 import { fetchUserFeaturedSessions } from '../store/sessions/actions';
-import { State, store } from '../store/store';
+import { RootState, store } from '../store';
 import { parseQueryParamsFilters } from '../utils/functions';
 
 class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) {
@@ -182,7 +182,7 @@ class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) 
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     super.stateChanged(state);
     this.setProperties({
       featuredSessions: state.sessions.featured,

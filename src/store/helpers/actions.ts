@@ -1,6 +1,6 @@
 import { TempAny } from '../../temp-any';
 import { WIPE_PREVIOUS_FEEDBACK } from '../feedback/types';
-import { store } from '../store';
+import { store } from '../';
 import { SIGN_IN } from '../user/types';
 import { Providers } from './types';
 

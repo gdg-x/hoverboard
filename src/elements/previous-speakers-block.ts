@@ -3,7 +3,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { fetchPreviousSpeakersList } from '../store/previous-speakers/actions';
-import { State, store } from '../store/store';
+import { RootState, store } from '../store';
 import { randomOrder } from '../utils/functions';
 import './shared-styles';
 
@@ -121,7 +121,7 @@ class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     return this.setProperties({
       viewport: state.ui.viewport,
       speakersRaw: state.previousSpeakers.list,

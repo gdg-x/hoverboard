@@ -12,7 +12,7 @@ import '../elements/speakers-block';
 import '../elements/subscribe-block';
 import '../elements/tickets-block';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { State } from '../store/store';
+import { RootState } from '../store';
 import { toggleVideoDialog } from '../store/ui/actions';
 import { TempAny } from '../temp-any';
 import { scrollToY } from '../utils/scrolling';
@@ -273,7 +273,7 @@ class HomePage extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.setProperties({
       viewport: state.ui.viewport,
     });

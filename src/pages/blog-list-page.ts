@@ -8,7 +8,7 @@ import '../elements/shared-styles';
 import '../elements/text-truncate';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { fetchBlogList } from '../store/blog/actions';
-import { State, store } from '../store/store';
+import { RootState, store } from '../store';
 import { getDate } from '../utils/functions';
 
 class BlogListPage extends ReduxMixin(PolymerElement) {
@@ -206,7 +206,7 @@ class BlogListPage extends ReduxMixin(PolymerElement) {
   private featuredPosts = [];
   private contentLoaderVisibility = false;
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.setProperties({
       viewport: state.ui.viewport,
       postsList: state.blog.list,

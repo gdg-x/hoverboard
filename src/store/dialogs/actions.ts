@@ -1,5 +1,5 @@
 import { CLOSE_DIALOG, DIALOGS, OPEN_DIALOG, SET_DIALOG_ERROR } from './types';
-import { store } from '../store';
+import { store } from '../';
 
 export const closeDialog = (dialogName: DIALOGS) => {
   store.dispatch({

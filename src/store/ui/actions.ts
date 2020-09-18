@@ -1,4 +1,4 @@
-import { store } from '../store';
+import { store } from '../';
 import {
   Hero,
   SET_HERO_SETTINGS,

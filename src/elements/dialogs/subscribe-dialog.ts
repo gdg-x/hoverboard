@@ -6,7 +6,7 @@ import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import { ReduxMixin } from '../../mixins/redux-mixin';
 import { closeDialog } from '../../store/dialogs/actions';
 import { DIALOGS } from '../../store/dialogs/types';
-import { State } from '../../store/store';
+import { RootState } from '../../store';
 import '../hoverboard-icons';
 import '../shared-styles';
 
@@ -144,7 +144,7 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.setProperties({
       subscribed: state.subscribed,
       ui: state.ui,

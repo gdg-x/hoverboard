@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { db } from '../db';
 import { DialogForm, DIALOGS, SET_DIALOG_DATA } from '../dialogs/types';
 import { trackError } from '../helpers/actions';
-import { store } from '../store';
+import { store } from '../';
 import { showToast } from '../toast/actions';
 import { SUBSCRIBE } from './types';
 

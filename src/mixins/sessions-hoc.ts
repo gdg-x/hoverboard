@@ -1,5 +1,5 @@
 import { fetchSessionsList } from '../store/sessions/actions';
-import { State, store } from '../store/store';
+import { RootState, store } from '../store';
 
 /* @polymerMixin */
 export const SessionsHoC = (subclass) =>
@@ -19,7 +19,7 @@ export const SessionsHoC = (subclass) =>
       };
     }
 
-    stateChanged(state: State) {
+    stateChanged(state: RootState) {
       super.stateChanged(state);
       this.setProperties({
         sessions: state.sessions.list,

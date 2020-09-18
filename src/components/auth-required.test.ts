@@ -3,7 +3,7 @@ import { html } from 'lit-html';
 import { mocked } from 'ts-jest/utils';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { openDialog } from '../store/dialogs/actions';
-import { store } from '../store/store';
+import { store } from '../store';
 import { SIGN_IN } from '../store/user/types';
 import './auth-required';
 import { AuthRequired } from './auth-required';

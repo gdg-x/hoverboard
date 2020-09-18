@@ -13,7 +13,7 @@ import { SpeakersHoC } from '../../mixins/speakers-hoc';
 import { closeDialog, openDialog } from '../../store/dialogs/actions';
 import { DIALOGS } from '../../store/dialogs/types';
 import { setUserFeaturedSessions } from '../../store/sessions/actions';
-import { State, store } from '../../store/store';
+import { RootState, store } from '../../store';
 import { showToast } from '../../store/toast/actions';
 import { toggleVideoDialog } from '../../store/ui/actions';
 import { getVariableColor } from '../../utils/functions';
@@ -198,7 +198,7 @@ class SessionDetails extends SpeakersHoC(
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     super.stateChanged(state);
     this.setProperties({
       featuredSessions: state.sessions.featured,

@@ -3,7 +3,7 @@ import { customElement, html, internalProperty } from 'lit-element';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
-import { State } from '../store/store';
+import { RootState } from '../store';
 import { ThemedElement } from './themed-element';
 
 @customElement('auth-required')
@@ -26,7 +26,7 @@ export class AuthRequired extends ReduxMixin(ThemedElement) {
     `;
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     this.signedIn = state.user.signedIn;
   }
 

@@ -3,7 +3,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { fetchGallery } from '../store/gallery/actions';
-import { State, store } from '../store/store';
+import { RootState, store } from '../store';
 import './shared-styles';
 
 class GalleryBlock extends ReduxMixin(PolymerElement) {
@@ -164,7 +164,7 @@ class GalleryBlock extends ReduxMixin(PolymerElement) {
     };
   }
 
-  stateChanged(state: State) {
+  stateChanged(state: RootState) {
     return this.setProperties({
       gallery: state.gallery.list,
       galleryFetching: state.gallery.fetching,
