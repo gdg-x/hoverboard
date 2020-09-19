@@ -24,6 +24,7 @@
     "watch": "concurrently --kill-others npm:watch:*"
   },
   "dependencies": {
+    "@abraham/remotedata": "^0.8.0",
     "@google-web-components/google-youtube": "^3.0.1",
     "@material/mwc-button": "^0.18.0",
     "@polymer/app-layout": "^3.1.0",
