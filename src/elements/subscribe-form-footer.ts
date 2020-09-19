@@ -1,3 +1,4 @@
+import { customElement, property } from '@polymer/decorators';
 import '@polymer/paper-input/paper-input';
 import { PaperInputElement } from '@polymer/paper-input/paper-input';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -7,7 +8,8 @@ import { subscribe } from '../store/subscribe/actions';
 import './hoverboard-icons';
 import './shared-styles';
 
-class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
+@customElement('subscribe-form-footer')
+export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -80,36 +82,17 @@ class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'subscribe-form-footer';
-  }
-
+  @property({ type: Boolean, computed: '_computeButtonLabel(subscribed)' })
   private subscribed = false;
+  @property({ type: Boolean })
   private validate = false;
+  @property({ type: String })
   private ctaLabel: string;
+  @property({ type: String })
   private email: string;
 
-  static get properties() {
-    return {
-      email: String,
-      subscribed: {
-        type: Boolean,
-      },
-      validate: {
-        type: Boolean,
-        value: false,
-      },
-      ctaLabel: {
-        type: String,
-        computed: '_computeButtonLabel(subscribed)',
-      },
-    };
-  }
-
   stateChanged(state: RootState) {
-    this.setProperties({
-      subscribed: state.subscribed,
-    });
+    this.subscribed = state.subscribed;
   }
 
   _subscribe() {
@@ -125,5 +108,3 @@ class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
     return subscribed ? '{$  subscribeBlock.subscribed $}' : '{$  subscribeBlock.subscribe $}';
   }
 }
-
-window.customElements.define(SubscribeFormFooter.is, SubscribeFormFooter);

@@ -1,3 +1,4 @@
+import { customElement, observe, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import { TempAny } from '../temp-any';
 import { generateClassName } from '../utils/functions';
@@ -5,7 +6,8 @@ import { offsetTop, scrollToY } from '../utils/scrolling';
 import './session-element';
 import './shared-styles';
 
-class ScheduleDay extends PolymerElement {
+@customElement('schedule-day')
+export class ScheduleDay extends PolymerElement {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -138,37 +140,26 @@ class ScheduleDay extends PolymerElement {
     `;
   }
 
-  static get is() {
-    return 'schedule-day';
-  }
-
+  @property({ type: Boolean })
   private active = false;
+  @property({ type: Object })
   private day = {};
+  @property({ type: String })
   private name: string;
+  @property({ type: Object })
   private user = {};
+  @property({ type: Object })
   private featuredSessions = {};
+  @property({ type: Boolean })
   private onlyFeatured = false;
+  @property({ type: Object })
   private viewport: { isTabletPlus?: boolean } = {};
+  @property({ type: Object })
   private selectedFilters = {};
+  @property({ type: String })
   private queryParams: string;
 
-  static get properties() {
-    return {
-      active: {
-        type: Boolean,
-        observer: '_pageVisible',
-      },
-      day: Object,
-      name: String,
-      user: Object,
-      featuredSessions: Object,
-      onlyFeatured: Boolean,
-      viewport: Object,
-      selectedFilters: Object,
-      queryParams: String,
-    };
-  }
-
+  @observe('active')
   _pageVisible(active) {
     if (active && window.location.hash) {
       const selectedTime = window.location.hash.slice(1);
@@ -226,5 +217,3 @@ class ScheduleDay extends PolymerElement {
     });
   }
 }
-
-window.customElements.define(ScheduleDay.is, ScheduleDay);

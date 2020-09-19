@@ -1,27 +1,19 @@
+import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer';
 import { clamp } from 'clamp-js-main';
 
-class TextTruncate extends PolymerElement {
+@customElement('text-truncate')
+export class TextTruncate extends PolymerElement {
   static get template() {
     return html` <slot id="text"></slot> `;
   }
 
-  static get is() {
-    return 'text-truncate';
-  }
-
+  @property({ type: Number })
   lines = 2;
 
+  @property({ type: Object })
   private _observer: FlattenedNodesObserver;
-
-  static get properties() {
-    return {
-      lines: {
-        type: Number,
-      },
-    };
-  }
 
   ready() {
     super.ready();
@@ -33,5 +25,3 @@ class TextTruncate extends PolymerElement {
     });
   }
 }
-
-window.customElements.define(TextTruncate.is, TextTruncate);

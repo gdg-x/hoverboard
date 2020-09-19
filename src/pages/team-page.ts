@@ -1,3 +1,4 @@
+import { customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/marked-element';
 import '@polymer/paper-icon-button';
@@ -8,11 +9,16 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { fetchTeam } from '../store/team/actions';
 
-class TeamPage extends ReduxMixin(PolymerElement) {
+@customElement('team-page')
+export class TeamPage extends ReduxMixin(PolymerElement) {
+  @property({ type: Boolean })
   active = false;
 
+  @property({ type: Array })
   private team = [];
+  @property({ type: Boolean })
   private teamFetching = false;
+  @property({ type: Object })
   private teamFetchingError = {};
 
   static get template() {
@@ -181,31 +187,10 @@ class TeamPage extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'team-page';
-  }
-
-  static get properties() {
-    return {
-      active: Boolean,
-      team: {
-        type: Array,
-      },
-      teamFetching: {
-        type: Boolean,
-      },
-      teamFetchingError: {
-        type: Object,
-      },
-    };
-  }
-
   stateChanged(state: RootState) {
-    this.setProperties({
-      team: state.team.list,
-      teamFetching: state.team.fetching,
-      teamFetchingError: state.team.fetchingError,
-    });
+    this.team = state.team.list;
+    this.teamFetching = state.team.fetching;
+    this.teamFetchingError = state.team.fetchingError;
   }
 
   connectedCallback() {
@@ -215,5 +200,3 @@ class TeamPage extends ReduxMixin(PolymerElement) {
     }
   }
 }
-
-window.customElements.define(TeamPage.is, TeamPage);

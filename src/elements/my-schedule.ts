@@ -1,9 +1,11 @@
+import { customElement, observe, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import './schedule-day';
 import './shared-styles';
 
-class MySchedule extends ReduxMixin(PolymerElement) {
+@customElement('my-schedule')
+export class MySchedule extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -45,34 +47,22 @@ class MySchedule extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'my-schedule';
-  }
-
+  @property({ type: Array })
   private schedule = [];
+  @property({ type: Array })
   private featuredSchedule = [];
+  @property({ type: Object })
   private featuredSessions = {};
+  @property({ type: Object })
   private selectedFilters = {};
+  @property({ type: String })
   private queryParams: string;
+  @property({ type: Object })
   private viewport = {};
+  @property({ type: Object })
   private user = {};
 
-  static get properties() {
-    return {
-      schedule: Array,
-      featuredSchedule: Array,
-      featuredSessions: Object,
-      selectedFilters: Object,
-      queryParams: String,
-      viewport: Object,
-      user: Object,
-    };
-  }
-
-  static get observers() {
-    return ['_filterSchedule(schedule, featuredSessions)'];
-  }
-
+  @observe('schedule', 'featuredSessions')
   _filterSchedule(schedule, featuredSessions) {
     if (schedule.length) {
       this.featuredSchedule = schedule.map((day) =>
@@ -91,5 +81,3 @@ class MySchedule extends ReduxMixin(PolymerElement) {
     }
   }
 }
-
-customElements.define(MySchedule.is, MySchedule);

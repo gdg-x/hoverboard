@@ -1,3 +1,4 @@
+import { customElement, property } from '@polymer/decorators';
 import '@polymer/marked-element';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
@@ -5,7 +6,8 @@ import { getDate } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
 
-class PostsList extends PolymerElement {
+@customElement('posts-list')
+export class PostsList extends PolymerElement {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -89,19 +91,10 @@ class PostsList extends PolymerElement {
     `;
   }
 
-  static get is() {
-    return 'posts-list';
-  }
-
-  static get properties() {
-    return {
-      posts: Array,
-    };
-  }
+  @property({ type: Array })
+  posts = [];
 
   getDate(date) {
     return getDate(date);
   }
 }
-
-window.customElements.define(PostsList.is, PostsList);

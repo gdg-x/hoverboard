@@ -1,75 +1,44 @@
+import { customElement, observe, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 
-class PolymerHelmet extends PolymerElement {
+@customElement('polymer-helmet')
+export class PolymerHelmet extends PolymerElement {
   static get template() {
     return html``;
   }
 
-  static get is() {
-    return 'polymer-helmet';
-  }
-
+  @property({ type: Boolean })
   active = false;
+  @property({ type: String })
   title: string;
+  @property({ type: String })
   description: string;
+  @property({ type: String })
   image: string;
+  @property({ type: String })
   label1: string;
+  @property({ type: String })
   data1: string;
+  @property({ type: String })
   label2: string;
+  @property({ type: String })
   data2: string;
+  @property({ type: String })
   private _defaultTitle = '{$ title $}';
+  @property({ type: String })
   private _defaultImage = '{$ image if image.startsWith("http") else (url + image) $}';
+  @property({ type: String })
   private _defaultDescription = '{$ description $}';
+  @property({ type: String })
   private _defaultLabel1 = '{$ location.label $}';
+  @property({ type: String })
   private _defaultData1 = '{$ location.name $}';
+  @property({ type: String })
   private _defaultLabel2 = '';
+  @property({ type: String })
   private _defaultData2 = '';
 
-  static get properties() {
-    return {
-      active: Boolean,
-      title: String,
-      description: String,
-      image: String,
-      label1: String,
-      data1: String,
-      label2: String,
-      data2: String,
-      _defaultTitle: {
-        type: String,
-        value: '{$ title $}',
-      },
-      _defaultDescription: {
-        type: String,
-        value: '{$ description $}',
-      },
-      _defaultImage: {
-        type: String,
-        value: '{$ image if image.startsWith("http") else (url + image) $}',
-      },
-      _defaultLabel1: {
-        type: String,
-        value: '{$ location.label $}',
-      },
-      _defaultData1: {
-        type: String,
-        value: '{$ location.name $}',
-      },
-      _defaultLabel2: {
-        type: String,
-        value: '',
-      },
-      _defaultData2: {
-        type: String,
-        value: '',
-      },
-    };
-  }
-
-  static get observers() {
-    return ['_setMetaInfo(active, title, description, image, label1, data1, label2, data2)'];
-  }
-
+  @observe('active', 'title', 'description', 'image', 'label1', 'data1', 'label2', 'data2')
   _setMetaInfo(active, title, description, image, label1, data1, label2, data2) {
     if (active) {
       const updatedTitle = title || this._defaultTitle;
@@ -116,5 +85,3 @@ class PolymerHelmet extends PolymerElement {
     return window.location.href;
   }
 }
-
-customElements.define(PolymerHelmet.is, PolymerHelmet);

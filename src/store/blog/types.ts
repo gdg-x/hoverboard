@@ -5,7 +5,7 @@ export const FETCH_BLOG_LIST = 'FETCH_BLOG_LIST';
 export const FETCH_BLOG_LIST_FAILURE = 'FETCH_BLOG_LIST_FAILURE';
 export const FETCH_BLOG_LIST_SUCCESS = 'FETCH_BLOG_LIST_SUCCESS';
 
-type BlogPostData = firebase.firestore.DocumentData & { id: string };
+export type BlogPostData = firebase.firestore.DocumentData & { id: string };
 
 export interface BlogState {
   fetching: boolean;

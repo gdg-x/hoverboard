@@ -1,18 +1,20 @@
+import { customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { store } from '../store';
 import { openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
 import { setUserFeaturedSessions } from '../store/sessions/actions';
-import { store } from '../store';
 import { showToast } from '../store/toast/actions';
 import { TempAny } from '../temp-any';
 import { getVariableColor, toggleQueryParam } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
 
-class SessionElement extends ReduxMixin(PolymerElement) {
+@customElement('session-element')
+export class SessionElement extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -223,44 +225,27 @@ class SessionElement extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'session-element';
-  }
-
+  @property({ type: Object })
   private user: { uid?: string; signedIn?: boolean } = {};
+  @property({ type: Object })
   private session: {
-    id?: string;
-    day?: TempAny;
-    startTime?: TempAny;
-  } = {};
+    id: string;
+    day: TempAny;
+    startTime: TempAny;
+    mainTag: string;
+  };
+  @property({ type: Object })
   private featuredSessions = {};
+  @property({ type: String })
   private queryParams: string;
-  private sessionColor: string;
-  private isFeatured: string;
-  private summary: string;
+  @property({ type: String })
   private dayName: string;
-
-  static get properties() {
-    return {
-      user: Object,
-      session: Object,
-      featuredSessions: Object,
-      queryParams: String,
-      dayName: String,
-      sessionColor: {
-        type: String,
-        computed: 'getVariableColor(session.mainTag)',
-      },
-      isFeatured: {
-        type: String,
-        computed: '_isFeatured(featuredSessions, session.id)',
-      },
-      summary: {
-        type: String,
-        computed: '_summary(session.description)',
-      },
-    };
-  }
+  @property({ type: String, computed: 'getVariableColor(session.mainTag)' })
+  private sessionCollor: string;
+  @property({ type: String, computed: '_isFeatured(featuredSessions, session.id)' })
+  private isFeatured: string;
+  @property({ type: String, computed: '_summary(session.description)' })
+  private summary: string;
 
   _isFeatured(featuredSessions, sessionId) {
     if (!featuredSessions || !sessionId) return false;
@@ -342,5 +327,3 @@ class SessionElement extends ReduxMixin(PolymerElement) {
     return text && text.slice(0, number);
   }
 }
-
-window.customElements.define(SessionElement.is, SessionElement);

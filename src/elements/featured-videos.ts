@@ -1,3 +1,4 @@
+import { customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import '@polymer/paper-icon-button';
@@ -10,7 +11,8 @@ import { fetchVideos } from '../store/videos/actions';
 import './shared-animations';
 import './shared-styles';
 
-class FeaturedVideos extends ReduxMixin(PolymerElement) {
+@customElement('featured-videos')
+export class FeaturedVideos extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -194,41 +196,24 @@ class FeaturedVideos extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'featured-videos';
-  }
-
+  @property({ type: Array })
   private videos = [];
+  @property({ type: Boolean })
   private videosFetching = false;
+  @property({ type: Object })
   private videosFetchingError = {};
+  @property({ type: Object })
   private viewport = {};
+  @property({ type: Boolean })
   private _leftArrowHidden = true;
+  @property({ type: Boolean })
   private _rightArrowHidden = false;
 
-  static get properties() {
-    return {
-      videos: Array,
-      videosFetching: Boolean,
-      videosFetchingError: Object,
-      viewport: Object,
-      _leftArrowHidden: {
-        type: Boolean,
-        value: true,
-      },
-      _rightArrowHidden: {
-        type: Boolean,
-        value: false,
-      },
-    };
-  }
-
   stateChanged(state: RootState) {
-    return this.setProperties({
-      videos: state.videos.list,
-      videosFetching: state.videos.fetching,
-      videosFetchingError: state.videos.fetchingError,
-      viewport: state.ui.viewport,
-    });
+    this.videos = state.videos.list;
+    this.videosFetching = state.videos.fetching;
+    this.videosFetchingError = state.videos.fetchingError;
+    this.viewport = state.ui.viewport;
   }
 
   connectedCallback() {
@@ -324,5 +309,3 @@ class FeaturedVideos extends ReduxMixin(PolymerElement) {
     });
   }
 }
-
-window.customElements.define(FeaturedVideos.is, FeaturedVideos);

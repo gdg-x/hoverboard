@@ -1,7 +1,9 @@
+import { customElement } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 
-class FooterNav extends PolymerElement {
+@customElement('footer-nav')
+export class FooterNav extends PolymerElement {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -82,10 +84,4 @@ class FooterNav extends PolymerElement {
       </div>
     `;
   }
-
-  static get is() {
-    return 'footer-nav';
-  }
 }
-
-window.customElements.define(FooterNav.is, FooterNav);

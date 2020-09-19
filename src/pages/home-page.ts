@@ -1,3 +1,4 @@
+import { customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import '../components/about-block';
@@ -14,10 +15,12 @@ import '../elements/tickets-block';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { toggleVideoDialog } from '../store/ui/actions';
+import { Viewport } from '../store/ui/types';
 import { TempAny } from '../temp-any';
 import { scrollToY } from '../utils/scrolling';
 
-class HomePage extends ReduxMixin(PolymerElement) {
+@customElement('home-page')
+export class HomePage extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -260,23 +263,13 @@ class HomePage extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'home-page';
-  }
-
-  static get properties() {
-    return {
-      active: Boolean,
-      viewport: {
-        type: Object,
-      },
-    };
-  }
+  @property({ type: Boolean })
+  private active = false;
+  @property({ type: Object })
+  private viewport: Viewport;
 
   stateChanged(state: RootState) {
-    this.setProperties({
-      viewport: state.ui.viewport,
-    });
+    this.viewport = state.ui.viewport;
   }
 
   _playVideo() {
@@ -300,5 +293,3 @@ class HomePage extends ReduxMixin(PolymerElement) {
     scrollToY(heroHeight, 600, 'easeInOutSine');
   }
 }
-
-window.customElements.define(HomePage.is, HomePage);

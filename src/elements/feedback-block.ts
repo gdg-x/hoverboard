@@ -6,8 +6,10 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { addComment, checkPreviousFeedback, deleteFeedback } from '../store/feedback/actions';
 import { RootState, store } from '../store';
 import { showToast } from '../store/toast/actions';
+import { computed, customElement, observe, property } from '@polymer/decorators';
 
-class Feedback extends ReduxMixin(PolymerElement) {
+@customElement('feedback-block')
+export class Feedback extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style>
@@ -101,109 +103,55 @@ class Feedback extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  private rating = false;
-  private contentRating = 0;
-  private styleRating = 0;
+  @property({ type: Number })
+  contentRating = 0;
+  @property({ type: Number })
+  styleRating = 0;
+  @property({ type: String })
   private comment = '';
+  @property({ type: String })
   private collection: string;
+  @property({ type: String })
   private dbItem: string;
+  @property({ type: Object })
   private user: { uid?: string; signedIn?: boolean } = {};
+  @property({ type: Object })
   private previousFeedback: { comment?: string; styleRating?: number; contentRating?: number } = {};
+  @property({ type: Boolean, observer: Feedback.prototype._feedbackAddingChanged })
   private feedbackFetching = false;
+  @property({ type: Boolean })
   private feedbackAdding = false;
+  @property({ type: Object })
   private feedbackAddingError = {};
+  @property({ type: Boolean, observer: Feedback.prototype._feedbackDeletingChanged })
   private feedbackDeleting = false;
+  @property({ type: Object })
   private feedbackDeletingError = {};
+  @property({ type: Boolean })
   private showDeleteButton = false;
+  @property({ type: Boolean })
   private feedbackState = {};
 
-  static get properties() {
-    return {
-      rating: {
-        type: Boolean,
-        value: false,
-        computed: '_hasRating(contentRating, styleRating)',
-      },
-      contentRating: {
-        type: Number,
-        value: 0,
-      },
-      styleRating: {
-        type: Number,
-        value: 0,
-      },
-      comment: {
-        type: String,
-        value: '',
-      },
-      collection: {
-        type: String,
-        value: 'sessions',
-      },
-      dbItem: {
-        type: String,
-        observer: '_dbItemChanged',
-      },
-      user: {
-        type: Object,
-        observer: '_userChanged',
-      },
-      previousFeedback: {
-        type: Object,
-        observer: '_previousFeedbackChanged',
-      },
-      feedbackFetching: {
-        type: Boolean,
-      },
-      feedbackAdding: {
-        type: Boolean,
-        observer: '_feedbackAddingChanged',
-      },
-      feedbackAddingError: {
-        type: Object,
-      },
-      feedbackDeleting: {
-        type: Boolean,
-        observer: '_feedbackDeletingChanged',
-      },
-      feedbackDeletingError: {
-        type: Object,
-      },
-      showDeleteButton: {
-        type: Boolean,
-        value: false,
-      },
-      feedbackState: {
-        type: Object,
-        observer: '_updateFeedbackState',
-      },
-    };
-  }
-
-  static get is() {
-    return 'feedback-block';
-  }
-
   stateChanged(state: RootState) {
-    return this.setProperties({
-      feedbackState: state.feedback,
-      feedbackDeleting: state.feedback.deleting,
-      feedbackDeletingError: state.feedback.deletingError,
-      feedbackAdding: state.feedback.adding,
-      feedbackAddingError: state.feedback.addingError,
-      feedbackFetching: state.feedback.fetching,
-      user: state.user,
-    });
+    this.feedbackState = state.feedback;
+    this.feedbackDeleting = state.feedback.deleting;
+    this.feedbackDeletingError = state.feedback.deletingError;
+    this.feedbackAdding = state.feedback.adding;
+    this.feedbackAddingError = state.feedback.addingError;
+    this.feedbackFetching = state.feedback.fetching;
+    this.user = state.user;
   }
 
-  _updateFeedbackState() {
-    if (this.feedbackState[this.collection]) {
-      if (this.dbItem) this.previousFeedback = this.feedbackState[this.collection][this.dbItem];
+  @observe('feedbackState')
+  _updateFeedbackState(feedbackState) {
+    if (feedbackState[this.collection]) {
+      if (this.dbItem) this.previousFeedback = feedbackState[this.collection][this.dbItem];
     } else {
       this.previousFeedback = undefined;
     }
   }
 
+  @observe('user')
   _userChanged(newUser) {
     if (newUser.signedIn) {
       if (this.dbItem && !this.feedbackFetching) this._dispatchPreviousFeedback();
@@ -219,13 +167,14 @@ class Feedback extends ReduxMixin(PolymerElement) {
     this.showDeleteButton = false;
   }
 
-  _dbItemChanged(newdbItem, _olddbItem) {
+  @observe('dbItem')
+  _dbItemChanged(newdbItem) {
     this._clear();
 
     if (newdbItem) {
       // Check for previous feedback once the session/speaker id is available
-      this._updateFeedbackState();
-      this._previousFeedbackChanged();
+      this._updateFeedbackState(this.feedbackState);
+      this._previousFeedbackChanged(this.previousFeedback);
 
       if (this.user.signedIn && !this.feedbackFetching && this.previousFeedback === undefined) {
         this._dispatchPreviousFeedback();
@@ -233,12 +182,13 @@ class Feedback extends ReduxMixin(PolymerElement) {
     }
   }
 
-  _previousFeedbackChanged() {
-    if (this.previousFeedback) {
+  @observe('previousFeedback')
+  _previousFeedbackChanged(previousFeedback) {
+    if (previousFeedback) {
       this.showDeleteButton = true;
-      this.contentRating = this.previousFeedback.contentRating;
-      this.styleRating = this.previousFeedback.styleRating;
-      this.comment = this.previousFeedback.comment;
+      this.contentRating = previousFeedback.contentRating;
+      this.styleRating = previousFeedback.styleRating;
+      this.comment = previousFeedback.comment;
     }
   }
 
@@ -317,9 +267,11 @@ class Feedback extends ReduxMixin(PolymerElement) {
     }
   }
 
-  _hasRating(contentRating, styleRating) {
-    return (contentRating > 0 && contentRating <= 5) || (styleRating > 0 && styleRating <= 5);
+  @computed('contentRating', 'styleRating')
+  get rating() {
+    return (
+      (this.contentRating > 0 && this.contentRating <= 5) ||
+      (this.styleRating > 0 && this.styleRating <= 5)
+    );
   }
 }
-
-window.customElements.define(Feedback.is, Feedback);

@@ -1,15 +1,17 @@
+import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { RootState, store } from '../store';
 import { openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
-import { RootState, store } from '../store';
 import { subscribe } from '../store/subscribe/actions';
 import './hoverboard-icons';
 import './shared-styles';
 
-class SubscribeBlock extends ReduxMixin(PolymerElement) {
+@customElement('subscribe-block')
+export class SubscribeBlock extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
@@ -69,47 +71,24 @@ class SubscribeBlock extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  static get is() {
-    return 'subscribe-block';
-  }
-
+  @property({ type: Object })
   private user: { signedIn?: boolean; email?: string; displayName?: string } = {};
+  @property({ type: Object })
   private viewport = {};
+  @property({ type: Boolean })
   private subscribed = false;
+  @property({ type: String })
   private ctaIcon = 'arrow-right-circle';
+  @property({ type: String })
   private ctaLabel = '{$  subscribeBlock.callToAction.label $}';
 
-  static get properties() {
-    return {
-      user: {
-        type: Object,
-      },
-      viewport: {
-        type: Object,
-      },
-      subscribed: {
-        type: Boolean,
-        observer: '_handleSubscribed',
-      },
-      ctaIcon: {
-        type: String,
-        value: 'arrow-right-circle',
-      },
-      ctaLabel: {
-        type: String,
-        value: '{$  subscribeBlock.callToAction.label $}',
-      },
-    };
-  }
-
   stateChanged(state: RootState) {
-    this.setProperties({
-      subscribed: state.subscribed,
-      user: state.user,
-      viewport: state.ui.viewport,
-    });
+    this.subscribed = state.subscribed;
+    this.user = state.user;
+    this.viewport = state.ui.viewport;
   }
 
+  @observe('subscribed')
   _handleSubscribed(subscribed) {
     if (subscribed) {
       this.ctaIcon = 'checked';
@@ -153,5 +132,3 @@ class SubscribeBlock extends ReduxMixin(PolymerElement) {
     store.dispatch(subscribe(data));
   }
 }
-
-window.customElements.define(SubscribeBlock.is, SubscribeBlock);
