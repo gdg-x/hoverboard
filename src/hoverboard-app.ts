@@ -52,7 +52,7 @@ import './pages/team-page';
 import { RootState, store } from './store';
 import { DialogState, initialDialogState } from './store/dialogs/state';
 import { DIALOGS } from './store/dialogs/types';
-import { getToken } from './store/notifications/actions';
+import { getAndStoreToken } from './store/notifications/actions';
 import { setRoute } from './store/routing/actions';
 import { initialRoutingState, RoutingState } from './store/routing/state';
 import { fetchTickets } from './store/tickets/actions';
@@ -406,7 +406,7 @@ export class HoverboardApp extends PolymerElement {
     log('Hoverboard is ready!');
     this.removeAttribute('unresolved');
     updateUser();
-    store.dispatch(getToken());
+    store.dispatch(getAndStoreToken());
   }
 
   closeDrawer() {

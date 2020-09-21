@@ -1,5 +1,4 @@
-import { NotificationState, NOTIFICATIONS_STATUS } from './types';
+import { Initialized, RemoteData } from '@abraham/remotedata';
 
-export const initialNotificationState: NotificationState = {
-  status: NOTIFICATIONS_STATUS.DEFAULT,
-};
+export type NotificationState = RemoteData<Error, string>;
+export const initialNotificationState: NotificationState = new Initialized();

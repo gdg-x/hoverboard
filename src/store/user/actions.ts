@@ -12,7 +12,7 @@ import { firebaseApp } from '../../firebase';
 import { TempAny } from '../../temp-any';
 import { getFederatedProvider, PROVIDERS } from '../../utils/providers';
 import { WIPE_PREVIOUS_FEEDBACK } from '../feedback/types';
-import { getToken } from '../notifications/actions';
+import { getAndStoreToken } from '../notifications/actions';
 import { resetSubscribed } from '../subscribe/actions';
 import { SIGN_IN } from './types';
 
@@ -24,7 +24,7 @@ export const signIn = (providerName: PROVIDERS) => {
   return signInWithPopup(auth, firebaseProvider)
     .then((signInObject) => {
       storeUser(signInObject.user);
-      getToken(true);
+      getAndStoreToken(true);
     })
     .catch((error) => {
       if (

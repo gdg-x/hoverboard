@@ -9,6 +9,7 @@ import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { initialDialogState } from '../store/dialogs/state';
 import { DIALOGS } from '../store/dialogs/types';
 import { requestPermission, unsubscribe } from '../store/notifications/actions';
+import { initialNotificationState, NotificationState } from '../store/notifications/state';
 import { NOTIFICATIONS_STATUS } from '../store/notifications/types';
 import { initialRoutingState, RoutingState } from '../store/routing/state';
 import { initialTicketsState, TicketsState } from '../store/tickets/state';
@@ -195,11 +196,11 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           no-animations
         >
           <paper-icon-button
-            icon="hoverboard:[[_getNotificationsIcon(notifications.status)]]"
+            icon="hoverboard:[[_getNotificationsIcon(notifications.data.status)]]"
             slot="dropdown-trigger"
           ></paper-icon-button>
           <div class="dropdown-panel" slot="dropdown-content">
-            <div hidden$="[[_hideNotificationBlock(notifications.status, 'DEFAULT')]]">
+            <div hidden$="[[_hideNotificationBlock(notifications.data.status, 'DEFAULT')]]">
               <p>{$ notifications.default $}</p>
               <div class="panel-actions" layout horizontal end-justified>
                 <paper-button primary-text on-click="_toggleNotifications"
@@ -207,7 +208,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
                 >
               </div>
             </div>
-            <div hidden$="[[_hideNotificationBlock(notifications.status, 'GRANTED')]]">
+            <div hidden$="[[_hideNotificationBlock(notifications.data.status, 'GRANTED')]]">
               <p>{$ notifications.enabled $}</p>
               <div class="panel-actions" layout horizontal end-justified>
                 <paper-button primary-text on-click="_toggleNotifications"
@@ -215,7 +216,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
                 >
               </div>
             </div>
-            <div hidden$="[[_hideNotificationBlock(notifications.status, 'DENIED')]]">
+            <div hidden$="[[_hideNotificationBlock(notifications.data.status, 'DENIED')]]">
               <p>{$ notifications.blocked $}</p>
               <div class="panel-actions" layout horizontal end-justified>
                 <a href="{$ notifications.enable.link $}" target="_blank" rel="noopener noreferrer">
@@ -281,7 +282,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private dialogs = initialDialogState;
   @property({ type: Object })
-  private notifications: { token?: string; status?: string } = {};
+  private notifications: NotificationState = initialNotificationState;
   @property({ type: Object })
   private user = {};
   @property({ type: Boolean, reflectToAttribute: true })
@@ -335,7 +336,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
 
   _toggleNotifications() {
     this._closeNotificationMenu();
-    if (this.notifications.status === NOTIFICATIONS_STATUS.GRANTED) {
+    if (this.notifications instanceof Success) {
       store.dispatch(unsubscribe());
       return;
     }
