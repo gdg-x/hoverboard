@@ -1,6 +1,7 @@
 import { Social } from './social';
+import { Id } from './types';
 
-export interface Member {
+export interface MemberData {
   name: string;
   order: number;
   photo: string;
@@ -8,3 +9,5 @@ export interface Member {
   socials: Social[];
   title: string;
 }
+
+export type Member = Id & MemberData;

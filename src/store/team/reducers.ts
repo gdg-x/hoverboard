@@ -1,35 +1,17 @@
-import { initialTeamState } from './state';
-import { FetchTeamActionTypes, FETCH_TEAM, FETCH_TEAM_FAILURE, FETCH_TEAM_SUCCESS } from './types';
+import { Failure, Pending, Success } from '@abraham/remotedata';
+import { initialTeamState, TeamState } from './state';
+import { FETCH_TEAM, FETCH_TEAM_FAILURE, FETCH_TEAM_SUCCESS, TeamActions } from './types';
 
-export const teamReducer = (state = initialTeamState, action: FetchTeamActionTypes) => {
+export const teamReducer = (state = initialTeamState, action: TeamActions): TeamState => {
   switch (action.type) {
     case FETCH_TEAM:
-      return {
-        ...state,
-        ...{
-          fetching: true,
-          fetchingError: null,
-          list: [],
-        },
-      };
+      return new Pending();
 
     case FETCH_TEAM_FAILURE:
-      return {
-        ...state,
-        ...{
-          fetching: false,
-          fetchingError: action.payload.error,
-        },
-      };
+      return new Failure(action.payload);
 
     case FETCH_TEAM_SUCCESS:
-      return {
-        ...state,
-        ...{
-          fetching: false,
-          list: action.payload.list,
-        },
-      };
+      return new Success(action.payload);
 
     default:
       return state;

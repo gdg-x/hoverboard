@@ -1,7 +1,13 @@
 /* eslint-env node */
 
 // Jest doesn't support ESModules https://github.com/facebook/jest/issues/4842
-const esModuleDependencies = ['lit-element', 'lit-html', '@material', 'pwa-helpers'].join('|');
+const esModuleDependencies = [
+  'lit-element',
+  'lit-html',
+  '@material',
+  'pwa-helpers',
+  '@abraham/remotedata',
+].join('|');
 
 module.exports = {
   globals: {
