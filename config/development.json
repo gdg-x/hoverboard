@@ -6,11 +6,11 @@
   "firebase": {
     "apiKey": "AIzaSyAKOkGjmfBPTuYlDyPxlrSj7H-1oqWET7E",
     "appId": "1:1083195713896:web:9aed8296d8d642cb",
-    "authDomain": "hoverboard-dev.firebaseapp.com",
+    "authDomain": "hoverboard-dev.web.app",
     "databaseURL": "https://hoverboard-dev.firebaseio.com",
     "messagingSenderId": "1083195713896",
     "projectId": "hoverboard-dev",
     "storageBucket": "hoverboard-dev.appspot.com"
   },
-  "googleMapApiKey": "AIzaSyBu9LI-hY4NfUOPJJKuV3BfQm7edLr2-aE"
+  "googleMapApiKey": "AIzaSyAKOkGjmfBPTuYlDyPxlrSj7H-1oqWET7E"
 }
