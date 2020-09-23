@@ -69,3 +69,4 @@ node_modules/
 dist/
 out-tsc/
 serviceAccount.json
+.DS_Store
