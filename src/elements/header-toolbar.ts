@@ -248,13 +248,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
             <div layout vertical center-justified>
               <span class="profile-name">[[user.displayName]]</span>
               <span class="profile-email">[[user.email]]</span>
-              <span
-                class="profile-action"
-                role="button"
-                on-click="_
-              signOut"
-                >{$ signOut $}</span
-              >
+              <span class="profile-action" role="button" on-click="_signOut">{$ signOut $}</span>
             </div>
           </div>
         </paper-menu-button>
