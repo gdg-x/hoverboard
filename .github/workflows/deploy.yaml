@@ -29,6 +29,9 @@ jobs:
       - name: Installing Dependencencies
         run: npm ci
 
+      - name: Create temp serviceAccount.json
+        run: echo "{}" > serviceAccount.json
+
       - name: Building the project
         run: npm run build
 
