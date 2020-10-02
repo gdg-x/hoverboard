@@ -1,27 +1,31 @@
 {
   "name": "hoverboard",
   "version": "3.0.0",
+  "private": true,
   "description": "Conference website template",
+  "engines": {
+    "node": "12"
+  },
   "scripts": {
     "build": "npm run clean && tsc && NODE_ENV=production rollup --config rollup.config.js",
     "clean": "rimraf dist out-tsc",
     "deploy": "npm run build && NODE_ENV=production firebase deploy",
     "firestore:copy": "babel-node ./internals/firestore-copy-data",
     "firestore:init": "firebase firestore:delete -r --all-collections -y && firebase functions:config:set schedule.enabled=true && firebase deploy --except hosting && babel-node ./internals/import-default-data",
+    "fix": "concurrently npm:fix:*",
     "fix:eslint": "eslint . --ext .ts --ext .js --fix",
     "fix:prettier": "prettier . --write",
     "fix:stylelint": "stylelint \"src/components/**/*.ts\" \"src/styles/**/*.ts\" --fix",
-    "fix": "concurrently npm:fix:*",
     "install:emulator": "firebase setup:emulators:firestore",
     "install:functions": "npm --prefix ./functions ci",
     "postinstall": "npm run install:functions && npm run install:emulator",
     "serve": "npm run build && firebase serve",
-    "start:emulators": "firebase emulators:start",
     "start": "NODE_ENV=development npm run watch",
+    "start:emulators": "firebase emulators:start",
     "test": "jest",
+    "watch": "concurrently --kill-others npm:watch:*",
     "watch:es-dev-server": "es-dev-server --open --watch",
-    "watch:tsc": "tsc --watch",
-    "watch": "concurrently --kill-others npm:watch:*"
+    "watch:tsc": "tsc --watch"
   },
   "dependencies": {
     "@abraham/remotedata": "^0.8.0",
@@ -95,7 +99,8 @@
     "jest-runner-stylelint": "^2.3.7",
     "jest-runner-tsc": "^1.6.0",
     "nunjucks": "^3.2.2",
-    "prettier": "^2.1.2",
+    "prettier": "2.1.2",
+    "prettier-plugin-package": "1.1.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.28.2",
     "rollup-plugin-copy": "^3.3.0",
@@ -106,13 +111,9 @@
     "ts-jest": "^26.4.1",
     "typescript": "^4.0.3"
   },
-  "engines": {
-    "node": "12"
-  },
   "contributors": [
     "Oleh Zasadnyy, GDG Lviv",
     "Sophie Huts, GDG Lviv",
     "Abraham Williams, GDG Madison"
-  ],
-  "private": true
+  ]
 }
