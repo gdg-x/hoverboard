@@ -4,23 +4,23 @@ import { firestore } from './firebase-config';
 
 const FILE_EXTENSION_PATTERN = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/gim;
 
-export function getData(path) {
+export function getData(path: string): Promise<object> {
   const source = getPathObject(path);
-  if (source.file) {
+  if ('file' in source) {
     return fetchDataFromFile(source.file);
   }
   return fetchDataFromFirestore(source.collection, source.doc);
 }
 
-export function saveData(data, path) {
+export function saveData(data: object, path: string) {
   const destination = getPathObject(path);
-  if (destination.file) {
+  if ('file' in destination) {
     return saveDataToFile(data, destination.file);
   }
   return saveDataToFirestore(data, destination.collection, destination.doc);
 }
 
-export function fetchDataFromFile(file) {
+function fetchDataFromFile(file: string): Promise<object> {
   return new Promise((resolve, reject) => {
     fs.readFile(path.resolve(process.cwd(), file), 'utf8', (err, data) => {
       if (err) reject(err);
@@ -29,22 +29,22 @@ export function fetchDataFromFile(file) {
   });
 }
 
-export function saveDataToFile(data, file) {
+function saveDataToFile(data: object, file: string) {
   return new Promise((resolve, reject) => {
-    fs.writeFile(path.resolve(process.cwd(), file), JSON.stringify(data), (err) => {
+    fs.writeFile(path.resolve(process.cwd(), file), JSON.stringify(data, null, 2), (err) => {
       if (err) reject(err);
       resolve(data);
     });
   });
 }
 
-export function fetchDataFromFirestore(collection, doc) {
+function fetchDataFromFirestore(collection: string, doc?: string): Promise<object> {
   if (!doc) {
     return firestore
       .collection(collection)
       .get()
       .then((snapshot) => {
-        const collectionData = {};
+        const collectionData: { [key: string]: object } = {};
         snapshot.forEach((doc) => {
           collectionData[doc.id] = doc.data();
         });
@@ -55,12 +55,10 @@ export function fetchDataFromFirestore(collection, doc) {
     .collection(collection)
     .doc(doc)
     .get()
-    .then((document) => {
-      return Promise.resolve(document.data());
-    });
+    .then((document) => document.data() as object);
 }
 
-export function saveDataToFirestore(data, collection, doc) {
+function saveDataToFirestore(data: object, collection: string, doc?: string) {
   if (!doc) {
     const batch = firestore.batch();
     Object.entries(data).forEach(([key, value]) => {
@@ -72,8 +70,19 @@ export function saveDataToFirestore(data, collection, doc) {
   return firestore.collection(collection).doc(doc).set(data);
 }
 
-export function getPathObject(params) {
-  const normalizedParams = params.replace(/\/$/, '');
+interface File {
+  file: string;
+}
+
+interface Doc {
+  collection: string;
+  doc?: string;
+}
+
+type PathObject = File | Doc;
+
+function getPathObject(path: string): PathObject {
+  const normalizedParams = path.replace(/\/$/, '');
   const paramsExtension = normalizedParams.match(FILE_EXTENSION_PATTERN);
 
   if (paramsExtension && paramsExtension[0]) {
