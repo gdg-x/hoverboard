@@ -10,8 +10,8 @@
     "build": "npm run clean && tsc && NODE_ENV=production rollup --config rollup.config.js",
     "clean": "rimraf dist out-tsc",
     "deploy": "npm run build && NODE_ENV=production firebase deploy",
-    "firestore:copy": "babel-node ./internals/firestore-copy-data",
-    "firestore:init": "firebase firestore:delete -r --all-collections -y && firebase functions:config:set schedule.enabled=true && firebase deploy --except hosting && babel-node ./internals/import-default-data",
+    "firestore:copy": "ts-node-script ./internals/firestore-copy-data",
+    "firestore:init": "firebase functions:config:set schedule.enabled=true && firebase deploy --except hosting && ts-node ./internals/import-default-data",
     "fix": "concurrently npm:fix:*",
     "fix:eslint": "eslint . --ext .ts --ext .js --fix",
     "fix:prettier": "prettier . --write",
@@ -73,6 +73,7 @@
     "@types/google.analytics": "0.0.40",
     "@types/jest": "^26.0.14",
     "@types/jest-dev-server": "^4.2.0",
+    "@types/node": "^12.12.62",
     "@types/polymer": "^1.2.9",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
@@ -109,6 +110,7 @@
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-recommended": "^3.0.0",
     "ts-jest": "^26.4.1",
+    "ts-node": "^9.0.0",
     "typescript": "^4.0.3"
   },
   "contributors": [

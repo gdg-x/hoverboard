@@ -29,6 +29,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Create temp serviceAccount.json
+        run: echo "{}" > serviceAccount.json
+
       - name: Running the tests
         run: npm run test
 
@@ -58,6 +61,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Create temp serviceAccount.json
+        run: echo "{}" > serviceAccount.json
 
       - name: Building the development environment
         run: npm run build
