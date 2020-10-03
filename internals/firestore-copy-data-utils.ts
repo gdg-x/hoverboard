@@ -2,100 +2,104 @@ import fs from 'fs';
 import path from 'path';
 import { firestore } from './firebase-config';
 
-const FILE_EXTENSION_PATTERN = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/gim;
-
-export function getData(path: string): Promise<object> {
-  const source = getPathObject(path);
-  if ('file' in source) {
-    return fetchDataFromFile(source.file);
-  }
-  return fetchDataFromFirestore(source.collection, source.doc);
+interface Document {
+  [key: string]: unknown;
 }
 
-export function saveData(data: object, path: string) {
-  const destination = getPathObject(path);
-  if ('file' in destination) {
-    return saveDataToFile(data, destination.file);
-  }
-  return saveDataToFirestore(data, destination.collection, destination.doc);
+interface Collection {
+  [id: string]: Document;
 }
 
-function fetchDataFromFile(file: string): Promise<object> {
-  return new Promise((resolve, reject) => {
-    fs.readFile(path.resolve(process.cwd(), file), 'utf8', (err, data) => {
-      if (err) reject(err);
-      resolve(JSON.parse(data));
-    });
-  });
-}
+type Data = Document | Collection;
 
-function saveDataToFile(data: object, file: string) {
-  return new Promise((resolve, reject) => {
-    fs.writeFile(path.resolve(process.cwd(), file), JSON.stringify(data, null, 2), (err) => {
-      if (err) reject(err);
-      resolve(data);
-    });
-  });
-}
-
-function fetchDataFromFirestore(collection: string, doc?: string): Promise<object> {
-  if (!doc) {
-    return firestore
-      .collection(collection)
-      .get()
-      .then((snapshot) => {
-        const collectionData: { [key: string]: object } = {};
-        snapshot.forEach((doc) => {
-          collectionData[doc.id] = doc.data();
-        });
-        return Promise.resolve(collectionData);
-      });
-  }
-  return firestore
-    .collection(collection)
-    .doc(doc)
-    .get()
-    .then((document) => document.data() as object);
-}
-
-function saveDataToFirestore(data: object, collection: string, doc?: string) {
-  if (!doc) {
-    const batch = firestore.batch();
-    Object.entries(data).forEach(([key, value]) => {
-      const docRef = firestore.collection(collection).doc(key);
-      batch.set(docRef, value);
-    });
-    return batch.commit();
-  }
-  return firestore.collection(collection).doc(doc).set(data);
-}
-
-interface File {
-  file: string;
-}
-
-interface Doc {
-  collection: string;
+interface PathObject {
+  file?: string;
+  collection?: string;
   doc?: string;
 }
 
-type PathObject = File | Doc;
+const FILE_EXTENSION_PATTERN = /\.([0-9a-z]+)(?=[?#])|(\.)(?:[\w]+)$/gim;
 
-function getPathObject(path: string): PathObject {
+export function getData(path: string): Promise<Data> {
+  const { file, collection, doc } = getPathObject(path);
+  if (file) {
+    return fetchDataFromFile(file);
+  } else if (collection && doc) {
+    return getDocument(collection, doc);
+  } else if (collection) {
+    return getCollection(collection);
+  } else {
+    throw new Error('Not a valid source');
+  }
+}
+
+export async function saveData(data: Data, path: string): Promise<void> {
+  const { file, collection, doc } = getPathObject(path);
+  if (file) {
+    await saveDataToFile(data, file);
+  } else if (collection && doc) {
+    return setDocument(data, collection, doc);
+  } else if (collection) {
+    return setCollection(data, collection);
+  } else {
+    throw new Error('Not a valid destination');
+  }
+}
+
+function fetchDataFromFile(file: string): Promise<Data> {
+  const contents = fs.readFileSync(path.resolve(process.cwd(), file), 'utf8');
+  return JSON.parse(contents);
+}
+
+async function saveDataToFile(data: object, file: string) {
+  fs.writeFileSync(path.resolve(process.cwd(), file), JSON.stringify(data, null, 2));
+}
+
+async function getDocument(collectionId: string, docId: string): Promise<Document> {
+  const document = await firestore.collection(collectionId).doc(docId).get();
+  if (document.exists) {
+    return document.data() as Document;
+  }
+  throw new Error(`Document ${collectionId}/${docId} not found.`);
+}
+
+async function getCollection(collectionId: string): Promise<Collection> {
+  const snapshot = await firestore.collection(collectionId).get();
+  const collection: Collection = {};
+  snapshot.forEach((doc) => (collection[doc.id] = doc.data() as Document));
+  return collection;
+}
+
+async function setDocument(data: Data, collectionId: string, documentId: string) {
+  await firestore.collection(collectionId).doc(documentId).set(data);
+}
+
+async function setCollection(data: Data, collectionId: string) {
+  const batch = firestore.batch();
+  Object.entries(data).forEach(([documentId, document]) => {
+    const docRef = firestore.collection(collectionId).doc(documentId);
+    batch.set(docRef, document);
+  });
+  await batch.commit();
+}
+
+function getPathObject(path: string) {
   const normalizedParams = path.replace(/\/$/, '');
   const paramsExtension = normalizedParams.match(FILE_EXTENSION_PATTERN);
+  const pathObject: PathObject = {
+    file: undefined,
+    collection: undefined,
+    doc: undefined,
+  };
 
   if (paramsExtension && paramsExtension[0]) {
-    return {
-      file: normalizedParams,
-    };
+    pathObject.file = normalizedParams;
   } else if (normalizedParams.split('/').length % 2 !== 0) {
-    return {
-      collection: normalizedParams,
-    };
+    pathObject.collection = normalizedParams;
+  } else {
+    pathObject.collection = normalizedParams.slice(0, normalizedParams.lastIndexOf('/'));
+    pathObject.doc = normalizedParams.slice(normalizedParams.lastIndexOf('/') + 1);
   }
-  return {
-    collection: normalizedParams.slice(0, normalizedParams.lastIndexOf('/')),
-    doc: normalizedParams.slice(normalizedParams.lastIndexOf('/') + 1),
-  };
+
+  return pathObject;
 }
