@@ -33,7 +33,7 @@ The diagram below is a brief summary of the directories within the project.
     |---docs/
     |---functions/
     |---images/
-    |---internals/
+    |---scripts/
     |---node_modules/
     |---out-tsc/
     |---src/
@@ -49,7 +49,7 @@ The diagram below is a brief summary of the directories within the project.
 - `docs/` documentation.
 - `functions/` directory with Firebase [cloud functions](https://firebase.google.com/docs/functions/) used for notifications, optimizations, saving data, etc.
 - `images/` is for static images.
-- `internals/` contains scripts that helps user to work with the project and it's data ([docs](./firebase-utils.md)).
+- `scripts/` contains scripts that helps user to work with the project and it's data ([docs](./firebase-utils.md)).
 - `node_modules/` is the place of Node dependencies.
 - `out-tsc` is the compiled TypeScript before Rollup bundles it.
 - `src/` is where you store all of your source code and do all of your development.

@@ -1,4 +1,4 @@
-import { getData, saveData } from './firestore-copy-data-utils';
+import { getData, saveData } from './utils';
 
 const [, , source, destination] = process.argv;
 
