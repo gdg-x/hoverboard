@@ -10,7 +10,7 @@ import {
   importTeam,
   importTickets,
   importVideos,
-} from './import-default-data-utils';
+} from './utils';
 
 importBlog()
   .then(() => importGallery())

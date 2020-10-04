@@ -1,5 +1,5 @@
-import { firestore } from './firebase-config';
-import data from '../docs/default-firebase-data.json';
+import { firestore } from '../firebase-config';
+import data from '../../docs/default-firebase-data.json';
 
 export const importSpeakers = () => {
   const speakers: { [key: string]: object } = data.speakers;

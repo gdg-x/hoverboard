@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { firestore } from './firebase-config';
+import { firestore } from '../firebase-config';
 
 interface Document {
   [key: string]: unknown;
