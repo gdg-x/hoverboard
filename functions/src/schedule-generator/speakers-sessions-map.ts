@@ -6,7 +6,8 @@ export function sessionsSpeakersMap(sessionsRaw, speakersRaw) {
     const sessionId = Object.keys(sessionsRaw)[index];
     const currentSession = sessionsRaw[sessionId];
     const sessionSpeakers = [];
-    const mainTag = currentSession.tags ? currentSession.tags[0] : 'General';
+    const mainTag =
+      currentSession.tags && currentSession.tags.length ? currentSession.tags[0] : 'General';
 
     currentSession.speakers &&
       currentSession.speakers.forEach((speakerId) => {
