@@ -150,13 +150,14 @@
   ],
   "schedule": {
     "2016-09-09": {
+      "date": "2016-09-09",
       "dateReadable": "September 9",
       "timeslots": [
         {
           "endTime": "10:00",
           "sessions": [
             {
-              "items": [132]
+              "items": ["132"]
             }
           ],
           "startTime": "09:00"
@@ -165,7 +166,7 @@
           "endTime": "10:15",
           "sessions": [
             {
-              "items": [136]
+              "items": ["136"]
             }
           ],
           "startTime": "10:00"
@@ -174,7 +175,7 @@
           "endTime": "11:00",
           "sessions": [
             {
-              "items": [139]
+              "items": ["139"]
             }
           ],
           "startTime": "10:15"
@@ -183,14 +184,14 @@
           "endTime": "11:40",
           "sessions": [
             {
-              "items": [103, 112]
+              "items": ["103", "112"]
             },
             {
-              "items": [120]
+              "items": ["120"]
             },
             {
               "extend": 3,
-              "items": [109]
+              "items": ["109"]
             }
           ],
           "startTime": "11:00"
@@ -199,10 +200,10 @@
           "endTime": "12:30",
           "sessions": [
             {
-              "items": [129]
+              "items": ["129"]
             },
             {
-              "items": [116]
+              "items": ["116"]
             }
           ],
           "startTime": "11:50"
@@ -211,7 +212,7 @@
           "endTime": "14:00",
           "sessions": [
             {
-              "items": [133]
+              "items": ["133"]
             }
           ],
           "startTime": "12:30"
@@ -220,14 +221,14 @@
           "endTime": "14:40",
           "sessions": [
             {
-              "items": [101]
+              "items": ["101"]
             },
             {
-              "items": [118]
+              "items": ["118"]
             },
             {
               "extend": 2,
-              "items": [107]
+              "items": ["107"]
             }
           ],
           "startTime": "14:00"
@@ -236,10 +237,10 @@
           "endTime": "15:30",
           "sessions": [
             {
-              "items": [140]
+              "items": ["140"]
             },
             {
-              "items": [126]
+              "items": ["126"]
             }
           ],
           "startTime": "14:50"
@@ -248,7 +249,7 @@
           "endTime": "16:00",
           "sessions": [
             {
-              "items": [134]
+              "items": ["134"]
             }
           ],
           "startTime": "15:30"
@@ -257,14 +258,14 @@
           "endTime": "16:40",
           "sessions": [
             {
-              "items": [105]
+              "items": ["105"]
             },
             {
-              "items": [127]
+              "items": ["127"]
             },
             {
               "extend": 3,
-              "items": [119]
+              "items": ["119"]
             }
           ],
           "startTime": "16:00"
@@ -273,10 +274,10 @@
           "endTime": "17:30",
           "sessions": [
             {
-              "items": [112]
+              "items": ["112"]
             },
             {
-              "items": [111]
+              "items": ["111"]
             }
           ],
           "startTime": "16:50"
@@ -285,10 +286,10 @@
           "endTime": "18:20",
           "sessions": [
             {
-              "items": [106]
+              "items": ["106"]
             },
             {
-              "items": [125]
+              "items": ["125"]
             }
           ],
           "startTime": "17:40"
@@ -297,7 +298,7 @@
           "endTime": "22:30",
           "sessions": [
             {
-              "items": [137]
+              "items": ["137"]
             }
           ],
           "startTime": "18:30"
@@ -316,13 +317,14 @@
       ]
     },
     "2016-09-10": {
+      "date": "2016-09-10",
       "dateReadable": "September 10",
       "timeslots": [
         {
           "endTime": "10:10",
           "sessions": [
             {
-              "items": [135]
+              "items": ["135"]
             }
           ],
           "startTime": "09:30"
@@ -331,13 +333,13 @@
           "endTime": "10:50",
           "sessions": [
             {
-              "items": [114]
+              "items": ["114"]
             },
             {
-              "items": [117]
+              "items": ["117"]
             },
             {
-              "items": [121]
+              "items": ["121"]
             }
           ],
           "startTime": "10:10"
@@ -346,14 +348,14 @@
           "endTime": "11:40",
           "sessions": [
             {
-              "items": [122]
+              "items": ["122"]
             },
             {
-              "items": [113]
+              "items": ["113"]
             },
             {
               "extend": 2,
-              "items": [121]
+              "items": ["121"]
             }
           ],
           "startTime": "11:00"
@@ -362,10 +364,10 @@
           "endTime": "12:30",
           "sessions": [
             {
-              "items": [104]
+              "items": ["104"]
             },
             {
-              "items": [124]
+              "items": ["124"]
             }
           ],
           "startTime": "11:50"
@@ -374,7 +376,7 @@
           "endTime": "14:00",
           "sessions": [
             {
-              "items": [133]
+              "items": ["133"]
             }
           ],
           "startTime": "12:30"
@@ -383,14 +385,14 @@
           "endTime": "14:40",
           "sessions": [
             {
-              "items": [108]
+              "items": ["108"]
             },
             {
-              "items": [128]
+              "items": ["128"]
             },
             {
               "extend": 2,
-              "items": [102]
+              "items": ["102"]
             }
           ],
           "startTime": "14:00"
@@ -399,10 +401,10 @@
           "endTime": "15:30",
           "sessions": [
             {
-              "items": [110]
+              "items": ["110"]
             },
             {
-              "items": [123]
+              "items": ["123"]
             }
           ],
           "startTime": "14:50"
@@ -411,7 +413,7 @@
           "endTime": "16:00",
           "sessions": [
             {
-              "items": [134]
+              "items": ["134"]
             }
           ],
           "startTime": "15:30"
@@ -420,14 +422,14 @@
           "endTime": "16:40",
           "sessions": [
             {
-              "items": [131]
+              "items": ["131"]
             },
             {
-              "items": [140]
+              "items": ["140"]
             },
             {
               "extend": 2,
-              "items": [130]
+              "items": ["130"]
             }
           ],
           "startTime": "16:00"
@@ -436,10 +438,10 @@
           "endTime": "17:30",
           "sessions": [
             {
-              "items": [115]
+              "items": ["115"]
             },
             {
-              "items": [140]
+              "items": ["140"]
             }
           ],
           "startTime": "16:50"
