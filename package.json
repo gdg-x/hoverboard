@@ -101,7 +101,7 @@
     "jest-runner-tsc": "^1.6.0",
     "nunjucks": "^3.2.2",
     "prettier": "2.1.2",
-    "prettier-plugin-package": "1.1.0",
+    "prettier-plugin-package": "1.2.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.29.0",
     "rollup-plugin-copy": "^3.3.0",
