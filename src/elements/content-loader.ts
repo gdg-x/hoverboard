@@ -2,6 +2,8 @@ import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import './shared-styles';
 
+// TODO: Rewrite
+
 @customElement('content-loader')
 export class ContentLoader extends PolymerElement {
   static get template() {

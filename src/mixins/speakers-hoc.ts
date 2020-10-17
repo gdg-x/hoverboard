@@ -1,10 +1,10 @@
-import { Pending } from '@abraham/remotedata';
+import { Initialized } from '@abraham/remotedata';
 import { Constructor } from '@lit/reactive-element/decorators';
 import { property } from '@polymer/decorators';
 import { PolymerElement } from '@polymer/polymer';
 import { RootState, store } from '../store';
 import { fetchSpeakersList } from '../store/speakers/actions';
-import { initialSpeakersState, SpeakersState } from '../store/speakers/state';
+import { initialSpeakersState } from '../store/speakers/state';
 
 /* @polymerMixin */
 export const SpeakersHoC = <
@@ -14,7 +14,7 @@ export const SpeakersHoC = <
 ) => {
   class SpeakersClass extends subclass {
     @property({ type: Object })
-    speakers: SpeakersState = initialSpeakersState;
+    speakers = initialSpeakersState;
 
     stateChanged(state: RootState) {
       super.stateChanged(state);
@@ -24,7 +24,7 @@ export const SpeakersHoC = <
     connectedCallback() {
       super.connectedCallback();
 
-      if (this.speakers instanceof Pending) {
+      if (this.speakers instanceof Initialized) {
         store.dispatch(fetchSpeakersList());
       }
     }

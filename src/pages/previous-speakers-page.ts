@@ -1,6 +1,5 @@
 import { Failure, Initialized, Success } from '@abraham/remotedata';
-import '@polymer/app-route/app-route';
-import { computed, customElement, observe, property } from '@polymer/decorators';
+import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
@@ -8,29 +7,15 @@ import '../elements/content-loader';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { PreviousSession } from '../models/previous-session';
+import { router } from '../router';
 import { RootState, store } from '../store';
-import { closeDialog, openDialog } from '../store/dialogs/actions';
-import { DIALOGS } from '../store/dialogs/types';
 import { fetchPreviousSpeakersList } from '../store/previous-speakers/actions';
-import {
-  initialPreviousSpeakersState,
-  PreviousSpeakersState,
-} from '../store/previous-speakers/state';
-import { isDialogOpen } from '../utils/dialogs';
+import { initialPreviousSpeakersState } from '../store/previous-speakers/state';
 
 @customElement('previous-speakers-page')
 export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
-  @property({ type: Boolean })
-  active = false;
   @property({ type: Object })
-  route = {};
-  @property({ type: Object })
-  previousSpeakers: PreviousSpeakersState = initialPreviousSpeakersState;
-
-  @property({ type: Object })
-  private routeData: { speakerId?: string } = {};
-  @property({ type: Boolean })
-  private isDialogOpened = false;
+  previousSpeakers = initialPreviousSpeakersState;
 
   static get template() {
     return html`
@@ -141,16 +126,12 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
       <polymer-helmet
         title="{$ heroSettings.previousSpeakers.title $} | {$ title $}"
         details="{$ heroSettings.previousSpeakers.metaDescription $}"
-        active="[[_setHelmetData(active, isDialogOpened)]]"
       ></polymer-helmet>
-
-      <app-route route="[[route]]" pattern="/:speakerId" data="{{routeData}}"></app-route>
 
       <hero-block
         background-image="{$ heroSettings.previousSpeakers.background.image $}"
         background-color="{$ heroSettings.previousSpeakers.background.color $}"
         font-color="{$ heroSettings.previousSpeakers.fontColor $}"
-        active="[[active]]"
       >
         <div class="hero-title">{$ heroSettings.previousSpeakers.title $}</div>
         <p class="hero-details">{$ heroSettings.previousSpeakers.details $}</p>
@@ -171,7 +152,7 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
         <template is="dom-repeat" items="[[previousSpeakers.data]]" as="speaker">
           <a
             class="speaker"
-            href$="/previous-speakers/[[speaker.id]]/"
+            href$="[[previousSpeakerUrl(speaker.id)]]"
             ga-on="click"
             ga-event-category="previous speaker"
             ga-event-action="open details"
@@ -208,7 +189,6 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
   }
 
   stateChanged(state: RootState) {
-    this.isDialogOpened = isDialogOpen(state.dialogs, DIALOGS.PREVIOUS_SPEAKER);
     this.previousSpeakers = state.previousSpeakers;
   }
 
@@ -220,33 +200,8 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
   }
 
   @computed('previousSpeakers')
-  get contentLoaderVisibility() {
+  get contentLoaderVisibility(): boolean {
     return this.previousSpeakers instanceof Success || this.previousSpeakers instanceof Failure;
-  }
-
-  @observe('isDialogOpened')
-  _dialogStatusChanged(nextState: boolean, prevState: boolean) {
-    if (!nextState && prevState && this.active && this.routeData.speakerId) {
-      history.back();
-    }
-  }
-
-  @observe('active', 'previousSpeakers', 'routeData.speakerId')
-  _openSpeakerDetails(active: boolean, speakers: PreviousSpeakersState, id?: string) {
-    if (speakers instanceof Success) {
-      requestAnimationFrame(() => {
-        if (active && id) {
-          const speakerData = speakers.data.find(({ id: currentId }) => currentId === id);
-          speakerData && openDialog(DIALOGS.PREVIOUS_SPEAKER, speakerData);
-        } else if (this.isDialogOpened) {
-          closeDialog();
-        }
-      });
-    }
-  }
-
-  _setHelmetData(active: boolean, isDialogOpened: boolean) {
-    return active && !isDialogOpened;
   }
 
   _getYears(sessions: { [key: number]: PreviousSession[] }) {
@@ -254,5 +209,9 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
       .map(Number)
       .sort((a, b) => b - a)
       .join(', ');
+  }
+
+  previousSpeakerUrl(id: string) {
+    return router.urlForName('previous-speaker-page', { id });
   }
 }

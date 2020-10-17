@@ -6,6 +6,7 @@ import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { router } from '../router';
 import { RootState, store } from '../store';
 import { fetchBlogList } from '../store/blog/actions';
 import { BlogState, initialBlogState } from '../store/blog/state';
@@ -87,7 +88,7 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
         <div class="posts-wrapper">
           <template is="dom-repeat" items="[[latestPosts]]" as="post">
             <a
-              href$="/blog/posts/[[post.id]]/"
+              href$="[[postUrl(post.id)]]"
               class="post card"
               ga-on="click"
               ga-event-category="blog"
@@ -154,6 +155,10 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
     } else {
       return [];
     }
+  }
+
+  postUrl(id: string) {
+    return router.urlForName('post-page', { id });
   }
 
   getDate(date: Date) {

@@ -9,7 +9,7 @@ import { RootState, store } from '../store';
 import { closeDialog, openDialog, setDialogError } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
 import { fetchPartners } from '../store/partners/actions';
-import { initialPartnersState, PartnersState } from '../store/partners/state';
+import { initialPartnersState } from '../store/partners/state';
 import { addPotentialPartner } from '../store/potential-partners/actions';
 import { showToast } from '../store/toast/actions';
 import './hoverboard-icons';
@@ -106,15 +106,13 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  @property({ type: Object })
-  private viewport = {};
   @property({ type: Boolean, observer: PartnersBlock.prototype._partnerAddingChanged })
   private partnerAdding = false;
   @property({ type: Object })
   private partnerAddingError: Error;
 
   @property({ type: Object })
-  partners: PartnersState = initialPartnersState;
+  partners = initialPartnersState;
 
   @computed('partners')
   get pending() {
@@ -127,7 +125,6 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
   }
 
   stateChanged(state: RootState) {
-    this.viewport = state.ui.viewport;
     this.partners = state.partners;
     this.partnerAdding = state.potentialPartners.adding;
     this.partnerAddingError = state.potentialPartners.addingError;

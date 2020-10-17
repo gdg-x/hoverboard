@@ -4,7 +4,7 @@ import { property } from '@polymer/decorators';
 import { PolymerElement } from '@polymer/polymer';
 import { RootState, store } from '../store';
 import { fetchSessions } from '../store/sessions/actions';
-import { initialSessionsState, SessionsState } from '../store/sessions/state';
+import { initialSessionsState } from '../store/sessions/state';
 
 /* @polymerMixin */
 export const SessionsHoC = <
@@ -14,7 +14,7 @@ export const SessionsHoC = <
 ) => {
   class SessionsClass extends subclass {
     @property({ type: Object })
-    protected sessions: SessionsState = initialSessionsState;
+    protected sessions = initialSessionsState;
 
     stateChanged(state: RootState) {
       super.stateChanged(state);

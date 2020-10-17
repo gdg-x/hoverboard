@@ -1,5 +1,5 @@
-import { Pending, RemoteData } from '@abraham/remotedata';
+import { Initialized, RemoteData } from '@abraham/remotedata';
 import { SpeakerWithTags } from '../../models/speaker';
 
 export type SpeakersState = RemoteData<Error, SpeakerWithTags[]>;
-export const initialSpeakersState: SpeakersState = new Pending();
+export const initialSpeakersState: SpeakersState = new Initialized();

@@ -4,6 +4,7 @@ import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
+import { initialUiState } from '../store/ui/state';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -106,7 +107,7 @@ export class MapBlock extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
-  private viewport;
+  private viewport = initialUiState.viewport;
   @property({ type: Object })
   private option = {
     disableDefaultUI: true,

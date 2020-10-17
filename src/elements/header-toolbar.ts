@@ -4,15 +4,19 @@ import { PaperMenuButton } from '@polymer/paper-menu-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ELEMENTS, setElement } from '../global';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { Hero } from '../models/hero';
+import { selectRouteName } from '../router';
 import { RootState, store } from '../store';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { initialDialogState } from '../store/dialogs/state';
 import { DIALOGS } from '../store/dialogs/types';
 import { requestPermission, unsubscribe } from '../store/notifications/actions';
+import { initialNotificationState } from '../store/notifications/state';
 import { NOTIFICATIONS_STATUS } from '../store/notifications/types';
-import { initialRoutingState, RoutingState } from '../store/routing/state';
 import { initialTicketsState, TicketsState } from '../store/tickets/state';
+import { initialUiState } from '../store/ui/state';
 import { signOut } from '../store/user/actions';
+import { initialUserState } from '../store/user/state';
 import { isDialogOpen } from '../utils/dialogs';
 import './shared-styles';
 
@@ -159,7 +163,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
 
         <paper-tabs
           class="nav-items"
-          selected="[[route.route]]"
+          selected="[[routeName]]"
           attr-for-selected="name"
           hidden$="[[!viewport.isLaptopPlus]]"
           role="navigation"
@@ -267,34 +271,34 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  @property({ type: Object })
-  route: RoutingState = initialRoutingState;
   @property({ type: Boolean, notify: true })
   drawerOpened: boolean;
   @property({ type: Object })
   tickets: TicketsState = initialTicketsState;
 
   @property({ type: Object })
-  private viewport = {};
+  private viewport = initialUiState.viewport;
   @property({ type: Object })
-  private heroSettings = {};
+  private heroSettings = initialUiState.heroSettings;
   @property({ type: Object })
   private dialogs = initialDialogState;
   @property({ type: Object })
-  private notifications: { token?: string; status?: string } = {};
+  private notifications = initialNotificationState;
   @property({ type: Object })
-  private user = {};
+  private user = initialUserState;
   @property({ type: Boolean, reflectToAttribute: true })
   private transparent = false;
+  @property({ type: String })
+  private routeName = '';
 
   stateChanged(state: RootState) {
     this.dialogs = state.dialogs;
     this.notifications = state.notifications;
-    this.route = state.routing;
     this.user = state.user;
     this.tickets = state.tickets;
     this.heroSettings = state.ui.heroSettings;
     this.viewport = state.ui.viewport;
+    this.routeName = selectRouteName(window.location.pathname);
   }
 
   connectedCallback() {
@@ -327,7 +331,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   }
 
   @observe('user.signedIn')
-  _authStatusChanged(_signedIn) {
+  _authStatusChanged(_signedIn?: boolean) {
     if (isDialogOpen(this.dialogs, DIALOGS.SIGNIN)) {
       closeDialog();
     }
@@ -374,7 +378,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   }
 
   @observe('heroSettings')
-  _setToolbarSettings(settings) {
+  _setToolbarSettings(settings: Hero) {
     if (!settings) return;
     this.updateStyles({
       '--hero-font-color': settings.fontColor || '',

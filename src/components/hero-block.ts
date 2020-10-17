@@ -8,8 +8,6 @@ import { ThemedElement } from './themed-element';
 
 @customElement('hero-block')
 export class HeroBlock extends ThemedElement {
-  @property({ type: Boolean })
-  active = false;
   @property({ type: String, attribute: 'background-image' })
   backgroundImage = '';
   @property({ type: String, attribute: 'background-color' })
@@ -125,14 +123,12 @@ export class HeroBlock extends ThemedElement {
 
   updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
-    if (this.active) {
-      setHeroSettings({
-        backgroundImage: this.backgroundImage,
-        backgroundColor: this.backgroundColor,
-        fontColor: this.fontColor,
-        hideLogo: this.hideLogo,
-      });
-    }
+    setHeroSettings({
+      backgroundImage: this.backgroundImage,
+      backgroundColor: this.backgroundColor,
+      fontColor: this.fontColor,
+      hideLogo: this.hideLogo,
+    });
   }
 }
 

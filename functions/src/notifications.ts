@@ -42,9 +42,10 @@ export const sendGeneralNotification = functions.firestore
     console.log('There are', tokens.length, 'tokens to send notifications to.');
 
     const payload = {
-      data: Object.assign({}, message, {
+      data: {
+        ...message,
         icon: message.icon || notificationsConfig.icon,
-      }),
+      },
     };
 
     const tokensToRemove = [];

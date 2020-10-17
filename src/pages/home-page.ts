@@ -15,9 +15,7 @@ import '../elements/tickets-block';
 import { firebaseApp } from '../firebase';
 import { ELEMENTS, getElement } from '../global';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { RootState } from '../store';
 import { toggleVideoDialog } from '../store/ui/actions';
-import { Viewport } from '../store/ui/types';
 import { scrollToY } from '../utils/scrolling';
 
 @customElement('home-page')
@@ -136,14 +134,13 @@ export class HomePage extends ReduxMixin(PolymerElement) {
         }
       </style>
 
-      <polymer-helmet active="[[active]]"></polymer-helmet>
+      <polymer-helmet></polymer-helmet>
 
       <hero-block
         id="hero"
         background-image="{$ heroSettings.home.background.image $}"
         background-color="{$ heroSettings.home.background.color $}"
         font-color="{$ heroSettings.home.fontColor $}"
-        active="[[active]]"
         hide-logo
       >
         <div class="home-content" layout vertical center>
@@ -265,15 +262,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Boolean })
-  private active = false;
-  @property({ type: Object })
-  private viewport: Viewport;
-  @property({ type: Boolean })
   private showForkMeBlock = false;
-
-  stateChanged(state: RootState) {
-    this.viewport = state.ui.viewport;
-  }
 
   _playVideo() {
     toggleVideoDialog({

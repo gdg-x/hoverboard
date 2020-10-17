@@ -9,15 +9,12 @@ import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { fetchTeams } from '../store/teams/actions';
-import { initialTeamsState, TeamsState } from '../store/teams/state';
+import { initialTeamsState } from '../store/teams/state';
 
 @customElement('team-page')
 export class TeamPage extends ReduxMixin(PolymerElement) {
-  @property({ type: Boolean })
-  active = false;
-
   @property({ type: Object })
-  teams: TeamsState = initialTeamsState;
+  teams = initialTeamsState;
 
   @computed('teams')
   get pending() {
@@ -133,14 +130,12 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
       <polymer-helmet
         title="{$ heroSettings.team.title $} | {$ title $}"
         description="{$ heroSettings.team.metaDescription $}"
-        active="[[active]]"
       ></polymer-helmet>
 
       <hero-block
         background-image="{$ heroSettings.team.background.image $}"
         background-color="{$ heroSettings.team.background.color $}"
         font-color="{$ heroSettings.team.fontColor $}"
-        active="[[active]]"
       >
         <div class="hero-title">{$ heroSettings.team.title $}</div>
         <p class="hero-description">{$ heroSettings.team.description $}</p>

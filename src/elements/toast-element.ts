@@ -5,7 +5,8 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { hideToast } from '../store/toast/actions';
-import { initialToastState, ToastState } from '../store/toast/state';
+import { initialToastState } from '../store/toast/state';
+import { initialUiState } from '../store/ui/state';
 import './shared-styles';
 
 @customElement('toast-element')
@@ -59,9 +60,9 @@ export class ToastElement extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
-  private toast: ToastState = initialToastState;
+  private toast = initialToastState;
   @property({ type: Object })
-  private viewport = {};
+  private viewport = initialUiState.viewport;
 
   stateChanged(state: RootState) {
     this.toast = state.toast;

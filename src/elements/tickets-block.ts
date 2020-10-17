@@ -7,7 +7,7 @@ import { ELEMENTS, setElement } from '../global';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { Ticket } from '../models/ticket';
 import { RootState } from '../store';
-import { initialTicketsState, TicketsState } from '../store/tickets/state';
+import { initialTicketsState } from '../store/tickets/state';
 import './content-loader';
 import './hoverboard-icons';
 import './shared-styles';
@@ -204,13 +204,9 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
-  tickets: TicketsState = initialTicketsState;
-
-  @property({ type: Object })
-  private viewport = {};
+  tickets = initialTicketsState;
 
   stateChanged(state: RootState) {
-    this.viewport = state.ui.viewport;
     this.tickets = state.tickets;
   }
 
@@ -237,6 +233,7 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
       return;
     }
     // TODO: Remove eslint exception
+    // TODO: What is `discount` supposed to be used with?
     // eslint-disable-next-line
     const discount = Math.round(100 - (ticket.price * 100) / maxPrice);
     return `{$ ticketsBlock.save $}`;

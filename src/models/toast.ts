@@ -1,8 +1,4 @@
-// TODO: Move to file
-interface Action {
-  title: string;
-  callback: () => void;
-}
+import { Action } from './action';
 
 export interface Toast {
   action?: Action;

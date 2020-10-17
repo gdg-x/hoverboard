@@ -1,8 +1,6 @@
 import { Success } from '@abraham/remotedata';
-import '@polymer/app-route/app-route';
-import { customElement, observe, property } from '@polymer/decorators';
+import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
-import '@polymer/iron-location/iron-location';
 import '@polymer/paper-icon-button';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -16,14 +14,12 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
 import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
-import { SpeakerWithTags } from '../models/speaker';
+import { onSearchChanged, router } from '../router';
 import { RootState } from '../store';
-import { closeDialog, openDialog } from '../store/dialogs/actions';
-import { DIALOGS } from '../store/dialogs/types';
-import { selectFiltersGroups } from '../store/sessions/state';
-import { SpeakersState } from '../store/speakers/state';
-import { isDialogOpen } from '../utils/dialogs';
-import { generateClassName, selectFilters } from '../utils/functions';
+import { selectFilterGroups } from '../store/sessions/selectors';
+import { selectFilteredSpeakers } from '../store/speakers/selectors';
+import { selectFilters } from '../utils/filters';
+
 @customElement('speakers-page')
 export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
   static get template() {
@@ -168,18 +164,12 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
       <polymer-helmet
         title="{$ heroSettings.speakers.title $} | {$ title $}"
         description="{$ heroSettings.speakers.metaDescription $}"
-        active="[[_setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened)]]"
       ></polymer-helmet>
-
-      <iron-location query="{{queryParams}}"></iron-location>
-
-      <app-route route="[[route]]" pattern="/:speakerId" data="{{routeData}}"></app-route>
 
       <hero-block
         background-image="{$ heroSettings.speakers.background.image $}"
         background-color="{$ heroSettings.speakers.background.color $}"
         font-color="{$ heroSettings.speakers.fontColor $}"
-        active="[[active]]"
       >
         <div class="hero-title">{$ heroSettings.speakers.title $}</div>
         <p class="hero-description">{$ heroSettings.speakers.description $}</p>
@@ -210,7 +200,7 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
         <template is="dom-repeat" items="[[speakersToRender]]" as="speaker">
           <a
             class="speaker card"
-            href$="[[speaker.link]]"
+            href$="[[speakerUrl(speaker.id)]]"
             ga-on="click"
             ga-event-category="speaker"
             ga-event-action="open details"
@@ -281,20 +271,6 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     `;
   }
 
-  @property({ type: Object })
-  private route = {};
-  @property({ type: Object })
-  private routeData = {};
-  @property({ type: Boolean })
-  private active = false;
-  @property({ type: Object })
-  private queryParams = {};
-  @property({ type: Boolean })
-  private isSpeakerDialogOpened = false;
-  @property({ type: Boolean })
-  private isSessionDialogOpened = false;
-  @property({ type: String })
-  private contentLoaderVisibility;
   @property({ type: Array })
   private filterGroups: FilterGroup[] = [];
   @property({ type: Array })
@@ -302,60 +278,24 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
   @property({ type: Array })
   private speakersToRender = [];
 
+  connectedCallback() {
+    super.connectedCallback();
+    onSearchChanged(() => (this.selectedFilters = selectFilters()));
+  }
+
   stateChanged(state: RootState) {
     super.stateChanged(state);
-    this.isSpeakerDialogOpened = isDialogOpen(state.dialogs, DIALOGS.SPEAKER);
-    this.isSessionDialogOpened = isDialogOpen(state.dialogs, DIALOGS.SESSION);
-    this.filterGroups = selectFiltersGroups(state).filter(
-      (filterGroup) => filterGroup.key === FilterGroupKey.tags
-    );
-  }
-
-  @observe('speakers', 'selectedFilters')
-  _speakersChanged(speakers: SpeakersState, selectedFilters: Filter[]) {
-    if (speakers instanceof Success) {
-      this.contentLoaderVisibility = 'hidden';
-      const updatedSpeakers = this._filterItems(speakers.data, selectedFilters).map((speaker) =>
-        Object.assign({}, speaker, {
-          link: `/speakers/${speaker.id}${this.queryParams ? `?${this.queryParams}` : ''}`,
-        })
-      );
-      this.speakersToRender = updatedSpeakers;
-    }
-  }
-
-  @observe('active', 'speakers', 'routeData.speakerId')
-  _openSpeakerDetails(active: boolean, speakers: SpeakersState, id: string) {
-    if (speakers instanceof Success) {
-      requestAnimationFrame(() => {
-        if (active && id) {
-          const speakerData = speakers.data.find((speaker) => speaker.id === id);
-          speakerData && openDialog(DIALOGS.SPEAKER, speakerData);
-        } else {
-          this.isSpeakerDialogOpened && closeDialog();
-          this.isSessionDialogOpened && closeDialog();
-        }
-      });
-    }
-  }
-
-  _setHelmetData(active: boolean, isSpeakerDialogOpened: boolean, isSessionDialogOpened: boolean) {
-    return active && !isSpeakerDialogOpened && !isSessionDialogOpened;
-  }
-
-  @observe('queryParams')
-  _paramsUpdated(queryParams: string) {
+    this.filterGroups = selectFilterGroups(state, [FilterGroupKey.tags]);
     this.selectedFilters = selectFilters();
+    this.speakersToRender = selectFilteredSpeakers(state);
   }
 
-  _filterItems(speakers: SpeakerWithTags[], selectedFilters: Filter[]) {
-    if (selectedFilters.length === 0) return speakers;
+  @computed('speakers')
+  get contentLoaderVisibility() {
+    return this.speakers instanceof Success;
+  }
 
-    return speakers.filter((speaker) => {
-      return (speaker.tags || []).some((tag) => {
-        const className = generateClassName(tag);
-        return selectedFilters.some((filter) => filter.tag === className);
-      });
-    });
+  speakerUrl(id: string) {
+    return router.urlForName('speaker-page', { id });
   }
 }

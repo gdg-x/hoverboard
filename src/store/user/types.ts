@@ -5,6 +5,9 @@ export const SIGN_OUT = 'SIGN_OUT';
 
 export interface UserState {
   signedIn: boolean;
+  uid?: string;
+  displayName?: string;
+  email?: string;
 }
 
 interface SignInAction {
