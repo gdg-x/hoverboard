@@ -41,8 +41,8 @@ export default deepmerge(config, {
     copy({
       targets: [
         {
-          src: 'images/**',
-          dest: 'dist/images',
+          src: 'images/',
+          dest: 'dist/',
         },
         {
           src: 'manifest.json',
