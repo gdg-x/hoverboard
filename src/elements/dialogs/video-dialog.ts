@@ -1,12 +1,13 @@
-import '@google-web-components/google-youtube';
+import '@justinribeiro/lite-youtube';
 import '@polymer/paper-button';
 import { PaperDialogBehavior } from '@polymer/paper-dialog-behavior/paper-dialog-behavior';
 import '@polymer/paper-icon-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
-import { ReduxMixin } from '../mixins/redux-mixin';
-import { toggleVideoDialog } from '../store/ui/actions';
-import './shared-styles';
+import { ReduxMixin } from '../../mixins/redux-mixin';
+import { toggleVideoDialog } from '../../store/ui/actions';
+import '../shared-styles';
+
 class VideoDialog extends ReduxMixin(mixinBehaviors([PaperDialogBehavior], PolymerElement)) {
   static get template() {
     return html`
@@ -14,6 +15,7 @@ class VideoDialog extends ReduxMixin(mixinBehaviors([PaperDialogBehavior], Polym
         :host {
           margin: 0;
           padding: 0;
+          background: var(--primary-background-color);
         }
 
         .video-wrapper {
@@ -37,10 +39,6 @@ class VideoDialog extends ReduxMixin(mixinBehaviors([PaperDialogBehavior], Polym
         .go-back-icon:hover {
           opacity: 0.9;
         }
-
-        .video {
-          padding: 0;
-        }
       </style>
 
       <div class="toolbar">
@@ -52,17 +50,12 @@ class VideoDialog extends ReduxMixin(mixinBehaviors([PaperDialogBehavior], Polym
         ></paper-icon-button>
       </div>
       <div class="video-wrapper">
-        <google-youtube
-          id="video"
-          class="video"
+        <lite-youtube
           video-id="[[youtubeId]]"
-          width="100%"
-          height="100%"
-          autohide="1"
-          chromeless="[[disableControls]]"
-          fit
-        >
-        </google-youtube>
+          video-title="[[title]]"
+          params="autoplay=1"
+          autoload
+        ></lite-youtube>
       </div>
     `;
   }
@@ -73,31 +66,18 @@ class VideoDialog extends ReduxMixin(mixinBehaviors([PaperDialogBehavior], Polym
 
   static get properties() {
     return {
-      videoTitle: String,
+      title: String,
       opened: {
         type: Boolean,
-        observer: 'videoDialogActionMade',
       },
-      youtubeId: String,
+      youtubeId: {
+        type: String,
+      },
       disableControls: {
         type: Boolean,
         value: false,
       },
     };
-  }
-
-  videoDialogActionMade() {
-    if (this.opened) {
-      if (this.withBackdrop) {
-        this.backdropElement.open();
-      }
-      this.$.video.play();
-    } else {
-      this.$.video.seekTo(0);
-      this.$.video.pause();
-      this.backdropElement.close();
-      this.opened = false;
-    }
   }
 
   _closeSelf() {
