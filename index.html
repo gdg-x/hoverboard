@@ -100,25 +100,17 @@
       !function(n,e){var t,o,i,c=[],f={passive:!0,capture:!0},r=new Date,a="pointerup",u="pointercancel";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=[])}function l(t){if(t.cancelable){var o=(t.timeStamp>1e12?new Date:performance.now())-t.timeStamp;"pointerdown"==t.type?function(t,o){function i(){p(t,o),r()}function c(){r()}function r(){e(a,i,f),e(u,c,f)}n(a,i,f),n(u,c,f)}(o,t):p(o,t)}}function w(n){["click","mousedown","keydown","touchstart","pointerdown"].forEach(function(e){n(e,l,f)})}w(n),self.perfMetrics=self.perfMetrics||{},self.perfMetrics.onFirstInputDelay=function(n){c.push(n),s()}}(addEventListener,removeEventListener);
     </script>
 
-    <script src="./node_assets/firebase/firebase-app.js"></script>
-    <script src="./node_assets/firebase/firebase-auth.js"></script>
-    <script src="./node_assets/firebase/firebase-firestore.js"></script>
-    <script src="./node_assets/firebase/firebase-messaging.js"></script>
-    <script src="./node_assets/firebase/firebase-performance.js"></script>
+    <script src="/__/firebase/{$ firebaseVersion $}/firebase-app.js"></script>
+    <script src="/__/firebase/{$ firebaseVersion $}/firebase-auth.js"></script>
+    <script src="/__/firebase/{$ firebaseVersion $}/firebase-firestore.js"></script>
+    <script src="/__/firebase/{$ firebaseVersion $}/firebase-messaging.js"></script>
+    <script src="/__/firebase/{$ firebaseVersion $}/firebase-performance.js"></script>
+    <script src="/__/firebase/init.js"></script>
+    <script src="./node_assets/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 
     <script>
       window.Polymer = { rootPath: '{$ basepath $}' };
       window.HOVERBOARD = { Elements: {} };
-
-      firebase.initializeApp({
-        apiKey: '{$ firebase.apiKey $}',
-        appId: '{$ firebase.appId $}',
-        authDomain: '{$ firebase.authDomain $}',
-        databaseURL: '{$ firebase.databaseURL $}',
-        messagingSenderId: '{$ firebase.messagingSenderId $}',
-        projectId: '{$ firebase.projectId $}',
-        storageBucket: '{$ firebase.storageBucket $}',
-      });
 
       firebase.performance();
       firebase
@@ -133,8 +125,7 @@
       console.log('Firebase is ready!');
     </script>
 
-    <script src="./node_assets/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <script src="./out-tsc/src/hoverboard-app.js" type="module"></script>
+    <script src="./src/hoverboard-app.ts" type="module"></script>
 
     <style>
       html,
@@ -187,6 +178,16 @@
           ga('send', 'timing', 'index.html', 'render', indexRenderTime);
         }
       };
+
+      if (location.hostname === 'localhost') {
+        document.write(
+          '<script src="http://' +
+            (location.host || 'localhost').split(':')[0] +
+            ':35729/livereload.js?snipver=1"></' +
+            'script>'
+        );
+        console.log('Livereload is ready!');
+      }
     </script>
   </body>
 </html>
