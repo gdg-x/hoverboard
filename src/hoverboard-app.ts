@@ -5,6 +5,7 @@ import '@polymer/app-layout/app-header/app-header';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
 import '@polymer/app-route/app-location';
 import '@polymer/app-route/app-route';
+import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-dropdown/iron-dropdown-scroll-manager';
 import '@polymer/iron-icon';
 import '@polymer/iron-media-query';
@@ -31,6 +32,7 @@ import './elements/dialogs/session-details';
 import './elements/dialogs/signin-dialog';
 import './elements/dialogs/speaker-details';
 import './elements/dialogs/subscribe-dialog';
+import './elements/dialogs/video-dialog';
 import './elements/footer-block';
 import './elements/header-toolbar';
 import './elements/hoverboard-analytics';
@@ -38,7 +40,6 @@ import './elements/hoverboard-icons';
 import './elements/polymer-helmet';
 import './elements/shared-styles';
 import './elements/toast-element';
-import './elements/video-dialog';
 import { ReduxMixin } from './mixins/redux-mixin';
 import './pages/blog-page';
 import './pages/coc-page';
@@ -48,17 +49,16 @@ import './pages/previous-speakers-page';
 import './pages/schedule-page';
 import './pages/speakers-page';
 import './pages/team-page';
+import { registerServiceWorker } from './service-worker-registration';
+import { RootState, store } from './store';
 import { getToken, initializeMessaging } from './store/notifications/actions';
 import { setRoute } from './store/routing/actions';
-import { RootState, store } from './store';
 import { fetchTickets } from './store/tickets/actions';
 import { showToast } from './store/toast/actions';
 import { setViewportSize } from './store/ui/actions';
 import { updateUser } from './store/user/actions';
-import { registerServiceWorker } from './service-worker-registration';
 import { TempAny } from './temp-any';
 import { scrollToY } from './utils/scrolling';
-import { customElement, observe, property } from '@polymer/decorators';
 
 setFastDomIf(true);
 setPassiveTouchGestures(true);
@@ -266,7 +266,7 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
 
       <video-dialog
         opened="[[ui.videoDialog.opened]]"
-        video-title="[[ui.videoDialog.title]]"
+        title="[[ui.videoDialog.title]]"
         youtube-id="[[ui.videoDialog.youtubeId]]"
         entry-animation="scale-up-animation"
         exit-animation="fade-out-animation"

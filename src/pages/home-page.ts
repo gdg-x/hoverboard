@@ -274,7 +274,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
 
   _playVideo() {
     toggleVideoDialog({
-      title: '{$  aboutBlock.callToAction.howItWas.title $}',
+      title: '{$  aboutBlock.callToAction.howItWas.label $}',
       youtubeId: '{$  aboutBlock.callToAction.howItWas.youtubeId $}',
       disableControls: true,
       opened: true,

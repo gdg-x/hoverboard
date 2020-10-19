@@ -123,7 +123,7 @@ export class AboutBlock extends ThemedElement {
 
   private playVideo() {
     toggleVideoDialog({
-      title: '{$  aboutBlock.callToAction.howItWas.title $}',
+      title: '{$  aboutBlock.callToAction.howItWas.label $}',
       youtubeId: '{$  aboutBlock.callToAction.howItWas.youtubeId $}',
       disableControls: true,
       opened: true,
