@@ -34,11 +34,10 @@ expect.extend({
 });
 
 declare global {
-  // eslint-disable-next-line
   namespace jest {
     interface Matchers<R> {
-      toDeny: () => {};
-      toAllow: () => {};
+      toDeny: () => R;
+      toAllow: () => R;
     }
   }
 }
