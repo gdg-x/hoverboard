@@ -1,4 +1,3 @@
-import { FirebaseError } from 'firebase';
 import { Dispatch } from 'redux';
 import { db } from '../db';
 import {
@@ -30,7 +29,7 @@ export const fetchBlogList = () => (dispatch: Dispatch<BlogActionTypes>) => {
         },
       });
     })
-    .catch((error: FirebaseError) => {
+    .catch((error: Error) => {
       dispatch({
         type: FETCH_BLOG_LIST_FAILURE,
         payload: { error },

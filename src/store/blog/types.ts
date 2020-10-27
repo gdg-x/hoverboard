@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import { FirebaseError } from 'firebase';
 
 export const FETCH_BLOG_LIST = 'FETCH_BLOG_LIST';
 export const FETCH_BLOG_LIST_FAILURE = 'FETCH_BLOG_LIST_FAILURE';
@@ -9,7 +8,7 @@ export type BlogPostData = firebase.firestore.DocumentData & { id: string };
 
 export interface BlogState {
   fetching: boolean;
-  fetchingError?: FirebaseError;
+  fetchingError?: Error;
   list?: BlogPostData[];
   obj?: {
     [id: string]: BlogPostData;
@@ -23,7 +22,7 @@ interface FetchBlogListAction {
 interface FetchBlogListFailureAction {
   type: typeof FETCH_BLOG_LIST_FAILURE;
   payload: {
-    error: FirebaseError;
+    error: Error;
   };
 }
 

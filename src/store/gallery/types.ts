@@ -1,5 +1,3 @@
-import { FirebaseError } from 'firebase';
-
 export const FETCH_GALLERY = 'FETCH_GALLERY';
 export const FETCH_GALLERY_FAILURE = 'FETCH_GALLERY_FAILURE';
 export const FETCH_GALLERY_SUCCESS = 'FETCH_GALLERY_SUCCESS';
@@ -12,7 +10,7 @@ export interface Gallery {
 
 export interface GalleryState {
   fetching: boolean;
-  fetchingError?: FirebaseError;
+  fetchingError?: Error;
   list: Gallery[];
 }
 
@@ -23,7 +21,7 @@ interface FetchGalleryAction {
 interface FetchGalleryFailureAction {
   type: typeof FETCH_GALLERY_FAILURE;
   payload: {
-    error: FirebaseError;
+    error: Error;
   };
 }
 

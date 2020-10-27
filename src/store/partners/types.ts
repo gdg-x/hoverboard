@@ -1,4 +1,3 @@
-import { FirebaseError } from 'firebase';
 import { Partner } from '../../models/partner';
 
 export const FETCH_PARTNERS = 'app/Partners/FETCH_PARTNERS';
@@ -10,10 +9,10 @@ export const ADD_POTENTIAL_PARTNER_SUCCESS = 'app/Partners/ADD_POTENTIAL_PARTNER
 
 export interface PartnersState {
   fetching: boolean;
-  fetchingError: FirebaseError;
+  fetchingError: Error;
   list: Partner[];
   adding: boolean;
-  addingError: FirebaseError;
+  addingError: Error;
 }
 
 interface FetchPartnersAction {
@@ -23,7 +22,7 @@ interface FetchPartnersAction {
 interface FetchPartnersFailureAction {
   type: typeof FETCH_PARTNERS_FAILURE;
   payload: {
-    error: FirebaseError;
+    error: Error;
   };
 }
 
@@ -44,7 +43,7 @@ interface AddPotentialPartnerAction {
 interface AddPotentialPartnerFailureAction {
   type: typeof ADD_POTENTIAL_PARTNER_FAILURE;
   payload: {
-    error: FirebaseError;
+    error: Error;
   };
 }
 

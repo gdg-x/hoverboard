@@ -1,4 +1,3 @@
-import { FirebaseError } from 'firebase';
 import { Session } from '../../models/session';
 
 export const FETCH_SESSIONS = 'FETCH_SESSIONS';
@@ -18,14 +17,14 @@ export interface FeaturedSessions {
 
 export interface SessionsState {
   fetching: boolean;
-  fetchingError: FirebaseError;
+  fetchingError: Error;
   list: Session[];
   obj: {
     [sessionId: string]: Session;
   };
   featured: FeaturedSessions;
   featuredFetching: boolean;
-  featuredError: FirebaseError;
+  featuredError: Error;
 }
 
 interface FetchSessionsAction {
@@ -35,7 +34,7 @@ interface FetchSessionsAction {
 interface FetchSessionsFailureAction {
   type: typeof FETCH_SESSIONS_FAILURE;
   payload: {
-    error: FirebaseError;
+    error: Error;
   };
 }
 
@@ -56,7 +55,7 @@ interface FetchUserFeaturedSessionsAction {
 interface FetchUserFeaturedSessionsFailureAction {
   type: typeof FETCH_USER_FEATURED_SESSIONS_FAILURE;
   payload: {
-    error: FirebaseError;
+    error: Error;
   };
 }
 
@@ -72,7 +71,7 @@ interface SetUserFeaturedSessionsAction {
 interface SetUserFeaturedSessionsFailureAction {
   type: typeof SET_USER_FEATURED_SESSIONS_FAILURE;
   payload: {
-    error: FirebaseError;
+    error: Error;
   };
 }
 

@@ -1,4 +1,3 @@
-import { FirebaseError } from 'firebase';
 import { Schedule } from '../../models/schedule';
 
 export const FETCH_SCHEDULE = 'FETCH_SCHEDULE';
@@ -14,7 +13,7 @@ interface FetchScheduleAction {
 interface FetchScheduleFailureAction {
   type: typeof FETCH_SCHEDULE_FAILURE;
   payload: {
-    error: FirebaseError;
+    error: Error;
   };
 }
 
