@@ -1,4 +1,3 @@
-import { FirebaseError } from 'firebase';
 import { Video } from '../../models/video';
 
 export const FETCH_VIDEOS = 'FETCH_VIDEOS';
@@ -7,7 +6,7 @@ export const FETCH_VIDEOS_SUCCESS = 'FETCH_VIDEOS_SUCCESS';
 
 export interface VideoState {
   fetching: boolean;
-  fetchingError?: FirebaseError;
+  fetchingError?: Error;
   list: Video[];
 }
 
@@ -18,7 +17,7 @@ interface FetchVideosAction {
 interface FetchVideosFailureAction {
   type: typeof FETCH_VIDEOS_FAILURE;
   payload: {
-    error: FirebaseError;
+    error: Error;
   };
 }
 

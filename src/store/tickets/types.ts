@@ -1,4 +1,3 @@
-import { FirebaseError } from 'firebase';
 import { Ticket } from '../../models/ticket';
 
 export const FETCH_TICKETS = 'FETCH_TICKETS';
@@ -7,7 +6,7 @@ export const FETCH_TICKETS_SUCCESS = 'FETCH_TICKETS_SUCCESS';
 
 export interface TicketsState {
   fetching: boolean;
-  fetchingError: FirebaseError;
+  fetchingError: Error;
   list: Ticket[];
 }
 
@@ -18,7 +17,7 @@ interface FetchTicketsAction {
 interface FetchTicketsFailureAction {
   type: typeof FETCH_TICKETS_FAILURE;
   payload: {
-    error: FirebaseError;
+    error: Error;
   };
 }
 

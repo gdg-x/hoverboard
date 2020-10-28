@@ -1,4 +1,3 @@
-import { FirebaseError } from 'firebase';
 import { Speaker } from '../../models/speaker';
 
 export const FETCH_PREVIOUS_SPEAKERS = 'FETCH_PREVIOUS_SPEAKERS';
@@ -7,7 +6,7 @@ export const FETCH_PREVIOUS_SPEAKERS_SUCCESS = 'FETCH_PREVIOUS_SPEAKERS_SUCCESS'
 
 export interface PreviousSpeakersState {
   fetching: boolean;
-  fetchingError: FirebaseError;
+  fetchingError: Error;
   list: Speaker[];
   obj: {
     [speakerId: string]: Speaker;
@@ -21,7 +20,7 @@ interface FetchPreviousSpeakersAction {
 interface FetchPreviousSpeakersFailureAction {
   type: typeof FETCH_PREVIOUS_SPEAKERS_FAILURE;
   payload: {
-    error: FirebaseError;
+    error: Error;
   };
 }
 

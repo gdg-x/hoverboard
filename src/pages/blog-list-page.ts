@@ -2,7 +2,6 @@ import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/marked-element';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
-import { FirebaseError } from 'firebase';
 import 'plastic-image';
 import '../elements/content-loader';
 import '../elements/posts-list';
@@ -182,7 +181,7 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
   @property({ type: Boolean })
   private postsFetching = false;
   @property({ type: Object })
-  private postsFetchingError: FirebaseError;
+  private postsFetchingError: Error;
   @property({ type: Object })
   private viewport: Viewport;
   @property({ type: Array })

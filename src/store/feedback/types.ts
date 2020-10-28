@@ -1,5 +1,3 @@
-import { FirebaseError } from 'firebase';
-
 export const FETCH_PREVIOUS_FEEDBACK = 'FETCH_PREVIOUS_FEEDBACK';
 export const FETCH_PREVIOUS_FEEDBACK_FAILURE = 'FETCH_PREVIOUS_FEEDBACK_FAILURE';
 export const FETCH_PREVIOUS_FEEDBACK_SUCCESS = 'FETCH_PREVIOUS_FEEDBACK_SUCCESS';
@@ -13,11 +11,11 @@ export const WIPE_PREVIOUS_FEEDBACK = 'WIPE_PREVIOUS_FEEDBACK';
 
 export interface FeedbackState {
   adding: boolean;
-  addingError: FirebaseError;
+  addingError: Error;
   fetching: boolean;
-  fetchingError: FirebaseError;
+  fetchingError: Error;
   deleting: boolean;
-  deletingError: FirebaseError;
+  deletingError: Error;
   sessions?: {
     [dbItem: string]: FeedbackData;
   };
@@ -44,7 +42,7 @@ interface FetchPreviousFeedbackAction {
 interface FetchPreviousFeedbackFailureAction {
   type: typeof FETCH_PREVIOUS_FEEDBACK_FAILURE;
   payload: {
-    error: FirebaseError;
+    error: Error;
   };
 }
 
@@ -64,7 +62,7 @@ interface SendFeedbackAction {
 interface SendFeedbackFailureAction {
   type: typeof SEND_FEEDBACK_FAILURE;
   payload: {
-    error: FirebaseError;
+    error: Error;
   };
 }
 
@@ -80,7 +78,7 @@ interface DeleteFeedbackAction {
 interface DeleteFeedbackFailureAction {
   type: typeof DELETE_FEEDBACK_FAILURE;
   payload: {
-    error: FirebaseError;
+    error: Error;
   };
 }
 

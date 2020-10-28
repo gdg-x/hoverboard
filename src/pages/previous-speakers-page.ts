@@ -2,7 +2,6 @@ import '@polymer/app-route/app-route';
 import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/paper-progress';
 import { html, PolymerElement } from '@polymer/polymer';
-import { FirebaseError } from 'firebase';
 import 'plastic-image';
 import '../elements/content-loader';
 import '../elements/shared-styles';
@@ -29,7 +28,7 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
   @property({ type: Boolean })
   private speakersFetching = false;
   @property({ type: Object })
-  private speakersFetchingError: FirebaseError;
+  private speakersFetchingError: Error;
   @property({ type: Boolean })
   private isDialogOpened = false;
   @property({ type: Boolean })
