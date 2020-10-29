@@ -41,17 +41,18 @@ module.exports = {
     {
       displayName: 'Prettier',
       preset: 'jest-runner-prettier',
-      testPathIgnorePatterns: ['/node_modules/', '/out-tsc/', '/dist/', '/package-lock.json/'],
+      testPathIgnorePatterns: ['/node_modules/', '/dist/', '/package-lock.json/'],
     },
-    {
-      displayName: 'TypeScript Web',
-      runner: 'tsc',
-    },
-    {
-      displayName: 'TypeScript Functions',
-      runner: 'tsc',
-      testMatch: ['<rootDir>/functions/**/*.ts'],
-    },
+    // jest-runner-tsc isn't failing on error
+    // {
+    //   displayName: 'TypeScript Web',
+    //   runner: 'tsc',
+    // },
+    // {
+    //   displayName: 'TypeScript Functions',
+    //   runner: 'tsc',
+    //   testMatch: ['<rootDir>/functions/**/*.ts'],
+    // },
     {
       displayName: 'stylelint',
       runner: 'stylelint',

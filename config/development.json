@@ -3,14 +3,5 @@
   "url": "https://hoverboard-dev.web.app/",
   "analytics": "UA-43643469-8",
   "prefix": "/",
-  "firebase": {
-    "apiKey": "AIzaSyAKOkGjmfBPTuYlDyPxlrSj7H-1oqWET7E",
-    "appId": "1:1083195713896:web:9aed8296d8d642cb",
-    "authDomain": "hoverboard-dev.web.app",
-    "databaseURL": "https://hoverboard-dev.firebaseio.com",
-    "messagingSenderId": "1083195713896",
-    "projectId": "hoverboard-dev",
-    "storageBucket": "hoverboard-dev.appspot.com"
-  },
   "googleMapApiKey": "AIzaSyAKOkGjmfBPTuYlDyPxlrSj7H-1oqWET7E"
 }

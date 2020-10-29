@@ -34,6 +34,13 @@ export const workboxConfig = {
       },
     },
     {
+      urlPattern: /\/__\/.*/,
+      handler: 'CacheFirst',
+      options: {
+        cacheName: 'firebase-cache',
+      },
+    },
+    {
       urlPattern: /https:\/\/maps\.googleapis\.com\/maps.*/,
       handler: 'NetworkFirst',
       options: {

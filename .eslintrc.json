@@ -21,7 +21,7 @@
     "es6": true
   },
   "plugins": ["jest", "@typescript-eslint", "html", "polymer"],
-  "ignorePatterns": ["dist/", "out-tsc"],
+  "ignorePatterns": ["dist/"],
   "rules": {
     "brace-style": "off",
     "new-cap": "off",

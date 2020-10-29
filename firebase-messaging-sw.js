@@ -1,15 +1,7 @@
-importScripts('./node_assets/firebase/firebase-app.js');
-importScripts('./node_assets/firebase/firebase-messaging.js');
+importScripts('/__/firebase/{$ firebaseVersion $}/firebase-app.js');
+importScripts('/__/firebase/{$ firebaseVersion $}/firebase-messaging.js');
+importScripts('/__/firebase/init.js');
 
-firebase.initializeApp({
-  apiKey: '{$ firebase.apiKey $}',
-  appId: '{$ firebase.appId $}',
-  authDomain: '{$ firebase.authDomain $}',
-  databaseURL: '{$ firebase.databaseURL $}',
-  messagingSenderId: '{$ firebase.messagingSenderId $}',
-  projectId: '{$ firebase.projectId $}',
-  storageBucket: '{$ firebase.storageBucket $}',
-});
 const messaging = firebase.messaging();
 
 messaging.setBackgroundMessageHandler(({ data }) => {
