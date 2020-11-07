@@ -1,16 +1,17 @@
 {
   "basepath": "/",
-  "url": "https://hoverboard-dev.web.app/",
+  "url": "https://mdevcamp.kotlinlapaz.dev",
   "analytics": "UA-43643469-8",
   "prefix": "/",
   "firebase": {
-    "apiKey": "AIzaSyAKOkGjmfBPTuYlDyPxlrSj7H-1oqWET7E",
-    "appId": "1:1083195713896:web:9aed8296d8d642cb",
-    "authDomain": "hoverboard-dev.web.app",
-    "databaseURL": "https://hoverboard-dev.firebaseio.com",
-    "messagingSenderId": "1083195713896",
-    "projectId": "hoverboard-dev",
-    "storageBucket": "hoverboard-dev.appspot.com"
+    "apiKey": "AIzaSyCdnQEgBQAt8XPhfQETBbeYI2a2ZN1fNSg",
+    "authDomain": "mdevcamp-b122d.firebaseapp.com",
+    "databaseURL": "https://mdevcamp-b122d.firebaseio.com",
+    "projectId": "mdevcamp-b122d",
+    "storageBucket": "mdevcamp-b122d.appspot.com",
+    "messagingSenderId": "472993796995",
+    "appId": "1:472993796995:web:aee312806c42ec2c615cb6",
+    "measurementId": "G-RSJXM1DDHN"
   },
   "googleMapApiKey": "AIzaSyAKOkGjmfBPTuYlDyPxlrSj7H-1oqWET7E"
 }

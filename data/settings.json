@@ -1,27 +1,27 @@
 {
   "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv",
+    "name": "Kotlin La Paz",
+    "twitter": "KotlinLaPaz",
     "blog": "https://medium.com/gdg-lviv",
     "url": "http://lviv.gdg.org.ua/"
   },
-  "startDate": "2017-10-013T09:00:00+03:00",
-  "endDate": "2017-10-14T19:00:00+03:00",
+  "startDate": "2020-12-19T09:00:00+03:00",
+  "endDate": "2020-12-24T19:00:00+03:00",
   "webapp": {
-    "shortName": "DevFest",
+    "shortName": "mDevCamp",
     "themeColor": "#673AB7",
     "backgroundColor": "#673AB7"
   },
   "dateFormat": {
-    "locale": "en-US"
+    "locale": "es-BO"
   },
-  "hashtag": "DevFest",
+  "hashtag": "mDevCamp",
   "disabledSchedule": false,
   "navigation": [
     {
-      "route": "home",
+      "route": "inicio",
       "permalink": "/",
-      "label": "Home"
+      "label": "Inicio"
     },
     {
       "route": "speakers",
@@ -29,14 +29,14 @@
       "label": "Speakers"
     },
     {
-      "route": "schedule",
+      "route": "programa",
       "permalink": "/schedule/",
-      "label": "Schedule"
+      "label": "Programa"
     },
     {
-      "route": "team",
+      "route": "equipo",
       "permalink": "/team/",
-      "label": "Team"
+      "label": "Equipo"
     },
     {
       "route": "blog",
@@ -46,7 +46,7 @@
   ],
   "heroSettings": {
     "home": {
-      "description": "Join the commuity, learn new things!",
+      "description": "Únete a la comunidad, ¡Aprende nuevas cosas!",
       "background": {
         "color": "#673ab7",
         "image": "/images/backgrounds/home.jpg"
@@ -55,7 +55,7 @@
     },
     "blog": {
       "title": "Blog",
-      "metaDescription": "Read stories from our team",
+      "metaDescription": "Lee historias de nuestro equipo",
       "background": {
         "color": "#FFF"
       },
@@ -63,32 +63,32 @@
     },
     "speakers": {
       "title": "Speakers",
-      "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
+      "metaDescription": "Escuche a los Experts y todos los Speakers invitados que están construyendo el futuro con tecnologías Móbiles. Vuelva a consultar con frecuencia a medida que agregamos más Speakers.",
+      "description": "Escuche a los Experts y todos los Speakers invitados que están construyendo el futuro con tecnologías Móbiles. Vuelva a consultar con frecuencia a medida que agregamos más Speakers.",
       "background": {
         "color": "#FFF"
       },
       "fontColor": "#424242"
     },
     "previousSpeakers": {
-      "title": "Previous Speakers",
-      "metaDescription": "Check who was with us last years",
+      "title": "Anteriores Speakers",
+      "metaDescription": "Mira quién estuvo con nosotros los últimos años",
       "background": {
         "color": "#FFF"
       },
       "fontColor": "#424242"
     },
     "schedule": {
-      "title": "Schedule",
-      "metaDescription": "Choose your sessions to visit",
+      "title": "Programa",
+      "metaDescription": "Elige tus sesiones para visitar",
       "background": {
         "color": "#fff"
       },
       "fontColor": "#424242"
     },
     "team": {
-      "title": "Team",
-      "metaDescription": "Get more info about organizers",
+      "title": "Equipo",
+      "metaDescription": "Obtener más información sobre los organizadores",
       "background": {
         "color": "#fff"
       },
@@ -96,15 +96,15 @@
     },
     "faq": {
       "title": "FAQs",
-      "metaDescription": "Find you answer right here!",
+      "metaDescription": "¡Encuentra tu respuesta aquí mismo!",
       "background": {
         "color": "#fff"
       },
       "fontColor": "#424242"
     },
     "coc": {
-      "title": "Code of Conduct",
-      "metaDescription": "Learn more about our expectations for all those who participate in our community",
+      "title": "Código de Conducta",
+      "metaDescription": "Conozca más sobre nuestras expectativas para todos los que participan en nuestra comunidad.",
       "background": {
         "color": "#fff"
       },
@@ -114,8 +114,8 @@
   "location": {
     "label": "Location",
     "name": "Planeta kino",
-    "city": "Lviv",
-    "short": "Lviv, Ukraine",
+    "city": "La Paz",
+    "short": "La Paz, Bolivia",
     "address": "36 Shchyretska St, Lviv, Ukraine",
     "pointer": {
       "latitude": 49.809841,
