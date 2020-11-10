@@ -8,14 +8,14 @@
   "startDate": "2020-12-19T09:00:00+03:00",
   "endDate": "2020-12-24T19:00:00+03:00",
   "webapp": {
-    "shortName": "mDevCamp",
+    "shortName": "mDevConf",
     "themeColor": "#673AB7",
     "backgroundColor": "#673AB7"
   },
   "dateFormat": {
     "locale": "es-BO"
   },
-  "hashtag": "mDevCamp",
+  "hashtag": "mDevConf",
   "disabledSchedule": false,
   "navigation": [
     {

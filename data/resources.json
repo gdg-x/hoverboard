@@ -1,5 +1,5 @@
 {
-  "title": "Mobile Developers Camp 2020",
+  "title": "Mobile Developers Conf 2020",
   "description": "¡Sé parte del evento, aprende cosas nuevas!",
   "image": "images/social-share.jpg",
   "keywords": "event, gdg, gde, devfest, google, programming, android, mobile, developers, web, cloud, androiddev, ios, flutter",
@@ -128,7 +128,7 @@
     "title": "Acerca de",
     "callToAction": {
       "featuredSessions": {
-        "description": "El evento mDevCamp reúne a los expertos de todo el mundo en tecnologías Móbiles durante 6 días de sesiones y talleres online.",
+        "description": "El evento mDevConf reúne a los expertos de todo el mundo en tecnologías Móbiles durante 6 días de sesiones y talleres online.",
         "label": "Explore la sesión destacada",
         "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
       },
@@ -232,7 +232,7 @@
     "emailAddress": "Dirección de Correo Electrónico",
     "firstName": "Nombres",
     "lastName": "Apellidos",
-    "formTitle": "Reciba las últimas actualizaciones, conocimientos y noticias sobre mDevCamp en su bandeja de entrada.",
+    "formTitle": "Reciba las últimas actualizaciones, conocimientos y noticias sobre mDevConf en su bandeja de entrada.",
     "emailRequired": "Por favor, introduce una dirección de correo electrónico válida.",
     "subscribe": "Suscribir",
     "subscribed": "Suscrito",
