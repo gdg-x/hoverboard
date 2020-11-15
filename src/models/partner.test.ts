@@ -4,9 +4,9 @@ import { allKeys } from './utils';
 
 describe('partner', () => {
   it('matches the shape of the default data', () => {
-    const partner: Partner[] = Object.values(data['partners']);
-    const keys: Array<keyof Partner> = ['logos', 'order', 'title'];
-    expect(partner).toHaveLength(2);
-    expect(allKeys(partner)).toStrictEqual(keys);
+    const posts: Partner[] = Object.values(data['partners'][1]['items']);
+    const keys: Array<keyof Partner> = ['logoUrl', 'name', 'order', 'url'];
+    expect(posts).toHaveLength(11);
+    expect(allKeys(posts)).toStrictEqual(keys);
   });
 });

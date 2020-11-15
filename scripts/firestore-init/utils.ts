@@ -85,7 +85,7 @@ export const importPartners = () => {
       order: partners[Number(docId)].order,
     });
 
-    partners[Number(docId)].logos.forEach((item, id) => {
+    partners[Number(docId)].items.forEach((item, id) => {
       batch.set(
         firestore
           .collection('partners')

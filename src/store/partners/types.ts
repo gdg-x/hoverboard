@@ -1,4 +1,4 @@
-import { Partner } from '../../models/partner';
+import { PartnerGroup } from '../../models/partner-group';
 
 export const FETCH_PARTNERS = 'app/Partners/FETCH_PARTNERS';
 export const FETCH_PARTNERS_FAILURE = 'app/Partners/FETCH_PARTNERS_FAILURE';
@@ -10,7 +10,7 @@ export const ADD_POTENTIAL_PARTNER_SUCCESS = 'app/Partners/ADD_POTENTIAL_PARTNER
 export interface PartnersState {
   fetching: boolean;
   fetchingError: Error;
-  list: Partner[];
+  list: PartnerGroup[];
   adding: boolean;
   addingError: Error;
 }
@@ -29,14 +29,14 @@ interface FetchPartnersFailureAction {
 interface FetchPartnersSuccessAction {
   type: typeof FETCH_PARTNERS_SUCCESS;
   payload: {
-    list: Partner[];
+    list: PartnerGroup[];
   };
 }
 
 interface AddPotentialPartnerAction {
   type: typeof ADD_POTENTIAL_PARTNER;
   payload: {
-    partner: Partner;
+    partner: PartnerGroup;
   };
 }
 
