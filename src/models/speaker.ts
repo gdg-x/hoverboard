@@ -1,7 +1,8 @@
 import { Badge } from './badge';
 import { Social } from './social';
+import { Id } from './types';
 
-export interface Speaker {
+export interface SpeakerData {
   badges?: Badge[];
   bio: string;
   company: string;
@@ -18,3 +19,5 @@ export interface Speaker {
   socials: Social[];
   title: string;
 }
+
+export type Speaker = Id & SpeakerData;

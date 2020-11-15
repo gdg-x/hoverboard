@@ -12,8 +12,8 @@ const getTeamIds = async (): Promise<TeamWithoutMembers[]> => {
 
 const getTeamMembers = async (team: TeamWithoutMembers): Promise<Team> => {
   const { docs } = await db().collection('team').doc(team.id).collection('members').get();
-
   const members = docs.map<Member>(mergeId);
+
   return {
     ...team,
     members,
@@ -31,10 +31,9 @@ export const fetchTeam = () => async (dispatch: Dispatch<TeamActions>) => {
   });
 
   try {
-    const teams = await getTeams();
     dispatch({
       type: FETCH_TEAM_SUCCESS,
-      payload: teams,
+      payload: await getTeams(),
     });
   } catch (error) {
     dispatch({
