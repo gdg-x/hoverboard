@@ -1,4 +1,5 @@
-import { customElement, property } from '@polymer/decorators';
+import { Failure, Initialized, Pending } from '@abraham/remotedata';
+import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -8,6 +9,7 @@ import { RootState, store } from '../store';
 import { closeDialog, openDialog, setDialogError } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
 import { fetchPartners } from '../store/partners/actions';
+import { initialPartnersState, PartnersState } from '../store/partners/state';
 import { addPotentialPartner } from '../store/potential-partners/actions';
 import { showToast } from '../store/toast/actions';
 import './hoverboard-icons';
@@ -62,7 +64,14 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
       <div class="container">
         <h1 class="container-title">{$ partnersBlock.title $}</h1>
 
-        <template is="dom-repeat" items="[[partners]]" as="block">
+        <template is="dom-if" if="[[pending]]">
+          <p>Loading...</p>
+        </template>
+        <template is="dom-if" if="[[failure]]">
+          <p>Error loading partners.</p>
+        </template>
+
+        <template is="dom-repeat" items="[[partners.data]]" as="block">
           <h4 class="block-title">[[block.title]]</h4>
           <div class="logos-wrapper">
             <template is="dom-repeat" items="[[block.items]]" as="logo">
@@ -99,29 +108,34 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
 
   @property({ type: Object })
   private viewport = {};
-  @property({ type: Array })
-  private partners = [];
-  @property({ type: Boolean })
-  private partnersFetching = false;
-  @property({ type: Object })
-  private partnersFetchingError = {};
   @property({ type: Boolean, observer: PartnersBlock.prototype._partnerAddingChanged })
   private partnerAdding = false;
   @property({ type: Object })
   private partnerAddingError = {};
 
+  @property({ type: Object })
+  partners: PartnersState = initialPartnersState;
+
+  @computed('partners')
+  get pending() {
+    return this.partners instanceof Pending;
+  }
+
+  @computed('partners')
+  get failure() {
+    return this.partners instanceof Failure;
+  }
+
   stateChanged(state: RootState) {
     this.viewport = state.ui.viewport;
-    this.partners = state.partners.list;
-    this.partnersFetching = state.partners.fetching;
-    this.partnersFetchingError = state.partners.fetchingError;
+    this.partners = state.partners;
     this.partnerAdding = state.potentialPartners.adding;
     this.partnerAddingError = state.potentialPartners.addingError;
   }
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.partnersFetching && (!this.partners || !this.partners.length)) {
+    if (this.partners instanceof Initialized) {
       store.dispatch(fetchPartners());
     }
   }
@@ -132,9 +146,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
       submitLabel: '{$ partnersBlock.form.submitLabel $}',
       firstFieldLabel: '{$ partnersBlock.form.fullName $}',
       secondFieldLabel: '{$ partnersBlock.form.companyName $}',
-      submit: (data) => {
-        store.dispatch(addPotentialPartner(data));
-      },
+      submit: (data) => store.dispatch(addPotentialPartner(data)),
     });
   }
 
