@@ -64,7 +64,7 @@
   },
   "partners": [
     {
-      "logos": [
+      "items": [
         {
           "order": 0,
           "logoUrl": "../images/logos/gdg-lviv.svg",
@@ -76,7 +76,7 @@
       "title": "Template Creator"
     },
     {
-      "logos": [
+      "items": [
         {
           "order": 0,
           "logoUrl": "../images/logos/google.svg",

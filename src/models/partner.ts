@@ -1,7 +1,6 @@
-import { Logo } from './logo';
-
 export interface Partner {
-  logos: Logo[];
+  logoUrl: string;
+  name: string;
   order: number;
-  title: string;
+  url: string;
 }
