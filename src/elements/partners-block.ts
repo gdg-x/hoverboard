@@ -7,7 +7,8 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { closeDialog, openDialog, setDialogError } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
-import { addPartner, fetchPartners } from '../store/partners/actions';
+import { fetchPartners } from '../store/partners/actions';
+import { addPotentialPartner } from '../store/potential-partners/actions';
 import { showToast } from '../store/toast/actions';
 import './hoverboard-icons';
 import './shared-styles';
@@ -114,8 +115,8 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
     this.partners = state.partners.list;
     this.partnersFetching = state.partners.fetching;
     this.partnersFetchingError = state.partners.fetchingError;
-    this.partnerAdding = state.partners.adding;
-    this.partnerAddingError = state.partners.addingError;
+    this.partnerAdding = state.potentialPartners.adding;
+    this.partnerAddingError = state.potentialPartners.addingError;
   }
 
   connectedCallback() {
@@ -132,7 +133,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
       firstFieldLabel: '{$ partnersBlock.form.fullName $}',
       secondFieldLabel: '{$ partnersBlock.form.companyName $}',
       submit: (data) => {
-        store.dispatch(addPartner(data));
+        store.dispatch(addPotentialPartner(data));
       },
     });
   }
