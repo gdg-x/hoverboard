@@ -1,13 +1,10 @@
+import { initialPartnersState } from './state';
 import {
-  ADD_POTENTIAL_PARTNER,
-  ADD_POTENTIAL_PARTNER_FAILURE,
-  ADD_POTENTIAL_PARTNER_SUCCESS,
   FETCH_PARTNERS,
   FETCH_PARTNERS_FAILURE,
   FETCH_PARTNERS_SUCCESS,
+  PartnerActionTypes,
 } from './types';
-import { initialPartnersState } from './state';
-import { PartnerActionTypes } from './types';
 
 export const partnersReducer = (state = initialPartnersState, action: PartnerActionTypes) => {
   switch (action.type) {
@@ -36,32 +33,6 @@ export const partnersReducer = (state = initialPartnersState, action: PartnerAct
         ...{
           fetching: false,
           list: action.payload.list,
-        },
-      };
-
-    case ADD_POTENTIAL_PARTNER:
-      return {
-        ...state,
-        ...{
-          adding: true,
-          addingError: null,
-        },
-      };
-
-    case ADD_POTENTIAL_PARTNER_FAILURE:
-      return {
-        ...state,
-        ...{
-          adding: false,
-          addingError: action.payload.error,
-        },
-      };
-
-    case ADD_POTENTIAL_PARTNER_SUCCESS:
-      return {
-        ...state,
-        ...{
-          adding: false,
         },
       };
 

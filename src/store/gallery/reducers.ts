@@ -1,4 +1,4 @@
-import { initialGalleryState } from './store';
+import { initialGalleryState } from './state';
 import {
   FETCH_GALLERY,
   FETCH_GALLERY_FAILURE,

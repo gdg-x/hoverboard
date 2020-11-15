@@ -3,16 +3,11 @@ import { PartnerGroup } from '../../models/partner-group';
 export const FETCH_PARTNERS = 'app/Partners/FETCH_PARTNERS';
 export const FETCH_PARTNERS_FAILURE = 'app/Partners/FETCH_PARTNERS_FAILURE';
 export const FETCH_PARTNERS_SUCCESS = 'app/Partners/FETCH_PARTNERS_SUCCESS';
-export const ADD_POTENTIAL_PARTNER = 'app/Partners/ADD_POTENTIAL_PARTNER';
-export const ADD_POTENTIAL_PARTNER_FAILURE = 'app/Partners/ADD_POTENTIAL_PARTNER_FAILURE';
-export const ADD_POTENTIAL_PARTNER_SUCCESS = 'app/Partners/ADD_POTENTIAL_PARTNER_SUCCESS';
 
 export interface PartnersState {
   fetching: boolean;
   fetchingError: Error;
   list: PartnerGroup[];
-  adding: boolean;
-  addingError: Error;
 }
 
 interface FetchPartnersAction {
@@ -33,28 +28,7 @@ interface FetchPartnersSuccessAction {
   };
 }
 
-interface AddPotentialPartnerAction {
-  type: typeof ADD_POTENTIAL_PARTNER;
-  payload: {
-    partner: PartnerGroup;
-  };
-}
-
-interface AddPotentialPartnerFailureAction {
-  type: typeof ADD_POTENTIAL_PARTNER_FAILURE;
-  payload: {
-    error: Error;
-  };
-}
-
-interface AddPotentialPartnerSuccessAction {
-  type: typeof ADD_POTENTIAL_PARTNER_SUCCESS;
-}
-
 export type PartnerActionTypes =
   | FetchPartnersAction
   | FetchPartnersFailureAction
-  | FetchPartnersSuccessAction
-  | AddPotentialPartnerAction
-  | AddPotentialPartnerFailureAction
-  | AddPotentialPartnerSuccessAction;
+  | FetchPartnersSuccessAction;
