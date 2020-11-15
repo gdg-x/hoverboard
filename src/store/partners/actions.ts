@@ -1,49 +1,42 @@
 import { Dispatch } from 'redux';
+import { Partner } from '../../models/partner';
+import { PartnerGroup } from '../../models/partner-group';
 import { db } from '../db';
+import { mergeId, order } from '../utils';
 import { FETCH_PARTNERS, FETCH_PARTNERS_FAILURE, FETCH_PARTNERS_SUCCESS } from './types';
 
-const _getPartnerItems = (groupId: string) =>
-  db()
-    .collection('partners')
-    .doc(groupId)
-    .collection('items')
-    .get()
-    .then((snaps) => {
-      return snaps.docs
-        .map((snap) => Object.assign({}, snap.data(), { id: snap.id }))
-        .sort((a, b) => a.order - b.order);
-    });
+const getGroupPartners = async (group: PartnerGroup & { id: string }): Promise<PartnerGroup> => {
+  const { docs } = await db().collection('partners').doc(group.id).collection('items').get();
+  const items = docs.map<Partner>(mergeId).sort(order);
 
-export const fetchPartners = () => (dispatch: Dispatch) => {
+  return {
+    ...group,
+    items,
+  };
+};
+
+const getPartnerGroups = async (): Promise<PartnerGroup[]> => {
+  const { docs } = await db().collection('partners').get();
+  const items = docs.map<PartnerGroup>(mergeId).sort(order);
+
+  return Promise.all(items.map(getGroupPartners));
+};
+
+export const fetchPartners = () => async (dispatch: Dispatch) => {
   dispatch({
     type: FETCH_PARTNERS,
   });
 
-  db()
-    .collection('partners')
-    .get()
-    .then((snaps) =>
-      Promise.all(
-        snaps.docs.map((snap) => Promise.all([snap.data(), snap.id, _getPartnerItems(snap.id)]))
-      )
-    )
-    .then((groups) =>
-      groups.map(([group, id, items]) => {
-        return Object.assign({}, group, { id, items });
-      })
-    )
-    .then((list) => {
-      dispatch({
-        type: FETCH_PARTNERS_SUCCESS,
-        payload: {
-          list,
-        },
-      });
-    })
-    .catch((error) => {
-      dispatch({
-        type: FETCH_PARTNERS_FAILURE,
-        payload: { error },
-      });
+  try {
+    const partnerGroups = await getPartnerGroups();
+    dispatch({
+      type: FETCH_PARTNERS_SUCCESS,
+      payload: partnerGroups,
     });
+  } catch (error) {
+    dispatch({
+      type: FETCH_PARTNERS_FAILURE,
+      payload: error,
+    });
+  }
 };
