@@ -1,4 +1,5 @@
-import { customElement, property } from '@polymer/decorators';
+import { Failure, Initialized, Pending } from '@abraham/remotedata';
+import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import '@polymer/paper-icon-button';
@@ -8,6 +9,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { toggleVideoDialog } from '../store/ui/actions';
 import { fetchVideos } from '../store/videos/actions';
+import { initialVideosState, VideoState } from '../store/videos/state';
 import './shared-animations';
 import './shared-styles';
 
@@ -142,7 +144,15 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
           ></paper-icon-button>
           <div id="videoList" class="video-list" layout flex horizontal>
             <div id="videos" class="videos" layout horizontal>
-              <template is="dom-repeat" items="[[videos]]" as="block" index-as="index">
+              <template is="dom-if" if="[[pending]]">
+                <p>Loading...</p>
+              </template>
+
+              <template is="dom-if" if="[[failure]]">
+                <p>Error loading videos.</p>
+              </template>
+
+              <template is="dom-repeat" items="[[videos.data]]" as="block" index-as="index">
                 <div
                   class="video-item"
                   on-click="playVideo"
@@ -196,12 +206,9 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  @property({ type: Array })
-  private videos = [];
-  @property({ type: Boolean })
-  private videosFetching = false;
   @property({ type: Object })
-  private videosFetchingError = {};
+  videos: VideoState = initialVideosState;
+
   @property({ type: Object })
   private viewport = {};
   @property({ type: Boolean })
@@ -209,16 +216,26 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
   @property({ type: Boolean })
   private _rightArrowHidden = false;
 
+  @computed('videos')
+  get pending() {
+    return this.videos instanceof Pending;
+  }
+
+  @computed('videos')
+  get failure() {
+    return this.videos instanceof Failure;
+  }
+
   stateChanged(state: RootState) {
-    this.videos = state.videos.list;
-    this.videosFetching = state.videos.fetching;
-    this.videosFetchingError = state.videos.fetchingError;
+    this.videos = state.videos;
     this.viewport = state.ui.viewport;
   }
 
   connectedCallback() {
     super.connectedCallback();
-    store.dispatch(fetchVideos());
+    if (this.videos instanceof Initialized) {
+      store.dispatch(fetchVideos());
+    }
   }
 
   shiftContentLeft() {
