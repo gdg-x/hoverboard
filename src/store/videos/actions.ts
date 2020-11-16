@@ -1,28 +1,35 @@
-import { FETCH_VIDEOS, FETCH_VIDEOS_FAILURE, FETCH_VIDEOS_SUCCESS } from './types';
+import {
+  FetchVideosActions,
+  FETCH_VIDEOS,
+  FETCH_VIDEOS_FAILURE,
+  FETCH_VIDEOS_SUCCESS,
+} from './types';
 import { db } from '../db';
 import { Dispatch } from 'redux';
+import { Video } from '../../models/video';
+import { mergeId } from '../utils';
 
-export const fetchVideos = () => (dispatch: Dispatch) => {
+const getVideos = async (): Promise<Video[]> => {
+  const { docs } = await db().collection('videos').orderBy('order', 'asc').get();
+
+  return docs.map<Video>(mergeId);
+};
+
+export const fetchVideos = () => async (dispatch: Dispatch<FetchVideosActions>) => {
   dispatch({
     type: FETCH_VIDEOS,
   });
 
-  return db()
-    .collection('videos')
-    .orderBy('order', 'asc')
-    .get()
-    .then((snaps) => {
-      const list = snaps.docs.map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
-
-      dispatch({
-        type: FETCH_VIDEOS_SUCCESS,
-        payload: { list },
-      });
-    })
-    .catch((error) => {
-      dispatch({
-        type: FETCH_VIDEOS_FAILURE,
-        payload: { error },
-      });
+  try {
+    console.log('try');
+    dispatch({
+      type: FETCH_VIDEOS_SUCCESS,
+      payload: await getVideos(),
     });
+  } catch (error) {
+    dispatch({
+      type: FETCH_VIDEOS_FAILURE,
+      payload: error,
+    });
+  }
 };

@@ -303,6 +303,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback();
     window.removeEventListener('scroll', this._onScroll);
   }
 

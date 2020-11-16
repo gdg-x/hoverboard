@@ -4,31 +4,21 @@ export const FETCH_VIDEOS = 'FETCH_VIDEOS';
 export const FETCH_VIDEOS_FAILURE = 'FETCH_VIDEOS_FAILURE';
 export const FETCH_VIDEOS_SUCCESS = 'FETCH_VIDEOS_SUCCESS';
 
-export interface VideoState {
-  fetching: boolean;
-  fetchingError?: Error;
-  list: Video[];
-}
-
 interface FetchVideosAction {
   type: typeof FETCH_VIDEOS;
 }
 
 interface FetchVideosFailureAction {
   type: typeof FETCH_VIDEOS_FAILURE;
-  payload: {
-    error: Error;
-  };
+  payload: Error;
 }
 
 interface FetchVideosSuccessAction {
   type: typeof FETCH_VIDEOS_SUCCESS;
-  payload: {
-    list: Video[];
-  };
+  payload: Video[];
 }
 
-export type FetchVideosActionTypes =
+export type FetchVideosActions =
   | FetchVideosAction
   | FetchVideosFailureAction
   | FetchVideosSuccessAction;

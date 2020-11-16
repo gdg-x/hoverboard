@@ -1,7 +1,5 @@
-import { VideoState } from './types';
+import { Initialized, RemoteData } from '@abraham/remotedata';
+import { Video } from '../../models/video';
 
-export const initialVideosState: VideoState = {
-  fetching: false,
-  fetchingError: null,
-  list: [],
-};
+export type VideoState = RemoteData<Error, Video[]>;
+export const initialVideosState: VideoState = new Initialized();

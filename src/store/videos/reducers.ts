@@ -1,36 +1,18 @@
 import { FETCH_VIDEOS, FETCH_VIDEOS_FAILURE, FETCH_VIDEOS_SUCCESS } from './types';
 import { initialVideosState } from './state';
-import { FetchVideosActionTypes } from './types';
+import { FetchVideosActions } from './types';
+import { Failure, Pending, Success } from '@abraham/remotedata';
 
-export const videosReducer = (state = initialVideosState, action: FetchVideosActionTypes) => {
+export const videosReducer = (state = initialVideosState, action: FetchVideosActions) => {
   switch (action.type) {
     case FETCH_VIDEOS:
-      return {
-        ...state,
-        ...{
-          fetching: true,
-          fetchingError: null,
-          list: [],
-        },
-      };
+      return new Pending();
 
     case FETCH_VIDEOS_FAILURE:
-      return {
-        ...state,
-        ...{
-          fetching: false,
-          fetchingError: action.payload.error,
-        },
-      };
+      return new Failure(action.payload);
 
     case FETCH_VIDEOS_SUCCESS:
-      return {
-        ...state,
-        ...{
-          fetching: false,
-          list: action.payload.list,
-        },
-      };
+      return new Success(action.payload);
 
     default:
       return state;
