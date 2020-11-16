@@ -1,8 +1,5 @@
-import { PreviousSpeakersState } from './types';
+import { Initialized, RemoteData } from '@abraham/remotedata';
+import { Speaker } from '../../models/speaker';
 
-export const initialPreviousSpeakersState: PreviousSpeakersState = {
-  fetching: false,
-  fetchingError: null,
-  list: [],
-  obj: {},
-};
+export type PreviousSpeakersState = RemoteData<Error, Speaker[]>;
+export const initialPreviousSpeakersState: PreviousSpeakersState = new Initialized();
