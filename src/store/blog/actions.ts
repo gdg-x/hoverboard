@@ -1,38 +1,34 @@
 import { Dispatch } from 'redux';
+import { Post } from '../../models/post';
 import { db } from '../db';
+import { mergeId } from '../utils';
 import {
-  BlogActionTypes,
+  BlogAction,
   FETCH_BLOG_LIST,
   FETCH_BLOG_LIST_FAILURE,
   FETCH_BLOG_LIST_SUCCESS,
 } from './types';
 
-export const fetchBlogList = () => (dispatch: Dispatch<BlogActionTypes>) => {
+const getPosts = async (): Promise<Post[]> => {
+  const { docs } = await db().collection('blog').orderBy('published', 'desc').get();
+
+  return docs.map<Post>(mergeId);
+};
+
+export const fetchBlogList = () => async (dispatch: Dispatch<BlogAction>) => {
   dispatch({
     type: FETCH_BLOG_LIST,
   });
 
-  db()
-    .collection('blog')
-    .orderBy('published', 'desc')
-    .get()
-    .then((snaps) => {
-      const list = snaps.docs.map((snap) => Object.assign({}, snap.data(), { id: snap.id }));
-
-      const obj = list.reduce((acc, curr) => Object.assign({}, acc, { [curr.id]: curr }), {});
-
-      dispatch({
-        type: FETCH_BLOG_LIST_SUCCESS,
-        payload: {
-          obj,
-          list,
-        },
-      });
-    })
-    .catch((error: Error) => {
-      dispatch({
-        type: FETCH_BLOG_LIST_FAILURE,
-        payload: { error },
-      });
+  try {
+    dispatch({
+      type: FETCH_BLOG_LIST_SUCCESS,
+      payload: await getPosts(),
     });
+  } catch (error) {
+    dispatch({
+      type: FETCH_BLOG_LIST_FAILURE,
+      payload: error,
+    });
+  }
 };

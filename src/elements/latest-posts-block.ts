@@ -1,4 +1,5 @@
-import { customElement, observe, property } from '@polymer/decorators';
+import { Initialized, Success } from '@abraham/remotedata';
+import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/marked-element';
 import '@polymer/paper-button';
@@ -7,6 +8,7 @@ import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { fetchBlogList } from '../store/blog/actions';
+import { BlogState, initialBlogState } from '../store/blog/state';
 import { getDate } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
@@ -83,7 +85,7 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
         <h1 class="container-title">{$ latestPostsBlock.title $}</h1>
 
         <div class="posts-wrapper">
-          <template is="dom-repeat" items="[[posts]]" as="post">
+          <template is="dom-repeat" items="[[latestPosts]]" as="post">
             <a
               href$="/blog/posts/[[post.id]]/"
               class="post card"
@@ -132,36 +134,29 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
-  private viewport = {};
-  @property({ type: Array })
-  private posts = [];
-  @property({ type: Array })
-  private postsList = [];
-  @property({ type: Boolean })
-  private postsFetching = false;
-  @property({ type: Object })
-  private postsFetchingError = {};
+  posts: BlogState = initialBlogState;
 
   stateChanged(state: RootState) {
-    this.viewport = state.ui.viewport;
-    this.postsList = state.blog.list;
-    this.postsFetching = state.blog.fetching;
-    this.postsFetchingError = state.blog.fetchingError;
+    this.posts = state.blog;
   }
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.postsFetching && (!this.postsList || !this.postsList.length)) {
+    if (this.posts instanceof Initialized) {
       store.dispatch(fetchBlogList());
     }
   }
 
-  @observe('postsList')
-  _transformPosts(postsList) {
-    this.posts = postsList.slice(0, 4);
+  @computed('posts')
+  get latestPosts() {
+    if (this.posts instanceof Success) {
+      return this.posts.data.slice(0, 4);
+    } else {
+      return [];
+    }
   }
 
-  getDate(date) {
+  getDate(date: Date) {
     return getDate(date);
   }
 }

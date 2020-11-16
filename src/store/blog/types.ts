@@ -1,19 +1,8 @@
-import firebase from 'firebase';
+import { Post } from '../../models/post';
 
 export const FETCH_BLOG_LIST = 'FETCH_BLOG_LIST';
 export const FETCH_BLOG_LIST_FAILURE = 'FETCH_BLOG_LIST_FAILURE';
 export const FETCH_BLOG_LIST_SUCCESS = 'FETCH_BLOG_LIST_SUCCESS';
-
-export type BlogPostData = firebase.firestore.DocumentData & { id: string };
-
-export interface BlogState {
-  fetching: boolean;
-  fetchingError?: Error;
-  list?: BlogPostData[];
-  obj?: {
-    [id: string]: BlogPostData;
-  };
-}
 
 interface FetchBlogListAction {
   type: typeof FETCH_BLOG_LIST;
@@ -21,22 +10,15 @@ interface FetchBlogListAction {
 
 interface FetchBlogListFailureAction {
   type: typeof FETCH_BLOG_LIST_FAILURE;
-  payload: {
-    error: Error;
-  };
+  payload: Error;
 }
 
 interface FetchBlogListSuccessAction {
   type: typeof FETCH_BLOG_LIST_SUCCESS;
-  payload: {
-    list: BlogPostData[];
-    obj: {
-      [id: string]: BlogPostData;
-    };
-  };
+  payload: Post[];
 }
 
-export type BlogActionTypes =
+export type BlogAction =
   | FetchBlogListAction
   | FetchBlogListFailureAction
   | FetchBlogListSuccessAction;

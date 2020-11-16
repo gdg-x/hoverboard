@@ -1,4 +1,6 @@
-export interface Post {
+import { Id } from './types';
+
+export interface PostData {
   backgroundColor: string;
   brief: string;
   content: string;
@@ -7,3 +9,5 @@ export interface Post {
   source?: string;
   title: string;
 }
+
+export type Post = PostData & Id;
