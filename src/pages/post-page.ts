@@ -1,3 +1,4 @@
+import { Initialized, Success } from '@abraham/remotedata';
 import '@polymer/app-route/app-route';
 import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-ajax/iron-ajax';
@@ -5,11 +6,14 @@ import '@polymer/marked-element';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import { TempAny } from '../../functions/src/temp-any';
 import '../elements/posts-list';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { Post } from '../models/post';
 import { RootState, store } from '../store';
 import { fetchBlogList } from '../store/blog/actions';
+import { BlogState, initialBlogState } from '../store/blog/state';
 import { getDate } from '../utils/functions';
 
 @customElement('post-page')
@@ -18,25 +22,17 @@ export class PostPage extends ReduxMixin(PolymerElement) {
   active = false;
   @property({ type: Object })
   route: object;
+  @property({ type: Object })
+  posts: BlogState = initialBlogState;
 
+  @property({ type: Object })
+  private post: Post;
   @property({ type: Array })
-  private post = {};
-  @property({ type: Array })
-  private postsList = [];
-  @property({ type: Array })
-  private suggestedPosts = [];
-  @property({ type: Array })
-  private postsMap = {};
-  @property({ type: Boolean })
-  private postsFetching = false;
-  @property({ type: Array })
-  private postsFetchingError = {};
-  @property({ type: Array })
-  private viewport = {};
+  private suggestedPosts: Post[] = [];
+  @property({ type: String })
+  private postContent: string;
   @property({ type: Object })
   private postData: { id?: string } = {};
-  @property({ type: Object })
-  private postContent: object;
 
   static get template() {
     return html`
@@ -146,39 +142,33 @@ export class PostPage extends ReduxMixin(PolymerElement) {
   }
 
   stateChanged(state: RootState) {
-    this.viewport = state.ui.viewport;
-    this.postsList = state.blog.list;
-    this.postsMap = state.blog.obj;
-    this.postsFetching = state.blog.fetching;
-    this.postsFetchingError = state.blog.fetchingError;
+    this.posts = state.blog;
   }
 
   connectedCallback() {
     super.connectedCallback();
-    if (!this.postsFetching && (!this.postsList || !this.postsList.length)) {
+    if (this.posts instanceof Initialized) {
       store.dispatch(fetchBlogList());
     }
   }
 
-  handleMarkdownFileFetch(event) {
+  handleMarkdownFileFetch(event: TempAny) {
     if (event.detail.response) {
       this.postContent = event.detail.response;
     }
   }
 
-  @observe('postData.id', 'postsList', 'postsMap')
-  _postDataObserver(postId: string, postsList, postsMap) {
-    if (!postsList || !postsList.length || !postsMap[postId]) {
-      return;
+  @observe('postData.id', 'posts')
+  _postDataObserver(postId: string, posts: BlogState) {
+    if (posts instanceof Success) {
+      const post = posts.data.find(({ id }) => id === postId);
+      this.post = post;
+      this.postContent = post?.content;
+      this.suggestedPosts = posts.data.filter(({ id }) => id !== postId).slice(0, 3);
     }
-
-    const post = this.postsMap[this.postData.id];
-    this.post = post;
-    this.postContent = post.content;
-    this.suggestedPosts = postsList.filter((post) => post.id !== this.postData.id).slice(0, 3);
   }
 
-  getDate(date) {
+  getDate(date: Date) {
     return getDate(date);
   }
 }

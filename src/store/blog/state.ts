@@ -1,8 +1,5 @@
-import { BlogState } from './types';
+import { Initialized, RemoteData } from '@abraham/remotedata';
+import { Post } from '../../models/post';
 
-export const initialBlogState: BlogState = {
-  fetching: false,
-  fetchingError: null,
-  list: [],
-  obj: {},
-};
+export type BlogState = RemoteData<Error, Post[]>;
+export const initialBlogState: BlogState = new Initialized();

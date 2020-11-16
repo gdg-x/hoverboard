@@ -1,43 +1,22 @@
-import { initialBlogState } from './state';
+import { Failure, Pending, Success } from '@abraham/remotedata';
+import { BlogState, initialBlogState } from './state';
 import {
-  BlogActionTypes,
-  BlogState,
+  BlogAction,
   FETCH_BLOG_LIST,
   FETCH_BLOG_LIST_FAILURE,
   FETCH_BLOG_LIST_SUCCESS,
 } from './types';
 
-export const blogReducer = (state = initialBlogState, action: BlogActionTypes): BlogState => {
+export const blogReducer = (state = initialBlogState, action: BlogAction): BlogState => {
   switch (action.type) {
     case FETCH_BLOG_LIST:
-      return {
-        ...state,
-        ...{
-          fetching: true,
-          fetchingError: null,
-          list: [],
-          obj: {},
-        },
-      };
+      return new Pending();
 
     case FETCH_BLOG_LIST_FAILURE:
-      return {
-        ...state,
-        ...{
-          fetching: false,
-          fetchingError: action.payload.error,
-        },
-      };
+      return new Failure(action.payload);
 
     case FETCH_BLOG_LIST_SUCCESS:
-      return {
-        ...state,
-        ...{
-          fetching: false,
-          list: action.payload.list,
-          obj: action.payload.obj,
-        },
-      };
+      return new Success(action.payload);
 
     default:
       return state;
