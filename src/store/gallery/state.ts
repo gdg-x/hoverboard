@@ -1,7 +1,5 @@
-import { GalleryState } from './types';
+import { Initialized, RemoteData } from '@abraham/remotedata';
+import { Photo } from '../../models/photo';
 
-export const initialGalleryState: GalleryState = {
-  fetching: false,
-  fetchingError: null,
-  list: [],
-};
+export type GalleryState = RemoteData<Error, Photo[]>;
+export const initialGalleryState: GalleryState = new Initialized();
