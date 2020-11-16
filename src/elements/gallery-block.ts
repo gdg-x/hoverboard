@@ -1,10 +1,12 @@
-import { customElement, property } from '@polymer/decorators';
+import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
+import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { fetchGallery } from '../store/gallery/actions';
+import { GalleryState, initialGalleryState } from '../store/gallery/state';
 import './shared-styles';
 
 @customElement('gallery-block')
@@ -127,7 +129,15 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
       </style>
 
       <div class="photos-grid">
-        <template is="dom-repeat" items="[[gallery]]" as="photo">
+        <template is="dom-if" if="[[pending]]">
+          <p>Loading...</p>
+        </template>
+
+        <template is="dom-if" if="[[failure]]">
+          <p>Error loading gallery.</p>
+        </template>
+
+        <template is="dom-repeat" items="[[gallery.data]]" as="photo">
           <plastic-image
             class="grid-item"
             srcset="[[photo.url]]"
@@ -137,36 +147,52 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
             fade
           ></plastic-image>
         </template>
-        <div class="gallery-info" layout vertical justified>
-          <div>
-            <h2>{$ galleryBlock.title $}</h2>
-            <p>{$ galleryBlock.description $}</p>
+
+        <template is="dom-if" if="[[success]]">
+          <div class="gallery-info" layout vertical justified>
+            <div>
+              <h2>{$ galleryBlock.title $}</h2>
+              <p>{$ galleryBlock.description $}</p>
+            </div>
+            <a
+              href="{$ galleryBlock.callToAction.link $}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <paper-button>{$ galleryBlock.callToAction.label $}</paper-button>
+            </a>
           </div>
-          <a href="{$ galleryBlock.callToAction.link $}" target="_blank" rel="noopener noreferrer">
-            <paper-button>{$ galleryBlock.callToAction.label $}</paper-button>
-          </a>
-        </div>
+        </template>
       </div>
     `;
   }
 
-  @property({ type: Array })
-  private gallery = [];
-  @property({ type: Boolean })
-  private galleryFetching = false;
   @property({ type: Object })
-  private galleryFetchingError = {};
+  gallery: GalleryState = initialGalleryState;
+
+  @computed('gallery')
+  get pending() {
+    return this.gallery instanceof Pending;
+  }
+
+  @computed('gallery')
+  get failure() {
+    return this.gallery instanceof Failure;
+  }
+
+  @computed('gallery')
+  get success() {
+    return this.gallery instanceof Success;
+  }
 
   stateChanged(state: RootState) {
-    this.gallery = state.gallery.list;
-    this.galleryFetching = state.gallery.fetching;
-    this.galleryFetchingError = state.gallery.fetchingError;
+    this.gallery = state.gallery;
   }
 
   connectedCallback() {
     super.connectedCallback();
 
-    if (!this.gallery || !this.gallery.length) {
+    if (this.gallery instanceof Initialized) {
       store.dispatch(fetchGallery());
     }
   }

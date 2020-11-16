@@ -1,27 +1,34 @@
 import { Dispatch } from 'redux';
-import { FETCH_GALLERY, FETCH_GALLERY_FAILURE, FETCH_GALLERY_SUCCESS } from './types';
+import { Photo } from '../../models/photo';
 import { db } from '../db';
+import { mergeId } from '../utils';
+import {
+  FETCH_GALLERY,
+  FETCH_GALLERY_FAILURE,
+  FETCH_GALLERY_SUCCESS,
+  GalleryActions,
+} from './types';
 
-export const fetchGallery = () => (dispatch: Dispatch) => {
+const getGalleries = async (): Promise<Photo[]> => {
+  const { docs } = await db().collection('gallery').get();
+
+  return docs.map<Photo>(mergeId);
+};
+
+export const fetchGallery = () => async (dispatch: Dispatch<GalleryActions>) => {
   dispatch({
     type: FETCH_GALLERY,
   });
 
-  return db()
-    .collection('gallery')
-    .get()
-    .then((snaps) => {
-      const list = snaps.docs.map((snap) => ({ ...snap.data(), ...{ id: snap.id } }));
-
-      dispatch({
-        type: FETCH_GALLERY_SUCCESS,
-        payload: { list },
-      });
-    })
-    .catch((error) => {
-      dispatch({
-        type: FETCH_GALLERY_FAILURE,
-        payload: { error },
-      });
+  try {
+    dispatch({
+      type: FETCH_GALLERY_SUCCESS,
+      payload: await getGalleries(),
     });
+  } catch (error) {
+    dispatch({
+      type: FETCH_GALLERY_FAILURE,
+      payload: error,
+    });
+  }
 };
