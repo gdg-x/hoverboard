@@ -30,7 +30,7 @@
   "dependencies": {
     "@abraham/remotedata": "^0.8.0",
     "@justinribeiro/lite-youtube": "^0.9.1",
-    "@material/mwc-button": "^0.19.1",
+    "@material/mwc-button": "^0.20.0",
     "@polymer/app-layout": "^3.1.0",
     "@polymer/app-route": "^3.0.2",
     "@polymer/decorators": "^3.0.0",
