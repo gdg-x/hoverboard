@@ -20,12 +20,16 @@ describe('about-block', () => {
 
   it('renders details', async () => {
     const { container } = await fixture(html`<about-block></about-block>`);
-    expect(getByText(container, '{$ aboutBlock.title $}')).toBeDefined();
+    expect(getByText(container, '{$ aboutBlock.title $}')).toBeInTheDocument();
     expect(
       getByText(container, '{$ aboutBlock.callToAction.featuredSessions.description $}')
-    ).toBeDefined();
-    expect(getByText(container, '{$ aboutBlock.statisticsBlock.attendees.number $}')).toBeDefined();
-    expect(getByText(container, '{$ aboutBlock.statisticsBlock.attendees.label $}')).toBeDefined();
+    ).toBeInTheDocument();
+    expect(
+      getByText(container, '{$ aboutBlock.statisticsBlock.attendees.number $}')
+    ).toBeInTheDocument();
+    expect(
+      getByText(container, '{$ aboutBlock.statisticsBlock.attendees.label $}')
+    ).toBeInTheDocument();
   });
 
   it('plays the video', async () => {
