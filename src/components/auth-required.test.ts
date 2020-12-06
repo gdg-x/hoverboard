@@ -7,6 +7,7 @@ import { store } from '../store';
 import { SIGN_IN } from '../store/user/types';
 import './auth-required';
 import { AuthRequired } from './auth-required';
+import { DIALOGS } from '../store/dialogs/types';
 
 jest.mock('../store/dialogs/actions');
 
@@ -53,7 +54,7 @@ describe('auth-required', () => {
   it('opens dialog on tap', () => {
     fireEvent.click(shadowRoot.querySelector('mwc-button')!);
     expect(mockOpenDialog).toHaveBeenCalledTimes(1);
-    expect(mockOpenDialog).toHaveBeenCalledWith('signin');
+    expect(mockOpenDialog).toHaveBeenCalledWith(DIALOGS.SIGNIN);
   });
 
   it('shows authenticated content', async () => {
