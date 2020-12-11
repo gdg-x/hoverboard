@@ -91,7 +91,7 @@
     "eslint-plugin-jest-dom": "^3.6.3",
     "eslint-plugin-polymer": "^0.4.0",
     "eslint-plugin-testing-library": "^3.10.1",
-    "firebase-admin": "^9.4.1",
+    "firebase-admin": "^9.4.2",
     "firebase-tools": "^8.18.1",
     "jest": "^26.6.3",
     "jest-dev-server": "^4.4.0",
