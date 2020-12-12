@@ -80,7 +80,7 @@
     "concurrently": "^5.3.0",
     "core-js": "^3.8.1",
     "deepmerge": "^4.2.2",
-    "es-dev-server": "^1.60.1",
+    "es-dev-server": "^2.0.2",
     "eslint": "^7.15.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^7.0.0",
