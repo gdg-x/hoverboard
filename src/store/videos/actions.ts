@@ -21,7 +21,6 @@ export const fetchVideos = () => async (dispatch: Dispatch<FetchVideosActions>) 
   });
 
   try {
-    console.log('try');
     dispatch({
       type: FETCH_VIDEOS_SUCCESS,
       payload: await getVideos(),
