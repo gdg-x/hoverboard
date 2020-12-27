@@ -16,6 +16,7 @@ import {
   PreviousSpeakersState,
 } from '../store/previous-speakers/state';
 import { TempAny } from '../temp-any';
+import { isDialogOpen } from '../utils/dialogs';
 
 @customElement('previous-speakers-page')
 export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
@@ -207,7 +208,7 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
   }
 
   stateChanged(state: RootState) {
-    this.isDialogOpened = state.dialogs.previousSpeaker.isOpened;
+    this.isDialogOpened = isDialogOpen(state.dialogs, DIALOGS.PREVIOUS_SPEAKER);
     this.previousSpeakers = state.previousSpeakers;
   }
 
@@ -238,7 +239,7 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
           const speakerData = speakers.data.find(({ id: currentId }) => currentId === id);
           speakerData && openDialog(DIALOGS.PREVIOUS_SPEAKER, speakerData);
         } else if (this.isDialogOpened) {
-          closeDialog(DIALOGS.PREVIOUS_SPEAKER);
+          closeDialog();
         }
       });
     }

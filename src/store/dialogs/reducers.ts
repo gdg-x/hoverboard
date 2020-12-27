@@ -1,42 +1,18 @@
-import {
-  CLOSE_DIALOG,
-  DialogActionTypes,
-  OPEN_DIALOG,
-  SET_DIALOG_DATA,
-  SET_DIALOG_ERROR,
-} from './types';
-import { initialDialogState } from './state';
+import { Failure, Initialized, Success } from '@abraham/remotedata';
+import { DialogState, initialDialogState } from './state';
+import { CLOSE_DIALOG, DialogActions, OPEN_DIALOG, SET_DIALOG_ERROR } from './types';
 
-export const dialogsReducer = (state = initialDialogState, action: DialogActionTypes) => {
+export const dialogsReducer = (state = initialDialogState, action: DialogActions): DialogState => {
   switch (action.type) {
     case OPEN_DIALOG:
-    case SET_DIALOG_DATA:
-      return {
-        ...state,
-        ...action.dialog,
-      };
+      return new Success(action.payload);
 
-    case SET_DIALOG_ERROR: {
-      const dialog = state[action.payload.dialogName];
-
-      return {
-        ...state,
-        ...{
-          [action.payload.dialogName]: {
-            isOpened: dialog.isOpened,
-            data: { ...dialog.data, ...{ errorOccurred: true } },
-          },
-        },
-      };
-    }
+    case SET_DIALOG_ERROR:
+      return new Failure(action.payload);
 
     case CLOSE_DIALOG:
-      return {
-        ...state,
-        ...{
-          [action.dialogName]: initialDialogState[action.dialogName],
-        },
-      };
+      return new Initialized();
+
     default:
       return state;
   }

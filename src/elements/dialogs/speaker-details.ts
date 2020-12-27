@@ -161,6 +161,10 @@ class SpeakerDetails extends SessionsHoC(
   static get properties() {
     return {
       ...super.properties,
+      data: {
+        type: Object,
+        observer: '_dataUpdate',
+      },
       speaker: {
         type: Object,
       },
@@ -195,32 +199,37 @@ class SpeakerDetails extends SessionsHoC(
   }
 
   _close() {
-    closeDialog(DIALOGS.SPEAKER);
+    closeDialog();
     history.back();
   }
 
-  _openSession(e) {
+  _dataUpdate() {
+    if (this.data?.name === DIALOGS.SPEAKER) {
+      this.speaker = this.data.data;
+    }
+  }
+
+  _openSession(e: MouseEvent & { currentTarget: HTMLLIElement }) {
     const sessionId = e.currentTarget.getAttribute('session-id');
     const sessionData = this.sessionsMap[sessionId];
 
     if (!sessionData) return;
     openDialog(DIALOGS.SESSION, sessionData);
-    closeDialog(DIALOGS.SPEAKER);
   }
 
-  _getCloseBtnIcon(isLaptopViewport) {
+  _getCloseBtnIcon(isLaptopViewport: boolean) {
     return isLaptopViewport ? 'close' : 'arrow-left';
   }
 
-  _computeCompanyInfo(title, company) {
+  _computeCompanyInfo(title: string, company: string) {
     return [title, company].filter(Boolean).join(', ');
   }
 
-  _computeJoin(...values) {
+  _computeJoin(...values: string[]) {
     return values.filter(Boolean).join(' • ');
   }
 
-  isEmpty(array) {
+  isEmpty(array: unknown[]) {
     return isEmpty(array);
   }
 

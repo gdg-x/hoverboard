@@ -1,8 +1,9 @@
 import { Dispatch } from 'redux';
-import { db } from '../db';
-import { DialogForm, DIALOGS, SET_DIALOG_DATA } from '../dialogs/types';
-import { trackError } from '../helpers/actions';
 import { store } from '../';
+import { db } from '../db';
+import { openDialog } from '../dialogs/actions';
+import { DialogForm, DIALOGS } from '../dialogs/types';
+import { trackError } from '../helpers/actions';
 import { showToast } from '../toast/actions';
 import { SUBSCRIBE } from './types';
 
@@ -25,15 +26,7 @@ export const subscribe = (data: DialogForm) => (dispatch: Dispatch) => {
       showToast({ message: '{$ subscribeBlock.toast $}' });
     })
     .catch((error) => {
-      dispatch({
-        type: SET_DIALOG_DATA,
-        dialog: {
-          [DIALOGS.SUBSCRIBE]: {
-            isOpened: true,
-            data: Object.assign(data, { errorOccurred: true }),
-          },
-        },
-      });
+      openDialog(DIALOGS.SUBSCRIBE, { ...data, errorOccurred: true });
 
       dispatch({
         type: SUBSCRIBE,

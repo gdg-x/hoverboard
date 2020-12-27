@@ -1,3 +1,4 @@
+import { Success } from '@abraham/remotedata';
 import '@polymer/app-layout/app-drawer-layout/app-drawer-layout';
 import '@polymer/app-layout/app-drawer/app-drawer';
 import '@polymer/app-layout/app-header-layout/app-header-layout';
@@ -51,6 +52,8 @@ import './pages/speakers-page';
 import './pages/team-page';
 import { registerServiceWorker } from './service-worker-registration';
 import { RootState, store } from './store';
+import { DialogState, initialDialogState } from './store/dialogs/state';
+import { DIALOGS } from './store/dialogs/types';
 import { getToken, initializeMessaging } from './store/notifications/actions';
 import { setRoute } from './store/routing/actions';
 import { initialRoutingState, RoutingState } from './store/routing/state';
@@ -59,6 +62,7 @@ import { showToast } from './store/toast/actions';
 import { setViewportSize } from './store/ui/actions';
 import { updateUser } from './store/user/actions';
 import { TempAny } from './temp-any';
+import { isDialogOpen } from './utils/dialogs';
 import { scrollToY } from './utils/scrolling';
 
 setFastDomIf(true);
@@ -277,41 +281,41 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
       ></video-dialog>
 
       <speaker-details
-        opened="[[dialogs.speaker.isOpened]]"
-        speaker="[[dialogs.speaker.data]]"
+        opened="[[isSpeakerDialogOpen]]"
+        data="[[dialogs.data]]"
         with-backdrop="[[viewport.isTabletPlus]]"
         no-cancel-on-outside-click="[[viewport.isPhone]]"
       ></speaker-details>
 
       <previous-speaker-details
-        opened="[[dialogs.previousSpeaker.isOpened]]"
-        speaker="[[dialogs.previousSpeaker.data]]"
+        opened="[[isPreviousSpeakerDialogOpen]]"
+        data="[[dialogs.data]]"
         with-backdrop="[[viewport.isTabletPlus]]"
         no-cancel-on-outside-click="[[viewport.isPhone]]"
       ></previous-speaker-details>
 
       <session-details
-        opened="[[dialogs.session.isOpened]]"
-        session="[[dialogs.session.data]]"
+        opened="[[isSessionDialogOpen]]"
+        data="[[dialogs.data]]"
         with-backdrop="[[viewport.isTabletPlus]]"
         no-cancel-on-outside-click="[[viewport.isPhone]]"
       ></session-details>
 
       <feedback-dialog
-        opened="[[dialogs.feedback.isOpened]]"
-        session="[[dialogs.feedback.data]]"
+        opened="[[isFeedbackDialogOpen]]"
+        data="[[dialogs.data]]"
         with-backdrop
       ></feedback-dialog>
 
       <subscribe-dialog
-        opened="[[dialogs.subscribe.isOpened]]"
-        data="[[dialogs.subscribe.data]]"
+        opened="[[isSubscribeDialogOpen]]"
+        data="[[dialogs.data.data]]"
         with-backdrop
         no-cancel-on-outside-click="[[viewport.isPhone]]"
       >
       </subscribe-dialog>
 
-      <signin-dialog opened="[[dialogs.signin.isOpened]]" with-backdrop></signin-dialog>
+      <signin-dialog opened="[[isSigninDialogOpen]]" with-backdrop></signin-dialog>
 
       <hoverboard-analytics></hoverboard-analytics>
       <toast-element></toast-element>
@@ -327,15 +331,15 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private route: RoutingState = initialRoutingState;
   @property({ type: Object })
-  private dialogs = {};
+  private dialogs: DialogState = initialDialogState;
   @property({ type: Object })
   private viewport = {};
   @property({ type: Object })
   private schedule = {};
   @property({ type: Object })
   private notifications;
-  @property({ type: String })
-  private _openedDialog: string;
+  @property({ type: Boolean })
+  private _openedDialog = false;
   @property({ type: Object })
   private user = {};
   @property({ type: Array })
@@ -352,9 +356,27 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
   private subRoute = {};
   @property({ type: Object })
   private routeData = {};
+  @property({ type: Boolean })
+  private isSigninDialogOpen = false;
+  @property({ type: Boolean })
+  private isSpeakerDialogOpen = false;
+  @property({ type: Boolean })
+  private isPreviousSpeakerDialogOpen = false;
+  @property({ type: Boolean })
+  private isSessionDialogOpen = false;
+  @property({ type: Boolean })
+  private isFeedbackDialogOpen = false;
+  @property({ type: Boolean })
+  private isSubscribeDialogOpen = false;
 
   stateChanged(state: RootState) {
     this.dialogs = state.dialogs;
+    this.isSigninDialogOpen = isDialogOpen(this.dialogs, DIALOGS.SIGNIN);
+    this.isSpeakerDialogOpen = isDialogOpen(this.dialogs, DIALOGS.SPEAKER);
+    this.isPreviousSpeakerDialogOpen = isDialogOpen(this.dialogs, DIALOGS.PREVIOUS_SPEAKER);
+    this.isSessionDialogOpen = isDialogOpen(this.dialogs, DIALOGS.SESSION);
+    this.isFeedbackDialogOpen = isDialogOpen(this.dialogs, DIALOGS.FEEDBACK);
+    this.isSubscribeDialogOpen = isDialogOpen(this.dialogs, DIALOGS.SUBSCRIBE);
     this.notifications = state.notifications;
     this.route = state.routing;
     this.schedule = state.schedule;
@@ -435,15 +457,8 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
   }
 
   @observe('dialogs')
-  _dialogToggled(dialogs) {
-    if (this._openedDialog) {
-      document.body.style.overflow = '';
-      this._openedDialog = null;
-    }
-    this._openedDialog = Object.keys(dialogs).find((key) => dialogs[key].isOpened);
-    if (this._openedDialog) {
-      document.body.style.overflow = 'hidden';
-    }
+  _dialogToggled(dialogs: DialogState) {
+    document.body.style.overflow = dialogs instanceof Success ? 'hidden' : '';
   }
 
   _toggleHeaderShadow(e) {

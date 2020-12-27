@@ -4,12 +4,14 @@ import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
+import { initialDialogState } from '../store/dialogs/state';
 import { DIALOGS } from '../store/dialogs/types';
 import { requestPermission, unsubscribe } from '../store/notifications/actions';
 import { NOTIFICATIONS_STATUS } from '../store/notifications/types';
 import { initialRoutingState, RoutingState } from '../store/routing/state';
 import { signOut } from '../store/user/actions';
 import { TempAny } from '../temp-any';
+import { isDialogOpen } from '../utils/dialogs';
 import './shared-styles';
 
 @customElement('header-toolbar')
@@ -275,7 +277,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private heroSettings = {};
   @property({ type: Object })
-  private dialogs = { signin: { isOpened: false } };
+  private dialogs = initialDialogState;
   @property({ type: Object })
   private notifications: { token?: string; status?: string } = {};
   @property({ type: Object })
@@ -325,9 +327,9 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   }
 
   @observe('user.signedIn')
-  _authStatusChanged(signedIn) {
-    if (this.dialogs.signin.isOpened) {
-      closeDialog(DIALOGS.SIGNIN);
+  _authStatusChanged(_signedIn) {
+    if (isDialogOpen(this.dialogs, DIALOGS.SIGNIN)) {
+      closeDialog();
     }
   }
 
