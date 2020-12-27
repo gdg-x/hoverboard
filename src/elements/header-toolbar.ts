@@ -7,6 +7,7 @@ import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
 import { requestPermission, unsubscribe } from '../store/notifications/actions';
 import { NOTIFICATIONS_STATUS } from '../store/notifications/types';
+import { initialRoutingState, RoutingState } from '../store/routing/state';
 import { signOut } from '../store/user/actions';
 import { TempAny } from '../temp-any';
 import './shared-styles';
@@ -263,7 +264,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
-  route: object;
+  route: RoutingState = initialRoutingState;
   @property({ type: Boolean, notify: true })
   drawerOpened: boolean;
 

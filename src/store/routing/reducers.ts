@@ -1,23 +1,19 @@
-import { initialRoutingState } from './state';
-import { RouteActionTypes, SET_ROUTE, SET_SUB_ROUTE } from './types';
+import { initialRoutingState, RoutingState } from './state';
+import { RouteActions, SET_ROUTE, SET_SUB_ROUTE } from './types';
 
-export const routingReducer = (state = initialRoutingState, action: RouteActionTypes) => {
+export const routingReducer = (state = initialRoutingState, action: RouteActions): RoutingState => {
   switch (action.type) {
     case SET_ROUTE:
       return {
-        ...state,
-        ...{
-          route: action.route,
-          subRoute: null,
-        },
+        route: action.payload,
       };
+
     case SET_SUB_ROUTE:
       return {
-        ...state,
-        ...{
-          subRoute: action.subRoute,
-        },
+        route: state.route,
+        subRoute: action.payload,
       };
+
     default:
       return state;
   }

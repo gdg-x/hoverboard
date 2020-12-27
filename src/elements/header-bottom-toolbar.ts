@@ -3,6 +3,7 @@ import '@polymer/iron-location/iron-location';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
+import { initialRoutingState, RoutingState } from '../store/routing/state';
 import { TempAny } from '../temp-any';
 import './content-loader';
 import './shared-styles';
@@ -95,7 +96,7 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
-  private route: object;
+  private route: RoutingState = initialRoutingState;
   @property({ type: Array })
   private schedule = [];
   @property({ type: Boolean })
