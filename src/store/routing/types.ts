@@ -1,19 +1,14 @@
 export const SET_ROUTE = 'SET_ROUTE';
 export const SET_SUB_ROUTE = 'SET_SUB_ROUTE';
 
-export interface RoutingState {
-  route: string;
-  subRoute: string;
-}
-
-interface SetRoute {
+interface SetRouteAction {
   type: typeof SET_ROUTE;
-  route: string;
+  payload: string;
 }
 
-interface SetSubRoute {
+interface SetSubRouteAction {
   type: typeof SET_SUB_ROUTE;
-  subRoute: string;
+  payload: string;
 }
 
-export type RouteActionTypes = SetRoute | SetSubRoute;
+export type RouteActions = SetRouteAction | SetSubRouteAction;

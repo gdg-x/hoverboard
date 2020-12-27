@@ -53,6 +53,7 @@ import { registerServiceWorker } from './service-worker-registration';
 import { RootState, store } from './store';
 import { getToken, initializeMessaging } from './store/notifications/actions';
 import { setRoute } from './store/routing/actions';
+import { initialRoutingState, RoutingState } from './store/routing/state';
 import { fetchTickets } from './store/tickets/actions';
 import { showToast } from './store/toast/actions';
 import { setViewportSize } from './store/ui/actions';
@@ -324,7 +325,7 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
   @property({ type: Boolean })
   private drawerOpened = false;
   @property({ type: Object })
-  private route: { route?: string } = {};
+  private route: RoutingState = initialRoutingState;
   @property({ type: Object })
   private dialogs = {};
   @property({ type: Object })

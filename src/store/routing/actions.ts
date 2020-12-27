@@ -5,14 +5,14 @@ export const setRoute = (routeFromAction: string) => {
   const route = routeFromAction || 'home';
   store.dispatch({
     type: SET_ROUTE,
-    route,
+    payload: route,
   });
 };
 
 export const setSubRoute = (subRoute: string) => {
   store.dispatch({
     type: SET_SUB_ROUTE,
-    subRoute,
+    payload: subRoute,
   });
 };
 
