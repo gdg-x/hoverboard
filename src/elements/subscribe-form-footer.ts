@@ -82,11 +82,11 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  @property({ type: Boolean, computed: '_computeButtonLabel(subscribed)' })
+  @property({ type: Boolean })
   private subscribed = false;
   @property({ type: Boolean })
   private validate = false;
-  @property({ type: String })
+  @property({ type: String, computed: '_computeButtonLabel(subscribed)' })
   private ctaLabel: string;
   @property({ type: String })
   private email: string;
@@ -104,7 +104,7 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
     }
   }
 
-  _computeButtonLabel(subscribed) {
+  _computeButtonLabel(subscribed: boolean) {
     return subscribed ? '{$  subscribeBlock.subscribed $}' : '{$  subscribeBlock.subscribe $}';
   }
 }

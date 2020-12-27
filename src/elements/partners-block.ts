@@ -111,7 +111,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
   @property({ type: Boolean, observer: PartnersBlock.prototype._partnerAddingChanged })
   private partnerAdding = false;
   @property({ type: Object })
-  private partnerAddingError = {};
+  private partnerAddingError: Error;
 
   @property({ type: Object })
   partners: PartnersState = initialPartnersState;
@@ -153,9 +153,9 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
   _partnerAddingChanged(newPartnerAdding, oldPartnerAdding) {
     if (oldPartnerAdding && !newPartnerAdding) {
       if (this.partnerAddingError) {
-        setDialogError(DIALOGS.SUBSCRIBE);
+        setDialogError(this.partnerAddingError);
       } else {
-        closeDialog(DIALOGS.SUBSCRIBE);
+        closeDialog();
         showToast({ message: '{$ partnersBlock.toast $}' });
       }
     }

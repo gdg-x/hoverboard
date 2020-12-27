@@ -10,10 +10,11 @@ import 'plastic-image';
 import '../../components/auth-required';
 import { ReduxMixin } from '../../mixins/redux-mixin';
 import { SpeakersHoC } from '../../mixins/speakers-hoc';
+import { RootState, store } from '../../store';
 import { closeDialog, openDialog } from '../../store/dialogs/actions';
 import { DIALOGS } from '../../store/dialogs/types';
 import { setUserFeaturedSessions } from '../../store/sessions/actions';
-import { RootState, store } from '../../store';
+import { FeaturedSessions } from '../../store/sessions/types';
 import { showToast } from '../../store/toast/actions';
 import { toggleVideoDialog } from '../../store/ui/actions';
 import { getVariableColor } from '../../utils/functions';
@@ -21,6 +22,9 @@ import '../feedback-block';
 import '../shared-styles';
 import '../text-truncate';
 import './dialog-styles';
+
+const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+const ONE_MINUTE_MS = 60 * 1000;
 
 class SessionDetails extends SpeakersHoC(
   ReduxMixin(mixinBehaviors([IronOverlayBehavior], PolymerElement))
@@ -175,6 +179,10 @@ class SessionDetails extends SpeakersHoC(
         type: Boolean,
         value: () => JSON.parse('{$ disabledSchedule $}'),
       },
+      data: {
+        type: Object,
+        observer: '_dataUpdate',
+      },
       session: {
         type: Object,
         observer: '_sessionUpdate',
@@ -195,6 +203,10 @@ class SessionDetails extends SpeakersHoC(
       currentSpeaker: {
         type: String,
       },
+      opened: {
+        type: Boolean,
+        value: false,
+      },
     };
   }
 
@@ -214,20 +226,19 @@ class SessionDetails extends SpeakersHoC(
   }
 
   _close() {
-    closeDialog(DIALOGS.SESSION);
+    closeDialog();
     history.back();
   }
 
-  _openSpeaker(e) {
-    const speakerId = e.currentTarget.getAttribute('speaker-id');
+  _openSpeaker(event: Event & { currentTarget: HTMLElement }) {
+    const speakerId = event.currentTarget.getAttribute('speaker-id');
     const speakerData = this.speakersMap[speakerId];
 
     if (!speakerData) return;
     openDialog(DIALOGS.SPEAKER, speakerData);
-    closeDialog(DIALOGS.SESSION);
   }
 
-  _getCloseBtnIcon(isLaptopViewport) {
+  _getCloseBtnIcon(isLaptopViewport: boolean) {
     return isLaptopViewport ? 'close' : 'arrow-left';
   }
 
@@ -240,7 +251,7 @@ class SessionDetails extends SpeakersHoC(
     });
   }
 
-  _toggleFeaturedSession(event) {
+  _toggleFeaturedSession(event: Event) {
     event.preventDefault();
     event.stopPropagation();
     if (!this.user.signedIn) {
@@ -248,9 +259,7 @@ class SessionDetails extends SpeakersHoC(
         message: '{$ schedule.saveSessionsSignedOut $}',
         action: {
           title: 'Sign in',
-          callback: () => {
-            openDialog(DIALOGS.SIGNIN);
-          },
+          callback: () => openDialog(DIALOGS.SIGNIN),
         },
       });
       return;
@@ -262,21 +271,23 @@ class SessionDetails extends SpeakersHoC(
     store.dispatch(setUserFeaturedSessions(this.user.uid, sessions));
   }
 
-  _getFeaturedSessionIcon(featuredSessions, sessionId) {
+  _getFeaturedSessionIcon(featuredSessions: FeaturedSessions, sessionId?: string) {
     return featuredSessions && featuredSessions[sessionId] ? 'bookmark-check' : 'bookmark-plus';
+  }
+
+  _dataUpdate() {
+    if (this.data?.name === DIALOGS.SESSION) {
+      this.session = this.data.data;
+    }
   }
 
   _sessionUpdate() {
     const { day, startTime } = this.session;
     if (day && startTime) {
-      const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
-      const ONE_MINUTE_MS = 60 * 1000;
       const now = new Date();
-      const convertedTimezoneDate = new Date(
-        new Date(`${day} ${startTime}`).getTime() +
-          (parseInt('{$ timezoneOffset $}') - now.getTimezoneOffset()) * ONE_MINUTE_MS
-      );
-
+      const currentTime = new Date(`${day} ${startTime}`).getTime();
+      const timezoneOffset = parseInt('{$ timezoneOffset $}') - now.getTimezoneOffset();
+      const convertedTimezoneDate = new Date(currentTime + timezoneOffset * ONE_MINUTE_MS);
       const diff = now.getTime() - convertedTimezoneDate.getTime();
       this.acceptingFeedback = diff > 0 && diff < ONE_WEEK_MS;
     } else {
@@ -284,7 +295,7 @@ class SessionDetails extends SpeakersHoC(
     }
   }
 
-  getVariableColor(value) {
+  getVariableColor(value: string) {
     return getVariableColor(this, value);
   }
 }

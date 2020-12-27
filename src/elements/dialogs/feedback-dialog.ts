@@ -53,6 +53,10 @@ class FeedbackDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
 
   static get properties() {
     return {
+      data: {
+        type: Object,
+        observer: '_dataUpdate',
+      },
       session: {
         type: Object,
       },
@@ -64,8 +68,14 @@ class FeedbackDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
     this.addEventListener('iron-overlay-canceled', this._close);
   }
 
+  _dataUpdate() {
+    if (this.data?.name === DIALOGS.FEEDBACK) {
+      this.session = this.data.data;
+    }
+  }
+
   _close() {
-    closeDialog(DIALOGS.FEEDBACK);
+    closeDialog();
   }
 }
 

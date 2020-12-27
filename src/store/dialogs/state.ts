@@ -1,28 +1,10 @@
-import { DIALOGS, DialogState } from './types';
+import { Initialized, RemoteData } from '@abraham/remotedata';
+import { DIALOGS } from './types';
 
-export const initialDialogState: DialogState = {
-  [DIALOGS.SPEAKER]: {
-    isOpened: false,
-    data: {},
-  },
-  [DIALOGS.PREVIOUS_SPEAKER]: {
-    isOpened: false,
-    data: {},
-  },
-  [DIALOGS.SESSION]: {
-    isOpened: false,
-    data: {},
-  },
-  [DIALOGS.FEEDBACK]: {
-    isOpened: false,
-    data: {},
-  },
-  [DIALOGS.SUBSCRIBE]: {
-    isOpened: false,
-    data: {},
-  },
-  [DIALOGS.SIGNIN]: {
-    isOpened: false,
-    data: {},
-  },
-};
+export interface Dialog {
+  name: DIALOGS;
+  data: unknown;
+}
+
+export type DialogState = RemoteData<Error, Dialog>;
+export const initialDialogState: DialogState = new Initialized();

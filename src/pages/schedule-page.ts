@@ -1,4 +1,5 @@
 import '@polymer/app-route/app-route';
+import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-location/iron-location';
 import '@polymer/iron-pages';
 import '@polymer/paper-progress';
@@ -13,14 +14,14 @@ import '../elements/sticky-element';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SessionsHoC } from '../mixins/sessions-hoc';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
+import { RootState, store } from '../store';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
 import { setSubRoute } from '../store/routing/actions';
 import { fetchSchedule } from '../store/schedule/actions';
 import { fetchUserFeaturedSessions } from '../store/sessions/actions';
-import { RootState, store } from '../store';
+import { isDialogOpen } from '../utils/dialogs';
 import { parseQueryParamsFilters } from '../utils/functions';
-import { customElement, observe, property } from '@polymer/decorators';
 
 @customElement('schedule-page')
 export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) {
@@ -151,10 +152,10 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
   private user = {};
   @property({ type: Object })
   private subRoute = {};
-  @property({ type: Object })
-  private isSpeakerDialogOpened = {};
-  @property({ type: Object })
-  private isSessionDialogOpened = {};
+  @property({ type: Boolean })
+  private isSpeakerDialogOpened = false;
+  @property({ type: Boolean })
+  private isSessionDialogOpened = false;
   @property({ type: Boolean })
   private contentLoaderVisibility = false;
   @property({ type: Object })
@@ -176,8 +177,8 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
     super.stateChanged(state);
     this.featuredSessions = state.sessions.featured;
     this.filters = state.filters;
-    this.isSessionDialogOpened = state.dialogs.session.isOpened;
-    this.isSpeakerDialogOpened = state.dialogs.speaker.isOpened;
+    this.isSessionDialogOpened = isDialogOpen(state.dialogs, DIALOGS.SESSION);
+    this.isSpeakerDialogOpened = isDialogOpen(state.dialogs, DIALOGS.SPEAKER);
     this.schedule = state.schedule;
     this.subRoute = state.routing.subRoute;
     this.user = state.user;
@@ -226,7 +227,7 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
         if (active && id) {
           openDialog(DIALOGS.SESSION, this.sessionsMap[id[0]]);
         } else {
-          this.isSessionDialogOpened && closeDialog(DIALOGS.SESSION);
+          this.isSessionDialogOpened && closeDialog();
         }
       });
     }

@@ -16,6 +16,7 @@ import { SpeakersHoC } from '../mixins/speakers-hoc';
 import { RootState } from '../store';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
+import { isDialogOpen } from '../utils/dialogs';
 import { generateClassName, parseQueryParamsFilters } from '../utils/functions';
 
 @customElement('speakers-page')
@@ -283,10 +284,10 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
   private active = false;
   @property({ type: Object })
   private queryParams = {};
-  @property({ type: Object })
-  private isSpeakerDialogOpened = {};
   @property({ type: Boolean })
-  private isSessionDialogOpened = {};
+  private isSpeakerDialogOpened = false;
+  @property({ type: Boolean })
+  private isSessionDialogOpened = false;
   @property({ type: String })
   private contentLoaderVisibility;
   @property({ type: Object })
@@ -300,8 +301,8 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
 
   stateChanged(state: RootState) {
     super.stateChanged(state);
-    this.isSpeakerDialogOpened = state.dialogs.speaker.isOpened;
-    this.isSessionDialogOpened = state.dialogs.session.isOpened;
+    this.isSpeakerDialogOpened = isDialogOpen(state.dialogs, DIALOGS.SPEAKER);
+    this.isSessionDialogOpened = isDialogOpen(state.dialogs, DIALOGS.SESSION);
     this.filters = state.filters;
   }
 
@@ -327,8 +328,8 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
           const speakerData = speakersMap[id];
           speakerData && openDialog(DIALOGS.SPEAKER, speakerData);
         } else {
-          this.isSpeakerDialogOpened && closeDialog(DIALOGS.SPEAKER);
-          this.isSessionDialogOpened && closeDialog(DIALOGS.SESSION);
+          this.isSpeakerDialogOpened && closeDialog();
+          this.isSessionDialogOpened && closeDialog();
         }
       });
     }

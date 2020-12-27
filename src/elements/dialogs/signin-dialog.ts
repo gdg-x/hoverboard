@@ -2,10 +2,10 @@ import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
 import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import { ReduxMixin } from '../../mixins/redux-mixin';
+import { RootState } from '../../store';
 import { closeDialog, openDialog } from '../../store/dialogs/actions';
 import { DIALOGS } from '../../store/dialogs/types';
 import { getProviderCompanyName } from '../../store/helpers/actions';
-import { RootState } from '../../store';
 import { mergeAccounts, signIn } from '../../store/user/actions';
 import '../hoverboard-icons';
 import '../shared-styles';
@@ -129,7 +129,7 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
   }
 
   _userChanged(user) {
-    closeDialog(DIALOGS.SIGNIN);
+    closeDialog();
     if (!user.signedIn) {
       if (user.initialProviderId && user.pendingCredential) {
         this.isMergeState = true;
@@ -142,13 +142,13 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
 
   _mergeAccounts() {
     mergeAccounts(this.user.initialProviderId, this.user.pendingCredential);
-    closeDialog(DIALOGS.SIGNIN);
+    closeDialog();
     this.isMergeState = false;
   }
 
   _close() {
     this.isMergeState = false;
-    closeDialog(DIALOGS.SIGNIN);
+    closeDialog();
   }
 
   _signIn(event) {

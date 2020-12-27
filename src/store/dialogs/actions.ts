@@ -1,52 +1,25 @@
-import { CLOSE_DIALOG, DIALOGS, OPEN_DIALOG, SET_DIALOG_ERROR } from './types';
 import { store } from '../';
+import { CLOSE_DIALOG, DIALOGS, OPEN_DIALOG, SET_DIALOG_ERROR } from './types';
 
-export const closeDialog = (dialogName: DIALOGS) => {
+export const closeDialog = () => {
   store.dispatch({
     type: CLOSE_DIALOG,
-    dialogName,
   });
 };
 
-export const setDialogError = (dialogName: DIALOGS) => {
+export const setDialogError = (error: Error) => {
   store.dispatch({
     type: SET_DIALOG_ERROR,
-    payload: { dialogName },
+    payload: error,
   });
 };
 
-export const openDialog = (dialogName: DIALOGS, data?: unknown) => {
+export const openDialog = (name: DIALOGS, data?: unknown) => {
   store.dispatch({
     type: OPEN_DIALOG,
-    dialog: {
-      [dialogName]: {
-        isOpened: true,
-        data,
-      },
+    payload: {
+      name,
+      data,
     },
   });
-};
-
-export const dialogsActions = {
-  openDialog: (dialogName: DIALOGS, data?: unknown) => {
-    store.dispatch({
-      type: OPEN_DIALOG,
-      dialog: {
-        [dialogName]: {
-          isOpened: true,
-          data,
-        },
-      },
-    });
-  },
-  closeDialog: (dialogName: DIALOGS) => {
-    store.dispatch({
-      type: CLOSE_DIALOG,
-      dialogName,
-    });
-  },
-  setDialogError: (dialogName: DIALOGS) => ({
-    type: SET_DIALOG_ERROR,
-    payload: { dialogName },
-  }),
 };
