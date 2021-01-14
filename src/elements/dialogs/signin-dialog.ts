@@ -7,6 +7,7 @@ import { closeDialog, openDialog } from '../../store/dialogs/actions';
 import { DIALOGS } from '../../store/dialogs/types';
 import { getProviderCompanyName } from '../../store/helpers/actions';
 import { mergeAccounts, signIn } from '../../store/user/actions';
+import { isDialogOpen } from '../../utils/dialogs';
 import '../hoverboard-icons';
 import '../shared-styles';
 
@@ -108,6 +109,10 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
         type: Boolean,
         value: false,
       },
+      isDialogOpen: {
+        type: Boolean,
+        value: false,
+      },
       email: String,
       providerCompanyName: String,
     };
@@ -116,6 +121,7 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
   stateChanged(state: RootState) {
     this.setProperties({
       user: state.user,
+      isDialogOpen: isDialogOpen(state.dialogs, DIALOGS.SIGNIN),
     });
   }
 
@@ -129,7 +135,9 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
   }
 
   _userChanged(user) {
-    closeDialog();
+    if (this.isDialogOpen) {
+      closeDialog();
+    }
     if (!user.signedIn) {
       if (user.initialProviderId && user.pendingCredential) {
         this.isMergeState = true;

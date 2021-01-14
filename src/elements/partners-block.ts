@@ -1,5 +1,5 @@
-import { Failure, Initialized, Pending } from '@abraham/remotedata';
-import { computed, customElement, property } from '@polymer/decorators';
+import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
+import { computed, customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -7,10 +7,14 @@ import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { closeDialog, openDialog, setDialogError } from '../store/dialogs/actions';
-import { DIALOGS } from '../store/dialogs/types';
+import { DialogForm, DIALOGS } from '../store/dialogs/types';
 import { fetchPartners } from '../store/partners/actions';
 import { initialPartnersState, PartnersState } from '../store/partners/state';
 import { addPotentialPartner } from '../store/potential-partners/actions';
+import {
+  initialPotentialPartnersState,
+  PotentialPartnersState,
+} from '../store/potential-partners/state';
 import { showToast } from '../store/toast/actions';
 import './hoverboard-icons';
 import './shared-styles';
@@ -108,10 +112,8 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
 
   @property({ type: Object })
   private viewport = {};
-  @property({ type: Boolean, observer: PartnersBlock.prototype._partnerAddingChanged })
-  private partnerAdding = false;
   @property({ type: Object })
-  private partnerAddingError: Error;
+  private potentialPartners = initialPotentialPartnersState;
 
   @property({ type: Object })
   partners: PartnersState = initialPartnersState;
@@ -129,8 +131,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
   stateChanged(state: RootState) {
     this.viewport = state.ui.viewport;
     this.partners = state.partners;
-    this.partnerAdding = state.potentialPartners.adding;
-    this.partnerAddingError = state.potentialPartners.addingError;
+    this.potentialPartners = state.potentialPartners;
   }
 
   connectedCallback() {
@@ -146,18 +147,17 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
       submitLabel: '{$ partnersBlock.form.submitLabel $}',
       firstFieldLabel: '{$ partnersBlock.form.fullName $}',
       secondFieldLabel: '{$ partnersBlock.form.companyName $}',
-      submit: (data) => store.dispatch(addPotentialPartner(data)),
+      submit: (data: DialogForm) => store.dispatch(addPotentialPartner(data)),
     });
   }
 
-  _partnerAddingChanged(newPartnerAdding, oldPartnerAdding) {
-    if (oldPartnerAdding && !newPartnerAdding) {
-      if (this.partnerAddingError) {
-        setDialogError(this.partnerAddingError);
-      } else {
-        closeDialog();
-        showToast({ message: '{$ partnersBlock.toast $}' });
-      }
+  @observe('potentialPartners')
+  _partnerAddingChanged(potentialPartners: PotentialPartnersState) {
+    if (potentialPartners instanceof Failure) {
+      setDialogError(potentialPartners.error);
+    } else if (potentialPartners instanceof Success) {
+      closeDialog();
+      showToast({ message: '{$ partnersBlock.toast $}' });
     }
   }
 }

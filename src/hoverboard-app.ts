@@ -371,12 +371,32 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
 
   stateChanged(state: RootState) {
     this.dialogs = state.dialogs;
-    this.isSigninDialogOpen = isDialogOpen(this.dialogs, DIALOGS.SIGNIN);
-    this.isSpeakerDialogOpen = isDialogOpen(this.dialogs, DIALOGS.SPEAKER);
-    this.isPreviousSpeakerDialogOpen = isDialogOpen(this.dialogs, DIALOGS.PREVIOUS_SPEAKER);
-    this.isSessionDialogOpen = isDialogOpen(this.dialogs, DIALOGS.SESSION);
-    this.isFeedbackDialogOpen = isDialogOpen(this.dialogs, DIALOGS.FEEDBACK);
-    this.isSubscribeDialogOpen = isDialogOpen(this.dialogs, DIALOGS.SUBSCRIBE);
+    this.isSigninDialogOpen = isDialogOpen(this.dialogs, DIALOGS.SIGNIN, this.isSigninDialogOpen);
+    this.isSpeakerDialogOpen = isDialogOpen(
+      this.dialogs,
+      DIALOGS.SPEAKER,
+      this.isSpeakerDialogOpen
+    );
+    this.isPreviousSpeakerDialogOpen = isDialogOpen(
+      this.dialogs,
+      DIALOGS.PREVIOUS_SPEAKER,
+      this.isPreviousSpeakerDialogOpen
+    );
+    this.isSessionDialogOpen = isDialogOpen(
+      this.dialogs,
+      DIALOGS.SESSION,
+      this.isSessionDialogOpen
+    );
+    this.isFeedbackDialogOpen = isDialogOpen(
+      this.dialogs,
+      DIALOGS.FEEDBACK,
+      this.isFeedbackDialogOpen
+    );
+    this.isSubscribeDialogOpen = isDialogOpen(
+      this.dialogs,
+      DIALOGS.SUBSCRIBE,
+      this.isSubscribeDialogOpen
+    );
     this.notifications = state.notifications;
     this.route = state.routing;
     this.schedule = state.schedule;
