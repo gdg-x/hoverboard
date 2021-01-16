@@ -1,7 +1,5 @@
-import { TicketsState } from './types';
+import { Initialized, RemoteData } from '@abraham/remotedata';
+import { Ticket } from '../../models/ticket';
 
-export const initialTicketsState: TicketsState = {
-  fetching: false,
-  fetchingError: null,
-  list: [],
-};
+export type TicketsState = RemoteData<Error, Ticket[]>;
+export const initialTicketsState: TicketsState = new Initialized();

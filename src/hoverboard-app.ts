@@ -6,7 +6,7 @@ import '@polymer/app-layout/app-header/app-header';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
 import '@polymer/app-route/app-location';
 import '@polymer/app-route/app-route';
-import { customElement, observe, property } from '@polymer/decorators';
+import { computed, customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-dropdown/iron-dropdown-scroll-manager';
 import '@polymer/iron-icon';
 import '@polymer/iron-media-query';
@@ -58,6 +58,7 @@ import { getToken, initializeMessaging } from './store/notifications/actions';
 import { setRoute } from './store/routing/actions';
 import { initialRoutingState, RoutingState } from './store/routing/state';
 import { fetchTickets } from './store/tickets/actions';
+import { initialTicketsState, TicketsState } from './store/tickets/state';
 import { showToast } from './store/toast/actions';
 import { setViewportSize } from './store/ui/actions';
 import { updateUser } from './store/user/actions';
@@ -225,7 +226,7 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
 
               <a
                 class="bottom-drawer-link"
-                href$="[[_getTicketUrl(tickets)]]"
+                href$="[[ticketUrl]]"
                 target="_blank"
                 rel="noopener noreferrer"
                 on-click="closeDrawer"
@@ -323,6 +324,9 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
+  tickets: TicketsState = initialTicketsState;
+
+  @property({ type: Object })
   private ui = {};
   @property({ type: Object })
   private addToHomeScreen: TempAny;
@@ -344,8 +348,6 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
   private user = {};
   @property({ type: Array })
   private providerUrls = '{$ signInProviders.allowedProvidersUrl $}'.split(',');
-  @property({ type: Object })
-  private tickets = { list: [] };
   @property({ type: Boolean })
   private isPhoneSize = false;
   @property({ type: Boolean })
@@ -469,10 +471,14 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
     this.drawerOpened = e.detail.value;
   }
 
-  _getTicketUrl(tickets) {
-    if (!tickets.list.length) return '';
-    const availableTicket = tickets.list.filter((ticket) => ticket.available)[0];
-    return availableTicket ? availableTicket.url : tickets.list[0].url;
+  @computed('tickets')
+  get ticketUrl(): string {
+    if (this.tickets instanceof Success && this.tickets.data.length > 0) {
+      const availableTicket = this.tickets.data.find((ticket) => ticket.available);
+      return (availableTicket || this.tickets.data[0]).url;
+    } else {
+      return '';
+    }
   }
 
   _isaddToHomeScreenHidden(addToHomeScreen, isTabletPlus) {
