@@ -1,40 +1,25 @@
-import { initialTicketsState } from './state';
+import { Failure, Pending, Success } from '@abraham/remotedata';
+import { initialTicketsState, TicketsState } from './state';
 import {
-  FetchTicketsActionTypes,
+  FetchTicketsActions,
   FETCH_TICKETS,
   FETCH_TICKETS_FAILURE,
   FETCH_TICKETS_SUCCESS,
 } from './types';
 
-export const ticketsReducer = (state = initialTicketsState, action: FetchTicketsActionTypes) => {
+export const ticketsReducer = (
+  state = initialTicketsState,
+  action: FetchTicketsActions
+): TicketsState => {
   switch (action.type) {
     case FETCH_TICKETS:
-      return {
-        ...state,
-        ...{
-          fetching: true,
-          fetchingError: null,
-          list: [],
-        },
-      };
+      return new Pending();
 
     case FETCH_TICKETS_FAILURE:
-      return {
-        ...state,
-        ...{
-          fetching: false,
-          fetchingError: action.payload.error,
-        },
-      };
+      return new Failure(action.payload);
 
     case FETCH_TICKETS_SUCCESS:
-      return {
-        ...state,
-        ...{
-          fetching: false,
-          list: action.payload.list,
-        },
-      };
+      return new Success(action.payload);
 
     default:
       return state;

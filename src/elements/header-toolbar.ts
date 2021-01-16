@@ -1,4 +1,5 @@
-import { customElement, observe, property } from '@polymer/decorators';
+import { Success } from '@abraham/remotedata';
+import { computed, customElement, observe, property } from '@polymer/decorators';
 import { PaperMenuButton } from '@polymer/paper-menu-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
@@ -9,6 +10,7 @@ import { DIALOGS } from '../store/dialogs/types';
 import { requestPermission, unsubscribe } from '../store/notifications/actions';
 import { NOTIFICATIONS_STATUS } from '../store/notifications/types';
 import { initialRoutingState, RoutingState } from '../store/routing/state';
+import { initialTicketsState, TicketsState } from '../store/tickets/state';
 import { signOut } from '../store/user/actions';
 import { TempAny } from '../temp-any';
 import { isDialogOpen } from '../utils/dialogs';
@@ -174,7 +176,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           >
 
           <a
-            href$="[[_getTicketUrl(tickets)]]"
+            href$="[[ticketUrl]]"
             target="_blank"
             rel="noopener noreferrer"
             ga-on="click"
@@ -269,6 +271,8 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   route: RoutingState = initialRoutingState;
   @property({ type: Boolean, notify: true })
   drawerOpened: boolean;
+  @property({ type: Object })
+  tickets: TicketsState = initialTicketsState;
 
   @property({ type: Object })
   private viewport = {};
@@ -282,8 +286,6 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   private notifications: { token?: string; status?: string } = {};
   @property({ type: Object })
   private user = {};
-  @property({ type: Object })
-  private tickets = { list: [] };
   @property({ type: Boolean, reflectToAttribute: true })
   private transparent = false;
 
@@ -293,6 +295,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
     this.route = state.routing;
     this.schedule = state.schedule;
     this.user = state.user;
+    this.tickets = state.tickets;
     this.heroSettings = state.ui.heroSettings;
     this.viewport = state.ui.viewport;
   }
@@ -363,10 +366,14 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
     return userSignedIn || isTabletPlus;
   }
 
-  _getTicketUrl(tickets) {
-    if (!tickets.list.length) return '';
-    const availableTicket = tickets.list.filter((ticket) => ticket.available)[0];
-    return availableTicket ? availableTicket.url : tickets.list[0].url;
+  @computed('tickets')
+  get ticketUrl() {
+    if (this.tickets instanceof Success && this.tickets.data.length > 0) {
+      const availableTicket = this.tickets.data.find((ticket) => ticket.available);
+      return (availableTicket || this.tickets.data[0]).url;
+    } else {
+      return '';
+    }
   }
 
   @observe('heroSettings')
