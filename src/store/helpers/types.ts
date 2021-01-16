@@ -1,4 +1,4 @@
-export enum Providers {
+export enum PROVIDERS {
   'https://accounts.google.com' = 'https://accounts.google.com',
   'google.com' = 'google.com',
   'https://www.facebook.com' = 'https://www.facebook.com',

@@ -2,7 +2,7 @@ import { TempAny } from '../../temp-any';
 import { WIPE_PREVIOUS_FEEDBACK } from '../feedback/types';
 import { store } from '../';
 import { SIGN_IN } from '../user/types';
-import { Providers } from './types';
+import { PROVIDERS } from './types';
 
 export const storeUser = (user?: TempAny) => {
   let userToStore: TempAny = { signedIn: false };
@@ -36,7 +36,7 @@ export const storeUser = (user?: TempAny) => {
   if (!userToStore.signedIn) store.dispatch({ type: WIPE_PREVIOUS_FEEDBACK });
 };
 
-export const getFederatedProvider = (provider: Providers) => {
+export const getFederatedProvider = (provider: PROVIDERS) => {
   switch (provider) {
     case 'https://accounts.google.com':
     case 'google.com': {
@@ -58,7 +58,7 @@ export const getFederatedProvider = (provider: Providers) => {
   }
 };
 
-export const getProviderCompanyName = (provider: Providers) => {
+export const getProviderCompanyName = (provider: PROVIDERS) => {
   switch (provider) {
     case 'https://accounts.google.com':
     case 'google.com': {
