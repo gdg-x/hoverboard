@@ -1,9 +1,9 @@
 import { getFederatedProvider, storeUser, trackError } from '../helpers/actions';
-import { Providers } from '../helpers/types';
+import { PROVIDERS } from '../helpers/types';
 import { getToken } from '../notifications/actions';
 import { resetSubscribed } from '../subscribe/actions';
 
-export const signIn = (providerName: Providers) => {
+export const signIn = (providerName: PROVIDERS) => {
   const firebaseProvider = getFederatedProvider(providerName);
 
   return window.firebase
@@ -21,7 +21,7 @@ export const signIn = (providerName: Providers) => {
         window.firebase
           .auth()
           .fetchSignInMethodsForEmail(error.email)
-          .then((providers: Providers[]) => {
+          .then((providers: PROVIDERS[]) => {
             storeUser({
               signedIn: false,
               initialProviderId: providers[0],
@@ -35,7 +35,7 @@ export const signIn = (providerName: Providers) => {
 };
 
 export const mergeAccounts = (
-  initialProviderId: Providers,
+  initialProviderId: PROVIDERS,
   pendingCredential: firebase.auth.AuthCredential
 ) => {
   const firebaseProvider = getFederatedProvider(initialProviderId);
