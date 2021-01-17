@@ -1,12 +1,14 @@
-import { customElement, observe, property } from '@polymer/decorators';
+import { Success } from '@abraham/remotedata';
+import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { openDialog } from '../store/dialogs/actions';
-import { DIALOGS } from '../store/dialogs/types';
+import { DialogForm, DIALOGS } from '../store/dialogs/types';
 import { subscribe } from '../store/subscribe/actions';
+import { initialSubscribeState, SubscribeState } from '../store/subscribe/state';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -56,7 +58,7 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
         <div class="cta-button">
           <paper-button
             class="animated icon-right"
-            disabled$="[[subscribed]]"
+            disabled$="[[subscribed.data]]"
             on-click="_subscribe"
             ga-on="click"
             ga-event-category="attendees"
@@ -72,15 +74,12 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
+  subscribed: SubscribeState = initialSubscribeState;
+
+  @property({ type: Object })
   private user: { signedIn?: boolean; email?: string; displayName?: string } = {};
   @property({ type: Object })
   private viewport = {};
-  @property({ type: Boolean })
-  private subscribed = false;
-  @property({ type: String })
-  private ctaIcon = 'arrow-right-circle';
-  @property({ type: String })
-  private ctaLabel = '{$  subscribeBlock.callToAction.label $}';
 
   stateChanged(state: RootState) {
     this.subscribed = state.subscribed;
@@ -88,15 +87,16 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
     this.viewport = state.ui.viewport;
   }
 
-  @observe('subscribed')
-  _handleSubscribed(subscribed) {
-    if (subscribed) {
-      this.ctaIcon = 'checked';
-      this.ctaLabel = '{$  subscribeBlock.subscribed $}';
-    } else {
-      this.ctaIcon = 'arrow-right-circle';
-      this.ctaLabel = '{$  subscribeBlock.callToAction.label $}';
-    }
+  @computed('subscribed')
+  get ctaIcon() {
+    return this.subscribed instanceof Success ? 'checked' : 'arrow-right-circle';
+  }
+
+  @computed('subscribed')
+  get ctaLabel() {
+    return this.subscribed instanceof Success
+      ? '{$  subscribeBlock.subscribed $}'
+      : '{$  subscribeBlock.callToAction.label $}';
   }
 
   _subscribe() {
@@ -123,12 +123,12 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
         secondFieldLabel: '{$ subscribeBlock.lastName $}',
         firstFieldValue: userData.firstFieldValue,
         secondFieldValue: userData.secondFieldValue,
-        submit: (data) => this._subscribeAction(data),
+        submit: (data: DialogForm) => this._subscribeAction(data),
       });
     }
   }
 
-  _subscribeAction(data) {
+  _subscribeAction(data: DialogForm) {
     store.dispatch(subscribe(data));
   }
 }
