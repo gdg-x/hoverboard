@@ -5,7 +5,4 @@ export const initialSessionsState: SessionsState = {
   fetchingError: null,
   list: [],
   obj: {},
-  featured: {},
-  featuredFetching: false,
-  featuredError: null,
 };

@@ -1,16 +1,10 @@
+import { initialSessionsState } from './state';
 import {
   FETCH_SESSIONS,
   FETCH_SESSIONS_FAILURE,
   FETCH_SESSIONS_SUCCESS,
-  FETCH_USER_FEATURED_SESSIONS,
-  FETCH_USER_FEATURED_SESSIONS_FAILURE,
-  FETCH_USER_FEATURED_SESSIONS_SUCCESS,
   SessionsActionTypes,
-  SET_USER_FEATURED_SESSIONS,
-  SET_USER_FEATURED_SESSIONS_FAILURE,
-  SET_USER_FEATURED_SESSIONS_SUCCESS,
 } from './types';
-import { initialSessionsState } from './state';
 
 export const sessionsReducer = (state = initialSessionsState, action: SessionsActionTypes) => {
   switch (action.type) {
@@ -41,36 +35,6 @@ export const sessionsReducer = (state = initialSessionsState, action: SessionsAc
           fetching: false,
           list: action.payload.list,
           obj: action.payload.obj,
-        },
-      };
-
-    case FETCH_USER_FEATURED_SESSIONS:
-    case SET_USER_FEATURED_SESSIONS:
-      return {
-        ...state,
-        ...{
-          featuredError: null,
-          featuredFetching: true,
-        },
-      };
-
-    case FETCH_USER_FEATURED_SESSIONS_FAILURE:
-    case SET_USER_FEATURED_SESSIONS_FAILURE:
-      return {
-        ...state,
-        ...{
-          featuredError: action.payload.error,
-          featuredFetching: false,
-        },
-      };
-
-    case FETCH_USER_FEATURED_SESSIONS_SUCCESS:
-    case SET_USER_FEATURED_SESSIONS_SUCCESS:
-      return {
-        ...state,
-        ...{
-          featured: action.payload.featuredSessions || {},
-          featuredFetching: false,
         },
       };
 
