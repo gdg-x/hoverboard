@@ -1,8 +1,9 @@
 import { Dispatch } from 'redux';
 import { Partner } from '../../models/partner';
 import { PartnerGroup } from '../../models/partner-group';
+import { mergeId } from '../../utils/merge-id';
+import { order } from '../../utils/order';
 import { db } from '../db';
-import { mergeId, order } from '../utils';
 import { FETCH_PARTNERS, FETCH_PARTNERS_FAILURE, FETCH_PARTNERS_SUCCESS } from './types';
 
 const getGroupPartners = async (group: PartnerGroup & { id: string }): Promise<PartnerGroup> => {

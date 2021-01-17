@@ -1,8 +1,8 @@
 import { Dispatch } from 'redux';
 import { Member } from '../../models/member';
 import { Team, TeamWithoutMembers } from '../../models/team';
+import { mergeId } from '../../utils/merge-id';
 import { db } from '../db';
-import { mergeId } from '../utils';
 import { FETCH_TEAM, FETCH_TEAM_FAILURE, FETCH_TEAM_SUCCESS, TeamActions } from './types';
 
 const getTeamIds = async (): Promise<TeamWithoutMembers[]> => {

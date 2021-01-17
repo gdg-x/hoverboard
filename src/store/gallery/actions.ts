@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { Photo } from '../../models/photo';
+import { mergeId } from '../../utils/merge-id';
 import { db } from '../db';
-import { mergeId } from '../utils';
 import {
   FETCH_GALLERY,
   FETCH_GALLERY_FAILURE,
