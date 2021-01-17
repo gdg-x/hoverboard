@@ -1,3 +1,4 @@
-import { SubscribeState } from './types';
+import { Initialized, RemoteData } from '@abraham/remotedata';
 
-export const initialSubscribeState: SubscribeState = false;
+export type SubscribeState = RemoteData<Error, true>;
+export const initialSubscribeState: SubscribeState = new Initialized();
