@@ -1,3 +1,4 @@
+import { Success } from '@abraham/remotedata';
 import '@polymer/app-route/app-route';
 import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
@@ -16,6 +17,7 @@ import { SpeakersHoC } from '../mixins/speakers-hoc';
 import { RootState } from '../store';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
+import { SpeakersState } from '../store/speakers/state';
 import { isDialogOpen } from '../utils/dialogs';
 import { generateClassName, parseQueryParamsFilters } from '../utils/functions';
 
@@ -307,11 +309,11 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
   }
 
   @observe('speakers', '_selectedFilters')
-  _speakersChanged(speakers, selectedFilters) {
-    if (this.speakers && this.speakers.length) {
+  _speakersChanged(speakers: SpeakersState, selectedFilters) {
+    if (speakers instanceof Success) {
       this.contentLoaderVisibility = 'hidden';
       const filters = selectedFilters && selectedFilters.tag ? selectedFilters.tag : [];
-      const updatedSpeakers = this._filterItems(speakers, filters).map((speaker) =>
+      const updatedSpeakers = this._filterItems(speakers.data, filters).map((speaker) =>
         Object.assign({}, speaker, {
           link: `/speakers/${speaker.id}${this.queryParams ? `?${this.queryParams}` : ''}`,
         })
@@ -320,12 +322,12 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     }
   }
 
-  @observe('active', 'speakers', 'speakersMap', 'routeData.speakerId')
-  _openSpeakerDetails(active, speakers, speakersMap, id) {
-    if (speakers && speakers.length) {
+  @observe('active', 'speakers', 'routeData.speakerId')
+  _openSpeakerDetails(active, speakers: SpeakersState, id: string) {
+    if (speakers instanceof Success) {
       requestAnimationFrame(() => {
         if (active && id) {
-          const speakerData = speakersMap[id];
+          const speakerData = speakers.data.find((speaker) => speaker.id === id);
           speakerData && openDialog(DIALOGS.SPEAKER, speakerData);
         } else {
           this.isSpeakerDialogOpened && closeDialog();

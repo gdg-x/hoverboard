@@ -1,8 +1,5 @@
-import { SpeakersState } from './types';
+import { Pending, RemoteData } from '@abraham/remotedata';
+import { Speaker } from '../../models/speaker';
 
-export const initialSpeakersState: SpeakersState = {
-  fetching: false,
-  fetchingError: null,
-  list: [],
-  obj: {},
-};
+export type SpeakersState = RemoteData<Error, Speaker[]>;
+export const initialSpeakersState: SpeakersState = new Pending();

@@ -4,37 +4,21 @@ export const FETCH_SPEAKERS = 'FETCH_SPEAKERS';
 export const FETCH_SPEAKERS_FAILURE = 'FETCH_SPEAKERS_FAILURE';
 export const FETCH_SPEAKERS_SUCCESS = 'FETCH_SPEAKERS_SUCCESS';
 
-export interface SpeakersState {
-  fetching: boolean;
-  fetchingError?: Error;
-  list: Speaker[];
-  obj: {
-    [speakerId: string]: Speaker;
-  };
-}
-
 interface FetchSpeakersAction {
   type: typeof FETCH_SPEAKERS;
 }
 
 interface FetchSpeakersFailureAction {
   type: typeof FETCH_SPEAKERS_FAILURE;
-  payload: {
-    error: Error;
-  };
+  payload: Error;
 }
 
 interface FetchSpeakersSuccessAction {
   type: typeof FETCH_SPEAKERS_SUCCESS;
-  payload: {
-    list: Speaker[];
-    obj: {
-      [speakerId: string]: Speaker;
-    };
-  };
+  payload: Speaker[];
 }
 
-export type SpeakerActionTypes =
+export type SpeakerActions =
   | FetchSpeakersAction
   | FetchSpeakersFailureAction
   | FetchSpeakersSuccessAction;

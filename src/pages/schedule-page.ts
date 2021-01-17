@@ -22,6 +22,7 @@ import { setSubRoute } from '../store/routing/actions';
 import { fetchSchedule } from '../store/schedule/actions';
 import { initialScheduleState, ScheduleState } from '../store/schedule/state';
 import { fetchUserFeaturedSessions } from '../store/sessions/actions';
+import { SpeakersState } from '../store/speakers/state';
 import { isDialogOpen } from '../utils/dialogs';
 import { parseQueryParamsFilters } from '../utils/functions';
 
@@ -189,8 +190,8 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
   }
 
   @observe('sessions', 'speakers')
-  _sessionsAndSpeakersChanged(sessions, speakers) {
-    if (this.schedule instanceof Initialized && sessions?.length && speakers?.length) {
+  _sessionsAndSpeakersChanged(sessions, speakers: SpeakersState) {
+    if (this.schedule instanceof Initialized && sessions?.length && speakers instanceof Success) {
       store.dispatch(fetchSchedule());
     }
   }
