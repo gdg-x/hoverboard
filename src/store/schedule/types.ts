@@ -4,25 +4,21 @@ export const FETCH_SCHEDULE = 'FETCH_SCHEDULE';
 export const FETCH_SCHEDULE_FAILURE = 'FETCH_SCHEDULE_FAILURE';
 export const FETCH_SCHEDULE_SUCCESS = 'FETCH_SCHEDULE_SUCCESS';
 
-export type ScheduleState = Schedule[];
-
 interface FetchScheduleAction {
   type: typeof FETCH_SCHEDULE;
 }
 
 interface FetchScheduleFailureAction {
   type: typeof FETCH_SCHEDULE_FAILURE;
-  payload: {
-    error: Error;
-  };
+  payload: Error;
 }
 
 interface FetchScheduleSuccessAction {
   type: typeof FETCH_SCHEDULE_SUCCESS;
-  data: Schedule[];
+  payload: Schedule[];
 }
 
-export type ScheduleActionTypes =
+export type ScheduleActions =
   | FetchScheduleAction
   | FetchScheduleFailureAction
   | FetchScheduleSuccessAction;

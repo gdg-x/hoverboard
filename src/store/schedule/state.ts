@@ -1,3 +1,5 @@
-import { ScheduleState } from './types';
+import { Initialized, RemoteData } from '@abraham/remotedata';
+import { Schedule } from '../../models/schedule';
 
-export const initialScheduleState: ScheduleState = [];
+export type ScheduleState = RemoteData<Error, Schedule[]>;
+export const initialScheduleState: ScheduleState = new Initialized();

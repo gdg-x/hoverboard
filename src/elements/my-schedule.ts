@@ -1,6 +1,8 @@
+import { Success } from '@abraham/remotedata';
 import { customElement, observe, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { initialScheduleState, ScheduleState } from '../store/schedule/state';
 import './schedule-day';
 import './shared-styles';
 
@@ -47,8 +49,8 @@ export class MySchedule extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  @property({ type: Array })
-  private schedule = [];
+  @property({ type: Object })
+  private schedule: ScheduleState = initialScheduleState;
   @property({ type: Array })
   private featuredSchedule = [];
   @property({ type: Object })
@@ -64,8 +66,8 @@ export class MySchedule extends ReduxMixin(PolymerElement) {
 
   @observe('schedule', 'featuredSessions')
   _filterSchedule(schedule, featuredSessions) {
-    if (schedule.length) {
-      this.featuredSchedule = schedule.map((day) =>
+    if (schedule instanceof Success) {
+      this.featuredSchedule = schedule.data.map((day) =>
         Object.assign({}, day, {
           timeslots: day.timeslots.map((timeslot) =>
             Object.assign({}, timeslot, {

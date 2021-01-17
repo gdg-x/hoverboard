@@ -1,5 +1,6 @@
+import { Initialized, Pending, Success } from '@abraham/remotedata';
 import '@polymer/app-route/app-route';
-import { customElement, observe, property } from '@polymer/decorators';
+import { computed, customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-location/iron-location';
 import '@polymer/iron-pages';
 import '@polymer/paper-progress';
@@ -19,6 +20,7 @@ import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
 import { setSubRoute } from '../store/routing/actions';
 import { fetchSchedule } from '../store/schedule/actions';
+import { initialScheduleState, ScheduleState } from '../store/schedule/state';
 import { fetchUserFeaturedSessions } from '../store/sessions/actions';
 import { isDialogOpen } from '../utils/dialogs';
 import { parseQueryParamsFilters } from '../utils/functions';
@@ -87,7 +89,7 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
         </sticky-element>
       </hero-block>
 
-      <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
+      <paper-progress indeterminate hidden$="[[!pending]]"></paper-progress>
 
       <filter-menu filters="[[_filters]]" selected="[[_selectedFilters]]"></filter-menu>
 
@@ -105,13 +107,15 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
           load-to="80%"
           blur-width="300px"
           items-count="{$ contentLoaders.schedule.itemsCount $}"
-          hidden$="[[contentLoaderVisibility]]"
+          hidden$="[[!pending]]"
           layout
         >
         </content-loader>
 
         <iron-pages attr-for-selected="name" selected="[[subRoute]]" selected-attribute="active">
-          <template is="dom-repeat" items="[[schedule]]" as="day">
+          <template is="dom-if" if="[[schedule.error]]">Error loading schedule.</template>
+
+          <template is="dom-repeat" items="[[schedule.data]]" as="day">
             <schedule-day
               name$="[[day.date]]"
               day="[[day]]"
@@ -139,13 +143,14 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
   }
 
   @property({ type: Object })
+  schedule: ScheduleState = initialScheduleState;
+
+  @property({ type: Object })
   private route = {};
   @property({ type: Object })
   private queryParams = {};
   @property({ type: Boolean })
   private active = false;
-  @property({ type: Array })
-  private schedule = [];
   @property({ type: Object })
   private featuredSessions = {};
   @property({ type: Object })
@@ -156,8 +161,6 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
   private isSpeakerDialogOpened = false;
   @property({ type: Boolean })
   private isSessionDialogOpened = false;
-  @property({ type: Boolean })
-  private contentLoaderVisibility = false;
   @property({ type: Object })
   private viewport = {};
   @property({ type: Object })
@@ -187,16 +190,14 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
 
   @observe('sessions', 'speakers')
   _sessionsAndSpeakersChanged(sessions, speakers) {
-    if (!this.schedule.length && sessions && sessions.length && speakers && speakers.length) {
+    if (this.schedule instanceof Initialized && sessions?.length && speakers?.length) {
       store.dispatch(fetchSchedule());
     }
   }
 
-  @observe('schedule', '_selectedFilters')
-  _scheduleChanged(schedule) {
-    if (schedule && schedule.length) {
-      this.contentLoaderVisibility = true;
-    }
+  @computed('schedule')
+  get pending() {
+    return this.schedule instanceof Pending;
   }
 
   @observe('active', 'sessions', 'user.uid')
@@ -204,8 +205,7 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
     if (
       active &&
       userUid &&
-      sessions &&
-      sessions.length &&
+      sessions?.length &&
       (!this.featuredSessions || !Object.keys(this.featuredSessions).length)
     ) {
       store.dispatch(fetchUserFeaturedSessions(userUid));
@@ -213,9 +213,9 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
   }
 
   @observe('active', 'routeData.day', 'schedule')
-  _setDay(active, day, schedule) {
-    if (active && schedule.length) {
-      const selectedDay = day || schedule[0].date;
+  _setDay(active, day, schedule: ScheduleState) {
+    if (active && schedule instanceof Success) {
+      const selectedDay = day || schedule.data[0].date;
       setSubRoute(selectedDay);
     }
   }

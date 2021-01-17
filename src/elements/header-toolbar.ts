@@ -277,8 +277,6 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private viewport = {};
   @property({ type: Object })
-  private schedule = {};
-  @property({ type: Object })
   private heroSettings = {};
   @property({ type: Object })
   private dialogs = initialDialogState;
@@ -293,7 +291,6 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
     this.dialogs = state.dialogs;
     this.notifications = state.notifications;
     this.route = state.routing;
-    this.schedule = state.schedule;
     this.user = state.user;
     this.tickets = state.tickets;
     this.heroSettings = state.ui.heroSettings;
