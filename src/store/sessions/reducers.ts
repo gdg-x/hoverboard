@@ -1,42 +1,25 @@
-import { initialSessionsState } from './state';
+import { Failure, Pending, Success } from '@abraham/remotedata';
+import { initialSessionsState, SessionsState } from './state';
 import {
   FETCH_SESSIONS,
   FETCH_SESSIONS_FAILURE,
   FETCH_SESSIONS_SUCCESS,
-  SessionsActionTypes,
+  SessionsActions,
 } from './types';
 
-export const sessionsReducer = (state = initialSessionsState, action: SessionsActionTypes) => {
+export const sessionsReducer = (
+  state = initialSessionsState,
+  action: SessionsActions
+): SessionsState => {
   switch (action.type) {
     case FETCH_SESSIONS:
-      return {
-        ...state,
-        ...{
-          fetching: true,
-          fetchingError: null,
-          list: [],
-          obj: {},
-        },
-      };
+      return new Pending();
 
     case FETCH_SESSIONS_FAILURE:
-      return {
-        ...state,
-        ...{
-          fetching: false,
-          fetchingError: action.payload.error,
-        },
-      };
+      return new Failure(action.payload);
 
     case FETCH_SESSIONS_SUCCESS:
-      return {
-        ...state,
-        ...{
-          fetching: false,
-          list: action.payload.list,
-          obj: action.payload.obj,
-        },
-      };
+      return new Success(action.payload);
 
     default:
       return state;

@@ -1,8 +1,5 @@
-import { SessionsState } from './types';
+import { Initialized, RemoteData } from '@abraham/remotedata';
+import { Session } from '../../models/session';
 
-export const initialSessionsState: SessionsState = {
-  fetching: false,
-  fetchingError: null,
-  list: [],
-  obj: {},
-};
+export type SessionsState = RemoteData<Error, Session[]>;
+export const initialSessionsState: SessionsState = new Initialized();

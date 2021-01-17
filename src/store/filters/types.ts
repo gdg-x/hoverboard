@@ -10,4 +10,4 @@ interface SetFiltersAction {
   payload: FiltersState;
 }
 
-export type FiltersActionTypes = SetFiltersAction;
+export type FiltersActions = SetFiltersAction;

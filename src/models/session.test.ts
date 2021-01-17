@@ -1,11 +1,11 @@
 import data from '../../docs/default-firebase-data.json';
-import { Session } from './session';
+import { SessionData } from './session';
 import { allKeys } from './utils';
 
 describe('session', () => {
   it('matches the shape of the default data', () => {
-    const sessions: Session[] = Object.values(data['sessions']);
-    const keys: Array<keyof Session> = [
+    const sessions: SessionData[] = Object.values(data['sessions']);
+    const keys: Array<keyof SessionData> = [
       'complexity',
       'description',
       'extend',
