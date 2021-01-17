@@ -1,7 +1,10 @@
-import { getFederatedProvider, storeUser } from '../helpers/actions';
-import { PROVIDERS } from '../helpers/types';
+import { store } from '..';
+import { TempAny } from '../../../functions/src/temp-any';
+import { getFederatedProvider, PROVIDERS } from '../../utils/providers';
+import { WIPE_PREVIOUS_FEEDBACK } from '../feedback/types';
 import { getToken } from '../notifications/actions';
 import { resetSubscribed } from '../subscribe/actions';
+import { SIGN_IN } from './types';
 
 export const signIn = (providerName: PROVIDERS) => {
   const firebaseProvider = getFederatedProvider(providerName);
@@ -62,4 +65,36 @@ export const signOut = () => {
       storeUser();
       resetSubscribed();
     });
+};
+
+const storeUser = (user?: TempAny) => {
+  let userToStore: TempAny = { signedIn: false };
+
+  if (user) {
+    const { uid, displayName, photoURL, refreshToken, actualProvider, pendingCredential } = user;
+
+    const email = user.email || (user.providerData && user.providerData[0].email);
+    const initialProviderId =
+      (user.providerData && user.providerData[0].providerId) || user.initialProviderId;
+    const signedIn = (user.uid && true) || user.signedIn;
+
+    userToStore = {
+      signedIn,
+      uid,
+      email,
+      displayName,
+      photoURL,
+      refreshToken,
+      initialProviderId,
+      actualProvider,
+      pendingCredential,
+    };
+  }
+
+  store.dispatch({
+    type: SIGN_IN,
+    user: userToStore,
+  });
+
+  if (!userToStore.signedIn) store.dispatch({ type: WIPE_PREVIOUS_FEEDBACK });
 };

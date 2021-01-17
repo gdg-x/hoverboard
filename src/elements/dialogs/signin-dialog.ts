@@ -5,8 +5,8 @@ import { ReduxMixin } from '../../mixins/redux-mixin';
 import { RootState } from '../../store';
 import { closeDialog, openDialog } from '../../store/dialogs/actions';
 import { DIALOGS } from '../../store/dialogs/types';
-import { getProviderCompanyName } from '../../store/helpers/actions';
 import { mergeAccounts, signIn } from '../../store/user/actions';
+import { getProviderCompanyName } from '../../utils/providers';
 import '../hoverboard-icons';
 import '../shared-styles';
 

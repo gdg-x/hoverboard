@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { Ticket } from '../../models/ticket';
+import { mergeId } from '../../utils/merge-id';
 import { db } from '../db';
-import { mergeId } from '../utils';
 import {
   FetchTicketsActions,
   FETCH_TICKETS,

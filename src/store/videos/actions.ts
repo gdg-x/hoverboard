@@ -1,13 +1,13 @@
+import { Dispatch } from 'redux';
+import { Video } from '../../models/video';
+import { mergeId } from '../../utils/merge-id';
+import { db } from '../db';
 import {
   FetchVideosActions,
   FETCH_VIDEOS,
   FETCH_VIDEOS_FAILURE,
   FETCH_VIDEOS_SUCCESS,
 } from './types';
-import { db } from '../db';
-import { Dispatch } from 'redux';
-import { Video } from '../../models/video';
-import { mergeId } from '../utils';
 
 const getVideos = async (): Promise<Video[]> => {
   const { docs } = await db().collection('videos').orderBy('order', 'asc').get();

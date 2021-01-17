@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { Post } from '../../models/post';
+import { mergeId } from '../../utils/merge-id';
 import { db } from '../db';
-import { mergeId } from '../utils';
 import {
   BlogAction,
   FETCH_BLOG_LIST,

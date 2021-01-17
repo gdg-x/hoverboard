@@ -1,40 +1,11 @@
-import { TempAny } from '../../temp-any';
-import { WIPE_PREVIOUS_FEEDBACK } from '../feedback/types';
-import { store } from '../';
-import { SIGN_IN } from '../user/types';
-import { PROVIDERS } from './types';
-
-export const storeUser = (user?: TempAny) => {
-  let userToStore: TempAny = { signedIn: false };
-
-  if (user) {
-    const { uid, displayName, photoURL, refreshToken, actualProvider, pendingCredential } = user;
-
-    const email = user.email || (user.providerData && user.providerData[0].email);
-    const initialProviderId =
-      (user.providerData && user.providerData[0].providerId) || user.initialProviderId;
-    const signedIn = (user.uid && true) || user.signedIn;
-
-    userToStore = {
-      signedIn,
-      uid,
-      email,
-      displayName,
-      photoURL,
-      refreshToken,
-      initialProviderId,
-      actualProvider,
-      pendingCredential,
-    };
-  }
-
-  store.dispatch({
-    type: SIGN_IN,
-    user: userToStore,
-  });
-
-  if (!userToStore.signedIn) store.dispatch({ type: WIPE_PREVIOUS_FEEDBACK });
-};
+export enum PROVIDERS {
+  'https://accounts.google.com' = 'https://accounts.google.com',
+  'google.com' = 'google.com',
+  'https://www.facebook.com' = 'https://www.facebook.com',
+  'facebook.com' = 'facebook.com',
+  'https://twitter.com' = 'https://twitter.com',
+  'twitter.com' = 'twitter.com',
+}
 
 export const getFederatedProvider = (provider: PROVIDERS) => {
   switch (provider) {

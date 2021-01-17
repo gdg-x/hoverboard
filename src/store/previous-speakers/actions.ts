@@ -1,13 +1,13 @@
 import { Dispatch } from 'redux';
+import { Speaker } from '../../models/speaker';
+import { mergeId } from '../../utils/merge-id';
+import { db } from '../db';
 import {
   FETCH_PREVIOUS_SPEAKERS,
   FETCH_PREVIOUS_SPEAKERS_FAILURE,
   FETCH_PREVIOUS_SPEAKERS_SUCCESS,
   PreviousSpeakersActions,
 } from './types';
-import { db } from '../db';
-import { Speaker } from '../../models/speaker';
-import { mergeId } from '../utils';
 
 const getPreviousSpeakers = async (): Promise<Speaker[]> => {
   const { docs } = await db().collection('previousSpeakers').orderBy('order', 'asc').get();
