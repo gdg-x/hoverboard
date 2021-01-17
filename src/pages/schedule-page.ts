@@ -18,10 +18,10 @@ import { SpeakersHoC } from '../mixins/speakers-hoc';
 import { RootState, store } from '../store';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
+import { fetchUserFeaturedSessions } from '../store/featured-sessions/actions';
 import { setSubRoute } from '../store/routing/actions';
 import { fetchSchedule } from '../store/schedule/actions';
 import { initialScheduleState, ScheduleState } from '../store/schedule/state';
-import { fetchUserFeaturedSessions } from '../store/sessions/actions';
 import { SpeakersState } from '../store/speakers/state';
 import { isDialogOpen } from '../utils/dialogs';
 import { parseQueryParamsFilters } from '../utils/functions';
@@ -179,7 +179,7 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
 
   stateChanged(state: RootState) {
     super.stateChanged(state);
-    this.featuredSessions = state.sessions.featured;
+    this.featuredSessions = state.featuredSessions.featured;
     this.filters = state.filters;
     this.isSessionDialogOpened = isDialogOpen(state.dialogs, DIALOGS.SESSION);
     this.isSpeakerDialogOpened = isDialogOpen(state.dialogs, DIALOGS.SPEAKER);

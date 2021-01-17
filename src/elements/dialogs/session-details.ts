@@ -12,8 +12,8 @@ import { ReduxMixin } from '../../mixins/redux-mixin';
 import { RootState, store } from '../../store';
 import { closeDialog, openDialog } from '../../store/dialogs/actions';
 import { DIALOGS } from '../../store/dialogs/types';
-import { setUserFeaturedSessions } from '../../store/sessions/actions';
-import { FeaturedSessions } from '../../store/sessions/types';
+import { setUserFeaturedSessions } from '../../store/featured-sessions/actions';
+import { FeaturedSessions } from '../../store/featured-sessions/types';
 import { showToast } from '../../store/toast/actions';
 import { toggleVideoDialog } from '../../store/ui/actions';
 import { getVariableColor } from '../../utils/functions';
@@ -210,7 +210,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
   stateChanged(state: RootState) {
     super.stateChanged(state);
     this.setProperties({
-      featuredSessions: state.sessions.featured,
+      featuredSessions: state.featuredSessions.featured,
       currentSpeaker: state.routing.subRoute,
       user: state.user,
       viewport: state.ui.viewport,

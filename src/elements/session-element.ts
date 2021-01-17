@@ -6,7 +6,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { store } from '../store';
 import { openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
-import { setUserFeaturedSessions } from '../store/sessions/actions';
+import { setUserFeaturedSessions } from '../store/featured-sessions/actions';
 import { showToast } from '../store/toast/actions';
 import { TempAny } from '../temp-any';
 import { getVariableColor, toggleQueryParam } from '../utils/functions';
