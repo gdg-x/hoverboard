@@ -1,9 +1,11 @@
-import { customElement, observe, property } from '@polymer/decorators';
+import { Pending } from '@abraham/remotedata';
+import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-location/iron-location';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { initialRoutingState, RoutingState } from '../store/routing/state';
+import { initialScheduleState, ScheduleState } from '../store/schedule/state';
 import { TempAny } from '../temp-any';
 import './content-loader';
 import './shared-styles';
@@ -65,7 +67,7 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
           items-count="{$ contentLoaders.schedule.itemsCount $}"
           layout
           horizontal
-          hidden$="[[contentLoaderVisibility]]"
+          hidden$="[[!pending]]"
         >
         </content-loader>
 
@@ -73,12 +75,12 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
           class="nav-items"
           selected="[[route.subRoute]]"
           attr-for-selected="day"
-          hidden$="[[!contentLoaderVisibility]]"
+          hidden$="[[pending]]"
           scrollable
           hide-scroll-buttons
           noink
         >
-          <template is="dom-repeat" items="[[schedule]]" as="day">
+          <template is="dom-repeat" items="[[schedule.data]]" as="day">
             <paper-tab class="nav-item" day="[[day.date]]" link>
               <a href$="[[_addQueryParams(day.date, queryParams)]]" layout vertical center-center
                 >[[day.dateReadable]]</a
@@ -96,11 +98,10 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
+  schedule: ScheduleState = initialScheduleState;
+
+  @property({ type: Object })
   private route: RoutingState = initialRoutingState;
-  @property({ type: Array })
-  private schedule = [];
-  @property({ type: Boolean })
-  private contentLoaderVisibility = false;
   @property({ type: Object })
   private user = {};
 
@@ -115,11 +116,9 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
     (window as TempAny).HOVERBOARD.Elements.StickyHeaderToolbar = this;
   }
 
-  @observe('schedule')
-  _scheduleChanged(schedule) {
-    if (schedule.length) {
-      this.contentLoaderVisibility = true;
-    }
+  @computed('schedule')
+  get pending() {
+    return this.schedule instanceof Pending;
   }
 
   _addQueryParams(tab, queryParams) {

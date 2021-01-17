@@ -1,26 +1,33 @@
 import { Dispatch } from 'redux';
+import { Schedule } from '../../models/schedule';
 import { db } from '../db';
-import { FETCH_SCHEDULE, FETCH_SCHEDULE_FAILURE, FETCH_SCHEDULE_SUCCESS } from './types';
+import {
+  FETCH_SCHEDULE,
+  FETCH_SCHEDULE_FAILURE,
+  FETCH_SCHEDULE_SUCCESS,
+  ScheduleActions,
+} from './types';
 
-export const fetchSchedule = () => (dispatch: Dispatch) => {
+const getSchedule = async (): Promise<Schedule[]> => {
+  const { docs } = await db().collection('generatedSchedule').get();
+
+  return docs.map((doc) => doc.data()).sort((a, b) => a.date.localeCompare(b.date));
+};
+
+export const fetchSchedule = () => async (dispatch: Dispatch<ScheduleActions>) => {
   dispatch({
     type: FETCH_SCHEDULE,
   });
 
-  return db()
-    .collection('generatedSchedule')
-    .get()
-    .then((snaps) => {
-      const scheduleDays = snaps.docs.map((snap) => snap.data());
-      dispatch({
-        type: FETCH_SCHEDULE_SUCCESS,
-        data: scheduleDays.sort((a, b) => a.date.localeCompare(b.date)),
-      });
-    })
-    .catch((error) => {
-      dispatch({
-        type: FETCH_SCHEDULE_FAILURE,
-        payload: { error },
-      });
+  try {
+    dispatch({
+      type: FETCH_SCHEDULE_SUCCESS,
+      payload: await getSchedule(),
     });
+  } catch (error) {
+    dispatch({
+      type: FETCH_SCHEDULE_FAILURE,
+      payload: error,
+    });
+  }
 };

@@ -339,8 +339,6 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private viewport = {};
   @property({ type: Object })
-  private schedule = {};
-  @property({ type: Object })
   private notifications;
   @property({ type: Boolean })
   private _openedDialog = false;
@@ -381,7 +379,6 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
     this.isSubscribeDialogOpen = isDialogOpen(this.dialogs, DIALOGS.SUBSCRIBE);
     this.notifications = state.notifications;
     this.route = state.routing;
-    this.schedule = state.schedule;
     this.tickets = state.tickets;
     this.ui = state.ui;
     this.user = state.user;
