@@ -1,8 +1,10 @@
+import { Pending } from '@abraham/remotedata';
 import { property } from '@polymer/decorators';
 import { PolymerElement } from '@polymer/polymer';
 import { Constructor } from 'lit-element';
 import { RootState, store } from '../store';
 import { fetchSpeakersList } from '../store/speakers/actions';
+import { initialSpeakersState, SpeakersState } from '../store/speakers/state';
 
 /* @polymerMixin */
 export const SpeakersHoC = <
@@ -11,27 +13,18 @@ export const SpeakersHoC = <
   subclass: T
 ) => {
   class SpeakersClass extends subclass {
-    @property({ type: Array })
-    protected speakers = [];
     @property({ type: Object })
-    protected speakersMap = {};
-    @property({ type: Boolean })
-    protected speakersFetching = false;
-    @property({ type: Object })
-    protected speakersFetchingError = {};
+    speakers: SpeakersState = initialSpeakersState;
 
     stateChanged(state: RootState) {
       super.stateChanged(state);
-      this.speakers = state.speakers.list;
-      this.speakersMap = state.speakers.obj;
-      this.speakersFetching = state.speakers.fetching;
-      this.speakersFetchingError = state.speakers.fetchingError;
+      this.speakers = state.speakers;
     }
 
     connectedCallback() {
       super.connectedCallback();
 
-      if (!this.speakersFetching && (!this.speakers || !this.speakers.length)) {
+      if (this.speakers instanceof Pending) {
         store.dispatch(fetchSpeakersList());
       }
     }

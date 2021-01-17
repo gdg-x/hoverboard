@@ -1,42 +1,25 @@
-import { initialSpeakersState } from './state';
+import { Failure, Pending, Success } from '@abraham/remotedata';
+import { initialSpeakersState, SpeakersState } from './state';
 import {
   FETCH_SPEAKERS,
   FETCH_SPEAKERS_FAILURE,
   FETCH_SPEAKERS_SUCCESS,
-  SpeakerActionTypes,
+  SpeakerActions,
 } from './types';
 
-export const speakersReducer = (state = initialSpeakersState, action: SpeakerActionTypes) => {
+export const speakersReducer = (
+  state = initialSpeakersState,
+  action: SpeakerActions
+): SpeakersState => {
   switch (action.type) {
     case FETCH_SPEAKERS:
-      return {
-        ...state,
-        ...{
-          fetching: true,
-          fetchingError: null,
-          list: [],
-          obj: {},
-        },
-      };
+      return new Pending();
 
     case FETCH_SPEAKERS_FAILURE:
-      return {
-        ...state,
-        ...{
-          fetching: false,
-          fetchingError: action.payload.error,
-        },
-      };
+      return new Failure(action.payload);
 
     case FETCH_SPEAKERS_SUCCESS:
-      return {
-        ...state,
-        ...{
-          fetching: false,
-          list: action.payload.list,
-          obj: action.payload.obj,
-        },
-      };
+      return new Success(action.payload);
 
     default:
       return state;

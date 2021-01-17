@@ -9,7 +9,6 @@ import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
 import 'plastic-image';
 import '../../components/auth-required';
 import { ReduxMixin } from '../../mixins/redux-mixin';
-import { SpeakersHoC } from '../../mixins/speakers-hoc';
 import { RootState, store } from '../../store';
 import { closeDialog, openDialog } from '../../store/dialogs/actions';
 import { DIALOGS } from '../../store/dialogs/types';
@@ -26,9 +25,7 @@ import './dialog-styles';
 const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 const ONE_MINUTE_MS = 60 * 1000;
 
-class SessionDetails extends SpeakersHoC(
-  ReduxMixin(mixinBehaviors([IronOverlayBehavior], PolymerElement))
-) {
+class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], PolymerElement)) {
   static get template() {
     return html`
       <style include="shared-styles dialog-styles flex flex-alignment positioning">
@@ -232,7 +229,7 @@ class SessionDetails extends SpeakersHoC(
 
   _openSpeaker(event: Event & { currentTarget: HTMLElement }) {
     const speakerId = event.currentTarget.getAttribute('speaker-id');
-    const speakerData = this.speakersMap[speakerId];
+    const speakerData = this.speakers.find((speaker) => speaker.id === speakerId);
 
     if (!speakerData) return;
     openDialog(DIALOGS.SPEAKER, speakerData);

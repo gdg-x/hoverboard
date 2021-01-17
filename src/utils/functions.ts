@@ -18,7 +18,7 @@ export const isEmpty = (array) => {
   return !array || !array.length;
 };
 
-export const randomOrder = (array) => {
+export const randomOrder = <T>(array: T[]): T[] => {
   return array.sort(() => 0.5 - Math.random());
 };
 
