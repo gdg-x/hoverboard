@@ -1,4 +1,4 @@
-import { getFederatedProvider, storeUser, trackError } from '../helpers/actions';
+import { getFederatedProvider, storeUser } from '../helpers/actions';
 import { PROVIDERS } from '../helpers/types';
 import { getToken } from '../notifications/actions';
 import { resetSubscribed } from '../subscribe/actions';
@@ -30,7 +30,6 @@ export const signIn = (providerName: PROVIDERS) => {
             });
           });
       }
-      trackError('userActions', 'signIn', error);
     });
 };
 
@@ -46,9 +45,7 @@ export const mergeAccounts = (
     .then((result) => {
       result.user.linkWithCredential(pendingCredential);
     })
-    .catch((error) => {
-      trackError('userActions', 'mergeAccounts', error);
-    });
+    .catch(() => {});
 };
 
 export const updateUser = () => {
