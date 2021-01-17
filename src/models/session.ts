@@ -1,4 +1,6 @@
-export interface Session {
+import { Id } from './types';
+
+export interface SessionData {
   complexity?: string;
   description: string;
   extend?: number;
@@ -11,3 +13,5 @@ export interface Session {
   title: string;
   videoId?: string;
 }
+
+export type Session = Id & SessionData;

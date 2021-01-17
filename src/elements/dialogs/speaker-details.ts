@@ -15,6 +15,9 @@ import { getVariableColor, isEmpty } from '../../utils/functions';
 import '../shared-styles';
 import '../text-truncate';
 import './dialog-styles';
+import { Session } from '../../models/session';
+import { SessionsState } from '../../store/sessions/state';
+import { Success } from '@abraham/remotedata';
 
 class SpeakerDetails extends SessionsHoC(
   ReduxMixin(mixinBehaviors([IronOverlayBehavior], PolymerElement))
@@ -211,10 +214,14 @@ class SpeakerDetails extends SessionsHoC(
 
   _openSession(e: MouseEvent & { currentTarget: HTMLLIElement }) {
     const sessionId = e.currentTarget.getAttribute('session-id');
-    const sessionData = this.sessionsMap[sessionId];
-
-    if (!sessionData) return;
-    openDialog(DIALOGS.SESSION, sessionData);
+    const sessions: SessionsState = this.sessions;
+    if (sessions instanceof Success) {
+      const session = sessions.data.find((session: Session) => session.id === sessionId);
+      if (session) {
+        openDialog(DIALOGS.SESSION, session);
+      }
+    }
+    // TODO: handle error case
   }
 
   _getCloseBtnIcon(isLaptopViewport: boolean) {

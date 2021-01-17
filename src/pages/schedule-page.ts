@@ -22,6 +22,7 @@ import { fetchUserFeaturedSessions } from '../store/featured-sessions/actions';
 import { setSubRoute } from '../store/routing/actions';
 import { fetchSchedule } from '../store/schedule/actions';
 import { initialScheduleState, ScheduleState } from '../store/schedule/state';
+import { SessionsState } from '../store/sessions/state';
 import { SpeakersState } from '../store/speakers/state';
 import { isDialogOpen } from '../utils/dialogs';
 import { parseQueryParamsFilters } from '../utils/functions';
@@ -169,7 +170,7 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
   @property({ type: Array })
   private _filters = [];
   @property({ type: Object })
-  private _selectedFilters = {};
+  private _selectedFilters: { sessionId?: string[] } = {};
   @property({ type: Object })
   private routeData = {};
   @property({ type: Object })
@@ -190,8 +191,12 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
   }
 
   @observe('sessions', 'speakers')
-  _sessionsAndSpeakersChanged(sessions, speakers: SpeakersState) {
-    if (this.schedule instanceof Initialized && sessions?.length && speakers instanceof Success) {
+  _sessionsAndSpeakersChanged(sessions: SessionsState, speakers: SpeakersState) {
+    if (
+      this.schedule instanceof Initialized &&
+      sessions instanceof Success &&
+      speakers instanceof Success
+    ) {
       store.dispatch(fetchSchedule());
     }
   }
@@ -202,11 +207,11 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
   }
 
   @observe('active', 'sessions', 'user.uid')
-  _fetchFeaturedSessions(active, sessions, userUid) {
+  _fetchFeaturedSessions(active: boolean, sessions: SessionsState, userUid?: string) {
     if (
       active &&
       userUid &&
-      sessions?.length &&
+      sessions instanceof Success &&
       (!this.featuredSessions || !Object.keys(this.featuredSessions).length)
     ) {
       store.dispatch(fetchUserFeaturedSessions(userUid));
@@ -214,7 +219,7 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
   }
 
   @observe('active', 'routeData.day', 'schedule')
-  _setDay(active, day, schedule: ScheduleState) {
+  _setDay(active: boolean, day, schedule: ScheduleState) {
     if (active && schedule instanceof Success) {
       const selectedDay = day || schedule.data[0].date;
       setSubRoute(selectedDay);
@@ -222,11 +227,12 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
   }
 
   @observe('active', 'sessions', '_selectedFilters.sessionId')
-  _openSessionDetails(active, sessions, id) {
-    if (sessions && sessions.length) {
+  _openSessionDetails(active: boolean, sessions: SessionsState, ids?: string[]) {
+    if (sessions instanceof Success) {
       requestAnimationFrame(() => {
-        if (active && id) {
-          openDialog(DIALOGS.SESSION, this.sessionsMap[id[0]]);
+        if (active && ids?.length && sessions instanceof Success) {
+          const session = sessions.data.find((session) => ids.includes(session.id));
+          openDialog(DIALOGS.SESSION, session);
         } else {
           this.isSessionDialogOpened && closeDialog();
         }
@@ -234,7 +240,7 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
     }
   }
 
-  _setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened) {
+  _setHelmetData(active: boolean, isSpeakerDialogOpened: boolean, isSessionDialogOpened: boolean) {
     return active && !isSpeakerDialogOpened && !isSessionDialogOpened;
   }
 

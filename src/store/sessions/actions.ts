@@ -1,57 +1,56 @@
 import { Dispatch } from 'redux';
+import { Session } from '../../models/session';
+import { mergeId } from '../../utils/merge-id';
 import { db } from '../db';
-import { SET_FILTERS } from '../filters/types';
-import { FETCH_SESSIONS, FETCH_SESSIONS_FAILURE, FETCH_SESSIONS_SUCCESS } from './types';
+import { FiltersActions, SET_FILTERS } from '../filters/types';
+import {
+  FETCH_SESSIONS,
+  FETCH_SESSIONS_FAILURE,
+  FETCH_SESSIONS_SUCCESS,
+  SessionsActions,
+} from './types';
 
-export const fetchSessionsList = () => (dispatch: Dispatch) => {
+const getSessions = async () => {
+  const { docs } = await db().collection('generatedSessions').get();
+  const tagFilters = new Set<string>();
+  const complexityFilters = new Set<string>();
+  const sessions = docs.map<Session>(mergeId);
+
+  sessions.forEach((session) => {
+    (session.tags || []).map((tag) => tagFilters.add(tag.trim()));
+    session.complexity && complexityFilters.add(session.complexity.trim());
+  });
+
+  return {
+    complexityFilters,
+    sessions,
+    tagFilters,
+  };
+};
+
+export const fetchSessions = () => async (dispatch: Dispatch<SessionsActions | FiltersActions>) => {
   dispatch({
     type: FETCH_SESSIONS,
   });
 
-  return new Promise((resolve, reject) => {
-    db()
-      .collection('generatedSessions')
-      .get()
-      .then((snaps) => {
-        const list = [];
-        const obj = {};
-        const tagFilters = new Set();
-        const complexityFilters = new Set();
+  try {
+    const { complexityFilters, sessions, tagFilters } = await getSessions();
 
-        snaps.docs.forEach((doc) => {
-          const session = Object.assign({}, doc.data());
-          list.push(session);
-          session.tags && session.tags.map((tag) => tagFilters.add(tag.trim()));
-          session.complexity && complexityFilters.add(session.complexity.trim());
-          obj[doc.id] = session;
-        });
-
-        const payload = {
-          obj,
-          list,
-        };
-
-        dispatch({
-          type: FETCH_SESSIONS_SUCCESS,
-          payload,
-        });
-
-        dispatch({
-          type: SET_FILTERS,
-          payload: {
-            tags: [...tagFilters].sort(),
-            complexity: [...complexityFilters],
-          },
-        });
-
-        resolve(payload);
-      })
-      .catch((error) => {
-        dispatch({
-          type: FETCH_SESSIONS_FAILURE,
-          payload: { error },
-        });
-        reject(error);
-      });
-  });
+    dispatch({
+      type: FETCH_SESSIONS_SUCCESS,
+      payload: sessions,
+    });
+    dispatch({
+      type: SET_FILTERS,
+      payload: {
+        tags: [...tagFilters].sort(),
+        complexity: [...complexityFilters],
+      },
+    });
+  } catch (error) {
+    dispatch({
+      type: FETCH_SESSIONS_FAILURE,
+      payload: error,
+    });
+  }
 };
