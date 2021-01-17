@@ -73,12 +73,3 @@ export const getProviderCompanyName = (provider: PROVIDERS) => {
       return 'Twitter';
   }
 };
-
-export const trackError = (action: string, method: string, message: Error) => {
-  console.log('trackError', action, method, message);
-  if (window.ga) {
-    ga('send', 'event', 'error', action + ':' + method, message);
-  } else {
-    console.warn('window.ga not defined');
-  }
-};

@@ -1,6 +1,5 @@
 import { Dispatch } from 'redux';
 import { db } from '../db';
-import { trackError } from '../helpers/actions';
 import { setLocation } from '../routing/actions';
 import { showToast } from '../toast/actions';
 import { NOTIFICATIONS_STATUS, UPDATE_NOTIFICATIONS_STATUS } from './types';
@@ -36,13 +35,11 @@ export const requestPermission = () => (dispatch: Dispatch) => {
     .then(() => {
       getToken(true);
     })
-    .catch((error) => {
+    .catch(() => {
       dispatch({
         type: UPDATE_NOTIFICATIONS_STATUS,
         status: NOTIFICATIONS_STATUS.DENIED,
       });
-
-      trackError('notificationActions', 'requestPermission', error);
     });
 };
 
@@ -122,14 +119,12 @@ export const getToken = (subscribe = false) => (dispatch: Dispatch, getState) =>
         });
       }
     })
-    .catch((error) => {
+    .catch(() => {
       dispatch({
         type: UPDATE_NOTIFICATIONS_STATUS,
         status: NOTIFICATIONS_STATUS.DENIED,
         token: null,
       });
-
-      trackError('notificationActions', 'getToken', error);
     });
 };
 
