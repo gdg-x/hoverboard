@@ -159,7 +159,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
 
             <auth-required hidden="[[!acceptingFeedback]]">
               <slot slot="prompt">{$ feedback.leaveFeedback $}</slot>
-              <feedback-block collection="sessions" db-item="[[session.id]]"></feedback-block>
+              <feedback-block session-id="[[session.id]]"></feedback-block>
             </auth-required>
 
             <p hidden="[[acceptingFeedback]]">{$ feedback.sessionClosed $}</p>

@@ -1,4 +1,4 @@
-export interface Feedback {
+export interface FeedbackData {
   comment: string;
   contentRating: number;
   styleRating: number;

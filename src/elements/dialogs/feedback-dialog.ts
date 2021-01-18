@@ -42,7 +42,7 @@ class FeedbackDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
       <div class="dialog-content" layout vertical>
         <div class="dialog-header">{$ feedback.headline $}</div>
         <div class="feedback-content">
-          <feedback-block collection="sessions" db-item="[[session.id]]"></feedback-block>
+          <feedback-block session-id="[[session.id]]"></feedback-block>
         </div>
       </div>
     `;

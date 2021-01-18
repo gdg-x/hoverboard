@@ -17,7 +17,7 @@ export interface FeedbackState {
   deleting: boolean;
   deletingError: Error;
   sessions?: {
-    [dbItem: string]: FeedbackData;
+    [sessionId: string]: FeedbackData;
   };
 }
 
@@ -28,8 +28,7 @@ export interface FeedbackData {
 }
 
 export interface FeedbackId {
-  collection: string;
-  dbItem: string;
+  sessionId: string;
   userId: string;
 }
 
@@ -49,8 +48,7 @@ interface FetchPreviousFeedbackFailureAction {
 interface FetchPreviousFeedbackSuccessAction {
   type: typeof FETCH_PREVIOUS_FEEDBACK_SUCCESS;
   payload: {
-    collection: string;
-    dbItem: string;
+    sessionId: string;
     previousFeedback: FeedbackData;
   };
 }
@@ -91,7 +89,7 @@ interface WipePreviousFeedbackAction {
   type: typeof WIPE_PREVIOUS_FEEDBACK;
 }
 
-export type FeedbackActionTypes =
+export type FeedbackActions =
   | FetchPreviousFeedbackAction
   | FetchPreviousFeedbackFailureAction
   | FetchPreviousFeedbackSuccessAction
