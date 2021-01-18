@@ -1,3 +1,4 @@
+import { Success } from '@abraham/remotedata';
 import { customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -7,6 +8,10 @@ import { store } from '../store';
 import { openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
 import { setUserFeaturedSessions } from '../store/featured-sessions/actions';
+import {
+  FeaturedSessionsState,
+  initialFeaturedSessionsState,
+} from '../store/featured-sessions/state';
 import { showToast } from '../store/toast/actions';
 import { TempAny } from '../temp-any';
 import { getVariableColor, toggleQueryParam } from '../utils/functions';
@@ -235,7 +240,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     mainTag: string;
   };
   @property({ type: Object })
-  private featuredSessions = {};
+  private featuredSessions: FeaturedSessionsState = initialFeaturedSessionsState;
   @property({ type: String })
   private queryParams: string;
   @property({ type: String })
@@ -247,9 +252,11 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
   @property({ type: String, computed: '_summary(session.description)' })
   private summary: string;
 
-  _isFeatured(featuredSessions, sessionId) {
-    if (!featuredSessions || !sessionId) return false;
-    return featuredSessions[sessionId];
+  _isFeatured(featuredSessions: FeaturedSessionsState, sessionId?: string) {
+    if (featuredSessions instanceof Success && sessionId) {
+      return featuredSessions.data[sessionId];
+    }
+    return false;
   }
 
   _getEnding(number) {
@@ -285,11 +292,13 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
       return;
     }
 
-    const sessions = Object.assign({}, this.featuredSessions, {
-      [this.session.id]: !this.featuredSessions[this.session.id] ? true : null,
-    });
+    if (this.featuredSessions instanceof Success) {
+      const sessions = Object.assign({}, this.featuredSessions.data, {
+        [this.session.id]: !this.featuredSessions.data[this.session.id] ? true : null,
+      });
 
-    store.dispatch(setUserFeaturedSessions(this.user.uid, sessions));
+      store.dispatch(setUserFeaturedSessions(this.user.uid, sessions));
+    }
   }
 
   _toggleFeedback(event) {

@@ -1,3 +1,4 @@
+import { Success } from '@abraham/remotedata';
 import '@polymer/app-layout/app-header-layout/app-header-layout';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
 import '@polymer/iron-icon';
@@ -13,7 +14,10 @@ import { RootState, store } from '../../store';
 import { closeDialog, openDialog } from '../../store/dialogs/actions';
 import { DIALOGS } from '../../store/dialogs/types';
 import { setUserFeaturedSessions } from '../../store/featured-sessions/actions';
-import { FeaturedSessions } from '../../store/featured-sessions/types';
+import {
+  FeaturedSessionsState,
+  initialFeaturedSessionsState,
+} from '../../store/featured-sessions/state';
 import { showToast } from '../../store/toast/actions';
 import { toggleVideoDialog } from '../../store/ui/actions';
 import { getVariableColor } from '../../utils/functions';
@@ -196,6 +200,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
       },
       featuredSessions: {
         type: Object,
+        value: initialFeaturedSessionsState,
       },
       currentSpeaker: {
         type: String,
@@ -210,7 +215,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
   stateChanged(state: RootState) {
     super.stateChanged(state);
     this.setProperties({
-      featuredSessions: state.featuredSessions.featured,
+      featuredSessions: state.featuredSessions,
       currentSpeaker: state.routing.subRoute,
       user: state.user,
       viewport: state.ui.viewport,
@@ -261,15 +266,17 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
       });
       return;
     }
-    const sessions = Object.assign({}, this.featuredSessions, {
-      [this.session.id]: !this.featuredSessions[this.session.id] ? true : null,
+    const sessions = Object.assign({}, this.featuredSessions.data, {
+      [this.session.id]: !this.featuredSessions.data[this.session.id] ? true : null,
     });
 
     store.dispatch(setUserFeaturedSessions(this.user.uid, sessions));
   }
 
-  _getFeaturedSessionIcon(featuredSessions: FeaturedSessions, sessionId?: string) {
-    return featuredSessions && featuredSessions[sessionId] ? 'bookmark-check' : 'bookmark-plus';
+  _getFeaturedSessionIcon(featuredSessions: FeaturedSessionsState, sessionId?: string) {
+    return featuredSessions instanceof Success && featuredSessions.data[sessionId]
+      ? 'bookmark-check'
+      : 'bookmark-plus';
   }
 
   _dataUpdate() {

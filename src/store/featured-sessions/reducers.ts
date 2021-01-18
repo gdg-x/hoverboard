@@ -1,4 +1,5 @@
-import { initialFeaturedSessionsState } from './state';
+import { Failure, Pending, Success } from '@abraham/remotedata';
+import { FeaturedSessionsState, initialFeaturedSessionsState } from './state';
 import {
   FETCH_USER_FEATURED_SESSIONS,
   FETCH_USER_FEATURED_SESSIONS_FAILURE,
@@ -12,37 +13,19 @@ import {
 export const featuredSessionsReducer = (
   state = initialFeaturedSessionsState,
   action: FeaturedSessionsActions
-) => {
+): FeaturedSessionsState => {
   switch (action.type) {
     case FETCH_USER_FEATURED_SESSIONS:
     case SET_USER_FEATURED_SESSIONS:
-      return {
-        ...state,
-        ...{
-          featuredError: null,
-          featuredFetching: true,
-        },
-      };
+      return new Pending();
 
     case FETCH_USER_FEATURED_SESSIONS_FAILURE:
     case SET_USER_FEATURED_SESSIONS_FAILURE:
-      return {
-        ...state,
-        ...{
-          featuredError: action.payload.error,
-          featuredFetching: false,
-        },
-      };
+      return new Failure(action.payload);
 
     case FETCH_USER_FEATURED_SESSIONS_SUCCESS:
     case SET_USER_FEATURED_SESSIONS_SUCCESS:
-      return {
-        ...state,
-        ...{
-          featured: action.payload.featuredSessions || {},
-          featuredFetching: false,
-        },
-      };
+      return new Success(action.payload);
 
     default:
       return state;

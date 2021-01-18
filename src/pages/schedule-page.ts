@@ -19,6 +19,10 @@ import { RootState, store } from '../store';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
 import { fetchUserFeaturedSessions } from '../store/featured-sessions/actions';
+import {
+  FeaturedSessionsState,
+  initialFeaturedSessionsState,
+} from '../store/featured-sessions/state';
 import { setSubRoute } from '../store/routing/actions';
 import { fetchSchedule } from '../store/schedule/actions';
 import { initialScheduleState, ScheduleState } from '../store/schedule/state';
@@ -154,7 +158,7 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
   @property({ type: Boolean })
   private active = false;
   @property({ type: Object })
-  private featuredSessions = {};
+  private featuredSessions: FeaturedSessionsState = initialFeaturedSessionsState;
   @property({ type: Object })
   private user = {};
   @property({ type: Object })
@@ -180,7 +184,7 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
 
   stateChanged(state: RootState) {
     super.stateChanged(state);
-    this.featuredSessions = state.featuredSessions.featured;
+    this.featuredSessions = state.featuredSessions;
     this.filters = state.filters;
     this.isSessionDialogOpened = isDialogOpen(state.dialogs, DIALOGS.SESSION);
     this.isSpeakerDialogOpened = isDialogOpen(state.dialogs, DIALOGS.SPEAKER);
@@ -212,7 +216,7 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
       active &&
       userUid &&
       sessions instanceof Success &&
-      (!this.featuredSessions || !Object.keys(this.featuredSessions).length)
+      this.featuredSessions instanceof Initialized
     ) {
       store.dispatch(fetchUserFeaturedSessions(userUid));
     }
