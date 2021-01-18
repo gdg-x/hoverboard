@@ -3,7 +3,8 @@ import {
   DELETE_FEEDBACK,
   DELETE_FEEDBACK_FAILURE,
   DELETE_FEEDBACK_SUCCESS,
-  FeedbackActionTypes,
+  FeedbackActions,
+  FeedbackState,
   FETCH_PREVIOUS_FEEDBACK,
   FETCH_PREVIOUS_FEEDBACK_FAILURE,
   FETCH_PREVIOUS_FEEDBACK_SUCCESS,
@@ -13,7 +14,10 @@ import {
   WIPE_PREVIOUS_FEEDBACK,
 } from './types';
 
-export const feedbackReducer = (state = initialFeedbackState, action: FeedbackActionTypes) => {
+export const feedbackReducer = (
+  state = initialFeedbackState,
+  action: FeedbackActions
+): FeedbackState => {
   switch (action.type) {
     case FETCH_PREVIOUS_FEEDBACK:
       return {
@@ -38,11 +42,8 @@ export const feedbackReducer = (state = initialFeedbackState, action: FeedbackAc
         ...state,
         ...{
           fetching: false,
-          [action.payload.collection]: {
-            ...state[action.payload.collection],
-            ...{
-              [action.payload.dbItem]: action.payload.previousFeedback,
-            },
+          ...{
+            [action.payload.sessionId]: action.payload.previousFeedback,
           },
         },
       };
@@ -70,14 +71,11 @@ export const feedbackReducer = (state = initialFeedbackState, action: FeedbackAc
         ...state,
         ...{
           adding: false,
-          [action.payload.collection]: {
-            ...state[action.payload.collection],
-            ...{
-              [action.payload.dbItem]: {
-                contentRating: action.payload.contentRating,
-                styleRating: action.payload.styleRating,
-                comment: action.payload.comment,
-              },
+          ...{
+            [action.payload.sessionId]: {
+              contentRating: action.payload.contentRating,
+              styleRating: action.payload.styleRating,
+              comment: action.payload.comment,
             },
           },
         },
@@ -106,9 +104,7 @@ export const feedbackReducer = (state = initialFeedbackState, action: FeedbackAc
         ...state,
         ...{
           deleting: false,
-          [action.payload.collection]: {
-            [action.payload.dbItem]: null,
-          },
+          [action.payload.sessionId]: null,
         },
       };
 

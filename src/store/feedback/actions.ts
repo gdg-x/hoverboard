@@ -21,7 +21,7 @@ export const addComment = (data: Feedback) => (dispatch: Dispatch) => {
   });
 
   db()
-    .collection(`${data.collection}/${data.dbItem}/feedback`)
+    .collection(`sessions/${data.sessionId}/feedback`)
     .doc(data.userId)
     .set({
       contentRating: data.contentRating,
@@ -49,15 +49,14 @@ export const checkPreviousFeedback = (data: FeedbackId) => (dispatch: Dispatch) 
   });
 
   db()
-    .collection(`${data.collection}/${data.dbItem}/feedback`)
+    .collection(`sessions/${data.sessionId}/feedback`)
     .doc(data.userId)
     .get()
     .then((snapshot) => {
       dispatch({
         type: FETCH_PREVIOUS_FEEDBACK_SUCCESS,
         payload: {
-          collection: data.collection,
-          dbItem: data.dbItem,
+          sessionId: data.sessionId,
           previousFeedback: snapshot.data(),
         },
       });
@@ -77,15 +76,14 @@ export const deleteFeedback = (data: FeedbackId) => (dispatch: Dispatch) => {
   });
 
   db()
-    .collection(`${data.collection}/${data.dbItem}/feedback`)
+    .collection(`sessions/${data.sessionId}/feedback`)
     .doc(data.userId)
     .delete()
     .then(() => {
       dispatch({
         type: DELETE_FEEDBACK_SUCCESS,
         payload: {
-          collection: data.collection,
-          dbItem: data.dbItem,
+          sessionId: data.sessionId,
         },
       });
     })

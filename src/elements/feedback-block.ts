@@ -110,9 +110,7 @@ export class Feedback extends ReduxMixin(PolymerElement) {
   @property({ type: String })
   private comment = '';
   @property({ type: String })
-  private collection: string;
-  @property({ type: String })
-  private dbItem: string;
+  private sessionId: string;
   @property({ type: Object })
   private user: { uid?: string; signedIn?: boolean } = {};
   @property({ type: Object })
@@ -144,8 +142,8 @@ export class Feedback extends ReduxMixin(PolymerElement) {
 
   @observe('feedbackState')
   _updateFeedbackState(feedbackState) {
-    if (feedbackState[this.collection]) {
-      if (this.dbItem) this.previousFeedback = feedbackState[this.collection][this.dbItem];
+    if (feedbackState) {
+      if (this.sessionId) this.previousFeedback = feedbackState[this.sessionId];
     } else {
       this.previousFeedback = undefined;
     }
@@ -154,7 +152,7 @@ export class Feedback extends ReduxMixin(PolymerElement) {
   @observe('user')
   _userChanged(newUser) {
     if (newUser.signedIn) {
-      if (this.dbItem && !this.feedbackFetching) this._dispatchPreviousFeedback();
+      if (this.sessionId && !this.feedbackFetching) this._dispatchPreviousFeedback();
     } else {
       this._clear();
     }
@@ -167,11 +165,11 @@ export class Feedback extends ReduxMixin(PolymerElement) {
     this.showDeleteButton = false;
   }
 
-  @observe('dbItem')
-  _dbItemChanged(newdbItem) {
+  @observe('sessionId')
+  _sessionIdChanged(newSessionId) {
     this._clear();
 
-    if (newdbItem) {
+    if (newSessionId) {
       // Check for previous feedback once the session/speaker id is available
       this._updateFeedbackState(this.feedbackState);
       this._previousFeedbackChanged(this.previousFeedback);
@@ -201,8 +199,7 @@ export class Feedback extends ReduxMixin(PolymerElement) {
     store.dispatch(
       addComment({
         userId: this.user.uid,
-        collection: this.collection,
-        dbItem: this.dbItem,
+        sessionId: this.sessionId,
         contentRating: this.contentRating,
         styleRating: this.styleRating,
         comment: this.comment,
@@ -213,8 +210,7 @@ export class Feedback extends ReduxMixin(PolymerElement) {
   _dispatchPreviousFeedback() {
     store.dispatch(
       checkPreviousFeedback({
-        collection: this.collection,
-        dbItem: this.dbItem,
+        sessionId: this.sessionId,
         userId: this.user.uid,
       })
     );
@@ -223,8 +219,7 @@ export class Feedback extends ReduxMixin(PolymerElement) {
   _dispatchDeleteFeedback() {
     store.dispatch(
       deleteFeedback({
-        collection: this.collection,
-        dbItem: this.dbItem,
+        sessionId: this.sessionId,
         userId: this.user.uid,
       })
     );
