@@ -1,5 +1,9 @@
 import { customElement, observe, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
+import {
+  FeaturedSessionsState,
+  initialFeaturedSessionsState,
+} from '../store/featured-sessions/state';
 import { TempAny } from '../temp-any';
 import { generateClassName } from '../utils/functions';
 import { offsetTop, scrollToY } from '../utils/scrolling';
@@ -149,7 +153,7 @@ export class ScheduleDay extends PolymerElement {
   @property({ type: Object })
   private user = {};
   @property({ type: Object })
-  private featuredSessions = {};
+  private featuredSessions: FeaturedSessionsState = initialFeaturedSessionsState;
   @property({ type: Boolean })
   private onlyFeatured = false;
   @property({ type: Object })

@@ -2,6 +2,11 @@ import { Success } from '@abraham/remotedata';
 import { customElement, observe, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { Schedule } from '../models/schedule';
+import {
+  FeaturedSessionsState,
+  initialFeaturedSessionsState,
+} from '../store/featured-sessions/state';
 import { initialScheduleState, ScheduleState } from '../store/schedule/state';
 import './schedule-day';
 import './shared-styles';
@@ -54,7 +59,7 @@ export class MySchedule extends ReduxMixin(PolymerElement) {
   @property({ type: Array })
   private featuredSchedule = [];
   @property({ type: Object })
-  private featuredSessions = {};
+  private featuredSessions: FeaturedSessionsState = initialFeaturedSessionsState;
   @property({ type: Object })
   private selectedFilters = {};
   @property({ type: String })
@@ -65,15 +70,15 @@ export class MySchedule extends ReduxMixin(PolymerElement) {
   private user = {};
 
   @observe('schedule', 'featuredSessions')
-  _filterSchedule(schedule, featuredSessions) {
-    if (schedule instanceof Success) {
+  _filterSchedule(schedule: Schedule, featuredSessions: FeaturedSessionsState) {
+    if (schedule instanceof Success && featuredSessions instanceof Success) {
       this.featuredSchedule = schedule.data.map((day) =>
         Object.assign({}, day, {
           timeslots: day.timeslots.map((timeslot) =>
             Object.assign({}, timeslot, {
               sessions: timeslot.sessions.map((sessionBlock) =>
                 Object.assign({}, sessionBlock, {
-                  items: sessionBlock.items.filter((session) => featuredSessions[session.id]),
+                  items: sessionBlock.items.filter((session) => featuredSessions.data[session.id]),
                 })
               ),
             })
