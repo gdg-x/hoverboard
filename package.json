@@ -81,7 +81,7 @@
     "core-js": "^3.8.2",
     "deepmerge": "^4.2.2",
     "es-dev-server": "^2.0.2",
-    "eslint": "^7.17.0",
+    "eslint": "^7.18.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-friendly-formatter": "^4.0.1",
