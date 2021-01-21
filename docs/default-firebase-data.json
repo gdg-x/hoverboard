@@ -37,6 +37,15 @@
       "published": "2020-04-17",
       "source": "/data/posts/2020-04-17-corona-sunny-tech-cancelled.md",
       "title": "Sunny Tech 2020 est annulé"
+    },
+    "2021-cancelled": {
+      "backgroundColor": "#888888",
+      "brief": "",
+      "content": "md",
+      "image": "/images/blog/covid19.jpg",
+      "published": "2021-01-21",
+      "source": "/data/posts/2021-01-21-news-cancelled.md",
+      "title": "Sunny Tech 2021 est annulé"
     }
   },
   "notifications": {
