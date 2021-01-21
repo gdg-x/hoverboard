@@ -57,12 +57,13 @@ tr<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
       .action-buttons .watch-video {
         color: #fff;
-        font-size: 18px
+        font-size: 18px;
       }
 
       .action-buttons iron-icon {
         --iron-icon-fill-color: currentColor;
-        margin-right: 8px;
+        /*margin-right: 8px;*/
+        margin-left: 4px;
       }
 
       .scroll-down {
@@ -153,24 +154,35 @@ tr<link rel="import" href="../../bower_components/polymer/polymer-element.html">
         <div class="info-items highlight-font">
           <div class="info-item"><span class="date-bold">{$ heroSettings.home.cancelledSunnyTech $}</span></div>
           <div class="info-item date-bold">{$ heroSettings.home.catchingPhrase $}</div>
+
+          <div class="action-buttons" layout horizontal center-justified wrap>
+            <a href="/blog/posts/2021-cancelled/">
+              <paper-button
+                class="watch-video">
+                {$ heroSettings.home.moreInfo $}
+                <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
+              </paper-button>
+            </a>
+          </div>
+
           <br>
           <div class="info-item">{$ heroSettings.home.description $}</div>
         </div>
 
 
-        <div class="action-buttons" layout horizontal center-justified wrap>
-          <paper-button
-            class="watch-video"
-            on-tap="_playVideo"
-            ga-on="click"
-            ga-event-category="video"
-            ga-event-action="watch"
-            ga-event-label="hero block - view highlights"
-          >
-            <iron-icon icon="hoverboard:play"></iron-icon>
-            {$ viewHighlights $}
-          </paper-button>
-        </div>
+<!--        <div class="action-buttons" layout horizontal center-justified wrap>-->
+<!--          <paper-button-->
+<!--            class="watch-video"-->
+<!--            on-tap="_playVideo"-->
+<!--            ga-on="click"-->
+<!--            ga-event-category="video"-->
+<!--            ga-event-action="watch"-->
+<!--            ga-event-label="hero block - view highlights"-->
+<!--          >-->
+<!--            <iron-icon icon="hoverboard:play"></iron-icon>-->
+<!--            {$ viewHighlights $}-->
+<!--          </paper-button>-->
+<!--        </div>-->
 
         <div class="scroll-down" on-tap="_scrollNextBlock">
           <svg xmlns="http://www.w3.org/2000/svg"  version="1.1" id="Layer_2" x="0px" y="0px" viewBox="0 0 25.166666 37.8704414" enable-background="new 0 0 25.166666 37.8704414" xml:space="preserve">

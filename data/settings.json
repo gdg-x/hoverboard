@@ -46,8 +46,9 @@
   "heroSettings": {
     "home": {
       "description": "#SeaTechAndSun️️",
-      "cancelledSunnyTech": "Sunny Tech 2020 est annulé",
-      "catchingPhrase": "Mais ne vous inquiétez pas, nous nous retrouverons en 2021 ☀",
+      "cancelledSunnyTech": "Sunny Tech 2021 est annulé",
+      "catchingPhrase": "Nous espérons vous retrouver en 2022 ☀",
+      "moreInfo": "Plus d'infos ",
       "background": {
         "color": "#fb4552",
         "image": "/images/backgrounds/home.jpg"
