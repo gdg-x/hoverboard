@@ -5,6 +5,7 @@ import { openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
 import { RootState } from '../store';
 import { ThemedElement } from './themed-element';
+import { Success } from '@abraham/remotedata';
 
 @customElement('auth-required')
 export class AuthRequired extends ReduxMixin(ThemedElement) {
@@ -27,7 +28,7 @@ export class AuthRequired extends ReduxMixin(ThemedElement) {
   }
 
   stateChanged(state: RootState) {
-    this.signedIn = state.user.signedIn;
+    this.signedIn = state.user instanceof Success;
   }
 
   private signIn() {

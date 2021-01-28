@@ -342,8 +342,6 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
   private notifications;
   @property({ type: Boolean })
   private _openedDialog = false;
-  @property({ type: Object })
-  private user = {};
   @property({ type: Array })
   private providerUrls = '{$ signInProviders.allowedProvidersUrl $}'.split(',');
   @property({ type: Boolean })
@@ -381,7 +379,6 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
     this.route = state.routing;
     this.tickets = state.tickets;
     this.ui = state.ui;
-    this.user = state.user;
     this.viewport = state.ui.viewport;
   }
 

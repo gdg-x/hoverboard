@@ -1,4 +1,6 @@
+import { Success } from '@abraham/remotedata';
 import { Dispatch } from 'redux';
+import { RootState } from '..';
 import { db } from '../db';
 import { setLocation } from '../routing/actions';
 import { showToast } from '../toast/actions';
@@ -43,7 +45,7 @@ export const requestPermission = () => (dispatch: Dispatch) => {
     });
 };
 
-export const getToken = (subscribe = false) => (dispatch: Dispatch, getState) => {
+export const getToken = (subscribe = false) => (dispatch: Dispatch, getState: () => RootState) => {
   if (!subscribe && Notification.permission !== 'granted') {
     return;
   }
@@ -51,12 +53,12 @@ export const getToken = (subscribe = false) => (dispatch: Dispatch, getState) =>
     .getToken()
     .then((currentToken) => {
       if (currentToken) {
-        const state = getState();
+        const { user } = getState();
 
         const subscribersRef = db().collection('notificationsSubscribers').doc(currentToken);
         const subscribersPromise = subscribersRef.get();
 
-        const userUid = state.user && (state.user.uid || null);
+        const userUid = (user instanceof Success && user.data.uid) || null;
 
         let userSubscriptionsPromise = Promise.resolve(null);
         let userSubscriptionsRef;

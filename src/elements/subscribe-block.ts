@@ -9,6 +9,7 @@ import { openDialog } from '../store/dialogs/actions';
 import { DialogForm, DIALOGS } from '../store/dialogs/types';
 import { subscribe } from '../store/subscribe/actions';
 import { initialSubscribeState, SubscribeState } from '../store/subscribe/state';
+import { initialUserState, UserState } from '../store/user/state';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -75,9 +76,9 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
 
   @property({ type: Object })
   subscribed: SubscribeState = initialSubscribeState;
-
   @property({ type: Object })
-  private user: { signedIn?: boolean; email?: string; displayName?: string } = {};
+  user: UserState = initialUserState;
+
   @property({ type: Object })
   private viewport = {};
 
@@ -105,16 +106,16 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
       secondFieldValue?: string;
     } = {};
 
-    if (this.user.signedIn) {
-      const fullNameSplit = this.user.displayName.split(' ');
+    if (this.user instanceof Success) {
+      const fullNameSplit = this.user.data.displayName.split(' ');
       userData = {
         firstFieldValue: fullNameSplit[0],
         secondFieldValue: fullNameSplit[1],
       };
     }
 
-    if (this.user.email) {
-      this._subscribeAction(Object.assign({}, { email: this.user.email }, userData));
+    if (this.user instanceof Success) {
+      this._subscribeAction(Object.assign({}, { email: this.user.data.email }, userData));
     } else {
       openDialog(DIALOGS.SUBSCRIBE, {
         title: '{$ subscribeBlock.formTitle $}',

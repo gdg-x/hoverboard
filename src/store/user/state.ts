@@ -1,5 +1,5 @@
-import { UserState } from './types';
+import { Initialized, RemoteData } from '@abraham/remotedata';
+import { User } from '../../models/user';
 
-export const initialUserState: UserState = {
-  signedIn: false,
-};
+export type UserState = RemoteData<Error, User>;
+export const initialUserState: UserState = new Initialized();

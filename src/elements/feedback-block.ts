@@ -7,6 +7,7 @@ import { addComment, checkPreviousFeedback, deleteFeedback } from '../store/feed
 import { RootState, store } from '../store';
 import { showToast } from '../store/toast/actions';
 import { computed, customElement, observe, property } from '@polymer/decorators';
+import { initialUserState, UserState } from '../store/user/state';
 
 @customElement('feedback-block')
 export class Feedback extends ReduxMixin(PolymerElement) {
@@ -112,7 +113,7 @@ export class Feedback extends ReduxMixin(PolymerElement) {
   @property({ type: String })
   private sessionId: string;
   @property({ type: Object })
-  private user: { uid?: string; signedIn?: boolean } = {};
+  private user: UserState = initialUserState;
   @property({ type: Object })
   private previousFeedback: { comment?: string; styleRating?: number; contentRating?: number } = {};
   @property({ type: Boolean, observer: Feedback.prototype._feedbackAddingChanged })

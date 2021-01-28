@@ -1,3 +1,4 @@
+import { Success } from '@abraham/remotedata';
 import { IronOverlayBehavior } from '@polymer/iron-overlay-behavior';
 import { html, PolymerElement } from '@polymer/polymer';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class';
@@ -130,7 +131,7 @@ class SigninDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Poly
 
   _userChanged(user) {
     closeDialog();
-    if (!user.signedIn) {
+    if (user instanceof Success) {
       if (user.initialProviderId && user.pendingCredential) {
         this.isMergeState = true;
         this.email = user.email;

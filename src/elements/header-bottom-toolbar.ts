@@ -1,4 +1,4 @@
-import { Pending } from '@abraham/remotedata';
+import { Pending, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-location/iron-location';
 import { html, PolymerElement } from '@polymer/polymer';
@@ -82,15 +82,20 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
         >
           <template is="dom-repeat" items="[[schedule.data]]" as="day">
             <paper-tab class="nav-item" day="[[day.date]]" link>
-              <a href$="[[_addQueryParams(day.date, queryParams)]]" layout vertical center-center
-                >[[day.dateReadable]]</a
-              >
+              <a href$="[[_addQueryParams(day.date, queryParams)]]" layout vertical center-center>
+                [[day.dateReadable]]
+              </a>
             </paper-tab>
           </template>
-          <paper-tab class="nav-item" day="my-schedule" hidden$="[[!user.signedIn]]" link>
-            <a href$="[[_addQueryParams('my-schedule', queryParams)]]" layout vertical center-center
-              >{$ mySchedule.title $}</a
+          <paper-tab class="nav-item" day="my-schedule" hidden$="[[!signedIn]]" link>
+            <a
+              href$="[[_addQueryParams('my-schedule', queryParams)]]"
+              layout
+              vertical
+              center-center
             >
+              {$ mySchedule.title $}
+            </a>
           </paper-tab>
         </paper-tabs>
       </app-toolbar>
@@ -102,13 +107,13 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
 
   @property({ type: Object })
   private route: RoutingState = initialRoutingState;
-  @property({ type: Object })
-  private user = {};
+  @property({ type: Boolean })
+  private signedIn = false;
 
   stateChanged(state: RootState) {
     this.route = state.routing;
     this.schedule = state.schedule;
-    this.user = state.user;
+    this.signedIn = state.user instanceof Success;
   }
 
   connectedCallback() {

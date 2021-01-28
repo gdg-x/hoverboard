@@ -20,6 +20,7 @@ import {
 } from '../../store/featured-sessions/state';
 import { showToast } from '../../store/toast/actions';
 import { toggleVideoDialog } from '../../store/ui/actions';
+import { initialUserState } from '../../store/user/state';
 import { getVariableColor } from '../../utils/functions';
 import '../feedback-block';
 import '../shared-styles';
@@ -197,6 +198,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
       },
       user: {
         type: Object,
+        value: initialUserState,
       },
       featuredSessions: {
         type: Object,
@@ -256,7 +258,13 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
   _toggleFeaturedSession(event: Event) {
     event.preventDefault();
     event.stopPropagation();
-    if (!this.user.signedIn) {
+    if (this.user instanceof Success) {
+      const sessions = Object.assign({}, this.featuredSessions.data, {
+        [this.session.id]: !this.featuredSessions.data[this.session.id] ? true : null,
+      });
+
+      store.dispatch(setUserFeaturedSessions(this.user.data.uid, sessions));
+    } else {
       showToast({
         message: '{$ schedule.saveSessionsSignedOut $}',
         action: {
@@ -264,13 +272,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
           callback: () => openDialog(DIALOGS.SIGNIN),
         },
       });
-      return;
     }
-    const sessions = Object.assign({}, this.featuredSessions.data, {
-      [this.session.id]: !this.featuredSessions.data[this.session.id] ? true : null,
-    });
-
-    store.dispatch(setUserFeaturedSessions(this.user.uid, sessions));
   }
 
   _getFeaturedSessionIcon(featuredSessions: FeaturedSessionsState, sessionId?: string) {
