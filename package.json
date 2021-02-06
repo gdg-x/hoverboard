@@ -73,7 +73,7 @@
     "@types/google.analytics": "0.0.41",
     "@types/jest": "^26.0.20",
     "@types/jest-dev-server": "^4.2.0",
-    "@types/node": "^12.19.15",
+    "@types/node": "^12.19.16",
     "@types/polymer": "^1.2.9",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
