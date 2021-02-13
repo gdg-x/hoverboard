@@ -1,24 +1,24 @@
 {
-  "title": "GDG DevFest Season 2018",
+  "title": "IWD WTM LATAM 2021",
   "description": "Join the community, learn new things!",
   "image": "images/social-share.jpg",
   "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
-  "dates": "October 12-13, 2018",
+  "dates": "13 de Marzo de 2021",
   "partnershipProposition": "https://bit.ly/dfua17-partners",
-  "share": "Share",
-  "followOur": "Follow our",
-  "followUs": "Follow us",
-  "emailUs": "Email us",
+  "share": "Compartir",
+  "followOur": "Sigue nuestro",
+  "followUs": "Siguenos",
+  "emailUs": "Escribenos",
   "partnershipResources": "Partnership Resources",
   "eventResources": "Event Resources",
-  "buyTicket": "Buy ticket",
+  "buyTicket": "Inscripcion",
   "signIn": "Sign in",
   "signOut": "Sign out",
   "viewHighlights": "View Highlights",
   "offlineMessage": "You can still work offline.",
   "cachingComplete": "Caching complete! Future visits will work offline.",
   "newVersionAvailable": "A new version of this app is available.",
-  "refresh": "Refresh",
+  "refresh": "Refrescar",
   "position": "Position",
   "country": "Country",
   "time": "Time",
@@ -34,7 +34,7 @@
   },
   "footerRelBlock": [
     {
-      "title": "About",
+      "title": "Sobre Nosotros",
       "links": [
         {
           "name": "GDG Lviv",
@@ -59,7 +59,7 @@
       ]
     },
     {
-      "title": "Explore Past DevFests",
+      "title": "Eventos Anteriores",
       "links": [
         {
           "name": "DFUA 2013",
@@ -84,7 +84,7 @@
       ]
     },
     {
-      "title": "Event Resources",
+      "title": "Recursos del Evento",
       "links": [
         {
           "name": "Partnership Proposition",
@@ -107,7 +107,7 @@
           "newTab": true
         },
         {
-          "name": "FAQs",
+          "name": "Preguntas Frecuentes",
           "url": "/faq/",
           "newTab": false
         }
@@ -115,9 +115,9 @@
     }
   ],
   "subscribeNote": "No spam, only the latest news and updates!",
-  "codeOfConduct": "Code of Conduct",
+  "codeOfConduct": "Codigo de Conducta",
   "codeOfConductBlock": {
-    "organization": "DevFest",
+    "organization": "IWD WTM LATAM 2021",
     "form": "https://bit.ly/2RstTJ8",
     "contacts": [
       "Organizer Oleh Zasadnyy, [+38 093 486 6460](tel:+380934866460), o.zasadnyy@gdg.org.ua",
@@ -125,7 +125,7 @@
     ]
   },
   "aboutBlock": {
-    "title": "About",
+    "title": "Sobre Nosotros",
     "callToAction": {
       "featuredSessions": {
         "description": "GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases.",
@@ -158,7 +158,7 @@
     }
   },
   "ticketsBlock": {
-    "title": "Tickets",
+    "title": "Inscripcion",
     "ticketsDetails": "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
     "soldOut": "You missed it!",
     "notAvailableYet": "Not available yet",
@@ -176,7 +176,7 @@
     "toast": "We will contact you soon!"
   },
   "featuredVideos": {
-    "title": "DFUA'16 featured videos",
+    "title": "Videos Destacados",
     "callToAction": {
       "label": "See all videos",
       "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
@@ -330,6 +330,6 @@
     "clear": "Clear all"
   },
   "addToHomeScreen": {
-    "cta": "Add to Home Screen"
+    "cta": "Agregar a Pantalla de Inicio"
   }
 }

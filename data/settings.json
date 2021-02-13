@@ -1,27 +1,27 @@
 {
   "organizer": {
-    "name": "GDG Lviv",
-    "twitter": "gdglviv",
-    "blog": "https://medium.com/gdg-lviv",
-    "url": "http://lviv.gdg.org.ua/"
+    "name": "IWD WTM LATAM 2021",
+    "twitter": "",
+    "blog": "",
+    "url": "https://gdg.community.dev/events/details/google-gdg-buenos-aires-presents-iwd-latam-2021-international-womens-day/#/"
   },
-  "startDate": "2017-10-013T09:00:00+03:00",
-  "endDate": "2017-10-14T19:00:00+03:00",
+  "startDate": "2021-03-133T08:00:00+05:00",
+  "endDate": "2021-03-13T19:20:00+05:00",
   "webapp": {
-    "shortName": "DevFest",
+    "shortName": "IWD LATAM 2020",
     "themeColor": "#673AB7",
     "backgroundColor": "#673AB7"
   },
   "dateFormat": {
-    "locale": "en-US"
+    "locale": "es-US"
   },
-  "hashtag": "DevFest",
+  "hashtag": "#CourageToCreate",
   "disabledSchedule": false,
   "navigation": [
     {
       "route": "home",
       "permalink": "/",
-      "label": "Home"
+      "label": "Inicio"
     },
     {
       "route": "speakers",
@@ -31,12 +31,12 @@
     {
       "route": "schedule",
       "permalink": "/schedule/",
-      "label": "Schedule"
+      "label": "Agenda"
     },
     {
       "route": "team",
       "permalink": "/team/",
-      "label": "Team"
+      "label": "Equipo"
     },
     {
       "route": "blog",
@@ -79,7 +79,7 @@
       "fontColor": "#424242"
     },
     "schedule": {
-      "title": "Schedule",
+      "title": "Agenda",
       "metaDescription": "Choose your sessions to visit",
       "background": {
         "color": "#fff"
@@ -87,7 +87,7 @@
       "fontColor": "#424242"
     },
     "team": {
-      "title": "Team",
+      "title": "Equipo",
       "metaDescription": "Get more info about organizers",
       "background": {
         "color": "#fff"
@@ -95,7 +95,7 @@
       "fontColor": "#424242"
     },
     "faq": {
-      "title": "FAQs",
+      "title": "Preguntas Frecuentes",
       "metaDescription": "Find you answer right here!",
       "background": {
         "color": "#fff"
@@ -103,7 +103,7 @@
       "fontColor": "#424242"
     },
     "coc": {
-      "title": "Code of Conduct",
+      "title": "Codigo de Conducta",
       "metaDescription": "Learn more about our expectations for all those who participate in our community",
       "background": {
         "color": "#fff"
@@ -178,7 +178,7 @@
       }
     ]
   },
-  "mailto": "devfest@gdg.org.ua",
+  "mailto": "info@wtmlatam.com",
   "signInProviders": {
     "providersData": [
       {

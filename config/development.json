@@ -1,16 +1,17 @@
 {
   "basepath": "/",
-  "url": "https://hoverboard-dev.web.app/",
-  "analytics": "UA-43643469-8",
+  "url": "https://iwd-wtm-latam.web.app/",
+  "analytics": "UA-189729631",
   "prefix": "/",
   "firebase": {
-    "apiKey": "AIzaSyAKOkGjmfBPTuYlDyPxlrSj7H-1oqWET7E",
-    "appId": "1:1083195713896:web:9aed8296d8d642cb",
-    "authDomain": "hoverboard-dev.web.app",
-    "databaseURL": "https://hoverboard-dev.firebaseio.com",
-    "messagingSenderId": "1083195713896",
-    "projectId": "hoverboard-dev",
-    "storageBucket": "hoverboard-dev.appspot.com"
+    "apiKey": "AIzaSyCYpcll7Zfvs3SS4yVQa5muAMxmcpR6HvE",
+    "appId": "1:710667102117:web:8dc89083b5132f7b2bea4c",
+    "authDomain": "iwd-wtm-latam.firebaseapp.com",
+    "databaseURL": "https://iwd-wtm-latam.firebaseio.com",
+    "messagingSenderId": "710667102117",
+    "projectId": "iwd-wtm-latam",
+    "storageBucket": "iwd-wtm-latam.appspot.com",
+    "measurementId": "G-WCTHQR44Q4"
   },
-  "googleMapApiKey": "AIzaSyAKOkGjmfBPTuYlDyPxlrSj7H-1oqWET7E"
+  "googleMapApiKey": "AIzaSyCYpcll7Zfvs3SS4yVQa5muAMxmcpR6HvE"
 }
