@@ -75,7 +75,7 @@ export class FooterNav extends PolymerElement {
         </a>
 
         <div class="copyright">
-          Based on
+          Sitio basado en
           <a href="https://github.com/gdg-x/hoverboard" target="_blank" rel="noopener noreferrer"
             >Project Hoverboard</a
           >

@@ -98,30 +98,24 @@
   "codeOfConduct": "Código de Conducta",
   "codeOfConductBlock": {
     "organization": "IWD WTM LATAM 2021",
-    "form": "https://bit.ly/2RstTJ8",
+    "form": "",
     "contacts": [
-      "Organizer Oleh Zasadnyy, [+38 093 486 6460](tel:+380934866460), o.zasadnyy@gdg.org.ua",
-      "Organizer Sofiya Huts, [+38 093 486 1425](tel:+380934861425), s.huts@gdg.org.ua"
+      "Email: info@wtmlatam.com"
     ]
   },
   "aboutBlock": {
     "title": "Sobre Nosotros",
     "callToAction": {
       "featuredSessions": {
-        "description": "GDG DevFest Ukraine brings together the world class experts in Android, Web and Cloud technologies to Lviv for 2 days of sessions, workshops and showcases.",
-        "label": "Explore featured session",
-        "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
-      },
-      "howItWas": {
-        "description": "Described by many as 'Google I/O of Ukraine', our team creates DevFest to be the best place for experience sharing in a phenomenal atmosphere.",
-        "label": "See how it was in 2016",
-        "youtubeId": "TdpbgRgz6eE"
+        "description": "El International Women's Day Latam 2021 se realizará el 13 de marzo, tiene como objetivo reunir mujeres y aliados del mundo de la técnología, promoviendo el desarrollo de mujeres, por medio de charlas inspiradoras y técnicas. El evento será organizado por las embajadoras y  miembros de Women Techmakers y GDGs de de America Latina.",
+        "label": "Más sobre IWD",
+        "link": "https://www.womentechmakers.com/events/iwd"
       }
     },
     "statisticsBlock": {
       "attendees": {
-        "label": "Attendees",
-        "number": "900"
+        "label": "Asistentes",
+        "number": "1000+"
       },
       "days": {
         "label": "Día",
