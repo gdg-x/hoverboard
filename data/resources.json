@@ -2,43 +2,43 @@
   "title": "IWD WTM LATAM 2021",
   "description": "Join the community, learn new things!",
   "image": "images/social-share.jpg",
-  "keywords": "event, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
+  "keywords": "event, wtm, iwd, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
   "dates": "13 de Marzo de 2021",
-  "partnershipProposition": "https://bit.ly/dfua17-partners",
+  "partnershipProposition": "",
   "share": "Compartir",
   "followOur": "Sigue nuestro",
   "followUs": "Siguenos",
   "emailUs": "Escribenos",
-  "partnershipResources": "Partnership Resources",
+  "partnershipResources": "Recursos para Sponsors",
   "eventResources": "Event Resources",
   "buyTicket": "Inscripcion",
-  "signIn": "Sign in",
-  "signOut": "Sign out",
-  "viewHighlights": "View Highlights",
-  "offlineMessage": "You can still work offline.",
-  "cachingComplete": "Caching complete! Future visits will work offline.",
-  "newVersionAvailable": "A new version of this app is available.",
+  "signIn": "Iniciar sesión",
+  "signOut": "Cerrar sesión",
+  "viewHighlights": "Ver Destacados",
+  "offlineMessage": "No hay Internet, pero puedes seguir trabajando offline.",
+  "cachingComplete": "¡Caching completado! Futuras visitas podrán ser realizadas aunque no tengas conexión a Internet.",
+  "newVersionAvailable": "Una nueva versión del sitio esta disponible.",
   "refresh": "Refrescar",
-  "position": "Position",
-  "country": "Country",
-  "time": "Time",
+  "position": "Posición",
+  "country": "País",
+  "time": "Hora",
   "faq": "/data/faq.md",
   "coc": "/data/coc.md",
   "timezoneOffset": "-180",
   "footer": {
-    "blog": "Blog"
+    "blog": "Noticias"
   },
   "mySchedule": {
-    "title": "My Schedule",
-    "browseSession": "Browse sessions"
+    "title": "Mi Agenda",
+    "browseSession": "Ver sesiones"
   },
   "footerRelBlock": [
     {
       "title": "Sobre Nosotros",
       "links": [
         {
-          "name": "GDG Lviv",
-          "url": "http://lviv.gdg.org.ua/",
+          "name": "IWD WTM LATAM",
+          "url": "http://iwd.wtmlatam.com/",
           "newTab": true
         },
         {
@@ -62,23 +62,8 @@
       "title": "Eventos Anteriores",
       "links": [
         {
-          "name": "DFUA 2013",
-          "url": "http://gdg-devfest-ua.appspot.com/",
-          "newTab": true
-        },
-        {
-          "name": "DFUA 2014",
-          "url": "https://dfua14.firebaseapp.com//",
-          "newTab": true
-        },
-        {
-          "name": "DFUA 2015",
-          "url": "https://dfua15.firebaseapp.com/",
-          "newTab": true
-        },
-        {
-          "name": "DFUA 2016",
-          "url": "https://dfua16.firebaseapp.com/",
+          "name": "IWD 2020",
+          "url": "",
           "newTab": true
         }
       ]
@@ -87,23 +72,18 @@
       "title": "Recursos del Evento",
       "links": [
         {
-          "name": "Partnership Proposition",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
+          "name": "Propuesta Para Sponsors",
+          "url": "",
           "newTab": true
         },
         {
-          "name": "Info Partnership Proposition",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
-          "newTab": true
-        },
-        {
-          "name": "Media Kit",
-          "url": "https://devfest.gdg.org.ua/assets/GDG_DevFest_2016_partnership_proposition.pdf",
+          "name": "Kit Para Medios",
+          "url": "",
           "newTab": true
         },
         {
           "name": "Call for Papers",
-          "url": "https://drive.google.com/open?id=10tPuu_7ASM8C70SotqRqIW5Uzos9BzALilMMQPg_JvA",
+          "url": "https://l.facebook.com/l.php?u=https%3A%2F%2Fforms.gle%2F5DiLPstqrcyQhKrA7%3Ffbclid%3DIwAR2DveHtSp8Xzd4o_1fZC0d_ztaEkXCZr3b2wwTBPj4qCJxkVCskp3IwoaY&h=AT2zKxPUy02AKnJnFJCSaTuld4XXLNHTrsMvaS_LHoqvSBS9tIyr-cY0jKHrLiopZ3tTaqttjMW5dOybI_5PaZNBjEDQbXigoDw2nb3XSjXlSoHDSc5ymTZ85UZ2Q8DJj104f0c&__tn__=-UK-R&c[0]=AT1miFEJDfcG2Hx94CUquAybMHGd8WKKQIyvn1CyjTBY34L3fmAJspqq5SHih2sBXrKko-GhoyCftGMSACXCCaIIBlZsYRIN5tdth-YsVl4DcbEdcQJzTiMf5i-O28A7fp8w_r82cdqKFGmV-R7vwDz1LsFh6A0Mm78IYYQI0bzl4RY",
           "newTab": true
         },
         {
@@ -115,7 +95,7 @@
     }
   ],
   "subscribeNote": "No spam, only the latest news and updates!",
-  "codeOfConduct": "Codigo de Conducta",
+  "codeOfConduct": "Código de Conducta",
   "codeOfConductBlock": {
     "organization": "IWD WTM LATAM 2021",
     "form": "https://bit.ly/2RstTJ8",
@@ -144,112 +124,112 @@
         "number": "900"
       },
       "days": {
-        "label": "Days",
-        "number": "2"
+        "label": "Día",
+        "number": "1"
       },
       "sessions": {
-        "label": "Sessions",
-        "number": "50"
+        "label": "Charlas",
+        "number": "20+"
       },
       "tracks": {
-        "label": "Tracks",
+        "label": "Escenarios (Track)",
         "number": "4"
       }
     }
   },
   "ticketsBlock": {
-    "title": "Inscripcion",
-    "ticketsDetails": "Tickets grant access to all conference sections, coffee breaks, lunch and party. Accommodation is NOT included in the ticket price.",
-    "soldOut": "You missed it!",
-    "notAvailableYet": "Not available yet",
-    "save": "Save ${discount}% today"
+    "title": "Inscripción",
+    "ticketsDetails": "Inscripción Gratuita",
+    "soldOut": "¡Te lo perdiste!",
+    "notAvailableYet": "Aun no disponible.",
+    "save": "Ahorra ${discount}% hoy"
   },
   "partnersBlock": {
-    "title": "Partners",
-    "button": "Become a partner",
+    "title": "Sponsors",
+    "button": "Sé un sponsor",
     "form": {
-      "title": "Become a partner!",
-      "submitLabel": "Submit",
-      "fullName": "Full Name",
-      "companyName": "Company Name"
+      "title": "Quiero ser Sponsor",
+      "submitLabel": "Enviar",
+      "fullName": "Nombre Completo",
+      "companyName": "Nombre de la Compañía"
     },
-    "toast": "We will contact you soon!"
+    "toast": "¡Gracias. Muy pronto estarémos en contacto!"
   },
   "featuredVideos": {
     "title": "Videos Destacados",
     "callToAction": {
-      "label": "See all videos",
-      "link": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+      "label": "Ver todos los videos",
+      "link": ""
     }
   },
   "blog": {
-    "published": "Published",
-    "suggested": "Up next"
+    "published": "Publicado en",
+    "suggested": "Sugerido"
   },
   "latestPostsBlock": {
-    "title": "The latest news",
+    "title": "Últimas noticias",
     "callToAction": {
-      "label": "View all stories",
+      "label": "Ver todas las historias",
       "link": "/blog/"
     }
   },
   "speakers": {
-    "skills": "Skills",
-    "previousYears": "Years",
-    "previousYear": "Year"
+    "skills": "Habilidades",
+    "previousYears": "Años",
+    "previousYear": "Año"
   },
   "speakersBlock": {
     "title": "Speakers",
     "callToAction": {
-      "label": "View all speakers",
+      "label": "Ver todos los speakers",
       "link": "/speakers/"
     }
   },
   "previousSpeakersBlock": {
-    "title": "Previous speakers",
+    "title": "Speakers anteriores",
     "callToAction": {
-      "label": "View all",
+      "label": "Ver todos",
       "link": "/previous-speakers/"
     }
   },
   "galleryBlock": {
-    "title": "#dfua16 highlights",
-    "description": "This year's festival built lots of excitement. Check out photos from featured talks, hands-on learning sessions, and after-hours fun.",
+    "title": "Contenido destacado de nuestro #IWD2020",
+    "description": "En 2020 el IWD fué organizado y llevado a cabo por varias comunidades de LATAM, y fué un día lleno de charlas, mucho aprendizaje, inspiración y empoderamiento.",
     "callToAction": {
-      "label": "See all photos",
+      "label": "Ver todas las fotos",
       "link": "https://goo.gl/photos/H8s3CtPexCzkLqSt9"
     }
   },
   "mapBlock": {
-    "title": "Location"
+    "title": "Ubicación"
   },
   "subscribeBlock": {
     "callToAction": {
-      "description": "Get notified about the important conference updates",
-      "label": "Subscribe"
+      "description": "Entérate de noticias importantes sobre el evento",
+      "label": "Suscribirse"
     },
-    "yourEmail": "Your email",
-    "emailAddress": "Email Address",
-    "firstName": "First Name",
-    "lastName": "Last Name",
-    "formTitle": "Get the latest updates, insights and news about GDG DevFest Ukraine sent to your inbox.",
-    "emailRequired": "Please enter a valid email address.",
-    "subscribe": "Subscribe",
-    "subscribed": "Subscribed",
-    "close": "Close",
-    "generalError": "An error has occurred. Please, try again later.",
-    "toast": "Successfully subscribed!"
+    "yourEmail": "Email",
+    "emailAddress": "Dirección de Email",
+    "firstName": "Primer Nombre",
+    "lastName": "Apellido",
+    "formTitle": "Entérate de noticias importantes sobre el evento IWD LATAM 2021 en tu inbox.",
+    "emailRequired": "Por favor introduce una dirección de email válida.",
+    "subscribe": "Subscribirse",
+    "subscribed": "Suscrito",
+    "close": "Cerrar",
+    "generalError": "Ocurrión un error. Por favor inténtalo de nuevo.",
+    "toast": "¡Te has inscrito con éxito!"
   },
   "team": {
     "description": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT."
   },
   "schedule": {
-    "saveSessionsSignedOut": "Sign in to save sessions"
+    "saveSessionsSignedOut": "Inicia sesión para guardar tus charlas"
   },
   "feedback": {
-    "save": "Save",
-    "headline": "Review session",
-    "leaveFeedback": "to leave feedback",
+    "save": "Guardar",
+    "headline": "Evaluar charla",
+    "leaveFeedback": "para dejar sugerencias",
     "sendFeedbackSignedOut": "Sign in to leave feedback",
     "feedbackRecorded": "Your saved",
     "feedbackDeleted": "Feedback deleted",
@@ -267,10 +247,10 @@
     "speakers": "Speakers"
   },
   "speakerDetails": {
-    "sessions": "Sessions"
+    "sessions": "Charlas"
   },
   "notifications": {
-    "default": "Enable notifications",
+    "default": "Habilitar notificaciones",
     "enabled": "We will miss you but you can unsubscribe anytime",
     "blocked": "We can't send you notifications right now. Please enable notifications in your browser",
     "subscribe": "Subscribe",
@@ -295,39 +275,48 @@
         }
       },
       {
-        "title": "What is a GDG?",
+        "title": "¿Qué es WomenTechmakers?",
+        "description": "Google’s Women Techmakers program provides visibility, community, and resources for women in technology.",
+        "callToAction": {
+          "label": "Ver más",
+          "link": "https://www.womentechmakers.com/",
+          "newTab": true
+        }
+      },
+      {
+        "title": "¿Qué es un GDG?",
         "description": "A Google Developer Group is a community of volunteers who create exciting projects and share experiences about Google technologies.",
         "callToAction": {
-          "label": "Read more",
+          "label": "Ver más",
           "link": "https://developers.google.com/groups/",
           "newTab": true
         }
       },
       {
-        "title": "What is DevFest?",
-        "description": "DevFests are community-led developer events hosted by Google Developer Groups around the globe.",
+        "title": "¿Qué es IWD?",
+        "description": "Since 2013, the Women Techmakers team has convened over 200 global events across 52 countries annually to drive visibility, community, and resources for women in technology in honor of International Women’s Day (IWD).",
         "callToAction": {
-          "label": "Read more",
-          "link": "https://devfest.withgoogle.com/",
+          "label": "Ver más",
+          "link": "https://www.womentechmakers.com/events/iwd",
           "newTab": true
         }
       }
     ]
   },
   "signInDialog": {
-    "alreadyHaveAccount": "You already have an account",
-    "alreadyUsed": "You've already used",
+    "alreadyHaveAccount": "Ya tienes una cuenta",
+    "alreadyUsed": "Ya has utilizado",
     "signInToContinue": {
-      "part1": "Sign in with",
-      "part2": "to continue."
+      "part1": "Inicia sesión con",
+      "part2": "para continuar."
     }
   },
   "filters": {
-    "title": "Filters",
-    "results": "Results",
-    "tags": "Tags",
-    "complexity": "Complexity",
-    "clear": "Clear all"
+    "title": "Filtrar",
+    "results": "Resulados",
+    "tags": "Etiquetas",
+    "complexity": "Nivel",
+    "clear": "Limpiar todo"
   },
   "addToHomeScreen": {
     "cta": "Agregar a Pantalla de Inicio"

@@ -41,12 +41,12 @@
     {
       "route": "blog",
       "permalink": "/blog/",
-      "label": "Blog"
+      "label": "Noticias"
     }
   ],
   "heroSettings": {
     "home": {
-      "description": "Join the commuity, learn new things!",
+      "description": "¡Regístrate ya y no te pierdas este súper evento!",
       "background": {
         "color": "#673ab7",
         "image": "/images/backgrounds/home.jpg"
@@ -54,8 +54,8 @@
       "fontColor": "#FFF"
     },
     "blog": {
-      "title": "Blog",
-      "metaDescription": "Read stories from our team",
+      "title": "Noticias",
+      "metaDescription": "Lee noticias publicadas por nuestro equipo",
       "background": {
         "color": "#FFF"
       },
@@ -114,19 +114,19 @@
   "location": {
     "label": "Location",
     "name": "Planeta kino",
-    "city": "Lviv",
-    "short": "Lviv, Ukraine",
-    "address": "36 Shchyretska St, Lviv, Ukraine",
+    "city": "Latinoamérica",
+    "short": "LATAM",
+    "address": "Latinoamérica",
     "pointer": {
-      "latitude": 49.809841,
-      "longitude": 23.972805,
-      "zoom": 5
+      "latitude": -3.1862983,
+      "longitude": -74.4076651,
+      "zoom": 3
     },
     "mapCenter": {
-      "latitude": 48,
-      "longitude": 8
+      "latitude": -3,
+      "longitude": -74
     },
-    "description": "Newly built Pivdennyi Expo is a long-awaited exhibition center in Lviv, which can fulfill the needs of the large-scale event"
+    "description": "Evento 100% en línea."
   },
   "mediaQueries": {
     "xs": {
@@ -148,23 +148,23 @@
     "follow": [
       {
         "name": "meetup",
-        "url": "https://www.meetup.com/GDG-Lviv/events/244342635/"
+        "url": ""
       },
       {
         "name": "facebook",
-        "url": "https://www.facebook.com/devfest.ukraine/"
+        "url": ""
       },
       {
         "name": "twitter",
-        "url": "https://twitter.com/devfest_ukraine/"
+        "url": ""
       },
       {
         "name": "instagram",
-        "url": "https://www.instagram.com/devfestukraine"
+        "url": ""
       },
       {
         "name": "youtube",
-        "url": "https://www.youtube.com/playlist?list=PLt8lEzcLNl31AouwDkbLbLARlQFwNS2en"
+        "url": ""
       }
     ],
     "share": [
@@ -183,7 +183,7 @@
     "providersData": [
       {
         "name": "google",
-        "label": "Sign in with Google",
+        "label": "Inicia sesión con Google",
         "url": "https://accounts.google.com"
       }
     ],
