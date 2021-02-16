@@ -3,8 +3,8 @@ import { css } from 'lit-element';
 export const theme = css`
   :host {
     --dark-primary-color: #512da8;
-    --default-primary-color: #673ab7;
-    --focused-color: #311b92;
+    --default-primary-color: #4285f4;
+    --focused-color: #ff7370;
     --light-primary-color: #d1c4e9;
     --text-primary-color: #ffffff;
     --accent-color: #ff5252;
@@ -40,7 +40,7 @@ export const theme = css`
     --max-container-width: 1280px;
 
     --primary-color-transparent: rgba(103, 58, 183, 0.1);
-    --primary-color-light: rgba(103, 58, 183, 0.8);
+    --primary-color-light: #ff7370;
     --primary-color-white: #ede7f6;
 
     /* Labels */
