@@ -36,7 +36,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
 
         .hero-logo {
           --iron-image-width: 100%;
-          max-width: 240px;
+          max-width: max-content;
         }
 
         .info-items {
@@ -124,7 +124,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           }
 
           .hero-logo {
-            max-width: 320px;
+            max-width: max-content;
           }
 
           .info-items {
@@ -148,7 +148,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
         <div class="home-content" layout vertical center>
           <plastic-image
             class="hero-logo"
-            srcset="/images/logo.svg"
+            srcset="/images/LogoHero.png"
             alt="{$ title $}"
           ></plastic-image>
           <div class="info-items">
