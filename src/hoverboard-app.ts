@@ -30,7 +30,6 @@ import { log } from './console';
 import './elements/dialogs/feedback-dialog';
 import './elements/dialogs/previous-speaker-details';
 import './elements/dialogs/session-details';
-import './elements/dialogs/signin-dialog';
 import './elements/dialogs/speaker-details';
 import './elements/dialogs/subscribe-dialog';
 import './elements/dialogs/video-dialog';
@@ -316,8 +315,6 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
       >
       </subscribe-dialog>
 
-      <signin-dialog opened="[[isSigninDialogOpen]]" with-backdrop></signin-dialog>
-
       <hoverboard-analytics></hoverboard-analytics>
       <toast-element></toast-element>
     `;
@@ -344,8 +341,6 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
   private _openedDialog = false;
   @property({ type: Object })
   private user = {};
-  @property({ type: Array })
-  private providerUrls = '{$ signInProviders.allowedProvidersUrl $}'.split(',');
   @property({ type: Boolean })
   private isPhoneSize = false;
   @property({ type: Boolean })
@@ -356,8 +351,6 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
   private subRoute = {};
   @property({ type: Object })
   private routeData = {};
-  @property({ type: Boolean })
-  private isSigninDialogOpen = false;
   @property({ type: Boolean })
   private isSpeakerDialogOpen = false;
   @property({ type: Boolean })
@@ -371,7 +364,6 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
 
   stateChanged(state: RootState) {
     this.dialogs = state.dialogs;
-    this.isSigninDialogOpen = isDialogOpen(this.dialogs, DIALOGS.SIGNIN);
     this.isSpeakerDialogOpen = isDialogOpen(this.dialogs, DIALOGS.SPEAKER);
     this.isPreviousSpeakerDialogOpen = isDialogOpen(this.dialogs, DIALOGS.PREVIOUS_SPEAKER);
     this.isSessionDialogOpen = isDialogOpen(this.dialogs, DIALOGS.SESSION);

@@ -24,24 +24,9 @@
       "label": "Inicio"
     },
     {
-      "route": "speakers",
-      "permalink": "/speakers/",
-      "label": "Speakers"
-    },
-    {
-      "route": "schedule",
-      "permalink": "/schedule/",
-      "label": "Agenda"
-    },
-    {
       "route": "team",
       "permalink": "/team/",
       "label": "Equipo"
-    },
-    {
-      "route": "blog",
-      "permalink": "/blog/",
-      "label": "Noticias"
     }
   ],
   "heroSettings": {
@@ -179,26 +164,9 @@
     ]
   },
   "mailto": "info@wtmlatam.com",
-  "signInProviders": {
-    "providersData": [
-      {
-        "name": "google",
-        "label": "Inicia sesión con Google",
-        "url": "https://accounts.google.com"
-      }
-    ],
-    "allowedProvidersUrl": [
-      "https://accounts.google.com",
-      "https://www.facebook.com",
-      "https://twitter.com"
-    ]
-  },
   "contentLoaders": {
     "schedule": {
       "itemsCount": 2
-    },
-    "blog": {
-      "itemsCount": 3
     },
     "speakers": {
       "itemsCount": 4

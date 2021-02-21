@@ -1,19 +1,12 @@
 import { Success } from '@abraham/remotedata';
 import { computed, customElement, observe, property } from '@polymer/decorators';
-import { PaperMenuButton } from '@polymer/paper-menu-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { RootState, store } from '../store';
-import { closeDialog, openDialog } from '../store/dialogs/actions';
+import { RootState } from '../store';
 import { initialDialogState } from '../store/dialogs/state';
-import { DIALOGS } from '../store/dialogs/types';
-import { requestPermission, unsubscribe } from '../store/notifications/actions';
-import { NOTIFICATIONS_STATUS } from '../store/notifications/types';
 import { initialRoutingState, RoutingState } from '../store/routing/state';
 import { initialTicketsState, TicketsState } from '../store/tickets/state';
-import { signOut } from '../store/user/actions';
 import { TempAny } from '../temp-any';
-import { isDialogOpen } from '../utils/dialogs';
 import './shared-styles';
 
 @customElement('header-toolbar')
@@ -53,7 +46,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
 
         .toolbar-logo {
           display: block;
-          width: 150px;
+          width: 180px;
           height: 32px;
           background-color: var(--default-primary-color);
           transition: background-color var(--animation);
@@ -67,8 +60,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           }
         }
 
-        .nav-item a,
-        .signin-tab {
+        .nav-item a {
           padding: 0 14px;
           color: inherit;
           text-transform: uppercase;
@@ -171,10 +163,6 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           </paper-tab>
           {% endfor %}
 
-          <paper-tab class="signin-tab" on-click="signIn" link hidden$="[[user.signedIn]]"
-            >{$ signIn $}</paper-tab
-          >
-
           <a
             href$="[[ticketUrl]]"
             target="_blank"
@@ -187,82 +175,6 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           </a>
         </paper-tabs>
 
-        <paper-menu-button
-          id="notificationsMenu"
-          class="notifications-menu"
-          vertical-align="top"
-          horizontal-align="right"
-          no-animations
-        >
-          <paper-icon-button
-            icon="hoverboard:[[_getNotificationsIcon(notifications.status)]]"
-            slot="dropdown-trigger"
-          ></paper-icon-button>
-          <div class="dropdown-panel" slot="dropdown-content">
-            <div hidden$="[[_hideNotificationBlock(notifications.status, 'DEFAULT')]]">
-              <p>{$ notifications.default $}</p>
-              <div class="panel-actions" layout horizontal end-justified>
-                <paper-button primary-text on-click="_toggleNotifications"
-                  >{$ notifications.subscribe $}</paper-button
-                >
-              </div>
-            </div>
-            <div hidden$="[[_hideNotificationBlock(notifications.status, 'GRANTED')]]">
-              <p>{$ notifications.enabled $}</p>
-              <div class="panel-actions" layout horizontal end-justified>
-                <paper-button primary-text on-click="_toggleNotifications"
-                  >{$ notifications.unsubscribe $}</paper-button
-                >
-              </div>
-            </div>
-            <div hidden$="[[_hideNotificationBlock(notifications.status, 'DENIED')]]">
-              <p>{$ notifications.blocked $}</p>
-              <div class="panel-actions" layout horizontal end-justified>
-                <a href="{$ notifications.enable.link $}" target="_blank" rel="noopener noreferrer">
-                  <paper-button primary-text on-click="_closeNotificationMenu"
-                    >{$ notifications.enable.label $}
-                  </paper-button>
-                </a>
-              </div>
-            </div>
-          </div>
-        </paper-menu-button>
-
-        <paper-menu-button
-          class="auth-menu"
-          hidden$="[[!user.signedIn]]"
-          vertical-align="top"
-          horizontal-align="right"
-          no-animations
-          layout
-          horizontal
-          center-center
-        >
-          <div
-            class="profile-image"
-            slot="dropdown-trigger"
-            style$="background-image: url('[[user.photoURL]]')"
-          ></div>
-          <div class="dropdown-panel profile-details" slot="dropdown-content" layout horizontal>
-            <div
-              class="profile-image"
-              slot="dropdown-trigger"
-              self-center
-              style$="background-image: url('[[user.photoURL]]')"
-            ></div>
-            <div layout vertical center-justified>
-              <span class="profile-name">[[user.displayName]]</span>
-              <span class="profile-email">[[user.email]]</span>
-              <span class="profile-action" role="button" on-click="_signOut">{$ signOut $}</span>
-            </div>
-          </div>
-        </paper-menu-button>
-
-        <paper-icon-button
-          icon="hoverboard:account"
-          on-click="signIn"
-          hidden$="[[_isAccountIconHidden(user.signedIn, viewport.isLaptopPlus)]]"
-        ></paper-icon-button>
       </app-toolbar>
     `;
   }
@@ -281,15 +193,12 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private dialogs = initialDialogState;
   @property({ type: Object })
-  private notifications: { token?: string; status?: string } = {};
-  @property({ type: Object })
   private user = {};
   @property({ type: Boolean, reflectToAttribute: true })
   private transparent = false;
 
   stateChanged(state: RootState) {
     this.dialogs = state.dialogs;
-    this.notifications = state.notifications;
     this.route = state.routing;
     this.user = state.user;
     this.tickets = state.tickets;
@@ -314,53 +223,8 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
     this.drawerOpened = true;
   }
 
-  signIn() {
-    openDialog(DIALOGS.SIGNIN);
-  }
-
-  _signOut() {
-    signOut();
-  }
-
   _onScroll() {
     this.transparent = document.documentElement.scrollTop === 0;
-  }
-
-  @observe('user.signedIn')
-  _authStatusChanged(_signedIn) {
-    if (isDialogOpen(this.dialogs, DIALOGS.SIGNIN)) {
-      closeDialog();
-    }
-  }
-
-  _toggleNotifications() {
-    this._closeNotificationMenu();
-    if (this.notifications.status === NOTIFICATIONS_STATUS.GRANTED) {
-      store.dispatch(unsubscribe(this.notifications.token));
-      return;
-    }
-    store.dispatch(requestPermission());
-  }
-
-  _getNotificationsIcon(status) {
-    return status === NOTIFICATIONS_STATUS.DEFAULT
-      ? 'bell-outline'
-      : status === NOTIFICATIONS_STATUS.GRANTED
-      ? 'bell'
-      : 'bell-off';
-  }
-
-  _hideNotificationBlock(status, blockStatus) {
-    return status !== NOTIFICATIONS_STATUS[blockStatus];
-  }
-
-  _closeNotificationMenu() {
-    // TODO: Remove type cast
-    (this.$.notificationsMenu as PaperMenuButton).close();
-  }
-
-  _isAccountIconHidden(userSignedIn, isTabletPlus) {
-    return userSignedIn || isTabletPlus;
   }
 
   @computed('tickets')
