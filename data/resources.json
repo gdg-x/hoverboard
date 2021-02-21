@@ -7,8 +7,8 @@
   "partnershipProposition": "",
   "share": "Compartir",
   "followOur": "Sigue nuestro",
-  "followUs": "Siguenos",
-  "emailUs": "Escribenos",
+  "followUs": "Síguenos",
+  "emailUs": "Escríbenos",
   "partnershipResources": "Recursos para Sponsors",
   "eventResources": "Event Resources",
   "buyTicket": "Inscripcion",
@@ -37,8 +37,13 @@
       "title": "Sobre Nosotros",
       "links": [
         {
-          "name": "IWD WTM LATAM",
-          "url": "http://iwd.wtmlatam.com/",
+          "name": "International Women's Day",
+          "url": "https://www.womentechmakers.com/events/iwd/",
+          "newTab": true
+        },
+        {
+          "name": "Women Techmakers",
+          "url": "https://www.womentechmakers.com/",
           "newTab": true
         },
         {
@@ -47,49 +52,9 @@
           "newTab": true
         },
         {
-          "name": "DevFest",
-          "url": "https://devfest.withgoogle.com/",
+          "name": "Conoce al Equipo",
+          "url": "http://iwd.wtmlatam.com/team/",
           "newTab": true
-        },
-        {
-          "name": "Meet the Team",
-          "url": "https://devfest.gdg.org.ua/team/",
-          "newTab": true
-        }
-      ]
-    },
-    {
-      "title": "Eventos Anteriores",
-      "links": [
-        {
-          "name": "IWD 2020",
-          "url": "",
-          "newTab": true
-        }
-      ]
-    },
-    {
-      "title": "Recursos del Evento",
-      "links": [
-        {
-          "name": "Propuesta Para Sponsors",
-          "url": "",
-          "newTab": true
-        },
-        {
-          "name": "Kit Para Medios",
-          "url": "",
-          "newTab": true
-        },
-        {
-          "name": "Call for Papers",
-          "url": "https://l.facebook.com/l.php?u=https%3A%2F%2Fforms.gle%2F5DiLPstqrcyQhKrA7%3Ffbclid%3DIwAR2DveHtSp8Xzd4o_1fZC0d_ztaEkXCZr3b2wwTBPj4qCJxkVCskp3IwoaY&h=AT2zKxPUy02AKnJnFJCSaTuld4XXLNHTrsMvaS_LHoqvSBS9tIyr-cY0jKHrLiopZ3tTaqttjMW5dOybI_5PaZNBjEDQbXigoDw2nb3XSjXlSoHDSc5ymTZ85UZ2Q8DJj104f0c&__tn__=-UK-R&c[0]=AT1miFEJDfcG2Hx94CUquAybMHGd8WKKQIyvn1CyjTBY34L3fmAJspqq5SHih2sBXrKko-GhoyCftGMSACXCCaIIBlZsYRIN5tdth-YsVl4DcbEdcQJzTiMf5i-O28A7fp8w_r82cdqKFGmV-R7vwDz1LsFh6A0Mm78IYYQI0bzl4RY",
-          "newTab": true
-        },
-        {
-          "name": "Preguntas Frecuentes",
-          "url": "/faq/",
-          "newTab": false
         }
       ]
     }

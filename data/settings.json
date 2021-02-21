@@ -15,7 +15,7 @@
   "dateFormat": {
     "locale": "es-US"
   },
-  "hashtag": "#CourageToCreate",
+  "hashtag": "CourageToCreate",
   "disabledSchedule": false,
   "navigation": [
     {
@@ -132,24 +132,8 @@
   "socialNetwork": {
     "follow": [
       {
-        "name": "meetup",
-        "url": ""
-      },
-      {
         "name": "facebook",
-        "url": ""
-      },
-      {
-        "name": "twitter",
-        "url": ""
-      },
-      {
-        "name": "instagram",
-        "url": ""
-      },
-      {
-        "name": "youtube",
-        "url": ""
+        "url": "https://fb.me/e/3IABNgcA3"
       }
     ],
     "share": [
@@ -163,7 +147,7 @@
       }
     ]
   },
-  "mailto": "info@wtmlatam.com",
+  "mailto": "wtmlatam@gmail.com",
   "contentLoaders": {
     "schedule": {
       "itemsCount": 2
