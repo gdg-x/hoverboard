@@ -82,17 +82,6 @@ export class AboutBlock extends ThemedElement {
             </a>
 
             <p>{$ aboutBlock.callToAction.howItWas.description $}</p>
-            <paper-button
-              class="animated icon-right"
-              @click="${this.playVideo}"
-              ga-on="click"
-              ga-event-category="video"
-              ga-event-action="watch"
-              ga-event-label="about block - {$ aboutBlock.callToAction.howItWas.label $}"
-            >
-              <span>{$ aboutBlock.callToAction.howItWas.label $}</span>
-              <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-            </paper-button>
           </div>
 
           <div class="statistics-block">
@@ -119,15 +108,6 @@ export class AboutBlock extends ThemedElement {
         </div>
       </div>
     `;
-  }
-
-  private playVideo() {
-    toggleVideoDialog({
-      title: '{$  aboutBlock.callToAction.howItWas.label $}',
-      youtubeId: '{$  aboutBlock.callToAction.howItWas.youtubeId $}',
-      disableControls: true,
-      opened: true,
-    });
   }
 }
 
