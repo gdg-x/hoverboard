@@ -215,7 +215,7 @@
     "toast": "¡Te has inscrito con éxito!"
   },
   "team": {
-    "description": "Google is known all around the world. Everyone is 'googling', checking on 'maps' and communicating in 'gmail'. For simple users, they are services that just works, but not for us. Developers see much more: APIs, scalability issues, complex technology stacks. And that is what GDG is about.<br><br> [Google Developers Group (GDG) Lviv](http://lviv.gdg.org.ua/) - is open and volunteer geek community who create exciting projects and share experience about Google technologies with a passion.<br><br> Our goal is to organize space to connect the best industry experts with Ukrainian audience to boost development of IT."
+    "description": "Este año, todas las embajadoras y miembros de Women Techmakers (WTM) de Latinoamérica nos hemos unido porque queremos sumar esfuerzos para crear un solo evento a nivel de latinoamérica y así ofrecer contenido de calidad a todas nuestros participantes."
   },
   "schedule": {
     "saveSessionsSignedOut": "Inicia sesión para guardar tus charlas"
@@ -262,15 +262,15 @@
     "blocks": [
       {
         "title": "Organizer",
-        "description": "<a href='http://lviv.gdg.org.ua' target='_blank'>GDG Lviv</a> with support of 10 GDGs from all around Ukraine is proud organizer of DevFest Ukraine",
+        "description": "WTM Latam representa la unión de 17 capítulos de Women Techmakers en Latinomérica.",
         "callToAction": {
           "label": "Open team page",
           "link": "/team"
         }
       },
       {
-        "title": "¿Qué es WomenTechmakers?",
-        "description": "Google’s Women Techmakers program provides visibility, community, and resources for women in technology.",
+        "title": "¿Qué es Women Techmakers?",
+        "description": "Women Techmakers es un programa de Google para dar visibilidad, formar comunidad, y compartir recursos para mujeres en tecnología.",
         "callToAction": {
           "label": "Ver más",
           "link": "https://www.womentechmakers.com/",
@@ -278,17 +278,8 @@
         }
       },
       {
-        "title": "¿Qué es un GDG?",
-        "description": "A Google Developer Group is a community of volunteers who create exciting projects and share experiences about Google technologies.",
-        "callToAction": {
-          "label": "Ver más",
-          "link": "https://developers.google.com/groups/",
-          "newTab": true
-        }
-      },
-      {
         "title": "¿Qué es IWD?",
-        "description": "Since 2013, the Women Techmakers team has convened over 200 global events across 52 countries annually to drive visibility, community, and resources for women in technology in honor of International Women’s Day (IWD).",
+        "description": "Desde el 2013, el equipo de Women Techmakers has realizado más de 200 eventos a nivel global en 52 países anualmente para dar visibilidad, formar comunidad comunidad, y proporcionar recursos para mujeres en tecnología en honor al Día Internación de la Mujer (IWD por sus siglas en inglés).",
         "callToAction": {
           "label": "Ver más",
           "link": "https://www.womentechmakers.com/events/iwd",
