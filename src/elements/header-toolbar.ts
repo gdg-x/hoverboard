@@ -164,12 +164,9 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           {% endfor %}
 
           <a
-            href$="[[ticketUrl]]"
+            href="https://gdg.community.dev/events/details/google-gdg-buenos-aires-presents-iwd-latam-2021-international-womens-day/"
             target="_blank"
             rel="noopener noreferrer"
-            ga-on="click"
-            ga-event-category="ticket button"
-            ga-event-action="buy_click"
           >
             <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>
           </a>
@@ -225,16 +222,6 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
 
   _onScroll() {
     this.transparent = document.documentElement.scrollTop === 0;
-  }
-
-  @computed('tickets')
-  get ticketUrl() {
-    if (this.tickets instanceof Success && this.tickets.data.length > 0) {
-      const availableTicket = this.tickets.data.find((ticket) => ticket.available);
-      return (availableTicket || this.tickets.data[0]).url;
-    } else {
-      return '';
-    }
   }
 
   @observe('heroSettings')

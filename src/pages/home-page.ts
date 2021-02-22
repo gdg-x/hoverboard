@@ -155,14 +155,13 @@ export class HomePage extends ReduxMixin(PolymerElement) {
             <div class="info-item">{$ location.city $}. {$ dates $}</div>
             <div class="info-item">{$ heroSettings.home.description $}</div>
           </div>
-
+          <a
+            class="bottom-drawer-link"
+            target="_blank"
+            href="https://gdg.community.dev/events/details/google-gdg-buenos-aires-presents-iwd-latam-2021-international-womens-day/"
+          />
           <div class="action-buttons" layout horizontal center-justified wrap>
             <paper-button
-              on-click="_scrollToTickets"
-              ga-on="click"
-              ga-event-category="tickets"
-              ga-event-action="scroll"
-              ga-event-label="hero block - scroll to tickets"
               primary
               invert
             >

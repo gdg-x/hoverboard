@@ -224,14 +224,10 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
               </a>
 
               <a
+                href="https://gdg.community.dev/events/details/google-gdg-buenos-aires-presents-iwd-latam-2021-international-womens-day/"
                 class="bottom-drawer-link"
-                href$="[[ticketUrl]]"
                 target="_blank"
                 rel="noopener noreferrer"
-                on-click="closeDrawer"
-                ga-on="click"
-                ga-event-category="ticket button"
-                ga-event-action="buy_click"
                 layout
                 horizontal
                 center
@@ -458,16 +454,6 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
 
   _toggleDrawer(e) {
     this.drawerOpened = e.detail.value;
-  }
-
-  @computed('tickets')
-  get ticketUrl(): string {
-    if (this.tickets instanceof Success && this.tickets.data.length > 0) {
-      const availableTicket = this.tickets.data.find((ticket) => ticket.available);
-      return (availableTicket || this.tickets.data[0]).url;
-    } else {
-      return '';
-    }
   }
 
   _isaddToHomeScreenHidden(addToHomeScreen, isTabletPlus) {
