@@ -1,0 +1,97 @@
+{
+  "blog": {},
+  "gallery": [
+    "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/gallery%2FEvento%20de%20GDG%20Neuquen%20con%20WTM.jpg?alt=media&token=6451354f-5f6b-4249-bb48-d704209715d9",
+    "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/gallery%2FWTM%20Arequipa.jpg?alt=media&token=f2bbb6c0-982f-4efa-a9a8-f6467778cf34",
+    "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/gallery%2FIWD_cochabamba_2018.jpg?alt=media&token=1f419f99-1591-4248-9725-47cf54cc72a1",
+    "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/gallery%2FIWD_cochabamba_2018.1.jpeg?alt=media&token=f9d6d9de-8431-477d-920e-5711dda26cde",
+    "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/gallery%2FIWD_cochabamba_2018.2.JPG?alt=media&token=1600ff08-2b27-47e5-ac92-2354fcdb3a85",
+    "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/gallery%2FIWD_cochabamba_2019.3.jpg?alt=media&token=ed1c9e2a-a5ff-4dd9-b9f6-abb4dd02ca22",
+    "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/gallery%2FWTMCostaRica-2020.jpg?alt=media&token=e5e0f250-9d96-4699-97d0-a5303692f96b",
+    "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/gallery%2FWTMCostaRica-2020a.jpg?alt=media&token=f7fb2cff-5597-425c-b3b7-786a2d4f96d6",
+    "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/gallery%2FWTMCostaRica-2020b.jpg?alt=media&token=39be781c-4e03-4fe7-b325-831788922837",
+    "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/gallery%2Fiwd_19_lima.jpg?alt=media&token=e931c0f7-26f8-438b-abc3-0a7eadb111f4",
+    "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/gallery%2FWTM%20Managua%20IWD%202020%20Collage.jpg?alt=media&token=1c4a8777-7323-4027-8b59-98d49215139a",
+    "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/gallery%2FIWD_cochabamba_2019.0.jpg?alt=media&token=028acf3d-48e6-485b-a32f-2998ef1e59fb",
+    "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/gallery%2FIWD_cochabamba_2019.1.jpg?alt=media&token=02443258-cb4c-49b5-b03e-7f4c49e0cf58",
+    "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/gallery%2FIWD_cochabamba_2019.2.jpg?alt=media&token=9817d9c8-ac2f-4c76-8206-7333c7ac4386"
+  ],
+  "notifications": {
+    "config": {
+      "icon": "",
+      "timezone": "+03:00"
+    },
+    "messages": {},
+    "subscribers": {},
+    "test": {},
+    "users": {}
+  },
+  "partners": [
+    {
+      "items": [
+        {
+          "order": 0,
+          "logoUrl": "../images/logos/gdg-lviv.svg",
+          "name": "GDG Lviv",
+          "url": "https://www.meetup.com/GDG-Lviv/"
+        }
+      ],
+      "order": 0,
+      "title": "Template Creator"
+    }
+  ],
+  "schedule": {},
+  "sessions": {},
+  "speakers": {},
+  "team": [
+    {
+      "members": [
+        {
+          "name": "Ihor Dvoretskyi",
+          "photo": "/images/people/ihor_dvoretskyi.jpg",
+          "photoUrl": "",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/idvoretskyi",
+              "name": "Facebook"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/idvoretskyi",
+              "name": "Twitter"
+            }
+          ],
+          "order": 0,
+          "title": "Cloud stream"
+        },
+        {
+          "name": "Dmytro Danylyk",
+          "photo": "/images/people/dmytro_danylyk.jpg",
+          "photoUrl": "",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/dmytrodanylyk",
+              "name": "Twitter"
+            },
+            {
+              "icon": "website",
+              "link": "http://www.dmytrodanylyk.com/#/about",
+              "name": "Website"
+            }
+          ],
+          "order": 1,
+          "title": "Android Stream"
+        }
+      ],
+      "title": "Program Committee"
+    }
+  ],
+  "tickets": [],
+  "triggers": {
+    "images": false
+  },
+  "videos": [],
+  "previousSpeakers": {}
+}

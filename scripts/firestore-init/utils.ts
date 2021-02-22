@@ -1,5 +1,5 @@
 import { firestore } from '../firebase-config';
-import data from '../../docs/default-firebase-data.json';
+import data from '../../docs/iwdlatam-firebase-data.json';
 
 export const importSpeakers = () => {
   const speakers: { [key: string]: object } = data.speakers;
@@ -152,7 +152,7 @@ export const importVideos = () => {
 
   Object.keys(docs).forEach((docId: string) => {
     batch.set(firestore.collection('videos').doc(docId.padStart(3, '0')), {
-      ...docs[Number(docId)],
+      ...(docs[Number(docId)] as any),
       order: docId,
     });
   });
@@ -173,7 +173,7 @@ export const importTickets = () => {
 
   Object.keys(docs).forEach((docId: string) => {
     batch.set(firestore.collection('tickets').doc(docId.padStart(3, '0')), {
-      ...docs[Number(docId)],
+      ...(docs[Number(docId)] as any),
       order: docId,
     });
   });

@@ -154,13 +154,14 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
               <h2>{$ galleryBlock.title $}</h2>
               <p>{$ galleryBlock.description $}</p>
             </div>
-            <a
+            <!-- TODO: Enable once we have a google photos album -->
+            <!--a
               href="{$ galleryBlock.callToAction.link $}"
               target="_blank"
               rel="noopener noreferrer"
             >
               <paper-button>{$ galleryBlock.callToAction.label $}</paper-button>
-            </a>
+            </a-->
           </div>
         </template>
       </div>

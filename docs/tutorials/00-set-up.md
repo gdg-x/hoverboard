@@ -17,7 +17,7 @@ Project Hoverboard locally in less than 15 minutes.
      - Read the warning and press **Generate key**
      - Save the file as `serviceAccount.json` and to the root of your hoverboard directory (❗Do NOT commit this file to the public repository)
    - Enable Firestore in web console at [console.firebase.google.com](https://console.firebase.google.com) -> Database -> Cloud Firestore -> Create database. Select **locked mode** and press **Enable**
-   - [Optional] You can edit `docs/default-firebase-data.json)` file using your own data
+   - [Optional] You can edit `docs/iwdlatam-firebase-data.json)` file using your own data
    - Select your Firebase project `npx firebase use <projectId>`
      - [Optional] If you need to clear out all of your data first, run `npx firebase firestore:delete --recursive --all-collections`
      - Run `npm run firestore:init`
