@@ -1,5 +1,4 @@
-import { Success } from '@abraham/remotedata';
-import { computed, customElement, observe, property } from '@polymer/decorators';
+import { customElement, observe, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
@@ -164,7 +163,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           {% endfor %}
 
           <a
-            href="https://gdg.community.dev/events/details/google-gdg-buenos-aires-presents-iwd-latam-2021-international-womens-day/"
+            href="{$ organizer.url $}"
             target="_blank"
             rel="noopener noreferrer"
           >

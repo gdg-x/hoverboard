@@ -6,7 +6,7 @@ import '@polymer/app-layout/app-header/app-header';
 import '@polymer/app-layout/app-toolbar/app-toolbar';
 import '@polymer/app-route/app-location';
 import '@polymer/app-route/app-route';
-import { computed, customElement, observe, property } from '@polymer/decorators';
+import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-dropdown/iron-dropdown-scroll-manager';
 import '@polymer/iron-icon';
 import '@polymer/iron-media-query';
@@ -224,7 +224,7 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
               </a>
 
               <a
-                href="https://gdg.community.dev/events/details/google-gdg-buenos-aires-presents-iwd-latam-2021-international-womens-day/"
+                href="{$ organizer.url $}"
                 class="bottom-drawer-link"
                 target="_blank"
                 rel="noopener noreferrer"
