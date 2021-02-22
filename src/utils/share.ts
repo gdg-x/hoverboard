@@ -30,7 +30,7 @@ const features = ({ height }: { height: number }): string => {
 };
 
 const openTwitter = ({ title, shareUrl }: { title: string; shareUrl: string }) => {
-  const text = `Check out ${title} at #{$ hashtag $}: ${shareUrl}`;
+  const text = `¡No te pierdas el ${title} #{$ hashtag $}! ${shareUrl}`;
   const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
   window.open(url, 'share', features({ height: 275 }));
 };

@@ -171,17 +171,6 @@ export class FooterSocial extends PolymerElement {
       </div>
     </div>
 
-    <div class="social-group blog">
-      <div class="title">
-        {$ followOur $}
-        <a
-          href="{$ organizer.blog $}"
-          {% if organizer.blog.startsWith('http') %} target="_blank" rel="noopener noreferrer" {% endif %}>
-          {$ footer.blog $}
-        </a>
-      </div>
-    </div>
-
     <div class="social-group social-networks">
       <div class="title">{$ followUs $} </div>
       <ul class="nav-inline">
