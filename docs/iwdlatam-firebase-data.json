@@ -345,6 +345,29 @@
             }
           ],
           "order": 17
+        },
+        {
+          "name": "WTM La Paz",
+          "photo": "/images/team/wtm_La_Paz.jpg",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/team%2FLa%20Paz.png?alt=media&token=a50b4b36-37ef-4cbd-b4d3-623c87c4b141",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/womentechmakerslapaz/",
+              "name": "Facebook"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/women-techmakers-la-paz-841bb81a3",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/womentechmakerslp",
+              "name": "Instagram"
+            }
+          ],
+          "order": 18
         }
       ],
       "title": "Comunidades organizadoras"
