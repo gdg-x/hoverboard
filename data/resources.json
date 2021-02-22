@@ -53,7 +53,7 @@
         },
         {
           "name": "Conoce al Equipo",
-          "url": "http://iwd.wtmlatam.com/team/",
+          "url": "/team/",
           "newTab": true
         }
       ]

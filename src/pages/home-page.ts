@@ -155,19 +155,20 @@ export class HomePage extends ReduxMixin(PolymerElement) {
             <div class="info-item">{$ location.city $}. {$ dates $}</div>
             <div class="info-item">{$ heroSettings.home.description $}</div>
           </div>
-          <a
-            class="bottom-drawer-link"
-            target="_blank"
-            href="https://gdg.community.dev/events/details/google-gdg-buenos-aires-presents-iwd-latam-2021-international-womens-day/"
-          />
           <div class="action-buttons" layout horizontal center-justified wrap>
-            <paper-button
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://gdg.community.dev/events/details/google-gdg-buenos-aires-presents-iwd-latam-2021-international-womens-day/"
+          >
+          <paper-button
               primary
               invert
             >
               <iron-icon icon="hoverboard:ticket"></iron-icon>
               {$ buyTicket $}
             </paper-button>
+          </a>
           </div>
 
           <div class="scroll-down" on-click="_scrollNextBlock">
