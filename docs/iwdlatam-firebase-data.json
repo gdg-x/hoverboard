@@ -153,6 +153,26 @@
               "icon": "twitter",
               "link": "https://twitter.com/WTMCochabamba/",
               "name": "Twitter"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/_u/gdgcochabamba",
+              "name": "Instagram"
+            },
+            {
+              "icon": "website",
+              "link": "https://iwd.gdg.com.bo/",
+              "name": "Website"
+            },
+            {
+              "icon": "meetup",
+              "link": "https://www.meetup.com/es/GDGCochabamba",
+              "name": "Meetup"
+            },
+            {
+              "icon": "youtube",
+              "link": "https://youtube.com/c/GDGCochabamba",
+              "name": "Youtube"
             }
           ],
           "order": 5
@@ -166,6 +186,26 @@
               "icon": "facebook",
               "link": "https://www.facebook.com/womentechmakerscr/",
               "name": "Facebook"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/gdgpuravida",
+              "name": "Twitter"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/wtm_costarica/",
+              "name": "Instagram"
+            },
+            {
+              "icon": "youtube",
+              "link": "https://www.youtube.com/channel/UCEbDneVpRdi67Kh53HtE9dw",
+              "name": "Youtube"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/company/gdgpuravida",
+              "name": "LinkedIn"
             }
           ],
           "order": 6
@@ -230,6 +270,11 @@
               "icon": "instagram",
               "link": "https://www.instagram.com/wtmmanagua/",
               "name": "Instagram"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/company/wtmmanagua/",
+              "name": "LinkedIn"
             }
           ],
           "order": 9
@@ -258,9 +303,34 @@
           "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/team%2FNeuquen.png?alt=media&token=cb9c8447-8c53-48b1-9763-f70addcca401",
           "socials": [
             {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/gdgneuquen",
+              "name": "Facebook"
+            },
+            {
               "icon": "twitter",
               "link": "https://twitter.com/GDGNeuquen",
               "name": "Twitter"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/gdgneuquen/",
+              "name": "Instagram"
+            },
+            {
+              "icon": "meetup",
+              "link": "https://www.meetup.com/es-ES/gdgneuquen",
+              "name": "Meetup"
+            },
+            {
+              "icon": "youtube",
+              "link": "https://www.youtube.com/c/GDGNeuqu%C3%A9n",
+              "name": "Youtube"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/company/google-developer-group-neuqu%C3%A9n/posts/?feedView=all",
+              "name": "LinkedIn"
             }
           ],
           "order": 11
@@ -321,9 +391,9 @@
               "name": "Facebook"
             },
             {
-              "icon": "twitter",
+              "icon": "instagram",
               "link": "https://www.instagram.com/wtm.sucre/",
-              "name": "Twitter"
+              "name": "Instagram"
             }
           ],
           "order": 16
@@ -342,6 +412,11 @@
               "icon": "twitter",
               "link": "https://twitter.com/wtmTarija",
               "name": "Twitter"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/wtmtarija/",
+              "name": "Instagram"
             }
           ],
           "order": 17
@@ -357,17 +432,55 @@
               "name": "Facebook"
             },
             {
-              "icon": "linkedin",
-              "link": "https://www.linkedin.com/in/women-techmakers-la-paz-841bb81a3",
-              "name": "LinkedIn"
-            },
-            {
               "icon": "instagram",
               "link": "https://www.instagram.com/womentechmakerslp",
               "name": "Instagram"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/women-techmakers-la-paz-841bb81a3",
+              "name": "LinkedIn"
             }
           ],
           "order": 18
+        },
+        {
+          "name": "Mujeres TICs Bolivia ",
+          "photo":"/images/team/Mujeres_TOCs_Bolivia.jpg",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/team%2Fmujeresticsbolivia.png?alt=media&token=7b735a69-f32a-4400-b34c-6b1d68ca3815",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/MujeresTICsBO/",
+              "name": "Facebook"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/MujeresTICsBO",
+              "name": "Twitter"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/Mujeresticsbo/",
+              "name": "Instagram"
+            },
+            {
+              "icon": "website",
+              "link": "https://mujeresticsbo.org/",
+              "name": "Website"
+            },
+            {
+              "icon": "youtube",
+              "link": "https://youtube.com/channel/UCMfTa_jVdEC24MDrEAYkBKA",
+              "name": "Youtube"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/company/mujeres-tic-s-bolivia",
+              "name": "LinkedIn"
+            }
+          ],
+          "order": 19
         }
       ],
       "title": "Comunidades organizadoras"
