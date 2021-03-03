@@ -57,7 +57,7 @@ export const importTeam = () => {
       title: teams[Number(teamId)].title,
     });
 
-    teams[Number(teamId)].members.forEach((member, id) => {
+    teams[Number(teamId)].members.forEach((member: any, id: any) => {
       batch.set(
         firestore.collection('team').doc(`${teamId}`).collection('members').doc(`${id}`),
         member
