@@ -88,7 +88,7 @@
       "fontColor": "#424242"
     },
     "coc": {
-      "title": "Codigo de Conducta",
+      "title": "Código de Conducta",
       "metaDescription": "Learn more about our expectations for all those who participate in our community",
       "background": {
         "color": "#fff"
@@ -97,8 +97,8 @@
     }
   },
   "location": {
-    "label": "Location",
-    "name": "Planeta kino",
+    "label": "Ubicación",
+    "name": "Evento Online En Vivo",
     "city": "Latinoamérica",
     "short": "LATAM",
     "address": "Latinoamérica",

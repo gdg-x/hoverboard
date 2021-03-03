@@ -1,5 +1,5 @@
 {
-  "title": "International Women's Day LATAM 2021",
+  "title": "IWD WTM LATAM 2021",
   "description": "Promoviendo el desarrollo personal y profesional de mujeres en Latinoamérica",
   "image": "images/social-share.jpg",
   "keywords": "event, wtm, iwd, gdg, gde, devfest, google, programming, android, chrome, polymer, developers, web, cloud, androiddev",
@@ -10,13 +10,13 @@
   "followUs": "Síguenos",
   "emailUs": "Escríbenos",
   "partnershipResources": "Recursos para Sponsors",
-  "eventResources": "Event Resources",
+  "eventResources": "Recursos del Evento",
   "buyTicket": "Inscripción",
   "signIn": "Iniciar sesión",
   "signOut": "Cerrar sesión",
   "viewHighlights": "Ver Destacados",
   "offlineMessage": "No hay Internet, pero puedes seguir trabajando offline.",
-  "cachingComplete": "¡Caching completado! Futuras visitas podrán ser realizadas aunque no tengas conexión a Internet.",
+  "cachingComplete": "Respaldo completado! Futuras visitas podrán ser realizadas aunque no tengas conexión a Internet.",
   "newVersionAvailable": "Una nueva versión del sitio esta disponible.",
   "refresh": "Refrescar",
   "position": "Posición",
@@ -34,10 +34,10 @@
   },
   "footerRelBlock": [
     {
-      "title": "Sobre Nosotros",
+      "title": "Sobre IWD",
       "links": [
         {
-          "name": "International Women's Day",
+          "name": "IWD",
           "url": "https://www.womentechmakers.com/events/iwd/",
           "newTab": true
         },
@@ -59,7 +59,7 @@
       ]
     }
   ],
-  "subscribeNote": "No spam, only the latest news and updates!",
+  "subscribeNote": "No te enviamos correo no deseado, solo noticias sobre el evento.",
   "codeOfConduct": "Código de Conducta",
   "codeOfConductBlock": {
     "organization": "IWD WTM LATAM 2021",
@@ -88,11 +88,11 @@
       },
       "sessions": {
         "label": "Charlas",
-        "number": "20+"
+        "number": "10"
       },
       "tracks": {
-        "label": "Escenarios (Track)",
-        "number": "4"
+        "label": "Escenarios (Tracks)",
+        "number": "2"
       }
     }
   },
@@ -189,20 +189,20 @@
     "save": "Guardar",
     "headline": "Evaluar charla",
     "leaveFeedback": "para dejar sugerencias",
-    "sendFeedbackSignedOut": "Sign in to leave feedback",
-    "feedbackRecorded": "Your saved",
-    "feedbackDeleted": "Feedback deleted",
-    "helperText": "Comments will be anonymously provided to speakers",
-    "somethingWentWrong": "Something went wrong",
-    "contentCaption": "Content quality",
-    "styleCaption": "Presentation style",
-    "deleteFeedback": "Delete",
-    "sessionClosed": "Session reviews are not open"
+    "sendFeedbackSignedOut": "Inicia sesión para dejar tus observaciones",
+    "feedbackRecorded": "Guardado",
+    "feedbackDeleted": "Observación eliminada",
+    "helperText": "Las observaciones serán proveídos a los Speakers de forma anónima",
+    "somethingWentWrong": "Algo salió mal",
+    "contentCaption": "Contenido",
+    "styleCaption": "Tipo de Presentación",
+    "deleteFeedback": "Eliminar",
+    "sessionClosed": "Las evaluaciones no estan abiertas"
   },
   "sessionDetails": {
-    "contentLevel": "Content level",
-    "viewPresentation": "View presentation",
-    "viewVideo": "View video",
+    "contentLevel": "Nivel",
+    "viewPresentation": "Ver presentación",
+    "viewVideo": "Ver video",
     "speakers": "Speakers"
   },
   "speakerDetails": {
@@ -210,26 +210,26 @@
   },
   "notifications": {
     "default": "Habilitar notificaciones",
-    "enabled": "We will miss you but you can unsubscribe anytime",
+    "enabled": "Te extrañaremos. Vuelve a suscribete cuando quieras.",
     "blocked": "We can't send you notifications right now. Please enable notifications in your browser",
-    "subscribe": "Subscribe",
-    "unsubscribe": "Unsubscribe",
+    "subscribe": "Suscribirse",
+    "unsubscribe": "Desuscribirse",
     "enable": {
-      "label": "Enable",
+      "label": "Habilitar",
       "link": "https://support.google.com/chrome/answer/3220216"
     },
     "toast": {
-      "title": "Open"
+      "title": "Abrir"
     }
   },
   "aboutOrganizerBlock": {
     "image": "/images/team.jpg",
     "blocks": [
       {
-        "title": "Organizer",
+        "title": "Organizadoras",
         "description": "WTM Latam representa la unión de 17 capítulos de Women Techmakers en Latinomérica.",
         "callToAction": {
-          "label": "Open team page",
+          "label": "Conoce al Equipo",
           "link": "/team"
         }
       },
