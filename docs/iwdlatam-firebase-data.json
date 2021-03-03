@@ -31,13 +31,25 @@
       "items": [
         {
           "order": 0,
-          "logoUrl": "../images/logos/gdg-lviv.svg",
-          "name": "GDG Lviv",
-          "url": "https://www.meetup.com/GDG-Lviv/"
+          "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2Fleonidas-esteban.png?alt=media&token=7a49a80e-41bc-4f11-9921-8dbada4a47e4",
+          "name": "Leónidas Esteban",
+          "url": "https://leonidasesteban.com/"
         }
       ],
       "order": 0,
-      "title": "Template Creator"
+      "title": "ADA LOVELACE"
+    },
+    {
+      "items": [
+        {
+          "order": 0,
+          "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2Fable.png?alt=media&token=f0f5c834-5452-4d38-ab5d-0600f02666f9",
+          "name": "Able",
+          "url": "https://able.co/"
+        }
+      ],
+      "order": 1,
+      "title": "GRACE HOPPER"
     }
   ],
   "schedule": {},
@@ -603,7 +615,8 @@
             }
           ],
           "order": 0
-        }, {
+        },
+        {
           "name": "WTM Bogotá",
           "photo": "/images/team/wtm_bogota.jpg",
           "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/team%2FBogota%CC%81.png?alt=media&token=a6359f82-6790-426e-8276-a5d2312614cb",
@@ -615,7 +628,8 @@
             }
           ],
           "order": 1
-        }, {
+        },
+        {
           "name": "WTM Buenos Aires",
           "photo": "/images/team/wtm_buenos_aires.jpg",
           "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/team%2FBuenos%20Aires.png?alt=media&token=da8598c0-a9dc-4881-b994-2518b2e08316",
@@ -986,7 +1000,7 @@
         },
         {
           "name": "Mujeres TICs Bolivia ",
-          "photo":"/images/team/Mujeres_TOCs_Bolivia.jpg",
+          "photo": "/images/team/Mujeres_TOCs_Bolivia.jpg",
           "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/team%2Fmujeresticsbolivia.png?alt=media&token=7b735a69-f32a-4400-b34c-6b1d68ca3815",
           "socials": [
             {
