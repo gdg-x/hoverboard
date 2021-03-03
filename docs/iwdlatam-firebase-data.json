@@ -47,6 +47,546 @@
     {
       "members": [
         {
+          "name": "Paola Lopez Rios",
+          "photo": "/images/organizadoras/lopito - Paola Lopez.jpg",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2Flopito%20-%20Paola%20Lopez.jpg?alt=media&token=43ecaa22-eb5b-41c8-92d7-6c40d5e57610",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/chpk4ever",
+              "name": "Facebook"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/paolalopezrios",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "WTM La Paz"
+        },
+        {
+          "name": "Lupe Canaviri Maydana",
+          "photo": "/images/organizadoras/Retrato Lupe - Lupe Canaviri Maydana.png",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FRetrato%20Lupe%20-%20Lupe%20Canaviri%20Maydana.png?alt=media&token=e44914ae-f15e-4b22-971c-210649efce08",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/luucamay",
+              "name": "Facebook"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/luucamay",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/luucamay",
+              "name": "Twitter"
+            },
+          ],
+          "title": "GDG Cloud El Alto"
+        },
+        {
+          "name": "Alarcon Catari Helen Guadalupe",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FHelen%20Guadalupe%20Alarcon%20Catari%20-%20HELEN%20GUADALUPE%20ALARCON%20CATARI.jpeg?alt=media&token=9dfec252-4915-467f-96ba-cda74abe8adf",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/guadalupe.alarconcatari",
+              "name": "Facebook"
+            },
+          ],
+          "title": "WTM La Paz / GDG La Paz"
+        },
+        {
+          "name": "Katherine Chauca",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FKatherineChauca%20-%20Katherine%20Chauca.jpg?alt=media&token=c1adbba4-5063-4268-a0a3-01f02fb2279c",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/katherinechauca",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/KateChauca",
+              "name": "Twitter"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/katechauca",
+              "name": "Instagram"
+            },
+          ],
+          "title": "WTM Lima , GDG Cloud Lima"
+        },
+        {
+          "name": "Nigel Davila Maturano",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2Fphoto5042278523489856419%20-%20Nigel%20Davila%20Maturano.jpg?alt=media&token=8791466f-4a28-4952-96bf-8751a290ef2d",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/nigel.davila/",
+              "name": "Facebook"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/kuroneko094/",
+              "name": "Instagram"
+            },
+          ],
+          "title": "Women Techmakers Cochabamba"
+        },
+        {
+          "name": "mariana ruiz",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FMariana%20Retrado%20ilustrado%20-%20mariana%20ruiz.png?alt=media&token=77640fec-6be9-49ee-b255-759405146c95",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/rozmariana",
+              "name": "Twitter"
+            }
+          ],
+          "title": "gdg wondercoders"
+        },
+        {
+          "name": "Andrea Paola Rojas",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FAndrea%20_%202021%20-%20Andrea%20Rojas.jpg?alt=media&token=26932320-f370-4012-8b63-d0c7e4cedf29",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/andrea-paola-rojas/",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/aprojas81/?hl=es-la",
+              "name": "Instagram"
+            },
+          ],
+          "title": "GDG Neuquén"
+        },
+        {
+          "name": "Astrit Altamirano",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FIMG_20200705_160839%20-%20Astrit%20Altamirano.jpg?alt=media&token=b15a4c7b-b9ac-4fef-bd22-a677226df00c",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/AstritAltamiran",
+              "name": "Twitter"
+            },
+          ],
+          "title": "GDG La Paz"
+        },
+        {
+          "name": "Adriana Ticonipa Gutierrez",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2Fadriana%20-%20Adriana%20Ticonipa%20Gutierrez.jpeg?alt=media&token=075220ba-a71d-4c2a-acb8-75479a59efe4",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/adrianita.osita",
+              "name": "Facebook"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/adriana-ticonipa-gutierrez-236238186/",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/TiconipaAdriana",
+              "name": "Twitter"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/adriana_ticonipa_gutierrez",
+              "name": "Instagram"
+            },
+          ],
+          "title": "GDG La Paz / WTM La Paz"
+        },
+        {
+          "name": "Lucero Condori Rivera",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FPerfil%20-%20Lucero%20Condori%20Rivera.jpeg?alt=media&token=dcdc8c5b-7993-41ec-bbb1-ec874156af32",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/lucerocondoririvera",
+              "name": "Facebook"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/lucerocondoririvera",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/LuceroCRiv",
+              "name": "Twitter"
+            },
+          ],
+          "title": "GDG Arequipa / Womentechmakrers Arequipa"
+        },
+        {
+          "name": "Kenji Kawaida",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2Fkenjikawaida%20-%20kenji%20kawaida.jpg?alt=media&token=082a0aee-c3a1-4c16-bcec-21d4e36b244a",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/kenjikv",
+              "name": "Facebook"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/kenji-kawaida-47459970",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/kenjikawaida",
+              "name": "Twitter"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/kenjikawaida/",
+              "name": "Instagram"
+            },
+          ],
+          "title": "GDG Santa Cruz, WTM Santa Cruz"
+        },
+        {
+          "name": "Mauricio Arce Torrez",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FIMG_1541%20-%20Mauricio%20Arce%20Torrez.jpg?alt=media&token=711a52be-f904-4eb3-b27d-e3f1cc520a15",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/combimauri/",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/combimauri",
+              "name": "Twitter"
+            },
+          ],
+          "title": "WTM Cochabamba"
+        },
+        {
+          "name": "Laura Gutiérrez",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2Flaura_gutierrez%20-%20Laura%20Gutie%CC%81rrez.jpg?alt=media&token=b110281a-43ba-4675-84af-240c1f1d235f",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/laura-gutierrez1",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/LauraOOQIA",
+              "name": "Twitter"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/lauragutierre_z/",
+              "name": "Instagram"
+            },
+          ],
+          "title": "WTM Managua"
+        },
+        {
+          "name": "Kattya Cuevas",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FKattyaCuevas2%20-%20Kattya%20Cuevas.png?alt=media&token=a50526e6-f610-4769-a642-eec9abbb09a3",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/kattyacuevas/",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/KattyaCuevas",
+              "name": "Twitter"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/KattyaCuevas/",
+              "name": "Instagram"
+            },
+          ],
+          "title": "Tech Talks / Ruby Perú"
+        },
+        {
+          "name": "Andrea Cornejo",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FIMG_20200716_131637_965%20-%20Andrea%20Cornejo.jpg?alt=media&token=4584bd6d-1ffe-4937-a788-c21ab2c45512",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://m.facebook.com/andreacoding0",
+              "name": "Facebook"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/andreacoding?s=09",
+              "name": "Twitter"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/andreacoding",
+              "name": "Instagram"
+            },
+          ],
+          "title": "GDG Sucre / WTM Sucre"
+        },
+        {
+          "name": "Daniela Ccama",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FDaniela_Ccama-%20-%20Daniela%20Ccama.jpg?alt=media&token=87af29b5-3b15-4644-892c-e5bb451ab2a2",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/KatherinDanielax",
+              "name": "Facebook"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/daniela-ccama/",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/katzu760",
+              "name": "Twitter"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/katherinccama/",
+              "name": "Instagram"
+            },
+          ],
+          "title": "WTM Arequipa"
+        },
+        {
+          "name": "Karen Lara Ferrufino",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2F-kgr162%20-%20Karen%20Lara.jpg?alt=media&token=70daa38d-15d9-4f9c-a30d-464b28bce823",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/klarafer.ferrufinokarenlaraferrufino",
+              "name": "Facebook"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/karen-lara-ferrufino-19bba4158",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/KarenLaraF?s=09",
+              "name": "Twitter"
+            },
+          ],
+          "title": "Mujeres TIC's Bolivia"
+        },
+        {
+          "name": "Karol Catacora",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FIMG_20210227_102253%20-%20Karol%20Haydee%20catacora%20Patana.jpg?alt=media&token=c33ad694-6521-459e-a26e-1eb68ed41d27",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/karolhaydee.catacorapatana",
+              "name": "Facebook"
+            }
+          ],
+          "title": "GDG La Paz / WTM La Paz"
+        },
+        {
+          "name": "Vania Catorceno",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FIMG_7068%20-%20Vania%20Marisela%20Catorceno%20Carballo%20-%20Vania%20Marisela%20Catorceno%20Carballo.JPG?alt=media&token=f0d00fe8-a10a-49bf-9ed5-9eee4611c3f0",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/vania.catorceno",
+              "name": "Facebook"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/vania-marisela-catorceno-carballo-79078a10a/",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/VaniCatorceno",
+              "name": "Twitter"
+            },
+          ],
+          "title": "GDG Cochabamba / WTM Cochabamba"
+        },
+        {
+          "name": "Wilma Paca",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FIMG_20200225_085821%20-%20Wilma%20Paca.jpg?alt=media&token=6a124dfa-92fc-4e4e-b86d-5057f6254499",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/wilma.paca",
+              "name": "Facebook"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/wilma-paca-patzi-32b58478",
+              "name": "LinkedIn"
+            },
+          ],
+          "title": "WTM Cochabamba"
+        },
+        {
+          "name": "Karol Rojas Montero",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FCaptura%20de%20Pantalla%202021-02-04%20a%20la(s)%2011.23.11%20-%20Karol%20Rojas%20Montero.png?alt=media&token=70c55dd5-00e3-4ce5-9040-b1dd0d262c68",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/KarolRojas90",
+              "name": "Twitter"
+            },
+          ],
+          "title": "GDG Pura Vida / WTM San José Costa Rica"
+        },
+        {
+          "name": "Mirina Gonzales Rodriguez",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FMirinaGonzales%20-%20Mirina%20Gonzales.jpeg?alt=media&token=075e285b-2c9f-4104-8a89-8340f95fb542",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/mirina-gonzales-rodriguez/",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/MirinaGonzales",
+              "name": "Twitter"
+            },
+          ],
+          "title": "GDG Arequipa"
+        },
+        {
+          "name": "Victoria Ubaldo Gamarra",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2Fvictoria_ubaldo_foto%20-%20Victoria%20Ubaldo.jpg?alt=media&token=63f37cbe-bed9-4cf4-a62a-c1277cb6f82f",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/victoriaubaldo/",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/VikyAle",
+              "name": "Twitter"
+            },
+          ],
+          "title": "GDG Cloud Lima"
+        },
+        {
+          "name": "Irvin Cossio Chavalier",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2F60774555_1026615750869054_1097784247764123648_n%20-%20Irvin%20Cossio%20Chavalier.jpg?alt=media&token=ff26fb6b-5ebc-4447-92c3-6edaec989b5e",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/irvin.chavalier/",
+              "name": "Facebook"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/irvin373/",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/irvinvisho",
+              "name": "Twitter"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/irvinvisho/",
+              "name": "Instagram"
+            },
+          ],
+          "title": "GDG Cochabamba"
+        },
+        {
+          "name": "Monica Canaza",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2Fdownload%20-%20Moni%20Hikari.png?alt=media&token=bdc6d2e7-0467-485e-8365-ee0d2be10968",
+          "socials": [
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/moni_hikari/",
+              "name": "Instagram"
+            }
+          ],
+          "title": "GDG La Paz"
+        },
+        {
+          "name": "Maria Griselda Garcia Flores",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FGriseldaGarcia%20-%20Mari%CC%81a%20Griselda%20Garcia%20Flores.PNG?alt=media&token=9f45a927-362b-4946-9eaf-6212f2de07b1",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/grissgarcia074",
+              "name": "Twitter"
+            },
+          ],
+          "title": "Angular Bolivia / WTM Cochabamba"
+        },
+        {
+          "name": "Silvana Gutierrez M.",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FSIlvana%20Gutierrez%20WTM%20La%20Paz%20-%20Silvana%20Gutierrez.jpg?alt=media&token=d5358dfe-9c88-4b18-9b10-702a80a447c7",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/SilvanaGuti/",
+              "name": "Facebook"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/silvanagutierrezm/",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/Sil_Guty",
+              "name": "Twitter"
+            },
+          ],
+          "title": "WTM La Paz"
+        },
+        {
+          "name": "Diosa Alejandra Torres",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2FekcoiLsQ_400x400%20-%20Diosa%20Alejandra%20Torres%20Sa%CC%81nchez.jpg?alt=media&token=d5f273c9-f7d0-49a8-90df-bb7f27f00aea",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/DiosaTorres",
+              "name": "Twitter"
+            },
+          ],
+          "title": ""
+        },
+        {
+          "name": "Oscar Salguero",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/organizadoras%2Foscars_bp_nyc%20-%20Oscar%20Salguero.png?alt=media&token=cc83435e-b5e9-43ad-a838-6ca6a48f85cf",
+          "socials": [
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/OscarSalguero",
+              "name": "Twitter"
+            },
+          ],
+          "title": ""
+        }
+      ],
+      "title": "Organizadoras"
+    },
+    {
+      "members": [
+        {
           "name": "WTM Arequipa",
           "photo": "/images/team/wtm_arequipa.jpg",
           "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/team%2FArequipa.png?alt=media&token=58462261-f016-40f0-aa0d-3b5a3e4d56cb",
