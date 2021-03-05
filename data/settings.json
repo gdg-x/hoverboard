@@ -24,6 +24,11 @@
       "label": "Inicio"
     },
     {
+      "route": "speakers",
+      "permalink": "/speakers/",
+      "label": "Speakers"
+    },
+    {
       "route": "team",
       "permalink": "/team/",
       "label": "Equipo"
@@ -48,16 +53,16 @@
     },
     "speakers": {
       "title": "Speakers",
-      "metaDescription": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
-      "description": "Hear from the Googlers, Partners, and Guest Speakers who are building the future of cloud. Check back often as we add more speakers, including our customers and partners.",
+      "metaDescription": "Mira charlas de Speakers con amplia experiencia en temas de desarrollo de softare, soft skills, la nube, etc.",
+      "description": "Mira charlas de Speakers con amplia experiencia en temas de desarrollo de softare, soft skills, la nube, etc.",
       "background": {
         "color": "#FFF"
       },
       "fontColor": "#424242"
     },
     "previousSpeakers": {
-      "title": "Previous Speakers",
-      "metaDescription": "Check who was with us last years",
+      "title": "Speakers Anteriores",
+      "metaDescription": "Mira quienes han sido Speakers en eventos anteriores.",
       "background": {
         "color": "#FFF"
       },
@@ -65,7 +70,7 @@
     },
     "schedule": {
       "title": "Agenda",
-      "metaDescription": "Choose your sessions to visit",
+      "metaDescription": "Escoge tus sesiones",
       "background": {
         "color": "#fff"
       },
@@ -73,7 +78,7 @@
     },
     "team": {
       "title": "Equipo",
-      "metaDescription": "Get more info about organizers",
+      "metaDescription": "Obten más información sobre los organizadores.",
       "background": {
         "color": "#fff"
       },
@@ -81,7 +86,7 @@
     },
     "faq": {
       "title": "Preguntas Frecuentes",
-      "metaDescription": "Find you answer right here!",
+      "metaDescription": "¿Tienes preguntas? Aquí podrás encontrar algunas respuestas.",
       "background": {
         "color": "#fff"
       },
@@ -153,13 +158,13 @@
       "itemsCount": 2
     },
     "speakers": {
-      "itemsCount": 4
+      "itemsCount": 10
     },
     "previousSpeakers": {
-      "itemsCount": 6
+      "itemsCount": 0
     },
     "tickets": {
-      "itemsCount": 5
+      "itemsCount": 0
     }
   },
   "showForkMeBlockForProjectIds": ["hoverboard-master", "hoverboard-dev"]

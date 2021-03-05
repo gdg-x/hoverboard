@@ -240,8 +240,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
       {% endif %}
       <about-block></about-block>
 
-      <!-- TODO: Uncomment once this is implemented -->
-      <!--speakers-block></speakers-block-->
+      <speakers-block></speakers-block>
 
       <gallery-block></gallery-block>
       <about-organizer-block></about-organizer-block>
