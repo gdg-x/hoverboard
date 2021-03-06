@@ -6,11 +6,9 @@ import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
-import { closeDialog, openDialog, setDialogError } from '../store/dialogs/actions';
-import { DIALOGS } from '../store/dialogs/types';
+import { closeDialog, setDialogError } from '../store/dialogs/actions';
 import { fetchPartners } from '../store/partners/actions';
 import { initialPartnersState, PartnersState } from '../store/partners/state';
-import { addPotentialPartner } from '../store/potential-partners/actions';
 import { showToast } from '../store/toast/actions';
 import './hoverboard-icons';
 import './shared-styles';
@@ -97,19 +95,10 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
             </template>
           </div>
         </template>
-
-        <paper-button class="cta-button animated icon-right" on-click="_addPotentialPartner">
-          <span>{$ partnersBlock.button $}</span>
-          <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-        </paper-button>
       </div>
     `;
   }
 
-  @property({ type: Object })
-  private viewport = {};
-  @property({ type: Boolean, observer: PartnersBlock.prototype._partnerAddingChanged })
-  private partnerAdding = false;
   @property({ type: Object })
   private partnerAddingError: Error;
 
@@ -127,9 +116,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
   }
 
   stateChanged(state: RootState) {
-    this.viewport = state.ui.viewport;
     this.partners = state.partners;
-    this.partnerAdding = state.potentialPartners.adding;
     this.partnerAddingError = state.potentialPartners.addingError;
   }
 
@@ -138,16 +125,6 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
     if (this.partners instanceof Initialized) {
       store.dispatch(fetchPartners());
     }
-  }
-
-  _addPotentialPartner() {
-    openDialog(DIALOGS.SUBSCRIBE, {
-      title: '{$ partnersBlock.form.title $}',
-      submitLabel: '{$ partnersBlock.form.submitLabel $}',
-      firstFieldLabel: '{$ partnersBlock.form.fullName $}',
-      secondFieldLabel: '{$ partnersBlock.form.companyName $}',
-      submit: (data) => store.dispatch(addPotentialPartner(data)),
-    });
   }
 
   _partnerAddingChanged(newPartnerAdding, oldPartnerAdding) {

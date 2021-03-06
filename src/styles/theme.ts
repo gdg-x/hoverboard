@@ -227,6 +227,14 @@ export const theme = css`
     border-radius: 32px;
   }
 
+  .mb-1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .mr-1 {
+    margin-right: 0.5rem;
+  }
+
   @media (min-width: 640px) {
     .container,
     .container-narrow {

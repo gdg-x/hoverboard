@@ -69,7 +69,7 @@
     ]
   },
   "aboutBlock": {
-    "title": "Sobre Nosotros",
+    "title": "Sobre el IWD",
     "callToAction": {
       "featuredSessions": {
         "description": "El International Women's Day Latam 2021 se realizará el 13 de marzo, tiene como objetivo reunir mujeres y aliados del mundo de la técnología, promoviendo el desarrollo de mujeres, por medio de charlas inspiradoras y técnicas. El evento será organizado por las embajadoras y  miembros de Women Techmakers y GDGs de de America Latina.",
@@ -88,7 +88,7 @@
       },
       "sessions": {
         "label": "Charlas",
-        "number": "10"
+        "number": "15"
       },
       "tracks": {
         "label": "Escenarios (Tracks)",
@@ -180,7 +180,7 @@
     "toast": "¡Te has inscrito con éxito!"
   },
   "team": {
-    "description": "Este año, todas las embajadoras y miembros de Women Techmakers (WTM) de Latinoamérica nos hemos unido porque queremos sumar esfuerzos para crear un solo evento a nivel de latinoamérica y así ofrecer contenido de calidad a todas nuestras participantes."
+    "description": "<div class='mb-1'>Este año, las embajadoras y miembros de Women Techmakers (WTM) de muchos países de Latinoamérica nos hemos unido porque queremos sumar esfuerzos para crear un solo evento a nivel de latinoamérica y así ofrecer contenido de calidad a todas nuestras participantes.</div><div><span class='mr-1'>🇦🇷</span>Argentina</div><div><span class='mr-1'>🇧🇴</span>Bolivia</div><div><span class='mr-1'>🇨🇴</span>Colombia</div><div><span class='mr-1'>🇨🇷</span>Costa Rica</div><div><span class='mr-1'>🇸🇻</span>El Salvador</div><div><span class='mr-1'>🇲🇽</span>México</div><div><span class='mr-1'>🇳🇮</span>Nicaragua</div><div><span class='mr-1'>🇵🇪</span>Perú</div><div><span class='mr-1'>🇩🇴</span>República Dominicana</div>"
   },
   "schedule": {
     "saveSessionsSignedOut": "Inicia sesión para guardar tus charlas"
@@ -227,7 +227,7 @@
     "blocks": [
       {
         "title": "Organizadoras",
-        "description": "WTM Latam representa la unión de 17 capítulos de Women Techmakers en Latinomérica.",
+        "description": "WTM Latam representa la unión de Women Techmakers Ambassadors de muchos países de Latinomérica.",
         "callToAction": {
           "label": "Conoce al Equipo",
           "link": "/team"
