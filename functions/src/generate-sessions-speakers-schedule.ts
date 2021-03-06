@@ -78,7 +78,7 @@ async function generateAndSaveData(changedSpeaker?) {
   const scheduleEnabled = scheduleConfig.enabled === 'true';
 
   if (!Object.keys(sessions).length) {
-    generatedData = { ...speakers };
+    generatedData.speakers = { ...speakers };
   } else if (!scheduleEnabled || !Object.keys(schedule).length) {
     generatedData = sessionsSpeakersMap(sessions, speakers);
   } else {
