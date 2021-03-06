@@ -76,7 +76,7 @@
     "@types/node": "^12.20.4",
     "@types/polymer": "^1.2.9",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
-    "@typescript-eslint/parser": "^4.15.2",
+    "@typescript-eslint/parser": "^4.16.1",
     "concurrently": "^6.0.0",
     "core-js": "^3.9.0",
     "deepmerge": "^4.2.2",
