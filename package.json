@@ -78,7 +78,7 @@
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.16.1",
     "concurrently": "^6.0.0",
-    "core-js": "^3.9.0",
+    "core-js": "^3.9.1",
     "deepmerge": "^4.2.2",
     "es-dev-server": "^2.1.0",
     "eslint": "^7.20.0",
