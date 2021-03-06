@@ -54,7 +54,414 @@
   ],
   "schedule": {},
   "sessions": {},
-  "speakers": {},
+  "speakers": {
+    "lupecanaviri": {
+      "bio": "Soy Indigena Aymara, Developer Advocate and JS Coach en Laboratoriala, Pythonista de corazón. Busco constantemente ese lugar donde el arte y la tecnología se intersectan.",
+      "company": "Laboratoria",
+      "companyLogo": "",
+      "companyLogoUrl": "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/logos/gdg-lviv.svg",
+      "country": "La Paz, Bolivia",
+      "featured": false,
+      "name": "Lupe Canaviri Maydana",
+      "photo": "/images/people/lupecanaviri.png",
+      "photoUrl": "",
+      "pronouns": "",
+      "shortBio": "Soy Indigena Aymara, Developer Advocate and JS Coach en @Laboratoriala, Pythonista de corazón.",
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/luucamay_",
+          "name": "Twitter"
+        },
+        {
+          "icon": "instagram",
+          "link": "https://www.instagram.com/luucamay",
+          "name": "Instagram"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://www.linkedin.com/in/luucamay",
+          "name": "LinkedIn"
+        },
+        {
+          "icon": "facebook",
+          "link": "https://www.facebook.com/luucamay/",
+          "name": "Facebook"
+        }
+      ],
+      "order": 0,
+      "title": "Developer Advocate and JS Coach"
+    },
+    "anaquevedo": {
+      "bio": "Ingeniera de Sistemas becada de la universidad UPAO, perteneciente al Primer puesto de la promoción de Ingeniería, con maestría en Data Management e Innovación Tecnología y con un Nanodegree en Ingeniería de Datos en Udacity. Con más de 7 años de experiencia nacional e internacional en las empresas InStrategy Consulting, UST Global, Ferreyros, Interbank, Everis y actualmente Intercorp. Donde desempeñé cargos en distintas áreas como BI, BA, Big Data a distintos sectores como agro, comercial, minera y banca. Conferencista recurrente en ponencias de Big Data y Analítica. Me desempeño como docente de Big Data en la Universidad Ricardo Palma y fundadora de la primera comunidad Cloud en Perú: Cloud & Data Analytics. Actualmente me desempeño en el área de Ingeniería de Datos del grupo Intercorp liderando diversos proyectos y encargada de dirigir la estrategia cloud de Big Data Academy con el rol de Directora Académica. Experta en temas de Big Data, Analítica y IoT.",
+      "company": "Alicorp",
+      "companyLogo": "",
+      "companyLogoUrl": "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/logos/gdg-lviv.svg",
+      "country": "Lima, Perú",
+      "featured": false,
+      "name": "Anita Quevedo",
+      "photo": "/images/people/anaquevedo.jpg",
+      "photoUrl": "",
+      "pronouns": "",
+      "shortBio": "Ingeniera de Sistemas becada de la universidad UPAO, perteneciente al Primer puesto de la promoción de Ingeniería, con maestría en Data Management e Innovación Tecnología y con un Nanodegree en Ingeniería de Datos en Udacity.",
+      "socials": [
+        {
+          "icon": "linkedin",
+          "link": "https://www.linkedin.com/in/aquevedos91/",
+          "name": "LinkedIn"
+        }
+      ],
+      "order": 1,
+      "title": "Ingeniera de Sistemas"
+    },
+    "valeriaviva": {
+      "bio": "Ingeniera en sistemas, tecnóloga y emprendedora. Maestranda en Género y Política.",
+      "company": "Social Digital Lab",
+      "companyLogo": "",
+      "companyLogoUrl": "",
+      "country": "Buenos Aires, Argentina",
+      "featured": false,
+      "name": "Valeria Viva",
+      "photo": "/images/people/valeriaviva.png",
+      "photoUrl": "",
+      "shortBio": "Ingeniera en sistemas, tecnóloga y emprendedora. Maestranda en Género y Política.",
+      "socials": [
+        {
+          "icon": "facebook",
+          "link": "https://www.facebook.com/valeria.viva",
+          "name": "Facebook"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/valeriaviva",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://www.linkedin.com/in/valeriaviva/",
+          "name": "LinkedIn"
+        }
+      ],
+      "order": 2,
+      "title": "Ingeniera en Sistemas"
+    },
+    "mendezgandica": {
+      "bio": "Beatris is an engineer working as a Program Manager at Microsoft. In this role, she manages the daily operations of the usage billing pipeline for Azure Data services. Her work is essential to Microsoft as it ensures that Azure’s customer billing is secure, scalable, and correct. Beatris' has a passion for giving back to the community. In 2018 she started a nonprofit organization, Nuevo Foundation, where she works to prepare underrepresented students to become tomorrow’s leaders. Nuevo Foundation’s mission is to inspire kids to be curious, confident, and courageous by discovering the world of STEM. To date, the nonprofit has taught more than 8,000 students about computer science and STEM education across thirty-five countries and Puerto Rico. In 2017, Beatris was selected as one of the 10 TechnoLochicas for the campaign. In 2019, Beatris was awarded the HACR Young Hispanic Corporate Achievers’ 40 under 40 award, the UWEC Outstanding Recent Alumni award, and delivered the Winter 2019 commencement address for her alma matter in Wisconsin. Lastly, she was selected to be one of the ambassadors for the American Association for the Advancement of Science IF/THEN to help shift the way our country—and the world—thinks about women in STEM.",
+      "company": "Microsoft",
+      "companyLogo": "",
+      "companyLogoUrl": "",
+      "country": "San Cristobal, Venezuela y Seattle, USA",
+      "featured": false,
+      "name": "Beatris Gandica",
+      "photo": "/images/people/mendezgandica.jpg",
+      "photoUrl": "",
+      "shortBio": "Beatris is an engineer working as a Program Manager at Microsoft. In this role, she manages the daily operations of the usage billing pipeline for Azure Data services.",
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "http://twitter.com/beagandica",
+          "name": "Twitter"
+        }
+      ],
+      "order": 3,
+      "title": "Engineering Program Manager"
+    },
+    "silvanagutierrez": {
+      "bio": "Ingeniera de sistemas con más de siete años de experiencia en el área de desarrollo web. Actualmente oficial de desarrollo de aplicaciones en la Dirección Nacional de Tecnologías de Información y Comunicación SEGIP. Co founder de AuroraSoft “Smart Solutions”, un emprendimiento orientado al desarrollo de proyectos de innovación tecnológica. Lead organizer de la comunidad de Google Developers  La Paz y Ambassador de Google´s Women Techmakers La Paz. Co organizer de Hackers & Founders Bolivia. Entusiasta de la tecnología, promotora de la educación y empoderamiento de las mujeres.",
+      "company": "Oficial de Desarrollo de Aplicaciones",
+      "companyLogo": "",
+      "companyLogoUrl": "",
+      "country": "La Paz, Bolivia",
+      "featured": false,
+      "name": "Silvana Gutierrez Montaño",
+      "photo": "/images/people/silvanagutierrez.jpg",
+      "photoUrl": "",
+      "shortBio": "Ingeniera de sistemas con más de siete años de experiencia en el área de desarrollo web.",
+      "socials": [
+        {
+          "icon": "facebook",
+          "link": "https://www.facebook.com/SilvanaGuti/",
+          "name": "Facebook"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/Sil_Guty",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://www.linkedin.com/in/silvanagutierrezm/",
+          "name": "LinkedIn"
+        }
+      ],
+      "order": 4,
+      "title": "Ingeniera de Sistemas"
+    },
+    "melissagave": {
+      "bio": "Techmom y apasionada de las tecnología de Google, ademas también es el co-organizador de varias comunidades locales como GDG Lima, GBG Lima, Women techmakers Lima Ambassador y  I'm remarkable Ambassador; ha estado involucrada en las comunidad es tecnológicas desde hace más de 5 años; y expositora en diferentes eventos con temas de  emprendimiento ,liderazgo ,Mujeres: líderes, emprendedoras y exitosas, web, google apps, ux y tiene un amplio espíritu empresarial y  innovación. Busco motivar a mas mujeres a involucrarse en el mundo de la tecnología, que conozcan las herramientas que están al alcance de la mano y que cumplan sus sueños y así puedan emprender y crecer como personas y profesionales y ayudar así al crecimiento de nuestro ecosistema.",
+      "company": "Banco de Crédito del Perú",
+      "companyLogo": "",
+      "companyLogoUrl": "",
+      "country": "La Paz, Bolivia",
+      "featured": false,
+      "name": "Lima, Perú",
+      "photo": "/images/people/melissagave.jpg",
+      "photoUrl": "",
+      "shortBio": "Techmom y apasionada de las tecnología de Google, ademas también es el co-organizador de varias comunidades.",
+      "socials": [
+        {
+          "icon": "facebook",
+          "link": "https://www.facebook.com/MelissaGaveM",
+          "name": "Facebook"
+        },
+        {
+          "icon": "instagram",
+          "link": "https://www.instagram.com/techmomperu/",
+          "name": "Instagram"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://www.linkedin.com/in/melissagavemq/",
+          "name": "LinkedIn"
+        }
+      ],
+      "order": 5,
+      "title": "Data Engineer"
+    },
+    "keilacarpio": {
+      "bio": "Profesional en Computación e Informática con más de 18 años de experiencia en la Implementación de Sistemas para los sectores de Banca, Telecomunicaciones, Seguros, Gobierno y Retail. Licenciada en Administración de Empresas y Negocios Internacionales. Estudiante de Maestría en Ciencia y Tecnología Informática.  Analista de Negocios y Desarrollador de Sistemas con certificaciones en SCRUM MASTER e ITIL Foundation. Apasionada en la creación de soluciones innovadoras en un marco de trabajo ágil. Mi frase favorita: “No existen límites para lograr tus objetivos, la perseverancia, el aprendizaje y creer en ti marca la diferencia”",
+      "company": "MIKA-Learning",
+      "companyLogo": "",
+      "companyLogoUrl": "",
+      "country": "Lima, Perú",
+      "featured": false,
+      "name": "Keila Zared Carpio Torres",
+      "photo": "/images/people/keilacarpio.jpg",
+      "photoUrl": "",
+      "shortBio": "Profesional en Computación e Informática con más de 18 años de experiencia en la Implementación de Sistemas para los sectores de Banca, Telecomunicaciones, Seguros, Gobierno y Retail.",
+      "socials": [
+        {
+          "icon": "instagram",
+          "link": "https://www.instagram.com/zarcar_zarcar/",
+          "name": "Instagram"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/zaredcarpio",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://www.linkedin.com/in/keila-c-83624661",
+          "name": "LinkedIn"
+        }
+      ],
+      "order": 6,
+      "title": "CEO"
+    },
+    "julissarodriguez": {
+      "bio": "Me gusta leer, escribir y programar. Actualmente me desempeño como Analista de Software en Inetum Perú para Pacífico Seguros y soy Co-fundadora y Co-Organizadora de la comunidad Perú .Net Development, donde realizamos eventos mensuales de hard-skills y soft-skills, también participo como Mentora en Perú Champs y como tallerista en eventos para impulsar la participación de las niñas y adolescentes en carreras STEAM. He estudiado Desarrollo de Software, como carrera técnica, en SENATI y actualmente estudio Ingeniería de Sistemas en UPC. Cuento con experiencia en el sector salud y educación.",
+      "company": "Inetum Perú",
+      "companyLogo": "",
+      "companyLogoUrl": "",
+      "country": "Lima, Perú",
+      "featured": false,
+      "name": "Julissa Rodriguez",
+      "photo": "/images/people/julissarodriguez.png",
+      "photoUrl": "",
+      "shortBio": "Actualmente me desempeño como Analista de Software en Inetum Perú para Pacífico Seguros.",
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/julissarparco",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkfacebookedin",
+          "link": "https://www.facebook.com/JSRParco/",
+          "name": "Facebook"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://www.linkedin.com/in/julissarodriguezparco/",
+          "name": "LinkedIn"
+        }
+      ],
+      "order": 7,
+      "title": "Analista de Sistemas Pleno"
+    },
+    "brendacosta": {
+      "bio": "Soy ingeniera de sistemas, peruana y arquitecta de soluciones, con 4 años de experiencia en proyectos en nube. He laborado en proyectos ágiles principalemente móviles y actualmente me encuentro a cargo del equipo de la aplicación móvil de Rimac, la principal aseguradora peruana. Estoy certificada como GCP Professional Architect y me encantan los temas asociados a Cloud Computing y serverless. Me encanta aprender de las experiencias de las personas que me rodean y compartir los conocimientos que he obtenido.",
+      "company": "Rimac Seguros y Reaseguros",
+      "companyLogo": "",
+      "companyLogoUrl": "",
+      "country": "Lima, Perú",
+      "featured": false,
+      "name": "Brenda Costa",
+      "photo": "/images/people/brendacosta.jpg",
+      "photoUrl": "",
+      "shortBio": "Soy ingeniera de sistemas, peruana y arquitecta de soluciones, con 4 años de experiencia en proyectos en nube.",
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/BrendaCostaB13",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://www.linkedin.com/in/bcostabo/",
+          "name": "LinkedIn"
+        }
+      ],
+      "order": 8,
+      "title": "Arquitecta de Soluciones Senior"
+    },
+    "anabrenes": {
+      "bio": "Líder de los equipos de desarrollo de software en la nube para latinoamerica en Cargill. Tengo a cargo más de 30 desarrolladores (lamentablemente sólo dos mujeres más en el equipo) y me siento sumamente feliz de poder trabajar con un equipo de personas tan profesionales y con una calidad humana impresionante! Además, soy embajadora de la red de mujeres de mi empresa y trabajo día a día para lograr una equidad de genero y mejores oportunidades para las mujeres en ingeniería. He participado como speaker en conferencias nacionales e internacionales (Jornadas Costarricense de Computación e informática en el 2017, Latinamerican Women in Technology en el 2019 y ese mismo año en España en la conferencia de Ubiquitous Computing and Ambient Intelligence). Soy apasionada de las nuevas tecnologías y de la inclusión de las mujeres en ciencias y tecnología y tengo una maestría en ciencias de la computación e informática enfocado en la interacción humano computador.",
+      "company": "Cargill",
+      "companyLogo": "",
+      "companyLogoUrl": "",
+      "country": "San Jose, Costa Rica",
+      "featured": true,
+      "name": "Ana Ligia Brenes",
+      "photo": "/images/people/anabrenes.jpg",
+      "photoUrl": "",
+      "shortBio": "Líder de los equipos de desarrollo de software en la nube para latinoamerica en Cargill.",
+      "socials": [
+        {
+          "icon": "facebook",
+          "link": "https://www.facebook.com/anabrenes92/",
+          "name": "Facebook"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://www.linkedin.com/in/ana-brenes-127b538b/",
+          "name": "Linkedin"
+        },
+        {
+          "icon": "instagram",
+          "link": "https://www.instagram.com/ana.brenesvindas/",
+          "name": "Instagram"
+        }
+      ],
+      "order": 8,
+      "title": "Lider de los equipos de desarrollo de software en la nube en Cargill"
+    },
+    "vanessamarely": {
+      "bio": "Frontend Developer - GDE en Angular & Tecnologías Web. Github Star. Mentora y Speaker. Le gustan los gatos, apasionada por los libros, la tecnología, las ilustraciones y la naturaleza.",
+      "company": "Gorilla Logic",
+      "companyLogo": "",
+      "companyLogoUrl": "",
+      "country": "Medellin, Colombia",
+      "featured": false,
+      "name": "Vanessa Aristizabal",
+      "photo": "/images/people/vanessamarely.jpg",
+      "photoUrl": "",
+      "shortBio": "Frontend Developer - GDE en Angular & Tecnologías Web. Github Star. Mentora y Speaker.",
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/vanessamarely",
+          "name": "Twitter"
+        }
+      ],
+      "order": 9,
+      "title": "Senior React Developer"
+    },
+    "adrimoya": {
+      "bio": "Ingeniera de Sistemas, especialista en Ingeniería de Software, Google Developer Expert para Google Cloud, trabajo como Cloud Engineer en Globant, Líder de la comunidad GDG Cloud Bogotá, Women Teachmakers Ambassador, apasionada por compartir y aprender tecnología Open Source. Adicta al Running, el Ciclomontañismo y los deportes al aire libre.",
+      "company": "Globant",
+      "companyLogo": "",
+      "companyLogoUrl": "",
+      "country": "Bogotá, Colombia",
+      "featured": false,
+      "name": "Adriana Fernanda Moya Forero",
+      "photo": "/images/people/adrimoya.jpg",
+      "photoUrl": "",
+      "shortBio": "Ingeniera de Sistemas, especialista en Ingeniería de Software, Google Developer Expert para Google Cloud.",
+      "socials": [
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/adriifermo",
+          "name": "Twitter"
+        }
+      ],
+      "order": 10,
+      "title": "Cloud Engineer"
+    },
+    "luzmaida": {
+      "bio": "Software Engineer, WTM Ambassador. Actualmente está enfocada en aplicar sus conocimientos sobre Javascript y Google Cloud Platform en diferentes proyectos. Entre sus pasiones están la tecnología, la Industria del Software, la Gestión y Análisis de Datos utilizando diferentes productos y servicios de Google, como Google Cloud Platform, Firebase y GA. Le encantan las comunidades y el crecimiento que se puede aportar a las personas, por lo que ha sido parte de diferentes comunidades y actualmente es parte del programa Google Developer Expert. Le encanta leer, codear, practicar Pilates, los gatitos, el trabajo colaborativo y contribuir a proyectos sociales.",
+      "company": "",
+      "companyLogo": "",
+      "companyLogoUrl": "",
+      "country": "Mainz, Alemania",
+      "featured": false,
+      "name": "Luz Maria Maida Claure",
+      "photo": "/images/people/luzmaida.jpeg",
+      "photoUrl": "",
+      "shortBio": "Software Engineer, WTM Ambassador. Actualmente está enfocada en aplicar sus conocimientos sobre Javascript y Google Cloud Platform en diferentes proyectos.",
+      "socials": [
+        {
+          "icon": "facebook",
+          "link": "https://www.facebook.com/lu.maida",
+          "name": "Facebook"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/LuMaidacl",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://www.linkedin.com/in/lumaidacl/",
+          "name": "LinkedIn"
+        },
+        {
+          "icon": "instagram",
+          "link": "https://www.instagram.com/lumaidacl/",
+          "name": "Instagram"
+        }
+      ],
+      "order": 11,
+      "title": "Software Engineer"
+    },
+    "marianvilla": {
+      "bio": "Marian is a Designer, Educator, Creator & Tinkerer. She holds a double major degree, one as a Graphic Designer and other as a Social Communicator & Journalist. She graduated with a Master in Marketing. She teaches about digital publications and interactive media . She has been working as a CEO in the design and marketing field for the past 10 years.She is one of the founders of @pionerasdev a non-profit initiative that has become Colombias largest community for Women in Tech.",
+      "company": "WOMINT, PionerasDev",
+      "companyLogo": "",
+      "companyLogoUrl": "",
+      "country": "Medellín, Colombia",
+      "featured": false,
+      "name": "Marian Villa",
+      "photo": "/images/people/marianvilla.jpg",
+      "photoUrl": "",
+      "shortBio": "Marian is a Designer, Educator, Creator & Tinkerer. She holds a double major degree, one as a Graphic Designer and other as a Social Communicator & Journalist.",
+      "socials": [
+        {
+          "icon": "facebook",
+          "link": "https://www.facebook.com/MarianVilla",
+          "name": "Facebook"
+        },
+        {
+          "icon": "instagram",
+          "link": "https://www.instagram.com/marianvilla/",
+          "name": "Instagram"
+        },
+        {
+          "icon": "twitter",
+          "link": "https://twitter.com/Marianvilla",
+          "name": "Twitter"
+        },
+        {
+          "icon": "linkedin",
+          "link": "https://www.linkedin.com/in/marianvilla",
+          "name": "Linkedin"
+        }
+      ],
+      "order": 12,
+      "title": "Co-founder WOMINT, CEO PionerasDev"
+    }
+  },
   "team": [
     {
       "members": [
