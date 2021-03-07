@@ -196,7 +196,7 @@
     },
     "102": {
       "complexity": "",
-      "description": "",
+      "description": "Aprender a identificar nuestras fortalezas y potenciarlas para alcanzar otros mercados debe ser nuestro interés primordial en el nuevo orden mundial, donde la zona horaria, el manejo del idioma, las costumbres, y por supuesto nuestrto talento en STEAM hace que los ojos estén en Latinoamérica.  Hoy somos la región con mayor crecimiento de developers en el mundo, generando una gran oferta por parte de empresas extranjeras, interesadas en contratar remoto y asíncrono. ¿Cuáles son las claves para 'Exportarnos/vendernos'? Descubrámoslas juntos 💪",
       "language": "Español",
       "presentation": "",
       "speakers": ["marianvilla"],
@@ -205,7 +205,7 @@
     },
     "103": {
       "complexity": "",
-      "description": "",
+      "description": "Machine Learning representa un nuevo paradigma en la programación en el cual se entrena un sistema con datos para inferir las reglas por sí mismo. Pero ¿cómo es en realidad el ML?En esta sesión conoceremos cómo iniciarnos en el aprendizaje automático y lo aprenderemos visualizando algunos ejemplos de reconocimiento de imágenes, voz, texto.",
       "language": "Español",
       "presentation": "",
       "speakers": ["melissagave"],
@@ -223,7 +223,7 @@
     },
     "105": {
       "complexity": "",
-      "description": "",
+      "description": "Haremos un recorrido por algunas nociones básicas de cloud para luego analizar las oportunidades que hay en esta área dado el contexto en el que vivimos y que retos tendremos que enfrentar en el día a día en las empresas que están viviendo esta migración o travesía a la nube.",
       "language": "Español",
       "presentation": "",
       "speakers": ["brendacosta"],
@@ -241,7 +241,7 @@
     },
     "107": {
       "complexity": "",
-      "description": "",
+      "description": "En esta charla aprenderás los pasos esenciales para crear tu Web de Negocios  que te inspiraran a conocer más del lenguaje Python y como se trabaja con el framework Django para lograrlo en poco tiempo.",
       "language": "Español",
       "presentation": "",
       "speakers": ["keilacarpio"],
@@ -250,7 +250,7 @@
     },
     "108": {
       "complexity": "",
-      "description": "",
+      "description": "Conseguir un buen empleo es el objetivo que se desea, para poner en practica todas esas nuevas habilidades adquiridas, pero aveces se desconoce el  cómo aplicar a una oferta para obtener ese empleo deseado. El objetivo de esta charla es darte algunos tips en el logro de ese maravilloso objetivo.",
       "language": "Español",
       "presentation": "",
       "speakers": ["vanessamarely"],
@@ -259,7 +259,7 @@
     },
     "109": {
       "complexity": "",
-      "description": "",
+      "description": "Alguna vez has ido a una clase de danza por primera vez y sentiste que no podias recordar ni siquiera el primer paso de la nueva coreografía que están haciendo? No te suena eso familiar a la primera vez que empezaste a programar? En esta charla voy a mostrarte la mentalidad que uso al aprender a bailar aplicada al aprender a programar.",
       "language": "Español",
       "presentation": "",
       "speakers": ["lupecanaviri"],
@@ -268,7 +268,7 @@
     },
     "110": {
       "complexity": "",
-      "description": "",
+      "description": "Poder enseñar que de manera muy sencilla puedes generar un datalake, desde la ingesta de datos en batch y real time luego procesarla con dataflow , llevarla a bigquery y pintarla a Data studio.",
       "language": "Español",
       "presentation": "",
       "speakers": ["anaquevedo"],
@@ -277,7 +277,7 @@
     },
     "111": {
       "complexity": "",
-      "description": "",
+      "description": "Una charla hablando de Inteligencia Artificial y como amplifica nuestros sesgos (raciales, de género, entre otros). Qué podemos hacer para contribuir a un mundo más igualitario y la responsabilidad que tenemos quienes hacemos tecnología.",
       "language": "Español",
       "presentation": "",
       "speakers": ["valeriaviva"],
@@ -286,7 +286,7 @@
     },
     "112": {
       "complexity": "",
-      "description": "",
+      "description": "Introducción a Api RestFul, repasando conceptos básicos desde que es un api, hasta una demo funcional de un api restful. Tocando puntos como API, REST, Principios de REST, HTTP, entre otros.",
       "language": "Español",
       "presentation": "",
       "speakers": ["julissarodriguez"],
@@ -295,7 +295,7 @@
     },
     "113": {
       "complexity": "",
-      "description": "",
+      "description": "Implementar un prototipo que permita a un usuario observar e interactuar virtualmente con la presentación (empaque) de un producto utilizando realidad virtual y evaluar la funcionalidad, usabilidad, experiencia de usuario del prototipo.",
       "language": "Español",
       "presentation": "",
       "speakers": ["anabrenes"],
@@ -304,7 +304,7 @@
     },
     "114": {
       "complexity": "",
-      "description": "",
+      "description": "Esta charla hablara de como cada quien puede encontrar su pasion, hacer ese algo que te gusta, y al mismo tiempo inspirar a otros para que tambien sean felices y cumplan sus sue#os.",
       "language": "Español",
       "presentation": "",
       "speakers": ["mendezgandica"],
@@ -313,7 +313,7 @@
     },
     "115": {
       "complexity": "",
-      "description": "",
+      "description": "En esta sesión abordaremos las oportunidades actuales que puedes tomar si te emociona todo lo relacionado con tecnologías cloud, que debes tener en cuenta y que tips te puede dar una Cloud Engineer.",
       "language": "Español",
       "presentation": "",
       "speakers": ["adrimoya"],
@@ -322,7 +322,7 @@
     },
     "116": {
       "complexity": "",
-      "description": "",
+      "description": "A través de un caso práctico, aprenderemos lo que se necesita para crear diferentes flujos de datos, que pueden existir dentro de Google Cloud, tomando en cuenta aspectos como la escabilidad, costos y seguridad.",
       "language": "Español",
       "presentation": "",
       "speakers": ["luzmaida"],
@@ -331,7 +331,7 @@
     },
     "117": {
       "complexity": "",
-      "description": "",
+      "description": "Hablaremos cómo los chatbots y los asistentes virtuales están  impactando y cambiando la forma en la que  interactuamos  con la tecnología. Comenzando por conocer las tecnologías que hacen posible la existencia de estos programas informáticos basados en algoritmos y potenciados por Inteligencia Artificial. También vamos a conocer muchos ejemplos de uso de los asistentes virtuales y su aplicación en múltiples ámbitos, para finalmente explicar desde cero cómo entrenar nuestro propio bot con Dialogflow y cómo integrarlo con diferentes plataformas.",
       "language": "Español",
       "presentation": "",
       "speakers": ["silvanagutierrez"],
