@@ -1,43 +1,35 @@
-### Introduction
+Requerimos que todos los asistentes, ponentes, patrocinadores y voluntarios de nuestra conferencia estén de acuerdo con el siguiente código de conducta. La organización se encargará de que se cumpla durante el evento. Esperamos la colaboración de todos los participantes para ayudar a construir un entorno seguro para todo el mundo.
 
-{$ title $} is dedicated to providing a harassment-free and inclusive event experience for everyone regardless of gender identity and expression, sexual orientation, disabilities, neurodiversity, physical appearance, body size, ethnicity, nationality, race, age, religion, or other protected category. We do not tolerate harassment of event participants in any form. {$ title $} takes violations of our policy seriously and will respond appropriately.
+### La versión rápida
 
-### Policy
+Queremos que esta conferencia sea una experiencia libre de acoso para todo el mundo sin importar su género, su identidad o expresión de género, edad, orientación sexual, discapacidad, aspecto físico, raza o religión.
 
-All participants of {$ title $} events must abide by the following policy:
+No toleraremos el acoso de ningún tipo a ningún participante. El lenguaje o las imágenes sexuales no son apropiadas para el evento, incluyendo las charlas, redes sociales  y cualquier otro medio de comunicación. Los participantes que violen estas reglas podrán ser sancionados o expulsados de la conferencia a discreción de los organizadores.
 
-1. Be excellent to each other. We want the event to be an excellent experience for everyone regardless of gender identity and expression, sexual orientation, disabilities, neurodiversity, physical appearance, body size, ethnicity, nationality, race, age, religion, or other protected category. Treat everyone with respect. Participate while acknowledging that everyone deserves to be here -- and each of us has the right to enjoy our experience without fear of harassment, discrimination, or condescension, whether blatant or via micro-aggressions. Jokes shouldn’t demean others. Consider what you are saying and how it would feel if it were said to or about you.
-2. Speak up if you see or hear something. Harassment is not tolerated, and you are empowered to politely engage when you or others are disrespected. The person making you feel uncomfortable may not be aware of what they are doing, and politely bringing their behavior to their attention is encouraged. If a participant engages in harassing or uncomfortable behavior, the event organizers may take any action they deem appropriate, including warning or expelling the offender from the event with no refund. If you are being harassed or feel uncomfortable, notice that someone else is being harassed, or have any other concerns, please contact a member of the event staff immediately.
-3. Harassment is not tolerated. Harassment includes, but is not limited to: verbal language that reinforces social structures of domination related to gender identity and expression, sexual orientation, disabilities, neurodiversity, physical appearance, body size, ethnicity, nationality, race, age, religion, or other protected category; sexual imagery in public spaces; deliberate intimidation; stalking; following; harassing photography or recording; sustained disruption of talks or other events; offensive verbal language; inappropriate physical contact; and unwelcome sexual attention. Participants asked to stop any harassing behavior are expected to comply immediately.
-4. Practice saying "Yes and" to each other. It’s a theatre improv technique to build on each other’s ideas. We all benefit when we create together.
+### La versión no tan rápida
 
-### Scope
+Incluimos como acoso:
 
-This policy extends to talks, forums, workshops, codelabs, social media, parties, hallway conversations, all attendees, partners, sponsors, volunteers, event staff, etc. You catch our drift. {$ title $} reserves the right to refuse admittance to, or remove any person from, any {$ title $} hosted event (including future {$ title $} events) at any time in its sole discretion. This includes, but is not limited to, attendees behaving in a disorderly manner or failing to comply with this policy, and the terms and conditions herein. If a participant engages in harassing or uncomfortable behavior, the event organizers may take any action they deem appropriate, including warning or expelling the offender from the event with no refund.
+Los comentarios expresados (de manera escrita o verbal) ofensivos relacionados con el género, la identidad o expresión de género, edad, orientación sexual, discapacidad, apariencia física, raza, religión;
 
-Our event staff can usually be identified by special badges/attire. Our zero-tolerance policy means that we will look into and review every allegation of violation of our Event Community Guidelines and Anti-Harassment Policy and respond appropriately. Please note, while we take all concerns raised seriously, we will use our discretion as to determining when and how to follow up on reported incidents, and may decline to take any further action and/or may direct the participant to other resources for resolution.
+Imágenes sexuales en espacios públicos;
 
-Event staff will be happy to help participants contact hotel/venue security or local law enforcement, provide escorts, or otherwise assist those experiencing discomfort or harassment to feel safe for the duration of the event. We value your attendance.
+Intimidación deliberada;
 
-Exhibiting partners, sponsors or vendor booths, or similar activities are also subject to this policy. In particular, exhibitors should not use sexualized images, activities, or other material. Booth staff (including volunteers) should not use sexualized clothing/uniforms/costumes, or otherwise create a sexualized environment. Participants and exhibiting partners or sponsors disobeying this policy will be notified and are expected to stop any offending behavior immediately.
+Acecho o persecución;
 
-### Why this policy is important
+El acoso con fotografías o vídeos;
 
-Harassment at events and in online communities is unfortunately common. Creating an official policy aims to improve this by making it clear that harassment of anyone for any reason is not acceptable within our events and communities. This policy may prevent harassment by clearly defining expectations for behavior, aims to provide reassurance, and encourages people who have had bad experiences at other events to participate in this one.
+La interrupción sostenida de charlas u otros eventos;
 
-### License and attribution
+La atención sexual no deseada.
 
-This policy is [licensed](https://support.google.com/developergroups/answer/3340512) under the [Creative Commons Zero license](https://creativecommons.org/publicdomain/zero/1.0/).
+Los patrocinadores también se encuentran sujetos a esta política.
 
-This policy is based on and influenced by several other community policies including Ohio LinuxFest Anti-Harassment policy, Con Anti-Harassment Project, Geek Feminism Wiki (created by the Ada Initiative), ConfCodeofConduct.com, JSconf, Rust, Diversity in Python, and Write/Speak/Code.
+En concreto, los patrocinadores no deben usar imágenes, actividades u otro material sexualizado. El personal (incluyendo los voluntarios) no debe utilizar ropa/uniformes/disfraces sexualizados, o crear de ninguna otra forma un entorno sexualizado. Si un participante tiene un comportamiento de acoso, los organizadores de la conferencia podrán tomar cualquier acción que consideren apropiada, incluyendo advertir al infractor o su expulsión de la conferencia. Si estás siendo acosado, sabes de alguien que lo está siendo o tienes alguna otra preocupación, por favor contacta con algún miembro de la organización inmediatamente. Los miembros de la organización estarán listos y dispuestos para ayudar a los participantes en esta situación o asistir de otra manera para ayudar a quienes están siendo acosados a sentirse seguros durante la conferencia. Valoramos tu participación.
 
-### Report incident
+Esperamos que los participantes sigan estas reglas durante la conferencia.
 
-To report an incident look for a staff member by badge/attire or contact our incident response team below:
-{% for contact in codeOfConductBlock.contacts %}
+Equipo IWD LATAM 2021
 
-- {$ contact $}{% endfor %}
-
-#### Anonymous report
-
-You can make an anonymous report [here]({$ codeOfConductBlock.form $}). We can't follow up with you directly, but we will fully investigate it and take whatever action is necessary to prevent a recurrence.
+#IWD2021 #WomenTechmakers #CourageToCreate #LATAM
