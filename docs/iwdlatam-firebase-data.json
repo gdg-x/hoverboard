@@ -187,7 +187,7 @@
   "sessions": {
     "101": {
       "complexity": "",
-      "description": "Last year women showed the incredible strength and power in the face of adversity. We recognize that there were tremendous challenges, especially for women, from dealing with COVID to broader issues of racial justice and human rights. But among all that, many new projects, ideas and goals were achieved, creating a positive change throughout the world. Now, will you have the #CouragetoCreate in 2021?",
+      "description": "Last year women showed the incredible strength and power in the face of adversity. We recognize that there were tremendous challenges, especially for women, from dealing with COVID to broader issues of racial justice and human rights. But among all that, many new projects, ideas and goals were achieved, creating a positive change throughout the world. Now, what will you have the #CouragetoCreate in 2021?",
       "language": "English",
       "presentation": "",
       "speakers": ["caitlinmorrissey"],
@@ -1282,6 +1282,24 @@
           "order": 22
         },
         {
+          "name": "María René Torrez",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/embajadoras%2FMaria%20Rene%20Torrez%20Vargas.jpg?alt=media&token=78db5421-182d-44a0-9fc2-dca4085cd040",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/solorene",
+              "name": "Facebook"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/solorene",
+              "name": "Twitter"
+            }
+          ],
+          "title": "GDG Cochabamba",
+          "order": 23
+        },
+        {
           "name": "Mariana Ruiz",
           "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/embajadoras%2FMariana%20Retrado%20ilustrado%20-%20mariana%20ruiz.png?alt=media&token=57cef8fb-7822-486f-9477-e66f920e6aff",
           "socials": [
@@ -1292,7 +1310,7 @@
             }
           ],
           "title": "GDG WonderCoders",
-          "order": 23
+          "order": 24
         },
         {
           "name": "Maribel Maisano",
@@ -1305,7 +1323,7 @@
             }
           ],
           "title": "GDG Buenos Aires",
-          "order": 24
+          "order": 25
         },
         {
           "name": "Maritza Pacheco Cuno",
@@ -1328,7 +1346,7 @@
             }
           ],
           "title": "GDG Tarija",
-          "order": 25
+          "order": 26
         },
         {
           "name": "Mauricio Arce Torrez",
@@ -1356,7 +1374,7 @@
             }
           ],
           "title": "Angular Bolivia / GDG Cochabamba",
-          "order": 26
+          "order": 27
         },
         {
           "name": "Mirina Gonzales Rodriguez",
@@ -1374,7 +1392,7 @@
             }
           ],
           "title": "GDG Arequipa",
-          "order": 27
+          "order": 28
         },
         {
           "name": "Monica Canaza",
@@ -1387,7 +1405,7 @@
             }
           ],
           "title": "GDG La Paz",
-          "order": 28
+          "order": 29
         },
         {
           "name": "Monica Limachi",
@@ -1400,7 +1418,7 @@
             }
           ],
           "title": "GDG Cloud La Paz",
-          "order": 29
+          "order": 30
         },
         {
           "name": "Nigel Davila Maturano",
@@ -1418,7 +1436,7 @@
             }
           ],
           "title": "GDG Cochabamba",
-          "order": 30
+          "order": 31
         },
         {
           "name": "Oscar Salguero",
@@ -1431,7 +1449,7 @@
             }
           ],
           "title": "GDG San Salvador",
-          "order": 31
+          "order": 32
         },
         {
           "name": "Paola Lopez Rios",
@@ -1449,7 +1467,7 @@
             }
           ],
           "title": "GDG La Paz",
-          "order": 32
+          "order": 33
         },
         {
           "name": "Samantha Zambrana Revollo",
@@ -1467,7 +1485,7 @@
             }
           ],
           "title": "GDG Cochabamba",
-          "order": 33
+          "order": 34
         },
         {
           "name": "Silvana Gutierrez M.",
@@ -1490,7 +1508,7 @@
             }
           ],
           "title": "GDG La Paz",
-          "order": 34
+          "order": 35
         },
         {
           "name": "Valeria Burgos",
@@ -1513,7 +1531,7 @@
             }
           ],
           "title": "GDG Tarija",
-          "order": 35
+          "order": 36
         },
         {
           "name": "Vania Catorceno",
@@ -1536,7 +1554,7 @@
             }
           ],
           "title": "GDG Cochabamba",
-          "order": 36
+          "order": 37
         },
         {
           "name": "Victoria Ubaldo Gamarra",
@@ -1554,7 +1572,7 @@
             }
           ],
           "title": "GDG Cloud Lima",
-          "order": 37
+          "order": 38
         },
         {
           "name": "Wilma Paca",
@@ -1572,7 +1590,7 @@
             }
           ],
           "title": "GDG Cochabamba",
-          "order": 38
+          "order": 39
         }
       ]
     },
