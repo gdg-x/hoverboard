@@ -29,6 +29,11 @@
       "label": "Speakers"
     },
     {
+      "route": "schedule",
+      "permalink": "/schedule/",
+      "label": "Agenda"
+    },
+    {
       "route": "team",
       "permalink": "/team/",
       "label": "Equipo"

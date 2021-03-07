@@ -348,7 +348,7 @@
   },
   "speakers": {
     "caitlinmorrissey": {
-      "bio": "",
+      "bio": "Program Manager, Women Techmakers, Google",
       "company": "Google",
       "companyLogo": "",
       "companyLogoUrl": "",
@@ -356,8 +356,8 @@
       "featured": true,
       "name": "Caitlin Morrissey",
       "photo": "/images/people/caitlinmorrissey.jpeg",
-      "photoUrl": "",
-      "shortBio": "",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fcaitlinmorrissey.jpeg?alt=media&token=a6edfb44-d736-4471-9ed4-1b50ad010c58",
+      "shortBio": "Program Manager, Women Techmakers, Google",
       "socials": [
         {
           "icon": "linkedin",
@@ -377,7 +377,7 @@
       "featured": false,
       "name": "Marian Villa",
       "photo": "/images/people/marianvilla.jpg",
-      "photoUrl": "",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fmarianvilla.jpg?alt=media&token=e3130842-6a8e-4e64-9710-d24a3b401033",
       "shortBio": "Marian is a Designer, Educator, Creator & Tinkerer. She holds a double major degree, one as a Graphic Designer and other as a Social Communicator & Journalist.",
       "socials": [
         {
@@ -411,9 +411,9 @@
       "companyLogoUrl": "",
       "country": "La Paz, Bolivia",
       "featured": false,
-      "name": "Lima, Perú",
+      "name": "Melissa Gave",
       "photo": "/images/people/melissagave.jpg",
-      "photoUrl": "",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fmelissagave.jpg?alt=media&token=80a159e8-619e-4e4c-bae1-e1b0daadf641",
       "shortBio": "Techmom y apasionada de las tecnología de Google, ademas también es el co-organizador de varias comunidades.",
       "socials": [
         {
@@ -436,7 +436,7 @@
       "title": "Data Engineer"
     },
     "kanchanapatlolla": {
-      "bio": "",
+      "bio": "Data and AI/ML Specialist Customer Engineer, Google",
       "company": "Google",
       "companyLogo": "",
       "companyLogoUrl": "",
@@ -444,8 +444,8 @@
       "featured": true,
       "name": "Kanchana Patlolla",
       "photo": "/images/people/kanchanapatlolla.jpeg",
-      "photoUrl": "",
-      "shortBio": "",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fkanchanapatlolla.jpeg?alt=media&token=1f637963-a653-4e76-90dc-ba22d6a5a3ee",
+      "shortBio": "Data and AI/ML Specialist Customer Engineer, Google",
       "socials": [
         {
           "icon": "linkedin",
@@ -465,7 +465,7 @@
       "featured": false,
       "name": "Brenda Costa",
       "photo": "/images/people/brendacosta.jpg",
-      "photoUrl": "",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fbrendacosta.jpg?alt=media&token=614ca075-6c72-40e2-85c8-ab0883e42713",
       "shortBio": "Soy ingeniera de sistemas, peruana y arquitecta de soluciones, con 4 años de experiencia en proyectos en nube.",
       "socials": [
         {
@@ -491,7 +491,7 @@
       "featured": false,
       "name": "Keila Zared Carpio Torres",
       "photo": "/images/people/keilacarpio.jpg",
-      "photoUrl": "",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fkeilacarpio.jpg?alt=media&token=e4aaaed1-bf20-4108-a85e-de9c56737591",
       "shortBio": "Profesional en Computación e Informática con más de 18 años de experiencia en la Implementación de Sistemas para los sectores de Banca, Telecomunicaciones, Seguros, Gobierno y Retail.",
       "socials": [
         {
@@ -522,7 +522,7 @@
       "featured": false,
       "name": "Vanessa Aristizabal",
       "photo": "/images/people/vanessamarely.jpg",
-      "photoUrl": "",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fvanessamarely.jpg?alt=media&token=761b4a5d-dc4c-415f-8f6c-295666969c21",
       "shortBio": "Frontend Developer - GDE en Angular & Tecnologías Web. Github Star. Mentora y Speaker.",
       "socials": [
         {
@@ -543,7 +543,7 @@
       "featured": false,
       "name": "Lupe Canaviri Maydana",
       "photo": "/images/people/lupecanaviri.png",
-      "photoUrl": "",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Flupecanaviri.png?alt=media&token=15825a32-df26-4221-864d-ea06a6dbba33",
       "pronouns": "",
       "shortBio": "Soy Indigena Aymara, Developer Advocate and JS Coach en @Laboratoriala, Pythonista de corazón.",
       "socials": [
@@ -575,12 +575,12 @@
       "bio": "Ingeniera de Sistemas becada de la universidad UPAO, perteneciente al Primer puesto de la promoción de Ingeniería, con maestría en Data Management e Innovación Tecnología y con un Nanodegree en Ingeniería de Datos en Udacity. Con más de 7 años de experiencia nacional e internacional en las empresas InStrategy Consulting, UST Global, Ferreyros, Interbank, Everis y actualmente Intercorp. Donde desempeñé cargos en distintas áreas como BI, BA, Big Data a distintos sectores como agro, comercial, minera y banca. Conferencista recurrente en ponencias de Big Data y Analítica. Me desempeño como docente de Big Data en la Universidad Ricardo Palma y fundadora de la primera comunidad Cloud en Perú: Cloud & Data Analytics. Actualmente me desempeño en el área de Ingeniería de Datos del grupo Intercorp liderando diversos proyectos y encargada de dirigir la estrategia cloud de Big Data Academy con el rol de Directora Académica. Experta en temas de Big Data, Analítica y IoT.",
       "company": "Alicorp",
       "companyLogo": "",
-      "companyLogoUrl": "https://storage.googleapis.com/hoverboard-experimental.appspot.com/images/logos/gdg-lviv.svg",
+      "companyLogoUrl": "",
       "country": "Lima, Perú",
       "featured": false,
       "name": "Anita Quevedo",
       "photo": "/images/people/anaquevedo.jpg",
-      "photoUrl": "",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fanaquevedo.jpg?alt=media&token=491773ed-0159-4e0d-a68f-a04a8471858a",
       "pronouns": "",
       "shortBio": "Ingeniera de Sistemas becada de la universidad UPAO, perteneciente al Primer puesto de la promoción de Ingeniería, con maestría en Data Management e Innovación Tecnología y con un Nanodegree en Ingeniería de Datos en Udacity.",
       "socials": [
@@ -602,7 +602,7 @@
       "featured": false,
       "name": "Valeria Viva",
       "photo": "/images/people/valeriaviva.png",
-      "photoUrl": "",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fvaleriaviva.png?alt=media&token=36a78bb9-f74d-4e44-81f7-08f988f20309",
       "shortBio": "Ingeniera en sistemas, tecnóloga y emprendedora. Maestranda en Género y Política.",
       "socials": [
         {
@@ -633,7 +633,7 @@
       "featured": false,
       "name": "Julissa Rodriguez",
       "photo": "/images/people/julissarodriguez.png",
-      "photoUrl": "",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fjulissarodriguez.png?alt=media&token=3faa2086-fc06-4ab3-99a4-d35167b3df7d",
       "shortBio": "Actualmente me desempeño como Analista de Software en Inetum Perú para Pacífico Seguros.",
       "socials": [
         {
@@ -664,7 +664,7 @@
       "featured": true,
       "name": "Ana Ligia Brenes",
       "photo": "/images/people/anabrenes.jpg",
-      "photoUrl": "",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fanabrenes.jpg?alt=media&token=6513e2c8-5bc0-4c29-8022-bf170bcae634",
       "shortBio": "Líder de los equipos de desarrollo de software en la nube para latinoamerica en Cargill.",
       "socials": [
         {
@@ -695,7 +695,7 @@
       "featured": false,
       "name": "Beatris Gandica",
       "photo": "/images/people/mendezgandica.jpg",
-      "photoUrl": "",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fmendezgandica.jpg?alt=media&token=2b9a0015-c46b-408e-b80f-f7a5e4ff2a83",
       "shortBio": "Beatris is an engineer working as a Program Manager at Microsoft. In this role, she manages the daily operations of the usage billing pipeline for Azure Data services.",
       "socials": [
         {
@@ -716,7 +716,7 @@
       "featured": false,
       "name": "Adriana Fernanda Moya Forero",
       "photo": "/images/people/adrimoya.jpg",
-      "photoUrl": "",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fadrimoya.jpg?alt=media&token=e67aa18a-2359-4ef9-b0b3-6ca4eda5d91a",
       "shortBio": "Ingeniera de Sistemas, especialista en Ingeniería de Software, Google Developer Expert para Google Cloud.",
       "socials": [
         {
@@ -737,7 +737,7 @@
       "featured": false,
       "name": "Luz Maria Maida Claure",
       "photo": "/images/people/luzmaida.jpeg",
-      "photoUrl": "",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fluzmaida.jpeg?alt=media&token=7f3b3fe3-dace-4ce3-8142-50b642bf73a8",
       "shortBio": "Software Engineer, WTM Ambassador. Actualmente está enfocada en aplicar sus conocimientos sobre Javascript y Google Cloud Platform en diferentes proyectos.",
       "socials": [
         {
@@ -773,7 +773,7 @@
       "featured": false,
       "name": "Silvana Gutierrez Montaño",
       "photo": "/images/people/silvanagutierrez.jpg",
-      "photoUrl": "",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fsilvanagutierrez.jpg?alt=media&token=4acbb175-e5df-4dea-bf50-022d91dede89",
       "shortBio": "Ingeniera de sistemas con más de siete años de experiencia en el área de desarrollo web.",
       "socials": [
         {
