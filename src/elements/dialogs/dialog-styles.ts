@@ -72,6 +72,10 @@ documentContainer.innerHTML = `<dom-module id="dialog-styles">
         line-height: 1.6;
       }
 
+      a.meta-info {
+        font-size: 1.17em;
+      }
+
       .description {
         margin: 24px 0 32px;
       }

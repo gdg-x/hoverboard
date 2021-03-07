@@ -69,30 +69,23 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
                   <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
                 </template>
               </div>
-
-              <div class="float-button">
-                <paper-fab
-                  icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
-                  hidden$="[[!viewport.isLaptopPlus]]"
-                  on-click="_toggleFeaturedSession"
-                ></paper-fab>
-              </div>
             </div>
           </app-toolbar>
         </app-header>
 
         <div class="dialog-container content">
-          <div class="float-button">
-            <paper-fab
-              icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
-              hidden$="[[viewport.isLaptopPlus]]"
-              on-click="_toggleFeaturedSession"
-            ></paper-fab>
-          </div>
           <h3 class="meta-info" hidden$="[[disabledSchedule]]">
             [[session.dateReadable]], [[session.startTime]] - [[session.endTime]]
           </h3>
-          <h3 class="meta-info" hidden$="[[disabledSchedule]]">[[session.track.title]]</h3>
+          <a
+            class="meta-info"
+            href$="[[session.track.link]]"
+            target="_blank"
+            rel="noopener noreferrer"
+            hidden$="[[disabledSchedule]]"
+          >
+            [[session.track.title]]
+          </a>
           <h3 class="meta-info" hidden$="[[!session.complexity]]">
             {$ sessionDetails.contentLevel $}: [[session.complexity]]
           </h3>
