@@ -192,7 +192,7 @@
       "presentation": "",
       "speakers": ["caitlinmorrissey"],
       "tags": ["Keynote"],
-      "title": "Keynote"
+      "title": "Keynote: #CourageToCreate"
     },
     "102": {
       "complexity": "",
@@ -214,7 +214,7 @@
     },
     "104": {
       "complexity": "",
-      "description": "",
+      "description": "Today we're seeing revolutionary changes in hardware and software that are democratizing machine learning and making it accessible to any developer. Whether you're new to ML or you’re already an expert, GCP has a variety of tools to help you. We'll start with the basics: how to use a pre-trained ML model with a single API call. Then you’ll learn how to customize a pre-trained model with AutoML.",
       "language": "English",
       "presentation": "",
       "speakers": ["kanchanapatlolla"],
