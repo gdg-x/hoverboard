@@ -2116,6 +2116,19 @@
   "triggers": {
     "images": false
   },
-  "videos": [],
+  "videos": [
+    {
+      "speakers": "IWD Latam",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/videos%2Fazul.jpg?alt=media&token=37b47239-8d58-4442-9d43-95f8a0fd08c2",
+      "title": "Stage Azul",
+      "youtubeId": "6wiCxQgVnn4"
+    },
+    {
+      "speakers": "IWD Latam",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/videos%2Fverde.jpg?alt=media&token=4ffb12e0-c256-433d-83fa-c354d7ec77fb",
+      "title": "Stage Verde",
+      "youtubeId": "Aw8zNLy20QI"
+    }
+  ],
   "previousSpeakers": {}
 }

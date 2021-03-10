@@ -37,6 +37,16 @@
       "route": "team",
       "permalink": "/team/",
       "label": "Equipo"
+    },
+    {
+      "route": "team",
+      "permalink": "https://youtu.be/6wiCxQgVnn4",
+      "label": "Stage Azul"
+    },
+    {
+      "route": "team",
+      "permalink": "https://youtu.be/Aw8zNLy20QI",
+      "label": "Stage Verde"
     }
   ],
   "heroSettings": {
