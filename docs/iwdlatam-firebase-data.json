@@ -50,6 +50,18 @@
       ],
       "order": 1,
       "title": "GRACE HOPPER"
+    },
+    {
+      "items": [
+        {
+          "order": 0,
+          "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2Fcodeable.png?alt=media&token=ef664d8f-9c27-4da7-bee7-555a231e389f",
+          "name": "Codeable",
+          "url": "https://www.codeable.la/"
+        }
+      ],
+      "order": 2,
+      "title": "MARGARET HAMILTON"
     }
   ],
   "schedule": {
