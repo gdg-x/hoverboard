@@ -25,7 +25,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
         .videos-wrapper {
           position: relative;
           overflow: hidden;
-          min-height: 300px;
+          min-height: 250px;
         }
 
         .video-list {
@@ -96,6 +96,10 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
             --video-item-height: 256px;
           }
 
+          .videos-wrapper {
+            min-height: 300px;
+          }
+
           .video-item {
             width: calc(var(--max-container-width) / 3 - 16px);
             cursor: pointer;
@@ -104,7 +108,9 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
           .video-item:not(:last-of-type) {
             padding-right: 30px;
           }
+        }
 
+        @media (max-width:900px) and (min-width: 640px) {
           .slide-icon {
             margin: 8px;
             width: 40px;

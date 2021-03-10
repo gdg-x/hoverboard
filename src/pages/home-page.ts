@@ -238,8 +238,8 @@ export class HomePage extends ReduxMixin(PolymerElement) {
       {% if showForkMeBlockForProjectIds.includes(firebase.projectId) %}
       <fork-me-block></fork-me-block>
       {% endif %}
-      <featured-videos></featured-videos>
       <about-block></about-block>
+      <featured-videos></featured-videos>
       <speakers-block></speakers-block>
       <gallery-block></gallery-block>
       <about-organizer-block></about-organizer-block>
