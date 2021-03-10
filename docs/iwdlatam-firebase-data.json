@@ -1985,6 +1985,33 @@
           "order": 14
         },
         {
+          "name": "GDG Santo Domingo",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/comunidades%2Fgdg.png?alt=media&token=8626efd1-7300-4bb7-a016-83618b0e150c",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/GDGSantoDomingo",
+              "name": "Facebook"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/gdgsdq",
+              "name": "Twitter"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/gdgsantodomingo/",
+              "name": "Instagram"
+            },
+            {
+              "icon": "youtube",
+              "link": "https://www.youtube.com/channel/UCzl7sJ95wRX_fMF5KxbPSwQ",
+              "name": "YouTube"
+            }
+          ],
+          "order": 15
+        },
+        {
           "name": "GDG Sucre",
           "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/comunidades%2Fgdg.png?alt=media&token=8626efd1-7300-4bb7-a016-83618b0e150c",
           "socials": [
@@ -1999,7 +2026,7 @@
               "name": "Instagram"
             }
           ],
-          "order": 15
+          "order": 16
         },
         {
           "name": "GDG Tarija",
@@ -2026,7 +2053,7 @@
               "name": "YouTube"
             }
           ],
-          "order": 16
+          "order": 17
         },
         {
           "name": "GDG WonderCoders",
@@ -2053,7 +2080,7 @@
               "name": "Meetup"
             }
           ],
-          "order": 17
+          "order": 18
         },
         {
           "name": "Mujeres TIC's Bolivia",
@@ -2090,7 +2117,7 @@
               "name": "LinkedIn"
             }
           ],
-          "order": 18
+          "order": 19
         },
         {
           "name": "Ruby Perú",
@@ -2102,7 +2129,7 @@
               "name": "Twitter"
             }
           ],
-          "order": 19
+          "order": 20
         },
         {
           "name": "Tech Talks",
@@ -2119,7 +2146,7 @@
               "name": "Meetup"
             }
           ],
-          "order": 20
+          "order": 21
         }
       ]
     }
