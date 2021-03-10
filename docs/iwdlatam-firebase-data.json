@@ -37,7 +37,7 @@
         },
         {
           "order": 1,
-          "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2Fdevexperto%20logo.png?alt=media&token=4487438a-4417-403f-9047-d0a029340539",
+          "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2Fdevexperto.png?alt=media&token=f22415f2-9b79-497c-9b3e-3fe1b0f79d78",
           "name": "devexperto",
           "url": "https://devexperto.com/"
         }
@@ -250,7 +250,7 @@
     },
     "106": {
       "complexity": "",
-      "description": "",
+      "description": "Toma las riendas de tu propio bienestar, porque sentirse bien, física y mentalmente, es clave para disfrutar de una buena salud.",
       "language": "Español",
       "presentation": "",
       "speakers": ["monicabriancon"],
@@ -820,12 +820,12 @@
       "company": "",
       "companyLogo": "",
       "companyLogoUrl": "",
-      "country": "Bolivia",
+      "country": "Cochabamba, Bolivia",
       "featured": false,
       "hidden": true,
       "name": "Monica Briançon Messinger",
       "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fmonicabriancon.jpg?alt=media&token=57c35ce1-8161-4d1a-ae5c-99a261788ee0",
-      "shortBio": "Certificada por la Escuela Prashant de Yoga y la Unión Iberoamericana de Profesores de Yoga. Grado de Sadhaka en el Método DeRose.",
+      "shortBio": "Certificada por la Escuela Prashant de Yoga y la Unión Iberoamericana de Profesores de Yoga. Grado de Sadhaka en el Método DeRose. Comunicadora social, con un máster en dirección de comunicación empresarial e institucional. Directora del portal digital Valor Agregado y columnista de los periódicos Los Tiempos y Correo del Sur.",
       "socials": [],
       "order": 17,
       "title": "Licenciada en Ciencias de la Comunicación"
