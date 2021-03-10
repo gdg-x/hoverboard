@@ -34,6 +34,12 @@
           "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2Fleonidas-esteban.png?alt=media&token=7a49a80e-41bc-4f11-9921-8dbada4a47e4",
           "name": "Leónidas Esteban",
           "url": "https://leonidasesteban.com/"
+        },
+        {
+          "order": 1,
+          "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2Fdevexperto%20logo.png?alt=media&token=4487438a-4417-403f-9047-d0a029340539",
+          "name": "devexperto",
+          "url": "https://devexperto.com/"
         }
       ],
       "order": 0,
