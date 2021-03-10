@@ -34,6 +34,12 @@
           "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2Fleonidas-esteban.png?alt=media&token=7a49a80e-41bc-4f11-9921-8dbada4a47e4",
           "name": "Leónidas Esteban",
           "url": "https://leonidasesteban.com/"
+        },
+        {
+          "order": 1,
+          "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2Fdevexperto.png?alt=media&token=f22415f2-9b79-497c-9b3e-3fe1b0f79d78",
+          "name": "devexperto",
+          "url": "https://devexperto.com/"
         }
       ],
       "order": 0,
@@ -50,6 +56,18 @@
       ],
       "order": 1,
       "title": "GRACE HOPPER"
+    },
+    {
+      "items": [
+        {
+          "order": 0,
+          "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2Fcodeable.png?alt=media&token=ef664d8f-9c27-4da7-bee7-555a231e389f",
+          "name": "Codeable",
+          "url": "https://www.codeable.la/"
+        }
+      ],
+      "order": 2,
+      "title": "MARGARET HAMILTON"
     }
   ],
   "schedule": {
@@ -58,8 +76,8 @@
       "dateReadable": "13 de Marzo 2021",
       "timeslots": [
         {
-          "startTime": "09:30",
-          "endTime": "10:00",
+          "startTime": "09:30 GMT-6",
+          "endTime": "10:00 GMT-6",
           "sessions": [
             {
               "items": ["101"]
@@ -67,8 +85,8 @@
           ]
         },
         {
-          "startTime": "10:00",
-          "endTime": "11:00",
+          "startTime": "10:00 GMT-6",
+          "endTime": "11:00 GMT-6",
           "sessions": [
             {
               "items": ["102"]
@@ -79,8 +97,8 @@
           ]
         },
         {
-          "startTime": "11:00",
-          "endTime": "12:00",
+          "startTime": "11:00 GMT-6",
+          "endTime": "12:00 GMT-6",
           "sessions": [
             {
               "items": ["104"]
@@ -91,8 +109,8 @@
           ]
         },
         {
-          "startTime": "12:00",
-          "endTime": "12:30",
+          "startTime": "12:00 GMT-6",
+          "endTime": "12:30 GMT-6",
           "sessions": [
             {
               "items": ["106"]
@@ -103,8 +121,8 @@
           ]
         },
         {
-          "startTime": "12:30",
-          "endTime": "13:00",
+          "startTime": "12:30 GMT-6",
+          "endTime": "13:00 GMT-6",
           "sessions": [
             {
               "items": ["108"]
@@ -115,8 +133,8 @@
           ]
         },
         {
-          "startTime": "13:00",
-          "endTime": "14:00",
+          "startTime": "13:00 GMT-6",
+          "endTime": "14:00 GMT-6",
           "sessions": [
             {
               "items": ["110"]
@@ -127,8 +145,8 @@
           ]
         },
         {
-          "startTime": "14:00",
-          "endTime": "15:00",
+          "startTime": "14:00 GMT-6",
+          "endTime": "15:00 GMT-6",
           "sessions": [
             {
               "items": ["112"]
@@ -139,8 +157,8 @@
           ]
         },
         {
-          "startTime": "15:00",
-          "endTime": "15:30",
+          "startTime": "15:00 GMT-6",
+          "endTime": "15:30 GMT-6",
           "sessions": [
             {
               "items": ["114"]
@@ -151,8 +169,8 @@
           ]
         },
         {
-          "startTime": "15:30",
-          "endTime": "16:30",
+          "startTime": "15:30 GMT-6",
+          "endTime": "16:30 GMT-6",
           "sessions": [
             {
               "items": ["116"]
@@ -163,8 +181,8 @@
           ]
         },
         {
-          "startTime": "16:30",
-          "endTime": "17:00",
+          "startTime": "16:30 GMT-6",
+          "endTime": "17:00 GMT-6",
           "sessions": [
             {
               "items": ["118"]
@@ -174,10 +192,12 @@
       ],
       "tracks": [
         {
-          "title": "Stage 1"
+          "title": "Stage Azul",
+          "link": "https://youtu.be/6wiCxQgVnn4"
         },
         {
-          "title": "Stage 2"
+          "title": "Stage Verde",
+          "link": "https://youtu.be/Aw8zNLy20QI"
         }
       ]
     }
@@ -185,16 +205,16 @@
   "sessions": {
     "101": {
       "complexity": "",
-      "description": "",
+      "description": "Last year women showed the incredible strength and power in the face of adversity. We recognize that there were tremendous challenges, especially for women, from dealing with COVID to broader issues of racial justice and human rights. But among all that, many new projects, ideas and goals were achieved, creating a positive change throughout the world. Now, what will you have the #CouragetoCreate in 2021?",
       "language": "English",
       "presentation": "",
       "speakers": ["caitlinmorrissey"],
       "tags": ["Keynote"],
-      "title": "Keynote"
+      "title": "Keynote: #CourageToCreate"
     },
     "102": {
       "complexity": "",
-      "description": "",
+      "description": "Aprender a identificar nuestras fortalezas y potenciarlas para alcanzar otros mercados debe ser nuestro interés primordial en el nuevo orden mundial, donde la zona horaria, el manejo del idioma, las costumbres, y por supuesto nuestrto talento en STEAM hace que los ojos estén en Latinoamérica.  Hoy somos la región con mayor crecimiento de developers en el mundo, generando una gran oferta por parte de empresas extranjeras, interesadas en contratar remoto y asíncrono. ¿Cuáles son las claves para 'Exportarnos/vendernos'? Descubrámoslas juntos 💪",
       "language": "Español",
       "presentation": "",
       "speakers": ["marianvilla"],
@@ -203,7 +223,7 @@
     },
     "103": {
       "complexity": "",
-      "description": "",
+      "description": "Machine Learning representa un nuevo paradigma en la programación en el cual se entrena un sistema con datos para inferir las reglas por sí mismo. Pero ¿cómo es en realidad el ML?En esta sesión conoceremos cómo iniciarnos en el aprendizaje automático y lo aprenderemos visualizando algunos ejemplos de reconocimiento de imágenes, voz, texto.",
       "language": "Español",
       "presentation": "",
       "speakers": ["melissagave"],
@@ -212,7 +232,7 @@
     },
     "104": {
       "complexity": "",
-      "description": "",
+      "description": "Today we're seeing revolutionary changes in hardware and software that are democratizing machine learning and making it accessible to any developer. Whether you're new to ML or you’re already an expert, GCP has a variety of tools to help you. We'll start with the basics: how to use a pre-trained ML model with a single API call. Then you’ll learn how to customize a pre-trained model with AutoML.",
       "language": "English",
       "presentation": "",
       "speakers": ["kanchanapatlolla"],
@@ -221,7 +241,7 @@
     },
     "105": {
       "complexity": "",
-      "description": "",
+      "description": "Haremos un recorrido por algunas nociones básicas de cloud para luego analizar las oportunidades que hay en esta área dado el contexto en el que vivimos y que retos tendremos que enfrentar en el día a día en las empresas que están viviendo esta migración o travesía a la nube.",
       "language": "Español",
       "presentation": "",
       "speakers": ["brendacosta"],
@@ -230,16 +250,16 @@
     },
     "106": {
       "complexity": "",
-      "description": "",
+      "description": "Toma las riendas de tu propio bienestar, porque sentirse bien, física y mentalmente, es clave para disfrutar de una buena salud.",
       "language": "Español",
       "presentation": "",
-      "speakers": [],
+      "speakers": ["monicabriancon"],
       "tags": [],
-      "title": "Break (Yoga - Meditación)"
+      "title": "Break (Yoga - Meditación): Recupera tu equilibrio físico mental"
     },
     "107": {
       "complexity": "",
-      "description": "",
+      "description": "En esta charla aprenderás los pasos esenciales para crear tu Web de Negocios  que te inspiraran a conocer más del lenguaje Python y como se trabaja con el framework Django para lograrlo en poco tiempo.",
       "language": "Español",
       "presentation": "",
       "speakers": ["keilacarpio"],
@@ -248,7 +268,7 @@
     },
     "108": {
       "complexity": "",
-      "description": "",
+      "description": "Conseguir un buen empleo es el objetivo que se desea, para poner en practica todas esas nuevas habilidades adquiridas, pero aveces se desconoce el  cómo aplicar a una oferta para obtener ese empleo deseado. El objetivo de esta charla es darte algunos tips en el logro de ese maravilloso objetivo.",
       "language": "Español",
       "presentation": "",
       "speakers": ["vanessamarely"],
@@ -257,16 +277,16 @@
     },
     "109": {
       "complexity": "",
-      "description": "",
+      "description": "Alguna vez has ido a una clase de danza por primera vez y sentiste que no podias recordar ni siquiera el primer paso de la nueva coreografía que están haciendo? No te suena eso familiar a la primera vez que empezaste a programar? En esta charla voy a mostrarte la mentalidad que uso al aprender a bailar aplicada al aprender a programar.",
       "language": "Español",
       "presentation": "",
       "speakers": ["lupecanaviri"],
       "tags": ["Programación"],
-      "title": "DOP: Dance Oriented ProgrammingCrea tu Web de Negocios con Django"
+      "title": "DOP: Dance Oriented Programming"
     },
     "110": {
       "complexity": "",
-      "description": "",
+      "description": "Poder enseñar que de manera muy sencilla puedes generar un datalake, desde la ingesta de datos en batch y real time luego procesarla con dataflow , llevarla a bigquery y pintarla a Data studio.",
       "language": "Español",
       "presentation": "",
       "speakers": ["anaquevedo"],
@@ -275,7 +295,7 @@
     },
     "111": {
       "complexity": "",
-      "description": "",
+      "description": "Una charla hablando de Inteligencia Artificial y como amplifica nuestros sesgos (raciales, de género, entre otros). Qué podemos hacer para contribuir a un mundo más igualitario y la responsabilidad que tenemos quienes hacemos tecnología.",
       "language": "Español",
       "presentation": "",
       "speakers": ["valeriaviva"],
@@ -284,7 +304,7 @@
     },
     "112": {
       "complexity": "",
-      "description": "",
+      "description": "Introducción a Api RestFul, repasando conceptos básicos desde que es un api, hasta una demo funcional de un api restful. Tocando puntos como API, REST, Principios de REST, HTTP, entre otros.",
       "language": "Español",
       "presentation": "",
       "speakers": ["julissarodriguez"],
@@ -293,7 +313,7 @@
     },
     "113": {
       "complexity": "",
-      "description": "",
+      "description": "Implementar un prototipo que permita a un usuario observar e interactuar virtualmente con la presentación (empaque) de un producto utilizando realidad virtual y evaluar la funcionalidad, usabilidad, experiencia de usuario del prototipo.",
       "language": "Español",
       "presentation": "",
       "speakers": ["anabrenes"],
@@ -302,7 +322,7 @@
     },
     "114": {
       "complexity": "",
-      "description": "",
+      "description": "Esta charla hablara de como cada quien puede encontrar su pasion, hacer ese algo que te gusta, y al mismo tiempo inspirar a otros para que tambien sean felices y cumplan sus sue#os.",
       "language": "Español",
       "presentation": "",
       "speakers": ["mendezgandica"],
@@ -311,7 +331,7 @@
     },
     "115": {
       "complexity": "",
-      "description": "",
+      "description": "En esta sesión abordaremos las oportunidades actuales que puedes tomar si te emociona todo lo relacionado con tecnologías cloud, que debes tener en cuenta y que tips te puede dar una Cloud Engineer.",
       "language": "Español",
       "presentation": "",
       "speakers": ["adrimoya"],
@@ -320,7 +340,7 @@
     },
     "116": {
       "complexity": "",
-      "description": "",
+      "description": "A través de un caso práctico, aprenderemos lo que se necesita para crear diferentes flujos de datos, que pueden existir dentro de Google Cloud, tomando en cuenta aspectos como la escabilidad, costos y seguridad.",
       "language": "Español",
       "presentation": "",
       "speakers": ["luzmaida"],
@@ -329,7 +349,7 @@
     },
     "117": {
       "complexity": "",
-      "description": "",
+      "description": "Hablaremos cómo los chatbots y los asistentes virtuales están  impactando y cambiando la forma en la que  interactuamos  con la tecnología. Comenzando por conocer las tecnologías que hacen posible la existencia de estos programas informáticos basados en algoritmos y potenciados por Inteligencia Artificial. También vamos a conocer muchos ejemplos de uso de los asistentes virtuales y su aplicación en múltiples ámbitos, para finalmente explicar desde cero cómo entrenar nuestro propio bot con Dialogflow y cómo integrarlo con diferentes plataformas.",
       "language": "Español",
       "presentation": "",
       "speakers": ["silvanagutierrez"],
@@ -794,6 +814,21 @@
       ],
       "order": 16,
       "title": "Ingeniera de Sistemas"
+    },
+    "monicabriancon": {
+      "bio": "Certificada por la Escuela Prashant de Yoga y la Unión Iberoamericana de Profesores de Yoga. Grado de Sadhaka en el Método DeRose. Ganadora del premio nacional al periodismo especializado en banca. Directora de la Revista Libre Empresa. Columnista del periódico Los Tiempos. Máster en Dirección de Comunicación Empresarial e Institucional (MDCEI) en la Universidad Autónoma de Barcelona. Licenciada en Ciencias de la Comunicación. Diplomada en periodismo económico y financiero y diplomada en Enseñanza en Educación Superior. Dircom del Grupo Jalasoft. Coordinadora de comunicaciones de Industrias de Aceite “FINO” S.A. Comunicadora externa del Grupo RAVI S.A. Gestora de prensa de la Sociedad de Ingenieros de Bolivia, y de la Empresa Misicuni. Directora de Relaciones Públicas de la Cámara Departamental de Industria. Secretaria de Prensa y Propaganda de la Federación de Profesionales de Cochabamba. Miembro fundador y coordinadora de comunicaciones y gestora de prensa, además de ocupar la cartera de Secretaría de la Fundación de la Fundación Orquesta Filarmónica de Cochabamba.",
+      "company": "",
+      "companyLogo": "",
+      "companyLogoUrl": "",
+      "country": "Cochabamba, Bolivia",
+      "featured": false,
+      "hidden": true,
+      "name": "Monica Briançon Messinger",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fmonicabriancon.jpg?alt=media&token=57c35ce1-8161-4d1a-ae5c-99a261788ee0",
+      "shortBio": "Certificada por la Escuela Prashant de Yoga y la Unión Iberoamericana de Profesores de Yoga. Grado de Sadhaka en el Método DeRose. Comunicadora social, con un máster en dirección de comunicación empresarial e institucional. Directora del portal digital Valor Agregado y columnista de los periódicos Los Tiempos y Correo del Sur.",
+      "socials": [],
+      "order": 17,
+      "title": "Licenciada en Ciencias de la Comunicación"
     }
   },
   "team": [
@@ -1280,6 +1315,24 @@
           "order": 22
         },
         {
+          "name": "María René Torrez",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/embajadoras%2FMaria%20Rene%20Torrez%20Vargas.jpg?alt=media&token=78db5421-182d-44a0-9fc2-dca4085cd040",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/solorene",
+              "name": "Facebook"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/solorene",
+              "name": "Twitter"
+            }
+          ],
+          "title": "GDG Cochabamba",
+          "order": 23
+        },
+        {
           "name": "Mariana Ruiz",
           "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/embajadoras%2FMariana%20Retrado%20ilustrado%20-%20mariana%20ruiz.png?alt=media&token=57cef8fb-7822-486f-9477-e66f920e6aff",
           "socials": [
@@ -1290,7 +1343,7 @@
             }
           ],
           "title": "GDG WonderCoders",
-          "order": 23
+          "order": 24
         },
         {
           "name": "Maribel Maisano",
@@ -1303,7 +1356,7 @@
             }
           ],
           "title": "GDG Buenos Aires",
-          "order": 24
+          "order": 25
         },
         {
           "name": "Maritza Pacheco Cuno",
@@ -1326,7 +1379,7 @@
             }
           ],
           "title": "GDG Tarija",
-          "order": 25
+          "order": 26
         },
         {
           "name": "Mauricio Arce Torrez",
@@ -1354,7 +1407,7 @@
             }
           ],
           "title": "Angular Bolivia / GDG Cochabamba",
-          "order": 26
+          "order": 27
         },
         {
           "name": "Mirina Gonzales Rodriguez",
@@ -1372,7 +1425,7 @@
             }
           ],
           "title": "GDG Arequipa",
-          "order": 27
+          "order": 28
         },
         {
           "name": "Monica Canaza",
@@ -1385,7 +1438,7 @@
             }
           ],
           "title": "GDG La Paz",
-          "order": 28
+          "order": 29
         },
         {
           "name": "Monica Limachi",
@@ -1398,7 +1451,7 @@
             }
           ],
           "title": "GDG Cloud La Paz",
-          "order": 29
+          "order": 30
         },
         {
           "name": "Nigel Davila Maturano",
@@ -1416,7 +1469,7 @@
             }
           ],
           "title": "GDG Cochabamba",
-          "order": 30
+          "order": 31
         },
         {
           "name": "Oscar Salguero",
@@ -1429,7 +1482,7 @@
             }
           ],
           "title": "GDG San Salvador",
-          "order": 31
+          "order": 32
         },
         {
           "name": "Paola Lopez Rios",
@@ -1447,7 +1500,7 @@
             }
           ],
           "title": "GDG La Paz",
-          "order": 32
+          "order": 33
         },
         {
           "name": "Samantha Zambrana Revollo",
@@ -1465,7 +1518,7 @@
             }
           ],
           "title": "GDG Cochabamba",
-          "order": 33
+          "order": 34
         },
         {
           "name": "Silvana Gutierrez M.",
@@ -1488,7 +1541,7 @@
             }
           ],
           "title": "GDG La Paz",
-          "order": 34
+          "order": 35
         },
         {
           "name": "Valeria Burgos",
@@ -1511,7 +1564,7 @@
             }
           ],
           "title": "GDG Tarija",
-          "order": 35
+          "order": 36
         },
         {
           "name": "Vania Catorceno",
@@ -1534,7 +1587,7 @@
             }
           ],
           "title": "GDG Cochabamba",
-          "order": 36
+          "order": 37
         },
         {
           "name": "Victoria Ubaldo Gamarra",
@@ -1552,7 +1605,7 @@
             }
           ],
           "title": "GDG Cloud Lima",
-          "order": 37
+          "order": 38
         },
         {
           "name": "Wilma Paca",
@@ -1570,7 +1623,7 @@
             }
           ],
           "title": "GDG Cochabamba",
-          "order": 38
+          "order": 39
         }
       ]
     },
@@ -1953,6 +2006,33 @@
           "order": 14
         },
         {
+          "name": "GDG Santo Domingo",
+          "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/comunidades%2Fgdg.png?alt=media&token=8626efd1-7300-4bb7-a016-83618b0e150c",
+          "socials": [
+            {
+              "icon": "facebook",
+              "link": "https://www.facebook.com/GDGSantoDomingo",
+              "name": "Facebook"
+            },
+            {
+              "icon": "twitter",
+              "link": "https://twitter.com/gdgsdq",
+              "name": "Twitter"
+            },
+            {
+              "icon": "instagram",
+              "link": "https://www.instagram.com/gdgsantodomingo/",
+              "name": "Instagram"
+            },
+            {
+              "icon": "youtube",
+              "link": "https://www.youtube.com/channel/UCzl7sJ95wRX_fMF5KxbPSwQ",
+              "name": "YouTube"
+            }
+          ],
+          "order": 15
+        },
+        {
           "name": "GDG Sucre",
           "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/comunidades%2Fgdg.png?alt=media&token=8626efd1-7300-4bb7-a016-83618b0e150c",
           "socials": [
@@ -1967,7 +2047,7 @@
               "name": "Instagram"
             }
           ],
-          "order": 15
+          "order": 16
         },
         {
           "name": "GDG Tarija",
@@ -1994,7 +2074,7 @@
               "name": "YouTube"
             }
           ],
-          "order": 16
+          "order": 17
         },
         {
           "name": "GDG WonderCoders",
@@ -2021,7 +2101,7 @@
               "name": "Meetup"
             }
           ],
-          "order": 17
+          "order": 18
         },
         {
           "name": "Mujeres TIC's Bolivia",
@@ -2058,7 +2138,7 @@
               "name": "LinkedIn"
             }
           ],
-          "order": 18
+          "order": 19
         },
         {
           "name": "Ruby Perú",
@@ -2070,7 +2150,7 @@
               "name": "Twitter"
             }
           ],
-          "order": 19
+          "order": 20
         },
         {
           "name": "Tech Talks",
@@ -2087,7 +2167,7 @@
               "name": "Meetup"
             }
           ],
-          "order": 20
+          "order": 21
         }
       ]
     }
@@ -2096,6 +2176,19 @@
   "triggers": {
     "images": false
   },
-  "videos": [],
+  "videos": [
+    {
+      "speakers": "IWD Latam",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/videos%2Fazul.jpg?alt=media&token=37b47239-8d58-4442-9d43-95f8a0fd08c2",
+      "title": "Stage Azul",
+      "youtubeId": "6wiCxQgVnn4"
+    },
+    {
+      "speakers": "IWD Latam",
+      "thumbnail": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/videos%2Fverde.jpg?alt=media&token=4ffb12e0-c256-433d-83fa-c354d7ec77fb",
+      "title": "Stage Verde",
+      "youtubeId": "Aw8zNLy20QI"
+    }
+  ],
   "previousSpeakers": {}
 }

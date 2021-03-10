@@ -69,30 +69,23 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
                   <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
                 </template>
               </div>
-
-              <div class="float-button">
-                <paper-fab
-                  icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
-                  hidden$="[[!viewport.isLaptopPlus]]"
-                  on-click="_toggleFeaturedSession"
-                ></paper-fab>
-              </div>
             </div>
           </app-toolbar>
         </app-header>
 
         <div class="dialog-container content">
-          <div class="float-button">
-            <paper-fab
-              icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
-              hidden$="[[viewport.isLaptopPlus]]"
-              on-click="_toggleFeaturedSession"
-            ></paper-fab>
-          </div>
           <h3 class="meta-info" hidden$="[[disabledSchedule]]">
             [[session.dateReadable]], [[session.startTime]] - [[session.endTime]]
           </h3>
-          <h3 class="meta-info" hidden$="[[disabledSchedule]]">[[session.track.title]]</h3>
+          <a
+            class="meta-info"
+            href$="[[session.track.link]]"
+            target="_blank"
+            rel="noopener noreferrer"
+            hidden$="[[disabledSchedule]]"
+          >
+            [[session.track.title]]
+          </a>
           <h3 class="meta-info" hidden$="[[!session.complexity]]">
             {$ sessionDetails.contentLevel $}: [[session.complexity]]
           </h3>
@@ -152,17 +145,6 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
                 </div>
               </div>
             </template>
-          </div>
-
-          <div id="feedback" class="additional-sections">
-            <h3>{$ feedback.headline $}</h3>
-
-            <auth-required hidden="[[!acceptingFeedback]]">
-              <slot slot="prompt">{$ feedback.leaveFeedback $}</slot>
-              <feedback-block session-id="[[session.id]]"></feedback-block>
-            </auth-required>
-
-            <p hidden="[[acceptingFeedback]]">{$ feedback.sessionClosed $}</p>
           </div>
         </div>
       </app-header-layout>
@@ -234,9 +216,14 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
 
   _openSpeaker(event: Event & { currentTarget: HTMLElement }) {
     const speakerId = event.currentTarget.getAttribute('speaker-id');
-    const speakerData = this.speakers.find((speaker) => speaker.id === speakerId);
+    // TODO: Work in a better solution, this is only a hotfix because
+    // speakers array doesn't have all the speakers' info
+    const speakerData = this.session.speakers.find((speaker) => speaker.id === speakerId);
 
     if (!speakerData) return;
+    // TODO: Work in a better solution, this is only a hotfix because
+    // the speaker could have other sessions besides the current one
+    speakerData.sessions = [this.session];
     openDialog(DIALOGS.SPEAKER, speakerData);
   }
 

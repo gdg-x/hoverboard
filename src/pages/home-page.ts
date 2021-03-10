@@ -159,7 +159,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://gdg.community.dev/events/details/google-gdg-buenos-aires-presents-iwd-latam-2021-international-womens-day/"
+            href="{$ organizer.url $}"
           >
           <paper-button
               primary
@@ -239,14 +239,12 @@ export class HomePage extends ReduxMixin(PolymerElement) {
       <fork-me-block></fork-me-block>
       {% endif %}
       <about-block></about-block>
-
+      <featured-videos></featured-videos>
       <speakers-block></speakers-block>
-
       <gallery-block></gallery-block>
       <about-organizer-block></about-organizer-block>
-
+      <latest-posts-block></latest-posts-block>
       <partners-block></partners-block>
-
       <footer-block></footer-block>
     `;
   }

@@ -158,7 +158,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
         >
           {% for nav in navigation %}
           <paper-tab name="{$ nav.route $}" class="nav-item" link>
-            <a href="{$ nav.permalink $}" layout vertical center-center>{$ nav.label $}</a>
+            <a href="{$ nav.permalink $}" target="{$ nav.target $}" layout vertical center-center>{$ nav.label $}</a>
           </paper-tab>
           {% endfor %}
 
