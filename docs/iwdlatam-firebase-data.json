@@ -247,9 +247,9 @@
       "description": "",
       "language": "Español",
       "presentation": "",
-      "speakers": [],
+      "speakers": ["monicabriancon"],
       "tags": [],
-      "title": "Break (Yoga - Meditación)"
+      "title": "Break (Yoga - Meditación): Recupera tu equilibrio físico mental"
     },
     "107": {
       "complexity": "",
@@ -808,6 +808,21 @@
       ],
       "order": 16,
       "title": "Ingeniera de Sistemas"
+    },
+    "monicabriancon": {
+      "bio": "Certificada por la Escuela Prashant de Yoga y la Unión Iberoamericana de Profesores de Yoga. Grado de Sadhaka en el Método DeRose. Ganadora del premio nacional al periodismo especializado en banca. Directora de la Revista Libre Empresa. Columnista del periódico Los Tiempos. Máster en Dirección de Comunicación Empresarial e Institucional (MDCEI) en la Universidad Autónoma de Barcelona. Licenciada en Ciencias de la Comunicación. Diplomada en periodismo económico y financiero y diplomada en Enseñanza en Educación Superior. Dircom del Grupo Jalasoft. Coordinadora de comunicaciones de Industrias de Aceite “FINO” S.A. Comunicadora externa del Grupo RAVI S.A. Gestora de prensa de la Sociedad de Ingenieros de Bolivia, y de la Empresa Misicuni. Directora de Relaciones Públicas de la Cámara Departamental de Industria. Secretaria de Prensa y Propaganda de la Federación de Profesionales de Cochabamba. Miembro fundador y coordinadora de comunicaciones y gestora de prensa, además de ocupar la cartera de Secretaría de la Fundación de la Fundación Orquesta Filarmónica de Cochabamba.",
+      "company": "",
+      "companyLogo": "",
+      "companyLogoUrl": "",
+      "country": "Bolivia",
+      "featured": false,
+      "hidden": true,
+      "name": "Monica Briançon Messinger",
+      "photoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/speakers%2Fmonicabriancon.jpg?alt=media&token=57c35ce1-8161-4d1a-ae5c-99a261788ee0",
+      "shortBio": "Certificada por la Escuela Prashant de Yoga y la Unión Iberoamericana de Profesores de Yoga. Grado de Sadhaka en el Método DeRose.",
+      "socials": [],
+      "order": 17,
+      "title": "Licenciada en Ciencias de la Comunicación"
     }
   },
   "team": [

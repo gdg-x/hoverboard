@@ -212,6 +212,7 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
             ga-event-category="speaker"
             ga-event-action="open details"
             ga-event-label$="[[speaker.name]]"
+            hidden$="[[speaker.hidden]]"
           >
             <div relative>
               <plastic-image
