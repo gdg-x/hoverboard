@@ -126,10 +126,16 @@
     "suggested": "Sugerido"
   },
   "latestPostsBlock": {
-    "title": "Últimas noticias",
+    "title": "Artículos importantes",
     "callToAction": {
       "label": "Ver todas las historias",
       "link": "/blog/"
+    },
+    "codeOfConduct": {
+      "title": "Código de Conducta",
+      "image": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/videos%2Fverde.jpg?alt=media&token=4ffb12e0-c256-433d-83fa-c354d7ec77fb",
+      "backgroundColor": "#2196F3",
+      "brief": "Requerimos que todos los asistentes, ponentes, patrocinadores y voluntarios de nuestra conferencia estén de acuerdo con el siguiente código de conducta."
     }
   },
   "speakers": {

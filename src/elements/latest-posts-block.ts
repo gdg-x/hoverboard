@@ -85,6 +85,40 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
         <h1 class="container-title">{$ latestPostsBlock.title $}</h1>
 
         <div class="posts-wrapper">
+          <a
+            href="/coc"
+            class="post card"
+            ga-on="click"
+            ga-event-category="blog"
+            ga-event-action="open post"
+            ga-event-label="{$ latestPostsBlock.codeOfConduct.title $}"
+            flex
+            layout
+            vertical
+          >
+            <plastic-image
+              class="image"
+              srcset="{$ latestPostsBlock.codeOfConduct.image $}"
+              style="background-color: {$ latestPostsBlock.codeOfConduct.backgroundColor $};"
+              sizing="cover"
+              lazy-load
+              preload
+              fade
+            ></plastic-image>
+            <div class="details" layout vertical justified flex-auto>
+              <div>
+                <text-truncate lines="2">
+                  <h3 class="title">{$ latestPostsBlock.codeOfConduct.title $}</h3>
+                </text-truncate>
+                <text-truncate lines="3">
+                  <marked-element class="description" markdown="{$ latestPostsBlock.codeOfConduct.brief $}">
+                    <div slot="markdown-html"></div>
+                  </marked-element>
+                </text-truncate>
+              </div>
+              <div class="date"></div>
+            </div>
+          </a>
           <template is="dom-repeat" items="[[latestPosts]]" as="post">
             <a
               href$="/blog/posts/[[post.id]]/"
@@ -122,13 +156,6 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
             </a>
           </template>
         </div>
-
-        <a href="{$ latestPostsBlock.callToAction.link $}">
-          <paper-button class="cta-button animated icon-right">
-            <span>{$ latestPostsBlock.callToAction.label $}</span>
-            <iron-icon icon="hoverboard:arrow-right-circle"></iron-icon>
-          </paper-button>
-        </a>
       </div>
     `;
   }
