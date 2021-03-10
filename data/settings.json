@@ -21,22 +21,38 @@
     {
       "route": "home",
       "permalink": "/",
-      "label": "Inicio"
+      "label": "Inicio",
+      "target": ""
     },
     {
       "route": "speakers",
       "permalink": "/speakers/",
-      "label": "Speakers"
+      "label": "Speakers",
+      "target": ""
     },
     {
       "route": "schedule",
       "permalink": "/schedule/",
-      "label": "Agenda"
+      "label": "Agenda",
+      "target": ""
     },
     {
       "route": "team",
       "permalink": "/team/",
-      "label": "Equipo"
+      "label": "Equipo",
+      "target": ""
+    },
+    {
+      "route": "team",
+      "permalink": "https://youtu.be/6wiCxQgVnn4",
+      "label": "Stage Azul",
+      "target": "_blank"
+    },
+    {
+      "route": "team",
+      "permalink": "https://youtu.be/Aw8zNLy20QI",
+      "label": "Stage Verde",
+      "target": "_blank"
     }
   ],
   "heroSettings": {
