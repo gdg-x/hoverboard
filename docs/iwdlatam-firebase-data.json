@@ -70,6 +70,12 @@
           "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2Fcodeable.png?alt=media&token=ef664d8f-9c27-4da7-bee7-555a231e389f",
           "name": "Codeable",
           "url": "https://www.codeable.la/"
+        },
+        {
+          "order": 1,
+          "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2FJalasoft.png?alt=media&token=86df1028-4c84-4091-b15e-efbf81dee7ee",
+          "name": "Jalasoft",
+          "url": "https://jalasoft.com/"
         }
       ],
       "order": 2,
