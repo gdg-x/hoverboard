@@ -46,6 +46,12 @@
           "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2Fjetbrains.png?alt=media&token=157dd18a-614f-4c31-9733-31a1fda7acde",
           "name": "JetBrains",
           "url": "https://www.jetbrains.com/"
+        },
+        {
+          "order": 3,
+          "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2Fnucba.png?alt=media&token=43ccdec8-e441-4394-9b7f-53433f752686",
+          "name": "NUCBA",
+          "url": "https://nucba.com.ar/"
         }
       ],
       "order": 0,
