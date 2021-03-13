@@ -82,6 +82,18 @@
           "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2FJalasoft.png?alt=media&token=86df1028-4c84-4091-b15e-efbf81dee7ee",
           "name": "Jalasoft",
           "url": "https://jalasoft.com/"
+        },
+        {
+          "order": 2,
+          "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2F10minds.png?alt=media&token=22d1a796-c324-45a0-9caa-eca32d2c1234",
+          "name": "10Minds",
+          "url": "https://10minds.org/"
+        },
+        {
+          "order": 3,
+          "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2FdeclarandoVariablesPodcast.png?alt=media&token=3e3b2cd8-f634-4034-bdba-f22d4539e895",
+          "name": "Declarando Variables Podcast",
+          "url": "https://declarandovariables.com/"
         }
       ],
       "order": 2,
