@@ -37,6 +37,11 @@
       "title": "Sobre IWD",
       "links": [
         {
+          "name": "Participa en Discord",
+          "url": "http://bit.ly/IWDLatamDiscord",
+          "newTab": true
+        },
+        {
           "name": "IWD",
           "url": "https://www.womentechmakers.com/events/iwd/",
           "newTab": true
@@ -80,7 +85,7 @@
     "statisticsBlock": {
       "attendees": {
         "label": "Asistentes",
-        "number": "1000+"
+        "number": "500+"
       },
       "days": {
         "label": "Día",
@@ -88,7 +93,7 @@
       },
       "sessions": {
         "label": "Charlas",
-        "number": "10+"
+        "number": "16"
       },
       "tracks": {
         "label": "Escenarios (Tracks)",

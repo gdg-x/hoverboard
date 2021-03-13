@@ -53,7 +53,14 @@
       "permalink": "https://youtu.be/Aw8zNLy20QI",
       "label": "Stage Verde",
       "target": "_blank"
+    },
+    {
+      "route": "team",
+      "permalink": "http://bit.ly/IWDLatamDiscord",
+      "label": "Discord",
+      "target": "_blank"
     }
+
   ],
   "heroSettings": {
     "home": {
@@ -179,7 +186,7 @@
       "itemsCount": 2
     },
     "speakers": {
-      "itemsCount": 10
+      "itemsCount": 4
     },
     "previousSpeakers": {
       "itemsCount": 0
