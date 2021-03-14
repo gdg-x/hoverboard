@@ -64,6 +64,12 @@
           "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2Fable.png?alt=media&token=f0f5c834-5452-4d38-ab5d-0600f02666f9",
           "name": "Able",
           "url": "https://able.co/"
+        },
+        {
+          "order": 1,
+          "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2FcodigoFacilito.png?alt=media&token=6b7cca55-069d-427e-a2fb-de878a1b7efb",
+          "name": "Código Facilito",
+          "url": "https://codigofacilito.com"
         }
       ],
       "order": 1,
@@ -94,6 +100,12 @@
           "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2FdeclarandoVariablesPodcast.png?alt=media&token=3e3b2cd8-f634-4034-bdba-f22d4539e895",
           "name": "Declarando Variables Podcast",
           "url": "https://declarandovariables.com/"
+        },
+        {
+          "order": 4,
+          "logoUrl": "https://firebasestorage.googleapis.com/v0/b/iwd-wtm-latam.appspot.com/o/sponsors%2Fgroway.jpg?alt=media&token=eb89faba-bbc5-4fd8-b14f-7c41ecdb3b5e",
+          "name": "Groway.Studio",
+          "url": "https://www.groway.studio/"
         }
       ],
       "order": 2,
