@@ -246,18 +246,18 @@
       "complexity": "",
       "description": "Aprender a identificar nuestras fortalezas y potenciarlas para alcanzar otros mercados debe ser nuestro interés primordial en el nuevo orden mundial, donde la zona horaria, el manejo del idioma, las costumbres, y por supuesto nuestrto talento en STEAM hace que los ojos estén en Latinoamérica.  Hoy somos la región con mayor crecimiento de developers en el mundo, generando una gran oferta por parte de empresas extranjeras, interesadas en contratar remoto y asíncrono. ¿Cuáles son las claves para 'Exportarnos/vendernos'? Descubrámoslas juntos 💪",
       "language": "Español",
-      "presentation": "",
+      "presentation": "http://bit.ly/2ZxXsOH",
       "speakers": ["marianvilla"],
-      "tags": ["Inspiracional"],
+      "tags": ["Desarrollo Profesional"],
       "title": "From Latam to the Universe 🚀"
     },
     "103": {
       "complexity": "",
       "description": "Machine Learning representa un nuevo paradigma en la programación en el cual se entrena un sistema con datos para inferir las reglas por sí mismo. Pero ¿cómo es en realidad el ML?En esta sesión conoceremos cómo iniciarnos en el aprendizaje automático y lo aprenderemos visualizando algunos ejemplos de reconocimiento de imágenes, voz, texto.",
       "language": "Español",
-      "presentation": "",
+      "presentation": "https://drive.google.com/file/d/12xskMMA_w5-9sFXp_PjsAV0WU0bQrx64/view?usp=sharing",
       "speakers": ["melissagave"],
-      "tags": ["Machine Learning"],
+      "tags": ["Inteligencia Artificial","Machine Learning","Data Science"],
       "title": "Machine Learning Zero to Hero"
     },
     "104": {
@@ -273,7 +273,7 @@
       "complexity": "",
       "description": "Haremos un recorrido por algunas nociones básicas de cloud para luego analizar las oportunidades que hay en esta área dado el contexto en el que vivimos y que retos tendremos que enfrentar en el día a día en las empresas que están viviendo esta migración o travesía a la nube.",
       "language": "Español",
-      "presentation": "",
+      "presentation": "https://docs.google.com/presentation/d/1zgByd4iArGoc9VAQKgm9-OxoaSujNh7fHNQIdqRl3I0/edit?usp=sharing",
       "speakers": ["brendacosta"],
       "tags": ["Cloud"],
       "title": "Mujeres en Cloud: Oportunidades y Retos"
@@ -293,25 +293,25 @@
       "language": "Español",
       "presentation": "",
       "speakers": ["keilacarpio"],
-      "tags": ["Web"],
+      "tags": ["Web","Mobile"],
       "title": "Crea tu Web de Negocios con Django"
     },
     "108": {
       "complexity": "",
       "description": "Conseguir un buen empleo es el objetivo que se desea, para poner en practica todas esas nuevas habilidades adquiridas, pero aveces se desconoce el  cómo aplicar a una oferta para obtener ese empleo deseado. El objetivo de esta charla es darte algunos tips en el logro de ese maravilloso objetivo.",
       "language": "Español",
-      "presentation": "",
+      "presentation": "https://t.co/WhJ8nLvKPh?amp=1",
       "speakers": ["vanessamarely"],
-      "tags": ["Web"],
+      "tags": ["Desarrollo Profesional"],
       "title": "Tips para obtener un buen empleo como Devs en la  Web"
     },
     "109": {
       "complexity": "",
       "description": "Alguna vez has ido a una clase de danza por primera vez y sentiste que no podias recordar ni siquiera el primer paso de la nueva coreografía que están haciendo? No te suena eso familiar a la primera vez que empezaste a programar? En esta charla voy a mostrarte la mentalidad que uso al aprender a bailar aplicada al aprender a programar.",
       "language": "Español",
-      "presentation": "",
+      "presentation": "https://slides.com/luucamay/dance-oriented-programming",
       "speakers": ["lupecanaviri"],
-      "tags": ["Programación"],
+      "tags": ["Desarrollo Profesional"],
       "title": "DOP: Dance Oriented Programming"
     },
     "110": {
@@ -329,7 +329,7 @@
       "language": "Español",
       "presentation": "",
       "speakers": ["valeriaviva"],
-      "tags": ["Inteligencia Artificial"],
+      "tags": ["Inteligencia Artificial","Machine Learning", "Data Science"],
       "title": "¿Podemos crear un mundo más igualitario con IA?"
     },
     "112": {
@@ -338,16 +338,16 @@
       "language": "Español",
       "presentation": "",
       "speakers": ["julissarodriguez"],
-      "tags": ["Web"],
+      "tags": ["Web","Mobile"],
       "title": "Introducción a Web API RESTFUL"
     },
     "113": {
       "complexity": "",
       "description": "Implementar un prototipo que permita a un usuario observar e interactuar virtualmente con la presentación (empaque) de un producto utilizando realidad virtual y evaluar la funcionalidad, usabilidad, experiencia de usuario del prototipo.",
       "language": "Español",
-      "presentation": "",
+      "presentation": "https://drive.google.com/file/d/1QqcmJqJ5vUG2w4eWICCIbMHsFUGXYNXp/view?usp=sharing",
       "speakers": ["anabrenes"],
-      "tags": ["VR"],
+      "tags": ["UI","UX","Design","Realidad Virtual"],
       "title": "Diseño de un prototipo de realidad virtual para ser usado en estudios de mercado"
     },
     "114": {
@@ -356,7 +356,7 @@
       "language": "Español",
       "presentation": "",
       "speakers": ["mendezgandica"],
-      "tags": ["Motivacional"],
+      "tags": ["Desarrollo Profesional"],
       "title": "Encontrando tu Pasión"
     },
     "115": {
