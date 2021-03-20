@@ -4,7 +4,7 @@
   "description": "Hoverboard serverless functions",
   "main": "dist/index.js",
   "engines": {
-    "node": "12"
+    "node": "14"
   },
   "scripts": {
     "build": "tsc",

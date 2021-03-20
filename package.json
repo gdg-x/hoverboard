@@ -4,7 +4,7 @@
   "private": true,
   "description": "Conference website template",
   "engines": {
-    "node": "12"
+    "node": "14"
   },
   "scripts": {
     "build": "npm run clean && tsc && NODE_ENV=production rollup --config rollup.config.js",
@@ -73,7 +73,7 @@
     "@types/google.analytics": "0.0.41",
     "@types/jest": "^26.0.21",
     "@types/jest-dev-server": "^4.2.0",
-    "@types/node": "^12.20.6",
+    "@types/node": "^14.14.35",
     "@types/polymer": "^1.2.9",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
