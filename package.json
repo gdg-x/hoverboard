@@ -4,7 +4,8 @@
   "private": true,
   "description": "Conference website template",
   "engines": {
-    "node": "14"
+    "node": "16",
+    "npm": "7"
   },
   "scripts": {
     "build": "npm run clean && tsc && NODE_ENV=production rollup --config rollup.config.js",
@@ -33,7 +34,7 @@
     "@polymer/app-layout": "^3.1.0",
     "@polymer/app-route": "^3.0.2",
     "@polymer/decorators": "^3.0.0",
-    "@polymer/google-map": "github:abraham/google-map#3.0",
+    "@polymer/google-map": "git+https://git@github.com/abraham/google-map.git#3.0",
     "@polymer/iron-ajax": "^3.0.1",
     "@polymer/iron-dropdown": "^3.0.1",
     "@polymer/iron-icon": "^3.0.1",
@@ -52,10 +53,10 @@
     "@polymer/paper-toast": "^3.0.1",
     "@polymer/polymer": "^3.4.1",
     "@power-elements/lazy-image": "^2.2.0",
-    "@radi-cho/star-rating": "github:abraham/star-rating#polymer-3",
+    "@radi-cho/star-rating": "git+https://git@github.com/abraham/star-rating.git#polymer-3",
     "@reduxjs/toolkit": "^1.6.1",
     "@webcomponents/webcomponentsjs": "^2.6.0",
-    "clamp-js-main": "github:abraham/clamp-js-main#export",
+    "clamp-js-main": "git+https://git@github.com/abraham/clamp-js-main.git#export",
     "firebase": "^9.1.1",
     "lit": "^2.0.2",
     "plastic-image": "^3.0.2",
