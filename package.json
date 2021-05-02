@@ -69,7 +69,7 @@
     "@firebase/testing": "^0.20.11",
     "@open-wc/building-rollup": "^1.10.0",
     "@testing-library/dom": "^7.30.3",
-    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/jest-dom": "^5.12.0",
     "@types/google.analytics": "0.0.41",
     "@types/jest": "^26.0.22",
     "@types/jest-dev-server": "^4.2.0",
