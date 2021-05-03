@@ -1,4 +1,4 @@
-import { getByText } from '@testing-library/dom';
+import { screen } from '@testing-library/dom';
 import { html } from 'lit-html';
 import { mocked } from 'ts-jest/utils';
 import { fixture } from '../../__tests__/helpers/fixtures';
@@ -52,7 +52,7 @@ describe('hero-block', () => {
   });
 
   it('displays slot elements', async () => {
-    const { element, shadowRoot } = await fixture<HeroBlock>(
+    const { shadowRoot } = await fixture<HeroBlock>(
       html`
         <hero-block>
           <p>default slot</p>
@@ -62,10 +62,10 @@ describe('hero-block', () => {
     );
     const slots = shadowRoot.querySelectorAll('slot');
     expect(slots).toHaveLength(2);
-    expect(getByText(element, 'default slot')).toBeVisible();
+    expect(screen.getByText('default slot')).toBeVisible();
     expect(slots[0]).not.toHaveAttribute('name');
     expect(slots[0].assignedElements()[0]).toHaveTextContent('default slot');
-    expect(getByText(element, 'bottom slot')).toBeVisible();
+    expect(screen.getByText('bottom slot')).toBeVisible();
     expect(slots[1]).toHaveAttribute('name', 'bottom');
     expect(slots[1].assignedElements()[0]).toHaveTextContent('bottom slot');
   });
