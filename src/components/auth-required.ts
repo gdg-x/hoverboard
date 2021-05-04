@@ -13,16 +13,14 @@ export class AuthRequired extends ReduxMixin(ThemedElement) {
 
   render() {
     return html`
-      <div class="container">
-        <mwc-button
-          label="{$ signIn $}"
-          @click="${() => this.signIn()}"
-          ?hidden="${this.signedIn}"
-          dense
-        ></mwc-button>
-        <slot name="prompt" ?hidden="${this.signedIn}"></slot>
-        <slot ?hidden="${!this.signedIn}"></slot>
-      </div>
+      <mwc-button
+        label="{$ signIn $}"
+        @click="${() => this.signIn()}"
+        ?hidden="${this.signedIn}"
+        dense
+      ></mwc-button>
+      <slot name="prompt" ?hidden="${this.signedIn}"></slot>
+      <slot ?hidden="${!this.signedIn}"></slot>
     `;
   }
 
