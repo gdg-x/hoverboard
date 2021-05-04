@@ -1,14 +1,14 @@
 import '@material/mwc-button';
-import { customElement, html, internalProperty } from 'lit-element';
+import { customElement, html, state } from 'lit-element';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { RootState } from '../store';
 import { openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
-import { RootState } from '../store';
 import { ThemedElement } from './themed-element';
 
 @customElement('auth-required')
 export class AuthRequired extends ReduxMixin(ThemedElement) {
-  @internalProperty()
+  @state()
   private signedIn = false;
 
   render() {
