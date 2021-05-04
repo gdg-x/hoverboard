@@ -1,5 +1,6 @@
-import { fireEvent, getByText } from '@testing-library/dom';
+import { within } from '@testing-library/dom';
 import { html } from 'lit-html';
+import { fireEvent, screen } from 'testing-library__dom';
 import { mocked } from 'ts-jest/utils';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { toggleVideoDialog } from '../store/ui/actions';
@@ -19,22 +20,25 @@ describe('about-block', () => {
   });
 
   it('renders details', async () => {
-    const { container } = await fixture(html`<about-block></about-block>`);
-    expect(getByText(container, '{$ aboutBlock.title $}')).toBeInTheDocument();
+    await fixture(html`<about-block></about-block>`);
+
+    expect(screen.getByText('{$ aboutBlock.title $}')).toBeInTheDocument();
     expect(
-      getByText(container, '{$ aboutBlock.callToAction.featuredSessions.description $}')
+      screen.getByText('{$ aboutBlock.callToAction.featuredSessions.description $}')
     ).toBeInTheDocument();
     expect(
-      getByText(container, '{$ aboutBlock.statisticsBlock.attendees.number $}')
+      screen.getByText('{$ aboutBlock.statisticsBlock.attendees.number $}')
     ).toBeInTheDocument();
     expect(
-      getByText(container, '{$ aboutBlock.statisticsBlock.attendees.label $}')
+      screen.getByText('{$ aboutBlock.statisticsBlock.attendees.label $}')
     ).toBeInTheDocument();
   });
 
   it('plays the video', async () => {
-    const { container } = await fixture(html`<about-block></about-block>`);
-    fireEvent.click(getByText(container, '{$ aboutBlock.callToAction.howItWas.label $}'));
+    const { shadowRootForWithin } = await fixture(html`<about-block></about-block>`);
+    const { getByText } = within(shadowRootForWithin);
+
+    fireEvent.click(getByText('{$ aboutBlock.callToAction.howItWas.label $}'));
     expect(mockToggleVideoDialogs).toHaveBeenCalledTimes(1);
     expect(mockToggleVideoDialogs).toHaveBeenCalledWith({
       title: '{$  aboutBlock.callToAction.howItWas.label $}',
