@@ -6,7 +6,6 @@
     "plugin:testing-library/dom",
     "plugin:jest-dom/recommended",
     "google",
-    "plugin:polymer/polymer-3",
     "plugin:import/errors",
     "plugin:import/typescript",
     "prettier"
@@ -20,7 +19,7 @@
     "browser": true,
     "es6": true
   },
-  "plugins": ["jest", "@typescript-eslint", "html", "polymer"],
+  "plugins": ["jest", "@typescript-eslint", "html"],
   "ignorePatterns": ["dist/", "out-tsc"],
   "rules": {
     "brace-style": "off",
@@ -51,6 +50,7 @@
     "ga": true,
     "HOVERBOARD": true,
     "importScripts": true,
+    "Polymer": true,
     "ShadyCSS": true
   }
 }
