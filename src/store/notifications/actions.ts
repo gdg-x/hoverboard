@@ -1,73 +1,76 @@
+import { doc, DocumentReference, DocumentSnapshot, getDoc, setDoc } from 'firebase/firestore';
+import { deleteToken, getMessaging, getToken as fbGetToken, onMessage } from 'firebase/messaging';
 import { Dispatch } from 'redux';
-import { db } from '../db';
+import { store } from '..';
+import { log } from '../../console';
+import { db, firebaseApp } from '../../firebase';
+import { TempAny } from '../../temp-any';
 import { setLocation } from '../routing/actions';
 import { showToast } from '../toast/actions';
 import { NOTIFICATIONS_STATUS, UPDATE_NOTIFICATIONS_STATUS } from './types';
 
 // TODO: Refactor this file
 
-let messaging: firebase.messaging.Messaging;
+const messaging = getMessaging(firebaseApp);
 
-export const initializeMessaging = () => {
-  return new Promise((resolve) => {
-    messaging = window.firebase.messaging();
-    messaging.onMessage(({ notification }) => {
-      showToast({
-        message: `${notification.title} ${notification.body}`,
-        action: {
-          title: '{$ notifications.toast.title $}',
-          callback: () => {
-            setLocation(notification.click_action);
-          },
-        },
-      });
-    });
-    messaging.onTokenRefresh(() => {
-      getToken(true);
-    });
-    resolve(messaging);
+onMessage(messaging, (payload) => {
+  const { notification } = payload;
+  if (!notification) {
+    log('Message missing payload');
+    return;
+  }
+
+  showToast({
+    message: `${notification.title} ${notification.body}`,
+    action: {
+      title: '{$ notifications.toast.title $}',
+      callback: () => {
+        setLocation((notification as TempAny).click_action);
+      },
+    },
   });
-};
+});
 
-export const requestPermission = () => (dispatch: Dispatch) => {
-  return messaging
-    .requestPermission()
-    .then(() => {
-      getToken(true);
-    })
-    .catch(() => {
-      dispatch({
-        type: UPDATE_NOTIFICATIONS_STATUS,
-        status: NOTIFICATIONS_STATUS.DENIED,
-      });
+export const requestPermission = () => async (dispatch: Dispatch) => {
+  try {
+    Notification.requestPermission();
+    getToken(true);
+  } catch (error) {
+    dispatch({
+      type: UPDATE_NOTIFICATIONS_STATUS,
+      status: NOTIFICATIONS_STATUS.DENIED,
     });
+  }
 };
 
-export const getToken = (subscribe = false) => (dispatch: Dispatch, getState) => {
+export const getToken = (subscribe = false) => (
+  dispatch: Dispatch,
+  getState: typeof store.getState
+) => {
   if (!subscribe && Notification.permission !== 'granted') {
     return;
   }
-  messaging
-    .getToken()
+
+  fbGetToken(messaging)
     .then((currentToken) => {
       if (currentToken) {
         const state = getState();
 
-        const subscribersRef = db().collection('notificationsSubscribers').doc(currentToken);
-        const subscribersPromise = subscribersRef.get();
+        const subscribersRef = doc(db, 'notificationsSubscribers', currentToken);
+        const subscribersPromise = getDoc(subscribersRef);
 
-        const userUid = state.user && (state.user.uid || null);
+        const userUid = state.user && ((state.user as TempAny).uid || null);
 
-        let userSubscriptionsPromise = Promise.resolve(null);
-        let userSubscriptionsRef;
+        let userSubscriptionsPromise: Promise<DocumentSnapshot | null> = Promise.resolve(null);
+        let userSubscriptionsRef: DocumentReference;
         if (userUid) {
-          userSubscriptionsRef = db().collection('notificationsUsers').doc(userUid);
-          userSubscriptionsPromise = userSubscriptionsRef.get();
+          userSubscriptionsRef = doc(db, 'notificationsUsers', userUid);
+          userSubscriptionsPromise = getDoc(userSubscriptionsRef);
         }
 
         Promise.all([subscribersPromise, userSubscriptionsPromise]).then(
           ([subscribersSnapshot, userSubscriptionsSnapshot]) => {
-            const isDeviceSubscribed = subscribersSnapshot.exists
+            const isDeviceSubscribed = subscribersSnapshot.exists()
               ? subscribersSnapshot.data()
               : false;
             const userSubscriptions =
@@ -76,7 +79,7 @@ export const getToken = (subscribe = false) => (dispatch: Dispatch, getState) =>
                 : {};
 
             const isUserSubscribed = !!(
-              userSubscriptions.tokens && userSubscriptions.tokens[currentToken]
+              userSubscriptions?.tokens && userSubscriptions.tokens[currentToken]
             );
 
             if (isDeviceSubscribed) {
@@ -86,7 +89,8 @@ export const getToken = (subscribe = false) => (dispatch: Dispatch, getState) =>
                 token: currentToken,
               });
               if (userUid && !isUserSubscribed) {
-                userSubscriptionsRef.set(
+                setDoc(
+                  userSubscriptionsRef,
                   {
                     tokens: { [currentToken]: true },
                   },
@@ -94,9 +98,10 @@ export const getToken = (subscribe = false) => (dispatch: Dispatch, getState) =>
                 );
               }
             } else if (!isDeviceSubscribed && subscribe) {
-              subscribersRef.set({ value: true });
+              setDoc(subscribersRef, { value: true });
               if (userUid) {
-                userSubscriptionsRef.set(
+                setDoc(
+                  userSubscriptionsRef,
                   {
                     tokens: { [currentToken]: true },
                   },
@@ -128,12 +133,11 @@ export const getToken = (subscribe = false) => (dispatch: Dispatch, getState) =>
     });
 };
 
-export const unsubscribe = (token) => (dispatch: Dispatch) => {
-  return messaging.deleteToken(token).then(() => {
-    dispatch({
-      type: UPDATE_NOTIFICATIONS_STATUS,
-      status: NOTIFICATIONS_STATUS.DEFAULT,
-      token: null,
-    });
+export const unsubscribe = () => async (dispatch: Dispatch) => {
+  await deleteToken(messaging);
+  dispatch({
+    type: UPDATE_NOTIFICATIONS_STATUS,
+    status: NOTIFICATIONS_STATUS.DEFAULT,
+    token: null,
   });
 };

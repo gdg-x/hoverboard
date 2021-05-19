@@ -1,4 +1,4 @@
-import * as firebase from '@firebase/testing';
+import * as firebase from '@firebase/rules-unit-testing';
 
 expect.extend({
   async toAllow(pr: Promise<any>) {

@@ -1,3 +1,5 @@
+import { FacebookAuthProvider, GoogleAuthProvider, TwitterAuthProvider } from 'firebase/auth';
+
 export enum PROVIDERS {
   'https://accounts.google.com' = 'https://accounts.google.com',
   'google.com' = 'google.com',
@@ -11,21 +13,23 @@ export const getFederatedProvider = (provider: PROVIDERS) => {
   switch (provider) {
     case 'https://accounts.google.com':
     case 'google.com': {
-      const provider = new window.firebase.auth.GoogleAuthProvider();
+      const provider = new GoogleAuthProvider();
       provider.addScope('profile');
       provider.addScope('email');
       return provider;
     }
     case 'https://www.facebook.com':
     case 'facebook.com': {
-      const provider = new window.firebase.auth.FacebookAuthProvider();
+      const provider = new FacebookAuthProvider();
       provider.addScope('email');
       provider.addScope('public_profile');
       return provider;
     }
     case 'https://twitter.com':
     case 'twitter.com':
-      return new window.firebase.auth.TwitterAuthProvider();
+      return new TwitterAuthProvider();
+    default:
+      throw new Error('Unsupported provider');
   }
 };
 
