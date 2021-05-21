@@ -1,6 +1,7 @@
+import { collection, getDocs, query } from 'firebase/firestore';
 import { Dispatch } from 'redux';
-import { Schedule } from '../../models/schedule';
-import { db } from '../db';
+import { db } from '../../firebase';
+import { Day } from '../../models/day';
 import {
   FETCH_SCHEDULE,
   FETCH_SCHEDULE_FAILURE,
@@ -8,10 +9,10 @@ import {
   ScheduleActions,
 } from './types';
 
-const getSchedule = async (): Promise<Schedule[]> => {
-  const { docs } = await db().collection('generatedSchedule').get();
+const getSchedule = async (): Promise<Day[]> => {
+  const { docs } = await getDocs(query(collection(db, 'generatedSchedule')));
 
-  return docs.map((doc) => doc.data()).sort((a, b) => a.date.localeCompare(b.date));
+  return docs.map<Day>((doc) => doc.data() as Day).sort((a, b) => a.date.localeCompare(b.date));
 };
 
 export const fetchSchedule = () => async (dispatch: Dispatch<ScheduleActions>) => {

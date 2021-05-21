@@ -1,16 +1,19 @@
 import { Dispatch } from 'redux';
 import { Speaker } from '../../models/speaker';
 import { mergeId } from '../../utils/merge-id';
-import { db } from '../db';
+import { db } from '../../firebase';
 import {
   FETCH_SPEAKERS,
   FETCH_SPEAKERS_FAILURE,
   FETCH_SPEAKERS_SUCCESS,
   SpeakerActions,
 } from './types';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 
 const getSpeakers = async (): Promise<Speaker[]> => {
-  const { docs } = await db().collection('generatedSpeakers').orderBy('order', 'asc').get();
+  const { docs } = await getDocs(
+    query(collection(db, 'generatedSpeakers'), orderBy('order', 'asc'))
+  );
 
   return docs.map<Speaker>(mergeId);
 };
