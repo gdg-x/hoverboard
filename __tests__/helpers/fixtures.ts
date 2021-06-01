@@ -26,6 +26,6 @@ export const fixture = async <T extends LitElement>(html: TemplateResult): Promi
   return {
     element,
     shadowRoot,
-    shadowRootForWithin: (shadowRoot as any) as HTMLElement,
+    shadowRootForWithin: shadowRoot as any as HTMLElement,
   };
 };
