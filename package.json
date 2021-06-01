@@ -57,7 +57,7 @@
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "clamp-js-main": "github:abraham/clamp-js-main#export",
     "firebase": "^8.4.3",
-    "lit-element": "^2.5.0",
+    "lit-element": "^2.5.1",
     "lit-html": "^1.4.0",
     "plastic-image": "^3.0.2",
     "pwa-helpers": "^0.9.1",
