@@ -13,7 +13,7 @@
     "prebuild": "rimraf dist"
   },
   "dependencies": {
-    "@google-cloud/storage": "^5.8.4",
+    "@google-cloud/storage": "^5.8.5",
     "child-process-promise": "^2.2.1",
     "express": "^4.17.1",
     "firebase-admin": "^9.7.0",
