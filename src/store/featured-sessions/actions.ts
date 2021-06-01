@@ -17,25 +17,24 @@ const getFeaturedSessions = async (userId: string): Promise<FeaturedSessions> =>
   return doc.data() || {};
 };
 
-export const fetchUserFeaturedSessions = (userId: string) => async (
-  dispatch: Dispatch<FeaturedSessionsActions>
-) => {
-  dispatch({
-    type: FETCH_USER_FEATURED_SESSIONS,
-  });
+export const fetchUserFeaturedSessions =
+  (userId: string) => async (dispatch: Dispatch<FeaturedSessionsActions>) => {
+    dispatch({
+      type: FETCH_USER_FEATURED_SESSIONS,
+    });
 
-  try {
-    dispatch({
-      type: FETCH_USER_FEATURED_SESSIONS_SUCCESS,
-      payload: await getFeaturedSessions(userId),
-    });
-  } catch (error) {
-    dispatch({
-      type: FETCH_USER_FEATURED_SESSIONS_FAILURE,
-      payload: error,
-    });
-  }
-};
+    try {
+      dispatch({
+        type: FETCH_USER_FEATURED_SESSIONS_SUCCESS,
+        payload: await getFeaturedSessions(userId),
+      });
+    } catch (error) {
+      dispatch({
+        type: FETCH_USER_FEATURED_SESSIONS_FAILURE,
+        payload: error,
+      });
+    }
+  };
 
 const setFeaturedSessions = async (
   userId: string,
@@ -44,24 +43,23 @@ const setFeaturedSessions = async (
   return db().collection('featuredSessions').doc(userId).set(featuredSessions);
 };
 
-export const setUserFeaturedSessions = (
-  userId: string,
-  featuredSessions: FeaturedSessions
-) => async (dispatch: Dispatch<FeaturedSessionsActions>) => {
-  dispatch({
-    type: SET_USER_FEATURED_SESSIONS,
-  });
+export const setUserFeaturedSessions =
+  (userId: string, featuredSessions: FeaturedSessions) =>
+  async (dispatch: Dispatch<FeaturedSessionsActions>) => {
+    dispatch({
+      type: SET_USER_FEATURED_SESSIONS,
+    });
 
-  try {
-    await setFeaturedSessions(userId, featuredSessions);
-    dispatch({
-      type: SET_USER_FEATURED_SESSIONS_SUCCESS,
-      payload: featuredSessions,
-    });
-  } catch (error) {
-    dispatch({
-      type: SET_USER_FEATURED_SESSIONS_FAILURE,
-      payload: error,
-    });
-  }
-};
+    try {
+      await setFeaturedSessions(userId, featuredSessions);
+      dispatch({
+        type: SET_USER_FEATURED_SESSIONS_SUCCESS,
+        payload: featuredSessions,
+      });
+    } catch (error) {
+      dispatch({
+        type: SET_USER_FEATURED_SESSIONS_FAILURE,
+        payload: error,
+      });
+    }
+  };
