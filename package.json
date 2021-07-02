@@ -74,7 +74,7 @@
     "@types/jest-dev-server": "^4.2.0",
     "@types/node": "^15.6.1",
     "@types/polymer": "^1.2.9",
-    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
     "@typescript-eslint/parser": "^4.26.0",
     "concurrently": "^6.2.0",
     "deepmerge": "^4.2.2",
