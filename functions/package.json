@@ -21,7 +21,7 @@
     "md5": "^2.3.0",
     "mkdirp-promise": "^5.0.1",
     "moment": "^2.29.1",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^3.0.0"
   },
   "devDependencies": {
     "cpx2": "^3.0.0",
