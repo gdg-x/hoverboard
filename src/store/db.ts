@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebase from 'firebase/compat';
 // TODO: Remove type
 declare global {
   interface Window {

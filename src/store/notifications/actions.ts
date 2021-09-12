@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux';
+import { TempAny } from '../../temp-any';
 import { db } from '../db';
 import { setLocation } from '../routing/actions';
 import { showToast } from '../toast/actions';
@@ -6,12 +7,12 @@ import { NOTIFICATIONS_STATUS, UPDATE_NOTIFICATIONS_STATUS } from './types';
 
 // TODO: Refactor this file
 
-let messaging: firebase.messaging.Messaging;
+let messaging: TempAny;
 
 export const initializeMessaging = () => {
   return new Promise((resolve) => {
     messaging = window.firebase.messaging();
-    messaging.onMessage(({ notification }) => {
+    messaging.onMessage(({ notification }: TempAny) => {
       showToast({
         message: `${notification.title} ${notification.body}`,
         action: {
@@ -45,13 +46,13 @@ export const requestPermission = () => (dispatch: Dispatch) => {
 
 export const getToken =
   (subscribe = false) =>
-  (dispatch: Dispatch, getState) => {
+  (dispatch: Dispatch, getState: TempAny) => {
     if (!subscribe && Notification.permission !== 'granted') {
       return;
     }
     messaging
       .getToken()
-      .then((currentToken) => {
+      .then((currentToken: TempAny) => {
         if (currentToken) {
           const state = getState();
 
@@ -130,7 +131,7 @@ export const getToken =
       });
   };
 
-export const unsubscribe = (token) => (dispatch: Dispatch) => {
+export const unsubscribe = (token: TempAny) => (dispatch: Dispatch) => {
   return messaging.deleteToken(token).then(() => {
     dispatch({
       type: UPDATE_NOTIFICATIONS_STATUS,
