@@ -53,7 +53,7 @@
     "@polymer/polymer": "^3.4.1",
     "@power-elements/lazy-image": "^2.2.0",
     "@radi-cho/star-rating": "github:abraham/star-rating#polymer-3",
-    "@reduxjs/toolkit": "^1.6.0",
+    "@reduxjs/toolkit": "^1.6.1",
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "clamp-js-main": "github:abraham/clamp-js-main#export",
     "firebase": "^8.7.0",
