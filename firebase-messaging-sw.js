@@ -1,5 +1,5 @@
-importScripts('./node_assets/firebase/firebase-app.js');
-importScripts('./node_assets/firebase/firebase-messaging.js');
+importScripts('./node_assets/firebase/firebase-app-compat.js');
+importScripts('./node_assets/firebase/firebase-messaging-compat.js');
 
 firebase.initializeApp({
   apiKey: '{$ firebase.apiKey $}',
