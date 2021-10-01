@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@abraham/remotedata": "^0.8.0",
-    "@justinribeiro/lite-youtube": "^0.9.1",
+    "@justinribeiro/lite-youtube": "^0.9.2",
     "@material/mwc-button": "^0.22.1",
     "@polymer/app-layout": "^3.1.0",
     "@polymer/app-route": "^3.0.2",
