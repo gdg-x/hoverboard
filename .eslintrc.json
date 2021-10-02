@@ -1,57 +1,56 @@
 {
+  "root": true,
   "extends": [
     "eslint:recommended",
+    "plugin:jest/all",
+    "plugin:testing-library/dom",
+    "plugin:jest-dom/recommended",
     "google",
-    "plugin:polymer/polymer-2"
+    "plugin:import/errors",
+    "plugin:import/typescript",
+    "prettier"
   ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 6
+    "sourceType": "module",
+    "ecmaVersion": 2018
   },
   "env": {
     "browser": true,
     "es6": true
   },
-  "plugins": [
-    "html",
-    "polymer"
-  ],
+  "plugins": ["jest", "@typescript-eslint", "html"],
+  "ignorePatterns": ["dist/", "out-tsc"],
   "rules": {
     "brace-style": "off",
     "new-cap": "off",
-    "no-var": "off",
+    "no-var": "error",
     "require-jsdoc": "off",
     "max-len": ["error", { "code": 120 }],
     "object-curly-spacing": ["error", "always"],
-    "space-before-function-paren": ["error", {"anonymous": "always", "named": "never", "asyncArrow": "always"}],
-    "linebreak-style": 0
+    "space-before-function-paren": [
+      "error",
+      { "anonymous": "always", "named": "never", "asyncArrow": "always" }
+    ],
+    "linebreak-style": 0,
+    "jest/no-hooks": "off",
+    "jest/prefer-expect-assertions": "off"
   },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": ["error", { "args": "none" }]
+      }
+    }
+  ],
   "globals": {
-    "Polymer": true,
+    "clients": true,
     "firebase": true,
-    "google": true,
     "ga": true,
-    "ShadyCSS": true,
-    "ReduxMixin": true,
-    "uiActions": true,
-    "routingActions": true,
-    "dialogsActions": true,
-    "toastActions": true,
-    "ticketsActions": true,
-    "partnersActions": true,
-    "videosActions": true,
-    "blogActions": true,
-    "speakersActions": true,
-    "previousSpeakersActions": true,
-    "sessionsActions": true,
-    "scheduleActions": true,
-    "galleryActions": true,
-    "becomeSponsorGalleryActions": true,
-    "teamActions": true,
-    "userActions": true,
-    "subscribeActions": true,
-    "notificationsActions": true,
-    "helperActions": true,
-    "DIALOGS": true,
-    "NOTIFICATIONS_STATUS": true
+    "HOVERBOARD": true,
+    "importScripts": true,
+    "Polymer": true,
+    "ShadyCSS": true
   }
 }

@@ -35,7 +35,8 @@
   "country": "Pays",
   "time": "Time",
   "faq": "/data/faq.md",
-  "cod": "/data/cod.md",
+  "coc": "/data/coc.md",
+  "timezoneOffset": "60",
   "locationText": "/data/location.md",
   "footer": {
     "blog": "Blog"
@@ -78,6 +79,9 @@
   ],
   "subscribeNote": "Pas de spam, seulement les dernières nouvelles",
   "codeOfConduct": "Code de conduite",
+  "codeOfConductBlock": {
+    "organization": "SunnyTech"
+  },
   "aboutBlock": {
     "title": "Contenu",
     "callToAction": {

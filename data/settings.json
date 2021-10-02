@@ -47,7 +47,7 @@
     "home": {
       "description": "#SeaTechAndSun️️",
       "cancelledSunnyTech": "Sunny Tech 2021 est annulé",
-      "catchingPhrase": "Nous espérons vous retrouver en 2022 ☀",
+      "catchingPhrase": "30 juin et 1er juillet 2022 à Montpellier",
       "moreInfo": "Plus d'infos ",
       "background": {
         "color": "#fb4552",
@@ -102,7 +102,7 @@
       },
       "fontColor": "#424242"
     },
-    "cod": {
+    "coc": {
       "title": "Code de conduite",
       "metaDescription": "En apprendre plus sur les attentes que nous avons vis-à-vis des participants",
       "background": {
@@ -180,6 +180,7 @@
     "url": "https://sunny-tech.us16.list-manage.com/subscribe/post?u=bc52bec3c758ad9f9e5b5bce7&amp;id=d9ed0e9aab",
     "name": "b_bc52bec3c758ad9f9e5b5bce7_d9ed0e9aab"
   },
+  "mailto": "devfest@gdg.org.ua",
   "signInProviders": {
     "providersData": [
       {
@@ -198,5 +199,6 @@
     "tickets": {
       "itemsCount": 5
     }
-  }
+  },
+  "showForkMeBlockForProjectIds": ["hoverboard-master", "hoverboard-dev"]
 }

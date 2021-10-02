@@ -1,0 +1,66 @@
+name: Pre Merge Checks
+on: pull_request
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Test
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create temp serviceAccount.json
+        run: echo "{}" > serviceAccount.json
+
+      - name: Running the tests
+        run: npm run test
+
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create temp serviceAccount.json
+        run: echo "{}" > serviceAccount.json
+
+      - name: Building the development environment
+        run: npm run build
+        env:
+          NODE_ENV: development
+
+      - name: Building the production environment
+        run: npm run build

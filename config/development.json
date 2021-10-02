@@ -5,6 +5,7 @@
   "prefix": "/",
   "firebase": {
     "apiKey": "AIzaSyDGTE3sUI4j-juB1HCpa91b2JI0UIxtUmk",
+    "appId": "1:728710060844:web:6fe473ba09fb5f234aea89",
     "authDomain": "sunnytechwebsite.firebaseapp.com",
     "databaseURL": "https://sunnytechwebsite.firebaseio.com",
     "projectId": "sunnytechwebsite",

@@ -1,8 +1,14 @@
-importScripts('node_modules/firebase/firebase-app.js');
-importScripts('node_modules/firebase/firebase-messaging.js');
+importScripts('./node_assets/firebase/firebase-app-compat.js');
+importScripts('./node_assets/firebase/firebase-messaging-compat.js');
 
 firebase.initializeApp({
+  apiKey: '{$ firebase.apiKey $}',
+  appId: '{$ firebase.appId $}',
+  authDomain: '{$ firebase.authDomain $}',
+  databaseURL: '{$ firebase.databaseURL $}',
   messagingSenderId: '{$ firebase.messagingSenderId $}',
+  projectId: '{$ firebase.projectId $}',
+  storageBucket: '{$ firebase.storageBucket $}',
 });
 const messaging = firebase.messaging();
 
@@ -15,8 +21,10 @@ messaging.setBackgroundMessageHandler(({ data }) => {
   return self.registration.showNotification(notification.title, notification);
 });
 
-self.addEventListener('notificationclick', event => {
-  const url = event.notification.data.click_action && event.notification.data.click_action.startsWith('/')
+self.addEventListener('notificationclick', (event) => {
+  const isPath =
+    event.notification.data.click_action && event.notification.data.click_action.startsWith('/');
+  const url = isPath
     ? `${self.origin}${event.notification.data.click_action}`
     : event.notification.data.click_action;
   event.waitUntil(clients.openWindow(url));
