@@ -105,13 +105,6 @@
         {
           "order": 3,
           "height": 100,
-          "logoUrl": "../images/logos/compostons.png",
-          "name": "Compostons",
-          "url": "http://www.compostons.org/"
-        },
-        {
-          "order": 3,
-          "height": 100,
           "logoUrl": "../images/logos/montpellier3m.png",
           "name": "Montpellier Méditerranée Métropole",
           "url": "https://www.montpellier3m.fr/"
