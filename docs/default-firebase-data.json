@@ -154,7 +154,7 @@
             }
           ],
           "title": "",
-          "order": 0
+          "order": 4
         },
         {
           "name": "Estelle Landry",
@@ -192,7 +192,7 @@
             }
           ],
           "title": "",
-          "order": 4
+          "order": 0
         },
         {
           "name": "François Teychene",
@@ -235,6 +235,11 @@
             {
               "icon": "linkedin",
               "link": "https://www.linkedin.com/in/armandinequinot/",
+              "name": "LinkedIn"
+            },
+            {
+              "icon": "linkedin",
+              "link": "https://twitter.com/armaqnt",
               "name": "LinkedIn"
             }
           ],
