@@ -1,28 +1,26 @@
 {
-  "database": {
-    "rules": "database.rules.json"
-  },
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
+  "functions": {
+    "predeploy": [
+      "npm --prefix \"$RESOURCE_DIR\" run build"
+    ],
+    "source": "functions"
+  },
   "hosting": {
-    "public": "./build",
-    "redirects": [{
-      "source": "/index.html",
-      "destination": "/",
-      "type" : 301
-    }],
-    "rewrites": [{
-      "source": "**",
-      "function": "prerender"
-    }],
+    "public": "dist",
     "ignore": [
-      "/test/**",
-      "bower.json",
-      "database.rules.json",
       "firebase.json",
-      "README.md"
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "prerender"
+      }
     ],
     "headers": [
       {
@@ -34,7 +32,7 @@
           },
           {
             "key": "X-Frame-Options",
-            "value": "DENY"
+            "value": "sameorigin"
           },
           {
             "key": "X-XSS-Protection",
@@ -48,10 +46,18 @@
       }
     ]
   },
-  "functions": {
-    "predeploy": [
-      "npm run predeploy",
-      "npm --prefix ./functions run build"
-    ]
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "emulators": {
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "hosting": {
+      "port": 5000
+    }
   }
 }

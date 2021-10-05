@@ -1,5 +1,4 @@
 import * as functions from 'firebase-functions';
-import md5 from 'md5';
 import fetch from 'node-fetch';
 
 const newPotentialPartner = functions.firestore.document('/potentialPartners/{id}')

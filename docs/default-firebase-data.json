@@ -60,179 +60,27 @@
   },
   "partners": [
     {
-      "logos": [
-        {
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/septeo.png",
-          "name": "Septeo",
-          "url": "https://www.septeo.fr/"
-        },
-        {
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/appvizer.png",
-          "name": "Isia",
-          "url": "https://www.appvizer.fr/"
-        },
-        {
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/isia.png",
-          "name": "Appvizer",
-          "url": "https://groupe-isia.com/"
-        }
-      ],
+      "items": [],
       "order": 0,
       "title": "Platinium"
     },
     {
-      "logos": [
-        {
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/ca.png",
-          "name": "CATS",
-          "url": "https://www.groupecreditagricole.jobs/Notre-groupe/Marques/Credit-Agricole-Technologies-et-Services"
-        },
-        {
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/logo_believe.png",
-          "name": "Believe it",
-          "url": "http://www.believeit.fr/"
-        },
-        {
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/zendesk.png",
-          "name": "Zendesk",
-          "url": "https://www.zendesk.fr"
-        },
-        {
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/clever-cloud.png",
-          "name": "Clerver Cloud",
-          "url": "https://www.clever-cloud.com/en/"
-        },
-        {
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/aquafadas.png",
-          "name": "Aquafadas",
-          "url": "https://www.aquafadas.com/"
-        },
-        {
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/kaliop.png",
-          "name": "Kaliop",
-          "url": "https://www.kaliop.com/"
-        },
-        {
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/3.svg",
-          "name": "Teads",
-          "url": "https://www.teads.com/"
-        }
-      ],
+      "items": [],
       "order": 1,
       "title": "Gold"
     },
     {
-      "logos": [
-        {
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/rh.png",
-          "name": "Recherche & Horizon",
-          "url": "https://www.reth.fr/"
-        },{
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/apside.png",
-          "name": "Apside",
-          "url": "https://www.apside.com/"
-        },{
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/smag.png",
-          "name": "Smag",
-          "url": "https://smag.tech/"
-        },{
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/netheos.png",
-          "name": "Netheos",
-          "url": "https://www.netheos.com/"
-        },{
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/esii.png",
-          "name": "ESII",
-          "url": "https://www.esii.com/fr"
-        },{
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/agysoft.jpeg",
-          "name": "Agysoft",
-          "url": "https://www.agysoft.fr/"
-        },{
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/swile.svg",
-          "name": "Swile",
-          "url": "https://www.swile.co/"
-        }
-      ],
+      "items": [],
       "order": 2,
       "title": "Silver"
     },
     {
-      "logos": [
-        {
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/decisionbrain.png",
-          "name": "DecisionBrain",
-          "url": "https://decisionbrain.com/"
-        },
-        {
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/sequoiasoft.png",
-          "name": "Sequoiasoft",
-          "url": "https://www.sequoiasoft.com/"
-        },
-        {
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/saagie.png",
-          "name": "Saagie",
-          "url": "hhttps://www.saagie.com/fr/"
-        },
-        {
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/laposte.png",
-          "name": "La Poste",
-          "url": "https://www.groupelaposte.com/fr/numerique"
-        },
-        {
-          "order": 0,
-          "height": 100,
-          "logoUrl": "../images/logos/sopra-steria.png",
-          "name": "Sopra Steria",
-          "url": "https://www.soprasteria.com/fr"
-        }
-      ],
+      "items": [],
       "order": 3,
       "title": "Bronze"
     },
     {
-      "logos": [
+      "items": [
         {
           "order": 0,
           "height": 100,
@@ -292,6 +140,7 @@
         {
           "name": "Loïc Talon",
           "photoUrl": "/images/people/loic_talon.jpg",
+          "photo": "/images/people/loic_talon.jpg",
           "socials": [
             {
               "icon": "twitter",
@@ -310,6 +159,7 @@
         {
           "name": "Estelle Landry",
           "photoUrl": "/images/people/estelle_landry.jpg",
+          "photo": "/images/people/estelle_landry.jpg",
           "socials": [
             {
               "icon": "twitter",
@@ -326,44 +176,9 @@
           "order": 1
         },
         {
-          "name": "Jérémy Barthe",
-          "photoUrl": "/images/people/jeremy_barthe.jpg",
-          "socials": [
-            {
-              "icon": "twitter",
-              "link": "https://twitter.com/jeremyb_/",
-              "name": "Twitter"
-            },
-            {
-              "icon": "linkedin",
-              "link": "https://fr.linkedin.com/in/jeremybarthe",
-              "name": "LinkedIn"
-            }
-          ],
-          "title": "",
-          "order": 2
-        },
-        {
-          "name": "Chloé Pellen",
-          "photoUrl": "/images/people/chloe_pellen.jpg",
-          "socials": [
-            {
-              "icon": "twitter",
-              "link": "https://twitter.com/ChloePellen/",
-              "name": "Twitter"
-            },
-            {
-              "icon": "linkedin",
-              "link": "https://fr.linkedin.com/in/chloe-pellen-66816162",
-              "name": "LinkedIn"
-            }
-          ],
-          "title": "",
-          "order": 3
-        },
-        {
-          "name": "Lauriane Gresse",
+          "name": "Lauriane Anthony",
           "photoUrl": "/images/people/lauriane_anthony.jpg",
+          "photo": "/images/people/lauriane_anthony.jpg",
           "socials": [
             {
               "icon": "twitter",
@@ -372,7 +187,7 @@
             },
             {
               "icon": "linkedin",
-              "link": "https://fr.linkedin.com/in/lauriane-gresse-a3696665",
+              "link": "https://linkedin.com/in/lauriane-anthony-a3696665/",
               "name": "LinkedIn"
             }
           ],
@@ -382,6 +197,7 @@
         {
           "name": "François Teychene",
           "photoUrl": "/images/people/francois_teychene.jpg",
+          "photo": "/images/people/francois_teychene.jpg",
           "socials": [
             {
               "icon": "twitter",
@@ -400,6 +216,7 @@
         {
           "name": "Benjamin Davy",
           "photoUrl": "/images/people/benjamin_davy.jpeg",
+          "photo": "/images/people/benjamin_davy.jpeg",
           "socials": [
             {
               "icon": "linkedin",
@@ -411,12 +228,13 @@
           "order": 6
         },
         {
-          "name": "Emmanuelle Cohet",
-          "photoUrl": "/images/people/emanuel_cohet.jpg",
+          "name": "Armandine Quinot",
+          "photoUrl": "/images/people/armandine_quinot.jpg",
+          "photo": "/images/people/armandine_quinot.jpg",
           "socials": [
             {
               "icon": "linkedin",
-              "link": "https://www.linkedin.com/in/emmanuelle-battata-3897821a/",
+              "link": "https://www.linkedin.com/in/armandinequinot/",
               "name": "LinkedIn"
             }
           ],
@@ -424,8 +242,23 @@
           "order": 7
         },
         {
+          "name": "Clarisse Orzalesi",
+          "photoUrl": "/images/people/clarisse_orzalesi.webp",
+          "photo": "/images/people/clarisse_orzalesi.webp",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/clarisse-orzalesi/?originalSubdomain=fr",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 8
+        },
+        {
           "name": "Hugo Gresse",
           "photoUrl": "/images/people/hugo_gresse.jpg",
+          "photo": "/images/people/hugo_gresse.jpg",
           "socials": [
             {
               "icon": "twitter",
@@ -433,9 +266,9 @@
               "name": "Twitter"
             },
             {
-              "icon": "website",
-              "link": "https://hugo.gresse.io",
-              "name": "Website"
+              "icon": "github",
+              "link": "https://github.com/HugoGresse",
+              "name": "GitHub"
             },
             {
               "icon": "linkedin",
@@ -444,47 +277,12 @@
             }
           ],
           "title": "",
-          "order": 8
-        },
-        {
-          "name": "Baptiste Haudegand",
-          "photoUrl": "/images/people/baptiste_haudegand.jpg",
-          "socials": [
-            {
-              "icon": "twitter",
-              "link": "https://twitter.com/Viewtiful_/",
-              "name": "Twitter"
-            },
-            {
-              "icon": "linkedin",
-              "link": "https://fr.linkedin.com/in/baptistehaudegand",
-              "name": "LinkedIn"
-            }
-          ],
-          "title": "",
-          "order": 9
-        },
-        {
-          "name": "Emilien Bajeux",
-          "photoUrl": "/images/people/emilien_bajeux.jpg",
-          "socials": [
-            {
-              "icon": "twitter",
-              "link": "https://twitter.com/miy_1",
-              "name": "Twitter"
-            },
-            {
-              "icon": "linkedin",
-              "link": "https://fr.linkedin.com/in/emilien-bajeux-b4835366",
-              "name": "LinkedIn"
-            }
-          ],
-          "title": "",
-          "order": 10
+          "order": 15
         },
         {
           "name": "Sadri Gora",
           "photoUrl": "/images/people/sadri_gora.jpg",
+          "photo": "/images/people/sadri_gora.jpg",
           "socials": [
             {
               "icon": "twitter",
@@ -501,90 +299,37 @@
           "order": 11
         },
         {
-          "name": "Emmanuelle Chauvot",
-          "photoUrl": "/images/people/emmanuelle_chauvot.jpg",
+          "name": "Kevin Fischer",
+          "photoUrl": "/images/people/kevin_fischer.jpg",
+          "photo": "/images/people/kevin_fischer.jpg",
           "socials": [
             {
               "icon": "linkedin",
-              "link": "https://www.linkedin.com/in/emmanuelle-chauvot",
+              "link": "https://www.linkedin.com/in/kevinfischerqa/",
               "name": "LinkedIn"
             }
           ],
           "title": "",
-          "order": 12
+          "order": 9
         },
         {
-          "name": "Magali Baude",
-          "photoUrl": "/images/people/magali_baude.jpg",
+          "name": "Przemyslaw Bidzinski",
+          "photoUrl": "/images/people/przemyslaw_bidzinski.jpg",
+          "photo": "/images/people/przemyslaw_bidzinski.jpg",
           "socials": [
             {
-              "icon": "twitter",
-              "link": "https://twitter.com/magalibaude",
-              "name": "Twitter"
-            },
-            {
               "icon": "linkedin",
-              "link": "https://fr.linkedin.com/in/magalibaude",
+              "link": "https://www.linkedin.com/in/przemyslaw-bidzinski/",
               "name": "LinkedIn"
             }
           ],
           "title": "",
-          "order": 13
-        },
-        {
-          "name": "Julien Champ",
-          "photoUrl": "/images/people/julien-champ.jpg",
-          "socials": [
-            {
-              "icon": "twitter",
-              "link": "https://twitter.com/julien314",
-              "name": "Twitter"
-            },
-            {
-              "icon": "linkedin",
-              "link": "https://www.linkedin.com/in/julienchamp/",
-              "name": "Linked In"
-            }
-          ],
-          "order": 16
-        },
-        {
-          "name": "Aurélien Tison",
-          "photoUrl": "/images/people/aurelien_tison.jpg",
-          "socials": [
-            {
-              "icon": "twitter",
-              "link": "https://twitter.com/Aurel_Tyson",
-              "name": "Twitter"
-            },
-            {
-              "icon": "linkedin",
-              "link": "https://www.linkedin.com/in/aurelien-tison/",
-              "name": "Linked In"
-            }
-          ],
-          "order": 17
-        },
-        {
-          "name": "Quentin Boileau",
-          "photoUrl": "/images/people/quentin_boileau.jpeg",
-          "socials": [
-            {
-              "icon": "twitter",
-              "link": "https://twitter.com/01kite",
-              "name": "Twitter"
-            },
-            {
-              "icon": "linkedin",
-              "link": "https://www.linkedin.com/in/qboileau/",
-              "name": "Linked In"
-            }
-          ],
-          "order": 18
+          "order": 10
         },
         {
           "name": "Gilles Vieira",
           "photoUrl": "/images/people/gvieira.jpg",
+          "photo": "/images/people/gvieira.jpg",
           "socials": [
             {
               "icon": "twitter",
@@ -598,11 +343,12 @@
             }
           ],
           "title": "",
-          "order": 19
+          "order": 11
         },
         {
           "name": "Hugo Maitre",
           "photoUrl": "/images/people/hugo-maitre.png",
+          "photo": "/images/people/hugo-maitre.png",
           "socials": [
             {
               "icon": "linkedin",
@@ -614,26 +360,9 @@
           "order": 20
         },
         {
-          "name": "Aurelle Thierry",
-          "photoUrl": "/images/people/aurelle.png",
-          "socials": [
-            {
-              "icon": "linkedin",
-              "link": "https://www.linkedin.com/in/aurelle-thierry-856b3a18a/",
-              "name": "LinkedIn"
-            },
-            {
-              "icon": "twitter",
-              "link": "https://twitter.com/thierryaurelle",
-              "name": "Twitter"
-            }
-          ],
-          "title": "",
-          "order": 21
-        },
-        {
           "name": "Roch Dardié",
           "photoUrl": "/images/people/roch_dardie.jpg",
+          "photo": "/images/people/roch_dardie.jpg",
           "socials": [
             {
               "icon": "linkedin",
@@ -647,7 +376,7 @@
             }
           ],
           "title": "",
-          "order": 22
+          "order": 19
         }
       ],
       "title": "Membres"
@@ -665,7 +394,7 @@
       "regular": false,
       "soldOut": true,
       "starts": "",
-      "url": "https://www.billetweb.fr/sunny-tech-2020"
+      "url": "https://www.billetweb.fr/sunny-tech-2022"
     },
     {
       "available": true,
@@ -673,12 +402,13 @@
       "ends": "",
       "inDemand": true,
       "name": "Regular",
+      "info": "",
       "price": 90,
       "primary": true,
       "regular": true,
       "soldOut": true,
       "starts": "",
-      "url": "https://www.billetweb.fr/sunny-tech-2020"
+      "url": "https://www.billetweb.fr/sunny-tech-2022"
     },
     {
       "available": true,
@@ -689,7 +419,7 @@
       "price": 40,
       "soldOut": true,
       "starts": "",
-      "url": "https://www.billetweb.fr/sunny-tech-2020"
+      "url": "https://www.billetweb.fr/sunny-tech-2022"
     }
   ],
   "triggers": {

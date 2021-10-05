@@ -9,7 +9,7 @@
   "locationCountry": "France",
   "image": "images/social-share.jpg",
   "keywords": "sunnytech, évènement, event, montpellier, Sunny, Tech, programming, android, chrome, developers, web, cloud, conférence, seatechandsun, docker, devops, ux, design, back, scala, fonctionnel",
-  "dates": "2 & 3 juillet 2020",
+  "dates": "30 juin et 1er juillet 2022",
   "partnershipProposition": "mailto:contact@sunny-tech.io",
   "share": "Partager",
   "followOur": "Suit notre",
@@ -25,7 +25,7 @@
   "signIn": "Connexion",
   "signOut": "Déconnexion",
   "viewHighlights": "Moments forts 2019",
-  "viewSchedule": "SCHEDULE 2020",
+  "viewSchedule": "SCHEDULE 2022",
   "downloadSchedule": "Télécharger le programme",
   "offlineMessage": "You can still work offline.",
   "cachingComplete": "Caching complete! Future visits will work offline.",
@@ -35,7 +35,8 @@
   "country": "Pays",
   "time": "Time",
   "faq": "/data/faq.md",
-  "cod": "/data/cod.md",
+  "coc": "/data/coc.md",
+  "timezoneOffset": "60",
   "locationText": "/data/location.md",
   "footer": {
     "blog": "Blog"
@@ -55,7 +56,7 @@
         },
         {
           "name": "Code de conduite",
-          "url": "/cod",
+          "url": "/coc",
           "newTab": false
         }
       ]
@@ -78,6 +79,9 @@
   ],
   "subscribeNote": "Pas de spam, seulement les dernières nouvelles",
   "codeOfConduct": "Code de conduite",
+  "codeOfConductBlock": {
+    "organization": "SunnyTech"
+  },
   "aboutBlock": {
     "title": "Contenu",
     "callToAction": {
@@ -89,7 +93,7 @@
         "title": "Valeurs",
         "description": "Les valeurs que porte Sunny Tech sont définies et partagées par ses membres, vous pourrez les retrouver le jour de l'évènement.",
         "important": "Ces valeurs sont : partage, ouverture, originalité & passion.",
-        "labelCod": "Lire notre code de conduite",
+        "labelCoc": "Lire notre code de conduite",
         "label": "Voir la vidéo de l'édition 2019",
         "youtubeId": "7gWUjFu-kko"
       }
@@ -121,7 +125,7 @@
     "save": "Économisez ${discount}%"
   },
   "partnersBlock": {
-    "title": "Sponsors pour l'édition 2020",
+    "title": "Sponsors de l'édition 2022",
     "button": "Devenez sponsor !",
     "form": {
       "title": "Devenez sponsor !",

@@ -4,8 +4,8 @@
     "twitter": "sunnytech_mtp",
     "url": "https://sunny-tech.io"
   },
-  "startDate": "2020-07-2T09:00:00+02:00",
-  "endDate": "2020-07-3T18:00:00+02:00",
+  "startDate": "2022-07-26-30T09:00:00+02:00",
+  "endDate": "2020-07-01T18:00:00+02:00",
   "webapp": {
     "shortName": "Sunny Tech",
     "themeColor": "#e83002",
@@ -28,8 +28,8 @@
       "label": "Équipe"
     },
     {
-      "route": "cod",
-      "permalink": "/cod/",
+      "route": "coc",
+      "permalink": "/coc/",
       "label": "Code de conduite"
     },
     {
@@ -45,9 +45,9 @@
   ],
   "heroSettings": {
     "home": {
-      "description": "#SeaTechAndSun️️",
+      "description": "#SeaTechAndSun ☀️️️",
       "cancelledSunnyTech": "Sunny Tech 2021 est annulé",
-      "catchingPhrase": "Nous espérons vous retrouver en 2022 ☀",
+      "catchingPhrase": "30 juin et 1er juillet 2022 à Montpellier",
       "moreInfo": "Plus d'infos ",
       "background": {
         "color": "#fb4552",
@@ -102,7 +102,7 @@
       },
       "fontColor": "#424242"
     },
-    "cod": {
+    "coc": {
       "title": "Code de conduite",
       "metaDescription": "En apprendre plus sur les attentes que nous avons vis-à-vis des participants",
       "background": {
@@ -198,5 +198,6 @@
     "tickets": {
       "itemsCount": 5
     }
-  }
+  },
+  "showForkMeBlockForProjectIds": ["hoverboard-master", "hoverboard-dev"]
 }
