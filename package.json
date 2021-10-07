@@ -61,7 +61,7 @@
     "lit-html": "^1.4.1",
     "plastic-image": "^3.0.2",
     "pwa-helpers": "^0.9.1",
-    "redux": "^4.1.0",
+    "redux": "^4.1.1",
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
