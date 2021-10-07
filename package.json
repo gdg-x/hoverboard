@@ -85,7 +85,7 @@
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-plugin-html": "^6.2.0",
     "eslint-plugin-import": "^2.24.2",
-    "eslint-plugin-jest": "^24.4.0",
+    "eslint-plugin-jest": "^24.5.2",
     "eslint-plugin-jest-dom": "^3.9.2",
     "eslint-plugin-testing-library": "^4.12.4",
     "firebase-admin": "^9.11.1",
