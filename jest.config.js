@@ -3,9 +3,9 @@
 // Jest doesn't support ESModules https://github.com/facebook/jest/issues/4842
 const esModuleDependencies = [
   '@abraham/remotedata',
+  '@lit',
   '@material',
-  'lit-element',
-  'lit-html',
+  'lit',
   'pwa-helpers',
   'testing-library__dom',
 ].join('|');

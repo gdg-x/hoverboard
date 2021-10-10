@@ -1,7 +1,7 @@
 import { Pending } from '@abraham/remotedata';
+import { Constructor } from '@lit/reactive-element/decorators';
 import { property } from '@polymer/decorators';
 import { PolymerElement } from '@polymer/polymer';
-import { Constructor } from 'lit-element';
 import { RootState, store } from '../store';
 import { fetchSpeakersList } from '../store/speakers/actions';
 import { initialSpeakersState, SpeakersState } from '../store/speakers/state';
