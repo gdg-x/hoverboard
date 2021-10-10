@@ -46,6 +46,10 @@ export default merge(baseConfig, {
           dest: 'dist/node_assets/@webcomponents/webcomponentsjs',
         },
         {
+          src: 'node_modules/lit/*.{js,map}',
+          dest: 'dist/node_assets/lit',
+        },
+        {
           src: 'node_modules/firebase/*.{js,map}',
           dest: 'dist/node_assets/firebase/',
         },
