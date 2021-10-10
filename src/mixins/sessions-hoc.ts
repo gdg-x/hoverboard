@@ -1,7 +1,7 @@
 import { Initialized } from '@abraham/remotedata';
+import { Constructor } from '@lit/reactive-element/decorators';
 import { property } from '@polymer/decorators';
 import { PolymerElement } from '@polymer/polymer';
-import { Constructor } from 'lit-element';
 import { RootState, store } from '../store';
 import { fetchSessions } from '../store/sessions/actions';
 import { initialSessionsState, SessionsState } from '../store/sessions/state';

@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/dom';
-import { html } from 'lit-html';
+import { html } from 'lit';
 import { mocked } from 'ts-jest/utils';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setHeroSettings } from '../store/ui/actions';

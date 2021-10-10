@@ -1,4 +1,4 @@
-import { css, LitElement } from 'lit-element';
+import { css, LitElement } from 'lit';
 import { flex, flexAlignment, positioning } from '../styles/layout';
 import { theme } from '../styles/theme';
 

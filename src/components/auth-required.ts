@@ -1,5 +1,6 @@
 import '@material/mwc-button';
-import { customElement, html, state } from 'lit-element';
+import { html } from 'lit';
+import { customElement, state } from 'lit/decorators.js';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { openDialog } from '../store/dialogs/actions';
