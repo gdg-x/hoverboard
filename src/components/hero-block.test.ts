@@ -21,11 +21,11 @@ describe('hero-block', () => {
 
   it('has default values', async () => {
     const { element, shadowRoot } = await fixture<HeroBlock>(html`<hero-block></hero-block>`);
-    expect(element.active).toStrictEqual(false);
-    expect(element.backgroundImage).toStrictEqual('');
-    expect(element.backgroundColor).toStrictEqual('#fff');
-    expect(element.fontColor).toStrictEqual('#000');
-    expect(element.hideLogo).toStrictEqual(false);
+    expect(element.active).toBe(false);
+    expect(element.backgroundImage).toBe('');
+    expect(element.backgroundColor).toBe('#fff');
+    expect(element.fontColor).toBe('#000');
+    expect(element.hideLogo).toBe(false);
     expect(shadowRoot.querySelector<HTMLDivElement>('.hero-overlay')).not.toHaveAttribute('show');
     expect(shadowRoot.querySelector<HTMLDivElement>('.hero-image')).toBeNull();
   });
@@ -42,11 +42,11 @@ describe('hero-block', () => {
         ></hero-block>
       `
     );
-    expect(element.active).toStrictEqual(true);
-    expect(element.backgroundImage).toStrictEqual('/example.jpg');
-    expect(element.backgroundColor).toStrictEqual('#000');
-    expect(element.fontColor).toStrictEqual('#fff');
-    expect(element.hideLogo).toStrictEqual(true);
+    expect(element.active).toBe(true);
+    expect(element.backgroundImage).toBe('/example.jpg');
+    expect(element.backgroundColor).toBe('#000');
+    expect(element.fontColor).toBe('#fff');
+    expect(element.hideLogo).toBe(true);
     expect(shadowRoot.querySelector<HTMLDivElement>('.hero-overlay')).toHaveAttribute('show');
     expect(shadowRoot.querySelector<HTMLDivElement>('.hero-image')).not.toBeNull();
   });
