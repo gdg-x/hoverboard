@@ -1,5 +1,7 @@
 import { auth } from 'firebase-functions';
-import { firestore } from 'firebase-admin';
+import admin from 'firebase-admin';
+
+const { firestore } = admin;
 
 export const saveUserData = auth.user().onCreate((userRecord) => {
   const uid = userRecord.uid || userRecord.providerData[0].uid;

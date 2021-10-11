@@ -1,10 +1,9 @@
 /* eslint-disable */
 
-import * as functions from 'firebase-functions';
 import express from 'express';
+import * as functions from 'firebase-functions';
 import fetch from 'node-fetch';
-import url from 'url';
-import path from 'path';
+import url, { URL } from 'url';
 
 const app = express();
 
@@ -74,7 +73,8 @@ app.get('*', (req, res) => {
     // 1. function doesn't know about the public hosting as far as I can tell (docs don't offer opinion/example)
     // 2. Could fetch and return...but I found copy+paste the index.html PWA shell into file returns faster
     // const indexHTML = fs.readFileSync('./index.html').toString();
-    res.sendFile(path.join(__dirname + '/index.html'));
+    const path = new URL('./index.html', import.meta.url).pathname;
+    res.sendFile(path);
   }
 });
 

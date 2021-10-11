@@ -1,13 +1,13 @@
 {
+  "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
     "noImplicitReturns": false,
     "noUnusedLocals": true,
     "outDir": "dist",
     "sourceMap": true,
-    "strict": false,
-    "target": "es2017",
-    "esModuleInterop": true
+    "module": "es2020",
+    "moduleResolution": "node",
+    "strict": false
   },
   "compileOnSave": true,
   "include": ["src"]

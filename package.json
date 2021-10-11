@@ -83,6 +83,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-friendly-formatter": "^4.0.1",
+    "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-html": "^6.2.0",
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jest": "^25.0.1",

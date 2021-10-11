@@ -1,6 +1,8 @@
-import { firestore, messaging } from 'firebase-admin';
+import admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import { TempAny } from './temp-any';
+import { TempAny } from './temp-any.js';
+
+const { firestore, messaging } = admin;
 
 export const sendGeneralNotification = functions.firestore
   .document('/notifications/{timestamp}')
