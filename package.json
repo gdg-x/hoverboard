@@ -57,7 +57,7 @@
     "@reduxjs/toolkit": "^1.6.1",
     "@webcomponents/webcomponentsjs": "^2.6.0",
     "clamp-js-main": "git+https://git@github.com/abraham/clamp-js-main.git#export",
-    "firebase": "^9.1.1",
+    "firebase": "^9.2.0",
     "lit": "^2.0.2",
     "plastic-image": "^3.0.2",
     "pwa-helpers": "^0.9.1",
