@@ -1,7 +1,8 @@
+import admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import { firestore, messaging } from 'firebase-admin';
 import moment from 'moment';
 
+const { firestore, messaging } = admin;
 const FORMAT = 'HH:mm';
 
 const removeUserTokens = (tokensToUsers) => {
@@ -43,9 +44,8 @@ const sendPushNotificationToUsers = async (userIds, payload) => {
     return firestore().collection('notificationsUsers').doc(id).get();
   });
 
-  const usersTokens: firestore.DocumentSnapshot<firestore.DocumentData>[] = await Promise.all(
-    tokensPromise
-  );
+  const usersTokens: admin.firestore.DocumentSnapshot<admin.firestore.DocumentData>[] =
+    await Promise.all(tokensPromise);
   const tokensToUsers = usersTokens.reduce((aggregator, userTokens) => {
     if (!userTokens.exists) return aggregator;
     const { tokens } = userTokens.data();

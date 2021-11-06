@@ -1,7 +1,9 @@
+import admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import { firestore } from 'firebase-admin';
-import { sessionsSpeakersScheduleMap } from './schedule-generator/speakers-sessions-schedule-map';
-import { sessionsSpeakersMap } from './schedule-generator/speakers-sessions-map';
+import { sessionsSpeakersScheduleMap } from './schedule-generator/speakers-sessions-schedule-map.js';
+import { sessionsSpeakersMap } from './schedule-generator/speakers-sessions-map.js';
+
+const { firestore } = admin;
 
 export const sessionsWrite = functions.firestore
   .document('sessions/{sessionId}')

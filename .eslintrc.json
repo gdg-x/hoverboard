@@ -13,14 +13,25 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
-    "ecmaVersion": 2018
+    "ecmaVersion": 2020
   },
   "env": {
     "browser": true,
     "es6": true
   },
-  "plugins": ["jest", "@typescript-eslint", "html"],
+  "plugins": ["jest", "@typescript-eslint", "html", "import"],
   "ignorePatterns": ["dist/", "out-tsc"],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "./tsconfig.json"
+      }
+    }
+  },
   "rules": {
     "brace-style": "off",
     "new-cap": "off",
