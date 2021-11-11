@@ -71,7 +71,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
               <h2 class="name">[[session.title]]</h2>
               <div class="tags" hidden$="[[!session.tags.length]]">
                 <template is="dom-repeat" items="[[session.tags]]" as="tag">
-                  <span class="tag" style$="color: [[getVariableColor(tag)]]"> [[tag]]</span>
+                  <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
                 </template>
               </div>
 
