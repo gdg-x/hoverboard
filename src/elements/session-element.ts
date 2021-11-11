@@ -134,6 +134,11 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
           font-size: 12px;
           line-height: 1;
         }
+        
+        .tags {
+          display: flex;
+          flex-wrap: wrap;
+        }
 
         @media (min-width: 640px) {
           :host {
@@ -199,7 +204,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
                 [[session.duration.mm]] min[[_getEnding(session.duration.mm)]]
               </span>
             </div>
-            <div class="session-footer-tags-container" hidden$="[[!session.tags.length]]">
+            <div class="tags" hidden$="[[!session.tags.length]]">
               <template is="dom-repeat" items="[[session.tags]]" as="tag">
                 <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
               </template>

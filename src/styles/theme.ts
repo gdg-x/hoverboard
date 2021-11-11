@@ -228,10 +228,7 @@ export const theme = css`
     margin:1px;
     line-height: initial;
   }
-  .session-footer-tags-container{
-    display: flex;
-    flex-wrap: wrap;
-  }
+
   @media (min-width: 640px) {
     .container,
     .container-narrow {
