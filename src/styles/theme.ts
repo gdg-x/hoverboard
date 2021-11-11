@@ -225,8 +225,13 @@ export const theme = css`
     background: white;
     border: 1px solid currentColor;
     border-radius: 32px;
+    margin:1px;
+    line-height: initial;
   }
-
+  .session-footer-tags-container{
+    display: flex;
+    flex-wrap: wrap;
+  }
   @media (min-width: 640px) {
     .container,
     .container-narrow {

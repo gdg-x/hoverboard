@@ -199,7 +199,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
                 [[session.duration.mm]] min[[_getEnding(session.duration.mm)]]
               </span>
             </div>
-            <div hidden$="[[!session.tags.length]]">
+            <div class="session-footer-tags-container" hidden$="[[!session.tags.length]]">
               <template is="dom-repeat" items="[[session.tags]]" as="tag">
                 <span class="tag" style$="color: [[getVariableColor(tag)]]">[[tag]]</span>
               </template>

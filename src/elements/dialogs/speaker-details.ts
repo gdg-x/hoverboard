@@ -54,7 +54,8 @@ class SpeakerDetails extends SessionsHoC(
         }
 
         .tags {
-          margin-top: 8px;
+          display: flex;
+          flex-wrap: wrap;
         }
 
         .star-rating {
