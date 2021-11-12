@@ -45,7 +45,6 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
           display: flex;
           flex-wrap: wrap;
         }
-
       </style>
 
       <polymer-helmet

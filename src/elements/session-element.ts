@@ -134,7 +134,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
           font-size: 12px;
           line-height: 1;
         }
-        
+
         .tags {
           display: flex;
           flex-wrap: wrap;
