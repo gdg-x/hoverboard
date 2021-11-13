@@ -112,7 +112,7 @@
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-re": "^1.0.7",
     "stylelint": "^13.13.1",
-    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-recommended": "^5.0.0",
     "testing-library__dom": "^7.29.4-beta.1",
     "ts-jest": "^26.5.6",
