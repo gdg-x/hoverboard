@@ -1,7 +1,7 @@
+// https://github.com/import-js/eslint-plugin-import/issues/1810
+// eslint-disable-next-line import/no-unresolved
+import { getFirestore } from 'firebase-admin/firestore';
 import { auth } from 'firebase-functions';
-import admin from 'firebase-admin';
-
-const { firestore } = admin;
 
 export const saveUserData = auth.user().onCreate((userRecord) => {
   const uid = userRecord.uid || userRecord.providerData[0].uid;
@@ -11,5 +11,5 @@ export const saveUserData = auth.user().onCreate((userRecord) => {
     photoURL: userRecord.photoURL || userRecord.providerData[0].photoURL || '',
   };
 
-  return firestore().collection('users').doc(uid).set(userData);
+  return getFirestore().collection('users').doc(uid).set(userData);
 });
