@@ -1,8 +1,11 @@
-import admin from 'firebase-admin';
+// https://github.com/import-js/eslint-plugin-import/issues/1810
+// eslint-disable-next-line import/no-unresolved
+import { getFirestore } from 'firebase-admin/firestore';
+// https://github.com/import-js/eslint-plugin-import/issues/1810
+// eslint-disable-next-line import/no-unresolved
+import { getMessaging } from 'firebase-admin/messaging';
 import * as functions from 'firebase-functions';
 import { TempAny } from './temp-any.js';
-
-const { firestore, messaging } = admin;
 
 export const sendGeneralNotification = functions.firestore
   .document('/notifications/{timestamp}')
@@ -12,8 +15,8 @@ export const sendGeneralNotification = functions.firestore
 
     if (!message) return null;
     console.log('New message added at ', timestamp, ' with payload ', message);
-    const deviceTokensPromise = firestore().collection('notificationsSubscribers').get();
-    const notificationsConfigPromise = firestore().collection('config').doc('notifications').get();
+    const deviceTokensPromise = getFirestore().collection('notificationsSubscribers').get();
+    const notificationsConfigPromise = getFirestore().collection('config').doc('notifications').get();
 
     const [tokensSnapshot, notificationsConfigSnapshot] = await Promise.all([
       deviceTokensPromise,
@@ -38,7 +41,7 @@ export const sendGeneralNotification = functions.firestore
     };
 
     const tokensToRemove = [];
-    const messagingResponse = await messaging().sendToDevice(tokens, payload);
+    const messagingResponse = await getMessaging().sendToDevice(tokens, payload);
     messagingResponse.results.forEach((result, index) => {
       const error = result.error;
       if (error) {
