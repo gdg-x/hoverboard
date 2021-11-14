@@ -48,8 +48,7 @@ const sendPushNotificationToUsers = async (userIds, payload) => {
     return getFirestore().collection('notificationsUsers').doc(id).get();
   });
 
-  const usersTokens: DocumentSnapshot<DocumentData>[] =
-    await Promise.all(tokensPromise);
+  const usersTokens: DocumentSnapshot<DocumentData>[] = await Promise.all(tokensPromise);
   const tokensToUsers = usersTokens.reduce((aggregator, userTokens) => {
     if (!userTokens.exists) return aggregator;
     const { tokens } = userTokens.data();
@@ -79,7 +78,10 @@ const sendPushNotificationToUsers = async (userIds, payload) => {
 export const scheduleNotifications = functions.pubsub
   .schedule('every 5 minutes')
   .onRun(async () => {
-    const notificationsConfigPromise = getFirestore().collection('config').doc('notifications').get();
+    const notificationsConfigPromise = getFirestore()
+      .collection('config')
+      .doc('notifications')
+      .get();
     const schedulePromise = getFirestore().collection('schedule').get();
 
     const [notificationsConfigSnapshot, scheduleSnapshot] = await Promise.all([

@@ -100,37 +100,9 @@
       !function(n,e){var t,o,i,c=[],f={passive:!0,capture:!0},r=new Date,a="pointerup",u="pointercancel";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=[])}function l(t){if(t.cancelable){var o=(t.timeStamp>1e12?new Date:performance.now())-t.timeStamp;"pointerdown"==t.type?function(t,o){function i(){p(t,o),r()}function c(){r()}function r(){e(a,i,f),e(u,c,f)}n(a,i,f),n(u,c,f)}(o,t):p(o,t)}}function w(n){["click","mousedown","keydown","touchstart","pointerdown"].forEach(function(e){n(e,l,f)})}w(n),self.perfMetrics=self.perfMetrics||{},self.perfMetrics.onFirstInputDelay=function(n){c.push(n),s()}}(addEventListener,removeEventListener);
     </script>
 
-    <script src="./node_assets/firebase/firebase-app-compat.js"></script>
-    <script src="./node_assets/firebase/firebase-auth-compat.js"></script>
-    <script src="./node_assets/firebase/firebase-firestore-compat.js"></script>
-    <script src="./node_assets/firebase/firebase-messaging-compat.js"></script>
-    <script src="./node_assets/firebase/firebase-performance-compat.js"></script>
-
     <script>
       window.Polymer = { rootPath: '{$ basepath $}' };
       window.HOVERBOARD = { Elements: {} };
-
-      firebase.initializeApp({
-        apiKey: '{$ firebase.apiKey $}',
-        appId: '{$ firebase.appId $}',
-        authDomain: '{$ firebase.authDomain $}',
-        databaseURL: '{$ firebase.databaseURL $}',
-        messagingSenderId: '{$ firebase.messagingSenderId $}',
-        projectId: '{$ firebase.projectId $}',
-        storageBucket: '{$ firebase.storageBucket $}',
-      });
-
-      firebase.performance();
-      firebase
-        .firestore()
-        .enablePersistence({ synchronizeTabs: true })
-        .catch(() => {
-          // eslint-disable-next-line no-console
-          console.warn('DB offline support not available');
-        });
-
-      // eslint-disable-next-line no-console
-      console.log('Firebase is ready!');
     </script>
 
     <script src="./node_assets/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>

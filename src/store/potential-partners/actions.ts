@@ -1,5 +1,6 @@
+import { doc, setDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
-import { db } from '../db';
+import { db } from '../../firebase';
 import { DialogForm } from '../dialogs/types';
 import {
   ADD_POTENTIAL_PARTNER,
@@ -7,7 +8,7 @@ import {
   ADD_POTENTIAL_PARTNER_SUCCESS,
 } from './types';
 
-export const addPotentialPartner = (data: DialogForm) => (dispatch: Dispatch) => {
+export const addPotentialPartner = (data: DialogForm) => async (dispatch: Dispatch) => {
   dispatch({
     type: ADD_POTENTIAL_PARTNER,
     payload: data,
@@ -20,20 +21,17 @@ export const addPotentialPartner = (data: DialogForm) => (dispatch: Dispatch) =>
     companyName: data.secondFieldValue || '',
   };
 
-  db()
-    .collection('potentialPartners')
-    .doc(id)
-    .set(partner)
-    .then(() => {
-      dispatch({
-        type: ADD_POTENTIAL_PARTNER_SUCCESS,
-        payload: { partner },
-      });
-    })
-    .catch((error) => {
-      dispatch({
-        type: ADD_POTENTIAL_PARTNER_FAILURE,
-        payload: { error },
-      });
+  try {
+    await setDoc(doc(db, 'potentialPartners', id), partner);
+
+    dispatch({
+      type: ADD_POTENTIAL_PARTNER_SUCCESS,
+      payload: { partner },
     });
+  } catch (error) {
+    dispatch({
+      type: ADD_POTENTIAL_PARTNER_FAILURE,
+      payload: { error },
+    });
+  }
 };

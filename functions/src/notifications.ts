@@ -16,7 +16,10 @@ export const sendGeneralNotification = functions.firestore
     if (!message) return null;
     console.log('New message added at ', timestamp, ' with payload ', message);
     const deviceTokensPromise = getFirestore().collection('notificationsSubscribers').get();
-    const notificationsConfigPromise = getFirestore().collection('config').doc('notifications').get();
+    const notificationsConfigPromise = getFirestore()
+      .collection('config')
+      .doc('notifications')
+      .get();
 
     const [tokensSnapshot, notificationsConfigSnapshot] = await Promise.all([
       deviceTokensPromise,

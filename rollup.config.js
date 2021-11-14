@@ -1,6 +1,7 @@
 /* eslint-env node */
 
 import { createSpaConfig } from '@open-wc/building-rollup';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import merge from 'deepmerge';
 import copy from 'rollup-plugin-copy';
 import replace from 'rollup-plugin-re';
@@ -19,61 +20,66 @@ const baseConfig = createSpaConfig({
   workbox: workboxConfig,
 });
 
-export default merge(baseConfig, {
-  input: './index.html',
-  plugins: [
-    replace({
-      exclude: 'node_modules/**',
-      patterns: [
-        {
-          transform: (code, _path) => compileTemplate(code),
-        },
-      ],
-    }),
-    copy({
-      targets: [
-        {
-          src: 'images/',
-          dest: 'dist/',
-        },
-        {
-          src: 'manifest.json',
-          dest: 'dist',
-          transform: compileBufferTemplate,
-        },
-        {
-          src: 'node_modules/@webcomponents/webcomponentsjs/*.{js,map}',
-          dest: 'dist/node_assets/@webcomponents/webcomponentsjs',
-        },
-        {
-          src: 'node_modules/lit/*.{js,map}',
-          dest: 'dist/node_assets/lit',
-        },
-        {
-          src: 'node_modules/firebase/*.{js,map}',
-          dest: 'dist/node_assets/firebase/',
-        },
-        {
-          src: 'out-tsc/src/service-worker-registration.js',
-          dest: 'dist/src',
-          transform: compileBufferTemplate,
-        },
-        {
-          src: 'firebase-messaging-sw.js',
-          dest: 'dist',
-          transform: compileBufferTemplate,
-        },
-        {
-          src: 'data/*.md',
-          dest: 'dist/data',
-          transform: compileBufferTemplate,
-        },
-        {
-          src: 'data/posts/*.md',
-          dest: 'dist/data/posts',
-          transform: compileBufferTemplate,
-        },
-      ],
-    }),
-  ],
-});
+export default [
+  {
+    input: 'out-tsc/firebase-messaging-sw.js',
+    output: {
+      file: 'dist/firebase-messaging-sw.js'
+    },
+    plugins: [nodeResolve()],
+  },
+  merge(baseConfig, {
+    input: './index.html',
+    plugins: [
+      replace({
+        exclude: 'node_modules/**',
+        patterns: [
+          {
+            transform: (code, _path) => compileTemplate(code),
+          },
+        ],
+      }),
+      copy({
+        targets: [
+          {
+            src: 'images/',
+            dest: 'dist/',
+          },
+          {
+            src: 'manifest.json',
+            dest: 'dist',
+            transform: compileBufferTemplate,
+          },
+          {
+            src: 'node_modules/@webcomponents/webcomponentsjs/*.{js,map}',
+            dest: 'dist/node_assets/@webcomponents/webcomponentsjs',
+          },
+          {
+            src: 'node_modules/lit/*.{js,map}',
+            dest: 'dist/node_assets/lit',
+          },
+          {
+            src: 'out-tsc/src/service-worker-registration.js',
+            dest: 'dist/src',
+            transform: compileBufferTemplate,
+          },
+          {
+            src: 'firebase-messaging-sw.js',
+            dest: 'dist',
+            transform: compileBufferTemplate,
+          },
+          {
+            src: 'data/*.md',
+            dest: 'dist/data',
+            transform: compileBufferTemplate,
+          },
+          {
+            src: 'data/posts/*.md',
+            dest: 'dist/data/posts',
+            transform: compileBufferTemplate,
+          },
+        ],
+      }),
+    ],
+  })
+];

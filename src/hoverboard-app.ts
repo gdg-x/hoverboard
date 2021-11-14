@@ -54,7 +54,7 @@ import { registerServiceWorker } from './service-worker-registration';
 import { RootState, store } from './store';
 import { DialogState, initialDialogState } from './store/dialogs/state';
 import { DIALOGS } from './store/dialogs/types';
-import { getToken, initializeMessaging } from './store/notifications/actions';
+import { getToken } from './store/notifications/actions';
 import { setRoute } from './store/routing/actions';
 import { initialRoutingState, RoutingState } from './store/routing/state';
 import { fetchTickets } from './store/tickets/actions';
@@ -422,7 +422,7 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
     log('Hoverboard is ready!');
     this.removeAttribute('unresolved');
     updateUser();
-    initializeMessaging().then(() => store.dispatch(getToken()));
+    store.dispatch(getToken());
   }
 
   closeDrawer() {

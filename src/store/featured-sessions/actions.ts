@@ -1,5 +1,6 @@
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
-import { db } from '../db';
+import { db } from '../../firebase';
 import { FeaturedSessions } from './state';
 import {
   FeaturedSessionsActions,
@@ -12,9 +13,9 @@ import {
 } from './types';
 
 const getFeaturedSessions = async (userId: string): Promise<FeaturedSessions> => {
-  const doc = await db().collection('featuredSessions').doc(userId).get();
+  const { data } = await getDoc<FeaturedSessions>(doc(db, 'featuredSessions', userId));
 
-  return doc.data() || {};
+  return data() || {};
 };
 
 export const fetchUserFeaturedSessions =
@@ -40,7 +41,7 @@ const setFeaturedSessions = async (
   userId: string,
   featuredSessions: FeaturedSessions
 ): Promise<void> => {
-  return db().collection('featuredSessions').doc(userId).set(featuredSessions);
+  await setDoc(doc(db, 'featuredSessions', userId), featuredSessions);
 };
 
 export const setUserFeaturedSessions =
