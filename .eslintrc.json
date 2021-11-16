@@ -58,11 +58,11 @@
   ],
   "globals": {
     "clients": true,
-    "firebase": true,
     "ga": true,
     "HOVERBOARD": true,
     "importScripts": true,
     "Polymer": true,
+    "ServiceWorkerGlobalScope": true,
     "ShadyCSS": true
   }
 }

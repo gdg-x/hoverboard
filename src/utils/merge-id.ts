@@ -1,4 +1,4 @@
-import { DocumentData, QueryDocumentSnapshot } from '@firebase/firestore-types';
+import { DocumentData, QueryDocumentSnapshot } from 'firebase/firestore';
 import { Id } from '../models/types';
 
 export const mergeId = <T>(snapshot: QueryDocumentSnapshot<DocumentData>): T & Id => {
