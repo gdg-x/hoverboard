@@ -5,7 +5,7 @@ import { Toast } from '../../models/toast';
 let toastHideTimeOut: number;
 
 export const showToast = (toast: Toast) => {
-  const duration = typeof toast.duration !== 'undefined' ? toast.duration : 5000;
+  const duration = toast.duration || 5000;
   store.dispatch({
     type: SHOW_TOAST,
     toast: {
