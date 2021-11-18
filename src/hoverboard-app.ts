@@ -50,7 +50,6 @@ import './pages/previous-speakers-page';
 import './pages/schedule-page';
 import './pages/speakers-page';
 import './pages/team-page';
-import { registerServiceWorker } from './service-worker-registration';
 import { RootState, store } from './store';
 import { DialogState, initialDialogState } from './store/dialogs/state';
 import { DIALOGS } from './store/dialogs/types';
@@ -395,8 +394,6 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
       e.preventDefault();
       this.addToHomeScreen = e;
     });
-
-    window.addEventListener('load', () => registerServiceWorker());
   }
 
   connectedCallback() {

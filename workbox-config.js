@@ -41,6 +41,13 @@ export const workboxConfig = {
       },
     },
     {
+      urlPattern: /\/__\/.*/,
+      handler: 'NetworkFirst',
+      options: {
+        cacheName: 'firebase-cache',
+      },
+    },
+    {
       urlPattern: /https:\/\/firebasestorage\.googleapis\.com\/.*/,
       handler: 'NetworkFirst',
       options: {

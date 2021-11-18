@@ -4,22 +4,11 @@
 declare let self: ServiceWorkerGlobalScope;
 
 import { initializeApp } from 'firebase/app';
-import { getMessaging, onMessage } from 'firebase/messaging';
+import { getMessaging, MessagePayload, onMessage } from 'firebase/messaging';
 
-const app = initializeApp({
-  apiKey: '{$ firebase.apiKey $}',
-  appId: '{$ firebase.appId $}',
-  authDomain: '{$ firebase.authDomain $}',
-  databaseURL: '{$ firebase.databaseURL $}',
-  messagingSenderId: '{$ firebase.messagingSenderId $}',
-  projectId: '{$ firebase.projectId $}',
-  storageBucket: '{$ firebase.storageBucket $}',
-});
-const messaging = getMessaging(app);
-
-onMessage(messaging, (payload) => {
+const buildNotification = (payload: MessagePayload) => {
   const { data } = payload;
-  const notification = {
+  return {
     ...{
       title: 'Notification',
     },
@@ -30,7 +19,16 @@ onMessage(messaging, (payload) => {
       },
     },
   };
-  return self.registration.showNotification(notification.title, notification);
+};
+
+fetch('/__/firebase/init.json').then(async (response) => {
+  const app = initializeApp(await response.json());
+  const messaging = getMessaging(app);
+
+  onMessage(messaging, (payload) => {
+    const notification = buildNotification(payload);
+    return self.registration.showNotification(notification.title, notification);
+  });
 });
 
 self.addEventListener('notificationclick', (event) => {

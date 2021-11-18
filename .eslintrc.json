@@ -20,7 +20,7 @@
     "es6": true
   },
   "plugins": ["jest", "@typescript-eslint", "html", "import"],
-  "ignorePatterns": ["dist/", "out-tsc"],
+  "ignorePatterns": ["dist/"],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]

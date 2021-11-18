@@ -25,3 +25,5 @@ export const registerServiceWorker = () => {
     },
   });
 };
+
+window.addEventListener('load', () => registerServiceWorker());

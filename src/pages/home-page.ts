@@ -12,6 +12,7 @@ import '../elements/partners-block';
 import '../elements/speakers-block';
 import '../elements/subscribe-block';
 import '../elements/tickets-block';
+import { firebaseApp } from '../firebase';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { toggleVideoDialog } from '../store/ui/actions';
@@ -246,9 +247,9 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           </div>
         </div>
       </hero-block>
-      {% if showForkMeBlockForProjectIds.includes(firebase.projectId) %}
-      <fork-me-block></fork-me-block>
-      {% endif %}
+      <template is="dom-if" if="{{showForkMeBlock}}">
+        <fork-me-block></fork-me-block>
+      </template>
       <about-block></about-block>
       <speakers-block></speakers-block>
       <subscribe-block></subscribe-block>
@@ -267,6 +268,8 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   private active = false;
   @property({ type: Object })
   private viewport: Viewport;
+  @property({ type: Boolean })
+  private showForkMeBlock = false;
 
   stateChanged(state: RootState) {
     this.viewport = state.ui.viewport;
@@ -291,5 +294,19 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   _scrollNextBlock() {
     const heroHeight = this.$.hero.getBoundingClientRect().height - 64;
     scrollToY(heroHeight, 600, 'easeInOutSine');
+  }
+
+  private shouldShowForkMeBlock() {
+    const showForkMeBlockForProjectIds = '{$  showForkMeBlockForProjectIds $}'.split(',');
+    const showForkMeBlock = showForkMeBlockForProjectIds.includes(firebaseApp.options.appId);
+    if (showForkMeBlock) {
+      import('../elements/fork-me-block');
+    }
+    return showForkMeBlock;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.showForkMeBlock = this.shouldShowForkMeBlock();
   }
 }
