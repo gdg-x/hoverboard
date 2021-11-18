@@ -24,7 +24,7 @@ export default [
   {
     input: 'out-tsc/firebase-messaging-sw.js',
     output: {
-      file: 'dist/firebase-messaging-sw.js'
+      file: 'dist/firebase-messaging-sw.js',
     },
     plugins: [nodeResolve()],
   },
@@ -81,5 +81,5 @@ export default [
         ],
       }),
     ],
-  })
+  }),
 ];
