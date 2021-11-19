@@ -41,7 +41,6 @@ import './elements/hoverboard-icons';
 import './elements/polymer-helmet';
 import './elements/shared-styles';
 import './elements/toast-element';
-import { ReduxMixin } from './mixins/redux-mixin';
 import './pages/blog-page';
 import './pages/coc-page';
 import './pages/faq-page';
@@ -74,7 +73,7 @@ if (location.hostname === 'localhost') {
 }
 
 @customElement('hoverboard-app')
-export class HoverboardApp extends ReduxMixin(PolymerElement) {
+export class HoverboardApp extends PolymerElement {
   static get template() {
     return html`
       <style include="shared-styles flex flex-reverse flex-alignment positioning">
@@ -394,6 +393,8 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
       e.preventDefault();
       this.addToHomeScreen = e;
     });
+
+    store.subscribe(() => this.stateChanged(store.getState()));
   }
 
   connectedCallback() {
