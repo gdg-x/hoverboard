@@ -88,7 +88,7 @@
       // https://stackoverflow.com/a/50407571/26406
       window.process = {
         env: {
-          NODE_ENV: '{$ NODE_ENV $}}',
+          NODE_ENV: '{$ NODE_ENV $}',
         },
       };
     </script>
@@ -105,8 +105,6 @@
       window.HOVERBOARD = { Elements: {} };
     </script>
 
-    <script src="./node_assets/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-    <script src="./node_assets/lit/polyfill-support.js"></script>
     <script src="./src/hoverboard-app.ts" type="module"></script>
     <script src="./src/service-worker-registration.ts" type="module"></script>
 

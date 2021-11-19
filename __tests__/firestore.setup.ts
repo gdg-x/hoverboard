@@ -4,7 +4,7 @@ import {
   initializeTestEnvironment,
   RulesTestContext,
   RulesTestEnvironment,
-  TestEnvironmentConfig
+  TestEnvironmentConfig,
 } from '@firebase/rules-unit-testing';
 import { afterAll, beforeAll } from '@jest/globals';
 import { doc, setDoc } from 'firebase/firestore';
