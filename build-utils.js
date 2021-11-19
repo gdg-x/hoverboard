@@ -3,13 +3,10 @@
 const n = require('nunjucks');
 const fs = require('fs');
 
-const production = process.env.NODE_ENV && process.env.NODE_ENV === 'production';
+const { BUILD_ENV, NODE_ENV } = process.env;
+const production = NODE_ENV === 'production';
 const development = !production;
-const buildTarget = process.env.BUILD_ENV
-  ? process.env.BUILD_ENV
-  : production
-  ? 'production'
-  : 'development';
+const buildTarget = BUILD_ENV ? BUILD_ENV : production ? 'production' : 'development';
 
 const getConfigPath = () => {
   const path = `./config/${buildTarget}.json`;
@@ -27,13 +24,14 @@ const getConfigPath = () => {
 
 const getData = () => {
   const settingsFiles = ['./data/resources.json', './data/settings.json', getConfigPath()];
-
-  return settingsFiles.reduce((currentData, path) => {
+  const combineSettings = (currentData, path) => {
     return {
       ...currentData,
       ...require(path),
     };
-  }, {});
+  };
+
+  return settingsFiles.reduce(combineSettings, { NODE_ENV });
 };
 
 const data = getData();

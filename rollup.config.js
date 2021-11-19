@@ -2,35 +2,44 @@
 
 import { createSpaConfig } from '@open-wc/building-rollup';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
+import typescript from '@rollup/plugin-typescript';
 import merge from 'deepmerge';
 import copy from 'rollup-plugin-copy';
+import livereload from 'rollup-plugin-livereload';
 import replace from 'rollup-plugin-re';
 import { workboxConfig } from './workbox-config';
 
 const { production, compileTemplate, compileBufferTemplate } = require('./build-utils.js');
-
-if (!production) {
-  throw new Error('build only supports NODE_ENV=production');
-}
 
 const baseConfig = createSpaConfig({
   html: {
     transform: (html) => compileTemplate(html),
   },
   workbox: workboxConfig,
+  developmentMode: !production,
 });
 
 export default [
   {
-    input: 'out-tsc/firebase-messaging-sw.js',
+    input: 'firebase-messaging-sw.ts',
     output: {
       file: 'dist/firebase-messaging-sw.js',
+      sourcemap: true,
     },
-    plugins: [nodeResolve()],
+    plugins: [
+      typescript({
+        noEmitOnError: true,
+      }),
+      nodeResolve(),
+    ],
   },
   merge(baseConfig, {
     input: './index.html',
+    treeshake: production,
     plugins: [
+      typescript({
+        noEmitOnError: true,
+      }),
       replace({
         exclude: 'node_modules/**',
         patterns: [
@@ -59,16 +68,6 @@ export default [
             dest: 'dist/node_assets/lit',
           },
           {
-            src: 'out-tsc/src/service-worker-registration.js',
-            dest: 'dist/src',
-            transform: compileBufferTemplate,
-          },
-          {
-            src: 'firebase-messaging-sw.js',
-            dest: 'dist',
-            transform: compileBufferTemplate,
-          },
-          {
             src: 'data/*.md',
             dest: 'dist/data',
             transform: compileBufferTemplate,
@@ -80,6 +79,10 @@ export default [
           },
         ],
       }),
+      process.env.ROLLUP_WATCH &&
+        livereload({
+          watch: 'dist',
+        }),
     ],
   }),
 ];
