@@ -1,4 +1,5 @@
 import * as firebase from '@firebase/testing';
+import { expect } from '@jest/globals';
 
 expect.extend({
   async toAllow(pr: Promise<any>) {
@@ -33,11 +34,12 @@ expect.extend({
   },
 });
 
-declare global {
-  namespace jest {
-    interface Matchers<R> {
-      toDeny: () => R;
-      toAllow: () => R;
-    }
+export { expect };
+
+// https://github.com/facebook/jest/issues/11487
+declare module 'expect/build/types' {
+  interface Matchers<R> {
+    toDeny: () => R;
+    toAllow: () => R;
   }
 }

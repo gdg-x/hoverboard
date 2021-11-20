@@ -1,5 +1,6 @@
+import { afterEach, beforeEach, describe, it } from '@jest/globals';
 import { setupApp, teardownApp } from './firestore.setup';
-import './helpers';
+import { expect } from './helpers';
 
 describe('firestore', () => {
   let db: firebase.firestore.Firestore;
