@@ -1,9 +1,16 @@
 /* eslint-disable jest/require-top-level-describe */
 
-import * as firebase from '@firebase/testing';
+import {
+  initializeTestEnvironment,
+  RulesTestContext,
+  RulesTestEnvironment,
+  TestEnvironmentConfig
+} from '@firebase/rules-unit-testing';
 import { afterAll, beforeAll } from '@jest/globals';
-import * as fs from 'fs';
+import { doc, setDoc } from 'firebase/firestore';
 import { setup, teardown } from 'jest-dev-server';
+
+let testEnv: RulesTestEnvironment;
 
 beforeAll(async () => {
   await setup({
@@ -18,36 +25,40 @@ afterAll(async () => {
   await teardown();
 });
 
-const loadRules = async (projectId: string, path: string) => {
-  await firebase.loadFirestoreRules({
-    projectId,
-    rules: fs.readFileSync(path, 'utf8'),
-  });
-};
+interface SetupApp {
+  userId?: string;
+  data?: { [key: string]: object };
+}
 
-export const setupApp = async (auth?: object, data?: { [key: string]: object }) => {
+export const setupApp = async ({ userId, data }: SetupApp = {}) => {
   const projectId = `rules-spec-${Date.now()}`;
-  const app = firebase.initializeTestApp({
+  const config: TestEnvironmentConfig = {
     projectId,
-    auth,
-  });
-  const db = app.firestore();
+    firestore: {
+      port: 8080,
+      host: 'localhost',
+    },
+  };
+  testEnv = await initializeTestEnvironment(config);
 
   if (data) {
-    await loadRules(projectId, '__tests__/firestore.rules');
-
-    for (const key in data) {
-      if ({}.hasOwnProperty.call(data, key)) {
-        await db.doc(key).set(data[key]);
+    testEnv.withSecurityRulesDisabled(async (context: RulesTestContext) => {
+      for (const key in data) {
+        if ({}.hasOwnProperty.call(data, key)) {
+          await setDoc(doc(context.firestore(), key), data);
+        }
       }
-    }
+    });
   }
 
-  await loadRules(projectId, 'firestore.rules');
-
-  return db;
+  if (userId) {
+    return testEnv.authenticatedContext(userId);
+  } else {
+    return testEnv.unauthenticatedContext();
+  }
 };
 
 export const teardownApp = async () => {
-  return Promise.all(firebase.apps().map((app) => app.delete()));
+  await testEnv.clearFirestore();
+  await testEnv.cleanup();
 };
