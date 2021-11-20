@@ -73,6 +73,8 @@
   },
   "devDependencies": {
     "@firebase/testing": "^0.20.11",
+    "@jest/globals": "^27.3.1",
+    "@jest/types": "^27.2.5",
     "@open-wc/building-rollup": "^1.10.0",
     "@rollup/plugin-node-resolve": "^13.0.6",
     "@rollup/plugin-typescript": "^8.3.0",
@@ -80,7 +82,7 @@
     "@testing-library/dom": "^8.11.0",
     "@testing-library/jest-dom": "^5.15.0",
     "@types/google.analytics": "0.0.42",
-    "@types/jest": "^27.0.2",
+    "@types/jest-dev-server": "^5.0.0",
     "@types/node": "^16.11.9",
     "@types/polymer": "^1.2.11",
     "@typescript-eslint/eslint-plugin": "^5.3.1",

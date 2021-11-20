@@ -1,8 +1,10 @@
+/* eslint-disable jest/require-top-level-describe */
+
 import * as firebase from '@firebase/testing';
+import { afterAll, beforeAll } from '@jest/globals';
 import * as fs from 'fs';
 import { setup, teardown } from 'jest-dev-server';
 
-// eslint-disable-next-line jest/require-top-level-describe
 beforeAll(async () => {
   await setup({
     command: 'npx firebase emulators:start --only firestore',
@@ -12,7 +14,6 @@ beforeAll(async () => {
   });
 }, 30000);
 
-// eslint-disable-next-line jest/require-top-level-describe
 afterAll(async () => {
   await teardown();
 });
