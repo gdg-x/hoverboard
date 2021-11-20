@@ -20,7 +20,7 @@
     "install:functions": "npm --prefix ./functions ci",
     "lint": "concurrently npm:lint:*",
     "lint:eslint": "eslint . --ext .ts --ext .js",
-    "lint:prettier": "prettier .",
+    "lint:prettier": "prettier --check .",
     "lint:stylelint": "stylelint \"src/components/**/*.ts\" \"src/styles/**/*.ts\"",
     "postinstall": "npm run install:functions",
     "serve": "NODE_ENV=production concurrently --kill-others npm:start:*",
