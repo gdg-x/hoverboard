@@ -1,11 +1,10 @@
 /* eslint-env node */
 
-const n = require('nunjucks');
-const fs = require('fs');
+import n from 'nunjucks';
+import fs from 'fs';
 
 const { BUILD_ENV, NODE_ENV } = process.env;
-const production = NODE_ENV === 'production';
-const development = !production;
+export const production = NODE_ENV === 'production';
 const buildTarget = BUILD_ENV ? BUILD_ENV : production ? 'production' : 'development';
 
 const getConfigPath = () => {
@@ -43,32 +42,8 @@ const nunjucks = n.configure({
   },
 });
 
-const isTemplate = ({ url, contentType }) => {
-  const templateTypes = [
-    'application/javascript',
-    'application/json',
-    'text/html',
-    'text/markdown',
-    'video/mp2t', // TypeScript
-  ];
-
-  if (isNodeModule({ url })) {
-    return false;
-  }
-
-  return templateTypes.some((templateType) => contentType.startsWith(templateType));
+export const compileTemplate = (template) => {
+  return nunjucks.renderString(template, data);
 };
 
-const compileTemplate = (template) => nunjucks.renderString(template, data);
-
-const compileBufferTemplate = (body) => compileTemplate(body.toString());
-
-const isNodeModule = ({ url }) => url.startsWith('/node_modules/');
-
-module.exports = {
-  compileBufferTemplate,
-  compileTemplate,
-  development,
-  isTemplate,
-  production,
-};
+export const compileBufferTemplate = (body) => compileTemplate(body.toString());
