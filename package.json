@@ -72,7 +72,9 @@
     "register-service-worker": "^1.7.2"
   },
   "devDependencies": {
-    "@firebase/testing": "^0.20.11",
+    "@firebase/logger": "^0.3.2",
+    "@firebase/rules-unit-testing": "^2.0.1",
+    "@firebase/util": "^1.4.2",
     "@jest/globals": "^27.3.1",
     "@jest/types": "^27.2.5",
     "@open-wc/building-rollup": "^1.10.0",
