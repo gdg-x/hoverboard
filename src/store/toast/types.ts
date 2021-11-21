@@ -12,4 +12,4 @@ interface HideToastAction {
   type: typeof HIDE_TOAST;
 }
 
-export type ToastActionTypes = ShowToastAction | HideToastAction;
+export type ToastActions = ShowToastAction | HideToastAction;

@@ -6,6 +6,8 @@ import {
   DELETE_FEEDBACK_FAILURE,
   DELETE_FEEDBACK_SUCCESS,
   Feedback,
+  FeedbackActions,
+  FeedbackData,
   FeedbackId,
   FETCH_PREVIOUS_FEEDBACK,
   FETCH_PREVIOUS_FEEDBACK_FAILURE,
@@ -15,7 +17,7 @@ import {
   SEND_FEEDBACK_SUCCESS,
 } from './types';
 
-export const addComment = (data: Feedback) => async (dispatch: Dispatch) => {
+export const addComment = (data: Feedback) => async (dispatch: Dispatch<FeedbackActions>) => {
   dispatch({
     type: SEND_FEEDBACK,
     payload: data,
@@ -40,31 +42,32 @@ export const addComment = (data: Feedback) => async (dispatch: Dispatch) => {
   }
 };
 
-export const checkPreviousFeedback = (feedbackId: FeedbackId) => async (dispatch: Dispatch) => {
-  dispatch({
-    type: FETCH_PREVIOUS_FEEDBACK,
-    payload: feedbackId,
-  });
-
-  try {
-    const { data } = await getDoc(doc(db, 'sessions', feedbackId.sessionId, 'feedback'));
-
+export const checkPreviousFeedback =
+  (feedbackId: FeedbackId) => async (dispatch: Dispatch<FeedbackActions>) => {
     dispatch({
-      type: FETCH_PREVIOUS_FEEDBACK_SUCCESS,
-      payload: {
-        sessionId: feedbackId.sessionId,
-        previousFeedback: data(),
-      },
+      type: FETCH_PREVIOUS_FEEDBACK,
+      payload: feedbackId,
     });
-  } catch (error) {
-    dispatch({
-      type: FETCH_PREVIOUS_FEEDBACK_FAILURE,
-      payload: { error },
-    });
-  }
-};
 
-export const deleteFeedback = (data: FeedbackId) => async (dispatch: Dispatch) => {
+    try {
+      const { data } = await getDoc(doc(db, 'sessions', feedbackId.sessionId, 'feedback'));
+
+      dispatch({
+        type: FETCH_PREVIOUS_FEEDBACK_SUCCESS,
+        payload: {
+          sessionId: feedbackId.sessionId,
+          previousFeedback: data() as FeedbackData,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: FETCH_PREVIOUS_FEEDBACK_FAILURE,
+        payload: { error },
+      });
+    }
+  };
+
+export const deleteFeedback = (data: FeedbackId) => async (dispatch: Dispatch<FeedbackActions>) => {
   dispatch({
     type: DELETE_FEEDBACK,
     payload: data,
@@ -75,9 +78,7 @@ export const deleteFeedback = (data: FeedbackId) => async (dispatch: Dispatch) =
 
     dispatch({
       type: DELETE_FEEDBACK_SUCCESS,
-      payload: {
-        sessionId: data.sessionId,
-      },
+      payload: data,
     });
   } catch (error) {
     dispatch({
