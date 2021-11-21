@@ -1,10 +1,11 @@
+import { Success } from '@abraham/remotedata';
 import { customElement, property } from '@polymer/decorators';
 import '@polymer/paper-toast/paper-toast';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { hideToast } from '../store/toast/actions';
-import { TempAny } from '../temp-any';
+import { initialToastState, ToastState } from '../store/toast/state';
 import './shared-styles';
 
 @customElement('toast-element')
@@ -40,9 +41,9 @@ export class ToastElement extends ReduxMixin(PolymerElement) {
 
       <paper-toast
         id="toast"
-        duration="[[toast.duration]]"
-        text="[[toast.message]]"
-        opened="[[toast.visible]]"
+        duration="[[toast.data.duration]]"
+        text="[[toast.data.message]]"
+        opened="[[toast.data.visible]]"
         on-click="_handleTap"
         fit-bottom$="[[viewport.isPhone]]"
         layout
@@ -50,15 +51,15 @@ export class ToastElement extends ReduxMixin(PolymerElement) {
         justified
         center
       >
-        <span class="toast-action" hidden$="[[!toast.action]]" on-click="_handleAction">
-          [[toast.action.title]]
+        <span class="toast-action" hidden$="[[!toast.data.action]]" on-click="_handleAction">
+          [[toast.data.action.title]]
         </span>
       </paper-toast>
     `;
   }
 
   @property({ type: Object })
-  private toast: { action?: { callback?: TempAny } } = {};
+  private toast: ToastState = initialToastState;
   @property({ type: Object })
   private viewport = {};
 
@@ -68,13 +69,15 @@ export class ToastElement extends ReduxMixin(PolymerElement) {
   }
 
   _handleTap() {
-    this.toast.action && this.toast.action.callback();
-    hideToast();
+    if (this.toast instanceof Success) {
+      this.toast.data.action && this.toast.data.action.callback();
+      hideToast();
+    }
   }
 
   _handleAction() {
-    if (this.toast.action) {
-      this.toast.action.callback();
+    if (this.toast instanceof Success && this.toast.data.action) {
+      this.toast.data.action.callback();
       hideToast();
     }
   }

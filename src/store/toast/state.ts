@@ -1,5 +1,5 @@
-import { ToastState } from './types';
+import { Initialized, RemoteData } from '@abraham/remotedata';
+import { Toast } from '../../models/toast';
 
-export const initialToastState: ToastState = {
-  message: '',
-};
+export type ToastState = RemoteData<Error, Toast>;
+export const initialToastState: ToastState = new Initialized();

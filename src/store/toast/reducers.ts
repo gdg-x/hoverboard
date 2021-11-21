@@ -1,12 +1,15 @@
-import { initialToastState } from './state';
+import { Initialized, Success } from '@abraham/remotedata';
+import { initialToastState, ToastState } from './state';
 import { HIDE_TOAST, SHOW_TOAST, ToastActionTypes } from './types';
 
-export const toastReducer = (state = initialToastState, action: ToastActionTypes) => {
+export const toastReducer = (state = initialToastState, action: ToastActionTypes): ToastState => {
   switch (action.type) {
     case SHOW_TOAST:
-      return action.toast;
+      return new Success(action.payload);
+
     case HIDE_TOAST:
-      return initialToastState;
+      return new Initialized();
+
     default:
       return state;
   }
