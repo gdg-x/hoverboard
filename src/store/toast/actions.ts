@@ -8,12 +8,10 @@ export const showToast = (toast: Toast) => {
   const duration = toast.duration || 5000;
   store.dispatch({
     type: SHOW_TOAST,
-    toast: {
+    payload: {
       ...toast,
-      ...{
-        duration,
-        visible: true,
-      },
+      duration,
+      visible: true,
     },
   });
 
