@@ -1,4 +1,4 @@
-import { PartnerGroup } from '../../models/partner-group';
+import { DialogForm } from '../dialogs/types';
 
 export const ADD_POTENTIAL_PARTNER = 'app/Partners/ADD_POTENTIAL_PARTNER';
 export const ADD_POTENTIAL_PARTNER_FAILURE = 'app/Partners/ADD_POTENTIAL_PARTNER_FAILURE';
@@ -11,9 +11,7 @@ export interface PotentialPartnersState {
 
 interface AddPotentialPartnerAction {
   type: typeof ADD_POTENTIAL_PARTNER;
-  payload: {
-    partner: PartnerGroup;
-  };
+  payload: DialogForm;
 }
 
 interface AddPotentialPartnerFailureAction {
@@ -27,7 +25,7 @@ interface AddPotentialPartnerSuccessAction {
   type: typeof ADD_POTENTIAL_PARTNER_SUCCESS;
 }
 
-export type PotentialPartnerActionTypes =
+export type PotentialPartnerActions =
   | AddPotentialPartnerAction
   | AddPotentialPartnerFailureAction
   | AddPotentialPartnerSuccessAction;

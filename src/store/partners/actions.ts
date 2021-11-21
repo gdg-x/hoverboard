@@ -5,7 +5,12 @@ import { Partner } from '../../models/partner';
 import { PartnerGroup } from '../../models/partner-group';
 import { mergeId } from '../../utils/merge-id';
 import { order } from '../../utils/order';
-import { FETCH_PARTNERS, FETCH_PARTNERS_FAILURE, FETCH_PARTNERS_SUCCESS } from './types';
+import {
+  FETCH_PARTNERS,
+  FETCH_PARTNERS_FAILURE,
+  FETCH_PARTNERS_SUCCESS,
+  PartnerActions,
+} from './types';
 
 const getGroupPartners = async (group: PartnerGroup & { id: string }): Promise<PartnerGroup> => {
   const { docs } = await getDocs(query(collection(db, 'partners', group.id, 'items')));
@@ -24,7 +29,7 @@ const getPartnerGroups = async (): Promise<PartnerGroup[]> => {
   return Promise.all(items.map(getGroupPartners));
 };
 
-export const fetchPartners = () => async (dispatch: Dispatch) => {
+export const fetchPartners = () => async (dispatch: Dispatch<PartnerActions>) => {
   dispatch({
     type: FETCH_PARTNERS,
   });

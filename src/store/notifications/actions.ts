@@ -7,7 +7,7 @@ import { db, firebaseApp } from '../../firebase';
 import { TempAny } from '../../temp-any';
 import { setLocation } from '../routing/actions';
 import { showToast } from '../toast/actions';
-import { NOTIFICATIONS_STATUS, UPDATE_NOTIFICATIONS_STATUS } from './types';
+import { NotificationActions, NOTIFICATIONS_STATUS, UPDATE_NOTIFICATIONS_STATUS } from './types';
 
 // TODO: Refactor this file
 
@@ -31,7 +31,7 @@ onMessage(messaging, (payload) => {
   });
 });
 
-export const requestPermission = () => async (dispatch: Dispatch) => {
+export const requestPermission = () => async (dispatch: Dispatch<NotificationActions>) => {
   try {
     Notification.requestPermission();
     getToken(true);
@@ -45,7 +45,7 @@ export const requestPermission = () => async (dispatch: Dispatch) => {
 
 export const getToken =
   (subscribe = false) =>
-  (dispatch: Dispatch, getState: typeof store.getState) => {
+  (dispatch: Dispatch<NotificationActions>, getState: typeof store.getState) => {
     if (!subscribe && Notification.permission !== 'granted') {
       return;
     }
@@ -118,7 +118,7 @@ export const getToken =
         } else {
           dispatch({
             type: UPDATE_NOTIFICATIONS_STATUS,
-            status: Notification.permission,
+            status: Notification.permission as TempAny,
             token: null,
           });
         }
@@ -132,7 +132,7 @@ export const getToken =
       });
   };
 
-export const unsubscribe = () => async (dispatch: Dispatch) => {
+export const unsubscribe = () => async (dispatch: Dispatch<NotificationActions>) => {
   await deleteToken(messaging);
   dispatch({
     type: UPDATE_NOTIFICATIONS_STATUS,
