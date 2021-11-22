@@ -59,7 +59,6 @@
   "globals": {
     "clients": true,
     "ga": true,
-    "importScripts": true,
     "Polymer": true,
     "ServiceWorkerGlobalScope": true,
     "ShadyCSS": true
