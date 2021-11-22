@@ -1,10 +1,4 @@
-import { TempAny } from '../temp-any';
-
-declare global {
-  interface Window {
-    ShadyCSS: TempAny;
-  }
-}
+import { PolymerElement } from '@polymer/polymer';
 
 export const getDate = (date) => {
   return new Date(date).toLocaleString('{$ dateFormat.locale $}', {
@@ -31,10 +25,8 @@ export const generateClassName = (value) => {
     : '';
 };
 
-export const getVariableColor = (element: TempAny, value: string, fallback?: string) => {
-  const calculated = window.ShadyCSS
-    ? window.ShadyCSS.getComputedStyleValue(element, `--${generateClassName(value)}`)
-    : getComputedStyle(element, `--${generateClassName(value)}`);
+export const getVariableColor = (element: PolymerElement, value: string, fallback?: string) => {
+  const calculated = getComputedStyle(element, `--${generateClassName(value)}`);
   return calculated || (fallback && getVariableColor(element, fallback));
 };
 

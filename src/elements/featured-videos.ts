@@ -36,7 +36,7 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
         }
 
         .videos {
-          transition: transform var(--slideAnimation);
+          transition: transform var(--slide-animation);
           will-change: transition;
           transform: translateX(0);
         }

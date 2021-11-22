@@ -67,7 +67,6 @@ node_modules/
 
 # Custom
 dist/
-out-tsc/
 serviceAccount.json
 *-adminsdk-*.json
 .DS_Store

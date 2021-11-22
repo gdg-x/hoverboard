@@ -1,4 +1,6 @@
-import admin from 'firebase-admin';
+// https://github.com/import-js/eslint-plugin-import/issues/1810
+// eslint-disable-next-line import/no-unresolved
+import { initializeApp } from 'firebase-admin/app';
 import {
   scheduleWrite,
   sessionsWrite,
@@ -15,7 +17,7 @@ import { scheduleNotifications } from './schedule-notifications.js';
 // - "noImplicitReturns": true,
 // - "strict": true,
 
-admin.initializeApp();
+initializeApp();
 
 export {
   saveUserData,

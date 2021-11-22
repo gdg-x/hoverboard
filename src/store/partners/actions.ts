@@ -1,13 +1,19 @@
+import { collection, getDocs, query } from 'firebase/firestore';
 import { Dispatch } from 'redux';
+import { db } from '../../firebase';
 import { Partner } from '../../models/partner';
 import { PartnerGroup } from '../../models/partner-group';
 import { mergeId } from '../../utils/merge-id';
 import { order } from '../../utils/order';
-import { db } from '../db';
-import { FETCH_PARTNERS, FETCH_PARTNERS_FAILURE, FETCH_PARTNERS_SUCCESS } from './types';
+import {
+  FETCH_PARTNERS,
+  FETCH_PARTNERS_FAILURE,
+  FETCH_PARTNERS_SUCCESS,
+  PartnerActions,
+} from './types';
 
 const getGroupPartners = async (group: PartnerGroup & { id: string }): Promise<PartnerGroup> => {
-  const { docs } = await db().collection('partners').doc(group.id).collection('items').get();
+  const { docs } = await getDocs(query(collection(db, 'partners', group.id, 'items')));
   const items = docs.map<Partner>(mergeId).sort(order);
 
   return {
@@ -17,13 +23,13 @@ const getGroupPartners = async (group: PartnerGroup & { id: string }): Promise<P
 };
 
 const getPartnerGroups = async (): Promise<PartnerGroup[]> => {
-  const { docs } = await db().collection('partners').get();
+  const { docs } = await getDocs(query(collection(db, 'partners')));
   const items = docs.map<PartnerGroup>(mergeId).sort(order);
 
   return Promise.all(items.map(getGroupPartners));
 };
 
-export const fetchPartners = () => async (dispatch: Dispatch) => {
+export const fetchPartners = () => async (dispatch: Dispatch<PartnerActions>) => {
   dispatch({
     type: FETCH_PARTNERS,
   });

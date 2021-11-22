@@ -1,9 +1,9 @@
-import admin from 'firebase-admin';
+// https://github.com/import-js/eslint-plugin-import/issues/1810
+// eslint-disable-next-line import/no-unresolved
+import { getFirestore } from 'firebase-admin/firestore';
 import * as functions from 'firebase-functions';
-import { sessionsSpeakersScheduleMap } from './schedule-generator/speakers-sessions-schedule-map.js';
 import { sessionsSpeakersMap } from './schedule-generator/speakers-sessions-map.js';
-
-const { firestore } = admin;
+import { sessionsSpeakersScheduleMap } from './schedule-generator/speakers-sessions-schedule-map.js';
 
 export const sessionsWrite = functions.firestore
   .document('sessions/{sessionId}')
@@ -38,9 +38,9 @@ export const speakersWrite = functions.firestore
   });
 
 async function generateAndSaveData(changedSpeaker?) {
-  const sessionsPromise = firestore().collection('sessions').get();
-  const schedulePromise = firestore().collection('schedule').orderBy('date', 'desc').get();
-  const speakersPromise = firestore().collection('speakers').get();
+  const sessionsPromise = getFirestore().collection('sessions').get();
+  const schedulePromise = getFirestore().collection('schedule').orderBy('date', 'desc').get();
+  const speakersPromise = getFirestore().collection('speakers').get();
 
   const [sessionsSnapshot, scheduleSnapshot, speakersSnapshot] = await Promise.all([
     sessionsPromise,
@@ -102,6 +102,6 @@ function saveGeneratedData(data, collectionName) {
 
   for (let index = 0; index < Object.keys(data).length; index++) {
     const key = Object.keys(data)[index];
-    firestore().collection(collectionName).doc(key).set(data[key]);
+    getFirestore().collection(collectionName).doc(key).set(data[key]);
   }
 }

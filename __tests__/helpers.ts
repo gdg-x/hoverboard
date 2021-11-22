@@ -1,13 +1,14 @@
-import * as firebase from '@firebase/testing';
+import { assertFails, assertSucceeds } from '@firebase/rules-unit-testing';
+import { expect } from '@jest/globals';
 
 expect.extend({
   async toAllow(pr: Promise<any>) {
     let pass = false;
     try {
-      await firebase.assertSucceeds(pr);
+      await assertSucceeds(pr);
       pass = true;
-    } catch (err) {
-      // no-op
+    } catch (error) {
+      console.log(error);
     }
 
     return {
@@ -21,10 +22,10 @@ expect.extend({
   async toDeny(pr: Promise<any>) {
     let pass = false;
     try {
-      await firebase.assertFails(pr);
+      await assertFails(pr);
       pass = true;
-    } catch (err) {
-      // no-op
+    } catch (error) {
+      console.log(error);
     }
     return {
       pass,
@@ -33,11 +34,12 @@ expect.extend({
   },
 });
 
-declare global {
-  namespace jest {
-    interface Matchers<R> {
-      toDeny: () => R;
-      toAllow: () => R;
-    }
+export { expect };
+
+// https://github.com/facebook/jest/issues/11487
+declare module 'expect/build/types' {
+  interface Matchers<R> {
+    toDeny: () => R;
+    toAllow: () => R;
   }
 }
