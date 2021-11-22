@@ -55,8 +55,5 @@
         "@typescript-eslint/no-unused-vars": ["error", { "args": "none" }]
       }
     }
-  ],
-  "globals": {
-    "ga": true
-  }
+  ]
 }
