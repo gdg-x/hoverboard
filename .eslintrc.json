@@ -60,7 +60,6 @@
     "clients": true,
     "ga": true,
     "Polymer": true,
-    "ServiceWorkerGlobalScope": true,
-    "ShadyCSS": true
+    "ServiceWorkerGlobalScope": true
   }
 }
