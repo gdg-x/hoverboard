@@ -3,18 +3,17 @@
 import * as path from 'path';
 
 const ONE_WEEK = 60 * 60 * 24 * 7;
-const FIREBASE_RESERVED_URLS = /\/__\/.*/;
 
 export const workboxConfig = {
   swDest: path.join(__dirname, 'dist', 'service-worker.js'),
   navigateFallback: '/index.html',
   navigateFallbackDenylist: [
-    FIREBASE_RESERVED_URLS, // Private Firebase URLs
+    /\/__\/.*/, // Private Firebase URLs
   ],
   skipWaiting: true,
   offlineGoogleAnalytics: true,
   globDirectory: path.join(__dirname, 'dist'),
-  globPatterns: ['**/*.{html,js,css,json,svg,md}'],
+  globPatterns: ['**/*.{html,js,css,json,svg,md}', 'node_assets/**/*.js'],
   runtimeCaching: [
     {
       urlPattern: /\/images\/.*/,
@@ -28,17 +27,17 @@ export const workboxConfig = {
       },
     },
     {
+      urlPattern: /\/node_assets\/.*/,
+      handler: 'NetworkFirst',
+      options: {
+        cacheName: 'node-modules-cache',
+      },
+    },
+    {
       urlPattern: /https:\/\/maps\.googleapis\.com\/maps.*/,
       handler: 'NetworkFirst',
       options: {
         cacheName: 'google-maps-cache',
-      },
-    },
-    {
-      urlPattern: /\/__\/.*/,
-      handler: 'NetworkFirst',
-      options: {
-        cacheName: 'firebase-cache',
       },
     },
     {

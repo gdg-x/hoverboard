@@ -54,8 +54,7 @@ class SpeakerDetails extends SessionsHoC(
         }
 
         .tags {
-          display: flex;
-          flex-wrap: wrap;
+          margin-top: 8px;
         }
 
         .star-rating {
@@ -242,7 +241,7 @@ class SpeakerDetails extends SessionsHoC(
   }
 
   getVariableColor(value: string) {
-    return getVariableColor(this as unknown as PolymerElement, value);
+    return getVariableColor(this, value);
   }
 }
 

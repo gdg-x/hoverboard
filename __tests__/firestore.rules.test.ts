@@ -1,43 +1,30 @@
-import { RulesTestContext } from '@firebase/rules-unit-testing';
-import { afterEach, beforeEach, describe, it } from '@jest/globals';
-import {
-  addDoc,
-  collection,
-  CollectionReference,
-  deleteDoc,
-  doc,
-  DocumentReference,
-  getDoc,
-  getDocs,
-  updateDoc,
-} from 'firebase/firestore';
 import { setupApp, teardownApp } from './firestore.setup';
-import { expect } from './helpers';
+import './helpers';
 
 describe('firestore', () => {
-  let testEnv: RulesTestContext;
+  let db: firebase.firestore.Firestore;
 
   afterEach(async () => {
     await teardownApp();
   });
 
   describe('default rules', () => {
-    let ref: CollectionReference;
+    let ref: firebase.firestore.CollectionReference;
 
     beforeEach(async () => {
-      testEnv = await setupApp();
-      ref = collection(testEnv.firestore(), 'some-nonexistent-collection');
+      db = await setupApp();
+      ref = db.collection('some-nonexistent-collection');
     });
 
     it('fail when reading/writing an unauthorized collection', () => {
-      expect(getDocs(ref)).toDeny();
-      expect(addDoc(ref, {})).toDeny();
+      expect(ref.get()).toDeny();
+      expect(ref.add({})).toDeny();
     });
   });
 
   describe('feedback rules', () => {
-    let colRef: CollectionReference;
-    let docRef: DocumentReference;
+    let colRef: firebase.firestore.CollectionReference;
+    let docRef: firebase.firestore.DocumentReference;
     const mockFeedback = {
       contentRating: 5,
       styleRating: 5,
@@ -53,48 +40,48 @@ describe('firestore', () => {
 
     describe('when not authenticated', () => {
       beforeEach(async () => {
-        testEnv = await setupApp({ data: mockData });
+        db = await setupApp(undefined, mockData);
 
-        colRef = collection(testEnv.firestore(), 'sessions/1/feedback');
-        docRef = doc(testEnv.firestore(), 'sessions/1/feedback', '1');
+        colRef = db.collection('sessions/1/feedback');
+        docRef = colRef.doc('1');
       });
 
       it('fail when reading/writing an unauthorized collection', () => {
-        expect(getDocs(colRef)).toDeny();
-        expect(addDoc(colRef, {})).toDeny();
-        expect(getDoc(docRef)).toDeny();
-        expect(updateDoc(docRef, {})).toDeny();
-        expect(deleteDoc(docRef)).toDeny();
+        expect(colRef.get()).toDeny();
+        expect(colRef.add({})).toDeny();
+        expect(docRef.get()).toDeny();
+        expect(docRef.update({})).toDeny();
+        expect(docRef.delete()).toDeny();
       });
     });
 
     describe('when authenticated', () => {
-      let ownDocRef: DocumentReference;
+      let ownDocRef: firebase.firestore.DocumentReference;
 
       beforeEach(async () => {
-        testEnv = await setupApp({ userId: '2', data: mockData });
+        db = await setupApp({ uid: '2' }, mockData);
 
-        colRef = collection(testEnv.firestore(), 'sessions/1/feedback');
-        docRef = doc(testEnv.firestore(), 'sessions/1/feedback', '1');
-        ownDocRef = doc(testEnv.firestore(), 'sessions/1/feedback', '2');
+        colRef = db.collection('sessions/1/feedback');
+        docRef = colRef.doc('1');
+        ownDocRef = colRef.doc('2');
       });
 
       it('fail on other documents', () => {
-        expect(getDocs(colRef)).toDeny();
-        expect(addDoc(colRef, mockFeedback)).toDeny();
-        expect(getDoc(docRef)).toDeny();
-        expect(updateDoc(docRef, {})).toDeny();
-        expect(deleteDoc(docRef)).toDeny();
+        expect(colRef.get()).toDeny();
+        expect(colRef.add(mockFeedback)).toDeny();
+        expect(docRef.get()).toDeny();
+        expect(docRef.update({})).toDeny();
+        expect(docRef.delete()).toDeny();
       });
 
       it('can interact with own documents', () => {
-        expect(getDoc(ownDocRef)).toAllow();
-        expect(updateDoc(ownDocRef, {})).toAllow();
-        expect(deleteDoc(ownDocRef)).toAllow();
+        expect(ownDocRef.get()).toAllow();
+        expect(ownDocRef.update({})).toAllow();
+        expect(ownDocRef.delete()).toAllow();
       });
 
       it('data validation', () => {
-        expect(updateDoc(ownDocRef, {})).toAllow();
+        expect(ownDocRef.update({})).toAllow();
         [
           { contentRating: -1 },
           { contentRating: 11 },
@@ -103,7 +90,7 @@ describe('firestore', () => {
           { comment: null },
           { comment: 'c'.repeat(257) },
         ].forEach((data) => {
-          expect(updateDoc(ownDocRef, data)).toDeny();
+          expect(ownDocRef.update(data)).toDeny();
         });
       });
     });

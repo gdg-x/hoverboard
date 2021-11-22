@@ -1,7 +1,7 @@
 import { initialUiState } from './state';
-import { SET_HERO_SETTINGS, SET_VIEWPORT_SIZE, TOGGLE_VIDEO_DIALOG, UiActions } from './types';
+import { SET_HERO_SETTINGS, SET_VIEWPORT_SIZE, TOGGLE_VIDEO_DIALOG, UiActionTypes } from './types';
 
-export const uiReducer = (state = initialUiState, action: UiActions) => {
+export const uiReducer = (state = initialUiState, action: UiActionTypes) => {
   switch (action.type) {
     case TOGGLE_VIDEO_DIALOG:
       return {

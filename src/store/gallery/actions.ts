@@ -1,8 +1,7 @@
-import { collection, getDocs, query } from 'firebase/firestore';
 import { Dispatch } from 'redux';
-import { db } from '../../firebase';
 import { Photo } from '../../models/photo';
 import { mergeId } from '../../utils/merge-id';
+import { db } from '../db';
 import {
   FETCH_GALLERY,
   FETCH_GALLERY_FAILURE,
@@ -11,7 +10,7 @@ import {
 } from './types';
 
 const getGalleries = async (): Promise<Photo[]> => {
-  const { docs } = await getDocs(query(collection(db, 'gallery')));
+  const { docs } = await db().collection('gallery').get();
 
   return docs.map<Photo>(mergeId);
 };

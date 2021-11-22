@@ -15,4 +15,4 @@ interface UpdateNotificationsStatusAction {
   token?: string;
 }
 
-export type NotificationActions = UpdateNotificationsStatusAction;
+export type NotificationActionTypes = UpdateNotificationsStatusAction;

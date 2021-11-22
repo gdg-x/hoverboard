@@ -17,4 +17,4 @@ interface SignOutAction {
   user: UnauthenticatedUser;
 }
 
-export type UserActions = SignInAction | SignOutAction;
+export type UserActionTypes = SignInAction | SignOutAction;

@@ -212,7 +212,7 @@ class PreviousSpeakerDetails extends ReduxMixin(
   }
 
   getVariableColor(value) {
-    return getVariableColor(this as unknown as PolymerElement, value);
+    return getVariableColor(this, value);
   }
 }
 

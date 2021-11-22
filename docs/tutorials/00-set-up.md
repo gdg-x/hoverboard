@@ -35,6 +35,7 @@ The diagram below is a brief summary of the directories within the project.
     |---images/
     |---scripts/
     |---node_modules/
+    |---out-tsc/
     |---src/
     |   |---components/
     |   |---elements/
@@ -50,6 +51,7 @@ The diagram below is a brief summary of the directories within the project.
 - `images/` is for static images.
 - `scripts/` contains scripts that helps user to work with the project and it's data ([docs](./firebase-utils.md)).
 - `node_modules/` is the place of Node dependencies.
+- `out-tsc` is the compiled TypeScript before Rollup bundles it.
 - `src/` is where you store all of your source code and do all of your development.
   - `components/` is where you keep your new LitElement custom elements.
   - `elements/` is where you keep your old Polymer custom elements.
@@ -58,8 +60,6 @@ The diagram below is a brief summary of the directories within the project.
 
 ## Build and serve
 
-1. Specify the Firebase project to use for development and deploy target
-   - `npx firebase use <projectid>`.
 1. Run locally
    - `npm start`
 1. Deploy
@@ -67,26 +67,24 @@ The diagram below is a brief summary of the directories within the project.
 
 There are two CLI flags you can set when running npm scripts:
 
-- `NODE_ENV`: Control if code should be optimized for a production deployment with minimization or for faster local development.
+- `NODE_ENV`: Control if code should be optimized for a production deployment with minimization or a faster local development.
 - `BUILD_ENV`: Which `config` JSON file should be used when building. This is where you set the Firebase project details.
 
 The common npm scripts are:
 
-- `npm start`: Start a local development server using the Firebase emulator with livereload.
+- `npm start`: Start a local development server.
 - `npm run build`: Build a production version of the site to the `dist` directory.
 - `npm run serve`: Build a production version of the site and serve it locally.
 - `npm run deploy`: Build a production version of the site and deploy it to Firebase.
 
-Below is the grid of the common npm script commands and their supported CLI flags.
+Below is the grid of the common npm script commands and thier supported CLI flags.
 
-|          | `NODE_ENV`    | `BUILD_ENV`                           |
-| -------- | ------------- | ------------------------------------- |
-| `start`  | `development` | `development`\|`production`\|`custom` |
-| `build`  | `production`  | `development`\|`production`\|`custom` |
-| `serve`  | `production`  | `development`\|`production`\|`custom` |
-| `deploy` | `production`  | `development`\|`production`\|`custom` |
+|             | `start`                               | `build`                               | `serve`                               | `deploy`                              |
+| ----------- | ------------------------------------- | ------------------------------------- | ------------------------------------- | ------------------------------------- |
+| `NODE_ENV`  | `development`                         | `production`\|`development`           | `production`\|`development`           | `production`                          |
+| `BUILD_ENV` | `development`\|`production`\|`custom` | `production`\|`development`\|`custom` | `production`\|`development`\|`custom` | `production`\|`development`\|`custom` |
 
-For example `npm start` only supports `NODE_ENV=development` and defaults to `BUILD_ENV=development` while `npm run build` only supports `NODE_ENV=production` and defaults to `BUILD_ENV=production`.
+For example `npm start` only supports `NODE_ENV=development` and defaults to `BUILD_ENV=development` while `npm run build` defaults to `NODE_ENV=production` and `BUILD_ENV=production` but supports `NODE_ENV=development` and `BUILD_ENV=development`.
 
 ## Next steps
 

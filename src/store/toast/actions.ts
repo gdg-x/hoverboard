@@ -5,24 +5,26 @@ import { Toast } from '../../models/toast';
 let toastHideTimeOut: number;
 
 export const showToast = (toast: Toast) => {
-  const duration = toast.duration || 5000;
+  const duration = typeof toast.duration !== 'undefined' ? toast.duration : 5000;
   store.dispatch({
     type: SHOW_TOAST,
-    payload: {
+    toast: {
       ...toast,
-      duration,
-      visible: true,
+      ...{
+        duration,
+        visible: true,
+      },
     },
   });
 
   if (duration === 0) return;
 
-  window.clearTimeout(toastHideTimeOut);
+  clearTimeout(toastHideTimeOut);
   toastHideTimeOut = window.setTimeout(() => hideToast(), duration);
 };
 
 export const hideToast = () => {
-  window.clearTimeout(toastHideTimeOut);
+  clearTimeout(toastHideTimeOut);
   store.dispatch({
     type: HIDE_TOAST,
   });

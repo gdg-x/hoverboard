@@ -2,11 +2,11 @@ import { Pending } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-location/iron-location';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ELEMENTS, setElement } from '../global';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { initialRoutingState, RoutingState } from '../store/routing/state';
 import { initialScheduleState, ScheduleState } from '../store/schedule/state';
+import { TempAny } from '../temp-any';
 import './content-loader';
 import './shared-styles';
 
@@ -113,7 +113,7 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
 
   connectedCallback() {
     super.connectedCallback();
-    setElement(ELEMENTS.STICKY_HEADER_TOOLBAR, this);
+    (window as TempAny).HOVERBOARD.Elements.StickyHeaderToolbar = this;
   }
 
   @computed('schedule')

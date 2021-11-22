@@ -41,10 +41,6 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
           display: inline-block;
           vertical-align: middle;
         }
-        .tags {
-          display: flex;
-          flex-wrap: wrap;
-        }
       </style>
 
       <polymer-helmet
@@ -304,7 +300,7 @@ class SessionDetails extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], Po
   }
 
   getVariableColor(value: string) {
-    return getVariableColor(this as unknown as PolymerElement, value);
+    return getVariableColor(this, value);
   }
 }
 

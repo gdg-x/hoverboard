@@ -1,10 +1,8 @@
-// https://github.com/import-js/eslint-plugin-import/issues/1810
-// eslint-disable-next-line import/no-unresolved
-import { getFirestore } from 'firebase-admin/firestore';
-// https://github.com/import-js/eslint-plugin-import/issues/1810
-// eslint-disable-next-line import/no-unresolved
-import { getMessaging } from 'firebase-admin/messaging';
+import admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
+import { TempAny } from './temp-any.js';
+
+const { firestore, messaging } = admin;
 
 export const sendGeneralNotification = functions.firestore
   .document('/notifications/{timestamp}')
@@ -14,11 +12,8 @@ export const sendGeneralNotification = functions.firestore
 
     if (!message) return null;
     console.log('New message added at ', timestamp, ' with payload ', message);
-    const deviceTokensPromise = getFirestore().collection('notificationsSubscribers').get();
-    const notificationsConfigPromise = getFirestore()
-      .collection('config')
-      .doc('notifications')
-      .get();
+    const deviceTokensPromise = firestore().collection('notificationsSubscribers').get();
+    const notificationsConfigPromise = firestore().collection('config').doc('notifications').get();
 
     const [tokensSnapshot, notificationsConfigSnapshot] = await Promise.all([
       deviceTokensPromise,
@@ -43,7 +38,7 @@ export const sendGeneralNotification = functions.firestore
     };
 
     const tokensToRemove = [];
-    const messagingResponse = await getMessaging().sendToDevice(tokens, payload);
+    const messagingResponse = await messaging().sendToDevice(tokens, payload);
     messagingResponse.results.forEach((result, index) => {
       const error = result.error;
       if (error) {
@@ -52,8 +47,8 @@ export const sendGeneralNotification = functions.firestore
           error.code === 'messaging/invalid-registration-token' ||
           error.code === 'messaging/registration-token-not-registered'
         ) {
-          const tokenRef = getFirestore().collection('notificationsSubscribers').doc(tokens[index]);
-          tokensToRemove.push(tokenRef.delete());
+          const tokenRef = (tokensSnapshot as TempAny).ref.child(tokens[index]);
+          tokensToRemove.push(tokenRef.remove());
         }
       }
     });
