@@ -5,7 +5,6 @@ import { getFirestore } from 'firebase-admin/firestore';
 // eslint-disable-next-line import/no-unresolved
 import { getMessaging } from 'firebase-admin/messaging';
 import * as functions from 'firebase-functions';
-import { TempAny } from './temp-any.js';
 
 export const sendGeneralNotification = functions.firestore
   .document('/notifications/{timestamp}')
@@ -53,8 +52,8 @@ export const sendGeneralNotification = functions.firestore
           error.code === 'messaging/invalid-registration-token' ||
           error.code === 'messaging/registration-token-not-registered'
         ) {
-          const tokenRef = (tokensSnapshot as TempAny).ref.child(tokens[index]);
-          tokensToRemove.push(tokenRef.remove());
+          const tokenRef = getFirestore().collection('notificationsSubscribers').doc(tokens[index]);
+          tokensToRemove.push(tokenRef.delete());
         }
       }
     });
