@@ -242,7 +242,7 @@ class SpeakerDetails extends SessionsHoC(
   }
 
   getVariableColor(value: string) {
-    return getVariableColor(this, value);
+    return getVariableColor(this as unknown as PolymerElement, value);
   }
 }
 

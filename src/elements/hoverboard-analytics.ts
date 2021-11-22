@@ -1,3 +1,7 @@
+/* eslint-disable no-undef */
+/* eslint-disable prefer-rest-params */
+/* eslint-disable max-len */
+
 import { TempAny } from '../temp-any';
 
 class HoverboardAnalytics extends HTMLElement {
@@ -5,11 +9,9 @@ class HoverboardAnalytics extends HTMLElement {
     // GOOGLE ANALYTICS TRACKING
 
     // Load google analytics script
-    /* eslint-disable */
     // prettier-ignore
     // @ts-ignore
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    /* eslint-enable */
+    (function (i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function (){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
     ga('create', {
       trackingId: '{$ analytics $}',

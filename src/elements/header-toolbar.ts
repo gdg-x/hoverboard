@@ -2,6 +2,7 @@ import { Success } from '@abraham/remotedata';
 import { computed, customElement, observe, property } from '@polymer/decorators';
 import { PaperMenuButton } from '@polymer/paper-menu-button';
 import { html, PolymerElement } from '@polymer/polymer';
+import { ELEMENTS, setElement } from '../global';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
@@ -12,7 +13,6 @@ import { NOTIFICATIONS_STATUS } from '../store/notifications/types';
 import { initialRoutingState, RoutingState } from '../store/routing/state';
 import { initialTicketsState, TicketsState } from '../store/tickets/state';
 import { signOut } from '../store/user/actions';
-import { TempAny } from '../temp-any';
 import { isDialogOpen } from '../utils/dialogs';
 import './shared-styles';
 
@@ -299,7 +299,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
 
   connectedCallback() {
     super.connectedCallback();
-    (window as TempAny).HOVERBOARD.Elements.HeaderToolbar = this;
+    setElement(ELEMENTS.HEADER_TOOLBAR, this);
     this._onScroll = this._onScroll.bind(this);
     window.addEventListener('scroll', this._onScroll);
     this._onScroll();

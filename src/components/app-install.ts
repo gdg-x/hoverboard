@@ -42,8 +42,10 @@ export class AppInstall extends ThemedElement {
     this.deferredPrompt.prompt();
     const { outcome } = await this.deferredPrompt.userChoice;
     if (outcome === 'accepted') {
+      // eslint-disable-next-line no-undef
       ga('send', 'event', 'add_to_home_screen_prompt', 'accepted');
     } else {
+      // eslint-disable-next-line no-undef
       ga('send', 'event', 'add_to_home_screen_prompt', 'dismissed');
     }
     this.deferredPrompt = undefined;

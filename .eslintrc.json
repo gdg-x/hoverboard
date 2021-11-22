@@ -55,14 +55,5 @@
         "@typescript-eslint/no-unused-vars": ["error", { "args": "none" }]
       }
     }
-  ],
-  "globals": {
-    "clients": true,
-    "ga": true,
-    "HOVERBOARD": true,
-    "importScripts": true,
-    "Polymer": true,
-    "ServiceWorkerGlobalScope": true,
-    "ShadyCSS": true
-  }
+  ]
 }

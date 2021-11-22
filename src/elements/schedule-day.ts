@@ -1,10 +1,10 @@
 import { customElement, observe, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
+import { ELEMENTS, getElement } from '../global';
 import {
   FeaturedSessionsState,
   initialFeaturedSessionsState,
 } from '../store/featured-sessions/state';
-import { TempAny } from '../temp-any';
 import { generateClassName } from '../utils/functions';
 import { offsetTop, scrollToY } from '../utils/scrolling';
 import './session-element';
@@ -169,11 +169,13 @@ export class ScheduleDay extends PolymerElement {
       const selectedTime = window.location.hash.slice(1);
       if (selectedTime) {
         requestAnimationFrame(() => {
-          const Elements = (window as TempAny).HOVERBOARD.Elements;
           const targetElement = this.shadowRoot.querySelector(`[id="${selectedTime}"]`);
           const offset = offsetTop(targetElement);
-          const toolbarHeight = Elements.HeaderToolbar.getBoundingClientRect().height - 1;
-          const stickyToolbarHeight = Elements.StickyHeaderToolbar.getBoundingClientRect().height;
+          const toolbarHeight =
+            getElement(ELEMENTS.HEADER_TOOLBAR).getBoundingClientRect().height - 1;
+          const stickyToolbarHeight = getElement(
+            ELEMENTS.STICKY_HEADER_TOOLBAR
+          ).getBoundingClientRect().height;
           const additionalMargin = this.viewport.isTabletPlus ? 8 : 0;
           const scrollTargetY = offset - toolbarHeight - stickyToolbarHeight - additionalMargin;
           scrollToY(scrollTargetY, 1500, 'easeInOutSine');

@@ -1,6 +1,7 @@
 // / <reference lib="WebWorker" />
 
 // @ts-ignore
+// eslint-disable-next-line no-undef
 declare let self: ServiceWorkerGlobalScope;
 
 import { initializeApp } from 'firebase/app';
