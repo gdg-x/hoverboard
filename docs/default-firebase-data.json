@@ -42,15 +42,15 @@
       "title": "What to do in Lviv"
     }
   },
-  "gallery": [
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4185.jpg?alt=media&token=ff3fd161-3d68-401a-90cd-74b90bd2a4d8",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4411.jpg?alt=media&token=7fda0d66-a631-4816-bd85-b93ef49ed3a6",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4577.jpg?alt=media&token=f14205b5-be75-447c-8bca-73a15ca2df41",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4525.jpg?alt=media&token=0428f0e3-fda0-4119-8249-69f98e936ce5",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4611.jpg?alt=media&token=b080143c-161c-4d9f-96f3-ebb6bdcdfd95",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4720.jpg?alt=media&token=75de0c2d-8bd9-48bb-9117-1349c9bc381f",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4646.jpg?alt=media&token=eafb0320-6f21-47bc-8ba4-8eec708f2076",
-    "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_5294.jpg?alt=media&token=72ab5141-d21b-4e71-a58b-faa2b00d1d02"
+  "gallery":[
+    "https://ik.imagekit.io/5co2xzqgrzj/DEVFEST_2019_DGD_Lagos...3021_STC5hlISb6bB.jpg?updatedAt=1637585402495", 
+    "https://ik.imagekit.io/5co2xzqgrzj/DEVFEST_2019_DGD_Lagos...2551_0qXw2zrEP.jpg?updatedAt=1637585402642",
+    "https://ik.imagekit.io/5co2xzqgrzj/DEVFEST_2019_DGD_Lagos...2376_6skX26TYZ.jpg?updatedAt=1637585398256",
+    "https://ik.imagekit.io/5co2xzqgrzj/DEVFEST_2019_DGD_Lagos...2728_VRYX0E-UN.jpg?updatedAt=1637585403102",
+    "https://ik.imagekit.io/5co2xzqgrzj/DEVFEST_2019_DGD_Lagos...2740_IhFrMbEUyD.jpg?updatedAt=1637585397980",
+    "https://ik.imagekit.io/5co2xzqgrzj/DEVFEST_2019_DGD_Lagos...2828_mcT7RJ6Nr.jpg?updatedAt=1637585401031",
+    "https://ik.imagekit.io/5co2xzqgrzj/DEVFEST_2019_DGD_Lagos...2417_Qqp-mHTd6.jpg?updatedAt=1637585402102",
+    "https://ik.imagekit.io/5co2xzqgrzj/DEVFEST_2019_DGD_Lagos...2630_2X_QlN7nlIS.jpg?updatedAt=1637585402807"
   ],
   "notifications": {
     "config": {
