@@ -377,7 +377,7 @@ export class HoverboardApp extends PolymerElement {
 
   constructor() {
     super();
-    window.performance && performance.mark && performance.mark('hoverboard-app.created');
+    window.performance?.mark('hoverboard-app.created');
     this._toggleHeaderShadow = this._toggleHeaderShadow.bind(this);
     this._toggleDrawer = this._toggleDrawer.bind(this);
     store.subscribe(() => this.stateChanged(store.getState()));
