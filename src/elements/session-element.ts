@@ -4,6 +4,7 @@ import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { Session } from '../models/session';
 import { store } from '../store';
 import { openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
@@ -13,7 +14,6 @@ import {
   initialFeaturedSessionsState,
 } from '../store/featured-sessions/state';
 import { showToast } from '../store/toast/actions';
-import { TempAny } from '../temp-any';
 import { getVariableColor, toggleQueryParam } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
@@ -238,12 +238,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private user: { uid?: string; signedIn?: boolean } = {};
   @property({ type: Object })
-  private session: {
-    id: string;
-    day: TempAny;
-    startTime: TempAny;
-    mainTag: string;
-  };
+  private session: Session;
   @property({ type: Object })
   private featuredSessions: FeaturedSessionsState = initialFeaturedSessionsState;
   @property({ type: String })

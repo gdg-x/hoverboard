@@ -17,12 +17,12 @@ export const showToast = (toast: Toast) => {
 
   if (duration === 0) return;
 
-  clearTimeout(toastHideTimeOut);
+  window.clearTimeout(toastHideTimeOut);
   toastHideTimeOut = window.setTimeout(() => hideToast(), duration);
 };
 
 export const hideToast = () => {
-  clearTimeout(toastHideTimeOut);
+  window.clearTimeout(toastHideTimeOut);
   store.dispatch({
     type: HIDE_TOAST,
   });
