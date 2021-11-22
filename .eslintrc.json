@@ -57,9 +57,7 @@
     }
   ],
   "globals": {
-    "clients": true,
     "ga": true,
-    "Polymer": true,
-    "ServiceWorkerGlobalScope": true
+    "Polymer": true
   }
 }
