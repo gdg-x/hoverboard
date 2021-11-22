@@ -14,7 +14,7 @@
   "buyTicket": "Buy ticket",
   "signIn": "Sign in",
   "signOut": "Sign out",
-  "viewHighlights": "View Highlights",
+  "viewHighlights": "View Teaser",
   "offlineMessage": "You can still work offline.",
   "cachingComplete": "Caching complete! Future visits will work offline.",
   "newVersionAvailable": "A new version of this app is available.",
@@ -134,7 +134,7 @@
       "howItWas": {
         "description": "A Google Developer Group is a community of volunteers who create exciting projects and share experiences about Google technologies.",
         "label": "What is GDG",
-        "youtubeId": "TdpbgRgz6eE"
+        "youtubeId": "KlWVfEiW7Ak"
       }
     },
     "statisticsBlock": {
