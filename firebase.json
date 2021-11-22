@@ -52,16 +52,6 @@
     },
     "hosting": {
       "port": 5000
-    },
-    "pubsub": {
-      "port": 8085
-    },
-    "ui": {
-      "enabled": true,
-      "port": 4000
-    },
-    "auth": {
-      "port": 9099
     }
   }
 }

@@ -6,6 +6,7 @@ import '@polymer/marked-element';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import { TempAny } from '../../functions/src/temp-any';
 import '../elements/posts-list';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
@@ -151,7 +152,7 @@ export class PostPage extends ReduxMixin(PolymerElement) {
     }
   }
 
-  handleMarkdownFileFetch(event: CustomEvent) {
+  handleMarkdownFileFetch(event: TempAny) {
     if (event.detail.response) {
       this.postContent = event.detail.response;
     }

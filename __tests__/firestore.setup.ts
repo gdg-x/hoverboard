@@ -1,17 +1,8 @@
-/* eslint-disable jest/require-top-level-describe */
-
-import {
-  initializeTestEnvironment,
-  RulesTestContext,
-  RulesTestEnvironment,
-  TestEnvironmentConfig,
-} from '@firebase/rules-unit-testing';
-import { afterAll, beforeAll } from '@jest/globals';
-import { doc, setDoc } from 'firebase/firestore';
+import * as firebase from '@firebase/testing';
+import * as fs from 'fs';
 import { setup, teardown } from 'jest-dev-server';
 
-let testEnv: RulesTestEnvironment;
-
+// eslint-disable-next-line jest/require-top-level-describe
 beforeAll(async () => {
   await setup({
     command: 'npx firebase emulators:start --only firestore',
@@ -21,44 +12,41 @@ beforeAll(async () => {
   });
 }, 30000);
 
+// eslint-disable-next-line jest/require-top-level-describe
 afterAll(async () => {
   await teardown();
 });
 
-interface SetupApp {
-  userId?: string;
-  data?: { [key: string]: object };
-}
-
-export const setupApp = async ({ userId, data }: SetupApp = {}) => {
-  const projectId = `rules-spec-${Date.now()}`;
-  const config: TestEnvironmentConfig = {
+const loadRules = async (projectId: string, path: string) => {
+  await firebase.loadFirestoreRules({
     projectId,
-    firestore: {
-      port: 8080,
-      host: 'localhost',
-    },
-  };
-  testEnv = await initializeTestEnvironment(config);
+    rules: fs.readFileSync(path, 'utf8'),
+  });
+};
+
+export const setupApp = async (auth?: object, data?: { [key: string]: object }) => {
+  const projectId = `rules-spec-${Date.now()}`;
+  const app = firebase.initializeTestApp({
+    projectId,
+    auth,
+  });
+  const db = app.firestore();
 
   if (data) {
-    testEnv.withSecurityRulesDisabled(async (context: RulesTestContext) => {
-      for (const key in data) {
-        if ({}.hasOwnProperty.call(data, key)) {
-          await setDoc(doc(context.firestore(), key), data);
-        }
+    await loadRules(projectId, '__tests__/firestore.rules');
+
+    for (const key in data) {
+      if ({}.hasOwnProperty.call(data, key)) {
+        await db.doc(key).set(data[key]);
       }
-    });
+    }
   }
 
-  if (userId) {
-    return testEnv.authenticatedContext(userId);
-  } else {
-    return testEnv.unauthenticatedContext();
-  }
+  await loadRules(projectId, 'firestore.rules');
+
+  return db;
 };
 
 export const teardownApp = async () => {
-  await testEnv.clearFirestore();
-  await testEnv.cleanup();
+  return Promise.all(firebase.apps().map((app) => app.delete()));
 };

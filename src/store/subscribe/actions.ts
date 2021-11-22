@@ -1,7 +1,6 @@
-import { doc, setDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { store } from '../';
-import { db } from '../../firebase';
+import { db } from '../db';
 import { openDialog } from '../dialogs/actions';
 import { DialogForm, DIALOGS } from '../dialogs/types';
 import { showToast } from '../toast/actions';
@@ -21,7 +20,7 @@ const setSubscribe = async (data: DialogForm): Promise<true> => {
     lastName: data.secondFieldValue || '',
   };
 
-  await setDoc(doc(db, 'subscribers', id), subscriber);
+  await db().collection('subscribers').doc(id).set(subscriber);
 
   return true;
 };

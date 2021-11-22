@@ -1,4 +1,4 @@
-import { Day } from '../../models/day';
+import { Schedule } from '../../models/schedule';
 
 export const FETCH_SCHEDULE = 'FETCH_SCHEDULE';
 export const FETCH_SCHEDULE_FAILURE = 'FETCH_SCHEDULE_FAILURE';
@@ -15,7 +15,7 @@ interface FetchScheduleFailureAction {
 
 interface FetchScheduleSuccessAction {
   type: typeof FETCH_SCHEDULE_SUCCESS;
-  payload: Day[];
+  payload: Schedule[];
 }
 
 export type ScheduleActions =

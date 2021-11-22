@@ -1,8 +1,7 @@
-import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { Dispatch } from 'redux';
-import { db } from '../../firebase';
 import { Speaker } from '../../models/speaker';
 import { mergeId } from '../../utils/merge-id';
+import { db } from '../db';
 import {
   FETCH_PREVIOUS_SPEAKERS,
   FETCH_PREVIOUS_SPEAKERS_FAILURE,
@@ -11,9 +10,7 @@ import {
 } from './types';
 
 const getPreviousSpeakers = async (): Promise<Speaker[]> => {
-  const { docs } = await getDocs(
-    query(collection(db, 'previousSpeakers'), orderBy('order', 'asc'))
-  );
+  const { docs } = await db().collection('previousSpeakers').orderBy('order', 'asc').get();
 
   return docs.map<Speaker>(mergeId);
 };

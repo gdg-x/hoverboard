@@ -1,5 +1,5 @@
 import { Initialized, RemoteData } from '@abraham/remotedata';
-import { Day } from '../../models/day';
+import { Schedule } from '../../models/schedule';
 
-export type ScheduleState = RemoteData<Error, Day[]>;
+export type ScheduleState = RemoteData<Error, Schedule[]>;
 export const initialScheduleState: ScheduleState = new Initialized();

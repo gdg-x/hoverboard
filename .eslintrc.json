@@ -20,7 +20,7 @@
     "es6": true
   },
   "plugins": ["jest", "@typescript-eslint", "html", "import"],
-  "ignorePatterns": ["dist/"],
+  "ignorePatterns": ["dist/", "out-tsc"],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
@@ -55,5 +55,14 @@
         "@typescript-eslint/no-unused-vars": ["error", { "args": "none" }]
       }
     }
-  ]
+  ],
+  "globals": {
+    "clients": true,
+    "firebase": true,
+    "ga": true,
+    "HOVERBOARD": true,
+    "importScripts": true,
+    "Polymer": true,
+    "ShadyCSS": true
+  }
 }

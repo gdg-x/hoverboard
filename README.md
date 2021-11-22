@@ -59,7 +59,6 @@ The [Getting Started guide](#getting-started) is probably a good first point of 
 ## Technology Stack
 
 - Polymer 3
-- LitElement
 - Redux
 - Firebase
 - Service Worker

@@ -1,6 +1,5 @@
 {
-  "extends": ["stylelint-config-standard", "stylelint-config-prettier"],
-  "customSyntax": "@stylelint/postcss-css-in-js",
+  "extends": ["stylelint-config-recommended", "stylelint-config-prettier"],
   "rules": {
     "selector-type-no-unknown": [
       true,

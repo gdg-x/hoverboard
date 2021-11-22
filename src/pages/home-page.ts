@@ -12,12 +12,11 @@ import '../elements/partners-block';
 import '../elements/speakers-block';
 import '../elements/subscribe-block';
 import '../elements/tickets-block';
-import { firebaseApp } from '../firebase';
-import { ELEMENTS, getElement } from '../global';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { toggleVideoDialog } from '../store/ui/actions';
 import { Viewport } from '../store/ui/types';
+import { TempAny } from '../temp-any';
 import { scrollToY } from '../utils/scrolling';
 
 @customElement('home-page')
@@ -247,9 +246,6 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           </div>
         </div>
       </hero-block>
-      <template is="dom-if" if="{{showForkMeBlock}}">
-        <fork-me-block></fork-me-block>
-      </template>
       <about-block></about-block>
       <speakers-block></speakers-block>
       <gallery-block></gallery-block>
@@ -264,8 +260,6 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   private active = false;
   @property({ type: Object })
   private viewport: Viewport;
-  @property({ type: Boolean })
-  private showForkMeBlock = false;
 
   stateChanged(state: RootState) {
     this.viewport = state.ui.viewport;
@@ -281,28 +275,14 @@ export class HomePage extends ReduxMixin(PolymerElement) {
   }
 
   _scrollToTickets() {
-    const toolbarHeight = getElement(ELEMENTS.HEADER_TOOLBAR).getBoundingClientRect().height - 1;
-    const ticketsBlockPositionY =
-      getElement(ELEMENTS.TICKETS).getBoundingClientRect().top - toolbarHeight;
+    const Elements = (window as TempAny).HOVERBOARD.Elements;
+    const toolbarHeight = Elements.HeaderToolbar.getBoundingClientRect().height - 1;
+    const ticketsBlockPositionY = Elements.Tickets.getBoundingClientRect().top - toolbarHeight;
     scrollToY(ticketsBlockPositionY, 600, 'easeInOutSine');
   }
 
   _scrollNextBlock() {
     const heroHeight = this.$.hero.getBoundingClientRect().height - 64;
     scrollToY(heroHeight, 600, 'easeInOutSine');
-  }
-
-  private shouldShowForkMeBlock() {
-    const showForkMeBlockForProjectIds = '{$  showForkMeBlockForProjectIds $}'.split(',');
-    const showForkMeBlock = showForkMeBlockForProjectIds.includes(firebaseApp.options.appId);
-    if (showForkMeBlock) {
-      import('../elements/fork-me-block');
-    }
-    return showForkMeBlock;
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.showForkMeBlock = this.shouldShowForkMeBlock();
   }
 }

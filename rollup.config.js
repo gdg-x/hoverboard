@@ -1,109 +1,79 @@
 /* eslint-env node */
 
-import { nodeResolve } from '@rollup/plugin-node-resolve';
-import typescript from '@rollup/plugin-typescript';
-import html from '@web/rollup-plugin-html';
-import fs from 'fs';
+import { createSpaConfig } from '@open-wc/building-rollup';
+import merge from 'deepmerge';
 import copy from 'rollup-plugin-copy';
-import livereload from 'rollup-plugin-livereload';
 import replace from 'rollup-plugin-re';
-import { generateSW } from 'rollup-plugin-workbox';
-import { compileBufferTemplate, compileTemplate, production } from './build-utils';
 import { workboxConfig } from './workbox-config';
-import { terser } from 'rollup-plugin-terser';
 
-const { ROLLUP_WATCH } = process.env;
+const { production, compileTemplate, compileBufferTemplate } = require('./build-utils.js');
 
-export default [
-  {
-    input: 'firebase-messaging-sw.ts',
-    treeshake: production,
-    output: {
-      file: 'dist/firebase-messaging-sw.js',
-      sourcemap: true,
-    },
-    plugins: [
-      nodeResolve(),
-      typescript({
-        noEmitOnError: true,
-      }),
-      production && terser(),
-    ],
+if (!production) {
+  throw new Error('build only supports NODE_ENV=production');
+}
+
+const baseConfig = createSpaConfig({
+  html: {
+    transform: (html) => compileTemplate(html),
   },
-  {
-    treeshake: production,
-    output: {
-      dir: 'dist',
-      entryFileNames: '[name]-[hash].js',
-      sourcemap: true,
-    },
-    plugins: [
-      nodeResolve(),
-      typescript({
-        noEmitOnError: true,
-      }),
-      html({
-        input: {
-          html: compileBufferTemplate(fs.readFileSync('index.html')),
+  workbox: workboxConfig,
+});
+
+export default merge(baseConfig, {
+  input: './index.html',
+  plugins: [
+    replace({
+      exclude: 'node_modules/**',
+      patterns: [
+        {
+          transform: (code, _path) => compileTemplate(code),
         },
-        extractAssets: false,
-        minify: production,
-        transformHtml: [
-          (html) => {
-            return compileTemplate(html);
-          },
-        ],
-        transformAsset: [
-          (content, path) => {
-            if (path.endsWith('.json')) {
-              return compileBufferTemplate(content);
-            }
-            return content;
-          },
-        ],
-      }),
-      replace({
-        exclude: 'node_modules/**',
-        patterns: [
-          {
-            transform: (code, path) => {
-              if (path.endsWith('.ts')) {
-                return compileTemplate(code);
-              }
-              return code;
-            },
-          },
-        ],
-      }),
-      copy({
-        targets: [
-          {
-            src: 'manifest.json',
-            dest: 'dist',
-            transform: compileBufferTemplate,
-          },
-          {
-            src: 'images',
-            dest: 'dist',
-          },
-          {
-            src: 'data/*.md',
-            dest: 'dist/data',
-            transform: compileBufferTemplate,
-          },
-          {
-            src: 'data/posts/*.md',
-            dest: 'dist/data/posts',
-            transform: compileBufferTemplate,
-          },
-        ],
-      }),
-      production && generateSW(workboxConfig),
-      production && terser(),
-      ROLLUP_WATCH &&
-        livereload({
-          watch: 'dist',
-        }),
-    ],
-  },
-];
+      ],
+    }),
+    copy({
+      targets: [
+        {
+          src: 'images/',
+          dest: 'dist/',
+        },
+        {
+          src: 'manifest.json',
+          dest: 'dist',
+          transform: compileBufferTemplate,
+        },
+        {
+          src: 'node_modules/@webcomponents/webcomponentsjs/*.{js,map}',
+          dest: 'dist/node_assets/@webcomponents/webcomponentsjs',
+        },
+        {
+          src: 'node_modules/lit/*.{js,map}',
+          dest: 'dist/node_assets/lit',
+        },
+        {
+          src: 'node_modules/firebase/*.{js,map}',
+          dest: 'dist/node_assets/firebase/',
+        },
+        {
+          src: 'out-tsc/src/service-worker-registration.js',
+          dest: 'dist/src',
+          transform: compileBufferTemplate,
+        },
+        {
+          src: 'firebase-messaging-sw.js',
+          dest: 'dist',
+          transform: compileBufferTemplate,
+        },
+        {
+          src: 'data/*.md',
+          dest: 'dist/data',
+          transform: compileBufferTemplate,
+        },
+        {
+          src: 'data/posts/*.md',
+          dest: 'dist/data/posts',
+          transform: compileBufferTemplate,
+        },
+      ],
+    }),
+  ],
+});

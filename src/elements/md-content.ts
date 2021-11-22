@@ -141,7 +141,7 @@ export class MdContent extends PolymerElement {
     super.connectedCallback();
 
     if (window.location.hash) {
-      window.setTimeout(() => {
+      setTimeout(() => {
         const id = window.location.hash.slice(1).split('#')[0];
         const element = this.shadowRoot.querySelector(`[id="${id}"]`);
         if (!element) return;

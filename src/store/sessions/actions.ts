@@ -1,8 +1,7 @@
-import { collection, getDocs, query } from 'firebase/firestore';
 import { Dispatch } from 'redux';
-import { db } from '../../firebase';
 import { Session } from '../../models/session';
 import { mergeId } from '../../utils/merge-id';
+import { db } from '../db';
 import { FiltersActions, SET_FILTERS } from '../filters/types';
 import {
   FETCH_SESSIONS,
@@ -12,7 +11,7 @@ import {
 } from './types';
 
 const getSessions = async () => {
-  const { docs } = await getDocs(query(collection(db, 'generatedSessions')));
+  const { docs } = await db().collection('generatedSessions').get();
   const tagFilters = new Set<string>();
   const complexityFilters = new Set<string>();
   const sessions = docs.map<Session>(mergeId);

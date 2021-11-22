@@ -52,7 +52,7 @@ documentContainer.innerHTML = `<dom-module id="dialog-styles">
         line-height: 1.2;
       }
 
-      .tags {
+      .tag {
         margin-top: 8px;
       }
 

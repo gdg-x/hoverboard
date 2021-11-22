@@ -1,12 +1,8 @@
-// https://github.com/import-js/eslint-plugin-import/issues/1810
-// eslint-disable-next-line import/no-unresolved
-import { DocumentData, DocumentSnapshot, getFirestore } from 'firebase-admin/firestore';
-// https://github.com/import-js/eslint-plugin-import/issues/1810
-// eslint-disable-next-line import/no-unresolved
-import { getMessaging } from 'firebase-admin/messaging';
+import admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 import moment from 'moment';
 
+const { firestore, messaging } = admin;
 const FORMAT = 'HH:mm';
 
 const removeUserTokens = (tokensToUsers) => {
@@ -18,9 +14,9 @@ const removeUserTokens = (tokensToUsers) => {
   }, {});
 
   const promises = Object.keys(userTokens).map((userId) => {
-    const ref = getFirestore().collection('notificationsUsers').doc(userId);
+    const ref = firestore().collection('notificationsUsers').doc(userId);
 
-    return getFirestore().runTransaction((transaction) =>
+    return firestore().runTransaction((transaction) =>
       transaction.get(ref).then((doc) => {
         if (!doc.exists) {
           return;
@@ -45,10 +41,11 @@ const sendPushNotificationToUsers = async (userIds, payload) => {
   console.log('sendPushNotificationToUsers user ids', userIds, 'with notification', payload);
 
   const tokensPromise = userIds.map((id) => {
-    return getFirestore().collection('notificationsUsers').doc(id).get();
+    return firestore().collection('notificationsUsers').doc(id).get();
   });
 
-  const usersTokens: DocumentSnapshot<DocumentData>[] = await Promise.all(tokensPromise);
+  const usersTokens: admin.firestore.DocumentSnapshot<admin.firestore.DocumentData>[] =
+    await Promise.all(tokensPromise);
   const tokensToUsers = usersTokens.reduce((aggregator, userTokens) => {
     if (!userTokens.exists) return aggregator;
     const { tokens } = userTokens.data();
@@ -57,7 +54,7 @@ const sendPushNotificationToUsers = async (userIds, payload) => {
   const tokens = Object.keys(tokensToUsers);
 
   const tokensToRemove = {};
-  const messagingResponse = await getMessaging().sendToDevice(tokens, payload);
+  const messagingResponse = await messaging().sendToDevice(tokens, payload);
   messagingResponse.results.forEach((result, index) => {
     const error = result.error;
     if (error) {
@@ -78,11 +75,8 @@ const sendPushNotificationToUsers = async (userIds, payload) => {
 export const scheduleNotifications = functions.pubsub
   .schedule('every 5 minutes')
   .onRun(async () => {
-    const notificationsConfigPromise = getFirestore()
-      .collection('config')
-      .doc('notifications')
-      .get();
-    const schedulePromise = getFirestore().collection('schedule').get();
+    const notificationsConfigPromise = firestore().collection('config').doc('notifications').get();
+    const schedulePromise = firestore().collection('schedule').get();
 
     const [notificationsConfigSnapshot, scheduleSnapshot] = await Promise.all([
       notificationsConfigPromise,
@@ -116,10 +110,10 @@ export const scheduleNotifications = functions.pubsub
           []
         )
       );
-      const usersIdsSnapshot = await getFirestore().collection('featuredSessions').get();
+      const usersIdsSnapshot = await firestore().collection('featuredSessions').get();
 
       upcomingSessions.forEach(async (upcomingSession, sessionIndex) => {
-        const sessionInfoSnapshot = await getFirestore()
+        const sessionInfoSnapshot = await firestore()
           .collection('sessions')
           .doc(upcomingSession)
           .get();

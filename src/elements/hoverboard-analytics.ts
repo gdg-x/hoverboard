@@ -1,15 +1,15 @@
-/* eslint-disable no-undef */
-/* eslint-disable prefer-rest-params */
-/* eslint-disable max-len */
+import { TempAny } from '../temp-any';
 
 class HoverboardAnalytics extends HTMLElement {
   connectedCallback() {
     // GOOGLE ANALYTICS TRACKING
 
     // Load google analytics script
+    /* eslint-disable */
     // prettier-ignore
     // @ts-ignore
-    (function (i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function (){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    /* eslint-enable */
 
     ga('create', {
       trackingId: '{$ analytics $}',
@@ -33,13 +33,15 @@ class HoverboardAnalytics extends HTMLElement {
     window.addEventListener('online', updateOnlineStatus);
     window.addEventListener('offline', updateOnlineStatus);
     window.addEventListener('WebComponentsReady', (_error) => {
-      ga(
-        'send',
-        'timing',
-        'JS Dependencies',
-        'WebComponentsReady',
-        Math.round(window.performance.now())
-      );
+      if (window.performance) {
+        ga(
+          'send',
+          'timing',
+          'JS Dependencies',
+          'WebComponentsReady',
+          Math.round(performance.now())
+        );
+      }
     });
 
     window.onerror = function (message, file, lineNumber, _columnNumber, error) {
@@ -53,6 +55,24 @@ class HoverboardAnalytics extends HTMLElement {
       } catch (e) {
         // no-op
       }
+    };
+
+    (window as TempAny).measureDuration = (mark, optReference) => {
+      const reference = optReference || 'responseEnd';
+      const name = `${reference}:${mark}`;
+
+      // Clears any existing measurements with the same name.
+      performance.clearMeasures(name);
+
+      // Creates a new measurement from the reference point to the specified mark.
+      // If more than one mark with this name exists, the most recent one is used.
+      performance.measure(name, reference, mark);
+
+      // Gets the value of the measurement just created.
+      const measure = performance.getEntriesByName(name)[0];
+
+      // Returns the measure duration.
+      return measure.duration;
     };
   }
 }

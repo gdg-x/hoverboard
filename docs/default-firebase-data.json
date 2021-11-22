@@ -67,9 +67,9 @@
       "items": [
         {
           "order": 0,
-          "logoUrl": "../images/logos/google.svg",
-          "name": "Google",
-          "url": "https://www.google.com.ua/intl/en/about/"
+          "logoUrl": "../images/logos/gdg-lviv.svg",
+          "name": "GDG Lagos",
+          "url": "https://gdg.community.dev/gdg-lagos/"
         }
       ],
       "order": 0,
@@ -85,101 +85,28 @@
         },
         {
           "order": 1,
-          "logoUrl": "../images/logos/sourcegraph",
-          "name": "Sourcegraph",
-          "url": "https://sourcegraph.com/search"
+          "logoUrl": "../images/logos/gdg-x.svg",
+          "name": "GDG[x]",
+          "url": "https://github.com/gdg-x"
         },
         {
           "order": 2,
-          "logoUrl": "../images/logos/interswitch.png",
-          "name": "Interswitch",
-          "url": "https://interswitchgroup.com/"
+          "logoUrl": "../images/logos/google.svg",
+          "name": "Google",
+          "url": "https://www.google.com.ua/intl/en/about/"
         },
         {
           "order": 3,
-          "logoUrl": "../images/logos/ProtocolLabs.png",
-          "name": "Protocol Labs",
-          "url": "https://filecoin.io/"
+          "logoUrl": "../images/logos/gdg-x.svg",
+          "name": "GDG[x]",
+          "url": "https://github.com/gdg-x"
         },
         {
           "order": 4,
-          "logoUrl": "../images/logos/Seerbit.png",
-          "name": "Seerbit",
-          "url": "https://seerbit.com/"
-        },
-        {
-          "order": 5,
-          "logoUrl": "../images/logos/Gupshup.png",
-          "name": "Gupshup",
-          "url": "https://www.gupshup.io/"
-        },
-        {
-          "order": 6,
-          "logoUrl": "../images/logos/FrainTechnologies.png",
-          "name": "Frain Technologies",
-          "url": "https://getconvoy.io/"
-        },
-        {
-          "order": 7,
-          "logoUrl": "../images/logos/Thepeer.png",
-          "name": "Thepeer",
-          "url": "https://thepeer.co/"
-        },
-        {
-          "order": 8,
-          "logoUrl": "../images/logos/NigeriaStartupBill.png",
-          "name": "Nigeria Startup Bill",
-          "url": "https://startupbill.ng/"
-        },
-         {
-          "order": 9,
-          "logoUrl": "../images/logos/Turing.png",
-          "name": "Turing",
-          "url": "https://www.turing.com"
-        },
-         {
-          "order": 10,
-          "logoUrl": "../images/logos/Africa.png",
-          "name": "Africa's Talking",
-          "url": "https://africastalking.com/"
-        },
-         {
-          "order": 11,
-          "logoUrl": "../images/logos/TekExperts.png",
-          "name": "Tek Experts",
-          "url": "https://www.tek-experts.com/"
-        },
-         {
-          "order": 12,
-          "logoUrl": "../images/logos/Okhi.png",
-          "name": "Okhi",
-          "url": "https://www.okhi.com/?utm_source=devfest21&utm_medium=social&utm_id=DevFest"
-        },
-         {
-          "order": 13,
-          "logoUrl": "../images/logos/AbokiAfrica.png",
-          "name": "Aboki Africa",
-          "url": "https://aboki.africa/"
-        },
-         {
-          "order": 14,
-          "logoUrl": "../images/logos/tunga.png",
-          "name": "Tunga",
-          "url": "https://tunga.io/"
-        },
-         {
-          "order": 15,
-          "logoUrl": "../images/logos/asacoterie.png",
-          "name": "Àṣà Coterie",
-          "url": "https://www.asadsgn.com/"
-        },
-         {
-          "order": 15,
-          "logoUrl": "../images/logos/Bumpa.png",
-          "name": "Bumpa",
-          "url": "https://getbumpa.com/"
+          "logoUrl": "../images/logos/google.svg",
+          "name": "Google",
+          "url": "https://www.google.com.ua/intl/en/about/"
         }
-
       ],
       "order": 1,
       "title": "General Partner"

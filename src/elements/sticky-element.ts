@@ -1,5 +1,6 @@
 import { customElement, observe, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
+import { TempAny } from '../temp-any';
 
 @customElement('sticky-element')
 export class StickyElement extends PolymerElement {
@@ -56,8 +57,8 @@ export class StickyElement extends PolymerElement {
   public active = false;
   @property({ type: Boolean })
   private waiting = false;
-  @property({ type: Number })
-  private endScrollHandle: number;
+  @property({ type: Object })
+  private endScrollHandle: TempAny;
 
   constructor() {
     super();
@@ -79,15 +80,15 @@ export class StickyElement extends PolymerElement {
       return;
     }
     this.waiting = true;
-    window.clearTimeout(this.endScrollHandle);
+    clearTimeout(this.endScrollHandle);
 
     this._toggleSticky();
 
-    window.setTimeout(() => {
+    setTimeout(() => {
       this.waiting = false;
     }, 100);
 
-    this.endScrollHandle = window.setTimeout(() => {
+    this.endScrollHandle = setTimeout(() => {
       this._toggleSticky();
     }, 200);
   }
