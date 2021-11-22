@@ -67,9 +67,9 @@
       "items": [
         {
           "order": 0,
-          "logoUrl": "../images/logos/gdg-lviv.svg",
-          "name": "GDG Lagos",
-          "url": "https://gdg.community.dev/gdg-lagos/"
+          "logoUrl": "../images/logos/google.svg",
+          "name": "Google",
+          "url": "https://www.google.com.ua/intl/en/about/"
         }
       ],
       "order": 0,
@@ -85,15 +85,15 @@
         },
         {
           "order": 1,
-          "logoUrl": "../images/logos/gdg-x.svg",
-          "name": "GDG[x]",
-          "url": "https://github.com/gdg-x"
+          "logoUrl": "../images/logos/sourcegraph",
+          "name": "Sourcegraph",
+          "url": "https://sourcegraph.com/search"
         },
         {
           "order": 2,
           "logoUrl": "../images/logos/google.svg",
           "name": "Google",
-          "url": "https://www.google.com.ua/intl/en/about/"
+          "url": "https://interswitchgroup.com/"
         },
         {
           "order": 3,
