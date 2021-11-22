@@ -1,16 +1,16 @@
 {
   "basepath": "/",
-  "url": "https://hoverboard-dev.web.app/",
-  "analytics": "UA-43643469-8",
+  "url": "https://devfestlagos2021.web.app/",
+  "analytics": "",
   "prefix": "/",
   "firebase": {
-    "apiKey": "AIzaSyAKOkGjmfBPTuYlDyPxlrSj7H-1oqWET7E",
-    "appId": "1:1083195713896:web:9aed8296d8d642cb",
-    "authDomain": "hoverboard-dev.web.app",
-    "databaseURL": "https://hoverboard-dev.firebaseio.com",
-    "messagingSenderId": "1083195713896",
-    "projectId": "hoverboard-dev",
-    "storageBucket": "hoverboard-dev.appspot.com"
+    "apiKey": "AIzaSyDr7P4YovXCpyQC6qNEjhFBpYl79Wvzx0s",
+    "appId": "1:1053609005939:web:d56107ce975d24d065eb06",
+    "authDomain": "devfestlagos2021.web.app",
+    "databaseURL": "https://devfestlagos2021.firebaseio.com",
+    "messagingSenderId": "1053609005939",
+    "projectId": "defvestlagos2021",
+    "storageBucket": "devfestlagos2021.appspot.com"
   },
   "googleMapApiKey": "AIzaSyAKOkGjmfBPTuYlDyPxlrSj7H-1oqWET7E"
 }
