@@ -3,7 +3,7 @@ import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
-import { TempAny } from '../../functions/src/temp-any';
+import { ELEMENTS, setElement } from '../global';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { Ticket } from '../models/ticket';
 import { RootState } from '../store';
@@ -216,7 +216,7 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
 
   connectedCallback() {
     super.connectedCallback();
-    (window as TempAny).HOVERBOARD.Elements.Tickets = this;
+    setElement(ELEMENTS.TICKETS, this);
   }
 
   @computed('tickets')

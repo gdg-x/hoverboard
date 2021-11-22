@@ -59,7 +59,6 @@
   "globals": {
     "clients": true,
     "ga": true,
-    "HOVERBOARD": true,
     "importScripts": true,
     "Polymer": true,
     "ServiceWorkerGlobalScope": true,
