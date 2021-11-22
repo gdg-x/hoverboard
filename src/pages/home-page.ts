@@ -169,7 +169,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
               {$ viewHighlights $}
             </paper-button>
             <paper-button
-              on-click="_scrollToTickets"
+              href="https://bit.ly/devfestlagos2021"
               ga-on="click"
               ga-event-category="tickets"
               ga-event-action="scroll"
@@ -178,7 +178,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
               invert
             >
               <iron-icon icon="hoverboard:ticket"></iron-icon>
-              {$ buyTicket $}
+              View Details
             </paper-button>
           </div>
 
@@ -246,17 +246,10 @@ export class HomePage extends ReduxMixin(PolymerElement) {
           </div>
         </div>
       </hero-block>
-      {% if showForkMeBlockForProjectIds.includes(firebase.projectId) %}
-      <fork-me-block></fork-me-block>
-      {% endif %}
       <about-block></about-block>
       <speakers-block></speakers-block>
-      <subscribe-block></subscribe-block>
-      <tickets-block></tickets-block>
       <gallery-block></gallery-block>
       <about-organizer-block></about-organizer-block>
-      <featured-videos></featured-videos>
-      <latest-posts-block></latest-posts-block>
       <map-block></map-block>
       <partners-block></partners-block>
       <footer-block></footer-block>

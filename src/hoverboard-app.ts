@@ -256,15 +256,12 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
             hide-immediately
           >
             <home-page name="home"></home-page>
-            <blog-page name="blog" route="[[subRoute]]"></blog-page>
             <schedule-page name="schedule" route="[[subRoute]]"></schedule-page>
             <speakers-page name="speakers" route="[[subRoute]]"></speakers-page>
             <previous-speakers-page
               name="previous-speakers"
               route="[[subRoute]]"
             ></previous-speakers-page>
-            <team-page name="team"></team-page>
-            <faq-page name="faq"></faq-page>
             <coc-page name="coc"></coc-page>
           </iron-pages>
         </app-header-layout>

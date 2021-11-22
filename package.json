@@ -2,7 +2,7 @@
   "name": "hoverboard",
   "version": "3.0.0",
   "private": true,
-  "description": "Conference website template",
+  "description": "DevFest Lagos is a highly anticipated event and is open to developers, designers, and all who wish to expand their skill sets, collaborate and learn skills like Mobile, Design, Web, Cloud, DevOps, Machine Learning amongst others.",
   "engines": {
     "node": "16",
     "npm": "7"
@@ -115,6 +115,7 @@
   "contributors": [
     "Oleh Zasadnyy, GDG Lviv",
     "Sophie Huts, GDG Lviv",
-    "Abraham Williams, GDG Madison"
+    "Abraham Williams, GDG Madison",
+    "Sodiq Akinjobi, GDG Lagos"
   ]
 }
