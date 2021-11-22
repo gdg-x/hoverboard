@@ -41,7 +41,6 @@ import './elements/hoverboard-icons';
 import './elements/polymer-helmet';
 import './elements/shared-styles';
 import './elements/toast-element';
-import { ReduxMixin } from './mixins/redux-mixin';
 import './pages/blog-page';
 import './pages/coc-page';
 import './pages/faq-page';
@@ -50,11 +49,10 @@ import './pages/previous-speakers-page';
 import './pages/schedule-page';
 import './pages/speakers-page';
 import './pages/team-page';
-import { registerServiceWorker } from './service-worker-registration';
 import { RootState, store } from './store';
 import { DialogState, initialDialogState } from './store/dialogs/state';
 import { DIALOGS } from './store/dialogs/types';
-import { getToken, initializeMessaging } from './store/notifications/actions';
+import { getToken } from './store/notifications/actions';
 import { setRoute } from './store/routing/actions';
 import { initialRoutingState, RoutingState } from './store/routing/state';
 import { fetchTickets } from './store/tickets/actions';
@@ -62,7 +60,6 @@ import { initialTicketsState, TicketsState } from './store/tickets/state';
 import { showToast } from './store/toast/actions';
 import { setViewportSize } from './store/ui/actions';
 import { updateUser } from './store/user/actions';
-import { TempAny } from './temp-any';
 import { isDialogOpen } from './utils/dialogs';
 import { scrollToY } from './utils/scrolling';
 
@@ -75,7 +72,7 @@ if (location.hostname === 'localhost') {
 }
 
 @customElement('hoverboard-app')
-export class HoverboardApp extends ReduxMixin(PolymerElement) {
+export class HoverboardApp extends PolymerElement {
   static get template() {
     return html`
       <style include="shared-styles flex flex-reverse flex-alignment positioning">
@@ -154,6 +151,7 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
           margin-left: 6px;
         }
 
+        // Look for copies of this
         .bottom-drawer-link {
           padding: 16px 24px;
           cursor: pointer;
@@ -216,13 +214,7 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
             </iron-selector>
 
             <div>
-              <a
-                class="bottom-drawer-link"
-                on-click="_onaddToHomeScreen"
-                hidden$="[[_isaddToHomeScreenHidden(addToHomeScreen, viewport.isLaptopPlus)]]"
-              >
-                {$ addToHomeScreen.cta $}
-              </a>
+              <app-install></app-install>
 
               <a
                 class="bottom-drawer-link"
@@ -325,8 +317,6 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
 
   @property({ type: Object })
   private ui = {};
-  @property({ type: Object })
-  private addToHomeScreen: TempAny;
   @property({ type: Boolean })
   private drawerOpened = false;
   @property({ type: Object })
@@ -384,16 +374,10 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
 
   constructor() {
     super();
-    window.performance && performance.mark && performance.mark('hoverboard-app.created');
+    window.performance.mark('hoverboard-app.created');
     this._toggleHeaderShadow = this._toggleHeaderShadow.bind(this);
     this._toggleDrawer = this._toggleDrawer.bind(this);
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      this.addToHomeScreen = e;
-    });
-
-    window.addEventListener('load', () => registerServiceWorker());
+    store.subscribe(() => this.stateChanged(store.getState()));
   }
 
   connectedCallback() {
@@ -419,7 +403,7 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
     log('Hoverboard is ready!');
     this.removeAttribute('unresolved');
     updateUser();
-    initializeMessaging().then(() => store.dispatch(getToken()));
+    store.dispatch(getToken());
   }
 
   closeDrawer() {
@@ -473,23 +457,5 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
     } else {
       return '';
     }
-  }
-
-  _isaddToHomeScreenHidden(addToHomeScreen, isTabletPlus) {
-    return isTabletPlus || !addToHomeScreen;
-  }
-
-  _onaddToHomeScreen() {
-    if (!this.addToHomeScreen) this.closeDrawer();
-    this.addToHomeScreen.prompt();
-    this.addToHomeScreen.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome === 'accepted') {
-        ga('send', 'event', 'add_to_home_screen_prompt', 'accepted');
-      } else {
-        ga('send', 'event', 'add_to_home_screen_prompt', 'dismissed');
-      }
-      this.addToHomeScreen = null;
-      this.closeDrawer();
-    });
   }
 }

@@ -18,7 +18,7 @@ interface FetchBlogListSuccessAction {
   payload: Post[];
 }
 
-export type BlogAction =
+export type BlogActions =
   | FetchBlogListAction
   | FetchBlogListFailureAction
   | FetchBlogListSuccessAction;

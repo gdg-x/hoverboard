@@ -18,5 +18,6 @@ export const setSubRoute = (subRoute: string) => {
 
 export const setLocation = (url: string) => {
   window.history.pushState({}, '', url);
+  // eslint-disable-next-line no-undef
   Polymer.Base.fire('location-changed', {}, { node: window });
 };

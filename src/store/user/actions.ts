@@ -1,17 +1,27 @@
+import {
+  AuthCredential,
+  fetchSignInMethodsForEmail,
+  getAuth,
+  linkWithCredential,
+  onAuthStateChanged,
+  signInWithPopup,
+  signOut as fbSignOut,
+} from 'firebase/auth';
 import { store } from '..';
-import { TempAny } from '../../../functions/src/temp-any';
+import { firebaseApp } from '../../firebase';
+import { TempAny } from '../../temp-any';
 import { getFederatedProvider, PROVIDERS } from '../../utils/providers';
 import { WIPE_PREVIOUS_FEEDBACK } from '../feedback/types';
 import { getToken } from '../notifications/actions';
 import { resetSubscribed } from '../subscribe/actions';
 import { SIGN_IN } from './types';
 
+const auth = getAuth(firebaseApp);
+
 export const signIn = (providerName: PROVIDERS) => {
   const firebaseProvider = getFederatedProvider(providerName);
 
-  return window.firebase
-    .auth()
-    .signInWithPopup(firebaseProvider)
+  return signInWithPopup(auth, firebaseProvider)
     .then((signInObject) => {
       storeUser(signInObject.user);
       getToken(true);
@@ -21,50 +31,39 @@ export const signIn = (providerName: PROVIDERS) => {
         error.code === 'auth/account-exists-with-different-credential' ||
         error.code === 'auth/email-already-in-use'
       ) {
-        window.firebase
-          .auth()
-          .fetchSignInMethodsForEmail(error.email)
-          .then((providers: PROVIDERS[]) => {
-            storeUser({
-              signedIn: false,
-              initialProviderId: providers[0],
-              email: error.email,
-              pendingCredential: error.credential,
-            });
+        fetchSignInMethodsForEmail(auth, error.email).then((providers) => {
+          storeUser({
+            signedIn: false,
+            initialProviderId: providers[0],
+            email: error.email,
+            pendingCredential: error.credential,
           });
+        });
       }
     });
 };
 
-export const mergeAccounts = (
-  initialProviderId: PROVIDERS,
-  pendingCredential: firebase.auth.AuthCredential
-) => {
+export const mergeAccounts = (initialProviderId: PROVIDERS, pendingCredential: AuthCredential) => {
   const firebaseProvider = getFederatedProvider(initialProviderId);
 
-  return window.firebase
-    .auth()
-    .signInWithPopup(firebaseProvider)
+  return signInWithPopup(auth, firebaseProvider)
     .then((result) => {
-      result.user.linkWithCredential(pendingCredential);
+      linkWithCredential(result.user, pendingCredential);
     })
     .catch(() => {});
 };
 
 export const updateUser = () => {
-  window.firebase.auth().onAuthStateChanged((user) => {
+  onAuthStateChanged(auth, (user) => {
     storeUser(user);
   });
 };
 
 export const signOut = () => {
-  return window.firebase
-    .auth()
-    .signOut()
-    .then(() => {
-      storeUser();
-      resetSubscribed();
-    });
+  return fbSignOut(auth).then(() => {
+    storeUser();
+    resetSubscribed();
+  });
 };
 
 const storeUser = (user?: TempAny) => {

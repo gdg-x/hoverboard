@@ -1,9 +1,13 @@
+import { deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
+import { db } from '../../firebase';
 import {
   DELETE_FEEDBACK,
   DELETE_FEEDBACK_FAILURE,
   DELETE_FEEDBACK_SUCCESS,
   Feedback,
+  FeedbackActions,
+  FeedbackData,
   FeedbackId,
   FETCH_PREVIOUS_FEEDBACK,
   FETCH_PREVIOUS_FEEDBACK_FAILURE,
@@ -12,85 +16,74 @@ import {
   SEND_FEEDBACK_FAILURE,
   SEND_FEEDBACK_SUCCESS,
 } from './types';
-import { db } from '../db';
 
-export const addComment = (data: Feedback) => (dispatch: Dispatch) => {
+export const addComment = (data: Feedback) => async (dispatch: Dispatch<FeedbackActions>) => {
   dispatch({
     type: SEND_FEEDBACK,
     payload: data,
   });
 
-  db()
-    .collection(`sessions/${data.sessionId}/feedback`)
-    .doc(data.userId)
-    .set({
+  try {
+    await setDoc(doc(db, 'sessions', data.sessionId, 'feedback'), {
       contentRating: data.contentRating,
       styleRating: data.styleRating,
       comment: data.comment,
-    })
-    .then(() => {
-      dispatch({
-        type: SEND_FEEDBACK_SUCCESS,
-        payload: data,
-      });
-    })
-    .catch((error) => {
-      dispatch({
-        type: SEND_FEEDBACK_FAILURE,
-        payload: { error },
-      });
     });
+
+    dispatch({
+      type: SEND_FEEDBACK_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: SEND_FEEDBACK_FAILURE,
+      payload: { error },
+    });
+  }
 };
 
-export const checkPreviousFeedback = (data: FeedbackId) => (dispatch: Dispatch) => {
-  dispatch({
-    type: FETCH_PREVIOUS_FEEDBACK,
-    payload: data,
-  });
+export const checkPreviousFeedback =
+  (feedbackId: FeedbackId) => async (dispatch: Dispatch<FeedbackActions>) => {
+    dispatch({
+      type: FETCH_PREVIOUS_FEEDBACK,
+      payload: feedbackId,
+    });
 
-  db()
-    .collection(`sessions/${data.sessionId}/feedback`)
-    .doc(data.userId)
-    .get()
-    .then((snapshot) => {
+    try {
+      const { data } = await getDoc(doc(db, 'sessions', feedbackId.sessionId, 'feedback'));
+
       dispatch({
         type: FETCH_PREVIOUS_FEEDBACK_SUCCESS,
         payload: {
-          sessionId: data.sessionId,
-          previousFeedback: snapshot.data(),
+          sessionId: feedbackId.sessionId,
+          previousFeedback: data() as FeedbackData,
         },
       });
-    })
-    .catch((error) => {
+    } catch (error) {
       dispatch({
         type: FETCH_PREVIOUS_FEEDBACK_FAILURE,
         payload: { error },
       });
-    });
-};
+    }
+  };
 
-export const deleteFeedback = (data: FeedbackId) => (dispatch: Dispatch) => {
+export const deleteFeedback = (data: FeedbackId) => async (dispatch: Dispatch<FeedbackActions>) => {
   dispatch({
     type: DELETE_FEEDBACK,
     payload: data,
   });
 
-  db()
-    .collection(`sessions/${data.sessionId}/feedback`)
-    .doc(data.userId)
-    .delete()
-    .then(() => {
-      dispatch({
-        type: DELETE_FEEDBACK_SUCCESS,
-        payload: {
-          sessionId: data.sessionId,
-        },
-      });
-    })
-    .catch((error) => {
-      dispatch({
-        type: DELETE_FEEDBACK_FAILURE,
-        payload: { error },
-      });
+  try {
+    await deleteDoc(doc(db, 'sessions', data.sessionId, 'feedback'));
+
+    dispatch({
+      type: DELETE_FEEDBACK_SUCCESS,
+      payload: data,
     });
+  } catch (error) {
+    dispatch({
+      type: DELETE_FEEDBACK_FAILURE,
+      payload: { error },
+    });
+  }
 };
