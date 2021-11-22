@@ -1,4 +1,3 @@
-import { TempAny } from '../temp-any';
 import { share } from './share';
 
 describe('share', () => {
@@ -11,7 +10,7 @@ describe('share', () => {
   ].join('');
 
   beforeAll(() => {
-    (window as TempAny).href = 'https://example.com/schedule';
+    window.location.href = 'https://example.com/schedule';
     document.title = 'Awesome Schedule';
     open = jest.spyOn(window, 'open').mockImplementation();
   });

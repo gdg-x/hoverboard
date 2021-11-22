@@ -8,8 +8,8 @@ import {
   signOut as fbSignOut,
 } from 'firebase/auth';
 import { store } from '..';
-import { TempAny } from '../../../functions/src/temp-any';
 import { firebaseApp } from '../../firebase';
+import { TempAny } from '../../temp-any';
 import { getFederatedProvider, PROVIDERS } from '../../utils/providers';
 import { WIPE_PREVIOUS_FEEDBACK } from '../feedback/types';
 import { getToken } from '../notifications/actions';

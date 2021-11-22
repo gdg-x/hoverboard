@@ -248,7 +248,7 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
       const header = this.shadowRoot.querySelector('.dialog-header');
       const headerHeight = header.offsetHeight;
 
-      setTimeout(() => {
+      window.setTimeout(() => {
         requestAnimationFrame(() => {
           this.style.maxHeight = `${this.initialHeight}px`;
           this.style.top = `-${headerHeight}px`;

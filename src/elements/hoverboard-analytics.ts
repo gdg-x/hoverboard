@@ -2,8 +2,6 @@
 /* eslint-disable prefer-rest-params */
 /* eslint-disable max-len */
 
-import { TempAny } from '../temp-any';
-
 class HoverboardAnalytics extends HTMLElement {
   connectedCallback() {
     // GOOGLE ANALYTICS TRACKING
@@ -35,15 +33,13 @@ class HoverboardAnalytics extends HTMLElement {
     window.addEventListener('online', updateOnlineStatus);
     window.addEventListener('offline', updateOnlineStatus);
     window.addEventListener('WebComponentsReady', (_error) => {
-      if (window.performance) {
-        ga(
-          'send',
-          'timing',
-          'JS Dependencies',
-          'WebComponentsReady',
-          Math.round(performance.now())
-        );
-      }
+      ga(
+        'send',
+        'timing',
+        'JS Dependencies',
+        'WebComponentsReady',
+        Math.round(window.performance.now())
+      );
     });
 
     window.onerror = function (message, file, lineNumber, _columnNumber, error) {
@@ -57,24 +53,6 @@ class HoverboardAnalytics extends HTMLElement {
       } catch (e) {
         // no-op
       }
-    };
-
-    (window as TempAny).measureDuration = (mark, optReference) => {
-      const reference = optReference || 'responseEnd';
-      const name = `${reference}:${mark}`;
-
-      // Clears any existing measurements with the same name.
-      performance.clearMeasures(name);
-
-      // Creates a new measurement from the reference point to the specified mark.
-      // If more than one mark with this name exists, the most recent one is used.
-      performance.measure(name, reference, mark);
-
-      // Gets the value of the measurement just created.
-      const measure = performance.getEntriesByName(name)[0];
-
-      // Returns the measure duration.
-      return measure.duration;
     };
   }
 }

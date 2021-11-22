@@ -7,6 +7,7 @@ import 'plastic-image';
 import '../elements/content-loader';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { PreviousSession } from '../models/previous-session';
 import { RootState, store } from '../store';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
@@ -15,7 +16,6 @@ import {
   initialPreviousSpeakersState,
   PreviousSpeakersState,
 } from '../store/previous-speakers/state';
-import { TempAny } from '../temp-any';
 import { isDialogOpen } from '../utils/dialogs';
 
 @customElement('previous-speakers-page')
@@ -249,7 +249,7 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
     return active && !isDialogOpened;
   }
 
-  _getYears(sessions: { [key: number]: TempAny }) {
+  _getYears(sessions: { [key: number]: PreviousSession[] }) {
     return Object.keys(sessions || {})
       .map(Number)
       .sort((a, b) => b - a)
