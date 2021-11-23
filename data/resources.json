@@ -68,17 +68,17 @@
         },
         {
           "name": "DFUA 2014",
-          "url": "https://dfua14.firebaseapp.com//",
+          "url": "https://dfua14.web.app/",
           "newTab": true
         },
         {
           "name": "DFUA 2015",
-          "url": "https://dfua15.firebaseapp.com/",
+          "url": "https://dfua15.web.app/",
           "newTab": true
         },
         {
           "name": "DFUA 2016",
-          "url": "https://dfua16.firebaseapp.com/",
+          "url": "https://dfua16.web.app/",
           "newTab": true
         }
       ]
