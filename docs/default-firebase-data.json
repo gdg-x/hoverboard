@@ -67,7 +67,7 @@
       "items": [
         {
           "order": 0,
-          "logoUrl": "../images/logos/gdg-lviv.svg",
+          "logoUrl": "../images/logos/gdg.svg",
           "name": "GDG Lagos",
           "url": "https://gdg.community.dev/gdg-lagos/"
         }
@@ -185,9 +185,9 @@
     }
   ],
   "schedule": {
-    "2016-09-09": {
-      "date": "2016-09-09",
-      "dateReadable": "September 9",
+    "2021-12-03": {
+      "date": "2021-12-03",
+      "dateReadable": "December 3",
       "timeslots": [
         {
           "endTime": "10:00",
@@ -338,149 +338,6 @@
             }
           ],
           "startTime": "18:30"
-        }
-      ],
-      "tracks": [
-        {
-          "title": "Expo hall"
-        },
-        {
-          "title": "Conference hall"
-        },
-        {
-          "title": "Workshops hall"
-        }
-      ]
-    },
-    "2016-09-10": {
-      "date": "2016-09-10",
-      "dateReadable": "September 10",
-      "timeslots": [
-        {
-          "endTime": "10:10",
-          "sessions": [
-            {
-              "items": ["135"]
-            }
-          ],
-          "startTime": "09:30"
-        },
-        {
-          "endTime": "10:50",
-          "sessions": [
-            {
-              "items": ["114"]
-            },
-            {
-              "items": ["117"]
-            },
-            {
-              "items": ["121"]
-            }
-          ],
-          "startTime": "10:10"
-        },
-        {
-          "endTime": "11:40",
-          "sessions": [
-            {
-              "items": ["122"]
-            },
-            {
-              "items": ["113"]
-            },
-            {
-              "extend": 2,
-              "items": ["121"]
-            }
-          ],
-          "startTime": "11:00"
-        },
-        {
-          "endTime": "12:30",
-          "sessions": [
-            {
-              "items": ["104"]
-            },
-            {
-              "items": ["124"]
-            }
-          ],
-          "startTime": "11:50"
-        },
-        {
-          "endTime": "14:00",
-          "sessions": [
-            {
-              "items": ["133"]
-            }
-          ],
-          "startTime": "12:30"
-        },
-        {
-          "endTime": "14:40",
-          "sessions": [
-            {
-              "items": ["108"]
-            },
-            {
-              "items": ["128"]
-            },
-            {
-              "extend": 2,
-              "items": ["102"]
-            }
-          ],
-          "startTime": "14:00"
-        },
-        {
-          "endTime": "15:30",
-          "sessions": [
-            {
-              "items": ["110"]
-            },
-            {
-              "items": ["123"]
-            }
-          ],
-          "startTime": "14:50"
-        },
-        {
-          "endTime": "16:00",
-          "sessions": [
-            {
-              "items": ["134"]
-            }
-          ],
-          "startTime": "15:30"
-        },
-        {
-          "endTime": "16:40",
-          "sessions": [
-            {
-              "items": ["131"]
-            },
-            {
-              "items": ["140"]
-            },
-            {
-              "extend": 2,
-              "items": ["130"]
-            }
-          ],
-          "startTime": "16:00"
-        },
-        {
-          "endTime": "17:30",
-          "sessions": [
-            {
-              "items": ["115"]
-            },
-            {
-              "items": ["140"]
-            }
-          ],
-          "startTime": "16:50"
         }
       ],
       "tracks": [
