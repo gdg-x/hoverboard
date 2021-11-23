@@ -67,7 +67,7 @@
       "items": [
         {
           "order": 0,
-          "logoUrl": "../images/logos/gdg-lviv.svg",
+          "logoUrl": "../images/logos/gdg.svg",
           "name": "GDG Lagos",
           "url": "https://gdg.community.dev/gdg-lagos/"
         }
@@ -388,53 +388,54 @@
   },
   "sessions": {
     "150": {
-      "description": "",
+      "description": "N/A",
       "icon": "breakfast",
       "title": "WTM + WW/Digital Skills Breakfast(?) & Registration"
     },
       "152": {
-      "description": "",
+      "description": "N/A",
       "icon": "coffee-break",
       "title": "Tea Break"
     },
       "153": {
-      "description": "",
-      "speakers": ["GDG_lagos"],
+      "description": "N/A",
+      "speakers": ["gdglagos"],
       "title": "Welcome"
     },
      "154": {
-      "description": "",
-      "speakers": ["Juliet_Ehimuan"],
+      "description": "N/A",
+      "speakers": ["juliet_ehimuan"],
       "title": "Google Keynote"
     },
     "155": {
-      "description": "",
-      "speakers": ["Aniedi_Udo-Obong"],
-      "title": "Google DevRel "
+      "description": "N/A",
+      "speakers": ["aniedi_Udo"],
+      "title": "Google DevRel"
     },
     "156": {
-      "description": "",
-      "title": "Keynote - Technology "
+      "description": "N/A",
+      "title": "Keynote - Technology"
     },
      "157": {
       "description": "DG of NITDA - Kashifu Abdullahi",
       "title": "Special Guest",
-      "speakers" :["Kashifu_Abdullahi"]
+      "speakers" :["kashifu_abdullahi"]
     },
     "158": {
       "description": "GDG Lagos - Kelvin",
       "title": "Sponsors",
-      "speakers" :["Kelvin"]
+      "speakers" : ["kelvin"]
     },
       "159": {
-      "title": "Group Photograph"
+      "title": "Group Photograph",
+      "description": "N/A"
     },
     "160": {
       "complexity": "",
       "description": "Blockchain and AI are the two extreme sides of the technology spectrum, one fostering centralized intelligence on close data platforms, the other promoting decentralized applications in an open-data environment. However, if we find an intelligent way to make them working together, the total positive externalities could be amplified in a blink.This talk will be focused on how we can utilize AI and Block add values to the society, disrupt businesses and sectors. We'll look deeply into the pros and cons of this emerging technologies.",
       "language": "English",
       "presentation": "",
-      "speakers": ["Samuel_Akinosho"],
+      "speakers": ["samuel_akinosho"],
       "tags": ["Blockchain"],
       "title": "The convergence of AI and Blockchain"
     },
@@ -442,16 +443,16 @@
       "complexity": "",
       "description": "According to Statistica, as of September 2021, Google Chrome accounted for about 67.56 percent of the global desktop internet browser market share. A lot of people who use browsers, use chrome.As engineers building for the web, it is important that as we build for web users, we at least cover this web browser that is used by a lot of the users we want to reach on the web.Learn how to effectively use chrome dev tools for building and debugging your web applications.",
       "language": "English",
-      "speakers": ["Oluebube_Prince_Egbuna"],
+      "speakers": ["oluebube_prince"],
       "tags": ["Chrome"],
       "title": "How to use chrome dev tools effectively"
     },
     "162": {
       "complexity": "",
-      "description": "`The cloud-native space is maturing and the market demand for building scalable distributed systems for the billion users has given rise to a high influx of developers and even software development teams seeking to transition and learn more about cloud-native development. More companies are seeking to modernize their systems into cloud-native applications to begin to enjoy the good parts of the cloud-native architecture.\nAn ancient adage advises that; Anything worth doing, is worth doing well. It's one thing to build cloud-native applications and another to build observable systems that are reliable, meet business and technical requirements and avoid a lot of the pitfalls and pains of managing distributed systems. in this talk I'll be sharing with the audience the basics of observability, battle-tested observability tools, observability best practices for cloud-native applications like; application health checks, logging, distributed tracing, their importance, and why they are key when building for the cloud.\nThis talk draws from experience building cloud-native applications at Deimos Cloud (A leading cloud-native application development company in Africa) and is intended for software developers, and SRE of any skill level.",
+      "description": "The cloud-native space is maturing and the market demand for building scalable distributed systems for the billion users has given rise to a high influx of developers and even software development teams seeking to transition and learn more about cloud-native development. More companies are seeking to modernize their systems into cloud-native applications to begin to enjoy the good parts of the cloud-native architecture.\nAn ancient adage advises that; Anything worth doing, is worth doing well. It's one thing to build cloud-native applications and another to build observable systems that are reliable, meet business and technical requirements and avoid a lot of the pitfalls and pains of managing distributed systems. in this talk I'll be sharing with the audience the basics of observability, battle-tested observability tools, observability best practices for cloud-native applications like; application health checks, logging, distributed tracing, their importance, and why they are key when building for the cloud.\nThis talk draws from experience building cloud-native applications at Deimos Cloud (A leading cloud-native application development company in Africa) and is intended for software developers, and SRE of any skill level.",
       "language": "English",
       "presentation": "",
-      "speakers": ["Prosper_Opara"],
+      "speakers": ["prosper_opara"],
       "tags": ["Cloud"],
       "title": "Building Observable Cloud Native Applications"
     },
@@ -460,7 +461,7 @@
       "description": "A few years ago CI/CD was considered a practice for most web developers. But in recent years it’s become best practice and a core task/process in setting up a project, we must pick a service that can offer the best experience both for teams and the product in general.",
       "language": "English",
       "presentation": "",
-      "speakers": ["Chiziaruhoma_Ogbonda"],
+      "speakers": ["chiziaruhoma_ogbonda"],
       "tags": ["Flutter"],
       "title": " Flutter DevOps: Creating a Delivery Channel for your Apps"
     },
@@ -469,7 +470,7 @@
       "description": "When they join Western or European startups, they experience stagnancy because they can't or dread self-advocacy.I will speak on pushing through friction at work, leverage two use cases at work:\na. where people have an idea for improvement, but neither their manager nor the team/department responsible for the related system aren't ready to support them or do the work required to aid their implementation of the idea.\nb. someone is trying to get a promotion at work, and it seems nobody is paying attention. They're not getting the kind of projects they want, nor getting the recognition they deserve.",
       "language": "English",
       "title": "Pushing through fiction",
-      "speakers": "Aregbede_Ayomide"
+      "speakers": ["aregbede_ayomide"]
     },
       "165": {
       "description": "Foooooooood!",
@@ -481,7 +482,7 @@
       "complexity": "",
       "description": "A workshop on how to search your codebase & demonstrating how batch changes can be used in a Github repo instance.",
       "language": "English",
-      "speakers": ["Michael_Bali"],
+      "speakers": ["michael_bali"],
       "tags": ["Sourcegraph"],
       "title": "Implementing Code Search and Batch changes using Sourcegraph"
     },
@@ -489,7 +490,7 @@
       "complexity": "",
       "description": "Kehinde is a Software Engineer at Microsoft. She started her engineering career working at companies that built bespoke software and delivered consultancy services for clients across Retail, Banking, Insurance, Telecoms, and the Health sector.\nHer technical interests lie in leadership, building high-quality software, and infrastructure engineering. Kehinde holds a B.Sc. in Computer Science with Economics from Obafemi Awolowo University. She likes to browse fashion and watch food videos.",
       "language": "English",
-      "speakers": ["Kehinde_Ladipo"],
+      "speakers": ["kehinde_ladipo"],
       "tags": ["Fire Drills"],
       "title": "Fire Drills for Software Development Teams"
     },
@@ -497,7 +498,7 @@
       "complexity": "",
       "description": "Deploying ML models on mobile devices has become common place, but how about deploying them to tiny microcontrollers that can run on a battery? This workshop will teach participants how to process sound files and train a model, then optimize the models for deployment using TensorFlow Lite for Microcontrollers, and then finally show them how to deploy the model in a feat of embedded programming. This session will require a working knowledge of the C and Python programming languages.",
       "language": "English",
-      "speakers": ["Robert_John"],
+      "speakers": ["robert_john"],
       "tags": ["Machine Learning"],
       "title": "Machine Learning on Tiny Edge Devices"
     },
@@ -505,7 +506,7 @@
       "complexity": "",
       "description": "The field of Quantum Computing and Quantum Information Science has been existing for decades in laboratories on the basis of Research, but in this NISQ era, tech giants and startup companies like IBM, GOOGLE, Microsoft, D-WAVE, Rigetti, ionQ, Zapata etc have utilized this Quantum physics in order to bring this disruptive computational paradigm to fruition. At the stage where it is, one can access these beasts through cloud services to solve highly complex problems in Computational Chemistry, Travelling salesman problem, Industrial Combinatorial Optimization Problems, Unstructured database search, Drug Design, Material Simulation, Protein folding, supply chain problems, Machine Learning and other numerous problems which are nearly impossible in a classical turning computer or would take years to solve.",
       "language": "English",
-      "speakers": ["Afam_Madu_Daniel"],
+      "speakers": ["afam_madu"],
       "tags": ["Quantum Computing"],
       "title": "Quantum Computing and its application to Industrial Optimization Problems"
     },
@@ -513,7 +514,7 @@
       "complexity": "",
       "description": "A lot of companies now participate in diversity and inclusion activities and as a result, we can see a lot of women and people of color in organizations but in nonmanagerial roles. They enter the talent pipeline but do not progress to senior management or corporate executive positions. In this talk, I will discuss diversity and inclusion in the workplace with special considerations to women in leadership.",
       "language": "English",
-      "speakers": ["Shulammite_Joyful_John"],
+      "speakers": ["shulammite_joyful"],
       "tags": ["Women"],
       "title": "Restructuring Women's (Tech) Leadership Through Diversity Equity And Inclusion"
     },
@@ -521,7 +522,7 @@
       "complexity": "",
       "description":"Don’t get me wrong, whether you are using Mix Panel, Google Analytics, Heaps, or Hotjar to collect product analytics data, it’s great. The reports you get out of these platforms are important and deliver real insights on product performance.\nBut analytics alone doesn't build successful products, the data from product analytics are a past reflection of your user behaviour and can hardly help you predict the future. \nIn this session, I & Chukwuka who are both Co-founders of Spire will deep dive into how you can build better products with customer & product feedback.",
       "language": "English",
-      "speakers": ["Charles_Njoku, Chukwuka"],
+      "speakers": ["charles_njoku"],
       "tags": ["Analytics"],
       "title": "Product Analytics is the past, Feedback is your future."
     },
@@ -529,14 +530,14 @@
       "complexity": "",
       "description": "Developer experience (DX) is similar to how you see and understand user experience (UX) but the difference is DX focus is strictly on developers who consume certain API services, SDKs, or other services owned by a company or an organization.\nThis talk will explore why developer experience matters in every company providing a technical service, what makes a great developer experience team, and the relationship between building a great developer experience flow in a company with the public.\nThe attendees will learn how Developer Experience increases product usage and how users can become advocates themselves for a product that has a great user-centric experience.",
       "language": "English",
-      "speakers": ["Shodipo_Ayomide"],
+      "speakers": ["shodipo_ayomide"],
       "tags": ["Web, UX"],
       "title": "Technical Principles of Developer Experience"
     },
     "173": {
       "description": "The promise of decentralization has been around for a long time. It's 2021 and we’re finally starting to see some enormous progress throughout the tech ecosystem. Facebook recently changed its name to reflect its future focus on web3 technologies. Tiktok launched an NFT collection some months ago. Stripe and Paypal now have dedicated crypto teams. We simply can no more ignore the fact that this is undoubtedly the next phase of the internet. This session will examine the fundamental ideas of decentralization from Ethereum to NFTs, Wallets to DAOs and outline why after writing 50K+ lines of Dart code in over 22 months, I think Flutter(Google’s UI toolkit) is the ideal choice for the development of the next generation of apps - Decentralized apps.",
       "language": "English",
-      "speakers": ["Kosi_Anyaegbuna"],
+      "speakers": ["kosi_anyaegbuna"],
       "tags": ["Metaverse"],
       "title": "A Match Made In The Metaverse: Web3 & Flutter"
     },
@@ -544,7 +545,7 @@
       "complexity": "",
       "description":"Introducing Convoy: A fast and Secure Webhooks Service. \n\nWith Thepeer, customers can now send and receive money from any business. Other offerings include direct charges, invoicing, recurrent billings and insights. Thepeer has created a way to bring businesses together through integrations while solving customers' problems of moving money around any. ",
       "language": "English",
-      "speakers": ["Subomi_Oluwalana ,Trojan_Michael_Okoh "],
+      "speakers": ["subomi_oluwalana","trojan_michael_okoh"],
       "tags": ["ThePeer,Convoy"],
       "title": "Introducing Convoy: A fast and Secure Webhooks Service \nGetting Started with ThePeer"
     },
@@ -552,7 +553,7 @@
       "complexity": "",
       "description": "In this talk, I will discuss how software engineers and programmers can learn and start saving, investing, and planning to retire early and safely.\nAudience will learn\n1. Why start tracking expenses and their net-worth and how much they owe\n2. The art of making a budget\n3. Types of Debt and how to pay them off\n4. Why investing is important and how it's tired to expenditure \n5. How to achieve financial independence and retire early and safely\n6. Reasons why we save and invest",
       "language": "English",
-      "speakers": ["Marvin_Hosea"],
+      "speakers": ["marvin_hosea"],
       "tags": ["Financial Independence"],
       "title": "Software Engineer's Roadmap to Saving, Investing and Financial Independence"
     },
@@ -560,7 +561,7 @@
       "complexity": "",
       "description": "In the last 5 years, the African ecosystem has recorded a steady increase in the number of innovations, disruptive products and solutions. \nWe have made strides to create a smooth transition from traditional cash (offline) payments to online/digital payments that help businesses and their customers with easy-to-use solutions and financial tools. And at the heart of all this, lies payment services.\nBut, as simple and smooth as the narrative may seem, digital payments come with a whole new challenge; trust.\nJoin me as I unpack the successful approaches my team and I have taken to designing payment solutions and services that don’t just let the customer know that it’s secure but also get the user to want to trust you with their money.",
       "language": "English",
-      "speakers": ["Lola_Shehu"],
+      "speakers": ["lola_shehu"],
       "tags": ["Digital Payments"],
       "title": "Designing for Trust in Digital Payments"
     },
@@ -568,22 +569,23 @@
       "complexity": "",
       "description": "This workshop is a hands-on introduction to data science and analytics in JavaScript using Danfo.js. Here, participants will learn how to:\n1. Use Danfo.js to analyze, wrangle, and transform datasets\n2. Learn how to use notebooks for analysis\n3. Learn to make interactive charts and plots from real-world data\n4. Learn how to combine Danfo.js with Tensorflow.js for machine learning.",
       "language": "English",
-      "speakers": ["Rising_Odegua"],
+      "speakers": ["rising_odegua"],
       "tags": ["Danfo.js"],
       "title": "Introducing Danfo.js: A data science and analytics toolkit for the web"
     },
     "181": {
       "description": "Eden",
       "language": "English",
-      "speakers": ["Prosper_Otemuyiwa"],
+      "speakers": ["prosper_otemuyiwa"],
       "title": "Panel"
     },
     "182": {
-      "title": "Closing Remark"
+      "title": "Closing Remark",
+      "description": ""
     }
   },
   "speakers": {
-    "Lola_Shehu": {
+    "lola_shehu": {
       "bio": "Lola Salehu is a Senior Product Designer, Writer and self-taught Front-end Developer from Lagos, Nigeria. She currently works at Paystack, a technology company solving payments problems for ambitious businesses in Africa. She is an advocate for inclusion and intersectionality in the tech space, as well as content-first design. She contributes to the tech community by speaking at conferences, building local open-source communities and teaching design education to beginners every other weekend. She's also a photographer, slightly obsessed with documenting experiences and can usually be found creating some on her laptop or outdoors exploring something new.",
       "company": "Paystack",
       "featured": true,
@@ -602,7 +604,7 @@
       "order": 0,
       "title": "Senior Product Designer"
     },
-    "Robert_John": {
+    "robert_john": {
       "bio": "Robert has been a software developer for over a decade and recently transitioned into the field of data science. He currently works as a Data Engineer and spends his days working on TensorFlow and the Google Cloud Platform.Outside of work, Robert co-organizes Google Cloud Developer Community, Kaduna. He is also a Google Developer Expert for Machine Learning and for Google Cloud Platform.",
       "company": "",
       "featured": true,
@@ -621,10 +623,10 @@
       "order": 1,
       "title": "Data Engineer"
     },
-    "Shulammite_Joyful_John": {
+    "shulammite_joyful": {
       "bio": "Shulammite Joyful U. John (who fondly likes to be called SHULA), is a Software Engineer based in Nigeria.In 2019, she Founded FemCode Africa and also is the founder of Shula's Table Talk Show.In February 2020, she created workshops that will help students identify their strengths and weaknesses technically. And also help them set achievable goals and purpose. She achieved this by organizing a mentorship class at the Abia State polytechnic where she Mentored ladies in Front end Web development.Shula studied Computer Science in school, She is a Scratch Educator and is passionate about always learning and improving.Shula is extremely passionate about the developer community and is trying to drive inclusion for women in technology. She co-organizes community events, contributes, and speaks at conferences/meetups, elementary and middle schools to promote education and self-improvement.",
       "company": "Femcode Africa",
-      "featured": true,
+      "featured": false,
       "name": "Shulammite John",
       "photo": "./images/speakers/Shulammite_Joyful_John.png",
       "photoUrl": "./images/speakers/Shulammite_Joyful_John.png",
@@ -640,10 +642,10 @@
       "order": 2,
       "title": "CEO"
     },
-    "Chiziaruhoma_Ogbonda": {
+    "chiziaruhoma_ogbonda": {
       "bio": "Chiziaruhoma Ogbonda is a Mobile Engineer and Flutter/Dart Google Developer Expert with skills in Native Android/iOS development, UI design, and Cross-Platform Mobile Development with Flutter.Besides code and work, he is also a music lover and enjoys playing the piano and writing about Flutter.",
       "company": "Bottlepay",
-      "featured": true,
+      "featured": false,
       "name": "Chiziaruhoma Ogbonda",
       "photo": "./images/speakers/ChiziaruhomaOgbonda.png",
       "photoUrl": "./images/speakers/ChiziaruhomaOgbonda.png",
@@ -659,10 +661,10 @@
       "order": 3,
       "title": "Mobile Engineer"
     },
-   "Rising_Odegua": {
+   "rising_odegua": {
       "bio": "Rising Odegua is a Software and Machine Learning Engineer with over 5 years of experience in building data-driven applications in languages like Java, Python, and JavaScript. He is a GDE in machine learning, a Github star, and a published technical author. Rising is actively engaged in building the developer ecosystem by giving talks, providing direct/indirect mentorship, working on open source projects, hosting meetups, and writing tutorials.",
       "company": "Philanthrolab",
-      "featured": true,
+      "featured": false,
       "name": "Rising Odegua",
       "photo": "./images/speakers/Rising_Odegua.png",
       "photoUrl": "./images/speakers/Rising_Odegua.png",
@@ -678,10 +680,10 @@
       "order": 4,
       "title": "CTO"
     },
-     "Kehinde_Ladipo": {
+     "kehinde_ladipo": {
       "bio": "Kehinde is a Software Engineer at Microsoft. She started her engineering career working at companies that built bespoke software and delivered consultancy services for clients across Retail, Banking, Insurance, Telecoms, and the Health sector.Her technical interests lie in leadership, building high-quality software, and infrastructure engineering. Kehinde holds a B.Sc. in Computer Science with Economics from Obafemi Awolowo University. She likes to browse fashion and watch food videos.",
       "company": "Microsoft",
-      "featured": true,
+      "featured": false,
       "name": "Kehinde Ladipo",
       "photo": "./images/speakers/Kehinde_Ladipo.png",
       "photoUrl": "./images/speakers/Kehinde_Ladipo.png",
@@ -697,10 +699,10 @@
       "order": 5,
       "title": "Software Engineer"
     },
-     "Prosper_Opara": {
+     "prosper_opara": {
       "bio": "I'm an experienced full-stack engineer with over 3 years of experience building software solutions. My experience cuts across open source contributions, cloud-native application development, financial technology application development, logistics application development, and technical writing.",
       "company": "Deimos Cloud",
-      "featured": true,
+      "featured": false,
       "name": "Prosper Opara",
       "photo": "./images/speakers/Prosper_Opara.png",
       "photoUrl": "./images/speakers/Prosper_Opara.png",
@@ -711,10 +713,10 @@
       "order": 6,
       "title": "Software Engineer"
     },
-    "Shodipo_Ayomide": {
+    "shodipo_ayomide": {
       "bio": "Shodipo Ayomide is a Dev. Relations Manager at Stack Overflow with 9 years of experience in Technology and a track record in web & mobile applications engineering, community management, and product design on a global scale.He has given talks/workshops at developer conferences around the globe at React Atlanta, FutureSync Conference, VueJS Amsterdam, VueJS Toronto, APIDAYS Hong Kong, Frontend Love Conference Amsterdam, FOSSASIA among many, he is also one of the organizers of the Developer Circles Lagos from Facebook, unStack Africa, Open-Source Community Africa, and various other communities empowering Africa and the world. In addition, he is an Expert and Instructor at egghead.io Among his latest topics we can find: Progressive Imaging & Handling: React + WebPack, Fast and Furious with VueJS & WebPack, Getting up to Speed With Deno, Automating Workflow Processes Using GitHub Actions, Design from the Realm of Open-Source, Technical Principles to Developer Experience and others",
       "company": "Stack Overflow",
-      "featured": true,
+      "featured": false,
       "name": "Shodipo Ayomide",
       "photo": "./images/speakers/Shodipo_Ayomide.png",
       "photoUrl": "./images/speakers/Shodipo_Ayomide.png",
@@ -730,10 +732,10 @@
       "order": 7,
       "title": "Dev. Relations Manager"
     },
-    "Afam_Madu_Daniel": {
+    "afam_madu": {
       "bio": "My name is Afam Madu Daniel. I am a physicist and with an Msc in view in Electronics Engineering. Also, I am the Startup Incubation Manager in Roar Nigeria Hub, University of Nigeria Nsukka (the first University embedded startup incubator in West Africa). However, as a Quantum Computing Research Scientist with a focus on gate-based quantum computation, I was appointed as the President of OneQuantum Nigerian Chapter. OneQuantum is an international Quantum Organization. In conclusion, i am a co-founder of Techniverse, a tech community inside the heart of the University of Nigeria Nsukka, geared towards forming clusters of tech enthusiasts for the purpose of free knowledge transfer, brainstorm sessions, and community engagements,",
       "company": "Roar Nigeria Hub",
-      "featured": true,
+      "featured": false,
       "name": "Afam Madu Daniel",
       "photo": "./images/speakers/Afam_Madu_Daniel.png",
       "photoUrl": "./images/speakers/Afam_Madu_Daniel.png",
@@ -749,10 +751,10 @@
       "order": 8,
       "title": "Startup Incubation Manager"
     },
-    "Charles_Njoku": {
+    "charles_njoku": {
       "bio": "Charles is the Co-founder & CEO of Spire; a startup helping businesses collect and manage feedback from anywhere in one collaborative place.He is one of Nigeria’s promising technology entrepreneurs with experience across several technology fields over the past 6years working with tech businesses and startups in Marketing and Communications, Branding, Strategy, Product & User Experience, as well as an avid salesman.",
       "company": "Spire",
-      "featured": true,
+      "featured": false,
       "name": "Charles Njoku",
       "photo": "./images/speakers/Charles_Njoku.png",
       "photoUrl": "./images/speakers/Charles_Njoku.png",
@@ -768,10 +770,10 @@
       "order": 9,
       "title": "CEO"
     },
-    "Samuel_Akinosho": {
+    "samuel_akinosho": {
       "bio": "Tech and Business Leader focusing on Artificial Intelligence and Research, Internet of Things, Fullstack Development, and Redefining Businesses & Individuals. Experienced in both enterprise application development and Hardware development.In addition to Software Development, Computer Science, and UX, I am passionate about entertainment, Speaking, and Social Entrepreneurship.",
       "company": "Spydar Africa",
-      "featured": true,
+      "featured": false,
       "name": "Samuel Akinosho",
       "photo": "./images/speakers/Samuel_Akinosho.png",
       "photoUrl": "./images/speakers/Samuel_Akinosho.png",
@@ -787,10 +789,10 @@
       "order": 10,
       "title": "CEO"
     },
-     "Aregbede_Ayomide": {
+    "aregbede_ayomide": {
       "bio": "Software Engineer, building distributed systems with Elixir at Community.com. Upcoming YouTuber helping techies build fulfilled careers. On weekends, rookie Tennis player.",
       "company": "Community.com",
-      "featured": true,
+      "featured": false,
       "name": "Aregbede Ayomide",
       "photo": "./images/speakers/Aregbede_Ayomide.png",
       "photoUrl": "./images/speakers/Aregbede_Ayomide.png",
@@ -806,10 +808,10 @@
       "order": 11,
       "title": "Software Engineer"
     },
-     "Michael_Bali": {
+    "michael_bali": {
       "bio": "Michael is very passionate about helping those around him. He enjoys Soccer a lot and discussing politics most especially politics in Africa with friends. During his leisure, he enjoys playing console games, reading books (crime thrillers) and traveling. He is also enthusiastic about meeting new folks and open-minded to learning!",
       "company": "Sourcegraph",
-      "featured": true,
+      "featured": false,
       "name": "Michael Bali",
       "photo": "./images/speakers/Michaek Bali - Amarachi Azubuike.png",
       "photoUrl": "./images/speakers/Michaek Bali - Amarachi Azubuike.png",
@@ -825,25 +827,23 @@
       "order": 12,
       "title": "Application Engineer"
     },
-     "Subomi_Oluwalana": {
+    "subomi_oluwalana": {
       "bio": "",
       "company": "GetConvoy",
-      "featured": true,
+      "featured": false,
       "name": "Subomi Oluwalana",
       "photo": "./images/speakers/Subomi_Oluwalana.png",
       "photoUrl": "./images/speakers/Subomi_Oluwalana.png",
       "pronouns": "he/him",
       "shortBio": "",
-      "socials": [
-         
-      ],
+      "socials": [],
       "order": 13,
       "title": "CTO"
     },
-      "Trojan_Michael_Okoh": {
+    "trojan_michael_okoh": {
       "bio": "",
       "company": "Thepeer",
-      "featured": true,
+      "featured": false,
       "name": "Michael Bali",
       "photo": "./images/speakers/Trojan_Michael_Okoh.png",
       "photoUrl": "./images/speakers/Trojan_Michael_Okoh.png",
