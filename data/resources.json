@@ -129,7 +129,7 @@
       "howItWas": {
         "description": "A Google Developer Group is a community of volunteers who create exciting projects and share experiences about Google technologies.",
         "label": "What is GDG",
-        "youtubeId": "KlWVfEiW7Ak"
+        "youtubeId": "jL3Em-2RwL4"
       }
     },
     "statisticsBlock": {
@@ -138,7 +138,7 @@
         "number": "3000"
       },
       "days": {
-        "label": "Days",
+        "label": "Day",
         "number": "1"
       },
       "sessions": {
@@ -197,13 +197,6 @@
     "callToAction": {
       "label": "View all speakers",
       "link": "/speakers/"
-    }
-  },
-  "previousSpeakersBlock": {
-    "title": "Previous speakers",
-    "callToAction": {
-      "label": "View all",
-      "link": "/previous-speakers/"
     }
   },
   "galleryBlock": {

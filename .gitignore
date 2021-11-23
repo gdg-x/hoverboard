@@ -71,3 +71,4 @@ out-tsc/
 serviceAccount.json
 *-adminsdk-*.json
 .DS_Store
+config/
