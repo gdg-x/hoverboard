@@ -2049,12 +2049,12 @@
     "adrian_kajda": {
       "bio": "Creator of Fuelio app. Fuelio was his hooby project started in 2012. Three years later the app was aquired by Sygic.",
       "company": "Sygic",
-      "companyLogo": "https://dfua16.firebaseapp.com//images/logos/sygic.svg",
+      "companyLogo": "https://dfua16.web.app/images/logos/sygic.svg",
       "country": "Poland",
       "id": "adrian_kajda",
       "name": "Adrian Kajda",
       "order": 6,
-      "photoUrl": "https://dfua16.firebaseapp.com//images/people/adrian_kajda.jpg",
+      "photoUrl": "https://dfua16.web.app/images/people/adrian_kajda.jpg",
       "sessions": {
         "2016": [
           {
@@ -2164,12 +2164,12 @@
     "carmen_popovicu": {
       "bio": "Carmen is a front-end engineer and a #1 fan of dev communities. She loves Angular but has since recently developed feelings for Polymer too. She strongly believes that adding at least one ASCII smiley in your emails will make the world a better place and hopes to one day make a difference for the web with the code she writes. If she had super powers, she would smiley all the things.",
       "company": "Widespread",
-      "companyLogo": "https://dfua16.firebaseapp.com//images/logos/widespread.png",
+      "companyLogo": "https://dfua16.web.app/images/logos/widespread.png",
       "country": "Romania",
       "id": "carmen_popovicu",
       "name": "Carmen Popovicu",
       "order": 3,
-      "photoUrl": "https://dfua16.firebaseapp.com//images/people/carmen_popovicu.jpg",
+      "photoUrl": "https://dfua16.web.app/images/people/carmen_popovicu.jpg",
       "sessions": {
         "2016": [
           {
@@ -2219,12 +2219,12 @@
     "dmytro_danylyk": {
       "bio": "Dmytro is a developer, writer, speaker. He live in Lviv - a quaint and beautiful city. He is passionate about android and flat design. Currently Dmytro works for a startup Timee where he develop Android application and he love what he do.",
       "company": "Timee",
-      "companyLogo": "https://dfua16.firebaseapp.com//images/logos/timee.png",
+      "companyLogo": "https://dfua16.web.app/images/logos/timee.png",
       "country": "Ukraine",
       "id": "dmytro_danylyk",
       "name": "Dmytro Danylyk",
       "order": 15,
-      "photoUrl": "https://dfua16.firebaseapp.com//images/people/dmytro_danylyk.jpg",
+      "photoUrl": "https://dfua16.web.app/images/people/dmytro_danylyk.jpg",
       "sessions": {
         "2014": [
           {
@@ -2666,7 +2666,7 @@
       "id": "roman_mazur",
       "name": "Roman Mazur",
       "order": 10,
-      "photoUrl": "https://dfua15.firebaseapp.com/images/people/roman_mazur.jpg",
+      "photoUrl": "https://dfua15.web.app/images/people/roman_mazur.jpg",
       "sessions": {
         "2014": [
           {
@@ -2727,12 +2727,12 @@
     "sergiy_mokienko": {
       "bio": "Sergiy is an android developer that has experience from building apps from scratch to developing android based sdks and libraries for other applications. He has more than 10 applications successfully published on Google Play. Former GDG chapter lead in Nikolaev. Currently he is leading a team that builds broker software for 60+ different brokers.",
       "company": "Leverate",
-      "companyLogo": "https://dfua16.firebaseapp.com//images/logos/leverate.svg",
+      "companyLogo": "https://dfua16.web.app/images/logos/leverate.svg",
       "country": " Ukraine",
       "id": "sergiy_mokienko",
       "name": "Sergiy Mokienko",
       "order": 9,
-      "photoUrl": "https://dfua16.firebaseapp.com//images/people/sergiy_mokienko.jpg",
+      "photoUrl": "https://dfua16.web.app/images/people/sergiy_mokienko.jpg",
       "sessions": {
         "2016": [
           {
@@ -2847,12 +2847,12 @@
     "vitaliy_zasadnyy": {
       "bio": "Vitaliy is a mobile developer, public speaker and community manager. He is eager about product perfection and scalability. Goes crazy about new IoT devices and Google products. Originally Vitaliy is from Ukraine, where he founded GDG Lviv. Now he is leading mobile department at GetSocial, startup based in The Netherlands. GetSocial is building the cloud-based mobile engagement platform that empowers any app developer with tools to maximise user acquisition, engagement, retention and monetization.",
       "company": "GetSocial",
-      "companyLogo": "https://dfua16.firebaseapp.com//images/logos/getsocial.svg",
+      "companyLogo": "https://dfua16.web.app/images/logos/getsocial.svg",
       "country": "Ukraine",
       "id": "vitaliy_zasadnyy",
       "name": "Vitaliy Zasadnyy",
       "order": 1,
-      "photoUrl": "https://dfua16.firebaseapp.com//images/people/vitaliy_zasadnyy.jpg",
+      "photoUrl": "https://dfua16.web.app/images/people/vitaliy_zasadnyy.jpg",
       "sessions": {
         "2016": [
           {
