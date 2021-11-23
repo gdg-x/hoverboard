@@ -399,17 +399,14 @@
     },
       "153": {
       "description": "N/A",
-      "speakers": ["gdglagos"],
       "title": "Welcome"
     },
      "154": {
       "description": "N/A",
-      "speakers": ["juliet_ehimuan"],
       "title": "Google Keynote"
     },
     "155": {
       "description": "N/A",
-      "speakers": ["aniedi_Udo"],
       "title": "Google DevRel"
     },
     "156": {
@@ -418,13 +415,11 @@
     },
      "157": {
       "description": "DG of NITDA - Kashifu Abdullahi",
-      "title": "Special Guest",
-      "speakers" :["kashifu_abdullahi"]
+      "title": "Special Guest"
     },
     "158": {
       "description": "GDG Lagos - Kelvin",
-      "title": "Sponsors",
-      "speakers" : ["kelvin"]
+      "title": "Sponsors"
     },
       "159": {
       "title": "Group Photograph",
