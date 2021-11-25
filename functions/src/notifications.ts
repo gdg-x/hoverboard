@@ -6,6 +6,11 @@ import { getFirestore } from 'firebase-admin/firestore';
 import { getMessaging } from 'firebase-admin/messaging';
 import * as functions from 'firebase-functions';
 
+const REMOVE_TOKEN_ERROR = [
+  'messaging/invalid-registration-token',
+  'messaging/registration-token-not-registered',
+];
+
 export const sendGeneralNotification = functions.firestore
   .document('/notifications/{timestamp}')
   .onCreate(async (snapshot, context) => {
@@ -48,10 +53,7 @@ export const sendGeneralNotification = functions.firestore
       const error = result.error;
       if (error) {
         console.error('Failure sending notification to', tokens[index], error);
-        if (
-          error.code === 'messaging/invalid-registration-token' ||
-          error.code === 'messaging/registration-token-not-registered'
-        ) {
+        if (REMOVE_TOKEN_ERROR.includes(error.code)) {
           const tokenRef = getFirestore().collection('notificationsSubscribers').doc(tokens[index]);
           tokensToRemove.push(tokenRef.delete());
         }

@@ -1,7 +1,7 @@
 /* eslint-env node */
 
 // Jest doesn't support ESModules https://github.com/facebook/jest/issues/4842
-const esModuleDependencies = [
+const ES_MODULE_DEPENDENCIES = [
   '@abraham/remotedata',
   '@lit',
   '@material',
@@ -26,7 +26,7 @@ module.exports = {
       transform: {
         '^.+\\.[t|j]sx?$': 'ts-jest',
       },
-      transformIgnorePatterns: [`node_modules/(?!${esModuleDependencies})`],
+      transformIgnorePatterns: [`node_modules/(?!${ES_MODULE_DEPENDENCIES})`],
     },
     {
       displayName: 'Firestore',

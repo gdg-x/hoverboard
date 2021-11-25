@@ -16,6 +16,10 @@ import { getToken } from '../notifications/actions';
 import { resetSubscribed } from '../subscribe/actions';
 import { SIGN_IN } from './types';
 
+const EXISTING_ACCOUNT_ERROR = [
+  'auth/account-exists-with-different-credential',
+  'auth/email-already-in-use',
+];
 const auth = getAuth(firebaseApp);
 
 export const signIn = (providerName: PROVIDERS) => {
@@ -27,10 +31,7 @@ export const signIn = (providerName: PROVIDERS) => {
       getToken(true);
     })
     .catch((error) => {
-      if (
-        error.code === 'auth/account-exists-with-different-credential' ||
-        error.code === 'auth/email-already-in-use'
-      ) {
+      if (EXISTING_ACCOUNT_ERROR.includes(error.code)) {
         fetchSignInMethodsForEmail(auth, error.email).then((providers) => {
           storeUser({
             signedIn: false,
