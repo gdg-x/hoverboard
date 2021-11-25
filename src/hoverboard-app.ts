@@ -36,7 +36,6 @@ import './elements/dialogs/subscribe-dialog';
 import './elements/dialogs/video-dialog';
 import './elements/footer-block';
 import './elements/header-toolbar';
-import './elements/hoverboard-analytics';
 import './elements/hoverboard-icons';
 import './elements/polymer-helmet';
 import './elements/shared-styles';
@@ -310,7 +309,6 @@ export class HoverboardApp extends PolymerElement {
 
       <signin-dialog opened="[[isSigninDialogOpen]]" with-backdrop></signin-dialog>
 
-      <hoverboard-analytics></hoverboard-analytics>
       <toast-element></toast-element>
     `;
   }
