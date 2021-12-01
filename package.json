@@ -91,7 +91,7 @@
     "@web/rollup-plugin-html": "^1.10.1",
     "concurrently": "^6.4.0",
     "deepmerge": "^4.2.2",
-    "eslint": "^8.2.0",
+    "eslint": "^8.3.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-typescript": "^2.5.0",
