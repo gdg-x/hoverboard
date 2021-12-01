@@ -116,7 +116,7 @@
     "rollup-plugin-workbox": "^6.2.0",
     "stylelint": "^14.0.1",
     "stylelint-config-prettier": "^9.0.3",
-    "stylelint-config-standard": "^23.0.0",
+    "stylelint-config-standard": "^24.0.0",
     "testing-library__dom": "^7.29.4-beta.1",
     "ts-jest": "^27.0.7",
     "ts-node": "^10.4.0",
