@@ -81,7 +81,7 @@
     "@rollup/plugin-typescript": "^8.3.0",
     "@stylelint/postcss-css-in-js": "^0.37.2",
     "@testing-library/dom": "^8.11.0",
-    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/jest-dom": "^5.15.1",
     "@types/google.analytics": "0.0.42",
     "@types/jest-dev-server": "^5.0.0",
     "@types/node": "^16.11.11",
