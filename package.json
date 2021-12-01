@@ -97,7 +97,7 @@
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-html": "^6.2.0",
     "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-jest": "^25.2.3",
+    "eslint-plugin-jest": "^25.3.0",
     "eslint-plugin-jest-dom": "^3.9.2",
     "eslint-plugin-testing-library": "^5.0.1",
     "firebase-admin": "^10.0.0",
