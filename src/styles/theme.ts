@@ -112,7 +112,7 @@ export const theme = css`
   paper-button[disabled] {
     cursor: default;
     background-color: var(--primary-color-transparent);
-    opacity: 80%;
+    opacity: 0.8;
   }
 
   paper-button[primary] {
