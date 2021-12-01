@@ -84,7 +84,7 @@
     "@testing-library/jest-dom": "^5.15.0",
     "@types/google.analytics": "0.0.42",
     "@types/jest-dev-server": "^5.0.0",
-    "@types/node": "^16.11.9",
+    "@types/node": "^16.11.11",
     "@types/polymer": "^1.2.11",
     "@typescript-eslint/eslint-plugin": "^5.5.0",
     "@typescript-eslint/parser": "^5.3.1",
