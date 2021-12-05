@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        script-name: [lint, test, build, types]
+        script-name: [lint, test, build, types, seed]
 
     steps:
       - name: Checkout the repo

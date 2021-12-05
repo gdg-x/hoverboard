@@ -6,8 +6,15 @@ import { cert, initializeApp, ServiceAccount } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 import serviceAccount from '../serviceAccount.json';
 
-const credential = cert(serviceAccount as ServiceAccount);
-initializeApp({ credential });
+const { FIRESTORE_EMULATOR_HOST } = process.env;
+
+if (FIRESTORE_EMULATOR_HOST) {
+  initializeApp({ projectId: 'demo-hoverboard' });
+} else {
+  const credential = cert(serviceAccount as ServiceAccount);
+  initializeApp({ credential });
+}
+
 const firestore = getFirestore();
 
 export { firestore };
