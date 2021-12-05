@@ -60,13 +60,14 @@ import { showToast } from './store/toast/actions';
 import { setViewportSize } from './store/ui/actions';
 import { updateUser } from './store/user/actions';
 import { isDialogOpen } from './utils/dialogs';
+import { isLocalhost } from './utils/environment';
 import { scrollToY } from './utils/scrolling';
 
 setFastDomIf(true);
 setPassiveTouchGestures(true);
 setRemoveNestedTemplates(true);
 setSuppressTemplateNotifications(true);
-if (location.hostname === 'localhost') {
+if (isLocalhost()) {
   setLegacyWarnings(true);
 }
 
