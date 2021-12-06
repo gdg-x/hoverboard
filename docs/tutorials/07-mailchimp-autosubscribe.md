@@ -10,6 +10,6 @@ This tutorial describes how to enable the MailChimp auto subscription feature. S
     ```
 1.  Deploy Firebase functions. You can find specific Mailchimp autosubscibe function [here](https://github.com/gdg-x/hoverboard/blob/main/functions/src/mailchimp-subscribe.js)
     ```console
-      npx firebase deploy --only functions
+      npx firebase deploy
     ```
 1.  As per the currently existing Firebase subscription plans, the free plan does not support calls to external APIs from Firebase functions (which is being used for the MailChimp integration). This means that you will need another subscription plan - we recommend the Blaze (pay-as-you-go) subscription plan, which is the cheapest option that will allow you to make the integration

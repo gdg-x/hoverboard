@@ -14,7 +14,6 @@
     "build:index": "cpx \"../dist/*.html\" dist",
     "build:src": "tsc",
     "clean": "rimraf dist",
-    "deploy": "firebase deploy --only functions",
     "start": "npm run clean && concurrently npm:start:*",
     "start:index": "npm run build:index",
     "start:src": "npm run build:src -- --watch"
