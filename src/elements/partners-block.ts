@@ -81,7 +81,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
           <div class="logos-wrapper">
             <template is="dom-repeat" items="[[block.items]]" as="logo">
               <a
-                class="logo-item"
+                class="logo-item card"
                 href$="[[logo.url]]"
                 title$="[[logo.name]]"
                 target="_blank"
