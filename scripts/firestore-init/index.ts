@@ -1,6 +1,6 @@
 import { importBlog } from './blog';
+import { importConfig } from './config';
 import { importGallery } from './gallery';
-import { importNotificationsConfig } from './notifications-config';
 import { importPartners } from './partners';
 import { importPreviousSpeakers } from './previous-speakers';
 import { importSchedule } from './schedule';
@@ -10,9 +10,9 @@ import { importTeam } from './team';
 import { importTickets } from './tickets';
 import { importVideos } from './videos';
 
-importBlog()
+importConfig() // Should always be first
+  .then(() => importBlog())
   .then(() => importGallery())
-  .then(() => importNotificationsConfig())
   .then(() => importPartners())
   .then(() => importPreviousSpeakers())
   .then(() => importSchedule())

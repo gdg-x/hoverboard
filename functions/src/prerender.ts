@@ -1,23 +1,34 @@
 /* eslint-disable */
 
 import express from 'express';
+import { getFirestore } from 'firebase-admin/firestore';
 import * as functions from 'firebase-functions';
 import fetch from 'node-fetch';
 import url, { URL } from 'url';
 
 const app = express();
 
+const getSiteDomain = async () => {
+  const doc = await getFirestore().collection('config').doc('site').get();
+  return doc.data().domain;
+};
+
+const getRendertronServer = async () => {
+  const doc = await getFirestore().collection('config').doc('rendertron').get();
+  return doc.data().server;
+};
+
 /**
  * generateUrl() - Piece together request parts to form FQDN URL
  * @param {Object} request
  */
-const generateUrl = (request) => {
-  // Why do we use functions.config().site.domain instead of the domain from
+const generateUrl = async (request) => {
+  // Why do we use config site.domain instead of the domain from
   // the request? Because it'll give you the wrong domain (pointed at the
   // cloudfunctions.net)
   return url.format({
     protocol: request.protocol,
-    host: functions.config().site.domain,
+    host: await getSiteDomain(),
     pathname: request.originalUrl,
   });
 };
@@ -43,16 +54,16 @@ const checkForBots = (userAgent) => {
 // configured rewrites (see "Hosting Priorities" https://firebase.google.com/docs/hosting/url-redirects-rewrites)
 //
 // The trick is on L66, pwaShell(): You must update that file! Open for explainer.
-app.get('*', (req, res) => {
+app.get('*', async (req, res) => {
   // What say you bot tester?
   const botResult = checkForBots(req.headers['user-agent']);
   if (botResult) {
     // Get me the url all nice
     const targetUrl = generateUrl(req);
 
-    // Did you read the README? You should have set functions.config().rendertron.server
+    // Did you read the README? You should have set rendertron document
     // to where ever you deployed https://github.com/GoogleChrome/rendertron on AppEngine
-    fetch(`${functions.config().rendertron.server}/render/${targetUrl}`)
+    fetch(`${await getRendertronServer()}/render/${targetUrl}`)
       .then((res) => res.text())
       .then((body) => {
         // We set Vary because we only want to cache this result for the bots

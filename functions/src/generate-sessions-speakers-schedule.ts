@@ -5,6 +5,19 @@ import * as functions from 'firebase-functions';
 import { sessionsSpeakersMap } from './schedule-generator/speakers-sessions-map.js';
 import { sessionsSpeakersScheduleMap } from './schedule-generator/speakers-sessions-schedule-map.js';
 
+const isScheduleEnabled = async (): Promise<boolean> => {
+  const doc = await getFirestore().collection('config').doc('schedule').get();
+
+  if (doc.exists) {
+    return doc.data().enabled === 'true' || doc.data().enabled === true;
+  } else {
+    console.error(
+      'Schedule config is not set. Set `config/schedule.enabled=true` Firestore value.'
+    );
+    return false;
+  }
+};
+
 export const sessionsWrite = functions.firestore
   .document('sessions/{sessionId}')
   .onWrite(async () => {
@@ -14,15 +27,7 @@ export const sessionsWrite = functions.firestore
 export const scheduleWrite = functions.firestore
   .document('schedule/{scheduleId}')
   .onWrite(async () => {
-    const scheduleConfig = functions.config().schedule;
-    if (!scheduleConfig || typeof scheduleConfig.enabled === 'undefined') {
-      console.error(
-        // eslint-disable-next-line
-        'Schedule config is NOT set! Run `firebase functions:config:set schedule.enabled=true`, redeploy functions and try again.'
-      );
-      return null;
-    }
-    if (scheduleConfig.enabled === 'true') {
+    if (await isScheduleEnabled()) {
       return generateAndSaveData();
     }
     return null;
@@ -69,19 +74,9 @@ async function generateAndSaveData(changedSpeaker?) {
     speakers?: {};
     schedule?: {};
   } = {};
-  const scheduleConfig = functions.config().schedule;
-  if (!scheduleConfig || typeof scheduleConfig.enabled === 'undefined') {
-    console.error(
-      // eslint-disable-next-line
-      'Schedule config is NOT set! Run `firebase functions:config:set schedule.enabled=true`, redeploy functions and try again.'
-    );
-    return null;
-  }
-  const scheduleEnabled = scheduleConfig.enabled === 'true';
-
   if (!Object.keys(sessions).length) {
     generatedData.speakers = { ...speakers };
-  } else if (!scheduleEnabled || !Object.keys(schedule).length) {
+  } else if ((await isScheduleEnabled()) || !Object.keys(schedule).length) {
     generatedData = sessionsSpeakersMap(sessions, speakers);
   } else {
     generatedData = sessionsSpeakersScheduleMap(sessions, speakers, schedule);

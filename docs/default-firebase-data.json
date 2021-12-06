@@ -52,15 +52,25 @@
     "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_4646.jpg?alt=media&token=eafb0320-6f21-47bc-8ba4-8eec708f2076",
     "https://firebasestorage.googleapis.com/v0/b/hoverboard-experimental.appspot.com/o/images%2Fgallery%2Fimg_5294.jpg?alt=media&token=72ab5141-d21b-4e71-a58b-faa2b00d1d02"
   ],
-  "notifications": {
-    "config": {
+  "config": {
+    "notifications": {
       "icon": "",
       "timezone": "+03:00"
     },
-    "messages": {},
-    "subscribers": {},
-    "test": {},
-    "users": {}
+    "rendertron": {
+      "server": ""
+    },
+    "site": {
+      "domain": ""
+    },
+    "schedule": {
+      "enabled": true
+    },
+    "mailchimp": {
+      "dc": "",
+      "listid": "",
+      "apikey": ""
+    }
   },
   "partners": [
     {

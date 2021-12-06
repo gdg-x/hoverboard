@@ -1,11 +1,19 @@
+// https://github.com/import-js/eslint-plugin-import/issues/1810
+// eslint-disable-next-line import/no-unresolved
+import { getFirestore } from 'firebase-admin/firestore';
 import * as functions from 'firebase-functions';
 import md5 from 'md5';
 import fetch from 'node-fetch';
 
+const getMailchimpConfig = async () => {
+  const doc = await getFirestore().collection('config').doc('mailchimp').get();
+  return doc.exists && doc.data();
+};
+
 export const mailchimpSubscribe = functions.firestore
   .document('/subscribers/{id}')
-  .onCreate((snapshot) => {
-    const mailchimpConfig = functions.config().mailchimp;
+  .onCreate(async (snapshot) => {
+    const mailchimpConfig = await getMailchimpConfig();
     if (!mailchimpConfig) {
       console.log("Can't subscribe user, Mailchimp config is empty.");
     }
