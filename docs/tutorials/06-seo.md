@@ -7,7 +7,7 @@
     ```
 1.  Deploy Firebase functions
     ```console
-      npx firebase deploy --only functions
+      npx firebase deploy
     ```
 
 `https://render-tron.appspot.com` is provided without uptime guarantees so you may want to [deploy your own version](https://github.com/GoogleChrome/rendertron).
