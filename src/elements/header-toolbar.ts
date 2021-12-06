@@ -171,6 +171,13 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
           </paper-tab>
           {% endfor %}
 
+
+
+          <a href="{$ cfpLink $}" target="_blank" rel="noopener noreferrer" ga-on="click"
+             ga-event-category="cfp button" ga-event-action="cfp_click">
+            <paper-button class="buy-button" primary>{$ cfpHeader $}</paper-button>
+          </a>
+
 <!--          <paper-tab class="signin-tab" on-click="signIn" link hidden$="[[user.signedIn]]"-->
 <!--            >{$ signIn $}</paper-tab-->
 <!--          >-->
@@ -184,7 +191,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
 <!--            ga-event-action="buy_click"-->
 <!--          >-->
 <!--            <paper-button class="buy-button" primary>{$ buyTicket $}</paper-button>-->
-          </a>
+<!--          </a>-->
         </paper-tabs>
 
         <paper-menu-button

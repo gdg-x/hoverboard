@@ -224,10 +224,10 @@ export class HoverboardApp extends ReduxMixin(PolymerElement) {
                 {$ addToHomeScreen.cta $}
               </a>
 
-              <!--            <a href="{$ cfpLink $}" target="_blank" rel="noopener noreferrer" ga-on="click"-->
-              <!--               ga-event-category="cfp button" ga-event-action="cfp_click" on-tap="closeDrawer">-->
-              <!--              <paper-button class="buy-button" primary>{$ cfpHeader $}</paper-button>-->
-              <!--            </a>-->
+              <a href="{$ cfpLink $}" target="_blank" rel="noopener noreferrer" ga-on="click"
+                 ga-event-category="cfp button" ga-event-action="cfp_click" on-tap="closeDrawer">
+                <paper-button class="buy-button" primary>{$ cfpHeader $}</paper-button>
+              </a>
 
               <!--            <a target="_scrollToBecomeSponsor" rel="noopener noreferrer" ga-on="click" on-tap="_scrollToBecomeSponsor"-->
               <!--               ga-event-category="becomSponsorGallery"  ga-event-action="scroll" ga-event-action="become_sponsor_click" on-tap="closeDrawer">-->
