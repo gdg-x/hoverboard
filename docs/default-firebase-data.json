@@ -83,7 +83,7 @@
         },
         {
           "order": 1,
-          "height": 100,
+          "height": 120,
           "logoUrl": "../images/logos/kaliop.png",
           "name": "Kaliop",
           "url": "https://www.kaliop.com/"
@@ -132,7 +132,7 @@
         {
           "order": 1,
           "height": 75,
-          "logoUrl": "../images/logos/hiway.png",
+          "logoUrl": "../images/logos/hiway-new.png",
           "name": "HIWAY",
           "url": "https://hiway.fr/"
         },

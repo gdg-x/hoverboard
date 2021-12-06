@@ -94,6 +94,7 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
                   class="logo-img"
                   srcset="[[logo.logoUrl]]"
                   sizing="contain"
+                  height="[[logo.height]]"
                   lazy-load
                   preload
                   fade
