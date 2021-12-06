@@ -60,24 +60,106 @@
   },
   "partners": [
     {
-      "items": [],
+      "items": [
+        {
+        "order": 2,
+        "height": 150,
+        "logoUrl": "../images/logos/septeo.png",
+        "name": "Septeo",
+        "url": "https://www.septeo.fr/"
+      }
+      ],
       "order": 0,
       "title": "Platinium"
     },
     {
-      "items": [],
+      "items": [
+        {
+          "order": 0,
+          "height": 100,
+          "logoUrl": "../images/logos/teads.jpg",
+          "name": "Teads",
+          "url": "https://teads.com/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/kaliop.png",
+          "name": "Kaliop",
+          "url": "https://www.kaliop.com/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/zendesk.png",
+          "name": "Zendesk",
+          "url": "https://www.zendesk.com/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/logo_believe.png",
+          "name": "Believe IT",
+          "url": "http://www.believeit.fr/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/isia.png",
+          "name": "Groupe ISIA",
+          "url": "https://groupe-isia.com/"
+        }
+      ],
       "order": 1,
       "title": "Gold"
     },
     {
-      "items": [],
+      "items": [
+        {
+          "order": 0,
+          "height": 75,
+          "logoUrl": "../images/logos/agysoft.jpeg",
+          "name": "Agysoft",
+          "url": "https://www.agysoft.fr/"
+        },
+        {
+          "order": 1,
+          "height": 75,
+          "logoUrl": "../images/logos/swile.svg",
+          "name": "Swile",
+          "url": "https://www.swile.co/"
+        },
+        {
+          "order": 1,
+          "height": 75,
+          "logoUrl": "../images/logos/hiway.png",
+          "name": "HIWAY",
+          "url": "https://hiway.fr/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/netheos.png",
+          "name": "Netheos",
+          "url": "https://www.netheos.com/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/apside.png",
+          "name": "Apside",
+          "url": "https://www.apside.com/"
+        },
+        {
+          "order": 1,
+          "height": 100,
+          "logoUrl": "../images/logos/cesi.png",
+          "name": "CESI",
+          "url": "https://www.cesi.fr/"
+        }
+      ],
       "order": 2,
       "title": "Silver"
-    },
-    {
-      "items": [],
-      "order": 3,
-      "title": "Bronze"
     },
     {
       "items": [
