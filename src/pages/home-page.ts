@@ -12,7 +12,7 @@ import '../elements/map-block';
 import '../elements/partners-block';
 // import '../elements/speakers-block';
 // import '../elements/subscribe-block';
-// import '../elements/tickets-block';
+import '../elements/tickets-block';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { toggleVideoDialog } from '../store/ui/actions';
@@ -169,18 +169,18 @@ export class HomePage extends ReduxMixin(PolymerElement) {
               <iron-icon icon="hoverboard:movie"></iron-icon>
               {$ viewHighlights $}
             </paper-button>
-<!--            <paper-button-->
-<!--              on-click="_scrollToTickets"-->
-<!--              ga-on="click"-->
-<!--              ga-event-category="tickets"-->
-<!--              ga-event-action="scroll"-->
-<!--              ga-event-label="hero block - scroll to tickets"-->
-<!--              primary-->
-<!--              invert-->
-<!--            >-->
-<!--              <iron-icon icon="hoverboard:ticket"></iron-icon>-->
-<!--              {$ buyTicket $}-->
-<!--            </paper-button>-->
+            <paper-button
+              on-click="_scrollToTickets"
+              ga-on="click"
+              ga-event-category="tickets"
+              ga-event-action="scroll"
+              ga-event-label="hero block - scroll to tickets"
+              primary
+              invert
+            >
+              <iron-icon icon="hoverboard:ticket"></iron-icon>
+              {$ buyTicket $}
+            </paper-button>
           </div>
 
           <div class="scroll-down" on-click="_scrollNextBlock">
@@ -254,7 +254,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
       <about-conference-block></about-conference-block>
 <!--      <speakers-block></speakers-block>-->
 <!--      <subscribe-block></subscribe-block>-->
-<!--      <tickets-block></tickets-block>-->
+      <tickets-block></tickets-block>
       <gallery-block></gallery-block>
       <about-organizer-block></about-organizer-block>
 <!--      <featured-videos></featured-videos>-->
