@@ -457,6 +457,20 @@
           ],
           "title": "",
           "order": 19
+        },
+        {
+          "name": "Margot Pierson",
+          "photoUrl": "/images/people/margot-pierson.jpg",
+          "photo": "/images/people/margot-pierson.jpg",
+          "socials": [
+            {
+              "icon": "linkedin",
+              "link": "https://www.linkedin.com/in/margot-pierson/",
+              "name": "LinkedIn"
+            }
+          ],
+          "title": "",
+          "order": 19
         }
       ],
       "title": "Membres"
@@ -467,12 +481,12 @@
       "available": true,
       "currency": "€",
       "ends": "",
-      "inDemand": true,
+      "inDemand": false,
       "info": "Quantité limitée",
       "name": "Early Bird",
       "price": 60,
       "regular": false,
-      "soldOut": false,
+      "soldOut": true,
       "starts": "",
       "url": "https://www.billetweb.fr/sunny-tech-2022"
     },
@@ -480,7 +494,7 @@
       "available": false,
       "currency": "€",
       "ends": "",
-      "inDemand": false,
+      "inDemand": true,
       "name": "Regular",
       "info": "",
       "price": 90,
