@@ -9,10 +9,8 @@ export const notificationsReducer = (
     case UPDATE_NOTIFICATIONS_STATUS:
       return {
         ...state,
-        ...{
-          status: action.status,
-          token: action.token,
-        },
+        status: action.status,
+        token: action.token,
       };
     default:
       return state;

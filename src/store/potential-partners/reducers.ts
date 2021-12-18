@@ -14,27 +14,21 @@ export const potentialPartnersReducer = (
     case ADD_POTENTIAL_PARTNER:
       return {
         ...state,
-        ...{
-          adding: true,
-          addingError: null,
-        },
+        adding: true,
+        addingError: null,
       };
 
     case ADD_POTENTIAL_PARTNER_FAILURE:
       return {
         ...state,
-        ...{
-          adding: false,
-          addingError: action.payload.error,
-        },
+        adding: false,
+        addingError: action.payload.error,
       };
 
     case ADD_POTENTIAL_PARTNER_SUCCESS:
       return {
         ...state,
-        ...{
-          adding: false,
-        },
+        adding: false,
       };
 
     default:
