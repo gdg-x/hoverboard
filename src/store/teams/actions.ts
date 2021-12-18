@@ -4,7 +4,7 @@ import { db } from '../../firebase';
 import { Member } from '../../models/member';
 import { Team, TeamWithoutMembers } from '../../models/team';
 import { mergeId } from '../../utils/merge-id';
-import { FETCH_TEAM, FETCH_TEAM_FAILURE, FETCH_TEAM_SUCCESS, TeamActions } from './types';
+import { FETCH_TEAMS, FETCH_TEAMS_FAILURE, FETCH_TEAMS_SUCCESS, TeamsActions } from './types';
 
 const getTeamIds = async (): Promise<TeamWithoutMembers[]> => {
   const { docs } = await getDocs(query(collection(db, 'team')));
@@ -27,19 +27,19 @@ const getTeams = async (): Promise<Team[]> => {
   return Promise.all(teamIds.map(getTeamMembers));
 };
 
-export const fetchTeam = () => async (dispatch: Dispatch<TeamActions>) => {
+export const fetchTeams = () => async (dispatch: Dispatch<TeamsActions>) => {
   dispatch({
-    type: FETCH_TEAM,
+    type: FETCH_TEAMS,
   });
 
   try {
     dispatch({
-      type: FETCH_TEAM_SUCCESS,
+      type: FETCH_TEAMS_SUCCESS,
       payload: await getTeams(),
     });
   } catch (error) {
     dispatch({
-      type: FETCH_TEAM_FAILURE,
+      type: FETCH_TEAMS_FAILURE,
       payload: error,
     });
   }

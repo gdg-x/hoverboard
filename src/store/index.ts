@@ -14,7 +14,7 @@ import { scheduleReducer } from './schedule/reducers';
 import { sessionsReducer } from './sessions/reducers';
 import { speakersReducer } from './speakers/reducers';
 import { subscribeReducer } from './subscribe/reducers';
-import { teamReducer } from './team/reducers';
+import { teamsReducer } from './teams/reducers';
 import { ticketsReducer } from './tickets/reducers';
 import { toastReducer } from './toast/reducers';
 import { uiReducer } from './ui/reducers';
@@ -42,7 +42,7 @@ export const store = configureStore({
     sessions: sessionsReducer,
     speakers: speakersReducer,
     subscribed: subscribeReducer,
-    team: teamReducer,
+    teams: teamsReducer,
     tickets: ticketsReducer,
     toast: toastReducer,
     ui: uiReducer,

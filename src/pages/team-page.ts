@@ -8,8 +8,8 @@ import 'plastic-image';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
-import { fetchTeam } from '../store/team/actions';
-import { initialTeamState, TeamState } from '../store/team/state';
+import { fetchTeams } from '../store/teams/actions';
+import { initialTeamsState, TeamsState } from '../store/teams/state';
 
 @customElement('team-page')
 export class TeamPage extends ReduxMixin(PolymerElement) {
@@ -17,7 +17,7 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
   active = false;
 
   @property({ type: Object })
-  teams: TeamState = initialTeamState;
+  teams: TeamsState = initialTeamsState;
 
   @computed('teams')
   get pending() {
@@ -204,13 +204,13 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
   }
 
   stateChanged(state: RootState) {
-    this.teams = state.team;
+    this.teams = state.teams;
   }
 
   connectedCallback() {
     super.connectedCallback();
     if (this.teams instanceof Initialized) {
-      store.dispatch(fetchTeam());
+      store.dispatch(fetchTeams());
     }
   }
 }
