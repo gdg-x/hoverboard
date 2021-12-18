@@ -37,7 +37,7 @@ export const workboxConfig = {
       },
     },
     {
-      urlPattern: /\/__\/.*/,
+      urlPattern: FIREBASE_RESERVED_URLS,
       handler: 'NetworkFirst',
       options: {
         cacheName: 'firebase-cache',
