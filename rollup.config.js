@@ -22,7 +22,7 @@ export default [
     treeshake: production,
     output: {
       file: 'dist/firebase-messaging-sw.js',
-      sourcemap: true,
+      sourcemap: production,
     },
     plugins: [
       nodeResolve(),
@@ -37,7 +37,7 @@ export default [
     output: {
       dir: 'dist',
       entryFileNames: '[name]-[hash].js',
-      sourcemap: true,
+      sourcemap: production,
     },
     plugins: [
       nodeResolve(),
