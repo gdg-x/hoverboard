@@ -8,23 +8,23 @@ import {
   Viewport,
 } from './types';
 
-export const setViewportSize = (value: Viewport) => {
+export const setViewportSize = (payload: Viewport) => {
   store.dispatch({
     type: SET_VIEWPORT_SIZE,
-    value,
+    payload,
   });
 };
 
-export const toggleVideoDialog = (value: VideoDialog) => {
+export const toggleVideoDialog = (payload: VideoDialog) => {
   store.dispatch({
     type: TOGGLE_VIDEO_DIALOG,
-    value,
+    payload,
   });
 };
 
-export const setHeroSettings = (value: Hero) => {
+export const setHeroSettings = (payload: Hero) => {
   store.dispatch({
     type: SET_HERO_SETTINGS,
-    value,
+    payload,
   });
 };

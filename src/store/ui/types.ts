@@ -27,17 +27,17 @@ export interface UiState {
 
 interface SetViewPortSizeAction {
   type: typeof SET_VIEWPORT_SIZE;
-  value: Viewport;
+  payload: Viewport;
 }
 
 interface SetHeroSettingsAction {
   type: typeof SET_HERO_SETTINGS;
-  value: Hero;
+  payload: Hero;
 }
 
 interface ToggleVideoDialogAction {
   type: typeof TOGGLE_VIDEO_DIALOG;
-  value: VideoDialog;
+  payload: VideoDialog;
 }
 
 export type UiActions = SetViewPortSizeAction | SetHeroSettingsAction | ToggleVideoDialogAction;
