@@ -1,5 +1,7 @@
 /* eslint-env node */
 
+// TODO: Rewrite in TypeScript
+
 import n from 'nunjucks';
 import fs from 'fs';
 

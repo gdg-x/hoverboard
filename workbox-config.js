@@ -1,19 +1,19 @@
 /* eslint-env node */
 
-import * as path from 'path';
+// TODO: Rewrite in TypeScript
 
 const ONE_WEEK = 60 * 60 * 24 * 7;
 const FIREBASE_RESERVED_URLS = /\/__\/.*/;
 
 export const workboxConfig = {
-  swDest: path.join(__dirname, 'dist', 'service-worker.js'),
+  swDest: 'dist/service-worker.js',
   navigateFallback: '/index.html',
   navigateFallbackDenylist: [
     FIREBASE_RESERVED_URLS, // Private Firebase URLs
   ],
   skipWaiting: true,
   offlineGoogleAnalytics: true,
-  globDirectory: path.join(__dirname, 'dist'),
+  globDirectory: 'dist',
   globPatterns: ['**/*.{html,js,css,json,svg,md}'],
   runtimeCaching: [
     {
@@ -35,7 +35,7 @@ export const workboxConfig = {
       },
     },
     {
-      urlPattern: /\/__\/.*/,
+      urlPattern: FIREBASE_RESERVED_URLS,
       handler: 'NetworkFirst',
       options: {
         cacheName: 'firebase-cache',
