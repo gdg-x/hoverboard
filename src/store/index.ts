@@ -21,36 +21,34 @@ import { uiReducer } from './ui/reducers';
 import { userReducer } from './user/reducers';
 import { videosReducer } from './videos/reducers';
 
-const rootReducer = {
-  blog: blogReducer,
-  dialogs: dialogsReducer,
-  featuredSessions: featuredSessionsReducer,
-  feedback: feedbackReducer,
-  filters: filtersReducer,
-  gallery: galleryReducer,
-  notifications: notificationsReducer,
-  partners: partnersReducer,
-  potentialPartners: potentialPartnersReducer,
-  previousSpeakers: previousSpeakersReducer,
-  routing: routingReducer,
-  schedule: scheduleReducer,
-  sessions: sessionsReducer,
-  speakers: speakersReducer,
-  subscribed: subscribeReducer,
-  team: teamReducer,
-  tickets: ticketsReducer,
-  toast: toastReducer,
-  ui: uiReducer,
-  user: userReducer,
-  videos: videosReducer,
-};
-
 export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
     }),
-  reducer: rootReducer,
+  reducer: {
+    blog: blogReducer,
+    dialogs: dialogsReducer,
+    featuredSessions: featuredSessionsReducer,
+    feedback: feedbackReducer,
+    filters: filtersReducer,
+    gallery: galleryReducer,
+    notifications: notificationsReducer,
+    partners: partnersReducer,
+    potentialPartners: potentialPartnersReducer,
+    previousSpeakers: previousSpeakersReducer,
+    routing: routingReducer,
+    schedule: scheduleReducer,
+    sessions: sessionsReducer,
+    speakers: speakersReducer,
+    subscribed: subscribeReducer,
+    team: teamReducer,
+    tickets: ticketsReducer,
+    toast: toastReducer,
+    ui: uiReducer,
+    user: userReducer,
+    videos: videosReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
