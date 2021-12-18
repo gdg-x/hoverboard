@@ -10,14 +10,10 @@ import { getMessaging, MessagePayload, onMessage } from 'firebase/messaging';
 const buildNotification = (payload: MessagePayload) => {
   const { data } = payload;
   return {
-    ...{
-      title: 'Notification',
-    },
+    title: 'Notification',
     ...data,
-    ...{
-      data: {
-        click_action: data.click_action,
-      },
+    data: {
+      click_action: data.click_action,
     },
   };
 };

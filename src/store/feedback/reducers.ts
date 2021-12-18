@@ -22,90 +22,68 @@ export const feedbackReducer = (
     case FETCH_PREVIOUS_FEEDBACK:
       return {
         ...state,
-        ...{
-          fetching: true,
-          fetchingError: null,
-        },
+        fetching: true,
+        fetchingError: null,
       };
 
     case FETCH_PREVIOUS_FEEDBACK_FAILURE:
       return {
         ...state,
-        ...{
-          fetching: false,
-          fetchingError: action.payload.error,
-        },
+        fetching: false,
+        fetchingError: action.payload.error,
       };
 
     case FETCH_PREVIOUS_FEEDBACK_SUCCESS:
       return {
         ...state,
-        ...{
-          fetching: false,
-          ...{
-            [action.payload.sessionId]: action.payload.previousFeedback,
-          },
-        },
+        fetching: false,
+        [action.payload.sessionId]: action.payload.previousFeedback,
       };
 
     case SEND_FEEDBACK:
       return {
         ...state,
-        ...{
-          adding: true,
-          addingError: null,
-        },
+        adding: true,
+        addingError: null,
       };
 
     case SEND_FEEDBACK_FAILURE:
       return {
         ...state,
-        ...{
-          adding: false,
-          addingError: action.payload.error,
-        },
+        adding: false,
+        addingError: action.payload.error,
       };
 
     case SEND_FEEDBACK_SUCCESS:
       return {
         ...state,
-        ...{
-          adding: false,
-          ...{
-            [action.payload.sessionId]: {
-              contentRating: action.payload.contentRating,
-              styleRating: action.payload.styleRating,
-              comment: action.payload.comment,
-            },
-          },
+        adding: false,
+        [action.payload.sessionId]: {
+          contentRating: action.payload.contentRating,
+          styleRating: action.payload.styleRating,
+          comment: action.payload.comment,
         },
       };
 
     case DELETE_FEEDBACK:
       return {
         ...state,
-        ...{
-          deleting: true,
-          deletingError: null,
-        },
+        deleting: true,
+        deletingError: null,
       };
 
     case DELETE_FEEDBACK_FAILURE:
       return {
         ...state,
-        ...{
-          deleting: false,
-          deletingError: action.payload.error,
-        },
+        deleting: false,
+        deletingError: action.payload.error,
       };
 
     case DELETE_FEEDBACK_SUCCESS:
       return {
         ...state,
-        ...{
-          deleting: false,
-          [action.payload.sessionId]: null,
-        },
+        deleting: false,
+        [action.payload.sessionId]: null,
       };
 
     case WIPE_PREVIOUS_FEEDBACK:

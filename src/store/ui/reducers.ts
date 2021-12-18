@@ -6,17 +6,17 @@ export const uiReducer = (state = initialUiState, action: UiActions) => {
     case TOGGLE_VIDEO_DIALOG:
       return {
         ...state,
-        ...{ videoDialog: action.value },
+        videoDialog: action.value,
       };
     case SET_VIEWPORT_SIZE:
       return {
         ...state,
-        ...{ viewport: action.value },
+        viewport: action.value,
       };
     case SET_HERO_SETTINGS:
       return {
         ...state,
-        ...{ heroSettings: action.value },
+        heroSettings: action.value,
       };
     default:
       return state;
