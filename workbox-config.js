@@ -1,5 +1,7 @@
 /* eslint-env node */
 
+// TODO: Rewrite in TypeScript
+
 import * as path from 'path';
 
 const ONE_WEEK = 60 * 60 * 24 * 7;
