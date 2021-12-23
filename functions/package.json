@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "npm run clean && concurrently npm:build:*",
-    "build:index": "copy-and-watch \"../dist/*.html\" dist",
+    "build:index": "cpx \"../dist/*.html\" dist",
     "build:src": "tsc",
     "clean": "rimraf dist",
     "start": "npm run clean && concurrently npm:start:*",
@@ -32,7 +32,7 @@
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",
     "concurrently": "^6.4.0",
-    "copy-and-watch": "^0.1.6",
+    "cpx2": "^4.1.2",
     "rimraf": "^3.0.2",
     "typescript": "^4.4.4"
   }
