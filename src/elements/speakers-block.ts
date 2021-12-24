@@ -222,8 +222,8 @@ export class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
   }
 
   _openSpeaker(e) {
-    window.history.pushState({}, null, '/speakers/');
-    window.history.pushState({}, null, `/speakers/${e.model.speaker.id}/`);
+    window.history.pushState({}, '', '/speakers/');
+    window.history.pushState({}, '', `/speakers/${e.model.speaker.id}/`);
     window.dispatchEvent(new CustomEvent('location-changed'));
   }
 

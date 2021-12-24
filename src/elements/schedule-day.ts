@@ -1,6 +1,8 @@
 import { customElement, observe, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ELEMENTS, getElement } from '../global';
+import { Filter } from '../models/filter';
+import { Session } from '../models/session';
 import {
   FeaturedSessionsState,
   initialFeaturedSessionsState,
@@ -206,20 +208,22 @@ export class ScheduleDay extends PolymerElement {
     return !!sessionBlock.items.length;
   }
 
-  _filterSessions(sessions, selectedFilters) {
-    if (!selectedFilters) return sessions;
+  _filterSessions(sessions: Session[], selectedFilters: Filter[]) {
+    if (selectedFilters.length === 0) {
+      return sessions;
+    }
+
     return sessions.filter((session) => {
-      return (
-        (!selectedFilters.tag ||
-          !selectedFilters.tag.length ||
-          (session.tags &&
-            !!session.tags.filter((tag) => selectedFilters.tag.includes(generateClassName(tag)))
-              .length)) &&
-        (!selectedFilters.complexity ||
-          !selectedFilters.complexity.length ||
-          (session.complexity &&
-            selectedFilters.complexity.includes(generateClassName(session.complexity))))
-      );
+      return selectedFilters.every((filter) => {
+        const values = session[filter.group];
+        if (values === undefined) {
+          return false;
+        } else if (typeof values === 'string') {
+          return generateClassName(values) === generateClassName(filter.tag);
+        } else {
+          return values.some((value) => generateClassName(value) === generateClassName(filter.tag));
+        }
+      });
     });
   }
 }

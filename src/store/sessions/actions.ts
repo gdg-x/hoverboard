@@ -3,7 +3,6 @@ import { Dispatch } from 'redux';
 import { db } from '../../firebase';
 import { Session } from '../../models/session';
 import { mergeId } from '../../utils/merge-id';
-import { FiltersActions, SET_FILTERS } from '../filters/types';
 import {
   FETCH_SESSIONS,
   FETCH_SESSIONS_FAILURE,
@@ -13,40 +12,18 @@ import {
 
 const getSessions = async () => {
   const { docs } = await getDocs(query(collection(db, 'generatedSessions')));
-  const tagFilters = new Set<string>();
-  const complexityFilters = new Set<string>();
-  const sessions = docs.map<Session>(mergeId);
-
-  sessions.forEach((session) => {
-    (session.tags || []).map((tag) => tagFilters.add(tag.trim()));
-    session.complexity && complexityFilters.add(session.complexity.trim());
-  });
-
-  return {
-    complexityFilters,
-    sessions,
-    tagFilters,
-  };
+  return docs.map<Session>(mergeId);
 };
 
-export const fetchSessions = () => async (dispatch: Dispatch<SessionsActions | FiltersActions>) => {
+export const fetchSessions = () => async (dispatch: Dispatch<SessionsActions>) => {
   dispatch({
     type: FETCH_SESSIONS,
   });
 
   try {
-    const { complexityFilters, sessions, tagFilters } = await getSessions();
-
     dispatch({
       type: FETCH_SESSIONS_SUCCESS,
-      payload: sessions,
-    });
-    dispatch({
-      type: SET_FILTERS,
-      payload: {
-        tags: [...tagFilters].sort(),
-        complexity: [...complexityFilters],
-      },
+      payload: await getSessions(),
     });
   } catch (error) {
     dispatch({

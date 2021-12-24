@@ -14,13 +14,16 @@ import '../elements/shared-styles';
 import '../elements/text-truncate';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
+import { Filter } from '../models/filter';
+import { FilterGroup, FilterGroupKey } from '../models/filter-group';
+import { SpeakerWithTags } from '../models/speaker';
 import { RootState } from '../store';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
+import { selectFiltersGroups } from '../store/sessions/state';
 import { SpeakersState } from '../store/speakers/state';
 import { isDialogOpen } from '../utils/dialogs';
-import { generateClassName, parseQueryParamsFilters } from '../utils/functions';
-
+import { generateClassName, selectFilters } from '../utils/functions';
 @customElement('speakers-page')
 export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
   static get template() {
@@ -185,8 +188,8 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
       <paper-progress indeterminate hidden$="[[contentLoaderVisibility]]"></paper-progress>
 
       <filter-menu
-        filters="[[_filters]]"
-        selected="[[_selectedFilters]]"
+        filter-groups="[[filterGroups]]"
+        selected-filters="[[selectedFilters]]"
         results-count="[[speakersToRender.length]]"
       ></filter-menu>
 
@@ -292,12 +295,10 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
   private isSessionDialogOpened = false;
   @property({ type: String })
   private contentLoaderVisibility;
-  @property({ type: Object })
-  private filters = {};
-  @property({ type: Object })
-  private _selectedFilters = {};
   @property({ type: Array })
-  private _filters = [];
+  private filterGroups: FilterGroup[] = [];
+  @property({ type: Array })
+  private selectedFilters: Filter[] = [];
   @property({ type: Array })
   private speakersToRender = [];
 
@@ -305,15 +306,16 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     super.stateChanged(state);
     this.isSpeakerDialogOpened = isDialogOpen(state.dialogs, DIALOGS.SPEAKER);
     this.isSessionDialogOpened = isDialogOpen(state.dialogs, DIALOGS.SESSION);
-    this.filters = state.filters;
+    this.filterGroups = selectFiltersGroups(state).filter(
+      (filterGroup) => filterGroup.key === FilterGroupKey.tags
+    );
   }
 
-  @observe('speakers', '_selectedFilters')
-  _speakersChanged(speakers: SpeakersState, selectedFilters) {
+  @observe('speakers', 'selectedFilters')
+  _speakersChanged(speakers: SpeakersState, selectedFilters: Filter[]) {
     if (speakers instanceof Success) {
       this.contentLoaderVisibility = 'hidden';
-      const filters = selectedFilters && selectedFilters.tag ? selectedFilters.tag : [];
-      const updatedSpeakers = this._filterItems(speakers.data, filters).map((speaker) =>
+      const updatedSpeakers = this._filterItems(speakers.data, selectedFilters).map((speaker) =>
         Object.assign({}, speaker, {
           link: `/speakers/${speaker.id}${this.queryParams ? `?${this.queryParams}` : ''}`,
         })
@@ -323,7 +325,7 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
   }
 
   @observe('active', 'speakers', 'routeData.speakerId')
-  _openSpeakerDetails(active, speakers: SpeakersState, id: string) {
+  _openSpeakerDetails(active: boolean, speakers: SpeakersState, id: string) {
     if (speakers instanceof Success) {
       requestAnimationFrame(() => {
         if (active && id) {
@@ -337,33 +339,23 @@ export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     }
   }
 
-  _setHelmetData(active, isSpeakerDialogOpened, isSessionDialogOpened) {
+  _setHelmetData(active: boolean, isSpeakerDialogOpened: boolean, isSessionDialogOpened: boolean) {
     return active && !isSpeakerDialogOpened && !isSessionDialogOpened;
   }
 
-  @observe('filters')
-  _onFiltersLoad(filters) {
-    this._filters = [
-      {
-        title: '{$ filters.tags $}',
-        key: 'tag',
-        items: filters.tags,
-      },
-    ];
-  }
-
   @observe('queryParams')
-  _paramsUpdated(queryParams) {
-    this._selectedFilters = parseQueryParamsFilters(queryParams);
+  _paramsUpdated(queryParams: string) {
+    this.selectedFilters = selectFilters();
   }
 
-  _filterItems(speakers, selectedFilters) {
+  _filterItems(speakers: SpeakerWithTags[], selectedFilters: Filter[]) {
+    if (selectedFilters.length === 0) return speakers;
+
     return speakers.filter((speaker) => {
-      if (!selectedFilters || !selectedFilters.length) return true;
-      return (
-        speaker.tags &&
-        !!speaker.tags.filter((tag) => selectedFilters.includes(generateClassName(tag))).length
-      );
+      return (speaker.tags || []).some((tag) => {
+        const className = generateClassName(tag);
+        return selectedFilters.some((filter) => filter.tag === className);
+      });
     });
   }
 }
