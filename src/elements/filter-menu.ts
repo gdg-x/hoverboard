@@ -1,7 +1,9 @@
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-location/iron-location';
 import { html, PolymerElement } from '@polymer/polymer';
-import { generateClassName, getVariableColor, toggleQueryParam } from '../utils/functions';
+import { Filter } from '../models/filter';
+import { FilterGroup, FilterGroupKey } from '../models/filter-group';
+import { generateClassName, getVariableColor, toggleFilter } from '../utils/functions';
 import './shared-styles';
 
 @customElement('filter-menu')
@@ -84,7 +86,7 @@ export class FilterMenu extends PolymerElement {
       <div class="filters-toolbar container">
         <div layout horizontal center>
           <div layout horizontal center flex>
-            <div class="results" hidden$="[[_hideResultText(resultsCount, _selectedArray)]]">
+            <div class="results" hidden$="[[hideResultText]]">
               [[resultsCount]] {$ filters.results $}
             </div>
           </div>
@@ -94,24 +96,24 @@ export class FilterMenu extends PolymerElement {
               class="reset-filters"
               role="button"
               on-click="_resetFilters"
-              hidden$="[[!_selectedArray.length]]"
+              hidden$="[[!selectedFilters.length]]"
             >
               {$ filters.clear $}
             </span>
             <paper-button class="icon-right" on-click="_toggleBoard">
               {$ filters.title $}
-              <iron-icon icon="hoverboard:[[_getFilterIcon(_openedBoard)]]"></iron-icon>
+              <iron-icon icon="hoverboard:[[icon]]"></iron-icon>
             </paper-button>
           </div>
         </div>
 
-        <div class="selected-filters" hidden$="[[!_selectedArray.length]]">
-          <template is="dom-repeat" items="[[_selectedArray]]" as="selectedFilter">
+        <div class="selected-filters" hidden$="[[!selectedFilters.length]]">
+          <template is="dom-repeat" items="[[selectedFilters]]" as="selectedFilter">
             <div
               class="tag"
-              style$="--color: [[getVariableColor(selectedFilter.value, 'primary-text-color')]]"
-              filter-key$="[[selectedFilter.key]]"
-              filter-value$="[[selectedFilter.value]]"
+              style$="--color: [[getVariableColor(selectedFilter.tag, 'primary-text-color')]]"
+              filter-key$="[[selectedFilter.group]]"
+              filter-value$="[[selectedFilter.tag]]"
               on-click="_toggleFilter"
               selected
               layout
@@ -119,32 +121,32 @@ export class FilterMenu extends PolymerElement {
               inline
               center
             >
-              <span>[[selectedFilter.value]]</span>
+              <span>[[selectedFilter.tag]]</span>
               <iron-icon icon="hoverboard:close"></iron-icon>
             </div>
           </template>
         </div>
       </div>
 
-      <div class="filters-board" block$="[[_openedBoard]]">
+      <div class="filters-board" block$="[[opened]]">
         <div class="container">
-          <template is="dom-repeat" items="[[filters]]" as="filter">
+          <template is="dom-repeat" items="[[filterGroups]]" as="filterGroup">
             <div class="filter-group">
-              <h3 class="filter-title">[[filter.title]]</h3>
-              <template is="dom-repeat" items="[[filter.items]]" as="item">
+              <h3 class="filter-title">[[filterGroup.title]]</h3>
+              <template is="dom-repeat" items="[[filterGroup.filters]]" as="filter">
                 <div
                   layout
                   horizontal
                   inline
                   center
                   class="tag"
-                  style$="--color: [[getVariableColor(item, 'primary-text-color')]]"
-                  filter-key$="[[filter.key]]"
-                  filter-value$="[[item]]"
-                  selected$="[[_isSelected(selected, filter.key, item)]]"
+                  style$="--color: [[getVariableColor(filter.tag, 'primary-text-color')]]"
+                  filter-key$="[[filterGroup.key]]"
+                  filter-value$="[[filter.tag]]"
+                  selected$="[[isSelected(selectedFilters, filter)]]"
                   on-click="_toggleFilter"
                 >
-                  [[item]]
+                  [[filter.tag]]
                 </div>
               </template>
             </div>
@@ -155,63 +157,57 @@ export class FilterMenu extends PolymerElement {
   }
 
   @property({ type: Array })
-  filters = [];
+  filterGroups: FilterGroup[] = [];
   @property({ type: Number })
-  private resultsCount = 0;
-  @property({ type: Object })
-  selected = {};
+  resultsCount: number = undefined;
+  @property({ type: Array })
+  selectedFilters: Filter[] = [];
   @property({ type: String })
   private queryParams: string;
   @property({ type: Boolean })
-  private _openedBoard = false;
+  opened = false;
 
   constructor() {
     super();
     this._clickOutsideListener = this._clickOutsideListener.bind(this);
   }
 
-  _isSelected(selectedFilters, key, value) {
-    return selectedFilters[key] && selectedFilters[key].includes(generateClassName(value.trim()));
+  isSelected(selectedFilters: Filter[], search: Filter) {
+    return selectedFilters.some(
+      (filter) => filter.tag === search.tag.toLocaleLowerCase() && filter.group === search.group
+    );
   }
 
-  _toggleFilter(e) {
-    const filterKey = e.currentTarget.getAttribute('filter-key');
-    const filter = generateClassName(e.currentTarget.getAttribute('filter-value').trim());
-    this.queryParams = toggleQueryParam(this.queryParams, filterKey, filter);
-  }
-
-  @computed('selected', 'filters')
-  private get _selectedArray() {
-    const { selected, filters } = this;
-
-    if (!selected || !filters) return [];
-
-    const targetFilters = filters.map((filter) => filter.key);
-    return Object.keys(selected)
-      .filter((key) => targetFilters.includes(key))
-      .reduce((aggr, key) => aggr.concat(selected[key].map((value) => ({ key, value }))), []);
+  _toggleFilter(e: Event) {
+    const currentTarget = e.currentTarget as HTMLElement;
+    const group = currentTarget.getAttribute('filter-key').trim() as FilterGroupKey;
+    const tag = generateClassName(currentTarget.getAttribute('filter-value').trim());
+    toggleFilter({ group, tag });
   }
 
   _toggleBoard() {
-    if (this._openedBoard) {
+    if (this.opened) {
       this._clickOutsideUnlisten();
     } else {
       this._clickOutsideListen();
     }
-    this._openedBoard = !this._openedBoard;
+    this.opened = !this.opened;
   }
 
-  _resetFilters(e) {
+  _resetFilters(e: MouseEvent) {
     e.preventDefault();
     this.queryParams = '';
   }
 
-  _getFilterIcon(state) {
-    return state ? 'close' : 'filter-list';
+  @computed('opened')
+  get icon() {
+    return this.opened ? 'close' : 'filter-list';
   }
 
-  _hideResultText(resultsCount, _selectedArray) {
-    return !_selectedArray || !_selectedArray.length || typeof resultsCount === 'undefined';
+  @computed('selectedFilters', 'resultsCount')
+  get hideResultText() {
+    const { selectedFilters, resultsCount } = this;
+    return selectedFilters.length === 0 || typeof resultsCount === 'undefined';
   }
 
   _clickOutsideListen() {

@@ -15,6 +15,8 @@ import '../elements/sticky-element';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SessionsHoC } from '../mixins/sessions-hoc';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
+import { Filter } from '../models/filter';
+import { FilterGroup } from '../models/filter-group';
 import { RootState, store } from '../store';
 import { closeDialog, openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
@@ -26,10 +28,10 @@ import {
 import { setSubRoute } from '../store/routing/actions';
 import { fetchSchedule } from '../store/schedule/actions';
 import { initialScheduleState, ScheduleState } from '../store/schedule/state';
-import { SessionsState } from '../store/sessions/state';
+import { selectFiltersGroups, SessionsState } from '../store/sessions/state';
 import { SpeakersState } from '../store/speakers/state';
 import { isDialogOpen } from '../utils/dialogs';
-import { parseQueryParamsFilters } from '../utils/functions';
+import { parseQueryParamsFilters, selectFilters } from '../utils/functions';
 
 @customElement('schedule-page')
 export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) {
@@ -97,7 +99,10 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
 
       <paper-progress indeterminate hidden$="[[!pending]]"></paper-progress>
 
-      <filter-menu filters="[[_filters]]" selected="[[_selectedFilters]]"></filter-menu>
+      <filter-menu
+        filter-groups="[[filterGroups]]"
+        selected-filters="[[selectedFilters]]"
+      ></filter-menu>
 
       <div class="container">
         <content-loader
@@ -127,7 +132,7 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
               day="[[day]]"
               user="[[user]]"
               featured-sessions="[[featuredSessions]]"
-              selected-filters="[[_selectedFilters]]"
+              selected-filters="[[selectedFilters]]"
               viewport="[[viewport]]"
               query-params="[[queryParams]]"
             ></schedule-day>
@@ -137,7 +142,7 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
             schedule="[[schedule]]"
             user="[[user]]"
             featured-sessions="[[featuredSessions]]"
-            selected-filters="[[_selectedFilters]]"
+            selected-filters="[[selectedFilters]]"
             viewport="[[viewport]]"
             query-params="[[queryParams]]"
           ></my-schedule>
@@ -169,29 +174,30 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
   private isSessionDialogOpened = false;
   @property({ type: Object })
   private viewport = {};
-  @property({ type: Object })
-  private filters = {};
   @property({ type: Array })
-  private _filters = [];
-  @property({ type: Object })
-  private _selectedFilters: { sessionId?: string[] } = {};
+  private filterGroups: FilterGroup[] = [];
+  @property({ type: Array })
+  private selectedFilters: Filter[] = [];
   @property({ type: Object })
   private routeData = {};
   @property({ type: Object })
   private appRoute = {};
   @property({ type: Object })
   private nQueryParams = {};
+  @property({ type: Number })
+  private sessionId: number | undefined;
 
   stateChanged(state: RootState) {
     super.stateChanged(state);
     this.featuredSessions = state.featuredSessions;
-    this.filters = state.filters;
     this.isSessionDialogOpened = isDialogOpen(state.dialogs, DIALOGS.SESSION);
     this.isSpeakerDialogOpened = isDialogOpen(state.dialogs, DIALOGS.SPEAKER);
     this.schedule = state.schedule;
     this.subRoute = state.routing.subRoute;
     this.user = state.user;
     this.viewport = state.ui.viewport;
+    this.filterGroups = selectFiltersGroups(state);
+    this.selectedFilters = selectFilters();
   }
 
   @observe('sessions', 'speakers')
@@ -230,7 +236,7 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
     }
   }
 
-  @observe('active', 'sessions', '_selectedFilters.sessionId')
+  @observe('active', 'sessions', 'sessionId')
   _openSessionDetails(active: boolean, sessions: SessionsState, ids?: string[]) {
     if (sessions instanceof Success) {
       requestAnimationFrame(() => {
@@ -248,24 +254,9 @@ export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElem
     return active && !isSpeakerDialogOpened && !isSessionDialogOpened;
   }
 
-  @observe('filters')
-  _onFiltersLoad(filters) {
-    this._filters = [
-      {
-        title: '{$ filters.tags $}',
-        key: 'tag',
-        items: filters.tags,
-      },
-      {
-        title: '{$ filters.complexity $}',
-        key: 'complexity',
-        items: filters.complexity,
-      },
-    ];
-  }
-
   @observe('queryParams')
   _paramsUpdated(queryParams: string) {
-    this._selectedFilters = parseQueryParamsFilters(queryParams);
+    this.selectedFilters = selectFilters();
+    this.sessionId = parseQueryParamsFilters(queryParams).sessionId;
   }
 }

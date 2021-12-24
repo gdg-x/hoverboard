@@ -21,3 +21,7 @@ export interface SpeakerData {
 }
 
 export type Speaker = Id & SpeakerData;
+
+export type SpeakerWithTags = Speaker & {
+  tags: string[];
+};
