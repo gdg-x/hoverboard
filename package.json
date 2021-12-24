@@ -22,16 +22,15 @@
     "lint:eslint": "eslint . --ext .ts --ext .js",
     "lint:prettier": "prettier --check .",
     "lint:stylelint": "stylelint \"src/components/**/*.ts\" \"src/styles/**/*.ts\"",
+    "lint:types:functions": "npm --prefix ./functions run build",
+    "lint:types:web": "tsc --noEmit",
     "postinstall": "npm run install:functions",
     "serve": "NODE_ENV=production concurrently --kill-others npm:start:*",
     "start": "NODE_ENV=development concurrently --kill-others npm:start:*",
     "start:emulators": "firebase emulators:start",
     "start:functions": "npm --prefix functions start",
     "start:rollup": "rollup --config rollup.config.js --watch",
-    "test": "jest",
-    "types": "concurrently npm:types:*",
-    "types:functions": "npm --prefix ./functions run build",
-    "types:web": "tsc --noEmit"
+    "test": "jest"
   },
   "dependencies": {
     "@abraham/remotedata": "^0.8.0",
