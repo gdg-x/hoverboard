@@ -259,7 +259,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     return false;
   }
 
-  _getEnding(number) {
+  _getEnding(number: number) {
     return number > 1 ? 's' : '';
   }
 
@@ -276,7 +276,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     return this.isFeatured ? 'bookmark-check' : 'bookmark-plus';
   }
 
-  _toggleFeaturedSession(event) {
+  _toggleFeaturedSession(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
     if (!this.user.signedIn) {
@@ -284,9 +284,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
         message: '{$ schedule.saveSessionsSignedOut $}',
         action: {
           title: 'Sign in',
-          callback: () => {
-            openDialog(DIALOGS.SIGNIN);
-          },
+          callback: () => openDialog(DIALOGS.SIGNIN),
         },
       });
       return;
@@ -301,7 +299,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     }
   }
 
-  _toggleFeedback(event) {
+  _toggleFeedback(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
     openDialog(DIALOGS.FEEDBACK, this.session);
@@ -320,7 +318,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     return diff > 0 && diff < ONE_WEEK_MS;
   }
 
-  _join(company, country) {
+  _join(company: string, country: string) {
     return [company, country].filter(Boolean).join(' / ');
   }
 
@@ -332,7 +330,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     return getVariableColor(this, value);
   }
 
-  slice(text, number) {
+  slice(text: string, number: number) {
     return text && text.slice(0, number);
   }
 }
