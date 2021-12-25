@@ -13,9 +13,9 @@ import {
 } from './types';
 
 const getFeaturedSessions = async (userId: string): Promise<FeaturedSessions> => {
-  const { data } = await getDoc<FeaturedSessions>(doc(db, 'featuredSessions', userId));
+  const snapshot = await getDoc(doc(db, 'featuredSessions', userId));
 
-  return data() || {};
+  return snapshot.data() || {};
 };
 
 export const fetchUserFeaturedSessions =
