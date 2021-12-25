@@ -7,6 +7,7 @@ export enum NOTIFICATIONS_STATUS {
 
 export interface NotificationState {
   status: NOTIFICATIONS_STATUS;
+  token?: string;
 }
 
 interface UpdateNotificationsStatusAction {

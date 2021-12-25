@@ -1,10 +1,10 @@
 import { initialNotificationState } from './state';
-import { NotificationActions, UPDATE_NOTIFICATIONS_STATUS } from './types';
+import { NotificationActions, NotificationState, UPDATE_NOTIFICATIONS_STATUS } from './types';
 
 export const notificationsReducer = (
   state = initialNotificationState,
   action: NotificationActions
-) => {
+): NotificationState => {
   switch (action.type) {
     case UPDATE_NOTIFICATIONS_STATUS:
       return {

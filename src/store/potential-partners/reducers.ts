@@ -4,12 +4,13 @@ import {
   ADD_POTENTIAL_PARTNER_FAILURE,
   ADD_POTENTIAL_PARTNER_SUCCESS,
   PotentialPartnerActions,
+  PotentialPartnersState,
 } from './types';
 
 export const potentialPartnersReducer = (
   state = initialPotentialPartnersState,
   action: PotentialPartnerActions
-) => {
+): PotentialPartnersState => {
   switch (action.type) {
     case ADD_POTENTIAL_PARTNER:
       return {
