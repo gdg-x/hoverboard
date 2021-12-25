@@ -1,5 +1,7 @@
+import { Success } from '@abraham/remotedata';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
+import { store } from '..';
 import { db } from '../../firebase';
 import { FeaturedSessions } from './state';
 import {
@@ -11,6 +13,24 @@ import {
   SET_USER_FEATURED_SESSIONS_FAILURE,
   SET_USER_FEATURED_SESSIONS_SUCCESS,
 } from './types';
+
+const selectFeaturedSessions = (): FeaturedSessions => {
+  const featuredSessions = store.getState().featuredSessions;
+  if (featuredSessions instanceof Success) {
+    return featuredSessions.data;
+  } else {
+    return {};
+  }
+};
+
+export const buildFeaturedSessions = (sessionId: string, featured: boolean): FeaturedSessions => {
+  const sessions = {
+    ...selectFeaturedSessions(),
+    [sessionId]: featured,
+  };
+
+  return sessions;
+};
 
 const getFeaturedSessions = async (userId: string): Promise<FeaturedSessions> => {
   const snapshot = await getDoc(doc(db, 'featuredSessions', userId));
@@ -44,6 +64,11 @@ const setFeaturedSessions = async (
   await setDoc(doc(db, 'featuredSessions', userId), featuredSessions);
 };
 
+const cleanFeaturedSessions = (object: FeaturedSessions): FeaturedSessions => {
+  const hasValue = ([_key, value]: [string, unknown]) => Boolean(value);
+  return Object.fromEntries(Object.entries(object).filter(hasValue));
+};
+
 export const setUserFeaturedSessions =
   (userId: string, featuredSessions: FeaturedSessions) =>
   async (dispatch: Dispatch<FeaturedSessionsActions>) => {
@@ -52,10 +77,11 @@ export const setUserFeaturedSessions =
     });
 
     try {
-      await setFeaturedSessions(userId, featuredSessions);
+      const cleanedFeaturedSessions = cleanFeaturedSessions(featuredSessions);
+      await setFeaturedSessions(userId, cleanedFeaturedSessions);
       dispatch({
         type: SET_USER_FEATURED_SESSIONS_SUCCESS,
-        payload: featuredSessions,
+        payload: cleanedFeaturedSessions,
       });
     } catch (error) {
       dispatch({
