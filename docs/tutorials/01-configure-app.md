@@ -56,15 +56,7 @@ The top block (aka 'hero') view of the page can be adjusted via `heroSettings` i
 ```
 
 If you don't need some pages, don't forget to remove them (or comment out)
-in `hoverboard-app.html`
-
-```html
-<iron-pages>
-  <home-page data-route="home"></home-page>
-  <blog-page data-route="blog" route="[[subRoute]]"></blog-page>
-  <speakers-page data-route="speakers" route="[[subRoute]]"></speakers-page>
-</iron-pages>
-```
+in `src/router.ts`
 
 ### Toolbar Navigation
 

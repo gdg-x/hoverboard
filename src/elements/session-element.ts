@@ -3,7 +3,6 @@ import { customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
-import { ReduxMixin } from '../mixins/redux-mixin';
 import { Session } from '../models/session';
 import { store } from '../store';
 import { openDialog } from '../store/dialogs/actions';
@@ -14,12 +13,13 @@ import {
   initialFeaturedSessionsState,
 } from '../store/featured-sessions/state';
 import { showToast } from '../store/toast/actions';
+import { initialUserState } from '../store/user/state';
 import { getVariableColor, toggleQueryParam } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
 
 @customElement('session-element')
-export class SessionElement extends ReduxMixin(PolymerElement) {
+export class SessionElement extends PolymerElement {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -236,11 +236,11 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
-  private user: { uid?: string; signedIn?: boolean } = {};
+  private user = initialUserState;
   @property({ type: Object })
   private session: Session;
   @property({ type: Object })
-  private featuredSessions: FeaturedSessionsState = initialFeaturedSessionsState;
+  private featuredSessions = initialFeaturedSessionsState;
   @property({ type: String })
   private queryParams: string;
   @property({ type: String })
@@ -279,6 +279,7 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
   _toggleFeaturedSession(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
+
     if (!this.user.signedIn) {
       showToast({
         message: '{$ schedule.saveSessionsSignedOut $}',
@@ -291,9 +292,10 @@ export class SessionElement extends ReduxMixin(PolymerElement) {
     }
 
     if (this.featuredSessions instanceof Success) {
-      const sessions = Object.assign({}, this.featuredSessions.data, {
-        [this.session.id]: !this.featuredSessions.data[this.session.id] ? true : null,
-      });
+      const sessions = {
+        ...this.featuredSessions.data,
+        [this.session.id]: !this.featuredSessions.data[this.session.id],
+      };
 
       store.dispatch(setUserFeaturedSessions(this.user.uid, sessions));
     }

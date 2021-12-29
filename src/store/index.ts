@@ -8,7 +8,6 @@ import { notificationsReducer } from './notifications/reducers';
 import { partnersReducer } from './partners/reducers';
 import { potentialPartnersReducer } from './potential-partners/reducers';
 import { previousSpeakersReducer } from './previous-speakers/reducers';
-import { routingReducer } from './routing/reducers';
 import { scheduleReducer } from './schedule/reducers';
 import { sessionsReducer } from './sessions/reducers';
 import { speakersReducer } from './speakers/reducers';
@@ -35,7 +34,6 @@ export const store = configureStore({
     partners: partnersReducer,
     potentialPartners: potentialPartnersReducer,
     previousSpeakers: previousSpeakersReducer,
-    routing: routingReducer,
     schedule: scheduleReducer,
     sessions: sessionsReducer,
     speakers: speakersReducer,

@@ -1,12 +1,13 @@
-import { Pending } from '@abraham/remotedata';
+import { Initialized, Pending, Success } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-location/iron-location';
 import { html, PolymerElement } from '@polymer/polymer';
+import { RouterLocation } from '@vaadin/router';
 import { ELEMENTS, setElement } from '../global';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
-import { initialRoutingState, RoutingState } from '../store/routing/state';
-import { initialScheduleState, ScheduleState } from '../store/schedule/state';
+import { fetchSchedule } from '../store/schedule/actions';
+import { initialScheduleState } from '../store/schedule/state';
+import { initialUserState } from '../store/user/state';
 import './content-loader';
 import './shared-styles';
 
@@ -47,8 +48,6 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
         }
       </style>
 
-      <iron-location query="{{queryParams}}"></iron-location>
-
       <app-toolbar class="bottom-toolbar">
         <content-loader
           class="nav-items"
@@ -73,7 +72,7 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
 
         <paper-tabs
           class="nav-items"
-          selected="[[route.subRoute]]"
+          selected="[[selectedTab]]"
           attr-for-selected="day"
           hidden$="[[pending]]"
           scrollable
@@ -82,13 +81,17 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
         >
           <template is="dom-repeat" items="[[schedule.data]]" as="day">
             <paper-tab class="nav-item" day="[[day.date]]" link>
-              <a href$="[[_addQueryParams(day.date, queryParams)]]" layout vertical center-center
+              <a href$="[[addQueryParams(day.date, location.search)]]" layout vertical center-center
                 >[[day.dateReadable]]</a
               >
             </paper-tab>
           </template>
           <paper-tab class="nav-item" day="my-schedule" hidden$="[[!user.signedIn]]" link>
-            <a href$="[[_addQueryParams('my-schedule', queryParams)]]" layout vertical center-center
+            <a
+              href$="[[addQueryParams('my-schedule', location.search)]]"
+              layout
+              vertical
+              center-center
               >{$ mySchedule.title $}</a
             >
           </paper-tab>
@@ -98,15 +101,13 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
-  schedule: ScheduleState = initialScheduleState;
-
+  schedule = initialScheduleState;
   @property({ type: Object })
-  private route: RoutingState = initialRoutingState;
+  location: RouterLocation;
   @property({ type: Object })
-  private user = {};
+  private user = initialUserState;
 
   stateChanged(state: RootState) {
-    this.route = state.routing;
     this.schedule = state.schedule;
     this.user = state.user;
   }
@@ -114,14 +115,34 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
   connectedCallback() {
     super.connectedCallback();
     setElement(ELEMENTS.STICKY_HEADER_TOOLBAR, this);
+    if (this.schedule instanceof Initialized) {
+      fetchSchedule();
+    }
   }
 
   @computed('schedule')
-  get pending() {
+  private get pending() {
     return this.schedule instanceof Pending;
   }
 
-  _addQueryParams(tab, queryParams) {
-    return `/schedule/${tab}${queryParams ? `?${queryParams}` : ''}`;
+  @computed('location', 'schedule')
+  private get selectedTab() {
+    if (this.location && this.schedule instanceof Success) {
+      const {
+        params: { id },
+        pathname,
+      } = this.location;
+      if (pathname.endsWith('my-schedule')) {
+        return 'my-schedule';
+      } else {
+        return id || this.schedule.data[0].date;
+      }
+    } else {
+      return undefined;
+    }
+  }
+
+  private addQueryParams(id: string, queryParams: string) {
+    return `/schedule/${id}${queryParams || ''}`;
   }
 }

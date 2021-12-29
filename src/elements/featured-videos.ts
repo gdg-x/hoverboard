@@ -9,7 +9,7 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { toggleVideoDialog } from '../store/ui/actions';
 import { fetchVideos } from '../store/videos/actions';
-import { initialVideosState, VideoState } from '../store/videos/state';
+import { initialVideosState } from '../store/videos/state';
 import './shared-animations';
 import './shared-styles';
 
@@ -207,10 +207,8 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
-  videos: VideoState = initialVideosState;
+  videos = initialVideosState;
 
-  @property({ type: Object })
-  private viewport = {};
   @property({ type: Boolean })
   private _leftArrowHidden = true;
   @property({ type: Boolean })
@@ -228,7 +226,6 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
 
   stateChanged(state: RootState) {
     this.videos = state.videos;
-    this.viewport = state.ui.viewport;
   }
 
   connectedCallback() {

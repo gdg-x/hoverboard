@@ -1,4 +1,4 @@
-import { customElement, observe, property } from '@polymer/decorators';
+import { customElement, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 
 @customElement('sticky-element')
@@ -53,8 +53,6 @@ export class StickyElement extends PolymerElement {
   }
 
   @property({ type: Boolean })
-  public active = false;
-  @property({ type: Boolean })
   private waiting = false;
   @property({ type: Number })
   private endScrollHandle: number;
@@ -64,14 +62,13 @@ export class StickyElement extends PolymerElement {
     this._onScroll = this._onScroll.bind(this);
   }
 
-  @observe('active')
-  _toggleListener(active) {
-    if (active) {
-      window.addEventListener('scroll', this._onScroll);
-    } else {
-      window.removeEventListener('scroll', this._onScroll);
-      this.$.content.classList.remove('sticked');
-    }
+  connectedCallback() {
+    window.addEventListener('scroll', this._onScroll);
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener('scroll', this._onScroll);
+    this.$.content.classList.remove('sticked');
   }
 
   _onScroll() {

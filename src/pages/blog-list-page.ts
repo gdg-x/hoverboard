@@ -10,10 +10,11 @@ import '../elements/shared-styles';
 import '../elements/text-truncate';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { Post } from '../models/post';
+import { router } from '../router';
 import { RootState, store } from '../store';
 import { fetchBlogList } from '../store/blog/actions';
-import { BlogState, initialBlogState } from '../store/blog/state';
-import { Viewport } from '../store/ui/types';
+import { initialBlogState } from '../store/blog/state';
+import { initialUiState } from '../store/ui/state';
 import { getDate } from '../utils/functions';
 
 @customElement('blog-list-page')
@@ -93,14 +94,12 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
       <polymer-helmet
         title="{$ heroSettings.blog.title $} | {$ title $}"
         description="{$ heroSettings.blog.metaDescription $}"
-        active="[[active]]"
       ></polymer-helmet>
 
       <hero-block
         background-image="{$ heroSettings.blog.background.image $}"
         background-color="{$ heroSettings.blog.background.color $}"
         font-color="{$ heroSettings.blog.fontColor $}"
-        active="[[active]]"
       >
         <div class="hero-title">{$ heroSettings.blog.title $}</div>
         <p class="hero-description">{$ heroSettings.blog.description $}</p>
@@ -133,7 +132,7 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
 
             <template is="dom-repeat" items="[[featuredPosts]]" as="post">
               <a
-                href$="/blog/posts/[[post.id]]/"
+                href$="[[postUrl(post.id)]]"
                 class="featured-post"
                 flex$="[[viewport.isTabletPlus]]"
                 ga-on="click"
@@ -178,13 +177,10 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  @property({ type: Boolean })
-  active = false;
   @property({ type: Object })
-  posts: BlogState = initialBlogState;
-
+  posts = initialBlogState;
   @property({ type: Object })
-  private viewport: Viewport;
+  private viewport = initialUiState.viewport;
 
   @computed('posts')
   get pending() {
@@ -240,5 +236,9 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
 
   getDate(date: Date) {
     return getDate(date);
+  }
+
+  postUrl(id: string) {
+    return router.urlForName('post-page', { id });
   }
 }

@@ -2,6 +2,8 @@ import { customElement, property } from '@polymer/decorators';
 import '@polymer/marked-element';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import { Post } from '../models/post';
+import { router } from '../router';
 import { getDate } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
@@ -60,7 +62,7 @@ export class PostsList extends PolymerElement {
       </style>
 
       <template is="dom-repeat" items="[[posts]]" as="post">
-        <a href$="/blog/posts/[[post.id]]/" class="post" layout horizontal>
+        <a href$="[[postUrl(post.id)]]" class="post" layout horizontal>
           <plastic-image
             class="image"
             srcset="[[post.image]]"
@@ -92,9 +94,13 @@ export class PostsList extends PolymerElement {
   }
 
   @property({ type: Array })
-  posts = [];
+  posts: Post[] = [];
 
-  getDate(date) {
+  postUrl(id: string) {
+    return router.urlForName('post-page', { id });
+  }
+
+  getDate(date: string) {
     return getDate(date);
   }
 }

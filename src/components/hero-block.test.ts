@@ -22,7 +22,6 @@ describe('hero-block', () => {
 
   it('has default values', async () => {
     const { element, shadowRoot } = await fixture<HeroBlock>(html`<hero-block></hero-block>`);
-    expect(element.active).toBe(false);
     expect(element.backgroundImage).toBe('');
     expect(element.backgroundColor).toBe('#fff');
     expect(element.fontColor).toBe('#000');
@@ -35,7 +34,6 @@ describe('hero-block', () => {
     const { element, shadowRoot } = await fixture<HeroBlock>(
       html`
         <hero-block
-          active
           background-image="/example.jpg"
           background-color="#000"
           font-color="#fff"
@@ -43,7 +41,6 @@ describe('hero-block', () => {
         ></hero-block>
       `
     );
-    expect(element.active).toBe(true);
     expect(element.backgroundImage).toBe('/example.jpg');
     expect(element.backgroundColor).toBe('#000');
     expect(element.fontColor).toBe('#fff');
@@ -78,23 +75,14 @@ describe('hero-block', () => {
     expect(shadowRoot.querySelector('.hero-image')).toHaveAttribute('src', '/example.jpg');
   });
 
-  describe('setHeroSettings', () => {
-    it('notifies when active', async () => {
-      await fixture<HeroBlock>(
-        html`<hero-block active background-image="/example.jpg"></hero-block>`
-      );
-      expect(mockSetHeroSettings).toHaveBeenCalledTimes(1);
-      expect(mockSetHeroSettings).toHaveBeenCalledWith({
-        backgroundColor: '#fff',
-        backgroundImage: '/example.jpg',
-        fontColor: '#000',
-        hideLogo: false,
-      });
-    });
-
-    it('does not notify when inactive', async () => {
-      await fixture<HeroBlock>(html`<hero-block background-image="/example.jpg"></hero-block>`);
-      expect(mockSetHeroSettings).not.toHaveBeenCalled();
+  it('setHeroSettings notifies', async () => {
+    await fixture<HeroBlock>(html`<hero-block background-image="/example.jpg"></hero-block>`);
+    expect(mockSetHeroSettings).toHaveBeenCalledTimes(1);
+    expect(mockSetHeroSettings).toHaveBeenCalledWith({
+      backgroundColor: '#fff',
+      backgroundImage: '/example.jpg',
+      fontColor: '#000',
+      hideLogo: false,
     });
   });
 });

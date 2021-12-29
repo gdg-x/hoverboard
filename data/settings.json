@@ -25,22 +25,22 @@
     },
     {
       "route": "speakers",
-      "permalink": "/speakers/",
+      "permalink": "/speakers",
       "label": "Speakers"
     },
     {
       "route": "schedule",
-      "permalink": "/schedule/",
+      "permalink": "/schedule",
       "label": "Schedule"
     },
     {
       "route": "team",
-      "permalink": "/team/",
+      "permalink": "/team",
       "label": "Team"
     },
     {
       "route": "blog",
-      "permalink": "/blog/",
+      "permalink": "/blog",
       "label": "Blog"
     }
   ],
@@ -105,6 +105,14 @@
     "coc": {
       "title": "Code of Conduct",
       "metaDescription": "Learn more about our expectations for all those who participate in our community",
+      "background": {
+        "color": "#fff"
+      },
+      "fontColor": "#424242"
+    },
+    "notFound": {
+      "title": "Not Found",
+      "metaDescription": "Page not found",
       "background": {
         "color": "#fff"
       },

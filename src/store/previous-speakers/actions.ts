@@ -1,7 +1,7 @@
 import { collection, getDocs, orderBy, query } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { db } from '../../firebase';
-import { Speaker } from '../../models/speaker';
+import { PreviousSpeaker } from '../../models/previous-speaker';
 import { mergeId } from '../../utils/merge-id';
 import {
   FETCH_PREVIOUS_SPEAKERS,
@@ -10,12 +10,14 @@ import {
   PreviousSpeakersActions,
 } from './types';
 
-const getPreviousSpeakers = async (): Promise<Speaker[]> => {
+const getPreviousSpeakers = async (): Promise<PreviousSpeaker[]> => {
   const { docs } = await getDocs(
     query(collection(db, 'previousSpeakers'), orderBy('order', 'asc'))
   );
 
-  return docs.map<Speaker>(mergeId);
+  return docs.map<PreviousSpeaker>(mergeId).sort((speakerA, speakerB) => {
+    return speakerA.name.localeCompare(speakerB.name);
+  });
 };
 
 export const fetchPreviousSpeakersList =

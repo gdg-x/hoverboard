@@ -108,7 +108,7 @@
         },
         {
           "name": "FAQs",
-          "url": "/faq/",
+          "url": "/faq",
           "newTab": false
         }
       ]
@@ -190,7 +190,7 @@
     "title": "The latest news",
     "callToAction": {
       "label": "View all stories",
-      "link": "/blog/"
+      "link": "/blog"
     }
   },
   "speakers": {
@@ -202,14 +202,14 @@
     "title": "Speakers",
     "callToAction": {
       "label": "View all speakers",
-      "link": "/speakers/"
+      "link": "/speakers"
     }
   },
   "previousSpeakersBlock": {
     "title": "Previous speakers",
     "callToAction": {
       "label": "View all",
-      "link": "/previous-speakers/"
+      "link": "/previous-speakers"
     }
   },
   "galleryBlock": {

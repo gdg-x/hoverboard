@@ -1,16 +1,18 @@
-import { Failure, Initialized, Pending, Success } from '@abraham/remotedata';
+import { Failure, Initialized, Pending } from '@abraham/remotedata';
 import { computed, customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
+import { PreviousSpeaker } from '../models/previous-speaker';
+import { router } from '../router';
 import { RootState, store } from '../store';
 import { fetchPreviousSpeakersList } from '../store/previous-speakers/actions';
+import { selectRandomPreviousSpeakers } from '../store/previous-speakers/selectors';
 import {
   initialPreviousSpeakersState,
   PreviousSpeakersState,
 } from '../store/previous-speakers/state';
-import { randomOrder } from '../utils/functions';
 import './shared-styles';
 
 @customElement('previous-speakers-block')
@@ -78,7 +80,7 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
           <template is="dom-repeat" items="[[speakers]]" as="speaker">
             <a
               class="speaker"
-              href$="/previous-speakers/[[speaker.id]]"
+              href$="[[previousSpeakerUrl(speaker.id)]]"
               ga-on="click"
               ga-event-category="previous speaker"
               ga-event-action="open details"
@@ -108,8 +110,8 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
 
   @property({ type: Object })
   previousSpeakers: PreviousSpeakersState = initialPreviousSpeakersState;
-  @property({ type: Object })
-  viewport: { isPhone?: boolean } = {};
+  @property({ type: Array })
+  speakers: PreviousSpeaker[] = [];
 
   @computed('previousSpeakers')
   get pending() {
@@ -122,8 +124,8 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
   }
 
   stateChanged(state: RootState) {
-    this.viewport = state.ui.viewport;
     this.previousSpeakers = state.previousSpeakers;
+    this.speakers = selectRandomPreviousSpeakers(state);
   }
 
   connectedCallback() {
@@ -133,13 +135,7 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
     }
   }
 
-  @computed('previousSpeakers', 'viewport')
-  get speakers() {
-    if (this.previousSpeakers instanceof Success) {
-      const displayCount = this.viewport.isPhone ? 8 : 14;
-      return randomOrder(this.previousSpeakers.data).slice(0, displayCount);
-    } else {
-      return [];
-    }
+  previousSpeakerUrl(id: string) {
+    return router.urlForName('previous-speaker-page', { id });
   }
 }

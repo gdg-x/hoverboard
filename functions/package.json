@@ -14,7 +14,7 @@
     "build:index": "cpx \"../dist/*.html\" dist",
     "build:src": "tsc",
     "clean": "rimraf dist",
-    "start": "npm run clean && concurrently npm:start:*",
+    "start": "npm run clean && concurrently --kill-others npm:start:*",
     "start:index": "npm run build:index -- --watch",
     "start:src": "npm run build:src -- --watch"
   },

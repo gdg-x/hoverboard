@@ -1,8 +1,8 @@
-import { Success } from '@abraham/remotedata';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { store } from '..';
 import { db } from '../../firebase';
+import { selectUserId } from '../user/selectors';
 import { FeaturedSessions } from './state';
 import {
   FeaturedSessionsActions,
@@ -14,24 +14,6 @@ import {
   SET_USER_FEATURED_SESSIONS_SUCCESS,
 } from './types';
 
-const selectFeaturedSessions = (): FeaturedSessions => {
-  const featuredSessions = store.getState().featuredSessions;
-  if (featuredSessions instanceof Success) {
-    return featuredSessions.data;
-  } else {
-    return {};
-  }
-};
-
-export const buildFeaturedSessions = (sessionId: string, featured: boolean): FeaturedSessions => {
-  const sessions = {
-    ...selectFeaturedSessions(),
-    [sessionId]: featured,
-  };
-
-  return sessions;
-};
-
 const getFeaturedSessions = async (userId: string): Promise<FeaturedSessions> => {
   const snapshot = await getDoc(doc(db, 'featuredSessions', userId));
 
@@ -39,7 +21,11 @@ const getFeaturedSessions = async (userId: string): Promise<FeaturedSessions> =>
 };
 
 export const fetchUserFeaturedSessions =
-  (userId: string) => async (dispatch: Dispatch<FeaturedSessionsActions>) => {
+  () => async (dispatch: Dispatch<FeaturedSessionsActions>) => {
+    const userId = selectUserId(store.getState()) as string;
+
+    if (!userId) return;
+
     dispatch({
       type: FETCH_USER_FEATURED_SESSIONS,
     });

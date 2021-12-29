@@ -6,6 +6,7 @@ import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { SpeakersHoC } from '../mixins/speakers-hoc';
 import { Speaker } from '../models/speaker';
+import { router } from '../router';
 import { randomOrder } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
@@ -28,7 +29,6 @@ export class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
 
         .speaker {
           text-align: center;
-          cursor: pointer;
         }
 
         .photo {
@@ -155,9 +155,9 @@ export class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
 
         <div class="speakers-wrapper">
           <template is="dom-repeat" items="[[featuredSpeakers]]" as="speaker">
-            <div
+            <a
               class="speaker"
-              on-click="_openSpeaker"
+              href$="[[speakerUrl(speaker.id)]]"
               ga-on="click"
               ga-event-category="speaker"
               ga-event-action="open details"
@@ -207,7 +207,7 @@ export class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
                   <div class="origin">[[speaker.country]]</div>
                 </text-truncate>
               </div>
-            </div>
+            </a>
           </template>
         </div>
 
@@ -221,12 +221,6 @@ export class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     `;
   }
 
-  _openSpeaker(e) {
-    window.history.pushState({}, '', '/speakers/');
-    window.history.pushState({}, '', `/speakers/${e.model.speaker.id}/`);
-    window.dispatchEvent(new CustomEvent('location-changed'));
-  }
-
   @computed('speakers')
   get featuredSpeakers(): Speaker[] {
     if (this.speakers instanceof Success) {
@@ -237,5 +231,9 @@ export class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
     } else {
       return [];
     }
+  }
+
+  speakerUrl(id: string) {
+    return router.urlForName('speaker-page', { id });
   }
 }

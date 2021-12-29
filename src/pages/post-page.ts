@@ -1,15 +1,16 @@
 import { Initialized, Success } from '@abraham/remotedata';
-import '@polymer/app-route/app-route';
 import { customElement, observe, property } from '@polymer/decorators';
 import '@polymer/iron-ajax/iron-ajax';
 import '@polymer/marked-element';
 import '@polymer/paper-button';
 import { html, PolymerElement } from '@polymer/polymer';
+import { RouterLocation } from '@vaadin/router';
 import 'plastic-image';
 import '../elements/posts-list';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { Post } from '../models/post';
+import { router } from '../router';
 import { RootState, store } from '../store';
 import { fetchBlogList } from '../store/blog/actions';
 import { BlogState, initialBlogState } from '../store/blog/state';
@@ -17,12 +18,8 @@ import { getDate } from '../utils/functions';
 
 @customElement('post-page')
 export class PostPage extends ReduxMixin(PolymerElement) {
-  @property({ type: Boolean })
-  active = false;
   @property({ type: Object })
-  route: object;
-  @property({ type: Object })
-  posts: BlogState = initialBlogState;
+  posts = initialBlogState;
 
   @property({ type: Object })
   private post: Post;
@@ -101,18 +98,14 @@ export class PostPage extends ReduxMixin(PolymerElement) {
         title="[[post.title]] | {$ title $}"
         description="[[post.brief]]"
         image="[[post.image]]"
-        active="[[active]]"
         label1="{$ blog.published $}"
         data1="[[published]]"
       ></polymer-helmet>
-
-      <app-route route="[[route]]" pattern="/:id" data="{{postData}}"></app-route>
 
       <hero-block
         background-image="[[post.image]]"
         background-color="[[post.primaryColor]]"
         font-color="#fff"
-        active="[[active]]"
       >
         <div class="hero-title">[[post.title]]</div>
       </hero-block>
@@ -151,23 +144,32 @@ export class PostPage extends ReduxMixin(PolymerElement) {
     }
   }
 
+  onAfterEnter(location: RouterLocation) {
+    this.postData = location.params;
+  }
+
   handleMarkdownFileFetch(event: CustomEvent) {
     if (event.detail.response) {
       this.postContent = event.detail.response;
     }
   }
 
+  // TODO: Move to selector
   @observe('postData.id', 'posts')
   _postDataObserver(postId: string, posts: BlogState) {
-    if (posts instanceof Success) {
+    if (postId && posts instanceof Success) {
       const post = posts.data.find(({ id }) => id === postId);
-      this.post = post;
-      this.postContent = post?.content;
-      this.suggestedPosts = posts.data.filter(({ id }) => id !== postId).slice(0, 3);
+      if (post) {
+        this.post = post;
+        this.postContent = post?.content;
+        this.suggestedPosts = posts.data.filter(({ id }) => id !== postId).slice(0, 3);
+      } else {
+        router.render('/404');
+      }
     }
   }
 
-  getDate(date: Date) {
+  getDate(date: string) {
     return getDate(date);
   }
 }

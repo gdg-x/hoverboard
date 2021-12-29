@@ -1,3 +1,4 @@
+import { Router } from '@vaadin/router';
 import { doc, DocumentReference, DocumentSnapshot, getDoc, setDoc } from 'firebase/firestore';
 import { deleteToken, getMessaging, getToken as fbGetToken, onMessage } from 'firebase/messaging';
 import { Dispatch } from 'redux';
@@ -5,7 +6,6 @@ import { store } from '..';
 import { log } from '../../console';
 import { db, firebaseApp } from '../../firebase';
 import { TempAny } from '../../temp-any';
-import { setLocation } from '../routing/actions';
 import { showToast } from '../toast/actions';
 import { NotificationActions, NOTIFICATIONS_STATUS, UPDATE_NOTIFICATIONS_STATUS } from './types';
 
@@ -24,9 +24,7 @@ onMessage(messaging, (payload) => {
     message: `${notification.title} ${notification.body}`,
     action: {
       title: '{$ notifications.toast.title $}',
-      callback: () => {
-        setLocation((notification as TempAny).click_action);
-      },
+      callback: () => Router.go((notification as TempAny).click_action),
     },
   });
 });

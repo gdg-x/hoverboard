@@ -6,7 +6,7 @@ import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
 import { fetchGallery } from '../store/gallery/actions';
-import { GalleryState, initialGalleryState } from '../store/gallery/state';
+import { initialGalleryState } from '../store/gallery/state';
 import './shared-styles';
 
 @customElement('gallery-block')
@@ -168,7 +168,7 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
-  gallery: GalleryState = initialGalleryState;
+  gallery = initialGalleryState;
 
   @computed('gallery')
   get pending() {

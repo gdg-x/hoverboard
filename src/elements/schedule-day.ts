@@ -1,19 +1,26 @@
-import { customElement, observe, property } from '@polymer/decorators';
+import { Initialized, Success } from '@abraham/remotedata';
+import { computed, customElement, observe, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
-import { ELEMENTS, getElement } from '../global';
+import { RouterLocation } from '@vaadin/router';
+import { ReduxMixin } from '../mixins/redux-mixin';
+import { Day } from '../models/day';
 import { Filter } from '../models/filter';
 import { Session } from '../models/session';
-import {
-  FeaturedSessionsState,
-  initialFeaturedSessionsState,
-} from '../store/featured-sessions/state';
+import { Time } from '../models/time';
+import { Timeslot } from '../models/timeslot';
+import { onSearchChanged } from '../router';
+import { RootState, store } from '../store';
+import { fetchUserFeaturedSessions } from '../store/featured-sessions/actions';
+import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
+import { initialScheduleState, ScheduleState } from '../store/schedule/state';
+import { initialUserState } from '../store/user/state';
+import { selectFilters } from '../utils/filters';
 import { generateClassName } from '../utils/functions';
-import { offsetTop, scrollToY } from '../utils/scrolling';
 import './session-element';
 import './shared-styles';
 
 @customElement('schedule-day')
-export class ScheduleDay extends PolymerElement {
+export class ScheduleDay extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -127,7 +134,7 @@ export class ScheduleDay extends PolymerElement {
             <div class="session" style$="grid-area: [[session.gridArea]]" layout vertical>
               <template
                 is="dom-repeat"
-                items="[[_filterSessions(session.items, selectedFilters)]]"
+                items="[[filterSessions(session.items, selectedFilters)]]"
                 as="subSession"
               >
                 <session-element
@@ -136,7 +143,6 @@ export class ScheduleDay extends PolymerElement {
                   session="[[subSession]]"
                   user="[[user]]"
                   featured-sessions="[[featuredSessions]]"
-                  query-params="[[queryParams]]"
                 ></session-element>
               </template>
             </div>
@@ -146,55 +152,54 @@ export class ScheduleDay extends PolymerElement {
     `;
   }
 
-  @property({ type: Boolean })
-  private active = false;
   @property({ type: Object })
-  private day = {};
-  @property({ type: String })
-  private name: string;
+  schedule: ScheduleState = initialScheduleState;
   @property({ type: Object })
-  private user = {};
+  location: RouterLocation;
   @property({ type: Object })
-  private featuredSessions: FeaturedSessionsState = initialFeaturedSessionsState;
+  private day: Day;
+
+  @property({ type: Object })
+  private user = initialUserState;
+  @property({ type: Object })
+  private featuredSessions = initialFeaturedSessionsState;
   @property({ type: Boolean })
   private onlyFeatured = false;
-  @property({ type: Object })
-  private viewport: { isTabletPlus?: boolean } = {};
-  @property({ type: Object })
-  private selectedFilters = {};
-  @property({ type: String })
-  private queryParams: string;
+  @property({ type: Array })
+  private selectedFilters: Filter[] = [];
 
-  @observe('active')
-  _pageVisible(active) {
-    if (active && window.location.hash) {
-      const selectedTime = window.location.hash.slice(1);
-      if (selectedTime) {
-        requestAnimationFrame(() => {
-          const targetElement = this.shadowRoot.querySelector(`[id="${selectedTime}"]`);
-          const offset = offsetTop(targetElement);
-          const toolbarHeight =
-            getElement(ELEMENTS.HEADER_TOOLBAR).getBoundingClientRect().height - 1;
-          const stickyToolbarHeight = getElement(
-            ELEMENTS.STICKY_HEADER_TOOLBAR
-          ).getBoundingClientRect().height;
-          const additionalMargin = this.viewport.isTabletPlus ? 8 : 0;
-          const scrollTargetY = offset - toolbarHeight - stickyToolbarHeight - additionalMargin;
-          scrollToY(scrollTargetY, 1500, 'easeInOutSine');
-        });
-      }
+  connectedCallback() {
+    super.connectedCallback();
+    onSearchChanged(() => (this.selectedFilters = selectFilters()));
+  }
+
+  onAfterEnter(location: RouterLocation) {
+    this.location = location;
+  }
+
+  stateChanged(state: RootState) {
+    this.schedule = state.schedule;
+    this.user = state.user;
+    this.selectedFilters = selectFilters();
+    this.featuredSessions = state.featuredSessions;
+  }
+
+  @observe('user.uid')
+  _fetchFeaturedSessions(uid?: string) {
+    if (uid && this.featuredSessions instanceof Initialized) {
+      store.dispatch(fetchUserFeaturedSessions());
     }
   }
 
-  _getTimePosition(timeslotIndex) {
+  _getTimePosition(timeslotIndex: number) {
     return `${timeslotIndex + 1} / 1`;
   }
 
-  _splitText(text, divider, index) {
+  _splitText(text: string, divider: string, index: number) {
     return text.split(divider)[index];
   }
 
-  _showAddSession(timeslot, onlyFeatured) {
+  _showAddSession(timeslot: Timeslot, onlyFeatured: boolean) {
     return (
       onlyFeatured &&
       !timeslot.sessions.reduce(
@@ -204,11 +209,11 @@ export class ScheduleDay extends PolymerElement {
     );
   }
 
-  _isNotEmpty(sessionBlock) {
+  _isNotEmpty(sessionBlock: Time) {
     return !!sessionBlock.items.length;
   }
 
-  _filterSessions(sessions: Session[], selectedFilters: Filter[]) {
+  filterSessions(sessions: Session[], selectedFilters: Filter[]) {
     if (selectedFilters.length === 0) {
       return sessions;
     }
@@ -225,5 +230,29 @@ export class ScheduleDay extends PolymerElement {
         }
       });
     });
+  }
+
+  @computed('location', 'schedule')
+  get name() {
+    if (this.location && this.schedule instanceof Success) {
+      const {
+        params: { id },
+        pathname,
+      } = this.location;
+      if (pathname.endsWith('my-schedule')) {
+        return 'my-schedule';
+      } else {
+        return id || this.schedule.data[0].date;
+      }
+    } else {
+      return undefined;
+    }
+  }
+
+  @observe('name', 'schedule')
+  onNameAndSchedule() {
+    if (!this.onlyFeatured && this.name && this.schedule instanceof Success) {
+      this.day = this.schedule.data.find((day) => day.date === this.name);
+    }
   }
 }

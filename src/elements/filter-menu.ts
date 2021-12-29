@@ -1,9 +1,9 @@
 import { computed, customElement, property } from '@polymer/decorators';
-import '@polymer/iron-location/iron-location';
 import { html, PolymerElement } from '@polymer/polymer';
 import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
-import { generateClassName, getVariableColor, toggleFilter } from '../utils/functions';
+import { toggleFilter } from '../utils/filters';
+import { generateClassName, getVariableColor, setQueryString } from '../utils/functions';
 import './shared-styles';
 
 @customElement('filter-menu')
@@ -80,8 +80,6 @@ export class FilterMenu extends PolymerElement {
           }
         }
       </style>
-
-      <iron-location query="{{queryParams}}"></iron-location>
 
       <div class="filters-toolbar container">
         <div layout horizontal center>
@@ -162,8 +160,6 @@ export class FilterMenu extends PolymerElement {
   resultsCount: number = undefined;
   @property({ type: Array })
   selectedFilters: Filter[] = [];
-  @property({ type: String })
-  private queryParams: string;
   @property({ type: Boolean })
   opened = false;
 
@@ -196,7 +192,7 @@ export class FilterMenu extends PolymerElement {
 
   _resetFilters(e: MouseEvent) {
     e.preventDefault();
-    this.queryParams = '';
+    setQueryString('');
   }
 
   @computed('opened')

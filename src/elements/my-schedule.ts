@@ -1,13 +1,16 @@
-import { Success } from '@abraham/remotedata';
+import { Initialized } from '@abraham/remotedata';
 import { customElement, observe, property } from '@polymer/decorators';
 import { html, PolymerElement } from '@polymer/polymer';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { Schedule } from '../models/schedule';
-import {
-  FeaturedSessionsState,
-  initialFeaturedSessionsState,
-} from '../store/featured-sessions/state';
-import { initialScheduleState, ScheduleState } from '../store/schedule/state';
+import { Day } from '../models/day';
+import { Filter } from '../models/filter';
+import { RootState, store } from '../store';
+import { fetchUserFeaturedSessions } from '../store/featured-sessions/actions';
+import { initialFeaturedSessionsState } from '../store/featured-sessions/state';
+import { selectFeaturedSchedule } from '../store/schedule/selectors';
+import { initialScheduleState } from '../store/schedule/state';
+import { initialUserState } from '../store/user/state';
+import { selectFilters } from '../utils/filters';
 import './schedule-day';
 import './shared-styles';
 
@@ -46,8 +49,6 @@ export class MySchedule extends ReduxMixin(PolymerElement) {
           user="[[user]]"
           featured-sessions="[[featuredSessions]]"
           selected-filters="[[selectedFilters]]"
-          viewport="[[viewport]]"
-          query-params="[[queryParams]]"
           only-featured
         ></schedule-day>
       </template>
@@ -55,36 +56,32 @@ export class MySchedule extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
-  private schedule: ScheduleState = initialScheduleState;
+  private schedule = initialScheduleState;
   @property({ type: Array })
-  private featuredSchedule = [];
+  private featuredSchedule: Day[] = [];
   @property({ type: Object })
-  private featuredSessions: FeaturedSessionsState = initialFeaturedSessionsState;
+  private featuredSessions = initialFeaturedSessionsState;
+  @property({ type: Array })
+  private selectedFilters: Filter[] = [];
   @property({ type: Object })
-  private selectedFilters = {};
-  @property({ type: String })
-  private queryParams: string;
-  @property({ type: Object })
-  private viewport = {};
-  @property({ type: Object })
-  private user = {};
+  private user = initialUserState;
 
-  @observe('schedule', 'featuredSessions')
-  _filterSchedule(schedule: Schedule, featuredSessions: FeaturedSessionsState) {
-    if (schedule instanceof Success && featuredSessions instanceof Success) {
-      this.featuredSchedule = schedule.data.map((day) =>
-        Object.assign({}, day, {
-          timeslots: day.timeslots.map((timeslot) =>
-            Object.assign({}, timeslot, {
-              sessions: timeslot.sessions.map((sessionBlock) =>
-                Object.assign({}, sessionBlock, {
-                  items: sessionBlock.items.filter((session) => featuredSessions.data[session.id]),
-                })
-              ),
-            })
-          ),
-        })
-      );
+  stateChanged(state: RootState) {
+    this.schedule = state.schedule;
+    this.user = state.user;
+    this.selectedFilters = selectFilters();
+    this.featuredSessions = state.featuredSessions;
+    this.featuredSchedule = selectFeaturedSchedule(state);
+
+    if (this.user.uid && this.featuredSessions instanceof Initialized) {
+      store.dispatch(fetchUserFeaturedSessions());
+    }
+  }
+
+  @observe('user.uid')
+  _fetchFeaturedSessions(uid?: string) {
+    if (uid && this.featuredSessions instanceof Initialized) {
+      store.dispatch(fetchUserFeaturedSessions());
     }
   }
 }

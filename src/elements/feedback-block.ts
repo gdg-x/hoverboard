@@ -7,6 +7,10 @@ import { addComment, checkPreviousFeedback, deleteFeedback } from '../store/feed
 import { RootState, store } from '../store';
 import { showToast } from '../store/toast/actions';
 import { computed, customElement, observe, property } from '@polymer/decorators';
+import { initialUserState } from '../store/user/state';
+import { UserState } from '../store/user/types';
+import { FeedbackData, FeedbackState } from '../store/feedback/types';
+import { initialFeedbackState } from '../store/feedback/state';
 
 @customElement('feedback-block')
 export class Feedback extends ReduxMixin(PolymerElement) {
@@ -112,26 +116,26 @@ export class Feedback extends ReduxMixin(PolymerElement) {
   @property({ type: String })
   private sessionId: string;
   @property({ type: Object })
-  private user: { uid?: string; signedIn?: boolean } = {};
+  private user = initialUserState;
   @property({ type: Object })
-  private previousFeedback: { comment?: string; styleRating?: number; contentRating?: number } = {};
+  private previousFeedback?: FeedbackData;
   @property({ type: Boolean, observer: Feedback.prototype._feedbackAddingChanged })
   private feedbackFetching = false;
   @property({ type: Boolean })
   private feedbackAdding = false;
   @property({ type: Object })
-  private feedbackAddingError = {};
+  private feedbackAddingError: Error;
   @property({ type: Boolean, observer: Feedback.prototype._feedbackDeletingChanged })
   private feedbackDeleting = false;
   @property({ type: Object })
-  private feedbackDeletingError = {};
+  private feedbackDeletingError: Error;
   @property({ type: Boolean })
   private showDeleteButton = false;
-  @property({ type: Boolean })
-  private feedbackState = {};
+  @property({ type: Object })
+  private feedback = initialFeedbackState;
 
   stateChanged(state: RootState) {
-    this.feedbackState = state.feedback;
+    this.feedback = state.feedback;
     this.feedbackDeleting = state.feedback.deleting;
     this.feedbackDeletingError = state.feedback.deletingError;
     this.feedbackAdding = state.feedback.adding;
@@ -140,17 +144,17 @@ export class Feedback extends ReduxMixin(PolymerElement) {
     this.user = state.user;
   }
 
-  @observe('feedbackState')
-  _updateFeedbackState(feedbackState) {
-    if (feedbackState) {
-      if (this.sessionId) this.previousFeedback = feedbackState[this.sessionId];
+  @observe('feedback')
+  _updateFeedbackState(feedback: FeedbackState) {
+    if (feedback) {
+      if (this.sessionId) this.previousFeedback = feedback[this.sessionId];
     } else {
       this.previousFeedback = undefined;
     }
   }
 
   @observe('user')
-  _userChanged(newUser) {
+  _userChanged(newUser: UserState) {
     if (newUser.signedIn) {
       if (this.sessionId && !this.feedbackFetching) this._dispatchPreviousFeedback();
     } else {
@@ -166,12 +170,12 @@ export class Feedback extends ReduxMixin(PolymerElement) {
   }
 
   @observe('sessionId')
-  _sessionIdChanged(newSessionId) {
+  _sessionIdChanged(newSessionId?: string) {
     this._clear();
 
     if (newSessionId) {
       // Check for previous feedback once the session/speaker id is available
-      this._updateFeedbackState(this.feedbackState);
+      this._updateFeedbackState(this.feedback);
       this._previousFeedbackChanged(this.previousFeedback);
 
       if (this.user.signedIn && !this.feedbackFetching && this.previousFeedback === undefined) {
@@ -181,7 +185,7 @@ export class Feedback extends ReduxMixin(PolymerElement) {
   }
 
   @observe('previousFeedback')
-  _previousFeedbackChanged(previousFeedback) {
+  _previousFeedbackChanged(previousFeedback?: FeedbackData) {
     if (previousFeedback) {
       this.showDeleteButton = true;
       this.contentRating = previousFeedback.contentRating;
@@ -225,7 +229,7 @@ export class Feedback extends ReduxMixin(PolymerElement) {
     );
   }
 
-  _feedbackAddingChanged(newFeedbackAdding, oldFeedbackAdding) {
+  _feedbackAddingChanged(newFeedbackAdding: boolean, oldFeedbackAdding: boolean) {
     if (oldFeedbackAdding && !newFeedbackAdding) {
       if (this.feedbackAddingError) {
         showToast({
@@ -243,7 +247,7 @@ export class Feedback extends ReduxMixin(PolymerElement) {
     }
   }
 
-  _feedbackDeletingChanged(newFeedbackDeleting, oldFeedbackDeleting) {
+  _feedbackDeletingChanged(newFeedbackDeleting: boolean, oldFeedbackDeleting: boolean) {
     if (oldFeedbackDeleting && !newFeedbackDeleting) {
       if (this.feedbackDeletingError) {
         showToast({

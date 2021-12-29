@@ -6,7 +6,7 @@ import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
-import { Viewport } from '../store/ui/types';
+import { initialUiState } from '../store/ui/state';
 import './hoverboard-icons';
 import './shared-styles';
 
@@ -103,7 +103,7 @@ export class AboutOrganizerBlock extends ReduxMixin(PolymerElement) {
   }
 
   @property({ type: Object })
-  private viewport: Viewport;
+  private viewport = initialUiState.viewport;
 
   stateChanged(state: RootState) {
     this.viewport = state.ui.viewport;
