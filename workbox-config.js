@@ -3,7 +3,7 @@
 // TODO: Rewrite in TypeScript
 
 const ONE_WEEK = 60 * 60 * 24 * 7;
-const FIREBASE_RESERVED_URLS = /\/__\/.*/;
+const FIREBASE_RESERVED_URLS = /^(?!\/__).*/;
 
 export const workboxConfig = {
   swDest: 'dist/service-worker.js',
