@@ -28,6 +28,7 @@ export default [
       nodeResolve(),
       typescript({
         noEmitOnError: true,
+        sourceMap: production,
       }),
       production && terser(),
     ],
@@ -43,6 +44,7 @@ export default [
       nodeResolve(),
       typescript({
         noEmitOnError: true,
+        sourceMap: production,
       }),
       html({
         input: {
