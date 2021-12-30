@@ -8,13 +8,12 @@ import 'plastic-image';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState, store } from '../store';
-import { fetchTeams } from '../store/teams/actions';
-import { initialTeamsState } from '../store/teams/state';
+import { fetchTeams, initialTeamsState } from '../store/teams';
 
 @customElement('team-page')
 export class TeamPage extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
-  teams = initialTeamsState;
+  teams = initialTeamsState.value;
 
   @computed('teams')
   get pending() {
@@ -199,7 +198,7 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
   }
 
   override stateChanged(state: RootState) {
-    this.teams = state.teams;
+    this.teams = state.teams.value;
   }
 
   override connectedCallback() {

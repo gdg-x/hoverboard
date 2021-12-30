@@ -14,7 +14,7 @@ import { scheduleReducer } from './schedule/reducers';
 import { sessionsReducer } from './sessions/reducers';
 import { speakersReducer } from './speakers/reducers';
 import { subscribeReducer } from './subscribe/reducers';
-import { teamsReducer } from './teams/reducers';
+import teamsReducer from './teams';
 import { ticketsReducer } from './tickets/reducers';
 import { toastReducer } from './toast/reducers';
 import { uiReducer } from './ui/reducers';
