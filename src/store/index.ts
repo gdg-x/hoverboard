@@ -6,6 +6,7 @@ import { featuredSessionsReducer } from './featured-sessions/reducers';
 import { feedbackReducer } from './feedback/reducers';
 import { filtersReducer } from './filters/reducers';
 import { galleryReducer } from './gallery/reducers';
+import { membersReducer } from './members/reducers';
 import { notificationsReducer } from './notifications/reducers';
 import { partnersReducer } from './partners/reducers';
 import { potentialPartnersReducer } from './potential-partners/reducers';
@@ -32,8 +33,9 @@ export const store = configureStore({
     dialogs: dialogsReducer,
     featuredSessions: featuredSessionsReducer,
     feedback: feedbackReducer,
-    gallery: galleryReducer,
     filters: filtersReducer,
+    gallery: galleryReducer,
+    members: membersReducer,
     notifications: notificationsReducer,
     partners: partnersReducer,
     potentialPartners: potentialPartnersReducer,

@@ -1,46 +1,41 @@
-import { collection, getDocs, query } from 'firebase/firestore';
+import { Failure, Initialized, Pending, RemoteData, Success } from '@abraham/remotedata';
+import { collection, onSnapshot, orderBy, query, Unsubscribe } from 'firebase/firestore';
 import { Dispatch } from 'redux';
 import { db } from '../../firebase';
-import { Member } from '../../models/member';
-import { Team, TeamWithoutMembers } from '../../models/team';
+import { TeamWithoutMembers } from '../../models/team';
 import { mergeDataAndId } from '../../utils/firestore';
 import { FETCH_TEAMS, FETCH_TEAMS_FAILURE, FETCH_TEAMS_SUCCESS, TeamsActions } from './types';
 
-const getTeamIds = async (): Promise<TeamWithoutMembers[]> => {
-  const { docs } = await getDocs(query(collection(db, 'team')));
+type Subscription = RemoteData<Error, Unsubscribe>;
+let subscription: Subscription = new Initialized();
 
-  return docs.map<TeamWithoutMembers>(mergeDataAndId);
+export const unsubscribe = () => {
+  if (subscription instanceof Success) {
+    subscription.data();
+  }
 };
 
-const getTeamMembers = async (team: TeamWithoutMembers): Promise<Team> => {
-  const { docs } = await getDocs(query(collection(db, 'team', team.id, 'members')));
-  const members = docs.map<Member>(mergeDataAndId);
+const subscribe = (path: string, dispatch: Dispatch<TeamsActions>) => {
+  const unsubscribe = onSnapshot(
+    query(collection(db, path), orderBy('title', 'asc')),
+    (snapshot) => {
+      const payload = snapshot.docs.map<TeamWithoutMembers>(mergeDataAndId);
+      dispatch({ type: FETCH_TEAMS_SUCCESS, payload });
+    },
+    (payload) => {
+      subscription = new Failure(payload);
+      dispatch({ type: FETCH_TEAMS_FAILURE, payload });
+    }
+  );
 
-  return {
-    ...team,
-    members,
-  };
-};
-
-const getTeams = async (): Promise<Team[]> => {
-  const teamIds = await getTeamIds();
-  return Promise.all(teamIds.map(getTeamMembers));
+  return new Success(unsubscribe);
 };
 
 export const fetchTeams = async (dispatch: Dispatch<TeamsActions>) => {
-  dispatch({
-    type: FETCH_TEAMS,
-  });
+  if (subscription instanceof Initialized) {
+    subscription = new Pending();
+    dispatch({ type: FETCH_TEAMS });
 
-  try {
-    dispatch({
-      type: FETCH_TEAMS_SUCCESS,
-      payload: await getTeams(),
-    });
-  } catch (error) {
-    dispatch({
-      type: FETCH_TEAMS_FAILURE,
-      payload: error,
-    });
+    subscription = subscribe('team', dispatch);
   }
 };
