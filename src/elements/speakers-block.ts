@@ -4,7 +4,7 @@ import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { SpeakersHoC } from '../mixins/speakers-hoc';
+import { SpeakersMixin } from '../mixins/speakers-mixin';
 import { Speaker } from '../models/speaker';
 import { router } from '../router';
 import { randomOrder } from '../utils/functions';
@@ -12,7 +12,7 @@ import './shared-styles';
 import './text-truncate';
 
 @customElement('speakers-block')
-export class SpeakersBlock extends SpeakersHoC(ReduxMixin(PolymerElement)) {
+export class SpeakersBlock extends SpeakersMixin(ReduxMixin(PolymerElement)) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">

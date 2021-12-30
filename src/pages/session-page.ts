@@ -8,7 +8,7 @@ import '../elements/feedback-block';
 import '../elements/shared-styles';
 import '../elements/text-truncate';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { SessionsHoC } from '../mixins/sessions-hoc';
+import { SessionsMixin } from '../mixins/sessions-mixin';
 import { Session } from '../models/session';
 import { router } from '../router';
 import { RootState, store } from '../store';
@@ -28,7 +28,7 @@ import { initialUserState } from '../store/user/state';
 import { getVariableColor } from '../utils/functions';
 
 @customElement('session-page')
-export class SessionPage extends SessionsHoC(ReduxMixin(PolymerElement)) {
+export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">

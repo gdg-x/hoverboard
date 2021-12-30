@@ -11,7 +11,7 @@ import '../elements/previous-speakers-block';
 import '../elements/shared-styles';
 import '../elements/text-truncate';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { SpeakersHoC } from '../mixins/speakers-hoc';
+import { SpeakersMixin } from '../mixins/speakers-mixin';
 import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
 import { onSearchChanged, router } from '../router';
@@ -21,7 +21,7 @@ import { selectFilteredSpeakers } from '../store/speakers/selectors';
 import { selectFilters } from '../utils/filters';
 
 @customElement('speakers-page')
-export class SpeakersPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
+export class SpeakersPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
