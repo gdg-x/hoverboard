@@ -11,7 +11,7 @@ import '../elements/content-loader';
 import '../elements/previous-speakers-block';
 import '../elements/shared-styles';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { SpeakersHoC } from '../mixins/speakers-hoc';
+import { SpeakersMixin } from '../mixins/speakers-mixin';
 import { SpeakerWithTags } from '../models/speaker';
 import { router } from '../router';
 import { RootState, store } from '../store';
@@ -20,7 +20,7 @@ import { SpeakersState } from '../store/speakers/state';
 import { getVariableColor, isEmpty } from '../utils/functions';
 
 @customElement('speaker-page')
-export class SpeakerPage extends SpeakersHoC(ReduxMixin(PolymerElement)) {
+export class SpeakerPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">

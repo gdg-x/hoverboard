@@ -3,32 +3,32 @@ import { Constructor } from '@lit/reactive-element/decorators';
 import { property } from '@polymer/decorators';
 import { PolymerElement } from '@polymer/polymer';
 import { RootState, store } from '../store';
-import { fetchSpeakersList } from '../store/speakers/actions';
-import { initialSpeakersState } from '../store/speakers/state';
+import { fetchSessions } from '../store/sessions/actions';
+import { initialSessionsState } from '../store/sessions/state';
 
 /* @polymerMixin */
-export const SpeakersHoC = <
+export const SessionsMixin = <
   T extends Constructor<PolymerElement & { stateChanged(_state: RootState): void }>
 >(
   subclass: T
 ) => {
-  class SpeakersClass extends subclass {
+  class SessionsClass extends subclass {
     @property({ type: Object })
-    speakers = initialSpeakersState;
+    protected sessions = initialSessionsState;
 
     stateChanged(state: RootState) {
       super.stateChanged(state);
-      this.speakers = state.speakers;
+      this.sessions = state.sessions;
     }
 
     connectedCallback() {
       super.connectedCallback();
 
-      if (this.speakers instanceof Initialized) {
-        store.dispatch(fetchSpeakersList());
+      if (this.sessions instanceof Initialized) {
+        store.dispatch(fetchSessions());
       }
     }
   }
 
-  return SpeakersClass;
+  return SessionsClass;
 };

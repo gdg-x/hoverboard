@@ -9,8 +9,8 @@ import '../elements/header-bottom-toolbar';
 import '../elements/shared-styles';
 import '../elements/sticky-element';
 import { ReduxMixin } from '../mixins/redux-mixin';
-import { SessionsHoC } from '../mixins/sessions-hoc';
-import { SpeakersHoC } from '../mixins/speakers-hoc';
+import { SessionsMixin } from '../mixins/sessions-mixin';
+import { SpeakersMixin } from '../mixins/speakers-mixin';
 import { Filter } from '../models/filter';
 import { FilterGroup } from '../models/filter-group';
 import { onSearchChanged } from '../router';
@@ -23,7 +23,7 @@ import { SpeakersState } from '../store/speakers/state';
 import { selectFilters } from '../utils/filters';
 
 @customElement('schedule-page')
-export class SchedulePage extends SessionsHoC(SpeakersHoC(ReduxMixin(PolymerElement))) {
+export class SchedulePage extends SessionsMixin(SpeakersMixin(ReduxMixin(PolymerElement))) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment">
