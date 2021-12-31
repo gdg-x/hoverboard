@@ -64,7 +64,7 @@ export class ToastElement extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private viewport = initialUiState.viewport;
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.toast = state.toast;
     this.viewport = state.ui.viewport;
   }

@@ -66,7 +66,7 @@ export class MySchedule extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private user = initialUserState;
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.schedule = state.schedule;
     this.user = state.user;
     this.selectedFilters = selectFilters(state);

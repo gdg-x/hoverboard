@@ -335,7 +335,7 @@ export class SessionPage extends SessionsMixin(ReduxMixin(PolymerElement)) {
   @property({ type: Boolean })
   private acceptingFeedback: boolean = false;
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     super.stateChanged(state);
     this.sessions = state.sessions;
     this.user = state.user;

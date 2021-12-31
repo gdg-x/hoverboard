@@ -105,7 +105,7 @@ export class AboutOrganizerBlock extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private viewport = initialUiState.viewport;
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.viewport = state.ui.viewport;
   }
 }

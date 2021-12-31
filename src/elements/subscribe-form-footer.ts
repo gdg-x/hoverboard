@@ -96,7 +96,7 @@ export class SubscribeFormFooter extends ReduxMixin(PolymerElement) {
   @property({ type: Boolean })
   private validate = false;
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.subscribed = state.subscribed;
   }
 

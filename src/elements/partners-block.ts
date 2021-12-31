@@ -124,13 +124,13 @@ export class PartnersBlock extends ReduxMixin(PolymerElement) {
     return this.partners instanceof Failure;
   }
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.partners = state.partners;
     this.partnerAdding = state.potentialPartners.adding;
     this.partnerAddingError = state.potentialPartners.addingError;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     if (this.partners instanceof Initialized) {
       store.dispatch(fetchPartners());

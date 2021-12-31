@@ -16,12 +16,12 @@ export const SessionsMixin = <
     @property({ type: Object })
     protected sessions = initialSessionsState;
 
-    stateChanged(state: RootState) {
+    override stateChanged(state: RootState) {
       super.stateChanged(state);
       this.sessions = state.sessions;
     }
 
-    connectedCallback() {
+    override connectedCallback() {
       super.connectedCallback();
 
       if (this.sessions instanceof Initialized) {

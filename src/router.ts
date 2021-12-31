@@ -78,9 +78,10 @@ const ROUTES: Route[] = [
         action: async (context, commands) => {
           const searchParams = new URLSearchParams(context.search);
           if (searchParams.get('sessionId')) {
-            return commands.redirect(`/sessions/${searchParams.get('sessionId')}`);
+            commands.redirect(`/sessions/${searchParams.get('sessionId')}`);
+          } else {
+            await import('./elements/schedule-day.js');
           }
-          await import('./elements/schedule-day.js');
         },
       },
     ],

@@ -16,12 +16,12 @@ export const SpeakersMixin = <
     @property({ type: Object })
     speakers = initialSpeakersState;
 
-    stateChanged(state: RootState) {
+    override stateChanged(state: RootState) {
       super.stateChanged(state);
       this.speakers = state.speakers;
     }
 
-    connectedCallback() {
+    override connectedCallback() {
       super.connectedCallback();
 
       if (this.speakers instanceof Initialized) {

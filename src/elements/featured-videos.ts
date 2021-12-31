@@ -224,11 +224,11 @@ export class FeaturedVideos extends ReduxMixin(PolymerElement) {
     return this.videos instanceof Failure;
   }
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.videos = state.videos;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     if (this.videos instanceof Initialized) {
       store.dispatch(fetchVideos());

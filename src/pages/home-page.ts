@@ -294,7 +294,7 @@ export class HomePage extends ReduxMixin(PolymerElement) {
     return showForkMeBlock;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     this.showForkMeBlock = this.shouldShowForkMeBlock();
   }

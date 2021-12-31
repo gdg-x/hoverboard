@@ -5,7 +5,7 @@ import { ThemedElement } from './themed-element';
 
 @customElement('about-block')
 export class AboutBlock extends ThemedElement {
-  static get styles() {
+  static override get styles() {
     return [
       ...super.styles,
       css`
@@ -57,7 +57,7 @@ export class AboutBlock extends ThemedElement {
     ];
   }
 
-  render() {
+  override render() {
     return html`
       <div class="container">
         <div>

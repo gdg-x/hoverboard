@@ -188,11 +188,11 @@ export class PreviousSpeakersPage extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.previousSpeakers = state.previousSpeakers;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     if (this.previousSpeakers instanceof Initialized) {
       store.dispatch(fetchPreviousSpeakersList());

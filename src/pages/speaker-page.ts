@@ -252,7 +252,7 @@ export class SpeakerPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
   @property({ type: String, computed: 'computeCompanyInfo(speaker.title, speaker.company)' })
   private companyInfo: string = '';
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     super.stateChanged(state);
     this.speakers = state.speakers;
   }

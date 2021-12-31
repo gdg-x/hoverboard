@@ -46,5 +46,7 @@ export const getProviderCompanyName = (provider: PROVIDERS) => {
     case 'https://twitter.com':
     case 'twitter.com':
       return 'Twitter';
+    default:
+      throw new Error('Unsupported provider');
   }
 };

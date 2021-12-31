@@ -61,7 +61,7 @@ export class FooterBlock extends PolymerElement {
     `;
   }
 
-  backToTop(e) {
+  backToTop(_e: MouseEvent) {
     scrollToY(0, 600, 'easeInOutSine');
   }
 }

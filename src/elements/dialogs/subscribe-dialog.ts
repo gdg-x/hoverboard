@@ -179,7 +179,7 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
     }
   }
 
-  _handleDialogToggled(opened, data) {
+  _handleDialogToggled(_opened: boolean, data) {
     if (data) {
       this.errorOccurred = data.errorOccurred;
     } else {
@@ -208,7 +208,7 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
     });
   }
 
-  _validateEmail(email) {
+  _validateEmail(email: string) {
     // https://stackoverflow.com/a/742588/26406
     const emailRegularExpression = /^[^@\s]+@[^@\s.]+\.[^@.\s]+$/;
     return emailRegularExpression.test(email);
@@ -235,15 +235,15 @@ class SubscribeDialog extends ReduxMixin(mixinBehaviors([IronOverlayBehavior], P
     this.validate = true;
   }
 
-  _focus(e) {
-    e.target.focus();
+  _focus(e: TouchEvent) {
+    (e.target as HTMLElement).focus();
   }
 
   _windowResize() {
     this.keyboardOpened = this.ui.viewport.isPhone && window.innerHeight < this.initialHeight - 100;
   }
 
-  _resize(e) {
+  _resize(_e: Event) {
     if (this.keyboardOpened) {
       const header = this.shadowRoot.querySelector('.dialog-header');
       const headerHeight = header.offsetHeight;

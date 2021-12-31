@@ -291,7 +291,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
   @property({ type: String })
   private routeName = '';
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.dialogs = state.dialogs;
     this.notifications = state.notifications;
     this.user = state.user;
@@ -301,7 +301,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
     this.routeName = selectRouteName(window.location.pathname);
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     setElement(ELEMENTS.HEADER_TOOLBAR, this);
     this._onScroll = this._onScroll.bind(this);
@@ -309,7 +309,7 @@ export class HeaderToolbar extends ReduxMixin(PolymerElement) {
     this._onScroll();
   }
 
-  disconnectedCallback() {
+  override disconnectedCallback() {
     super.disconnectedCallback();
     window.removeEventListener('scroll', this._onScroll);
   }

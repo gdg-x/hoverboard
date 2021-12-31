@@ -198,11 +198,11 @@ export class TeamPage extends ReduxMixin(PolymerElement) {
     `;
   }
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.teams = state.teams;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     if (this.teams instanceof Initialized) {
       store.dispatch(fetchTeams());

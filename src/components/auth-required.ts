@@ -12,7 +12,7 @@ export class AuthRequired extends ReduxMixin(ThemedElement) {
   @state()
   private signedIn = false;
 
-  render() {
+  override render() {
     return html`
       <mwc-button
         label="{$ signIn $}"
@@ -25,7 +25,7 @@ export class AuthRequired extends ReduxMixin(ThemedElement) {
     `;
   }
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.signedIn = state.user.signedIn;
   }
 

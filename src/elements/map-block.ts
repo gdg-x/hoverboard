@@ -133,7 +133,7 @@ export class MapBlock extends ReduxMixin(PolymerElement) {
     ],
   };
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.viewport = state.ui.viewport;
   }
 }
