@@ -3,10 +3,11 @@ import { fireEvent } from '@testing-library/dom';
 import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fixture } from '../../__tests__/helpers/fixtures';
+import { User } from '../models/user';
 import { store } from '../store';
 import { openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
-import { SIGN_IN } from '../store/user/types';
+import { SET_USER, UserActions } from '../store/user/types';
 import './auth-required';
 import { AuthRequired } from './auth-required';
 
@@ -59,9 +60,9 @@ describe('auth-required', () => {
   });
 
   it('shows authenticated content', async () => {
-    store.dispatch({
-      type: SIGN_IN,
-      user: { uid: '1', signedIn: true },
+    store.dispatch<UserActions>({
+      type: SET_USER,
+      payload: { uid: '1' } as User,
     });
     await element.updateComplete;
     expect(shadowRoot.querySelector<HTMLDivElement>('mwc-button')).toHaveAttribute('hidden');

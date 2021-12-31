@@ -3,9 +3,10 @@ import { customElement, property } from '@polymer/decorators';
 import '@polymer/iron-icon';
 import { html, PolymerElement } from '@polymer/polymer';
 import 'plastic-image';
+import { ReduxMixin } from '../mixins/redux-mixin';
 import { Session } from '../models/session';
 import { router } from '../router';
-import { store } from '../store';
+import { RootState, store } from '../store';
 import { openDialog } from '../store/dialogs/actions';
 import { DIALOGS } from '../store/dialogs/types';
 import { setUserFeaturedSessions } from '../store/featured-sessions/actions';
@@ -15,12 +16,13 @@ import {
 } from '../store/featured-sessions/state';
 import { showToast } from '../store/toast/actions';
 import { initialUserState } from '../store/user/state';
+import { UserState } from '../store/user/types';
 import { getVariableColor, toggleQueryParam } from '../utils/functions';
 import './shared-styles';
 import './text-truncate';
 
 @customElement('session-element')
-export class SessionElement extends PolymerElement {
+export class SessionElement extends ReduxMixin(PolymerElement) {
   static get template() {
     return html`
       <style include="shared-styles flex flex-alignment positioning">
@@ -189,7 +191,7 @@ export class SessionElement extends PolymerElement {
             <iron-icon
               class="bookmark-session"
               hidden="[[_acceptingFeedback()]]"
-              icon="hoverboard:[[isFeatured]]"
+              icon="hoverboard:[[icon]]"
               on-click="_toggleFeaturedSession"
             ></iron-icon>
           </div>
@@ -248,16 +250,27 @@ export class SessionElement extends PolymerElement {
   private dayName: string;
   @property({ type: String, computed: 'getVariableColor(session.mainTag)' })
   private sessionCollor: string;
-  @property({ type: String, computed: '_isFeatured(featuredSessions, session.id)' })
-  private isFeatured: string;
+  @property({ type: Boolean, computed: '_isFeatured(user, featuredSessions, session.id)' })
+  private isFeatured: boolean;
   @property({ type: String, computed: '_summary(session.description)' })
   private summary: string;
+  @property({ type: String, computed: '_icon(isFeatured)' })
+  private icon: string;
 
-  _isFeatured(featuredSessions: FeaturedSessionsState, sessionId?: string) {
-    if (featuredSessions instanceof Success && sessionId) {
+  override stateChanged(state: RootState) {
+    this.user = state.user;
+    this.featuredSessions = state.featuredSessions;
+  }
+
+  _isFeatured(user: UserState, featuredSessions: FeaturedSessionsState, sessionId?: string) {
+    if (user instanceof Success && featuredSessions instanceof Success && sessionId) {
       return featuredSessions.data[sessionId];
     }
     return false;
+  }
+
+  _icon(isFeatured: boolean) {
+    return isFeatured ? 'bookmark-check' : 'bookmark-plus';
   }
 
   _getEnding(number: number) {
@@ -277,7 +290,7 @@ export class SessionElement extends PolymerElement {
     event.preventDefault();
     event.stopPropagation();
 
-    if (!this.user.signedIn) {
+    if (!(this.user instanceof Success)) {
       showToast({
         message: '{$ schedule.saveSessionsSignedOut $}',
         action: {
@@ -288,13 +301,13 @@ export class SessionElement extends PolymerElement {
       return;
     }
 
-    if (this.featuredSessions instanceof Success) {
+    if (this.user instanceof Success && this.featuredSessions instanceof Success) {
       const sessions = {
         ...this.featuredSessions.data,
         [this.session.id]: !this.featuredSessions.data[this.session.id],
       };
 
-      store.dispatch(setUserFeaturedSessions(this.user.uid, sessions));
+      store.dispatch(setUserFeaturedSessions(this.user.data.uid, sessions));
     }
   }
 

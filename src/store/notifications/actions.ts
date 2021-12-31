@@ -1,8 +1,9 @@
+import { Success } from '@abraham/remotedata';
 import { Router } from '@vaadin/router';
 import { doc, DocumentReference, DocumentSnapshot, getDoc, setDoc } from 'firebase/firestore';
 import { deleteToken, getMessaging, getToken as fbGetToken, onMessage } from 'firebase/messaging';
 import { Dispatch } from 'redux';
-import { store } from '..';
+import { RootState } from '..';
 import { log } from '../../console';
 import { db, firebaseApp } from '../../firebase';
 import { TempAny } from '../../temp-any';
@@ -43,7 +44,7 @@ export const requestPermission = () => async (dispatch: Dispatch<NotificationAct
 
 export const getToken =
   (subscribe = false) =>
-  (dispatch: Dispatch<NotificationActions>, getState: typeof store.getState) => {
+  (dispatch: Dispatch<NotificationActions>, getState: () => RootState) => {
     if (!subscribe && Notification.permission !== 'granted') {
       return;
     }
@@ -56,7 +57,7 @@ export const getToken =
           const subscribersRef = doc(db, 'notificationsSubscribers', currentToken);
           const subscribersPromise = getDoc(subscribersRef);
 
-          const userUid = state.user && ((state.user as TempAny).uid || null);
+          const userUid = state.user instanceof Success ? state.user.data.uid : null;
 
           let userSubscriptionsPromise: Promise<DocumentSnapshot | null> = Promise.resolve(null);
           let userSubscriptionsRef: DocumentReference;

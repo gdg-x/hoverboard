@@ -7,7 +7,6 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { RootState } from '../store';
 import { fetchSchedule } from '../store/schedule/actions';
 import { initialScheduleState } from '../store/schedule/state';
-import { initialUserState } from '../store/user/state';
 import './content-loader';
 import './shared-styles';
 
@@ -86,7 +85,7 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
               >
             </paper-tab>
           </template>
-          <paper-tab class="nav-item" day="my-schedule" hidden$="[[!user.signedIn]]" link>
+          <paper-tab class="nav-item" day="my-schedule" hidden$="[[!signedIn]]" link>
             <a
               href$="[[addQueryParams('my-schedule', location.search)]]"
               layout
@@ -104,12 +103,12 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
   schedule = initialScheduleState;
   @property({ type: Object })
   location: RouterLocation;
-  @property({ type: Object })
-  private user = initialUserState;
+  @property({ type: Boolean })
+  private signedIn = false;
 
   override stateChanged(state: RootState) {
     this.schedule = state.schedule;
-    this.user = state.user;
+    this.signedIn = state.user instanceof Success;
   }
 
   override connectedCallback() {

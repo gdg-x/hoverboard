@@ -1,23 +1,18 @@
-import { AuthenticatedUser, UnauthenticatedUser } from '../../models/user';
+import { RemoteData } from '@abraham/remotedata';
+import { User } from '../../models/user';
 
-export const SIGN_IN = 'SIGN_IN';
-export const SIGN_OUT = 'SIGN_OUT';
+export const SET_USER = 'SET_USER';
+export const REMOVE_USER = 'REMOVE_USER';
 
-export interface UserState {
-  signedIn: boolean;
-  uid?: string;
-  displayName?: string;
-  email?: string;
+export type UserState = RemoteData<Error, User>;
+
+interface SetUserAction {
+  type: typeof SET_USER;
+  payload: User;
 }
 
-interface SignInAction {
-  type: typeof SIGN_IN;
-  user: AuthenticatedUser;
+interface RemoveUserAction {
+  type: typeof REMOVE_USER;
 }
 
-interface SignOutAction {
-  type: typeof SIGN_OUT;
-  user: UnauthenticatedUser;
-}
-
-export type UserActions = SignInAction | SignOutAction;
+export type UserActions = SetUserAction | RemoveUserAction;

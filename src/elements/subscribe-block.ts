@@ -107,16 +107,20 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
       secondFieldValue?: string;
     } = {};
 
-    if (this.user.signedIn) {
-      const fullNameSplit = this.user.displayName.split(' ');
+    if (this.user instanceof Success) {
+      const fullNameSplit = this.user.data.displayName.split(' ');
       userData = {
         firstFieldValue: fullNameSplit[0],
         secondFieldValue: fullNameSplit[1],
       };
+
+      if (this.user.data.email) {
+        this._subscribeAction({ ...userData, email: this.user.data.email });
+      }
     }
 
-    if (this.user.email) {
-      this._subscribeAction({ ...userData, email: this.user.email });
+    if (this.user instanceof Success && this.user.data.email) {
+      this._subscribeAction({ ...userData, email: this.user.data.email });
     } else {
       openDialog(DIALOGS.SUBSCRIBE, {
         title: '{$ subscribeBlock.formTitle $}',

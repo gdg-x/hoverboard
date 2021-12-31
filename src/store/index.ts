@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { authReducer } from './auth/reducers';
 import { blogReducer } from './blog/reducers';
 import { dialogsReducer } from './dialogs/reducers';
 import { featuredSessionsReducer } from './featured-sessions/reducers';
@@ -26,6 +27,7 @@ export const store = configureStore({
       serializableCheck: false,
     }),
   reducer: {
+    auth: authReducer,
     blog: blogReducer,
     dialogs: dialogsReducer,
     featuredSessions: featuredSessionsReducer,

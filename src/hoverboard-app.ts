@@ -45,7 +45,7 @@ import { initialTicketsState } from './store/tickets/state';
 import { showToast } from './store/toast/actions';
 import { setViewportSize } from './store/ui/actions';
 import { initialUiState } from './store/ui/state';
-import { updateUser } from './store/user/actions';
+import { onUser } from './store/auth/actions';
 import { isDialogOpen } from './utils/dialogs';
 import { isLocalhost } from './utils/environment';
 
@@ -325,7 +325,7 @@ export class HoverboardApp extends PolymerElement {
     log('Hoverboard is ready!');
     this.removeAttribute('unresolved');
     startRouter(this.shadowRoot.querySelector('main'));
-    updateUser();
+    onUser();
     store.dispatch(getToken());
   }
 

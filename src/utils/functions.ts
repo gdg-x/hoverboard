@@ -3,7 +3,7 @@ import { setFilters } from '../store/filters/actions';
 import { TempAny } from '../temp-any';
 import { parseFilters } from './filters';
 
-export const getDate = (date) => {
+export const getDate = (date: string | Date) => {
   return new Date(date).toLocaleString('{$ dateFormat.locale $}', {
     month: 'short',
     day: 'numeric',
