@@ -192,12 +192,12 @@ export class BlogListPage extends ReduxMixin(PolymerElement) {
     return this.posts instanceof Failure;
   }
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.viewport = state.ui.viewport;
     this.posts = state.blog;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     if (this.posts instanceof Initialized) {
       store.dispatch(fetchBlogList());

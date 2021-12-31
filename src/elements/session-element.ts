@@ -188,7 +188,7 @@ export class SessionElement extends PolymerElement {
             <iron-icon
               class="bookmark-session"
               hidden="[[_acceptingFeedback()]]"
-              icon="hoverboard:[[_getFeaturedSessionIcon(featuredSessions, session.id)]]"
+              icon="hoverboard:[[isFeatured]]"
               on-click="_toggleFeaturedSession"
             ></iron-icon>
           </div>
@@ -270,10 +270,6 @@ export class SessionElement extends PolymerElement {
       description.length,
     ].filter((index) => index > 0);
     return description.slice(0, Math.min(...indexes));
-  }
-
-  _getFeaturedSessionIcon(featuredSessions, sessionId) {
-    return this.isFeatured ? 'bookmark-check' : 'bookmark-plus';
   }
 
   _toggleFeaturedSession(event: MouseEvent) {

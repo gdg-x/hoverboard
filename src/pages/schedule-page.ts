@@ -114,7 +114,7 @@ export class SchedulePage extends SessionsMixin(SpeakersMixin(ReduxMixin(Polymer
   @property({ type: Object })
   private location: RouterLocation;
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     super.stateChanged(state);
     this.schedule = state.schedule;
     this.filterGroups = selectFilterGroups(state);

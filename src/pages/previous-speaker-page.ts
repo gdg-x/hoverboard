@@ -284,7 +284,7 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
   @property({ type: String, computed: 'computeCompanyInfo(speaker.title, speaker.company)' })
   private companyInfo: string = '';
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
 
     if (this.speakers instanceof Initialized) {
@@ -292,7 +292,7 @@ export class PreviousSpeakerPage extends ReduxMixin(PolymerElement) {
     }
   }
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     super.stateChanged(state);
     this.speakers = state.previousSpeakers;
   }

@@ -107,12 +107,12 @@ export class HeaderBottomToolbar extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private user = initialUserState;
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.schedule = state.schedule;
     this.user = state.user;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     setElement(ELEMENTS.STICKY_HEADER_TOOLBAR, this);
     if (this.schedule instanceof Initialized) {

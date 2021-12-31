@@ -171,7 +171,7 @@ export class ScheduleDay extends ReduxMixin(PolymerElement) {
     this.location = location;
   }
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.schedule = state.schedule;
     this.user = state.user;
     this.selectedFilters = selectFilters(state);

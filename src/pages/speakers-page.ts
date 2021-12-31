@@ -278,7 +278,7 @@ export class SpeakersPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
   @property({ type: Array })
   private speakersToRender = [];
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     super.stateChanged(state);
     this.filterGroups = selectFilterGroups(state, [FilterGroupKey.tags]);
     this.selectedFilters = selectFilters(state);

@@ -137,11 +137,11 @@ export class LatestPostsBlock extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   posts: BlogState = initialBlogState;
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.posts = state.blog;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     if (this.posts instanceof Initialized) {
       store.dispatch(fetchBlogList());

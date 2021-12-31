@@ -185,11 +185,11 @@ export class GalleryBlock extends ReduxMixin(PolymerElement) {
     return this.gallery instanceof Success;
   }
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.gallery = state.gallery;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
 
     if (this.gallery instanceof Initialized) {

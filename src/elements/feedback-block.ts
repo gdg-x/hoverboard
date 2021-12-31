@@ -134,7 +134,7 @@ export class Feedback extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private feedback = initialFeedbackState;
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.feedback = state.feedback;
     this.feedbackDeleting = state.feedback.deleting;
     this.feedbackDeletingError = state.feedback.deletingError;

@@ -3,7 +3,7 @@ import { flex, flexAlignment, positioning } from '../styles/layout';
 import { theme } from '../styles/theme';
 
 export class ThemedElement extends LitElement {
-  static get styles() {
+  static override get styles() {
     return [
       theme,
       flex,

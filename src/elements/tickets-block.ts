@@ -206,11 +206,11 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   tickets = initialTicketsState;
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.tickets = state.tickets;
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     setElement(ELEMENTS.TICKETS, this);
   }
@@ -222,15 +222,15 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
 
   _getDiscount(ticket: Ticket) {
     if (!(this.tickets instanceof Success)) {
-      return;
+      return '';
     }
     const primaryTicket = this.tickets.data.find((ticket) => ticket.primary);
     if (!primaryTicket) {
-      return;
+      return '';
     }
     const maxPrice = primaryTicket && primaryTicket.price;
     if (!ticket.regular || ticket.primary || ticket.soldOut || !maxPrice) {
-      return;
+      return '';
     }
     // TODO: Remove eslint exception
     // TODO: What is `discount` supposed to be used with?
@@ -246,7 +246,7 @@ export class TicketsBlock extends ReduxMixin(PolymerElement) {
     }
   }
 
-  _getButtonText(available) {
+  _getButtonText(available: boolean) {
     return available ? '{$ buyTicket $}' : '{$ ticketsBlock.notAvailableYet $}';
   }
 }

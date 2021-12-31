@@ -10,7 +10,7 @@ export class PolymerHelmet extends PolymerElement {
   }
 
   @property({ type: String })
-  title: string;
+  override title: string;
   @property({ type: String })
   description: string;
   @property({ type: String })

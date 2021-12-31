@@ -17,7 +17,7 @@ export class HeroBlock extends ThemedElement {
   @property({ type: Boolean, attribute: 'hide-logo' })
   hideLogo = false;
 
-  static get styles() {
+  static override get styles() {
     return [
       ...super.styles,
       css`
@@ -88,7 +88,7 @@ export class HeroBlock extends ThemedElement {
     ];
   }
 
-  render() {
+  override render() {
     return html`
       <div
         class="hero-block"
@@ -121,7 +121,7 @@ export class HeroBlock extends ThemedElement {
     `;
   }
 
-  updated(changedProperties: PropertyValues) {
+  override updated(changedProperties: PropertyValues) {
     super.updated(changedProperties);
     setHeroSettings({
       backgroundImage: this.backgroundImage,

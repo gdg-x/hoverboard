@@ -123,12 +123,12 @@ export class PreviousSpeakersBlock extends ReduxMixin(PolymerElement) {
     return this.previousSpeakers instanceof Failure;
   }
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.previousSpeakers = state.previousSpeakers;
     this.speakers = selectRandomPreviousSpeakers(state);
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     if (this.previousSpeakers instanceof Initialized) {
       store.dispatch(fetchPreviousSpeakersList());

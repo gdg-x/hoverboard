@@ -62,11 +62,11 @@ export class StickyElement extends PolymerElement {
     this._onScroll = this._onScroll.bind(this);
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     window.addEventListener('scroll', this._onScroll);
   }
 
-  disconnectedCallback() {
+  override disconnectedCallback() {
     window.removeEventListener('scroll', this._onScroll);
     this.$.content.classList.remove('sticked');
   }

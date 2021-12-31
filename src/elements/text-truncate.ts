@@ -15,7 +15,7 @@ export class TextTruncate extends PolymerElement {
   @property({ type: Object })
   private _observer: FlattenedNodesObserver;
 
-  ready() {
+  override ready() {
     super.ready();
     this._observer = new FlattenedNodesObserver(this.$.text, (info) => {
       const target = info.addedNodes.filter(function (node) {

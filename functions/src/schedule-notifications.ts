@@ -110,7 +110,7 @@ export const scheduleNotifications = functions.pubsub
         return timeslotTime.isBetween(beforeTime, afterTime);
       });
 
-      const upcomingSessions = upcomingTimeslot.reduce((result, timeslot) =>
+      const upcomingSessions = upcomingTimeslot.reduce((_result, timeslot) =>
         timeslot.sessions.reduce(
           (aggregatedSessions, current) => [...aggregatedSessions, ...current.items],
           []
@@ -123,7 +123,7 @@ export const scheduleNotifications = functions.pubsub
           .collection('sessions')
           .doc(upcomingSession)
           .get();
-        if (!sessionInfoSnapshot.exists) return;
+        if (!sessionInfoSnapshot.exists) return undefined;
 
         const usersIds = usersIdsSnapshot.docs.reduce(
           (acc, doc) => ({ ...acc, [doc.id]: doc.data() }),
@@ -160,6 +160,8 @@ export const scheduleNotifications = functions.pubsub
         } else {
           console.log('There is no sessions right now');
         }
+
+        return undefined;
       });
     } else {
       console.log(todayDay, 'was not found in the schedule');

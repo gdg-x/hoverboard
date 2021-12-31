@@ -4,7 +4,7 @@ import { ThemedElement } from './themed-element';
 
 @customElement('app-install')
 export class AppInstall extends ThemedElement {
-  static get styles() {
+  static override get styles() {
     return [
       ...super.styles,
       css`
@@ -27,7 +27,7 @@ export class AppInstall extends ThemedElement {
     });
   }
 
-  render() {
+  override render() {
     return html`
       <a class="bottom-drawer-link" @click="${this.prompt}" ?hidden=${!this.deferredPrompt}>
         {$ addToHomeScreen.cta $}

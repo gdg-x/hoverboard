@@ -165,6 +165,8 @@ function addTagTo(array, element) {
   if (array.indexOf(element) < 0) {
     return [...array, element];
   }
+
+  return undefined;
 }
 
 function updateSpeakersSessions(speakersRaw, speakerIds, session, generatedSpeakers) {

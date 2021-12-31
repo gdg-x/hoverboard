@@ -83,7 +83,7 @@ export class SubscribeBlock extends ReduxMixin(PolymerElement) {
   @property({ type: Object })
   private viewport = initialUiState.viewport;
 
-  stateChanged(state: RootState) {
+  override stateChanged(state: RootState) {
     this.subscribed = state.subscribed;
     this.user = state.user;
     this.viewport = state.ui.viewport;

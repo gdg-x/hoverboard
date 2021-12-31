@@ -4,7 +4,7 @@ import data from '../../docs/default-firebase-data.json';
 export const importGallery = () => {
   const gallery: string[] = data.gallery;
   if (!Object.keys(gallery).length) {
-    return;
+    return undefined;
   }
   console.log('Importing gallery...');
 

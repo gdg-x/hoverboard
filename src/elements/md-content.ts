@@ -132,12 +132,12 @@ export class MdContent extends PolymerElement {
     this._changeUrl = this._changeUrl.bind(this);
   }
 
-  ready() {
+  override ready() {
     super.ready();
     this.addEventListener('marked-render-complete', this._renderContent);
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
 
     if (window.location.hash) {

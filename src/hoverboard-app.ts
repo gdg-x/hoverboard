@@ -302,7 +302,7 @@ export class HoverboardApp extends PolymerElement {
     store.subscribe(() => this.stateChanged(store.getState()));
   }
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     window.addEventListener('element-sticked', this._toggleHeaderShadow);
     this.$.drawer.addEventListener('opened-changed', this._toggleDrawer);
@@ -314,13 +314,13 @@ export class HoverboardApp extends PolymerElement {
     store.dispatch(fetchTickets());
   }
 
-  disconnectedCallback() {
+  override disconnectedCallback() {
     super.disconnectedCallback();
     window.removeEventListener('element-sticked', this._toggleHeaderShadow);
     this.$.drawer.removeEventListener('opened-changed', this._toggleDrawer);
   }
 
-  ready() {
+  override ready() {
     super.ready();
     log('Hoverboard is ready!');
     this.removeAttribute('unresolved');

@@ -156,7 +156,7 @@ export class ContentLoader extends PolymerElement {
   @property({ type: Number })
   private itemsCount = 0;
 
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
 
     this.updateStyles({
