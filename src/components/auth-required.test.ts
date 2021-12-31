@@ -1,7 +1,7 @@
 import { beforeEach, describe, it, jest } from '@jest/globals';
 import { fireEvent } from '@testing-library/dom';
+import { mocked } from 'jest-mock';
 import { html } from 'lit';
-import { mocked } from 'ts-jest/utils';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { store } from '../store';
 import { openDialog } from '../store/dialogs/actions';

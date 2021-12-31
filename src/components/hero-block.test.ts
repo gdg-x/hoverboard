@@ -1,7 +1,7 @@
 import { beforeEach, describe, it } from '@jest/globals';
 import { screen } from '@testing-library/dom';
+import { mocked } from 'jest-mock';
 import { html } from 'lit';
-import { mocked } from 'ts-jest/utils';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { setHeroSettings } from '../store/ui/actions';
 import './hero-block';

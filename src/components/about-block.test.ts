@@ -1,8 +1,8 @@
 import { beforeEach, describe, it, jest } from '@jest/globals';
 import { within } from '@testing-library/dom';
+import { mocked } from 'jest-mock';
 import { html } from 'lit';
 import { fireEvent, screen } from 'testing-library__dom';
-import { mocked } from 'ts-jest/utils';
 import { fixture } from '../../__tests__/helpers/fixtures';
 import { toggleVideoDialog } from '../store/ui/actions';
 import './about-block';
