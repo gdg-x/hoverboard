@@ -13,14 +13,13 @@ import { SessionsMixin } from '../mixins/sessions-mixin';
 import { SpeakersMixin } from '../mixins/speakers-mixin';
 import { Filter } from '../models/filter';
 import { FilterGroup } from '../models/filter-group';
-import { onSearchChanged } from '../router';
 import { RootState, store } from '../store';
+import { selectFilters } from '../store/filters/selectors';
 import { fetchSchedule } from '../store/schedule/actions';
 import { initialScheduleState } from '../store/schedule/state';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { SessionsState } from '../store/sessions/state';
 import { SpeakersState } from '../store/speakers/state';
-import { selectFilters } from '../utils/filters';
 
 @customElement('schedule-page')
 export class SchedulePage extends SessionsMixin(SpeakersMixin(ReduxMixin(PolymerElement))) {
@@ -115,16 +114,11 @@ export class SchedulePage extends SessionsMixin(SpeakersMixin(ReduxMixin(Polymer
   @property({ type: Object })
   private location: RouterLocation;
 
-  connectedCallback() {
-    super.connectedCallback();
-    onSearchChanged(() => (this.selectedFilters = selectFilters()));
-  }
-
   stateChanged(state: RootState) {
     super.stateChanged(state);
     this.schedule = state.schedule;
     this.filterGroups = selectFilterGroups(state);
-    this.selectedFilters = selectFilters();
+    this.selectedFilters = selectFilters(state);
   }
 
   onAfterEnter(location: RouterLocation) {

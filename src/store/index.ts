@@ -3,6 +3,7 @@ import { blogReducer } from './blog/reducers';
 import { dialogsReducer } from './dialogs/reducers';
 import { featuredSessionsReducer } from './featured-sessions/reducers';
 import { feedbackReducer } from './feedback/reducers';
+import { filtersReducer } from './filters/reducers';
 import { galleryReducer } from './gallery/reducers';
 import { notificationsReducer } from './notifications/reducers';
 import { partnersReducer } from './partners/reducers';
@@ -30,6 +31,7 @@ export const store = configureStore({
     featuredSessions: featuredSessionsReducer,
     feedback: feedbackReducer,
     gallery: galleryReducer,
+    filters: filtersReducer,
     notifications: notificationsReducer,
     partners: partnersReducer,
     potentialPartners: potentialPartnersReducer,

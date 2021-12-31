@@ -1,5 +1,7 @@
 import { PolymerElement } from '@polymer/polymer';
+import { setFilters } from '../store/filters/actions';
 import { TempAny } from '../temp-any';
+import { parseFilters } from './filters';
 
 export const getDate = (date) => {
   return new Date(date).toLocaleString('{$ dateFormat.locale $}', {
@@ -47,5 +49,5 @@ export const setQueryString = (search: string): void => {
   const [url] = location.href.split('?');
 
   window.history.pushState({}, '', [url, search].filter(Boolean).join('?'));
-  window.dispatchEvent(new CustomEvent('hoverboard-search-changed'));
+  setFilters(parseFilters());
 };

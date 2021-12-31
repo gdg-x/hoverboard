@@ -1,22 +1,12 @@
 import { Route, Router } from '@vaadin/router';
 
-type Callback = () => void;
-
 export let router: Router;
-
-const searchChangedCallbacks: Callback[] = [];
 
 window.addEventListener('vaadin-router-location-changed', (event) => {
   // url ends in a slash and pathname starts with a slash
   const canonicalLink = `{$ url $}${event.detail.location.pathname.slice(1)}`;
   document.querySelector('link[rel="canonical"]').setAttribute('href', canonicalLink);
 });
-
-window.addEventListener('hoverboard-search-changed', (event) => {
-  searchChangedCallbacks.forEach((callback) => callback());
-});
-
-export const onSearchChanged = (callback: Callback) => searchChangedCallbacks.push(callback);
 
 export const selectRouteName = (pathname: string) => {
   let [, part] = pathname.split('/');

@@ -14,11 +14,11 @@ import { ReduxMixin } from '../mixins/redux-mixin';
 import { SpeakersMixin } from '../mixins/speakers-mixin';
 import { Filter } from '../models/filter';
 import { FilterGroup, FilterGroupKey } from '../models/filter-group';
-import { onSearchChanged, router } from '../router';
+import { router } from '../router';
 import { RootState } from '../store';
+import { selectFilters } from '../store/filters/selectors';
 import { selectFilterGroups } from '../store/sessions/selectors';
 import { selectFilteredSpeakers } from '../store/speakers/selectors';
-import { selectFilters } from '../utils/filters';
 
 @customElement('speakers-page')
 export class SpeakersPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
@@ -278,15 +278,10 @@ export class SpeakersPage extends SpeakersMixin(ReduxMixin(PolymerElement)) {
   @property({ type: Array })
   private speakersToRender = [];
 
-  connectedCallback() {
-    super.connectedCallback();
-    onSearchChanged(() => (this.selectedFilters = selectFilters()));
-  }
-
   stateChanged(state: RootState) {
     super.stateChanged(state);
     this.filterGroups = selectFilterGroups(state, [FilterGroupKey.tags]);
-    this.selectedFilters = selectFilters();
+    this.selectedFilters = selectFilters(state);
     this.speakersToRender = selectFilteredSpeakers(state);
   }
 
